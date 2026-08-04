@@ -41,11 +41,12 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
 
   [params.homeInfoParams]
     Title = "Willkommen bei FranksFinanzcheck 👋"
-    Content = "Geld sparen ohne Verzicht: Frugalismus-Tricks, Budgetplanung und clevere Vergleichstipps zu Strom, Gas, DSL, Versicherungen und Reisen. Die Artikel erscheinen laufend neu – schau bald wieder vorbei!"
+    Content = "Geld sparen ohne Verzicht: Frugalismus-Tricks, Budgetplanung und clevere Vergleichstipps zu Strom, Gas, DSL, Versicherungen und Reisen. Die Artikel erscheinen laufend neu – schau bald wieder vorbei! Alle Tipps gibt es auch als Infografiken auf [Pinterest](https://www.pinterest.de/franksfinanzcheck/) – folge mir, um nichts zu verpassen! 📌"
 
-  [params.socialIcons]
-    # Beispiel: [[params.socialIcons]] name="pinterest" url="https://..." etc.
-    # Leer lassen für den Start.
+  [[params.socialIcons]]
+    name = "pinterest"
+    url = "https://www.pinterest.de/franksfinanzcheck/"
+    title = "FranksFinanzcheck auf Pinterest"
 
 [menu]
 [[menu.main]]
