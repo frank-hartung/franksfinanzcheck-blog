@@ -66,6 +66,6 @@ Das hängt vom Tarif ab – viele zahlen für Schwangerschaftskomplikationen, ab
 
 ---
 
-👉 **Jetzt Reisekrankenversicherung vergleichen:** [**→ Tarife prüfen**](https://www.check24.de/reisekrankenversicherung/)
+👉 **Jetzt Reisekrankenversicherung vergleichen:** [**→ Tarife prüfen**](https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=reisekrankenversicherung)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
