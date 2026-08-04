@@ -1,33 +1,74 @@
 # ============================================================
-#  Themenpool für die automatische Content-Generierung
-#  Ergänze oder ändere hier einfach die Themen – der Bot pickt
-#  sich täglich ein Thema heraus und schreibt einen Entwurf.
-#  Die Schlüsselwörter (keywords) fließen direkt in die
-#  SEO-Metadaten des Artikels ein.
+#  THEMENPOOL – abgestimmt auf den Pinterest-Masterplan
+#  „FranksFinanzcheck" (August 2026)
+#
+#  Educational-Pins (EP)  → Blog-Artikel (destillation für Pins)
+#  Transactional-Pins (TP) → CHECK24-Kategorien (Affiliate)
+#
+#  Jedes Thema kann einen eigenen Affiliate-Link haben
+#  (affiliate_url). Fehlt er, wird die globale AFFILIATE_URL
+#  aus der Umgebungsvariable / Skript-Konfiguration genutzt.
 # ============================================================
 
 topics:
-  - title: "Stromanbieter wechseln"
-    keywords: ["Strom wechseln", "Stromtarife vergleichen", "Strom sparen"]
-  - title: "Gastarife vergleichen und Gasanbieter wechseln"
-    keywords: ["Gas wechseln", "Gastarife vergleichen", "Gas sparen"]
-  - title: "DSL- und Internetanbieter vergleichen"
-    keywords: ["DSL vergleichen", "Internetanbieter wechseln", "günstiges Internet"]
-  - title: "Handytarife vergleichen – so findest du den günstigsten Tarif"
-    keywords: ["Handytarif vergleichen", "Handyvertrag wechseln", "günstiger Handytarif"]
-  - title: "Kfz-Versicherung wechseln und sparen"
-    keywords: ["Kfz-Versicherung vergleichen", "Autoversicherung wechseln", "SF-Klasse"]
-  - title: "Haftpflichtversicherung: Was sie kostet und warum sie Pflicht ist"
-    keywords: ["Privathaftpflicht", "Haftpflichtversicherung Vergleich", "Haftpflicht Kosten"]
-  - title: "Hausratversicherung: Wer sie braucht und was sie kostet"
-    keywords: ["Hausratversicherung vergleichen", "Hausrat absichern", "Hausrat Kosten"]
-  - title: "Pauschalreise buchen: Die besten Tipps für den günstigsten Preis"
-    keywords: ["Pauschalreise buchen", "Reiseangebote vergleichen", "günstig in den Urlaub"]
-  - title: "Mietwagen im Urlaub: So buchst du clever und günstig"
-    keywords: ["Mietwagen vergleichen", "Mietwagen buchen", "Mietwagen sparen"]
-  - title: "Kredit vergleichen: So findest du den günstigsten Ratenkredit"
-    keywords: ["Kredit vergleichen", "Ratenkredit Zinsen", "günstiger Kredit"]
-  - title: "Girokonto wechseln: Schritt für Schritt zum neuen Konto"
-    keywords: ["Girokonto wechseln", "Kontowechsel", "kostenloses Girokonto"]
-  - title: "Reisekrankenversicherung: Wann sie sich wirklich lohnt"
-    keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschutz"]
+  # --- EP: Geld sparen & Frugalismus -------------------------
+  - title: "5 einfache Frugalismus-Tricks für den Alltag"
+    keywords: ["Frugalismus Tipps", "Geld sparen im Alltag", "Haushaltsbuch führen", "Sparmethoden"]
+  - title: "Die 50-30-20-Regel einfach erklärt"
+    keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen"]
+  - title: "7 Gewohnheiten für finanzielle Freiheit"
+    keywords: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset"]
+  - title: "Notgroschen aufbauen: Wie viel reicht wirklich?"
+    keywords: ["Notgroschen aufbauen", "Tagesgeld", "Finanzielle Sicherheit"]
+
+  # --- EP: Strom & Gas ---------------------------------------
+  - title: "Stromfresser im Haushalt entlarven"
+    keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]
+    affiliate_url: "https://www.check24.de/strom/"
+  - title: "Heizperiode vorbereiten im Spätsommer"
+    keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
+    affiliate_url: "https://www.check24.de/gas/"
+
+  # --- EP: Internet & DSL ------------------------------------
+  - title: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
+    keywords: ["WLAN verbessern", "DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk"]
+    affiliate_url: "https://www.check24.de/dsl/"
+  - title: "DNS-Server ändern für schnelleres Internet"
+    keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps"]
+    affiliate_url: "https://www.check24.de/dsl/"
+
+  # --- EP: Reisen --------------------------------------------
+  - title: "Urlaubskasse clever aufbessern"
+    keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig reisen"]
+  - title: "Mietwagen-Fallen im Urlaub vermeiden"
+    keywords: ["Mietwagen Tipps", "Urlaub Mietwagen", "Reisekosten sparen"]
+    affiliate_url: "https://www.check24.de/mietwagen/"
+
+  # --- TP: CHECK24-Kategorien (Transactional) ----------------
+  - title: "Stromanbieter wechseln und bis zu 300 Euro sparen"
+    keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten sparen 2026"]
+    affiliate_url: "https://www.check24.de/strom/"
+  - title: "Gastarife vergleichen vor dem Herbst"
+    keywords: ["Gasvergleich", "Gaskosten sparen", "Heizkosten senken"]
+    affiliate_url: "https://www.check24.de/gas/"
+  - title: "DSL- und Internet-Flat günstig sichern"
+    keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus"]
+    affiliate_url: "https://www.check24.de/dsl/"
+  - title: "Kostenloses Girokonto ohne Gebühren finden"
+    keywords: ["Kostenloses Girokonto", "Girokonto Vergleich", "Kontoführungsgebühren sparen"]
+    affiliate_url: "https://www.check24.de/girokonto/"
+  - title: "Günstigen Ratenkredit mit Bestzins sichern"
+    keywords: ["Kreditvergleich", "Ratenkredit günstig", "Umschuldung sparen"]
+    affiliate_url: "https://www.check24.de/kredit/"
+  - title: "Kfz-Versicherung vergleichen und sparen"
+    keywords: ["Kfz Versicherung wechseln", "Autoversicherung vergleichen", "Sparmethoden Auto"]
+    affiliate_url: "https://www.check24.de/kfz-versicherung/"
+  - title: "Last-Minute Urlaubsangebote sichern"
+    keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Sommerurlaub Schnäppchen"]
+    affiliate_url: "https://www.check24.de/reisen/"
+  - title: "Günstigen Mietwagen für den Urlaub buchen"
+    keywords: ["Mietwagen buchen", "Günstige Mietwagen", "Mietwagen Vergleich"]
+    affiliate_url: "https://www.check24.de/mietwagen/"
+  - title: "Günstige Flüge für den Spätsommer finden"
+    keywords: ["Flugtickets günstig", "Flugvergleich", "Reisebudget sparen"]
+    affiliate_url: "https://www.check24.de/fluege/"

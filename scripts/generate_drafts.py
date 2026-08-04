@@ -76,10 +76,12 @@ def load_topics():
             line = line.strip()
             if line.startswith("- title:"):
                 t = line.split(":", 1)[1].strip().strip("\"'")
-                topics.append({"title": t, "keywords": []})
+                topics.append({"title": t, "keywords": [], "affiliate_url": None})
             elif line.startswith("keywords:") and topics:
                 raw = line.split(":", 1)[1].strip()
                 topics[-1]["keywords"] = [k.strip().strip("\"'") for k in raw.strip("[]").split(",")]
+            elif line.startswith("affiliate_url:") and topics:
+                topics[-1]["affiliate_url"] = line.split(":", 1)[1].strip().strip("\"'")
     if not topics:
         sys.exit("FEHLER: Keine Themen in data/topics.yaml gefunden.")
     return topics
@@ -292,8 +294,11 @@ def parse_article(raw, topic, angle_name):
     return title, desc, body
 
 
-def write_draft(topic, keywords, angle, provider, used_titles):
+def write_draft(topic_entry, angle, provider, used_titles):
     """Erzeugt eine Draft-Datei. Gibt True zurück, wenn etwas geschrieben wurde."""
+    topic = topic_entry["title"]
+    keywords = topic_entry["keywords"]
+    affiliate_url = topic_entry.get("affiliate_url") or AFFILIATE_URL
     print(f"\n=== Thema: {topic} | Stil: {angle[0]} ===")
     raw, provider_name = generate_article_text(topic, angle)
     if not raw:
@@ -322,7 +327,7 @@ def write_draft(topic, keywords, angle, provider, used_titles):
 
     cta = (
         "\n---\n\n"
-        f"👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**]({AFFILIATE_URL})\n\n"
+        f"👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**]({affiliate_url})\n\n"
         "*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link "
         "erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*\n"
     )
@@ -368,8 +373,7 @@ def main():
         attempts += 1
         topic_entry = topics[(attempts - 1) % len(topics)]
         angle = ANGLES[(attempts - 1) % len(ANGLES)]
-        if write_draft(topic_entry["title"], topic_entry["keywords"],
-                       angle, provider=None, used_titles=used_titles):
+        if write_draft(topic_entry, angle, provider=None, used_titles=used_titles):
             created += 1
         time.sleep(2)
 

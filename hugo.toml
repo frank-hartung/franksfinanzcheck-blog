@@ -4,14 +4,14 @@
 # ============================================================
 
 baseURL = "https://DEINE-DOMAIN.DE/"          # <-- HIER deine Domain eintragen
-title = "SparRatgeber24"                       # <-- HIER deinen Blog-Namen eintragen
+title = "FranksFinanzcheck"                       # <-- HIER deinen Blog-Namen eintragen
 theme = "PaperMod"
 locale = "de-DE"
 defaultContentLanguage = "de"
 enableRobotsTXT = true                         # erzeugt robots.txt automatisch
 enableEmoji = true
 paginate = 10
-copyright = "© 2026 SparRatgeber24 – Alle Rechte vorbehalten"
+copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
 
 [markup]
   [markup.goldmark]
@@ -20,10 +20,10 @@ copyright = "© 2026 SparRatgeber24 – Alle Rechte vorbehalten"
 
 [params]
   env = "production"
-  title = "SparRatgeber24"                      # <-- Blog-Name (erscheint im Browser-Tab)
-  description = "Unabhängige Ratgeber und Vergleichstipps zu Strom, Gas, DSL, Versicherungen und Reisen – so sparst du garantiert Geld."
-  keywords = ["Stromvergleich", "Gasvergleich", "Handytarife", "Kfz-Versicherung", "CHECK24", "Sparen", "Tarife vergleichen"]
-  author = "Redaktion"                          # <-- Name des Autors/Betreibers
+  title = "FranksFinanzcheck"                      # <-- Blog-Name (erscheint im Browser-Tab)
+  description = "Geld sparen & Frugalismus: Praxistipps zu Budgetplanung, Strom- & Gastarifen, DSL, Versicherungen und Reisen – so sparst du monatlich bares Geld."
+  keywords = ["Geld sparen", "Frugalismus", "Budgetplanung", "Stromvergleich", "Gasvergleich", "DSL vergleichen", "Kfz-Versicherung", "Sparen"]
+  author = "Frank"                          # <-- Name des Autors/Betreibers
   DateFormat = "2. January 2006"
   defaultTheme = "auto"
   disableThemeToggle = true
@@ -40,8 +40,8 @@ copyright = "© 2026 SparRatgeber24 – Alle Rechte vorbehalten"
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
   [params.homeInfoParams]
-    Title = "Willkommen bei SparRatgeber24 👋"
-    Content = "Unabhängige Tipps, wie du bei Strom, Gas, Internet, Versicherungen und Reisen bares Geld sparst – Schritt für Schritt erklärt, getestet und stets aktuell. Die Artikel erscheinen laufend neu – schau bald wieder vorbei!"
+    Title = "Willkommen bei FranksFinanzcheck 👋"
+    Content = "Geld sparen ohne Verzicht: Frugalismus-Tricks, Budgetplanung und clevere Vergleichstipps zu Strom, Gas, DSL, Versicherungen und Reisen. Die Artikel erscheinen laufend neu – schau bald wieder vorbei!"
 
   [params.socialIcons]
     # Beispiel: [[params.socialIcons]] name="pinterest" url="https://..." etc.

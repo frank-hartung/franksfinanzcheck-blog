@@ -1,6 +1,6 @@
-# SparRatgeber24 – Hugo Affiliate-Blog (CHECK24)
+# FranksFinanzcheck – Hugo Affiliate-Blog (CHECK24)
 
-Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung** – gebaut mit Hugo + PaperMod, hostbar kostenlos auf GitHub Pages oder Cloudflare Pages.
+Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung** – gebaut mit Hugo + PaperMod, hostbar kostenlos auf GitHub Pages oder Cloudflare Pages. Die Themen sind abgestimmt auf den **Pinterest-Masterplan** (FranksFinanzcheck, August 2026): Jeder Educational-Pin bekommt einen passenden Blog-Artikel, jeder Transactional-Pin eine eigene CHECK24-Kategorie.
 
 > ⚠️ **Wichtiger Hinweis zur Automatisierung:** Der Bot erzeugt täglich **Entwürfe** (`draft: true`), die du vor dem Veröffentlichen kurz prüfst. **Nicht** automatisch veröffentlichen lassen: Google wertet massenhaft automatisch publizierten KI-Content als Spam („Scaled Content Abuse") und kann die ganze Seite abwerten. Entwurf → prüfen → mit einem Klick veröffentlichen ist der google-sichere Weg.
 
@@ -13,7 +13,7 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 | Hugo-Blog | Theme PaperMod (SEO-fertig: Meta-Tags, OpenGraph, JSON-LD, Sitemap, robots.txt, Canonical) |
 | Pflichtseiten | Impressum (mit Platzhaltern), Datenschutz, Über – Werbekennzeichnung inklusive |
 | 2 Beispiel-Artikel | Stromwechsel & Kfz-Versicherung (dienen als Vorlage/Struktur) |
-| Themenpool | `data/topics.yaml` – 12 CHECK24-Nischen, frei erweiterbar |
+| Themenpool | `data/topics.yaml` – 20 Themen aus dem Pinterest-Masterplan (EP + TP), inkl. themenspezifischer CHECK24-Links |
 | 🤖 Content-Bot | `scripts/generate_drafts.py` – erzeugt täglich frische, einzigartige Artikel-Entwürfe (Titel, Meta-Description, Keywords, strukturiertes Markdown, FAQ, Affiliate-CTA) |
 | ⏰ Täglicher Job | `.github/workflows/daily-content.yml` – läuft automatisch um 07:00 Uhr (Sommerzeit) |
 | 🚀 Deployment | `.github/workflows/deploy.yml` – baut & veröffentlicht kostenlos auf GitHub Pages |
@@ -141,3 +141,17 @@ DEMO_MODE=1 python3 scripts/generate_drafts.py   # erzeugt Test-Entwurf
 **Kann ich den Bot stoppen?** GitHub → Actions → Workflow „Tägliche Content-Generierung" → Disable workflow.
 
 **Was, wenn der Bot fehlschlägt?** Schau in die Workflow-Logs (Actions → Run → Logs). Häufigste Ursache: Key falsch gesetzt oder Kontingent erreicht – dann wechsle auf den anderen Anbieter oder warte bis zum nächsten Tag.
+
+---
+
+## 📌 Pinterest-Integration (Masterplan August 2026)
+
+Der Themenpool `data/topics.yaml` ist 1:1 aus deinem Pinterest-Masterplan abgeleitet:
+
+**Educational-Pins (EP) → Blog-Artikel**
+Die 10 wiederkehrenden EP-Themen (Frugalismus-Tricks, 50-30-20-Regel, Stromfresser, WLAN vs. Mesh, Urlaubskasse, finanzielle Freiheit, Notgroschen, Heizperiode, DNS-Server, Mietwagen-Fallen) sind als Themen im Pool. Tipp: Ändere die **DESTINATION URL** deiner EP-Pins von `pinterest.de/franksfinanzcheck/` auf den jeweiligen Blog-Artikel – so bekommen die Pins eine SEO-wertvolle Zielseite statt nur dein Profil.
+
+**Transactional-Pins (TP) → CHECK24**
+Die TP-Pins (Strom, Gas, DSL, Girokonto, Kredit, Kfz, Reisen, Mietwagen, Flüge) sind ebenfalls im Pool – mit dem passenden CHECK24-Link pro Artikel (`affiliate_url`). Die Blog-Artikel verlinken damit automatisch auf die richtige Vergleichs-Kategorie.
+
+**Neue Artikel = neue Pin-Ideen:** Jeder vom Bot erzeugte Entwurf kann als Vorlage für einen neuen Pin dienen (Titel + Kernaussagen → Infografik).
