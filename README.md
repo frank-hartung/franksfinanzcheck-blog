@@ -156,3 +156,5 @@ Die 10 wiederkehrenden EP-Themen (Frugalismus-Tricks, 50-30-20-Regel, Stromfress
 Die TP-Pins (Strom, Gas, DSL, Girokonto, Kredit, Kfz, Reisen, Mietwagen, Flüge) sind ebenfalls im Pool – mit dem passenden CHECK24-Link pro Artikel (`affiliate_url`). Die Blog-Artikel verlinken damit automatisch auf die richtige Vergleichs-Kategorie.
 
 **Neue Artikel = neue Pin-Ideen:** Jeder vom Bot erzeugte Entwurf kann als Vorlage für einen neuen Pin dienen (Titel + Kernaussagen → Infografik).
+
+**Fertiger Verlinkungsplan:** In `Pinterest-Blog-Verlinkungsplan.xlsx` findest du alle 62 Pins mit der jeweils passenden Blog-URL (nach Domain-Ersetzung einfach im Pinterest-Bulk-Editor eintragen).
