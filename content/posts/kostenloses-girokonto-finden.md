@@ -7,6 +7,10 @@ tags: ["Girokonto", "Bank", "Gebühren sparen"]
 categories: ["Haushaltskasse & Budgetplanung"]
 keywords: ["Kostenloses Girokonto", "Girokonto Vergleich", "Kontoführungsgebühren sparen"]
 author: "Frank"
+cover:
+  image: "/images/covers/kostenloses-girokonto-finden.jpg"
+  alt: "Spar-Tipp: Kostenloses Girokonto Finden"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Kontoführungsgebühren von 5 bis 10 Euro pro Monat klingen harmlos – sind aber 60 bis 120 Euro im Jahr, die du für eine Dienstleistung zahlst, die viele Banken inzwischen kostenlos anbieten. Ein Wechsel des Girokontos ist heute unkompliziert, und die Ersparnis kommt Jahr für Jahr auf dein Konto. So findest du das richtige kostenlose Konto.

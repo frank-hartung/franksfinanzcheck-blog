@@ -7,6 +7,10 @@ tags: ["Hausrat", "Versicherung", "Wohnen"]
 categories: ["Versicherungen"]
 keywords: ["Hausratversicherung vergleichen", "Hausrat absichern", "Hausrat Kosten"]
 author: "Frank"
+cover:
+  image: "/images/covers/hausratversicherung-wer-braucht-leistung.jpg"
+  alt: "Spar-Tipp: Hausratversicherung Wer Braucht Leistung"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Ein Einbruch, ein Rohrbruch oder ein Zimmerbrand – solche Ereignisse treffen immer andere. Bis sie dich treffen. Dann zeigt sich, ob du richtig versichert bist: Die Hausratversicherung ersetzt den gesamten Hausrat (Möbel, Elektronik, Kleidung, Küche) bei Schäden durch Feuer, Wasser, Einbruchdiebstahl, Sturm und Hagel. Dieser Ratgeber zeigt, wer sie braucht, was sie leistet und worauf du beim Vergleich achten musst.

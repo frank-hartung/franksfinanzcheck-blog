@@ -7,6 +7,10 @@ tags: ["Handytarif", "Handyvertrag", "Telekommunikation"]
 categories: ["Internet- & DSL-Hacks"]
 keywords: ["Handytarif vergleichen", "Handyvertrag wechseln", "Günstiger Handytarif"]
 author: "Frank"
+cover:
+  image: "/images/covers/handytarife-vergleichen-guenstigster-tarif.jpg"
+  alt: "Spar-Tipp: Handytarife Vergleichen Guenstigster Tarif"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Der Handyvertrag ist für viele ein „Dauerläufer": Einmal abgeschlossen, nie wieder angeschaut. Dabei lohnt sich der Vergleich enorm – die Preise für Datenvolumen fallen seit Jahren, und wer seinen Tarif nicht regelmäßig prüft, zahlt oft das Doppelte für weniger Leistung. So findest du den günstigsten Tarif für deinen Bedarf.

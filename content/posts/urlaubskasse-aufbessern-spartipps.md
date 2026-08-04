@@ -7,6 +7,10 @@ tags: ["Urlaub sparen", "Reisebudget", "Günstig reisen"]
 categories: ["Reisebudget & Mietwagen"]
 keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig reisen"]
 author: "Frank"
+cover:
+  image: "/images/covers/urlaubskasse-aufbessern-spartipps.jpg"
+  alt: "Spar-Tipp: Urlaubskasse Aufbessern Spartipps"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Der Sommerurlaub ist die schönste Zeit des Jahres – und oft die teuerste. Damit die Urlaubskasse nicht schon nach der Anreise leer ist, habe ich dir 7 erprobte Spartipps zusammengestellt. Die gute Nachricht: Die meisten kosten nur wenige Minuten Zeit und sparen trotzdem dreistellige Beträge.

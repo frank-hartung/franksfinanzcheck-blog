@@ -7,6 +7,10 @@ tags: ["Reise", "Versicherung", "Ausland"]
 categories: ["Reisebudget & Mietwagen"]
 keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschutz"]
 author: "Frank"
+cover:
+  image: "/images/covers/reisekrankenversicherung-wann-lohnt.jpg"
+  alt: "Spar-Tipp: Reisekrankenversicherung Wann Lohnt"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Ein Krankenhausaufenthalt in den USA kann schnell sechsstellige Summen kosten – und auch innerhalb Europas lauern Kostenfallen, wenn man nur auf die gesetzliche Kasse vertraut. Eine Reisekrankenversicherung kostet nur wenige Euro pro Jahr und schützt genau vor diesen Risiken. Wann sie sich lohnt und worauf du achten musst, zeigt dieser Ratgeber.

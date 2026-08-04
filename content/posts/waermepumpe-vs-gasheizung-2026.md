@@ -7,6 +7,10 @@ tags: ["Wärmepumpe", "Heizung", "Energie"]
 categories: ["Günstige Strom- & Gastarife"]
 keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken"]
 author: "Frank"
+cover:
+  image: "/images/covers/waermepumpe-vs-gasheizung-2026.jpg"
+  alt: "Spar-Tipp: Waermepumpe Vs Gasheizung 2026"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Vor der Entscheidung zwischen Wärmepumpe und Gasheizung stehen 2026 viele Hausbesitzer: Die neue Heizungsregel (GEG) schreibt schrittweise erneuerbare Heiztechnik vor, die Gaspreise steigen durch den CO₂-Preis, und die Förderung für Wärmepumpen ist attraktiv. Dieser Ratgeber vergleicht beide Techniken ehrlich – Kosten, Betrieb, Förderung und für wen sich was lohnt.

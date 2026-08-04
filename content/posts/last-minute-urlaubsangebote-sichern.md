@@ -7,6 +7,10 @@ tags: ["Last Minute", "Reisen", "Urlaub"]
 categories: ["Reisebudget & Mietwagen"]
 keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Sommerurlaub Schnäppchen"]
 author: "Frank"
+cover:
+  image: "/images/covers/last-minute-urlaubsangebote-sichern.jpg"
+  alt: "Spar-Tipp: Last Minute Urlaubsangebote Sichern"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Der Sommer ist da, das Wetter gut – und du hast noch keinen Urlaub gebucht? Dann bist du in der besten Position für Last-Minute-Schnäppchen. Reiseveranstalter senken die Preise kurz vor Abreise, um Restplätze zu füllen. Mit der richtigen Strategie sicherst du dir Traumziele für oft 20 bis 40 Prozent weniger. So geht's.

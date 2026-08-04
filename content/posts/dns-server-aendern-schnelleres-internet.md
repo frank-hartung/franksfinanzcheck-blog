@@ -7,6 +7,10 @@ tags: ["DNS", "Internet", "DSL Tipps"]
 categories: ["Internet- & DSL-Hacks"]
 keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps"]
 author: "Frank"
+cover:
+  image: "/images/covers/dns-server-aendern-schnelleres-internet.jpg"
+  alt: "Spar-Tipp: Dns Server Aendern Schnelleres Internet"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Dein Internet fühlt sich träge an, obwohl der Tarif schnell ist? Dann liegt es oft nicht an der Leitung, sondern an der Übersetzung von Adressen – dem DNS-Server. Der gute Nachricht: Du kannst ihn in wenigen Minuten kostenlos wechseln und damit Seiten spürbar schneller laden lassen. So geht's.

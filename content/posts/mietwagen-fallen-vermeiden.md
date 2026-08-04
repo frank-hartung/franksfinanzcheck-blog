@@ -7,6 +7,10 @@ tags: ["Mietwagen", "Reisetipps", "Reisekosten sparen"]
 categories: ["Reisebudget & Mietwagen"]
 keywords: ["Mietwagen Tipps", "Urlaub Mietwagen", "Reisekosten sparen"]
 author: "Frank"
+cover:
+  image: "/images/covers/mietwagen-fallen-vermeiden.jpg"
+  alt: "Spar-Tipp: Mietwagen Fallen Vermeiden"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Der Mietwagen-Schalter am Flughafen ist der Ort, an dem Urlaubsbudgets am häufigsten kippen. Was online nach einem Schnäppchen aussah, wird vor Ort schnell teuer – wenn man die Fallen nicht kennt. Dieser Artikel zeigt dir die 7 häufigsten Mietwagen-Fallen und wie du sie umgehst.

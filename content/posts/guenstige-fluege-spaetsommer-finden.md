@@ -7,6 +7,10 @@ tags: ["Flüge", "Reisen", "Reisebudget"]
 categories: ["Reisebudget & Mietwagen"]
 keywords: ["Flugtickets günstig", "Flugvergleich", "Reisebudget sparen"]
 author: "Frank"
+cover:
+  image: "/images/covers/guenstige-fluege-spaetsommer-finden.jpg"
+  alt: "Spar-Tipp: Guenstige Fluege Spaetsommer Finden"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Der Spätsommer ist die zweite große Reisezeit des Jahres – und die Preise für Flugtickets steigen entsprechend. Doch mit den richtigen Tricks fliegst du auch jetzt noch günstig: Wer den Buchungszeitpunkt kennt, flexibel bleibt und versteckte Kosten vermeidet, spart oft 20 bis 40 Prozent. So findest du die besten Angebote.

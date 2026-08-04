@@ -7,6 +7,10 @@ tags: ["WLAN", "DSL Hacks", "Internet"]
 categories: ["Internet- & DSL-Hacks"]
 keywords: ["WLAN verbessern", "DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk"]
 author: "Frank"
+cover:
+  image: "/images/covers/wlan-verstaerker-vs-mesh-wlan.jpg"
+  alt: "Spar-Tipp: Wlan Verstaerker Vs Mesh Wlan"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Das WLAN ist langsam, das Video buffert, und im Schlafzimmer gibt es nur noch ein Balken-Signal? Bevor du einen teuren Techniker rufst: In den meisten Fällen löst entweder ein WLAN-Verstärker (Repeater) oder ein Mesh-System das Problem. Der Unterschied ist entscheidend – und die Wahl hängt von deiner Wohnung ab.

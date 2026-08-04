@@ -1,0 +1,179 @@
+#!/usr/bin/env python3
+"""
+Generiert für jeden Blog-Artikel ein Branding-Cover (Smaragdgrün/Gelb –
+Stil des Pinterest-Masterplans) und trägt es ins Frontmatter ein.
+
+- Bilder: static/images/covers/<slug>.jpg (1000x1500, 2:3 – Pinterest-Format)
+- Frontmatter: cover.image, cover.alt, cover.caption (nur falls noch keins existiert)
+- Das Theme rendert das Cover im Artikel und als og:image
+
+Nutzung:
+    python3 scripts/generate_covers.py
+"""
+import os
+import re
+import sys
+
+BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+OUT_DIR = os.path.join(BLOG_DIR, "static", "images", "covers")
+
+# --- Farben aus dem Masterplan ---
+EMERALD = (14, 90, 67)        # Smaragdgrün
+EMERALD_DARK = (8, 58, 43)    # dunkleres Grün für Verlauf
+GOLD = (255, 179, 0)          # Signalgelb
+WHITE = (255, 255, 255)
+CREAM = (240, 245, 242)
+
+try:
+    from PIL import Image, ImageDraw, ImageFont, ImageFilter
+except ImportError:
+    sys.exit("FEHLER: pillow nicht installiert –  pip install pillow")
+
+
+def load_font(size):
+    """Versucht Montserrat Bold (Masterplan-Font), sonst DejaVuSans-Bold."""
+    candidates = [
+        "/usr/share/fonts/truetype/montserrat/Montserrat-Bold.ttf",
+        os.path.join(BLOG_DIR, "static", "fonts", "Montserrat-Bold.ttf"),
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    ]
+    for path in candidates:
+        if os.path.exists(path):
+            try:
+                return ImageFont.truetype(path, size)
+            except Exception:
+                continue
+    # Letzter Ausweg: Default-Font
+    return ImageFont.load_default()
+
+
+def wrap_text(text, font, max_width, draw):
+    """Bricht Text in Zeilen um (max_width Pixel)."""
+    words = text.split()
+    lines = []
+    cur = ""
+    for w in words:
+        test = (cur + " " + w).strip()
+        if draw.textlength(test, font=font) <= max_width:
+            cur = test
+        else:
+            if cur:
+                lines.append(cur)
+            cur = w
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def make_cover(title, slug, out_path):
+    W, H = 1000, 1500
+    # Vertikaler Verlauf Smaragdgrün → dunkel
+    img = Image.new("RGB", (W, H))
+    px = img.load()
+    for y in range(H):
+        t = y / H
+        r = int(EMERALD[0] + (EMERALD_DARK[0] - EMERALD[0]) * t)
+        g = int(EMERALD[1] + (EMERALD_DARK[1] - EMERALD[1]) * t)
+        b = int(EMERALD[2] + (EMERALD_DARK[2] - EMERALD[2]) * t)
+        for x in range(W):
+            px[x, y] = (r, g, b)
+
+    d = ImageDraw.Draw(img)
+
+    # Dezentes Punktmuster oben/unten
+    for i in range(0, W, 40):
+        for j in range(80, 220, 40):
+            d.ellipse([i, j, i + 6, j + 6], fill=(255, 255, 255, 18))
+    for i in range(0, W, 40):
+        for j in range(H - 220, H - 80, 40):
+            d.ellipse([i, j, i + 6, j + 6], fill=(255, 255, 255, 18))
+
+    # Gelber Akzentbalken oben
+    d.rounded_rectangle([120, 120, 180, 132], radius=6, fill=GOLD)
+
+    # Titel (zentriert, automatischer Umbruch, Skalierung)
+    title_font = load_font(78)
+    margin = 90
+    max_w = W - 2 * margin
+
+    # Skaliere Schriftgröße, bis der Titel in max. 6 Zeilen passt
+    for size in (78, 68, 58, 50, 44, 38, 32):
+        title_font = load_font(size)
+        lines = wrap_text(title, title_font, max_w, d)
+        if len(lines) <= 6:
+            break
+
+    line_h = int(title_font.size * 1.25)
+    total_h = len(lines) * line_h
+    y_start = (H // 2) - (total_h // 2) - 60
+    for i, line in enumerate(lines):
+        lw = d.textlength(line, font=title_font)
+        x = (W - lw) / 2
+        d.text((x, y_start + i * line_h), line, font=title_font, fill=WHITE)
+
+    # Untertitel-Zeile: "Geld sparen & Frugalismus"
+    sub_font = load_font(34)
+    sub = "GELD SPAREN & FRUGALISMUS"
+    sw = d.textlength(sub, font=sub_font)
+    d.text(((W - sw) / 2, y_start + total_h + 50), sub, font=sub_font, fill=CREAM)
+
+    # Footer: Branding + Pinterest-Pfeil-Symbol (simplifiziert)
+    brand_font = load_font(40)
+    brand = "FranksFinanzcheck"
+    bw = d.textlength(brand, font=brand_font)
+    d.text(((W - bw) / 2, H - 170), brand, font=brand_font, fill=GOLD)
+
+    # Kleine Pins (pinterest-artige Punkte) unten
+    for i, cx in enumerate([W // 2 - 60, W // 2, W // 2 + 60]):
+        d.ellipse([cx - 7, H - 105, cx + 7, H - 91], fill=GOLD if i == 1 else (255, 255, 255, 120))
+
+    img.save(out_path, "JPEG", quality=88)
+    print(f"  ✓ Cover: {os.path.basename(out_path)}")
+
+
+def ensure_cover_in_frontmatter(md_path, slug):
+    with open(md_path, encoding="utf-8") as f:
+        content = f.read()
+    if re.search(r"^cover:", content, re.M):
+        return False  # Cover existiert bereits
+    image_path = f"/images/covers/{slug}.jpg"
+    block = (
+        f"cover:\n"
+        f'  image: "{image_path}"\n'
+        f'  alt: "Spar-Tipp: {slug.replace("-", " ").title()}"\n'
+        f'  caption: "Tipp von FranksFinanzcheck"\n'
+    )
+    # Nach dem Frontmatter-Ende (---) einfügen, vor der ersten Inhaltszeile
+    if content.startswith("---"):
+        parts = content.split("---", 2)
+        if len(parts) == 3:
+            content = parts[0] + "---" + parts[1] + block + "---" + parts[2]
+    with open(md_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    return True
+
+
+def main():
+    os.makedirs(OUT_DIR, exist_ok=True)
+    files = sorted(f for f in os.listdir(POSTS_DIR) if f.endswith(".md"))
+    covers = 0
+    frontmatter = 0
+    for fn in files:
+        slug = fn[:-3]
+        with open(os.path.join(POSTS_DIR, fn), encoding="utf-8") as f:
+            content = f.read()
+        m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
+        title = (m.group(1) if m else slug).strip()
+        out_path = os.path.join(OUT_DIR, f"{slug}.jpg")
+        if not os.path.exists(out_path):
+            make_cover(title, slug, out_path)
+            covers += 1
+        if ensure_cover_in_frontmatter(os.path.join(POSTS_DIR, fn), slug):
+            frontmatter += 1
+    print(f"\nFertig: {covers} Cover erstellt, {frontmatter} Frontmatter ergänzt "
+          f"(von {len(files)} Artikeln).")
+
+
+if __name__ == "__main__":
+    main()

@@ -7,6 +7,10 @@ tags: ["Haftpflicht", "Versicherung", "Absicherung"]
 categories: ["Versicherungen"]
 keywords: ["Privathaftpflicht", "Haftpflichtversicherung Vergleich", "Haftpflicht Kosten"]
 author: "Frank"
+cover:
+  image: "/images/covers/privathaftpflicht-warum-pflicht-kosten.jpg"
+  alt: "Spar-Tipp: Privathaftpflicht Warum Pflicht Kosten"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Du öffnest versehentlich die Tür zu schnell und triffst den Nachbarn, der die Treppe herunterfällt. Der Schaden: mehrere zehntausend Euro. Ohne Privathaftpflicht bleibst du auf den Kosten sitzen – und musst womöglich dein Leben lang abzahlen. Diese Versicherung ist die wichtigste überhaupt, weil sie genau solche Fälle abdeckt. Und sie kostet weniger als ein Kinobesuch pro Monat.

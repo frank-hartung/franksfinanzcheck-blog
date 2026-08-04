@@ -7,6 +7,10 @@ tags: ["DSL", "Internet", "Glasfaser"]
 categories: ["Internet- & DSL-Hacks"]
 keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus"]
 author: "Frank"
+cover:
+  image: "/images/covers/dsl-internet-flat-guenstig-sichern.jpg"
+  alt: "Spar-Tipp: Dsl Internet Flat Guenstig Sichern"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Das Internet ist für die meisten Haushalte inzwischen genauso wichtig wie Strom und Wasser – und gleichzeitig einer der Verträge, bei denen am meisten Geld verschenkt wird. Viele zahlen jahrelang für Tarife, die sie gar nicht brauchen, oder übersehen die Wechselboni. So findest du die günstigste Internet-Flat für deinen Bedarf.

@@ -7,6 +7,10 @@ tags: ["Kredit", "Ratenkredit", "Umschuldung"]
 categories: ["Geld sparen & Frugalismus"]
 keywords: ["Kreditvergleich", "Ratenkredit günstig", "Umschuldung sparen"]
 author: "Frank"
+cover:
+  image: "/images/covers/ratenkredit-bestszins-vergleichen.jpg"
+  alt: "Spar-Tipp: Ratenkredit Bestszins Vergleichen"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Ein Kredit ist dann günstig, wenn du ihn nicht brauchst – und wenn du ihn brauchst, ist der Zinsvergleich entscheidend. Zwischen dem teuersten und dem günstigsten Anbieter liegen bei gleicher Kreditsumme oft mehrere hundert Euro Zinsunterschied. Mit diesen Regeln findest du den Bestzins – und weißt, worauf es wirklich ankommt.

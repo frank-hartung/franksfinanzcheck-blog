@@ -1,0 +1,24 @@
+{{- /* Pinterest-Pin-Button am Ende jedes Artikels (Site-Override von PaperMods extend_post_content) */ -}}
+{{- $pin_url := .Permalink -}}
+{{- $pin_media := "" -}}
+{{- if .Params.cover.image -}}
+  {{- $pin_media = .Params.cover.image | absURL -}}
+{{- end -}}
+{{- $pin_desc := printf "%s – via FranksFinanzcheck" (.Title | plainify) -}}
+{{- $pin_href := printf "https://pinterest.com/pin/create/button/?url=%s&media=%s&description=%s" ($pin_url | urlquery) ($pin_media | urlquery) ($pin_desc | urlquery) -}}
+<div class="pin-article" style="text-align:center; margin:28px 0 8px;">
+  <a href="{{ $pin_href }}"
+     target="_blank"
+     rel="noopener nofollow"
+     title="Diesen Artikel auf Pinterest pinnen"
+     style="display:inline-flex; align-items:center; gap:10px; padding:12px 26px; border-radius:999px;
+            background:#e60023; color:#fff; text-decoration:none; font-weight:700; font-size:1.02em;
+            box-shadow:0 2px 8px rgba(0,0,0,.18); transition:transform .15s ease, box-shadow .15s ease;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true">
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.64 7.86 6.36 9.31-.09-.79-.17-2.01.03-2.87.19-.78 1.2-5.01 1.2-5.01s-.3-.61-.3-1.52c0-1.42.82-2.48 1.85-2.48.87 0 1.29.65 1.29 1.44 0 .87-.56 2.18-.85 3.4-.24 1.02.51 1.85 1.51 1.85 1.82 0 3.22-1.92 3.22-4.69 0-2.45-1.76-4.17-4.28-4.17-2.92 0-4.63 2.19-4.63 4.45 0 .88.34 1.83.76 2.34.08.1.1.19.07.29-.08.32-.25 1.02-.28 1.16-.04.19-.15.23-.34.14-1.25-.58-2.03-2.41-2.03-3.88 0-3.16 2.29-6.06 6.61-6.06 3.47 0 6.17 2.47 6.17 5.78 0 3.45-2.17 6.22-5.19 6.22-1.01 0-1.97-.53-2.29-1.15l-.62 2.37c-.23.87-.84 1.96-1.25 2.63.94.29 1.94.45 2.98.45 5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+    </svg>
+    <span>Pin diesen Artikel 📌</span>
+  </a>
+  <p style="font-size:.82em; color:var(--secondary); margin:8px 0 0;">Du findest diesen Beitrag auch als Infografik auf
+    <a href="https://www.pinterest.de/franksfinanzcheck/" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600;">meinem Pinterest-Profil</a>.</p>
+</div>
