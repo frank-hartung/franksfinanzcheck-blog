@@ -103,6 +103,32 @@ def existing_titles():
     return titles
 
 
+def topic_already_covered(topic_title, used_titles):
+    """Prüft, ob ein Thema bereits durch einen vorhandenen Artikel abgedeckt ist.
+    Vergleicht normalisierte Titel: Wenn der Themen-Titel (normalisiert) in einem
+    vorhandenen Artikel-Titel steckt (oder umgekehrt), gilt das Thema als erledigt."""
+    def norm(s):
+        s = s.lower()
+        s = re.sub(r"[äàáâ]", "ae", s)
+        s = re.sub(r"[öòóô]", "oe", s)
+        s = re.sub(r"[üùúû]", "ue", s)
+        s = re.sub(r"ß", "ss", s)
+        return re.sub(r"[^a-z0-9]+", " ", s).strip()
+
+    t = norm(topic_title)
+    if not t:
+        return False
+    t_tokens = t.split()[:4]  # erste 4 Wörter als Kern des Themas
+    for title in used_titles:
+        nt = norm(title)
+        if t in nt or nt in t:
+            return True
+        # Präfix-Abgleich: gleiche ersten 4 Wörter = gleiches Thema
+        if t_tokens and nt.split()[:4] == t_tokens:
+            return True
+    return False
+
+
 def slugify(text):
     """Erzeugt einen URL-freundlichen Slug aus deutschem Text."""
     text = text.lower()
@@ -372,6 +398,9 @@ def main():
     while created < MAX_ARTICLES and attempts < MAX_ARTICLES * 3:
         attempts += 1
         topic_entry = topics[(attempts - 1) % len(topics)]
+        if topic_already_covered(topic_entry["title"], used_titles):
+            print(f"  – Thema bereits behandelt, übersprungen: {topic_entry['title'][:60]}…")
+            continue
         angle = ANGLES[(attempts - 1) % len(ANGLES)]
         if write_draft(topic_entry, angle, provider=None, used_titles=used_titles):
             created += 1
