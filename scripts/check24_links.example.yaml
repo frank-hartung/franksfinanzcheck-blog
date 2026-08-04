@@ -1,0 +1,28 @@
+# ============================================================
+#  VORLAGE: Deine persönlichen CHECK24-Partner-Links
+#
+#  SO BENUTZEN:
+#  1) Kopieren:  cp scripts/check24_links.example.yaml scripts/check24_links.yaml
+#  2) Bei JEDER Zeile den Platzhalter "DEIN-LINK" durch deinen
+#     persönlichen CHECK24-Partnerlink ersetzen (die Datei steht
+#     in .gitignore und wird NICHT committet).
+#  3) Ausführen: python3 scripts/set_check24_links.py
+#
+#  WICHTIG:
+#  - Links müssen in Anführungszeichen stehen.
+#  - Nur die Zeilen eintragen, für die du einen Link hast.
+#  - "allgemein" ist für Artikel ohne konkrete Kategorie
+#    (Frugalismus, 50-30-20, finanzielle Freiheit usw.)
+# ============================================================
+
+links:
+  allgemein: "DEIN-LINK"
+  strom: "DEIN-LINK"
+  gas: "DEIN-LINK"
+  dsl: "DEIN-LINK"
+  girokonto: "DEIN-LINK"
+  kredit: "DEIN-LINK"
+  kfz-versicherung: "DEIN-LINK"
+  reisen: "DEIN-LINK"
+  mietwagen: "DEIN-LINK"
+  fluege: "DEIN-LINK"

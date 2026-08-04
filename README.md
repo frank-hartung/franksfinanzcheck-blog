@@ -114,7 +114,8 @@ DEMO_MODE=1 python3 scripts/generate_drafts.py   # erzeugt Test-Entwurf
 - [ ] **Impressum** ausfüllen (`content/impressum/index.md`) – Platzhalter ersetzen, § 5 DDG
 - [ ] **Datenschutzerklärung** anpassen (Generator wie eRecht24/IT-Recht Kanzlei empfohlen)
 - [ ] **Affiliate-Links kennzeichnen** – im Blog bereits eingebaut (Hinweis + Disclaimer in `hugo.toml`)
-- [ ] **CHECK24-Partnerprogramm** – Anmeldung über das Awin-Netzwerk, Voraussetzung: eigene Website
+- [ ] **CHECK24-Partnerprogramm** – Anmeldung (z. B. über das Awin-Netzwerk), Voraussetzung: eigene Website
+- [ ] **Persönliche Partnerlinks einsetzen** – siehe `ANLEITUNG-CHECK24-LINKS.md` (`python3 scripts/set_check24_links.py --topics`)
 - [ ] **Steuer** – Provisionen sind Einkünfte (Steuererklärung!)
 - [ ] **Marke:** keine Domain mit „check24" im Namen verwenden
 

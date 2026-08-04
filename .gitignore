@@ -6,5 +6,5 @@
 # Sonstiges
 .DS_Store
 *.log
-# Awin-ID (nicht committen)
-scripts/awin_id.txt
+# Persönliche CHECK24-Links (nicht committen)
+scripts/check24_links.yaml
