@@ -7,6 +7,10 @@ tags: ["Zahnzusatz", "Versicherung", "Gesundheit"]
 categories: ["Versicherungen"]
 keywords: ["Zahnzusatzversicherung", "Zahnarztkosten sparen", "Zahnersatz versichern"]
 author: "Frank"
+cover:
+  image: "/images/covers/zahnzusatzversicherung-lohnt-sich.jpg"
+  alt: "Spar-Tipp: Zahnzusatzversicherung Lohnt Sich"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Ein Implantat kostet schnell 2.000 bis 3.000 Euro – die gesetzliche Kasse übernimmt nur einen Festzuschuss von rund 60 Prozent der Regelversorgung, und auch das nur bei regelmäßiger Vorsorge. Die Zahnzusatzversicherung schließt diese Lücke. Doch sie lohnt sich nicht für jeden. Dieser Ratgeber zeigt, wann der Abschluss sinnvoll ist und worauf du achten musst.

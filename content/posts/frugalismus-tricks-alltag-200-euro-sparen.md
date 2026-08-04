@@ -7,6 +7,10 @@ tags: ["Frugalismus", "Geld sparen", "Haushaltsbuch"]
 categories: ["Geld sparen & Frugalismus"]
 keywords: ["Frugalismus Tipps", "Geld sparen im Alltag", "Haushaltsbuch führen", "Sparmethoden"]
 author: "Frank"
+cover:
+  image: "/images/covers/frugalismus-tricks-alltag-200-euro-sparen.jpg"
+  alt: "Spar-Tipp: Frugalismus Tricks Alltag 200 Euro Sparen"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Frugalismus klingt nach Verzicht, Sparbuch und kaltem Kaffee – dabei ist das Gegenteil der Fall: Frugalismus bedeutet, sein Geld bewusst für die Dinge auszugeben, die wirklich zählen, und bei allem anderen smart zu sparen. Mit diesen fünf Tricks kommst du ohne großen Aufwand auf 200 Euro Ersparnis pro Monat.

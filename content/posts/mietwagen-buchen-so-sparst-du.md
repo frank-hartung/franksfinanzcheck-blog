@@ -7,6 +7,10 @@ tags: ["Mietwagen", "Reisen", "Urlaub"]
 categories: ["Reisebudget & Mietwagen"]
 keywords: ["Mietwagen buchen", "Günstige Mietwagen", "Mietwagen Vergleich"]
 author: "Frank"
+cover:
+  image: "/images/covers/mietwagen-buchen-so-sparst-du.jpg"
+  alt: "Spar-Tipp: Mietwagen Buchen So Sparst Du"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Ein Mietwagen macht den Urlaub flexibel – kann aber schnell zum Kostenfresser werden, wenn man am falschen Ende spart. Wer ein paar Regeln beachtet, fährt günstig und trotzdem sicher. Dieser Ratgeber zeigt dir, wie du den besten Mietwagen-Preis findest, ohne in die klassischen Fallen zu tappen.

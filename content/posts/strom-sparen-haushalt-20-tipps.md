@@ -7,6 +7,10 @@ tags: ["Strom sparen", "Energie", "Haushalt"]
 categories: ["Günstige Strom- & Gastarife"]
 keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren"]
 author: "Frank"
+cover:
+  image: "/images/covers/strom-sparen-haushalt-20-tipps.jpg"
+  alt: "Spar-Tipp: Strom Sparen Haushalt 20 Tipps"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Strom sparen heißt nicht, im Dunkeln zu sitzen. Mit den richtigen Gewohnheiten und ein paar gezielten Investitionen senkst du deinen Verbrauch spürbar – oft um 15 bis 25 Prozent, ohne Komfort zu verlieren. Diese 20 Tipps sind nach Sofortwirkung und Aufwand sortiert.

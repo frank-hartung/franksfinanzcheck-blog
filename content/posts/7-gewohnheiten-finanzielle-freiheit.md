@@ -7,6 +7,10 @@ tags: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset"]
 categories: ["Geld sparen & Frugalismus"]
 keywords: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset"]
 author: "Frank"
+cover:
+  image: "/images/covers/7-gewohnheiten-finanzielle-freiheit.jpg"
+  alt: "Spar-Tipp: 7 Gewohnheiten Finanzielle Freiheit"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Finanzielle Freiheit klingt nach Lottogewinn oder Erbe – ist aber in Wahrheit das Ergebnis von Gewohnheiten. Wer dauerhaft kleine, richtige Entscheidungen trifft, kommt dem Ziel näher als jeder, der einmalig einen großen Wurf versucht. Diese 7 Gewohnheiten haben sich in der Praxis bewährt.

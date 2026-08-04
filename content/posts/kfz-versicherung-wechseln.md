@@ -7,6 +7,10 @@ tags: ["Versicherung", "Kfz", "Sparen"]
 categories: ["Versicherungen"]
 keywords: ["Kfz-Versicherung wechseln", "Autoversicherung vergleichen", "SF-Klasse"]
 author: "Redaktion"
+cover:
+  image: "/images/covers/kfz-versicherung-wechseln.jpg"
+  alt: "Spar-Tipp: Kfz Versicherung Wechseln"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Die Kfz-Versicherung ist für die meisten Haushalte eine der größten regelmäßigen Ausgaben nach Miete und Energie. Trotzdem wechseln nur wenige den Anbieter – obwohl sich das fast immer lohnt. Dieser Ratgeber zeigt dir, wann und wie du clever wechselst.

@@ -7,6 +7,10 @@ tags: ["Kreditkarte", "Bank", "Gebühren sparen"]
 categories: ["Haushaltskasse & Budgetplanung"]
 keywords: ["Kreditkarte ohne Gebühren", "Kreditkarten Vergleich", "Kostenlose Kreditkarte"]
 author: "Frank"
+cover:
+  image: "/images/covers/kreditkarte-ohne-jahresgebuehr.jpg"
+  alt: "Spar-Tipp: Kreditkarte Ohne Jahresgebuehr"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Eine Kreditkarte kostet in Deutschland oft 30 bis 100 Euro pro Jahr – muss sie aber nicht. Viele Banken bieten dauerhaft kostenlose Kreditkarten an, und der Unterschied liegt in den Details: Auslandsgebühren, Abhebe-Konditionen und Zusatzleistungen. Dieser Ratgeber zeigt, worauf du beim Vergleich achten musst, um die richtige kostenlose Karte zu finden.

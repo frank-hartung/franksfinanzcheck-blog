@@ -7,6 +7,10 @@ tags: ["E-Auto", "Strom", "Ladekosten"]
 categories: ["Günstige Strom- & Gastarife"]
 keywords: ["E-Auto Ladekosten", "Stromtarif E-Auto", "Wallbox sparen"]
 author: "Frank"
+cover:
+  image: "/images/covers/e-auto-laden-stromkosten-senken.jpg"
+  alt: "Spar-Tipp: E Auto Laden Stromkosten Senken"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Ein E-Auto fährt günstiger als ein Verbrenner – aber nur, wenn du an den richtigen Stellen lädst. Der Unterschied zwischen Hausstrom, öffentlichen Säulen und Schnellladern kann das Doppelte oder Dreifache betragen. Mit den richtigen Tarifen und Ladestrategien senkst du deine Stromkosten fürs E-Auto deutlich.

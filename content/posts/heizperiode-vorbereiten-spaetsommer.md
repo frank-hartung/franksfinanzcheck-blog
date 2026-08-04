@@ -7,6 +7,10 @@ tags: ["Heizkosten sparen", "Gas", "Herbst Vorbereitung"]
 categories: ["Günstige Strom- & Gastarife"]
 keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
 author: "Frank"
+cover:
+  image: "/images/covers/heizperiode-vorbereiten-spaetsommer.jpg"
+  alt: "Spar-Tipp: Heizperiode Vorbereiten Spaetsommer"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Der August ist der ruhigste Monat des Jahres – zumindest bei den Heizkosten. Genau das macht ihn zur perfekten Zeit, um Heizung und Gasvertrag auf Vordermann zu bringen. Wer jetzt handelt, spart im Winter bares Geld und vermeidet teure Überraschungen. Diese drei Dinge solltest du im August erledigen.

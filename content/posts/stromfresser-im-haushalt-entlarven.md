@@ -7,6 +7,10 @@ tags: ["Strom sparen", "Energiekosten", "Stromfresser"]
 categories: ["Günstige Strom- & Gastarife"]
 keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]
 author: "Frank"
+cover:
+  image: "/images/covers/stromfresser-im-haushalt-entlarven.jpg"
+  alt: "Spar-Tipp: Stromfresser Im Haushalt Entlarven"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Die Stromrechnung steigt – aber du weißt nicht, warum? Oft sind es ein paar unbemerkte Dauerläufer, die Jahr für Jahr hunderte Euro kosten. Wir zeigen dir, welche Geräte die größten Stromfresser sind, wie du sie findest und was du dagegen tun kannst.

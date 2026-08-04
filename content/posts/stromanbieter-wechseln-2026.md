@@ -7,6 +7,10 @@ tags: ["Strom", "Anbieterwechsel", "Sparen"]
 categories: ["Energie"]
 keywords: ["Strom wechseln", "Stromanbieter vergleichen", "Strom sparen 2026"]
 author: "Redaktion"
+cover:
+  image: "/images/covers/stromanbieter-wechseln-2026.jpg"
+  alt: "Spar-Tipp: Stromanbieter Wechseln 2026"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Der Strompreis steigt – aber dein Wechsel will nicht so richtig klappen? Kein Wunder: Viele sitzen jahrelang im teuren Grundtarif ihres lokalen Versorgers, obwohl ein Wechsel oft nur wenige Minuten dauert. In diesem Artikel zeige ich dir, wie du in fünf Schritten deinen Stromanbieter wechselst und dabei im Schnitt mehrere hundert Euro pro Jahr sparst.

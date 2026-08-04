@@ -7,6 +7,10 @@ tags: ["Gas", "Heizkosten sparen", "Tarifwechsel"]
 categories: ["Günstige Strom- & Gastarife"]
 keywords: ["Gasvergleich", "Gaskosten sparen", "Heizkosten senken", "Check24 Gas"]
 author: "Frank"
+cover:
+  image: "/images/covers/gastarife-vergleichen-vor-dem-herbst.jpg"
+  alt: "Spar-Tipp: Gastarife Vergleichen Vor Dem Herbst"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Der Herbst kommt bestimmt – und mit ihm die Heizperiode und die höchsten Energiekosten des Jahres. Genau deshalb ist der Spätsommer die beste Zeit, um den Gastarif zu prüfen und zu wechseln. Wer jetzt vergleicht, zahlt im Winter weniger und muss keine bange Blicke auf die Jahresabrechnung werfen. So gehst du vor.

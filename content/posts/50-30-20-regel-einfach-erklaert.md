@@ -7,6 +7,10 @@ tags: ["Budgetierung", "50-30-20", "Haushaltsplanung"]
 categories: ["Haushaltskasse & Budgetplanung"]
 keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen"]
 author: "Frank"
+cover:
+  image: "/images/covers/50-30-20-regel-einfach-erklaert.jpg"
+  alt: "Spar-Tipp: 50 30 20 Regel Einfach Erklaert"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Kennst du das Gefühl, dass am Monatsende einfach nichts übrig ist, obwohl du nicht verschwenderisch lebst? Die 50-30-20-Regel ist die einfachste Methode, um diesem Gefühl ein Ende zu machen. Sie stammt von der US-Senatorin Elizabeth Warren, ist aber längst ein weltweiter Standard der Budgetplanung – und funktioniert gerade in Deutschland hervorragend.

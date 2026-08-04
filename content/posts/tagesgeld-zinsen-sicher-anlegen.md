@@ -7,6 +7,10 @@ tags: ["Tagesgeld", "Sparen", "Zinsen"]
 categories: ["Haushaltskasse & Budgetplanung"]
 keywords: ["Tagesgeld", "Zinsen vergleichen", "Geld sicher anlegen"]
 author: "Frank"
+cover:
+  image: "/images/covers/tagesgeld-zinsen-sicher-anlegen.jpg"
+  alt: "Spar-Tipp: Tagesgeld Zinsen Sicher Anlegen"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Der Notgroschen auf dem Girokonto bringt keine Zinsen, und Aktien sind für die Sicherheitsreserve zu schwankend. Die Lösung für den Mittelweg ist das Tagesgeldkonto: jederzeit verfügbar, sicher und inzwischen wieder mit ordentlichen Zinsen. Dieser Ratgeber zeigt, worauf du beim Vergleich achten musst und wie du das Beste aus deinem Ersparten herausholst.

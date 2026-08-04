@@ -7,6 +7,10 @@ tags: ["Notgroschen", "Tagesgeld", "Finanzielle Sicherheit"]
 categories: ["Haushaltskasse & Budgetplanung"]
 keywords: ["Notgroschen aufbauen", "Tagesgeld", "Finanzielle Sicherheit"]
 author: "Frank"
+cover:
+  image: "/images/covers/notgroschen-aufbauen-wie-viel-reicht.jpg"
+  alt: "Spar-Tipp: Notgroschen Aufbauen Wie Viel Reicht"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Die Waschmaschine gibt den Geist auf, das Auto braucht neue Reifen, und der Zahnarzt schickt eine Rechnung – wer keinen Notgroschen hat, landet bei solchen Ausgaben schnell auf dem Dispo. Dabei ist der Aufbau einer Sicherheitsreserve einfacher, als viele denken. Dieser Artikel zeigt, wie viel du wirklich brauchst und wie du es schaffst.
