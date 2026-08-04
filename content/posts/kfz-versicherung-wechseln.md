@@ -60,6 +60,6 @@ Nicht unbedingt – aber ein Vergleich pro Jahr kostet 10 Minuten und kann 100 b
 
 ---
 
-👉 **Jetzt Kfz-Versicherung vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://www.check24.de/DEINE-AFFILIATE-ID-HIER-EINFUEGEN)
+👉 **Jetzt Kfz-Versicherung vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://www.check24.de/kfz-versicherung/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

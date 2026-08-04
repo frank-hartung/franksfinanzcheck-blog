@@ -71,6 +71,6 @@ Das ist der Tarif, in den du automatisch fällst, wenn du keinen eigenen Vertrag
 
 ---
 
-👉 **Jetzt Stromtarife vergleichen und bis zu 300 € sparen:** [**→ Jetzt vergleichen bei CHECK24**](https://www.check24.de/DEINE-AFFILIATE-ID-HIER-EINFUEGEN)
+👉 **Jetzt Stromtarife vergleichen und bis zu 300 € sparen:** [**→ Jetzt vergleichen bei CHECK24**](https://www.check24.de/strom/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
