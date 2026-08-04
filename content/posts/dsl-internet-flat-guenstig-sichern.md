@@ -2,7 +2,7 @@
 title: "DSL- und Internet-Flat günstig sichern: So findest du den besten Tarif"
 description: "DSL, Kabel oder Glasfaser: So findest du den günstigsten Internetvertrag, sparst beim Wechsel und sicherst dir den Wechselbonus."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["DSL", "Internet", "Glasfaser"]
 categories: ["Internet- & DSL-Hacks"]
 keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus"]

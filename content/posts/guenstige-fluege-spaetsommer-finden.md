@@ -2,7 +2,7 @@
 title: "Günstige Flüge für den Spätsommer finden: 7 Tricks, die wirklich funktionieren"
 description: "Flugtickets günstig buchen: Der beste Buchungszeitpunkt, flexible Daten, Vergleichsportale und versteckte Kosten – so sparst du beim Fliegen."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Flüge", "Reisen", "Reisebudget"]
 categories: ["Reisebudget & Mietwagen"]
 keywords: ["Flugtickets günstig", "Flugvergleich", "Reisebudget sparen"]
