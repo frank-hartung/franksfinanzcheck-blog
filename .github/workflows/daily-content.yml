@@ -1,0 +1,45 @@
+# ============================================================
+#  TÄGLICHE CONTENT-AUTOMATISIERUNG (kostenlos)
+#  Läuft jeden Tag um 05:00 UTC (= 07:00 Uhr Sommerzeit in DE).
+#  Erzeugt automatisch frische Blog-ENTWÜRFE (draft: true),
+#  die du nach kurzer Prüfung mit einem Klick veröffentlichst.
+#  Manuell starten: GitHub → Actions → "Tägliche Content-Generierung"
+#  → "Run workflow".
+# ============================================================
+name: Tägliche Content-Generierung
+
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  generiere-entwuerfe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Blog-Entwürfe generieren
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}   # optional, gratis: console.groq.com
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # optional, gratis: aistudio.google.com
+          BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
+          AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
+          MAX_ARTIKEL_PRO_LAUF: ${{ vars.MAX_ARTIKEL_PRO_LAUF }}
+        run: python3 scripts/generate_drafts.py
+
+      - name: Änderungen committen & pushen
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine neuen Entwürfe – nichts zu committen."
+          else
+            git commit -m "content: neue Blog-Entwürfe automatisch generiert"
+            git push
+          fi

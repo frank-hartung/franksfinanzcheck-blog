@@ -1,0 +1,33 @@
+# ============================================================
+#  Themenpool für die automatische Content-Generierung
+#  Ergänze oder ändere hier einfach die Themen – der Bot pickt
+#  sich täglich ein Thema heraus und schreibt einen Entwurf.
+#  Die Schlüsselwörter (keywords) fließen direkt in die
+#  SEO-Metadaten des Artikels ein.
+# ============================================================
+
+topics:
+  - title: "Stromanbieter wechseln"
+    keywords: ["Strom wechseln", "Stromtarife vergleichen", "Strom sparen"]
+  - title: "Gastarife vergleichen und Gasanbieter wechseln"
+    keywords: ["Gas wechseln", "Gastarife vergleichen", "Gas sparen"]
+  - title: "DSL- und Internetanbieter vergleichen"
+    keywords: ["DSL vergleichen", "Internetanbieter wechseln", "günstiges Internet"]
+  - title: "Handytarife vergleichen – so findest du den günstigsten Tarif"
+    keywords: ["Handytarif vergleichen", "Handyvertrag wechseln", "günstiger Handytarif"]
+  - title: "Kfz-Versicherung wechseln und sparen"
+    keywords: ["Kfz-Versicherung vergleichen", "Autoversicherung wechseln", "SF-Klasse"]
+  - title: "Haftpflichtversicherung: Was sie kostet und warum sie Pflicht ist"
+    keywords: ["Privathaftpflicht", "Haftpflichtversicherung Vergleich", "Haftpflicht Kosten"]
+  - title: "Hausratversicherung: Wer sie braucht und was sie kostet"
+    keywords: ["Hausratversicherung vergleichen", "Hausrat absichern", "Hausrat Kosten"]
+  - title: "Pauschalreise buchen: Die besten Tipps für den günstigsten Preis"
+    keywords: ["Pauschalreise buchen", "Reiseangebote vergleichen", "günstig in den Urlaub"]
+  - title: "Mietwagen im Urlaub: So buchst du clever und günstig"
+    keywords: ["Mietwagen vergleichen", "Mietwagen buchen", "Mietwagen sparen"]
+  - title: "Kredit vergleichen: So findest du den günstigsten Ratenkredit"
+    keywords: ["Kredit vergleichen", "Ratenkredit Zinsen", "günstiger Kredit"]
+  - title: "Girokonto wechseln: Schritt für Schritt zum neuen Konto"
+    keywords: ["Girokonto wechseln", "Kontowechsel", "kostenloses Girokonto"]
+  - title: "Reisekrankenversicherung: Wann sie sich wirklich lohnt"
+    keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschutz"]

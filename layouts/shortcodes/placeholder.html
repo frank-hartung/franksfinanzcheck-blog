@@ -1,0 +1,2 @@
+{{- $text := .Get 0 | default (.Get "text") -}}
+<span style="display:inline-block; background:#fff3cd; color:#664d03; border:1px dashed #b58900; border-radius:4px; padding:0 .35em; font-weight:600;">⚠ {{ $text }}</span>
