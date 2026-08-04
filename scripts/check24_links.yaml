@@ -1,17 +1,18 @@
 # ============================================================
-#  PERSÖNLICHE CHECK24-AFFILIATE-LINKS (aus dem Partner-Dashboard)
-#  PID: 80968  |  Format: a.check24.net/misc/click.php
+#  PERSÖNLICHE AFFILIATE-LINKS (CHECK24 + TARIFCHECK)
 #
-#  Diese Datei wird vom Skript scripts/set_check24_links.py gelesen
-#  und ist im Repo committed (die Links sind öffentlich – sie stehen
-#  später ohnehin im HTML der Website).
+#  QUELLE:
+#   [PDF]  = Link direkt aus der PDF "Affiliate-Links" (vom Kunden bestätigt)
+#   [TEST] = Gleiches Muster, Weiterleitung + PID-Zuordnung per HTTP-Test
+#            verifiziert (301 → check24.net/tarifcheck.de mit PID).
+#            Bitte zur Sicherheit im Partner-Dashboard gegenprüfen.
 #
-#  Neue Links ergänzen: Kategorie unten eintragen und
-#  python3 scripts/set_check24_links.py --topics ausführen.
+#  CHECK24:    https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=...
+#  TARIFCHECK: https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=...
 # ============================================================
 
 links:
-  # --- Vorhandene Deep-Links aus dem Dashboard (getestet, funktionieren) ---
+  # --- CHECK24 (aus der PDF, bestätigt) ---
   strom: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
   gas: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
   dsl: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
@@ -20,17 +21,17 @@ links:
   girokonto: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
   allgemein: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
 
-  # --- Unfallversicherung (Tarifcheck) ---
-  unfallversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=unfallversicherung"
+  # --- CHECK24 (Muster getestet, [TEST]) ---
+  kredit: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditvergleich"
+  kfz-versicherung: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kfz-versicherung"
+  fluege: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=flugvergleich"
+  handytarife: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife"
+  kreditkarte: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
+  tagesgeld: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich"
 
-  # --- FEHLENDE Kategorien: hier eintragen, sobald im Dashboard generiert ---
-  # kredit: "DEIN-LINK"
-  # kfz-versicherung: "DEIN-LINK"
-  # fluege: "DEIN-LINK"
-  # handytarife: "DEIN-LINK"
-  # haftpflicht: "DEIN-LINK"
-  # hausrat: "DEIN-LINK"
-  # zahnzusatzversicherung: "DEIN-LINK"
-  # reisekrankenversicherung: "DEIN-LINK"
-  # kreditkarte: "DEIN-LINK"
-  # tagesgeld: "DEIN-LINK"
+  # --- TARIFCHECK (Unfall aus PDF bestätigt, Rest [TEST]) ---
+  unfallversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=unfallversicherung"
+  haftpflicht: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=haftpflichtversicherung"
+  hausrat: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hausratversicherung"
+  zahnzusatzversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=zahnzusatzversicherung"
+  reisekrankenversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=reisekrankenversicherung"

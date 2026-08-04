@@ -66,6 +66,6 @@ Nein – Kinder sind in der Familien-Haftpflicht der Eltern mitversichert, solan
 
 ---
 
-👉 **Jetzt Privathaftpflicht vergleichen und absichern:** [**→ Tarife prüfen**](https://www.check24.de/haftpflicht/)
+👉 **Jetzt Privathaftpflicht vergleichen und absichern:** [**→ Tarife prüfen**](https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=haftpflichtversicherung)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

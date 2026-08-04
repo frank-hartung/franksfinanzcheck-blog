@@ -58,6 +58,6 @@ Für den Notgroschen und kurzfristig verfügbares Geld: Tagesgeld (kein Kursschw
 
 ---
 
-👉 **Jetzt Tagesgeldkonten vergleichen und Zinsen sichern:** [**→ Konten prüfen**](https://www.check24.de/tagesgeld/)
+👉 **Jetzt Tagesgeldkonten vergleichen und Zinsen sichern:** [**→ Konten prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

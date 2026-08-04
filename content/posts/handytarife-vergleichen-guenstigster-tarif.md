@@ -62,6 +62,6 @@ Zum Vertragsende – die Kündigungsfrist beträgt meist 3 Monate. Viele Anbiete
 
 ---
 
-👉 **Jetzt Handytarife vergleichen und sparen:** [**→ Tarife prüfen**](https://www.check24.de/handytarife/)
+👉 **Jetzt Handytarife vergleichen und sparen:** [**→ Tarife prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

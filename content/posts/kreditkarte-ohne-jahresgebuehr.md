@@ -59,6 +59,6 @@ Nur, wenn du die Versicherungen wirklich nutzt – z. B. bei mehreren Reisen pro
 
 ---
 
-👉 **Jetzt Kreditkarten vergleichen und Gebühren sparen:** [**→ Karten prüfen**](https://www.check24.de/kreditkarte/)
+👉 **Jetzt Kreditkarten vergleichen und Gebühren sparen:** [**→ Karten prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

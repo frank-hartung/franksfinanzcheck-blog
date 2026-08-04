@@ -56,6 +56,6 @@ Die Rate sollte dauerhaft unter 30 Prozent deines Nettoeinkommens bleiben. Bei 2
 
 ---
 
-👉 **Jetzt Ratenkredite vergleichen und Zinsen sparen:** [**→ Kredit-Angebote prüfen**](https://www.check24.de/kredit/)
+👉 **Jetzt Ratenkredite vergleichen und Zinsen sparen:** [**→ Kredit-Angebote prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditvergleich)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
