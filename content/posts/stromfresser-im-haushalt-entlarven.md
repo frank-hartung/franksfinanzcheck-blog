@@ -57,6 +57,6 @@ Wer Standby konsequent reduziert, den Kühlschrank tauscht und den Tarif wechsel
 
 ---
 
-👉 **Stromtarife vergleichen und Wechselprämie sichern:** [**→ Jetzt Strompreise vergleichen**](https://www.check24.de/strom/)
+👉 **Stromtarife vergleichen und Wechselprämie sichern:** [**→ Jetzt Strompreise vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

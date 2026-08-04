@@ -57,6 +57,6 @@ Häufiges Schnellladen (DC) kann die Batterie stärker beanspruchen als langsame
 
 ---
 
-👉 **Jetzt den passenden Stromtarif fürs E-Auto finden:** [**→ Stromtarife vergleichen**](https://www.check24.de/strom/)
+👉 **Jetzt den passenden Stromtarif fürs E-Auto finden:** [**→ Stromtarife vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

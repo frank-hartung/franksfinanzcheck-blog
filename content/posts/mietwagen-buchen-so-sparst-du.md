@@ -56,6 +56,6 @@ Nein – vor Ort zahlst du fast immer mehr, und die Auswahl ist kleiner. Immer o
 
 ---
 
-👉 **Jetzt Mietwagen vergleichen und den Bestpreis sichern:** [**→ Mietwagen-Angebote prüfen**](https://www.check24.de/mietwagen/)
+👉 **Jetzt Mietwagen vergleichen und den Bestpreis sichern:** [**→ Mietwagen-Angebote prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

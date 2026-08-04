@@ -64,6 +64,6 @@ DSL läuft über die Telefonleitung, Kabel über das TV-Kabelnetz. Kabel ist in 
 
 ---
 
-👉 **Jetzt DSL-, Kabel- und Glasfasertarife vergleichen:** [**→ Internet-Tarife prüfen**](https://www.check24.de/dsl/)
+👉 **Jetzt DSL-, Kabel- und Glasfasertarife vergleichen:** [**→ Internet-Tarife prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

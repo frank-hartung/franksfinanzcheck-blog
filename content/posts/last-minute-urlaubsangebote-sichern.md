@@ -61,6 +61,6 @@ An der Transparenz: Gesamtpreis inklusive aller Gebühren, klare Stornobedingung
 
 ---
 
-👉 **Jetzt Last-Minute-Angebote vergleichen und sparen:** [**→ Reise-Schnäppchen prüfen**](https://www.check24.de/reisen/)
+👉 **Jetzt Last-Minute-Angebote vergleichen und sparen:** [**→ Reise-Schnäppchen prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

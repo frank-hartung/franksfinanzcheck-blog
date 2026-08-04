@@ -1,0 +1,36 @@
+# ============================================================
+#  PERSÖNLICHE CHECK24-AFFILIATE-LINKS (aus dem Partner-Dashboard)
+#  PID: 80968  |  Format: a.check24.net/misc/click.php
+#
+#  Diese Datei wird vom Skript scripts/set_check24_links.py gelesen
+#  und ist im Repo committed (die Links sind öffentlich – sie stehen
+#  später ohnehin im HTML der Website).
+#
+#  Neue Links ergänzen: Kategorie unten eintragen und
+#  python3 scripts/set_check24_links.py --topics ausführen.
+# ============================================================
+
+links:
+  # --- Vorhandene Deep-Links aus dem Dashboard (getestet, funktionieren) ---
+  strom: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+  gas: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
+  dsl: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+  mietwagen: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
+  reisen: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
+  girokonto: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
+  allgemein: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+
+  # --- Unfallversicherung (Tarifcheck) ---
+  unfallversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=unfallversicherung"
+
+  # --- FEHLENDE Kategorien: hier eintragen, sobald im Dashboard generiert ---
+  # kredit: "DEIN-LINK"
+  # kfz-versicherung: "DEIN-LINK"
+  # fluege: "DEIN-LINK"
+  # handytarife: "DEIN-LINK"
+  # haftpflicht: "DEIN-LINK"
+  # hausrat: "DEIN-LINK"
+  # zahnzusatzversicherung: "DEIN-LINK"
+  # reisekrankenversicherung: "DEIN-LINK"
+  # kreditkarte: "DEIN-LINK"
+  # tagesgeld: "DEIN-LINK"

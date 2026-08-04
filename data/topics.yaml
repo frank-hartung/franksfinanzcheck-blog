@@ -24,17 +24,17 @@ topics:
   # --- EP: Strom & Gas ---------------------------------------
   - title: "Stromfresser im Haushalt entlarven"
     keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]
-    affiliate_url: "https://www.check24.de/strom/"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
   - title: "Heizperiode vorbereiten im Spätsommer"
     keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
-    affiliate_url: "https://www.check24.de/gas/"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
 
   # --- EP: Internet & DSL ------------------------------------
   - title: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
     keywords: ["WLAN verbessern", "DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk"]
-    affiliate_url: "https://www.check24.de/dsl/"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
   - title: "DNS-Server ändern für schnelleres Internet"
-    keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps"]
+    keywords: ["DNS Server wechseln", "Intehttps://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4L Tipps"]
     affiliate_url: "https://www.check24.de/dsl/"
 
   # --- EP: Reisen --------------------------------------------
@@ -42,21 +42,21 @@ topics:
     keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig reisen"]
   - title: "Mietwagen-Fallen im Urlaub vermeiden"
     keywords: ["Mietwagen Tipps", "Urlaub Mietwagen", "Reisekosten sparen"]
-    affiliate_url: "https://www.check24.de/mietwagen/"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
 
   # --- TP: CHECK24-Kategorien (Transactional) ----------------
   - title: "Stromanbieter wechseln und bis zu 300 Euro sparen"
-    keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten sparen 2026"]
+    keywords: ["Stromanbieter wechseln", "Stromvhttps://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1n 2026"]
     affiliate_url: "https://www.check24.de/strom/"
   - title: "Gastarife vergleichen vor dem Herbst"
-    keywords: ["Gasvergleich", "Gaskosten sparen", "Heizkosten senken"]
+    keywords: ["Gasvergleich", "Gahttps://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3n senken"]
     affiliate_url: "https://www.check24.de/gas/"
   - title: "DSL- und Internet-Flat günstig sichern"
-    keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus"]
+    https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4 "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus"]
     affiliate_url: "https://www.check24.de/dsl/"
   - title: "Kostenloses Girokonto ohne Gebühren finden"
     keywords: ["Kostenloses Girokonto", "Girokonto Vergleich", "Kontoführungsgebühren sparen"]
-    affiliate_url: "https://www.check24.de/girokonto/"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
   - title: "Günstigen Ratenkredit mit Bestzins sichern"
     keywords: ["Kreditvergleich", "Ratenkredit günstig", "Umschuldung sparen"]
     affiliate_url: "https://www.check24.de/kredit/"
@@ -65,9 +65,9 @@ topics:
     affiliate_url: "https://www.check24.de/kfz-versicherung/"
   - title: "Last-Minute Urlaubsangebote sichern"
     keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Sommerurlaub Schnäppchen"]
-    affiliate_url: "https://www.check24.de/reisen/"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
   - title: "Günstigen Mietwagen für den Urlaub buchen"
-    keywords: ["Mietwagen buchen", "Günstige Mietwagen", "Mietwagen Vergleich"]
+    keywords: ["Mietwagen buchen", "Günstighttps://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10h"]
     affiliate_url: "https://www.check24.de/mietwagen/"
   - title: "Günstige Flüge für den Spätsommer finden"
     keywords: ["Flugtickets günstig", "Flugvergleich", "Reisebudget sparen"]
@@ -96,11 +96,9 @@ topics:
     keywords: ["Tagesgeld", "Zinsen vergleichen", "Geld sicher anlegen"]
   - title: "E-Auto laden: So senkst du deine Stromkosten"
     keywords: ["E-Auto Ladekosten", "Stromtarif E-Auto", "Wallbox sparen"]
-  - title: "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung"
-    keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren"]
+  - title: "Strom sparen im Haushalt: 20 Tipps für die nächste Rechhttps://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1paren Tipps", "Energiekosten senken", "Stromverbrauch reduzieren"]
     affiliate_url: "https://www.check24.de/strom/"
-  - title: "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?"
-    keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken"]
+  - title: "Wärmepumpe vs. Gasheizunhttps://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3  keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken"]
     affiliate_url: "https://www.check24.de/gas/"
 
   # --- Erweiterung Runde 2: weitere Nischen (laufend ergänzbar) -----
@@ -111,8 +109,7 @@ topics:
   - title: "Festgeld vs. Tagesgeld: Wo gibt es die besten Zinsen?"
     keywords: ["Festgeld", "Zinsen vergleichen", "Geld anlegen"]
   - title: "Umzug: Diese Versicherungen und Verträge musst du ummelden"
-    keywords: ["Umzug Checkliste", "Verträge ummelden", "Umzug sparen"]
-  - title: "Kabel-Internet vs. DSL: Was ist 2026 die bessere Wahl?"
+    keywords: ["Umzug Checkliste", "Verträge ummelden", "Umhttps://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4bel-Internet vs. DSL: Was ist 2026 die bessere Wahl?"
     keywords: ["Kabel Internet", "DSL Vergleich", "Internetanbieter"]
     affiliate_url: "https://www.check24.de/dsl/"
   - title: "Altersvorsorge: Die besten Wege für deine Rente"
@@ -121,10 +118,13 @@ topics:
     keywords: ["Heizöl Preise", "Heizöl bestellen", "Heizkosten senken"]
   - title: "Glasfaserausbau: Wann lohnt sich der Anschluss?"
     keywords: ["Glasfaser", "Glasfaseranschluss", "Schnelles Internet"]
-    affiliate_url: "https://www.check24.de/dsl/"
-  - title: "Stromtarif für Wärmepumpe: So sparst du beim Heizen"
+    affiliate_url: "https://www.check2https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1arif für Wärmepumpe: So sparst du beim Heizen"
     keywords: ["Wärmepumpen-Tarif", "Stromtarif Heizen", "Heizkosten senken"]
     affiliate_url: "https://www.check24.de/strom/"
   - title: "Hauskauf finanzieren: Darlehen clever vergleichen"
     keywords: ["Baufinanzierung", "Immobilienkredit", "Hauskauf Finanzierung"]
     affiliate_url: "https://www.check24.de/baufinanzierung/"
+
+  - title: "Private Unfallversicherung: Für wen sie sich wirklich lohnt"
+    keywords: ["Unfallversicherung", "Private Unfallversicherung", "Absicherung"]
+    affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=unfallversicherung"

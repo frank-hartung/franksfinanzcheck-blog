@@ -73,6 +73,6 @@ Sie ergänzen sich: Der DNS beschleunigt die „Adressübersetzung", der Tarif b
 
 ---
 
-👉 **Und wenn die Leitung selbst zu langsam ist:** [**→ Jetzt DSL- und Glasfasertarife vergleichen**](https://www.check24.de/dsl/)
+👉 **Und wenn die Leitung selbst zu langsam ist:** [**→ Jetzt DSL- und Glasfasertarife vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

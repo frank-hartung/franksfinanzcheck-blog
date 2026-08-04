@@ -61,6 +61,6 @@ Ein Kontowechsel an sich nicht – ein Girokonto ist in der Schufa normal. Nur v
 
 ---
 
-👉 **Jetzt kostenlose Girokonten vergleichen und Startguthaben sichern:** [**→ Girokonten prüfen**](https://www.check24.de/girokonto/)
+👉 **Jetzt kostenlose Girokonten vergleichen und Startguthaben sichern:** [**→ Girokonten prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
