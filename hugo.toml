@@ -3,7 +3,7 @@
 #  WICHTIG: baseURL später durch deine echte Domain ersetzen!
 # ============================================================
 
-baseURL = "https://DEINE-DOMAIN.DE/"          # <-- HIER deine Domain eintragen
+baseURL = "https://franksfinanzcheck.de/"          # <-- HIER deine Domain eintragen
 title = "FranksFinanzcheck"                       # <-- HIER deinen Blog-Namen eintragen
 theme = "PaperMod"
 locale = "de-DE"
