@@ -6,5 +6,5 @@
 # Sonstiges
 .DS_Store
 *.log
-# Persönliche CHECK24-Links (nicht committen)
-scripts/check24_links.yaml
+# CHECK24-Partner-ID (nicht committen)
+scripts/check24_id.txt
