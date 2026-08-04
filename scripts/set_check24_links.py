@@ -35,6 +35,8 @@ ID_FILE = os.path.join(BLOG_DIR, "scripts", "check24_id.txt")
 CATEGORIES = [
     "strom", "gas", "dsl", "girokonto", "kredit",
     "kfz-versicherung", "reisen", "mietwagen", "fluege",
+    "handytarife", "haftpflicht", "hausrat", "reisekrankenversicherung",
+    "zahnzusatzversicherung", "kreditkarte", "tagesgeld",
 ]
 
 # Link-Vorlage (Standard-Format von CHECK24: Parameter "pi").

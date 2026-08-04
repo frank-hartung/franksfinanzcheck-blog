@@ -102,3 +102,29 @@ topics:
   - title: "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?"
     keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken"]
     affiliate_url: "https://www.check24.de/gas/"
+
+  # --- Erweiterung Runde 2: weitere Nischen (laufend ergänzbar) -----
+  - title: "Photovoltaik: Lohnt sich eine Solaranlage 2026?"
+    keywords: ["Photovoltaik", "Solaranlage Kosten", "Strom selbst erzeugen"]
+  - title: "Balkonkraftwerk: Der einfache Einstieg in die Solarenergie"
+    keywords: ["Balkonkraftwerk", "Mini-Solaranlage", "Stecker-Solargerät"]
+  - title: "Festgeld vs. Tagesgeld: Wo gibt es die besten Zinsen?"
+    keywords: ["Festgeld", "Zinsen vergleichen", "Geld anlegen"]
+  - title: "Umzug: Diese Versicherungen und Verträge musst du ummelden"
+    keywords: ["Umzug Checkliste", "Verträge ummelden", "Umzug sparen"]
+  - title: "Kabel-Internet vs. DSL: Was ist 2026 die bessere Wahl?"
+    keywords: ["Kabel Internet", "DSL Vergleich", "Internetanbieter"]
+    affiliate_url: "https://www.check24.de/dsl/"
+  - title: "Altersvorsorge: Die besten Wege für deine Rente"
+    keywords: ["Altersvorsorge", "Rente aufbessern", "Private Vorsorge"]
+  - title: "Heizöl kaufen: Wann ist der beste Zeitpunkt?"
+    keywords: ["Heizöl Preise", "Heizöl bestellen", "Heizkosten senken"]
+  - title: "Glasfaserausbau: Wann lohnt sich der Anschluss?"
+    keywords: ["Glasfaser", "Glasfaseranschluss", "Schnelles Internet"]
+    affiliate_url: "https://www.check24.de/dsl/"
+  - title: "Stromtarif für Wärmepumpe: So sparst du beim Heizen"
+    keywords: ["Wärmepumpen-Tarif", "Stromtarif Heizen", "Heizkosten senken"]
+    affiliate_url: "https://www.check24.de/strom/"
+  - title: "Hauskauf finanzieren: Darlehen clever vergleichen"
+    keywords: ["Baufinanzierung", "Immobilienkredit", "Hauskauf Finanzierung"]
+    affiliate_url: "https://www.check24.de/baufinanzierung/"
