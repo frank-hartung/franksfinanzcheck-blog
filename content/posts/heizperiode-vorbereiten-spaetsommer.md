@@ -2,7 +2,7 @@
 title: "Heizperiode vorbereiten im Spätsommer: 3 Dinge, die du im August tun musst"
 description: "Bereite Heizung und Gasverträge im Spätsommer vor! Wer jetzt prüft, vermeidet teure Überraschungen im Winter – mit Checkliste."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Heizkosten sparen", "Gas", "Herbst Vorbereitung"]
 categories: ["Günstige Strom- & Gastarife"]
 keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]

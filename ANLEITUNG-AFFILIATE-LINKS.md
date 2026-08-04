@@ -96,3 +96,30 @@ Link in einem privaten Browserfenster öffnen: Er muss auf CHECK24 weiterleiten 
 
 **Was, wenn ich meine Partner-ID später ändere?**
 Einfach in `scripts/affiliate_links.yaml` die neue ID eintragen und Schritt 4 erneut ausführen – die Ersetzung funktioniert auch rückwärts (Awin-Link → neuer Awin-Link).
+
+---
+
+## ⚡ Der schnelle Weg: `set_awin_links.py` (nur EINE ID nötig)
+
+Das oben beschriebene Mapping-Skript ist flexibel, aber du musst 10 Zeilen ausfüllen.
+**Einfacher:** `scripts/set_awin_links.py` baut alle Deep-Links automatisch aus nur deiner Partner-ID:
+
+```bash
+# Vorschau (ändert nichts):
+python3 scripts/set_awin_links.py --awin-id 1234567 --dry-run
+
+# Alles ersetzen (alle Artikel + ggf. Themenpool für den Bot):
+python3 scripts/set_awin_links.py --awin-id 1234567
+python3 scripts/set_awin_links.py --awin-id 1234567 --topics
+
+# ID einmalig speichern – danach reicht:  python3 scripts/set_awin_links.py
+python3 scripts/set_awin_links.py --awin-id 1234567 --save
+```
+
+Die gespeicherte ID liegt in `scripts/awin_id.txt` (steht in `.gitignore`, wird also **nicht** mitcommittet).
+
+**Was das Skript kann:**
+- Ersetzt alle `check24.de`-Links (9 Kategorien + generische) durch korrekte Awin-Deep-Links mit URL-Encoding
+- Aktualisiert auch bereits gesetzte Awin-Links, falls sich deine ID ändert (idempotent)
+- Kontrolle am Ende: meldet, wenn ein Link übrig bleibt
+- `--dry-run` zum gefahrlosen Testen

@@ -2,7 +2,7 @@
 title: "Urlaubskasse clever aufbessern: 7 erprobte Spartipps für den Sommerurlaub"
 description: "Mit diesen 7 Tipps bleibt nach dem Sommerurlaub noch Geld in der Kasse: früh buchen, smart vergleichen und bei Ausflügen sparen."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Urlaub sparen", "Reisebudget", "Günstig reisen"]
 categories: ["Reisebudget & Mietwagen"]
 keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig reisen"]

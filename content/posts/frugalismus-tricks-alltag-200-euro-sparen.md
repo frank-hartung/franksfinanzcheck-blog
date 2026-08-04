@@ -2,7 +2,7 @@
 title: "5 einfache Frugalismus-Tricks für den Alltag: So sparst du 200 € im Monat"
 description: "5 praxiserprobte Frugalismus-Tricks, mit denen du sofort im Alltag Geld sparst: von der 50-30-20-Regel bis zu smarter Vorratshaltung – ohne Verzicht."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Frugalismus", "Geld sparen", "Haushaltsbuch"]
 categories: ["Geld sparen & Frugalismus"]
 keywords: ["Frugalismus Tipps", "Geld sparen im Alltag", "Haushaltsbuch führen", "Sparmethoden"]

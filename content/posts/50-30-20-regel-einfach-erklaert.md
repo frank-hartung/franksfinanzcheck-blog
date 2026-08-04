@@ -2,7 +2,7 @@
 title: "Die 50-30-20-Regel einfach erklärt: Die perfekte Formel für deine Finanzen"
 description: "So strukturierst du dein Gehalt optimal: 50 % Fixkosten, 30 % Freizeit, 20 % Sparen. Die einfachste Budgetierungsmethode, Schritt für Schritt erklärt."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Budgetierung", "50-30-20", "Haushaltsplanung"]
 categories: ["Haushaltskasse & Budgetplanung"]
 keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen"]

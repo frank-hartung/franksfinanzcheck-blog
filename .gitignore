@@ -6,3 +6,5 @@
 # Sonstiges
 .DS_Store
 *.log
+# Awin-ID (nicht committen)
+scripts/awin_id.txt

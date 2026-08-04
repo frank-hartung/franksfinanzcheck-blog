@@ -2,7 +2,7 @@
 title: "Stromfresser im Haushalt entlarven: Diese 3 Geräte treiben deine Stromrechnung hoch"
 description: "Welche Haushaltsgeräte verbrauchen am meisten Strom? So findest du Stromfresser, reduzierst Standby-Kosten und sparst hunderte Euro im Jahr."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Strom sparen", "Energiekosten", "Stromfresser"]
 categories: ["Günstige Strom- & Gastarife"]
 keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]

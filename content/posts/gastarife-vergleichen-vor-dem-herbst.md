@@ -2,7 +2,7 @@
 title: "Gastarife vergleichen vor dem Herbst: So senkst du deine Heizkosten"
 description: "Der Spätsommer ist die beste Zeit für den Gaswechsel: Gastarife vergleichen, auf Preisgarantie und Boni achten – so sparst du im Winter bares Geld."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Gas", "Heizkosten sparen", "Tarifwechsel"]
 categories: ["Günstige Strom- & Gastarife"]
 keywords: ["Gasvergleich", "Gaskosten sparen", "Heizkosten senken", "Check24 Gas"]

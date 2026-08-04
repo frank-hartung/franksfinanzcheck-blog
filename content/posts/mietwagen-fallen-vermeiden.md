@@ -2,7 +2,7 @@
 title: "Mietwagen-Fallen im Urlaub vermeiden: Worauf du bei Versicherung & Kaution achten musst"
 description: "Versteckte Kosten beim Mietwagen? So schützt du dich vor teuren Zusatzversicherungen und Kautions-Abzocke im Ausland."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Mietwagen", "Reisetipps", "Reisekosten sparen"]
 categories: ["Reisebudget & Mietwagen"]
 keywords: ["Mietwagen Tipps", "Urlaub Mietwagen", "Reisekosten sparen"]
