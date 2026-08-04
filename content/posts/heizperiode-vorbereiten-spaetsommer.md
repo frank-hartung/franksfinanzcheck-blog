@@ -65,6 +65,6 @@ Pauschal lässt sich das nicht sagen – es hängt von Tarif, Gebäude und Techn
 
 ---
 
-👉 **Jetzt Gastarife vergleichen und den Winter günstig überstehen:** [**→ Gaspreise prüfen**](https://www.check24.de/gas/)
+👉 **Jetzt Gastarife vergleichen und den Winter günstig überstehen:** [**→ Gaspreise prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

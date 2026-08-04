@@ -60,6 +60,6 @@ Ja – moderne Wärmepumpen arbeiten bis etwa -20 °C zuverlässig. Die Effizien
 
 ---
 
-👉 **Jetzt Stromtarife für die Wärmepumpe vergleichen:** [**→ Strompreise prüfen**](https://www.check24.de/strom/)
+👉 **Jetzt Stromtarife für die Wärmepumpe vergleichen:** [**→ Strompreise prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

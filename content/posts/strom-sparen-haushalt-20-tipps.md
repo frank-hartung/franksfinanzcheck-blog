@@ -63,6 +63,6 @@ Ja – ein Messgerät (oft kostenlos ausleihbar) zeigt in 24 Stunden, welche Ger
 
 ---
 
-👉 **Jetzt Stromtarif vergleichen und sofort sparen:** [**→ Strompreise prüfen**](https://www.check24.de/strom/)
+👉 **Jetzt Stromtarif vergleichen und sofort sparen:** [**→ Strompreise prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

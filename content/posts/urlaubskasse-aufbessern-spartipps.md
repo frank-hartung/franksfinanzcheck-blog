@@ -65,6 +65,6 @@ Bei teuren, früh gebuchten Reisen ja – vor allem bei festen Terminen oder wen
 
 ---
 
-👉 **Jetzt Urlaubsangebote vergleichen und sparen:** [**→ Reiseangebote prüfen**](https://www.check24.de/reisen/)
+👉 **Jetzt Urlaubsangebote vergleichen und sparen:** [**→ Reiseangebote prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
