@@ -12,8 +12,20 @@ Unser Ziel: Dir helfen, die besten Tarife zu finden und im Alltag smarter mit Ge
 ## Transparenz
 Dieser Blog nimmt am CHECK24-Partnerprogramm teil. Das heißt: Wenn du über unsere Empfehlungslinks etwas buchst oder einen Vertrag abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Inhalte entstehen unabhängig davon; wir empfehlen nur, was wir selbst sinnvoll finden.
 
-## Auch auf Pinterest
-Alle Artikel gibt es auch als Infografiken und Pins auf [Pinterest](https://www.pinterest.de/franksfinanzcheck/) – Pinwand für Pinwand mit den gleichen Themen: Geld sparen & Frugalismus, Haushaltskasse & Budgetplanung, Günstige Strom- & Gastarife, Internet- & DSL-Hacks sowie Reisebudget & Mietwagen.
+## Auch auf Pinterest 📌
+
+Alle Artikel gibt es auch als Infografiken und Pins auf meinem Pinterest-Profil:
+
+👉 **[FranksFinanzcheck auf Pinterest](https://www.pinterest.de/franksfinanzcheck/)**
+
+Pinwand für Pinwand mit den gleichen Themen:
+- **Geld sparen & Frugalismus**
+- **Haushaltskasse & Budgetplanung**
+- **Günstige Strom- & Gastarife**
+- **Internet- & DSL-Hacks**
+- **Reisebudget & Mietwagen**
+
+Folge mir dort, um keine neue Infografik und keinen neuen Spartipp zu verpassen!
 
 ## Keine Beratung
 Unsere Artikel ersetzen keine individuelle Finanz-, Rechts- oder Versicherungsberatung. Tarife und Konditionen ändern sich ständig – prüfe Angebote vor Abschluss immer selbst auf der jeweiligen Anbieter-Website.
