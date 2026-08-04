@@ -6,7 +6,7 @@
 baseURL = "https://DEINE-DOMAIN.DE/"          # <-- HIER deine Domain eintragen
 title = "SparRatgeber24"                       # <-- HIER deinen Blog-Namen eintragen
 theme = "PaperMod"
-languageCode = "de-de"
+locale = "de-DE"
 defaultContentLanguage = "de"
 enableRobotsTXT = true                         # erzeugt robots.txt automatisch
 enableEmoji = true
