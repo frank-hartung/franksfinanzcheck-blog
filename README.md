@@ -13,7 +13,7 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 | Hugo-Blog | Theme PaperMod (SEO-fertig: Meta-Tags, OpenGraph, JSON-LD, Sitemap, robots.txt, Canonical) |
 | Pflichtseiten | Impressum (mit Platzhaltern), Datenschutz, Über – Werbekennzeichnung inklusive |
 | 2 Beispiel-Artikel | Stromwechsel & Kfz-Versicherung (dienen als Vorlage/Struktur) |
-| Themenpool | `data/topics.yaml` – 20 Themen aus dem Pinterest-Masterplan (EP + TP), inkl. themenspezifischer CHECK24-Links |
+| Themenpool | `data/topics.yaml` – 29 Themen (19 aus dem Pinterest-Masterplan + 10 weitere Nischen), inkl. themenspezifischer CHECK24-Links |
 | 🤖 Content-Bot | `scripts/generate_drafts.py` – erzeugt täglich frische, einzigartige Artikel-Entwürfe (Titel, Meta-Description, Keywords, strukturiertes Markdown, FAQ, Affiliate-CTA) |
 | ⏰ Täglicher Job | `.github/workflows/daily-content.yml` – läuft automatisch um 07:00 Uhr (Sommerzeit) |
 | 🚀 Deployment | `.github/workflows/deploy.yml` – baut & veröffentlicht kostenlos auf GitHub Pages |

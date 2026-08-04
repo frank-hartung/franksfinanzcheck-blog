@@ -72,3 +72,33 @@ topics:
   - title: "Günstige Flüge für den Spätsommer finden"
     keywords: ["Flugtickets günstig", "Flugvergleich", "Reisebudget sparen"]
     affiliate_url: "https://www.check24.de/fluege/"
+
+  # --- Erweiterung: weitere Nischen (laufend ergänzbar) -----
+  - title: "Handytarife vergleichen: So findest du den günstigsten Tarif"
+    keywords: ["Handytarif vergleichen", "Handyvertrag wechseln", "Günstiger Handytarif"]
+    affiliate_url: "https://www.check24.de/handytarife/"
+  - title: "Privathaftpflicht: Warum sie Pflicht ist und was sie kostet"
+    keywords: ["Privathaftpflicht", "Haftpflichtversicherung Vergleich", "Haftpflicht Kosten"]
+    affiliate_url: "https://www.check24.de/haftpflicht/"
+  - title: "Hausratversicherung: Wer sie braucht und was sie leistet"
+    keywords: ["Hausratversicherung vergleichen", "Hausrat absichern", "Hausrat Kosten"]
+    affiliate_url: "https://www.check24.de/hausrat/"
+  - title: "Reisekrankenversicherung: Wann sie sich wirklich lohnt"
+    keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschutz"]
+    affiliate_url: "https://www.check24.de/reisekrankenversicherung/"
+  - title: "Zahnzusatzversicherung: Lohnt sich der Abschluss?"
+    keywords: ["Zahnzusatzversicherung", "Zahnarztkosten sparen", "Zahnersatz versichern"]
+    affiliate_url: "https://www.check24.de/zahnzusatzversicherung/"
+  - title: "Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten"
+    keywords: ["Kreditkarte ohne Gebühren", "Kreditkarten Vergleich", "Kostenlose Kreditkarte"]
+    affiliate_url: "https://www.check24.de/kreditkarte/"
+  - title: "Tagesgeld und Zinsen: So parkst du dein Geld sicher"
+    keywords: ["Tagesgeld", "Zinsen vergleichen", "Geld sicher anlegen"]
+  - title: "E-Auto laden: So senkst du deine Stromkosten"
+    keywords: ["E-Auto Ladekosten", "Stromtarif E-Auto", "Wallbox sparen"]
+  - title: "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung"
+    keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren"]
+    affiliate_url: "https://www.check24.de/strom/"
+  - title: "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?"
+    keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken"]
+    affiliate_url: "https://www.check24.de/gas/"
