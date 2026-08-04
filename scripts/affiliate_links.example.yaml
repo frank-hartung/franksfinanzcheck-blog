@@ -1,0 +1,27 @@
+# ============================================================
+#  MAPPING-VORLAGE: CHECK24-Links → deine persönlichen Awin-Links
+#
+#  SO BENUTZEN:
+#  1) Diese Datei kopieren:  cp scripts/affiliate_links.example.yaml scripts/affiliate_links.yaml
+#  2) Deine Awin-Links eintragen (siehe Schritt 1 der Anleitung)
+#  3) Ausführen:             python3 scripts/replace_affiliate_links.py
+#
+#  WICHTIG:
+#  - Die alte URL (links) muss EXAKT der URL im Artikel entsprechen.
+#  - Deinen Awin-Link (rechts) immer in Anführungszeichen setzen,
+#    weil er &-Zeichen enthält.
+#  - Links ohne Kategorie (check24.de/) sind die generischen Artikel –
+#    trage dort deinen allgemeinen CHECK24-Link ein oder lasse die Zeile weg.
+# ============================================================
+
+mappings:
+  https://www.check24.de/: "https://www.awin1.com/cread.php?awinmid=DEINE_AWIN_ID&p=https%3A%2F%2Fwww.check24.de%2F"
+  https://www.check24.de/strom/: "https://www.awin1.com/cread.php?awinmid=DEINE_AWIN_ID&p=https%3A%2F%2Fwww.check24.de%2Fstrom%2F"
+  https://www.check24.de/gas/: "https://www.awin1.com/cread.php?awinmid=DEINE_AWIN_ID&p=https%3A%2F%2Fwww.check24.de%2Fgas%2F"
+  https://www.check24.de/dsl/: "https://www.awin1.com/cread.php?awinmid=DEINE_AWIN_ID&p=https%3A%2F%2Fwww.check24.de%2Fdsl%2F"
+  https://www.check24.de/girokonto/: "https://www.awin1.com/cread.php?awinmid=DEINE_AWIN_ID&p=https%3A%2F%2Fwww.check24.de%2Fgirokonto%2F"
+  https://www.check24.de/kredit/: "https://www.awin1.com/cread.php?awinmid=DEINE_AWIN_ID&p=https%3A%2F%2Fwww.check24.de%2Fkredit%2F"
+  https://www.check24.de/kfz-versicherung/: "https://www.awin1.com/cread.php?awinmid=DEINE_AWIN_ID&p=https%3A%2F%2Fwww.check24.de%2Fkfz-versicherung%2F"
+  https://www.check24.de/reisen/: "https://www.awin1.com/cread.php?awinmid=DEINE_AWIN_ID&p=https%3A%2F%2Fwww.check24.de%2Freisen%2F"
+  https://www.check24.de/mietwagen/: "https://www.awin1.com/cread.php?awinmid=DEINE_AWIN_ID&p=https%3A%2F%2Fwww.check24.de%2Fmietwagen%2F"
+  https://www.check24.de/fluege/: "https://www.awin1.com/cread.php?awinmid=DEINE_AWIN_ID&p=https%3A%2F%2Fwww.check24.de%2Ffluege%2F"
