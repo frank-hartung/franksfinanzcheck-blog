@@ -56,6 +56,13 @@ S = {
     "small":    st("small", fontSize=8.5, leading=12, textColor=GREY),
 }
 
+
+def fmt(text):
+    """Formatiert Markdown-Inline (**bold**, `code`) für Paragraph-HTML."""
+    text = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", text)
+    text = re.sub(r"`(.+?)`", r'<font face="DejaVu" color="#0A4634"><b>\1</b></font>', text)
+    return text
+
 # ---------- Markdown-Mini-Parser (unsere Datei) ----------
 def md_to_flowables(md_text):
     flow = []
@@ -114,7 +121,7 @@ def md_to_flowables(md_text):
             if all(re.fullmatch(r":?-{2,}:?", c) for c in cells):
                 table_rows = []  # Trennzeile ignorieren
             else:
-                table_rows.append(cells)
+                table_rows.append([fmt(c) for c in cells])
             i += 1
             continue
         else:
@@ -122,19 +129,21 @@ def md_to_flowables(md_text):
 
         # Überschriften
         if stripped.startswith("# "):
-            flow.append(Paragraph(stripped[2:], S["h1"]))
+            flow.append(Paragraph(fmt(stripped[2:]), S["h1"]))
         elif stripped.startswith("## "):
-            flow.append(Paragraph(stripped[3:], S["h2"]))
+            flow.append(Paragraph(fmt(stripped[3:]), S["h2"]))
         elif stripped.startswith("### "):
-            flow.append(Paragraph(stripped[4:], S["h3"]))
+            flow.append(Paragraph(fmt(stripped[4:]), S["h3"]))
         # Checkliste
         elif stripped.startswith("- [ ]"):
-            flow.append(Paragraph("☐ " + stripped[5:].strip(), S["check"]))
+            txt = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", stripped[5:].strip())
+            flow.append(Paragraph("☐ " + txt, S["check"]))
         # Liste
         elif stripped.startswith("- ") or stripped.startswith("* "):
-            flow.append(Paragraph("• " + stripped[2:].strip(), S["bullet"]))
+            txt = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", stripped[2:].strip())
+            flow.append(Paragraph("• " + txt, S["bullet"]))
         elif stripped.startswith("1. ") or re.match(r"^\d+\.\s", stripped):
-            flow.append(Paragraph("• " + re.sub(r"^\d+\.\s", "", stripped), S["bullet"]))
+            flow.append(Paragraph("• " + fmt(re.sub(r"^\d+\.\s", "", stripped)), S["bullet"]))
         # Trennlinie
         elif re.fullmatch(r"[-*_]{3,}", stripped):
             flow.append(Spacer(1, 4))
@@ -143,11 +152,7 @@ def md_to_flowables(md_text):
             pass
         # normaler Text
         else:
-            text = stripped
-            # Markdown-Inline: **bold** und `code`
-            text = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", text)
-            text = re.sub(r"`(.+?)`", r'<font face="DejaVu" color="#0A4634"><b>\1</b></font>', text)
-            flow.append(Paragraph(text, S["body"]))
+            flow.append(Paragraph(fmt(stripped), S["body"]))
         i += 1
 
     flush_table()
@@ -164,7 +169,7 @@ def build_pdf(md_path, out_path):
     for ln in lines:
         if ln.startswith("# "):
             title = ln[2:].strip()
-        elif ln.startswith("**Ziel:**") or ln.startswith("**Basis:**"):
+        elif ln.startswith("**Ziel:**"):
             subtitle = ln.replace("**", "").strip()
             break
 
