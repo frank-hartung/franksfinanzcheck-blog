@@ -231,3 +231,80 @@ h1, h2, h3, h4, h5, h6,
     color: var(--ff-emerald);
     font-weight: 800;
 }
+
+/* ---------- Pinterest-CTA-Block (Startseite, prominent) ---------- */
+.ff-pinterest-cta {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    background: var(--ff-white);
+    border: 2px solid var(--ff-emerald);
+    border-left: 8px solid var(--ff-emerald);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 16px rgba(14, 90, 67, 0.12);
+}
+
+.ff-pinterest-cta-logo {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(230, 0, 35, 0.25);
+}
+
+.ff-pinterest-cta-text {
+    flex: 1 1 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ff-pinterest-cta-text strong {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.15em;
+    color: var(--ff-anthracite);
+}
+
+.ff-pinterest-cta-text span {
+    font-size: 0.9em;
+    color: #555;
+    line-height: 1.5;
+}
+
+.ff-pinterest-cta-btn {
+    display: inline-block;
+    background: var(--ff-yellow);
+    color: var(--ff-anthracite);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1em;
+    padding: 12px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(255, 179, 0, 0.4);
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.ff-pinterest-cta-btn:hover {
+    background: var(--ff-yellow-dark);
+    color: var(--ff-anthracite);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .ff-pinterest-cta {
+        justify-content: center;
+        text-align: center;
+    }
+    .ff-pinterest-cta-btn {
+        width: 100%;
+    }
+}
