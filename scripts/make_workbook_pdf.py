@@ -54,6 +54,8 @@ S = {
                    backColor=EMERALD_SOFT, leftIndent=8, rightIndent=8, spaceBefore=4, spaceAfter=8),
     "table":    st("table", fontSize=9, leading=13),
     "small":    st("small", fontSize=8.5, leading=12, textColor=GREY),
+    "intro":    st("intro", fontName="DejaVuBold", fontSize=16, leading=23,
+                   textColor=EMERALD_DARK, alignment=TA_CENTER, spaceAfter=6),
 }
 
 
@@ -170,7 +172,7 @@ def build_pdf(md_path, out_path):
         if ln.startswith("# "):
             title = ln[2:].strip()
         elif ln.startswith("**Ziel:**"):
-            subtitle = ln.replace("**", "").strip()
+            subtitle = ln.replace("**", "").replace("Ziel:", "").strip()
             break
 
     doc = BaseDocTemplate(out_path, pagesize=A4,
@@ -211,15 +213,16 @@ def build_pdf(md_path, out_path):
     story.append(Spacer(1, 30))
     story.append(Paragraph(title, S["title"]))
     story.append(Spacer(1, 8))
-    story.append(Paragraph("für " + subtitle, S["subtitle"]))
+    story.append(Paragraph(subtitle, S["subtitle"]))
     story.append(Spacer(1, 20))
     # Gelber Trenn-Balken
     t = Table([[""]], colWidths=[60*mm], rowHeights=[3])
     t.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), YELLOW)]))
     story.append(t)
     story.append(Spacer(1, 20))
-    story.append(Paragraph("Kostenlose Maßnahmen, um deinen Blog über Pinterest bekannter zu machen – "
-                           "basierend auf deinem Pinterest-Masterplan (August 2026).", S["body"]))
+    story.append(Paragraph("Kostenlose Maßnahmen, um deinen Blog über Pinterest bekannter zu machen",
+                           S["intro"]))
+    story.append(Paragraph("basierend auf deinem Pinterest-Masterplan (August 2026)", S["intro"]))
     story.append(PageBreak())
 
     # Restlichen Markdown-Inhalt (ohne die erste Titelzeile)
