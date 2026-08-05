@@ -8,10 +8,7 @@ showToc: true
 ## 1. Datenschutz auf einen Blick
 
 **Verantwortliche Stelle:**
-Frank Hartung
-Karl-Marx-Str. 13
-19376 Ruhner Berge OT Marnitz
-Deutschland
+Frank Hartung, Karl-Marx-Str. 13, 19376 Ruhner Berge OT Marnitz, Deutschland
 
 E-Mail: frankhartung@web.de
 
