@@ -102,6 +102,7 @@ dir Wechselprämien"}
 - [ ] Destination-URL = passender Blog-Artikel (nicht Startseite!)?
 - [ ] Pin-Grafik im Branding (grün/gelb, vertikal)?
 
+<!-- pagebreak -->
 ### 📆 Wöchentlich (montags, 30 Minuten)
 
 - [ ] **Pinterest-Trends** checken: trends.pinterest.com → 3 Suchbegriffe für die Woche notieren
