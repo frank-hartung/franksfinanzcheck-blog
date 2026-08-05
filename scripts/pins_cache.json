@@ -1,0 +1,622 @@
+[
+ {
+  "tag": 1,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "5 einfache Frugalismus-Tricks für den Alltag",
+  "beschreibung": "Entdecke 5 praxiserprobte Frugalismus-Tricks, mit denen Du sofort im Alltag Geld sparst.",
+  "keywords": "frugalismus tipps, geld sparen im alltag, haushaltsbuch führen, sparmethoden",
+  "pinwand": "Geld sparen & Frugalismus",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 1,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Die 50-30-20 Regel einfach erklärt",
+  "beschreibung": "So strukturierst Du Dein Gehalt optimal: 50% Festkosten, 30% Freizeit, 20% Sparen.",
+  "keywords": "50 30 20 regel, budgetierung, haushaltsplanung, finanzwissen",
+  "pinwand": "Haushaltskasse & Budgetplanung",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 2,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "Stromfresser im Haushalt entlarven",
+  "beschreibung": "Welche Haushaltsgeräte verbrauchen am meisten Strom? Wir zeigen Dir, wie Du Standby-",
+  "keywords": "stromfresser finden, strom sparen tipps, energiekosten senken",
+  "pinwand": "Günstige Strom- & Gastarife 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 2,
+  "pin": 2,
+  "typ": "TP",
+  "titel": "Stromanbieter wechseln & 300€ sparen",
+  "beschreibung": "Vergleiche jetzt aktuelle Stromtarife auf CHECK24 und sichere Dir Wechselprämien von",
+  "keywords": "stromanbieter wechseln, stromvergleich, stromkosten sparen 2026",
+  "pinwand": "Günstige Strom- & Gastarife 1",
+  "url_alt": "https://www.check24.de/strom/"
+ },
+ {
+  "tag": 3,
+  "pin": 1,
+  "typ": "",
+  "titel": "WLAN-Verstärker vs. Mesh-WLAN",
+  "beschreibung": "Ist Dein WLAN zu langsam? Erfahre den Unterschied zwischen Repeater und Mesh-",
+  "keywords": "wlan verbessern, dsl hacks, schnelles internet zuhause",
+  "pinwand": "Internet- & DSL-Hacks 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 3,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Urlaubskasse clever aufbessern",
+  "beschreibung": "Mit diesen Tipps bleibt nach dem Sommerurlaub noch Geld in der Kasse. Plane Voraus",
+  "keywords": "urlaub sparen, reisebudget tipps, günstig reisen",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 4,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "7 Gewohnheiten für finanzielle Freiheit",
+  "beschreibung": "Finanzielle Unabhängigkeit beginnt im Kopf. Lerne 7 tägliche Routinen kennen, die Deinen",
+  "keywords": "finanzielle freiheit, vermögensaufbau, sparmindset",
+  "pinwand": "Geld sparen & Frugalismus 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 4,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Notgroschen aufbauen: Wie viel reicht?",
+  "beschreibung": "Wie viele Monatsgehälter solltest Du auf der hohen Kante haben? Alle Fakten zum",
+  "keywords": "notgroschen aufbauen, tagesgeld, finanzielle sicherheit",
+  "pinwand": "Haushaltskasse & Budgetplanung 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 5,
+  "pin": 1,
+  "typ": "TP",
+  "titel": "Gastarife vergleichen vor dem Herbst",
+  "beschreibung": "Der Spätsommer ist die beste Zeit zum Gaswechsel! Vergleiche die günstigsten Gastarife",
+  "keywords": "gasvergleich, gaskosten sparen, heizkosten senken, check24 gas",
+  "pinwand": "Günstige Strom- & Gastarife 1",
+  "url_alt": "https://www.check24.de/gas/"
+ },
+ {
+  "tag": 5,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Heizperiode vorbereiten im Spätsommer",
+  "beschreibung": "Bereite Deine Heizung und Gasverträge im Spätsommer vor! Wer jetzt prüft, vermeidet",
+  "keywords": "gasrechnung senken, heizkosten sparen, herbst vorbereitung",
+  "pinwand": "Günstige Strom- & Gastarife 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 6,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "DNS-Server ändern für schnelleres Internet",
+  "beschreibung": "Mit einem Wechsel des DNS-Servers surfst Du spürbar schneller und sicherer. Schritt-für-",
+  "keywords": "dns server wechseln, internet schneller machen, dsl tipps",
+  "pinwand": "Internet- & DSL-Hacks 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 6,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Mietwagen-Fallen im Urlaub vermeiden",
+  "beschreibung": "Versteckte Kosten beim Mietwagen? So schützt Du Dich vor teuren Zusatzversicherungen",
+  "keywords": "mietwagen tipps, urlaub mietwagen, reisekosten sparen",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 7,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "5 einfache Frugalismus-Tricks für den Alltag",
+  "beschreibung": "Entdecke 5 praxiserprobte Frugalismus-Tricks, mit denen Du sofort im Alltag Geld sparst.",
+  "keywords": "frugalismus tipps, geld sparen im alltag, haushaltsbuch führen, sparmethoden",
+  "pinwand": "Geld sparen & Frugalismus 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 7,
+  "pin": 2,
+  "typ": "TP",
+  "titel": "DSL & Internet-Fiat ab 9,99€/Monat",
+  "beschreibung": "Surfe schneller und günstiger! Finde jetzt auf CHECK24 Deinen passenden DSL- oder",
+  "keywords": "dsl vergleich, internetvertrag wechseln, günstiges internet",
+  "pinwand": "Internet- & DSL-Hacks 1",
+  "url_alt": "https://www.check24.de/dsl/"
+ },
+ {
+  "tag": 8,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "Die 50-30-20 Regel einfach erklärt",
+  "beschreibung": "So strukturierst Du Dein Gehalt optimal: 50% Festkosten, 30% Freizeit, 20% Sparen.",
+  "keywords": "50 30 20 reget, budgetierung, haushaltsplanung, finanzwissen",
+  "pinwand": "Haushaltskasse & Budgetplanung 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 8,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Stromfresser im Haushalt entlarven",
+  "beschreibung": "Welche Haushaltsgeräte verbrauchen am meisten Strom? Wir zeigen Dir, wie Du Standby-",
+  "keywords": "stromfresser finden, strom sparen tipps, energiekosten senken",
+  "pinwand": "Günstige Strom- & Gastarife 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 9,
+  "pin": 1,
+  "typ": "",
+  "titel": "WLAN-Verstärker vs. Mesh-WLAN",
+  "beschreibung": "Ist Dein WLAN zu langsam? Erfahre den Unterschied zwischen Repeater und Mesh-",
+  "keywords": "wlan verbessern, dsl hacks, schnelles internet zuhause",
+  "pinwand": "Internet- & DSL-Hacks 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 9,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Urlaubskasse clever aufbessern",
+  "beschreibung": "Mit diesen Tipps bleibt nach dem Sommerurlaub noch Geld in der Kasse. Plane Voraus",
+  "keywords": "urlaub sparen, reisebudget tipps, günstig reisen",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 10,
+  "pin": 1,
+  "typ": "TP",
+  "titel": "Kostenloses Girokonto ohne Gebühren",
+  "beschreibung": "Zahlst Du noch Kontoführungsgebühren? Vergleiche kostenlose Girokonten auf CHECK24",
+  "keywords": "kostenloses girokonto, girokonto vergleich, kontoführungsgebühren sparen",
+  "pinwand": "Haushaltskasse & Budgetplanung 1",
+  "url_alt": "https://www.check24.de/girokonto/"
+ },
+ {
+  "tag": 10,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "7 Gewohnheiten für finanzielle Freiheit",
+  "beschreibung": "Finanzielle Unabhängigkeit beginnt im Kopf. Lerne 7 tägliche Routinen kennen, die Deinen",
+  "keywords": "finanzielle freiheit, vermögensaufbau, sparmindset",
+  "pinwand": "Geld sparen & Frugalismus 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 11,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "Notgroschen aufbauen: Wie viel reicht?",
+  "beschreibung": "Wie viele Monatsgehälter solltest Du auf der hohen Kante haben? Alle Fakten zum",
+  "keywords": "notgroschen aufbauen, tagesgeld, finanzielle sicherheit",
+  "pinwand": "Haushaltskasse & Budgetplanung 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 11,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Heizperiode vorbereiten im Spätsommer",
+  "beschreibung": "Bereite Deine Heizung und Gasverträge im Spätsommer vor! Wer jetzt prüft, vermeidet",
+  "keywords": "gasrechnung senken, heizkosten sparen, herbst vorbereitung",
+  "pinwand": "Günstige Strom-  & Gastarife 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 12,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "DNS-Server ändern für schnelleres Internet",
+  "beschreibung": "Mit einem Wechsel des DNS-Servers surfst Du spürbar schneller und sicherer. Schritt-für-",
+  "keywords": "dns server wechseln, internet schneller machen, dsl tipps",
+  "pinwand": "Internet- & DSL-Hacks 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 12,
+  "pin": 2,
+  "typ": "TP",
+  "titel": "Günstiger Ratenkredit mit Bestzins",
+  "beschreibung": "Bestehende Kredite umschulden oder Wünsche günstig finanzieren. Vergleiche",
+  "keywords": "kreditvergleich, ratenkredit günstig, umschuldung sparen",
+  "pinwand": "Geld sparen & Frugalismus 1",
+  "url_alt": "https://www.check24.de/kredit/"
+ },
+ {
+  "tag": 13,
+  "pin": 1,
+  "typ": "",
+  "titel": "Mietwagen-Fallen im Urlaub vermeiden",
+  "beschreibung": "Versteckte Kosten beim Mietwagen? So schützt Du Dich vor teuren Zusatzversicherungen",
+  "keywords": "mietwagen tipps, urlaub mietwagen, reisekosten sparen",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 13,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "5 einfache Frugalismus-Tricks für den Alltag",
+  "beschreibung": "Entdecke 5 praxiserprobte Frugalismus-Tricks, mit denen Du sofort im Alltag Geld sparst.",
+  "keywords": "frugalismus tipps, geld sparen im alltag, haushaltsbuch führen, sparmethoden",
+  "pinwand": "Geld sparen & Frugalismus 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 14,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "Die 50-30-20 Regel einfach erklärt",
+  "beschreibung": "So strukturierst Du Dein Gehalt optimal: 50% Festkosten, 30% Freizeit, 20% Sparen.",
+  "keywords": "50 30 20 reget, budgetierung, haushaltsplanung, finanzwissen",
+  "pinwand": "Haushaltskasse & Budgetplanung 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 14,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Stromfresser im Haushalt entlarven",
+  "beschreibung": "Welche Haushaltsgeräte verbrauchen am meisten Strom? Wir zeigen Dir, wie Du Standby-",
+  "keywords": "stromfresser finden, strom sparen tipps, energiekosten senken",
+  "pinwand": "Günstige Strom- & Gastarife 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 15,
+  "pin": 1,
+  "typ": "TP",
+  "titel": "KFZ-Versicherung vergleichen & sparen",
+  "beschreibung": "Jetzt schon die KFZ-Versicherung vergleichen und im Herbst mühelos wechseln. Finde",
+  "keywords": "kfz versicherung wechseln, autoversicherung vergleichen, sparmethoden auto",
+  "pinwand": "Geld sparen & Frugalismus 1",
+  "url_alt": "https://www.check24.de/kfz-versicherung/"
+ },
+ {
+  "tag": 15,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "WLAN-Verstärker vs. Mesh-WLAN",
+  "beschreibung": "Ist Dein WLAN zu langsam? Erfahre den Unterschied zwischen Repeater und Mesh-",
+  "keywords": "wlan verbessern, dsl hacks, schnelles internet zuhause",
+  "pinwand": "Internet- & DSL-Hacks 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 16,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "Urlaubskasse clever aufbessern",
+  "beschreibung": "Mit diesen Tipps bleibt nach dem Sommerurlaub noch Geld in der Kasse. Plane Voraus",
+  "keywords": "urlaub sparen, reisebudget tipps, günstig reisen",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 16,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "7 Gewohnheiten für finanzielle Freiheit",
+  "beschreibung": "Finanzielle Unabhängigkeit beginnt im Kopf. Lerne 7 tägliche Routinen kennen, die Deinen",
+  "keywords": "finanzielle freiheit, vermögensaufbau, sparmindset",
+  "pinwand": "Geld sparen & Frugalismus 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 17,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "Notgroschen aufbauen: Wie viel reicht?",
+  "beschreibung": "Wie viele Monatsgehälter solltest Du auf der hohen Kante haben? Alle Fakten zum",
+  "keywords": "notgroschen aufbauen, tagesgeld, finanzielle sicherheit",
+  "pinwand": "Haushaltskasse & Budgetplanung 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 17,
+  "pin": 2,
+  "typ": "TP",
+  "titel": "Last-Minute Urlaubsangebote sichern",
+  "beschreibung": "Finde jetzt spontane Sommer- und Spätsommer-Angebote auf CHECK24 Reisen. Beste",
+  "keywords": "last minute urlaub, reiseangebote günstig, sommerurlaub schnäppchen",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.check24.de/reisen/"
+ },
+ {
+  "tag": 18,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "Heizperiode vorbereiten im Spätsommer",
+  "beschreibung": "Bereite Deine Heizung und Gasverträge im Spätsommer vor! Wer jetzt prüft, vermeidet",
+  "keywords": "gasrechnung senken, heizkosten sparen, herbst vorbereitung",
+  "pinwand": "Günstige Strom- & Gastarife 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 18,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "DNS-Server ändern für schnelleres Internet",
+  "beschreibung": "Mit einem Wechsel des DNS-Servers surfst Du spürbar schneller und sicherer. Schritt-für-",
+  "keywords": "dns server wechseln, internet schneller machen, dsl tipps",
+  "pinwand": "Internet- & DSL-Hacks 1",
+  "url_alt": "https://www.pinterest.denrankstinanzcheck/"
+ },
+ {
+  "tag": 19,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "Mietwagen-Fallen im Urlaub vermeiden",
+  "beschreibung": "Versteckte Kosten beim Mietwagen? So schützt Du Dich vor teuren Zusatzversicherungen",
+  "keywords": "mietwagen tipps, urlaub mietwagen, reisekosten sparen",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 19,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "5 einfache Frugalismus-Tricks für den Alltag",
+  "beschreibung": "Entdecke 5 praxiserprobte Frugalismus-Tricks, mit denen Du sofort im Alltag Geld sparst.",
+  "keywords": "frugalismus tipps, geld sparen im alltag, haushaltsbuch führen, sparmethoden",
+  "pinwand": "Geld sparen & Frugalismus 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 20,
+  "pin": 1,
+  "typ": "TP",
+  "titel": "Günstigen Mietwagen für den Urlaub buchen",
+  "beschreibung": "Sichere Dir Deinen Mietwagen zum Bestpreis auf CHECK24. Inklusive transparenter",
+  "keywords": "mietwagen buchen, günstige mietwagen, urlaub mietwagen vergleich",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.check24.de/mietwagen/"
+ },
+ {
+  "tag": 20,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Die 50-30-20 Regel einfach erklärt",
+  "beschreibung": "So strukturierst Du Dein Gehalt optimal: 50% Festkosten, 30% Freizeit, 20% Sparen.",
+  "keywords": "50 30 20 regel, budgetierung, haushaltsplanung, finanzwissen",
+  "pinwand": "Haushaltskasse & Budgetplanung 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 21,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "Stromfresser im Haushalt entlarven",
+  "beschreibung": "Welche Haushaltsgeräte verbrauchen am meisten Strom? Wir zeigen Dir, wie Du Standby-",
+  "keywords": "stromfresser finden, strom sparen tipps, energiekosten senken",
+  "pinwand": "Günstige Strom- & Gastarife 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 21,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "WLAN-Verstärker vs. Mesh-WLAN",
+  "beschreibung": "Ist Dein WLAN zu langsam? Erfahre den Unterschied zwischen Repeater und Mesh-",
+  "keywords": "wlan verbessern, dsl hacks, schnelles internet zuhause",
+  "pinwand": "Internet- & DSL-Hacks 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 22,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "Urlaubskasse clever aufbessern",
+  "beschreibung": "Mit diesen Tipps bleibt nach dem Sommerurlaub noch Geld in der Kasse. Plane Voraus",
+  "keywords": "urlaub sparen, reisebudget tipps, günstig reisen",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 22,
+  "pin": 2,
+  "typ": "",
+  "titel": "Günstige Flüge für den Spätsommer finden",
+  "beschreibung": "Vergleiche Hunderte Fluggesellschaften auf CHECK24 und finde die günstigsten",
+  "keywords": "flugtickets günstig, flugvergleich, reisebudget sparen",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.check24.de/fluege/"
+ },
+ {
+  "tag": 23,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "7 Gewohnheiten für finanzielle Freiheit",
+  "beschreibung": "Finanzielle Unabhängigkeit beginnt im Kopf. Lerne 7 tägliche Routinen kennen, die Deinen",
+  "keywords": "finanzielle freiheit, vermögensaufbau, sparmindset",
+  "pinwand": "Geld sparen & Frugalismus 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 23,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Notgroschen aufbauen: Wie viel reicht?",
+  "beschreibung": "Wie viele Monatsgehälter solltest Du auf der hohen Kante haben? Alle Fakten zum",
+  "keywords": "notgroschen aufbauen, tagesgeld, finanzielle sicherheit",
+  "pinwand": "Haushaltskasse & Budgetplanung 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 24,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "Heizperiode vorbereiten im Spätsommer",
+  "beschreibung": "Bereite Deine Heizung und Gasverträge im Spätsommer vor! Wer jetzt prüft, vermeidet",
+  "keywords": "gasrechnung senken, heizkosten sparen, herbst vorbereitung",
+  "pinwand": "Günstige Strom- & Gastarife 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 24,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "DNS-Server ändern für schnelleres Internet",
+  "beschreibung": "Mit einem Wechsel des DNS-Servers surfst Du spürbar schneller und sicherer. Schritt-für-",
+  "keywords": "dns server wechseln, internet schneller machen, dsl tipps",
+  "pinwand": "Internet- & DSL-Hacks 1",
+  "url_alt": "https://www.pinterest.denranksfinanzcheck/"
+ },
+ {
+  "tag": 25,
+  "pin": 1,
+  "typ": "TP",
+  "titel": "Zweite Welle Gaspreis-Anpassung: Jetzt sichern",
+  "beschreibung": "Schütze Dich vor steigenden Gaspreisen im Winter. Jetzt auf CHECK24 Gastarife mit",
+  "keywords": "preisgarantie gas, gasrechnung sparen, check24 gasvergleich",
+  "pinwand": "Günstige Strom- & Gastarife 1",
+  "url_alt": "https://www.check24.de/gas/"
+ },
+ {
+  "tag": 25,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Mietwagen-Fallen im Urlaub vermeiden",
+  "beschreibung": "Versteckte Kosten beim Mietwagen? So schützt Du Dich vor teuren Zusatzversicherungen",
+  "keywords": "mietwagen tipps, urlaub mietwagen, reisekosten sparen",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 26,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "5 einfache Frugalismus-Tricks für den Alltag",
+  "beschreibung": "Entdecke 5 praxiserprobte Frugalismus-Tricks, mit denen Du sofort im Alltag Geld sparst.",
+  "keywords": "frugalismus tipps, geld sparen im alltag, haushaltsbuch führen, sparmethoden",
+  "pinwand": "Geld sparen & Frugalismus 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 26,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Die 50-30-20 Regel einfach erklärt",
+  "beschreibung": "So strukturierst Du Dein Gehalt optimal: 50% Festkosten, 30% Freizeit, 20% Sparen.",
+  "keywords": "50 30 20 reget, budgetierung, haushaltsplanung, finanzwissen",
+  "pinwand": "Haushaltskasse & Budgetplanung 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 27,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "Stromfresser im Haushalt entlarven",
+  "beschreibung": "Welche Haushaltsgeräte verbrauchen am meisten Strom? Wir zeigen Dir, wie Du Standby-",
+  "keywords": "stromfresser finden, strom sparen tipps, energiekosten senken",
+  "pinwand": "Günstige Strom- & Gastarife 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 27,
+  "pin": 2,
+  "typ": "TP",
+  "titel": "DSL-Wechselbonus mitnehmen",
+  "beschreibung": "Wechsle jetzt Deinen DSL-Anbieter über CHECK24 und profitiere von exklusiven",
+  "keywords": "dsl wechselbonus, cashback dsl, dsl anbieter vergleichen",
+  "pinwand": "Internet- & DSL-Hacks 1",
+  "url_alt": "https://www.check24.de/dsl/"
+ },
+ {
+  "tag": 28,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "WLAN-Verstärker vs. Mesh-WLAN",
+  "beschreibung": "Ist Dein WLAN zu langsam? Erfahre den Unterschied zwischen Repeater und Mesh-",
+  "keywords": "wlan verbessern, dsl hacks, schnelles internet zuhause",
+  "pinwand": "Internet- & DSL-Hacks 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 28,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Urlaubskasse clever aufbessern",
+  "beschreibung": "Mit diesen Tipps bleibt nach dem Sommerurlaub noch Geld in der Kasse. Plane Voraus",
+  "keywords": "urlaub sparen, reisebudget tipps, günstig reisen",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 29,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "7 Gewohnheiten für finanzielle Freiheit",
+  "beschreibung": "Finanzielle Unabhängigkeit beginnt im Kopf. Lerne 7 tägliche Routinen kennen, die Deinen",
+  "keywords": "finanzielle freiheit, vermögensaufbau, sparmindset",
+  "pinwand": "Geld sparen & Frugalismus 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 29,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Notgroschen aufbauen: Wie viel reicht?",
+  "beschreibung": "Wie viele Monatsgehälter solltest Du auf der hohen Kante haben? Alle Fakten zum",
+  "keywords": "notgroschen aufbauen, tagesgeld, finanzielle sicherheit",
+  "pinwand": "Haushaltskasse & Budgetplanung 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 30,
+  "pin": 1,
+  "typ": "TP",
+  "titel": "Spätsommer-Mietwagen Schnäppchen",
+  "beschreibung": "Roadtrip geplant? Vergleiche Mietwagenangebote weltweit auf CHECK24 und spare bis zu",
+  "keywords": "mietwagen roadtrip, mietwagen günstig buchen, reise budget",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.check24.de/mietwagen/"
+ },
+ {
+  "tag": 30,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Heizperiode vorbereiten im Spätsommer",
+  "beschreibung": "Bereite Deine Heizung und Gasverträge im Spätsommer vor! Wer jetzt prüft, vermeidet",
+  "keywords": "gasrechnung senken, heizkosten sparen, herbst vorbereitung",
+  "pinwand": "Günstige Strom- & Gastarife 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 31,
+  "pin": 1,
+  "typ": "EP",
+  "titel": "DNS-Server ändern für schnelleres Internet",
+  "beschreibung": "Mit einem Wechsel des DNS-Servers surfst Du spürbar schneller und sicherer. Schritt-für-",
+  "keywords": "dns server wechseln, internet schneller machen, dsl tipps",
+  "pinwand": "Internet- & DSL-Hacks 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ },
+ {
+  "tag": 31,
+  "pin": 2,
+  "typ": "EP",
+  "titel": "Mietwagen-Fallen im Urlaub vermeiden",
+  "beschreibung": "Versteckte Kosten beim Mietwagen? So schützt Du Dich vor teuren Zusatzversicherungen",
+  "keywords": "mietwagen tipps, urlaub mietwagen, reisekosten sparen",
+  "pinwand": "Reisebudget & Mietwagen 1",
+  "url_alt": "https://www.pinterest.de/franksfinanzcheck/"
+ }
+]

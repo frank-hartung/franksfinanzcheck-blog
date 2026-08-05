@@ -49,29 +49,50 @@ def load_links():
 
 
 def replace_in_text(content, links):
-    """Ersetzt Standard-Check24-URLs durch persönliche Links. Liefert (text, anzahl)."""
+    """Ersetzt Standard-Check24-URLs durch persönliche Links. Liefert (text, anzahl).
+
+    WICHTIG: Die URLs werden nur ersetzt, wenn danach ein Begrenzer folgt
+    (Slash, Klammer, Leerzeichen, Anführungszeichen oder Zeilenende).
+    So wird NIE mitten in Wörtern ersetzt (z. B. "Gasheizung" bleibt unangetastet).
+    """
     total = 0
+    # Begrenzer nach der Kategorie-URL: / ) Leerzeichen " ' oder Ende
+    boundary = r'(?=/|\)|\s|["\']|$)'
     # 1) Kategorie-Links (z. B. check24.de/strom/)
+    #    re.sub ersetzt alle Matches in einem Durchlauf korrekt (kein Offset-Problem).
     for cat in CATEGORIES:
         personal = links.get(cat)
         if not personal:
             continue
-        pattern = re.compile(rf"https://www\.check24\.de/{cat}/?")
-        for m in list(pattern.finditer(content)):
-            if content[m.start():m.start() + len(personal)] == personal:
-                continue  # idempotent
-            content = content[:m.start()] + personal + content[m.end():]
-            total += 1
+        pattern = re.compile(rf"https://www\.check24\.de/{cat}(?:/)?{boundary}")
+        new_content, n = pattern.subn(lambda m: personal, content)
+        total += n
+        content = new_content
     # 2) Generischer Link (check24.de/ direkt vor ) oder Leerzeichen/Zeilenende)
     if links.get("allgemein"):
         personal = links["allgemein"]
         pattern = re.compile(r"https://www\.check24\.de/(?=[)\s])")
-        for m in list(pattern.finditer(content)):
-            if content[m.start():m.start() + len(personal)] == personal:
-                continue
-            content = content[:m.start()] + personal + content[m.end():]
-            total += 1
+        new_content, n = pattern.subn(lambda m: personal, content)
+        total += n
+        content = new_content
     return content, total
+
+
+def check_word_breaks(posts_dir, links):
+    """Sicherheits-Check: Meldet URLs, die MITTEN IN WÖRTERN stecken
+    (Zeichen vor der URL ist ein Buchstabe). Sollte nie vorkommen."""
+    problems = []
+    for fn in sorted(os.listdir(posts_dir)):
+        if not fn.endswith(".md"):
+            continue
+        path = os.path.join(posts_dir, fn)
+        with open(path, encoding="utf-8") as f:
+            content = f.read()
+        for m in re.finditer(r"https?://", content):
+            start = m.start()
+            if start > 0 and content[start - 1].isalnum():
+                problems.append((fn, content[max(0, start - 20):start + 40]))
+    return problems
 
 
 def process_file(path, links, dry_run):
@@ -142,6 +163,14 @@ def main():
         print("  → Im Partner-Dashboard generieren, in die YAML eintragen, erneut ausführen.")
     else:
         print("✓ Alle Standard-Check24-Links sind durch deine persönlichen Links ersetzt.")
+
+    word_breaks = check_word_breaks(POSTS_DIR, links)
+    if word_breaks:
+        print("\n⚠ ACHTUNG: URLs mitten in Wörtern gefunden (Sicherheits-Check):")
+        for fn, snippet in word_breaks[:10]:
+            print(f"  - {fn}: …{snippet}…")
+    else:
+        print("✓ Sicherheits-Check: keine URLs mitten in Wörtern.")
 
     if dry_run and grand_total:
         print("\nZum echten Ersetzen ohne --dry-run ausführen.")

@@ -41,6 +41,8 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 TOPICS_FILE = os.path.join(BLOG_DIR, "data", "topics.yaml")
 
+PINTEREST_PLAN = os.path.join(BLOG_DIR, "data", "pinterest_plan.yaml")
+
 MAX_ARTICLES = int(os.environ.get("MAX_ARTIKEL_PRO_LAUF", "1"))
 AUTHOR = os.environ.get("BLOG_AUTHOR", "Redaktion")
 AFFILIATE_URL = os.environ.get(
@@ -57,6 +59,22 @@ ANGLES = [
     ("checkliste", "kompakter Artikel mit Checklisten und Praxistipps"),
     ("hintergrund", "Hintergrund-Artikel: wie es funktioniert, was sich 2026 geändert hat"),
 ]
+
+# Zusätzliche Variation: Erzählperspektive (wird zufällig zum Stil kombiniert,
+# damit zwei Artikel zum selben Thema nie gleich klingen)
+PERSPECTIVES = [
+    ("direkt", "Sprich den Leser direkt mit 'du' an und gib ihm konkrete Handlungsanweisungen"),
+    ("erfahrung", "Schreibe aus der Ich-Perspektive, als hättest du es selbst ausprobiert (mit Beispielen aus dem Alltag)"),
+    ("neutral", "Schreibe sachlich-neutral wie ein unabhängiger Tester, ohne Ich-Form"),
+    ("story", "Eröffne mit einer kurzen Alltagsgeschichte/Beispielsituation, dann die Erklärung"),
+    ("fragen", "Stelle zu Beginn 2-3 Leitfragen, die der Artikel beantwortet"),
+]
+
+# Einzigartigkeits-Schutz: Wie viele übereinstimmende 7-Wort-Phrasen mit der
+# Pin-Beschreibung sind maximal erlaubt, bevor der Artikel als "zu ähnlich"
+# gilt und neu generiert wird.
+MAX_SIMILAR_PHRASES = 1
+PHRASE_LEN = 7
 
 SYSTEM_PROMPT = (
     "Du bist ein deutschsprachiger, seriöser Finanz- und Verbraucher-Ratgeber-Autor. "
@@ -159,7 +177,80 @@ def http_text(url, timeout=90):
         return resp.read().decode("utf-8")
 
 
-# ---------------------------------------------------------------- KI-Provider
+# ---------------------------------------------------------------- Pinterest-Inspiration
+
+
+def load_pinterest_plan():
+    """Lädt data/pinterest_plan.yaml (62 Pins als INSPIRATIONSQUELLE)."""
+    pins = []
+    if not os.path.exists(PINTEREST_PLAN):
+        return pins
+    current = None
+    with open(PINTEREST_PLAN, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith("- tag:"):
+                current = {"tag": line.split(":", 1)[1].strip()}
+                pins.append(current)
+            elif current and ":" in line:
+                key, val = line.split(":", 1)
+                current[key.strip()] = val.strip().strip("\"'")
+    return pins
+
+
+def find_pin_for_topic(topic_title, pins):
+    """Findet den thematisch passenden Pin (für Inspiration + Einzigartigkeits-Check)."""
+    def norm(s):
+        s = s.lower()
+        s = re.sub(r"[äàáâ]", "ae", s)
+        s = re.sub(r"[öòóô]", "oe", s)
+        s = re.sub(r"[üùúû]", "ue", s)
+        s = re.sub(r"ß", "ss", s)
+        return re.sub(r"[^a-z0-9]+", " ", s).strip()
+
+    t = norm(topic_title)
+    best, best_score = None, 0
+    for p in pins:
+        ref = norm((p.get("titel") or "") + " " + (p.get("pinwand") or ""))
+        # Überlappung der ersten Wörter
+        score = 0
+        t_tokens = t.split()
+        for i in range(min(len(t_tokens), 6)):
+            if i < len(ref.split()) and t_tokens[i] == ref.split()[i]:
+                score += 1
+        if score > best_score:
+            best, best_score = p, score
+    return best if best_score >= 2 else None
+
+
+def uniqueness_check(text, pin, max_similar=MAX_SIMILAR_PHRASES, n=PHRASE_LEN):
+    """Prüft, ob der generierte Text zu viele 7-Wort-Phrasen mit der Pin-Beschreibung
+    gemeinsam hat. Liefert (ok, anzahl_treffer, beispiele)."""
+    ref_text = " ".join(filter(None, [
+        pin.get("titel", ""), pin.get("beschreibung", ""), pin.get("keywords", "")
+    ])).lower()
+    if len(ref_text.split()) < n:
+        return True, 0, []
+
+    words = re.findall(r"\w+", text.lower())
+    if len(words) < n:
+        return True, 0, []
+
+    ref_words = re.findall(r"\w+", ref_text)
+    ref_grams = set()
+    for i in range(len(ref_words) - n + 1):
+        ref_grams.add(" ".join(ref_words[i:i + n]))
+
+    hits, examples = 0, []
+    for i in range(len(words) - n + 1):
+        gram = " ".join(words[i:i + n])
+        if gram in ref_grams:
+            hits += 1
+            if len(examples) < 3:
+                examples.append(gram)
+    return hits <= max_similar, hits, examples
+
+
 
 
 def call_groq(prompt):
@@ -255,29 +346,56 @@ PROVIDERS = [
 ]
 
 
-def generate_article_text(topic, angle):
-    """Baut den Prompt und ruft die KI auf. Liefert (rohtext, provider)."""
+def generate_article_text(topic, angle, perspective=None, pin=None):
+    """Baut den Prompt und ruft die KI auf. Liefert (rohtext, provider).
+
+    - angle:      Schreibstil (Ratgeber, Vergleich, FAQ …)
+    - perspective: Erzählperspektive (direkt, Erfahrung, neutral …)
+    - pin:        der zugehörige Pinterest-Pin – NUR als Inspiration,
+                  der Artikel muss eigenständig formuliert sein.
+    """
     if os.environ.get("DEMO_MODE") == "1":
         return demo_article(topic, angle), "Demo (ohne API-Key)"
 
     angle_name, angle_desc = angle
-    prompt = f"""Schreibe einen einzigartigen, hilfreichen deutschen Blog-Artikel zum Thema:
+    if perspective is None:
+        perspective = random.choice(PERSPECTIVES)
+    _, persp_desc = perspective
+
+    # Pin nur als Inspiration einbetten (Thema/Keywords), NIEMALS als Kopiervorlage
+    inspiration = ""
+    if pin:
+        inspiration = (
+            "INSPIRATION (nur zur Orientierung, NICHT übernehmen):\n"
+            f"- Ursprünglicher Pin-Titel: {pin.get('titel', '')}\n"
+            f"- Pinwand: {pin.get('pinwand', '')}\n"
+            f"- Stichwörter: {pin.get('keywords', '')}\n"
+            "WICHTIG: Der Pin-Text ist nur eine Anregung. Schreibe den Artikel "
+            "KOMPLETT NEU in deinen eigenen Worten. Übernimm KEINE Sätze, "
+            "KEINE Formulierungen und KEINE Satzstrukturen aus dem Pin. "
+            "Wähle eine eigene Überschrift und eine eigene Struktur.\n"
+        )
+
+    prompt = f"""Schreibe einen EINZIGARTIGEN, hilfreichen deutschen Blog-Artikel zum Thema:
 "{topic}"
 
+{inspiration}
 Stil des Artikels: {angle_desc}.
+Erzählperspektive: {persp_desc}.
 
 FORMAT – halte dich GENAU daran (wichtig für die Weiterverarbeitung):
-Zeile 1: TITLE: Ein prägnanter, klickstarker Titel (max. 60 Zeichen, darf NICHT mit dem Thema identisch sein, wähle einen frischen Blickwinkel)
+Zeile 1: TITLE: Ein prägnanter, klickstarker Titel (max. 60 Zeichen). Wähle einen FRISCHEN Blickwinkel – verwende NICHT den Pin-Titel und nicht wörtlich das Thema.
 Zeile 2: DESCRIPTION: Eine Meta-Beschreibung (max. 155 Zeichen, mit wichtigstem Keyword)
 Ab Zeile 3: Der Artikel in Markdown:
 - Keine Überschrift für den Titel am Anfang (Titel steht schon in Zeile 1)
-- Beginne mit einem einleitenden Absatz
-- 4 bis 6 Abschnitte mit H2-Überschriften (##)
+- Beginne mit einem einleitenden Absatz (erst bei der Perspektive "story"/"fragen" mit einer Geschichte/Frage)
+- 4 bis 6 Abschnitte mit H2-Überschriften (##) – strukturiere sie ANDERS als die Pin-Vorlage
 - Optional kurze Listen oder eine Tabelle
 - Am Ende ein FAQ-Bereich: "## Häufige Fragen" mit 3 Fragen als H3 und Antworten
 - 400 bis 700 Wörter insgesamt
 - KEINE Links einfügen, KEINE konkreten Preise oder Zahlen erfinden
 - Schreibe so, dass der Artikel echtes Wissen vermittelt und jemandem hilft
+- Originalität ist Pflicht: eigener Wortlaut, eigene Beispiele, eigene Abschnittsfolge
 """
     forced = os.environ.get("AI_PROVIDER")
     for name, fn in PROVIDERS:
@@ -321,12 +439,22 @@ def parse_article(raw, topic, angle_name):
 
 
 def write_draft(topic_entry, angle, provider, used_titles):
-    """Erzeugt eine Draft-Datei. Gibt True zurück, wenn etwas geschrieben wurde."""
+    """Erzeugt eine Draft-Datei. Gibt True zurück, wenn etwas geschrieben wurde.
+
+    Der Artikel wird gegen die passende Pin-Beschreibung geprüft
+    (Einzigartigkeits-Check). Ist er zu ähnlich, wird bis zu 2× mit
+    anderem Stil/Perspektive neu generiert.
+    """
     topic = topic_entry["title"]
     keywords = topic_entry["keywords"]
     affiliate_url = topic_entry.get("affiliate_url") or AFFILIATE_URL
+    pins = load_pinterest_plan()
+    pin = find_pin_for_topic(topic, pins)
     print(f"\n=== Thema: {topic} | Stil: {angle[0]} ===")
-    raw, provider_name = generate_article_text(topic, angle)
+    if pin:
+        print(f"    Inspiration: Pinterest-Pin (Tag {pin.get('tag')}) – wird nur als Grundlage genutzt")
+
+    raw, provider_name = generate_article_text(topic, angle, perspective=None, pin=pin)
     if not raw:
         has_key = bool(os.environ.get("GROQ_API_KEY") or os.environ.get("GEMINI_API_KEY"))
         if not has_key:
@@ -341,11 +469,32 @@ def write_draft(topic_entry, angle, provider, used_titles):
             print("  ✗ Provider haben geantwortet, aber mit Fehlern – Logs oben prüfen.")
         return False
 
-    title, desc, body = parse_article(raw, topic, angle[0])
-    if title.lower() in used_titles:
-        print(f"  ✗ Titel existiert bereits ({title[:50]}…) – Duplikat-Schutz.")
-        return False
+    # Einzigartigkeits-Check: zu ähnlich zum Pin? → neu generieren (max. 2 Versuche)
+    for attempt in range(1, 3):
+        title, desc, body = parse_article(raw, topic, angle[0])
+        if title.lower() in used_titles:
+            print(f"  ✗ Titel existiert bereits ({title[:50]}…) – Duplikat-Schutz.")
+            return False
+        if pin:
+            ok, hits, examples = uniqueness_check(body, pin)
+            if not ok:
+                print(f"  ⚠ Zu ähnlich zum Pinterest-Pin ({hits} gleiche Phrasen, Versuch {attempt})")
+                for ex in examples:
+                    print(f"    → „{ex}…“")
+                print(f"  ↻ Generiere mit anderem Stil neu …")
+                other_angles = [a for a in ANGLES if a[0] != angle[0]]
+                other_persp = [p for p in PERSPECTIVES if p[0] != (getattr(angle, 'persp', None) or '')]
+                new_angle = random.choice(other_angles)
+                raw, provider_name = generate_article_text(topic, new_angle,
+                                                           perspective=random.choice(PERSPECTIVES),
+                                                           pin=pin)
+                if not raw:
+                    return False
+                angle = new_angle
+                continue
+        break
 
+    title, desc, body = parse_article(raw, topic, angle[0])
     used_titles.add(title.lower())
     date = datetime.date.today().isoformat()
     slug = slugify(title)
@@ -357,6 +506,12 @@ def write_draft(topic_entry, angle, provider, used_titles):
         "*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link "
         "erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*\n"
     )
+    inspiration_line = ""
+    if pin:
+        inspiration_line = (
+            f"inspiration: Pin {pin.get('tag')} – „{pin.get('titel', '')}“ "
+            "(nur Themen-Grundlage, eigenständig formuliert)\n"
+        )
     frontmatter = (
         "---\n"
         f"title: {yaml_str(title)}\n"
@@ -369,6 +524,7 @@ def write_draft(topic_entry, angle, provider, used_titles):
         f"author: {yaml_str(AUTHOR)}\n"
         f"ai_generated: true\n"
         f"ai_provider: {yaml_str(provider_name)}\n"
+        f"{inspiration_line}"
         "---\n\n"
     )
     with open(filename, "w", encoding="utf-8") as f:

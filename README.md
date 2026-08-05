@@ -101,6 +101,15 @@ Oder manuell: Datei öffnen → `draft: true` → `draft: false` → pushen.
 
 **Themen erweitern:** `data/topics.yaml` öffnen, neue Zeilen ergänzen – fertig.
 
+**Einzigartigkeit statt 1:1-Kopien:** Die Pinterest-Pins (in `data/pinterest_plan.yaml`)
+dienen dem Bot NUR als Inspirationsquelle (Thema, Keywords, Pinwand). Der Prompt
+verpflichtet die KI zu eigenem Wortlaut, eigener Struktur und eigenem Titel.
+Zusätzlich prüft ein **Einzigartigkeits-Check** den fertigen Text gegen die
+Pin-Beschreibung (7-Wort-Phrasen): Ist der Artikel zu ähnlich, wird er mit
+anderem Stil und anderer Erzählperspektive automatisch neu generiert.
+Im Frontmatter jedes Bot-Artikels steht `inspiration:` als Nachweis, dass nur
+die Themen-Grundlage vom Pin stammt.
+
 **Lokal testen (ohne Key):**
 
 ```bash
