@@ -197,7 +197,3 @@ Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne des 
 ## 15. Aktualität und Änderung dieser Datenschutzerklärung
 
 Diese Datenschutzerklärung ist aktuell gültig (**Stand: August 2026**). Durch die Weiterentwicklung dieser Website oder aufgrund geänderter gesetzlicher bzw. behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern. Die jeweils aktuelle Fassung findest du jederzeit auf dieser Seite.
-
----
-
-{{< callout type="warning" text="Rechtlicher Hinweis: Diese Datenschutzerklärung wurde nach dem aktuellen Standard professioneller Affiliate-Blogs erstellt, ersetzt jedoch keine anwaltliche Beratung. Für maximale Rechtssicherheit empfiehlt sich ein anwaltlich geprüfter Generator (eRecht24 oder IT-Recht Kanzlei) – siehe CHECKLISTE-DATENSCHUTZ-GENERATOR.md." >}}
