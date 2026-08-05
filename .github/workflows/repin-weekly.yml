@@ -1,0 +1,61 @@
+# ============================================================
+#  WÖCHENTLICHES AUTOMATISCHES NACH-PINNEN (Pinterest API)
+#
+#  Läuft jeden Montag um 17:30 Uhr (DE, Sommerzeit = 15:30 UTC).
+#  Warum Montag 17:30?
+#    - Wochenend-Artikel (Sa/So, 4 Stück) sind fertig
+#    - 1-2 Stunden VOR dem abendlichen Pinterest-Peak (19-22 Uhr),
+#      damit die Pins Zeit haben, in die Verteilung zu gehen
+#    - Kein Konflikt mit den Pin-Zeiten 08:00 und 19:30
+#
+#  Was passiert:
+#    - Findet alle Artikel mit "pinned: false"
+#    - Erstellt für jeden einen Pin (Cover-Bild, Meta-Description,
+#      Artikel-URL, Hashtags)
+#    - Setzt "pinned: true" und committet
+#
+#  VORAUSSETZUNG (einmalig, ~10 Min., siehe ANLEITUNG-PINTEREST-API.md):
+#    - Pinterest-Developer-App + Access-Token
+#      → Secret: PINTEREST_ACCESS_TOKEN
+#    - Board-ID (mit --list-boards ermitteln)
+#      → Variable: PINTEREST_BOARD_ID
+#
+#  Manuell starten: GitHub → Actions → "Wöchentliches Nach-Pinnen"
+#  → "Run workflow".
+# ============================================================
+name: Wöchentliches Nach-Pinnen
+
+on:
+  schedule:
+    - cron: "30 15 * * 1"    # Montag 17:30 Uhr MESZ (15:30 UTC)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  nachpinnen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Artikel bei Pinterest nachpinnen
+        env:
+          PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+          PINTEREST_BOARD_ID: ${{ vars.PINTEREST_BOARD_ID }}
+          BLOG_BASE_URL: "https://frank-hartung.github.io/franksfinanzcheck-blog"
+        run: python3 scripts/generate_pins.py
+
+      - name: pinned-Flags committen & pushen
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen – nichts zu committen."
+          else
+            git commit -m "content: Artikel als gepinnt markiert (Pinterest)"
+            git push
+          fi
