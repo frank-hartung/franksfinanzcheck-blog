@@ -5,15 +5,33 @@ brauchst du einen Pinterest-API-Zugang. Das ist **kostenlos** – die Schritte s
 
 ---
 
-## Schritt 1: Developer-App erstellen (5 Minuten)
+## Schritt 1: Developer-App erstellen (10 Minuten)
 
-1. Gehe auf **https://developers.pinterest.com/** und melde dich mit deinem Pinterest-Konto an
-2. Klicke auf **„My apps"** (oben rechts) → **„Create app"**
-3. Fülle das Formular aus:
-   - **App name:** `FranksFinanzcheck Blog`
-   - **App description:** `Automatisches Nachpinnen der Blog-Artikel`
-   - **Website:** `https://frank-hartung.github.io/franksfinanzcheck-blog`
-4. **Bestätigen** → deine App ist erstellt (App-ID wird angezeigt)
+### 1a. Voraussetzungen (einmalig)
+- **Pinterest Business-Konto** (hast du bereits – für die Website-Verifizierung) ✅
+- **E-Mail-Adresse bestätigt** (in deinem Pinterest-Konto)
+- **Developer Terms akzeptieren:** Beim ersten Besuch von https://developers.pinterest.com/ wirst du aufgefordert, die Nutzungsbedingungen zu bestätigen
+
+### 1b. „Connect app"-Formular ausfüllen
+
+Gehe auf **https://developers.pinterest.com/** → **„My apps"** → **„Connect app"** (bzw. „Create app") und fülle DIESE Felder aus:
+
+| Feld | Was du einträgst |
+|---|---|
+| **App name** | `FranksFinanzcheck Blog` |
+| **Company name** | `FranksFinanzcheck` (oder dein Name `Frank Hartung` – als Privatperson beides ok) |
+| **Website** | `https://frank-hartung.github.io/franksfinanzcheck-blog` |
+| **App purpose** (Freitext) | `The purpose of this app is to allow us to add images and videos, called "pins", to Pinterest accounts, get data about connected accounts, and post analytics.` |
+| **Developer purpose** (Auswahl) | `I am developing an app for my organization/personal use` |
+| **Use cases** (Mehrfachauswahl) | ☑️ **Pin creation & scheduling** · ☑️ **Reporting** |
+| **Audience** (Mehrfachauswahl) | ☑️ **Pinners** · ☑️ **Creators** |
+
+Dann **„Submit"** klicken.
+
+### 1c. Wichtig: Freigabe abwarten! ⏳
+Pinterest prüft jede App **manuell** – die Freigabe („Trial access") kann **mehrere Tage dauern** [1](https://docs.mixpost.app/services/social/pinterest/). Du bekommst eine **E-Mail**, sobald deine App freigeschaltet ist. Erst danach kannst du den Token erzeugen (Schritt 2).
+
+> Tipp: Du kannst den GitHub-Teil (Push des Workflows) schon jetzt machen – nur das Pinnen startet, sobald die App freigegeben ist.
 
 ## Schritt 2: OAuth-Token erzeugen (3 Minuten)
 
