@@ -8,3 +8,4 @@
 *.log
 # CHECK24-Partner-ID (nicht committen)
 scripts/check24_id.txt
+scripts/__pycache__/
