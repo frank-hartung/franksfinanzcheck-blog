@@ -4,7 +4,7 @@
 #  (scripts/deploy_github.sh ersetzt sie durch die Live-URL).
 # ============================================================
 
-baseURL = "https://franksfinanzcheck.de/"   # Wunsch-Domain – wird beim Deploy ersetzt
+baseURL = "https://frank-hartung.github.io/franksfinanzcheck-blog/"
 title = "FranksFinanzcheck"
 theme = "PaperMod"
 locale = "de-DE"
