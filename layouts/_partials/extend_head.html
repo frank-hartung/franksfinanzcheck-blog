@@ -1,0 +1,15 @@
+{{- /* SEO-Erweiterungen (Site-Override von PaperMods extend_head) */ -}}
+{{- if and (eq .Kind "home") (site.Params.description) -}}
+<meta name="description" content="{{ site.Params.description }}">
+{{- end -}}
+{{- with site.Params.author -}}
+<meta name="author" content="{{ . }}">
+{{- end -}}
+<meta name="robots" content="index, follow">
+
+{{- /* Pinterest-Website-Verifikation (Meta-Tag-Methode)
+       Code in hugo.toml eintragen:  pinterestVerify = "DEIN-CODE"
+       oder direkt hier als content-Wert ersetzen. */ -}}
+{{- with site.Params.pinterestVerify -}}
+<meta name="p:domain_verify" content="{{ . }}">
+{{- end -}}
