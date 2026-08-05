@@ -1,0 +1,233 @@
+/* ============================================================
+   FranksFinanzcheck – Pinterest-Branding (Custom CSS)
+   Farbwelt aus dem Pinterest-Masterplan:
+   - Smaragdgrün (#0E5A43 / Akzent #1F6F5C)
+   - Anthrazit (#2E2E33)
+   - Signalgelb (#FFB300) für CTAs
+   - Montserrat Bold für Überschriften (wie Pin-Titel)
+   - Playfair Display (Serif) für Subline-Akzente (wie Pin-Untertitel)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+/* ---------- Grundfarben (Hell-Modus) ---------- */
+:root {
+    --ff-emerald: #0E5A43;
+    --ff-emerald-dark: #0A4634;
+    --ff-emerald-soft: #EAF4EF;
+    --ff-anthracite: #2E2E33;
+    --ff-yellow: #FFB300;
+    --ff-yellow-dark: #E6A100;
+    --ff-white: #FFFFFF;
+
+    /* PaperMod-Variablen überschreiben (Hell) */
+    --primary: rgb(46, 46, 51);
+    --theme: rgb(250, 252, 251);
+    --entry: rgb(255, 255, 255);
+    --link-color: var(--ff-emerald);
+    --link-hover: var(--ff-emerald-dark);
+    --link-underline: rgba(14, 90, 67, 0.3);
+    --selection: rgba(255, 179, 0, 0.35);
+    --border: rgb(220, 230, 225);
+}
+
+/* ---------- Typografie ---------- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+.post-title, .entry-title, .home-info h1,
+.logo a, .nav a, .archive .group-title {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+/* ---------- Header / Logo ---------- */
+.nav {
+    border-bottom: 3px solid var(--ff-emerald);
+    background: var(--ff-white);
+}
+
+.logo a {
+    font-weight: 800;
+    color: var(--ff-emerald);
+}
+
+.logo a:hover { color: var(--ff-emerald-dark); }
+
+.nav a:hover {
+    color: var(--ff-emerald);
+    border-bottom-color: var(--ff-yellow);
+}
+
+/* ---------- Startseite (Home Info) im Pin-Stil ---------- */
+.home-info {
+    background: linear-gradient(160deg, var(--ff-emerald) 0%, var(--ff-emerald-dark) 100%);
+    border-radius: 14px;
+    padding: 28px 26px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 18px rgba(14, 90, 67, 0.25);
+}
+
+.home-info h1 {
+    color: var(--ff-white);
+    font-weight: 800;
+    font-size: 1.9em;
+    margin-bottom: 10px;
+}
+
+.home-info .entry-content {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.98em;
+    line-height: 1.6;
+}
+
+.home-info .entry-content a {
+    color: var(--ff-yellow);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Subline-Akzent (Playfair) in der Home-Info */
+.home-info .entry-content em {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    color: var(--ff-yellow);
+}
+
+/* ---------- Artikel-Einträge (Blog-Übersicht) ---------- */
+.post-entry {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.post-entry:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(14, 90, 67, 0.14);
+    border-color: rgba(14, 90, 67, 0.35);
+}
+
+.post-entry .entry-header h2 {
+    color: var(--ff-emerald);
+    font-weight: 700;
+}
+
+.post-entry:hover .entry-header h2 {
+    color: var(--ff-emerald-dark);
+}
+
+.entry-cover img {
+    border-radius: 10px 10px 0 0;
+}
+
+/* ---------- Artikel-Inhalt ---------- */
+.post-title {
+    color: var(--ff-emerald);
+    font-weight: 800;
+}
+
+.post-content h2 {
+    color: var(--ff-emerald);
+    font-weight: 700;
+    border-bottom: 2px solid rgba(255, 179, 0, 0.5);
+    padding-bottom: 6px;
+}
+
+.post-content h3 {
+    color: var(--ff-anthracite);
+    font-weight: 700;
+}
+
+.post-content a {
+    color: var(--ff-emerald);
+    font-weight: 600;
+}
+
+.post-content a:hover {
+    color: var(--ff-emerald-dark);
+}
+
+.post-content blockquote {
+    border-left: 4px solid var(--ff-yellow);
+    background: var(--ff-emerald-soft);
+    border-radius: 0 8px 8px 0;
+}
+
+.post-content table th {
+    background: var(--ff-emerald);
+    color: var(--ff-white);
+}
+
+/* ---------- Affiliate-CTA im Artikel (gelber Pill-Button-Look) ---------- */
+.post-content hr + p:has(> strong > a),
+.post-content p:has(> a[href*="check24.net"]) {
+    /* CTA-Zeilen sanft hervorheben */
+    background: rgba(255, 179, 0, 0.10);
+    border: 1px dashed rgba(255, 179, 0, 0.6);
+    border-radius: 10px;
+    padding: 10px 14px;
+}
+
+.post-content a[href*="check24.net"] {
+    display: inline-block;
+    background: var(--ff-yellow);
+    color: var(--ff-anthracite);
+    padding: 4px 16px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+
+.post-content a[href*="check24.net"]:hover {
+    background: var(--ff-yellow-dark);
+    color: var(--ff-anthracite);
+}
+
+/* ---------- FAQ ---------- */
+.post-content details summary {
+    color: var(--ff-emerald);
+    font-weight: 700;
+}
+
+/* ---------- Pagination ---------- */
+.pagination a {
+    border: 2px solid var(--ff-emerald);
+    color: var(--ff-emerald);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 4px 16px;
+}
+
+.pagination a:hover {
+    background: var(--ff-emerald);
+    color: var(--ff-white);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+    border-top: 2px solid var(--ff-emerald);
+    margin-top: 30px;
+}
+
+/* ---------- Scroll-to-top ---------- */
+#top-link {
+    border: 2px solid var(--ff-emerald);
+    color: var(--ff-emerald);
+}
+
+#top-link:hover {
+    background: var(--ff-emerald);
+    color: var(--ff-white);
+}
+
+/* ---------- Rechtsseiten (Impressum/Datenschutz) ---------- */
+.single .post-content h1 {
+    color: var(--ff-emerald);
+    font-weight: 800;
+}
