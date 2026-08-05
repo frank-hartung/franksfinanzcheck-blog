@@ -128,6 +128,16 @@ Oder manuell: Datei öffnen → `draft: true` → `draft: false` → pushen.
 
 **Themen erweitern:** `data/topics.yaml` öffnen, neue Zeilen ergänzen – fertig.
 
+**Einzigartigkeits-Audit für bestehende Artikel:**
+```bash
+python3 scripts/check_uniqueness.py            # Standard-Check (7-Wort-Phrasen)
+python3 scripts/check_uniqueness.py --strict   # strengerer Check (5-Wort-Phrasen)
+```
+Prüft alle Artikel gegen die Pinterest-Pin-Texte UND untereinander (interne Duplikate).
+Template-Bausteine (Werbekennzeichnung, CTA, FAQ-Rahmen) werden automatisch
+herausgefiltert – nur der echte Fließtext zählt. Unter 5 übereinstimmenden
+7-Wort-Phrasen ist unkritisch (normale Standard-Formulierungen).
+
 **Einzigartigkeit statt 1:1-Kopien:** Die Pinterest-Pins (in `data/pinterest_plan.yaml`)
 dienen dem Bot NUR als Inspirationsquelle (Thema, Keywords, Pinwand). Der Prompt
 verpflichtet die KI zu eigenem Wortlaut, eigener Struktur und eigenem Titel.

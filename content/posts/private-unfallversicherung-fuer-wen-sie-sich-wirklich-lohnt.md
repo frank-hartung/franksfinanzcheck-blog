@@ -13,7 +13,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 ---
 
-Ein Unfall kann jeden treffen – im Straßenverkehr, beim Sport, in der Freizeit. Während die gesetzliche Unfallversicherung nur Arbeits- und Wegeunfälle abdeckt, greift die private Unfallversicherung rund um die Uhr und weltweit. Dieser Ratgeber zeigt, für wen sie sich wirklich lohnt, was sie leistet und worauf du beim Vergleich achten musst.
+Ein Unfall kann jeden treffen – im Straßenverkehr, beim Sport, in der Freizeit. Während die gesetzliche Unfallversicherung nur Arbeits- und Wegeunfälle abdeckt, greift die private Unfallversicherung rund um die Uhr und weltweit. Dieser Ratgeber klärt, für wen sich der Schutz rechnet, was die Police abdeckt und welche Kriterien beim Tarifvergleich entscheidend sind.
 
 ## Das Grundproblem: Die gesetzliche Unfallversicherung deckt nur wenig
 

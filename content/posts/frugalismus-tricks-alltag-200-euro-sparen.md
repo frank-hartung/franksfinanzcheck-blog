@@ -33,7 +33,7 @@ Strom, Gas, DSL, Handy, Kfz-Versicherung: Wer diese fünf Verträge einmal jähr
 
 ## Trick 5: Automatisch sparen – bevor du es merkst
 
-Richte einen Dauerauftrag ein, der am Monatsanfang automatisch 10 Prozent deines Gehalts auf ein separates Sparkonto (z. B. Tagesgeld) überweist. Was du nicht auf dem Girokonto siehst, gibst du nicht aus. Zusammen mit der 50-30-20-Regel entsteht so ein Sparen, das ganz ohne Willenskraft funktioniert.
+Richte einen Dauerauftrag ein, der am Monatsanfang automatisch 10 Prozent deines Gehalts auf ein separates Sparkonto (z. B. Tagesgeld) überweist. Geld, das nie auf dem Alltagskonto ankommt, wird auch nicht ausgegeben – so funktioniert das Sparen ganz ohne Willenskraft. Zusammen mit der 50-30-20-Regel entsteht so ein Sparen, das ganz ohne Willenskraft funktioniert.
 
 ## Das Spar-Potenzial auf einen Blick
 

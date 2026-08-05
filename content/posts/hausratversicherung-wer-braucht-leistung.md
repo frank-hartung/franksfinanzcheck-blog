@@ -13,7 +13,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 ---
 
-Ein Einbruch, ein Rohrbruch oder ein Zimmerbrand – solche Ereignisse treffen immer andere. Bis sie dich treffen. Dann zeigt sich, ob du richtig versichert bist: Die Hausratversicherung ersetzt den gesamten Hausrat (Möbel, Elektronik, Kleidung, Küche) bei Schäden durch Feuer, Wasser, Einbruchdiebstahl, Sturm und Hagel. Dieser Ratgeber zeigt, wer sie braucht, was sie leistet und worauf du beim Vergleich achten musst.
+Ein Einbruch, ein Rohrbruch oder ein Zimmerbrand – solche Ereignisse treffen immer andere. Bis sie dich treffen. Dann zeigt sich, ob du richtig versichert bist: Die Hausratversicherung ersetzt den gesamten Hausrat (Möbel, Elektronik, Kleidung, Küche) bei Schäden durch Feuer, Wasser, Einbruchdiebstahl, Sturm und Hagel. Dieser Ratgeber beantwortet, für wen sich der Schutz lohnt, welche Leistungen enthalten sind und welche Punkte beim Tarifvergleich zählen.
 
 ## Wer braucht eine Hausratversicherung?
 

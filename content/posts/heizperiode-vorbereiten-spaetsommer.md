@@ -17,14 +17,14 @@ Der August ist der ruhigste Monat des Jahres – zumindest bei den Heizkosten. G
 
 ## 1. Gasvertrag prüfen und wechseln
 
-Der Spätsommer ist die klassische Wechselsaison für Gastarife: Viele Anbieter passen ihre Preise zum Herbst an, und wer noch im teuren Grundtarif oder in einem ausgelaufenen Vertrag steckt, zahlt im Winter besonders drauf. Die gute Nachricht: Ein Gaswechsel dauert nur wenige Minuten und ist komplett online machbar – inklusive kostenloser Kündigung durch den neuen Anbieter.
+Der Spätsommer ist die klassische Wechselsaison für Gastarife: Viele Versorger stellen ihre Konditionen zum Herbst um, und wer in der Grundversorgung oder einem ausgelaufenen Vertrag steckt, zahlt im Winter besonders drauf. Die gute Nachricht: Ein Gaswechsel geht komplett online in wenigen Minuten – die Kündigung beim alten Anbieter übernimmt der neue Versorger kostenlos.
 
 Worauf du beim Vergleich achten solltest:
 
 - **Arbeitspreis pro kWh** und Grundpreis im Blick behalten
 - **Preisgarantie:** Mindestens 12 Monate sollten es sein
 - **Boni:** Neukunden- und Sofortboni einrechnen – aber prüfen, wann sie ausgezahlt werden
-- **Vertragslaufzeit:** 12 Monate sind Standard, kürzer ist besser
+- **Vertragslaufzeit:** Die übliche Bindung beträgt 12 Monate – wer flexibler bleiben will, sollte nach kürzeren Laufzeiten suchen
 
 ## 2. Heizung warten und entlüften
 
@@ -38,7 +38,7 @@ Eine schlecht eingestellte Heizung verbraucht bis zu 15 Prozent mehr Energie. Vo
 
 Kleinvieh macht auch Mist – und bei Heizkosten ist es gar nicht so klein:
 
-- **1 Grad weniger spart etwa 6 Prozent Energie.** Wer von 22 auf 20 Grad geht, spart rund 12 Prozent.
+- **Jedes Grad weniger senkt den Verbrauch spürbar** – wer die Raumtemperatur von 22 auf 20 Grad reduziert, kann rund 12 Prozent Heizenergie einsparen.
 - **Nachts und bei Abwesenheit** die Temperatur auf 16–18 Grad absenken statt komplett abstellen (Auskühlung kostet mehr).
 - **Richtiges Lüften:** 3-mal täglich 5 Minuten Stoßlüften statt Dauerkipp – das hält die Wärme in den Wänden.
 - **Türen zwischen beheizten und unbeheizten Räumen schließen.**
@@ -58,7 +58,7 @@ Kleinvieh macht auch Mist – und bei Heizkosten ist es gar nicht so klein:
 Der Spätsommer (August/September), denn dann legen viele Anbieter ihre Herbstpreise fest. Ein Wechsel dauert meist 2 bis 4 Wochen – also genau richtig für den Winterbeginn.
 
 ### Wie viel kann ich beim Gas sparen?
-Je nach Ausgangslage 10 bis 25 Prozent der Jahresrechnung – bei 1.200 Euro Jahreskosten sind das 120 bis 300 Euro. Dazu kommt das Einsparpotenzial durch Heizverhalten und Entlüften.
+Das hängt stark von deinem bisherigen Tarif ab. Wer aus der teuren Grundversorgung kommt, spart oft ein Viertel oder mehr der Jahreskosten; wer schon einen günstigen Tarif hat, immer noch etwa ein Zehntel. Bei 1.200 Euro Jahreskosten sind das schnell 120 bis 300 Euro – zusätzlich zum Einsparpotenzial durch Heizverhalten und Entlüften.
 
 ### Ist Heizen mit Strom oder Gas günstiger?
 Pauschal lässt sich das nicht sagen – es hängt von Tarif, Gebäude und Technik ab. Wer elektrisch heizt (z. B. Wärmepumpe), sollte den Stromtarif im Blick behalten; wer mit Gas heizt, den Gastarif.
