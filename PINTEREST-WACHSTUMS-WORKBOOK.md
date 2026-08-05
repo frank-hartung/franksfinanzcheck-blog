@@ -107,7 +107,7 @@ dir Wechselprämien"}
 
 - [ ] **Pinterest-Trends** checken: trends.pinterest.com → 3 Suchbegriffe für die Woche notieren
 - [ ] **3–5 neue Pin-Grafiken** erstellen (Canva-Vorlage) aus den besten Blog-Artikeln
-- [ ] **Neue Blog-Artikel der Woche** (14 Stück vom Bot) als Pins nachpinnen
+- [x] **Neue Blog-Artikel nachpinnen** – läuft automatisch montags um 17:30 Uhr (Workflow 'Wöchentliches Nach-Pinnen', sobald Pinterest-API eingerichtet ist). Nur bei Fehlern manuell prüfen: GitHub → Actions → Workflow-Log
 - [ ] **Analytics auswerten:** Business-Hub → Analytics → „Outbound-Clicks": Welche Pins bringen Besucher auf den Blog?
 - [ ] **Verlinkungsplan prüfen:** Sind alle Pins auf Artikel verlinkt? (Excel abgleichen)
 - [ ] 1 **Idea Pin** erstellen (Reichweite): z. B. „3 Stromspar-Tipps in 30 Sekunden" (5 Slides)

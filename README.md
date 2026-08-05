@@ -52,6 +52,17 @@ Alle Affiliate-Links liegen zentral in **`scripts/check24_links.yaml`**. Ändern
 2. **Bestehende Artikel:** `python3 scripts/set_check24_links.py --topics` ausführen – ersetzt alle alten Links in allen Artikeln + Themenpool durch die neuen aus der YAML (sicherer Wortgrenzen-Check inklusive).
 3. **Generischer Link (GitHub-Variable):** Falls nötig, in GitHub unter Settings → Secrets and variables → Actions die Variable `AFFILIATE_URL` aktualisieren.
 
+**📌 Automatisches Nach-Pinnen bei Pinterest (montags 17:30 Uhr):**
+
+Der Workflow **„Wöchentliches Nach-Pinnen"** erstellt jeden Montag um 17:30 Uhr (DE)
+automatisch Pins für alle neuen Blog-Artikel (Cover-Bild, Beschreibung, Artikel-URL,
+Hashtags) über die Pinterest API v5. Jeder Artikel wird nur einmal gepinnt
+(`pinned: true`-Flag im Frontmatter).
+
+**Einmalige Einrichtung (~10 Min.):** Siehe `ANLEITUNG-PINTEREST-API.md`
+- Pinterest-Developer-App + Access-Token → Secret `PINTEREST_ACCESS_TOKEN`
+- Board-ID (`python3 scripts/generate_pins.py --list-boards`) → Variable `PINTEREST_BOARD_ID`
+
 **Automatisches Einzigartigkeits-Audit (Qualitäts-Gate):**
 - **Nach jeder Bot-Veröffentlichung** läuft `scripts/check_uniqueness.py` automatisch mit:
   - Findet der Check kritische Duplikate (≥5 gleiche 7-Wort-Phrasen oder Pin-Konflikt),
