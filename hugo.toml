@@ -1,15 +1,9 @@
-# ============================================================
-#  Hugo-Konfiguration – FranksFinanzcheck (CHECK24 Affiliate-Blog)
-#  Hinweis: Die baseURL wird beim Deployment automatisch angepasst
-#  (scripts/deploy_github.sh ersetzt sie durch die Live-URL).
-# ============================================================
-
 baseURL = "https://frank-hartung.github.io/franksfinanzcheck-blog/"
 title = "FranksFinanzcheck"
 theme = "PaperMod"
 locale = "de-DE"
 defaultContentLanguage = "de"
-enableRobotsTXT = true                         # erzeugt robots.txt automatisch
+enableRobotsTXT = true
 enableEmoji = true
 paginate = 10
 copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
@@ -21,10 +15,10 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
 
 [params]
   env = "production"
-  title = "FranksFinanzcheck"                      # <-- Blog-Name (erscheint im Browser-Tab)
+  title = "FranksFinanzcheck"
   description = "Geld sparen & Frugalismus: Praxistipps zu Budgetplanung, Strom- & Gastarifen, DSL, Versicherungen und Reisen – so sparst du monatlich bares Geld."
   keywords = ["Geld sparen", "Frugalismus", "Budgetplanung", "Stromvergleich", "Gasvergleich", "DSL vergleichen", "Kfz-Versicherung", "Sparen"]
-  author = "Frank Hartung"                          # <-- Name des Autors/Betreibers
+  author = "Frank Hartung"
   DateFormat = "2. January 2006"
   defaultTheme = "auto"
   disableThemeToggle = true
@@ -37,7 +31,6 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   ShowToc = true
   comments = false
   mainSections = ["posts"]
-  # Pflicht-Hinweis für Affiliate-Links (erscheint unter jedem Artikel)
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
   [params.homeInfoParams]
