@@ -52,6 +52,12 @@ jobs:
           AUTO_PUBLISH: "1"        # Veröffentlichung ohne manuellen Schritt
         run: python3 scripts/generate_drafts.py
 
+      - name: Einzigartigkeits-Audit (Qualitäts-Gate)
+        # Prüft ALLE Artikel gegen die Pin-Texte + untereinander.
+        # Bei kritischen Duplikaten bricht der Workflow ab (Exit 1) →
+        # nichts wird committet/veröffentlicht. Im Log siehst du, was zu tun ist.
+        run: python3 scripts/check_uniqueness.py
+
       - name: Änderungen committen & pushen
         run: |
           git config user.name "Content-Bot"

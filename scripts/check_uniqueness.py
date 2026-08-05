@@ -146,7 +146,17 @@ def main():
     else:
         print(f"  (davon kritisch: {critical} – unter 5 Phrasen ist normal und kein Duplicate Content)")
 
-    print(f"\nErgebnis: Pin-Konflikte: {pin_problems} | Interne Überlappungen: {internal}")
+    print(f"\nErgebnis: Pin-Konflikte: {pin_problems} | Interne Überlappungen: {internal} | Kritisch: {critical}")
+
+    # Exit-Code für CI/Automatisierung:
+    #   0 = alles ok (keine kritischen Probleme)
+    #   1 = kritische Duplikate gefunden → Workflow bricht ab, nichts wird veröffentlicht
+    if pin_problems > 0 or critical > 0:
+        print("\n⚠️ KRITISCHE DUPLIKATE GEFUNDEN – Bitte Artikel überarbeiten, bevor veröffentlicht wird.")
+        print("  Tipp: Betroffene Passagen umformulieren und Audit erneut ausführen.")
+        sys.exit(1)
+    else:
+        print("\n✅ Audit bestanden – alle Artikel sind einzigartig.")
 
 
 if __name__ == "__main__":
