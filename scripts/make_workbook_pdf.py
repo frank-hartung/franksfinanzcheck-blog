@@ -222,7 +222,8 @@ def build_pdf(md_path, out_path):
     story.append(Spacer(1, 20))
     story.append(Paragraph("Kostenlose Maßnahmen, um deinen Blog über Pinterest bekannter zu machen",
                            S["intro"]))
-    story.append(Paragraph("basierend auf deinem Pinterest-Masterplan (August 2026)", S["intro"]))
+    story.append(Paragraph("basierend auf deinem Pinterest-Masterplan", S["intro"]))
+    story.append(Paragraph("(August 2026)", S["intro"]))
     story.append(PageBreak())
 
     # Restlichen Markdown-Inhalt (ohne die erste Titelzeile)
