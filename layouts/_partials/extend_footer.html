@@ -1,6 +1,8 @@
 {{- /* ============================================================
     CONSENT-BANNER + Pinterest-Footer (Site-Override von extend_footer)
     - Erscheint auf ALLEN Seiten (Footer wird überall gerendert)
+    - Pinterest-Link NUR auf Inhaltsseiten, NICHT auf Rechtsseiten
+      (impressum, datenschutz)
     - Funktioniert ohne externe Dienste (offline-fähig)
     - Speichert die Einwilligung im Cookie "ff_cookie_consent"
       (technisch notwendig, § 25 Abs. 2 TDDDG – kein Consent nötig)
@@ -8,7 +10,9 @@
     - Upgrade auf Cookiebot/Klaro jederzeit möglich (siehe README)
 ============================================================ -}}
 
-{{- /* ---------- Pinterest-Footer ---------- */ -}}
+{{- /* ---------- Pinterest-Footer (nur auf Inhaltsseiten) ---------- */ -}}
+{{- $isLegal := or (strings.HasPrefix .RelPermalink "/impressum/") (strings.HasPrefix .RelPermalink "/datenschutz/") -}}
+{{- if not $isLegal -}}
 <div class="pinterest-footer" style="text-align:center; margin: 12px 0;">
   <a href="https://www.pinterest.de/franksfinanzcheck/"
      target="_blank"
@@ -20,7 +24,10 @@
     </svg>
     <span>Folge mir auf Pinterest 📌</span>
   </a>
-  <span style="margin:0 10px; color:var(--secondary);">·</span>
+</div>
+{{- end -}}
+
+<div style="text-align:center; margin: 8px 0;">
   <a href="#" onclick="ffConsentShow();return false;" title="Cookie-Einstellungen öffnen"
      style="color:var(--secondary); text-decoration:underline; font-size:.9em;">Cookie-Einstellungen</a>
 </div>

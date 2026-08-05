@@ -1,4 +1,7 @@
-{{- /* Pinterest-Pin-Button am Ende jedes Artikels (Site-Override von PaperMods extend_post_content) */ -}}
+{{- /* Pinterest-Pin-Button am Ende jedes ARTIKELS.
+     Nur in der posts-Sektion rendern – NICHT auf Rechtsseiten
+     (Impressum, Datenschutz) oder anderen Einzelseiten. */ -}}
+{{- if eq .Section "posts" -}}
 {{- $pin_url := .Permalink -}}
 {{- $pin_media := "" -}}
 {{- if .Params.cover.image -}}
@@ -22,3 +25,4 @@
   <p style="font-size:.82em; color:var(--secondary); margin:8px 0 0;">Du findest diesen Beitrag auch als Infografik auf
     <a href="https://www.pinterest.de/franksfinanzcheck/" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600;">meinem Pinterest-Profil</a>.</p>
 </div>
+{{- end -}}
