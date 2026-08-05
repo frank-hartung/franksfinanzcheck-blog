@@ -279,7 +279,7 @@ def call_gemini(prompt):
     key = os.environ.get("GEMINI_API_KEY")
     if not key:
         return None
-    model = os.environ.get("GEMINI_MODEL", "gemini-2.0-flash")
+    model = os.environ.get("GEMINI_MODEL", "gemini-3-flash-preview")
     body = {"contents": [{"parts": [{"text": prompt}]}]}
     data = json.dumps(body).encode("utf-8")
     resp = http_json(
