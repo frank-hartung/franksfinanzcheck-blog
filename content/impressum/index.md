@@ -9,23 +9,18 @@ showToc: false
 
 **Betreiber dieser Website:**
 
-{{< placeholder "Vor- und Nachname" >}}
-{{< placeholder "Straße und Hausnummer" >}}
-{{< placeholder "PLZ und Ort" >}}
-{{< placeholder "Deutschland" >}}
+**Frank Hartung**
+Karl-Marx-Str. 13
+19376 Ruhner Berge OT Marnitz
+Deutschland
 
 **Kontakt:**
-- E-Mail: {{< placeholder "deine@email.de" >}}
-- Telefon: {{< placeholder "optional" >}}
+- E-Mail: frankhartung@web.de
 
 **Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:**
-{{< placeholder "Vor- und Nachname, Anschrift wie oben" >}}
+Frank Hartung, Karl-Marx-Str. 13, 19376 Ruhner Berge OT Marnitz
 
 ---
-
-## Wichtiger Hinweis
-
-{{< callout type="warning" text="Bitte ersetze alle Platzhalter durch deine echten Daten, bevor die Seite online geht. Ohne vollständiges Impressum drohen bei Affiliate-Seiten Abmahnungen. Hinweis: Diese Vorlage ersetzt keine anwaltliche Beratung." >}}
 
 ---
 
