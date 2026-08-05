@@ -44,6 +44,15 @@ Der Workflow **„Automatische Content-Generierung"** läuft abgestimmt auf dein
 - **Manuell starten:** GitHub → Actions → „Run workflow"
 - **Wieder auf Entwurfs-Modus:** Im Workflow `AUTO_PUBLISH: "0"` setzen (dann musst du wieder freigeben)
 
+**Automatisches Einzigartigkeits-Audit (Qualitäts-Gate):**
+- **Nach jeder Bot-Veröffentlichung** läuft `scripts/check_uniqueness.py` automatisch mit:
+  - Findet der Check kritische Duplikate (≥5 gleiche 7-Wort-Phrasen oder Pin-Konflikt),
+    bricht der Workflow AB → der Artikel wird NICHT veröffentlicht. Das Log zeigt, was zu tun ist.
+- **Wöchentlich (montags 07:00 Uhr):** Der Workflow „Wöchentliches Einzigartigkeits-Audit"
+  prüft alle Artikel und erstellt bei Problemen automatisch ein **GitHub-Issue** –
+  du siehst es auf einen Blick im Repo (Tab „Issues").
+- **Manuell:** `python3 scripts/check_uniqueness.py` (oder `--strict`)
+
 > Hinweis: Im Winter (MEZ) verschiebt sich die UTC-Zeit automatisch – deutsche Uhrzeit (08:10/19:40) bleibt gleich.
 
 ---
