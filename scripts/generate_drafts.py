@@ -537,21 +537,85 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
 # ---------------------------------------------------------------- Hauptprogramm
 
 
+def load_affiliate_links():
+    """Lädt die zentralen Affiliate-Links aus scripts/check24_links.yaml.
+    Wenn sich die Links ändern, genügt es, DIESE Datei zu aktualisieren –
+    der Bot verwendet automatisch die neuen Links für alle neuen Artikel."""
+    links = {}
+    path = os.path.join(BLOG_DIR, "scripts", "check24_links.yaml")
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                m = re.match(r"^\s*([a-z-]+):\s*[\"'](.+?)[\"']\s*(?:#.*)?$", line)
+                if m:
+                    cat, url = m.group(1), m.group(2)
+                    if url and not url.startswith("DEIN-LINK"):
+                        links[cat] = url
+    return links
+
+
+def category_from_pin(pin):
+    """Leitet die Affiliate-Kategorie aus der Pin-Ziel-URL bzw. Pinwand ab.
+    Liefert den Kategorie-Schlüssel (z. B. 'strom') oder None."""
+    url = (pin.get("url") or "").lower()
+    pinwand = (pin.get("pinwand") or "").lower()
+
+    # 1) Direkt aus der Ziel-URL (check24.de/<kategorie>/)
+    m = re.search(r"check24\.de/([a-z0-9-]+)", url)
+    if m:
+        path = m.group(1)
+        mapping = {
+            "strom": "strom", "stromanbieter-wechseln": "strom",
+            "gas": "gas", "gasanbieter-wechseln": "gas",
+            "dsl": "dsl", "dsl-anbieterwechsel": "dsl",
+            "mietwagen": "mietwagen", "mietwagen-preisvergleich": "mietwagen",
+            "reisen": "reisen", "pauschalreisen-vergleich": "reisen",
+            "fluege": "fluege", "flugvergleich": "fluege",
+            "girokonto": "girokonto", "c24bank": "girokonto",
+            "kredit": "kredit", "kreditvergleich": "kredit",
+            "kfz-versicherung": "kfz-versicherung",
+            "handytarife": "handytarife",
+            "kreditkarte": "kreditkarte",
+            "tagesgeld": "tagesgeld", "tagesgeldvergleich": "tagesgeld",
+        }
+        if path in mapping:
+            return mapping[path]
+
+    # 2) Fallback über die Pinwand (bei Educational-Pins ohne Ziel-URL)
+    if "strom" in pinwand or "gas" in pinwand:
+        return "strom"
+    if "internet" in pinwand or "dsl" in pinwand:
+        return "dsl"
+    if "reisebudget" in pinwand or "mietwagen" in pinwand:
+        return "mietwagen"
+    # Geld sparen / Haushaltskasse / Budgetplanung → generischer Link (None)
+    return None
+
+
 def load_pin_topics():
     """Lädt Themen direkt aus dem Pinterest-Plan (data/pinterest_plan.yaml).
     Jeder Pin wird zu einem Themen-Eintrag – die Pins sind damit die
-    Grundlage für die Artikel (nur als Inspiration, nie 1:1 kopiert)."""
+    Grundlage für die Artikel (nur als Inspiration, nie 1:1 kopiert).
+
+    WICHTIG: Jeder Pin bekommt den PASSENDEN Affiliate-Link aus
+    scripts/check24_links.yaml zugewiesen (basierend auf Ziel-URL/Pinwand).
+    Ändern sich die Links, genügt ein Update der check24_links.yaml –
+    neue Artikel nutzen dann automatisch die neuen Links."""
     pins = load_pinterest_plan()
+    aff_links = load_affiliate_links()
     topics = []
     for p in pins:
         titel = (p.get("titel") or "").strip()
         if not titel:
             continue
         kws = [k.strip() for k in (p.get("keywords") or "").split(",") if k.strip()]
+        cat = category_from_pin(p)
+        affiliate = aff_links.get(cat) or aff_links.get("allgemein")
         topics.append({
             "title": titel,
             "keywords": kws[:5] or ["Geld sparen", "Ratgeber"],
-            "affiliate_url": None,
+            "affiliate_url": affiliate,
+            "pin_category": cat,
         })
     return topics
 

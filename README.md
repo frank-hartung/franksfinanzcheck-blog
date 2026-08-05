@@ -44,6 +44,14 @@ Der Workflow **„Automatische Content-Generierung"** läuft abgestimmt auf dein
 - **Manuell starten:** GitHub → Actions → „Run workflow"
 - **Wieder auf Entwurfs-Modus:** Im Workflow `AUTO_PUBLISH: "0"` setzen (dann musst du wieder freigeben)
 
+**🔗 Affiliate-Links ändern – so geht's (wichtig!):**
+
+Alle Affiliate-Links liegen zentral in **`scripts/check24_links.yaml`**. Ändern sich deine Links (z. B. neue PID, neues Link-Format, neue Partnerprogramme):
+
+1. **Neue Artikel (Bot):** Einfach die Links in `scripts/check24_links.yaml` aktualisieren – der Bot weist neuen Artikeln automatisch die passenden Links zu (Pin → Kategorie → Link). Die Zuordnung erfolgt über die Ziel-URL des Pins (z. B. `check24.de/strom/` → Strom-Link) bzw. die Pinwand.
+2. **Bestehende Artikel:** `python3 scripts/set_check24_links.py --topics` ausführen – ersetzt alle alten Links in allen Artikeln + Themenpool durch die neuen aus der YAML (sicherer Wortgrenzen-Check inklusive).
+3. **Generischer Link (GitHub-Variable):** Falls nötig, in GitHub unter Settings → Secrets and variables → Actions die Variable `AFFILIATE_URL` aktualisieren.
+
 **Automatisches Einzigartigkeits-Audit (Qualitäts-Gate):**
 - **Nach jeder Bot-Veröffentlichung** läuft `scripts/check_uniqueness.py` automatisch mit:
   - Findet der Check kritische Duplikate (≥5 gleiche 7-Wort-Phrasen oder Pin-Konflikt),
