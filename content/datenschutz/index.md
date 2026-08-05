@@ -64,11 +64,19 @@ Sofern der Kooperationspartner Tracking-Cookies oder vergleichbare Technologien 
 - Klicke Affiliate-Links nicht an, wenn du kein Tracking wünschst
 - Du kannst gesetzte Cookies jederzeit in deinen Browsereinstellungen löschen
 
-## 5. Cookies
+## 5. Cookies und Consent-Banner
 
-Diese Website selbst verwendet derzeit keine eigenen Tracking-Cookies. Beim Klick auf Affiliate-Links können jedoch, wie unter Punkt 4 beschrieben, Cookies durch Drittanbieter (CHECK24/Awin) gesetzt werden.
+**Diese Website setzt einen Consent-Banner (Cookie-Einwilligungsverwaltung) ein.** Beim ersten Besuch erscheint ein Hinweis, in dem du zwischen „Alle akzeptieren" und „Nur notwendige" wählen kannst.
 
-Sollten in Zukunft eigene Analyse-, Werbe- oder Cookie-Tools eingebunden werden, wird diese Datenschutzerklärung entsprechend ergänzt. Insbesondere wird dann ein **Consent-Management-Banner** eingesetzt, mit dem du vor dem Setzen von Cookies deine Einwilligung erteilen oder verweigern kannst (§ 25 TDDDG, Art. 6 Abs. 1 lit. a DSGVO).
+**Technisch notwendige Cookies:** Diese Website verwendet selbst keine Tracking-Cookies. Beim Klick auf Affiliate-Links können jedoch, wie unter Punkt 4 beschrieben, Cookies durch Drittanbieter (CHECK24/Awin) gesetzt werden.
+
+**Speicherung deiner Einwilligung:** Deine getroffene Wahl („Alle akzeptieren" oder „Nur notwendige") wird in einem Cookie namens `ff_cookie_consent` auf deinem Gerät gespeichert (Gültigkeit: 12 Monate). Dieses Cookie ist **technisch erforderlich**, um deine Einwilligung zu dokumentieren – es wird daher ohne gesonderte Einwilligung gesetzt (§ 25 Abs. 2 TDDDG, Art. 6 Abs. 1 lit. c und f DSGVO).
+
+**Jederzeit änderbar:** Du kannst deine Einwilligung jederzeit über den Link „Cookie-Einstellungen" im Footer der Website ändern oder widerrufen (Art. 7 Abs. 3 DSGVO). Der Widerruf wirkt für die Zukunft; die Rechtmäßigkeit der bisherigen Verarbeitung bleibt unberührt.
+
+**Keine Cookie-Wall:** Die Nutzung der Website ist auch ohne Einwilligung möglich – du kannst „Nur notwendige" wählen, ohne Nachteile zu haben.
+
+Sollten in Zukunft eigene Analyse- oder Werbe-Tools eingebunden werden, werden diese nur nach deiner Einwilligung aktiviert (siehe hierzu die Hinweise unter Punkt 4 und § 25 TDDDG, Art. 6 Abs. 1 lit. a DSGVO) und diese Datenschutzerklärung entsprechend ergänzt.
 
 ## 6. Deine Rechte als betroffene Person
 

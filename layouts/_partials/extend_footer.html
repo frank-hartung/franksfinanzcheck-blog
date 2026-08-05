@@ -1,4 +1,14 @@
-{{- /* Pinterest-Verknüpfung im Footer (Site-Override von PaperMods extend_footer) */ -}}
+{{- /* ============================================================
+    CONSENT-BANNER + Pinterest-Footer (Site-Override von extend_footer)
+    - Erscheint auf ALLEN Seiten (Footer wird überall gerendert)
+    - Funktioniert ohne externe Dienste (offline-fähig)
+    - Speichert die Einwilligung im Cookie "ff_cookie_consent"
+      (technisch notwendig, § 25 Abs. 2 TDDDG – kein Consent nötig)
+    - Bietet API für künftige Tracking-Skripte: window.ffConsentChoice
+    - Upgrade auf Cookiebot/Klaro jederzeit möglich (siehe README)
+============================================================ -}}
+
+{{- /* ---------- Pinterest-Footer ---------- */ -}}
 <div class="pinterest-footer" style="text-align:center; margin: 12px 0;">
   <a href="https://www.pinterest.de/franksfinanzcheck/"
      target="_blank"
@@ -10,4 +20,57 @@
     </svg>
     <span>Folge mir auf Pinterest 📌</span>
   </a>
+  <span style="margin:0 10px; color:var(--secondary);">·</span>
+  <a href="#" onclick="ffConsentShow();return false;" title="Cookie-Einstellungen öffnen"
+     style="color:var(--secondary); text-decoration:underline; font-size:.9em;">Cookie-Einstellungen</a>
 </div>
+
+{{- /* ---------- Consent-Banner (Markup) ---------- */ -}}
+<div id="ff-consent-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:999999;
+     background:#ffffff; border-top:3px solid #1F6F5C; box-shadow:0 -4px 20px rgba(0,0,0,.25); padding:14px 20px;">
+  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
+    <div style="flex:1 1 55%; font-size:.93em; line-height:1.45; color:#222;">
+      <strong style="color:#1F6F5C;">🍪 Cookie-Einstellungen</strong><br>
+      Diese Website verwendet nur technisch notwendige Cookies. Beim Klick auf Affiliate-Links
+      (z.&nbsp;B. zu CHECK24) können Anbieter eigene Tracking-Cookies setzen. Du kannst deine
+      Einwilligung hier verwalten. Details in der
+      <a href="/datenschutz/" style="color:#1F6F5C; font-weight:600;">Datenschutzerklärung</a>.
+    </div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-left:auto;">
+      <button onclick="ffConsent('all')"
+        style="background:#FFB300; color:#111; border:none; border-radius:999px; padding:10px 20px;
+               font-weight:700; font-size:.95em; cursor:pointer;">Alle akzeptieren</button>
+      <button onclick="ffConsent('necessary')"
+        style="background:#1F6F5C; color:#fff; border:none; border-radius:999px; padding:10px 20px;
+               font-weight:700; font-size:.95em; cursor:pointer;">Nur notwendige</button>
+    </div>
+  </div>
+</div>
+
+{{- /* ---------- Consent-Banner (Logik) ---------- */ -}}
+<script>
+(function () {
+  var KEY = 'ff_cookie_consent';
+  function getCookie(name) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+  function setCookie(name, value) {
+    document.cookie = name + '=' + encodeURIComponent(value) + ';max-age=31536000;path=/;SameSite=Lax';
+  }
+  var banner = document.getElementById('ff-consent-banner');
+  function hide() { if (banner) banner.style.display = 'none'; }
+  // Öffentliche API: Einwilligung setzen / Banner erneut öffnen / Status abfragen
+  window.ffConsent = function (choice) {
+    setCookie(KEY, choice);
+    window.ffConsentChoice = choice;
+    hide();
+  };
+  window.ffConsentShow = function () { if (banner) banner.style.display = 'block'; };
+  window.ffConsentStatus = function () { return getCookie(KEY); };
+  // Beim ersten Besuch anzeigen (kein Consent-Cookie vorhanden)
+  if (!getCookie(KEY)) {
+    window.ffConsentShow();
+  }
+})();
+</script>
