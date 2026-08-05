@@ -11,19 +11,16 @@
 #  und VERÖFFENTLICHT sie automatisch (draft: false) –
 #  kein manuelles Pushen nötig.
 #
+#  WICHTIG (Workflow-Kette): Nach dem Commit wird der Deploy-Workflow
+#  per workflow_dispatch explizit angestoßen – ein normaler Push mit
+#  GITHUB_TOKEN würde den Deploy NICHT auslösen (GitHub-Schutz).
+#
 #  Zeitzonen-Hinweis: GitHub-Actions-Cron läuft in UTC.
 #    Sommerzeit (MESZ, UTC+2):  06:10 UTC = 08:10 Uhr · 17:40 UTC = 19:40 Uhr
 #    Winterzeit (MEZ, UTC+1):   07:10 UTC = 08:10 Uhr · 18:40 UTC = 19:40 Uhr
-#  (Im Winter verschiebt sich die Ausführung um 1 Stunde nach vorne in UTC –
-#   deutsche Uhrzeit bleibt immer 08:10/19:40.)
 #
 #  Manuell starten: GitHub → Actions → "Automatische Content-Generierung"
 #  → "Run workflow".  |  Stoppen: Workflow deaktivieren (Kill-Switch).
-#
-#  Qualitäts-Schutz (Google-konform):
-#    - max. 1 Artikel pro Lauf (2 pro Tag)
-#    - Einzigartigkeits-Check gegen die Pin-Texte (Auto-Regenerierung)
-#    - keine 1:1-Übernahmen – nur Themen/Keywords als Grundlage
 # ============================================================
 name: Automatische Content-Generierung
 
@@ -35,6 +32,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   generiere-und-veroeffentliche:
@@ -65,3 +63,25 @@ jobs:
             git commit -m "content: neuer Artikel automatisch aus Pinterest-Plan generiert und veröffentlicht"
             git push
           fi
+
+      - name: Deploy-Workflow anstoßen (wenn Artikel veröffentlicht wurden)
+        if: ${{ !cancelled() }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            // Prüfen, ob es neue Commits gab (der Content-Bot-Commit)
+            const changed = execSync('git rev-parse --short HEAD').toString().trim();
+            const last = execSync('git log -1 --format=%s').toString().trim();
+            if (last.startsWith('content:') || last.startsWith('content:')) {
+              console.log('Neuer Artikel gefunden – Deploy wird angestoßen.');
+              await github.rest.actions.createWorkflowDispatch({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: 'deploy.yml',
+                ref: 'main'
+              });
+              console.log('✅ Deploy-Workflow angestoßen');
+            } else {
+              console.log('Kein neuer Artikel in diesem Lauf – kein Deploy nötig.');
+            }
