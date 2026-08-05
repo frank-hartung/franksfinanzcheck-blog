@@ -146,6 +146,9 @@ def md_to_flowables(md_text):
             flow.append(Paragraph("• " + txt, S["bullet"]))
         elif stripped.startswith("1. ") or re.match(r"^\d+\.\s", stripped):
             flow.append(Paragraph("• " + fmt(re.sub(r"^\d+\.\s", "", stripped)), S["bullet"]))
+        # Seitenumbruch-Marker
+        elif stripped == "<!-- pagebreak -->":
+            flow.append(PageBreak())
         # Trennlinie
         elif re.fullmatch(r"[-*_]{3,}", stripped):
             flow.append(Spacer(1, 4))
