@@ -1,10 +1,11 @@
 # ============================================================
-#  Hugo-Konfiguration – CHECK24 Affiliate-Blog
-#  WICHTIG: baseURL später durch deine echte Domain ersetzen!
+#  Hugo-Konfiguration – FranksFinanzcheck (CHECK24 Affiliate-Blog)
+#  Hinweis: Die baseURL wird beim Deployment automatisch angepasst
+#  (scripts/deploy_github.sh ersetzt sie durch die Live-URL).
 # ============================================================
 
-baseURL = "https://franksfinanzcheck.de/"          # <-- HIER deine Domain eintragen
-title = "FranksFinanzcheck"                       # <-- HIER deinen Blog-Namen eintragen
+baseURL = "https://franksfinanzcheck.de/"   # Wunsch-Domain – wird beim Deploy ersetzt
+title = "FranksFinanzcheck"
 theme = "PaperMod"
 locale = "de-DE"
 defaultContentLanguage = "de"
