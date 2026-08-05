@@ -438,7 +438,7 @@ def parse_article(raw, topic, angle_name):
     return title, desc, body
 
 
-def write_draft(topic_entry, angle, provider, used_titles):
+def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
     """Erzeugt eine Draft-Datei. Gibt True zurück, wenn etwas geschrieben wurde.
 
     Der Artikel wird gegen die passende Pin-Beschreibung geprüft
@@ -512,12 +512,13 @@ def write_draft(topic_entry, angle, provider, used_titles):
             f"inspiration: Pin {pin.get('tag')} – „{pin.get('titel', '')}“ "
             "(nur Themen-Grundlage, eigenständig formuliert)\n"
         )
+    draft_flag = "false" if auto_publish else "true"
     frontmatter = (
         "---\n"
         f"title: {yaml_str(title)}\n"
         f"description: {yaml_str(desc)}\n"
         f"date: {date}\n"
-        "draft: true\n"
+        f"draft: {draft_flag}\n"
         f'tags: {json.dumps(keywords[:4], ensure_ascii=False)}\n'
         f'categories: ["Ratgeber"]\n'
         f"keywords: {json.dumps(keywords, ensure_ascii=False)}\n"
@@ -539,31 +540,72 @@ def write_draft(topic_entry, angle, provider, used_titles):
 # ---------------------------------------------------------------- Hauptprogramm
 
 
+def load_pin_topics():
+    """Lädt Themen direkt aus dem Pinterest-Plan (data/pinterest_plan.yaml).
+    Jeder Pin wird zu einem Themen-Eintrag – die Pins sind damit die
+    Grundlage für die Artikel (nur als Inspiration, nie 1:1 kopiert)."""
+    pins = load_pinterest_plan()
+    topics = []
+    for p in pins:
+        titel = (p.get("titel") or "").strip()
+        if not titel:
+            continue
+        kws = [k.strip() for k in (p.get("keywords") or "").split(",") if k.strip()]
+        topics.append({
+            "title": titel,
+            "keywords": kws[:5] or ["Geld sparen", "Ratgeber"],
+            "affiliate_url": None,
+        })
+    return topics
+
+
 def main():
     if not os.path.isdir(POSTS_DIR):
         os.makedirs(POSTS_DIR, exist_ok=True)
-    topics = load_topics()
+    auto_publish = os.environ.get("AUTO_PUBLISH", "0") == "1"
+    pin_topics = os.environ.get("PIN_TOPICS", "0") == "1"
+
     used_titles = existing_titles()
-    print(f"Content-Bot gestartet – {len(topics)} Themen verfügbar, "
-          f"{MAX_ARTICLES} Entwurf/Entwürfe geplant, "
+
+    if pin_topics:
+        topics = load_pin_topics()
+        quelle = "Pinterest-Plan (62 Pins)"
+        # Fallback: Sind alle Pin-Themen bereits abgedeckt, wird automatisch
+        # auf den erweiterten Themenpool zurückgegriffen (nie leerlaufen).
+        freie = [t for t in topics if not topic_already_covered(t["title"], used_titles)]
+        if not freie:
+            print("  – Alle Pin-Themen bereits behandelt → Fallback auf Themenpool (topics.yaml)")
+            topics = load_topics()
+            quelle = "Themenpool (Fallback)"
+    else:
+        topics = load_topics()
+        quelle = "Themenpool (topics.yaml)"
+
+    print(f"Content-Bot gestartet – Quelle: {quelle} ({len(topics)} Themen), "
+          f"{MAX_ARTICLES} Artikel geplant, "
           f"{len(used_titles)} bestehende Artikel erkannt.")
+    print(f"Modus: {'AUTO-VERÖFFENTLICHUNG (draft: false)' if auto_publish else 'Entwürfe (draft: true)'}")
 
     created = 0
     attempts = 0
     random.shuffle(topics)
-    while created < MAX_ARTICLES and attempts < MAX_ARTICLES * 3:
+    while created < MAX_ARTICLES and attempts < MAX_ARTICLES * 15:
         attempts += 1
         topic_entry = topics[(attempts - 1) % len(topics)]
         if topic_already_covered(topic_entry["title"], used_titles):
             print(f"  – Thema bereits behandelt, übersprungen: {topic_entry['title'][:60]}…")
             continue
         angle = ANGLES[(attempts - 1) % len(ANGLES)]
-        if write_draft(topic_entry, angle, provider=None, used_titles=used_titles):
+        if write_draft(topic_entry, angle, provider=None, used_titles=used_titles,
+                       auto_publish=auto_publish):
             created += 1
         time.sleep(2)
 
-    print(f"\nFertig: {created} neue Entwürfe (draft: true). "
-          "Zum Veröffentlichen draft auf 'false' setzen (siehe README).")
+    if auto_publish:
+        print(f"\nFertig: {created} neue Artikel AUTOMATISCH VERÖFFENTLICHT (draft: false).")
+    else:
+        print(f"\nFertig: {created} neue Entwürfe (draft: true). "
+              "Zum Veröffentlichen draft auf 'false' setzen (siehe README).")
 
 
 if __name__ == "__main__":

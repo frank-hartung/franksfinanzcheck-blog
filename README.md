@@ -21,6 +21,33 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 
 ---
 
+## ⚡ Vollautomatik (kein tägliches Pushen nötig)
+
+Der Workflow **„Automatische Content-Generierung"** läuft abgestimmt auf deine Pinterest-Zeiten:
+
+| Uhrzeit (DE) | Was passiert |
+|---|---|
+| **08:00** | Deine Pinterest-Pins erscheinen |
+| **08:10** | Der Bot generiert 1 einzigartigen Artikel aus einem freien Pin-Thema und VERÖFFENTLICHT ihn automatisch |
+| **19:30** | Deine abendlichen Pinterest-Pins erscheinen |
+| **19:40** | Der Bot generiert + veröffentlicht den 2. Artikel des Tages |
+
+**Wie es funktioniert:**
+- Themen kommen **direkt aus deinem Pinterest-Plan** (`data/pinterest_plan.yaml`, 62 Pins)
+- Der Artikel wird **automatisch veröffentlicht** (`draft: false`) – kein manueller Schritt
+- Sind alle Pin-Themen abgedeckt, greift automatisch der erweiterte Themenpool (`topics.yaml`)
+- Einzigartigkeits-Check + Anti-Copy-Prompt stellen sicher, dass kein Pin-Text 1:1 kopiert wird
+- Max. 2 Artikel/Tag (1 pro Lauf) – Google-konform, kein Content-Spam
+
+**Steuerung:**
+- **Stoppen (Kill-Switch):** GitHub → Actions → „Automatische Content-Generierung" → Disable workflow
+- **Manuell starten:** GitHub → Actions → „Run workflow"
+- **Wieder auf Entwurfs-Modus:** Im Workflow `AUTO_PUBLISH: "0"` setzen (dann musst du wieder freigeben)
+
+> Hinweis: Im Winter (MEZ) verschiebt sich die UTC-Zeit automatisch – deutsche Uhrzeit (08:10/19:40) bleibt gleich.
+
+---
+
 ## 🚀 In 15 Minuten live
 
 ### 1. Repository anlegen & hochladen

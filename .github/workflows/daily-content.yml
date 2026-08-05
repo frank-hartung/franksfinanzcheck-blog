@@ -1,35 +1,57 @@
 # ============================================================
-#  TÄGLICHE CONTENT-AUTOMATISIERUNG (kostenlos)
-#  Läuft jeden Tag um 05:00 UTC (= 07:00 Uhr Sommerzeit in DE).
-#  Erzeugt automatisch frische Blog-ENTWÜRFE (draft: true),
-#  die du nach kurzer Prüfung mit einem Klick veröffentlichst.
-#  Manuell starten: GitHub → Actions → "Tägliche Content-Generierung"
-#  → "Run workflow".
+#  AUTOMATISCHE CONTENT-GENERIERUNG (Vollautomatik, kostenlos)
+#
+#  Abgestimmt auf deine Pinterest-Veröffentlichungszeiten:
+#    - Pins morgens um 08:00 Uhr  → Blog-Artikel ca. 08:10 Uhr
+#    - Pins abends um 19:30 Uhr   → Blog-Artikel ca. 19:40 Uhr
+#
+#  Der Bot wählt Themen DIREKT aus deinem Pinterest-Plan
+#  (data/pinterest_plan.yaml, 62 Pins), generiert daraus
+#  EINZIGARTIGE Artikel (Anti-Copy-Prompt + 7-Wort-Phrasen-Check)
+#  und VERÖFFENTLICHT sie automatisch (draft: false) –
+#  kein manuelles Pushen nötig.
+#
+#  Zeitzonen-Hinweis: GitHub-Actions-Cron läuft in UTC.
+#    Sommerzeit (MESZ, UTC+2):  06:10 UTC = 08:10 Uhr · 17:40 UTC = 19:40 Uhr
+#    Winterzeit (MEZ, UTC+1):   07:10 UTC = 08:10 Uhr · 18:40 UTC = 19:40 Uhr
+#  (Im Winter verschiebt sich die Ausführung um 1 Stunde nach vorne in UTC –
+#   deutsche Uhrzeit bleibt immer 08:10/19:40.)
+#
+#  Manuell starten: GitHub → Actions → "Automatische Content-Generierung"
+#  → "Run workflow".  |  Stoppen: Workflow deaktivieren (Kill-Switch).
+#
+#  Qualitäts-Schutz (Google-konform):
+#    - max. 1 Artikel pro Lauf (2 pro Tag)
+#    - Einzigartigkeits-Check gegen die Pin-Texte (Auto-Regenerierung)
+#    - keine 1:1-Übernahmen – nur Themen/Keywords als Grundlage
 # ============================================================
-name: Tägliche Content-Generierung
+name: Automatische Content-Generierung
 
 on:
   schedule:
-    - cron: "0 5 * * *"
+    - cron: "10 6 * * *"    # 08:10 Uhr MESZ (nach den Morgen-Pins 08:00)
+    - cron: "40 17 * * *"   # 19:40 Uhr MESZ (nach den Abend-Pins 19:30)
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
 jobs:
-  generiere-entwuerfe:
+  generiere-und-veroeffentliche:
     runs-on: ubuntu-latest
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
-      - name: Blog-Entwürfe generieren
+      - name: Artikel generieren & automatisch veröffentlichen
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}   # optional, gratis: console.groq.com
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # optional, gratis: aistudio.google.com
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}    # Gratis-Key: console.groq.com
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # Gratis-Key: aistudio.google.com
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
-          MAX_ARTIKEL_PRO_LAUF: ${{ vars.MAX_ARTIKEL_PRO_LAUF }}
+          MAX_ARTIKEL_PRO_LAUF: "1"
+          PIN_TOPICS: "1"          # Themen direkt aus dem Pinterest-Plan
+          AUTO_PUBLISH: "1"        # Veröffentlichung ohne manuellen Schritt
         run: python3 scripts/generate_drafts.py
 
       - name: Änderungen committen & pushen
@@ -38,8 +60,8 @@ jobs:
           git config user.email "content-bot@users.noreply.github.com"
           git add -A
           if git diff --cached --quiet; then
-            echo "Keine neuen Entwürfe – nichts zu committen."
+            echo "Keine neuen Artikel – nichts zu committen."
           else
-            git commit -m "content: neue Blog-Entwürfe automatisch generiert"
+            git commit -m "content: neuer Artikel automatisch aus Pinterest-Plan generiert und veröffentlicht"
             git push
           fi
