@@ -1,15 +1,15 @@
 # ============================================================
-#  KOSTENLOSES DEPLOYMENT AUF GITHUB PAGES – ROBUSTE VERSION
+#  KOSTENLOSES DEPLOYMENT AUF GITHUB PAGES – BRANCH-METHODE
 #
-#  Änderungen für Stabilität (heutige Deploy-Ausfälle behoben):
-#   1. QUEUE statt CANCEL: concurrency ohne cancel-in-progress
-#      → parallele Deploys (Content-Bot + manuell) warten, statt
-#        sich gegenseitig abzubrechen (Ursache der Failure-Läufe)
-#   2. RETRY beim Veröffentlichen: deploy-pages wird bis zu 3×
-#      wiederholt, falls GitHub Pages gerade überlastet ist
-#   3. Robustes Artefakt-Handling + Cleanup
+#  Robuster als deploy-pages: Der Build wird direkt auf den
+#  gh-pages-Branch gepusht. GitHub Pages deployed von dort –
+#  ohne die anfällige deploy-pages-Action (heutige Ausfälle:
+#  "Deployment cancelled" durch GitHub-Pages-Überlastung).
 #
-#  Auslöser: Push auf main, workflow_dispatch (auch vom Content-Bot)
+#  VORAUSSETZUNG (einmalig, per API erledigt):
+#    Settings → Pages → Source: "Deploy from a branch" → gh-pages
+#
+#  Queue statt Cancel: parallele Deploys warten
 # ============================================================
 name: Deploy auf GitHub Pages
 
@@ -19,17 +19,14 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
-# QUEUE statt Cancel: Läufe desselben Typs warten, bis der vorherige fertig ist
 concurrency:
   group: "pages-deploy"
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Repository auschecken
@@ -44,58 +41,11 @@ jobs:
       - name: Seite bauen
         run: hugo --minify
 
-      - name: Build-Artefakt hochladen
-        uses: actions/upload-pages-artifact@v3
+      - name: Auf gh-pages-Branch veröffentlichen
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: ./public
-          retention-days: 1
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      # Versuch 1
-      - name: Deploy-Versuch 1
-        id: deployment1
-        uses: actions/deploy-pages@v4
-        continue-on-error: true
-
-      # Bei Fehler: warten + Versuch 2
-      - name: Warten vor Versuch 2
-        if: steps.deployment1.outcome == 'failure'
-        run: sleep 20
-
-      - name: Deploy-Versuch 2
-        if: steps.deployment1.outcome == 'failure'
-        id: deployment2
-        uses: actions/deploy-pages@v4
-        continue-on-error: true
-
-      # Bei Fehler: warten + Versuch 3
-      - name: Warten vor Versuch 3
-        if: steps.deployment2.outcome == 'failure'
-        run: sleep 40
-
-      - name: Deploy-Versuch 3
-        if: steps.deployment2.outcome == 'failure'
-        id: deployment3
-        uses: actions/deploy-pages@v4
-        continue-on-error: true
-
-      # Finale Bewertung
-      - name: Finaler Status
-        if: always()
-        run: |
-          if [ "${{ steps.deployment3.outcome }}" == "failure" ]; then
-            echo "❌ Alle 3 Deploy-Versuche fehlgeschlagen."
-            exit 1
-          elif [ "${{ steps.deployment1.outcome }}" == "success" ]; then
-            echo "✅ Deploy beim 1. Versuch erfolgreich."
-          elif [ "${{ steps.deployment2.outcome }}" == "success" ]; then
-            echo "✅ Deploy beim 2. Versuch erfolgreich."
-          else
-            echo "✅ Deploy beim 3. Versuch erfolgreich."
-          fi
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          force_orphan: true
+          cname: ""  # Keine eigene Domain (github.io)
