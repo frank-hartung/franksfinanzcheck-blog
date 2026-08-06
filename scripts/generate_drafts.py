@@ -162,8 +162,14 @@ def yaml_str(s):
 
 
 def http_json(url, data=None, headers=None, timeout=90):
-    """HTTP-Helfer (nur Standardbibliothek)."""
-    req = urllib.request.Request(url, data=data, headers=headers or {})
+    """HTTP-Helfer (nur Standardbibliothek).
+    WICHTIG: Browser-User-Agent setzen – Cloudflare blockt Requests ohne
+    User-Agent (Error 1010/403), wie es im GitHub-Runner passiert ist."""
+    hdrs = dict(headers or {})
+    hdrs.setdefault("User-Agent",
+                    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                    "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
+    req = urllib.request.Request(url, data=data, headers=hdrs)
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
@@ -250,6 +256,26 @@ def uniqueness_check(text, pin, max_similar=MAX_SIMILAR_PHRASES, n=PHRASE_LEN):
 
 
 
+def _retry(fn, attempts=3, base_delay=3):
+    """Führt fn mit Wiederholungen aus (Timeout/5xx-robust)."""
+    last_err = None
+    for i in range(attempts):
+        try:
+            return fn()
+        except urllib.error.HTTPError as e:
+            last_err = e
+            if e.code in (429, 500, 502, 503, 504):
+                time.sleep(base_delay * (i + 1))
+                continue
+            raise
+        except (TimeoutError, urllib.error.URLError, ConnectionError):
+            last_err = None
+            time.sleep(base_delay * (i + 1))
+    if last_err:
+        raise last_err
+    raise TimeoutError("API nach mehreren Versuchen nicht erreichbar")
+
+
 def call_groq(prompt):
     key = os.environ.get("GROQ_API_KEY")
     if not key:
@@ -264,12 +290,16 @@ def call_groq(prompt):
         "max_tokens": 1800,
     }
     data = json.dumps(body).encode("utf-8")
-    resp = http_json(
-        "https://api.groq.com/openai/v1/chat/completions",
-        data=data,
-        headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"},
-    )
-    return resp["choices"][0]["message"]["content"]
+
+    def _call():
+        resp = http_json(
+            "https://api.groq.com/openai/v1/chat/completions",
+            data=data,
+            headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"},
+        )
+        return resp["choices"][0]["message"]["content"]
+
+    return _retry(_call)
 
 
 def call_gemini(prompt):
@@ -279,12 +309,16 @@ def call_gemini(prompt):
     model = os.environ.get("GEMINI_MODEL", "gemini-3-flash-preview")
     body = {"contents": [{"parts": [{"text": prompt}]}]}
     data = json.dumps(body).encode("utf-8")
-    resp = http_json(
-        f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
-        data=data,
-        headers={"Content-Type": "application/json"},
-    )
-    return resp["candidates"][0]["content"]["parts"][0]["text"]
+
+    def _call():
+        resp = http_json(
+            f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
+            data=data,
+            headers={"Content-Type": "application/json"},
+        )
+        return resp["candidates"][0]["content"]["parts"][0]["text"]
+
+    return _retry(_call)
 
 
 def call_pollinations(prompt):
