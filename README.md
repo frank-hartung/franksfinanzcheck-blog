@@ -78,6 +78,18 @@ Der Workflow **„Wöchentliche SEO-Optimierung"** läuft jeden Mittwoch 07:00 U
 3. **Google:** Sitemap bereits eingereicht; zusätzlich empfohlen: Google Search
    Console „Indexierung anfordern" nach Veröffentlichung (manuell, 30 Sekunden).
 
+**🔑 Automatische Keyword-Optimierung (Profi-Niveau):**
+
+1. **Neue Artikel:** Der Content-Bot erhält die Ziel-Keywords direkt im
+   Generierungs-Prompt – das Haupt-Keyword muss in Titel, Description,
+   erstem Absatz und einer H2 erscheinen (automatisch, keine Handarbeit).
+2. **Bestehende Artikel:** `python3 scripts/keyword_optimizer.py` prüft alle
+   Artikel auf Keyword-Platzierung (Titel, Description, erster Absatz,
+   Überschriften, URL-Slug) und Keyword-Dichte (0,3–3 %). Läuft auch im
+   wöchentlichen SEO-Workflow (mittwochs 07:00) – bei Problemen → GitHub-Issue.
+3. **Optional KI-Vorschläge:** `python3 scripts/keyword_optimizer.py --ai`
+   schlägt verwandte LSI-Keywords pro Artikel vor (nutzt deine Gratis-KI-Keys).
+
 **Automatisches Einzigartigkeits-Audit (Qualitäts-Gate):**
 - **Nach jeder Bot-Veröffentlichung** läuft `scripts/check_uniqueness.py` automatisch mit:
   - Findet der Check kritische Duplikate (≥5 gleiche 7-Wort-Phrasen oder Pin-Konflikt),

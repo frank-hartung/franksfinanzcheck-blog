@@ -13,9 +13,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 ---
 
-Der Handyvertrag ist für viele ein „Dauerläufer": Einmal abgeschlossen, nie wieder angeschaut. Dabei lohnt sich der Vergleich enorm – die Preise für Datenvolumen fallen seit Jahren, und wer seinen Tarif nicht regelmäßig prüft, zahlt oft das Doppelte für weniger Leistung. So findest du den günstigsten Tarif für deinen Bedarf.
+Wer einen Handytarif vergleichen möchte, sollte zuerst den eigenen Bedarf kennen. Der Handyvertrag ist für viele ein „Dauerläufer": Einmal abgeschlossen, nie wieder angeschaut. Dabei lohnt sich der Vergleich enorm – die Preise für Datenvolumen fallen seit Jahren, und wer seinen Tarif nicht regelmäßig prüft, zahlt oft das Doppelte für weniger Leistung. So findest du den günstigsten Tarif für deinen Bedarf.
 
-## Schritt 1: Deinen echten Bedarf ermitteln
+## Schritt 1: Bedarf ermitteln – der erste Schritt beim Handytarif-Vergleich
 
 Bevor du vergleichst, kläre, was du wirklich brauchst:
 
