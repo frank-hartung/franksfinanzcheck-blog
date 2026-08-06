@@ -71,3 +71,20 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   changefreq = "weekly"
   filename = "sitemap.xml"
   priority = 0.5
+
+[related]
+  threshold = 60
+  includeNewer = true
+  [[related.indices]]
+    name = "keywords"
+    weight = 100
+  [[related.indices]]
+    name = "tags"
+    weight = 80
+  [[related.indices]]
+    name = "categories"
+    weight = 60
+  [[related.indices]]
+    name = "date"
+    weight = 10
+    pattern = "2006"
