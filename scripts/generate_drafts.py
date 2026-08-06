@@ -377,13 +377,15 @@ PROVIDERS = [
 ]
 
 
-def generate_article_text(topic, angle, perspective=None, pin=None):
+def generate_article_text(topic, angle, perspective=None, pin=None, keywords=None):
     """Baut den Prompt und ruft die KI auf. Liefert (rohtext, provider).
 
     - angle:      Schreibstil (Ratgeber, Vergleich, FAQ …)
     - perspective: Erzählperspektive (direkt, Erfahrung, neutral …)
     - pin:        der zugehörige Pinterest-Pin – NUR als Inspiration,
                   der Artikel muss eigenständig formuliert sein.
+    - keywords:   Ziel-Keywords – der Artikel soll sie natürlich einbauen
+                  (automatische Keyword-Optimierung neuer Artikel).
     """
     if os.environ.get("DEMO_MODE") == "1":
         return demo_article(topic, angle), "Demo (ohne API-Key)"
@@ -407,10 +409,23 @@ def generate_article_text(topic, angle, perspective=None, pin=None):
             "Wähle eine eigene Überschrift und eine eigene Struktur.\n"
         )
 
+    # Automatische Keyword-Optimierung: Ziel-Keywords in den Prompt einbauen
+    keyword_hint = ""
+    if keywords:
+        kw_list = ", ".join(keywords[:5])
+        keyword_hint = (
+            f"SEO-KEYWORDS (natürlich und ungezwungen in den Text einbauen): {kw_list}\n"
+            "Anforderungen: Das Haupt-Keyword (das erste) MUSS vorkommen in: "
+            "Titel (TITLE-Zeile), Meta-Beschreibung (DESCRIPTION-Zeile), "
+            "dem ersten Absatz und mindestens einer H2-Überschrift. "
+            "Die Keywords insgesamt 3-6 Mal natürlich verteilen – "
+            "KEIN Keyword-Stuffing, KEINE künstliche Aufzählung.\n"
+        )
+
     prompt = f"""Schreibe einen EINZIGARTIGEN, hilfreichen deutschen Blog-Artikel zum Thema:
 "{topic}"
 
-{inspiration}
+{inspiration}{keyword_hint}
 Stil des Artikels: {angle_desc}.
 Erzählperspektive: {persp_desc}.
 
@@ -485,7 +500,7 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
     if pin:
         print(f"    Inspiration: Pinterest-Pin (Tag {pin.get('tag')}) – wird nur als Grundlage genutzt")
 
-    raw, provider_name = generate_article_text(topic, angle, perspective=None, pin=pin)
+    raw, provider_name = generate_article_text(topic, angle, perspective=None, pin=pin, keywords=keywords)
     if not raw:
         has_key = bool(os.environ.get("GROQ_API_KEY") or os.environ.get("GEMINI_API_KEY"))
         if not has_key:
@@ -518,7 +533,7 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
                 new_angle = random.choice(other_angles)
                 raw, provider_name = generate_article_text(topic, new_angle,
                                                            perspective=random.choice(PERSPECTIVES),
-                                                           pin=pin)
+                                                           pin=pin, keywords=keywords)
                 if not raw:
                     return False
                 angle = new_angle

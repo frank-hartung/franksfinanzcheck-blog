@@ -1,11 +1,11 @@
 ---
 title: "Heizperiode vorbereiten: 3 Dinge für den August"
-description: "Bereite Heizung und Gasverträge im Spätsommer vor! Wer jetzt prüft, vermeidet teure Überraschungen im Winter – mit Checkliste."
+description: "Heizperiode vorbereiten im Spätsommer: 3 Dinge, die du im August tun musst – so vermeidest du teure Überraschungen im Winter."
 date: 2026-08-04
 draft: false
 tags: ["Heizkosten sparen", "Gas", "Herbst Vorbereitung"]
 categories: ["Günstige Strom- & Gastarife"]
-keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
+keywords: ["Heizperiode vorbereiten", "Heizkosten sparen", "Gasrechnung senken", "Heizung prüfen"]
 author: "Frank"
 cover:
   image: "/images/covers/heizperiode-vorbereiten-spaetsommer.jpg"
@@ -17,7 +17,7 @@ Der August ist der ruhigste Monat des Jahres – zumindest bei den Heizkosten. G
 
 ## 1. Gasvertrag prüfen und wechseln
 
-Der Spätsommer ist die klassische Wechselsaison für Gastarife: Viele Versorger stellen ihre Konditionen zum Herbst um, und wer in der Grundversorgung oder einem ausgelaufenen Vertrag steckt, zahlt im Winter besonders drauf. Die gute Nachricht: Ein Gaswechsel geht komplett online in wenigen Minuten – die Kündigung beim alten Anbieter übernimmt der neue Versorger kostenlos.
+Die Heizperiode steht vor der Tür – und mit ihr die höchsten Energiekosten des Jahres. Der Spätsommer ist die klassische Wechselsaison für Gastarife: Viele Versorger stellen ihre Konditionen zum Herbst um, und wer in der Grundversorgung oder einem ausgelaufenen Vertrag steckt, zahlt im Winter besonders drauf. Die gute Nachricht: Ein Gaswechsel geht komplett online in wenigen Minuten – die Kündigung beim alten Anbieter übernimmt der neue Versorger kostenlos.
 
 Worauf du beim Vergleich achten solltest:
 
@@ -26,7 +26,7 @@ Worauf du beim Vergleich achten solltest:
 - **Boni:** Neukunden- und Sofortboni einrechnen – aber prüfen, wann sie ausgezahlt werden
 - **Vertragslaufzeit:** Die übliche Bindung beträgt 12 Monate – wer flexibler bleiben will, sollte nach kürzeren Laufzeiten suchen
 
-## 2. Heizung warten und entlüften
+## 2. Heizung warten und entlüften: So startet die Heizperiode reibungslos
 
 Eine schlecht eingestellte Heizung verbraucht bis zu 15 Prozent mehr Energie. Vor der Heizperiode lohnt sich deshalb:
 

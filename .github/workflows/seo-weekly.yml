@@ -45,6 +45,13 @@ jobs:
           python3 scripts/seo_audit.py | tee /tmp/seo_audit_log.txt
           exit ${PIPESTATUS[0]}
 
+      - name: Keyword-Optimierungs-Audit
+        id: kw
+        continue-on-error: true
+        run: |
+          python3 scripts/keyword_optimizer.py | tee /tmp/kw_audit_log.txt
+          exit ${PIPESTATUS[0]}
+
       - name: IndexNow-Indexierung (neue Artikel einreichen)
         run: python3 scripts/submit_indexnow.py
 
