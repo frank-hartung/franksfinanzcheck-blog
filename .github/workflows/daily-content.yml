@@ -26,8 +26,17 @@ name: Automatische Content-Generierung
 
 on:
   schedule:
+    # Haupt-Zeiten (nach deinen Pin-Zeiten):
     - cron: "10 6 * * *"    # 08:10 Uhr MESZ (nach den Morgen-Pins 08:00)
     - cron: "40 17 * * *"   # 19:40 Uhr MESZ (nach den Abend-Pins 19:30)
+    # Fallback-Zeiten (GitHub kann geplante Läufe verzögern/verwerfen –
+    #  durch mehrere Crons wird sichergestellt, dass der Artikel trotzdem
+    #  erscheint. Das Skript prüft selbst: max. 2 Artikel pro Tag.)
+    - cron: "10 8 * * *"    # 10:10 Uhr MESZ (Fallback Morgen)
+    - cron: "10 10 * * *"   # 12:10 Uhr MESZ (Fallback Morgen)
+    - cron: "10 12 * * *"   # 14:10 Uhr MESZ (Fallback Morgen)
+    - cron: "10 14 * * *"   # 16:10 Uhr MESZ (Fallback Morgen)
+    - cron: "10 19 * * *"   # 21:10 Uhr MESZ (Fallback Abend)
   workflow_dispatch: {}
 
 permissions:
@@ -48,6 +57,7 @@ jobs:
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
           MAX_ARTIKEL_PRO_LAUF: "1"
+          MAX_ARTIKEL_PRO_TAG: "2"   # max. 2 Artikel/Tag (Guard gegen Doppel-Läufe)
           PIN_TOPICS: "1"          # Themen direkt aus dem Pinterest-Plan
           AUTO_PUBLISH: "1"        # Veröffentlichung ohne manuellen Schritt
         run: python3 scripts/generate_drafts.py
