@@ -1,4 +1,4 @@
-{{- /* Pinterest-Pin-Button am Ende jedes ARTIKELS.
+{{- /* Pinterest-Pin-Button + Related Posts am Ende jedes ARTIKELS.
      Nur in der posts-Sektion rendern – NICHT auf Rechtsseiten
      (Impressum, Datenschutz) oder anderen Einzelseiten. */ -}}
 {{- if eq .Section "posts" -}}
@@ -25,4 +25,20 @@
   <p style="font-size:.82em; color:var(--secondary); margin:8px 0 0;">Du findest diesen Beitrag auch als Infografik auf
     <a href="https://www.pinterest.de/franksfinanzcheck/" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600;">meinem Pinterest-Profil</a>.</p>
 </div>
+
+{{- /* ---------- Related Posts (interne Verlinkung / SEO) ---------- */ -}}
+{{- $related := .Site.RegularPages.Related . | first 3 -}}
+{{- if gt (len $related) 0 -}}
+<div class="ff-related" style="margin:32px 0 8px; padding-top:20px; border-top:2px solid rgba(14,90,67,.15);">
+  <h3 style="font-family:'Montserrat',sans-serif; font-weight:800; color:#0E5A43; margin-bottom:12px;">📚 Das könnte dich auch interessieren</h3>
+  <ul style="list-style:none; padding:0; margin:0; display:grid; gap:8px;">
+    {{- range $related -}}
+    <li style="padding:10px 14px; background:#EAF4EF; border-radius:8px; border-left:4px solid #FFB300;">
+      <a href="{{ .Permalink }}" style="color:#0E5A43; font-weight:600; text-decoration:none;">{{ .Title }}</a>
+      <span style="display:block; font-size:.82em; color:#555; margin-top:2px;">{{ .Description | truncate 90 }}</span>
+    </li>
+    {{- end -}}
+  </ul>
+</div>
+{{- end -}}
 {{- end -}}

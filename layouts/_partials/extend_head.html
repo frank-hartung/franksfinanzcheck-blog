@@ -1,4 +1,14 @@
-{{- /* SEO-Erweiterungen (Site-Override von PaperMods extend_head) */ -}}
+{{- /* ============================================================
+    SEO-ERWEITERUNGEN (Site-Override von PaperMods extend_head)
+    - Meta-Basics (Description, Author, Robots)
+    - Pinterest- & Bing-Verifikation
+    - FAQPage-Schema (Featured Snippets!) aus den FAQ-Abschnitten
+    - Organization/WebSite-Schema auf der Startseite
+    - OpenGraph article-Tags (published/modified/author)
+    - Preconnect für Google Fonts (schnelleres Laden / CWV)
+============================================================ -}}
+
+{{- /* ---------- Meta-Basics ---------- */ -}}
 {{- if and (eq .Kind "home") (site.Params.description) -}}
 <meta name="description" content="{{ site.Params.description }}">
 {{- end -}}
@@ -7,15 +17,53 @@
 {{- end -}}
 <meta name="robots" content="index, follow">
 
-{{- /* Pinterest-Website-Verifikation (Meta-Tag-Methode)
-       Code in hugo.toml eintragen:  pinterestVerify = "DEIN-CODE"
-       oder direkt hier als content-Wert ersetzen. */ -}}
+{{- /* ---------- Verifikationen ---------- */ -}}
 {{- with site.Params.pinterestVerify -}}
 <meta name="p:domain_verify" content="{{ . }}">
 {{- end -}}
-
-{{- /* Bing-Website-Verifikation (Meta-Tag-Methode)
-       Code in hugo.toml eintragen:  bingVerify = "DEIN-CODE" */ -}}
 {{- with site.Params.bingVerify -}}
 <meta name="msvalidate.01" content="{{ . }}">
+{{- end -}}
+
+{{- /* ---------- Preconnect: Google Fonts (Core Web Vitals) ---------- */ -}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+{{- /* ---------- FAQPage-Schema (aus den FAQ-Abschnitten der Artikel) ---------- */ -}}
+{{- if and .IsPage (eq .Section "posts") -}}
+{{- $faq := slice -}}
+{{- $chunks := split (plainify .RawContent) "### " -}}
+{{- range $chunks -}}
+  {{- $lines := split . "\n" -}}
+  {{- $q := trim (index $lines 0) " \t\r\n" -}}
+  {{- if and (gt (len $q) 5) (findRE "[?]" $q) -}}
+    {{- $answer := trim (delimit (after 1 $lines) " ") " \t\r\n" -}}
+    {{- if gt (len $answer) 10 -}}
+      {{- $faq = $faq | append (dict "@type" "Question" "name" $q
+          "acceptedAnswer" (dict "@type" "Answer" "text" $answer)) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if gt (len $faq) 0 -}}
+<script type="application/ld+json">{{ (dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $faq) | jsonify | safeJS }}</script>
+{{- end -}}
+
+{{- /* ---------- OpenGraph article-Tags ---------- */ -}}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:author" content="{{ site.Params.author }}">
+<meta property="article:section" content="{{ with .Params.categories }}{{ index . 0 }}{{ else }}Ratgeber{{ end }}">
+{{- end -}}
+
+{{- /* ---------- Organization/WebSite-Schema (Startseite) ---------- */ -}}
+{{- if .IsHome -}}
+<script type="application/ld+json">{{ (dict
+  "@context" "https://schema.org"
+  "@type" "WebSite"
+  "name" site.Title
+  "url" site.BaseURL
+  "description" site.Params.description
+  "publisher" (dict "@type" "Organization" "name" site.Title "url" site.BaseURL
+                    "sameAs" (slice "https://www.pinterest.de/franksfinanzcheck/"))
+) | jsonify | safeJS }}</script>
 {{- end -}}
