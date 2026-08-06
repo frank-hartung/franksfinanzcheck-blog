@@ -77,8 +77,11 @@
     if (banner) {
       banner.style.display = 'block';
       // Fokus auf den ersten Button setzen (Tastatur-Navigation)
+      // preventScroll: verhindert erzwungenen synchronen Reflow
+      // (style.display-Änderung hat Styles invalidiert – focus() würde
+      // sonst sofort Layout erzwingen, Lighthouse-Culprit :29:736)
       var firstBtn = banner.querySelector('button');
-      if (firstBtn) firstBtn.focus();
+      if (firstBtn) firstBtn.focus({ preventScroll: true });
     }
   };
   // Escape-Taste schließt den Banner (nur „Nur notwendige" als Default)
