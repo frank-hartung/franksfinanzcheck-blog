@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Tagesgeld", "Sparen", "Zinsen"]
 categories: ["Haushaltskasse & Budgetplanung"]
-keywords: ["Tagesgeld", "Zinsen vergleichen", "Geld sicher anlegen"]
+keywords: ["Tagesgeld", "Zinsen vergleichen", "Geld sicher anlegen", "Tagesgeldkonto", "Tagesgeldzinsen"]
 author: "Frank"
 cover:
   image: "/images/covers/tagesgeld-zinsen-sicher-anlegen.jpg"

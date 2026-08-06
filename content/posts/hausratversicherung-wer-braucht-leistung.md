@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Hausrat", "Versicherung", "Wohnen"]
 categories: ["Versicherungen"]
-keywords: ["Hausratversicherung vergleichen", "Hausrat absichern", "Hausrat Kosten"]
+keywords: ["Hausratversicherung vergleichen", "Hausrat absichern", "Hausrat Kosten", "Hausratversicherung Tarif", "HausratversicherungTest"]
 author: "Frank"
 cover:
   image: "/images/covers/hausratversicherung-wer-braucht-leistung.jpg"

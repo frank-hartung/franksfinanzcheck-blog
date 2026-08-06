@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Mietwagen", "Reisen", "Urlaub"]
 categories: ["Reisebudget & Mietwagen"]
-keywords: ["Mietwagen buchen", "Günstige Mietwagen", "Mietwagen Vergleich"]
+keywords: ["Mietwagen buchen", "Günstige Mietwagen", "Mietwagen Vergleich", "billige Mietwagen", "Mietwagen Preise"]
 author: "Frank"
 cover:
   image: "/images/covers/mietwagen-buchen-so-sparst-du.jpg"

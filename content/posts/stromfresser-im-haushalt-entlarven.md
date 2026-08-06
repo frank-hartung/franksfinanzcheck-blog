@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Strom sparen", "Energiekosten", "Stromfresser"]
 categories: ["Günstige Strom- & Gastarife"]
-keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]
+keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten", "Energieverbrauch reduzieren", "Stromfresser im Haushalt"]
 author: "Frank"
 cover:
   image: "/images/covers/stromfresser-im-haushalt-entlarven.jpg"

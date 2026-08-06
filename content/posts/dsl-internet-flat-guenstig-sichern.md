@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["DSL", "Internet", "Glasfaser"]
 categories: ["Internet- & DSL-Hacks"]
-keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus"]
+keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus", "Internetanbieter Vergleich", "DSL Tarife"]
 author: "Frank"
 cover:
   image: "/images/covers/dsl-internet-flat-guenstig-sichern.jpg"

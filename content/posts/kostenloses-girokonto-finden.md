@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Girokonto", "Bank", "Gebühren sparen"]
 categories: ["Haushaltskasse & Budgetplanung"]
-keywords: ["Kostenloses Girokonto", "Girokonto Vergleich", "Kontoführungsgebühren sparen"]
+keywords: ["Kostenloses Girokonto", "Girokonto Vergleich", "Kontoführungsgebühren sparen", "kostenloses Girokonto ohne Gebühren", "kostenloses Girokonto eröffnen"]
 author: "Frank"
 cover:
   image: "/images/covers/kostenloses-girokonto-finden.jpg"

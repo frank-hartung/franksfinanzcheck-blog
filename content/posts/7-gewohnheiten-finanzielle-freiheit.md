@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset"]
 categories: ["Geld sparen & Frugalismus"]
-keywords: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset"]
+keywords: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset", "Passives Einkommen", "Frugalismus"]
 author: "Frank"
 cover:
   image: "/images/covers/7-gewohnheiten-finanzielle-freiheit.jpg"

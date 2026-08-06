@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Budgetierung", "50-30-20", "Haushaltsplanung"]
 categories: ["Haushaltskasse & Budgetplanung"]
-keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen"]
+keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen", "Regel Rechner", "Haushaltsbuch Vorlage"]
 author: "Frank"
 cover:
   image: "/images/covers/50-30-20-regel-einfach-erklaert.jpg"

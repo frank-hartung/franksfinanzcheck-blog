@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Kredit", "Ratenkredit", "Umschuldung"]
 categories: ["Geld sparen & Frugalismus"]
-keywords: ["Ratenkredit vergleichen", "Ratenkredit günstig", "Kreditvergleich", "Umschuldung sparen"]
+keywords: ["Ratenkredit vergleichen", "Ratenkredit günstig", "Kreditvergleich", "Umschuldung sparen", "Ratenkredit Vergleich", "Kredit Vergleichen"]
 author: "Frank"
 cover:
   image: "/images/covers/ratenkredit-bestszins-vergleichen.jpg"

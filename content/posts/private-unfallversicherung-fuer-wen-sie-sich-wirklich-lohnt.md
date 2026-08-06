@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Unfallversicherung", "Versicherung", "Absicherung"]
 categories: ["Versicherungen"]
-keywords: ["Unfallversicherung", "Private Unfallversicherung", "Absicherung"]
+keywords: ["Unfallversicherung", "Private Unfallversicherung", "Absicherung", "Unfallschutz", "Versicherungsvergleich"]
 author: "Frank"
 cover:
   image: "/images/covers/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt.jpg"

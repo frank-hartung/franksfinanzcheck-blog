@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Haftpflicht", "Versicherung", "Absicherung"]
 categories: ["Versicherungen"]
-keywords: ["Privathaftpflicht", "Haftpflichtversicherung Vergleich", "Haftpflicht Kosten"]
+keywords: ["Privathaftpflicht", "Haftpflichtversicherung Vergleich", "Haftpflicht Kosten", "Privathaftpflichtversicherung", "Privathaftpflicht Kosten"]
 author: "Frank"
 cover:
   image: "/images/covers/privathaftpflicht-warum-pflicht-kosten.jpg"

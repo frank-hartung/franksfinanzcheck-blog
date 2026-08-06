@@ -5,7 +5,7 @@ date: 2026-08-03
 draft: false
 tags: ["Versicherung", "Kfz", "Sparen"]
 categories: ["Versicherungen"]
-keywords: ["Kfz-Versicherung wechseln", "Autoversicherung vergleichen", "SF-Klasse"]
+keywords: ["Kfz-Versicherung wechseln", "Autoversicherung vergleichen", "SF-Klasse", "Kfz-Versicherung wechseln beim Neuwagen", "Kfz-Versicherung Vergleich"]
 author: "Redaktion"
 cover:
   image: "/images/covers/kfz-versicherung-wechseln.jpg"

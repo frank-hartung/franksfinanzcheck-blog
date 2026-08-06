@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Wärmepumpe", "Heizung", "Energie"]
 categories: ["Günstige Strom- & Gastarife"]
-keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken"]
+keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken", "Wärmepumpenpreis", "Wärmepumpen Kosten"]
 author: "Frank"
 cover:
   image: "/images/covers/waermepumpe-vs-gasheizung-2026.jpg"

@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Mietwagen", "Reisetipps", "Reisekosten sparen"]
 categories: ["Reisebudget & Mietwagen"]
-keywords: ["Mietwagen Tipps", "Urlaub Mietwagen", "Reisekosten sparen"]
+keywords: ["Mietwagen Tipps", "Urlaub Mietwagen", "Reisekosten sparen", "Mietwagen Vergleich", "Billig Mietwagen"]
 author: "Frank"
 cover:
   image: "/images/covers/mietwagen-fallen-vermeiden.jpg"
