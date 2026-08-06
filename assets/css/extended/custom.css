@@ -192,10 +192,11 @@ h1, h2, h3, h4, h5, h6,
     font-weight: 700;
 }
 
-/* ---------- Pagination ---------- */
+/* ---------- Pagination (Kontrast-optimiert: WCAG AA) ---------- */
 .pagination a {
     border: 2px solid var(--ff-emerald);
-    color: var(--ff-emerald);
+    color: var(--ff-white);          /* Weiß auf Grün: 8.2:1 ✅ */
+    background: var(--ff-emerald);   /* Grüner Grund statt Anthrazit */
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     border-radius: 999px;
@@ -203,8 +204,9 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .pagination a:hover {
-    background: var(--ff-emerald);
-    color: var(--ff-white);
+    background: var(--ff-yellow);    /* Gelb bei Hover (7.5:1) */
+    color: var(--ff-anthracite);
+    border-color: var(--ff-yellow);
 }
 
 /* ---------- Footer ---------- */
