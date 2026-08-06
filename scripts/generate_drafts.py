@@ -625,6 +625,26 @@ def main():
         os.makedirs(POSTS_DIR, exist_ok=True)
     auto_publish = os.environ.get("AUTO_PUBLISH", "0") == "1"
     pin_topics = os.environ.get("PIN_TOPICS", "0") == "1"
+    # Tages-Limit: Wie viele Artikel dürfen pro Tag veröffentlicht werden?
+    # (Guard gegen mehrere Workflow-Läufe pro Tag – GitHub-Crons können
+    #  verzögert laufen oder doppelt ausgelöst werden.)
+    max_per_day = int(os.environ.get("MAX_ARTIKEL_PRO_TAG", "2"))
+
+    # Heute bereits veröffentlichte Artikel zählen
+    today = datetime.date.today().isoformat()
+    published_today = 0
+    if os.path.isdir(POSTS_DIR):
+        for fn in os.listdir(POSTS_DIR):
+            if fn.startswith(today) and fn.endswith(".md"):
+                with open(os.path.join(POSTS_DIR, fn), encoding="utf-8") as f:
+                    content = f.read()
+                if "draft: false" in content:
+                    published_today += 1
+
+    if auto_publish and published_today >= max_per_day:
+        print(f"Bereits {published_today} Artikel heute veröffentlicht "
+              f"(Limit: {max_per_day}) – nichts zu tun.")
+        return
 
     used_titles = existing_titles()
 
@@ -664,6 +684,12 @@ def main():
 
     if auto_publish:
         print(f"\nFertig: {created} neue Artikel AUTOMATISCH VERÖFFENTLICHT (draft: false).")
+        if created == 0:
+            print("⚠ WICHTIG: Es wurde KEIN Artikel erzeugt. Mögliche Ursachen:")
+            print("  - API-Key fehlt oder abgelaufen (GROQ_API_KEY / GEMINI_API_KEY)")
+            print("  - API-Kontingent erschöpft (Rate Limit)")
+            print("  → Bitte Workflow-Log prüfen und Keys aktualisieren.")
+            sys.exit(1)  # Workflow als fehlgeschlagen markieren
     else:
         print(f"\nFertig: {created} neue Entwürfe (draft: true). "
               "Zum Veröffentlichen draft auf 'false' setzen (siehe README).")
