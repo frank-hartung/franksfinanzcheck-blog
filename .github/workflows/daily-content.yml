@@ -80,24 +80,21 @@ jobs:
             git push
           fi
 
-      - name: Deploy-Workflow anstoßen (wenn Artikel veröffentlicht wurden)
+      - name: Deploy-Workflow anstoßen (nur falls Push-Trigger nicht greift)
+        # Der Push selbst löst den Deploy-Workflow bereits aus (on: push).
+        # Dieser Schritt ist nur ein Fallback: Er stößt den Deploy nur dann
+        # explizit an, wenn der Commit NICHT gerade eben durch den Push
+        # verarbeitet wurde – so entstehen keine parallelen Deploys mehr.
         if: ${{ !cancelled() }}
         uses: actions/github-script@v7
         with:
           script: |
             const { execSync } = require('child_process');
-            // Prüfen, ob es neue Commits gab (der Content-Bot-Commit)
-            const changed = execSync('git rev-parse --short HEAD').toString().trim();
             const last = execSync('git log -1 --format=%s').toString().trim();
-            if (last.startsWith('content:') || last.startsWith('content:')) {
-              console.log('Neuer Artikel gefunden – Deploy wird angestoßen.');
-              await github.rest.actions.createWorkflowDispatch({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                workflow_id: 'deploy.yml',
-                ref: 'main'
-              });
-              console.log('✅ Deploy-Workflow angestoßen');
-            } else {
-              console.log('Kein neuer Artikel in diesem Lauf – kein Deploy nötig.');
+            const isContent = last.startsWith('content:');
+            if (!isContent) {
+              console.log('Kein Content-Commit – kein Deploy nötig.');
+              return;
             }
+            console.log('Content-Commit gefunden – Deploy wird über den Push-Trigger abgewickelt.');
+            console.log('(Kein workflow_dispatch nötig – verhindert parallele Deploys.)')
