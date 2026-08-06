@@ -13,8 +13,8 @@
 {{- else -}}
 {{- if .Title -}}
 {{- $t := .Title | plainify -}}
-{{- if or (lt (len $t) 45) (eq .Section "posts") -}}
-{{- if and (eq .Section "posts") (gt (len $t) 45) -}}
+{{- if or (lt (len $t) 40) (eq .Section "posts") -}}
+{{- if and (eq .Section "posts") (gt (len $t) 40) -}}
 {{ $t }}
 {{- else -}}
 {{ $t }} | {{ site.Title }}
