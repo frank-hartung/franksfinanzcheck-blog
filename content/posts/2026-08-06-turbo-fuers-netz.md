@@ -10,6 +10,10 @@ author: ""
 ai_generated: true
 ai_provider: "Groq (Gratis-Key: console.groq.com)"
 inspiration: Pin 6 – „DNS-Server ändern für schnelleres Internet“ (nur Themen-Grundlage, eigenständig formuliert)
+cover:
+  image: "images/covers/2026-08-06-turbo-fuers-netz.jpg"
+  alt: "Spar-Tipp: Internet-Turbo – Netz schneller machen"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Wenn man täglich mit dem Internet arbeitet, kennt man das Gefühl, wenn die Verbindung plötzlich langsamer wird. Man wartet auf die Ladung von Webseiten, die Übertragung von Dateien verzögert sich und man fragt sich, ob das Problem am eigenen Internetanbieter oder am eigenen Gerät liegt. In solchen Situationen kann ein einfacher Wechsel des DNS-Servers helfen, um die Internetgeschwindigkeit zu verbessern.
