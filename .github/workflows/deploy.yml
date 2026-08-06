@@ -39,6 +39,9 @@ jobs:
           extended: true
 
       - name: Seite bauen
+        env:
+          # Bild-URLs fürs jsDelivr-CDN versionieren (Cache: 1 Jahr + immutable)
+          HUGO_JSDELIVR_SHA: ${{ github.sha }}
         run: hugo --minify
 
       - name: Auf gh-pages-Branch veröffentlichen

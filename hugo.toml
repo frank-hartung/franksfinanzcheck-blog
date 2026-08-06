@@ -93,3 +93,9 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
     name = "date"
     weight = 10
     pattern = "2006"
+
+# Cover-Bilder: keine serverseitige Bildverarbeitung (Responsive-Srcset) –
+# stattdessen direkte Datei-URLs. Ermöglicht die Auslieferung über das
+# jsDelivr-CDN (Cache: 1 Jahr + immutable) statt GitHub Pages (max-age=600).
+[cover]
+  responsiveImages = false

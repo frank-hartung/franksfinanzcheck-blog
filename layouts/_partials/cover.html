@@ -20,9 +20,18 @@
     {{- end -}}
 
     {{- $imgdl := (.Params.cover.image) | absURL }}
-    {{- if $cover -}}
+    {{- /* jsDelivr-CDN: Bilder mit 1 Jahr Cache + immutable ausliefern
+           (GitHub Pages setzt hart max-age=600). Der Commit-SHA wird vom
+           Deploy-Workflow als HUGO_JSDELIVR_SHA injiziert; ohne ihn
+           (lokaler Build) bleiben die GitHub-Pages-URLs aktiv. */}}
+    {{- $jsdelivrSha := getenv "HUGO_JSDELIVR_SHA" }}
+    {{- if $jsdelivrSha }}
+        {{- $imgdl = printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s" $jsdelivrSha .Params.cover.image }}
+    {{- else if $cover }}
         {{- $imgdl = $cover.Permalink }}
-    {{- end -}}
+    {{- end }}
+    {{- /* Fallback, falls das CDN mal nicht erreichbar ist: gleiche Datei auf GitHub Pages */}}
+    {{- $imgFallback := (.Params.cover.image) | absURL }}
 
     {{- $imgWidth := (.Params.cover.width | default 1000) }}
     {{- $imgHeight := (.Params.cover.height | default 1500) }}
@@ -46,11 +55,11 @@
                 width="{{ $cover.Width }}" height="{{ $cover.Height }}"
                 alt="{{ $alt }}">
         {{- else }}{{/* Unprocessable image or responsive images disabled */}}
-            <img loading="{{ $loading }}" src="{{ $imgdl }}" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
+            <img loading="{{ $loading }}" src="{{ $imgdl }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
         {{- end }}
     {{- else }}
         {{- /* For absolute urls and external links, no img processing here */}}
-        <img loading="{{ $loading }}" src="{{ $imgdl }}" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
+        <img loading="{{ $loading }}" src="{{ $imgdl }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
     {{- end }}
 
     {{- if $addLink }}

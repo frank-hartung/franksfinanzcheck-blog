@@ -35,6 +35,12 @@ Diese Website wird bei einem externen Dienstleister gehostet (nach Abschluss des
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren, stabilen und effizienten Bereitstellung der Website). Mit dem Hoster wird ein **Auftragsverarbeitungsvertrag (AVV)** gemäß Art. 28 DSGVO geschlossen.
 
+### Content-Delivery-Network (jsDelivr)
+
+Zur schnellen Auslieferung von Bildern (Titelbilder der Artikel) nutzt diese Website das Content-Delivery-Network (CDN) **jsDelivr** der Firma Prospect One Sp. z o.o., Krótka 1/19, 05-500 Piaseczno, Polen (`cdn.jsdelivr.net`). Beim Abruf eines Bildes wird deine IP-Adresse sowie technische Daten (Browsertyp, Betriebssystem, Referrer, Uhrzeit der Anfrage) an die Server von jsDelivr übermittelt. jsDelivr betreibt Serverstandorte weltweit; eine Verarbeitung der IP-Adresse kann daher auch außerhalb der EU erfolgen. jsDelivr bietet ein Datenverarbeitungsabkommen an und verarbeitet die Daten nach eigenen Angaben ausschließlich zur Auslieferung der angeforderten Inhalte und zur Fehleranalyse – nicht zu Werbezwecken.
+
+**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer schnellen und zuverlässigen Auslieferung der Website-Inhalte). Weitere Informationen: [www.jsdelivr.com/privacy-policy-jsdelivr](https://www.jsdelivr.com/privacy-policy-jsdelivr).
+
 ### Server-Logfiles
 
 Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Logfiles, die dein Browser automatisch an uns übermittelt. Dies sind:
