@@ -8,7 +8,7 @@ categories: ["Ratgeber"]
 keywords: ["frugalismus tipps", "geld sparen im alltag", "haushaltsbuch führen", "sparmethoden"]
 author: ""
 cover:
-  image: "images/covers/frugalismus-im-alltag.jpg"
+  image: "images/covers/2026-08-06-frugalismus-im-alltag.jpg"
   alt: "Frugalismus im Alltag – Geld sparen leicht gemacht"
   caption: "Tipp von FranksFinanzcheck"
 ai_generated: true
