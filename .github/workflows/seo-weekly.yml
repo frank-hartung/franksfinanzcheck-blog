@@ -68,6 +68,29 @@ jobs:
             git push
           fi
 
+      - name: Meta-Daten-Optimierung (Title/Description/Keywords)
+        id: meta
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/meta_optimizer.py --fix --ai | tee /tmp/meta_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Meta-Änderungen committen
+        if: steps.meta.outcome == 'success'
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Meta-Änderungen"
+          else
+            git commit -m "seo: Meta-Daten optimiert (Title/Description/Keywords)"
+            git push
+          fi
+
       - name: IndexNow-Indexierung (neue Artikel einreichen)
         run: python3 scripts/submit_indexnow.py
 

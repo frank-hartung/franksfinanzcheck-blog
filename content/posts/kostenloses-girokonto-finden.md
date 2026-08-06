@@ -1,5 +1,5 @@
 ---
-title: "Kostenloses Girokonto ohne Gebühren: So findest du das richtige"
+title: "Kostenloses Girokonto ohne Gebühren: So findest du es"
 description: "Zahlst du noch Kontoführungsgebühren? Vergleiche kostenlose Girokonten, achte auf Konditionen und wechsle in wenigen Schritten – inkl. Startguthaben."
 date: 2026-08-04
 draft: false

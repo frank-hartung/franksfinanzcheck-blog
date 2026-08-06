@@ -1,5 +1,5 @@
 ---
-title: "Günstige Flüge für den Spätsommer: 7 Tricks, die funktionieren"
+title: "Günstige Flüge für den Spätsommer: 7 Tricks"
 description: "Flugtickets günstig buchen: Der beste Buchungszeitpunkt, flexible Daten, Vergleichsportale und versteckte Kosten – so sparst du beim Fliegen."
 date: 2026-08-04
 draft: false
