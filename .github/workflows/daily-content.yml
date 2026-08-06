@@ -62,6 +62,14 @@ jobs:
           AUTO_PUBLISH: "1"        # Veröffentlichung ohne manuellen Schritt
         run: python3 scripts/generate_drafts.py
 
+      - name: Cover-Bilder für neue Artikel generieren
+        # Der Bot erstellt Artikel ohne Cover – dieser Schritt erzeugt
+        # automatisch das Branding-Cover (1000x1500, Smaragdgrün/Gelb)
+        # und trägt es ins Frontmatter ein (nur falls noch keins existiert).
+        run: |
+          pip install -q pillow
+          python3 scripts/generate_covers.py
+
       - name: Einzigartigkeits-Audit (Qualitäts-Gate)
         # Prüft ALLE Artikel gegen die Pin-Texte + untereinander.
         # Bei kritischen Duplikaten bricht der Workflow ab (Exit 1) →
