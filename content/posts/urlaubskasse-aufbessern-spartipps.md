@@ -1,5 +1,5 @@
 ---
-title: "Urlaubskasse clever aufbessern: 7 erprobte Spartipps für den Sommerurlaub"
+title: "Urlaubskasse aufbessern: 7 Spartipps für den Sommerurlaub"
 description: "Mit diesen 7 Tipps bleibt nach dem Sommerurlaub noch Geld in der Kasse: früh buchen, smart vergleichen und bei Ausflügen sparen."
 date: 2026-08-04
 draft: false

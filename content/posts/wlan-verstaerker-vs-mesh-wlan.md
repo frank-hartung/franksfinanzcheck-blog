@@ -1,5 +1,5 @@
 ---
-title: "WLAN-Verstärker vs. Mesh-WLAN: So bekommst du überall schnelles Internet"
+title: "WLAN-Verstärker vs. Mesh-WLAN: Schnelles Internet zuhause"
 description: "Ist dein WLAN zu langsam? Der Unterschied zwischen Repeater und Mesh-Netzwerk, wann sich was lohnt und wie du dein Heimnetzwerk optimierst."
 date: 2026-08-04
 draft: false

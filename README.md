@@ -63,6 +63,21 @@ Hashtags) über die Pinterest API v5. Jeder Artikel wird nur einmal gepinnt
 - Pinterest-Developer-App + Access-Token → Secret `PINTEREST_ACCESS_TOKEN`
 - Board-ID (`python3 scripts/generate_pins.py --list-boards`) → Variable `PINTEREST_BOARD_ID`
 
+**🔍 Automatische SEO-Optimierung (wöchentlich, kostenlos, Profi-Niveau):**
+
+Der Workflow **„Wöchentliche SEO-Optimierung"** läuft jeden Mittwoch 07:00 Uhr (DE):
+
+1. **SEO-Audit** (`python3 scripts/seo_audit.py`): prüft alle 30+ Artikel auf
+   Titel-Länge (30-65 Zeichen), Meta-Description (70-165), Keywords, H2-Struktur,
+   Alt-Texte, interne Links, Wortanzahl (min. 300) und Sitemap-Konsistenz.
+   Bei Problemen → automatisches GitHub-Issue mit Details.
+2. **Bing-Indexierung** (`python3 scripts/submit_bing.py`): reicht neue Artikel
+   automatisch bei Bing ein (kostenlose Bing-Webmaster-API) – Bing speist auch
+   DuckDuckGo und die ChatGPT-Suche. Einmalig: `BING_API_KEY` als Secret
+   (Bing Webmaster Tools → kostenlos → API-Key).
+3. **Google:** Sitemap bereits eingereicht; zusätzlich empfohlen: Google Search
+   Console „Indexierung anfordern" nach Veröffentlichung (manuell, 30 Sekunden).
+
 **Automatisches Einzigartigkeits-Audit (Qualitäts-Gate):**
 - **Nach jeder Bot-Veröffentlichung** läuft `scripts/check_uniqueness.py` automatisch mit:
   - Findet der Check kritische Duplikate (≥5 gleiche 7-Wort-Phrasen oder Pin-Konflikt),
