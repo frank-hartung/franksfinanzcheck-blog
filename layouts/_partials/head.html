@@ -98,12 +98,11 @@
 {{- end }}
 {{- end -}}
 
-{{- /* Favicons */}}
-<link rel="icon" href="{{ site.Params.assets.favicon | default "favicon.ico" | absURL }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ site.Params.assets.favicon16x16 | default "favicon-16x16.png" | absURL }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ site.Params.assets.favicon32x32 | default "favicon-32x32.png" | absURL }}">
-<link rel="apple-touch-icon" href="{{ site.Params.assets.apple_touch_icon | default "apple-touch-icon.png" | absURL }}">
-<link rel="mask-icon" href="{{ site.Params.assets.safari_pinned_tab | default "safari-pinned-tab.svg" | absURL }}">
+{{- /* Favicons: favicon.ico als Data-URI inline – spart einen Request und
+       umgeht den kurzen GitHub-Pages-Cache (max-age=600). Die anderen
+       Icon-Formate (16x16/32x32/apple-touch/mask) existieren nicht als
+       Dateien und wurden entfernt (keine 404-Requests mehr). */}}
+<link rel="icon" href="data:image/x-icon;base64,AAABAAEAQEAAAAAAIAB1AQAAFgAAAIlQTkcNChoKAAAADUlIRFIAAABAAAAAQAgCAAAAJQvmiQAAATxJREFUeJztmcsRwkAMQwnDGYqiCmiQKiiKDjjshUlgs7bkEZlIV0DozX5sJ9P5fj1sWUd1AFQGUMsAahlALQOoZQC1DKDWqcL0dXv++ujyIDe/E7Gd7uReikXCAQhF/xSOQTgD6fTgb5tQADwB6AAB4OlxnzwAKz3olgTgpkc8MwAV6dPOYYC69Dn/kkrcNLvji8hjhWwwRKc84Q4z8Zu5/n/TeyEywEg+LkMAYHX1x5OtfnP8wGx+HqABRDcGayN5BdQygFo0gGinwOos9rQCxOpDrInkFRhh4Lal/C3Uz0dvqsPPhcYTpOeBUJEuHGiqZ7em8BaiN/Sgf+YM1DEknJOHuIIh55m/hbgMaTfoGmUxID5oHcAZQAdCIUMS4Px+Q/NNW31HJtGe5oH/lAHUMoBaBlDLAGoZQK03O2lt3ms09kEAAAAASUVORK5CYII=">
 <meta name="theme-color" content="{{ site.Params.assets.theme_color | default "#2e2e33" }}">
 <meta name="msapplication-TileColor" content="{{ site.Params.assets.msapplication_TileColor | default "#2e2e33" }}">
 
