@@ -1,31 +1,43 @@
 ---
-title: "Über diesen Blog"
-description: "Wer wir sind und was dieser Blog bietet"
+title: "Über mich und diesen Blog"
+description: "Über Frank Hartung und FranksFinanzcheck – der unabhängige Ratgeber für Geld sparen, Frugalismus, Tarifvergleiche und clevere Finanz-Tipps."
 draft: false
-showToc: false
+showToc: true
 ---
 
-**FranksFinanzcheck** ist dein Ratgeber fürs Geld sparen – ohne Verzicht: Frugalismus-Tricks, Budgetplanung mit der 50-30-20-Regel, Notgroschen-Aufbau und clevere Vergleichstipps zu Strom, Gas, DSL, Versicherungen und Reisen.
+## Wer steckt hinter FranksFinanzcheck?
 
-Unser Ziel: Dir helfen, die besten Tarife zu finden und im Alltag smarter mit Geld umzugehen – ohne Fachchinesisch und ohne versteckte Kosten.
+Hallo, ich bin **Frank Hartung** – der Autor hinter FranksFinanzcheck. Dieser Blog ist aus einer einfachen Erkenntnis entstanden: **Viele Menschen zahlen Jahr für Jahr zu viel** – für Strom, Gas, Internet, Versicherungen und Reisen – einfach weil sie nie vergleichen. Dabei dauert ein Wechsel heute nur wenige Minuten und spart oft mehrere hundert Euro im Jahr.
 
-## Transparenz
-Dieser Blog nimmt am CHECK24-Partnerprogramm teil. Das heißt: Wenn du über unsere Empfehlungslinks etwas buchst oder einen Vertrag abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Inhalte entstehen unabhängig davon; wir empfehlen nur, was wir selbst sinnvoll finden.
+Mein Ziel ist es, das zu ändern: **Geld sparen ohne Verzicht** – verständlich erklärt, ehrlich und ohne Fachchinesisch. Ich teste Tarife, lese Kleingedrucktes und fasse zusammen, worauf es wirklich ankommt – damit du schneller und besser informiert entscheidest.
 
-## Auch auf Pinterest 📌
+## Was dich auf diesem Blog erwartet
 
-Alle Artikel gibt es auch als Infografiken und Pins auf meinem Pinterest-Profil:
+- **Frugalismus & Budgetplanung:** Praxistipps wie die 50-30-20-Regel, Notgroschen-Aufbau und Sparmethoden für den Alltag
+- **Tarifvergleiche:** Strom, Gas, DSL, Handy – Schritt für Schritt zum günstigeren Tarif
+- **Versicherungen:** Kfz, Haftpflicht, Hausrat, Zahnzusatz – was du wirklich brauchst und was nicht
+- **Reisen & Finanzen:** Günstig buchen, Mietwagen-Fallen vermeiden, Kredite clever vergleichen
 
-👉 **[FranksFinanzcheck auf Pinterest](https://www.pinterest.de/franksfinanzcheck/)**
+Die Artikel erscheinen **laufend neu** – auch als Infografiken auf [meinem Pinterest-Profil](https://www.pinterest.de/franksfinanzcheck/).
 
-Pinwand für Pinwand mit den gleichen Themen:
-- **Geld sparen & Frugalismus**
-- **Haushaltskasse & Budgetplanung**
-- **Günstige Strom- & Gastarife**
-- **Internet- & DSL-Hacks**
-- **Reisebudget & Mietwagen**
+## So arbeite ich
 
-Folge mir dort, um keine neue Infografik und keinen neuen Spartipp zu verpassen!
+1. **Ich recherchiere selbst:** Die Inhalte basieren auf öffentlich zugänglichen Informationen, Tarifbedingungen und Anbieterangaben – nicht auf Hörensagen.
+2. **Ich erkläre verständlich:** Kein Fachchinesisch, keine versteckten Fußnoten. Wenn etwas kompliziert ist, sage ich es.
+3. **Ich bleibe unabhängig:** Empfehlungen entstehen aus Recherche und Erfahrung – nicht aus dem höchsten Provisionsversprechen.
+
+## Transparenz: Affiliate-Links
+
+Damit dieser Blog kostenlos bleibt, nimmt er am **CHECK24-Partnerprogramm** (über das Awin-Netzwerk) sowie am Partnerprogramm von **Tarifcheck** teil. Das heißt: Wenn du über einen Empfehlungslink auf dieser Seite etwas buchst, einen Vertrag abschließt oder kaufst, erhalte ich eine Provision – **für dich entstehen keine Mehrkosten**.
+
+**Wichtig für dich:** Die Provision hat **keinen Einfluss** auf meine Inhalte. Ich empfehle nur, was ich selbst für sinnvoll halte, und kennzeichne Affiliate-Links transparent als Werbung. Alle Artikel lassen sich auch ohne einen einzigen Klick auf einen Link vollständig lesen.
+
+## Kontakt
+
+Du hast eine Frage, einen Themenwunsch oder Anmerkungen? Schreib mir gern eine E-Mail an **frankhartung@web.de** – ich freue mich über Feedback und lese jede Nachricht.
 
 ## Keine Beratung
-Unsere Artikel ersetzen keine individuelle Finanz-, Rechts- oder Versicherungsberatung. Tarife und Konditionen ändern sich ständig – prüfe Angebote vor Abschluss immer selbst auf der jeweiligen Anbieter-Website.
+
+Die Artikel auf FranksFinanzcheck ersetzen **keine individuelle Finanz-, Rechts- oder Versicherungsberatung**. Tarife, Preise und Konditionen ändern sich ständig – prüfe Angebote vor Abschluss daher immer selbst auf der jeweiligen Anbieter-Website.
+
+*Stand: August 2026*
