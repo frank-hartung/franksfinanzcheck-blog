@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Heizkosten sparen", "Gas", "Herbst Vorbereitung"]
 categories: ["Günstige Strom- & Gastarife"]
-keywords: ["Heizperiode vorbereiten", "Heizkosten sparen", "Gasrechnung senken", "Heizung prüfen"]
+keywords: ["Heizperiode vorbereiten", "Heizkosten sparen", "Gasrechnung senken", "Heizung prüfen", "Heizkosten reduzieren", "Energiekosten sparen"]
 author: "Frank"
 cover:
   image: "/images/covers/heizperiode-vorbereiten-spaetsommer.jpg"

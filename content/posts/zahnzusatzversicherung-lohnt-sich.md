@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Zahnzusatz", "Versicherung", "Gesundheit"]
 categories: ["Versicherungen"]
-keywords: ["Zahnzusatzversicherung", "Zahnarztkosten sparen", "Zahnersatz versichern"]
+keywords: ["Zahnzusatzversicherung", "Zahnarztkosten sparen", "Zahnersatz versichern", "Zusatzversicherung Zahnarzt", "Zahnzusatzversicherung Vergleich"]
 author: "Frank"
 cover:
   image: "/images/covers/zahnzusatzversicherung-lohnt-sich.jpg"

@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Last Minute", "Reisen", "Urlaub"]
 categories: ["Reisebudget & Mietwagen"]
-keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Sommerurlaub Schnäppchen"]
+keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Sommerurlaub Schnäppchen", "Last Minute Reisen", "Günstiger Urlaub"]
 author: "Frank"
 cover:
   image: "/images/covers/last-minute-urlaubsangebote-sichern.jpg"

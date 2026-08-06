@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Gas", "Heizkosten sparen", "Tarifwechsel"]
 categories: ["Günstige Strom- & Gastarife"]
-keywords: ["Gastarife vergleichen", "Heizkosten senken", "Gasvergleich", "Gaskosten sparen"]
+keywords: ["Gastarife vergleichen", "Heizkosten senken", "Gasvergleich", "Gaskosten sparen", "Gastarife im Vergleich", "Strom und Gas vergleichen"]
 author: "Frank"
 cover:
   image: "/images/covers/gastarife-vergleichen-vor-dem-herbst.jpg"

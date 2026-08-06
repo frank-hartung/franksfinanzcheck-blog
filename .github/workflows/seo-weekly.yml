@@ -45,12 +45,28 @@ jobs:
           python3 scripts/seo_audit.py | tee /tmp/seo_audit_log.txt
           exit ${PIPESTATUS[0]}
 
-      - name: Keyword-Optimierungs-Audit
+      - name: Keyword-Optimierungs-Audit + KI-LSI-Vorschläge
         id: kw
         continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          python3 scripts/keyword_optimizer.py | tee /tmp/kw_audit_log.txt
+          python3 scripts/keyword_optimizer.py --ai --apply | tee /tmp/kw_audit_log.txt
           exit ${PIPESTATUS[0]}
+
+      - name: LSI-Keyword-Änderungen committen
+        if: steps.kw.outcome == 'success'
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Keyword-Änderungen"
+          else
+            git commit -m "seo: LSI-Keywords für neue Artikel ergänzt (KI-Vorschläge)"
+            git push
+          fi
 
       - name: IndexNow-Indexierung (neue Artikel einreichen)
         run: python3 scripts/submit_indexnow.py

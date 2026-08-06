@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Handytarif", "Handyvertrag", "Telekommunikation"]
 categories: ["Internet- & DSL-Hacks"]
-keywords: ["Handytarif vergleichen", "Handyvertrag wechseln", "Günstiger Handytarif"]
+keywords: ["Handytarif vergleichen", "Handyvertrag wechseln", "Günstiger Handytarif", "Handytarif vergleichen online", "günstige Handytarife"]
 author: "Frank"
 cover:
   image: "/images/covers/handytarife-vergleichen-guenstigster-tarif.jpg"

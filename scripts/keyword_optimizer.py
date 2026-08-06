@@ -126,16 +126,33 @@ def check_article(a):
         issues.append(f"Keyword-Dichte sehr niedrig ({density*100:.2f}%)")
 
     return {"file": a["file"], "title": a["title"][:45], "score": round(score),
-            "issues": issues, "density": round(density * 100, 2)}
+            "issues": issues, "density": round(density * 100, 2),
+            "main_kw": main_kw, "keywords": a["keywords"]}
 
 
-def ai_suggest(main_kw):
-    """Optional: verwandte Keywords per Gemini/Groq vorschlagen."""
+CACHE_FILE = os.path.join(BLOG_DIR, ".keyword_suggestions.json")
+
+
+def load_cache():
+    if os.path.exists(CACHE_FILE):
+        try:
+            with open(CACHE_FILE, encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return {}
+    return {}
+
+
+def save_cache(cache):
+    with open(CACHE_FILE, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False, indent=1)
+
+
+def _call_ai(prompt):
+    """Ruft Gemini (bevorzugt) oder Groq auf. Liefert Antworttext oder None."""
     import urllib.request
 
-    prompt = (f"Gib für das Haupt-Keyword '{main_kw}' eines deutschen Finanz-/Spar-Blogs "
-              f"genau 5 verwandte Suchbegriffe (LSI-Keywords) zurück – nur die Begriffe, "
-              f"durch Komma getrennt, ohne Einleitung.")
+    ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 
     gemini_key = os.environ.get("GEMINI_API_KEY", "")
     if gemini_key:
@@ -144,8 +161,7 @@ def ai_suggest(main_kw):
             req = urllib.request.Request(
                 "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=" + gemini_key,
                 data=json.dumps(body).encode(),
-                headers={"Content-Type": "application/json",
-                         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) Chrome/126.0"})
+                headers={"Content-Type": "application/json", "User-Agent": ua})
             resp = json.loads(urllib.request.urlopen(req, timeout=60).read())
             return resp["candidates"][0]["content"]["parts"][0]["text"]
         except Exception:
@@ -155,13 +171,13 @@ def ai_suggest(main_kw):
     if groq_key:
         try:
             body = {"model": "llama-3.3-70b-versatile",
-                    "messages": [{"role": "user", "content": prompt}], "max_tokens": 100}
+                    "messages": [{"role": "user", "content": prompt}], "max_tokens": 200}
             req = urllib.request.Request(
                 "https://api.groq.com/openai/v1/chat/completions",
                 data=json.dumps(body).encode(),
                 headers={"Content-Type": "application/json",
                          "Authorization": f"Bearer {groq_key}",
-                         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) Chrome/126.0"})
+                         "User-Agent": ua})
             resp = json.loads(urllib.request.urlopen(req, timeout=60).read())
             return resp["choices"][0]["message"]["content"]
         except Exception:
@@ -169,21 +185,94 @@ def ai_suggest(main_kw):
     return None
 
 
+def ai_suggest(main_kw):
+    """Liefert 5 verwandte LSI-Keywords per KI (mit Cache)."""
+    cache = load_cache()
+    if main_kw in cache:
+        return cache[main_kw]
+
+    if not (os.environ.get("GEMINI_API_KEY") or os.environ.get("GROQ_API_KEY")):
+        return None
+
+    prompt = (f"Für das Haupt-Keyword '{main_kw}' eines deutschen Finanz-/Spar-Blogs: "
+              f"nenne genau 5 verwandte Suchbegriffe (LSI-Keywords), die Nutzer zusätzlich "
+              f"googeln. Antwort: NUR die 5 Begriffe, durch Komma getrennt, "
+              f"ohne Nummerierung und ohne Einleitung.")
+
+    raw = _call_ai(prompt)
+    if not raw:
+        return None
+
+    # Bereinigen: nur die Begriffe extrahieren
+    import re as _re
+    parts = [p.strip().strip("\"\"'") for p in _re.split(r"[,\n;]", raw) if p.strip()]
+    # Nummerierungen entfernen ("1. ", "1)", "- ")
+    parts = [_re.sub(r"^[\d\-\*\.\s\)]+", "", p).strip() for p in parts]
+    parts = [p for p in parts if p and len(p) > 2]
+    result = parts[:5]
+
+    if result:
+        cache[main_kw] = result
+        save_cache(cache)
+    return result
+
+
+def apply_suggestions(articles, suggestions):
+    """Fügt bis zu 2 neue LSI-Keywords ins Frontmatter ein (echte Optimierung)."""
+    applied = 0
+    for a in articles:
+        kw = a.get("main_kw")
+        if not kw or kw not in suggestions:
+            continue
+        existing = [norm(k) for k in a["keywords"]]
+        new_kws = [k for k in suggestions[kw] if norm(k) not in existing and norm(k) != norm(kw)]
+        to_add = new_kws[:2]
+        if not to_add:
+            continue
+        fn = os.path.join(POSTS_DIR, a["file"])
+        content = open(fn, encoding="utf-8").read()
+        # Keywords-Liste im Frontmatter erweitern
+        import re as _re
+        m = _re.search(r"^keywords:\s*\[(.+?)\]", content, _re.M)
+        if m:
+            old_list = m.group(1)
+            new_items = ", ".join(f'"{k}"' for k in to_add)
+            content = content[:m.start()] + f"keywords: [{old_list}, {new_items}]" + content[m.end():]
+            open(fn, "w", encoding="utf-8").write(content)
+            applied += 1
+            print(f"  ✓ {a['file'][:40]}: +{', '.join(to_add)}")
+    return applied
+
+
 def main():
     as_json = "--json" in sys.argv
     with_ai = "--ai" in sys.argv
+    apply = "--apply" in sys.argv
 
     articles = load_articles()
     results = [check_article(a) for a in articles]
     avg = sum(r["score"] for r in results) / len(results) if results else 0
     critical = [r for r in results if r["score"] < 60]
 
+    # KI-Vorschläge einmal sammeln (mit Cache, nur fehlende werden angefragt)
+    suggestions = {}
+    if with_ai:
+        print("⏳ KI-Keyword-Vorschläge werden generiert (einmalig pro Keyword, gecacht)…")
+        for r in results:
+            kw = r.get("main_kw")
+            if kw:
+                suggestions[kw] = ai_suggest(kw)
+        generated = sum(1 for v in suggestions.values() if v)
+        print(f"   → {generated} Keyword-Vorschläge generiert/geladen")
+        if apply:
+            print("\n📝 Wende LSI-Keywords auf Artikel an:")
+            n = apply_suggestions(results, suggestions)
+            print(f"   → {n} Artikel um LSI-Keywords erweitert\n")
+
     if as_json:
         out = {"articles": len(results), "avg_score": round(avg, 1),
-               "critical": len(critical), "details": results}
-        if with_ai:
-            for r in results:
-                r["ai_keywords"] = ai_suggest(r.get("main_kw", ""))
+               "critical": len(critical), "details": results,
+               "suggestions": suggestions}
         print(json.dumps(out, ensure_ascii=False, indent=2))
         sys.exit(1 if critical else 0)
 
@@ -193,10 +282,9 @@ def main():
         print(f"{flag} {r['score']:>3}/100  {r['title']}  (Dichte: {r['density']}%)")
         for i in r["issues"][:3]:
             print(f"      • {i}")
-        if with_ai:
-            sug = ai_suggest(r.get("main_kw", ""))
-            if sug:
-                print(f"      💡 LSI: {sug[:120]}")
+        kw = r.get("main_kw")
+        if kw and suggestions.get(kw):
+            print(f"      💡 LSI: {', '.join(suggestions[kw])}")
 
     print(f"\nErgebnis: {len(critical)} Artikel unter 60 Punkten (kritisch)")
     if critical:

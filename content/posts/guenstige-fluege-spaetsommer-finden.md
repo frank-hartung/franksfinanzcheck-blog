@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Flüge", "Reisen", "Reisebudget"]
 categories: ["Reisebudget & Mietwagen"]
-keywords: ["Günstige Flüge", "Flugtickets günstig", "Flugvergleich", "Reisebudget sparen"]
+keywords: ["Günstige Flüge", "Flugtickets günstig", "Flugvergleich", "Reisebudget sparen", "Billige Flugtickets", "Günstige Flugangebote"]
 author: "Frank"
 cover:
   image: "/images/covers/guenstige-fluege-spaetsommer-finden.jpg"

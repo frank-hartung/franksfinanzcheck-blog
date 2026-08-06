@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Urlaub sparen", "Reisebudget", "Günstig reisen"]
 categories: ["Reisebudget & Mietwagen"]
-keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig reisen"]
+keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig reisen", "Urlaub günstig buchen", "Urlaubs sparvertrag"]
 author: "Frank"
 cover:
   image: "/images/covers/urlaubskasse-aufbessern-spartipps.jpg"

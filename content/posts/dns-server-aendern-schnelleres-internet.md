@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["DNS", "Internet", "DSL Tipps"]
 categories: ["Internet- & DSL-Hacks"]
-keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps"]
+keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps", "DNS Server ändern", "Bester DNS Server"]
 author: "Frank"
 cover:
   image: "/images/covers/dns-server-aendern-schnelleres-internet.jpg"

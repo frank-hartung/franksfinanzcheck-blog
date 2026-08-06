@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Notgroschen", "Tagesgeld", "Finanzielle Sicherheit"]
 categories: ["Haushaltskasse & Budgetplanung"]
-keywords: ["Notgroschen aufbauen", "Tagesgeld", "Finanzielle Sicherheit"]
+keywords: ["Notgroschen aufbauen", "Tagesgeld", "Finanzielle Sicherheit", "Notgroschen anlegen", "Notfallfonds aufbauen"]
 author: "Frank"
 cover:
   image: "/images/covers/notgroschen-aufbauen-wie-viel-reicht.jpg"

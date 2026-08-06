@@ -5,7 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Reise", "Versicherung", "Ausland"]
 categories: ["Reisebudget & Mietwagen"]
-keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschutz"]
+keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschutz", "Reiseversicherung", "Auslandsreiseversicherung"]
 author: "Frank"
 cover:
   image: "/images/covers/reisekrankenversicherung-wann-lohnt.jpg"
