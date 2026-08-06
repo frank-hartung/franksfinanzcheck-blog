@@ -21,8 +21,9 @@
 {{- else }}
 <body id="top">
 {{- end }}
+    <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
     {{ partialCached "header.html" . .Page -}}
-    <main class="main">
+    <main class="main" id="main-content">
         {{- block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . -}}

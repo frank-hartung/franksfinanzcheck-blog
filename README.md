@@ -90,6 +90,18 @@ Der Workflow **„Wöchentliche SEO-Optimierung"** läuft jeden Mittwoch 07:00 U
 3. **Optional KI-Vorschläge:** `python3 scripts/keyword_optimizer.py --ai`
    schlägt verwandte LSI-Keywords pro Artikel vor (nutzt deine Gratis-KI-Keys).
 
+**♿ Automatische Barrierefreiheit (WCAG 2.1, Top-Niveau):**
+
+Der Blog ist barrierefrei umgesetzt und wird wöchentlich geprüft
+(`python3 scripts/a11y_audit.py` – auch im SEO-Workflow):
+- Skip-Link „Zum Inhalt springen" (Tastatur-Navigation)
+- Sichtbare Fokus-Stile auf allen interaktiven Elementen
+- `prefers-reduced-motion` (Animationen für empfindliche Nutzer aus)
+- `aria-hidden` für alle dekorativen Emojis (Screenreader-freundlich)
+- Consent-Banner: `role="region"`, Escape zum Schließen, Fokus-Management
+- Alle Bilder mit Alt-Texten, genau 1 h1 pro Seite, `lang="de"`
+- Farbkontraste geprüft gegen WCAG AA (alle ≥ 4.5:1, meist 7:1+)
+
 **Automatisches Einzigartigkeits-Audit (Qualitäts-Gate):**
 - **Nach jeder Bot-Veröffentlichung** läuft `scripts/check_uniqueness.py` automatisch mit:
   - Findet der Check kritische Duplikate (≥5 gleiche 7-Wort-Phrasen oder Pin-Konflikt),

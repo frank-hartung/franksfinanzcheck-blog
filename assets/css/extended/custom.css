@@ -306,3 +306,80 @@ h1, h2, h3, h4, h5, h6,
         width: 100%;
     }
 }
+
+/* ============================================================
+   BARRIEREFREIHEIT (Accessibility / A11y)
+   ============================================================ */
+
+/* ---------- Skip-Link (Tastatur-Navigation) ---------- */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100000;
+    background: var(--ff-emerald);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 0 0 8px 0;
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    left: 0;
+    outline: 3px solid var(--ff-yellow);
+    outline-offset: 0;
+}
+
+/* ---------- Sichtbarer Fokus für ALLE interaktiven Elemente ---------- */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--ff-yellow) !important;
+    outline-offset: 2px !important;
+    border-radius: 4px;
+}
+
+/* ---------- prefers-reduced-motion: Animationen deaktivieren ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .post-entry:hover,
+    .ff-pinterest-cta-btn:hover,
+    .pin-article a:hover {
+        transform: none !important;
+    }
+}
+
+/* ---------- Kontrast-Verbesserungen ---------- */
+/* Sekundärtext dunkler (min. 4.5:1 auf Weiß) */
+.ff-related span,
+.pin-article p {
+    color: #444 !important;
+}
+
+/* Home-Info: Links auf Grün klar erkennbar */
+.home-info .entry-content a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+}
+
+/* ---------- Screenreader-only (visuell versteckt) ---------- */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
