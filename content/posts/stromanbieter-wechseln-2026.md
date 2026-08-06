@@ -1,5 +1,5 @@
 ---
-title: "Stromanbieter wechseln: So sparst du 2026 bis zu 300 € im Jahr"
+title: "Stromanbieter wechseln: So sparst du 2026"
 description: "Stromwechsel in 5 Schritten: Preise vergleichen, kündigen, umsteigen. Mit Checkliste und den häufigsten Fehlern, die dich Geld kosten."
 date: 2026-08-04
 draft: false
