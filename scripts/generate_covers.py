@@ -137,7 +137,7 @@ def ensure_cover_in_frontmatter(md_path, slug):
         content = f.read()
     if re.search(r"^cover:", content, re.M):
         return False  # Cover existiert bereits
-    image_path = f"/images/covers/{slug}.jpg"
+    image_path = f"images/covers/{slug}.jpg"   # OHNE Slash: Hugo absURL + Subdir-BaseURL
     block = (
         f"cover:\n"
         f'  image: "{image_path}"\n'

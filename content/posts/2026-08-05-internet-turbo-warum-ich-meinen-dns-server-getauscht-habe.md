@@ -10,6 +10,10 @@ author: ""
 ai_generated: true
 ai_provider: "Gemini (Gratis-Key: aistudio.google.com)"
 inspiration: Pin 6 – „DNS-Server ändern für schnelleres Internet“ (nur Themen-Grundlage, eigenständig formuliert)
+cover:
+  image: "images/covers/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe.jpg"
+  alt: "Spar-Tipp: DNS-Server wechseln für schnelleres Internet"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Kennst du das Gefühl, wenn du eine Webseite aufrufst und für einen Moment gar nichts passiert, bevor die Seite plötzlich lädt? Genau dieses Problem hatte ich vor ein paar Wochen. Obwohl mein DSL-Vertrag eigentlich eine hohe Bandbreite verspricht, fühlte sich das Surfen zäh an, fast so, als müsste mein Browser jedes Mal erst tief Luft holen. Nach einer kurzen Recherche stieß ich auf die Lösung: Der DNS-Server meines Internetanbieters war schlichtweg zu langsam. Ich habe die Einstellungen kurzerhand selbst in die Hand genommen und möchte dir hier zeigen, wie auch du mit diesem kleinen Kniff dein Surferlebnis verbessern kannst.
