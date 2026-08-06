@@ -183,6 +183,13 @@ Oder manuell: Datei öffnen → `draft: true` → `draft: false` → pushen.
 
 **Themen erweitern:** `data/topics.yaml` öffnen, neue Zeilen ergänzen – fertig.
 
+**🛡️ Lösch-Schutz (verhindert Datenverlust):**
+
+Der Bot unterscheidet strikt zwischen echten Artikeln und Demo-Dateien.
+Nur Dateien mit dem Marker `demo-artikel` im Inhalt dürfen aufgeräumt
+werden – echte Artikel (auch Bot-generierte) sind vor versehentlichem
+Löschen geschützt (`demo_files()`-Check im Skript).
+
 **Einzigartigkeits-Audit für bestehende Artikel:**
 ```bash
 python3 scripts/check_uniqueness.py            # Standard-Check (7-Wort-Phrasen)

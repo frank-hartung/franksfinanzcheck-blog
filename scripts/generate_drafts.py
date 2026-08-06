@@ -102,6 +102,21 @@ def load_topics():
     return topics
 
 
+def demo_files():
+    """Findet Demo-Artikel (mit Marker 'demo-artikel' im Inhalt) – NUR diese
+    dürfen vom Aufräum-Prozess gelöscht werden. Schützt echte Bot-Artikel."""
+    demos = []
+    if not os.path.isdir(POSTS_DIR):
+        return demos
+    for fn in os.listdir(POSTS_DIR):
+        if not fn.endswith(".md"):
+            continue
+        with open(os.path.join(POSTS_DIR, fn), encoding="utf-8") as f:
+            if "demo-artikel" in f.read():
+                demos.append(fn)
+    return demos
+
+
 def existing_titles():
     """Listet bereits vorhandene Artikel-Titel (für Duplikat-Schutz)."""
     titles = set()
