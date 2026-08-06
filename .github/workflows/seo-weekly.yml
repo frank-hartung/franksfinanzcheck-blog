@@ -1,0 +1,83 @@
+# ============================================================
+#  WÖCHENTLICHES SEO-AUTOMATISIERUNG (kostenlos, Profi-Niveau)
+#
+#  Läuft jeden Mittwoch um 07:00 Uhr (DE):
+#    1. SEO-Audit: prüft alle Artikel (Titel, Description, Keywords,
+#       Struktur, Alt-Texte, interne Links, Wortanzahl, Sitemap)
+#    2. Bing-Indexierung: reicht neue Artikel automatisch bei Bing ein
+#       (kostenlose Bing-Webmaster-API – Bing speist auch DuckDuckGo)
+#    3. Report: Bei kritischen Problemen wird ein GitHub-Issue erstellt
+#
+#  VORAUSSETZUNG (einmalig, kostenlos):
+#    - Bing Webmaster Tools: https://www.bing.com/webmasters
+#      → Website verifizieren → API-Key holen
+#      → Secret: BING_API_KEY
+#
+#  Manuell starten: GitHub → Actions → "Wöchentliche SEO-Optimierung"
+# ============================================================
+name: Wöchentliche SEO-Optimierung
+
+on:
+  schedule:
+    - cron: "0 5 * * 3"    # Mittwoch 07:00 Uhr MESZ (05:00 UTC)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Hugo-Build für Sitemap-Check
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+
+      - name: SEO-Audit ausführen
+        id: audit
+        continue-on-error: true
+        run: |
+          hugo --minify > /dev/null 2>&1
+          python3 scripts/seo_audit.py | tee /tmp/seo_audit_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Bing-Indexierung (neue Artikel einreichen)
+        env:
+          BING_API_KEY: ${{ secrets.BING_API_KEY }}
+        run: python3 scripts/submit_bing.py
+
+      - name: Bing-Status committen
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen"
+          else
+            git commit -m "seo: Bing-Indexierungs-Status aktualisiert"
+            git push
+          fi
+
+      - name: Issue bei kritischen SEO-Problemen erstellen
+        if: steps.audit.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let details = 'SEO-Audit hat kritische Probleme gefunden.';
+            try {
+              details = fs.readFileSync('/tmp/seo_audit_log.txt', 'utf-8');
+            } catch (e) {}
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🔍 SEO-Audit: Optimierungsbedarf gefunden',
+              body: '```\n' + details + '\n```\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow.'
+            });
+            console.log('✅ Issue erstellt');

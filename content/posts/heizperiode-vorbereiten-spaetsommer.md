@@ -1,5 +1,5 @@
 ---
-title: "Heizperiode vorbereiten im Spätsommer: 3 Dinge, die du im August tun musst"
+title: "Heizperiode vorbereiten: 3 Dinge für den August"
 description: "Bereite Heizung und Gasverträge im Spätsommer vor! Wer jetzt prüft, vermeidet teure Überraschungen im Winter – mit Checkliste."
 date: 2026-08-04
 draft: false

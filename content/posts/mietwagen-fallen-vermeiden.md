@@ -1,5 +1,5 @@
 ---
-title: "Mietwagen-Fallen im Urlaub vermeiden: Worauf du bei Versicherung & Kaution achten musst"
+title: "Mietwagen-Fallen vermeiden: Versicherung & Kaution im Urlaub"
 description: "Versteckte Kosten beim Mietwagen? So schützt du dich vor teuren Zusatzversicherungen und Kautions-Abzocke im Ausland."
 date: 2026-08-04
 draft: false

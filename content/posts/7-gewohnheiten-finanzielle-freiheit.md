@@ -1,5 +1,5 @@
 ---
-title: "7 Gewohnheiten für finanzielle Freiheit: Kleine Schritte, große Wirkung"
+title: "7 Gewohnheiten für finanzielle Freiheit"
 description: "Finanzielle Unabhängigkeit beginnt im Kopf. Lerne 7 tägliche Routinen kennen, die deinen Vermögensaufbau nachhaltig beschleunigen."
 date: 2026-08-04
 draft: false

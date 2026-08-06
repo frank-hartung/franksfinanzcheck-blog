@@ -1,5 +1,5 @@
 ---
-title: "Die 50-30-20-Regel einfach erklärt: Die perfekte Formel für deine Finanzen"
+title: "Die 50-30-20-Regel: Die perfekte Formel für deine Finanzen"
 description: "So strukturierst du dein Gehalt optimal: 50 % Fixkosten, 30 % Freizeit, 20 % Sparen. Die einfachste Budgetierungsmethode, Schritt für Schritt erklärt."
 date: 2026-08-04
 draft: false
