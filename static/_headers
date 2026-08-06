@@ -1,0 +1,15 @@
+# Cache-Header für Cloudflare Pages / Netlify
+# (GitHub Pages ignoriert diese Datei – sie greift beim Umzug auf
+#  Cloudflare Pages oder Netlify automatisch)
+
+# Fingerprinted Assets (Hash im Namen) → 1 Jahr cachen (immutable)
+/assets/*
+  Cache-Control: max-age=31536000, immutable
+
+# Bilder → 30 Tage
+/images/*
+  Cache-Control: max-age=2592000
+
+# HTML-Seiten → kurz cachen (immer aktuell)
+/*
+  Cache-Control: max-age=600
