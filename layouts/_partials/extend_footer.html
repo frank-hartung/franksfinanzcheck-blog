@@ -76,12 +76,18 @@
   window.ffConsentShow = function () {
     if (banner) {
       banner.style.display = 'block';
-      // Fokus auf den ersten Button setzen (Tastatur-Navigation)
-      // preventScroll: verhindert erzwungenen synchronen Reflow
-      // (style.display-Änderung hat Styles invalidiert – focus() würde
-      // sonst sofort Layout erzwingen, Lighthouse-Culprit :29:736)
+      // Fokus auf den ersten Button setzen (Tastatur-Navigation).
+      // Erzwingt KEIN synchrones Layout: display-Änderung hat Styles
+      // invalidiert – der Fokus läuft deshalb im NÄCHSTEN Frame
+      // (requestAnimationFrame) statt im selben Task. focus() selbst
+      // triggert sonst einen Forced Reflow (Lighthouse-Culprit
+      // "Forced reflow" – auch mit preventScroll:true).
       var firstBtn = banner.querySelector('button');
-      if (firstBtn) firstBtn.focus({ preventScroll: true });
+      if (firstBtn) {
+        requestAnimationFrame(function () {
+          firstBtn.focus({ preventScroll: true });
+        });
+      }
     }
   };
   // Escape-Taste schließt den Banner (nur „Nur notwendige" als Default)
