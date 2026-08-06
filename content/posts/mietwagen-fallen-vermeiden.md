@@ -8,7 +8,7 @@ categories: ["Reisebudget & Mietwagen"]
 keywords: ["Mietwagen Tipps", "Urlaub Mietwagen", "Reisekosten sparen", "Mietwagen Vergleich", "Billig Mietwagen"]
 author: "Frank"
 cover:
-  image: "/images/covers/mietwagen-fallen-vermeiden.jpg"
+  image: "images/covers/mietwagen-fallen-vermeiden.jpg"
   alt: "Spar-Tipp: Mietwagen Fallen Vermeiden"
   caption: "Tipp von FranksFinanzcheck"
 ---

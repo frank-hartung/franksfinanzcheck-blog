@@ -8,7 +8,7 @@ categories: ["Haushaltskasse & Budgetplanung"]
 keywords: ["Tagesgeld", "Zinsen vergleichen", "Geld sicher anlegen", "Tagesgeldkonto", "Tagesgeldzinsen"]
 author: "Frank"
 cover:
-  image: "/images/covers/tagesgeld-zinsen-sicher-anlegen.jpg"
+  image: "images/covers/tagesgeld-zinsen-sicher-anlegen.jpg"
   alt: "Spar-Tipp: Tagesgeld Zinsen Sicher Anlegen"
   caption: "Tipp von FranksFinanzcheck"
 ---

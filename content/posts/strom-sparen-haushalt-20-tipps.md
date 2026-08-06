@@ -8,7 +8,7 @@ categories: ["Günstige Strom- & Gastarife"]
 keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren", "Energiekosten reduzieren", "Stromverbrauch senken"]
 author: "Frank"
 cover:
-  image: "/images/covers/strom-sparen-haushalt-20-tipps.jpg"
+  image: "images/covers/strom-sparen-haushalt-20-tipps.jpg"
   alt: "Spar-Tipp: Strom Sparen Haushalt 20 Tipps"
   caption: "Tipp von FranksFinanzcheck"
 ---

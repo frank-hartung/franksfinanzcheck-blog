@@ -8,7 +8,7 @@ categories: ["Reisebudget & Mietwagen"]
 keywords: ["Mietwagen buchen", "Günstige Mietwagen", "Mietwagen Vergleich", "billige Mietwagen", "Mietwagen Preise"]
 author: "Frank"
 cover:
-  image: "/images/covers/mietwagen-buchen-so-sparst-du.jpg"
+  image: "images/covers/mietwagen-buchen-so-sparst-du.jpg"
   alt: "Spar-Tipp: Mietwagen Buchen So Sparst Du"
   caption: "Tipp von FranksFinanzcheck"
 ---

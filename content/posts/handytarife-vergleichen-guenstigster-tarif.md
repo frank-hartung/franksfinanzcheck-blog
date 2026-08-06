@@ -8,7 +8,7 @@ categories: ["Internet- & DSL-Hacks"]
 keywords: ["Handytarif vergleichen", "Handyvertrag wechseln", "Günstiger Handytarif", "Handytarif vergleichen online", "günstige Handytarife"]
 author: "Frank"
 cover:
-  image: "/images/covers/handytarife-vergleichen-guenstigster-tarif.jpg"
+  image: "images/covers/handytarife-vergleichen-guenstigster-tarif.jpg"
   alt: "Spar-Tipp: Handytarife Vergleichen Guenstigster Tarif"
   caption: "Tipp von FranksFinanzcheck"
 ---

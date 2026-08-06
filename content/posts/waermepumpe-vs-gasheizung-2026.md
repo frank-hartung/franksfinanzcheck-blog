@@ -8,7 +8,7 @@ categories: ["Günstige Strom- & Gastarife"]
 keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken", "Wärmepumpenpreis", "Wärmepumpen Kosten"]
 author: "Frank"
 cover:
-  image: "/images/covers/waermepumpe-vs-gasheizung-2026.jpg"
+  image: "images/covers/waermepumpe-vs-gasheizung-2026.jpg"
   alt: "Spar-Tipp: Waermepumpe Vs Gasheizung 2026"
   caption: "Tipp von FranksFinanzcheck"
 ---

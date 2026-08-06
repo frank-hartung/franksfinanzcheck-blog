@@ -8,7 +8,7 @@ categories: ["Versicherungen"]
 keywords: ["Unfallversicherung", "Private Unfallversicherung", "Absicherung", "Unfallschutz", "Versicherungsvergleich"]
 author: "Frank"
 cover:
-  image: "/images/covers/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt.jpg"
+  image: "images/covers/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt.jpg"
   alt: "Private Unfallversicherung: Für wen sie sich wirklich lohnt"
   caption: "Tipp von FranksFinanzcheck"
 ---

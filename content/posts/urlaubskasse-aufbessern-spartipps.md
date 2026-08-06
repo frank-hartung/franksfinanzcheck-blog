@@ -8,7 +8,7 @@ categories: ["Reisebudget & Mietwagen"]
 keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig reisen", "Urlaub günstig buchen", "Urlaubs sparvertrag"]
 author: "Frank"
 cover:
-  image: "/images/covers/urlaubskasse-aufbessern-spartipps.jpg"
+  image: "images/covers/urlaubskasse-aufbessern-spartipps.jpg"
   alt: "Spar-Tipp: Urlaubskasse Aufbessern Spartipps"
   caption: "Tipp von FranksFinanzcheck"
 ---

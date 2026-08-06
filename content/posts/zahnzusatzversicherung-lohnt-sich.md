@@ -8,7 +8,7 @@ categories: ["Versicherungen"]
 keywords: ["Zahnzusatzversicherung", "Zahnarztkosten sparen", "Zahnersatz versichern", "Zusatzversicherung Zahnarzt", "Zahnzusatzversicherung Vergleich"]
 author: "Frank"
 cover:
-  image: "/images/covers/zahnzusatzversicherung-lohnt-sich.jpg"
+  image: "images/covers/zahnzusatzversicherung-lohnt-sich.jpg"
   alt: "Spar-Tipp: Zahnzusatzversicherung Lohnt Sich"
   caption: "Tipp von FranksFinanzcheck"
 ---

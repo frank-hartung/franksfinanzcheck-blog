@@ -8,7 +8,7 @@ categories: ["Energie"]
 keywords: ["Strom wechseln", "Stromanbieter vergleichen", "Strom sparen 2026", "Strom anbieter wechseln", "Stromversorger wechseln"]
 author: "Redaktion"
 cover:
-  image: "/images/covers/stromanbieter-wechseln-2026.jpg"
+  image: "images/covers/stromanbieter-wechseln-2026.jpg"
   alt: "Spar-Tipp: Stromanbieter Wechseln 2026"
   caption: "Tipp von FranksFinanzcheck"
 ---

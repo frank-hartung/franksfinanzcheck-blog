@@ -8,7 +8,7 @@ categories: ["Günstige Strom- & Gastarife"]
 keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten", "Energieverbrauch reduzieren", "Stromfresser im Haushalt"]
 author: "Frank"
 cover:
-  image: "/images/covers/stromfresser-im-haushalt-entlarven.jpg"
+  image: "images/covers/stromfresser-im-haushalt-entlarven.jpg"
   alt: "Spar-Tipp: Stromfresser Im Haushalt Entlarven"
   caption: "Tipp von FranksFinanzcheck"
 ---

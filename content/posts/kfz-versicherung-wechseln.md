@@ -8,7 +8,7 @@ categories: ["Versicherungen"]
 keywords: ["Kfz-Versicherung wechseln", "Autoversicherung vergleichen", "SF-Klasse", "Kfz-Versicherung wechseln beim Neuwagen", "Kfz-Versicherung Vergleich"]
 author: "Redaktion"
 cover:
-  image: "/images/covers/kfz-versicherung-wechseln.jpg"
+  image: "images/covers/kfz-versicherung-wechseln.jpg"
   alt: "Spar-Tipp: Kfz Versicherung Wechseln"
   caption: "Tipp von FranksFinanzcheck"
 ---

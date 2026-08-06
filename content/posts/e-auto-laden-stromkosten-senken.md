@@ -8,7 +8,7 @@ categories: ["Günstige Strom- & Gastarife"]
 keywords: ["E-Auto Ladekosten", "Stromtarif E-Auto", "Wallbox sparen", "Strompreis pro kWh", "Kostenvergleich Benziner Elektroauto"]
 author: "Frank"
 cover:
-  image: "/images/covers/e-auto-laden-stromkosten-senken.jpg"
+  image: "images/covers/e-auto-laden-stromkosten-senken.jpg"
   alt: "Spar-Tipp: E Auto Laden Stromkosten Senken"
   caption: "Tipp von FranksFinanzcheck"
 ---

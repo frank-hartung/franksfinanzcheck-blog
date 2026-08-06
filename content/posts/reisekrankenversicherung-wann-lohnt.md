@@ -8,7 +8,7 @@ categories: ["Reisebudget & Mietwagen"]
 keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschutz", "Reiseversicherung", "Auslandsreiseversicherung"]
 author: "Frank"
 cover:
-  image: "/images/covers/reisekrankenversicherung-wann-lohnt.jpg"
+  image: "images/covers/reisekrankenversicherung-wann-lohnt.jpg"
   alt: "Spar-Tipp: Reisekrankenversicherung Wann Lohnt"
   caption: "Tipp von FranksFinanzcheck"
 ---

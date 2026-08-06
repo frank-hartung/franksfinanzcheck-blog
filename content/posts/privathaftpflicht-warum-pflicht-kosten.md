@@ -8,7 +8,7 @@ categories: ["Versicherungen"]
 keywords: ["Privathaftpflicht", "Haftpflichtversicherung Vergleich", "Haftpflicht Kosten", "Privathaftpflichtversicherung", "Privathaftpflicht Kosten"]
 author: "Frank"
 cover:
-  image: "/images/covers/privathaftpflicht-warum-pflicht-kosten.jpg"
+  image: "images/covers/privathaftpflicht-warum-pflicht-kosten.jpg"
   alt: "Spar-Tipp: Privathaftpflicht Warum Pflicht Kosten"
   caption: "Tipp von FranksFinanzcheck"
 ---
