@@ -4,14 +4,12 @@
 #  Läuft jeden Mittwoch um 07:00 Uhr (DE):
 #    1. SEO-Audit: prüft alle Artikel (Titel, Description, Keywords,
 #       Struktur, Alt-Texte, interne Links, Wortanzahl, Sitemap)
-#    2. Bing-Indexierung: reicht neue Artikel automatisch bei Bing ein
-#       (kostenlose Bing-Webmaster-API – Bing speist auch DuckDuckGo)
+#    2. IndexNow-Indexierung: reicht neue Artikel automatisch bei Bing &
+#       Co. ein (kostenlos, ohne API-Key – Key-Datei liegt im Repo)
 #    3. Report: Bei kritischen Problemen wird ein GitHub-Issue erstellt
 #
-#  VORAUSSETZUNG (einmalig, kostenlos):
-#    - Bing Webmaster Tools: https://www.bing.com/webmasters
-#      → Website verifizieren → API-Key holen
-#      → Secret: BING_API_KEY
+#  VORAUSSETZUNG (einmalig): Bereits eingerichtet (scripts/indexnow_key.txt
+#    + static/<key>.txt). Kein Bing-Konto/API-Key nötig!
 #
 #  Manuell starten: GitHub → Actions → "Wöchentliche SEO-Optimierung"
 # ============================================================
@@ -47,10 +45,8 @@ jobs:
           python3 scripts/seo_audit.py | tee /tmp/seo_audit_log.txt
           exit ${PIPESTATUS[0]}
 
-      - name: Bing-Indexierung (neue Artikel einreichen)
-        env:
-          BING_API_KEY: ${{ secrets.BING_API_KEY }}
-        run: python3 scripts/submit_bing.py
+      - name: IndexNow-Indexierung (neue Artikel einreichen)
+        run: python3 scripts/submit_indexnow.py
 
       - name: Bing-Status committen
         run: |

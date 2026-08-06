@@ -71,10 +71,10 @@ Der Workflow **„Wöchentliche SEO-Optimierung"** läuft jeden Mittwoch 07:00 U
    Titel-Länge (30-65 Zeichen), Meta-Description (70-165), Keywords, H2-Struktur,
    Alt-Texte, interne Links, Wortanzahl (min. 300) und Sitemap-Konsistenz.
    Bei Problemen → automatisches GitHub-Issue mit Details.
-2. **Bing-Indexierung** (`python3 scripts/submit_bing.py`): reicht neue Artikel
-   automatisch bei Bing ein (kostenlose Bing-Webmaster-API) – Bing speist auch
-   DuckDuckGo und die ChatGPT-Suche. Einmalig: `BING_API_KEY` als Secret
-   (Bing Webmaster Tools → kostenlos → API-Key).
+2. **IndexNow-Indexierung** (`python3 scripts/submit_indexnow.py`): reicht neue
+   Artikel automatisch bei Bing, Seznam, Naver & Yandex ein (kostenloses
+   Push-Protokoll, kein API-Key nötig – Key-Datei liegt im Repo). Bing speist
+   auch DuckDuckGo und die ChatGPT-Suche.
 3. **Google:** Sitemap bereits eingereicht; zusätzlich empfohlen: Google Search
    Console „Indexierung anfordern" nach Veröffentlichung (manuell, 30 Sekunden).
 
