@@ -33,6 +33,7 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   mainSections = ["posts"]
   # Pinterest-Website-Verifikation (wird nach Erhalt des Codes befüllt)
   pinterestVerify = "e238ffd88bd085648a14bd1d52d72405"
+  bingVerify = "DD6ABFE13474B50A9739BBB46E542368"
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
   [params.homeInfoParams]

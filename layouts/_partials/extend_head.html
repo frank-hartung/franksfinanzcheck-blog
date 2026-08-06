@@ -13,3 +13,9 @@
 {{- with site.Params.pinterestVerify -}}
 <meta name="p:domain_verify" content="{{ . }}">
 {{- end -}}
+
+{{- /* Bing-Website-Verifikation (Meta-Tag-Methode)
+       Code in hugo.toml eintragen:  bingVerify = "DEIN-CODE" */ -}}
+{{- with site.Params.bingVerify -}}
+<meta name="msvalidate.01" content="{{ . }}">
+{{- end -}}
