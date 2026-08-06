@@ -77,15 +77,11 @@
 {{- /* Add extended css after theme style */ -}}
 {{- $stylesheet := (slice $license_css $core $extended) | resources.Concat "assets/css/stylesheet.css"  }}
 
-{{- /* Render-blocking vermeiden: CSS asynchron laden (media="print" onload-Trick) */ -}}
-{{- if not site.Params.assets.disableFingerprinting }}
-{{- $stylesheet := $stylesheet | fingerprint }}
-<link rel="preload" href="{{ $stylesheet.RelPermalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" media="print" href="{{ $stylesheet.RelPermalink }}"></noscript>
-{{- else }}
-<link rel="preload" href="{{ $stylesheet.RelPermalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" media="print" href="{{ $stylesheet.RelPermalink }}"></noscript>
-{{- end }}
+{{- /* CLS-FIX: Stylesheet INLINE einbetten – kein FOUC, kein Layout-Shift.
+       (Async-CSS erzeugte einen kompletten Body-Shift, wenn das Stylesheet
+       nach dem ersten Paint ankam – Lighthouse-Culprit: body#top) */ -}}
+{{- $stylesheet = $stylesheet | resources.Minify }}
+<style>{{ $stylesheet.Content | safeCSS }}</style>
 
 {{- /* Search */}}
 {{- if (eq .Layout `search`) -}}
