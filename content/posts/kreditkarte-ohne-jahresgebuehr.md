@@ -8,7 +8,7 @@ categories: ["Haushaltskasse & Budgetplanung"]
 keywords: ["Kreditkarte ohne Gebühren", "Kreditkarten Vergleich", "Kostenlose Kreditkarte", "Kreditkarte ohne Jahresgebühr", "Kreditkarte mit keiner Gebühr"]
 author: "Frank"
 cover:
-  image: "/images/covers/kreditkarte-ohne-jahresgebuehr.jpg"
+  image: "images/covers/kreditkarte-ohne-jahresgebuehr.jpg"
   alt: "Spar-Tipp: Kreditkarte Ohne Jahresgebuehr"
   caption: "Tipp von FranksFinanzcheck"
 ---

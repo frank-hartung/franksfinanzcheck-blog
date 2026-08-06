@@ -8,7 +8,7 @@ categories: ["Internet- & DSL-Hacks"]
 keywords: ["WLAN verbessern", "DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN Signal stärken", "WiFi Optimieren"]
 author: "Frank"
 cover:
-  image: "/images/covers/wlan-verstaerker-vs-mesh-wlan.jpg"
+  image: "images/covers/wlan-verstaerker-vs-mesh-wlan.jpg"
   alt: "Spar-Tipp: Wlan Verstaerker Vs Mesh Wlan"
   caption: "Tipp von FranksFinanzcheck"
 ---

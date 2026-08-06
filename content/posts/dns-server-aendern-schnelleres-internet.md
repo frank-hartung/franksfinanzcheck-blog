@@ -8,7 +8,7 @@ categories: ["Internet- & DSL-Hacks"]
 keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps", "DNS Server ändern", "Bester DNS Server"]
 author: "Frank"
 cover:
-  image: "/images/covers/dns-server-aendern-schnelleres-internet.jpg"
+  image: "images/covers/dns-server-aendern-schnelleres-internet.jpg"
   alt: "Spar-Tipp: Dns Server Aendern Schnelleres Internet"
   caption: "Tipp von FranksFinanzcheck"
 ---

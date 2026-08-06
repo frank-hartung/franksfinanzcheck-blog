@@ -8,7 +8,7 @@ categories: ["Haushaltskasse & Budgetplanung"]
 keywords: ["Notgroschen aufbauen", "Tagesgeld", "Finanzielle Sicherheit", "Notgroschen anlegen", "Notfallfonds aufbauen"]
 author: "Frank"
 cover:
-  image: "/images/covers/notgroschen-aufbauen-wie-viel-reicht.jpg"
+  image: "images/covers/notgroschen-aufbauen-wie-viel-reicht.jpg"
   alt: "Spar-Tipp: Notgroschen Aufbauen Wie Viel Reicht"
   caption: "Tipp von FranksFinanzcheck"
 ---

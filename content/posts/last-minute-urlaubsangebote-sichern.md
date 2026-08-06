@@ -8,7 +8,7 @@ categories: ["Reisebudget & Mietwagen"]
 keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Sommerurlaub Schnäppchen", "Last Minute Reisen", "Günstiger Urlaub"]
 author: "Frank"
 cover:
-  image: "/images/covers/last-minute-urlaubsangebote-sichern.jpg"
+  image: "images/covers/last-minute-urlaubsangebote-sichern.jpg"
   alt: "Spar-Tipp: Last Minute Urlaubsangebote Sichern"
   caption: "Tipp von FranksFinanzcheck"
 ---

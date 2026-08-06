@@ -8,7 +8,7 @@ categories: ["Reisebudget & Mietwagen"]
 keywords: ["Günstige Flüge", "Flugtickets günstig", "Flugvergleich", "Reisebudget sparen", "Billige Flugtickets", "Günstige Flugangebote"]
 author: "Frank"
 cover:
-  image: "/images/covers/guenstige-fluege-spaetsommer-finden.jpg"
+  image: "images/covers/guenstige-fluege-spaetsommer-finden.jpg"
   alt: "Spar-Tipp: Guenstige Fluege Spaetsommer Finden"
   caption: "Tipp von FranksFinanzcheck"
 ---

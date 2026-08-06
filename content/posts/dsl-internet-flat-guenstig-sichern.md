@@ -8,7 +8,7 @@ categories: ["Internet- & DSL-Hacks"]
 keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus", "Internetanbieter Vergleich", "DSL Tarife"]
 author: "Frank"
 cover:
-  image: "/images/covers/dsl-internet-flat-guenstig-sichern.jpg"
+  image: "images/covers/dsl-internet-flat-guenstig-sichern.jpg"
   alt: "Spar-Tipp: Dsl Internet Flat Guenstig Sichern"
   caption: "Tipp von FranksFinanzcheck"
 ---

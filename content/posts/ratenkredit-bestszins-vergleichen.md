@@ -8,7 +8,7 @@ categories: ["Geld sparen & Frugalismus"]
 keywords: ["Ratenkredit vergleichen", "Ratenkredit günstig", "Kreditvergleich", "Umschuldung sparen", "Ratenkredit Vergleich", "Kredit Vergleichen"]
 author: "Frank"
 cover:
-  image: "/images/covers/ratenkredit-bestszins-vergleichen.jpg"
+  image: "images/covers/ratenkredit-bestszins-vergleichen.jpg"
   alt: "Spar-Tipp: Ratenkredit Bestszins Vergleichen"
   caption: "Tipp von FranksFinanzcheck"
 ---

@@ -8,7 +8,7 @@ categories: ["Günstige Strom- & Gastarife"]
 keywords: ["Heizperiode vorbereiten", "Heizkosten sparen", "Gasrechnung senken", "Heizung prüfen", "Heizkosten reduzieren", "Energiekosten sparen"]
 author: "Frank"
 cover:
-  image: "/images/covers/heizperiode-vorbereiten-spaetsommer.jpg"
+  image: "images/covers/heizperiode-vorbereiten-spaetsommer.jpg"
   alt: "Spar-Tipp: Heizperiode Vorbereiten Spaetsommer"
   caption: "Tipp von FranksFinanzcheck"
 ---

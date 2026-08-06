@@ -8,7 +8,7 @@ categories: ["Geld sparen & Frugalismus"]
 keywords: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset", "Passives Einkommen", "Frugalismus"]
 author: "Frank"
 cover:
-  image: "/images/covers/7-gewohnheiten-finanzielle-freiheit.jpg"
+  image: "images/covers/7-gewohnheiten-finanzielle-freiheit.jpg"
   alt: "Spar-Tipp: 7 Gewohnheiten Finanzielle Freiheit"
   caption: "Tipp von FranksFinanzcheck"
 ---

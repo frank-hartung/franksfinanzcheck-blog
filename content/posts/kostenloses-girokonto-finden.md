@@ -8,7 +8,7 @@ categories: ["Haushaltskasse & Budgetplanung"]
 keywords: ["Kostenloses Girokonto", "Girokonto Vergleich", "Kontoführungsgebühren sparen", "kostenloses Girokonto ohne Gebühren", "kostenloses Girokonto eröffnen"]
 author: "Frank"
 cover:
-  image: "/images/covers/kostenloses-girokonto-finden.jpg"
+  image: "images/covers/kostenloses-girokonto-finden.jpg"
   alt: "Spar-Tipp: Kostenloses Girokonto Finden"
   caption: "Tipp von FranksFinanzcheck"
 ---

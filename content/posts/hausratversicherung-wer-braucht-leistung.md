@@ -8,7 +8,7 @@ categories: ["Versicherungen"]
 keywords: ["Hausratversicherung vergleichen", "Hausrat absichern", "Hausrat Kosten", "Hausratversicherung Tarif", "HausratversicherungTest"]
 author: "Frank"
 cover:
-  image: "/images/covers/hausratversicherung-wer-braucht-leistung.jpg"
+  image: "images/covers/hausratversicherung-wer-braucht-leistung.jpg"
   alt: "Spar-Tipp: Hausratversicherung Wer Braucht Leistung"
   caption: "Tipp von FranksFinanzcheck"
 ---

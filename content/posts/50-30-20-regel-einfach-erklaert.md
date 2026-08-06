@@ -8,7 +8,7 @@ categories: ["Haushaltskasse & Budgetplanung"]
 keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen", "Regel Rechner", "Haushaltsbuch Vorlage"]
 author: "Frank"
 cover:
-  image: "/images/covers/50-30-20-regel-einfach-erklaert.jpg"
+  image: "images/covers/50-30-20-regel-einfach-erklaert.jpg"
   alt: "Spar-Tipp: 50 30 20 Regel Einfach Erklaert"
   caption: "Tipp von FranksFinanzcheck"
 ---

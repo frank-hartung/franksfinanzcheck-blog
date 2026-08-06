@@ -8,7 +8,7 @@ categories: ["Geld sparen & Frugalismus"]
 keywords: ["Frugalismus Tipps", "Geld sparen im Alltag", "Haushaltsbuch führen", "Sparmethoden", "Sparsam leben", "Finanzielle Freiheit"]
 author: "Frank"
 cover:
-  image: "/images/covers/frugalismus-tricks-alltag-200-euro-sparen.jpg"
+  image: "images/covers/frugalismus-tricks-alltag-200-euro-sparen.jpg"
   alt: "Spar-Tipp: Frugalismus Tricks Alltag 200 Euro Sparen"
   caption: "Tipp von FranksFinanzcheck"
 ---
