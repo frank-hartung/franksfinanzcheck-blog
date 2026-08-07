@@ -20,6 +20,7 @@ SICHERHEIT (Verifikation VOR dem Schreiben):
 Nutzung:
     python3 scripts/profi_polish.py --file X.md     # einzelnen Artikel
     python3 scripts/profi_polish.py --new           # alle Artikel ohne lastmod
+    python3 scripts/profi_polish.py --all           # ALLE Artikel (auch manuelle)
     python3 scripts/profi_polish.py --dry-run       # ohne zu schreiben
 """
 import os
@@ -227,6 +228,7 @@ def write_polished(a, new_body):
 def main():
     dry = "--dry-run" in sys.argv
     mode_new = "--new" in sys.argv
+    mode_all = "--all" in sys.argv
 
     files = []
     if "--file" in sys.argv:
@@ -243,17 +245,20 @@ def main():
                  if f.endswith(".md")]
 
     polished, failed, skipped = [], [], 0
-    for path in files:
+    import time
+    for idx, path in enumerate(files):
         a = load_article(path)
         if not a:
             skipped += 1
             continue
-        # Nur Bot-Artikel polieren (ai_generated) – manuelle Texte anfassen? Nein:
-        content = open(path, encoding="utf-8").read()
-        if "ai_generated: true" not in content:
-            skipped += 1
-            continue
-        print(f"  → {os.path.basename(path)[:50]}…")
+        # Standard: nur Bot-Artikel polieren (ai_generated).
+        # --all: AUCH manuelle Artikel polieren (Profi-Niveau für alles).
+        if not mode_all:
+            content = open(path, encoding="utf-8").read()
+            if "ai_generated: true" not in content:
+                skipped += 1
+                continue
+        print(f"  [{idx+1}/{len(files)}] → {os.path.basename(path)[:50]}…", flush=True)
         new_body = ai_polish(a)
         if not new_body:
             failed.append(os.path.basename(path))
@@ -268,7 +273,10 @@ def main():
         if not dry:
             write_polished(a, new_body)
         polished.append(os.path.basename(path))
-        print(f"    ✅ Poliert ({len(new_body)} Zeichen)")
+        print(f"    ✅ Poliert ({len(new_body)} Zeichen)", flush=True)
+        # Rate-Limit-Schonung: kurze Pause zwischen KI-Calls (mehrere Artikel)
+        if not dry and len(files) > 1:
+            time.sleep(2)
 
     print(f"\nFertig: {len(polished)} poliert, {len(failed)} fehlgeschlagen, "
           f"{skipped} übersprungen (manuell/Entwurf).")
