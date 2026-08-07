@@ -34,7 +34,7 @@
 {{- if gt (len $related) 0 -}}
 {{- $jsdelivrSha := getenv "HUGO_JSDELIVR_SHA" -}}
 <div class="ff-related" style="margin:36px 0 8px; padding-top:24px; border-top:2px solid rgba(14,90,67,.15);">
-  <h3 style="font-family:'Montserrat',sans-serif; font-weight:800; color:#0E5A43; margin-bottom:16px; font-size:1.25em; line-height:1.35;"><span aria-hidden="true">📚 </span>Das könnte dich auch interessieren</h3>
+  <h3 style="font-family:'Montserrat',sans-serif; font-weight:700; color:#0E5A43; margin-bottom:16px; font-size:1.25em; line-height:1.35;"><span aria-hidden="true">📚 </span>Das könnte dich auch interessieren</h3>
   <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px;">
     {{- range $related -}}
     {{- $rCover := .Params.cover.image -}}
