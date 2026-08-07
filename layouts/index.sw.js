@@ -54,7 +54,10 @@ self.addEventListener('activate', (event) => {
       keys.filter((k) => k.startsWith('ff-assets-') && k !== CACHE)
           .map((k) => caches.delete(k))
     );
-    await self.clients.claim();
+    /* KEIN clients.claim(): Der SW übernimmt die Kontrolle erst beim
+       NÄCHSTEN Besuch. Beim allerersten Besuch (SW-Installation) werden
+       so keine Requests mitten im Ladevorgang umgeleitet – LCP/Performance
+       des Erstbesuchs bleiben unberührt (Lighthouse-messbar). */
   })());
 });
 
