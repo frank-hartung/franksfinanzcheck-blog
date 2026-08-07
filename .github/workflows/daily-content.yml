@@ -127,6 +127,20 @@ jobs:
           python3 scripts/profi_text_check.py --new-only | tee /tmp/profi_gate.txt
           exit ${PIPESTATUS[0]}
 
+      - name: Lesbarkeits-Gate (deutsche Readability-Formeln)
+        # Prüft neue Artikel auf Lesbarkeit (Flesch/Amstad: Ø Satzlänge,
+        # Wortlänge, Schachtelsätze, Passiv). Schwelle: Score ≥ 75.
+        # Exit 1 → Workflow-Abbruch (kein unlesbarer Text live).
+        if: ${{ !cancelled() }}
+        run: |
+          LAST=$(git log -1 --format=%s)
+          if [[ "$LAST" != content:* ]]; then
+            echo "Kein Content-Commit – kein Lesbarkeits-Gate nötig."
+            exit 0
+          fi
+          python3 scripts/readability_check.py --new-only | tee /tmp/read_log.txt
+          exit ${PIPESTATUS[0]}
+
       - name: Cover-Bilder für neue Artikel generieren
         # Der Bot erstellt Artikel ohne Cover – dieser Schritt erzeugt
         # automatisch das Branding-Cover (1000x1500, Smaragdgrün/Gelb)
