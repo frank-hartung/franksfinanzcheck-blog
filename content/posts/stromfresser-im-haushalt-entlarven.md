@@ -11,12 +11,12 @@ cover:
   image: "images/covers/stromfresser-im-haushalt-entlarven.jpg"
   alt: "Spar-Tipp: Stromfresser Im Haushalt Entlarven"
   caption: "Tipp von FranksFinanzcheck"
----Die Stromrechnung steigt - aber du weißt nicht, warum? Oft sind es unbemerkte Dauerläufer, die Jahr für Jahr hunderte Euro kosten. Wir zeigen dir, welche Geräte die größten Stromfresser sind, wie du sie findest und was du dagegen tun kannst.
+---Die Stromrechnung steigt - aber du weißt nicht, warum? Oft sind es unbemerkte Dauerläufer, die Jahr für Jahr hunderte Euro kosten. Stromfresser zu finden lohnt sich: Oft stecken nur wenige Geräte hinter der hohen Rechnung – Wir zeigen dir, welche Geräte die größten Stromfresser sind, wie du sie findest und was du dagegen tun kannst.
 
 ## Die 3 größten Stromfresser im Haushalt
 
 **1. Alte Kühl- und Gefriergeräte (Energieklasse A oder schlechter)**
-Ein 15 Jahre alter Kühlschrank verbraucht oft doppelt so viel Strom wie ein modernes Gerät der Klasse A+++. Das können 200 bis 350 kWh pro Jahr sein - bei aktuellen Preisen rund 70 bis 120 Euro jährlich. Ein neues Gerät rechnet sich oft schon nach wenigen Jahren.
+ein 15 Jahre alter Kühlschrank verbraucht oft doppelt so viel Strom wie ein modernes Gerät der Klasse A+++. Das können 200 bis 350 kWh pro Jahr sein - bei aktuellen Preisen rund 70 bis 120 Euro jährlich. Ein neues Gerät rechnet sich oft schon nach wenigen Jahren.
 
 **2. Elektro-Boiler und Durchlauferhitzer**
 Warmwasser ist der größte Posten in vielen Haushalten. Ein Elektro-Boiler, der dauerhaft auf 60 Grad heizt, zieht Strom, auch wenn niemand duscht. Du sparst deutlich, wenn du auf sparsame Duschköpfe, kürzere Duschzeiten oder einen geregelten Boiler umstellst.
@@ -27,7 +27,7 @@ TV, Receiver, Spielkonsole, WLAN-Router, Kaffeemaschine mit Zeitschaltuhr: Ein e
 ## So findest du deine persönlichen Stromfresser
 
 - **Strommessgerät ausleihen**: Du kannst ein Gerät zwischen Steckdose und Verbraucher stecken und 24 Stunden messen.
-- **Ablese-Trick:** Notiere den Zählerstand abends, schalte alle Verbraucher aus und lies den Zählerstand morgens erneut ab - der Unterschied ist dein Grundverbrauch. 
+- **Ablese-Trick:** Notiere den Zählerstand abends, schalte alle Verbraucher aus und ließ den Zählerstand morgens erneut ab - der Unterschied ist dein Grundverbrauch. 
 - **Jahresverbrauch vergleichen**: Ein Haushalt mit 2 Personen liegt im Schnitt bei 2.500 bis 3.500 kWh. Wenn du deutlich darüber liegst, hast du fast sicher einen Stromfresser.
 
 ## Sofort-Maßnahmen gegen Standby-Kosten

@@ -30,20 +30,23 @@ Die Anschaffung der Wärmepumpe ist teurer – aber Förderung und niedrigere Be
 
 ## Wann die Wärmepumpe sich lohnt
 
-- **Gut gedämmtes Haus:** Je besser die Dämmung, desto effizienter die Wärmepumpe. 
+- **Gut gedämmtes Haus:** je besser die Dämmung, desto effizienter die Wärmepumpe. 
 - **Fußbodenheizung:** Ideal – arbeitet mit niedrigen Temperaturen. 
-- **Neubau:** Die Wärmepumpe ist hier der Standard – günstigste Variante über den Lebenszyklus.
-- **Bei Förderung:** Bis zu 70 % Zuschuss drücken die Anschaffungskosten.
+- **Neubau:** die Wärmepumpe ist hier der Standard – günstigste Variante über den Lebenszyklus.
+- **bei Förderung:** bis zu 70 % Zuschuss drücken die Anschaffungskosten.
 
 ## Wann die Gasheizung (noch) Sinn ergibt
 
-- **Schlecht gedämmter Altbau:** Hier arbeitet die Wärmepumpe ineffizient – ein Hybrid-System kann die Übergangslösung sein.
-- **Sehr niedriger Gaspreis:** In Einzelfällen kann Gas günstiger sein – aber der CO₂-Preis steigt jährlich.
-- **Kein Platz für die Außeneinheit:** Wärmepumpen brauchen Außenfläche – im dichten Stadtgebiet manchmal ein Problem.
+- **schlecht gedämmter Altbau:** hier arbeitet die Wärmepumpe ineffizient – ein Hybrid-System kann die Übergangslösung sein.
+- **sehr niedriger Gaspreis:** in Einzelfällen kann Gas günstiger sein – aber der CO₂-Preis steigt jährlich.
+- **kein Platz für die Außeneinheit:** Wärmepumpen brauchen Außenfläche – im dichten Stadtgebiet manchmal ein Problem.
 
 ## Der große Kosten-Hebel: Der Stromtarif
 
 Eine Wärmepumpe heizt mit Strom – und der Strompreis entscheidet über die Betriebskosten. Ein günstiger Wärmepumpen-Stromtarif senkt die Heizkosten deutlich. 
+
+
+Auch die Förderlandschaft spielt 2026 eine entscheidende Rolle: Die Bundesförderung für effiziente Wärmepumpen übernimmt je nach Einkommen und Tauschgeschwindigkeit einen erheblichen Teil der Anschaffungskosten. Wichtig ist, die Förderung VOR dem Kauf zu beantragen – eine nachträgliche Bezuschussung ist in der Regel nicht möglich. Dazu kommt: Wer eine Ölheizung ersetzt, erhält oft einen zusätzlichen Bonus. Die Kombination aus Förderung und niedrigeren Betriebskosten verkürzt die Amortisationszeit einer Wärmepumpe deutlich – für viele Haushalte lohnt sich der Umstieg damit schneller als gedacht.
 
 ## Häufige Fragen
 

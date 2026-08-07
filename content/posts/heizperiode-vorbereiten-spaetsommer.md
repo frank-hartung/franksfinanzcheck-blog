@@ -1,6 +1,6 @@
 ---
 title: "Heizperiode vorbereiten: 3 wichtige Dinge für den August"
-description: "Heizperiode vorbereiten im Spätsommer: 3 Dinge, die du im August tun musst – so vermeidest du teure Überraschungen im Winter."
+description: "Heizperioden vorbereiten im Spätsommer: 3 Dinge, die du im August tun musst – so vermeidest du teure Überraschungen im Winter."
 date: 2026-08-04
 draft: false
 tags: ["Heizkosten sparen", "Gas", "Herbst Vorbereitung"]

@@ -11,11 +11,11 @@ cover:
   image: "images/covers/stromanbieter-wechseln-2026.jpg"
   alt: "Spar-Tipp: Stromanbieter Wechseln 2026"
   caption: "Tipp von FranksFinanzcheck"
----Du willst deinen Strompreis senken? Durchschnittlich kannst du 200-300 Euro pro Jahr sparen, wenn du deinen Stromanbieter wechselst. Die meisten sitzen jahrelang im teuren Grundtarif ihres lokalen Versorgers, obwohl ein Wechsel nur wenige Minuten dauert.
+---Du willst deinen Strompreis senken? Durchschnittlich kannst du 200-300 Euro pro Jahr sparen, wenn du deinen Stromanbieter wechselst. Wer den Strom wechseln möchte, spart im Schnitt mehrere hundert Euro pro Jahr – Die meisten sitzen jahrelang im teuren Grundtarif ihres lokalen Versorgers, obwohl ein Wechsel nur wenige Minuten dauert.
 
 ## Warum sich ein Wechsel lohnt
 
-Der Unterschied zwischen Grundversorgung und günstigem Tarif liegt oft bei 15-25%. Bei einem durchschnittlichen Vier-Personen-Haushalt mit 4.000 kWh Jahresverbrauch sind das schnell 200-300 Euro pro Jahr. Dein Aufwand: etwa 15 Minuten, einmal im Jahr.
+Der Unterschied zwischen Grundversorgung und günstigem Tarif liegt oft bei 15-25 %. Bei einem durchschnittlichen Vier-Personen-Haushalt mit 4.000 kWh Jahresverbrauch sind das schnell 200-300 Euro pro Jahr. Dein Aufwand: etwa 15 Minuten, einmal im Jahr.
 
 ## Schritt 1: Verbrauch und Zählerstand ermitteln
 
@@ -58,16 +58,16 @@ Nach dem ersten Jahr lohnt sich der Blick auf die Jahresabrechnung: Wurden alle 
 
 ## Häufige Fragen (FAQ)
 
-**Ist ein Stromwechsel wirklich kostenlos?**
+### Ist ein Stromwechsel wirklich kostenlos?
 Ja. Der Anbieterwechsel ist für dich kostenlos – ein Tarifwechsel im selben Netzgebiet ist gesetzlich sogar von der Kündigung des alten Vertrags befreit.
 
-**Wie lange dauert der Wechsel?**
-In der Regel zwei bis sechs Wochen bis zum nächsten Monatsersten. Deine Versorgung ist nie unterbrochen.
+### Wie lange dauert der Wechsel?
+in der Regel zwei bis sechs Wochen bis zum nächsten Monatsersten. Deine Versorgung ist nie unterbrochen.
 
-**Kann ich auch mit einem Vertrag mit langer Laufzeit wechseln?**
+### Kann ich auch mit einem Vertrag mit langer Laufzeit wechseln?
 Ja, aber erst nach Ablauf der Mindestlaufzeit (meist 12 Monate) oder gegen Zahlung einer Restlaufzeit-Entschädigung. Prüfe deine Kündigungsfrist!
 
-**Was ist die Grundversorgung?**
+### Was ist die Grundversorgung?
 Das ist der Tarif, in den du automatisch fällst, wenn du keinen eigenen Vertrag hast – und fast immer der teuerste. Wer nie gewechselt hat, zahlt meist zu viel.
 
 ---

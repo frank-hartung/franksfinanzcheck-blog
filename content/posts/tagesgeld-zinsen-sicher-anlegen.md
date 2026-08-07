@@ -17,9 +17,9 @@ cover:
 Ein Tagesgeldkonto ist ein flexibles Sparkonto ohne feste Laufzeit und ohne Kündigungsfrist. Du kannst jederzeit Geld einzahlen und abheben – die Zinsen werden meist monatlich oder vierteljährlich gutgeschrieben. Im Gegensatz zum Festgeld bleibst du flexibel, musst aber auch Zinsschwankungen akzeptieren.
 
 ## Die 5 wichtigsten Kriterien beim Tagesgeld-Vergleich
-1. **Zinssatz:** Der Nominalzins – aktuell wieder attraktiv, aber genau hinsehen: Viele Banken zahlen "Lockzinsen" nur für die ersten 6 Monate.
-2. **Zinsgarantie:** Wie lange gilt der beworbene Zins? 6 Monate sind Standard, manche Banken garantieren 12+.
-3. **Einlagensicherung:** Bis 100.000 € pro Kunde und Bank gesetzlich geschützt.
+1. **Zinssatz:** der Nominalzins – aktuell wieder attraktiv, aber genau hinsehen: Viele Banken zahlen "Lockzinsen" nur für die ersten 6 Monate.
+2. **Zinsgarantie:** wie lange gilt der beworbene Zins? 6 Monate sind Standard, manche Banken garantieren 12+.
+3. **Einlagensicherung:** bis 100.000 € pro Kunde und Bank gesetzlich geschützt.
 4. **Kosten:** Tagesgeldkonten sind in der Regel komplett kostenlos – versteckte Gebühren sind ein Warnsignal.
 5. **Verfügbarkeit:** Schnelle Überweisung aufs Girokonto, manche Banken zahlen nur mit Wartezeit.
 
@@ -29,15 +29,18 @@ Ein Tagesgeldkonto ist ein flexibles Sparkonto ohne feste Laufzeit und ohne Kün
 | **Verfügbarkeit** | Jederzeit | Erst nach Laufzeitende |
 | **Zins** | Variabel | Fest für die Laufzeit |
 | **Zinssicherheit** | Nicht garantiert | Garantiert |
-| **Geeignet für** | Notgroschen, laufende Rücklagen | Längerfristig verfügbares Geld |
+| **geeignet für** | Notgroschen, laufende Rücklagen | Längerfristig verfügbares Geld |
 
-**Faustregel:** Der Notgroschen gehört aufs Tagesgeld. Geld, das du sicher 1–5 Jahre nicht brauchst, kann ins Festgeld – dort gibt es meist etwas mehr Zins.
+**Faustregel:** der Notgroschen gehört aufs Tagesgeld. Geld, das du sicher 1–5 Jahre nicht brauchst, kann ins Festgeld – dort gibt es meist etwas mehr Zins.
 
 ## So holst du das Beste aus deinem Tagesgeld heraus
-1. **Zins-Hopping:** Nach Ablauf der Zinsgarantie das Konto wechseln – der "Lockzins" der neuen Bank ist oft deutlich höher.
-2. **Mehrere Konten:** Wer mehr als 100.000 € anlegt, verteilt auf mehrere Banken.
+1. **Zins-Hopping:** nach Ablauf der Zinsgarantie das Konto wechseln – der "Lockzins" der neuen Bank ist oft deutlich höher.
+2. **Mehrere Konten:** wer mehr als 100.000 € anlegt, verteilt auf mehrere Banken.
 3. **Zinseszins nutzen:** Zinsen nicht abheben, sondern auf dem Konto lassen – so wächst das Kapital schneller.
-4. **Zinsen vergleichen:** Ein Zinsunterschied von 1 Prozentpunkt macht bei 10.000 € immerhin 100 € im Jahr.
+4. **Zinsen vergleichen:** ein Zinsunterschied von 1 Prozentpunkt macht bei 10.000 € immerhin 100 € im Jahr.
+
+
+Ein häufiger Fehler beim Tagesgeld: Das gesamte Ersparte auf ein einziges Konto zu legen. Sinnvoller ist es, mehrere Tagesgeldkonten zu nutzen – etwa für den Notgroschen, die Urlaubskasse und das langfristige Sparen. So bleibt die Übersicht erhalten und du kannst flexibel auf Zinsänderungen reagieren. Zudem solltest du die Einlagensicherung im Blick behalten: Innerhalb der EU sind bis zu 100.000 Euro pro Bank und Kunde geschützt. Wer mehr Geld anlegen möchte, verteilt es auf verschiedene Banken.
 
 ## Häufige Fragen
 ### Ist Tagesgeld sicher?

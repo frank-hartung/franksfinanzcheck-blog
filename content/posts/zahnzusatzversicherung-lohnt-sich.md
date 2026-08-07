@@ -24,7 +24,7 @@ Die Leistungen hängen vom Tarif ab. Typische Bausteine sind:
 |---|---|
 | **Zahnersatz** | Kronen, Brücken, Implantate, Prothesen – oft 50–90 % Erstattung |
 | **Zahnbehandlung** | Wurzelbehandlung, Parodontose, Spezialleistungen |
-| **Professionelle Zahnreinigung** | Meist mit Erstattung von 80–100 € pro Sitzung |
+| **professionelle Zahnreinigung** | Meist mit Erstattung von 80 bis 100 € pro Sitzung |
 | **Inlays/Onlays** | Hochwertige Füllungen statt Amalgam |
 | **Kieferorthopädie** | Für Kinder und Erwachsene (je nach Tarif) |
 
@@ -44,16 +44,16 @@ Der Abschluss lohnt sich:
 - Wenn du hochwertigen Zahnersatz oder Implantate planst
 - Wenn du Wert auf Vollkeramik, Spezialbehandlung oder professionelle Zahnreinigung legst
 - Für jüngere Menschen, die langfristig absichern wollen
-Der Abschluss lohnt sich nicht:
+der Abschluss lohnt sich nicht:
 - Wenn du nur die Regelversorgung nutzt und mit dem Festzuschuss zufrieden bist
 - Wenn du bereits einen hohen Behandlungsbedarf hast und hoffst, den Rückwirkend versichert zu bekommen
 
 ## Die 4 wichtigsten Vergleichs-Kriterien
 
-1. **Erstattungshöhe:** Ab 80 % bei Zahnersatz lohnt es sich meist
-2. **Wartezeiten:** Je kürzer, desto besser
-3. **Vorerkrankungen:** Was ist ausgeschlossen?
-4. **Altersunabhängige Beiträge:** Manche Tarife steigen mit dem Alter – Beitragsgarantie bevorzugen
+1. **Erstattungshöhe:** ab 80 % bei Zahnersatz lohnt es sich meist
+2. **Wartezeiten:** je kürzer, desto besser
+3. **Vorerkrankungen:** was ist ausgeschlossen?
+4. **Altersunabhängige Beiträge:** manche Tarife steigen mit dem Alter – Beitragsgarantie bevorzugen
 
 ## Häufige Fragen
 

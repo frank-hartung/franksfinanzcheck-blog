@@ -23,15 +23,15 @@ cover:
 
 1. **Dauerhafte Kostenfreiheit:** Prüfe genau, ob die Karte auch nach 12 Monaten beitragsfrei bleibt. Oft schnappt die Kostenfalle erst im zweiten Jahr mit 30 bis 60 Euro zu.
 2. **Zahlungen weltweit:** Achte auf die Fremdwährungsgebühr bei Einkäufen außerhalb der Eurozone. Viele Anbieter schlagen hier heimlich 1 bis 2 Prozent auf den Rechnungsbetrag auf.
-3. **Bargeldbezug:** Das Abheben sollte an jedem Automaten gebührenfrei funktionieren. Manche Banken schränken dich auf ihren eigenen Verbund wie die CashGroup ein.
-4. **Partnerkarten:** Benötigt dein Partner eine eigene Karte? Einige Institute verlangen hierfür eine zusätzliche Gebühr, während andere sie verschenken.
+3. **Bargeldbezug:** das Abheben sollte an jedem Automaten gebührenfrei funktionieren. Manche Banken schränken dich auf ihren eigenen Verbund wie die CashGroup ein.
+4. **Partnerkarten:** benötigt dein Partner eine eigene Karte? Einige Institute verlangen hierfür eine zusätzliche Gebühr, während andere sie verschenken.
 5. **Extras:** Versicherungen oder Bonusprogramme klingen verlockend, sind aber oft teuer erkauft. Nutze solche Vorteile nur, wenn der Mehrwert die Grundgebühr tatsächlich übersteigt.
 
 ## Die 3 häufigsten Gebühren-Fallen
 
 Lockvogelangebote werben gern mit einem kostenlosen ersten Jahr. Lies das Kleingedruckte, damit du nicht ab dem 13. Monat automatisch eine Jahresgebühr zahlst. Manche Banken verstecken diese Kosten tief in ihren Preisverzeichnissen.
 
-Die Karte selbst kostet nichts, aber jede Zahlung in Dollar oder Pfund wird teuer. Diese 1 bis 2 Prozent summieren sich im Urlaub schnell zu beachtlichen Beträgen. Wähle für Fernreisen gezielt eine **Kostenlose Kreditkarte** ohne Auslandsnutzungsgebühr.
+Die Karte selbst kostet nichts, aber jede Zahlung in Dollar oder Pfund wird teuer. Diese 1 bis 2 Prozent summieren sich im Urlaub schnell zu beachtlichen Beträgen. Wähle für Fernreisen gezielt eine **kostenlose Kreditkarte** ohne Auslandsnutzungsgebühr.
 
 Wer am falschen Automaten Geld zieht, zahlt oft pauschale Gebühren zwischen 4 und 6 Euro. Eine gute Karte verzichtet auf solche Hürden und erlaubt den Zugriff auf Bargeld an fast jedem Terminal. Prüfe vorab die Mindestbeträge, da manche Banken erst ab 50 Euro kostenfrei auszahlen.
 
@@ -43,7 +43,7 @@ Oft fährst du mit einer kostenlosen Karte und einer separat abgeschlossenen Rei
 
 ## So findest du die richtige Karte
 
-1. **Bedarf ermitteln:** Nutzt du die Karte primär für Online-Shopping oder für weltweite Urlaubsreisen?
+1. **Bedarf ermitteln:** nutzt du die Karte primär für Online-Shopping oder für weltweite Urlaubsreisen?
 2. **Vergleich starten:** Nutze einen gezielten **Kreditkarten Vergleich**, um schwarze Schafe auszusortieren.
 3. **Details prüfen:** Achte penibel auf die Gebühren für Abhebungen und den Einsatz im Ausland.
 4. **Bonität checken:** Banken verlangen meist ein festes Einkommen für echte Kreditkarten mit Limit.

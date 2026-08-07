@@ -11,7 +11,7 @@ cover:
   image: "images/covers/notgroschen-aufbauen-wie-viel-reicht.jpg"
   alt: "Spar-Tipp: Notgroschen Aufbauen Wie Viel Reicht"
   caption: "Tipp von FranksFinanzcheck"
----Die Waschmaschine gibt den Geist auf, das Auto braucht neue Reifen, und der Zahnarzt schickt eine Rechnung – du landest ohne Notgroschen schnell auf dem Dispo. Der Aufbau einer Sicherheitsreserve ist einfacher, als viele denken. Du brauchst eine Strategie, um deine Finanzen zu sichern.
+---Die Waschmaschine gibt den Geist auf, das Auto braucht neue Reifen, und der Zahnarzt schickt eine Rechnung – du landest ohne Notgroschen schnell auf dem Dispo. Einen Notgroschen aufzubauen ist der wichtigste erste Schritt der Finanzplanung – Der Aufbau einer Sicherheitsreserve ist einfacher, als viele denken. Du brauchst eine Strategie, um deine Finanzen zu sichern.
 
 ## Wie viel Notgroschen brauchst du wirklich?
 
@@ -30,19 +30,19 @@ Die Reserve gehört **nicht** aufs Girokonto und nicht in Aktien. Ideal ist ein 
 
 ## In 6 Schritten zum Notgroschen
 
-1. **Monatsausgaben berechnen:** Alle Fixkosten + Lebensmittel + Puffer zusammenrechnen.
+1. **Monatsausgaben berechnen:** alle Fixkosten + Lebensmittel + Puffer zusammenrechnen.
 2. **Ziel setzen:** 3 × Monatsausgaben für den Start – das ist realistisch und reicht meist.
-3. **Dauerauftrag einrichten:** Monatlich einen festen Betrag (z. B. 50 oder 100 Euro) aufs Tagesgeldkonto – direkt nach Gehaltseingang.
+3. **Dauerauftrag einrichten:** monatlich einen festen Betrag (z. B. 50 oder 100 Euro) aufs Tagesgeldkonto – direkt nach Gehaltseingang.
 4. **Extrageld nutzen:** Steuererstattung, Weihnachtsgeld, Prämien gehen zu 50 Prozent in den Notgroschen.
 5. **Verträge entlasten:** Strom-, Handy- oder Versicherungswechsel schafft Platz im Budget – der Unterschied wandert aufs Sparkonto.
-6. **Erst dann investieren:** Ist die Reserve voll, kann das Sparen in ETFs oder Aktien umgeleitet werden.
+6. **Erst dann investieren:** ist die Reserve voll, kann das Sparen in ETFs oder Aktien umgeleitet werden.
 
 ## Häufige Fehler beim Notgroschen
 
-- **Zu klein planen:** 500 Euro klingen viel, reichen aber nur für eine einzige Autoreparatur.
+- **zu klein planen:** 500 Euro klingen viel, reichen aber nur für eine einzige Autoreparatur.
 - **Vermischen:** Notgroschen auf dem Girokonto wird erfahrungsgemäß ausgegeben.
-- **In riskante Anlagen stecken:** Der Notgroschen ist kein Renditeobjekt, sondern eine Versicherung.
-- **Nach Aufbau stoppen:** Auch später gilt: Einmal im Jahr die Reserve auffüllen, wenn sie angezapft wurde.
+- **in riskante Anlagen stecken:** der Notgroschen ist kein Renditeobjekt, sondern eine Versicherung.
+- **nach Aufbau stoppen:** auch später gilt: Einmal im Jahr die Reserve auffüllen, wenn sie angezapft wurde.
 
 ## Häufige Fragen
 
@@ -53,7 +53,7 @@ Nein – er ist die Basis. Erst wenn 3 bis 6 Monatsausgaben stehen, macht ein se
 Hohe Zinsen (z. B. Dispo) haben Vorrang – sie fressen mehr, als der Notgroschen an Sicherheit bringt. Faustregel: Dispo zuerst tilgen, parallel einen Mini-Notgroschen (500–1.000 €) aufbauen.
 
 ### Ist der Notgroschen inflationssicher?
-Nein, aber das ist sein Job nicht. Er ist eine Versicherung gegen finanzielle Schocks. Überschüsse über die Reserve hinaus gehören auf renditestärkere Anlagen.
+Nein, aber das ist sein Job nicht. Er ist eine Versicherung gegen finanzielle Schocks. Überschüsse über die Reserve hinaus gehören auf renditestarker Anlagen.
 
 Das Wichtigste in Kürze:
 - Baue einen Notgroschen auf, um finanzielle Sicherheit zu gewährleisten.

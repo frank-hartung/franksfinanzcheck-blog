@@ -14,10 +14,10 @@ cover:
 ---Ein Kredit kann dich bis zu 600 Euro im Jahr kosten, wenn du den falschen Zins wählst. Der Unterschied zwischen dem teuersten und dem günstigsten Anbieter kann bei gleicher Kreditsumme mehrere hundert Euro Zinsunterschied bedeuten. Du kannst den Bestzins finden und Geld sparen, wenn du die Regeln für einen Ratenkredit vergleichen kennst.
 
 ## Der wichtigste Wert: der effektive Jahreszins
-Der effektive Jahreszins entscheidet, ob ein Ratenkredit günstig ist. Er ist gesetzlich vorgeschrieben und macht Angebote vergleichbar. Der effektive Jahreszins inkludiert alle Kosten, wie den Sollzins und Bearbeitungsgebühren. Je niedriger der effektive Jahreszins, desto günstiger der Kredit. Du solltest dich nicht von versteckten Gebühren täuschen lassen, sondern immer den effektiven Jahreszins vergleichen.
+der effektive Jahreszins entscheidet, ob ein Ratenkredit günstig ist. Er ist gesetzlich vorgeschrieben und macht Angebote vergleichbar. Der effektive Jahreszins inkludiert alle Kosten, wie den Sollzins und Bearbeitungsgebühren. Je niedriger der effektive Jahreszins, desto günstiger der Kredit. Du solltest dich nicht von versteckten Gebühren täuschen lassen, sondern immer den effektiven Jahreszins vergleichen.
 
 ## So findest du den günstigsten Ratenkredit
-Du kannst den günstigsten Ratenkredit finden, indem du:
+du kannst den günstigsten Ratenkredit finden, indem du:
 1. **Kreditvergleich nutzt** – mit Kreditsumme und Laufzeit alle Angebote anzeigst
 2. **Nicht den ersten Treffer nimmst** – die Zinsspanne zwischen Anbietern ist oft groß
 3. **Laufzeit realistisch wählst** – kürzere Laufzeit bedeutet niedrigere Zinskosten
@@ -36,6 +36,13 @@ Hast du bereits einen Kredit mit hohem Zins, lohnt sich der Blick auf die Umschu
 
 ## Was beeinflusst deinen Zins?
 Der Zins, den du bekommst, hängt von deiner Bonität ab: regelmäßiges Einkommen, saubere Schufa, keine offenen Mahnungen, ein bestehendes Girokonto. Du solltest Kreditanträge nicht "auf Verdacht" stellen und vorher die eigene Bonität prüfen lassen.
+
+
+Das Wichtigste in Kürze:
+- Der **effektive Jahreszins** ist die entscheidende Vergleichsgröße – nicht der Nominalzins.
+- Achte auf **Sondertilgungen**: Kredite mit kostenloser Sondertilgung sind flexibler.
+- **Laufzeit verkürzen** spart am meisten: Je schneller du tilgst, desto weniger Zinsen fallen an.
+- Prüfe die **Restschuldversicherung** – sie ist oft überflüssig und teuer.
 
 ## Häufige Fragen
 ### Was ist der Unterschied zwischen Soll- und Effektivzins?

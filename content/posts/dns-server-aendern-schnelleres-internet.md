@@ -51,7 +51,7 @@ Navigiere in die WLAN-Einstellungen und halte den Namen deines Netzwerks gedrüc
 Tippe in den WLAN-Einstellungen auf das blaue Info-Symbol neben deinem Netzwerk. Wähle den Punkt „DNS konfigurieren" und stelle diesen auf „Manuell". Füge nun über „Server hinzufügen" die neue Adresse hinzu.
 
 ### Router (für das ganze Haus)
-Logge dich in deine Router-Oberfläche ein, zum Beispiel über fritz.box oder 192.168.0.1. Suche unter dem Menüpunkt „Internet" nach den DNS-Server-Einstellungen. Hier kannst du global für alle Geräte den DNS Server ändern und profitierst überall vom Speed-Boost.
+Logge dich in deine Router-Oberfläche ein, zum Beispiel über Fritzbox oder 192.168.0.1. Suche unter dem Menüpunkt „Internet" nach den DNS-Server-Einstellungen. Hier kannst du global für alle Geräte den DNS Server ändern und profitierst überall vom Speed-Boost.
 
 ## Sicherheit: Achtung bei öffentlichen WLANs
 

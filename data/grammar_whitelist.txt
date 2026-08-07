@@ -1,0 +1,17 @@
+# Whitelist für die Grammatikprüfung (scripts/grammar_check.py)
+# Eigennamen, Marken, Fachbegriffe – zusätzlich zur eingebauten Liste
+cashgroup
+paypal
+amazon
+netflix
+spotify
+telekom
+vodafone
+congstar
+all-inclusive
+quad9
+fritz
+post-ident
+video-ident
+push-tan
+sms-tan
