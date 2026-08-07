@@ -75,6 +75,38 @@
 
 {{- /* bundle all required css */}}
 {{- /* Add extended css after theme style */ -}}
+{{- /* ---------- Kritischer Pfad: LCP-Cover-Preload ---------- */ -}}
+{{- /* Das LCP-Element ist das Cover-Bild (eager+high). Ohne Preload wird es
+       erst NACH CSS-Parsing+Layout entdeckt (Discovery ~40 ms) – Preload mit
+       imagesrcset/imagesizes startet den Download PARALLEL zum HTML und der
+       Browser wählt exakt dieselbe Größe wie im <picture>. */ -}}
+{{- $lcpCover := "" }}{{- $lcpDir := "" }}{{- $lcpBase := "" }}{{- $lcpSizes := "(min-width: 768px) 620px, 100vw" }}
+{{- $isList := or (eq .Kind "home") (eq .Kind "section") (eq .Kind "term") }}
+{{- if and $isList (gt (len .Paginator.Pages) 0) (eq .Paginator.PageNumber 1) }}
+  {{- with index .Paginator.Pages 0 }}
+    {{- with .Params.cover.image }}
+      {{- $lcpCover = . }}{{- $lcpDir = path.Dir . }}{{- $lcpBase = strings.TrimSuffix (path.Ext (path.Base .)) (path.Base .) }}
+    {{- end }}
+  {{- end }}
+{{- else if and .Params.cover.image (eq .Kind "page") }}
+  {{- $lcpCover = .Params.cover.image }}{{- $lcpDir = path.Dir .Params.cover.image }}
+  {{- $lcpBase = strings.TrimSuffix (path.Ext (path.Base .Params.cover.image)) (path.Base .Params.cover.image) }}
+  {{- $lcpSizes = "(min-width: 768px) 720px, 100vw" }}
+{{- end }}
+{{- if $lcpCover }}
+<link rel="preload" as="image" fetchpriority="high"
+  imagesrcset="{{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "620" $lcpBase) }} 620w, {{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "720" $lcpBase) }} 720w, {{ partial "asset_url.html" (printf "%s/avif/%s.avif" $lcpDir $lcpBase) }} 1000w"
+  imagesizes="{{ $lcpSizes }}">
+{{- end }}
+
+{{- /* ---------- Kritischer Pfad: preload für Fonts ---------- */ -}}
+{{- /* Die Fonts hängen sonst NACH dem CSS im kritischen Pfad
+       (Font-Discovery erst nach CSS-Parsing). Preload startet den Download
+       PARALLEL zum HTML-Parsing → kürzere Kette (Lighthouse
+       'network-dependency-tree'). crossorigin ist für Fonts Pflicht.
+       Kein Preconnect nötig: Fonts kommen vom EIGENEN Ursprung. */ -}}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{ partial "asset_url.html" "fonts/inter-variable.woff2" }}">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{ partial "asset_url.html" "fonts/montserrat-normal-700.woff2" }}">
 {{- $stylesheet := (slice $license_css $core $extended) | resources.Concat "assets/css/stylesheet.css"  }}
 
 {{- /* CLS-FIX: Stylesheet INLINE einbetten – kein FOUC, kein Layout-Shift.
@@ -88,24 +120,6 @@
        kein externes CDN, keine Drittanbieter (Lighthouse "Drittanbieter" = 0).
        Cache-Busting via ?v=<SHA> übernimmt das Partial asset_url.html
        (Env HUGO_JSDELIVR_SHA wird vom Deploy-Workflow injiziert). */ -}}
-{{- /* ---------- Kritischer Pfad: preload für Fonts ---------- */ -}}
-{{- /* Die Fonts hängen sonst NACH dem CSS im kritischen Pfad
-       (Font-Discovery erst nach CSS-Parsing). Preload startet den Download
-       PARALLEL zum HTML-Parsing → kürzere Kette (Lighthouse
-       'network-dependency-tree'). crossorigin ist für Fonts Pflicht.
-       Kein Preconnect nötig: Fonts kommen vom EIGENEN Ursprung. */ -}}
-{{- /* Preloads: Inter (Body-Font, kritisch für den gesamten Fließtext) und
-       Montserrat-700 (Überschriften/Buttons). Nur die 2 wirklich kritischen
-       Fonts preloaden (Playfair wird nur für Akzente gebraucht → on-demand). */ -}}
-{{- /* Preloads: Inter (Body-Font, kritisch für den gesamten Fließtext – wird
-       ohne Preload erst NACH dem CSS-Parsing entdeckt, hängt dann als
-       zweites Glied in der Kette: HTML → CSS → Font) und Montserrat-700
-       (Überschriften/Buttons). Preload startet beide Downloads PARALLEL
-       zum HTML – kritische Kette wird auf HTML → Font verkürzt.
-       Nur die 2 wirklich kritischen Fonts preloaden (Playfair wird nur für
-       Akzente gebraucht → on-demand). */ -}}
-<link rel="preload" as="font" type="font/woff2" crossorigin href="{{ partial "asset_url.html" "fonts/inter-variable.woff2" }}">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="{{ partial "asset_url.html" "fonts/montserrat-normal-700.woff2" }}">
 <style>
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:optional;src:url({{ partial "asset_url.html" "fonts/montserrat-normal-500.woff2" }}) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:optional;src:url({{ partial "asset_url.html" "fonts/montserrat-normal-600.woff2" }}) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
