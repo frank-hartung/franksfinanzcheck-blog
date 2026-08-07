@@ -1,0 +1,96 @@
+# ============================================================
+#  ARTIKEL-UPDATE-ROUTINE (quartalsweise – Frische-Signal)
+#
+#  Aktualisiert alle 3 Monate automatisch die Top-10-Artikel:
+#  neue Zahlen, aktuelle Formulierungen, "Stand:"-Angaben –
+#  als Frische-Signal an Google (article:modified_time + sitemap).
+#
+#  Ablauf:
+#    1. Skript priorisiert die 10 wichtigsten Artikel
+#       (SEO-Qualität + Alter + interne Links + Tarif-Relevanz,
+#       Rotation: erst kürzlich aktualisierte werden übersprungen)
+#    2. KI (Gemini, Fallback Groq) überarbeitet den Text
+#       (Struktur/FAQ/Affiliate-Links bleiben erhalten – Verifikation!)
+#    3. lastmod wird gesetzt → Hugo rendert article:modified_time
+#    4. Einzigartigkeits-Gate + Meta-Fix + Commit + Deploy + IndexNow
+#    5. Report wird committet (ARTIKEL-UPDATE-REPORT.md)
+#
+#  Cron: 1. Januar/April/Juli/Oktober, 07:00 MESZ (06:00 UTC).
+#    Winterzeit (MEZ): 06:00 UTC = 07:00 MEZ (Kommentar unten).
+#
+#  Manuell: GitHub → Actions → "Quartalsweises Artikel-Update"
+# ============================================================
+name: Quartalsweises Artikel-Update
+
+on:
+  schedule:
+    - cron: "0 6 1 1,4,7,10 *"    # 1. Jan/Apr/Jul/Okt 07:00 MESZ (06:00 UTC)
+    # Winterzeit-Fallback: 1 Stunde später in UTC, damit es weiterhin
+    # ~07:00 MEZ ist:
+    - cron: "0 7 1 1,4,7,10 *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Top-Artikel aktualisieren (KI, Qualitäts-Verifikation)
+        id: update
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/update_articles.py --apply --max 10 | tee /tmp/update_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Einzigartigkeits-Gate (Qualitäts-Check)
+        run: |
+          python3 scripts/check_uniqueness.py | tee /tmp/update_uniqueness.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Meta-Daten der aktualisierten Artikel nachziehen
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/meta_optimizer.py --fix --ai || true
+          python3 scripts/meta_report.py || true
+
+      - name: Änderungen committen & pushen
+        run: |
+          git config user.name "Update-Bot"
+          git config user.email "update-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Artikel aktualisiert."
+          else
+            git commit -m "content: Quartalsweises Artikel-Update – Top-Artikel aufgefrischt (Frische-Signal)"
+            git push
+          fi
+
+      - name: Aktualisierte Artikel bei IndexNow einreichen
+        run: python3 scripts/submit_indexnow.py
+
+      - name: Issue bei Fehlern erstellen (nur wenn Update fehlschlug)
+        if: steps.update.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let details = 'Artikel-Update fehlgeschlagen.';
+            try { details = fs.readFileSync('/tmp/update_log.txt', 'utf-8'); } catch (e) {}
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🔄 Artikel-Update fehlgeschlagen',
+              body: '```\n' + details + '\n```\n\n---\nAutomatisch erstellt vom Quartals-Workflow.'
+            });
+            console.log('✅ Issue erstellt');
