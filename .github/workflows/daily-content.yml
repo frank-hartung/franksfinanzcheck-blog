@@ -67,7 +67,7 @@ jobs:
         # automatisch das Branding-Cover (1000x1500, Smaragdgrün/Gelb)
         # und trägt es ins Frontmatter ein (nur falls noch keins existiert).
         run: |
-          pip install -q pillow
+          pip install -q pillow pillow-avif-plugin
           python3 scripts/generate_covers.py
 
       - name: Einzigartigkeits-Audit (Qualitäts-Gate)
