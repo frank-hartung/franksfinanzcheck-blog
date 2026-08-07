@@ -1,11 +1,17 @@
 {{- /* ============================================================
     CONSENT-BANNER (Markup) – direkt nach <body> im DOM
     ------------------------------------------------------------
-    LCP-Optimierung: Das Banner-Markup steht bewusst GANZ VORN im
-    DOM (statt im Footer). Es ist position:fixed – visuell identisch –
-    aber der Browser kann es mit dem ERSTEN Paint rendern, ohne erst
-    den kompletten Body parsen zu müssen. Das eliminiert den
-    Lighthouse "Rendering-Delay" des LCP-Elements (Cookie-Banner).
+    LCP-Optimierung (dauerhaft Top-Level):
+    - Das Banner-Markup steht bewusst GANZ VORN im DOM (statt im
+      Footer). Es ist position:fixed – visuell identisch – aber der
+      Browser kann es mit dem ERSTEN Paint rendern.
+    - SYSTEM-FONT statt Inter: Der Banner-Text wartet NICHT auf die
+      Inter-Font (kein Font-Loading-Delay im kritischen Pfad). Falls
+      der Banner jemals LCP-Kandidat ist, wird er sofort gemalt –
+      die Lighthouse "Verzögerung beim Rendering des Elements"
+      (250 ms durch Font-Wait) ist damit unmöglich.
+    - KOMPAKT: geringe Fläche (kleiner als jedes Cover) → das Cover
+      bleibt das LCP-Element, nicht der Banner.
 
     Sichtbarkeit: Standardmäßig sichtbar (kein display:none – kein
     spätes JS-Einblenden). Rückkehrer (Cookie vorhanden) bekommen
@@ -16,22 +22,21 @@
     (extend_footer.html) – findet das Element per ID.
 ============================================================ */}}
 <div id="ff-consent-banner" role="region" aria-label="Cookie-Einstellungen" style="position:fixed; bottom:0; left:0; right:0; z-index:999999;
-     background:#ffffff; border-top:3px solid #1F6F5C; box-shadow:0 -4px 20px rgba(0,0,0,.25); padding:14px 20px;">
-  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
-    <div style="flex:1 1 55%; font-size:.93em; line-height:1.45; color:#222;">
-      <strong style="color:#1F6F5C;"><span aria-hidden="true">🍪 </span>Cookie-Einstellungen</strong><br>
-      Diese Website verwendet nur technisch notwendige Cookies. Beim Klick auf Affiliate-Links
-      (z.&nbsp;B. zu CHECK24) können Anbieter eigene Tracking-Cookies setzen. Du kannst deine
-      Einwilligung hier verwalten. Details in der
-      <a href="{{ "datenschutz/" | absURL }}" style="color:#1F6F5C; font-weight:600;">Datenschutzerklärung</a>.
+     background:#ffffff; border-top:3px solid #1F6F5C; box-shadow:0 -4px 20px rgba(0,0,0,.25); padding:10px 16px;
+     font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;">
+  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+    <div style="flex:1 1 60%; font-size:.88em; line-height:1.4; color:#222;">
+      <strong style="color:#1F6F5C;"><span aria-hidden="true">🍪 </span>Cookie-Einstellungen:</strong>
+      Nur technisch notwendige Cookies. Beim Klick auf Affiliate-Links (z.&nbsp;B. zu CHECK24) können Anbieter Tracking-Cookies setzen – hier verwalten.
+      <a href="{{ "datenschutz/" | absURL }}" style="color:#1F6F5C; font-weight:600; white-space:nowrap;">Datenschutzerklärung</a>
     </div>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-left:auto;">
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-left:auto;">
       <button onclick="ffConsent('all')"
-        style="background:#FFB300; color:#111; border:none; border-radius:999px; padding:10px 20px;
-               font-weight:700; font-size:.95em; cursor:pointer;">Alle akzeptieren</button>
+        style="background:#FFB300; color:#111; border:none; border-radius:999px; padding:8px 16px;
+               font-weight:700; font-size:.88em; cursor:pointer;">Alle akzeptieren</button>
       <button onclick="ffConsent('necessary')"
-        style="background:#1F6F5C; color:#fff; border:none; border-radius:999px; padding:10px 20px;
-               font-weight:700; font-size:.95em; cursor:pointer;">Nur notwendige</button>
+        style="background:#1F6F5C; color:#fff; border:none; border-radius:999px; padding:8px 16px;
+               font-weight:700; font-size:.88em; cursor:pointer;">Nur notwendige</button>
     </div>
   </div>
 </div>
