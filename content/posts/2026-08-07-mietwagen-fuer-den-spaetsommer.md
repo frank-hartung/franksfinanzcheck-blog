@@ -5,6 +5,7 @@ date: 2026-08-07
 draft: false
 tags: ["mietwagen roadtrip", "mietwagen günstig buchen", "reise budget"]
 categories: ["Ratgeber"]
+pillar: "mietwagen"
 keywords: ["mietwagen roadtrip", "mietwagen günstig buchen", "reise budget"]
 author: "Frank"
 ai_generated: true

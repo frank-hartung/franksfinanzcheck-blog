@@ -5,6 +5,7 @@ date: 2026-08-07
 draft: false
 tags: ["frugalismus tipps", "geld sparen im alltag", "haushaltsbuch führen", "sparmethoden"]
 categories: ["Ratgeber"]
+pillar: "frugalismus"
 keywords: ["frugalismus tipps", "geld sparen im alltag", "haushaltsbuch führen", "sparmethoden"]
 author: "Frank"
 ai_generated: true

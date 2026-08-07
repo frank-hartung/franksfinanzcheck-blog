@@ -1,0 +1,82 @@
+{{- define "main" }}
+
+<article class="post-single">
+  <header class="post-header">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 class="post-title entry-hint-parent">
+      {{ .Title | safeHTML }}</h1>
+    <div class="post-meta">
+      <span style="font-size:.9em; color:#666;">Ratgeber von Frank · {{ .Date.Format "2. Januar 2006" }} · {{ .ReadingTime }} Min. Lesezeit</span>
+    </div>
+  </header>
+
+  {{- if .Content }}
+  <div class="post-content md-content">
+    {{- partial "anchored_headings.html" .Content }}
+  </div>
+  {{- end }}
+
+  {{- /* ---------- Alle Artikel in diesem Ratgeber (Cluster) ---------- */}}
+  {{- $clusterPosts := where site.RegularPages ".Params.pillar" .File.ContentBaseName }}
+  {{- if gt (len $clusterPosts) 0 }}
+  <div style="margin:32px 0 8px; padding-top:20px; border-top:2px solid rgba(14,90,67,.15);">
+    <h2 style="font-family:'Montserrat',sans-serif; font-weight:700; color:#0E5A43; margin-bottom:4px; font-size:1.35em;">Alle Artikel im Ratgeber</h2>
+    <p style="color:#555; font-size:.95em; margin-bottom:16px;">Diese Beiträge gehören zu diesem Ratgeber – sieh dich in Ruhe um:</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px;">
+      {{- range $clusterPosts }}
+      {{- $rCover := .Params.cover.image }}
+      {{- $rDir := "" }}{{ $rFile := "" }}{{ $rBase := "" }}
+      {{- if $rCover }}
+        {{- $rFile = path.Base $rCover }}{{ $rDir = path.Dir $rCover }}
+        {{- $rBase = strings.TrimSuffix (path.Ext $rFile) $rFile }}
+      {{- end }}
+      <a href="../../posts/{{ .File.ContentBaseName }}/" aria-label="Weiterlesen: {{ .Title }}"
+         style="display:flex; flex-direction:column; background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; overflow:hidden; text-decoration:none; box-shadow:0 1px 4px rgba(0,0,0,.06); transition:transform .18s ease, box-shadow .18s ease;">
+        {{- if $rCover }}
+        <span style="display:block; position:relative;">
+          <img loading="lazy" src="{{ partial "asset_url.html" (printf "%s/620/%s" $rDir $rFile) }}" alt="{{ .Params.cover.alt | default .Title }}"
+               width="620" height="930" style="width:100%; height:auto; display:block;">
+        </span>
+        {{- else }}
+        <span style="display:block; width:100%; padding-top:40%; background:linear-gradient(160deg,#0E5A43,#0B4A36);"></span>
+        {{- end }}
+        <span style="display:block; padding:12px 14px;">
+          <strong style="font-family:'Montserrat',sans-serif; font-size:.95em; line-height:1.35; color:#0E5A43; display:block; margin-bottom:6px;">{{ .Title | plainify }}</strong>
+          {{- with .Description }}<span style="font-size:.82em; color:#555; line-height:1.45; display:block;">{{ . | plainify | truncate 100 }}</span>{{ end }}
+        </span>
+      </a>
+      {{- end }}
+    </div>
+  </div>
+  {{- end }}
+
+  {{- /* ---------- Verwandte Ratgeber (Cluster-Vernetzung) ---------- */}}
+  {{- $pillars := slice "strom-sparen" "versicherungen" "mietwagen" "frugalismus" "internet-dsl" "konto-karten" }}
+  {{- $others := slice }}
+  {{- range $pillars }}{{ if ne . $.File.ContentBaseName }}{{ $others = $others | append . }}{{ end }}{{ end }}
+  {{- if gt (len $others) 0 }}
+  <div style="margin:28px 0 8px; padding-top:20px; border-top:2px solid rgba(14,90,67,.15);">
+    <h2 style="font-family:'Montserrat',sans-serif; font-weight:700; color:#0E5A43; margin-bottom:16px; font-size:1.15em;">Weitere Ratgeber auf FranksFinanzcheck</h2>
+    <div style="display:flex; flex-wrap:wrap; gap:10px;">
+      {{- range $others }}
+        {{- with site.GetPage (printf "pillar/%s" .) }}
+        <a href="../{{ .File.ContentBaseName }}/" style="background:var(--ff-emerald-soft); color:#0E5A43; border:1px solid rgba(14,90,67,.25); border-radius:999px; padding:8px 16px; font-size:.88em; font-weight:600; text-decoration:none;">{{ .Title | plainify | replaceRE "^.*?: " "" | truncate 40 }}</a>
+        {{- end }}
+      {{- end }}
+    </div>
+  </div>
+  {{- end }}
+
+  {{ partial "extend_post_content.html" . }}
+
+  <footer class="post-footer">
+    {{- $tags := .Language.Params.Taxonomies.tags | default "tags" }}
+    <ul class="post-tags">
+      {{- range ($.GetTerms $tags) }}
+      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+  </footer>
+</article>
+
+{{- end }}{{/* end main */}}

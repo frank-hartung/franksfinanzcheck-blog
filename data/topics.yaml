@@ -13,121 +13,161 @@
 topics:
   # --- EP: Geld sparen & Frugalismus -------------------------
   - title: "5 einfache Frugalismus-Tricks für den Alltag"
+    pillar: "frugalismus"
     keywords: ["Frugalismus Tipps", "Geld sparen im Alltag", "Haushaltsbuch führen", "Sparmethoden"]
   - title: "Die 50-30-20-Regel einfach erklärt"
+    pillar: "frugalismus"
     keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen"]
   - title: "7 Gewohnheiten für finanzielle Freiheit"
+    pillar: "frugalismus"
     keywords: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset"]
   - title: "Notgroschen aufbauen: Wie viel reicht wirklich?"
+    pillar: "frugalismus"
     keywords: ["Notgroschen aufbauen", "Tagesgeld", "Finanzielle Sicherheit"]
 
   # --- EP: Strom & Gas ---------------------------------------
   - title: "Stromfresser im Haushalt entlarven"
+    pillar: "strom-sparen"
     keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
   - title: "Heizperiode vorbereiten im Spätsommer"
+    pillar: "strom-sparen"
     keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
 
   # --- EP: Internet & DSL ------------------------------------
   - title: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
+    pillar: "internet-dsl"
     keywords: ["WLAN verbessern", "DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
   - title: "DNS-Server ändern für schnelleres Internet"
+    pillar: "internet-dsl"
     keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
 
   # --- EP: Reisen --------------------------------------------
   - title: "Urlaubskasse clever aufbessern"
+    pillar: "mietwagen"
     keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig reisen"]
   - title: "Mietwagen-Fallen im Urlaub vermeiden"
+    pillar: "mietwagen"
     keywords: ["Mietwagen Tipps", "Urlaub Mietwagen", "Reisekosten sparen"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
 
   # --- TP: CHECK24-Kategorien (Transactional) ----------------
   - title: "Stromanbieter wechseln und bis zu 300 Euro sparen"
+    pillar: "strom-sparen"
     keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten sparen 2026"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
   - title: "Gastarife vergleichen vor dem Herbst"
+    pillar: "strom-sparen"
     keywords: ["Gasvergleich", "Gaskosten sparen", "Heizkosten senken"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
   - title: "DSL- und Internet-Flat günstig sichern"
+    pillar: "internet-dsl"
     keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
   - title: "Kostenloses Girokonto ohne Gebühren finden"
+    pillar: "konto-karten"
     keywords: ["Kostenloses Girokonto", "Girokonto Vergleich", "Kontoführungsgebühren sparen"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
   - title: "Günstigen Ratenkredit mit Bestzins sichern"
+    pillar: "konto-karten"
     keywords: ["Kreditvergleich", "Ratenkredit günstig", "Umschuldung sparen"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditvergleich"
   - title: "Kfz-Versicherung vergleichen und sparen"
+    pillar: "versicherungen"
     keywords: ["Kfz Versicherung wechseln", "Autoversicherung vergleichen", "Sparmethoden Auto"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kfz-versicherung"
   - title: "Last-Minute Urlaubsangebote sichern"
+    pillar: "mietwagen"
     keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Sommerurlaub Schnäppchen"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
   - title: "Günstigen Mietwagen für den Urlaub buchen"
+    pillar: "mietwagen"
     keywords: ["Mietwagen buchen", "Günstige Mietwagen", "Mietwagen Vergleich"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
   - title: "Günstige Flüge für den Spätsommer finden"
+    pillar: "mietwagen"
     keywords: ["Flugtickets günstig", "Flugvergleich", "Reisebudget sparen"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=flugvergleich"
 
   # --- Erweiterung: weitere Nischen (laufend ergänzbar) -----
   - title: "Handytarife vergleichen: So findest du den günstigsten Tarif"
+    pillar: "internet-dsl"
     keywords: ["Handytarif vergleichen", "Handyvertrag wechseln", "Günstiger Handytarif"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife"
   - title: "Privathaftpflicht: Warum sie Pflicht ist und was sie kostet"
+    pillar: "versicherungen"
     keywords: ["Privathaftpflicht", "Haftpflichtversicherung Vergleich", "Haftpflicht Kosten"]
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=haftpflichtversicherung"
   - title: "Hausratversicherung: Wer sie braucht und was sie leistet"
+    pillar: "versicherungen"
     keywords: ["Hausratversicherung vergleichen", "Hausrat absichern", "Hausrat Kosten"]
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hausratversicherung"
   - title: "Reisekrankenversicherung: Wann sie sich wirklich lohnt"
+    pillar: "versicherungen"
     keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschutz"]
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=reisekrankenversicherung"
   - title: "Zahnzusatzversicherung: Lohnt sich der Abschluss?"
+    pillar: "versicherungen"
     keywords: ["Zahnzusatzversicherung", "Zahnarztkosten sparen", "Zahnersatz versichern"]
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=zahnzusatzversicherung"
   - title: "Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten"
+    pillar: "konto-karten"
     keywords: ["Kreditkarte ohne Gebühren", "Kreditkarten Vergleich", "Kostenlose Kreditkarte"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
   - title: "Tagesgeld und Zinsen: So parkst du dein Geld sicher"
+    pillar: "konto-karten"
     keywords: ["Tagesgeld", "Zinsen vergleichen", "Geld sicher anlegen"]
   - title: "E-Auto laden: So senkst du deine Stromkosten"
+    pillar: "strom-sparen"
     keywords: ["E-Auto Ladekosten", "Stromtarif E-Auto", "Wallbox sparen"]
   - title: "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung"
+    pillar: "strom-sparen"
     keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
   - title: "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?"
+    pillar: "strom-sparen"
     keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
 
   # --- Erweiterung Runde 2: weitere Nischen (laufend ergänzbar) -----
   - title: "Photovoltaik: Lohnt sich eine Solaranlage 2026?"
+    pillar: "strom-sparen"
     keywords: ["Photovoltaik", "Solaranlage Kosten", "Strom selbst erzeugen"]
   - title: "Balkonkraftwerk: Der einfache Einstieg in die Solarenergie"
+    pillar: "strom-sparen"
     keywords: ["Balkonkraftwerk", "Mini-Solaranlage", "Stecker-Solargerät"]
   - title: "Festgeld vs. Tagesgeld: Wo gibt es die besten Zinsen?"
+    pillar: "konto-karten"
     keywords: ["Festgeld", "Zinsen vergleichen", "Geld anlegen"]
   - title: "Umzug: Diese Versicherungen und Verträge musst du ummelden"
+    pillar: "versicherungen"
     keywords: ["Umzug Checkliste", "Verträge ummelden", "Umzug sparen"]
   - title: "Kabel-Internet vs. DSL: Was ist 2026 die bessere Wahl?"
+    pillar: "internet-dsl"
     keywords: ["Kabel Internet", "DSL Vergleich", "Internetanbieter"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
   - title: "Altersvorsorge: Die besten Wege für deine Rente"
+    pillar: "konto-karten"
     keywords: ["Altersvorsorge", "Rente aufbessern", "Private Vorsorge"]
   - title: "Heizöl kaufen: Wann ist der beste Zeitpunkt?"
+    pillar: "strom-sparen"
     keywords: ["Heizöl Preise", "Heizöl bestellen", "Heizkosten senken"]
   - title: "Glasfaserausbau: Wann lohnt sich der Anschluss?"
+    pillar: "internet-dsl"
     keywords: ["Glasfaser", "Glasfaseranschluss", "Schnelles Internet"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
   - title: "Stromtarif für Wärmepumpe: So sparst du beim Heizen"
+    pillar: "strom-sparen"
     keywords: ["Wärmepumpen-Tarif", "Stromtarif Heizen", "Heizkosten senken"]
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
   - title: "Hauskauf finanzieren: Darlehen clever vergleichen"
+    pillar: "konto-karten"
     keywords: ["Baufinanzierung", "Immobilienkredit", "Hauskauf Finanzierung"]
     affiliate_url: "https://www.check24.de/baufinanzierung/"
   - title: "Private Unfallversicherung: Für wen sie sich wirklich lohnt"
+    pillar: "versicherungen"
     keywords: ["Unfallversicherung", "Private Unfallversicherung", "Absicherung"]
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=unfallversicherung"

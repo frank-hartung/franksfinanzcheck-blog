@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Strom sparen", "Energie", "Haushalt"]
 categories: ["Günstige Strom- & Gastarife"]
+pillar: "strom-sparen"
 keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren", "Energiekosten reduzieren", "Stromverbrauch senken"]
 author: "Frank"
 cover:

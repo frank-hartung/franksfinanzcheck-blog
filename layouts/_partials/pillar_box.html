@@ -1,0 +1,23 @@
+{{- /* ============================================================
+    pillar_box.html – „Teil des Ratgebers"-Box in Artikeln
+    ------------------------------------------------------------
+    Jeder Post mit Frontmatter-Feld pillar: "<slug>" bekommt automatisch
+    einen kontextuellen, relativen Link auf seine Pillar-Page
+    (../../pillar/<slug>/ – Hugo-Subdir-Bug: keine führenden Slashes).
+    Das vernetzt das Themen-Cluster dauerhaft und bidirektional.
+============================================================ */ -}}
+{{- $slug := .Params.pillar -}}
+{{- if $slug -}}
+  {{- with site.GetPage (printf "pillar/%s" $slug) -}}
+  <div style="margin:28px 0 8px; background:linear-gradient(160deg,#EAF4EF,#F7FBF9); border:1px solid rgba(14,90,67,.22); border-left:6px solid #0E5A43; border-radius:12px; padding:14px 18px;">
+    <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+      <span style="font-size:1.5em;" aria-hidden="true">📘</span>
+      <div style="flex:1 1 220px; min-width:0;">
+        <strong style="font-family:'Montserrat',sans-serif; color:#0E5A43; font-size:.95em; display:block;">Teil des Ratgebers: {{ .Title | plainify | replaceRE "^.*?: " "" }}</strong>
+        <span style="font-size:.85em; color:#444; line-height:1.45; display:block;">{{ .Description | plainify | truncate 120 }}</span>
+      </div>
+      <a href="../../pillar/{{ $slug }}/" style="background:#0E5A43; color:#fff; font-family:'Montserrat',sans-serif; font-weight:700; font-size:.88em; padding:9px 18px; border-radius:999px; text-decoration:none; white-space:nowrap;">Zum Ratgeber →</a>
+    </div>
+  </div>
+  {{- end -}}
+{{- end -}}

@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Zahnzusatz", "Versicherung", "Gesundheit"]
 categories: ["Versicherungen"]
+pillar: "versicherungen"
 keywords: ["Zahnzusatzversicherung", "Zahnarztkosten sparen", "Zahnersatz versichern", "Zusatzversicherung Zahnarzt", "Zahnzusatzversicherung Vergleich"]
 author: "Frank"
 cover:

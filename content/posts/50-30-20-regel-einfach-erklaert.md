@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Budgetierung", "50-30-20", "Haushaltsplanung"]
 categories: ["Haushaltskasse & Budgetplanung"]
+pillar: "frugalismus"
 keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen", "Regel Rechner", "Haushaltsbuch Vorlage"]
 author: "Frank"
 cover:

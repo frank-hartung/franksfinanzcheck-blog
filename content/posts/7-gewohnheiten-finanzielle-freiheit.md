@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset"]
 categories: ["Geld sparen & Frugalismus"]
+pillar: "frugalismus"
 keywords: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset", "Passives Einkommen", "Frugalismus"]
 author: "Frank"
 cover:

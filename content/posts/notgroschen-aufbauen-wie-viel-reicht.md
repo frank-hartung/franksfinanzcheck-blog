@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Notgroschen", "Tagesgeld", "Finanzielle Sicherheit"]
 categories: ["Haushaltskasse & Budgetplanung"]
+pillar: "frugalismus"
 keywords: ["Notgroschen aufbauen", "Tagesgeld", "Finanzielle Sicherheit", "Notgroschen anlegen", "Notfallfonds aufbauen"]
 author: "Frank"
 cover:

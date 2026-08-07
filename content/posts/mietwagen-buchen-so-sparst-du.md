@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Mietwagen", "Reisen", "Urlaub"]
 categories: ["Reisebudget & Mietwagen"]
+pillar: "mietwagen"
 keywords: ["Mietwagen buchen", "Günstige Mietwagen", "Mietwagen Vergleich", "billige Mietwagen", "Mietwagen Preise"]
 author: "Frank"
 cover:

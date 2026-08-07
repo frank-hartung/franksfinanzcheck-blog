@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Reise", "Versicherung", "Ausland"]
 categories: ["Reisebudget & Mietwagen"]
+pillar: "versicherungen"
 keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschutz", "Reiseversicherung", "Auslandsreiseversicherung"]
 author: "Frank"
 cover:

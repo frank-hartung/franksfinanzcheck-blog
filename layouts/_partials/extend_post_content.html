@@ -34,6 +34,7 @@
 {{- /* Nutzt Hugos semantisches Related-Matching (keywords/tags/categories,
        siehe [related] in hugo.toml) und zeigt 3 Karten mit Cover-Bildern
        in der AVIF/WebP/JPEG-Kaskade (wie cover.html). */ -}}
+{{- partial "pillar_box.html" . }}
 {{- $related := .Site.RegularPages.Related . | first 3 -}}
 {{- if gt (len $related) 0 -}}
 <div class="ff-related" style="margin:36px 0 8px; padding-top:24px; border-top:2px solid rgba(14,90,67,.15);">

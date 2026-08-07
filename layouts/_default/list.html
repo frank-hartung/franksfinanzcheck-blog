@@ -117,6 +117,12 @@
 </footer>
 {{- end }}
 
+{{- /* Ratgeber-Cluster am Seitenende: hält das erste Cover (LCP) im
+       Viewport, verlinkt aber alle 6 Pillar-Pages von der Startseite. */}}
+{{- if and .IsHome (eq $paginator.PageNumber 1) }}
+{{- partial "home_clusters.html" . }}
+{{- end }}
+
 {{- end }}{{/* end profileMode */}}
 
 {{- end }}{{- /* end main */ -}}

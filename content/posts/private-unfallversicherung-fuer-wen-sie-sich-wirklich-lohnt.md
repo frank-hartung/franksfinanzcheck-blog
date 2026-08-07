@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Unfallversicherung", "Versicherung", "Absicherung"]
 categories: ["Versicherungen"]
+pillar: "versicherungen"
 keywords: ["Unfallversicherung", "Private Unfallversicherung", "Absicherung", "Unfallschutz", "Versicherungsvergleich"]
 author: "Frank"
 cover:

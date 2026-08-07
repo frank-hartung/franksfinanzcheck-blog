@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Tagesgeld", "Sparen", "Zinsen"]
 categories: ["Haushaltskasse & Budgetplanung"]
+pillar: "konto-karten"
 keywords: ["Tagesgeld", "Zinsen vergleichen", "Geld sicher anlegen", "Tagesgeldkonto", "Tagesgeldzinsen"]
 author: "Frank"
 cover:

@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Hausrat", "Versicherung", "Wohnen"]
 categories: ["Versicherungen"]
+pillar: "versicherungen"
 keywords: ["Hausratversicherung vergleichen", "Hausrat absichern", "Hausrat Kosten", "Hausratversicherung Tarif", "HausratversicherungTest"]
 author: "Frank"
 cover:
