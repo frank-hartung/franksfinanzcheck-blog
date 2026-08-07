@@ -23,6 +23,7 @@ on:
       - "Backlink-Automation"
       - "Wöchentliches Einzigartigkeits-Audit"
       - "Wöchentliches Nach-Pinnen"
+      - "Quartalsweises Artikel-Update"
     types:
       - completed
 
