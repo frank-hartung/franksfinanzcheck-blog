@@ -55,6 +55,11 @@
     setCookie(KEY, choice);
     window.ffConsentChoice = choice;
     root.classList.add('ff-consent-set');
+    // Event für nachgeladene Dienste (z. B. Umami-Analytics, das bei
+    // späterer Zustimmung "Alle akzeptieren" nachgeladen wird)
+    try {
+      document.dispatchEvent(new CustomEvent('ffConsentChange', { detail: choice }));
+    } catch (e) {}
   };
   window.ffConsentShow = function (focusFirst) {
     root.classList.remove('ff-consent-set');

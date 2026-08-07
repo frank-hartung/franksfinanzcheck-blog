@@ -49,6 +49,25 @@ Diese Website verwendet Schriftarten der Familie **Montserrat** und **Playfair D
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer einheitlichen und schnellen Darstellung der Website).
 
+### Statistik und Reichweitenmessung (Umami – cookieless)
+
+Diese Website nutzt zur Reichweitenmessung das datenschutzfreundliche Analyse-Tool **Umami** (Open Source). Umami ist **cookieless**: Es werden **keine Cookies** gesetzt und **keine personenbezogenen Daten** gespeichert. Erfasst werden ausschließlich anonyme, aggregierte Kennzahlen:
+
+- Seitenaufrufe und Verweildauer
+- Herkunftsland (auf Regionsebene, nicht IP-basiert)
+- Referrer (welche Website verwiesen hat)
+- Gerätetyp und Browser (ohne individuelle Kennung)
+
+**Technische Umsetzung:** Die IP-Adresse wird von Umami beim Empfang **sofort anonymisiert** (gehasht) und nicht gespeichert. Eine Identifizierung einzelner Besucher ist technisch ausgeschlossen. Es werden keine Daten an Dritte (z. B. Google) weitergegeben.
+
+**Betrieb der Instanz:**
+- **Cloud-Variante:** Die Daten werden auf den Servern von Umami verarbeitet (weitere Informationen: [umami.is/privacy](https://umami.is/privacy)). Umami verarbeitet nach eigenen Angaben keine personenbezogenen Daten.
+- **Self-hosted-Variante:** Die Daten liegen auf einem eigenen Server (je nach Hosting in der EU oder im Rahmen der gültigen Datenschutz-Abkommen mit dem Hosting-Anbieter).
+
+**Einwilligung:** Der Einsatz erfolgt nach deiner Wahl im Consent-Banner – entweder erst nach „Alle akzeptieren" (strenger Modus) oder cookieless ohne Einwilligung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Verbesserung der Website). Du kannst die Messung jederzeit verhindern, indem du in deinem Browser den **Do-Not-Track-Header** aktivierst oder im Consent-Banner „Nur notwendige" wählst.
+
+**Rechtsgrundlage:** Art. 6 Abs. 1 lit. a DSGVO (Einwilligung) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse), je nach gewähltem Modus. § 25 TDDDG ist nicht einschlägig, da keine Cookies gesetzt werden.
+
 ### Server-Logfiles
 
 Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Logfiles, die dein Browser automatisch an uns übermittelt. Dies sind:
