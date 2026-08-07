@@ -1,0 +1,50 @@
+# ============================================================
+#  BACKLINK-AUTOMATION (wöchentlich, Montag 08:00 MESZ)
+#
+#  Der Scout prüft die kuratierten Backlink-Opportunities
+#  (data/backlink_prospects.yaml), priorisiert sie nach Passung
+#  und generiert personalisierte Outreach-Texte in
+#  BACKLINK-REPORT.md. Das ABSENDEN bleibt bewusst manuell
+#  (Qualitäts-Gate – automatisches Posten wäre Spam).
+#
+#  Der Report wird automatisch committet, damit du ihn immer
+#  aktuell im Repo findest (oder per E-Mail-Benachrichtigung).
+#
+#  Zeitzonen: GitHub-Cron läuft UTC. MESZ = UTC+2, MEZ = UTC+1.
+#    Sommerzeit: 06:00 UTC = 08:00 MESZ
+#    Winterzeit: 07:00 UTC = 08:00 MEZ
+# ============================================================
+name: Backlink-Automation
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"    # Mo 08:00 MESZ (06:00 UTC)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  backlink-scout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python + Abhängigkeiten
+        run: pip install -q pyyaml
+
+      - name: Backlink-Scout ausführen
+        run: python3 scripts/backlink_automation.py
+
+      - name: Report + Status committen
+        run: |
+          git config user.name "Backlink-Bot"
+          git config user.email "backlink-bot@users.noreply.github.com"
+          git add BACKLINK-REPORT.md data/backlink_prospects.yaml
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen – Report ist aktuell."
+          else
+            git commit -m "backlinks: wöchentlicher Scout-Report generiert"
+            git push
+          fi

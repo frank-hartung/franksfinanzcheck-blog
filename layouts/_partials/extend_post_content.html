@@ -26,19 +26,57 @@
     <a href="https://www.pinterest.de/franksfinanzcheck/" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600;">meinem Pinterest-Profil</a>.</p>
 </div>
 
-{{- /* ---------- Related Posts (interne Verlinkung / SEO) ---------- */ -}}
+{{- /* ---------- Related Posts (interne Verlinkung / SEO) – PROFI ---------- */ -}}
+{{- /* Nutzt Hugos semantisches Related-Matching (keywords/tags/categories,
+       siehe [related] in hugo.toml) und zeigt 3 Karten mit Cover-Bildern
+       in der AVIF/WebP/JPEG-Kaskade (wie cover.html). */ -}}
 {{- $related := .Site.RegularPages.Related . | first 3 -}}
 {{- if gt (len $related) 0 -}}
-<div class="ff-related" style="margin:32px 0 8px; padding-top:20px; border-top:2px solid rgba(14,90,67,.15);">
-  <h3 style="font-family:'Montserrat',sans-serif; font-weight:800; color:#0E5A43; margin-bottom:12px;"><span aria-hidden="true">📚 </span>Das könnte dich auch interessieren</h3>
-  <ul style="list-style:none; padding:0; margin:0; display:grid; gap:8px;">
+{{- $jsdelivrSha := getenv "HUGO_JSDELIVR_SHA" -}}
+<div class="ff-related" style="margin:36px 0 8px; padding-top:24px; border-top:2px solid rgba(14,90,67,.15);">
+  <h3 style="font-family:'Montserrat',sans-serif; font-weight:800; color:#0E5A43; margin-bottom:16px; font-size:1.25em;"><span aria-hidden="true">📚 </span>Das könnte dich auch interessieren</h3>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px;">
     {{- range $related -}}
-    <li style="padding:10px 14px; background:#EAF4EF; border-radius:8px; border-left:4px solid #FFB300;">
-      <a href="{{ .Permalink }}" style="color:#0E5A43; font-weight:600; text-decoration:none;">{{ .Title }}</a>
-      <span style="display:block; font-size:.82em; color:#555; margin-top:2px;">{{ .Description | truncate 90 }}</span>
-    </li>
+    {{- $rCover := .Params.cover.image -}}
+    {{- $rFile := "" -}}
+    {{- $rBase := "" -}}
+    {{- $rDir := "" -}}
+    {{- if $rCover -}}
+      {{- $rFile = path.Base $rCover -}}
+      {{- $rBase = strings.TrimSuffix (path.Ext $rFile) $rFile -}}
+      {{- $rDir = path.Dir $rCover -}}
     {{- end -}}
-  </ul>
+    <a href="{{ .Permalink }}"
+       aria-label="Weiterlesen: {{ .Title }}"
+       style="display:flex; flex-direction:column; background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; overflow:hidden; text-decoration:none; transition:transform .18s ease, box-shadow .18s ease; box-shadow:0 1px 4px rgba(0,0,0,.06);">
+      <span style="display:block; position:relative;">
+        {{- if $rCover -}}
+          <picture>
+            {{- if $jsdelivrSha -}}
+            <source type="image/avif" srcset="https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $jsdelivrSha }}/static/{{ $rDir }}/avif/{{ $rBase }}.avif 1x">
+            <source type="image/webp" srcset="https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $jsdelivrSha }}/static/{{ $rDir }}/webp/{{ $rBase }}.webp 1x">
+            {{- end -}}
+            <img loading="lazy" src="{{ if $jsdelivrSha }}https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $jsdelivrSha }}/static/{{ $rDir }}/620/{{ $rFile }}{{ else }}{{ $rCover | absURL }}{{ end }}"
+                 alt="{{ .Params.cover.alt | default .Title }}"
+                 width="620" height="930"
+                 style="width:100%; aspect-ratio:2/3; object-fit:cover; display:block;">
+          </picture>
+        {{- else -}}
+          <span style="display:block; width:100%; aspect-ratio:2/3; background:linear-gradient(160deg,#0E5A43,#0B4A36);"></span>
+        {{- end -}}
+        {{- with .Params.categories -}}
+        {{- $cat := index . 0 -}}
+        <span style="position:absolute; top:8px; left:8px; background:rgba(255,179,0,.95); color:#111; font-size:.68em; font-weight:700; padding:3px 8px; border-radius:999px; letter-spacing:.02em;">{{ $cat }}</span>
+        {{- end -}}
+      </span>
+      <span style="display:block; padding:12px 14px 14px;">
+        <span style="display:block; font-size:.75em; color:#777; margin-bottom:4px;">{{ .Date.Format "02.01.2006" }}</span>
+        <span style="display:block; color:#0E5A43; font-weight:700; font-size:.95em; line-height:1.35; margin-bottom:6px;">{{ .Title }}</span>
+        <span style="display:block; color:#555; font-size:.82em; line-height:1.4;">{{ .Description | plainify | truncate 80 }}</span>
+      </span>
+    </a>
+    {{- end -}}
+  </div>
 </div>
 {{- end -}}
 {{- end -}}
