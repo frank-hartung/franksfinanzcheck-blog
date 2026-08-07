@@ -82,6 +82,22 @@
        nach dem ersten Paint ankam – Lighthouse-Culprit: body#top) */ -}}
 {{- $stylesheet = $stylesheet | resources.Minify }}
 <style>{{ $stylesheet.Content | safeCSS }}</style>
+{{- /* ---------- Selbst gehostete Fonts (@font-face, jsDelivr-SHA) ---------- */}}
+{{- /* Google-Fonts-Thirdparty eliminiert: woff2-Dateien liegen in static/fonts/
+       und werden über jsDelivr mit 1-Jahres-Cache ausgeliefert. Die SHA-URL
+       wird vom Deploy-Workflow injiziert (HUGO_JSDELIVR_SHA). */ -}}
+{{- $fontSha := getenv "HUGO_JSDELIVR_SHA" -}}
+{{- if $fontSha -}}
+<style>
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:optional;src:url(https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $fontSha }}/static/fonts/montserrat-normal-500.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:optional;src:url(https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $fontSha }}/static/fonts/montserrat-normal-600.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:optional;src:url(https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $fontSha }}/static/fonts/montserrat-normal-700.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:optional;src:url(https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $fontSha }}/static/fonts/montserrat-normal-800.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:500;font-display:optional;src:url(https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $fontSha }}/static/fonts/playfairdisplay-normal-500.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:600;font-display:optional;src:url(https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $fontSha }}/static/fonts/playfairdisplay-normal-600.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:500;font-display:optional;src:url(https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $fontSha }}/static/fonts/playfairdisplay-italic-500.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+</style>
+{{- end -}}
 
 {{- /* Search */}}
 {{- if (eq .Layout `search`) -}}
