@@ -116,6 +116,14 @@ jobs:
           python3 scripts/spellcheck.py --fix | tee /tmp/spell_log.txt
           exit ${PIPESTATUS[0]}
 
+      - name: Grammatikprüfung aller Artikel (LanguageTool de-DE)
+        # Wöchentliche Komplettprüfung: Grammatik, Zeichensetzung,
+        # Kontext-Fehler in allen Posts – eindeutige Korrekturen werden
+        # automatisch angewendet (Stil-Fälle nur im Report).
+        run: |
+          python3 scripts/grammar_check.py --fix | tee /tmp/grammar_log.txt
+          exit ${PIPESTATUS[0]}
+
       - name: Meta-Qualitäts-Gate (Re-Audit + Report – VOLLAUTOMATISCH)
         # Prüft nach der Optimierung ALLE Artikel erneut und erzeugt
         # META-REPORT.md. Exit 0 = alles grün (kein Handlungsbedarf),

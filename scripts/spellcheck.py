@@ -78,6 +78,7 @@ PHRASEN_FIXES = [
     (re.compile(r'\bgeld sparen im alltag\b'), 'Geld sparen im Alltag'),
     (re.compile(r'\bmietwagen günstig buchen\b'), 'Mietwagen günstig buchen'),
     (re.compile(r'\bfrugalismus tipps\b'), 'Frugalismus-Tipps'),
+    (re.compile(r'Jjetzt([A-Za-zÄÖÜäöüß]+)'), r'Jetzt \1'),  # Polish-Artefakt
 ]
 
 

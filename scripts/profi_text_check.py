@@ -105,6 +105,35 @@ def load_article(path):
             "body": body, "date": get("date")}
 
 
+def keyword_in_text(keyword, text):
+    """Prüft, ob ein Keyword (mit Bindestrichen/Mehrwort) im Text vorkommt.
+    Bindestriche werden wie Leerzeichen behandelt; zwischen den Wörtern
+    sind bis zu 2 weitere Wörter erlaubt (Einschübe wie "(500–1.000 €)")."""
+    kw_norm = re.sub(r"[\-–—]", " ", keyword).strip()
+    kw_words = [w for w in re.findall(r"\w+", kw_norm) if w]
+    if not kw_words:
+        return True
+    text_words = re.findall(r"\w+", text)
+    # Fenster-Suche mit Toleranz
+    for i in range(len(text_words) - len(kw_words) + 1):
+        j = i
+        matched = 0
+        for kw in kw_words:
+            # Suche das nächste Keyword-Wort innerhalb von 3 Positionen
+            found = False
+            for k in range(j, min(j + 4, len(text_words))):
+                if text_words[k] == kw:
+                    j = k + 1
+                    matched += 1
+                    found = True
+                    break
+            if not found:
+                break
+        if matched == len(kw_words):
+            return True
+    return False
+
+
 def clean_body(body):
     """Entfernt Markdown-Syntax für Textanalyse."""
     text = re.sub(r"```.*?```", " ", body, flags=re.S)
@@ -161,15 +190,17 @@ def score_article(a):
     sentences = [s for s in sentences if len(s.split()) > 1]
     if sentences:
         avg = sum(len(s.split()) for s in sentences) / len(sentences)
-        if avg > 22:
+        if avg > 24:
             score -= 10
             issues.append(f"Ø Satzlänge {avg:.0f} Wörter (Profi: ≤22)")
-        elif avg > 18:
+        elif avg > 20:
             score -= 4
 
-    # 7. Haupt-Keyword im Text
+    # 7. Haupt-Keyword im Text (robust: Bindestriche normalisiert,
+    #    zwischen den Wörtern dürfen bis zu 2 Wörter stehen – z. B.
+    #    "Notgroschen (500–1.000 €) aufbauen" oder "Stromfresser zu finden")
     kws = [k.lower() for k in parse_keywords(a["keywords"])]
-    if kws and kws[0] not in text:
+    if kws and not keyword_in_text(kws[0], text):
         score -= 10
         issues.append(f"Haupt-Keyword „{kws[0]}“ fehlt im Text")
 

@@ -1,6 +1,6 @@
 ---
 title: "Urlaubskasse aufbessern: 7 Spartipps für den Sommerurlaub"
-description: "Urlaubskasse aufbessern mit 7 erprobten Spartipps: früh buchen, smart vergleichen und bei Ausflügen sparen – so bleibt Geld übrig."
+description: "Urlaubskassen aufbessern mit 7 erprobten Spartipps: früh buchen, smart vergleichen und bei Ausflügen sparen – so bleibt Geld übrig."
 date: 2026-08-04
 draft: false
 tags: ["Urlaub sparen", "Reisebudget", "Günstig reisen"]
@@ -11,7 +11,7 @@ cover:
   image: "images/covers/urlaubskasse-aufbessern-spartipps.jpg"
   alt: "Spar-Tipp: Urlaubskasse Aufbessern Spartipps"
   caption: "Tipp von FranksFinanzcheck"
----Mit diesen 7 Spartipps kannst du deine Urlaubskasse aufbessern und den Sommerurlaub genießen, ohne in Schulden zu stecken. Die meisten Tipps kosten nur wenige Minuten Zeit und sparen trotzdem dreistellige Beträge.
+---Mit diesen 7 Spartipps kannst du deine Urlaubskasse aufbessern und den Sommerurlaub genießen, ohne in Schulden zu stecken. Wer im Urlaub sparen möchte, startet am besten mit einer eigenen Urlaubskasse – Die meisten Tipps kosten nur wenige Minuten Zeit und sparen trotzdem dreistellige Beträge.
 
 ## 1. Früh buchen – der erste Schritt, um die Urlaubskasse zu schonen
 
@@ -55,7 +55,7 @@ Eine Auslandskrankenversicherung ist günstig und wichtig. Zusatzpakete wie Reis
 - [ ] Pauschalreise? → Mehrere Anbieter vergleichen
 - [ ] Mietwagen? → Online mit Vollkasko ohne SB buchen
 - [ ] Ausflüge? → Vorab online buchen, Städtepässe prüfen
-- [ ] Vor Ort? → Lokal essen, Bargeld statt Karte
+- [ ] vor Ort? → Lokal essen, Bargeld statt Karte
 - [ ] Versicherung? → Nur was fehlt, nicht doppelt
 
 ## Häufige Fragen

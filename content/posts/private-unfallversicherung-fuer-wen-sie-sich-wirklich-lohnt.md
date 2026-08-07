@@ -27,11 +27,11 @@ Der Staat schützt dich nur bei Unfällen im Job, in der Schule oder auf dem dir
 ## Was die private Unfallversicherung leistet
 
 - **Invaliditätsleistung:** Du erhältst eine hohe Einmalzahlung, wenn eine dauerhafte Beeinträchtigung bleibt.
-- **Progression:** Dieser Turbo erhöht deine Auszahlung überproportional bei schweren Schäden.
-- **Unfallrente:** Ab einem bestimmten Invaliditätsgrad zahlt der Versicherer eine lebenslange monatliche Rente.
+- **Progression:** dieser Turbo erhöht deine Auszahlung überproportional bei schweren Schäden.
+- **Unfallrente:** ab einem bestimmten Invaliditätsgrad zahlt der Versicherer eine lebenslange monatliche Rente.
 - **Krankenhaustagegeld:** Du bekommst für jeden Tag in der Klinik einen festen Geldbetrag.
 - **Gliedertaxe:** Sie legt präzise fest, wie viel Geld du für den Verlust eines Fingers, Beins oder des Sehvermögens erhältst.
-- **Todesfallleistung:** Diese Summe sichert deine Hinterbliebenen finanziell ab, falls ein Unfall tödlich endet.
+- **Todesfallleistung:** diese Summe sichert deine Hinterbliebenen finanziell ab, falls ein Unfall tödlich endet.
 
 ## Was der Schutz kostet
 
@@ -47,11 +47,11 @@ Dein Eintrittsalter spielt eine große Rolle. Schließe die Police frühzeitig a
 
 ## Für wen lohnt sich der Abschluss?
 
-**Die Versicherung ist unverzichtbar für:**
-- **Sportler und aktive Menschen:** Wer viel wandert, Rad fährt oder im Verein spielt, trägt ein höheres Risiko.
+**Die Versicherung ist besonders sinnvoll für:**
+- **Sportler und aktive Menschen:** wer viel wandert, Rad fährt oder im Verein spielt, trägt ein höheres Risiko.
 - **Familien mit Kindern:** Kinder erkunden ihre Welt oft ohne Gefahrenbewusstsein – Unfälle auf dem Spielplatz sind privat nicht versichert.
 - **Selbstständige:** Du genießt oft gar keinen gesetzlichen Schutz und musst deine Existenz selbst absichern.
-- **Hausbesitzer:** Ein Unfall erfordert oft teure Umbauten am Eigenheim, die diese Versicherung finanziert.
+- **Hausbesitzer:** ein Unfall erfordert oft teure Umbauten am Eigenheim, die diese Versicherung finanziert.
 
 **Eher zweitrangig ist sie für:**
 - Personen mit sehr hohem Vermögen, die Invaliditätsfolgen aus eigenen Mitteln stemmen.

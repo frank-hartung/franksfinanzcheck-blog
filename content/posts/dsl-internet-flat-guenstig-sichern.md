@@ -17,16 +17,16 @@ cover:
 - **Bedarf ermitteln:** 100 Mbit/s genügen den meisten Haushalten völlig.
 - **Effektivpreis berechnen:** Rechne alle Boni und Hardware-Kosten auf die Laufzeit um.
 - **Fristen wahren:** Kündige rechtzeitig, um teure automatische Verlängerungen zu vermeiden.
-- **Prämien nutzen:** Ein hoher Wechselbonus senkt deine monatliche Belastung massiv.
+- **Prämien nutzen:** ein hoher Wechselbonus senkt deine monatliche Belastung massiv.
 - **Verfügbarkeit prüfen:** Nutze einen unabhängigen DSL Vergleich für deine Adresse.
 
 ## Schritt 1: Was brauchst du wirklich?
 
 Bevor du einen neuen Vertrag abschließt, kläre deinen tatsächlichen Bedarf. Die Bandbreite bestimmt maßgeblich den Preis deines Tarifs.
 
-- **50–100 Mbit/s:** Diese Geschwindigkeit reicht für Single-Haushalte und Paare. Du streamst damit problemlos Filme in HD und arbeitest ohne Ruckler im Homeoffice.
+- **50–100 Mbit/s:** diese Geschwindigkeit reicht für Single-Haushalte und Paare. Du streamst damit problemlos Filme in HD und arbeitest ohne Ruckler im Homeoffice.
 - **100–250 Mbit/s:** Familien mit mehreren Geräten profitieren hiervon. Streaming in 4K und größere Downloads laufen parallel flüssig.
-- **250 Mbit/s und mehr:** Diese Tarife eignen sich für Profi-Gamer oder Haushalte mit extrem hohem Datenaufkommen.
+- **250 Mbit/s und mehr:** diese Tarife eignen sich für Profi-Gamer oder Haushalte mit extrem hohem Datenaufkommen.
 
 Die meisten Haushalte kommen mit 100 Mbit/s sehr gut aus. Mehr Bandbreite kostet oft 10 bis 20 Euro mehr pro Monat, bringt im Alltag aber selten spürbare Vorteile. Prüfe vorab, welche Technologie bei dir anliegt: DSL, Kabel oder Glasfaser.
 

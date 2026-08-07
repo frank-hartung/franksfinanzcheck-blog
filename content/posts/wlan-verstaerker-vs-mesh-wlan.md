@@ -30,7 +30,7 @@ Ein Repeater empfängt das WLAN-Signal des Routers und sendet es verstärkt weit
 - Bei mehreren Repeatern wird das Netz unübersichtlich
 - Geräte "kleben" am schwächeren Repeater statt automatisch am besten Sender
 
-**Mein Fazit:** Für eine kleine Wohnung, etwa bis 80 m², oder wenn nur ein einzelner Raum versorgt werden muss, reicht ein Repeater völlig aus.
+**Mein Fazit:** für eine kleine Wohnung, etwa bis 80 m², oder wenn nur ein einzelner Raum versorgt werden muss, reicht ein Repeater völlig aus.
 
 ## Mesh-WLAN: Das Profi-System
 
@@ -46,7 +46,7 @@ Ein Mesh-System besteht aus mehreren gleichartigen Knoten, die untereinander ein
 - Teurer, zwischen 100 und 300 Euro für 2-3 Knoten
 - Etwas mehr Einrichtungsaufwand
 
-**Mein Fazit:** Für größere Wohnungen, Häuser, mehrere Etagen oder wenn du Video-Streaming und Homeoffice gleichzeitig nutzt, ist Mesh die bessere Investition.
+**Mein Fazit:** für größere Wohnungen, Häuser, mehrere Etagen oder wenn du Video-Streaming und Homeoffice gleichzeitig nutzt, ist Mesh die bessere Investition.
 
 ## Die Entscheidung in 30 Sekunden
 
@@ -60,10 +60,10 @@ Ein Mesh-System besteht aus mehreren gleichartigen Knoten, die untereinander ein
 
 ## Bonus-Tipps für besseres WLAN – ohne neue Geräte
 
-1. **Router-Position:** Möglichst zentral und frei aufstellen – nicht im Schrank, nicht hinter dem Fernseher.
+1. **Router-Position:** möglichst zentral und frei aufstellen – nicht im Schrank, nicht hinter dem Fernseher.
 2. **Frequenzband wechseln:** 2,4 GHz reicht weiter, 5 GHz ist schneller – für Streaming 5 GHz wählen.
-3. **Kanal wechseln:** Überlappende Nachbarnetzwerke stören – im Router-Menü einen freien Kanal wählen.
-4. **Firmware aktualisieren:** Klingt banal, behebt aber oft Geschwindigkeitsprobleme.
+3. **Kanal wechseln:** überlappende Nachbarnetzwerke stören – im Router-Menü einen freien Kanal wählen.
+4. **Firmware aktualisieren:** klingt banal, behebt aber oft Geschwindigkeitsprobleme.
 5. **Veraltete Geräte aussortieren:** Router aus der Single-Stream-Ära sind ein Flaschenhals für jeden modernen Anschluss.
 
 Um dein WLAN zu optimieren und ein schnelles Internet zu Hause zu haben, ist es wichtig, die richtige Lösung für deine spezifische Situation zu wählen. Ein Mesh-Netzwerk kann beispielsweise eine gute Wahl sein, wenn du ein großes Haus hast oder wenn du viele Geräte gleichzeitig verbinden musst. Wenn du jedoch nur ein kleines Apartment hast, reicht möglicherweise ein einfacher WLAN-Verstärker aus.

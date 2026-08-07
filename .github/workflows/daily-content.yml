@@ -96,6 +96,21 @@ jobs:
           python3 scripts/spellcheck.py --fix | tee /tmp/spell_log.txt
           exit ${PIPESTATUS[0]}
 
+      - name: Grammatikprüfung (LanguageTool de-DE – Top-Level)
+        # Prüft die heute erstellten Artikel auf Grammatik, Zeichensetzung
+        # und Kontext-Fehler (LanguageTool Public API, kostenlos).
+        # Eindeutige Korrekturen werden automatisch angewendet; Stil-Fälle
+        # und unsichere landen im Report. Exit 1 → Workflow-Abbruch.
+        if: ${{ !cancelled() }}
+        run: |
+          LAST=$(git log -1 --format=%s)
+          if [[ "$LAST" != content:* ]]; then
+            echo "Kein Content-Commit – keine Grammatikprüfung nötig."
+            exit 0
+          fi
+          python3 scripts/grammar_check.py --fix --new-only | tee /tmp/grammar_log.txt
+          exit ${PIPESTATUS[0]}
+
       - name: Profi-Text-Qualitäts-Gate (nur neue Artikel)
         # Prüft die HEUTE erstellten Artikel auf Profi-Niveau (Wortanzahl,
         # Struktur, KI-Floskeln, Lesbarkeit, Keywords). Bei Unterschreitung

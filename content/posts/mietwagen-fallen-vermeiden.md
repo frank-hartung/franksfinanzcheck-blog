@@ -34,7 +34,7 @@ Die Kautionsblockade auf der Kreditkarte kann 500 bis 3.000 Euro betragen und is
 - **Junge-Fahrer-Gebühr:** unter 25 (oft auch unter 21) wird ein Aufschlag fällig – vorab vergleichen
 - **Zweiter Fahrer:** kostet bei den meisten Anbietern extra
 - **Zusatzfahrer:** auch wenn er nie fährt, muss er eingetragen sein – sonst erlischt der Versicherungsschutz
-- **Grenzübertrittsgebühr:** Fährst du ins Ausland (z. B. Von Spanien nach Portugal), kann eine Gebühr anfallen – vorab klären
+- **Grenzübertrittsgebühr:** fährst du ins Ausland (z. B. Von Spanien nach Portugal), kann eine Gebühr anfallen – vorab klären
 
 ## Falle 6: Die Schadensdokumentation
 

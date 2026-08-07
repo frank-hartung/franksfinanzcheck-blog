@@ -24,9 +24,9 @@ cover:
 
 Bevor du die Angebote sichtest, klärst du deinen tatsächlichen Bedarf. Nutze dafür die Verbrauchsübersicht in deinem aktuellen Smartphone-Menü oder die App deines Anbieters.
 
-- **2–5 GB:** Diese Menge reicht für Messaging, gelegentliches Surfen und Musik-Streaming.
+- **2–5 GB:** diese Menge reicht für Messaging, gelegentliches Surfen und Musik-Streaming.
 - **10–20 GB:** Ideal für Social Media, regelmäßiges Video-Streaming und mobiles Arbeiten.
-- **30 GB+:** Diese Pakete eignen sich für Power-User, die oft HD-Videos streamen oder Hotspots nutzen.
+- **30 GB+:** diese Pakete eignen sich für Power-User, die oft HD-Videos streamen oder Hotspots nutzen.
 
 Die meisten Nutzer decken ihren Alltag mit 10 bis 20 GB komplett ab. Ein unnötig großes Paket treibt den Preis in die Höhe. Ein günstiger Handytarif muss genau zu deinem Surfverhalten passen.
 
@@ -47,9 +47,9 @@ Achte auf das Kleingedruckte, um böse Überraschungen zu vermeiden. Sogenannte 
 
 Den Handyvertrag wechseln funktioniert heute oft innerhalb weniger Werktage. Folge einfach diesen Schritten für einen reibungslosen Übergang.
 
-1. **Kündigungsfrist checken:** Nach der Mindestlaufzeit beträgt die Frist meist nur noch einen Monat.
+1. **Kündigungsfrist checken:** nach der Mindestlaufzeit beträgt die Frist meist nur noch einen Monat.
 2. **Handytarif vergleichen online:** Nutze Portale für einen schnellen und transparenten Marktüberblick.
-3. **Bonus sichern:** Viele Anbieter locken mit Wechselprämien oder Cashback zwischen 10 und 50 Euro.
+3. **Bonus sichern:** viele Anbieter locken mit Wechselprämien oder Cashback zwischen 10 und 50 Euro.
 4. **Portierung beauftragen:** Dein neuer Anbieter regelt den Umzug deiner Rufnummer für dich.
 5. **Bestätigung prüfen:** Warte auf den verbindlichen Termin für die technische Umschaltung.
 

@@ -43,7 +43,7 @@ Lege für den Vergleich deinen aktuellen Versicherungsschein und deinen Kilomete
 ## FAQ
 
 **Kann ich während der Vertragslaufzeit wechseln?**
-Ein Wechsel ist möglich, wenn dein Versicherer die Beiträge erhöht. In diesem Fall hast du ein Sonderkündigungsrecht von vier Wochen ab Erhalt der Rechnung. Auch nach einem Schadensfall oder einem Fahrzeugverkauf darfst du den Vertrag vorzeitig beenden.
+ein Wechsel ist möglich, wenn dein Versicherer die Beiträge erhöht. In diesem Fall hast du ein Sonderkündigungsrecht von vier Wochen ab Erhalt der Rechnung. Auch nach einem Schadensfall oder einem Fahrzeugverkauf darfst du den Vertrag vorzeitig beenden.
 
 **Wird die SF-Klasse mitgenommen?**
 Ja, deine mühsam erfahrene Schadenfreiheitsklasse gehört dir persönlich. Dein neuer Versicherer fragt diese Daten nach dem Wechsel einfach beim alten Anbieter ab. Dein Rabatt bleibt dir also erhalten.
@@ -53,6 +53,19 @@ Ein Umzug allein ist kein Kündigungsgrund. Dein Versicherer stuft dich jedoch i
 
 **Lohnt sich der Wechsel jedes Jahr?**
 Ein kurzer Check lohnt sich immer. Die Tariflandschaft ist extrem dynamisch. Oft sparst du durch einen schnellen Vergleich jedes Jahr dreistellige Beträge, die du besser investieren kannst.
+
+
+## Häufige Fragen
+
+### Wann lohnt sich der Kfz-Versicherungswechsel?
+Der Wechsel lohnt sich fast immer zum Ende des Versicherungsjahres. Kündigungsfrist ist in der Regel ein Monat vor Ablauf. Wer früher wechseln will, kann bei einer Beitragserhöhung ein Sonderkündigungsrecht nutzen.
+
+### Was kostet ein Wechsel der Kfz-Versicherung?
+Der Wechsel selbst ist kostenlos. Du musst nur die neue Police rechtzeitig abschließen und die alte fristgerecht kündigen. Achte darauf, dass der neue Vertrag nahtlos beginnt, damit kein Versicherungsschutz entsteht.
+
+### Worauf sollte ich beim Wechsel achten?
+Nicht nur der Preis zählt: Prüfe die Leistungen wie Werkstattbindung, Schutzbrief oder Rabattschutz. Ein günstiger Tarif bringt nichts, wenn er im Schadenfall weniger zahlt.
+
 
 ---
 

@@ -47,8 +47,8 @@ Dort tauschst du die automatische Zuweisung gegen feste IP-Adressen aus. Nach de
 Ich habe verschiedene Dienste getestet, um die beste Performance zu finden. Hier sind die drei stabilsten Optionen für dein Netzwerk:
 
 *   **Cloudflare (1.1.1.1):** Aktuell einer der schnellsten Dienste weltweit. Er punktet durch minimale Ladezeiten und hohen Fokus auf Datenschutz.
-*   **Google Public DNS (8.8.8.8):** Enorm zuverlässig und schnell. Google nutzt die Daten jedoch intensiver als andere Anbieter.
-*   **Quad9 (9.9.9.9):** Dieser Dienst priorisiert deine Sicherheit. Er blockiert bekannte bösartige Webseiten bereits auf DNS-Ebene.
+*   **Google Public DNS (8.8.8.8):** enorm zuverlässig und schnell. Google nutzt die Daten jedoch intensiver als andere Anbieter.
+*   **Quad9 (9.9.9.9):** dieser Dienst priorisiert deine Sicherheit. Er blockiert bekannte bösartige Webseiten bereits auf DNS-Ebene.
 
 ## Privatsphäre als wichtiger Bonus
 

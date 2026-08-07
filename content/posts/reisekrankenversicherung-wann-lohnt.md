@@ -17,7 +17,7 @@ cover:
 
 Die gesetzliche Krankenversicherung übernimmt im EU-Ausland mit der Europäischen Krankenversicherungskarte nur die medizinisch notwendige Behandlung zu deutschen GKV-Bedingungen. Du erhältst also meist die Regelversorgung. Nicht abgedeckt sind unter anderem:
 - Krankentransport oder Rücktransport nach Deutschland – kann zehntausende Euro kosten
-- Privatärztliche Behandlung und Einzelzimmer
+- Privat ärztliche Behandlung und Einzelzimmer
 - Zahnbehandlung über die Regelversorgung hinaus
 - Behandlung in Ländern außerhalb der EU – hier zahlt die GKV gar nichts
 
@@ -38,15 +38,15 @@ Die Beiträge sind bemerkenswert günstig:
 | Einzelperson (bis 65 Jahre) | 10–30 € pro Jahr |
 | Familie (inkl. Kinder) | 20–40 € pro Jahr |
 | Senioren (ab 65) | 40–100 € pro Jahr |
-Du erhältst weltweite Absicherung – das beste Preis-Leistungs-Verhältnis aller Versicherungen.
+du erhältst weltweite Absicherung – das beste Preis-Leistungs-Verhältnis aller Versicherungen.
 
 ## Darauf solltest du beim Vergleich achten
 
-1. **Rücktransport:** Unbedingt enthalten – nicht nur „Transport zum nächsten Krankenhaus“
-2. **Weltweite Deckung:** Auch für Nicht-EU-Länder wie USA oder Thailand
-3. **Dauer:** Reicht die Deckung für längere Reisen oder nur für 30 Tage?
-4. **Vorerkrankungen:** Manche Tarife schließen chronische Erkrankungen aus – bei Vorerkrankungen genau prüfen
-5. **Altersgrenzen:** Viele Tarife haben günstige Senioren-Varianten oder unbegrenzte Dauer
+1. **Rücktransport:** unbedingt enthalten – nicht nur „Transport zum nächsten Krankenhaus“
+2. **Weltweite Deckung:** auch für Nicht-EU-Länder wie USA oder Thailand
+3. **Dauer:** reicht die Deckung für längere Reisen oder nur für 30 Tage?
+4. **Vorerkrankungen:** manche Tarife schließen chronische Erkrankungen aus – bei Vorerkrankungen genau prüfen
+5. **Altersgrenzen:** viele Tarife haben günstige Senioren-Varianten oder unbegrenzte Dauer
 
 ## Häufige Fragen
 

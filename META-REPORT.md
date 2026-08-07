@@ -37,7 +37,7 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Günstige Flüge im Spätsommer: 7 Tricks zum Ge | 54 | 141 | 6 | ✅ |
 | 100 | Handytarife vergleichen: So findest du den gü | 60 | 137 | 5 | ✅ |
 | 100 | Hausratversicherung: Wer sie braucht und was  | 56 | 141 | 5 | ✅ |
-| 100 | Heizperiode vorbereiten: 3 wichtige Dinge für | 56 | 125 | 6 | ✅ |
+| 100 | Heizperiode vorbereiten: 3 wichtige Dinge für | 56 | 126 | 6 | ✅ |
 | 100 | Kfz-Versicherung wechseln: Wann es sich wirkl | 54 | 129 | 5 | ✅ |
 | 100 | Kostenloses Girokonto ohne Gebühren: So finde | 53 | 149 | 5 | ✅ |
 | 100 | Kreditkarte ohne Jahresgebühr: Die besten kos | 60 | 143 | 5 | ✅ |
@@ -53,10 +53,10 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Stromanbieter wechseln 2026: So sparst du bei | 59 | 134 | 5 | ✅ |
 | 100 | Stromfresser entlarven: Diese 3 Geräte kosten | 50 | 140 | 6 | ✅ |
 | 100 | Tagesgeld und Zinsen: So parkst du dein Geld  | 51 | 130 | 5 | ✅ |
-| 100 | Urlaubskasse aufbessern: 7 Spartipps für den  | 57 | 130 | 5 | ✅ |
+| 100 | Urlaubskasse aufbessern: 7 Spartipps für den  | 57 | 131 | 5 | ✅ |
 | 100 | Wärmepumpe vs. Gasheizung: Was sich 2026 wirk | 55 | 134 | 5 | ✅ |
 | 100 | WLAN-Verstärker vs. Mesh-WLAN: Schnelles Inte | 58 | 139 | 6 | ✅ |
 | 100 | Zahnzusatzversicherung: Wann sich der Abschlu | 53 | 141 | 5 | ✅ |
 
 ---
-*Erzeugt am 2026-08-07 um 15:03 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-07 um 15:17 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*

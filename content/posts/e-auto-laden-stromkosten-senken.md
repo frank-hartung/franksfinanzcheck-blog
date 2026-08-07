@@ -24,8 +24,8 @@ cover:
 | Ladestation | Kosten pro kWh (ca.) | Wann sinnvoll |
 |---|---|---|
 | **Zuhause (Wallbox)** | 0,28–0,40 € | Täglich über Nacht – die günstigste Basis |
-| **Öffentliche AC-Säule** | 0,45–0,65 € | Beim Parken in der Stadt oder beim Einkauf |
-| **Öffentlicher Schnelllader (DC)** | 0,55–0,85 € | Ausschließlich auf Langstrecken nutzen |
+| **öffentliche AC-Säule** | 0,45–0,65 € | Beim Parken in der Stadt oder beim Einkauf |
+| **öffentlicher Schnelllader (DC)** | 0,55–0,85 € | Ausschließlich auf Langstrecken nutzen |
 
 Wer 80 Prozent der Energie daheim bezieht, spart am meisten. Du zahlst pro Kilometer dann nur einen Bruchteil im Vergleich zu fossilen Kraftstoffen. Nutzt du fast ausschließlich öffentliche Säulen, schmilzt dein finanzieller Vorteil schnell dahin.
 

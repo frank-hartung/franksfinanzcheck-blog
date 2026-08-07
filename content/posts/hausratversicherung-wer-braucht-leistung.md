@@ -26,7 +26,7 @@ Grundsätzlich braucht jeder eine Hausratversicherung, der einen eigenen Haushal
 
 *   **Mieter:** Du haftest selbst für dein Inventar und benötigst eigenen Schutz.
 *   **Eigentümer:** Ergänze deine Gebäudeversicherung unbedingt um den Schutz für bewegliche Güter.
-*   **Wohngemeinschaften:** Prüft, ob ihr eine gemeinsame Police abschließt oder jeder Bewohner seinen eigenen Bereich versichert.
+*   **Wohngemeinschaften:** prüft, ob ihr eine gemeinsame Police abschließt oder jeder Bewohner seinen eigenen Bereich versichert.
 
 ## Was die Hausratversicherung abdeckt
 
@@ -35,14 +35,14 @@ Der Basisschutz greift bei Schäden durch Feuer, Leitungswasser, Sturm und Hagel
 *   **Feuer:** Brand, Blitzschlag, Explosion und oft auch Sengschäden.
 *   **Leitungswasser:** Rohrbruch oder Schäden durch defekte Waschmaschinen.
 *   **Diebstahl:** Raub und Einbruchdiebstahl in die versicherte Wohnung.
-*   **Sturm & Hagel:** In der Regel ab Windstärke 8 versichert.
+*   **Sturm & Hagel:** in der Regel ab Windstärke 8 versichert.
 *   **Optionen:** Erweitere den Schutz bei Bedarf um Fahrraddiebstahl oder Glasbruch.
 
 Einige Punkte bleiben jedoch meist ausgeschlossen. Eigenes Verschulden ohne entsprechenden Tarifbaustein oder die normale Abnutzung deiner Möbel übernimmt der Versicherer nicht. Wertsachen wie Schmuck oder Bargeld sind oft nur bis zu einer Grenze von ca. 20 bis 30 % der Versicherungssumme gedeckt.
 
 ## Was kostet die Hausratversicherung?
 
-Die Hausrat Kosten hängen primär von deinem Wohnort und dem Wert deiner Einrichtung ab. In Städten mit höheren Einbruchstatistiken zahlst du oft etwas mehr als in ländlichen Regionen. Nutze die Quadratmeter-Pauschale, um den passenden Schutzwert zu ermitteln.
+Die Hausrat-Kosten hängen primär von deinem Wohnort und dem Wert deiner Einrichtung ab. In Städten mit höheren Einbruchstatistiken zahlst du oft etwas mehr als in ländlichen Regionen. Nutze die Quadratmeter-Pauschale, um den passenden Schutzwert zu ermitteln.
 
 | Wohnung | Jahresbeitrag (ca.) |
 |---|---|
@@ -54,9 +54,9 @@ Die meisten Versicherer rechnen mit einer Summe von 650 Euro pro Quadratmeter Wo
 
 ## Die 5 wichtigsten Vergleichs-Kriterien
 
-Ein guter Hausratversicherung Tarif muss mehr leisten als nur den Standard. Achte zwingend auf den Unterversicherungsverzicht, damit dein Versicherer im Teilschaden voll zahlt. Der gleitende Neuwert stellt sicher, dass du dir heute gleichwertigen Ersatz kaufen kannst.
+Ein guter Hausratversicherung-Tarif muss mehr leisten als nur den Standard. Achte zwingend auf den Unterversicherungsverzicht, damit dein Versicherer im Teilschaden voll zahlt. Der gleitende Neuwert stellt sicher, dass du dir heute gleichwertigen Ersatz kaufen kannst.
 
-1.  **Unterversicherungsverzicht:** Der Versicherer prüft im Schadensfall nicht, ob die Summe exakt stimmt.
+1.  **Unterversicherungsverzicht:** der Versicherer prüft im Schadensfall nicht, ob die Summe exakt stimmt.
 2.  **Grob fahrlässige Herbeiführung:** Die Versicherung zahlt auch, wenn du etwa die brennende Kerze vergisst.
 3.  **Wertsachen:** Prüfe die Entschädigungsgrenzen für Schmuck, Bargeld und Sammlungen.
 4.  **Elementarschäden:** Dieser Baustein sichert dich gegen Überschwemmung und Rückstau ab.

@@ -24,9 +24,9 @@ cover:
 
 Du teilst dein monatliches Nettoeinkommen in drei feste Töpfe auf. So behältst du die volle Kontrolle über deine Haushaltsplanung. Das Geld, das wirklich auf deinem Konto ankommt, bildet die Berechnungsgrundlage.
 
-- **50 % für Fixkosten:** Hierzu zählen Miete, Strom, Gas, Versicherungen und Kredite. Auch Internetverträge und notwendige Fahrtkosten gehören in diesen Block.
+- **50 % für Fixkosten:** hierzu zählen Miete, Strom, Gas, Versicherungen und Kredite. Auch Internetverträge und notwendige Fahrtkosten gehören in diesen Block.
 - **30 % für persönliche Wünsche:** Nutze diesen Teil für deine Freizeit, Restaurantbesuche und Shopping. Auch Streaming-Abos und Urlaubskosten fallen unter diese Kategorie.
-- **20 % zum Sparen:** Dieser Topf dient dem Aufbau deines Notgroschens und der Altersvorsorge. Erweitere hiermit gezielt dein Finanzwissen durch kluge Investitionen in ETFs oder Aktien.
+- **20 % zum Sparen:** dieser Topf dient dem Aufbau deines Notgroschens und der Altersvorsorge. Erweitere hiermit gezielt dein Finanzwissen durch kluge Investitionen in ETFs oder Aktien.
 
 Das System zwingt dich zu einer klaren Priorisierung. Du deckst zuerst deine Lebenshaltungskosten und sicherst deine Zukunft ab. Dein Konsum orientiert sich an dem, was danach übrig bleibt.
 
