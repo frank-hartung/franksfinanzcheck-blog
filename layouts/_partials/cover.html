@@ -5,13 +5,14 @@
     {{- /* LCP-Optimierung (Profi-Erkenntnis):
            - Single-Seiten: Cover ist oben im Viewport → eager + fetchpriority=high
              (schnellstes LCP, Bild ist das LCP-Element).
-           - Listen (Startseite): ALLE Covers lazy. Auf Mobile liegt das erste
-             Cover unterhalb des Folds (wird nie gemalt/nie LCP) – eager+high
-             würde dort nur einen unnötigen Download + Render-Delay im
-             Lighthouse-Modell erzeugen. Auf Desktop lädt der Browser
-             in-viewport-lazy-Bilder SOFORT → kein LCP-Nachteil. */}}
+           - Startseite: Das ERSTE Cover (Seite 1, Index 0) ist auf Desktop im
+             Viewport und das größte Element → LCP-Kandidat. eager + high, damit
+             Lighthouse LCP bewertet (lazy-Bilder im Viewport führen sonst zu
+             „LCP nicht bewertet") und das Bild früh lädt.
+           - Alle weiteren Listen-Covers: lazy (unterhalb des Folds). */}}
     {{- $fetchPriority := "" }}
     {{- if $.IsSingle }}{{ $fetchPriority = "high" }}{{ end }}
+    {{- if $.IsFirst }}{{ $loading = "eager" }}{{ $fetchPriority = "high" }}{{ end }}
     {{- $addLink := (and site.Params.cover.linkFullImages $.IsSingle) }}
     {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) }}
     {{- $alt := (.Params.cover.alt | default .Params.cover.caption | plainify) }}
