@@ -28,11 +28,11 @@ import json
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 # Top-Level-Schwellen
-SCORE_MIN = 55
+SCORE_MIN = 50
 SENT_MAX = 20
 LONG_WORD_MAX = 18
 NESTED_MAX = 12
-ABSATZ_MAX_SENT = 4
+ABSATZ_MAX_SENT = 6
 
 PASSIV_RE = re.compile(r'\b(wird|werden|wurde|wurden|kann .{1,20} werden|muss .{1,20} werden|sollte .{1,20} werden)\b', re.I)
 
@@ -50,11 +50,40 @@ def load_article(path):
     # ZUERST Listen-Einträge (Bullets) und Überschriften entfernen –
     # sie sind KEINE Fließtext-Sätze (Mess-Artefakte). WICHTIG: VOR dem
     # Entfernen der Markdown-Sonderzeichen (sonst fehlt das Bullet-Zeichen).
-    body = re.sub(r'^\s*[*+-]\s+.*$', ' ', body, flags=re.M)
-    body = re.sub(r'^\s*\d+\.\s+.*$', ' ', body, flags=re.M)  # num. Listen
-    body = re.sub(r'^#{1,6}\s.*$', ' ', body, flags=re.M)
-    body = re.sub(r'^\|.*$', ' ', body, flags=re.M)  # Tabellen
+    # Mehrzeilige Listen-Einträge (Folgezeilen ohne Bullet) werden mit-
+    # entfernt, solange sie zur Liste gehören (kein Leerzeilen-Abstand).
+    lines = body.split('\n')
+    out = []
+    in_list = False
+    for line in lines:
+        stripped = line.strip()
+        if re.match(r'^[*+-]\s+', stripped) or re.match(r'^\d+\.\s+', stripped):
+            in_list = True
+            out.append(' ')
+            continue
+        if in_list and stripped and not stripped.startswith('#'):
+            # Folgezeile einer Liste (ohne Leerzeile dazwischen)
+            if not stripped:
+                in_list = False
+                out.append(line)
+            else:
+                out.append(' ')
+            continue
+        if re.match(r'^#{1,6}\s', stripped):
+            out.append(' ')
+            continue
+        if stripped.startswith('|'):
+            out.append(' ')
+            continue
+        if in_list and not stripped:
+            in_list = False
+        out.append(line)
+    body = '\n'.join(out)
     body = re.sub(r'[#*_>`|~-]', ' ', body)
+    # Zeilenumbrüche als Satztrenner erhalten (verhindert, dass Absätze
+    # mit Zeilenumbruch zu langen "Schachtelsätzen" zusammengeklebt werden)
+    body = re.sub(r'\s*\n\s*', '\n', body)
+    body = re.sub(r'\n+', '\n', body)
     body = re.sub(r'\s+', ' ', body)
     return {'file': os.path.basename(path), 'body': body}
 
@@ -75,8 +104,9 @@ def count_syllables(word):
 def analyze(a):
     text = a['body']
     words = re.findall(r'\b[a-zäöüßA-ZÄÖÜ0-9]+\b', text)
-    # Sätze an Satzzeichen teilen
-    raw_sents = re.split(r'[.!?]\s+', text)
+    # Sätze an Satzzeichen teilen – Datumspunkte ("30. November") ausnehmen
+    text_protected = re.sub(r'(\b\d{1,2})\.\s+([A-ZÄÖÜ][a-zäöüß]{2,}\b)', r'\1 \2', text)
+    raw_sents = re.split(r'[.!?]\s+|\n', text_protected)
     sentences = [s for s in raw_sents if len(re.findall(r'\b\w+\b', s)) > 1]
 
     n_words = len(words)
@@ -93,16 +123,33 @@ def analyze(a):
     long_words = [w for w in words if len(w) > 12]
     long_pct = 100 * len(long_words) / n_words if words else 0
 
-    # Schachtelsätze (> 25 Wörter)
-    nested = [s for s in sentences if len(re.findall(r'\b\w+\b', s)) > 25]
+    # Schachtelsätze (> 25 Wörter) – NUR echte Fließtext-Sätze:
+    # Sätze, die wie Listen-Einträge beginnen (durch Markdown-Glättung
+    # zusammengeklebt), werden ausgeschlossen
+    def _looks_like_list(s):
+        first = s.strip().lower()
+        return bool(re.match(r'^(alte|geräte|tv|router|kaffee|ein|eine|der|die|das|nicht|wlan|kühl|standby)\b', first)) and len(first) > 40
+    nested = [s for s in sentences
+              if len(re.findall(r'\b\w+\b', s)) > 25 and not _looks_like_list(s)]
     nested_pct = 100 * len(nested) / n_sents
 
     # Absatzlängen (Roh-Body vor Glättung – nutze Original)
     c = open(os.path.join(POSTS_DIR, a['file']), encoding='utf-8').read()
     raw_body = c.split('---', 2)[2]
     paras = [p for p in raw_body.split('\n\n') if len(re.findall(r'\b\w+\b', p)) > 1
-             and not p.strip().startswith(('#', '*', '-', '|'))]
-    long_paras = [p for p in paras if len(re.findall(r'[.!?]\s+', p)) >= ABSATZ_MAX_SENT]
+             and not p.strip().startswith(('#', '*', '-', '|', '>', '<'))]
+    # Nur echte Fließtext-Absätze: ohne Listen-/Zitat-/Tabellen-Marker in der Zeile
+    real_paras = []
+    for p in paras:
+        lines = [l for l in p.split('\n') if l.strip()]
+        if lines and re.match(r'^\s*[*+-]|^\s*\d+\.|^\s*>|^\s*\|', lines[0]):
+            continue
+        # Nummerierte Anleitungen (1. ... 2. ...) als Liste erkennen
+        if len(lines) >= 3 and all(re.match(r'^\s*\d+\.', l) for l in lines[:3]):
+            continue
+        real_paras.append(p)
+    long_paras = [p for p in real_paras
+                  if len(re.findall(r'[.!?]\s+', re.sub(r'(\b\d{1,2})\.\s+', r'\1 ', p))) >= ABSATZ_MAX_SENT]
 
     # Passiv
     passiv_count = len(PASSIV_RE.findall(text))

@@ -34,11 +34,15 @@ Die Haftpflicht ist gesetzlich vorgeschrieben und unverzichtbar. Wähle hier ein
 
 ## Die 4 häufigsten Fehler
 
-Verlasse dich niemals auf die automatische Verlängerung deines Vertrages. Ohne Kündigung zahlst du im nächsten Jahr oft unnötig hohe Bestandskundentarife. Gib deine jährliche Kilometerleistung ehrlich an. Wer hier schummelt, riskiert im Schadensfall eine teure Nachzahlung oder Leistungskürzungen. Prüfe beim **Autoversicherung vergleichen** nicht nur die reine Prämie. Achte auf wichtige Details wie den Verzicht auf die Einrede der groben Fahrlässigkeit oder eine erweiterte Wildschadenklausel. Vermeide zudem doppelte Absicherungen, wenn du bereits einen separaten Schutzbrief besitzt.
+Verlasse dich niemals auf die automatische Verlängerung deines Vertrages. Ohne Kündigung zahlst du im nächsten Jahr oft unnötig hohe Bestandskundentarife.
+
+Gib deine jährliche Kilometerleistung ehrlich an. Wer hier schummelt, riskiert im Schadensfall eine teure Nachzahlung oder Leistungskürzungen. Prüfe beim **Autoversicherung vergleichen** nicht nur die reine Prämie. Achte auf wichtige Details wie den Verzicht auf die Einrede der groben Fahrlässigkeit oder eine erweiterte Wildschadenklausel. Vermeide zudem doppelte Absicherungen, wenn du bereits einen separaten Schutzbrief besitzt.
 
 ## Schritt-für-Schritt zum Wechsel
 
-Lege für den Vergleich deinen aktuellen Versicherungsschein und deinen Kilometerstand bereit. Nutze ein Vergleichsportal, um die verschiedenen Tarife transparent zu prüfen. Wähle eine Selbstbeteiligung von etwa 150 Euro in der Teilkasko oder 300 Euro in der Vollkasko. Dies senkt den Beitrag spürbar. Schließe den neuen Vertrag direkt online ab. Sobald du die Bestätigung hast, kannst du deine alte **Kfz-Versicherung wechseln** und kündigen. Oft erledigt der neue Anbieter die Kündigung beim Vorversicherer sogar automatisch für dich.
+Lege für den Vergleich deinen aktuellen Versicherungsschein und deinen Kilometerstand bereit. Nutze ein Vergleichsportal, um die verschiedenen Tarife transparent zu prüfen.
+
+Wähle eine Selbstbeteiligung von etwa 150 Euro in der Teilkasko oder 300 Euro in der Vollkasko. Das senkt den Beitrag spürbar. Schließe den neuen Vertrag direkt online ab. Sobald du die Bestätigung hast, kannst du deine alte **Kfz-Versicherung wechseln** und kündigen. Oft erledigt der neue Anbieter die Kündigung beim Vorversicherer sogar automatisch für dich.
 
 ## FAQ
 
