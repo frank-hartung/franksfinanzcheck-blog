@@ -1,0 +1,28 @@
+{{- /* ============================================================
+    asset_url.html – Zentraler Asset-URL-Helper (FIRST-PARTY)
+    ------------------------------------------------------------
+    Erzeugt aus einem statischen Pfad (z. B. "fonts/inter.woff2"
+    oder "images/covers/x.jpg") eine domain-relative URL, die direkt
+    auf GitHub Pages zeigt (relURL → /franksfinanzcheck-blog/...).
+
+    KEIN Drittanbieter-CDN: Alle Fonts/Bilder kommen vom eigenen
+    Ursprung (GitHub Pages läuft selbst auf einem globalen Fastly-
+    CDN). Damit ist der Lighthouse-Report "Drittanbieter" dauerhaft
+    leer – 0 KiB Third-Party-Übertragung.
+
+    Cache-Busting: GitHub Pages setzt max-age=600 (10 Minuten).
+    Deshalb wird der Deploy-SHA (Env HUGO_JSDELIVR_SHA, vom
+    Deploy-Workflow injiziert) als Query-Parameter ?v=<sha>
+    angehängt → nach jedem Deploy neue URL → sofort frischer
+    Content (identischer Effekt wie die früheren jsDelivr-SHA-URLs).
+    Ohne Env (lokaler Build) entfällt der Parameter.
+
+    Nutzung: {{ partial "asset_url.html" "fonts/inter.woff2" }}
+============================================================ */ -}}
+{{- $path := . -}}
+{{- $u := $path | relURL -}}
+{{- $sha := getenv "HUGO_JSDELIVR_SHA" -}}
+{{- if $sha -}}
+    {{- $u = printf "%s?v=%s" $u $sha -}}
+{{- end -}}
+{{- return $u -}}

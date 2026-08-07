@@ -181,8 +181,8 @@ def make_cover(title, slug, out_path):
     # --- Responsive Varianten (srcset): 620px und 720px Breite ---
     # Die Covers werden in Listen (620px) und Single-Seiten (720px) angezeigt.
     # Ohne kleinere Varianten lädt der Browser immer das 1000px-Original →
-    # Lighthouse "Properly size images". Die Varianten laufen über jsDelivr
-    # (gleiche SHA-URLs → gleicher 1-Jahres-Cache).
+    # Lighthouse "Properly size images". Die Varianten werden first-party von
+    # GitHub Pages ausgeliefert (Cache-Busting via ?v=<SHA> in asset_url.html).
     for variant_w in (620, 720):
         scale = variant_w / W
         vh = int(H * scale)

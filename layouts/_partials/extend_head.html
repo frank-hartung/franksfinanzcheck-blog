@@ -26,11 +26,12 @@
 {{- end -}}
 
 {{- /* ---------- Google Fonts: SELBST GEHOSTET (kein Drittanbieter) ---------- */ -}}
-{{- /* Die Latin-woff2-Dateien liegen in static/fonts/ und werden über
-       jsDelivr ausgeliefert (1-Jahres-Cache). Damit entfallen
-       fonts.googleapis.com + fonts.gstatic.com komplett (Datenschutz,
-       keine Drittanbieter-Requests, kein Render-Blocking). Die
-       @font-face-Regeln generiert head.html mit den SHA-URLs. */ -}}
+{{- /* Die Latin-woff2-Dateien liegen in static/fonts/ und werden DIREKT von
+       GitHub Pages (eigener Ursprung) ausgeliefert – kein externes CDN,
+       keine Drittanbieter (Lighthouse "Drittanbieter" = 0; Datenschutz).
+       Die @font-face-Regeln generiert head.html via asset_url.html
+       (?v=<SHA>-Cache-Busting). fonts.googleapis.com + fonts.gstatic.com
+       sind komplett eliminiert (kein Render-Blocking). */ -}}
 
 {{- /* ---------- Consent-Banner: LCP-/CLS-optimierte Anzeige ---------- */ -}}
 {{- /* Der Banner ist im Markup ab dem ERSTEN PAINT sichtbar (kein spätes
