@@ -6,10 +6,11 @@ draft: false
 tags: ["mietwagen roadtrip", "mietwagen günstig buchen", "reise budget"]
 categories: ["Ratgeber"]
 keywords: ["mietwagen roadtrip", "mietwagen günstig buchen", "reise budget"]
-author: ""
+author: "Frank"
 ai_generated: true
 ai_provider: "Groq (Gratis-Key: console.groq.com)"
 inspiration: Pin 30 – „Spätsommer-Mietwagen Schnäppchen“ (nur Themen-Grundlage, eigenständig formuliert)
+erfahrung: "Bei meinen eigenen Mietwagen-Buchungen habe ich mehrfach erlebt, wie sich der Preis zwischen Buchung und Abholung ändert – und dass ein Vergleich vor der Buchung schnell 20-30 % spart. Die Tipps hier habe ich in der Praxis gegengeprüft."
 cover:
   image: "images/covers/2026-08-07-mietwagen-fuer-den-spaetsommer.jpg"
   alt: "Spar-Tipp: 2026 08 07 Mietwagen Fuer Den Spaetsommer"

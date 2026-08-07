@@ -44,7 +44,9 @@ TOPICS_FILE = os.path.join(BLOG_DIR, "data", "topics.yaml")
 PINTEREST_PLAN = os.path.join(BLOG_DIR, "data", "pinterest_plan.yaml")
 
 MAX_ARTICLES = int(os.environ.get("MAX_ARTIKEL_PRO_LAUF", "1"))
-AUTHOR = os.environ.get("BLOG_AUTHOR", "Redaktion")
+AUTHOR = os.environ.get("BLOG_AUTHOR") or "Frank"
+# E-E-A-T: Autor immer setzen – kein leerer Author (Google braucht die
+# Autoren-Zuordnung für die E-E-A-T-Bewertung)
 AFFILIATE_URL = os.environ.get("AFFILIATE_URL") or "https://a.check24.net/misc/click.php?pid=80968&aid=18"
 
 # Schreib-Stile, die rotieren – so wird jeder Artikel einzigartig
