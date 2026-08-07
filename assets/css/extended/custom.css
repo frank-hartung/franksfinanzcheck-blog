@@ -94,22 +94,26 @@ h1, h2, h3, h4, h5, h6,
 .home-info {
     background: linear-gradient(160deg, var(--ff-emerald) 0%, var(--ff-emerald-dark) 100%);
     border-radius: 14px;
-    padding: 28px 26px;
-    margin-bottom: 28px;
+    padding: 22px 20px;
+    margin-bottom: 20px;
     box-shadow: 0 4px 18px rgba(14, 90, 67, 0.25);
 }
 
-.home-info h1 {
-    color: var(--ff-white);
-    font-weight: 700;
-    font-size: 1.9em;
-    margin-bottom: 10px;
-}
-
-.home-info .entry-content {
-    color: rgba(255, 255, 255, 0.92);
-    font-size: 0.98em;
-    line-height: 1.6;
+/* Mobile: Home-Info kompakt, damit das erste Cover (LCP-Element) in den
+   Viewport kommt und nicht der Text (mit Font-Wait) LCP wird. */
+@media (max-width: 600px) {
+    .home-info {
+        padding: 14px 16px;
+        margin-bottom: 14px;
+    }
+    .home-info h1 {
+        font-size: 1.25em;
+        margin-bottom: 6px;
+    }
+    .home-info .entry-content {
+        font-size: 0.88em;
+        line-height: 1.5;
+    }
 }
 
 .home-info .entry-content a {
@@ -127,17 +131,14 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* ---------- Artikel-Einträge (Blog-Übersicht) ---------- */
-/* Profi-Performance: content-visibility überspringt das Rendering aller
-   Karten UNTERHALB des Viewports → massiv weniger initiale Style/Layout-
-   Arbeit (Lighthouse "long-tasks"/"mainthread-work-breakdown").
-   contain-intrinsic-size reserviert die Höhe (auto = Browser merkt sich
-   die echte Größe) → KEIN CLS beim Scrollen. */
+/* KEIN content-visibility auf den Einträgen: Bei nur 8 Einträgen pro Seite
+   ist der Rendering-Gewinn minimal, aber content-visibility:auto kann das
+   LCP-Rendering von Text verzögern (bekanntes Lighthouse-Problem). Ohne
+   wird der erste Eintrag (LCP-Kandidat) sofort normal gerendert. */
 .post-entry {
     border: 1px solid var(--border);
     border-radius: 12px;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
-    content-visibility: auto;
-    contain-intrinsic-size: auto 950px;
 }
 
 .post-entry:hover {
@@ -285,14 +286,14 @@ html.ff-consent-set #ff-consent-banner {
 .ff-pinterest-cta {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 14px;
     flex-wrap: nowrap;              /* CLS-Fix: kein Umbruch nach Font-Swap */
     background: var(--ff-white);
     border: 2px solid var(--ff-emerald);
     border-left: 8px solid var(--ff-emerald);
     border-radius: 14px;
-    padding: 20px 24px;
-    margin-bottom: 28px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
     box-shadow: 0 4px 16px rgba(14, 90, 67, 0.12);
 }
 
@@ -301,8 +302,8 @@ html.ff-consent-set #ff-consent-banner {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 72px;
-    height: 72px;
+    width: 52px;
+    height: 52px;
     background: #fff;
     border-radius: 50%;
     box-shadow: 0 2px 10px rgba(230, 0, 35, 0.25);
@@ -313,22 +314,22 @@ html.ff-consent-set #ff-consent-banner {
     min-width: 0;                   /* CLS-Fix: Text schrumpft statt umzubrechen */
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
 }
 
 .ff-pinterest-cta-text strong {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 1.15em;
+    font-size: 1.0em;
     line-height: 1.35;              /* CLS-Fix: deterministische Zeilenhöhe
                                         (unabhängig vom Montserrat-Font-Swap) */
     color: var(--ff-anthracite);
 }
 
 .ff-pinterest-cta-text span {
-    font-size: 0.9em;
+    font-size: 0.85em;
     color: #555;
-    line-height: 1.5;
+    line-height: 1.45;
 }
 
 .ff-pinterest-cta-btn {
@@ -337,10 +338,10 @@ html.ff-consent-set #ff-consent-banner {
     color: var(--ff-anthracite);
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 1em;
+    font-size: 0.95em;
     line-height: 1.2;               /* CLS-Fix: deterministische Zeilenhöhe */
     white-space: nowrap;            /* CLS-Fix: kein Textumbruch nach Font-Swap */
-    padding: 12px 28px;
+    padding: 10px 22px;
     border-radius: 999px;
     text-decoration: none;
     box-shadow: 0 3px 10px rgba(255, 179, 0, 0.4);
@@ -358,9 +359,21 @@ html.ff-consent-set #ff-consent-banner {
         flex-wrap: wrap;            /* Mobile: Umbruch erlaubt (kein Font-Swap-Risiko) */
         justify-content: center;
         text-align: center;
+        gap: 10px;
+        padding: 10px 14px;
+        margin-bottom: 14px;
+    }
+    .ff-pinterest-cta-logo {
+        width: 44px;
+        height: 44px;
+    }
+    .ff-pinterest-cta-text strong {
+        font-size: 0.95em;
     }
     .ff-pinterest-cta-btn {
         width: 100%;
+        padding: 9px 18px;
+        font-size: 0.9em;
     }
 }
 
