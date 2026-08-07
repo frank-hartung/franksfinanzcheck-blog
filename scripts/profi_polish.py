@@ -108,6 +108,11 @@ REGELN:
     innerhalb der Absätze um. Nur Floskeln/Füllwörter dürfen entfallen.
 11. Falls der Artikel KEINE Liste und KEINE Tabelle enthält, ergänze eine kurze
     Liste mit 4-6 Punkten (z. B. "Das Wichtigste in Kürze") an passender Stelle.
+11b. LESBARKEIT (wichtig!): Zerlege Schachtelsätze (über 25 Wörter) in 2 kurze
+    Sätze. Ersetze lange Wörter durch einfachere Alternativen (z. B. "die
+    Erstattungsfähigkeit" → "ob die Kosten erstattet werden"). Vermeide
+    Nominalstil ("die Übernahme der Kosten" → "die Kasse übernimmt die Kosten").
+    Ziel: Ø Satzlänge unter 15 Wörter, Flesch-Score über 60.
 12. GROSS-/KLEINSCHREIBUNG: Verwende die NORMALE deutsche Rechtschreibung – wie in
     einem Zeitungsartikel. Nur Satzanfänge und Substantive werden großgeschrieben,
     alle anderen Wörter klein (KEIN Titel-Stil, kein "Jedes Wort Groß").
