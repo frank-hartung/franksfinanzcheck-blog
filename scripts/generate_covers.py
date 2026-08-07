@@ -30,6 +30,53 @@ try:
 except ImportError:
     sys.exit("FEHLER: pillow nicht installiert –  pip install pillow")
 
+try:
+    import pillow_avif  # noqa: F401 – Aktiviert AVIF-Support in Pillow
+    AVIF_OK = True
+except ImportError:
+    AVIF_OK = False
+    print("HINWEIS: pillow-avif-plugin fehlt – AVIF-Varianten werden übersprungen "
+          "(pip install pillow-avif-plugin)")
+
+
+def save_modern_variants(img, out_path):
+    """Speichert WebP- und AVIF-Varianten (1000/620/720px) für ein Cover.
+
+    Struktur:
+        webp/<name>.webp          avif/<name>.avif          (1000px)
+        webp/620/<name>.webp      avif/620/<name>.avif      (620px)
+        webp/720/<name>.webp      avif/720/<name>.avif      (720px)
+
+    AVIF ~50 % kleiner als WebP, WebP ~30-50 % kleiner als JPEG –
+    so liefert <picture> jedem Browser das kleinste passende Format.
+    """
+    W, H = img.size
+    base = os.path.dirname(out_path)
+    name = os.path.basename(out_path)
+    made = []
+
+    def store(fmt_dir, w, ext, save_kwargs):
+        d = os.path.join(base, fmt_dir, str(w) if w != W else "")
+        os.makedirs(d, exist_ok=True)
+        vpath = os.path.join(d, os.path.splitext(name)[0] + ext)
+        if os.path.exists(vpath):
+            return  # bereits vorhanden – nicht neu encodieren
+        v = img if w == W else img.resize((w, int(H * w / W)), Image.LANCZOS)
+        v.save(vpath, **save_kwargs)
+        made.append(os.path.relpath(vpath, base))
+
+    # WebP (immer)
+    store("webp", W, ".webp", {"format": "WEBP", "quality": 80, "method": 6})
+    store("webp", 620, ".webp", {"format": "WEBP", "quality": 80, "method": 6})
+    store("webp", 720, ".webp", {"format": "WEBP", "quality": 80, "method": 6})
+
+    # AVIF (nur wenn verfügbar)
+    if AVIF_OK:
+        for w in (W, 620, 720):
+            store("avif", w, ".avif", {"format": "AVIF", "quality": 50, "speed": 6})
+
+    return made
+
 
 def load_font(size):
     """Versucht Montserrat Bold (Masterplan-Font), sonst DejaVuSans-Bold."""
@@ -145,6 +192,10 @@ def make_cover(title, slug, out_path):
         v.save(os.path.join(vdir, os.path.basename(out_path)), "JPEG", quality=82, optimize=True)
     print(f"  ✓ Responsive: 620px + 720px für {os.path.basename(out_path)}")
 
+    # Moderne Formate (WebP + AVIF) für alle Größen
+    modern = save_modern_variants(img, out_path)
+    print(f"  ✓ Modern: {len(modern)} WebP/AVIF-Varianten für {os.path.basename(out_path)}")
+
 
 def ensure_cover_in_frontmatter(md_path, slug):
     with open(md_path, encoding="utf-8") as f:
@@ -169,12 +220,14 @@ def ensure_cover_in_frontmatter(md_path, slug):
 
 
 def ensure_responsive_variants(out_path):
-    """Erzeugt 620px- und 720px-Varianten für ein bestehendes Cover, falls fehlend."""
+    """Erzeugt 620px-/720px-JPEGs und WebP/AVIF-Varianten für ein bestehendes
+    Cover, falls fehlend (Nachzieh-Funktion für Bestandsbilder)."""
     if not os.path.exists(out_path):
         return False
     img = Image.open(out_path)
     W, H = img.size
     made = False
+    # JPEG 620/720
     for variant_w in (620, 720):
         vpath = os.path.join(os.path.dirname(out_path), str(variant_w), os.path.basename(out_path))
         if not os.path.exists(vpath):
@@ -184,8 +237,12 @@ def ensure_responsive_variants(out_path):
             os.makedirs(os.path.dirname(vpath), exist_ok=True)
             v.save(vpath, "JPEG", quality=82, optimize=True)
             made = True
+    # WebP/AVIF (prüft intern, ob bereits vorhanden)
+    modern = save_modern_variants(img, out_path)
+    if modern:
+        made = True
     if made:
-        print(f"  ✓ Responsive-Varianten ergänzt: {os.path.basename(out_path)}")
+        print(f"  ✓ Responsive/Modern-Varianten ergänzt: {os.path.basename(out_path)}")
     return made
 
 
