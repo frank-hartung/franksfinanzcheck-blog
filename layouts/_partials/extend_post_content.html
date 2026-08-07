@@ -9,6 +9,10 @@
 {{- end -}}
 {{- $pin_desc := printf "%s – via FranksFinanzcheck" (.Title | plainify) -}}
 {{- $pin_href := printf "https://pinterest.com/pin/create/button/?url=%s&media=%s&description=%s" ($pin_url | urlquery) ($pin_media | urlquery) ($pin_desc | urlquery) -}}
+{{- /* E-E-A-T: Erfahrungs-Marker (nur wenn Frontmatter `erfahrung:` gesetzt) */ -}}
+{{- partial "experience_box.html" . }}
+{{- /* E-E-A-T: Vertrauens-Box (Autor, Qualifikation, Transparenz) */ -}}
+{{- partial "trust_box.html" . }}
 <div class="pin-article" style="text-align:center; margin:28px 0 8px;">
   <a href="{{ $pin_href }}"
      target="_blank"
@@ -35,7 +39,7 @@
 {{- $jsdelivrSha := getenv "HUGO_JSDELIVR_SHA" -}}
 <div class="ff-related" style="margin:36px 0 8px; padding-top:24px; border-top:2px solid rgba(14,90,67,.15);">
   <h3 style="font-family:'Montserrat',sans-serif; font-weight:700; color:#0E5A43; margin-bottom:16px; font-size:1.25em; line-height:1.35;"><span aria-hidden="true">📚 </span>Das könnte dich auch interessieren</h3>
-  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px;">
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px;">
     {{- range $related -}}
     {{- $rCover := .Params.cover.image -}}
     {{- $rFile := "" -}}
@@ -59,10 +63,10 @@
             <img loading="lazy" src="{{ if $jsdelivrSha }}https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $jsdelivrSha }}/static/{{ $rDir }}/620/{{ $rFile }}{{ else }}{{ $rCover | absURL }}{{ end }}"
                  alt="{{ .Params.cover.alt | default .Title }}"
                  width="620" height="930"
-                 style="width:100%; aspect-ratio:2/3; object-fit:cover; display:block;">
+                 style="width:100%; height:auto; display:block;">
           </picture>
         {{- else -}}
-          <span style="display:block; width:100%; aspect-ratio:2/3; background:linear-gradient(160deg,#0E5A43,#0B4A36);"></span>
+          <span style="display:block; width:100%; padding-top:150%; background:linear-gradient(160deg,#0E5A43,#0B4A36);"></span>
         {{- end -}}
         {{- with .Params.categories -}}
         {{- $cat := index . 0 -}}
@@ -71,7 +75,7 @@
       </span>
       <span style="display:block; padding:12px 14px 14px;">
         <span style="display:block; font-size:.75em; color:#777; margin-bottom:4px;">{{ .Date.Format "02.01.2006" }}</span>
-        <span style="display:block; color:#0E5A43; font-weight:700; font-size:.95em; line-height:1.35; margin-bottom:6px;">{{ .Title }}</span>
+        <span style="display:block; color:#0E5A43; font-weight:700; font-size:1.02em; line-height:1.4; margin-bottom:6px;">{{ .Title }}</span>
         <span style="display:block; color:#555; font-size:.82em; line-height:1.4;">{{ .Description | plainify | truncate 80 }}</span>
       </span>
     </a>
