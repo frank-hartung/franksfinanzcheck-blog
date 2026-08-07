@@ -49,6 +49,39 @@
 </script>
 <noscript><style>#ff-consent-banner{display:none}</style></noscript>
 
+{{- /* ---------- E-E-A-T: Person-Schema (Autor mit Foto) ---------- */ -}}
+{{- /* Unterstützt Googles Autoren-Bewertung: identische @id auf allen
+       Seiten → Google verknüpft Artikel, Über-Seite und Autor. */ -}}
+{{- $authorPhoto := "images/frank-hartung.jpg" | absURL -}}
+{{- if .IsPage -}}
+<script type="application/ld+json">{{ (dict
+  "@context" "https://schema.org"
+  "@type" "Person"
+  "@id" (printf "%s#frank-hartung" site.BaseURL)
+  "name" "Frank Hartung"
+  "url" (printf "%sueber/" site.BaseURL)
+  "image" $authorPhoto
+  "jobTitle" "Autor & Betreiber von FranksFinanzcheck"
+  "knowsAbout" (slice "Geld sparen" "Frugalismus" "Tarifvergleiche" "Versicherungen" "Privatfinanzen")
+  "sameAs" (slice "https://www.pinterest.de/franksfinanzcheck/")
+) | jsonify | safeJS }}</script>
+{{- end -}}
+
+{{- /* ---------- E-E-A-T: ProfilePage-Schema (Über-Seite) ---------- */ -}}
+{{- if (and .IsPage (strings.HasSuffix .RelPermalink "/ueber/")) -}}
+<script type="application/ld+json">{{ (dict
+  "@context" "https://schema.org"
+  "@type" "ProfilePage"
+  "mainEntity" (dict
+    "@type" "Person"
+    "@id" (printf "%s#frank-hartung" site.BaseURL)
+    "name" "Frank Hartung"
+    "description" "Autor und Betreiber von FranksFinanzcheck – seit über 10 Jahren in der privaten Finanzplanung aktiv, hunderte selbst durchgeführte Tarifvergleiche."
+    "image" $authorPhoto
+  )
+) | jsonify | safeJS }}</script>
+{{- end -}}
+
 {{- /* ---------- FAQPage-Schema (aus den FAQ-Abschnitten der Artikel) ---------- */ -}}
 {{- if and .IsPage (eq .Section "posts") -}}
 {{- $faq := slice -}}

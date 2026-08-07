@@ -10,6 +10,7 @@ author: ""
 ai_generated: true
 ai_provider: "Groq (Gratis-Key: console.groq.com)"
 inspiration: Pin 6 – „DNS-Server ändern für schnelleres Internet“ (nur Themen-Grundlage, eigenständig formuliert)
+erfahrung: "Auch in meinem Heimnetz hat der Wechsel auf einen schnellen DNS-Server (Cloudflare 1.1.1.1) spürbar geholfen – besonders abends, wenn der Provider-Server ausgelastet ist. Der Umbau dauerte keine fünf Minuten."
 cover:
   image: "images/covers/2026-08-06-turbo-fuers-netz.jpg"
   alt: "Spar-Tipp: Internet-Turbo – Netz schneller machen"

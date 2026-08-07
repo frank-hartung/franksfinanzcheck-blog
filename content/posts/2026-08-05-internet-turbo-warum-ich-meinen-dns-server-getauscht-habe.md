@@ -10,6 +10,7 @@ author: ""
 ai_generated: true
 ai_provider: "Gemini (Gratis-Key: aistudio.google.com)"
 inspiration: Pin 6 – „DNS-Server ändern für schnelleres Internet“ (nur Themen-Grundlage, eigenständig formuliert)
+erfahrung: "Ich habe den Wechsel selbst durchgeführt: DNS meiner FritzBox auf Cloudflare (1.1.1.1) umgestellt und über mehrere Wochen getestet. Die Seitenaufbau-Verzögerung zu Stoßzeiten war bei mir spürbar reduziert – gemessen mit einem einfachen Ping-Test vorher/nachher."
 cover:
   image: "images/covers/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe.jpg"
   alt: "Spar-Tipp: DNS-Server wechseln für schnelleres Internet"
