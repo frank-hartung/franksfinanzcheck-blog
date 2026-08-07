@@ -179,7 +179,6 @@ perfektionismus
 starrheit
 aufbrauchen
 sparmindset
-sparmethoden
 haushaltsbuch
 
 # Sonstige korrekte Wörter, die Hunspell fehlen
