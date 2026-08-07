@@ -469,6 +469,20 @@ def analyze_article(a, whitelist):
                         "conf": 0.9,
                         "reason": "Description nutzt Höflichkeitsform – Blog-Stil ist du-Ansprache",
                     })
+            # DESCRIPTION-ENDPUNKT: Meta-Description muss mit . ! ? enden
+            # (vollständiger Satz – Google zeigt sie so in den SERPs).
+            # Nur anhängen, wenn der letzte Char kein Satzzeichen ist.
+            if desc and desc[-1] not in ".!?…":
+                punct_desc = desc.rstrip() + "."
+                # Länge im Rahmen halten (max. 160 – ggf. 1 Zeichen kürzen)
+                if len(punct_desc) > 160:
+                    punct_desc = desc.rstrip()[:159].rstrip() + "."
+                problems.append({
+                    "type": "desc_punkt", "word": desc, "fix": punct_desc,
+                    "abs_start": dstart, "abs_end": dstart + len(desc),
+                    "conf": 0.98,
+                    "reason": "Description endet ohne Satzzeichen – Punkt ergänzen",
+                })
             # Kleingeschriebene Substantive in der Description
             for m in re.finditer(r"[A-Za-zÄÖÜäöüß]+(?:-[A-Za-zÄÖÜäöüß]+)*", desc):
                 w = m.group(0)
