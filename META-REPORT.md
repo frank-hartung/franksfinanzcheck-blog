@@ -9,7 +9,7 @@
 | Artikel geprüft | 35 |
 | Ø Qualitätsscore | **98/100** |
 | Ø Titel-Länge | 53 Zeichen (optimal 50–60) |
-| Ø Description-Länge | 138 Zeichen (optimal 120–160) |
+| Ø Description-Länge | 137 Zeichen (optimal 120–160) |
 | Artikel mit Problemen | **0** |
 
 ## Status
@@ -33,9 +33,9 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 95 | Wärmepumpe vs. Gasheizung: Was lohnt sich 202 | 47 | 134 | 5 | ✅ |
 | 95 | Zahnzusatzversicherung: Lohnt sich der Abschl | 49 | 141 | 5 | ✅ |
 | 100 | Internet-Turbo: Warum ich meinen DNS-Server g | 58 | 148 | 3 | ✅ |
-| 100 | Frugalismus im Alltag: So sparst du jeden Mon | 58 | 127 | 4 | ✅ |
-| 100 | Turbo fürs Netz: DNS-Wechsel für schnelleres  | 53 | 160 | 3 | ✅ |
-| 100 | Mietwagen im Spätsommer: Günstig buchen und s | 50 | 129 | 3 | ✅ |
+| 100 | Frugalismus im Alltag: So sparst du jeden Mon | 58 | 120 | 4 | ✅ |
+| 100 | Turbo fürs Netz: DNS-Wechsel für schnelleres  | 53 | 134 | 3 | ✅ |
+| 100 | Mietwagen im Spätsommer: Günstig buchen und s | 50 | 127 | 3 | ✅ |
 | 100 | Die 50-30-20-Regel: Die perfekte Formel für d | 58 | 150 | 6 | ✅ |
 | 100 | DNS-Server ändern: Der kostenlose Boost für d | 57 | 142 | 5 | ✅ |
 | 100 | DSL- und Internet-Flat günstig sichern: Der b | 55 | 128 | 6 | ✅ |
@@ -56,7 +56,7 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Stromfresser entlarven: Diese 3 Geräte kosten | 50 | 140 | 6 | ✅ |
 | 100 | Tagesgeld und Zinsen: So parkst du dein Geld  | 51 | 130 | 5 | ✅ |
 | 100 | Urlaubskasse aufbessern: 7 Spartipps für den  | 57 | 130 | 5 | ✅ |
-| 100 | WLAN-Verstärker vs. Mesh-WLAN: Schnelles Inte | 57 | 139 | 6 | ✅ |
+| 100 | WLAN-Verstärker vs. Mesh-WLAN: Schnelles Inte | 58 | 139 | 6 | ✅ |
 
 ---
-*Erzeugt am 2026-08-07 um 14:31 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-07 um 14:45 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*

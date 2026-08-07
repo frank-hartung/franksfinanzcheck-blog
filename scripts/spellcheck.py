@@ -153,14 +153,25 @@ def batch_hunspell(words):
 
 
 def is_noun_capitalized(word):
-    """Prüft, ob die GROSSGESCHRIEBENE Form ein bekanntes Nomen ist
-    (Hunspell kennt 'Strom', aber nicht 'strom')."""
+    """Prüft, ob die GROSSGESCHRIEBENE Form ein bekanntes Nomen ist.
+
+    Strengere Logik (verhindert falsche Positives wie 'erreichst'→'Erreichst'):
+    - Die KLEINform muss ein Hunspell-FEHLER sein (sonst ist es ein Verb,
+      Adjektiv oder Pronomen – z. B. 'erreichst', 'deine', 'finanzielle').
+    - Die GROSSform muss ein Hunspell-TREFFER sein.
+    Nur dann liegt ein kleingeschriebenes Nomen vor ('geld'→'Geld')."""
     if not word or word[0].isupper():
         return False
+    # Kleinform: bekannt → kein Nomen-Fall (Verb/Adjektiv)
+    r_small = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
+                             input=word + "\n", capture_output=True, text=True)
+    if r_small.stdout.strip() == "":
+        return False
+    # Großform: bekannt → Nomen-Kandidat
     cap = word[0].upper() + word[1:]
-    r = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
-                       input=cap + "\n", capture_output=True, text=True)
-    return r.stdout.strip() == ""  # kein Fehler = bekanntes Wort
+    r_cap = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
+                           input=cap + "\n", capture_output=True, text=True)
+    return r_cap.stdout.strip() == ""
 
 
 def suggestions(word):
@@ -242,16 +253,64 @@ def analyze_article(a, whitelist):
             "reason": "„zuhause“ → „zu Hause“ (Standardform)",
         })
 
+    # 3. Description im Frontmatter mitprüfen (Google-Text!):
+    #    Phrasen-Fixes + "zuhause" + kleingeschriebene Substantive –
+    #    tags/keywords bleiben bewusst unangetastet (SEO-Kleinschreibung).
+    desc = a.get("description", "")
+    desc_abs_start = a["content"].find("description:")
+    if desc and desc_abs_start >= 0:
+        # absolute Position des Description-Inhalts (nach 'description: "')
+        quote = a["content"].find('"', desc_abs_start + 12)
+        if quote >= 0:
+            dstart = quote + 1
+            for regex, fix in PHRASEN_FIXES:
+                for m in regex.finditer(desc):
+                    problems.append({
+                        "type": "phrase", "word": m.group(0), "fix": fix,
+                        "abs_start": dstart + m.start(), "abs_end": dstart + m.end(),
+                        "conf": 0.97,
+                        "reason": f"Description-Phrase: „{m.group(0)}“ → „{fix}“",
+                    })
+            for m in ZUHAUSE_RE.finditer(desc):
+                problems.append({
+                    "type": "zuhause", "word": "zuhause", "fix": "zu Hause",
+                    "abs_start": dstart + m.start(), "abs_end": dstart + m.end(),
+                    "conf": 0.9,
+                    "reason": "Description: „zuhause“ → „zu Hause“",
+                })
+            # Kleingeschriebene Substantive in der Description
+            for m in re.finditer(r"[A-Za-zÄÖÜäöüß]+(?:-[A-Za-zÄÖÜäöüß]+)*", desc):
+                w = m.group(0)
+                if w.lower() in whitelist or len(w) <= 3 or w[0].isupper():
+                    continue
+                if is_noun_capitalized(w) and w.lower() != "zuhause":
+                    # Phrasen-Abdeckung prüfen (nicht doppelt)
+                    covered = any(regex.search(desc[max(0, m.start()-20):m.end()+20])
+                                  for regex, _ in PHRASEN_FIXES)
+                    if not covered:
+                        cap = w[0].upper() + w[1:]
+                        problems.append({
+                            "type": "noun_case", "word": w, "fix": cap,
+                            "abs_start": dstart + m.start(), "abs_end": dstart + m.end(),
+                            "conf": 0.95,
+                            "reason": f"Description: Substantive klein „{w}“ → „{cap}“",
+                        })
+
     return problems
 
 
 def apply_fix(a, problem):
-    """Wendet eine Korrektur im BODY an (Offset beachten: body beginnt nach ---)."""
+    """Wendet eine Korrektur an. Body-Funde rechnen den Offset nach dem
+    Frontmatter hoch; Description-Funde nutzen absolute Offsets."""
     content = a["content"]
     parts = content.split("---", 2)
     body_start = content.index(parts[2]) if len(parts) == 3 else 0
-    abs_start = body_start + problem["start"]
-    abs_end = body_start + problem["end"]
+    if "abs_start" in problem:
+        abs_start = problem["abs_start"]
+        abs_end = problem["abs_end"]
+    else:
+        abs_start = body_start + problem["start"]
+        abs_end = body_start + problem["end"]
 
     # Sicherheitscheck: nichts im Link/Code verändern
     segment = content[max(0, abs_start - 30):abs_end + 30]
@@ -367,21 +426,24 @@ def main():
         # 1) PHASEN-Fixes (größere Bereiche) zuerst – sie haben Vorrang
         # 2) Wort-Fixes, die mit einem Phasen-Bereich überlappen, überspringen
         covered = []  # bereits korrigierte Bereiche
+        def pstart(p): return p.get("abs_start", p.get("start"))
+        def pend(p):   return p.get("abs_end", p.get("end"))
         phases = sorted([p for p in entry["problems"] if p["type"] == "phrase"],
-                        key=lambda p: p["start"], reverse=True)
+                        key=lambda p: pstart(p), reverse=True)
         words = sorted([p for p in entry["problems"] if p["type"] != "phrase"],
-                       key=lambda p: p["start"], reverse=True)
+                       key=lambda p: pstart(p), reverse=True)
         for p in phases + words:
             if not (p["fix"] and p["conf"] >= 0.7):
                 remaining.append(p)
                 continue
             # Overlap-Check gegen bereits korrigierte Bereiche
-            if any(not (p["end"] <= cs or p["start"] >= ce) for cs, ce in covered):
+            ps, pe = pstart(p), pend(p)
+            if any(not (pe <= cs or ps >= ce) for cs, ce in covered):
                 continue
             if fix and apply_fix(a, p):
                 fixed_count += 1
                 p["applied"] = True
-                covered.append((p["start"], p["end"]))
+                covered.append((ps, pe))
             elif fix:
                 pass
             else:
