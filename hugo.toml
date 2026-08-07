@@ -5,7 +5,8 @@ locale = "de-DE"
 defaultContentLanguage = "de"
 enableRobotsTXT = true
 enableEmoji = true
-paginate = 10
+[pagination]
+pagerSize = 8
 copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
 
 [markup]
