@@ -6,7 +6,7 @@ showToc: true
 ---
 
 <div class="ff-author-hero" style="display:flex; gap:28px; align-items:flex-start; flex-wrap:wrap; margin: 8px 0 32px; padding: 28px; background:linear-gradient(135deg,#EAF4EF 0%,#fff 60%); border-radius:16px; border:1px solid rgba(14,90,67,.15);">
-  <img src="/images/frank-hartung.jpg" alt="Frank Hartung, Autor von FranksFinanzcheck" width="220" height="220" style="border-radius:50%; object-fit:cover; border:4px solid #fff; box-shadow:0 6px 20px rgba(14,90,67,.25); flex:0 0 auto;" loading="eager">
+  {{< autor-foto >}}
   <div style="flex:1 1 320px;">
     <p style="margin:0 0 4px; font-size:.85em; font-weight:700; letter-spacing:.06em; color:#0E5A43;">AUTOR &AMP; BETREIBER</p>
     <h2 style="margin:0 0 10px; font-family:'Montserrat',sans-serif; font-size:1.9em; color:#2E2E33;">Frank Hartung</h2>
