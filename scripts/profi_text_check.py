@@ -136,7 +136,8 @@ def keyword_in_text(keyword, text):
 
 def clean_body(body):
     """Entfernt Markdown-Syntax für Textanalyse."""
-    text = re.sub(r"```.*?```", " ", body, flags=re.S)
+    text = body.replace("&nbsp;", " ")
+    text = re.sub(r"```.*?```", " ", text, flags=re.S)
     text = re.sub(r"!\[[^\]]*\]\([^)]*\)", " ", text)
     text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)
     text = re.sub(r"[#>*_`|~-]", " ", text)

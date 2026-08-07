@@ -15,8 +15,8 @@ cover:
 
 ## Das Wichtigste in Kürze
 
-*   Echte Null-Euro-Konten sparen dir bis zu 150 € an Gebühren jährlich.
-*   Viele Top-Anbieter setzen einen monatlichen Mindestgeldeingang (ca. 700 €) voraus.
+*   Echte Null-Euro-Konten sparen dir bis zu 150&nbsp;€ an Gebühren jährlich.
+*   Viele Top-Anbieter setzen einen monatlichen Mindestgeldeingang (ca. 700&nbsp;€) voraus.
 *   Der digitale Kontowechsel-Service erledigt den Umzug heute fast vollautomatisch.
 *   Achte auf versteckte Kosten für physische Karten oder Bargeldabhebungen.
 *   Kündige dein altes Konto erst nach einer zweimonatigen Übergangsphase.
@@ -27,9 +27,9 @@ cover:
 
 | Kriterium | Worauf du achten musst |
 |---|---|
-| **Kontoführung** | Suche nach dauerhaft 0 € statt zeitlich begrenzter Lockangebote. |
-| **Bedingungen** | Viele Banken verlangen einen Geldeingang von 500 € bis 1.000 € für die Gebührenfreiheit. |
-| **EC-/Girocard** | Prüfe, ob die physische Karte inklusive ist oder 10 bis 15 € pro Jahr kostet. |
+| **Kontoführung** | Suche nach dauerhaft 0&nbsp;€ statt zeitlich begrenzter Lockangebote. |
+| **Bedingungen** | Viele Banken verlangen einen Geldeingang von 500&nbsp;€ bis 1.000&nbsp;€ für die Gebührenfreiheit. |
+| **EC-/Girocard** | Prüfe, ob die physische Karte inklusive ist oder 10 bis 15&nbsp;€ pro Jahr kostet. |
 | **Kreditkarte** | Ist eine [Kostenlose Kreditkarte](../../posts/kreditkarte-ohne-jahresgebuehr/) im Paket enthalten? |
 | **Bargeld abheben** | Achte auf große Verbünde wie die Cash-Group oder freie Abhebungen an jedem Automaten. |
 | **Gebühren im Ausland** | Vermeide Kosten für Zahlungen in Fremdwährungen oder Abhebungen in der EU. |

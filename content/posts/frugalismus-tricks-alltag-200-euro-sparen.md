@@ -15,7 +15,7 @@ cover:
 
 ### Das Wichtigste in Kürze
 *   Unnötige Abos kündigen bringt sofortige Liquidität.
-*   Einkaufsplanung senkt die Lebensmittelkosten um rund 20 %.
+*   Einkaufsplanung senkt die Lebensmittelkosten um rund 20&nbsp;%.
 *   Jährliche Tarifvergleiche sichern dreistellige Ersparnisse.
 *   Automatisierung ersetzt mühsame Willenskraft beim Sparen.
 
@@ -43,10 +43,10 @@ Strom, Gas, Internet und Versicherungen kosten dich bei Trägheit unnötig viel 
 
 | Trick | Ersparnis pro Monat |
 |---|---|
-| Abos & Mitgliedschaften streichen | 20–40 € |
-| Smarte Vorratshaltung & Einkaufsplanung | 60–80 € |
-| Verträge jährlich vergleichen (Strom, DSL, Versicherung) | 50–100 € |
-| Automatisches Sparen (10 % vom Gehalt) | individuell |
+| Abos & Mitgliedschaften streichen | 20–40&nbsp;€ |
+| Smarte Vorratshaltung & Einkaufsplanung | 60–80&nbsp;€ |
+| Verträge jährlich vergleichen (Strom, DSL, Versicherung) | 50–100&nbsp;€ |
+| Automatisches Sparen (10&nbsp;% vom Gehalt) | individuell |
 
 ## Häufige Fragen
 
@@ -56,7 +56,7 @@ Nein. Frugalismus bedeutet, dein Geld bewusst für Dinge einzusetzen, die dir ec
 ### Wie starte ich als Anfänger?
 Beginne mit der Analyse deiner Fixkosten und richte einen Dauerauftrag für deine Ersparnisse ein. Diese zwei Schritte kosten dich weniger als eine Stunde Zeit. Die Wirkung auf deinen Kontostand bemerkst du bereits im Folgemonat.
 
-### Wie lange dauert es, bis ich 200 € im Monat spare?
+### Wie lange dauert es, bis ich 200&nbsp;€ im Monat spare?
 Die meisten Haushalte erreichen dieses Ziel innerhalb von zwei bis drei Monaten. Sobald die ersten Verträge umgestellt sind und die neue Einkaufsroutine sitzt, greifen die Effekte dauerhaft. Gehe schrittweise vor, um die Gewohnheiten fest zu verankern.
 
 ---

@@ -31,7 +31,7 @@ Im Frugalismus triffst du bewusste Entscheidungen, um deine Ressourcen zu schone
 Frugalismus schützt dich vor Verschwendung und schafft finanzielle Sicherheit. Oft merkst du erst beim genauen Hinsehen, wie viel Geld in Abos oder Kleinkram versickert. Durch effektive **Sparmethoden** lenkst du dieses Kapital in deine Altersvorsorge oder den Immobilienkauf. Ein bewussterer Konsum reduziert zudem deinen täglichen Stress. Wer seine Finanzen im Griff hat, blickt deutlich gelassener in die Zukunft.
 
 ## Haushaltsbuch führen
-Ohne Überblick verlierst du deine Ziele schnell aus den Augen. Du solltest daher zwingend ein **Haushaltsbuch führen**, um deine Geldströme genau zu verstehen. Ob du eine App nutzt oder klassisch auf Papier schreibst, bleibt deinem Geschmack überlassen. Moderne Banking-Apps kategorisieren deine Ausgaben oft schon vollautomatisch. So entdeckst du Einsparpotenziale von ca. 50 € bis 200 € pro Monat, die vorher einfach verschwunden sind. Hier findest du weitere [effektive Tricks zum Sparen](../../posts/frugalismus-tricks-alltag-200-euro-sparen/).
+Ohne Überblick verlierst du deine Ziele schnell aus den Augen. Du solltest daher zwingend ein **Haushaltsbuch führen**, um deine Geldströme genau zu verstehen. Ob du eine App nutzt oder klassisch auf Papier schreibst, bleibt deinem Geschmack überlassen. Moderne Banking-Apps kategorisieren deine Ausgaben oft schon vollautomatisch. So entdeckst du Einsparpotenziale von ca. 50&nbsp;€ bis 200&nbsp;€ pro Monat, die vorher einfach verschwunden sind. Hier findest du weitere [effektive Tricks zum Sparen](../../posts/frugalismus-tricks-alltag-200-euro-sparen/).
 
 ## Die Herausforderungen des Frugalismus
 Der Weg zum genügsamen Leben verläuft selten ohne Hindernisse. Überall lauern Konsumreize, von der Schaufensterwerbung bis hin zu Social-Media-Trends. Es erfordert Disziplin, gegen den Strom zu schwimmen und öfter "Nein" zu sagen. Erinnere dich in solchen Momenten immer an dein langfristiges Ziel der Unabhängigkeit. Die anfängliche Umstellung lohnt sich, sobald dein Bankkonto kontinuierlich und spürbar wächst.
@@ -41,7 +41,7 @@ Der Weg zum genügsamen Leben verläuft selten ohne Hindernisse. Überall lauern
 Erfasse zuerst deine gesamten Ausgaben für einen vollen Monat. So identifizierst du unnötige Kostenfresser sofort. Mit gezielten **Sparmethoden** steigerst du danach Schritt für Schritt deine monatliche Sparrate.
 
 ### Wie kann man seine Ausgaben reduzieren?
-Hinterfrage jeden Kauf kritisch: Brauchst du diesen Gegenstand wirklich? Vergleiche Tarife für Strom oder Internet, um oft über 100 € im Jahr zu sparen. Konzentriere dich auf Erlebnisse statt auf materielle Statussymbole.
+Hinterfrage jeden Kauf kritisch: Brauchst du diesen Gegenstand wirklich? Vergleiche Tarife für Strom oder Internet, um oft über 100&nbsp;€ im Jahr zu sparen. Konzentriere dich auf Erlebnisse statt auf materielle Statussymbole.
 
 ### Welche Vorteile hat das Führen eines Haushaltsbuchs?
 Ein Haushaltsbuch schafft absolute Transparenz über deine Finanzen. Du verhinderst, dass dein Geld für Kleinigkeiten unbemerkt versickert. Nur wer seine Zahlen kennt, kann sein Vermögen aktiv und erfolgreich steuern.

@@ -201,6 +201,9 @@ def extract_words(body, whitelist):
     Leerzeichen maskiert – die start/end-Positionen stimmen exakt mit dem
     Original-Body überein (für sichere Korrekturen)."""
     text = body
+    # HTML-Entity &nbsp; durch gleich viele Leerzeichen ersetzen (6 Zeichen →
+    # 6 Leerzeichen): Offsets bleiben exakt, "nbsp" wird kein gefundenes Wort
+    text = text.replace("&nbsp;", " " * 6)
     # Code + URLs + komplette Markdown-Links maskieren (gleiche Länge!)
     text = CODE_RE.sub(lambda m: " " * (m.end() - m.start()), text)
     text = URL_RE.sub(lambda m: " " * (m.end() - m.start()), text)
@@ -347,6 +350,8 @@ def analyze_article(a, whitelist):
     body_masked = CODE_RE.sub(lambda m: " " * (m.end() - m.start()), body)
     body_masked = URL_RE.sub(lambda m: " " * (m.end() - m.start()), body_masked)
     body_masked = LINK_RE.sub(lambda m: " " * (m.end() - m.start()), body_masked)
+    # &nbsp; (6 Zeichen) → 6 Leerzeichen: gleiche Länge, Offsets bleiben gültig
+    body_masked = body_masked.replace("&nbsp;", " " * 6)
 
     # 2c2. SATZZEICHEN: Abkürzungen mit fehlendem Leerzeichen (Z.B. → z. B.)
     for regex, fix in ABKUERZUNG_FIXES:

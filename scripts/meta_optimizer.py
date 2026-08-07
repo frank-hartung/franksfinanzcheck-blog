@@ -259,8 +259,9 @@ def ai_title(a):
 
 def audit(a):
     issues = []
-    tl = len(a["title"])
-    dl = len(a["description"])
+    # Titel-Länge OHNE HTML-Tags messen (z. B. "<br>" für den H1-Zeilenumbruch)
+    tl = len(re.sub(r"<[^>]+>", "", a["title"]).replace("&nbsp;", " "))
+    dl = len(a["description"].replace("&nbsp;", " "))
     kw_count = len(parse_keywords(a["keywords"]))
 
     if tl < TITLE_MIN:

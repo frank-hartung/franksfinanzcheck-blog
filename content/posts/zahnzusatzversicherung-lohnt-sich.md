@@ -22,9 +22,9 @@ Die gesetzliche Krankenversicherung zahlt bei Zahnersatz nur einen Festzuschuss 
 Die Leistungen hängen vom Tarif ab. Typische Bausteine sind:
 | Baustein | Deckt ab |
 |---|---|
-| **Zahnersatz** | Kronen, Brücken, Implantate, Prothesen – oft 50–90 % Erstattung |
+| **Zahnersatz** | Kronen, Brücken, Implantate, Prothesen – oft 50–90&nbsp;% Erstattung |
 | **Zahnbehandlung** | Wurzelbehandlung, Parodontose, Spezialleistungen |
-| **professionelle Zahnreinigung** | Meist mit Erstattung von 80 bis 100 € pro Sitzung |
+| **professionelle Zahnreinigung** | Meist mit Erstattung von 80 bis 100&nbsp;€ pro Sitzung |
 | **Inlays/Onlays** | Hochwertige Füllungen statt Amalgam |
 | **Kieferorthopädie** | Für Kinder und Erwachsene (je nach Tarif) |
 
@@ -33,9 +33,9 @@ Die Leistungen hängen vom Tarif ab. Typische Bausteine sind:
 Die Beiträge hängen stark vom Alter ab – je jünger, desto günstiger. Die Beiträge liegen bei:
 | Alter | Beitrag (ca., mit Zahnersatz) |
 |---|---|
-| 20–30 Jahre | 10–20 € pro Monat |
-| 40–50 Jahre | 20–40 € pro Monat |
-| 60+ Jahre | 40–80 € pro Monat |
+| 20–30 Jahre | 10–20&nbsp;€ pro Monat |
+| 40–50 Jahre | 20–40&nbsp;€ pro Monat |
+| 60+ Jahre | 40–80&nbsp;€ pro Monat |
 Dazu kommen meist Wartezeiten – oft 8 Monate für Zahnersatz. Wer den Abschluss lange aufschiebt, zahlt mehr und muss länger warten.
 
 ## Für wen lohnt sich der Abschluss?
@@ -50,7 +50,7 @@ der Abschluss lohnt sich nicht:
 
 ## Die 4 wichtigsten Vergleichs-Kriterien
 
-1. **Erstattungshöhe:** ab 80 % bei Zahnersatz lohnt es sich meist
+1. **Erstattungshöhe:** ab 80&nbsp;% bei Zahnersatz lohnt es sich meist
 2. **Wartezeiten:** je kürzer, desto besser
 3. **Vorerkrankungen:** was ist ausgeschlossen?
 4. **Altersunabhängige Beiträge:** manche Tarife steigen mit dem Alter – Beitragsgarantie bevorzugen

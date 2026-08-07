@@ -12,7 +12,7 @@
 {{ site.Title }}
 {{- else -}}
 {{- if .Title -}}
-{{- $t := .Title | plainify -}}
+{{- $t := .Title | plainify | replaceRE "\\s+" " " -}}
 {{- if or (lt (len $t) 40) (eq .Section "posts") -}}
 {{- if and (eq .Section "posts") (gt (len $t) 40) -}}
 {{ $t }}

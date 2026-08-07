@@ -16,7 +16,7 @@ cover:
 ### Das Wichtigste in Kürze
 *   Buche idealerweise 2 bis 4 Wochen vor dem Abflug.
 *   Nutze Abflughäfen in Bundesländern ohne aktuelle Ferienzeit.
-*   Vergleiche Pauschalpakete für eine maximale Ersparnis von oft 200 bis 500 € pro Person.
+*   Vergleiche Pauschalpakete für eine maximale Ersparnis von oft 200 bis 500&nbsp;€ pro Person.
 *   Achte auf Inklusivleistungen wie Transfer, Verpflegung und Gepäckgebühren.
 
 ## Wann sich Last Minute wirklich lohnt
@@ -29,7 +29,7 @@ In den deutschen Schulferien sind Restplätze seltener und die Rabatte fallen sp
 
 Nutze spezialisierte Vergleichsportale und filtere gezielt nach Restplätzen. Wähle bei der Suche einen flexiblen Zeitraum von einer ganzen Woche statt fester Daten. So zeigt dir das System deutlich mehr Optionen für deinen Trip an. Erweitere deinen Suchradius auf verschiedene Abflughäfen in deiner Umgebung.
 
-Wer von einem Flughafen im benachbarten Bundesland startet, spart oft 100 € oder mehr pro Ticket. Zögere bei einem guten Treffer nicht zu lange. Echte Last Minute Reisen sind aufgrund der hohen Nachfrage oft innerhalb weniger Stunden vergriffen. Prüfe immer den Gesamtpreis des Pakets. Pauschalreisen inklusive Flug und Hotel sind meist preiswerter als die Summe der Einzelbuchungen.
+Wer von einem Flughafen im benachbarten Bundesland startet, spart oft 100&nbsp;€ oder mehr pro Ticket. Zögere bei einem guten Treffer nicht zu lange. Echte Last Minute Reisen sind aufgrund der hohen Nachfrage oft innerhalb weniger Stunden vergriffen. Prüfe immer den Gesamtpreis des Pakets. Pauschalreisen inklusive Flug und Hotel sind meist preiswerter als die Summe der Einzelbuchungen.
 
 ## Worauf du bei All-inclusive-Schnäppchen achten musst
 

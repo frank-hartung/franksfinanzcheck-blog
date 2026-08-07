@@ -17,7 +17,7 @@ cover:
 * Buche Kurzstrecken 4 bis 10 Wochen im Voraus.
 * Nutze Wochentage wie Dienstag oder Mittwoch für deinen Flug.
 * Prüfe alternative Flughäfen im Umkreis von etwa 100 Kilometern.
-* Vermeide Aufgabegepäck und spare ca. 30 bis 60 € pro Strecke.
+* Vermeide Aufgabegepäck und spare ca. 30 bis 60&nbsp;€ pro Strecke.
 * Kontrolliere versteckte Gebühren für Sitzplätze und Zahlungsarten.
 
 ## Trick 1: Der richtige Buchungszeitpunkt

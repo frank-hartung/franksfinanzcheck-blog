@@ -113,6 +113,11 @@ REGELN:
     Erstattungsfähigkeit" → "ob die Kosten erstattet werden"). Vermeide
     Nominalstil ("die Übernahme der Kosten" → "die Kasse übernimmt die Kosten").
     Ziel: Ø Satzlänge unter 15 Wörter, Flesch-Score über 60.
+12. TOP-LEVEL-DARSTELLUNG: Jeder Absatz ist 3-4 Sätze lang, behandelt genau EINEN
+    Gedanken und endet an einer sinnvollen Stelle (keine Textwände). Schreibe
+    Wörter NIE mit Silbentrennung. Zwischen einer Zahl und ihrer Einheit steht
+    IMMER ein geschütztes Leerzeichen (&nbsp;): 20&nbsp;%, 50&nbsp;€,
+    100&nbsp;EUR – niemals "20 %" oder "50 €" mit normalem Leerzeichen.
 12. GROSS-/KLEINSCHREIBUNG: Verwende die NORMALE deutsche Rechtschreibung – wie in
     einem Zeitungsartikel. Nur Satzanfänge und Substantive werden großgeschrieben,
     alle anderen Wörter klein (KEIN Titel-Stil, kein "Jedes Wort Groß").
@@ -202,6 +207,22 @@ def fix_capitalization(text):
     return re.sub(r"([a-zäöüßA-ZÄÖÜ0-9\)\"])([.!?])(\s+)([a-zäöüß])", repl, text)
 
 
+def fix_number_units(text):
+    """Top-Level-Darstellung: Zahl + Einheit (% / € / EUR) mit geschütztem
+    Leerzeichen (&nbsp;) verbinden, damit nie getrennt umbrochen wird.
+    Markdown-Links werden maskiert, damit URLs unangetastet bleiben."""
+    link_re = re.compile(r"\[[^\]]*\]\([^)]*\)")
+    num_unit_re = re.compile(r"(\d[\d.,]*)\s+(%|€|EUR)(?!\w)")
+    masked = link_re.sub(lambda m: " " * (m.end() - m.start()), text)
+    out, last = [], 0
+    for m in num_unit_re.finditer(masked):
+        out.append(text[last:m.start()])
+        out.append(m.group(1) + "&nbsp;" + m.group(2))
+        last = m.end()
+    out.append(text[last:])
+    return "".join(out)
+
+
 def verify(a, new_body):
     """Sicherheits-Verifikation vor dem Schreiben."""
     problems = []
@@ -276,6 +297,8 @@ def main():
             continue
         # Deterministischer Auto-Fix: Großschreibung nach Satzpunkten
         new_body = fix_capitalization(new_body)
+        # Top-Level-Darstellung: Zahl+Einheit mit &nbsp; verbinden (% / € / EUR)
+        new_body = fix_number_units(new_body)
         problems = verify(a, new_body)
         if problems:
             print(f"    ❌ Verworfen: {'; '.join(problems)}")

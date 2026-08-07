@@ -11,7 +11,7 @@ cover:
   image: "images/covers/dns-server-aendern-schnelleres-internet.jpg"
   alt: "Spar-Tipp: Dns Server Aendern Schnelleres Internet"
   caption: "Tipp von FranksFinanzcheck"
----Surfe bis zu 30 % schneller, ohne einen Cent für einen teureren Tarif auszugeben. Dein Internet wirkt oft träge, obwohl die gebuchte Bandbreite eigentlich stimmt? Häufig bremst der Standard-Server deines Anbieters den Seitenaufbau unnötig aus. Du kannst deinen DNS Server wechseln und so in wenigen Minuten das Maximum aus deiner Leitung herausholen.
+---Surfe bis zu 30&nbsp;% schneller, ohne einen Cent für einen teureren Tarif auszugeben. Dein Internet wirkt oft träge, obwohl die gebuchte Bandbreite eigentlich stimmt? Häufig bremst der Standard-Server deines Anbieters den Seitenaufbau unnötig aus. Du kannst deinen DNS Server wechseln und so in wenigen Minuten das Maximum aus deiner Leitung herausholen.
 
 ## Was ist ein DNS-Server überhaupt?
 
