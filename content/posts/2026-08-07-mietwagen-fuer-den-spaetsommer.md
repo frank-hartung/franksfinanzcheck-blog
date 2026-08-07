@@ -1,5 +1,5 @@
 ---
-title: "Mietwagen für den Spätsommer"
+title: "Mietwagen im Spätsommer: Günstig buchen und sparen"
 description: "Erfahren Sie, wie Sie einen Mietwagen günstig buchen können und Ihren Reisebudget für den perfekten mietwagen roadtrip optimieren"
 date: 2026-08-07
 draft: false

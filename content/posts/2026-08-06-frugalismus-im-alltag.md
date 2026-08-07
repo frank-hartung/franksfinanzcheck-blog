@@ -1,5 +1,5 @@
 ---
-title: "Frugalismus im Alltag"
+title: "Frugalismus im Alltag: So sparst du jeden Monat bares Geld"
 description: "Entdecken Sie die Vorteile von frugalismus tipps, um geld sparen im alltag zu können und Ihre finanzielle Freiheit zu erreichen"
 date: 2026-08-06
 draft: false
