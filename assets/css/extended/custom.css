@@ -233,6 +233,18 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* ---------- Pinterest-CTA-Block (Startseite, prominent) ---------- */
+/* ---------- Consent-Banner: LCP-/CLS-optimiert ---------- */
+/* Der Banner ist standardmäßig SICHTBAR (ab erstem Paint – kein spätes
+   JS-Einblenden → LCP). Ausgeblendet wird er nur, wenn die Klasse
+   ff-consent-set am <html> sitzt (gesetzt vom Head-Skript bei vorhandenem
+   Cookie bzw. von ffConsent() beim Schließen). */
+#ff-consent-banner {
+    display: block;
+}
+html.ff-consent-set #ff-consent-banner {
+    display: none !important;
+}
+
 .ff-pinterest-cta {
     display: flex;
     align-items: center;
