@@ -209,6 +209,12 @@ def score_article(a):
         score -= 10
         issues.append("keine Liste/Tabelle (Mehrwert fehlt)")
 
+    # 8b. Nackte URLs als Linktext ([https://x](https://x)) – SEO/UX-Problem
+    bare_links = re.findall(r"\[https?://[^\]]+\]\(https?://[^)]*\)", body)
+    if bare_links:
+        score -= 10
+        issues.append(f"{len(bare_links)} nackte URL(s) als Linktext (Ankertext verwenden!)")
+
     # 9. Rechtschreib-Stichprobe: Sätze beginnen mit Kleinbuchstaben?
     #    Nur ECHTE Fälle zählen: nach einem Wort-Endpunkt (. ! ?) direkt
     #    gefolgt von Leerzeichen + Kleinbuchstabe. Nummern-Listen ("1. strom")
