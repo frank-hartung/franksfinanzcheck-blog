@@ -26,7 +26,10 @@
            (lokaler Build) bleiben die GitHub-Pages-URLs aktiv. */}}
     {{- $jsdelivrSha := getenv "HUGO_JSDELIVR_SHA" }}
     {{- $imgSrcset := "" }}
+    {{- $webpSrcset := "" }}
+    {{- $avifSrcset := "" }}
     {{- $coverFile := path.Base .Params.cover.image }}
+    {{- $coverBase := strings.TrimSuffix (path.Ext $coverFile) $coverFile }}
     {{- if $jsdelivrSha }}
         {{- $imgdl = printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s" $jsdelivrSha .Params.cover.image }}
         {{- /* Responsive srcset: 620px (Listen) + 720px (Singles) + 1000px Original.
@@ -34,11 +37,19 @@
                von generate_covers.py erzeugt. → spart Download (Lighthouse). */}}
         {{- $coverDir := path.Dir .Params.cover.image }}
         {{- $srcsetParts := slice }}
+        {{- $webpParts := slice }}
+        {{- $avifParts := slice }}
         {{- range $w := slice "620" "720" }}
             {{- $srcsetParts = $srcsetParts | append (printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s/%s/%s %sw" $jsdelivrSha $coverDir $w $coverFile $w) }}
+            {{- $webpParts = $webpParts | append (printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s/webp/%s/%s.webp %sw" $jsdelivrSha $coverDir $w $coverBase $w) }}
+            {{- $avifParts = $avifParts | append (printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s/avif/%s/%s.avif %sw" $jsdelivrSha $coverDir $w $coverBase $w) }}
         {{- end }}
         {{- $srcsetParts = $srcsetParts | append (printf "%s %dw" $imgdl 1000) }}
+        {{- $webpParts = $webpParts | append (printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s/webp/%s.webp 1000w" $jsdelivrSha $coverDir $coverBase) }}
+        {{- $avifParts = $avifParts | append (printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s/avif/%s.avif 1000w" $jsdelivrSha $coverDir $coverBase) }}
         {{- $imgSrcset = delimit $srcsetParts ", " }}
+        {{- $webpSrcset = delimit $webpParts ", " }}
+        {{- $avifSrcset = delimit $avifParts ", " }}
     {{- else if $cover }}
         {{- $imgdl = $cover.Permalink }}
     {{- end }}
@@ -56,6 +67,12 @@
         <a href="{{ $imgdl }}" target="_blank" rel="noopener noreferrer">
     {{- end }}
 
+    {{- /* <picture> mit Format-Kaskade: AVIF → WebP → JPEG (Fallback).
+           Browser wählt das kleinste unterstützte Format; das srcset
+           liefert zusätzlich die passende Größe (620/720/1000px). */}}
+    <picture>
+    {{- if $avifSrcset }}<source type="image/avif" srcset="{{ $avifSrcset }}" sizes="{{ $imgSizes }}">{{- end }}
+    {{- if $webpSrcset }}<source type="image/webp" srcset="{{ $webpSrcset }}" sizes="{{ $imgSizes }}">{{- end }}
     {{- if $cover -}}
         {{/* i.e it is present in page bundle */}}
         {{- if (and (in $processableFormats $cover.MediaType.SubType) ($responsiveImages) (eq $prod true)) }}
@@ -77,6 +94,7 @@
         {{- /* For absolute urls and external links, no img processing here */}}
         <img loading="{{ $loading }}" src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
     {{- end }}
+    </picture>
 
     {{- if $addLink }}
         </a>
