@@ -39,9 +39,9 @@ Die monatlichen Beiträge richten sich nach deinem Alter, deinem Beruf und den g
 
 | Baustein | Kosten (ca. Spanne) |
 |---|---|
-| Grundschutz (100.000 € Basissumme) | 5 € – 12 € pro Monat |
-| Komfortschutz (mit Progression & Tagegeld) | 12 € – 25 € pro Monat |
-| Premiumschutz (inkl. Rente & hoher Summe) | 25 € – 45 € pro Monat |
+| Grundschutz (100.000&nbsp;€ Basissumme) | 5&nbsp;€ – 12&nbsp;€ pro Monat |
+| Komfortschutz (mit Progression & Tagegeld) | 12&nbsp;€ – 25&nbsp;€ pro Monat |
+| Premiumschutz (inkl. Rente & hoher Summe) | 25&nbsp;€ – 45&nbsp;€ pro Monat |
 
 Dein Eintrittsalter spielt eine große Rolle. Schließe die Police frühzeitig ab, um dir dauerhaft günstige Konditionen zu sichern. Ein Versicherungsvergleich hilft dir, das beste Preis-Leistungs-Verhältnis zu finden.
 
@@ -59,8 +59,8 @@ Dein Eintrittsalter spielt eine große Rolle. Schließe die Police frühzeitig a
 
 ## Die 5 wichtigsten Kriterien beim Versicherungsvergleich
 
-1. **Invaliditätssumme:** Wähle mindestens 100.000 € als Grundsumme.
-2. **Progression:** Ein Satz von 225 % oder 350 % ist ratsam. Er vervielfacht die Zahlung bei Vollinvalidität.
+1. **Invaliditätssumme:** Wähle mindestens 100.000&nbsp;€ als Grundsumme.
+2. **Progression:** Ein Satz von 225&nbsp;% oder 350&nbsp;% ist ratsam. Er vervielfacht die Zahlung bei Vollinvalidität.
 3. **Gliedertaxe:** Achte auf "verbesserte Gliedertaxen". Gute Tarife zahlen bei Funktionsverlust von Gliedmaßen deutlich mehr als der Standard.
 4. **Eigenbewegung:** Dein Tarif sollte auch Unfälle durch Eigenbewegungen (z. B. umknicken ohne Fremdeinwirkung) abdecken.
 5. **Mitwirkungsgrad:** Versicherer mindern die Leistung oft, wenn Vorerkrankungen bestehen. Gute Tarife verzichten bis zu einem hohen Grad darauf.

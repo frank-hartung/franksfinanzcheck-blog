@@ -47,10 +47,10 @@ Die Reserve gehört **nicht** aufs Girokonto und nicht in Aktien. Ideal ist ein 
 ## Häufige Fragen
 
 ### Zählt der Notgroschen zum Vermögensaufbau?
-Nein – er ist die Basis. Erst wenn 3 bis 6 Monatsausgaben stehen, macht ein separates Investment Sinn. Wer beides gleichzeitig will, teilt das monatliche Spargeld: 70 % Notgroschen, 30 % Investment, bis die Reserve steht.
+Nein – er ist die Basis. Erst wenn 3 bis 6 Monatsausgaben stehen, macht ein separates Investment Sinn. Wer beides gleichzeitig will, teilt das monatliche Spargeld: 70&nbsp;% Notgroschen, 30&nbsp;% Investment, bis die Reserve steht.
 
 ### Was, wenn ich Schulden habe?
-Hohe Zinsen (z. B. Dispo) haben Vorrang – sie fressen mehr, als der Notgroschen an Sicherheit bringt. Faustregel: Dispo zuerst tilgen, parallel einen Mini-Notgroschen (500–1.000 €) aufbauen.
+Hohe Zinsen (z. B. Dispo) haben Vorrang – sie fressen mehr, als der Notgroschen an Sicherheit bringt. Faustregel: Dispo zuerst tilgen, parallel einen Mini-Notgroschen (500–1.000&nbsp;€) aufbauen.
 
 ### Ist der Notgroschen inflationssicher?
 Nein, aber das ist sein Job nicht. Er ist eine Versicherung gegen finanzielle Schocks. Überschüsse über die Reserve hinaus gehören auf renditestarker Anlagen.

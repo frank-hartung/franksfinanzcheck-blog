@@ -102,7 +102,7 @@ def count_syllables(word):
 
 
 def analyze(a):
-    text = a['body']
+    text = a['body'].replace('&nbsp;', ' ')
     words = re.findall(r'\b[a-zäöüßA-ZÄÖÜ0-9]+\b', text)
     # Sätze an Satzzeichen teilen – Datumspunkte ("30. November") ausnehmen
     text_protected = re.sub(r'(\b\d{1,2})\.\s+([A-ZÄÖÜ][a-zäöüß]{2,}\b)', r'\1 \2', text)

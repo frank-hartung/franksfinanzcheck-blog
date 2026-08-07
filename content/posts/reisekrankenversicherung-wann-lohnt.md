@@ -35,9 +35,9 @@ Genau diese Lücken schließt die Reisekrankenversicherung. Du kannst dich auf d
 Die Beiträge sind bemerkenswert günstig:
 | Tarif | Kosten (ca.) |
 |---|---|
-| Einzelperson (bis 65 Jahre) | 10–30 € pro Jahr |
-| Familie (inkl. Kinder) | 20–40 € pro Jahr |
-| Senioren (ab 65) | 40–100 € pro Jahr |
+| Einzelperson (bis 65 Jahre) | 10–30&nbsp;€ pro Jahr |
+| Familie (inkl. Kinder) | 20–40&nbsp;€ pro Jahr |
+| Senioren (ab 65) | 40–100&nbsp;€ pro Jahr |
 du erhältst weltweite Absicherung – das beste Preis-Leistungs-Verhältnis aller Versicherungen.
 
 ## Darauf solltest du beim Vergleich achten

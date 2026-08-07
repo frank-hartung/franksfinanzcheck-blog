@@ -104,10 +104,32 @@ SYSTEM_PROMPT = (
     "\"Es ist wichtig zu beachten\", \"Zusammenfassend lässt sich sagen\", \"Des Weiteren\", "
     "\"Es gibt viele Möglichkeiten\", \"heutzutage\", \"Tauchen wir ein\". "
     "Deine Texte sind journalistisch, konkret, praxisnah und vermitteln echten Nutzen. "
-    "Jeder Absatz ist 3–4 Sätze lang. Deutsche Rechtschreibung ist fehlerfrei."
+    "Jeder Absatz ist 3–4 Sätze lang, behandelt genau EINEN Gedanken und endet an einer "
+    "sinnvollen Stelle – keine Textwände, kein Aneinanderreihen von Ein-Satz-Absätzen. "
+    "Schreibe Wörter NIE mit Silbentrennung (kein Wort wird getrennt). Zwischen einer "
+    "Zahl und ihrer Einheit steht IMMER ein geschütztes Leerzeichen (HTML-Entity "
+    "&nbsp;), damit Zahl und Einheit nie in verschiedene Zeilen brechen: "
+    "z. B. 20&nbsp;%, 50&nbsp;€, 100&nbsp;EUR – niemals \"20 %\" oder \"50 €\" mit "
+    "normalem Leerzeichen. Deutsche Rechtschreibung ist fehlerfrei."
 )
 
 # ---------------------------------------------------------------- Hilfsfunktionen
+
+
+def fix_number_units(body):
+    """Top-Level-Darstellung: Zahl + Einheit (% / € / EUR) mit geschütztem
+    Leerzeichen (&nbsp;) verbinden, damit nie getrennt umbrochen wird.
+    Markdown-Links werden maskiert, damit URLs unangetastet bleiben."""
+    link_re = re.compile(r"\[[^\]]*\]\([^)]*\)")
+    num_unit_re = re.compile(r"(\d[\d.,]*)\s+(%|€|EUR)(?!\w)")
+    masked = link_re.sub(lambda m: " " * (m.end() - m.start()), body)
+    out, last = [], 0
+    for m in num_unit_re.finditer(masked):
+        out.append(body[last:m.start()])
+        out.append(m.group(1) + "&nbsp;" + m.group(2))
+        last = m.end()
+    out.append(body[last:])
+    return "".join(out)
 
 
 def load_topics():
@@ -679,7 +701,7 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
         "---\n\n"
     )
     with open(filename, "w", encoding="utf-8") as f:
-        f.write(frontmatter + body + "\n" + cta)
+        f.write(frontmatter + fix_number_units(body) + "\n" + cta)
     print(f"  ✓ Entwurf erstellt: {os.path.relpath(filename, BLOG_DIR)}")
     print(f"    Titel: {title}")
     print(f"    Beschreibung: {desc}")

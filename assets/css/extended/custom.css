@@ -42,12 +42,14 @@ html body {
 }
 
 /* Deutscher Text: Silbentrennung für besseren Zeilenfall
-   (lange Komposita brechen sauber um – Lesbarkeits-Plus) */
+/* Top-Level-Darstellung: KEINE automatische Silbentrennung
+   (User-Vorgabe – Wörter werden nie getrennt; Zahlen+Einheiten
+   sind per &nbsp; fest verbunden) */
 .post-content,
 .md-content,
 .entry-content {
-    hyphens: auto;
-    -webkit-hyphens: auto;
+    hyphens: manual;
+    -webkit-hyphens: manual;
 }
 
 /* Lesefluss: ausgewogenere Zeilenenden statt frühzeitige Umbrüche */

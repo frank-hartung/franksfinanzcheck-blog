@@ -77,6 +77,8 @@ def mask_protected(text):
     text = code_re.sub(lambda m: " " * (m.end() - m.start()), text)
     text = url_re.sub(lambda m: " " * (m.end() - m.start()), text)
     text = link_re.sub(lambda m: m.group(1), text)
+    # &nbsp; → gleich viele Leerzeichen (Offsets bleiben gültig, kein "nbsp"-Wort)
+    text = text.replace("&nbsp;", " " * 6)
     return text
 
 

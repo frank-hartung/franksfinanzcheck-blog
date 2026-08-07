@@ -15,15 +15,15 @@ cover:
 
 ## Die Ausgangslage 2026
 
-Das Gebäudeenergiegesetz (GEG) fordert seit 2024, dass neue Heizungen möglichst mit 65 % erneuerbarer Energie betrieben werden. In vielen Fällen ist die Wärmepumpe die Standardlösung. Reine Gasheizungen sind nur noch in Übergangsfristen oder Sonderfällen neu einbaubar. Du entscheidest dich meist für eine Wärmepumpe – oft gefördert.
+Das Gebäudeenergiegesetz (GEG) fordert seit 2024, dass neue Heizungen möglichst mit 65&nbsp;% erneuerbarer Energie betrieben werden. In vielen Fällen ist die Wärmepumpe die Standardlösung. Reine Gasheizungen sind nur noch in Übergangsfristen oder Sonderfällen neu einbaubar. Du entscheidest dich meist für eine Wärmepumpe – oft gefördert.
 
 ## Die Kosten im Vergleich
 
 | Kostenpunkt | Wärmepumpe | Gasheizung |
 |---|---|---|
-| **Anschaffung** | 15.000–30.000 € | 8.000–15.000 € |
-| **Förderung (BEG)** | bis zu 40–70 % | keine (reine Gasheizung) |
-| **Betriebskosten (4-Personen-Haushalt)** | 800–1.500 €/Jahr (Strom) | 1.500–2.500 €/Jahr (Gas, steigend) |
+| **Anschaffung** | 15.000–30.000&nbsp;€ | 8.000–15.000&nbsp;€ |
+| **Förderung (BEG)** | bis zu 40–70&nbsp;% | keine (reine Gasheizung) |
+| **Betriebskosten (4-Personen-Haushalt)** | 800–1.500&nbsp;€/Jahr (Strom) | 1.500–2.500&nbsp;€/Jahr (Gas, steigend) |
 | **Lebensdauer** | 20+ Jahre | 15–20 Jahre |
 
 Die Anschaffung der Wärmepumpe ist teurer – aber Förderung und niedrigere Betriebskosten gleichen das oft aus. Abhängig von Dämmung und Strompreis liegt der Break-even häufig bei 10–15 Jahren.
@@ -33,7 +33,7 @@ Die Anschaffung der Wärmepumpe ist teurer – aber Förderung und niedrigere Be
 - **Gut gedämmtes Haus:** je besser die Dämmung, desto effizienter die Wärmepumpe. 
 - **Fußbodenheizung:** Ideal – arbeitet mit niedrigen Temperaturen. 
 - **Neubau:** die Wärmepumpe ist hier der Standard – günstigste Variante über den Lebenszyklus.
-- **bei Förderung:** bis zu 70 % Zuschuss drücken die Anschaffungskosten.
+- **bei Förderung:** bis zu 70&nbsp;% Zuschuss drücken die Anschaffungskosten.
 
 ## Wann die Gasheizung (noch) Sinn ergibt
 
@@ -54,7 +54,7 @@ Auch die Förderlandschaft spielt 2026 eine entscheidende Rolle: Die Bundesförd
 Nein – bestehende Gasheizungen dürfen weiterbetrieben und repariert werden. Die Pflicht zur erneuerbaren Heizung greift erst beim Austausch der Heizung. 
 
 ### Was kostet der Heizungstausch auf Wärmepumpe wirklich?
-Realistisch 20.000–35.000 € inklusive Installation – abzüglich Förderung. Bei einer Förderung von 40 % bleiben oft 12.000–20.000 € übrig. 
+Realistisch 20.000–35.000&nbsp;€ inklusive Installation – abzüglich Förderung. Bei einer Förderung von 40&nbsp;% bleiben oft 12.000–20.000&nbsp;€ übrig. 
 
 ### Ist die Wärmepumpe bei Minusgraden zuverlässig?
 Ja – moderne Wärmepumpen arbeiten bis etwa -20 °C zuverlässig. 

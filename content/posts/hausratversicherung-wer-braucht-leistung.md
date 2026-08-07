@@ -16,7 +16,7 @@ cover:
 **Das Wichtigste in Kürze:**
 *   Ersetzt Einrichtung und Technik zum aktuellen Neuwert.
 *   Schützt bei Feuer, Leitungswasser, Sturm und Einbruch.
-*   Pauschalwert von ca. 650 €/m² verhindert Unterversicherung.
+*   Pauschalwert von ca. 650&nbsp;€/m² verhindert Unterversicherung.
 *   Zusatzbausteine für Fahrräder oder Elementarschäden sind oft sinnvoll.
 *   Regelmäßiger Check der Konditionen spart jährlich bares Geld.
 
@@ -38,7 +38,7 @@ Der Basisschutz greift bei Schäden durch Feuer, Leitungswasser, Sturm und Hagel
 *   **Sturm & Hagel:** in der Regel ab Windstärke 8 versichert.
 *   **Optionen:** Erweitere den Schutz bei Bedarf um Fahrraddiebstahl oder Glasbruch.
 
-Einige Punkte bleiben jedoch meist ausgeschlossen. Eigenes Verschulden ohne entsprechenden Tarifbaustein oder die normale Abnutzung deiner Möbel übernimmt der Versicherer nicht. Wertsachen wie Schmuck oder Bargeld sind oft nur bis zu einer Grenze von ca. 20 bis 30 % der Versicherungssumme gedeckt.
+Einige Punkte bleiben jedoch meist ausgeschlossen. Eigenes Verschulden ohne entsprechenden Tarifbaustein oder die normale Abnutzung deiner Möbel übernimmt der Versicherer nicht. Wertsachen wie Schmuck oder Bargeld sind oft nur bis zu einer Grenze von ca. 20 bis 30&nbsp;% der Versicherungssumme gedeckt.
 
 ## Was kostet die Hausratversicherung?
 
@@ -46,9 +46,9 @@ Die Hausrat-Kosten hängen primär von deinem Wohnort und dem Wert deiner Einric
 
 | Wohnung | Jahresbeitrag (ca.) |
 |---|---|
-| 50 m² Single | 60–90 € |
-| 80 m² Paar | 90–130 € |
-| 120 m² Familie | 120–180 € |
+| 50 m² Single | 60–90&nbsp;€ |
+| 80 m² Paar | 90–130&nbsp;€ |
+| 120 m² Familie | 120–180&nbsp;€ |
 
 Die meisten Versicherer rechnen mit einer Summe von 650 Euro pro Quadratmeter Wohnfläche. Bei einer 80-m²-Wohnung entspricht das einer Versicherungssumme von 52.000 Euro. Dieser Richtwert schützt dich vor einer Kürzung der Leistung im Schadensfall.
 
