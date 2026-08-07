@@ -1,5 +1,5 @@
 ---
-title: "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?"
+title: "Wärmepumpe vs. Gasheizung: Was sich 2026 wirklich lohnt"
 description: "Wärmepumpe oder Gasheizung: Kosten, Förderung, Betriebskosten und die neue Heizungsregel – der große Vergleich für deine Entscheidung."
 date: 2026-08-04
 draft: false

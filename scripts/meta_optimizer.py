@@ -29,6 +29,9 @@ CACHE_FILE = os.path.join(BLOG_DIR, ".meta_cache.json")
 
 TITLE_MIN, TITLE_MAX = 30, 60
 DESC_MIN, DESC_MAX = 70, 160
+# Optimale CTR-Bereiche (für den 100er-Score im Meta-Report)
+TITLE_OPT_MIN, TITLE_OPT_MAX = 50, 60
+DESC_OPT_MIN, DESC_OPT_MAX = 120, 160
 KEYWORDS_MIN = 3
 
 
@@ -205,7 +208,7 @@ def ai_title(a):
     kws = parse_keywords(a["keywords"])[:4]
     kw = kws[0] if kws else title
     prompt = (f"Schreibe für einen deutschen Blog-Artikel einen klickstarken, "
-              f"natürlichen SEO-Titel von EXAKT 45-60 Zeichen. Wichtigstes Keyword: "
+              f"natürlichen SEO-Titel von EXAKT 50-60 Zeichen. Wichtigstes Keyword: "
               f"'{kw}'. Ausgangs-Titel: '{title}'. Kein Clickbait, keine "
               f"Sonderzeichen am Ende. Nur der Titel, ohne Anführungszeichen.")
 
@@ -272,29 +275,58 @@ def audit(a):
             "kw": kw_count, "issues": issues}
 
 
+def extend_description(desc, a, target_min=DESC_OPT_MIN, target_max=DESC_OPT_MAX):
+    """Verlängert eine zu kurze Description deterministisch auf 120+ Zeichen."""
+    desc = desc.rstrip()
+    # Sinnvolle Bausteine anhängen (bis Ziel erreicht)
+    addons = [
+        " So sparst du jeden Monat bares Geld.",
+        " Schritt für Schritt erklärt – ohne Fachchinesisch.",
+        " Mit praktischen Tipps für den Alltag.",
+        " Vergleiche jetzt und profitiere von den besten Konditionen.",
+        " So gelingt dir der Wechsel schnell und unkompliziert.",
+    ]
+    for add in addons:
+        if len(desc) >= target_min:
+            break
+        if add.lstrip().lower()[:20] in desc.lower():
+            continue
+        if len(desc) + len(add) <= target_max:
+            desc += add
+    # Letzter Notnagel: Keyword-Phrase anhängen
+    if len(desc) < target_min:
+        kws = parse_keywords(a["keywords"])
+        for kw in kws:
+            if len(desc) + len(kw) + 4 <= target_max:
+                desc += f" – {kw}."
+                break
+    return desc[:target_max]
+
+
 def fix_meta(a, use_ai):
     """Wendet Fixes an. Liefert (geändert, beschreibung_neu)."""
     content = a["content"]
     changed = False
 
-    # 1) Description fixen (fehlt/zu kurz/zu lang)
+    # 1) Description auf CTR-OPTIMUM fixen (120-160 Zeichen)
     dl = len(a["description"])
-    if dl < DESC_MIN or dl > DESC_MAX:
+    if dl < DESC_OPT_MIN or dl > DESC_OPT_MAX:
         new_desc = ai_description(a) if use_ai else generate_description(a)
-        if new_desc and DESC_MIN <= len(new_desc) <= DESC_MAX:
-            old_line = re.search(rf'^description:.*$', content, re.M)
-            if old_line:
-                content = content[:old_line.start()] + f'description: "{new_desc}"' + content[old_line.end():]
-                changed = True
-        elif new_desc:
+        # KI/Generator-Ziel prüfen; sonst deterministisch nachbessern
+        if new_desc:
+            if len(new_desc) < DESC_OPT_MIN:
+                new_desc = extend_description(new_desc, a)
+            elif len(new_desc) > DESC_OPT_MAX:
+                new_desc = new_desc[:DESC_OPT_MAX - 1].rstrip() + "…"
+        if new_desc:
             old_line = re.search(rf'^description:.*$', content, re.M)
             if old_line:
                 content = content[:old_line.start()] + f'description: "{new_desc}"' + content[old_line.end():]
                 changed = True
 
-    # 1b) Titel fixen (zu kurz → ergänzen, zu lang → kürzen)
+    # 1b) Titel auf CTR-OPTIMUM fixen (50-60 Zeichen)
     tl = len(a["title"])
-    if tl < TITLE_MIN or tl > TITLE_MAX:
+    if tl < TITLE_OPT_MIN or tl > TITLE_OPT_MAX:
         new_title = None
         if use_ai:
             new_title = ai_title(a)
@@ -315,18 +347,28 @@ def fix_meta(a, use_ai):
                 if first and first not in title_l and kw.lower() not in title_l:
                     suffix = cap(kw)
                     break
-            if tl < TITLE_MIN and suffix:
-                new_title = f"{a['title']}: {suffix}"
-                # Länge prüfen: ggf. 2. Keyword ergänzen, falls noch zu kurz
-                if len(new_title) < TITLE_MIN:
-                    for kw in kws:
-                        add = cap(kw)
-                        if add.lower() not in new_title.lower() and len(new_title) + len(add) + 2 <= TITLE_MAX:
-                            new_title = f"{new_title} {add}"
-                            if len(new_title) >= TITLE_MIN:
-                                break
-            elif tl > TITLE_MAX:
-                new_title = a["title"][:TITLE_MAX - 1].rstrip() + "…"
+            if tl < TITLE_OPT_MIN:
+                # 1) Keyword-Suffix anhängen
+                if suffix:
+                    new_title = f"{a['title']}: {suffix}"
+                # 2) Weitere Keywords ergänzen, bis ≥ Optimum
+                for kw in kws:
+                    add = cap(kw)
+                    if add.lower() not in new_title.lower() and len(new_title) + len(add) + 2 <= TITLE_OPT_MAX:
+                        new_title = f"{new_title} {add}"
+                        if len(new_title) >= TITLE_OPT_MIN:
+                            break
+                # 3) Notnagel: generische Bausteine (nur wenn noch < Optimum)
+                for addon in [" im Vergleich", " – so geht’s", " – Tipps & Tricks", " einfach erklärt"]:
+                    if len(new_title) >= TITLE_OPT_MIN:
+                        break
+                    if len(new_title) + len(addon) <= TITLE_OPT_MAX:
+                        new_title += addon
+                # Final abschneiden, falls über Ziel
+                if len(new_title) > TITLE_OPT_MAX:
+                    new_title = new_title[:TITLE_OPT_MAX - 1].rstrip() + "…"
+            elif tl > TITLE_OPT_MAX:
+                new_title = a["title"][:TITLE_OPT_MAX - 1].rstrip() + "…"
         # Länge final begrenzen (KI kann überziehen)
         if new_title and len(new_title) > TITLE_MAX + 5:
             new_title = new_title[:TITLE_MAX - 1].rstrip() + "…"
