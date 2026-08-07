@@ -62,7 +62,7 @@ Dein Eintrittsalter spielt eine große Rolle. Schließe die Police frühzeitig a
 1. **Invaliditätssumme:** Wähle mindestens 100.000 € als Grundsumme.
 2. **Progression:** Ein Satz von 225 % oder 350 % ist ratsam. Er vervielfacht die Zahlung bei Vollinvalidität.
 3. **Gliedertaxe:** Achte auf "verbesserte Gliedertaxen". Gute Tarife zahlen bei Funktionsverlust von Gliedmaßen deutlich mehr als der Standard.
-4. **Eigenbewegung:** Dein Tarif sollte auch Unfälle durch Eigenbewegungen (z. B. Umknicken ohne Fremdeinwirkung) abdecken.
+4. **Eigenbewegung:** Dein Tarif sollte auch Unfälle durch Eigenbewegungen (z. B. umknicken ohne Fremdeinwirkung) abdecken.
 5. **Mitwirkungsgrad:** Versicherer mindern die Leistung oft, wenn Vorerkrankungen bestehen. Gute Tarife verzichten bis zu einem hohen Grad darauf.
 
 ## Häufige Fragen

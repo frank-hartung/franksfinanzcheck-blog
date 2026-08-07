@@ -71,7 +71,7 @@ Um dein WLAN zu optimieren und ein schnelles Internet zu Hause zu haben, ist es 
 ## Häufige Fragen
 
 ### Wie viele Mesh-Knoten brauche ich?
-Faustregel: Ein Knoten pro 60-80 m² bzw. Pro Etage. Für eine 100-m²-Wohnung reichen meist 2, für ein Einfamilienhaus 3.
+Faustregel: Ein Knoten pro 60-80 m² bzw. pro Etage. Für eine 100-m²-Wohnung reichen meist 2, für ein Einfamilienhaus 3.
 
 ### Ist Mesh auch mit meinem alten Router nutzbar?
 Teilweise – viele Mesh-Systeme können einen bestehenden Router als "Basis" weiterverwenden, verlieren dann aber oft Funktionen. Sauberer ist ein komplettes System.
