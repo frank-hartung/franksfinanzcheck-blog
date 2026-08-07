@@ -100,3 +100,12 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
 # jsDelivr-CDN (Cache: 1 Jahr + immutable) statt GitHub Pages (max-age=600).
 [cover]
   responsiveImages = false
+
+# Privacy-freundliches Analytics (Umami – cookieless, DSGVO-konform)
+# websiteId leer = Analytics deaktiviert. ID + ggf. src/hostUrl eintragen
+# (siehe ANLEITUNG-UMAMI-ANALYTICS.md).
+[params.umami]
+  websiteId = ""                        # ← Umami-Website-ID hier eintragen
+  src = "https://cloud.umami.is/script.js"  # Cloud; self-hosted: eigene URL (z. B. https://umami.example.com/script.js)
+  hostUrl = ""                          # self-hosted: https://umami.example.com (sonst leer)
+  consentRequired = true                # true: lädt nur nach "Alle akzeptieren" (streng); false: cookieless ohne Einwilligung (DNT wird respektiert)

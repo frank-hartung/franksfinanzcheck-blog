@@ -120,3 +120,59 @@
                     "sameAs" (slice "https://www.pinterest.de/franksfinanzcheck/"))
 ) | jsonify | safeJS }}</script>
 {{- end -}}
+
+{{- /* ---------- Privacy-Analytics (Umami, cookieless) ---------- */ -}}
+{{- /* DSGVO-freundliche Reichweitenmessung: keine Cookies, keine
+       personenbezogenen Daten (IP wird gehasht), keine Daten an Google.
+       - consentRequired=true: Skript lädt erst nach "Alle akzeptieren"
+         (bzw. vor der ersten Entscheidung gar nicht) – striktester Modus.
+       - consentRequired=false: lädt immer, respektiert aber den
+         Do-Not-Track-Header des Browsers (data-do-not-track).
+       Opt-out jederzeit: Browser-DNT aktivieren oder Cookie-Einstellungen.
+       Ausführliche Infos: ANLEITUNG-UMAMI-ANALYTICS.md + Datenschutz. */ -}}
+{{- with site.Params.umami.websiteId -}}
+{{- $umamiSrc := site.Params.umami.src | default "https://cloud.umami.is/script.js" -}}
+{{- $umamiHost := site.Params.umami.hostUrl | default "" -}}
+{{- $consent := site.Params.umami.consentRequired | default true -}}
+<script>
+(function () {
+  // Nur laden, wenn keine Einwilligung nötig ODER Cookie = "all" (oder noch keine Entscheidung)
+  var KEY = 'ff_cookie_consent';
+  function getConsent() {
+    try {
+      var m = document.cookie.match(new RegExp('(?:^|; )' + KEY + '=([^;]*)'));
+      return m ? decodeURIComponent(m[1]) : null;
+    } catch (e) { return null; }
+  }
+  var consentRequired = {{ $consent }};
+  var c = getConsent();
+  var shouldLoad = !consentRequired || c === 'all' || c === null;
+  if (!shouldLoad) return;
+
+  var d = document, s = d.createElement('script');
+  s.async = true;
+  s.src = '{{ $umamiSrc }}';
+  s.setAttribute('data-website-id', '{{ . }}');
+  s.setAttribute('data-do-not-track', 'true');   // DNT des Browsers respektieren
+  s.setAttribute('data-cache', 'false');          // keine Daten im localStorage
+  s.setAttribute('data-host-url', '{{ $umamiHost }}'); // leer = Cloud-Default
+  d.head.appendChild(s);
+  window.__umamiLoaded = true;
+
+  // Falls der Nutzer später "Alle akzeptieren" wählt → nachladen
+  document.addEventListener('ffConsentChange', function (e) {
+    if (e.detail === 'all' && !window.__umamiLoaded) {
+      window.__umamiLoaded = true;
+      var s2 = d.createElement('script');
+      s2.async = true;
+      s2.src = '{{ $umamiSrc }}';
+      s2.setAttribute('data-website-id', '{{ . }}');
+      s2.setAttribute('data-do-not-track', 'true');
+      s2.setAttribute('data-cache', 'false');
+      s2.setAttribute('data-host-url', '{{ $umamiHost }}'); // leer = Cloud-Default
+      d.head.appendChild(s2);
+    }
+  });
+})();
+</script>
+{{- end -}}
