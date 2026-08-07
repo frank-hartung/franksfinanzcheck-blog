@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["WLAN", "DSL Hacks", "Internet"]
 categories: ["Internet- & DSL-Hacks"]
+pillar: "internet-dsl"
 keywords: ["WLAN verbessern", "DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN Signal stärken", "WiFi Optimieren"]
 author: "Frank"
 cover:

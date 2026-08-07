@@ -84,7 +84,7 @@
 {{- end -}}
 
 {{- /* ---------- FAQPage-Schema (aus den FAQ-Abschnitten der Artikel) ---------- */ -}}
-{{- if and .IsPage (eq .Section "posts") -}}
+{{- if and .IsPage (or (eq .Section "posts") (eq .Section "pillar")) -}}
 {{- $faq := slice -}}
 {{- $chunks := split (plainify .RawContent) "### " -}}
 {{- range $chunks -}}

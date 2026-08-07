@@ -140,12 +140,14 @@ def load_topics():
             line = line.strip()
             if line.startswith("- title:"):
                 t = line.split(":", 1)[1].strip().strip("\"'")
-                topics.append({"title": t, "keywords": [], "affiliate_url": None})
+                topics.append({"title": t, "keywords": [], "affiliate_url": None, "pillar": None})
             elif line.startswith("keywords:") and topics:
                 raw = line.split(":", 1)[1].strip()
                 topics[-1]["keywords"] = [k.strip().strip("\"'") for k in raw.strip("[]").split(",")]
             elif line.startswith("affiliate_url:") and topics:
                 topics[-1]["affiliate_url"] = line.split(":", 1)[1].strip().strip("\"'")
+            elif line.startswith("pillar:") and topics:
+                topics[-1]["pillar"] = line.split(":", 1)[1].strip().strip("\"'")
     if not topics:
         sys.exit("FEHLER: Keine Themen in data/topics.yaml gefunden.")
     return topics
@@ -529,8 +531,21 @@ def generate_article_text(topic, angle, perspective=None, pin=None, keywords=Non
         )
 
     anrede_var = "Du-Form (du/dein/dich)" if os.environ.get("BLOG_ANREDE", "du").lower() != "sie" else "Sie-Form (Sie/Ihnen/Ihre)"
+    pillar_hint = ""
+    if topic.get("pillar"):
+        pillar_hint = (
+            "CLUSTER-VERLINKUNG: Dieser Artikel gehört zu einer Ratgeber-Übersicht "
+            "(Pillar-Page) auf FranksFinanzcheck. Baue an genau EINER passenden "
+            "Stelle im Fließtext einen natürlichen, kontextuellen Link auf die "
+            "Ratgeber-Übersicht ein – Markdown-Link mit RELATIVEM Pfad "
+            "(kein führender Slash): "
+            f"[Ratgeber: ...](../../pillar/{topic['pillar']}/) – "
+            "z. B. „Mehr dazu im Ratgeber …“ mit aussagekräftigem Ankertext.\n"
+        )
     prompt = f"""Schreibe einen EINZIGARTIGEN, hilfreichen deutschen Blog-Artikel zum Thema:
 "{topic}"
+
+{pillar_hint}{inspiration}{keyword_hint}Stil des Artikels: {angle_desc}.
 
 {inspiration}{keyword_hint}
 Stil des Artikels: {angle_desc}.
@@ -693,7 +708,8 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
         f"draft: {draft_flag}\n"
         f'tags: {json.dumps(keywords[:4], ensure_ascii=False)}\n'
         f'categories: ["Ratgeber"]\n'
-        f"keywords: {json.dumps(keywords, ensure_ascii=False)}\n"
+        + (f'pillar: "{topic.get("pillar")}"\n' if topic.get("pillar") else "")
+        + f"keywords: {json.dumps(keywords, ensure_ascii=False)}\n"
         f"author: {yaml_str(AUTHOR)}\n"
         f"ai_generated: true\n"
         f"ai_provider: {yaml_str(provider_name)}\n"

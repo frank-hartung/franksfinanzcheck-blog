@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["DNS", "Internet", "DSL Tipps"]
 categories: ["Internet- & DSL-Hacks"]
+pillar: "internet-dsl"
 keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps", "DNS Server ändern", "Bester DNS Server"]
 author: "Frank"
 cover:

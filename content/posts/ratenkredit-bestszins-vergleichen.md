@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Kredit", "Ratenkredit", "Umschuldung"]
 categories: ["Geld sparen & Frugalismus"]
+pillar: "konto-karten"
 keywords: ["Ratenkredit vergleichen", "Ratenkredit günstig", "Kreditvergleich", "Umschuldung sparen", "Ratenkredit Vergleich", "Kredit Vergleichen"]
 author: "Frank"
 cover:

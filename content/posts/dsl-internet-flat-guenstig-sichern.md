@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["DSL", "Internet", "Glasfaser"]
 categories: ["Internet- & DSL-Hacks"]
+pillar: "internet-dsl"
 keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus", "Internetanbieter Vergleich", "DSL Tarife"]
 author: "Frank"
 cover:

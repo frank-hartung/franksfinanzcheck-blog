@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["E-Auto", "Strom", "Ladekosten"]
 categories: ["Günstige Strom- & Gastarife"]
+pillar: "strom-sparen"
 keywords: ["E-Auto Ladekosten", "Stromtarif E-Auto", "Wallbox sparen", "Strompreis pro kWh", "Kostenvergleich Benziner Elektroauto"]
 author: "Frank"
 cover:

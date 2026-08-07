@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Handytarif", "Handyvertrag", "Telekommunikation"]
 categories: ["Internet- & DSL-Hacks"]
+pillar: "internet-dsl"
 keywords: ["Handytarif vergleichen", "Handyvertrag wechseln", "Günstiger Handytarif", "Handytarif vergleichen online", "günstige Handytarife"]
 author: "Frank"
 cover:

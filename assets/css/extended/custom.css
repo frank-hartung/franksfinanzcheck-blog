@@ -453,3 +453,25 @@ input:focus-visible {
     white-space: nowrap;
     border: 0;
 }
+
+/* ---------- Ratgeber-Cluster (Startseite) ---------- */
+/* Mobile: kompakte Chip-Leiste statt Grid – hält das erste Cover
+   (LCP-Element) im Viewport (Grid wäre ~1500 px hoch). */
+@media (max-width: 600px) {
+    .ff-clusters-grid {
+        display: none !important;
+    }
+    .ff-clusters-chips {
+        display: flex !important;
+    }
+    .ff-clusters-intro {
+        display: none;
+    }
+    .ff-clusters-title {
+        font-size: 1.05em !important;
+        margin-bottom: 8px !important;
+    }
+    .ff-clusters-chips a {
+        padding: 6px 11px !important;
+    }
+}

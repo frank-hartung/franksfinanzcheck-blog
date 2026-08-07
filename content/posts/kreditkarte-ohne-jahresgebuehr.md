@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Kreditkarte", "Bank", "Gebühren sparen"]
 categories: ["Haushaltskasse & Budgetplanung"]
+pillar: "konto-karten"
 keywords: ["Kreditkarte ohne Gebühren", "Kreditkarten Vergleich", "Kostenlose Kreditkarte", "Kreditkarte ohne Jahresgebühr", "Kreditkarte mit keiner Gebühr"]
 author: "Frank"
 cover:

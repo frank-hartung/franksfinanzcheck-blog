@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Strom", "Anbieterwechsel", "Sparen"]
 categories: ["Energie"]
+pillar: "strom-sparen"
 keywords: ["Strom wechseln", "Stromanbieter vergleichen", "Strom sparen 2026", "Strom anbieter wechseln", "Stromversorger wechseln"]
 author: "Redaktion"
 cover:

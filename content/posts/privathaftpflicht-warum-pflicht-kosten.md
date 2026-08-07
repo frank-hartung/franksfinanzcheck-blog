@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Haftpflicht", "Versicherung", "Absicherung"]
 categories: ["Versicherungen"]
+pillar: "versicherungen"
 keywords: ["Privathaftpflicht", "Haftpflichtversicherung Vergleich", "Haftpflicht Kosten", "Privathaftpflichtversicherung", "Privathaftpflicht Kosten"]
 author: "Frank"
 cover:

@@ -168,7 +168,10 @@ def load_whitelist():
 
 def load_articles(files=None):
     arts = []
-    paths = files or sorted(glob.glob(os.path.join(POSTS_DIR, "*.md")))
+    paths = files or sorted(
+        glob.glob(os.path.join(POSTS_DIR, "*.md"))
+        + glob.glob(os.path.join(BLOG_DIR, "content", "pillar", "*", "index.md"))
+    )
     for path in paths:
         content = open(path, encoding="utf-8").read()
         parts = content.split("---", 2)

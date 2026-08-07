@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Girokonto", "Bank", "Gebühren sparen"]
 categories: ["Haushaltskasse & Budgetplanung"]
+pillar: "konto-karten"
 keywords: ["Kostenloses Girokonto", "Girokonto Vergleich", "Kontoführungsgebühren sparen", "kostenloses Girokonto ohne Gebühren", "kostenloses Girokonto eröffnen"]
 author: "Frank"
 cover:

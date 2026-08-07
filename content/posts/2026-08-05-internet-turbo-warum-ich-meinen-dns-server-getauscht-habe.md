@@ -5,6 +5,7 @@ date: 2026-08-05
 draft: false
 tags: ["dns server wechseln", "internet schneller machen", "dsl tipps"]
 categories: ["Ratgeber"]
+pillar: "internet-dsl"
 keywords: ["dns server wechseln", "internet schneller machen", "dsl tipps"]
 author: "Frank"
 ai_generated: true

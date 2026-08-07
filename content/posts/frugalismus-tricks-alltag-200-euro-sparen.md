@@ -5,6 +5,7 @@ date: 2026-08-04
 draft: false
 tags: ["Frugalismus", "Geld sparen", "Haushaltsbuch"]
 categories: ["Geld sparen & Frugalismus"]
+pillar: "frugalismus"
 keywords: ["Frugalismus Tipps", "Geld sparen im Alltag", "Haushaltsbuch führen", "Sparmethoden", "Sparsam leben", "Finanzielle Freiheit"]
 author: "Frank"
 cover:
