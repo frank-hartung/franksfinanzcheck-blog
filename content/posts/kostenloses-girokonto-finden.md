@@ -30,7 +30,7 @@ cover:
 | **Kontoführung** | Suche nach dauerhaft 0 € statt zeitlich begrenzter Lockangebote. |
 | **Bedingungen** | Viele Banken verlangen einen Geldeingang von 500 € bis 1.000 € für die Gebührenfreiheit. |
 | **EC-/Girocard** | Prüfe, ob die physische Karte inklusive ist oder 10 bis 15 € pro Jahr kostet. |
-| **Kreditkarte** | Ist eine [Kostenlose Kreditkarte](/posts/kreditkarte-ohne-jahresgebuehr/) im Paket enthalten? |
+| **Kreditkarte** | Ist eine [Kostenlose Kreditkarte](../../posts/kreditkarte-ohne-jahresgebuehr/) im Paket enthalten? |
 | **Bargeld abheben** | Achte auf große Verbünde wie die Cash-Group oder freie Abhebungen an jedem Automaten. |
 | **Gebühren im Ausland** | Vermeide Kosten für Zahlungen in Fremdwährungen oder Abhebungen in der EU. |
 | **App & Banking** | Setze auf moderne Apps mit Echtzeit-Überweisungen und Push-Benachrichtigungen. |

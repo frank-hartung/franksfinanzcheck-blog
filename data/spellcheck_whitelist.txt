@@ -179,7 +179,6 @@ perfektionismus
 starrheit
 aufbrauchen
 sparmindset
-haushaltsbuch
 
 # Sonstige korrekte Wörter, die Hunspell fehlen
 flinkere

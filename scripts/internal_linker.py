@@ -187,7 +187,7 @@ def main():
             if not anchor:
                 continue
             start, end = anchor
-            target = f"/posts/{tgt_fn[:-3]}/"
+            target = f"../../posts/{tgt_fn[:-3]}/"  # relativ (Hugo-Subdir: führender Slash = Domain-Wurzel → 404)
             rel = pages[tgt_fn]["path"]
             print(f"  {src_fn}: „{src['body'][start:end].strip()}“ → {tgt_fn} (Score {score})")
             if apply:

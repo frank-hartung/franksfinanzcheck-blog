@@ -341,9 +341,16 @@ def analyze_article(a, whitelist):
             "reason": f"Satzanfang nach Überschrift: „{m.group(2)}“ → „{m.group(2).upper()}“",
         })
 
+    # Satzzeichen-Checks auf MASKED Text (Links/URLs ausgeblendet → keine
+    # falschen Treffer durch "../../posts/" o. Ä.; Offsets bleiben gültig,
+    # weil die Maskierung gleich lang ist)
+    body_masked = CODE_RE.sub(lambda m: " " * (m.end() - m.start()), body)
+    body_masked = URL_RE.sub(lambda m: " " * (m.end() - m.start()), body_masked)
+    body_masked = LINK_RE.sub(lambda m: " " * (m.end() - m.start()), body_masked)
+
     # 2c2. SATZZEICHEN: Abkürzungen mit fehlendem Leerzeichen (Z.B. → z. B.)
     for regex, fix in ABKUERZUNG_FIXES:
-        for m in regex.finditer(body):
+        for m in regex.finditer(body_masked):
             problems.append({
                 "type": "punctuation", "word": m.group(0), "fix": fix,
                 "start": m.start(), "end": m.end(), "conf": 0.95,
@@ -351,7 +358,7 @@ def analyze_article(a, whitelist):
             })
 
     # 2c3. SATZZEICHEN: Leerzeichen VOR Satzzeichen entfernen ("Hallo ," → "Hallo,")
-    for m in SPACE_BEFORE_PUNCT_RE.finditer(body):
+    for m in SPACE_BEFORE_PUNCT_RE.finditer(body_masked):
         # Nicht in Links/Code (maskierte Bereiche sind Leerzeichen → kein Treffer)
         problems.append({
             "type": "punctuation", "word": m.group(0), "fix": m.group(1),
@@ -360,7 +367,7 @@ def analyze_article(a, whitelist):
         })
 
     # 2c4. SATZZEICHEN: Doppelte Satzzeichen zusammenfassen (".." → ".")
-    for m in DOUBLE_PUNCT_RE.finditer(body):
+    for m in DOUBLE_PUNCT_RE.finditer(body_masked):
         fix = m.group(0)[0]
         problems.append({
             "type": "punctuation", "word": m.group(0), "fix": fix,
@@ -370,8 +377,8 @@ def analyze_article(a, whitelist):
 
     # 2c5. Großbuchstabe nach Abkürzung mitten im Satz → klein
     #      ("z. B. Wenn" → "z. B. wenn"), außer nach Satzende (. ! ?)
-    for m in AFTER_ABBR_CAP_RE.finditer(body):
-        before = body[max(0, m.start() - 4):m.start()]
+    for m in AFTER_ABBR_CAP_RE.finditer(body_masked):
+        before = body_masked[max(0, m.start() - 4):m.start()]
         if re.search(r'[.!?]\s*$', before):
             continue  # neuer Satz nach Satzendepunkt – groß korrekt
         w = m.group(1)
