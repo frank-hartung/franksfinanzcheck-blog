@@ -1,6 +1,6 @@
 ---
 title: "Mietwagen im Spätsommer: Günstig buchen und sparen"
-description: "Erfahren Sie, wie Sie einen Mietwagen günstig buchen können und Ihren Reisebudget für den perfekten mietwagen roadtrip optimieren"
+description: "Erfahren Sie, wie Sie einen Mietwagen günstig buchen können und Ihr Reisebudget für den perfekten Mietwagen-Roadtrip optimieren"
 date: 2026-08-07
 draft: false
 tags: ["mietwagen roadtrip", "mietwagen günstig buchen", "reise budget"]

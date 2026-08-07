@@ -1,6 +1,6 @@
 ---
 title: "Frugalismus für den Erfolg: Der Weg zur Freiheit"
-description: "Frugalismus für den Erfolg: Mit einfachen frugalismus tipps und geld sparen im alltag erreichst du deine finanzielle Freiheit Schritt für Schritt."
+description: "Frugalismus für den Erfolg: Mit einfachen Frugalismus-Tipps und Geld sparen im Alltag erreichst du deine finanzielle Freiheit Schritt für Schritt."
 date: 2026-08-07
 draft: false
 tags: ["frugalismus tipps", "geld sparen im alltag", "haushaltsbuch führen", "sparmethoden"]
