@@ -1,5 +1,5 @@
 ---
-title: "Zahnzusatzversicherung: Lohnt sich der Abschluss?"
+title: "Zahnzusatzversicherung: Wann sich der Abschluss lohnt"
 description: "Zahnzusatzversicherung im Test: Was sie kostet, was sie zahlt und für wen sich der Abschluss wirklich lohnt – mit den wichtigsten Bausteinen."
 date: 2026-08-04
 draft: false
