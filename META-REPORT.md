@@ -9,7 +9,7 @@
 | Artikel geprüft | 35 |
 | Ø Qualitätsscore | **100/100** |
 | Ø Titel-Länge | 55 Zeichen (optimal 50–60) |
-| Ø Description-Länge | 139 Zeichen (optimal 120–160) |
+| Ø Description-Länge | 140 Zeichen (optimal 120–160) |
 | Artikel mit Problemen | **0** |
 
 ## Status
@@ -23,10 +23,10 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | Score | Artikel | Titel | Desc | Keywords | Status |
 |---|---|---|---|---|---|
 | 100 | Internet-Turbo: Warum ich meinen DNS-Server g | 58 | 148 | 3 | ✅ |
-| 100 | Frugalismus im Alltag: So sparst du jeden Mon | 58 | 120 | 4 | ✅ |
+| 100 | Frugalismus im Alltag: So sparst du jeden Mon | 58 | 136 | 4 | ✅ |
 | 100 | Turbo fürs Netz: DNS-Wechsel für schnelleres  | 53 | 134 | 3 | ✅ |
 | 100 | Frugalismus für den Erfolg: Der Weg in die Fr | 51 | 146 | 4 | ✅ |
-| 100 | Mietwagen im Spätsommer: Günstig buchen und s | 50 | 127 | 3 | ✅ |
+| 100 | Mietwagen im Spätsommer: Günstig buchen und s | 50 | 159 | 3 | ✅ |
 | 100 | Die 50-30-20-Regel: Die perfekte Formel für d | 58 | 150 | 6 | ✅ |
 | 100 | 7 Gewohnheiten für mehr finanzielle Freiheit  | 54 | 130 | 5 | ✅ |
 | 100 | DNS-Server ändern: Der kostenlose Boost für d | 57 | 142 | 5 | ✅ |
@@ -59,4 +59,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Zahnzusatzversicherung: Wann sich der Abschlu | 53 | 141 | 5 | ✅ |
 
 ---
-*Erzeugt am 2026-08-07 um 15:40 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-07 um 15:55 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
