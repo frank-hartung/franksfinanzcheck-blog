@@ -107,6 +107,15 @@ jobs:
             git push
           fi
 
+      - name: Rechtschreib- & Groß-Klein-Prüfung aller Artikel (Top-Level)
+        # Wöchentliche Komplettprüfung: korrigiert alle Posts mit
+        # Hunspell de_DE + Groß-Klein-Regeln. Whitelist schützt
+        # Eigennamen; Links/Frontmatter-Keywords bleiben unangetastet.
+        run: |
+          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
+          python3 scripts/spellcheck.py --fix | tee /tmp/spell_log.txt
+          exit ${PIPESTATUS[0]}
+
       - name: Meta-Qualitäts-Gate (Re-Audit + Report – VOLLAUTOMATISCH)
         # Prüft nach der Optimierung ALLE Artikel erneut und erzeugt
         # META-REPORT.md. Exit 0 = alles grün (kein Handlungsbedarf),

@@ -15,7 +15,7 @@ cover:
 
 ## 1. Früh buchen – der erste Schritt, um die Urlaubskasse zu schonen
 
-Flexibel sein lohnt sich. Last minute findest du echte Schnäppchen. Hast du feste Termine, solltest du früh buchen und unbedingt vergleichen. Ein Vergleich mehrerer Anbieter spart bei Pauschalreisen oft 10 bis 20 Prozent, gerade bei All-inclusive-Angeboten.
+Flexibel sein lohnt sich. Last Minute findest du echte Schnäppchen. Hast du feste Termine, solltest du früh buchen und unbedingt vergleichen. Ein Vergleich mehrerer Anbieter spart bei Pauschalreisen oft 10 bis 20 Prozent, gerade bei All-inclusive-Angeboten.
 
 ## 2. Die Nebensaison nutzen
 

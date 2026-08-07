@@ -43,6 +43,11 @@ def clean_body(content):
     body = re.sub(r"\*?Dieser Artikel enthält Affiliate-Links.*?(Mehrkosten|Mehrkosten\.)\*?", " ", body, flags=re.S)
     # Affiliate-CTA-Blöcke (👉 ... Link ...)
     body = re.sub(r"👉.*?\)", " ", body, flags=re.S)
+    # ROBUST: ALLE URLs entfernen (unabhängig vom CTA-Format – der Polish
+    # variiert den CTA-Text, dadurch blieben URL-Bruchstücke als
+    # "Duplikate" im Audit zurück)
+    body = re.sub(r"https?://[^\s)\"']+", " ", body)
+    body = re.sub(r"www\.[^\s)\"']+", " ", body)
     # FAQ-Intro-Standardsätze
     body = re.sub(r"## Häufige Fragen", " ", body)
     # Übrige Markdown-Syntax

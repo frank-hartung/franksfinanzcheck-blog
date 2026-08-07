@@ -14,7 +14,7 @@ cover:
 ---Du zahlst für 100 Kilometer Fahrt entweder 4,50 Euro oder 15 Euro – die Entscheidung liegt allein bei deiner Ladestrategie. Ein Elektrofahrzeug schlägt den Verbrenner bei den Betriebskosten fast immer. Dennoch variieren die Preise massiv zwischen der heimischen Garage und dem Schnelllader an der Autobahn. Mit dem richtigen Wissen drückst du deine E-Auto Ladekosten auf ein Minimum.
 
 ### Das Wichtigste in Kürze
-*   Laden zuhause kostet meist nur ein Drittel im Vergleich zum Schnelllader.
+*   Laden zu Hause kostet meist nur ein Drittel im Vergleich zum Schnelllader.
 *   Ein spezieller Stromtarif für E-Autos senkt den Strompreis pro kWh deutlich.
 *   Photovoltaik-Anlagen bieten die günstigste Möglichkeit für volle Akkus.
 *   Ladekarten-Apps schützen dich vor überteuerten Preisen an öffentlichen Säulen.
@@ -29,7 +29,7 @@ cover:
 
 Wer 80 Prozent der Energie daheim bezieht, spart am meisten. Du zahlst pro Kilometer dann nur einen Bruchteil im Vergleich zu fossilen Kraftstoffen. Nutzt du fast ausschließlich öffentliche Säulen, schmilzt dein finanzieller Vorteil schnell dahin.
 
-## So senkst du die Ladekosten zuhause
+## So senkst du die Ladekosten zu Hause
 
 Wähle unbedingt einen passenden Stromtarif für dein E-Auto. Viele Versorger bieten Tarife mit reduzierten Netzentgelten an, falls du die Wallbox separat steuern lässt. Ein Vergleich verschiedener Anbieter lohnt sich hier oft schon ab der ersten Kilowattstunde.
 
@@ -49,7 +49,7 @@ Achte penibel auf Blockiergebühren. Viele Betreiber verlangen nach drei oder vi
 
 ## Kostenvergleich: Benziner gegen Elektroauto
 
-Ein modernes E-Auto verbraucht im Schnitt etwa 15 bis 20 kWh auf 100 Kilometern. Beim Laden zuhause (ca. 0,30 €/kWh) entstehen Kosten von 4,50 bis 6,00 Euro. Ein vergleichbarer Benziner benötigt bei 7 Litern Verbrauch und einem Preis von 1,75 Euro rund 12,25 Euro.
+Ein modernes E-Auto verbraucht im Schnitt etwa 15 bis 20 kWh auf 100 Kilometern. Beim Laden zu Hause (ca. 0,30 €/kWh) entstehen Kosten von 4,50 bis 6,00 Euro. Ein vergleichbarer Benziner benötigt bei 7 Litern Verbrauch und einem Preis von 1,75 Euro rund 12,25 Euro.
 
 In diesem Kostenvergleich Benziner Elektroauto sparst du also über 50 Prozent deiner Energiekosten. Optimierst du deinen Strompreis pro kWh durch einen Anbieterwechsel, vergrößert sich dieser Abstand weiter. Auf eine Laufleistung von 15.000 Kilometern pro Jahr sparst du so schnell über 900 Euro.
 
@@ -62,7 +62,7 @@ Ja, für regelmäßiges Laden ist die Wallbox unverzichtbar. Du sparst Zeit und 
 Suche nach einem Tarif mit niedrigen Arbeitspreisen und moderater Grundgebühr. Tarife für steuerbare Verbrauchseinrichtungen nach §14a EnWG bieten oft reduzierte Netzentgelte. Ein Stromvergleich liefert dir die besten Konditionen für deinen Wohnort.
 
 ### Schadet schnelles Laden dem Akku?
-Ständiges Laden am DC-Schnelllader führt zu einer schnelleren Alterung der Akkuzellen. Die Hitzeentwicklung stresst das Material deutlich mehr als langsames AC-Laden. Nutze für die tägliche Routine die Wallbox zuhause, um die Lebensdauer deiner Batterie zu maximieren.
+Ständiges Laden am DC-Schnelllader führt zu einer schnelleren Alterung der Akkuzellen. Die Hitzeentwicklung stresst das Material deutlich mehr als langsames AC-Laden. Nutze für die tägliche Routine die Wallbox zu Hause, um die Lebensdauer deiner Batterie zu maximieren.
 
 ---
 
