@@ -45,7 +45,7 @@ KI_FLOSKELN = [
     "in diesem artikel werden wir",
     "in diesem artikel erfahren sie",
     "in diesem beitrag",
-    "fazit:",
+    "fazit: es bleibt",  # nur als Abschluss-Floskel, nicht "mein Fazit:
     "zusammenfassung:",
     "es gibt viele möglichkeiten",
     "es gibt zahlreiche",
