@@ -1,5 +1,5 @@
 ---
-title: "Frugalismus für den Erfolg"
+title: "Frugalismus für den Erfolg: Der Weg zur Freiheit"
 description: "Mit einfachen frugalismus tipps kann man geld sparen im alltag und seine finanzielle Situation verbessern."
 date: 2026-08-07
 draft: false

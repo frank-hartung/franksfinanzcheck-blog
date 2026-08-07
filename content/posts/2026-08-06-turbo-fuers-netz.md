@@ -1,6 +1,6 @@
 ---
-title: "Turbo fürs Netz"
-description: "DNS-Server wechseln für schnellere Internetverbindungen"
+title: "Turbo fürs Netz: DNS-Wechsel für schnelleres Internet"
+description: "dns server wechseln: Wenn man täglich mit dem Internet arbeitet, kennt man das Gefühl, wenn die Verbindung plötzlich langsamer wird. Man wartet auf die Ladung …"
 date: 2026-08-06
 draft: false
 tags: ["dns server wechseln", "internet schneller machen", "dsl tipps"]

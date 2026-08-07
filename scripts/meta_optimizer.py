@@ -32,6 +32,16 @@ DESC_MIN, DESC_MAX = 70, 160
 KEYWORDS_MIN = 3
 
 
+def parse_keywords(raw):
+    """Parst Keywords aus dem Frontmatter (YAML-Liste oder Komma-String)."""
+    if not raw:
+        return []
+    raw = raw.strip()
+    if raw.startswith("["):
+        return [k.strip().strip('"\'') for k in raw[1:-1].split(",") if k.strip()]
+    return [k.strip().strip('"\'') for k in raw.split(",") if k.strip()]
+
+
 def norm(s):
     s = s.lower()
     s = re.sub(r"[äàáâ]", "ae", s)
@@ -100,7 +110,7 @@ def generate_description(a):
         source = a["body"]
     desc = clean_text(source, DESC_MAX - 3)
     # Keyword vorne einbauen, falls nicht enthalten
-    kws = [k.strip() for k in a["keywords"].split(",") if k.strip()]
+    kws = parse_keywords(a["keywords"])
     if kws:
         core = norm(kws[0]).split()
         core = next((t for t in core if len(t) >= 3), "")
@@ -129,7 +139,7 @@ def ai_description(a):
         return None
 
     title = a["title"][:80]
-    kws = [k.strip() for k in a["keywords"].split(",") if k.strip()][:4]
+    kws = parse_keywords(a["keywords"])[:4]
     prompt = (f"Schreibe für einen deutschen Blog-Artikel eine klickstarke Meta-Description "
               f"(max. 155 Zeichen, mit wichtigstem Keyword '{kws[0] if kws else title}'). "
               f"Artikel-Titel: '{title}'. Nur die Description, ohne Anführungszeichen.")
@@ -174,11 +184,76 @@ def ai_description(a):
     return None
 
 
+def ai_title(a):
+    """KI-generierter, klickstarker Titel (50–60 Zeichen) mit Cache."""
+    import urllib.request
+    cache = {}
+    if os.path.exists(CACHE_FILE):
+        try:
+            cache = json.load(open(CACHE_FILE, encoding="utf-8"))
+        except Exception:
+            cache = {}
+
+    key_id = a["slug"] + ":title"
+    if key_id in cache:
+        return cache[key_id]
+
+    if not (os.environ.get("GEMINI_API_KEY") or os.environ.get("GROQ_API_KEY")):
+        return None
+
+    title = a["title"][:80]
+    kws = parse_keywords(a["keywords"])[:4]
+    kw = kws[0] if kws else title
+    prompt = (f"Schreibe für einen deutschen Blog-Artikel einen klickstarken, "
+              f"natürlichen SEO-Titel von EXAKT 45-60 Zeichen. Wichtigstes Keyword: "
+              f"'{kw}'. Ausgangs-Titel: '{title}'. Kein Clickbait, keine "
+              f"Sonderzeichen am Ende. Nur der Titel, ohne Anführungszeichen.")
+
+    ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+
+    gemini_key = os.environ.get("GEMINI_API_KEY", "")
+    if gemini_key:
+        try:
+            body = {"contents": [{"parts": [{"text": prompt}]}]}
+            req = urllib.request.Request(
+                "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=" + gemini_key,
+                data=json.dumps(body).encode(),
+                headers={"Content-Type": "application/json", "User-Agent": ua})
+            resp = json.loads(urllib.request.urlopen(req, timeout=60).read())
+            text = resp["candidates"][0]["content"]["parts"][0]["text"].strip()
+            if text:
+                cache[key_id] = text
+                json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
+            return text
+        except Exception:
+            pass
+
+    groq_key = os.environ.get("GROQ_API_KEY", "")
+    if groq_key:
+        try:
+            body = {"model": "llama-3.3-70b-versatile",
+                    "messages": [{"role": "user", "content": prompt}], "max_tokens": 80}
+            req = urllib.request.Request(
+                "https://api.groq.com/openai/v1/chat/completions",
+                data=json.dumps(body).encode(),
+                headers={"Content-Type": "application/json",
+                         "Authorization": f"Bearer {groq_key}", "User-Agent": ua})
+            resp = json.loads(urllib.request.urlopen(req, timeout=60).read())
+            text = resp["choices"][0]["message"]["content"].strip()
+            if text:
+                cache[key_id] = text
+                json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
+            return text
+        except Exception:
+            pass
+    return None
+
+
 def audit(a):
     issues = []
     tl = len(a["title"])
     dl = len(a["description"])
-    kw_count = len([k for k in a["keywords"].split(",") if k.strip()])
+    kw_count = len(parse_keywords(a["keywords"]))
 
     if tl < TITLE_MIN:
         issues.append(f"Titel zu kurz ({tl} Zeichen)")
@@ -217,10 +292,54 @@ def fix_meta(a, use_ai):
                 content = content[:old_line.start()] + f'description: "{new_desc}"' + content[old_line.end():]
                 changed = True
 
+    # 1b) Titel fixen (zu kurz → ergänzen, zu lang → kürzen)
+    tl = len(a["title"])
+    if tl < TITLE_MIN or tl > TITLE_MAX:
+        new_title = None
+        if use_ai:
+            new_title = ai_title(a)
+        if not new_title:
+            # Deterministischer Fallback: passendes Keyword als Ergänzung
+            kws = parse_keywords(a["keywords"])
+            ABBR = {"dns", "dsl", "kfz", "wlan", "lte", "tv", "pc", "gmbh",
+                    "check24", "tarifcheck", "lkw", "pk"}
+            def cap(kw):
+                first = kw.split()[0].lower() if kw else ""
+                if first in ABBR:
+                    return first.upper() + kw[len(first):]
+                return kw[0].upper() + kw[1:]
+            title_l = a["title"].lower()
+            suffix = ""
+            for kw in kws:
+                first = kw.split()[0].lower() if kw else ""
+                if first and first not in title_l and kw.lower() not in title_l:
+                    suffix = cap(kw)
+                    break
+            if tl < TITLE_MIN and suffix:
+                new_title = f"{a['title']}: {suffix}"
+                # Länge prüfen: ggf. 2. Keyword ergänzen, falls noch zu kurz
+                if len(new_title) < TITLE_MIN:
+                    for kw in kws:
+                        add = cap(kw)
+                        if add.lower() not in new_title.lower() and len(new_title) + len(add) + 2 <= TITLE_MAX:
+                            new_title = f"{new_title} {add}"
+                            if len(new_title) >= TITLE_MIN:
+                                break
+            elif tl > TITLE_MAX:
+                new_title = a["title"][:TITLE_MAX - 1].rstrip() + "…"
+        # Länge final begrenzen (KI kann überziehen)
+        if new_title and len(new_title) > TITLE_MAX + 5:
+            new_title = new_title[:TITLE_MAX - 1].rstrip() + "…"
+        if new_title:
+            old_line = re.search(r'^title:.*$', content, re.M)
+            if old_line:
+                content = content[:old_line.start()] + f'title: "{new_title}"' + content[old_line.end():]
+                changed = True
+
     # 2) Keywords erweitern, falls zu wenige
-    kw_count = len([k for k in a["keywords"].split(",") if k.strip()])
+    kw_count = len(parse_keywords(a["keywords"]))
     if kw_count < KEYWORDS_MIN:
-        kws = [k.strip() for k in a["keywords"].split(",") if k.strip()]
+        kws = parse_keywords(a["keywords"])
         # Aus dem Titel ableiten
         title_words = [w for w in a["title"].split() if len(w) > 3 and w.lower() not in
                        ("für", "und", "der", "die", "das", "mit", "den", "dem")]

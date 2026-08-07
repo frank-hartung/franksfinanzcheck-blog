@@ -107,6 +107,57 @@ jobs:
             git push
           fi
 
+      - name: Meta-Qualitäts-Gate (Re-Audit + Report – VOLLAUTOMATISCH)
+        # Prüft nach der Optimierung ALLE Artikel erneut und erzeugt
+        # META-REPORT.md. Exit 0 = alles grün (kein Handlungsbedarf),
+        # Exit 1 = Probleme verbleiben → automatisches Issue unten.
+        # Damit entfällt die manuelle Sichtung vollständig.
+        id: meta_gate
+        continue-on-error: true
+        run: |
+          python3 scripts/meta_report.py | tee /tmp/meta_gate_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Meta-Report committen
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add META-REPORT.md .meta_report.json
+          if git diff --cached --quiet; then
+            echo "Report unverändert"
+          else
+            git commit -m "seo: Meta-Report aktualisiert (vollautomatisch)"
+            git push
+          fi
+
+      - name: Issue bei verbleibenden Meta-Problemen (kein manuelles Sichten nötig)
+        # Greift NUR wenn nach der automatischen Optimierung noch Probleme
+        # übrig sind (Exit 1). Erstellt ein GitHub-Issue mit allen Details –
+        # der wöchentliche Lauf ist damit zu 100 % autonom.
+        if: steps.meta_gate.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let details = 'Meta-Qualitäts-Gate hat verbleibende Probleme gefunden.';
+            try {
+              const j = JSON.parse(fs.readFileSync('.meta_report.json', 'utf-8'));
+              details = '### Verbleibende Probleme (' + j.critical.length + ')\n\n';
+              for (const c of j.critical) {
+                details += '- **' + c.title + '**: ' + c.issues.join('; ') + '\n';
+              }
+              details += '\nKennzahlen: Ø Score ' + j.avg_score + '/100 · Ø Titel ' + j.avg_title_len + ' Zeichen · Ø Description ' + j.avg_desc_len + ' Zeichen';
+            } catch (e) {
+              try { details = fs.readFileSync('/tmp/meta_gate_log.txt', 'utf-8'); } catch (e2) {}
+            }
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🔍 Meta-Daten: ' + (JSON.parse(fs.readFileSync('.meta_report.json','utf-8')).critical.length || '?') + ' Artikel brauchen Aufmerksamkeit',
+              body: details + '\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow (Meta-Qualitäts-Gate).\nDetails: siehe META-REPORT.md im Repo.'
+            });
+            console.log('✅ Issue erstellt');
+
       - name: Barrierefreiheits-Audit (WCAG 2.1)
         id: a11y
         continue-on-error: true
