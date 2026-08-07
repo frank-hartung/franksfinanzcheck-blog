@@ -28,7 +28,7 @@ Im Frugalismus triffst du bewusste Entscheidungen, um deine Ressourcen zu schone
 *   Lege einen festen Sparbetrag direkt am Monatsanfang beiseite.
 
 ## Die Vorteile von Frugalismus
-Frugalismus schützt dich vor Verschwendung und schafft finanzielle Sicherheit. Oft merkst du erst beim genauen Hinsehen, wie viel Geld in Abos oder Kleinkram versickert. Durch effektive **sparmethoden** lenkst du dieses Kapital in deine Altersvorsorge oder den Immobilienkauf. Ein bewussterer Konsum reduziert zudem deinen täglichen Stress. Wer seine Finanzen im Griff hat, blickt deutlich gelassener in die Zukunft.
+Frugalismus schützt dich vor Verschwendung und schafft finanzielle Sicherheit. Oft merkst du erst beim genauen Hinsehen, wie viel Geld in Abos oder Kleinkram versickert. Durch effektive **Sparmethoden** lenkst du dieses Kapital in deine Altersvorsorge oder den Immobilienkauf. Ein bewussterer Konsum reduziert zudem deinen täglichen Stress. Wer seine Finanzen im Griff hat, blickt deutlich gelassener in die Zukunft.
 
 ## Haushaltsbuch führen
 Ohne Überblick verlierst du deine Ziele schnell aus den Augen. Du solltest daher zwingend ein **haushaltsbuch führen**, um deine Geldströme genau zu verstehen. Ob du eine App nutzt oder klassisch auf Papier schreibst, bleibt deinem Geschmack überlassen. Moderne Banking-Apps kategorisieren deine Ausgaben oft schon vollautomatisch. So entdeckst du Einsparpotenziale von ca. 50 € bis 200 € pro Monat, die vorher einfach verschwunden sind. Hier findest du weitere [effektive Tricks zum Sparen](/posts/frugalismus-tricks-alltag-200-euro-sparen/).
@@ -38,7 +38,7 @@ Der Weg zum genügsamen Leben verläuft selten ohne Hindernisse. Überall lauern
 
 ## Häufige Fragen
 ### Was ist der erste Schritt, um den Frugalismus zu leben?
-Erfasse zuerst deine gesamten Ausgaben für einen vollen Monat. So identifizierst du unnötige Kostenfresser sofort. Mit gezielten **sparmethoden** steigerst du danach Schritt für Schritt deine monatliche Sparrate.
+Erfasse zuerst deine gesamten Ausgaben für einen vollen Monat. So identifizierst du unnötige Kostenfresser sofort. Mit gezielten **Sparmethoden** steigerst du danach Schritt für Schritt deine monatliche Sparrate.
 
 ### Wie kann man seine Ausgaben reduzieren?
 Hinterfrage jeden Kauf kritisch: Brauchst du diesen Gegenstand wirklich? Vergleiche Tarife für Strom oder Internet, um oft über 100 € im Jahr zu sparen. Konzentriere dich auf Erlebnisse statt auf materielle Statussymbole.
