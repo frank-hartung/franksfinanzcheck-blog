@@ -47,6 +47,12 @@ Diese Website verwendet Schriftarten der Familie **Montserrat**, **Playfair Disp
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer einheitlichen und schnellen Darstellung der Website).
 
+### Lokale Zwischenspeicherung (Service Worker)
+
+Zur Beschleunigung wiederholter Besuche setzt diese Website einen **Service Worker** ein. Bereits geladene Schriftarten, Bilder und sonstige statische Dateien werden dabei **lokal im Browser** (Cache-API) zwischengespeichert und bei erneuten Besuchen direkt von dort geladen. Dabei werden **keine Daten an uns oder an Dritte übertragen** – die Daten verlassen dein Gerät nicht und es werden keine Cookies gesetzt. Die Zwischenspeicherung kannst du jederzeit durch Löschen der Browserdaten (Cache) deaktivieren.
+
+**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer schnellen Bereitstellung der Website).
+
 ### Statistik und Reichweitenmessung (Umami – cookieless)
 
 Diese Website nutzt zur Reichweitenmessung das datenschutzfreundliche Analyse-Tool **Umami** (Open Source). Umami ist **cookieless**: Es werden **keine Cookies** gesetzt und **keine personenbezogenen Daten** gespeichert. Erfasst werden ausschließlich anonyme, aggregierte Kennzahlen:
