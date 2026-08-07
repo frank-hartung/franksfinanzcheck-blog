@@ -65,10 +65,7 @@
 
 <article class="{{ $class }}">
   {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
-  {{- /* LCP-Optimierung: Das ERSTE Cover auf Seite 1 ist das LCP-Element.
-         Es bekommt eager + fetchpriority=high (alle weiteren bleiben lazy). */}}
-  {{- $isLcp := (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $isHidden)) }}
-  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden "isLcp" $isLcp) }}
+  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
   <header class="entry-header">
     <h2 class="entry-hint-parent">
       {{- .Title }}
