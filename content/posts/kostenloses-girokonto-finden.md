@@ -24,7 +24,7 @@ Kostenlos heißt nicht automatisch überall gleich. Prüfe diese Punkte:
 | **Kontoführung** | Dauerhaft 0 € – nicht nur im ersten Jahr |
 | **Bedingungen** | Viele Banken verlangen einen monatlichen Geldeingang (z. B. 500–1.000 €) für die kostenlose Führung |
 | **EC-/Girocard** | Oft kostenlos, manchmal mit kleiner Jahresgebühr |
-| **Kreditkarte** | Kostenlose Kreditkarte inklusive oder als Option? |
+| **Kreditkarte** | [Kostenlose Kreditkarte](/posts/kreditkarte-ohne-jahresgebuehr/) inklusive oder als Option? |
 | **Bargeld abheben** | Kostenlose Abhebung bei allen Geldautomaten (z. B. über Cash-Group oder CashPool) |
 | **Gebühren im Ausland** | Kostenlose Zahlung und Abhebung in der EU (SEPA) |
 | **App & Banking** | Kostenloses Online-/Mobile-Banking, Push-TAN statt teurer TAN-Generator |

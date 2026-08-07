@@ -68,6 +68,22 @@ jobs:
             git push
           fi
 
+      - name: Interne Verlinkung automatisch ausbauen
+        # Fügt kontextuelle Links zwischen thematisch passenden Artikeln ein
+        # (max. 3 neue Links pro Lauf, natürliche Anker, keine Duplikate).
+        # → stärkt die interne Linkstruktur (SEO), ohne Spam-Muster.
+        run: |
+          python3 scripts/internal_linker.py --apply --max 3 | tee /tmp/internal_link_log.txt
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine neuen internen Links (Struktur bereits dicht)."
+          else
+            git commit -m "seo: interne Verlinkung ausgebaut (kontextuelle Links)"
+            git push
+          fi
+
       - name: Meta-Daten-Optimierung (Title/Description/Keywords)
         id: meta
         continue-on-error: true

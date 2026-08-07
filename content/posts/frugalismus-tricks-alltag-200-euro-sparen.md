@@ -47,7 +47,7 @@ Richte einen Dauerauftrag ein, der am Monatsanfang automatisch 10 Prozent deines
 ## Häufige Fragen
 
 ### Ist Frugalismus dasselbe wie Geiz?
-Nein. Frugalismus heißt: Geld bewusst dorthin lenken, wo es dir Freude und Sicherheit bringt – und unnötige Ausgaben streichen. Geiz spart um des Sparens willen, Frugalismus für ein besseres Leben.
+Nein. Frugalismus heißt: Geld bewusst dorthin lenken, wo es dir Freude und Sicherheit bringt – und unnötige Ausgaben streichen. Geiz spart um des Sparens willen, [Frugalismus für](/posts/2026-08-07-frugalismus-fuer-den-erfolg/) ein besseres Leben.
 
 ### Wie starte ich als Anfänger?
 Fange mit dem Haushaltsbuch (Trick 1) und dem automatischen Sparen (Trick 5) an. Beides ist in einer Stunde eingerichtet und bringt sofort Wirkung.

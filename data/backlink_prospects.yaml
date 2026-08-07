@@ -1,0 +1,129 @@
+prospects:
+- name: Finanztip Community
+  type: community
+  url: https://www.finanztip.de/community/
+  topic: Geld sparen, Versicherungen
+  approach: Qualitativ hochwertige Antworten auf Fragen zu Stromtarifen/Girokonten
+    geben – Profil-Link in Signatur (nofollow, aber Referral-Traffic + Autorität).
+  fit: 5
+  status: neu
+  last_checked: '2026-08-07'
+- name: r/Finanzen (Reddit)
+  type: community
+  url: https://www.reddit.com/r/Finanzen/
+  topic: Allgemeine Finanzen
+  approach: Wöchentlich 1 hilfreiche Antwort mit Link nur wo kontextuell wertvoll
+    (Reddit bestraft offenes Spammen).
+  fit: 4
+  status: neu
+  last_checked: '2026-08-07'
+- name: Geld.de Blog-Verzeichnis
+  type: verzeichnis
+  url: https://www.geld.de/blog/
+  topic: Finanzblogs
+  approach: Blog in der Kategorie 'Geld sparen' einreichen (kurze Beschreibung + Link).
+  fit: 3
+  status: neu
+  last_checked: '2026-08-07'
+- name: Finanzblogs.de
+  type: verzeichnis
+  url: https://finanzblogs.de/
+  topic: Finanzblogs Deutschland
+  approach: Blog-Verzeichnis-Eintrag mit Kategorien 'Sparen', 'Versicherungen'.
+  fit: 4
+  status: neu
+  last_checked: '2026-08-07'
+- name: Blog-Verzeichnis von Blogger.de
+  type: verzeichnis
+  url: https://www.blogger.de/
+  topic: Allgemein
+  approach: Profil + Blog eintragen (dofollow-Link aus Profil).
+  fit: 2
+  status: neu
+  last_checked: '2026-08-07'
+- name: Gastartikel auf Sparkonto.org
+  type: gastartikel
+  url: https://www.sparkonto.org/
+  topic: Sparen, Zinsen
+  approach: 'Gastartikel-Anfrage: ''5 Fehler beim Tagesgeld-Vergleich'' – Platzierung
+    mit 1-2 Links zum eigenen Blog.'
+  fit: 4
+  status: neu
+  last_checked: '2026-08-07'
+- name: Gastartikel auf Finanzfluss-Blog
+  type: gastartikel
+  url: https://www.finanzfluss.de/
+  topic: Finanzen allgemein
+  approach: 'Kontaktformular: Gastbeitrag zu ''Stromkosten senken 2026'' anbieten
+    (hohe Domain-Autorität).'
+  fit: 4
+  status: neu
+  last_checked: '2026-08-07'
+- name: Gastartikel auf Geld-Magazin.de
+  type: gastartikel
+  url: https://www.geld-magazin.de/
+  topic: Geld sparen
+  approach: Gastbeitrag '10 Spartipps für den Alltag' mit Autoren-Bio + Blog-Link.
+  fit: 3
+  status: neu
+  last_checked: '2026-08-07'
+- name: Linktausch mit Sparblog24
+  type: linktausch
+  url: https://www.sparblog24.de/
+  topic: Sparen
+  approach: Gegenseitige Verlinkung in passenden Artikeln (relevante Nachbar-Nische,
+    gleiche Zielgruppe).
+  fit: 3
+  status: neu
+  last_checked: '2026-08-07'
+- name: Check24-Partnerportal Forum
+  type: community
+  url: https://www.check24.de/partner/
+  topic: CHECK24-Partner
+  approach: Im Partner-Forum aktiv werden, Austausch mit anderen Affiliates, ggf.
+    Kooperationen.
+  fit: 3
+  status: neu
+  last_checked: '2026-08-07'
+- name: Trustpilot/Verbraucherportale-Artikel
+  type: press
+  url: https://www.trustpilot.com/
+  topic: Verbraucherschutz
+  approach: 'Experten-Kommentar zu Versicherungs-/Tarifvergleichen anbieten (HARO-Alternativen:
+    pressebox.de).'
+  fit: 2
+  status: neu
+  last_checked: '2026-08-07'
+- name: LinkedIn-Artikel
+  type: community
+  url: https://www.linkedin.com/
+  topic: Persönliche Marke
+  approach: Artikel auf LinkedIn veröffentlichen (mit Link zum Blog) – baut Autoren-Autorität
+    auf.
+  fit: 3
+  status: neu
+  last_checked: '2026-08-07'
+- name: Gastartikel auf MeinGeldBlog
+  type: gastartikel
+  url: https://www.meingeldblog.de/
+  topic: Finanzen
+  approach: Gastbeitrag-Anfrage mit Themenliste (Konto, Sparen, Versicherungen).
+  fit: 3
+  status: neu
+  last_checked: '2026-08-07'
+- name: Finanzblog-Verzeichnis Sparwelt
+  type: verzeichnis
+  url: https://www.sparwelt.de/
+  topic: Sparen, Gutscheine
+  approach: Redaktionelle Einreichung (Pressebereich) mit Blog-Beschreibung.
+  fit: 2
+  status: neu
+  last_checked: '2026-08-07'
+- name: Antworten auf Gutefrage.net
+  type: community
+  url: https://www.gutefrage.net/
+  topic: Finanzfragen
+  approach: Hilfreiche Antworten mit Quellen-Link zum Blog (nur wo sinnvoll).
+  fit: 3
+  status: neu
+  last_checked: '2026-08-07'
