@@ -98,32 +98,39 @@
 
 {{- if (not site.Params.disableScrollToTop) }}
 <script>
+    // Top-Link ein-/ausblenden OHNE Geometrie-Reads: Ein IntersectionObserver
+    // überwacht einen unsichtbaren 1px-Sentinel am Seitenanfang. Der Callback
+    // liefert die Sichtbarkeit asynchron – kein scroll-Listener, kein
+    // scrollY/scrollTop-Read, kein Forced Reflow (Lighthouse-Culprit).
     var toplink = document.getElementById("top-link");
-    var scrollTicking = false;
-
-    function updateTopLink() {
-        // window.scrollY zuerst (vom Browser gecacht), Fallback für alte Browser.
-        // Geometrie-Lesevorgang läuft im requestAnimationFrame – kein
-        // synchroner Reflow im Scroll-Event-Handler.
-        var scrollY = window.scrollY || document.documentElement.scrollTop;
-        var scrollThreshold = window.innerHeight;
-        if (scrollY > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
+    if (toplink && 'IntersectionObserver' in window) {
+        var sentinel = document.createElement('div');
+        sentinel.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;visibility:hidden;pointer-events:none;';
+        document.body.appendChild(sentinel);
+        new IntersectionObserver(function (entries) {
+            // Sentinel sichtbar = am Seitenanfang → Top-Link verstecken
+            toplink.classList.toggle('hidden', entries[0].isIntersecting);
+        }, { threshold: 0 }).observe(sentinel);
+    } else {
+        // Fallback für sehr alte Browser: klassischer Scroll-Check
+        // (nur gecachtes window.scrollY, kein documentElement.scrollTop)
+        var scrollTicking = false;
+        function updateTopLink() {
+            if (window.scrollY > window.innerHeight) {
+                toplink.classList.remove("hidden");
+            } else {
+                toplink.classList.add("hidden");
+            }
+            scrollTicking = false;
         }
-        scrollTicking = false;
+        window.addEventListener('scroll', function () {
+            if (!scrollTicking) {
+                scrollTicking = true;
+                requestAnimationFrame(updateTopLink);
+            }
+        }, { passive: true });
+        requestAnimationFrame(updateTopLink);
     }
-
-    window.addEventListener('scroll', function () {
-        if (!scrollTicking) {
-            scrollTicking = true;
-            requestAnimationFrame(updateTopLink);
-        }
-    }, { passive: true });
-
-    // Initialen Zustand direkt nach dem ersten Paint setzen
-    requestAnimationFrame(updateTopLink);
 </script>
 {{- end }}
 
