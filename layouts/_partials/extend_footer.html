@@ -33,7 +33,10 @@
 </div>
 
 {{- /* ---------- Consent-Banner (Markup) ---------- */ -}}
-<div id="ff-consent-banner" role="region" aria-label="Cookie-Einstellungen" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:999999;
+{{- /* KEIN display:none im Markup: Der Banner ist ab dem ersten Paint sichtbar
+       (LCP-Optimierung – kein spätes Einblenden per JS). Rückkehrer werden
+       durch die Klasse html.ff-consent-set (Head-Skript) ausgeblendet. */ -}}
+<div id="ff-consent-banner" role="region" aria-label="Cookie-Einstellungen" style="position:fixed; bottom:0; left:0; right:0; z-index:999999;
      background:#ffffff; border-top:3px solid #1F6F5C; box-shadow:0 -4px 20px rgba(0,0,0,.25); padding:14px 20px;">
   <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
     <div style="flex:1 1 55%; font-size:.93em; line-height:1.45; color:#222;">
@@ -65,48 +68,44 @@
   function setCookie(name, value) {
     document.cookie = name + '=' + encodeURIComponent(value) + ';max-age=31536000;path=/;SameSite=Lax';
   }
-  var banner = document.getElementById('ff-consent-banner');
-  function hide() { if (banner) banner.style.display = 'none'; }
+  var root = document.documentElement;
   // Öffentliche API: Einwilligung setzen / Banner erneut öffnen / Status abfragen
+  // Klassenbasierte Steuerung (html.ff-consent-set) statt style.display-Wechsel:
+  // - Banner sichtbar (Standard-CSS), wenn KEINE Klasse gesetzt ist
+  // - Schließen = Klasse setzen (kein Reflow im JS)
+  // - Öffnen (Klick) = Klasse entfernen
+  // Das Head-Skript setzt die Klasse für Rückkehrer bereits VOR dem ersten
+  // Paint – der Banner wird dort nie gerendert (kein Flash, kein CLS).
   window.ffConsent = function (choice) {
     setCookie(KEY, choice);
     window.ffConsentChoice = choice;
-    hide();
+    root.classList.add('ff-consent-set');
   };
   window.ffConsentShow = function (focusFirst) {
-    if (banner) {
-      banner.style.display = 'block';
-      // Fokus NUR bei explizitem Öffnen (Klick auf „Cookie-Einstellungen“).
-      // Beim automatischen Einblenden (erster Besuch) KEIN Fokus:
-      //  - WCAG 3.2.1: Ein automatisch erscheinendes Banner darf den
-      //    Fokus nicht übernehmen (reißt Screenreader-Nutzer aus dem Lesefluss)
-      //  - focus() erzeugt im DevTools-Trace einen Forced Reflow, auch mit
-      //    preventScroll + Double-rAF (Lighthouse-Culprit) – der Read läuft
-      //    vor dem Layout-Schritt des Frames.
-      // Beim Klick: Fokus erst nach dem nächsten vollständigen Frame
-      // (Double-rAF), damit das Banner-Layout berechnet ist.
-      if (focusFirst) {
-        var firstBtn = banner.querySelector('button');
-        if (firstBtn) {
+    root.classList.remove('ff-consent-set');
+    // Fokus NUR bei explizitem Öffnen (Klick auf „Cookie-Einstellungen“):
+    // WCAG 3.2.1 – automatisch erscheinende Banner übernehmen keinen Fokus.
+    // Beim Klick: Fokus erst nach dem nächsten vollständigen Frame
+    // (Double-rAF), damit das Banner-Layout berechnet ist.
+    if (focusFirst) {
+      var firstBtn = document.querySelector('#ff-consent-banner button');
+      if (firstBtn) {
+        requestAnimationFrame(function () {
           requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-              firstBtn.focus({ preventScroll: true });
-            });
+            firstBtn.focus({ preventScroll: true });
           });
-        }
+        });
       }
     }
   };
-  // Escape-Taste schließt den Banner (nur „Nur notwendige" als Default)
+  // Escape-Taste schließt den Banner, wenn er sichtbar ist
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && banner && banner.style.display === 'block') {
+    if (e.key === 'Escape' && !root.classList.contains('ff-consent-set')) {
       window.ffConsent('necessary');
     }
   });
   window.ffConsentStatus = function () { return getCookie(KEY); };
-  // Beim ersten Besuch anzeigen (kein Consent-Cookie vorhanden)
-  if (!getCookie(KEY)) {
-    window.ffConsentShow();
-  }
+  // Erstbesucher (kein Cookie): Banner ist bereits per CSS sichtbar –
+  // kein JS-Einblenden nötig (LCP-optimiert).
 })();
 </script>
