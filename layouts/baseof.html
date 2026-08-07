@@ -21,6 +21,9 @@
 {{- else }}
 <body id="top">
 {{- end }}
+    {{- /* Consent-Banner ganz vorn im DOM – LCP-Optimierung (kein
+           Render-Delay für das LCP-Element, s. consent_banner.html) */ -}}
+    {{- partial "consent_banner.html" . }}
     <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
     {{ partialCached "header.html" . .Page -}}
     <main class="main" id="main-content">

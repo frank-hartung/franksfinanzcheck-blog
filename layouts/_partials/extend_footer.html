@@ -32,31 +32,6 @@
      style="color:var(--secondary); text-decoration:underline; font-size:.9em;">Cookie-Einstellungen</a>
 </div>
 
-{{- /* ---------- Consent-Banner (Markup) ---------- */ -}}
-{{- /* KEIN display:none im Markup: Der Banner ist ab dem ersten Paint sichtbar
-       (LCP-Optimierung – kein spätes Einblenden per JS). Rückkehrer werden
-       durch die Klasse html.ff-consent-set (Head-Skript) ausgeblendet. */ -}}
-<div id="ff-consent-banner" role="region" aria-label="Cookie-Einstellungen" style="position:fixed; bottom:0; left:0; right:0; z-index:999999;
-     background:#ffffff; border-top:3px solid #1F6F5C; box-shadow:0 -4px 20px rgba(0,0,0,.25); padding:14px 20px;">
-  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
-    <div style="flex:1 1 55%; font-size:.93em; line-height:1.45; color:#222;">
-      <strong style="color:#1F6F5C;"><span aria-hidden="true">🍪 </span>Cookie-Einstellungen</strong><br>
-      Diese Website verwendet nur technisch notwendige Cookies. Beim Klick auf Affiliate-Links
-      (z.&nbsp;B. zu CHECK24) können Anbieter eigene Tracking-Cookies setzen. Du kannst deine
-      Einwilligung hier verwalten. Details in der
-      <a href="/datenschutz/" style="color:#1F6F5C; font-weight:600;">Datenschutzerklärung</a>.
-    </div>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-left:auto;">
-      <button onclick="ffConsent('all')"
-        style="background:#FFB300; color:#111; border:none; border-radius:999px; padding:10px 20px;
-               font-weight:700; font-size:.95em; cursor:pointer;">Alle akzeptieren</button>
-      <button onclick="ffConsent('necessary')"
-        style="background:#1F6F5C; color:#fff; border:none; border-radius:999px; padding:10px 20px;
-               font-weight:700; font-size:.95em; cursor:pointer;">Nur notwendige</button>
-    </div>
-  </div>
-</div>
-
 {{- /* ---------- Consent-Banner (Logik) ---------- */ -}}
 <script>
 (function () {
