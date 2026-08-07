@@ -70,6 +70,7 @@ def load_articles():
             m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
             return m.group(1).strip() if m else ""
 
+        anrede_raw = get("anrede").strip('"').lower()
         arts.append({
             "file": fn,
             "slug": fn[:-3],
@@ -81,6 +82,7 @@ def load_articles():
             "body": body,
             "path": os.path.join(POSTS_DIR, fn),
             "content": content,
+            "anrede_sie": anrede_raw in ("sie", "sie-form", "höflich"),
         })
     return arts
 
@@ -143,8 +145,11 @@ def ai_description(a):
 
     title = a["title"][:80]
     kws = parse_keywords(a["keywords"])[:4]
+    anrede_hint = ("Sprich den Leser mit 'du' an." if not a.get("anrede_sie")
+                   else "Sprich den Leser mit der Höflichkeitsform 'Sie' an.")
     prompt = (f"Schreibe für einen deutschen Blog-Artikel eine klickstarke Meta-Description "
               f"(max. 155 Zeichen, mit wichtigstem Keyword '{kws[0] if kws else title}'). "
+              f"{anrede_hint} "
               f"Artikel-Titel: '{title}'. Nur die Description, ohne Anführungszeichen.")
 
     ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"

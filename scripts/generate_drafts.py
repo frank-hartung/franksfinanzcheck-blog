@@ -75,6 +75,23 @@ PERSPECTIVES = [
 MAX_SIMILAR_PHRASES = 1
 PHRASE_LEN = 7
 
+# Anrede: Standard "du" – per Umgebungsvariable BLOG_ANREDE=sie auf Sie-Form umstellbar
+ANREDE = os.environ.get("BLOG_ANREDE", "du").lower()
+if ANREDE == "sie":
+    SYSTEM_ANREDE = (
+        "Du sprichst den Leser mit der HOEFLICHKEITSFORM an (Sie, Ihre, Ihnen) - "
+        "konsistent durchgehend, kein Wechsel zu du."
+    )
+    ANREDE_PRON = "Sie/Ihnen/Ihre"
+    ANREDE_VERB = "Sie"
+else:
+    SYSTEM_ANREDE = (
+        "Du sprichst den Leser durchgehend mit du an (du, dein, dich) - "
+        "konsistent, kein Wechsel zur Hoeflichkeitsform."
+    )
+    ANREDE_PRON = "du/dein/dich"
+    ANREDE_VERB = "du"
+
 SYSTEM_PROMPT = (
     "Du bist ein deutschsprachiger, seriöser Finanz- und Verbraucher-Ratgeber-Autor auf "
     "PROFI-NIVEAU – vergleichbar mit den besten unabhängigen Finanzblogs im DACH-Raum. "
@@ -82,7 +99,7 @@ SYSTEM_PROMPT = (
     "Du erfindest keine konkreten Preise oder Anbieterbewertungen – Preise nennst du nur "
     "als vorsichtige Spannen (\"ca. X–Y €\") oder mit \"in der Regel\". "
     "Du schreibst in AKTIVER, lebendiger Sprache: kurze Sätze (max. ~20 Wörter), starke "
-    "Verben, direkte Ansprache mit \"du\". Kein Passiv, keine Füllphrasen, kein Werbesprech. "
+    "Verben. " + SYSTEM_ANREDE + " Kein Passiv, keine Füllphrasen, kein Werbesprech. "
     "Du verzichtest auf typische KI-Floskeln wie \"In der heutigen schnelllebigen Welt\", "
     "\"Es ist wichtig zu beachten\", \"Zusammenfassend lässt sich sagen\", \"Des Weiteren\", "
     "\"Es gibt viele Möglichkeiten\", \"heutzutage\", \"Tauchen wir ein\". "
@@ -489,6 +506,7 @@ def generate_article_text(topic, angle, perspective=None, pin=None, keywords=Non
             "KEIN Keyword-Stuffing, KEINE künstliche Aufzählung.\n"
         )
 
+    anrede_var = "Du-Form (du/dein/dich)" if os.environ.get("BLOG_ANREDE", "du").lower() != "sie" else "Sie-Form (Sie/Ihnen/Ihre)"
     prompt = f"""Schreibe einen EINZIGARTIGEN, hilfreichen deutschen Blog-Artikel zum Thema:
 "{topic}"
 
@@ -508,6 +526,7 @@ Ab Zeile 3: Der Artikel in Markdown:
 - Am Ende ein FAQ-Bereich: "## Häufige Fragen" mit 3 Fragen als H3 und Antworten
 - 500 bis 800 Wörter insgesamt – substanziell, aber ohne Blabla
 - Absätze max. 3–4 Sätze, aktive Sprache ("du"), kurze Sätze (max. ~20 Wörter)
+- ANREDE: {anrede_var} – konsistent durchgehend verwenden
 - PRAXISBEZUG (E-E-A-T): konkrete, plausible Alltagsbeispiele; eigene Erfahrung als
   Formulierung erlaubt ("Ich habe…", "In der Praxis…") – aber KEINE erfundenen Fakten,
   KEINE konkreten Preise; Preisspannen nur mit "ca." oder "in der Regel"
