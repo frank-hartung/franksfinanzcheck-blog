@@ -95,6 +95,14 @@
        Kette (Lighthouse 'network-dependency-tree'). Preconnect spart die
        TLS-Handshake-Latenz zum CDN. crossorigin ist für Fonts Pflicht. */ -}}
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+{{- /* Preloads: Inter (Body-Font, kritisch für den gesamten Fließtext – wird
+       ohne Preload erst NACH dem CSS-Parsing entdeckt, hängt dann als
+       zweites Glied in der Kette: HTML → CSS → Font) und Montserrat-700
+       (Überschriften/Buttons). Preload startet beide Downloads PARALLEL
+       zum HTML – kritische Kette wird auf HTML → Font verkürzt.
+       Nur die 2 wirklich kritischen Fonts preloaden (Playfair wird nur für
+       Akzente gebraucht → on-demand). */ -}}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $fontSha }}/static/fonts/inter-variable.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $fontSha }}/static/fonts/montserrat-normal-700.woff2">
 <style>
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:optional;src:url(https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@{{ $fontSha }}/static/fonts/montserrat-normal-500.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
