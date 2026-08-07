@@ -28,7 +28,7 @@
 {{- end -}}
 
 <div style="text-align:center; margin: 8px 0;">
-  <a href="#" onclick="ffConsentShow();return false;" title="Cookie-Einstellungen öffnen"
+  <a href="#" onclick="ffConsentShow(true);return false;" title="Cookie-Einstellungen öffnen"
      style="color:var(--secondary); text-decoration:underline; font-size:.9em;">Cookie-Einstellungen</a>
 </div>
 
@@ -73,20 +73,27 @@
     window.ffConsentChoice = choice;
     hide();
   };
-  window.ffConsentShow = function () {
+  window.ffConsentShow = function (focusFirst) {
     if (banner) {
       banner.style.display = 'block';
-      // Fokus auf den ersten Button setzen (Tastatur-Navigation).
-      // Erzwingt KEIN synchrones Layout: display-Änderung hat Styles
-      // invalidiert – der Fokus läuft deshalb im NÄCHSTEN Frame
-      // (requestAnimationFrame) statt im selben Task. focus() selbst
-      // triggert sonst einen Forced Reflow (Lighthouse-Culprit
-      // "Forced reflow" – auch mit preventScroll:true).
-      var firstBtn = banner.querySelector('button');
-      if (firstBtn) {
-        requestAnimationFrame(function () {
-          firstBtn.focus({ preventScroll: true });
-        });
+      // Fokus NUR bei explizitem Öffnen (Klick auf „Cookie-Einstellungen“).
+      // Beim automatischen Einblenden (erster Besuch) KEIN Fokus:
+      //  - WCAG 3.2.1: Ein automatisch erscheinendes Banner darf den
+      //    Fokus nicht übernehmen (reißt Screenreader-Nutzer aus dem Lesefluss)
+      //  - focus() erzeugt im DevTools-Trace einen Forced Reflow, auch mit
+      //    preventScroll + Double-rAF (Lighthouse-Culprit) – der Read läuft
+      //    vor dem Layout-Schritt des Frames.
+      // Beim Klick: Fokus erst nach dem nächsten vollständigen Frame
+      // (Double-rAF), damit das Banner-Layout berechnet ist.
+      if (focusFirst) {
+        var firstBtn = banner.querySelector('button');
+        if (firstBtn) {
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              firstBtn.focus({ preventScroll: true });
+            });
+          });
+        }
       }
     }
   };
