@@ -9,7 +9,7 @@
 | Artikel geprüft | 35 |
 | Ø Qualitätsscore | **98/100** |
 | Ø Titel-Länge | 53 Zeichen (optimal 50–60) |
-| Ø Description-Länge | 137 Zeichen (optimal 120–160) |
+| Ø Description-Länge | 138 Zeichen (optimal 120–160) |
 | Artikel mit Problemen | **0** |
 
 ## Status
@@ -22,8 +22,8 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 
 | Score | Artikel | Titel | Desc | Keywords | Status |
 |---|---|---|---|---|---|
-| 90 | Frugalismus für den Erfolg: Der Weg zur Freih | 48 | 106 | 4 | ✅ |
 | 90 | E-Auto laden: So senkst du deine Stromkosten | 44 | 116 | 5 | ✅ |
+| 95 | Frugalismus für den Erfolg: Der Weg zur Freih | 48 | 146 | 4 | ✅ |
 | 95 | 7 Gewohnheiten für finanzielle Freiheit | 39 | 130 | 5 | ✅ |
 | 95 | 5 Frugalismus-Tricks: So sparst du 200 € im M | 49 | 149 | 6 | ✅ |
 | 95 | Günstige Flüge für den Spätsommer: 7 Tricks | 43 | 141 | 6 | ✅ |
@@ -59,4 +59,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | WLAN-Verstärker vs. Mesh-WLAN: Schnelles Inte | 57 | 139 | 6 | ✅ |
 
 ---
-*Erzeugt am 2026-08-07 um 12:50 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-07 um 12:56 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
