@@ -11,7 +11,7 @@ cover:
   image: "images/covers/stromfresser-im-haushalt-entlarven.jpg"
   alt: "Spar-Tipp: Stromfresser Im Haushalt Entlarven"
   caption: "Tipp von FranksFinanzcheck"
----Die Stromrechnung steigt - aber du weißt nicht, warum? Oft sind es unbemerkte Dauerläufer, die Jahr für Jahr hunderte Euro kosten. Stromfresser zu finden lohnt sich: Oft stecken nur wenige Geräte hinter der hohen Rechnung – Wir zeigen dir, welche Geräte die größten Stromfresser sind, wie du sie findest und was du dagegen tun kannst.
+---Die Stromrechnung steigt - aber du weißt nicht, warum? Oft sind es unbemerkte Dauerläufer, die Jahr für Jahr hunderte Euro kosten. Stromfresser zu finden lohnt sich: Oft stecken nur wenige Geräte hinter der hohen Rechnung. Wir zeigen dir, welche Geräte die größten Stromfresser sind. Und was du dagegen tun kannst.
 
 ## Die 3 größten Stromfresser im Haushalt
 
