@@ -48,8 +48,10 @@ def load_article(path):
         m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
         return m.group(1).strip() if m else ""
 
+    anrede_raw = get("anrede").strip('"').lower()
     return {"path": path, "title": get("title"), "description": get("description"),
-            "keywords": get("keywords"), "body": body}
+            "keywords": get("keywords"), "body": body,
+            "anrede_sie": anrede_raw in ("sie", "sie-form", "höflich")}
 
 
 def ai_polish(a):
@@ -78,6 +80,10 @@ def ai_polish(a):
     else:
         kws = [k.strip() for k in kws_raw.split(",") if k.strip()]
     kw_hint = ", ".join(kws[:4]) if kws else a["title"]
+    # Anrede: Standard "du" – bei Frontmatter anrede:"Sie" → Sie-Form
+    anrede_auftrag = ('"du" – der Leser wird geduzt (Blog-Stil)' if not a.get("anrede_sie")
+                      else '"Sie" – dieser Artikel richtet sich bewusst an eine Zielgruppe, die gesiezt wird')
+    anrede_pronomen = '("du"/"dein"/"dich")' if not a.get("anrede_sie") else '("Sie"/"Ihr"/"Ihnen")'
 
     prompt = f"""Du bist Lektor für einen seriösen deutschen Finanz-Ratgeber-Blog (Profi-Niveau).
 Polieren den folgenden Blog-Artikel auf PROFESSIONELLES Text-Niveau.
@@ -86,7 +92,7 @@ REGELN:
 1. Entferne ALLE KI-Floskeln und Füllphrasen ("In der heutigen…", "Es ist wichtig zu beachten",
    "Zusammenfassend lässt sich sagen", "Des Weiteren", "Es gibt viele…", "heutzutage" usw.).
 2. Schreibe in AKTIVER, lebendiger Sprache: kurze Sätze (max. ~20 Wörter), starke Verben,
-   direkte Ansprache ("du"). Vermeide Passiv.
+   direkte Ansprache {anrede_auftrag} {anrede_pronomen}. Vermeide Passiv.
 3. Einleitung: Beginne mit einem starken Haken (Nutzenversprechen, konkrete Zahl, Frage).
 4. Absätze auf 3-4 Sätze kürzen. Zwischenüberschriften beibehalten.
 5. Baue die Keywords natürlich ein (kein Stuffing): {a['keywords'][:120]}

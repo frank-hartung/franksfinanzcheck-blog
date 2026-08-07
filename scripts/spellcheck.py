@@ -156,10 +156,15 @@ def load_articles(files=None):
             m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
             return m.group(1).strip() if m else ""
 
+        # Optionales Frontmatter-Flag für Sie-Artikel:
+        #   anrede: "Sie" → dieser Artikel siezt bewusst (z. B. Senioren-
+        #   Zielgruppe) – die automatische du-Konvertierung wird übersprungen.
+        anrede_raw = get("anrede").strip('"').lower()
         arts.append({
             "file": os.path.basename(path), "path": path,
             "title": get("title"), "description": get("description"),
             "fm": fm, "body": body, "content": content,
+            "anrede_sie": anrede_raw in ("sie", "sie-form", "höflich"),
         })
     return arts
 
@@ -378,8 +383,11 @@ def analyze_article(a, whitelist):
                     "reason": "Description beginnt klein – Satzanfang groß schreiben",
                 })
             # ANREDE-KONSISTENZ: Höflichkeitsform (Sie/Ihre…) in Description
-            # → du-Form (Blog-Stil). Nur bei echten Höflichkeits-Mustern.
-            if re.search(r'(?<![a-zäöüß])(Sie|Ihre|Ihren|Ihrem|Ihnen)(?![a-zäöüß])', desc) \
+            # → du-Form (Blog-Stil). Wird übersprungen, wenn der Artikel
+            # bewusst in Sie-Form geschrieben ist (Frontmatter anrede: "Sie").
+            if a.get("anrede_sie"):
+                pass  # bewusste Sie-Form – nicht konvertieren
+            elif re.search(r'(?<![a-zäöüß])(Sie|Ihre|Ihren|Ihrem|Ihnen)(?![a-zäöüß])', desc) \
                or re.search(r'\b(Erfahren|Entdecken|Nutzen|Vergleichen|Informieren|Melden|Buchen|Sparen|Prüfen|Sichern|Beachten) Sie\b', desc):
                 converted = anrede_to_du(desc)
                 if converted and converted != desc:
