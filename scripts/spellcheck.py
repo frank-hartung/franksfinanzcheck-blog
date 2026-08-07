@@ -70,6 +70,18 @@ SENTENCE_END_RE = re.compile(r'([.!?])\s+([a-zäöüß])')
 # "zuhause" → "zu Hause" (nur kleingeschrieben; "Zuhause" Nomen bleibt)
 ZUHAUSE_RE = re.compile(r'\bzuhause\b')
 
+# Satzanfang NACH einer Markdown-Überschrift muss groß sein:
+#   "## Die Grundlagen des Frugalismus\ndu brauchst…" → "Du brauchst…"
+HEADING_START_RE = re.compile(r'^(#{1,6}\s+[^\n]+\n)([a-zäöüß])', re.M)
+
+# Falsche Großschreibung NACH KOMMA (kein Nomen/Eigenname):
+#   ", Wer Vermögen aufbauen will" → ", wer Vermögen…"
+#   Ausnahme: Zeile beginnt mit "#" (zusammengeführte Überschrift+Text)
+COMMA_CAP_RE = re.compile(r',\s+([A-ZÄÖÜ][a-zäöüß]+)')
+
+# Höflichkeitsformen, die nach Komma korrekt groß bleiben
+POLITE_FORMS = {"sie", "ihr", "ihre", "ihnen", "sie", "ihnen"}
+
 # Bekannte Fehl-Phrasen (Bot-Artefakte: Keywords wörtlich klein im Fließtext)
 PHRASEN_FIXES = [
     (re.compile(r'\bdns server wechseln\b'), 'DNS-Server wechseln'),
@@ -254,6 +266,49 @@ def analyze_article(a, whitelist):
             "reason": "„zuhause“ → „zu Hause“ (Standardform)",
         })
 
+    # 2b. Satzanfang nach Überschrift groß schreiben
+    for m in HEADING_START_RE.finditer(body):
+        problems.append({
+            "type": "heading_start", "word": m.group(2), "fix": m.group(2).upper(),
+            "start": m.start(2), "end": m.end(2), "conf": 0.95,
+            "reason": f"Satzanfang nach Überschrift: „{m.group(2)}“ → „{m.group(2).upper()}“",
+        })
+
+    # 2c. Falsche Großschreibung nach Komma (Nicht-Nomen) korrigieren
+    for m in COMMA_CAP_RE.finditer(body):
+        w = m.group(1)
+        # Zeile beginnt mit "#"? → zusammengeführte Überschrift+Text, überspringen
+        line_start = body.rfind("\n", 0, m.start()) + 1
+        if body[line_start:line_start + 1] == "#":
+            continue
+        # Höflichkeitsformen groß lassen
+        if w.lower() in POLITE_FORMS:
+            continue
+        # Whitelist
+        if w.lower() in whitelist:
+            continue
+        # Teil eines Kompositums? ("Online-Bonus", "Last-Minute") → nie fixen
+        if m.end(1) < len(body) and body[m.end(1):m.end(1) + 1] == "-":
+            continue
+        # Wenn die KLEINFORM ein Hunspell-FEHLER ist → Nomen (nur groß korrekt,
+        # z. B. "gas", "strom") → groß lassen, nicht als Fehler markieren.
+        r = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
+                           input=w.lower() + "\n", capture_output=True, text=True)
+        if r.stdout.strip() != "":
+            continue  # Kleinform unbekannt = Nomen/Eigenname → groß korrekt
+        # AMBIG: Existiert die GROSSform auch als eigenständiges Wort (Nomen)?
+        # ("Steuern" = Abgaben, "Gerät" = Gegenstand, "Decken" = Decke)
+        # Dann ist die Großschreibung kontextabhängig → NICHT automatisch fixen.
+        r2 = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
+                            input=w + "\n", capture_output=True, text=True)
+        if r2.stdout.strip() == "":
+            continue  # Großform bekannt → ambig → lassen
+        problems.append({
+            "type": "comma_cap", "word": w, "fix": w.lower(),
+            "start": m.start(1), "end": m.end(1), "conf": 0.85,
+            "reason": f"Nach Komma klein: „{w}“ → „{w.lower()}“",
+        })
+
     # 3. Description im Frontmatter mitprüfen (Google-Text!):
     #    Phrasen-Fixes + "zuhause" + kleingeschriebene Substantive –
     #    tags/keywords bleiben bewusst unangetastet (SEO-Kleinschreibung).
@@ -278,6 +333,13 @@ def analyze_article(a, whitelist):
                     "abs_start": dstart + m.start(), "abs_end": dstart + m.end(),
                     "conf": 0.9,
                     "reason": "Description: „zuhause“ → „zu Hause“",
+                })
+            # Description beginnt mit Kleinbuchstabe? → Satzanfang groß
+            if desc and desc[0].islower():
+                problems.append({
+                    "type": "heading_start", "word": desc[0], "fix": desc[0].upper(),
+                    "abs_start": dstart, "abs_end": dstart + 1, "conf": 0.95,
+                    "reason": "Description beginnt klein – Satzanfang groß schreiben",
                 })
             # Kleingeschriebene Substantive in der Description
             for m in re.finditer(r"[A-Za-zÄÖÜäöüß]+(?:-[A-Za-zÄÖÜäöüß]+)*", desc):

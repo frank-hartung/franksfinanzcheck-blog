@@ -62,7 +62,7 @@ Nach dem ersten Jahr lohnt sich der Blick auf die Jahresabrechnung: Wurden alle 
 Ja. Der Anbieterwechsel ist für dich kostenlos – ein Tarifwechsel im selben Netzgebiet ist gesetzlich sogar von der Kündigung des alten Vertrags befreit.
 
 ### Wie lange dauert der Wechsel?
-in der Regel zwei bis sechs Wochen bis zum nächsten Monatsersten. Deine Versorgung ist nie unterbrochen.
+In der Regel zwei bis sechs Wochen bis zum nächsten Monatsersten. Deine Versorgung ist nie unterbrochen.
 
 ### Kann ich auch mit einem Vertrag mit langer Laufzeit wechseln?
 Ja, aber erst nach Ablauf der Mindestlaufzeit (meist 12 Monate) oder gegen Zahlung einer Restlaufzeit-Entschädigung. Prüfe deine Kündigungsfrist!
