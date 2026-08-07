@@ -29,9 +29,37 @@
     --border: rgb(220, 230, 225);
 }
 
-/* ---------- Typografie ---------- */
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+/* ---------- Typografie (Top-Level) ---------- */
+/* Inter als professioneller Lesefont (variable Font, 400-700, selbst
+   gehostet über jsDelivr – OFL-Lizenz). Montserrat bleibt für
+   Überschriften (Marken-Font). */
+html body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-feature-settings: "cv11", "ss01";  /* Inter-Optik: alternatives a + Einzelstock-1 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Deutscher Text: Silbentrennung für besseren Zeilenfall
+   (lange Komposita brechen sauber um – Lesbarkeits-Plus) */
+.post-content,
+.md-content,
+.entry-content {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+/* Lesefluss: ausgewogenere Zeilenenden statt frühzeitige Umbrüche */
+.post-content p {
+    text-wrap: pretty;
+}
+
+/* Feinschliff: Zahlen im Text mit tabellarischen Ziffern (saubere
+   Auflistung von Beträgen), Ligaturen für besseren Buchstabenfluss */
+.post-content {
+    font-variant-numeric: tabular-nums;
+    font-kerning: normal;
 }
 
 h1, h2, h3, h4, h5, h6,
