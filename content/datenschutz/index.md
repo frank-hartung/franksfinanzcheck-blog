@@ -31,19 +31,17 @@ Diese Website nutzt **Affiliate-Partnerprogramme** (CHECK24, Tarifcheck) sowie e
 
 ### Hosting
 
-Diese Website wird bei einem externen Dienstleister gehostet (nach Abschluss des Deployment wird der konkrete Anbieter hier ergänzt). Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert.
+Diese Website wird bei einem externen Dienstleister gehostet: **GitHub Pages** (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. GitHub unterhält Serverstandorte auch außerhalb der EU; eine Verarbeitung der IP-Adresse kann daher außerhalb der EU (insbesondere in den USA) erfolgen. Mit dem Hoster besteht eine Auftragsverarbeitungsvereinbarung (Standardvertragsklauseln gemäß Art. 46 DSGVO).
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren, stabilen und effizienten Bereitstellung der Website). Mit dem Hoster wird ein **Auftragsverarbeitungsvertrag (AVV)** gemäß Art. 28 DSGVO geschlossen.
 
-### Content-Delivery-Network (jsDelivr)
+### Content-Auslieferung (ohne Drittanbieter-CDN)
 
-Zur schnellen Auslieferung von **statischen Dateien** (Titelbilder der Artikel, Schriftarten, Favicon) nutzt diese Website das Content-Delivery-Network (CDN) **jsDelivr** der Firma Prospect One Sp. z o.o., Krótka 1/19, 05-500 Piaseczno, Polen (`cdn.jsdelivr.net`). Beim Abruf einer Datei wird deine IP-Adresse sowie technische Daten (Browsertyp, Betriebssystem, Referrer, Uhrzeit der Anfrage) an die Server von jsDelivr übermittelt. jsDelivr betreibt Serverstandorte weltweit; eine Verarbeitung der IP-Adresse kann daher auch außerhalb der EU erfolgen. jsDelivr bietet ein Datenverarbeitungsabkommen an und verarbeitet die Daten nach eigenen Angaben ausschließlich zur Auslieferung der angeforderten Inhalte und zur Fehleranalyse – nicht zu Werbezwecken.
-
-**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer schnellen und zuverlässigen Auslieferung der Website-Inhalte). Weitere Informationen: [www.jsdelivr.com/privacy-policy-jsdelivr](https://www.jsdelivr.com/privacy-policy-jsdelivr).
+Alle **statischen Dateien** (Titelbilder der Artikel, Schriftarten, Favicon) werden **direkt von unserem Hosting (GitHub Pages)** ausgeliefert. Es wird **kein externes Content-Delivery-Network eines Drittanbieters** (z. B. jsDelivr, Cloudflare, Google) verwendet. Es findet daher keine Datenübermittlung an zusätzliche CDN-Anbieter statt; für die Auslieferung gelten allein die Angaben zum Hosting (Abschnitt 2, „Hosting").
 
 ### Schriftarten (lokal gehostet)
 
-Diese Website verwendet Schriftarten der Familie **Montserrat** und **Playfair Display**. Die Schriftdateien werden **nicht** von externen Schriftarten-Diensten (z. B. Google Fonts) geladen, sondern liegen **lokal auf unserem Server** bzw. werden über das oben genannte CDN jsDelivr ausgeliefert.
+Diese Website verwendet Schriftarten der Familie **Montserrat**, **Playfair Display** und **Inter**. Die Schriftdateien werden **nicht** von externen Schriftarten-Diensten (z. B. Google Fonts) geladen, sondern liegen **lokal bei unserem Hosting** und werden direkt von dort ausgeliefert.
 
 **Beim Aufruf dieser Website wird daher keine Verbindung zu den Servern von Google (fonts.googleapis.com, fonts.gstatic.com) aufgebaut und es werden keine Daten (insbesondere keine IP-Adresse) an Google übermittelt.**
 

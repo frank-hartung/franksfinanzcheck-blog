@@ -31,41 +31,41 @@
     {{- end -}}
 
     {{- $imgdl := (.Params.cover.image) | absURL }}
-    {{- /* jsDelivr-CDN: Bilder mit 1 Jahr Cache + immutable ausliefern
-           (GitHub Pages setzt hart max-age=600). Der Commit-SHA wird vom
-           Deploy-Workflow als HUGO_JSDELIVR_SHA injiziert; ohne ihn
-           (lokaler Build) bleiben die GitHub-Pages-URLs aktiv. */}}
-    {{- $jsdelivrSha := getenv "HUGO_JSDELIVR_SHA" }}
+    {{- /* First-Party-Auslieferung: Bilder direkt von GitHub Pages (eigener
+           Ursprung, kein Drittanbieter-CDN → Lighthouse "Drittanbieter" = 0).
+           Cache-Busting via ?v=<SHA> (asset_url.html). Der Commit-SHA wird
+           vom Deploy-Workflow als HUGO_JSDELIVR_SHA injiziert. */}}
     {{- $imgSrcset := "" }}
     {{- $webpSrcset := "" }}
     {{- $avifSrcset := "" }}
     {{- $coverFile := path.Base .Params.cover.image }}
     {{- $coverBase := strings.TrimSuffix (path.Ext $coverFile) $coverFile }}
-    {{- if $jsdelivrSha }}
-        {{- $imgdl = printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s" $jsdelivrSha .Params.cover.image }}
-        {{- /* Responsive srcset: 620px (Listen) + 720px (Singles) + 1000px Original.
-               Die Varianten liegen unter static/images/covers/{620,720}/ und werden
-               von generate_covers.py erzeugt. → spart Download (Lighthouse). */}}
-        {{- $coverDir := path.Dir .Params.cover.image }}
-        {{- $srcsetParts := slice }}
-        {{- $webpParts := slice }}
-        {{- $avifParts := slice }}
-        {{- range $w := slice "620" "720" }}
-            {{- $srcsetParts = $srcsetParts | append (printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s/%s/%s %sw" $jsdelivrSha $coverDir $w $coverFile $w) }}
-            {{- $webpParts = $webpParts | append (printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s/webp/%s/%s.webp %sw" $jsdelivrSha $coverDir $w $coverBase $w) }}
-            {{- $avifParts = $avifParts | append (printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s/avif/%s/%s.avif %sw" $jsdelivrSha $coverDir $w $coverBase $w) }}
-        {{- end }}
-        {{- $srcsetParts = $srcsetParts | append (printf "%s %dw" $imgdl 1000) }}
-        {{- $webpParts = $webpParts | append (printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s/webp/%s.webp 1000w" $jsdelivrSha $coverDir $coverBase) }}
-        {{- $avifParts = $avifParts | append (printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s/avif/%s.avif 1000w" $jsdelivrSha $coverDir $coverBase) }}
-        {{- $imgSrcset = delimit $srcsetParts ", " }}
-        {{- $webpSrcset = delimit $webpParts ", " }}
-        {{- $avifSrcset = delimit $avifParts ", " }}
-    {{- else if $cover }}
-        {{- $imgdl = $cover.Permalink }}
+    {{- $coverDir := path.Dir .Params.cover.image }}
+    {{- $imgdl = partial "asset_url.html" .Params.cover.image }}
+    {{- /* Responsive srcset: 620px (Listen) + 720px (Singles) + 1000px Original.
+           Die Varianten liegen unter static/images/covers/{620,720}/ und werden
+           von generate_covers.py erzeugt. → spart Download (Lighthouse). */}}
+    {{- $srcsetParts := slice }}
+    {{- $webpParts := slice }}
+    {{- $avifParts := slice }}
+    {{- range $w := slice "620" "720" }}
+        {{- $srcsetParts = $srcsetParts | append (printf "%s %sw" (partial "asset_url.html" (printf "%s/%s/%s" $coverDir $w $coverFile)) $w) }}
+        {{- $webpParts = $webpParts | append (printf "%s %sw" (partial "asset_url.html" (printf "%s/webp/%s/%s.webp" $coverDir $w $coverBase)) $w) }}
+        {{- $avifParts = $avifParts | append (printf "%s %sw" (partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $coverDir $w $coverBase)) $w) }}
     {{- end }}
-    {{- /* Fallback, falls das CDN mal nicht erreichbar ist: gleiche Datei auf GitHub Pages */}}
-    {{- $imgFallback := (.Params.cover.image) | absURL }}
+    {{- $srcsetParts = $srcsetParts | append (printf "%s 1000w" (partial "asset_url.html" .Params.cover.image)) }}
+    {{- $webpParts = $webpParts | append (printf "%s 1000w" (partial "asset_url.html" (printf "%s/webp/%s.webp" $coverDir $coverBase))) }}
+    {{- $avifParts = $avifParts | append (printf "%s 1000w" (partial "asset_url.html" (printf "%s/avif/%s.avif" $coverDir $coverBase))) }}
+    {{- $imgSrcset = delimit $srcsetParts ", " }}
+    {{- $webpSrcset = delimit $webpParts ", " }}
+    {{- $avifSrcset = delimit $avifParts ", " }}
+    {{- if not $imgSrcset }}
+        {{- if $cover }}
+            {{- $imgdl = $cover.Permalink }}
+        {{- end }}
+    {{- end }}
+    {{- /* Fallback (gleiche Datei, first-party) */}}
+    {{- $imgFallback := partial "asset_url.html" .Params.cover.image }}
 
     {{- $imgWidth := (.Params.cover.width | default 1000) }}
     {{- $imgHeight := (.Params.cover.height | default 1500) }}
