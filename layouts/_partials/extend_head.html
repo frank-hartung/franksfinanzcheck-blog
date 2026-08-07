@@ -177,3 +177,14 @@
 })();
 </script>
 {{- end -}}
+
+{{- /* Service Worker: Langzeit-Caching auf GitHub Pages (Cache-TTL ist dort
+       hart auf 10 Minuten gesetzt – der SW liefert wiederholte Besuche sofort
+       aus dem lokalen Cache, siehe sw.js). First-party, keine Drittanbieter.
+       Frühe Registrierung im Head → Installation startet sofort und die
+       kritischen Fonts werden direkt precached. */ -}}
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('{{ "sw.js" | relURL }}').catch(function () {});
+  }
+</script>

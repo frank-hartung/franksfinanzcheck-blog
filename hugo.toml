@@ -9,6 +9,22 @@ enableEmoji = true
 pagerSize = 8
 copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
 
+# Service Worker (sw.js) als eigenes Output-Format am Seiten-Root rendern.
+# Die Cache-Version wird aus HUGO_JSDELIVR_SHA abgeleitet → nach jedem
+# Deploy neue Cache-Generation, alte Caches werden automatisch gelöscht.
+[mediaTypes]
+  [mediaTypes."application/javascript"]
+    suffixes = ["js"]
+    delimiter = ""
+
+[outputFormats.SWJS]
+  mediaType = "application/javascript"
+  baseName = "sw"
+  isPlainText = true
+
+[outputs]
+  home = ["HTML", "SWJS"]
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
