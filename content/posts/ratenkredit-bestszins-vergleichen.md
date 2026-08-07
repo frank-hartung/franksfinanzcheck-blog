@@ -14,10 +14,10 @@ cover:
 ---Ein Kredit kann dich bis zu 600 Euro im Jahr kosten, wenn du den falschen Zins wählst. Der Unterschied zwischen dem teuersten und dem günstigsten Anbieter kann bei gleicher Kreditsumme mehrere hundert Euro Zinsunterschied bedeuten. Du kannst den Bestzins finden und Geld sparen, wenn du die Regeln für einen Ratenkredit vergleichen kennst.
 
 ## Der wichtigste Wert: der effektive Jahreszins
-der effektive Jahreszins entscheidet, ob ein Ratenkredit günstig ist. Er ist gesetzlich vorgeschrieben und macht Angebote vergleichbar. Der effektive Jahreszins inkludiert alle Kosten, wie den Sollzins und Bearbeitungsgebühren. Je niedriger der effektive Jahreszins, desto günstiger der Kredit. Du solltest dich nicht von versteckten Gebühren täuschen lassen, sondern immer den effektiven Jahreszins vergleichen.
+Der effektive Jahreszins entscheidet, ob ein Ratenkredit günstig ist. Er ist gesetzlich vorgeschrieben und macht Angebote vergleichbar. Der effektive Jahreszins inkludiert alle Kosten, wie den Sollzins und Bearbeitungsgebühren. Je niedriger der effektive Jahreszins, desto günstiger der Kredit. Du solltest dich nicht von versteckten Gebühren täuschen lassen, sondern immer den effektiven Jahreszins vergleichen.
 
 ## So findest du den günstigsten Ratenkredit
-du kannst den günstigsten Ratenkredit finden, indem du:
+Du kannst den günstigsten Ratenkredit finden, indem du:
 1. **Kreditvergleich nutzt** – mit Kreditsumme und Laufzeit alle Angebote anzeigst
 2. **Nicht den ersten Treffer nimmst** – die Zinsspanne zwischen Anbietern ist oft groß
 3. **Laufzeit realistisch wählst** – kürzere Laufzeit bedeutet niedrigere Zinskosten

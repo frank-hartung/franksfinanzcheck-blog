@@ -14,7 +14,7 @@ cover:
 ---Du kannst deinen Stromverbrauch um 15 bis 25 Prozent senken, ohne Komfort zu verlieren. Diese Strom-sparen-Tipps helfen dir, deinen Verbrauch sofort zu senken – Diese 20 Tipps sind nach Sofortwirkung und Aufwand sortiert.
 
 ## Sofort umsetzbar (0 €, 5 Minuten)
-du kannst sofort beginnen, deinen Stromverbrauch zu reduzieren. 
+Du kannst sofort beginnen, deinen Stromverbrauch zu reduzieren. 
 1. **Standby abschalten:** Fernseher, Receiver, Spielekonsole und PC in eine abschaltbare Steckdosenleiste – spart 50–80 € pro Jahr. 
 2. **Ladegeräte abziehen:** Handy-Ladegeräte ziehen auch ohne Handy Strom. 
 3. **Kühlschrank-Temperatur:** 7 Grad genügen – jedes Grad weniger kostet bis zu 6 % mehr Strom. 
@@ -27,7 +27,7 @@ du kannst sofort beginnen, deinen Stromverbrauch zu reduzieren.
 10. **LED-Lampen:** auch alte Energiesparlampen sind oft reif für den Tausch – LED verbraucht bis zu 80 % weniger.
 
 ## Klein investieren (10–50 €)
-mit kleinen Investitionen kannst du deinen Stromverbrauch weiter reduzieren. 
+Mit kleinen Investitionen kannst du deinen Stromverbrauch weiter reduzieren. 
 11. **Zeitschaltuhren:** für Router, Aquarium-Beleuchtung und Standby-Geräte – schalten automatisch ab. 
 12. **Steckdosenleisten mit Schalter:** eine für jeden Geräte-Cluster, abends ein Knopfdruck. 
 13. **Duschkopf mit Wassersparfunktion:** spart Warmwasser – und damit Heizenergie, nicht nur Strom. 
@@ -35,7 +35,7 @@ mit kleinen Investitionen kannst du deinen Stromverbrauch weiter reduzieren.
 15. **Spülmaschine im Eco-Programm:** läuft länger, verbraucht aber deutlich weniger Strom und Wasser.
 
 ## Größere Investition (100 €+)
-mit größeren Investitionen kannst du deinen Stromverbrauch noch mehr reduzieren. 
+Mit größeren Investitionen kannst du deinen Stromverbrauch noch mehr reduzieren. 
 16. **Neue Kühlgeräte:** ein Kühlschrank der Klasse A (alt) verbraucht oft doppelt so viel wie ein modernes A+++-Gerät – der Tausch lohnt sich ab 15 Jahren. 
 17. **Wärmepumpentrockner:** Verbrauchen bis zu 50 % weniger als alte Ablufttrockner. 
 18. **Programmierbare Thermostate:** Heizung automatisch absenken, wenn niemand zu Hause ist. 
@@ -43,7 +43,7 @@ mit größeren Investitionen kannst du deinen Stromverbrauch noch mehr reduziere
 20. **Stromtarif wechseln:** der größte Hebel überhaupt – der Unterschied zwischen Grundtarif und günstigstem Anbieter liegt oft bei 200–300 € pro Jahr.
 
 ## Die 3 größten Stromfresser im Haushalt
-die größten Stromfresser im Haushalt sind: 
+Die größten Stromfresser im Haushalt sind: 
 1. **Elektrische Warmwasserbereitung** (Boiler/Durchlauferhitzer)
 2. **Kühl- und Gefriergeräte** (laufen 24/7)
 3. **Wäschetrockner** (pro Ladung so viel wie 3–5 Waschmaschinen)
