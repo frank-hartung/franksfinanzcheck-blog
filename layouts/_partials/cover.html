@@ -25,8 +25,20 @@
            Deploy-Workflow als HUGO_JSDELIVR_SHA injiziert; ohne ihn
            (lokaler Build) bleiben die GitHub-Pages-URLs aktiv. */}}
     {{- $jsdelivrSha := getenv "HUGO_JSDELIVR_SHA" }}
+    {{- $imgSrcset := "" }}
+    {{- $coverFile := path.Base .Params.cover.image }}
     {{- if $jsdelivrSha }}
         {{- $imgdl = printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s" $jsdelivrSha .Params.cover.image }}
+        {{- /* Responsive srcset: 620px (Listen) + 720px (Singles) + 1000px Original.
+               Die Varianten liegen unter static/images/covers/{620,720}/ und werden
+               von generate_covers.py erzeugt. → spart Download (Lighthouse). */}}
+        {{- $coverDir := path.Dir .Params.cover.image }}
+        {{- $srcsetParts := slice }}
+        {{- range $w := slice "620" "720" }}
+            {{- $srcsetParts = $srcsetParts | append (printf "https://cdn.jsdelivr.net/gh/frank-hartung/franksfinanzcheck-blog@%s/static/%s/%s/%s %sw" $jsdelivrSha $coverDir $w $coverFile $w) }}
+        {{- end }}
+        {{- $srcsetParts = $srcsetParts | append (printf "%s %dw" $imgdl 1000) }}
+        {{- $imgSrcset = delimit $srcsetParts ", " }}
     {{- else if $cover }}
         {{- $imgdl = $cover.Permalink }}
     {{- end }}
@@ -35,6 +47,10 @@
 
     {{- $imgWidth := (.Params.cover.width | default 1000) }}
     {{- $imgHeight := (.Params.cover.height | default 1500) }}
+    {{- /* sizes: In Listen werden Covers ~620px breit dargestellt, auf
+           Single-Seiten ~720px. */}}
+    {{- $imgSizes := "(min-width: 768px) 620px, 100vw" }}
+    {{- if $.IsSingle }}{{ $imgSizes = "(min-width: 768px) 720px, 100vw" }}{{ end }}
 
     {{- if $addLink }}
         <a href="{{ $imgdl }}" target="_blank" rel="noopener noreferrer">
@@ -55,11 +71,11 @@
                 width="{{ $cover.Width }}" height="{{ $cover.Height }}"
                 alt="{{ $alt }}">
         {{- else }}{{/* Unprocessable image or responsive images disabled */}}
-            <img loading="{{ $loading }}" src="{{ $imgdl }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
+            <img loading="{{ $loading }}" src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
         {{- end }}
     {{- else }}
         {{- /* For absolute urls and external links, no img processing here */}}
-        <img loading="{{ $loading }}" src="{{ $imgdl }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
+        <img loading="{{ $loading }}" src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
     {{- end }}
 
     {{- if $addLink }}

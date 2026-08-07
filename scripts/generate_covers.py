@@ -131,6 +131,20 @@ def make_cover(title, slug, out_path):
     img.save(out_path, "JPEG", quality=88)
     print(f"  ✓ Cover: {os.path.basename(out_path)}")
 
+    # --- Responsive Varianten (srcset): 620px und 720px Breite ---
+    # Die Covers werden in Listen (620px) und Single-Seiten (720px) angezeigt.
+    # Ohne kleinere Varianten lädt der Browser immer das 1000px-Original →
+    # Lighthouse "Properly size images". Die Varianten laufen über jsDelivr
+    # (gleiche SHA-URLs → gleicher 1-Jahres-Cache).
+    for variant_w in (620, 720):
+        scale = variant_w / W
+        vh = int(H * scale)
+        v = img.resize((variant_w, vh), Image.LANCZOS)
+        vdir = os.path.join(os.path.dirname(out_path), str(variant_w))
+        os.makedirs(vdir, exist_ok=True)
+        v.save(os.path.join(vdir, os.path.basename(out_path)), "JPEG", quality=82, optimize=True)
+    print(f"  ✓ Responsive: 620px + 720px für {os.path.basename(out_path)}")
+
 
 def ensure_cover_in_frontmatter(md_path, slug):
     with open(md_path, encoding="utf-8") as f:
@@ -154,11 +168,33 @@ def ensure_cover_in_frontmatter(md_path, slug):
     return True
 
 
+def ensure_responsive_variants(out_path):
+    """Erzeugt 620px- und 720px-Varianten für ein bestehendes Cover, falls fehlend."""
+    if not os.path.exists(out_path):
+        return False
+    img = Image.open(out_path)
+    W, H = img.size
+    made = False
+    for variant_w in (620, 720):
+        vpath = os.path.join(os.path.dirname(out_path), str(variant_w), os.path.basename(out_path))
+        if not os.path.exists(vpath):
+            scale = variant_w / W
+            vh = int(H * scale)
+            v = img.resize((variant_w, vh), Image.LANCZOS)
+            os.makedirs(os.path.dirname(vpath), exist_ok=True)
+            v.save(vpath, "JPEG", quality=82, optimize=True)
+            made = True
+    if made:
+        print(f"  ✓ Responsive-Varianten ergänzt: {os.path.basename(out_path)}")
+    return made
+
+
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     files = sorted(f for f in os.listdir(POSTS_DIR) if f.endswith(".md"))
     covers = 0
     frontmatter = 0
+    variants = 0
     for fn in files:
         slug = fn[:-3]
         with open(os.path.join(POSTS_DIR, fn), encoding="utf-8") as f:
@@ -169,9 +205,12 @@ def main():
         if not os.path.exists(out_path):
             make_cover(title, slug, out_path)
             covers += 1
+        if ensure_responsive_variants(out_path):
+            variants += 1
         if ensure_cover_in_frontmatter(os.path.join(POSTS_DIR, fn), slug):
             frontmatter += 1
-    print(f"\nFertig: {covers} Cover erstellt, {frontmatter} Frontmatter ergänzt "
+    print(f"\nFertig: {covers} Cover erstellt, {frontmatter} Frontmatter ergänzt, "
+          f"{variants} responsive Varianten nachgezogen "
           f"(von {len(files)} Artikeln).")
 
 
