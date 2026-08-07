@@ -37,9 +37,17 @@ Diese Website wird bei einem externen Dienstleister gehostet (nach Abschluss des
 
 ### Content-Delivery-Network (jsDelivr)
 
-Zur schnellen Auslieferung von Bildern (Titelbilder der Artikel) nutzt diese Website das Content-Delivery-Network (CDN) **jsDelivr** der Firma Prospect One Sp. z o.o., Krótka 1/19, 05-500 Piaseczno, Polen (`cdn.jsdelivr.net`). Beim Abruf eines Bildes wird deine IP-Adresse sowie technische Daten (Browsertyp, Betriebssystem, Referrer, Uhrzeit der Anfrage) an die Server von jsDelivr übermittelt. jsDelivr betreibt Serverstandorte weltweit; eine Verarbeitung der IP-Adresse kann daher auch außerhalb der EU erfolgen. jsDelivr bietet ein Datenverarbeitungsabkommen an und verarbeitet die Daten nach eigenen Angaben ausschließlich zur Auslieferung der angeforderten Inhalte und zur Fehleranalyse – nicht zu Werbezwecken.
+Zur schnellen Auslieferung von **statischen Dateien** (Titelbilder der Artikel, Schriftarten, Favicon) nutzt diese Website das Content-Delivery-Network (CDN) **jsDelivr** der Firma Prospect One Sp. z o.o., Krótka 1/19, 05-500 Piaseczno, Polen (`cdn.jsdelivr.net`). Beim Abruf einer Datei wird deine IP-Adresse sowie technische Daten (Browsertyp, Betriebssystem, Referrer, Uhrzeit der Anfrage) an die Server von jsDelivr übermittelt. jsDelivr betreibt Serverstandorte weltweit; eine Verarbeitung der IP-Adresse kann daher auch außerhalb der EU erfolgen. jsDelivr bietet ein Datenverarbeitungsabkommen an und verarbeitet die Daten nach eigenen Angaben ausschließlich zur Auslieferung der angeforderten Inhalte und zur Fehleranalyse – nicht zu Werbezwecken.
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer schnellen und zuverlässigen Auslieferung der Website-Inhalte). Weitere Informationen: [www.jsdelivr.com/privacy-policy-jsdelivr](https://www.jsdelivr.com/privacy-policy-jsdelivr).
+
+### Schriftarten (lokal gehostet)
+
+Diese Website verwendet Schriftarten der Familie **Montserrat** und **Playfair Display**. Die Schriftdateien werden **nicht** von externen Schriftarten-Diensten (z. B. Google Fonts) geladen, sondern liegen **lokal auf unserem Server** bzw. werden über das oben genannte CDN jsDelivr ausgeliefert.
+
+**Beim Aufruf dieser Website wird daher keine Verbindung zu den Servern von Google (fonts.googleapis.com, fonts.gstatic.com) aufgebaut und es werden keine Daten (insbesondere keine IP-Adresse) an Google übermittelt.**
+
+**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer einheitlichen und schnellen Darstellung der Website).
 
 ### Server-Logfiles
 
