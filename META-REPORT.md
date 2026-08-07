@@ -59,4 +59,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | WLAN-Verstärker vs. Mesh-WLAN: Schnelles Inte | 57 | 139 | 6 | ✅ |
 
 ---
-*Erzeugt am 2026-08-07 um 12:56 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-07 um 14:31 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*

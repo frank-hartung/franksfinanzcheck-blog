@@ -38,9 +38,9 @@ Ein weiterer Grund für einen Wechsel ist die Verlässlichkeit. Fällt der Serve
 
 ## Mein Selbstversuch: So habe ich den Wechsel vollzogen
 
-Du brauchst kein IT-Studium für diesen Turbo-Boost. Ich habe den Prozess, den **dns server wechseln** zu wollen, direkt in meiner FritzBox erledigt. Das hat den Vorteil, dass alle Geräte im Heimnetz – vom Laptop bis zum Smart-TV – sofort profitieren. Im Menü "Internet" unter dem Punkt "Zugangsdaten" findest du den Reiter für DNS-Server.
+Du brauchst kein IT-Studium für diesen Turbo-Boost. Ich habe den Prozess, den **DNS-Server wechseln** zu wollen, direkt in meiner FritzBox erledigt. Das hat den Vorteil, dass alle Geräte im Heimnetz – vom Laptop bis zum Smart-TV – sofort profitieren. Im Menü "Internet" unter dem Punkt "Zugangsdaten" findest du den Reiter für DNS-Server.
 
-Dort tauschst du die automatische Zuweisung gegen feste IP-Adressen aus. Nach dem Speichern laden Webseiten meist sofort spürbar zügiger. Mit solchen einfachen **dsl tipps** holst du das Maximum aus deinem bestehenden Vertrag heraus. Die Verzögerung beim ersten Klick auf einen neuen Link verschwindet fast vollständig.
+Dort tauschst du die automatische Zuweisung gegen feste IP-Adressen aus. Nach dem Speichern laden Webseiten meist sofort spürbar zügiger. Mit solchen einfachen **DSL-Tipps** holst du das Maximum aus deinem bestehenden Vertrag heraus. Die Verzögerung beim ersten Klick auf einen neuen Link verschwindet fast vollständig.
 
 ## Welche Alternativen gibt es?
 
@@ -52,7 +52,7 @@ Ich habe verschiedene Dienste getestet, um die beste Performance zu finden. Hier
 
 ## Privatsphäre als wichtiger Bonus
 
-Dein DNS-Server protokolliert theoretisch jede Webseite, die du besuchst. Viele Internetanbieter speichern diese Protokolle über längere Zeiträume. Private Anbieter wie Cloudflare versprechen, diese Log-Daten bereits nach 24 Stunden zu löschen. Das schützt deine digitale Privatsphäre besser vor neugierigen Blicken und Tracking. So kannst du dein **internet schneller machen** und gleichzeitig deutlich diskreter im Netz unterwegs sein.
+Dein DNS-Server protokolliert theoretisch jede Webseite, die du besuchst. Viele Internetanbieter speichern diese Protokolle über längere Zeiträume. Private Anbieter wie Cloudflare versprechen, diese Log-Daten bereits nach 24 Stunden zu löschen. Das schützt deine digitale Privatsphäre besser vor neugierigen Blicken und Tracking. So kannst du dein **Internet schneller machen** und gleichzeitig deutlich diskreter im Netz unterwegs sein.
 
 ## Häufige Fragen
 

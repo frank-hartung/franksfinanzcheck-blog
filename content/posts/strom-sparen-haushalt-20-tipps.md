@@ -38,7 +38,7 @@ Mit kleinen Investitionen kannst du deinen Stromverbrauch weiter reduzieren.
 Mit größeren Investitionen kannst du deinen Stromverbrauch noch mehr reduzieren. 
 16. **Neue Kühlgeräte:** Ein Kühlschrank der Klasse A (alt) verbraucht oft doppelt so viel wie ein modernes A+++-Gerät – der Tausch lohnt sich ab 15 Jahren. 
 17. **Wärmepumpentrockner:** Verbrauchen bis zu 50 % weniger als alte Ablufttrockner. 
-18. **Programmierbare Thermostate:** Heizung automatisch absenken, wenn niemand zuhause ist. 
+18. **Programmierbare Thermostate:** Heizung automatisch absenken, wenn niemand zu Hause ist. 
 19. **Solar-Balkonkraftwerk:** Ein Mini-Solarmodul (400–800 W) am Balkon produziert 300–600 kWh pro Jahr – rechnet sich oft schon nach 3–5 Jahren. 
 20. **Stromtarif wechseln:** Der größte Hebel überhaupt – der Unterschied zwischen Grundtarif und günstigstem Anbieter liegt oft bei 200–300 € pro Jahr.
 
