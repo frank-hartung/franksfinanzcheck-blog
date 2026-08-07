@@ -76,10 +76,18 @@ MAX_SIMILAR_PHRASES = 1
 PHRASE_LEN = 7
 
 SYSTEM_PROMPT = (
-    "Du bist ein deutschsprachiger, seriöser Finanz- und Verbraucher-Ratgeber-Autor. "
+    "Du bist ein deutschsprachiger, seriöser Finanz- und Verbraucher-Ratgeber-Autor auf "
+    "PROFI-NIVEAU – vergleichbar mit den besten unabhängigen Finanzblogs im DACH-Raum. "
     "Du schreibst ehrliche, hilfreiche und sachlich korrekte Artikel. "
-    "Du erfindest keine konkreten Preise oder Anbieterbewertungen. "
-    "Du schreibst im Dativ-Stil neutral und ohne Werbesprech."
+    "Du erfindest keine konkreten Preise oder Anbieterbewertungen – Preise nennst du nur "
+    "als vorsichtige Spannen (\"ca. X–Y €\") oder mit \"in der Regel\". "
+    "Du schreibst in AKTIVER, lebendiger Sprache: kurze Sätze (max. ~20 Wörter), starke "
+    "Verben, direkte Ansprache mit \"du\". Kein Passiv, keine Füllphrasen, kein Werbesprech. "
+    "Du verzichtest auf typische KI-Floskeln wie \"In der heutigen schnelllebigen Welt\", "
+    "\"Es ist wichtig zu beachten\", \"Zusammenfassend lässt sich sagen\", \"Des Weiteren\", "
+    "\"Es gibt viele Möglichkeiten\", \"heutzutage\", \"Tauchen wir ein\". "
+    "Deine Texte sind journalistisch, konkret, praxisnah und vermitteln echten Nutzen. "
+    "Jeder Absatz ist 3–4 Sätze lang. Deutsche Rechtschreibung ist fehlerfrei."
 )
 
 # ---------------------------------------------------------------- Hilfsfunktionen
@@ -241,6 +249,48 @@ def find_pin_for_topic(topic_title, pins):
         if score > best_score:
             best, best_score = p, score
     return best if best_score >= 2 else None
+
+
+# KI-Floskeln, die in Profi-Texten nie vorkommen dürfen
+PROFI_FLOSKELN = [
+    "in der heutigen schnelllebigen welt", "in der heutigen zeit",
+    "es ist wichtig zu beachten", "zusammenfassend lässt sich sagen",
+    "zusammenfassend kann man sagen", "des weiteren", "in diesem artikel werden wir",
+    "in diesem artikel erfahren sie", "es gibt viele möglichkeiten",
+    "es gibt zahlreiche", "wenn es darum geht", "heutzutage",
+    "in der modernen welt", "tauchen wir ein", "lassen sie uns",
+    "der schlüssel zum erfolg", "ein muss für jeden", "unverzichtbar für",
+    "das a und o", "die welt der", "in einer welt, in der",
+]
+
+
+def profi_quality_ok(body, keywords=None):
+    """Prüft einen frisch generierten Artikel auf Profi-Niveau.
+    Liefert (ok, probleme). Wird in der Regenerierungs-Schleife genutzt."""
+    problems = []
+    text = re.sub(r"[#*_>`|~\[\]()-]", " ", body)
+    text = re.sub(r"\s+", " ", text).lower()
+    words = len(re.findall(r"\w+", text))
+
+    if words < 400:
+        problems.append(f"nur {words} Wörter (Profi: 400+)")
+    h2 = len(re.findall(r"^##\s", body, re.M))
+    if h2 < 4:
+        problems.append(f"nur {h2} H2-Abschnitte")
+    faq = len(re.findall(r"^###\s.*\?", body, re.M))
+    if faq < 2:
+        problems.append(f"nur {faq} FAQ-Fragen")
+    floskeln = [f for f in PROFI_FLOSKELN if f in text]
+    if floskeln:
+        problems.append(f"KI-Floskeln: {', '.join(floskeln[:2])}")
+    if keywords:
+        kws = [k.strip().strip('"').lower() for k in keywords if k.strip()]
+        if kws and kws[0] not in text:
+            problems.append(f"Keyword „{kws[0]}“ fehlt")
+    if not re.search(r"(^|\n)[-*]\s", body, re.M) and "|" not in body:
+        problems.append("keine Liste/Tabelle")
+
+    return len(problems) == 0, problems
 
 
 def uniqueness_check(text, pin, max_similar=MAX_SIMILAR_PHRASES, n=PHRASE_LEN):
@@ -451,13 +501,21 @@ Zeile 1: TITLE: Ein prägnanter, klickstarker Titel (max. 60 Zeichen). Wähle ei
 Zeile 2: DESCRIPTION: Eine Meta-Beschreibung (max. 155 Zeichen, mit wichtigstem Keyword)
 Ab Zeile 3: Der Artikel in Markdown:
 - Keine Überschrift für den Titel am Anfang (Titel steht schon in Zeile 1)
-- Beginne mit einem einleitenden Absatz (erst bei der Perspektive "story"/"fragen" mit einer Geschichte/Frage)
+- Einleitung mit starkem HAKEN: Nutzenversprechen, konkrete Frage oder überraschende Zahl –
+  KEIN generischer Einstieg ("In der heutigen Zeit…", "Geld sparen ist wichtig…")
 - 4 bis 6 Abschnitte mit H2-Überschriften (##) – strukturiere sie ANDERS als die Pin-Vorlage
-- Optional kurze Listen oder eine Tabelle
+- Mindestens EINE Liste oder Tabelle (Mehrwert, Scannability)
 - Am Ende ein FAQ-Bereich: "## Häufige Fragen" mit 3 Fragen als H3 und Antworten
-- 400 bis 700 Wörter insgesamt
-- KEINE Links einfügen, KEINE konkreten Preise oder Zahlen erfinden
-- Schreibe so, dass der Artikel echtes Wissen vermittelt und jemandem hilft
+- 500 bis 800 Wörter insgesamt – substanziell, aber ohne Blabla
+- Absätze max. 3–4 Sätze, aktive Sprache ("du"), kurze Sätze (max. ~20 Wörter)
+- PRAXISBEZUG (E-E-A-T): konkrete, plausible Alltagsbeispiele; eigene Erfahrung als
+  Formulierung erlaubt ("Ich habe…", "In der Praxis…") – aber KEINE erfundenen Fakten,
+  KEINE konkreten Preise; Preisspannen nur mit "ca." oder "in der Regel"
+- KEINE KI-Floskeln: verboten sind u.a. "In der heutigen schnelllebigen Welt", "Es ist
+  wichtig zu beachten", "Zusammenfassend lässt sich sagen", "Des Weiteren", "Es gibt viele
+  Möglichkeiten", "heutzutage", "Tauchen wir ein", "Der Schlüssel zum Erfolg"
+- KEINE Links einfügen, KEINE konkreten Zahlen erfinden
+- Deutsche Orthografie: korrekte Groß-/Kleinschreibung, korrekte Anführungszeichen ("…")
 - Originalität ist Pflicht: eigener Wortlaut, eigene Beispiele, eigene Abschnittsfolge
 """
     forced = os.environ.get("AI_PROVIDER")
@@ -532,30 +590,40 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
             print("  ✗ Provider haben geantwortet, aber mit Fehlern – Logs oben prüfen.")
         return False
 
-    # Einzigartigkeits-Check: zu ähnlich zum Pin? → neu generieren (max. 2 Versuche)
-    for attempt in range(1, 3):
+    # Qualitäts-Schleife (Profi-Niveau): Pin-Ähnlichkeit ODER Text unter
+    # Profi-Schwelle → mit anderem Stil neu generieren (max. 3 Versuche)
+    for attempt in range(1, 4):
         title, desc, body = parse_article(raw, topic, angle[0])
         if title.lower() in used_titles:
             print(f"  ✗ Titel existiert bereits ({title[:50]}…) – Duplikat-Schutz.")
             return False
+        reason = None
         if pin:
             ok, hits, examples = uniqueness_check(body, pin)
             if not ok:
-                print(f"  ⚠ Zu ähnlich zum Pinterest-Pin ({hits} gleiche Phrasen, Versuch {attempt})")
+                reason = f"zu ähnlich zum Pinterest-Pin ({hits} gleiche Phrasen)"
                 for ex in examples:
                     print(f"    → „{ex}…“")
-                print(f"  ↻ Generiere mit anderem Stil neu …")
-                other_angles = [a for a in ANGLES if a[0] != angle[0]]
-                other_persp = [p for p in PERSPECTIVES if p[0] != (getattr(angle, 'persp', None) or '')]
-                new_angle = random.choice(other_angles)
-                raw, provider_name = generate_article_text(topic, new_angle,
-                                                           perspective=random.choice(PERSPECTIVES),
-                                                           pin=pin, keywords=keywords)
-                if not raw:
-                    return False
-                angle = new_angle
-                continue
+        if not reason:
+            ok_profi, prob = profi_quality_ok(body, keywords)
+            if not ok_profi:
+                reason = "Profi-Qualität nicht erreicht: " + "; ".join(prob)
+        if reason:
+            print(f"  ⚠ {reason} (Versuch {attempt}/3)")
+            print(f"  ↻ Generiere mit anderem Stil neu …")
+            other_angles = [a for a in ANGLES if a[0] != angle[0]]
+            new_angle = random.choice(other_angles) if other_angles else angle
+            raw, provider_name = generate_article_text(topic, new_angle,
+                                                       perspective=random.choice(PERSPECTIVES),
+                                                       pin=pin, keywords=keywords)
+            if not raw:
+                return False
+            angle = new_angle
+            continue
         break
+    else:
+        print("  ✗ 3 Versuche ohne Profi-Niveau – Artikel wird übersprungen.")
+        return False
 
     title, desc, body = parse_article(raw, topic, angle[0])
     used_titles.add(title.lower())
