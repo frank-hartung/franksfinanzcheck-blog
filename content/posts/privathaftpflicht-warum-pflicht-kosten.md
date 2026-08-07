@@ -18,7 +18,7 @@ cover:
 Die Privathaftpflicht zahlt, wenn du als Privatperson einem anderen Menschen einen Schaden zufügst – und zwar für:
 - **Personenschäden:** Arztkosten, Verdienstausfall, Schmerzensgeld
 - **Sachschäden:** beschädigte oder zerstörte Gegenstände
-- **Vermögensschäden:** Z.B. Wenn durch dein Verschulden jemand finanziell benachteiligt wird
+- **Vermögensschäden:** z. B. wenn durch dein Verschulden jemand finanziell benachteiligt wird
 
 Der Versicherer prüft die Ansprüche, wehrt unberechtigte Forderungen ab und zahlt berechtigte Schäden. Diese doppelte Funktion – Schutz vor Zahlung und Schutz vor Abmahnungen – macht die Versicherung so wertvoll.
 

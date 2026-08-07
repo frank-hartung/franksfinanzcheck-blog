@@ -82,6 +82,32 @@ COMMA_CAP_RE = re.compile(r',\s+([A-ZÄÖÜ][a-zäöüß]+)')
 # Höflichkeitsformen, die nach Komma korrekt groß bleiben
 POLITE_FORMS = {"sie", "ihr", "ihre", "ihnen", "sie", "ihnen"}
 
+# SATZZEICHEN-REGELN (deterministisch, sicher):
+# 1) Abkürzungen ohne Leerzeichen: "Z.B." → "z. B.", "z.B." → "z. B." …
+ABKUERZUNG_FIXES = [
+    (re.compile(r'\bZ\.B\.'), 'z. B.'),
+    (re.compile(r'\bz\.B\.'), 'z. B.'),
+    (re.compile(r'\bU\.A\.'), 'u. a.'),
+    (re.compile(r'\bu\.A\.'), 'u. a.'),
+    (re.compile(r'\bD\.H\.'), 'd. h.'),
+    (re.compile(r'\bd\.H\.'), 'd. h.'),
+    (re.compile(r'\bU\.S\.W\.'), 'usw.'),
+    (re.compile(r'\bu\.S\.W\.'), 'usw.'),
+    (re.compile(r'\bE\.T\.C\.'), 'etc.'),
+    (re.compile(r'\be\.T\.C\.'), 'etc.'),
+]
+# 2) Leerzeichen VOR Satzzeichen (", . ; : ! ?") – NICHT bei "z. B."-Abkürzungen
+#    und nicht bei Dezimalzahlen ("4, 5" → "4,5" ist ok, aber selten – wir
+#    fixen nur eindeutige Fälle wie "Hallo ," → "Hallo,")
+SPACE_BEFORE_PUNCT_RE = re.compile(r' +([,;:!?])')
+
+# 3) Doppelte Satzzeichen: "..", ",,", ";;", "::", "!!", "??" → einfach
+DOUBLE_PUNCT_RE = re.compile(r'(?<![.\d])\.\.(?![.\d])|,,|;;|::|!!|\?\?')
+
+# 4) Großbuchstabe NACH Abkürzung mitten im Satz ("z. B. Wenn" → "z. B. wenn"):
+#    nur wenn davor KEIN Satzendepunkt steht (dann wäre es ein neuer Satz)
+AFTER_ABBR_CAP_RE = re.compile(r'(?:[zZ]\.\s?[bB]\.|[uU]\.\s?[aA]\.|[dD]\.\s?[hH]\.|usw\.|etc\.|bzw\.)\s+([A-ZÄÖÜ][a-zäöüß]+)')
+
 # ANREDE-KONSISTENZ: Der Blog spricht Leser durchgehend mit "du" an.
 # Echte Höflichkeitsformen (Sie/Ihre/Ihnen) in Descriptions sind ein
 # Stilbruch. Diese Muster werden deterministisch auf du-Form umgestellt.
@@ -313,6 +339,52 @@ def analyze_article(a, whitelist):
             "type": "heading_start", "word": m.group(2), "fix": m.group(2).upper(),
             "start": m.start(2), "end": m.end(2), "conf": 0.95,
             "reason": f"Satzanfang nach Überschrift: „{m.group(2)}“ → „{m.group(2).upper()}“",
+        })
+
+    # 2c2. SATZZEICHEN: Abkürzungen mit fehlendem Leerzeichen (Z.B. → z. B.)
+    for regex, fix in ABKUERZUNG_FIXES:
+        for m in regex.finditer(body):
+            problems.append({
+                "type": "punctuation", "word": m.group(0), "fix": fix,
+                "start": m.start(), "end": m.end(), "conf": 0.95,
+                "reason": f"Satzzeichen: „{m.group(0)}“ → „{fix}“",
+            })
+
+    # 2c3. SATZZEICHEN: Leerzeichen VOR Satzzeichen entfernen ("Hallo ," → "Hallo,")
+    for m in SPACE_BEFORE_PUNCT_RE.finditer(body):
+        # Nicht in Links/Code (maskierte Bereiche sind Leerzeichen → kein Treffer)
+        problems.append({
+            "type": "punctuation", "word": m.group(0), "fix": m.group(1),
+            "start": m.start(), "end": m.end(), "conf": 0.95,
+            "reason": f"Satzzeichen: Leerzeichen vor „{m.group(1)}“ entfernen",
+        })
+
+    # 2c4. SATZZEICHEN: Doppelte Satzzeichen zusammenfassen (".." → ".")
+    for m in DOUBLE_PUNCT_RE.finditer(body):
+        fix = m.group(0)[0]
+        problems.append({
+            "type": "punctuation", "word": m.group(0), "fix": fix,
+            "start": m.start(), "end": m.end(), "conf": 0.9,
+            "reason": f"Satzzeichen: „{m.group(0)}“ → „{fix}“",
+        })
+
+    # 2c5. Großbuchstabe nach Abkürzung mitten im Satz → klein
+    #      ("z. B. Wenn" → "z. B. wenn"), außer nach Satzende (. ! ?)
+    for m in AFTER_ABBR_CAP_RE.finditer(body):
+        before = body[max(0, m.start() - 4):m.start()]
+        if re.search(r'[.!?]\s*$', before):
+            continue  # neuer Satz nach Satzendepunkt – groß korrekt
+        w = m.group(1)
+        # Whitelist/ambig: Wenn die Kleinform unbekannt ist (Nomen), groß lassen
+        r = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
+                           input=w.lower() + "\n", capture_output=True, text=True)
+        if r.stdout.strip() != "":
+            continue  # Nomen/Eigenname – groß korrekt
+        abbr = m.group(0).split(w)[0].strip()
+        problems.append({
+            "type": "punctuation", "word": w, "fix": w.lower(),
+            "start": m.start(1), "end": m.end(1), "conf": 0.85,
+            "reason": f"Satzzeichen: nach „{abbr}“ klein – „{w}“ → „{w.lower()}“",
         })
 
     # 2c. Falsche Großschreibung nach Komma (Nicht-Nomen) korrigieren

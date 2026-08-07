@@ -64,7 +64,7 @@ Ja – aber laufende Behandlungen und bekannte Vorerkrankungen sind meist ausges
 In guten Tarifen ja – mit Erstattungssätzen von 80 bis 90 Prozent. Achte auf die Formulierung „Implantate inklusive" und die Obergrenzen pro Zahn.
 
 ### Was ist die Regelversorgung?
-Das ist die vom Gesetzgeber festgelegte, zweckmäßige und wirtschaftliche Versorgung – bei Zahnersatz z. B. Die einfache Metall-Kunststoff-Krone. Alles Hochwertigere geht über die Regelversorgung hinaus und wird nur anteilig bezuschusst.
+Das ist die vom Gesetzgeber festgelegte, zweckmäßige und wirtschaftliche Versorgung – bei Zahnersatz z. B. die einfache Metall-Kunststoff-Krone. Alles Hochwertigere geht über die Regelversorgung hinaus und wird nur anteilig bezuschusst.
 
 ---
 
