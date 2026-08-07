@@ -237,7 +237,7 @@ h1, h2, h3, h4, h5, h6,
     display: flex;
     align-items: center;
     gap: 18px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;              /* CLS-Fix: kein Umbruch nach Font-Swap */
     background: var(--ff-white);
     border: 2px solid var(--ff-emerald);
     border-left: 8px solid var(--ff-emerald);
@@ -261,6 +261,7 @@ h1, h2, h3, h4, h5, h6,
 
 .ff-pinterest-cta-text {
     flex: 1 1 220px;
+    min-width: 0;                   /* CLS-Fix: Text schrumpft statt umzubrechen */
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -270,6 +271,8 @@ h1, h2, h3, h4, h5, h6,
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     font-size: 1.15em;
+    line-height: 1.35;              /* CLS-Fix: deterministische Zeilenhöhe
+                                        (unabhängig vom Montserrat-Font-Swap) */
     color: var(--ff-anthracite);
 }
 
@@ -286,6 +289,8 @@ h1, h2, h3, h4, h5, h6,
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 1em;
+    line-height: 1.2;               /* CLS-Fix: deterministische Zeilenhöhe */
+    white-space: nowrap;            /* CLS-Fix: kein Textumbruch nach Font-Swap */
     padding: 12px 28px;
     border-radius: 999px;
     text-decoration: none;
@@ -301,6 +306,7 @@ h1, h2, h3, h4, h5, h6,
 
 @media (max-width: 600px) {
     .ff-pinterest-cta {
+        flex-wrap: wrap;            /* Mobile: Umbruch erlaubt (kein Font-Swap-Risiko) */
         justify-content: center;
         text-align: center;
     }
