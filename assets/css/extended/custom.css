@@ -97,10 +97,17 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* ---------- Artikel-Einträge (Blog-Übersicht) ---------- */
+/* Profi-Performance: content-visibility überspringt das Rendering aller
+   Karten UNTERHALB des Viewports → massiv weniger initiale Style/Layout-
+   Arbeit (Lighthouse "long-tasks"/"mainthread-work-breakdown").
+   contain-intrinsic-size reserviert die Höhe (auto = Browser merkt sich
+   die echte Größe) → KEIN CLS beim Scrollen. */
 .post-entry {
     border: 1px solid var(--border);
     border-radius: 12px;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 950px;
 }
 
 .post-entry:hover {
