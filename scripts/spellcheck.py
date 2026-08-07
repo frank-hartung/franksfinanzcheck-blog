@@ -82,6 +82,42 @@ COMMA_CAP_RE = re.compile(r',\s+([A-ZÄÖÜ][a-zäöüß]+)')
 # Höflichkeitsformen, die nach Komma korrekt groß bleiben
 POLITE_FORMS = {"sie", "ihr", "ihre", "ihnen", "sie", "ihnen"}
 
+# ANREDE-KONSISTENZ: Der Blog spricht Leser durchgehend mit "du" an.
+# Echte Höflichkeitsformen (Sie/Ihre/Ihnen) in Descriptions sind ein
+# Stilbruch. Diese Muster werden deterministisch auf du-Form umgestellt.
+ANREDE_IMPERATIVE = [
+    (re.compile(r'Erfahren Sie, wie Sie'), 'Erfahre, wie du'),
+    (re.compile(r'Erfahren Sie, wie'), 'Erfahre, wie'),
+    (re.compile(r'Erfahren Sie'), 'Erfahre'),
+    (re.compile(r'Entdecken Sie'), 'Entdecke'),
+    (re.compile(r'Nutzen Sie'), 'Nutze'),
+    (re.compile(r'Vergleichen Sie'), 'Vergleiche'),
+    (re.compile(r'Informieren Sie sich'), 'Informiere dich'),
+    (re.compile(r'Melden Sie'), 'Melde'),
+    (re.compile(r'Buchen Sie'), 'Buche'),
+    (re.compile(r'Sparen Sie'), 'Spare'),
+    (re.compile(r'Prüfen Sie'), 'Prüfe'),
+    (re.compile(r'Sichern Sie'), 'Sichere'),
+    (re.compile(r'Beachten Sie'), 'Beachte'),
+]
+ANREDE_PRONOUN = [
+    (re.compile(r'\bIhre\b'), 'deine'),
+    (re.compile(r'\bIhren\b'), 'deinen'),
+    (re.compile(r'\bIhrem\b'), 'deinem'),
+    (re.compile(r'\bIhnen\b'), 'dir'),
+    (re.compile(r'\bSie\b'), 'du'),
+]
+
+def anrede_to_du(text):
+    """Konvertiert echte Höflichkeitsformen in du-Form (deterministisch).
+    Nur für Descriptions geeignet (kein Nomen-Verweis-Kontext)."""
+    orig = text
+    for regex, repl in ANREDE_IMPERATIVE:
+        text = regex.sub(repl, text)
+    for regex, repl in ANREDE_PRONOUN:
+        text = regex.sub(repl, text)
+    return text if text != orig else None
+
 # Bekannte Fehl-Phrasen (Bot-Artefakte: Keywords wörtlich klein im Fließtext)
 PHRASEN_FIXES = [
     (re.compile(r'\bdns server wechseln\b'), 'DNS-Server wechseln'),
@@ -341,6 +377,18 @@ def analyze_article(a, whitelist):
                     "abs_start": dstart, "abs_end": dstart + 1, "conf": 0.95,
                     "reason": "Description beginnt klein – Satzanfang groß schreiben",
                 })
+            # ANREDE-KONSISTENZ: Höflichkeitsform (Sie/Ihre…) in Description
+            # → du-Form (Blog-Stil). Nur bei echten Höflichkeits-Mustern.
+            if re.search(r'(?<![a-zäöüß])(Sie|Ihre|Ihren|Ihrem|Ihnen)(?![a-zäöüß])', desc) \
+               or re.search(r'\b(Erfahren|Entdecken|Nutzen|Vergleichen|Informieren|Melden|Buchen|Sparen|Prüfen|Sichern|Beachten) Sie\b', desc):
+                converted = anrede_to_du(desc)
+                if converted and converted != desc:
+                    problems.append({
+                        "type": "anrede", "word": desc, "fix": converted,
+                        "abs_start": dstart, "abs_end": dstart + len(desc),
+                        "conf": 0.9,
+                        "reason": "Description nutzt Höflichkeitsform – Blog-Stil ist du-Ansprache",
+                    })
             # Kleingeschriebene Substantive in der Description
             for m in re.finditer(r"[A-Za-zÄÖÜäöüß]+(?:-[A-Za-zÄÖÜäöüß]+)*", desc):
                 w = m.group(0)
