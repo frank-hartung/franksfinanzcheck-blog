@@ -49,7 +49,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .logo a {
-    font-weight: 800;
+    font-weight: 700;
     color: var(--ff-emerald);
 }
 
@@ -71,7 +71,7 @@ h1, h2, h3, h4, h5, h6,
 
 .home-info h1 {
     color: var(--ff-white);
-    font-weight: 800;
+    font-weight: 700;
     font-size: 1.9em;
     margin-bottom: 10px;
 }
@@ -125,7 +125,7 @@ h1, h2, h3, h4, h5, h6,
 /* ---------- Artikel-Inhalt ---------- */
 .post-title {
     color: var(--ff-emerald);
-    font-weight: 800;
+    font-weight: 700;
 }
 
 .post-content h2 {
@@ -229,7 +229,7 @@ h1, h2, h3, h4, h5, h6,
 /* ---------- Rechtsseiten (Impressum/Datenschutz) ---------- */
 .single .post-content h1 {
     color: var(--ff-emerald);
-    font-weight: 800;
+    font-weight: 700;
 }
 
 /* ---------- Pinterest-CTA-Block (Startseite, prominent) ---------- */
@@ -281,7 +281,7 @@ html.ff-consent-set #ff-consent-banner {
 
 .ff-pinterest-cta-text strong {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 1.15em;
     line-height: 1.35;              /* CLS-Fix: deterministische Zeilenhöhe
                                         (unabhängig vom Montserrat-Font-Swap) */
