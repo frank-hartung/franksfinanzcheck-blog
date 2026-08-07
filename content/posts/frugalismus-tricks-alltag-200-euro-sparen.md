@@ -51,7 +51,7 @@ Strom, Gas, Internet und Versicherungen kosten dich bei Trägheit unnötig viel 
 ## Häufige Fragen
 
 ### Ist Frugalismus dasselbe wie Geiz?
-Nein. Frugalismus bedeutet, dein Geld bewusst für Dinge einzusetzen, die dir echten Mehrwert bieten. Du streichst lediglich die Ausgaben, die keinen Nutzen bringen. Geiz spart wahllos, [Frugalismus für](/posts/2026-08-07-frugalismus-fuer-den-erfolg/) ein freieres und selbstbestimmtes Leben.
+Nein. Frugalismus bedeutet, dein Geld bewusst für Dinge einzusetzen, die dir echten Mehrwert bieten. Du streichst lediglich die Ausgaben, die keinen Nutzen bringen. Geiz spart wahllos, [Frugalismus für](../../posts/2026-08-07-frugalismus-fuer-den-erfolg/) ein freieres und selbstbestimmtes Leben.
 
 ### Wie starte ich als Anfänger?
 Beginne mit der Analyse deiner Fixkosten und richte einen Dauerauftrag für deine Ersparnisse ein. Diese zwei Schritte kosten dich weniger als eine Stunde Zeit. Die Wirkung auf deinen Kontostand bemerkst du bereits im Folgemonat.
