@@ -88,6 +88,42 @@ jobs:
             git push
           fi
 
+      - name: Neue Artikel sofort auf Profi-Niveau bringen (Meta + Interne Links)
+        # Lücke geschlossen: Neue Bot-Artikel hatten bis zum wöchentlichen
+        # SEO-Workflow (Mittwoch) kurze Titel/Descriptions und waren nicht
+        # in die interne Linkstruktur eingebunden. Jetzt direkt nach der
+        # Veröffentlichung: Meta-Optimierung (KI) + kontextuelle interne
+        # Links – nur wenn wirklich ein Content-Commit vorliegt.
+        id: sofort_optimieren
+        if: ${{ !cancelled() }}
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          LAST=$(git log -1 --format=%s)
+          if [[ "$LAST" != content:* ]]; then
+            echo "Kein Content-Commit in diesem Lauf – keine Sofort-Optimierung nötig."
+            exit 0
+          fi
+          echo "Content-Commit gefunden – optimiere neuen Artikel sofort…"
+          python3 scripts/meta_optimizer.py --fix --ai
+          python3 scripts/internal_linker.py --apply --max 3
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Optimierungs-Änderungen."
+          else
+            git commit -m "content: neuer Artikel sofort optimiert (Meta-Titel/Description, interne Verlinkung)"
+            git push
+          fi
+
+      - name: Neue Artikel sofort bei Bing/Yandex einreichen (IndexNow)
+        # Lücke geschlossen: Neue Artikel wurden erst am Mittwoch (SEO-
+        # Workflow) bei IndexNow eingereicht → bis zu 5 Tage Indexierungs-
+        # Verzögerung. Jetzt sofort nach der Veröffentlichung.
+        run: python3 scripts/submit_indexnow.py
+
       - name: Deploy-Workflow anstoßen (nur falls Push-Trigger nicht greift)
         # Der Push selbst löst den Deploy-Workflow bereits aus (on: push).
         # Dieser Schritt ist nur ein Fallback: Er stößt den Deploy nur dann
