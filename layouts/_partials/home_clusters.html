@@ -4,32 +4,34 @@
     Zeigt die 6 Pillar-Pages als Karten. Relative Links
     ("pillar/<slug>/") – kein führender Slash (Hugo-Subdir-Bug).
 
-    LCP-SCHUTZ (wichtig): Auf Mobile würde das 6-Karten-Grid das
-    erste Cover (LCP-Element) aus dem Viewport schieben (1514 px!).
-    Deshalb: Mobile zeigt eine KOMPAKTE horizontale Chip-Leiste
-    (~60 px hoch) – das Cover bleibt im Viewport, die Cluster sind
-    trotzdem sichtbar und verlinkt.
+    LAYOUT: Die Sektion steht am ENDE der Startseite (nach den Posts)
+    – dort ist sie LCP-unschädlich. Desktop: lesbares Grid mit
+    auto-fit/minmax (bei 720px Inhalt = 3 Spalten à ~230px, 2 Reihen).
+    Mobile: horizontale Chip-Leiste (kurze Ratgeber-Namen).
 ============================================================ */ -}}
 {{- $pillars := slice "strom-sparen" "versicherungen" "mietwagen" "frugalismus" "internet-dsl" "konto-karten" }}
 {{- $labels := dict "strom-sparen" "⚡" "versicherungen" "🛡️" "mietwagen" "🚗" "frugalismus" "🌱" "internet-dsl" "🌐" "konto-karten" "💳" }}
-<section class="ff-clusters" style="margin:0 0 20px;" aria-label="Ratgeber-Übersicht">
-  <h2 class="ff-clusters-title" style="font-family:'Montserrat',sans-serif; font-weight:700; color:#0E5A43; font-size:1.2em; margin-bottom:4px;">Die großen Ratgeber</h2>
-  <p class="ff-clusters-intro" style="color:#555; font-size:.9em; margin-bottom:12px;">Jeder Ratgeber bündelt alle Artikel zu einem Thema – starte dort oder spring direkt in die Beiträge.</p>
+<section class="ff-clusters" style="margin:28px 0 8px; padding-top:24px; border-top:2px solid rgba(14,90,67,.15);" aria-label="Ratgeber-Übersicht">
+  <h2 style="font-family:'Montserrat',sans-serif; font-weight:700; color:#0E5A43; font-size:1.3em; margin-bottom:4px;">Die großen Ratgeber</h2>
+  <p style="color:#555; font-size:.92em; margin-bottom:16px;">Jeder Ratgeber bündelt alle Artikel zu einem Thema – starte dort oder spring direkt in die Beiträge.</p>
 
-  {{- /* Desktop: kompakte Karten-Zeile (LCP-Schutz: hält das erste
-         Cover im Viewport – große Karten mit Description würden es
-         unter den Fold schieben) */}}
-  <div class="ff-clusters-grid" style="display:grid; grid-template-columns:repeat(6, 1fr); gap:12px;">
+  {{- /* Desktop/Tablet: lesbares Karten-Grid (auto-fit → 3 Spalten bei 720px) */}}
+  <div class="ff-clusters-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px;">
     {{- range $pillars }}
       {{- with site.GetPage (printf "pillar/%s" .) }}
       {{- $count := len (where site.RegularPages ".Params.pillar" .File.ContentBaseName) }}
-      <a href="pillar/{{ .File.ContentBaseName }}/" aria-label="Zum Ratgeber: {{ .Title }}"
-         style="display:flex; align-items:center; gap:10px; background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; padding:12px; text-decoration:none; box-shadow:0 1px 4px rgba(0,0,0,.05); transition:transform .15s ease, box-shadow .15s ease;">
-        <span style="font-size:1.4em; line-height:1; flex:none;" aria-hidden="true">{{ index $labels .File.ContentBaseName | default "📘" }}</span>
-        <span style="min-width:0;">
-          <strong style="font-family:'Montserrat',sans-serif; color:#0E5A43; font-size:.85em; line-height:1.3; display:block;">{{ .Title | plainify | replaceRE "^.*?: " "" }}</strong>
-          <span style="font-size:.75em; color:#0E5A43; font-weight:700;">{{ $count }} Artikel →</span>
-        </span>
+      {{- $full := .Title | plainify }}
+      {{- $name := trim (index (split $full ":") 0) " " }}
+      {{- $desc := .Description | plainify }}
+      {{- if strings.HasPrefix $desc (printf "%s " $name) }}
+        {{- $desc = strings.TrimPrefix (printf "%s " $name) $desc }}
+      {{- end }}
+      <a href="pillar/{{ .File.ContentBaseName }}/" aria-label="Zum Ratgeber: {{ $full }}"
+         style="display:flex; flex-direction:column; background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; padding:16px; text-decoration:none; box-shadow:0 1px 4px rgba(0,0,0,.05); transition:transform .15s ease, box-shadow .15s ease;">
+        <span style="font-size:1.7em; line-height:1;" aria-hidden="true">{{ index $labels .File.ContentBaseName | default "📘" }}</span>
+        <strong style="font-family:'Montserrat',sans-serif; color:#0E5A43; font-size:1.02em; line-height:1.35; margin:10px 0 4px;">{{ $name }}</strong>
+        <span style="font-size:.82em; color:#666; line-height:1.45; flex:1;">{{ $desc | truncate 90 }}</span>
+        <span style="margin-top:10px; font-size:.8em; color:#0E5A43; font-weight:700;">{{ $count }} Artikel →</span>
       </a>
       {{- end }}
     {{- end }}
@@ -39,11 +41,13 @@
   <div class="ff-clusters-chips" style="display:none; gap:8px; overflow-x:auto; padding-bottom:6px; -webkit-overflow-scrolling:touch;">
     {{- range $pillars }}
       {{- with site.GetPage (printf "pillar/%s" .) }}
-      <a href="pillar/{{ .File.ContentBaseName }}/" aria-label="Zum Ratgeber: {{ .Title }}"
+      {{- $full := .Title | plainify }}
+      {{- $name := trim (index (split $full ":") 0) " " }}
+      <a href="pillar/{{ .File.ContentBaseName }}/" aria-label="Zum Ratgeber: {{ $full }}"
          style="flex:0 0 auto; display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid rgba(14,90,67,.25); border-radius:999px; padding:8px 14px; text-decoration:none; white-space:nowrap;">
         <span aria-hidden="true">{{ index $labels .File.ContentBaseName | default "📘" }}</span>
-        <strong style="font-family:'Montserrat',sans-serif; color:#0E5A43; font-size:.85em;">{{ .Title | plainify | replaceRE "^.*?: " "" }}</strong>
-        <span style="font-size:.75em; color:#888;">{{ len (where site.RegularPages ".Params.pillar" .File.ContentBaseName) }}</span>
+        <strong style="font-family:'Montserrat',sans-serif; color:#0E5A43; font-size:.88em;">{{ $name }}</strong>
+        <span style="font-size:.78em; color:#888;">{{ len (where site.RegularPages ".Params.pillar" .File.ContentBaseName) }}</span>
       </a>
       {{- end }}
     {{- end }}
