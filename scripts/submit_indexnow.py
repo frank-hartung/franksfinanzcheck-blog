@@ -70,7 +70,7 @@ def submit(urls, key):
     body = json.dumps({
         "host": HOST,
         "key": key,
-        "keyLocation": f"https://{HOST}/franksfinanzcheck-blog/{key}.txt",
+        "keyLocation": f"https://{HOST}/{key}.txt",
         "urlList": urls,
     }).encode()
     req = urllib.request.Request(
