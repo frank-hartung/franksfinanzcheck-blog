@@ -94,21 +94,9 @@ jobs:
           fi
 
           # 4) GitHub-TLS-Zertifikat für franksfinanzcheck.de ausgestellt?
+          #    (ausgelagert in scripts/watchdog_check4_tls.py – robuster als Inline-Python)
           CERT_OK=0
-          if python3 -c "
-import ssl, socket
-try:
-    ctx = ssl.create_default_context()
-    with socket.create_connection(('185.199.108.153', 443), timeout=8) as sock:
-        with ctx.wrap_socket(sock, server_hostname='franksfinanzcheck.de') as tls:
-            cert = tls.getpeercert()
-            san = [v for k, v in cert.get('subjectAltName', [])]
-            if any('franksfinanzcheck.de' in s for s in san):
-                raise SystemExit(0)
-except Exception:
-    pass
-raise SystemExit(1)
-" 2>/dev/null; then
+          if python3 scripts/watchdog_check4_tls.py 2>/dev/null; then
             CERT_OK=1
           fi
           if [ "$CERT_OK" = "1" ]; then
