@@ -116,9 +116,7 @@
    "pillar": "versicherungen",
    "fixed": 0,
    "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
-   ],
+   "infos": [],
    "ok": true
   },
   {
