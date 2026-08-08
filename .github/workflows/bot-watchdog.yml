@@ -78,7 +78,7 @@ jobs:
           if [ -n "$LAST_SHA" ]; then
             NEWEST_SLUG=$(git show --stat --format="" "$LAST_SHA" | grep -o "content/posts/[^/]*" | sort -u | tail -1 | sed 's|content/posts/||')
             if [ -n "$NEWEST_SLUG" ]; then
-              STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "https://frank-hartung.github.io/franksfinanzcheck-blog/posts/${NEWEST_SLUG}/")
+              STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "https://franksfinanzcheck.de/posts/${NEWEST_SLUG}/")
               if [ "$STATUS" != "200" ]; then
                 PROBLEMS="$PROBLEMS
           - **Neuester Artikel nicht live (HTTP ${STATUS})** – ${NEWEST_SLUG} (Deploy prüfen)"

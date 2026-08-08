@@ -32,8 +32,8 @@ from post_utils import list_post_paths, slug_of
 KEY_FILE = os.path.join(BLOG_DIR, "scripts", "indexnow_key.txt")
 STATE_FILE = os.path.join(BLOG_DIR, ".indexnow_submitted.json")
 
-HOST = "frank-hartung.github.io"
-BASE_URL = f"https://{HOST}/franksfinanzcheck-blog"
+HOST = "franksfinanzcheck.de"
+BASE_URL = f"https://{HOST}"
 INDEXNOW = "https://api.indexnow.org/indexnow"
 
 

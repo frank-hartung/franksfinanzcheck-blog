@@ -82,7 +82,7 @@ def build_outreach(prospect, articles):
     topic = prospect.get("topic", "Finanzen")
     topic_kws = [t.strip() for t in topic.split(",")][:3]
     article = pick_best_article(articles, topic_kws)
-    art_url = f"https://frank-hartung.github.io/franksfinanzcheck-blog/posts/{article['slug']}/" if article else ""
+    art_url = f"https://franksfinanzcheck.de/posts/{article['slug']}/" if article else ""
     art_title = article["title"] if article else "unseren Ratgeber"
     name = prospect.get("name", "die Plattform")
     return (
@@ -96,7 +96,7 @@ def build_outreach(prospect, articles):
         f"Gerne liefere ich auch einen exklusiven Beitrag nur für euch.\n\n"
         f"Mein Blog: {art_url}\n\n"
         f"Beste Grüße\nFrank Hartung\nFranksFinanzcheck\n"
-        f"https://frank-hartung.github.io/franksfinanzcheck-blog/"
+        f"https://franksfinanzcheck.de/"
     )
 
 

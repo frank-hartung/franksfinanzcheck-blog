@@ -30,7 +30,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths
 
-BASE_URL = os.environ.get("BLOG_BASE_URL", "https://frank-hartung.github.io/franksfinanzcheck-blog")
+BASE_URL = os.environ.get("BLOG_BASE_URL", "https://franksfinanzcheck.de")
 API = "https://api.pinterest.com/v5"
 
 

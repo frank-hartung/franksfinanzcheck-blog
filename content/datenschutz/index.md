@@ -31,13 +31,15 @@ Diese Website nutzt **Affiliate-Partnerprogramme** (CHECK24, Tarifcheck) sowie e
 
 ### Hosting
 
-Diese Website wird bei einem externen Dienstleister gehostet: **GitHub Pages** (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. GitHub unterhält Serverstandorte auch außerhalb der EU; eine Verarbeitung der IP-Adresse kann daher außerhalb der EU (insbesondere in den USA) erfolgen. Mit dem Hoster besteht eine Auftragsverarbeitungsvereinbarung (Standardvertragsklauseln gemäß Art. 46 DSGVO).
+Diese Website wird bei einem externen Dienstleister gehostet: **GitHub Pages** (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA), erreichbar unter **franksfinanzcheck.de**. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. GitHub unterhält Serverstandorte auch außerhalb der EU; eine Verarbeitung der IP-Adresse kann daher außerhalb der EU (insbesondere in den USA) erfolgen. Mit dem Hoster besteht eine Auftragsverarbeitungsvereinbarung (Standardvertragsklauseln gemäß Art. 46 DSGVO).
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren, stabilen und effizienten Bereitstellung der Website). Mit dem Hoster wird ein **Auftragsverarbeitungsvertrag (AVV)** gemäß Art. 28 DSGVO geschlossen.
 
-### Content-Auslieferung (ohne Drittanbieter-CDN)
+### Content-Delivery-Network (Cloudflare)
 
-Alle **statischen Dateien** (Titelbilder der Artikel, Schriftarten, Favicon) werden **direkt von unserem Hosting (GitHub Pages)** ausgeliefert. Es wird **kein externes Content-Delivery-Network eines Drittanbieters** (z. B. jsDelivr, Cloudflare, Google) verwendet. Es findet daher keine Datenübermittlung an zusätzliche CDN-Anbieter statt; für die Auslieferung gelten allein die Angaben zum Hosting (Abschnitt 2, „Hosting").
+Zur Auslieferung der Website wird das Content-Delivery-Network (CDN) **Cloudflare** (Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA) eingesetzt. Beim Abruf einer Seite wird deine IP-Adresse sowie technische Daten (Browsertyp, Betriebssystem, Referrer, Uhrzeit der Anfrage) an die Server von Cloudflare übermittelt. Cloudflare betreibt Serverstandorte weltweit; eine Verarbeitung der IP-Adresse kann daher auch außerhalb der EU (insbesondere in den USA) erfolgen. Cloudflare bietet ein Datenverarbeitungsabkommen an und verarbeitet die Daten nach eigenen Angaben ausschließlich zur Auslieferung der angeforderten Inhalte und zur Fehleranalyse – nicht zu Werbezwecken.
+
+**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer schnellen und zuverlässigen Auslieferung der Website-Inhalte). Weitere Informationen: [www.cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/).
 
 ### Schriftarten (lokal gehostet)
 
