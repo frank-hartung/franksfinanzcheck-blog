@@ -94,6 +94,7 @@ TARIF_SLUG_DEEP = {
     "reisekrankenversicherung-wann-lohnt": "reisekrankenversicherung",
     "zahnzusatzversicherung-lohnt-sich": "zahnzusatzversicherung",
     "private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt": "unfallversicherung",
+    "2026-08-08-dein-tier-im-krankheitsfall": "hundeversicherung",
 }
 TARIF_PILLAR_DEEP = {
     "versicherungen": None,  # generisch erlaubt, wenn kein Slug-Deep passt

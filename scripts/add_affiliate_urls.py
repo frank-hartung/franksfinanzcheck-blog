@@ -36,7 +36,8 @@ RULES = [
     (r"reisekranken", tarif_url("reisekrankenversicherung")),
     (r"zahnzusatz|krankenzusatz", tarif_url("zahnzusatzversicherung")),
     (r"unfallversicherung", tarif_url("unfallversicherung")),
-    (r"tier|umzug", tarif_url()),
+    (r"tier|hund|katze", tarif_url("hundeversicherung")),
+    (r"umzug", tarif_url()),
 ]
 
 

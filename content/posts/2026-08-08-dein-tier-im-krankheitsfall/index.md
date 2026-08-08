@@ -53,6 +53,8 @@ Du kündigst deinen Vertrag unter Einhaltung der vertraglichen Fristen. Meist be
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18)
+👉 **Jetzt vergleichen und sparen:** [**→ Hundekrankenversicherung vergleichen**](https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hundeversicherung)
+
+*Hinweis: Bei dem angebotenen Tarif handelt es sich um eine **Hundekrankenversicherung** – Katzen sind nicht abgedeckt. Für deinen Hund kannst du hier Leistungen und Preise direkt vergleichen.*
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
