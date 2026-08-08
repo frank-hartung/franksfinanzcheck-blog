@@ -12,7 +12,7 @@ cover:
   image: "images/covers/last-minute-urlaubsangebote-sichern.jpg"
   alt: "Last-Minute Urlaubsangebote: Traumurlaub günstig buchen"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Du kannst Last-Minute-Angebote oft mit Rabatten von bis zu 50&nbsp;% finden. Diese Schnäppchen werden in der Regel kurzfristig von Reiseveranstaltern angeboten. Im Sommer und Spätsommer kannst du besonders günstige Angebote für All-inclusive-Reisen finden, wenn du flexibel bist."
+kurzantwort: "Du kannst Last-Minute-Angebote oft mit Rabatten von bis zu 50 % finden. Diese Schnäppchen werden in der Regel kurzfristig von Reiseveranstaltern angeboten. Im Sommer und Spätsommer kannst du besonders günstige Angebote für All-inclusive-Reisen finden, wenn du flexibel bist."
 ---Sparst du bei deiner nächsten Reise bereits 40 Prozent oder zahlst du noch den vollen Preis? Kurzentschlossene sichern sich oft enorme Preisvorteile durch Restkontingente der Reiseveranstalter. Mit der richtigen Taktik verwandelst du leere Hotelbetten in deinen persönlichen Preisvorteil. Ein Last Minute Urlaub schont dein Budget und maximiert dein Erlebnis ohne Qualitätsverlust.
 
 ### Das Wichtigste in Kürze

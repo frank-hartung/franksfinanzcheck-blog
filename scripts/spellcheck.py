@@ -192,7 +192,7 @@ def load_articles(files=None):
         anrede_raw = get("anrede").strip('"').lower()
         arts.append({
             "file": os.path.relpath(path, POSTS_DIR), "path": path,
-            "title": get("title"), "description": get("description"),
+            "title": get("title"), "description": get("description"), "kurzantwort": get("kurzantwort"),
             "fm": fm, "body": body, "content": content,
             "anrede_sie": anrede_raw in ("sie", "sie-form", "höflich"),
         })
@@ -287,9 +287,6 @@ def analyze_article(a, whitelist):
                 "reason": f"Phrase: „{m.group(0)}“ → „{fix}“",
             })
     words = extract_words(body, whitelist)
-    if not words:
-        return problems
-
     word_list = [w for w, _, _ in words]
     bad = batch_hunspell(word_list)
 
@@ -601,7 +598,33 @@ def analyze_article(a, whitelist):
                             "reason": f"Description: Substantive klein „{w}“ → „{cap}“",
                         })
 
+    # 3b. KURZANTWORT im Frontmatter mitprüfen (Featured-Snippet-Text!):
+    #     Entities (&nbsp;, &amp;) dürfen NICHT als sichtbarer Text erscheinen,
+    #     typische KI-Fehler ("less als") werden gefunden.
+    kurz = a.get("kurzantwort", "")
+    if kurz:
+        kstart = a["content"].find("kurzantwort:")
+        if kstart >= 0:
+            q = a["content"].find('"', kstart + 12)
+            if q >= 0:
+                kabs = q + 1
+                if "&nbsp;" in kurz:
+                    problems.append({"type": "entity", "word": "&nbsp;", "fix": " ",
+                                     "abs_start": kabs + kurz.find("&nbsp;"),
+                                     "abs_end": kabs + kurz.find("&nbsp;") + 6,
+                                     "conf": 1.0, "reason": "Kurzantwort: &nbsp; als sichtbarer Text → Leerzeichen"})
+                if "&amp;" in kurz:
+                    problems.append({"type": "entity", "word": "&amp;", "fix": "&",
+                                     "abs_start": kabs + kurz.find("&amp;"),
+                                     "abs_end": kabs + kurz.find("&amp;") + 5,
+                                     "conf": 1.0, "reason": "Kurzantwort: &amp; als sichtbarer Text → &"})
+                for mm in re.finditer(r"\bless als\b", kurz, re.I):
+                    problems.append({"type": "phrase", "word": mm.group(0), "fix": "weniger als",
+                                     "abs_start": kabs + mm.start(), "abs_end": kabs + mm.end(),
+                                     "conf": 1.0, "reason": "Kurzantwort: „less als“ → „weniger als“"})
+
     return problems
+
 
 
 def apply_fix(a, problem):
