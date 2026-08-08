@@ -86,6 +86,16 @@ def main():
             fail += 1
             continue
         answer = answer.strip().replace("\n", " ")
+        # BERREINIGUNG (Top-Level): HTML-Entities & bekannte KI-Fehler entfernen.
+        # Sonst erscheinen sie im Frontmatter/HTML als sichtbarer Text.
+        answer = answer.replace("&nbsp;", " ").replace("&amp;", "&")
+        answer = re.sub(r"\bless als\b", "weniger als", answer, flags=re.I)
+        answer = re.sub(r"\s+", " ", answer).strip()
+        # Validierung: keine Entities, keine offensichtlichen Fehler
+        if any(bad in answer for bad in ["&nbsp;", "&amp;", "less als", "  "]):
+            print(f"  ⚠ Antwort nach Bereinigung noch fehlerhaft: {os.path.basename(os.path.dirname(path))}")
+            fail += 1
+            continue
         set_kurzantwort(path, answer)
         ok += 1
         print(f"  ✓ {os.path.basename(os.path.dirname(path))[:50]} → {answer[:60]}…")
