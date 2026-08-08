@@ -39,6 +39,7 @@ import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+from post_utils import list_post_paths
 TRACKING_FILE = os.path.join(BLOG_DIR, ".article_updates.json")
 REPORT_FILE = os.path.join(BLOG_DIR, "ARTIKEL-UPDATE-REPORT.md")
 CACHE_FILE = os.path.join(BLOG_DIR, ".update_cache.json")
@@ -65,10 +66,7 @@ STAND_PATTERNS = [
 def load_articles():
     """Lädt alle Artikel mit Frontmatter + Body + Metadaten."""
     arts = []
-    for fn in sorted(os.listdir(POSTS_DIR)):
-        if not fn.endswith(".md"):
-            continue
-        path = os.path.join(POSTS_DIR, fn)
+    for path in list_post_paths():
         content = open(path, encoding="utf-8").read()
         parts = content.split("---", 2)
         if len(parts) < 3:

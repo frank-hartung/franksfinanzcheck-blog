@@ -16,6 +16,7 @@ import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+from post_utils import list_post_paths, slug_of
 OUT_DIR = os.path.join(BLOG_DIR, "static", "images", "covers")
 
 # --- Farben aus dem Masterplan ---
@@ -248,13 +249,13 @@ def ensure_responsive_variants(out_path):
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
-    files = sorted(f for f in os.listdir(POSTS_DIR) if f.endswith(".md"))
+    files = list_post_paths()
     covers = 0
     frontmatter = 0
     variants = 0
-    for fn in files:
-        slug = fn[:-3]
-        with open(os.path.join(POSTS_DIR, fn), encoding="utf-8") as f:
+    for path in files:
+        slug = slug_of(path)
+        with open(path, encoding="utf-8") as f:
             content = f.read()
         m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
         title = (m.group(1) if m else slug).strip()
@@ -264,7 +265,7 @@ def main():
             covers += 1
         if ensure_responsive_variants(out_path):
             variants += 1
-        if ensure_cover_in_frontmatter(os.path.join(POSTS_DIR, fn), slug):
+        if ensure_cover_in_frontmatter(path, slug):
             frontmatter += 1
     print(f"\nFertig: {covers} Cover erstellt, {frontmatter} Frontmatter ergänzt, "
           f"{variants} responsive Varianten nachgezogen "

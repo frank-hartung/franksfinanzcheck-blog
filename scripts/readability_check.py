@@ -85,7 +85,7 @@ def load_article(path):
     body = re.sub(r'\s*\n\s*', '\n', body)
     body = re.sub(r'\n+', '\n', body)
     body = re.sub(r'\s+', ' ', body)
-    return {'file': os.path.basename(path), 'body': body}
+    return {'file': os.path.relpath(path, POSTS_DIR), 'body': body}
 
 
 def count_syllables(word):
@@ -195,7 +195,10 @@ def main():
     files = None
     if '--file' in sys.argv:
         files = [sys.argv[sys.argv.index('--file') + 1]]
-    paths = files or sorted(glob.glob(os.path.join(POSTS_DIR, '*.md')))
+    paths = files or sorted(
+        glob.glob(os.path.join(POSTS_DIR, "*.md"))
+        + glob.glob(os.path.join(POSTS_DIR, "*", "index.md"))
+    )
 
     if new_only:
         # Nur Artikel, die heute publiziert wurden (draft ausgeschlossen)

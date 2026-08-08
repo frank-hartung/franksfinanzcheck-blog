@@ -13,6 +13,7 @@ import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+from post_utils import list_post_paths
 
 
 def publish(path):
@@ -36,7 +37,7 @@ def main():
         print(__doc__)
         sys.exit(1)
     if args == ["--all"]:
-        files = sorted(glob.glob(os.path.join(POSTS_DIR, "*.md")))
+        files = list_post_paths()
         print(f"Veröffentliche alle {len(files)} Artikel in {POSTS_DIR}:")
         count = sum(publish(f) for f in files)
     else:

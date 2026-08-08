@@ -31,6 +31,7 @@ import json
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+from post_utils import list_post_paths
 THRESHOLD = 80
 
 # Typische KI-Floskeln – disqualifizieren einzelne Punkte (je -8)
@@ -244,8 +245,7 @@ def main():
     if "--file" in sys.argv:
         files = [sys.argv[sys.argv.index("--file") + 1]]
     else:
-        files = [os.path.join(POSTS_DIR, f) for f in sorted(os.listdir(POSTS_DIR))
-                 if f.endswith(".md")]
+        files = list_post_paths()
     as_json = "--json" in sys.argv
 
     results = []

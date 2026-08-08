@@ -28,6 +28,7 @@ import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+from post_utils import list_post_paths
 
 BASE_URL = os.environ.get("BLOG_BASE_URL", "https://frank-hartung.github.io/franksfinanzcheck-blog")
 API = "https://api.pinterest.com/v5"
@@ -36,10 +37,7 @@ API = "https://api.pinterest.com/v5"
 def load_posts():
     """Liest alle Artikel mit pinned-Flag."""
     posts = []
-    for fn in sorted(os.listdir(POSTS_DIR)):
-        if not fn.endswith(".md"):
-            continue
-        path = os.path.join(POSTS_DIR, fn)
+    for path in list_post_paths():
         content = open(path, encoding="utf-8").read()
         m = re.search(r"^title:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
         d = re.search(r"^description:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)

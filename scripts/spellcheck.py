@@ -170,6 +170,7 @@ def load_articles(files=None):
     arts = []
     paths = files or sorted(
         glob.glob(os.path.join(POSTS_DIR, "*.md"))
+        + glob.glob(os.path.join(POSTS_DIR, "*", "index.md"))
         + glob.glob(os.path.join(BLOG_DIR, "content", "pillar", "*", "index.md"))
     )
     for path in paths:
