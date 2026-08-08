@@ -153,6 +153,27 @@ jobs:
             echo "✅ Affiliate-Fixes gepusht"
           fi
 
+      - name: Cover-Validierung (alle Varianten – VOLLAUTOMATISCH)
+        # Prüft für jeden Post, dass ALLE Cover-Varianten (620/720/avif/webp
+        # + responsive) existieren. --fix zieht fehlende Varianten automatisch
+        # nach (verhindert 404 im <picture>-srcset). Exit 1 → Workflow-Abbruch.
+        run: |
+          python3 scripts/check_covers.py --fix | tee /tmp/cov_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Cover-Fixes committen
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add static/images/covers/
+          if git diff --cached --quiet; then
+            echo "Keine Cover-Änderungen."
+          else
+            git commit -m "seo: Cover-Varianten nachgezogen (vollautomatisch)"
+            git push
+            echo "✅ Cover-Fixes gepusht"
+          fi
+
       - name: Meta-Qualitäts-Gate (Re-Audit + Report – VOLLAUTOMATISCH)
         # Prüft nach der Optimierung ALLE Artikel erneut und erzeugt
         # META-REPORT.md. Exit 0 = alles grün (kein Handlungsbedarf),

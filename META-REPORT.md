@@ -6,7 +6,7 @@
 
 | Kennzahl | Wert |
 |---|---|
-| Artikel geprüft | 37 |
+| Artikel geprüft | 38 |
 | Ø Qualitätsscore | **100/100** |
 | Ø Titel-Länge | 55 Zeichen (optimal 50–60) |
 | Ø Description-Länge | 141 Zeichen (optimal 120–160) |
@@ -22,6 +22,7 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 
 | Score | Artikel | Titel | Desc | Keywords | Status |
 |---|---|---|---|---|---|
+| 100 | ETF-Sparplan für Einsteiger: So startest du m | 53 | 156 | 3 | ✅ |
 | 100 | Internet-Turbo: Warum ich meinen DNS-Server g | 58 | 148 | 3 | ✅ |
 | 100 | Frugalismus im Alltag: So sparst du jeden Mon | 58 | 137 | 4 | ✅ |
 | 100 | Turbo fürs Netz: DNS-Wechsel für schnelleres  | 53 | 134 | 3 | ✅ |
@@ -61,4 +62,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Zahnzusatzversicherung: Wann sich der Abschlu | 53 | 141 | 5 | ✅ |
 
 ---
-*Erzeugt am 2026-08-08 um 12:06 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-08 um 14:21 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
