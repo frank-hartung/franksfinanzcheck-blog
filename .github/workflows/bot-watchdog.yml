@@ -69,19 +69,28 @@ jobs:
             echo "CHECK2=OK" >> "$GITHUB_ENV"
           fi
 
-          # 3) Live-Site aktuell? (letzter Content-Commit-SHA in ?v= auf der Site)
+          # 3) Live-Site aktuell? Der robusteste Check: den NEUESTEN Artikel aus
+          #    dem letzten Content-Commit nehmen und seine Live-URL per HTTP
+          #    prüfen (HTTP 200 = veröffentlicht). (Kein ?v=-SHA-Abgleich –
+          #    die Seite nutzt den Deploy-SHA als Cache-Buster, nicht den
+          #    Content-SHA → der frühere Check war ein False-Positive-Risiko.)
           LAST_SHA=$(git log -1 --format=%h --grep="^content:" || true)
           if [ -n "$LAST_SHA" ]; then
-            LIVE=$(curl -s --max-time 20 "https://frank-hartung.github.io/franksfinanzcheck-blog/?cb=watchdog" | grep -o "v=${LAST_SHA}" | head -1)
-            if [ -z "$LIVE" ]; then
-              PROBLEMS="$PROBLEMS
-          - **Live-Site evtl. veraltet** – Commit ${LAST_SHA} nicht in den Asset-URLs gefunden (Deploy prüfen)"
-              echo "CHECK3=FAIL" >> "$GITHUB_ENV"
+            NEWEST_SLUG=$(git show --stat --format="" "$LAST_SHA" | grep -o "content/posts/[^/]*" | sort -u | tail -1 | sed 's|content/posts/||')
+            if [ -n "$NEWEST_SLUG" ]; then
+              STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "https://frank-hartung.github.io/franksfinanzcheck-blog/posts/${NEWEST_SLUG}/")
+              if [ "$STATUS" != "200" ]; then
+                PROBLEMS="$PROBLEMS
+          - **Neuester Artikel nicht live (HTTP ${STATUS})** – ${NEWEST_SLUG} (Deploy prüfen)"
+                echo "CHECK3=FAIL" >> "$GITHUB_ENV"
+              else
+                echo "CHECK3=OK (${NEWEST_SLUG} → 200)"
+              fi
             else
-              echo "CHECK3=OK" >> "$GITHUB_ENV"
+              echo "CHECK3=SKIP (kein Slug im Commit)"
             fi
           else
-            echo "CHECK3=SKIP" >> "$GITHUB_ENV"
+            echo "CHECK3=SKIP (kein Content-Commit)"
           fi
 
           echo "$PROBLEMS" > /tmp/problems.txt
