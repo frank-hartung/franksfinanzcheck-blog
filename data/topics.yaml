@@ -554,3 +554,67 @@ topics:
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
     keywords: ["Stromspar-Apps", "Haushalt", "Test"]
     pillar: "strom-sparen"
+
+  - title: "Jahreskosten fürs Auto minimieren"
+    keywords: ["Autokosten", "Versicherungen", "Kraftstoff"]
+    pillar: "frugalismus"
+
+  - title: "Günstige Reisezeitpunkte für den Urlaub"
+    keywords: ["Reise", "Urlaub", "SparTipps"]
+    pillar: "mietwagen"
+
+  - title: "Die richtige Absicherung für dein Haus"
+    keywords: ["Haus", "Versicherung", "Schutz"]
+    pillar: "versicherungen"
+
+  - title: "Internet-Tarife im Vergleich"
+    keywords: ["Internet", "Tarif", "Vergleich"]
+    pillar: "internet-dsl"
+
+  - title: "Kreditkarten mit guten Leistungen"
+    keywords: ["Kreditkarte", "Leistungen", "Vorteile"]
+    pillar: "konto-karten"
+
+  - title: "Energiekosten senken mit kleinen Veränderungen"
+    keywords: ["Energie", "Kosten", "SparTipps"]
+    pillar: "strom-sparen"
+
+  - title: "Preiswerter DSL-Anschluss für Zuhause"
+    keywords: ["DSL", "Anschluss", "Preiswert"]
+    pillar: "internet-dsl"
+
+  - title: "Reiseversicherungen im Test"
+    keywords: ["Reise", "Versicherung", "Test"]
+    pillar: "versicherungen"
+
+  - title: "Wie du deine monatlichen Ausgaben reduzieren kannst"
+    keywords: ["Ausgaben", "Reduzieren", "SparTipps"]
+    pillar: "frugalismus"
+
+  - title: "Günstige Tarife fürs Handy"
+    keywords: ["Handy", "Tarife", "Günstig"]
+    pillar: "internet-dsl"
+
+  - title: "Checkliste für den Kauf einer Hausratversicherung"
+    keywords: ["Hausrat", "Versicherung", "Checkliste"]
+    pillar: "versicherungen"
+
+  - title: "Die besten Kreditkarten für Reisen"
+    keywords: ["Kreditkarte", "Reise", "Vorteile"]
+    pillar: "konto-karten"
+
+  - title: "Energieeffizienz zu Hause verbessern"
+    keywords: ["Energie", "Effizienz", "Zuhause"]
+    pillar: "strom-sparen"
+
+  - title: "Jahresvergleich für deine Versicherungen"
+    keywords: ["Versicherung", "Vergleich", "Jahresvergleich"]
+    pillar: "versicherungen"
+
+  - title: "Günstige Angebote für Internet und TV"
+    keywords: ["Internet", "TV", "Günstig"]
+    pillar: "internet-dsl"
+
+  - title: "SparTipps für den Alltag"
+    keywords: ["SparTipps", "Alltag", "Geld"]
+    pillar: "frugalismus"
