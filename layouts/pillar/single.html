@@ -30,11 +30,11 @@
         {{- $rFile = path.Base $rCover }}{{ $rDir = path.Dir $rCover }}
         {{- $rBase = strings.TrimSuffix (path.Ext $rFile) $rFile }}
       {{- end }}
-      <a href="../../posts/{{ .File.ContentBaseName }}/" aria-label="Weiterlesen: {{ .Title }}"
+      <a href="../../posts/{{ .File.ContentBaseName }}/" aria-label="Weiterlesen: {{ .Title | plainify }}"
          style="display:flex; flex-direction:column; background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; overflow:hidden; text-decoration:none; box-shadow:0 1px 4px rgba(0,0,0,.06); transition:transform .18s ease, box-shadow .18s ease;">
         {{- if $rCover }}
         <span style="display:block; position:relative;">
-          <img loading="lazy" src="{{ partial "asset_url.html" (printf "%s/620/%s" $rDir $rFile) }}" alt="{{ .Params.cover.alt | default .Title }}"
+          <img loading="lazy" src="{{ partial "asset_url.html" (printf "%s/620/%s" $rDir $rFile) }}" alt="{{ .Params.cover.alt | default .Title | plainify }}"
                width="620" height="930" style="width:100%; height:auto; display:block;">
         </span>
         {{- else }}
