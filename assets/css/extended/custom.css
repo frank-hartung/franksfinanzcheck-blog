@@ -99,6 +99,21 @@ h1, h2, h3, h4, h5, h6,
     box-shadow: 0 4px 18px rgba(14, 90, 67, 0.25);
 }
 
+/* Textfarbe: WEISS auf dem grünen Verlauf (muss immer greifen –
+   wurde beim LCP-Fix kurz verloren, daher hier explizit als Basis) */
+.home-info h1 {
+    color: var(--ff-white);
+    font-weight: 700;
+    font-size: 1.55em;
+    margin-bottom: 8px;
+}
+
+.home-info .entry-content {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.95em;
+    line-height: 1.55;
+}
+
 /* Mobile: Home-Info kompakt, damit das erste Cover (LCP-Element) in den
    Viewport kommt und nicht der Text (mit Font-Wait) LCP wird. */
 @media (max-width: 600px) {
