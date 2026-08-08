@@ -86,13 +86,16 @@ def main():
             fail += 1
             continue
         answer = answer.strip().replace("\n", " ")
-        # BERREINIGUNG (Top-Level): HTML-Entities & bekannte KI-Fehler entfernen.
-        # Sonst erscheinen sie im Frontmatter/HTML als sichtbarer Text.
-        answer = answer.replace("&nbsp;", " ").replace("&amp;", "&")
-        answer = re.sub(r"\bless als\b", "weniger als", answer, flags=re.I)
+        # BERREINIGUNG (Top-Level): Whitespace kollabieren, HTML-Entities in
+        # geschützte Leerzeichen (U+00A0) wandeln, KI-Fehler entfernen.
+        # Sonst erscheinen sie im Frontmatter/HTML als sichtbarer Text bzw.
+        # bricht der Browser zwischen Zahl und Einheit um.
         answer = re.sub(r"\s+", " ", answer).strip()
-        # Validierung: keine Entities, keine offensichtlichen Fehler
-        if any(bad in answer for bad in ["&nbsp;", "&amp;", "less als", "  "]):
+        answer = answer.replace("&nbsp;", "\u00a0").replace("&amp;", "&")
+        answer = re.sub(r"\bless als\b", "weniger als", answer, flags=re.I)
+        answer = re.sub(r"\d[ \u00a0]+[%€]", lambda m: m.group(0)[0] + "\u00a0" + m.group(0)[-1], answer)
+        # Validierung: keine Entities, kein normales Leerzeichen vor %/€, keine offensichtlichen Fehler
+        if any(bad in answer for bad in ["&nbsp;", "&amp;", "less als", "  "]) or re.search(r"\d[ \u00a0]* [ \u00a0]*[%€]", answer):
             print(f"  ⚠ Antwort nach Bereinigung noch fehlerhaft: {os.path.basename(os.path.dirname(path))}")
             fail += 1
             continue

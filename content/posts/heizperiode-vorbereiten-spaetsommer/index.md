@@ -12,7 +12,7 @@ cover:
   image: "images/covers/heizperiode-vorbereiten-spaetsommer.jpg"
   alt: "Heizperiode vorbereiten: 3 wichtige Dinge für den August"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Du musst im August deine Heizanlage warten lassen, um sicherzustellen, dass sie effizient und sicher läuft. Eine regelmäßige Wartung kann bis zu 20 % Energiekosten sparen. Überprüfe auch deine Dämmung, um Wärmeverluste zu minimieren."
+kurzantwort: "Du musst im August deine Heizanlage warten lassen, um sicherzustellen, dass sie effizient und sicher läuft. Eine regelmäßige Wartung kann bis zu 20 % Energiekosten sparen. Überprüfe auch deine Dämmung, um Wärmeverluste zu minimieren."
 ---Wusstest du, dass du im August hunderte Euro an Energiekosten sparst? Während andere die Sonne genießen, sicherst du dir jetzt die besten Konditionen für den Winter. Wer frühzeitig die Heizperiode vorbereiten will, handelt sofort. So vermeidest du böse Überraschungen bei der nächsten Abrechnung. Diese drei Schritte bringen dir sofort finanzielle Vorteile.
 
 Das Wichtigste in Kürze:

@@ -12,7 +12,7 @@ cover:
   image: "images/covers/mietwagen-buchen-so-sparst-du.jpg"
   alt: "Günstigen Mietwagen buchen: So sparst du im Urlaub"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Du sparst Geld, wenn du deinen Mietwagen früh buchst und Vollkasko ohne Selbstbeteiligung wählst. Eine frühzeitige Buchung kann dir ca. 10–20 % des Preises sparen. Vergleiche auch die Abholstationen, um die günstigste Option zu finden."
+kurzantwort: "Du sparst Geld, wenn du deinen Mietwagen früh buchst und Vollkasko ohne Selbstbeteiligung wählst. Eine frühzeitige Buchung kann dir ca. 10–20 % des Preises sparen. Vergleiche auch die Abholstationen, um die günstigste Option zu finden."
 ---Ein Mietwagen kann den Urlaub flexibel machen, aber auch schnell zum Kostenfresser werden, wenn du am falschen Ende sparst. Wer einen Mietwagen buchen möchte, sollte früh vergleichen – Du kannst günstig und trotzdem sicher fahren, wenn du ein paar Regeln beachtest. Dieser Ratgeber zeigt dir, wie du den besten Mietwagen-Preis findest, ohne in die klassischen Fallen zu tappen.
 
 ## Die goldene Regel: Früh buchen und vergleichen

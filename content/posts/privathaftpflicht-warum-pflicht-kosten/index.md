@@ -12,7 +12,7 @@ cover:
   image: "images/covers/privathaftpflicht-warum-pflicht-kosten.jpg"
   alt: "Privathaftpflicht: Warum sie Pflicht ist und was sie kostet"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Die Privathaftpflicht deckt Schäden an anderen Personen oder Sachen ab, die du versehentlich verursachst. Sie kostet in der Regel ca. 50–150 € im Jahr. Damit schützt du dein Vermögen vor möglichen finanziellen Ruinierungen bei Schadensfällen."
+kurzantwort: "Die Privathaftpflicht deckt Schäden an anderen Personen oder Sachen ab, die du versehentlich verursachst. Sie kostet in der Regel ca. 50–150 € im Jahr. Damit schützt du dein Vermögen vor möglichen finanziellen Ruinierungen bei Schadensfällen."
 ---Du öffnest versehentlich die Tür zu schnell und triffst den Nachbarn, der die Treppe herunterfällt. Der Schaden: mehrere zehntausend Euro. Ohne Privathaftpflicht bleibst du auf den Kosten sitzen – und musst womöglich dein Leben lang abzahlen. Diese Versicherung ist die wichtigste überhaupt, weil sie genau solche Fälle abdeckt. Und sie kostet weniger als ein Kinobesuch pro Monat.
 
 ## Was die Privathaftpflicht abdeckt

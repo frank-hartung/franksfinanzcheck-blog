@@ -38,7 +38,7 @@
       <span style="font-size:1.3em; line-height:1.2;" aria-hidden="true">💡</span>
       <div>
         <strong style="font-family:'Montserrat',sans-serif; color:#0E5A43; font-size:.85em; display:block; margin-bottom:4px;">Kurz &amp; knapp – die Antwort</strong>
-        <span style="font-size:.95em; line-height:1.55; color:#222;">{{ .Params.kurzantwort }}</span>
+        <span style="font-size:.95em; line-height:1.55; color:#222;">{{ .Params.kurzantwort | partial "nbsp_sicherung.html" }}</span>
       </div>
     </div>
   </div>
@@ -52,8 +52,8 @@
   {{- if .Content }}
   <div class="post-content md-content">
     {{- if not (.Param "disableAnchoredHeadings") }}
-    {{- partial "anchored_headings.html" .Content -}}
-    {{- else }}{{ .Content }}{{ end }}
+    {{- partial "anchored_headings.html" ((.Content | partial "nbsp_sicherung.html") | safeHTML) -}}
+    {{- else }}{{ (.Content | partial "nbsp_sicherung.html") | safeHTML }}{{ end }}
   </div>
   {{- end }}
 

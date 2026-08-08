@@ -1,5 +1,5 @@
 ---
-title: "5 Frugalismus-Tricks: So sparst du 200 € pro Monat"
+title: "5 Frugalismus-Tricks: So sparst du 200 € pro Monat"
 description: "5 praxiserprobte Frugalismus-Tricks, mit denen du sofort im Alltag Geld sparst: von der 50-30-20-Regel bis zu smarter Vorratshaltung – ohne Verzicht."
 date: 2026-08-04
 draft: false
@@ -10,9 +10,9 @@ keywords: ["Frugalismus Tipps", "Geld sparen im Alltag", "Haushaltsbuch führen"
 author: "Frank"
 cover:
   image: "images/covers/frugalismus-tricks-alltag-200-euro-sparen.jpg"
-  alt: "5 Frugalismus-Tricks: So sparst du 200 € pro Monat"
+  alt: "5 Frugalismus-Tricks: So sparst du 200 € pro Monat"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Du kannst mit der 50-30-20-Regel beginnen, bei der 50 % deines Einkommens für feste Ausgaben, 30 % für freie Ausgaben und 20 % für Sparvermögen verwendet werden. So sparst du effektiv Geld, ohne großen Verzicht leisten zu müssen. Mit diesen Tricks kannst du bis zu 200 € pro Monat sparen."
+kurzantwort: "Du kannst mit der 50-30-20-Regel beginnen, bei der 50 % deines Einkommens für feste Ausgaben, 30 % für freie Ausgaben und 20 % für Sparvermögen verwendet werden. So sparst du effektiv Geld, ohne großen Verzicht leisten zu müssen. Mit diesen Tricks kannst du bis zu 200 € pro Monat sparen."
 ---Wie viel Geld bleibt am Ende des Monats auf deinem Konto wirklich übrig? Mit nur fünf Hebeln aktivierst du ein Sparpotenzial von 200 Euro und mehr, ohne deine Lebensqualität zu opfern. Frugalismus bedeutet nicht Verzicht, sondern kluge Entscheidungen für deine finanzielle Freiheit. Diese **Frugalismus Tipps** helfen dir, deine Ausgaben sofort zu optimieren.
 
 ### Das Wichtigste in Kürze

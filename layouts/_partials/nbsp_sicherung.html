@@ -1,0 +1,13 @@
+{{- /* ============================================================
+     nbsp_sicherung.html – LETZTE VERTEIDIGUNGSLINIE
+     Ersetzt ein normales Leerzeichen zwischen Ziffer und % bzw. €
+     durch ein geschütztes Leerzeichen (U+00A0). Damit kann der Browser
+     NIE zwischen Zahl und Einheit umbrechen („10 %" / „50 €").
+     Wird auf .Content, Kurzantworten und Summaries angewendet.
+     Bereits geschützte Leerzeichen bleiben unangetastet.
+     ============================================================ */ -}}
+{{- $nbsp := htmlUnescape "&nbsp;" -}}
+{{- $t := . -}}
+{{- $t = $t | replaceRE "([0-9]) %" (printf "$1%s%%" $nbsp) -}}
+{{- $t = $t | replaceRE "([0-9]) €" (printf "$1%s€" $nbsp) -}}
+{{- return $t -}}

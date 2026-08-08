@@ -12,7 +12,7 @@ cover:
   image: "images/covers/mietwagen-fallen-vermeiden.jpg"
   alt: "Mietwagen-Fallen vermeiden: Versicherung & Kaution im Urlaub"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Versteckte Kosten beim Mietwagen können schnell 20 € pro Tag oder mehr betragen. Du solltest immer die Versicherungsbedingungen genau prüfen, bevor du den Mietwagen buchst. Eine umfassende Reiseversicherung kann dich vor teuren Zusatzkosten schützen."
+kurzantwort: "Versteckte Kosten beim Mietwagen können schnell 20 € pro Tag oder mehr betragen. Du solltest immer die Versicherungsbedingungen genau prüfen, bevor du den Mietwagen buchst. Eine umfassende Reiseversicherung kann dich vor teuren Zusatzkosten schützen."
 ---Der Mietwagen-Schalter am Flughafen ist der Ort, an dem Urlaubsbudgets am häufigsten kippen. Was online nach einem Schnäppchen aussah, wird vor Ort schnell teuer – wenn du die Fallen nicht kennst. Du kannst bis zu 200 Euro pro Tag sparen, wenn du die folgenden Tipps beachtest.
 
 ## Falle 1: Die unverständliche Versicherungslage

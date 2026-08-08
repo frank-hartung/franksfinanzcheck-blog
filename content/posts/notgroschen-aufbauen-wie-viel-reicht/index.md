@@ -12,7 +12,7 @@ cover:
   image: "images/covers/notgroschen-aufbauen-wie-viel-reicht.jpg"
   alt: "Notgroschen aufbauen: Wie viel Geld reicht wirklich?"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Du solltest etwa 3-6 Monatsgehälter auf der hohen Kante haben, um finanziell abgesichert zu sein. Das ermöglicht dir, unerwartete Ausgaben zu decken, ohne in finanzielle Schwierigkeiten zu geraten. In der Regel reicht ein Betrag von 5.000 € bis 15.000 € aus, um einen solchen Notgroschen zu bilden."
+kurzantwort: "Du solltest etwa 3-6 Monatsgehälter auf der hohen Kante haben, um finanziell abgesichert zu sein. Das ermöglicht dir, unerwartete Ausgaben zu decken, ohne in finanzielle Schwierigkeiten zu geraten. In der Regel reicht ein Betrag von 5.000 € bis 15.000 € aus, um einen solchen Notgroschen zu bilden."
 ---Die Waschmaschine gibt den Geist auf, das Auto braucht neue Reifen, und der Zahnarzt schickt eine Rechnung – du landest ohne Notgroschen schnell auf dem Dispo. Einen Notgroschen aufzubauen ist der wichtigste erste Schritt der Finanzplanung – Der Aufbau einer Sicherheitsreserve ist einfacher, als viele denken. Du brauchst eine Strategie, um deine Finanzen zu sichern.
 
 ## Wie viel Notgroschen brauchst du wirklich?
