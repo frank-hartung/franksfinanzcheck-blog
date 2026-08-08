@@ -44,7 +44,7 @@ jobs:
         env:
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
           PINTEREST_BOARD_ID: ${{ vars.PINTEREST_BOARD_ID }}
-          BLOG_BASE_URL: "https://frank-hartung.github.io/franksfinanzcheck-blog"
+          BLOG_BASE_URL: "https://franksfinanzcheck.de"
         run: python3 scripts/generate_pins.py
 
       - name: pinned-Flags committen & pushen
