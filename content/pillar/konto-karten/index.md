@@ -5,6 +5,8 @@ date: 2026-08-07
 draft: false
 author: "Frank"
 categories: ["Ratgeber"]
+build:
+  list: never
 keywords: ["Kostenloses Girokonto", "Kreditkarte ohne Jahresgebühr", "Tagesgeld", "Ratenkredit", "Banking Kosten sparen"]
 ---
 
