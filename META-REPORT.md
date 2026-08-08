@@ -61,4 +61,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Zahnzusatzversicherung: Wann sich der Abschlu | 53 | 141 | 5 | ✅ |
 
 ---
-*Erzeugt am 2026-08-08 um 11:49 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-08 um 12:06 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*

@@ -143,6 +143,8 @@ jobs:
           python3 scripts/generate_covers.py || echo "⚠ Cover-Fehler (nicht kritisch)"
           echo "== Einzigartigkeits-Audit =="
           python3 scripts/check_uniqueness.py || echo "⚠ Uniqueness-Audit: kritische Funde (manuell prüfen – nicht blockierend)"
+          echo "== Affiliate-Link-Check (Deep-Links automatisch korrigieren) =="
+          python3 scripts/affiliate_link_check.py --fix || echo "⚠ Affiliate-Check: Probleme (siehe AFFILIATE-REPORT.md – nicht blockierend)"
           # Fixes als Folge-Commit sichern
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
