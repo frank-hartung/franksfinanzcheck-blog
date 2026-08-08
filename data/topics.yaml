@@ -171,3 +171,253 @@ topics:
     pillar: "versicherungen"
     keywords: ["Unfallversicherung", "Private Unfallversicherung", "Absicherung"]
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=unfallversicherung"
+
+  # --- NEU: Themen-Nachschub August 2026 (6 Pillars) ----------
+  - title: "Photovoltaik: Lohnt sich eine Solaranlage 2026?"
+    keywords: ["Photovoltaik", "Solaranlage", "Stromkosten senken"]
+    pillar: "strom-sparen"
+  - title: "Balkonkraftwerk: Der einfache Einstieg in die Solarenergie"
+    keywords: ["Balkonkraftwerk", "Solar", "Stecker-Solar"]
+    pillar: "strom-sparen"
+  - title: "Festgeld vs. Tagesgeld: Wo gibt es die besten Zinsen?"
+    keywords: ["Festgeld", "Tagesgeld", "Zinsen vergleichen"]
+    pillar: "konto-karten"
+  - title: "Umzug: Diese Versicherungen und Verträge musst du ummelden"
+    keywords: ["Umzug", "Versicherungen ummelden", "Verträge"]
+    pillar: "versicherungen"
+  - title: "Altersvorsorge: Die besten Wege für deine Rente"
+    keywords: ["Altersvorsorge", "Rente", "Vermögensaufbau"]
+    pillar: "konto-karten"
+  - title: "Heizöl kaufen: Wann ist der beste Zeitpunkt?"
+    keywords: ["Heizöl", "Heizölpreis", "Energiekosten"]
+    pillar: "strom-sparen"
+  - title: "Stromtarif für Wärmepumpe: So sparst du beim Heizen"
+    keywords: ["Wärmepumpentarif", "Stromtarif", "Heizkosten"]
+    pillar: "strom-sparen"
+  - title: "Hauskauf finanzieren: Darlehen clever vergleichen"
+    keywords: ["Baufinanzierung", "Hauskauf", "Darlehen"]
+    pillar: "konto-karten"
+  - title: "Zweite Welle Gaspreis-Anpassung: Jetzt sichern"
+    keywords: ["Gaspreis", "Gastarif wechseln", "Heizkosten senken"]
+    pillar: "strom-sparen"
+  - title: "DSL-Wechselbonus mitnehmen: So klappt der Anbieterwechsel"
+    keywords: ["DSL Wechsel", "Wechselbonus", "Internet sparen"]
+    pillar: "internet-dsl"
+  - title: "Kabel-Internet vs. DSL: Was ist 2026 die bessere Wahl?"
+    keywords: ["Kabel Internet", "DSL Vergleich", "Breitband"]
+    pillar: "internet-dsl"
+  - title: "Glasfaserausbau: Wann lohnt sich der Anschluss?"
+    keywords: ["Glasfaser", "Fiber", "Schnelles Internet"]
+    pillar: "internet-dsl"
+  - title: "Depot eröffnen: Worauf Anfänger 2026 achten sollten"
+    keywords: ["Depot", "ETF Sparplan", "Aktien für Anfänger"]
+    pillar: "konto-karten"
+  - title: "ETF-Sparplan für Einsteiger: So startest du monatlich"
+    keywords: ["ETF Sparplan", "Vermögensaufbau", "Börse"]
+    pillar: "frugalismus"
+  - title: "Riester-Rente: Lohnt sie sich 2026 noch?"
+    keywords: ["Riester", "Altersvorsorge", "Rente"]
+    pillar: "konto-karten"
+  - title: "Kfz-Versicherung für Fahranfänger: So sparst du beim Einstieg"
+    keywords: ["Kfz Versicherung", "Fahranfänger", "Auto Versicherung"]
+    pillar: "versicherungen"
+  - title: "Hund & Katze: Lohnt sich eine Tierversicherung?"
+    keywords: ["Tierversicherung", "Hundeversicherung", "Katzenversicherung"]
+    pillar: "versicherungen"
+  - title: "Büroausstattung: Diese Kosten kannst du von der Steuer absetzen"
+    keywords: ["Steuer sparen", "Homeoffice", "Absetzbare Kosten"]
+    pillar: "frugalismus"
+  - title: "Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub"
+    keywords: ["E-Auto Mietwagen", "Elektromobilität", "Urlaub"]
+    pillar: "mietwagen"
+  - title: "Campingurlaub 2026: So hältst du die Kosten im Rahmen"
+    keywords: ["Camping", "Urlaub sparen", "Campingplatz"]
+    pillar: "mietwagen"
+  - title: "Krankenzusatzversicherung: Welche Bausteine sich lohnen"
+    keywords: ["Krankenzusatz", "Versicherung", "Zahnzusatz"]
+    pillar: "versicherungen"
+  - title: "Strom sparen im Sommer: 10 Tipps für heiße Monate"
+    keywords: ["Strom sparen Sommer", "Energiekosten", "Klimaanlage"]
+    pillar: "strom-sparen"
+  - title: "Smart Home: Diese Geräte sparen wirklich Strom"
+    keywords: ["Smart Home", "Energie sparen", "Smarte Steckdosen"]
+    pillar: "strom-sparen"
+  - title: "Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung"
+    keywords: ["Handyvertrag kündigen", "Mobilfunk sparen", "Tarifwechsel"]
+    pillar: "internet-dsl"
+
+  - title: "Billig fliegen im Winter: 10 Geheimtipps"
+    keywords: ["Flugvergleich", "Billigflüge", "Reisekosten sparen"]
+    pillar: "mietwagen"
+
+  - title: "Kreditkarten mit Reiseversicherung im Test"
+    keywords: ["Kreditkarten", "Reiseversicherung", "Versicherungsvergleich"]
+    pillar: "konto-karten"
+
+  - title: "DSL-Tarife im Vergleich: Welcher ist der beste?"
+    keywords: ["DSL-Tarife", "Internetvergleich", "DSL-Anbieter"]
+    pillar: "internet-dsl"
+
+  - title: "Versicherungen im Überblick: Was brauchst du wirklich?"
+    keywords: ["Versicherungen", "Versicherungsvergleich", "Risikomanagement"]
+    pillar: "versicherungen"
+
+  - title: "Mietwagen für die Stadt: Kleine Autos im Vergleich"
+    keywords: ["Mietwagen", "Stadtverkehr", "Kleine Autos"]
+    pillar: "mietwagen"
+
+  - title: "Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?"
+    keywords: ["Konto eröffnen", "Schufa", "Konto ohne Schufa"]
+    pillar: "konto-karten"
+
+  - title: "Internetflat mit hoher Geschwindigkeit: Welche Anbieter bieten was?"
+    keywords: ["Internetflat", "Hohe Geschwindigkeit", "Anbietervergleich"]
+    pillar: "internet-dsl"
+
+  - title: "Kreditkarten mit Bonusprogramm: Welche sind die besten?"
+    keywords: ["Kreditkarten", "Bonusprogramm", "Kreditkartenvergleich"]
+    pillar: "konto-karten"
+
+  - title: "Energieeffizienz im Haushalt: 5 einfache Maßnahmen"
+    keywords: ["Energieeffizienz", "Haushalt", "Energie sparen"]
+    pillar: "strom-sparen"
+
+  - title: "10 Tipps für günstige Reiseversicherungen"
+    keywords: ["Reiseversicherung", "Versicherungsvergleich", "Günstige Versicherungen"]
+    pillar: "versicherungen"
+
+  - title: "Strompreis-Anpassung im Sommer ausnutzen"
+    keywords: ["Strompreis", "Energiekosten", "Stromsparen"]
+    pillar: "strom-sparen"
+
+  - title: "Kreditkarten mit guten Rewards-Programmen"
+    keywords: ["Kreditkarte", "Rewards-Programm", "Kartenvergleich"]
+    pillar: "konto-karten"
+
+  - title: "DSL-Tarife mit hoher Geschwindigkeit vergleichen"
+    keywords: ["DSL-Tarif", "Internetgeschwindigkeit", "Tarife vergleichen"]
+    pillar: "internet-dsl"
+
+  - title: "Mietwagen-Kosten im Ausland minimieren"
+    keywords: ["Mietwagen", "Ausland", "Kosten minimieren"]
+    pillar: "mietwagen"
+
+  - title: "Günstige Gasanbieter für den Haushalt finden"
+    keywords: ["Gasanbieter", "Günstige Anbieter", "Haushalt"]
+    pillar: "strom-sparen"
+
+  - title: "Versicherungsvergleich für junge Erwachsene"
+    keywords: ["Versicherungsvergleich", "Junge Erwachsene", "Versicherungen"]
+    pillar: "versicherungen"
+
+  - title: "Schnellstes Internet für Zuhause finden"
+    keywords: ["Schnelles Internet", "Zuhause", "Internetanbieter"]
+    pillar: "internet-dsl"
+
+  - title: "Kontoeröffnung mit günstigen Gebühren"
+    keywords: ["Kontoeröffnung", "Günstige Gebühren", "Kontenvergleich"]
+    pillar: "konto-karten"
+
+  - title: "Mietwagen-Verträge vor dem Urlaub checken"
+    keywords: ["Mietwagen", "Verträge", "Urlaub"]
+    pillar: "mietwagen"
+
+  - title: "Energiekosten im Haushalt senken mit Smart-Home-Geräten"
+    keywords: ["Energiekosten", "Smart-Home-Geräte", "Haushalt"]
+    pillar: "strom-sparen"
+
+  - title: "Günstige Kreditkarten für den Alltag finden"
+    keywords: ["Kreditkarte", "Günstige Karten", "Alltag"]
+    pillar: "konto-karten"
+
+  - title: "10 Tipps für günstige Reisekreditkarten"
+    keywords: ["Reisekreditkarten", "günstige Karten", "Reisekosten sparen"]
+    pillar: "konto-karten"
+
+  - title: "Versteckte Kosten im Mietwagenvertrag entschlüsseln"
+    keywords: ["Mietwagenvertrag", "versteckte Kosten", "Urlaubskasse"]
+    pillar: "mietwagen"
+
+  - title: "Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst"
+    keywords: ["Budget-App", "Ausgaben kontrollieren", "Finanzplanung"]
+    pillar: "frugalismus"
+
+  - title: "Die besten Tarife für ein günstiges Handy-Abonnement"
+    keywords: ["günstiges Handy-Abonnement", "Tarifvergleich", "Mobilfunk"]
+    pillar: "internet-dsl"
+
+  - title: "So kannst du deine Heizkosten um 20&nbsp;% senken"
+    keywords: ["Heizkosten sparen", "energiesparende Tipps", "Heizperiode"]
+    pillar: "strom-sparen"
+
+  - title: "Die Vorteile einer Kreditkarten-Versicherung"
+    keywords: ["Kreditkarten-Versicherung", "Reiseversicherung", "Kreditkarten-Schutz"]
+    pillar: "versicherungen"
+
+  - title: "Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung"
+    keywords: ["Minimalismus", "365-Tage-Herausforderung", "Konsumverzicht"]
+    pillar: "frugalismus"
+
+  - title: "DSL-Tarife im Vergleich: Die günstigsten Anbieter"
+    keywords: ["DSL-Tarife", "günstige Anbieter", "Internetvergleich"]
+    pillar: "internet-dsl"
+
+  - title: "Wie du deine Bankgebühren um 50&nbsp;% reduzieren kannst"
+    keywords: ["Bankgebühren sparen", "Konto-gebühren", "Gebühren-reduzierung"]
+    pillar: "konto-karten"
+
+  - title: "Die verschiedenen Arten von Reiseversicherungen im Vergleich"
+    keywords: ["Reiseversicherungen", "Versicherungsarten", "Reise-Schutz"]
+    pillar: "versicherungen"
+
+  - title: "5 einfache Schritte zum Aufbau eines Notgroschens"
+    keywords: ["Notgroschen aufbauen", "Finanzsicherheit", "Sparplan"]
+    pillar: "frugalismus"
+
+  - title: "Die besten Mietwagen-Anbieter für junge Fahrer"
+    keywords: ["Mietwagen-Anbieter", "junge Fahrer", "Mietwagen-Tarife"]
+    pillar: "mietwagen"
+
+  - title: "Günstige Reiseversicherungen für den Winterurlaub"
+    keywords: ["Reiseversicherungen", "Winterurlaub", "Versicherungsvergleich"]
+    pillar: "versicherungen"
+
+  - title: "10 Tipps für günstige Reiseversicherungen im Ausland"
+    keywords: ["Reiseversicherung", "Auslandsreise", "Versicherungstipps"]
+    pillar: "versicherungen"
+
+  - title: "Wie du mit einem Smart-Plug Energie sparen kannst"
+    keywords: ["Smart-Plug", "Energie sparen", "Haushaltsgeräte"]
+    pillar: "strom-sparen"
+
+  - title: "Die besten Kreditkarten für den Alltag im Vergleich"
+    keywords: ["Kreditkarte", "Alltag", "Vergleich"]
+    pillar: "konto-karten"
+
+  - title: "Günstige Internet-Tarife für Zuhause finden"
+    keywords: ["Internet-Tarife", "Zuhause", "Günstig"]
+    pillar: "internet-dsl"
+
+  - title: "Die Vorteile von Frugalismus für dein Finanzbudget"
+    keywords: ["Frugalismus", "Finanzbudget", "Vorteile"]
+    pillar: "frugalismus"
+
+  - title: "Strompreis-Entwicklung: Wie du dich vor hohen Kosten schützen kannst"
+    keywords: ["Strompreis", "Entwicklung", "Kosten sparen"]
+    pillar: "strom-sparen"
+
+  - title: "Versicherungen im Vergleich: Was du wissen musst"
+    keywords: ["Versicherungen", "Vergleich", "Wissenswertes"]
+    pillar: "versicherungen"
+
+  - title: "DSL-Anbieter wechseln: Wie du den besten Tarif findest"
+    keywords: ["DSL-Anbieter", "Wechsel", "Tarif"]
+    pillar: "internet-dsl"
+
+  - title: "Günstige Kreditkarten für den Online-Einkauf"
+    keywords: ["Kreditkarte", "Online-Einkauf", "Günstig"]
+    pillar: "konto-karten"
+
+  - title: "Mietwagen-Verträge: Was du vor dem Unterschreiben wissen musst"
+    keywords: ["Mietwagen", "Verträge", "Wissenswertes"]
+    pillar: "mietwagen"

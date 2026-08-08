@@ -191,7 +191,7 @@ def load_articles(files=None):
         #   Zielgruppe) – die automatische du-Konvertierung wird übersprungen.
         anrede_raw = get("anrede").strip('"').lower()
         arts.append({
-            "file": os.path.basename(path), "path": path,
+            "file": os.path.relpath(path, POSTS_DIR), "path": path,
             "title": get("title"), "description": get("description"),
             "fm": fm, "body": body, "content": content,
             "anrede_sie": anrede_raw in ("sie", "sie-form", "höflich"),

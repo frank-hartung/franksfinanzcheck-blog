@@ -20,14 +20,14 @@ def publish(path):
     with open(path, encoding="utf-8") as f:
         content = f.read()
     if "draft: true" not in content:
-        print(f"  – übersprungen (kein Entwurf): {os.path.basename(path)}")
+        print(f"  – übersprungen (kein Entwurf): {slug_of(path)}")
         return 0
     content = content.replace("draft: true", "draft: false", 1)
     # Entwurfs-Datum durch heutiges Datum ersetzen (wird beim Veröffentlichen neu datiert)
     content = re.sub(r"^date: \d{4}-\d{2}-\d{2}$", f"date: {__import__('datetime').date.today().isoformat()}", content, count=1, flags=re.M)
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
-    print(f"  ✓ veröffentlicht: {os.path.basename(path)}")
+    print(f"  ✓ veröffentlicht: {slug_of(path)}")
     return 1
 
 

@@ -32,6 +32,7 @@ import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+from post_utils import list_post_paths, slug_of
 CACHE_FILE = os.path.join(BLOG_DIR, ".polish_cache.json")
 
 
@@ -56,7 +57,7 @@ def load_article(path):
 
 def ai_polish(a):
     """KI-Polish. Liefert neuen Body oder None."""
-    key = os.path.basename(a["path"])
+    key = slug_of(a["path"])  # eindeutig (Bundles: Ordnername, nicht "index.md"!)
     cache = {}
     if os.path.exists(CACHE_FILE):
         try:
@@ -266,15 +267,17 @@ def main():
     if "--file" in sys.argv:
         files = [sys.argv[sys.argv.index("--file") + 1]]
     elif mode_new:
-        # Nur Artikel OHNE lastmod (= noch nie gepolished/aktualisiert)
-        for f in sorted(os.listdir(POSTS_DIR)):
-            if f.endswith(".md"):
-                c = open(os.path.join(POSTS_DIR, f), encoding="utf-8").read()
-                if "lastmod:" not in c.split("---", 2)[1] if "---" in c else True:
-                    files.append(os.path.join(POSTS_DIR, f))
+        # Nur Artikel VON HEUTE (date == heute, draft: false) – so verschwendet
+        # der tägliche Workflow keine Zeit/Quota mit alten, nie gepolisheden
+        # Artikeln (die z. B. wegen Affiliate-Link-Schutz verworfen werden).
+        today = datetime.date.today().isoformat()
+        for f in list_post_paths():
+            c = open(f, encoding="utf-8").read()
+            fm = c.split("---", 2)[1] if c.startswith("---") and c.count("---") >= 2 else ""
+            if today in fm and "draft: false" in fm:
+                files.append(f)
     else:
-        files = [os.path.join(POSTS_DIR, f) for f in sorted(os.listdir(POSTS_DIR))
-                 if f.endswith(".md")]
+        files = list_post_paths()
 
     polished, failed, skipped = [], [], 0
     import time
