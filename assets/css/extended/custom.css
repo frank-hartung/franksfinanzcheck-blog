@@ -214,8 +214,11 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* ---------- Affiliate-CTA im Artikel (gelber Pill-Button-Look) ---------- */
+/* Gilt für ALLE Affiliate-Links: CHECK24 (a.check24.net) UND
+   Tarifcheck (a.partner-versicherung.de) – gleiche optische Verlinkung. */
 .post-content hr + p:has(> strong > a),
-.post-content p:has(> a[href*="check24.net"]) {
+.post-content p:has(> a[href*="check24.net"]),
+.post-content p:has(> a[href*="partner-versicherung.de"]) {
     /* CTA-Zeilen sanft hervorheben */
     background: rgba(255, 179, 0, 0.10);
     border: 1px dashed rgba(255, 179, 0, 0.6);
@@ -223,7 +226,8 @@ h1, h2, h3, h4, h5, h6,
     padding: 10px 14px;
 }
 
-.post-content a[href*="check24.net"] {
+.post-content a[href*="check24.net"],
+.post-content a[href*="partner-versicherung.de"] {
     display: inline-block;
     background: var(--ff-yellow);
     color: var(--ff-anthracite);
@@ -234,7 +238,8 @@ h1, h2, h3, h4, h5, h6,
     transition: background 0.15s ease;
 }
 
-.post-content a[href*="check24.net"]:hover {
+.post-content a[href*="check24.net"]:hover,
+.post-content a[href*="partner-versicherung.de"]:hover {
     background: var(--ff-yellow-dark);
     color: var(--ff-anthracite);
 }
