@@ -3,7 +3,7 @@ title: "Turbo fürs Netz: DNS-Wechsel für schnelleres Internet"
 description: "DNS-Server wechseln: So machst du dein Internet spürbar schneller – Schritt für Schritt erklärt, mit den besten kostenlosen Anbietern."
 date: 2026-08-06
 draft: false
-tags: ["dns server wechseln", "internet schneller machen", "dsl tipps"]
+tags: ["DNS-Server wechseln", "Internet schneller machen", "DSL-Tipps"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 keywords: ["dns server wechseln", "internet schneller machen", "dsl tipps"]

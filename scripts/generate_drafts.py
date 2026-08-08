@@ -751,6 +751,60 @@ def validate_frontmatter(path):
         print(f"    ✓ Frontmatter repariert: {', '.join(fixes)} ergänzt")
 
 
+def normalize_tags(keywords):
+    """Korrigiert die Schreibweise von Tags (sichtbar im Footer/Tag-Seiten).
+    Hugo wendet KEINEN Title-Case mehr an (titleCaseStyle=none) – die Tags
+    werden exakt wie im Frontmatter angezeigt. Deshalb müssen sie hier
+    korrekt geschrieben werden: erstes Wort groß, bekannte Nomen/Fachbegriffe
+    korrekt, Rest klein (deutsche Regeln).
+    Bekannte Korrekturen (häufige Bot-Keywords) + generische Regel:
+    erstes Wort groß, übrige Wörter klein – außer sie stehen in NOMEN_SET."""
+    NOMEN_SET = {
+        "alltag", "budget", "checkliste", "energie", "freiheit", "girokonto",
+        "haushalt", "haushaltsbuch", "internet", "kredit", "kreditkarte",
+        "mietwagen", "notgroschen", "ratenkredit", "reise", "reisebudget",
+        "sparmethoden", "strom", "tagesgeld", "tarif", "urlaub", "versicherung",
+        "wärmepumpe", "zinsen", "dns", "dsl", "wlan", "kfz", "e-auto", "gas",
+        "heizung", "stromtarif", "handytarif", "ratgeber", "tier", "hund",
+        "katze", "tierversicherung", "hundeversicherung", "katzenversicherung",
+    }
+    TAG_FIXES = {
+        "dns server wechseln": "DNS-Server wechseln",
+        "dsl tipps": "DSL-Tipps",
+        "dsl hacks": "DSL-Hacks",
+        "reise budget": "Reisebudget",
+        "geld sparen im alltag": "Geld sparen im Alltag",
+        "internet schneller machen": "Internet schneller machen",
+        "mietwagen günstig buchen": "Mietwagen günstig buchen",
+        "mietwagen roadtrip": "Mietwagen Roadtrip",
+        "haushaltsbuch führen": "Haushaltsbuch führen",
+        "frugalismus tipps": "Frugalismus Tipps",
+        "sparmethoden": "Sparmethoden",
+    }
+    out = []
+    for kw in keywords:
+        kw = kw.strip()
+        if not kw:
+            continue
+        low = kw.lower()
+        if low in TAG_FIXES:
+            out.append(TAG_FIXES[low])
+            continue
+        # Generische Regel: erstes Wort groß, Rest klein – Nomen behalten Groß
+        words = kw.split()
+        fixed = []
+        for i, w in enumerate(words):
+            wl = w.lower()
+            if i == 0:
+                fixed.append(wl[0].upper() + wl[1:] if wl else w)
+            elif wl in NOMEN_SET:
+                fixed.append(wl[0].upper() + wl[1:])
+            else:
+                fixed.append(wl)
+        out.append(" ".join(fixed))
+    return out
+
+
 def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
     """Erzeugt eine Draft-Datei. Gibt True zurück, wenn etwas geschrieben wurde.
 
@@ -851,7 +905,7 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
         f"description: {yaml_str(desc)}\n"
         f"date: {date}\n"
         f"draft: {draft_flag}\n"
-        f'tags: {json.dumps(keywords[:4], ensure_ascii=False)}\n'
+        f'tags: {json.dumps(normalize_tags(keywords[:4]), ensure_ascii=False)}\n'
         f'categories: ["Ratgeber"]\n'
         + (f'pillar: "{topic_entry.get("pillar")}"\n' if topic_entry.get("pillar") else "")
         + f"keywords: {json.dumps(keywords, ensure_ascii=False)}\n"

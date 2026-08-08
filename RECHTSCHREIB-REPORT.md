@@ -1,6 +1,6 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am … – 1 Artikel geprüft, 8 Funde, 0 korrigiert, 8 offen.
+> **Automatisch** erzeugt am … – 44 Artikel geprüft, 13 Funde, 0 korrigiert, 13 offen.
 
 ## Offene Punkte
 
@@ -12,6 +12,11 @@
 - `Unbekanntes Wort: „MSCI“ (Vorschläge: –)`
 - `Unbekanntes Wort: „World“ (Vorschläge: –)`
 - `Unbekanntes Wort: „auszusitzen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „tierärztliche“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Einmalzahlungen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Physiotherapie“ (Vorschläge: –)`
+- `Unbekanntes Wort: „rassetypische“ (Vorschläge: –)`
+- `Unbekanntes Wort: „vergünstigter“ (Vorschläge: –)`
 
 ---
 *Erzeugt von scripts/spellcheck.py*
