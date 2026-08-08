@@ -12,3 +12,8 @@ scripts/__pycache__/
 
 # Polish-Cache (KI-Ergebnisse)
 .polish_cache.json
+.meta_cache.json
+.polish_cache.json
+.spellcheck_report.json
+.grammar_report.json
+.meta_report.json

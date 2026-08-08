@@ -180,7 +180,7 @@ def load_articles(files=None, new_only=False):
         if new_only and not date.startswith(today):
             continue
         arts.append({
-            "file": os.path.basename(path), "path": path,
+            "file": os.path.relpath(path, POSTS_DIR), "path": path,
             "title": get("title"), "description": get("description"),
             "fm": fm, "body": body, "content": content,
         })

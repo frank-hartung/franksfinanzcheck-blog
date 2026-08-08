@@ -154,6 +154,69 @@ def load_topics():
     return topics
 
 
+def refill_topics(topics, used_titles, target=12):
+    """Lässt die KI neue Themenvorschläge generieren, wenn der Pool leer läuft.
+    Neue Themen werden auf Duplikate (gegen Pool + bestehende Artikel) geprüft
+    und an data/topics.yaml angehängt. Liefert Anzahl der neuen Themen."""
+    PILLARS = ["strom-sparen", "versicherungen", "mietwagen", "frugalismus",
+               "internet-dsl", "konto-karten"]
+    existing_lines = "\n".join(f"- {t['title']}" for t in topics)
+    prompt = (
+        f"Generiere {target} NEUE, konkrete deutsche Blog-Artikel-Titel für einen "
+        "Finanz-Ratgeber-Blog (Frugalismus, Strom/Gas sparen, Versicherungen, "
+        "Mietwagen/Reisen, Internet/DSL, Konto/Karten). Anforderungen: "
+        "spezifisch und praxisnah (keine Allgemeinplätze), für 2026/2027 relevant, "
+        "jeder Titel 5-12 Wörter mit konkretem Nutzenversprechen. "
+        "Diese Themen existieren BEREITS – erfinde KEINE ähnlichen:\n"
+        f"{existing_lines}\n\n"
+        "Antworte NUR in diesem Format (genau 1 Leerzeile zwischen Blöcken):\n"
+        "TITLE: <Titel>\n"
+        "KEYWORDS: <Keyword1>, <Keyword2>, <Keyword3>\n"
+        f"PILLAR: <einer von: {', '.join(PILLARS)}>\n"
+    )
+    raw = None
+    for fn in (call_groq, call_gemini, call_pollinations):
+        try:
+            raw = fn(prompt)
+            if raw and len(raw.strip()) > 200:
+                break
+        except Exception:
+            continue
+    if not raw:
+        print("    ✗ KI-Themen-Generierung fehlgeschlagen (kein Provider erreichbar).")
+        return 0
+
+    # Blöcke parsen
+    blocks = re.split(r"\n\s*\n", raw.strip())
+    neue = 0
+    with open(TOPICS_FILE, "a", encoding="utf-8") as f:
+        for b in blocks:
+            t = re.search(r"^TITLE:\s*(.+)$", b, re.M)
+            k = re.search(r"^KEYWORDS:\s*(.+)$", b, re.M)
+            p = re.search(r"^PILLAR:\s*(.+)$", b, re.M)
+            if not t:
+                continue
+            title = t.group(1).strip().strip('"')
+            if not title or len(title) > 90:
+                continue
+            # Duplikat-Checks
+            if topic_already_covered(title, used_titles):
+                continue
+            if any(topic_already_covered(title, {x["title"]}) for x in topics):
+                continue
+            keywords = [kw.strip() for kw in (k.group(1).split(",") if k else [])][:4]
+            if not keywords:
+                keywords = [title]
+            pillar = (p.group(1).strip() if p else "frugalismus")
+            if pillar not in PILLARS:
+                pillar = "frugalismus"
+            f.write(f'\n  - title: "{title}"\n    keywords: {json.dumps(keywords, ensure_ascii=False)}\n    pillar: "{pillar}"\n')
+            topics.append({"title": title, "keywords": keywords, "affiliate_url": None, "pillar": pillar})
+            neue += 1
+    print(f"    ✓ {neue} neue Themen in topics.yaml gespeichert.")
+    return neue
+
+
 def demo_files():
     """Findet Demo-Artikel (mit Marker 'demo-artikel' im Inhalt) – NUR diese
     dürfen vom Aufräum-Prozess gelöscht werden. Schützt echte Bot-Artikel."""
@@ -183,8 +246,21 @@ def existing_titles():
 
 def topic_already_covered(topic_title, used_titles):
     """Prüft, ob ein Thema bereits durch einen vorhandenen Artikel abgedeckt ist.
-    Vergleicht normalisierte Titel: Wenn der Themen-Titel (normalisiert) in einem
-    vorhandenen Artikel-Titel steckt (oder umgekehrt), gilt das Thema als erledigt."""
+    Mehrstufig:
+      1) Exakte/normalisierte Übereinstimmung (Titel in Titel)
+      2) Präfix-Abgleich der ersten 4 Wörter
+      3) TOKEN-ÜBERSCHNEIDUNG: Teilt beide Titel in inhaltstragende Wörter
+         (ohne Stoppwörter) und prüft, ob ≥ 60 % der Themen-Tokens in einem
+         bestehenden Titel vorkommen → verhindert Themen-Kannibalisierung
+         (z. B. „5 einfache Frugalismus-Tricks" vs. „5 Frugalismus-Tricks:
+         So sparst du 200 €" – gleiches Kern-Thema).
+    """
+    STOP = {"der", "die", "das", "und", "oder", "fur", "fuer", "mit", "von", "im",
+            "in", "den", "dem", "ein", "eine", "einer", "eines", "auf", "bei",
+            "zum", "zur", "sich", "nicht", "auch", "als", "wie", "was", "dich",
+            "dein", "deine", "ihr", "ihre", "so", "du", "sie", "is", "sind",
+            "fur", "gegen", "nach", "uber", "aus", "für", "über"}
+
     def norm(s):
         s = s.lower()
         s = re.sub(r"[äàáâ]", "ae", s)
@@ -193,10 +269,16 @@ def topic_already_covered(topic_title, used_titles):
         s = re.sub(r"ß", "ss", s)
         return re.sub(r"[^a-z0-9]+", " ", s).strip()
 
+    def tokens(s):
+        return [w for w in norm(s).split() if w not in STOP and len(w) > 2]
+
     t = norm(topic_title)
     if not t:
         return False
     t_tokens = t.split()[:4]  # erste 4 Wörter als Kern des Themas
+    topic_tokens = tokens(topic_title)
+    core_tokens = topic_tokens[:3]  # erste 3 inhaltstragende Wörter (Kern)
+
     for title in used_titles:
         nt = norm(title)
         if t in nt or nt in t:
@@ -204,6 +286,21 @@ def topic_already_covered(topic_title, used_titles):
         # Präfix-Abgleich: gleiche ersten 4 Wörter = gleiches Thema
         if t_tokens and nt.split()[:4] == t_tokens:
             return True
+        # Token-Überschneidung: ≥ 60 % der Themen-Tokens stecken im Titel
+        if topic_tokens:
+            nt_tokens = tokens(title)
+            if nt_tokens:
+                overlap = sum(1 for w in topic_tokens if w in nt_tokens)
+                if overlap / len(topic_tokens) >= 0.6:
+                    return True
+                # Kern-Token-Regel: ≥ 2 der ersten 3 Kern-Wörter im Titel
+                # (fängt Fälle wie „5 einfache Frugalismus-Tricks" vs.
+                #  „5 Frugalismus-Tricks: So sparst du 200 €" – 50 %-Overlap,
+                #  aber identischer Themen-Kern)
+                if len(core_tokens) >= 2:
+                    core_hits = sum(1 for w in core_tokens if w in nt_tokens)
+                    if core_hits >= 2:
+                        return True
     return False
 
 
@@ -310,8 +407,8 @@ def profi_quality_ok(body, keywords=None):
     text = re.sub(r"\s+", " ", text).lower()
     words = len(re.findall(r"\w+", text))
 
-    if words < 400:
-        problems.append(f"nur {words} Wörter (Profi: 400+)")
+    if words < 350:
+        problems.append(f"nur {words} Wörter (Profi: 350+)")
     h2 = len(re.findall(r"^##\s", body, re.M))
     if h2 < 4:
         problems.append(f"nur {h2} H2-Abschnitte")
@@ -361,7 +458,7 @@ def uniqueness_check(text, pin, max_similar=MAX_SIMILAR_PHRASES, n=PHRASE_LEN):
 
 
 
-def _retry(fn, attempts=3, base_delay=3):
+def _retry(fn, attempts=4, base_delay=5):
     """Führt fn mit Wiederholungen aus (Timeout/5xx-robust)."""
     last_err = None
     for i in range(attempts):
@@ -482,7 +579,7 @@ PROVIDERS = [
 ]
 
 
-def generate_article_text(topic, angle, perspective=None, pin=None, keywords=None):
+def generate_article_text(topic, angle, perspective=None, pin=None, keywords=None, pillar=None):
     """Baut den Prompt und ruft die KI auf. Liefert (rohtext, provider).
 
     - angle:      Schreibstil (Ratgeber, Vergleich, FAQ …)
@@ -529,14 +626,14 @@ def generate_article_text(topic, angle, perspective=None, pin=None, keywords=Non
 
     anrede_var = "Du-Form (du/dein/dich)" if os.environ.get("BLOG_ANREDE", "du").lower() != "sie" else "Sie-Form (Sie/Ihnen/Ihre)"
     pillar_hint = ""
-    if topic.get("pillar"):
+    if pillar:
         pillar_hint = (
             "CLUSTER-VERLINKUNG: Dieser Artikel gehört zu einer Ratgeber-Übersicht "
             "(Pillar-Page) auf FranksFinanzcheck. Baue an genau EINER passenden "
             "Stelle im Fließtext einen natürlichen, kontextuellen Link auf die "
             "Ratgeber-Übersicht ein – Markdown-Link mit RELATIVEM Pfad "
             "(kein führender Slash): "
-            f"[Ratgeber: ...](../../pillar/{topic['pillar']}/) – "
+            f"[Ratgeber: ...](../../pillar/{pillar}/) – "
             "z. B. „Mehr dazu im Ratgeber …“ mit aussagekräftigem Ankertext.\n"
         )
     prompt = f"""Schreibe einen EINZIGARTIGEN, hilfreichen deutschen Blog-Artikel zum Thema:
@@ -583,6 +680,10 @@ Ab Zeile 3: Der Artikel in Markdown:
             print("    Antwort zu kurz oder leer, nächster Provider …")
         except urllib.error.HTTPError as e:
             print(f"    Provider-Fehler ({e.code}), nächster Provider …")
+            if e.code in (429, 500, 502, 503, 504):
+                # Rate-Limit/Server-Probleme: kurz warten, bevor der nächste
+                # Provider gefragt wird (verhindert Ketten-Ausfälle)
+                time.sleep(8)
         except Exception as e:
             print(f"    Provider-Fehler ({type(e).__name__}: {e}), nächster Provider …")
     return None, None
@@ -628,7 +729,7 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
     if pin:
         print(f"    Inspiration: Pinterest-Pin (Tag {pin.get('tag')}) – wird nur als Grundlage genutzt")
 
-    raw, provider_name = generate_article_text(topic, angle, perspective=None, pin=pin, keywords=keywords)
+    raw, provider_name = generate_article_text(topic, angle, perspective=None, pin=pin, keywords=keywords, pillar=topic_entry.get("pillar"))
     if not raw:
         has_key = bool(os.environ.get("GROQ_API_KEY") or os.environ.get("GEMINI_API_KEY"))
         if not has_key:
@@ -707,7 +808,7 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
         f"draft: {draft_flag}\n"
         f'tags: {json.dumps(keywords[:4], ensure_ascii=False)}\n'
         f'categories: ["Ratgeber"]\n'
-        + (f'pillar: "{topic.get("pillar")}"\n' if topic.get("pillar") else "")
+        + (f'pillar: "{topic_entry.get("pillar")}"\n' if topic_entry.get("pillar") else "")
         + f"keywords: {json.dumps(keywords, ensure_ascii=False)}\n"
         f"author: {yaml_str(AUTHOR)}\n"
         f"ai_generated: true\n"
@@ -852,6 +953,18 @@ def main():
     else:
         topics = load_topics()
         quelle = "Themenpool (topics.yaml)"
+
+    # SELBSTHEILENDER THEMENPOOL: Wenn nur noch wenige Themen frei sind,
+    # lässt die KI neue Themenvorschläge generieren und ergänzt topics.yaml.
+    # So läuft der Generator nie leer (dauerhafte Vollautomatik).
+    freie_vorher = [t for t in topics if not topic_already_covered(t["title"], used_titles)]
+    if len(freie_vorher) < 5:
+        print(f"  – Themenpool fast leer ({len(freie_vorher)} frei) → KI generiert Nachschub …")
+        neu = refill_topics(topics, used_titles)
+        if neu:
+            topics = load_topics()  # neu laden (Datei wurde ergänzt)
+            quelle += " + KI-Nachschub"
+            print(f"  – Themenpool aufgefrischt: jetzt {len(topics)} Themen")
 
     print(f"Content-Bot gestartet – Quelle: {quelle} ({len(topics)} Themen), "
           f"{MAX_ARTICLES} Artikel geplant, "

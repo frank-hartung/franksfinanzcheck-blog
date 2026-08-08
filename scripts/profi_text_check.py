@@ -257,7 +257,7 @@ def main():
         if new_only and not a["date"].startswith(today):
             continue
         score, issues = score_article(a)
-        results.append({"file": os.path.basename(path), "title": a["title"],
+        results.append({"file": os.path.relpath(path, POSTS_DIR), "title": a["title"],
                         "score": score, "issues": issues,
                         "ok": score >= THRESHOLD})
 

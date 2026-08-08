@@ -26,7 +26,7 @@ import yaml
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
-from post_utils import list_post_paths
+from post_utils import list_post_paths, slug_of
 MAX_LINKS_PER_ARTICLE = 3  # neue Links pro Artikel pro Lauf
 MIN_WORDS = 2              # Ankertext min. Wörter (vermeidet generische Links)
 MAX_WORDS = 4              # Ankertext max. Wörter
@@ -119,12 +119,13 @@ def load_pages():
     """Lädt alle Artikel mit Metadaten."""
     pages = {}
     for path in list_post_paths():
+        slug = slug_of(path)
         content = open(path, encoding="utf-8").read()
         fm, body = parse_frontmatter(content)
-        title = fm.get("title", fn[:-3])
+        title = fm.get("title", slug)
         keywords = [k.strip().lower() for k in (fm.get("keywords") or [])]
         tags = [t.strip().lower() for t in (fm.get("tags") or [])]
-        pages[fn] = {
+        pages[slug] = {
             "title": title,
             "keywords": keywords,
             "tags": tags,
