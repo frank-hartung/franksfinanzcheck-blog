@@ -78,7 +78,7 @@
 
 | # | Punkt | Status | Aufwand |
 |---|---|---|---|
-| 1 | **Cloudflare SSL „Full (strict)"** | Sobald GitHub das TLS-Zertifikat ausstellt (automatisch, Watchdog meldet es per Issue) | 1 Min |
+| 1 | **Cloudflare SSL „Full (strict)"** | GitHub-Zertifikat noch nicht ausgestellt (Stand 08.08. abends) – Watchdog prüft täglich und meldet es per Issue, sobald da | 1 Min |
 | 2 | **Pinterest-API-Token** | App beantragt; Token (`pina_…`) steht aus → dann Secret `PINTEREST_ACCESS_TOKEN` + Variable `PINTEREST_BOARD_ID` anlegen, `repin-weekly.yml` aktivieren | 10 Min (sobald Token da) |
 | 3 | **4 Posts/Tag aktivieren** | Variable `MAX_ARTIKEL_PRO_TAG = "4"` in GitHub-Settings setzen (Zeitfenster stehen bereit) | 1 Min |
 | 4 | **Google Search Console – Domain-Property** | Optional: zusätzlich Domain-Property (DNS-TXT bei Cloudflare) für bessere Abdeckung | 5 Min |
@@ -98,7 +98,50 @@
 | LCP | ~0,3–0,8 s (warm/kalt) |
 | Cache-TTL | 1 Jahr (Cloudflare) |
 | Drittanbieter | 0 |
+| Domain | `franksfinanzcheck.de` (Cloudflare vorgeschaltet) |
 
 ---
 
 *Automatisch gepflegt – Stand 08.08.2026 · Bei größeren Änderungen aktualisieren.*
+
+## 💡 8. Neue Optimierungsideen (Stand 08.08.2026)
+
+### Schnell umsetzbar (je 5–15 Min)
+
+| # | Idee | Warum | Aufwand |
+|---|---|---|---|
+| 1 | **AI Overviews / Featured-Snippets optimieren** | FAQ-Schema ist da – jetzt pro Artikel 1 knackige „Kurzantwort“ (2–3 Sätze) direkt unter der H2, die Google als Snippet übernehmen kann | 10 Min/Artikel |
+| 2 | **Interne Verlinkung vertiefen** | `internal_linker.py --max 3` läuft – auf 5 erhöhen für noch mehr Topic-Signale (bei 38 Artikeln unkritisch) | 2 Min |
+| 3 | **`lastmod`-Datum bei Updates** | Wöchentlicher SEO-Workflow aktualisiert Artikel – `lastmod` im Frontmatter setzen, damit Google das Update erkennt | 5 Min |
+| 4 | **Alt-Texte der Covers prüfen** | Bot-Covers haben generische Alt-Texte („Spar-Tipp: …“) – durch keywordreiche, natürliche Alt-Texte ersetzen | 15 Min |
+| 5 | **OG-Image je Artikel** | Beim Teilen auf WhatsApp/LinkedIn erscheint aktuell kein individuelles Vorschau-Bild – `og:image` pro Post setzen (Cover reicht) | 10 Min |
+
+### Mittelfristig (je 1–3 h)
+
+| # | Idee | Warum | Aufwand |
+|---|---|---|---|
+| 6 | **„Beste Angebote“-Infobox je Pillar** | Eine wiederkehrende Vergleichs-Box (aktueller Strom-/DSL-/Versicherungs-Tarif mit Affiliate-Link) erhöht Conversion & Verweildauer | 2 h |
+| 7 | **E-Mail-Newsletter (alternativlos für Wiederkehr)** | Auch ohne eigenen Mailserver: kostenloser Anbieter (z. B. Buttondown/Beehiiv) mit „Neuer Artikel“-Benachrichtigung | 2 h |
+| 8 | **Eigene Domain-E-Mail** | `hallo@franksfinanzcheck.de` (z. B. über Cloudflare Email Routing kostenlos) – seriöser für Backlink-Outreach | 30 Min |
+| 9 | **YouTube/Short-Videos je Artikel** | 60-Sek-Video mit Kern-Tipps → Link im Artikel, neue Reichweite | je 1 h |
+| 10 | **Backlink-Aufbau intensivieren** | `backlink_automation.py` liefert Prospects – monatlich 5 Gastbeiträge/Listen-Platzierungen anstreben (Domain-Autorität) | laufend |
+
+### Strategisch (größere Projekte)
+
+| # | Idee | Warum | Aufwand |
+|---|---|---|---|
+| 11 | **Eigene Domain-E-Mail + Google Workspace** | Maximale Seriosität für E-E-A-T & Outreach (statt Free-Mail im Impressum) | 1 Tag |
+| 12 | **Umami-Selfhosting / Analytics-Ausbau** | Aktuell cookieless – mit Umami-Dashboard Conversion-Pfade (Affiliate-Klicks) messen | 1 Tag |
+| 13 | **Mehrsprachigkeit (EN)** | Englische Version der Top-20-Artikel → internationaler Traffic (Nische „Frugalismus“ ist global) | groß |
+| 14 | **Digitaler Produktverkauf** | Z. B. „Sparplan-Excel“ oder „CHECK24-Wechsel-Checkliste“ als PDF (5–15 €) – erste Monetarisierung unabhängig von Affiliate | 1–2 Tage |
+| 15 | **Pinterest voll ausrollen** | 62-Pin-Plan liegt bereit – sobald API-Token da: automatisierte Pins, Board-Strategie, Pin-Optimierung nach Impressions | laufend |
+
+### Kontinuierliche Qualitäts-Schleife (bereits aktiv, ausbauen)
+
+- **Monatliches Content-Audit:** Älteste 5 Artikel nach 6 Monaten aktualisieren (Zahlen, Links, Screenshots) → `lastmod`-Signal
+- **Quartalsweises Keyword-Refresh:** `keyword_optimizer.py` auf die 10 wichtigsten Seiten anwenden
+- **Saisonale Inhalte:** 4 Wochen VOR Saisonstart (Heizperiode: August, Steuererklärung: Januar) publizieren
+
+---
+
+*Dokument wird bei größeren Änderungen aktualisiert – Stand 08.08.2026 (abends).*
