@@ -1,4 +1,4 @@
-# 📋 Meta-Daten-Report – 2026-08-07
+# 📋 Meta-Daten-Report – 2026-08-08
 
 > **Vollautomatisch** erzeugt vom wöchentlichen SEO-Workflow. Keine manuelle Sichtung nötig: Bei verbleibenden Problemen erstellt der Workflow automatisch ein GitHub-Issue.
 
@@ -59,4 +59,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Zahnzusatzversicherung: Wann sich der Abschlu | 53 | 141 | 5 | ✅ |
 
 ---
-*Erzeugt am 2026-08-07 um 20:33 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-08 um 09:12 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*

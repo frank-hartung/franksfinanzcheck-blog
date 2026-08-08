@@ -1,6 +1,6 @@
 ---
 title: "Internet & DSL: Der große Ratgeber für schnelles Netz"
-description: "Internet schneller machen: DNS-Server wechseln, WLAN-Verstärker oder Mesh, DSL-Flat günstig sichern und den besten Handytarif finden – der Ratgeber."
+description: "Den DNS-Server wechseln, WLAN-Verstärker oder Mesh aufbauen, DSL-Flat günstig sichern und den besten Handytarif finden – der Ratgeber für schnelles Netz."
 date: 2026-08-07
 draft: false
 author: "Frank"

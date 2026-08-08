@@ -1,6 +1,6 @@
 ---
 title: "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen"
-description: "Mietwagen günstig buchen, Fallen vermeiden, günstige Flüge und Last-Minute-Angebote finden – der komplette Ratgeber für die sparsame Urlaubsplanung."
+description: "Günstig buchen, Fallen vermeiden, günstige Flüge und Last-Minute-Angebote finden – der komplette Ratgeber für die sparsame Urlaubsplanung."
 date: 2026-08-07
 draft: false
 author: "Frank"
