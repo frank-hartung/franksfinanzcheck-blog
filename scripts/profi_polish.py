@@ -210,15 +210,17 @@ def fix_capitalization(text):
 
 def fix_number_units(text):
     """Top-Level-Darstellung: Zahl + Einheit (% / € / EUR) mit geschütztem
-    Leerzeichen (&nbsp;) verbinden, damit nie getrennt umbrochen wird.
-    Markdown-Links werden maskiert, damit URLs unangetastet bleiben."""
+    Leerzeichen (U+00A0) verbinden, damit nie getrennt umbrochen wird.
+    HTML-Entities (&nbsp;) werden dabei normalisiert. Markdown-Links werden
+    maskiert, damit URLs unangetastet bleiben."""
     link_re = re.compile(r"\[[^\]]*\]\([^)]*\)")
     num_unit_re = re.compile(r"(\d[\d.,]*)\s+(%|€|EUR)(?!\w)")
+    text = re.sub(r"&nbsp;", "\u00a0", text)
     masked = link_re.sub(lambda m: " " * (m.end() - m.start()), text)
     out, last = [], 0
     for m in num_unit_re.finditer(masked):
         out.append(text[last:m.start()])
-        out.append(m.group(1) + "&nbsp;" + m.group(2))
+        out.append(m.group(1) + "\u00a0" + m.group(2))
         last = m.end()
     out.append(text[last:])
     return "".join(out)

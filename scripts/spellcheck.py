@@ -609,10 +609,10 @@ def analyze_article(a, whitelist):
             if q >= 0:
                 kabs = q + 1
                 if "&nbsp;" in kurz:
-                    problems.append({"type": "entity", "word": "&nbsp;", "fix": " ",
+                    problems.append({"type": "entity", "word": "&nbsp;", "fix": "\u00a0",
                                      "abs_start": kabs + kurz.find("&nbsp;"),
                                      "abs_end": kabs + kurz.find("&nbsp;") + 6,
-                                     "conf": 1.0, "reason": "Kurzantwort: &nbsp; als sichtbarer Text → Leerzeichen"})
+                                     "conf": 1.0, "reason": "Kurzantwort: &nbsp; als sichtbarer Text → geschütztes Leerzeichen (U+00A0)"})
                 if "&amp;" in kurz:
                     problems.append({"type": "entity", "word": "&amp;", "fix": "&",
                                      "abs_start": kabs + kurz.find("&amp;"),
@@ -622,6 +622,29 @@ def analyze_article(a, whitelist):
                     problems.append({"type": "phrase", "word": mm.group(0), "fix": "weniger als",
                                      "abs_start": kabs + mm.start(), "abs_end": kabs + mm.end(),
                                      "conf": 1.0, "reason": "Kurzantwort: „less als“ → „weniger als“"})
+
+    # 3c. ZAHL + EINHEIT: Zwischen Ziffer und %/€ MUSS ein geschütztes Leerzeichen
+    #     (U+00A0, Non-Breaking Space) stehen. Mit normalem Leerzeichen bricht der
+    #     Browser zwischen Zahl und Einheit um („10 %“ am Zeilenende) – im Body
+    #     UND in der Kurzantwort. (Auch Restfälle mit mehreren/doppelten Spaces.)
+    def _nbsp_problem(m, base=None):
+        word = m.group(0)
+        fix = word[0] + "\u00a0" + word[-1]  # Ziffer + NBSP + Einheit
+        if base is None:
+            return {"type": "nbsp", "word": word, "fix": fix,
+                    "start": m.start(), "end": m.end(), "conf": 1.0,
+                    "reason": "Zahl+Einheit: normales Leerzeichen → geschütztes (U+00A0), kein Umbruch zwischen Zahl und %/€"}
+        return {"type": "nbsp", "word": word, "fix": fix,
+                "abs_start": base + m.start(), "abs_end": base + m.end(),
+                "conf": 1.0,
+                "reason": "Kurzantwort: Zahl+Einheit → geschütztes Leerzeichen (U+00A0), kein Umbruch"}
+    for m in re.finditer(r"\d[ \u00a0]+[%€]", body):
+        if " " in m.group(0):
+            problems.append(_nbsp_problem(m))
+    if kurz:
+        for m in re.finditer(r"\d[ \u00a0]+[%€]", kurz):
+            if " " in m.group(0):
+                problems.append(_nbsp_problem(m, kabs))
 
     return problems
 

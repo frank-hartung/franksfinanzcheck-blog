@@ -35,7 +35,7 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | DNS-Server ändern: Der kostenlose Boost für d | 57 | 142 | 5 | ✅ |
 | 100 | DSL- und Internet-Flat günstig sichern: Der b | 55 | 128 | 6 | ✅ |
 | 100 | E-Auto laden: So senkst du deine Stromkosten  | 53 | 155 | 5 | ✅ |
-| 100 | 5 Frugalismus-Tricks: So sparst du 200 € pro  | 50 | 149 | 6 | ✅ |
+| 100 | 5 Frugalismus-Tricks: So sparst du 200 € pro  | 50 | 149 | 6 | ✅ |
 | 100 | Gastarife vergleichen: Heizkosten vor dem Her | 55 | 147 | 6 | ✅ |
 | 100 | Günstige Flüge im Spätsommer: 7 Tricks zum Ge | 54 | 141 | 6 | ✅ |
 | 100 | Handytarife vergleichen: So findest du den gü | 60 | 137 | 5 | ✅ |
@@ -62,4 +62,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Zahnzusatzversicherung: Wann sich der Abschlu | 53 | 141 | 5 | ✅ |
 
 ---
-*Erzeugt am 2026-08-08 um 21:56 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-08 um 22:32 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*

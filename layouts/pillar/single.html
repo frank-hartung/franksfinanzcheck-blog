@@ -12,7 +12,7 @@
 
   {{- if .Content }}
   <div class="post-content md-content">
-    {{- partial "anchored_headings.html" .Content }}
+    {{- partial "anchored_headings.html" ((.Content | partial "nbsp_sicherung.html") | safeHTML) }}
   </div>
   {{- end }}
 

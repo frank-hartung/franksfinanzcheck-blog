@@ -5,7 +5,7 @@
     </header>
     <div class="entry-content md-content">
         {{ $opts := dict "display" "block" }}
-        {{ .Content | $.Page.RenderString $opts }}
+        {{ (.Content | $.Page.RenderString $opts | partial "nbsp_sicherung.html") | safeHTML }}
     </div>
 
 </article>

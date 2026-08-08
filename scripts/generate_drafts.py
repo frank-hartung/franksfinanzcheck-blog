@@ -108,10 +108,10 @@ SYSTEM_PROMPT = (
     "Jeder Absatz ist 3–4 Sätze lang, behandelt genau EINEN Gedanken und endet an einer "
     "sinnvollen Stelle – keine Textwände, kein Aneinanderreihen von Ein-Satz-Absätzen. "
     "Schreibe Wörter NIE mit Silbentrennung (kein Wort wird getrennt). Zwischen einer "
-    "Zahl und ihrer Einheit steht IMMER ein geschütztes Leerzeichen (HTML-Entity "
-    "&nbsp;), damit Zahl und Einheit nie in verschiedene Zeilen brechen: "
-    "z. B. 20&nbsp;%, 50&nbsp;€, 100&nbsp;EUR – niemals \"20 %\" oder \"50 €\" mit "
-    "normalem Leerzeichen. Deutsche Rechtschreibung ist fehlerfrei."
+    "Zahl und ihrer Einheit steht IMMER ein geschütztes Leerzeichen (U+00A0, "
+    "Non-Breaking Space), damit Zahl und Einheit nie in verschiedene Zeilen brechen: "
+    "z. B. 20 %, 50 €, 100 EUR mit geschütztem Leerzeichen – niemals mit normalem "
+    "Leerzeichen und niemals als HTML-Entity (&nbsp;). Deutsche Rechtschreibung ist fehlerfrei."
 )
 
 # ---------------------------------------------------------------- Hilfsfunktionen
@@ -119,15 +119,17 @@ SYSTEM_PROMPT = (
 
 def fix_number_units(body):
     """Top-Level-Darstellung: Zahl + Einheit (% / € / EUR) mit geschütztem
-    Leerzeichen (&nbsp;) verbinden, damit nie getrennt umbrochen wird.
-    Markdown-Links werden maskiert, damit URLs unangetastet bleiben."""
+    Leerzeichen (U+00A0) verbinden, damit nie getrennt umbrochen wird.
+    HTML-Entities (&nbsp;) werden dabei normalisiert. Markdown-Links werden
+    maskiert, damit URLs unangetastet bleiben."""
     link_re = re.compile(r"\[[^\]]*\]\([^)]*\)")
     num_unit_re = re.compile(r"(\d[\d.,]*)\s+(%|€|EUR)(?!\w)")
+    body = re.sub(r"&nbsp;", "\u00a0", body)
     masked = link_re.sub(lambda m: " " * (m.end() - m.start()), body)
     out, last = [], 0
     for m in num_unit_re.finditer(masked):
         out.append(body[last:m.start()])
-        out.append(m.group(1) + "&nbsp;" + m.group(2))
+        out.append(m.group(1) + "\u00a0" + m.group(2))
         last = m.end()
     out.append(body[last:])
     return "".join(out)

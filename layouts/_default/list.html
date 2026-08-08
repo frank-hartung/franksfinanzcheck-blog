@@ -33,8 +33,8 @@
 {{- if .Content }}
 <div class="post-content md-content">
   {{- if not (.Param "disableAnchoredHeadings") }}
-  {{- partial "anchored_headings.html" .Content -}}
-  {{- else }}{{ .Content }}{{ end }}
+  {{- partial "anchored_headings.html" ((.Content | partial "nbsp_sicherung.html") | safeHTML) -}}
+  {{- else }}{{ (.Content | partial "nbsp_sicherung.html") | safeHTML }}{{ end }}
 </div>
 {{- end }}
 
@@ -83,7 +83,7 @@
   </header>
   {{- if (ne (.Param "hideSummary") true) }}
   <div class="entry-content">
-    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+    <p>{{ .Summary | plainify | htmlUnescape | partial "nbsp_sicherung.html" }}{{ if .Truncated }}...{{ end }}</p>
   </div>
   {{- end }}
   {{- if not (.Param "hideMeta") }}
