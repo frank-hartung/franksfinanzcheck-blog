@@ -154,7 +154,7 @@ def load_topics():
     return topics
 
 
-def refill_topics(topics, used_titles, target=12):
+def refill_topics(topics, used_titles, target=16):
     """Lässt die KI neue Themenvorschläge generieren, wenn der Pool leer läuft.
     Neue Themen werden auf Duplikate (gegen Pool + bestehende Artikel) geprüft
     und an data/topics.yaml angehängt. Liefert Anzahl der neuen Themen."""
@@ -958,7 +958,7 @@ def main():
     # lässt die KI neue Themenvorschläge generieren und ergänzt topics.yaml.
     # So läuft der Generator nie leer (dauerhafte Vollautomatik).
     freie_vorher = [t for t in topics if not topic_already_covered(t["title"], used_titles)]
-    if len(freie_vorher) < 5:
+    if len(freie_vorher) < 8:  # Schwelle für 4 Posts/Tag (früher nachfüllen)
         print(f"  – Themenpool fast leer ({len(freie_vorher)} frei) → KI generiert Nachschub …")
         neu = refill_topics(topics, used_titles)
         if neu:

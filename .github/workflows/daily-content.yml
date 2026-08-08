@@ -1,9 +1,17 @@
 # ============================================================
 #  AUTOMATISCHE CONTENT-GENERIERUNG (Vollautomatik, kostenlos)
 #
-#  Abgestimmt auf deine Pinterest-Veröffentlichungszeiten:
-#    - Pins morgens um 08:00 Uhr  → Blog-Artikel ca. 08:10 Uhr
-#    - Pins abends um 19:30 Uhr   → Blog-Artikel ca. 19:40 Uhr
+#  POSTS PRO TAG (vorbereitet für bis zu 4, aktuell 2):
+#    - 4 Veröffentlichungs-Zeitfenster eingerichtet: 08:10, 12:10,
+#      16:10 und 19:40 Uhr MESZ (+ Fallback-Crons gegen Ausfälle).
+#    - AKTUELL (August 2026): 2 Posts/Tag – gesteuert über die
+#      Repository-Variable MAX_ARTIKEL_PRO_TAG (Default "2").
+#      → Umstellung auf 4 Posts/Tag: GitHub → Settings → Secrets and
+#        variables → Actions → Variable MAX_ARTIKEL_PRO_TAG = "4"
+#        (kein Code-Change nötig).
+#    - Der Guard im Skript zählt die heute veröffentlichten Artikel
+#      und stoppt, sobald das Limit erreicht ist (auch bei doppelt
+#      ausgelösten/nachgeholten Crons).
 #
 #  ROBUSTHEITS-ARCHITEKTUR (seit 08/2026):
 #    PHASE 1 – Generieren & SOFORT veröffentlichen:
@@ -31,17 +39,19 @@ name: Automatische Content-Generierung
 
 on:
   schedule:
-    # Haupt-Zeiten (nach deinen Pin-Zeiten):
+    # 4 VERÖFFENTLICHUNGS-ZEITEN (je 1 Artikel pro Lauf, Limit 4/Tag):
     - cron: "10 6 * * *"    # 08:10 Uhr MESZ (nach den Morgen-Pins 08:00)
+    - cron: "10 10 * * *"   # 12:10 Uhr MESZ
+    - cron: "10 14 * * *"   # 16:10 Uhr MESZ
     - cron: "40 17 * * *"   # 19:40 Uhr MESZ (nach den Abend-Pins 19:30)
     # Fallback-Zeiten (GitHub kann geplante Läufe verzögern/verwerfen –
-    #  durch mehrere Crons wird sichergestellt, dass der Artikel trotzdem
-    #  erscheint. Das Skript prüft selbst: max. 2 Artikel pro Tag.)
-    - cron: "10 8 * * *"    # 10:10 Uhr MESZ (Fallback Morgen)
-    - cron: "10 10 * * *"   # 12:10 Uhr MESZ (Fallback Morgen)
-    - cron: "10 12 * * *"   # 14:10 Uhr MESZ (Fallback Morgen)
-    - cron: "10 14 * * *"   # 16:10 Uhr MESZ (Fallback Morgen)
-    - cron: "10 19 * * *"   # 21:10 Uhr MESZ (Fallback Abend)
+    #  durch mehrere Crons wird sichergestellt, dass alle 4 Artikel
+    #  trotzdem erscheinen. Das Skript prüft selbst: max. 4 pro Tag.)
+    - cron: "10 8 * * *"    # 10:10 Uhr MESZ (Fallback)
+    - cron: "10 12 * * *"   # 14:10 Uhr MESZ (Fallback)
+    - cron: "10 16 * * *"   # 18:10 Uhr MESZ (Fallback)
+    - cron: "10 19 * * *"   # 21:10 Uhr MESZ (Fallback)
+    - cron: "10 20 * * *"   # 22:10 Uhr MESZ (Fallback)
   workflow_dispatch: {}
 
 permissions:
@@ -69,7 +79,12 @@ jobs:
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
           MAX_ARTIKEL_PRO_LAUF: "1"
-          MAX_ARTIKEL_PRO_TAG: "2"   # max. 2 Artikel/Tag (Guard gegen Doppel-Läufe)
+          # Tageslimit via Repository-Variable steuerbar (GitHub → Settings →
+          # Secrets and variables → Actions → Variables):
+          #   MAX_ARTIKEL_PRO_TAG = "2"  → aktuell (August 2026): 2 Posts/Tag
+          #   MAX_ARTIKEL_PRO_TAG = "4"  → ab sofort 4 Posts/Tag möglich
+          # Ohne Variable gilt der Default 2. Der Guard verhindert Doppel-Läufe.
+          MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '2' }}
           PIN_TOPICS: "1"          # Themen direkt aus dem Pinterest-Plan
           AUTO_PUBLISH: "1"        # Veröffentlichung ohne manuellen Schritt
         run: python3 scripts/generate_drafts.py
@@ -195,7 +210,7 @@ jobs:
             echo ""
             echo "- **Artikel erstellt:** ${{ env.ARTIKEL_ERSTELLT == 'true' && 'JA ✅' || 'Nein (Limit erreicht oder KI ohne Antwort)' }}"
             echo "- **Letzter Commit:** $(git log -1 --format='%h %s')"
-            echo "- **Tages-Limit:** 2 Artikel (Guard aktiv)"
+            echo "- **Tages-Limit:** ${{ vars.MAX_ARTIKEL_PRO_TAG || '2' }} Artikel (Guard aktiv – per GitHub-Variable auf 4 erhöhbar)"
             echo ""
             echo "> Hinweis: Phase-2/3-Fehler sind weich – sie verhindern die Veröffentlichung NICHT."
           } >> "$GITHUB_STEP_SUMMARY"
