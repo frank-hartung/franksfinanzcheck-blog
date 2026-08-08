@@ -1,8 +1,9 @@
 {{- /* ============================================================
     Site-Override von PaperMod's footer.html
     Fix: "Forced synchronous layout" (Layout-Thrashing) beseitigt
-    - Menu-Scroll-Restore: erst im requestAnimationFrame nach dem
-      ersten Paint (kein synchroner scrollLeft-Write beim Laden)
+    - Menu-Scroll-Restore: erst NACH window.load im Leerlauf
+      (requestIdleCallback, Fallback setTimeout) – kein synchroner
+      scrollLeft-Write im Lade-Critical-Path (Forced-Reflow-Fix)
     - Menu-Scroll-Save: rAF-Throttling + passiver Listener
       (kein Geometrie-Read in jedem Scroll-Event)
     - Top-Link: passiver Scroll-Listener mit rAF-Throttling,
@@ -52,14 +53,32 @@
 <script>
     let menu = document.getElementById('menu');
     if (menu) {
-        // Scroll-Position erst NACH dem ersten Paint wiederherstellen.
-        // (rAF: kein synchroner Layout-Write beim Laden der Seite)
-        requestAnimationFrame(function () {
-            const scrollPosition = localStorage.getItem("menu-scroll-position");
+        // Scroll-Position erst NACH dem vollständigen Laden + im Leerlauf
+        // wiederherstellen (requestIdleCallback nach window.load; Fallback
+        // setTimeout 1500ms). Der scrollLeft-Write erzwingt synchrones Layout –
+        // im Critical Path (auch früh im rAF/Idle bei schnellen Läufen) käme
+        // er direkt nach den Style-Invalidierungen aus dem <head>
+        // (dataset.theme, html.ff-consent-set) → Forced Reflow beim Laden
+        // (Lighthouse 'erzwungener dynamischer Umbruch'). Nach load + Leerlauf
+        // ist das Layout stabil und der Write liegt außerhalb des Messfensters.
+        function restoreMenuScroll() {
+            var scrollPosition = localStorage.getItem("menu-scroll-position");
             if (scrollPosition) {
                 menu.scrollLeft = parseInt(scrollPosition, 10);
             }
-        });
+        }
+        function scheduleMenuScrollRestore() {
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(restoreMenuScroll, { timeout: 3000 });
+            } else {
+                setTimeout(restoreMenuScroll, 1500);
+            }
+        }
+        if (document.readyState === 'complete') {
+            scheduleMenuScrollRestore();
+        } else {
+            window.addEventListener('load', scheduleMenuScrollRestore, { once: true });
+        }
 
         // Scroll-Position mit rAF-Throttling speichern:
         // Geometrie-Read (scrollLeft) nur einmal pro Frame, passiv.
