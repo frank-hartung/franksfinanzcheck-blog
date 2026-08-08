@@ -28,6 +28,21 @@
     </div>
     {{- end }}
   </header>
+
+  {{- /* Kurzantwort-Box (Featured Snippet / AI Overview) – nur auf Posts.
+         Das Frontmatter-Feld `kurzantwort` wird von
+         scripts/generate_kurzantworten.py automatisch befüllt. */ -}}
+  {{- if and (eq .Section "posts") (.Params.kurzantwort) }}
+  <div class="ff-kurzantwort" style="margin:18px 0 22px; background:linear-gradient(160deg,#EAF4EF,#F7FBF9); border:1px solid rgba(14,90,67,.22); border-left:6px solid #0E5A43; border-radius:12px; padding:14px 18px;">
+    <div style="display:flex; gap:10px; align-items:flex-start;">
+      <span style="font-size:1.3em; line-height:1.2;" aria-hidden="true">💡</span>
+      <div>
+        <strong style="font-family:'Montserrat',sans-serif; color:#0E5A43; font-size:.85em; display:block; margin-bottom:4px;">Kurz &amp; knapp – die Antwort</strong>
+        <span style="font-size:.95em; line-height:1.55; color:#222;">{{ .Params.kurzantwort }}</span>
+      </div>
+    </div>
+  </div>
+  {{- end }}
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
   {{- if (.Param "ShowToc") }}

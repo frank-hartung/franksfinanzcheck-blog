@@ -73,7 +73,7 @@ jobs:
         # (max. 3 neue Links pro Lauf, natürliche Anker, keine Duplikate).
         # → stärkt die interne Linkstruktur (SEO), ohne Spam-Muster.
         run: |
-          python3 scripts/internal_linker.py --apply --max 3 | tee /tmp/internal_link_log.txt
+          python3 scripts/internal_linker.py --apply --max 5 | tee /tmp/internal_link_log.txt
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
           git add -A
@@ -184,6 +184,13 @@ jobs:
         run: |
           python3 scripts/meta_report.py | tee /tmp/meta_gate_log.txt
           exit ${PIPESTATUS[0]}
+
+      - name: lastmod für geänderte Artikel setzen (Frische-Signal)
+        # Artikel, die in diesem Lauf optimiert wurden (Meta, Rechtschreibung,
+        # Links), bekommen lastmod=heute → Hugo rendert article:modified_time
+        # + Sitemap-lastmod (Google erkennt das Update).
+        run: |
+          python3 scripts/set_lastmod.py --git-changed
 
       - name: Meta-Report committen
         run: |

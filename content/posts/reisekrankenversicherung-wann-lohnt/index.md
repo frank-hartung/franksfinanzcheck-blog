@@ -10,8 +10,9 @@ keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschu
 author: "Frank"
 cover:
   image: "images/covers/reisekrankenversicherung-wann-lohnt.jpg"
-  alt: "Spar-Tipp: Reisekrankenversicherung Wann Lohnt"
+  alt: "Reisekrankenversicherung: Wann sie sich wirklich lohnt"
   caption: "Tipp von FranksFinanzcheck"
+kurzantwort: "Die gesetzliche Kasse zahlt in der Regel nur einen Teil der Kosten, du musst also selbst ca. 20–30 % der Behandlungskosten zahlen. Wenn du also im Ausland behandelt werden musst, kann eine Reisekrankenversicherung helfen, diese Kosten zu decken. Sie lohnt sich, wenn du länger als 30 Tage im Ausland bist oder bestimmte Risiken eingehst."
 ---Ein Krankenhausaufenthalt in den USA kann schnell sechsstellige Summen kosten. Innerhalb Europas lauern Kostenfallen, wenn man nur auf die gesetzliche Kasse vertraut. Eine Reisekrankenversicherung kostet nur wenige Euro pro Jahr und schützt genau vor diesen Risiken. Du bekommst weltweite Absicherung für oft unter 30 Euro Jahresbeitrag.
 
 ## Das Grundproblem: Die gesetzliche Kasse zahlt im Ausland nur wenig
