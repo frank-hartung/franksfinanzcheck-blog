@@ -12,6 +12,7 @@ cover:
   image: "images/covers/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt.jpg"
   alt: "Private Unfallversicherung: Für wen sie sich wirklich lohnt"
   caption: "Tipp von FranksFinanzcheck"
+kurzantwort: "Du solltest dir eine private Unfallversicherung zulegen, wenn du ein hohes Risiko für Unfälle hast, wie z. B. bei gefährlichen Berufen oder extremen Hobbys. Sie kann dir im Schadensfall bis zu 100&nbsp;EUR pro Tag an Einkommensverlust ersetzen. Für junge, gesunde Menschen mit geringem Unfallrisiko lohnt sich der Abschluss in der Regel nicht, da die Kosten ca. 50–200&nbsp;€ pro Jahr betragen."
 ---Ein Sturz vom Rennrad oder ein Fehltritt auf der Haushaltsleiter verändert dein Leben oft in Sekunden. Über 70 Prozent aller Unfälle passieren in der Freizeit oder im Haushalt – genau dort, wo die gesetzliche Kasse keinen Cent zahlt. Die private Unfallversicherung schließt diese gefährliche Lücke und schützt dich weltweit vor hohen Folgekosten.
 
 ## Das Grundproblem: Die gesetzliche Absicherung greift zu kurz

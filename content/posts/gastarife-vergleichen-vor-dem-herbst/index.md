@@ -10,8 +10,9 @@ keywords: ["Gastarife vergleichen", "Heizkosten senken", "Gasvergleich", "Gaskos
 author: "Frank"
 cover:
   image: "images/covers/gastarife-vergleichen-vor-dem-herbst.jpg"
-  alt: "Spar-Tipp: Gastarife Vergleichen Vor Dem Herbst"
+  alt: "Gastarife vergleichen: Heizkosten vor dem Herbst senken"
   caption: "Tipp von FranksFinanzcheck"
+kurzantwort: "Du kannst im Winter bares Geld sparen, wenn du im Spätsommer den Gastarif wechselst. Ein Preisvergleich kann dir dabei helfen, bis zu 20&nbsp;% an Heizkosten zu sparen. Durch die Auswahl eines günstigen Tarifs mit Preisgarantie und Boni kannst du deine Ausgaben senken."
 ---Bezahlst du noch die hohen Preise deines Grundversorgers? Wer jetzt seine Gastarife vergleichen will, nutzt den Spätsommer für den Wechsel und spart im kommenden Winter bares Geld. Ein kluger Anbieterwechsel senkt deine jährlichen Fixkosten oft um 200 bis 400 Euro. So sicherst du dir günstige Konditionen, bevor die Heizperiode startet und die Preise traditionell anziehen.
 
 ### Das Wichtigste in Kürze

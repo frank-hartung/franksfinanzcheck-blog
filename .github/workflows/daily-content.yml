@@ -171,7 +171,7 @@ jobs:
           echo "== Meta-Optimierung (KI) =="
           python3 scripts/meta_optimizer.py --fix --ai || echo "⚠ Meta-Fehler (nicht kritisch)"
           echo "== Interne Verlinkung =="
-          python3 scripts/internal_linker.py --apply --max 3 || echo "⚠ Linker-Fehler (nicht kritisch)"
+          python3 scripts/internal_linker.py --apply --max 5 || echo "⚠ Linker-Fehler (nicht kritisch)"
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
           git add -A

@@ -37,7 +37,11 @@
 
 {{- if .Params.cover.image -}}
   {{- if (ne .Params.cover.relative true) }}
-    <meta property="og:image" content="{{ .Params.cover.image | absURL }}">
+    {{- $sha := getenv "HUGO_JSDELIVR_SHA" }}
+    {{- $ogImg := .Params.cover.image | absURL }}
+    {{- if $sha }}{{ $ogImg = printf "%s?v=%s" $ogImg $sha }}{{ end }}
+    <meta property="og:image" content="{{ $ogImg }}">
+    {{- with .Params.cover.alt }}<meta property="og:image:alt" content="{{ . | plainify }}">{{ end }}
   {{- else}}
     <meta property="og:image" content="{{ (path.Join .RelPermalink .Params.cover.image ) | absURL }}">
   {{- end}}

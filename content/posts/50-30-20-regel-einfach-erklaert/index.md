@@ -10,8 +10,9 @@ keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen",
 author: "Frank"
 cover:
   image: "images/covers/50-30-20-regel-einfach-erklaert.jpg"
-  alt: "Spar-Tipp: 50 30 20 Regel Einfach Erklaert"
+  alt: "Die 50-30-20-Regel: Die perfekte Formel für deine Finanzen"
   caption: "Tipp von FranksFinanzcheck"
+kurzantwort: "Du verteilst dein Gehalt in drei Teile: 50&nbsp;% für Fixkosten, 30&nbsp;% für Freizeitausgaben und 20&nbsp;% für das Sparen. Diese Regel hilft dir, deine Finanzen effektiv zu planen. Mit 20&nbsp;% deines Einkommens sparst du kontinuierlich für die Zukunft."
 ---Bleiben dir am Monatsende oft weniger als 100 Euro auf dem Konto? Viele Menschen verlieren trotz eines guten Gehalts den Überblick über ihre Ausgaben. Die 50 30 20 Regel löst dieses Problem sofort. Diese einfache Formel strukturiert deine Finanzen ohne komplizierte Tabellen. Du schaffst dir damit eine solide Basis für deinen langfristigen Vermögensaufbau.
 
 ### Das Wichtigste in Kürze

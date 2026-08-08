@@ -10,8 +10,9 @@ keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", 
 author: "Frank"
 cover:
   image: "images/covers/stromfresser-im-haushalt-entlarven.jpg"
-  alt: "Spar-Tipp: Stromfresser Im Haushalt Entlarven"
+  alt: "Stromfresser entlarven: Diese 3 Geräte kosten Geld"
   caption: "Tipp von FranksFinanzcheck"
+kurzantwort: "Dein Fernseher, Computer und Kühlschrank verbrauchen am meisten Strom. Diese Geräte können bis zu 50&nbsp;% deines Gesamtstromverbrauchs ausmachen. Durch Abschalten im Standby-Modus kannst du etwa 100&nbsp;€ im Jahr sparen."
 ---Die Stromrechnung steigt - aber du weißt nicht, warum? Oft sind es unbemerkte Dauerläufer, die Jahr für Jahr hunderte Euro kosten. Stromfresser zu finden lohnt sich: Oft stecken nur wenige Geräte hinter der hohen Rechnung. Wir zeigen dir, welche Geräte die größten Stromfresser sind. Und was du dagegen tun kannst.
 
 ## Die 3 größten Stromfresser im Haushalt
