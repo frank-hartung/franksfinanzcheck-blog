@@ -159,7 +159,10 @@ def load_articles(files=None, new_only=False):
     import datetime
     today = datetime.date.today().isoformat()
     arts = []
-    paths = files or sorted(glob.glob(os.path.join(POSTS_DIR, "*.md")))
+    paths = files or sorted(
+        glob.glob(os.path.join(POSTS_DIR, "*.md"))
+        + glob.glob(os.path.join(POSTS_DIR, "*", "index.md"))
+    )
     for path in paths:
         content = open(path, encoding="utf-8").read()
         parts = content.split("---", 2)

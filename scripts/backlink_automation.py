@@ -27,6 +27,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_FILE = os.path.join(BLOG_DIR, "data", "backlink_prospects.yaml")
 REPORT_FILE = os.path.join(BLOG_DIR, "BACKLINK-REPORT.md")
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+from post_utils import list_post_paths, slug_of
 
 try:
     import yaml
@@ -52,12 +53,10 @@ def http_check(url, timeout=8):
 def load_articles():
     """Lädt Artikel-Titel + Themen für die Outreach-Personalisierung."""
     arts = []
-    for fn in sorted(os.listdir(POSTS_DIR)):
-        if not fn.endswith(".md"):
-            continue
-        content = open(os.path.join(POSTS_DIR, fn), encoding="utf-8").read()
+    for path in list_post_paths():
+        content = open(path, encoding="utf-8").read()
         m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
-        title = (m.group(1) if m else fn[:-3]).strip()
+        title = (m.group(1) if m else slug_of(path)).strip()
         m2 = re.search(r'^categories:\s*\[(.*?)\]', content, re.M)
         cats = [c.strip().strip('"\'') for c in (m2.group(1).split(",") if m2 else [])]
         arts.append({"title": title, "slug": fn[:-3], "categories": cats})

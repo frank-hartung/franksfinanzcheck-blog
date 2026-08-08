@@ -39,6 +39,7 @@ import urllib.request
 # ---------------------------------------------------------------- Konfiguration
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+from post_utils import list_post_paths, slug_of
 TOPICS_FILE = os.path.join(BLOG_DIR, "data", "topics.yaml")
 
 PINTEREST_PLAN = os.path.join(BLOG_DIR, "data", "pinterest_plan.yaml")
@@ -159,12 +160,10 @@ def demo_files():
     demos = []
     if not os.path.isdir(POSTS_DIR):
         return demos
-    for fn in os.listdir(POSTS_DIR):
-        if not fn.endswith(".md"):
-            continue
-        with open(os.path.join(POSTS_DIR, fn), encoding="utf-8") as f:
+    for path in list_post_paths():
+        with open(path, encoding="utf-8") as f:
             if "demo-artikel" in f.read():
-                demos.append(fn)
+                demos.append(path)
     return demos
 
 
@@ -173,10 +172,8 @@ def existing_titles():
     titles = set()
     if not os.path.isdir(POSTS_DIR):
         return titles
-    for fn in os.listdir(POSTS_DIR):
-        if not fn.endswith(".md"):
-            continue
-        with open(os.path.join(POSTS_DIR, fn), encoding="utf-8") as f:
+    for path in list_post_paths():
+        with open(path, encoding="utf-8") as f:
             content = f.read()
         m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
         if m:
@@ -685,7 +682,9 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
     used_titles.add(title.lower())
     date = datetime.date.today().isoformat()
     slug = slugify(title)
-    filename = os.path.join(POSTS_DIR, f"{date}-{slug}.md")
+    bundle_dir = os.path.join(POSTS_DIR, f"{date}-{slug}")
+    os.makedirs(bundle_dir, exist_ok=True)
+    filename = os.path.join(bundle_dir, "index.md")
 
     cta = (
         "\n---\n\n"
@@ -825,9 +824,10 @@ def main():
     today = datetime.date.today().isoformat()
     published_today = 0
     if os.path.isdir(POSTS_DIR):
-        for fn in os.listdir(POSTS_DIR):
-            if fn.startswith(today) and fn.endswith(".md"):
-                with open(os.path.join(POSTS_DIR, fn), encoding="utf-8") as f:
+        for path in list_post_paths():
+            slug = slug_of(path)
+            if slug.startswith(today):
+                with open(path, encoding="utf-8") as f:
                     content = f.read()
                 if "draft: false" in content:
                     published_today += 1

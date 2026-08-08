@@ -20,6 +20,7 @@ from itertools import combinations
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+from post_utils import list_post_paths
 PINTEREST_PLAN = os.path.join(BLOG_DIR, "data", "pinterest_plan.yaml")
 
 PHRASE_LEN = int(os.environ.get("PHRASE_LEN", "7"))
@@ -100,13 +101,11 @@ def main():
 
     articles = {}
     titles = {}
-    for fn in sorted(os.listdir(POSTS_DIR)):
-        if not fn.endswith(".md"):
-            continue
-        content = open(os.path.join(POSTS_DIR, fn), encoding="utf-8").read()
+    for path in list_post_paths():
+        content = open(path, encoding="utf-8").read()
         m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
-        titles[fn] = m.group(1) if m else fn
-        articles[fn] = clean_body(content)
+        titles[path] = m.group(1) if m else path
+        articles[path] = clean_body(content)
 
     print(f"Prüfe {len(articles)} Artikel (Phrasenlänge: {n}, max. ähnlich: {max_sim})\n")
 

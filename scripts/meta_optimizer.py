@@ -25,6 +25,7 @@ import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+from post_utils import list_post_paths, slug_of
 CACHE_FILE = os.path.join(BLOG_DIR, ".meta_cache.json")
 
 TITLE_MIN, TITLE_MAX = 30, 60
@@ -56,10 +57,8 @@ def norm(s):
 
 def load_articles():
     arts = []
-    for fn in sorted(os.listdir(POSTS_DIR)):
-        if not fn.endswith(".md"):
-            continue
-        content = open(os.path.join(POSTS_DIR, fn), encoding="utf-8").read()
+    for path in list_post_paths():
+        content = open(path, encoding="utf-8").read()
         parts = content.split("---", 2)
         fm = parts[1] if len(parts) > 1 else ""
         body = parts[2] if len(parts) == 3 else content
@@ -72,15 +71,15 @@ def load_articles():
 
         anrede_raw = get("anrede").strip('"').lower()
         arts.append({
-            "file": fn,
-            "slug": fn[:-3],
+            "file": path,
+            "slug": slug_of(path),
             "title": get("title"),
             "description": get("description"),
             "keywords": get("keywords"),
             "cover": get("cover"),
             "fm": fm,
             "body": body,
-            "path": os.path.join(POSTS_DIR, fn),
+            "path": path,
             "content": content,
             "anrede_sie": anrede_raw in ("sie", "sie-form", "höflich"),
         })

@@ -21,6 +21,7 @@ import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+from post_utils import list_post_paths
 TOPICS_FILE = os.path.join(BLOG_DIR, "data", "topics.yaml")
 LINKS_FILE = os.path.join(BLOG_DIR, "scripts", "check24_links.yaml")
 
@@ -131,12 +132,11 @@ def main():
     print(f"Persönliche Links geladen: {len(links)} Kategorien")
     print("Modus: " + ("VORSCHAU (--dry-run) – es wird nichts geändert" if dry_run else "ERSETZEN"))
 
-    files = sorted(os.listdir(POSTS_DIR))
-    md_files = [f for f in files if f.endswith(".md")]
+    md_files = list_post_paths()
     grand_total = 0
     print(f"\nDurchsuche {len(md_files)} Artikel …")
     for fn in md_files:
-        count, name = process_file(os.path.join(POSTS_DIR, fn), links, dry_run)
+        count, name = process_file(fn, links, dry_run)
         if count:
             action = "würde ersetzen" if dry_run else "ersetzt"
             print(f"  ✓ {name}: {count} Link(s) {action}")
