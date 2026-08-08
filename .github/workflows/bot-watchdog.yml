@@ -11,6 +11,8 @@
 #        Ruhe ab und erkennt trotzdem einen kompletten Ausfall)
 #    2) Sind alle Bot-Skripte syntaktisch valide?
 #    3) Ist die Live-Site auf dem neuesten Content-Commit (Deploy ok)?
+#    4) Ist das GitHub-TLS-Zertifikat für franksfinanzcheck.de ausgestellt?
+#       (Wenn ja → Hinweis-Issue: Cloudflare auf "Full (strict)" umstellen)
 #
 #  Bei Problemen: automatisch GitHub-Issue (mit Dedupe – kein Spam).
 #  Manuell starten: Actions → Bot-Watchdog → Run workflow
@@ -71,9 +73,7 @@ jobs:
 
           # 3) Live-Site aktuell? Der robusteste Check: den NEUESTEN Artikel aus
           #    dem letzten Content-Commit nehmen und seine Live-URL per HTTP
-          #    prüfen (HTTP 200 = veröffentlicht). (Kein ?v=-SHA-Abgleich –
-          #    die Seite nutzt den Deploy-SHA als Cache-Buster, nicht den
-          #    Content-SHA → der frühere Check war ein False-Positive-Risiko.)
+          #    prüfen (HTTP 200 = veröffentlicht).
           LAST_SHA=$(git log -1 --format=%h --grep="^content:" || true)
           if [ -n "$LAST_SHA" ]; then
             NEWEST_SLUG=$(git show --stat --format="" "$LAST_SHA" | grep -o "content/posts/[^/]*" | sort -u | tail -1 | sed 's|content/posts/||')
@@ -93,6 +93,30 @@ jobs:
             echo "CHECK3=SKIP (kein Content-Commit)"
           fi
 
+          # 4) GitHub-TLS-Zertifikat für franksfinanzcheck.de ausgestellt?
+          CERT_OK=0
+          if python3 -c "
+import ssl, socket
+try:
+    ctx = ssl.create_default_context()
+    with socket.create_connection(('185.199.108.153', 443), timeout=8) as sock:
+        with ctx.wrap_socket(sock, server_hostname='franksfinanzcheck.de') as tls:
+            cert = tls.getpeercert()
+            san = [v for k, v in cert.get('subjectAltName', [])]
+            if any('franksfinanzcheck.de' in s for s in san):
+                raise SystemExit(0)
+except Exception:
+    pass
+raise SystemExit(1)
+" 2>/dev/null; then
+            CERT_OK=1
+          fi
+          if [ "$CERT_OK" = "1" ]; then
+            echo "CHECK4=OK" >> "$GITHUB_ENV"
+          else
+            echo "CHECK4=WAIT" >> "$GITHUB_ENV"
+          fi
+
           echo "$PROBLEMS" > /tmp/problems.txt
           echo "PROBLEMS<<EOF" >> "$GITHUB_ENV"
           echo "$PROBLEMS" >> "$GITHUB_ENV"
@@ -108,11 +132,45 @@ jobs:
           echo "- Check 1 (Artikel in 30h): ${{ env.CHECK1 }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Check 2 (Skript-Syntax): ${{ env.CHECK2 }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Check 3 (Live-Site): ${{ env.CHECK3 }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Check 4 (GitHub-TLS-Zertifikat): ${{ env.CHECK4 }}" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
           if [ -n "${{ env.PROBLEMS }}" ]; then
             echo "### Probleme" >> "$GITHUB_STEP_SUMMARY"
             echo "${{ env.PROBLEMS }}" >> "$GITHUB_STEP_SUMMARY"
           fi
+
+      - name: Issue bei fertigem GitHub-Zertifikat (Hinweis auf Full strict)
+        if: ${{ env.CHECK4 == 'OK' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: existing } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', per_page: 100
+            });
+            const open = existing.filter(i => i.title && i.title.includes('GitHub-Zertifikat') && !i.pull_request);
+            if (open.length > 0) {
+              console.log('Hinweis-Issue existiert bereits (#' + open[0].number + ').');
+              return;
+            }
+            await github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo,
+              title: '✅ GitHub-Zertifikat für franksfinanzcheck.de ist da',
+              body: [
+                'Das TLS-Zertifikat von GitHub Pages für **franksfinanzcheck.de** ist jetzt ausgestellt.',
+                '',
+                '**Empfohlener Schritt (1 Min):**',
+                '1. Cloudflare → franksfinanzcheck.de → SSL/TLS → Overview',
+                '2. Modus von **"Full"** auf **"Full (strict)"** umstellen',
+                '3. Fertig – maximale Sicherheit (Cloudflare verifiziert das Origin-Zertifikat)',
+                '',
+                'Dieses Issue kann danach geschlossen werden.',
+                '',
+                '---',
+                '*Automatisch erstellt vom Bot-Watchdog.*'
+              ].join('\n')
+            });
+            console.log('✅ Hinweis-Issue erstellt');
 
       - name: Issue bei Problemen erstellen (mit Dedupe)
         if: ${{ env.PROBLEMS != '' }}
