@@ -1,6 +1,6 @@
 ---
 title: "Stromtarif für Wärmepumpe: So sparst du beim Heizen"
-description: "Wärmepumpen sparen Heizkosten."
+description: "Du willst beim Heizen sparen? Finde den besten Wärmepumpentarif für dein Zuhause und senke deine Stromkosten spürbar. Jetzt lesen und bares Geld sparen!"
 date: 2026-08-08
 draft: false
 tags: ["Wärmepumpentarif", "Stromtarif", "Heizkosten"]
