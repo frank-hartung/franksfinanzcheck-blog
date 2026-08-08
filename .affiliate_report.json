@@ -1,5 +1,5 @@
 {
- "total": 43,
+ "total": 44,
  "errors": 0,
  "fixed": 0,
  "posts": [
@@ -58,6 +58,17 @@
    "errors": [],
    "infos": [
     "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich",
+   "title": "ETF-Sparplan für Einsteiger: So startest du monatl",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
    "ok": true
   },
