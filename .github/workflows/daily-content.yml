@@ -158,6 +158,34 @@ jobs:
         continue-on-error: true
         run: python3 scripts/submit_indexnow.py || echo "⚠ IndexNow-Fehler (nicht kritisch – SEO-Workflow reicht später nach)"
 
+      # ===================== DEPLOY ANSTOSSEN (KRITISCH) =====================
+      # GitHub-Schutz: Commits, die vom GITHUB_TOKEN eines Workflows erstellt
+      # werden, lösen KEINE weiteren Workflow-Läufe aus (rekursive Trigger-
+      # Sperre). Der Content-Bot pusht aber genau so → der Deploy-Workflow
+      # würde NIE starten und neue Artikel blieben offline!
+      # Lösung: Deploy-Workflow per workflow_dispatch explizit anstoßen –
+      # GANZ AM ENDE (nach allen Folge-Commits), damit der neueste Stand
+      # deployed wird. (Deploy-Workflow hat concurrency-Queue → kein Konflikt.)
+      - name: Deploy-Workflow explizit anstoßen (GitHub-Token-Schutz umgehen)
+        if: ${{ !cancelled() }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const last = execSync('git log -1 --format=%s').toString().trim();
+            const isContent = last.startsWith('content:');
+            if (!isContent) {
+              console.log('Kein Content-Commit in diesem Lauf – kein Deploy nötig.');
+              return;
+            }
+            console.log('Content-Commit gefunden – stoße Deploy-Workflow an …');
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy.yml',
+              ref: 'main',
+            });
+            console.log('✅ Deploy-Workflow ausgelöst.');
+
       # ===================== STATUS-ZUSAMMENFASSUNG =====================
       - name: Status-Zusammenfassung (Job-Summary)
         if: ${{ always() }}
