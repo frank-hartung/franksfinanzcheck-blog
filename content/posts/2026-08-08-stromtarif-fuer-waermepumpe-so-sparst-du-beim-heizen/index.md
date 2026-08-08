@@ -17,7 +17,7 @@ cover:
 ---Wusstest du, dass du deine Heizkosten um bis zu 30&nbsp;% senken kannst? Ein spezieller Wärmepumpentarif macht diesen finanziellen Vorteil möglich. Deine Wärmepumpe benötigt viel Energie, doch dieser Strom muss nicht teuer sein. Wir zeigen dir, wie du den passenden Tarif für dein Haus findest.
 
 ## Wärmepumpentarif: Die Grundlagen
-ein Wärmepumpentarif ist ein vergünstigter Stromtarif für deine Heizung. Netzbetreiber steuern diese Tarife aus der Ferne, um das Stromnetz zu entlasten. Im Gegenzug zahlst du deutlich geringere Netzentgelte als beim normalen Haushaltsstrom. Das senkt deine jährlichen Heizkosten spürbar.
+Ein Wärmepumpentarif ist ein vergünstigter Stromtarif für deine Heizung. Netzbetreiber steuern diese Tarife aus der Ferne, um das Stromnetz zu entlasten. Im Gegenzug zahlst du deutlich geringere Netzentgelte als beim normalen Haushaltsstrom. Das senkt deine jährlichen Heizkosten spürbar.
 
 Du benötigst dafür meist einen eigenen Stromzähler für die Wärmepumpe. Prüfe vorab, ob sich der zusätzliche Grundpreis für diesen Zähler für dich rechnet. Bei einem hohen Strombedarf von über 3.000&nbsp;kWh lohnt sich die Trennung fast immer. Weitere Tipps findest du im [Ratgeber: Strom sparen](../../pillar/strom-sparen/).
 

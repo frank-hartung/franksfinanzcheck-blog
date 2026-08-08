@@ -348,14 +348,98 @@ def analyze_article(a, whitelist):
             "reason": f"Satzanfang nach Überschrift: „{m.group(2)}“ → „{m.group(2).upper()}“",
         })
 
-    # Satzzeichen-Checks auf MASKED Text (Links/URLs ausgeblendet → keine
-    # falschen Treffer durch "../../posts/" o. Ä.; Offsets bleiben gültig,
-    # weil die Maskierung gleich lang ist)
+    # MASKED Text (Links/URLs/Code ausgeblendet → keine falschen Treffer durch
+    # "../../posts/" o. Ä.; Offsets bleiben gültig, weil die Maskierung gleich
+    # lang ist). Wird von den Satzanfangs- und Satzzeichen-Checks genutzt.
     body_masked = CODE_RE.sub(lambda m: " " * (m.end() - m.start()), body)
     body_masked = URL_RE.sub(lambda m: " " * (m.end() - m.start()), body_masked)
     body_masked = LINK_RE.sub(lambda m: " " * (m.end() - m.start()), body_masked)
     # &nbsp; (6 Zeichen) → 6 Leerzeichen: gleiche Länge, Offsets bleiben gültig
     body_masked = body_masked.replace("&nbsp;", " " * 6)
+
+    # 2b2. SATZANFANG großschreiben (TOP-LEVEL, deterministisch & robust):
+    #      a) Am ABSATZANFANG: erste Zeile eines Blocks (nach Leerzeile oder
+    #         Textbeginn), die nicht mit Markdown-Syntax beginnt → erstes Wort groß
+    #      b) Nach SATZENDE (. ! ? …): nächstes Wort groß
+    #      Schützt: Abkürzungen (z. B., usw., bzw. – danach bleibt klein korrekt),
+    #      Markennamen mit CamelCase (iCloud, eBay …), Zeilen, die mit einem
+    #      Link beginnen (maskiert), nummerierte Listen, Bullets, Tabellen, Code.
+    SATZANFANG_MARKEN = {"icloud", "ebay", "ipad", "iphone", "ipod", "macos", "ios",
+                         "mbit", "kbit", "gbit", "mbits", "kbits"}
+
+    def _abk_norm(w):
+        # ALLE Nicht-Buchstaben entfernen (Punkte, Spaces, Klammern …),
+        # damit "(z. B." und "z. B." gleich normalisiert werden
+        return re.sub(r"[^a-zäöüß]", "", w.lower())
+
+    _abk_set = {_abk_norm(a) for a in ABKUERZUNGEN}
+
+    def _ist_abkuerzungsende(text):
+        worte = text.split()
+        if not worte:
+            return False
+        # Nummerierung/Datum: "1.", "2.", "30." – der Punkt ist KEIN Satzende
+        if worte[-1].rstrip(".").isdigit():
+            return True
+        if _abk_norm(worte[-1]) in _abk_set:
+            return True
+        if len(worte) >= 2 and _abk_norm(worte[-2] + worte[-1]) in _abk_set:
+            return True
+        return False
+
+    def _satzanfang_wort(pos):
+        m = re.match(r"[a-zäöüß][a-zäöüßA-ZÄÖÜ0-9\-]*", body_masked[pos:])
+        return m.group(0) if m else ""
+
+    def _ist_abkuerzung_wort(pos):
+        # Volles Wort bis Whitespace (inkl. Punkt, z. B. "usw." oder "z."):
+        # wenn es mit Punkt endet oder eine bekannte Abkürzung ist → Abkürzung
+        m = re.match(r"[a-zäöüß][^ \t\n]*", body_masked[pos:])
+        if not m:
+            return False
+        w = m.group(0)
+        if w.endswith("."):
+            return True
+        return _abk_norm(w) in _abk_set
+
+    def _endet_mit_link(orig_text, pos):
+        seg = orig_text[max(0, pos - 80):pos]
+        letzte_zeile = seg.split("\n")[-1]
+        return bool(re.search(r"\[[^\]]*\]\([^)]*\)\s*$", letzte_zeile))
+
+    # a) Absatzanfang großschreiben
+    for m in re.finditer(r"(?:^|\n\n)[ \t]*(?:[„“])?([a-zäöüß])", body_masked):
+        pos = m.start(1)
+        wort = _satzanfang_wort(pos)
+        if not wort or wort.lower() in SATZANFANG_MARKEN:
+            continue
+        if _ist_abkuerzung_wort(pos):
+            continue  # "z. B. …" oder "usw. …" am Absatzanfang bleibt klein
+        if _endet_mit_link(body, pos):
+            continue
+        problems.append({
+            "type": "satzanfang", "word": m.group(1), "fix": m.group(1).upper(),
+            "start": pos, "end": pos + 1, "conf": 0.95,
+            "reason": f"Satzanfang: „{m.group(1)}“ → „{m.group(1).upper()}“ (Absatzbeginn)",
+        })
+
+    # b) Nach Satzende großschreiben (mit Abkürzungs-Schutz)
+    for m in re.finditer(r"([.!?…])\s+([a-zäöüß])", body_masked):
+        if _ist_abkuerzungsende(body_masked[max(0, m.start() - 40):m.start(1)]):
+            continue
+        pos = m.start(2)
+        wort = _satzanfang_wort(pos)
+        if not wort or wort.lower() in SATZANFANG_MARKEN:
+            continue
+        if _ist_abkuerzung_wort(pos):
+            continue  # "…bleibt. usw. das…" – usw. bleibt klein
+        problems.append({
+            "type": "satzanfang", "word": m.group(2), "fix": m.group(2).upper(),
+            "start": pos, "end": pos + 1, "conf": 0.95,
+            "reason": f"Satzanfang nach „{m.group(1)}“: „{m.group(2)}“ → „{m.group(2).upper()}“",
+        })
+
+
 
     # 2c2. SATZZEICHEN: Abkürzungen mit fehlendem Leerzeichen (Z.B. → z. B.)
     for regex, fix in ABKUERZUNG_FIXES:
