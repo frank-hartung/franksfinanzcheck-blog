@@ -490,3 +490,26 @@ input:focus-visible {
         padding: 6px 11px !important;
     }
 }
+
+/* ---------- Cover kleiner darstellen (User-Wunsch) ---------- */
+/* Listen (Startseite/Kategorien): Cover max. 440px breit, zentriert –
+   statt volle 670px. Bleibt LCP-tauglich (größtes Element im Viewport). */
+.post-entry .entry-cover img,
+.first-entry .entry-cover img {
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+/* Single-Seiten: Cover max. 560px breit, zentriert – statt volle 720px */
+.post-single .entry-cover img {
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+/* Mobile: Cover bleibt voll breit (schon kompakt bei 375px) */
+@media (max-width: 600px) {
+    .post-entry .entry-cover img,
+    .first-entry .entry-cover img {
+        max-width: 100%;
+    }
+}
