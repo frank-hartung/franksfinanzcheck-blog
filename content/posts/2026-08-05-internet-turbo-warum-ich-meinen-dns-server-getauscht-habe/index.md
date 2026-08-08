@@ -3,7 +3,7 @@ title: "Internet-Turbo: Warum ich meinen DNS-Server getauscht habe"
 description: "Du willst deinen DNS-Server wechseln? Ich erkläre dir, wie ich mein Internet spürbar beschleunigt habe und warum Standard-Einstellungen oft bremsen."
 date: 2026-08-05
 draft: false
-tags: ["dns server wechseln", "internet schneller machen", "dsl tipps"]
+tags: ["DNS-Server wechseln", "Internet schneller machen", "DSL-Tipps"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 keywords: ["dns server wechseln", "internet schneller machen", "dsl tipps"]

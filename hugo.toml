@@ -1,6 +1,11 @@
 baseURL = "https://frank-hartung.github.io/franksfinanzcheck-blog/"
 title = "FranksFinanzcheck"
 theme = "PaperMod"
+
+# Keine automatische Titel-Umwandlung (Title-Case) durch Hugo:
+# Taxonomie-Terme (Tags/Kategorien) werden EXAKT wie im Frontmatter
+# angezeigt – verhindert "Haushaltsbuch Führen" statt "Haushaltsbuch führen".
+titleCaseStyle = "none"
 locale = "de-DE"
 defaultContentLanguage = "de"
 enableRobotsTXT = true
