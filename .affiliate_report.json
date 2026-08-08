@@ -1,0 +1,410 @@
+{
+ "total": 43,
+ "errors": 0,
+ "fixed": 0,
+ "posts": [
+  {
+   "slug": "frugalismus",
+   "title": "Frugalismus: Der große Ratgeber für finanzielle Fr",
+   "pillar": "",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "internet-dsl",
+   "title": "Internet & DSL: Der große Ratgeber für schnelles N",
+   "pillar": "",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "konto-karten",
+   "title": "Konto & Karten: Der große Ratgeber für gebührenfre",
+   "pillar": "",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "mietwagen",
+   "title": "Mietwagen & Reisen: Der große Ratgeber zum Geld sp",
+   "pillar": "",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "strom-sparen",
+   "title": "Strom sparen: Der große Ratgeber für niedrige Ener",
+   "pillar": "",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "versicherungen",
+   "title": "Versicherungen: Der große Ratgeber für den richtig",
+   "pillar": "",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe",
+   "title": "Internet-Turbo: Warum ich meinen DNS-Server getaus",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-06-frugalismus-im-alltag",
+   "title": "Frugalismus im Alltag: So sparst du jeden Monat ba",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-06-turbo-fuers-netz",
+   "title": "Turbo fürs Netz: DNS-Wechsel für schnelleres Inter",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-07-frugalismus-fuer-den-erfolg",
+   "title": "Frugalismus für den Erfolg:<br> Der Weg in die Fre",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-07-mietwagen-fuer-den-spaetsommer",
+   "title": "Mietwagen im Spätsommer: Günstig buchen und sparen",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-08-dein-tier-im-krankheitsfall",
+   "title": "Tierversicherung: Schutz für dein Tier im Krankhei",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen",
+   "title": "Stromtarif für Wärmepumpe: So sparst du beim Heize",
+   "pillar": "strom-sparen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "50-30-20-regel-einfach-erklaert",
+   "title": "Die 50-30-20-Regel: Die perfekte Formel für deine ",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "7-gewohnheiten-finanzielle-freiheit",
+   "title": "7 Gewohnheiten für mehr finanzielle Freiheit im Al",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "dns-server-aendern-schnelleres-internet",
+   "title": "DNS-Server ändern: Der kostenlose Boost für dein I",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "dsl-internet-flat-guenstig-sichern",
+   "title": "DSL- und Internet-Flat günstig sichern: Der beste ",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "e-auto-laden-stromkosten-senken",
+   "title": "E-Auto laden: So senkst du deine Stromkosten zu Ha",
+   "pillar": "strom-sparen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "frugalismus-tricks-alltag-200-euro-sparen",
+   "title": "5 Frugalismus-Tricks: So sparst du 200 € pro Monat",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "gastarife-vergleichen-vor-dem-herbst",
+   "title": "Gastarife vergleichen: Heizkosten vor dem Herbst s",
+   "pillar": "strom-sparen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "guenstige-fluege-spaetsommer-finden",
+   "title": "Günstige Flüge im Spätsommer: 7 Tricks zum Geld sp",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "handytarife-vergleichen-guenstigster-tarif",
+   "title": "Handytarife vergleichen: So findest du den günstig",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "hausratversicherung-wer-braucht-leistung",
+   "title": "Hausratversicherung: Wer sie braucht und was sie l",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "heizperiode-vorbereiten-spaetsommer",
+   "title": "Heizperiode vorbereiten: 3 wichtige Dinge für den ",
+   "pillar": "strom-sparen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "kfz-versicherung-wechseln",
+   "title": "Kfz-Versicherung wechseln: Wann es sich wirklich l",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "kostenloses-girokonto-finden",
+   "title": "Kostenloses Girokonto ohne Gebühren: So findest du",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "kreditkarte-ohne-jahresgebuehr",
+   "title": "Kreditkarte ohne Jahresgebühr: Die besten kostenlo",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "last-minute-urlaubsangebote-sichern",
+   "title": "Last-Minute Urlaubsangebote: Traumurlaub günstig b",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "mietwagen-buchen-so-sparst-du",
+   "title": "Günstigen Mietwagen buchen: So sparst du im Urlaub",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "mietwagen-fallen-vermeiden",
+   "title": "Mietwagen-Fallen vermeiden: Versicherung & Kaution",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "notgroschen-aufbauen-wie-viel-reicht",
+   "title": "Notgroschen aufbauen: Wie viel Geld reicht wirklic",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt",
+   "title": "Private Unfallversicherung: Für wen sie sich wirkl",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "privathaftpflicht-warum-pflicht-kosten",
+   "title": "Privathaftpflicht: Warum sie Pflicht ist und was s",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "ratenkredit-bestszins-vergleichen",
+   "title": "Ratenkredit mit Bestzins sichern: So vergleichst d",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "reisekrankenversicherung-wann-lohnt",
+   "title": "Reisekrankenversicherung: Wann sie sich wirklich l",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "strom-sparen-haushalt-20-tipps",
+   "title": "Strom sparen im Haushalt: 20 Tipps für die nächste",
+   "pillar": "strom-sparen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "stromanbieter-wechseln-2026",
+   "title": "Stromanbieter wechseln 2026: So sparst du beim Tar",
+   "pillar": "strom-sparen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "stromfresser-im-haushalt-entlarven",
+   "title": "Stromfresser entlarven: Diese 3 Geräte kosten Geld",
+   "pillar": "strom-sparen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "tagesgeld-zinsen-sicher-anlegen",
+   "title": "Tagesgeld und Zinsen: So parkst du dein Geld siche",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "urlaubskasse-aufbessern-spartipps",
+   "title": "Urlaubskasse aufbessern: 7 Spartipps für den Somme",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "waermepumpe-vs-gasheizung-2026",
+   "title": "Wärmepumpe vs. Gasheizung: Was sich 2026 wirklich ",
+   "pillar": "strom-sparen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "wlan-verstaerker-vs-mesh-wlan",
+   "title": "WLAN-Verstärker vs. Mesh-WLAN: Schnelles Internet ",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "zahnzusatzversicherung-lohnt-sich",
+   "title": "Zahnzusatzversicherung: Wann sich der Abschluss lo",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  }
+ ]
+}
