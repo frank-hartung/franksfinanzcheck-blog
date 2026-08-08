@@ -72,6 +72,18 @@ jobs:
         uses: actions/checkout@v4
 
       # ================= PHASE 1: GENERIEREN & SOFORT LIVE =================
+      # ============== PRE-FLIGHT-CHECK (widerstandsfähig) ==============
+      # Prüft VOR der Generierung: Skript-Syntax (verhindert stille Ausfälle
+      # durch kaputte Skripte), API-Keys, Themenpool. Bricht früh mit klarer
+      # Meldung ab (→ Fehler-Alerting) statt mitten im Lauf zu scheitern.
+      - name: Pre-Flight-Check (Syntax, Keys, Themenpool)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/bot_preflight.py
+          echo "PREFLIGHT_OK=true" >> "$GITHUB_ENV"
+
       - name: Artikel generieren (Phase 1)
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}    # Gratis-Key: console.groq.com
@@ -202,6 +214,27 @@ jobs:
             console.log('✅ Deploy-Workflow ausgelöst.');
 
       # ===================== STATUS-ZUSAMMENFASSUNG =====================
+      # ============== BOT-STATUS-DASHBOARD (immer aktualisieren) ==============
+      # Aktualisiert BOT-STATUS.md im Repo (Änderungs-Only-Commit, kein Spam),
+      # damit du den Zustand der Automatisierung auf der Repo-Seite siehst.
+      - name: Bot-Status-Dashboard aktualisieren
+        if: ${{ always() }}
+        env:
+          MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '2' }}
+        run: |
+          python3 scripts/bot_status.py
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add BOT-STATUS.md
+          if git diff --cached --quiet; then
+            echo "BOT-STATUS.md unverändert."
+          else
+            git commit -m "chore: Bot-Status aktualisiert"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+            echo "✅ BOT-STATUS.md gepusht"
+          fi
+
       - name: Status-Zusammenfassung (Job-Summary)
         if: ${{ always() }}
         run: |

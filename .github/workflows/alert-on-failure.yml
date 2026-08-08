@@ -24,6 +24,7 @@ on:
       - "Wöchentliches Einzigartigkeits-Audit"
       - "Wöchentliches Nach-Pinnen"
       - "Quartalsweises Artikel-Update"
+      - "Bot-Watchdog"
     types:
       - completed
 

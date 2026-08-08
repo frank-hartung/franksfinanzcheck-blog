@@ -713,6 +713,44 @@ def parse_article(raw, topic, angle_name):
     return title, desc, body
 
 
+def validate_frontmatter(path):
+    """Prüft Pflichtfelder im Frontmatter eines frisch erstellten Artikels.
+    Fehlende/kaputte Felder werden repariert. Wirft Exception bei nicht
+    reparierbaren Zuständen (z. B. leere Datei)."""
+    content = open(path, encoding="utf-8").read()
+    if "---" not in content:
+        raise ValueError("Kein Frontmatter vorhanden")
+    parts = content.split("---", 2)
+    fm = parts[1]
+    required = ["title:", "description:", "date:", "draft:", "categories:", "keywords:", "author:"]
+    fixes = []
+    for field in required:
+        if field not in fm:
+            fixes.append(field)
+    if fixes:
+        # Minimal-Reparatur: fehlende Felder mit sinnvollen Defaults ergänzen
+        import datetime as _dt
+        add = ""
+        for f in fixes:
+            if f == "date:":
+                add += f"date: {_dt.date.today().isoformat()}\n"
+            elif f == "draft:":
+                add += "draft: false\n"
+            elif f == "categories:":
+                add += 'categories: ["Ratgeber"]\n'
+            elif f == "keywords:":
+                add += "keywords: []\n"
+            elif f == "author:":
+                add += "author: \"Frank\"\n"
+            elif f == "title:":
+                add += 'title: "Artikel"\n'
+            elif f == "description:":
+                add += 'description: "Tipps und Einordnung zu diesem Thema."\n'
+        parts[1] = fm.rstrip() + "\n" + add
+        open(path, "w", encoding="utf-8").write("---".join(parts))
+        print(f"    ✓ Frontmatter repariert: {', '.join(fixes)} ergänzt")
+
+
 def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
     """Erzeugt eine Draft-Datei. Gibt True zurück, wenn etwas geschrieben wurde.
 
@@ -784,6 +822,13 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
     date = datetime.date.today().isoformat()
     slug = slugify(title)
     bundle_dir = os.path.join(POSTS_DIR, f"{date}-{slug}")
+    # Duplikat-Schutz: Existiert der Ordner bereits (z. B. durch einen früheren
+    # Lauf mit gleichem Titel), wird ein Zähler angehängt – nie überschreiben.
+    if os.path.exists(bundle_dir):
+        i = 2
+        while os.path.exists(f"{bundle_dir}-{i}"):
+            i += 1
+        bundle_dir = f"{bundle_dir}-{i}"
     os.makedirs(bundle_dir, exist_ok=True)
     filename = os.path.join(bundle_dir, "index.md")
 
@@ -818,6 +863,13 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
     )
     with open(filename, "w", encoding="utf-8") as f:
         f.write(frontmatter + fix_number_units(body) + "\n" + cta)
+    # FRONTMATTER-VALIDIERUNG: Pflichtfelder müssen gesetzt sein – sonst
+    # wird die Datei repariert (fehlende Felder ergänzt). Verhindert, dass
+    # ein Artikel ohne Title/Description/Date/draft live geht.
+    try:
+        validate_frontmatter(filename)
+    except Exception as e:
+        print(f"  ⚠ Frontmatter-Validierung: {e}")
     print(f"  ✓ Entwurf erstellt: {os.path.relpath(filename, BLOG_DIR)}")
     print(f"    Titel: {title}")
     print(f"    Beschreibung: {desc}")
@@ -981,9 +1033,18 @@ def main():
             print(f"  – Thema bereits behandelt, übersprungen: {topic_entry['title'][:60]}…")
             continue
         angle = ANGLES[(attempts - 1) % len(ANGLES)]
-        if write_draft(topic_entry, angle, provider=None, used_titles=used_titles,
-                       auto_publish=auto_publish):
-            created += 1
+        try:
+            if write_draft(topic_entry, angle, provider=None, used_titles=used_titles,
+                           auto_publish=auto_publish):
+                created += 1
+        except Exception as e:
+            # FEHLER-ISOLATION: Ein fehlerhaftes Thema (z. B. API-Format-Wechsel,
+            # unerwarteter Datentyp) stoppt NICHT den gesamten Lauf. Der Fehler
+            # wird protokolliert, der nächste Versuch startet.
+            import traceback
+            print(f"  ⚠ Fehler bei Thema „{topic_entry['title'][:50]}…“: {type(e).__name__}: {e}")
+            traceback.print_exc()
+            print("  → Thema übersprungen, nächster Versuch …")
         time.sleep(2)
 
     if auto_publish:

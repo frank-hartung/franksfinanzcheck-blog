@@ -1,0 +1,175 @@
+# ============================================================
+#  BOT-WATCHDOG (Selbstüberwachung der Automatisierung)
+#
+#  Schließt die größte Lücke: Wenn der Content-Bot GAR NICHT läuft
+#  (Cron verworfen, Workflow deaktiviert, GitHub-Ausfall, stiller
+#  Fehler), meldet sich sonst niemand – es käme einfach kein Artikel.
+#
+#  Der Watchdog prüft täglich:
+#    1) Wurde in den letzten ~30 h ein Artikel committet?
+#       (2 Posts/Tag erwartet → 30h-Fenster fängt Wochenend-/Feiertags-
+#        Ruhe ab und erkennt trotzdem einen kompletten Ausfall)
+#    2) Sind alle Bot-Skripte syntaktisch valide?
+#    3) Ist die Live-Site auf dem neuesten Content-Commit (Deploy ok)?
+#
+#  Bei Problemen: automatisch GitHub-Issue (mit Dedupe – kein Spam).
+#  Manuell starten: Actions → Bot-Watchdog → Run workflow
+# ============================================================
+name: Bot-Watchdog
+
+on:
+  schedule:
+    - cron: "30 8 * * *"    # 10:30 Uhr MESZ – nach dem Morgen-Artikel (08:10)
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # volle Historie für git log
+
+      - name: Watchdog-Prüfungen
+        id: checks
+        run: |
+          PROBLEMS=""
+          NOW=$(date +%s)
+
+          # 1) Letzter Content-Commit (letzte 30h)
+          LAST_TS=$(git log -1 --format=%ct --grep="^content:" || true)
+          if [ -z "$LAST_TS" ]; then
+            PROBLEMS="$PROBLEMS
+          - **Kein Artikel seit Beginn** – noch nie ein Content-Commit"
+            echo "CHECK1=FAIL" >> "$GITHUB_ENV"
+          else
+            AGE=$(( (NOW - LAST_TS) / 3600 ))
+            echo "Letzter Content-Commit vor ${AGE} h"
+            if [ "$AGE" -gt 30 ]; then
+              PROBLEMS="$PROBLEMS
+          - **Kein Artikel in den letzten ${AGE} h** (erwartet: 2/Tag) – Bot prüfen"
+              echo "CHECK1=FAIL" >> "$GITHUB_ENV"
+            else
+              echo "CHECK1=OK" >> "$GITHUB_ENV"
+            fi
+          fi
+
+          # 2) Skript-Syntax
+          python3 -m py_compile scripts/*.py 2>/tmp/syntax_err.txt
+          if [ $? -ne 0 ]; then
+            PROBLEMS="$PROBLEMS
+          - **Skript-Syntaxfehler:** $(head -3 /tmp/syntax_err.txt | tr '\n' ' ')"
+            echo "CHECK2=FAIL" >> "$GITHUB_ENV"
+          else
+            echo "CHECK2=OK" >> "$GITHUB_ENV"
+          fi
+
+          # 3) Live-Site aktuell? (letzter Content-Commit-SHA in ?v= auf der Site)
+          LAST_SHA=$(git log -1 --format=%h --grep="^content:" || true)
+          if [ -n "$LAST_SHA" ]; then
+            LIVE=$(curl -s --max-time 20 "https://frank-hartung.github.io/franksfinanzcheck-blog/?cb=watchdog" | grep -o "v=${LAST_SHA}" | head -1)
+            if [ -z "$LIVE" ]; then
+              PROBLEMS="$PROBLEMS
+          - **Live-Site evtl. veraltet** – Commit ${LAST_SHA} nicht in den Asset-URLs gefunden (Deploy prüfen)"
+              echo "CHECK3=FAIL" >> "$GITHUB_ENV"
+            else
+              echo "CHECK3=OK" >> "$GITHUB_ENV"
+            fi
+          else
+            echo "CHECK3=SKIP" >> "$GITHUB_ENV"
+          fi
+
+          echo "$PROBLEMS" > /tmp/problems.txt
+          echo "PROBLEMS<<EOF" >> "$GITHUB_ENV"
+          echo "$PROBLEMS" >> "$GITHUB_ENV"
+          echo "EOF" >> "$GITHUB_ENV"
+          if [ -z "$PROBLEMS" ]; then
+            echo "ALLES OK"
+          fi
+
+      - name: Zusammenfassung
+        run: |
+          echo "## 🤖 Watchdog-Ergebnis" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Check 1 (Artikel in 30h): ${{ env.CHECK1 }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Check 2 (Skript-Syntax): ${{ env.CHECK2 }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Check 3 (Live-Site): ${{ env.CHECK3 }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "${{ env.PROBLEMS }}" ]; then
+            echo "### Probleme" >> "$GITHUB_STEP_SUMMARY"
+            echo "${{ env.PROBLEMS }}" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Issue bei Problemen erstellen (mit Dedupe)
+        if: ${{ env.PROBLEMS != '' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const problems = process.env.PROBLEMS || '';
+            // Dedupe: kein neues Issue, wenn schon ein offenes Watchdog-Issue existiert
+            const { data: existing } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100
+            });
+            const open = existing.filter(i => i.title && i.title.includes('Bot-Watchdog') && !i.pull_request);
+            if (open.length > 0) {
+              console.log('Offenes Watchdog-Issue existiert bereits (#' + open[0].number + ') – kein Duplikat.');
+              console.log('Probleme bleiben offen: ' + problems);
+              return;
+            }
+            const body = [
+              '## 🤖 Bot-Watchdog hat Probleme festgestellt',
+              '',
+              'Folgende Checks sind fehlgeschlagen:',
+              '',
+              problems,
+              '',
+              '### Nächste Schritte',
+              '1. **API-Keys prüfen:** Settings → Secrets and variables → Actions (GROQ/GEMINI)',
+              '2. **Workflow-Log ansehen:** Actions → „Automatische Content-Generierung“ → letzter Lauf',
+              '3. **Manuell nachhelfen:** Actions → „Automatische Content-Generierung“ → Run workflow',
+              '4. **Deploy prüfen:** Actions → „Deploy auf GitHub Pages“ → letzter Lauf',
+              '',
+              'Das Issue wird automatisch geschlossen, sobald der nächste Watchdog-Lauf alles grün meldet.',
+              '',
+              '---',
+              '*Automatisch erstellt vom Bot-Watchdog (täglich 10:30 Uhr MESZ).*'
+            ].join('\n');
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '⚠️ Bot-Watchdog: Probleme mit der Content-Automatisierung',
+              body: body
+            });
+            console.log('✅ Watchdog-Issue erstellt');
+
+      - name: Offenes Watchdog-Issue schließen (alles wieder grün)
+        if: ${{ env.PROBLEMS == '' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: existing } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100
+            });
+            const open = existing.filter(i => i.title && i.title.includes('Bot-Watchdog') && !i.pull_request);
+            for (const issue of open) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed',
+                state_reason: 'completed'
+              });
+              console.log('✅ Watchdog-Issue #' + issue.number + ' geschlossen (alles grün).');
+            }
+            if (open.length === 0) console.log('Kein offenes Watchdog-Issue.');
