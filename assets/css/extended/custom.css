@@ -518,3 +518,27 @@ input:focus-visible {
         max-width: 100%;
     }
 }
+
+/* ---------- Mobile: Cover ÜBER dem Titel (LCP-Fix für kleine Viewports) ----------
+   Problem: Der lange H1 (bis zu 192 px hoch) schiebt das Cover auf top≈577 –
+   bei Viewports ≤ 667 px liegt es fast komplett unter dem Fold → wird nie als
+   LCP gemalt → Lighthouse "LCP nicht bewertet" + riesige Rendering-Verzögerung.
+   Fix: .post-single wird auf Mobile zur Flex-Column, das Cover bekommt
+   order:-1 (erscheint direkt unter der Navigation) und wird auf max 55vh
+   begrenzt → sicher im Viewport, sofort gemalt, kein CLS (deterministisch). */
+@media (max-width: 600px) {
+    .post-single {
+        display: flex;
+        flex-direction: column;
+    }
+    .post-single .entry-cover {
+        order: -1;
+        margin-bottom: 10px;
+    }
+    .post-single .entry-cover img {
+        max-width: 75%;
+        max-height: 55vh;
+        width: auto;
+        margin: 0 auto;
+    }
+}
