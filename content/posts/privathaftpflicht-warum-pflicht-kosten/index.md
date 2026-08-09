@@ -36,9 +36,9 @@ Der Versicherer prüft die Ansprüche, wehrt unberechtigte Forderungen ab und za
 Die Beiträge sind erstaunlich günstig – in der Regel:
 | Tarif | Jahresbeitrag (ca.) |
 |---|---|
-| Single | 40–70&nbsp;€ |
-| Familie (mit Kindern) | 60–100&nbsp;€ |
-| Mit Tierhalter- oder Bauherren-Baustein | +10–30&nbsp;€ |
+| Single | 40–70 € |
+| Familie (mit Kindern) | 60–100 € |
+| Mit Tierhalter- oder Bauherren-Baustein | +10–30 € |
 
 Ein Haftpflichtversicherung-Vergleich lohnt sich, um die besten Tarife zu finden. Ein Tarif für 50 Euro kann deutlich besser sein als einer für 40 Euro, wenn er wichtige Bausteine enthält. Die Haftpflicht Kosten sind somit abhängig vom Angebot.
 

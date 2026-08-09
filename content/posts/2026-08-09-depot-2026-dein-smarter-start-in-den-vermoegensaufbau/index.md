@@ -22,8 +22,8 @@ Dieser Ratgeber beantwortet deine wichtigsten Fragen zum Einstieg:
 3. Wie richtest du dein Depot technisch sicher ein?
 
 **Das Wichtigste in Kürze:**
-*   Depotführung sollte heute 0&nbsp;€ kosten.
-*   Sparpläne starten bei vielen Anbietern ab 1&nbsp;€ pro Monat.
+*   Depotführung sollte heute 0 € kosten.
+*   Sparpläne starten bei vielen Anbietern ab 1 € pro Monat.
 *   Nutze das EID-Verfahren für eine Eröffnung in wenigen Minuten.
 *   Ein Welt-ETF minimiert dein Risiko durch breite Streuung.
 *   Richte sofort einen Freistellungsauftrag in der App ein.
@@ -43,8 +43,8 @@ Hier siehst du, welche Konditionen 2026 als fair gelten:
 | Kostenfaktor | Was 2026 fair ist | Vorsicht bei... |
 |:--- |:--- |:--- |
 | Depotführung | Kostenlos | Monatlichen Grundgebühren |
-| ETF-Sparplan | 0&nbsp;€ oder geringe Pauschale | Kosten über 1,5&nbsp;% |
-| Ordergebühr | Geringe fixe Pauschale | Mindestgebühren über 10&nbsp;€ |
+| ETF-Sparplan | 0 € oder geringe Pauschale | Kosten über 1,5 % |
+| Ordergebühr | Geringe fixe Pauschale | Mindestgebühren über 10 € |
 | Fremdwährungen | Echter Wechselkurs | Hohen Aufschlägen bei US-Aktien |
 
 Ein günstiges Depot bildet das Fundament für deinen Erfolg. Prüfe dein gesamtes Finanz-Setup gründlich vor der ersten Investition. Der [Ratgeber: Konten und Karten strategisch nutzen](../../pillar/konto-karten/) hilft dir dabei. So integrierst du dein Depot perfekt in deinen finanziellen Alltag.
@@ -73,7 +73,7 @@ Ohne diesen Auftrag zieht die Bank die Abgeltungsteuer sofort ein. Du müsstest 
 ## Häufige Fragen
 
 ### Wie viel Geld brauche ich mindestens für die Depoteröffnung?
-Die Eröffnung selbst kostet bei modernen Brokern heute 0&nbsp;€. Viele Anbieter ermöglichen dir ETF-Sparpläne bereits ab 1&nbsp;€ pro Monat. Du startest also auch mit sehr kleinen Beträgen erfolgreich an der Börse. Erhöhe deine Sparrate später einfach flexibel, wenn dein Einkommen steigt.
+Die Eröffnung selbst kostet bei modernen Brokern heute 0 €. Viele Anbieter ermöglichen dir ETF-Sparpläne bereits ab 1 € pro Monat. Du startest also auch mit sehr kleinen Beträgen erfolgreich an der Börse. Erhöhe deine Sparrate später einfach flexibel, wenn dein Einkommen steigt.
 
 ### Kann ich mein Depot jederzeit wieder kündigen?
 Ja, dein Depot ist kein langfristiger Knebelvertrag. Du kannst es jederzeit ohne Angabe von Gründen auflösen. Verkaufe deine Wertpapiere vorher oder übertrage sie auf ein neues Depot. Ein Depotübertrag ist innerhalb Deutschlands für dich in der Regel kostenlos.

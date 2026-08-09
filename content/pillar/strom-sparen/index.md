@@ -42,7 +42,7 @@ Wer ein Elektroauto besitzt, kann die Ladekosten mit dem richtigen Haushalts- od
 ## Häufige Fragen
 
 ### Wie viel kann ich beim Stromanbieter-Wechsel sparen?
-Je nach Region und Verbrauch sind 150&nbsp;€ bis 300&nbsp;€ pro Jahr realistisch. Entscheidend ist der Vergleich von Arbeitspreis, Grundgebühr und Einmalboni – mehr dazu im [Ratgeber Tarifwechsel](../../posts/stromanbieter-wechseln-2026/).
+Je nach Region und Verbrauch sind 150 € bis 300 € pro Jahr realistisch. Entscheidend ist der Vergleich von Arbeitspreis, Grundgebühr und Einmalboni – mehr dazu im [Ratgeber Tarifwechsel](../../posts/stromanbieter-wechseln-2026/).
 
 ### Welche Geräte sind die größten Stromfresser?
 Alte Kühlgeräte, Wäschetrockner und Geräte im Dauer-Standby. Ein Strommessgerät zeigt dir in einer Woche, wo das Geld hinfließt – Tipps findest du im [Stromfresser-Ratgeber](../../posts/stromfresser-im-haushalt-entlarven/).

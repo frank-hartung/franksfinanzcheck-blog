@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """fix_nbsp.py – Geschütztes Leerzeichen (U+00A0) zwischen Zahl und Einheit.
 
-Ersetzt in ALLEN Content-Dateien (Posts, Pillars, topics.yaml) ein NORMALES
-Leerzeichen zwischen Ziffer und % bzw. € durch ein geschütztes Leerzeichen
-(Non-Breaking Space, U+00A0). Damit kann der Browser NIE zwischen Zahl und
-Einheit umbrechen („10 %" darf nicht am Zeilenende auseinandergerissen werden).
+Ersetzt in ALLEN Content-Dateien (Posts, Pillars, topics.yaml):
+  1) NORMALES Leerzeichen zwischen Ziffer und % bzw. € → geschütztes
+     Leerzeichen (Non-Breaking Space, U+00A0). Damit kann der Browser NIE
+     zwischen Zahl und Einheit umbrechen („10 %" darf nicht am Zeilenende
+     auseinandergerissen werden).
+  2) HTML-Entity &nbsp; (Überbleibsel der alten Generatoren) → echtes U+00A0
+     überall (Body UND Frontmatter/Kurzantwort – dort wäre die Entity
+     sichtbarer Text).
 
 Idempotent: Bereits geschützte Leerzeichen werden nicht erneut ersetzt.
 
@@ -22,12 +26,15 @@ FILES = (
 )
 # Ziffer + beliebige Mischung aus normalen/geschützten Leerzeichen + Einheit (% oder €)
 RE = re.compile(r"(\d)[ \u00a0]+([%€])")
+# HTML-Entity überall (z. B. 50&nbsp;% oder z.&nbsp;B.)
+RE_ENT = re.compile(r"&nbsp;")
 
 
 def fix_text(text: str) -> tuple[str, int]:
     """Ersetzt alle Vorkommen; liefert (neuer Text, Anzahl)."""
-    new, n = RE.subn(lambda m: m.group(1) + NBSP + m.group(2), text)
-    return new, n
+    new, n1 = RE.subn(lambda m: m.group(1) + NBSP + m.group(2), text)
+    new, n2 = RE_ENT.subn(NBSP, new)
+    return new, n1 + n2
 
 
 def main() -> int:

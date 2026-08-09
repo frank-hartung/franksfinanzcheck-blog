@@ -21,11 +21,11 @@ Frugalismus ist für mich nie Verzicht um des Verzichts willen gewesen – sonde
 
 ## Frugalismus im Alltag: Die Grundlagen
 
-Wer mit dem Sparen beginnt, braucht zuerst Transparenz. Wie du mit einem Haushaltsbuch deine Ausgaben sichtbar machst und die größten Kostenfresser findest, erkläre ich in [Frugalismus im Alltag: So sparst du jeden Monat bares Geld](../../posts/frugalismus-im-alltag/) und mit konkreten, sofort umsetzbaren Tricks in [5 Frugalismus-Tricks: So sparst du 200&nbsp;€ pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/).
+Wer mit dem Sparen beginnt, braucht zuerst Transparenz. Wie du mit einem Haushaltsbuch deine Ausgaben sichtbar machst und die größten Kostenfresser findest, erkläre ich in [Frugalismus im Alltag: So sparst du jeden Monat bares Geld](../../posts/frugalismus-im-alltag/) und mit konkreten, sofort umsetzbaren Tricks in [5 Frugalismus-Tricks: So sparst du 200 € pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/).
 
 ## Die 50-30-20-Regel: Deine Budget-Formel
 
-Die einfachste Methode, die ich kenne: 50&nbsp;% für Fixkosten, 30&nbsp;% für Wünsche, 20&nbsp;% fürs Sparen. Wie du die Regel auf dein Einkommen anwendest und anpasst, steht in [Die 50-30-20-Regel: Die perfekte Formel für deine Finanzen](../../posts/50-30-20-regel-einfach-erklaert/).
+Die einfachste Methode, die ich kenne: 50 % für Fixkosten, 30 % für Wünsche, 20 % fürs Sparen. Wie du die Regel auf dein Einkommen anwendest und anpasst, steht in [Die 50-30-20-Regel: Die perfekte Formel für deine Finanzen](../../posts/50-30-20-regel-einfach-erklaert/).
 
 ## Notgroschen und Sicherheit
 
@@ -38,7 +38,7 @@ Vermögen entsteht durch Wiederholung, nicht durch Einmal-Aktionen. Die sieben G
 ## Häufige Fragen
 
 ### Wie viel sollte ich monatlich sparen?
-Als Faustregel 20&nbsp;% des Nettoeinkommens – die 50-30-20-Regel zeigt dir, wie das ohne Verbissenheit klappt. Details im [50-30-20-Ratgeber](../../posts/50-30-20-regel-einfach-erklaert/).
+Als Faustregel 20 % des Nettoeinkommens – die 50-30-20-Regel zeigt dir, wie das ohne Verbissenheit klappt. Details im [50-30-20-Ratgeber](../../posts/50-30-20-regel-einfach-erklaert/).
 
 ### Wie groß muss mein Notgroschen sein?
 Drei bis sechs Monatsausgaben sind der übliche Richtwert – die genaue Rechnung für deine Situation steht in [Notgroschen aufbauen](../../posts/notgroschen-aufbauen-wie-viel-reicht/).

@@ -26,9 +26,9 @@ kurzantwort: "Du verteilst dein Gehalt in drei Teile: 50 % für Fixkosten, 30 
 
 Du teilst dein monatliches Nettoeinkommen in drei feste Töpfe auf. So behältst du die volle Kontrolle über deine Haushaltsplanung. Das Geld, das wirklich auf deinem Konto ankommt, bildet die Berechnungsgrundlage.
 
-- **50&nbsp;% für Fixkosten:** hierzu zählen Miete, Strom, Gas, Versicherungen und Kredite. Auch Internetverträge und notwendige Fahrtkosten gehören in diesen Block.
-- **30&nbsp;% für persönliche Wünsche:** Nutze diesen Teil für deine Freizeit, Restaurantbesuche und Shopping. Auch Streaming-Abos und Urlaubskosten fallen unter diese Kategorie.
-- **20&nbsp;% zum Sparen:** dieser Topf dient dem Aufbau deines Notgroschens und der Altersvorsorge. Erweitere hiermit gezielt dein Finanzwissen durch kluge Investitionen in ETFs oder Aktien.
+- **50 % für Fixkosten:** hierzu zählen Miete, Strom, Gas, Versicherungen und Kredite. Auch Internetverträge und notwendige Fahrtkosten gehören in diesen Block.
+- **30 % für persönliche Wünsche:** Nutze diesen Teil für deine Freizeit, Restaurantbesuche und Shopping. Auch Streaming-Abos und Urlaubskosten fallen unter diese Kategorie.
+- **20 % zum Sparen:** dieser Topf dient dem Aufbau deines Notgroschens und der Altersvorsorge. Erweitere hiermit gezielt dein Finanzwissen durch kluge Investitionen in ETFs oder Aktien.
 
 Das System zwingt dich zu einer klaren Priorisierung. Du deckst zuerst deine Lebenshaltungskosten und sicherst deine Zukunft ab. Dein Konsum orientiert sich an dem, was danach übrig bleibt.
 
@@ -40,7 +40,7 @@ Das System zwingt dich zu einer klaren Priorisierung. Du deckst zuerst deine Leb
 4. **Abgleich machen:** Liegen deine Fixkosten über der 50-Prozent-Marke? Dann belasten dich deine Wohnung oder deine Verträge aktuell zu stark.
 5. **Automatisieren:** Richte am Monatsanfang einen Dauerauftrag auf dein Sparkonto ein. So verhinderst du, dass du dein Sparziel im Laufe des Monats ausgibst.
 
-## Was tun, wenn die 50&nbsp;% nicht reichen?
+## Was tun, wenn die 50 % nicht reichen?
 
 In teuren Großstädten wie München oder Hamburg frisst die Miete oft mehr als die Hälfte des Lohns. Senke deine laufenden Kosten durch gezielte Budgetierung und Vertragswechsel. Ein neuer Stromanbieter oder ein optimierter DSL-Tarif sparen oft 200 bis 450 Euro jährlich. 
 

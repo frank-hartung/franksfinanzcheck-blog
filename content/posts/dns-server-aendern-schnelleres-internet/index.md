@@ -13,7 +13,7 @@ cover:
   alt: "DNS-Server ändern: Der kostenlose Boost für dein Internet"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst dein Internet um bis zu 20 % beschleunigen, indem du deinen DNS-Server wechselst. Ein DNS-Server-Wechsel verbessert auch die Sicherheit deines Internets. Der Wechsel ist in der Regel kostenlos und einfach durchzuführen."
----Surfe bis zu 30&nbsp;% schneller, ohne einen Cent für einen teureren Tarif auszugeben. Dein Internet wirkt oft träge, obwohl die gebuchte Bandbreite eigentlich stimmt? Häufig bremst der Standard-Server deines Anbieters den Seitenaufbau unnötig aus. Du kannst deinen DNS Server wechseln und so in wenigen Minuten das Maximum aus deiner Leitung herausholen.
+---Surfe bis zu 30 % schneller, ohne einen Cent für einen teureren Tarif auszugeben. Dein Internet wirkt oft träge, obwohl die gebuchte Bandbreite eigentlich stimmt? Häufig bremst der Standard-Server deines Anbieters den Seitenaufbau unnötig aus. Du kannst deinen DNS Server wechseln und so in wenigen Minuten das Maximum aus deiner Leitung herausholen.
 
 ## Was ist ein DNS-Server überhaupt?
 

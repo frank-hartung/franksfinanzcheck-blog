@@ -15,7 +15,7 @@ cover:
   alt: "Tierversicherung: Schutz für dein Tier im Krankheitsfall"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Eine Tierversicherung deckt in der Regel 50 bis 90 % der Tierarztkosten ab. So kannst du dich auf die Genesung deines Tieres konzentrieren, anstatt dich um die Kosten zu sorgen. Mit einer monatlichen Prämie von ca. 20 € bis 50 € schützt du dein Tier und deine Finanzen."
----Eine Not-Operation am Sonntagabend kostet dich schnell über 2.000&nbsp;€. Solche Rechnungen belasten dein Konto massiv und kommen oft völlig unerwartet. Eine Tierversicherung übernimmt dieses finanzielle Risiko für dich. So sicherst du die medizinische Versorgung deines Lieblings dauerhaft ab.
+---Eine Not-Operation am Sonntagabend kostet dich schnell über 2.000 €. Solche Rechnungen belasten dein Konto massiv und kommen oft völlig unerwartet. Eine Tierversicherung übernimmt dieses finanzielle Risiko für dich. So sicherst du die medizinische Versorgung deines Lieblings dauerhaft ab.
 
 ## Was ist eine Tierversicherung?
 Dieser Schutz erstattet dir hohe Kosten für tierärztliche Behandlungen. Die Versicherung zahlt meist für Operationen, teure Medikamente und aufwendige Diagnosen. Je nach Tierart wählst du eine Hundeversicherung oder eine Katzenversicherung. Damit verhinderst du schmerzhafte Einmalzahlungen aus deinem Ersparten.
@@ -44,7 +44,7 @@ Einige Tarife beinhalten eine feste Selbstbeteiligung pro Behandlungsfall. Du za
 
 ## Häufige Fragen
 ### Wie hoch sind die Beiträge für eine Tierversicherung?
-Die Kosten hängen vom Alter und dem Gesundheitszustand deines Tieres ab. In der Regel zahlst du zwischen 20&nbsp;€ und 50&nbsp;€ pro Monat. Ein junges Tier versicherst du deutlich günstiger als einen Senior.
+Die Kosten hängen vom Alter und dem Gesundheitszustand deines Tieres ab. In der Regel zahlst du zwischen 20 € und 50 € pro Monat. Ein junges Tier versicherst du deutlich günstiger als einen Senior.
 
 ### Was ist eine Hundeversicherung und wie unterscheidet sie sich von einer Katzenversicherung?
 Eine Hundeversicherung deckt spezifische Risiken wie Gelenkprobleme oder Magendrehungen ab. Bei einer Katzenversicherung stehen Infektionskrankheiten oder die Gefahren für Freigänger im Fokus. Beide Varianten passen sich optimal an die medizinischen Bedürfnisse der jeweiligen Tierart an.

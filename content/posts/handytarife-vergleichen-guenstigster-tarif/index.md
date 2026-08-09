@@ -19,7 +19,7 @@ kurzantwort: "Du kannst bis zu 50 € im Monat sparen, wenn du deinen Handytari
 * Ermittle dein tatsächliches Datenvolumen in den Smartphone-Einstellungen.
 * Bevorzuge monatlich kündbare Tarife für maximale Flexibilität.
 * Achte auf inkludiertes 5G für zukunftssicheres Surfen.
-* Prüfe Aktionsangebote auf wegfallende Anschlussgebühren (ca. 10–30&nbsp;€ Ersparnis).
+* Prüfe Aktionsangebote auf wegfallende Anschlussgebühren (ca. 10–30 € Ersparnis).
 * Nutze den gesetzlichen Anspruch auf eine kostenlose Rufnummernmitnahme.
 
 ## Schritt 1: Bedarf ermitteln – der erste Schritt beim Handytarif-Vergleich
@@ -38,7 +38,7 @@ Die meisten Nutzer decken ihren Alltag mit 10 bis 20 GB komplett ab. Ein unnöti
 |---|---|
 | **Datenvolumen** | Prüfe deinen realen Verbrauch der letzten drei Monate. |
 | **5G** | 5G gehört mittlerweile zum Standard und sollte ohne Aufpreis dabei sein. |
-| **Laufzeit** | Flexible Tarife ohne Bindung kosten oft nur 1–2&nbsp;€ mehr pro Monat. |
+| **Laufzeit** | Flexible Tarife ohne Bindung kosten oft nur 1–2 € mehr pro Monat. |
 | **Anschlusspreis** | Viele Anbieter streichen diese Gebühr bei speziellen Online-Aktionen. |
 
 ## Schritt 3: Versteckte Kosten im Blick behalten
