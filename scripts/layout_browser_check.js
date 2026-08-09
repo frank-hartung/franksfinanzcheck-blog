@@ -49,6 +49,8 @@ async function auditPage(browser, url, viewport) {
   const errors = [];
   const httpErrors = [];
   let domCount = 0;
+  let domDepth = 0;
+  let maxChildren = 0;
   page.on('pageerror', e => errors.push('JS: ' + e.message));
   page.on('console', m => { if (m.type() === 'error') errors.push('console: ' + m.text()); });
   page.on('response', r => { if (r.status() >= 400) httpErrors.push(r.status() + ' ' + r.url()); });
@@ -56,7 +58,20 @@ async function auditPage(browser, url, viewport) {
   const t0 = Date.now();
   await page.goto(url, { waitUntil: 'networkidle0', timeout: 45000 }).catch(e => errors.push('load: ' + e.message));
   const loadMs = Date.now() - t0;
-  domCount = await page.evaluate(() => document.querySelectorAll('*').length);
+  const metrics = await page.evaluate(() => {
+    const all = document.querySelectorAll('*');
+    let depth = 0, maxKids = 0;
+    for (const el of all) {
+      let d = 0, n = el;
+      while (n && n !== document.documentElement) { d++; n = n.parentElement; }
+      if (d > depth) depth = d;
+      if (el.children.length > maxKids) maxKids = el.children.length;
+    }
+    return { count: all.length, depth, maxKids };
+  });
+  domCount = metrics.count;
+  domDepth = metrics.depth;
+  maxChildren = metrics.maxKids;
   const title = await page.title();
   const h1 = await page.evaluate(() => document.querySelector('h1') ? document.querySelector('h1').textContent.trim().slice(0, 60) : null);
   await page.close();
@@ -64,11 +79,15 @@ async function auditPage(browser, url, viewport) {
   const issues = [];
   if (errors.length) issues.push(...errors.slice(0, 5));
   if (httpErrors.length) issues.push(...httpErrors.slice(0, 5));
-  if (domCount > 1400) issues.push(`DOM ${domCount} > 1400 (Performance-Budget überschritten)`);
+  // DOM-Performance-Budgets (Lighthouse-Schwellen: 1400/32/60 – wir warnen
+  // deutlich früher als Frühwarnsystem, damit nie ein Problem entsteht):
+  if (domCount > 900) issues.push(`DOM ${domCount} > 900 Elemente (Budget: <900, Lighthouse-Warnung: 1400)`);
+  if (domDepth > 28) issues.push(`DOM-Tiefe ${domDepth} > 28 (Lighthouse-Warnung: 32)`);
+  if (maxChildren > 58) issues.push(`Max. Kinder ${maxChildren} > 58 (Lighthouse-Warnung: 60) – meist der <head>, prüfen ob unnötige Meta/Scripts dazukamen`);
   if (!title) issues.push('kein <title>');
   if (!h1) issues.push('kein <h1>');
 
-  return { url, viewport: viewport.width + 'x' + viewport.height, domCount, loadMs, title: title.slice(0, 60), h1, issues };
+  return { url, viewport: viewport.width + 'x' + viewport.height, domCount, domDepth, maxChildren, loadMs, title: title.slice(0, 60), h1, issues };
 }
 
 (async () => {
