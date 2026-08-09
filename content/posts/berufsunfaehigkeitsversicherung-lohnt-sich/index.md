@@ -36,7 +36,7 @@ Arbeitslosigkeit oder eine freiwillige Teilzeit deckt die Police dagegen nicht a
 
 Moderne Tarife verzichten auf die sogenannte abstrakte Verweisung. Das bedeutet: Die Versicherung darf dich nicht auf einen anderen Job abschieben. Du erhältst dein Geld, wenn du deinen speziellen Beruf nicht mehr schaffst. Achte unbedingt auf diese wichtige Klausel in deinem Vertrag.
 
-## Die Zahlen: Wie wahrscheinlich ist Berufsunfähigkeit?
+## Die Zahlen:<br>Wie wahrscheinlich ist Berufsunfähigkeit?
 
 Statistiken des Gesamtverbands der Deutschen Versicherungswirtschaft zeigen ein klares Bild. Etwa jeder vierte Erwerbstätige wird im Laufe seines Lebens berufsunfähig. Psychische Leiden machen dabei rund 30 % der Fälle aus. Rückenprobleme und Krebs folgen mit 20 % und 15 % auf den Plätzen.
 
@@ -64,7 +64,7 @@ Manche Besserverdiener profitieren von starken betrieblichen Versorgungswerken. 
 
 Menschen kurz vor dem Ruhestand brauchen keine neue Versicherung mehr. Wer in fünf Jahren in Rente geht, überbrückt die Zeit oft mit Ersparnissen. Die hohen Beiträge für ältere Einsteiger stehen hier in keinem Verhältnis zum Nutzen. Nutze dein Geld in diesem Alter lieber für den Vermögensaufbau.
 
-## Kostencheck: So findest du die günstigste BU
+## Kostencheck:<br>So findest du die günstigste BU
 
 Die Preise für eine monatliche Rente von 1.500 € variieren 2026 stark. Ein Büroangestellter zahlt deutlich weniger als ein Dachdecker oder eine Pflegekraft. Dein Alter beim Abschluss spielt ebenfalls eine entscheidende Rolle für die Beitragshöhe.
 
@@ -87,7 +87,7 @@ Bei falschen Angaben verweigert der Anbieter die monatliche Rentenzahlung. Er ka
 
 Nutze die Hilfe von Profis bei Vorerkrankungen. Unabhängige Makler stellen anonyme Risikovoranfragen bei vielen Gesellschaften. So findest du einen Anbieter, der dich trotz kleinerer Leiden aufnimmt. Oft gibt es faire Lösungen mit geringen Zuschlägen oder gezielten Ausschlüssen.
 
-## Alternative: Die Grundfähigkeitsversicherung
+## Alternative:<br>Die Grundfähigkeitsversicherung
 
 Wenn die BU Versicherung für dich zu teuer ist, gibt es Alternativen. Die Grundfähigkeitsversicherung ist eine solide Option für körperlich arbeitende Menschen. Sie zahlt eine Rente, wenn du wichtige Basisfähigkeiten verlierst. Dazu zählen etwa das Sehen, Hören, Sprechen oder Knien.
 

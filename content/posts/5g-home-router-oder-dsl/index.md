@@ -54,7 +54,7 @@ Die realistische Prüfung:
 
 Nur wer am Ende des Tests mit dem Tempo zufrieden ist, sollte den Vertrag behalten.
 
-## Kostenvergleich: 5G-Home vs. DSL-Vertrag
+## Kostenvergleich:<br>5G-Home vs. DSL-Vertrag
 
 Die Preise für 5G-Home liegen 2026 meist zwischen 35 und 50 Euro pro Monat für 100 bis 250 Mbit/s – mit Laufzeiten von 24 Monaten (mit Router) oder flexibel ohne Router. Im Vergleich:
 
@@ -69,7 +69,7 @@ Die Preise für 5G-Home liegen 2026 meist zwischen 35 und 50 Euro pro Monat für
 Fazit: 5G-Home ist bei gleichem Tempo meist etwas teurer als DSL –   
 der Vorteil liegt nicht im Preis, sondern in der Verfügbarkeit (wo DSL langsam ist) und der schnellen Einrichtung.
 
-## Datenvolumen: Die unbekannte Grenze
+## Datenvolumen:<br>Die unbekannte Grenze
 
 Der größte Fallstrick bei 5G-Home: die Datenlimits. Viele Tarife haben ein begrenztes Datenvolumen (100 bis 500 GB pro Monat) – danach wird gedrosselt oder es kostet extra. Wer streamt, in Videocalls sitzt und Updates lädt, verbraucht schnell 200 bis 500 GB pro Monat.
 
@@ -100,7 +100,7 @@ Tarife mit „unbegrenztem" Datenvolumen für Zuhause gibt es – sie kosten abe
 
 3. **Laufzeit und Kündigungsfrist:** 24-Monats-Verträge mit 1-Monats-Frist danach sind Standard – flexiblere Tarife (monatlich kündbar) kosten etwas mehr, sind aber bei unsicherer Abdeckung die sicherere Wahl.
 
-## Die Kombination: 5G-Home als Backup und für unterwegs
+## Die Kombination:<br>5G-Home als Backup und für unterwegs
 
 5G-Home muss nicht die einzige Internet-Quelle sein –   
 es funktioniert auch hervorragend als Ergänzung. Die Kombinationen, die sich lohnen:

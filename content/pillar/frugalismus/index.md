@@ -19,11 +19,11 @@ Frugalismus ist für mich nie Verzicht um des Verzichts willen gewesen – sonde
 *   **Kleine Gewohnheiten** im Alltag sparen mehr als jeder Verzicht auf Großes.
 *   **Frugalismus ist ein Weg zur Freiheit**, nicht zur Entbehrung.
 
-## Frugalismus im Alltag: Die Grundlagen
+## Frugalismus im Alltag:<br>Die Grundlagen
 
 Wer mit dem Sparen beginnt, braucht zuerst Transparenz. Wie du mit einem Haushaltsbuch deine Ausgaben sichtbar machst und die größten Kostenfresser findest, erkläre ich in [Frugalismus im Alltag: So sparst du jeden Monat bares Geld](../../posts/2026-08-06-frugalismus-im-alltag/) und mit konkreten, sofort umsetzbaren Tricks in [5 Frugalismus-Tricks: So sparst du 200 € pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/).
 
-## Die 50-30-20-Regel: Deine Budget-Formel
+## Die 50-30-20-Regel:<br>Deine Budget-Formel
 
 Die einfachste Methode, die ich kenne: 50 % für Fixkosten, 30 % für Wünsche, 20 % fürs Sparen. Wie du die Regel auf dein Einkommen anwendest und anpasst, steht in [Die 50-30-20-Regel: Die perfekte Formel für deine Finanzen](../../posts/50-30-20-regel-einfach-erklaert/).
 

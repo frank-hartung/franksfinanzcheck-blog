@@ -55,7 +55,7 @@ Tippe in den WLAN-Einstellungen auf das blaue Info-Symbol neben deinem Netzwerk.
 ### Router (für das ganze Haus)
 Logge dich in deine Router-Oberfläche ein, zum Beispiel über Fritzbox oder 192.168.0.1. Suche unter dem Menüpunkt „Internet" nach den DNS-Server-Einstellungen. Hier kannst du global für alle Geräte den DNS Server ändern und profitierst überall vom Speed-Boost.
 
-## Sicherheit: Achtung bei öffentlichen WLANs
+## Sicherheit:<br>Achtung bei öffentlichen WLANs
 
 Ein schneller DNS ersetzt kein Sicherheitstool. In öffentlichen Netzwerken lauern Gefahren durch manipulierte Antworten von Angreifern. Nutze unterwegs daher am besten ein VPN oder bleibe beim Standard-DNS. Zu Hause profitierst du dagegen ohne Bedenken von der besseren Performance der freien Anbieter.
 

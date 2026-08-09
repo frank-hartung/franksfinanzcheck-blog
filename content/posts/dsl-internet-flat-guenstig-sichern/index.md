@@ -22,7 +22,7 @@ kurzantwort: "Du vergleichst am besten die Tarife von mindestens 3 Anbietern, um
 - **Prämien nutzen:** ein hoher Wechselbonus senkt deine monatliche Belastung massiv.
 - **Verfügbarkeit prüfen:** Nutze einen unabhängigen DSL Vergleich für deine Adresse.
 
-## Schritt 1: Was brauchst du wirklich?
+## Schritt 1:<br>Was brauchst du wirklich?
 
 Bevor du einen neuen Vertrag abschließt, kläre deinen tatsächlichen Bedarf. Die Bandbreite bestimmt maßgeblich den Preis deines Tarifs.
 
@@ -32,17 +32,17 @@ Bevor du einen neuen Vertrag abschließt, kläre deinen tatsächlichen Bedarf. D
 
 Die meisten Haushalte kommen mit 100 Mbit/s sehr gut aus. Mehr Bandbreite kostet oft 10 bis 20 Euro mehr pro Monat, bringt im Alltag aber selten spürbare Vorteile. Prüfe vorab, welche Technologie bei dir anliegt: DSL, Kabel oder Glasfaser.
 
-## Schritt 2: Die Gesamtkosten berechnen
+## Schritt 2:<br>Die Gesamtkosten berechnen
 
 Beim Tarifvergleich zählt nicht allein die monatliche Grundgebühr der ersten Monate. Konzentriere dich stattdessen auf die effektiven Monatskosten über die gesamte Mindestlaufzeit.
 
 Rechne dafür alle Kosten zusammen: Monatspreis mal 24 Monate plus Anschlussgebühr und Router-Miete. Ziehe davon alle Gutschriften und den Wechselbonus ab. Teile diese Summe durch 24. So erkennst du sofort, welcher Anbieter wirklich am günstigsten ist. Viele Provider locken mit 100 bis 300 Euro Gutschrift für Neukunden. Achte darauf, ob der Preis nach 6 oder 12 Monaten drastisch ansteigt.
 
-## Schritt 3: Laufzeit clever wählen
+## Schritt 3:<br>Laufzeit clever wählen
 
 Tarife mit 24 Monaten Laufzeit bieten fast immer die höchsten Rabatte. Du bindest dich damit jedoch zwei Jahre an einen Anbieter. Falls du planst umzuziehen oder auf Glasfaser wartest, wähle lieber eine monatlich kündbare Variante. Diese Tarife sind im Grundpreis oft etwas teurer und bieten selten einen hohen Wechselbonus. Wäge Flexibilität gegen die maximale Ersparnis ab.
 
-## Schritt 4: Wechseln – so läuft es ab
+## Schritt 4:<br>Wechseln – so läuft es ab
 
 Wenn du deinen Internetvertrag wechseln möchtest, ist der Prozess heute weitgehend automatisiert. Dein neuer Anbieter übernimmt in der Regel die Kündigung beim alten Dienstleister.
 
@@ -52,7 +52,7 @@ Wenn du deinen Internetvertrag wechseln möchtest, ist der Prozess heute weitgeh
 4. **Hardware erhalten:** Dein neuer Router kommt meist wenige Tage vor der Schaltung per Post.
 5. **Aktivierung:** Am Tag der Umstellung schließt du den Router an – oft ohne Technikerbesuch.
 
-## Glasfaser: Wann lohnt sich der Wechsel?
+## Glasfaser:<br>Wann lohnt sich der Wechsel?
 
 Glasfaser bietet die stabilste Verbindung und sehr hohe Upload-Raten. Ein Wechsel ist sinnvoll, wenn du beruflich riesige Datenmengen versendest oder eine zukunftssichere Leitung wünschst. Die Preise für Glasfaser sind zuletzt gesunken. Oft liegen sie durch Aktionsangebote auf dem Niveau von herkömmlichen DSL-Tarifen. Ein Internetvertrag wechseln auf Glasfaser wertet zudem deine Immobilie langfristig auf.
 

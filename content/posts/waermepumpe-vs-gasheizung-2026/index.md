@@ -43,7 +43,7 @@ Die Anschaffung der Wärmepumpe ist teurer – aber Förderung und niedrigere Be
 - **sehr niedriger Gaspreis:** in Einzelfällen kann Gas günstiger sein – aber der CO₂-Preis steigt jährlich.
 - **kein Platz für die Außeneinheit:** Wärmepumpen brauchen Außenfläche – im dichten Stadtgebiet manchmal ein Problem.
 
-## Der große Kosten-Hebel: Der Stromtarif
+## Der große Kosten-Hebel:<br>Der Stromtarif
 
 Eine Wärmepumpe heizt mit Strom – und der Strompreis entscheidet über die Betriebskosten. Ein günstiger Wärmepumpen-Stromtarif senkt die Heizkosten deutlich. 
 

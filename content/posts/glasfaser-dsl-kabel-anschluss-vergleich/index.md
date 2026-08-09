@@ -26,7 +26,7 @@ Die Frage nach dem richtigen Internetanschluss wird jedes Jahr drängender: Glas
 
 **Glasfaser (FTTH):** Die Zukunft: Lichtwellenleiter direkt bis in die Wohnung. 100 bis 1.000 Mbit/s symmetrisch (gleiche Geschwindigkeit hoch- und runterladen), extrem stabil, keine Drosselung durch Nachbarn. Der Ausbau schreitet voran, aber nicht überall ist Glasfaser verfügbar.
 
-## Tempo im Alltag: Was du wirklich brauchst
+## Tempo im Alltag:<br>Was du wirklich brauchst
 
 Bevor du auf das teuerste Paket schielst, die ehrliche Einordnung, was verschiedene Anwendungen brauchen:
 
@@ -55,7 +55,7 @@ Die Preise für einen 100-Mbit/s-Anschluss liegen 2026 ungefähr so:
 Dazu kommen in den ersten 6 bis 12 Monaten oft Neukunden-Boni, die den effektiven Monatspreis um 10 bis 20 Euro senken. Wichtig: Rechne immer den Preis ab dem zweiten Jahr –   
 dort enden die meisten Rabatte. Der [Tarifvergleich für DSL und Internet](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt dir die aktuellen Angebote mit allen Bedingungen.
 
-## Verfügbarkeit prüfen: Der erste Schritt
+## Verfügbarkeit prüfen:<br>Der erste Schritt
 
 Bevor du träumst, prüfe die Realität: Nicht jeder Anschluss ist überall verfügbar. Der Breitbandatlas der Bundesnetzagentur zeigt dir auf einer Karte, welche Technologien an deiner Adresse verfügbar sind – kostenlos und unabhängig.
 
@@ -64,7 +64,7 @@ So gehst du vor: Adresse eingeben, dann siehst du, ob Glasfaser (FTTH) in deiner
 Wichtig bei Glasfaser: Auch wenn der Ausbau in deiner Straße läuft, musst du den Hausanschluss oft selbst beauftragen und bezahlen (100 bis 800 Euro, je nach Anbieter und Förderung). Prüfe, ob dein Anbieter den Hausanschluss kostenlos übernimmt –   
 das ist bei vielen Ausbauprojekten inzwischen Standard.
 
-## Glasfaser: Wann der Umstieg Pflicht wird
+## Glasfaser:<br>Wann der Umstieg Pflicht wird
 
 Glasfaser ist die einzige Technologie, die in den nächsten Jahren nicht an ihr Limit stößt. Während DSL bei 250 Mbit/s endet und Kabel bei hohen Tempi instabil wird, sind Glasfaser-Anschlüsse mit 1.000 Mbit/s und mehr Standard – und die Netze sind für 10 Gbit/s ausgelegt.
 
@@ -72,7 +72,7 @@ Der Umstieg lohnt sich heute, wenn: Glasfaser bei dir verfügbar ist (oder koste
 
 Die ehrliche Einordnung: Wer nur surft und streamt, merkt den Unterschied zwischen 100 Mbit/s DSL und 100 Mbit/s Glasfaser kaum. Der Vorteil von Glasfaser zeigt sich bei hohen Uploads, stabiler Latenz und in Spitzenzeiten – und eben in der Zukunftssicherheit.
 
-## Kabel: Die Drossel-Falle am Abend
+## Kabel:<br>Die Drossel-Falle am Abend
 
 Kabelinternet hat einen entscheidenden Nachteil, den die Werbung verschweigt: Das Netz teilt sich die Kapazität. Wenn um 20 Uhr die ganze Straße streamt, kann deine Geschwindigkeit spürbar einbrechen – von 250 auf 50 Mbit/s und weniger ist keine Seltenheit.
 
@@ -93,7 +93,7 @@ Die Prüfung: Frage Nachbarn in deiner Straße nach ihren Erfahrungen am Abend �
 
 Der richtige Anschluss ist die Basis – danach kommt das WLAN im Haus. Wer mit [WLAN-Problemen](../../posts/wlan-verstaerker-vs-mesh-wlan/) kämpft, sollte zuerst den Anschluss prüfen, bevor er teure Hardware kauft. Und wenn du [mobil unterwegs viel Internet brauchst](../../posts/5g-home-router-oder-dsl/), ist der [Handytarif-Vergleich](../../posts/handytarife-vergleichen-guenstigster-tarif/) der nächste Schritt.
 
-## WLAN-Router und Anschluss: Die Kombination entscheidet
+## WLAN-Router und Anschluss:<br>Die Kombination entscheidet
 
 Der beste Anschluss nutzt dir nichts, wenn der Router ihn ausbremst. Die häufigste Konstellation: Ein 250-Mbit/s-Anschluss mit einem alten Miet-Router, der nur 100 Mbit/s über WLAN schafft. Bevor du den Anschluss wechselst, prüfe also zuerst die Hardware.
 

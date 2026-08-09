@@ -43,7 +43,7 @@ Deine Kfz-Teilkasko übernimmt zwar Überschwemmungsschäden an deinem Auto. Das
 
 Im Ahrtal waren vor der Flut 2021 sogar nur 37 % der Häuser versichert. Viele Betroffene verloren dadurch alles. Verlasse dich nicht auf dein Glück. Eine fehlende Elementarschadenversicherung ist ein enormes finanzielles Risiko.
 
-## Wer ein hohes Risiko hat: Die Zonierung verstehen
+## Wer ein hohes Risiko hat:<br>Die Zonierung verstehen
 
 Versicherer nutzen das ZÜRS-System zur Bewertung deines Wohnortes. Das System teilt Deutschland in vier Gefahrenzonen ein. Über 98 % aller Adressen liegen in der sicheren Zone 1. Hier ist das Risiko für Hochwasser extrem gering.
 
@@ -80,7 +80,7 @@ Der Wechsel oder die Ergänzung deiner Police ist einfach. Folge diesen Schritte
 4.  **Passe den Schutz an:** Ergänze den Baustein oder wechsle den Anbieter. Beachte bei einem Wechsel die Kündigungsfrist von meist drei Monaten.
 5.  **Prüfe den Rückstau:** Kläre, ob eine Rückstauklappe in deinem Keller Pflicht ist.
 
-## Prävention: So senkst du dein Schadenrisiko aktiv
+## Prävention:<br>So senkst du dein Schadenrisiko aktiv
 
 Versicherungen decken nur den Geldwert ab. Schütze deine persönlichen Erinnerungen durch kluge Vorsorge. Verhindere Schäden, bevor sie überhaupt entstehen können. Diese Maßnahmen sind besonders effektiv:
 

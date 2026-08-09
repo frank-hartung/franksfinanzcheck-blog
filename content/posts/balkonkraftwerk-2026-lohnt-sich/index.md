@@ -83,7 +83,7 @@ So gehst du in der Praxis vor:
 
 Für Mieter hat sich die Rechtslage massiv verbessert. Vermieter dürfen die Installation nur noch bei extremen sachlichen Gründen ablehnen. Ein pauschales Verbot im Mietvertrag ist rechtlich nicht mehr haltbar. Du hast einen Anspruch darauf, mit deinem Balkon Solarstrom sparen zu können.
 
-## Balkon, Garten oder Garage: Standort-Check
+## Balkon, Garten oder Garage:<br>Standort-Check
 
 Die Position deiner Module bestimmt deine Rendite maßgeblich. Eine Südfassade oder ein Südbalkon liefern die höchsten Erträge. Hier holst du das Maximum aus der Sonnenstrahlung heraus. Aber auch andere Standorte bieten Vorteile für deinen Geldbeutel.
 
@@ -101,7 +101,7 @@ Unterschätze niemals die Windlasten bei der Montage. Ein Solarmodul wirkt wie e
 
 Kombiniere deine Anlage mit einem [günstigen Stromtarif](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1). So reduzierst du deine Fixkosten von zwei Seiten gleichzeitig. Weitere effektive Methoden findest du in unseren [20 Stromspar-Tipps](../../posts/strom-sparen-haushalt-20-tipps/) oder beim [Entlarven der Stromfresser](../../posts/stromfresser-im-haushalt-entlarven/).
 
-## Mit Speicher: Lohnt sich der Mini-Akku?
+## Mit Speicher:<br>Lohnt sich der Mini-Akku?
 
 Immer mehr Systeme bieten kompakte Akkus für den Balkon an. Du speicherst die Energie mittags und verbrauchst sie in den Abendstunden. Das erhöht deinen Eigenverbrauch theoretisch auf bis zu 90 Prozent. Doch die wirtschaftliche Rechnung erfordert einen genauen Blick auf die Kosten.
 

@@ -19,11 +19,11 @@ kurzantwort: "Du kannst beim Wechsel deines Stromanbieters in der Regel zwischen
 
 Der Unterschied zwischen Grundversorgung und günstigem Tarif liegt oft bei 15-25 %. Bei einem durchschnittlichen Vier-Personen-Haushalt mit 4.000 kWh Jahresverbrauch sind das schnell 200-300 Euro pro Jahr. Dein Aufwand: etwa 15 Minuten, einmal im Jahr.
 
-## Schritt 1: Verbrauch und Zählerstand ermitteln
+## Schritt 1:<br>Verbrauch und Zählerstand ermitteln
 
 Bevor du vergleichst, brauchst du deinen Jahresverbrauch in Kilowattstunden (kWh). Den findest du auf deiner letzten Jahresabrechnung. Wichtig: Schau auf den tatsächlichen Verbrauch, nicht auf die Abschlagszahlung. Deinen Zählerstand fotografierst du am besten direkt beim Wechsel.
 
-## Schritt 2: Tarife vergleichen
+## Schritt 2:<br>Tarife vergleichen
 
 Vergleichsportale wie CHECK24 zeigen dir alle verfügbaren Tarife auf einen Blick. Achte dabei nicht nur auf den Arbeitspreis pro kWh, sondern auch auf:
 - **Grundpreis** (monatliche Fixkosten)
@@ -31,15 +31,15 @@ Vergleichsportale wie CHECK24 zeigen dir alle verfügbaren Tarife auf einen Blic
 - **Boni und Rabatte** (Neukundenbonus, Sofortbonus, Online-Bonus – Vorsicht: Boni werden oft erst nach 12 Monaten ausgezahlt)
 - **Preisgarantie** (mindestens 12 Monate sollten es sein)
 
-## Schritt 3: Den neuen Tarif abschließen
+## Schritt 3:<br>Den neuen Tarif abschließen
 
 Den Abschluss machst du direkt online – meist mit wenigen Klicks. Du brauchst dafür nur deine Anschrift, deine Zählernummer und den Zählerstand. Die Kündigung des alten Vertrags übernimmt in der Regel dein neuer Anbieter kostenlos für dich.
 
-## Schritt 4: Umzugstermin abwarten
+## Schritt 4:<br>Umzugstermin abwarten
 
 Nach dem Abschluss erhältst du eine Bestätigung mit dem Liefertermin. Der Wechsel erfolgt normalerweise zum Monatsersten. Deine Stromversorgung ist dabei durchgehend gesichert – du merkst praktisch nichts davon, außer auf der Rechnung.
 
-## Schritt 5: Rechnung prüfen
+## Schritt 5:<br>Rechnung prüfen
 
 Nach dem ersten Jahr lohnt sich der Blick auf die Jahresabrechnung: Wurden alle Boni ausgezahlt? Passt der Verbrauch? Und dann gilt: Das Spiel beginnt von vorn. Wer einmal im Jahr vergleicht, ist fast immer auf der sicheren Seite.
 
@@ -50,7 +50,7 @@ Nach dem ersten Jahr lohnt sich der Blick auf die Jahresabrechnung: Wurden alle 
 3. **Vorzeitige Kündigung** – kündigst du während der Mindestlaufzeit, drohen Gebühren.
 4. **Keine Preisgarantie** – ohne Garantie kann der Preis nach 3 Monaten steigen.
 
-## Checkliste: Dein Stromwechsel in 5 Minuten
+## Checkliste:<br>Dein Stromwechsel in 5 Minuten
 
 - [ ] Jahresverbrauch von der letzten Abrechnung notiert
 - [ ] Zählerstand und Zählernummer bereit

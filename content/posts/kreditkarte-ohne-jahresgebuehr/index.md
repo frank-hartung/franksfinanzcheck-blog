@@ -51,7 +51,7 @@ Oft fährst du mit einer kostenlosen Karte und einer separat abgeschlossenen Rei
 4. **Bonität checken:** Banken verlangen meist ein festes Einkommen für echte Kreditkarten mit Limit.
 5. **Beantragung:** Erledige den Antrag bequem online in wenigen Minuten über Video-Ident oder Post-Ident.
 
-## Prepaid & Debit: Die Alternativen
+## Prepaid & Debit:<br>Die Alternativen
 
 Prepaid-Karten funktionieren auf Guthabenbasis und bieten dir volle Kostenkontrolle ohne Verschuldungsrisiko. Sie eignen sich perfekt für Jugendliche oder Menschen mit schwankendem Einkommen. Du musst sie vor der Nutzung per Überweisung aufladen.
 

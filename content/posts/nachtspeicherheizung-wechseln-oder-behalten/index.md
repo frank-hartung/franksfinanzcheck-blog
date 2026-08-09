@@ -65,7 +65,7 @@ Wenn du Eigentümer bist und wechseln willst, so gehst du vor:
 
 Der gesamte Prozess dauert realistisch 3 bis 6 Monate – plane den Wechsel also nicht im November, sondern im Frühjahr oder Sommer.
 
-## Miete vs. Eigentum: Wer zahlt?
+## Miete vs. Eigentum:<br>Wer zahlt?
 
 **Als Mieter** hast du gute Karten: Seit 2020 können Mieter von Vermietern verlangen, eine elektrische Speicherheizung zu ersetzen, wenn diese älter als 30 Jahre ist (Modernisierungsverlangen nach § 555c BGB). Der Vermieter muss dann auf eigene Kosten tauschen – und darf einen Teil der Kosten über die Modernisierungsumlage auf die Miete umlegen.
 
@@ -73,7 +73,7 @@ Wichtig für Mieter: Die Umlage ist auf 8 Prozent der Kosten gedeckelt, und die 
 
 **Als Eigentümer** trägst du die Investition selbst – mit Förderung und langfristiger Ersparnis. Die Amortisation liegt je nach System und Förderung bei 5 bis 10 Jahren. Danach sparst du 800 bis 1.500 Euro pro Jahr.
 
-## Rechenbeispiel: 70 Quadratmeter Wohnung
+## Rechenbeispiel:<br>70 Quadratmeter Wohnung
 
 Ausgangslage: 70 m², 8.000 kWh Heizbedarf, Eigentümer, 60.000 Euro Haushaltseinkommen.
 
@@ -85,7 +85,7 @@ Ausgangslage: 70 m², 8.000 kWh Heizbedarf, Eigentümer, 60.000 Euro Haushaltsei
 
 Wer nicht sofort wechseln kann oder will, kann die Kosten der Alt-Heizung wenigstens senken: mit einem günstigen [Stromtarif](../../posts/stromanbieter-wechseln-2026/) (Nachtstrom-Tarife vergleichen!), der [Vorbereitung der Heizperiode](../../posts/heizperiode-vorbereiten-spaetsommer/) und den [10 Heizkosten-Maßnahmen](../../posts/heizkosten-senken-10-massnahmen/). Alle Energie-Ratgeber findest du im [Pillar Strom sparen](../../pillar/strom-sparen/).
 
-## Schritt für Schritt: Der Weg zum modernen Heizsystem
+## Schritt für Schritt:<br>Der Weg zum modernen Heizsystem
 
 Wenn du dich für den Wechsel entschieden hast, läuft der Prozess in sieben Schritten –   
 so kommst du strukturiert ans Ziel, ohne dich zu verzetteln:

@@ -33,7 +33,7 @@ Vermeide den Fehler, keinen Puffer einzuplanen. Wenn du jeden Euro verplanst, br
 
 Viele Menschen schauen ihr Budget nach der Erstellung nie wieder an. Ein Plan muss atmen und sich mit deinem Leben verändern. Prüfe deine Zahlen wöchentlich für ein paar Minuten. So bleibt dein Haushaltsplan ein nützliches Werkzeug und wird keine graue Theorie.
 
-## Schritt 1: Einnahmen erfassen
+## Schritt 1:<br>Einnahmen erfassen
 
 Bevor du Ausgaben planst, musst du dein verfügbares Einkommen kennen. Nimm dein Nettoeinkommen als Basis für alle weiteren Berechnungen. Dazu zählen dein Gehalt, das Kindergeld, Mieteinnahmen oder regelmäßige Erträge aus Nebenjobs.
 
@@ -41,7 +41,7 @@ Einmalige Zahlungen wie Urlaubs- oder Weihnachtsgeld solltest du separat behande
 
 Schwankt dein Einkommen als Selbstständiger oder durch Provisionen? Nutze den Durchschnitt der letzten 6 Monate als vorsichtigen Richtwert. Plane im Zweifel lieber mit etwas weniger Geld. So vermeidest du Engpässe in schwächeren Monaten.
 
-## Schritt 2: Fixkosten auflisten
+## Schritt 2:<br>Fixkosten auflisten
 
 Jetzt sammelst du alle regelmäßigen Zahlungen deines Kontos. Hier lernst du, wie du dein Geld einteilen musst, um sicher durch den Monat zu kommen. Gehe deine Kontoauszüge der letzten 3 Monate akribisch durch:
 
@@ -53,7 +53,7 @@ Jetzt sammelst du alle regelmäßigen Zahlungen deines Kontos. Hier lernst du, w
 
 Vergiss jährliche Zahlungen wie die Kfz-Steuer oder Versicherungen nicht. Teile den Jahresbetrag durch zwölf und lege diese Summe monatlich beiseite. So triffst du Vorsorge für den Januar und erlebst keine bösen Überraschungen.
 
-## Schritt 3: Variable Kosten ehrlich schätzen
+## Schritt 3:<br>Variable Kosten ehrlich schätzen
 
 Hier liegt der größte Hebel für deine Finanzen. Variable Kosten umfassen Lebensmittel, Freizeit, Shopping und Restaurantbesuche. Die meisten Menschen unterschätzen diesen Bereich um bis zu 50 %. Schau dir deshalb deine realen Ausgaben der letzten Monate genau an.
 
@@ -61,7 +61,7 @@ Der Durchschnitt deiner bisherigen Ausgaben bildet deinen realistischen Startwer
 
 Hast du bisher keinen Überblick über deine täglichen Ausgaben? Führe für zwei Wochen ein [Haushaltsbuch](../../posts/haushaltsbuch-fuehren-app-excel-oder-stift/). Du wirst erstaunt sein, wie viel Geld in kleine Alltagsdinge fließt. Diese Erkenntnis ist die Basis für jede erfolgreiche Budgetplanung.
 
-## Schritt 4: Sparziel festlegen
+## Schritt 4:<br>Sparziel festlegen
 
 Entscheide jetzt, welchen Betrag du monatlich investieren oder sparen möchtest. Als Faustregel gelten 10 bis 20 % deines Nettoeinkommens. Auch kleine Beträge wie 25 € oder 50 € machen über die Zeit einen gewaltigen Unterschied. Starte lieber klein, als gar nicht anzufangen.
 
@@ -69,7 +69,7 @@ Nutze die Macht der Automatisierung für deinen Vermögensaufbau. Richte einen D
 
 Dein Sparziel sollte eine hohe Priorität in deinem Leben haben. Bezahle dich immer selbst zuerst, bevor du Geld für Konsum ausgibst. Erst wenn die Sparrate gesichert ist, planst du den Rest deiner Ausgaben.
 
-## Schritt 5: Budget-Kategorien befüllen
+## Schritt 5:<br>Budget-Kategorien befüllen
 
 Setze nun alle Puzzleteile zu einem Gesamtbild zusammen. Die 50-30-20-Regel bietet dir hierfür eine einfache und bewährte Struktur. Sie teilt dein Geld in drei klare Bereiche auf, damit du den Überblick behältst:
 
@@ -81,7 +81,7 @@ Setze nun alle Puzzleteile zu einem Gesamtbild zusammen. Die 50-30-20-Regel biet
 
 Passe diese Prozentsätze an deine individuelle Lebenssituation an. In teuren Städten fressen die Fixkosten oft mehr als die Hälfte des Einkommens. Trage für jede Kategorie feste Euro-Beträge ein. Details zur Umsetzung findest du in meinem [Ratgeber zur 50-30-20-Regel](../../posts/50-30-20-regel-einfach-erklaert/).
 
-## Schritt 6: Monatlich nachjustieren
+## Schritt 6:<br>Monatlich nachjustieren
 
 Dein erster Entwurf wird im Alltag vermutlich noch Lücken aufweisen. Gleiche am Monatsende deine geplanten Werte mit den tatsächlichen Ausgaben ab. Justiere die Beträge für den Folgemonat entsprechend nach. Nach drei Monaten sitzt dein Plan perfekt.
 

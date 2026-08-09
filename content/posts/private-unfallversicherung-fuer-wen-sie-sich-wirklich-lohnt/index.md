@@ -16,7 +16,7 @@ kurzantwort: "Du solltest dir eine private Unfallversicherung zulegen, wenn du e
 ---Ein Sturz vom Rennrad oder ein Fehltritt auf der Haushaltsleiter verändert dein Leben oft in Sekunden. Über 70 Prozent aller Unfälle passieren in der Freizeit oder im Haushalt –   
 genau dort, wo die gesetzliche Kasse keinen Cent zahlt. Die private Unfallversicherung schließt diese gefährliche Lücke und schützt dich weltweit vor hohen Folgekosten.
 
-## Das Grundproblem: Die gesetzliche Absicherung greift zu kurz
+## Das Grundproblem:<br>Die gesetzliche Absicherung greift zu kurz
 
 Der Staat schützt dich nur bei Unfällen im Job, in der Schule oder auf dem direkten Weg dorthin. Passiert das Unglück beim Joggen, Heimwerken oder im Urlaub, gehst du leer aus. Ohne eine private Unfallversicherung trägst du das finanzielle Risiko dauerhafter körperlicher Einschränkungen komplett allein. Ein hochwertiger Unfallschutz sichert deinen Lebensstandard, wenn deine Arbeitskraft nach einem Unglück sinkt.
 

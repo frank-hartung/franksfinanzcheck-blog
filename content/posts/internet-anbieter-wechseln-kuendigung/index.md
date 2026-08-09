@@ -20,7 +20,7 @@ Internetverträge gehören zu den Verträgen, die die meisten Menschen nie wechs
 
 In diesem Artikel zeige ich dir, wie du kündigst, wann du sofort rauskommst und wie der Wechsel ohne Internet-Lücke klappt.
 
-## Kündigungsfristen 2026: Was gesetzlich gilt
+## Kündigungsfristen 2026:<br>Was gesetzlich gilt
 
 Seit der Gesetzesänderung 2021 gelten klare, verbraucherfreundliche Regeln: Nach Ablauf der Mindestlaufzeit (meist 12 oder 24 Monate) ist die Kündigungsfrist auf **einen Monat** begrenzt. Du kannst also jederzeit mit einem Monat Vorlauf kündigen – und musst nicht mehr auf den „Vertragsablauf" warten.
 
@@ -34,7 +34,7 @@ Die wichtigsten Regeln im Überblick:
 Viele Anbieter versuchen trotzdem, längere Fristen in den AGB zu verstecken. Die gesetzlichen Regeln gelten aber immer –   
 ein Verweis auf das Telekommunikationsgesetz hilft im Zweifel.
 
-## Sonderkündigungsrecht: Wann du sofort rauskommst
+## Sonderkündigungsrecht:<br>Wann du sofort rauskommst
 
 Das Sonderkündigungsrecht erlaubt dir, den Vertrag außerordentlich zu beenden – ohne Frist und ohne Konsequenzen. Die wichtigsten Fälle:
 
@@ -60,7 +60,7 @@ Der Wechsel selbst ist heute stark automatisiert. So läuft es:
 
 Der Aufwand liegt bei insgesamt 30 bis 60 Minuten – verteilt auf zwei bis drei Wochen Wartezeit, in der du nichts tun musst.
 
-## Kündigung per Musterbrief: So formulierst du sicher
+## Kündigung per Musterbrief:<br>So formulierst du sicher
 
 Falls du selbst kündigen musst (ohne Wechsel-Service), hilft dieses Gerüst:
 
@@ -92,7 +92,7 @@ Die größten Rabatte gibt es für Neukunden – und die besten Zeitpunkte für 
 
 **Vertragsende deines aktuellen Vertrags:** Der klassische Zeitpunkt – kombiniere Wechsel und Sonderkündigungsrecht, falls eine Preiserhöhung ins Haus steht.
 
-## Checkliste: Alle Leistungen im Blick
+## Checkliste:<br>Alle Leistungen im Blick
 
 Vor dem Wechsel – diese 5 Punkte auf der Checkliste:
 

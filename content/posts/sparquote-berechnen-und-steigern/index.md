@@ -94,7 +94,7 @@ Wichtig: Das Tempo bestimmst du. Wenn ein Monat nicht klappt, geht der Plan einf
 
 Dein gespartes Geld hat dann einen Job: Zuerst [Notgroschen aufbauen](../../posts/notgroschen-aufbauen-wie-viel-reicht/), dann den Rest [per ETF-Sparplan investieren](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/). Alle Bausteine dafür findest du im [Frugalismus-Ratgeber](../../pillar/frugalismus/).
 
-## Die Psychologie des Sparens: Warum es schwerfällt
+## Die Psychologie des Sparens:<br>Warum es schwerfällt
 
 Wenn Sparen so einfach wäre, würden es alle tun. Die Wahrheit: Dein Gehirn ist auf Gegenwart programmiert. Die Belohnung von morgen (ein dickeres Konto) ist abstrakt –   
 der Kaffee zum Mitnehmen von heute ist konkret. Psychologen nennen das Gegenwarts-Bias, und es erklärt, warum die beste Sparstrategie nicht mit Willenskraft arbeitet, sondern mit Automatisierung.

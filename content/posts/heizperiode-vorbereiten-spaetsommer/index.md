@@ -33,7 +33,7 @@ Worauf du beim Vergleich achten solltest:
 *   Prüfe die Auszahlungsbedingungen für Neukundenboni genau.
 *   Bevorzuge Vertragslaufzeiten von maximal einem Jahr für mehr Flexibilität.
 
-## 2. Heizung prüfen und warten: So startest du reibungslos
+## 2. Heizung prüfen und warten:<br>So startest du reibungslos
 
 Eine schlecht eingestellte Anlage verschwendet bis zu 15 Prozent deiner Energie. Deshalb solltest du jetzt deine Heizung prüfen. Entlüfte alle Heizkörper, sobald die Anlage im Testbetrieb läuft. Das dauert pro Heizkörper nur etwa zwei Minuten und benötigt lediglich einen Entlüftungsschlüssel.
 

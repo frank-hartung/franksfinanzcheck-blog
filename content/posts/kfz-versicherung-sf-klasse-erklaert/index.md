@@ -33,7 +33,7 @@ So funktioniert dein Aufstieg in der Praxis: Jedes Kalenderjahr ohne gemeldeten 
 
 Hier kannst du dir die Logik der Kfz-Versicherung erklären lassen: SF 1/2 entspricht oft 100 % des Beitrags. Nach zehn Jahren (SF 10) zahlst du meist nur noch 45 %. Erreicht ein erfahrener Fahrer die SF 35, sinkt der Beitrag häufig auf rund 20 %. Der [Kfz-Vergleich](../../posts/kfz-versicherung-wechseln/) zeigt dir die genauen Unterschiede der Anbieter.
 
-## Typklasse und Regionalklasse: Die unbekannten Preistreiber
+## Typklasse und Regionalklasse:<br>Die unbekannten Preistreiber
 
 Viele Autofahrer glauben, dass nur die SF-Klasse den Preis bestimmt. Das ist ein Irrtum, denn zwei weitere Faktoren spielen eine riesige Rolle. Die Typklasse bewertet jedes Automodell jährlich neu auf Basis von Unfallstatistiken und Reparaturkosten. Ein PS-starker Sportwagen ist in der Regel teurer eingestuft als ein solider Familienkombi.
 
@@ -41,7 +41,7 @@ Zusätzlich beeinflusst dein Wohnort die Regionalklasse deines Fahrzeugs. Versic
 
 Prüfe diese Klassen unbedingt vor jedem [Autokauf](../../posts/kfz-versicherung-wechseln/). Wer zwischen zwei ähnlichen Modellen schwankt, spart durch die niedrigere Typklasse oft über 100 € im Jahr. Informiere dich vorab beim Gesamtverband der Deutschen Versicherungswirtschaft (GDV) über die aktuellen Einstufungen deines Wunschautos.
 
-## Schadenfreiheit sichern: Rabattretter und Co.
+## Schadenfreiheit sichern:<br>Rabattretter und Co.
 
 Ein Rabattretter ist eine Zusatzoption für deinen Vertrag, die dich vor einer Rückstufung bewahrt. Er kostet dich in der Regel zwischen 20 € und 60 € Aufpreis pro Jahr. Verursachst du einen Unfall, bleibst du in deiner aktuellen SF-Klasse eingestuft. Das lohnt sich besonders, wenn du bereits eine hohe Einstufung erreicht hast.
 
@@ -58,7 +58,7 @@ Beachte jedoch die Einschränkungen dieser Zusatzleistung. Ein Rabattretter grei
 5.  **Begleitetes Fahren:** Junge Fahrer, die mit 17 starten, erhalten bei vielen Anbietern günstigere Konditionen.
 6.  **Zahlweise:** Zahle deinen Beitrag einmal im Jahr komplett, um bis zu 5 % gegenüber der Monatszahlung zu sparen.
 
-## Jährlicher Wechsel: Wann er sich lohnt
+## Jährlicher Wechsel:<br>Wann er sich lohnt
 
 Der Wechsel deiner Versicherung zum 30. November ist ein bewährter Spartrick. Die Preise am Markt schwanken stark, da Versicherer jedes Jahr aggressiv um Neukunden werben. Ein kurzer [Kfz-Vergleich](../../posts/kfz-versicherung-wechseln/) kostet dich nur zehn Minuten Zeit. Du findest dort oft Tarife, die bei identischer Leistung deutlich weniger kosten.
 
@@ -74,7 +74,7 @@ Gib deine SF-Klasse absolut präzise an, um spätere Nachzahlungen zu vermeiden.
 
 Prüfe zudem die Bewertungen des Versicherers im Bereich Schadensabwicklung. Ein billiger Tarif nützt dir wenig, wenn das Unternehmen im Ernstfall die Zahlung verzögert. Portale wie Stiftung Warentest bieten gute Anhaltspunkte für die Servicequalität. Ein guter Versicherer reguliert Schäden schnell und unbürokratisch für dich.
 
-## SF-Klasse für Fahranfänger: Der günstigste Start
+## SF-Klasse für Fahranfänger:<br>Der günstigste Start
 
 Für Fahranfänger ist der Einstieg oft frustrierend teuer. Ein eigener Vertrag startet häufig bei SF 1/2 mit einem Beitragssatz von 100 %. Das kostet junge Fahrer je nach Modell schnell 1.500 € bis 3.000 € pro Jahr. Mit ein paar Kniffen senkst du diese Kosten jedoch drastisch.
 

@@ -28,11 +28,11 @@ Kontoführungsgebühren von 5 € bis 10 € im Monat summieren sich auf 60 �
 Für Reisen, Mietwagen-Reservierungen und Online-Käufe ist eine Kreditkarte praktisch unverzichtbar –   
 eine gebührenpflichtige aber nicht. Die besten kostenlosen Karten und worauf du bei den Konditionen achten solltest: [Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten](../../posts/kreditkarte-ohne-jahresgebuehr/).
 
-## Tagesgeld: Dein Geld sicher und zinsbringend parken
+## Tagesgeld:<br>Dein Geld sicher und zinsbringend parken
 
 Der Notgroschen gehört nicht aufs Girokonto, sondern auf ein Tagesgeldkonto mit ordentlichen Zinsen. Wie du den besten Anbieter findest, den Einlagenschutz prüfst und Zinsangebote richtig vergleichst, steht in [Tagesgeld und Zinsen: So parkst du dein Geld sicher](../../posts/tagesgeld-zinsen-sicher-anlegen/).
 
-## Ratenkredit: Nur zum Bestzins
+## Ratenkredit:<br>Nur zum Bestzins
 
 Wer einen Kredit braucht, sollte niemals den erstbesten nehmen: Der Unterschied zwischen Hausbank und Bestzins liegt oft bei mehreren Hundert Euro. Meine Vergleichsstrategie findest du in [Ratenkredit mit Bestzins sichern: So vergleichst du richtig](../../posts/ratenkredit-bestszins-vergleichen/).
 

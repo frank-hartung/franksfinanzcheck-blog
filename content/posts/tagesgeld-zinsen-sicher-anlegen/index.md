@@ -26,7 +26,7 @@ die Zinsen werden meist monatlich oder vierteljährlich gutgeschrieben. Im Gegen
 4. **Kosten:** Tagesgeldkonten sind in der Regel komplett kostenlos – versteckte Gebühren sind ein Warnsignal.
 5. **Verfügbarkeit:** Schnelle Überweisung aufs Girokonto, manche Banken zahlen nur mit Wartezeit.
 
-## Tagesgeld vs. Festgeld: Was passt zu dir?
+## Tagesgeld vs. Festgeld:<br>Was passt zu dir?
 | Kriterium | Tagesgeld | Festgeld |
 |---|---|---|
 | **Verfügbarkeit** | Jederzeit | Erst nach Laufzeitende |

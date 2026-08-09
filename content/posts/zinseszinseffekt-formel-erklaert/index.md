@@ -54,7 +54,7 @@ Ein Beispiel: 100 Euro monatlich, 6 Prozent, 30 Jahre:
 
 Wer es genau rechnen will, nutzt einen Zinseszins-Rechner (gratis im Netz) oder die Excel-Formel ZW(). Die Faustregel für die Verdopplungszeit liefert die 72er-Regel.
 
-## Die 3 Stellschrauben: Rate, Zeit, Rendite
+## Die 3 Stellschrauben:<br>Rate, Zeit, Rendite
 
 Der Zinseszinseffekt hat genau drei Stellschrauben – und ihre Wirkung ist überraschend unterschiedlich:
 
@@ -66,7 +66,7 @@ Der Zinseszinseffekt hat genau drei Stellschrauben – und ihre Wirkung ist übe
 
 Die Praxis-Einordnung: Die Rendite kannst du nur begrenzt steuern (Aktienmarkt statt Sparbuch, Kosten senken), die Zeit ist bei späterem Start unwiederbringlich, und die Rate ist dein direktester Hebel. Deshalb: **Früh starten schlägt mehr sparen.**
 
-## Die Macht der Zeit: Tabellen
+## Die Macht der Zeit:<br>Tabellen
 
 Die Zahlen zeigen es am deutlichsten – 100 Euro monatlich, bei unterschiedlichen Zeiträumen und Renditen:
 
@@ -81,7 +81,7 @@ Der entscheidende Blick auf die letzte Spalte: Bei 30 Jahren und 6 Prozent komme
 
 Umgekehrt zeigt die Tabelle die Kosten des Zögerns: Wer 10 Jahre wartet, verliert bei 6 Prozent fast 54.000 Euro Endwert – ohne einen Cent weniger eingezahlt zu haben. Der teuerste Fehler im Vermögensaufbau ist nicht die falsche Anlage, sondern der späte Start.
 
-## Der 72er-Trick: Verdopplung im Kopf rechnen
+## Der 72er-Trick:<br>Verdopplung im Kopf rechnen
 
 Die 72er-Regel ist die einfachste Finanzformel der Welt: **Teile 72 durch den Zinssatz –   
 das Ergebnis ist die Anzahl der Jahre, bis sich dein Geld verdoppelt.**
@@ -101,7 +101,7 @@ Ein Vergleich: Person A spart ab 25 Jahren 100 Euro monatlich bis 65 (40 Jahre) 
 
 Die Konsequenz für dich: Fang heute an, auch mit kleinen Beträgen. Der [100-Euro-Plan](../../posts/monatsbudget-erstellen-schritt-fuer-schritt/) zeigt, wie wenig es braucht – und der [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) ist das Instrument, das den Zinseszins über den Aktienmarkt realisiert. Ein Tagesgeldkonto allein erreicht die Rendite nicht.
 
-## Die Praxis: Zinseszins mit ETFs realisieren
+## Die Praxis:<br>Zinseszins mit ETFs realisieren
 
 Die Theorie ist klar –   
 die Umsetzung entscheidend. Der Zinseszinseffekt entfaltet seine volle Kraft, wenn drei Bedingungen erfüllt sind:

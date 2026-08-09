@@ -33,7 +33,7 @@ Bevor du sparst, kennst du die Kostenstruktur: Bei einer Familienreise (2 Erwach
 Der größte Hebel liegt also bei Unterkunft und Verpflegung –   
 genau dort setzen die wichtigsten Tricks an.
 
-## Trick 1: Kinder-Rabatte systematisch nutzen
+## Trick 1:<br>Kinder-Rabatte systematisch nutzen
 
 Die größte Familien-Waffe sind Kinder-Rabatte – aber sie sind oft gut versteckt. Die Regeln:
 
@@ -43,19 +43,19 @@ Die größte Familien-Waffe sind Kinder-Rabatte – aber sie sind oft gut verste
 
 Die Systematik: Vor jeder Buchung die Kinder-Konditionen prüfen – sie machen bei einer 2.000-Euro-Reise schnell 200 bis 400 Euro aus.
 
-## Trick 2: Selbstverpflegung statt Halbpension
+## Trick 2:<br>Selbstverpflegung statt Halbpension
 
 Das Halbpensions-Angebot der Hotels klingt bequem – ist aber oft die teuerste Verpflegungsform. Die Rechnung: Halbpension kostet pro Person 15 bis 25 Euro pro Tag – für vier Personen 60 bis 100 Euro täglich. In einer Ferienwohnung mit Supermarkt-Einkauf (40 bis 60 Euro pro Tag) ist die Familie bei gleicher Qualität deutlich günstiger – und flexibler.
 
 Der Kompromiss: Frühstück in der Unterkunft (oft im Preis oder günstig), Mittagessen aus dem Rucksack, abends selbst kochen oder ein Restaurant-Besuch als Highlight. Kinder essen meist wenig – und Selbstverpflegung spart 100 bis 200 Euro pro Woche.
 
-## Trick 3: Familienzimmer vs. Appartement
+## Trick 3:<br>Familienzimmer vs. Appartement
 
 Das Familienzimmer im Hotel (oft 120 bis 200 Euro pro Nacht) ist selten die günstigste Lösung. Ein Appartement oder eine Ferienwohnung mit zwei Schlafzimmern und Küche kostet oft das Gleiche – bietet aber mehr Platz und die Küche für die Selbstverpflegung.
 
 Der Vergleich lohnt: Familienzimmer im Hotel vs. Appartement in der Nähe – inklusive Verpflegungskosten rechnen. Viele Familien stellen fest, dass das Appartement 20 bis 30 Prozent günstiger ist.
 
-## Trick 4: Zug statt Flug (Familien-Bonus)
+## Trick 4:<br>Zug statt Flug (Familien-Bonus)
 
 Für Familien ist die Bahn oft die deutlich günstigere Alternative zum Flug – besonders innerhalb Deutschlands und in die Nachbarländer. Die Gründe:
 
@@ -65,7 +65,7 @@ Für Familien ist die Bahn oft die deutlich günstigere Alternative zum Flug –
 
 Die Rechnung: Eine vierköpfige Familie spart mit dem Zug oft 100 bis 300 Euro gegenüber dem Flug – und startet entspannter. Der [Flug-Trick](../../posts/flug-buchen-9-tricks-guenstige-tickets/) lohnt erst bei Fernreisen.
 
-## Trick 5: Mietwagen ohne Kindersitz-Miete
+## Trick 5:<br>Mietwagen ohne Kindersitz-Miete
 
 Der Klassiker der Mietwagen-Falle: Der Kindersitz kostet bei den Vermietern 5 bis 10 Euro pro Tag – bei zwei Wochen sind das 70 bis 140 Euro. Die Alternativen:
 
@@ -75,7 +75,7 @@ Der Klassiker der Mietwagen-Falle: Der Kindersitz kostet bei den Vermietern 5 bi
 
 Wichtig: Die gesetzlichen Vorgaben für Kindersitze im Ausland prüfen (Größe und Alter) – und den Sitz vor der Abfahrt richtig einbauen.
 
-## Trick 6: Nebensaison für Familien
+## Trick 6:<br>Nebensaison für Familien
 
 Der größte Preisfaktor im Familienurlaub ist der Reisezeitpunkt: In den Schulferien zahlen Familien oft 30 bis 60 Prozent mehr als in der Nebensaison. Die Kunst: Ferienzeiten clever nutzen.
 
@@ -85,7 +85,7 @@ Der größte Preisfaktor im Familienurlaub ist der Reisezeitpunkt: In den Schulf
 
 Wer flexibel ist, spart mit dem Reisezeitpunkt mehr als mit jedem anderen Trick.
 
-## Trick 7 bis 10: Die restlichen Spartricks
+## Trick 7 bis 10:<br>Die restlichen Spartricks
 
 **7. Frühbucher mit kostenloser Stornierung:** Familienreisen früh buchen (beste Preise und Hotel-Auswahl) – aber nur mit kostenloser Stornierung, falls die Pläne sich ändern.
 
@@ -110,7 +110,7 @@ die Urlaubs-Aufschläge für diese Basics sind enorm.
 - [ ] Frühbucher mit kostenloser Stornierung genutzt
 - [ ] Budget gesetzt – und [die Urlaubskasse](../../posts/urlaubskasse-aufbessern-spartipps/) rechtzeitig gefüllt
 
-## Urlaub mit Kindern planen: Der 6-Schritte-Plan
+## Urlaub mit Kindern planen:<br>Der 6-Schritte-Plan
 
 Damit der Familienurlaub entspannt und günstig wird, hilft ein fester Planungs-Rhythmus – sechs Schritte, verteilt über die Monate vor der Reise:
 

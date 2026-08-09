@@ -16,7 +16,7 @@ kurzantwort: "Eine Zahnzusatzversicherung lohnt sich für gesetzlich Versicherte
 ---Ein Implantat kostet schnell 2.000 bis 3.000 Euro –   
 die gesetzliche Kasse übernimmt nur einen Festzuschuss von rund 60 Prozent der Regelversorgung. Die Zahnzusatzversicherung schließt diese Lücke. Doch sie lohnt sich nicht für jeden. Du bekommst hier einen Ratgeber, der zeigt, wann der Abschluss sinnvoll ist und worauf du achten musst.
 
-## Das Grundproblem: Die GKV zahlt nur den Festzuschuss
+## Das Grundproblem:<br>Die GKV zahlt nur den Festzuschuss
 
 Die gesetzliche Krankenversicherung zahlt bei Zahnersatz nur einen Festzuschuss – in der Regel 60 Prozent der Regelversorgung. Alles darüber hinaus zahlst du selbst. Bei Zahnbehandlung und professioneller Zahnreinigung bleibt vieles an dir hängen. Du zahlst selbst, wenn du hochwertige Keramik oder Vollkeramikkronen haben möchtest.
 

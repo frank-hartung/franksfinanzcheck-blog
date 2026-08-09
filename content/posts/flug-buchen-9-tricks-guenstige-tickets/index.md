@@ -19,7 +19,7 @@ cover:
 Flugpreise wirken oft wie ein Mysterium: Der Sitz neben dir hat vielleicht 100 Euro mehr oder weniger gekostet, obwohl ihr denselben Flug gebucht habt. Tatsächlich folgen Flugpreise klaren Mustern –   
 wer sie kennt, zahlt deutlich weniger. Die gute Nachricht: Die 9 Tricks in diesem Artikel funktionieren bei jeder Buchung, ohne Glück und ohne Sonderangebote-Jagd.
 
-## Der richtige Suchzeitpunkt: 6 bis 8 Wochen
+## Der richtige Suchzeitpunkt:<br>6 bis 8 Wochen
 
 Der beste Buchungszeitpunkt für Flüge liegt bei den meisten Zielen **6 bis 8 Wochen vor Abreise**. In diesem Fenster sind die Preise am niedrigsten – davor sind die Tarife hoch, weil die Airlines die frühen Buchungen teuer verkaufen, und danach steigen sie mit der Nachfrage.
 
@@ -35,7 +35,7 @@ viele Portale zeigen dir die günstigsten Tage im Monatskalender. Wer die Abreis
 
 Für Ziele gilt das Gleiche: Statt „Mallorca" einfach „alle Ziele" suchen und sehen, wohin es diese Woche günstig geht. Wer nicht an ein konkretes Ziel gebunden ist, fliegt für ein Drittel des Preises.
 
-## Abflughafen-Vergleich: Der unterschätzte Hebel
+## Abflughafen-Vergleich:<br>Der unterschätzte Hebel
 
 Ein Blick auf die umliegenden Flughäfen spart oft 100 bis 300 Euro: Der Flug ab Frankfurt, Düsseldorf oder Hamburg ist oft deutlich teurer als ab einem kleineren Flughafen in der Region – oder umgekehrt. Die Vergleichsportale zeigen die Preise je Abflughafen direkt an.
 
@@ -57,7 +57,7 @@ Die Regeln beim Vergleich:
 - **Handgepäck-Maße prüfen:** Die „Personal Item"-Regel (nur ein kleiner Rucksack) ist bei vielen Billig-Airlines der Standard – wer einen Trolley mitnimmt, zahlt extra.
 - **Zusatzleistungen vorab buchen:** Gepäck und Sitzplätze sind online deutlich günstiger als am Schalter.
 
-## Versteckte Kosten: Sitzplatz, Priority, Versicherung
+## Versteckte Kosten:<br>Sitzplatz, Priority, Versicherung
 
 Die Zusatzleistungen sind das Geschäftsmodell der Billig-Airlines – und die Falle für Unaufmerksame:
 
@@ -86,7 +86,7 @@ Bevor du zahlst, geh diese 5 Punkte durch:
 4. **Flexibilität?** Ist eine kostenlose Stornierung oder Umbuchung enthalten – oder zahle ich bei Änderungen extra?
 5. **Preisvergleich gemacht?** Dasselbe Ticket beim Vergleichsportal und direkt bei der Airline gecheckt – manchmal ist die Direktbuchung günstiger (oder die Airline bietet Service-Vorteile).
 
-## Fliegen mit Kindern: Die Familien-Tricks
+## Fliegen mit Kindern:<br>Die Familien-Tricks
 
 Fliegen mit Kindern ist teuer – aber mit den richtigen Tricks sparen Familien auch hier 100 bis 300 Euro pro Reise:
 

@@ -33,7 +33,7 @@ Es gibt drei Bausteine, die in der Diskussion immer wieder auftauchen – mit se
 
 Die Reihenfolge der Priorität ist eindeutig: Auslandskranken zuerst, Reiserücktritt bei Bedarf – und der Rest ist meist unnötig.
 
-## Auslandskrankenversicherung: Pflicht für jede Reise
+## Auslandskrankenversicherung:<br>Pflicht für jede Reise
 
 Die Auslandskrankenversicherung ist die wichtigste Reiseversicherung überhaupt – und die günstigste: **10 bis 30 Euro pro Jahr** für eine Einzelperson, 20 bis 50 Euro für Familien. Sie zahlt die Arzt- und Krankenhauskosten, die deine gesetzliche Krankenversicherung im Ausland nicht (oder nur teilweise) übernimmt.
 
@@ -46,7 +46,7 @@ Die Details, die zählen:
 
 Wichtig: Die Auslandskrankenversicherung gilt für **jede** Reise, auch Kurztrips – und die meisten Tarife decken auch Reisen bis 6 Wochen Dauer ab. Wer öfter verreist, nimmt den Jahresvertrag.
 
-## Reiserücktrittsversicherung: Wann sie sich lohnt
+## Reiserücktrittsversicherung:<br>Wann sie sich lohnt
 
 Die Reiserücktrittsversicherung zahlt die Stornokosten, wenn du die Reise aus einem versicherten Grund nicht antreten kannst – in der Regel Krankheit, Unfall, schwere Erkrankung Angehöriger, Jobverlust oder unerwartete Schwangerschaft. Die Kosten: 3 bis 5 Prozent des Reisepreises, also 30 bis 80 Euro für eine 2.000-Euro-Reise.
 
@@ -58,7 +58,7 @@ Wann sie sich lohnt:
 
 Wann sie unnötig ist: Bei günstigen Reisen unter 500 Euro oder Städtereisen, die sich flexibel verschieben lassen. Der Selbstbehalt von 20 bis 25 Prozent sollte bei der Kalkulation eingeplant werden.
 
-## Reisegepäckversicherung: Meist überflüssig
+## Reisegepäckversicherung:<br>Meist überflüssig
 
 Die Reisegepäckversicherung klingt praktisch – ist aber für die meisten Reisenden überflüssig. Die Gründe:
 
@@ -98,7 +98,7 @@ Der Vergleich lohnt sich: Die Preise für identische Leistungen unterscheiden si
 3. **Bewertungen prüfen:** Im Schadensfall zählt die Zahlungsmoral – Stiftung Warentest testet Reiseversicherungen regelmäßig.
 4. **Jahresvertrag prüfen:** Bei mehreren Reisen pro Jahr fast immer die günstigste Option.
 
-## Versicherungs-Check vor der Reise: Die 5-Minuten-Routine
+## Versicherungs-Check vor der Reise:<br>Die 5-Minuten-Routine
 
 Die beste Versicherung ist die, die du im Schadensfall wirklich dabei hast. Deshalb gehört der Versicherungs-Check fest in die Reise-Vorbereitung – er dauert nur 5 Minuten:
 

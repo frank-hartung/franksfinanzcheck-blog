@@ -20,7 +20,7 @@ Der durchschnittliche deutsche Haushalt gibt rund 2.900 Euro pro Jahr für Versi
 
 Die gute Nachricht: Mit einer systematischen Bestandsaufnahme erkennst du die überflüssigen Policen – und kündigst sie. In diesem Artikel zeige ich dir die 5 häufigsten Kandidaten und die 4 Policen, die bleiben sollten.
 
-## Der Versicherungs-Ordner: Erst Bestandsaufnahme
+## Der Versicherungs-Ordner:<br>Erst Bestandsaufnahme
 
 Bevor du kündigst, sammelst du alle Verträge: Gibt es einen Ordner oder hast du Zugriff auf das Online-Postfach deiner Versicherer? Lege eine Liste an mit Versicherer, Vertragsnummer, Beitrag, Leistung und Laufzeit.
 
@@ -28,33 +28,33 @@ Der klassische Fehler: Man kündigt „mal eben" eine Police, die man gar nicht 
 
 Danach sortierst du in drei Stapel: Muss bleiben, kann weg, muss geprüft werden. Genau diese Struktur hilft, die 5 folgenden Kandidaten zu erkennen.
 
-## Kündigen: 1. Handy- und Elektronikversicherung
+## Kündigen:<br>1. Handy- und Elektronikversicherung
 
 Die Versicherung für Smartphone, Tablet oder Laptop klingt praktisch – ist aber meist ein schlechtes Geschäft. Die Prämien liegen bei 5 bis 15 Euro pro Monat, die Selbstbeteiligung bei 50 bis 150 Euro pro Schadenfall, und viele Geräte sind über die Hausratversicherung oder die Herstellergarantie bereits teilweise abgedeckt.
 
 Die Rechnung: Wer 3 Jahre lang 8 Euro im Monat zahlt, hat 288 Euro eingezahlt – und hat im besten Fall einmal 200 Euro Ersatz bekommen. Für günstige Geräte (unter 300 Euro) lohnt sich eine Versicherung fast nie. Mein Tipp: Für Neugeräte die Herstellergarantie nutzen, eine Hülle kaufen und den Rest selbst tragen – im Schnitt ist das deutlich günstiger.
 
-## Kündigen: 2. Reisegepäckversicherung
+## Kündigen:<br>2. Reisegepäckversicherung
 
 Die Reisegepäckversicherung zahlt bei Verlust oder Diebstahl des Gepäcks – oft mit hohen Selbstbehalten und engen Bedingungen (zum Beispiel nur innerhalb von 24 Stunden nach Anzeige). Der durchschnittliche Schaden ist gering, und viele Fälle sind gar nicht versichert (Verschluss, Abnutzung, Wertgegenstände über Einzelgrenzen).
 
 Zudem: Wer eine [Auslandskrankenversicherung](../../posts/reisekrankenversicherung-wann-lohnt/) und eine Hausratversicherung hat, ist für viele Fälle schon abgesichert. Die Reisegepäckversicherung gehört zu den Policen, die Versicherer gern im „Reise-Paket" mitverkaufen – und die sich fast nie lohnt.
 
-## Kündigen: 3. Doppelte Hausratversicherung
+## Kündigen:<br>3. Doppelte Hausratversicherung
 
 Klassiker: Ein Umzug, ein neuer Vertrag – und die alte Hausratversicherung läuft still weiter, weil niemand gekündigt hat. Oder: Partner haben jeweils eine eigene Hausrat, die sich gegenseitig doppelt. Doppelte Versicherung bedeutet doppelte Beiträge für denselben Schutz.
 
 Prüfe: Deckt deine [Hausratversicherung](../../posts/hausratversicherung-wer-braucht-leistung/) den aktuellen Hausrat wirklich ab? Bei Umzug oder Zuzug eines Partners kann sich der Bedarf geändert haben. Eine Police reicht –   
 die günstigere behalten, die teurere kündigen. Achtung: Erst kündigen, wenn der neue Vertrag aktiv ist.
 
-## Kündigen: 4. Kleinst-Lebensversicherungen und Sterbegeld-Policen
+## Kündigen:<br>4. Kleinst-Lebensversicherungen und Sterbegeld-Policen
 
 Kleinst-Lebensversicherungen mit 5.000 bis 15.000 Euro Todesfallsumme stammen oft aus Zeiten, als solche Policen als „Sparvertrag" verkauft wurden. Heute sind sie meist teuer, intransparent und decken ein Risiko ab, das der Bedarf nicht mehr hergibt –   
 die Hinterbliebenen brauchen selten eine 10.000-Euro-Police, wenn der [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) und die eigene Vorsorge stehen.
 
 Prüfe den Rückkaufswert: Viele Policen haben nach Jahren eine garantierte Leistung, die unter den eingezahlten Beiträgen liegt. Der Rückkauf kann trotzdem sinnvoll sein, wenn das Geld anderweitig besser arbeitet – zum Beispiel in einem [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/). Lass dich bei Altverträgen beraten, die Kündigung kann steuerliche Folgen haben.
 
-## Kündigen: 5. Kfz-Schutzbrief und unnötige Zusatzbausteine
+## Kündigen:<br>5. Kfz-Schutzbrief und unnötige Zusatzbausteine
 
 Der Kfz-Schutzbrief (Pannenhilfe, Abschleppen, Mietwagen bei Panne) kostet 20 bis 60 Euro pro Jahr und ist oft im Kfz-Vertrag „mit drin". Viele Fahrer:innen haben ihn doppelt – über den ADAC, die Kreditkarte oder den Autohersteller. Prüfe, was du schon hast, bevor du den Baustein weiterzahlst.
 
@@ -79,7 +79,7 @@ das ist oft der perfekte Zeitpunkt zum Wechseln oder Kündigen.
 
 Für Kfz- und [Haftpflicht-Verträge](../../posts/privathaftpflicht-warum-pflicht-kosten/) gilt: Der Wechsel zum 30. November (Wechselstichtag) ist der Klassiker. Plane den Versicherungs-Check einmal im Jahr fest ein – zum Beispiel zum Geburtstag oder Jahresbeginn. So bleibt der Ordner sauber und die Beiträge niedrig.
 
-## Der jährliche Versicherungs-Check: Die 30-Minuten-Routine
+## Der jährliche Versicherungs-Check:<br>Die 30-Minuten-Routine
 
 Damit sich überflüssige Policen nicht wieder einschleichen, etablierst du eine feste Jahres-Routine – 30 Minuten, einmal im Jahr, am besten im Januar oder zum Geburtstag. So geht's:
 

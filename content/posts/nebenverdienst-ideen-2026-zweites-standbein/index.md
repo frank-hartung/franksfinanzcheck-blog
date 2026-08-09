@@ -34,7 +34,7 @@ Die steuerlichen Rahmenbedingungen sind attraktiv. Durch den Grundfreibetrag von
 
 Ein Minijob bietet dir besondere Vorteile. Bis zu 556 € monatlich zahlst du keine Sozialversicherungsbeiträge. Dein Arbeitgeber übernimmt die pauschale Versteuerung für dich. Das ist der einfachste Weg für ein verlässliches Netto-Plus.
 
-## Ideen 1 bis 3: Digital und flexibel
+## Ideen 1 bis 3:<br>Digital und flexibel
 
 **1. Freelancing neben dem Job.** Deine beruflichen Fähigkeiten sind wertvoll. Schreibe Texte, pflege Websites oder unterstütze Firmen bei der Buchhaltung. Plattformen wie Kleinanzeigen oder LinkedIn helfen dir bei der Kundensuche. Du verdienst hier etwa 15 bis 80 € pro Stunde.
 
@@ -42,7 +42,7 @@ Ein Minijob bietet dir besondere Vorteile. Bis zu 556 € monatlich zahlst du k
 
 **3. Online-Umfragen und Produkttests.** Marktforschungs-Institute zahlen für deine ehrliche Meinung. Der Verdienst ist mit 5 bis 20 € pro Stunde eher gering. Diese Arbeit eignet sich perfekt für Wartezeiten oder Pendelstrecken. Zahle niemals Gebühren, um an Umfragen teilnehmen zu dürfen.
 
-## Ideen 4 bis 6: Flexibel vor Ort
+## Ideen 4 bis 6:<br>Flexibel vor Ort
 
 **4. Nachhilfe geben.** Fächer wie Mathe, Deutsch oder Englisch sind immer gefragt. Ein einfacher Aushang an Schulen oder Portalen reicht oft aus. Du verdienst zwischen 15 und 35 € pro Stunde. Die Termine legst du flexibel auf Abende oder Wochenenden.
 
@@ -50,19 +50,19 @@ Ein Minijob bietet dir besondere Vorteile. Bis zu 556 € monatlich zahlst du k
 
 **6. Zustellung und Lieferdienste.** Liefere Essen, Pakete oder Zeitungen in deiner Nachbarschaft aus. Diese Jobs passen sich meist gut an deinen Zeitplan an. Du erhältst etwa 10 bis 20 € pro Stunde. Achte auf gute Ausrüstung, besonders wenn du bei jedem Wetter startest.
 
-## Ideen 7 und 8: Mit Kapital und Wissen
+## Ideen 7 und 8:<br>Mit Kapital und Wissen
 
 **7. Vermietung von Gegenständen.** Werkzeug, Anhänger oder deine Kamera-Ausrüstung liegen oft ungenutzt herum. Vermiete diese Dinge an Menschen aus deiner Umgebung. Auch ein freier Parkplatz bringt monatlich fixes Geld. Dein Aufwand bleibt minimal, während dein Eigentum für dich arbeitet.
 
 **8. Dividenden und Zinsen.** Lass dein bereits gespartes Geld für dich arbeiten. Zinsen und Dividenden fließen ganz ohne aktiven Zeitaufwand auf dein Konto. Nutze ein [Tagesgeldkonto](../../posts/tagesgeld-zinsen-sicher-anlegen/) oder einen [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) für den Start. Das ist die passivste Form eines Nebenverdienstes.
 
-## Ideen 9 und 10: Skalierbar
+## Ideen 9 und 10:<br>Skalierbar
 
 **9. Digitale Vorlagen und Info-Produkte.** Erstelle hilfreiche Dokumente wie [Vorlagen für Haushaltsbücher](../../posts/monatsbudget-erstellen-schritt-fuer-schritt/). Einmal erstellt, verkaufst du diese Produkte unendlich oft. Dein Verdienst liegt je nach Bekanntheit bei 100 bis 500 € im Monat. Der hohe Aufwand entsteht nur zu Beginn des Projekts.
 
 **10. Coaching und Beratung.** Hilf anderen Menschen bei Themen wie Fitness, Finanzen oder Bewerbungen. Starte mit kostenlosen Beratungen, um Erfahrungen und Referenzen zu sammeln. Später sind Honorare von 30 bis 80 € pro Stunde realistisch. Baue dir langfristig eine eigene kleine Marke auf.
 
-## Steuerfreibetrag und Anmeldung: Das musst du wissen
+## Steuerfreibetrag und Anmeldung:<br>Das musst du wissen
 
 Beachte die geltenden Regeln für das Jahr 2026. Dein gesamtes Einkommen bleibt bis zu 12.096 € einkommensteuerfrei. Verdienst du mehr, zahlst du auf jeden weiteren Euro Steuern. Ein Minijob bis 556 € monatlich bleibt für dich meist abgabenfrei.
 

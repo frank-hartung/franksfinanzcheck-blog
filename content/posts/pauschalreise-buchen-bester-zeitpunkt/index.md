@@ -20,7 +20,7 @@ Die Frage „Frühbucher oder Last Minute?" beschäftigt jeden Urlauber – und 
 
 In diesem Artikel zeige ich dir die besten Buchungszeitfenster je Ziel, erkläre den Preisverlauf und gebe dir 6 Spartricks, die bei jeder Pauschalreise funktionieren.
 
-## Frühbucher vs. Last Minute: Die Wahrheit
+## Frühbucher vs. Last Minute:<br>Die Wahrheit
 
 Die Zeiten, in denen Last Minute pauschal billiger war, sind vorbei. Die Reiseveranstalter haben ihre Preissysteme umgestellt: Frühbucher-Rabatte (bis 40 Prozent auf den Katalogpreis) sichern sich die besten Kontingente, und die Restplätze werden selten unter die Frühbucherpreise verkauft.
 
@@ -45,7 +45,7 @@ Nicht jede Reise folgt demselben Muster. Die Faustregeln für 2026:
 | Städtereisen | 2–3 Monate vorher | Kurze Buchungszyklen, flexible Preise |
 | Skireisen | 3–5 Monate vorher | Frühbucher für die Ferienzeiten |
 
-## Den Preisverlauf verstehen: 5 Muster
+## Den Preisverlauf verstehen:<br>5 Muster
 
 Wer die Preismechanik versteht, kauft zum richtigen Zeitpunkt. Die 5 wichtigsten Muster:
 
@@ -55,21 +55,21 @@ Wer die Preismechanik versteht, kauft zum richtigen Zeitpunkt. Die 5 wichtigsten
 4. **Der „Buchungsstress"-Preis:** Kurzfristig angefragte Reisen sind oft teurer, weil die Hotels die Verfügbarkeit knapp kalkulieren.
 5. **Der Preis-Vergleichs-Effekt:** Preise schwanken wöchentlich – ein Preisalarm im Vergleichsportal hilft, den richtigen Moment zu erwischen.
 
-## Spartrick 1: Flexibel beim Abflughafen
+## Spartrick 1:<br>Flexibel beim Abflughafen
 
 Der größte Hebel beim Reisepreis ist der Abflughafen. Wer statt des Heimatflughafens einen 100 Kilometer entfernten Flughafen wählt, spart oft 100 bis 300 Euro pro Person – gerade bei Pauschalreisen, wo der Flug ein großer Kostenblock ist.
 
 Die Rechnung: Hin- und Rückfahrt zum weiter entfernten Flughafen (Zug oder Auto) kostet 30 bis 80 Euro –   
 die Ersparnis beim Reisepreis ist meist deutlich höher. Die [Vergleichsportale](../../posts/guenstige-fluege-spaetsommer-finden/) zeigen dir die Preise je Abflughafen auf einen Blick.
 
-## Spartrick 2: Mitte der Woche fliegen
+## Spartrick 2:<br>Mitte der Woche fliegen
 
 Der Abreisetag beeinflusst den Preis stärker als gedacht: Wer statt Samstag/Sonntag Dienstag oder Mittwoch fliegt, spart bei Pauschalreisen oft 50 bis 150 Euro pro Person. Der Grund: Die Nachfrage konzentriert sich auf das Wochenende –   
 die Veranstalter bepreisen das.
 
 Gerade bei Kurztrips und Städtereisen ist die Wochenmitte der Geheimtipp: Weniger Andrang, günstigere Hotels, ruhigere Flüge.
 
-## Spartrick 3: Zubuchungen geschickt wählen
+## Spartrick 3:<br>Zubuchungen geschickt wählen
 
 Die Zubuchungs-Falle der Reiseportale: Transfer, Ausflüge, Mietwagen, Versicherungen –   
 alles wird dir beim Buchen „bequem" angeboten, oft mit satten Aufschlägen. Die Regeln:
@@ -78,23 +78,23 @@ alles wird dir beim Buchen „bequem" angeboten, oft mit satten Aufschlägen. Di
 - **Reiseversicherung:** Die Versicherungen der Portale sind oft überteuert – [vergleiche die Konditionen](../../posts/reisekrankenversicherung-wann-lohnt/) vorher.
 - **Zimmer-Upgrades:** An der Rezeption vor Ort verhandeln ist oft günstiger als vorgebuchte Upgrades.
 
-## Spartrick 4: Die richtige Reisedauer
+## Spartrick 4:<br>Die richtige Reisedauer
 
 Die meisten Pauschalreisen werden in 7-Tage-Schritten verkauft – und der Preis pro Tag fällt mit der Dauer. Wer 10 statt 7 Tage bucht, zahlt oft nur 20 bis 30 Prozent mehr. Der Tipp: Vergleiche die Tagespreise verschiedener Reisedauern –  
 die 10-Tage-Variante ist oft das bessere Preis-Leistungs-Verhältnis.
 
-## Spartrick 5 und 6: Preisalarme + Vergleichsportale
+## Spartrick 5 und 6:<br>Preisalarme + Vergleichsportale
 
 Zwei Basics, die man nie vergessen sollte: **Preisalarme** in Vergleichsportalen (CHECK24, HolidayCheck, idealo) schlagen zu, wenn der Preis fällt – und der **Vergleich der Veranstalter** lohnt sich, weil derselbe Urlaub bei verschiedenen Anbietern 100 bis 300 Euro unterschiedlich teuer sein kann. Die [Pauschalreise-Vergleiche](../../posts/last-minute-urlaubsangebote-sichern/) zeigen die Preise mit allen Leistungen – und mit der kostenlosen Stornierung kannst du bei Preisverfall nachbuchen.
 
-## Der Pauschalreise-Vorteil: Sicherheit & Recht
+## Der Pauschalreise-Vorteil:<br>Sicherheit & Recht
 
 Zum Schluss die Einordnung, warum Pauschalreisen trotzdem ihren Preis wert sind: Der **Pauschalreise-Vertrag** bietet dir umfassende Rechte –   
 die [Reiseverordnung](../../posts/reisekrankenversicherung-wann-lohnt/) schützt dich bei Flugausfällen, Hotel-Problemen und Reisemängeln. Du hast einen Ansprechpartner (den Veranstalter), der sich um alles kümmert, und bei Insolvenz greift der [Reisesicherungsschein](../../posts/urlaubskasse-aufbessern-spartipps/).
 
 Wer Flexibilität und günstige Preise will, bucht Bausteine einzeln. Wer Sicherheit und Komfort will, bucht pauschal – zum richtigen Zeitpunkt.
 
-## Pauschalreise für Familien: Die Ferien-Logik verstehen
+## Pauschalreise für Familien:<br>Die Ferien-Logik verstehen
 
 Für Familien gilt eine eigene Preis-Logik: Die Schulferien sind der teuerste Zeitraum des Jahres, und die Nachfrage ist in den Ferienwochen praktisch garantiert. Das hat Konsequenzen für die Buchungsstrategie:
 

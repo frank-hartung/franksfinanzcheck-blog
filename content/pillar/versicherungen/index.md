@@ -20,23 +20,23 @@ die falsche ist reine Geldverbrennung. In diesem Ratgeber bekommst du den Überb
 *   **Zahnzusatz- und Unfallversicherung** sind Einzelfall-Entscheidungen – hier zählt deine persönliche Situation.
 *   **Kfz-Versicherung:** Ein Wechsel zum Stichtag spart oft mehrere Hundert Euro.
 
-## Privathaftpflicht: Die Pflichtversicherung für alle
+## Privathaftpflicht:<br>Die Pflichtversicherung für alle
 
 Ein Missgeschick kann schnell sechsstellige Schäden verursachen – dafür haftest du privat mit deinem gesamten Vermögen. Warum diese Police für jeden die Nummer eins ist und was sie kosten darf, erkläre ich in [Privathaftpflicht: Warum sie Pflicht ist und was sie kostet](../../posts/privathaftpflicht-warum-pflicht-kosten/).
 
-## Hausrat: Wer sie braucht und was sie leistet
+## Hausrat:<br>Wer sie braucht und was sie leistet
 
 Ob sich eine Hausratversicherung lohnt, hängt vor allem vom Wert deines Hausrats ab. Wie du den Versicherungswert richtig bestimmst, welche Gefahren abgedeckt sind und wo die typischen Ausschlüsse lauern, erkläre ich in [Hausratversicherung: Wer sie braucht und was sie leistet](../../posts/hausratversicherung-wer-braucht-leistung/).
 
-## Zahnzusatz: Wann sich der Abschluss lohnt
+## Zahnzusatz:<br>Wann sich der Abschluss lohnt
 
 Implantate und hochwertiger Zahnersatz sind teuer – aber nicht für jeden lohnt sich eine Zusatzversicherung. Die ehrliche Einordnung mit Kostenbeispielen findest du in [Zahnzusatzversicherung: Wann sich der Abschluss lohnt](../../posts/zahnzusatzversicherung-lohnt-sich/).
 
-## Unfall- und Reisekrankenversicherung: Für wen sie wirklich sinnvoll sind
+## Unfall- und Reisekrankenversicherung:<br>Für wen sie wirklich sinnvoll sind
 
 Die private Unfallversicherung wird oft überteuert verkauft. Für wen sie sich wirklich lohnt und welche Alternativen es gibt, steht in [Private Unfallversicherung: Für wen sie sich wirklich lohnt](../../posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/). Für Reisen ins Ausland ist dagegen die [Reisekrankenversicherung](../../posts/reisekrankenversicherung-wann-lohnt/) fast immer eine sinnvolle, günstige Ergänzung.
 
-## Kfz-Versicherung wechseln: Der jährliche Sparhebel
+## Kfz-Versicherung wechseln:<br>Der jährliche Sparhebel
 
 Zum Wechselstichtag im November/Dezember lohnt sich der Vergleich besonders: Wer seine Kfz-Versicherung wechselt, spart oft 100 € bis 300 € – bei gleicher Leistung. Wie du richtig vergleichst und typische Fallen vermeidest, erkläre ich in [Kfz-Versicherung wechseln: Wann es sich wirklich lohnt](../../posts/kfz-versicherung-wechseln/).
 

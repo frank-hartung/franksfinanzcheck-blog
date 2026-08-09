@@ -31,7 +31,7 @@ Verbraucherzentralen kritisieren die Banken seit Jahren für diese hohen Sätze.
 
 Du kannst deinen persönlichen Zinssatz jedoch oft selbst beeinflussen. Viele Kunden wissen gar nicht, dass Banken hier verhandlungsbereit sind. Ein kurzer Anruf bei deinem Berater genügt oft schon für eine Besserung. So kannst du teure Dispozinsen dauerhaft senken.
 
-## Rechenbeispiel: 1.000 Euro für 30 Tage
+## Rechenbeispiel:<br>1.000 Euro für 30 Tage
 
 Lass uns 1.000 € für genau 30 Tage im Minus betrachten. Bei 12 % Zinsen zahlst du monatlich 10 € an die Bank. Steigt der Satz auf 14 %, sind es bereits 11,67 €. Verhandelst du geschickt auf 8 %, sinkt die Last auf nur 6,67 €.
 
@@ -51,19 +51,19 @@ Kunden nutzen den Dispo oft unbewusst nebenher im Alltag. Die Kosten werden dabe
 
 Zusätzlich entsteht bei vielen Nutzern ein gefährlicher Gewohnheitseffekt. Wer einmal tief im Minus steckt, kommt ohne Plan schwer wieder heraus. Die Bank verdient an jeder weiteren Überziehung deines Kontos mit. Bewusstsein für diese Kosten ist deshalb dein wichtigster erster Schritt.
 
-## Alternative 1: Den Dispo-Zinssatz verhandeln
+## Alternative 1:<br>Den Dispo-Zinssatz verhandeln
 
 Du kannst deinen Zinssatz für den Dispo aktiv senken lassen. Viele Banken reagieren positiv auf Anfragen von Kunden mit guter Bonität. Ein regelmäßiges Einkommen auf dem Konto verbessert deine Verhandlungsposition dabei erheblich. Die Verhandlung dauert meist nur ein kurzes Telefonat mit deinem Berater.
 
 Nenne den aktuellen Zinssatz deiner Bank und den Branchendurchschnitt. Erwähne sachlich, dass du über einen Wechsel zu einem günstigeren Anbieter nachdenkst. Oft gewährt dir die Bank dann einen Rabatt von 1 % bis 3 %. Das spart dir bei 1.000 € Dispo etwa 30 € im Jahr.
 
-## Alternative 2: Notgroschen aufbauen
+## Alternative 2:<br>Notgroschen aufbauen
 
 Die nachhaltigste Lösung ist ein Puffer auf einem extra Konto. Ein [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) von 1.000 € bis 3.000 € fängt unerwartete Reparaturen oder Anschaffungen sicher ab. So kannst du den Dispo vermeiden und bleibst finanziell unabhängig. Deine Waschmaschine oder das Auto verursachen dann kein Minus mehr.
 
 Dein Erspartes ersetzt den teuren Kreditrahmen funktional komplett. Statt 12 % Zinsen zu zahlen, erhältst du auf dem Tagesgeld sogar Zinsen. Wenn du monatlich 100 € sparst, hast du nach 10 Monaten einen guten Puffer. Damit bist du praktisch sofort dauerhaft dispo-frei.
 
-## Alternative 3: Ratenkredit mit Vergleich
+## Alternative 3:<br>Ratenkredit mit Vergleich
 
 Ein Ratenkredit ist bei größeren Summen fast immer die bessere Wahl. Nutze einen [Ratenkredit-Vergleich](../../posts/ratenkredit-bestszins-vergleichen/), um Zinsen ab etwa 5 % zu finden. Er gehört zu den sinnvollsten Kreditalternativen für die Umschuldung deines Dispos. Die monatlichen Raten geben dir eine klare Struktur zurück.
 
@@ -71,17 +71,17 @@ Ein Beispiel macht den großen Sparvorteil für dich deutlich. Wenn du 5.000 �
 
 Nimm den Kredit aber nur bei einer sicheren Rückzahlung auf. Du musst die monatliche Rate dauerhaft ohne Probleme stemmen können. Sonst wird aus dem Dispo eine langfristige und gefährliche Schuldenfalle. Plane dein Budget deshalb vor dem Abschluss genau ein.
 
-## Alternative 4: Kostenloses Konto mit Rahmen
+## Alternative 4:<br>Kostenloses Konto mit Rahmen
 
 Einige Banken bieten ihren Kunden spezielle Sicherheitspolster mit niedrigen Zinsen an. Das gilt besonders für Konten mit regelmäßigem Gehaltseingang. Vergleiche die Konditionen der verschiedenen Anbieter deshalb sehr genau. Ein [Wechsel zu einem kostenlosen Girokonto](../../posts/kontowechsel-in-20-minuten-wechselservice/) kann deine Kosten sofort drastisch senken.
 
-## Alternative 5: Budget-Fix
+## Alternative 5:<br>Budget-Fix
 
 Hinter regelmäßigen Überziehungen steckt meist ein echtes Loch im Budget. Deine monatlichen Ausgaben übersteigen in diesem Fall dauerhaft deine Einnahmen. Ein [Monatsbudget](../../posts/monatsbudget-erstellen-schritt-fuer-schritt/) zeigt dir sofort, wohin dein Geld wirklich fließt. Nutze ein [Haushaltsbuch](../../posts/haushaltsbuch-fuehren-app-excel-oder-stift/), um unnötige Kostenfresser schnell zu identifizieren.
 
 Billige Kredite lösen das Problem der Mehrausgaben langfristig leider nicht. Nur ein ehrlicher Blick auf deine Zahlen schafft echte Abhilfe. Reduziere deine fixen Kosten oder erhöhe gezielt deine monatlichen Einnahmen. So schließt du die Lücke und lebst dauerhaft entspannt.
 
-## Der Dispo und die Psychologie: Warum wir überziehen
+## Der Dispo und die Psychologie:<br>Warum wir überziehen
 
 Hinter der Nutzung des Dispos steckt oft ein psychologisches Muster. Studien zeigen, dass Menschen ihr Konto meist ohne bewusstes Rechnen überziehen. Das Konto gibt beim Bezahlen oft kein direktes Warnsignal ab. Die Bank informiert dich meist erst viel zu spät über das Minus.
 
