@@ -63,6 +63,13 @@
 {{- else if $term }}
 {{- $class = "post-entry tag-entry" }}
 {{- end }}
+{{- /* LCP-Marker: Die ERSTE Karte auf der Startseite bleibt voll gerendert
+       (content-visibility: visible) – alle anderen Karten bekommen
+       content-visibility: auto (siehe custom.css) und werden erst bei
+       Annäherung gerendert. Das beschleunigt das LCP-Element spürbar. */}}
+{{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0)) }}
+{{- $class = printf "%s lcp-card" $class }}
+{{- end }}
 
 <article class="{{ $class }}">
   {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
