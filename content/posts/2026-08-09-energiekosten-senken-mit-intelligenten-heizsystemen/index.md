@@ -1,6 +1,6 @@
 ---
 title: "Energiekosten senken mit intelligenten Heizsystemen"
-description: "Energiekosten senken."
+description: "Senke deine Energiekosten mit intelligenten Heizsystemen und spare Geld bei deinen Heizkosten So sparst du jeden Monat bares Geld."
 date: 2026-08-09
 draft: false
 tags: ["Energiekosten", "Heizsysteme", "Energiesparen"]

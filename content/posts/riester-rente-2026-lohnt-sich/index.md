@@ -1,5 +1,5 @@
 ---
-title: "Riester-Rente 2026: Weiterfördern oder kündigen?"
+title: "Riester Rente 2026 Weiterfördern oder kündigen dieses Jahr"
 description: "Die Riester-Reform kommt – aber was heißt das für deinen Vertrag? So entscheidest du 2026: fördern, stilllegen oder kündigen."
 date: 2026-08-09T09:00:00Z
 draft: false
