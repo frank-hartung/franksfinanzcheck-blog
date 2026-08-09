@@ -1,10 +1,14 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am … – 44 Artikel geprüft, 0 Funde, 0 korrigiert, 0 offen.
+> **Automatisch** erzeugt am … – 45 Artikel geprüft, 10 Funde, 5 korrigiert, 5 offen.
 
 ## Offene Punkte
 
-_Keine offenen Punkte._
+- `Unbekanntes Wort: „PFOF“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Filialbanken“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Video-Call“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Abgeltungsteuer“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Broker-App“ (Vorschläge: –)`
 
 ---
 *Erzeugt von scripts/spellcheck.py*

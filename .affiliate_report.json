@@ -1,7 +1,7 @@
 {
- "total": 44,
+ "total": 45,
  "errors": 0,
- "fixed": 0,
+ "fixed": 1,
  "posts": [
   {
    "slug": "frugalismus",
@@ -135,6 +135,15 @@
    "title": "Stromtarif für Wärmepumpe: So sparst du beim Heize",
    "pillar": "strom-sparen",
    "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau",
+   "title": "Depot 2026: Dein smarter Start in den Vermögensauf",
+   "pillar": "konto-karten",
+   "fixed": 1,
    "errors": [],
    "infos": [],
    "ok": true
