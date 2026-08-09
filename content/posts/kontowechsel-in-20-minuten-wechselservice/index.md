@@ -93,15 +93,7 @@ Kündige es schriftlich per Brief oder gesicherter E-Mail, sobald die Umstellung
 **Wie lange dauert der Wechsel?**
 Die Eröffnung des Kontos erledigst du in 10 bis 15 Minuten. Die technische Umstellung im Hintergrund dauert etwa 2 bis 4 Wochen. Dein persönlicher Zeitaufwand beträgt insgesamt nur etwa 20 Minuten.
 
-<<<<<<< HEAD
-Ein modernes Girokonto ist die Basis für deinen finanziellen Erfolg. Wie du das beste Angebot findest, liest du in meinem [Ratgeber zum kostenlosen Girokonto](../../posts/kostenloses-girokonto-finding/). Prüfe beim Wechsel auch direkt, ob deine [Kreditkarte auf Jahresgebühren](../../posts/kreditkarte-ohne-jahresgebuehr/) verzichtet. Viele Banken bieten attraktive Pakete ohne Zusatzkosten an. Weitere Tipps findest du im [Ratgeber Konto & Karten](../../pillar/konto-karten/).
-=======
-<<<<<<< HEAD
-Ein modernes Girokonto ist die Basis für deinen finanziellen Erfolg. Wie du das beste Angebot findest, liest du in meinem [Ratgeber zum kostenlosen Girokonto](../../posts/kostenloses-girokonto-finding/). Prüfe beim Wechsel auch direkt, ob deine [Kreditkarte auf Jahresgebühren](../../posts/kreditkarte-ohne-jahresgebuehr/) verzichtet. Viele Banken bieten attraktive Pakete ohne Zusatzkosten an. Weitere Tipps findest du im [Ratgeber Konto & Karten](../../pillar/konto-karten/).
-=======
 Ein modernes Girokonto ist die Basis für deinen finanziellen Erfolg. Wie du das beste Angebot findest, liest du in meinem [Ratgeber zum kostenlosen Girokonto](../../posts/kostenloses-girokonto-finden/). Prüfe beim Wechsel auch direkt, ob deine [Kreditkarte auf Jahresgebühren](../../posts/kreditkarte-ohne-jahresgebuehr/) verzichtet. Viele Banken bieten attraktive Pakete ohne Zusatzkosten an. Weitere Tipps findest du im [Ratgeber Konto & Karten](../../pillar/konto-karten/).
->>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
->>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
 
 👉 **Jetzt kostenloses Girokonto vergleichen und wechseln:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
 

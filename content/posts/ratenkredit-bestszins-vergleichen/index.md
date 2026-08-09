@@ -4,15 +4,7 @@ description: "Kreditvergleich lohnt sich: effektiver Jahreszins, versteckte Kost
 date: 2026-08-04
 draft: false
 tags: ["Kredit", "Ratenkredit", "Umschuldung"]
-<<<<<<< HEAD
-categories: ["[Geld sparen](../../posts/versicherungen-kuendigen-diese-5-poli/) & Frugalismus"]
-=======
-<<<<<<< HEAD
-categories: ["[Geld sparen](../../posts/versicherungen-kuendigen-diese-5-poli/) & Frugalismus"]
-=======
 categories: ["[Geld sparen](../../posts/versicherungen-kuendigen-diese-5-policen/) & Frugalismus"]
->>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
->>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
 pillar: "konto-karten"
 keywords: ["Ratenkredit vergleichen", "Ratenkredit günstig", "Kreditvergleich", "Umschuldung sparen", "Ratenkredit Vergleich", "Kredit Vergleichen"]
 author: "Frank"
