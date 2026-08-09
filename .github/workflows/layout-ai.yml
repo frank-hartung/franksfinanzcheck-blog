@@ -80,16 +80,24 @@ jobs:
         id: browser
         continue-on-error: true
         run: |
+          # Robuste Einrichtung: apt-get-Update zuerst, Fehler dürfen den
+          # Step NICHT crashen (exit 100 bei fehlendem Paket-Index) – der
+          # Browser-Audit ist weich (continue-on-error + sauberer Skip).
+          sudo apt-get update -qq >/dev/null 2>&1 || true
           sudo apt-get install -y -qq libnspr4 libnss3 libatk1.0-0 libatk-bridge2.0-0 \
             libxdamage1 libxkbcommon0 libasound2 libatspi2.0-0 libxcomposite1 libxrandr2 \
-            libgbm1 libdrm2 libcups2 libpango-1.0-0 libcairo2 >/dev/null 2>&1
+            libgbm1 libdrm2 libcups2 libpango-1.0-0 libcairo2 >/dev/null 2>&1 || true
           npm install -g puppeteer-core >/dev/null 2>&1 || true
           export NODE_PATH=$(npm root -g)
-          CHROME_DIR=$(npx -y @puppeteer/browsers install chrome-headless-shell@latest 2>/dev/null | grep -oE '/[^ ]+chrome-headless-shell$' | tail -1)
+          CHROME_DIR=$(npx -y @puppeteer/browsers install chrome-headless-shell@latest 2>/dev/null | grep -oE '/[^ ]+chrome-headless-shell$' | tail -1) || true
           echo "CHROME: $CHROME_DIR"
+          if [ -z "$CHROME_DIR" ]; then
+            echo "⚠ Chrome konnte nicht installiert werden – Browser-Audit übersprungen (kein Fehler)."
+            exit 0
+          fi
           LAYOUT_BASE=$PWD/public LAYOUT_PORT=8099 CHROME_PATH="$CHROME_DIR" node scripts/layout_browser_check.js \
             > /tmp/browser-audit.json || echo "BROWSER_ISSUES=true" >> "$GITHUB_ENV"
-          cat /tmp/browser-audit.json
+          cat /tmp/browser-audit.json || true
 
       # ============ REPORT COMMITTEN ============
       - name: Layout-Report veröffentlichen
