@@ -17,8 +17,7 @@ die falsche ist reine Geldverbrennung. In diesem Ratgeber bekommst du den Überb
 
 *   Die **Privathaftpflicht** ist die wichtigste Versicherung überhaupt – schon ab rund 30 € im Jahr.
 *   **Hausrat** lohnt sich vor allem bei hochwertigem Hausrat; der Wert entscheidet.
-*   **Zahnzusatz- und Unfallversicherung** sind Einzelfall-Entscheidungen –   
-hier zählt deine persönliche Situation.
+*   **Zahnzusatz- und Unfallversicherung** sind Einzelfall-Entscheidungen – hier zählt deine persönliche Situation.
 *   **Kfz-Versicherung:** Ein Wechsel zum Stichtag spart oft mehrere Hundert Euro.
 
 ## Privathaftpflicht: Die Pflichtversicherung für alle

@@ -28,8 +28,7 @@ Die Förderung 2026 im Überblick:
 
 - **Grundzulage:** 175 Euro pro Jahr (seit 2023)
 - **Kinderzulage:** 185 Euro pro Jahr pro Kind (ab Geburtsjahr 2008), 300 Euro für ältere Kinder
-- **Steuervorteil:** Beiträge können als Sonderausgaben abgesetzt werden –   
-wer dadurch weniger Steuern zahlt als die Zulagen betragen, bekommt die Differenz als Steuererstattung
+- **Steuervorteil:** Beiträge können als Sonderausgaben abgesetzt werden – wer dadurch weniger Steuern zahlt als die Zulagen betragen, bekommt die Differenz als Steuererstattung
 
 Dafür gilt: Das Geld ist bis zum Rentenalter gebunden, wird bei Auszahlung besteuert, und die Förderung muss in bestimmten Fällen zurückgezahlt werden (zum Beispiel bei Kündigung ohne Weiterführung).
 
@@ -37,8 +36,7 @@ Dafür gilt: Das Geld ist bis zum Rentenalter gebunden, wird bei Auszahlung best
 
 Die Bundesregierung hat eine Riester-Reform auf den Weg gebracht, die das System grundlegend vereinfachen soll. Die wichtigsten Änderungen, Stand 2026:
 
-- **neue Produkttypen:** Riester wird für mehr Anbieter und Produkte geöffnet, auch reine Fondssparpläne ohne Garantie werden erlaubt –   
-das verspricht höhere Renditen.
+- **neue Produkttypen:** Riester wird für mehr Anbieter und Produkte geöffnet, auch reine Fondssparpläne ohne Garantie werden erlaubt – das verspricht höhere Renditen.
 - **Kostenbremse:** die Abschluss- und Verwaltungskosten werden gedeckelt, damit mehr vom Gesparten ankommt.
 - **Vereinfachung:** die komplizierte Günstigerprüfung soll entfallen, die Förderung wird einfacher und transparenter.
 - **Bestandsschutz:** bestehende Verträge bleiben gültig – du kannst sie weiterführen, anpassen oder wechseln.

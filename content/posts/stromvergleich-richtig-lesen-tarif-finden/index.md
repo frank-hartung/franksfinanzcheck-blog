@@ -79,8 +79,7 @@ das übernimmt der neue Anbieter. Du musst nur:
 1. Deinen Verbrauch bereit halten (letzte Jahresabrechnung).
 2. Den passenden Tarif im Vergleich wählen.
 3. Das Online-Formular ausfüllen (Daten der letzten Rechnung, Zählernummer).
-4. Den alten Vertrag kündigen lassen –   
-der neue Anbieter übernimmt die Kündigung meist automatisch.
+4. Den alten Vertrag kündigen lassen – der neue Anbieter übernimmt die Kündigung meist automatisch.
 
 Wichtig: Es gibt keine Strom-Sperre durch den Wechsel. Du bleibst durchgehend versorgt, und die Abrechnung klärt der neue Anbieter mit dem Netzbetreiber. Einen Tag ohne Strom gibt es nicht –   
 das ist gesetzlich abgesichert.
@@ -118,8 +117,7 @@ Ja. Der neue Anbieter übernimmt die Kündigung beim alten Anbieter und kümmert
 Der neue Anbieter informiert deinen alten Anbieter über den Wechsel und kündigt deinen Vertrag zum nächstmöglichen Termin. Du musst selbst nichts tun – nur die Bestätigungen aufbewahren.
 
 **Wie lange dauert der Wechsel?**
-Die Umstellung dauert in der Regel 2 bis 6 Wochen. Währenddessen bist du durchgehend mit Strom versorgt –   
-ein Wechsel ohne Strom gibt es nicht.
+Die Umstellung dauert in der Regel 2 bis 6 Wochen. Währenddessen bist du durchgehend mit Strom versorgt – ein Wechsel ohne Strom gibt es nicht.
 
 **Kann ich meinen Tarif bei einem Umzug mitnehmen?**
 In den meisten Fällen ja: Viele Anbieter gestatten die Mitnahme des Tarifs an die neue Adresse, sofern sie dort liefern. Beim Umzug in ein anderes Netzgebiet kann sich der Arbeitspreis ändern. Prüfe im Vertrag die Umzugsklausel – sonst hilft das Sonderkündigungsrecht, das bei Umzügen gesetzlich gilt.

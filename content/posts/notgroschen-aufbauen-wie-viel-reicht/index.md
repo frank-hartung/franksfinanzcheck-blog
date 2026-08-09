@@ -28,18 +28,15 @@ Die Reserve gehört **nicht** aufs Girokonto und nicht in Aktien. Ideal ist ein 
 - Jederzeit verfügbar – oft am selben Tag.
 - Kein Kursrisiko.
 - Meist kostenlos, mit inzwischen wieder attraktiven Zinsen.
-- Getrennt vom Alltagskonto –   
-die Versuchung ist geringer.
+- Getrennt vom Alltagskonto – die Versuchung ist geringer.
 
 ## In 6 Schritten zum Notgroschen
 
 1. **Monatsausgaben berechnen:** alle Fixkosten + Lebensmittel + Puffer zusammenrechnen.
-2. **Ziel setzen:** 3 × Monatsausgaben für den Start –   
-das ist realistisch und reicht meist.
+2. **Ziel setzen:** 3 × Monatsausgaben für den Start – das ist realistisch und reicht meist.
 3. **Dauerauftrag einrichten:** monatlich einen festen Betrag (z. B. 50 oder 100 Euro) aufs Tagesgeldkonto – direkt nach Gehaltseingang.
 4. **Extrageld nutzen:** Steuererstattung, Weihnachtsgeld, Prämien gehen zu 50 Prozent in den Notgroschen.
-5. **Verträge entlasten:** Strom-, Handy- oder Versicherungswechsel schafft Platz im Budget –   
-der Unterschied wandert aufs Sparkonto.
+5. **Verträge entlasten:** Strom-, Handy- oder Versicherungswechsel schafft Platz im Budget – der Unterschied wandert aufs Sparkonto.
 6. **Erst dann investieren:** ist die Reserve voll, kann das Sparen in ETFs oder Aktien umgeleitet werden.
 
 ## Häufige Fehler beim Notgroschen

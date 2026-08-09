@@ -35,8 +35,7 @@ Die Mietpreise hängen stark von Tag und Uhrzeit ab. Die günstigsten Zeiten:
 
 - **Unter der Woche statt am Wochenende:** Wer Montag bis Freitag mietet, zahlt oft 20 bis 30 Prozent weniger als am Wochenende.
 - **Mittags statt morgens:** Flughafen-Stationen haben morgens die teuersten Tarife (Ankunftswellen). Wer mittags oder nachmittags abholt, bekommt bessere Preise.
-- **Länger als nötig:** Klingt paradox, aber: 7 Tage sind oft kaum teurer als 5 Tage –   
-die Tagespreise fallen mit der Mietdauer. Prüfe, ob sich der Verlängerungstag lohnt.
+- **Länger als nötig:** Klingt paradox, aber: 7 Tage sind oft kaum teurer als 5 Tage – die Tagespreise fallen mit der Mietdauer. Prüfe, ob sich der Verlängerungstag lohnt.
 
 ## Trick 2: Winterreifen-Check (Pflicht!)
 

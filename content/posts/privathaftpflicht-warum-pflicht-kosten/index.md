@@ -27,8 +27,7 @@ Der Versicherer prüft die Ansprüche, wehrt unberechtigte Forderungen ab und za
 ## Was sie nicht abdeckt
 
 - **eigene Schäden** (dafür gibt es Hausrat, Kfz-Kasko etc.)
-- **Vorsätzliche Schäden** –   
-die sind nie versichert
+- **Vorsätzliche Schäden** – die sind nie versichert
 - **Schäden durch Haustiere** – nur mit Zusatzbaustein „Tierhalterhaftpflicht" (bei Hunden ohnehin separat Pflicht)
 - **Schäden aus dem Beruf** – dafür gibt es die Betriebshaftpflicht
 
@@ -45,13 +44,11 @@ Ein Haftpflichtversicherung-Vergleich lohnt sich, um die besten Tarife zu finden
 
 ## Darauf solltest du beim Vergleich achten
 
-1. **Deckungssumme:** mindestens 10 Millionen Euro pauschal für Personen- und Sachschäden –   
-besser mehr
+1. **Deckungssumme:** mindestens 10 Millionen Euro pauschal für Personen- und Sachschäden – besser mehr
 2. **Grobe Fahrlässigkeit:** viele Versicherer zahlen inzwischen auch bei grober Fahrlässigkeit 
 3. **Forderungsausfalldeckung:** greift, wenn der Verursacher selbst nicht zahlen kann
 4. **Schlüsselverlust:** zahlt, wenn du fremde Schlüssel verlierst
-5. **Auslandschadenschutz:** weltweite Deckung –   
-wichtig für den Urlaub
+5. **Auslandschadenschutz:** weltweite Deckung – wichtig für den Urlaub
 6. **Mietsachschäden:** manche Tarife decken auch Schäden in der Mietwohnung 
 
 ## Häufige Fragen

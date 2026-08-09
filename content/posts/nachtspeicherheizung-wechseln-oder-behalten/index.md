@@ -95,8 +95,7 @@ so kommst du strukturiert ans Ziel, ohne dich zu verzetteln:
 3. **Förderantrag stellen:** Vor dem Kauf beim BAFA oder über die KfW den BEG-Antrag einreichen. Warte auf den Bewilligungsbescheid, bevor du bestellst.
 4. **Angebote einholen:** Drei Fachbetriebe um Festpreis-Angebote bitten – mit identischer Leistungsbeschreibung, damit du vergleichen kannst.
 5. **Auftrag vergeben:** Auf die Einhaltung der Förderauflagen achten (Fachbetrieb, Rechnungen, Zertifikate).
-6. **Einbau begleiten:** Bei Wärmepumpe: Außeneinheit, Inneneinheit, Pufferspeicher –   
-der Fachbetrieb koordiniert Elektriker und ggf. Schornsteinfeger.
+6. **Einbau begleiten:** Bei Wärmepumpe: Außeneinheit, Inneneinheit, Pufferspeicher – der Fachbetrieb koordiniert Elektriker und ggf. Schornsteinfeger.
 7. **Förderung auszahlen lassen:** Nach der Inbetriebnahme alle Belege einreichen und den Verwendungsnachweis fristgerecht abgeben.
 
 Realistisch dauert der komplette Prozess drei bis sechs Monate. Der ideale Start ist der Frühsommer: Dann ist der Einbau vor der Heizsaison fertig, und du profitierst ab dem ersten Herbst von den niedrigeren Kosten.

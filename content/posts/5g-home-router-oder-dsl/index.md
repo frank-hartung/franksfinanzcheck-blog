@@ -48,8 +48,7 @@ Der wichtigste Schritt vor dem Wechsel: die 5G-Abdeckung an deinem Wohnort prüf
 
 Die realistische Prüfung:
 
-1. **Abdeckungskarte checken:** 5G an deiner Adresse eingetragen? (Telekom, Vodafone, o2 separat prüfen –   
-die Netze unterscheiden sich stark.)
+1. **Abdeckungskarte checken:** 5G an deiner Adresse eingetragen? (Telekom, Vodafone, o2 separat prüfen – die Netze unterscheiden sich stark.)
 2. **Kostenloser Test:** Viele Anbieter bieten Testphasen (14 bis 30 Tage) oder Geld-zurück-Garantien für 5G-Home an. Nutze das: Router aufstellen, eine Woche den Alltag testen, Speedtests zu verschiedenen Tageszeiten machen.
 3. **Standort testen:** Der Router gehört ans Fenster oder in die beste Empfangsecke – manchmal bringen 2 Meter Standortwechsel 50 Mbit/s Unterschied.
 
@@ -89,11 +88,9 @@ Tarife mit „unbegrenztem" Datenvolumen für Zuhause gibt es – sie kosten abe
 
 **Eher nicht geeignet:**
 
-- **Familien mit hohem Datenverbrauch** (Streaming, Gaming, Homeoffice) –   
-das Limit und die Schwankungen nerven.
+- **Familien mit hohem Datenverbrauch** (Streaming, Gaming, Homeoffice) – das Limit und die Schwankungen nerven.
 - **Gamer, die Wert auf niedrige Latenz legen.**
-- **Wer ohnehin schnelles DSL oder Glasfaser hat** –   
-der Wechsel bringt keinen Vorteil.
+- **Wer ohnehin schnelles DSL oder Glasfaser hat** – der Wechsel bringt keinen Vorteil.
 
 ## Die 3 Fallstricke beim 5G-Vertrag
 
@@ -127,8 +124,7 @@ In guter Lage 100 bis 500 Mbit/s – aber abhängig von Abdeckung, Tageszeit und
 Je nach Tarif wird gedrosselt (oft auf 1 bis 10 Mbit/s) oder es kostet extra. Prüfe das Datenvolumen vor dem Abschluss – Familien mit Streaming brauchen oft 500 GB oder unbegrenzte Tarife.
 
 **Kann ich 5G-Home mitnehmen?**
-Ja –   
-der Router funktioniert überall mit 5G-Abdeckung. Ein Umzug ist also kein Problem, solange der neue Ort im Netzgebiet liegt. Prüfe die Abdeckung vorher auf der Karte des Anbieters.
+Ja – der Router funktioniert überall mit 5G-Abdeckung. Ein Umzug ist also kein Problem, solange der neue Ort im Netzgebiet liegt. Prüfe die Abdeckung vorher auf der Karte des Anbieters.
 
 5G-Home ist eine echte Option, aber keine Wunderwaffe. Wer [den besten Anschluss](../../posts/glasfaser-dsl-kabel-anschluss-vergleich/) sucht, vergleicht alle Optionen an seiner Adresse – und wer [schnelles WLAN zu Hause](../../posts/wlan-verbessern-ohne-neue-hardware/) will, findet die Tricks im nächsten Ratgeber. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 

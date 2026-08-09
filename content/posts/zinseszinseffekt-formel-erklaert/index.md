@@ -120,16 +120,13 @@ dann ist er unabhängig von Stimmung und Disziplin.
 Deine Zinsen werden dem Kapital zugeschlagen und werfen im nächsten Jahr selbst Zinsen ab. Dadurch wächst das Geld exponentiell statt linear – je länger die Laufzeit, desto stärker der Effekt.
 
 **Welche Rendite kann ich realistisch erwarten?**
-Ein breit gestreuter Welt-ETF hat historisch 6 bis 8 Prozent pro Jahr geliefert (über lange Zeiträume). Tagesgeld und Festgeld liegen bei 2 bis 3 Prozent –   
-der Zinseszins fällt dort entsprechend kleiner aus.
+Ein breit gestreuter Welt-ETF hat historisch 6 bis 8 Prozent pro Jahr geliefert (über lange Zeiträume). Tagesgeld und Festgeld liegen bei 2 bis 3 Prozent – der Zinseszins fällt dort entsprechend kleiner aus.
 
 **Wie viel muss ich sparen, um Millionär zu werden?**
-Bei 7 Prozent Rendite: 250 Euro monatlich über 45 Jahre ≈ 1 Million Euro. 500 Euro monatlich über 35 Jahre ≈ 1 Million Euro. Der frühe Start ist der entscheidende Faktor –   
-die [Sparquote](../../posts/sparquote-berechnen-und-steigern/) zeigt, wie du hinkommst.
+Bei 7 Prozent Rendite: 250 Euro monatlich über 45 Jahre ≈ 1 Million Euro. 500 Euro monatlich über 35 Jahre ≈ 1 Million Euro. Der frühe Start ist der entscheidende Faktor – die [Sparquote](../../posts/sparquote-berechnen-und-steigern/) zeigt, wie du hinkommst.
 
 **Ist der Zinseszins garantiert?**
-Nein –   
-die Rendite von Aktien ist keine Garantie, sondern eine historische Erwartung. Kursschwankungen und Krisen gehören dazu. Der Zinseszins wirkt über lange Zeiträume – wer kurzfristig denkt, profitiert nicht davon.
+Nein – die Rendite von Aktien ist keine Garantie, sondern eine historische Erwartung. Kursschwankungen und Krisen gehören dazu. Der Zinseszins wirkt über lange Zeiträume – wer kurzfristig denkt, profitiert nicht davon.
 
 Der Zinseszinseffekt ist das Fundament jedes [Vermögensaufbaus](../../posts/sparquote-berechnen-und-steigern/) – und der [ETF-Sparplan für Einsteiger](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) das Werkzeug, das ihn nutzt. Für Kinder lohnt sich der Start besonders früh: [ETF-Sparplan für Kinder](../../posts/etf-sparplan-fuer-kinder-depot-eröffnen/). Alle Grundlagen-Themen: [Ratgeber Frugalismus](../../pillar/frugalismus/).
 

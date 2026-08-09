@@ -21,16 +21,14 @@ Die gesetzliche Krankenversicherung übernimmt im EU-Ausland mit der Europäisch
 - Krankentransport oder Rücktransport nach Deutschland – kann zehntausende Euro kosten
 - Privat ärztliche Behandlung und Einzelzimmer
 - Zahnbehandlung über die Regelversorgung hinaus
-- Behandlung in Ländern außerhalb der EU –   
-hier zahlt die GKV gar nichts
+- Behandlung in Ländern außerhalb der EU – hier zahlt die GKV gar nichts
 
 Genau diese Lücken schließt die Reisekrankenversicherung. Du kannst dich auf deine Reise konzentrieren, ohne dich um die Kosten zu sorgen.
 
 ## Was eine Reisekrankenversicherung abdeckt
 
 - Ambulante und stationäre Behandlung im Ausland – inklusive der in Deutschland üblichen Sätze
-- Medizinisch notwendiger Rücktransport –   
-der wichtigste Baustein überhaupt
+- Medizinisch notwendiger Rücktransport – der wichtigste Baustein überhaupt
 - Zahnbehandlung bis zu bestimmten Höchstgrenzen
 - Weltweite Gültigkeit – außer in Deutschland selbst
 
@@ -62,8 +60,7 @@ Ja – auch in der EU entstehen Lücken. Für wenige Euro pro Jahr bist du auch 
 Viele Tarife decken chronische Erkrankungen ab, solange sie nicht der Anlass der Reise sind. Bei Vorerkrankungen genau die Bedingungen prüfen oder eine spezielle Police wählen.
 
 ### Zahlt die Versicherung auch bei Schwangerschaft?
-Das hängt vom Tarif ab –   
-viele zahlen für Schwangerschaftskomplikationen, aber nicht für die Entbindung im Ausland. Wer schwanger verreist, sollte die Bedingungen vorab klären.
+Das hängt vom Tarif ab – viele zahlen für Schwangerschaftskomplikationen, aber nicht für die Entbindung im Ausland. Wer schwanger verreist, sollte die Bedingungen vorab klären.
 
 Das Wichtigste in Kürze:
 * Reisekrankenversicherung schützt vor hohen Kosten im Ausland

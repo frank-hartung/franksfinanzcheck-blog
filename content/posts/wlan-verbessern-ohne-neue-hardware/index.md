@@ -93,8 +93,7 @@ Alle Tipps sind wertlos, wenn du den Erfolg nicht misst. Der Speedtest ist dein 
 
 Die Mess-Regeln für aussagekräftige Ergebnisse:
 
-- **Drei Tests pro Messung:** Die Geschwindigkeit schwankt –   
-der Mittelwert aus drei Tests ist aussagekräftig.
+- **Drei Tests pro Messung:** Die Geschwindigkeit schwankt – der Mittelwert aus drei Tests ist aussagekräftig.
 - **Zu verschiedenen Zeiten messen:** Abends ist das Netz voller – teste morgens und abends.
 - **Am selben Ort messen:** Der Standort des Geräts beeinflusst das Ergebnis – immer vom selben Platz testen.
 - **WLAN vs. Kabel unterscheiden:** Ein Kabel-Test zeigt, was die Leitung hergibt; der WLAN-Test zeigt, was bei dir ankommt. Der Unterschied ist dein WLAN-Verlust.
@@ -106,8 +105,7 @@ dann ist der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder
 ## Häufig gestellte Fragen
 
 **Warum ist mein WLAN abends langsam?**
-Abends nutzen alle Nachbarn gleichzeitig das Internet –   
-die Kanäle sind voll, und bei Kabelanschlüssen teilt sich die Bandbreite mit der Nachbarschaft. Gegen die Nachbarn hilft der Kanalwechsel, gegen die Kabel-Drosselung nur der Anschluss-Wechsel.
+Abends nutzen alle Nachbarn gleichzeitig das Internet – die Kanäle sind voll, und bei Kabelanschlüssen teilt sich die Bandbreite mit der Nachbarschaft. Gegen die Nachbarn hilft der Kanalwechsel, gegen die Kabel-Drosselung nur der Anschluss-Wechsel.
 
 **Was bringt ein Kanalwechsel wirklich?**
 Wenn dein Kanal stark belegt ist, kann der Wechsel das Tempo spürbar verbessern – oft 20 bis 50 Prozent. In ruhigen Gebieten mit wenigen Nachbarn ist der Effekt gering.
