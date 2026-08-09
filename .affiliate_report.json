@@ -1,6 +1,6 @@
 {
- "total": 55,
- "errors": 4,
+ "total": 65,
+ "errors": 7,
  "fixed": 0,
  "posts": [
   {
@@ -180,6 +180,37 @@
    "ok": true
   },
   {
+   "slug": "berufsunfaehigkeitsversicherung-lohnt-sich",
+   "title": "Berufsunfähigkeitsversicherung: Für wen sie sich 2",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "depot-umzug-steuerfrei-wechseln",
+   "title": "Depot-Umzug: So wechselst du das Depot ohne Steuer",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "dispozinsen-verstehen-alternativen",
+   "title": "Dispozinsen verstehen: Was dein Dispo wirklich kos",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [
+    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)"
+   ],
+   "infos": [],
+   "ok": false
+  },
+  {
    "slug": "dns-server-aendern-schnelleres-internet",
    "title": "DNS-Server ändern: Der kostenlose Boost für dein I",
    "pillar": "internet-dsl",
@@ -207,6 +238,28 @@
    "ok": true
   },
   {
+   "slug": "elementarschadenversicherung-hochwasser-starkregen",
+   "title": "Elementarschadenversicherung: Hochwasser, Starkreg",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "festgeld-oder-tagesgeld-2026",
+   "title": "Festgeld oder Tagesgeld? Wo dein Geld 2026 richtig",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [
+    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)"
+   ],
+   "infos": [],
+   "ok": false
+  },
+  {
    "slug": "frugalismus-tricks-alltag-200-euro-sparen",
    "title": "5 Frugalismus-Tricks: So sparst du 200 € pro Monat",
    "pillar": "frugalismus",
@@ -225,6 +278,17 @@
    "errors": [],
    "infos": [],
    "ok": true
+  },
+  {
+   "slug": "gebuehrenfallen-banking-vermeiden",
+   "title": "Gebührenfallen beim Banking: Diese 7 Kosten killst",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [
+    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)"
+   ],
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "guenstige-fluege-spaetsommer-finden",
@@ -296,9 +360,29 @@
    "ok": false
   },
   {
+   "slug": "kfz-versicherung-sf-klasse-erklaert",
+   "title": "SF-Klasse einfach erklärt: So steigst du in die be",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
    "slug": "kfz-versicherung-wechseln",
    "title": "Kfz-Versicherung wechseln: Wann es sich wirklich l",
    "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "kontowechsel-in-20-minuten-wechselservice",
+   "title": "Kontowechsel in 20 Minuten: Der Wechselservice erk",
+   "pillar": "konto-karten",
    "fixed": 0,
    "errors": [],
    "infos": [],
@@ -437,6 +521,17 @@
    "ok": true
   },
   {
+   "slug": "riester-rente-2026-lohnt-sich",
+   "title": "Riester-Rente 2026: Weiterfördern oder kündigen?",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
    "slug": "sparquote-berechnen-und-steigern",
    "title": "Sparquote steigern: Von 5 auf 30 Prozent in 12 Mon",
    "pillar": "frugalismus",
@@ -499,6 +594,17 @@
    "fixed": 0,
    "errors": [],
    "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "versicherungen-kuendigen-diese-5-policen",
+   "title": "Versicherungen kündigen: Diese 5 Policen brauchst ",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
    "ok": true
   },
   {

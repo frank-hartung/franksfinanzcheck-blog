@@ -13,7 +13,7 @@ ai_provider: "Manuell (Masterplan Blueprint 9)"
 kurzantwort: "Eine Nachtspeicherheizung kostet dich im Schnitt 2.000 bis 3.500 Euro pro Jahr – deutlich mehr als Gas oder Wärmepumpe. Ein Wechsel lohnt sich 2026 besonders wegen der Förderung von bis zu 70 Prozent, aber nur wenn die Bausubstanz passt. Mieter können vom Vermieter einen Austausch verlangen."
 cover:
   image: "images/covers/nachtspeicherheizung-wechseln-oder-behalten.jpg"
-  alt: "Nachtspeicherheizung: Wechseln oder behalten? Das sagt die Rechnung"
+  alt: "Nachtspeicherheizung: Wechseln oder behalten? Die Rechnung"
   caption: "Tipp von FranksFinanzcheck"
 ---
 Die Nachtspeicherheizung hat einen schlechten Ruf – und in vielen Fällen zu Recht. Sie heizt mit Strom, der nachts in Speichersteinen „gebunkert" und tagsüber abgegeben wird. Was in den 1970er- und 80er-Jahren als günstige Lösung galt, ist heute meist die teuerste Heizform überhaupt.
