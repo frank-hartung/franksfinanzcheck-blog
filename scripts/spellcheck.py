@@ -348,9 +348,18 @@ def analyze_article(a, whitelist):
     # MASKED Text (Links/URLs/Code ausgeblendet → keine falschen Treffer durch
     # "../../posts/" o. Ä.; Offsets bleiben gültig, weil die Maskierung gleich
     # lang ist). Wird von den Satzanfangs- und Satzzeichen-Checks genutzt.
-    body_masked = CODE_RE.sub(lambda m: " " * (m.end() - m.start()), body)
-    body_masked = URL_RE.sub(lambda m: " " * (m.end() - m.start()), body_masked)
-    body_masked = LINK_RE.sub(lambda m: " " * (m.end() - m.start()), body_masked)
+    # mask_intervals sammelt die Positionen der Maskierungen, damit der
+    # Satzzeichen-Check (2c3) KEINE False Positives bei „…](…),“ meldet
+    # (Komma direkt nach einem Markdown-Link ist korrektes Deutsch).
+    mask_intervals = []
+
+    def _mask_span(m):
+        mask_intervals.append((m.start(), m.end()))
+        return " " * (m.end() - m.start())
+
+    body_masked = CODE_RE.sub(_mask_span, body)
+    body_masked = URL_RE.sub(_mask_span, body_masked)
+    body_masked = LINK_RE.sub(_mask_span, body_masked)
     # &nbsp; (6 Zeichen) → 6 Leerzeichen: gleiche Länge, Offsets bleiben gültig
     body_masked = body_masked.replace("&nbsp;", " " * 6)
 
@@ -449,6 +458,10 @@ def analyze_article(a, whitelist):
 
     # 2c3. SATZZEICHEN: Leerzeichen VOR Satzzeichen entfernen ("Hallo ," → "Hallo,")
     for m in SPACE_BEFORE_PUNCT_RE.finditer(body_masked):
+        # Kein False Positive: Leerzeichen stammt aus einer Link-/URL-/Code-Maske
+        # (z. B. „…](…),“ – Komma NACH einem Link ist korrekt).
+        if any(s <= m.start(1) - 1 < e for s, e in mask_intervals):
+            continue
         # Nicht in Links/Code (maskierte Bereiche sind Leerzeichen → kein Treffer)
         problems.append({
             "type": "punctuation", "word": m.group(0), "fix": m.group(1),

@@ -12,7 +12,7 @@ ai_generated: true
 ai_provider: "Gemini (Gratis-Key: aistudio.google.com)"
 cover:
   image: "images/covers/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau.jpg"
-  alt: "Spar-Tipp: 2026 08 09 Depot 2026 Dein Smarter Start In Den Vermoegensaufbau"
+  alt: "Depot 2026: Dein smarter Start in den Vermögensaufbau"
   caption: "Tipp von FranksFinanzcheck"
 ---Dein Erspartes auf dem Tagesgeldkonto verliert 2026 täglich an Wert. Die Inflation frisst dein Vermögen auf, während der Aktienmarkt so einfach wie nie erreichbar bleibt. Doch Vorsicht: Zwischen bunten Apps und neuen Gesetzen warten teure Fehler auf dich.
 
