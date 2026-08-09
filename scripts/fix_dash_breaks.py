@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """fix_dash_breaks.py – Dauerhafte Regel: Zeilenumbruch nach Gedankenstrich
-vor erläuterndem Nachsatz.
+vor erläuterndem Nachsatz (PROFI-LEVEL mit Kontext-Erkennung).
 
 WARUM: Auf schmalen Bildschirmen bricht der Browser sonst oft VOR dem
 Gedankenstrich um („…verschiedener Reisedauern" / „– die 10-Tage-Variante…").
@@ -8,25 +8,33 @@ Damit der Nachsatz sauber auf einer NEUEN Zeile beginnt, wird nach „ – "
 ein Markdown-Hard-Break gesetzt (zwei Leerzeichen + Zeilenumbruch =
 CommonMark-<br>).
 
-REGEL: Umbruch nur, wenn nach dem Gedankenstrich ein ERLÄUTERNDER
-Nachsatz folgt (Artikel/Pronomen/Fragewort/Erläuterungs-Wort wie „die,
-der, das, ein, wer, was, man, es, das heißt, sprich, konkret, …").
-KEIN Umbruch bei Fortsetzungen (Präpositionen/Konjunktionen wie „und,
-oder, für, mit, z. B., …" – z. B. die Affiliate-Disclosure „…Provision –
-für dich entstehen keine Mehrkosten." bleibt kompakt).
+REGEL (Umbruch setzen):
+  NUR im normalen Fließtext und NUR, wenn nach dem Gedankenstrich ein
+  ERLÄUTERNDER Nachsatz folgt (Artikel/Pronomen/Fragewort/Erläuterungs-Wort:
+  die, der, das, ein, wer, was, man, es, das heißt, sprich, konkret, …).
 
-Ausgenommen: Tabellenzeilen (enthalten „|") und Inline-Code (Backticks).
-Idempotent: Bereits umgebrochene Stellen (Zeile endet mit „ –  ") werden
-nicht angefasst.
+KEIN Umbruch (und bestehende werden ZURÜCKGEBAUT):
+  1) FAQ-BEREICHE (ab „## Häufige Fragen" / „## Häufig gestellte Fragen" /
+     „## FAQ" bis zur nächsten Überschrift oder Dateiende): Antworten werden
+     als Schema-JSON-LD (FAQPage) gerendert – dort sind <br> unschön.
+  2) LISTENELEMENTE (Zeilen mit „- " / „* " / „1. "): Ein <li> mit erzwungenem
+     Umbruch sieht in Aufzählungen unprofessionell aus.
+  3) Tabellenzeilen („|"), Inline-Code („`"), Überschriften („#") – Titel
+     werden nie zerrissen.
+  4) Fortsetzungen (und, oder, für, mit, z. B., …) – z. B. bleibt die
+     Affiliate-Disclosure kompakt.
+
+Idempotent: Bereits korrekt gesetzte Umbrüche im Fließtext bleiben.
 
 Aufruf:  python3 scripts/fix_dash_breaks.py          (alle Dateien)
          python3 scripts/fix_dash_breaks.py --dry-run (nur anzeigen)
 """
 import glob
+import os
 import re
 import sys
 
-BLOG_DIR = __import__("os").path.dirname(__import__("os").path.dirname(__import__("os").path.abspath(__file__)))
+BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Nachsatz-Einleiter (→ Umbruch): Artikel, Pronomen, Fragewörter, Erläuterung
 NACHSATZ_WORDS = (
@@ -61,40 +69,85 @@ _KEIN = sorted(set(KEIN_WORDS) | set(KEIN_PHRASES), key=len, reverse=True)
 RE_NACHSATZ = re.compile(r" \u2013 (" + "|".join(re.escape(w) for w in _NACH) + r")(?![a-zäöüß])")
 RE_KEIN = re.compile(r" \u2013 (" + "|".join(re.escape(w) for w in _KEIN) + r")(?![a-zäöüß])")
 
-DASH = "\u2013"
+# FAQ-Start: „## Häufige Fragen", „## Häufig gestellte Fragen", „## FAQ", …
+RE_FAQ_START = re.compile(
+    r"^#{1,6}\s*(Häufige Fragen|Häufig gestellte Fragen|Häufige Fragen \(FAQ\)|FAQ)\s*$",
+    re.I)
+# Umgebrochene Zeile: endet mit „ – " + mind. 1 Space (Hard-Break-Spur)
+RE_BROKEN_END = re.compile(r"\u2013[ \u00a0]+$")
+# Listenelement-Anfang
+RE_LIST_ITEM = re.compile(r"^\s*(?:[-*]|\d+\.)\s+")
 
 
 def fix_body(body: str) -> tuple[str, int]:
-    """Wendet die Regel auf den Body an. Liefert (neuer_body, anzahl)."""
+    """Wendet die Regel an. Liefert (neuer_body, anzahl)."""
     lines = body.split("\n")
     out: list[str] = []
     changed = 0
-    for line in lines:
-        # Tabellenzeilen, Inline-Code und ÜBERSCHRIFTEN auslassen
-        # (eine Überschrift wie "### … – was ist besser?" darf NICHT
-        # umgebrochen werden – der Titel würde zerrissen)
-        if "|" in line or "`" in line or line.lstrip().startswith("#"):
+    in_faq = False
+    i = 0
+    n = len(lines)
+    while i < n:
+        line = lines[i]
+
+        # Kontext-Tracking: FAQ-Bereich erkennen. Nur Überschriften der
+        # Ebenen # und ## beenden ihn; ###-Fragen INNERHALB der FAQ
+        # (z. B. "### Ist ein Stromwechsel wirklich kostenlos?") bleiben
+        # im FAQ-Kontext – ihre Antworten gehören dazu.
+        if re.match(r"^#{1,6}\s+", line):
+            if RE_FAQ_START.match(line):
+                in_faq = True
+            elif re.match(r"^#{1,2}\s+", line):
+                in_faq = False
+
+        # KEIN-Umbruch-Kontext? (FAQ, Liste, Tabelle, Code, Überschrift)
+        no_break_ctx = (
+            in_faq
+            or RE_LIST_ITEM.match(line)
+            or "|" in line
+            or "`" in line
+            or line.lstrip().startswith("#")
+        )
+
+        if no_break_ctx:
+            # Bestehende Umbrüche ZURÜCKBAUEN: Zeile endet mit „ –  " und die
+            # nächste Zeile ist die Fortsetzung → zusammenführen.
+            if RE_BROKEN_END.search(line) and i + 1 < n:
+                nxt = lines[i + 1].strip()
+                # Nächste Zeile darf nicht wieder eine umgebrochene Zeile sein
+                if nxt and not RE_BROKEN_END.search(nxt):
+                    merged = line.rstrip() + " " + nxt
+                    out.append(merged)
+                    changed += 1
+                    i += 2
+                    continue
             out.append(line)
+            i += 1
             continue
-        # Bereits umgebrochen (Zeile endet mit „ –  ")?
-        if line.rstrip().endswith(DASH + "  ") or line.rstrip().endswith(DASH):
+
+        # Normaler Fließtext:
+        # 1) Bereits umgebrochen? (idempotent – nichts tun)
+        if RE_BROKEN_END.search(line):
             out.append(line)
+            i += 1
             continue
+        # 2) Neuer Umbruch-Kandidat?
         m = RE_NACHSATZ.search(line)
         if not m:
             out.append(line)
+            i += 1
             continue
-        # Sicherheitscheck: kein Fortsetzungs-Wort
         if RE_KEIN.search(line):
             out.append(line)
+            i += 1
             continue
-        # Stelle des Nachsatzes: nach „ – "
         pos = m.start() + 3  # Länge von „ – " (Space, Dash, Space)
-        before = line[:pos] + "  "   # 2 Leerzeichen = Markdown-Hard-Break
+        before = line[:pos] + "  "
         after = line[pos:]
         out.append(before)
         out.append(after)
         changed += 1
+        i += 1
     return "\n".join(out), changed
 
 
@@ -108,14 +161,13 @@ def main() -> int:
         parts = content.split("---", 2)
         if len(parts) < 3:
             continue
-        body = parts[2]
-        new_body, n = fix_body(body)
+        new_body, n = fix_body(parts[2])
         if n:
             total += n
-            print(f"  {f.split('/')[-2]}: {n} Umbruch/Umbrüche")
+            print(f"  {f.split('/')[-2]}: {n} Änderung(en)")
             if not dry:
                 open(f, "w", encoding="utf-8").write(parts[0] + "---" + parts[1] + "---" + new_body)
-    print(f"\n{'DRY-RUN: ' if dry else ''}Fertig: {total} Umbrüche in {len(files)} Dateien.")
+    print(f"\n{'DRY-RUN: ' if dry else ''}Fertig: {total} Änderungen in {len(files)} Dateien.")
     return 0
 
 
