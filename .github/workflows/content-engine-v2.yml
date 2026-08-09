@@ -74,16 +74,20 @@ jobs:
         run: |
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "Kein neuer Artikel – nichts zu committen."
-            echo "ARTIKEL_ERSTELLT=false" >> "$GITHUB_ENV"
-          else
+          # NUR committen, wenn sich wirklich etwas unter content/ geändert hat.
+          # (ENGINE-STATUS.md etc. werden erst in Phase 5 committet – sonst
+          # würde ARTIKEL_ERSTELLT fälschlich true und Phase 2/3 liefen ohne
+          # neuen Artikel – inkl. unnötiger KI-API-Calls.)
+          if git status --short content/ data/ | grep -q .; then
+            git add content/ data/
             git commit -m "content: neuer Artikel automatisch generiert und veröffentlicht"
             git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
             git push
             echo "✅ Phase-1-Commit: Artikel (oder Entwurf) veröffentlicht"
             echo "ARTIKEL_ERSTELLT=true" >> "$GITHUB_ENV"
+          else
+            echo "Kein neuer Artikel – nichts zu committen."
+            echo "ARTIKEL_ERSTELLT=false" >> "$GITHUB_ENV"
           fi
 
       # ================= PHASE 2: QUALITÄTS-KETTE (weich) =================
@@ -201,23 +205,12 @@ jobs:
       - name: Hinweis bei Entwurf (Draft-Rettung aktiv)
         if: ${{ env.ARTIKEL_ERSTELLT == 'true' && !cancelled() }}
         continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if grep -q "Entwurf gesichert" ENGINE-STATUS.md; then
             echo "⚠ Ein Artikel wurde als ENTWURF gesichert (Profi-Gate nicht erreicht)."
-            echo "→ Issue-Erstellung (Dedupe):"
-            python3 - <<'EOF'
-            import json, os, urllib.request
-            token = os.environ.get("GITHUB_TOKEN", "")
-            api = "https://api.github.com/repos/" + os.environ.get("GITHUB_REPOSITORY", "") + "/issues"
-            body = "Die Content-Engine v2 hat einen Artikel nur als ENTWURF sichern können.\n\nDetails: siehe ENGINE-STATUS.md\n\nBitte prüfen und ggf. freigeben (draft: false setzen)."
-            req = urllib.request.Request(api, data=json.dumps({"title": "⚠ Content-Engine: Entwurf wartet auf Freigabe", "body": body}).encode(),
-                                         headers={"Authorization": f"token {token}", "Accept": "application/vnd.github+json"}, method="POST")
-            try:
-                with urllib.request.urlopen(req, timeout=20) as r:
-                    print("Issue erstellt:", r.status)
-            except Exception as e:
-                print("Issue-Fehler (nicht kritisch):", e)
-            EOF
+            python3 scripts/engine_issue.py || echo "⚠ Issue-Fehler (nicht kritisch)"
           else
             echo "Kein Entwurf – alles gut."
           fi
