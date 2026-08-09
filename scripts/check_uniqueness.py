@@ -49,6 +49,10 @@ def clean_body(content):
     # "Duplikate" im Audit zurück)
     body = re.sub(r"https?://[^\s)\"']+", " ", body)
     body = re.sub(r"www\.[^\s)\"']+", " ", body)
+    # Markdown-Links: nur den Ankertext behalten. Interne Link-ZIELE
+    # (../../posts/slug/) sind Navigation, kein Inhalt – sonst erzeugen
+    # identische Link-Ziele in mehreren Artikeln falsche "Duplikate".
+    body = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", body)
     # FAQ-Intro-Standardsätze
     body = re.sub(r"## Häufige Fragen", " ", body)
     # Übrige Markdown-Syntax
