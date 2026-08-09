@@ -219,23 +219,64 @@ h1, h2, h3, h4, h5, h6,
 .post-content hr + p:has(> strong > a),
 .post-content p:has(> a[href*="check24.net"]),
 .post-content p:has(> a[href*="partner-versicherung.de"]) {
-    /* CTA-Zeilen sanft hervorheben */
+    /* CTA-Kasten: zentriert (Text UND Button), sanfter gelber Hintergrund */
     background: rgba(255, 179, 0, 0.10);
     border: 1px dashed rgba(255, 179, 0, 0.6);
     border-radius: 10px;
-    padding: 10px 14px;
+    padding: 14px 18px;
+    text-align: center;           /* zentriert den CTA-Text */
+    display: flex;
+    flex-direction: column;
+    align-items: center;          /* zentriert den Pill-Button */
+    gap: 8px;
+    margin: 22px auto;            /* Kasten zentriert, etwas Abstand */
+    max-width: 520px;             /* Kasten nicht überbreit auf Desktop */
+}
+
+/* Der CTA-Text (👉 …:) als Block, damit Text + Button untereinander stehen */
+.post-content p:has(> a[href*="check24.net"]) strong,
+.post-content p:has(> a[href*="partner-versicherung.de"]) strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* CTA mit "---"-Trenner (hr + p) ebenfalls zentriert */
+.post-content hr + p:has(> strong > a) {
+    text-align: center;
+    align-items: center;
 }
 
 .post-content a[href*="check24.net"],
 .post-content a[href*="partner-versicherung.de"] {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: var(--ff-yellow);
     color: var(--ff-anthracite);
-    padding: 4px 16px;
+    padding: 8px 22px;
     border-radius: 999px;
     font-weight: 700;
     text-decoration: none;
     transition: background 0.15s ease;
+    width: auto;                  /* Button passt sich dem Text an */
+    max-width: 100%;
+    align-self: center;           /* im Flex-Kasten (p) zentriert */
+    flex: 0 1 auto;               /* als Flex-Item nicht dehnen */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+/* Das <strong> im CTA-Button ist ein Flex-Item (inline wird in Flex-
+   Containern blockifiziert) – deshalb NICHT dehnen lassen:
+   flex: 0 1 auto + overflow hidden. */
+.post-content p:has(> a[href*="check24.net"]) a strong,
+.post-content p:has(> a[href*="partner-versicherung.de"]) a strong,
+.post-content a[href*="check24.net"] > strong,
+.post-content a[href*="partner-versicherung.de"] > strong {
+    flex: 0 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .post-content a[href*="check24.net"]:hover,
