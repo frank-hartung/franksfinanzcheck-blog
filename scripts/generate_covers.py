@@ -10,6 +10,7 @@ Stil des Pinterest-Masterplans) und trägt es ins Frontmatter ein.
 Nutzung:
     python3 scripts/generate_covers.py
 """
+import glob
 import os
 import re
 import sys
@@ -114,6 +115,63 @@ def wrap_text(text, font, max_width, draw):
     return lines
 
 
+# Präpositionen/Konjunktionen, die NIE am Zeilenende stehen dürfen
+# (hängende Zeilen wirken unprofessionell auf den Cover-Bildern).
+NO_LINE_END = {
+    "ab", "als", "am", "an", "auch", "auf", "aufs", "aus", "bei", "beim", "bis", "das", "den", "der", "die", "durch", "ein", "eine", "einer", "für", "gegen", "im", "in", "ins", "mit", "nach", "oder", "ohne", "seit", "sich", "um", "und", "unter", "vom", "von", "vor", "wegen", "zum", "zur", "zwischen", "über",
+}
+
+
+def wrap_text_no_hang(text, font, max_width, draw):
+    """Wie wrap_text, aber ohne hängende Präpositionen am Zeilenende."""
+    words = text.split()
+    lines = []
+    cur = ""
+    for w in words:
+        test = (cur + " " + w).strip()
+        if draw.textlength(test, font=font) <= max_width:
+            cur = test
+        else:
+            if cur:
+                # Letztes Wort der Zeile ist eine Präposition → in nächste
+                # Zeile verschieben (außer die Zeile bestünde dann nur aus
+                # diesem einen Wort).
+                parts = cur.split()
+                if len(parts) > 1 and parts[-1].strip(":;,.!?") in NO_LINE_END:
+                    lines.append(" ".join(parts[:-1]))
+                    cur = parts[-1] + " " + w
+                else:
+                    lines.append(cur)
+                    cur = w
+            else:
+                cur = w
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def smart_wrap(title, font, max_width, draw):
+    """Semantischer Titel-Umbruch für Cover (dauerhafte Regel):
+
+    1) BEVORZUGT nach dem ersten Doppelpunkt brechen – alle Blog-Titel
+       folgen dem Muster "Hauptkeyword: Untertitel" (z. B. "Flug buchen:
+       9 Tricks für günstige Flugtickets"). Der Teil vor dem Doppelpunkt
+       (inkl. ":") wird zur ersten Zeile, der Rest danach umgebrochen.
+    2) Fallback: Wort-Umbruch ohne hängende Präpositionen.
+    """
+    if ":" in title:
+        head, tail = title.split(":", 1)
+        head = head.strip() + ":"
+        tail = tail.strip()
+        # Kopf (inkl. Doppelpunkt) muss in eine Zeile passen
+        if draw.textlength(head, font=font) <= max_width:
+            tail_lines = wrap_text_no_hang(tail, font, max_width, draw)
+            # Balance: Kopf + max. 4 Folgezeilen ist ok (Cover-Design)
+            if len(tail_lines) <= 4:
+                return [head] + tail_lines
+    return wrap_text_no_hang(title, font, max_width, draw)
+
+
 def make_cover(title, slug, out_path):
     W, H = 1000, 1500
     # Vertikaler Verlauf Smaragdgrün → dunkel
@@ -145,12 +203,17 @@ def make_cover(title, slug, out_path):
     margin = 90
     max_w = W - 2 * margin
 
-    # Skaliere Schriftgröße, bis der Titel in max. 6 Zeilen passt
+    # Skaliere Schriftgröße: ZIEL max. 3 Zeilen (gute Balance, kompakte
+    # Covers). smart_wrap bricht semantisch um (bevorzugt nach dem
+    # Doppelpunkt). Fallback: nie mehr als 6 Zeilen (sehr lange Titel).
     for size in (78, 68, 58, 50, 44, 38, 32):
         title_font = load_font(size)
-        lines = wrap_text(title, title_font, max_w, d)
-        if len(lines) <= 6:
+        lines = smart_wrap(title, title_font, max_w, d)
+        if len(lines) <= 3:
             break
+    if len(lines) > 6:
+        title_font = load_font(32)
+        lines = smart_wrap(title, title_font, max_w, d)
 
     line_h = int(title_font.size * 1.25)
     total_h = len(lines) * line_h
@@ -220,9 +283,11 @@ def ensure_cover_in_frontmatter(md_path, slug):
     return True
 
 
-def ensure_responsive_variants(out_path):
+def ensure_responsive_variants(out_path, force=False):
     """Erzeugt 620px-/720px-JPEGs und WebP/AVIF-Varianten für ein bestehendes
-    Cover, falls fehlend (Nachzieh-Funktion für Bestandsbilder)."""
+    Cover. Ohne force nur falls fehlend (Nachzieh-Funktion); mit force werden
+    ALLE Varianten neu aus der (ggf. neu generierten) JPG erzeugt – wichtig,
+    wenn sich die Cover-Generierung (z. B. Titel-Umbruch) geändert hat."""
     if not os.path.exists(out_path):
         return False
     img = Image.open(out_path)
@@ -231,23 +296,27 @@ def ensure_responsive_variants(out_path):
     # JPEG 620/720
     for variant_w in (620, 720):
         vpath = os.path.join(os.path.dirname(out_path), str(variant_w), os.path.basename(out_path))
-        if not os.path.exists(vpath):
+        if force or not os.path.exists(vpath):
             scale = variant_w / W
             vh = int(H * scale)
             v = img.resize((variant_w, vh), Image.LANCZOS)
             os.makedirs(os.path.dirname(vpath), exist_ok=True)
             v.save(vpath, "JPEG", quality=82, optimize=True)
             made = True
-    # WebP/AVIF (prüft intern, ob bereits vorhanden)
+    # WebP/AVIF (mit force: alte Dateien entfernen, damit neu erzeugt wird)
+    if force:
+        base = os.path.splitext(os.path.basename(out_path))[0]
+        for sub in ("webp", "avif"):
+            for f in glob.glob(os.path.join(os.path.dirname(out_path), sub, "**", "*"),
+                               recursive=True):
+                if os.path.isfile(f) and os.path.basename(f).startswith(base):
+                    os.remove(f)
     modern = save_modern_variants(img, out_path)
     if modern:
         made = True
-    if made:
-        print(f"  ✓ Responsive/Modern-Varianten ergänzt: {os.path.basename(out_path)}")
     return made
-
-
 def main():
+    force = "--force" in sys.argv  # alle Covers neu generieren (neue Umbruch-Regel)
     os.makedirs(OUT_DIR, exist_ok=True)
     files = list_post_paths()
     covers = 0
@@ -260,10 +329,10 @@ def main():
         m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
         title = (m.group(1) if m else slug).strip()
         out_path = os.path.join(OUT_DIR, f"{slug}.jpg")
-        if not os.path.exists(out_path):
+        if force or not os.path.exists(out_path):
             make_cover(title, slug, out_path)
             covers += 1
-        if ensure_responsive_variants(out_path):
+        if ensure_responsive_variants(out_path, force=force):
             variants += 1
         if ensure_cover_in_frontmatter(path, slug):
             frontmatter += 1
