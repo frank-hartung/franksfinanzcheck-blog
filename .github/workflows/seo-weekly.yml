@@ -114,6 +114,7 @@ jobs:
         run: |
           sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
           python3 scripts/fix_dash_breaks.py || true
+          python3 scripts/fix_heading_breaks.py || true
           python3 scripts/spellcheck.py --fix | tee /tmp/spell_log.txt
           exit ${PIPESTATUS[0]}
 

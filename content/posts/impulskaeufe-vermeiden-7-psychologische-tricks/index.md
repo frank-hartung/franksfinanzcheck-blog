@@ -34,7 +34,7 @@ Oft kaufst du Dinge, um negative Gefühle wie Stress oder Langeweile zu kompensi
 
 Die digitale Welt macht das Problem noch deutlich schlimmer. Mit "One-Click"-Bestellungen und gespeicherten Kreditkartendaten verschwindet die Hürde beim Bezahlen fast komplett. Du spürst den finanziellen Verlust in diesem Moment nicht mehr. Das macht es besonders schwer, **unnötige Ausgaben stoppen** zu können.
 
-## Trick 1: Die 48-Stunden-Regel konsequent nutzen
+## Trick 1:<br>Die 48-Stunden-Regel konsequent nutzen
 
 Dies ist das mächtigste Werkzeug für deine finanzielle Freiheit. Siehst du ein interessantes Produkt, darfst du es nicht sofort kaufen. Setze es stattdessen auf eine Warteliste für exakt 48 Stunden. In dieser Zeit kühlt dein Belohnungszentrum im Gehirn wieder ab.
 
@@ -42,7 +42,7 @@ Oft stellst du nach zwei Tagen fest, dass der Reiz völlig verflogen ist. Die sc
 
 Besonders beim Online-Shopping hilft es, den Browser-Tab einfach zu schließen. Die meisten Shops speichern deinen Warenkorb für einige Tage. Wenn du den Gegenstand nach zwei Tagen immer noch unbedingt willst, ist es ein bewusster Kauf. In neun von zehn Fällen wirst du den Kauf jedoch einfach vergessen.
 
-## Trick 2: Mit Einkaufsliste und Bargeld arbeiten
+## Trick 2:<br>Mit Einkaufsliste und Bargeld arbeiten
 
 Der Supermarkt ist ein Minenfeld für dein Budget. Ohne eine klare Liste greifst du automatisch zu Produkten, die du gar nicht benötigst. Schreibe dir genau auf, was du für die nächsten Tage zum Kochen brauchst. Alles, was nicht auf dem Zettel steht, bleibt konsequent im Regal liegen.
 
@@ -50,7 +50,7 @@ Nutze für deine täglichen Besorgungen echtes Bargeld. Nimm zum Beispiel nur 60
 
 Bargeld schafft ein direktes Bewusstsein für den Wert deiner Arbeit. Du siehst genau, wie die Scheine aus deinem Portemonnaie verschwinden. Diese Hürde ist psychologisch viel höher als das bloße Vorhalten einer Karte. So kannst du effektiv **Geld sparen im Alltag**.
 
-## Trick 3: Newsletter und Push-Nachrichten löschen
+## Trick 3:<br>Newsletter und Push-Nachrichten löschen
 
 Jede E-Mail mit einem Rabatt-Code ist eine Einladung zum Geld ausgeben. Händler schicken dir diese Nachrichten nicht aus Freundlichkeit, sondern um Kaufreize zu setzen. Ein "20 %-Rabatt nur heute" erzeugt sofortige Verlustangst in deinem Kopf.
 
@@ -58,7 +58,7 @@ Nimm dir 15 Minuten Zeit und melde dich von allen Shopping-Newslettern ab. Was 
 
 Deaktiviere zusätzlich alle Benachrichtigungen von Verkaufs-Apps auf deinem Smartphone. Jedes Pling auf dem Display unterbricht deine Konzentration und lockt dich in den Shop. Ohne diese ständigen Reize sinkt dein Bedürfnis nach spontanen Käufen drastisch.
 
-## Trick 4: Den Warenkorb als Falle erkennen
+## Trick 4:<br>Den Warenkorb als Falle erkennen
 
 Warenkörbe in Online-Shops sind psychologische Werkzeuge. Meldungen wie "Nur noch 2 Stück auf Lager" sollen dich zur Eile antreiben. Fall nicht auf diese alten Tricks der Verkaufspsychologie herein. Verlasse den Shop ganz bewusst, wenn dieser Druck aufgebaut wird.
 
@@ -66,7 +66,7 @@ Manchmal schicken dir Händler nach einem Tag sogar einen extra Gutschein per Ma
 
 Nutze Vergleichsportale wie [Check24](https://a.check24.net), um Preise objektiv zu prüfen. Oft ist das vermeintliche Schnäppchen bei einem anderen Anbieter dauerhaft günstiger. Ein kurzer Check von zwei Minuten verhindert teure Fehlentscheidungen durch Zeitdruck.
 
-## Trick 5: Kosten pro Nutzung knallhart berechnen
+## Trick 5:<br>Kosten pro Nutzung knallhart berechnen
 
 Frage dich bei jedem größeren Wunsch: Wie oft werde ich das Teil wirklich nutzen? Eine Küchenmaschine für 400 € kostet dich bei wöchentlicher Nutzung im ersten Jahr etwa 8 € pro Einsatz. Nutzt du sie nur dreimal im Jahr, sind es über 130 € pro Nutzung.
 
@@ -74,7 +74,7 @@ Diese Rechnung rückt den Preis in ein völlig neues Licht. Ein teures Paar Schu
 
 Rechne den Preis alternativ in deine eigene Arbeitszeit um. Kostet ein Smartphone 1.000 € und du verdienst 20 € netto pro Stunde? Dann musst du dafür 50 Stunden lang arbeiten. Frage dich ehrlich, ob das Gerät diesen massiven Zeitaufwand wirklich wert ist.
 
-## Trick 6: Deine persönlichen Auslöser entlarven
+## Trick 6:<br>Deine persönlichen Auslöser entlarven
 
 Jeder Mensch hat bestimmte Situationen, in denen er eher schwach wird. Bist du besonders anfällig für Käufe, wenn du traurig oder gestresst bist? Vielleicht kaufst du auch aus Langeweile abends auf dem Sofa per Handy ein. Wer seine Trigger kennt, kann sie gezielt umgehen.
 
@@ -82,7 +82,7 @@ Führe für einen Monat ein kurzes Notizbuch über deine Ausgaben. Notiere neben
 
 Ein kurzer Spaziergang oder ein Telefonat mit Freunden hilft oft besser gegen Stress als ein Paket. Ersetze die schlechte Gewohnheit des Kaufens durch eine gesunde Tätigkeit. So sparst du nicht nur Geld, sondern tust auch etwas für dein Wohlbefinden.
 
-## Trick 7: Belohnungen klug umplanen
+## Trick 7:<br>Belohnungen klug umplanen
 
 Verzicht fühlt sich oft nach harter Arbeit an und führt irgendwann zu Frust-Käufen. Erlaube dir deshalb ein festes monatliches Budget für "Spaß-Ausgaben". Das können zum Beispiel 50 € oder 100 € sein, die du ohne Reue ausgeben darfst. Damit befriedigst du den Wunsch nach Neuem, ohne dein Budget zu sprengen.
 

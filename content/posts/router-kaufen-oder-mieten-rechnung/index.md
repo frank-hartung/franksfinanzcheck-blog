@@ -20,7 +20,7 @@ Die Router-Miete gehört zu den unscheinbarsten Kostenfallen im Internetvertrag.
 
 In diesem Artikel rechne ich dir vor, wann sich der Router-Kauf lohnt, welche Fallstricke es gibt und wie du den Wechsel sauber durchziehst.
 
-## Die Miet-Falle: Was Router-Miete wirklich kostet
+## Die Miet-Falle:<br>Was Router-Miete wirklich kostet
 
 Die Rechnung ist simpel: 5 Euro Miete pro Monat × 24 Monate = 120 Euro. Dazu kommt: Nach der Mindestlaufzeit läuft die Miete weiter – bei einem Vertrag, den du nicht kündigst, sind es über 4 Jahre schnell 240 Euro. Und die gemieteten Geräte sind oft nicht die besten: Viele Anbieter liefern Basis-Router mit mäßigem WLAN.
 
@@ -43,7 +43,7 @@ die Amortisation beginnt erst ab etwa 18 bis 24 Monaten.
 
 Für alle anderen: Kaufen.
 
-## Die Kauf-Rechnung: Amortisation nach 12–18 Monaten
+## Die Kauf-Rechnung:<br>Amortisation nach 12–18 Monaten
 
 Das konkrete Beispiel mit einer Fritzbox 7590 (ca. 200 Euro, Stand 2026):
 
@@ -53,7 +53,7 @@ Das konkrete Beispiel mit einer Fritzbox 7590 (ca. 200 Euro, Stand 2026):
 
 Bei einem günstigeren Router (100 Euro) liegt der Break-even schon nach 20 Monaten. Und der entscheidende Unterschied: Nach der Vertragslaufzeit gehört dir das Gerät – und du kannst es beim Anbieterwechsel mitnehmen.
 
-## Router-Freiheit: Dein Recht auf eigene Hardware
+## Router-Freiheit:<br>Dein Recht auf eigene Hardware
 
 Seit 2016 ist die Router-Freiheit in Deutschland gesetzlich verankert: Du darfst an deinem Anschluss jedes geeignete Endgerät betreiben –   
 der Anbieter muss die technischen Zugangsdaten (Benutzername, Passwort, VLAN-Einstellungen) kostenlos herausgeben.
@@ -62,7 +62,7 @@ In der Praxis heißt das: Du kannst den Miet-Router kündigen und deinen eigenen
 
 Wichtig: Prüfe vor dem Kauf, ob dein Router zum Anschlusstyp passt – DSL-Router funktionieren nicht am Kabelanschluss und umgekehrt. Die Verpackung weist den Anschlusstyp aus (DSL/VDSL, Kabel, Glasfaser).
 
-## Kompatibilität prüfen: Der häufigste Fehler
+## Kompatibilität prüfen:<br>Der häufigste Fehler
 
 Der häufigste Fehler beim Router-Kauf ist die falsche Anschlussart. Bevor du bestellst, klärst du:
 
@@ -73,7 +73,7 @@ Der häufigste Fehler beim Router-Kauf ist die falsche Anschlussart. Bevor du be
 
 Im Zweifel frag beim Anbieter nach einer Liste der freigegebenen Router – oder wähle ein Gerät mit gutem Ruf wie die Fritzbox, die mit fast allen Anschlüssen kompatibel ist.
 
-## WLAN-Qualität: Worauf du beim Kauf achtest
+## WLAN-Qualität:<br>Worauf du beim Kauf achtest
 
 Der Miet-Router ist oft der WLAN-Schwachpunkt im Haushalt. Beim Kauf solltest du auf diese Punkte achten:
 
@@ -97,7 +97,7 @@ die Kategorien, nicht konkrete Modelle (die Preise ändern sich):
 **Premium (150–250 Euro):** Wi-Fi 6E/7, Mesh-fähig, maximale Reichweite, viele Anschlüsse. Für große Wohnungen, Gamer und Technik-Fans –   
 hier ist eine [Fritzbox](../../posts/wlan-verstaerker-vs-mesh-wlan/) der Klassiker.
 
-## Die Anschluss-Wechsel-Strategie: Router-Frage mitdenken
+## Die Anschluss-Wechsel-Strategie:<br>Router-Frage mitdenken
 
 Der perfekte Zeitpunkt für den Router-Kauf ist der Anbieterwechsel: Beim [Wechsel des Internetvertrags](../../posts/internet-anbieter-wechseln-kuendigung/) kannst du die Router-Miete des alten Anbieters kündigen und dein eigenes Gerät mitnehmen. Viele Anbieter geben sogar Rabatte, wenn du auf das Mietgerät verzichtest.
 

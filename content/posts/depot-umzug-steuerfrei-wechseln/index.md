@@ -38,7 +38,7 @@ Ein Depotübertrag zwischen deutschen Instituten ist für dich grundsätzlich ko
 
 Vorsicht ist nur bei Brokern mit Sitz im Ausland geboten. Hier können Gebühren pro Position anfallen. Diese liegen je nach Anbieter oft zwischen 10 € und 50 € pro Gattung. Prüfe das Preis-Leistungs-Verzeichnis deines aktuellen Brokers vorab. In den meisten Fällen rechnet sich der Wechsel durch die künftige Ersparnis dennoch.
 
-## Schritt für Schritt: Der Depotübertrag
+## Schritt für Schritt:<br>Der Depotübertrag
 
 So wickelst du den Wechsel in sechs einfachen Schritten ab:
 
@@ -49,7 +49,7 @@ So wickelst du den Wechsel in sechs einfachen Schritten ab:
 5.  **Prüfen:** Kontrolliere nach dem Einzug die Stückzahlen im neuen Depot. Prüfe auch, ob der neue Broker die korrekten Einstandswerte anzeigt. Bei Fehlern hilft dir der Kundenservice des neuen Anbieters weiter.
 6.  **Altes Depot kündigen:** Kündige dein altes Depot erst, wenn alle Anteile übertragen sind. Nutze dafür ein einfaches Kündigungsschreiben. Überweise restliches Guthaben vorher auf dein neues Verrechnungskonto.
 
-## Steuern beim Übertrag: Was du wissen musst
+## Steuern beim Übertrag:<br>Was du wissen musst
 
 Der Depotübertrag ist für das Finanzamt kein Verkauf. Es fallen keine Steuern an, solange der Gläubiger identisch bleibt. Du nimmst deine ursprünglichen Kaufkurse einfach mit zum neuen Anbieter. Erst bei einem späteren Verkauf berechnet der Broker die Steuer auf Basis dieser Werte.
 
@@ -79,7 +79,7 @@ Ein weiteres Problem sind die Steuerdaten. Ausländische Broker melden Einstands
 4.  **Handelsstopp unterschätzt:** Du kannst während der Übertragung nicht auf Marktschwankungen reagieren. Wähle eine ruhige Marktphase für den Umzug.
 5.  **Sparpläne nicht gestoppt:** Lösche deine Sparpläne beim alten Broker rechtzeitig. Richte sie beim neuen Anbieter parallel neu ein, um keine Raten zu verpassen.
 
-## Depot-Umzug und Steuern: Die Sonderfälle im Detail
+## Depot-Umzug und Steuern:<br>Die Sonderfälle im Detail
 
 Der Standardprozess ist leicht, doch Sonderfälle erfordern Vorsicht. Achte auf diese vier Details, damit dein Wechsel perfekt gelingt:
 

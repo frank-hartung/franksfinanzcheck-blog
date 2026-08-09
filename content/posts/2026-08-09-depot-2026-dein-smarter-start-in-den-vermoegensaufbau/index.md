@@ -28,14 +28,14 @@ Dieser Ratgeber zeigt dir den schnellen Weg zum ersten Investment:
 *   Breit gestreute Welt-ETFs minimieren dein Risiko deutlich.
 *   Ein Freistellungsauftrag schützt deine Gewinne sofort vor Steuern.
 
-## Die Wahl des richtigen Brokers: App oder Filiale?
+## Die Wahl des richtigen Brokers:<br>App oder Filiale?
 Der Markt spaltet sich im Jahr 2026 deutlich auf. Etablierte Filialbanken bieten dir zwar Beratung vor Ort, verlangen aber oft 30 € bis 60 € Jahresgebühr. Diese Fixkosten belasten deine Rendite besonders bei kleinen Sparsummen unnötig stark.
 
 Neobroker setzen hingegen konsequent auf dein Smartphone und schlanke Prozesse. Diese Anbieter sind 2026 technisch ausgereift und unterliegen strenger staatlicher Regulierung. Sie führen deine Steuern meist vollautomatisch an das Finanzamt ab.
 
 Ein Depot 2026: Dein smarter Start gelingt vor allem über niedrige Gebühren. Viele Anfänger wählen aus Gewohnheit ihre Hausbank und verschenken dadurch jedes Jahr hunderte Euro. Vergleiche die Konditionen genau und wähle einen Anbieter mit dauerhaft kostenloser Kontoführung.
 
-## Kostenfallen erkennen: Transparenz ist Pflicht
+## Kostenfallen erkennen:<br>Transparenz ist Pflicht
 Früher finanzierten sich Broker oft über Rückvergütungen der Handelsplätze. Die EU hat diese Praxis mittlerweile untersagt, um die Transparenz für dich zu erhöhen. Dadurch haben viele Anbieter ihre Gebührenmodelle grundlegend angepasst.
 
 Hier siehst du, welche Konditionen 2026 als marktüblich und fair gelten:
@@ -49,14 +49,14 @@ Hier siehst du, welche Konditionen 2026 als marktüblich und fair gelten:
 
 Ein günstiges Depot bildet das Fundament für deinen langfristigen Vermögensaufbau. Prüfe dein gesamtes Finanz-Setup gründlich vor der ersten Investition am Aktienmarkt. Der [Ratgeber: Konten und Karten strategisch nutzen](../../pillar/konto-karten/) hilft dir dabei.
 
-## Der Anmeldeprozess: In zehn Minuten zum Investor
+## Der Anmeldeprozess:<br>In zehn Minuten zum Investor
 Die Eröffnung eines Depots erfolgt 2026 vollständig digital und Papierlos. Du benötigst für den Prozess nur deinen Personalausweis und dein Smartphone. Nach der Dateneingabe startest du direkt die gesetzlich vorgeschriebene Identitätsprüfung.
 
 Meist nutzt du dafür das moderne EID-Verfahren deiner Ausweiskarte. Dabei liest die App den Chip deines Ausweises in wenigen Sekunden drahtlos aus. Alternativ steht dir oft ein klassischer Video-Call mit einem Mitarbeiter zur Verfügung.
 
 Sobald der Broker dein Konto freischaltet, überweist du dein erstes Kapital. Nutze dafür dein hinterlegtes Referenzkonto bei deiner Hausbank für maximale Sicherheit. Nach etwa einem Bankarbeitstag steht das Geld für deinen ersten Kauf bereit.
 
-## Die erste Investition: Weniger ist mehr
+## Die erste Investition:<br>Weniger ist mehr
 Viele Neulinge investieren aus Neugier sofort in riskante Trends oder Einzelaktien. Ich rate dir zu Beginn klar zu einem weltweit gestreuten ETF. Damit kaufst du Anteile an über 1.500 Unternehmen gleichzeitig mit nur einem Klick.
 
 Setze konsequent auf die Automatisierung durch einen monatlichen Sparplan. Deine App kauft dann regelmäßig zum festen Termin neue Anteile für dich ein. Das schaltet deine Emotionen bei kurzfristig schwankenden Kursen effektiv aus.

@@ -22,7 +22,7 @@ kurzantwort: "Du kannst bis zu 50 € im Monat sparen, wenn du deinen Handytari
 * Prüfe Aktionsangebote auf wegfallende Anschlussgebühren (ca. 10–30 € Ersparnis).
 * Nutze den gesetzlichen Anspruch auf eine kostenlose Rufnummernmitnahme.
 
-## Schritt 1: Bedarf ermitteln – der erste Schritt beim Handytarif-Vergleich
+## Schritt 1:<br>Bedarf ermitteln – der erste Schritt beim Handytarif-Vergleich
 
 Bevor du die Angebote sichtest, klärst du deinen tatsächlichen Bedarf. Nutze dafür die Verbrauchsübersicht in deinem aktuellen Smartphone-Menü oder die App deines Anbieters.
 
@@ -32,7 +32,7 @@ Bevor du die Angebote sichtest, klärst du deinen tatsächlichen Bedarf. Nutze d
 
 Die meisten Nutzer decken ihren Alltag mit 10 bis 20 GB komplett ab. Ein unnötig großes Paket treibt den Preis in die Höhe. Ein günstiger Handytarif muss genau zu deinem Surfverhalten passen.
 
-## Schritt 2: Die 4 wichtigsten Vergleichs-Kriterien
+## Schritt 2:<br>Die 4 wichtigsten Vergleichs-Kriterien
 
 | Kriterium | Worauf achten? |
 |---|---|
@@ -41,11 +41,11 @@ Die meisten Nutzer decken ihren Alltag mit 10 bis 20 GB komplett ab. Ein unnöti
 | **Laufzeit** | Flexible Tarife ohne Bindung kosten oft nur 1–2 € mehr pro Monat. |
 | **Anschlusspreis** | Viele Anbieter streichen diese Gebühr bei speziellen Online-Aktionen. |
 
-## Schritt 3: Versteckte Kosten im Blick behalten
+## Schritt 3:<br>Versteckte Kosten im Blick behalten
 
 Achte auf das Kleingedruckte, um böse Überraschungen zu vermeiden. Sogenannte Discount-Marken bieten oft exzellente Preise, sparen aber manchmal beim persönlichen Telefon-Support. EU-Roaming gehört gesetzlich zum Standard und darf in der Regel keine Extra-Kosten verursachen. Prüfe zudem die Geschwindigkeit nach dem Aufbrauchen des Inklusiv-Volumens. Sinkt diese auf 32 kbit/s, lädt kaum noch eine Webseite flüssig. Eine kostenlose Rufnummernmitnahme ist mittlerweile gesetzlich garantiert und darf nichts kosten.
 
-## Schritt 4: Wechseln – so geht's
+## Schritt 4:<br>Wechseln – so geht's
 
 Den Handyvertrag wechseln funktioniert heute oft innerhalb weniger Werktage. Folge einfach diesen Schritten für einen reibungslosen Übergang.
 

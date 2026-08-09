@@ -42,7 +42,7 @@ Besonders mit einer eigenen Photovoltaik-Anlage lässt du die Konkurrenz hinter 
 
 Steuere deine Ladezeiten über smarte Apps. Diese starten den Ladevorgang automatisch, wenn die Stromnachfrage sinkt oder die Sonne scheint. So nutzt du dynamische Tarife optimal aus und reduzierst deine jährliche Rechnung.
 
-## Öffentliches Laden: So vermeidest du Kostenfallen
+## Öffentliches Laden:<br>So vermeidest du Kostenfallen
 
 Vergleiche verschiedene Ladekarten und Apps vor dem ersten Anstecken. Die Preise an derselben Säule unterscheiden sich je nach Anbieter oft um 20 Cent oder mehr. Eine gute App zeigt dir den günstigsten Stromtarif für dein E-Auto in Echtzeit an.
 
@@ -50,7 +50,7 @@ Nutze Schnelllader (DC) wirklich nur bei Zeitnot oder auf Reisen. Diese Statione
 
 Achte penibel auf Blockiergebühren. Viele Betreiber verlangen nach drei oder vier Stunden Standzeit eine zusätzliche Gebühr pro Minute. Ziehe den Stecker direkt nach dem Ladevorgang ab, um diese unnötigen Kosten zu vermeiden.
 
-## Kostenvergleich: Benziner gegen Elektroauto
+## Kostenvergleich:<br>Benziner gegen Elektroauto
 
 Ein modernes E-Auto verbraucht im Schnitt etwa 15 bis 20 kWh auf 100 Kilometern. Beim Laden zu Hause (ca. 0,30 €/kWh) entstehen Kosten von 4,50 bis 6,00 Euro. Ein vergleichbarer Benziner benötigt bei 7 Litern Verbrauch und einem Preis von 1,75 Euro rund 12,25 Euro.
 

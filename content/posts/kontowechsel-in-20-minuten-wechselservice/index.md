@@ -42,7 +42,7 @@ Konkret überträgt der Service deine Daueraufträge direkt auf das neue Girokon
 
 Du füllst dafür lediglich ein digitales Formular aus. Danach kommunizieren die Banken untereinander. In der Regel dauert die gesamte Umstellung zwischen 2 und 4 Wochen. Du musst während dieser Phase nicht selbst aktiv werden.
 
-## Schritt für Schritt: Der Wechsel in 20 Minuten
+## Schritt für Schritt:<br>Der Wechsel in 20 Minuten
 
 So gelingt dir der Kontowechsel ohne Papierkram und unnötige Telefonate. Zuerst wählst du ein passendes neues Konto aus und eröffnest es online. Die Identitätsprüfung erledigst du bequem per Video-Call oder mit der eID-Funktion deines Personalausweises. Dieser erste Schritt beansprucht etwa 10 Minuten deiner Zeit.
 

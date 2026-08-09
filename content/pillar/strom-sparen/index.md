@@ -28,15 +28,15 @@ Bevor du den Anbieter wechselst, solltest du wissen, wo dein Strom überhaupt hi
 Wer systematisch sparen will, findet in meiner Übersicht [Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung](../../posts/strom-sparen-haushalt-20-tipps/) alle wirksamen Stellschrauben: von der richtigen Waschtemperatur über LED-Tausch bis zu smarten Steckdosen. Die Tipps sind nach Einsparpotenzial sortiert –   
 so startest du mit dem größten Hebel.
 
-## Tarifwechsel: Der schnellste Weg zu niedrigeren Kosten
+## Tarifwechsel:<br>Der schnellste Weg zu niedrigeren Kosten
 
 Ein Wechsel des Stromanbieters dauert heute nur wenige Minuten und bringt im Schnitt mehrere Hundert Euro Ersparnis pro Jahr. Wie du dabei sicher vorgehst, Boni richtig einordnest und den Wechsel reibungslos durchziehst, erkläre ich in [Stromanbieter wechseln 2026: So sparst du beim Tarifwechsel](../../posts/stromanbieter-wechseln-2026/).
 
-## Heizen: Wärmepumpe, Gas oder der kluge Tarifvergleich
+## Heizen:<br>Wärmepumpe, Gas oder der kluge Tarifvergleich
 
 Beim Heizen laufen zwei Fragen zusammen: Welche Technik lohnt sich langfristig, und welcher Gastarif ist der günstigste? Die große Abwägung findest du in [Wärmepumpe vs. Gasheizung: Was sich 2026 wirklich lohnt](../../posts/waermepumpe-vs-gasheizung-2026/). Wer weiter mit Gas heizt, sollte vor der kalten Jahreszeit [Gastarife vergleichen und Heizkosten senken](../../posts/gastarife-vergleichen-vor-dem-herbst/) – und die [Heizperiode rechtzeitig vorbereiten](../../posts/heizperiode-vorbereiten-spaetsommer/).
 
-## E-Auto laden: Stromkosten zu Hause senken
+## E-Auto laden:<br>Stromkosten zu Hause senken
 
 Wer ein Elektroauto besitzt, kann die Ladekosten mit dem richtigen Haushalts- oder Ladetarif deutlich drücken. Welche Möglichkeiten sich wirklich lohnen und worauf du bei der Wallbox achten solltest, beschreibe ich in [E-Auto laden: So senkst du deine Stromkosten zu Hause](../../posts/e-auto-laden-stromkosten-senken/).
 

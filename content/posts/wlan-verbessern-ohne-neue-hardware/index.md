@@ -20,7 +20,7 @@ Bevor du 100 Euro für einen neuen Router oder [WLAN-Verstärker](../../posts/wl
 
 In diesem Artikel bekommst du 12 Tipps, die dein WLAN sofort spürbar schneller machen. Alles ohne neuen Router, ohne Verstärker, ohne Kabel.
 
-## Der richtige Router-Standort: Der wichtigste Tipp überhaupt
+## Der richtige Router-Standort:<br>Der wichtigste Tipp überhaupt
 
 Der Standort des Routers entscheidet mehr über dein WLAN als jedes teure Gerät. Die Grundregeln:
 
@@ -32,7 +32,7 @@ Der Standort des Routers entscheidet mehr über dein WLAN als jedes teure Gerät
 Die beste Position ist oft der Flur oder das Wohnzimmer –   
 dort, wo sich die meisten Geräte aufhalten. Ein Versuch mit 30 Zentimetern Standortänderung kann das Signal um 20 bis 50 Prozent verbessern.
 
-## Frequenzwahl: 2,4 GHz vs. 5 GHz
+## Frequenzwahl:<br>2,4 GHz vs. 5 GHz
 
 Dein Router sendet auf zwei Frequenzbändern: 2,4 GHz und 5 GHz. Das 2,4-GHz-Band hat die bessere Reichweite, ist aber deutlich anfälliger für Störungen – Mikrowellen, Bluetooth und die WLAN-Netze der Nachbarn tummeln sich dort. Das 5-GHz-Band ist schneller und sauberer, dafür reicht die Reichweite kürzer.
 
@@ -40,7 +40,7 @@ Die Regel: Geräte, die nah am Router stehen (unter 10 Meter), gehören ins 5-GH
 
 Bei modernen Routern mit Wi-Fi 6 kommt das 6-GHz-Band (Wi-Fi 6E) dazu – noch weniger Störungen, noch kürzere Reichweite.
 
-## Kanal-Check: Der Trick gegen Nachbarn
+## Kanal-Check:<br>Der Trick gegen Nachbarn
 
 WLAN-Kanäle sind wie Funkfrequenzen auf einer Autobahn: Wenn alle Nachbarn denselben Kanal nutzen, wird es voll. Viele Router wählen den Kanal automatisch – aber oft nicht den optimalen.
 
@@ -87,7 +87,7 @@ Die Optimierung: DLAN-Adapter nicht in Mehrfachsteckdosen stecken (Störungen!),
 11. Geräte-Name prüfen: Ein eigenes WLAN-Netz für 5 GHz hilft der Orientierung
 12. Speedtest vorher/nachher: Messen, ob die Änderung wirkt
 
-## Der Speedtest vorher/nachher: So misst du den Erfolg
+## Der Speedtest vorher/nachher:<br>So misst du den Erfolg
 
 Alle Tipps sind wertlos, wenn du den Erfolg nicht misst. Der Speedtest ist dein Werkzeug: Vor den Änderungen einen Ausgangswert messen (am besten auf einem Gerät, das nah am Router steht und per WLAN verbunden ist – nicht per Kabel), dann nach jeder Änderung erneut testen.
 

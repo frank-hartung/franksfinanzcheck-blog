@@ -26,7 +26,7 @@ Du kannst den günstigsten Ratenkredit finden, indem du:
 4. **Sondertilgungen prüfst** – kostenlose Sonderzahlungen oder Gebühren für Sondertilgungen
 5. **Angebote prüfst** – effektiver Jahreszins, Restschuld, Laufzeit und Gesamtbetrag in Euro
 
-## Umschuldung: Der geheime Zinssparer
+## Umschuldung:<br>Der geheime Zinssparer
 Hast du bereits einen Kredit mit hohem Zins, lohnt sich der Blick auf die Umschuldung: Ein neuer Kredit mit niedrigerem Zins löst den alten ab. Die Ersparnis kann bei größeren Summen und langen Laufzeiten mehrere hundert Euro betragen. Du musst jedoch prüfen, ob die Vorfälligkeitsentschädigung des alten Kredits die Zinsersparnis nicht auffrisst.
 
 ## Die 5 größten Kredit-Fehler

@@ -34,7 +34,7 @@ Etwa 20 bis 30 % der Energie entweichen durch undichte Fugen und falsches Lüft
 
 Zusätzlich sorgen falsch eingestellte Anlagen oder verdeckte Heizkörper für unnötige Kosten. Die gute Nachricht: Die größten Lecks stopfst du ohne teure Handwerker. Genau hier setzen die ersten Schritte an, um effektiv **Energiekosten senken** zu können.
 
-## Maßnahmen 1 bis 4: Ohne Kosten
+## Maßnahmen 1 bis 4:<br>Ohne Kosten
 
 **1. Heizkörper freihalten.** das ist die einfachste Regel für effizientes Heizen. Verdeckte Heizkörper oder Möbel direkt davor kosten dich 10 bis 20 % der Leistung. Die warme Luft muss frei in den Raum strömen können. Achte auch darauf, dass keine langen Vorhänge die Thermostate verdeckt halten.
 
@@ -44,7 +44,7 @@ Zusätzlich sorgen falsch eingestellte Anlagen oder verdeckte Heizkörper für u
 
 **4. Türen schließen.** Trenne kühle Räume konsequent von warmen Wohnbereichen ab. So bleibt die Wärme dort, wo du dich tatsächlich aufhältst. Du verhinderst, dass der Flur oder das Treppenhaus ungewollt mitgeheizt werden. Das spart bares Geld und sorgt für ein stabiles Klima in deinen Wohnräumen.
 
-## Maßnahmen 5 bis 7: Kleine Investition
+## Maßnahmen 5 bis 7:<br>Kleine Investition
 
 **5. Tür- und Fensterdichtungen erneuern.** Alte Dichtungen lassen oft unbemerkt teure Wärme nach draußen entweichen. Neue Dichtungsbänder kosten dich nur wenige Euro pro Meter. Du klebst sie in wenigen Minuten selbst ein. Teste deine Fenster mit einer brennenden Kerze auf Zugluft, um undichte Stellen sofort zu finden.
 
@@ -52,7 +52,7 @@ Zusätzlich sorgen falsch eingestellte Anlagen oder verdeckte Heizkörper für u
 
 **7. Reflexionsfolie hinter Heizkörpern anbringen.** Heizkörper an Außenwänden heizen oft die Wand stärker als den Raum. Eine Reflexionsfolie für ca. 10 € lenkt die Wärme aktiv zurück in das Zimmer. Besonders in Altbauten ohne moderne Fassadendämmung ist dieser Effekt deutlich spürbar. Du reduzierst damit den Wärmeverlust nach draußen spürbar.
 
-## Maßnahmen 8 bis 10: Größer denken
+## Maßnahmen 8 bis 10:<br>Größer denken
 
 **8. Hydraulischer Abgleich durchführen lassen.** Ein Fachbetrieb stellt deine Anlage so ein, dass jeder Heizkörper exakt die nötige Wassermenge erhält. Ohne diesen Abgleich werden manche Räume zu heiß, während andere kühl bleiben. Du sparst dadurch 5 bis 15 % Heizenergie ein. Der Staat fördert diese Maßnahme zudem mit attraktiven Zuschüssen.
 
@@ -79,7 +79,7 @@ Die ersten sieben Punkte dieser Liste kosten dich fast nichts. Wenn du sie konse
 
 Prüfe vor dem Winter auch deinen aktuellen Energievertrag. Ein Wechsel des Anbieters bringt oft zusätzliche 100 bis 300 € Ersparnis. Wer früh die [Heizperiode vorbereitet](../../posts/heizperiode-vorbereiten-spaetsommer/), vermeidet Stress und hohe Kosten im Winter. Weitere Tipps findest du im [Pillar Strom sparen](../../pillar/strom-sparen/).
 
-## Heizkosten in der Mietwohnung: Deine Rechte
+## Heizkosten in der Mietwohnung:<br>Deine Rechte
 
 Als Mieter hast du mehr Einfluss auf deine Kosten, als du vielleicht denkst. Dein Vermieter muss eine funktionierende Heizung garantieren. Tagsüber müssen in den Wohnräumen mindestens 20 bis 22 Grad erreichbar sein. Sinkt die Temperatur dauerhaft darunter, hast du unter Umständen Anspruch auf eine Mietminderung.
 

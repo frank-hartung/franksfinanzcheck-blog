@@ -32,7 +32,7 @@ Banken zahlen 2026 wieder attraktive Zinsen auf deine Ersparnisse. Ein Tagesgeld
 
 Diese Zinsen sichern dein Kapital und bieten eine feste Kalkulationsgrundlage. Du profitierst von der Einlagensicherung bis 100.000 € pro Bank. Die Zinsen liegen zwar unter der [langfristigen Aktienrendite eines ETF-Sparplans](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/), dafür bleibt dein Geld wertstabil. Dein Ziel ist das Parken von Liquidität am richtigen Ort.
 
-## Tagesgeld: Vorteile und Grenzen
+## Tagesgeld:<br>Vorteile und Grenzen
 
 Das Tagesgeldkonto fungiert als deine flexible Geldbörse für Erspartes. Du zahlst jederzeit Beträge ein oder hebst sie ohne Kündigungsfrist ab. Die Bank passt den Zinssatz regelmäßig an die aktuelle Marktlage an. Das Konto kostet dich in der Regel keine Gebühren.
 
@@ -49,7 +49,7 @@ Das Tagesgeldkonto fungiert als deine flexible Geldbörse für Erspartes. Du zah
 
 Dein [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) gehört zwingend auf ein Tagesgeldkonto. Plane hierfür drei bis sechs Monatsgehälter ein. Auch Geld für den nächsten Urlaub oder die Steuernachzahlung ist hier gut aufgehoben. So bleibst du handlungsfähig und kassierst trotzdem Zinsen.
 
-## Festgeld: Laufzeiten und Zinsstaffel
+## Festgeld:<br>Laufzeiten und Zinsstaffel
 
 Beim Festgeld bindest du dein Kapital für einen festen Zeitraum. Üblich sind Laufzeiten von 6 Monaten bis zu 10 Jahren. Die Bank garantiert dir den Zins für die gesamte Dauer. Ein Zugriff auf das Geld ist während der Laufzeit fast immer ausgeschlossen.
 
@@ -71,13 +71,13 @@ Ein konkretes Beispiel verdeutlicht den Unterschied bei einer Anlage von 10.000�
 
 Du gewinnst durch die Bindung also 158 € zusätzlich. Eine Kombination aus 5.000 € Tagesgeld und 5.000 € Festgeld bringt dir 10.858 €. Dieser Mix bietet dir Sicherheit und eine ordentliche Rendite. Für den echten Vermögensaufbau nutzt du zusätzlich einen [langfristigen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/).
 
-## Sicherheit: Die Einlagensicherung verstehen
+## Sicherheit:<br>Die Einlagensicherung verstehen
 
 Deine Einlagen genießen hohen Schutz durch gesetzliche Sicherungssysteme. Pro Bank und Person sind 100.000 € gesetzlich abgesichert. Viele deutsche Institute bieten darüber hinaus freiwillige Zusatzabsicherungen an. Das gilt gleichermaßen für dein Tagesgeld wie für dein Festgeld.
 
 Verteile Beträge über 100.000 € unbedingt auf mehrere Banken. Wähle bevorzugt Institute mit Sitz in der EU für maximale Rechtssicherheit. Ausländische Banken mit deutscher Lizenz bieten dir den gleichen Schutz. Prüfe Angebote mit extrem hohen Zinsen immer kritisch auf ihre Seriosität.
 
-## Zins-Hopping: Legale Strategie oder Aufwand?
+## Zins-Hopping:<br>Legale Strategie oder Aufwand?
 
 Beim Zins-Hopping wechselst du regelmäßig zu neuen Banken mit Aktionszinsen. Du nimmst den hohen Neukunden-Zins für meist 6 Monate mit. Danach ziehst du dein Kapital zum nächsten Anbieter weiter. Diese Strategie steigert deine Rendite oft um 0,5 bis 1,0 % pro Jahr.
 
@@ -98,7 +98,7 @@ Mit dieser Übersicht triffst du sofort die richtige Wahl für dein Geld:
 
 Die Mischung macht dein Portfolio stabil und rentabel. Halte den Notgroschen flüssig und binde nur den Rest längerfristig. Den Teil für die Altersvorsorge steckst du am besten in einen [Welt-ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/). So nutzt du alle Vorteile des Finanzmarktes.
 
-## Die Zins-Leiter: So kombinierst du beides clever
+## Die Zins-Leiter:<br>So kombinierst du beides clever
 
 Die Zins-Leiter (Laddering) verbindet hohe Zinsen mit regelmäßiger Verfügbarkeit. Du teilst deine Anlagesumme in mehrere Tranchen auf. Diese legst du mit unterschiedlichen Laufzeiten an, etwa 12, 18 und 24 Monate. Jedes Jahr wird ein Teil deines Geldes wieder frei.
 

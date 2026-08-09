@@ -34,7 +34,7 @@ Zusätzliche Bauteile wie die Beleuchtung oder die Elektronik verbrauchen ebenfa
 
 Der typische Verbrauch liegt zwischen 100 kWh und 300 kWh pro Jahr. Bei einem Preis von 30 Cent pro kWh zahlst du 30 bis 90 Euro. Große Kühl-Gefrier-Kombinationen verursachen dabei die höchsten Kosten.
 
-## Die richtige Temperatur: 7 Grad und minus 18 Grad
+## Die richtige Temperatur:<br>7 Grad und minus 18 Grad
 
 Die Temperatur ist dein wichtigster Hebel, wenn du beim **Kühlschrank Strom sparen** willst. Wähle 7 °C für den Kühlbereich und −18 °C für das Gefrierfach. Jedes Grad weniger steigert deinen Stromverbrauch um etwa 5 bis 10 %.
 
@@ -42,7 +42,7 @@ Viele Haushalte kühlen ihre Lebensmittel unnötig stark auf 4 oder 5 Grad. Ko
 
 Im Gefrierfach reichen −18 °C für eine sichere Lagerung völlig aus. Eine kältere Einstellung verschwendet nur teure Energie. Nutze die Schockfrost-Funktion nur, wenn du große Mengen frischer Lebensmittel einlagerst.
 
-## Standort und Abstand: Die unsichtbaren Einsparungen
+## Standort und Abstand:<br>Die unsichtbaren Einsparungen
 
 Der richtige Standort beeinflusst die **Energieeffizienz Kühlschrank** massiv. Vermeide Plätze direkt neben dem Herd, der Spülmaschine oder der Heizung. Externe Wärmequellen zwingen das Gerät zu dauerhafter Höchstleistung.
 

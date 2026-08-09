@@ -15,11 +15,11 @@ cover:
 kurzantwort: "Dein WLAN ist zu langsam, wenn du weniger als 50 MBit/s hast. Ein WLAN-Verstärker kann helfen, wenn du nur wenige Räume abdecken musst.Mesh-WLAN-Systeme sind besser für größere Häuser mit vielen Räumen und mehreren Stockwerken."
 ---Die WLAN-Verbindung ist langsam, das Video buffert, und im Schlafzimmer gibt es nur noch ein Balken-Signal? Bevor du einen teuren Techniker rufst, kann entweder ein WLAN-Verstärker oder ein Mesh-System das Problem lösen. Wer sein WLAN verbessern möchte, hat dafür mehrere Wege – ich zeige dir, welcher wirklich hilft.  Der Unterschied zwischen diesen beiden Lösungen ist entscheidend und hängt von deiner Wohnung ab.
 
-## Das Grundproblem: Der Router schafft es nicht allein
+## Das Grundproblem:<br>Der Router schafft es nicht allein
 
 Ein einzelner Router kann Wände, Decken und dicke Mauern nur begrenzt durchdringen. Je weiter du vom Router entfernt bist, desto schwächer das Signal – vor allem bei 5-GHz-Frequenzen, die zwar schneller, aber kurzreichweitiger sind. Abhilfe schaffen zusätzliche Geräte, die das Signal weiterreichen: Repeater oder Mesh.
 
-## WLAN-Verstärker (Repeater): Der Klassiker
+## WLAN-Verstärker (Repeater):<br>Der Klassiker
 
 Ein Repeater empfängt das WLAN-Signal des Routers und sendet es verstärkt weiter. Er wird einfach in eine Steckdose gesteckt und mit dem WLAN verbunden. 
 **Vorteile:**
@@ -34,7 +34,7 @@ Ein Repeater empfängt das WLAN-Signal des Routers und sendet es verstärkt weit
 
 **Mein Fazit:** für eine kleine Wohnung, etwa bis 80 m², oder wenn nur ein einzelner Raum versorgt werden muss, reicht ein Repeater völlig aus.
 
-## Mesh-WLAN: Das Profi-System
+## Mesh-WLAN:<br>Das Profi-System
 
 Ein Mesh-System besteht aus mehreren gleichartigen Knoten, die untereinander ein eigenes, dediziertes Funknetz aufbauen. Der Router und die Satelliten sprechen über einen eigenen Kanal miteinander, nicht über denselben wie deine Geräte.
 

@@ -28,7 +28,7 @@ Ein Beispiel: 50 Euro monatlich ab Geburt, 6 Prozent Rendite, bis zum 18. Geburt
 
 Dazu kommt der pädagogische Effekt: Ein Depot, das das Kind ab dem Teenager-Alter mitverfolgen darf, lehrt mehr über Geld als jedes Buch. Viele Banken bieten dafür kindgerechte Apps mit Sparzielen und Übersichten.
 
-## Die 3 Wege: Sparbuch, Banksparplan, ETF
+## Die 3 Wege:<br>Sparbuch, Banksparplan, ETF
 
 Die Wahl des Instruments entscheidet über das Ergebnis. Der Vergleich für 50 Euro monatlich über 18 Jahre:
 
@@ -42,7 +42,7 @@ Der Unterschied zwischen Tagesgeld und ETF-Sparplan liegt nach 18 Jahren bei 5.0
 
 Wichtig zur Ehrlichkeit: Die ETF-Rendite ist keine Garantie, sondern eine historische Erwartung. Kursschwankungen gehören dazu – aber bei 18 Jahren Anlagehorizont gleichen sie sich statistisch weitgehend aus. Wer das Risiko reduzieren will, mischt ETF und Tagesgeld (zum Beispiel 70/30).
 
-## Depot für Kinder: Die Konto-Formen
+## Depot für Kinder:<br>Die Konto-Formen
 
 Für das Sparen in Wertpapieren gibt es zwei Wege, die sich steuerlich und rechtlich unterscheiden:
 
@@ -68,7 +68,7 @@ So setzt du den ETF-Sparplan für dein Kind in fünf Schritten um:
 **Schritt 5 – Freistellungsauftrag für das Kind einrichten (5 Minuten):** Beim Broker den Sparerpauschbetrag des Kindes (1.000 Euro) hinterlegen. Damit bleiben die ersten 1.000 Euro Gewinn pro Jahr steuerfrei –   
 der größte Steuervorteil des Kinderdepots.
 
-## Steuern & Freibeträge: Der unterschätzte Vorteil
+## Steuern & Freibeträge:<br>Der unterschätzte Vorteil
 
 Der Steuervorteil des Kinderdepots ist der am meisten übersehene Punkt. Jedes Kind hat einen eigenen **Sparerpauschbetrag von 1.000 Euro** und einen **Grundfreibetrag** (2026: 12.096 Euro). Solange die Kapitaleinkünfte des Kindes diese Grenzen nicht überschreiten, bleiben sie komplett steuerfrei.
 

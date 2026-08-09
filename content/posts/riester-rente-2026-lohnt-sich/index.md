@@ -32,7 +32,7 @@ Die Förderung 2026 im Überblick:
 
 Dafür gilt: Das Geld ist bis zum Rentenalter gebunden, wird bei Auszahlung besteuert, und die Förderung muss in bestimmten Fällen zurückgezahlt werden (zum Beispiel bei Kündigung ohne Weiterführung).
 
-## Die Reform 2026: Was sich ändert
+## Die Reform 2026:<br>Was sich ändert
 
 Die Bundesregierung hat eine Riester-Reform auf den Weg gebracht, die das System grundlegend vereinfachen soll. Die wichtigsten Änderungen, Stand 2026:
 
@@ -89,7 +89,7 @@ Bevor du irgendetwas entscheidest, analysiere deinen Vertrag:
 Mit diesen vier Zahlen kannst du Riester mit einem [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) vergleichen: historisch erzielen Welt-ETFs langfristig 6 bis 8 Prozent pro Jahr vor Kosten –   
 die meisten Riester-Verträge liegen deutlich darunter. Die Förderung muss diese Differenz ausgleichen.
 
-## Alternativen: Was du mit dem Geld machen könntest
+## Alternativen:<br>Was du mit dem Geld machen könntest
 
 Die ehrliche Einordnung: Riester ist ein Baustein, kein Allheilmittel. Die moderne Altersvorsorge setzt auf drei Säulen:
 
@@ -99,7 +99,7 @@ Die ehrliche Einordnung: Riester ist ein Baustein, kein Allheilmittel. Die moder
 
 Für die meisten ist die Kombination aus bAV und ETF-Sparplan die schlagkräftigste Lösung. Riester kann dazukommen, wenn die Zulagen hoch sind – aber nie als einzige private Vorsorge.
 
-## Riester und die bAV: Die unterschätzte Kombination
+## Riester und die bAV:<br>Die unterschätzte Kombination
 
 Wer über Riester nachdenkt, sollte auch die betriebliche Altersvorsorge (bAV) prüfen – sie ist oft die unterschlagene Alternative. Der entscheidende Vorteil: Der Arbeitgeber muss mindestens 15 Prozent Zuschuss zu deinen Beiträgen zahlen. Zusammen mit den Steuervorteilen (bis zu 8 Prozent der Beitragsbemessungsgrenze steuerfrei) ist die bAV für viele die attraktivste Form der privaten Vorsorge.
 

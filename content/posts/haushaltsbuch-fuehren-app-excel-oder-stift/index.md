@@ -36,7 +36,7 @@ Die Verbraucherzentrale empfiehlt diese Übersicht ausdrücklich als Basis jeder
 
 Dokumentiere für den Erfolg nicht zwingend jeden einzelnen Cent. Erfasse lieber grobe Kategorien für eine bessere Übersicht. Die Regelmäßigkeit entscheidet über deinen Fortschritt. Fünf Minuten am Tag bringen mehr als eine Stunde am Monatsende.
 
-## Methode 1: Die Haushaltsbuch App
+## Methode 1:<br>Die Haushaltsbuch App
 
 Eine **Haushaltsbuch App** ist der schnellste Weg zu mehr Übersicht. Du tippst deine Ausgaben direkt beim Bezahlen in dein Smartphone ein. Viele Anwendungen schlagen automatisch Kategorien vor oder erstellen hilfreiche Statistiken. Moderne Banking-Apps sortieren deine Umsätze oft sogar völlig selbstständig vor.
 
@@ -53,7 +53,7 @@ Eine **Haushaltsbuch App** ist der schnellste Weg zu mehr Übersicht. Du tippst 
 
 Starte am besten mit einer kostenlosen App ohne Kontozwang. Teste das Programm für genau zwei Wochen in deinem Alltag. Falls du die App nach 14 Tagen kaum noch öffnest, wechselst du die Methode. Nicht jedes digitale Werkzeug passt zu jedem Charakter.
 
-## Methode 2: Die Excel-Vorlage
+## Methode 2:<br>Die Excel-Vorlage
 
 Excel bietet dir die volle Kontrolle über deine sensiblen Daten. Du legst alle Kategorien selbst fest und baust eigene Auswertungen. Die Daten bleiben dabei sicher auf deinem eigenen Rechner gespeichert. Viele Finanz-Profis nutzen diese Methode seit Jahren für ihre private Buchhaltung.
 
@@ -61,7 +61,7 @@ Für den Anfang genügen fünf einfache Spalten in deiner Tabelle. Notiere Datum
 
 Der Nachteil liegt im manuellen Aufwand für die Dateneingabe. Wer unterwegs viel bar bezahlt, vergisst leicht das spätere Nachtragen der Belege. Sammle deshalb alle Kassenbons in deinem Geldbeutel. Nimm dir einmal pro Woche 15 Minuten Zeit für die Übertragung.
 
-## Methode 3: Stift und Papier
+## Methode 3:<br>Stift und Papier
 
 Diese analoge Methode wirkt heute fast schon altmodisch. Sie hat jedoch einen entscheidenden psychologischen Vorteil für dein Gehirn. Das handschriftliche Notieren verlangsamt deinen Prozess beim Bezahlen spürbar. Du kaufst nachweislich weniger impulsiv, wenn du jeden Kauf händisch aufschreibst.
 

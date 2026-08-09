@@ -95,7 +95,7 @@ die entscheidet, wie viel Ökostrom ins Netz eingespeist wird.
 
 Wer jetzt wechselt, kann [bis zu 300 Euro pro Jahr sparen](../../posts/stromanbieter-wechseln-2026/). Die besten Spartipps für den Haushalt findest du in meiner [Liste der 20 Stromspar-Tipps](../../posts/strom-sparen-haushalt-20-tipps/), und wer [mit einer Wärmepumpe heizt](../../posts/waermepumpe-vs-gasheizung-2026/), sollte auch den Tarif darauf abstimmen.
 
-## Der Wechsel-Check: 5 Punkte vor dem Klick
+## Der Wechsel-Check:<br>5 Punkte vor dem Klick
 
 Bevor du den Tarif bestätigst, geh diese Liste durch – sie verhindert die häufigsten Fehlkäufe:
 

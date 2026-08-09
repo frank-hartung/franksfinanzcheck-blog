@@ -29,7 +29,7 @@ Besonders günstig sind Mietwagen in Städten ohne Wintersport: Flughäfen im Mi
 Wichtig: In Skigebieten selbst (zum Beispiel Innsbruck, Salzburg, Zürich im Winter) sind die Preise höher –   
 dort lohnt der Vergleich mit der Anmietung am Flughafen der Region.
 
-## Trick 1: Abholzeitpunkt clever wählen
+## Trick 1:<br>Abholzeitpunkt clever wählen
 
 Die Mietpreise hängen stark von Tag und Uhrzeit ab. Die günstigsten Zeiten:
 
@@ -37,7 +37,7 @@ Die Mietpreise hängen stark von Tag und Uhrzeit ab. Die günstigsten Zeiten:
 - **Mittags statt morgens:** Flughafen-Stationen haben morgens die teuersten Tarife (Ankunftswellen). Wer mittags oder nachmittags abholt, bekommt bessere Preise.
 - **Länger als nötig:** Klingt paradox, aber: 7 Tage sind oft kaum teurer als 5 Tage – die Tagespreise fallen mit der Mietdauer. Prüfe, ob sich der Verlängerungstag lohnt.
 
-## Trick 2: Winterreifen-Check (Pflicht!)
+## Trick 2:<br>Winterreifen-Check (Pflicht!)
 
 Der wichtigste Punkt beim Winter-Mietwagen: die Bereifung. In vielen Ländern (Deutschland, Österreich, Schweiz, Frankreich in Ski-Regionen) ist Winterausrüstung gesetzlich vorgeschrieben. Ohne Winterreifen riskierst du Bußgelder – und im Schnee deine Sicherheit.
 
@@ -48,7 +48,7 @@ Die Regeln:
 - **Schneeketten:** In vielen Skigebieten Pflicht. Frage, ob Ketten im Auto liegen – oder miete sie dazu (oft kostenlos).
 - **4×4 nicht automatisch besser:** Allrad hilft beim Anfahren, nicht beim Bremsen – Winterreifen sind entscheidend.
 
-## Trick 3: Skigebiete: Kleinwagen statt SUV
+## Trick 3:<br>Skigebiete: Kleinwagen statt SUV
 
 Der Klassiker-Fehler: Für die Skireise wird ein SUV gebucht, weil „man da ja Berge fährt". Die Realität: Auf geräumten Straßen kommt ein Kleinwagen mit Winterreifen genauso gut hoch – und kostet 30 bis 50 Prozent weniger.
 
@@ -56,14 +56,14 @@ Ein SUV lohnt sich nur, wenn du wirklich abseits der geräumten Straßen unterwe
 
 Tipp: Achte auf die Kofferraumgröße – vier Personen mit Skiausrüstung brauchen einen Kombi oder Kleinbus. Skier lassen sich übrigens oft günstiger über eine [Dachbox oder Skihalterung](../../posts/mietwagen-buchen-so-sparst-du/) transportieren, als ein größeres Auto zu mieten.
 
-## Trick 4: Voll zu voll und die Tankregel
+## Trick 4:<br>Voll zu voll und die Tankregel
 
 Die Tankregel ist der Klassiker der Mietwagen-Spartricks: Nimm den Tarif „voll zu voll" – du bekommst das Auto mit vollem Tank und gibst es voll wieder zurück. Der Vorteil: Du zahlst nur den Sprit, den du wirklich verbrauchst, und vermeidest die oft überteuerten Tank-Pakete der Vermieter (bis zu 2 Euro pro Liter Aufpreis).
 
 Die Regeln für den Winter: Die Tankstelle vor der Rückgabe suchen (nicht im Skigebiet –   
 dort sind die Preise oft 20 Cent höher), und den Beleg aufbewahren. Bei Kälte verbraucht das Auto übrigens mehr Sprit (Motorwarmlauf, Heizung, Licht) – plane den Tankbedarf großzügig.
 
-## Trick 5: Der richtige Buchungszeitpunkt
+## Trick 5:<br>Der richtige Buchungszeitpunkt
 
 Der beste Buchungszeitpunkt für Winter-Mietwagen: **6 bis 12 Wochen vor der Reise.** In diesem Fenster sind die Preise am niedrigsten – zu früh gebuchte Tarife sind oft teurer, weil die Vermieter die Flotten noch nicht rabattiert haben, und zu spät gebuchte Tarife steigen mit der Nachfrage.
 
@@ -72,7 +72,7 @@ hier gilt „je früher, desto besser", weil die Nachfrage die Preise treibt.
 
 Der [Mietwagen-Vergleich](../../posts/mietwagen-buchen-so-sparst-du/) zeigt dir Preise und Bedingungen auf einen Blick – und mit der kostenlosen Stornierung kannst du nachbuchen, falls der Preis fällt.
 
-## Trick 6: Die richtige Versicherungskombination
+## Trick 6:<br>Die richtige Versicherungskombination
 
 Die Versicherungs-Frage ist beim Winter-Mietwagen besonders wichtig – und teuer, wenn du unvorbereitet bist. Die Kombination, die sich lohnt:
 
@@ -82,14 +82,14 @@ Die Versicherungs-Frage ist beim Winter-Mietwagen besonders wichtig – und teue
 
 Wichtig: Die Winterreifen-Frage ist keine Versicherungsfrage – fehlende Winterreifen können die Versicherung im Schadensfall leistungsfrei machen.
 
-## Trick 7: Stornobedingungen nutzen
+## Trick 7:<br>Stornobedingungen nutzen
 
 Der letzte Trick ist die Flexibilität: Buche mit **kostenloser Stornierung** (bei den meisten Portalen Standard) und prüfe den Preis regelmäßig. Sinkt der Tarif, storniere und buche zum günstigeren Preis nach. Das Gleiche gilt, wenn sich deine Pläne ändern – ohne Storno-Gebühr bleibst du flexibel.
 
 Tipp: Auch die Tankregel und Zusatzfahrer solltest du vor der Buchung klären –   
 manche Portale berechnen für den zweiten Fahrer 5 bis 10 Euro pro Tag, andere inkludieren ihn. Beim [Mietwagen-Vergleich](../../posts/mietwagen-buchen-so-sparst-du/) siehst du die Bedingungen im Detail.
 
-## Winter-Mietwagen in Skigebieten: Die Spezialfälle
+## Winter-Mietwagen in Skigebieten:<br>Die Spezialfälle
 
 In Skigebieten gelten eigene Regeln – und die Schnäppchen-Logik kehrt sich teilweise um. Diese Spezialfälle solltest du kennen:
 

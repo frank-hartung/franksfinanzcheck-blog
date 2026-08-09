@@ -38,7 +38,7 @@ Router nutzen ab Werk meist den DNS-Server deines Internetanbieters. Das ist beq
 
 Ein weiterer Grund für einen Wechsel ist die Verlässlichkeit. Fällt der Server deines Providers aus, bleibt dein Bildschirm weiß – selbst wenn die physische Verbindung steht. Große Player wie Cloudflare oder Google betreiben eine gigantische Infrastruktur. Diese reagiert oft in wenigen Millisekunden und bietet eine deutlich höhere Stabilität als regionale Provider-Server.
 
-## Mein Selbstversuch: So habe ich den Wechsel vollzogen
+## Mein Selbstversuch:<br>So habe ich den Wechsel vollzogen
 
 Du brauchst kein IT-Studium für diesen Turbo-Boost. Ich habe den Prozess, den **DNS-Server wechseln** zu wollen, direkt in meiner FritzBox erledigt. Das hat den Vorteil, dass alle Geräte im Heimnetz – vom Laptop bis zum Smart-TV – sofort profitieren. Im Menü "Internet" unter dem Punkt "Zugangsdaten" findest du den Reiter für DNS-Server.
 
