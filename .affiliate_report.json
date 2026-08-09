@@ -1,7 +1,7 @@
 {
- "total": 66,
- "errors": 7,
- "fixed": 1,
+ "total": 78,
+ "errors": 12,
+ "fixed": 0,
  "posts": [
   {
    "slug": "frugalismus",
@@ -152,7 +152,7 @@
    "slug": "2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen",
    "title": "Energiekosten senken mit intelligenten Heizsysteme",
    "pillar": "strom-sparen",
-   "fixed": 1,
+   "fixed": 0,
    "errors": [],
    "infos": [],
    "ok": true
@@ -167,6 +167,17 @@
     "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
    "ok": true
+  },
+  {
+   "slug": "5g-home-router-oder-dsl",
+   "title": "5G-Home statt DSL: Für wen sich mobiles Internet l",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [
+    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4 (erwartet: DSL-Tarifvergleich)"
+   ],
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "7-gewohnheiten-finanzielle-freiheit",
@@ -258,12 +269,32 @@
    "ok": true
   },
   {
+   "slug": "etf-sparplan-fuer-kinder-depot-eröffnen",
+   "title": "ETF-Sparplan für Kinder: So legst du richtig an",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
    "slug": "festgeld-oder-tagesgeld-2026",
    "title": "Festgeld oder Tagesgeld? Wo dein Geld 2026 richtig",
    "pillar": "konto-karten",
    "fixed": 0,
    "errors": [
     "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)"
+   ],
+   "infos": [],
+   "ok": false
+  },
+  {
+   "slug": "flug-buchen-9-tricks-guenstige-tickets",
+   "title": "Flug buchen: 9 Tricks für günstige Flugtickets",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [
+    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10 (erwartet: Mietwagen-Vergleich)"
    ],
    "infos": [],
    "ok": false
@@ -298,6 +329,15 @@
    ],
    "infos": [],
    "ok": false
+  },
+  {
+   "slug": "glasfaser-dsl-kabel-anschluss-vergleich",
+   "title": "Glasfaser, DSL oder Kabel: Der Anschluss-Vergleich",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
   },
   {
    "slug": "guenstige-fluege-spaetsommer-finden",
@@ -367,6 +407,15 @@
    ],
    "infos": [],
    "ok": false
+  },
+  {
+   "slug": "internet-anbieter-wechseln-kuendigung",
+   "title": "Internetvertrag wechseln: Fristen, Sonderkündigung",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
   },
   {
    "slug": "kfz-versicherung-sf-klasse-erklaert",
@@ -452,6 +501,15 @@
    "ok": true
   },
   {
+   "slug": "mietwagen-im-winter-schnaeppchen-tricks",
+   "title": "Mietwagen im Winter: Die besten Schnäppchen-Tricks",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
    "slug": "monatsbudget-erstellen-schritt-fuer-schritt",
    "title": "Monatsbudget erstellen: Anleitung mit kostenloser ",
    "pillar": "frugalismus",
@@ -494,6 +552,17 @@
    "ok": true
   },
   {
+   "slug": "pauschalreise-buchen-bester-zeitpunkt",
+   "title": "Pauschalreise buchen: Wann ist der beste Zeitpunkt",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [
+    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10 (erwartet: Mietwagen-Vergleich)"
+   ],
+   "infos": [],
+   "ok": false
+  },
+  {
    "slug": "private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt",
    "title": "Private Unfallversicherung: Für wen sie sich wirkl",
    "pillar": "versicherungen",
@@ -530,14 +599,34 @@
    "ok": true
   },
   {
+   "slug": "reiseversicherung-richtig-kombinieren",
+   "title": "Reiseversicherung: Diese Kombination ist die richt",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [
+    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10 (erwartet: Mietwagen-Vergleich)"
+   ],
+   "infos": [],
+   "ok": false
+  },
+  {
    "slug": "riester-rente-2026-lohnt-sich",
-   "title": "Riester-Rente 2026: Weiterfördern oder kündigen?",
+   "title": "Riester Rente 2026 Weiterfördern oder kündigen die",
    "pillar": "versicherungen",
    "fixed": 0,
    "errors": [],
    "infos": [
     "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
+   "ok": true
+  },
+  {
+   "slug": "router-kaufen-oder-mieten-rechnung",
+   "title": "Router kaufen oder mieten: Was sich wirklich rechn",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
    "ok": true
   },
   {
@@ -597,6 +686,17 @@
    "ok": true
   },
   {
+   "slug": "urlaub-mit-kindern-guenstig-spartricks",
+   "title": "Urlaub mit Kindern: So sparst du 300 Euro pro Fami",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [
+    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10 (erwartet: Mietwagen-Vergleich)"
+   ],
+   "infos": [],
+   "ok": false
+  },
+  {
    "slug": "urlaubskasse-aufbessern-spartipps",
    "title": "Urlaubskasse aufbessern: 7 Spartipps für den Somme",
    "pillar": "mietwagen",
@@ -626,6 +726,15 @@
    "ok": true
   },
   {
+   "slug": "wlan-verbessern-ohne-neue-hardware",
+   "title": "WLAN verbessern: 12 Tipps ohne neue Hardware",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
    "slug": "wlan-verstaerker-vs-mesh-wlan",
    "title": "WLAN-Verstärker vs. Mesh-WLAN: Schnelles Internet ",
    "pillar": "internet-dsl",
@@ -641,6 +750,17 @@
    "fixed": 0,
    "errors": [],
    "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "zinseszinseffekt-formel-erklaert",
+   "title": "Zinseszinseffekt: Die Formel, die dein Geld vermeh",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
    "ok": true
   }
  ]

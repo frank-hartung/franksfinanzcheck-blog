@@ -1,20 +1,26 @@
 # 🔗 Affiliate-Link-Report
 
-> **Automatisch** – 66 Posts geprüft, 7 mit Problemen, 1 Links korrigiert.
+> **Automatisch** – 78 Posts geprüft, 12 mit Problemen, 0 Links korrigiert.
 
 ## Zusammenfassung
 
-- ✅ Korrekt: 59/66
-- ❌ Mit Problemen: 7
-- 🔧 Korrigiert (--fix): 1
+- ✅ Korrekt: 66/78
+- ❌ Mit Problemen: 12
+- 🔧 Korrigiert (--fix): 0
 
 ## ❌ Probleme
+
+### 5g-home-router-oder-dsl
+- ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4 (erwartet: DSL-Tarifvergleich)
 
 ### dispozinsen-verstehen-alternativen
 - ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)
 
 ### festgeld-oder-tagesgeld-2026
 - ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)
+
+### flug-buchen-9-tricks-guenstige-tickets
+- ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10 (erwartet: Mietwagen-Vergleich)
 
 ### gebuehrenfallen-banking-vermeiden
 - ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)
@@ -28,8 +34,17 @@
 ### nachtspeicherheizung-wechseln-oder-behalten
 - ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1 (erwartet: Stromtarif-Vergleich)
 
+### pauschalreise-buchen-bester-zeitpunkt
+- ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10 (erwartet: Mietwagen-Vergleich)
+
+### reiseversicherung-richtig-kombinieren
+- ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10 (erwartet: Mietwagen-Vergleich)
+
 ### sparquote-berechnen-und-steigern
 - ❌ KEIN Affiliate-Link vorhanden
+
+### urlaub-mit-kindern-guenstig-spartricks
+- ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10 (erwartet: Mietwagen-Vergleich)
 
 ## ℹ️ Generische Links (erlaubt, aber prüfen)
 
@@ -49,6 +64,7 @@
 - nebenverdienst-ideen-2026-zweites-standbein: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
 - riester-rente-2026-lohnt-sich: Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
 - versicherungen-kuendigen-diese-5-policen: Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
+- zinseszinseffekt-formel-erklaert: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
 
 ---
 *Erzeugt von scripts/affiliate_link_check.py*
