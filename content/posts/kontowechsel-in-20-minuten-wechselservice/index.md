@@ -13,7 +13,7 @@ ai_provider: "Manuell (Masterplan Blueprint 11)"
 kurzantwort: "Ein Kontowechsel dauert mit dem kostenlosen Wechselservice nur etwa 20 Minuten: Du eröffnest das neue Konto online, beauftragst den Service, und der zieht alle Daueraufträge, Lastschriften und Zahlungseingänge automatisch um. Wer ein gebührenpflichtiges Konto gegen ein kostenloses tauscht, spart 50 bis 200 Euro pro Jahr."
 cover:
   image: "images/covers/kontowechsel-in-20-minuten-wechselservice.jpg"
-  alt: "Kontowechsel in 20 Minuten: So funktioniert der Wechselservice"
+  alt: "Kontowechsel in 20 Minuten: Der Wechselservice erklärt"
   caption: "Tipp von FranksFinanzcheck"
 ---Zahlst du monatlich für dein Girokonto? Du verschenkst damit jedes Jahr bis zu 200 € an deine Bank. Dein Girokonto dient als Schaltzentrale für deine Finanzen. Dennoch lassen viele Menschen hier unnötig Geld liegen.
 

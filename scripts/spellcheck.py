@@ -434,6 +434,12 @@ def analyze_article(a, whitelist):
         if _ist_abkuerzungsende(body_masked[max(0, m.start() - 40):m.start(1)]):
             continue
         pos = m.start(2)
+        # Beginnt der Satz mit einem Markdown-Link (Link zwischen Satzende und
+        # Wort maskiert)? Dann ist der Ankertext der Satzanfang (in der Regel
+        # groß geschrieben) → kein Fehler, sonst False Positive wie
+        # „…Rechnung. [Eigene Router](../../posts/…) gibt es ab 150 Euro…“
+        if any(s > m.start(1) and s < pos for s, e in mask_intervals):
+            continue
         wort = _satzanfang_wort(pos)
         if not wort or wort.lower() in SATZANFANG_MARKEN:
             continue
