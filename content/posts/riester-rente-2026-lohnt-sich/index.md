@@ -36,10 +36,10 @@ Dafür gilt: Das Geld ist bis zum Rentenalter gebunden, wird bei Auszahlung best
 
 Die Bundesregierung hat eine Riester-Reform auf den Weg gebracht, die das System grundlegend vereinfachen soll. Die wichtigsten Änderungen, Stand 2026:
 
-- **Neue Produkttypen:** Riester wird für mehr Anbieter und Produkte geöffnet, auch reine Fondssparpläne ohne Garantie werden erlaubt – das verspricht höhere Renditen.
-- **Kostenbremse:** Die Abschluss- und Verwaltungskosten werden gedeckelt, damit mehr vom Gesparten ankommt.
-- **Vereinfachung:** Die komplizierte Günstigerprüfung soll entfallen, die Förderung wird einfacher und transparenter.
-- **Bestandsschutz:** Bestehende Verträge bleiben gültig – du kannst sie weiterführen, anpassen oder wechseln.
+- **neue Produkttypen:** Riester wird für mehr Anbieter und Produkte geöffnet, auch reine Fondssparpläne ohne Garantie werden erlaubt – das verspricht höhere Renditen.
+- **Kostenbremse:** die Abschluss- und Verwaltungskosten werden gedeckelt, damit mehr vom Gesparten ankommt.
+- **Vereinfachung:** die komplizierte Günstigerprüfung soll entfallen, die Förderung wird einfacher und transparenter.
+- **Bestandsschutz:** bestehende Verträge bleiben gültig – du kannst sie weiterführen, anpassen oder wechseln.
 
 Wichtig: Die Reform ist ein laufender Gesetzgebungsprozess. Die genauen Konditionen können sich bis zum Inkrafttreten ändern – Stand heute gilt: Abwarten und die bestehende Förderung mitnehmen, bis die Details feststehen, ist oft die klügste Strategie.
 
@@ -47,9 +47,9 @@ Wichtig: Die Reform ist ein laufender Gesetzgebungsprozess. Die genauen Konditio
 
 Riester lohnt sich vor allem für die Gruppen, die die vollen Zulagen kassieren:
 
-**Familien mit Kindern:** Die Kinderzulagen machen Riester für Eltern besonders attraktiv. Ein Paar mit zwei Kindern, das den Mindestbeitrag zahlt, bekommt jährlich 175 + 175 + 185 + 185 = 720 Euro Zulagen – bei einem Eigenbeitrag von 2.100 Euro sind das über 34 Prozent Sofortrendite. Das schlägt fast jede andere Anlage.
+**Familien mit Kindern:** die Kinderzulagen machen Riester für Eltern besonders attraktiv. Ein Paar mit zwei Kindern, das den Mindestbeitrag zahlt, bekommt jährlich 175 + 175 + 185 + 185 = 720 Euro Zulagen – bei einem Eigenbeitrag von 2.100 Euro sind das über 34 Prozent Sofortrendite. Das schlägt fast jede andere Anlage.
 
-**Geringverdiener:** Wer wenig verdient und wenig Steuern zahlt, profitiert von den Zulagen am stärksten – die Förderquote (Zulagen im Verhältnis zum Eigenbeitrag) ist hier am höchsten.
+**Geringverdiener:** wer wenig verdient und wenig Steuern zahlt, profitiert von den Zulagen am stärksten – die Förderquote (Zulagen im Verhältnis zum Eigenbeitrag) ist hier am höchsten.
 
 **Menschen, die diszipliniert sparen wollen:** Riester zwingt zum Sparen, weil die Förderung an den Mindestbeitrag gebunden ist. Wer ohne Riester ohnehin nicht sparen würde, nutzt den Vertrag als Sparzwang mit Bonus.
 
@@ -57,7 +57,7 @@ Riester lohnt sich vor allem für die Gruppen, die die vollen Zulagen kassieren:
 
 Die Kehrseite: Für viele andere ist Riester ein schwaches Produkt.
 
-**Alleinstehende ohne Kinder mit gutem Einkommen:** Die Grundzulage von 175 Euro ist im Verhältnis zum Mindestbeitrag (4 Prozent des rentenversicherungspflichtigen Einkommens, rund 1.750 bis 2.100 Euro) gering. Bei höheren Steuersätzen hilft der Steuervorteil, aber die Kosten und die schlechte Rendite vieler Verträge fressen den Vorteil oft auf.
+**Alleinstehende ohne Kinder mit gutem Einkommen:** die Grundzulage von 175 Euro ist im Verhältnis zum Mindestbeitrag (4 Prozent des rentenversicherungspflichtigen Einkommens, rund 1.750 bis 2.100 Euro) gering. Bei höheren Steuersätzen hilft der Steuervorteil, aber die Kosten und die schlechte Rendite vieler Verträge fressen den Vorteil oft auf.
 
 **Verträge mit hohen Kosten:** Ältere Versicherungs-Riesterverträge mit 5 Prozent Abschlusskosten und jährlicher Verwaltungsgebühr sind schwer zu retten. Eine ehrliche Kostenanalyse zeigt oft: Ein [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) hätte deutlich mehr erwirtschaftet.
 

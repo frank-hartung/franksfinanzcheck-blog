@@ -30,22 +30,22 @@ Die Konsequenz: Vergleiche immer denselben Verbrauchswert auf demselben Portal �
 
 ## Die 4 wichtigsten Kennzahlen
 
-**Arbeitspreis (Cent pro kWh):** Der Preis pro verbrauchter Kilowattstunde. Der wichtigste Wert – aber nicht der einzige. Je höher dein Verbrauch, desto wichtiger wird der Arbeitspreis.
+**Arbeitspreis (Cent pro kWh):** der Preis pro verbrauchter Kilowattstunde. Der wichtigste Wert – aber nicht der einzige. Je höher dein Verbrauch, desto wichtiger wird der Arbeitspreis.
 
-**Grundpreis (Euro pro Monat):** Die fixe Gebühr, die du unabhängig vom Verbrauch zahlst. Sie deckt Zähler, Messstelle und Abrechnung. Bei niedrigem Verbrauch kann ein höherer Arbeitspreis mit niedrigerem Grundpreis günstiger sein.
+**Grundpreis (Euro pro Monat):** die fixe Gebühr, die du unabhängig vom Verbrauch zahlst. Sie deckt Zähler, Messstelle und Abrechnung. Bei niedrigem Verbrauch kann ein höherer Arbeitspreis mit niedrigerem Grundpreis günstiger sein.
 
-**Boni (Sofortbonus, Neukundenbonus):** Einmalige Rabatte, oft gestaffelt: Sofortbonus bei Vertragsbeginn, Neukundenbonus nach 12 Monaten. Sie senken den effektiven Jahrespreis – aber Achtung: Boni werden oft nur bei pünktlicher Zahlung und nur im ersten Jahr gewährt.
+**Boni (Sofortbonus, Neukundenbonus):** einmalige Rabatte, oft gestaffelt: Sofortbonus bei Vertragsbeginn, Neukundenbonus nach 12 Monaten. Sie senken den effektiven Jahrespreis – aber Achtung: Boni werden oft nur bei pünktlicher Zahlung und nur im ersten Jahr gewährt.
 
-**Preisgarantie (Monate):** Die Zusage, den Arbeitspreis für eine bestimmte Zeit nicht zu erhöhen. 12 Monate sind Standard, 24 Monate besser. Ohne Garantie kann der Preis auch im ersten Jahr steigen.
+**Preisgarantie (Monate):** die Zusage, den Arbeitspreis für eine bestimmte Zeit nicht zu erhöhen. 12 Monate sind Standard, 24 Monate besser. Ohne Garantie kann der Preis auch im ersten Jahr steigen.
 
 ## Versteckte Kosten erkennen
 
 Der Teufel steckt im Detail. Diese Punkte übersehen viele beim Vergleichen:
 
-- **Bonuszahlung an Bedingungen geknüpft:** Manche Boni gibt es nur bei online-Zahlung oder wenn du keine Mahnung bekommst.
+- **Bonuszahlung an Bedingungen geknüpft:** manche Boni gibt es nur bei online-Zahlung oder wenn du keine Mahnung bekommst.
 - **Kündigungsfrist:** Tarife mit 24 Monaten Laufzeit sind oft günstiger – aber binden dich. Wer flexibel bleiben will, nimmt 12 Monate oder eine 1-Monats-Kündigung.
-- **Preisanpassungsklauseln:** Ohne Preisgarantie kann der Anbieter den Preis anpassen – nach oben wie nach unten.
-- **Unerwünschte Zusatzleistungen:** Manche Tarife enthalten kostenpflichtige Extras wie „StromGarant" oder Service-Pakete, die du gar nicht brauchst.
+- **Preisanpassungsklauseln:** ohne Preisgarantie kann der Anbieter den Preis anpassen – nach oben wie nach unten.
+- **unerwünschte Zusatzleistungen:** manche Tarife enthalten kostenpflichtige Extras wie „Strom Garant" oder Service-Pakete, die du gar nicht brauchst.
 - **Vorkasse-Modelle:** Einige günstige Tarife verlangen Vorkasse. Das bindet Kapital und ist bei unseriösen Anbietern riskant.
 
 Prüfe immer das Kleingedruckte – oder wähle Tarife mit Preisgarantie und seriösem Anbieter-Hintergrund.
