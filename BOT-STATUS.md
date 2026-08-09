@@ -1,17 +1,16 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 08.08.2026 21:15 Uhr (MESZ)
+> Automatisch aktualisiert: 09.08.2026 08:21 Uhr (MESZ)
 
 ## Heutiger Stand
 
-- **Veröffentlicht heute:** 2/2 Artikel
-- 2026-08-08-dein-tier-im-krankheitsfall – Tierversicherung: Schutz für dein Tier im Krankheitsfall
-- 2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen – Stromtarif für Wärmepumpe: So sparst du beim Heizen
+- **Veröffentlicht heute:** 1/2 Artikel
+- 2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau – Depot 2026: Dein smarter Start in den Vermögensaufbau
 
 ## System
 
-- **Themenpool:** 132 Themen, **92 frei**
-- **Letzter Content-Commit:** noch keiner
+- **Themenpool:** 149 Themen, **109 frei**
+- **Letzter Content-Commit:** b6dcfc6 2026-08-09 content: neuer Artikel sofort optimiert (Meta, interne Verlinkung)
 - **Tageslimit:** 2 (steuerbar per Variable MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen
