@@ -1,57 +1,17 @@
 # ============================================================
 #  AUTOMATISCHE CONTENT-GENERIERUNG (Vollautomatik, kostenlos)
 #
-#  POSTS PRO TAG (vorbereitet für bis zu 4, aktuell 2):
-#    - 4 Veröffentlichungs-Zeitfenster eingerichtet: 08:10, 12:10,
-#      16:10 und 19:40 Uhr MESZ (+ Fallback-Crons gegen Ausfälle).
-#    - AKTUELL (August 2026): 2 Posts/Tag – gesteuert über die
-#      Repository-Variable MAX_ARTIKEL_PRO_TAG (Default "2").
-#      → Umstellung auf 4 Posts/Tag: GitHub → Settings → Secrets and
-#        variables → Actions → Variable MAX_ARTIKEL_PRO_TAG = "4"
-#        (kein Code-Change nötig).
-#    - Der Guard im Skript zählt die heute veröffentlichten Artikel
-#      und stoppt, sobald das Limit erreicht ist (auch bei doppelt
-#      ausgelösten/nachgeholten Crons).
-#
-#  ROBUSTHEITS-ARCHITEKTUR (seit 08/2026):
-#    PHASE 1 – Generieren & SOFORT veröffentlichen:
-#      Sobald die KI einen Artikel erzeugt hat, wird er IMMEDIAT
-#      committet und gepusht (draft: false). Kein Qualitäts-Gate kann
-#      den Artikel danach noch aufhalten – er ist live.
-#    PHASE 2 – Qualitäts-Kette (weich, continue-on-error):
-#      Polish, Rechtschreibung, Grammatik, Profi-/Lesbarkeits-Gate,
-#      Cover, Einzigartigkeit. Fehler werden geloggt, ABER stoppen den
-#      Workflow NICHT (z. B. LanguageTool-Rate-Limit, Readability 74).
-#      Fixes landen in einem Folge-Commit.
-#    PHASE 3 – Sofort-Optimierung (weich): Meta, interne Links, IndexNow.
-#    concurrency: parallele/nachgeholte Crons werden serialisiert
-#      (verhindert git-push-Konflikte und Doppel-Artikel).
-#
-#  Selbstheilend: Themenpool wird von der KI nachgefüllt, wenn er leer
-#  läuft (scripts/generate_drafts.py → refill_topics). Der Workflow
-#  schlägt NUR fehl, wenn die KI GAR keinen Artikel erzeugen kann
-#  (exit 1 → alert-on-failure benachrichtigt).
-#
-#  Manuell starten: GitHub → Actions → "Automatische Content-Generierung"
-#  → "Run workflow".  |  Stoppen: Workflow deaktivieren (Kill-Switch).
+#  ⚠️ SEIT 09.08.2026 DEAKTIVIERT (nur noch manuell startbar):
+#  Abgelöst durch "Content-Engine v2" (.github/workflows/content-engine-v2.yml),
+#  die die 2 kritischen Fehler dieser Version behebt:
+#    1) Deploy-Trigger crashte (execSync-Import fehlte) → Artikel wurden
+#       nie deployed.
+#    2) Kein Fallback bei schwacher KI → 0 Artikel pro Tag.
+#  → Die Engine v2 läuft automatisch über dieselben Crons.
 # ============================================================
 name: Automatische Content-Generierung
 
 on:
-  schedule:
-    # 4 VERÖFFENTLICHUNGS-ZEITEN (je 1 Artikel pro Lauf, Limit 4/Tag):
-    - cron: "10 6 * * *"    # 08:10 Uhr MESZ (nach den Morgen-Pins 08:00)
-    - cron: "10 10 * * *"   # 12:10 Uhr MESZ
-    - cron: "10 14 * * *"   # 16:10 Uhr MESZ
-    - cron: "40 17 * * *"   # 19:40 Uhr MESZ (nach den Abend-Pins 19:30)
-    # Fallback-Zeiten (GitHub kann geplante Läufe verzögern/verwerfen –
-    #  durch mehrere Crons wird sichergestellt, dass alle 4 Artikel
-    #  trotzdem erscheinen. Das Skript prüft selbst: max. 4 pro Tag.)
-    - cron: "10 8 * * *"    # 10:10 Uhr MESZ (Fallback)
-    - cron: "10 12 * * *"   # 14:10 Uhr MESZ (Fallback)
-    - cron: "10 16 * * *"   # 18:10 Uhr MESZ (Fallback)
-    - cron: "10 19 * * *"   # 21:10 Uhr MESZ (Fallback)
-    - cron: "10 20 * * *"   # 22:10 Uhr MESZ (Fallback)
   workflow_dispatch: {}
 
 permissions:

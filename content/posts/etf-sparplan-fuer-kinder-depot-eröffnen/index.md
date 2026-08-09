@@ -108,7 +108,15 @@ Ja – Wertpapiere sind Sondervermögen: Selbst bei einer Broker-Insolvenz gehö
 **Können auch Großeltern einzahlen?**
 Ja, und das ist sogar steuerlich clever: Schenkungen an Enkel sind bis 200.000 Euro pro Person und 10 Jahre steuerfrei. Die Einzahlung läuft einfach per Überweisung auf das Verrechnungskonto des Kinderdepots.
 
+<<<<<<< HEAD
 Der ETF-Sparplan für Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die [Steuern auf ETF-Gewinne](../../posts/freistellungsauftrag-optimal-nutzen/) erklären, wie du den Pauschbetrag maximal ausschöpfst. Alle Banking-Themen: [Ratgeber Konto & Karten](../../pillar/konto-karten/).
+=======
+<<<<<<< HEAD
+Der ETF-Sparplan für Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die [Steuern auf ETF-Gewinne](../../posts/freistellungsauftrag-optimal-nutzen/) erklären, wie du den Pauschbetrag maximal ausschöpfst. Alle Banking-Themen: [Ratgeber Konto & Karten](../../pillar/konto-karten/).
+=======
+Der ETF-Sparplan für Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die [Steuern auf ETF-Gewinne](../../posts/freistellungsauftrag-optimal-nutzen/) erklären, wie du den Pauschbetrag maximal ausschöpfst. Alle Banking-Themen: [Ratgeber Konto & Karten](../../pillar/konto-karten/).
+>>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
+>>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
 
 👉 **Jetzt kostenloses Konto mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
 

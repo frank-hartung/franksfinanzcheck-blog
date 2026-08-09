@@ -6,7 +6,15 @@ draft: false
 tags: ["Impulskäufe", "Sparen", "Konsum"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
+<<<<<<< HEAD
 keywords: ["Impulskäufe vermeiden", "unnötige Ausgaben stoppen", "Kaufimpulse kontrollieren", "[Geld sparen](../../posts/versicherungen-kuendigen-diese-5-poli/) im Alltag"]
+=======
+<<<<<<< HEAD
+keywords: ["Impulskäufe vermeiden", "unnötige Ausgaben stoppen", "Kaufimpulse kontrollieren", "[Geld sparen](../../posts/versicherungen-kuendigen-diese-5-poli/) im Alltag"]
+=======
+keywords: ["Impulskäufe vermeiden", "unnötige Ausgaben stoppen", "Kaufimpulse kontrollieren", "[Geld sparen](../../posts/versicherungen-kuendigen-diese-5-policen/) im Alltag"]
+>>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
+>>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
 author: "Frank"
 ai_generated: true
 ai_provider: "Manuell (Masterplan Blueprint 2)"
@@ -88,7 +96,15 @@ Verzicht fühlt sich oft nach harter Arbeit an und führt irgendwann zu Frust-K�
 
 Gleichzeitig solltest du dir Belohnungen suchen, die kein Geld kosten. Ein langer Abend mit einem guten Buch oder ein Besuch im Park schenken oft mehr Freude. Wenn du lernst, Glück nicht über Konsum zu definieren, verlierst du das Interesse an Impulskäufen.
 
+<<<<<<< HEAD
 Nutze das gesparte Geld für deine langfristige Sicherheit. Ein solider [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) gibt dir mehr Ruhe als jedes neue Gadget. Auch ein automatisierter [ETF-Sparplan](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) sorgt dafür, dass dein Geld für dich arbeitet, statt in dunklen Kanälen zu versickern.
+=======
+<<<<<<< HEAD
+Nutze das gesparte Geld für deine langfristige Sicherheit. Ein solider [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) gibt dir mehr Ruhe als jedes neue Gadget. Auch ein automatisierter [ETF-Sparplan](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) sorgt dafür, dass dein Geld für dich arbeitet, statt in dunklen Kanälen zu versickern.
+=======
+Nutze das gesparte Geld für deine langfristige Sicherheit. Ein solider [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) gibt dir mehr Ruhe als jedes neue Gadget. Auch ein automatisierter [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) sorgt dafür, dass dein Geld für dich arbeitet, statt in dunklen Kanälen zu versickern.
+>>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
+>>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
 
 ## Der 30-Tage-Plan gegen Impulskäufe
 

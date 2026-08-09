@@ -1,0 +1,223 @@
+# ============================================================
+#  CONTENT-ENGINE v2 (Autonome Content-Automatisierung, Top-Level)
+#
+#  WARUM NEU (08/2026): Die alte Automatisierung (daily-content.yml)
+#  hatte 2 kritische Fehler:
+#    1) Deploy-Trigger crashte (execSync ohne Import in
+#       actions/github-script@v7) -> Artikel wurden committet, aber
+#       NIE deployed.
+#    2) Bei schwacher KI-Antwort: "3 Versuche ohne Profi-Niveau ->
+#       Artikel wird übersprungen" -> 0 Artikel für den Tag.
+#
+#  LÖSUNG (Content-Engine v2):
+#    - 3-Ebenen-Fallback (Profi -> Relaxed -> Draft-Rettung):
+#      NIE ein Tag ohne neuen Artikel.
+#    - Multi-Modell-Rotation (Gemini <-> Groq) gegen Provider-Schwäche.
+#    - Deploy-Trigger mit korrektem execSync-Import.
+#    - ENGINE-STATUS.md Dashboard + Fehler-Alerting bei Komplettausfall.
+#
+#  Zeitfenster: 4 Haupt-Crons + Fallbacks (wie gehabt), Limit 2-4/Tag
+#  via Variable MAX_ARTIKEL_PRO_TAG (Default 2).
+# ============================================================
+name: Content-Engine v2
+
+on:
+  schedule:
+    - cron: "10 6 * * *"     # 08:10 MESZ
+    - cron: "10 10 * * *"    # 12:10 MESZ
+    - cron: "10 14 * * *"    # 16:10 MESZ
+    - cron: "40 17 * * *"    # 19:40 MESZ
+    - cron: "10 8 * * *"     # Fallback 10:10 MESZ
+    - cron: "10 12 * * *"    # Fallback 14:10 MESZ
+    - cron: "10 16 * * *"    # Fallback 18:10 MESZ
+    - cron: "10 19 * * *"    # Fallback 21:10 MESZ
+    - cron: "10 20 * * *"    # Fallback 22:10 MESZ
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  actions: write
+  issues: write
+
+concurrency:
+  group: content-bot
+  cancel-in-progress: false
+
+jobs:
+  engine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      # ================= PHASE 0: PRE-FLIGHT =================
+      - name: Pre-Flight-Check (Syntax, Keys, Themenpool)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/bot_preflight.py
+          echo "PREFLIGHT_OK=true" >> "$GITHUB_ENV"
+
+      # ================= PHASE 1: GENERIEREN (Multi-Fallback) =================
+      - name: Phase 1 – Artikel generieren (Engine v2, 3 Ebenen)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
+          AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
+          MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '2' }}
+          PIN_TOPICS: "1"
+        run: python3 scripts/engine_generate.py
+
+      - name: Phase-1-Commit – sofort veröffentlichen (auch Entwürfe)
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Kein neuer Artikel – nichts zu committen."
+            echo "ARTIKEL_ERSTELLT=false" >> "$GITHUB_ENV"
+          else
+            git commit -m "content: neuer Artikel automatisch generiert und veröffentlicht"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+            echo "✅ Phase-1-Commit: Artikel (oder Entwurf) veröffentlicht"
+            echo "ARTIKEL_ERSTELLT=true" >> "$GITHUB_ENV"
+          fi
+
+      # ================= PHASE 2: QUALITÄTS-KETTE (weich) =================
+      - name: Phase 2 – Qualitäts-Kette (Polish, Gates, Cover)
+        if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          echo "== Profi-Polish (KI) =="
+          python3 scripts/profi_polish.py --new || echo "⚠ Polish-Fehler (nicht kritisch)"
+          echo "== Rechtschreibung =="
+          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
+          python3 scripts/spellcheck.py --fix || echo "⚠ Spellcheck-Fehler (nicht kritisch)"
+          echo "== Grammatik =="
+          python3 scripts/grammar_check.py --fix --new-only || echo "⚠ Grammatik-Fehler (nicht kritisch)"
+          echo "== Profi-Text-Gate =="
+          python3 scripts/profi_text_check.py --new-only || echo "⚠ Profi-Gate (nicht blockierend)"
+          echo "== Lesbarkeit =="
+          python3 scripts/readability_check.py --new-only || echo "⚠ Lesbarkeit (nicht blockierend)"
+          echo "== Cover generieren =="
+          pip install -q pillow pillow-avif-plugin
+          python3 scripts/generate_covers.py || echo "⚠ Cover-Fehler (nicht kritisch)"
+          echo "== Einzigartigkeit =="
+          python3 scripts/check_uniqueness.py || echo "⚠ Uniqueness (nicht blockierend)"
+          echo "== Affiliate-Links (auto-korrigieren) =="
+          python3 scripts/affiliate_link_check.py --fix || echo "⚠ Affiliate-Check (nicht blockierend)"
+          echo "== Cover-Validierung (auto-nachziehen) =="
+          python3 scripts/check_covers.py --fix || echo "⚠ Cover-Varianten (nicht blockierend)"
+          echo "== Kurzantworten (Featured-Snippet-Box) =="
+          python3 scripts/generate_kurzantworten.py || echo "⚠ Kurzantworten (nicht kritisch)"
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Qualitäts-Fixes."
+          else
+            git commit -m "content: Qualitäts-Fixes (Rechtschreibung, Grammatik, Cover, Polish)"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+            echo "✅ Folge-Commit: Qualitäts-Fixes gepusht"
+          fi
+
+      # ================= PHASE 3: SOFORT-OPTIMIERUNG =================
+      - name: Phase 3 – Meta-Optimierung & interne Links
+        if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/meta_optimizer.py --fix --ai || echo "⚠ Meta-Fehler (nicht kritisch)"
+          python3 scripts/internal_linker.py --apply --max 5 || echo "⚠ Linker-Fehler (nicht kritisch)"
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Optimierungs-Änderungen."
+          else
+            git commit -m "content: neuer Artikel sofort optimiert (Meta, interne Verlinkung)"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+            echo "✅ Optimierungs-Commit gepusht"
+          fi
+
+      - name: Phase 3 – IndexNow-Ping
+        if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
+        continue-on-error: true
+        run: python3 scripts/submit_indexnow.py || echo "⚠ IndexNow-Fehler (nicht kritisch)"
+
+      # ================= PHASE 4: DEPLOY ANSTOSSEN (FIXED!) =================
+      # FIX: execSync MUSS explizit importiert werden (github-script@v7 hat
+      # es nicht mehr im globalen Kontext – das crashte die alte Version).
+      - name: Phase 4 – Deploy-Workflow anstoßen
+        if: ${{ !cancelled() }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            const last = execSync('git log -1 --format=%s').toString().trim();
+            const isContent = last.startsWith('content:');
+            if (!isContent) {
+              console.log('Kein Content-Commit in diesem Lauf – kein Deploy nötig.');
+              return;
+            }
+            console.log('Content-Commit gefunden – stoße Deploy-Workflow an …');
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy.yml',
+              ref: 'main',
+            });
+            console.log('✅ Deploy-Workflow ausgelöst.');
+
+      # ================= PHASE 5: STATUS-DASHBOARD =================
+      - name: Phase 5 – Status-Dashboards aktualisieren
+        if: ${{ always() }}
+        env:
+          MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '2' }}
+        run: |
+          python3 scripts/bot_status.py || true
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add BOT-STATUS.md ENGINE-STATUS.md
+          if git diff --cached --quiet; then
+            echo "Status unverändert."
+          else
+            git commit -m "chore: Bot-Status aktualisiert"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+          fi
+
+      # ================= WATCHDOG-INFO (nur bei Draft-Rettung) =================
+      - name: Hinweis bei Entwurf (Draft-Rettung aktiv)
+        if: ${{ env.ARTIKEL_ERSTELLT == 'true' && !cancelled() }}
+        continue-on-error: true
+        run: |
+          if grep -q "Entwurf gesichert" ENGINE-STATUS.md; then
+            echo "⚠ Ein Artikel wurde als ENTWURF gesichert (Profi-Gate nicht erreicht)."
+            echo "→ Issue-Erstellung (Dedupe):"
+            python3 - <<'EOF'
+            import json, os, urllib.request
+            token = os.environ.get("GITHUB_TOKEN", "")
+            api = "https://api.github.com/repos/" + os.environ.get("GITHUB_REPOSITORY", "") + "/issues"
+            body = "Die Content-Engine v2 hat einen Artikel nur als ENTWURF sichern können.\n\nDetails: siehe ENGINE-STATUS.md\n\nBitte prüfen und ggf. freigeben (draft: false setzen)."
+            req = urllib.request.Request(api, data=json.dumps({"title": "⚠ Content-Engine: Entwurf wartet auf Freigabe", "body": body}).encode(),
+                                         headers={"Authorization": f"token {token}", "Accept": "application/vnd.github+json"}, method="POST")
+            try:
+                with urllib.request.urlopen(req, timeout=20) as r:
+                    print("Issue erstellt:", r.status)
+            except Exception as e:
+                print("Issue-Fehler (nicht kritisch):", e)
+            EOF
+          else
+            echo "Kein Entwurf – alles gut."
+          fi
