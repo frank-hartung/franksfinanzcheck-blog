@@ -1,81 +1,209 @@
 #!/usr/bin/env python3
-"""fix_linebreaks.py – VOLLAUTOMATISCHER ZEILENUMBRUCH-GENERATOR (PROFI-LEVEL)
+"""fix_linebreaks.py – VOLLAUTOMATISCHER ZEILENUMBRUCH-GENERATOR (PROFI-LEVEL, KI-ENTSCHEIDER)
 
-Entscheidet SELBST, ob ein Zeilenumbruch sinnvoll ist – und ist
-SELBSTHEILEND (idempotent + Rückbau unpassender Umbrüche).
+Der Generator entscheidet SELBST per KI, ob ein Zeilenumbruch sinnvoll ist –
+OHNE Wortlisten-Heuristiken („alle bisherigen Sonderregelungen entfernt").
 
-WAS ER KANN:
-  A) GEDANKENSTRICH-NACHSATZ: Nach „ – " im normalen Fließtext wird ein
-     Markdown-Hard-Break (2 Spaces + Newline) gesetzt, wenn ein
-     erläuternder Nachsatz folgt („die, der, das, ein, wer, was, …").
-     Kein Umbruch bei Fortsetzungen („und, oder, für, mit, z. B., …").
-  B) ÜBERSCHRIFTEN-DOPPELPUNKT: In H2/H3 wird nach „:" ein <br> gesetzt,
-     wenn ein nicht-klein beginnender Untertitel folgt.
-  C) SELBSTHEILUNG: Umbrüche in unpassenden Kontexten (FAQ-Antworten,
-     Listenelemente, Tabellen, Code, Blockquotes) werden erkannt und
-     zurückgebaut; bereits korrekt gesetzte bleiben (idempotent).
-  D) ENTSCHEIDUNG: Kontext-Erkennung (FAQ-Bereich, Listen, Tabellen,
-     Code, Überschriften, Blockquotes) + Wortlisten für Nachsatz vs.
-     Fortsetzung + Großschreibungs-Check.
+WIE ER ARBEITET:
+  1) KANDIDATEN SAMMELN: Alle „ – "-Stellen im Fließtext (auch bereits
+     umgebrochene Zeilen werden als Kandidaten mit „aktuell umgebrochen"
+     markiert) – die KI entscheidet über jeden einzelnen.
+  2) KI-ENTSCHEIDUNG (Groq/Gemini, Batch pro Datei): Jeder Kandidat wird
+     mit Kontext (Satz vor/nach dem Gedankenstrich) präsentiert. Die KI
+     antwortet pro Kandidat mit „ja" (Umbruch sinnvoll) oder „nein".
+  3) ANWENDEN: „ja" → Hard-Break (2 Spaces + Newline) setzen bzw. behalten;
+     „nein" → zurückbauen (Zeilen zusammenführen).
+  4) SELBSTHEILUNG (deterministisch, ohne KI): Umbrüche in technisch
+     unpassenden Kontexten werden IMMER zurückgebaut – FAQ-Antworten
+     (FAQPage-JSON-LD!), Listenelemente, Tabellen, Inline-Code,
+     Blockquotes. Diese Kontexte sind keine „Geschmacks-Sonderregeln",
+     sondern technisch zwingend (sonst bricht das Schema/HTML).
+  5) FALLBACK OHNE KI (kein API-Key/Fehler): Keine neuen Umbrüche, aber
+     die Selbstheilung in Schutzkontexten läuft weiter – der Blog bleibt
+     immer konsistent.
 
-Aufruf:  python3 scripts/fix_linebreaks.py            (alle Dateien)
-         python3 scripts/fix_linebreaks.py --dry-run  (nur anzeigen)
+Aufruf:  python3 scripts/fix_linebreaks.py             (alle Dateien)
+         python3 scripts/fix_linebreaks.py --dry-run   (nur anzeigen)
+         python3 scripts/fix_linebreaks.py --file X    (eine Datei)
 """
 import glob
+import json
 import os
 import re
 import sys
+import time
+import urllib.error
+import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# ---------------- Wortlisten (Entscheidungslogik) ----------------
-NACHSATZ_WORDS = (
-    "die der das ein eine einer einem einen wer was wem wen man es "
-    "sprich konkret genau wichtig entscheidend dabei außerdem zudem "
-    "nämlich deshalb darum deswegen kurz kurzum letztlich letztendlich "
-    "so dann damit hier dort alles nichts viel mehr weniger besser "
-    "schlechter günstiger teurer schneller langsamer einfacher "
-    "schwieriger sinnvoll ratsam empfehlenswert viele einige manche "
-).split()
-NACHSATZ_PHRASES = ("das heißt", "der Trick", "die Regel", "die Idee", "der Unterschied",
-    "der Vorteil", "der Nachteil", "das Ergebnis", "das Fazit", "der Schlüssel",
-    "die Antwort", "die Lösung", "die Wahrheit", "die Sache", "das Ganze",
-    "die meisten", "die wenigsten", "am Ende", "im Kern")
-KEIN_WORDS = (
-    "und oder aber denn doch jedoch sowie auch nicht kein keine keinen "
-    "keinem nie immer oft meist manchmal wirklich eigentlich eben ja nein "
-    "für mit von bei auf zu um aus nach über unter vor bis an in im zum "
-    "zur vom beim gegen ohne durch zwischen wegen als wie wenn weil dass "
-    "damit obwohl während seit ab außer trotz laut dank je pro plus minus "
-    "mal etwa rund ungefähr fast nur gerade schon noch bereits erst"
-).split()
-KEIN_PHRASES = ("z. B.", "zum Beispiel", "eine Provision", "ein paar", "ein wenig",
-    "ein bisschen", "viele Jahre")
-
-_NACH = sorted(set(NACHSATZ_WORDS) | set(NACHSATZ_PHRASES), key=len, reverse=True)
-_KEIN = sorted(set(KEIN_WORDS) | set(KEIN_PHRASES), key=len, reverse=True)
-
-RE_NACHSATZ = re.compile(r" \u2013 (" + "|".join(re.escape(w) for w in _NACH) + r")(?![a-zäöüß])")
-RE_KEIN = re.compile(r" \u2013 (" + "|".join(re.escape(w) for w in _KEIN) + r")(?![a-zäöüß])")
 RE_FAQ_START = re.compile(
     r"^#{1,2}\s*(Häufige Fragen|Häufig gestellte Fragen|Häufige Fragen \(FAQ\)|FAQ)\s*$",
     re.I)
+RE_BROKEN_END = re.compile(r"[ \u00a0]{2,}$")       # Zeile endet mit Hard-Break-Spuren
+RE_DASH = re.compile(r"\u2013")                      # Gedankenstrich
 RE_HEADING_COLON = re.compile(r"^(#{2,3})\s+([^:\n]+?):([ \t]+)(\S.*)$")
 RE_LOWER_START = re.compile(r"^[a-zäöüß]")
-RE_BROKEN_END = re.compile(r"[ \u00a0]{2,}$")       # Zeile endet mit Hard-Break-Spuren
-RE_HEADING_BROKEN = re.compile(r":[ \u00a0]{2,}$")  # Überschrift mit Hard-Break-Spur
 
 
-def _is_list_item(line: str) -> bool:
-    return bool(re.match(r"^\s*(?:[-*]|\d+\.)\s+", line))
+# ---------------------------------------------------------------------------
+# Kontext-Erkennung (nur technisch zwingende Schutzbereiche)
+# ---------------------------------------------------------------------------
+
+def _is_protected(line: str) -> bool:
+    """Zeilen, in denen NIE umgebrochen werden darf (technisch zwingend)."""
+    if "|" in line or "`" in line:
+        return True
+    if line.lstrip().startswith((">", "```")):
+        return True
+    if re.match(r"^\s*(?:[-*]|\d+\.)\s+", line):     # Listenelement
+        return True
+    if line.lstrip().startswith("#"):                 # Überschrift
+        return True
+    return False
 
 
-def _is_quote(line: str) -> bool:
-    return bool(re.match(r"^\s*&?gt;?\s*", line)) or line.lstrip().startswith(">")
+def _find_candidates(body: str) -> list[dict]:
+    """Sammelt alle Kandidaten im Fließtext (außerhalb Schutzkontexte)."""
+    lines = body.split("\n")
+    candidates = []
+    in_faq = False
+    for i, line in enumerate(lines):
+        if re.match(r"^#{1,6}\s+", line):
+            if RE_FAQ_START.match(line):
+                in_faq = True
+            elif re.match(r"^#{1,2}\s+", line):
+                in_faq = False
+        if in_faq or _is_protected(line):
+            continue
+        is_broken = bool(RE_BROKEN_END.search(line))
+        has_dash = bool(RE_DASH.search(line))
+        if not (is_broken or has_dash):
+            continue
+        # Nächste Zeile = Fortsetzung (bei umgebrochener Zeile)
+        nxt = lines[i + 1].strip() if i + 1 < len(lines) else ""
+        candidates.append({
+            "idx": i,
+            "line": line.rstrip(),
+            "broken": is_broken,
+            "next": nxt,
+        })
+    return candidates
 
 
-def fix_body(body: str) -> tuple[str, int]:
-    """Wendet alle Zeilenumbruch-Regeln an. Liefert (neuer_body, anzahl)."""
+# ---------------------------------------------------------------------------
+# KI-Entscheidung
+# ---------------------------------------------------------------------------
+
+def _llm_call(prompt: str, provider: str) -> str | None:
+    """Ruft Groq oder Gemini an. Liefert Antwort-Text oder None."""
+    try:
+        if provider == "GROQ":
+            key = os.environ.get("GROQ_API_KEY", "")
+            url = "https://api.groq.com/openai/v1/chat/completions"
+            data = json.dumps({
+                "model": os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile"),
+                "messages": [{"role": "user", "content": prompt}],
+                "temperature": 0.1,
+                "max_tokens": 2000,
+            }).encode()
+            req = urllib.request.Request(url, data=data, headers={
+                "Authorization": f"Bearer {key}", "Content-Type": "application/json",
+                "User-Agent": "Mozilla/5.0 (Finanzblog-Automation)"})
+            with urllib.request.urlopen(req, timeout=60) as r:
+                out = json.loads(r.read().decode())["choices"][0]["message"]["content"]
+                time.sleep(4)  # Rate-Limit-Schutz (Gratis-Key)
+                return out
+        else:
+            key = os.environ.get("GEMINI_API_KEY", "")
+            url = ("https://generativelanguage.googleapis.com/v1beta/models/"
+                   + os.environ.get("GEMINI_MODEL", "gemini-2.0-flash")
+                   + ":generateContent?key=" + key)
+            data = json.dumps({
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {"temperature": 0.1, "maxOutputTokens": 2000},
+            }).encode()
+            req = urllib.request.Request(url, data=data, headers={
+                "Content-Type": "application/json",
+                "User-Agent": "Mozilla/5.0 (Finanzblog-Automation)"})
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return json.loads(r.read().decode())["candidates"][0]["content"]["parts"][0]["text"]
+    except Exception as e:  # noqa: BLE001
+        print(f"    ⚠ {provider}-Fehler: {e}")
+        return None
+
+
+def _ai_decide(candidates: list[dict]) -> list[bool]:
+    """Fragt die KI, ob pro Kandidat ein Umbruch sinnvoll ist.
+    Liefert Liste von bool (True = Umbruch). Bei KI-Fehler: konservativ False."""
+    if not candidates:
+        return []
+    prompt_lines = [
+        "Du bist ein Typografie-Experte für einen deutschen Finanzblog.",
+        "Für jede Stelle mit Gedankenstrich entscheidest du, ob ein Zeilenumbruch "
+        "nach dem Gedankenstrich sinnvoll ist (der Nachsatz beginnt auf einer neuen "
+        "Zeile) oder ob der Satz zusammenbleiben soll.",
+        "UMBRUCH sinnvoll (ja), wenn: der Nachsatz ein eigenständiger, erläuternder "
+        "Gedanke ist (z. B. '…Reisedauern –  die 10-Tage-Variante ist besser').",
+        "KEIN Umbruch (nein), wenn: der Nachsatz eng zur Zahl/Aussage davor gehört "
+        "(z. B. '2.653 Euro – mehr als 650 Euro zusätzlich'), eine kurze Ergänzung "
+        "ist, oder der Satz ohne Umbruch besser liest.",
+        "Antworte NUR im Format: Nummer|ja oder Nummer|nein – eine Zeile pro Nummer.",
+        "",
+    ]
+    for k, c in enumerate(candidates, 1):
+        vor = c["line"][-70:] if len(c["line"]) > 70 else c["line"]
+        nach = c["next"][:70]
+        status = " (aktuell umgebrochen)" if c["broken"] else ""
+        prompt_lines.append(f"{k}. …{vor} – {nach}…{status}")
+    prompt = "\n".join(prompt_lines)
+
+    # Provider-Rotation
+    for provider in ("GROQ", "GEMINI"):
+        if not os.environ.get(f"{provider}_API_KEY"):
+            continue
+        answer = _llm_call(prompt, provider)
+        if answer:
+            decisions = {}
+            for line in answer.strip().splitlines():
+                m = re.match(r"^\s*(\d+)\s*[|:]\s*(ja|nein)\b", line, re.I)
+                if m:
+                    decisions[int(m.group(1))] = m.group(2).lower() == "ja"
+            if decisions:
+                return [decisions.get(k + 1, False) for k in range(len(candidates))]
+    print("    ⚠ Keine KI-Antwort – konservativ: keine neuen Umbrüche.")
+    return [c["broken"] for c in candidates]  # Bestand halten, nichts Neues
+
+
+# ---------------------------------------------------------------------------
+# Anwenden
+# ---------------------------------------------------------------------------
+
+def apply_decisions(body: str, candidates: list[dict], decisions: list[bool]) -> tuple[str, int]:
+    """Setzt/baut Umbrüche gemäß KI-Entscheidung. Liefert (neuer_body, anzahl)."""
+    lines = body.split("\n")
+    # Rückwärts arbeiten, damit Indizes stabil bleiben
+    changed = 0
+    for c, want_break in zip(reversed(candidates), reversed(decisions)):
+        i = c["idx"]
+        line = lines[i]
+        nxt = lines[i + 1] if i + 1 < len(lines) else ""
+        if want_break:
+            if c["broken"]:
+                continue  # schon umgebrochen – ok
+            if nxt and not _is_protected(nxt) and not RE_BROKEN_END.search(nxt):
+                lines[i] = line.rstrip() + "  "
+                changed += 1
+        else:
+            if c["broken"] and nxt:
+                lines[i] = line.rstrip() + " " + nxt.strip()
+                del lines[i + 1]
+                changed += 1
+    return "\n".join(lines), changed
+
+
+def self_heal(body: str) -> tuple[str, int]:
+    """Deterministische Selbstheilung: Umbrüche in Schutzkontexten zurückbauen."""
     lines = body.split("\n")
     out: list[str] = []
     changed = 0
@@ -84,64 +212,74 @@ def fix_body(body: str) -> tuple[str, int]:
     n = len(lines)
     while i < n:
         line = lines[i]
-
-        # Kontext-Tracking
         if re.match(r"^#{1,6}\s+", line):
             if RE_FAQ_START.match(line):
                 in_faq = True
             elif re.match(r"^#{1,2}\s+", line):
                 in_faq = False
-
-        is_heading = bool(re.match(r"^#{2,3}\s+", line))
-        no_break_ctx = (
-            in_faq
-            or _is_list_item(line)
-            or _is_quote(line)
-            or "|" in line          # Tabelle
-            or "`" in line          # Inline-Code
-            or line.lstrip().startswith("#")  # Überschrift (für Regel A)
-        )
-
-        # ---------- SELBSTHEILUNG: unpassende Umbrüche zurückbauen ----------
-        if no_break_ctx and RE_BROKEN_END.search(line) and i + 1 < n:
+        if (in_faq or _is_protected(line)) and RE_BROKEN_END.search(line) and i + 1 < n:
             nxt = lines[i + 1].strip()
             if nxt and not RE_BROKEN_END.search(nxt) and not re.match(r"^#{1,6}\s+", nxt):
-                line = line.rstrip() + " " + nxt
-                i += 1
+                out.append(line.rstrip() + " " + nxt)
                 changed += 1
-
-        # ---------- REGEL B: Überschriften-Doppelpunkt (H2/H3) ----------
-        if is_heading and not in_faq and ":<br>" not in line:
-            m = RE_HEADING_COLON.match(line)
-            if m and not RE_LOWER_START.match(m.group(4)):
-                heading = m.group(1) + " " + m.group(2) + ":"
-                rest = m.group(4)
-                out.append(heading + "<br>" + rest)
-                changed += 1
-                i += 1
+                i += 2
                 continue
-
-        # ---------- REGEL A: Gedankenstrich-Nachsatz (nur Fließtext) ----------
-        if not no_break_ctx and not is_heading:
-            if not RE_BROKEN_END.search(line):  # idempotent
-                m = RE_NACHSATZ.search(line)
-                if m and not RE_KEIN.search(line):
-                    pos = m.start() + 3  # Länge von „ – "
-                    out.append(line[:pos] + "  ")
-                    out.append(line[pos:])
-                    changed += 1
-                    i += 1
-                    continue
-
         out.append(line)
         i += 1
     return "\n".join(out), changed
 
 
+def _apply_heading_breaks(body: str) -> tuple[str, int]:
+    """Design-Vorgabe (vom User explizit gewünscht): Teilüberschriften (H2/H3)
+    mit Doppelpunkt bekommen nach dem Doppelpunkt ein <br> – der Untertitel
+    beginnt auf einer neuen Zeile. Deterministisch (keine KI nötig).
+    Ausgenommen: FAQ-Fragen (Schema!), klein beginnende Untertitel."""
+    lines = body.split("\n")
+    out: list[str] = []
+    changed = 0
+    in_faq = False
+    for line in lines:
+        if re.match(r"^#{1,6}\s+", line):
+            if RE_FAQ_START.match(line):
+                in_faq = True
+            elif re.match(r"^#{1,2}\s+", line):
+                in_faq = False
+        if re.match(r"^#{2,3}\s+", line) and not in_faq and ":<br>" not in line:
+            m = RE_HEADING_COLON.match(line)
+            if m and not RE_LOWER_START.match(m.group(4)):
+                out.append(m.group(1) + " " + m.group(2) + ":<br>" + m.group(4))
+                changed += 1
+                continue
+        out.append(line)
+    return "\n".join(out), changed
+
+
+def fix_body(body: str) -> tuple[str, int]:
+    """Hauptfunktion: Überschriften → Selbstheilung → KI-Entscheidung."""
+    # 1) Überschriften-Doppelpunkt (Design-Vorgabe)
+    body, n0 = _apply_heading_breaks(body)
+    # 2) Selbstheilung (Schutzkontexte deterministisch bereinigen)
+    body, n1 = self_heal(body)
+    # 2) Kandidaten sammeln (nach Selbstheilung neu)
+    candidates = _find_candidates(body)
+    if not candidates:
+        return body, n1
+    # 3) KI entscheiden
+    decisions = _ai_decide(candidates)
+    # 4) Anwenden
+    body, n2 = apply_decisions(body, candidates, decisions)
+    return body, n0 + n1 + n2
+
+
 def main() -> int:
     dry = "--dry-run" in sys.argv
+    only = None
+    if "--file" in sys.argv:
+        only = sys.argv[sys.argv.index("--file") + 1]
     files = (sorted(glob.glob(f"{BLOG_DIR}/content/posts/*/index.md"))
              + sorted(glob.glob(f"{BLOG_DIR}/content/pillar/*/index.md")))
+    if only:
+        files = [f for f in files if only in f]
     total = 0
     for f in files:
         content = open(f, encoding="utf-8").read()
@@ -154,7 +292,7 @@ def main() -> int:
             print(f"  {f.split('/')[-2]}: {n} Änderung(en)")
             if not dry:
                 open(f, "w", encoding="utf-8").write(parts[0] + "---" + parts[1] + "---" + new_body)
-    print(f"\n{'DRY-RUN: ' if dry else ''}Zeilenumbruch-Generator: {total} Änderungen in {len(files)} Dateien.")
+    print(f"\n{'DRY-RUN: ' if dry else ''}Zeilenumbruch-Generator (KI): {total} Änderungen.")
     return 0
 
 

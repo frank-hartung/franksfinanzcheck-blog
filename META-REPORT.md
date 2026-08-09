@@ -96,4 +96,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Zinseszinseffekt: Die Formel, die dein Geld v | 52 | 159 | 4 | ✅ |
 
 ---
-*Erzeugt am 2026-08-09 um 17:30 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-09 um 17:43 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
