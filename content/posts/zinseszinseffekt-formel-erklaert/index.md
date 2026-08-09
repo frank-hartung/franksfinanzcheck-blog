@@ -16,8 +16,7 @@ cover:
   alt: "Zinseszinseffekt: Die Formel, die dein Geld vermehrt"
   caption: "Tipp von FranksFinanzcheck"
 ---
-Albert Einstein soll den Zinseszins das achte Weltwunder genannt haben –   
-wer die Formel verstanden hat, weiß warum. Der Zinseszinseffekt ist der einzige Mechanismus im Finanzsystem, der aus kleinen regelmäßigen Beträgen über die Zeit ein Vermögen macht, ohne dass du mehr arbeiten musst. Und er funktioniert für jeden – unabhängig vom Einkommen.
+Albert Einstein soll den Zinseszins das achte Weltwunder genannt haben – wer die Formel verstanden hat, weiß warum. Der Zinseszinseffekt ist der einzige Mechanismus im Finanzsystem, der aus kleinen regelmäßigen Beträgen über die Zeit ein Vermögen macht, ohne dass du mehr arbeiten musst. Und er funktioniert für jeden – unabhängig vom Einkommen.
 
 In diesem Artikel erkläre ich dir die Formel, zeige dir Rechenbeispiele und Tabellen und verrate, warum die Zeit die wichtigste Zutat ist.
 
@@ -27,8 +26,7 @@ Zinseszins bedeutet: Du bekommst nicht nur Zinsen auf dein ursprüngliches Kapit
 
 Ein einfaches Beispiel: 1.000 Euro zu 5 Prozent. Nach einem Jahr hast du 1.050 Euro. Im zweiten Jahr bekommst du 5 Prozent auf 1.050 Euro = 52,50 Euro – nicht nur 50 Euro. Der Unterschied klingt klein, aber über Jahrzehnte wird er gewaltig: Das Wachstum beschleunigt sich ständig, weil die Basis jedes Jahr größer wird.
 
-Der Unterschied zur einfachen Verzinsung: Bei 5 Prozent ohne Zinseszins würden 1.000 Euro in 20 Jahren auf 2.000 Euro wachsen (50 Euro pro Jahr). Mit Zinseszins sind es 2.653 Euro –   
-mehr als 650 Euro zusätzlich, allein weil die Zinsen mitgearbeitet haben.
+Der Unterschied zur einfachen Verzinsung: Bei 5 Prozent ohne Zinseszins würden 1.000 Euro in 20 Jahren auf 2.000 Euro wachsen (50 Euro pro Jahr). Mit Zinseszins sind es 2.653 Euro – mehr als 650 Euro zusätzlich, allein weil die Zinsen mitgearbeitet haben.
 
 ## Die Formel & der Rechner
 
@@ -83,8 +81,7 @@ Umgekehrt zeigt die Tabelle die Kosten des Zögerns: Wer 10 Jahre wartet, verlie
 
 ## Der 72er-Trick:<br>Verdopplung im Kopf rechnen
 
-Die 72er-Regel ist die einfachste Finanzformel der Welt: **Teile 72 durch den Zinssatz –   
-das Ergebnis ist die Anzahl der Jahre, bis sich dein Geld verdoppelt.**
+Die 72er-Regel ist die einfachste Finanzformel der Welt: **Teile 72 durch den Zinssatz – das Ergebnis ist die Anzahl der Jahre, bis sich dein Geld verdoppelt.**
 
 - Bei 3 Prozent: 72 ÷ 3 = 24 Jahre
 - Bei 6 Prozent: 72 ÷ 6 = 12 Jahre
@@ -94,8 +91,7 @@ Der Trick funktioniert erstaunlich genau und macht den Zinseszins im Kopf greifb
 
 ## Warum die Zeit wichtiger ist als die Rate
 
-Der häufigste Denkfehler beim Sparen: „Ich habe nicht genug Geld zum Sparen." Die Wahrheit ist: Die Zeit kompensiert eine kleine Rate –   
-die Rate kann die verlorene Zeit nicht kompensieren.
+Der häufigste Denkfehler beim Sparen: „Ich habe nicht genug Geld zum Sparen." Die Wahrheit ist: Die Zeit kompensiert eine kleine Rate – die Rate kann die verlorene Zeit nicht kompensieren.
 
 Ein Vergleich: Person A spart ab 25 Jahren 100 Euro monatlich bis 65 (40 Jahre) → rund 199.000 Euro bei 6 Prozent. Person B spart ab 35 Jahren 200 Euro monatlich bis 65 (30 Jahre) → rund 100.500 Euro. Person B zahlt doppelt so viel ein – und hat trotzdem nur halb so viel. Die 10 Jahre Vorsprung von Person A sind mehr wert als die doppelte Rate.
 
@@ -108,8 +104,7 @@ die Umsetzung entscheidend. Der Zinseszinseffekt entfaltet seine volle Kraft, we
 
 **1. Rendite über der Inflation:** Wer nur auf dem Sparbuch parkt, verliert real Geld. Ein [Welt-ETF](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) hat historisch 6 bis 8 Prozent pro Jahr geliefert – deutlich über der Inflation.
 
-**2. Thesaurierung statt Ausschüttung:** Bei thesaurierenden ETFs werden die Erträge automatisch reinvestiert –   
-der Zinseszins läuft von selbst. Bei ausschüttenden Fonds musst du die Erträge manuell wieder anlegen, sonst bleibt der Effekt liegen.
+**2. Thesaurierung statt Ausschüttung:** Bei thesaurierenden ETFs werden die Erträge automatisch reinvestiert – der Zinseszins läuft von selbst. Bei ausschüttenden Fonds musst du die Erträge manuell wieder anlegen, sonst bleibt der Effekt liegen.
 
 **3. Keine Unterbrechungen:** Wer in Krisen verkauft oder den Sparplan stoppt, durchbricht den Zinseszins. Der Plan läuft am besten automatisch per Dauerauftrag –   
 dann ist er unabhängig von Stimmung und Disziplin.
