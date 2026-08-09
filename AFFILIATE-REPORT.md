@@ -1,14 +1,23 @@
 # 🔗 Affiliate-Link-Report
 
-> **Automatisch** – 55 Posts geprüft, 4 mit Problemen, 0 Links korrigiert.
+> **Automatisch** – 65 Posts geprüft, 7 mit Problemen, 0 Links korrigiert.
 
 ## Zusammenfassung
 
-- ✅ Korrekt: 51/55
-- ❌ Mit Problemen: 4
+- ✅ Korrekt: 58/65
+- ❌ Mit Problemen: 7
 - 🔧 Korrigiert (--fix): 0
 
 ## ❌ Probleme
+
+### dispozinsen-verstehen-alternativen
+- ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)
+
+### festgeld-oder-tagesgeld-2026
+- ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)
+
+### gebuehrenfallen-banking-vermeiden
+- ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)
 
 ### heizkosten-senken-10-massnahmen
 - ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1 (erwartet: Stromtarif-Vergleich)
@@ -31,10 +40,15 @@
 - 2026-08-07-frugalismus-fuer-den-erfolg: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
 - 50-30-20-regel-einfach-erklaert: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
 - 7-gewohnheiten-finanzielle-freiheit: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
+- berufsunfaehigkeitsversicherung-lohnt-sich: Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
+- elementarschadenversicherung-hochwasser-starkregen: Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
 - frugalismus-tricks-alltag-200-euro-sparen: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
 - haushaltsbuch-fuehren-app-excel-oder-stift: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
+- kfz-versicherung-sf-klasse-erklaert: Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
 - monatsbudget-erstellen-schritt-fuer-schritt: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
 - nebenverdienst-ideen-2026-zweites-standbein: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
+- riester-rente-2026-lohnt-sich: Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
+- versicherungen-kuendigen-diese-5-policen: Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
 
 ---
 *Erzeugt von scripts/affiliate_link_check.py*

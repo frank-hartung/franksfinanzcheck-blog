@@ -13,7 +13,7 @@ ai_provider: "Manuell (Masterplan Blueprint 1)"
 kurzantwort: "Ein Haushaltsbuch bringt dir monatlich etwa 10 bis 20 Prozent mehr Überblick über deine Finanzen, weil du siehst, wohin dein Geld wirklich fließt. Am einfachsten startest du mit einer App oder einer Excel-Vorlage: 5 Minuten am Tag reichen, um dauerhaft Geld zu sparen."
 cover:
   image: "images/covers/haushaltsbuch-fuehren-app-excel-oder-stift.jpg"
-  alt: "Haushaltsbuch führen: App, Excel oder Stift – was wirklich funktioniert"
+  alt: "Haushaltsbuch führen: App, Excel oder Stift – was klappt"
   caption: "Tipp von FranksFinanzcheck"
 ---
 Fast jeder zweite Haushalt in Deutschland weiß nicht, wohin sein Geld am Monatsende verschwindet. Das ist kein Zeichen von Dummheit, sondern von fehlender Struktur. Ein Haushaltsbuch schafft genau diese Struktur – und ist damit der wirkungsvollste erste Schritt, wenn du dauerhaft Geld sparen willst.

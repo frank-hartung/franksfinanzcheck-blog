@@ -13,7 +13,7 @@ ai_provider: "Manuell (Masterplan Blueprint 4)"
 kurzantwort: "Deine Sparquote ist der Anteil deines Nettoeinkommens, den du zurücklegst – berechnet als Sparen geteilt durch Einkommen. Mit Automatisierung, Gehaltserhöhungen und Fixkosten-Senkung kommst du realistisch von 5 auf 30 Prozent in 12 Monaten, ohne auf Lebensqualität zu verzichten."
 cover:
   image: "images/covers/sparquote-berechnen-und-steigern.jpg"
-  alt: "Sparquote berechnen und steigern: Von 5 % auf 30 % in 12 Monaten"
+  alt: "Sparquote steigern: Von 5 auf 30 Prozent in 12 Monaten"
   caption: "Tipp von FranksFinanzcheck"
 ---
 Die Sparquote ist die wichtigste Kennzahl deiner Finanzen – wichtiger als jeder Aktienkurs und jedes Zinsangebot. Sie sagt dir, wie viel von deinem Einkommen wirklich bei dir bleibt. Zwei Menschen mit demselben Gehalt können in völlig unterschiedlichen Geschwindigkeiten Vermögen aufbauen – der Unterschied ist ihre Sparquote.
