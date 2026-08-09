@@ -38,10 +38,12 @@ Vermögen entsteht durch Wiederholung, nicht durch Einmal-Aktionen. Die sieben G
 ## Häufige Fragen
 
 ### Wie viel sollte ich monatlich sparen?
-Als Faustregel 20 % des Nettoeinkommens – die 50-30-20-Regel zeigt dir, wie das ohne Verbissenheit klappt. Details im [50-30-20-Ratgeber](../../posts/50-30-20-regel-einfach-erklaert/).
+Als Faustregel 20 % des Nettoeinkommens –   
+die 50-30-20-Regel zeigt dir, wie das ohne Verbissenheit klappt. Details im [50-30-20-Ratgeber](../../posts/50-30-20-regel-einfach-erklaert/).
 
 ### Wie groß muss mein Notgroschen sein?
-Drei bis sechs Monatsausgaben sind der übliche Richtwert – die genaue Rechnung für deine Situation steht in [Notgroschen aufbauen](../../posts/notgroschen-aufbauen-wie-viel-reicht/).
+Drei bis sechs Monatsausgaben sind der übliche Richtwert –   
+die genaue Rechnung für deine Situation steht in [Notgroschen aufbauen](../../posts/notgroschen-aufbauen-wie-viel-reicht/).
 
 ### Ist Frugalismus nicht reiner Verzicht?
 Nein – richtig umgesetzt ist er bewusstes Ausgeben für das, was dir wichtig ist. Mehr dazu in [Frugalism../posts/2026-08-07-frugalismus-fuer-den-erfolg/ismus-fuer-den-erfolg/).

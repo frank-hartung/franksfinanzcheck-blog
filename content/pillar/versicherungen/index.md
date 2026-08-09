@@ -10,13 +10,15 @@ build:
 keywords: ["Versicherungen vergleichen", "Privathaftpflicht", "Hausratversicherung", "Zahnzusatzversicherung", "Kfz-Versicherung"]
 ---
 
-Versicherungen sind ein Thema, bei dem viele entweder zu viel oder zu wenig absichern. Aus meiner eigenen Erfahrung als Verbraucher, der jahrelang Policen verglichen und gewechselt hat, gilt: Die richtige Versicherung schützt vor existenzbedrohenden Kosten – die falsche ist reine Geldverbrennung. In diesem Ratgeber bekommst du den Überblick, welche Policen sich wirklich lohnen und für wen.
+Versicherungen sind ein Thema, bei dem viele entweder zu viel oder zu wenig absichern. Aus meiner eigenen Erfahrung als Verbraucher, der jahrelang Policen verglichen und gewechselt hat, gilt: Die richtige Versicherung schützt vor existenzbedrohenden Kosten –   
+die falsche ist reine Geldverbrennung. In diesem Ratgeber bekommst du den Überblick, welche Policen sich wirklich lohnen und für wen.
 
 ### Das Wichtigste in Kürze
 
 *   Die **Privathaftpflicht** ist die wichtigste Versicherung überhaupt – schon ab rund 30 € im Jahr.
 *   **Hausrat** lohnt sich vor allem bei hochwertigem Hausrat; der Wert entscheidet.
-*   **Zahnzusatz- und Unfallversicherung** sind Einzelfall-Entscheidungen – hier zählt deine persönliche Situation.
+*   **Zahnzusatz- und Unfallversicherung** sind Einzelfall-Entscheidungen –   
+hier zählt deine persönliche Situation.
 *   **Kfz-Versicherung:** Ein Wechsel zum Stichtag spart oft mehrere Hundert Euro.
 
 ## Privathaftpflicht: Die Pflichtversicherung für alle

@@ -63,22 +63,27 @@ Viele Wechsler machen es sich zur Strategie, jährlich zu wechseln und jedes Mal
 
 ## Preisgarantie: sinnvoll oder unnötig?
 
-Eine Preisgarantie schützt dich vor Preiserhöhungen während der Laufzeit. Bei 12 Monaten Garantie und 12 Monaten Laufzeit deckt sie die komplette Vertragslaufzeit ab – das ist der Idealfall.
+Eine Preisgarantie schützt dich vor Preiserhöhungen während der Laufzeit. Bei 12 Monaten Garantie und 12 Monaten Laufzeit deckt sie die komplette Vertragslaufzeit ab –   
+das ist der Idealfall.
 
-Längere Garantien (24 Monate) sind besonders wertvoll, wenn du eine längerfristige Kalkulation willst oder die Preise tendenziell steigen. Manche Anbieter verlangen für lange Garantien einen kleinen Aufpreis – der sich bei steigenden Marktpreisen schnell rechnet.
+Längere Garantien (24 Monate) sind besonders wertvoll, wenn du eine längerfristige Kalkulation willst oder die Preise tendenziell steigen. Manche Anbieter verlangen für lange Garantien einen kleinen Aufpreis –   
+der sich bei steigenden Marktpreisen schnell rechnet.
 
 Meine Empfehlung: Nimm eine Preisgarantie, die mindestens deine Vertragslaufzeit abdeckt. Alles andere ist unnötiges Risiko.
 
 ## So wechselst du ohne Risiko
 
-Der Wechsel selbst ist unkompliziert und kostenlos – das übernimmt der neue Anbieter. Du musst nur:
+Der Wechsel selbst ist unkompliziert und kostenlos –   
+das übernimmt der neue Anbieter. Du musst nur:
 
 1. Deinen Verbrauch bereit halten (letzte Jahresabrechnung).
 2. Den passenden Tarif im Vergleich wählen.
 3. Das Online-Formular ausfüllen (Daten der letzten Rechnung, Zählernummer).
-4. Den alten Vertrag kündigen lassen – der neue Anbieter übernimmt die Kündigung meist automatisch.
+4. Den alten Vertrag kündigen lassen –   
+der neue Anbieter übernimmt die Kündigung meist automatisch.
 
-Wichtig: Es gibt keine Strom-Sperre durch den Wechsel. Du bleibst durchgehend versorgt, und die Abrechnung klärt der neue Anbieter mit dem Netzbetreiber. Einen Tag ohne Strom gibt es nicht – das ist gesetzlich abgesichert.
+Wichtig: Es gibt keine Strom-Sperre durch den Wechsel. Du bleibst durchgehend versorgt, und die Abrechnung klärt der neue Anbieter mit dem Netzbetreiber. Einen Tag ohne Strom gibt es nicht –   
+das ist gesetzlich abgesichert.
 
 Die Umstellung dauert in der Regel 2 bis 6 Wochen. Kündigungsfristen des alten Tarifs (meist 1 Monat) und die Frist des neuen Anbieters werden dabei sauber verrechnet.
 
@@ -86,7 +91,8 @@ Die Umstellung dauert in der Regel 2 bis 6 Wochen. Kündigungsfristen des alten 
 
 Ökostrom-Tarife sind heute kaum teurer als Graustrom – oft sogar günstiger. Achte auf echte Ökostrom-Zertifikate (TÜV Nord, ok-power) statt auf reine Marketing-Versprechen. Ein Ökostrom-Tarif mit Preisgarantie und gutem Preis ist für die meisten Haushalte die beste Wahl: günstig, sauber und ohne Nachteile.
 
-Übrigens: Der Strom aus deiner Steckdose ist physikalisch immer derselbe. Der Unterschied liegt in der Herkunfts-Garantie – die entscheidet, wie viel Ökostrom ins Netz eingespeist wird.
+Übrigens: Der Strom aus deiner Steckdose ist physikalisch immer derselbe. Der Unterschied liegt in der Herkunfts-Garantie –   
+die entscheidet, wie viel Ökostrom ins Netz eingespeist wird.
 
 Wer jetzt wechselt, kann [bis zu 300 Euro pro Jahr sparen](../../posts/stromanbieter-wechseln-2026/). Die besten Spartipps für den Haushalt findest du in meiner [Liste der 20 Stromspar-Tipps](../../posts/strom-sparen-haushalt-20-tipps/), und wer [mit einer Wärmepumpe heizt](../../posts/waermepumpe-vs-gasheizung-2026/), sollte auch den Tarif darauf abstimmen.
 
@@ -112,7 +118,8 @@ Ja. Der neue Anbieter übernimmt die Kündigung beim alten Anbieter und kümmert
 Der neue Anbieter informiert deinen alten Anbieter über den Wechsel und kündigt deinen Vertrag zum nächstmöglichen Termin. Du musst selbst nichts tun – nur die Bestätigungen aufbewahren.
 
 **Wie lange dauert der Wechsel?**
-Die Umstellung dauert in der Regel 2 bis 6 Wochen. Währenddessen bist du durchgehend mit Strom versorgt – ein Wechsel ohne Strom gibt es nicht.
+Die Umstellung dauert in der Regel 2 bis 6 Wochen. Währenddessen bist du durchgehend mit Strom versorgt –   
+ein Wechsel ohne Strom gibt es nicht.
 
 **Kann ich meinen Tarif bei einem Umzug mitnehmen?**
 In den meisten Fällen ja: Viele Anbieter gestatten die Mitnahme des Tarifs an die neue Adresse, sofern sie dort liefern. Beim Umzug in ein anderes Netzgebiet kann sich der Arbeitspreis ändern. Prüfe im Vertrag die Umzugsklausel – sonst hilft das Sonderkündigungsrecht, das bei Umzügen gesetzlich gilt.

@@ -111,7 +111,10 @@ SYSTEM_PROMPT = (
     "Zahl und ihrer Einheit steht IMMER ein geschütztes Leerzeichen (U+00A0, "
     "Non-Breaking Space), damit Zahl und Einheit nie in verschiedene Zeilen brechen: "
     "z. B. 20 %, 50 €, 100 EUR mit geschütztem Leerzeichen – niemals mit normalem "
-    "Leerzeichen und niemals als HTML-Entity (&nbsp;). Deutsche Rechtschreibung ist fehlerfrei."
+    "Leerzeichen und niemals als HTML-Entity (&nbsp;). Leitet ein Gedankenstrich "
+    "einen erläuternden Nachsatz ein (Muster: 'Satz – Nachsatz', z. B. '…Reisedauern – "
+    "die 10-Tage-Variante…'), beginnt der Nachsatz auf einer NEUEN Zeile "
+    "(Markdown-Hard-Break: zwei Leerzeichen am Zeilenende). Deutsche Rechtschreibung ist fehlerfrei."
 )
 
 # ---------------------------------------------------------------- Hilfsfunktionen

@@ -29,7 +29,8 @@ Der Standort des Routers entscheidet mehr über dein WLAN als jedes teure Gerät
 - **Frei lassen:** Keine Metallgegenstände, Aquarien oder dicke Wände direkt daneben. Auch der Fernseher oder das Regal mit vielen Büchern können das Signal schlucken.
 - **Nicht neben dem Router-Modem stapeln:** Stromkabel, Ladegeräte und andere Elektronik erzeugen Störfelder.
 
-Die beste Position ist oft der Flur oder das Wohnzimmer – dort, wo sich die meisten Geräte aufhalten. Ein Versuch mit 30 Zentimetern Standortänderung kann das Signal um 20 bis 50 Prozent verbessern.
+Die beste Position ist oft der Flur oder das Wohnzimmer –   
+dort, wo sich die meisten Geräte aufhalten. Ein Versuch mit 30 Zentimetern Standortänderung kann das Signal um 20 bis 50 Prozent verbessern.
 
 ## Frequenzwahl: 2,4 GHz vs. 5 GHz
 
@@ -57,7 +58,8 @@ Zwei der unterschätztesten WLAN-Tricks:
 
 ## WLAN-Verschlüsselung und versteckte Geräte
 
-Ein offenes oder schwach verschlüsseltes WLAN ist nicht nur ein Sicherheitsrisiko – es kostet dich auch Tempo, wenn Nachbarn oder Fremde dein Netz mitbenutzen. Die Regeln:
+Ein offenes oder schwach verschlüsseltes WLAN ist nicht nur ein Sicherheitsrisiko –   
+es kostet dich auch Tempo, wenn Nachbarn oder Fremde dein Netz mitbenutzen. Die Regeln:
 
 - **WPA3 oder mindestens WPA2** als Verschlüsselung aktivieren (in den Router-Einstellungen).
 - **Passwort regelmäßig ändern** – und ein starkes Passwort verwenden (mindestens 12 Zeichen).
@@ -91,18 +93,21 @@ Alle Tipps sind wertlos, wenn du den Erfolg nicht misst. Der Speedtest ist dein 
 
 Die Mess-Regeln für aussagekräftige Ergebnisse:
 
-- **Drei Tests pro Messung:** Die Geschwindigkeit schwankt – der Mittelwert aus drei Tests ist aussagekräftig.
+- **Drei Tests pro Messung:** Die Geschwindigkeit schwankt –   
+der Mittelwert aus drei Tests ist aussagekräftig.
 - **Zu verschiedenen Zeiten messen:** Abends ist das Netz voller – teste morgens und abends.
 - **Am selben Ort messen:** Der Standort des Geräts beeinflusst das Ergebnis – immer vom selben Platz testen.
 - **WLAN vs. Kabel unterscheiden:** Ein Kabel-Test zeigt, was die Leitung hergibt; der WLAN-Test zeigt, was bei dir ankommt. Der Unterschied ist dein WLAN-Verlust.
 
-Praktisch: Wer nach dem Kanalwechsel und der Standort-Optimierung 30 Prozent mehr Tempo misst, weiß, dass die Tricks gewirkt haben. Und wer keine Verbesserung sieht, hat damit ein klares Signal, dass die Hardware das Problem ist – dann ist der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein [Mesh-System](../../posts/wlan-verstaerker-vs-mesh-wlan/) die nächste Stufe.
+Praktisch: Wer nach dem Kanalwechsel und der Standort-Optimierung 30 Prozent mehr Tempo misst, weiß, dass die Tricks gewirkt haben. Und wer keine Verbesserung sieht, hat damit ein klares Signal, dass die Hardware das Problem ist –   
+dann ist der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein [Mesh-System](../../posts/wlan-verstaerker-vs-mesh-wlan/) die nächste Stufe.
 
 
 ## Häufig gestellte Fragen
 
 **Warum ist mein WLAN abends langsam?**
-Abends nutzen alle Nachbarn gleichzeitig das Internet – die Kanäle sind voll, und bei Kabelanschlüssen teilt sich die Bandbreite mit der Nachbarschaft. Gegen die Nachbarn hilft der Kanalwechsel, gegen die Kabel-Drosselung nur der Anschluss-Wechsel.
+Abends nutzen alle Nachbarn gleichzeitig das Internet –   
+die Kanäle sind voll, und bei Kabelanschlüssen teilt sich die Bandbreite mit der Nachbarschaft. Gegen die Nachbarn hilft der Kanalwechsel, gegen die Kabel-Drosselung nur der Anschluss-Wechsel.
 
 **Was bringt ein Kanalwechsel wirklich?**
 Wenn dein Kanal stark belegt ist, kann der Wechsel das Tempo spürbar verbessern – oft 20 bis 50 Prozent. In ruhigen Gebieten mit wenigen Nachbarn ist der Effekt gering.

@@ -23,9 +23,11 @@ Mietwagenpreise steigen, je näher der Abreisetag rückt. An beliebten Urlaubsor
 
 - **Vergleichsportal nutzen** – zeigt alle Anbieter auf einen Blick, inklusive Bewertungen
 - **Gesamtpreis statt Tagespreis** – inklusive Gebühren, Steuern und Zuschlägen 
-- **Fahrzeugklasse ehrlich wählen** – die günstigste Klasse ist oft sehr klein 
+- **Fahrzeugklasse ehrlich wählen** –   
+die günstigste Klasse ist oft sehr klein 
 - **Abholstation vergleichen** – Flughafen-Stationen sind teurer 
-- **Bewertungen lesen** – ein günstiger Anbieter mit schlechten Abhol-Erfahrungen kann teurer sein
+- **Bewertungen lesen** –   
+ein günstiger Anbieter mit schlechten Abhol-Erfahrungen kann teurer sein
 
 ## Der Preis-Trick: Vor Ort vs. Online
 
@@ -33,12 +35,14 @@ Am Schalter vor Ort ist der Mietwagen fast immer teurer als online gebucht. Der 
 
 ## Vollkasko ohne Selbstbeteiligung: Pflicht oder Luxus?
 
-Ohne ausreichende Absicherung kann der Urlaub teuer enden. Die Vollkasko **ohne Selbstbeteiligung** deckt genau diese Fälle ab. Sie kostet wenige Euro pro Tag mehr. Die günstige Variante mit hoher Selbstbeteiligung ist nur etwas für Wagemutige. **Immer die Variante ohne Selbstbeteiligung buchen** – das Risiko ist es nicht wert.
+Ohne ausreichende Absicherung kann der Urlaub teuer enden. Die Vollkasko **ohne Selbstbeteiligung** deckt genau diese Fälle ab. Sie kostet wenige Euro pro Tag mehr. Die günstige Variante mit hoher Selbstbeteiligung ist nur etwas für Wagemutige. **Immer die Variante ohne Selbstbeteiligung buchen** –   
+das Risiko ist es nicht wert.
 
 ## Weitere Spartipps
 
 1. **Tankregel „voll/voll"** wählen 
-2. **Mietzeit realistisch planen** – die meisten Vermieter rechnen in 24-Stunden-Blöcken 
+2. **Mietzeit realistisch planen** –   
+die meisten Vermieter rechnen in 24-Stunden-Blöcken 
 3. **Zweiter Fahrer** – nur eintragen lassen, wenn er wirklich fährt 
 4. **Nicht am Flughafen tanken** 
 5. **Kreditkarte mit hohem Limit** für die Kaution 

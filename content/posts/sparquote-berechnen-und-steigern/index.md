@@ -16,7 +16,8 @@ cover:
   alt: "Sparquote steigern: Von 5 auf 30 Prozent in 12 Monaten"
   caption: "Tipp von FranksFinanzcheck"
 ---
-Die Sparquote ist die wichtigste Kennzahl deiner Finanzen – wichtiger als jeder Aktienkurs und jedes Zinsangebot. Sie sagt dir, wie viel von deinem Einkommen wirklich bei dir bleibt. Zwei Menschen mit demselben Gehalt können in völlig unterschiedlichen Geschwindigkeiten Vermögen aufbauen – der Unterschied ist ihre Sparquote.
+Die Sparquote ist die wichtigste Kennzahl deiner Finanzen – wichtiger als jeder Aktienkurs und jedes Zinsangebot. Sie sagt dir, wie viel von deinem Einkommen wirklich bei dir bleibt. Zwei Menschen mit demselben Gehalt können in völlig unterschiedlichen Geschwindigkeiten Vermögen aufbauen –   
+der Unterschied ist ihre Sparquote.
 
 In diesem Artikel zeige ich dir, wie du deine Sparquote berechnest und wie du sie in 12 Monaten von 5 auf 30 Prozent steigerst. Ohne Gerichtsdrama, dafür mit System.
 
@@ -42,9 +43,11 @@ Nutze für die Zahlenbasis dein [Haushaltsbuch](../../posts/haushaltsbuch-fuehre
 
 ## Deine aktuelle Quote ermitteln
 
-Schau auf deine letzten 6 Monate: Wie viel ist auf dem Konto geblieben? Wenn du es nicht weißt, ist deine Quote vermutlich niedriger, als du denkst – das ist normal und kein Grund zur Sorge.
+Schau auf deine letzten 6 Monate: Wie viel ist auf dem Konto geblieben? Wenn du es nicht weißt, ist deine Quote vermutlich niedriger, als du denkst –   
+das ist normal und kein Grund zur Sorge.
 
-Die ehrliche Bestandsaufnahme geht so: Summiere alle Einnahmen der letzten 6 Monate, subtrahiere alle Ausgaben und teile durch die Einnahmen. Wenn dabei 0 oder ein negativer Wert herauskommt, lebst du über deine Verhältnisse – dann ist Kapitel 6 (der 12-Monats-Plan) dein Ausgangspunkt.
+Die ehrliche Bestandsaufnahme geht so: Summiere alle Einnahmen der letzten 6 Monate, subtrahiere alle Ausgaben und teile durch die Einnahmen. Wenn dabei 0 oder ein negativer Wert herauskommt, lebst du über deine Verhältnisse –   
+dann ist Kapitel 6 (der 12-Monats-Plan) dein Ausgangspunkt.
 
 ## Die 4 Stellschrauben deiner Sparquote
 
@@ -56,7 +59,8 @@ Es gibt genau vier Wege, die Sparquote zu erhöhen – und du solltest alle vier
 
 **Stellschraube 3: Variable Kosten optimieren.** [Impulskäufe vermeiden](../../posts/impulskaeufe-vermeiden-7-psychologische-tricks/), bewusster einkaufen, günstigere Alternativen nutzen: Hier findest du das schnellste Einsparpotenzial – aber auch die höchste Rückfall-Gefahr.
 
-**Stellschraube 4: Automatisierung.** Die wichtigste Stellschraube von allen. Ein Dauerauftrag direkt nach dem Gehaltseingang auf ein separates Sparkonto macht das Sparen zur Routine. Wer automatisiert, erreicht seine Quote zuverlässig – wer händisch spart, vergisst es regelmäßig.
+**Stellschraube 4: Automatisierung.** Die wichtigste Stellschraube von allen. Ein Dauerauftrag direkt nach dem Gehaltseingang auf ein separates Sparkonto macht das Sparen zur Routine. Wer automatisiert, erreicht seine Quote zuverlässig –   
+wer händisch spart, vergisst es regelmäßig.
 
 ## Gehaltserhöhung = Sparquote?
 
@@ -66,7 +70,8 @@ Die Gegenstrategie: Bei jeder Gehaltserhöhung wandern 50 Prozent des Zuwachses 
 
 ## Sparquote bei niedrigem Einkommen
 
-Wer wenig verdient, hat oft das Gefühl, dass Sparen unmöglich ist. Falsch: Gerade bei niedrigen Einkommen zählt jeder Euro, und die Quote lässt sich durch Fixkosten-Senkung massiv verbessern. Wer seine [Strom- und Gasrechnung](../../posts/gastarife-vergleichen-vor-dem-herbst/) optimiert, sein [Girokonto gebührenfrei](../../posts/kostenloses-girokonto-finden/) führt und auf unnötige Versicherungen verzichtet, holt oft 100 bis 200 Euro pro Monat aus dem Budget – das sind bei 1.800 Euro netto satte 5 bis 10 Prozentpunkte Sparquote.
+Wer wenig verdient, hat oft das Gefühl, dass Sparen unmöglich ist. Falsch: Gerade bei niedrigen Einkommen zählt jeder Euro, und die Quote lässt sich durch Fixkosten-Senkung massiv verbessern. Wer seine [Strom- und Gasrechnung](../../posts/gastarife-vergleichen-vor-dem-herbst/) optimiert, sein [Girokonto gebührenfrei](../../posts/kostenloses-girokonto-finden/) führt und auf unnötige Versicherungen verzichtet, holt oft 100 bis 200 Euro pro Monat aus dem Budget –   
+das sind bei 1.800 Euro netto satte 5 bis 10 Prozentpunkte Sparquote.
 
 Wichtig ist auch der psychologische Aspekt: Beginne mit einer kleinen, automatischen Sparrate von 25 oder 50 Euro. Der Betrag wächst mit der Zeit – Hauptsache, die Routine steht.
 
@@ -91,7 +96,8 @@ Dein gespartes Geld hat dann einen Job: Zuerst [Notgroschen aufbauen](../../post
 
 ## Die Psychologie des Sparens: Warum es schwerfällt
 
-Wenn Sparen so einfach wäre, würden es alle tun. Die Wahrheit: Dein Gehirn ist auf Gegenwart programmiert. Die Belohnung von morgen (ein dickeres Konto) ist abstrakt – der Kaffee zum Mitnehmen von heute ist konkret. Psychologen nennen das Gegenwarts-Bias, und es erklärt, warum die beste Sparstrategie nicht mit Willenskraft arbeitet, sondern mit Automatisierung.
+Wenn Sparen so einfach wäre, würden es alle tun. Die Wahrheit: Dein Gehirn ist auf Gegenwart programmiert. Die Belohnung von morgen (ein dickeres Konto) ist abstrakt –   
+der Kaffee zum Mitnehmen von heute ist konkret. Psychologen nennen das Gegenwarts-Bias, und es erklärt, warum die beste Sparstrategie nicht mit Willenskraft arbeitet, sondern mit Automatisierung.
 
 Drei psychologische Kniffe machen den Unterschied:
 

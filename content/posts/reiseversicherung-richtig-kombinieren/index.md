@@ -40,9 +40,11 @@ Die Auslandskrankenversicherung ist die wichtigste Reiseversicherung überhaupt 
 Die Details, die zählen:
 
 - **Deckungssumme:** Mindestens 1 Million Euro (Standard in Deutschland) – genug für jeden erdenklichen Fall.
-- **Rücktransport:** Muss enthalten sein – ein medizinischer Rücktransport kann 10.000 bis 50.000 Euro kosten.
+- **Rücktransport:** Muss enthalten sein –   
+ein medizinischer Rücktransport kann 10.000 bis 50.000 Euro kosten.
 - **Geltungsbereich:** Weltweit (mit USA-Zusatz oft teurer) oder nur Europa? Prüfe, wohin du reist.
-- **Vorerkrankungen:** Die meisten Tarife schließen die Behandlung chronischer Erkrankungen aus, wenn sie vor Reisebeginn bekannt waren – das ist Standard, aber lesenswert.
+- **Vorerkrankungen:** Die meisten Tarife schließen die Behandlung chronischer Erkrankungen aus, wenn sie vor Reisebeginn bekannt waren –   
+das ist Standard, aber lesenswert.
 
 Wichtig: Die Auslandskrankenversicherung gilt für **jede** Reise, auch Kurztrips – und die meisten Tarife decken auch Reisen bis 6 Wochen Dauer ab. Wer öfter verreist, nimmt den Jahresvertrag.
 
@@ -52,7 +54,8 @@ Die Reiserücktrittsversicherung zahlt die Stornokosten, wenn du die Reise aus e
 
 Wann sie sich lohnt:
 
-- **Teure Reisen (ab ca. 1.500 Euro):** Die Stornokosten können 50 bis 90 Prozent des Reisepreises betragen – das Risiko ist real.
+- **Teure Reisen (ab ca. 1.500 Euro):** Die Stornokosten können 50 bis 90 Prozent des Reisepreises betragen –   
+das Risiko ist real.
 - **Reisen mit Vorerkrankungen:** Wer regelmäßig krank ist oder ältere Angehörige betreut, hat ein höheres Stornorisiko.
 - **Nicht verschiebbare Reisen:** Ferienreisen mit festem Hotel und Flug – nicht umbuchbar.
 
@@ -73,7 +76,8 @@ Wer teure Technik mitnimmt, prüft besser die Hausrat-Deckung oder eine speziell
 Die wichtigste Kosten-Entscheidung: Jahresvertrag oder Einzelreise-Versicherung?
 
 - **Jahresvertrag** (30–60 Euro für Auslandskranken, 80–150 Euro mit Reiserücktritt für Paare): Lohnt sich ab 2 bis 3 Reisen pro Jahr – und ist günstiger als die Einzelabschlüsse der Reiseportale.
-- **Einzelreise:** Sinnvoll, wenn du nur 1× pro Jahr verreist und die Reise teuer ist – dann rechnet sich der Einzelabschluss mit Reiserücktritt.
+- **Einzelreise:** Sinnvoll, wenn du nur 1× pro Jahr verreist und die Reise teuer ist –   
+dann rechnet sich der Einzelabschluss mit Reiserücktritt.
 
 Die Faustregel: Wer mehr als zweimal im Jahr fliegt, nimmt den Jahresvertrag – und zwar direkt bei einem Versicherer oder über einen Vergleich, nicht im Buchungsprozess des Reiseportals.
 
@@ -121,10 +125,12 @@ Diese Routine kostet 5 Minuten vor jeder Reise – und erspart im Ernstfall Taus
 10 bis 30 Euro pro Jahr für Einzelpersonen, 20 bis 50 Euro für Familien – mit weltweiter Deckung und Rücktransport. Die günstigste Reiseversicherung überhaupt und für jede Reise sinnvoll.
 
 **Wann lohnt sich eine Reiserücktrittsversicherung?**
-Bei Reisen ab etwa 1.500 Euro, bei Vorerkrankungen und bei nicht verschiebbaren Reisen. Bei günstigen, flexiblen Trips ist sie unnötig – die Stornokosten wären gering.
+Bei Reisen ab etwa 1.500 Euro, bei Vorerkrankungen und bei nicht verschiebbaren Reisen. Bei günstigen, flexiblen Trips ist sie unnötig –   
+die Stornokosten wären gering.
 
 **Zahlt die gesetzliche Krankenkasse im Ausland?**
-Innerhalb der EU greift die Europäische Krankenversicherungskarte (EHIC) – sie deckt aber nur Behandlungen, die auch in Deutschland von der GKV übernommen werden, und keine Rücktransporte. Außerhalb der EU besteht oft gar kein Schutz – die private Auslandskrankenversicherung schließt die Lücken.
+Innerhalb der EU greift die Europäische Krankenversicherungskarte (EHIC) – sie deckt aber nur Behandlungen, die auch in Deutschland von der GKV übernommen werden, und keine Rücktransporte. Außerhalb der EU besteht oft gar kein Schutz –   
+die private Auslandskrankenversicherung schließt die Lücken.
 
 Die richtige Reiseversicherung gehört zur [Reise-Planung](../../posts/urlaubskasse-aufbessern-spartipps/) wie der [Mietwagen](../../posts/mietwagen-buchen-so-sparst-du/) und die [Flugbuchung](../../posts/guenstige-fluege-spaetsommer-finden/). Alle Reise- und Versicherungsthemen findest du in den [Ratgebern Mietwagen & Reisen](../../pillar/mietwagen/) und [Versicherungen](../../pillar/versicherungen/).
 

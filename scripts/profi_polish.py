@@ -119,6 +119,9 @@ REGELN:
     Wörter NIE mit Silbentrennung. Zwischen einer Zahl und ihrer Einheit steht
     IMMER ein geschütztes Leerzeichen (&nbsp;): 20&nbsp;%, 50&nbsp;€,
     100&nbsp;EUR – niemals "20 %" oder "50 €" mit normalem Leerzeichen.
+    Leitet ein Gedankenstrich einen erläuternden Nachsatz ein (Muster:
+    'Satz – Nachsatz'), beginnt der Nachsatz auf einer NEUEN Zeile
+    (Markdown-Hard-Break: zwei Leerzeichen am Zeilenende).
 12. GROSS-/KLEINSCHREIBUNG: Verwende die NORMALE deutsche Rechtschreibung – wie in
     einem Zeitungsartikel. Nur Satzanfänge und Substantive werden großgeschrieben,
     alle anderen Wörter klein (KEIN Titel-Stil, kein "Jedes Wort Groß").

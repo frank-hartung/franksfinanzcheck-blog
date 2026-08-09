@@ -25,7 +25,8 @@ Kontoführungsgebühren von 5 € bis 10 € im Monat summieren sich auf 60 �
 
 ## Kreditkarte ohne Jahresgebühr
 
-Für Reisen, Mietwagen-Reservierungen und Online-Käufe ist eine Kreditkarte praktisch unverzichtbar – eine gebührenpflichtige aber nicht. Die besten kostenlosen Karten und worauf du bei den Konditionen achten solltest: [Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten](../../posts/kreditkarte-ohne-jahresgebuehr/).
+Für Reisen, Mietwagen-Reservierungen und Online-Käufe ist eine Kreditkarte praktisch unverzichtbar –   
+eine gebührenpflichtige aber nicht. Die besten kostenlosen Karten und worauf du bei den Konditionen achten solltest: [Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten](../../posts/kreditkarte-ohne-jahresgebuehr/).
 
 ## Tagesgeld: Dein Geld sicher und zinsbringend parken
 
@@ -41,10 +42,12 @@ Wer einen Kredit braucht, sollte niemals den erstbesten nehmen: Der Unterschied 
 Viele Banken verlangen 5 € bis 10 € pro Monat – kostenlose Konten gibt es aber reichlich. Die Übersicht findest du in [Kostenloses Girokonto finden](../../posts/kostenloses-girokonto-finden/).
 
 ### Brauche ich wirklich eine Kreditkarte?
-Für Mietwagen, Reisen und Online-Handel ja – eine kostenlose Karte reicht völlig. Details in [Kreditkarte ohne Jahresgebühr](../../posts/kreditkarte-ohne-jahresgebuehr/).
+Für Mietwagen, Reisen und Online-Handel ja –   
+eine kostenlose Karte reicht völlig. Details in [Kreditkarte ohne Jahresgebühr](../../posts/kreditkarte-ohne-jahresgebuehr/).
 
 ### Wo parke ich meinen Notgroschen am besten?
-Auf einem Tagesgeldkonto mit Einlagensicherung – die Zins-Strategie steht in [Tagesgeld sicher anlegen](../../posts/tagesgeld-zinsen-sicher-anlegen/).
+Auf einem Tagesgeldkonto mit Einlagensicherung –   
+die Zins-Strategie steht in [Tagesgeld sicher anlegen](../../posts/tagesgeld-zinsen-sicher-anlegen/).
 
 ---
 

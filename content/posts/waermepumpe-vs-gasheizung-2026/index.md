@@ -39,7 +39,8 @@ Die Anschaffung der Wärmepumpe ist teurer – aber Förderung und niedrigere Be
 
 ## Wann die Gasheizung (noch) Sinn ergibt
 
-- **schlecht gedämmter Altbau:** hier arbeitet die Wärmepumpe ineffizient – ein Hybrid-System kann die Übergangslösung sein.
+- **schlecht gedämmter Altbau:** hier arbeitet die Wärmepumpe ineffizient –   
+ein Hybrid-System kann die Übergangslösung sein.
 - **sehr niedriger Gaspreis:** in Einzelfällen kann Gas günstiger sein – aber der CO₂-Preis steigt jährlich.
 - **kein Platz für die Außeneinheit:** Wärmepumpen brauchen Außenfläche – im dichten Stadtgebiet manchmal ein Problem.
 
