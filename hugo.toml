@@ -59,8 +59,8 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
   [params.homeInfoParams]
-    Title = "Willkommen bei FranksFinanzcheck 👋"
-    Content = "Geld sparen ohne Verzicht: Frugalismus-Tricks, Budgetplanung und clevere Vergleichstipps zu Strom, Gas, DSL, Versicherungen und Reisen. Die Artikel erscheinen laufend neu – schau bald wieder vorbei!"
+    Title = "Willkommen bei FranksFinanzcheck"
+    Content = "Geld sparen ohne Verzicht: Frugalismus-Tricks, Budgetplanung und clevere Vergleichstipps – jeden Tag ein neuer Artikel."
 
   [[params.socialIcons]]
     name = "pinterest"

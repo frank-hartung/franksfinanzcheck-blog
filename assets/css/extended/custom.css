@@ -582,3 +582,13 @@ input:focus-visible {
         margin-bottom: 12px;
     }
 }
+
+/* LCP-Feinschliff: Auf Mobile den CTA-Beschreibungstext ausblenden –
+   nur "Folge mir auf Pinterest" + Button bleiben. Der CTA schrumpft von
+   ~156px auf ~60px → das erste Artikel-Cover (LCP-Element) rückt ~90px
+   höher in den Viewport und wird deutlich früher gemalt. */
+@media (max-width: 768px) {
+    .ff-pinterest-cta-text span {
+        display: none;
+    }
+}
