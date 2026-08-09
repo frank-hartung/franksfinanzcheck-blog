@@ -6,7 +6,7 @@ draft: false
 tags: ["Impulskäufe", "Sparen", "Konsum"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["Impulskäufe vermeiden", "unnötige Ausgaben stoppen", "Kaufimpulse kontrollieren", "Geld sparen im Alltag"]
+keywords: ["Impulskäufe vermeiden", "unnötige Ausgaben stoppen", "Kaufimpulse kontrollieren", "[Geld sparen](../../posts/versicherungen-kuendigen-diese-5-poli/) im Alltag"]
 author: "Frank"
 ai_generated: true
 ai_provider: "Manuell (Masterplan Blueprint 2)"
