@@ -1,14 +1,6 @@
 # 🤖 Bot-Status
 
-<<<<<<< HEAD
-> Automatisch aktualisiert: 09.08.2026 11:49 Uhr (MESZ)
-=======
-<<<<<<< HEAD
-> Automatisch aktualisiert: 09.08.2026 11:49 Uhr (MESZ)
-=======
-> Automatisch aktualisiert: 09.08.2026 10:16 Uhr (MESZ)
->>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
->>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
+> Automatisch aktualisiert: 09.08.2026 15:52 Uhr (MESZ)
 
 ## Heutiger Stand
 
@@ -18,18 +10,8 @@
 
 ## System
 
-<<<<<<< HEAD
 - **Themenpool:** 161 Themen, **102 frei**
 - **Letzter Content-Commit:** noch keiner
-=======
-<<<<<<< HEAD
-- **Themenpool:** 161 Themen, **102 frei**
-- **Letzter Content-Commit:** noch keiner
-=======
-- **Themenpool:** 161 Themen, **110 frei**
-- **Letzter Content-Commit:** 8ee19d4 2026-08-09 content: neuer Artikel sofort optimiert (Meta, interne Verlinkung)
->>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
->>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
 - **Tageslimit:** 2 (steuerbar per Variable MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen
