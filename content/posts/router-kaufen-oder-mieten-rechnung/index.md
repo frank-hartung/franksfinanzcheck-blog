@@ -67,8 +67,7 @@ Wichtig: Prüfe vor dem Kauf, ob dein Router zum Anschlusstyp passt – DSL-Rout
 Der häufigste Fehler beim Router-Kauf ist die falsche Anschlussart. Bevor du bestellst, klärst du:
 
 1. **Anschlusstyp:** DSL/VDSL, Kabel (DOCSIS) oder Glasfaser? Jede Technologie braucht ihren Router-Typ.
-2. **Geschwindigkeit:** Der Router muss das gebuchte Tempo unterstützen –   
-ein alter Router mit nur 100 Mbit/s-LAN-Ports bremst deinen 250er-Anschluss aus.
+2. **Geschwindigkeit:** Der Router muss das gebuchte Tempo unterstützen – ein alter Router mit nur 100 Mbit/s-LAN-Ports bremst deinen 250er-Anschluss aus.
 3. **Telefonie:** Wenn du über den Router telefonierst (VoIP), brauchst du ein Gerät mit Telefonanschlüssen oder DECT-Basis.
 4. **Vektorierung/Supervectoring:** Bei schnellem DSL prüfen, ob der Router die Technik deines Anbieters unterstützt.
 
@@ -105,8 +104,7 @@ Der perfekte Zeitpunkt für den Router-Kauf ist der Anbieterwechsel: Beim [Wechs
 Die Strategie in drei Schritten:
 
 1. **Vor dem Wechsel:** Prüfen, ob dein Wunsch-Router zum neuen Anschluss passt (DSL, Kabel oder Glasfaser). Die [Anschluss-Wahl](../../posts/glasfaser-dsl-kabel-anschluss-vergleich/) entscheidet über die Router-Kompatibilität.
-2. **Beim Vertragsabschluss:** Den Tarif ohne Router-Miete wählen –   
-das sind 4 bis 6 Euro Ersparnis pro Monat, also 50 bis 70 Euro pro Jahr.
+2. **Beim Vertragsabschluss:** Den Tarif ohne Router-Miete wählen – das sind 4 bis 6 Euro Ersparnis pro Monat, also 50 bis 70 Euro pro Jahr.
 3. **Nach dem Wechsel:** Den alten Miet-Router fristgerecht zurückschicken und die Rückgabe bestätigen lassen – sonst läuft die Miete weiter.
 
 Wer diese Strategie umsetzt, spart doppelt: beim Tarif (ohne Miete) und bei der Hardware (einmal kaufen, jahrelang nutzen).
@@ -115,8 +113,7 @@ Wer diese Strategie umsetzt, spart doppelt: beim Tarif (ohne Miete) und bei der 
 ## Häufig gestellte Fragen
 
 **Darf ich meinen Router selbst kaufen?**
-Ja –   
-die Router-Freiheit erlaubt es dir seit 2016, eigene Endgeräte am Anschluss zu betreiben. Dein Anbieter muss dir die Zugangsdaten kostenlos herausgeben.
+Ja – die Router-Freiheit erlaubt es dir seit 2016, eigene Endgeräte am Anschluss zu betreiben. Dein Anbieter muss dir die Zugangsdaten kostenlos herausgeben.
 
 **Welcher Router ist der beste?**
 Für die meisten Haushalte ist ein Wi-Fi-6-Router mit Dual-Band und Gigabit-Ports die beste Wahl – als Einsteiger ab 80 Euro, für Familien mit mehreren Geräten ab 120 Euro. Eine gute Fritzbox ist der Klassiker für DSL-Anschlüsse.

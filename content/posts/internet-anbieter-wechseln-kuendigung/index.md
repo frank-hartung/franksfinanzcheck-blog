@@ -29,8 +29,7 @@ Die wichtigsten Regeln im Überblick:
 - **Mindestlaufzeit:** Maximal 24 Monate – danach monatlich kündbar.
 - **Kündigungsfrist:** Maximal 1 Monat zum Monatsende.
 - **Verlängerung:** Verträge, die sich automatisch verlängern, tun das maximal um 12 Monate – und sind dann wieder monatlich kündbar.
-- **Form:** Kündigung per Textform (E-Mail oder Brief mit Bestätigung) ist ausreichend –   
-eine mündliche Kündigung genügt nicht.
+- **Form:** Kündigung per Textform (E-Mail oder Brief mit Bestätigung) ist ausreichend – eine mündliche Kündigung genügt nicht.
 
 Viele Anbieter versuchen trotzdem, längere Fristen in den AGB zu verstecken. Die gesetzlichen Regeln gelten aber immer –   
 ein Verweis auf das Telekommunikationsgesetz hilft im Zweifel.
@@ -109,15 +108,13 @@ Ein Wechsel ist einfach – aber die Fehler kosten trotzdem Geld und Nerven. Die
 
 1. **Kein Doppelbetrieb geplant:** Wer den alten Anschluss kündigt, bevor der neue geschaltet ist, sitzt tagelang ohne Internet. Lösung: Die Termine über den Wechsel-Service koordinieren, damit sich die Anschlüsse überlappen.
 
-2. **Die E-Mail-Adresse vergessen:** Viele Internet-Verträge enthalten eine E-Mail-Adresse des Anbieters. Nach der Kündigung ist sie weg –   
-wer sie für Konten nutzt, verliert den Zugang. Lösung: Vor der Kündigung alle Konten auf eine eigene Adresse umstellen.
+2. **Die E-Mail-Adresse vergessen:** Viele Internet-Verträge enthalten eine E-Mail-Adresse des Anbieters. Nach der Kündigung ist sie weg – wer sie für Konten nutzt, verliert den Zugang. Lösung: Vor der Kündigung alle Konten auf eine eigene Adresse umstellen.
 
 3. **Router-Miete doppelt gezahlt:** Der Miet-Router des alten Anbieters muss fristgerecht zurück – sonst läuft die [Miete weiter](../../posts/router-kaufen-oder-mieten-rechnung/). Lösung: Rücksendung sofort nach der Schaltung, Beleg aufbewahren.
 
 4. **Keine Preisgarantie gesichert:** Viele Tarife erhöhen den Preis nach 12 Monaten. Lösung: Beim Abschluss auf die Preisgarantie achten oder den Wechsel-Rhythmus bewusst einplanen.
 
-5. **Nur auf den Lockvogel-Preis geschaut:** Der erste Monat für 0 Euro klingt gut –   
-entscheidend ist der Preis ab Monat 13. Lösung: Immer die Gesamtkosten über 24 Monate vergleichen.
+5. **Nur auf den Lockvogel-Preis geschaut:** Der erste Monat für 0 Euro klingt gut – entscheidend ist der Preis ab Monat 13. Lösung: Immer die Gesamtkosten über 24 Monate vergleichen.
 
 Wer diese fünf Punkte beachtet, wechselt stressfrei – und spart dauerhaft.
 
@@ -131,11 +128,9 @@ Bei Preiserhöhungen, Umzug ohne gleichwertigen Anschluss, dauerhafter Vertragsw
 Schriftlich per E-Mail an die Kündigungsadresse (mit Bestätigung) oder per Einschreiben. Die Kündigungsfrist beträgt nach der Mindestlaufzeit maximal 1 Monat.
 
 **Gibt es Boni für den Wechsel?**
-Ja –   
-die meisten Anbieter zahlen Neukunden-Boni von 50 bis 200 Euro oder geben die ersten Monate gratis. Die besten Angebote gibt es zu Black Friday, Jahresbeginn und in Glasfaser-Ausbaugebieten.
+Ja – die meisten Anbieter zahlen Neukunden-Boni von 50 bis 200 Euro oder geben die ersten Monate gratis. Die besten Angebote gibt es zu Black Friday, Jahresbeginn und in Glasfaser-Ausbaugebieten.
 
-Der Internetwechsel gehört zu den lohnendsten Sparmaßnahmen überhaupt –   
-genau wie der [Stromanbieter-Wechsel](../../posts/stromanbieter-wechseln-2026/). Und wer [den Anschluss vergleicht](../../posts/glasfaser-dsl-kabel-anschluss-vergleich/), sollte gleich auch den [Handytarif](../../posts/handytarife-vergleichen-guenstigster-tarif/) prüfen. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
+Der Internetwechsel gehört zu den lohnendsten Sparmaßnahmen überhaupt – genau wie der [Stromanbieter-Wechsel](../../posts/stromanbieter-wechseln-2026/). Und wer [den Anschluss vergleicht](../../posts/glasfaser-dsl-kabel-anschluss-vergleich/), sollte gleich auch den [Handytarif](../../posts/handytarife-vergleichen-guenstigster-tarif/) prüfen. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
 👉 **Jetzt Internet-Tarife vergleichen und Wechsel-Bonus sichern:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
 

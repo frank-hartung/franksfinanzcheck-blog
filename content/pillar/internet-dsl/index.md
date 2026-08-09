@@ -15,8 +15,7 @@ Langsames Internet kostet dich jeden Tag Zeit – und oft auch Geld, weil du meh
 ### Das Wichtigste in Kürze
 
 *   Der **DNS-Wechsel** ist kostenlos und kann spürbar schnelleres Laden bewirken.
-*   **WLAN-Verstärker oder Mesh** –   
-die richtige Wahl hängt von deiner Wohnung ab.
+*   **WLAN-Verstärker oder Mesh** – die richtige Wahl hängt von deiner Wohnung ab.
 *   Die **DSL-Flat** lässt sich mit dem Vergleich schnell um mehrere Hundert Euro im Jahr senken.
 *   Auch beim **Handytarif** zahlen viele doppelt so viel wie nötig.
 

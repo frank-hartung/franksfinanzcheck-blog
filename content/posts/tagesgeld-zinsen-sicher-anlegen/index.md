@@ -38,11 +38,9 @@ die Zinsen werden meist monatlich oder vierteljährlich gutgeschrieben. Im Gegen
 dort gibt es meist etwas mehr Zins.
 
 ## So holst du das Beste aus deinem Tagesgeld heraus
-1. **Zins-Hopping:** nach Ablauf der Zinsgarantie das Konto wechseln –   
-der "Lockzins" der neuen Bank ist oft deutlich höher.
+1. **Zins-Hopping:** nach Ablauf der Zinsgarantie das Konto wechseln – der "Lockzins" der neuen Bank ist oft deutlich höher.
 2. **Mehrere Konten:** wer mehr als 100.000 € anlegt, verteilt auf mehrere Banken.
-3. **Zinseszins nutzen:** Zinsen nicht abheben, sondern auf dem Konto lassen –   
-so wächst das Kapital schneller.
+3. **Zinseszins nutzen:** Zinsen nicht abheben, sondern auf dem Konto lassen – so wächst das Kapital schneller.
 4. **Zinsen vergleichen:** ein Zinsunterschied von 1 Prozentpunkt macht bei 10.000 € immerhin 100 € im Jahr.
 
 
@@ -53,8 +51,7 @@ Ein häufiger Fehler beim Tagesgeld: Das gesamte Ersparte auf ein einziges Konto
 Ja – bis 100.000 € pro Kunde und Bank ist dein Geld durch die gesetzliche Einlagensicherung geschützt.
 
 ### Wie viel Zinsen bekomme ich aktuell?
-Die Zinsen schwanken. Aktuell gibt es für Tagesgeld wieder attraktive Angebote im niedrigen bis mittleren Prozentbereich –   
-der Vergleich lohnt sich.
+Die Zinsen schwanken. Aktuell gibt es für Tagesgeld wieder attraktive Angebote im niedrigen bis mittleren Prozentbereich – der Vergleich lohnt sich.
 
 ### Lohnt sich Tagesgeld oder doch lieber ETF?
 Für den Notgroschen und kurzfristig verfügbares Geld: Tagesgeld. Für langfristigen Vermögensaufbau: ETF-Sparplan. Die Mischung macht's – Tagesgeld als Basis, ETF für den langen Atem.

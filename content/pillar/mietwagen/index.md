@@ -45,8 +45,7 @@ In der Regel so früh wie möglich, bei beliebten Zielen und in der Hauptsaison 
 Die Vollkasko mit Selbstbeteiligungs-Reduzierung ist meist sinnvoll – aber nicht die Zusatzversicherungen an der Theke. Die Details stehen im [Mietwagen-Fallen-Ratgeber](../../posts/mietwagen-fallen-vermeiden/).
 
 ### Lohnt sich Last Minute noch?
-Für flexible Reisende mit unkomplizierten Zielen ja. Wer bestimmte Hotels oder Termine braucht, sollte klassisch buchen –   
-mehr in [Last Minute: Traumurlaub günstig buchen](../../posts/last-minute-urlaubsangebote-sichern/).
+Für flexible Reisende mit unkomplizierten Zielen ja. Wer bestimmte Hotels oder Termine braucht, sollte klassisch buchen – mehr in [Last Minute: Traumurlaub günstig buchen](../../posts/last-minute-urlaubsangebote-sichern/).
 
 ---
 

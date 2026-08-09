@@ -28,8 +28,7 @@ Die Realität 2026:
 
 - **Frühbucher (4–6 Monate vorher):** Beste Preise, beste Hotel-Auswahl, beste Flugzeiten. Der Standard für Familien und alle, die ein bestimmtes Hotel wollen.
 - **Last Minute (2–4 Wochen vorher):** Nur noch sinnvoll, wenn Ziel und Hotel flexibel sind. Dann gibt es echte Schnäppchen – aber auch das Risiko, dass nichts Passendes mehr da ist.
-- **Mittelfristig (1–3 Monate):** Der teuerste Zeitraum –   
-die Frühbucher-Kontingente sind weg, die Restplätze noch nicht reduziert.
+- **Mittelfristig (1–3 Monate):** Der teuerste Zeitraum – die Frühbucher-Kontingente sind weg, die Restplätze noch nicht reduziert.
 
 Die Ausnahme: Flexible Reisende ohne Hotel-Wunsch können mit Last Minute (vor allem außerhalb der Ferienzeiten) gute Deals finden. Wer aber ein bestimmtes Hotel, einen bestimmten Flug oder eine Familienreise in den Ferien will, bucht früh.
 
@@ -54,8 +53,7 @@ Wer die Preismechanik versteht, kauft zum richtigen Zeitpunkt. Die 5 wichtigsten
 2. **Der Ferien-Effekt:** In den Schulferien steigen die Preise um 30 bis 60 Prozent – unabhängig vom Buchungszeitpunkt.
 3. **Der Restplatz-Preis:** 3 bis 6 Wochen vor Abreise senken die Veranstalter die Preise für unverkaufte Plätze – aber nur, wenn das Ziel nicht ausgebucht ist.
 4. **Der „Buchungsstress"-Preis:** Kurzfristig angefragte Reisen sind oft teurer, weil die Hotels die Verfügbarkeit knapp kalkulieren.
-5. **Der Preis-Vergleichs-Effekt:** Preise schwanken wöchentlich –   
-ein Preisalarm im Vergleichsportal hilft, den richtigen Moment zu erwischen.
+5. **Der Preis-Vergleichs-Effekt:** Preise schwanken wöchentlich – ein Preisalarm im Vergleichsportal hilft, den richtigen Moment zu erwischen.
 
 ## Spartrick 1: Flexibel beim Abflughafen
 
@@ -76,8 +74,7 @@ Gerade bei Kurztrips und Städtereisen ist die Wochenmitte der Geheimtipp: Wenig
 Die Zubuchungs-Falle der Reiseportale: Transfer, Ausflüge, Mietwagen, Versicherungen –   
 alles wird dir beim Buchen „bequem" angeboten, oft mit satten Aufschlägen. Die Regeln:
 
-- **Transfer:** Oft 30 bis 60 Euro pro Person –   
-ein [Mietwagen](../../posts/mietwagen-buchen-so-sparst-du/) oder öffentliche Verkehrsmittel sind oft günstiger und flexibler.
+- **Transfer:** Oft 30 bis 60 Euro pro Person – ein [Mietwagen](../../posts/mietwagen-buchen-so-sparst-du/) oder öffentliche Verkehrsmittel sind oft günstiger und flexibler.
 - **Reiseversicherung:** Die Versicherungen der Portale sind oft überteuert – [vergleiche die Konditionen](../../posts/reisekrankenversicherung-wann-lohnt/) vorher.
 - **Zimmer-Upgrades:** An der Rezeption vor Ort verhandeln ist oft günstiger als vorgebuchte Upgrades.
 

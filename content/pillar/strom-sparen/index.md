@@ -15,8 +15,7 @@ Strom ist einer der größten Posten im Haushaltsbudget – und einer, den du mi
 ### Das Wichtigste in Kürze
 
 *   Der **Tarifwechsel** ist der schnellste Hebel: Oft sparst du sofort mehrere Hundert Euro pro Jahr.
-*   **Stromfresser** im Standby kosten dich Jahr für Jahr bares Geld –   
-ein Strommessgerät lohnt sich.
+*   **Stromfresser** im Standby kosten dich Jahr für Jahr bares Geld – ein Strommessgerät lohnt sich.
 *   Beim **Heizen** entscheidet der Vergleich: Gaspreis, Wärmepumpe und Fördermittel 2026 genau prüfen.
 *   Auch beim **E-Auto-Laden** zu Hause lässt sich mit dem richtigen Tarif sparen.
 
@@ -44,8 +43,7 @@ Wer ein Elektroauto besitzt, kann die Ladekosten mit dem richtigen Haushalts- od
 ## Häufige Fragen
 
 ### Wie viel kann ich beim Stromanbieter-Wechsel sparen?
-Je nach Region und Verbrauch sind 150 € bis 300 € pro Jahr realistisch. Entscheidend ist der Vergleich von Arbeitspreis, Grundgebühr und Einmalboni –   
-mehr dazu im [Ratgeber Tarifwechsel](../../posts/stromanbieter-wechseln-2026/).
+Je nach Region und Verbrauch sind 150 € bis 300 € pro Jahr realistisch. Entscheidend ist der Vergleich von Arbeitspreis, Grundgebühr und Einmalboni – mehr dazu im [Ratgeber Tarifwechsel](../../posts/stromanbieter-wechseln-2026/).
 
 ### Welche Geräte sind die größten Stromfresser?
 Alte Kühlgeräte, Wäschetrockner und Geräte im Dauer-Standby. Ein Strommessgerät zeigt dir in einer Woche, wo das Geld hinfließt – Tipps findest du im [Stromfresser-Ratgeber](../../posts/stromfresser-im-haushalt-entlarven/).

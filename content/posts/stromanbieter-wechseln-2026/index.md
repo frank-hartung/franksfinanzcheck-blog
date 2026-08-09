@@ -46,8 +46,7 @@ Nach dem ersten Jahr lohnt sich der Blick auf die Jahresabrechnung: Wurden alle 
 ## Die häufigsten Fehler beim Stromwechsel
 
 1. **Bonus-Fallen übersehen** – Boni, die erst nach 12 Monaten ausgezahlt werden, sind nichts wert, wenn du vorher kündigst.
-2. **Nur auf den Arbeitspreis schauen** –   
-der Grundpreis kann kleine Preisvorteile komplett auffressen.
+2. **Nur auf den Arbeitspreis schauen** – der Grundpreis kann kleine Preisvorteile komplett auffressen.
 3. **Vorzeitige Kündigung** – kündigst du während der Mindestlaufzeit, drohen Gebühren.
 4. **Keine Preisgarantie** – ohne Garantie kann der Preis nach 3 Monaten steigen.
 
@@ -62,8 +61,7 @@ der Grundpreis kann kleine Preisvorteile komplett auffressen.
 ## Häufige Fragen (FAQ)
 
 ### Ist ein Stromwechsel wirklich kostenlos?
-Ja. Der Anbieterwechsel ist für dich kostenlos –   
-ein Tarifwechsel im selben Netzgebiet ist gesetzlich sogar von der Kündigung des alten Vertrags befreit.
+Ja. Der Anbieterwechsel ist für dich kostenlos – ein Tarifwechsel im selben Netzgebiet ist gesetzlich sogar von der Kündigung des alten Vertrags befreit.
 
 ### Wie lange dauert der Wechsel?
 In der Regel zwei bis sechs Wochen bis zum nächsten Monatsersten. Deine Versorgung ist nie unterbrochen.
