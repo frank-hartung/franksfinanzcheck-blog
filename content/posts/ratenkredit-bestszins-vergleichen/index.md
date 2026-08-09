@@ -56,5 +56,5 @@ Nur, wenn die Ersparnis die Kosten übersteigt. Faustregel: Bei Zinsunterschiede
 ### Wie viel Kredit kann ich mir leisten?
 Die Rate sollte dauerhaft unter 30 Prozent deines Nettoeinkommens bleiben. Bei 2.000 Euro netto sind das maximal 600 Euro monatlich – besser ist weniger, denn die Rate muss auch in schlechteren Monaten passen.
 
-👉 **Jetzt Ratenkredit vergleichen und Zinsen sparen:** [**→ Kredit-Angebote prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditvergleich)
+👉 **Jetzt Ratenkredit vergleichen und Zinsen sparen:** [**→ Kredit-Angebote prüfen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=kreditvergleich)
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

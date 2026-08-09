@@ -122,6 +122,6 @@ Die Umstellung dauert in der Regel 2 bis 6 Wochen. Währenddessen bist du durchg
 **Kann ich meinen Tarif bei einem Umzug mitnehmen?**
 In den meisten Fällen ja: Viele Anbieter gestatten die Mitnahme des Tarifs an die neue Adresse, sofern sie dort liefern. Beim Umzug in ein anderes Netzgebiet kann sich der Arbeitspreis ändern. Prüfe im Vertrag die Umzugsklausel – sonst hilft das Sonderkündigungsrecht, das bei Umzügen gesetzlich gilt.
 
-👉 **Jetzt Stromtarife vergleichen und bis zu 300 Euro sparen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
+👉 **Jetzt Stromtarife vergleichen und bis zu 300 Euro sparen:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

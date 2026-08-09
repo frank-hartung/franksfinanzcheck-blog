@@ -100,10 +100,10 @@ jobs:
         run: |
           echo "== Profi-Polish (KI) =="
           python3 scripts/profi_polish.py --new || echo "⚠ Polish-Fehler (nicht kritisch)"
-          echo "== Gedankenstrich-Umbruch-Regel (Nachsatz auf neue Zeile) =="
-          python3 scripts/fix_dash_breaks.py || echo "⚠ Dash-Break-Regel (nicht kritisch)"
-          echo "== Teilüberschriften-Generator (Umbruch nach Doppelpunkt) =="
-          python3 scripts/fix_heading_breaks.py || echo "⚠ Überschriften-Regel (nicht kritisch)"
+          echo "== Zeilenumbruch-Generator (Profi-Level, selbstheilend) =="
+          python3 scripts/fix_linebreaks.py || echo "⚠ Zeilenumbruch-Generator (nicht kritisch)"
+          echo "== Leerzeichen-Generator (Profi-Level, selbstheilend) =="
+          python3 scripts/fix_spaces.py || echo "⚠ Leerzeichen-Generator (nicht kritisch)"
           echo "== Rechtschreibung =="
           sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
           python3 scripts/spellcheck.py --fix || echo "⚠ Spellcheck-Fehler (nicht kritisch)"

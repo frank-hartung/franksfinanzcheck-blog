@@ -14,10 +14,10 @@ Frugalismus ist für mich nie Verzicht um des Verzichts willen gewesen – sonde
 
 ### Das Wichtigste in Kürze
 
-*   Die **50-30-20-Regel** gibt deinen Finanzen eine einfache, tragfähige Struktur.
-*   Ein **Notgroschen** auf dem Tagesgeldkonto macht dich unabhängig von Schicksalsschlägen.
-*   **Kleine Gewohnheiten** im Alltag sparen mehr als jeder Verzicht auf Großes.
-*   **Frugalismus ist ein Weg zur Freiheit**, nicht zur Entbehrung.
+* Die **50-30-20-Regel** gibt deinen Finanzen eine einfache, tragfähige Struktur.
+* Ein **Notgroschen** auf dem Tagesgeldkonto macht dich unabhängig von Schicksalsschlägen.
+* **Kleine Gewohnheiten** im Alltag sparen mehr als jeder Verzicht auf Großes.
+* **Frugalismus ist ein Weg zur Freiheit**, nicht zur Entbehrung.
 
 ## Frugalismus im Alltag:<br>Die Grundlagen
 
@@ -48,6 +48,6 @@ Nein – richtig umgesetzt ist er bewusstes Ausgeben für das, was dir wichtig i
 
 ---
 
-👉 **Jetzt Angebote vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18)
+👉 **Jetzt Angebote vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a. check24. net/misc/click. php? pid=80968&aid=18)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

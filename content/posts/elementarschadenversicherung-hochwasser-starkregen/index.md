@@ -18,20 +18,20 @@ cover:
 ---Jede zweite Wohnung in Deutschland ist schutzlos gegen Naturgewalten. Ein einziger Starkregen setzt deinen Keller in Minuten unter Wasser und vernichtet deine Ersparnisse. Der Staat hilft dir im Ernstfall nur selten. Erfahre hier, wie du mit einer Elementarschadenversicherung deine Existenz sicherst.
 
 ### Das Wichtigste in Kürze
-*   Die Basis-Hausrat deckt keine Naturgewalten wie Hochwasser ab.
-*   Ein Zusatzbaustein schützt dich vor finanziellen Folgen durch Starkregen.
-*   In Zone 1 kostet der Schutz oft weniger als 50 € im Jahr.
-*   Ohne Versicherung entfällt meist der Anspruch auf staatliche Soforthilfe.
+* Die Basis-Hausrat deckt keine Naturgewalten wie Hochwasser ab.
+* Ein Zusatzbaustein schützt dich vor finanziellen Folgen durch Starkregen.
+* In Zone 1 kostet der Schutz oft weniger als 50 € im Jahr.
+* Ohne Versicherung entfällt meist der Anspruch auf staatliche Soforthilfe.
 
 ## Was die Elementarschadenversicherung abdeckt
 
 Die Elementarschadenversicherung ist ein wichtiger Zusatzbaustein für deinen Schutz. Sie ergänzt deine Hausrat- oder Wohngebäudeversicherung sinnvoll. Standardverträge lassen Schäden durch extreme Naturgewalten oft außen vor. Mit diesem Baustein sicherst du dich gegen diese Gefahren ab:
 
-*   **Überschwemmung** durch Hochwasser, Rückstau oder eine Starkregen Versicherung.
-*   **Schneedruck**, der dein Dach eindrückt.
-*   **Erdbeben**, Erdfall oder Erdrutsch.
-*   **Lawinen** sowie Vulkanausbrüche.
-*   **Orkan** (einfacher Sturm ist meist in der Basis-Police enthalten).
+* **Überschwemmung** durch Hochwasser, Rückstau oder eine Starkregen Versicherung.
+* **Schneedruck**, der dein Dach eindrückt.
+* **Erdbeben**, Erdfall oder Erdrutsch.
+* **Lawinen** sowie Vulkanausbrüche.
+* **Orkan** (einfacher Sturm ist meist in der Basis-Police enthalten).
 
 Die Bedingungen unterscheiden sich je nach Anbieter deutlich. Achte besonders auf den Rückstauschutz. Dieser greift, wenn Wasser aus der Kanalisation in dein Haus drückt. Prüfe deinen Vertrag, ob du diese Klausel aktiv vereinbaren musst.
 
@@ -74,11 +74,11 @@ Aktuell gibt es in Deutschland keine generelle Versicherungspflicht. Dennoch for
 
 Der Wechsel oder die Ergänzung deiner Police ist einfach. Folge diesen Schritten für einen besseren Schutz:
 
-1.  **Checke deinen Vertrag:** Prüfe, ob der Elementar-Baustein bereits aktiv ist.
-2.  **Frage die Zone ab:** Dein Makler nennt dir deine ZÜRS-Einstufung.
-3.  **Vergleiche Preise:** Fordere Angebote bei deinem und anderen Anbietern an. Nutze den [Hausrat-Vergleich](../../posts/hausratversicherung-wer-braucht-leistung/) für die besten Konditionen.
-4.  **Passe den Schutz an:** Ergänze den Baustein oder wechsle den Anbieter. Beachte bei einem Wechsel die Kündigungsfrist von meist drei Monaten.
-5.  **Prüfe den Rückstau:** Kläre, ob eine Rückstauklappe in deinem Keller Pflicht ist.
+1. **Checke deinen Vertrag:** Prüfe, ob der Elementar-Baustein bereits aktiv ist.
+2. **Frage die Zone ab:** Dein Makler nennt dir deine ZÜRS-Einstufung.
+3. **Vergleiche Preise:** Fordere Angebote bei deinem und anderen Anbietern an. Nutze den [Hausrat-Vergleich](../../posts/hausratversicherung-wer-braucht-leistung/) für die besten Konditionen.
+4. **Passe den Schutz an:** Ergänze den Baustein oder wechsle den Anbieter. Beachte bei einem Wechsel die Kündigungsfrist von meist drei Monaten.
+5. **Prüfe den Rückstau:** Kläre, ob eine Rückstauklappe in deinem Keller Pflicht ist.
 
 ## Prävention:<br>So senkst du dein Schadenrisiko aktiv
 
@@ -115,6 +115,6 @@ Ja, das ist der Kern des Schutzes. Das Wasser muss von außen in das Gebäude ei
 **Kann ich die Versicherung jederzeit abschließen?**
 In der Regel ist der Abschluss jederzeit möglich. In akuten Hochwasserlagen lehnen Versicherer neue Anträge jedoch oft ab. Warte nicht auf die nächste Regenfront, sondern handle sofort.
 
-👉 **Jetzt Hausrat- und Elementarschutz vergleichen:** [**→ Jetzt vergleichen und sparen**](https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hausratversicherung)
+👉 **Jetzt Hausrat- und Elementarschutz vergleichen:** [**→ Jetzt vergleichen und sparen**](https://a. partner-versicherung. de/click. php? partner_id=47086&ad_id=15&deep=hausratversicherung)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

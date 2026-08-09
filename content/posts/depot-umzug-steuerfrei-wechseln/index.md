@@ -20,11 +20,11 @@ cover:
 In diesem Ratgeber erfährst du, wie der Wechsel reibungslos gelingt. Ich zeige dir den Prozess Schritt für Schritt. Zudem erfährst du, welche steuerlichen Klippen du umschiffen musst.
 
 ### Das Wichtigste in Kürze
-*   **Kostenlos:** Deutsche Banken dürfen für den Übertrag keine Gebühren verlangen.
-*   **steuerneutral:** Du verkaufst nichts, daher fällt keine Abgeltungsteuer an.
-*   **Dauer:** Plane etwa eine bis drei Wochen für den gesamten Vorgang ein.
-*   **Verlusttöpfe:** diese musst du oft separat übertragen lassen.
-*   **Sparpläne:** Richte deine automatischen Käufe beim neuen Broker neu ein.
+* **Kostenlos:** Deutsche Banken dürfen für den Übertrag keine Gebühren verlangen.
+* **steuerneutral:** Du verkaufst nichts, daher fällt keine Abgeltungsteuer an.
+* **Dauer:** Plane etwa eine bis drei Wochen für den gesamten Vorgang ein.
+* **Verlusttöpfe:** diese musst du oft separat übertragen lassen.
+* **Sparpläne:** Richte deine automatischen Käufe beim neuen Broker neu ein.
 
 ## Warum ein Depotwechsel sich lohnen kann
 
@@ -42,12 +42,12 @@ Vorsicht ist nur bei Brokern mit Sitz im Ausland geboten. Hier können Gebühren
 
 So wickelst du den Wechsel in sechs einfachen Schritten ab:
 
-1.  **Neues Depot eröffnen:** die Eröffnung dauert meist nur 15 Minuten. Nutze dafür die Identitätsprüfung per Video-Ident. Das funktioniert so einfach wie beim [Girokonto-Wechsel](../../posts/kontowechsel-in-20-minuten-wechselservice/).
-2.  **Übertragsformular ausfüllen:** Suche beim neuen Broker nach dem Punkt „Depotübertrag“. Trage dort die Kennnummern (ISIN) und die Stückzahlen deiner Papiere ein. Du kannst auch das gesamte Depot übertragen.
-3.  **Auftrag erteilen:** Reiche das Formular online ein oder lade es unterschrieben hoch. Dein neuer Broker kontaktiert dann deine alte Bank für dich. Du musst dich um die weitere Kommunikation kaum kümmern.
-4.  **Warten:** Der Transfer dauert im Regelfall ein bis drei Wochen. In dieser Zeit liegen deine Papiere sicher bei der alten Bank. Beachte jedoch: Während des Übertrags kannst du die Wertpapiere nicht verkaufen.
-5.  **Prüfen:** Kontrolliere nach dem Einzug die Stückzahlen im neuen Depot. Prüfe auch, ob der neue Broker die korrekten Einstandswerte anzeigt. Bei Fehlern hilft dir der Kundenservice des neuen Anbieters weiter.
-6.  **Altes Depot kündigen:** Kündige dein altes Depot erst, wenn alle Anteile übertragen sind. Nutze dafür ein einfaches Kündigungsschreiben. Überweise restliches Guthaben vorher auf dein neues Verrechnungskonto.
+1. **Neues Depot eröffnen:** die Eröffnung dauert meist nur 15 Minuten. Nutze dafür die Identitätsprüfung per Video-Ident. Das funktioniert so einfach wie beim [Girokonto-Wechsel](../../posts/kontowechsel-in-20-minuten-wechselservice/).
+2. **Übertragsformular ausfüllen:** Suche beim neuen Broker nach dem Punkt „Depotübertrag“. Trage dort die Kennnummern (ISIN) und die Stückzahlen deiner Papiere ein. Du kannst auch das gesamte Depot übertragen.
+3. **Auftrag erteilen:** Reiche das Formular online ein oder lade es unterschrieben hoch. Dein neuer Broker kontaktiert dann deine alte Bank für dich. Du musst dich um die weitere Kommunikation kaum kümmern.
+4. **Warten:** Der Transfer dauert im Regelfall ein bis drei Wochen. In dieser Zeit liegen deine Papiere sicher bei der alten Bank. Beachte jedoch: Während des Übertrags kannst du die Wertpapiere nicht verkaufen.
+5. **Prüfen:** Kontrolliere nach dem Einzug die Stückzahlen im neuen Depot. Prüfe auch, ob der neue Broker die korrekten Einstandswerte anzeigt. Bei Fehlern hilft dir der Kundenservice des neuen Anbieters weiter.
+6. **Altes Depot kündigen:** Kündige dein altes Depot erst, wenn alle Anteile übertragen sind. Nutze dafür ein einfaches Kündigungsschreiben. Überweise restliches Guthaben vorher auf dein neues Verrechnungskonto.
 
 ## Steuern beim Übertrag:<br>Was du wissen musst
 
@@ -73,11 +73,11 @@ Ein weiteres Problem sind die Steuerdaten. Ausländische Broker melden Einstands
 
 ## Die 5 häufigsten Fehler beim Depotwechsel
 
-1.  **Verlusttöpfe vergessen:** Beantrage den Übertrag deiner Verluste immer schriftlich.
-2.  **Einstandswerte ignorieren:** Prüfe nach dem Wechsel unbedingt deine Kaufkurse.
-3.  **Zu frühe Kündigung:** Kündige das alte Depot erst nach dem erfolgreichen Abschluss. Sonst gehen Dividenden während der Übergangszeit eventuell verloren.
-4.  **Handelsstopp unterschätzt:** Du kannst während der Übertragung nicht auf Marktschwankungen reagieren. Wähle eine ruhige Marktphase für den Umzug.
-5.  **Sparpläne nicht gestoppt:** Lösche deine Sparpläne beim alten Broker rechtzeitig. Richte sie beim neuen Anbieter parallel neu ein, um keine Raten zu verpassen.
+1. **Verlusttöpfe vergessen:** Beantrage den Übertrag deiner Verluste immer schriftlich.
+2. **Einstandswerte ignorieren:** Prüfe nach dem Wechsel unbedingt deine Kaufkurse.
+3. **Zu frühe Kündigung:** Kündige das alte Depot erst nach dem erfolgreichen Abschluss. Sonst gehen Dividenden während der Übergangszeit eventuell verloren.
+4. **Handelsstopp unterschätzt:** Du kannst während der Übertragung nicht auf Marktschwankungen reagieren. Wähle eine ruhige Marktphase für den Umzug.
+5. **Sparpläne nicht gestoppt:** Lösche deine Sparpläne beim alten Broker rechtzeitig. Richte sie beim neuen Anbieter parallel neu ein, um keine Raten zu verpassen.
 
 ## Depot-Umzug und Steuern:<br>Die Sonderfälle im Detail
 
@@ -104,6 +104,6 @@ Sparpläne werden nicht automatisch übertragen. Du musst sie beim alten Anbiete
 
 Ein Depot-Umzug ist ein Klassiker der [Gebührenoptimierung im Banking](../../posts/gebuehrenfallen-banking-vermeiden/). Es ist die perfekte Gelegenheit für einen Check. Passt dein Anbieter noch zu deinem [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/)? Wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch sucht, findet online schnell den passenden Partner. Mehr Informationen findest du auch im [Ratgeber Konto & Karten](../../pillar/konto-karten/).
 
-👉 **Jetzt kostenloses Konto mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
+👉 **Jetzt kostenloses Konto mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=c24bank&cat=14)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

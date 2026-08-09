@@ -16,11 +16,11 @@ kurzantwort: "Du kannst im Winter bares Geld sparen, wenn du im Spätsommer den 
 ---Bezahlst du noch die hohen Preise deines Grundversorgers? Wer jetzt seine Gastarife vergleichen will, nutzt den Spätsommer für den Wechsel und spart im kommenden Winter bares Geld. Ein kluger Anbieterwechsel senkt deine jährlichen Fixkosten oft um 200 bis 400 Euro. So sicherst du dir günstige Konditionen, bevor die Heizperiode startet und die Preise traditionell anziehen.
 
 ### Das Wichtigste in Kürze
-*   Prüfe deinen Jahresverbrauch auf der letzten Abrechnung (Angabe in kWh).
-*   Nutze einen unabhängigen Gasvergleich für den Marktüberblick.
-*   Achte auf Preisgarantien von mindestens 12 Monaten.
-*   Wähle kurze Kündigungsfristen für maximale Flexibilität.
-*   Der neue Anbieter erledigt die Kündigung beim alten Versorger automatisch.
+* Prüfe deinen Jahresverbrauch auf der letzten Abrechnung (Angabe in kWh).
+* Nutze einen unabhängigen Gasvergleich für den Marktüberblick.
+* Achte auf Preisgarantien von mindestens 12 Monaten.
+* Wähle kurze Kündigungsfristen für maximale Flexibilität.
+* Der neue Anbieter erledigt die Kündigung beim alten Versorger automatisch.
 
 ## Warum gerade jetzt wechseln?
 
@@ -39,10 +39,10 @@ Energieversorger passen ihre Preise häufig zum Beginn der Heizsaison an. Wenn d
 
 ## Der Gaswechsel in 4 Schritten
 
-1.  **Jahresverbrauch ermitteln**: Schaue auf deine letzte Abrechnung. Nutze den Wert in Kilowattstunden (kWh), da dieser für den Vergleich präziser ist als Kubikmeter.
-2.  **Tarife vergleichen**: Gib deine Postleitzahl und den Verbrauch in den Rechner ein. Sortiere die Ergebnisse nach fairen Bedingungen und stabilen Preisen.
-3.  **Angebot prüfen**: Achte auf das Kleingedruckte bei den Bonuszahlungen. Manche Boni fließen erst nach einem vollen Belieferungsjahr zurück auf dein Konto.
-4.  **Abschluss machen**: Fülle das Online-Formular aus. Dein neuer Anbieter kündigt für dich beim alten Versorger und bestätigt dir den Lieferbeginn schriftlich.
+1. **Jahresverbrauch ermitteln**: Schaue auf deine letzte Abrechnung. Nutze den Wert in Kilowattstunden (kWh), da dieser für den Vergleich präziser ist als Kubikmeter.
+2. **Tarife vergleichen**: Gib deine Postleitzahl und den Verbrauch in den Rechner ein. Sortiere die Ergebnisse nach fairen Bedingungen und stabilen Preisen.
+3. **Angebot prüfen**: Achte auf das Kleingedruckte bei den Bonuszahlungen. Manche Boni fließen erst nach einem vollen Belieferungsjahr zurück auf dein Konto.
+4. **Abschluss machen**: Fülle das Online-Formular aus. Dein neuer Anbieter kündigt für dich beim alten Versorger und bestätigt dir den Lieferbeginn schriftlich.
 
 ## Der Herbst-Check für deine Heizung
 
@@ -61,6 +61,6 @@ Du schließt den neuen Vertrag einfach mit Wirkung zum Ende deiner aktuellen Lau
 
 ---
 
-👉 **Jetzt Gastarife vergleichen und den Winter günstig überstehen:** [**→ Gaspreise prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3)
+👉 **Jetzt Gastarife vergleichen und den Winter günstig überstehen:** [**→ Gaspreise prüfen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

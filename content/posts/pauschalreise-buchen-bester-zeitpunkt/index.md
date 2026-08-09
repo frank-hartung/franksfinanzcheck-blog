@@ -120,6 +120,6 @@ Die Pauschalreise-Verordnung: kostenlose Stornierung bei schweren Umständen, Mi
 
 Die Pauschalreise ist die sicherste Art zu reisen – kombiniert mit [günstigen Flügen](../../posts/guenstige-fluege-spaetsommer-finden/) und einem [Mietwagen vor Ort](../../posts/mietwagen-buchen-so-sparst-du/) wird daraus der ideale Urlaub. Wer sein [Reisebudget](../../posts/urlaubskasse-aufbessern-spartipps/) im Blick behält, plant entspannt. Alle Reisethemen: [Ratgeber Mietwagen & Reisen](../../pillar/mietwagen/).
 
-👉 **Jetzt Pauschalreisen vergleichen und sparen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9)
+👉 **Jetzt Pauschalreisen vergleichen und sparen:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
