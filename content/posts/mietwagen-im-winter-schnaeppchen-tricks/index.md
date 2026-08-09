@@ -26,7 +26,8 @@ Die Preise folgen der Nachfrage: Im Sommer sind die Flotten der Vermieter ausgeb
 
 Besonders günstig sind Mietwagen in Städten ohne Wintersport: Flughäfen im Mittelmeerraum oder in Nordeuropa haben im Winter Leerstände. Wer einen Zwischenstopp oder eine Städtereise mit Mietwagen plant, profitiert doppelt.
 
-Wichtig: In Skigebieten selbst (zum Beispiel Innsbruck, Salzburg, Zürich im Winter) sind die Preise höher – dort lohnt der Vergleich mit der Anmietung am Flughafen der Region.
+Wichtig: In Skigebieten selbst (zum Beispiel Innsbruck, Salzburg, Zürich im Winter) sind die Preise höher –   
+dort lohnt der Vergleich mit der Anmietung am Flughafen der Region.
 
 ## Trick 1: Abholzeitpunkt clever wählen
 
@@ -34,7 +35,8 @@ Die Mietpreise hängen stark von Tag und Uhrzeit ab. Die günstigsten Zeiten:
 
 - **Unter der Woche statt am Wochenende:** Wer Montag bis Freitag mietet, zahlt oft 20 bis 30 Prozent weniger als am Wochenende.
 - **Mittags statt morgens:** Flughafen-Stationen haben morgens die teuersten Tarife (Ankunftswellen). Wer mittags oder nachmittags abholt, bekommt bessere Preise.
-- **Länger als nötig:** Klingt paradox, aber: 7 Tage sind oft kaum teurer als 5 Tage – die Tagespreise fallen mit der Mietdauer. Prüfe, ob sich der Verlängerungstag lohnt.
+- **Länger als nötig:** Klingt paradox, aber: 7 Tage sind oft kaum teurer als 5 Tage –   
+die Tagespreise fallen mit der Mietdauer. Prüfe, ob sich der Verlängerungstag lohnt.
 
 ## Trick 2: Winterreifen-Check (Pflicht!)
 
@@ -59,13 +61,15 @@ Tipp: Achte auf die Kofferraumgröße – vier Personen mit Skiausrüstung brauc
 
 Die Tankregel ist der Klassiker der Mietwagen-Spartricks: Nimm den Tarif „voll zu voll" – du bekommst das Auto mit vollem Tank und gibst es voll wieder zurück. Der Vorteil: Du zahlst nur den Sprit, den du wirklich verbrauchst, und vermeidest die oft überteuerten Tank-Pakete der Vermieter (bis zu 2 Euro pro Liter Aufpreis).
 
-Die Regeln für den Winter: Die Tankstelle vor der Rückgabe suchen (nicht im Skigebiet – dort sind die Preise oft 20 Cent höher), und den Beleg aufbewahren. Bei Kälte verbraucht das Auto übrigens mehr Sprit (Motorwarmlauf, Heizung, Licht) – plane den Tankbedarf großzügig.
+Die Regeln für den Winter: Die Tankstelle vor der Rückgabe suchen (nicht im Skigebiet –   
+dort sind die Preise oft 20 Cent höher), und den Beleg aufbewahren. Bei Kälte verbraucht das Auto übrigens mehr Sprit (Motorwarmlauf, Heizung, Licht) – plane den Tankbedarf großzügig.
 
 ## Trick 5: Der richtige Buchungszeitpunkt
 
 Der beste Buchungszeitpunkt für Winter-Mietwagen: **6 bis 12 Wochen vor der Reise.** In diesem Fenster sind die Preise am niedrigsten – zu früh gebuchte Tarife sind oft teurer, weil die Vermieter die Flotten noch nicht rabattiert haben, und zu spät gebuchte Tarife steigen mit der Nachfrage.
 
-Die Ausnahme: Skigebiete zu Ferienzeiten (Weihnachten, Februarferien) – hier gilt „je früher, desto besser", weil die Nachfrage die Preise treibt.
+Die Ausnahme: Skigebiete zu Ferienzeiten (Weihnachten, Februarferien) –   
+hier gilt „je früher, desto besser", weil die Nachfrage die Preise treibt.
 
 Der [Mietwagen-Vergleich](../../posts/mietwagen-buchen-so-sparst-du/) zeigt dir Preise und Bedingungen auf einen Blick – und mit der kostenlosen Stornierung kannst du nachbuchen, falls der Preis fällt.
 
@@ -83,7 +87,8 @@ Wichtig: Die Winterreifen-Frage ist keine Versicherungsfrage – fehlende Winter
 
 Der letzte Trick ist die Flexibilität: Buche mit **kostenloser Stornierung** (bei den meisten Portalen Standard) und prüfe den Preis regelmäßig. Sinkt der Tarif, storniere und buche zum günstigeren Preis nach. Das Gleiche gilt, wenn sich deine Pläne ändern – ohne Storno-Gebühr bleibst du flexibel.
 
-Tipp: Auch die Tankregel und Zusatzfahrer solltest du vor der Buchung klären – manche Portale berechnen für den zweiten Fahrer 5 bis 10 Euro pro Tag, andere inkludieren ihn. Beim [Mietwagen-Vergleich](../../posts/mietwagen-buchen-so-sparst-du/) siehst du die Bedingungen im Detail.
+Tipp: Auch die Tankregel und Zusatzfahrer solltest du vor der Buchung klären –   
+manche Portale berechnen für den zweiten Fahrer 5 bis 10 Euro pro Tag, andere inkludieren ihn. Beim [Mietwagen-Vergleich](../../posts/mietwagen-buchen-so-sparst-du/) siehst du die Bedingungen im Detail.
 
 ## Winter-Mietwagen in Skigebieten: Die Spezialfälle
 
@@ -91,11 +96,14 @@ In Skigebieten gelten eigene Regeln – und die Schnäppchen-Logik kehrt sich te
 
 **Abholung am Flughafen statt im Skigebiet:** Die Stationen in den Skigebieten (zum Beispiel Innsbruck, Salzburg, Zürich im Winter) haben hohe Preise, weil die Nachfrage konstant ist. Wer am Flughafen der Region mietet (oft 20 bis 30 Kilometer entfernt), zahlt oft 30 bis 50 Prozent weniger – und holt das Auto auf dem Weg ins Tal ab.
 
-**Wochenend-Ski-Trips:** Wer nur übers Wochenende fährt, zahlt die teuersten Tagessätze. Die Lösung: Freitagabend oder Samstagfrüh abholen und bis Montag mieten – der Wochenend-Tarif ist oft günstiger als die Tages-Tarife.
+**Wochenend-Ski-Trips:** Wer nur übers Wochenende fährt, zahlt die teuersten Tagessätze. Die Lösung: Freitagabend oder Samstagfrüh abholen und bis Montag mieten –   
+der Wochenend-Tarif ist oft günstiger als die Tages-Tarife.
 
-**Skibus-Stationen als Alternative:** In vielen Skigebieten sind die Ortschaften mit Skibussen verbunden – wer nahe an einer Station wohnt, kann den Mietwagen am Urlaubsort sogar komplett sparen. Prüfe vor der Buchung, ob du das Auto wirklich jeden Tag brauchst.
+**Skibus-Stationen als Alternative:** In vielen Skigebieten sind die Ortschaften mit Skibussen verbunden –   
+wer nahe an einer Station wohnt, kann den Mietwagen am Urlaubsort sogar komplett sparen. Prüfe vor der Buchung, ob du das Auto wirklich jeden Tag brauchst.
 
-**Die Rückgabe im Dunkeln:** Im Winter wird es früh dunkel – kontrolliere das Auto bei der Rückgabe mit Taschenlampe auf Schäden (Felgen, Stoßstangen, Unterboden durch Schneeketten). Fotos als Beweis machen – das schützt vor Nachforderungen.
+**Die Rückgabe im Dunkeln:** Im Winter wird es früh dunkel – kontrolliere das Auto bei der Rückgabe mit Taschenlampe auf Schäden (Felgen, Stoßstangen, Unterboden durch Schneeketten). Fotos als Beweis machen –   
+das schützt vor Nachforderungen.
 
 
 ## Häufig gestellte Fragen

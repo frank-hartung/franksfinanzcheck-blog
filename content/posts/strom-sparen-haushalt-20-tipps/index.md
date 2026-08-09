@@ -22,7 +22,8 @@ Du kannst sofort beginnen, deinen Stromverbrauch zu reduzieren.
 3. **Kühlschrank-Temperatur:** 7 Grad genügen – jedes Grad weniger kostet bis zu 6 % mehr Strom. 
 4. **Gefrierfach abtauen:** schon 1 cm Eisschicht erhöht den Verbrauch um bis zu 15 %. 
 5. **Kurz kalt waschen:** 30 Grad statt 60 Grad spart bis zu 50 % Strom pro Waschgang. 
-6. **Wäsche an der Luft trocknen:** der Trockner ist einer der größten Stromfresser – der Balkon oder Ständer spart 60–100 € pro Jahr. 
+6. **Wäsche an der Luft trocknen:** der Trockner ist einer der größten Stromfresser –   
+der Balkon oder Ständer spart 60–100 € pro Jahr. 
 7. **Deckel auf den Topf:** beim Kochen mit Deckel spart du bis zu zwei Drittel der Energie. 
 8. **Wasserkocher statt Herdplatte:** für eine Tasse Tee ist der Wasserkocher deutlich effizienter. 
 9. **Backofen nicht vorheizen:** bei den meisten Gerichten unnötig – spart Strom und Zeit. 
@@ -38,11 +39,13 @@ Mit kleinen Investitionen kannst du deinen Stromverbrauch weiter reduzieren.
 
 ## Größere Investition (100 €+)
 Mit größeren Investitionen kannst du deinen Stromverbrauch noch mehr reduzieren. 
-16. **Neue Kühlgeräte:** ein Kühlschrank der Klasse A (alt) verbraucht oft doppelt so viel wie ein modernes A+++-Gerät – der Tausch lohnt sich ab 15 Jahren. 
+16. **Neue Kühlgeräte:** ein Kühlschrank der Klasse A (alt) verbraucht oft doppelt so viel wie ein modernes A+++-Gerät –   
+der Tausch lohnt sich ab 15 Jahren. 
 17. **Wärmepumpentrockner:** Verbrauchen bis zu 50 % weniger als alte Ablufttrockner. 
 18. **Programmierbare Thermostate:** Heizung automatisch absenken, wenn niemand zu Hause ist. 
 19. **Solar-Balkonkraftwerk:** ein Mini-Solarmodul (400–800 W) am Balkon produziert 300–600 kWh pro Jahr – rechnet sich oft schon nach 3–5 Jahren. 
-20. **Stromtarif wechseln:** der größte Hebel überhaupt – der Unterschied zwischen Grundtarif und günstigstem Anbieter liegt oft bei 200–300 € pro Jahr.
+20. **Stromtarif wechseln:** der größte Hebel überhaupt –   
+der Unterschied zwischen Grundtarif und günstigstem Anbieter liegt oft bei 200–300 € pro Jahr.
 
 ## Die 3 größten Stromfresser im Haushalt
 Die größten Stromfresser im Haushalt sind: 
@@ -58,7 +61,8 @@ Wer die Sofort-Tipps umsetzt, spart realistisch 100–200 € pro Jahr. Mit Inv
 Der Stromtarif-Wechsel (Tipp 20) hat den größten Einzel-Effekt. Danach folgen Standby-Vermeidung, Wäschetrocknen an der Luft und der Austausch alter Kühlgeräte.
 
 ### Lohnt sich ein Strommessgerät?
-Ja – ein Messgerät (oft kostenlos ausleihbar) zeigt in 24 Stunden, welche Geräte wirklich viel ziehen. Gerade versteckte Dauerläufer werden so sichtbar.
+Ja –   
+ein Messgerät (oft kostenlos ausleihbar) zeigt in 24 Stunden, welche Geräte wirklich viel ziehen. Gerade versteckte Dauerläufer werden so sichtbar.
 
 Das Wichtigste in Kürze: 
 * Standby-Geräte abschalten 

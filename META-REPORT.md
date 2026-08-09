@@ -96,12 +96,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Zinseszinseffekt: Die Formel, die dein Geld v | 52 | 159 | 4 | ✅ |
 
 ---
-<<<<<<< HEAD
-*Erzeugt am 2026-08-09 um 11:25 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
-=======
-<<<<<<< HEAD
-*Erzeugt am 2026-08-09 um 11:25 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
-=======
-*Erzeugt am 2026-08-09 um 12:31 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
->>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
->>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
+*Erzeugt am 2026-08-09 um 16:08 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*

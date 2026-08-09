@@ -48,7 +48,8 @@ Für das Sparen in Wertpapieren gibt es zwei Wege, die sich steuerlich und recht
 
 **Das Kinderdepot (auf den Namen des Kindes):** Das Depot gehört dem Kind. Die Eltern verwalten es als gesetzliche Vertreter. Vorteile: Das Kind nutzt seinen eigenen Sparerpauschbetrag (1.000 Euro) und Grundfreibetrag – Gewinne bis zur Grenze bleiben steuerfrei. Nachteil: Mit 18 verfügt das Kind frei über das Geld.
 
-**Das Treuhanddepot (auf den Namen der Eltern):** Das Depot läuft auf die Eltern, ist aber für das Kind zweckgebunden. Vorteile: Die Eltern behalten die Kontrolle. Nachteil: Die Erträge werden mit dem Steuersatz der Eltern versteuert – der Steuervorteil entfällt weitgehend.
+**Das Treuhanddepot (auf den Namen der Eltern):** Das Depot läuft auf die Eltern, ist aber für das Kind zweckgebunden. Vorteile: Die Eltern behalten die Kontrolle. Nachteil: Die Erträge werden mit dem Steuersatz der Eltern versteuert –   
+der Steuervorteil entfällt weitgehend.
 
 Für die meisten Familien ist das **Kinderdepot** die bessere Wahl: Steuerlich effizient, klar geregelt, und der pädagogische Effekt (das Kind sieht „sein" Depot) ist stärker. Wer Sorge hat, dass der Nachwuchs mit 18 das Geld verprasst, kann später über eine Auszahlplan-Vereinbarung oder Schenkung mit Auflage steuern.
 
@@ -64,7 +65,8 @@ So setzt du den ETF-Sparplan für dein Kind in fünf Schritten um:
 
 **Schritt 4 – Sparplan einrichten (10 Minuten):** Betrag festlegen (ab 10 bis 25 Euro möglich), Ausführungstag wählen (zum Beispiel der 1. des Monats) und den Dauerauftrag auf das Verrechnungskonto einrichten. Das Schöne: Der Sparplan läuft automatisch – du musst nichts mehr tun.
 
-**Schritt 5 – Freistellungsauftrag für das Kind einrichten (5 Minuten):** Beim Broker den Sparerpauschbetrag des Kindes (1.000 Euro) hinterlegen. Damit bleiben die ersten 1.000 Euro Gewinn pro Jahr steuerfrei – der größte Steuervorteil des Kinderdepots.
+**Schritt 5 – Freistellungsauftrag für das Kind einrichten (5 Minuten):** Beim Broker den Sparerpauschbetrag des Kindes (1.000 Euro) hinterlegen. Damit bleiben die ersten 1.000 Euro Gewinn pro Jahr steuerfrei –   
+der größte Steuervorteil des Kinderdepots.
 
 ## Steuern & Freibeträge: Der unterschätzte Vorteil
 

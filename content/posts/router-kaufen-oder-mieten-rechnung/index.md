@@ -26,17 +26,20 @@ Die Rechnung ist simpel: 5 Euro Miete pro Monat × 24 Monate = 120 Euro. Dazu ko
 
 Der Vergleich zum Kauf: Ein solider WLAN-Router kostet 80 bis 150 Euro, eine gute Fritzbox 150 bis 250 Euro. Die Miete über 2 Jahre deckt also bereits den Kaufpreis eines ordentlichen Geräts – und danach gehört dir die Hardware und läuft kostenlos weiter.
 
-Wichtig: Die Router-Miete ist im Internetvertrag oft als „Bereitstellung" oder „Leihgerät" versteckt. Prüfe deinen Vertrag auf solche Posten – viele Anbieter weisen sie nicht klar aus.
+Wichtig: Die Router-Miete ist im Internetvertrag oft als „Bereitstellung" oder „Leihgerät" versteckt. Prüfe deinen Vertrag auf solche Posten –   
+viele Anbieter weisen sie nicht klar aus.
 
 ## Wann Mieten sinnvoll ist
 
-So sehr ich den Kauf empfehle – es gibt Situationen, in denen Mieten die bessere Wahl ist:
+So sehr ich den Kauf empfehle –   
+es gibt Situationen, in denen Mieten die bessere Wahl ist:
 
 **Du willst null Technik-Aufwand:** Der Anbieter liefert das Gerät, konfiguriert es und tauscht es bei Defekt kostenlos. Wer keine Lust auf Einrichtung hat, zahlt für diese Bequemlichkeit.
 
 **Dein Anbieter erzwingt das Mietgerät:** Bei Glasfaser-Anschlüssen verlangen einige Anbieter ihr eigenes Modem (ONT), das du nicht ersetzen kannst. Hier kannst du nur den Rest (Router/WLAN) selbst kaufen.
 
-**Kurze Mietzeit:** Wer nur für 12 Monate einen Übergangsvertrag hat, für den lohnt der Kauf nicht – die Amortisation beginnt erst ab etwa 18 bis 24 Monaten.
+**Kurze Mietzeit:** Wer nur für 12 Monate einen Übergangsvertrag hat, für den lohnt der Kauf nicht –   
+die Amortisation beginnt erst ab etwa 18 bis 24 Monaten.
 
 Für alle anderen: Kaufen.
 
@@ -52,7 +55,8 @@ Bei einem günstigeren Router (100 Euro) liegt der Break-even schon nach 20 Mona
 
 ## Router-Freiheit: Dein Recht auf eigene Hardware
 
-Seit 2016 ist die Router-Freiheit in Deutschland gesetzlich verankert: Du darfst an deinem Anschluss jedes geeignete Endgerät betreiben – der Anbieter muss die technischen Zugangsdaten (Benutzername, Passwort, VLAN-Einstellungen) kostenlos herausgeben.
+Seit 2016 ist die Router-Freiheit in Deutschland gesetzlich verankert: Du darfst an deinem Anschluss jedes geeignete Endgerät betreiben –   
+der Anbieter muss die technischen Zugangsdaten (Benutzername, Passwort, VLAN-Einstellungen) kostenlos herausgeben.
 
 In der Praxis heißt das: Du kannst den Miet-Router kündigen und deinen eigenen Router anschließen. Die meisten Anbieter stellen die Zugangsdaten online im Kundenportal bereit. Sollte dein Anbieter sich weigern, hilft ein Verweis auf die Bundesnetzagentur – sie hat die Router-Freiheit mehrfach durchgesetzt.
 
@@ -63,7 +67,8 @@ Wichtig: Prüfe vor dem Kauf, ob dein Router zum Anschlusstyp passt – DSL-Rout
 Der häufigste Fehler beim Router-Kauf ist die falsche Anschlussart. Bevor du bestellst, klärst du:
 
 1. **Anschlusstyp:** DSL/VDSL, Kabel (DOCSIS) oder Glasfaser? Jede Technologie braucht ihren Router-Typ.
-2. **Geschwindigkeit:** Der Router muss das gebuchte Tempo unterstützen – ein alter Router mit nur 100 Mbit/s-LAN-Ports bremst deinen 250er-Anschluss aus.
+2. **Geschwindigkeit:** Der Router muss das gebuchte Tempo unterstützen –   
+ein alter Router mit nur 100 Mbit/s-LAN-Ports bremst deinen 250er-Anschluss aus.
 3. **Telefonie:** Wenn du über den Router telefonierst (VoIP), brauchst du ein Gerät mit Telefonanschlüssen oder DECT-Basis.
 4. **Vektorierung/Supervectoring:** Bei schnellem DSL prüfen, ob der Router die Technik deines Anbieters unterstützt.
 
@@ -83,13 +88,15 @@ Der Miet-Router ist oft der WLAN-Schwachpunkt im Haushalt. Beim Kauf solltest du
 
 ## Die 3 besten Preis-Leistungs-Router (Kategorien)
 
-Als Orientierung für den Kauf – die Kategorien, nicht konkrete Modelle (die Preise ändern sich):
+Als Orientierung für den Kauf –   
+die Kategorien, nicht konkrete Modelle (die Preise ändern sich):
 
 **Einsteiger (40–80 Euro):** Solide DSL-Router mit Wi-Fi 5 oder einfachem Wi-Fi 6, Dual-Band, 4 LAN-Ports. Reicht für Single-Haushalte und kleine Wohnungen.
 
 **Standard (80–150 Euro):** Wi-Fi 6, Tri-Band optional, gute Reichweite, oft mit DECT-Telefonbasis. Die beste Wahl für die meisten Familien.
 
-**Premium (150–250 Euro):** Wi-Fi 6E/7, Mesh-fähig, maximale Reichweite, viele Anschlüsse. Für große Wohnungen, Gamer und Technik-Fans – hier ist eine [Fritzbox](../../posts/wlan-verstaerker-vs-mesh-wlan/) der Klassiker.
+**Premium (150–250 Euro):** Wi-Fi 6E/7, Mesh-fähig, maximale Reichweite, viele Anschlüsse. Für große Wohnungen, Gamer und Technik-Fans –   
+hier ist eine [Fritzbox](../../posts/wlan-verstaerker-vs-mesh-wlan/) der Klassiker.
 
 ## Die Anschluss-Wechsel-Strategie: Router-Frage mitdenken
 
@@ -98,7 +105,8 @@ Der perfekte Zeitpunkt für den Router-Kauf ist der Anbieterwechsel: Beim [Wechs
 Die Strategie in drei Schritten:
 
 1. **Vor dem Wechsel:** Prüfen, ob dein Wunsch-Router zum neuen Anschluss passt (DSL, Kabel oder Glasfaser). Die [Anschluss-Wahl](../../posts/glasfaser-dsl-kabel-anschluss-vergleich/) entscheidet über die Router-Kompatibilität.
-2. **Beim Vertragsabschluss:** Den Tarif ohne Router-Miete wählen – das sind 4 bis 6 Euro Ersparnis pro Monat, also 50 bis 70 Euro pro Jahr.
+2. **Beim Vertragsabschluss:** Den Tarif ohne Router-Miete wählen –   
+das sind 4 bis 6 Euro Ersparnis pro Monat, also 50 bis 70 Euro pro Jahr.
 3. **Nach dem Wechsel:** Den alten Miet-Router fristgerecht zurückschicken und die Rückgabe bestätigen lassen – sonst läuft die Miete weiter.
 
 Wer diese Strategie umsetzt, spart doppelt: beim Tarif (ohne Miete) und bei der Hardware (einmal kaufen, jahrelang nutzen).
@@ -107,7 +115,8 @@ Wer diese Strategie umsetzt, spart doppelt: beim Tarif (ohne Miete) und bei der 
 ## Häufig gestellte Fragen
 
 **Darf ich meinen Router selbst kaufen?**
-Ja – die Router-Freiheit erlaubt es dir seit 2016, eigene Endgeräte am Anschluss zu betreiben. Dein Anbieter muss dir die Zugangsdaten kostenlos herausgeben.
+Ja –   
+die Router-Freiheit erlaubt es dir seit 2016, eigene Endgeräte am Anschluss zu betreiben. Dein Anbieter muss dir die Zugangsdaten kostenlos herausgeben.
 
 **Welcher Router ist der beste?**
 Für die meisten Haushalte ist ein Wi-Fi-6-Router mit Dual-Band und Gigabit-Ports die beste Wahl – als Einsteiger ab 80 Euro, für Familien mit mehreren Geräten ab 120 Euro. Eine gute Fritzbox ist der Klassiker für DSL-Anschlüsse.

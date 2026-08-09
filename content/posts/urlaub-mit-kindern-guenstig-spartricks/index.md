@@ -30,13 +30,15 @@ Bevor du sparst, kennst du die Kostenstruktur: Bei einer Familienreise (2 Erwach
 - **Aktivitäten & Ausflüge:** 10–15 Prozent
 - **Mietwagen & Transfer:** 5–15 Prozent
 
-Der größte Hebel liegt also bei Unterkunft und Verpflegung – genau dort setzen die wichtigsten Tricks an.
+Der größte Hebel liegt also bei Unterkunft und Verpflegung –   
+genau dort setzen die wichtigsten Tricks an.
 
 ## Trick 1: Kinder-Rabatte systematisch nutzen
 
 Die größte Familien-Waffe sind Kinder-Rabatte – aber sie sind oft gut versteckt. Die Regeln:
 
-- **Unterkunft:** Viele Hotels und Appartement-Vermieter bieten „Kinder bis X Jahre kostenlos" oder deutliche Rabatte. Das gilt besonders für Appartements und Ferienwohnungen – hier zahlt man oft nur für die Belegung, nicht pro Kind.
+- **Unterkunft:** Viele Hotels und Appartement-Vermieter bieten „Kinder bis X Jahre kostenlos" oder deutliche Rabatte. Das gilt besonders für Appartements und Ferienwohnungen –   
+hier zahlt man oft nur für die Belegung, nicht pro Kind.
 - **Pauschalreisen:** Die Veranstalter geben für Kinder unter 12 Jahren oft 20 bis 50 Prozent Rabatt – aber nur auf den Katalogpreis. Vergleiche die effektiven Preise über die [Vergleichsportale](../../posts/pauschalreise-buchen-bester-zeitpunkt/).
 - **Museen, Bahn, ÖPNV:** Familienkarten und Kinder-Tickets sind in fast allen Städten günstiger – immer nach der Familienkarte fragen.
 
@@ -59,7 +61,8 @@ Der Vergleich lohnt: Familienzimmer im Hotel vs. Appartement in der Nähe – in
 Für Familien ist die Bahn oft die deutlich günstigere Alternative zum Flug – besonders innerhalb Deutschlands und in die Nachbarländer. Die Gründe:
 
 - **Familien-Bahncards und Sparpreise:** Kinder unter 15 Jahren fahren mit der Bahncard der Eltern kostenlos mit.
-- **Kein Gepäck-Problem:** Kein Aufgabegepäck-Preis, keine Handgepäck-Maße – der Kinderwagen passt einfach.
+- **Kein Gepäck-Problem:** Kein Aufgabegepäck-Preis, keine Handgepäck-Maße –   
+der Kinderwagen passt einfach.
 - **Keine Flughafen-Kosten:** Kein Transfer, kein Parken, kein Warten.
 
 Die Rechnung: Eine vierköpfige Familie spart mit dem Zug oft 100 bis 300 Euro gegenüber dem Flug – und startet entspannter. Der [Flug-Trick](../../posts/flug-buchen-9-tricks-guenstige-tickets/) lohnt erst bei Fernreisen.
@@ -80,7 +83,8 @@ Der größte Preisfaktor im Familienurlaub ist der Reisezeitpunkt: In den Schulf
 
 - **Ferienbeginn/-ende:** In den ersten und letzten Ferientagen sind die Preise oft günstiger als in der Ferienmitte.
 - **Bundesland-Ferien:** Wenn dein Bundesland andere Ferienzeiten hat als der Großteil, bist du oft in der günstigeren Randzeit unterwegs.
-- **Herbst- und Pfingstferien:** Die günstigste „Ferienzeit" für Familien – viele Ziele sind da halb so teuer wie im Sommer.
+- **Herbst- und Pfingstferien:** Die günstigste „Ferienzeit" für Familien –   
+viele Ziele sind da halb so teuer wie im Sommer.
 
 Wer flexibel ist, spart mit dem Reisezeitpunkt mehr als mit jedem anderen Trick.
 
@@ -88,11 +92,13 @@ Wer flexibel ist, spart mit dem Reisezeitpunkt mehr als mit jedem anderen Trick.
 
 **7. Frühbucher mit kostenloser Stornierung:** Familienreisen früh buchen (beste Preise und Hotel-Auswahl) – aber nur mit kostenloser Stornierung, falls die Pläne sich ändern.
 
-**8. Ausflüge bündeln:** Familienpässe und Kombitickets (Zoo + Schwimmbad + Museum) sind fast überall günstiger als Einzeltickets. Und: Gratis-Aktivitäten einplanen (Strand, Spielplätze, Wanderungen) – die besten Urlaubserinnerungen kosten oft nichts.
+**8. Ausflüge bündeln:** Familienpässe und Kombitickets (Zoo + Schwimmbad + Museum) sind fast überall günstiger als Einzeltickets. Und: Gratis-Aktivitäten einplanen (Strand, Spielplätze, Wanderungen) –   
+die besten Urlaubserinnerungen kosten oft nichts.
 
 **9. Lebensmittel im Supermarkt statt Hotel-Shop:** Der Supermarkt im Urlaubsort ist 30 bis 50 Prozent günstiger als der Hotel-Shop – für Getränke, Snacks und Windeln ein Muss.
 
-**10. Mitnahme-Strategie:** Snacks, Sonnencreme und Notfall-Medikamente von zu Hause mitnehmen – die Urlaubs-Aufschläge für diese Basics sind enorm.
+**10. Mitnahme-Strategie:** Snacks, Sonnencreme und Notfall-Medikamente von zu Hause mitnehmen –   
+die Urlaubs-Aufschläge für diese Basics sind enorm.
 
 ## Die Familien-Spar-Checkliste
 

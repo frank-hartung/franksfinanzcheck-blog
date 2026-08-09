@@ -37,7 +37,8 @@ Der entscheidende Punkt: die laufenden Kosten. Die Rechnung für eine 70-Quadrat
 | Wärmepumpe (Neu, gefördert) | 15.000–30.000 € | 700–1.200 € | niedrig |
 | Holz-Pellet (Neu) | 12.000–18.000 € | 900–1.400 € | niedrig |
 
-Die Nachtspeicherheizung schlägt bei den laufenden Kosten jede Alternative – der Unterschied liegt bei 800 bis 2.000 Euro pro Jahr. Bei modernen, gut gedämmten Geräten und sehr niedrigem Nachtstrom kann die Rechnung etwas besser aussehen, die Grundlogik bleibt aber: Direktstrom-Heizen ist das teuerste Heizen.
+Die Nachtspeicherheizung schlägt bei den laufenden Kosten jede Alternative –   
+der Unterschied liegt bei 800 bis 2.000 Euro pro Jahr. Bei modernen, gut gedämmten Geräten und sehr niedrigem Nachtstrom kann die Rechnung etwas besser aussehen, die Grundlogik bleibt aber: Direktstrom-Heizen ist das teuerste Heizen.
 
 ## Das Wärmepumpen-Förderprogramm
 
@@ -86,14 +87,16 @@ Wer nicht sofort wechseln kann oder will, kann die Kosten der Alt-Heizung wenigs
 
 ## Schritt für Schritt: Der Weg zum modernen Heizsystem
 
-Wenn du dich für den Wechsel entschieden hast, läuft der Prozess in sieben Schritten – so kommst du strukturiert ans Ziel, ohne dich zu verzetteln:
+Wenn du dich für den Wechsel entschieden hast, läuft der Prozess in sieben Schritten –   
+so kommst du strukturiert ans Ziel, ohne dich zu verzetteln:
 
 1. **Bestandsaufnahme:** Verbrauch der letzten 3 Jahre sammeln, Gebäudezustand und Heizkörper dokumentieren. Diese Daten brauchst du für Angebote und Förderung.
 2. **Energieberatung nutzen:** Die kostenlose Energieberatung der Verbraucherzentrale oder ein unabhängiger Energieberater bewertet, welche Heizung zu deinem Gebäude passt. Das ist Pflicht-Baustein für die Förderung.
 3. **Förderantrag stellen:** Vor dem Kauf beim BAFA oder über die KfW den BEG-Antrag einreichen. Warte auf den Bewilligungsbescheid, bevor du bestellst.
 4. **Angebote einholen:** Drei Fachbetriebe um Festpreis-Angebote bitten – mit identischer Leistungsbeschreibung, damit du vergleichen kannst.
 5. **Auftrag vergeben:** Auf die Einhaltung der Förderauflagen achten (Fachbetrieb, Rechnungen, Zertifikate).
-6. **Einbau begleiten:** Bei Wärmepumpe: Außeneinheit, Inneneinheit, Pufferspeicher – der Fachbetrieb koordiniert Elektriker und ggf. Schornsteinfeger.
+6. **Einbau begleiten:** Bei Wärmepumpe: Außeneinheit, Inneneinheit, Pufferspeicher –   
+der Fachbetrieb koordiniert Elektriker und ggf. Schornsteinfeger.
 7. **Förderung auszahlen lassen:** Nach der Inbetriebnahme alle Belege einreichen und den Verwendungsnachweis fristgerecht abgeben.
 
 Realistisch dauert der komplette Prozess drei bis sechs Monate. Der ideale Start ist der Frühsommer: Dann ist der Einbau vor der Heizsaison fertig, und du profitierst ab dem ersten Herbst von den niedrigeren Kosten.

@@ -28,7 +28,8 @@ Ein Repeater empfängt das WLAN-Signal des Routers und sendet es verstärkt weit
 - Flexibel einsetzbar, eine Steckdose genügt
 
 **Nachteile:**
-- Halbierte Bandbreite: Der Repeater nutzt denselben Funkkanal für Empfang und Senden – die Geschwindigkeit sinkt spürbar, oft um die Hälfte
+- Halbierte Bandbreite: Der Repeater nutzt denselben Funkkanal für Empfang und Senden –   
+die Geschwindigkeit sinkt spürbar, oft um die Hälfte
 - Bei mehreren Repeatern wird das Netz unübersichtlich
 - Geräte "kleben" am schwächeren Repeater statt automatisch am besten Sender
 
@@ -76,7 +77,8 @@ Um dein WLAN zu optimieren und ein schnelles Internet zu Hause zu haben, ist es 
 Faustregel: Ein Knoten pro 60-80 m² bzw. pro Etage. Für eine 100-m²-Wohnung reichen meist 2, für ein Einfamilienhaus 3.
 
 ### Ist Mesh auch mit meinem alten Router nutzbar?
-Teilweise – viele Mesh-Systeme können einen bestehenden Router als "Basis" weiterverwenden, verlieren dann aber oft Funktionen. Sauberer ist ein komplettes System.
+Teilweise –   
+viele Mesh-Systeme können einen bestehenden Router als "Basis" weiterverwenden, verlieren dann aber oft Funktionen. Sauberer ist ein komplettes System.
 
 ### Bringt ein schnellerer Internetvertrag mehr als ein Mesh?
 Beides hängt zusammen: Ohne schnellen Anschluss hilft auch das beste Mesh nichts, und mit tollem Anschluss bringt ein schlechtes WLAN nichts. Faustregel: Erst den Tarif prüfen, dann das WLAN optimieren – und beides einmal im Jahr vergleichen. Damit kannst du dein Internet zu Hause verbessern und ein schnelles Internet genießen.

@@ -52,7 +52,8 @@ Die Preise für einen 100-Mbit/s-Anschluss liegen 2026 ungefähr so:
 | Kabel | 25–40 € | 30–45 € | Drossel-Risiko in Spitzenzeiten |
 | Glasfaser | 30–45 € | 35–50 € | Zukunftssicher, oft Ausbau-Rabatte |
 
-Dazu kommen in den ersten 6 bis 12 Monaten oft Neukunden-Boni, die den effektiven Monatspreis um 10 bis 20 Euro senken. Wichtig: Rechne immer den Preis ab dem zweiten Jahr – dort enden die meisten Rabatte. Der [Tarifvergleich für DSL und Internet](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt dir die aktuellen Angebote mit allen Bedingungen.
+Dazu kommen in den ersten 6 bis 12 Monaten oft Neukunden-Boni, die den effektiven Monatspreis um 10 bis 20 Euro senken. Wichtig: Rechne immer den Preis ab dem zweiten Jahr –   
+dort enden die meisten Rabatte. Der [Tarifvergleich für DSL und Internet](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt dir die aktuellen Angebote mit allen Bedingungen.
 
 ## Verfügbarkeit prüfen: Der erste Schritt
 
@@ -60,7 +61,8 @@ Bevor du träumst, prüfe die Realität: Nicht jeder Anschluss ist überall verf
 
 So gehst du vor: Adresse eingeben, dann siehst du, ob Glasfaser (FTTH) in deiner Straße liegt oder geplant ist, wie schnell dein Kabelanschluss ist und welche DSL-Geschwindigkeiten möglich sind. Ergänzend fragen die Vergleichsportale automatisch die Verfügbarkeit ab – aber der Breitbandatlas ist die neutrale Quelle.
 
-Wichtig bei Glasfaser: Auch wenn der Ausbau in deiner Straße läuft, musst du den Hausanschluss oft selbst beauftragen und bezahlen (100 bis 800 Euro, je nach Anbieter und Förderung). Prüfe, ob dein Anbieter den Hausanschluss kostenlos übernimmt – das ist bei vielen Ausbauprojekten inzwischen Standard.
+Wichtig bei Glasfaser: Auch wenn der Ausbau in deiner Straße läuft, musst du den Hausanschluss oft selbst beauftragen und bezahlen (100 bis 800 Euro, je nach Anbieter und Förderung). Prüfe, ob dein Anbieter den Hausanschluss kostenlos übernimmt –   
+das ist bei vielen Ausbauprojekten inzwischen Standard.
 
 ## Glasfaser: Wann der Umstieg Pflicht wird
 
@@ -109,7 +111,8 @@ Für die meisten Haushalte reichen 100 Mbit/s: Streaming, Homeoffice und Surfen 
 2026 zwischen 30 und 50 Euro für 100 bis 250 Mbit/s, inklusive Router-Miete oft etwas mehr. Viele Anbieter geben in der Ausbauphase Rabatte – prüfe die Angebote an deiner Adresse.
 
 **Wann lohnt sich der Wechsel zu Glasfaser?**
-Wenn Glasfaser verfügbar ist und du mehr als 100 Mbit/s brauchst, hohe Uploads hast oder langfristig zukunftssicher sein willst. Wer nur surft und streamt, kann bei DSL bleiben – der [Vergleich](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt, was sich rechnet.
+Wenn Glasfaser verfügbar ist und du mehr als 100 Mbit/s brauchst, hohe Uploads hast oder langfristig zukunftssicher sein willst. Wer nur surft und streamt, kann bei DSL bleiben –   
+der [Vergleich](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt, was sich rechnet.
 
 👉 **Jetzt DSL-, Kabel- und Glasfaser-Tarife vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
 
