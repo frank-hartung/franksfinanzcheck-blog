@@ -17,7 +17,7 @@ kurzantwort: "Du kannst dein Internet um bis zu 20 % beschleunigen, indem du de
 
 ## Was ist ein DNS-Server überhaupt?
 
-Tippst du eine Adresse wie „check24.de" in deinen Browser, sucht dein Rechner die passende IP-Adresse im Hintergrund. Diese Aufgabe übernimmt das Domain Name System (DNS) – quasi das digitale Telefonbuch des Internets. Dein Provider stellt dir automatisch einen Standard-Server bereit.
+Tippst du eine Adresse wie „check24. de" in deinen Browser, sucht dein Rechner die passende IP-Adresse im Hintergrund. Diese Aufgabe übernimmt das Domain Name System (DNS) – quasi das digitale Telefonbuch des Internets. Dein Provider stellt dir automatisch einen Standard-Server bereit.
 
 Diese Anbieter-Server reagieren jedoch oft langsam oder überlasten bei vielen gleichzeitigen Anfragen. Ein alternativer DNS Server macht dein Internet schneller, indem er diese Suchanfragen effizienter verarbeitet. Du spürst den Unterschied sofort durch flinkere Reaktionszeiten beim Surfen.
 
@@ -72,6 +72,6 @@ Beide Faktoren spielen zusammen. Der DNS optimiert den Start jedes Seitenaufrufs
 
 ---
 
-👉 **Und wenn die Leitung selbst zu langsam ist:** [**→ Jetzt DSL- und Glasfasertarife vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
+👉 **Und wenn die Leitung selbst zu langsam ist:** [**→ Jetzt DSL- und Glasfasertarife vergleichen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

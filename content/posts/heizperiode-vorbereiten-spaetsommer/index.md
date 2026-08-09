@@ -16,10 +16,10 @@ kurzantwort: "Du musst im August deine Heizanlage warten lassen, um sicherzustel
 ---Wusstest du, dass du im August hunderte Euro an Energiekosten sparst? Während andere die Sonne genießen, sicherst du dir jetzt die besten Konditionen für den Winter. Wer frühzeitig die Heizperiode vorbereiten will, handelt sofort. So vermeidest du böse Überraschungen bei der nächsten Abrechnung. Diese drei Schritte bringen dir sofort finanzielle Vorteile.
 
 Das Wichtigste in Kürze:
-*   Gaspreise jetzt vergleichen und Wechsel einleiten.
-*   Heizkörper rechtzeitig entlüften und Funktionalität prüfen.
-*   Thermostate für die kalte Jahreszeit programmieren.
-*   Raumtemperatur moderat senken und Heizkosten sparen.
+* Gaspreise jetzt vergleichen und Wechsel einleiten.
+* Heizkörper rechtzeitig entlüften und Funktionalität prüfen.
+* Thermostate für die kalte Jahreszeit programmieren.
+* Raumtemperatur moderat senken und Heizkosten sparen.
 
 ## 1. Gasvertrag prüfen und wechseln
 
@@ -28,10 +28,10 @@ Dein Gastarif entscheidet massiv über deine Fixkosten im Winter. Im August star
 Ein Wechsel funktioniert online in wenigen Minuten. Dein neuer Anbieter übernimmt die Kündigung in der Regel kostenlos für dich. So lässt sich effektiv die Gasrechnung senken, ohne dass du selbst Briefe schreiben musst. Je nach Verbrauch sparst du durch einen Anbieterwechsel zwischen 150 und 400 Euro pro Jahr.
 
 Worauf du beim Vergleich achten solltest:
-*   Achte auf den Arbeitspreis pro kWh und den Grundpreis.
-*   Wähle eine Preisgarantie von mindestens 12 Monaten.
-*   Prüfe die Auszahlungsbedingungen für Neukundenboni genau.
-*   Bevorzuge Vertragslaufzeiten von maximal einem Jahr für mehr Flexibilität.
+* Achte auf den Arbeitspreis pro kWh und den Grundpreis.
+* Wähle eine Preisgarantie von mindestens 12 Monaten.
+* Prüfe die Auszahlungsbedingungen für Neukundenboni genau.
+* Bevorzuge Vertragslaufzeiten von maximal einem Jahr für mehr Flexibilität.
 
 ## 2. Heizung prüfen und warten:<br>So startest du reibungslos
 
@@ -71,6 +71,6 @@ Gas ist für klassische Heizsysteme in der Regel deutlich preiswerter als direkt
 
 ---
 
-👉 **Jetzt [Gastarife vergleichen](../../posts/gastarife-vergleichen-vor-dem-herbst/) und den Winter günstig überstehen:** [**→ Gaspreise prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3)
+👉 **Jetzt [Gastarife vergleichen](../../posts/gastarife-vergleichen-vor-dem-herbst/) und den Winter günstig überstehen:** [**→ Gaspreise prüfen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

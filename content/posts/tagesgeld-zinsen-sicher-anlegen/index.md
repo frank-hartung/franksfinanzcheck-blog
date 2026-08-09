@@ -56,6 +56,6 @@ Die Zinsen schwanken. Aktuell gibt es für Tagesgeld wieder attraktive Angebote 
 ### Lohnt sich Tagesgeld oder doch lieber ETF?
 Für den Notgroschen und kurzfristig verfügbares Geld: Tagesgeld. Für langfristigen Vermögensaufbau: ETF-Sparplan. Die Mischung macht's – Tagesgeld als Basis, ETF für den langen Atem.
 
-👉 **Jetzt Tagesgeldkonten vergleichen und Zinsen sichern:** [**→ Konten prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich)
+👉 **Jetzt Tagesgeldkonten vergleichen und Zinsen sichern:** [**→ Konten prüfen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=tagesgeldvergleich)
 
 *Dieser Artikel enthält Affiliate-Links. Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -16,29 +16,29 @@ kurzantwort: "Eine Hausratversicherung deckt Schäden an deinem Eigentum ab, wie
 ---Ein Rohrbruch flutet dein Wohnzimmer, ein Brand vernichtet die Küche oder Einbrecher räumen die Wohnung leer. Solche Schäden kosten dich ohne Schutz schnell fünfstellige Summen. Eine leistungsstarke Hausratversicherung ersetzt dir den kompletten Neuwert deiner Möbel, Technik und Kleidung. In diesem Ratgeber erfährst du, wie du deinen Hausrat absichern kannst und worauf du beim Tarifvergleich achten musst.
 
 **Das Wichtigste in Kürze:**
-*   Ersetzt Einrichtung und Technik zum aktuellen Neuwert.
-*   Schützt bei Feuer, Leitungswasser, Sturm und Einbruch.
-*   Pauschalwert von ca. 650 €/m² verhindert Unterversicherung.
-*   Zusatzbausteine für Fahrräder oder Elementarschäden sind oft sinnvoll.
-*   Regelmäßiger Check der Konditionen spart jährlich bares Geld.
+* Ersetzt Einrichtung und Technik zum aktuellen Neuwert.
+* Schützt bei Feuer, Leitungswasser, Sturm und Einbruch.
+* Pauschalwert von ca. 650 €/m² verhindert Unterversicherung.
+* Zusatzbausteine für Fahrräder oder Elementarschäden sind oft sinnvoll.
+* Regelmäßiger Check der Konditionen spart jährlich bares Geld.
 
 ## Wer braucht eine Hausratversicherung?
 
 Grundsätzlich braucht jeder eine Hausratversicherung, der einen eigenen Haushalt führt. Dein Vermieter versichert lediglich die Gebäudehülle, nicht aber deine privaten Möbel und Geräte. Auch als Eigentümer schützt dich die Wohngebäudeversicherung nur bei Schäden an der festen Bausubstanz.
 
-*   **Mieter:** Du haftest selbst für dein Inventar und benötigst eigenen Schutz.
-*   **Eigentümer:** Ergänze deine Gebäudeversicherung unbedingt um den Schutz für bewegliche Güter.
-*   **Wohngemeinschaften:** prüft, ob ihr eine gemeinsame Police abschließt oder jeder Bewohner seinen eigenen Bereich versichert.
+* **Mieter:** Du haftest selbst für dein Inventar und benötigst eigenen Schutz.
+* **Eigentümer:** Ergänze deine Gebäudeversicherung unbedingt um den Schutz für bewegliche Güter.
+* **Wohngemeinschaften:** prüft, ob ihr eine gemeinsame Police abschließt oder jeder Bewohner seinen eigenen Bereich versichert.
 
 ## Was die Hausratversicherung abdeckt
 
 Der Basisschutz greift bei Schäden durch Feuer, Leitungswasser, Sturm und Hagel sowie Einbruchdiebstahl. Auch Vandalismus nach einem Einbruch decken die meisten Tarife ab. Achte beim Hausratversicherung vergleichen besonders auf den Einschluss grober Fahrlässigkeit.
 
-*   **Feuer:** Brand, Blitzschlag, Explosion und oft auch Sengschäden.
-*   **Leitungswasser:** Rohrbruch oder Schäden durch defekte Waschmaschinen.
-*   **Diebstahl:** Raub und Einbruchdiebstahl in die versicherte Wohnung.
-*   **Sturm & Hagel:** in der Regel ab Windstärke 8 versichert.
-*   **Optionen:** Erweitere den Schutz bei Bedarf um Fahrraddiebstahl oder Glasbruch.
+* **Feuer:** Brand, Blitzschlag, Explosion und oft auch Sengschäden.
+* **Leitungswasser:** Rohrbruch oder Schäden durch defekte Waschmaschinen.
+* **Diebstahl:** Raub und Einbruchdiebstahl in die versicherte Wohnung.
+* **Sturm & Hagel:** in der Regel ab Windstärke 8 versichert.
+* **Optionen:** Erweitere den Schutz bei Bedarf um Fahrraddiebstahl oder Glasbruch.
 
 Einige Punkte bleiben jedoch meist ausgeschlossen. Eigenes Verschulden ohne entsprechenden Tarifbaustein oder die normale Abnutzung deiner Möbel übernimmt der Versicherer nicht. Wertsachen wie Schmuck oder Bargeld sind oft nur bis zu einer Grenze von ca. 20 bis 30 % der Versicherungssumme gedeckt.
 
@@ -58,11 +58,11 @@ Die meisten Versicherer rechnen mit einer Summe von 650 Euro pro Quadratmeter Wo
 
 Ein guter Hausratversicherung-Tarif muss mehr leisten als nur den Standard. Achte zwingend auf den Unterversicherungsverzicht, damit dein Versicherer im Teilschaden voll zahlt. Der gleitende Neuwert stellt sicher, dass du dir heute gleichwertigen Ersatz kaufen kannst.
 
-1.  **Unterversicherungsverzicht:** der Versicherer prüft im Schadensfall nicht, ob die Summe exakt stimmt.
-2.  **Grob fahrlässige Herbeiführung:** Die Versicherung zahlt auch, wenn du etwa die brennende Kerze vergisst.
-3.  **Wertsachen:** Prüfe die Entschädigungsgrenzen für Schmuck, Bargeld und Sammlungen.
-4.  **Elementarschäden:** Dieser Baustein sichert dich gegen Überschwemmung und Rückstau ab.
-5.  **Selbstbeteiligung:** Eine SB von 150 bis 300 Euro senkt deine jährliche Prämie spürbar.
+1. **Unterversicherungsverzicht:** der Versicherer prüft im Schadensfall nicht, ob die Summe exakt stimmt.
+2. **Grob fahrlässige Herbeiführung:** Die Versicherung zahlt auch, wenn du etwa die brennende Kerze vergisst.
+3. **Wertsachen:** Prüfe die Entschädigungsgrenzen für Schmuck, Bargeld und Sammlungen.
+4. **Elementarschäden:** Dieser Baustein sichert dich gegen Überschwemmung und Rückstau ab.
+5. **Selbstbeteiligung:** Eine SB von 150 bis 300 Euro senkt deine jährliche Prämie spürbar.
 
 ## Häufige Fragen
 
@@ -77,6 +77,6 @@ In der Regel reicht die Faustformel von 650 Euro pro Quadratmeter vollkommen aus
 
 ---
 
-👉 **Jetzt Hausratversicherung vergleichen und absichern:** [**→ Tarife prüfen**](https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hausratversicherung)
+👉 **Jetzt Hausratversicherung vergleichen und absichern:** [**→ Tarife prüfen**](https://a. partner-versicherung. de/click. php? partner_id=47086&ad_id=15&deep=hausratversicherung)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

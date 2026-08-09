@@ -20,11 +20,11 @@ cover:
 Du musst kein neues Gerät kaufen, um sofort Geld zu sparen. Mit den richtigen Handgriffen senkst du deine Kosten um bis zu 80 Euro pro Jahr. Bei alten Modellen sparst du oft noch deutlich mehr.
 
 ### Das Wichtigste in Kürze
-*   Stelle die Temperatur im Kühlraum auf exakt 7 °C ein.
-*   Halte im Gefrierfach eine Temperatur von −18 °C ein.
-*   Taue vereiste Gefrierfächer regelmäßig ab, um die Effizienz zu steigern.
-*   Säubere die Kühlrippen auf der Rückseite einmal pro Jahr von Staub.
-*   Prüfe die Türdichtungen mit einem einfachen Papiertest.
+* Stelle die Temperatur im Kühlraum auf exakt 7 °C ein.
+* Halte im Gefrierfach eine Temperatur von −18 °C ein.
+* Taue vereiste Gefrierfächer regelmäßig ab, um die Effizienz zu steigern.
+* Säubere die Kühlrippen auf der Rückseite einmal pro Jahr von Staub.
+* Prüfe die Türdichtungen mit einem einfachen Papiertest.
 
 ## Warum Kühlgeräte so viel Strom fressen
 
@@ -106,6 +106,6 @@ Moderne Geräte der Klasse A verursachen etwa 30 bis 45 Euro Stromkosten. Alt
 **Wie prüfe ich den tatsächlichen Verbrauch meines Kühlschranks?**
 Nutze ein einfaches Strommessgerät für die Steckdose aus dem Baumarkt. Miss den Verbrauch über eine ganze Woche für ein genaues Ergebnis. Rechne diesen Wert dann einfach auf das gesamte Jahr hoch.
 
-👉 **Jetzt Stromtarif prüfen und Wechsel-Bonus sichern:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
+👉 **Jetzt Stromtarif prüfen und Wechsel-Bonus sichern:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -72,6 +72,6 @@ Vergleiche Pauschalangebote mit den Einzelpreisen von Flug und Hotel. Manchmal g
 
 ---
 
-👉 **Jetzt Flüge vergleichen und den Bestpreis sichern:** [**→ Flug-Angebote prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=flugvergleich)
+👉 **Jetzt Flüge vergleichen und den Bestpreis sichern:** [**→ Flug-Angebote prüfen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=flugvergleich)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

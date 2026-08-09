@@ -123,6 +123,6 @@ Nach Kündigung der Miete schickst du das Gerät an den Anbieter zurück (franki
 
 Wer seinen [Internetvertrag sowieso wechselt](../../posts/internet-anbieter-wechseln-kuendigung/), sollte die Router-Frage gleich mitklären: Viele Anbieter geben Rabatte, wenn du kein Mietgerät nimmst. Und wer sein [WLAN zu Hause verbessern](../../posts/wlan-verbessern-ohne-neue-hardware/) will, findet die Tipps im nächsten Ratgeber. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
-👉 **Jetzt Internet-Tarife ohne Router-Miete vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
+👉 **Jetzt Internet-Tarife ohne Router-Miete vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

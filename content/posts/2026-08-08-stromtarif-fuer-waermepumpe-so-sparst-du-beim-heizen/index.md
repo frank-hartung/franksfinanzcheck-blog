@@ -23,11 +23,11 @@ Ein Wärmepumpentarif ist ein vergünstigter Stromtarif für deine Heizung. Netz
 Du benötigst dafür meist einen eigenen Stromzähler für die Wärmepumpe. Prüfe vorab, ob sich der zusätzliche Grundpreis für diesen Zähler für dich rechnet. Bei einem hohen Strombedarf von über 3.000 kWh lohnt sich die Trennung fast immer. Weitere Tipps findest du im [Ratgeber: Strom sparen](../../pillar/strom-sparen/).
 
 ### Das Wichtigste in Kürze
-*   Ein Wärmepumpentarif spart oft mehrere hundert Euro pro Jahr.
-*   Du profitierst von staatlich reduzierten Netzentgelten für steuerbare Lasten.
-*   Ein zweiter Zähler ist meistens die technische Voraussetzung.
-*   Netzbetreiber dürfen die Stromzufuhr in Spitzenzeiten kurzzeitig unterbrechen.
-*   Vergleiche lohnen sich besonders bei einem hohen Jahresverbrauch.
+* Ein Wärmepumpentarif spart oft mehrere hundert Euro pro Jahr.
+* Du profitierst von staatlich reduzierten Netzentgelten für steuerbare Lasten.
+* Ein zweiter Zähler ist meistens die technische Voraussetzung.
+* Netzbetreiber dürfen die Stromzufuhr in Spitzenzeiten kurzzeitig unterbrechen.
+* Vergleiche lohnen sich besonders bei einem hohen Jahresverbrauch.
 
 ## Die häufigsten Fehler
 Viele Hausbesitzer verschenken Geld, weil sie ihren Stromtarif nie wechseln. Sie bleiben jahrelang beim teuren Grundversorger in ihrer Region. Ein kurzer Vergleich spart oft 200 € bis 500 € im Jahr. Achte besonders auf den tatsächlichen Jahresverbrauch deiner Wärmepumpe.
@@ -54,6 +54,6 @@ Deine Ersparnis hängt stark von deinem aktuellen Tarif ab. In der Regel sparst 
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -20,11 +20,11 @@ cover:
 Ich stelle dir 10 realistische Wege vor. Du erhältst ehrliche Angaben zu Verdienst-Spannen und Start-Hürden. Zudem klären wir die wichtigsten Steuer-Fragen für dein **Zusatzeinkommen**. So erlebst du keine bösen Überraschungen mit dem Finanzamt.
 
 ### Das Wichtigste in Kürze
-*   **Steuern:** bis 12.096 € Gesamteinkommen bleibt alles steuerfrei.
-*   **Minijobs:** die Grenze liegt 2026 bei 556 € pro Monat.
-*   **Fokus:** Nutze das Geld für den Vermögensaufbau, nicht für Konsum.
-*   **Start:** Beginne klein und teste eine Idee für vier Wochen.
-*   **Gewerbe:** Melde regelmäßige Tätigkeiten rechtzeitig beim Amt an.
+* **Steuern:** bis 12.096 € Gesamteinkommen bleibt alles steuerfrei.
+* **Minijobs:** die Grenze liegt 2026 bei 556 € pro Monat.
+* **Fokus:** Nutze das Geld für den Vermögensaufbau, nicht für Konsum.
+* **Start:** Beginne klein und teste eine Idee für vier Wochen.
+* **Gewerbe:** Melde regelmäßige Tätigkeiten rechtzeitig beim Amt an.
 
 ## Lohnt sich ein Nebenjob überhaupt?
 
@@ -102,6 +102,6 @@ Jobs als Lieferfahrer oder Umzugshelfer zahlen oft schon nach der ersten Woche. 
 **Wie kombiniere ich Nebenverdienst und Hauptjob ohne Burnout?**
 Setze dir klare Grenzen und feste Arbeitszeiten für deinen Nebenjob. Plane bewusste Erholungsphasen und freie Wochenenden fest in deinen Kalender ein. Starte mit maximal 5 bis 8 Stunden pro Woche. Gesundheit und dein Hauptjob haben immer Vorrang vor dem Zusatzeinkommen.
 
-👉 **Dein Geld optimal arbeiten lassen:** [**→ Jetzt Angebote vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich)
+👉 **Dein Geld optimal arbeiten lassen:** [**→ Jetzt Angebote vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=tagesgeldvergleich)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

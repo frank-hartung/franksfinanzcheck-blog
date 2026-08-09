@@ -101,6 +101,6 @@ Bei alten Anlagen über 20 Jahren ist der Tausch fast immer wirtschaftlich sinnv
 **Wann sollte ich meine Heizung warten lassen?**
 Lasse deine Anlage einmal jährlich im Spätsommer von einem Profi prüfen. Eine gewartete Heizung arbeitet effizienter und verbraucht deutlich weniger Brennstoff. Zudem sinkt das Risiko für teure Ausfälle mitten in der kalten Jahreszeit. Bei vielen Gasheizungen ist diese regelmäßige Wartung sogar gesetzlich vorgeschrieben.
 
-👉 **Jetzt Gastarife vergleichen und Heizkosten senken:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3)
+👉 **Jetzt Gastarife vergleichen und Heizkosten senken:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -22,29 +22,29 @@ kurzantwort: "Du kannst mit einem monatlichen Betrag von ca. 50–100 € in ei
 Ein ETF-Sparplan lässt dein Geld automatisch für dich arbeiten. Du investierst regelmäßig feste Beträge in den Aktienmarkt und profitierst vom Zinseszinseffekt. Über Zeiträume von 10 bis 15 Jahren glichen breite Welt-Indizes Schwankungen bisher zuverlässig aus. Du kaufst bei niedrigen Kursen mehr Anteile und bei hohen Kursen weniger.
 
 ### Das Wichtigste in Kürze
-*   Start bereits ab 1 € bis 25 € monatlich möglich.
-*   Breite Risikostreuung über hunderte oder tausende Unternehmen.
-*   Jederzeit flexibel anpassbar oder kündbar.
-*   Geringe Kosten im Vergleich zu klassischen Bankprodukten.
+* Start bereits ab 1 € bis 25 € monatlich möglich.
+* Breite Risikostreuung über hunderte oder tausende Unternehmen.
+* Jederzeit flexibel anpassbar oder kündbar.
+* Geringe Kosten im Vergleich zu klassischen Bankprodukten.
 
 ## Häufige Fehler
 
 Viele Anfänger stürzen sich ohne Plan auf den erstbesten Anbieter ihrer Hausbank. Dort kosten Depots oft eine Grundgebühr, während Online-Broker diese meist kostenlos anbieten. Achte genau auf die Gesamtkostenquote (TER) deines gewählten ETFs. Ein günstiger Welt-ETF kostet dich in der Regel nur ca. 0,15 % bis 0,30 % Gebühren pro Jahr.
 
 Hier sind Punkte, die du prüfen solltest:
-*   Die Auswahl an ETFs ist riesig, doch nur wenige passen zu einer langfristigen Strategie.
-*   Gebühren für die Ausführung der Sparrate variieren je nach Anbieter von 0 € bis zu 1,50 % der Summe.
-*   Manche Depots verlangen versteckte Entgelte für die Verrechnung von Dividenden.
+* Die Auswahl an ETFs ist riesig, doch nur wenige passen zu einer langfristigen Strategie.
+* Gebühren für die Ausführung der Sparrate variieren je nach Anbieter von 0 € bis zu 1,50 % der Summe.
+* Manche Depots verlangen versteckte Entgelte für die Verrechnung von Dividenden.
 
 ## So startest du richtig
 
 Zuerst benötigst du ein Wertpapierdepot bei einer Bank oder einem Broker. Vergleiche die Konditionen für die monatliche Ausführung deiner gewünschten Summe. Ein guter Broker bietet dir eine große Auswahl an kostenfreien Aktions-ETFs an. Eröffne das Depot online per Video-Ident-Verfahren in wenigen Minuten.
 
 So richtest du deinen Plan ein:
-1.  Wähle einen weltweit gestreuten ETF (zum Beispiel auf den MSCI World).
-2.  Lege deine monatliche Sparrate fest (etwa 50 € oder 100 €).
-3.  Bestimme den Abbuchungstag, idealerweise direkt nach deinem Gehaltseingang.
-4.  Prüfe einmal im Jahr, ob die Sparrate noch zu deinem Budget passt.
+1. Wähle einen weltweit gestreuten ETF (zum Beispiel auf den MSCI World).
+2. Lege deine monatliche Sparrate fest (etwa 50 € oder 100 €).
+3. Bestimme den Abbuchungstag, idealerweise direkt nach deinem Gehaltseingang.
+4. Prüfe einmal im Jahr, ob die Sparrate noch zu deinem Budget passt.
 
 ## Wie viel solltest du investieren?
 
@@ -67,6 +67,6 @@ Du kannst die Höhe deiner Sparrate jederzeit anpassen oder den Plan komplett l�
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a. check24. net/misc/click. php? pid=80968&aid=18)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
