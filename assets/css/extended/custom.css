@@ -542,3 +542,43 @@ input:focus-visible {
         margin: 0 auto;
     }
 }
+
+/* ---------- LCP-Beschleunigung (Startseite) ----------
+   Die ERSTE Artikel-Karte (LCP-Element) wird voll gerendert; alle weiteren
+   Karten erst bei Annäherung (content-visibility: auto). Spart Layout- und
+   Paint-Arbeit für Inhalte unterhalb des Folds → das LCP-Bild wird deutlich
+   früher gemalt (weniger "Verzögerung beim Rendering des Elements").
+   contain-intrinsic-size reserviert die Höhe → kein Scroll-Springen. */
+.post-entry:not(.lcp-card) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 240px;
+}
+
+/* Mobile: Hero + Pinterest-CTA kompakter, damit das erste Cover (LCP)
+   höher in den Viewport rückt und früher gemalt wird. */
+@media (max-width: 768px) {
+    .ff-pinterest-cta {
+        padding: 10px 12px;
+        margin-bottom: 12px;
+        gap: 10px;
+    }
+    .ff-pinterest-cta-logo {
+        width: 40px;
+        height: 40px;
+    }
+    .ff-pinterest-cta-logo svg {
+        width: 26px;
+        height: 26px;
+    }
+    .ff-pinterest-cta-text strong {
+        font-size: 0.92em;
+    }
+    .ff-pinterest-cta-btn {
+        font-size: 0.85em;
+        padding: 6px 12px;
+    }
+    .home-info {
+        padding: 12px 14px;
+        margin-bottom: 12px;
+    }
+}

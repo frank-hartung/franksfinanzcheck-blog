@@ -87,7 +87,7 @@
     {{- if $cover -}}
         {{/* i.e it is present in page bundle */}}
         {{- if (and (in $processableFormats $cover.MediaType.SubType) ($responsiveImages) (eq $prod true)) }}
-            <img loading="{{$loading}}"
+            <img loading="{{$loading}}" decoding="async"
                 srcset='{{- range $size := $sizes -}}
                             {{- if (ge $cover.Width $size) }}
                                 {{- printf "%s %s" (($cover.Resize (printf "%sx" $size)).Permalink) (printf "%sw," $size) }}
@@ -99,11 +99,11 @@
                 width="{{ $cover.Width }}" height="{{ $cover.Height }}"
                 alt="{{ $alt }}">
         {{- else }}{{/* Unprocessable image or responsive images disabled */}}
-            <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
+            <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
         {{- end }}
     {{- else }}
         {{- /* For absolute urls and external links, no img processing here */}}
-        <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
+        <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
     {{- end }}
     </picture>
 
