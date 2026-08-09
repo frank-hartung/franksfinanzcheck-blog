@@ -1,0 +1,141 @@
+# ============================================================
+#  LAYOUT-AI (Layout-Automatisierung, Top-Level)
+#
+#  Prüft die gebaute Website automatisch auf Layout-Integrität:
+#    - Statisches Audit (layout_audit.py): interne Links (404-Finder),
+#      Cover-Varianten, Alt-Texte, Schema-JSON-LD, og:image, Meta, H1
+#    - Browser-Audit (layout_browser_check.js, Puppeteer/Chrome):
+#      Startseite + 3 neueste Artikel in Desktop & Mobile –
+#      HTTP-Fehler, JS-Fehler, DOM-Größe, Titel/H1, Ladezeit
+#    - Auto-Heilung: fehlende Cover-Varianten werden nachgezogen
+#      (check_covers.py --fix) und committet
+#    - Report: LAYOUT-REPORT.md im Repo
+#    - Bei kritischen Problemen: GitHub-Issue (mit Dedupe)
+#
+#  Läuft: wöchentlich (Mo 09:00 MESZ) + manuell. KEIN push-Trigger,
+#  damit keine Endlosschleife mit dem Deploy-Workflow entsteht.
+# ============================================================
+name: Layout-AI
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"    # Montag 09:00 MESZ (07:00 UTC)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: layout-ai
+  cancel-in-progress: false
+
+jobs:
+  layout-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Hugo installieren
+        run: |
+          curl -sL -o /tmp/hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v0.164.0/hugo_extended_0.164.0_linux-amd64.tar.gz"
+          tar -xzf /tmp/hugo.tar.gz -C /tmp hugo
+          sudo mv /tmp/hugo /usr/local/bin/hugo
+          hugo version
+
+      - name: Website bauen
+        env:
+          HUGO_JSDELIVR_SHA: ${{ github.sha }}
+        run: hugo --quiet
+
+      # ============ STATISCHES AUDIT ============
+      - name: Statisches Layout-Audit (Links, Covers, Schema, Meta)
+        id: static
+        run: |
+          python3 scripts/layout_audit.py || true
+          echo "REPORT_READY=true" >> "$GITHUB_ENV"
+
+      # ============ AUTO-HEILUNG: Cover nachziehen ============
+      - name: Auto-Heilung – fehlende Cover-Varianten nachziehen
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: |
+          pip install -q pillow pillow-avif-plugin
+          python3 scripts/check_covers.py --fix || true
+          git config user.name "Layout-Bot"
+          git config user.email "layout-bot@users.noreply.github.com"
+          git add -A static/ content/
+          if git diff --cached --quiet; then
+            echo "Keine Cover-Fixes nötig."
+          else
+            git commit -m "fix: Layout-Automatisierung – Cover-Varianten nachgezogen"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+            echo "✅ Cover-Fixes gepusht"
+          fi
+
+      # ============ BROWSER-AUDIT (Puppeteer) ============
+      - name: Browser-Audit (Chrome headless – Performance & Fehler)
+        id: browser
+        continue-on-error: true
+        run: |
+          sudo apt-get install -y -qq libnspr4 libnss3 libatk1.0-0 libatk-bridge2.0-0 \
+            libxdamage1 libxkbcommon0 libasound2 libatspi2.0-0 libxcomposite1 libxrandr2 \
+            libgbm1 libdrm2 libcups2 libpango-1.0-0 libcairo2 >/dev/null 2>&1
+          npm install -g puppeteer-core >/dev/null 2>&1 || true
+          export NODE_PATH=$(npm root -g)
+          CHROME_DIR=$(npx -y @puppeteer/browsers install chrome-headless-shell@latest 2>/dev/null | grep -oE '/[^ ]+chrome-headless-shell$' | tail -1)
+          echo "CHROME: $CHROME_DIR"
+          LAYOUT_BASE=$PWD/public LAYOUT_PORT=8099 CHROME_PATH="$CHROME_DIR" node scripts/layout_browser_check.js \
+            > /tmp/browser-audit.json || echo "BROWSER_ISSUES=true" >> "$GITHUB_ENV"
+          cat /tmp/browser-audit.json
+
+      # ============ REPORT COMMITTEN ============
+      - name: Layout-Report veröffentlichen
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "Layout-Bot"
+          git config user.email "layout-bot@users.noreply.github.com"
+          git add LAYOUT-REPORT.md
+          if git diff --cached --quiet; then
+            echo "Report unverändert."
+          else
+            git commit -m "chore: LAYOUT-REPORT aktualisiert"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+          fi
+
+      # ============ ISSUE BEI KRITISCHEN PROBLEMEN (Dedupe) ============
+      - name: Issue bei kritischen Layout-Problemen
+        if: ${{ !cancelled() && (env.BROWSER_ISSUES == 'true' || failure()) }}
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.existsSync('LAYOUT-REPORT.md') ? fs.readFileSync('LAYOUT-REPORT.md', 'utf8') : '';
+            const browserAudit = fs.existsSync('/tmp/browser-audit.json') ? JSON.parse(fs.readFileSync('/tmp/browser-audit.json', 'utf8')) : null;
+            let body = '## ⚠️ Layout-Automatisierung meldet Probleme\n\n';
+            if (report) body += '### Statisches Audit\n```\n' + report.slice(0, 2500) + '\n```\n';
+            if (browserAudit && !browserAudit.allOk) {
+              body += '### Browser-Audit\n';
+              for (const p of browserAudit.criticalPages) {
+                body += `- **${p.url}** (${p.viewport}): ${p.issues.join('; ')}\n`;
+              }
+            }
+            const { data: existing } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', per_page: 50,
+            });
+            const dup = existing.find(i => i.title.includes('Layout-Automatisierung') && !i.pull_request);
+            if (dup) {
+              console.log('Issue existiert bereits: #' + dup.number);
+              return;
+            }
+            await github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo,
+              title: '⚠ Layout-Automatisierung: Probleme gefunden',
+              body: body,
+            });
+            console.log('✅ Issue erstellt.');

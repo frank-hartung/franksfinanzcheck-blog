@@ -87,7 +87,15 @@ Dein erster Entwurf wird im Alltag vermutlich noch Lücken aufweisen. Gleiche am
 
 Mache einmal pro Quartal einen umfassenden Kassensturz. Suche nach ungenutzten Abos oder teuren Tarifen, die du kündigen kannst. Prüfe, ob sich deine Ziele oder Prioritäten geändert haben. So bleibt dein Budget ein dynamischer Begleiter.
 
+<<<<<<< HEAD
 Schon nach kurzer Zeit wirst du Überschüsse auf deinem Konto entdecken. Diese Gelder fließen direkt in deinen [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/). Später baust du damit dein Vermögen durch die [Geldanlage mit einem ETF-Sparplan](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) gezielt auf.
+=======
+<<<<<<< HEAD
+Schon nach kurzer Zeit wirst du Überschüsse auf deinem Konto entdecken. Diese Gelder fließen direkt in deinen [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/). Später baust du damit dein Vermögen durch die [Geldanlage mit einem ETF-Sparplan](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) gezielt auf.
+=======
+Schon nach kurzer Zeit wirst du Überschüsse auf deinem Konto entdecken. Diese Gelder fließen direkt in deinen [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/). Später baust du damit dein Vermögen durch die [Geldanlage mit einem ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) gezielt auf.
+>>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
+>>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
 
 ## So sieht ein fertiges Monatsbudget aus
 

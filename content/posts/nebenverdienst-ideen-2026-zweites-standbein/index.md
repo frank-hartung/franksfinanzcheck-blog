@@ -54,7 +54,15 @@ Ein Minijob bietet dir besondere Vorteile. Bis zu 556 € monatlich zahlst du k
 
 **7. Vermietung von Gegenständen.** Werkzeug, Anhänger oder deine Kamera-Ausrüstung liegen oft ungenutzt herum. Vermiete diese Dinge an Menschen aus deiner Umgebung. Auch ein freier Parkplatz bringt monatlich fixes Geld. Dein Aufwand bleibt minimal, während dein Eigentum für dich arbeitet.
 
+<<<<<<< HEAD
 **8. Dividenden und Zinsen.** Lass dein bereits gespartes Geld für dich arbeiten. Zinsen und Dividenden fließen ganz ohne aktiven Zeitaufwand auf dein Konto. Nutze ein [Tagesgeldkonto](../../posts/tagesgeld-zinsen-sicher-anlegen/) oder einen [ETF-Sparplan](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) für den Start. Das ist die passivste Form eines Nebenverdienstes.
+=======
+<<<<<<< HEAD
+**8. Dividenden und Zinsen.** Lass dein bereits gespartes Geld für dich arbeiten. Zinsen und Dividenden fließen ganz ohne aktiven Zeitaufwand auf dein Konto. Nutze ein [Tagesgeldkonto](../../posts/tagesgeld-zinsen-sicher-anlegen/) oder einen [ETF-Sparplan](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) für den Start. Das ist die passivste Form eines Nebenverdienstes.
+=======
+**8. Dividenden und Zinsen.** Lass dein bereits gespartes Geld für dich arbeiten. Zinsen und Dividenden fließen ganz ohne aktiven Zeitaufwand auf dein Konto. Nutze ein [Tagesgeldkonto](../../posts/tagesgeld-zinsen-sicher-anlegen/) oder einen [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) für den Start. Das ist die passivste Form eines Nebenverdienstes.
+>>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
+>>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
 
 ## Ideen 9 und 10: Skalierbar
 
@@ -76,7 +84,15 @@ Viele Menschen geben ihr zusätzliches Geld sofort wieder aus. Dein **zweites St
 
 Lege vor dem ersten Euro fest, wohin das Geld fließen soll. Priorisiere die Schuldentilgung oder fülle deinen [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) auf. Automatisiere deine Sparraten direkt nach dem Geldeingang. So steigt deine [Sparquote](../../posts/sparquote-berechnen-und-steigern/) jeden Monat messbar an.
 
+<<<<<<< HEAD
 Weitere Tipps zum Sparen findest du in unserem [Frugalismus-Ratgeber](../../pillar/frugalismus/). Lies dort mehr über [Frugalismus im Alltag](../../posts/frugalismus-im-alltag/) oder entdecke effektive [5 Frugalismus-Tricks](../../posts/frugalismus-tricks-alltag-200-euro-sparen/). Wer weniger ausgibt, muss für das gleiche Vermögen weniger arbeiten.
+=======
+<<<<<<< HEAD
+Weitere Tipps zum Sparen findest du in unserem [Frugalismus-Ratgeber](../../pillar/frugalismus/). Lies dort mehr über [Frugalismus im Alltag](../../posts/frugalismus-im-alltag/) oder entdecke effektive [5 Frugalismus-Tricks](../../posts/frugalismus-tricks-alltag-200-euro-sparen/). Wer weniger ausgibt, muss für das gleiche Vermögen weniger arbeiten.
+=======
+Weitere Tipps zum Sparen findest du in unserem [Frugalismus-Ratgeber](../../pillar/frugalismus/). Lies dort mehr über [Frugalismus im Alltag](../../posts/2026-08-06-frugalismus-im-alltag/) oder entdecke effektive [5 Frugalismus-Tricks](../../posts/frugalismus-tricks-alltag-200-euro-sparen/). Wer weniger ausgibt, muss für das gleiche Vermögen weniger arbeiten.
+>>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
+>>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
 
 ## So findest du die richtige Idee für dich
 

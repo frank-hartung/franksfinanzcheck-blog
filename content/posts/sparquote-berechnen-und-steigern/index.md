@@ -87,7 +87,7 @@ So sieht der realistische Stufenplan aus, den ich dir empfehle:
 
 Wichtig: Das Tempo bestimmst du. Wenn ein Monat nicht klappt, geht der Plan einfach im nächsten weiter. Entscheidend ist die Richtung – und dass die Sparrate automatisch läuft.
 
-Dein gespartes Geld hat dann einen Job: Zuerst [Notgroschen aufbauen](../../posts/notgroschen-aufbauen-wie-viel-reicht/), dann den Rest [per ETF-Sparplan investieren](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/). Alle Bausteine dafür findest du im [Frugalismus-Ratgeber](../../pillar/frugalismus/).
+Dein gespartes Geld hat dann einen Job: Zuerst [Notgroschen aufbauen](../../posts/notgroschen-aufbauen-wie-viel-reicht/), dann den Rest [per ETF-Sparplan investieren](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/). Alle Bausteine dafür findest du im [Frugalismus-Ratgeber](../../pillar/frugalismus/).
 
 ## Die Psychologie des Sparens: Warum es schwerfällt
 

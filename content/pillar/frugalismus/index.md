@@ -21,7 +21,7 @@ Frugalismus ist für mich nie Verzicht um des Verzichts willen gewesen – sonde
 
 ## Frugalismus im Alltag: Die Grundlagen
 
-Wer mit dem Sparen beginnt, braucht zuerst Transparenz. Wie du mit einem Haushaltsbuch deine Ausgaben sichtbar machst und die größten Kostenfresser findest, erkläre ich in [Frugalismus im Alltag: So sparst du jeden Monat bares Geld](../../posts/frugalismus-im-alltag/) und mit konkreten, sofort umsetzbaren Tricks in [5 Frugalismus-Tricks: So sparst du 200 € pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/).
+Wer mit dem Sparen beginnt, braucht zuerst Transparenz. Wie du mit einem Haushaltsbuch deine Ausgaben sichtbar machst und die größten Kostenfresser findest, erkläre ich in [Frugalismus im Alltag: So sparst du jeden Monat bares Geld](../../posts/2026-08-06-frugalismus-im-alltag/) und mit konkreten, sofort umsetzbaren Tricks in [5 Frugalismus-Tricks: So sparst du 200 € pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/).
 
 ## Die 50-30-20-Regel: Deine Budget-Formel
 
@@ -33,7 +33,7 @@ Bevor du investierst, brauchst du ein finanzielles Polster. Wie groß es wirklic
 
 ## Gewohnheiten für finanzielle Freiheit
 
-Vermögen entsteht durch Wiederholung, nicht durch Einmal-Aktionen. Die sieben Gewohnheiten, die bei mir den größten Unterschied gemacht haben, findest du in [7 Gewohnheiten für mehr finanzielle Freiheit im Alltag](../../posts/7-gewohnheiten-finanzielle-freiheit/). Und warum das alles kein Verzicht ist, sondern der Weg in ein selbstbestimmtes Leben, zeigt [Frugalismus für den Erfolg: Der Weg in die Freiheit](../../posts/frugalismus-fuer-den-erfolg/).
+Vermögen entsteht durch Wiederholung, nicht durch Einmal-Aktionen. Die sieben Gewohnheiten, die bei mir den größten Unterschied gemacht haben, findest du in [7 Gewohnheiten für mehr finanzielle Freiheit im Alltag](../../posts/7-gewohnheiten-finanzielle-freiheit/). Und warum das alles kein Verzicht ist, sondern der Weg in ein selbstbestimmtes Leben, zeigt [Frugalismus für den Erfolg: Der Weg in die Freiheit](../../posts/2026-08-07-frugalismus-fuer-den-erfolg/).
 
 ## Häufige Fragen
 
@@ -44,7 +44,7 @@ Als Faustregel 20 % des Nettoeinkommens – die 50-30-20-Regel zeigt dir, wie d
 Drei bis sechs Monatsausgaben sind der übliche Richtwert – die genaue Rechnung für deine Situation steht in [Notgroschen aufbauen](../../posts/notgroschen-aufbauen-wie-viel-reicht/).
 
 ### Ist Frugalismus nicht reiner Verzicht?
-Nein – richtig umgesetzt ist er bewusstes Ausgeben für das, was dir wichtig ist. Mehr dazu in [Frugalismus für den Erfolg](../../posts/frugalismus-fuer-den-erfolg/).
+Nein – richtig umgesetzt ist er bewusstes Ausgeben für das, was dir wichtig ist. Mehr dazu in [Frugalism../posts/2026-08-07-frugalismus-fuer-den-erfolg/ismus-fuer-den-erfolg/).
 
 ---
 

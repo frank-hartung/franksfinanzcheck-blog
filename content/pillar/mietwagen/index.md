@@ -21,7 +21,7 @@ Reisen ist Lebensqualität – aber die Kosten lassen sich mit den richtigen Tri
 
 ## Mietwagen günstig buchen
 
-Der Mietwagen ist oft die größte Einzelposition der Reise – und die mit den meisten versteckten Kosten. Wie du den Preisvergleich richtig nutzt, den richtigen Buchungszeitpunkt wählst und die Gesamtkosten im Blick behältst, zeige ich in [Günstigen Mietwagen buchen: So sparst du im Urlaub](../../posts/mietwagen-buchen-so-sparst-du/) und für die aktuelle Saison in [Mietwagen im Spätsommer: Günstig buchen und sparen](../../posts/mietwagen-fuer-den-spaetsommer/).
+Der Mietwagen ist oft die größte Einzelposition der Reise – und die mit den meisten versteckten Kosten. Wie du den Preisvergleich richtig nutzt, den richtigen Buchungszeitpunkt wählst und die Gesamtkosten im Blick behältst, zeige ich in [Günstigen Mietwagen buchen: So sparst du im Urlaub](../../posts/mietwagen-buchen-so-sparst-du/) und für die aktuelle Saison in [Mietwagen im Spätsommer: Günstig buchen und sparen](../../posts/2026-08-07-mietwagen-fuer-den-spaetsommer/).
 
 ## Mietwagen-Fallen vermeiden
 

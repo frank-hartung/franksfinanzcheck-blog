@@ -21,7 +21,7 @@ Langsames Internet kostet dich jeden Tag Zeit – und oft auch Geld, weil du meh
 
 ## Internet-Turbo: Der DNS-Wechsel
 
-Einer der unterschätzten Tricks: der Wechsel des DNS-Servers. Wie du ihn in wenigen Minuten durchführst und was er wirklich bringt, erkläre ich in [DNS-Server ändern: Der kostenlose Boost für dein Internet](../../posts/dns-server-aendern-schnelleres-internet/). Meine persönlichen Erfahrungen mit dem Wechsel findest du in [Internet-Turbo: Warum ich meinen DNS-Server getauscht habe](../../posts/internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/) und [Turbo fürs Netz: DNS-Wechsel für schnelleres Internet](../../posts/turbo-fuers-netz/).
+Einer der unterschätzten Tricks: der Wechsel des DNS-Servers. Wie du ihn in wenigen Minuten durchführst und was er wirklich bringt, erkläre ich in [DNS-Server ändern: Der kostenlose Boost für dein Internet](../../posts/dns-server-aendern-schnelleres-internet/). Meine persönlichen Erfahrungen mit dem Wechsel findest du in [Internet-Turbo: Warum ich meinen DNS-Server getauscht habe](../../posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/) und [Turbo fürs Netz: DNS-Wechsel für schnelleres Internet](../../posts/2026-08-06-turbo-fuers-netz/).
 
 ## WLAN verbessern: Verstärker oder Mesh?
 

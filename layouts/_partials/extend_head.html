@@ -188,3 +188,8 @@
     navigator.serviceWorker.register('{{ "sw.js" | relURL }}').catch(function () {});
   }
 </script>
+
+{{- /* ---------- Article-Schema (E-E-A-T, Rich Results) – nur Artikel ---------- */ -}}
+{{- if and (eq .Section "posts") (eq .Kind "page") -}}
+{{- partial "schema_article.html" . -}}
+{{- end -}}

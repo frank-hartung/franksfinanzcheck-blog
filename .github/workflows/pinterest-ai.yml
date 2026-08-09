@@ -1,0 +1,66 @@
+# ============================================================
+#  PINTEREST-AI (Pinterest-Automatisierung, Top-Level)
+#
+#  Postet neue Artikel automatisch als Pins (Pinterest API v5):
+#    - Pin-Texte werden SEO-optimiert (Titel ≤100, Description +
+#      Keyword-CTA + Hashtags aus Tags/Slug)
+#    - Läuft zu den Pinterest-Peaks: 08:00 und 19:30 Uhr MESZ
+#    - Wöchentliche Rotation: ältere Pins (> 60 Tage) als Refresh-
+#      Kandidaten in die Queue (PIN-STATUS.md)
+#    - OHNE Token: erstellt automatisch die Pin-Queue
+#      (data/pin_queue.yaml + PIN-STATUS.md) und skippt SAUBER
+#      (exit 0, kein Fehler-Alerting) – du kannst die Pins jederzeit
+#      manuell posten oder später das Secret ergänzen.
+#
+#  Aktivieren (einmalig, ~10 Min.):
+#    1) Pinterest Developer App erstellen (pinterest.com → Entwickler)
+#    2) Access-Token holen → Secret PINTEREST_ACCESS_TOKEN
+#    3) Board-ID ermitteln: Actions → Pinterest-AI → Run workflow
+#       (ohne Token zeigt der Lauf die Anleitung; mit Token + --list-boards)
+#    4) Board-ID als Variable PINTEREST_BOARD_ID setzen
+# ============================================================
+name: Pinterest-AI
+
+on:
+  schedule:
+    - cron: "0 6 * * *"     # 08:00 MESZ (Morgen-Peak)
+    - cron: "30 17 * * *"   # 19:30 MESZ (Abend-Peak)
+    - cron: "30 15 * * 1"   # Montag 17:30 MESZ (Wochen-Rotation)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pinterest-ai
+  cancel-in-progress: false
+
+jobs:
+  pinterest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Pinterest-Engine ausführen (Posten oder Queue)
+        env:
+          PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+          PINTEREST_BOARD_ID: ${{ vars.PINTEREST_BOARD_ID }}
+          PINTEREST_ROTATE_DAYS: ${{ vars.PINTEREST_ROTATE_DAYS || '60' }}
+          BLOG_BASE_URL: "https://franksfinanzcheck.de"
+        run: python3 scripts/pinterest_engine.py --auto
+
+      - name: Status + pinned-Flags committen
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "Pinterest-Bot"
+          git config user.email "pinterest-bot@users.noreply.github.com"
+          git add PIN-STATUS.md data/pin_queue.yaml content/posts/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
+            git commit -m "chore: Pinterest-Status + Pins aktualisiert"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+            echo "✅ Pinterest-Status gepusht"
+          fi
