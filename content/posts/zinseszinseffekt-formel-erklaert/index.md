@@ -95,15 +95,7 @@ Der häufigste Denkfehler beim Sparen: „Ich habe nicht genug Geld zum Sparen."
 
 Ein Vergleich: Person A spart ab 25 Jahren 100 Euro monatlich bis 65 (40 Jahre) → rund 199.000 Euro bei 6 Prozent. Person B spart ab 35 Jahren 200 Euro monatlich bis 65 (30 Jahre) → rund 100.500 Euro. Person B zahlt doppelt so viel ein – und hat trotzdem nur halb so viel. Die 10 Jahre Vorsprung von Person A sind mehr wert als die doppelte Rate.
 
-<<<<<<< HEAD
-Die Konsequenz für dich: Fang heute an, auch mit kleinen Beträgen. Der [100-Euro-Plan](../../posts/monatsbudget-erstellen-schritt-fuer-schritt/) zeigt, wie wenig es braucht – und der [ETF-Sparplan](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) ist das Instrument, das den Zinseszins über den Aktienmarkt realisiert. Ein Tagesgeldkonto allein erreicht die Rendite nicht.
-=======
-<<<<<<< HEAD
-Die Konsequenz für dich: Fang heute an, auch mit kleinen Beträgen. Der [100-Euro-Plan](../../posts/monatsbudget-erstellen-schritt-fuer-schritt/) zeigt, wie wenig es braucht – und der [ETF-Sparplan](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) ist das Instrument, das den Zinseszins über den Aktienmarkt realisiert. Ein Tagesgeldkonto allein erreicht die Rendite nicht.
-=======
 Die Konsequenz für dich: Fang heute an, auch mit kleinen Beträgen. Der [100-Euro-Plan](../../posts/monatsbudget-erstellen-schritt-fuer-schritt/) zeigt, wie wenig es braucht – und der [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) ist das Instrument, das den Zinseszins über den Aktienmarkt realisiert. Ein Tagesgeldkonto allein erreicht die Rendite nicht.
->>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
->>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
 
 ## Die Praxis: Zinseszins mit ETFs realisieren
 
@@ -129,15 +121,7 @@ Bei 7 Prozent Rendite: 250 Euro monatlich über 45 Jahre ≈ 1 Million Euro. 500
 **Ist der Zinseszins garantiert?**
 Nein – die Rendite von Aktien ist keine Garantie, sondern eine historische Erwartung. Kursschwankungen und Krisen gehören dazu. Der Zinseszins wirkt über lange Zeiträume – wer kurzfristig denkt, profitiert nicht davon.
 
-<<<<<<< HEAD
-Der Zinseszinseffekt ist das Fundament jedes [Vermögensaufbaus](../../posts/sparquote-berechnen-und-steigern/) – und der [ETF-Sparplan für Einsteiger](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) das Werkzeug, das ihn nutzt. Für Kinder lohnt sich der Start besonders früh: [ETF-Sparplan für Kinder](../../posts/etf-sparplan-fuer-kinder-depot-eröffnen/). Alle Grundlagen-Themen: [Ratgeber Frugalismus](../../pillar/frugalismus/).
-=======
-<<<<<<< HEAD
-Der Zinseszinseffekt ist das Fundament jedes [Vermögensaufbaus](../../posts/sparquote-berechnen-und-steigern/) – und der [ETF-Sparplan für Einsteiger](../../posts/etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) das Werkzeug, das ihn nutzt. Für Kinder lohnt sich der Start besonders früh: [ETF-Sparplan für Kinder](../../posts/etf-sparplan-fuer-kinder-depot-eröffnen/). Alle Grundlagen-Themen: [Ratgeber Frugalismus](../../pillar/frugalismus/).
-=======
 Der Zinseszinseffekt ist das Fundament jedes [Vermögensaufbaus](../../posts/sparquote-berechnen-und-steigern/) – und der [ETF-Sparplan für Einsteiger](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) das Werkzeug, das ihn nutzt. Für Kinder lohnt sich der Start besonders früh: [ETF-Sparplan für Kinder](../../posts/etf-sparplan-fuer-kinder-depot-eröffnen/). Alle Grundlagen-Themen: [Ratgeber Frugalismus](../../pillar/frugalismus/).
->>>>>>> 1fc9330 (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
->>>>>>> d0fbade (feat: 3 neue Top-Level-Automatisierungen – Content-Engine v2, Layout-AI, Pinterest-AI)
 
 👉 **Jetzt Tagesgeld- und Anlageangebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich)
 
