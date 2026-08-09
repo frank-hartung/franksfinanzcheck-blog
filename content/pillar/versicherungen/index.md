@@ -14,7 +14,7 @@ Versicherungen sind ein Thema, bei dem viele entweder zu viel oder zu wenig absi
 
 ### Das Wichtigste in Kürze
 
-*   Die **Privathaftpflicht** ist die wichtigste Versicherung überhaupt – schon ab rund 30&nbsp;€ im Jahr.
+*   Die **Privathaftpflicht** ist die wichtigste Versicherung überhaupt – schon ab rund 30 € im Jahr.
 *   **Hausrat** lohnt sich vor allem bei hochwertigem Hausrat; der Wert entscheidet.
 *   **Zahnzusatz- und Unfallversicherung** sind Einzelfall-Entscheidungen – hier zählt deine persönliche Situation.
 *   **Kfz-Versicherung:** Ein Wechsel zum Stichtag spart oft mehrere Hundert Euro.
@@ -37,7 +37,7 @@ Die private Unfallversicherung wird oft überteuert verkauft. Für wen sie sich 
 
 ## Kfz-Versicherung wechseln: Der jährliche Sparhebel
 
-Zum Wechselstichtag im November/Dezember lohnt sich der Vergleich besonders: Wer seine Kfz-Versicherung wechselt, spart oft 100&nbsp;€ bis 300&nbsp;€ – bei gleicher Leistung. Wie du richtig vergleichst und typische Fallen vermeidest, erkläre ich in [Kfz-Versicherung wechseln: Wann es sich wirklich lohnt](../../posts/kfz-versicherung-wechseln/).
+Zum Wechselstichtag im November/Dezember lohnt sich der Vergleich besonders: Wer seine Kfz-Versicherung wechselt, spart oft 100 € bis 300 € – bei gleicher Leistung. Wie du richtig vergleichst und typische Fallen vermeidest, erkläre ich in [Kfz-Versicherung wechseln: Wann es sich wirklich lohnt](../../posts/kfz-versicherung-wechseln/).
 
 ## Häufige Fragen
 

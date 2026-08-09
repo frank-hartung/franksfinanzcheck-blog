@@ -21,7 +21,7 @@ Kontoführungsgebühren, Kreditkarten-Jahresgebühren und miese Tagesgeldzinsen:
 
 ## Kostenloses Girokonto finden
 
-Kontoführungsgebühren von 5&nbsp;€ bis 10&nbsp;€ im Monat summieren sich auf 60&nbsp;€ bis 120&nbsp;€ im Jahr – für eine Leistung, die viele Banken kostenlos anbieten. Wie du das passende kostenlose Konto findest und den Wechsel stressfrei schaffst, erkläre ich in [Kostenloses Girokonto ohne Gebühren: So findest du es](../../posts/kostenloses-girokonto-finden/).
+Kontoführungsgebühren von 5 € bis 10 € im Monat summieren sich auf 60 € bis 120 € im Jahr – für eine Leistung, die viele Banken kostenlos anbieten. Wie du das passende kostenlose Konto findest und den Wechsel stressfrei schaffst, erkläre ich in [Kostenloses Girokonto ohne Gebühren: So findest du es](../../posts/kostenloses-girokonto-finden/).
 
 ## Kreditkarte ohne Jahresgebühr
 
@@ -38,7 +38,7 @@ Wer einen Kredit braucht, sollte niemals den erstbesten nehmen: Der Unterschied 
 ## Häufige Fragen
 
 ### Was kostet ein Girokonto durchschnittlich?
-Viele Banken verlangen 5&nbsp;€ bis 10&nbsp;€ pro Monat – kostenlose Konten gibt es aber reichlich. Die Übersicht findest du in [Kostenloses Girokonto finden](../../posts/kostenloses-girokonto-finden/).
+Viele Banken verlangen 5 € bis 10 € pro Monat – kostenlose Konten gibt es aber reichlich. Die Übersicht findest du in [Kostenloses Girokonto finden](../../posts/kostenloses-girokonto-finden/).
 
 ### Brauche ich wirklich eine Kreditkarte?
 Für Mietwagen, Reisen und Online-Handel ja – eine kostenlose Karte reicht völlig. Details in [Kreditkarte ohne Jahresgebühr](../../posts/kreditkarte-ohne-jahresgebuehr/).

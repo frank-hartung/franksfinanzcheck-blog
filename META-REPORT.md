@@ -1,4 +1,4 @@
-# 📋 Meta-Daten-Report – 2026-08-08
+# 📋 Meta-Daten-Report – 2026-08-09
 
 > **Vollautomatisch** erzeugt vom wöchentlichen SEO-Workflow. Keine manuelle Sichtung nötig: Bei verbleibenden Problemen erstellt der Workflow automatisch ein GitHub-Issue.
 
@@ -6,7 +6,7 @@
 
 | Kennzahl | Wert |
 |---|---|
-| Artikel geprüft | 38 |
+| Artikel geprüft | 39 |
 | Ø Qualitätsscore | **100/100** |
 | Ø Titel-Länge | 55 Zeichen (optimal 50–60) |
 | Ø Description-Länge | 141 Zeichen (optimal 120–160) |
@@ -30,6 +30,7 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Mietwagen im Spätsommer: Günstig buchen und s | 50 | 160 | 3 | ✅ |
 | 100 | Tierversicherung: Schutz für dein Tier im Kra | 56 | 147 | 3 | ✅ |
 | 100 | Stromtarif für Wärmepumpe: So sparst du beim  | 51 | 152 | 3 | ✅ |
+| 100 | Depot 2026: Dein smarter Start in den Vermöge | 53 | 141 | 3 | ✅ |
 | 100 | Die 50-30-20-Regel: Die perfekte Formel für d | 58 | 150 | 6 | ✅ |
 | 100 | 7 Gewohnheiten für mehr finanzielle Freiheit  | 54 | 130 | 5 | ✅ |
 | 100 | DNS-Server ändern: Der kostenlose Boost für d | 57 | 142 | 5 | ✅ |
@@ -62,4 +63,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Zahnzusatzversicherung: Wann sich der Abschlu | 53 | 141 | 5 | ✅ |
 
 ---
-*Erzeugt am 2026-08-08 um 22:32 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-09 um 09:11 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*

@@ -56,7 +56,7 @@ Finanzielle Freiheit erfordert Ausdauer, keinen Perfektionismus. Belohne dich f�
 |---|---|
 | 1 | Dauerauftrag fürs Sparen einrichten (Gewohnheit 1) |
 | 2 | Finanz-Review durchführen + Abos streichen (Gewohnheit 2) |
-| 3 | 48-Stunden-Regel bei allen Käufen über 100&nbsp;€ (Gewohnheit 3) |
+| 3 | 48-Stunden-Regel bei allen Käufen über 100 € (Gewohnheit 3) |
 | 4 | Vertrags-Check starten (Gewohnheit 4) |
 
 ## Häufige Fragen

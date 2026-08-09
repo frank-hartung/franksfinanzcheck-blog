@@ -25,9 +25,9 @@ kurzantwort: "Du kannst deine E-Auto-Ladekosten senken, indem du einen günstige
 
 | Ladestation | Kosten pro kWh (ca.) | Wann sinnvoll |
 |---|---|---|
-| **Zuhause (Wallbox)** | 0,28–0,40&nbsp;€ | Täglich über Nacht – die günstigste Basis |
-| **öffentliche AC-Säule** | 0,45–0,65&nbsp;€ | Beim Parken in der Stadt oder beim Einkauf |
-| **öffentlicher Schnelllader (DC)** | 0,55–0,85&nbsp;€ | Ausschließlich auf Langstrecken nutzen |
+| **Zuhause (Wallbox)** | 0,28–0,40 € | Täglich über Nacht – die günstigste Basis |
+| **öffentliche AC-Säule** | 0,45–0,65 € | Beim Parken in der Stadt oder beim Einkauf |
+| **öffentlicher Schnelllader (DC)** | 0,55–0,85 € | Ausschließlich auf Langstrecken nutzen |
 
 Wer 80 Prozent der Energie daheim bezieht, spart am meisten. Du zahlst pro Kilometer dann nur einen Bruchteil im Vergleich zu fossilen Kraftstoffen. Nutzt du fast ausschließlich öffentliche Säulen, schmilzt dein finanzieller Vorteil schnell dahin.
 
@@ -51,7 +51,7 @@ Achte penibel auf Blockiergebühren. Viele Betreiber verlangen nach drei oder vi
 
 ## Kostenvergleich: Benziner gegen Elektroauto
 
-Ein modernes E-Auto verbraucht im Schnitt etwa 15 bis 20 kWh auf 100 Kilometern. Beim Laden zu Hause (ca. 0,30&nbsp;€/kWh) entstehen Kosten von 4,50 bis 6,00 Euro. Ein vergleichbarer Benziner benötigt bei 7 Litern Verbrauch und einem Preis von 1,75 Euro rund 12,25 Euro.
+Ein modernes E-Auto verbraucht im Schnitt etwa 15 bis 20 kWh auf 100 Kilometern. Beim Laden zu Hause (ca. 0,30 €/kWh) entstehen Kosten von 4,50 bis 6,00 Euro. Ein vergleichbarer Benziner benötigt bei 7 Litern Verbrauch und einem Preis von 1,75 Euro rund 12,25 Euro.
 
 In diesem Kostenvergleich Benziner Elektroauto sparst du also über 50 Prozent deiner Energiekosten. Optimierst du deinen Strompreis pro kWh durch einen Anbieterwechsel, vergrößert sich dieser Abstand weiter. Auf eine Laufleistung von 15.000 Kilometern pro Jahr sparst du so schnell über 900 Euro.
 
