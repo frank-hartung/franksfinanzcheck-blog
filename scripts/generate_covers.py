@@ -204,16 +204,23 @@ def make_cover(title, slug, out_path):
     max_w = W - 2 * margin
 
     # Skaliere Schriftgröße: ZIEL max. 3 Zeilen (gute Balance, kompakte
-    # Covers). smart_wrap bricht semantisch um (bevorzugt nach dem
-    # Doppelpunkt). Fallback: nie mehr als 6 Zeilen (sehr lange Titel).
+    # Covers) UND keine Zeile breiter als max_w (lange Wörter wie
+    # „Reisekrankenversicherung:“ dürfen NICHT über den Rand laufen).
+    # smart_wrap bricht semantisch um (bevorzugt nach dem Doppelpunkt).
+    # Fallback: nie mehr als 6 Zeilen (sehr lange Titel).
     for size in (78, 68, 58, 50, 44, 38, 32):
         title_font = load_font(size)
         lines = smart_wrap(title, title_font, max_w, d)
-        if len(lines) <= 3:
+        # Abbruch nur, wenn ALLE Zeilen in die Breite passen
+        if len(lines) <= 3 and all(d.textlength(l, font=title_font) <= max_w for l in lines):
             break
-    if len(lines) > 6:
+    if len(lines) > 6 or any(d.textlength(l, font=title_font) > max_w for l in lines):
+        # Letzte Rettung: kleinste Schrift, längste Wörter ggf. hart trennen
         title_font = load_font(32)
         lines = smart_wrap(title, title_font, max_w, d)
+        if any(d.textlength(l, font=title_font) > max_w for l in lines):
+            # Wort-Hyphenation als allerletzte Option (nur bei Übergrößen)
+            lines = wrap_text_no_hang(title, title_font, max_w, d)
 
     line_h = int(title_font.size * 1.25)
     total_h = len(lines) * line_h
