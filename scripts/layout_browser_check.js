@@ -114,8 +114,16 @@ async function auditPage(browser, url, viewport) {
   server.close();
 
   const critical = results.filter(r => r.issues.length > 0);
+  // Aggregierte DOM-Messwerte für den Log (Frühwarn-Dashboard)
+  const agg = {
+    maxElements: Math.max(...results.map(r => r.domCount)),
+    maxDepth: Math.max(...results.map(r => r.domDepth)),
+    maxChildren: Math.max(...results.map(r => r.maxChildren)),
+    avgLoadMs: Math.round(results.reduce((s, r) => s + r.loadMs, 0) / results.length),
+  };
   const summary = {
     checked: results.length,
+    domMetrics: agg,
     criticalPages: critical.map(r => ({ url: r.url, viewport: r.viewport, issues: r.issues })),
     allOk: critical.length === 0,
   };
