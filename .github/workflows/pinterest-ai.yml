@@ -42,9 +42,13 @@ jobs:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
+      - name: Krypto-Bibliothek für Token-Auto-Refresh installieren
+        run: pip install -q cryptography
+
       - name: Pinterest-Engine ausführen (Posten oder Queue)
         env:
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
           PINTEREST_BOARD_ID: ${{ vars.PINTEREST_BOARD_ID }}
           PINTEREST_ROTATE_DAYS: ${{ vars.PINTEREST_ROTATE_DAYS || '60' }}
           BLOG_BASE_URL: "https://franksfinanzcheck.de"
@@ -55,7 +59,9 @@ jobs:
         run: |
           git config user.name "Pinterest-Bot"
           git config user.email "pinterest-bot@users.noreply.github.com"
-          git add PIN-STATUS.md data/pin_queue.yaml content/posts/
+          # pinterest_tokens.enc: erneuerte (verschlüsselte!) Tokens persistieren,
+          # damit das 60-Tage-Fenster des Refresh-Tokens immer offen bleibt
+          git add PIN-STATUS.md data/pin_queue.yaml data/pinterest_tokens.enc content/posts/
           if git diff --cached --quiet; then
             echo "Keine Änderungen."
           else

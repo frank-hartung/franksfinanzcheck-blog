@@ -3,6 +3,12 @@
 Damit der Blog **montags automatisch** neue Artikel bei Pinterest nachpinnen kann,
 brauchst du einen Pinterest-API-Zugang. Das ist **kostenlos** – die Schritte sind:
 
+> ⚠️ **WICHTIG (Stand 2026): Token-Lebensdauer!** Pinterest-Access-Tokens laufen nach
+> **30 Tagen** ab. Dieses System erneuert sie deshalb **automatisch bei jedem Lauf**
+> (Continuous Refresh, `scripts/pinterest_auth.py`). Die Tokens liegen AES-256-
+> verschlüsselt in `data/pinterest_tokens.enc`; der Schlüssel ist das Secret
+> `PINTEREST_TOKEN_KEY`. Einmalig bei der Ersteinrichtung erzeugen (Schritt 2a).
+
 ---
 
 ## Schritt 1: Developer-App erstellen (10 Minuten)
@@ -33,20 +39,42 @@ Pinterest prüft jede App **manuell** – die Freigabe („Trial access") kann *
 
 > Tipp: Du kannst den GitHub-Teil (Push des Workflows) schon jetzt machen – nur das Pinnen startet, sobald die App freigegeben ist.
 
-## Schritt 2: OAuth-Token erzeugen (3 Minuten)
+## Schritt 2: OAuth-Token erzeugen (3 Minuten) – mit Auto-Refresh
 
-1. Gehe auf **https://developers.pinterest.com/tools/access-token/**
-2. Wähle deine App aus dem Dropdown
-3. Hake **alle Scopes** an, insbesondere:
-   - ☑️ **`boards:read`**
-   - ☑️ **`pins:read`**
-   - ☑️ **`pins:write`** (das Wichtigste – erlaubt das Erstellen von Pins)
-4. Klicke **„Generate token"** / **„Authorize"**
-5. Pinterest fragt: **„Erlaube der App, auf dein Konto zuzugreifen?"** → **„Erlauben"**
-6. **Kopiere den Token** – er beginnt mit `pina_...`
+### 2a. Verschlüsselungs-Schlüssel vorbereiten (1 Minute, einmalig)
+1. Erzeuge eine zufällige Zeichenkette (mind. 32 Zeichen, z. B. mit einem Passwort-Generator)
+2. GitHub → Repo → **Settings → Secrets and variables → Actions → New repository secret**
+3. Name: **`PINTEREST_TOKEN_KEY`** → Wert: deine Zufallszeichenkette
+   (Dieser Schlüssel entsperrt die Token-Datei. Ohne ihn ist die Datei wertlos.)
 
-> ⚠️ Der Token ist ein **Geheimnis** – er erlaubt das Pinnen in deinem Namen.
-> Schicke ihn mir hier im Chat NUR zum Einrichten (danach löschen/neu erzeugen).
+### 2b. Redirect-URI in der App hinterlegen
+Pinterest-Dashboard → **My apps → deine App →** Redirect URI:
+**`https://franksfinanzcheck.de/pinterest-oauth`** eintragen und speichern.
+(Die Seite muss nicht existieren – der Browser landet nach dem Erlauben auf
+einer 404-Seite, der Code steht trotzdem in der Adresszeile.)
+
+### 2c. Autorisierung durchführen (mit Assistenz oder lokal)
+```bash
+# 1. URL erzeugen und im Browser öffnen (mit Pinterest eingeloggt):
+PINTEREST_APP_ID=<deine-app-id> python3 scripts/pinterest_auth.py --auth-url
+
+# 2. Nach „Erlauben" den ?code=... aus der Adresszeile kopieren und austauschen:
+PINTEREST_APP_ID=<id> PINTEREST_APP_SECRET=<secret> \
+PINTEREST_TOKEN_KEY=<schluessel> \
+python3 scripts/pinterest_auth.py --exchange <CODE>
+
+# 3. Verschlüsselte Tokens ins Repo (sicher, auch bei öffentlichem Repo):
+git add data/pinterest_tokens.enc && git commit -m "chore: Pinterest-Tokens (verschlüsselt)" && git push
+
+# 4. Jederzeit prüfbar:
+PINTEREST_TOKEN_KEY=<schluessel> python3 scripts/pinterest_auth.py --status
+```
+
+> ℹ️ **Ab jetzt vollautomatisch:** Jeder Bot-Lauf ruft den Refresh-Endpunkt auf,
+> bekommt frische Tokens (Access 30 Tage, Refresh-Token wird neu ausgestellt) und
+> committet die erneuerte `data/pinterest_tokens.enc`. Solange der Workflow nicht
+> länger als 60 Tage pausiert, ist nie wieder Handarbeit nötig.
+> Das klassische Secret `PINTEREST_ACCESS_TOKEN` bleibt als Fallback weiter nutzbar.
 
 ## Schritt 3: Board-ID ermitteln (1 Minute)
 
