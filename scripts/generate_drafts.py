@@ -897,10 +897,17 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
         "*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link "
         "erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*\n"
     )
+    def _yq(value):
+        """YAML-sicher quoten (Doppelpunkte/Sonderzeichen)."""
+        v = str(value)
+        if ":" in v or "#" in v or v != v.strip():
+            return '"' + v.replace('"', '\\"') + '"'
+        return v
+
     inspiration_line = ""
     if pin:
         inspiration_line = (
-            f"inspiration: Pin {pin.get('tag')} – „{pin.get('titel', '')}“ "
+            f"inspiration: {_yq('Pin ' + str(pin.get('tag')) + ' – „' + str(pin.get('titel', '')) + '“')} "
             "(nur Themen-Grundlage, eigenständig formuliert)\n"
         )
     draft_flag = "false" if auto_publish else "true"
