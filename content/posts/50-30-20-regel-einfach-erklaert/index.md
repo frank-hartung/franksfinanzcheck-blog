@@ -1,5 +1,5 @@
 ---
-title: "Die 50–30–20-Regel: Die perfekte Formel für deine Finanzen"
+title: "Die 50-30-20-Regel: Die perfekte Formel für deine Finanzen"
 description: "So strukturierst du dein Gehalt optimal: 50 % Fixkosten, 30 % Freizeit, 20 % Sparen. Die einfachste Budgetierungsmethode, Schritt für Schritt erklärt."
 date: 2026-08-04
 draft: false
@@ -9,8 +9,8 @@ pillar: "frugalismus"
 keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen", "Regel Rechner", "Haushaltsbuch Vorlage"]
 author: "Frank"
 cover:
-  image: "images/covers/50–30–20-regel-einfach-erklaert.jpg"
-  alt: "Die 50–30–20-Regel: Die perfekte Formel für deine Finanzen"
+  image: "images/covers/50-30-20-regel-einfach-erklaert.jpg"
+  alt: "Die 50-30-20-Regel: Die perfekte Formel für deine Finanzen"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du verteilst dein Gehalt in drei Teile: 50 % für Fixkosten, 30 % für Freizeitausgaben und 20 % für das Sparen. Diese Regel hilft dir, deine Finanzen effektiv zu planen. Mit 20 % deines Einkommens sparst du kontinuierlich für die Zukunft."
 social_posted: true

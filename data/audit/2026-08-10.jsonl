@@ -14,3 +14,7 @@
 {"ts": "2026-08-10T10:32:21Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 80}, "output": {"changes": 9}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-08-10T10:33:44Z", "module": "fix_linebreaks", "action": "selfheal-lead-definitions", "input": {"pattern": "Lead-Definition + Hard-Break"}, "output": {"fixed": 9, "articles": 4}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-08-10T22:30:44Z", "module": "fix_dash_und", "action": "apply", "input": {"files": 3}, "output": {"changes": 4}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-10T23:03:42Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 25}, "output": {"changes": 62}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-10T23:04:09Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 25}, "output": {"changes": 62}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-10T23:05:08Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 25}, "output": {"changes": 62}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-10T23:06:06Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 25}, "output": {"changes": 62}, "status": "ok", "critical": false, "commit": null}

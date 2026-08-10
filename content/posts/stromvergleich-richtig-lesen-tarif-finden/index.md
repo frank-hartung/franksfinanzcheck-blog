@@ -64,8 +64,7 @@ Viele Wechsler machen es sich zur Strategie, jährlich zu wechseln und jedes Mal
 
 ## Preisgarantie: sinnvoll oder unnötig?
 
-Eine Preisgarantie schützt dich vor Preiserhöhungen während der Laufzeit. Bei 12 Monaten Garantie und 12 Monaten Laufzeit deckt sie die komplette Vertragslaufzeit ab –   
-das ist der Idealfall.
+Eine Preisgarantie schützt dich vor Preiserhöhungen während der Laufzeit. Bei 12 Monaten Garantie und 12 Monaten Laufzeit deckt sie die komplette Vertragslaufzeit ab. Das ist der Idealfall.
 
 Längere Garantien (24 Monate) sind besonders wertvoll, wenn du eine längerfristige Kalkulation willst oder die Preise tendenziell steigen. Manche Anbieter verlangen für lange Garantien einen kleinen Aufpreis –   
 der sich bei steigenden Marktpreisen schnell rechnet.
@@ -74,16 +73,14 @@ Meine Empfehlung: Nimm eine Preisgarantie, die mindestens deine Vertragslaufzeit
 
 ## So wechselst du ohne Risiko
 
-Der Wechsel selbst ist unkompliziert und kostenlos –   
-das übernimmt der neue Anbieter. Du musst nur:
+Der Wechsel selbst ist unkompliziert und kostenlos. Das übernimmt der neue Anbieter. Du musst nur:
 
 1. Deinen Verbrauch bereit halten (letzte Jahresabrechnung).
 2. Den passenden Tarif im Vergleich wählen.
 3. Das Online-Formular ausfüllen (Daten der letzten Rechnung, Zählernummer).
 4. Den alten Vertrag kündigen lassen – der neue Anbieter übernimmt die Kündigung meist automatisch.
 
-Wichtig: Es gibt keine Strom-Sperre durch den Wechsel. Du bleibst durchgehend versorgt, und die Abrechnung klärt der neue Anbieter mit dem Netzbetreiber. Einen Tag ohne Strom gibt es nicht –   
-das ist gesetzlich abgesichert.
+Wichtig: Es gibt keine Strom-Sperre durch den Wechsel. Du bleibst durchgehend versorgt, und die Abrechnung klärt der neue Anbieter mit dem Netzbetreiber. Einen Tag ohne Strom gibt es nicht. Das ist gesetzlich abgesichert.
 
 Die Umstellung dauert in der Regel 2 bis 6 Wochen. Kündigungsfristen des alten Tarifs (meist 1 Monat) und die Frist des neuen Anbieters werden dabei sauber verrechnet.
 

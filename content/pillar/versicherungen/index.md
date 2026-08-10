@@ -10,8 +10,7 @@ build:
 keywords: ["Versicherungen vergleichen", "Privathaftpflicht", "Hausratversicherung", "Zahnzusatzversicherung", "Kfz-Versicherung"]
 ---
 
-Versicherungen sind ein Thema, bei dem viele entweder zu viel oder zu wenig absichern. Aus meiner eigenen Erfahrung als Verbraucher, der jahrelang Policen verglichen und gewechselt hat, gilt: Die richtige Versicherung schützt vor existenzbedrohenden Kosten –   
-die falsche ist reine Geldverbrennung. In diesem Ratgeber bekommst du den Überblick, welche Policen sich wirklich lohnen und für wen.
+Versicherungen sind ein Thema, bei dem viele entweder zu viel oder zu wenig absichern. Aus meiner eigenen Erfahrung als Verbraucher, der jahrelang Policen verglichen und gewechselt hat, gilt: Die richtige Versicherung schützt vor existenzbedrohenden Kosten. Die falsche ist reine Geldverbrennung. In diesem Ratgeber bekommst du den Überblick, welche Policen sich wirklich lohnen und für wen.
 
 ### Das Wichtigste in Kürze
 

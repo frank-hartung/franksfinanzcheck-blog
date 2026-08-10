@@ -60,20 +60,17 @@ Wer die Preismechanik versteht, kauft zum richtigen Zeitpunkt. Die 5 wichtigsten
 
 Der größte Hebel beim Reisepreis ist der Abflughafen. Wer statt des Heimatflughafens einen 100 Kilometer entfernten Flughafen wählt, spart oft 100 bis 300 Euro pro Person – gerade bei Pauschalreisen, wo der Flug ein großer Kostenblock ist.
 
-Die Rechnung: Hin- und Rückfahrt zum weiter entfernten Flughafen (Zug oder Auto) kostet 30 bis 80 Euro –   
-die Ersparnis beim Reisepreis ist meist deutlich höher. Die [Vergleichsportale](../../posts/guenstige-fluege-spaetsommer-finden/) zeigen dir die Preise je Abflughafen auf einen Blick.
+Die Rechnung: Hin- und Rückfahrt zum weiter entfernten Flughafen (Zug oder Auto) kostet 30 bis 80 Euro. Die Ersparnis beim Reisepreis ist meist deutlich höher. Die [Vergleichsportale](../../posts/guenstige-fluege-spaetsommer-finden/) zeigen dir die Preise je Abflughafen auf einen Blick.
 
 ## Spartrick 2:<br>Mitte der Woche fliegen
 
-Der Abreisetag beeinflusst den Preis stärker als gedacht: Wer statt Samstag/Sonntag Dienstag oder Mittwoch fliegt, spart bei Pauschalreisen oft 50 bis 150 Euro pro Person. Der Grund: Die Nachfrage konzentriert sich auf das Wochenende –   
-die Veranstalter bepreisen das.
+Der Abreisetag beeinflusst den Preis stärker als gedacht: Wer statt Samstag/Sonntag Dienstag oder Mittwoch fliegt, spart bei Pauschalreisen oft 50 bis 150 Euro pro Person. Der Grund: Die Nachfrage konzentriert sich auf das Wochenende. Die Veranstalter bepreisen das.
 
 Gerade bei Kurztrips und Städtereisen ist die Wochenmitte der Geheimtipp: Weniger Andrang, günstigere Hotels, ruhigere Flüge.
 
 ## Spartrick 3:<br>Zubuchungen geschickt wählen
 
-Die Zubuchungs-Falle der Reiseportale: Transfer, Ausflüge, Mietwagen, Versicherungen –   
-alles wird dir beim Buchen „bequem" angeboten, oft mit satten Aufschlägen. Die Regeln:
+Die Zubuchungs-Falle der Reiseportale: Transfer, Ausflüge, Mietwagen, Versicherungen. Alles wird dir beim Buchen „bequem" angeboten, oft mit satten Aufschlägen. Die Regeln:
 
 - **Transfer:** Oft 30 bis 60 Euro pro Person – ein [Mietwagen](../../posts/mietwagen-buchen-so-sparst-du/) oder öffentliche Verkehrsmittel sind oft günstiger und flexibler.
 - **Reiseversicherung:** Die Versicherungen der Portale sind oft überteuert – [vergleiche die Konditionen](../../posts/reisekrankenversicherung-wann-lohnt/) vorher.
@@ -81,8 +78,7 @@ alles wird dir beim Buchen „bequem" angeboten, oft mit satten Aufschlägen. Di
 
 ## Spartrick 4:<br>Die richtige Reisedauer
 
-Die meisten Pauschalreisen werden in 7-Tage-Schritten verkauft – und der Preis pro Tag fällt mit der Dauer. Wer 10 statt 7 Tage bucht, zahlt oft nur 20 bis 30 Prozent mehr. Der Tipp: Vergleiche die Tagespreise verschiedener Reisedauern –  
-die 10-Tage-Variante ist oft das bessere Preis-Leistungs-Verhältnis.
+Die meisten Pauschalreisen werden in 7-Tage-Schritten verkauft – und der Preis pro Tag fällt mit der Dauer. Wer 10 statt 7 Tage bucht, zahlt oft nur 20 bis 30 Prozent mehr. Der Tipp: Vergleiche die Tagespreise verschiedener Reisedauern. Die 10-Tage-Variante ist oft das bessere Preis-Leistungs-Verhältnis.
 
 ## Spartrick 5 und 6:<br>Preisalarme + Vergleichsportale
 
@@ -90,8 +86,7 @@ Zwei Basics, die man nie vergessen sollte: **Preisalarme** in Vergleichsportalen
 
 ## Der Pauschalreise-Vorteil:<br>Sicherheit & Recht
 
-Zum Schluss die Einordnung, warum Pauschalreisen trotzdem ihren Preis wert sind: Der **Pauschalreise-Vertrag** bietet dir umfassende Rechte –   
-die [Reiseverordnung](../../posts/reisekrankenversicherung-wann-lohnt/) schützt dich bei Flugausfällen, Hotel-Problemen und Reisemängeln. Du hast einen Ansprechpartner (den Veranstalter), der sich um alles kümmert, und bei Insolvenz greift der [Reisesicherungsschein](../../posts/urlaubskasse-aufbessern-spartipps/).
+Zum Schluss die Einordnung, warum Pauschalreisen trotzdem ihren Preis wert sind: Der **Pauschalreise-Vertrag** bietet dir umfassende Rechte. Die [Reiseverordnung](../../posts/reisekrankenversicherung-wann-lohnt/) schützt dich bei Flugausfällen, Hotel-Problemen und Reisemängeln. Du hast einen Ansprechpartner (den Veranstalter), der sich um alles kümmert, und bei Insolvenz greift der [Reisesicherungsschein](../../posts/urlaubskasse-aufbessern-spartipps/).
 
 Wer Flexibilität und günstige Preise will, bucht Bausteine einzeln. Wer Sicherheit und Komfort will, bucht pauschal – zum richtigen Zeitpunkt.
 

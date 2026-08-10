@@ -50,8 +50,7 @@ Riester lohnt sich vor allem für die Gruppen, die die vollen Zulagen kassieren:
 
 **Familien mit Kindern:** die Kinderzulagen machen Riester für Eltern besonders attraktiv. Ein Paar mit zwei Kindern, das den Mindestbeitrag zahlt, bekommt jährlich 175 + 175 + 185 + 185 = 720 Euro Zulagen – bei einem Eigenbeitrag von 2.100 Euro sind das über 34 Prozent Sofortrendite. Das schlägt fast jede andere Anlage.
 
-**Geringverdiener:** wer wenig verdient und wenig Steuern zahlt, profitiert von den Zulagen am stärksten –   
-die Förderquote (Zulagen im Verhältnis zum Eigenbeitrag) ist hier am höchsten.
+**Geringverdiener:** wer wenig verdient und wenig Steuern zahlt, profitiert von den Zulagen am stärksten – die Förderquote (Zulagen im Verhältnis zum Eigenbeitrag) ist hier am höchsten.
 
 **Menschen, die diszipliniert sparen wollen:** Riester zwingt zum Sparen, weil die Förderung an den Mindestbeitrag gebunden ist. Wer ohne Riester ohnehin nicht sparen würde, nutzt den Vertrag als Sparzwang mit Bonus.
 
@@ -65,8 +64,7 @@ Die Kehrseite: Für viele andere ist Riester ein schwaches Produkt.
 
 **Kurz vor der Rente:** Wer in wenigen Jahren ohnehin in Rente geht und kaum Zulagen bekommen hat, sollte die Kündigung (oder das Stilllegen) ernsthaft prüfen.
 
-Achtung bei der Kündigung: Du musst die erhaltenen Zulagen und Steuervorteile zurückzahlen –   
-das kann schnell 2.000 bis 5.000 Euro sein. Die Rechnung muss also immer den Nettovorteil der Kündigung zeigen: Was bleibt nach Rückzahlung übrig, und was kann ich damit anderweitig erreichen?
+Achtung bei der Kündigung: Du musst die erhaltenen Zulagen und Steuervorteile zurückzahlen. Das kann schnell 2.000 bis 5.000 Euro sein. Die Rechnung muss also immer den Nettovorteil der Kündigung zeigen: Was bleibt nach Rückzahlung übrig, und was kann ich damit anderweitig erreichen?
 
 ## Stilllegen vs. kündigen vs. weiterzahlen
 
@@ -87,8 +85,7 @@ Bevor du irgendetwas entscheidest, analysiere deinen Vertrag:
 3. **Welche Rendite:** Was hat der Vertrag in den letzten 5 Jahren wirklich erwirtschaftet (nach Kosten)?
 4. **Förderquote:** Wie viel Zulage und Steuerersparnis bekommst du pro Jahr im Verhältnis zu deinem Eigenbeitrag?
 
-Mit diesen vier Zahlen kannst du Riester mit einem [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) vergleichen: historisch erzielen Welt-ETFs langfristig 6 bis 8 Prozent pro Jahr vor Kosten –   
-die meisten Riester-Verträge liegen deutlich darunter. Die Förderung muss diese Differenz ausgleichen.
+Mit diesen vier Zahlen kannst du Riester mit einem [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) vergleichen: historisch erzielen Welt-ETFs langfristig 6 bis 8 Prozent pro Jahr vor Kosten. Die meisten Riester-Verträge liegen deutlich darunter. Die Förderung muss diese Differenz ausgleichen.
 
 ## Alternativen:<br>Was du mit dem Geld machen könntest
 
@@ -108,8 +105,7 @@ Die Kombination sieht so aus: bAV für den Arbeitgeber-Zuschuss und die Steuerer
 
 Wichtig bei der bAV: Prüfe die Kosten und die Verzinsung des Vertrags. Manche bAV-Angebote sind trotz Arbeitgeber-Zuschuss unattraktiv, weil die Gebühren hoch sind. Die Faustregel: Wenn der Arbeitgeber mindestens 15 Prozent zuschießt und die Kosten unter 1,5 Prozent liegen, lohnt sich die bAV fast immer.
 
-Und falls du Riester beitragsfrei stellst, aber noch Zulagen erhalten willst: Prüfe, ob du den Mindestbeitrag (4 Prozent des Vorjahreseinkommens, gedeckelt) weiterhin leisten kannst –   
-dann fließen Zulagen und Steuervorteile weiter, und dein Geld arbeitet mit Förderung.
+Und falls du Riester beitragsfrei stellst, aber noch Zulagen erhalten willst: Prüfe, ob du den Mindestbeitrag (4 Prozent des Vorjahreseinkommens, gedeckelt) weiterhin leisten kannst. Dann fließen Zulagen und Steuervorteile weiter, und dein Geld arbeitet mit Förderung.
 
 
 ## Häufig gestellte Fragen
