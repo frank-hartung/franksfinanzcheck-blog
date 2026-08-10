@@ -11,7 +11,7 @@ ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "relaxed"
 
-inspiration: Zweite Welle Gaspreis-Anpassung: Jetzt sichern
+inspiration: "Zweite Welle Gaspreis-Anpassung: Jetzt sichern"
 cover:
   image: "images/covers/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.jpg"
   alt: "Spar-Tipp: 2026 08 10 Sicher Heizen So Schuetzt Dich Eine Preisgarantie Gas"

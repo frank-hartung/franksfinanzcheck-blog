@@ -66,6 +66,17 @@ def write_status(line_extra=None, level="OK"):
 # Hilfsfunktionen: Frontmatter + Datei speichern
 # ---------------------------------------------------------------------------
 
+def yaml_quote(value: str) -> str:
+    """Quoted einen Wert YAML-sicher (Doppelpunkte, Sonderzeichen).
+    Verhindert Frontmatter-Build-Fehler wie 'inspiration: Text: Mehr'."""
+    if value is None:
+        return '""'
+    v = str(value)
+    if ":" in v or "#" in v or v.startswith((" ", "-", "?", "!")) or v != v.strip():
+        return '"' + v.replace('"', '\\"') + '"'
+    return v
+
+
 def save_article(title, desc, body, draft=False, inspiration=None):
     """Speichert Artikel als Page-Bundle (Format wie bisherige Pipeline)."""
     date = datetime.date.today().isoformat()
@@ -89,12 +100,12 @@ def save_article(title, desc, body, draft=False, inspiration=None):
     )
     insp_line = ""
     if inspiration:
-        insp_line = f"\ninspiration: {inspiration}\n"
+        insp_line = f"\ninspiration: {yaml_quote(inspiration)}\n"
     draft_line = "true" if draft else "false"
     frontmatter = (
         "---\n"
-        f'title: "{title}"\n'
-        f'description: "{desc}"\n'
+        f'title: {yaml_quote(title)}\n'
+        f'description: {yaml_quote(desc)}\n'
         f"date: {date}T12:00:00Z\n"
         f"draft: {draft_line}\n"
         'tags: []\n'
