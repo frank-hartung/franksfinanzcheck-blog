@@ -13,7 +13,7 @@ ai_provider: "Manuell (Masterplan Blueprint 24)"
 kurzantwort: "Die 3 wirksamsten WLAN-Tricks ohne Kauf sind: Router zentral und erhöht aufstellen, das 5-GHz-Funkband nutzen statt 2,4 GHz und den WLAN-Kanal wechseln. Zusammen mit Firmware-Update und Neustart-Routine bringt das oft 30 bis 80 Prozent mehr Tempo – ganz ohne neue Hardware."
 cover:
   image: "images/covers/wlan-verbessern-ohne-neue-hardware.jpg"
-  alt: "WLAN verbessern: 12 Tipps ohne neue Hardware"
+  alt: "WLAN verbessern: 12 praktische Tipps ohne neue Hardware"
   caption: "Tipp von FranksFinanzcheck"
 ---
 Bevor du 100 Euro für einen neuen Router oder [WLAN-Verstärker](../../posts/wlan-verstaerker-vs-mesh-wlan/) ausgibst, solltest du wissen: Die Hälfte aller WLAN-Probleme lässt sich mit Einstellungen und Tricks lösen – kostenlos. Oft liegt es nicht an der Hardware, sondern an Standort, Frequenzwahl oder veralteter Software.
@@ -115,6 +115,6 @@ Durch eine normale Trockenbauwand etwa 10 bis 15 Meter, durch dicke Betonwände 
 
 Wenn die 12 Tipps nicht reichen, liegt es meist an der Hardware: Dann lohnt der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein [Mesh-System](../../posts/wlan-verstaerker-vs-mesh-wlan/). Und wer generell [schnelleres Internet](../../posts/dns-server-aendern-schnelleres-internet/) will, findet im DNS-Ratgeber den nächsten kostenlosen Hebel. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
-👉 **Jetzt den passenden Internet-Tarif finden:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
+👉 **Jetzt den passenden Internet-Tarif finden:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

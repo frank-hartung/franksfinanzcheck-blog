@@ -1,10 +1,10 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am … – 80 Artikel geprüft, 1 Funde, 0 korrigiert, 1 offen.
+> **Automatisch** erzeugt am … – 80 Artikel geprüft, 0 Funde, 0 korrigiert, 0 offen.
 
 ## Offene Punkte
 
-- `Satzanfang nach Überschrift: „e“ → „E“`
+_Keine offenen Punkte._
 
 ---
 *Erzeugt von scripts/spellcheck.py*

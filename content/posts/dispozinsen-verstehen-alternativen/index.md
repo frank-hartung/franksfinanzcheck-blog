@@ -108,6 +108,6 @@ Für wenige Tage ist er aufgrund der Bequemlichkeit akzeptabel. Als dauerhafte F
 
 Wer den Dispo dauerhaft loswerden will, startet mit einem [Notgroschen-Plan](../../posts/notgroschen-aufbauen-wie-viel-reicht/) und einem ehrlichen [Budget](../../posts/monatsbudget-erstellen-schritt-fuer-schritt/). Prüfe bei einem Kontowechsel direkt die neuen Konditionen für Überziehungen. Viele [kostenlose Konten](../../posts/kostenloses-girokonto-finden/) bieten heute sehr faire Zinssätze an. Weitere Tipps findest du im [Ratgeber Konto & Karten](../../pillar/konto-karten/).
 
-👉 **Jetzt Ratenkredit vergleichen und Dispo ablösen:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=kreditvergleich)
+👉 **Jetzt Ratenkredit vergleichen und Dispo ablösen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditvergleich)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

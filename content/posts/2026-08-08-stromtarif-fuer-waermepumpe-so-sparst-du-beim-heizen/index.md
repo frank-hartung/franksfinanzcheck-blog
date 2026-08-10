@@ -54,6 +54,6 @@ Deine Ersparnis hängt stark von deinem aktuellen Tarif ab. In der Regel sparst 
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

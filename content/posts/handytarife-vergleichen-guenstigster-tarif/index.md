@@ -68,6 +68,6 @@ Der ideale Moment ist kurz vor Ablauf deiner Mindestlaufzeit. Viele attraktive S
 
 ---
 
-👉 **Jetzt Handytarife vergleichen und sparen:** [**→ Tarife prüfen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=handytarife)
+👉 **Jetzt Handytarife vergleichen und sparen:** [**→ Tarife prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

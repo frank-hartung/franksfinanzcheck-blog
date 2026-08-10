@@ -67,6 +67,6 @@ Das Wichtigste in Kürze:
 * Wäsche an der Luft trocknen 
 * Stromtarif wechseln 
 
-👉 **Jetzt [Stromtarif vergleichen](../../posts/stromvergleich-richtig-lesen-tarif-finden/) und sofort sparen:** [**→ Strompreise prüfen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
+👉 **Jetzt [Stromtarif vergleichen](../../posts/stromvergleich-richtig-lesen-tarif-finden/) und sofort sparen:** [**→ Strompreise prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

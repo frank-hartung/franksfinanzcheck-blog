@@ -132,6 +132,6 @@ Die richtige Reiseversicherung gehört zur [Reise-Planung](../../posts/urlaubska
 Eine Reiseabbruchversicherung lohnt sich bei teuren Reisen (ab etwa 1.500 Euro), wenn du die Reise vorzeitig abbrechen musst – etwa wegen Krankheit oder eines Todesfalls in der Familie. Sie erstattet die nicht genutzten Reiseleistungen und die Rückreisekosten. Bei günstigen Reisen ist das Risiko gering und die Police unnötig – prüfe vor dem Abschluss, ob deine [Hausrat- oder Kreditkarten-Versicherung](../../posts/kreditkarte-ohne-jahresgebuehr/) diesen Baustein schon abdeckt.
 
 
-👉 **Jetzt Reiseversicherungen vergleichen und abschließen:** [**→ Jetzt vergleichen und sparen**](https://a. partner-versicherung. de/click. php? partner_id=47086&ad_id=15&deep=reisekrankenversicherung)
+👉 **Jetzt Reiseversicherungen vergleichen und abschließen:** [**→ Jetzt vergleichen und sparen**](https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=reisekrankenversicherung)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -115,6 +115,6 @@ Ja, die Bundesförderung für effiziente Gebäude (BEG) fördert den Tausch von 
 **Was passiert mit den alten Speichergeräten?**
 Die ausgebauten Nachtspeicherheizungen müssen fachgerecht entsorgt werden – sie enthalten Speichersteine und elektrische Bauteile, die nicht in den Hausmüll gehören. Fachbetriebe übernehmen den Rückbau und die Entsorgung in der Regel im Rahmen des Einbaus. Einige Anbieter zahlen sogar einen kleinen Restwert für die Kupferanteile.
 
-👉 **Jetzt Strom- und Gastarife vergleichen und sparen:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3)
+👉 **Jetzt Strom- und Gastarife vergleichen und sparen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

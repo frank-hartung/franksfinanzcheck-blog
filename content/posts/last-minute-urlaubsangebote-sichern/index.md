@@ -43,7 +43,7 @@ Lies die aktuellen Bewertungen zur Lage deiner Unterkunft kritisch durch. Ein Ho
 
 - [ ] Ist dein Reisepass oder Personalausweis noch mindestens 6 Monate gültig?
 - [ ] Hast du die aktuellen Einreisebestimmungen und Visumspflichten deines Zielprojekts geprüft?
-- [ ] Besteht ein aktiver Schutz durch eine Auslands-Reisekrankenversicherung? ([Hier prüfen](https://a. partner-versicherung. de))
+- [ ] Besteht ein aktiver Schutz durch eine Auslands-Reisekrankenversicherung? ([Hier prüfen](https://a.partner-versicherung.de))
 - [ ] Liegt deine Kreditkarte für Kautionen im Hotel oder für den Mietwagen bereit?
 - [ ] Kennst du die genauen Gepäckregeln deiner Fluggesellschaft zur Vermeidung von Aufpreisen?
 - [ ] Ist der Transfer vom Zielflughafen zu deiner Unterkunft bereits organisiert oder inklusive?
@@ -61,6 +61,6 @@ Ein seriöser Anbieter nennt dir sofort den Endpreis inklusive aller Steuern und
 
 ---
 
-👉 **Jetzt Last-Minute-Angebote vergleichen und sparen:** [**→ Reise-Schnäppchen prüfen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9)
+👉 **Jetzt Last-Minute-Angebote vergleichen und sparen:** [**→ Reise-Schnäppchen prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

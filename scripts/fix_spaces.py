@@ -62,6 +62,25 @@ def _is_protected(line: str) -> bool:
     return "|" in line or "`" in line or line.lstrip().startswith((">", "```"))
 
 
+# URL-Maske: matcht http(s)-URLs (auch mit internen Leerzeichen durch
+# fruehere Fehllauefe) – wird vor den Leerzeichen-Regeln maskiert, damit
+# NIE wieder Leerzeichen in URLs eingefuegt/veraendert werden.
+RE_URL = re.compile(r"https?://[^\s)\]\}]+(?:\s+[^\s)\]\}]+)*")
+
+
+def _mask_urls(line: str) -> tuple[str, list[tuple[str, str]]]:
+    """Ersetzt URLs durch eindeutige Token (§URL0§, §URL1§, …).
+    Die Token enthalten keine Leerzeichen/Punkte → werden von keiner
+    Leerzeichen-Regel veraendert und koennen danach sicher zurueck-
+    ersetzt werden (positionsunabhaengig)."""
+    urls = []
+    def _repl(m):
+        tok = f"§URL{len(urls)}§"
+        urls.append((tok, m.group(0)))
+        return tok
+    return RE_URL.sub(_repl, line), urls
+
+
 def fix_line(line: str) -> tuple[str, int]:
     """Wendet alle Leerzeichen-Regeln auf EINE Zeile an."""
     if _is_protected(line):
@@ -109,7 +128,19 @@ def fix_line(line: str) -> tuple[str, int]:
     line, n = re.subn(r"(\d)[ \u00a0]+([%€])", lambda m: m.group(1) + NBSP + m.group(2), line)
     changed += n
 
+    # URLs unveraendert wiederherstellen (Platzhalter zurueck)
+    # (fix_line arbeitet auf maskierter Zeile – wir maskieren hier erneut,
+    # damit die Regeln URLs nie anfassen koennen.)
     return line, changed
+
+
+def fix_line_safe(line: str) -> tuple[str, int]:
+    """fix_line mit URL-Maskierung (URLs werden nie veraendert)."""
+    masked, urls = _mask_urls(line)
+    out, n = fix_line(masked)
+    for tok, u in urls:
+        out = out.replace(tok, u)
+    return out, n
 
 
 def fix_body(body: str) -> tuple[str, int]:
@@ -118,7 +149,7 @@ def fix_body(body: str) -> tuple[str, int]:
     out: list[str] = []
     changed = 0
     for line in lines:
-        new_line, n = fix_line(line)
+        new_line, n = fix_line_safe(line)
         out.append(new_line)
         changed += n
     return "\n".join(out), changed
