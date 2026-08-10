@@ -17,7 +17,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
-Die Nachtspeicherheizung hat einen schlechten Ruf – und in vielen Fällen zu Recht. Sie heizt mit Strom, der nachts in Speichersteinen „gebunkert" und tagsüber abgegeben wird. Was in den 1970er- und 80er-Jahren als günstige Lösung galt, ist heute meist die teuerste Heizform überhaupt.
+Die Nachtspeicherheizung hat einen schlechten Ruf und in vielen Fällen zu Recht. Sie heizt mit Strom, der nachts in Speichersteinen „gebunkert" und tagsüber abgegeben wird. Was in den 1970er- und 80er-Jahren als günstige Lösung galt, ist heute meist die teuerste Heizform überhaupt.
 
 Aber: Nicht jede Nachtspeicherheizung muss sofort raus. Ob sich der Wechsel 2026 lohnt, hängt von deiner Situation ab – Eigentum oder Miete, Gebäudezustand, Fördermöglichkeiten. In diesem Artikel bekommst du die Rechnung und die Entscheidungs-Kriterien.
 

@@ -1,6 +1,6 @@
 ---
 title: "Berufsunfähigkeitsversicherung: Für wen sie sich 2026 lohnt"
-description: "Die BU ist die teuerste Police – und für viele unnötig. Für wen sich der Abschluss 2026 wirklich lohnt, was sie kostet und wie du sparen kannst."
+description: "Die BU ist die teuerste Police und für viele unnötig. Für wen sich der Abschluss 2026 wirklich lohnt, was sie kostet und wie du sparen kannst."
 date: 2026-08-09T07:40:00Z
 draft: false
 tags: ["Berufsunfähigkeitsversicherung", "BU", "Versicherung"]
