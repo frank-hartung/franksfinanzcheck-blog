@@ -1,7 +1,7 @@
 ---
 title: "Sicher heizen: So schützt dich eine Preisgarantie Gas"
 description: "Schütze dich vor steigenden Kosten! Erfahre, wie du mit einer Preisgarantie Gas deine Fixkosten senkst und bares Geld bei der Heizkostenabrechnung sparst."
-date: 2026-08-10T12:00:00Z
+date: 2026-08-10T09:29:05Z
 draft: false
 tags: []
 categories: ["Ratgeber"]
