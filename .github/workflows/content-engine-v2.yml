@@ -119,6 +119,8 @@ jobs:
           python3 scripts/compound_guard.py --fix --ai --new-only || echo "⚠ Compound-Guard (nicht kritisch)"
           echo "== Emoji-Guard (Marken-Touchpoints + Mojibake-Scanner) =="
           python3 scripts/emoji_guard.py --fix || echo "⚠ Emoji-Guard (nicht kritisch)"
+          echo "== Brand-Guard (Marken-Lock: Willkommenstext/Emojis/Disclaimer unantastbar) =="
+          python3 scripts/brand_guard.py --fix || echo "⚠ Brand-Guard (nicht kritisch)"
           echo "== Laengen-Guard (Korridor + KI-Selbstheilung fuer neue Artikel) =="
           python3 scripts/length_guard.py --fix --ai --new-only || echo "⚠ Length-Guard (nicht kritisch)"
           echo "== Profi-Text-Gate =="
