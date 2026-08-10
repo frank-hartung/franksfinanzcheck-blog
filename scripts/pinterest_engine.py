@@ -78,12 +78,14 @@ def hashtags_for(post):
 
 
 def pin_text(post):
-    """Optimierter Pin-Text: Description + CTA + Hashtags (≤ 500 Zeichen)."""
+    """Optimierter Pin-Text: Kennzeichnung + Description + CTA + Hashtags (≤ 500 Zeichen)."""
     desc = post["description"]
     if not desc:
         desc = post["title"]
     hashtags = hashtags_for(post)
-    text = f"{desc} Mehr Spartipps auf FranksFinanzcheck! {hashtags}"
+    # Werbekennzeichnung (deutsches Recht): Artikel enthalten Affiliate-Links,
+    # daher Pins vorangestellt als Werbung deklarieren.
+    text = f"*Werbung | {desc} Mehr Spartipps auf FranksFinanzcheck! {hashtags}"
     return text[:500]
 
 

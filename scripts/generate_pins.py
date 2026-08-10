@@ -150,7 +150,8 @@ def main():
         elif not image.startswith("http"):
             image = f"{BASE_URL}/images/covers/{p['slug']}.jpg"
         link = f"{BASE_URL}/posts/{p['slug']}/"
-        desc = (p["description"] or p["title"])[:490]
+        # Werbekennzeichnung (deutsches Recht): Artikel enthalten Affiliate-Links
+        desc = "*Werbung | " + (p["description"] or p["title"])[:478]
         desc += "\n\n#GeldSparen #Spartipps #FranksFinanzcheck"
         try:
             result = create_pin(token, board_id, p["title"], desc, link, image)
