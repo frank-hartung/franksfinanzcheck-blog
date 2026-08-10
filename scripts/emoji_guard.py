@@ -130,8 +130,12 @@ def apply_fixes(findings) -> bool:
     return True
 
 
+ZERO_WIDTH = ["​", "‌", "‍", "﻿"]  # E5: unsichtbarer Müll (U+200B/C/D, BOM)
+
+
 def mojibake_scan() -> tuple[list[dict], int]:
-    """E4: scannt content/ + hugo.toml nach UTF-8-Brüchen; fixt optional."""
+    """E4+E5: scannt content/ + hugo.toml nach UTF-8-Brüchen und
+    Zero-Width-Zeichen; repariert mit --fix optional automatisch."""
     hits, repaired = [], 0
     paths = [HUGO_TOML] + sorted((ROOT / "content").rglob("index.md")) + \
         sorted((ROOT / "content").rglob("_index.md"))
@@ -141,15 +145,21 @@ def mojibake_scan() -> tuple[list[dict], int]:
         em = len(EMOJI_MOJI.findall(text))
         if em:
             found["kaputte Emoji (ðŸ…)"] = em
+        zw = sum(text.count(c) for c in ZERO_WIDTH)
+        if zw:
+            found["Zero-Width (U+200B o. ä.)"] = zw
         if not found:
             continue
         hits.append({"file": str(p.relative_to(ROOT)), "arten": found})
-        if DO_FIX and not DRY_RUN and "kaputte Emoji (ðŸ…)" not in found:
+        if DO_FIX and not DRY_RUN:
+            if "kaputte Emoji (ðŸ…)" in found:
+                continue  # kaputte Emoji: nicht raten -> nur melden
             for bad, good in MOJIBAKE.items():
                 text = text.replace(bad, good)
+            for c in ZERO_WIDTH:                       # E5: immer sicher zu löschen
+                text = text.replace(c, "")
             p.write_text(text, encoding="utf-8")
             repaired += 1
-        # kaputte Emoji: nicht raten -> nur melden
     return hits, repaired
 
 
@@ -174,7 +184,7 @@ def main() -> None:
         lines += ["## Befunde", ""]
         lines += [f"- **{f['id']}** `{f['wo']}`: {f['problem']}" for f in open_f]
     if moji:
-        lines += ["", "## ⚠️ E4 Mojibake (UTF-8-Brüche)", ""]
+        lines += ["", "## ⚠️ E4/E5 Text-Hygiene (Mojibake + unsichtbare Zeichen)", ""]
         if repaired:
             lines += [f"✅ {repaired} Datei(en) automatisch repariert.", ""]
         lines += [f"- `{m['file']}`: " +
