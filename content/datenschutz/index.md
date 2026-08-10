@@ -110,7 +110,7 @@ Diese Website nimmt an **Affiliate-Partnerprogrammen** teil. Beim Klick auf eine
 
 | Partner | Anbieter (Verantwortlicher) | Datenschutzerklärung |
 |---|---|---|
-| **CHECK24** (Strom, Gas, DSL, Girokonto, Kredit, Kfz, Reisen, Mietwagen, Flüge) | CHECK24 Vergleichsportal GmbH, Erika-Mann-Str. 62, 80636 München | https://www.check24.de/datenschutz/ |
+| **CHECK24** (Strom, Gas, DSL, Girokonto, Kredit, Kfz, Reisen, Mietwagen, Flüge) | CHECK24-Vergleichsportal GmbH, Erika-Mann-Str. 62, 80636 München | https://www.check24.de/datenschutz/ |
 | **Tarifcheck** (Versicherungen: Haftpflicht, Hausrat, Unfall, Zahnzusatz, Reisekranken) | Tarifcheck – Datenschutzerklärung über die jeweilige Website | https://www.tarifcheck.de/datenschutz |
 | **Awin** (Vermittlungsnetzwerk) | Awin AG, Otto-Oliva-Platz 1, 10707 Berlin | https://www.awin.com/de/rechtliches |
 

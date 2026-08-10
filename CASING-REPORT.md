@@ -1,10 +1,8 @@
 # 🔠 CASING-REPORT (casing_guard.py)
 
-**Stand:** 2026-08-10 19:35 UTC · Modus: FIX
+**Stand:** 2026-08-10 20:07 UTC · Modus: REPORT
 
-## ✅ Korrigiert (1 Dateien)
-
-- `content/posts/2026-08-10-dsl-wechselbonus-sichern/index.md`: 2 Korrektur(en)
+🎉 Akronym-Orthografie sauber (C1 + C2, Duden).
 
 ---
 _C1 kanonische Akronym-Schreibweise (dsl→DSL) · C2 Durchkopplung (DSL Tarif→DSL-Tarif). Front-Matter = SEO-Safe-Zone (Keywords bleiben klein)._

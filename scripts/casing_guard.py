@@ -14,6 +14,10 @@
 #        („etf" -> „ETF", „wlans" -> „WLANs", Binnenmajuskel-Schutz)
 #    C2  Akronym + Nomen (Liste) ohne Bindestrich -> Durchkopplung
 #        („5G Netz" -> „5G-Netz"); Genus/Plural-Endungen tolerant.
+#    C3  MARKEN-Durchkopplung (Fund 2026-08-10, „Check24 Gasvergleich"):
+#        Eigenname/Affiliate-Marke + Nomen -> Bindestrich (Duden).
+#        „CHECK24 Vergleichsportal" -> „CHECK24-Vergleichsportal"
+#        Haus-Marken: Check24/CHECK24, Tarifcheck, Verivox, Idealo.
 #
 #  GESCHÜTZT (niemals anfassen):
 #    - Front-Matter KOMPLETT (keywords = SEO-Suchanfragen, bleiben klein!)
@@ -62,11 +66,21 @@ COUPLE_NOUNS = ("Tarif", "Tarife", "Tarifen", "Wechselbonus", "Anbieter", "Angeb
 ACRO_FOR_COUPLE = ("DSL", "WLAN", "LTE", "4G", "5G", "NFC", "SIM", "ETF", "ETFs",
                    "PIN", "TAN", "USB", "HDMI", "SEPA", "Kfz", "SMS")
 
+# C3: Marken (Schreibweise bleibt wie hinterlegt), die mit Nomen durchkoppelt werden:
+BRAND_PREFIXES = ("Check24", "CHECK24", "Tarifcheck", "TARIFCHECK", "Verivox", "Idealo")
+# Nomenliste von C2 + vergleichsportale-spezifische (Gasvergleich & Co.):
+C3_NOUNS = COUPLE_NOUNS + ("Gasvergleich", "Stromvergleich", "Tarifrechner",
+                           "Vergleichsportal", "Vergleichsrechner", "Bonus",
+                           "Angebot", "Angebote", "Deal", "Deals")
+
 C1_RE = re.compile(r"\b(" + "|".join(ACRONYMS) + r")\b", re.IGNORECASE)
 C2_RE = re.compile(r"\b(" + "|".join(ACRO_FOR_COUPLE) + r") ("
                    + "|".join(COUPLE_NOUNS) + r")(?:e[nrms]?|s)?\b")
 
-WHITELIST = re.compile(r"^\s*(#|//|\{%)")        # Zeilen, die nie angefasst werden
+WHITELIST = re.compile(r"^\s*(//|\{%)")        # Template-/Code-Kommentare nur;
+                                               # Bug-Fix 10.08.: ^# hatte auch
+                                               # ALLE Markdown-Überschriften
+                                               # vom Scan ausgesperrt!
 SITZWEST = {"pin"}, {"pin": "PIN"}                 # Sicherheitswortliste
 
 
@@ -113,6 +127,14 @@ def fix_line(body: str) -> tuple[str, int]:
         return f"{m.group(1)}-{noun}{tail}"
     body = re.sub(r"\b(" + "|".join(ACRO_FOR_COUPLE) + r") (("
                   + "|".join(COUPLE_NOUNS) + r")(e[nrms]?|s)?)\b", _c2b, body)
+
+    # C3: Marken-Durchkopplung (Flexion tolerant)
+    def _c3(m):
+        nonlocal hits
+        hits += 1
+        return f"{m.group(1)}-{m.group(2)}"
+    body = re.sub(r"\b(" + "|".join(BRAND_PREFIXES) + r") ("
+                  + "|".join(C3_NOUNS) + r")\b", _c3, body)
     return body, hits
 
 
