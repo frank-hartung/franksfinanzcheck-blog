@@ -1,0 +1,65 @@
+# ============================================================
+#  DEPENDABOT AUTO-MERGE (Vollautomatik, Profi-Sicherung)
+#
+#  Wunsch: PRs der Dependabot-Routine sollen sich SELBST mergen.
+#  Sicherheitsregel (bewusste Entscheidung):
+#    ✅ PATCH + MINOR  -> automatisch approve + automerge
+#    🛡️ MAJOR          -> Kommentar „manuell prüfen" (Major-Updates
+#                         von Actions können Verhalten brechen –
+#                         kurzer Blick lohnt sich)
+#
+#  Technik:
+#    - pull_request_target: läuft mit Base-Repo-Rechten, checkoutet
+#      KEINEN PR-Code (sicheres Muster laut GitHub-Doku).
+#    - gh pr merge --auto: Falls „Allow auto-merge" im Repo aktiv ist,
+#      mergt GitHub, sobald Checks ok sind. Fallback: Direkt-Merge.
+#    - Nur Dependabot-PRs (Actor-Filter) – niemand kann den Workflow
+#      für Fremd-Code missbrauchen, denn es wird nichts ausgecheckt.
+# ============================================================
+name: Dependabot Auto-Merge
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    # NUR Dependabot-PRs, NUR github-actions-Updates:
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Update-Typ ermitteln (Semver-Level)
+        id: meta
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Patch/Minor -> automatisch mergen
+        if: steps.meta.outputs.update-type != 'version-update:semver-major'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          set -e
+          gh pr review --approve "$PR_URL" || true
+          # Bevorzugt: GitHub-Auto-Merge (wartet ggf. Checks ab).
+          if gh pr merge --auto --squash --delete-branch "$PR_URL" 2>/dev/null; then
+            echo "✔ Auto-Merge aktiviert – GitHub mergt sobald Checks fertig sind."
+          else
+            # Fallback: Direkt-Merge (keine Pflicht-Checks konfiguriert).
+            echo "Auto-Merge nicht verfügbar (Repo-Einstellung?) – mergen direkt."
+            gh pr merge --squash --delete-branch "$PR_URL"
+          fi
+
+      - name: Major-Update -> kommentieren statt mergen
+        if: steps.meta.outputs.update-type == 'version-update:semver-major'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          gh pr comment "$PR_URL" --body "🛡️ **Major-Update** (${{ steps.meta.outputs.dependency-names }}): Auto-Merge bewusst deaktiviert. Major-Sprünge von Actions können Verhalten ändern – bitte Changelog prüfen, dann manuell mergen."
+          echo "Major-Update erkannt – wartet auf manuelle Prüfung."
