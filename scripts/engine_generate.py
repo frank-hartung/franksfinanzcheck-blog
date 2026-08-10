@@ -77,6 +77,13 @@ def yaml_quote(value: str) -> str:
     return v
 
 
+def now_utc_iso() -> str:
+    """Aktuelle UTC-Zeit als ISO-String (1 Minute zurück – NIE ein
+    Future-Post, der von Hugo nicht gebaut würde)."""
+    return (datetime.datetime.now(datetime.timezone.utc)
+            - datetime.timedelta(minutes=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 def save_article(title, desc, body, draft=False, inspiration=None):
     """Speichert Artikel als Page-Bundle (Format wie bisherige Pipeline)."""
     date = datetime.date.today().isoformat()
@@ -106,7 +113,7 @@ def save_article(title, desc, body, draft=False, inspiration=None):
         "---\n"
         f'title: {yaml_quote(title)}\n'
         f'description: {yaml_quote(desc)}\n'
-        f"date: {date}T12:00:00Z\n"
+        f"date: {now_utc_iso()}\n"
         f"draft: {draft_line}\n"
         'tags: []\n'
         'categories: ["Ratgeber"]\n'
