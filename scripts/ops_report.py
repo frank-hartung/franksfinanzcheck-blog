@@ -31,6 +31,30 @@ def _count_posts() -> int:
     return len(glob.glob(f"{BLOG_DIR}/content/posts/*/index.md"))
 
 
+# Reale Infrastruktur (maßgeblich: INFRASTRUKTUR.md)
+INFRASTRUCTURE = {
+    "hosting": "github-pages",
+    "hosting_detail": "Branch gh-pages via deploy.yml (peaceiris/actions-gh-pages)",
+    "dns_proxy": "cloudflare-proxy",
+    "dns_detail": "Cloudflare nur DNS + Proxy (A: 185.199.108-111.153), KEIN Cloudflare Pages/Workers",
+    "ssl_mode": "full",
+    "ssl_note": "GitHub liefert Wildcard *.github.io; Umstellung auf Full (strict), sobald Watchdog-Check-4 das GitHub-TLS-Zertifikat meldet",
+    "cache_strategy": "cache-buster-v-sha",
+    "cache_note": "Assets max-age=31536000 + ?v=<deploy-sha>; HTML dynamisch (max-age=600). KEIN Cache-Purge noetig.",
+    "deploy_trigger": "github-only",
+    "deploy_note": "push/workflow_dispatch; Content-Bot stoesst Deploy explizit an (GITHUB_TOKEN triggert keine Workflows)",
+    "backup": "github-repo-offsite",
+    "backup_note": "GitHub-Repo = Offsite-Backup (Code+Content+History); S3-Export geplant (Credentials fehlen)",
+    "origin_url": "https://frank-hartung.github.io/franksfinanzcheck-blog/",
+    "live_url": "https://franksfinanzcheck.de/",
+}
+
+
+def _infrastructure_report() -> dict:
+    """Infrastruktur-Block für den Report (siehe INFRASTRUKTUR.md)."""
+    return INFRASTRUCTURE
+
+
 def _quality_summary() -> dict:
     try:
         import quality_score as qs
@@ -90,6 +114,7 @@ def build_report() -> dict:
     q = _quality_summary()
 
     report = {
+        "infrastructure": _infrastructure_report(),
         "audit": {
             "today_events": len(events),
             "total_events": audit_stats.get("total", 0),
@@ -126,9 +151,11 @@ def _next_steps(q: dict, audit_stats: dict) -> list[dict]:
     steps.append({"priority": 2, "action": "run-content-engine",
                   "detail": "Content-Engine v2 läuft automatisch (Crons 08:10–19:40 MESZ)"})
     steps.append({"priority": 3, "action": "monitor-tls-cert",
-                  "detail": "GitHub-TLS-Zertifikat: Watchdog Check 4 meldet, sobald da → Full (strict)"})
+                  "detail": "GitHub-TLS-Zertifikat: Watchdog Check 4 meldet, sobald da → Cloudflare SSL auf Full (strict) (kein CF Pages/Workers)"})
     steps.append({"priority": 3, "action": "pinterest-token",
                   "detail": "PINTEREST_ACCESS_TOKEN fehlt → Pinterest-AI postet noch nicht"})
+    steps.append({"priority": 3, "action": "s3-backup",
+                  "detail": "S3-Export geplant (INFRASTRUKTUR.md §4.5) – Credentials fehlen; GitHub-Repo ist bereits Offsite-Backup"})
     return steps
 
 
@@ -138,6 +165,8 @@ def main() -> int:
         q = report["reports"]["quality"]
         lines = [
             f"FrankAutoOps-Report {datetime.date.today().isoformat()}",
+            f"  Infrastruktur: {INFRASTRUCTURE['hosting']} + {INFRASTRUCTURE['dns_proxy']} "
+            f"(SSL {INFRASTRUCTURE['ssl_mode']}, Cache: {INFRASTRUCTURE['cache_strategy']})",
             f"  Artikel: {q.get('articles', '?')} | Ø-Score: {q.get('avg_score', '?')} "
             f"(publish {q.get('publish', '?')} / draft {q.get('draft_autofix', '?')} "
             f"/ review {len(q.get('human_review', []))})",
