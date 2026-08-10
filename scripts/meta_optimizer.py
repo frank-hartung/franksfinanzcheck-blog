@@ -214,7 +214,11 @@ def ai_title(a):
     prompt = (f"Schreibe für einen deutschen Blog-Artikel einen klickstarken, "
               f"natürlichen SEO-Titel von EXAKT 50-60 Zeichen. Wichtigstes Keyword: "
               f"'{kw}'. Ausgangs-Titel: '{title}'. Kein Clickbait, keine "
-              f"Sonderzeichen am Ende. Nur der Titel, ohne Anführungszeichen.")
+              f"Sonderzeichen am Ende. Nur der Titel, ohne Anführungszeichen. "
+              f"WICHTIG: Falls der Ausgangs-Titel einen Doppelpunkt enthält "
+              f"(Muster 'Hauptkeyword: Untertitel'), behalte diese Struktur "
+              f"unbedingt bei – kein 'dieses Jahr' o. Ä. am Ende, keine "
+              f"Bindestrich-Komposita (z. B. 'Riester-Rente') auseinanderreißen.")
 
     ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 
@@ -254,6 +258,42 @@ def ai_title(a):
         except Exception:
             pass
     return None
+
+
+# --- Titel-Gate: schützt Blog-Konventionen vor Verschlimmbesserung --------
+# Die Blog-Konvention ist "Hauptkeyword: Untertitel" – der Cover-Renderer
+# (smart_wrap in generate_covers.py) bricht Cover-Texte semantisch nach dem
+# Doppelpunkt. KI-Titel ohne diese Struktur führen zu kaputten
+# Cover-Umrüchen (z. B. "Weiterfördern / oder kündigen dieses Jahr").
+# Eingeführt nach Fund: meta_optimizer hatte "Riester-Rente 2026:
+# Weiterfördern oder kündigen?" → "Riester Rente 2026 Weiterfördern oder
+# kündigen dieses Jahr" umgeschrieben (Bindestrich + Doppelpunkt entfernt).
+try:
+    from check_titles import COMPOUND_FIXES, TIME_TAIL
+except ImportError:
+    COMPOUND_FIXES, TIME_TAIL = [], None
+
+
+def _title_gate(new_title, orig_title, reject_no_colon=True):
+    """Validiert/korrigiert einen Titel-Vorschlag. Rückgabe: korrigierter
+    Titel oder None (= Vorschlag verwerfen, Original behalten)."""
+    if not new_title or not new_title.strip():
+        return None
+    t = new_title.strip()
+    # 1) Doppelpunkt-Struktur des Originals nicht zerstören (KI-Schutz)
+    if reject_no_colon and ":" in orig_title and ":" not in t:
+        return None
+    # 2) Holprige Zeit-Anhängsel ("dieses Jahr", "im Jahr 2027" …)
+    if TIME_TAIL is not None:
+        if reject_no_colon and TIME_TAIL.search(t):
+            return None
+        t = TIME_TAIL.sub("", t).strip()
+    # 3) Bekannte Bindestrich-Komposita sicherstellen
+    for pat, repl in COMPOUND_FIXES:
+        t = re.sub(pat, repl, t)
+    # 4) Whitespace-Glättung
+    t = re.sub(r"\s{2,}", " ", t).strip()
+    return t or None
 
 
 def audit(a):
@@ -334,7 +374,9 @@ def fix_meta(a, use_ai):
     if tl < TITLE_OPT_MIN or tl > TITLE_OPT_MAX:
         new_title = None
         if use_ai:
-            new_title = ai_title(a)
+            # KI-Titel durch das Titel-Gate schicken: verwirft Vorschläge,
+            # die Doppelpunkt-Struktur/Bindestriche/Zeit-Anhängsel verletzen
+            new_title = _title_gate(ai_title(a), a["title"], reject_no_colon=True)
         if not new_title:
             # Deterministischer Fallback: passendes Keyword als Ergänzung
             kws = parse_keywords(a["keywords"])
@@ -353,9 +395,13 @@ def fix_meta(a, use_ai):
                     suffix = cap(kw)
                     break
             if tl < TITLE_OPT_MIN:
-                # 1) Keyword-Suffix anhängen
+                # 1) Keyword-Suffix anhängen (bestehende Doppelpunkt-
+                #    Struktur nicht zerstören, kein doppelter Doppelpunkt)
                 if suffix:
-                    new_title = f"{a['title']}: {suffix}"
+                    if ":" in a["title"]:
+                        new_title = f"{a['title']} – {suffix}"
+                    else:
+                        new_title = f"{a['title']}: {suffix}"
                 # 2) Weitere Keywords ergänzen, bis ≥ Optimum
                 for kw in kws:
                     add = cap(kw)
@@ -377,6 +423,10 @@ def fix_meta(a, use_ai):
         # Länge final begrenzen (KI kann überziehen)
         if new_title and len(new_title) > TITLE_MAX + 5:
             new_title = new_title[:TITLE_MAX - 1].rstrip() + "…"
+        # Titel-Gate auch auf Fallback/Kürzung anwenden (deterministische
+        # Korrekturen: Komposita-Bindestriche, Zeit-Anhängsel, Whitespace)
+        if new_title:
+            new_title = _title_gate(new_title, a["title"], reject_no_colon=False)
         if new_title:
             old_line = re.search(r'^title:.*$', content, re.M)
             if old_line:
