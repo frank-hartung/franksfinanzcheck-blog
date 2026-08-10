@@ -53,9 +53,9 @@ Hier ist eine Checkliste für deinen nächsten Tarifvergleich:
 * **Abschläge:** Setze auf realistische Beträge passend zu deinem Vorjahresverbrauch.
 * **Öko-Optionen:** Tarife mit Biogas sind oft nur minimal teurer als Standardtarife.
 
-## Mit dem Check24 Gasvergleich den Überblick behalten
+## Mit dem Check24-Gasvergleich den Überblick behalten
 
-Du brauchst kein Expertenwissen für den günstigsten Deal in deiner Region. Ein professioneller Check24 Gasvergleich liefert dir in wenigen Sekunden alle wichtigen Marktdaten. Gib einfach deine Postleitzahl und deinen geschätzten Jahresverbrauch in das System ein. Die Ergebnisse erscheinen sofort sortiert nach dem besten Preis für dich.
+Du brauchst kein Expertenwissen für den günstigsten Deal in deiner Region. Ein professioneller Check24-Gasvergleich liefert dir in wenigen Sekunden alle wichtigen Marktdaten. Gib einfach deine Postleitzahl und deinen geschätzten Jahresverbrauch in das System ein. Die Ergebnisse erscheinen sofort sortiert nach dem besten Preis für dich.
 
 Das Portal berechnet die Ersparnis inklusive aller Boni für das erste Jahr. So erkennst du sofort, welcher Versorger das beste Preis-Leistungs-Verhältnis bietet. Achte zusätzlich auf die Sterne-Bewertungen anderer Kunden – diese geben dir wertvolle Hinweise auf die Servicequalität des Anbieters.
 
