@@ -14,6 +14,7 @@ cover:
   image: "images/covers/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau.jpg"
   alt: "Depot 2026: Dein smarter Start in den Vermögensaufbau"
   caption: "Tipp von FranksFinanzcheck"
+kurzantwort: "Du solltest auf niedrige Gebühren achten, in der Regel zwischen 0,1 % und 1,0 % pro Jahr. ETF-Sparpläne bieten eine gute Möglichkeit, regelmäßig in den Markt zu investieren. Neobroker können eine kostengünstige Alternative zu traditionellen Banken sein."
 ---2026: Dein Geld auf dem Sparbuch verliert durch die Inflation täglich an Kaufkraft. Historisch gesehen erzielt der Aktienmarkt hingegen Renditen von ca. 7 % bis 9 % pro Jahr. Mit einem Depot sicherst du dir den Zugang zu diesem Wachstum und schützt dein Vermögen aktiv.
 
 Dieser Ratgeber zeigt dir den schnellen Weg zum ersten Investment:

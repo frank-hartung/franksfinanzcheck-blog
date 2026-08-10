@@ -29,8 +29,7 @@ Die Kautionsblockade auf der Kreditkarte kann 500 bis 3.000 Euro betragen und is
 
 ## Falle 4:<br>Die Tankregel
 
-"Voll/Voll" ist die Regel: Auto voll getankt übernehmen, voll zurückgeben –   
-dann zahlst du nur den echten Verbrauch. Vorsicht bei "voll/leer": Die Vermietung berechnet den Sprit zum Fantasiepreis und du zahlst oft für den vollen Tank, auch wenn er halb leer war. Faustregel: immer "voll/voll" buchen.
+"Voll/Voll" ist die Regel: Auto voll getankt übernehmen, voll zurückgeben – dann zahlst du nur den echten Verbrauch. Vorsicht bei "voll/leer": Die Vermietung berechnet den Sprit zum Fantasiepreis und du zahlst oft für den vollen Tank, auch wenn er halb leer war. Faustregel: immer "voll/voll" buchen.
 
 ## Falle 5:<br>Versteckte Gebühren
 

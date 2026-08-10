@@ -25,8 +25,7 @@ Kontoführungsgebühren von 5 € bis 10 € im Monat summieren sich auf 60 �
 
 ## Kreditkarte ohne Jahresgebühr
 
-Für Reisen, Mietwagen-Reservierungen und Online-Käufe ist eine Kreditkarte praktisch unverzichtbar –   
-eine gebührenpflichtige aber nicht. Die besten kostenlosen Karten und worauf du bei den Konditionen achten solltest: [Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten](../../posts/kreditkarte-ohne-jahresgebuehr/).
+Für Reisen, Mietwagen-Reservierungen und Online-Käufe ist eine Kreditkarte praktisch unverzichtbar – eine gebührenpflichtige aber nicht. Die besten kostenlosen Karten und worauf du bei den Konditionen achten solltest: [Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten](../../posts/kreditkarte-ohne-jahresgebuehr/).
 
 ## Tagesgeld:<br>Dein Geld sicher und zinsbringend parken
 

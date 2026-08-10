@@ -99,15 +99,13 @@ Die Konsequenz für dich: Fang heute an, auch mit kleinen Beträgen. Der [100-Eu
 
 ## Die Praxis:<br>Zinseszins mit ETFs realisieren
 
-Die Theorie ist klar –   
-die Umsetzung entscheidend. Der Zinseszinseffekt entfaltet seine volle Kraft, wenn drei Bedingungen erfüllt sind:
+Die Theorie ist klar – die Umsetzung entscheidend. Der Zinseszinseffekt entfaltet seine volle Kraft, wenn drei Bedingungen erfüllt sind:
 
 **1. Rendite über der Inflation:** Wer nur auf dem Sparbuch parkt, verliert real Geld. Ein [Welt-ETF](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) hat historisch 6 bis 8 Prozent pro Jahr geliefert – deutlich über der Inflation.
 
 **2. Thesaurierung statt Ausschüttung:** Bei thesaurierenden ETFs werden die Erträge automatisch reinvestiert – der Zinseszins läuft von selbst. Bei ausschüttenden Fonds musst du die Erträge manuell wieder anlegen, sonst bleibt der Effekt liegen.
 
-**3. Keine Unterbrechungen:** Wer in Krisen verkauft oder den Sparplan stoppt, durchbricht den Zinseszins. Der Plan läuft am besten automatisch per Dauerauftrag –   
-dann ist er unabhängig von Stimmung und Disziplin.
+**3. Keine Unterbrechungen:** Wer in Krisen verkauft oder den Sparplan stoppt, durchbricht den Zinseszins. Der Plan läuft am besten automatisch per Dauerauftrag – dann ist er unabhängig von Stimmung und Disziplin.
 
 ## Häufig gestellte Fragen
 

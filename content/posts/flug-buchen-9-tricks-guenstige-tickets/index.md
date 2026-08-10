@@ -16,8 +16,7 @@ cover:
   alt: "Flug buchen: 9 Tricks für günstige Flugtickets"
   caption: "Tipp von FranksFinanzcheck"
 ---
-Flugpreise wirken oft wie ein Mysterium: Der Sitz neben dir hat vielleicht 100 Euro mehr oder weniger gekostet, obwohl ihr denselben Flug gebucht habt. Tatsächlich folgen Flugpreise klaren Mustern –   
-wer sie kennt, zahlt deutlich weniger. Die gute Nachricht: Die 9 Tricks in diesem Artikel funktionieren bei jeder Buchung, ohne Glück und ohne Sonderangebote-Jagd.
+Flugpreise wirken oft wie ein Mysterium: Der Sitz neben dir hat vielleicht 100 Euro mehr oder weniger gekostet, obwohl ihr denselben Flug gebucht habt. Tatsächlich folgen Flugpreise klaren Mustern – wer sie kennt, zahlt deutlich weniger. Die gute Nachricht: Die 9 Tricks in diesem Artikel funktionieren bei jeder Buchung, ohne Glück und ohne Sonderangebote-Jagd.
 
 ## Der richtige Suchzeitpunkt:<br>6 bis 8 Wochen
 

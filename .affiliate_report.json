@@ -1,6 +1,6 @@
 {
- "total": 78,
- "errors": 12,
+ "total": 79,
+ "errors": 78,
  "fixed": 0,
  "posts": [
   {
@@ -8,165 +8,198 @@
    "title": "Frugalismus: Der große Ratgeber für finanzielle Fr",
    "pillar": "",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "internet-dsl",
    "title": "Internet & DSL: Der große Ratgeber für schnelles N",
    "pillar": "",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "konto-karten",
    "title": "Konto & Karten: Der große Ratgeber für gebührenfre",
    "pillar": "",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "mietwagen",
    "title": "Mietwagen & Reisen: Der große Ratgeber zum Geld sp",
    "pillar": "",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "strom-sparen",
    "title": "Strom sparen: Der große Ratgeber für niedrige Ener",
    "pillar": "",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "versicherungen",
    "title": "Versicherungen: Der große Ratgeber für den richtig",
    "pillar": "",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich",
    "title": "ETF-Sparplan für Einsteiger: So startest du monatl",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe",
    "title": "Internet-Turbo: Warum ich meinen DNS-Server getaus",
    "pillar": "internet-dsl",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "2026-08-06-frugalismus-im-alltag",
    "title": "Frugalismus im Alltag: So sparst du jeden Monat ba",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "2026-08-06-turbo-fuers-netz",
    "title": "Turbo fürs Netz: DNS-Wechsel für schnelleres Inter",
    "pillar": "internet-dsl",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "2026-08-07-frugalismus-fuer-den-erfolg",
    "title": "Frugalismus für den Erfolg:<br> Der Weg in die Fre",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "2026-08-07-mietwagen-fuer-den-spaetsommer",
    "title": "Mietwagen im Spätsommer: Günstig buchen und sparen",
    "pillar": "mietwagen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "2026-08-08-dein-tier-im-krankheitsfall",
    "title": "Tierversicherung: Schutz für dein Tier im Krankhei",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen",
    "title": "Stromtarif für Wärmepumpe: So sparst du beim Heize",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau",
    "title": "Depot 2026: Dein smarter Start in den Vermögensauf",
    "pillar": "konto-karten",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen",
    "title": "Energiekosten senken mit intelligenten Heizsysteme",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
+  },
+  {
+   "slug": "2026-08-10-dsl-wechselbonus-sichern",
+   "title": "DSL-Wechselbonus sichern",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "50-30-20-regel-einfach-erklaert",
    "title": "Die 50-30-20-Regel: Die perfekte Formel für deine ",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "5g-home-router-oder-dsl",
@@ -174,7 +207,7 @@
    "pillar": "internet-dsl",
    "fixed": 0,
    "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4 (erwartet: DSL-Tarifvergleich)"
+    "KEIN Affiliate-Link vorhanden"
    ],
    "infos": [],
    "ok": false
@@ -184,40 +217,44 @@
    "title": "7 Gewohnheiten für mehr finanzielle Freiheit im Al",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "balkonkraftwerk-2026-lohnt-sich",
    "title": "Balkonkraftwerk 2026: Kosten, Förderung, Amortisat",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "berufsunfaehigkeitsversicherung-lohnt-sich",
    "title": "Berufsunfähigkeitsversicherung: Für wen sie sich 2",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "depot-umzug-steuerfrei-wechseln",
    "title": "Depot-Umzug: So wechselst du das Depot ohne Steuer",
    "pillar": "konto-karten",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "dispozinsen-verstehen-alternativen",
@@ -225,7 +262,7 @@
    "pillar": "konto-karten",
    "fixed": 0,
    "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)"
+    "KEIN Affiliate-Link vorhanden"
    ],
    "infos": [],
    "ok": false
@@ -235,47 +272,55 @@
    "title": "DNS-Server ändern: Der kostenlose Boost für dein I",
    "pillar": "internet-dsl",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "dsl-internet-flat-guenstig-sichern",
    "title": "DSL- und Internet-Flat günstig sichern: Der beste ",
    "pillar": "internet-dsl",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "e-auto-laden-stromkosten-senken",
    "title": "E-Auto laden: So senkst du deine Stromkosten zu Ha",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "elementarschadenversicherung-hochwasser-starkregen",
    "title": "Elementarschadenversicherung: Hochwasser, Starkreg",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "etf-sparplan-fuer-kinder-depot-eröffnen",
    "title": "ETF-Sparplan für Kinder: So legst du richtig an",
    "pillar": "konto-karten",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "festgeld-oder-tagesgeld-2026",
@@ -283,7 +328,7 @@
    "pillar": "konto-karten",
    "fixed": 0,
    "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)"
+    "KEIN Affiliate-Link vorhanden"
    ],
    "infos": [],
    "ok": false
@@ -294,7 +339,7 @@
    "pillar": "mietwagen",
    "fixed": 0,
    "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10 (erwartet: Mietwagen-Vergleich)"
+    "KEIN Affiliate-Link vorhanden"
    ],
    "infos": [],
    "ok": false
@@ -304,20 +349,22 @@
    "title": "5 Frugalismus-Tricks: So sparst du 200 € pro Monat",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "gastarife-vergleichen-vor-dem-herbst",
    "title": "Gastarife vergleichen: Heizkosten vor dem Herbst s",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "gebuehrenfallen-banking-vermeiden",
@@ -325,7 +372,7 @@
    "pillar": "konto-karten",
    "fixed": 0,
    "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)"
+    "KEIN Affiliate-Link vorhanden"
    ],
    "infos": [],
    "ok": false
@@ -335,47 +382,55 @@
    "title": "Glasfaser, DSL oder Kabel: Der Anschluss-Vergleich",
    "pillar": "internet-dsl",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "guenstige-fluege-spaetsommer-finden",
    "title": "Günstige Flüge im Spätsommer: 7 Tricks zum Geld sp",
    "pillar": "mietwagen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "handytarife-vergleichen-guenstigster-tarif",
    "title": "Handytarife vergleichen: So findest du den günstig",
    "pillar": "internet-dsl",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "haushaltsbuch-fuehren-app-excel-oder-stift",
    "title": "Haushaltsbuch führen: App, Excel oder Stift – was ",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "hausratversicherung-wer-braucht-leistung",
    "title": "Hausratversicherung: Wer sie braucht und was sie l",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "heizkosten-senken-10-massnahmen",
@@ -383,7 +438,7 @@
    "pillar": "strom-sparen",
    "fixed": 0,
    "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1 (erwartet: Stromtarif-Vergleich)"
+    "KEIN Affiliate-Link vorhanden"
    ],
    "infos": [],
    "ok": false
@@ -393,9 +448,11 @@
    "title": "Heizperiode vorbereiten: 3 wichtige Dinge für den ",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "impulskaeufe-vermeiden-7-psychologische-tricks",
@@ -413,112 +470,132 @@
    "title": "Internetvertrag wechseln: Fristen, Sonderkündigung",
    "pillar": "internet-dsl",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "kfz-versicherung-sf-klasse-erklaert",
    "title": "SF-Klasse einfach erklärt: So steigst du in die be",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "kfz-versicherung-wechseln",
    "title": "Kfz-Versicherung wechseln: Wann es sich wirklich l",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "kontowechsel-in-20-minuten-wechselservice",
    "title": "Kontowechsel in 20 Minuten: Der Wechselservice erk",
    "pillar": "konto-karten",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "kostenloses-girokonto-finden",
    "title": "Kostenloses Girokonto ohne Gebühren: So findest du",
    "pillar": "konto-karten",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "kreditkarte-ohne-jahresgebuehr",
    "title": "Kreditkarte ohne Jahresgebühr: Die besten kostenlo",
    "pillar": "konto-karten",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "kuehlschrank-strom-sparen-einstellung",
    "title": "Kühlschrank Strom sparen: Die richtige Einstellung",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "last-minute-urlaubsangebote-sichern",
    "title": "Last-Minute Urlaubsangebote: Traumurlaub günstig b",
    "pillar": "mietwagen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "mietwagen-buchen-so-sparst-du",
    "title": "Günstigen Mietwagen buchen: So sparst du im Urlaub",
    "pillar": "mietwagen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "mietwagen-fallen-vermeiden",
    "title": "Mietwagen-Fallen vermeiden: Versicherung & Kaution",
    "pillar": "mietwagen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "mietwagen-im-winter-schnaeppchen-tricks",
    "title": "Mietwagen im Winter: Die besten Schnäppchen-Tricks",
    "pillar": "mietwagen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "monatsbudget-erstellen-schritt-fuer-schritt",
    "title": "Monatsbudget erstellen: Anleitung mit kostenloser ",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "nachtspeicherheizung-wechseln-oder-behalten",
@@ -526,7 +603,7 @@
    "pillar": "strom-sparen",
    "fixed": 0,
    "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1 (erwartet: Stromtarif-Vergleich)"
+    "KEIN Affiliate-Link vorhanden"
    ],
    "infos": [],
    "ok": false
@@ -536,20 +613,22 @@
    "title": "Nebenverdienst 2026: 10 Ideen für ein zweites Stan",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "notgroschen-aufbauen-wie-viel-reicht",
    "title": "Notgroschen aufbauen: Wie viel Geld reicht wirklic",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "pauschalreise-buchen-bester-zeitpunkt",
@@ -557,7 +636,7 @@
    "pillar": "mietwagen",
    "fixed": 0,
    "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10 (erwartet: Mietwagen-Vergleich)"
+    "KEIN Affiliate-Link vorhanden"
    ],
    "infos": [],
    "ok": false
@@ -567,36 +646,44 @@
    "title": "Private Unfallversicherung: Für wen sie sich wirkl",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "privathaftpflicht-warum-pflicht-kosten",
    "title": "Privathaftpflicht: Warum sie Pflicht ist und was s",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "ratenkredit-bestszins-vergleichen",
    "title": "Ratenkredit mit Bestzins sichern: So vergleichst d",
    "pillar": "konto-karten",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "reisekrankenversicherung-wann-lohnt",
    "title": "Reisekrankenversicherung: Wann sie sich wirklich l",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "reiseversicherung-richtig-kombinieren",
@@ -604,7 +691,7 @@
    "pillar": "mietwagen",
    "fixed": 0,
    "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10 (erwartet: Mietwagen-Vergleich)"
+    "KEIN Affiliate-Link vorhanden"
    ],
    "infos": [],
    "ok": false
@@ -614,20 +701,22 @@
    "title": "Riester Rente 2026 Weiterfördern oder kündigen die",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "router-kaufen-oder-mieten-rechnung",
    "title": "Router kaufen oder mieten: Was sich wirklich rechn",
    "pillar": "internet-dsl",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "sparquote-berechnen-und-steigern",
@@ -645,45 +734,55 @@
    "title": "Strom sparen im Haushalt: 20 Tipps für die nächste",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "stromanbieter-wechseln-2026",
    "title": "Stromanbieter wechseln 2026: So sparst du beim Tar",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "stromfresser-im-haushalt-entlarven",
    "title": "Stromfresser entlarven: Diese 3 Geräte kosten Geld",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "stromvergleich-richtig-lesen-tarif-finden",
    "title": "Stromvergleich richtig lesen: So findest du den be",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "tagesgeld-zinsen-sicher-anlegen",
    "title": "Tagesgeld und Zinsen: So parkst du dein Geld siche",
    "pillar": "konto-karten",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "urlaub-mit-kindern-guenstig-spartricks",
@@ -691,7 +790,7 @@
    "pillar": "mietwagen",
    "fixed": 0,
    "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10 (erwartet: Mietwagen-Vergleich)"
+    "KEIN Affiliate-Link vorhanden"
    ],
    "infos": [],
    "ok": false
@@ -701,9 +800,11 @@
    "title": "Urlaubskasse aufbessern: 7 Spartipps für den Somme",
    "pillar": "mietwagen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "versicherungen-kuendigen-diese-5-policen",
@@ -721,47 +822,55 @@
    "title": "Wärmepumpe vs. Gasheizung: Was sich 2026 wirklich ",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "wlan-verbessern-ohne-neue-hardware",
    "title": "WLAN verbessern: 12 Tipps ohne neue Hardware",
    "pillar": "internet-dsl",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "wlan-verstaerker-vs-mesh-wlan",
    "title": "WLAN-Verstärker vs. Mesh-WLAN: Schnelles Internet ",
    "pillar": "internet-dsl",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "zahnzusatzversicherung-lohnt-sich",
    "title": "Zahnzusatzversicherung: Wann sich der Abschluss lo",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "zinseszinseffekt-formel-erklaert",
    "title": "Zinseszinseffekt: Die Formel, die dein Geld vermeh",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   }
  ]
 }

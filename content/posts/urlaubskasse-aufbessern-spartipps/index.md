@@ -29,8 +29,7 @@ Mietwagen sind vor Ort oft teurer als online. Buch im Voraus über ein Vergleich
 
 ## 4. Vor Ort lokal statt touristisch essen
 
-Ein Restaurant in der Touristenzone kostet schnell das Doppelte von einem guten Lokal zwei Straßen weiter. Frag die Einheimischen, nimm Menüs des Tages und trink an der Strandpromenade nur Kaffee –   
-so bleibt deine Urlaubskasse voller.
+Ein Restaurant in der Touristenzone kostet schnell das Doppelte von einem guten Lokal zwei Straßen weiter. Frag die Einheimischen, nimm Menüs des Tages und trink an der Strandpromenade nur Kaffee – so bleibt deine Urlaubskasse voller.
 
 ## 5. Ausflüge im Voraus planen
 
@@ -38,8 +37,7 @@ Tagesausflüge und Attraktionen sind vor Ort oft teurer als online gebucht. Verg
 
 ## 6. Reisekasse statt Karte
 
-Bargeld in der Landeswährung hat zwei Vorteile: Du behältst den Überblick und sparst Fremdwährungsgebühren. Tipp: Tausche vor der Reise am Bankschalter –   
-die Kurse sind meist besser als am Flughafen.
+Bargeld in der Landeswährung hat zwei Vorteile: Du behältst den Überblick und sparst Fremdwährungsgebühren. Tipp: Tausche vor der Reise am Bankschalter – die Kurse sind meist besser als am Flughafen.
 
 ## 7. Reiseversicherung nur, was du brauchst
 
