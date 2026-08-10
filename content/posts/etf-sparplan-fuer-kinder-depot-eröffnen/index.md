@@ -1,5 +1,5 @@
 ---
-title: "ETF-Sparplan für Kinder: So legst du richtig an"
+title: "ETF-Sparplan für Kinder: So baust du sinnvoll Vermögen auf"
 description: "Depot für Kinder eröffnen, Sparplan einrichten, Steuern verstehen: So startest du den ETF-Sparplan für dein Kind – Schritt für Schritt, ab 10 Euro monatlich."
 date: 2026-08-09T10:20:00Z
 draft: false

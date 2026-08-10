@@ -16,7 +16,7 @@ cover:
   alt: "Sparquote steigern: Von 5 auf 30 Prozent in 12 Monaten"
   caption: "Tipp von FranksFinanzcheck"
 ---
-Die Sparquote ist die wichtigste Kennzahl deiner Finanzen – wichtiger als jeder Aktienkurs und jedes Zinsangebot. Sie sagt dir, wie viel von deinem Einkommen wirklich bei dir bleibt. Zwei Menschen mit demselben Gehalt können in völlig unterschiedlichen Geschwindigkeiten Vermögen aufbauen – der Unterschied ist ihre Sparquote.
+Die Sparquote ist die wichtigste Kennzahl deiner Finanzen – wichtiger als jeder Aktienkurs und jedes Zinsangebot. Sie sagt dir, wie viel von deinem Einkommen wirklich bei dir bleibt. Zwei Menschen mit demselben Gehalt können in völlig unterschiedlichen Geschwindigkeiten [Vermögen aufbauen](../../posts/zinseszinseffekt-formel-erkla/) – der Unterschied ist ihre Sparquote.
 
 In diesem Artikel zeige ich dir, wie du deine Sparquote berechnest und wie du sie in 12 Monaten von 5 auf 30 Prozent steigerst. Ohne Gerichtsdrama, dafür mit System.
 

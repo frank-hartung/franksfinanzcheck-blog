@@ -48,7 +48,7 @@ Der Supermarkt ist ein Minenfeld für dein Budget. Ohne eine klare Liste greifst
 
 Nutze für deine täglichen Besorgungen echtes Bargeld. Nimm zum Beispiel nur 60 € oder 80 € für den Wocheneinkauf mit. Wenn das Geld in der Hand physisch weniger wird, kaufst du automatisch vorsichtiger ein. Digitale Zahlungen fühlen sich dagegen fast wie Spielgeld an.
 
-Bargeld schafft ein direktes Bewusstsein für den Wert deiner Arbeit. Du siehst genau, wie die Scheine aus deinem Portemonnaie verschwinden. Diese Hürde ist psychologisch viel höher als das bloße Vorhalten einer Karte. So kannst du effektiv **Geld sparen im Alltag**.
+Bargeld schafft ein direktes Bewusstsein für den Wert deiner Arbeit. Du siehst genau, wie die Scheine aus deinem Portemonnaie verschwinden. Diese Hürde ist psychologisch viel höher als das bloße Vorhalten einer Karte. So kannst du effektiv **[Geld sparen](../../posts/versicherungen-kuendigen-diese-5-poli/) im Alltag**.
 
 ## Trick 3:<br>Newsletter und Push-Nachrichten löschen
 
