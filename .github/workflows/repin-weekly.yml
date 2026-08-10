@@ -27,11 +27,17 @@ name: Wöchentliches Nach-Pinnen
 
 on:
   schedule:
-    - cron: "30 15 * * 1"    # Montag 17:30 Uhr MESZ (15:30 UTC)
+    - cron: "0 14 * * 1"    # Montag 16:00 MESZ (14:00 UTC)
+    # AUDIT-FIX: Zeitslot-Kollision mit pinterest-ai (ebenfalls Mo 17:30,
+    # beide pushen!) -> repin auf 16:00 verschoben.
   workflow_dispatch: {}
 
 permissions:
   contents: write
+
+concurrency:          # AUDIT-FIX: gegen Doppelläufe
+  group: content-pins
+  cancel-in-progress: false
 
 jobs:
   nachpinnen:
@@ -61,5 +67,7 @@ jobs:
             echo "Keine Änderungen – nichts zu committen."
           else
             git commit -m "content: Artikel als gepinnt markiert (Pinterest)"
-            git push
+            # AUDIT-FIX: Rebase-Schutz gegen Push-Race mit anderen Bots
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push || { sleep 20; git pull --rebase origin main && git push; }
           fi
