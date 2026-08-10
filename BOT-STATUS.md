@@ -1,6 +1,6 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 10.08.2026 08:25 Uhr (MESZ)
+> Automatisch aktualisiert: 10.08.2026 10:42 Uhr (MESZ)
 
 ## Heutiger Stand
 
@@ -10,8 +10,8 @@
 
 ## System
 
-- **Themenpool:** 161 Themen, **97 frei**
-- **Letzter Content-Commit:** 467c6a1 2026-08-10 content: neuer Artikel sofort optimiert (Meta, interne Verlinkung)
+- **Themenpool:** 123 Themen, **91 frei**
+- **Letzter Content-Commit:** noch keiner
 - **Tageslimit:** 2 (steuerbar per Variable MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen
