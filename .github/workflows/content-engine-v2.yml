@@ -109,6 +109,8 @@ jobs:
           python3 scripts/spellcheck.py --fix || echo "⚠ Spellcheck-Fehler (nicht kritisch)"
           echo "== Grammatik =="
           python3 scripts/grammar_check.py --fix --new-only || echo "⚠ Grammatik-Fehler (nicht kritisch)"
+          echo "== Strich-Typografie (Dash-Guard: Duden-Niveau + KI-Schiedsrichter) =="
+          python3 scripts/dash_guard.py --fix --ai --new-only || echo "⚠ Dash-Guard: Hinweise (nicht kritisch)"
           echo "== Profi-Text-Gate =="
           python3 scripts/profi_text_check.py --new-only || echo "⚠ Profi-Gate (nicht blockierend)"
           echo "== Lesbarkeit =="
