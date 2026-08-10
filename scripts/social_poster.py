@@ -44,11 +44,13 @@ STATUS_FILE = ROOT / "SOCIAL-STATUS.md"
 LOG_FILE = ROOT / "data" / "social_log.jsonl"
 BASE_URL = "https://franksfinanzcheck.de"
 
-MASTODON_TOKEN = os.environ.get("MASTODON_ACCESS_TOKEN", "").strip()
-MASTODON_INSTANCE = os.environ.get("MASTODON_INSTANCE", "https://mastodon.social").strip().rstrip("/")
+# ACHTUNG: GitHub-Actions setzt nicht existierende Vars als LEEREN String
+# ("${{ vars.X }}" -> "") – daher "or" statt get-Default!
+MASTODON_TOKEN = (os.environ.get("MASTODON_ACCESS_TOKEN") or "").strip()
+MASTODON_INSTANCE = (os.environ.get("MASTODON_INSTANCE") or "https://mastodon.social").strip().rstrip("/")
 LINKEDIN_TOKEN = os.environ.get("LINKEDIN_ACCESS_TOKEN", "").strip()
 LINKEDIN_URN = os.environ.get("LINKEDIN_PERSON_URN", "").strip()
-MAX_PER_RUN = int(os.environ.get("SOCIAL_MAX_PRO_LAUF", "4"))
+MAX_PER_RUN = int(os.environ.get("SOCIAL_MAX_PRO_LAUF") or "4")
 DRY_RUN = "--dry-run" in sys.argv
 MARK_ALL = "--mark-all-posted" in sys.argv
 
