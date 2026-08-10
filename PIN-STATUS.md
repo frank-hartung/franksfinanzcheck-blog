@@ -1,6 +1,6 @@
 # 📌 PIN-STATUS (Pinterest-Automatisierung)
 
-**Stand:** 2026-08-10 10:19 UTC
+**Stand:** 2026-08-10 10:41 UTC
 
 **Modus:** Queue (kein PINTEREST_ACCESS_TOKEN/BOARD_ID)
 
