@@ -21,7 +21,7 @@ social_posted: true
 - **Effektivpreis berechnen:** Rechne alle Boni und Hardware-Kosten auf die Laufzeit um.
 - **Fristen wahren:** Kündige rechtzeitig, um teure automatische Verlängerungen zu vermeiden.
 - **Prämien nutzen:** ein hoher Wechselbonus senkt deine monatliche Belastung massiv.
-- **Verfügbarkeit prüfen:** Nutze einen unabhängigen DSL Vergleich für deine Adresse.
+- **Verfügbarkeit prüfen:** Nutze einen unabhängigen DSL-Vergleich für deine Adresse.
 
 ## Schritt 1:<br>Was brauchst du wirklich?
 
@@ -48,7 +48,7 @@ Tarife mit 24 Monaten Laufzeit bieten fast immer die höchsten Rabatte. Du binde
 Wenn du deinen Internetvertrag wechseln möchtest, ist der Prozess heute weitgehend automatisiert. Dein neuer Anbieter übernimmt in der Regel die Kündigung beim alten Dienstleister.
 
 1. **Verfügbarkeit prüfen:** Gib deine Adresse in ein Vergleichsportal ein.
-2. **Vergleichen:** Nutze einen DSL Vergleich, um Preise und Kundenbewertungen zu sichten.
+2. **Vergleichen:** Nutze einen DSL-Vergleich, um Preise und Kundenbewertungen zu sichten.
 3. **Abschluss online:** Übermittle deine Daten direkt über das Portal.
 4. **Hardware erhalten:** Dein neuer Router kommt meist wenige Tage vor der Schaltung per Post.
 5. **Aktivierung:** Am Tag der Umstellung schließt du den Router an – oft ohne Technikerbesuch.

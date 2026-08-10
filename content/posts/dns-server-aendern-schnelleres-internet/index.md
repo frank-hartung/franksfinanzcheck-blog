@@ -69,7 +69,7 @@ Erwarte keine Wunder bei der reinen Download-Rate von großen Dateien. Aber der 
 Nein, die Umstellung ist harmlos und jederzeit umkehrbar. Du nutzt lediglich ein anderes Verzeichnis für die Adresssuche. Falls Probleme auftreten, stellst du einfach wieder auf „Automatisch beziehen" um.
 
 ### Bringt ein schneller DNS mehr als ein besserer Tarif?
-Beide Faktoren spielen zusammen. Der DNS optimiert den Start jedes Seitenaufrufs, während dein Tarif die maximale Datenmenge pro Sekunde begrenzt. Kombiniere unsere DSL Tipps mit einem DNS-Wechsel für das beste Ergebnis.
+Beide Faktoren spielen zusammen. Der DNS optimiert den Start jedes Seitenaufrufs, während dein Tarif die maximale Datenmenge pro Sekunde begrenzt. Kombiniere unsere DSL-Tipps mit einem DNS-Wechsel für das beste Ergebnis.
 
 ---
 
