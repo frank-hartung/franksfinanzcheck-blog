@@ -14,7 +14,7 @@ Frugalismus ist für mich nie Verzicht um des Verzichts willen gewesen – sonde
 
 ### Das Wichtigste in Kürze
 
-* Die **50-30-20-Regel** gibt deinen Finanzen eine einfache, tragfähige Struktur.
+* Die **50–30–20-Regel** gibt deinen Finanzen eine einfache, tragfähige Struktur.
 * Ein **Notgroschen** auf dem Tagesgeldkonto macht dich unabhängig von Schicksalsschlägen.
 * **Kleine Gewohnheiten** im Alltag sparen mehr als jeder Verzicht auf Großes.
 * **Frugalismus ist ein Weg zur Freiheit**, nicht zur Entbehrung.
@@ -38,7 +38,7 @@ Vermögen entsteht durch Wiederholung, nicht durch Einmal-Aktionen. Die sieben G
 ## Häufige Fragen
 
 ### Wie viel sollte ich monatlich sparen?
-Als Faustregel 20 % des Nettoeinkommens – die 50-30-20-Regel zeigt dir, wie das ohne Verbissenheit klappt. Details im [50-30-20-Ratgeber](../../posts/50-30-20-regel-einfach-erklaert/).
+Als Faustregel 20 % des Nettoeinkommens – die 50–30–20-Regel zeigt dir, wie das ohne Verbissenheit klappt. Details im [50-30-20-Ratgeber](../../posts/50-30-20-regel-einfach-erklaert/).
 
 ### Wie groß muss mein Notgroschen sein?
 Drei bis sechs Monatsausgaben sind der übliche Richtwert – die genaue Rechnung für deine Situation steht in [Notgroschen aufbauen](../../posts/notgroschen-aufbauen-wie-viel-reicht/).

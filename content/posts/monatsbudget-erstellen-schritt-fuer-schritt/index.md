@@ -10,7 +10,7 @@ keywords: ["Monatsbudget erstellen", "Budgetplanung", "Haushaltsplan", "Geld ein
 author: "Frank"
 ai_generated: true
 ai_provider: "Manuell (Masterplan Blueprint 3)"
-kurzantwort: "Ein Monatsbudget erstellst du in 6 Schritten: Einnahmen erfassen, Fixkosten auflisten, variable Kosten schätzen, Sparziel festlegen, Kategorien befüllen und monatlich nachjustieren. Die 50-30-20-Regel ist der einfachste Startpunkt – 30 Minuten Arbeit reichen für den kompletten Plan."
+kurzantwort: "Ein Monatsbudget erstellst du in 6 Schritten: Einnahmen erfassen, Fixkosten auflisten, variable Kosten schätzen, Sparziel festlegen, Kategorien befüllen und monatlich nachjustieren. Die 50–30–20-Regel ist der einfachste Startpunkt – 30 Minuten Arbeit reichen für den kompletten Plan."
 cover:
   image: "images/covers/monatsbudget-erstellen-schritt-fuer-schritt.jpg"
   alt: "Monatsbudget erstellen: Anleitung mit kostenloser Vorlage"
@@ -18,7 +18,7 @@ cover:
 social_posted: true
 ---Willst du am Monatsende endlich wissen, wo dein Geld geblieben ist? Ein kluger Plan gibt dir Freiheit, statt dich einzuschränken. Wer seine Finanzen aktiv steuert, behält die Kontrolle über seine Träume und Ziele. In dieser Anleitung lernst du, wie du ein effektives Monatsbudget erstellen kannst.
 
-Du brauchst dafür etwa 30 Minuten Zeit und eine Stunde pro Monat zum Nachjustieren. Ich zeige dir mein bewährtes System für deine Budgetplanung. Wir nutzen die 50-30-20-Regel als einfachen und stabilen Startpunkt für deinen Erfolg.
+Du brauchst dafür etwa 30 Minuten Zeit und eine Stunde pro Monat zum Nachjustieren. Ich zeige dir mein bewährtes System für deine Budgetplanung. Wir nutzen die 50–30–20-Regel als einfachen und stabilen Startpunkt für deinen Erfolg.
 
 ### Das Wichtigste in Kürze
 * Erfasse alle Einnahmen und Ausgaben ehrlich und lückenlos.
@@ -72,7 +72,7 @@ Dein Sparziel sollte eine hohe Priorität in deinem Leben haben. Bezahle dich im
 
 ## Schritt 5:<br>Budget-Kategorien befüllen
 
-Setze nun alle Puzzleteile zu einem Gesamtbild zusammen. Die 50-30-20-Regel bietet dir hierfür eine einfache und bewährte Struktur. Sie teilt dein Geld in drei klare Bereiche auf, damit du den Überblick behältst:
+Setze nun alle Puzzleteile zu einem Gesamtbild zusammen. Die 50–30–20-Regel bietet dir hierfür eine einfache und bewährte Struktur. Sie teilt dein Geld in drei klare Bereiche auf, damit du den Überblick behältst:
 
 | Kategorie | Anteil | Beispiele |
 |:--- |:--- |:--- |
@@ -92,7 +92,7 @@ Schon nach kurzer Zeit wirst du Überschüsse auf deinem Konto entdecken. Diese 
 
 ## So sieht ein fertiges Monatsbudget aus
 
-Hier siehst du ein Beispiel für ein Nettoeinkommen von 2.600 € nach der 50-30-20-Struktur. Dieses Modell zeigt dir, wie die Verteilung in der Praxis aussehen kann:
+Hier siehst du ein Beispiel für ein Nettoeinkommen von 2.600 € nach der 50–30–20-Struktur. Dieses Modell zeigt dir, wie die Verteilung in der Praxis aussehen kann:
 
 | Posten | Betrag | Anteil |
 |:--- |:--- |:--- |
