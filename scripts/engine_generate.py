@@ -34,6 +34,17 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import generate_drafts as g  # noqa: E402  (nutzt bestehende Generierungs-Logik)
+from check_titles import KOMPOSITA_FIXES, RE_ANHAENGSEL  # noqa: E402 – Titel-Qualitätsgate (FrankAutoOps)
+
+
+def normalize_title(title: str) -> str:
+    """Deterministische Titel-Normalisierung (FrankAutoOps-Gate R3):
+    behebt bekannte Komposita-Schreibfehler ('Riester Rente' -> 'Riester-Rente'),
+    damit fehlerhafte Titel gar nicht erst entstehen."""
+    for wrong, right in KOMPOSITA_FIXES:
+        if wrong in title:
+            title = title.replace(wrong, right)
+    return title
 
 STATUS_FILE = os.path.join(BLOG_DIR, "ENGINE-STATUS.md")
 
@@ -159,8 +170,14 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
         title, desc, body = g.parse_article(raw, topic, angle[0])
         if not title or not body:
             continue
+        title = normalize_title(title)  # FrankAutoOps R3: Komposita-Fixes
         if title.lower() in used_titles:
             print(f"  ✗ Titel existiert bereits: {title[:50]}…")
+            continue
+        # FrankAutoOps R2: lose Anhängsel ("… dieses Jahr") ohne Doppelpunkt
+        # sind harte Titel-Verstöße -> Versuch verwerfen, neu generieren
+        if ":" not in title and RE_ANHAENGSEL.search(title):
+            print(f"  ✗ Titel-Gate R2: Anhängsel-Muster ohne ':' – Versuch {attempt} verworfen: {title[:60]}")
             continue
 
         if not relaxed:
