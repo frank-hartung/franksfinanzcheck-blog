@@ -15,6 +15,7 @@ cover:
   image: "images/covers/riester-rente-2026-lohnt-sich.jpg"
   alt: "Riester-Rente 2026: Weiterfördern, stilllegen oder kündigen?"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 Die Riester-Rente ist das umstrittenste Förderprodukt der deutschen Altersvorsorge – und 2026 steht die große Reform an. Was bedeutet das für deinen Vertrag? Solltest du weiterfördern, stilllegen oder kündigen? Die Antwort hängt von deiner persönlichen Situation ab – und von einer ehrlichen Rechnung.
 

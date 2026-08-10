@@ -15,6 +15,7 @@ cover:
   image: "images/covers/depot-umzug-steuerfrei-wechseln.jpg"
   alt: "Depot-Umzug: So wechselst du das Depot ohne Steuerchaos"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---Verschenkst du jedes Jahr bis zu 150 € an unnötigen Gebühren? Ein Depotwechsel spart dir oft viel Geld und optimiert deine Rendite. Viele Anleger fürchten jedoch das Finanzamt oder komplizierten Papierkram. Dabei ist dein Depot umziehen in Deutschland meist unkompliziert, kostenlos und steuerfrei. Deine Wertpapiere wandern inklusive der historischen Einstandswerte einfach zum neuen Anbieter.
 
 In diesem Ratgeber erfährst du, wie der Wechsel reibungslos gelingt. Ich zeige dir den Prozess Schritt für Schritt. Zudem erfährst du, welche steuerlichen Klippen du umschiffen musst.

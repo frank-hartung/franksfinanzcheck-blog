@@ -15,6 +15,7 @@ cover:
   image: "images/covers/kuehlschrank-strom-sparen-einstellung.jpg"
   alt: "Kühlschrank Strom sparen: Die richtige Einstellung zählt"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---Dein Kühlschrank arbeitet rund um die Uhr an 365 Tagen im Jahr. Kein anderes Gerät in deinem Haushalt verbraucht so dauerhaft Energie. Etwa 20 % deiner Stromrechnung entfallen auf das Kühlen und Gefrieren deiner Lebensmittel.
 
 Du musst kein neues Gerät kaufen, um sofort Geld zu sparen. Mit den richtigen Handgriffen senkst du deine Kosten um bis zu 80 Euro pro Jahr. Bei alten Modellen sparst du oft noch deutlich mehr.

@@ -13,6 +13,7 @@ cover:
   alt: "Ratenkredit mit Bestzins sichern: So vergleichst du richtig"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst durch einen sorgfältigen Kreditvergleich den effektiven Jahreszins senken und so Zinsen sparen. Ein guter Vergleich berücksichtigt auch versteckte Kosten und Umschuldungsmöglichkeiten. Durch diese Recherche kannst du in der Regel 1-2 % Zinsen pro Jahr einsparen."
+social_posted: true
 ---Ein Kredit kann dich bis zu 600 Euro im Jahr kosten, wenn du den falschen Zins wählst. Der Unterschied zwischen dem teuersten und dem günstigsten Anbieter kann bei gleicher Kreditsumme mehrere hundert Euro Zinsunterschied bedeuten. Du kannst den Bestzins finden und [Geld sparen](../../posts/versicherungen-kuendigen-diese-5-policen/), wenn du die Regeln für einen Ratenkredit vergleichen kennst.
 
 ## Der wichtigste Wert: der effektive Jahreszins

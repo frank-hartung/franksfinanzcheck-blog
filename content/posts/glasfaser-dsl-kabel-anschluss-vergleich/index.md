@@ -15,6 +15,7 @@ cover:
   image: "images/covers/glasfaser-dsl-kabel-anschluss-vergleich.jpg"
   alt: "Glasfaser, DSL oder Kabel: Der Anschluss-Vergleich 2026"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 Die Frage nach dem richtigen Internetanschluss wird jedes Jahr drängender: Glasfaser wird ausgebaut, Kabelnetze werden modernisiert, und die Werbung verspricht überall Höchstgeschwindigkeiten. Doch was brauchst du wirklich – und was kostet es? In diesem Artikel vergleichst du die drei Technologien ehrlich und findest in zehn Minuten den richtigen Anschluss für deinen Haushalt.
 

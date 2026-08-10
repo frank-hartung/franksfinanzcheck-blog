@@ -15,6 +15,7 @@ cover:
   image: "images/covers/zinseszinseffekt-formel-erklaert.jpg"
   alt: "Zinseszinseffekt: Die Formel, die dein Geld vermehrt"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 Albert Einstein soll den Zinseszins das achte Weltwunder genannt haben – wer die Formel verstanden hat, weiß warum. Der Zinseszinseffekt ist der einzige Mechanismus im Finanzsystem, der aus kleinen regelmäßigen Beträgen über die Zeit ein Vermögen macht, ohne dass du mehr arbeiten musst. Und er funktioniert für jeden – unabhängig vom Einkommen.
 

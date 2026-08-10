@@ -15,6 +15,7 @@ cover:
   image: "images/covers/stromvergleich-richtig-lesen-tarif-finden.jpg"
   alt: "Stromvergleich richtig lesen: So findest du den besten Tarif"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 Stromvergleiche versprechen „bis zu 500 Euro sparen" – und zeigen dann eine Liste mit Tarifen, die sich auf den ersten Blick kaum unterscheiden. Arbeitspreis, Grundpreis, Sofortbonus, Neukundenbonus, Preisgarantie: Wer nicht genau hinschaut, wählt am Ende einen Tarif, der gar nicht der günstigste ist.
 

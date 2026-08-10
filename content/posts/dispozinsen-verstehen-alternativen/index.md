@@ -15,6 +15,7 @@ cover:
   image: "images/covers/dispozinsen-verstehen-alternativen.jpg"
   alt: "Dispozinsen verstehen: Was dein Dispo wirklich kostet"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---Zahlst du deiner Bank freiwillig 14 % Zinsen für dein eigenes Geld? Der Dispositionskredit ist die bequemste, aber auch teuerste Art der Verschuldung. Viele Menschen tappen unbewusst in diese teure Kostenfalle. In diesem Ratgeber erfährst du, wie du hohe Dispozinsen effektiv senkst oder komplett umgehst.
 
 ### Das Wichtigste in Kürze

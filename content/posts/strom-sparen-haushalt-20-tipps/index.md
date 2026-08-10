@@ -13,6 +13,7 @@ cover:
   alt: "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst deinen Stromverbrauch um etwa 10 % senken, indem du einfache Änderungen wie das Ausschalten von Geräten im Standby-Modus und die Verwendung von energiesparenden Leuchten umsetzt. Durch die Optimierung deiner Waschmaschinen- und Trockner-Einstellungen kannst du weitere Einsparungen erzielen. Mit diesen Maßnahmen kannst du deine Rechnung um etwa 50 € im Jahr reduzieren."
+social_posted: true
 ---Du kannst deinen Stromverbrauch um 15 bis 25 Prozent senken, ohne Komfort zu verlieren. Diese Strom-sparen-Tipps helfen dir, deinen Verbrauch sofort zu senken – Diese 20 Tipps sind nach Sofortwirkung und Aufwand sortiert.
 
 ## Sofort umsetzbar (0 €, 5 Minuten)

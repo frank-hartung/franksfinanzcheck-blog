@@ -13,6 +13,7 @@ cover:
   alt: "Hausratversicherung: Wer sie braucht und was sie leistet"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Eine Hausratversicherung deckt Schäden an deinem Eigentum ab, wie z.B. Einbruch, Brand oder Wasserrohrbruch. Die Kosten liegen in der Regel zwischen 50–200 € pro Jahr. Sie leistet, wenn deine Sachen beschädigt oder gestohlen werden, und hilft dir, Unterversicherung zu vermeiden, indem du den Wert deines Hausrats richtig schätzt."
+social_posted: true
 ---Ein Rohrbruch flutet dein Wohnzimmer, ein Brand vernichtet die Küche oder Einbrecher räumen die Wohnung leer. Solche Schäden kosten dich ohne Schutz schnell fünfstellige Summen. Eine leistungsstarke Hausratversicherung ersetzt dir den kompletten Neuwert deiner Möbel, Technik und Kleidung. In diesem Ratgeber erfährst du, wie du deinen Hausrat absichern kannst und worauf du beim Tarifvergleich achten musst.
 
 **Das Wichtigste in Kürze:**

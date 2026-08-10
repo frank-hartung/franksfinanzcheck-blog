@@ -15,6 +15,7 @@ cover:
   image: "images/covers/impulskaeufe-vermeiden-7-psychologische-tricks.jpg"
   alt: "Impulskäufe vermeiden: 7 Tricks, die dein Budget retten"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---Etwa 60 % aller Käufe im Supermarkt oder online geschehen rein impulsiv. Du planst einen Einkauf für 10 € und verlässt den Laden mit einer Rechnung über 45 €? Diese unkontrollierten Ausgaben kosten dich jedes Jahr mehrere tausend Euro. Mit den richtigen psychologischen Kniffen kannst du deine **Impulskäufe vermeiden** und dein Erspartes effektiv schützen.
 
 Das Gehirn reagiert auf Angebote wie auf eine Droge. Ein kurzer Kick durch Dopamin lässt die Vernunft für einen Moment verstummen. Sobald du diese Mechanismen verstehst, gewinnst du die Kontrolle über dein Geld zurück. In diesem Leitfaden erfährst du, wie du deine Kaufimpulse kontrollieren kannst.

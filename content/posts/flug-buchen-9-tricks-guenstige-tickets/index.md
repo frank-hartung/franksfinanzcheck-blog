@@ -15,6 +15,7 @@ cover:
   image: "images/covers/flug-buchen-9-tricks-guenstige-tickets.jpg"
   alt: "Flug buchen Tipps: 9 Tricks für günstige Flugtickets"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 Flugpreise wirken oft wie ein Mysterium: Der Sitz neben dir hat vielleicht 100 Euro mehr oder weniger gekostet, obwohl ihr denselben Flug gebucht habt. Tatsächlich folgen Flugpreise klaren Mustern – wer sie kennt, zahlt deutlich weniger. Die gute Nachricht: Die 9 Tricks in diesem Artikel funktionieren bei jeder Buchung, ohne Glück und ohne Sonderangebote-Jagd.
 

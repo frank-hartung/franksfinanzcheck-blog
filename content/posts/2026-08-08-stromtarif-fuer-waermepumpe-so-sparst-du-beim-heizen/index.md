@@ -15,6 +15,7 @@ cover:
   alt: "Stromtarif für Wärmepumpe: So sparst du beim Heizen"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst bis zu 50 € im Monat sparen, wenn du den richtigen Stromtarif für deine Wärmepumpe findest. Ein passender Tarif kann deine Stromkosten um 20 % reduzieren. Vergleiche verschiedene Anbieter, um den besten Tarif für dein Zuhause zu finden."
+social_posted: true
 ---Wusstest du, dass du deine Heizkosten um bis zu 30 % senken kannst? Ein spezieller Wärmepumpentarif macht diesen finanziellen Vorteil möglich. Deine Wärmepumpe benötigt viel Energie, doch dieser Strom muss nicht teuer sein. Wir zeigen dir, wie du den passenden Tarif für dein Haus findest.
 
 ## Wärmepumpentarif:<br>Die Grundlagen
