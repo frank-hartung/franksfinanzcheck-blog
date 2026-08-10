@@ -31,8 +31,7 @@ was zählt, ist der frühe Buchungszeitpunkt und die flexible Suche, nicht der W
 
 Der größte Hebel beim Flugpreis ist die Flexibilität. Wer den Reisezeitraum und das Ziel offen lässt, findet regelmäßig Deals, die 30 bis 50 Prozent unter dem Normalpreis liegen.
 
-Die praktische Umsetzung: In der Flugsuche „flexible Daten" oder „±3 Tage" wählen –   
-viele Portale zeigen dir die günstigsten Tage im Monatskalender. Wer die Abreise um einen Tag verschiebt, spart oft 50 bis 150 Euro.
+Die praktische Umsetzung: In der Flugsuche „flexible Daten" oder „±3 Tage" wählen. Viele Portale zeigen dir die günstigsten Tage im Monatskalender. Wer die Abreise um einen Tag verschiebt, spart oft 50 bis 150 Euro.
 
 Für Ziele gilt das Gleiche: Statt „Mallorca" einfach „alle Ziele" suchen und sehen, wohin es diese Woche günstig geht. Wer nicht an ein konkretes Ziel gebunden ist, fliegt für ein Drittel des Preises.
 
@@ -93,11 +92,9 @@ Fliegen mit Kindern ist teuer – aber mit den richtigen Tricks sparen Familien 
 
 **Kinder-Rabatte der Airlines:** Die meisten Airlines berechnen für Kinder unter 2 Jahren nur 10 Prozent (ohne eigenen Sitzplatz) und für Kinder bis 11 Jahre 75 Prozent des Tarifs. Bei den Billig-Airlines gelten eigene Regeln – vergleiche die Kindertarife bei der Buchung.
 
-**Sitzplatz-Strategie:** Wer mit Kleinkind fliegt, braucht eine freie Sitzreihe oder einen extra Sitz –   
-die „Bassinet"-Plätze (Babykorb an der Wand) sind bei vielen Airlines kostenlos reservierbar, aber limitiert. Früh buchen sichert die Plätze.
+**Sitzplatz-Strategie:** Wer mit Kleinkind fliegt, braucht eine freie Sitzreihe oder einen extra Sitz – die „Bassinet"-Plätze (Babykorb an der Wand) sind bei vielen Airlines kostenlos reservierbar, aber limitiert. Früh buchen sichert die Plätze.
 
-**Gepäck clever verteilen:** Das Aufgabegepäck der Eltern kann das Kindergepäck mitnehmen –   
-ein Koffer für die ganze Familie spart das zweite Gepäckstück. Kinderwagen und Kindersitz sind bei den meisten Airlines kostenlos.
+**Gepäck clever verteilen:** Das Aufgabegepäck der Eltern kann das Kindergepäck mitnehmen – ein Koffer für die ganze Familie spart das zweite Gepäckstück. Kinderwagen und Kindersitz sind bei den meisten Airlines kostenlos.
 
 **Direktflüge statt Umsteigen:** Ein Direktflug ist mit Kindern fast immer die bessere Wahl – auch wenn er 20 bis 30 Euro teurer ist. Der Stressfaktor und das Risiko von verpassten Anschlüssen (mit Gepäck und Kindern) sind es nicht wert.
 

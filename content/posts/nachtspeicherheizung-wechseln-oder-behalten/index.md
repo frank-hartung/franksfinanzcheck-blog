@@ -38,8 +38,7 @@ Der entscheidende Punkt: die laufenden Kosten. Die Rechnung für eine 70-Quadrat
 | Wärmepumpe (Neu, gefördert) | 15.000–30.000 € | 700–1.200 € | niedrig |
 | Holz-Pellet (Neu) | 12.000–18.000 € | 900–1.400 € | niedrig |
 
-Die Nachtspeicherheizung schlägt bei den laufenden Kosten jede Alternative –   
-der Unterschied liegt bei 800 bis 2.000 Euro pro Jahr. Bei modernen, gut gedämmten Geräten und sehr niedrigem Nachtstrom kann die Rechnung etwas besser aussehen, die Grundlogik bleibt aber: Direktstrom-Heizen ist das teuerste Heizen.
+Die Nachtspeicherheizung schlägt bei den laufenden Kosten jede Alternative. Der Unterschied liegt bei 800 bis 2.000 Euro pro Jahr. Bei modernen, gut gedämmten Geräten und sehr niedrigem Nachtstrom kann die Rechnung etwas besser aussehen, die Grundlogik bleibt aber: Direktstrom-Heizen ist das teuerste Heizen.
 
 ## Das Wärmepumpen-Förderprogramm
 
@@ -88,8 +87,7 @@ Wer nicht sofort wechseln kann oder will, kann die Kosten der Alt-Heizung wenigs
 
 ## Schritt für Schritt:<br>Der Weg zum modernen Heizsystem
 
-Wenn du dich für den Wechsel entschieden hast, läuft der Prozess in sieben Schritten –   
-so kommst du strukturiert ans Ziel, ohne dich zu verzetteln:
+Wenn du dich für den Wechsel entschieden hast, läuft der Prozess in sieben Schritten. So kommst du strukturiert ans Ziel, ohne dich zu verzetteln:
 
 1. **Bestandsaufnahme:** Verbrauch der letzten 3 Jahre sammeln, Gebäudezustand und Heizkörper dokumentieren. Diese Daten brauchst du für Angebote und Förderung.
 2. **Energieberatung nutzen:** Die kostenlose Energieberatung der Verbraucherzentrale oder ein unabhängiger Energieberater bewertet, welche Heizung zu deinem Gebäude passt. Das ist Pflicht-Baustein für die Förderung.

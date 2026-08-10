@@ -67,8 +67,7 @@ Die Preise für 5G-Home liegen 2026 meist zwischen 35 und 50 Euro pro Monat für
 | 5G-Home 100 Mbit/s | 35–45 € | variabel | 24 Monate oder flexibel |
 | 5G-Home 250 Mbit/s | 45–60 € | variabel | 24 Monate |
 
-Fazit: 5G-Home ist bei gleichem Tempo meist etwas teurer als DSL –   
-der Vorteil liegt nicht im Preis, sondern in der Verfügbarkeit (wo DSL langsam ist) und der schnellen Einrichtung.
+Fazit: 5G-Home ist bei gleichem Tempo meist etwas teurer als DSL. Der Vorteil liegt nicht im Preis, sondern in der Verfügbarkeit (wo DSL langsam ist) und der schnellen Einrichtung.
 
 ## Datenvolumen:<br>Die unbekannte Grenze
 
@@ -103,8 +102,7 @@ Tarife mit „unbegrenztem" Datenvolumen für Zuhause gibt es – sie kosten abe
 
 ## Die Kombination:<br>5G-Home als Backup und für unterwegs
 
-5G-Home muss nicht die einzige Internet-Quelle sein –   
-es funktioniert auch hervorragend als Ergänzung. Die Kombinationen, die sich lohnen:
+5G-Home muss nicht die einzige Internet-Quelle sein. Es funktioniert auch hervorragend als Ergänzung. Die Kombinationen, die sich lohnen:
 
 **Backup für den Hauptanschluss:** Ein günstiger 5G-Tarif mit kleinem Datenvolumen (10 bis 20 Euro) sichert dich ab, wenn DSL oder Kabel ausfällt – gerade im Homeoffice ein beruhigendes Sicherheitsnetz. Im Ernstfall teilst du das Handy-Hotspot oder steckst die SIM in den 5G-Router.
 
@@ -112,8 +110,7 @@ es funktioniert auch hervorragend als Ergänzung. Die Kombinationen, die sich lo
 
 **Übergangsphase beim Umzug:** Wer umzieht und auf den neuen Anschluss wartet, überbrückt die Zeit mit 5G-Home – monatlich kündbar, sofort verfügbar. Das ist oft die stressfreieste Lösung.
 
-Wichtig bei der Kombination: Die [WLAN-Qualität zu Hause](../../posts/wlan-verbessern-ohne-neue-hardware/) entscheidet, wie gut du die verschiedenen Quellen nutzen kannst –   
-ein guter Router bündelt DSL, 5G und WLAN zu einem Netz.
+Wichtig bei der Kombination: Die [WLAN-Qualität zu Hause](../../posts/wlan-verbessern-ohne-neue-hardware/) entscheidet, wie gut du die verschiedenen Quellen nutzen kannst. Ein guter Router bündelt DSL, 5G und WLAN zu einem Netz.
 
 
 ## Häufig gestellte Fragen

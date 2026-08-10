@@ -104,6 +104,8 @@ jobs:
           python3 scripts/fix_linebreaks.py || echo "⚠ Zeilenumbruch-Generator (nicht kritisch)"
           echo "== Gedankenstrich-vor-und-Generator (deterministisch, selbstheilend) =="
           python3 scripts/fix_dash_und.py --fix || echo "⚠ Gedankenstrich-Check (nicht kritisch)"
+          echo "== Gedankenstrich-am-Zeilenende (deterministisch, selbstheilend) =="
+          python3 scripts/fix_dash_eol.py --fix || echo "⚠ Gedankenstrich-EOL-Check (nicht kritisch)"
           echo "== Leerzeichen-Generator (Profi-Level, selbstheilend) =="
           python3 scripts/fix_spaces.py || echo "⚠ Leerzeichen-Generator (nicht kritisch)"
           echo "== Rechtschreibung =="

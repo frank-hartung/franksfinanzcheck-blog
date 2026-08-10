@@ -50,8 +50,7 @@ die günstigere behalten, die teurere kündigen. Achtung: Erst kündigen, wenn d
 
 ## Kündigen:<br>4. Kleinst-Lebensversicherungen und Sterbegeld-Policen
 
-Kleinst-Lebensversicherungen mit 5.000 bis 15.000 Euro Todesfallsumme stammen oft aus Zeiten, als solche Policen als „Sparvertrag" verkauft wurden. Heute sind sie meist teuer, intransparent und decken ein Risiko ab, das der Bedarf nicht mehr hergibt –   
-die Hinterbliebenen brauchen selten eine 10.000-Euro-Police, wenn der [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) und die eigene Vorsorge stehen.
+Kleinst-Lebensversicherungen mit 5.000 bis 15.000 Euro Todesfallsumme stammen oft aus Zeiten, als solche Policen als „Sparvertrag" verkauft wurden. Heute sind sie meist teuer, intransparent und decken ein Risiko ab, das der Bedarf nicht mehr hergibt. Die Hinterbliebenen brauchen selten eine 10.000-Euro-Police, wenn der [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) und die eigene Vorsorge stehen.
 
 Prüfe den Rückkaufswert: Viele Policen haben nach Jahren eine garantierte Leistung, die unter den eingezahlten Beiträgen liegt. Der Rückkauf kann trotzdem sinnvoll sein, wenn das Geld anderweitig besser arbeitet – zum Beispiel in einem [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/). Lass dich bei Altverträgen beraten, die Kündigung kann steuerliche Folgen haben.
 
@@ -75,8 +74,7 @@ Nach dem Ausmisten bleibt das Fundament – diese 4 Policen sind für fast jeden
 
 ## Kündigungsfristen richtig nutzen
 
-Beim Kündigen gilt: Fristen einhalten und schriftlich kündigen (E-Mail mit Empfangsbestätigung oder Einschreiben). Die meisten Versicherungen haben eine Kündigungsfrist von 3 Monaten zum Ablauf – prüfe deinen Vertrag. Nach einer Beitragserhöhung hast du ein Sonderkündigungsrecht –   
-das ist oft der perfekte Zeitpunkt zum Wechseln oder Kündigen.
+Beim Kündigen gilt: Fristen einhalten und schriftlich kündigen (E-Mail mit Empfangsbestätigung oder Einschreiben). Die meisten Versicherungen haben eine Kündigungsfrist von 3 Monaten zum Ablauf – prüfe deinen Vertrag. Nach einer Beitragserhöhung hast du ein Sonderkündigungsrecht. Das ist oft der perfekte Zeitpunkt zum Wechseln oder Kündigen.
 
 Für Kfz- und [Haftpflicht-Verträge](../../posts/privathaftpflicht-warum-pflicht-kosten/) gilt: Der Wechsel zum 30. November (Wechselstichtag) ist der Klassiker. Plane den Versicherungs-Check einmal im Jahr fest ein – zum Beispiel zum Geburtstag oder Jahresbeginn. So bleibt der Ordner sauber und die Beiträge niedrig.
 

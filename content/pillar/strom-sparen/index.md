@@ -25,8 +25,7 @@ Bevor du den Anbieter wechselst, solltest du wissen, wo dein Strom überhaupt hi
 
 ## 20 konkrete Tipps für den Haushalt
 
-Wer systematisch sparen will, findet in meiner Übersicht [Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung](../../posts/strom-sparen-haushalt-20-tipps/) alle wirksamen Stellschrauben: von der richtigen Waschtemperatur über LED-Tausch bis zu smarten Steckdosen. Die Tipps sind nach Einsparpotenzial sortiert –   
-so startest du mit dem größten Hebel.
+Wer systematisch sparen will, findet in meiner Übersicht [Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung](../../posts/strom-sparen-haushalt-20-tipps/) alle wirksamen Stellschrauben: von der richtigen Waschtemperatur über LED-Tausch bis zu smarten Steckdosen. Die Tipps sind nach Einsparpotenzial sortiert. So startest du mit dem größten Hebel.
 
 ## Tarifwechsel:<br>Der schnellste Weg zu niedrigeren Kosten
 

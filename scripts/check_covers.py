@@ -47,6 +47,25 @@ def collect_covers():
     return covers
 
 
+def normalize_dash_image(img):
+    """Korrigiert Gedankenstriche (–/—) in Cover-DATEINAMEN zu Bindestrichen.
+
+    Selbstheilung nach Fund: Frontmatter referenzierte
+    „images/covers/50–30–20-regel…jpg" (Gedankenstrich), die Datei hieß
+    „50-30-20-regel…jpg" (Bindestrich) → 404 im <picture>-srcset.
+    Deterministik: Nur wenn die Bindestrich-Variante existiert und die
+    referenzierte nicht, wird die Referenz angepasst (--fix).
+    """
+    if "–" not in img and "—" not in img:
+        return img
+    base = os.path.basename(img)
+    fixed = os.path.join(os.path.dirname(img), base.replace("–", "-").replace("—", "-"))
+    if (not os.path.exists(os.path.join(STATIC_DIR, base))
+            and os.path.exists(os.path.join(STATIC_DIR, os.path.basename(fixed)))):
+        return fixed
+    return img
+
+
 def check(covers):
     problems = []
     for c in covers:
@@ -118,6 +137,19 @@ def main():
     covers = collect_covers()
     problems = check(covers)
     stale = check_stale(covers)
+
+    # Selbstheilung: Gedankenstrich im Cover-Dateinamen → Bindestrich
+    # (wenn die Bindestrich-Datei existiert; --fix schreibt die Referenz um)
+    dash_fixes = 0
+    for c in covers:
+        img = c["image"]
+        if "–" in img or "—" in img:
+            fixed = normalize_dash_image(img)
+            if fixed != img and fix:
+                content = open(c["file"], encoding="utf-8").read()
+                content = content.replace(img, fixed)
+                open(c["file"], "w", encoding="utf-8").write(content)
+                dash_fixes += 1
 
     if fix:
         if problems:

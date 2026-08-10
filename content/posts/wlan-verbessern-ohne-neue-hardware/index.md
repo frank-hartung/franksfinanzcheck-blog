@@ -59,8 +59,7 @@ Zwei der unterschätztesten WLAN-Tricks:
 
 ## WLAN-Verschlüsselung und versteckte Geräte
 
-Ein offenes oder schwach verschlüsseltes WLAN ist nicht nur ein Sicherheitsrisiko –   
-es kostet dich auch Tempo, wenn Nachbarn oder Fremde dein Netz mitbenutzen. Die Regeln:
+Ein offenes oder schwach verschlüsseltes WLAN ist nicht nur ein Sicherheitsrisiko. Es kostet dich auch Tempo, wenn Nachbarn oder Fremde dein Netz mitbenutzen. Die Regeln:
 
 - **WPA3 oder mindestens WPA2** als Verschlüsselung aktivieren (in den Router-Einstellungen).
 - **Passwort regelmäßig ändern** – und ein starkes Passwort verwenden (mindestens 12 Zeichen).
@@ -99,8 +98,7 @@ Die Mess-Regeln für aussagekräftige Ergebnisse:
 - **Am selben Ort messen:** Der Standort des Geräts beeinflusst das Ergebnis – immer vom selben Platz testen.
 - **WLAN vs. Kabel unterscheiden:** Ein Kabel-Test zeigt, was die Leitung hergibt; der WLAN-Test zeigt, was bei dir ankommt. Der Unterschied ist dein WLAN-Verlust.
 
-Praktisch: Wer nach dem Kanalwechsel und der Standort-Optimierung 30 Prozent mehr Tempo misst, weiß, dass die Tricks gewirkt haben. Und wer keine Verbesserung sieht, hat damit ein klares Signal, dass die Hardware das Problem ist –   
-dann ist der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein [Mesh-System](../../posts/wlan-verstaerker-vs-mesh-wlan/) die nächste Stufe.
+Praktisch: Wer nach dem Kanalwechsel und der Standort-Optimierung 30 Prozent mehr Tempo misst, weiß, dass die Tricks gewirkt haben. Und wer keine Verbesserung sieht, hat damit ein klares Signal, dass die Hardware das Problem ist. Dann ist der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein [Mesh-System](../../posts/wlan-verstaerker-vs-mesh-wlan/) die nächste Stufe.
 
 
 ## Häufig gestellte Fragen
