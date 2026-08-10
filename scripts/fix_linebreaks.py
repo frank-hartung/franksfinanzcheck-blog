@@ -293,6 +293,14 @@ def main() -> int:
             if not dry:
                 open(f, "w", encoding="utf-8").write(parts[0] + "---" + parts[1] + "---" + new_body)
     print(f"\n{'DRY-RUN: ' if dry else ''}Zeilenumbruch-Generator (KI): {total} Änderungen.")
+    if not dry:
+        try:
+            from audit_log import log_event
+            log_event(module="fix_linebreaks", action="apply",
+                      input={"files": len(files)}, output={"changes": total},
+                      status="ok")
+        except Exception:
+            pass
     return 0
 
 

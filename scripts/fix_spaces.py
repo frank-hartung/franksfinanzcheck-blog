@@ -141,6 +141,14 @@ def main() -> int:
             if not dry:
                 open(f, "w", encoding="utf-8").write(parts[0] + "---" + parts[1] + "---" + new_body)
     print(f"\n{'DRY-RUN: ' if dry else ''}Leerzeichen-Generator: {total} Korrekturen in {len(files)} Dateien.")
+    if not dry:
+        try:
+            from audit_log import log_event
+            log_event(module="fix_spaces", action="apply",
+                      input={"files": len(files)}, output={"fixes": total},
+                      status="ok" if total >= 0 else "error")
+        except Exception:
+            pass
     return 0
 
 

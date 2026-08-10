@@ -1,0 +1,5 @@
+{"ts": "2026-08-10T09:11:45Z", "module": "quality_score", "action": "scan", "input": {"files": 78}, "output": {"avg": 0.96}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-10T09:11:45Z", "module": "fix_spaces", "action": "apply", "input": {"files": 78}, "output": {"fixes": 960}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-10T09:11:45Z", "module": "test", "action": "fail-test", "input": {}, "output": {"error": "x"}, "status": "error", "critical": false, "commit": null}
+{"ts": "2026-08-10T09:12:55Z", "module": "quality_score", "action": "scan", "input": {"files": 78}, "output": {"avg": 0.9}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-10T09:14:51Z", "module": "fix_spaces", "action": "apply", "input": {"files": 80}, "output": {"fixes": 411}, "status": "ok", "critical": false, "commit": null}
