@@ -1,0 +1,12 @@
+# 🔒 BRAND-LOCK – geschützte Marken-Bausteine (Single Source of Truth)
+# Geändert/ausgeweitet wird NUR über: python3 scripts/brand_guard.py --set-current
+# (Autowiederherstellung bei Abweichung: siehe scripts/brand_guard.py)
+
+- key: homeInfoParams.Title
+  expected: "Willkommen bei FranksFinanzcheck! 👋"
+- key: homeInfoParams.Content
+  expected: "💰 Geld sparen ohne Gürtel enger zu schnallen – genau darum geht es hier.\\n\\nJeden Tag erscheint ein neuer, verständlicher Ratgeber: **Strom, Gas und DSL günstiger**, Versicherungen richtig wählen, Konto & Karte ohne Gebührenfallen, dazu Frugalismus-Tricks und Budgetplanung, die wirklich im Alltag funktionieren. Ohne Fachchinesisch, ohne Verkaufsdruck – dafür mit konkreten Zahlen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen.\\n\\nStöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+- key: params.description
+  expected: "Geld sparen & Frugalismus: Praxistipps zu Budgetplanung, Strom- & Gastarifen, DSL, Versicherungen und Reisen – so sparst du monatlich bares Geld."
+- key: params.disclaimer
+  expected: "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."

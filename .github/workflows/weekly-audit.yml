@@ -36,6 +36,7 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
+          python3 scripts/brand_guard.py --fix || echo "⚠ Brand-Lock verletzt & geheilt"
           python3 scripts/length_guard.py --fix --ai --backlog 3
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
