@@ -39,7 +39,8 @@ es gibt Situationen, in denen Mieten die bessere Wahl ist:
 
 **Dein Anbieter erzwingt das Mietgerät:** Bei Glasfaser-Anschlüssen verlangen einige Anbieter ihr eigenes Modem (ONT), das du nicht ersetzen kannst. Hier kannst du nur den Rest (Router/WLAN) selbst kaufen.
 
-**Kurze Mietzeit:** Wer nur für 12 Monate einen Übergangsvertrag hat, für den lohnt der Kauf nicht – die Amortisation beginnt erst ab etwa 18 bis 24 Monaten.
+**Kurze Mietzeit:** Wer nur für 12 Monate einen Übergangsvertrag hat, für den lohnt der Kauf nicht –   
+die Amortisation beginnt erst ab etwa 18 bis 24 Monaten.
 
 Für alle anderen: Kaufen.
 
@@ -94,7 +95,8 @@ die Kategorien, nicht konkrete Modelle (die Preise ändern sich):
 
 **Standard (80–150 Euro):** Wi-Fi 6, Tri-Band optional, gute Reichweite, oft mit DECT-Telefonbasis. Die beste Wahl für die meisten Familien.
 
-**Premium (150–250 Euro):** Wi-Fi 6E/7, Mesh-fähig, maximale Reichweite, viele Anschlüsse. Für große Wohnungen, Gamer und Technik-Fans – hier ist eine [Fritzbox](../../posts/wlan-verstaerker-vs-mesh-wlan/) der Klassiker.
+**Premium (150–250 Euro):** Wi-Fi 6E/7, Mesh-fähig, maximale Reichweite, viele Anschlüsse. Für große Wohnungen, Gamer und Technik-Fans –   
+hier ist eine [Fritzbox](../../posts/wlan-verstaerker-vs-mesh-wlan/) der Klassiker.
 
 ## Die Anschluss-Wechsel-Strategie:<br>Router-Frage mitdenken
 

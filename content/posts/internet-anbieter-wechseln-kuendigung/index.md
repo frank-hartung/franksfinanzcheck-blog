@@ -32,7 +32,8 @@ Die wichtigsten Regeln im Überblick:
 - **Verlängerung:** Verträge, die sich automatisch verlängern, tun das maximal um 12 Monate – und sind dann wieder monatlich kündbar.
 - **Form:** Kündigung per Textform (E-Mail oder Brief mit Bestätigung) ist ausreichend – eine mündliche Kündigung genügt nicht.
 
-Viele Anbieter versuchen trotzdem, längere Fristen in den AGB zu verstecken. Die gesetzlichen Regeln gelten aber immer – ein Verweis auf das Telekommunikationsgesetz hilft im Zweifel.
+Viele Anbieter versuchen trotzdem, längere Fristen in den AGB zu verstecken. Die gesetzlichen Regeln gelten aber immer –   
+ein Verweis auf das Telekommunikationsgesetz hilft im Zweifel.
 
 ## Sonderkündigungsrecht:<br>Wann du sofort rauskommst
 

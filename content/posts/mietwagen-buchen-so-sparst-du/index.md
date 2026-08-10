@@ -34,7 +34,8 @@ Am Schalter vor Ort ist der Mietwagen fast immer teurer als online gebucht. Der 
 
 ## Vollkasko ohne Selbstbeteiligung:<br>Pflicht oder Luxus?
 
-Ohne ausreichende Absicherung kann der Urlaub teuer enden. Die Vollkasko **ohne Selbstbeteiligung** deckt genau diese Fälle ab. Sie kostet wenige Euro pro Tag mehr. Die günstige Variante mit hoher Selbstbeteiligung ist nur etwas für Wagemutige. **Immer die Variante ohne Selbstbeteiligung buchen** – das Risiko ist es nicht wert.
+Ohne ausreichende Absicherung kann der Urlaub teuer enden. Die Vollkasko **ohne Selbstbeteiligung** deckt genau diese Fälle ab. Sie kostet wenige Euro pro Tag mehr. Die günstige Variante mit hoher Selbstbeteiligung ist nur etwas für Wagemutige. **Immer die Variante ohne Selbstbeteiligung buchen** –   
+das Risiko ist es nicht wert.
 
 ## Weitere Spartipps
 

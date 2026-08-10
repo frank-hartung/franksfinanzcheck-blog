@@ -14,7 +14,8 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst deine E-Auto-Ladekosten senken, indem du einen günstigen Ladetarif wählst oder dich für Ökostrom entscheidest. In der Regel kostet das Laden eines E-Autos ca. 10–15 € pro 1000 kilometer. Mit einer Wallbox und einem geeigneten Tarif kannst du deine Ladekosten um bis zu 20 % reduzieren."
 social_posted: true
----Du zahlst für 100 Kilometer Fahrt entweder 4,50 Euro oder 15 Euro – die Entscheidung liegt allein bei deiner Ladestrategie. Ein Elektrofahrzeug schlägt den Verbrenner bei den Betriebskosten fast immer. Dennoch variieren die Preise massiv zwischen der heimischen Garage und dem Schnelllader an der Autobahn. Mit dem richtigen Wissen drückst du deine E-Auto Ladekosten auf ein Minimum.
+---Du zahlst für 100 Kilometer Fahrt entweder 4,50 Euro oder 15 Euro –   
+die Entscheidung liegt allein bei deiner Ladestrategie. Ein Elektrofahrzeug schlägt den Verbrenner bei den Betriebskosten fast immer. Dennoch variieren die Preise massiv zwischen der heimischen Garage und dem Schnelllader an der Autobahn. Mit dem richtigen Wissen drückst du deine E-Auto Ladekosten auf ein Minimum.
 
 ### Das Wichtigste in Kürze
 * Laden zu Hause kostet meist nur ein Drittel im Vergleich zum Schnelllader.
