@@ -34,16 +34,16 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import generate_drafts as g  # noqa: E402  (nutzt bestehende Generierungs-Logik)
-from check_titles import KOMPOSITA_FIXES, RE_ANHAENGSEL  # noqa: E402 – Titel-Qualitätsgate (FrankAutoOps)
+from check_titles import COMPOUND_FIXES, TIME_TAIL as RE_ANHAENGSEL  # noqa: E402 – Titel-Qualitätsgate (FrankAutoOps)
 
 
 def normalize_title(title: str) -> str:
-    """Deterministische Titel-Normalisierung (FrankAutoOps-Gate R3):
-    behebt bekannte Komposita-Schreibfehler ('Riester Rente' -> 'Riester-Rente'),
-    damit fehlerhafte Titel gar nicht erst entstehen."""
-    for wrong, right in KOMPOSITA_FIXES:
-        if wrong in title:
-            title = title.replace(wrong, right)
+    """Deterministische Titel-Normalisierung (FrankAutoOps-Gate R2):
+    behebt bekannte Komposita-Schreibfehler ('Riester Rente' -> 'Riester-Rente')
+    per Regex (Wortgrenzen), damit fehlerhafte Titel gar nicht erst entstehen."""
+    import re as _re
+    for pat, repl in COMPOUND_FIXES:
+        title = _re.sub(pat, repl, title)
     return title
 
 STATUS_FILE = os.path.join(BLOG_DIR, "ENGINE-STATUS.md")
