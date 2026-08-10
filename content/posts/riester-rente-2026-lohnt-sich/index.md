@@ -1,5 +1,5 @@
 ---
-title: "Riester Rente 2026 Weiterfördern oder kündigen dieses Jahr"
+title: "Riester-Rente 2026: Weiterfördern, stilllegen oder kündigen?"
 description: "Die Riester-Reform kommt – aber was heißt das für deinen Vertrag? So entscheidest du 2026: fördern, stilllegen oder kündigen."
 date: 2026-08-09T09:00:00Z
 draft: false
@@ -13,7 +13,7 @@ ai_provider: "Manuell (Masterplan Blueprint 20)"
 kurzantwort: "Die Riester-Reform 2026 vereinfacht das System und senkt Kosten – ob sich dein Vertrag lohnt, hängt von Zulagen und Kosten ab. Für Familien mit Kindern lohnt Riester oft weiter, für Alleinstehende ohne Kinder lohnt meist eher ein ETF-Sparplan. Eine Kündigung solltest du nur nach sorgfältiger Rechnung durchziehen."
 cover:
   image: "images/covers/riester-rente-2026-lohnt-sich.jpg"
-  alt: "Riester Rente 2026 Weiterfördern oder kündigen dieses Jahr"
+  alt: "Riester-Rente 2026: Weiterfördern, stilllegen oder kündigen?"
   caption: "Tipp von FranksFinanzcheck"
 ---
 Die Riester-Rente ist das umstrittenste Förderprodukt der deutschen Altersvorsorge – und 2026 steht die große Reform an. Was bedeutet das für deinen Vertrag? Solltest du weiterfördern, stilllegen oder kündigen? Die Antwort hängt von deiner persönlichen Situation ab – und von einer ehrlichen Rechnung.
