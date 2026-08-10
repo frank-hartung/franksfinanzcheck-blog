@@ -6,7 +6,7 @@ draft: false
 tags: ["WLAN", "DSL Hacks", "Internet"]
 categories: ["Internet- & DSL-Hacks"]
 pillar: "internet-dsl"
-keywords: ["WLAN verbessern", "DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN Signal stärken", "WiFi Optimieren"]
+keywords: ["[WLAN verbessern](../../posts/wlan-verbessern-ohne-neue-hardw/)", "DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN Signal stärken", "WiFi Optimieren"]
 author: "Frank"
 cover:
   image: "images/covers/wlan-verstaerker-vs-mesh-wlan.jpg"

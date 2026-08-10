@@ -1,5 +1,5 @@
 ---
-title: "Flug buchen: 9 Tricks für günstige Flugtickets"
+title: "Flug buchen Tipps: 9 Tricks für günstige Flugtickets"
 description: "Bis zu 40 Prozent sparen beim Flug: Diese 9 bewährten Tricks funktionieren bei jeder Buchung – von Suchfenstern bis zur Versteckte-Gebühren-Falle."
 date: 2026-08-09T10:10:00Z
 draft: false

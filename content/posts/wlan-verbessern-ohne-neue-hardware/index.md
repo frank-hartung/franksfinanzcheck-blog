@@ -1,5 +1,5 @@
 ---
-title: "WLAN verbessern: 12 Tipps ohne neue Hardware"
+title: "WLAN verbessern: 12 praktische Tipps ohne neue Hardware"
 description: "Langsames WLAN? Diese 12 Einstellungen und Tricks verbessern dein WLAN sofort – ohne einen Euro für neue Hardware auszugeben."
 date: 2026-08-09T09:30:00Z
 draft: false

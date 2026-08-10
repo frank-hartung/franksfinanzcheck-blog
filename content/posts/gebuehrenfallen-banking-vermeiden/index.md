@@ -34,7 +34,7 @@ Oft verstecken sich weitere Kosten im Detail. Banken berechnen 1 € bis 2 €
 
 ## Falle 1:<br>Die Auslandseinsatz-Gebühr
 
-Zahlst du im Urlaub außerhalb der Euro-Zone mit Karte? Viele Banken berechnen hierfür 1 % bis 2 % des Umsatzes. Bei einem Urlaub mit 2.000 € Kartenumsatz verlierst du so 20 € bis 40 € ohne Nutzen. Das lässt sich durch die richtige Wahl der Karte leicht verhindern.
+Zahlst du im Urlaub außerhalb der Euro-Zone mit Karte? Viele Banken berechnen hierfür 1 % bis 2 % des Umsatzes. Bei einem [Urlaub mit](../../posts/urlaub-mit-kindern-guenstig-spartri/) 2.000 € Kartenumsatz verlierst du so 20 € bis 40 € ohne Nutzen. Das lässt sich durch die richtige Wahl der Karte leicht verhindern.
 
 Nutze stattdessen eine Kreditkarte ohne Auslandseinsatz-Gebühr. Viele Anbieter für eine **Kreditkarte kostenlos** verzichten heute komplett auf diesen Aufschlag. Im EU-Ausland bleibt das Abheben mit der Girocard oft gebührenfrei. Prüfe die Konditionen deiner Bank dennoch unbedingt vor Reisebeginn.
 
