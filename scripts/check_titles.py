@@ -1,189 +1,143 @@
 #!/usr/bin/env python3
-"""
-FrankAutoOps – Titel-Qualitätsgate (check_titles.py)
+"""Titel-Qualitäts-Gate (vollautomatisch) für FranksFinanzcheck.
 
-Prüft alle Blog-Titel (Überschrift + Cover-Text-Quelle) auf Qualitätsmuster
-und korrigiert deterministische Fehler selbst (Self-Healing):
+Verhindert, dass Artikel-Überschriften (und damit auch die Cover-Texte,
+die aus dem Titel gerendert werden) durch Meta-Optimierung oder
+KI-Titelgenerierung verschlimmbessert werden.
 
-  R1 [Hinweis] Titel > 45 Zeichen ohne ":" und ohne "?" – der Cover-Umbruch
-               (smart_wrap) bricht dann nur Wort für Wort; Konvention der
-               Blog-Titel ist "Hauptkeyword: Untertitel".
-  R2 [hart]    Anhängsel-Muster "dieses Jahr|diesen Jahres|dieses Monats"
-               am Titelende OHNE Doppelpunkt – grammatisch lose Endung
-               (Fall: "Riester Rente 2026 Weiterfördern oder kündigen
-               dieses Jahr"). Titel mit solchen Endungen müssen von einem
-               Menschen/Agenten umformuliert werden.
-  R3 [fix]     Bekannte Komposita-Schreibfehler (deterministische Wortliste,
-               z. B. "Riester Rente" -> "Riester-Rente"). Wird mit --fix
-               automatisch korrigiert; bei Titeländerung wird das Cover
-               (alle Varianten) neu gerendert.
-  R4 [Hinweis] Cover-Layout-Simulation: Titel belegt auf dem Cover mehr als
-               3 Zeilen oder eine Zeile breiter als 820 px -> Cover-Text
-               überladen (wird bei Font 58 simuliert).
+Regeln (deterministisch):
+  R1  Titel > 45 Zeichen OHNE Doppelpunkt → FAIL
+      (Blog-Konvention "Hauptkeyword: Untertitel"; smart_wrap bricht
+      Cover-Texte semantisch nach dem Doppelpunkt – ohne ihn zerfällt
+      der Cover-Umbruch, z. B. "Weiterfördern / oder kündigen dieses Jahr")
+  R2  Bekannte Komposita ohne Bindestrich (Eigennamen+Substantiv) → FAIL
+      (z. B. "Riester Rente" statt "Riester-Rente"); --fix korrigiert
+  R3  Holprige Zeit-Anhängsel am Titelende → FAIL
+      ("dieses Jahr", "dieses Monat", "im Jahr 20XX"); --fix entfernt
+      sie, wenn der Rest-Titel noch aussagekräftig ist (>= 20 Zeichen)
+  R4  Doppelte Leerzeichen, " :", ": " (ohne Sinn) → FAIL; --fix korrigiert
 
 Nutzung:
-    python3 scripts/check_titles.py            # Report + Exit-Code
-    python3 scripts/check_titles.py --fix      # R3 + Cover-Neu-Render
+  python3 scripts/check_titles.py            # nur prüfen (Exit 0/1)
+  python3 scripts/check_titles.py --fix      # R2–R4 deterministisch korrigieren
+  python3 scripts/check_titles.py --json     # JSON-Output
 
-Exit-Codes: 0 = sauber, 1 = nur Hinweise (nicht blockierend),
-            2 = harte Verstöße (R2) -> Review nötig
+Exit: 0 = alle Titel ok · 1 = mind. 1 Verstoß (Workflow kann alerten).
 """
-import glob
 import os
 import re
 import sys
+import json
+import glob
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 
-# ---------------------------------------------------------------------------
-# R3: Deterministische Komposita-Schreibfehler (nur sichere, eindeutige Fälle)
-# ---------------------------------------------------------------------------
-KOMPOSITA_FIXES = [
-    ("Riester Rente", "Riester-Rente"),
-    ("Riester Vertrag", "Riester-Vertrag"),
-    ("Riester Förderung", "Riester-Förderung"),
-    ("ETF Sparplan", "ETF-Sparplan"),
-    ("Kfz Versicherung", "Kfz-Versicherung"),
+# R2: Eindeutige Komposita (Eigenname/Abkürzung + Substantiv) – Bindestrich-Pflicht
+COMPOUND_FIXES = [
+    (r"\bRiester Rente\b", "Riester-Rente"),
+    (r"\bRiester Vertrag\b", "Riester-Vertrag"),
+    (r"\bRiester Förderung\b", "Riester-Förderung"),
+    (r"\bKfz Versicherung\b", "Kfz-Versicherung"),
+    (r"\bKfz Versicherungen\b", "Kfz-Versicherungen"),
+    (r"\bDSL Tarif\b", "DSL-Tarif"),
+    (r"\bDSL Tarife\b", "DSL-Tarife"),
+    (r"\bETF Sparplan\b", "ETF-Sparplan"),
+    (r"\bETF Sparpläne\b", "ETF-Sparpläne"),
 ]
 
-# R2: Lose Anhängsel am Titelende (ohne Doppelpunkt davor)
-RE_ANHAENGSEL = re.compile(
-    r"\s+(?:dieses Jahr|diesen Jahres|dieses Monats|diesen Monats)\s*$",
-    re.IGNORECASE,
-)
+# R3: Holprige Zeit-Anhängsel am Titelende
+TIME_TAIL = re.compile(r"\b(dieses Jahr|dieses Monat|im Jahr 20\d\d)\s*\.?$")
 
-R1_LEN = 45  # Titel ab dieser Länge ohne ':'/'?' gelten als konventionsabweichend
+TITLE_NO_COLON_MAX = 45  # R1: länger ohne Doppelpunkt → Cover-Umbruch kaputt
+REST_MIN = 20            # R3: Rest nach Anhängsel-Entfernung muss aussagekräftig sein
 
 
-def all_posts():
-    return sorted(glob.glob(os.path.join(POSTS_DIR, "*", "index.md")))
+def check_title(title):
+    """Gibt Liste von (rule, message) zurück."""
+    issues = []
+    t = title.strip()
+    if not t:
+        return [("R0", "Titel ist leer")]
+    if len(t) > TITLE_NO_COLON_MAX and ":" not in t:
+        issues.append(("R1", f"Titel {len(t)} Zeichen ohne Doppelpunkt "
+                             f"(Konvention 'Hauptkeyword: Untertitel', "
+                             f"Cover-Umbruch bricht sonst semantisch kaputt)"))
+    for pat, repl in COMPOUND_FIXES:
+        if re.search(pat, t):
+            issues.append(("R2", f"Kompositum ohne Bindestrich: {pat[1:-1]!r} "
+                                 f"→ {repl!r}"))
+    m = TIME_TAIL.search(t)
+    if m:
+        issues.append(("R3", f"holpriges Zeit-Anhängsel am Ende: {m.group(0)!r}"))
+    if "  " in t:
+        issues.append(("R4", "doppelte Leerzeichen"))
+    if " :" in t or re.search(r":\s{2,}", t):
+        issues.append(("R4", "Leerzeichen vor/mehrfach nach Doppelpunkt"))
+    return issues
 
 
-def read_frontmatter_title(path):
-    with open(path, encoding="utf-8") as f:
-        content = f.read()
-    m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
-    return (m.group(1).strip() if m else None), content
+def fix_title(title):
+    """Deterministische Korrekturen R2–R4 (kein R1-Fix – semantisch)."""
+    t = title.strip()
+    for pat, repl in COMPOUND_FIXES:
+        t = re.sub(pat, repl, t)
+    t = TIME_TAIL.sub("", t).strip()
+    t = re.sub(r"\s{2,}", " ", t)
+    t = re.sub(r"\s+:", ":", t)
+    t = re.sub(r":\s{2,}", ": ", t)
+    if len(t) < REST_MIN and title != t:
+        # Anhängsel-Entfernung hat den Titel entkernt → Änderung verwerfen
+        t = title.strip()
+    return t
 
 
-def write_frontmatter_title(path, content, new_title):
-    """Ersetzt title: im Frontmatter (nur erste Zeile, gequotet)."""
-    new_content = re.sub(
-        r'^title:\s*["\']?(.+?)["\']?\s*$',
-        lambda m: f'title: "{new_title}"',
-        content,
-        count=1,
-        flags=re.M,
-    )
-    # cover.alt nachziehen, falls er identisch mit dem alten Titel war
-    old_title = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M).group(1).strip()
-    new_content = new_content.replace(
-        f'alt: "{old_title}"',
-        f'alt: "{new_title}"',
-    )
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(new_content)
-    return old_title
-
-
-def simulate_cover_layout(title):
-    """R4: Simuliert smart_wrap bei Font 58 (typische Cover-Größe)."""
-    try:
-        from PIL import Image, ImageDraw
-        sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
-        from generate_covers import load_font, smart_wrap
-
-        img = Image.new("RGB", (1000, 1500))
-        d = ImageDraw.Draw(img)
-        font = load_font(58)
-        if font is None:
-            return None
-        max_w = 1000 - 2 * 90
-        lines = smart_wrap(title, font, max_w, d)
-        over = [l for l in lines if d.textlength(l, font=font) > max_w]
-        return len(lines), len(over), max_w
-    except Exception:
-        return None
+def collect():
+    posts = []
+    for pattern in ["content/posts/*/index.md", "content/pillar/*/index.md"]:
+        for f in glob.glob(os.path.join(BLOG_DIR, pattern)):
+            content = open(f, encoding="utf-8").read()
+            m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
+            if m:
+                posts.append({"file": f, "title": m.group(1).strip()})
+    return posts
 
 
 def main():
     fix = "--fix" in sys.argv
-    hard = 0
-    hints = 0
-    fixes = 0
-    report = []
+    as_json = "--json" in sys.argv
+    posts = collect()
+    all_issues = []
+    fixed = 0
+    for p in posts:
+        issues = check_title(p["title"])
+        if issues and fix:
+            new_title = fix_title(p["title"])
+            if new_title != p["title"]:
+                content = open(p["file"], encoding="utf-8").read()
+                old_line = re.search(r'^title:.*$', content, re.M)
+                content = (content[:old_line.start()]
+                           + f'title: "{new_title}"'
+                           + content[old_line.end():])
+                open(p["file"], "w", encoding="utf-8").write(content)
+                fixed += 1
+                p["title"] = new_title
+                issues = [i for i in issues if i[0] != "R2"
+                          and i[0] != "R3" and i[0] != "R4"]
+                issues = check_title(new_title)
+        for rule, msg in issues:
+            all_issues.append({"file": p["file"], "title": p["title"][:60],
+                               "rule": rule, "msg": msg})
 
-    for path in all_posts():
-        slug = os.path.basename(os.path.dirname(path))
-        title, content = read_frontmatter_title(path)
-        if not title:
-            continue
-        orig = title
-
-        # ---- R3: deterministische Komposita-Fixes (Self-Healing) ----
-        new_title = title
-        for wrong, right in KOMPOSITA_FIXES:
-            if wrong in new_title:
-                new_title = new_title.replace(wrong, right)
-        if new_title != title:
-            if fix:
-                old = write_frontmatter_title(path, content, new_title)
-                title = new_title
-                fixes += 1
-                report.append(f"  ✗ R3-FIX {slug}: '{old}' -> '{new_title}'")
-            else:
-                hard += 1
-                report.append(f"  ✗ R3 {slug}: '{title}' (--fix korrigiert)")
-
-        # ---- R2: lose Anhängsel ohne Doppelpunkt (hart) ----
-        if ":" not in title and RE_ANHAENGSEL.search(title):
-            hard += 1
-            report.append(f"  ✗ R2 {slug}: '{title}' (Anhängsel-Muster, Review nötig)")
-
-        # ---- R1: Konventions-Hinweis ----
-        if len(title) > R1_LEN and ":" not in title and "?" not in title:
-            hints += 1
-            report.append(f"  • R1 {slug}: '{title}' ({len(title)} Z., kein ':' – Cover-Umbruch suboptimal)")
-
-        # ---- R4: Cover-Layout-Simulation (Hinweis) ----
-        layout = simulate_cover_layout(title)
-        if layout:
-            n_lines, n_over, max_w = layout
-            if n_over > 0:
-                hints += 1
-                report.append(f"  • R4 {slug}: Cover-Zeile > {max_w} px bei Font 58")
-            elif n_lines > 3:
-                hints += 1
-                report.append(f"  • R4 {slug}: Cover braucht {n_lines} Zeilen (Ziel <= 3)")
-
-        # ---- Cover-Neu-Render bei Titeländerung (Self-Healing-Kette) ----
-        if fix and new_title != orig:
-            try:
-                sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
-                import generate_covers as gc
-
-                out_path = os.path.join(gc.OUT_DIR, f"{slug}.jpg")
-                if os.path.exists(out_path):
-                    gc.make_cover(new_title, slug, out_path)
-                    gc.ensure_responsive_variants(out_path, force=True)
-                    report.append(f"  ✓ Cover neu gerendert: {slug} (alle Varianten)")
-            except Exception as exc:  # noqa: BLE001
-                report.append(f"  ⚠ Cover-Neu-Render fehlgeschlagen ({slug}): {exc}")
-
-    # Report
-    print("=" * 60)
-    print(f"Titel-Gate: {len(all_posts())} Artikel geprüft")
-    print(f"  harte Verstöße (R2/R3): {hard}")
-    print(f"  Hinweise (R1/R4):       {hints}")
-    if fixes:
-        print(f"  Self-Healing-Fixes:    {fixes} (inkl. Cover-Neu-Render)")
-    if report:
-        print("-" * 60)
-        print("\n".join(report))
-    print("=" * 60)
-
-    return 2 if hard else (1 if hints else 0)
+    print(f"Titel-Check: {len(posts)} Titel | Verstöße: {len(all_issues)}"
+          + (f" | automatisch gefixt: {fixed}" if fix else ""))
+    for i in all_issues:
+        print(f"  ❌ [{i['rule']}] {os.path.basename(os.path.dirname(i['file']))}: "
+              f"{i['msg']}  ({i['title']})")
+    if as_json:
+        print(json.dumps({"total": len(posts), "issues": len(all_issues),
+                          "fixed": fixed, "items": all_issues},
+                         ensure_ascii=False))
+    return 1 if all_issues else 0
 
 
 if __name__ == "__main__":

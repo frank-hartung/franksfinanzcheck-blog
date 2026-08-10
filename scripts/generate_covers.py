@@ -19,6 +19,39 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, slug_of
 OUT_DIR = os.path.join(BLOG_DIR, "static", "images", "covers")
+MANIFEST_PATH = os.path.join(BLOG_DIR, "data", "covers_manifest.json")
+
+# --- Cover-Manifest (Stale-Erkennung) --------------------------------------
+# data/covers_manifest.json: { "<slug>": {"title": "<Titel bei Generierung>",
+#                                          "ts": "<ISO-Zeitstempel>"} }
+# check_covers.py vergleicht den aktuellen Frontmatter-Titel mit dem
+# Manifest-Eintrag. Weicht er ab, wurde der Titel geändert, ohne das Cover
+# neu zu rendern → Cover zeigt veralteten Text (Selbstheilung: --fix).
+import json
+import datetime as _dt
+
+
+def load_manifest():
+    try:
+        return json.load(open(MANIFEST_PATH, encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def save_manifest(manifest):
+    os.makedirs(os.path.dirname(MANIFEST_PATH), exist_ok=True)
+    tmp = MANIFEST_PATH + ".tmp"
+    json.dump(manifest, open(tmp, "w", encoding="utf-8"),
+              ensure_ascii=False, indent=1)
+    os.replace(tmp, MANIFEST_PATH)
+
+
+def manifest_set(slug, title):
+    m = load_manifest()
+    m[slug] = {"title": title,
+               "ts": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds")}
+    save_manifest(m)
+
 
 # --- Farben aus dem Masterplan ---
 EMERALD = (14, 90, 67)        # Smaragdgrün
@@ -41,7 +74,7 @@ except ImportError:
           "(pip install pillow-avif-plugin)")
 
 
-def save_modern_variants(img, out_path):
+def save_modern_variants(img, out_path, force=False):
     """Speichert WebP- und AVIF-Varianten (1000/620/720px) für ein Cover.
 
     Struktur:
@@ -51,6 +84,10 @@ def save_modern_variants(img, out_path):
 
     AVIF ~50 % kleiner als WebP, WebP ~30-50 % kleiner als JPEG –
     so liefert <picture> jedem Browser das kleinste passende Format.
+
+    force=True (Einzel-Slug-Neugenerierung): existierende Varianten werden
+    überschrieben – sonst zeigten sie nach einer Titel-Änderung weiter den
+    ALTEN Cover-Text (stille Inkonsistenz, gefunden beim Riester-Cover).
     """
     W, H = img.size
     base = os.path.dirname(out_path)
@@ -61,7 +98,7 @@ def save_modern_variants(img, out_path):
         d = os.path.join(base, fmt_dir, str(w) if w != W else "")
         os.makedirs(d, exist_ok=True)
         vpath = os.path.join(d, os.path.splitext(name)[0] + ext)
-        if os.path.exists(vpath):
+        if os.path.exists(vpath) and not force:
             return  # bereits vorhanden – nicht neu encodieren
         v = img if w == W else img.resize((w, int(H * w / W)), Image.LANCZOS)
         v.save(vpath, **save_kwargs)
@@ -172,7 +209,7 @@ def smart_wrap(title, font, max_width, draw):
     return wrap_text_no_hang(title, font, max_width, draw)
 
 
-def make_cover(title, slug, out_path):
+def make_cover(title, slug, out_path, force=False):
     W, H = 1000, 1500
     # Vertikaler Verlauf Smaragdgrün → dunkel
     img = Image.new("RGB", (W, H))
@@ -264,7 +301,7 @@ def make_cover(title, slug, out_path):
     print(f"  ✓ Responsive: 620px + 720px für {os.path.basename(out_path)}")
 
     # Moderne Formate (WebP + AVIF) für alle Größen
-    modern = save_modern_variants(img, out_path)
+    modern = save_modern_variants(img, out_path, force=force)
     print(f"  ✓ Modern: {len(modern)} WebP/AVIF-Varianten für {os.path.basename(out_path)}")
 
 
@@ -318,12 +355,17 @@ def ensure_responsive_variants(out_path, force=False):
                                recursive=True):
                 if os.path.isfile(f) and os.path.basename(f).startswith(base):
                     os.remove(f)
-    modern = save_modern_variants(img, out_path)
+    modern = save_modern_variants(img, out_path, force=force)
     if modern:
         made = True
     return made
 def main():
     force = "--force" in sys.argv  # alle Covers neu generieren (neue Umbruch-Regel)
+    only_slug = None
+    if "--slug" in sys.argv:
+        i = sys.argv.index("--slug")
+        if i + 1 < len(sys.argv):
+            only_slug = sys.argv[i + 1].strip()
     os.makedirs(OUT_DIR, exist_ok=True)
     files = list_post_paths()
     covers = 0
@@ -331,18 +373,24 @@ def main():
     variants = 0
     for path in files:
         slug = slug_of(path)
+        if only_slug and slug != only_slug:
+            continue
         with open(path, encoding="utf-8") as f:
             content = f.read()
         m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
         title = (m.group(1) if m else slug).strip()
         out_path = os.path.join(OUT_DIR, f"{slug}.jpg")
-        if force or not os.path.exists(out_path):
-            make_cover(title, slug, out_path)
+        if force or only_slug or not os.path.exists(out_path):
+            make_cover(title, slug, out_path, force=force or bool(only_slug))
             covers += 1
-        if ensure_responsive_variants(out_path, force=force):
+        if ensure_responsive_variants(out_path, force=force or bool(only_slug)):
             variants += 1
         if ensure_cover_in_frontmatter(path, slug):
             frontmatter += 1
+        if only_slug or force or slug not in load_manifest():
+            # Einzel-Lauf/Force: Manifest immer aktualisieren; Gesamtlauf:
+            # fehlende Einträge nachtragen (Stale-Erkennung lückenlos).
+            manifest_set(slug, title)
     print(f"\nFertig: {covers} Cover erstellt, {frontmatter} Frontmatter ergänzt, "
           f"{variants} responsive Varianten nachgezogen "
           f"(von {len(files)} Artikeln).")

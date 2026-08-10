@@ -1,4 +1,4 @@
-# 📋 Meta-Daten-Report – 2026-08-09
+# 📋 Meta-Daten-Report – 2026-08-10
 
 > **Vollautomatisch** erzeugt vom wöchentlichen SEO-Workflow. Keine manuelle Sichtung nötig: Bei verbleibenden Problemen erstellt der Workflow automatisch ein GitHub-Issue.
 
@@ -6,25 +6,26 @@
 
 | Kennzahl | Wert |
 |---|---|
-| Artikel geprüft | 72 |
+| Artikel geprüft | 74 |
 | Ø Qualitätsscore | **100/100** |
 | Ø Titel-Länge | 55 Zeichen (optimal 50–60) |
 | Ø Description-Länge | 142 Zeichen (optimal 120–160) |
-| Artikel mit Problemen | **0** |
+| Artikel mit Problemen | **2** |
 
 ## Status
 
-### ✅ Alle Meta-Daten auf Profi-Niveau
+### ⚠️ 2 Artikel brauchen Aufmerksamkeit
 
-Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
+> Ein GitHub-Issue wurde automatisch erstellt – Details siehe dort.
 
 ## Detail-Übersicht
 
 | Score | Artikel | Titel | Desc | Keywords | Status |
 |---|---|---|---|---|---|
-| 95 | ETF-Sparplan für Kinder: So legst du richtig  | 47 | 157 | 4 | ✅ |
-| 95 | Flug buchen: 9 Tricks für günstige Flugticket | 46 | 146 | 4 | ✅ |
-| 95 | WLAN verbessern: 12 Tipps ohne neue Hardware | 44 | 125 | 4 | ✅ |
+| 85 | DSL-Wechselbonus sichern: So sparst du beim I | 59 | 153 | 0 | ⚠️ (1) |
+| | | | | | `Nur 0 Keywords (min. 3)` |
+| 85 | Sicher heizen: So schützt dich eine Preisgara | 53 | 154 | 0 | ⚠️ (1) |
+| | | | | | `Nur 0 Keywords (min. 3)` |
 | 100 | ETF-Sparplan für Einsteiger: So startest du m | 53 | 156 | 3 | ✅ |
 | 100 | Internet-Turbo: Warum ich meinen DNS-Server g | 58 | 148 | 3 | ✅ |
 | 100 | Frugalismus im Alltag: So sparst du jeden Mon | 58 | 137 | 4 | ✅ |
@@ -34,10 +35,10 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Tierversicherung: Schutz für dein Tier im Kra | 56 | 147 | 3 | ✅ |
 | 100 | Stromtarif für Wärmepumpe: So sparst du beim  | 51 | 152 | 3 | ✅ |
 | 100 | Depot 2026: Dein smarter Start in den Vermöge | 53 | 141 | 3 | ✅ |
-| 100 | Energiekosten senken mit intelligenten Heizsy | 51 | 130 | 3 | ✅ |
+| 100 | Intelligente Heizsysteme: So senkst du Energi | 52 | 130 | 3 | ✅ |
 | 100 | Die 50-30-20-Regel: Die perfekte Formel für d | 58 | 150 | 6 | ✅ |
 | 100 | 5G-Home statt DSL: Für wen sich mobiles Inter | 54 | 132 | 4 | ✅ |
-| 100 | 7 Gewohnheiten für mehr finanzielle Freiheit  | 54 | 130 | 5 | ✅ |
+| 100 | Finanzielle Freiheit: 7 Gewohnheiten für mehr | 60 | 130 | 5 | ✅ |
 | 100 | Balkonkraftwerk 2026: Kosten, Förderung, Amor | 53 | 143 | 4 | ✅ |
 | 100 | Berufsunfähigkeitsversicherung: Für wen sie s | 59 | 144 | 4 | ✅ |
 | 100 | Depot-Umzug: So wechselst du das Depot ohne S | 55 | 160 | 4 | ✅ |
@@ -46,7 +47,9 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | DSL- und Internet-Flat günstig sichern: Der b | 55 | 128 | 6 | ✅ |
 | 100 | E-Auto laden: So senkst du deine Stromkosten  | 53 | 155 | 5 | ✅ |
 | 100 | Elementarschadenversicherung: Hochwasser, Sta | 58 | 146 | 4 | ✅ |
-| 100 | Festgeld oder Tagesgeld? Wo dein Geld 2026 ri | 56 | 141 | 4 | ✅ |
+| 100 | ETF-Sparplan für Kinder: So baust du sinnvoll | 58 | 157 | 4 | ✅ |
+| 100 | Festgeld oder Tagesgeld 2026: Wo dein Geld ri | 56 | 141 | 4 | ✅ |
+| 100 | Flug buchen Tipps: 9 Tricks für günstige Flug | 52 | 146 | 4 | ✅ |
 | 100 | 5 Frugalismus-Tricks: So sparst du 200 € pro  | 50 | 149 | 6 | ✅ |
 | 100 | Gastarife vergleichen: Heizkosten vor dem Her | 55 | 147 | 6 | ✅ |
 | 100 | Gebührenfallen beim Banking: Diese 7 Kosten k | 53 | 155 | 4 | ✅ |
@@ -79,7 +82,7 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Ratenkredit mit Bestzins sichern: So vergleic | 59 | 146 | 6 | ✅ |
 | 100 | Reisekrankenversicherung: Wann sie sich wirkl | 54 | 131 | 5 | ✅ |
 | 100 | Reiseversicherung: Diese Kombination ist die  | 53 | 151 | 4 | ✅ |
-| 100 | Riester Rente 2026 Weiterfördern oder kündige | 58 | 125 | 4 | ✅ |
+| 100 | Riester-Rente 2026: Weiterfördern, stilllegen | 60 | 125 | 4 | ✅ |
 | 100 | Router kaufen oder mieten: Was sich wirklich  | 52 | 140 | 4 | ✅ |
 | 100 | Sparquote steigern: Von 5 auf 30 Prozent in 1 | 54 | 134 | 4 | ✅ |
 | 100 | Strom sparen im Haushalt: 20 Tipps für die nä | 59 | 140 | 5 | ✅ |
@@ -91,9 +94,10 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Urlaubskasse aufbessern: 7 Spartipps für den  | 57 | 131 | 5 | ✅ |
 | 100 | Versicherungen kündigen: Diese 5 Policen brau | 58 | 134 | 4 | ✅ |
 | 100 | Wärmepumpe vs. Gasheizung: Was sich 2026 wirk | 55 | 134 | 5 | ✅ |
+| 100 | WLAN verbessern: 12 praktische Tipps ohne neu | 55 | 125 | 4 | ✅ |
 | 100 | WLAN-Verstärker vs. Mesh-WLAN: Schnelles Inte | 58 | 139 | 6 | ✅ |
 | 100 | Zahnzusatzversicherung: Wann sich der Abschlu | 53 | 141 | 5 | ✅ |
 | 100 | Zinseszinseffekt: Die Formel, die dein Geld v | 52 | 159 | 4 | ✅ |
 
 ---
-*Erzeugt am 2026-08-09 um 17:43 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-10 um 11:09 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*

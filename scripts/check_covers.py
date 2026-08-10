@@ -41,7 +41,9 @@ def collect_covers():
             content = open(f, encoding="utf-8").read()
             m = re.search(r'^cover:\s*\n\s*image:\s*"?([^"\n]+)"?', content, re.M)
             if m:
-                covers.append({"file": f, "image": m.group(1).strip()})
+                tm = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
+                title = (tm.group(1).strip() if tm else "").strip('"')
+                covers.append({"file": f, "image": m.group(1).strip(), "title": title})
     return covers
 
 
@@ -78,26 +80,82 @@ def check(covers):
     return problems
 
 
+def check_stale(covers):
+    """Stale-Covers: Cover-Bild wurde mit anderem Titel gerendert als der
+    aktuelle Frontmatter-Titel (Titel-Änderung ohne Cover-Re-Generierung).
+
+    Basis: data/covers_manifest.json (geschrieben von generate_covers.py).
+    Fehlt das Manifest, gilt alles als unbekannt (wird beim ersten
+    Gesamtlauf befüllt).
+    """
+    manifest_path = os.path.join(BLOG_DIR, "data", "covers_manifest.json")
+    if not os.path.exists(manifest_path):
+        return []
+    try:
+        manifest = json.load(open(manifest_path, encoding="utf-8"))
+    except Exception:
+        return []
+    stale = []
+    for c in covers:
+        base = os.path.basename(c["image"])
+        slug = os.path.splitext(base)[0]
+        entry = manifest.get(slug)
+        if entry is None:
+            continue  # unbekannt → nicht als Fehler werten
+        m_title = (entry.get("title") or "").strip()
+        f_title = (c.get("title") or "").strip()
+        if m_title and f_title and m_title != f_title:
+            stale.append({
+                "file": c["file"], "slug": slug,
+                "manifest_title": m_title, "frontmatter_title": f_title,
+            })
+    return stale
+
+
 def main():
     fix = "--fix" in sys.argv
     as_json = "--json" in sys.argv
     covers = collect_covers()
     problems = check(covers)
+    stale = check_stale(covers)
 
-    if fix and problems:
-        print(f"{len(problems)} Cover mit fehlenden Varianten – ziehe nach …")
+    if fix:
+        if problems:
+            print(f"{len(problems)} Cover mit fehlenden Varianten – ziehe nach …")
+            subprocess.run([sys.executable, os.path.join(BLOG_DIR, "scripts", "generate_covers.py")],
+                           cwd=BLOG_DIR, check=False)
+            covers = collect_covers()
+            problems = check(covers)
+        if stale:
+            print(f"{len(stale)} Cover mit veraltetem Text – generiere neu …")
+            gen = os.path.join(BLOG_DIR, "scripts", "generate_covers.py")
+            for s in stale:
+                print(f"  → {s['slug']}: '{s['manifest_title']}' ≠ "
+                      f"'{s['frontmatter_title']}'")
+                subprocess.run([sys.executable, gen, "--slug", s["slug"], "--force"],
+                               cwd=BLOG_DIR, check=False)
+            covers = collect_covers()
+            stale = check_stale(covers)
+    elif not os.path.exists(os.path.join(BLOG_DIR, "data", "covers_manifest.json")):
+        # Manifest initial befüllen (einmalig, nach Konsistenz-Check):
+        # generiert keine Bilder neu, aktualisiert nur die Manifeste.
         subprocess.run([sys.executable, os.path.join(BLOG_DIR, "scripts", "generate_covers.py")],
                        cwd=BLOG_DIR, check=False)
-        problems = check(covers)  # erneut prüfen
 
-    print(f"Cover-Check: {len(covers)} Covers | Probleme: {len(problems)}")
+    total = len(problems) + len(stale)
+    print(f"Cover-Check: {len(covers)} Covers | Probleme: {len(problems)} | "
+          f"Stale: {len(stale)}")
     for p in problems:
         print(f"  ❌ {os.path.basename(os.path.dirname(p['file']))}: {p['image']} → fehlt: {', '.join(p['missing'])}")
+    for s in stale:
+        print(f"  ❌ STALE {s['slug']}: Cover zeigt '{s['manifest_title']}', "
+              f"Frontmatter '{s['frontmatter_title']}'")
 
     if as_json:
         print(json.dumps({"total": len(covers), "problems": len(problems),
-                          "items": problems}, ensure_ascii=False))
-    return 1 if problems else 0
+                          "stale": len(stale),
+                          "items": problems + stale}, ensure_ascii=False))
+    return 1 if total else 0
 
 
 if __name__ == "__main__":
