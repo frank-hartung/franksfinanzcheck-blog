@@ -62,7 +62,7 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
 
   [params.homeInfoParams]
     Title = "Willkommen bei FranksFinanzcheck"
-    Content = "Geld sparen ohne Verzicht: Frugalismus-Tricks, Budgetplanung und clevere Vergleichstipps – jeden Tag ein neuer Artikel."
+    Content = "💰 Geld sparen ohne Verzicht: Frugalismus-Tricks, Budgetplanung und clevere Vergleichstipps – jeden Tag ein neuer Artikel."
 
   [[params.socialIcons]]
     name = "pinterest"

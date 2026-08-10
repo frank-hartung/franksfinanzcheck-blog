@@ -117,6 +117,8 @@ jobs:
           python3 scripts/fix_heading_breaks.py || echo "⚠ Heading-Breaks (nicht kritisch)"
           echo "== Komposita-Waechter (compound_guard.py: Keyword-Falle 'Preisgarantie Gas' etc.) =="
           python3 scripts/compound_guard.py --fix --ai --new-only || echo "⚠ Compound-Guard (nicht kritisch)"
+          echo "== Emoji-Guard (Marken-Touchpoints + Mojibake-Scanner) =="
+          python3 scripts/emoji_guard.py --fix || echo "⚠ Emoji-Guard (nicht kritisch)"
           echo "== Profi-Text-Gate =="
           python3 scripts/profi_text_check.py --new-only || echo "⚠ Profi-Gate (nicht blockierend)"
           echo "== Lesbarkeit =="
