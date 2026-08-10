@@ -2,6 +2,11 @@ baseURL = "https://franksfinanzcheck.de/"
 title = "FranksFinanzcheck"
 theme = "PaperMod"
 
+# RSS komplett deaktiviert (Entscheidung 10.08.2026 – nicht erwünscht):
+# Hugo erzeugt dann weder index.xml noch Sektions-Feeds; der Head-Link
+# rel=alternate auf den Feed entfällt bei PaperMod automatisch mit.
+disableKinds = ["RSS"]
+
 # Keine automatische Titel-Umwandlung (Title-Case) durch Hugo:
 # Taxonomie-Terme (Tags/Kategorien) werden EXAKT wie im Frontmatter
 # angezeigt – verhindert "Haushaltsbuch Führen" statt "Haushaltsbuch führen".
@@ -28,7 +33,7 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   isPlainText = true
 
 [outputs]
-  home = ["HTML", "RSS", "SWJS"]
+  home = ["HTML", "SWJS"]  # RSS raus (disableKinds in hugo.toml oben)
 
 [markup]
   [markup.goldmark]
