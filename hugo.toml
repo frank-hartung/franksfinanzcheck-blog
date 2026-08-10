@@ -61,8 +61,8 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
   [params.homeInfoParams]
-    Title = "Willkommen bei FranksFinanzcheck"
-    Content = "💰 Geld sparen ohne Verzicht: Frugalismus-Tricks, Budgetplanung und clevere Vergleichstipps – jeden Tag ein neuer Artikel."
+    Title = "Willkommen bei FranksFinanzcheck! 👋"
+    Content = "💰 Geld sparen ohne Gürtel enger zu schnallen – genau darum geht es hier.\n\nJeden Tag erscheint ein neuer, verständlicher Ratgeber: **Strom, Gas und DSL günstiger**, Versicherungen richtig wählen, Konto & Karte ohne Gebührenfallen, dazu Frugalismus-Tricks und Budgetplanung, die wirklich im Alltag funktionieren. Ohne Fachchinesisch, ohne Verkaufsdruck – dafür mit konkreten Zahlen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen.\n\nStöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
 
   [[params.socialIcons]]
     name = "pinterest"
