@@ -63,6 +63,17 @@ def _is_protected(line: str) -> bool:
     return False
 
 
+# Definitions-Listen-Muster: Zeile beginnt mit "**Fett-Titel:**" (mit oder ohne
+# Listen-Marker davor). Das ist ein Aufzählungs-/Tipp-Stil, bei dem der ganze
+# Absatz als EINHEIT gehört – ein Umbruch nach dem Gedankenstrich zerreisst
+# die Definition. Wird deterministisch geschuetzt und zurueckgebaut.
+RE_LEAD = re.compile(r"^\s*(?:[-*]\s+)?\*\*[^*]+:\*\*")
+
+
+def _is_lead_definition(line: str) -> bool:
+    return bool(RE_LEAD.match(line))
+
+
 def _find_candidates(body: str) -> list[dict]:
     """Sammelt alle Kandidaten im Fließtext (außerhalb Schutzkontexte)."""
     lines = body.split("\n")
@@ -74,7 +85,7 @@ def _find_candidates(body: str) -> list[dict]:
                 in_faq = True
             elif re.match(r"^#{1,2}\s+", line):
                 in_faq = False
-        if in_faq or _is_protected(line):
+        if in_faq or _is_protected(line) or _is_lead_definition(line):
             continue
         is_broken = bool(RE_BROKEN_END.search(line))
         has_dash = bool(RE_DASH.search(line))
@@ -217,7 +228,8 @@ def self_heal(body: str) -> tuple[str, int]:
                 in_faq = True
             elif re.match(r"^#{1,2}\s+", line):
                 in_faq = False
-        if (in_faq or _is_protected(line)) and RE_BROKEN_END.search(line) and i + 1 < n:
+        if (in_faq or _is_protected(line) or _is_lead_definition(line)) \
+                and RE_BROKEN_END.search(line) and i + 1 < n:
             nxt = lines[i + 1].strip()
             if nxt and not RE_BROKEN_END.search(nxt) and not re.match(r"^#{1,6}\s+", nxt):
                 out.append(line.rstrip() + " " + nxt)
