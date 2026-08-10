@@ -24,6 +24,10 @@ permissions:
   contents: write
   issues: write
 
+concurrency:          # AUDIT-FIX
+  group: seo-weekly
+  cancel-in-progress: false
+
 jobs:
   seo:
     runs-on: ubuntu-latest
@@ -65,7 +69,8 @@ jobs:
             echo "Keine Keyword-Änderungen"
           else
             git commit -m "seo: LSI-Keywords für neue Artikel ergänzt (KI-Vorschläge)"
-            git push
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push  # AUDIT-FIX: Rebase-Schutz
           fi
 
       - name: Interne Verlinkung automatisch ausbauen
@@ -81,7 +86,8 @@ jobs:
             echo "Keine neuen internen Links (Struktur bereits dicht)."
           else
             git commit -m "seo: interne Verlinkung ausgebaut (kontextuelle Links)"
-            git push
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push  # AUDIT-FIX: Rebase-Schutz
           fi
 
       - name: Meta-Daten-Optimierung (Title/Description/Keywords)
@@ -104,7 +110,8 @@ jobs:
             echo "Keine Meta-Änderungen"
           else
             git commit -m "seo: Meta-Daten optimiert (Title/Description/Keywords)"
-            git push
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push  # AUDIT-FIX: Rebase-Schutz
           fi
 
       - name: Rechtschreib- & Groß-Klein-Prüfung aller Artikel (Top-Level)
@@ -151,7 +158,8 @@ jobs:
             echo "Keine Affiliate-Änderungen."
           else
             git commit -m "seo: Affiliate-Deep-Links korrigiert (vollautomatisch)"
-            git push
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push  # AUDIT-FIX: Rebase-Schutz
             echo "✅ Affiliate-Fixes gepusht"
           fi
 
@@ -172,7 +180,8 @@ jobs:
             echo "Keine Cover-Änderungen."
           else
             git commit -m "seo: Cover-Varianten nachgezogen (vollautomatisch)"
-            git push
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push  # AUDIT-FIX: Rebase-Schutz
             echo "✅ Cover-Fixes gepusht"
           fi
 
@@ -203,7 +212,8 @@ jobs:
             echo "Report unverändert"
           else
             git commit -m "seo: Meta-Report aktualisiert (vollautomatisch)"
-            git push
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push  # AUDIT-FIX: Rebase-Schutz
           fi
 
       - name: Issue bei verbleibenden Meta-Problemen (kein manuelles Sichten nötig)
@@ -273,7 +283,8 @@ jobs:
             echo "Keine Änderungen"
           else
             git commit -m "seo: Bing-Indexierungs-Status aktualisiert"
-            git push
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push  # AUDIT-FIX: Rebase-Schutz
           fi
 
       - name: Issue bei kritischen SEO-Problemen erstellen

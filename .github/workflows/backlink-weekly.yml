@@ -24,6 +24,10 @@ on:
 permissions:
   contents: write
 
+concurrency:          # AUDIT-FIX
+  group: backlink
+  cancel-in-progress: false
+
 jobs:
   backlink-scout:
     runs-on: ubuntu-latest
@@ -46,5 +50,6 @@ jobs:
             echo "Keine Änderungen – Report ist aktuell."
           else
             git commit -m "backlinks: wöchentlicher Scout-Report generiert"
-            git push
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push  # AUDIT-FIX: Rebase-Schutz
           fi

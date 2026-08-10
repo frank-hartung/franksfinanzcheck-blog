@@ -26,6 +26,11 @@ on:
       - "Quartalsweises Artikel-Update"
       - "Bot-Watchdog"
       - "Social-Media-AI"
+      # KRITISCHE LÜCKE (Audit 2026-08-10): Die wichtigsten Läufer fehlten!
+      - "Content-Engine v2"      # Herzstück! (alter Name "Automatische Content-Generierung" bleibt oben)
+      - "Pinterest-AI"           # Pins würden still ausfallen
+      - "Layout-AI"              # Layout-Regressionen still
+      - "FrankAutoOps-Report"    # Ops-Monitoring selbst
     types:
       - completed
 
