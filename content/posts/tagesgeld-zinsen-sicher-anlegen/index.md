@@ -16,8 +16,7 @@ kurzantwort: "Du suchst ein sicheres Tagesgeldkonto mit guten Zinsen. In der Reg
 ---Du suchst eine sichere Anlage für dein Geld? Ein Tagesgeldkonto bietet dir Flexibilität und ordentliche Zinsen. Dieser Ratgeber zeigt dir, worauf du achten musst, um das Beste aus deinem Ersparten herauszuholen.
 
 ## Was ist ein Tagesgeldkonto?
-Ein Tagesgeldkonto ist ein flexibles Sparkonto ohne feste Laufzeit und ohne Kündigungsfrist. Du kannst jederzeit Geld einzahlen und abheben –   
-die Zinsen werden meist monatlich oder vierteljährlich gutgeschrieben. Im Gegensatz zum Festgeld bleibst du flexibel, musst aber auch Zinsschwankungen akzeptieren.
+Ein Tagesgeldkonto ist ein flexibles Sparkonto ohne feste Laufzeit und ohne Kündigungsfrist. Du kannst jederzeit Geld einzahlen und abheben – die Zinsen werden meist monatlich oder vierteljährlich gutgeschrieben. Im Gegensatz zum Festgeld bleibst du flexibel, musst aber auch Zinsschwankungen akzeptieren.
 
 ## Die 5 wichtigsten Kriterien beim Tagesgeld-Vergleich
 1. **Zinssatz:** der Nominalzins – aktuell wieder attraktiv, aber genau hinsehen: Viele Banken zahlen "Lockzinsen" nur für die ersten 6 Monate.
@@ -34,8 +33,7 @@ die Zinsen werden meist monatlich oder vierteljährlich gutgeschrieben. Im Gegen
 | **Zinssicherheit** | Nicht garantiert | Garantiert |
 | **geeignet für** | Notgroschen, laufende Rücklagen | Längerfristig verfügbares Geld |
 
-**Faustregel:** der Notgroschen gehört aufs Tagesgeld. Geld, das du sicher 1–5 Jahre nicht brauchst, kann ins Festgeld –   
-dort gibt es meist etwas mehr Zins.
+**Faustregel:** der Notgroschen gehört aufs Tagesgeld. Geld, das du sicher 1–5 Jahre nicht brauchst, kann ins Festgeld – dort gibt es meist etwas mehr Zins.
 
 ## So holst du das Beste aus deinem Tagesgeld heraus
 1. **Zins-Hopping:** nach Ablauf der Zinsgarantie das Konto wechseln – der "Lockzins" der neuen Bank ist oft deutlich höher.
