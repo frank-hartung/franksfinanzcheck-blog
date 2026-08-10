@@ -14,11 +14,11 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst beim Wechsel deines Stromanbieters in der Regel zwischen 100 € und 300 € pro Jahr sparen. Ein Tarifwechsel kann innerhalb weniger Minuten erfolgen. Mit einer sorgfältigen Preisvergleichs-Checkliste kannst du die besten Tarife finden."
 social_posted: true
----Du willst deinen Strompreis senken? Durchschnittlich kannst du 200-300 Euro pro Jahr sparen, wenn du deinen Stromanbieter wechselst. Wer den Strom wechseln möchte, spart im Schnitt mehrere hundert Euro pro Jahr – Die meisten sitzen jahrelang im teuren Grundtarif ihres lokalen Versorgers, obwohl ein Wechsel nur wenige Minuten dauert.
+---Du willst deinen Strompreis senken? Durchschnittlich kannst du 200–300 Euro pro Jahr sparen, wenn du deinen Stromanbieter wechselst. Wer den Strom wechseln möchte, spart im Schnitt mehrere hundert Euro pro Jahr – Die meisten sitzen jahrelang im teuren Grundtarif ihres lokalen Versorgers, obwohl ein Wechsel nur wenige Minuten dauert.
 
 ## Warum sich ein Wechsel lohnt
 
-Der Unterschied zwischen Grundversorgung und günstigem Tarif liegt oft bei 15-25 %. Bei einem durchschnittlichen Vier-Personen-Haushalt mit 4.000 kWh Jahresverbrauch sind das schnell 200-300 Euro pro Jahr. Dein Aufwand: etwa 15 Minuten, einmal im Jahr.
+Der Unterschied zwischen Grundversorgung und günstigem Tarif liegt oft bei 15–25 %. Bei einem durchschnittlichen Vier-Personen-Haushalt mit 4.000 kWh Jahresverbrauch sind das schnell 200–300 Euro pro Jahr. Dein Aufwand: etwa 15 Minuten, einmal im Jahr.
 
 ## Schritt 1:<br>Verbrauch und Zählerstand ermitteln
 

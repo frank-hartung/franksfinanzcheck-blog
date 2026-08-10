@@ -33,7 +33,7 @@ Vergleiche Anbieter sorgfältig für den optimalen Tarif an deinem Standort. Pr�
 Die Preise variieren je nach Anbieter massiv. Suche gezielt nach Aktionen mit geringer Anschlussgebühr oder Gratis-Routern. Viele Firmen locken Wechsler mit extrem niedrigen Preisen im ersten Halbjahr. Berechne immer die Gesamtkosten über die vollen zwei Jahre Vertragslaufzeit. So erkennst du versteckte Preissprünge nach der Rabattphase sofort.
 
 ## Vor- und Nachteile eines DSL-Wechselbonus
-Ein DSL-Wechselbonus senkt deine effektiven Kosten im ersten Jahr massiv. Oft locken Anbieter zudem mit einem attraktiven Cashback DSL. Dennoch hat die Sache einen kleinen Haken. Du bindest dich meist für 24 Monate an den neuen Vertrag. – Ließ das Kleingedruckte zu den Auszahlungsfristen deshalb ganz genau.
+Ein DSL-Wechselbonus senkt deine effektiven Kosten im ersten Jahr massiv. Oft locken Anbieter zudem mit einem attraktiven Cashback DSL. Dennoch hat die Sache einen kleinen Haken. Du bindest dich meist für 24 Monate an den neuen Vertrag. Lies das Kleingedruckte zu den Auszahlungsfristen deshalb ganz genau.
 
 | Vorteil | Nachteil |
 |:--- |:--- |

@@ -100,7 +100,7 @@ Achte auf die Qualität des Wechselrichters beim Kauf. Bekannte Marken wie Hoymi
 
 Unterschätze niemals die Windlasten bei der Montage. Ein Solarmodul wirkt wie ein Segel und entwickelt bei Sturm enorme Kräfte. Nutze nur geprüfte Halterungen und befestige diese exakt nach Anleitung. Sicherheit geht vor, besonders wenn dein Balkon über einem Gehweg liegt.
 
-Kombiniere deine Anlage mit einem [günstigen Stromtarif](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1). So reduzierst du deine Fixkosten von zwei Seiten gleichzeitig. Weitere effektive Methoden findest du in unseren [20 Stromspar-Tipps](../../posts/strom-sparen-haushalt-20-tipps/) oder beim [Entlarven der Stromfresser](../../posts/stromfresser-im-haushalt-entlarven/).
+Kombiniere deine Anlage mit einem [günstigen Stromtarif]( 0  So reduzierst du deine Fixkosten von zwei Seiten gleichzeitig. Weitere effektive Methoden findest du in unseren [20 Stromspar-Tipps](../../posts/strom-sparen-haushalt-20-tipps/) oder beim [Entlarven der Stromfresser](../../posts/stromfresser-im-haushalt-entlarven/).
 
 ## Mit Speicher:<br>Lohnt sich der Mini-Akku?
 

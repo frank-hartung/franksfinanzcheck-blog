@@ -1,16 +1,16 @@
 ---
-title: "Die 50-30-20-Regel: Die perfekte Formel für deine Finanzen"
+title: "Die 50–30–20-Regel: Die perfekte Formel für deine Finanzen"
 description: "So strukturierst du dein Gehalt optimal: 50 % Fixkosten, 30 % Freizeit, 20 % Sparen. Die einfachste Budgetierungsmethode, Schritt für Schritt erklärt."
 date: 2026-08-04
 draft: false
-tags: ["Budgetierung", "50-30-20", "Haushaltsplanung"]
+tags: ["Budgetierung", "50–30–20", "Haushaltsplanung"]
 categories: ["Haushaltskasse & Budgetplanung"]
 pillar: "frugalismus"
 keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen", "Regel Rechner", "Haushaltsbuch Vorlage"]
 author: "Frank"
 cover:
-  image: "images/covers/50-30-20-regel-einfach-erklaert.jpg"
-  alt: "Die 50-30-20-Regel: Die perfekte Formel für deine Finanzen"
+  image: "images/covers/50–30–20-regel-einfach-erklaert.jpg"
+  alt: "Die 50–30–20-Regel: Die perfekte Formel für deine Finanzen"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du verteilst dein Gehalt in drei Teile: 50 % für Fixkosten, 30 % für Freizeitausgaben und 20 % für das Sparen. Diese Regel hilft dir, deine Finanzen effektiv zu planen. Mit 20 % deines Einkommens sparst du kontinuierlich für die Zukunft."
 social_posted: true
@@ -45,7 +45,7 @@ Das System zwingt dich zu einer klaren Priorisierung. Du deckst zuerst deine Leb
 
 In teuren Großstädten wie München oder Hamburg frisst die Miete oft mehr als die Hälfte des Lohns. Senke deine laufenden Kosten durch gezielte Budgetierung und Vertragswechsel. Ein neuer Stromanbieter oder ein optimierter DSL-Tarif sparen oft 200 bis 450 Euro jährlich. 
 
-Prüfe deine Versicherungen auf doppelte Leistungen und kündige überflüssige Policen. Oft zahlen Menschen für Versicherungen, die sie im Alltag gar nicht benötigen. Falls du die 50 Prozent aktuell deutlich reißt, starte vorerst mit einer 60-30-10-Aufteilung. Arbeite jedoch konsequent daran, deine Fixkosten durch Vergleiche zu reduzieren.
+Prüfe deine Versicherungen auf doppelte Leistungen und kündige überflüssige Policen. Oft zahlen Menschen für Versicherungen, die sie im Alltag gar nicht benötigen. Falls du die 50 Prozent aktuell deutlich reißt, starte vorerst mit einer 60–30–10-Aufteilung. Arbeite jedoch konsequent daran, deine Fixkosten durch Vergleiche zu reduzieren.
 
 ## Häufige Fragen
 

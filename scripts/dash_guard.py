@@ -110,10 +110,11 @@ def unmask(line: str, store: dict) -> str:
 
 
 def in_front_matter(idx: int, lines: list[str]) -> bool:
-    """Zeile idx innerhalb des Front-Matters (erste zwei --- Zeilen, inklusive)?"""
+    """Zeile idx innerhalb des Front-Matters? Fence-Erkennung mit
+    startswith('---'), damit auch geklebte Fences („---Text") gelten."""
     if lines and lines[0].strip() == "---":
         for j in range(1, min(len(lines), 60)):
-            if lines[j].rstrip() == "---":
+            if lines[j].startswith("---"):
                 return idx <= j          # 0..j = Front-Matter inkl. Schluss-Fence
     return False
 
@@ -128,8 +129,11 @@ def fix_r153(line: str) -> tuple[str, list[str]]:
     new = re.sub(r"(\S)–\s", r"\1 – ", new)
     # R3: Geviertstrich normalisieren ("—"/" — ")
     new = re.sub(r"\s*—\s*", " – ", new)
-    # R4: doppelte/dreifache Minus im Fließtext
-    new = re.sub(r"(\S)\s*-{2,3}\s*(\S)", r"\1 – \2", new)
+    # R4: doppelte/dreifache Minus zwischen Wörtern im Fließtext.
+    # Anker \w (statt \S): Wortgrenzen links+rechts – SCHÜTZT Zeilenanfänge wie
+    # „---Fence"/Markdown-HR/Listensequenzen (Bug-Fix 2026-08-10: R4 hatte
+    # geklebte Front-Matter-Fences „---Text" zu „- – Text" deformiert).
+    new = re.sub(r"(\w)\s*-{2,3}\s*(\w)", r"\1 – \2", new)
     # R1: gesetztes Minus als Gedankenstrich (" Wort - wort")
     new = re.sub(r"(\w) - ", r"\1 – ", new)
     new = re.sub(r" - (\w)", r" – \1", new)
@@ -138,6 +142,23 @@ def fix_r153(line: str) -> tuple[str, list[str]]:
     return new, notes
 
 
+# R7: Gedankenstrich direkt NACH Satzende-Punkt (Stil-Orphan, Fund 2026-08-10:
+# „…Vertrag. – Ließ …"). Entscheidung nach Folgezeichen:
+#   Großbuchstabe danach → neuer Satz, Strich weg:   „. – Deshalb" → „. Deshalb"
+#   Kleinbuchstabe danach → Apposition gehört in den Satz: „. – und" → „ – und"
+R7_UPPER = re.compile(r"([.!?]) – (?=[A-ZÄÖÜ0-9])")
+
+# R8 (Mikro-Tabelle): Imperativ-Schreibweise am Satzanfang (Fund im selben Satz:
+# „Ließ" = Präteritum, richtig ist „Lies"). Eng gefasst – trifft nie ein
+# legitimes „Dann ließ er …" (dort klein/mittendrin).
+R8_IMPERATIV = re.compile(r"(?<=[.!?] )Ließ (das|dein|deine|deinen|mein|meine|hier|bitte)")
+
+
+def fix_r7_r8(line: str) -> tuple[str, list[str]]:
+    new = R7_UPPER.sub(r"\1 ", line)                              # Groß: Strich weg
+    new = re.sub(r"([.!?]) – (?=[a-zäöü])", r" – ", new)          # klein: Punkt weg
+    new = R8_IMPERATIV.sub(lambda m: "Lies " + m.group(1), new)   # Ließ→Lies
+    return new, (["Satzende-/Imperativ-Regel (R7/R8)"] if new != line else [])
 BIS_PAT = re.compile(
     r"(?<!\d)(\d+(?:[.,]\d+)?)\s?[-–]\s?"              # Zahl + Strich (verbraucht)
     r"(?=(\d+(?:[.,]\d+)?)(?:\s?(?:Euro|%|Jahr|Monat|Tage|Prozent|€|km|kg|\b)))")
@@ -263,11 +284,19 @@ def process_file(path: Path) -> dict:
         if stripped.startswith("```"):
             in_code = not in_code
             out.append(line); continue
-        if (in_code or in_front_matter(i, lines)
-                or re.fullmatch(r"\s*[-|–:\s]*", line or "|")      # Tabellen-Separator
-                or stripped == "---"                                # Trennlinie
-                or stripped.startswith("<!--")):                    # HTML-Kommentar
-            out.append(line); continue
+        # GEKLEBTER FENCE („---Zahlst du …"): Prefix "---" immer schützen,
+        # angeschlossener Text IST Body und wird geregelt. Muss VOR der
+        # Front-Matter-Schutz-Abfrage stehen (die den Fence sonst ganz auslässt)!
+        fence_prefix = ""
+        if line.startswith("---") and len(line) > 3:
+            fence_prefix, line = "---", line[3:]
+            stripped = line.strip()
+        if in_code or (in_front_matter(i, lines) and not fence_prefix):
+            out.append(fence_prefix + line); continue
+        if (re.fullmatch(r"\s*[-|–:\s]*", stripped or "|")      # Tabellen-Separator
+                or stripped == "---"                            # Trennlinie
+                or stripped.startswith("<!--")):                # HTML-Kommentar
+            out.append(fence_prefix + line); continue
 
         is_heading = stripped.startswith("#")
         prefix = ""
@@ -280,6 +309,8 @@ def process_file(path: Path) -> dict:
         fixed, notes = fix_r153(masked)
         fixed, n5 = fix_r5(fixed)
         notes += n5
+        fixed, n78 = fix_r7_r8(fixed)
+        notes += n78
         fixed = unmask(fixed, store)
 
         if is_heading:
@@ -289,7 +320,7 @@ def process_file(path: Path) -> dict:
         if fixed != body and not is_heading and DO_FIX and not DRY_RUN:
             stats["R"] += len(notes)
         style_check(fixed, str(rel), i)
-        out.append(prefix + (fixed if (not is_heading) else body))
+        out.append(fence_prefix + prefix + (fixed if (not is_heading) else body))
 
     # Ebene 2: KI-Schiedsrichter über Stil-Funde (nur mit --ai und Keys)
     ki_changes = []
