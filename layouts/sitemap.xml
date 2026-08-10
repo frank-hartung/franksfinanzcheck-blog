@@ -1,0 +1,34 @@
+{{- /* ============================================================
+    sitemap.xml – Standard-Sitemap + die 6 Pillar-Ratgeber
+    ------------------------------------------------------------
+    Die Pillar-Seiten haben 'build: list: never' (Commit 6a1c81a,
+    damit sie nicht als Post-Karten in Listen erscheinen). Dadurch
+    fehlen sie auch in der Standard-Sitemap. Dieses Template erbt
+    das Hugo-Standardverhalten (.Data.Pages) und ergänzt die 6
+    Pillars explizit per site.GetPage.
+============================================================ */ -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{{- range .Data.Pages }}
+{{- if or .Permalink (and .Sitemap (ne .Sitemap.Disable true)) }}
+<url>
+  <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
+  <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}{{ with .Sitemap.ChangeFreq }}
+  <changefreq>{{ . }}</changefreq>{{ end }}{{ if ge .Sitemap.Priority 0.0 }}
+  <priority>{{ .Sitemap.Priority }}</priority>{{ end }}
+</url>
+{{- end }}
+{{- end }}
+{{- /* Die 6 Pillar-Ratgeber explizit ergänzen (fehlen wegen list: never) */}}
+{{- $pillars := slice "strom-sparen" "versicherungen" "mietwagen" "frugalismus" "internet-dsl" "konto-karten" }}
+{{- range $pillars }}
+  {{- with site.GetPage (printf "pillar/%s" .) }}
+<url>
+  <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
+  <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+  {{- end }}
+{{- end }}
+</urlset>
