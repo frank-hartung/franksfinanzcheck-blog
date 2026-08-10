@@ -115,6 +115,6 @@ Ja, das ist der Kern des Schutzes. Das Wasser muss von außen in das Gebäude ei
 **Kann ich die Versicherung jederzeit abschließen?**
 In der Regel ist der Abschluss jederzeit möglich. In akuten Hochwasserlagen lehnen Versicherer neue Anträge jedoch oft ab. Warte nicht auf die nächste Regenfront, sondern handle sofort.
 
-👉 **Jetzt Hausrat- und Elementarschutz vergleichen:** [**→ Jetzt vergleichen und sparen**](https://a. partner-versicherung. de/click. php? partner_id=47086&ad_id=15&deep=hausratversicherung)
+👉 **Jetzt Hausrat- und Elementarschutz vergleichen:** [**→ Jetzt vergleichen und sparen**](https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hausratversicherung)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

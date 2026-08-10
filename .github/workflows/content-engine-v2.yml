@@ -120,6 +120,27 @@ jobs:
           python3 scripts/check_uniqueness.py || echo "⚠ Uniqueness (nicht blockierend)"
           echo "== Affiliate-Links (auto-korrigieren) =="
           python3 scripts/affiliate_link_check.py --fix || echo "⚠ Affiliate-Check (nicht blockierend)"
+          echo "== Qualitäts-Score (FrankAutoOps, Threshold >= 0.85) =="
+          python3 - <<'PYEOF'
+          import glob, subprocess, sys, json, os
+          sys.path.insert(0, "scripts")
+          import quality_score as qs
+          files = sorted(glob.glob("content/posts/*/index.md"))
+          results = [qs.score_article(f) for f in files]
+          low = [r for r in results if r["verdict"] == "draft+autofix"]
+          review = [r for r in results if r["verdict"] == "human-review"]
+          print(f"Qualitäts-Score: {len(results)} Artikel | publish: {len(results)-len(low)-len(review)} | draft: {len(low)} | review: {len(review)}")
+          if review:
+              print(f"⚠ HUMAN REVIEW nötig: {[r['slug'] for r in review]}")
+          # Bei human-review: Artikel auf draft setzen (nicht live gehen)
+          for r in review:
+              p = f"content/posts/{r['slug']}/index.md"
+              c = open(p, encoding="utf-8").read()
+              if "draft: false" in c:
+                  open(p, "w", encoding="utf-8").write(c.replace("draft: false", "draft: true", 1))
+                  print(f"  → {r['slug']} auf draft gesetzt (Score {r['score']})")
+          PYEOF
+          || echo "⚠ Qualitäts-Score (nicht kritisch)"
           echo "== Cover-Validierung (auto-nachziehen) =="
           python3 scripts/check_covers.py --fix || echo "⚠ Cover-Varianten (nicht blockierend)"
           echo "== Kurzantworten (Featured-Snippet-Box) =="

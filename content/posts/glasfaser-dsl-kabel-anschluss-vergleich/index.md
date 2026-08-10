@@ -113,6 +113,6 @@ Für die meisten Haushalte reichen 100 Mbit/s: Streaming, Homeoffice und Surfen 
 **Wann lohnt sich der Wechsel zu Glasfaser?**
 Wenn Glasfaser verfügbar ist und du mehr als 100 Mbit/s brauchst, hohe Uploads hast oder langfristig zukunftssicher sein willst. Wer nur surft und streamt, kann bei DSL bleiben – der [Vergleich](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt, was sich rechnet.
 
-👉 **Jetzt DSL-, Kabel- und Glasfaser-Tarife vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
+👉 **Jetzt DSL-, Kabel- und Glasfaser-Tarife vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

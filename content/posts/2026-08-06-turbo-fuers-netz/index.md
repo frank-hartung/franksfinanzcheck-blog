@@ -50,6 +50,6 @@ Das Wichtigste in Kürze:
 * Ein Wechsel des DNS-Servers kann auch den Schutz vor Malware und Phishing-Angriffen verbessern.
 
 ---
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

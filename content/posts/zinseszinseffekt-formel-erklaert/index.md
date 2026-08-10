@@ -62,7 +62,7 @@ Der Zinseszinseffekt hat genau drei Stellschrauben – und ihre Wirkung ist übe
 
 **3. Die Rendite (Zinssatz):** Auch sie wirkt exponentiell. Der Unterschied zwischen 3 und 6 Prozent ist nach 30 Jahren enorm – bei 100 Euro monatlich: rund 58.000 Euro vs. 100.000 Euro.
 
-Die Praxis-Einordnung: Die Rendite kannst du nur begrenzt steuern (Aktienmarkt statt Sparbuch, Kosten senken), die Zeit ist bei späterem Start unwiederbringlich, und die Rate ist dein direktester Hebel. Deshalb: **Früh starten schlägt [mehr sparen](../../posts/sparquote-berechnen-und-steig/).**
+Die Praxis-Einordnung: Die Rendite kannst du nur begrenzt steuern (Aktienmarkt statt Sparbuch, Kosten senken), die Zeit ist bei späterem Start unwiederbringlich, und die Rate ist dein direktester Hebel. Deshalb: **Früh starten schlägt [mehr sparen](../../posts/sparquote-berechnen-und-steigern/).**
 
 ## Die Macht der Zeit:<br>Tabellen
 
@@ -123,6 +123,6 @@ Nein – die Rendite von Aktien ist keine Garantie, sondern eine historische Erw
 
 Der Zinseszinseffekt ist das Fundament jedes [Vermögensaufbaus](../../posts/sparquote-berechnen-und-steigern/) – und der [ETF-Sparplan für Einsteiger](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) das Werkzeug, das ihn nutzt. Für Kinder lohnt sich der Start besonders früh: [ETF-Sparplan für Kinder](../../posts/etf-sparplan-fuer-kinder-depot-eröffnen/). Alle Grundlagen-Themen: [Ratgeber Frugalismus](../../pillar/frugalismus/).
 
-👉 **Jetzt Tagesgeld- und Anlageangebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=tagesgeldvergleich)
+👉 **Jetzt Tagesgeld- und Anlageangebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

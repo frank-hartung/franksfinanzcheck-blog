@@ -48,7 +48,7 @@ Der Supermarkt ist ein Minenfeld für dein Budget. Ohne eine klare Liste greifst
 
 Nutze für deine täglichen Besorgungen echtes Bargeld. Nimm zum Beispiel nur 60 € oder 80 € für den Wocheneinkauf mit. Wenn das Geld in der Hand physisch weniger wird, kaufst du automatisch vorsichtiger ein. Digitale Zahlungen fühlen sich dagegen fast wie Spielgeld an.
 
-Bargeld schafft ein direktes Bewusstsein für den Wert deiner Arbeit. Du siehst genau, wie die Scheine aus deinem Portemonnaie verschwinden. Diese Hürde ist psychologisch viel höher als das bloße Vorhalten einer Karte. So kannst du effektiv **[Geld sparen](../../posts/versicherungen-kuendigen-diese-5-poli/) im Alltag**.
+Bargeld schafft ein direktes Bewusstsein für den Wert deiner Arbeit. Du siehst genau, wie die Scheine aus deinem Portemonnaie verschwinden. Diese Hürde ist psychologisch viel höher als das bloße Vorhalten einer Karte. So kannst du effektiv **[Geld sparen](../../posts/versicherungen-kuendigen-diese-5-policen/) im Alltag**.
 
 ## Trick 3:<br>Newsletter und Push-Nachrichten löschen
 
@@ -64,7 +64,7 @@ Warenkörbe in Online-Shops sind psychologische Werkzeuge. Meldungen wie "Nur no
 
 Manchmal schicken dir Händler nach einem Tag sogar einen extra Gutschein per Mail. Wenn du das Produkt dann nach deiner 48-Stunden-Bedenkzeit noch willst, wird es sogar günstiger. Du behältst die Kontrolle und lässt dich nicht hetzen. Geduld zahlt sich hier in barer Münze aus.
 
-Nutze Vergleichsportale wie [Check24](https://a. check24. net), um Preise objektiv zu prüfen. Oft ist das vermeintliche Schnäppchen bei einem anderen Anbieter dauerhaft günstiger. Ein kurzer Check von zwei Minuten verhindert teure Fehlentscheidungen durch Zeitdruck.
+Nutze Vergleichsportale wie [Check24](https://a.check24.net), um Preise objektiv zu prüfen. Oft ist das vermeintliche Schnäppchen bei einem anderen Anbieter dauerhaft günstiger. Ein kurzer Check von zwei Minuten verhindert teure Fehlentscheidungen durch Zeitdruck.
 
 ## Trick 5:<br>Kosten pro Nutzung knallhart berechnen
 
@@ -97,7 +97,7 @@ Neue Gewohnheiten brauchen Zeit, um sich in deinem Alltag zu festigen. Mit diese
 * **Woche 1:** Notiere jeden einzelnen Kauf und die dazugehörige Emotion. Sei ehrlich zu dir selbst.
 * **Woche 2:** Melde dich von allen Newslettern ab und installiere Shopping-Apps von deinem Handy deinstallieren.
 * **Woche 3:** Führe die 48-Stunden-Regel für jeden Kauf über 20 € ein. Kaufe Lebensmittel nur noch mit Liste.
-* **Woche 4:** Prüfe deine Versicherungen und Fixkosten bei [Partner-Versicherung](https://a. partner-versicherung. de). Das gesparte Geld fließt direkt auf dein Sparkonto.
+* **Woche 4:** Prüfe deine Versicherungen und Fixkosten bei [Partner-Versicherung](https://a.partner-versicherung.de). Das gesparte Geld fließt direkt auf dein Sparkonto.
 
 Am Ende des Monats wirst du feststellen, wie viel mehr Geld auf deinem Konto bleibt. Meistens sind das zwischen 150 € und 400 €, die du vorher unbemerkt ausgegeben hättest. Mehr Tipps zum bewussten Leben findest du in unserem [Frugalismus-Ratgeber](../../pillar/frugalismus/).
 
@@ -111,3 +111,7 @@ Lege das Produkt zurück in das Regal und verlasse für fünf Minuten das Gesch�
 
 **Helfen Kreditkarten-Hacks beim Sparen?**
 Eher nicht, denn Kreditkarten machen das Ausgeben zu einfach. Sie verschleiern den Schmerz beim Bezahlen durch den zeitlichen Verzug. Nutze lieber eine Debitkarte mit sofortiger Abbuchung oder eben klassisches Bargeld für volle Transparenz.
+
+👉 **Jetzt Girokonto-Angebote vergleichen und Gebühren sparen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
+
+*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

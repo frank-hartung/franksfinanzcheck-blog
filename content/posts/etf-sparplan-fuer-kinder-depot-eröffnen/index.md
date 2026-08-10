@@ -13,7 +13,7 @@ ai_provider: "Manuell (Content-Engine Blueprint A1)"
 kurzantwort: "Ein ETF-Sparplan für dein Kind startet ab 10 bis 25 Euro monatlich: Du eröffnest ein Kinderdepot bei einem günstigen Broker, richtest den Sparplan auf einen Welt-ETF ein und nutzt den Sparerpauschbetrag von 1.000 Euro des Kindes steuerfrei. Bei 50 Euro monatlich und 6 Prozent Rendite warten nach 18 Jahren rund 20.000 Euro auf den Nachwuchs."
 cover:
   image: "images/covers/etf-sparplan-fuer-kinder-depot-eröffnen.jpg"
-  alt: "ETF-Sparplan für Kinder: So legst du richtig an"
+  alt: "ETF-Sparplan für Kinder: So baust du sinnvoll Vermögen auf"
   caption: "Tipp von FranksFinanzcheck"
 ---
 Wenn dein Kind 18 wird, soll es einen möglichst guten Start ins Erwachsenenleben haben – finanziell, versteht sich. Das klassische Sparbuch bringt bei 2 Prozent Zinsen kaum etwas, und die meisten Banksparpläne fressen die Rendite durch Gebühren. Ein ETF-Sparplan ist der moderne Weg: kostengünstig, renditestark und mit Steuervorteilen, die viele Eltern übersehen.
@@ -110,6 +110,6 @@ Ja, und das ist sogar steuerlich clever: Schenkungen an Enkel sind bis 200.000 E
 
 Der ETF-Sparplan für Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die [Steuern auf ETF-Gewinne](../../posts/freistellungsauftrag-optimal-nutzen/) erklären, wie du den Pauschbetrag maximal ausschöpfst. Alle Banking-Themen: [Ratgeber Konto & Karten](../../pillar/konto-karten/).
 
-👉 **Jetzt kostenloses Konto mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=c24bank&cat=14)
+👉 **Jetzt kostenloses Konto mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

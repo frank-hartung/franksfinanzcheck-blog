@@ -65,6 +65,25 @@ SLUG_DEEP = {
     "tagesgeld-zinsen-sicher-anlegen": ("tagesgeldvergleich", "Tagesgeld-Vergleich"),
     # Versicherungen (CHECK24)
     "kfz-versicherung-wechseln": ("kfz-versicherung", "Kfz-Versicherung"),
+    # Zusaetzliche Artikel (thematisch korrekte Deep-Links)
+    "heizkosten-senken-10-massnahmen": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
+    "nachtspeicherheizung-wechseln-oder-behalten": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
+    "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
+    "5g-home-router-oder-dsl": ("handytarife", "Handytarif-Vergleich"),
+    "2026-08-10-dsl-wechselbonus-sichern": ("dsl-anbieterwechsel&cat=4", "DSL-Tarifvergleich"),
+    "flug-buchen-9-tricks-guenstige-tickets": ("flugvergleich", "Flugvergleich"),
+    "pauschalreise-buchen-bester-zeitpunkt": ("pauschalreisen-vergleich&cat=9", "Pauschalreisen-Vergleich"),
+    "urlaub-mit-kindern-guenstig-spartricks": ("pauschalreisen-vergleich&cat=9", "Pauschalreisen-Vergleich"),
+    "mietwagen-im-winter-schnaeppchen-tricks": ("mietwagen-preisvergleich&cat=10", "Mietwagen-Vergleich"),
+    "festgeld-oder-tagesgeld-2026": ("tagesgeldvergleich", "Tagesgeld-Vergleich"),
+    "dispozinsen-verstehen-alternativen": ("kreditvergleich", "Kreditvergleich"),
+    "gebuehrenfallen-banking-vermeiden": ("kreditkarte", "Kreditkarten-Vergleich"),
+    "reiseversicherung-richtig-kombinieren": ("kfz-versicherung", "Kfz-Versicherung"),
+}
+
+# Artikel, die Tarifcheck (partner-versicherung.de) nutzen statt CHECK24
+TARIF_SLUG_DEEP_EXTRA = {
+    "reiseversicherung-richtig-kombinieren": "reisekrankenversicherung",
 }
 
 # Pillar-Fallback: wenn der Slug nicht gemappt ist → Pillar-Default
@@ -158,6 +177,8 @@ def expected_target(post):
             return ("check24", entry[0], entry[1])
         return ("generic_ok", None, f"Pillar {slug}: kein Mapping – generisch erlaubt")
     # 1) Tarifcheck-Deep (Versicherungen)
+    if slug in TARIF_SLUG_DEEP_EXTRA:
+        return ("tarifcheck", TARIF_SLUG_DEEP_EXTRA[slug], f"Tarifcheck: {TARIF_SLUG_DEEP_EXTRA[slug]}")
     if slug in TARIF_SLUG_DEEP:
         return ("tarifcheck", TARIF_SLUG_DEEP[slug], f"Tarifcheck: {TARIF_SLUG_DEEP[slug]}")
     # 2) CHECK24-Slug-Deep

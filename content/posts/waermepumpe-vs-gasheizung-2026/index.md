@@ -61,6 +61,6 @@ Realistisch 20.000–35.000 € inklusive Installation – abzüglich Förderun
 ### Ist die Wärmepumpe bei Minusgraden zuverlässig?
 Ja – moderne Wärmepumpen arbeiten bis etwa -20 °C zuverlässig. 
 
-👉 **Jetzt Stromtarife für die Wärmepumpe vergleichen:** [**→ Strompreise prüfen**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
+👉 **Jetzt Stromtarife für die Wärmepumpe vergleichen:** [**→ Strompreise prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
 
 *Dieser Artikel enthält Affiliate-Links. Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

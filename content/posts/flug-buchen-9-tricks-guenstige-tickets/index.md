@@ -13,7 +13,7 @@ ai_provider: "Manuell (Masterplan Blueprint 28)"
 kurzantwort: "Die 9 bewährtesten Flug-Spartricks: 6 bis 8 Wochen vorher buchen, flexible Reisedaten nutzen, Abflughäfen vergleichen, in der Wochenmitte fliegen, Handgepäck-Tarife richtig lesen, versteckte Gebühren meiden und Preise mit dem Vergleichsportal tracken. So sparst du realistisch 20 bis 40 Prozent."
 cover:
   image: "images/covers/flug-buchen-9-tricks-guenstige-tickets.jpg"
-  alt: "Flug buchen: 9 Tricks für günstige Flugtickets"
+  alt: "Flug buchen Tipps: 9 Tricks für günstige Flugtickets"
   caption: "Tipp von FranksFinanzcheck"
 ---
 Flugpreise wirken oft wie ein Mysterium: Der Sitz neben dir hat vielleicht 100 Euro mehr oder weniger gekostet, obwohl ihr denselben Flug gebucht habt. Tatsächlich folgen Flugpreise klaren Mustern – wer sie kennt, zahlt deutlich weniger. Die gute Nachricht: Die 9 Tricks in diesem Artikel funktionieren bei jeder Buchung, ohne Glück und ohne Sonderangebote-Jagd.
@@ -119,6 +119,6 @@ Die Flugbuchung ist die halbe Reise – die andere Hälfte sind [Mietwagen](../.
 Bei einer Verspätung ab 3 Stunden oder einem Ausfall hast du Anspruch auf Ausgleichszahlungen (250 bis 600 Euro, je nach Flugdistanz) plus Betreuungsleistungen (Verpflegung, Hotel). Die Airline muss dich informieren – und du kannst die Entschädigung online über die [Fluggastrechte-Portale](../../posts/guenstige-fluege-spaetsommer-finden/) oder direkt bei der Airline geltend machen. Wichtig: Beweise sichern (Boardingkarte, Verspätungs-Mitteilung) und innerhalb der Frist (3 Jahre) einreichen.
 
 
-👉 **Jetzt Flüge vergleichen und günstig buchen:** [**→ Jetzt vergleichen bei CHECK24**](https://a. check24. net/misc/click. php? pid=80968&aid=18&deep=flugvergleich)
+👉 **Jetzt Flüge vergleichen und günstig buchen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=flugvergleich)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
