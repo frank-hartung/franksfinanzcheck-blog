@@ -1,17 +1,16 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 09.08.2026 21:54 Uhr (MESZ)
+> Automatisch aktualisiert: 10.08.2026 08:15 Uhr (MESZ)
 
 ## Heutiger Stand
 
-- **Veröffentlicht heute:** 2/2 Artikel
-- 2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau – Depot 2026: Dein smarter Start in den Vermögensaufbau
-- 2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen – Energiekosten senken mit intelligenten Heizsystemen
+- **Veröffentlicht heute:** 1/2 Artikel
+- 2026-08-10-dsl-wechselbonus-sichern – DSL-Wechselbonus sichern
 
 ## System
 
-- **Themenpool:** 161 Themen, **102 frei**
-- **Letzter Content-Commit:** noch keiner
+- **Themenpool:** 161 Themen, **101 frei**
+- **Letzter Content-Commit:** 00581d0 2026-08-10 content: Qualitäts-Fixes (Rechtschreibung, Grammatik, Cover, Polish)
 - **Tageslimit:** 2 (steuerbar per Variable MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen
