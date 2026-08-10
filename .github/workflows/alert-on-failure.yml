@@ -25,6 +25,7 @@ on:
       - "Wöchentliches Nach-Pinnen"
       - "Quartalsweises Artikel-Update"
       - "Bot-Watchdog"
+      - "Social-Media-AI"
     types:
       - completed
 

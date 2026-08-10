@@ -1,0 +1,63 @@
+# ============================================================
+#  SOCIAL-MEDIA-AI (automatisches Posten neuer Artikel)
+#
+#  Postet neue Artikel automatisch auf Mastodon (kostenlos) und
+#  optional LinkedIn. Läuft 2× täglich NACH den Content-Crons,
+#  damit frisch veröffentlichte Artikel zeitnah geteilt werden:
+#    - morgens 09:15 MESZ  (nach dem 08:10-Artikel)
+#    - abends  20:45 MESZ  (nach dem 19:40-Artikel)
+#
+#  Das Skript postet nur Artikel OHNE "social_posted: true" im
+#  Front-Matter und setzt das Flag danach – keine Doppelposts.
+#  Altbestand: einmalig lokal `python3 scripts/social_poster.py
+#  --mark-all-posted` ausführen & pushen (siehe Anleitung).
+#
+#  OHNE Token: Lauf endet sauber (exit 0) mit Setup-Anleitung –
+#  kein Fehler-Alerting. Setup: ANLEITUNG-SOCIAL-MEDIA.md
+#
+#  Manuell starten: Actions → „Social-Media-AI" → Run workflow
+# ============================================================
+name: Social-Media-AI
+
+on:
+  schedule:
+    - cron: "15 7 * * *"    # 09:15 MESZ (Sommerzeit!)
+    - cron: "45 18 * * *"   # 20:45 MESZ (Sommerzeit!)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: social-media
+  cancel-in-progress: false
+
+jobs:
+  social:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Neue Artikel auf Social Media posten
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_PERSON_URN: ${{ vars.LINKEDIN_PERSON_URN }}
+          SOCIAL_MAX_PRO_LAUF: ${{ vars.SOCIAL_MAX_PRO_LAUF || '4' }}
+        run: python3 scripts/social_poster.py
+
+      - name: Flags & Status committen
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nichts zu committen."
+          else
+            git commit -m "social: neue Artikel auf Social Media geteilt"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+            echo "✅ Social-Update gepusht"
+          fi

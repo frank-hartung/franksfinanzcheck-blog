@@ -17,3 +17,4 @@ scripts/__pycache__/
 .spellcheck_report.json
 .grammar_report.json
 .meta_report.json
+public/
