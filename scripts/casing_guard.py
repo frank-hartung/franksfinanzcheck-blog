@@ -49,6 +49,8 @@ ACRONYMS = {
     "kfz": "Kfz", "sim": "SIM", "sms": "SMS", "pin": "PIN", "tan": "TAN",
     "sepa": "SEPA", "nfc": "NFC", "usb": "USB", "lte": "LTE",
     "5g": "5G", "4g": "4G", "hdmi": "HDMI", "usb-c": "USB-C",
+    # Anglizismen-Nomen (kein Akronym, aber Nomen-Regel): Cashback groß
+    "cashback": "Cashback",
 }
 # Nomen, die bei Akronym-Direktkontakt durchkoppelt werden (Dudenkoalition):
 COUPLE_NOUNS = ("Tarif", "Tarife", "Tarifen", "Wechselbonus", "Anbieter", "Angebote",

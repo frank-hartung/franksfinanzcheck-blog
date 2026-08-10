@@ -33,7 +33,7 @@ Vergleiche Anbieter sorgfältig für den optimalen Tarif an deinem Standort. Pr�
 Die Preise variieren je nach Anbieter massiv. Suche gezielt nach Aktionen mit geringer Anschlussgebühr oder Gratis-Routern. Viele Firmen locken Wechsler mit extrem niedrigen Preisen im ersten Halbjahr. Berechne immer die Gesamtkosten über die vollen zwei Jahre Vertragslaufzeit. So erkennst du versteckte Preissprünge nach der Rabattphase sofort.
 
 ## Vor- und Nachteile eines DSL-Wechselbonus
-​Ein DSL-Wechselbonus senkt deine effektiven Kosten im ersten Jahr massiv. Oft locken Anbieter zudem mit einem attraktiven cashback DSL. Dennoch hat die Sache einen kleinen Haken. Du bindest dich meist für 24 Monate an den neuen Vertrag. – Ließ das Kleingedruckte zu den Auszahlungsfristen deshalb ganz genau.
+Ein DSL-Wechselbonus senkt deine effektiven Kosten im ersten Jahr massiv. Oft locken Anbieter zudem mit einem attraktiven Cashback DSL. Dennoch hat die Sache einen kleinen Haken. Du bindest dich meist für 24 Monate an den neuen Vertrag. – Ließ das Kleingedruckte zu den Auszahlungsfristen deshalb ganz genau.
 
 | Vorteil | Nachteil |
 |:--- |:--- |
@@ -44,7 +44,7 @@ Die Preise variieren je nach Anbieter massiv. Suche gezielt nach Aktionen mit ge
 Manche Boni erhältst du erst nach mehreren Monaten Laufzeit. Dokumentiere alle Zusagen während des Bestellprozesses für deine Unterlagen. Ein DSL-Wechselbonus lohnt sich fast immer bei Unzufriedenheit. Die Ersparnis gleicht die Mühe des Wechsels locker aus. Bleibe flexibel und wechsle nach Ablauf der Mindestlaufzeit einfach erneut.
 
 ## Wie funktioniert ein DSL-Wechselbonus?
-Der neue Provider zahlt den Bonus meist nach der ersten Abrechnung aus. Dies geschieht als Gutschrift auf dein Kundenkonto oder per Überweisung. Manche Firmen verrechnen den Betrag direkt mit den monatlichen Grundgebühren. So zahlst du in der Startphase effektiv 0 €. Ein cashback DSL erfordert oft den Upload deiner ersten Rechnung.
+Der neue Provider zahlt den Bonus meist nach der ersten Abrechnung aus. Dies geschieht als Gutschrift auf dein Kundenkonto oder per Überweisung. Manche Firmen verrechnen den Betrag direkt mit den monatlichen Grundgebühren. So zahlst du in der Startphase effektiv 0 €. Ein Cashback DSL erfordert oft den Upload deiner ersten Rechnung.
 
 Halte dich strikt an die Fristen für deine Unterlagen. Verpasst du den Zeitraum, verfällt dein Anspruch auf das Geld. Meist hast du nach der Aktivierung ca. 4 bis 8 Wochen Zeit. Der Anbieter prüft deine Daten und gibt die Zahlung frei. In der Regel landet das Geld nach etwa drei Monaten bei dir.
 
