@@ -19,8 +19,8 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: read
-  issues: write
+  contents: write   # AUDIT 2026-08-10: Backlog-Heilung schreibt
+  issues: read
 
 jobs:
   audit:
@@ -28,6 +28,25 @@ jobs:
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
+
+      # ---- Audit-Erweiterung (2026-08-10): Laengen-Backlog heilen (3/Woche) ----
+      - name: Laengen-Backlog heilen (Length-Guard, 3 Artikel pro Woche)
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/length_guard.py --fix --ai --backlog 3
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Artikel zu heilen – Bestand im Korridor."
+          else
+            git commit -m "content: Laengen-Heilung Backlog (KI, verifiziert) + LENGTH-REPORT"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push || { sleep 20; git pull --rebase origin main && git push; }
+          fi
 
       - name: Audit ausführen (Log wird gespeichert)
         id: audit

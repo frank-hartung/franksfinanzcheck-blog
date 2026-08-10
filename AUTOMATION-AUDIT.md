@@ -54,7 +54,7 @@ Empfehlung: in `scripts/_archiv/` verschieben oder im Kopf als „manuell" kennz
 ## 5. Was noch fehlt (Priorisierung)
 
 **P1 – bald sinnvoll:**
-- [ ] **Dependabot für GitHub Actions** (Versions-Updates der Actions – 3 Zeilen YAML) → `.github/dependabot.yml`
+- [x] **Dependabot für GitHub Actions** – ERLEDIGT 2026-08-10 (`.github/dependabot.yml`, wöchentlich Mo 07:00 MESZ)
 - [ ] **Uptime-Check** der Live-Domain (6h-Cron, `curl` auf franksfinanzcheck.de → Issue bei Ausfall; ergänzt Watchdog, der ja nur „Bot schweigt" prüft)
 - [ ] Alt-Workflow `daily-content.yml` **löschen** (ist deaktiviert & verwirrt nur noch; History bleibt im Git)
 

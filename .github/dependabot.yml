@@ -1,0 +1,16 @@
+# Dependabot – hält die GitHub-Actions in den Workflows automatisch aktuell.
+# P1 aus AUTOMATION-AUDIT.md (2026-08-10). Erstellt wöchentliche PRs, die du
+# nur noch mergen musst (oder auto-mergen lassen kannst).
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "05:00"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(deps)"
+    labels: ["dependencies"]
