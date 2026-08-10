@@ -27,6 +27,20 @@
 </div>
 {{- end -}}
 
+{{- /* ---------- Newsletter-Anmeldung (Footer, nur Inhaltsseiten) ---------- */ -}}
+{{- /* News (10.08.2026): Button erscheint nur, wenn der Param newsletterFormUrl
+       in hugo.toml gesetzt ist (Brevo gehostetes DOI-Formular). */ -}}
+{{- with site.Params.newsletterFormUrl -}}
+<div class="newsletter-footer" style="text-align:center; margin: 16px 0 6px; padding: 14px 10px; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <span style="display:block; font-weight:600; color:var(--primary); margin-bottom:6px;">📬 Keinen Spartipp mehr verpassen?</span>
+  <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
+     title="Zum kostenlosen Newsletter von FranksFinanzcheck anmelden"
+     style="display:inline-flex; align-items:center; gap:8px; background:#0f6049; color:#fff; padding:9px 18px; border-radius:8px; text-decoration:none; font-weight:600; font-size:.95em;">
+    Jetzt Newsletter abonnieren – 1 Mail/Tag, jederzeit kündbar
+  </a>
+</div>
+{{- end -}}
+
 <div style="text-align:center; margin: 8px 0;">
   <a href="#" onclick="ffConsentShow(true);return false;" title="Cookie-Einstellungen öffnen"
      style="color:var(--secondary); text-decoration:underline; font-size:.9em;">Cookie-Einstellungen</a>

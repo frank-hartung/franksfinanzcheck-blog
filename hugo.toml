@@ -62,6 +62,8 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   pinterestVerify = "e238ffd88bd085648a14bd1d52d72405"
   mastodonUrl    = "https://mastodon.social/@FranksFinanzcheck"
   mastodonUser   = "@FranksFinanzcheck@mastodon.social"
+  # URL des gehosteten Brevo-Anmeldeformulars (leer = Button unsichtbar):
+  newsletterFormUrl = ""
   bingVerify = "5079875E367065FE09E09FC61BC077C6"
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
