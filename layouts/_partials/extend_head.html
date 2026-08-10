@@ -24,6 +24,12 @@
 {{- with site.Params.bingVerify -}}
 <meta name="msvalidate.01" content="{{ . }}">
 {{- end -}}
+{{- with site.Params.mastodonUrl -}}
+<link rel="me" href="{{ . }}">
+{{- end -}}
+{{- with site.Params.mastodonUser -}}
+<meta name="fediverse:creator" content="{{ . }}">
+{{- end -}}
 
 {{- /* ---------- Google Fonts: SELBST GEHOSTET (kein Drittanbieter) ---------- */ -}}
 {{- /* Die Latin-woff2-Dateien liegen in static/fonts/ und werden DIREKT von
