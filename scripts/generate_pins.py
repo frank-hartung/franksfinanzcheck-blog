@@ -109,7 +109,13 @@ def mark_pinned(post):
 def main():
     dry_run = "--dry-run" in sys.argv
     list_boards = "--list-boards" in sys.argv
-    token = os.environ.get("PINTEREST_ACCESS_TOKEN", "").strip()
+    # Token-Priorität: 1) Auto-Refresh (pinterest_auth.py) 2) Env-Secret
+    try:
+        import pinterest_auth
+        token = pinterest_auth.get_access_token() or os.environ.get("PINTEREST_ACCESS_TOKEN", "").strip()
+    except Exception as _auth_err:
+        print(f"⚠ Pinterest-Token-Refresh übersprungen ({_auth_err}) – nutze Env-Token.")
+        token = os.environ.get("PINTEREST_ACCESS_TOKEN", "").strip()
     board_id = os.environ.get("PINTEREST_BOARD_ID", "").strip()
 
     if list_boards:

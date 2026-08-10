@@ -40,9 +40,13 @@ jobs:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
+      - name: Krypto-Bibliothek für Token-Auto-Refresh installieren
+        run: pip install -q cryptography
+
       - name: Artikel bei Pinterest nachpinnen
         env:
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
           PINTEREST_BOARD_ID: ${{ vars.PINTEREST_BOARD_ID }}
           BLOG_BASE_URL: "https://franksfinanzcheck.de"
         run: python3 scripts/generate_pins.py

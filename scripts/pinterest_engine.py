@@ -35,7 +35,15 @@ from post_utils import list_post_paths  # noqa: E402
 
 BASE_URL = os.environ.get("BLOG_BASE_URL", "https://franksfinanzcheck.de")
 API = "https://api.pinterest.com/v5"
-TOKEN = os.environ.get("PINTEREST_ACCESS_TOKEN", "")
+# Token-Priorität: 1) Auto-Refresh aus data/pinterest_tokens.enc (pinterest_auth.py –
+# Token läuft nach 30 Tagen ab, refresh hält ihn automatisch am Leben)
+# 2) Fallback: klassisches Secret PINTEREST_ACCESS_TOKEN
+try:
+    import pinterest_auth
+    TOKEN = pinterest_auth.get_access_token() or os.environ.get("PINTEREST_ACCESS_TOKEN", "")
+except Exception as _auth_err:
+    print(f"⚠ Pinterest-Token-Refresh übersprungen ({_auth_err}) – nutze Env-Token.")
+    TOKEN = os.environ.get("PINTEREST_ACCESS_TOKEN", "")
 BOARD_ID = os.environ.get("PINTEREST_BOARD_ID", "")
 ROTATE_DAYS = int(os.environ.get("PINTEREST_ROTATE_DAYS", "60"))
 QUEUE_FILE = os.path.join(BLOG_DIR, "data", "pin_queue.yaml")
