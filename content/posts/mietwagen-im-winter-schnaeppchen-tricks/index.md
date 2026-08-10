@@ -26,8 +26,7 @@ Die Preise folgen der Nachfrage: Im Sommer sind die Flotten der Vermieter ausgeb
 
 Besonders günstig sind Mietwagen in Städten ohne Wintersport: Flughäfen im Mittelmeerraum oder in Nordeuropa haben im Winter Leerstände. Wer einen Zwischenstopp oder eine Städtereise mit Mietwagen plant, profitiert doppelt.
 
-Wichtig: In Skigebieten selbst (zum Beispiel Innsbruck, Salzburg, Zürich im Winter) sind die Preise höher –   
-dort lohnt der Vergleich mit der Anmietung am Flughafen der Region.
+Wichtig: In Skigebieten selbst (zum Beispiel Innsbruck, Salzburg, Zürich im Winter) sind die Preise höher – dort lohnt der Vergleich mit der Anmietung am Flughafen der Region.
 
 ## Trick 1:<br>Abholzeitpunkt clever wählen
 
@@ -60,8 +59,7 @@ Tipp: Achte auf die Kofferraumgröße – vier Personen mit Skiausrüstung brauc
 
 Die Tankregel ist der Klassiker der Mietwagen-Spartricks: Nimm den Tarif „voll zu voll" – du bekommst das Auto mit vollem Tank und gibst es voll wieder zurück. Der Vorteil: Du zahlst nur den Sprit, den du wirklich verbrauchst, und vermeidest die oft überteuerten Tank-Pakete der Vermieter (bis zu 2 Euro pro Liter Aufpreis).
 
-Die Regeln für den Winter: Die Tankstelle vor der Rückgabe suchen (nicht im Skigebiet –   
-dort sind die Preise oft 20 Cent höher), und den Beleg aufbewahren. Bei Kälte verbraucht das Auto übrigens mehr Sprit (Motorwarmlauf, Heizung, Licht) – plane den Tankbedarf großzügig.
+Die Regeln für den Winter: Die Tankstelle vor der Rückgabe suchen (nicht im Skigebiet – dort sind die Preise oft 20 Cent höher), und den Beleg aufbewahren. Bei Kälte verbraucht das Auto übrigens mehr Sprit (Motorwarmlauf, Heizung, Licht) – plane den Tankbedarf großzügig.
 
 ## Trick 5:<br>Der richtige Buchungszeitpunkt
 

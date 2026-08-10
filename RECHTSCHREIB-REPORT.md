@@ -1,12 +1,10 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am … – 79 Artikel geprüft, 12 Funde, 9 korrigiert, 3 offen.
+> **Automatisch** erzeugt am … – 80 Artikel geprüft, 2 Funde, 1 korrigiert, 1 offen.
 
 ## Offene Punkte
 
-- `Unbekanntes Wort: „Einmalgutschrift“ (Vorschläge: –)`
-- `Unbekanntes Wort: „leistungsstärkeren“ (Vorschläge: –)`
-- `Description endet ohne Satzzeichen – Punkt ergänzen`
+- `Unbekanntes Wort: „stressfreien“ (Vorschläge: –)`
 
 ---
 *Erzeugt von scripts/spellcheck.py*

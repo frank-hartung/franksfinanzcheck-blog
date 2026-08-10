@@ -1,11 +1,11 @@
 # 🔗 Affiliate-Link-Report
 
-> **Automatisch** – 79 Posts geprüft, 78 mit Problemen, 0 Links korrigiert.
+> **Automatisch** – 80 Posts geprüft, 79 mit Problemen, 0 Links korrigiert.
 
 ## Zusammenfassung
 
-- ✅ Korrekt: 1/79
-- ❌ Mit Problemen: 78
+- ✅ Korrekt: 1/80
+- ❌ Mit Problemen: 79
 - 🔧 Korrigiert (--fix): 0
 
 ## ❌ Probleme
@@ -59,6 +59,9 @@
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### 2026-08-10-dsl-wechselbonus-sichern
+- ❌ KEIN Affiliate-Link vorhanden
+
+### 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### 50-30-20-regel-einfach-erklaert
