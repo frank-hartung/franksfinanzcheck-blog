@@ -1,12 +1,12 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 10.08.2026 17:14 Uhr (MESZ)
+> Automatisch aktualisiert: 10.08.2026 19:42 Uhr (MESZ)
 
 ## Heutiger Stand
 
 - **Veröffentlicht heute:** 2/2 Artikel
 - 2026-08-10-dsl-wechselbonus-sichern – DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
-- 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas – Sicher heizen: So schützt dich eine Preisgarantie Gas
+- 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas – Sicher heizen: So schützt dich eine Gaspreisgarantie
 
 ## System
 
