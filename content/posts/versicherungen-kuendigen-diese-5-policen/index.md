@@ -15,6 +15,7 @@ cover:
   image: "images/covers/versicherungen-kuendigen-diese-5-policen.jpg"
   alt: "Versicherungen kündigen: Diese 5 Policen brauchst du nicht"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 Der durchschnittliche deutsche Haushalt gibt rund 2.900 Euro pro Jahr für Versicherungen aus – und ein Teil davon ist rausgeworfenes Geld. Viele Policen wurden vor Jahren abgeschlossen, doppeln sich mit anderen Verträgen oder decken Risiken ab, die es gar nicht wert sind, versichert zu werden.
 

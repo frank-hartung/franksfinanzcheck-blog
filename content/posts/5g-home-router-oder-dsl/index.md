@@ -15,6 +15,7 @@ cover:
   image: "images/covers/5g-home-router-oder-dsl.jpg"
   alt: "5G-Home statt DSL: Für wen sich mobiles Internet lohnt"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 Wenn dein DSL-Anschluss nur 16 oder 50 Mbit/s schafft, während in der Stadt Glasfaser üblich ist, kennst du das Gefühl der Internet-Benachteiligung. Der 5G-Home-Router verspricht die Lösung: schnelles Internet über den Mobilfunk, ohne Kabelverlegung und ohne lange Wartezeit.
 

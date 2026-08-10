@@ -15,6 +15,7 @@ cover:
   image: "images/covers/router-kaufen-oder-mieten-rechnung.jpg"
   alt: "Router kaufen oder mieten: Was sich wirklich rechnet"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 Die Router-Miete gehört zu den unscheinbarsten Kostenfallen im Internetvertrag. Vier bis sechs Euro pro Monat klingen harmlos – aber auf die typische Vertragslaufzeit von 24 Monaten summiert sich das auf 100 bis 150 Euro. Geld für ein Gerät, das du nach der Vertragszeit meist ohnehin zurückgeben musst.
 

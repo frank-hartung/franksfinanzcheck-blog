@@ -17,6 +17,7 @@ cover:
   alt: "Turbo fürs Netz: DNS-Wechsel für schnelleres Internet"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst dein Internet um bis zu 20 % beschleunigen, indem du den DNS-Server wechselst. Ein Wechsel zu einem kostenlosen Anbieter wie Google Public DNS oder Cloudflare DNS kann helfen. Mit wenigen Schritten kannst du deinen DNS-Server ändern und somit deine Online-Geschwindigkeit erhöhen."
+social_posted: true
 ---Wenn du täglich mit dem Internet arbeitest, kennst du das Gefühl, wenn die Verbindung plötzlich langsamer wird. Du wartest auf die Ladung von Webseiten, die Übertragung von Dateien verzögert sich und du fragst dich, ob das Problem am eigenen Internetanbieter oder am eigenen Gerät liegt. Ein einfacher Wechsel des DNS-Servers kann helfen, um die Internetgeschwindigkeit zu verbessern.
 
 ## Was ist ein DNS-Server?

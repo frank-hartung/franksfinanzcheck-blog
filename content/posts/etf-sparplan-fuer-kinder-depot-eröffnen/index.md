@@ -15,6 +15,7 @@ cover:
   image: "images/covers/etf-sparplan-fuer-kinder-depot-eröffnen.jpg"
   alt: "ETF-Sparplan für Kinder: So baust du sinnvoll Vermögen auf"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 Wenn dein Kind 18 wird, soll es einen möglichst guten Start ins Erwachsenenleben haben – finanziell, versteht sich. Das klassische Sparbuch bringt bei 2 Prozent Zinsen kaum etwas, und die meisten Banksparpläne fressen die Rendite durch Gebühren. Ein ETF-Sparplan ist der moderne Weg: kostengünstig, renditestark und mit Steuervorteilen, die viele Eltern übersehen.
 

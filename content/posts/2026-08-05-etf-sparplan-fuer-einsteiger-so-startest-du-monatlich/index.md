@@ -15,6 +15,7 @@ cover:
   alt: "ETF-Sparplan für Einsteiger: So startest du monatlich"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst mit einem monatlichen Betrag von ca. 50–100 € in einen ETF-Sparplan investieren. Dieser Betrag kann langfristig zu einem soliden Vermögensaufbau beitragen. Regelmäßiges Investieren in einen ETF-Sparplan kann auch mit nur 25 € pro Monat starten."
+social_posted: true
 ---Schon mit 25 € im Monat legst du den Grundstein für dein späteres Vermögen. Viele Menschen schieben den ersten Schritt jahrelang auf und verschenken so wertvolle Zinsen. Ich habe zu Beginn selbst Fehler bei der Broker-Wahl gemacht, die dich heute unnötiges Geld kosten würden. Erfahre hier, wie ein ETF-Sparplan für Einsteiger: So startest du monatlich funktioniert und worauf du achten musst.
 
 ## Warum ein ETF-Sparplan?

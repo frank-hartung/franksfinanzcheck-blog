@@ -15,6 +15,7 @@ cover:
   image: "images/covers/wlan-verbessern-ohne-neue-hardware.jpg"
   alt: "WLAN verbessern: 12 praktische Tipps ohne neue Hardware"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 Bevor du 100 Euro für einen neuen Router oder [WLAN-Verstärker](../../posts/wlan-verstaerker-vs-mesh-wlan/) ausgibst, solltest du wissen: Die Hälfte aller WLAN-Probleme lässt sich mit Einstellungen und Tricks lösen – kostenlos. Oft liegt es nicht an der Hardware, sondern an Standort, Frequenzwahl oder veralteter Software.
 

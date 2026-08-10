@@ -15,6 +15,7 @@ cover:
   image: "images/covers/heizkosten-senken-10-massnahmen.jpg"
   alt: "Heizkosten senken: 10 Maßnahmen mit schneller Amortisation"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---Heizen verschlingt rund 70 % deiner Energie im Haushalt. Hier schlummert dein größtes Sparpotenzial, wenn du die richtigen Hebel kennst. Du kannst deine **Heizkosten senken**, ohne auf wohlige Wärme zu verzichten. Gehe dabei strategisch vor: Erst optimierst du dein Verhalten, dann investierst du gezielt in Technik.
 
 Diese zehn Maßnahmen sind nach ihrer Wirkung und dem nötigen Aufwand sortiert. Die meisten Schritte amortisieren sich bereits innerhalb einer einzigen Heizsaison. So nutzt du dein Budget optimal aus und schützt dich vor hohen Nachzahlungen.

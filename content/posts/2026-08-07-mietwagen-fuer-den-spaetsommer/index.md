@@ -17,6 +17,7 @@ cover:
   alt: "Mietwagen im Spätsommer: Günstig buchen und sparen"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst ca. 10-20 % deines Mietwagen-Budgets sparen, wenn du deinen Wagen im Voraus buchst. Im Spätsommer sind die Preise in der Regel günstiger als in der Hochsaison. Jetzt buchen und bis zu 50 € pro Woche sparen, das lohnt sich."
+social_posted: true
 ---Sparst du bei deiner nächsten Reise bis zu 30 Prozent? Der Spätsommer ist die ideale Zeit für Schnäppchenjäger auf vier Rädern. Wer clever vergleicht, schont sein reise Budget spürbar. Du genießt leere Straßen und zahlst oft nur einen Bruchteil der Preise aus der Hauptsaison. In der Regel sinken die Raten ab September um ca. 15 bis 40 € pro Miettag.
 
 ## Die Vorteile eines Mietwagens

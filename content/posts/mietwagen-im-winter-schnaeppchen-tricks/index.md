@@ -15,6 +15,7 @@ cover:
   image: "images/covers/mietwagen-im-winter-schnaeppchen-tricks.jpg"
   alt: "Mietwagen im Winter: Die besten Schnäppchen-Tricks"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 Der Mietwagen im Winter ist das bestgehütete Schnäppchen-Geheimnis der Reisebranche. Während die Preise im Sommer durch die Decke gehen, fallen sie ab November drastisch – in vielen Destinationen um bis zu 60 Prozent. Wer eine Skireise oder einen Winterurlaub plant, kann mit ein paar Tricks richtig viel [Geld sparen](../../posts/versicherungen-kuendigen-diese-5-policen/).
 

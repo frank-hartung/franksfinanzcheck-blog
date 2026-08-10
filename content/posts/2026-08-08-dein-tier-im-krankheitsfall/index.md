@@ -15,6 +15,7 @@ cover:
   alt: "Tierversicherung: Schutz für dein Tier im Krankheitsfall"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Eine Tierversicherung deckt in der Regel 50 bis 90 % der Tierarztkosten ab. So kannst du dich auf die Genesung deines Tieres konzentrieren, anstatt dich um die Kosten zu sorgen. Mit einer monatlichen Prämie von ca. 20 € bis 50 € schützt du dein Tier und deine Finanzen."
+social_posted: true
 ---Eine Not-Operation am Sonntagabend kostet dich schnell über 2.000 €. Solche Rechnungen belasten dein Konto massiv und kommen oft völlig unerwartet. Eine Tierversicherung übernimmt dieses finanzielle Risiko für dich. So sicherst du die medizinische Versorgung deines Lieblings dauerhaft ab.
 
 ## Was ist eine Tierversicherung?

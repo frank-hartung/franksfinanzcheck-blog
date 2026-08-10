@@ -13,6 +13,7 @@ cover:
   alt: "Wärmepumpe vs. Gasheizung: Was sich 2026 wirklich lohnt"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst mit einer Wärmepumpe langfristig etwa 30 % bis 50 % der Heizkosten sparen. Die Förderung für Wärmepumpen ist in der Regel höher als für Gasheizungen. Eine Wärmepumpe kann sich daher bereits nach 5 bis 10 Jahren amortisieren."
+social_posted: true
 ---Du stehst 2026 vor einer wichtigen Entscheidung: Soll es eine Wärmepumpe oder eine Gasheizung sein? Die neue Heizungsregel schreibt erneuerbare Heiztechnik vor, die Gaspreise steigen und die Förderung für Wärmepumpen ist attraktiv. 
 
 ## Die Ausgangslage 2026

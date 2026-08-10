@@ -15,6 +15,7 @@ cover:
   image: "images/covers/reiseversicherung-richtig-kombinieren.jpg"
   alt: "Reiseversicherung: Diese Kombination ist die richtige"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 Vor jeder Reise stellt sich dieselbe Frage: Welche Versicherung brauche ich – und welche ist rausgeworfenes Geld? Die Reiseportale bieten beim Buchen gleich das „komplette" Versicherungspaket an, und die Versicherer verkaufen Bausteine, die sich bei genauem Hinsehen oft doppeln oder überflüssig sind.
 

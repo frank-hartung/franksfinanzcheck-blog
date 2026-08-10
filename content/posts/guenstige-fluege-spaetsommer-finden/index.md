@@ -13,6 +13,7 @@ cover:
   alt: "Günstige Flüge im Spätsommer: 7 Tricks zum Geld sparen"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du sparst am meisten, wenn du deine Flüge 2-3 Monate im Voraus buchst. Flexible Daten und eine offene Reisezielwahl helfen dir, bessere Preise zu finden. In der Regel kannst du so ca. 20 % bis 30 % des Flugpreises sparen."
+social_posted: true
 ---Du sparst bei deiner Reise im Spätsommer bis zu 40 Prozent, wenn du den perfekten Buchungszeitpunkt nutzt. Viele Reisende zahlen unnötig drauf, weil sie typische Preisfallen übersehen. Mit gezielten Strategien und einem präzisen **Flugvergleich** sicherst du dir die besten Plätze zum kleinen Preis. So bleibt am Ende deutlich mehr Geld in deiner Urlaubskasse.
 
 ### Das Wichtigste in Kürze
