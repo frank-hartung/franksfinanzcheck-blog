@@ -1,13 +1,8 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-08-11 16:53 UTC · Modus: FIX
+**Stand:** 2026-08-11 17:08 UTC · Modus: FIX
 
-## ✅ Automatisch korrigiert (4 Dateien)
-
-- `content/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/index.md`: Regel-Fixes 3, KI-Umformulierungen 0
-- `content/posts/2026-08-06-turbo-fuers-netz/index.md`: Regel-Fixes 1, KI-Umformulierungen 0
-- `content/posts/2026-08-07-mietwagen-fuer-den-spaetsommer/index.md`: Regel-Fixes 5, KI-Umformulierungen 0
-- `content/posts/2026-08-08-dein-tier-im-krankheitsfall/index.md`: Regel-Fixes 1, KI-Umformulierungen 0
+🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
 
 ## 🎓 Stil-Hinweise (Ebene 2, nur Info bzw. mit --ai aktiv)
 
