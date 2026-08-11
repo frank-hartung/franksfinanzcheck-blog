@@ -2,7 +2,7 @@
 title: "Urlaubskasse aufbessern: 7 Spartipps für den Sommerurlaub"
 description: "Urlaubskassen aufbessern mit 7 erprobten Spartipps: früh buchen, smart vergleichen und bei Ausflügen sparen – so bleibt Geld übrig."
 date: 2026-08-04
-draft: false
+draft: true
 tags: ["Urlaub sparen", "Reisebudget", "Günstig reisen"]
 categories: ["Reisebudget & Mietwagen"]
 pillar: "mietwagen"

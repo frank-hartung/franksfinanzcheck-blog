@@ -1,18 +1,18 @@
 {
  "total": 78,
- "errors": 70,
- "fixed": 0,
+ "errors": 77,
+ "fixed": 1,
  "posts": [
   {
    "slug": "frugalismus",
    "title": "Frugalismus: Der große Ratgeber für finanzielle Fr",
    "pillar": "",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "internet-dsl",
@@ -63,44 +63,44 @@
    "title": "Versicherungen: Der große Ratgeber für den richtig",
    "pillar": "",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich",
    "title": "ETF-Sparplan für Einsteiger: So startest du monatl",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "2026-08-06-frugalismus-im-alltag",
    "title": "Frugalismus im Alltag: So sparst du jeden Monat ba",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "2026-08-07-frugalismus-fuer-den-erfolg",
    "title": "Frugalismus für den Erfolg:<br> Der Weg in die Fre",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen",
@@ -158,20 +158,18 @@
    "ok": false
   },
   {
-   "slug": "2026-08-11-preisgarantie-gas-so-schuetzt-du-dich-vor-preiserhoehungen",
-   "title": "Preisgarantie Gas: So schützt du dich vor Preiserh",
+   "slug": "2026-08-11-gaspreisschock-so-nutzt-du-die-preisgarantie-gas-richtig",
+   "title": "Gaspreisschock? So nutzt du die Preisgarantie Gas ",
    "pillar": "konto-karten",
-   "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
-   ],
+   "fixed": 1,
+   "errors": [],
    "infos": [],
-   "ok": false
+   "ok": true
   },
   {
-   "slug": "2026-08-11-preisgarantie-gas-so-sicherst-du-dich-gegen-preisspruenge-ab",
-   "title": "Preisgarantie Gas: So sicherst du dich gegen Preis",
-   "pillar": "strom-sparen",
+   "slug": "2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck",
+   "title": "Lastschrift zurückbuchen: So holst du dir dein Gel",
+   "pillar": "konto-karten",
    "fixed": 0,
    "errors": [
     "KEIN Affiliate-Link vorhanden"
@@ -184,11 +182,11 @@
    "title": "Die 50-30-20-Regel: Die perfekte Formel für deine ",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "5g-home-router-oder-dsl",
@@ -206,11 +204,11 @@
    "title": "Finanzielle Freiheit: 7 Gewohnheiten für mehr Unab",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "balkonkraftwerk-2026-lohnt-sich",
@@ -338,11 +336,11 @@
    "title": "5 Frugalismus-Tricks: So sparst du 200 € pro Monat",
    "pillar": "frugalismus",
    "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
    ],
-   "ok": true
+   "infos": [],
+   "ok": false
   },
   {
    "slug": "gastarife-vergleichen-vor-dem-herbst",
@@ -790,7 +788,7 @@
    "pillar": "mietwagen",
    "fixed": 0,
    "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9 (erwartet: Pauschalreisen-Vergleich)"
+    "KEIN Affiliate-Link vorhanden"
    ],
    "infos": [],
    "ok": false

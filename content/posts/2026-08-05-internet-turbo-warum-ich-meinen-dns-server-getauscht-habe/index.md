@@ -64,7 +64,7 @@ Du brauchst kein IT-Studium für diesen Turbo-Boost. Ich habe den Prozess, den *
 5. Trage die Adressen deines Wunsch-Anbieters ein (siehe Vergleich unten).
 6. Wiederhole dies optional für DNSv6, um zukunftssicher aufgestellt zu sein.
 
-Nach dem Speichern laden Webseiten meist sofort spürbar zügiger. Die Verzögerung beim ersten Klick auf einen neuen Link verschwindet fast vollständig. In meinem Test sank die Antwortzeit von durchschnittlich 45 ms (Provider-DNS) auf beeindruckende 12 ms (Cloudflare). Wer sein **Internet schneller machen** will, findet hier den Hebel mit dem besten Zeit-Nutzen-Verhältnis.
+Nach dem Speichern laden Webseiten meist sofort spürbar zügiger. Die Verzögerung beim ersten Klick auf einen neuen Link verschwindet fast vollständig. In meinem Test sank die Antwortzeit von durchschnittlich 45 ms (Provider-DNS) auf beeindruckende 12 ms (Cloudflare). Wer sein **[Internet schneller machen](../../posts/2026-08-06-turbo-fuers-n/)** will, findet hier den Hebel mit dem besten Zeit-Nutzen-Verhältnis.
 
 ## Welche Alternativen gibt es?
 

@@ -2,7 +2,7 @@
 title: "Gebührenfallen beim Banking: Diese 7 Kosten killst du"
 description: "Konto, Karte, Ausland: Banken verstecken Kosten an vielen Stellen. Diese 7 Gebührenfallen erkennst und umgehst du ab sofort – und sparst 100 Euro pro Jahr."
 date: 2026-08-09T07:20:00Z
-draft: false
+draft: true
 tags: ["Bankgebühren", "Kreditkarte", "Konto", "Sparen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
@@ -116,6 +116,6 @@ Vergleiche die Bedingungen für Kontoführung, Karten und Bargeldbezug genau. Ma
 
 Wer seine Bankkosten senkt, schafft die Basis für echten Vermögensaufbau. [Konto wechseln](../../posts/kontowechsel-in-20-minuten-wechselservice/), [Karte prüfen](../../posts/kreditkarte-ohne-jahresgebuehr/) und den [Dispo vermeiden](../../posts/dispozinsen-verstehen-alternativen/) sind die ersten Schritte. Alle weiteren Tipps findest du in unserem [Ratgeber Konto & Karten](../../pillar/konto-karten/).
 
-👉 **Jetzt kostenloses Konto und Kreditkarte vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/kreditkarte/)
+👉 **Jetzt [kostenloses Konto](../../posts/kontowechsel-in-20-minuten-wechselserv/) und Kreditkarte vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/kreditkarte/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

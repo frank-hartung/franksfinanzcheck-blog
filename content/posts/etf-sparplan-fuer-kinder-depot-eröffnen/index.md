@@ -2,7 +2,7 @@
 title: "ETF-Sparplan für Kinder: So baust du sinnvoll Vermögen auf"
 description: "Depot für Kinder eröffnen, Sparplan einrichten, Steuern verstehen: So startest du den ETF-Sparplan für dein Kind – Schritt für Schritt, ab 10 Euro monatlich."
 date: 2026-08-09T10:20:00Z
-draft: false
+draft: true
 tags: ["ETF-Sparplan", "Kindersparen", "Depot", "Vermögensaufbau"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
@@ -100,7 +100,7 @@ So einfach das Konzept ist, so wichtig sind die Details:
 
 ## Der langfristige Ausblick
 
-Ein ETF-Sparplan für Kinder ist keine Wette, sondern die konsequente Nutzung von Zeit und Zinseszins. Wer früh startet, gibt dem Kind ein finanzielles Fundament – ohne dass es die Familie belastet. Schon 25 € monatlich ergeben nach 18 Jahren fast 10.000 €; 50 € fast 20.000 €.
+Ein [ETF-Sparplan für](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatl/) Kinder ist keine Wette, sondern die konsequente Nutzung von Zeit und Zinseszins. Wer früh startet, gibt dem Kind ein finanzielles Fundament – ohne dass es die Familie belastet. Schon 25 € monatlich ergeben nach 18 Jahren fast 10.000 €; 50 € fast 20.000 €.
 
 Wichtig ist die Ruhe: Kursschwankungen gehören zum Aktienmarkt dazu. Wer den Sparplan über die Jahre laufen lässt und bei Krisen nicht verkauft, erntet am Ende die Rendite des langen Atems. Genau das ist die Lektion, die das Kind mitnimmt – und die mehr wert ist als jeder Geldbetrag.
 
@@ -118,7 +118,7 @@ Ja – Wertpapiere sind Sondervermögen: Selbst bei einer Broker-Insolvenz gehö
 **Können auch Großeltern einzahlen?**
 Ja, und das ist sogar steuerlich clever: Schenkungen an Enkel sind bis 200.000 € pro Person und 10 Jahre steuerfrei. Die Einzahlung läuft einfach per Überweisung auf das Verrechnungskonto des Kinderdepots.
 
-Der ETF-Sparplan für Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die [Steuern auf ETF-Gewinne](../../posts/freistellungsauftrag-optimal-nutzen/) erklären, wie du den Pauschbetrag maximal ausschöpfst. Alle Bank[ing-Themen: [Ratg](../../posts/kontowechsel-in-20-mi[nuten-wechselserv](../../posts/kontowechsel-in-20-minuten-wechselserv/)/)Eber Konto & Karten](././pillar/konto-karten/).
+Der ETF-Sparplan für Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die [Steuern auf ETF-Gewinne](../../posts/freistellungsauftrag-optimal-nutzen/) erklären, wie du den Pauschbetrag maximal ausschöpfst. Alle Bank[ing-Themen: [Ratg](../../posts/kontowechsel-in-20-mi[nuten-wechselserv](../../posts/kontowechsel-in-20-minu[ten-wechselserv/)](../../posts/kontowechsel-in-20-minuten-wechselserv/)/)Eber Konto & Karten](././pillar/konto-karten/).
 
 👉 **Jetzt kostenloses Konto mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/girokonto/)
 

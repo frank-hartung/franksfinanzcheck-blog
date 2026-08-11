@@ -2,7 +2,7 @@
 title: "Ratenkredit mit Bestzins sichern: So vergleichst du richtig"
 description: "Kreditvergleich lohnt sich: effektiver Jahreszins, versteckte Kosten und Umschuldung. So findest du den günstigsten Ratenkredit und sparst Zinsen."
 date: 2026-08-04
-draft: false
+draft: true
 tags: ["Kredit", "Ratenkredit", "Umschuldung"]
 categories: ["[Geld sparen](../../posts/versicherungen-kuendigen-diese-5-policen/) & Frugalismus"]
 pillar: "konto-karten"

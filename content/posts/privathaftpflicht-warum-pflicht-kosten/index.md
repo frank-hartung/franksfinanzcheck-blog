@@ -2,7 +2,7 @@
 title: "Privathaftpflicht: Warum sie Pflicht ist und was sie kostet"
 description: "Die Privathaftpflicht ist die wichtigste Versicherung überhaupt: Was sie abdeckt, was sie kostet und worauf du beim Vertrag achten musst."
 date: 2026-08-04
-draft: false
+draft: true
 tags: ["Haftpflicht", "Versicherung", "Absicherung"]
 categories: ["Versicherungen"]
 pillar: "versicherungen"

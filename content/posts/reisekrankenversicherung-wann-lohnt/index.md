@@ -2,7 +2,7 @@
 title: "Reisekrankenversicherung: Wann sie sich wirklich lohnt"
 description: "Reisekrankenversicherung im Ausland: Was die gesetzliche Kasse zahlt, was du selbst zahlen musst und wann sich der Abschluss lohnt."
 date: 2026-08-04
-draft: false
+draft: true
 tags: ["Reise", "Versicherung", "Ausland"]
 categories: ["Reisebudget & Mietwagen"]
 pillar: "versicherungen"

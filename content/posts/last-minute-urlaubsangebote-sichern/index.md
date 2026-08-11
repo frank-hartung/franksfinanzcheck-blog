@@ -2,7 +2,7 @@
 title: "Last-Minute Urlaubsangebote: Traumurlaub günstig buchen"
 description: "Spontan in den Urlaub: So findest du Last-Minute-Schnäppchen für Sommer und Spätsommer – inklusive All-inclusive-Tipps und Buchungs-Checkliste."
 date: 2026-08-04
-draft: false
+draft: true
 tags: ["Last Minute", "Reisen", "Urlaub"]
 categories: ["Reisebudget & Mietwagen"]
 pillar: "mietwagen"

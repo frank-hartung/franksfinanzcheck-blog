@@ -2,7 +2,7 @@
 title: "5 Frugalismus-Tricks: So sparst du 200 € pro Monat"
 description: "5 praxiserprobte Frugalismus-Tricks, mit denen du sofort im Alltag Geld sparst: von der 50–30–20-Regel bis zu smarter Vorratshaltung – ohne Verzicht."
 date: 2026-08-04
-draft: false
+draft: true
 tags: ["Frugalismus", "Geld sparen", "Haushaltsbuch"]
 categories: ["Geld sparen & Frugalismus"]
 pillar: "frugalismus"
@@ -33,7 +33,7 @@ Nutze bewährte **Sparmethoden** für eine klare Struktur. Reserviere 50 % dein
 
 ## Trick 3:<br>S[[marter ein](../../posts/versicherungen-kuendigen-diese-5-poli/)kaufen stat](././posts/2026-08-06-frugalismus-im-all/)t teurer kochen
 
-Effizientes **[[Geld spare](../../posts/versicherungen-kuendigen-diese-5-poli/)n im Alltag](../../posts/2026-08-07-frugalismus-fuer-den-erf/)** beginnt in der Küche. Kaufe Grundnahrungsmittel wie Reis oder Nudeln auf Vorrat, sobald sie im Angebot sind. Erstelle vor dem Wocheneinkauf einen festen Plan und vermeide Spontankäufe im hungrigen Zustand. Ein Vier-Personen-Haushalt spart durch gezielte Planung oft 60 bis 80 € monatlich. Das entspricht einer Ersparnis von etwa 15 bis 20 % bei den Lebensmitteln. Eine weitere Möglichkeit, Geld zu sparen, ist der Kauf von **Saisonprodukten**, die oft günstiger sind als importierte Produkte.
+Effizientes **[[Geld spare](../../posts/versicherungen-kuendigen-diese-5-poli/)n im Alltag](././posts/2026-08-07-frugalismus-fuer-den-erf/)** beginnt in der Küche. Kaufe Grundnahrungsmittel wie Reis oder Nudeln auf Vorrat, sobald sie im Angebot sind. Erstelle vor dem Wocheneinkauf einen festen Plan und vermeide Spontankäufe im hungrigen Zustand. Ein Vier-Personen-Haushalt spart durch gezielte Planung oft 60 bis 80 € monatlich. Das entspricht einer Ersparnis von etwa 15 bis 20 % bei den Lebensmitteln. Eine weitere Möglichkeit, Geld zu sparen, ist der Kauf von **Saisonprodukten**, die oft günstiger sind als importierte Produkte.
 
 ## Trick 4:<br>Jahresverträge einmal im Jahr unter die Lupe nehmen
 

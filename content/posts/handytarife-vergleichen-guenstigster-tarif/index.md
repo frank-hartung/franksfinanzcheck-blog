@@ -2,7 +2,7 @@
 title: "Handytarife vergleichen: So findest du den günstigsten Tarif"
 description: "Handytarif wechseln und sparen: Datenvolumen, 5G, Laufzeit und versteckte Kosten – so findest du den günstigsten Tarif für deinen Bedarf."
 date: 2026-08-04
-draft: false
+draft: true
 tags: ["Handytarif", "Handyvertrag", "Telekommunikation"]
 categories: ["Internet- & DSL-Hacks"]
 pillar: "internet-dsl"

@@ -118,7 +118,7 @@ In den meisten Fällen sind Winterreifen in Skigebieten inklusive oder Pflicht. 
 **Wann bucht man den Winter-Mietwagen am besten?**
 6 bis 12 Wochen vor der Reise – in diesem Fenster sind die Preise am niedrigsten. In Skigebieten zu Ferienzeiten gilt: je früher, desto besser.
 
-**Was kostet ein Mietwagen im Winter?**
+**Was kostet ein [Mietwagen im](../../posts/2026-08-07-mietwagen-fuer-den-spaetsom/) Winter?**
 In Städten und Regionen ohne Wintersport 20 bis 40 € pro Tag für einen Kleinwagen – oft 40 bis 60 % günstiger als im Sommer. In Skigebieten liegen die Preise höher, besonders in den Ferienzeiten.
 
 Der Winter-Mietwagen ist die günstigste Art, einen [Winterurlaub zu sparen](../../posts/urlaubskasse-aufbessern-spartipps/) – kombiniert mit den [Mietwagen-Fallen](../../posts/mietwagen-fallen-vermeiden/) im Hinterkopf. Wer im Sommer [Mietwagen bucht](../../posts/mietwagen-buchen-so-sparst-du/), findet dort die Basis-Tricks. Alle Reisethemen: [Ratgeber Mietwagen & Reisen](../../pillar/mietwagen/).
