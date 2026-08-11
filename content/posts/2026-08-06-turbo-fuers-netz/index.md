@@ -18,7 +18,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst dein Internet um bis zu 20 % beschleunigen, indem du den DNS-Server wechselst. Ein Wechsel zu einem kostenlosen Anbieter wie Google Public DNS oder Cloudflare DNS kann helfen. Mit wenigen Schritten kannst du deinen DNS-Server ändern und somit deine Online-Geschwindigkeit erhöhen."
 social_posted: true
----## Was ist ein DNS-Server?
+---
+
+## Was ist ein DNS-Server?
 Ein DNS-Server ist ein Computer, der die IP-Adressen von Webseiten und anderen Online-Diensten mit ihren entsprechenden Domänennamen verbindet. Wenn du eine Website besuchst, wird der DNS-Server kontaktiert, um die IP-Adresse der Website zu ermitteln, damit dein Computer sie anzeigen kann. Der Standard-DNS-Server, der von den meisten Internetanbietern bereitgestellt wird, kann jedoch nicht immer die beste Lösung sein. Einige DNS-Server sind langsamer als andere, was zu Verzögerungen bei der Ladung von Webseiten führen kann. Andere DNS-Server können von Internetanbietern oder Regierungen zensiert werden, um den Zugang zu bestimmten Webseiten zu beschränken.
 
 ## Warum sollte man den DNS-Server wechseln?

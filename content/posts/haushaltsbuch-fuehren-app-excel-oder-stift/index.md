@@ -16,7 +16,9 @@ cover:
   alt: "Haushaltsbuch führen: App, Excel oder Stift – was klappt"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
----Fast 48 % der deutschen Haushalte wissen am Monatsende nicht, wohin ihr Geld verschwand. Das liegt selten an mangelnder Intelligenz. Meistens fehlt einfach eine klare Struktur für die eigenen Finanzen. Wer dauerhaft ein **Haushaltsbuch führen** möchte, macht den ersten Schritt zu echtem Vermögensaufbau.
+---
+
+Fast 48 % der deutschen Haushalte wissen am Monatsende nicht, wohin ihr Geld verschwand. Das liegt selten an mangelnder Intelligenz. Meistens fehlt einfach eine klare Struktur für die eigenen Finanzen. Wer dauerhaft ein **Haushaltsbuch führen** möchte, macht den ersten Schritt zu echtem Vermögensaufbau.
 
 Ein Haushaltsbuch wirkt wie eine Diät für dein Bankkonto. Du entdeckst versteckte Kostenfresser und unnötige Abos sofort. Mit diesem System wirst du deine **Ausgaben im Blick behalten**. So bleibt am Ende des Monats spürbar mehr Geld für deine Träume übrig.
 

@@ -14,7 +14,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Eine Hausratversicherung deckt Schäden an deinem Eigentum ab, wie z.B. Einbruch, Brand oder Wasserrohrbruch. Die Kosten liegen in der Regel zwischen 50–200 € pro Jahr. Sie leistet, wenn deine Sachen beschädigt oder gestohlen werden, und hilft dir, Unterversicherung zu vermeiden, indem du den Wert deines Hausrats richtig schätzt."
 social_posted: true
----Ein Rohrbruch flutet dein Wohnzimmer, ein Brand vernichtet die Küche oder Einbrecher räumen die Wohnung leer. Solche Schäden kosten dich ohne Schutz schnell fünfstellige Summen. Eine leistungsstarke Hausratversicherung ersetzt dir den kompletten Neuwert deiner Möbel, Technik und Kleidung. Das bedeutet: Auch wenn dein fünf Jahre alter Fernseher gestohlen wird, zahlt die Versicherung den Preis für ein vergleichbares Neugerät. In diesem Ratgeber erfährst du, wie du deinen Hausrat absichern kannst und worauf du beim Hausratversicherung-Tarifvergleich achten musst.
+---
+
+Ein Rohrbruch flutet dein Wohnzimmer, ein Brand vernichtet die Küche oder Einbrecher räumen die Wohnung leer. Solche Schäden kosten dich ohne Schutz schnell fünfstellige Summen. Eine leistungsstarke Hausratversicherung ersetzt dir den kompletten Neuwert deiner Möbel, Technik und Kleidung. Das bedeutet: Auch wenn dein fünf Jahre alter Fernseher gestohlen wird, zahlt die Versicherung den Preis für ein vergleichbares Neugerät. In diesem Ratgeber erfährst du, wie du deinen Hausrat absichern kannst und worauf du beim Hausratversicherung-Tarifvergleich achten musst.
 
 **Das Wichtigste in Kurzform:**
 * **Neuwert-Ersatz:** Ersetzt Einrichtung und Technik zum aktuellen Neupreis, nicht zum Zeitwert.
@@ -50,9 +52,9 @@ Die Hausrat-Kosten hängen primär von deinem Wohnort (Postleitzahl-Region) und 
 
 | Wohnfläche | Standard-Schutz (ca.) | Premium-Schutz inkl. Glas/Fahrrad |
 |---|---|---|
-| 50 m² (Single) | 35 – 55 € / Jahr | 60 – 90 € / Jahr |
-| 80 m² (Paar) | 50 – 80 € / Jahr | 90 – 130 € / Jahr |
-| 120 m² (Familie) | 80 – 120 € / Jahr | 130 – 210 € / Jahr |
+| 50 m² (Single) | 35–55 € / Jahr | 60–90 € / Jahr |
+| 80 m² (Paar) | 50–80 € / Jahr | 90–130 € / Jahr |
+| 120 m² (Familie) | 80–120 € / Jahr | 130–210 € / Jahr |
 
 Die meisten Versicherer rechnen mit einer Summe von **650 Euro pro Quadratmeter** Wohnfläche. Bei einer 80-m²-Wohnung entspricht das einer Versicherungssumme von 52.000 Euro. Dieser Richtwert ist ein Goldstandard: Wählst du diesen Wert, verzichtet der Versicherer auf die Prüfung einer Unterversicherung. Das bedeutet, dass er im Schadensfall keine Kürzungen vornimmt, selbst wenn dein Hausrat tatsächlich wertvoller sein sollte.
 

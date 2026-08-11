@@ -16,7 +16,9 @@ cover:
   alt: "SF-Klasse einfach erklärt: So steigst du in die beste Stufe"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
----Wusstest du, dass ein einziger Unfall dich über zehn Jahre hinweg mehrere tausend Euro kosten kann? Deine Kfz-Versicherung ist oft einer der größten Posten in deinem Budget. Wer Begriffe wie SF-Klasse, Typklasse oder Rabattretter nicht versteht, zahlt unnötig drauf. In diesem Artikel erfährst du, wie das System funktioniert und wie du deine Kosten massiv senkst.
+---
+
+Wusstest du, dass ein einziger Unfall dich über zehn Jahre hinweg mehrere tausend Euro kosten kann? Deine Kfz-Versicherung ist oft einer der größten Posten in deinem Budget. Wer Begriffe wie SF-Klasse, Typklasse oder Rabattretter nicht versteht, zahlt unnötig drauf. In diesem Artikel erfährst du, wie das System funktioniert und wie du deine Kosten massiv senkst.
 
 ### Das Wichtigste in Kürze
 

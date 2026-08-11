@@ -14,7 +14,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst im Winter bares Geld sparen, wenn du im Spätsommer den Gastarif wechselst. Ein Preisvergleich kann dir dabei helfen, bis zu 20 % an Heizkosten zu sparen. Durch die Auswahl eines günstigen Tarifs mit Preisgarantie und Boni kannst du deine Ausgaben senken."
 social_posted: true
----## Warum gerade jetzt wechseln?
+---
+
+## Warum gerade jetzt wechseln?
 
 Energieversorger passen ihre Preise häufig zum Beginn der Heizsaison an. Wenn du im August oder September handelst, entgehst du dieser Preisspirale. Wer in der teuren Grundversorgung steckt, zahlt ab Oktober oft deutlich mehr als nötig. Der Wechselprozess dauert online nur wenige Minuten und läuft vollautomatisch im Hintergrund ab. Deine Versorgung ist gesetzlich lückenlos gesichert; du merkst von der Umstellung technisch nichts.
 

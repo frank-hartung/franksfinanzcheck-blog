@@ -18,7 +18,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst dein Internet um bis zu 20 % beschleunigen, indem du deinen DNS-Server wechselst. Viele Standard-Einstellungen sind nicht optimal konfiguriert und bremsen daher das Internet. Ein Wechsel zu einem schnelleren DNS-Server wie Cloudflare oder Google kann helfen, die Ladezeiten zu verkürzen."
 social_posted: true
----Deine Webseite braucht Sekunden, bis sie lädt, obwohl du für schnelles Internet zahlst? Oft bremst ein veraltetes "Telefonbuch" deinen Browser aus. Mit dem richtigen Kniff sparst du wertvolle Ladezeit und surfst spürbar flüssiger. Hier erfährst du, wie ich meinen DNS-Server getauscht habe und warum das dein Surferlebnis verändert.
+---
+
+Deine Webseite braucht Sekunden, bis sie lädt, obwohl du für schnelles Internet zahlst? Oft bremst ein veraltetes "Telefonbuch" deinen Browser aus. Mit dem richtigen Kniff sparst du wertvolle Ladezeit und surfst spürbar flüssiger. Hier erfährst du, wie ich meinen DNS-Server getauscht habe und warum das dein Surferlebnis verändert.
 
 ### Das Wichtigste in Kürze
 * DNS-Server übersetzen Domainnamen in numerische IP-Adressen.

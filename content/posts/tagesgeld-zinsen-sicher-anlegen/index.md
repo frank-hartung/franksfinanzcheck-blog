@@ -14,7 +14,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du suchst ein sicheres Tagesgeldkonto mit guten Zinsen. In der Regel bieten Tagesgeldkonten Zinsen von ca. 0,5–1,5 % pro Jahr. Einlagensicherung ist bei vielen Anbietern vorhanden, um dein Erspartes zu schützen."
 social_posted: true
----Du suchst eine sichere Anlage für dein Geld? Ein Tagesgeldkonto bietet dir Flexibilität und ordentliche Zinsen. Dieser Ratgeber zeigt dir, worauf du achten musst, um das Beste aus deinem Ersparten herauszuholen.
+---
+
+Du suchst eine sichere Anlage für dein Geld? Ein Tagesgeldkonto bietet dir Flexibilität und ordentliche Zinsen. Dieser Ratgeber zeigt dir, worauf du achten musst, um das Beste aus deinem Ersparten herauszuholen.
 
 ## Was ist ein Tagesgeldkonto?
 Ein Tagesgeldkonto ist ein flexibles Sparkonto ohne feste Laufzeit und ohne Kündigungsfrist. Du kannst jederzeit Geld einzahlen und abheben. Die Zinsen werden meist monatlich oder vierteljährlich gutgeschrieben. Im Gegensatz zum Festgeld bleibst du flexibel, musst aber auch Zinsschwankungen akzeptieren.

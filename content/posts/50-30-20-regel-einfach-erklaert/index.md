@@ -14,10 +14,12 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du verteilst dein Gehalt in drei Teile: 50 % für Fixkosten, 30 % für Freizeitausgaben und 20 % für das Sparen. Diese Regel hilft dir, deine Finanzen effektiv zu planen. Mit 20 % deines Einkommens sparst du kontinuierlich für die Zukunft."
 social_posted: true
----Bleiben dir am Monatsende oft weniger als 100 Euro auf dem Konto, obwohl du eigentlich gut verdienst? Viele Menschen verlieren trotz eines stabilen Gehalts den Überblick über ihre Ausgaben, weil sie keine klare Struktur verfolgen. Die 50-30-20-Regel löst dieses Problem sofort. Diese einfache Formel, die ursprünglich von der US-Senatorin Elizabeth Warren populär gemacht wurde, strukturiert deine Finanzen ohne komplizierte Tabellen. Du schaffst dir damit eine solide Basis für deinen langfristigen Vermögensaufbau und verhinderst, dass dein Geld unkontrolliert versickert.
+---
+
+Bleiben dir am Monatsende oft weniger als 100 Euro auf dem Konto, obwohl du eigentlich gut verdienst? Viele Menschen verlieren trotz eines stabilen Gehalts den Überblick über ihre Ausgaben, weil sie keine klare Struktur verfolgen. Die 50–30–20-Regel löst dieses Problem sofort. Diese einfache Formel, die ursprünglich von der US-Senatorin Elizabeth Warren populär gemacht wurde, strukturiert deine Finanzen ohne komplizierte Tabellen. Du schaffst dir damit eine solide Basis für deinen langfristigen Vermögensaufbau und verhinderst, dass dein Geld unkontrolliert versickert.
 
 ### Das Wichtigste in Kürze
-- **Klare Struktur:** Die 50-30-20-Regel teilt dein Nettoeinkommen in drei unverwechselbare Bereiche auf.
+- **Klare Struktur:** Die 50–30–20-Regel teilt dein Nettoeinkommen in drei unverwechselbare Bereiche auf.
 - **Fixkosten-Deckelung:** Deine Lebenshaltungskosten beanspruchen maximal 50 Prozent deines Budgets.
 - **Lebensqualität:** Du reservierst bewusst 30 Prozent für deinen persönlichen Lebensstil und Spaß – ohne schlechtes Gewissen.
 - **Zukunftssicherung:** Mindestens 20 Prozent fließen direkt in den Notgroschen, die Schuldentilgung oder den Vermögensaufbau.
@@ -70,7 +72,7 @@ Nutze einen einfachen **Regel Rechner** oder eine Excel-Tabelle, um deine indivi
 
 ## Vor- und Nachteile der Methode
 
-Kein Finanzsystem ist perfekt. Die 50-30-20-Regel bietet jedoch einen hervorragenden Rahmen.
+Kein Finanzsystem ist perfekt. Die 50–30–20-Regel bietet jedoch einen hervorragenden Rahmen.
 
 **Vorteile:**
 - **Einfachheit:** Du musst nicht jede Quittung für einen Kaugummi sammeln. Drei Kategorien genügen.
@@ -78,14 +80,14 @@ Kein Finanzsystem ist perfekt. Die 50-30-20-Regel bietet jedoch einen hervorrage
 - **Flexibilität:** Die Regel passt sich jedem Gehaltssprung automatisch an.
 
 **Nachteile:**
-- **Ballungsraum-Problem:** Bei sehr hohen Mieten ist die 50-Prozent-Quote oft unrealistisch. Hier musst du auf 60-20-20 ausweichen.
+- **Ballungsraum-Problem:** Bei sehr hohen Mieten ist die 50-Prozent-Quote oft unrealistisch. Hier musst du auf 60–20–20 ausweichen.
 - **Geringverdiener-Hürde:** Wer 1.200 Euro netto verdient, kämpft oft schon damit, die 50 % für Miete und Strom einzuhalten. Hier steht die Existenzsicherung vor dem Vermögensaufbau.
 
 ## Was tun, wenn die 50 % nicht reichen?
 
 Wenn die Miete allein schon 40 % deines Einkommens frisst, bleibt kaum Spielraum für Versicherungen und Lebensmittel. In diesem Fall ist radikale Budgetierung gefragt. Senke deine laufenden Kosten durch gezielte Vertragswechsel. Ein neuer Stromanbieter oder ein optimierter DSL-Tarif sparen oft 200 bis 450 Euro jährlich. 
 
-Prüfe deine Versicherungen auf doppelte Leistungen und kündige überflüssige Policen wie Handyversicherungen oder überteuerte Rechtsschutzverträge. Falls du die 50-Prozent-Marke aktuell deutlich reißt, starte vorerst mit einer **60-25-15-Aufteilung**. Das Ziel bleibt jedoch, durch Gehaltssteigerungen oder Kostensenkungen langfristig zur 50-30-20-Struktur zurückzukehren.
+Prüfe deine Versicherungen auf doppelte Leistungen und kündige überflüssige Policen wie Handyversicherungen oder überteuerte Rechtsschutzverträge. Falls du die 50-Prozent-Marke aktuell deutlich reißt, starte vorerst mit einer **60–25–15-Aufteilung**. Das Ziel bleibt jedoch, durch Gehaltssteigerungen oder Kostensenkungen langfristig zur 50–30–20-Struktur zurückzukehren.
 
 ## Häufige Fragen
 
@@ -99,7 +101,7 @@ Schuldenabbau ist die beste Form des Sparens. Nutze den 20-Prozent-Anteil zuerst
 Vermeide die sogenannte „Lifestyle-Inflation“. Wenn du 200 Euro mehr verdienst, erhöhe nicht sofort deine Fixkosten. Teile die Erhöhung nach der Regel auf: 100 Euro mehr für Fixkosten (oder Puffer), 60 Euro mehr für Spaß und 40 Euro zusätzlich in den Sparplan. So wächst dein Wohlstand parallel zu deinem Lebensstandard.
 
 ### Ist die Regel auch für Selbstständige geeignet?
-Ja, aber erst nach Abzug der Steuerrücklagen. Als Selbstständiger solltest du zuerst dein „privates Netto“ ermitteln (Einnahmen minus Geschäftskosten minus Steuern minus Krankenkasse). Auf diesen Restbetrag wendest du die 50-30-20-Regel an.
+Ja, aber erst nach Abzug der Steuerrücklagen. Als Selbstständiger solltest du zuerst dein „privates Netto“ ermitteln (Einnahmen minus Geschäftskosten minus Steuern minus Krankenkasse). Auf diesen Restbetrag wendest du die 50–30–20-Regel an.
 
 ---
 

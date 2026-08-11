@@ -14,7 +14,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Versteckte Kosten beim Mietwagen können schnell 20 € pro Tag oder mehr betragen. Du solltest immer die Versicherungsbedingungen genau prüfen, bevor du den Mietwagen buchst. Eine umfassende Reiseversicherung kann dich vor teuren Zusatzkosten schützen."
 social_posted: true
----## Falle 1:<br>Die unverständliche Versicherungslage
+---
+
+## Falle 1:<br>Die unverständliche Versicherungslage
 
 Viele Buchungsportale werben mit "Vollkasko" – meinen aber eine Vollkasko mit Selbstbeteiligung von oft 1.000 bis 2.000 Euro. Kommt ein Kratzer, zahlst du selbst. Achte auf "Vollkasko ohne Selbstbeteiligung" (oft als "Premium-Schutz" oder "Top-Schutz" bezeichnet). Der Aufpreis ist meist überschaubar – im Schadensfall aber Gold wert. Zum Beispiel kostet die Vollkasko ohne Selbstbeteiligung bei einem Anbieter 15 Euro pro Tag, während die Vollkasko mit Selbstbeteiligung nur 5 Euro pro Tag kostet. Es lohnt sich also, vorher zu vergleichen und die richtige Versicherung auszuwählen.
 

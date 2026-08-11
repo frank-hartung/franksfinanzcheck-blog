@@ -16,7 +16,9 @@ cover:
   alt: "Berufsunfähigkeitsversicherung: Für wen sie sich 2026 lohnt"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
----Deine Arbeitskraft ist über zwei Millionen € wert. Wenn du gesund bleibst, verdienst du dieses Vermögen bis zur Rente. Doch was passiert bei einem schweren Schicksalsschlag? Eine Berufsunfähigkeitsversicherung schützt dich vor dem finanziellen Ruin.
+---
+
+Deine Arbeitskraft ist über zwei Millionen € wert. Wenn du gesund bleibst, verdienst du dieses Vermögen bis zur Rente. Doch was passiert bei einem schweren Schicksalsschlag? Eine Berufsunfähigkeitsversicherung schützt dich vor dem finanziellen Ruin.
 
 Sichere deine Existenz ab, bevor du an andere Investitionen denkst. Rund 30 € bis 150 € monatlich investierst du in diesen Schutz. Über 40 Jahre zahlst du so einen hohen fünfstelligen Betrag ein. Wir klären jetzt, ob sich dieser Einsatz für dich wirklich auszahlt.
 

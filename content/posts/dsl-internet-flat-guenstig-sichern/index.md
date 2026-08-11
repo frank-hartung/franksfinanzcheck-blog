@@ -14,7 +14,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du vergleichst am besten die Tarife von mindestens 3 Anbietern, um den günstigsten Internetvertrag zu finden. Ein Wechselbonus von ca. 50–100 € ist in der Regel möglich. Bei einem Tarifwechsel sparst du bis zu 20 % deiner monatlichen Kosten."
 social_posted: true
----Zahlst du monatlich mehr als 40 Euro für dein Internet? Dann verschenkst du wahrscheinlich jedes Jahr über 200 Euro an deinen Anbieter. Internet gehört heute zur Grundversorgung wie Strom und Wasser. Dennoch zahlen viele Haushalte jahrelang für überdimensionierte Tarife oder verpassen lukrative Neukunden-Prämien. Mit dem richtigen Vorgehen sicherst du dir dauerhaft günstiges Internet für dein Zuhause.
+---
+
+Zahlst du monatlich mehr als 40 Euro für dein Internet? Dann verschenkst du wahrscheinlich jedes Jahr über 200 Euro an deinen Anbieter. Internet gehört heute zur Grundversorgung wie Strom und Wasser. Dennoch zahlen viele Haushalte jahrelang für überdimensionierte Tarife oder verpassen lukrative Neukunden-Prämien. Mit dem richtigen Vorgehen sicherst du dir dauerhaft günstiges Internet für dein Zuhause.
 
 ### Das Wichtigste in Kürze
 - **Bedarf ermitteln:** 100 Mbit/s genügen den meisten Haushalten völlig.

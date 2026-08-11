@@ -14,7 +14,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Eine Zahnzusatzversicherung lohnt sich für gesetzlich Versicherte, die hohe Zuzahlungen bei Zahnersatz vermeiden wollen, da die Krankenkasse oft nur 60 Prozent der Basisversorgung übernimmt. Gute Tarife kosten für Jüngere etwa 10 bis 20 Euro im Monat und decken wichtige Leistungen wie hochwertige Implantate, Inlays oder professionelle Zahnreinigungen ab."
 social_posted: true
----Ein Implantat kostet schnell 2.000 bis 3.000 Euro. Die gesetzliche Kasse übernimmt nur einen Festzuschuss von rund 60 Prozent der Regelversorgung. Die Zahnzusatzversicherung schließt diese Lücke. Doch sie lohnt sich nicht für jeden. Du bekommst hier einen Ratgeber, der zeigt, wann der Abschluss sinnvoll ist und worauf du achten musst.
+---
+
+Ein Implantat kostet schnell 2.000 bis 3.000 Euro. Die gesetzliche Kasse übernimmt nur einen Festzuschuss von rund 60 Prozent der Regelversorgung. Die Zahnzusatzversicherung schließt diese Lücke. Doch sie lohnt sich nicht für jeden. Du bekommst hier einen Ratgeber, der zeigt, wann der Abschluss sinnvoll ist und worauf du achten musst.
 
 ## Das Grundproblem:<br>Die GKV zahlt nur den Festzuschuss
 

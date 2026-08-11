@@ -16,7 +16,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst deine Energiekosten um bis zu 20 % senken, indem du intelligente Heizsysteme einsetzt. Diese Systeme passen sich deinem Heizverhalten an und optimieren die Energieverbrauch. So sparst du jeden Monat bares Geld, etwa 50 € bei durchschnittlichen Heizkosten."
 social_posted: true
----Zahlst du jeden Monat hunderte Euro für deine Wärme? Mit smarten Lösungen senkst du deine Energiekosten oft um bis zu 30 %. Ich zeige dir, wie diese Technik dein Budget schont und den Komfort steigert.
+---
+
+Zahlst du jeden Monat hunderte Euro für deine Wärme? Mit smarten Lösungen senkst du deine Energiekosten oft um bis zu 30 %. Ich zeige dir, wie diese Technik dein Budget schont und den Komfort steigert.
 
 Die Energiekosten belasten viele Haushalte in Deutschland massiv. Besonders die Preise für Gas und Fernwärme sind volatil. Ein kluger Umstieg auf moderne Heizsysteme entlastet dein Bankkonto spürbar. Du gewinnst dadurch mehr finanziellen Spielraum für deine restliche Lebensplanung, statt dein Geld sprichwörtlich „zu verheizen“. Für einen durchschnittlichen Haushalt in einer 100-Quadratmeter-Wohnung bedeutet eine Ersparnis von 25 % oft ein Plus von 400 € bis 600 € pro Jahr in der Haushaltskasse.
 
@@ -43,9 +45,9 @@ Smarte Thermostate kosten im Fachhandel meist zwischen 40 € und 90 € pro S
 
 | Systemtyp | Kosten pro Raum | Einsparpotenzial | Aufwand Installation |
 | :--- | :--- | :--- | :--- |
-| **Manuelle Thermostate** | 10 € - 15 € | 0 % (Basis) | Sehr gering |
-| **Programmierbare Regler** | 20 € - 35 € | 10 % - 15 % | Gering |
-| **Smarte WLAN-Systeme** | 45 € - 90 € | 20 % - 31 % | Mittel (App-Setup) |
+| **Manuelle Thermostate** | 10 € – 15 € | 0 % (Basis) | Sehr gering |
+| **Programmierbare Regler** | 20 € – 35 € | 10 % – 15 % | Gering |
+| **Smarte WLAN-Systeme** | 45 € – 90 € | 20 % – 31 % | Mittel (App-Setup) |
 
 ## Das Wichtigste in Kurzform
 * **Hohe Ersparnis:** Reduktion der Energiekosten um bis zu 30 % realistisch.
@@ -63,13 +65,13 @@ Diese Kombination drückt deine laufenden Ausgaben auf ein Minimum. Du machst di
 Prüfe vor der Investition den Dämmstandard deiner Immobilie. Ein schlecht isoliertes Haus verliert Wärme trotz smarter Technik zu schnell. In einem solchen Fall solltest du zusätzlich über einfache Maßnahmen wie das Dämmen der Heizkörpernischen oder der Rohrleitungen im Keller nachdenken.
 
 * **Kompatibilität:** Überprüfe, ob deine vorhandenen Ventile (z. B. Heimeier, Danfoss) Adapter benötigen. Meist liegen diese den Starter-Sets bei.
-* **Starter-Sets nutzen:** Kaufe für den Beginn ein Set mit Bridge (Zentrale) und 2-3 Thermostaten. Das ist oft 20 % günstiger als der Einzelkauf.
+* **Starter-Sets nutzen:** Kaufe für den Beginn ein Set mit Bridge (Zentrale) und 2–3 Thermostaten. Das ist oft 20 % günstiger als der Einzelkauf.
 * **Staatliche Förderung:** Für größere Maßnahmen, wie den hydraulischen Abgleich in Kombination mit einer smarten Steuerung, gibt es oft Zuschüsse vom BAFA oder der KfW. Informiere dich hierzu vorab, da Anträge meist vor Vorhabensbeginn gestellt werden müssen.
 * **Batterielaufzeit:** Achte auf Modelle, die mit Standard-AA-Batterien arbeiten und eine Laufzeit von mindestens zwei Heizperioden versprechen.
 
 ## Häufige Fragen
 ### Wie hoch sind die Anschaffungskosten für ein intelligentes Heizsystem wirklich?
-Die Kosten hängen stark von der Anzahl deiner Heizkörper ab. Ein solides Starter-Set für eine Drei-Zimmer-Wohnung (Zentrale + 3 Thermostate) kostet oft zwischen 180 € und 320 €. Für ein komplettes Einfamilienhaus mit 10-12 Heizkörpern solltest du mit etwa 700 € bis 950 € kalkulieren. Wer auf Angebote bei Black Friday oder ähnlichen Aktionen wartet, spart oft zusätzlich 20 %.
+Die Kosten hängen stark von der Anzahl deiner Heizkörper ab. Ein solides Starter-Set für eine Drei-Zimmer-Wohnung (Zentrale + 3 Thermostate) kostet oft zwischen 180 € und 320 €. Für ein komplettes Einfamilienhaus mit 10–12 Heizkörpern solltest du mit etwa 700 € bis 950 € kalkulieren. Wer auf Angebote bei Black Friday oder ähnlichen Aktionen wartet, spart oft zusätzlich 20 %.
 
 ### Muss ich meinen Vermieter um Erlaubnis fragen?
 Nein, für den Austausch der Thermostatköpfe in einer Mietwohnung benötigst du keine Genehmigung, solange du die alten Köpfe aufbewahrst. Es handelt sich um einen rein funktionalen Austausch ohne Eingriff in die Gebäudesubstanz. Beim Auszug musst du jedoch den ursprünglichen Zustand wiederherstellen.
@@ -81,7 +83,7 @@ Ja, die Vernetzung mit Photovoltaik, digitalen Stromzählern (Smart Meter) oder 
 Deine Heizung wird nicht kalt. Die Thermostate behalten die zuletzt programmierten Zeitpläne bei und lassen sich weiterhin manuell am Drehrad bedienen. Lediglich die Steuerung per App von unterwegs oder die Geofencing-Funktion ist während des Ausfalls deaktiviert.
 
 ### Wie lange halten die Batterien in den Funk-Thermostaten?
-Bei qualitativ hochwertigen Systemen halten die Batterien etwa zwei Jahre. Das System warnt dich meist frühzeitig (ca. 4-8 Wochen vorher) per App oder Display, wenn ein Wechsel ansteht. Ich empfehle die Nutzung von hochwertigen Alkali-Batterien statt Akkus, da Akkus eine geringere Spannung haben und oft Fehlermeldungen auslösen.
+Bei qualitativ hochwertigen Systemen halten die Batterien etwa zwei Jahre. Das System warnt dich meist frühzeitig (ca. 4–8 Wochen vorher) per App oder Display, wenn ein Wechsel ansteht. Ich empfehle die Nutzung von hochwertigen Alkali-Batterien statt Akkus, da Akkus eine geringere Spannung haben und oft Fehlermeldungen auslösen.
 
 ---
 
