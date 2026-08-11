@@ -1,6 +1,6 @@
 # 🎨 DESIGN-REPORT (Verlags-QA)
 
-**Stand:** 2026-08-11 15:49 UTC · Modus: REPORT · Seiten: 410
+**Stand:** 2026-08-11 16:24 UTC · Modus: REPORT · Seiten: 410
 **🔴 Kritisch:** 0 · **🟡 Warnungen:** 186 · **✅ Auto-geheilt (alts):** 0
 
 

@@ -21,7 +21,7 @@
 #  heilen NICHT (nur Alarm) – kein Aktionismus bei Timeout.
 #
 #  SABOTAGE-SCHUTZ: SELFTEST (offline, laeuft IMMER zuerst):
-#  15 eingefrorene Urteils-Faelle pruefen die verdict()-Logik
+#  17 eingefrorene Urteils-Faelle pruefen die verdict()-Logik
 #  selbst. Wer an Kontrakt/Logging „herumverbessert", bricht jeden
 #  Lauf mit Exit 2 ab, BEVOR etwas geschrieben wird.
 #
@@ -89,6 +89,7 @@ CONTRACT = {
     "hausrat":     ("tarifcheck", "partner_id=47086&ad_id=15", ["hausrat"], True, False),
     "zahnzusatzversicherung": ("tarifcheck", "partner_id=47086&ad_id=15", ["zahnzusatz"], True, False),
     "reisekrankenversicherung": ("tarifcheck", "partner_id=47086&ad_id=15", ["reisekranken"], True, False),
+    "hunde":       ("tarifcheck", "partner_id=47086&ad_id=15&deep=hundekrankenversicherung", ["hundekranken"], True, False),
 }
 
 # Sicherer Hafen pro Netz (PID bleibt vollstaendig erhalten):
@@ -118,6 +119,8 @@ SELFTEST = [
     ("hausrat", "https://www.tarifcheck.de/hausratversicherung/", 200, "ok"),
     ("reisekrankenversicherung", "https://www.tarifcheck.de/reisekrankenversicherung.html?partner_id=47086&ad_id=15&model=1", 403, "waf"),
     ("unfallversicherung", "https://www.tarifcheck.de/unfallversicherung/?partner_id=47086&ad_id=15&model=1", 403, "waf"),
+    ("hunde", "https://www.tarifcheck.de/hundekrankenversicherung/?partner_id=47086&ad_id=15&model=1", 403, "waf"),
+    ("hunde", "https://www.tarifcheck.de/haftpflichtversicherung/", 200, "kategorie"),
 ]
 
 

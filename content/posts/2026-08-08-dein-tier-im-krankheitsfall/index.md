@@ -35,7 +35,7 @@ Seit der Anpassung der Gebührenordnung für Tierärzte (GOT) im November 2022 s
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/allgemein/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/hunde/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Wie funktioniert eine Tierversicherung?
@@ -128,7 +128,7 @@ Ehrliche Antwort: Eine Versicherung für eine bereits bestehende, akute Krankhei
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Hundekrankenversicherung vergleichen**](https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hundekrankenversicherung)
+👉 **Jetzt vergleichen und sparen:** [**→ Hundekrankenversicherung vergleichen**](/go/hunde/)
 
 *Hinweis: Bei dem angebotenen Tarif handelt es sich um eine **Hundekrankenversicherung** – Katzen sind nicht abgedeckt. Für deinen Hund kannst du hier Leistungen und Preise direkt vergleichen.*
 

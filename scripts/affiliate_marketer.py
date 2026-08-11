@@ -69,6 +69,7 @@ DEEP_HINTS = [
     # Reihenfolge = Spezifität (Supertrumpf erst). Aussicht: kein „übergreifendes
     # Wort" (z.B. „konto|internet|heiz") darf frueher als ein Fach treffen.
     (re.compile(r"unfall", re.I), "unfallversicherung"),
+    (re.compile(r"tierkranken|hundekranken|katzenkranken|pferdekranken|tierversicherung|hundeversicherung|katzenversicherung|tier[- ]?op[- ]?versicherung", re.I), "hunde"),
     (re.compile(r"reisekranken", re.I), "reisekrankenversicherung"),
     (re.compile(r"zahn", re.I), "zahnzusatzversicherung"),
     (re.compile(r"privathaftpflicht", re.I), "haftpflicht"),
@@ -103,7 +104,7 @@ def route_for(text: str, pillar: str = "") -> str:
 
 # ------------------------------------------------------------
 # SABOTAGE-SCHUTZ (Selbsttest-Batterie, 11.08.2026)
-# 17 kanonische Routing-Faelle, eingefroren nach der grossen
+# 19 kanonische Routing-Faelle, eingefroren nach der grossen
 # Fehlrouting-Korrektur (Depot->girokonto, Elementar->handytarife,
 # Sicher heizen->girokonto usw. waren die Schaedlinge).
 # Wenn kuenftig jemand - Mensch oder KI - die DEEP_HINTS
@@ -129,6 +130,9 @@ SELFTEST = [
     ("Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten", "", "kreditkarte"),
     ("Mietwagen buchen: So sparst du bei der Autovermietung", "", "mietwagen"),
     ("Urlaubskasse aufbessern: Die besten Spartipps für deinen nächsten Urlaub", "", "reisen"),
+    ("Tierkrankenversicherung: So schützt du deinen Hund vor hohen Tierarztkosten", "", "hunde"),
+    # wie im echten Tier-Artikel Front-Matter (Tags: Tierversicherung …):
+    ("Tierversicherung: Schutz für dein Tier im Krankheitsfall", "versicherungen", "hunde"),
     # Pillar-Fallback, wenn das Thema keine Fach-Route hat:
     ("Ganz ohne passendes Fachthema im Text", "konto-karten", "girokonto"),
     # bewusst breites Budget-Thema bleibt beim Portal:
