@@ -18,7 +18,7 @@ cover:
 social_posted: true
 ---
 Flugpreise wirken oft wie ein Mysterium: Der Sitz neben dir hat vielleicht 100 € mehr oder weniger gekostet, obwohl ihr denselben Flug gebucht habt. Tatsächlich folgen Flugpreise klaren Mustern –   
-wer sie kennt, zahlt deutlich weniger. Die gute Nachricht: Die 9 Tricks in diesem Artikel funktionieren bei jeder Buchung, ohne Glück und ohne Sonderangebote-Jagd.
+wer sie kennt, zahlt deutlich weniger. Die gute Nachricht: Die neun Tricks in diesem Artikel funktionieren bei jeder Buchung, ohne Glück und ohne Sonderangebote-Jagd.
 
 
 
@@ -85,7 +85,7 @@ Auch Gelegenheitsflieger können von Vielfliegerprogrammen profitieren – ohne 
 
 ## Der Buchungs-Check vor dem Klick
 
-Bevor du zahlst, geh diese 5 Punkte durch:
+Bevor du zahlst, geh diese fünf Punkte durch:
 
 1. **Endpreis geprüft?** Alle Gebühren und Zusatzleistungen eingerechnet.
 2. **Gepäck inklusive?** Aufgabegepäck im Tarif enthalten – oder bewusst dazu gebucht?

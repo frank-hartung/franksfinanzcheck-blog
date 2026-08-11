@@ -44,7 +44,7 @@ Ein wichtiger Aspekt, den du beachten solltest, ist die **Preisgarantie**. Viele
 
 Es ist auch wichtig, auf die **Kündigungsfrist** zu achten. Eine kurze Kündigungsfrist von 4 Wochen gibt dir die Flexibilität, schnell auf Änderungen im Markt reagieren zu können. Wenn du einen Anbieter mit einer langen Kündigungsfrist wählst, könntest du in einem teuren Vertrag feststecken, wenn die Preise steigen.
 
-## Der Gaswechsel in 4 Schritten
+## Der Gaswechsel in vier Schritten
 
 1. **Jahresverbrauch ermitteln**: Schaue auf deine letzte Abrechnung. Nutze den Wert in Kilowattstunden (kWh), da dieser für den Vergleich präziser ist als Kubikmeter.
 2. **Tarife vergleichen**: Gib deine Postleitzahl und den Verbrauch in den Rechner ein. Sortiere die Ergebnisse nach fairen Bedingungen und stabilen Preisen.

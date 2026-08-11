@@ -59,7 +59,7 @@ Wenn du **Kontoführungsgebühren sparen** willst, hast du meist zwei Optionen. 
 
 **Neobanks** (wie N26, Revolut oder C24) sind hingegen "Mobile First". Alles findet in einer hochmodernen App statt. Hier ist das **kostenlose Girokonto ohne Gebühren** oft radikaler umgesetzt, Funktionen wie Unterkonten (Spaces) oder Echtzeit-Push-Nachrichten bei jeder Zahlung gehören zum Standard. Dafür ist der persönliche Support manchmal schwerer erreichbar als bei klassischen Direktbanken.
 
-## Der Kontowechsel in 6 Schritten
+## Der Kontowechsel in sechs Schritten
 
 1. **Konditionen prüfen:** Nutze einen **Girokonto Vergleich**, um die besten Zinsen auf [Tagesgeld und](../../posts/tagesgeld-zinsen-sicher-anle/) Kartenoptionen für deinen Bedarf zu finden.
 2. **Antrag stellen:** Eröffne dein neues Konto online per Video-Ident. Du brauchst nur deinen Personalausweis und ein Smartphone. Das dauert meist unter zehn Minuten.

@@ -60,7 +60,7 @@ Wichtig: Die Boni sind gedeckelt, und die Förderung muss VOR dem Kauf beantragt
 
 Für eine Wärmepumpe brauchst du außerdem: eine gute Gebäudedämmung (sonst steigen die Betriebskosten), passende Heizkörper (bei Altbau oft Austausch nötig) und einen Platz für die Außeneinheit. Wer das nicht hat, sollte Alternativen wie Gas-Brennwert oder Pellet prüfen.
 
-## Der Sanierungsfahrplan in 5 Schritten
+## Der Sanierungsfahrplan in fünf Schritten
 
 Wenn du Eigentümer bist und wechseln willst, so gehst du vor:
 

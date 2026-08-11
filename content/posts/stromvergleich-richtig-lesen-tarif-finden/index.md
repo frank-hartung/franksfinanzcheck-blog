@@ -110,7 +110,7 @@ Bevor du den Tarif bestätigst, geh diese Liste durch – sie verhindert die hä
 4. **Vertragslaufzeit und Kündigungsfrist klar?** 12 Monate Laufzeit sind der Standard – längere Laufzeiten nur gegen echten Preisvorteil.
 5. **Anbieter-Bewertungen angeschaut?** Seriöse Anbieter erkennt man an transparenten Bedingungen und fairen Kundenbewertungen. Bei Angeboten, die deutlich unter dem Marktdurchschnitt liegen, ist Vorsicht geboten.
 
-Wenn alle 5 Punkte passen, ist der Wechsel sicher – und du sparst Jahr für Jahr, ohne darüber nachzudenken. Einmal eingerichtet, läuft der Tarif automatisch weiter; nur die jährliche Preisgarantie-Prüfung gehört zur Routine.
+Wenn alle fünf Punkte passen, ist der Wechsel sicher – und du sparst Jahr für Jahr, ohne darüber nachzudenken. Einmal eingerichtet, läuft der Tarif automatisch weiter; nur die jährliche Preisgarantie-Prüfung gehört zur Routine.
 
 
 ## Häufig gestellte Fragen
