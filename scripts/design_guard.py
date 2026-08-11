@@ -48,6 +48,26 @@ VAGUE_LINKS = {"hier klicken", "klicken", "mehr", "mehr erfahren", "hier", "weit
 EXTERNAL_DENY = re.compile(r"(fonts\.googleapis|fonts\.gstatic|cdn\.jsdelivr|unpkg|cloudflare|"
                            r"googleapis\.com|cloudfront|cdnjs)", re.I)
 
+# D10: Vertrag zwischen Affiliate-Shield (Links -> /go/) und dem CTA-CSS –
+# Widget berechtigt sich selbst zu heilen (siehe fix:-Teil unten).
+CTA_CSS = ROOT / "assets" / "css" / "extended" / "custom.css"
+CTA_SELECTOR_FRAGMENTS = ['a[href^="/go/"]', 'a[href*="check24.net"]',
+                          'a[href*="partner-versicherung.de"]']
+CTA_CSS_TEMPLATE = '''
+/* AUTO-HEILUNG (design_guard D10, 11.08.2026): Das Affiliate-Shield
+   ersetzte direkte Netzwerk-Links durch /go/-Gateway-Links; das CSS
+   des gelben CTA-Kastens feuerte nur fuer die rohen Domains – Kasten
+   fiel aus. Dieser Block wird bei Fehlen automatisch wiederhergestellt. */
+.post-content p:has(> a[href^="/go/"]) {
+    background: rgba(255, 179, 0, 0.10);
+    border: 1px dashed rgba(255, 179, 0, 0.6);
+    border-radius: 10px; padding: 14px 18px;
+    text-align: center; display: flex; flex-direction: column;
+    align-items: center; gap: 8px; margin: 22px auto; max-width: 520px;
+}
+.post-content p:has(> a[href^="/go/"]) strong { display: block; margin-bottom: 4px; }
+'''
+
 
 def collect_html() -> list[Path]:
     out = []
@@ -115,6 +135,20 @@ def audit_css_fonts() -> list[dict]:
         for face in re.findall(r'@font-face\s*\{[^}]+\}', css):
             if "font-display" not in face:
                 out.append({"lvl": "warn", "typ": "D5", "details": f"{p.name}: @font-face ohne font-display"})
+    # D10: CTA-Kontrakt (/go/-Selektoren im Design-System) + Selbstheilung
+    if CTA_CSS.exists():
+        css = CTA_CSS.read_text(encoding="utf-8")
+        fehlende = [c for c in CTA_SELECTOR_FRAGMENTS if c not in css]
+        if fehlende:
+            out.append({"lvl": "kritisch", "typ": "D10",
+                        "details": f"CTA-CSS enthaelt NICHT: {', '.join(fehlende)} "
+                                   "(/go/-Gateway gerauscht – gelber Kasten aus!)"})
+            if DO_FIX and not DRY_RUN:
+                with CTA_CSS.open("a", encoding="utf-8") as fh:
+                    fh.write(CTA_CSS_TEMPLATE)
+                out.append({"lvl": "fix", "typ": "D10-auto",
+                            "details": "CTA-Selektoren automatisch nachgezogen "
+                                       "(Selbstheilung, siehe Block-Ende custom.css)"})
     return out
 
 
