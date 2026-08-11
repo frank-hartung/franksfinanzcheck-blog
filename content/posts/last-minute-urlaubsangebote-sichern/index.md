@@ -53,7 +53,7 @@ Lies die aktuellen Bewertungen zur Lage deiner Unterkunft kritisch durch. Ein Ho
 
 - [ ] Ist dein Reisepass oder Personalausweis noch mindestens 6 Monate gültig?
 - [ ] Hast du die aktuellen Einreisebestimmungen und Visumspflichten deines Zielprojekts geprüft?
-- [ ] Besteht ein aktiver Schutz durch eine Auslands-Reisekrankenversicherung? ([Hier prüfen](https://a.partner-versicherung.de))
+- [ ] Besteht ein aktiver Schutz durch eine Auslands-Reisekrankenversicherung? ([Hier prüfen](/go/mietwagen/))
 - [ ] Liegt deine Kreditkarte für Kautionen im Hotel oder für den Mietwagen bereit?
 - [ ] Kennst du die genauen Gepäckregeln deiner Fluggesellschaft zur Vermeidung von Aufpreisen?
 - [ ] Ist der Transfer vom Zielflughafen zu deiner Unterkunft bereits organisiert oder inklusive?

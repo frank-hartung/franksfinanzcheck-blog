@@ -46,6 +46,19 @@ AFFIL_PAT = re.compile(
     r"https://a\.(?:check24\.net|partner-versicherung\.de)[^)\]\s\"']*")
 
 
+def ctx_route_for(full_text: str) -> str:
+    """Thematische Route EINMAL pro Datei – Wahrheit: affiliate_marketer.route_for
+    (mit Pillar-Fallback). Dient dem AUTO-DEEP: generische Roh-Links (ohne deep=)
+    werden nicht mehr nur gemeldet, sondern auf ihre /go/-Deep-Route gehoben.
+    Frank-Regel 11.08.: Deep-first, generisch nur wo wirklich kein Fach passt."""
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import affiliate_marketer as am
+        return am.route_for(full_text, am.pillar_of(full_text))
+    except Exception:
+        return ""
+
+
 def load_registry() -> dict:
     """YAML-Simpelparse: '  key: "URL"' Zeilen. Liefert {key: url}."""
     out = {}
@@ -105,14 +118,20 @@ def generate_go_pages(reg: dict) -> int:
     return count
 
 
-def shield_line(body: str, dmap: dict, reg: dict, fname: str, reports: list) -> str:
-    """Routet rohe Affiliate-Links ueber /go/<key>/."""
+def shield_line(body: str, dmap: dict, reg: dict, fname: str, reports: list,
+                ctx_route: str = "") -> str:
+    """Routet rohe Affiliate-Links ueber /go/<key>/. Generische Links (ohne
+    deep=) werden seit 11.08. (Abend) automatisch auf die thematische
+    Deep-/go/-Route gehoben (Auto-Deep)."""
     def repl(m):
         url = m.group(0)
         d = re.search(r"[?&]deep=([\w-]+)", url)
         if not d:
-            # Generisch (kein deep): NICHT routen, nur melden. Zuständig
-            # seit jeher: affiliate_link_check.py (Pillar-Kontext!). Bleibt.
+            if ctx_route and ctx_route in reg:
+                # /go/allgemein/ == funktional identisch zum bisherigen
+                # Check24-Generik-Link; thematische Routen sind klar besser.
+                reports.append((fname, f"AUTO-DEEP → /go/{ctx_route}/", url))
+                return f"/go/{ctx_route}/"
             reports.append((fname, "GENERIC-link (Checker zuständig)", url))
             return url
         key = dmap.get(d.group(1))
@@ -125,7 +144,9 @@ def shield_line(body: str, dmap: dict, reg: dict, fname: str, reports: list) -> 
 
 def process(path: Path, dmap: dict, reg: dict, reports: list) -> tuple[int, str]:
     rel = str(path.relative_to(ROOT))
-    lines = path.read_text(encoding="utf-8").split("\n")
+    full = path.read_text(encoding="utf-8")
+    lines = full.split("\n")
+    ctx_route = ctx_route_for(full)  # einmal pro Datei (Auto-Deep)
     out, n = [], 0
     in_code, fence_open, fence_done = False, False, False
     for raw in lines:
@@ -143,13 +164,13 @@ def process(path: Path, dmap: dict, reg: dict, reports: list) -> tuple[int, str]
             # geklebte Fence-Restzeile (bekanntes Engine-Format)
             rest = s[3:]
             if rest.strip():
-                fixed = shield_line(rest, dmap, reg, rel, reports)
+                fixed = shield_line(rest, dmap, reg, rel, reports, ctx_route)
                 out.append("---" + fixed)
                 continue
             out.append(raw); continue
         if not fence_done:
             out.append(raw); continue
-        fixed = shield_line(raw, dmap, reg, rel, reports)
+        fixed = shield_line(raw, dmap, reg, rel, reports, ctx_route)
         if fixed != raw:
             n += 1
         out.append(fixed)

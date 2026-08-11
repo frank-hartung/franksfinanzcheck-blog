@@ -67,7 +67,7 @@ Warenkörbe in Online-Shops sind psychologische Werkzeuge. Meldungen wie "Nur no
 
 Manchmal schicken dir Händler nach einem Tag sogar einen extra Gutschein per Mail. Wenn du das Produkt dann nach deiner 48-Stunden-Bedenkzeit noch willst, wird es sogar günstiger. Du behältst die Kontrolle und lässt dich nicht hetzen. Geduld zahlt sich hier in barer Münze aus.
 
-Nutze Vergleichsportale wie [Check24](https://a.check24.net), um Preise objektiv zu prüfen. Oft ist das vermeintliche Schnäppchen bei einem anderen Anbieter dauerhaft günstiger. Ein kurzer Check von zwei Minuten verhindert teure Fehlentscheidungen durch Zeitdruck.
+Nutze Vergleichsportale wie [Check24](/go/allgemein/), um Preise objektiv zu prüfen. Oft ist das vermeintliche Schnäppchen bei einem anderen Anbieter dauerhaft günstiger. Ein kurzer Check von zwei Minuten verhindert teure Fehlentscheidungen durch Zeitdruck.
 
 ## Trick 5:<br>Kosten pro Nutzung knallhart berechnen
 
@@ -100,7 +100,7 @@ Neue Gewohnheiten brauchen Zeit, um sich in deinem Alltag zu festigen. Mit diese
 * **Woche 1:** Notiere jeden einzelnen Kauf und die dazugehörige Emotion. Sei ehrlich zu dir selbst.
 * **Woche 2:** Melde dich von allen Newslettern ab und installiere Shopping-Apps von deinem Handy deinstallieren.
 * **Woche 3:** Führe die 48-Stunden-Regel für jeden Kauf über 20 € ein. Kaufe Lebensmittel nur noch mit Liste.
-* **Woche 4:** Prüfe deine Versicherungen und Fixkosten bei [Partner-Versicherung](https://a.partner-versicherung.de). Das gesparte Geld fließt direkt auf dein Sparkonto.
+* **Woche 4:** Prüfe deine Versicherungen und Fixkosten bei [Partner-Versicherung](/go/allgemein/). Das gesparte Geld fließt direkt auf dein Sparkonto.
 
 Am Ende des Monats wirst du feststellen, wie viel mehr Geld auf deinem Konto bleibt. Meistens sind das zwischen 150 € und 400 €, die du vorher unbemerkt ausgegeben hättest. Mehr Tipps zum bewussten Leben findest du in unserem [Frugalismus-Ratgeber](../../pillar/frugalismus/).
 
