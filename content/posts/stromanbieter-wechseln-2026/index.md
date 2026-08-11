@@ -2,7 +2,7 @@
 title: "Stromanbieter wechseln 2026: So sparst du beim Tarifwechsel"
 description: "Stromwechsel in 5 Schritten: Preise vergleichen, kündigen, umsteigen. Mit Checkliste und den häufigsten Fehlern, die dich Geld kosten."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Strom", "Anbieterwechsel", "Sparen"]
 categories: ["Energie"]
 pillar: "strom-sparen"

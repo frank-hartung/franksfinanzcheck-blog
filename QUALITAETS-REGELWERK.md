@@ -226,6 +226,14 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (10):** Grossstoerfall-Schlussbericht: Die Quality-Score-
+  Inline-Zelle in der Engine bewertete ALLE Posts und parkte „human-review"-
+  Faelle — die Kombination Schablonen-Blindheit (Schnell-Tipp/Disclaimer nicht
+  ausgeklammert, uniqueness 0.0) + /go/-Blindheit (has_link false, Affiliate-Part 0.5)
+  zwang 0.80 ueberall (CI = 42 offline). Fix: quality_score.py erkennt
+  /go/-Links + streift Boilerplate vor n-Gramm; Workflow-Skopus auf „nur heute
+  geboren" + CIRCUIT-BREAKER (>3 Park-Vorgaenge = verweigert + Alarm statt
+  Ausloesung). 38 Artikel zurueckgeholt, 4 legitime Entwürfe bleiben.
 - **11.08.2026 (9):** Masken-Kollaps gefunden & geheilt: gieriges Zitat-Regex in
   lektor_guard.mask() fraß Platzhalter verschachtelter Masken (md-Link zwischen
   zwei Zitaten → Link verloren, \x00-Leiche in der Datei). Fix: nicht-gierige

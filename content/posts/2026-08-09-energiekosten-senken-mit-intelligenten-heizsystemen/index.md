@@ -2,7 +2,7 @@
 title: "Intelligente Heizsysteme: So senkst du Energiekosten"
 description: "Senke deine Energiekosten mit intelligenten Heizsystemen und spare Geld bei deinen Heizkosten So sparst du jeden Monat bares Geld."
 date: 2026-08-09
-draft: true
+draft: false
 tags: ["Energiekosten", "Heizsysteme", "Energiesparen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

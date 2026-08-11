@@ -2,7 +2,7 @@
 title: "Günstigen Mietwagen buchen: So sparst du im Urlaub"
 description: "Mietwagen clever buchen: früh vergleichen, Vollkasko ohne Selbstbeteiligung wählen und die richtige Abholstation – so bleibt der Urlaub günstig."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Mietwagen", "Reisen", "Urlaub"]
 categories: ["Reisebudget & Mietwagen"]
 pillar: "mietwagen"

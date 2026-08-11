@@ -2,7 +2,7 @@
 title: "Notgroschen aufbauen: Wie viel Geld reicht wirklich?"
 description: "Wie viele Monatsgehälter solltest du auf der hohen Kante haben? Alle Fakten zum perfekten Notgroschen auf dem Tagesgeldkonto – mit Start-Plan."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Notgroschen", "Tagesgeld", "Finanzielle Sicherheit"]
 categories: ["Haushaltskasse & Budgetplanung"]
 pillar: "frugalismus"

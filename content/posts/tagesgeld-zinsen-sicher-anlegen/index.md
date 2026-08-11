@@ -2,7 +2,7 @@
 title: "Tagesgeld und Zinsen: So parkst du dein Geld sicher"
 description: "Tagesgeldkonto im Vergleich: Zinsen, Einlagensicherung, Tagesgeld vs. Festgeld – so findest du das beste Konto für dein Erspartes."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Tagesgeld", "Sparen", "Zinsen"]
 categories: ["Haushaltskasse & Budgetplanung"]
 pillar: "konto-karten"

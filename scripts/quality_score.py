@@ -122,11 +122,21 @@ def score_article(path: str) -> dict:
     parts["typography"] = max(0.0, typo)
 
     # 5) Einzigartigkeit (bestehendes Audit-Ergebnis grob ermitteln)
+    # Achtung (Stoerfall 11.08.): Kesselplatten (Schnell-Tipp-Box, Disclaimer,
+    # CTA-Zeilen, „Das Wichtigste"-Hakenlistung) werden ZUERST abgezogen -
+    # sonst wertet jeder Artikel als „Duplikat" und es stuermt das Massen-Parken.
+    def _strip_boilerplate(text: str) -> str:
+        text = re.sub(r"💡[^\n]*Schnell-Tipp[^\n]*", " ", text)
+        text = re.sub(r"[*_]?Dieser Artikel enthält Affiliate-Links[^\n]*", " ", text)
+        text = re.sub(r"👉[^\n]*", " ", text)
+        text = re.sub(r"\*\*Das Wichtigste in Kürze:\*\*", " ", text)
+        text = re.sub(r"_(Dieser Artikel enthält|Lesetipps zum Weitersparen)[^\n]*_", " ", text)
+        return text
     try:
         import check_uniqueness as cu
         arts = {}
         for p in glob.glob(f"{BLOG_DIR}/content/posts/*/index.md"):
-            arts[p] = cu.clean_body(open(p, encoding="utf-8").read())
+            arts[p] = cu.clean_body(_strip_boilerplate(open(p, encoding="utf-8").read()))
         from itertools import combinations
         grams = {k: cu.ngrams(v, cu.PHRASE_LEN) for k, v in arts.items()}
         overlap = 0
@@ -137,9 +147,10 @@ def score_article(path: str) -> dict:
     except Exception:
         parts["uniqueness"] = 0.5
 
-    # 6) Affiliate-Integrität
+    # 6) Affiliate-Integrität (Gateway-Ära: echte Links laufen ueber /go/!)
     aff = 1.0
-    has_link = "check24.net" in a["content"] or "partner-versicherung.de" in a["content"]
+    has_link = ("check24.net" in a["content"] or "partner-versicherung.de" in a["content"]
+                or bool(re.search(r"/go/[\w-]+/", a["content"])))
     has_disclosure = "Affiliate" in a["content"] or "Provision" in a["content"]
     if not has_link:
         aff -= 0.5

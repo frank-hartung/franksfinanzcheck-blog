@@ -2,7 +2,7 @@
 title: "E-Auto laden: So senkst du deine Stromkosten zu Hause"
 description: "E-Auto-Ladekosten senken: Hausstrom, Wallbox, Ladetarife und Ökostrom – so lädst du dein Elektroauto am günstigsten. Mit diesen Tipps sparst du bares Geld."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["E-Auto", "Strom", "Ladekosten"]
 categories: ["Günstige Strom- & Gastarife"]
 pillar: "strom-sparen"

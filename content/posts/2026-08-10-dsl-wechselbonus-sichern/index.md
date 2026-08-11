@@ -2,7 +2,7 @@
 title: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
 description: "Jetzt DSL-Wechselbonus sichern und bares Geld sparen! Erfahre hier, wie der Anbieterwechsel stressfrei klappt und welche Prämien aktuell auf dich warten."
 date: 2026-08-10T10:20:09Z
-draft: true
+draft: false
 tags: []
 categories: ["Ratgeber"]
 pillar: "konto-karten"

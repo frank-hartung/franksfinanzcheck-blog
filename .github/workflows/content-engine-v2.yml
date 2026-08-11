@@ -160,16 +160,30 @@ jobs:
           echo "== Qualitäts-Score (FrankAutoOps, Threshold >= 0.85) =="
           python3 - <<'PYEOF'
           import glob, subprocess, sys, json, os
+          import datetime
           sys.path.insert(0, "scripts")
           import quality_score as qs
-          files = sorted(glob.glob("content/posts/*/index.md"))
+          # SKOPUS-SCHUTZ (11.08. Spaet): nur HEUTE geborene Artikel bewerten.
+          # Hintergrund: Der Block bewertete alle Posts; die Kombination aus
+          # Schablonen-Blindheit + /go/-Blindheit parkte ploetzlich 42 Artikel.
+          today = datetime.date.today().isoformat()
+          files = []
+          for f in sorted(glob.glob("content/posts/*/index.md")):
+              head = open(f, encoding="utf-8").read()
+              fm = head.split("---", 2)[1] if head.startswith("---") and head.count("---") >= 2 else ""
+              if today in fm and "draft: false" in fm:
+                  files.append(f)
           results = [qs.score_article(f) for f in files]
           low = [r for r in results if r["verdict"] == "draft+autofix"]
           review = [r for r in results if r["verdict"] == "human-review"]
-          print(f"Qualitäts-Score: {len(results)} Artikel | publish: {len(results)-len(low)-len(review)} | draft: {len(low)} | review: {len(review)}")
+          print(f"Qualitäts-Score: {len(results)} HEUTIGE Artikel | publish: {len(results)-len(low)-len(review)} | draft: {len(low)} | review: {len(review)}")
           if review:
               print(f"⚠ HUMAN REVIEW nötig: {[r['slug'] for r in review]}")
-          # Bei human-review: Artikel auf draft setzen (nicht live gehen)
+          # SABOTAGE-STOPFTRIEME: mehr als 3 Ein-Parkungen pro Lauf = Anomalie;
+          # NIEMALS massenhaft parken (beim letzten Mal blog-breit 42 Artikel weg).
+          if len(review) > 3 or len(low) > 3:
+              print("🛑 QUALITY-CIRCUIT-BREAKER aktiv: Score-Anomalie erkannt – NICHTS wird geparkt/verworfen. Bitte Templates/Scorer prüfen (siehe QUALITAETS-REGELWERK).")
+              sys.exit(0)
           for r in review:
               p = f"content/posts/{r['slug']}/index.md"
               c = open(p, encoding="utf-8").read()
