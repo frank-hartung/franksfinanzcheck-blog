@@ -24,6 +24,13 @@ Das Wichtigste in Kürze:
 * Thermostate für die kalte Jahreszeit programmieren.
 * Raumtemperatur moderat senken und Heizkosten sparen.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/allgemein/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## 1. Gasvertrag prüfen und wechseln
 
 Dein Gastarif entscheidet massiv über deine Fixkosten im Winter. Im August startet die wichtigste Wechselsaison der Energieversorger. Viele Anbieter passen ihre Konditionen pünktlich zum Herbstbeginn an. Wenn du in der Grundversorgung verharrst, zahlst du oft 20 bis 30 % zu viel.

@@ -16,6 +16,13 @@ kurzantwort: "Versteckte Kosten beim Mietwagen können schnell 20 € pro Tag o
 social_posted: true
 ---
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/allgemein/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Falle 1:<br>Die unverständliche Versicherungslage
 
 Viele Buchungsportale werben mit "Vollkasko" – meinen aber eine Vollkasko mit Selbstbeteiligung von oft 1.000 bis 2.000 €. Kommt ein Kratzer, zahlst du selbst. Achte auf "Vollkasko ohne Selbstbeteiligung" (oft als "Premium-Schutz" oder "Top-Schutz" bezeichnet). Der Aufpreis ist meist überschaubar – im Schadensfall aber Gold wert. Zum Beispiel kostet die Vollkasko ohne Selbstbeteiligung bei einem Anbieter 15 € pro Tag, während die Vollkasko mit Selbstbeteiligung nur 5 € pro Tag kostet. Es lohnt sich also, vorher zu vergleichen und die richtige Versicherung auszuwählen.

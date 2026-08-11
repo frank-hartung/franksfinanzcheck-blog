@@ -29,6 +29,13 @@ Ob sich die Anlage für dich rechnet, entscheiden dein Standort und dein Stromve
 * Die Anmeldung im Marktstammdatenregister ist kostenlos und einfach.
 * Du sparst direkt bei jeder Kilowattstunde Eigenverbrauch.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/allgemein/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Was ein Balkonkraftwerk kann (und was nicht)
 
 Ein Balkonkraftwerk nutzt ein oder zwei Solarmodule mit moderner Technik. Ein kleiner Wechselrichter wandelt den Gleichstrom in Haushaltsstrom um. Du steckst das System einfach in eine vorhandene Steckdose. Jedes erzeugte Watt verbrauchen deine Geräte sofort im Haushalt. So stoppt dein Stromzähler oder dreht sich deutlich langsamer.

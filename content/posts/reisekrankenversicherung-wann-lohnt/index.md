@@ -18,6 +18,13 @@ social_posted: true
 
 Ein Krankenhausaufenthalt in den USA kann schnell sechsstellige Summen kosten. Innerhalb Europas lauern Kostenfallen, wenn man nur auf die gesetzliche Kasse vertraut. Eine Reisekrankenversicherung kostet nur wenige Euro pro Jahr und schützt genau vor diesen Risiken. Du bekommst weltweite Absicherung für oft unter 30 € Jahresbeitrag.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/allgemein/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Das Grundproblem:<br>Die gesetzliche Kasse zahlt im Ausland nur wenig
 
 Die gesetzliche Krankenversicherung übernimmt im EU-Ausland mit der Europäischen Krankenversicherungskarte nur die medizinisch notwendige Behandlung zu deutschen GKV-Bedingungen. Du erhältst also meist die Regelversorgung. Nicht abgedeckt sind unter anderem:
