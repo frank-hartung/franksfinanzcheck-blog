@@ -18,7 +18,7 @@ kurzantwort: "Du kannst mit einem monatlichen Betrag von ca. 50–100 € in ei
 social_posted: true
 ---
 
-Schon mit 25 € im Monat legst du den Grundstein für dein späteres Vermögen. Viele Menschen schieben den ersten Schritt jahrelang auf und verschenken so wertvolle Zinsen. Ein Rechenbeispiel verdeutlicht das: Wer mit 25 Jahren startet und monatlich 100 € bei 7 % Rendite anlegt, verfügt mit 65 Jahren über rund 260.000 €. Wer erst mit 35 Jahren beginnt, kommt bei gleicher Sparrate nur noch auf etwa 120.000 €. Dieser „Preis des Wartens“ von 140.000 € lässt sich nie wieder aufholen. Ich habe zu Beginn selbst Fehler bei der Broker-Wahl gemacht, die dich heute unnötiges Geld kosten würden. Erfahre hier, wie ein ETF-Sparplan für Einsteiger: So startest du monatlich funktioniert und worauf du achten musst.
+Schon mit 25 € im Monat legst du den Grundstein für dein späteres Vermögen. Viele Menschen schieben den ersten Schritt jahrelang auf und verschenken so wertvolle Zinsen. Ein Rechenbeispiel verdeutlicht das: Wer mit 25 Jahren startet und monatlich 100 € bei 7 % Rendite anlegt, verfügt mit 65 Jahren über rund 260.000 €. Wer erst mit 35 Jahren beginnt, kommt bei gleicher Sparrate nur noch auf etwa 120.000 €. Dieser „Preis des Wartens“ von 140.000 € lässt sich nie wieder aufholen. Ich habe zu Beginn selbst Fehler bei der Broker-Wahl gemacht, die dich heute unnötiges Geld kosten würden. Erfahre hier, wie ein [ETF-Sparplan für](../../posts/etf-sparplan-fuer-kinder-depot-eröff/) Einsteiger: So startest du monatlich funktioniert und worauf du achten musst.
 
 ## Warum ein ETF-Sparplan?
 
@@ -45,7 +45,7 @@ Hier sind Punkte, die du prüfen solltest:
 
 Zuerst benötigst du ein Wertpapierdepot bei einer Bank oder einem Broker. Vergleiche die Konditionen für die monatliche Ausführung deiner gewünschten Summe. Ein guter Broker bietet dir eine große Auswahl an kostenfreien Aktions-ETFs an. Eröffne das Depot online per Video-Ident-Verfahren in wenigen Minuten.
 
-### Vergleich: Broker-Typen für deinen Sparplan
+### Vergleich:<br>Broker-Typen für deinen Sparplan
 
 | Kriterium | Neo-Broker (z. B. Trade Republic, Scalable) | Direktbanken (z. B. ING, DKB) | Hausbank (Sparkasse, Volksbank) |
 | :--- | :--- | :--- | :--- |

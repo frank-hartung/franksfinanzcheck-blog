@@ -51,7 +51,7 @@ Mit einer Versicherung ermöglichst du deinem Tier immer die beste Medizin. Dein
 Du profitierst zudem von einer hohen Sicherheit für deine Finanzplanung. Der Versicherer übernimmt auch die Kosten für langwierige, chronische Krankheiten. Viele Tarife zahlen sogar für Physiotherapie oder alternative Heilmethoden. Das schont deine Rücklagen für andere wichtige Ausgaben.
 
 ### Vorteile im Überblick
-* Finanzielle Sicherheit bei unerwarteten Tierarztkosten
+* [Finanzielle Sicherheit](../../posts/notgroschen-aufbauen-wie-viel-rei/) bei unerwarteten Tierarztkosten
 * Möglichkeit, die beste Medizin für dein Tier zu wählen
 * Reduzierte finanzielle Belastung bei schweren Unfällen
 * Sicherheit für deine Finanzplanung

@@ -47,7 +47,7 @@ Tarife mit 24 Monaten Laufzeit bieten fast immer die höchsten Rabatte. Du binde
 
 ## Schritt 4:<br>Wechseln – so läuft es ab
 
-Wenn du deinen Internetvertrag wechseln möchtest, ist der Prozess heute weitgehend automatisiert. Dein neuer Anbieter übernimmt in der Regel die Kündigung beim alten Dienstleister.
+Wenn du deinen [Internetvertrag wechseln](../../posts/internet-anbieter-wechseln-kuendig/) möchtest, ist der Prozess heute weitgehend automatisiert. Dein neuer Anbieter übernimmt in der Regel die Kündigung beim alten Dienstleister.
 
 1. **Verfügbarkeit prüfen:** Gib deine Adresse in ein Vergleichsportal ein.
 2. **Vergleichen:** Nutze einen DSL-Vergleich, um Preise und Kundenbewertungen zu sichten.

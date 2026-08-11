@@ -52,7 +52,7 @@ TV, Receiver, Spielkonsole, WLAN-Router, Kaffeemaschine mit Zeitschaltuhr: Ein e
 * Standby-Verbrauch reduzieren
 * Tarif wechseln
 * Strommessgerät verwenden
-* Energiekosten senken durch effiziente Geräte
+* [Energiekosten senken](../../posts/strom-sparen-haushalt-20-ti/) durch effiziente Geräte
 
 ## Häufige Fragen
 

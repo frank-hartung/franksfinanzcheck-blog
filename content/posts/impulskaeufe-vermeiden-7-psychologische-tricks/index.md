@@ -39,7 +39,7 @@ Die digitale Welt macht das Problem noch deutlich schlimmer. Mit "One-Click"-Bes
 
 ## Trick 1:<br>Die 48-Stunden-Regel konsequent nutzen
 
-Dies ist das mächtigste Werkzeug für deine finanzielle Freiheit. Siehst du ein interessantes Produkt, darfst du es nicht sofort kaufen. Setze es stattdessen auf eine Warteliste für exakt 48 Stunden. In dieser Zeit kühlt dein Belohnungszentrum im Gehirn wieder ab.
+Dies ist das mächtigste Werkzeug für deine [finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freih/). Siehst du ein interessantes Produkt, darfst du es nicht sofort kaufen. Setze es stattdessen auf eine Warteliste für exakt 48 Stunden. In dieser Zeit kühlt dein Belohnungszentrum im Gehirn wieder ab.
 
 Oft stellst du nach zwei Tagen fest, dass der Reiz völlig verflogen ist. Die schicke Jacke für 120 € oder das neue Gadget für 80 € wirken plötzlich blass. Du entscheidest nun wieder mit deinem logischen Verstand statt mit deinen Emotionen. Wer diese Regel befolgt, spart oft hunderte Euro pro Monat.
 

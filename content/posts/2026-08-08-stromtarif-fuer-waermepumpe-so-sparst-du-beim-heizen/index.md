@@ -70,7 +70,7 @@ Der Markt für Heizstrom ist in den letzten Jahren stark gewachsen. Neben lokale
 
 Achte beim Vergleich nicht nur auf den Arbeitspreis pro Kilowattstunde. Die monatliche Grundgebühr spielt eine ebenso wichtige Rolle, besonders wenn dein Haus sehr effizient ist. Wähle am besten einen Vertrag mit einer Preisgarantie von 12 Monaten. So bist du vor plötzlichen Preissprüngen im Winter geschützt.
 
-## Profi-Tipp: Kaskadenschaltung für Photovoltaik-Besitzer
+## Profi-Tipp:<br>Kaskadenschaltung für Photovoltaik-Besitzer
 Besitzt du eine PV-Anlage? Dann ist die sogenannte **Kaskadenschaltung** die Königsklasse. Hierbei werden zwei Zähler so hintereinander geschaltet, dass du deinen selbst erzeugten Solarstrom vorrangig für den Haushaltsstrom UND die Wärmepumpe nutzen kannst. Gleichzeitig behältst du den Anspruch auf den günstigen Wärmepumpentarif für den Strom, den du zusätzlich aus dem Netz beziehen musst. Das erfordert zwar etwas Aufwand bei der Zählerverdrahtung, maximiert aber deine Eigenverbrauchsquote und minimiert die Heizkosten.
 
 ## Häufige Fragen

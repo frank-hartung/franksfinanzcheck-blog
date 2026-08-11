@@ -48,7 +48,7 @@ Beim Vergleich der Tarife solltest du auch auf die **Vertragslaufzeit** achten. 
 
 ## Der Herbst-Check für deine Heizung
 
-Ein günstiger Tarif ist die Basis, aber effizientes Heizen hilft dir zusätzlich, deine Heizkosten senken zu können. Entlüfte alle Heizkörper, bevor du die Thermostate im Herbst das erste Mal aufdrehst. Luft im System behindert den Wärmefluss und treibt den Verbrauch unnötig in die Höhe. Ein professioneller hydraulischer Abgleich optimiert die Wärmeverteilung im ganzen Haus. Schon eine Senkung der Raumtemperatur um ein Grad spart etwa 6 Prozent Energie ein.
+Ein günstiger Tarif ist die Basis, aber effizientes Heizen hilft dir zusätzlich, deine [Heizkosten senken](../../posts/waermepumpe-vs-gasheizung-2/) zu können. Entlüfte alle Heizkörper, bevor du die Thermostate im Herbst das erste Mal aufdrehst. Luft im System behindert den Wärmefluss und treibt den Verbrauch unnötig in die Höhe. Ein professioneller hydraulischer Abgleich optimiert die Wärmeverteilung im ganzen Haus. Schon eine Senkung der Raumtemperatur um ein Grad spart etwa 6 Prozent Energie ein.
 
 Eine weitere Möglichkeit, deine Heizkosten zu senken, ist die **Isolierung** deines Hauses. Eine gute Isolierung kann helfen, die Wärme im Haus zu halten und den Verbrauch zu reduzieren. Du kannst auch überlegen, ob du deine alten Heizkörper durch neue, effizientere Modelle ersetzen möchtest.
 

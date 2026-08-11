@@ -16,7 +16,7 @@ kurzantwort: "Du musst im August deine Heizanlage warten lassen, um sicherzustel
 social_posted: true
 ---
 
-Wusstest du, dass du im August hunderte Euro an Energiekosten sparst? Während andere die Sonne genießen, sicherst du dir jetzt die besten Konditionen für den Winter. Wer frühzeitig die Heizperiode vorbereiten will, handelt sofort. So vermeidest du böse Überraschungen bei der nächsten Abrechnung. Diese drei Schritte bringen dir sofort finanzielle Vorteile.
+Wusstest du, dass du im August hunderte Euro an Energiekosten sparst? Während andere die Sonne genießen, sicherst du dir jetzt die besten Konditionen für den Winter. Wer frühzeitig die [Heizperiode vorbereiten](../../posts/heizkosten-senken-10-massnah/) will, handelt sofort. So vermeidest du böse Überraschungen bei der nächsten Abrechnung. Diese drei Schritte bringen dir sofort finanzielle Vorteile.
 
 Das Wichtigste in Kürze:
 * Gaspreise jetzt vergleichen und Wechsel einleiten.

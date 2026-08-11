@@ -27,7 +27,7 @@ Hier erfährst du, wie du deine Zinsen optimierst und Fehler vermeidest. Ich zei
 - Ein Festgeldkonto garantiert dir feste Zinsen über die gesamte Laufzeit.
 - Die gesetzliche Einlagensicherung schützt Beträge bis 100.000 € pro Bank.
 - Eine Kombination beider Konten optimiert deine Rendite.
-- Wer klug Zinsen vergleichen will, nutzt digitale Rechner für den Marktüberblick.
+- Wer klug [Zinsen vergleichen](../../posts/tagesgeld-zinsen-sicher-anle/) will, nutzt digitale Rechner für den Marktüberblick.
 
 ## Der Zinsmarkt 2026 kurz erklärt
 

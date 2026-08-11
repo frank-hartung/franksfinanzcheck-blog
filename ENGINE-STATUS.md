@@ -1,8 +1,8 @@
 # 🤖 ENGINE-STATUS (Content-Engine v2)
 
-**Letzter Lauf:** 2026-08-10 22:10 UTC
+**Letzter Lauf:** 2026-08-11 09:40 UTC
 **Status:** OK
 
-Tageslimit erreicht (2/2).
+Thema: Zweite Welle Gaspreis-Anpassung: Jetzt sichern | Ebene: profi | veröffentlicht | OK via Gemini (Gratis-Key: aistudio.google.com) (profi)
 
 _Wird bei jedem Lauf der Content-Engine v2 aktualisiert._
