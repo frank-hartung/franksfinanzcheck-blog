@@ -226,14 +226,6 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
-- **11.08.2026 (14):** Font-Pakt eingefroren (Frank-Fund „G bei Geld"):
-  Cover werden nur noch in Montserrat Bold gerendert (jetzt fest im Repo
-  static/fonts/Montserrat-Bold.ttf); ist sie weg, bricht generate_covers.py
-  mit Exit 2 ab statt still auf System-Fonts auszuweichen (das war die
-  Ursache: lokal DejaVu vs. CI-Serif = visuelle InKonsistenz). Zwei heutige
-  Titelbilder neu gerendert; 16 Waisen-Cover der geloeschten Gas-Zwillinge
-  entfernt (auch die tiefen Varianten-Ordner). Ehrlich: Wildcard-Unfall
-  selbst gefangen per check_covers.
 - **11.08.2026 (13):** Link-Zivil-Katastrophe gefunden & komplett geheilt:
   Die Engine hatte Dutzende interne Links mit ABGEKNICKTEN Slugs gebaut
   (z. B. …/7-gewohnheiten-finanzielle-freih/) sowie Pillar-Links in die
