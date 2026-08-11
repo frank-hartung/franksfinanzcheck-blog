@@ -37,19 +37,14 @@ links:
   handytarife: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife"
   kreditkarte: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
   tagesgeld: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
-  #  ^ 11.08.2026 repariert: deep=tagesgeldvergleich war TOT (404). Der Tracker-
-  #    Mirror (check24.net) hat KEINE Tagesgeld-Seite (tagesgeld/, geldanlage/,
-  #    festgeld/ alles 404). C24 Bank IST die Geldanlage-Heimat von Check24
-  #    (C24 Tagesgeld) und verifiziert erreichbar.
-  #    TODO Frank: Falls dein Dashboard einen dedizierten Tagesgeld-Deep anbietet,
-  #    hier ersetzen – der Waechter verifiziert ihn dann automatisch end-to-end.
-  fluege: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
-  #  ^ 11.08.2026 ehrlicher Fallback: deep=flugvergleich war TOT (404). Am Tracker
-  #    existiert KEIN funktionierender Flug-Deep (flug/fluege/urlaub/billigflug
-  #    alles 404; das Flug-Portal flug.check24.de ist via click.php nicht
-  #    erreichbar). Deshalb: Check24-Startseite (hat Flug-Kachel im Reise-Menue).
-  #    TODO Frank: Flug-Deep-Link aus dem Check24-Partner-Dashboard holen und
-  #    eintragen – affiliate_health.py verifiziert ihn dann automatisch.
+  #  ^ [PDF/Frank 11.08.2026 bestaetigt]: Es gibt im Check24-Partnerprogramm
+  #    KEINEN eigenen Tagesgeld-Link – der offizielle Deep ist c24bank&cat=14
+  #    (C24 Bank = Check24s Geldanlage-Heimat). WICHTIG: Bei Verlinkung immer
+  #    „C24 Bank" nennen (Tooltips render-link.html + Gateway-Text shield).
+  fluege: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
+  #  ^ [PDF/Frank 11.08.2026 bestaetigt]: Das ist der offizielle Flug-Deep-Link
+  #    aus dem Partnerprogramm (Check24 buendelt Flug mit Pauschalreisen, cat=9).
+  #    NICHT „flugvergleich" o.ae. raten – solche Pfade sind 404-tot!
 
   # --- TARIFCHECK (Unfall aus PDF bestätigt, alle E2E-verifiziert) ---
   #  Hinweis: tarifcheck.de sperrt Datacenter-Bots mit 403 (WAF). Der Waechter

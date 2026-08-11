@@ -213,12 +213,18 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (5):** Frank-Bestaetigung aus dem Partnerprogramm eingefroren:
+  fluege = offizieller Deep `pauschalreisen-vergleich&cat=9` (Homepage-Landung
+  gilt jetzt als Sabotage-Falle im Kontrakt!); tagesgeld = `c24bank&cat=14`
+  (es existiert kein eigener Tagesgeld-Link – C24 Bank ist die Heimat).
+  C24-Nennungs-Regel ueberall: Tooltips (D11-Canonical + render-link),
+  Gateway-Seiten-Text (GO_NAMES im Shield), kuenftige CTA-Anker (Marketer).
 - **11.08.2026 (4):** Affiliate-Grossreparatur + E2E-Haertung. Zwei Deeps waren
   TOT (kreditvergleich, tagesgeldvergleich → 404 auf der Endseite; alter Waechter
   pruefte nur Hop 1!). Neu: kredit→kredit-vergleich, tagesgeld→c24bank (C24 =
   Geldanlage-Heimat), fluege→ehrlicher Homepage-Fallback (kein Flug-Deep am
   Tracker, TODO Dashboard). affiliate_health.py jetzt E2E mit Kategorie-Vertrag,
-  Auto-Heilung auf sicheren Fallback und 14-Faelle-Selbsttest.
+  Auto-Heilung auf sicheren Fallback und 15-Faelle-Selbsttest.
 - **11.08.2026 (3):** affiliate_marketer.py: Schnell-Tipp-Routing-Korrektur (Fehlrouten
   Depot→girokonto, Elementar→handytarife u.a. geheilt), universelles Retarget +
   17-Fälle-Selbsttest als Sabotage-Schutz (Exit 2 vor jeder Datei-Berührung).

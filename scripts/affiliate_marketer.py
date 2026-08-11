@@ -185,10 +185,17 @@ def first_affil_quote(bodysplit: list[str]) -> float:
     return 0.0
 
 
+# Frank-Regel (11.08.2026): Ziel ist die C24 Bank -> im Linktext nennen.
+C24_ROUTES = ("tagesgeld", "girokonto")
+C24_ANCHOR = "Jetzt C24 Bank Angebote vergleichen"
+
+
 def build_top_cta(pillar: str, reg: dict, artikel_text: str = "") -> str:
     route = route_for(artikel_text, pillar) if artikel_text else PILLAR_ROUTE.get(pillar, "allgemein")
     url = f"/go/{route}/" if route in reg else "/go/allgemein/"
     anchor, klass = CTA_POOL[(date.today().day + len(route)) % len(CTA_POOL)]
+    if route in C24_ROUTES:
+        anchor = C24_ANCHOR
     return (
         f'\n---\n\n💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren '
         f'Partner-Vergleich: [**{anchor}**]({url})\n'
@@ -201,6 +208,8 @@ def end_cta(pillar: str, reg: dict, artikel_text: str = "") -> str:
     route = route_for(artikel_text, pillar) if artikel_text else PILLAR_ROUTE.get(pillar, "allgemein")
     url = f"/go/{route}/" if route in reg else "/go/allgemein/"
     anchor, klass = CTA_POOL[(date.today().day + 1) % len(CTA_POOL)]
+    if route in C24_ROUTES:
+        anchor = C24_ANCHOR
     return (
         f'\n---\n\n👉 **Sparend zuerst vergleichen:** [**{anchor}**]({url})\n\n'
         f'*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link '

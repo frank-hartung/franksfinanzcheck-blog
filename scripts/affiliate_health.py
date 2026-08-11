@@ -21,7 +21,7 @@
 #  heilen NICHT (nur Alarm) – kein Aktionismus bei Timeout.
 #
 #  SABOTAGE-SCHUTZ: SELFTEST (offline, laeuft IMMER zuerst):
-#  14 eingefrorene Urteils-Faelle pruefen die verdict()-Logik
+#  15 eingefrorene Urteils-Faelle pruefen die verdict()-Logik
 #  selbst. Wer an Kontrakt/Logging „herumverbessert", bricht jeden
 #  Lauf mit Exit 2 ab, BEVOR etwas geschrieben wird.
 #
@@ -77,10 +77,13 @@ CONTRACT = {
     "allgemein":   ("check24", "pid=80968&aid=18", [], False, True),
     "kredit":      ("check24", "pid=80968&aid=18", ["kredit"], False, False),
     "kfz-versicherung": ("check24", "pid=80968&aid=18", ["kfz"], False, False),
-    "fluege":      ("check24", "pid=80968&aid=18", [], False, True),
     "handytarife": ("check24", "pid=80968&aid=18", ["handy"], False, False),
     "kreditkarte": ("check24", "pid=80968&aid=18", ["kreditkarte"], False, False),
     "tagesgeld":   ("check24", "pid=80968&aid=18", ["c24bank"], False, False),
+    # fluege: offizieller Flug-Deep IM PROGRAMM = pauschalreisen-vergleich&cat=9
+    # (Frank, 11.08.). Homepage-Landung gilt hier als SABOTAGE/Fehlroute!
+    "fluege":      ("check24", "pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9",
+                    ["pauschalreisen"], False, False),
     "unfallversicherung": ("tarifcheck", "partner_id=47086&ad_id=15", ["unfall"], True, False),
     "haftpflicht": ("tarifcheck", "partner_id=47086&ad_id=15", ["haftpflicht"], True, False),
     "hausrat":     ("tarifcheck", "partner_id=47086&ad_id=15", ["hausrat"], True, False),
@@ -107,8 +110,9 @@ SELFTEST = [
     ("kredit", "https://www.check24.net/kredit-vergleich/", 200, "ok"),
     ("tagesgeld", "https://www.check24.net/c24bank/?partner_id=80968&tracking_id=", 200, "ok"),
     ("girokonto", "https://www.check24.net/c24bank/?partner_id=80968&tracking_id=", 200, "ok"),
-    ("fluege", "https://www.check24.net/", 200, "ok"),
     ("allgemein", "https://www.check24.net/", 200, "ok"),
+    ("fluege", "https://www.check24.net/pauschalreisen-vergleich/?pid=80968&ad_id=18&tid=&ref=&mode=", 200, "ok"),
+    ("fluege", "https://www.check24.net/", 200, "kategorie"),  # Homepage = Sabotage-Falle!
     ("haftpflicht", "https://www.tarifcheck.de/haftpflichtversicherung/?partner_id=47086&ad_id=15&model=1", 403, "waf"),
     ("haftpflicht", "https://www.tarifcheck.de/hausratversicherung/?partner_id=47086", 200, "kategorie"),
     ("hausrat", "https://www.tarifcheck.de/hausratversicherung/", 200, "ok"),
