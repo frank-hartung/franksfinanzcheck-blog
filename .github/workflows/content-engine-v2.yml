@@ -162,6 +162,10 @@ jobs:
           echo "== Font-Vertrag (die Datei beweist ihr Gewicht, nicht ihr Name) =="
           python3 -m pip install -q fonttools brotli 2>/dev/null || true
           python3 scripts/font_guard.py || echo "⚠ Font-Pakt (nicht kritisch)"
+          echo "== Tabellen-Wache (Struktur + Zell-Splitter, Selbsttest) =="
+          python3 scripts/table_guard.py --fix --new-only || echo "⚠ Tabellen-Funde gemeldet (nicht kritisch)"
+          echo "== Redaktionelle Endabnahme (Profi-Gate G1-G5, Zertifikat) =="
+          python3 scripts/redaktion_final.py || echo "⚠ Endabnahme: Funde im REDAKTION-FINAL-REPORT (nicht blockierend)"
           echo "== Qualitäts-Score (FrankAutoOps, Threshold >= 0.85) =="
           python3 - <<'PYEOF'
           import glob, subprocess, sys, json, os

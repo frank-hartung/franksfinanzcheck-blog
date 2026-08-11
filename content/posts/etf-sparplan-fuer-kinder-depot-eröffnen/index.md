@@ -10,7 +10,7 @@ keywords: ["ETF-Sparplan für Kinder", "Kinderdepot", "Kindersparen", "Depot fü
 author: "Frank"
 ai_generated: true
 ai_provider: "Manuell (Content-Engine Blueprint A1)"
-kurzantwort: "Ein ETF-Sparplan für dein Kind startet ab 10 bis 25 Euro monatlich: Du eröffnest ein Kinderdepot bei einem günstigen Broker, richtest den Sparplan auf einen Welt-ETF ein und nutzt den Sparerpauschbetrag von 1.000 Euro des Kindes steuerfrei. Bei 50 Euro monatlich und 6 Prozent Rendite warten nach 18 Jahren rund 20.000 Euro auf den Nachwuchs."
+kurzantwort: "Ein ETF-Sparplan für dein Kind startet ab 10 bis 25 Euro monatlich: Du eröffnest ein Kinderdepot bei einem günstigen Broker, richtest den Sparplan auf einen Welt-ETF ein und nutzt den Sparerpauschbetrag von 1.000 Euro des Kindes steuerfrei. Bei 50 Euro monatlich und 6 Prozent Rendite warten nach 18 Jahren rund 19.400 Euro auf den Nachwuchs."
 cover:
   image: "images/covers/etf-sparplan-fuer-kinder-depot-eröffnen.jpg"
   alt: "ETF-Sparplan für Kinder: So baust du sinnvoll Vermögen auf"
@@ -19,7 +19,7 @@ social_posted: true
 ---
 Wenn dein Kind 18 wird, soll es einen möglichst guten Start ins Erwachsenenleben haben – finanziell, versteht sich. Das klassische Sparbuch bringt bei 2 % Zinsen kaum etwas, und die meisten Banksparpläne fressen die Rendite durch Gebühren. Ein ETF-Sparplan ist der moderne Weg: kostengünstig, renditestark und mit Steuervorteilen, die viele Eltern übersehen.
 
-In diesem Artikel zeige ich dir, wie du den [ETF-Sparplan für](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) dein Kind Schritt für Schritt aufsetzt – von der Depot-Wahl über die Steuer-Optimierung bis zu den Fallstricken, die du unbedingt kennen solltest.
+In diesem Artikel zeige ich dir, wie du den [ETF-Sparplan für dein Kind](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) Schritt für Schritt aufsetzt – von der Depot-Wahl über die Steuer-Optimierung bis zu den Fallstricken, die du unbedingt kennen solltest.
 
 
 
@@ -32,7 +32,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Der größte Vorteil beim Sparen für Kinder ist die Zeit. Ein Kind, das mit 1 Jahr zu sparen beginnt, hat 17 Jahre Anlagehorizont bis zur Volljährigkeit – und danach ein ganzes Leben. Genau diese Zeit macht den Zinseszinseffekt so mächtig: Frühe Beiträge wirken Jahrzehnte länger als spätere.
 
-Ein Beispiel: 50 € monatlich ab Geburt, 6 % Rendite, bis zum 18. Geburtstag: rund 19.500 €. Startest du erst mit 10 Jahren, sind es nur noch rund 9.600 € – bei derselben Monatsrate. Wer also früh beginnt, halbiert den nötigen Beitrag für dasselbe Ergebnis.
+Ein Beispiel: 50 € monatlich ab Geburt, 6 % Rendite, bis zum 18. Geburtstag: rund 19.400 €. Startest du erst mit 10 Jahren, sind es nur noch rund 6.100 € – bei derselben Monatsrate. Wer spät beginnt, muss für dasselbe Ergebnis die Rate mehr als verdreifachen.
 
 Dazu kommt der pädagogische Effekt: Ein Depot, das das Kind ab dem Teenager-Alter mitverfolgen darf, lehrt mehr über Geld als jedes Buch. Viele Banken bieten dafür kindgerechte Apps mit Sparzielen und Übersichten.
 
@@ -40,11 +40,13 @@ Dazu kommt der pädagogische Effekt: Ein Depot, das das Kind ab dem Teenager-Alt
 
 Die Wahl des Instruments entscheidet über das Ergebnis. Der Vergleich für 50 € monatlich über 18 Jahre:
 
-| Anlageform | Typische Rendite | Endwert nach 18 Jahren | Kosten |
+| Anlageform | Typische Rendite p. a. | Endwert nach 18 Jahren* | Laufende Kosten |
 |:--- |:--- |:--- |:--- |
-| Sparbuch / Tagesgeld | 2–3 % | 13.300–14.600 € | Keine |
-| Banksparplan (Fonds aktiv) | 3–4 % (nach Kosten oft weniger) | 14.600–16.200 € | 1,5–2,5 % pro Jahr |
-| ETF-Sparplan (Welt-ETF) | 6–7 % (h[istorisch) | ](../../posts/tagesgeld-zinsen-sicher-anlegen/)19.500–22.300 € | 0,2–0,5 % pro Jahr |
+| Sparbuch / Tagesgeld | 2–3 % | rund 13.000–14.300 € | Keine |
+| Banksparplan (aktiver Fonds) | 3–4 % **nach Kosten** | rund 14.300–15.800 € | 1,5–2,5 % pro Jahr |
+| ETF-Sparplan (Welt-ETF) | 6–7 % (historisch) | rund 19.400–21.500 € | 0,2–0,5 % pro Jahr |
+
+*\*Sparrate 50 € monatlich, monatliche Verzinsung, Werte gerundet. Historie ist keine Garantie für die Zukunft.*
 
 Der Unterschied zwischen [Tagesgeld und](../../posts/tagesgeld-zinsen-sicher-anlegen/) ETF-Sparplan liegt nach 18 Jahren bei 5.000 bis 8.000 € – und zwar bei gleichem Monatsbeitrag. Das ist kein Kleingeld: Es ist der Unterschied zwischen Führerschein-Geschenk und Studienfinanzierung.
 
@@ -63,7 +65,7 @@ Für die meisten Familien ist das **Kinderdepot** die bessere Wahl: Steuerlich e
 
 ## Der 5-Schritte-Startplan
 
-So setzt du den [ETF-Sparplan für](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) dein Kind in fünf Schritten um:
+So setzt du den [ETF-Sparplan für dein Kind](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) in fünf Schritten um:
 
 **Schritt 1 – Broker vergleichen (30 Minuten):** Du brauchst einen Anbieter mit kostenlosem Kinderdepot und kostenlosen ETF-Sparplänen. Die großen Neobroker und Direktbanken bieten das inzwischen an. Achte auf: keine Depotgebühr, keine Ordergebühr für den Sparplan, günstige Kosten für den Welt-ETF.
 
@@ -100,7 +102,7 @@ So einfach das Konzept ist, so wichtig sind die Details:
 
 ## Der langfristige Ausblick
 
-Ein [ETF-Sparplan für](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) Kinder ist keine Wette, sondern die konsequente Nutzung von Zeit und Zinseszins. Wer früh startet, gibt dem Kind ein finanzielles Fundament – ohne dass es die Familie belastet. Schon 25 € monatlich ergeben nach 18 Jahren fast 10.000 €; 50 € fast 20.000 €.
+Ein [ETF-Sparplan für Kinder](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) ist keine Wette, sondern die konsequente Nutzung von Zeit und Zinseszins. Wer früh startet, gibt dem Kind ein finanzielles Fundament – ohne dass es die Familie belastet. Schon 25 € monatlich ergeben nach 18 Jahren fast 10.000 €; 50 € fast 20.000 €.
 
 Wichtig ist die Ruhe: Kursschwankungen gehören zum Aktienmarkt dazu. Wer den Sparplan über die Jahre laufen lässt und bei Krisen nicht verkauft, erntet am Ende die Rendite des langen Atems. Genau das ist die Lektion, die das Kind mitnimmt – und die mehr wert ist als jeder Geldbetrag.
 

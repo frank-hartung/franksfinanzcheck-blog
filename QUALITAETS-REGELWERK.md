@@ -231,6 +231,14 @@ jeder Schreibaktion.
   Fall-kontrolliert) – Pflege nur in L14_KANON (lektor_guard.py). Neu
   geborene Faelle meldet das Compound-Radar, Aufnahme hier durch
   Redaktion. Selbsttest nun 16 Faelle.
+- **11.08.2026 (15):** Nachts gehört die Tabellen dem Schlafwandler:
+  Frank erwischte den abgerissenen Link-Mitten-In-Zelle-Bruch in der
+  ETF-Kinder-Tabelle. Das Zahlenmodell werde jetzt auch wirklich bewiesen
+  (50 €/Monat, 6 %, 19 Jahr -> exakt 19.400 €; Appeluft: „halbieren" ->
+  „mehr als verdreifachen" bewiesen). Neuer table_guard.py (T1 Spalten-
+  Kongruenz, T2 Bruchform-Heilung praezis bewiesen byte-gleich, T3
+  Zell-Schutt, T4 absteigende Bereiche), 6 Faelle Selbsttest, verdrahtet
+  in Engine + Weekly-Audit.
 - **11.08.2026 (14):** Inter-Aera ausgerufen (Frank-Wahl nach Font-Palette):
   Ueberschriften UND Covertext = Inter Bold. Montserrat-Thin-Klone entfernt;
   Head-CSS referenziert nur noch Inter (Variable, 400..700) + Playfair-Akzent.

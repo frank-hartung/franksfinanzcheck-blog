@@ -101,6 +101,18 @@ jobs:
             git push || { sleep 20; git pull --rebase origin main && git push; }
           fi
 
+      - name: Tabellen-Wache (Bestand – Struktur/Splitter, selbstheilend)
+        continue-on-error: true
+        run: |
+          python3 scripts/table_guard.py --fix || echo "⚠ Tabellen (nicht kritisch)"
+          git add -A 2>/dev/null || true
+          git diff --cached --quiet || { git config user.name "Content-Bot"; git config user.email "content-bot@users.noreply.github.com"; git commit -m "fix(tabellen): Zell-Splitter geheilt (table_guard)"; git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true; git push || { sleep 20; git pull --rebase origin main && git push; }; }
+
+      - name: Redaktionelle Endabnahme des Wochenbestands (Gates G1-G5, Zertifikat)
+        continue-on-error: true
+        run: |
+          python3 scripts/redaktion_final.py || echo "⚠ Endabnahme meldet Funde (nicht kritisch)"
+
       - name: Audit ausführen (Log wird gespeichert)
         id: audit
         continue-on-error: true   # Wir fangen den Exit-Code selbst ab

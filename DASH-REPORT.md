@@ -1,21 +1,21 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-08-11 19:39 UTC · Modus: FIX
+**Stand:** 2026-08-11 22:29 UTC · Modus: FIX
 
 🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
 
 ## 🎓 Stil-Hinweise (Ebene 2, nur Info bzw. mit --ai aktiv)
 
-- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 18: S3-Konjunktion
-- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 27: S3-Konjunktion
-- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 67: S3-Konjunktion
-- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 71: S3-Konjunktion
-- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 75: S3-Konjunktion
-- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 19: S3-Konjunktion
-- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 23: S3-Konjunktion
-- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 35: S3-Konjunktion
-- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 86: S3-Konjunktion
-- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 119: S3-Konjunktion
+- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 19: S3-Konjunktion
+- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 28: S3-Konjunktion
+- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 68: S3-Konjunktion
+- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 72: S3-Konjunktion
+- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 76: S3-Konjunktion
+- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 20: S3-Konjunktion
+- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 24: S3-Konjunktion
+- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 36: S3-Konjunktion
+- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 87: S3-Konjunktion
+- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 120: S3-Konjunktion
 - `content/posts/5g-home-router-oder-dsl/index.md` Zeile 21: S3-Konjunktion
 - `content/posts/5g-home-router-oder-dsl/index.md` Zeile 32: S3-Konjunktion
 - `content/posts/5g-home-router-oder-dsl/index.md` Zeile 54: S3-Konjunktion
