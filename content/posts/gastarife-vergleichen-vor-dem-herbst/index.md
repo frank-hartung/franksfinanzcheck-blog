@@ -14,18 +14,11 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst im Winter bares Geld sparen, wenn du im Spätsommer den Gastarif wechselst. Ein Preisvergleich kann dir dabei helfen, bis zu 20 % an Heizkosten zu sparen. Durch die Auswahl eines günstigen Tarifs mit Preisgarantie und Boni kannst du deine Ausgaben senken."
 social_posted: true
----Bezahlst du noch die hohen Preise deines Grundversorgers? Wer jetzt seine Gastarife vergleichen will, nutzt den Spätsommer für den Wechsel und spart im kommenden Winter bares Geld. Ein kluger Anbieterwechsel senkt deine jährlichen Fixkosten oft um 200 bis 400 Euro. So sicherst du dir günstige Konditionen, bevor die Heizperiode startet und die Preise traditionell anziehen.
-
-### Das Wichtigste in Kürze
-* Prüfe deinen Jahresverbrauch auf der letzten Abrechnung (Angabe in kWh).
-* Nutze einen unabhängigen Gasvergleich für den Marktüberblick.
-* Achte auf Preisgarantien von mindestens 12 Monaten.
-* Wähle kurze Kündigungsfristen für maximale Flexibilität.
-* Der neue Anbieter erledigt die Kündigung beim alten Versorger automatisch.
-
-## Warum gerade jetzt wechseln?
+---## Warum gerade jetzt wechseln?
 
 Energieversorger passen ihre Preise häufig zum Beginn der Heizsaison an. Wenn du im August oder September handelst, entgehst du dieser Preisspirale. Wer in der teuren Grundversorgung steckt, zahlt ab Oktober oft deutlich mehr als nötig. Der Wechselprozess dauert online nur wenige Minuten und läuft vollautomatisch im Hintergrund ab. Deine Versorgung ist gesetzlich lückenlos gesichert; du merkst von der Umstellung technisch nichts.
+
+Ein wichtiger Aspekt, den du beachten solltest, ist die **Preisgarantie**. Viele Anbieter bieten eine Preisgarantie von mindestens 12 Monaten an. Dies bedeutet, dass der Anbieter seinen Preis für die Dauer der Garantie nicht erhöhen kann. Eine solche Garantie kann dir helfen, deine Kosten langfristig zu planen und unerwartete Preiserhöhungen zu vermeiden.
 
 ## Worauf du beim Gasvergleich achten musst
 
@@ -37,6 +30,10 @@ Energieversorger passen ihre Preise häufig zum Beginn der Heizsaison an. Wenn d
 | **Boni** | Neukundenboni senken den Preis im ersten Jahr massiv. |
 | **Vertragslaufzeit** | 12 Monate bieten Planungssicherheit und Flexibilität. |
 | **Kündigungsfrist** | Kurze Fristen von 4 Wochen sind ideal für schnelle Reaktionen. |
+| **Kundenservice** | Ein guter Kundenservice kann bei Problemen oder Fragen helfen. |
+| **Ökologische Aspekte** | Einige Anbieter bieten ökologische Tarife an, die aus erneuerbaren Energien stammen. |
+
+Es ist auch wichtig, auf die **Kündigungsfrist** zu achten. Eine kurze Kündigungsfrist von 4 Wochen gibt dir die Flexibilität, schnell auf Änderungen im Markt reagieren zu können. Wenn du einen Anbieter mit einer langen Kündigungsfrist wählst, könntest du in einem teuren Vertrag feststecken, wenn die Preise steigen.
 
 ## Der Gaswechsel in 4 Schritten
 
@@ -45,9 +42,13 @@ Energieversorger passen ihre Preise häufig zum Beginn der Heizsaison an. Wenn d
 3. **Angebot prüfen**: Achte auf das Kleingedruckte bei den Bonuszahlungen. Manche Boni fließen erst nach einem vollen Belieferungsjahr zurück auf dein Konto.
 4. **Abschluss machen**: Fülle das Online-Formular aus. Dein neuer Anbieter kündigt für dich beim alten Versorger und bestätigt dir den Lieferbeginn schriftlich.
 
+Beim Vergleich der Tarife solltest du auch auf die **Vertragslaufzeit** achten. Ein Vertrag mit einer Laufzeit von 12 Monaten bietet eine gute Balance zwischen Planungssicherheit und Flexibilität. Wenn du einen Vertrag mit einer längeren Laufzeit wählst, könntest du in einem teuren Vertrag feststecken, wenn die Preise steigen.
+
 ## Der Herbst-Check für deine Heizung
 
 Ein günstiger Tarif ist die Basis, aber effizientes Heizen hilft dir zusätzlich, deine Heizkosten senken zu können. Entlüfte alle Heizkörper, bevor du die Thermostate im Herbst das erste Mal aufdrehst. Luft im System behindert den Wärmefluss und treibt den Verbrauch unnötig in die Höhe. Ein professioneller hydraulischer Abgleich optimiert die Wärmeverteilung im ganzen Haus. Schon eine Senkung der Raumtemperatur um ein Grad spart etwa 6 Prozent Energie ein.
+
+Eine weitere Möglichkeit, deine Heizkosten zu senken, ist die **Isolierung** deines Hauses. Eine gute Isolierung kann helfen, die Wärme im Haus zu halten und den Verbrauch zu reduzieren. Du kannst auch überlegen, ob du deine alten Heizkörper durch neue, effizientere Modelle ersetzen möchtest.
 
 ## Häufige Fragen
 
@@ -59,6 +60,12 @@ Ein Gasvergleich lohnt sich besonders für Haushalte in der Grundversorgung. Hie
 
 ### Was passiert, wenn der alte Vertrag noch läuft?
 Du schließt den neuen Vertrag einfach mit Wirkung zum Ende deiner aktuellen Laufzeit ab. Bei einer Preiserhöhung hast du zudem ein Sonderkündigungsrecht. Nutze dieses Recht aktiv, um sofort Gaskosten sparen zu können.
+
+### Kann ich auch als Mieter einen Gasanbieter wechseln?
+Ja, auch als Mieter kannst du einen Gasanbieter wechseln. Du musst jedoch sicherstellen, dass du die Erlaubnis deines Vermieters hast, bevor du einen neuen Vertrag abschließt.
+
+### Wie lange dauert der Wechselprozess?
+Der Wechselprozess dauert in der Regel nur wenige Minuten. Du füllst das Online-Formular aus, und dein neuer Anbieter übernimmt die restlichen Schritte. Die Umstellung deines Zählers erfolgt automatisch im Hintergrund.
 
 ---
 

@@ -1,20 +1,19 @@
 # 📐 LAYOUT-REPORT (Layout-Automatisierung)
 
-**Stand:** 2026-08-10 23:07 UTC
+**Stand:** 2026-08-11 00:28 UTC
 
-## ⚠️ Warnungen (1)
-## ✅ OK (7)
+## ❌ Kritisch (1)
+## ✅ OK (6)
 
 ## ❌ Kritisch
+Meta-Description fehlt auf 74 Seiten.
 
 ## ⚠️ Warnungen
-Zukunfts-Link (geplant): posts/etf-sparplan-fuer-kinder-depot-eröffnen/index.html → ../../posts/freistellungsauftrag-optimal-nutzen/
 
 ## ✅ OK
-Interne Links: 1554 geprüft, 0 kaputt.
+Interne Links: 552 geprüft, 0 kaputt.
 Covers: alle Originale + WebP/AVIF-Varianten vorhanden.
 Alt-Texte: alle gesetzt und aussagekräftig.
 Schema-JSON-LD (Article) auf allen 74 Artikel-Seiten.
 og:image auf allen Artikel-Seiten.
-Meta-Description überall vorhanden.
 H1 überall vorhanden.

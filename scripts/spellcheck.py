@@ -64,6 +64,9 @@ LINK_RE = re.compile(r'\[([^\]]*)\]\([^)]*\)')
 # Code-Blöcke
 CODE_RE = re.compile(r'```.*?```', re.S)
 
+# Markdown-Tabellen-Trennzeile (Spalten-Ausrichtung): „| :--- | :---: |“
+TABLE_SEP_RE = re.compile(r'^\s*\|?\s*:?-{2,}:?\s*(?:\|\s*:?-{2,}:?\s*)*\|?\s*$', re.M)
+
 # Satzendepunkte für Satzanfangs-Prüfung
 SENTENCE_END_RE = re.compile(r'([.!?])\s+([a-zäöüß])')
 
@@ -362,6 +365,13 @@ def analyze_article(a, whitelist):
     body_masked = LINK_RE.sub(_mask_span, body_masked)
     # &nbsp; (6 Zeichen) → 6 Leerzeichen: gleiche Länge, Offsets bleiben gültig
     body_masked = body_masked.replace("&nbsp;", " " * 6)
+
+    # Markdown-Tabellen-TRENNZEILEN („| :--- | :--- |“ – Spalten-Ausrichtung)
+    # sind gültige Syntax; das „Leerzeichen vor :“ wäre ein False Positive.
+    # → als maskierte Intervalle markieren (gleiche Länge, Offsets gültig).
+    for m in TABLE_SEP_RE.finditer(body_masked):
+        mask_intervals.append((m.start(), m.end()))
+    body_masked = TABLE_SEP_RE.sub(lambda m: " " * (m.end() - m.start()), body_masked)
 
     # 2b2. SATZANFANG großschreiben (TOP-LEVEL, deterministisch & robust):
     #      a) Am ABSATZANFANG: erste Zeile eines Blocks (nach Leerzeile oder

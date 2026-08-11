@@ -7,7 +7,7 @@ Ersetzt den fragilen Einzel-Lauf der alten Automatisierung durch eine
   EBENE 1 (Normal):   KI-Artikel generieren, Profi-Gate hart (wie bisher),
                       max. 3 Versuche mit wechselndem Stil/Perspektive.
   EBENE 2 (Relaxed):  Wenn Ebene 1 scheitert: 2 weitere Versuche mit
-                      reduzierter Schwelle (nur HARTE Kriterien: >= 350 Wörter,
+                      reduzierter Schwelle (nur HARTE Kriterien: >= 550 Wörter,
                       >= 3 H2, keine KI-Floskeln). Artikel wird trotzdem
                       veröffentlicht – Qualitäts-Gates (Phase 3) polieren nach.
   EBENE 3 (Draft):    Wenn auch das scheitert: Artikel wird als ENTWURF
@@ -191,7 +191,7 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
             words = len(re.findall(r"\w+", text))
             h2 = len(re.findall(r"^##\s", body, re.M))
             floskeln = [f for f in g.PROFI_FLOSKELN if f in text.lower()]
-            if words < 350 or h2 < 3 or floskeln:
+            if words < 550 or h2 < 3 or floskeln:
                 print(f"  ⚠ Relaxed-Gate: {words} Wörter / {h2} H2 / Floskeln {floskeln[:2]} (Versuch {attempt})")
                 continue
 
