@@ -30,7 +30,8 @@ on:
       - "Pinterest-AI"           # Pins würden still ausfallen
       - "Layout-AI"              # Layout-Regressionen still
       - "FrankAutoOps-Report"
-      - "Affiliate-Health (Wochenwache)"    # Ops-Monitoring selbst
+      - "Affiliate-Health (Wochenwache)"
+      - "Design-Visual (Screenshot-Regression)"    # Ops-Monitoring selbst
     types:
       - completed
 

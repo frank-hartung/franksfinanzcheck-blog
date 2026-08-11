@@ -105,6 +105,14 @@ Heilung = KI ergänzt **Mehrwert-Module** (kein Fülltext!): Rechenbeispiel mit 
 typische Fehler, Checkliste, +2 FAQ – eingefügt vor Fazit/Disclaimer, nach Gates.
 Neue Artikel: Engine (`--new-only`). Rückstand: Wochen-Audit (`--backlog 3`, Pillars zuerst).
 
+### design_guard.py + design_visual.py – 🎨 Verlagshaus-Design-QA (neu 11.08.)
+| Regel/Modul | Inhalt | Lohn/Macht |
+|---|---|---|
+| Statisch (Guard) | D1 CLS-Bilder dims, D2 alt-Text, D3 Heading-Springe, D4 vage Links, D5 font-display, D6 externe Calls (KRITISCH – Privacy!), D7 doppelte IDs, D8 lang/viewport | Auto-Fix Alt-Text |
+| Visuell (Visual) | pHash-Schnappschüsse (Desktop+Mobile) vs. Baseline; Regression -> Issue (Dedupe), Baseline heilt sich mit moderater Drift | Screenshots NIE im Repo (64-Bit-Hashes!) |
+
+Echtes Verfahren wie bei Grossverlagen (Percy/Chromatic): nur deutlich leichter.
+
 ### math_guard.py – 🧮 Faktencheck-Schreibtisch (neu 11.08.)
 | Regel | Inhalt | Automatik |
 |---|---|---|
