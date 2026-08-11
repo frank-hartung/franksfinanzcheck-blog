@@ -226,6 +226,10 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (12):** Archiv-Roundtrip abgeschlossen (alle deterministischen
+  Auto-Regeln 0 Rest-Funde; Radar: 148 L8/166 L5 bewusst delegeiert) +
+  neuer wochentlicher KI-Lauf „Redaktions-Politur" (Freitag 17:00 MESZ,
+  --ai-budget=3 nach Fund-Dichte, Gates aktiv, Franks Quota-Regel).
 - **11.08.2026 (11):** Betriebspruefung Frank: vier Massnahmen ausgefuehrt:
   13a. Lektor L13 Doppel-Anlauf-Detektor (KI-Verschleppungen „Ddiebesten" ->
   Report; Selbsttest-Faelle 14+15 inkl. Aachen-Negativfall);
