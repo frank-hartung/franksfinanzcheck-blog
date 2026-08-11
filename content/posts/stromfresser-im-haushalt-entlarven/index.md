@@ -65,6 +65,6 @@ Ja – es zeigt dir in 24 Stunden, ob dein Kühlschrank krankhaft viel zieht. Un
 ### Wie viel kann ich insgesamt sparen?
 Du kannst realistisch auf 300 bis 500 € Ersparnis pro Jahr kommen, wenn du Standby konsequent reduzierst, den Kühlschrank tauschst und den Tarif wechselst.
 
-👉 **Stromtarife vergleichen und Wechselprämie sichern:** [**→ Jetzt Strompreise vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
+👉 **Stromtarife vergleichen und Wechselprämie sichern:** [**→ Jetzt Strompreise vergleichen**](/go/strom/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

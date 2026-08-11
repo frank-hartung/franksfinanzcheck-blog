@@ -76,6 +76,6 @@ Ja, aber erst nach Ablauf der Mindestlaufzeit (meist 12 Monate) oder gegen Zahlu
 Das ist der Tarif, in den du automatisch fällst, wenn du keinen eigenen Vertrag hast – und fast immer der teuerste. Wer nie gewechselt hat, zahlt meist zu viel.
 
 ---
-👉 **Jetzt Stromtarife vergleichen und bis zu 300 € sparen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
+👉 **Jetzt Stromtarife vergleichen und bis zu 300 € sparen:** [**→ Jetzt vergleichen bei CHECK24**](/go/strom/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -98,6 +98,6 @@ Wenn du in einer Stadt wohnst oder viel mit der Bahn reist, ist 5G ein echter Vo
 
 ---
 
-👉 **Jetzt Handytarife vergleichen und sparen:** [**→ Tarife prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife)
+👉 **Jetzt Handytarife vergleichen und sparen:** [**→ Tarife prüfen**](/go/handytarife/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -73,5 +73,5 @@ Das ist die vom Gesetzgeber festgelegte, zweckmäßige und wirtschaftliche Verso
 
 ---
 
-👉 **Jetzt Zahnzusatzversicherung vergleichen:** [**→ Tarife prüfen**](https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=zahnzusatzversicherung)
+👉 **Jetzt Zahnzusatzversicherung vergleichen:** [**→ Tarife prüfen**](/go/zahnzusatzversicherung/)
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

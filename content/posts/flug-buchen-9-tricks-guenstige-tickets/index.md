@@ -120,6 +120,6 @@ Die Flugbuchung ist die halbe Reise – die andere Hälfte sind [Mietwagen](../.
 Bei einer Verspätung ab 3 Stunden oder einem Ausfall hast du Anspruch auf Ausgleichszahlungen (250 bis 600 €, je nach Flugdistanz) plus Betreuungsleistungen (Verpflegung, Hotel). Die Airline muss dich informieren – und du kannst die Entschädigung online über die [Fluggastrechte-Portale](../../posts/guenstige-fluege-spaetsommer-finden/) oder direkt bei der Airline geltend machen. Wichtig: Beweise sichern (Boardingkarte, Verspätungs-Mitteilung) und innerhalb der Frist (3 Jahre) einreichen.
 
 
-👉 **Jetzt Flüge vergleichen und günstig buchen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=flugvergleich)
+👉 **Jetzt Flüge vergleichen und günstig buchen:** [**→ Jetzt vergleichen bei CHECK24**](/go/fluege/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
