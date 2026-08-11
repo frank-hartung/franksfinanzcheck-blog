@@ -1,0 +1,59 @@
+# ============================================================
+#  REDAKTIONS-POLITUR (Freitags 17:00 MESZ)
+#
+#  Frank-Beschluss 12.08.: Gezielter, quota-schonender KI-Feinschliff
+#  fuer das Archiv. Was heute schon deterministisch auto-geheilt wird,
+#  bleibt Sache der Wachen – hier geht es um das, was KI mit Gates
+#  besser loest (Echoe, Personen-Mix, ggf. spaeter Longsatz-Umbau):
+#
+#    python3 scripts/lektor_guard.py --fix --ai --ai-budget=3
+#
+#  Budget-Regel dauerhaft: MAX 3 Dateien pro Lauf (Ranking nach
+#  Fund-Dichte, Echoe priorisiert). So bleibt die Groq/Gemini-Quote
+#  kalt, waehrend der Bestand sich jede Woche spuerbar hebt.
+#  Kein Fund -> kein Commit, Workflow bleibt gruen.
+#
+#  Sabotage-Schutz: Der eingebaute 15-Faelle-SELBSTTEST des
+#  Lektors laeuft vor jedem Einsatz und bricht bei Abweichung ab
+#  (Exit 2, keine Schreibung).
+# ============================================================
+name: Redaktions-Politur (KI, budgetiert)
+
+on:
+  schedule:
+    - cron: "0 15 * * 5"    # Freitag 17:00 MESZ (15:00 UTC)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: redaktions-politur
+  cancel-in-progress: false
+
+jobs:
+  politur:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lektorat mit KI-Budget (L5-Echo/L3-Person, Gates aktiv)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/lektor_guard.py --fix --ai --ai-budget=3 || echo "⚠ Politur-Teilprobleme – nicht kritisch, siehe LEKTOR-REPORT"
+
+      - name: Geheilte Zeilen committen
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add content/ LEKTOR-REPORT.md data/lektor_history.jsonl
+          if git diff --cached --quiet; then
+            echo "Keine KI-Heilungen – Bestand stabil. ✨"
+          else
+            git commit -m "content: Redaktions-Politur (KI-Gates, Budget 3) - Echoe/Personen geheilt"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push || { sleep 20; git pull --rebase origin main && git push; }
+          fi
