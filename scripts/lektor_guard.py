@@ -70,6 +70,12 @@ DO_FIX = "--fix" in sys.argv
 USE_AI = "--ai" in sys.argv
 DRY_RUN = "--dry-run" in sys.argv
 NEW_ONLY = "--new-only" in sys.argv
+# Redaktions-Politur-Modus (12.08., Frank): --ai-budget N
+#  KI-Heilung nur fuer die N lautesten Fund-Dateien, Rest bleibt Report.
+AI_BUDGET = None
+for _a in sys.argv:
+    if _a.startswith("--ai-budget"):
+        AI_BUDGET = int(_a.split("=", 1)[1]) if "=" in _a else 3
 
 # ---------------- L1: Doppelwoerter (Kanon: wiederholte Funktionswoerter) --------
 # Auto-Fix nur bei NIE legalen Verdopplungen (Konjunktionen/Partikel).
@@ -229,7 +235,7 @@ def unmask(line, store):
 def fresh_stats() -> dict:
     return {"L1": 0, "L1rel": 0, "L2": 0, "L3": 0, "L4": 0, "L5echo": 0, "L5ki": 0,
             "L7": 0, "L8n": 0, "L8meldung": False, "L9": 0, "L10": 0, "L11": 0, "L12": 0,
-            "L13": 0}
+            "L13": 0, "L3ki": 0}
 
 
 def run_selftest() -> list[str]:
@@ -448,9 +454,6 @@ def lektor_line(line: str, stats, reports=None, fname="", line_no=0, du_dominant
         if n_before:
             stats["L2"] += n_before
             line = pat.sub(repl, line)
-    # L3 Personenkonsistenz – KI-only (deterministisch NIEMALS: Worttausch
-    # ohne Verb-Konjugation erzeugt Grammatik-Bruch, getestet und verworfen).
-    # Zwei Bedingungen: Datei ist du-dominiert + Satz hat Sie-Formen.
     if du_dominant and re.search(r"\b(Sie|Ihnen|Ihre|Ihrem|Ihrer)\b", line):
         stats["L3"] += line.count("Sie ") + line.count("Ihn")
         if reports is not None:
@@ -461,6 +464,7 @@ def lektor_line(line: str, stats, reports=None, fname="", line_no=0, du_dominant
                     fixed = l3_ai_rewrite(satz)
                     if fixed and fixed != satz:
                         line = line.replace(satz, fixed)
+                        stats["L3ki"] += 1
     # L4 Ausrufezeichen
     bang = line.count("!") + line.count("！")
     if bang:
@@ -574,16 +578,39 @@ def main() -> None:
         print("\n".join(fehler))
         sys.exit(2)
     print(f"✅ Lektor-Selbsttest: {len(SELFTEST)} Fälle grün.")
+    global USE_AI
     files = target_files()
+    if USE_AI and AI_BUDGET is not None:
+        # Budget-Ranking (Redaktions-Politur): Dateien mit den meisten
+        # KI-heilbaren Funden (Echo + Personen-Mix) zuerst, Rest nur Report.
+        bedarf = []
+        for p in files:
+            t = p.read_text(encoding="utf-8")
+            eco = 0
+            for ln in t.split("\n"):
+                if ln.lstrip().startswith(("-", "*", "|", "#", ">", "!")) or len(ln.strip()) < 36:
+                    continue
+                eco += len(l5_echo(mask(ln)[0]))
+            sie_n = len(re.findall(r"\b(Sie|Ihnen|Ihre)\b", t))
+            if eco or sie_n:
+                bedarf.append((eco * 2 + sie_n, str(p)))
+        bedarf.sort(reverse=True)
+        files = [Path(p) for _n, p in bedarf] + [f for f in files if str(f) not in {p for _n, p in bedarf}]
+        print(f"💎 Politur-Modus: KI-Budget {AI_BUDGET} Datei(en), Reihenfolge nach Bedarf (Echoe/Personen-Mix)")
     total_fix = {"L1": 0, "L2": 0, "L3": 0, "L4": 0, "L5echo": 0, "L5ki": 0,
                  "L7": 0, "L8n": 0, "L9": 0, "L10": 0, "L11": 0, "L12": 0, "L13": 0}
     all_reports = []
     touched = 0
+    used_ai_files = 0
     for p in files:
+        if AI_BUDGET is not None and used_ai_files >= AI_BUDGET:
+            USE_AI = False  # Budget aufgebraucht – restliche Dateien nur Report
         stats, reports, new_text = process(p)
         if DO_FIX and not DRY_RUN and new_text != p.read_text(encoding="utf-8"):
             p.write_text(new_text, encoding="utf-8")
             touched += 1
+        if AI_BUDGET is not None and (stats.get("L5ki") or stats.get("L3ki")):
+            used_ai_files += 1
         for k in total_fix:
             total_fix[k] += stats[k]
         all_reports += reports
