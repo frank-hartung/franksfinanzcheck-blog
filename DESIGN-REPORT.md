@@ -1,11 +1,8 @@
 # 🎨 DESIGN-REPORT (Verlags-QA)
 
-**Stand:** 2026-08-11 14:25 UTC · Modus: FIX · Seiten: 410
-**🔴 Kritisch:** 1 · **🟡 Warnungen:** 185 · **✅ Auto-geheilt (alts):** 0
+**Stand:** 2026-08-11 15:49 UTC · Modus: REPORT · Seiten: 410
+**🔴 Kritisch:** 0 · **🟡 Warnungen:** 186 · **✅ Auto-geheilt (alts):** 0
 
-## 🔴 Kritisch
-
-- **D11** Render-Hook ohne Ziel-Tooltip - Nutzer erkennt das Affiliate-Ziel nicht (Transparenz-Verlust)!
 
 ## 🟡 Warnungen (Auswahl)
 

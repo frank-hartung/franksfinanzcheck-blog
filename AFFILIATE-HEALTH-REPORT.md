@@ -1,6 +1,6 @@
 # 🩺 AFFILIATE-HEALTH-REPORT (E2E)
 
-**Stand:** 2026-08-11 15:26 UTC
+**Stand:** 2026-08-11 15:50 UTC
 **Routen:** 18 · **E2E geprüft:** 18 **· WAF-Hinweise:** 5
 **Status:** 🟢 Alles gesund
 

@@ -66,6 +66,20 @@ def deep_map(reg: dict) -> dict:
     return m
 
 
+# Ziel-Namen fuer die Gateway-Seiten (Transparenz beim Uebergang –
+# wie Profi-Affiliates: Nutzer SEHEN, wohin es geht; Frank-Regel 11.08.:
+# bei C24-Verlinkung immer die C24 Bank nennen).
+GO_NAMES = {
+    "tagesgeld": "C24 Bank (von Check24)",
+    "girokonto": "C24 Bank (von Check24)",
+    "haftpflicht": "Tarifcheck",
+    "hausrat": "Tarifcheck",
+    "unfallversicherung": "Tarifcheck",
+    "zahnzusatzversicherung": "Tarifcheck",
+    "reisekrankenversicherung": "Tarifcheck",
+}
+
+
 def generate_go_pages(reg: dict) -> int:
     """Erzeugt die statischen Weiterleitungen static/go/<key>/index.html."""
     GO_DIR.mkdir(parents=True, exist_ok=True)
@@ -74,18 +88,19 @@ def generate_go_pages(reg: dict) -> int:
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta http-equiv="refresh" content="0; url={url}">
 <link rel="canonical" href="{url}">
-<title>Weiter zu unserem Partner | FranksFinanzcheck</title>
+<title>Weiter zu {zielname} | FranksFinanzcheck</title>
 </head><body style="font-family:sans-serif;text-align:center;padding:60px 20px;color:#19324c">
-<p>Du wirst zu unserem Partner weitergeleitet …</p>
+<p>Du wirst zu <strong>{zielname}</strong> weitergeleitet …</p>
 <h1 style="font-size:20px">FranksFinanzcheck</h1>
-<p><a href="{url}" style="background:#0f6049;color:#fff;padding:12px 26px;border-radius:8px;text-decoration:none;font-weight:600">Falls nicht automatisch: hier klicken</a></p>
+<p><a href="{url}" style="background:#0f6049;color:#fff;padding:12px 26px;border-radius:8px;text-decoration:none;font-weight:600">Falls nicht automatisch: weiter zu {zielname}</a></p>
 <p style="color:#798897;font-size:12px;margin-top:40px">Partnerlink (Werbung). Wir erhalten ggf. eine Provision – fuer dich kostenlos.</p>
 </body></html>
 """
     for key, url in reg.items():
         dest = GO_DIR / key / "index.html"
         dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.write_text(tpl.replace("{url}", url), encoding="utf-8")
+        dest.write_text(tpl.replace("{url}", url)
+                        .replace("{zielname}", GO_NAMES.get(key, "Check24")), encoding="utf-8")
         count += 1
     return count
 
