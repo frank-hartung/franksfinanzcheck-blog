@@ -72,7 +72,7 @@ Die Zinsen für 2026 staffeln sich je nach Laufzeit. Für 12 Monate liegen die 
 
 Ein konkretes Beispiel verdeutlicht den Unterschied bei einer Anlage von 10.000 € über 3 Jahre. Auf einem Tagesgeldkonto mit 2,5 % Zinsen wächst dein Kapital auf 10.769 €. Das entspricht einem Gewinn von 769 €. Ein Festgeld mit 3,0 % erzielt im gleichen Zeitraum 10.927 €.
 
-Du gewinnst durch die Bindung also 158 € zusätzlich. Eine Kombination aus 5.000 € Tagesgeld und 5.000 € Festgeld bringt dir 10.858 €. Dieser Mix bietet dir Sicherheit und eine ordentliche Rendite. Für den echten Vermögensaufbau nutzt du zusätzlich einen [langfristigen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/).
+Du gewinnst durch die Bindung also 158 € zusätzlich. Eine Kombination aus 5.000 € [Tagesgeld und](../../posts/tagesgeld-zinsen-sicher-anle/) 5.000 € Festgeld bringt dir 10.858 €. Dieser Mix bietet dir Sicherheit und eine ordentliche Rendite. Für den echten Vermögensaufbau nutzt du zusätzlich einen [langfristigen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/).
 
 ## Sicherheit:<br>Die Einlagensicherung verstehen
 

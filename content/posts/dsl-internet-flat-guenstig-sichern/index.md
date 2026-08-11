@@ -57,7 +57,7 @@ Wenn du deinen [Internetvertrag wechseln](../../posts/internet-anbieter-wechseln
 
 ## Glasfaser:<br>Wann lohnt sich der Wechsel?
 
-Glasfaser bietet die stabilste Verbindung und sehr hohe Upload-Raten. Ein Wechsel ist sinnvoll, wenn du beruflich riesige Datenmengen versendest oder eine zukunftssichere Leitung wünschst. Die Preise für Glasfaser sind zuletzt gesunken. Oft liegen sie durch Aktionsangebote auf dem Niveau von herkömmlichen DSL-Tarifen. Ein Internetvertrag wechseln auf Glasfaser wertet zudem deine Immobilie langfristig auf.
+Glasfaser bietet die stabilste Verbindung und sehr hohe Upload-Raten. Ein Wechsel ist sinnvoll, wenn du beruflich riesige Datenmengen versendest oder eine zukunftssichere Leitung wünschst. Die Preise für Glasfaser sind zuletzt gesunken. Oft liegen sie durch Aktionsangebote auf dem Niveau von herkömmlichen DSL-Tarifen. Ein [Internetvertrag wechseln](../../posts/internet-anbieter-wechseln-kuendig/) auf Glasfaser wertet zudem deine Immobilie langfristig auf.
 
 ## Häufige Fragen
 

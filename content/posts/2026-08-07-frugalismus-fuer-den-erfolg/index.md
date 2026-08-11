@@ -37,16 +37,16 @@ Du brauchst ein klares finanzielles Ziel, um langfristig motiviert zu bleiben. I
 Das Herzstück des Frugalismus ist die **Sparquote**. Während der Durchschnittsdeutsche etwa 10 % seines Einkommens beiseitelegt, zielen Frugalisten auf 30 %, 50 % oder sogar noch mehr ab. Warum? Weil eine hohe Sparquote die Zeit bis zur finanziellen Freiheit exponentiell verkürzt. Wer 50 % seines Einkommens spart, kann nach etwa 17 Jahren von seinem Vermögen leben (basierend [auf der 4-Prozent](../../posts/zinseszinseffekt-formel-erkla/)-Regel).
 
 ## Haushaltsbuch führen
-Wer Vermögen aufbauen will, muss seine Zahlen im Griff haben. Ein Haushaltsbuch führen ist das Fundament deiner finanziellen Freiheit. Dokumentiere jede Ausgabe, damit du versteckte Kostenfresser sofort entlarvst. So entdeckst du Abonnements oder Kleinstbeträge, die sich monatlich oft auf 50 € bis 150 € summieren.
+Wer [Vermögen aufbauen](../../posts/zinseszinseffekt-formel-erkla/) will, muss seine Zahlen im Griff haben. Ein [Haushaltsbuch führen](../../posts/frugalismus-tricks-alltag-200-euro-spa/) ist das Fundament deiner finanziellen Freiheit. Dokumentiere jede Ausgabe, damit du versteckte Kostenfresser sofort entlarvst. So entdeckst du Abonnements oder Kleinstbeträge, die sich monatlich oft auf 50 € bis 150 € summieren.
 
 Du hast hierbei die Wahl zwischen klassischen Apps, Excel-Tabellen oder dem analogen Notizbuch. Wichtig ist die Kategorisierung:
 1. **Fixkosten:** Miete, Versicherungen, Internet.
 2. **Variable Notwendigkeiten:** Lebensmittel, Drogerie, Fahrtkosten.
 3. **Lifestyle/Luxus:** Restaurantbesuche, Streaming-Dienste, Hobby.
 
-Nach drei Monaten Analyse wirst du Muster erkennen. Oft ist es der tägliche Coffee-to-go oder die vergessene [Fitnessstud](../../posts/versicherungen-kuendigen-diese-5-poli/)io-Mitgliedschaft, die dein Budget [unbemerkt aushöhlt.
+Nach drei Monaten Analyse wirst du Muster erkennen. Oft ist es der tägliche Coffee-to-go oder die vergessene [Fitnessstud](../../posts/versicherungen-kuendigen-diese-5-poli/)io-Mitgliedschaft, die dein Budget [[unbemerkt ](../../posts/versicherungen-kuendigen-diese-5-poli/)aushöhlt.
 
-](../../posts/2026-08-06-frugalismus-im-all/)## Spartipps im Alltag
+](../../posts/2026-08-06[-frugalismus-im-all/)](../../posts/2026-08-06-frugalismus-im-all/)## Spartipps im Alltag
 Effektives Geld sparen im Alltag beginnt oft bei den täglichen Gewohnheiten. Wer Mahlzeiten selbst zubereitet statt auswärts zu essen, spart je nach Lebensstil ca. 100 € bis 300 € pro Monat. Nutze das Fahrrad oder den Nahverkehr, um hohe Fixkosten für ein Auto zu vermeiden. Ein durchschnittlicher PKW kostet Unterhalt (Wertverlust, Versicherung, Sprit, Reparaturen) oft zwischen 400 € und 600 € im Monat. Allein der Verzicht darauf macht dich zum finanziellen Überflieger.
 
 Hier findest du attraktive Konditionen für deine Fixkosten: [→ Jetzt Angebote vergleichen](https://a.check24.net/misc/click.php?pid=80968&aid=18)

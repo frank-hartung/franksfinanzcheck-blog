@@ -1,8 +1,8 @@
 # 🧩 COMPOUND-REPORT (compound_guard.py)
 
-**Stand:** 2026-08-11 09:45 UTC · Modus: FIX+KI
+**Stand:** 2026-08-11 11:11 UTC · Modus: FIX+KI
 
-## Regelwerk-Treffer: 2 ✅ korrigiert
+## Regelwerk-Treffer: 4 ✅ korrigiert
 
 
 ---

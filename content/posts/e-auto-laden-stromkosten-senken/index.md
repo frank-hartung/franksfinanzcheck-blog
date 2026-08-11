@@ -36,7 +36,7 @@ Wer 80 % der Energie daheim bezieht, spart am meisten. Du zahlst pro Kilometer 
 
 ## So senkst du die Ladekosten zu Hause
 
-Wähle unbedingt einen passenden Stromtarif für dein E-Auto. Viele Versorger bieten Tarife mit reduzierten Netzentgelten an, falls du die Wallbox separat steuern lässt. Ein Vergleich verschiedener Anbieter lohnt sich hier oft schon ab der ersten Kilowattstunde.
+Wähle unbedingt einen passenden [Stromtarif für](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-hei/) dein E-Auto. Viele Versorger bieten Tarife mit reduzierten Netzentgelten an, falls du die Wallbox separat steuern lässt. Ein Vergleich verschiedener Anbieter lohnt sich hier oft schon ab der ersten Kilowattstunde.
 
 Investiere in eine intelligente Wallbox mit Lastmanagement. Diese Technik lädt dein Fahrzeug effizienter als eine herkömmliche Steckdose. Zudem erlauben viele moderne Boxen die gezielte Nutzung von günstigem Nachtstrom.
 

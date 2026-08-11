@@ -104,7 +104,7 @@ Viele Direktbanken und Neobanken bieten Karten ohne Auslandseinsatzentgelt an. A
 **Was kostet Geld abheben in der EU?**
 Innerhalb der Euro-Zone zahlst du mit der Girocard an Automaten deines Bankenverbunds meist nichts. Fremdbanken verlangen hingegen oft 3 € bis 6 € Gebühr pro Abhebung. Nutze am besten eine Kreditkarte, die weltweit kostenloses Abheben an allen Automate[n garantiert.
 
-**](../../posts/kontowechsel-in-20-minuten-wechselserv/)Wie finde ich ein wirklich kostenloses Konto?**
+**](../../posts/kontowechsel-in-20-minuten-wechselserv/)Wie finde ich ein wirklich [kostenloses Konto](../../posts/kontowechsel-in-20-minuten-wechselserv/)?**
 Vergleiche die Bedingungen für Kontoführung, Karten und Bargeldbezug genau. Manche Banken fordern einen monatlichen Mindestgeldeingang für die Kostenfreiheit. Die [Übersicht der kostenlosen Konten](../../posts/kostenloses-girokonto-finden/) hilft dir, das passende Modell ohne versteckte Bedingungen zu finden.
 
 Wer seine Bankkosten senkt, schafft die Basis für echten Vermögensaufbau. [Konto wechseln](../../posts/kontowechsel-in-20-minuten-wechselservice/), [Karte prüfen](../../posts/kreditkarte-ohne-jahresgebuehr/) und den [Dispo vermeiden](../../posts/dispozinsen-verstehen-alternativen/) sind die ersten Schritte. Alle weiteren Tipps findest du in unserem [Ratgeber Konto & Karten](../../pillar/konto-karten/).
