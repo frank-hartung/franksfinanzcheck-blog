@@ -94,6 +94,6 @@ Ja, das ist einer der größten Vorteile. Du kannst die Höhe deiner Sparrate je
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/tagesgeld/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
