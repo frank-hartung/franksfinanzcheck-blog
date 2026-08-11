@@ -157,6 +157,8 @@ jobs:
           python3 scripts/affiliate_marketer.py --fix --new-only || echo "⚠ Affiliate-Marketer (nicht kritisch)"
           echo "== Affiliate-Health Offline-Kontrakt (PIDs + Gateway-Drift + Selbsttest) =="
           python3 scripts/affiliate_health.py --no-net || echo "⚠ Affiliate-Kontrakt verletzt – Wochenwache repariert (siehe Report)"
+          echo "== Link-Integritaet (relative Ziele + /go/-Register, Selbsttest) =="
+          python3 scripts/link_guard.py --fix --new-only || echo "⚠ Link-Guard geheilt/gemeldet (nicht kritisch)"
           echo "== Qualitäts-Score (FrankAutoOps, Threshold >= 0.85) =="
           python3 - <<'PYEOF'
           import glob, subprocess, sys, json, os

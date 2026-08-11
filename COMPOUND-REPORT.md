@@ -1,6 +1,6 @@
 # 🧩 COMPOUND-REPORT (compound_guard.py)
 
-**Stand:** 2026-08-11 19:12 UTC · Modus: FIX
+**Stand:** 2026-08-11 19:39 UTC · Modus: FIX
 
 🎉 Keine Komposita-Fehler gefunden (Profi-Level).
 

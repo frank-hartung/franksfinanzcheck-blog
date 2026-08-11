@@ -61,7 +61,7 @@ Wenn du **Kontoführungsgebühren sparen** willst, hast du meist zwei Optionen. 
 
 ## Der Kontowechsel in sechs Schritten
 
-1. **Konditionen prüfen:** Nutze einen **Girokonto Vergleich**, um die besten Zinsen auf [Tagesgeld und](../../posts/tagesgeld-zinsen-sicher-anle/) Kartenoptionen für deinen Bedarf zu finden.
+1. **Konditionen prüfen:** Nutze einen **Girokonto Vergleich**, um die besten Zinsen auf [Tagesgeld und](../../posts/tagesgeld-zinsen-sicher-anlegen/) Kartenoptionen für deinen Bedarf zu finden.
 2. **Antrag stellen:** Eröffne dein neues Konto online per Video-Ident. Du brauchst nur deinen Personalausweis und ein Smartphone. Das dauert meist unter zehn Minuten.
 3. **Umzugsservice starten:** Nutze den digitalen Kontowechselservice. Die Bank loggt sich (mit deiner Erlaubnis) in dein altes Konto ein, erkennt Lastschriften von Vermieter, Fitnessstudio und Stromanbieter und informiert diese automatisch.
 4. **Übergangszeit einplanen:** Lass dein altes Konto etwa zwei Monate als Puffer aktiv. Es gibt immer einen "Nachzügler" (z. B. die jährliche Abbuchung des ADAC), der die neue IBAN noch nicht im System hat.

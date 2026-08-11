@@ -226,6 +226,14 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (13):** Link-Zivil-Katastrophe gefunden & komplett geheilt:
+  Die Engine hatte Dutzende interne Links mit ABGEKNICKTEN Slugs gebaut
+  (z. B. …/7-gewohnheiten-finanzielle-freih/) sowie Pillar-Links in die
+  falsche Sektion gelegt (../../posts/frugalismus/ statt ../../pillar/).
+  Neuer hartnäckiger Waechter link_guard.py (V1/Ziel-Register,
+  V2/go-Register, 6-Faelle-Selbsttest, Sektions-Korrektur), ~86 Links
+  geheilt inkl. 1 Handchirurgie (zersplitterte Markdown-Zeile). Tot seit:
+  beiden Engine-Geburtskette (new-only) UND Weekly-Audit (Vollbestand).
 - **11.08.2026 (12):** Archiv-Roundtrip abgeschlossen (alle deterministischen
   Auto-Regeln 0 Rest-Funde; Radar: 148 L8/166 L5 bewusst delegeiert) +
   neuer wochentlicher KI-Lauf „Redaktions-Politur" (Freitag 17:00 MESZ,

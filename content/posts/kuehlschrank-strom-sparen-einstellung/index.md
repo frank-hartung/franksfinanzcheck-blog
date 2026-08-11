@@ -46,7 +46,7 @@ Der typische Verbrauch liegt zwischen 100 kWh und 300 kWh pro Jahr. Bei einem 
 
 ## Die richtige Temperatur:<br>7 Grad und minus 18 Grad
 
-Die Temperatur ist dein wichtigster Hebel, wenn du beim **Kühlschrank [Strom sparen](../../posts/strom-sparen-haushalt-20-ti/)** willst. Wähle 7 °C für den Kühlbereich und −18 °C für das Gefrierfach. Jedes Grad weniger steigert deinen Stromverbrauch um etwa 5 bis 10 %.
+Die Temperatur ist dein wichtigster Hebel, wenn du beim **Kühlschrank [Strom sparen](../../posts/strom-sparen-haushalt-20-tipps/)** willst. Wähle 7 °C für den Kühlbereich und −18 °C für das Gefrierfach. Jedes Grad weniger steigert deinen Stromverbrauch um etwa 5 bis 10 %.
 
 Viele Haushalte kühlen ihre Lebensmittel unnötig stark auf 4 oder 5 Grad. Kontrolliere die echte Temperatur mit einem Thermometer in einem Wasserglas. Platziere es mittig im Kühlschrank, da es an der Tür meist wärmer ist.
 

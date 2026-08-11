@@ -70,6 +70,21 @@ jobs:
             git push || { sleep 20; git pull --rebase origin main && git push; }
           fi
 
+      # ---- Audit-Erweiterung 11.08. (spaet): Link-Integritaet mit Selbstheilung ----
+      - name: Link-Guard (interne Linkziele pruefen + heilen, Selbsttest-Gate)
+        continue-on-error: true
+        run: |
+          python3 scripts/link_guard.py --fix || echo "⚠ Link-Guard (nicht kritisch)"
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "Links sauber."
+          else
+            git commit -m "fix: kaputte interne Links geheilt (Truncation/Sektion)"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push || { sleep 20; git pull --rebase origin main && git push; }
+          fi
+
       - name: Audit ausführen (Log wird gespeichert)
         id: audit
         continue-on-error: true   # Wir fangen den Exit-Code selbst ab
