@@ -18,6 +18,13 @@ social_posted: true
 
 120 € im Jahr für nichts? So viel kosten dich durchschnittliche Kontoführungsgebühren von etwa 10 € pro Monat. Viele Banken bieten dieselbe Dienstleistung komplett gratis an. Mit einem schnellen Wechsel holst du dir dieses Geld dauerhaft zurück. Ein **kostenloses Girokonto** spart dir über die Jahre vierstellige Beträge – Geld, das auf deinem Sparkonto oder in einem ETF deutlich besser aufgehoben ist als in der Verwaltung deiner Hausbank. Rechnet man die gesparten 120 € jährlich auf ein Arbeitsleben von 40 Jahren hoch und legt sie zu 7 % Zinsen an, reden wir über ein Endkapital von über 25.000 €.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/allgemein/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Das Wichtigste in Kürze
 
 * **Echte Null-Euro-Konten:** Sparen dir bis zu 150 € an Gebühren jährlich, wenn du alle Kostenfaktoren (Karten, Buchungen, Depot) einbeziehst.

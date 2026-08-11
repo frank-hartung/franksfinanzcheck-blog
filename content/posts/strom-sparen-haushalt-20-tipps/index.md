@@ -18,6 +18,13 @@ social_posted: true
 
 Du kannst deinen Stromverbrauch um 15 bis 25 % senken, ohne Komfort zu verlieren. Diese Strom-sparen-Tipps helfen dir, deinen Verbrauch sofort zu senken – Diese 20 Tipps sind nach Sofortwirkung und Aufwand sortiert.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/allgemein/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Sofort umsetzbar (0 €, 5 Minuten)
 Du kannst sofort beginnen, deinen Stromverbrauch zu reduzieren. 
 1. **Standby abschalten:** Fernseher, Receiver, Spielekonsole und PC in eine abschaltbare Steckdosenleiste – spart 50–80 € pro Jahr. 

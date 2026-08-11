@@ -29,6 +29,13 @@ In diesem Ratgeber erfährst du, wie der Wechsel reibungslos gelingt. Ich zeige 
 * **Verlusttöpfe:** diese musst du oft separat übertragen lassen.
 * **Sparpläne:** Richte deine automatischen Käufe beim neuen Broker neu ein.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/allgemein/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Warum ein Depotwechsel sich lohnen kann
 
 Hohe Orderkosten oder fehlende ETF-Sparpläne fressen deine Rendite. Neobroker bieten die Depotführung oft komplett kostenlos an. Ein Depotwechsel spart dir so schnell 100 € im Jahr. Deine Wertpapiere übertragen bedeutet keinen Verkauf. Alle Positionen bleiben erhalten.

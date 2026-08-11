@@ -21,6 +21,13 @@ Der durchschnittliche deutsche Haushalt gibt rund 2.900 € pro Jahr für Versi
 
 Die gute Nachricht: Mit einer systematischen Bestandsaufnahme erkennst du die überflüssigen Policen – und kündigst sie. In diesem Artikel zeige ich dir die 5 häufigsten Kandidaten und die 4 Policen, die bleiben sollten.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/allgemein/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Der Versicherungs-Ordner:<br>Erst Bestandsaufnahme
 
 Bevor du kündigst, sammelst du alle Verträge: Gibt es einen Ordner oder hast du Zugriff auf das Online-Postfach deiner Versicherer? Lege eine Liste an mit Versicherer, Vertragsnummer, Beitrag, Leistung und Laufzeit.

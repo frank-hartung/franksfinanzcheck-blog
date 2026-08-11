@@ -21,6 +21,13 @@ Internetverträge gehören zu den Verträgen, die die meisten Menschen nie wechs
 
 In diesem Artikel zeige ich dir, wie du kündigst, wann du sofort rauskommst und wie der Wechsel ohne Internet-Lücke klappt.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/allgemein/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Kündigungsfristen 2026:<br>Was gesetzlich gilt
 
 Seit der Gesetzesänderung 2021 gelten klare, verbraucherfreundliche Regeln: Nach Ablauf der Mindestlaufzeit (meist 12 oder 24 Monate) ist die Kündigungsfrist auf **einen Monat** begrenzt. Du kannst also jederzeit mit einem Monat Vorlauf kündigen – und musst nicht mehr auf den „Vertragsablauf" warten.

@@ -22,6 +22,13 @@ wer die Formel verstanden hat, weiß warum. Der Zinseszinseffekt ist der einzige
 
 In diesem Artikel erkläre ich dir die Formel, zeige dir Rechenbeispiele und Tabellen und verrate, warum die Zeit die wichtigste Zutat ist.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/allgemein/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Was ist Zinseszins?
 
 Zinseszins bedeutet: Du bekommst nicht nur Zinsen auf dein ursprüngliches Kapital, sondern auch auf die bereits gutgeschriebenen Zinsen. Die Erträge des ersten Jahres arbeiten im zweiten Jahr mit – und ihre Erträge wiederum im dritten. So wächst dein Geld nicht linear, sondern exponentiell.

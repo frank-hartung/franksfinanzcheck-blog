@@ -33,6 +33,13 @@ Wir klären die wichtigsten Punkte für deinen Geldbeutel:
 * Prüfe die Auswirkungen der CO2-Abgabe auf deinen Endpreis.
 * Nutze dein Sonderkündigungsrecht bei einseitigen Preiserhöhungen.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/allgemein/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Warum die zweite Welle der Preisanpassung dich treffen kann
 
 Energiepreise reagieren oft wie ein schwerer Öltanker.  
