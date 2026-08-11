@@ -16,6 +16,7 @@ cover:
   image: "images/covers/2026-08-11-preisgarantie-gas-so-schuetzt-du-dich-vor-preiserhoehungen.jpg"
   alt: "Spar-Tipp: 2026 08 11 Preisgarantie Gas So Schuetzt Du Dich Vor Preiserhoehungen"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 
 Gaspreise steigen oft über Nacht um 20 % oder mehr. Dein Briefkasten birgt dann böse Überraschungen in Form von hohen Nachzahlungen. Mit einer **Gaspreisgarantie: So schützt du dich vor Preiserhöhungen** und behältst die volle Kostenkontrolle. Du sicherst dir damit einen festen Preis pro Kilowattstunde für die gesamte Laufzeit.
