@@ -90,6 +90,7 @@ GO_NAMES = {
     "unfallversicherung": "Tarifcheck",
     "zahnzusatzversicherung": "Tarifcheck",
     "reisekrankenversicherung": "Tarifcheck",
+    "hunde": "Tarifcheck",
 }
 
 

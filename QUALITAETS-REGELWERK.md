@@ -146,7 +146,7 @@ oder einfach den Wert in `data/brand_lock.yaml` ändern und commiten – die Aut
 Steuert die 💡-Schnell-Tipp-Box thematisch korrekt (`route_for()` + `DEEP_HINTS`,
 Reihenfolge = Spezifität; Register-Gate gegen 404) und retargetet jede falsch
 geroutete Box automatisch auf die Ideale-Route. **Sabotage-Schutz:** `run_selftest()`
-prüft vor JEDEM Lauf 17 kanonische Routing-Fälle (DSL→dsl, Elementar→hausrat (!),
+prüft vor JEDEM Lauf 18 kanonische Routing-Fälle (DSL→dsl, Elementar→hausrat (!),
 Depot→tagesgeld, Gas→gas …). Schlägt auch nur einer fehl, bricht der Marketer mit
 Exit 2 ab, bevor eine Datei angefasst wird – Mensch oder KI kann das Routing nicht
 mehr „aus Versehen" verbiegen.
@@ -213,6 +213,11 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (6):** Route 19 `hunde` (Tarifcheck Hundekrankenversicherung,
+  deep=hundekrankenversicherung) nach Frank-Entscheid aufgenommen — Fund via
+  UNREGISTERED-deep-Report; Tier-Artikel oben+unten auf /go/hunde/ geroutet.
+  Hinweis-Auto-Tune: Tierversicherung/Hundeversicherung/Katzenversicherung
+  routen jetzt thematisch. Deep-First gilt per Auto-Deep im Shield dauerhaft.
 - **11.08.2026 (5):** Frank-Bestaetigung aus dem Partnerprogramm eingefroren:
   fluege = offizieller Deep `pauschalreisen-vergleich&cat=9` (Homepage-Landung
   gilt jetzt als Sabotage-Falle im Kontrakt!); tagesgeld = `c24bank&cat=14`
@@ -224,7 +229,7 @@ jeder Schreibaktion.
   pruefte nur Hop 1!). Neu: kredit→kredit-vergleich, tagesgeld→c24bank (C24 =
   Geldanlage-Heimat), fluege→ehrlicher Homepage-Fallback (kein Flug-Deep am
   Tracker, TODO Dashboard). affiliate_health.py jetzt E2E mit Kategorie-Vertrag,
-  Auto-Heilung auf sicheren Fallback und 15-Faelle-Selbsttest.
+  Auto-Heilung auf sicheren Fallback und 17-Faelle-Selbsttest.
 - **11.08.2026 (3):** affiliate_marketer.py: Schnell-Tipp-Routing-Korrektur (Fehlrouten
   Depot→girokonto, Elementar→handytarife u.a. geheilt), universelles Retarget +
   17-Fälle-Selbsttest als Sabotage-Schutz (Exit 2 vor jeder Datei-Berührung).
