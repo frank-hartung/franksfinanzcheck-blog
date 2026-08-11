@@ -17,8 +17,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
-Albert Einstein soll den Zinseszins das achte Weltwunder genannt haben –   
-wer die Formel verstanden hat, weiß warum. Der Zinseszinseffekt ist der einzige Mechanismus im Finanzsystem, der aus kleinen regelmäßigen Beträgen über die Zeit ein Vermögen macht, ohne dass du mehr arbeiten musst. Und er funktioniert für jeden – unabhängig vom Einkommen.
+Albert Einstein soll den Zinseszins das achte Weltwunder genannt haben – wer die Formel verstanden hat, weiß warum. Der Zinseszinseffekt ist der einzige Mechanismus im Finanzsystem, der aus kleinen regelmäßigen Beträgen über die Zeit ein Vermögen macht, ohne dass du mehr arbeiten musst. Und er funktioniert für jeden – unabhängig vom Einkommen.
 
 In diesem Artikel erkläre ich dir die Formel, zeige dir Rechenbeispiele und Tabellen und verrate, warum die Zeit die wichtigste Zutat ist.
 
@@ -108,16 +107,13 @@ Die Konsequenz für dich: Fang heute an, auch mit kleinen Beträgen. Der [100-Eu
 
 ## Die Praxis:<br>Zinseszins mit ETFs realisieren
 
-Die Theorie ist klar –   
-die Umsetzung entscheidend. Der Zinseszinseffekt entfaltet seine volle Kraft, wenn drei Bedingungen erfüllt sind:
+Die Theorie ist klar – die Umsetzung entscheidend. Der Zinseszinseffekt entfaltet seine volle Kraft, wenn drei Bedingungen erfüllt sind:
 
 **1. Rendite über der Inflation:** Wer nur auf dem Sparbuch parkt, verliert real Geld. Ein [Welt-ETF](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) hat historisch 6 bis 8 % pro Jahr geliefert – deutlich über der Inflation.
 
-**2. Thesaurierung statt Ausschüttung:** Bei thesaurierenden ETFs werden die Erträge automatisch reinvestiert –   
-der Zinseszins läuft von selbst. Bei ausschüttenden Fonds musst du die Erträge manuell wieder anlegen, sonst bleibt der Effekt liegen.
+**2. Thesaurierung statt Ausschüttung:** Bei thesaurierenden ETFs werden die Erträge automatisch reinvestiert – der Zinseszins läuft von selbst. Bei ausschüttenden Fonds musst du die Erträge manuell wieder anlegen, sonst bleibt der Effekt liegen.
 
-**3. Keine Unterbrechungen:** Wer in Krisen verkauft oder den Sparplan stoppt, durchbricht den Zinseszins. Der Plan läuft am besten automatisch per Dauerauftrag –   
-dann ist er unabhängig von Stimmung und Disziplin.
+**3. Keine Unterbrechungen:** Wer in Krisen verkauft oder den Sparplan stoppt, durchbricht den Zinseszins. Der Plan läuft am besten automatisch per Dauerauftrag – dann ist er unabhängig von Stimmung und Disziplin.
 
 ## Häufig gestellte Fragen
 

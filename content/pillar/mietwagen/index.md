@@ -29,8 +29,7 @@ Die teuersten Überraschungen im Urlaub entstehen an der Mietwagen-Theke: Zusatz
 
 ## Günstige Flüge finden
 
-Flugpreise schwanken stark –   
-wer die Mechanismen kennt, spart regelmäßig. Meine sieben erprobten Tricks stehen in [Günstige Flüge im Spätsommer: 7 Tricks zum Geld sparen](../../posts/guenstige-fluege-spaetsommer-finden/).
+Flugpreise schwanken stark – wer die Mechanismen kennt, spart regelmäßig. Meine sieben erprobten Tricks stehen in [Günstige Flüge im Spätsommer: 7 Tricks zum Geld sparen](../../posts/guenstige-fluege-spaetsommer-finden/).
 
 ## Last-Minute und die Urlaubskasse
 

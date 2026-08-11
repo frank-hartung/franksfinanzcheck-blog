@@ -67,8 +67,7 @@ Tipp: Achte auf die Kofferraumgröße – vier Personen mit Skiausrüstung brauc
 
 Die Tankregel ist der Klassiker der Mietwagen-Spartricks: Nimm den Tarif „voll zu voll" – du bekommst das Auto mit vollem Tank und gibst es voll wieder zurück. Der Vorteil: Du zahlst nur den Sprit, den du wirklich verbrauchst, und vermeidest die oft überteuerten Tank-Pakete der Vermieter (bis zu 2 € pro Liter Aufpreis).
 
-Die Regeln für den Winter: Die Tankstelle vor der Rückgabe suchen (nicht im Skigebiet –   
-dort sind die Preise oft 20 Cent höher), und den Beleg aufbewahren. Bei Kälte verbraucht das Auto übrigens mehr Sprit (Motorwarmlauf, Heizung, Licht) – plane den Tankbedarf großzügig.
+Die Regeln für den Winter: Die Tankstelle vor der Rückgabe suchen (nicht im Skigebiet – dort sind die Preise oft 20 Cent höher), und den Beleg aufbewahren. Bei Kälte verbraucht das Auto übrigens mehr Sprit (Motorwarmlauf, Heizung, Licht) – plane den Tankbedarf großzügig.
 
 ## Trick 5:<br>Der richtige Buchungszeitpunkt
 
@@ -100,14 +99,11 @@ In Skigebieten gelten eigene Regeln – und die Schnäppchen-Logik kehrt sich te
 
 **Abholung am Flughafen statt im Skigebiet:** Die Stationen in den Skigebieten (zum Beispiel Innsbruck, Salzburg, Zürich im Winter) haben hohe Preise, weil die Nachfrage konstant ist. Wer am Flughafen der Region mietet (oft 20 bis 30 Kilometer entfernt), zahlt oft 30 bis 50 % weniger – und holt das Auto auf dem Weg ins Tal ab.
 
-**Wochenend-Ski-Trips:** Wer nur übers Wochenende fährt, zahlt die teuersten Tagessätze. Die Lösung: Freitagabend oder Samstagfrüh abholen und bis Montag mieten –   
-der Wochenend-Tarif ist oft günstiger als die Tages-Tarife.
+**Wochenend-Ski-Trips:** Wer nur übers Wochenende fährt, zahlt die teuersten Tagessätze. Die Lösung: Freitagabend oder Samstagfrüh abholen und bis Montag mieten – der Wochenend-Tarif ist oft günstiger als die Tages-Tarife.
 
-**Skibus-Stationen als Alternative:** In vielen Skigebieten sind die Ortschaften mit Skibussen verbunden –   
-wer nahe an einer Station wohnt, kann den Mietwagen am Urlaubsort sogar komplett sparen. Prüfe vor der Buchung, ob du das Auto wirklich jeden Tag brauchst.
+**Skibus-Stationen als Alternative:** In vielen Skigebieten sind die Ortschaften mit Skibussen verbunden – wer nahe an einer Station wohnt, kann den Mietwagen am Urlaubsort sogar komplett sparen. Prüfe vor der Buchung, ob du das Auto wirklich jeden Tag brauchst.
 
-**Die Rückgabe im Dunkeln:** Im Winter wird es früh dunkel – kontrolliere das Auto bei der Rückgabe mit Taschenlampe auf Schäden (Felgen, Stoßstangen, Unterboden durch Schneeketten). Fotos als Beweis machen –   
-das schützt vor Nachforderungen.
+**Die Rückgabe im Dunkeln:** Im Winter wird es früh dunkel – kontrolliere das Auto bei der Rückgabe mit Taschenlampe auf Schäden (Felgen, Stoßstangen, Unterboden durch Schneeketten). Fotos als Beweis machen – das schützt vor Nachforderungen.
 
 
 ## Häufig gestellte Fragen

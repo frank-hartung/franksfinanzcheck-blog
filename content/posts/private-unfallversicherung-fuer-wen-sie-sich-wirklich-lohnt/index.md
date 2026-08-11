@@ -16,8 +16,7 @@ kurzantwort: "Du solltest dir eine private Unfallversicherung zulegen, wenn du e
 social_posted: true
 ---
 
-Ein Sturz vom Rennrad oder ein Fehltritt auf der Haushaltsleiter verändert dein Leben oft in Sekunden. Über 70 % aller Unfälle passieren in der Freizeit oder im Haushalt –   
-genau dort, wo die gesetzliche Kasse keinen Cent zahlt. Die private Unfallversicherung schließt diese gefährliche Lücke und schützt dich weltweit vor hohen Folgekosten.
+Ein Sturz vom Rennrad oder ein Fehltritt auf der Haushaltsleiter verändert dein Leben oft in Sekunden. Über 70 % aller Unfälle passieren in der Freizeit oder im Haushalt – genau dort, wo die gesetzliche Kasse keinen Cent zahlt. Die private Unfallversicherung schließt diese gefährliche Lücke und schützt dich weltweit vor hohen Folgekosten.
 
 
 

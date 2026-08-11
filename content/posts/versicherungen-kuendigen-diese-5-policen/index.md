@@ -52,8 +52,7 @@ Zudem: Wer eine [Auslandskrankenversicherung](../../posts/reisekrankenversicheru
 
 Klassiker: Ein Umzug, ein neuer Vertrag – und die alte Hausratversicherung läuft still weiter, weil niemand gekündigt hat. Oder: Partner haben jeweils eine eigene Hausrat, die sich gegenseitig doppelt. Doppelte Versicherung bedeutet doppelte Beiträge für denselben Schutz.
 
-Prüfe: Deckt deine [Hausratversicherung](../../posts/hausratversicherung-wer-braucht-leistung/) den aktuellen Hausrat wirklich ab? Bei Umzug oder Zuzug eines Partners kann sich der Bedarf geändert haben. Eine Police reicht –   
-die günstigere behalten, die teurere kündigen. Achtung: Erst kündigen, wenn der neue Vertrag aktiv ist.
+Prüfe: Deckt deine [Hausratversicherung](../../posts/hausratversicherung-wer-braucht-leistung/) den aktuellen Hausrat wirklich ab? Bei Umzug oder Zuzug eines Partners kann sich der Bedarf geändert haben. Eine Police reicht – die günstigere behalten, die teurere kündigen. Achtung: Erst kündigen, wenn der neue Vertrag aktiv ist.
 
 ## Kündigen:<br>4. Kleinst-Lebensversicherungen und Sterbegeld-Policen
 

@@ -1,6 +1,6 @@
 # ✒️ LEKTOR-REPORT (lektor_guard.py)
 
-**Stand:** 2026-08-11 22:05 UTC · Modus: FIX
+**Stand:** 2026-08-11 22:57 UTC · Modus: FIX
 
 | Regel | Anzahl |
 |---|---|
@@ -8,7 +8,7 @@
 | L2 Fuehl-Phrasen (Auto) | 0 |
 | L3 Personenkonsistenz | 38 |
 | L4 Ausrufezeichen/Grenze | 0 |
-| L5 Echo (Report) | 165/0 |
+| L5 Echo (Report) | 166/0 |
 | L7 Nominalstil-Radar (Report) | 18 |
 | L8 Weichmacher-Dichte (Report) | 148 |
 | L9 Satzanfangs-Echo (Report) | 2 |
@@ -17,6 +17,7 @@
 | L12 Longsatz-Alarm (Report) | 10 |
 | L13 Doppelanlauf-Detektor (Report) | 0 |
 | L14 Unidiom-Fangsatz (Auto, Kanon) | 0 |
+| L15 Gedankenstrich-Bruch (Auto, Fusion) | 35 |
 
 ## Fundstellen (Auswahl)
 
@@ -26,17 +27,17 @@
 - `content/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/index.md` Z.45: **L5-Echo** server: Technisch gesehen durchläuft eine DNS-Abfrage mehrer
 - `content/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/index.md` Z.94: **L12-Longsatz** Was nach wenig klingt, summiert sich: Da eine moderne Nachri
 - `content/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/index.md` Z.118: **L3-Formal-Ich** Ja, absolut. Es handelt sich um eine Standard-Funktion in je
-- `content/posts/2026-08-06-frugalismus-im-alltag/index.md` Z.24: **L3-Formal-Ich** das sind fast 1.500 € im Jahr, die einfach verpufften. Erst 
-- `content/posts/2026-08-06-frugalismus-im-alltag/index.md` Z.71: **L5-Echo** setzt: Wer auf Carsharing, das 49-Euro-Ticket oder das Fahrr
-- `content/posts/2026-08-06-frugalismus-im-alltag/index.md` Z.81: **L5-Echo** schritt: Mit gezielten **Sparmethoden**, wie dem Eliminieren
-- `content/posts/2026-08-06-frugalismus-im-alltag/index.md` Z.93: **L5-Echo** deine: Wahre Freunde schätzen deine Gesellschaft, nicht dein
-- `content/posts/2026-08-06-frugalismus-im-alltag/index.md` Z.93: **L5-Echo** deinem: Sei mutig und steh zu deinem Lebensstil – oft inspir
+- `content/posts/2026-08-06-frugalismus-im-alltag/index.md` Z.23: **L3-Formal-Ich** Wie viel Geld verlierst du jeden Monat durch unüberlegte Käu
+- `content/posts/2026-08-06-frugalismus-im-alltag/index.md` Z.70: **L5-Echo** setzt: Wer auf Carsharing, das 49-Euro-Ticket oder das Fahrr
+- `content/posts/2026-08-06-frugalismus-im-alltag/index.md` Z.80: **L5-Echo** schritt: Mit gezielten **Sparmethoden**, wie dem Eliminieren
+- `content/posts/2026-08-06-frugalismus-im-alltag/index.md` Z.92: **L5-Echo** deine: Wahre Freunde schätzen deine Gesellschaft, nicht dein
+- `content/posts/2026-08-06-frugalismus-im-alltag/index.md` Z.92: **L5-Echo** deinem: Sei mutig und steh zu deinem Lebensstil – oft inspir
 - `content/posts/2026-08-06-turbo-fuers-netz/index.md` Z.23: **L5-Echo** deines: Bevor du nun frustriert die Hotline deines Anbieters
 - `content/posts/2026-08-06-turbo-fuers-netz/index.md` Z.33: **L5-Echo** browser: Wenn du eine Adresse in deinen Browser eintippst, p
-- `content/posts/2026-08-06-turbo-fuers-netz/index.md` Z.48: **L12-Longsatz** Du hast zwei Möglichkeiten: Entweder du änderst den DNS dire
-- `content/posts/2026-08-06-turbo-fuers-netz/index.md` Z.89: **L5-Echo** deinem: Die Geschwindigkeit hängt massiv von deinem Wohnort 
-- `content/posts/2026-08-06-turbo-fuers-netz/index.md` Z.108: **L3-Formal-Ich** Nein, die hier genannten Top-Dienste wie Google, Cloudflare 
-- `content/posts/2026-08-06-turbo-fuers-netz/index.md` Z.108: **L5-Echo** durch: Sie finanzieren sich oft durch Unternehmenskunden ode
+- `content/posts/2026-08-06-turbo-fuers-netz/index.md` Z.47: **L12-Longsatz** Du hast zwei Möglichkeiten: Entweder du änderst den DNS dire
+- `content/posts/2026-08-06-turbo-fuers-netz/index.md` Z.88: **L5-Echo** deinem: Die Geschwindigkeit hängt massiv von deinem Wohnort 
+- `content/posts/2026-08-06-turbo-fuers-netz/index.md` Z.107: **L3-Formal-Ich** Nein, die hier genannten Top-Dienste wie Google, Cloudflare 
+- `content/posts/2026-08-06-turbo-fuers-netz/index.md` Z.107: **L5-Echo** durch: Sie finanzieren sich oft durch Unternehmenskunden ode
 - `content/posts/2026-08-07-frugalismus-fuer-den-erfolg/index.md` Z.25: **L5-Echo** ausgaben/seine: Der Frugalist hingegen hält seine Ausgaben s
 - `content/posts/2026-08-07-frugalismus-fuer-den-erfolg/index.md` Z.70: **L5-Echo** weniger: Wer weniger braucht, hat weniger Angst vor dem Jobv
 - `content/posts/2026-08-07-frugalismus-fuer-den-erfolg/index.md` Z.82: **L5-Echo** einen: Vergleiche deine Versicherungen und Tarife regelmäßig

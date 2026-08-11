@@ -57,8 +57,7 @@ Riester lohnt sich vor allem für die Gruppen, die die vollen Zulagen kassieren:
 
 **Familien mit Kindern:** die Kinderzulagen machen Riester für Eltern besonders attraktiv. Ein Paar mit zwei Kindern, das den Mindestbeitrag zahlt, bekommt jährlich 175 + 175 + 185 + 185 = 720 € Zulagen – bei einem Eigenbeitrag von 2.100 € sind das über 34 % Sofortrendite. Das schlägt fast jede andere Anlage.
 
-**Geringverdiener:** wer wenig verdient und wenig Steuern zahlt, profitiert von den Zulagen am stärksten –   
-die Förderquote (Zulagen im Verhältnis zum Eigenbeitrag) ist hier am höchsten.
+**Geringverdiener:** wer wenig verdient und wenig Steuern zahlt, profitiert von den Zulagen am stärksten – die Förderquote (Zulagen im Verhältnis zum Eigenbeitrag) ist hier am höchsten.
 
 **Menschen, die diszipliniert sparen wollen:** Riester zwingt zum Sparen, weil die Förderung an den Mindestbeitrag gebunden ist. Wer ohne Riester ohnehin nicht sparen würde, nutzt den Vertrag als Sparzwang mit Bonus.
 

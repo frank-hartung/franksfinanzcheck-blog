@@ -37,8 +37,7 @@ Der Standort des Routers entscheidet mehr über dein WLAN als jedes teure Gerät
 - **Frei lassen:** Keine Metallgegenstände, Aquarien oder dicke Wände direkt daneben. Auch der Fernseher oder das Regal mit vielen Büchern können das Signal schlucken.
 - **Nicht neben dem Router-Modem stapeln:** Stromkabel, Ladegeräte und andere Elektronik erzeugen Störfelder.
 
-Die beste Position ist oft der Flur oder das Wohnzimmer –   
-dort, wo sich die meisten Geräte aufhalten. Ein Versuch mit 30 Zentimetern Standortänderung kann das Signal um 20 bis 50 % verbessern.
+Die beste Position ist oft der Flur oder das Wohnzimmer – dort, wo sich die meisten Geräte aufhalten. Ein Versuch mit 30 Zentimetern Standortänderung kann das Signal um 20 bis 50 % verbessern.
 
 ## Frequenzwahl:<br>2,4 GHz vs. 5 GHz
 

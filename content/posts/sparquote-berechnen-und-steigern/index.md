@@ -64,8 +64,7 @@ Es gibt genau vier Wege, die Sparquote zu erhöhen – und du solltest alle vier
 
 **Stellschraube 3: Variable Kosten optimieren.** [Impulskäufe vermeiden](../../posts/impulskaeufe-vermeiden-7-psychologische-tricks/), bewusster einkaufen, günstigere Alternativen nutzen: Hier findest du das schnellste Einsparpotenzial – aber auch die höchste Rückfall-Gefahr.
 
-**Stellschraube 4: Automatisierung.** Die wichtigste Stellschraube von allen. Ein Dauerauftrag direkt nach dem Gehaltseingang auf ein separates Sparkonto macht das Sparen zur Routine. Wer automatisiert, erreicht seine Quote zuverlässig –   
-wer händisch spart, vergisst es regelmäßig.
+**Stellschraube 4: Automatisierung.** Die wichtigste Stellschraube von allen. Ein Dauerauftrag direkt nach dem Gehaltseingang auf ein separates Sparkonto macht das Sparen zur Routine. Wer automatisiert, erreicht seine Quote zuverlässig – wer händisch spart, vergisst es regelmäßig.
 
 ## Gehaltserhöhung = Sparquote?
 

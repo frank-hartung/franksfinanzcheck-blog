@@ -43,8 +43,7 @@ Ein Tagesgeldkonto ist ein flexibles Sparkonto ohne feste Laufzeit und ohne Kün
 | **Zinssicherheit** | Nicht garantiert | Garantiert |
 | **geeignet für** | Notgroschen, laufende Rücklagen | Längerfristig verfügbares Geld |
 
-**Faustregel:** der Notgroschen gehört aufs Tagesgeld. Geld, das du sicher 1–5 Jahre nicht brauchst, kann ins Festgeld –   
-dort gibt es meist etwas mehr Zins.
+**Faustregel:** der Notgroschen gehört aufs Tagesgeld. Geld, das du sicher 1–5 Jahre nicht brauchst, kann ins Festgeld – dort gibt es meist etwas mehr Zins.
 
 ## So holst du das Beste aus deinem Tagesgeld heraus
 1. **Zins-Hopping:** nach Ablauf der Zinsgarantie das Konto wechseln – der "Lockzins" der neuen Bank ist oft deutlich höher.

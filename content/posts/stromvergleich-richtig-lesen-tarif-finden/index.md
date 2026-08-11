@@ -73,8 +73,7 @@ Viele Wechsler machen es sich zur Strategie, jährlich zu wechseln und jedes Mal
 
 Eine Preisgarantie schützt dich vor Preiserhöhungen während der Laufzeit. Bei 12 Monaten Garantie und 12 Monaten Laufzeit deckt sie die komplette Vertragslaufzeit ab. Das ist der Idealfall.
 
-Längere Garantien (24 Monate) sind besonders wertvoll, wenn du eine längerfristige Kalkulation willst oder die Preise tendenziell steigen. Manche Anbieter verlangen für lange Garantien einen kleinen Aufpreis –   
-der sich bei steigenden Marktpreisen schnell rechnet.
+Längere Garantien (24 Monate) sind besonders wertvoll, wenn du eine längerfristige Kalkulation willst oder die Preise tendenziell steigen. Manche Anbieter verlangen für lange Garantien einen kleinen Aufpreis – der sich bei steigenden Marktpreisen schnell rechnet.
 
 Meine Empfehlung: Nimm eine Preisgarantie, die mindestens deine Vertragslaufzeit abdeckt. Alles andere ist unnötiges Risiko.
 
@@ -95,8 +94,7 @@ Die Umstellung dauert in der Regel 2 bis 6 Wochen. Kündigungsfristen des alten 
 
 Ökostrom-Tarife sind heute kaum teurer als Graustrom – oft sogar günstiger. Achte auf echte Ökostrom-Zertifikate (TÜV Nord, ok-power) statt auf reine Marketing-Versprechen. Ein Ökostrom-Tarif mit Preisgarantie und gutem Preis ist für die meisten Haushalte die beste Wahl: günstig, sauber und ohne Nachteile.
 
-Übrigens: Der Strom aus deiner Steckdose ist physikalisch immer derselbe. Der Unterschied liegt in der Herkunfts-Garantie –   
-die entscheidet, wie viel Ökostrom ins Netz eingespeist wird.
+Übrigens: Der Strom aus deiner Steckdose ist physikalisch immer derselbe. Der Unterschied liegt in der Herkunfts-Garantie – die entscheidet, wie viel Ökostrom ins Netz eingespeist wird.
 
 Wer jetzt wechselt, kann [bis zu 300 Euro pro Jahr sparen](../../posts/stromanbieter-wechseln-2026/). Die besten Spartipps für den Haushalt findest du in meiner [Liste der 20 Stromspar-Tipps](../../posts/strom-sparen-haushalt-20-tipps/), und wer [mit einer Wärmepumpe heizt](../../posts/waermepumpe-vs-gasheizung-2026/), sollte auch den Tarif darauf abstimmen.
 

@@ -17,8 +17,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
-Flugpreise wirken oft wie ein Mysterium: Der Sitz neben dir hat vielleicht 100 € mehr oder weniger gekostet, obwohl ihr denselben Flug gebucht habt. Tatsächlich folgen Flugpreise klaren Mustern –   
-wer sie kennt, zahlt deutlich weniger. Die gute Nachricht: Die neun Tricks in diesem Artikel funktionieren bei jeder Buchung, ohne Glück und ohne Sonderangebote-Jagd.
+Flugpreise wirken oft wie ein Mysterium: Der Sitz neben dir hat vielleicht 100 € mehr oder weniger gekostet, obwohl ihr denselben Flug gebucht habt. Tatsächlich folgen Flugpreise klaren Mustern – wer sie kennt, zahlt deutlich weniger. Die gute Nachricht: Die neun Tricks in diesem Artikel funktionieren bei jeder Buchung, ohne Glück und ohne Sonderangebote-Jagd.
 
 
 
@@ -31,8 +30,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Der beste Buchungszeitpunkt für Flüge liegt bei den meisten Zielen **6 bis 8 Wochen vor Abreise**. In diesem Fenster sind die Preise am niedrigsten – davor sind die Tarife hoch, weil die Airlines die frühen Buchungen teuer verkaufen, und danach steigen sie mit der Nachfrage.
 
-Die Ausnahmen: Ferienzeiten und beliebte Ziele solltest du 3 bis 4 Monate vorher buchen, Geschäftsreise-Strecken (zum Beispiel Frankfurt–Berlin) sind kurzfristig oft günstiger. Und: Der oft kolportierte „Dienstags-Rabatt" existiert so pauschal nicht –   
-was zählt, ist der frühe Buchungszeitpunkt und die flexible Suche, nicht der Wochentag der Buchung.
+Die Ausnahmen: Ferienzeiten und beliebte Ziele solltest du 3 bis 4 Monate vorher buchen, Geschäftsreise-Strecken (zum Beispiel Frankfurt–Berlin) sind kurzfristig oft günstiger. Und: Der oft kolportierte „Dienstags-Rabatt" existiert so pauschal nicht – was zählt, ist der frühe Buchungszeitpunkt und die flexible Suche, nicht der Wochentag der Buchung.
 
 ## Flexible Ziele und Daten nutzen
 
@@ -99,11 +97,9 @@ Fliegen mit Kindern ist teuer – aber mit den richtigen Tricks sparen Familien 
 
 **Kinder-Rabatte der Airlines:** Die meisten Airlines berechnen für Kinder unter 2 Jahren nur 10 % (ohne eigenen Sitzplatz) und für Kinder bis 11 Jahre 75 % des Tarifs. Bei den Billig-Airlines gelten eigene Regeln – vergleiche die Kindertarife bei der Buchung.
 
-**Sitzplatz-Strategie:** Wer mit Kleinkind fliegt, braucht eine freie Sitzreihe oder einen extra Sitz –   
-die „Bassinet"-Plätze (Babykorb an der Wand) sind bei vielen Airlines kostenlos reservierbar, aber limitiert. Früh buchen sichert die Plätze.
+**Sitzplatz-Strategie:** Wer mit Kleinkind fliegt, braucht eine freie Sitzreihe oder einen extra Sitz – die „Bassinet"-Plätze (Babykorb an der Wand) sind bei vielen Airlines kostenlos reservierbar, aber limitiert. Früh buchen sichert die Plätze.
 
-**Gepäck clever verteilen:** Das Aufgabegepäck der Eltern kann das Kindergepäck mitnehmen –   
-ein Koffer für die ganze Familie spart das zweite Gepäckstück. Kinderwagen und Kindersitz sind bei den meisten Airlines kostenlos.
+**Gepäck clever verteilen:** Das Aufgabegepäck der Eltern kann das Kindergepäck mitnehmen – ein Koffer für die ganze Familie spart das zweite Gepäckstück. Kinderwagen und Kindersitz sind bei den meisten Airlines kostenlos.
 
 **Direktflüge statt Umsteigen:** Ein Direktflug ist mit Kindern fast immer die bessere Wahl – auch wenn er 20 bis 30 € teurer ist. Der Stressfaktor und das Risiko von verpassten Anschlüssen (mit Gepäck und Kindern) sind es nicht wert.
 

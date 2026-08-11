@@ -231,6 +231,11 @@ jeder Schreibaktion.
   Fall-kontrolliert) – Pflege nur in L14_KANON (lektor_guard.py). Neu
   geborene Faelle meldet das Compound-Radar, Aufnahme hier durch
   Redaktion. Selbsttest nun 16 Faelle.
+- **11.08.2026 (16):** L15 Gedankenstrich-Bruch (Frank „Zeilenumbruch prüfen",
+  ETF-Kinder Schritt-5): Engine-Zeilenumbruch-Stil hinterließ Zeilenenden
+  „… steuerfrei –  ⏎  der groesste …". jetzt LOT lokalisiert: 35 Bruche
+  in 19 Dateien auto-fusioniert, Selbsttest 17, Body-only (FM/Code/Listen
+  bleiben). Workflows brauchte es nicht einmal – Lektor laeuft ja ueberall.
 - **11.08.2026 (15):** Nachts gehört die Tabellen dem Schlafwandler:
   Frank erwischte den abgerissenen Link-Mitten-In-Zelle-Bruch in der
   ETF-Kinder-Tabelle. Das Zahlenmodell werde jetzt auch wirklich bewiesen
