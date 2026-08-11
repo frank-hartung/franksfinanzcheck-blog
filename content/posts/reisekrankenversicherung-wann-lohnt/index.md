@@ -14,7 +14,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Die gesetzliche Kasse zahlt in der Regel nur einen Teil der Kosten, du musst also selbst ca. 20–30 % der Behandlungskosten zahlen. Wenn du also im Ausland behandelt werden musst, kann eine Reisekrankenversicherung helfen, diese Kosten zu decken. Sie lohnt sich, wenn du länger als 30 Tage im Ausland bist oder bestimmte Risiken eingehst."
 social_posted: true
----Ein Krankenhausaufenthalt in den USA kann schnell sechsstellige Summen kosten. Innerhalb Europas lauern Kostenfallen, wenn man nur auf die gesetzliche Kasse vertraut. Eine Reisekrankenversicherung kostet nur wenige Euro pro Jahr und schützt genau vor diesen Risiken. Du bekommst weltweite Absicherung für oft unter 30 Euro Jahresbeitrag.
+---
+
+Ein Krankenhausaufenthalt in den USA kann schnell sechsstellige Summen kosten. Innerhalb Europas lauern Kostenfallen, wenn man nur auf die gesetzliche Kasse vertraut. Eine Reisekrankenversicherung kostet nur wenige Euro pro Jahr und schützt genau vor diesen Risiken. Du bekommst weltweite Absicherung für oft unter 30 Euro Jahresbeitrag.
 
 ## Das Grundproblem:<br>Die gesetzliche Kasse zahlt im Ausland nur wenig
 

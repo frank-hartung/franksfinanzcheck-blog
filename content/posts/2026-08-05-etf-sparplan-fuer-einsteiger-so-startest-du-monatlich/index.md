@@ -16,7 +16,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst mit einem monatlichen Betrag von ca. 50–100 € in einen ETF-Sparplan investieren. Dieser Betrag kann langfristig zu einem soliden Vermögensaufbau beitragen. Regelmäßiges Investieren in einen ETF-Sparplan kann auch mit nur 25 € pro Monat starten."
 social_posted: true
----Schon mit 25 € im Monat legst du den Grundstein für dein späteres Vermögen. Viele Menschen schieben den ersten Schritt jahrelang auf und verschenken so wertvolle Zinsen. Ein Rechenbeispiel verdeutlicht das: Wer mit 25 Jahren startet und monatlich 100 € bei 7 % Rendite anlegt, verfügt mit 65 Jahren über rund 260.000 €. Wer erst mit 35 Jahren beginnt, kommt bei gleicher Sparrate nur noch auf etwa 120.000 €. Dieser „Preis des Wartens“ von 140.000 € lässt sich nie wieder aufholen. Ich habe zu Beginn selbst Fehler bei der Broker-Wahl gemacht, die dich heute unnötiges Geld kosten würden. Erfahre hier, wie ein ETF-Sparplan für Einsteiger: So startest du monatlich funktioniert und worauf du achten musst.
+---
+
+Schon mit 25 € im Monat legst du den Grundstein für dein späteres Vermögen. Viele Menschen schieben den ersten Schritt jahrelang auf und verschenken so wertvolle Zinsen. Ein Rechenbeispiel verdeutlicht das: Wer mit 25 Jahren startet und monatlich 100 € bei 7 % Rendite anlegt, verfügt mit 65 Jahren über rund 260.000 €. Wer erst mit 35 Jahren beginnt, kommt bei gleicher Sparrate nur noch auf etwa 120.000 €. Dieser „Preis des Wartens“ von 140.000 € lässt sich nie wieder aufholen. Ich habe zu Beginn selbst Fehler bei der Broker-Wahl gemacht, die dich heute unnötiges Geld kosten würden. Erfahre hier, wie ein ETF-Sparplan für Einsteiger: So startest du monatlich funktioniert und worauf du achten musst.
 
 ## Warum ein ETF-Sparplan?
 
@@ -61,7 +63,7 @@ Zuerst benötigst du ein Wertpapierdepot bei einer Bank oder einem Broker. Vergl
 
 ## Wie viel solltest du investieren?
 
-Deine monatliche Rate muss zu deinem frei verfügbaren Einkommen passen. Eine bewährte Faustformel ist die 50-30-20-Regel: 50 % für Fixkosten, 30 % für Freizeit und 20 % für das Sparen und Investieren. 
+Deine monatliche Rate muss zu deinem frei verfügbaren Einkommen passen. Eine bewährte Faustformel ist die 50–30–20-Regel: 50 % für Fixkosten, 30 % für Freizeit und 20 % für das Sparen und Investieren. 
 
 Starte lieber mit einer kleineren Summe von 25 € oder 50 €, statt dich finanziell zu übernehmen. Behalte immer eine eiserne Reserve von drei Monatsgehältern auf einem Tagesgeldkonto für Notfälle zurück. Investiere nur Geld, auf das du die nächsten 10 Jahre verzichten kannst. Du kannst die Rate deines Sparplans bei den meisten Anbietern jederzeit mit zwei Klicks erhöhen oder verringern, falls sich deine Lebenssituation ändert.
 

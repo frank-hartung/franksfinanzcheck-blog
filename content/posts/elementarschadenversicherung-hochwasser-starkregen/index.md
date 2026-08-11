@@ -16,7 +16,9 @@ cover:
   alt: "Elementarschadenversicherung: Hochwasser, Starkregen & Co."
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
----Jede zweite Wohnung in Deutschland ist schutzlos gegen Naturgewalten. Ein einziger Starkregen setzt deinen Keller in Minuten unter Wasser und vernichtet deine Ersparnisse. Der Staat hilft dir im Ernstfall nur selten. Erfahre hier, wie du mit einer Elementarschadenversicherung deine Existenz sicherst.
+---
+
+Jede zweite Wohnung in Deutschland ist schutzlos gegen Naturgewalten. Ein einziger Starkregen setzt deinen Keller in Minuten unter Wasser und vernichtet deine Ersparnisse. Der Staat hilft dir im Ernstfall nur selten. Erfahre hier, wie du mit einer Elementarschadenversicherung deine Existenz sicherst.
 
 ### Das Wichtigste in Kürze
 * Die Basis-Hausrat deckt keine Naturgewalten wie Hochwasser ab.

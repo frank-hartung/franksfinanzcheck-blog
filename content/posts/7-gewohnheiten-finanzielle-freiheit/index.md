@@ -14,9 +14,11 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du baust dein Vermögen nachhaltig auf, wenn du täglich ca. 1 Stunde für finanzielle Planung und Kontrolle einplant. Regelmäßiges Sparen und Investieren von etwa 10 % deines Einkommens kann finanzielle Freiheit fördern. Mit Disziplin und konsequentem Handeln kannst du deine finanziellen Ziele erreichen."
 social_posted: true
----## 1. Zahle dich zuerst
+---
 
-Überweise am Monatsanfang sofort 10 bis 15 Prozent deines Einkommens auf ein separates Depot oder Tagesgeldkonto. Betrachte diesen Betrag als deine wichtigste Rechnung, die du zuerst begleichst. Was du nicht auf dem Girokonto siehst, gibst du im Alltag nicht aus. Diese einfache Routine sichert deinen langfristigen Vermögensaufbau ohne täglichen Verzicht. Ein Beispiel: Wenn du 2.500 Euro monatlich verdienst, solltest du 250-375 Euro auf dein Sparbuch überweisen.
+## 1. Zahle dich zuerst
+
+Überweise am Monatsanfang sofort 10 bis 15 Prozent deines Einkommens auf ein separates Depot oder Tagesgeldkonto. Betrachte diesen Betrag als deine wichtigste Rechnung, die du zuerst begleichst. Was du nicht auf dem Girokonto siehst, gibst du im Alltag nicht aus. Diese einfache Routine sichert deinen langfristigen Vermögensaufbau ohne täglichen Verzicht. Ein Beispiel: Wenn du 2.500 Euro monatlich verdienst, solltest du 250–375 Euro auf dein Sparbuch überweisen.
 
 ## 2. Führe monatlich ein Finanz-Review
 

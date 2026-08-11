@@ -14,7 +14,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst mit der 50–30–20-Regel beginnen, bei der 50 % deines Einkommens für feste Ausgaben, 30 % für freie Ausgaben und 20 % für Sparvermögen verwendet werden. So sparst du effektiv Geld, ohne großen Verzicht leisten zu müssen. Mit diesen Tricks kannst du bis zu 200 € pro Monat sparen."
 social_posted: true
----## Trick 1:<br>Ein Haushaltsbuch führen – aber richtig
+---
+
+## Trick 1:<br>Ein Haushaltsbuch führen – aber richtig
 
 Notiere nicht mühsam jeden Kaugummi. Reserviere dir einmal im Monat 20 Minuten für deine Finanzen. Stelle deine Fixkosten den Kategorien Lebensmittel, Mobilität und Freizeit gegenüber. Ein **Haushaltsbuch führen** entlarvt vergessene Abos und unnötige Mitgliedschaften sofort. Allein das Streichen von zwei oder drei ungenutzten Diensten für je 10 Euro spart dir 30 Euro im Monat. Um dein Haushaltsbuch noch effektiver zu gestalten, kannst du auch eine **Budget-App** nutzen, die dir hilft, deine Ausgaben zu verfolgen und zu kategorisieren.
 

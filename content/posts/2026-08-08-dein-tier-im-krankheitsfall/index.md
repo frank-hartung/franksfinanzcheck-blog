@@ -16,7 +16,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Eine Tierversicherung deckt in der Regel 50 bis 90 % der Tierarztkosten ab. So kannst du dich auf die Genesung deines Tieres konzentrieren, anstatt dich um die Kosten zu sorgen. Mit einer monatlichen Prämie von ca. 20 € bis 50 € schützt du dein Tier und deine Finanzen."
 social_posted: true
----## Was ist eine Tierversicherung?
+---
+
+## Was ist eine Tierversicherung?
 Dieser Schutz erstattet dir hohe Kosten für tierärztliche Behandlungen. Die Versicherung zahlt meist für Operationen, teure Medikamente und aufwendige Diagnosen. Je nach Tierart wählst du eine Hundeversicherung oder eine Katzenversicherung. Damit verhinderst du schmerzhafte Einmalzahlungen aus deinem Ersparten.
 
 ### Das Wichtigste in Kürze:
@@ -36,12 +38,12 @@ Prüfe vor dem Abschluss unbedingt die vereinbarte Wartezeit. Viele Anbieter zah
 Die Beiträge für eine Tierversicherung werden in der Regel wie folgt berechnet:
 | Alter des Tieres | Rasse | Beitrag |
 | --- | --- | --- |
-| Jung (0-2 Jahre) | Kleine Rassen | 20-30 €/Monat |
-| Jung (0-2 Jahre) | Große Rassen | 30-40 €/Monat |
-| Erwachsen (2-7 Jahre) | Kleine Rassen | 30-40 €/Monat |
-| Erwachsen (2-7 Jahre) | Große Rassen | 40-50 €/Monat |
-| Alt (7-12 Jahre) | Kleine Rassen | 40-50 €/Monat |
-| Alt (7-12 Jahre) | Große Rassen | 50-60 €/Monat |
+| Jung (0–2 Jahre) | Kleine Rassen | 20–30 €/Monat |
+| Jung (0–2 Jahre) | Große Rassen | 30–40 €/Monat |
+| Erwachsen (2–7 Jahre) | Kleine Rassen | 30–40 €/Monat |
+| Erwachsen (2–7 Jahre) | Große Rassen | 40–50 €/Monat |
+| Alt (7–12 Jahre) | Kleine Rassen | 40–50 €/Monat |
+| Alt (7–12 Jahre) | Große Rassen | 50–60 €/Monat |
 
 ## Was sind die Vorteile einer Tierversicherung?
 Mit einer Versicherung ermöglichst du deinem Tier immer die beste Medizin. Dein Kontostand entscheidet nicht mehr über lebenswichtige Behandlungen. Du senkst deine finanzielle Belastung bei schweren Unfällen drastisch. Die Sorge um das Geld weicht der Sorge um dein Tier.
@@ -78,7 +80,7 @@ Eine Hundeversicherung deckt spezifische Risiken wie Gelenkprobleme oder Magendr
 Du kündigst deinen Vertrag unter Einhaltung der vertraglichen Fristen. Meist beträgt die Kündigungsfrist drei Monate zum Ende des Versicherungsjahres. Bei einer Erhöhung der Beiträge nutzt du oft ein Sonderkündigungsrecht.
 
 ### Wie lange dauert die Bearbeitung einer Schadensmeldung?
-Die Bearbeitung einer Schadensmeldung kann je nach Versicherer und Komplexität des Falls variieren. In der Regel dauert es jedoch zwischen 2-5 Werktagen, bis die Erstattung auf deinem Konto eingegangen ist.
+Die Bearbeitung einer Schadensmeldung kann je nach Versicherer und Komplexität des Falls variieren. In der Regel dauert es jedoch zwischen 2–5 Werktagen, bis die Erstattung auf deinem Konto eingegangen ist.
 
 ### Kann ich meine Tierversicherung auch im Ausland nutzen?
 Ja, viele Tierversicherungen bieten einen weltweiten Schutz an. Das bedeutet, dass du auch im Ausland Anspruch auf Erstattung von Tierarztkosten hast. Informiere dich jedoch vorab über die Bedingungen und Einschränkungen deines Tarifs.

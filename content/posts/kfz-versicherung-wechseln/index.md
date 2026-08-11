@@ -14,7 +14,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du sparst bis zu 400 €, wenn du deine Kfz-Versicherung wechselst. Der beste Zeitpunkt für den Wechsel ist in der Regel vor Ablauf deines aktuellen Vertrags. Ein Vergleich der Tarife kann dir helfen, die günstigste Option zu finden."
 social_posted: true
----Mit einem Wechsel deiner Autoversicherung sparst du oft 200 bis 400 Euro im Jahr. Die Kfz-Haftpflicht gehört nach Miete und Strom zu den größten Fixkosten in deutschen Haushalten. Dennoch lassen viele Autofahrer dieses Sparpotenzial ungenutzt. Dieser Ratgeber zeigt dir, wie du mit minimalem Aufwand deine Kosten senkst.
+---
+
+Mit einem Wechsel deiner Autoversicherung sparst du oft 200 bis 400 Euro im Jahr. Die Kfz-Haftpflicht gehört nach Miete und Strom zu den größten Fixkosten in deutschen Haushalten. Dennoch lassen viele Autofahrer dieses Sparpotenzial ungenutzt. Dieser Ratgeber zeigt dir, wie du mit minimalem Aufwand deine Kosten senkst.
 
 ## Der beste Zeitpunkt:<br>November oder Dezember
 

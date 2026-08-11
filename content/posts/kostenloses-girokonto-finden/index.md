@@ -14,7 +14,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst ein kostenloses Girokonto ohne Gebühren finden, indem du Angebote vergleichst. Viele Banken bieten kostenlose Girokonten an, oft mit Startguthaben von ca. 50–100 €. Ein Wechsel kann sich lohnen, wenn du derzeit Kontoführungsgebühren von in der Regel 5–10 € pro Monat zahlst."
 social_posted: true
----120 Euro im Jahr für nichts? So viel kosten dich durchschnittliche Kontoführungsgebühren von etwa 10 Euro pro Monat. Viele Banken bieten dieselbe Dienstleistung komplett gratis an. Mit einem schnellen Wechsel holst du dir dieses Geld dauerhaft zurück. Ein **kostenloses Girokonto** spart dir über die Jahre vierstellige Beträge – Geld, das auf deinem Sparkonto oder in einem ETF deutlich besser aufgehoben ist als in der Verwaltung deiner Hausbank. Rechnet man die gesparten 120 Euro jährlich auf ein Arbeitsleben von 40 Jahren hoch und legt sie zu 7 % Zinsen an, reden wir über ein Endkapital von über 25.000 Euro.
+---
+
+120 Euro im Jahr für nichts? So viel kosten dich durchschnittliche Kontoführungsgebühren von etwa 10 Euro pro Monat. Viele Banken bieten dieselbe Dienstleistung komplett gratis an. Mit einem schnellen Wechsel holst du dir dieses Geld dauerhaft zurück. Ein **kostenloses Girokonto** spart dir über die Jahre vierstellige Beträge – Geld, das auf deinem Sparkonto oder in einem ETF deutlich besser aufgehoben ist als in der Verwaltung deiner Hausbank. Rechnet man die gesparten 120 Euro jährlich auf ein Arbeitsleben von 40 Jahren hoch und legt sie zu 7 % Zinsen an, reden wir über ein Endkapital von über 25.000 Euro.
 
 ## Das Wichtigste in Kürze
 
@@ -69,7 +71,7 @@ Exklusive Leistungen rechtfertigen manchmal monatliche Kosten von 10 bis 15 Euro
 Ja, laut Zahlungskontengesetz dürfen Banken für den gesetzlich vorgeschriebenen Wechselservice keine Gebühren berechnen. Auch die Kontoeröffnung ist bei Direktbanken fast immer gratis. Lediglich für den Versand physischer Karten oder den Postversand von Unterlagen können geringe Portokosten anfallen, falls du die digitale Variante ablehnst.
 
 ### Was passiert mit meinem Dispo?
-Gleiche dein Minus vor dem Wechsel unbedingt aus. Dein neuer Anbieter gewährt dir einen Dispokredit meist erst nach drei monatlichen Gehaltseingängen oder einer Bonitätsprüfung. Ein bestehender Dispo wird beim Schließen des alten Kontos sofort fällig. Wenn du das Geld nicht flüssig hast, kann ein günstiger Ratenkredit zur Umschuldung sinnvoll sein, da Dispozinsen oft bei 10-14 % liegen.
+Gleiche dein Minus vor dem Wechsel unbedingt aus. Dein neuer Anbieter gewährt dir einen Dispokredit meist erst nach drei monatlichen Gehaltseingängen oder einer Bonitätsprüfung. Ein bestehender Dispo wird beim Schließen des alten Kontos sofort fällig. Wenn du das Geld nicht flüssig hast, kann ein günstiger Ratenkredit zur Umschuldung sinnvoll sein, da Dispozinsen oft bei 10–14 % liegen.
 
 ### Schadet der Wechsel meiner Schufa?
 Ein neues Girokonto führt zu einer kurzfristigen Anfrage bei der Schufa, was den Score minimal beeinflussen kann. Das ist jedoch temporär. Langfristig ist ein stabil geführtes Konto positiv. Du solltest jedoch vermeiden, innerhalb weniger Monate drei oder vier Konten gleichzeitig zu eröffnen. Kündige alte, ungenutzte Konten konsequent, da zu viele offene Kreditlinien (auch Dispos) deine Bonität eher belasten.

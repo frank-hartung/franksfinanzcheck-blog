@@ -16,7 +16,9 @@ cover:
   alt: "Balkonkraftwerk 2026: Kosten, Förderung, Amortisation"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
----Willst du eine Rendite von 15 % pro Jahr? Mit einem Balkonkraftwerk 2026 verwandelst du deinen Balkon in eine eigene Gelddruckmaschine. Die Preise für die Technik befinden sich auf einem Rekordtief. Die Anmeldung ist mittlerweile in wenigen Minuten erledigt. Für viele Haushalte ist Stecker-Solar die lukrativste Investition am Markt.
+---
+
+Willst du eine Rendite von 15 % pro Jahr? Mit einem Balkonkraftwerk 2026 verwandelst du deinen Balkon in eine eigene Gelddruckmaschine. Die Preise für die Technik befinden sich auf einem Rekordtief. Die Anmeldung ist mittlerweile in wenigen Minuten erledigt. Für viele Haushalte ist Stecker-Solar die lukrativste Investition am Markt.
 
 Ob sich die Anlage für dich rechnet, entscheiden dein Standort und dein Stromverbrauch. Nicht jeder Balkon liefert die gleichen Ergebnisse. In diesem Leitfaden erfährst du die exakten Zahlen. Nutze diese Fakten für deine persönliche Entscheidung.
 

@@ -16,7 +16,9 @@ cover:
   alt: "Kontowechsel in 20 Minuten: Der Wechselservice erklärt"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
----Zahlst du monatlich für dein Girokonto? Du verschenkst damit jedes Jahr bis zu 200 € an deine Bank. Dein Girokonto dient als Schaltzentrale für deine Finanzen. Dennoch lassen viele Menschen hier unnötig Geld liegen.
+---
+
+Zahlst du monatlich für dein Girokonto? Du verschenkst damit jedes Jahr bis zu 200 € an deine Bank. Dein Girokonto dient als Schaltzentrale für deine Finanzen. Dennoch lassen viele Menschen hier unnötig Geld liegen.
 
 ### Das Wichtigste in Kürze
 - Ein kostenloses Konto spart dir oft über 100 € pro Jahr.

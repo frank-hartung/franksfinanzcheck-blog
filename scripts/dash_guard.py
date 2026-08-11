@@ -154,6 +154,24 @@ R7_UPPER = re.compile(r"([.!?]) – (?=[A-ZÄÖÜ0-9])")
 R8_IMPERATIV = re.compile(r"(?<=[.!?] )Ließ (das|dein|deine|deinen|mein|meine|hier|bitte)")
 
 
+# R9: Geklebte Front-Matter-SCHLUSS-Fence normalisieren.
+# „---Text" wird zu „---\n\nText" – NUR an genau einer Stelle: der ersten
+# Fence-Zeile nach dem oeffnenden Front-Matter. Verhindert YAML-Parse-Fehler
+# in Editoren (GitHub Web-UI!) ohne jedes Layout-Risiko (Hugo aendert nichts).
+def normalize_glued_fence(text: str) -> tuple[str, bool]:
+    lines = text.split("\n")
+    if not lines or lines[0].strip() != "---":
+        return text, False
+    for j in range(1, min(len(lines), 80)):
+        if lines[j].startswith("---"):
+            rest = lines[j][3:]
+            if rest.strip():                       # geklebt: ---Text
+                lines[j] = "---\n" + rest if False else "---\n\n" + rest
+                return "\n".join(lines), True
+            return text, False                     # sauber: nichts zu tun
+    return text, False
+
+
 def fix_r7_r8(line: str) -> tuple[str, list[str]]:
     new = R7_UPPER.sub(r"\1 ", line)                              # Groß: Strich weg
     new = re.sub(r"([.!?]) – (?=[a-zäöü])", r" – ", new)          # klein: Punkt weg
@@ -272,6 +290,11 @@ Bei keep=false: formuliere NUR die Strich-/Satzglied-Probleme um, Inhalt/Wörter
 def process_file(path: Path) -> dict:
     rel = path.relative_to(ROOT)
     text = path.read_text(encoding="utf-8")
+    # R9: geklebte Schluss-Fence zuerst heilen (Datei-Ebene, sonst YAML-Bruch
+    # in Editoren & Guards!)
+    text, _glued_fixed = normalize_glued_fence(text)
+    if _glued_fixed:
+        pass  # Zaehlung unten im Schreibpfad (gleiche Bedingung wie Zeilenregeln)
     lines = text.split("\n")
     out, stats = [], {"R": 0, "KI": 0}
     in_code = False
@@ -336,6 +359,8 @@ def process_file(path: Path) -> dict:
             return {"file": str(rel), "stats": stats, "text": full}
 
     if stats["R"] or (DO_FIX and not DRY_RUN):
+        if _glued_fixed:
+            stats["R"] += 1
         return {"file": str(rel), "stats": stats, "text": "\n".join(out),
                 "styles": list(STYLE_FINDINGS)}
     return {"file": str(rel), "stats": stats, "text": None, "styles": list(STYLE_FINDINGS)}
