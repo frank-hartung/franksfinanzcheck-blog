@@ -151,6 +151,18 @@ Depot→tagesgeld, Gas→gas …). Schlägt auch nur einer fehl, bricht der Mark
 Exit 2 ab, bevor eine Datei angefasst wird – Mensch oder KI kann das Routing nicht
 mehr „aus Versehen" verbiegen.
 
+### affiliate_health.py – 🩺 E2E-Wächter mit Kontrakt + Selbstheilung (haerteste Fassung)
+Prueft jede Route **end-to-end**: komplette Redirect-Kette bis zur finalen
+Landeseite (nicht nur Tracker-Hop 1!), Endseite < 400, richtige Kategorie per
+Keyword-Vertrag (`CONTRACT`, eingefroren), PID-Pins (`pid=80968&aid=18` /
+`partner_id=47086&ad_id=15`), Gateway-Drift, CTA-Abdeckung. tarifcheck-WAF-403
+(Datacenter-Bots) wird korrekt als erwartbar bewertet.
+**Selbstheilung:** tote/falsch geroutete Ziele werden automatisch auf den
+sicheren Homepage-Fallback (PID bleibt!) umgebaut, Gateways neu generiert,
+Issue an Frank (Label `affiliate-health`). **Sabotage-Schutz:** 14 eingefrorene
+Urteils-Faelle testen die `verdict()`-Logik selbst – Abbruch mit Exit 2 vor
+jeder Schreibaktion.
+
 ---
 
 ## 🛡️ Schutzzonen (gelten über allen Guards)
@@ -201,6 +213,12 @@ mehr „aus Versehen" verbiegen.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (4):** Affiliate-Grossreparatur + E2E-Haertung. Zwei Deeps waren
+  TOT (kreditvergleich, tagesgeldvergleich → 404 auf der Endseite; alter Waechter
+  pruefte nur Hop 1!). Neu: kredit→kredit-vergleich, tagesgeld→c24bank (C24 =
+  Geldanlage-Heimat), fluege→ehrlicher Homepage-Fallback (kein Flug-Deep am
+  Tracker, TODO Dashboard). affiliate_health.py jetzt E2E mit Kategorie-Vertrag,
+  Auto-Heilung auf sicheren Fallback und 14-Faelle-Selbsttest.
 - **11.08.2026 (3):** affiliate_marketer.py: Schnell-Tipp-Routing-Korrektur (Fehlrouten
   Depot→girokonto, Elementar→handytarife u.a. geheilt), universelles Retarget +
   17-Fälle-Selbsttest als Sabotage-Schutz (Exit 2 vor jeder Datei-Berührung).

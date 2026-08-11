@@ -1,17 +1,22 @@
 # ============================================================
-#  AFFILIATE-HEALTH – Wochenwache der Geldverdien-Links
+#  AFFILIATE-HEALTH – Wochenwache der Geldverdien-Links (E2E-Fassung)
 #
 #  Läuft jeden Montag um 07:45 MESZ (vor dem Backlink-Scout):
-#    H1  Online-Erreichbarkeit + Redirect-Netzwerk-Zugehoerigkeit
+#    H1  E2E: KOMPLETTE Redirect-Kette bis zur Endseite (< 400 +
+#        richtige Kategorie per Keyword-Vertrag; tarifcheck-WAF-403
+#        wird als erwartbarer Datacenter-Effekt gewertet)
 #    H2  PID-Integritaet (pid=80968&aid=18 | partner_id=47086&ad_id=15)
 #    H3  /go/-Gateway-Drift (YAML-Register vs. generierte Seiten)
 #    H4  CTA-Abdeckung (Artikel ohne Affiliate-Link)
+#    +   SELBSTHEILUNG: tote/falsch geroutete Ziele -> sicherer
+#        Homepage-Fallback (PID bleibt!), Gateways neu, Issue an Frank.
+#    +   SABOTAGE-SCHUTZ: 14-Faelle-Selbsttest vor jedem Einsatz.
 #
 #  Kritischer Fund -> GitHub-Issue (Label: affiliate-health, Dedupe).
 #  Nicht kritisch: Report wird committet, Workflow bleibt gruen.
+#  Geheilte Artefakte (Register + static/go) werden mit-committet.
 #
-#  Manuell: Actions → „Affiliate-Health" → Run workflow (Offline-Test
-#  per Inputs? Einfach Workflow starten – Netz wird erwartet.)
+#  Manuell: Actions → „Affiliate-Health" → Run workflow.
 # ============================================================
 name: Affiliate-Health (Wochenwache)
 
@@ -45,11 +50,12 @@ jobs:
         run: |
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
-          git add AFFILIATE-HEALTH-REPORT.md data/affiliate_health_history.jsonl
+          git add AFFILIATE-HEALTH-REPORT.md data/affiliate_health_history.jsonl \
+                  scripts/check24_links.yaml static/go/
           if git diff --cached --quiet; then
             echo "Kein Update."
           else
-            git commit -m "chore: Affiliate-Health-Report aktualisiert"
+            git commit -m "chore+heal: Affiliate-Health E2E (Report${{ github.event_name == 'schedule' && ', Wochenwache' || '' }})"
             git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
             git push || { sleep 20; git pull --rebase origin main && git push; }
           fi
