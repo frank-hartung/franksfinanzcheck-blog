@@ -176,6 +176,10 @@ SELFTEST = [
     ("L8", "Du könntest sparen und müsstest prüfen und solltest wechseln und dürftest warten und möchtest handeln; wir könnten alle, wir müssten alle.", None, "L8-Weichmacher"),
     ("L9", "Du sparst Geld zur Seite. Du siehst die Kurse regelmässig. Du handelst besonnen und mit Plan.", None, "L9-Satzanfang"),
     ("L12", "Dies ist ein ausgesprochen langer Satz der mit vielen Woertern und Nebensaetzen und Einschueben und Gedanken und Wendungen und Details und Klaerungen und Beispielen und Hinweisen versehen wurde damit er definitiv weit ueber fuenfunddreissig Woerter kommt ohne je zu enden.", None, "L12-Longsatz"),
+    # MASKE-REGRESSION (11.08. Nacht): md-Link ZWISCHEN zwei Zitaten darf
+    # niemals als Platzhalter-Leiche in der Datei landen:
+    ("MASK", "Das macht das [Internet schneller machen](../../posts/2026-08-06-turbo-fuers-netz/) zu einer Sache von Millisekunden – das Gefühl, wie eine Seite „anspringt“, zählt.",
+     "Das macht das [Internet schneller machen](../../posts/2026-08-06-turbo-fuers-netz/) zu einer Sache von Millisekunden – das Gefühl, wie eine Seite „anspringt“, zählt.", ""),
 ]
 
 # ---------------- L5/L3 Wortlisten ------------------------------------------------
@@ -189,18 +193,29 @@ def mask(line: str):
         k = f"\x00{len(store)}\x00"
         store[k] = m.group(0)
         return k
-    line = re.sub(r"https?://\S+", _m, line)
+    line = re.sub("https?://\\S+", _m, line)
     line = re.sub(r"\[[^\]]*\]\([^)]*\)", _m, line)
-    line = re.sub(r"`[^`]*`", _m, line)
-    # Lektorats-Ehre: direkte Rede/Zitate („…" / "…") niemals umschreiben
-    line = re.sub('„[^"]+["“]', _m, line)
+    line = re.sub("`[^`]*`", _m, line)
+    # Lektorats-Ehre: direkte Rede/Zitate („…" / "…") niemals umschreiben.
+    # WICHTIG (Bugfix 11.08.): [^„"]… nicht-gierig – sonst frisst ein Zitat
+    # bis zum LETZTEN Anfuehrungszeichen der Zeile und schluckt dabei
+    # bereits gesetzte Platzhalter (Masken-Schachtelungs-Bug).
+    line = re.sub('„[^„"]{1,240}?["“]', _m, line)
     line = re.sub('"[^"\n]{3,120}"', _m, line)
     return line, store
 
 
 def unmask(line, store):
-    for k, v in store.items():
-        line = line.replace(k, v)
+    # Rueckwaerts-Reihenfolge (LIFO): spaet maskierte Regionen zuerst
+    # aufloesen – sie koennen fruehere Platzhalter inhaltlich umschliessen;
+    # dann Platzhalter im Ergebnis solange aufloesen, bis nichts mehr da ist.
+    for k in reversed(list(store.keys())):
+        line = line.replace(k, store[k])
+    for _ in range(8):  # Verschachtelungs-Fixpunkt (Sicherheitsnetz)
+        if "\x00" not in line:
+            break
+        for k, v in reversed(list(store.items())):
+            line = line.replace(k, v)
     return line
 
 
