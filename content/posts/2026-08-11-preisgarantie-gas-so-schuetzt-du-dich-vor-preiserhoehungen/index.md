@@ -50,7 +50,7 @@ Hast du den Wunschtarif gefunden, klicke direkt auf den Online-Antrag. Dein neue
 
 ## Den Check24-Gasvergleich optimal nutzen
 
-Vergleichsportale sind mächtige Werkzeuge für informierte Sparer. Schau beim [**check24 Gasvergleich**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14) jedoch nicht nur auf die erste Zahl. Viele Versorger locken Neukunden mit hohen Einmalboni von 100 € bis 300 €. Diese Boni werden oft erst nach einem Jahr gutgeschrieben.
+Vergleichsportale sind mächtige Werkzeuge für informierte Sparer. Schau beim [**check24 Gasvergleich**](/go/girokonto/) jedoch nicht nur auf die erste Zahl. Viele Versorger locken Neukunden mit hohen Einmalboni von 100 € bis 300 €. Diese Boni werden oft erst nach einem Jahr gutgeschrieben.
 
 Rechne den Preis am besten ohne diese Bonuszahlungen aus. So siehst du die echten Kosten für das zweite Vertragsjahr. Nur so erkennst du, ob das Angebot dauerhaft fair bleibt. Transparenz ist beim Gaskauf viel wichtiger als ein kurzfristiges Geschenk.
 
@@ -95,6 +95,6 @@ Ja, bei einer einseitigen Preisanpassung durch den Versorger hast du ein Sonderk
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/girokonto/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

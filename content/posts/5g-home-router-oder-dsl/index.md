@@ -126,6 +126,6 @@ Ja – der Router funktioniert überall mit 5G-Abdeckung. Ein Umzug ist also kei
 
 5G-Home ist eine echte Option, aber keine Wunderwaffe. Wer [den besten Anschluss](../../posts/glasfaser-dsl-kabel-anschluss-vergleich/) sucht, vergleicht alle Optionen an seiner Adresse – und wer [schnelles WLAN zu Hause](../../posts/wlan-verbessern-ohne-neue-hardware/) will, findet die Tricks im nächsten Ratgeber. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
-👉 **Jetzt Handy- und 5G-Tarife vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife)
+👉 **Jetzt Handy- und 5G-Tarife vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/handytarife/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

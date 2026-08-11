@@ -1,0 +1,8 @@
+{{- /* Affiliate-Shield Render-Hook (11.08.2026):
+   - Links nach /go/… bekommen rel="sponsored nofollow noopener"
+     (Google-Affiliate-Compliance) + target=_blank + Umami-Event.
+   - Alles andere bleibt exakt wie bisher (Default-Verhalten). */ -}}
+{{- $href := .Destination -}}
+{{- $clean := $href | strings.TrimPrefix "/go/" | strings.TrimSuffix "/" -}}
+{{- $isGo := strings.HasPrefix $href "/go/" -}}
+<a href="{{ $href | safeURL }}"{{ if $isGo }} rel="sponsored nofollow noopener" target="_blank" data-umami-event="affiliate_click" data-umami-event-slug="{{ $clean }}"{{ end }}{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>

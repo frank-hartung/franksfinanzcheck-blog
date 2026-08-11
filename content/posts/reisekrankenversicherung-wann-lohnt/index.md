@@ -71,5 +71,5 @@ Das Wichtigste in Kürze:
 * Achte auf Rücktransport, weltweite Deckung und Dauer
 * Vorerkrankungen und Altersgrenzen genau prüfen
 
-👉 **Jetzt Reisekrankenversicherung vergleichen:** [**→ Tarife prüfen**](https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=reisekrankenversicherung)
+👉 **Jetzt Reisekrankenversicherung vergleichen:** [**→ Tarife prüfen**](/go/reisekrankenversicherung/)
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

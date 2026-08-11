@@ -81,6 +81,6 @@ Absolut. Viele nutzen ein zweites **kostenloses Girokonto ohne Gebühren**, um F
 
 ---
 
-👉 **Jetzt kostenlose Girokonten vergleichen und Startguthaben sichern:** [**→ Girokonten prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
+👉 **Jetzt kostenlose Girokonten vergleichen und Startguthaben sichern:** [**→ Girokonten prüfen**](/go/girokonto/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

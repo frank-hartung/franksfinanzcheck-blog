@@ -124,6 +124,6 @@ Kombiniere dein Buch mit der [50-30-20-Regel für deine Budgetverteilung](../../
 **Hilft ein Haushaltsbuch beim Sparen für Ziele?**
 Ja, denn konkrete Ziele motivieren dich bei der täglichen Erfassung. Plane deinen Urlaub oder ein neues Auto als festen Budget-Posten ein. Überweise diesen Betrag monatlich auf ein separates Konto für mehr Klarheit. Dein Haushaltsbuch zeigt dir dann jederzeit deinen aktuellen Fortschritt an.
 
-👉 **Jetzt [Geld sparen](../../posts/versicherungen-kuendigen-diese-5-policen/) und Angebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
+👉 **Jetzt [Geld sparen](../../posts/versicherungen-kuendigen-diese-5-policen/) und Angebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/girokonto/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
