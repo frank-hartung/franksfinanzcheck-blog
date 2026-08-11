@@ -1,8 +1,11 @@
 # 🎨 DESIGN-REPORT (Verlags-QA)
 
-**Stand:** 2026-08-11 13:04 UTC · Modus: REPORT · Seiten: 410
-**🔴 Kritisch:** 0 · **🟡 Warnungen:** 186 · **✅ Auto-geheilt (alts):** 0
+**Stand:** 2026-08-11 13:19 UTC · Modus: FIX · Seiten: 410
+**🔴 Kritisch:** 1 · **🟡 Warnungen:** 186 · **✅ Auto-geheilt (alts):** 0
 
+## 🔴 Kritisch
+
+- **D10** CTA-CSS enthaelt NICHT: a[href^="/go/"] (/go/-Gateway gerauscht – gelber Kasten aus!)
 
 ## 🟡 Warnungen (Auswahl)
 

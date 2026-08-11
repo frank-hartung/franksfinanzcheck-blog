@@ -214,8 +214,9 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* ---------- Affiliate-CTA im Artikel (gelber Pill-Button-Look) ---------- */
-/* Gilt für ALLE Affiliate-Links: CHECK24 (a.check24.net) UND
-   Tarifcheck (a.partner-versicherung.de) – gleiche optische Verlinkung. */
+/* Vertrag mit der Pipeline: CTA-Links laufen seit 11.08. ueber das
+   /go/-Gateway (Affiliate-Shield) – Selector deckt rohe Netzwerk-URLs UND
+   /go/-Links ab. design_guard D10 waercht das (Regelwerk). */
 .post-content hr + p:has(> strong > a),
 .post-content p:has(> a[href*="check24.net"]),
 .post-content p:has(> a[href*="partner-versicherung.de"]) {
@@ -652,3 +653,16 @@ input:focus-visible {
     main.main > footer { order: 4; }
     main.main > section.ff-clusters { order: 5; }
 }
+
+/* AUTO-HEILUNG (design_guard D10, 11.08.2026): Das Affiliate-Shield
+   ersetzte direkte Netzwerk-Links durch /go/-Gateway-Links; das CSS
+   des gelben CTA-Kastens feuerte nur fuer die rohen Domains – Kasten
+   fiel aus. Dieser Block wird bei Fehlen automatisch wiederhergestellt. */
+.post-content p:has(> a[href^="/go/"]) {
+    background: rgba(255, 179, 0, 0.10);
+    border: 1px dashed rgba(255, 179, 0, 0.6);
+    border-radius: 10px; padding: 14px 18px;
+    text-align: center; display: flex; flex-direction: column;
+    align-items: center; gap: 8px; margin: 22px auto; max-width: 520px;
+}
+.post-content p:has(> a[href^="/go/"]) strong { display: block; margin-bottom: 4px; }
