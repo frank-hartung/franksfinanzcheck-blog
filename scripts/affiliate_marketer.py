@@ -66,22 +66,30 @@ PILLAR_ROUTE = {
 # hartkodiert auf konto-karten!), lenkt dieser Kontextabgleich auf bessere
 # Routen, ohne das System zu destabilisieren. Reihenfolge = Spezifität.
 DEEP_HINTS = [
-    (re.compile(r"sturmtief|sturm|hochwasser|flut|unwetter", re.I), "elementar"),
-    (re.compile(r"kredit-raten|ratenkredit|dispo|schuld", re.I), "kredit"),
-    (re.compile(r"girokonto|konto|bankauszug", re.I), "girokonto"),
-    (re.compile(r"etf|sparplan|aktie|börse|boerse|depot|vermögensaufbau|altersvorsorge|rente", re.I), "tagesgeld"),
-    (re.compile(r"strom|elektrizitä|kwh|kühl|heiz|wärmepumpe|e-auto", re.I), "strom"),
-    (re.compile(r"gas", re.I), "gas"),
-    (re.compile(r"dsl|internet|5g|fritz|router|breitband", re.I), "dsl"),
-    (re.compile(r"handy|mobilfunktarif", re.I), "handytarife"),
-    (re.compile(r"mietwagen", re.I), "mietwagen"),
-    (re.compile(r"kfz|autoversicherung", re.I), "kfz-versicherung"),
-    (re.compile(r"hausrat|haftpflicht|privathaftpflicht", re.I), "hausrat"),
-    (re.compile(r"unfallversicherung", re.I), "unfallversicherung"),
+    # Reihenfolge = Spezifität (Supertrumpf erst). Aussicht: kein „übergreifendes
+    # Wort" (z.B. „konto|internet|heiz") darf frueher als ein Fach treffen.
+    (re.compile(r"unfall", re.I), "unfallversicherung"),
     (re.compile(r"reisekranken", re.I), "reisekrankenversicherung"),
-    (re.compile(r"reisen?|urlaub|flug", re.I), "reisen"),
     (re.compile(r"zahn", re.I), "zahnzusatzversicherung"),
+    (re.compile(r"privathaftpflicht", re.I), "haftpflicht"),
+    (re.compile(r"hausrat", re.I), "hausrat"),
+    (re.compile(r"haftpflicht", re.I), "haftpflicht"),
+    (re.compile(r"kfz|kasko|sf-klasse", re.I), "kfz-versicherung"),
+    (re.compile(r"mietwagen|mietauto|autovermiet", re.I), "mietwagen"),
+    (re.compile(r"flug|fluege|flugzeug|flugticket", re.I), "fluege"),
+    (re.compile(r"pauschal|last.minute|urlaubskasse|all.inclusive|urlaub", re.I), "reisen"),
+    (re.compile(r"elementar|starkregen|hochwasser|flut|sturm|unwetter", re.I), "hausrat"),
+    (re.compile(r"gasanbieter|gaspreis|gastarif|gasheizung", re.I), "gas"),
+    (re.compile(r"strom|wärmepumpe|kühl|nachtspeicher|stromfresser|stromvergleich|eigend|balkonkraft|e-auto", re.I), "strom"),
+    (re.compile(r"handy|mobilfunktarif|datenvolumen|sim.karte", re.I), "handytarife"),
+    (re.compile(r"breitband|glasfaser|router|fritz", re.I), "dsl"),
+    (re.compile(r"dsl", re.I), "dsl"),
+    (re.compile(r"internet", re.I), "dsl"),
+    (re.compile(r"tagesgeld|festgeld|zinsgarantie|sparzinsen|etf|sparplan|aktie|börse|boerse|depot|vermögensaufbau|zinseszins|sparquote|investieren|zinses|vermögens", re.I), "tagesgeld"),
     (re.compile(r"kreditkarte", re.I), "kreditkarte"),
+    (re.compile(r"ratenkredit|kredit|umschuldung|dispo", re.I), "kredit"),
+    (re.compile(r"girokonto|bankkonto|kontoführung|wechselservice|kontowechsel", re.I), "girokonto"),
+    (re.compile(r"budget|haushaltsbuch|frugal|notgroschen|50.30.20|monatsbudget|nebenverdienst|impulskaeufe", re.I), "allgemein"),
 ]
 
 def route_for(text: str, pillar: str = "") -> str:
@@ -92,6 +100,50 @@ def route_for(text: str, pillar: str = "") -> str:
         if pat.search(ctx):
             return key
     return PILLAR_ROUTE.get(pillar, "allgemein")
+
+# ------------------------------------------------------------
+# SABOTAGE-SCHUTZ (Selbsttest-Batterie, 11.08.2026)
+# 17 kanonische Routing-Faelle, eingefroren nach der grossen
+# Fehlrouting-Korrektur (Depot->girokonto, Elementar->handytarife,
+# Sicher heizen->girokonto usw. waren die Schaedlinge).
+# Wenn kuenftig jemand - Mensch oder KI - die DEEP_HINTS
+# "verbessert" oder reiht und dadurch das Routing kippt, bricht
+# JEDER Lauf (manuell + CI) sofort mit Exit 2 ab, BEVOR auch nur
+# eine Datei angefasst wird. Ehrlich statt still kaputt.
+# ------------------------------------------------------------
+SELFTEST = [
+    # (Kontexttext, Pillar, erwartete Route)
+    ("So sicherst du dir den besten DSL-Wechselbonus und Cashback", "", "dsl"),
+    ("Girokonto wechseln mit dem Wechselservice: Kontoführungsgebühren vermeiden", "", "girokonto"),
+    ("Günstige Flüge finden: Die besten Tricks für dein Flugticket", "", "fluege"),
+    ("KFZ-Versicherung wechseln: So nutzt du deine SF-Klasse optimal", "", "kfz-versicherung"),
+    ("Unfallversicherung: Warum sie wichtiger ist als viele denken", "", "unfallversicherung"),
+    ("Sicher heizen mit Preisgarantie: Gastarife vergleichen und den Gaspreis sichern", "", "gas"),
+    ("Strom sparen im Haushalt: 20 Tipps gegen Stromfresser", "", "strom"),
+    ("Handytarife vergleichen: Mehr Datenvolumen fürs gleiche Geld", "", "handytarife"),
+    # DER Sabotage-Klassiker: frueher routete das faelschlich auf handytarife!
+    ("Elementarschadenversicherung: Schutz bei Hochwasser und Starkregen", "", "hausrat"),
+    ("Privathaftpflicht: Warum sie Pflicht für jeden ist", "", "haftpflicht"),
+    ("Hausratversicherung: Wer braucht welche Leistung?", "", "hausrat"),
+    ("Depot 2026: Dein smarter Start in den Vermögensaufbau mit ETF-Sparplan", "", "tagesgeld"),
+    ("Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten", "", "kreditkarte"),
+    ("Mietwagen buchen: So sparst du bei der Autovermietung", "", "mietwagen"),
+    ("Urlaubskasse aufbessern: Die besten Spartipps für deinen nächsten Urlaub", "", "reisen"),
+    # Pillar-Fallback, wenn das Thema keine Fach-Route hat:
+    ("Ganz ohne passendes Fachthema im Text", "konto-karten", "girokonto"),
+    # bewusst breites Budget-Thema bleibt beim Portal:
+    ("Haushaltsbuch führen: So behältst du dein Monatsbudget im Griff", "", "allgemein"),
+]
+
+
+def run_selftest() -> list[str]:
+    """Prüft jede kanonische Route. Liefert Fehlerliste (leer = alles gut)."""
+    fehler = []
+    for i, (txt, pillar, want) in enumerate(SELFTEST, 1):
+        got = route_for(txt, pillar)
+        if got != want:
+            fehler.append(f"  Fall {i}: erwartet /go/{want}/, bekam /go/{got}/  ← „{txt[:60]}“")
+    return fehler
 
 CTA_POOL = [
     ("Jetzt Angebote vergleichen", "Vergleichen & sparen"),
@@ -221,28 +273,23 @@ def process(path: Path, reg: dict) -> dict:
                 "erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*") + "\n"
             fixes["am3"] = True
 
-    # RETARGET: Heilungs-CTAs vom 11.08. nachsintern (allgemein -> thematisch besser).
-    # Deterministisch, berührt ausschließlich unsere im Repo gegebenen Packstücke.
+    # RETARGET (universell & sabotage-robust): Jede Schnell-Tipp-Box, deren Route vom
+    # Ideal abweicht, wird auf die thematisch beste Route umgeschrieben.
+    # Register-Gate gegen 404. Sabotage-Test ist global (selftest) aktiv.
     marker = "Schnell-Tipp von FranksFinanzcheck"
     best = route_for(text, pillar)
-    change = False
-    # Gate: nur auf EXISTIERENDE Gateway-Seiten retargeten (sonst 404!).
-    if best != "allgemein" and best in reg and marker in text and "/go/allgemein/" in text:
-        lines_t = text.split("\n")
-        for i, l in enumerate(lines_t):
-            if marker in l or ("💡" in l and "Partner-Vergleich" in l):
-                pass
-        idx = [i for i, l in enumerate(lines_t) if marker in l]
-        if idx:
-            j = idx[0]
-            if "/go/allgemein/" in lines_t[j]:
-                # nur diese eine Linie erweitern, aber DEEP_HINTS sind gut; Kleidung prüfen:
-                lines_t[j] = lines_t[j].replace("/go/allgemein/", f"/go/{best}/")
-                text = "\n".join(lines_t)
+    cur_route_m = re.search(marker + r".*?/go/([\w-]+)/", text, re.S)
+    if best and best in reg and cur_route_m:
+        cur_route = cur_route_m.group(1)
+        if cur_route != best:
+            new_text, n = re.subn(
+                re.escape(marker) + r"(.*?)\/go\/" + re.escape(cur_route) + r"\/",
+                marker + "\\1/go/" + best + "/",
+                text, count=1)
+            if n > 0:
+                text = new_text
                 fixes["am2"] = True
-                change = True
-        if change:
-            status.append(("RT", f"Top-CTA retargeted auf /go/{best}/", "info"))
+                status.append(("RT", f"Top-CTA: /go/{cur_route}/ -> /go/{best}/ (thematisch besser)", "info"))
     return {"file": str(path.relative_to(ROOT)), "text": text, "fixes": fixes, "status": status,
             "affils": len(affils)}
 
@@ -252,6 +299,14 @@ def anchor_report(affil_anchor_map):
 
 
 def main():
+    # SABOTAGE-SCHUTZ zuerst: Routing-Selbsttest VOR jeder Datei-Beruehrung.
+    fehler = run_selftest()
+    if fehler:
+        print("🛑 SELBSTTEST FEHLGESCHLAGEN – Routing-Sabotage verhindert.")
+        print("   Kein Lauf, keine Datei angefasst. Bitte DEEP_HINTS/route_for prüfen:")
+        print("\n".join(fehler))
+        sys.exit(2)
+    print(f"✅ Selbsttest: {len(SELFTEST)} kanonische Routen stimmen.")
     reg = load_registry()
     posts = sorted((ROOT / "content" / "posts").glob("*/index.md"))
     if NEW_ONLY:

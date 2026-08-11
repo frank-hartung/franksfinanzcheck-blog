@@ -142,6 +142,15 @@ Meta-Description, Affiliate-Disclaimer. **Jede Abweichung wird zurückgerollt.**
 Absichtliche Änderung: entweder `hugo.toml` + einmal `python3 scripts/brand_guard.py --set-current`,
 oder einfach den Wert in `data/brand_lock.yaml` ändern und commiten – die Automatik folgt.
 
+### affiliate_marketer.py – 🎯 CTA-Routing mit Selbsttest-Batterie (Sabotage-Schutz)
+Steuert die 💡-Schnell-Tipp-Box thematisch korrekt (`route_for()` + `DEEP_HINTS`,
+Reihenfolge = Spezifität; Register-Gate gegen 404) und retargetet jede falsch
+geroutete Box automatisch auf die Ideale-Route. **Sabotage-Schutz:** `run_selftest()`
+prüft vor JEDEM Lauf 17 kanonische Routing-Fälle (DSL→dsl, Elementar→hausrat (!),
+Depot→tagesgeld, Gas→gas …). Schlägt auch nur einer fehl, bricht der Marketer mit
+Exit 2 ab, bevor eine Datei angefasst wird – Mensch oder KI kann das Routing nicht
+mehr „aus Versehen" verbiegen.
+
 ---
 
 ## 🛡️ Schutzzonen (gelten über allen Guards)
@@ -192,6 +201,9 @@ oder einfach den Wert in `data/brand_lock.yaml` ändern und commiten – die Aut
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (3):** affiliate_marketer.py: Schnell-Tipp-Routing-Korrektur (Fehlrouten
+  Depot→girokonto, Elementar→handytarife u.a. geheilt), universelles Retarget +
+  17-Fälle-Selbsttest als Sabotage-Schutz (Exit 2 vor jeder Datei-Berührung).
 - **11.08.2026 (2):** Verlags-Lektorat `lektor_guard.py` (L1–L5) in die Kette eingebaut.
 - **11.08.2026:** Hoheitskarte Längen-Systeme festgelegt (Posts vs. Pillar, Floor 1.000); R9 Fence-Normalisierung dauerhaft; 56 Alt-Fences geheilt.
 - **10.08.2026:** Regelwerk 1.0. Neu: casing_guard, dash_guard (R1–R8),

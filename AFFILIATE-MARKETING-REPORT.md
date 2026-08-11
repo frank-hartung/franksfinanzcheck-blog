@@ -1,7 +1,7 @@
 # 🎯 AFFILIATE-MARKETING-REPORT
 
-**Stand:** 2026-08-11 14:12 UTC · Modus: FIX
-**Artikel:** 76 · **Kritisch:** 0 · **Autofixes:** 65
+**Stand:** 2026-08-11 14:48 UTC · Modus: FIX
+**Artikel:** 76 · **Kritisch:** 0 · **Autofixes:** 0
 
 🎉 Alle Money-Pages: CTA frueh + Disclaimer komplett. Pro-Level.
 
