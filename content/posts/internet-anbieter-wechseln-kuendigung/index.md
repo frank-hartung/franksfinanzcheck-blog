@@ -68,17 +68,17 @@ Falls du selbst kündigen musst (ohne Wechsel-Service), hilft dieses Gerüst:
 
 **Text:** „hiermit kündige ich meinen Vertrag [Tarifname] mit der Vertragsnummer [Nummer] zum nächstmöglichen Termin. Bitte bestätigen Sie mir die Kündigung schriftlich unter Angabe des Beendigungszeitpunkts. Meine Kontaktdaten finden Sie in Ihrem System."
 
-Wichtig: Per E-Mail an die offizielle Kündigungsadresse senden und die Empfangsbestätigung aufbewahren. Bei Streit über den Zugang hilft ein Einschreiben mit Rückschein – für 3 bis 4 Euro zusätzliche Sicherheit.
+Wichtig: Per E-Mail an die offizielle Kündigungsadresse senden und die Empfangsbestätigung aufbewahren. Bei Streit über den Zugang hilft ein Einschreiben mit Rückschein – für 3 bis 4 € zusätzliche Sicherheit.
 
 ## Was Anbieter dir „beim Bleiben" bieten
 
-Wenn du kündigst, wird dein Anbieter mit Rückhol-Angeboten antworten – oft mit Rabatten von 10 bis 20 Prozent oder einem Gratis-Monat. Das ist der Moment zum Verhandeln, auch ohne ernsthafte Wechselabsicht:
+Wenn du kündigst, wird dein Anbieter mit Rückhol-Angeboten antworten – oft mit Rabatten von 10 bis 20 % oder einem Gratis-Monat. Das ist der Moment zum Verhandeln, auch ohne ernsthafte Wechselabsicht:
 
 1. Kündigung einreichen (Frist einhalten!).
 2. Auf das Rückhol-Angebot warten.
 3. Entweder annehmen (wenn es gut ist) – oder dem neuen Anbieter das Angebot vorlegen und einen besseren Rabatt verhandeln.
 
-Die Anbieter wissen, dass Wechsel teuer sind (Kundenakquise kostet 100 bis 200 Euro), und geben daher oft echte Rabatte. Wichtig: Die Kündigungsfrist läuft weiter – wenn kein gutes Angebot kommt, ziehst du den Wechsel einfach durch.
+Die Anbieter wissen, dass Wechsel teuer sind (Kundenakquise kostet 100 bis 200 €), und geben daher oft echte Rabatte. Wichtig: Die Kündigungsfrist läuft weiter – wenn kein gutes Angebot kommt, ziehst du den Wechsel einfach durch.
 
 ## Die besten Wechsel-Zeitpunkte (Neukunden-Boni)
 
@@ -114,7 +114,7 @@ Ein Wechsel ist einfach – aber die Fehler kosten trotzdem Geld und Nerven. Die
 
 4. **Keine Preisgarantie gesichert:** Viele Tarife erhöhen den Preis nach 12 Monaten. Lösung: Beim Abschluss auf die Preisgarantie achten oder den Wechsel-Rhythmus bewusst einplanen.
 
-5. **Nur auf den Lockvogel-Preis geschaut:** Der erste Monat für 0 Euro klingt gut – entscheidend ist der Preis ab Monat 13. Lösung: Immer die Gesamtkosten über 24 Monate vergleichen.
+5. **Nur auf den Lockvogel-Preis geschaut:** Der erste Monat für 0 € klingt gut – entscheidend ist der Preis ab Monat 13. Lösung: Immer die Gesamtkosten über 24 Monate vergleichen.
 
 Wer diese fünf Punkte beachtet, wechselt stressfrei – und spart dauerhaft.
 
@@ -128,7 +128,7 @@ Bei Preiserhöhungen, Umzug ohne gleichwertigen Anschluss, dauerhafter Vertragsw
 Schriftlich per E-Mail an die Kündigungsadresse (mit Bestätigung) oder per Einschreiben. Die Kündigungsfrist beträgt nach der Mindestlaufzeit maximal 1 Monat.
 
 **Gibt es Boni für den Wechsel?**
-Ja – die meisten Anbieter zahlen Neukunden-Boni von 50 bis 200 Euro oder geben die ersten Monate gratis. Die besten Angebote gibt es zu Black Friday, Jahresbeginn und in Glasfaser-Ausbaugebieten.
+Ja – die meisten Anbieter zahlen Neukunden-Boni von 50 bis 200 € oder geben die ersten Monate gratis. Die besten Angebote gibt es zu Black Friday, Jahresbeginn und in Glasfaser-Ausbaugebieten.
 
 Der Internetwechsel gehört zu den lohnendsten Sparmaßnahmen überhaupt – genau wie der [Stromanbieter-Wechsel](../../posts/stromanbieter-wechseln-2026/). Und wer [den Anschluss vergleicht](../../posts/glasfaser-dsl-kabel-anschluss-vergleich/), sollte gleich auch den [Handytarif](../../posts/handytarife-vergleichen-guenstigster-tarif/) prüfen. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 

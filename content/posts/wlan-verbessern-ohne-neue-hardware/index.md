@@ -17,7 +17,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
-Bevor du 100 Euro für einen neuen Router oder [WLAN-Verstärker](../../posts/wlan-verstaerker-vs-mesh-wlan/) ausgibst, solltest du wissen: Die Hälfte aller WLAN-Probleme lässt sich mit Einstellungen und Tricks lösen – kostenlos. Oft liegt es nicht an der Hardware, sondern an Standort, Frequenzwahl oder veralteter Software.
+Bevor du 100 € für einen neuen Router oder [WLAN-Verstärker](../../posts/wlan-verstaerker-vs-mesh-wlan/) ausgibst, solltest du wissen: Die Hälfte aller WLAN-Probleme lässt sich mit Einstellungen und Tricks lösen – kostenlos. Oft liegt es nicht an der Hardware, sondern an Standort, Frequenzwahl oder veralteter Software.
 
 In diesem Artikel bekommst du 12 Tipps, die dein WLAN sofort spürbar schneller machen. Alles ohne neuen Router, ohne Verstärker, ohne Kabel.
 
@@ -31,7 +31,7 @@ Der Standort des Routers entscheidet mehr über dein WLAN als jedes teure Gerät
 - **Nicht neben dem Router-Modem stapeln:** Stromkabel, Ladegeräte und andere Elektronik erzeugen Störfelder.
 
 Die beste Position ist oft der Flur oder das Wohnzimmer –   
-dort, wo sich die meisten Geräte aufhalten. Ein Versuch mit 30 Zentimetern Standortänderung kann das Signal um 20 bis 50 Prozent verbessern.
+dort, wo sich die meisten Geräte aufhalten. Ein Versuch mit 30 Zentimetern Standortänderung kann das Signal um 20 bis 50 % verbessern.
 
 ## Frequenzwahl:<br>2,4 GHz vs. 5 GHz
 
@@ -70,7 +70,7 @@ Ein offenes oder schwach verschlüsseltes WLAN ist nicht nur ein Sicherheitsrisi
 
 Wenn einzelne Räume kein WLAN bekommen, ist die günstigste Lösung oft DLAN (Internet über die Stromleitung): Du steckst einen Adapter in die Steckdose beim Router und einen zweiten im Empfangsraum. Das Signal reist über das Stromnetz – meist schneller und stabiler als durch dicke Wände.
 
-Die Optimierung: DLAN-Adapter nicht in Mehrfachsteckdosen stecken (Störungen!), sondern direkt in die Wandsteckdose. Und: Beide Adapter müssen im selben Stromkreis sein – in Altbauten mit getrennten Sicherungen funktioniert das nicht immer. Ein gutes DLAN-Set kostet 40 bis 80 Euro – deutlich günstiger als ein Mesh-System.
+Die Optimierung: DLAN-Adapter nicht in Mehrfachsteckdosen stecken (Störungen!), sondern direkt in die Wandsteckdose. Und: Beide Adapter müssen im selben Stromkreis sein – in Altbauten mit getrennten Sicherungen funktioniert das nicht immer. Ein gutes DLAN-Set kostet 40 bis 80 € – deutlich günstiger als ein Mesh-System.
 
 ## Die 12-Tipps-Checkliste zum Abhaken
 
@@ -98,7 +98,7 @@ Die Mess-Regeln für aussagekräftige Ergebnisse:
 - **Am selben Ort messen:** Der Standort des Geräts beeinflusst das Ergebnis – immer vom selben Platz testen.
 - **WLAN vs. Kabel unterscheiden:** Ein Kabel-Test zeigt, was die Leitung hergibt; der WLAN-Test zeigt, was bei dir ankommt. Der Unterschied ist dein WLAN-Verlust.
 
-Praktisch: Wer nach dem Kanalwechsel und der Standort-Optimierung 30 Prozent mehr Tempo misst, weiß, dass die Tricks gewirkt haben. Und wer keine Verbesserung sieht, hat damit ein klares Signal, dass die Hardware das Problem ist. Dann ist der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein [Mesh-System](../../posts/wlan-verstaerker-vs-mesh-wlan/) die nächste Stufe.
+Praktisch: Wer nach dem Kanalwechsel und der Standort-Optimierung 30 % mehr Tempo misst, weiß, dass die Tricks gewirkt haben. Und wer keine Verbesserung sieht, hat damit ein klares Signal, dass die Hardware das Problem ist. Dann ist der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein [Mesh-System](../../posts/wlan-verstaerker-vs-mesh-wlan/) die nächste Stufe.
 
 
 ## Häufig gestellte Fragen
@@ -107,7 +107,7 @@ Praktisch: Wer nach dem Kanalwechsel und der Standort-Optimierung 30 Prozent meh
 Abends nutzen alle Nachbarn gleichzeitig das Internet – die Kanäle sind voll, und bei Kabelanschlüssen teilt sich die Bandbreite mit der Nachbarschaft. Gegen die Nachbarn hilft der Kanalwechsel, gegen die Kabel-Drosselung nur der Anschluss-Wechsel.
 
 **Was bringt ein Kanalwechsel wirklich?**
-Wenn dein Kanal stark belegt ist, kann der Wechsel das Tempo spürbar verbessern – oft 20 bis 50 Prozent. In ruhigen Gebieten mit wenigen Nachbarn ist der Effekt gering.
+Wenn dein Kanal stark belegt ist, kann der Wechsel das Tempo spürbar verbessern – oft 20 bis 50 %. In ruhigen Gebieten mit wenigen Nachbarn ist der Effekt gering.
 
 **Wie weit reicht WLAN durch Wände?**
 Durch eine normale Trockenbauwand etwa 10 bis 15 Meter, durch dicke Betonwände oft nur 3 bis 5 Meter. Der 5-GHz-Band hat kürzere Reichweite als 2,4 GHz – in Altbauten hilft [Mesh](../../posts/wlan-verstaerker-vs-mesh-wlan/) oder DLAN.

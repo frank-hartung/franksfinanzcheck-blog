@@ -27,7 +27,7 @@ Ein Rohrbruch flutet dein Wohnzimmer, ein Brand vernichtet die Küche oder Einbr
 
 ## Wer braucht eine Hausratversicherung?
 
-Grundsätzlich braucht jeder eine Hausratversicherung, der einen eigenen Haushalt führt. Viele unterschätzen den Gesamtwert ihres Besitzes: Zählst du Kleidung, Geschirr, Elektrogeräte und Möbel zusammen, kommst du selbst in einer kleinen Wohnung schnell auf 20.000 bis 30.000 Euro. Dein Vermieter versichert lediglich die Gebäudehülle, nicht aber deine privaten Besitztümer. Auch als Eigentümer schützt dich die Wohngebäudeversicherung nur bei Schäden an der festen Bausubstanz (Mauern, Dach).
+Grundsätzlich braucht jeder eine Hausratversicherung, der einen eigenen Haushalt führt. Viele unterschätzen den Gesamtwert ihres Besitzes: Zählst du Kleidung, Geschirr, Elektrogeräte und Möbel zusammen, kommst du selbst in einer kleinen Wohnung schnell auf 20.000 bis 30.000 €. Dein Vermieter versichert lediglich die Gebäudehülle, nicht aber deine privaten Besitztümer. Auch als Eigentümer schützt dich die Wohngebäudeversicherung nur bei Schäden an der festen Bausubstanz (Mauern, Dach).
 
 * **Mieter:** Du haftest selbst für dein Inventar. Ohne Versicherung bleibst du bei einem Brand auf den Kosten für die komplette Neuanschaffung sitzen.
 * **Eigentümer:** Ergänze deine Gebäudeversicherung unbedingt um den Schutz für bewegliche Güter. Dazu zählen auch Dinge im Keller oder in der Garage.
@@ -56,7 +56,7 @@ Die Hausrat-Kosten hängen primär von deinem Wohnort (Postleitzahl-Region) und 
 | 80 m² (Paar) | 50–80 € / Jahr | 90–130 € / Jahr |
 | 120 m² (Familie) | 80–120 € / Jahr | 130–210 € / Jahr |
 
-Die meisten Versicherer rechnen mit einer Summe von **650 Euro pro Quadratmeter** Wohnfläche. Bei einer 80-m²-Wohnung entspricht das einer Versicherungssumme von 52.000 Euro. Dieser Richtwert ist ein Goldstandard: Wählst du diesen Wert, verzichtet der Versicherer auf die Prüfung einer Unterversicherung. Das bedeutet, dass er im Schadensfall keine Kürzungen vornimmt, selbst wenn dein Hausrat tatsächlich wertvoller sein sollte.
+Die meisten Versicherer rechnen mit einer Summe von **650 € pro Quadratmeter** Wohnfläche. Bei einer 80-m²-Wohnung entspricht das einer Versicherungssumme von 52.000 €. Dieser Richtwert ist ein Goldstandard: Wählst du diesen Wert, verzichtet der Versicherer auf die Prüfung einer Unterversicherung. Das bedeutet, dass er im Schadensfall keine Kürzungen vornimmt, selbst wenn dein Hausrat tatsächlich wertvoller sein sollte.
 
 ## Die 5 wichtigsten Vergleichs-Kriterien
 
@@ -81,16 +81,16 @@ Wenn es knallt, brennt oder fließt, musst du schnell handeln, um deinen Anspruc
 ## Häufige Fragen (FAQ)
 
 ### Brauche ich als Student in einer WG eine Hausratversicherung?
-Ja, denn auch Studenten besitzen mit Laptop, Smartphone, Tablet und Fahrrad oft Werte von mehreren tausend Euro. Kleine Tarife für einzelne Zimmer kosten oft nur 35 bis 50 Euro im Jahr. Falls du noch bei deinen Eltern gemeldet bist und dort dein „Mittelpunkt der Lebensführung“ ist, greift eventuell deren Schutz über die Außenversicherung – das solltest du jedoch schriftlich vom Versicherer bestätigen lassen.
+Ja, denn auch Studenten besitzen mit Laptop, Smartphone, Tablet und Fahrrad oft Werte von mehreren tausend Euro. Kleine Tarife für einzelne Zimmer kosten oft nur 35 bis 50 € im Jahr. Falls du noch bei deinen Eltern gemeldet bist und dort dein „Mittelpunkt der Lebensführung“ ist, greift eventuell deren Schutz über die Außenversicherung – das solltest du jedoch schriftlich vom Versicherer bestätigen lassen.
 
 ### Was passiert bei einer Unterversicherung konkret?
-Ohne den „Verzicht auf Unterversicherung“ kürzt die Versicherung deine Entschädigung anteilig. Beispiel: Dein Hausrat ist 60.000 Euro wert, du hast aber nur 30.000 Euro versichert (50 %). Wenn nun bei einem Wasserschaden Möbel im Wert von 10.000 Euro zerstört werden, zahlt die Versicherung nur 5.000 Euro. Mit der 650-Euro-pro-m²-Regel umgehst du diese Falle komplett.
+Ohne den „Verzicht auf Unterversicherung“ kürzt die Versicherung deine Entschädigung anteilig. Beispiel: Dein Hausrat ist 60.000 € wert, du hast aber nur 30.000 € versichert (50 %). Wenn nun bei einem Wasserschaden Möbel im Wert von 10.000 € zerstört werden, zahlt die Versicherung nur 5.000 €. Mit der 650-Euro-pro-m²-Regel umgehst du diese Falle komplett.
 
 ### Sind Home-Office-Geräte mitversichert?
 Ja, privates IT-Equipment ist normaler Hausrat. Gehören Laptop oder Monitor jedoch deinem Arbeitgeber, ist dieser in der Regel selbst dafür verantwortlich oder über eine Firmenversicherung geschützt. Bist du selbstständig, solltest du prüfen, ob dein Arbeitszimmer mehr als 50 % der Wohnfläche einnimmt – dann benötigst du oft eine spezielle Inhaltsversicherung für Gewerbe.
 
 ### Lohnt sich eine hohe Selbstbeteiligung?
-Eine Selbstbeteiligung (SB) von 150 oder 250 Euro reduziert die jährliche Prämie oft um 20 bis 30 %. Das ist wirtschaftlich sinnvoll, da die Versicherung primär für existenzbedrohende Großschäden da sein sollte, nicht für Kleinstschäden, die man aus eigener Tasche zahlen kann.
+Eine Selbstbeteiligung (SB) von 150 oder 250 € reduziert die jährliche Prämie oft um 20 bis 30 %. Das ist wirtschaftlich sinnvoll, da die Versicherung primär für existenzbedrohende Großschäden da sein sollte, nicht für Kleinstschäden, die man aus eigener Tasche zahlen kann.
 
 ### Gilt die Versicherung auch im Auto?
 Bedingt. Der Baustein „Außenversicherung“ deckt Raub (Gewalt) ab. Einfacher Diebstahl aus dem Auto (Aufbrechen des PKW) ist bei modernen Tarifen oft bis zu einer bestimmten Summe (z. B. 1.000 €) inkludiert, sofern die Gegenstände von außen nicht sichtbar waren.

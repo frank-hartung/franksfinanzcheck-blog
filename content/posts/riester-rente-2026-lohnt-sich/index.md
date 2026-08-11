@@ -27,8 +27,8 @@ Riester ist ein staatlich gefördertes Altersvorsorge-Produkt: Du sparst in eine
 
 Die Förderung 2026 im Überblick:
 
-- **Grundzulage:** 175 Euro pro Jahr (seit 2023)
-- **Kinderzulage:** 185 Euro pro Jahr pro Kind (ab Geburtsjahr 2008), 300 Euro für ältere Kinder
+- **Grundzulage:** 175 € pro Jahr (seit 2023)
+- **Kinderzulage:** 185 € pro Jahr pro Kind (ab Geburtsjahr 2008), 300 € für ältere Kinder
 - **Steuervorteil:** Beiträge können als Sonderausgaben abgesetzt werden – wer dadurch weniger Steuern zahlt als die Zulagen betragen, bekommt die Differenz als Steuererstattung
 
 Dafür gilt: Das Geld ist bis zum Rentenalter gebunden, wird bei Auszahlung besteuert, und die Förderung muss in bestimmten Fällen zurückgezahlt werden (zum Beispiel bei Kündigung ohne Weiterführung).
@@ -48,7 +48,7 @@ Wichtig: Die Reform ist ein laufender Gesetzgebungsprozess. Die genauen Konditio
 
 Riester lohnt sich vor allem für die Gruppen, die die vollen Zulagen kassieren:
 
-**Familien mit Kindern:** die Kinderzulagen machen Riester für Eltern besonders attraktiv. Ein Paar mit zwei Kindern, das den Mindestbeitrag zahlt, bekommt jährlich 175 + 175 + 185 + 185 = 720 Euro Zulagen – bei einem Eigenbeitrag von 2.100 Euro sind das über 34 Prozent Sofortrendite. Das schlägt fast jede andere Anlage.
+**Familien mit Kindern:** die Kinderzulagen machen Riester für Eltern besonders attraktiv. Ein Paar mit zwei Kindern, das den Mindestbeitrag zahlt, bekommt jährlich 175 + 175 + 185 + 185 = 720 € Zulagen – bei einem Eigenbeitrag von 2.100 € sind das über 34 % Sofortrendite. Das schlägt fast jede andere Anlage.
 
 **Geringverdiener:** wer wenig verdient und wenig Steuern zahlt, profitiert von den Zulagen am stärksten –   
 die Förderquote (Zulagen im Verhältnis zum Eigenbeitrag) ist hier am höchsten.
@@ -59,13 +59,13 @@ die Förderquote (Zulagen im Verhältnis zum Eigenbeitrag) ist hier am höchsten
 
 Die Kehrseite: Für viele andere ist Riester ein schwaches Produkt.
 
-**Alleinstehende ohne Kinder mit gutem Einkommen:** die Grundzulage von 175 Euro ist im Verhältnis zum Mindestbeitrag (4 Prozent des rentenversicherungspflichtigen Einkommens, rund 1.750 bis 2.100 Euro) gering. Bei höheren Steuersätzen hilft der Steuervorteil, aber die Kosten und die schlechte Rendite vieler Verträge fressen den Vorteil oft auf.
+**Alleinstehende ohne Kinder mit gutem Einkommen:** die Grundzulage von 175 € ist im Verhältnis zum Mindestbeitrag (4 % des rentenversicherungspflichtigen Einkommens, rund 1.750 bis 2.100 €) gering. Bei höheren Steuersätzen hilft der Steuervorteil, aber die Kosten und die schlechte Rendite vieler Verträge fressen den Vorteil oft auf.
 
-**Verträge mit hohen Kosten:** Ältere Versicherungs-Riesterverträge mit 5 Prozent Abschlusskosten und jährlicher Verwaltungsgebühr sind schwer zu retten. Eine ehrliche Kostenanalyse zeigt oft: Ein [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) hätte deutlich mehr erwirtschaftet.
+**Verträge mit hohen Kosten:** Ältere Versicherungs-Riesterverträge mit 5 % Abschlusskosten und jährlicher Verwaltungsgebühr sind schwer zu retten. Eine ehrliche Kostenanalyse zeigt oft: Ein [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) hätte deutlich mehr erwirtschaftet.
 
 **Kurz vor der Rente:** Wer in wenigen Jahren ohnehin in Rente geht und kaum Zulagen bekommen hat, sollte die Kündigung (oder das Stilllegen) ernsthaft prüfen.
 
-Achtung bei der Kündigung: Du musst die erhaltenen Zulagen und Steuervorteile zurückzahlen. Das kann schnell 2.000 bis 5.000 Euro sein. Die Rechnung muss also immer den Nettovorteil der Kündigung zeigen: Was bleibt nach Rückzahlung übrig, und was kann ich damit anderweitig erreichen?
+Achtung bei der Kündigung: Du musst die erhaltenen Zulagen und Steuervorteile zurückzahlen. Das kann schnell 2.000 bis 5.000 € sein. Die Rechnung muss also immer den Nettovorteil der Kündigung zeigen: Was bleibt nach Rückzahlung übrig, und was kann ich damit anderweitig erreichen?
 
 ## Stilllegen vs. kündigen vs. weiterzahlen
 
@@ -82,11 +82,11 @@ Es gibt drei Optionen – und „kündigen" ist nicht immer die beste:
 Bevor du irgendetwas entscheidest, analysiere deinen Vertrag:
 
 1. **Welche Garantie:** Wie hoch ist die garantierte Rente/Leistung? (steht in der jährlichen Standmitteilung)
-2. **Welche Kosten:** Abschlusskosten (werden über Jahre verteilt), Verwaltungskosten, Fondskosten – oft 1,5 bis 3 Prozent pro Jahr.
+2. **Welche Kosten:** Abschlusskosten (werden über Jahre verteilt), Verwaltungskosten, Fondskosten – oft 1,5 bis 3 % pro Jahr.
 3. **Welche Rendite:** Was hat der Vertrag in den letzten 5 Jahren wirklich erwirtschaftet (nach Kosten)?
 4. **Förderquote:** Wie viel Zulage und Steuerersparnis bekommst du pro Jahr im Verhältnis zu deinem Eigenbeitrag?
 
-Mit diesen vier Zahlen kannst du Riester mit einem [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) vergleichen: historisch erzielen Welt-ETFs langfristig 6 bis 8 Prozent pro Jahr vor Kosten. Die meisten Riester-Verträge liegen deutlich darunter. Die Förderung muss diese Differenz ausgleichen.
+Mit diesen vier Zahlen kannst du Riester mit einem [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) vergleichen: historisch erzielen Welt-ETFs langfristig 6 bis 8 % pro Jahr vor Kosten. Die meisten Riester-Verträge liegen deutlich darunter. Die Förderung muss diese Differenz ausgleichen.
 
 ## Alternativen:<br>Was du mit dem Geld machen könntest
 
@@ -100,13 +100,13 @@ Für die meisten ist die Kombination aus bAV und ETF-Sparplan die schlagkräftig
 
 ## Riester und die bAV:<br>Die unterschätzte Kombination
 
-Wer über Riester nachdenkt, sollte auch die betriebliche Altersvorsorge (bAV) prüfen – sie ist oft die unterschlagene Alternative. Der entscheidende Vorteil: Der Arbeitgeber muss mindestens 15 Prozent Zuschuss zu deinen Beiträgen zahlen. Zusammen mit den Steuervorteilen (bis zu 8 Prozent der Beitragsbemessungsgrenze steuerfrei) ist die bAV für viele die attraktivste Form der privaten Vorsorge.
+Wer über Riester nachdenkt, sollte auch die betriebliche Altersvorsorge (bAV) prüfen – sie ist oft die unterschlagene Alternative. Der entscheidende Vorteil: Der Arbeitgeber muss mindestens 15 % Zuschuss zu deinen Beiträgen zahlen. Zusammen mit den Steuervorteilen (bis zu 8 % der Beitragsbemessungsgrenze steuerfrei) ist die bAV für viele die attraktivste Form der privaten Vorsorge.
 
 Die Kombination sieht so aus: bAV für den Arbeitgeber-Zuschuss und die Steuerersparnis, Riester für die Zulagen (wenn du Kinder hast oder gering verdienst), und ein [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) für den Rendite-Teil. Wer alle drei Bausteine nutzt, hat eine breit gestreute Altersvorsorge – und ist nicht von einem Produkt abhängig.
 
-Wichtig bei der bAV: Prüfe die Kosten und die Verzinsung des Vertrags. Manche bAV-Angebote sind trotz Arbeitgeber-Zuschuss unattraktiv, weil die Gebühren hoch sind. Die Faustregel: Wenn der Arbeitgeber mindestens 15 Prozent zuschießt und die Kosten unter 1,5 Prozent liegen, lohnt sich die bAV fast immer.
+Wichtig bei der bAV: Prüfe die Kosten und die Verzinsung des Vertrags. Manche bAV-Angebote sind trotz Arbeitgeber-Zuschuss unattraktiv, weil die Gebühren hoch sind. Die Faustregel: Wenn der Arbeitgeber mindestens 15 % zuschießt und die Kosten unter 1,5 % liegen, lohnt sich die bAV fast immer.
 
-Und falls du Riester beitragsfrei stellst, aber noch Zulagen erhalten willst: Prüfe, ob du den Mindestbeitrag (4 Prozent des Vorjahreseinkommens, gedeckelt) weiterhin leisten kannst. Dann fließen Zulagen und Steuervorteile weiter, und dein Geld arbeitet mit Förderung.
+Und falls du Riester beitragsfrei stellst, aber noch Zulagen erhalten willst: Prüfe, ob du den Mindestbeitrag (4 % des Vorjahreseinkommens, gedeckelt) weiterhin leisten kannst. Dann fließen Zulagen und Steuervorteile weiter, und dein Geld arbeitet mit Förderung.
 
 
 ## Häufig gestellte Fragen
@@ -118,7 +118,7 @@ Nur nach sorgfältiger Rechnung: Zulagen und Steuervorteile müssen zurückgezah
 Die erhaltenen Zulagen und Steuervorteile werden bei der Kündigung zurückgefordert und vom Rückkaufswert abgezogen. Die genaue Summe steht in der Abrechnung der Versicherung.
 
 **Gibt es bessere Alternativen zu Riester?**
-Für die meisten: ein [ETF-Sparplan auf einen Welt-ETF](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) mit historisch 6 bis 8 Prozent Rendite. Wer hohe Zulagen bekommt (Familien, Geringverdiener), kann Riester ergänzend nutzen.
+Für die meisten: ein [ETF-Sparplan auf einen Welt-ETF](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) mit historisch 6 bis 8 % Rendite. Wer hohe Zulagen bekommt (Familien, Geringverdiener), kann Riester ergänzend nutzen.
 
 Die Altersvorsorge ist ein Puzzle: [Versicherungen sortieren](../../posts/versicherungen-kuendigen-diese-5-policen/), [BU prüfen](../../posts/berufsunfaehigkeitsversicherung-lohnt-sich/), und das freie Geld in einen [langfristigen Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) stecken. Alle Versicherungs- und Vorsorgethemen findest du im [Ratgeber Versicherungen](../../pillar/versicherungen/).
 

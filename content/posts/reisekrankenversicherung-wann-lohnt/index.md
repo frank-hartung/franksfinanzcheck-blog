@@ -16,7 +16,7 @@ kurzantwort: "Die gesetzliche Kasse zahlt in der Regel nur einen Teil der Kosten
 social_posted: true
 ---
 
-Ein Krankenhausaufenthalt in den USA kann schnell sechsstellige Summen kosten. Innerhalb Europas lauern Kostenfallen, wenn man nur auf die gesetzliche Kasse vertraut. Eine Reisekrankenversicherung kostet nur wenige Euro pro Jahr und schützt genau vor diesen Risiken. Du bekommst weltweite Absicherung für oft unter 30 Euro Jahresbeitrag.
+Ein Krankenhausaufenthalt in den USA kann schnell sechsstellige Summen kosten. Innerhalb Europas lauern Kostenfallen, wenn man nur auf die gesetzliche Kasse vertraut. Eine Reisekrankenversicherung kostet nur wenige Euro pro Jahr und schützt genau vor diesen Risiken. Du bekommst weltweite Absicherung für oft unter 30 € Jahresbeitrag.
 
 ## Das Grundproblem:<br>Die gesetzliche Kasse zahlt im Ausland nur wenig
 
@@ -67,7 +67,7 @@ Das hängt vom Tarif ab – viele zahlen für Schwangerschaftskomplikationen, ab
 
 Das Wichtigste in Kürze:
 * Reisekrankenversicherung schützt vor hohen Kosten im Ausland
-* Weltweite Absicherung für oft unter 30 Euro Jahresbeitrag
+* Weltweite Absicherung für oft unter 30 € Jahresbeitrag
 * Achte auf Rücktransport, weltweite Deckung und Dauer
 * Vorerkrankungen und Altersgrenzen genau prüfen
 

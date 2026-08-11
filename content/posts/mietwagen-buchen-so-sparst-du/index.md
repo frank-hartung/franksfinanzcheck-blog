@@ -20,7 +20,7 @@ Ein Mietwagen kann den Urlaub flexibel machen, aber auch schnell zum Kostenfress
 
 ## Die goldene Regel:<br>Früh buchen und vergleichen
 
-Mietwagenpreise steigen, je näher der Abreisetag rückt. An beliebten Urlaubsorten sind günstige Fahrzeugklassen oft Wochen vorher ausgebucht. Du solltest 2 bis 3 Monate vor Abreise buchen. Vergleiche immer: Die Preisunterschiede zwischen den Vermietern für exakt dasselbe Auto am selben Schalter können 30 bis 50 Prozent betragen.
+Mietwagenpreise steigen, je näher der Abreisetag rückt. An beliebten Urlaubsorten sind günstige Fahrzeugklassen oft Wochen vorher ausgebucht. Du solltest 2 bis 3 Monate vor Abreise buchen. Vergleiche immer: Die Preisunterschiede zwischen den Vermietern für exakt dasselbe Auto am selben Schalter können 30 bis 50 % betragen.
 
 ## So vergleichst du richtig
 
@@ -52,7 +52,7 @@ Ohne ausreichende Absicherung kann der Urlaub teuer enden. Die Vollkasko **ohne 
 2 bis 3 Monate vor Abreise. Danach steigen die Preise, und beliebte Klassen werden knapp.
 
 ### Wie viel kostet ein Mietwagen im Urlaub realistisch?
-Das hängt von Ziel, Saison und Klasse ab. Als grobe Orientierung: Kleine Fahrzeuge in Südeuropa gibt es ab etwa 20–30 Euro pro Tag – mit Vollkasko ohne Selbstbeteiligung entsprechend mehr.
+Das hängt von Ziel, Saison und Klasse ab. Als grobe Orientierung: Kleine Fahrzeuge in Südeuropa gibt es ab etwa 20–30 € pro Tag – mit Vollkasko ohne Selbstbeteiligung entsprechend mehr.
 
 ### Ist es günstiger, vor Ort zu buchen?
 Nein – vor Ort zahlst du fast immer mehr. Immer online im Voraus buchen.

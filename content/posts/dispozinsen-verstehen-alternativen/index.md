@@ -34,7 +34,7 @@ Verbraucherzentralen kritisieren die Banken seit Jahren für diese hohen Sätze.
 
 Du kannst deinen persönlichen Zinssatz jedoch oft selbst beeinflussen. Viele Kunden wissen gar nicht, dass Banken hier verhandlungsbereit sind. Ein kurzer Anruf bei deinem Berater genügt oft schon für eine Besserung. So kannst du teure Dispozinsen dauerhaft senken.
 
-## Rechenbeispiel:<br>1.000 Euro für 30 Tage
+## Rechenbeispiel:<br>1.000 € für 30 Tage
 
 Lass uns 1.000 € für genau 30 Tage im Minus betrachten. Bei 12 % Zinsen zahlst du monatlich 10 € an die Bank. Steigt der Satz auf 14 %, sind es bereits 11,67 €. Verhandelst du geschickt auf 8 %, sinkt die Last auf nur 6,67 €.
 

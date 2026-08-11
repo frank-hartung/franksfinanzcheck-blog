@@ -20,11 +20,11 @@ Mit diesen 7 Spartipps kannst du deine Urlaubskasse aufbessern und den Sommerurl
 
 ## 1. Früh buchen – der erste Schritt, um die Urlaubskasse zu schonen
 
-Flexibel sein lohnt sich. Last Minute findest du echte Schnäppchen. Hast du feste Termine, solltest du früh buchen und unbedingt vergleichen. Ein Vergleich mehrerer Anbieter spart bei Pauschalreisen oft 10 bis 20 Prozent, gerade bei All-inclusive-Angeboten.
+Flexibel sein lohnt sich. Last Minute findest du echte Schnäppchen. Hast du feste Termine, solltest du früh buchen und unbedingt vergleichen. Ein Vergleich mehrerer Anbieter spart bei Pauschalreisen oft 10 bis 20 %, gerade bei All-inclusive-Angeboten.
 
 ## 2. Die Nebensaison nutzen
 
-Preise für Flüge und Hotels schwanken stark im Jahresverlauf. Reist du außerhalb der Schulferien, sparst du oft 20 bis 40 Prozent – bei gleicher Sonne, gleichem Strand und weniger Gedränge. Der September ist oft der beste Monat.
+Preise für Flüge und Hotels schwanken stark im Jahresverlauf. Reist du außerhalb der Schulferien, sparst du oft 20 bis 40 % – bei gleicher Sonne, gleichem Strand und weniger Gedränge. Der September ist oft der beste Monat.
 
 ## 3. Mietwagen smart buchen
 
@@ -69,7 +69,7 @@ Eine Auslandskrankenversicherung ist günstig und wichtig. Zusatzpakete wie Reis
 Faustregel: Pauschalreisen in der Hauptsaison 3–6 Monate vorher, Flüge 2–3 Monate vorher, Last-Minute-Angebote 2–4 Wochen vor Abreise. Wer flexibel ist, bucht last minute.
 
 ### Wie viel kann ich realistisch sparen?
-Wer alle 7 Tipps umsetzt, spart erfahrungsgemäß 15 bis 30 Prozent der Reisekosten – bei 2.000 Euro Budget sind das 300 bis 600 Euro.
+Wer alle 7 Tipps umsetzt, spart erfahrungsgemäß 15 bis 30 % der Reisekosten – bei 2.000 € Budget sind das 300 bis 600 €.
 
 ### Lohnt sich eine Reiserücktrittsversicherung?
 Bei teuren, früh gebuchten Reisen ja – vor allem bei festen Terminen oder wenn die Familie mitreist. Prüfe vorher, ob deine Kreditkarte schon eine Reiseversicherung enthält. Informiere dich im [Versicherungsvergleich](https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15) über passende Versicherungsmöglichkeiten.

@@ -48,7 +48,7 @@ Beim Vergleich der Tarife solltest du auch auf die **Vertragslaufzeit** achten. 
 
 ## Der Herbst-Check für deine Heizung
 
-Ein günstiger Tarif ist die Basis, aber effizientes Heizen hilft dir zusätzlich, deine [Heizkosten senken](../../posts/waermepumpe-vs-gasheizung-2/) zu können. Entlüfte alle Heizkörper, bevor du die Thermostate im Herbst das erste Mal aufdrehst. Luft im System behindert den Wärmefluss und treibt den Verbrauch unnötig in die Höhe. Ein professioneller hydraulischer Abgleich optimiert die Wärmeverteilung im ganzen Haus. Schon eine Senkung der Raumtemperatur um ein Grad spart etwa 6 Prozent Energie ein.
+Ein günstiger Tarif ist die Basis, aber effizientes Heizen hilft dir zusätzlich, deine [Heizkosten senken](../../posts/waermepumpe-vs-gasheizung-2/) zu können. Entlüfte alle Heizkörper, bevor du die Thermostate im Herbst das erste Mal aufdrehst. Luft im System behindert den Wärmefluss und treibt den Verbrauch unnötig in die Höhe. Ein professioneller hydraulischer Abgleich optimiert die Wärmeverteilung im ganzen Haus. Schon eine Senkung der Raumtemperatur um ein Grad spart etwa 6 % Energie ein.
 
 Eine weitere Möglichkeit, deine Heizkosten zu senken, ist die **Isolierung** deines Hauses. Eine gute Isolierung kann helfen, die Wärme im Haus zu halten und den Verbrauch zu reduzieren. Du kannst auch überlegen, ob du deine alten Heizkörper durch neue, effizientere Modelle ersetzen möchtest.
 
@@ -58,7 +58,7 @@ Eine weitere Möglichkeit, deine Heizkosten zu senken, ist die **Isolierung** de
 Ja, für den Wechselvorgang fallen keine Gebühren an. Dein neuer Anbieter übernimmt die bürokratische Abwicklung mit dem alten Versorger als Serviceleistung. Es entstehen keine Kosten für die Umstellung deines Zählers.
 
 ### Wie viel kann ich beim Gas sparen?
-Ein Gasvergleich lohnt sich besonders für Haushalte in der Grundversorgung. Hier liegt das Sparpotenzial oft zwischen 10 und 25 Prozent der Gesamtkosten. Bei einem Einfamilienhaus mit 20.000 kWh Verbrauch sparst du so schnell 300 Euro oder mehr.
+Ein Gasvergleich lohnt sich besonders für Haushalte in der Grundversorgung. Hier liegt das Sparpotenzial oft zwischen 10 und 25 % der Gesamtkosten. Bei einem Einfamilienhaus mit 20.000 kWh Verbrauch sparst du so schnell 300 € oder mehr.
 
 ### Was passiert, wenn der alte Vertrag noch läuft?
 Du schließt den neuen Vertrag einfach mit Wirkung zum Ende deiner aktuellen Laufzeit ab. Bei einer Preiserhöhung hast du zudem ein Sonderkündigungsrecht. Nutze dieses Recht aktiv, um sofort Gaskosten sparen zu können.

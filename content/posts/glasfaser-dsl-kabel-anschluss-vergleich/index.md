@@ -53,7 +53,7 @@ Die Preise für einen 100-Mbit/s-Anschluss liegen 2026 ungefähr so:
 | Kabel | 25–40 € | 30–45 € | Drossel-Risiko in Spitzenzeiten |
 | Glasfaser | 30–45 € | 35–50 € | Zukunftssicher, oft Ausbau-Rabatte |
 
-Dazu kommen in den ersten 6 bis 12 Monaten oft Neukunden-Boni, die den effektiven Monatspreis um 10 bis 20 Euro senken. Wichtig: Rechne immer den Preis ab dem zweiten Jahr. Dort enden die meisten Rabatte. Der [Tarifvergleich für DSL und Internet](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt dir die aktuellen Angebote mit allen Bedingungen.
+Dazu kommen in den ersten 6 bis 12 Monaten oft Neukunden-Boni, die den effektiven Monatspreis um 10 bis 20 € senken. Wichtig: Rechne immer den Preis ab dem zweiten Jahr. Dort enden die meisten Rabatte. Der [Tarifvergleich für DSL und Internet](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt dir die aktuellen Angebote mit allen Bedingungen.
 
 ## Verfügbarkeit prüfen:<br>Der erste Schritt
 
@@ -61,7 +61,7 @@ Bevor du träumst, prüfe die Realität: Nicht jeder Anschluss ist überall verf
 
 So gehst du vor: Adresse eingeben, dann siehst du, ob Glasfaser (FTTH) in deiner Straße liegt oder geplant ist, wie schnell dein Kabelanschluss ist und welche DSL-Geschwindigkeiten möglich sind. Ergänzend fragen die Vergleichsportale automatisch die Verfügbarkeit ab – aber der Breitbandatlas ist die neutrale Quelle.
 
-Wichtig bei Glasfaser: Auch wenn der Ausbau in deiner Straße läuft, musst du den Hausanschluss oft selbst beauftragen und bezahlen (100 bis 800 Euro, je nach Anbieter und Förderung). Prüfe, ob dein Anbieter den Hausanschluss kostenlos übernimmt. Das ist bei vielen Ausbauprojekten inzwischen Standard.
+Wichtig bei Glasfaser: Auch wenn der Ausbau in deiner Straße läuft, musst du den Hausanschluss oft selbst beauftragen und bezahlen (100 bis 800 €, je nach Anbieter und Förderung). Prüfe, ob dein Anbieter den Hausanschluss kostenlos übernimmt. Das ist bei vielen Ausbauprojekten inzwischen Standard.
 
 ## Glasfaser:<br>Wann der Umstieg Pflicht wird
 
@@ -77,7 +77,7 @@ Kabelinternet hat einen entscheidenden Nachteil, den die Werbung verschweigt: Da
 
 Die gute Nachricht: Die Kabelnetzbetreiber haben in den letzten Jahren massiv in den Ausbau investiert (DOCSIS 3.1), und die Drosselungen sind seltener geworden. In vielen Gebieten ist Kabel heute die beste Preis-Leistungs-Option, wenn du hohe Tempi willst.
 
-Die Prüfung: Frage Nachbarn in deiner Straße nach ihren Erfahrungen am Abend – oder teste den Anschluss in der Vertragsphase. Und achte auf die Vertragsbedingungen: Manche Anbieter garantieren eine Mindestbandbreite (zum Beispiel 70 Prozent des gebuchten Tempos). Steht das nicht im Vertrag, hast du im Drossel-Fall kaum Handhabe.
+Die Prüfung: Frage Nachbarn in deiner Straße nach ihren Erfahrungen am Abend – oder teste den Anschluss in der Vertragsphase. Und achte auf die Vertragsbedingungen: Manche Anbieter garantieren eine Mindestbandbreite (zum Beispiel 70 % des gebuchten Tempos). Steht das nicht im Vertrag, hast du im Drossel-Fall kaum Handhabe.
 
 ## Die Entscheidungs-Tabelle
 
@@ -107,7 +107,7 @@ Und noch ein Punkt: Der Anschluss-Wechsel ist die perfekte Gelegenheit, [das WLA
 Für die meisten Haushalte reichen 100 Mbit/s: Streaming, Homeoffice und Surfen laufen damit problemlos. Familien mit mehreren gleichzeitigen Nutzern nehmen 250 Mbit/s. Höhere Tempi sind Komfort, kein Muss.
 
 **Was kostet Glasfaser im Monat?**
-2026 zwischen 30 und 50 Euro für 100 bis 250 Mbit/s, inklusive Router-Miete oft etwas mehr. Viele Anbieter geben in der Ausbauphase Rabatte – prüfe die Angebote an deiner Adresse.
+2026 zwischen 30 und 50 € für 100 bis 250 Mbit/s, inklusive Router-Miete oft etwas mehr. Viele Anbieter geben in der Ausbauphase Rabatte – prüfe die Angebote an deiner Adresse.
 
 **Wann lohnt sich der Wechsel zu Glasfaser?**
 Wenn Glasfaser verfügbar ist und du mehr als 100 Mbit/s brauchst, hohe Uploads hast oder langfristig zukunftssicher sein willst. Wer nur surft und streamt, kann bei DSL bleiben – der [Vergleich](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt, was sich rechnet.

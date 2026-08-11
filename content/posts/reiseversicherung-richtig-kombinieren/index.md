@@ -36,12 +36,12 @@ Die Reihenfolge der Priorität ist eindeutig: Auslandskranken zuerst, Reiserück
 
 ## Auslandskrankenversicherung:<br>Pflicht für jede Reise
 
-Die Auslandskrankenversicherung ist die wichtigste Reiseversicherung überhaupt – und die günstigste: **10 bis 30 Euro pro Jahr** für eine Einzelperson, 20 bis 50 Euro für Familien. Sie zahlt die Arzt- und Krankenhauskosten, die deine gesetzliche Krankenversicherung im Ausland nicht (oder nur teilweise) übernimmt.
+Die Auslandskrankenversicherung ist die wichtigste Reiseversicherung überhaupt – und die günstigste: **10 bis 30 € pro Jahr** für eine Einzelperson, 20 bis 50 € für Familien. Sie zahlt die Arzt- und Krankenhauskosten, die deine gesetzliche Krankenversicherung im Ausland nicht (oder nur teilweise) übernimmt.
 
 Die Details, die zählen:
 
 - **Deckungssumme:** Mindestens 1 Million Euro (Standard in Deutschland) – genug für jeden erdenklichen Fall.
-- **Rücktransport:** Muss enthalten sein – ein medizinischer Rücktransport kann 10.000 bis 50.000 Euro kosten.
+- **Rücktransport:** Muss enthalten sein – ein medizinischer Rücktransport kann 10.000 bis 50.000 € kosten.
 - **Geltungsbereich:** Weltweit (mit USA-Zusatz oft teurer) oder nur Europa? Prüfe, wohin du reist.
 - **Vorerkrankungen:** Die meisten Tarife schließen die Behandlung chronischer Erkrankungen aus, wenn sie vor Reisebeginn bekannt waren – das ist Standard, aber lesenswert.
 
@@ -49,23 +49,23 @@ Wichtig: Die Auslandskrankenversicherung gilt für **jede** Reise, auch Kurztrip
 
 ## Reiserücktrittsversicherung:<br>Wann sie sich lohnt
 
-Die Reiserücktrittsversicherung zahlt die Stornokosten, wenn du die Reise aus einem versicherten Grund nicht antreten kannst – in der Regel Krankheit, Unfall, schwere Erkrankung Angehöriger, Jobverlust oder unerwartete Schwangerschaft. Die Kosten: 3 bis 5 Prozent des Reisepreises, also 30 bis 80 Euro für eine 2.000-Euro-Reise.
+Die Reiserücktrittsversicherung zahlt die Stornokosten, wenn du die Reise aus einem versicherten Grund nicht antreten kannst – in der Regel Krankheit, Unfall, schwere Erkrankung Angehöriger, Jobverlust oder unerwartete Schwangerschaft. Die Kosten: 3 bis 5 % des Reisepreises, also 30 bis 80 € für eine 2.000-Euro-Reise.
 
 Wann sie sich lohnt:
 
-- **Teure Reisen (ab ca. 1.500 Euro):** Die Stornokosten können 50 bis 90 Prozent des Reisepreises betragen – das Risiko ist real.
+- **Teure Reisen (ab ca. 1.500 €):** Die Stornokosten können 50 bis 90 % des Reisepreises betragen – das Risiko ist real.
 - **Reisen mit Vorerkrankungen:** Wer regelmäßig krank ist oder ältere Angehörige betreut, hat ein höheres Stornorisiko.
 - **Nicht verschiebbare Reisen:** Ferienreisen mit festem Hotel und Flug – nicht umbuchbar.
 
-Wann sie unnötig ist: Bei günstigen Reisen unter 500 Euro oder Städtereisen, die sich flexibel verschieben lassen. Der Selbstbehalt von 20 bis 25 Prozent sollte bei der Kalkulation eingeplant werden.
+Wann sie unnötig ist: Bei günstigen Reisen unter 500 € oder Städtereisen, die sich flexibel verschieben lassen. Der Selbstbehalt von 20 bis 25 % sollte bei der Kalkulation eingeplant werden.
 
 ## Reisegepäckversicherung:<br>Meist überflüssig
 
 Die Reisegepäckversicherung klingt praktisch – ist aber für die meisten Reisenden überflüssig. Die Gründe:
 
-- **Geringe Deckung mit hohen Selbstbehalten:** Die typischen Tarife zahlen nur einen Bruchteil des Schadens, oft mit Einzelgrenzen pro Gegenstand (300–500 Euro).
-- **Doppelte Absicherung:** Die [Hausratversicherung](../../posts/hausratversicherung-wer-braucht-leistung/) deckt Reisegepäck meist mit ab – außerhalb der eigenen Wohnung bis zu 10 Prozent der Versicherungssumme.
-- **Seltene Schadensfälle:** Gepäck geht selten verloren – und wenn, dann meist auf Flügen, wo die Airline nach dem Montrealer Übereinkommen haftet (bis ca. 1.600 Euro).
+- **Geringe Deckung mit hohen Selbstbehalten:** Die typischen Tarife zahlen nur einen Bruchteil des Schadens, oft mit Einzelgrenzen pro Gegenstand (300–500 €).
+- **Doppelte Absicherung:** Die [Hausratversicherung](../../posts/hausratversicherung-wer-braucht-leistung/) deckt Reisegepäck meist mit ab – außerhalb der eigenen Wohnung bis zu 10 % der Versicherungssumme.
+- **Seltene Schadensfälle:** Gepäck geht selten verloren – und wenn, dann meist auf Flügen, wo die Airline nach dem Montrealer Übereinkommen haftet (bis ca. 1.600 €).
 
 Wer teure Technik mitnimmt, prüft besser die Hausrat-Deckung oder eine spezielle Elektronik-Versicherung – statt der pauschalen Gepäck-Police.
 
@@ -73,14 +73,14 @@ Wer teure Technik mitnimmt, prüft besser die Hausrat-Deckung oder eine speziell
 
 Die wichtigste Kosten-Entscheidung: Jahresvertrag oder Einzelreise-Versicherung?
 
-- **Jahresvertrag** (30–60 Euro für Auslandskranken, 80–150 Euro mit Reiserücktritt für Paare): Lohnt sich ab 2 bis 3 Reisen pro Jahr – und ist günstiger als die Einzelabschlüsse der Reiseportale.
+- **Jahresvertrag** (30–60 € für Auslandskranken, 80–150 € mit Reiserücktritt für Paare): Lohnt sich ab 2 bis 3 Reisen pro Jahr – und ist günstiger als die Einzelabschlüsse der Reiseportale.
 - **Einzelreise:** Sinnvoll, wenn du nur 1× pro Jahr verreist und die Reise teuer ist – dann rechnet sich der Einzelabschluss mit Reiserücktritt.
 
 Die Faustregel: Wer mehr als zweimal im Jahr fliegt, nimmt den Jahresvertrag – und zwar direkt bei einem Versicherer oder über einen Vergleich, nicht im Buchungsprozess des Reiseportals.
 
 ## Die Kombi-Falle der Reiseportale
 
-Die Reiseportale haben ein perfides Preissystem: Das „Komplett-Paket" (Auslandskranken + Reiserücktritt + Gepäck + Abbruch) kostet 3 bis 7 Prozent des Reisepreises – und beinhaltet Leistungen, die du oft gar nicht brauchst oder doppelt hast.
+Die Reiseportale haben ein perfides Preissystem: Das „Komplett-Paket" (Auslandskranken + Reiserücktritt + Gepäck + Abbruch) kostet 3 bis 7 % des Reisepreises – und beinhaltet Leistungen, die du oft gar nicht brauchst oder doppelt hast.
 
 Die Regeln gegen die Kombi-Falle:
 
@@ -88,11 +88,11 @@ Die Regeln gegen die Kombi-Falle:
 2. **Doppelten Schutz vermeiden:** Hast du schon eine [Auslandskrankenversicherung über deinen Jahresvertrag](../../posts/reisekrankenversicherung-wann-lohnt/)? Dann brauchst du im Portal nur den Reiserücktritt – falls überhaupt.
 3. **Selbstbehalt prüfen:** Manche Portal-Pakete haben hohe Selbstbehalte, die im Schadensfall überraschen.
 
-Die günstigste Kombination: Jahresvertrag Auslandskranken (30 Euro) + bei teuren Reisen eine separate Reiserücktrittsversicherung vom Versicherer (30–60 Euro) – statt des Portal-Pakets für 100+ Euro.
+Die günstigste Kombination: Jahresvertrag Auslandskranken (30 €) + bei teuren Reisen eine separate Reiserücktrittsversicherung vom Versicherer (30–60 €) – statt des Portal-Pakets für 100+ Euro.
 
 ## So findest du den günstigsten Schutz
 
-Der Vergleich lohnt sich: Die Preise für identische Leistungen unterscheiden sich zwischen den Anbietern um 30 bis 50 Prozent. Die Schritte:
+Der Vergleich lohnt sich: Die Preise für identische Leistungen unterscheiden sich zwischen den Anbietern um 30 bis 50 %. Die Schritte:
 
 1. **Bedarf definieren:** Wer reist, wie oft, wohin, mit welchem Reisepreis?
 2. **Vergleichen:** Unabhängige Vergleichsportale für Reiseversicherungen nutzen (nicht die Buchungs-Portale).
@@ -119,10 +119,10 @@ Diese Routine kostet 5 Minuten vor jeder Reise – und erspart im Ernstfall Taus
 ## Häufig gestellte Fragen
 
 **Was kostet eine Auslandskrankenversicherung?**
-10 bis 30 Euro pro Jahr für Einzelpersonen, 20 bis 50 Euro für Familien – mit weltweiter Deckung und Rücktransport. Die günstigste Reiseversicherung überhaupt und für jede Reise sinnvoll.
+10 bis 30 € pro Jahr für Einzelpersonen, 20 bis 50 € für Familien – mit weltweiter Deckung und Rücktransport. Die günstigste Reiseversicherung überhaupt und für jede Reise sinnvoll.
 
 **Wann lohnt sich eine Reiserücktrittsversicherung?**
-Bei Reisen ab etwa 1.500 Euro, bei Vorerkrankungen und bei nicht verschiebbaren Reisen. Bei günstigen, flexiblen Trips ist sie unnötig – die Stornokosten wären gering.
+Bei Reisen ab etwa 1.500 €, bei Vorerkrankungen und bei nicht verschiebbaren Reisen. Bei günstigen, flexiblen Trips ist sie unnötig – die Stornokosten wären gering.
 
 **Zahlt die gesetzliche Krankenkasse im Ausland?**
 Innerhalb der EU greift die Europäische Krankenversicherungskarte (EHIC) – sie deckt aber nur Behandlungen, die auch in Deutschland von der GKV übernommen werden, und keine Rücktransporte. Außerhalb der EU besteht oft gar kein Schutz – die private Auslandskrankenversicherung schließt die Lücken.
@@ -130,7 +130,7 @@ Innerhalb der EU greift die Europäische Krankenversicherungskarte (EHIC) – si
 Die richtige Reiseversicherung gehört zur [Reise-Planung](../../posts/urlaubskasse-aufbessern-spartipps/) wie der [Mietwagen](../../posts/mietwagen-buchen-so-sparst-du/) und die [Flugbuchung](../../posts/guenstige-fluege-spaetsommer-finden/). Alle Reise- und Versicherungsthemen findest du in den [Ratgebern Mietwagen & Reisen](../../pillar/mietwagen/) und [Versicherungen](../../pillar/versicherungen/).
 
 **Sind Reiseabbruchversicherungen sinnvoll?**
-Eine Reiseabbruchversicherung lohnt sich bei teuren Reisen (ab etwa 1.500 Euro), wenn du die Reise vorzeitig abbrechen musst – etwa wegen Krankheit oder eines Todesfalls in der Familie. Sie erstattet die nicht genutzten Reiseleistungen und die Rückreisekosten. Bei günstigen Reisen ist das Risiko gering und die Police unnötig – prüfe vor dem Abschluss, ob deine [Hausrat- oder Kreditkarten-Versicherung](../../posts/kreditkarte-ohne-jahresgebuehr/) diesen Baustein schon abdeckt.
+Eine Reiseabbruchversicherung lohnt sich bei teuren Reisen (ab etwa 1.500 €), wenn du die Reise vorzeitig abbrechen musst – etwa wegen Krankheit oder eines Todesfalls in der Familie. Sie erstattet die nicht genutzten Reiseleistungen und die Rückreisekosten. Bei günstigen Reisen ist das Risiko gering und die Police unnötig – prüfe vor dem Abschluss, ob deine [Hausrat- oder Kreditkarten-Versicherung](../../posts/kreditkarte-ohne-jahresgebuehr/) diesen Baustein schon abdeckt.
 
 
 👉 **Jetzt Reiseversicherungen vergleichen und abschließen:** [**→ Jetzt vergleichen und sparen**](https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=reisekrankenversicherung)

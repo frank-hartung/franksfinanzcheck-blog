@@ -46,7 +46,7 @@ dort gibt es meist etwas mehr Zins.
 4. **[Zinsen vergleichen](../../posts/festgeld-oder-tagesgeld-2/):** ein Zinsunterschied von 1 Prozentpunkt macht bei 10.000 € immerhin 100 € im Jahr.
 
 
-Ein häufiger Fehler beim Tagesgeld: Das gesamte Ersparte auf ein einziges Konto zu legen. Sinnvoller ist es, mehrere Tagesgeldkonten zu nutzen – etwa für den Notgroschen, die Urlaubskasse und das langfristige Sparen. So bleibt die Übersicht erhalten und du kannst flexibel auf Zinsänderungen reagieren. Zudem solltest du die Einlagensicherung im Blick behalten: Innerhalb der EU sind bis zu 100.000 Euro pro Bank und Kunde geschützt. Wer mehr Geld anlegen möchte, verteilt es auf verschiedene Banken.
+Ein häufiger Fehler beim Tagesgeld: Das gesamte Ersparte auf ein einziges Konto zu legen. Sinnvoller ist es, mehrere Tagesgeldkonten zu nutzen – etwa für den Notgroschen, die Urlaubskasse und das langfristige Sparen. So bleibt die Übersicht erhalten und du kannst flexibel auf Zinsänderungen reagieren. Zudem solltest du die Einlagensicherung im Blick behalten: Innerhalb der EU sind bis zu 100.000 € pro Bank und Kunde geschützt. Wer mehr Geld anlegen möchte, verteilt es auf verschiedene Banken.
 
 ## Häufige Fragen
 ### Ist Tagesgeld sicher?

@@ -43,7 +43,7 @@ Die Beiträge sind erstaunlich günstig – in der Regel:
 | Familie (mit Kindern) | 60–100 € |
 | Mit Tierhalter- oder Bauherren-Baustein | +10–30 € |
 
-Ein Haftpflichtversicherung-Vergleich lohnt sich, um die besten Tarife zu finden. Ein Tarif für 50 Euro kann deutlich besser sein als einer für 40 Euro, wenn er wichtige Bausteine enthält. Die Haftpflicht Kosten sind somit abhängig vom Angebot.
+Ein Haftpflichtversicherung-Vergleich lohnt sich, um die besten Tarife zu finden. Ein Tarif für 50 € kann deutlich besser sein als einer für 40 €, wenn er wichtige Bausteine enthält. Die Haftpflicht Kosten sind somit abhängig vom Angebot.
 
 ## Darauf solltest du beim Vergleich achten
 

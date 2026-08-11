@@ -21,13 +21,13 @@ Die Stromrechnung steigt – aber du weißt nicht, warum? Oft sind es unbemerkte
 ## Die 3 größten Stromfresser im Haushalt
 
 **1. Alte Kühl- und Gefriergeräte (Energieklasse A oder schlechter)**
-ein 15 Jahre alter Kühlschrank verbraucht oft doppelt so viel Strom wie ein modernes Gerät der Klasse A+++. Das können 200 bis 350 kWh pro Jahr sein – bei aktuellen Preisen rund 70 bis 120 Euro jährlich. Ein neues Gerät rechnet sich oft schon nach wenigen Jahren.
+ein 15 Jahre alter Kühlschrank verbraucht oft doppelt so viel Strom wie ein modernes Gerät der Klasse A+++. Das können 200 bis 350 kWh pro Jahr sein – bei aktuellen Preisen rund 70 bis 120 € jährlich. Ein neues Gerät rechnet sich oft schon nach wenigen Jahren.
 
 **2. Elektro-Boiler und Durchlauferhitzer**
 Warmwasser ist der größte Posten in vielen Haushalten. Ein Elektro-Boiler, der dauerhaft auf 60 Grad heizt, zieht Strom, auch wenn niemand duscht. Du sparst deutlich, wenn du auf sparsame Duschköpfe, kürzere Duschzeiten oder einen geregelten Boiler umstellst.
 
 **3. Geräte im Dauer-Standby**
-TV, Receiver, Spielkonsole, WLAN-Router, Kaffeemaschine mit Zeitschaltuhr: Ein einzelnes Gerät im Standby kostet wenig – aber die Summe aus zehn Geräten schlägt mit 50 bis 80 Euro pro Jahr zu Buche. Dazu kommen Ladegeräte, die dauerhaft am Netz hängen.
+TV, Receiver, Spielkonsole, WLAN-Router, Kaffeemaschine mit Zeitschaltuhr: Ein einzelnes Gerät im Standby kostet wenig – aber die Summe aus zehn Geräten schlägt mit 50 bis 80 € pro Jahr zu Buche. Dazu kommen Ladegeräte, die dauerhaft am Netz hängen.
 
 ## So findest du deine persönlichen Stromfresser
 
@@ -45,7 +45,7 @@ TV, Receiver, Spielkonsole, WLAN-Router, Kaffeemaschine mit Zeitschaltuhr: Ein e
 ## Was sich langfristig lohnt
 
 - **Kühlgeräte nach 15 Jahren ersetzen** – das ist der Klassiker unter den Stromeffizienz-Maßnahmen.
-- **Tarif prüfen**: Der beste Hebel bleibt der Stromtarif selbst. Wer den Grundversorgungstarif zahlt, verschenkt oft 200 bis 300 Euro pro Jahr. Ein Wechsel dauert heute nur wenige Minuten – der neue Anbieter übernimmt die Kündigung.
+- **Tarif prüfen**: Der beste Hebel bleibt der Stromtarif selbst. Wer den Grundversorgungstarif zahlt, verschenkt oft 200 bis 300 € pro Jahr. Ein Wechsel dauert heute nur wenige Minuten – der neue Anbieter übernimmt die Kündigung.
 
 ### Das Wichtigste in Kürze:
 * Kühlgeräte regelmäßig überprüfen
@@ -63,7 +63,7 @@ Im Schnitt ist es die elektrische Warmwasserbereitung (Boiler/Durchlauferhitzer)
 Ja – es zeigt dir in 24 Stunden, ob dein Kühlschrank krankhaft viel zieht. Und es macht den Standby-Verbrauch sichtbar, den man sonst unterschätzt.
 
 ### Wie viel kann ich insgesamt sparen?
-Du kannst realistisch auf 300 bis 500 Euro Ersparnis pro Jahr kommen, wenn du Standby konsequent reduzierst, den Kühlschrank tauschst und den Tarif wechselst.
+Du kannst realistisch auf 300 bis 500 € Ersparnis pro Jahr kommen, wenn du Standby konsequent reduzierst, den Kühlschrank tauschst und den Tarif wechselst.
 
 👉 **Stromtarife vergleichen und Wechselprämie sichern:** [**→ Jetzt Strompreise vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
 
