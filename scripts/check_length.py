@@ -33,10 +33,12 @@ import subprocess
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MIN_WORDS = 700
-OPT_MIN = 800
-OPT_MAX = 1400
-MAX_WORDS = 1800
+# Schwellen via Env ueberschreibbar (Audit 11.08.: Affiliate-Floor 1000 in der
+# Engine per Variable LENGTH_MIN_WORDS gesetzt - siehe content-engine-v2.yml)
+MIN_WORDS = int(os.environ.get("LENGTH_MIN_WORDS") or 700)
+OPT_MIN = int(os.environ.get("LENGTH_OPT_MIN") or 800)
+OPT_MAX = int(os.environ.get("LENGTH_OPT_MAX") or 1400)
+MAX_WORDS = int(os.environ.get("LENGTH_MAX_WORDS") or 1800)
 
 RE_CODE = re.compile(r"```.*?```", re.S)
 RE_HTML = re.compile(r"<[^>]+>")
