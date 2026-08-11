@@ -39,7 +39,7 @@ Du teilst dein monatliches Nettoeinkommen – also das Geld, das nach Steuern un
 ### 1. 50 % für Grundbedürfnisse (Needs)
 Hierzu zählen alle Ausgaben, die anfallen, damit dein Leben funktioniert. Wenn du diese Kosten nicht zahlst, hast du ein ernsthaftes Problem.
 - **Wohnen:** Miete (warm), Strom, Gas, Wasser.
-- **Versicherungen:** Haftpflicht, BU, Krankenkasse (falls privat), KFZ-Versicherung.
+- **Versicherungen:** Haftpflicht, BU, Krankenkasse (falls privat), Kfz-Versicherung.
 - **Mobilität:** Tankkosten, ÖPNV-Ticket oder Leasingraten.
 - **Lebensmittel:** Dein Grundbedarf an Nahrungsmitteln und Drogerieartikeln.
 - **Verträge:** Internet, Mobilfunk und notwendige Kredittilgungen.
@@ -72,7 +72,7 @@ Nutze einen einfachen **Regel Rechner** oder eine Excel-Tabelle, um deine indivi
 ## Schritt für Schritt zur eigenen 50-30-20-Planung
 
 1. **Echtes Nettoeinkommen ermitteln:** Nutze dein regelmäßiges Gehalt als Basis. Ignoriere schwankende Boni oder einmaliges Weihnachtsgeld für eine konservative Planung. Diese Extrazahlungen kannst du später als Sonder-Spende in den 20-Prozent-Topf werfen.
-2. **Fixkosten-Inventur:** Erstelle dir zuerst eine einfache Haushaltsbuch-Vorlage. Sammle alle festen Ausgaben der letzten drei bis sechs Monate aus deinen Kontoauszügen. Vergiss dabei keine jährlichen Abbuchungen (wie die KFZ-Steuer), rechne diese auf den Monat herunter.
+2. **Fixkosten-Inventur:** Erstelle dir zuerst eine einfache Haushaltsbuch-Vorlage. Sammle alle festen Ausgaben der letzten drei bis sechs Monate aus deinen Kontoauszügen. Vergiss dabei keine jährlichen Abbuchungen (wie die Kfz-Steuer), rechne diese auf den Monat herunter.
 3. **Budget-Abgleich:** Berechne deine persönlichen Grenzwerte. Liegen deine Fixkosten über der 50-Prozent-Marke? In Städten wie Berlin oder München ist das oft der Fall. Hier gilt: Der 30-Prozent-Topf muss dann schrumpfen, nicht der Sparanteil.
 4. **Optimierungspotenziale finden:** Überprüfe jeden Posten im 50-Prozent-Block. Ein Wechsel des Stromanbieters spart oft 150 € im Jahr, ein optimierter Mobilfunktarif weitere 20 € im Monat.
 5. **Daueraufträge einrichten:** Automatisiere deinen Erfolg. Sobald dein Gehalt kommt, gehen die 20 % für das Sparen per Dauerauftrag auf ein separates Depot oder Tagesgeldkonto. Was weg ist, kann nicht mehr für Spontankäufe ausgegeben werden.

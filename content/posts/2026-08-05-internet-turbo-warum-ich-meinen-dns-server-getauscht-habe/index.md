@@ -18,7 +18,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst dein Internet um bis zu 20 % beschleunigen, indem du deinen DNS-Server wechselst. Viele Standard-Einstellungen sind nicht optimal konfiguriert und bremsen daher das Internet. Ein Wechsel zu einem schnelleren DNS-Server wie Cloudflare oder Google kann helfen, die Ladezeiten zu verkürzen."
 social_posted: true
----Deine Webseite braucht Sekunden, bis sie lädt, obwohl du für schnelles Internet zahlst? Oft bremst ein veraltetes "Telefonbuch" deinen Browser aus. Mit dem richtigen Kniff sparst du wertvolle Ladezeit und surfst spürbar flüssiger. Hier erfährst du, wie ich meinen DNS-Server getauscht habe und warum das dein Surferlebnis verändert.
+---
+
+Deine Webseite braucht Sekunden, bis sie lädt, obwohl du für schnelles Internet zahlst? Oft bremst ein veraltetes "Telefonbuch" deinen Browser aus. Mit dem richtigen Kniff sparst du wertvolle Ladezeit und surfst spürbar flüssiger. Hier erfährst du, wie ich meinen DNS-Server getauscht habe und warum das dein Surferlebnis verändert.
 
 ### Das Wichtigste in Kürze
 * DNS-Server übersetzen Domainnamen in numerische IP-Adressen.
@@ -48,7 +50,7 @@ Router nutzen ab Werk meist den DNS-Server deines Internetanbieters (Telekom, Vo
 
 Ein weiterer Grund für einen Wechsel ist die Verlässlichkeit. Fällt der Server deines Providers aus, bleibt dein Bildschirm weiß – selbst wenn die physische Verbindung steht. Große Player wie Cloudflare oder Google betreiben eine gigantische, weltweit verteilte Infrastruktur. Diese reagiert oft in weniger als 15 Millisekunden und bietet eine deutlich höhere Stabilität als regionale Provider-Server.
 
-Zusätzlich nutzen einige Internetanbieter DNS-Server, um bestimmte Webseiten zu blockieren (Netzsperren) oder um dich bei Tippfehlern auf eigene Werbeseiten umzuleiten. Mit einem freien DNS-Server umgehst du solche Bevormundungen und genießt ein neutrales Netz. Das ist einer der effektivsten **DSL Tipps**, um die Kontrolle über den eigenen Datenverkehr zurückzugewinnen.
+Zusätzlich nutzen einige Internetanbieter DNS-Server, um bestimmte Webseiten zu blockieren (Netzsperren) oder um dich bei Tippfehlern auf eigene Werbeseiten umzuleiten. Mit einem freien DNS-Server umgehst du solche Bevormundungen und genießt ein neutrales Netz. Das ist einer der effektivsten **DSL-Tipps**, um die Kontrolle über den eigenen Datenverkehr zurückzugewinnen.
 
 ## Mein Selbstversuch:<br>So habe ich den Wechsel vollzogen
 
@@ -86,8 +88,8 @@ Ich habe verschiedene Dienste getestet, um die beste Performance zu finden. Hier
 Um den Erfolg zu kontrollieren, kannst du Tools wie den "DNS Benchmark" von GRC oder "namebench" nutzen. Diese Programme vergleichen die Antwortzeiten hunderter DNS-Server direkt von deinem Anschluss aus. 
 
 In einem typischen deutschen Haushalt mit einer 100-Mbit-Leitung sieht der Vorher-Nachher-Vergleich oft so aus:
-* **Standard-Provider:** ~40-60 ms Antwortzeit.
-* **Cloudflare/Google:** ~10-20 ms Antwortzeit.
+* **Standard-Provider:** ~40–60 ms Antwortzeit.
+* **Cloudflare/Google:** ~10–20 ms Antwortzeit.
 
 Was nach wenig klingt, summiert sich: Da eine moderne Nachrichtenseite wie "Spiegel. de" oder "Zeit. de" beim ersten Aufruf oft über 100 DNS-Anfragen auslöst (für Bilder, Skripte, Werbebanner), sparst du bei 30 ms Differenz pro Anfrage theoretisch bis zu 3 Sekunden rein an "Wartezeit auf die Auskunft". Das ist der Grund, warum sich das Surfen nach dem Wechsel so viel "snappier" anfühlt.
 
