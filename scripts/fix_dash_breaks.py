@@ -41,7 +41,7 @@ NACHSATZ_WORDS = (
     "die der das ein eine einer einem einen wer was wem wen man es "
     "sprich konkret genau wichtig entscheidend dabei außerdem zudem "
     "nämlich deshalb darum deswegen kurz kurzum letztlich letztendlich "
-    "so dann damit hier dort alles nichts viel mehr weniger besser "
+    "so dann damit hier dort alles nichts viel besser "
     "schlechter günstiger teurer schneller langsamer einfacher "
     "schwieriger sinnvoll ratsam empfehlenswert viele einige manche "
 ).split()
@@ -51,13 +51,18 @@ NACHSATZ_PHRASES = ("das heißt", "der Trick", "die Regel", "die Idee", "der Unt
     "die meisten", "die wenigsten", "am Ende", "im Kern")
 
 # KEIN Umbruch (Fortsetzung): Präpositionen, Konjunktionen, Disclosure-Bausteine
+# RECONCILE 11.08.2026: "mehr"/"weniger" gehoeren zu NACHTRAG (keine Erläuterung!)
+# – sonst Ping-Pong mit fix_dash_eol.py Modus D (z. B. "2.653 Euro – mehr als
+# 650 Euro zusätzlich" wurde hin- und her gebrochen). Hoheit: Nachtrag = niemals
+# Hard-Break.
 KEIN_WORDS = (
     "und oder aber denn doch jedoch sowie auch nicht kein keine keinen "
     "keinem nie immer oft meist manchmal wirklich eigentlich eben ja nein "
     "für mit von bei auf zu um aus nach über unter vor bis an in im zum "
     "zur vom beim gegen ohne durch zwischen wegen als wie wenn weil dass "
     "damit obwohl während seit ab außer trotz laut dank je pro plus minus "
-    "mal etwa rund ungefähr fast nur gerade schon noch bereits erst"
+    "mal etwa rund ungefähr fast nur gerade schon noch bereits erst "
+    "mehr weniger"
 ).split()
 KEIN_PHRASES = ("z. B.", "zum Beispiel", "eine Provision", "ein paar", "ein wenig",
     "ein bisschen", "viele Jahre")
