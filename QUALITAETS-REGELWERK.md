@@ -226,6 +226,12 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (9):** Masken-Kollaps gefunden & geheilt: gieriges Zitat-Regex in
+  lektor_guard.mask() fraß Platzhalter verschachtelter Masken (md-Link zwischen
+  zwei Zitaten → Link verloren, \x00-Leiche in der Datei). Fix: nicht-gierige
+  Klasse + LIFO-unmask mit Fixpunkt; gleiche Panzerung in dash/casing/compound/
+  unmask. Neuer Selbsttest-Fall 13 friert den Regressionsfall ein. Zwei seit
+  Tagen korrumpierte Artikel (dns-server, balkonkraftwerk) chirurgisch geheilt.
 - **11.08.2026 (8):** Cover-404-Fix: AVIF-<source>-Elemente in cover.html +
   extend_post_content.html werden nur noch emittiert, wenn die Datei echt
   existiert (os.FileExists-Gate). Grund: lokal ohne pillow-avif-plugin

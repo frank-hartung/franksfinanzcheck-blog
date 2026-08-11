@@ -98,8 +98,16 @@ def mask(line: str):
 
 
 def unmask(line, store):
-    for k, v in store.items():
-        line = line.replace(k, v)
+    # LIFO + Fixpunkt (11.08. Nacht, aus dem lektor-Masken-Bug gelernt):
+    # zuletzt maskierte Regionen zuerst loesen, dann bis zur Platzhalter-
+    # Freiheit rotieren – Verschachtelung kann so nie mehr lecken.
+    for k in reversed(list(store.keys())):
+        line = line.replace(k, store[k])
+    for _ in range(6):
+        if "\x00" not in line:
+            break
+        for k, v in reversed(list(store.items())):
+            line = line.replace(k, v)
     return line
 
 
