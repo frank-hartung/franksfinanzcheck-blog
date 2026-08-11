@@ -37,7 +37,7 @@
     <a href="{{ .File.ContentBaseName }}/" aria-label="Zum Ratgeber: {{ .Title | plainify }}"
        style="display:flex; flex-direction:column; background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:14px; padding:22px 20px; text-decoration:none; box-shadow:0 2px 6px rgba(0,0,0,.06); transition:transform .18s ease, box-shadow .18s ease;">
       <span style="font-size:2em; line-height:1;" aria-hidden="true">{{ index $labels .File.ContentBaseName | default "📘" }}</span>
-      <strong style="font-family:'Montserrat',sans-serif; color:#0E5A43; font-size:1.12em; line-height:1.35; margin:12px 0 6px;">{{ .Title | plainify }}</strong>
+      <strong style="font-family:'Inter',sans-serif; color:#0E5A43; font-size:1.12em; line-height:1.35; margin:12px 0 6px;">{{ .Title | plainify }}</strong>
       <span style="font-size:.88em; color:#555; line-height:1.5; flex:1;">{{ .Description | plainify | truncate 130 }}</span>
       <span style="margin-top:14px; font-size:.85em; color:#0E5A43; font-weight:700;">{{ $count }} Artikel →</span>
     </a>

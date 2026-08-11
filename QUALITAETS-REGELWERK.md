@@ -226,6 +226,14 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (14):** Inter-Aera ausgerufen (Frank-Wahl nach Font-Palette):
+  Ueberschriften UND Covertext = Inter Bold. Montserrat-Thin-Klone entfernt;
+  Head-CSS referenziert nur noch Inter (Variable, 400..700) + Playfair-Akzent.
+  76 Covers in Inter neu gebacken; Cover-Generator haengt hart an
+  static/fonts/Inter-Bold.ttf (Exit 2 statt Stille). font_guard Vertrag auf
+  Inter aktualisiert, Wiederverdrahtung in Engine + Wochenaudit.
+  R796-Vorgespraech: zwei Vorab-Font-Commits wurden mit git revert sauber
+  zurueckgenommen (kein Verlust, Regeln bewahrt).
 - **11.08.2026 (13):** Link-Zivil-Katastrophe gefunden & komplett geheilt:
   Die Engine hatte Dutzende interne Links mit ABGEKNICKTEN Slugs gebaut
   (z. B. …/7-gewohnheiten-finanzielle-freih/) sowie Pillar-Links in die

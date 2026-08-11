@@ -35,8 +35,7 @@ const ASSET_RE = /\.(woff2?|avif|webp|jpe?g|png|gif|svg|css|js|ico|txt|xml|json)
    der ZWEITE Besuch startet sofort aus dem SW-Cache. */
 const PRECACHE = [
   '{{ "fonts/inter-variable.woff2" | relURL }}?v={{ getenv "HUGO_JSDELIVR_SHA" | default "dev" }}',
-  '{{ "fonts/montserrat-normal-700.woff2" | relURL }}?v={{ getenv "HUGO_JSDELIVR_SHA" | default "dev" }}',
-  '{{ "fonts/montserrat-normal-500.woff2" | relURL }}?v={{ getenv "HUGO_JSDELIVR_SHA" | default "dev" }}'
+  '{{ "fonts/Inter-Bold.ttf" | relURL }}?v={{ getenv "HUGO_JSDELIVR_SHA" | default "dev" }}'
 ];
 
 self.addEventListener('install', (event) => {

@@ -7,7 +7,7 @@
 {{- $erfahrung := .Params.erfahrung -}}
 {{- if and (eq .Section "posts") $erfahrung -}}
 <div class="ff-experience" style="margin:22px 0; padding:18px 20px; background:#FFF8E6; border-left:6px solid #FFB300; border-radius:0 10px 10px 0;">
-  <p style="margin:0 0 6px; font-family:'Montserrat',sans-serif; font-weight:800; color:#8a6100; font-size:.9em; letter-spacing:.03em;">
+  <p style="margin:0 0 6px; font-family:'Inter',sans-serif; font-weight:800; color:#8a6100; font-size:.9em; letter-spacing:.03em;">
     <span aria-hidden="true">🧪 </span>MEINE ERFAHRUNG
   </p>
   <p style="margin:0; font-size:.95em; line-height:1.6; color:#4a3a00;">{{ $erfahrung | markdownify }}</p>

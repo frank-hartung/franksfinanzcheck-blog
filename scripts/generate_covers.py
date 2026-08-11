@@ -118,11 +118,10 @@ def save_modern_variants(img, out_path, force=False):
 
 
 def load_font(size):
-    """Versucht Montserrat Bold (Masterplan-Font), sonst DejaVuSans-Bold."""
+    """Cover-Font: nur Inter Bold (Frank-Wahl 11.08. spaet - das ruhige G)."""
     candidates = [
-        "/usr/share/fonts/truetype/montserrat/Montserrat-Bold.ttf",
-        os.path.join(BLOG_DIR, "static", "fonts", "Montserrat-Bold.ttf"),
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        os.path.join(BLOG_DIR, "static", "fonts", "Inter-Bold.ttf"),
+        "/usr/share/fonts/truetype/inter/Inter-Bold.ttf",
     ]
     for path in candidates:
         if os.path.exists(path):
@@ -130,8 +129,11 @@ def load_font(size):
                 return ImageFont.truetype(path, size)
             except Exception:
                 continue
-    # Letzter Ausweg: Default-Font
-    return ImageFont.load_default()
+    # Sabotage-Schutz: NIEMALS auf einen anderen Font ausweichen - lieber
+    # laut scheitern als leise falsch branden (Lektion vom "G bei Geld").
+    print("🛑 FONT-PACT VERLETZT: static/fonts/Inter-Bold.ttf fehlt!")
+    print("   Kein Cover wird falsch gerendert. `python3 scripts/bake_fonts.py --file Inter-Bold.ttf` zuerst.")
+    sys.exit(2)
 
 
 def wrap_text(text, font, max_width, draw):

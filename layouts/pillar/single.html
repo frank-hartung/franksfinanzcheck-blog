@@ -20,7 +20,7 @@
   {{- $clusterPosts := where site.RegularPages ".Params.pillar" .File.ContentBaseName }}
   {{- if gt (len $clusterPosts) 0 }}
   <div style="margin:32px 0 8px; padding-top:20px; border-top:2px solid rgba(14,90,67,.15);">
-    <h2 style="font-family:'Montserrat',sans-serif; font-weight:700; color:#0E5A43; margin-bottom:4px; font-size:1.35em;">Alle Artikel im Ratgeber</h2>
+    <h2 style="font-family:'Inter',sans-serif; font-weight:700; color:#0E5A43; margin-bottom:4px; font-size:1.35em;">Alle Artikel im Ratgeber</h2>
     <p style="color:#555; font-size:.95em; margin-bottom:16px;">Diese Beiträge gehören zu diesem Ratgeber – sieh dich in Ruhe um:</p>
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px;">
       {{- range $clusterPosts }}
@@ -41,7 +41,7 @@
         <span style="display:block; width:100%; padding-top:40%; background:linear-gradient(160deg,#0E5A43,#0B4A36);"></span>
         {{- end }}
         <span style="display:block; padding:12px 14px;">
-          <strong style="font-family:'Montserrat',sans-serif; font-size:.95em; line-height:1.35; color:#0E5A43; display:block; margin-bottom:6px;">{{ .Title | plainify }}</strong>
+          <strong style="font-family:'Inter',sans-serif; font-size:.95em; line-height:1.35; color:#0E5A43; display:block; margin-bottom:6px;">{{ .Title | plainify }}</strong>
           {{- with .Description }}<span style="font-size:.82em; color:#555; line-height:1.45; display:block;">{{ . | plainify | truncate 100 }}</span>{{ end }}
         </span>
       </a>
@@ -56,7 +56,7 @@
   {{- range $pillars }}{{ if ne . $.File.ContentBaseName }}{{ $others = $others | append . }}{{ end }}{{ end }}
   {{- if gt (len $others) 0 }}
   <div style="margin:28px 0 8px; padding-top:20px; border-top:2px solid rgba(14,90,67,.15);">
-    <h2 style="font-family:'Montserrat',sans-serif; font-weight:700; color:#0E5A43; margin-bottom:16px; font-size:1.15em;">Weitere Ratgeber auf FranksFinanzcheck</h2>
+    <h2 style="font-family:'Inter',sans-serif; font-weight:700; color:#0E5A43; margin-bottom:16px; font-size:1.15em;">Weitere Ratgeber auf FranksFinanzcheck</h2>
     <div style="display:flex; flex-wrap:wrap; gap:10px;">
       {{- range $others }}
         {{- with site.GetPage (printf "pillar/%s" .) }}

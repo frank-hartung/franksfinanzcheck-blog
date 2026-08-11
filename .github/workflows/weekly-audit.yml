@@ -85,6 +85,22 @@ jobs:
             git push || { sleep 20; git pull --rebase origin main && git push; }
           fi
 
+      # ---- Wiederlebt 11.08. spaet (Inter-Aera): Font-Vertrag beweisen ----
+      - name: Font-Guard (woff2/ttf-Inhalt pruefen + selbstheilend zurueckbauen)
+        continue-on-error: true
+        run: |
+          python3 -m pip install -q fonttools brotli 2>/dev/null || true
+          python3 scripts/font_guard.py --fix || echo "⚠ Font-Guard (nicht kritisch)"
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add static/fonts/ FONT-REPORT.md data/font_history.jsonl
+          if git diff --cached --quiet; then echo "Fonts sauber."
+          else
+            git commit -m "fix(fonts): Vertragsbruch geheilt (font_guard)"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push || { sleep 20; git pull --rebase origin main && git push; }
+          fi
+
       - name: Audit ausführen (Log wird gespeichert)
         id: audit
         continue-on-error: true   # Wir fangen den Exit-Code selbst ab

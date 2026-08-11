@@ -12,7 +12,7 @@
 {{- $pillars := slice "strom-sparen" "versicherungen" "mietwagen" "frugalismus" "internet-dsl" "konto-karten" }}
 {{- $labels := dict "strom-sparen" "⚡" "versicherungen" "🛡️" "mietwagen" "🚗" "frugalismus" "🌱" "internet-dsl" "🌐" "konto-karten" "💳" }}
 <section class="ff-clusters" style="margin:28px 0 8px; padding-top:24px; border-top:2px solid rgba(14,90,67,.15);" aria-label="Ratgeber-Übersicht">
-  <h2 style="font-family:'Montserrat',sans-serif; font-weight:700; color:#0E5A43; font-size:1.3em; margin-bottom:4px;">Die großen Ratgeber</h2>
+  <h2 style="font-family:'Inter',sans-serif; font-weight:700; color:#0E5A43; font-size:1.3em; margin-bottom:4px;">Die großen Ratgeber</h2>
   <p style="color:#555; font-size:.92em; margin-bottom:16px;">Jeder Ratgeber bündelt alle Artikel zu einem Thema – starte dort oder spring direkt in die Beiträge.</p>
 
   {{- /* Desktop/Tablet: lesbares Karten-Grid (auto-fit → 3 Spalten bei 720px) */}}
@@ -29,7 +29,7 @@
       <a href="pillar/{{ .File.ContentBaseName }}/" aria-label="Zum Ratgeber: {{ $full }}"
          style="display:flex; flex-direction:column; background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; padding:16px; text-decoration:none; box-shadow:0 1px 4px rgba(0,0,0,.05); transition:transform .15s ease, box-shadow .15s ease;">
         <span style="font-size:1.7em; line-height:1;" aria-hidden="true">{{ index $labels .File.ContentBaseName | default "📘" }}</span>
-        <strong style="font-family:'Montserrat',sans-serif; color:#0E5A43; font-size:1.02em; line-height:1.35; margin:10px 0 4px;">{{ $name }}</strong>
+        <strong style="font-family:'Inter',sans-serif; color:#0E5A43; font-size:1.02em; line-height:1.35; margin:10px 0 4px;">{{ $name }}</strong>
         <span style="font-size:.82em; color:#666; line-height:1.45; flex:1;">{{ $desc | truncate 90 }}</span>
         <span style="margin-top:10px; font-size:.8em; color:#0E5A43; font-weight:700;">{{ $count }} Artikel →</span>
       </a>
@@ -46,7 +46,7 @@
       <a href="pillar/{{ .File.ContentBaseName }}/" aria-label="Zum Ratgeber: {{ $full }}"
          style="flex:0 0 auto; display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid rgba(14,90,67,.25); border-radius:999px; padding:8px 14px; text-decoration:none; white-space:nowrap;">
         <span aria-hidden="true">{{ index $labels .File.ContentBaseName | default "📘" }}</span>
-        <strong style="font-family:'Montserrat',sans-serif; color:#0E5A43; font-size:.88em;">{{ $name }}</strong>
+        <strong style="font-family:'Inter',sans-serif; color:#0E5A43; font-size:.88em;">{{ $name }}</strong>
         <span style="font-size:.78em; color:#888;">{{ len (where site.RegularPages ".Params.pillar" .File.ContentBaseName) }}</span>
       </a>
       {{- end }}

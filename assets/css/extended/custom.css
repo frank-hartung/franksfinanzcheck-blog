@@ -4,7 +4,7 @@
    - Smaragdgrün (#0E5A43 / Akzent #1F6F5C)
    - Anthrazit (#2E2E33)
    - Signalgelb (#FFB300) für CTAs
-   - Montserrat Bold für Überschriften (wie Pin-Titel)
+   - Inter Bold für Überschriften (Frank-Wahl 11.08.25 – das ruhige G)
    - Playfair Display (Serif) für Subline-Akzente (wie Pin-Untertitel)
    ============================================================ */
 
@@ -31,7 +31,7 @@
 
 /* ---------- Typografie (Top-Level) ---------- */
 /* Inter als professioneller Lesefont (variable Font, 400-700, selbst
-   gehostet über jsDelivr – OFL-Lizenz). Montserrat bleibt für
+   gehostet (First-Party, OFL). Inter traegt jetzt
    Überschriften (Marken-Font). */
 html body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -67,7 +67,9 @@ html body {
 h1, h2, h3, h4, h5, h6,
 .post-title, .entry-title, .home-info h1,
 .logo a, .nav a, .archive .group-title {
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    /* FONT-PACT (Frank, 11.08. spaet): Ueberschriften = Inter Bold.
+       Das ruhige G ohne Montserrat-Spur ist Gewaehr zaehlt. */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-weight: 700;
     letter-spacing: -0.01em;
 }
@@ -297,7 +299,7 @@ h1, h2, h3, h4, h5, h6,
     border: 2px solid var(--ff-emerald);
     color: var(--ff-white);          /* Weiß auf Grün: 8.2:1 ✅ */
     background: var(--ff-emerald);   /* Grüner Grund statt Anthrazit */
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     border-radius: 999px;
     padding: 4px 16px;
@@ -380,7 +382,7 @@ html.ff-consent-set #ff-consent-banner {
 }
 
 .ff-pinterest-cta-text strong {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 1.0em;
     line-height: 1.35;              /* CLS-Fix: deterministische Zeilenhöhe
@@ -398,7 +400,7 @@ html.ff-consent-set #ff-consent-banner {
     display: inline-block;
     background: var(--ff-yellow);
     color: var(--ff-anthracite);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 0.95em;
     line-height: 1.2;               /* CLS-Fix: deterministische Zeilenhöhe */
@@ -451,7 +453,7 @@ html.ff-consent-set #ff-consent-banner {
     z-index: 100000;
     background: var(--ff-emerald);
     color: #fff;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     padding: 12px 20px;
     border-radius: 0 0 8px 0;
