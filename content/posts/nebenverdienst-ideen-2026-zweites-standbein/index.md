@@ -105,6 +105,6 @@ Jobs als Lieferfahrer oder Umzugshelfer zahlen oft schon nach der ersten Woche. 
 **Wie kombiniere ich Nebenverdienst und Hauptjob ohne Burnout?**
 Setze dir klare Grenzen und feste Arbeitszeiten für deinen Nebenjob. Plane bewusste Erholungsphasen und freie Wochenenden fest in deinen Kalender ein. Starte mit maximal 5 bis 8 Stunden pro Woche. Gesundheit und dein Hauptjob haben immer Vorrang vor dem Zusatzeinkommen.
 
-👉 **Dein Geld optimal arbeiten lassen:** [**→ Jetzt Angebote vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich)
+👉 **Dein Geld optimal arbeiten lassen:** [**→ Jetzt Angebote vergleichen bei CHECK24**](/go/tagesgeld/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

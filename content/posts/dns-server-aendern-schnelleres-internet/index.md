@@ -103,6 +103,6 @@ Ja, das kann er. Ein DNS-Server verbessert zwar nicht direkt die Verbindung zwis
 
 ---
 
-👉 **Und wenn die Leitung selbst trotz Optimierung zu langsam ist:** [**→ Jetzt DSL- und Glasfasertarife vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
+👉 **Und wenn die Leitung selbst trotz Optimierung zu langsam ist:** [**→ Jetzt DSL- und Glasfasertarife vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

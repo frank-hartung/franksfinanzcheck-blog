@@ -127,6 +127,6 @@ Mit deinem neuen Monatsbudget hast du das Fundament für deinen Wohlstand gelegt
 **Was mache ich, wenn mein Einkommen schwankt?**
 Berechne dein Budget auf Basis eines konservativen Durchschnitts der letzten Monate. In starken Monaten bildest du Rücklagen für schwächere Phasen auf deinem Konto. Stelle sicher, dass deine Fixkosten auch bei geringeren Einnahmen jederzeit gedeckt sind.
 
-👉 **Jetzt deine Finanzen optimieren und Angebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
+👉 **Jetzt deine Finanzen optimieren und Angebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/girokonto/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

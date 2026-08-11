@@ -128,6 +128,6 @@ Nein – die Rendite von Aktien ist keine Garantie, sondern eine historische Erw
 
 Der Zinseszinseffekt ist das Fundament jedes [Vermögensaufbaus](../../posts/sparquote-berechnen-und-steigern/) – und der [ETF-Sparplan für Einsteiger](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) das Werkzeug, das ihn nutzt. Für Kinder lohnt sich der Start besonders früh: [ETF-Sparplan für Kinder](../../posts/etf-sparplan-fuer-kinder-depot-eröffnen/). Alle Grundlagen-Themen: [Ratgeber Frugalismus](../../pillar/frugalismus/).
 
-👉 **Jetzt Tagesgeld- und Anlageangebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich)
+👉 **Jetzt Tagesgeld- und Anlageangebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/tagesgeld/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

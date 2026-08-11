@@ -83,6 +83,6 @@ Lies die Bedingungen des Anbieters genau durch, dokumentiere alle Zusagen währe
 Du verlierst möglicherweise den DSL-Wechselbonus und musst Vertragsstrafen zahlen. Lies die Bedingungen des Anbieters genau durch, um dies zu vermeiden.
 
 ---
-**Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
+**Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

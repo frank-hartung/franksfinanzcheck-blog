@@ -150,6 +150,8 @@ jobs:
           python3 scripts/check_uniqueness.py || echo "⚠ Uniqueness (nicht blockierend)"
           echo "== Affiliate-Links (auto-korrigieren) =="
           python3 scripts/affiliate_link_check.py --fix || echo "⚠ Affiliate-Check (nicht blockierend)"
+          echo "== Affiliate-Shield (/go/-Gateway + sponsored) =="
+          python3 scripts/affiliate_shield.py --fix --new-only || echo "⚠ Affiliate-Shield (nicht kritisch)"
           echo "== Qualitäts-Score (FrankAutoOps, Threshold >= 0.85) =="
           python3 - <<'PYEOF'
           import glob, subprocess, sys, json, os

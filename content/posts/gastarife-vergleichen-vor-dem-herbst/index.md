@@ -71,6 +71,6 @@ Der Wechselprozess dauert in der Regel nur wenige Minuten. Du füllst das Online
 
 ---
 
-👉 **Jetzt Gastarife vergleichen und den Winter günstig überstehen:** [**→ Gaspreise prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3)
+👉 **Jetzt Gastarife vergleichen und den Winter günstig überstehen:** [**→ Gaspreise prüfen**](/go/gas/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

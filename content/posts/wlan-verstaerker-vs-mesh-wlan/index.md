@@ -89,6 +89,6 @@ Um dein WLAN zu verbessern, kannst du auch die DSL-Hacks anwenden, die wir hier 
 Um ein schnelles Internet zu Hause zu haben, ist es auch wichtig, ein gutes Mesh-Netzwerk aufzubauen. Ein Mesh-Netzwerk besteht aus mehreren Knoten, die miteinander verbunden sind und ein starkes und zuverlässiges Netzwerk bilden. Mit einem solchen Netzwerk kannst du alle deine Geräte problemlos verbinden und ein schnelles Internet genießen.
 
 ## Schnelleren Internetvertrag finden:
-[**→ Jetzt DSL- und Glasfasertarife vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
+[**→ Jetzt DSL- und Glasfasertarife vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

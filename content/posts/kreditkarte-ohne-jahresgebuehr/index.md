@@ -73,6 +73,6 @@ Dieses Modell rechnet sich meist erst ab drei oder mehr Auslandsreisen pro Jahr.
 
 ---
 
-👉 **Jetzt Kreditkarten vergleichen und Gebühren sparen:** [**→ Karten prüfen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte)
+👉 **Jetzt Kreditkarten vergleichen und Gebühren sparen:** [**→ Karten prüfen**](/go/kreditkarte/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

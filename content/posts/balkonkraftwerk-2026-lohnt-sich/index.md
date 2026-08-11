@@ -123,6 +123,6 @@ Ein hochwertiges 800-Watt-Set erzeugt etwa 600 bis 800 kWh sauberen Strom. Dami
 **Ist die Anmeldung Pflicht?**
 Ja, du musst die Anlage im Marktstammdatenregister eintragen. Dieser Schritt ist für dich kostenlos und rechtlich zwingend erforderlich. Es dauert nur wenige Minuten und sichert dir den legalen Betrieb deines Kraftwerks.
 
-👉 **Jetzt Stromtarif sichern und Wechsel-Bonus nutzen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
+👉 **Jetzt Stromtarif sichern und Wechsel-Bonus nutzen:** [**→ Jetzt vergleichen bei CHECK24**](/go/strom/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

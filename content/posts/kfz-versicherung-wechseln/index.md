@@ -78,6 +78,6 @@ Nicht nur der Preis zählt: Prüfe die Leistungen wie Werkstattbindung, Schutzbr
 
 ---
 
-👉 **Jetzt Kfz-Versicherung vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kfz-versicherung)
+👉 **Jetzt Kfz-Versicherung vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/kfz-versicherung/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
