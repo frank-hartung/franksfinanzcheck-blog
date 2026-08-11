@@ -12,6 +12,7 @@ Nutzung:
 """
 import glob
 import os
+import sys
 import re
 import sys
 
@@ -118,11 +119,10 @@ def save_modern_variants(img, out_path, force=False):
 
 
 def load_font(size):
-    """Versucht Montserrat Bold (Masterplan-Font), sonst DejaVuSans-Bold."""
+    """Cover-Font: nur Montserrat Bold (Masterplan). (11.08. spaet)"""
     candidates = [
         "/usr/share/fonts/truetype/montserrat/Montserrat-Bold.ttf",
         os.path.join(BLOG_DIR, "static", "fonts", "Montserrat-Bold.ttf"),
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
     ]
     for path in candidates:
         if os.path.exists(path):
@@ -130,8 +130,12 @@ def load_font(size):
                 return ImageFont.truetype(path, size)
             except Exception:
                 continue
-    # Letzter Ausweg: Default-Font
-    return ImageFont.load_default()
+    # Sabotage-Schutz (Frank 11.08.): NIEMALS still auf eine falsche Font
+    # ausweichen – ein falsch gesetztes Cover faellt SOFORT auf (siehe
+    # „G bei Geld"-Fall). Hart abbrechen statt verkorkstes Branding.
+    print("🛑 FONT-PACT VERLETZT: static/fonts/Montserrat-Bold.ttf fehlt!")
+    print("   Kein Cover wird falsch gerendert. Font-Datei in static/fonts/ nachziehen.")
+    sys.exit(2)
 
 
 def wrap_text(text, font, max_width, draw):
