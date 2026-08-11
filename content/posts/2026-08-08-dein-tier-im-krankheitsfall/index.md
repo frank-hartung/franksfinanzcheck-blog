@@ -16,7 +16,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Eine Tierversicherung deckt in der Regel 50 bis 90 % der Tierarztkosten ab. So kannst du dich auf die Genesung deines Tieres konzentrieren, anstatt dich um die Kosten zu sorgen. Mit einer monatlichen Prämie von ca. 20 € bis 50 € schützt du dein Tier und deine Finanzen."
 social_posted: true
----## Was ist eine Tierversicherung?
+---
+
+## Was ist eine Tierversicherung?
 Dieser Schutz erstattet dir hohe Kosten für tierärztliche Behandlungen. Die Versicherung zahlt meist für Operationen, teure Medikamente und aufwendige Diagnosen. Je nach Tierart wählst du eine Hundeversicherung oder eine Katzenversicherung. Damit verhinderst du schmerzhafte Einmalzahlungen aus deinem Ersparten.
 
 Seit der Anpassung der Gebührenordnung für Tierärzte (GOT) im November 2022 sind die Kosten für Behandlungen massiv gestiegen. Ein einfacher Hausbesuch oder eine Routineuntersuchung kosten heute oft das Doppelte wie noch vor wenigen Jahren. Eine **Tierversicherung** fungiert hier als dein finanzieller Airbag. Du unterscheidest dabei grundsätzlich zwischen zwei Modellen:

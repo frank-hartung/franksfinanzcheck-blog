@@ -18,7 +18,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst ca. 10-20 % deines Mietwagen-Budgets sparen, wenn du deinen Wagen im Voraus buchst. Im Spätsommer sind die Preise in der Regel günstiger als in der Hochsaison. Jetzt buchen und bis zu 50 € pro Woche sparen, das lohnt sich."
 social_posted: true
----## Die Vorteile eines Mietwagens
+---
+
+## Die Vorteile eines Mietwagens
 Ein Leihwagen schenkt dir volle Freiheit für deine Route. Du steuerst entlegene Orte an, die kein Bus erreicht – sei es der versteckte Strandabschnitt an der Algarve oder das einsame Bergdorf in den Abruzzen. Dein eigenes Auto bleibt währenddessen sicher in der Garage stehen. Das hat handfeste finanzielle Gründe: Ein durchschnittlicher Mittelklassewagen verliert pro gefahrenem Kilometer zwischen 20 und 50 Cent an Wert (Verschleiß, Wertverlust, Wartung). Bei einem ausgiebigen Roadtrip von 2.000 Kilometern sparst du deinem Privat-Pkw also eine Wertminderung von bis zu 1.000 € und vermeidest teure Werkstattbesuche unmittelbar nach der Reise.
 
 Zudem wählst du für deinen Urlaub genau das Modell, das zu deiner aktuellen Gruppengröße und dem Gelände passt. Während im Alltag ein sparsamer Stadtflitzer reicht, darf es für den **mietwagen roadtrip** in den Bergen ein drehmomentstarker Diesel oder ein SUV mit Allradantrieb sein. Ein weiterer Vorteil ist die Sicherheit: Mietwagenflotten werden meist alle 6 bis 12 Monate erneuert. Du profitierst also von den neuesten Sicherheitsfeatures wie Spurhalteassistenten, modernen Airbagsystemen und effizienten Motoren, was besonders bei langen Distanzen Ermüdung vorbeugt und den Spritverbrauch senkt.
@@ -45,7 +47,7 @@ Einige nützliche Tipps für die Suche nach einem [günstigen Mietwagen](../../p
 ## Die Auswahl des richtigen Mietwagens
 Wähle die Fahrzeugklasse nach deinem tatsächlichen Platzbedarf aus, aber kalkuliere das Gepäck großzügig ein. Nichts ist stressiger als ein Koffer, der die Sicht durch die Heckscheibe blockiert. Ein Kleinwagen der Klasse "Economy" verbraucht deutlich weniger Sprit und parkt leichter in engen Küstenorten oder historischen Altstädten. Reist du jedoch mit der Familie oder planst Camping-Equipment ein, bietet ein Kombi oder ein Van den nötigen Komfort, um quengelnde Kinder und Rückenschmerzen zu vermeiden.
 
-Prüfe vorab immer die enthaltenen Inklusivkilometer. Für einen stationären Urlaub mit wenigen Ausflügen reichen oft 100 km pro Tag. Planst du jedoch eine Rundreise, ist "Unbegrenzte Kilometer" (Unlimited Mileage) Pflicht, da jeder Zusatzkilometer am Ende mit 0,30 € bis 0,60 € abgerechnet werden kann. Ein Rundum-Schutz ohne Selbstbeteiligung (LDW - Loss Damage Waiver) bewahrt dich vor hohen Kosten bei Bagatellschäden. Ein kleiner Kratzer an der Felge kostet bei einer hohen Selbstbeteiligung schnell 300 € bis 800 € – Geld, das in deiner Urlaubskasse besser aufgehoben ist.
+Prüfe vorab immer die enthaltenen Inklusivkilometer. Für einen stationären Urlaub mit wenigen Ausflügen reichen oft 100 km pro Tag. Planst du jedoch eine Rundreise, ist "Unbegrenzte Kilometer" (Unlimited Mileage) Pflicht, da jeder Zusatzkilometer am Ende mit 0,30 € bis 0,60 € abgerechnet werden kann. Ein Rundum-Schutz ohne Selbstbeteiligung (LDW – Loss Damage Waiver) bewahrt dich vor hohen Kosten bei Bagatellschäden. Ein kleiner Kratzer an der Felge kostet bei einer hohen Selbstbeteiligung schnell 300 € bis 800 € – Geld, das in deiner Urlaubskasse besser aufgehoben ist.
 
 Einige Dinge, die du bei der Auswahl des richtigen Mietwagens beachten solltest:
 * **Fahrzeuggröße**: Wähle ein Fahrzeug, das deinen Platzbedarf deckt. Ein "Upgrade" vor Ort klingt verlockend, bedeutet aber oft auch höheren Verbrauch und schwierigere Parkplatzsuche.
@@ -100,9 +102,9 @@ Das ist riskant. Viele Vermieter, besonders in Südeuropa und den USA, akzeptier
 
 | Anbieter-Typ | Preis-Niveau | Fahrzeugalter | Service-Netz | Ideal für... |
 | --- | --- | --- | --- | --- |
-| Premium (Großketten) | Hoch | 0-6 Monate | Sehr dicht | Geschäftsreisen & maximalen Komfort |
-| Mid-Range | Mittel | 6-12 Monate | Gut | Familienurlaub & Sicherheit |
-| Budget / Lokal | Niedrig | 1-3 Jahre | Eingeschränkt | Preisbewusste Entdecker & kurze Trips |
+| Premium (Großketten) | Hoch | 0–6 Monate | Sehr dicht | Geschäftsreisen & maximalen Komfort |
+| Mid-Range | Mittel | 6–12 Monate | Gut | Familienurlaub & Sicherheit |
+| Budget / Lokal | Niedrig | 1–3 Jahre | Eingeschränkt | Preisbewusste Entdecker & kurze Trips |
 | Broker (Vermittler) | Variabel | Je nach Partner | Weltweit | Preisvergleicher & Schnäppchenjäger |
 
 ---

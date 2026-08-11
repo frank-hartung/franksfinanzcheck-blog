@@ -81,7 +81,7 @@ Die Vorgehensweise variiert je nach Version. Bei modernen Android-Geräten (ab V
 Tippe in den WLAN-Einstellungen auf das blaue Info-Symbol (i) neben deinem aktiven Netzwerk. Wähle den Punkt „DNS konfigurieren" und stelle diesen von „Automatisch" auf „Manuell". Lösche die alten Einträge und füge über „Server hinzufügen" die neuen Adressen hinzu.
 
 ### Router (Die Gold-Lösung für das ganze Haus)
-Dies ist der effizienteste Weg für alle deine DSL Tipps. Logge dich in deine Router-Oberfläche ein (meist via `fritz.box` oder `192.168.1.1`).
+Dies ist der effizienteste Weg für alle deine DSL-Tipps. Logge dich in deine Router-Oberfläche ein (meist via `fritz.box` oder `192.168.1.1`).
 1. Gehe zu **Internet** > **Zugangsdaten** > **DNS-Server**.
 2. Wähle „Andere DNSv4-Server verwenden“.
 3. Trage die gewünschten Server ein (z. B. Cloudflare oder Quad9).
