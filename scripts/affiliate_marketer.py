@@ -62,6 +62,37 @@ PILLAR_ROUTE = {
     "versicherungen": "haftpflicht",
 }
 
+# THEMA-SCHNÜFFLER: Wenn der Pillar ein Fremdpaket war (gestern: fast alle
+# hartkodiert auf konto-karten!), lenkt dieser Kontextabgleich auf bessere
+# Routen, ohne das System zu destabilisieren. Reihenfolge = Spezifität.
+DEEP_HINTS = [
+    (re.compile(r"sturmtief|sturm|hochwasser|flut|unwetter", re.I), "elementar"),
+    (re.compile(r"kredit-raten|ratenkredit|dispo|schuld", re.I), "kredit"),
+    (re.compile(r"girokonto|konto|bankauszug", re.I), "girokonto"),
+    (re.compile(r"etf|sparplan|aktie|börse|boerse|depot|vermögensaufbau|altersvorsorge|rente", re.I), "tagesgeld"),
+    (re.compile(r"strom|elektrizitä|kwh|kühl|heiz|wärmepumpe|e-auto", re.I), "strom"),
+    (re.compile(r"gas", re.I), "gas"),
+    (re.compile(r"dsl|internet|5g|fritz|router|breitband", re.I), "dsl"),
+    (re.compile(r"handy|mobilfunktarif", re.I), "handytarife"),
+    (re.compile(r"mietwagen", re.I), "mietwagen"),
+    (re.compile(r"kfz|autoversicherung", re.I), "kfz-versicherung"),
+    (re.compile(r"hausrat|haftpflicht|privathaftpflicht", re.I), "hausrat"),
+    (re.compile(r"unfallversicherung", re.I), "unfallversicherung"),
+    (re.compile(r"reisekranken", re.I), "reisekrankenversicherung"),
+    (re.compile(r"reisen?|urlaub|flug", re.I), "reisen"),
+    (re.compile(r"zahn", re.I), "zahnzusatzversicherung"),
+    (re.compile(r"kreditkarte", re.I), "kreditkarte"),
+]
+
+def route_for(text: str, pillar: str = "") -> str:
+    """Wählt den konversionsstärksten Deep-Link. Erst Thema aus dem Artikel
+    (Titel + Tags + Intro), dann sauberer Pillar-Fallback."""
+    ctx = text.lower()[:1200]
+    for pat, key in DEEP_HINTS:
+        if pat.search(ctx):
+            return key
+    return PILLAR_ROUTE.get(pillar, "allgemein")
+
 CTA_POOL = [
     ("Jetzt Angebote vergleichen", "Vergleichen & sparen"),
     ("Kostenlos vergleichen", "Kostenlos prüfen"),
@@ -102,8 +133,8 @@ def first_affil_quote(bodysplit: list[str]) -> float:
     return 0.0
 
 
-def build_top_cta(pillar: str, reg: dict) -> str:
-    route = PILLAR_ROUTE.get(pillar, "allgemein")
+def build_top_cta(pillar: str, reg: dict, artikel_text: str = "") -> str:
+    route = route_for(artikel_text, pillar) if artikel_text else PILLAR_ROUTE.get(pillar, "allgemein")
     url = f"/go/{route}/" if route in reg else "/go/allgemein/"
     anchor, klass = CTA_POOL[(date.today().day + len(route)) % len(CTA_POOL)]
     return (
@@ -114,8 +145,8 @@ def build_top_cta(pillar: str, reg: dict) -> str:
     )
 
 
-def end_cta(pillar: str, reg: dict) -> str:
-    route = PILLAR_ROUTE.get(pillar, "allgemein")
+def end_cta(pillar: str, reg: dict, artikel_text: str = "") -> str:
+    route = route_for(artikel_text, pillar) if artikel_text else PILLAR_ROUTE.get(pillar, "allgemein")
     url = f"/go/{route}/" if route in reg else "/go/allgemein/"
     anchor, klass = CTA_POOL[(date.today().day + 1) % len(CTA_POOL)]
     return (
@@ -160,7 +191,7 @@ def process(path: Path, reg: dict) -> dict:
     if not affils:
         status.append(("AM1", "kein Affiliate-Link", "kritisch"))
         if DO_FIX and not DRY_RUN:
-            text = text.rstrip() + end_cta(pillar, reg) + "\n"
+            text = text.rstrip() + end_cta(pillar, reg, text) + "\n"
             fixes["am1"] = True
     else:
         pos = first_affil_quote(body_lines)
@@ -179,7 +210,7 @@ def process(path: Path, reg: dict) -> dict:
                         idx_h2 = body_start + filled[2]
                 if idx_h2 is not None:
                     text_lines = text.split("\n")
-                    text_lines = text_lines[:idx_h2] + ["", build_top_cta(pillar, reg), ""] + text_lines[idx_h2:]
+                    text_lines = text_lines[:idx_h2] + ["", build_top_cta(pillar, reg, text), ""] + text_lines[idx_h2:]
                     text = "\n".join(text_lines)
                     fixes["am2"] = True
     if not has_disclaimer:
@@ -190,6 +221,28 @@ def process(path: Path, reg: dict) -> dict:
                 "erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*") + "\n"
             fixes["am3"] = True
 
+    # RETARGET: Heilungs-CTAs vom 11.08. nachsintern (allgemein -> thematisch besser).
+    # Deterministisch, berührt ausschließlich unsere im Repo gegebenen Packstücke.
+    marker = "Schnell-Tipp von FranksFinanzcheck"
+    best = route_for(text, pillar)
+    change = False
+    # Gate: nur auf EXISTIERENDE Gateway-Seiten retargeten (sonst 404!).
+    if best != "allgemein" and best in reg and marker in text and "/go/allgemein/" in text:
+        lines_t = text.split("\n")
+        for i, l in enumerate(lines_t):
+            if marker in l or ("💡" in l and "Partner-Vergleich" in l):
+                pass
+        idx = [i for i, l in enumerate(lines_t) if marker in l]
+        if idx:
+            j = idx[0]
+            if "/go/allgemein/" in lines_t[j]:
+                # nur diese eine Linie erweitern, aber DEEP_HINTS sind gut; Kleidung prüfen:
+                lines_t[j] = lines_t[j].replace("/go/allgemein/", f"/go/{best}/")
+                text = "\n".join(lines_t)
+                fixes["am2"] = True
+                change = True
+        if change:
+            status.append(("RT", f"Top-CTA retargeted auf /go/{best}/", "info"))
     return {"file": str(path.relative_to(ROOT)), "text": text, "fixes": fixes, "status": status,
             "affils": len(affils)}
 
