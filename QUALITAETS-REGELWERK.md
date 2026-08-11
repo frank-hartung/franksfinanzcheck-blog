@@ -226,6 +226,14 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (11):** Betriebspruefung Frank: vier Massnahmen ausgefuehrt:
+  13a. Lektor L13 Doppel-Anlauf-Detektor (KI-Verschleppungen „Ddiebesten" ->
+  Report; Selbsttest-Faelle 14+15 inkl. Aachen-Negativfall);
+  13b. seo-weekly bekommt die komplette Textbatterie als Anschluss-Stufe
+  (Mittwoch-KI-Edits schleichen sich nicht mehr ein);
+  13c. deploy.yml mit Pfad-Filter: Nur Nutzersichtbares baut die Seite
+  (Report-/Bot-Commits ohne Rebuild);
+  13d. FrankAutoOps-Report 08:00 → 07:35 MESZ (raus aus dem Push-Rennen).
 - **11.08.2026 (10):** Grossstoerfall-Schlussbericht: Die Quality-Score-
   Inline-Zelle in der Engine bewertete ALLE Posts und parkte „human-review"-
   Faelle — die Kombination Schablonen-Blindheit (Schnell-Tipp/Disclaimer nicht
