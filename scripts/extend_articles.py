@@ -37,9 +37,11 @@ import urllib.error
 import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MIN_WORDS = 700
-TARGET_MIN = 750
-TARGET_MAX = 950
+MIN_WORDS = int(os.environ.get("LENGTH_MIN_WORDS") or 700)  # env-steuerbar (Audit 11.08.)
+# Zielzone relativ zum Floor (Audit 11.08.): nie unter der Schwelle landen,
+# sonst Heilungs-Loop. Floor 1000 -> Ziel 1150-1350.
+TARGET_MIN = None  # berechnet sich aus MIN_WORDS
+TARGET_MAX = None  # "" 
 
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
@@ -228,7 +230,10 @@ def extend_article(path, min_words, dry=False):
 
 
 def main():
+    global TARGET_MIN, TARGET_MAX
     min_words = MIN_WORDS
+    TARGET_MIN = min_words + 150
+    TARGET_MAX = min_words + 350
     if "--min" in sys.argv:
         min_words = int(sys.argv[sys.argv.index("--min") + 1])
     dry = "--dry" in sys.argv
@@ -236,6 +241,7 @@ def main():
     if "--slug" in sys.argv:
         only = sys.argv[sys.argv.index("--slug") + 1]
 
+    heal_per_run = int(os.environ.get("LENGTH_HEAL_PER_RUN") or "2")
     files = sorted(glob.glob(os.path.join(BLOG_DIR, "content", "posts", "*", "index.md")))
     targets = []
     for f in files:
@@ -249,11 +255,13 @@ def main():
         print(f"Keine Artikel unter {min_words} Wörtern – alles im Rahmen.")
         return 0
 
-    print(f"{'DRY-RUN: ' if dry else ''}Verlängerung von {len(targets)} Artikeln "
+    if len(targets) > heal_per_run:
+        print(f"    (Ration: {heal_per_run} von {len(targets)}, Rest in folgenden Läufen)")
+    print(f"{'DRY-RUN: ' if dry else ''}Verlängerung von {min(len(targets), heal_per_run)} von {len(targets)} Artikeln "
           f"unter {min_words} Wörtern (Ziel {TARGET_MIN}-{TARGET_MAX}) …")
     ok_count = 0
     failed = []
-    for f, slug, w in targets:
+    for f, slug, w in targets[:heal_per_run]:
         print(f"  ▶ {slug} ({w} Wörter)")
         ok, info = extend_article(f, min_words, dry=dry)
         if ok:
