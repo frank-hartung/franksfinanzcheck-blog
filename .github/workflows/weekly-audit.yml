@@ -29,6 +29,10 @@ jobs:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
+      # ---- Audit-Erweiterung 11.08.: Workspace-Hygiene mit Selbstheilung ----
+      - name: Workspace-Guard (Junk/Waisen/Rotation — auto-heilen)
+        run: python3 scripts/workspace_guard.py --fix
+
       # ---- Audit-Erweiterung (2026-08-10): Laengen-Backlog heilen (3/Woche) ----
       - name: Laengen-Backlog heilen (Length-Guard, 3 Artikel pro Woche)
         continue-on-error: true
