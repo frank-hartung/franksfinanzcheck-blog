@@ -31,7 +31,7 @@ Kontoführungsgebühren von 5 € bis 10 € summieren sich schnell auf 120 �
 
 Du scheust den Aufwand beim Girokonto wechseln? Dank des gesetzlichen Kontowechsel-Service dauert dein Einsatz nur rund 20 Minuten. Deine neue Bank erledigt den Rest fast vollständig automatisiert. Ich zeige dir hier Schritt für Schritt den Weg zum neuen Konto ohne Fallstricke.
 
-## Warum ein Kontowechsel bis zu 200 Euro im Jahr bringt
+## Warum ein Kontowechsel bis zu 200 € im Jahr bringt
 
 Die Rechnung ist simpel. Wer monatlich 8 € Gebühren zahlt, überweist jährlich 96 € ohne echten Gegenwert. Dazu kommen oft versteckte Kosten wie 2 € für die Kreditkarte oder Gebühren für Bargeldabhebungen. Ein kostenloses Konto mit gratis Karte spart dir realistisch 50 € bis 200 € pro Jahr.
 

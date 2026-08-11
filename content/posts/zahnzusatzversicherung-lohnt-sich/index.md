@@ -16,11 +16,11 @@ kurzantwort: "Eine Zahnzusatzversicherung lohnt sich für gesetzlich Versicherte
 social_posted: true
 ---
 
-Ein Implantat kostet schnell 2.000 bis 3.000 Euro. Die gesetzliche Kasse übernimmt nur einen Festzuschuss von rund 60 Prozent der Regelversorgung. Die Zahnzusatzversicherung schließt diese Lücke. Doch sie lohnt sich nicht für jeden. Du bekommst hier einen Ratgeber, der zeigt, wann der Abschluss sinnvoll ist und worauf du achten musst.
+Ein Implantat kostet schnell 2.000 bis 3.000 €. Die gesetzliche Kasse übernimmt nur einen Festzuschuss von rund 60 % der Regelversorgung. Die Zahnzusatzversicherung schließt diese Lücke. Doch sie lohnt sich nicht für jeden. Du bekommst hier einen Ratgeber, der zeigt, wann der Abschluss sinnvoll ist und worauf du achten musst.
 
 ## Das Grundproblem:<br>Die GKV zahlt nur den Festzuschuss
 
-Die gesetzliche Krankenversicherung zahlt bei Zahnersatz nur einen Festzuschuss – in der Regel 60 Prozent der Regelversorgung. Alles darüber hinaus zahlst du selbst. Bei Zahnbehandlung und professioneller Zahnreinigung bleibt vieles an dir hängen. Du zahlst selbst, wenn du hochwertige Keramik oder Vollkeramikkronen haben möchtest.
+Die gesetzliche Krankenversicherung zahlt bei Zahnersatz nur einen Festzuschuss – in der Regel 60 % der Regelversorgung. Alles darüber hinaus zahlst du selbst. Bei Zahnbehandlung und professioneller Zahnreinigung bleibt vieles an dir hängen. Du zahlst selbst, wenn du hochwertige Keramik oder Vollkeramikkronen haben möchtest.
 
 ## Was eine Zahnzusatzversicherung abdeckt
 
@@ -66,7 +66,7 @@ der Abschluss lohnt sich nicht:
 Ja – aber laufende Behandlungen und bekannte Vorerkrankungen sind meist ausgeschlossen. Der Abschluss lohnt sich trotzdem für künftige Behandlungen.
 
 ### Zahlt die Versicherung auch Implantate?
-In guten Tarifen ja – mit Erstattungssätzen von 80 bis 90 Prozent. Achte auf die Formulierung „Implantate inklusive" und die Obergrenzen pro Zahn.
+In guten Tarifen ja – mit Erstattungssätzen von 80 bis 90 %. Achte auf die Formulierung „Implantate inklusive" und die Obergrenzen pro Zahn.
 
 ### Was ist die Regelversorgung?
 Das ist die vom Gesetzgeber festgelegte, zweckmäßige und wirtschaftliche Versorgung – bei Zahnersatz z. B. die einfache Metall-Kunststoff-Krone. Alles Hochwertigere geht über die Regelversorgung hinaus und wird nur anteilig bezuschusst.

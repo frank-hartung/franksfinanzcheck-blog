@@ -20,7 +20,7 @@ social_posted: true
 
 Dein Kühlschrank arbeitet rund um die Uhr an 365 Tagen im Jahr. Kein anderes Gerät in deinem Haushalt verbraucht so dauerhaft Energie. Etwa 20 % deiner Stromrechnung entfallen auf das Kühlen und Gefrieren deiner Lebensmittel.
 
-Du musst kein neues Gerät kaufen, um sofort Geld zu sparen. Mit den richtigen Handgriffen senkst du deine Kosten um bis zu 80 Euro pro Jahr. Bei alten Modellen sparst du oft noch deutlich mehr.
+Du musst kein neues Gerät kaufen, um sofort Geld zu sparen. Mit den richtigen Handgriffen senkst du deine Kosten um bis zu 80 € pro Jahr. Bei alten Modellen sparst du oft noch deutlich mehr.
 
 ### Das Wichtigste in Kürze
 * Stelle die Temperatur im Kühlraum auf exakt 7 °C ein.
@@ -35,7 +35,7 @@ Ein Kühlschrank funktioniert wie eine umgekehrte Wärmepumpe. Er transportiert 
 
 Zusätzliche Bauteile wie die Beleuchtung oder die Elektronik verbrauchen ebenfalls Energie. Alte Geräte besitzen oft ineffiziente Kompressoren und schlechte Isolierungen. Ein 20 Jahre altes Modell verbraucht häufig dreimal so viel wie ein modernes Gerät.
 
-Der typische Verbrauch liegt zwischen 100 kWh und 300 kWh pro Jahr. Bei einem Preis von 30 Cent pro kWh zahlst du 30 bis 90 Euro. Große Kühl-Gefrier-Kombinationen verursachen dabei die höchsten Kosten.
+Der typische Verbrauch liegt zwischen 100 kWh und 300 kWh pro Jahr. Bei einem Preis von 30 Cent pro kWh zahlst du 30 bis 90 €. Große Kühl-Gefrier-Kombinationen verursachen dabei die höchsten Kosten.
 
 ## Die richtige Temperatur:<br>7 Grad und minus 18 Grad
 
@@ -75,7 +75,7 @@ Nicht jedes Lebensmittel gehört zwingend in die Kühlung. Bananen, Tomaten oder
 
 Bei Geräten über 15 Jahren lohnt sich ein Neukauf fast immer wirtschaftlich. Moderne Modelle der Klasse A verbrauchen oft 60 % weniger Strom als alte Schätze. So kannst du deine **Stromkosten senken**.
 
-Ein altes Gerät kostet dich bei 300 kWh etwa 90 Euro im Jahr. Ein neues A-Modell benötigt nur noch 120 kWh für ca. 36 Euro. Du sparst also jährlich 54 Euro an reinen Energiekosten ein.
+Ein altes Gerät kostet dich bei 300 kWh etwa 90 € im Jahr. Ein neues A-Modell benötigt nur noch 120 kWh für ca. 36 €. Du sparst also jährlich 54 € an reinen Energiekosten ein.
 
 Beachte die Umstellung der EU-Energielabel seit dem Jahr 2021. Die neue Klasse A ist deutlich strenger als das alte A+++. Vergleiche beim Kauf immer den konkreten kWh-Wert auf dem Label.
 
@@ -101,10 +101,10 @@ Kombiniere die Faktoren Temperatur, Standort und Pflege für das beste Ergebnis.
 Stelle 7 °C im Kühlraum und minus 18 °C im Gefrierfach ein. Dies schützt deine Lebensmittel und schont gleichzeitig dein Budget. Jedes Grad kälter treibt deine Stromrechnung unnötig in die Höhe.
 
 **Lohnt sich ein neuer Kühlschrank?**
-Bei Geräten, die älter als 15 Jahre sind, rechnet sich der Kauf meistens. Du sparst jährlich zwischen 40 und 60 Euro an Stromkosten ein. Ein Neugerät finanziert sich so über die Jahre fast von selbst.
+Bei Geräten, die älter als 15 Jahre sind, rechnet sich der Kauf meistens. Du sparst jährlich zwischen 40 und 60 € an Stromkosten ein. Ein Neugerät finanziert sich so über die Jahre fast von selbst.
 
 **Was kostet ein Kühlschrank im Jahr?**
-Moderne Geräte der Klasse A verursachen etwa 30 bis 45 Euro Stromkosten. Alte Modelle belasten dein Budget oft mit 80 bis 120 Euro jährlich. Ein Strommessgerät deckt die exakten Kosten deines alten Geräts auf.
+Moderne Geräte der Klasse A verursachen etwa 30 bis 45 € Stromkosten. Alte Modelle belasten dein Budget oft mit 80 bis 120 € jährlich. Ein Strommessgerät deckt die exakten Kosten deines alten Geräts auf.
 
 **Wie prüfe ich den tatsächlichen Verbrauch meines Kühlschranks?**
 Nutze ein einfaches Strommessgerät für die Steckdose aus dem Baumarkt. Miss den Verbrauch über eine ganze Woche für ein genaues Ergebnis. Rechne diesen Wert dann einfach auf das gesamte Jahr hoch.

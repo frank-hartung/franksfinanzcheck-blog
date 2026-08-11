@@ -57,7 +57,7 @@ Nur wer am Ende des Tests mit dem Tempo zufrieden ist, sollte den Vertrag behalt
 
 ## Kostenvergleich:<br>5G-Home vs. DSL-Vertrag
 
-Die Preise für 5G-Home liegen 2026 meist zwischen 35 und 50 Euro pro Monat für 100 bis 250 Mbit/s – mit Laufzeiten von 24 Monaten (mit Router) oder flexibel ohne Router. Im Vergleich:
+Die Preise für 5G-Home liegen 2026 meist zwischen 35 und 50 € pro Monat für 100 bis 250 Mbit/s – mit Laufzeiten von 24 Monaten (mit Router) oder flexibel ohne Router. Im Vergleich:
 
 | Tarif | Preis/Monat | Tempo | Bindung |
 |:--- |:--- |:--- |:--- |
@@ -75,7 +75,7 @@ Der größte Fallstrick bei 5G-Home: die Datenlimits. Viele Tarife haben ein beg
 
 Die Prüfung: Wie viel Datenvolumen verbraucht dein Haushalt aktuell? Das siehst du im Router deines aktuellen Anschlusses oder schätzt es anhand des Streaming-Verhaltens. Ein 4K-Film = 7 GB, eine Stunde Videocall = 1 GB, ein Spiel-Update = 20 bis 100 GB.
 
-Tarife mit „unbegrenztem" Datenvolumen für Zuhause gibt es – sie kosten aber deutlich mehr (60 bis 80 Euro) und haben oft eine Fair-Use-Klausel (Drosselung ab einer bestimmten Menge).
+Tarife mit „unbegrenztem" Datenvolumen für Zuhause gibt es – sie kosten aber deutlich mehr (60 bis 80 €) und haben oft eine Fair-Use-Klausel (Drosselung ab einer bestimmten Menge).
 
 ## Für wen sich 5G-Home lohnt
 
@@ -94,7 +94,7 @@ Tarife mit „unbegrenztem" Datenvolumen für Zuhause gibt es – sie kosten abe
 
 ## Die 3 Fallstricke beim 5G-Vertrag
 
-1. **Mindestlaufzeit mit teurem Router:** Prüfe, ob der Router im Preis enthalten ist oder 10–15 Euro monatlich extra kostet. [Eigene 5G-Router](../../posts/router-kaufen-oder-mieten-rechnung/) gibt es ab 150 Euro – bei langer Nutzung günstiger als die Miete.
+1. **Mindestlaufzeit mit teurem Router:** Prüfe, ob der Router im Preis enthalten ist oder 10–15 € monatlich extra kostet. [Eigene 5G-Router](../../posts/router-kaufen-oder-mieten-rechnung/) gibt es ab 150 € – bei langer Nutzung günstiger als die Miete.
 
 2. **Drossel nach Volumen:** Die meisten Tarife haben ein Limit. Achte auf „unbegrenzt" (mit Fair-Use) oder wähle ein großzügiges Volumen.
 
@@ -104,7 +104,7 @@ Tarife mit „unbegrenztem" Datenvolumen für Zuhause gibt es – sie kosten abe
 
 5G-Home muss nicht die einzige Internet-Quelle sein. Es funktioniert auch hervorragend als Ergänzung. Die Kombinationen, die sich lohnen:
 
-**Backup für den Hauptanschluss:** Ein günstiger 5G-Tarif mit kleinem Datenvolumen (10 bis 20 Euro) sichert dich ab, wenn DSL oder Kabel ausfällt – gerade im Homeoffice ein beruhigendes Sicherheitsnetz. Im Ernstfall teilst du das Handy-Hotspot oder steckst die SIM in den 5G-Router.
+**Backup für den Hauptanschluss:** Ein günstiger 5G-Tarif mit kleinem Datenvolumen (10 bis 20 €) sichert dich ab, wenn DSL oder Kabel ausfällt – gerade im Homeoffice ein beruhigendes Sicherheitsnetz. Im Ernstfall teilst du das Handy-Hotspot oder steckst die SIM in den 5G-Router.
 
 **Zweitwohnung und Camping:** Der 5G-Router wandert mit: In der Zweitwohnung, im Ferienhaus oder beim Camping-Urlaub hast du überall schnelles Internet – ohne Verträge an jedem Ort. [Handy-Tarife mit großem Datenvolumen](../../posts/handytarife-vergleichen-guenstigster-tarif/) sind dafür die Basis.
 

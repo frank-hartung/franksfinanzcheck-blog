@@ -26,9 +26,9 @@ Das Wichtigste in Kürze:
 
 ## 1. Gasvertrag prüfen und wechseln
 
-Dein Gastarif entscheidet massiv über deine Fixkosten im Winter. Im August startet die wichtigste Wechselsaison der Energieversorger. Viele Anbieter passen ihre Konditionen pünktlich zum Herbstbeginn an. Wenn du in der Grundversorgung verharrst, zahlst du oft 20 bis 30 Prozent zu viel.
+Dein Gastarif entscheidet massiv über deine Fixkosten im Winter. Im August startet die wichtigste Wechselsaison der Energieversorger. Viele Anbieter passen ihre Konditionen pünktlich zum Herbstbeginn an. Wenn du in der Grundversorgung verharrst, zahlst du oft 20 bis 30 % zu viel.
 
-Ein Wechsel funktioniert online in wenigen Minuten. Dein neuer Anbieter übernimmt die Kündigung in der Regel kostenlos für dich. So lässt sich effektiv die Gasrechnung senken, ohne dass du selbst Briefe schreiben musst. Je nach Verbrauch sparst du durch einen Anbieterwechsel zwischen 150 und 400 Euro pro Jahr.
+Ein Wechsel funktioniert online in wenigen Minuten. Dein neuer Anbieter übernimmt die Kündigung in der Regel kostenlos für dich. So lässt sich effektiv die Gasrechnung senken, ohne dass du selbst Briefe schreiben musst. Je nach Verbrauch sparst du durch einen Anbieterwechsel zwischen 150 und 400 € pro Jahr.
 
 Worauf du beim Vergleich achten solltest:
 * Achte auf den Arbeitspreis pro kWh und den Grundpreis.
@@ -38,15 +38,15 @@ Worauf du beim Vergleich achten solltest:
 
 ## 2. Heizung prüfen und warten:<br>So startest du reibungslos
 
-Eine schlecht eingestellte Anlage verschwendet bis zu 15 Prozent deiner Energie. Deshalb solltest du jetzt deine Heizung prüfen. Entlüfte alle Heizkörper, sobald die Anlage im Testbetrieb läuft. Das dauert pro Heizkörper nur etwa zwei Minuten und benötigt lediglich einen Entlüftungsschlüssel.
+Eine schlecht eingestellte Anlage verschwendet bis zu 15 % deiner Energie. Deshalb solltest du jetzt deine Heizung prüfen. Entlüfte alle Heizkörper, sobald die Anlage im Testbetrieb läuft. Das dauert pro Heizkörper nur etwa zwei Minuten und benötigt lediglich einen Entlüftungsschlüssel.
 
-Wenn das Wasser die Wärme optimal transportiert, sinken deine Kosten sofort. Ein hydraulischer Abgleich durch einen Fachbetrieb optimiert die Wärmeverteilung zusätzlich. Das kostet je nach Hausgröße ca. 500 bis 900 Euro, amortisiert sich aber oft nach wenigen Jahren. Viele Fachbetriebe haben im Spätsommer noch kurzfristige Termine frei.
+Wenn das Wasser die Wärme optimal transportiert, sinken deine Kosten sofort. Ein hydraulischer Abgleich durch einen Fachbetrieb optimiert die Wärmeverteilung zusätzlich. Das kostet je nach Hausgröße ca. 500 bis 900 €, amortisiert sich aber oft nach wenigen Jahren. Viele Fachbetriebe haben im Spätsommer noch kurzfristige Termine frei.
 
-Programmierbare Thermostate helfen dir zusätzlich beim Sparen. Sie regeln die Wärme automatisch herunter, wenn du nicht zu Hause bist oder schläfst. Moderne Modelle kosten zwischen 20 und 50 Euro pro Stück. Diese Investition hast du oft schon nach einer Heizperiode wieder eingespielt.
+Programmierbare Thermostate helfen dir zusätzlich beim Sparen. Sie regeln die Wärme automatisch herunter, wenn du nicht zu Hause bist oder schläfst. Moderne Modelle kosten zwischen 20 und 50 € pro Stück. Diese Investition hast du oft schon nach einer Heizperiode wieder eingespielt.
 
 ## 3. Heizverhalten optimieren
 
-Jedes Grad weniger Raumtemperatur spart etwa sechs Prozent Energie. Wenn du von 22 auf 20 Grad reduzierst, schrumpft dein Verbrauch um ca. 12 Prozent. Nutze die Nachtabsenkung konsequent auf 16 bis 18 Grad. Vermeide es jedoch, die Räume komplett auskühlen zu lassen.
+Jedes Grad weniger Raumtemperatur spart etwa sechs Prozent Energie. Wenn du von 22 auf 20 Grad reduzierst, schrumpft dein Verbrauch um ca. 12 %. Nutze die Nachtabsenkung konsequent auf 16 bis 18 Grad. Vermeide es jedoch, die Räume komplett auskühlen zu lassen.
 
 Lüfte dreimal täglich kurz und kräftig bei weit geöffnetem Fenster. Dauerhaft gekippte Fenster lassen nur die Wände auskühlen und treiben die Kosten hoch. Schließe zudem die Türen zu kühleren Räumen konsequent. So bleibt die Wärme dort, wo du sie wirklich benötigst.
 
@@ -67,7 +67,7 @@ Diese einfachen Maßnahmen kosten dich keinen Cent, bringen aber sofortige Erspa
 Der Spätsommer ist ideal, da viele Versorger im August ihre Tarife für den Winter kalkulieren. Ein Wechsel benötigt oft zwei bis vier Wochen Vorlaufzeit. Wenn du jetzt handelst, profitierst du pünktlich zum Heizstart von niedrigen Preisen.
 
 ### Wie viel Geld spare ich beim Gas?
-Das Sparpotenzial ist enorm, besonders beim Wechsel aus der teuren Grundversorgung. Viele Haushalte sparen so 200 bis 500 Euro pro Jahr ein. Selbst bei einem Wechsel zwischen günstigen Tarifen bleiben oft 100 Euro übrig. Kombiniert mit richtigem Lüften schützt das dein Bankkonto effektiv.
+Das Sparpotenzial ist enorm, besonders beim Wechsel aus der teuren Grundversorgung. Viele Haushalte sparen so 200 bis 500 € pro Jahr ein. Selbst bei einem Wechsel zwischen günstigen Tarifen bleiben oft 100 € übrig. Kombiniert mit richtigem Lüften schützt das dein Bankkonto effektiv.
 
 ### Ist Heizen mit Strom oder Gas günstiger?
 Gas ist für klassische Heizsysteme in der Regel deutlich preiswerter als direkter Strom. Wer jedoch eine effiziente Wärmepumpe nutzt, heizt oft günstiger als mit fossilen Brennstoffen. Vergleiche in jedem Fall deinen aktuellen Tarif mit dem Marktangebot. Nur so behältst du die volle Kontrolle über deine monatlichen Ausgaben.

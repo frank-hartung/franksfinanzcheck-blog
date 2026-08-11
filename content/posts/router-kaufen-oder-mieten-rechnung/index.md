@@ -17,15 +17,15 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
-Die Router-Miete gehört zu den unscheinbarsten Kostenfallen im Internetvertrag. Vier bis sechs Euro pro Monat klingen harmlos – aber auf die typische Vertragslaufzeit von 24 Monaten summiert sich das auf 100 bis 150 Euro. Geld für ein Gerät, das du nach der Vertragszeit meist ohnehin zurückgeben musst.
+Die Router-Miete gehört zu den unscheinbarsten Kostenfallen im Internetvertrag. Vier bis sechs Euro pro Monat klingen harmlos – aber auf die typische Vertragslaufzeit von 24 Monaten summiert sich das auf 100 bis 150 €. Geld für ein Gerät, das du nach der Vertragszeit meist ohnehin zurückgeben musst.
 
 In diesem Artikel rechne ich dir vor, wann sich der Router-Kauf lohnt, welche Fallstricke es gibt und wie du den Wechsel sauber durchziehst.
 
 ## Die Miet-Falle:<br>Was Router-Miete wirklich kostet
 
-Die Rechnung ist simpel: 5 Euro Miete pro Monat × 24 Monate = 120 Euro. Dazu kommt: Nach der Mindestlaufzeit läuft die Miete weiter – bei einem Vertrag, den du nicht kündigst, sind es über 4 Jahre schnell 240 Euro. Und die gemieteten Geräte sind oft nicht die besten: Viele Anbieter liefern Basis-Router mit mäßigem WLAN.
+Die Rechnung ist simpel: 5 € Miete pro Monat × 24 Monate = 120 €. Dazu kommt: Nach der Mindestlaufzeit läuft die Miete weiter – bei einem Vertrag, den du nicht kündigst, sind es über 4 Jahre schnell 240 €. Und die gemieteten Geräte sind oft nicht die besten: Viele Anbieter liefern Basis-Router mit mäßigem WLAN.
 
-Der Vergleich zum Kauf: Ein solider WLAN-Router kostet 80 bis 150 Euro, eine gute Fritzbox 150 bis 250 Euro. Die Miete über 2 Jahre deckt also bereits den Kaufpreis eines ordentlichen Geräts – und danach gehört dir die Hardware und läuft kostenlos weiter.
+Der Vergleich zum Kauf: Ein solider WLAN-Router kostet 80 bis 150 €, eine gute Fritzbox 150 bis 250 €. Die Miete über 2 Jahre deckt also bereits den Kaufpreis eines ordentlichen Geräts – und danach gehört dir die Hardware und läuft kostenlos weiter.
 
 Wichtig: Die Router-Miete ist im Internetvertrag oft als „Bereitstellung" oder „Leihgerät" versteckt. Prüfe deinen Vertrag auf solche Posten. Viele Anbieter weisen sie nicht klar aus.
 
@@ -45,13 +45,13 @@ Für alle anderen: Kaufen.
 
 ## Die Kauf-Rechnung:<br>Amortisation nach 12–18 Monaten
 
-Das konkrete Beispiel mit einer Fritzbox 7590 (ca. 200 Euro, Stand 2026):
+Das konkrete Beispiel mit einer Fritzbox 7590 (ca. 200 €, Stand 2026):
 
 - **Miete:** 5 € × 24 Monate = 120 €, danach 5 €/Monat weiter = 60 €/Jahr
 - **Kauf:** 200 € einmalig, danach 0 €/Monat
 - **Break-even:** nach 24 Monaten Miete (120 €) hast du 80 % des Kaufpreises „verbrannt"; nach 40 Monaten ist die Miete teurer als der Kaufpreis
 
-Bei einem günstigeren Router (100 Euro) liegt der Break-even schon nach 20 Monaten. Und der entscheidende Unterschied: Nach der Vertragslaufzeit gehört dir das Gerät – und du kannst es beim Anbieterwechsel mitnehmen.
+Bei einem günstigeren Router (100 €) liegt der Break-even schon nach 20 Monaten. Und der entscheidende Unterschied: Nach der Vertragslaufzeit gehört dir das Gerät – und du kannst es beim Anbieterwechsel mitnehmen.
 
 ## Router-Freiheit:<br>Dein Recht auf eigene Hardware
 
@@ -89,11 +89,11 @@ Der Miet-Router ist oft der WLAN-Schwachpunkt im Haushalt. Beim Kauf solltest du
 Als Orientierung für den Kauf –   
 die Kategorien, nicht konkrete Modelle (die Preise ändern sich):
 
-**Einsteiger (40–80 Euro):** Solide DSL-Router mit Wi-Fi 5 oder einfachem Wi-Fi 6, Dual-Band, 4 LAN-Ports. Reicht für Single-Haushalte und kleine Wohnungen.
+**Einsteiger (40–80 €):** Solide DSL-Router mit Wi-Fi 5 oder einfachem Wi-Fi 6, Dual-Band, 4 LAN-Ports. Reicht für Single-Haushalte und kleine Wohnungen.
 
-**Standard (80–150 Euro):** Wi-Fi 6, Tri-Band optional, gute Reichweite, oft mit DECT-Telefonbasis. Die beste Wahl für die meisten Familien.
+**Standard (80–150 €):** Wi-Fi 6, Tri-Band optional, gute Reichweite, oft mit DECT-Telefonbasis. Die beste Wahl für die meisten Familien.
 
-**Premium (150–250 Euro):** Wi-Fi 6E/7, Mesh-fähig, maximale Reichweite, viele Anschlüsse. Für große Wohnungen, Gamer und Technik-Fans –   
+**Premium (150–250 €):** Wi-Fi 6E/7, Mesh-fähig, maximale Reichweite, viele Anschlüsse. Für große Wohnungen, Gamer und Technik-Fans –   
 hier ist eine [Fritzbox](../../posts/wlan-verstaerker-vs-mesh-wlan/) der Klassiker.
 
 ## Die Anschluss-Wechsel-Strategie:<br>Router-Frage mitdenken
@@ -103,7 +103,7 @@ Der perfekte Zeitpunkt für den Router-Kauf ist der Anbieterwechsel: Beim [Wechs
 Die Strategie in drei Schritten:
 
 1. **Vor dem Wechsel:** Prüfen, ob dein Wunsch-Router zum neuen Anschluss passt (DSL, Kabel oder Glasfaser). Die [Anschluss-Wahl](../../posts/glasfaser-dsl-kabel-anschluss-vergleich/) entscheidet über die Router-Kompatibilität.
-2. **Beim Vertragsabschluss:** Den Tarif ohne Router-Miete wählen – das sind 4 bis 6 Euro Ersparnis pro Monat, also 50 bis 70 Euro pro Jahr.
+2. **Beim Vertragsabschluss:** Den Tarif ohne Router-Miete wählen – das sind 4 bis 6 € Ersparnis pro Monat, also 50 bis 70 € pro Jahr.
 3. **Nach dem Wechsel:** Den alten Miet-Router fristgerecht zurückschicken und die Rückgabe bestätigen lassen – sonst läuft die Miete weiter.
 
 Wer diese Strategie umsetzt, spart doppelt: beim Tarif (ohne Miete) und bei der Hardware (einmal kaufen, jahrelang nutzen).
@@ -115,7 +115,7 @@ Wer diese Strategie umsetzt, spart doppelt: beim Tarif (ohne Miete) und bei der 
 Ja – die Router-Freiheit erlaubt es dir seit 2016, eigene Endgeräte am Anschluss zu betreiben. Dein Anbieter muss dir die Zugangsdaten kostenlos herausgeben.
 
 **Welcher Router ist der beste?**
-Für die meisten Haushalte ist ein Wi-Fi-6-Router mit Dual-Band und Gigabit-Ports die beste Wahl – als Einsteiger ab 80 Euro, für Familien mit mehreren Geräten ab 120 Euro. Eine gute Fritzbox ist der Klassiker für DSL-Anschlüsse.
+Für die meisten Haushalte ist ein Wi-Fi-6-Router mit Dual-Band und Gigabit-Ports die beste Wahl – als Einsteiger ab 80 €, für Familien mit mehreren Geräten ab 120 €. Eine gute Fritzbox ist der Klassiker für DSL-Anschlüsse.
 
 **Was passiert mit dem alten Miet-Router?**
 Nach Kündigung der Miete schickst du das Gerät an den Anbieter zurück (frankierter Rücksendeumschlag). Prüfe, ob der Anbieter eine Leihgebühr bis zur Rückgabe berechnet – kündige rechtzeitig und schicke das Gerät sofort zurück.

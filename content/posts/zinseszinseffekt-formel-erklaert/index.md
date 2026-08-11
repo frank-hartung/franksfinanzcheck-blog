@@ -26,9 +26,9 @@ In diesem Artikel erkläre ich dir die Formel, zeige dir Rechenbeispiele und Tab
 
 Zinseszins bedeutet: Du bekommst nicht nur Zinsen auf dein ursprüngliches Kapital, sondern auch auf die bereits gutgeschriebenen Zinsen. Die Erträge des ersten Jahres arbeiten im zweiten Jahr mit – und ihre Erträge wiederum im dritten. So wächst dein Geld nicht linear, sondern exponentiell.
 
-Ein einfaches Beispiel: 1.000 Euro zu 5 Prozent. Nach einem Jahr hast du 1.050 Euro. Im zweiten Jahr bekommst du 5 Prozent auf 1.050 Euro = 52,50 Euro – nicht nur 50 Euro. Der Unterschied klingt klein, aber über Jahrzehnte wird er gewaltig: Das Wachstum beschleunigt sich ständig, weil die Basis jedes Jahr größer wird.
+Ein einfaches Beispiel: 1.000 € zu 5 %. Nach einem Jahr hast du 1.050 €. Im zweiten Jahr bekommst du 5 % auf 1.050 € = 52,50 € – nicht nur 50 €. Der Unterschied klingt klein, aber über Jahrzehnte wird er gewaltig: Das Wachstum beschleunigt sich ständig, weil die Basis jedes Jahr größer wird.
 
-Der Unterschied zur einfachen Verzinsung: Bei 5 Prozent ohne Zinseszins würden 1.000 Euro in 20 Jahren auf 2.000 Euro wachsen (50 Euro pro Jahr). Mit Zinseszins sind es 2.653 Euro – mehr als 650 Euro zusätzlich, allein weil die Zinsen mitgearbeitet haben.
+Der Unterschied zur einfachen Verzinsung: Bei 5 % ohne Zinseszins würden 1.000 € in 20 Jahren auf 2.000 € wachsen (50 € pro Jahr). Mit Zinseszins sind es 2.653 € – mehr als 650 € zusätzlich, allein weil die Zinsen mitgearbeitet haben.
 
 ## Die Formel & der Rechner
 
@@ -47,10 +47,10 @@ Für einen monatlichen Sparplan kommt die Sparrate dazu. Die vereinfachte Formel
 
 **Endwert = Rate × 12 × (((1 + i)^n − 1) / i)** – wobei i der Jahreszins und n die Anzahl der Jahre ist.
 
-Ein Beispiel: 100 Euro monatlich, 6 Prozent, 30 Jahre:
-- Monatliche Einzahlungen gesamt: 100 × 12 × 30 = 36.000 Euro
-- Endwert: rund **100.000 Euro**
-- Davon Zinseszins-Anteil: 64.000 Euro – fast zwei Drittel!
+Ein Beispiel: 100 € monatlich, 6 %, 30 Jahre:
+- Monatliche Einzahlungen gesamt: 100 × 12 × 30 = 36.000 €
+- Endwert: rund **100.000 €**
+- Davon Zinseszins-Anteil: 64.000 € – fast zwei Drittel!
 
 Wer es genau rechnen will, nutzt einen Zinseszins-Rechner (gratis im Netz) oder die Excel-Formel ZW(). Die Faustregel für die Verdopplungszeit liefert die 72er-Regel.
 
@@ -58,17 +58,17 @@ Wer es genau rechnen will, nutzt einen Zinseszins-Rechner (gratis im Netz) oder 
 
 Der Zinseszinseffekt hat genau drei Stellschrauben – und ihre Wirkung ist überraschend unterschiedlich:
 
-**1. Die Rate (monatlicher Betrag):** Verdoppelst du die Rate von 50 auf 100 Euro, verdoppelt sich der Endwert bei gleicher Laufzeit. Linear, aber begrenzt durch dein Budget.
+**1. Die Rate (monatlicher Betrag):** Verdoppelst du die Rate von 50 auf 100 €, verdoppelt sich der Endwert bei gleicher Laufzeit. Linear, aber begrenzt durch dein Budget.
 
 **2. Die Zeit (Anlagehorizont):** Die Zeit wirkt exponentiell – sie ist die mächtigste Stellschraube. 10 Jahre Anlagehorizont mehr können den Endwert vervielfachen, ohne dass du einen Euro mehr einzahlst.
 
-**3. Die Rendite (Zinssatz):** Auch sie wirkt exponentiell. Der Unterschied zwischen 3 und 6 Prozent ist nach 30 Jahren enorm – bei 100 Euro monatlich: rund 58.000 Euro vs. 100.000 Euro.
+**3. Die Rendite (Zinssatz):** Auch sie wirkt exponentiell. Der Unterschied zwischen 3 und 6 % ist nach 30 Jahren enorm – bei 100 € monatlich: rund 58.000 € vs. 100.000 €.
 
 Die Praxis-Einordnung: Die Rendite kannst du nur begrenzt steuern (Aktienmarkt statt Sparbuch, Kosten senken), die Zeit ist bei späterem Start unwiederbringlich, und die Rate ist dein direktester Hebel. Deshalb: **Früh starten schlägt [mehr sparen](../../posts/sparquote-berechnen-und-steigern/).**
 
 ## Die Macht der Zeit:<br>Tabellen
 
-Die Zahlen zeigen es am deutlichsten – 100 Euro monatlich, bei unterschiedlichen Zeiträumen und Renditen:
+Die Zahlen zeigen es am deutlichsten – 100 € monatlich, bei unterschiedlichen Zeiträumen und Renditen:
 
 | Jahre | Bei 3 % | Bei 6 % | Eigene Einzahlung |
 |:--- |:--- |:--- |:--- |
@@ -77,25 +77,25 @@ Die Zahlen zeigen es am deutlichsten – 100 Euro monatlich, bei unterschiedlich
 | 30 | 58.200 € | 100.500 € | 36.000 € |
 | 40 | 92.400 € | 199.100 € | 48.000 € |
 
-Der entscheidende Blick auf die letzte Spalte: Bei 30 Jahren und 6 Prozent kommen 64.500 Euro „geschenkt" – allein durch den Zinseszinseffekt. Und je länger die Laufzeit, desto krasser das Verhältnis: Bei 40 Jahren stammen 151.000 von 199.000 Euro aus Zinserträgen. Deine Einzahlungen sind dann nur noch ein Viertel des Ergebnisses.
+Der entscheidende Blick auf die letzte Spalte: Bei 30 Jahren und 6 % kommen 64.500 € „geschenkt" – allein durch den Zinseszinseffekt. Und je länger die Laufzeit, desto krasser das Verhältnis: Bei 40 Jahren stammen 151.000 von 199.000 € aus Zinserträgen. Deine Einzahlungen sind dann nur noch ein Viertel des Ergebnisses.
 
-Umgekehrt zeigt die Tabelle die Kosten des Zögerns: Wer 10 Jahre wartet, verliert bei 6 Prozent fast 54.000 Euro Endwert – ohne einen Cent weniger eingezahlt zu haben. Der teuerste Fehler im Vermögensaufbau ist nicht die falsche Anlage, sondern der späte Start.
+Umgekehrt zeigt die Tabelle die Kosten des Zögerns: Wer 10 Jahre wartet, verliert bei 6 % fast 54.000 € Endwert – ohne einen Cent weniger eingezahlt zu haben. Der teuerste Fehler im Vermögensaufbau ist nicht die falsche Anlage, sondern der späte Start.
 
 ## Der 72er-Trick:<br>Verdopplung im Kopf rechnen
 
 Die 72er-Regel ist die einfachste Finanzformel der Welt: **Teile 72 durch den Zinssatz. Das Ergebnis ist die Anzahl der Jahre, bis sich dein Geld verdoppelt.**
 
-- Bei 3 Prozent: 72 ÷ 3 = 24 Jahre
-- Bei 6 Prozent: 72 ÷ 6 = 12 Jahre
-- Bei 8 Prozent: 72 ÷ 8 = 9 Jahre
+- Bei 3 %: 72 ÷ 3 = 24 Jahre
+- Bei 6 %: 72 ÷ 6 = 12 Jahre
+- Bei 8 %: 72 ÷ 8 = 9 Jahre
 
-Der Trick funktioniert erstaunlich genau und macht den Zinseszins im Kopf greifbar: 1.000 Euro bei 6 Prozent sind nach 12 Jahren 2.000, nach 24 Jahren 4.000, nach 36 Jahren 8.000 Euro – ohne weitere Einzahlungen. Wer das verinnerlicht hat, versteht sofort, warum der Aktienmarkt langfristig so mächtig ist.
+Der Trick funktioniert erstaunlich genau und macht den Zinseszins im Kopf greifbar: 1.000 € bei 6 % sind nach 12 Jahren 2.000, nach 24 Jahren 4.000, nach 36 Jahren 8.000 € – ohne weitere Einzahlungen. Wer das verinnerlicht hat, versteht sofort, warum der Aktienmarkt langfristig so mächtig ist.
 
 ## Warum die Zeit wichtiger ist als die Rate
 
 Der häufigste Denkfehler beim Sparen: „Ich habe nicht genug Geld zum Sparen." Die Wahrheit ist: Die Zeit kompensiert eine kleine Rate. Die Rate kann die verlorene Zeit nicht kompensieren.
 
-Ein Vergleich: Person A spart ab 25 Jahren 100 Euro monatlich bis 65 (40 Jahre) → rund 199.000 Euro bei 6 Prozent. Person B spart ab 35 Jahren 200 Euro monatlich bis 65 (30 Jahre) → rund 100.500 Euro. Person B zahlt doppelt so viel ein – und hat trotzdem nur halb so viel. Die 10 Jahre Vorsprung von Person A sind mehr wert als die doppelte Rate.
+Ein Vergleich: Person A spart ab 25 Jahren 100 € monatlich bis 65 (40 Jahre) → rund 199.000 € bei 6 %. Person B spart ab 35 Jahren 200 € monatlich bis 65 (30 Jahre) → rund 100.500 €. Person B zahlt doppelt so viel ein – und hat trotzdem nur halb so viel. Die 10 Jahre Vorsprung von Person A sind mehr wert als die doppelte Rate.
 
 Die Konsequenz für dich: Fang heute an, auch mit kleinen Beträgen. Der [100-Euro-Plan](../../posts/monatsbudget-erstellen-schritt-fuer-schritt/) zeigt, wie wenig es braucht – und der [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) ist das Instrument, das den Zinseszins über den Aktienmarkt realisiert. Ein Tagesgeldkonto allein erreicht die Rendite nicht.
 
@@ -104,7 +104,7 @@ Die Konsequenz für dich: Fang heute an, auch mit kleinen Beträgen. Der [100-Eu
 Die Theorie ist klar –   
 die Umsetzung entscheidend. Der Zinseszinseffekt entfaltet seine volle Kraft, wenn drei Bedingungen erfüllt sind:
 
-**1. Rendite über der Inflation:** Wer nur auf dem Sparbuch parkt, verliert real Geld. Ein [Welt-ETF](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) hat historisch 6 bis 8 Prozent pro Jahr geliefert – deutlich über der Inflation.
+**1. Rendite über der Inflation:** Wer nur auf dem Sparbuch parkt, verliert real Geld. Ein [Welt-ETF](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) hat historisch 6 bis 8 % pro Jahr geliefert – deutlich über der Inflation.
 
 **2. Thesaurierung statt Ausschüttung:** Bei thesaurierenden ETFs werden die Erträge automatisch reinvestiert –   
 der Zinseszins läuft von selbst. Bei ausschüttenden Fonds musst du die Erträge manuell wieder anlegen, sonst bleibt der Effekt liegen.
@@ -118,10 +118,10 @@ dann ist er unabhängig von Stimmung und Disziplin.
 Deine Zinsen werden dem Kapital zugeschlagen und werfen im nächsten Jahr selbst Zinsen ab. Dadurch wächst das Geld exponentiell statt linear – je länger die Laufzeit, desto stärker der Effekt.
 
 **Welche Rendite kann ich realistisch erwarten?**
-Ein breit gestreuter Welt-ETF hat historisch 6 bis 8 Prozent pro Jahr geliefert (über lange Zeiträume). [Tagesgeld und](../../posts/tagesgeld-zinsen-sicher-anle/) Festgeld liegen bei 2 bis 3 Prozent – der Zinseszins fällt dort entsprechend kleiner aus.
+Ein breit gestreuter Welt-ETF hat historisch 6 bis 8 % pro Jahr geliefert (über lange Zeiträume). [Tagesgeld und](../../posts/tagesgeld-zinsen-sicher-anle/) Festgeld liegen bei 2 bis 3 % – der Zinseszins fällt dort entsprechend kleiner aus.
 
 **Wie viel muss ich sparen, um Millionär zu werden?**
-Bei 7 Prozent Rendite: 250 Euro monatlich über 45 Jahre ≈ 1 Million Euro. 500 Euro monatlich über 35 Jahre ≈ 1 Million Euro. Der frühe Start ist der entscheidende Faktor – die [Sparquote](../../posts/sparquote-berechnen-und-steigern/) zeigt, wie du hinkommst.
+Bei 7 % Rendite: 250 € monatlich über 45 Jahre ≈ 1 Million Euro. 500 € monatlich über 35 Jahre ≈ 1 Million Euro. Der frühe Start ist der entscheidende Faktor – die [Sparquote](../../posts/sparquote-berechnen-und-steigern/) zeigt, wie du hinkommst.
 
 **Ist der Zinseszins garantiert?**
 Nein – die Rendite von Aktien ist keine Garantie, sondern eine historische Erwartung. Kursschwankungen und Krisen gehören dazu. Der Zinseszins wirkt über lange Zeiträume – wer kurzfristig denkt, profitiert nicht davon.

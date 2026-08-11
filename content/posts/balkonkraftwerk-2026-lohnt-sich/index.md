@@ -54,21 +54,21 @@ Die Preise für Solartechnik sind im Jahr 2026 auf einem historischen Tiefstand.
 
 Die Anmeldung beim Marktstammdatenregister kostet dich keinen Cent. Der Netzbetreiber darf für den Zählertausch ebenfalls keine Gebühren verlangen. Manche Kommunen erheben jedoch kleine Gebühren für die Montage an der Hausfassade. Prüfe dies vorab bei deiner örtlichen Baubehörde.
 
-Ein 800-Watt-Set bei Süd-Ausrichtung liefert in Deutschland beachtliche Werte. Du rechnest mit 600 bis 800 kWh pro Jahr. Bei einem Strompreis von 30 Cent sparst du jährlich bis zu 240 Euro. Eine Ost-West-Anlage liefert zwar weniger Gesamtertrag, verteilt diesen aber besser über den Tag.
+Ein 800-Watt-Set bei Süd-Ausrichtung liefert in Deutschland beachtliche Werte. Du rechnest mit 600 bis 800 kWh pro Jahr. Bei einem Strompreis von 30 Cent sparst du jährlich bis zu 240 €. Eine Ost-West-Anlage liefert zwar weniger Gesamtertrag, verteilt diesen aber besser über den Tag.
 
 ## Amortisationsrechnung mit echtem Ertrag
 
-Wann hast du dein Geld wieder auf dem Konto? Ein Rechenbeispiel zeigt die Dynamik. Wir nehmen ein Standard-Set für 500 Euro mit zwei Modulen und Südausrichtung an. Die Anlage produziert jährlich rund 700 kWh Strom für dich.
+Wann hast du dein Geld wieder auf dem Konto? Ein Rechenbeispiel zeigt die Dynamik. Wir nehmen ein Standard-Set für 500 € mit zwei Modulen und Südausrichtung an. Die Anlage produziert jährlich rund 700 kWh Strom für dich.
 
-Du verbrauchst etwa 70 Prozent dieses Stroms direkt selbst im Haushalt. Das entspricht 490 kWh, die du nicht teuer einkaufen musst. Bei 30 Cent pro Kilowattstunde sparst du so 147 Euro im Jahr. Den Rest speist du für etwa 8 Cent Vergütung ein und erhältst weitere 17 Euro.
+Du verbrauchst etwa 70 % dieses Stroms direkt selbst im Haushalt. Das entspricht 490 kWh, die du nicht teuer einkaufen musst. Bei 30 Cent pro Kilowattstunde sparst du so 147 € im Jahr. Den Rest speist du für etwa 8 Cent Vergütung ein und erhältst weitere 17 €.
 
-Deine jährliche Gesamtersparnis beläuft sich somit auf 164 Euro. Dein Balkonkraftwerk 2026 hat sich nach rund 3 Jahren vollständig bezahlt. Danach produziert die Anlage für mindestens 20 Jahre reinen Gewinn für dich. Das entspricht einer jährlichen Rendite von über 15 Prozent.
+Deine jährliche Gesamtersparnis beläuft sich somit auf 164 €. Dein Balkonkraftwerk 2026 hat sich nach rund 3 Jahren vollständig bezahlt. Danach produziert die Anlage für mindestens 20 Jahre reinen Gewinn für dich. Das entspricht einer jährlichen Rendite von über 15 %.
 
-Der Erfolg hängt jedoch massiv von der Verschattung ab. Ein Nord-Balkon senkt die Ersparnis oft auf unter 100 Euro pro Jahr. Dann dauert es 6 bis 8 Jahre bis zum Gewinn. Beobachte vor dem Kauf genau, wie viele Stunden die Sonne ungestört auf deine Fläche scheint.
+Der Erfolg hängt jedoch massiv von der Verschattung ab. Ein Nord-Balkon senkt die Ersparnis oft auf unter 100 € pro Jahr. Dann dauert es 6 bis 8 Jahre bis zum Gewinn. Beobachte vor dem Kauf genau, wie viele Stunden die Sonne ungestört auf deine Fläche scheint.
 
 ## Förderung von Bund und Ländern
 
-Der Staat unterstützt dich indirekt beim Kauf deiner Anlage. Seit 2023 zahlst du beim Erwerb von Solarmodulen keine Mehrwertsteuer. Das spart dir sofort 19 Prozent gegenüber anderen Elektronikprodukten. Viele Städte legen zusätzlich attraktive Förderprogramme mit Zuschüssen von bis zu 500 Euro auf.
+Der Staat unterstützt dich indirekt beim Kauf deiner Anlage. Seit 2023 zahlst du beim Erwerb von Solarmodulen keine Mehrwertsteuer. Das spart dir sofort 19 % gegenüber anderen Elektronikprodukten. Viele Städte legen zusätzlich attraktive Förderprogramme mit Zuschüssen von bis zu 500 € auf.
 
 Frage gezielt bei deiner Stadtverwaltung oder deinem Landkreis nach Fördermitteln. Oft sind diese Töpfe zu Jahresbeginn prall gefüllt und später schnell leer. Die Beantragung ist meist unbürokratisch über ein Online-Formular möglich. So senkst du deine Anschaffungskosten noch weiter.
 
@@ -92,7 +92,7 @@ Die Position deiner Module bestimmt deine Rendite maßgeblich. Eine Südfassade 
 
 Anlagen mit Ost-West-Ausrichtung produzieren Strom, wenn du ihn meist brauchst. Morgens für den Kaffee und abends für das Kochen liefert die Sonne Energie. Auf Flachdächern oder im Garten kannst du die Module optimal aufständern. So erreichst du oft die besten Ergebnisse über das ganze Jahr hinweg.
 
-Vermeide Schatten um jeden Preis. Schon ein kleiner Ast oder ein Geländerstab senken die Leistung des ganzen Moduls. Ein Schatten auf nur 10 Prozent der Fläche kann die Ausbeute halbieren. Wähle den Platz mit der längsten direkten Sonneneinstrahlung für den besten Ertrag.
+Vermeide Schatten um jeden Preis. Schon ein kleiner Ast oder ein Geländerstab senken die Leistung des ganzen Moduls. Ein Schatten auf nur 10 % der Fläche kann die Ausbeute halbieren. Wähle den Platz mit der längsten direkten Sonneneinstrahlung für den besten Ertrag.
 
 ## Typische Fehler beim Kauf
 
@@ -106,9 +106,9 @@ Kombiniere deine Anlage mit einem [günstigen Stromtarif]( 0  So reduzierst du d
 
 ## Mit Speicher:<br>Lohnt sich der Mini-Akku?
 
-Immer mehr Systeme bieten kompakte Akkus für den Balkon an. Du speicherst die Energie mittags und verbrauchst sie in den Abendstunden. Das erhöht deinen Eigenverbrauch theoretisch auf bis zu 90 Prozent. Doch die wirtschaftliche Rechnung erfordert einen genauen Blick auf die Kosten.
+Immer mehr Systeme bieten kompakte Akkus für den Balkon an. Du speicherst die Energie mittags und verbrauchst sie in den Abendstunden. Das erhöht deinen Eigenverbrauch theoretisch auf bis zu 90 %. Doch die wirtschaftliche Rechnung erfordert einen genauen Blick auf die Kosten.
 
-Ein Speicher mit 1 kWh Kapazität kostet aktuell zwischen 400 € und 800 €. Er spart dir pro Tag etwa 30 Cent zusätzlich ein. Im Jahr summiert sich das auf rund 100 Euro Ersparnis. Damit amortisiert sich der Akku erst nach 5 bis 8 Jahren.
+Ein Speicher mit 1 kWh Kapazität kostet aktuell zwischen 400 € und 800 €. Er spart dir pro Tag etwa 30 Cent zusätzlich ein. Im Jahr summiert sich das auf rund 100 € Ersparnis. Damit amortisiert sich der Akku erst nach 5 bis 8 Jahren.
 
 Ein Speicher lohnt sich für dich, wenn du tagsüber kaum Strom verbrauchst. Falls du viel im Homeoffice arbeitest, nutzt du den Strom ohnehin direkt. Dann ist eine Anlage ohne Akku die wirtschaftlichere Wahl. Du kannst viele Speichersysteme später problemlos nachrüsten, wenn die Preise weiter fallen.
 
@@ -118,7 +118,7 @@ Ein Speicher lohnt sich für dich, wenn du tagsüber kaum Strom verbrauchst. Fal
 Nein. Du darfst ein zertifiziertes Balkonkraftwerk selbst an deine Steckdose anschließen. Der Gesetzgeber erlaubt die Nutzung einer normalen Schuko-Steckdose. Ein teurer Umbau durch einen Fachbetrieb ist für den Betrieb nicht vorgeschrieben.
 
 **Was bringt ein 800-Watt-Modul im Jahr?**
-Ein hochwertiges 800-Watt-Set erzeugt etwa 600 bis 800 kWh sauberen Strom. Damit sparst du bei guter Eigennutzung etwa 180 bis 240 Euro im Jahr ein. Die Anschaffungskosten hast du so extrem schnell wieder eingespielt.
+Ein hochwertiges 800-Watt-Set erzeugt etwa 600 bis 800 kWh sauberen Strom. Damit sparst du bei guter Eigennutzung etwa 180 bis 240 € im Jahr ein. Die Anschaffungskosten hast du so extrem schnell wieder eingespielt.
 
 **Ist die Anmeldung Pflicht?**
 Ja, du musst die Anlage im Marktstammdatenregister eintragen. Dieser Schritt ist für dich kostenlos und rechtlich zwingend erforderlich. Es dauert nur wenige Minuten und sichert dir den legalen Betrieb deines Kraftwerks.

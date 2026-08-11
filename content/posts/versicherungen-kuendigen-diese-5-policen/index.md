@@ -17,7 +17,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
-Der durchschnittliche deutsche Haushalt gibt rund 2.900 Euro pro Jahr für Versicherungen aus – und ein Teil davon ist rausgeworfenes Geld. Viele Policen wurden vor Jahren abgeschlossen, doppeln sich mit anderen Verträgen oder decken Risiken ab, die es gar nicht wert sind, versichert zu werden.
+Der durchschnittliche deutsche Haushalt gibt rund 2.900 € pro Jahr für Versicherungen aus – und ein Teil davon ist rausgeworfenes Geld. Viele Policen wurden vor Jahren abgeschlossen, doppeln sich mit anderen Verträgen oder decken Risiken ab, die es gar nicht wert sind, versichert zu werden.
 
 Die gute Nachricht: Mit einer systematischen Bestandsaufnahme erkennst du die überflüssigen Policen – und kündigst sie. In diesem Artikel zeige ich dir die 5 häufigsten Kandidaten und die 4 Policen, die bleiben sollten.
 
@@ -31,9 +31,9 @@ Danach sortierst du in drei Stapel: Muss bleiben, kann weg, muss geprüft werden
 
 ## Kündigen:<br>1. Handy- und Elektronikversicherung
 
-Die Versicherung für Smartphone, Tablet oder Laptop klingt praktisch – ist aber meist ein schlechtes Geschäft. Die Prämien liegen bei 5 bis 15 Euro pro Monat, die Selbstbeteiligung bei 50 bis 150 Euro pro Schadenfall, und viele Geräte sind über die Hausratversicherung oder die Herstellergarantie bereits teilweise abgedeckt.
+Die Versicherung für Smartphone, Tablet oder Laptop klingt praktisch – ist aber meist ein schlechtes Geschäft. Die Prämien liegen bei 5 bis 15 € pro Monat, die Selbstbeteiligung bei 50 bis 150 € pro Schadenfall, und viele Geräte sind über die Hausratversicherung oder die Herstellergarantie bereits teilweise abgedeckt.
 
-Die Rechnung: Wer 3 Jahre lang 8 Euro im Monat zahlt, hat 288 Euro eingezahlt – und hat im besten Fall einmal 200 Euro Ersatz bekommen. Für günstige Geräte (unter 300 Euro) lohnt sich eine Versicherung fast nie. Mein Tipp: Für Neugeräte die Herstellergarantie nutzen, eine Hülle kaufen und den Rest selbst tragen – im Schnitt ist das deutlich günstiger.
+Die Rechnung: Wer 3 Jahre lang 8 € im Monat zahlt, hat 288 € eingezahlt – und hat im besten Fall einmal 200 € Ersatz bekommen. Für günstige Geräte (unter 300 €) lohnt sich eine Versicherung fast nie. Mein Tipp: Für Neugeräte die Herstellergarantie nutzen, eine Hülle kaufen und den Rest selbst tragen – im Schnitt ist das deutlich günstiger.
 
 ## Kündigen:<br>2. Reisegepäckversicherung
 
@@ -50,13 +50,13 @@ die günstigere behalten, die teurere kündigen. Achtung: Erst kündigen, wenn d
 
 ## Kündigen:<br>4. Kleinst-Lebensversicherungen und Sterbegeld-Policen
 
-Kleinst-Lebensversicherungen mit 5.000 bis 15.000 Euro Todesfallsumme stammen oft aus Zeiten, als solche Policen als „Sparvertrag" verkauft wurden. Heute sind sie meist teuer, intransparent und decken ein Risiko ab, das der Bedarf nicht mehr hergibt. Die Hinterbliebenen brauchen selten eine 10.000-Euro-Police, wenn der [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) und die eigene Vorsorge stehen.
+Kleinst-Lebensversicherungen mit 5.000 bis 15.000 € Todesfallsumme stammen oft aus Zeiten, als solche Policen als „Sparvertrag" verkauft wurden. Heute sind sie meist teuer, intransparent und decken ein Risiko ab, das der Bedarf nicht mehr hergibt. Die Hinterbliebenen brauchen selten eine 10.000-Euro-Police, wenn der [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) und die eigene Vorsorge stehen.
 
 Prüfe den Rückkaufswert: Viele Policen haben nach Jahren eine garantierte Leistung, die unter den eingezahlten Beiträgen liegt. Der Rückkauf kann trotzdem sinnvoll sein, wenn das Geld anderweitig besser arbeitet – zum Beispiel in einem [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/). Lass dich bei Altverträgen beraten, die Kündigung kann steuerliche Folgen haben.
 
 ## Kündigen:<br>5. Kfz-Schutzbrief und unnötige Zusatzbausteine
 
-Der Kfz-Schutzbrief (Pannenhilfe, Abschleppen, Mietwagen bei Panne) kostet 20 bis 60 Euro pro Jahr und ist oft im Kfz-Vertrag „mit drin". Viele Fahrer:innen haben ihn doppelt – über den ADAC, die Kreditkarte oder den Autohersteller. Prüfe, was du schon hast, bevor du den Baustein weiterzahlst.
+Der Kfz-Schutzbrief (Pannenhilfe, Abschleppen, Mietwagen bei Panne) kostet 20 bis 60 € pro Jahr und ist oft im Kfz-Vertrag „mit drin". Viele Fahrer:innen haben ihn doppelt – über den ADAC, die Kreditkarte oder den Autohersteller. Prüfe, was du schon hast, bevor du den Baustein weiterzahlst.
 
 Auch andere Zusatzbausteine in der [Kfz-Versicherung](../../posts/kfz-versicherung-wechseln/) lohnen sich oft nicht: Fahrerschutz-Versicherung mit kleinen Summen, Gepäckversicherung oder Mallorca-Police (wenn du ohnehin keine Auslandsfahrten machst). Der [Kfz-Vergleich](../../posts/kfz-versicherung-wechseln/) zeigt, wie viel du durch das Weglassen überflüssiger Bausteine sparst.
 
@@ -64,9 +64,9 @@ Auch andere Zusatzbausteine in der [Kfz-Versicherung](../../posts/kfz-versicheru
 
 Nach dem Ausmisten bleibt das Fundament – diese 4 Policen sind für fast jeden Haushalt wichtig:
 
-**1. Privathaftpflicht** (30 bis 60 Euro im Jahr): Deckt Personen- und Sachschäden, die du anderen zufügst. Die wichtigste Police überhaupt – [hier erklärt](../../posts/privathaftpflicht-warum-pflicht-kosten/).
+**1. Privathaftpflicht** (30 bis 60 € im Jahr): Deckt Personen- und Sachschäden, die du anderen zufügst. Die wichtigste Police überhaupt – [hier erklärt](../../posts/privathaftpflicht-warum-pflicht-kosten/).
 
-**2. Hausratversicherung** (60 bis 150 Euro im Jahr): Schützt deinen Hausrat bei Feuer, Wasser, Einbruch. Für Mieter und Eigentümer gleichermaßen sinnvoll – [hier erklärt](../../posts/hausratversicherung-wer-braucht-leistung/).
+**2. Hausratversicherung** (60 bis 150 € im Jahr): Schützt deinen Hausrat bei Feuer, Wasser, Einbruch. Für Mieter und Eigentümer gleichermaßen sinnvoll – [hier erklärt](../../posts/hausratversicherung-wer-braucht-leistung/).
 
 **3. Kfz-Haftpflicht** (Pflicht): Deckt Schäden, die du mit dem Auto verursachst. Vollkasko nur bei neuen, teuren Autos sinnvoll.
 
@@ -100,7 +100,7 @@ Nur die Kfz-Haftpflicht ist gesetzlich Pflicht. Dazu kommen für fast alle sinnv
 Schriftlich mit Vertragsnummer und Kündigungsfrist – per E-Mail (mit Bestätigung) oder Einschreiben. Nach Beitragserhöhungen gilt ein Sonderkündigungsrecht mit verkürzter Frist.
 
 **Was bringt ein Versicherungs-Check?**
-Ein systematischer Check deckt doppelte, überflüssige oder zu teure Policen auf – realistisch sparen Haushalte 100 bis 400 Euro pro Jahr, ohne den Schutz zu verschlechtern.
+Ein systematischer Check deckt doppelte, überflüssige oder zu teure Policen auf – realistisch sparen Haushalte 100 bis 400 € pro Jahr, ohne den Schutz zu verschlechtern.
 
 Der Versicherungs-Check ist Teil eines soliden Finanz-Fundaments: erst [Haftpflicht und Hausrat](../../posts/privathaftpflicht-warum-pflicht-kosten/) klären, dann [überflüssige Policen kündigen](../../posts/versicherungen-kuendigen-diese-5-policen/), und das gesparte Geld in den [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) oder [Vermögensaufbau](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) stecken. Alle Versicherungsthemen: [Ratgeber Versicherungen](../../pillar/versicherungen/).
 
