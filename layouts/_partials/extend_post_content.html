@@ -56,8 +56,10 @@
       <span style="display:block; position:relative;">
         {{- if $rCover -}}
           <picture>
-            <source type="image/avif" srcset="{{ partial "asset_url.html" (printf "%s/avif/%s.avif" $rDir $rBase) }} 1x">
-            <source type="image/webp" srcset="{{ partial "asset_url.html" (printf "%s/webp/%s.webp" $rDir $rBase) }} 1x">
+            {{- $rAvif := printf "%s/avif/%s.avif" $rDir $rBase -}}
+            {{- $rWebp := printf "%s/webp/%s.webp" $rDir $rBase -}}
+            {{- if os.FileExists (path.Join "static" $rAvif) }}<source type="image/avif" srcset="{{ partial "asset_url.html" $rAvif }} 1x">{{ end }}
+            {{- if os.FileExists (path.Join "static" $rWebp) }}<source type="image/webp" srcset="{{ partial "asset_url.html" $rWebp }} 1x">{{ end }}
             <img loading="lazy" src="{{ partial "asset_url.html" (printf "%s/620/%s" $rDir $rFile) }}"
                  alt="{{ .Params.cover.alt | default .Title | plainify }}"
                  width="620" height="930"

@@ -226,6 +226,12 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (8):** Cover-404-Fix: AVIF-<source>-Elemente in cover.html +
+  extend_post_content.html werden nur noch emittiert, wenn die Datei echt
+  existiert (os.FileExists-Gate). Grund: lokal ohne pillow-avif-plugin
+  geborenes Cover referenzierte nie erzeugte AVIFs → 404 auf Karte/Artikel.
+  check_covers.py (9-Varianten-Vertrag) bleibt Suspender; CI erzeugt AVIF
+  vollständig (pillow-avif-plugin im Engine-Step vorhanden).
 - **11.08.2026 (7):** Zielredaktions-Erweiterung Lektorat (Frank-Auftrag):
   L7 Nominalstil-Radar, L8 Weichmacher-Dichte, L9 Satzanfangs-Echo,
   L10 Duden-Zahlenschreibweise (Auto, 13 Funde im Archiv geheilt),
