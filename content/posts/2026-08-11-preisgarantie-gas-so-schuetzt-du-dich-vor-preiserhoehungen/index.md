@@ -2,7 +2,7 @@
 title: "Preisgarantie Gas: So schützt du dich vor Preiserhöhungen"
 description: Sichere dir jetzt eine Preisgarantie Gas und vermeide teure Überraschungen. Mit einem Check24 Gasvergleich effektiv bei der Gasrechnung sparen.
 date: 2026-08-11T09:39:07Z
-draft: false
+draft: true
 tags: []
 categories: ["Ratgeber"]
 pillar: "konto-karten"
