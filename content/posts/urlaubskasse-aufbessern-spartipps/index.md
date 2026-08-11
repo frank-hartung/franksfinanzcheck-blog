@@ -61,7 +61,7 @@ Eine Auslandskrankenversicherung ist günstig und wichtig. Zusatzpakete wie Reis
 - Ausflüge im Voraus planen, um Zeit und Geld zu sparen
 - Reisekasse statt Karte, um den Überblick zu behalten
 
-## Die 7 Tipps auf einen Blick
+## Die sieben Tipps auf einen Blick
 
 - [ ] Reiseziel und Termine flexibel? → Nebensaison prüfen
 - [ ] Pauschalreise? → Mehrere Anbieter vergleichen
@@ -76,7 +76,7 @@ Eine Auslandskrankenversicherung ist günstig und wichtig. Zusatzpakete wie Reis
 Faustregel: Pauschalreisen in der Hauptsaison 3–6 Monate vorher, Flüge 2–3 Monate vorher, Last-Minute-Angebote 2–4 Wochen vor Abreise. Wer flexibel ist, bucht last minute.
 
 ### Wie viel kann ich realistisch sparen?
-Wer alle 7 Tipps umsetzt, spart erfahrungsgemäß 15 bis 30 % der Reisekosten – bei 2.000 € Budget sind das 300 bis 600 €.
+Wer alle sieben Tipps umsetzt, spart erfahrungsgemäß 15 bis 30 % der Reisekosten – bei 2.000 € Budget sind das 300 bis 600 €.
 
 ### Lohnt sich eine Reiserücktrittsversicherung?
 Bei teuren, früh gebuchten Reisen ja – vor allem bei festen Terminen oder wenn die Familie mitreist. Prüfe vorher, ob deine Kreditkarte schon eine Reiseversicherung enthält. Informiere dich im [Versicherungsvergleich](/go/mietwagen/) über passende Versicherungsmöglichkeiten.

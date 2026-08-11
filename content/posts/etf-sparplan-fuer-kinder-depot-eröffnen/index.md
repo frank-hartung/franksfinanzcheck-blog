@@ -36,7 +36,7 @@ Ein Beispiel: 50 € monatlich ab Geburt, 6 % Rendite, bis zum 18. Geburtstag:
 
 Dazu kommt der pädagogische Effekt: Ein Depot, das das Kind ab dem Teenager-Alter mitverfolgen darf, lehrt mehr über Geld als jedes Buch. Viele Banken bieten dafür kindgerechte Apps mit Sparzielen und Übersichten.
 
-## Die 3 Wege:<br>Sparbuch, Banksparplan, ETF
+## Die drei Wege:<br>Sparbuch, Banksparplan, ETF
 
 Die Wahl des Instruments entscheidet über das Ergebnis. Der Vergleich für 50 € monatlich über 18 Jahre:
 

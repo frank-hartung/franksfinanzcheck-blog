@@ -40,7 +40,7 @@ Die Reserve gehört **nicht** aufs Girokonto und nicht in Aktien. Ideal ist ein 
 - Meist kostenlos, mit inzwischen wieder attraktiven Zinsen.
 - Getrennt vom Alltagskonto – die Versuchung ist geringer.
 
-## In 6 Schritten zum Notgroschen
+## In sechs Schritten zum Notgroschen
 
 1. **Monatsausgaben berechnen:** alle Fixkosten + Lebensmittel + Puffer zusammenrechnen.
 2. **Ziel setzen:** 3 × Monatsausgaben für den Start – das ist realistisch und reicht meist.

@@ -19,6 +19,18 @@
 #        -> REPORT (nicht auto-fix); mit --ai formuliert der Lektor um
 #        (4-fach-Verifikations-Gate wie dash_guard: URL/Laenge/MD/sinnig)
 #    L6  Stale-Jahre: „Stand: 2023"/„(2024)" neben Jahreswechsel-Flag  -> Report
+#    L7  NOMINALSTIL-RADAR: >4 Behoerden-Nomen (-ung/-heit/…) je Absatz -> Report
+#    L8  WEICHMACHER-DICHTE: >6 Konjunktive (könnte/sollte/müsste) -> Report
+#    L9  SATZANFANGS-ECHO: gleiches Wort startet 3+ Saetze eines Absatzes -> Report
+#    L10 ZAHLENSCHREIBWEISE (Duden): 2-12 ausgeschrieben vor Zaehlwoertern
+#        (3 Tipps -> drei Tipps) – Auto-Fix; NIE vor %, €, Euro, Jahren
+#    L11 WERBE-INTENSIVEL entschaerft (brutal guenstig -> besonders guenstig,
+#        sensationell -> beachtlich, mega- -> sehr …) – Auto-Fix Kanon
+#    L12 LONGSATZ-ALARM: >35 Woerter -> Report
+#
+#  SABOTAGE-SCHUTZ (neu): SELFTEST mit 12 eingefrorenen Lektorats-Faellen
+#  (inkl. Negativ-Fallen „darf unangetastet bleiben") laeuft vor JEDEM
+#  Einsatz; Abweichung -> Exit 2, keine Datei wird angefasst.
 #
 #  SCHUTZZONEN (bewahrte Familien-Regeln): Front-Matter, URLs, Code,
 #  Hashtags, Woerterbuecher (z. B. buchstabierend „der der" wenn…), Zitate,
@@ -26,7 +38,7 @@
 #
 #  Verdrahtet: Engine v2 Phase 2 (hoch in der Sprachgruppe, NACH Unit/
 #  Casing, VOR Profi-Gate). Lektorat in Echtzeit, gleich bei der Geburt.
-#  Idempotent (Convergence-Test 11.08.).
+#  + Wochen-Gesamtsichtung im Archiv (weekly-audit). Idempotent (getestet).
 #
 #  Aufruf:
 #    python3 scripts/lektor_guard.py             # Report (weich)
@@ -96,6 +108,76 @@ PHRASEN = [
 # ---------------- L4: Ausrufezeichen-Kontrolle -----------------------------------
 AUSRUF_MAX = 3  # Lektorats-Regel: mehr als 3 = Werbeton
 
+# ------------- L7-L12: Zielredaktions-Erweiterung (11.08.2026, Abend) -------------
+# L7 NOMINALSTIL-RADAR: Behoerden-Nomen auf -ung/-heit/-keit/… pro Absatz zaehlen,
+#    ueber Schwellenwert -> Report (Verlagsregel: >4 = Kancelli-Stil)
+NOMINAL_PAT = re.compile(
+    r"\b\w{3,}(ung|ungen|heit|heiten|keit|keiten|nis|nisse|enz|tion|tionen)\b", re.I)
+NOMINAL_MAX = 4
+
+# L8 MODALVERB-WEICHMACHER (Konjunktiv-Traegheit) – Dichte pro Artikel
+WEICH_PAT = re.compile(
+    r"\b(könnte(?:n|st|t)?|sollte(?:n|st|t)?|müsste(?:n|st|t)?|"
+    r"dürfte(?:n|st|t)?|möchte(?:n|st|t)?)\b", re.I)
+WEICH_MAX = 6
+
+# L9 SATZANFANGS-ECHO: dasselbe Wort beginnt >= 3 Saetze eines Absatzes
+ANFANG_ECHO_MIN = 3
+
+# L10 ZAHLENSCHREIBWEISE (Duden): Kardinalzahlen 2-12 werden ausgeschrieben.
+# Auto-Fix NUR vor Alltags-Zaehlwoertern – NIE vor %, €, Euro, Jahren usw.
+ZAHL_KANON = {"2": "zwei", "3": "drei", "4": "vier", "5": "fünf", "6": "sechs",
+              "7": "sieben", "8": "acht", "9": "neun", "10": "zehn", "11": "elf",
+              "12": "zwölf"}
+ZAEHL_NOMEN = (r"Tipps?|Tricks?|Schritte?n?|Regeln?|Wege?|Fehler?|Gründe?|Beispiele?n?|"
+               r"Fragen?|Faktoren?|Strategien?|Methoden?|Punkte?n?|Gewohnheiten?|"
+               r"Ideen?|Vorteile?n?|Nachteile?n?|Möglichkeiten?|Geheimnisse?")
+ZAHL_PAT = re.compile(
+    r"(?<![\d.,/€>|\-])\b(1[0-2]|[2-9])\s+(?=(?:" + ZAEHL_NOMEN + r")\b)")
+
+
+def _zahl_repl(m):
+    w = ZAHL_KANON[m.group(1)]
+    j = m.start() - 1
+    while j >= 0 and m.string[j] in " \t":
+        j -= 1
+    if j < 0 or m.string[j] in ".!?":
+        w = w.capitalize()
+    return w + " "
+
+# L11 WERBE-INTENSIVEL (Typen-Sprech) mit Kanon-Entschaerfung:
+INTENSIV = [
+    (re.compile(r"\bbrutal\s+(?=günstig|teuer|schwer|einfach|gut)", re.I), "besonders "),
+    (re.compile(r"\bunfassbar\s+(?=günstig|viel|hoch|niedrig|gut)", re.I), "bemerkenswert "),
+    (re.compile(r"\bsensationell\s+", re.I), "beachtlich "),
+    (re.compile(r"\bmega[- ](?=\w)", re.I), "sehr "),
+    (re.compile(r"\bkrass\s+", re.I), "deutlich "),
+]
+
+# L12 LANGE-SAETZE-ALARM (Verlagsstil: >35 Woerter = Sichtungskandidat)
+SATZ_MAX_WOERTER = 35
+
+# ------------------------------------------------------------
+# SABOTAGE-SCHUTZ (11.08.2026, Abend): eingefrorene Lektorats-Faelle.
+# Laueft vor JEDEM Einsatz; bei Abweichung Exit 2, bevor eine Datei
+# angefasst wird – niemand biegt das Lektorat still kaputt.
+# ------------------------------------------------------------
+SELFTEST = [
+    # (Regel, Zeile, Erwarteter Output oder None = nur Flag, Report-Tag oder "")
+    ("L1", "Wir sparen und und planen weiter.", "Wir sparen und planen weiter.", ""),
+    ("L1rel", "Institute, die die meisten Vorteile bieten.", None, "L1-Relativ"),
+    ("L2", "In der heutigen Zeit sparst du mehr.", "Heute sparst du mehr.", ""),
+    ("L4", "Das ist stark!!!", "Das ist stark!", ""),
+    ("L10", "Mit 3 Tipps sparst du Geld.", "Mit drei Tipps sparst du Geld.", ""),
+    ("L10neg", "Spare 3 Euro pro Woche.", None, ""),          # Euro bleibt Ziffer
+    ("L10neg", "Mit 13 Tipps startest du.", None, ""),        # 13 nicht im Kanon
+    ("L11", "Diese Konten sind brutal günstig.", "Diese Konten sind besonders günstig.", ""),
+    ("L7", "Die Überprüfung der Ermöglichung von Einsparungen und Reduzierungen verbessert die Haushaltsrechnung.", None, "L7-Nominalstil"),
+    ("L8", "Du könntest sparen und müsstest prüfen und solltest wechseln und dürftest warten und möchtest handeln; wir könnten alle, wir müssten alle.", None, "L8-Weichmacher"),
+    ("L9", "Du sparst Geld zur Seite. Du siehst die Kurse regelmässig. Du handelst besonnen und mit Plan.", None, "L9-Satzanfang"),
+    ("L12", "Dies ist ein ausgesprochen langer Satz der mit vielen Woertern und Nebensaetzen und Einschueben und Gedanken und Wendungen und Details und Klaerungen und Beispielen und Hinweisen versehen wurde damit er definitiv weit ueber fuenfunddreissig Woerter kommt ohne je zu enden.", None, "L12-Longsatz"),
+]
+
 # ---------------- L5/L3 Wortlisten ------------------------------------------------
 DU_SET = {"du", "dein", "deine", "deiner", "deinen", "deinem", "deinem", "deines", "dich", "dir", "deinen"}
 SIE_SET = {"Sie", "Ihnen", "Ihre", "Ihrem", "Ihrer"}
@@ -120,6 +202,32 @@ def unmask(line, store):
     for k, v in store.items():
         line = line.replace(k, v)
     return line
+
+
+def fresh_stats() -> dict:
+    return {"L1": 0, "L1rel": 0, "L2": 0, "L3": 0, "L4": 0, "L5echo": 0, "L5ki": 0,
+            "L7": 0, "L8n": 0, "L8meldung": False, "L9": 0, "L10": 0, "L11": 0, "L12": 0}
+
+
+def run_selftest() -> list[str]:
+    """Sabotage-Schutz: eingefrorene Lektorats-Faelle gegen live-Logik."""
+    fehler = []
+    for i, (regel, zeile, want_out, want_tag) in enumerate(SELFTEST, 1):
+        st = fresh_stats()
+        reps = []
+        masked, store = mask(zeile)
+        out, _ = lektor_line(masked, st, reports=reps, fname="sabotage-selbsttest", line_no=i)
+        out = unmask(out, store)
+        if want_out is not None and out != want_out:
+            fehler.append(f"  Fall {i} [{regel}]: Output falsch → {out[:70]!r}")
+            continue
+        if want_out is None and not want_tag and out != zeile:
+            fehler.append(f"  Fall {i} [{regel}]: darf unveraendert bleiben → {out[:70]!r}")
+        if want_tag:
+            tags = [r[2] for r in reps]
+            if not any(want_tag in t for t in tags):
+                fehler.append(f"  Fall {i} [{regel}]: Report-Tag „{want_tag}“ fehlt (bekommen: {tags})")
+    return fehler
 
 
 # ---------------------------------------------------------- L3 (Person) ----------
@@ -256,7 +364,7 @@ def process(path: Path):
     full_text = path.read_text(encoding="utf-8")
     lines = full_text.split("\n")
     out = []
-    stats = {"L1": 0, "L2": 0, "L3": 0, "L4": 0, "L5echo": 0, "L5ki": 0}
+    stats = fresh_stats()
     reports = []
 
     # Datei-Duktus einmalig (L3-Entscheidung ist filebasiert, nicht zeilenbasiert)
@@ -340,6 +448,54 @@ def lektor_line(line: str, stats, reports=None, fname="", line_no=0, du_dominant
         stats["L4"] += 1
         if reports is not None:
             reports.append((fname, line_no, "L4-Werbeton", line.strip()[:90]))
+    # ----- L7-L12: Zielredaktion (11.08.2026 Abend) -----
+    prose = not line.lstrip().startswith(("-", "*", "|", "#", ">", "!")) and len(line.strip()) >= 36
+    if prose:
+        # L7 Nominalstil-Radar (Report)
+        nom = len(NOMINAL_PAT.findall(line))
+        if nom > NOMINAL_MAX:
+            stats["L7"] += 1
+            if reports is not None:
+                reports.append((fname, line_no, "L7-Nominalstil",
+                                f"{nom} Behörden-Nomen: {line.strip()[:70]}"))
+        # L9 Satzanfangs-Echo (Report) + L12 Longsatz (Report)
+        saetze = [s_.strip() for s_ in re.split(r"(?<=[.!?])\s+", line) if s_.strip()]
+        anfaenge = []
+        for s_ in saetze:
+            mm = re.match(r"^[*>\-\s]*([A-Za-zÄÖÜäöüß]{2,})", s_)
+            if mm:
+                anfaenge.append(mm.group(1).lower())
+            if len(s_.split()) > SATZ_MAX_WOERTER:
+                stats["L12"] += 1
+                if reports is not None:
+                    reports.append((fname, line_no, "L12-Longsatz", s_[:70]))
+        for w_ in set(anfaenge):
+            if anfaenge.count(w_) >= ANFANG_ECHO_MIN:
+                stats["L9"] += 1
+                if reports is not None:
+                    reports.append((fname, line_no, "L9-Satzanfang",
+                                    f"„{w_}“ ×{anfaenge.count(w_)}: {line.strip()[:60]}"))
+                break
+    # L8 Weichmacher-Dichte (Artikel-Ebene, Schwellen-Meldung einmalig)
+    w_n = len(WEICH_PAT.findall(line))
+    if w_n:
+        stats["L8n"] += w_n
+        if stats["L8n"] > WEICH_MAX and not stats.get("L8meldung"):
+            stats["L8meldung"] = True
+            if reports is not None:
+                reports.append((fname, line_no, "L8-Weichmacher",
+                                f"{stats['L8n']}+ Konjunktive – {line.strip()[:60]}"))
+    # L10 Zahlenschreibweise (Auto-Fix, Duden)
+    n10 = len(ZAHL_PAT.findall(line))
+    if n10:
+        stats["L10"] += n10
+        line = ZAHL_PAT.sub(_zahl_repl, line)
+    # L11 Werbe-Intensivierung entschaerfen (Auto-Fix, Kanon)
+    for pat, repl in INTENSIV:
+        nb = len(pat.findall(line))
+        if nb:
+            stats["L11"] += nb
+            line = pat.sub(repl, line)
     # L5 Echo-Report (nur Fliesstext-Zeilen – Listen/Tabellen/Ueberschriften
     # haben Wiederholung per Konstruktion!)
     if line.lstrip().startswith(("-", "*", "|", "#", ">")) or len(line.strip()) < 36:
@@ -377,8 +533,18 @@ def target_files():
 
 
 def main() -> None:
+    # SABOTAGE-SCHUTZ zuerst: Lektorat testet sich selbst (offline),
+    # BEVOR irgendeine Datei angefasst wird.
+    fehler = run_selftest()
+    if fehler:
+        print("🛑 LEKTOR-SELBSTTEST FEHLGESCHLAGEN – Sabotage verhindert.")
+        print("   Kein Lauf, keine Datei angefasst. Bitte lektor_guard.py prüfen:")
+        print("\n".join(fehler))
+        sys.exit(2)
+    print(f"✅ Lektor-Selbsttest: {len(SELFTEST)} Fälle grün.")
     files = target_files()
-    total_fix = {"L1": 0, "L2": 0, "L3": 0, "L4": 0, "L5echo": 0, "L5ki": 0}
+    total_fix = {"L1": 0, "L2": 0, "L3": 0, "L4": 0, "L5echo": 0, "L5ki": 0,
+                 "L7": 0, "L8n": 0, "L9": 0, "L10": 0, "L11": 0, "L12": 0}
     all_reports = []
     touched = 0
     for p in files:
@@ -400,6 +566,12 @@ def main() -> None:
     L.append(f"| L3 Personenkonsistenz | {total_fix['L3']} |")
     L.append(f"| L4 Ausrufezeichen/Grenze | {total_fix['L4']} |")
     L.append(f"| L5 Echo (Report" + ("/KI-gefixt" if USE_AI else "") + f") | {total_fix['L5echo']}/{total_fix['L5ki']} |")
+    L.append(f"| L7 Nominalstil-Radar (Report) | {total_fix['L7']} |")
+    L.append(f"| L8 Weichmacher-Dichte (Report) | {total_fix['L8n']} |")
+    L.append(f"| L9 Satzanfangs-Echo (Report) | {total_fix['L9']} |")
+    L.append(f"| L10 Zahlenschreibweise (Auto) | {total_fix['L10']} |")
+    L.append(f"| L11 Werbe-Intensivel (Auto) | {total_fix['L11']} |")
+    L.append(f"| L12 Longsatz-Alarm (Report) | {total_fix['L12']} |")
     if all_reports:
         L += ["", "## Fundstellen (Auswahl)", ""]
         L += [f"- `{f}` Z.{n}: **{t}** {c[:60]}" for f, n, t, c in all_reports[:20]]

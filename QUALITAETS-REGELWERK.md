@@ -126,7 +126,7 @@ Ausloeser: Artikel „Urlaub mit Kindern" (Beispielrechnung korrekt; dafuer
 der Schutz fuer künftige KI-Halluzinationen, die erfahrungsgemaeß bei
 Geldrechnungen eklatant sind).
 
-### lektor_guard.py – ✒️ Verlags-Lektorat (Zeitungs-/Buchniveau, neu 11.08.)
+### lektor_guard.py – ✒️ Verlags-Lektorat (Zeitungs-/Buchniveau, neu 11.08., Zielredaktion am Abend)
 | Regel | Inhalt | Automatik |
 |---|---|---|
 | L1 | Wortduplikate („das das") | Auto-Fix (sichere Liste) + Komma-Lookbehind bei Artikeln |
@@ -135,6 +135,19 @@ Geldrechnungen eklatant sind).
 | L3 | Personenkonsistenz Sie↔du | **Nur KI** (--ai) mit Grammatik-Gate (du+Verb-muss) |
 | L4 | Ausrufezeichen-Inflation „!!" -> „!"; >3 pro Artikel = Werbeton-Radar | Auto + Report |
 | L5 | Echo-Wörter (>4 Buchstaben 2× im Satz) | Report; KI-veredelt mit --ai + Gates |
+| L6 | Stale-Jahre („Stand: 2023") | Report |
+| L7 | Nominalstil-Radar (>4 Behörden-Nomen -ung/-heit/-keit je Absatz) | Report |
+| L8 | Weichmacher-Dichte (>6 Konjunktive könnte/sollte/müsste je Artikel) | Report |
+| L9 | Satzanfangs-Echo (gleiches Wort startet 3+ Sätze eines Absatzes) | Report |
+| L10 | Zahlenschreibweise Duden (2–12 ausgeschrieben: „3 Tipps"→„drei Tipps"; NIE vor %, €, Euro) | Auto |
+| L11 | Werbe-Intensivel („brutal günstig"→„besonders günstig", „sensationell"→„beachtlich"…) | Auto-Kanon |
+| L12 | Longsatz-Alarm (>35 Wörter) | Report |
+
+**🛡️ Sabotage-Schutz:** 12 eingefrorene Lektorats-Fälle (inkl. Negativ-Fallen wie
+„Spare 3 Euro bleibt Ziffer") prüfen vor jedem Einsatz die Regelmaschine selbst –
+Abweichung = Exit 2, keine Zeile wird geschrieben. **Verdrahtung:** Engine Phase 2
+(`--fix --ai --new-only`, Lektorat bei der Geburt) + **wöchentliche Archiv-
+Gesamtsichtung** im Weekly-Audit (auto-committet). Idempotent (Convergence getestet).
 
 ### brand_guard.py – 🔒 Marken-Lock (höchste Stufe)
 Sperrt in `data/brand_lock.yaml` enthaltene hugo.toml-Bausteine: Willkommens-Titel/Tagline,
@@ -213,6 +226,11 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (7):** Zielredaktions-Erweiterung Lektorat (Frank-Auftrag):
+  L7 Nominalstil-Radar, L8 Weichmacher-Dichte, L9 Satzanfangs-Echo,
+  L10 Duden-Zahlenschreibweise (Auto, 13 Funde im Archiv geheilt),
+  L11 Werbe-Intensivel-Kanon, L12 Longsatz-Alarm + 12-Faelle-Selbsttest
+  (Sabotage-Schutz) + woechentliche Archiv-Sichtung im Weekly-Audit.
 - **11.08.2026 (6):** Route 19 `hunde` (Tarifcheck Hundekrankenversicherung,
   deep=hundekrankenversicherung) nach Frank-Entscheid aufgenommen — Fund via
   UNREGISTERED-deep-Report; Tier-Artikel oben+unten auf /go/hunde/ geroutet.

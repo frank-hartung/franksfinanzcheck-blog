@@ -101,7 +101,7 @@ Die größten Rabatte gibt es für Neukunden – und die besten Zeitpunkte für 
 
 ## Checkliste:<br>Alle Leistungen im Blick
 
-Vor dem Wechsel – diese 5 Punkte auf der Checkliste:
+Vor dem Wechsel – diese fünf Punkte auf der Checkliste:
 
 1. **Verfügbarkeit geprüft:** Tarif an deiner Adresse verfügbar (Breitbandatlas oder Vergleichsportal)?
 2. **Gesamtkosten kalkuliert:** Preis ab Monat 13 eingerechnet (nicht nur der Lockvogel-Preis)?

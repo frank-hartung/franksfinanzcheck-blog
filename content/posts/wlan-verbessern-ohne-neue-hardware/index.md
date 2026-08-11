@@ -19,7 +19,7 @@ social_posted: true
 ---
 Bevor du 100 € für einen neuen Router oder [WLAN-Verstärker](../../posts/wlan-verstaerker-vs-mesh-wlan/) ausgibst, solltest du wissen: Die Hälfte aller WLAN-Probleme lässt sich mit Einstellungen und Tricks lösen – kostenlos. Oft liegt es nicht an der Hardware, sondern an Standort, Frequenzwahl oder veralteter Software.
 
-In diesem Artikel bekommst du 12 Tipps, die dein WLAN sofort spürbar schneller machen. Alles ohne neuen Router, ohne Verstärker, ohne Kabel.
+In diesem Artikel bekommst du zwölf Tipps, die dein WLAN sofort spürbar schneller machen. Alles ohne neuen Router, ohne Verstärker, ohne Kabel.
 
 
 
@@ -119,7 +119,7 @@ Wenn dein Kanal stark belegt ist, kann der Wechsel das Tempo spürbar verbessern
 **Wie weit reicht WLAN durch Wände?**
 Durch eine normale Trockenbauwand etwa 10 bis 15 Meter, durch dicke Betonwände oft nur 3 bis 5 Meter. Der 5-GHz-Band hat kürzere Reichweite als 2,4 GHz – in Altbauten hilft [Mesh](../../posts/wlan-verstaerker-vs-mesh-wlan/) oder DLAN.
 
-Wenn die 12 Tipps nicht reichen, liegt es meist an der Hardware: Dann lohnt der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein [Mesh-System](../../posts/wlan-verstaerker-vs-mesh-wlan/). Und wer generell [schnelleres Internet](../../posts/dns-server-aendern-schnelleres-internet/) will, findet im DNS-Ratgeber den nächsten kostenlosen Hebel. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
+Wenn die zwölf Tipps nicht reichen, liegt es meist an der Hardware: Dann lohnt der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein [Mesh-System](../../posts/wlan-verstaerker-vs-mesh-wlan/). Und wer generell [schnelleres Internet](../../posts/dns-server-aendern-schnelleres-internet/) will, findet im DNS-Ratgeber den nächsten kostenlosen Hebel. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
 👉 **Jetzt den passenden Internet-Tarif finden:** [**→ Jetzt vergleichen bei CHECK24**](/go/dsl/)
 

@@ -54,6 +54,22 @@ jobs:
             git push || { sleep 20; git pull --rebase origin main && git push; }
           fi
 
+      # ---- Audit-Erweiterung 11.08. (Abend): Verlags-Lektorat L1-L12, woechentl. Archiv-Sichtung ----
+      - name: Lektor-Guard (Archiv-Gesamtsichtung, selbstheilend, Selbsttest-Gate)
+        continue-on-error: true
+        run: |
+          python3 scripts/lektor_guard.py --fix || echo "⚠ Lektorat Archiv (nicht kritisch)"
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Lektorat: Bestand sauber."
+          else
+            git commit -m "content: Verlags-Lektorat Archiv-Sichtung (Auto-Regeln L1/L2/L4/L10/L11)"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push || { sleep 20; git pull --rebase origin main && git push; }
+          fi
+
       - name: Audit ausführen (Log wird gespeichert)
         id: audit
         continue-on-error: true   # Wir fangen den Exit-Code selbst ab
