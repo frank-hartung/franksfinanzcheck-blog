@@ -129,6 +129,8 @@ jobs:
           python3 scripts/unit_guard.py --fix --new-only || echo "⚠ Unit-Guard (nicht kritisch)"
           echo "== Emoji-Guard (Marken-Touchpoints + Mojibake-Scanner) =="
           python3 scripts/emoji_guard.py --fix || echo "⚠ Emoji-Guard (nicht kritisch)"
+          echo "== Lektorat (Verlagsniveau: Doppelwoerter, Fuell-Phrasen, Person-Mix, Echo) =="
+          python3 scripts/lektor_guard.py --fix --ai --new-only || echo "⚠ Lektorat (nicht kritisch)"
           echo "== Brand-Guard (Marken-Lock: Willkommenstext/Emojis/Disclaimer unantastbar) =="
           python3 scripts/brand_guard.py --fix || echo "⚠ Brand-Guard (nicht kritisch)"
           echo "== Laengen-Guard PILLAR-SCOPE (Silo-Seiten >= 2.500 Woerter) =="
