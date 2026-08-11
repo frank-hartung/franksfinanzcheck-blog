@@ -39,7 +39,7 @@ Oft verstecken sich weitere Kosten im Detail. Banken berechnen 1 € bis 2 €
 
 Zahlst du im Urlaub außerhalb der Euro-Zone mit Karte? Viele Banken berechnen hierfür 1 % bis 2 % des Umsatzes. Bei einem [Urlaub mit](../../posts/urlaub-mit-kindern-guenstig-spartricks/) 2.000 € Kartenumsatz verlierst du so 20 € bis 40 € ohne Nutzen. Das lässt sich durch die richtige Wahl der Karte leicht verhindern.
 
-Nutze stattdessen eine Kreditkarte ohne Auslandseinsatz-Gebühr. Viele Anbieter für eine **Kreditkarte kostenlos** verzichten heute komplett auf diesen Aufschlag. Im EU-Ausland bleibt das Abheben mit der Girocard oft gebührenfrei. Prüfe die Konditionen deiner Bank dennoch unbedingt vor Reisebeginn.
+Nutze stattdessen eine [Kreditkarte ohne](../../posts/kreditkarte-ohne-jahresgebu/) Auslandseinsatz-Gebühr. Viele Anbieter für eine **Kreditkarte kostenlos** verzichten heute komplett auf diesen Aufschlag. Im EU-Ausland bleibt das Abheben mit der Girocard oft gebührenfrei. Prüfe die Konditionen deiner Bank dennoch unbedingt vor Reisebeginn.
 
 ## Falle 2:<br>Fremdautomaten-Gebühren
 
@@ -102,9 +102,9 @@ Auch Zahlungsdienstleister wie PayPal können Gebühren verursachen. Private Gel
 Viele Direktbanken und Neobanken bieten Karten ohne Auslandseinsatzentgelt an. Achte beim Vergleich gezielt auf diesen Punkt in den Preislisten. Bei vielen modernen Debitkarten gehört dieser Vorteil mittlerweile zum Standard für Reisende.
 
 **Was kostet Geld abheben in der EU?**
-Innerhalb der Euro-Zone zahlst du mit der Girocard an Automaten deines Bankenverbunds meist nichts. Fremdbanken verlangen hingegen oft 3 € bis 6 € Gebühr pro Abhebung. Nutze am besten eine Kreditkarte, die weltweit kostenloses Abheben an allen Automaten garantiert.
+Innerhalb der Euro-Zone zahlst du mit der Girocard an Automaten deines Bankenverbunds meist nichts. Fremdbanken verlangen hingegen oft 3 € bis 6 € Gebühr pro Abhebung. Nutze am besten eine Kreditkarte, die weltweit kostenloses Abheben an allen Automate[n garantiert.
 
-**Wie finde ich ein wirklich kostenloses Konto?**
+**](../../posts/kontowechsel-in-20-minuten-wechselserv/)Wie finde ich ein wirklich kostenloses Konto?**
 Vergleiche die Bedingungen für Kontoführung, Karten und Bargeldbezug genau. Manche Banken fordern einen monatlichen Mindestgeldeingang für die Kostenfreiheit. Die [Übersicht der kostenlosen Konten](../../posts/kostenloses-girokonto-finden/) hilft dir, das passende Modell ohne versteckte Bedingungen zu finden.
 
 Wer seine Bankkosten senkt, schafft die Basis für echten Vermögensaufbau. [Konto wechseln](../../posts/kontowechsel-in-20-minuten-wechselservice/), [Karte prüfen](../../posts/kreditkarte-ohne-jahresgebuehr/) und den [Dispo vermeiden](../../posts/dispozinsen-verstehen-alternativen/) sind die ersten Schritte. Alle weiteren Tipps findest du in unserem [Ratgeber Konto & Karten](../../pillar/konto-karten/).

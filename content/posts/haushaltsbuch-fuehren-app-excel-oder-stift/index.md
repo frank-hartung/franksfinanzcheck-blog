@@ -18,7 +18,7 @@ cover:
 social_posted: true
 ---
 
-Fast 48 % der deutschen Haushalte wissen am Monatsende nicht, wohin ihr Geld verschwand. Das liegt selten an mangelnder Intelligenz. Meistens fehlt einfach eine klare Struktur für die eigenen Finanzen. Wer dauerhaft ein **Haushaltsbuch führen** möchte, macht den ersten Schritt zu echtem Vermögensaufbau.
+Fast 48 % der deutschen Haushalte wissen am Monatsende nicht, wohin ihr Geld verschwand. Das liegt selten an mangelnder Intelligenz. Meistens fehlt einfach eine klare Struktur für die eigenen Finanzen. Wer dauerhaft ein **[Haushaltsbuch führen](../../posts/frugalismus-tricks-alltag-200-euro-spa/)** möchte, macht den ersten Schritt zu echtem Vermögensaufbau.
 
 Ein Haushaltsbuch wirkt wie eine Diät für dein Bankkonto. Du entdeckst versteckte Kostenfresser und unnötige Abos sofort. Mit diesem System wirst du deine **Ausgaben im Blick behalten**. So bleibt am Ende des Monats spürbar mehr Geld für deine Träume übrig.
 
@@ -117,7 +117,7 @@ Die ideale App hängt stark von deinen persönlichen Bedürfnissen ab. Einsteige
 Plane etwa 20 bis 30 Minuten pro Woche für deine Finanzübersicht ein. Das entspricht einer täglichen Routine von nur wenigen Augenblicken. Die Eingabe direkt nach dem Bezahlen dauert meistens nur wenige Sekunden. So bleibt der Aufwand in deinem Alltag fast unbemerkt.
 
 **Was bringt ein Haushaltsbuch wirklich?**
-Es deckt unnötige Ausgabenmuster und teure Abos sofort für dich auf. Die meisten Nutzer finden monatliche Einsparpotenziale zwischen 50 und 200 €. Damit ist es der wichtigste Baustein für deine finanzielle Freiheit. Du gewinnst die volle Kontrolle über deine monatlichen Geldflüsse zurück.
+Es deckt unnötige Ausgabenmuster und teure Abos sofort für dich auf. Die meisten Nutzer finden monatliche Einsparpotenziale zwischen 50 und[ 200 €. Damit ist es](../../posts/7-gewohnheiten-finanzielle-freih/) der wichtigste Baustein für deine finanzielle Freiheit. Du gewinnst die volle Kontrolle über deine monatlichen Geldflüsse zurück.
 
 Kombiniere dein Buch mit der [50-30-20-Regel für deine Budgetverteilung](../../posts/50-30-20-regel-einfach-erklaert/). So baust du in kurzer Zeit ein funktionierendes System auf. Wer seine Ausgaben genau kennt, kann auch seinen [Notgroschen gezielt aufbauen](../../posts/notgroschen-aufbauen-wie-viel-reicht/). Weitere Tipps für den Alltag findest du im [Frugalismus-Ratgeber](../../pillar/frugalismus/).
 

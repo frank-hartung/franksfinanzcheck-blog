@@ -19,7 +19,7 @@ social_posted: true
 ---
 Wenn dein Kind 18 wird, soll es einen möglichst guten Start ins Erwachsenenleben haben – finanziell, versteht sich. Das klassische Sparbuch bringt bei 2 Prozent Zinsen kaum etwas, und die meisten Banksparpläne fressen die Rendite durch Gebühren. Ein ETF-Sparplan ist der moderne Weg: kostengünstig, renditestark und mit Steuervorteilen, die viele Eltern übersehen.
 
-In diesem Artikel zeige ich dir, wie du den ETF-Sparplan für dein Kind Schritt für Schritt aufsetzt – von der Depot-Wahl über die Steuer-Optimierung bis zu den Fallstricken, die du unbedingt kennen solltest.
+In diesem Artikel zeige ich dir, wie du den [ETF-Sparplan für](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatl/) dein Kind Schritt für Schritt aufsetzt – von der Depot-Wahl über die Steuer-Optimierung bis zu den Fallstricken, die du unbedingt kennen solltest.
 
 ## Warum Kindersparen wichtiger ist als gedacht
 
@@ -37,7 +37,7 @@ Die Wahl des Instruments entscheidet über das Ergebnis. Der Vergleich für 50 E
 |:--- |:--- |:--- |:--- |
 | Sparbuch / Tagesgeld | 2–3 % | 13.300–14.600 € | Keine |
 | Banksparplan (Fonds aktiv) | 3–4 % (nach Kosten oft weniger) | 14.600–16.200 € | 1,5–2,5 % pro Jahr |
-| ETF-Sparplan (Welt-ETF) | 6–7 % (historisch) | 19.500–22.300 € | 0,2–0,5 % pro Jahr |
+| ETF-Sparplan (Welt-ETF) | 6–7 % (h[istorisch) | ](../../posts/tagesgeld-zinsen-sicher-anle/)19.500–22.300 € | 0,2–0,5 % pro Jahr |
 
 Der Unterschied zwischen Tagesgeld und ETF-Sparplan liegt nach 18 Jahren bei 5.000 bis 8.000 Euro – und zwar bei gleichem Monatsbeitrag. Das ist kein Kleingeld: Es ist der Unterschied zwischen Führerschein-Geschenk und Studienfinanzierung.
 
@@ -49,7 +49,8 @@ Für das Sparen in Wertpapieren gibt es zwei Wege, die sich steuerlich und recht
 
 **Das Kinderdepot (auf den Namen des Kindes):** Das Depot gehört dem Kind. Die Eltern verwalten es als gesetzliche Vertreter. Vorteile: Das Kind nutzt seinen eigenen Sparerpauschbetrag (1.000 Euro) und Grundfreibetrag – Gewinne bis zur Grenze bleiben steuerfrei. Nachteil: Mit 18 verfügt das Kind frei über das Geld.
 
-**Das Treuhanddepot (auf den Namen der Eltern):** Das Depot läuft auf die Eltern, ist aber für das Kind zweckgebunden. Vorteile: Die Eltern behalten die Kontrolle. Nachteil: Die Erträge werden mit dem Steuersatz der Eltern versteuert – der Steuervorteil entfällt weitgehend.
+**Das Treuhanddepot (auf den Namen der Eltern):** Das Depot läuft auf die Eltern, ist aber für das Kind zweckgebunden. Vorteile: Die Eltern behalten die Kontrolle. Nachteil: Die Erträge werden mit dem Steuersatz der Eltern versteuert –   
+der Steuervorteil entfällt weitgehend.
 
 Für die meisten Familien ist das **Kinderdepot** die bessere Wahl: Steuerlich effizient, klar geregelt, und der pädagogische Effekt (das Kind sieht „sein" Depot) ist stärker. Wer Sorge hat, dass der Nachwuchs mit 18 das Geld verprasst, kann später über eine Auszahlplan-Vereinbarung oder Schenkung mit Auflage steuern.
 
@@ -65,7 +66,8 @@ So setzt du den ETF-Sparplan für dein Kind in fünf Schritten um:
 
 **Schritt 4 – Sparplan einrichten (10 Minuten):** Betrag festlegen (ab 10 bis 25 Euro möglich), Ausführungstag wählen (zum Beispiel der 1. des Monats) und den Dauerauftrag auf das Verrechnungskonto einrichten. Das Schöne: Der Sparplan läuft automatisch – du musst nichts mehr tun.
 
-**Schritt 5 – Freistellungsauftrag für das Kind einrichten (5 Minuten):** Beim Broker den Sparerpauschbetrag des Kindes (1.000 Euro) hinterlegen. Damit bleiben die ersten 1.000 Euro Gewinn pro Jahr steuerfrei – der größte Steuervorteil des Kinderdepots.
+**Schritt 5 – Freistellungsauftrag für das Kind einrichten (5 Minuten):** Beim Broker den Sparerpauschbetrag des Kindes (1.000 Euro) hinterlegen. Damit bleiben die ersten 1.000 Euro Gewinn pro Jahr steuerfrei –   
+der größte Steuervorteil des Kinderdepots.
 
 ## Steuern & Freibeträge:<br>Der unterschätzte Vorteil
 
@@ -109,7 +111,7 @@ Ja – Wertpapiere sind Sondervermögen: Selbst bei einer Broker-Insolvenz gehö
 **Können auch Großeltern einzahlen?**
 Ja, und das ist sogar steuerlich clever: Schenkungen an Enkel sind bis 200.000 Euro pro Person und 10 Jahre steuerfrei. Die Einzahlung läuft einfach per Überweisung auf das Verrechnungskonto des Kinderdepots.
 
-Der ETF-Sparplan für Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die [Steuern auf ETF-Gewinne](../../posts/freistellungsauftrag-optimal-nutzen/) erklären, wie du den Pauschbetrag maximal ausschöpfst. Alle Banking-Themen: [Ratgeber Konto & Karten](../../pillar/konto-karten/).
+Der ETF-Sparplan für Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die [Steuern auf ETF-Gewinne](../../posts/freistellungsauftrag-optimal-nutzen/) erklären, wie du den Pauschbetrag maximal ausschöpfst. Alle Bank[ing-Themen: [Ratg](../../posts/kontowechsel-in-20-minuten-wechselserv/)eber Konto & Karten](../../pillar/konto-karten/).
 
 👉 **Jetzt kostenloses Konto mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
 

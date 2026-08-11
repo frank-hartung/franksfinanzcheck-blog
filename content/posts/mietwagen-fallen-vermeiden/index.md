@@ -47,7 +47,7 @@ Bei der Übernahme: Das Auto **fotografieren und filmen** – alle Kratzer, Dell
 
 ## Falle 7:<br>Die Abholung am Flughafen
 
-Am Flughafen zahlst du den "Airport-Zuschlag" – manchmal 30 Prozent mehr als in der Stadt. Wer mit öffentlichen Verkehrsmitteln eine Station in der Stadt ansteuert (oft 15–30 Minuten), spart deutlich. Vor allem bei längeren Mietzeiten lohnt sich das. Durch einen **Mietwagen Vergleich** kannst du die besten Angebote finden und Geld sparen. Ein Beispiel: Wenn du einen Mietwagen am Flughafen für 40 Euro pro Tag nimmst, aber in der Stadt für 28 Euro pro Tag, sparst du 12 Euro pro Tag, wenn du den Mietwagen in der Stadt nimmst.
+Am Flughafen zahlst du den "Airport-Zuschlag" – manchmal 30 Prozent mehr als in der Stadt. Wer mit öffentlichen Verkehrsmitteln eine Station in der Stadt ansteuert (oft 15–30 Minuten), spart deutlich. Vor allem bei längeren Mietzeiten lohnt sich das. Durch einen **[Mietwagen Vergleich](../../posts/mietwagen-buchen-so-sparst/)*[* kannst du](../../posts/versicherungen-kuendigen-diese-5-poli/) die besten Angebote finden und Geld sparen. Ein Beispiel: Wenn du einen Mietwagen am Flughafen für 40 Euro pro Tag nimmst, aber in der Stadt für 28 Euro pro Tag, sparst du 12 Euro pro Tag, wenn du den Mietwagen in der Stadt nimmst.
 
 ## Die Mietwagen-Checkliste
 

@@ -75,7 +75,7 @@ Beantrage bei schwankendem Einkommen rechtzeitig einen Freibetrag beim Finanzamt
 
 ## So vermeidest du den Nebenjob-Trugschluss
 
-Viele Menschen geben ihr zusätzliches Geld sofort wieder aus. Dein **zweites Standbein** soll aber deine finanzielle Freiheit sichern. Erhöhe niemals deinen Lebensstandard parallel zu deinem neuen Einkommen. Das Geld gehört in dein Depot oder auf dein Sparkonto.
+Viele Menschen geben ihr zusätzliches Geld sofort wieder aus. Dein **zweites Standbein** soll aber deine [finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freih/) sichern. Erhöhe niemals deinen Lebensstandard parallel zu deinem neuen Einkommen. Das Geld gehört in dein Depot oder auf dein Sparkonto.
 
 Lege vor dem ersten Euro fest, wohin das Geld fließen soll. Priorisiere die Schuldentilgung oder fülle deinen [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) auf. Automatisiere deine Sparraten direkt nach dem Geldeingang. So steigt deine [Sparquote](../../posts/sparquote-berechnen-und-steigern/) jeden Monat messbar an.
 

@@ -1,6 +1,6 @@
 # 🔒 BRAND-REPORT (brand_guard.py)
 
-**Stand:** 2026-08-10 19:13 UTC · Modus: REPORT
+**Stand:** 2026-08-11 09:45 UTC · Modus: FIX
 **Lock:** 4 geschützte Einträge (`data/brand_lock.yaml`)
 
 🎉 Alle geschützten Marken-Bausteine sind unverändert (Willkommenstext, Tagline, Meta-Description, Disclaimer).

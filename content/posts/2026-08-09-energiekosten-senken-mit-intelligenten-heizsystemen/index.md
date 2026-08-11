@@ -59,7 +59,8 @@ Smarte Thermostate kosten im Fachhandel meist zwischen 40 € und 90 € pro S
 ## Energiesparen mit vernetzten Heizsystemen
 Maximales Energiesparen gelingt dir durch eine clevere Vernetzung. Verbinde deine Heizung mit einer Solaranlage oder einer modernen Wärmepumpe. So nutzt du erzeugten Strom genau dann, wenn er verfügbar ist (Power-to-Heat). Intelligente Gateways können sogar den Wetterbericht einbeziehen: Wenn für mittags strahlender Sonnenschein gemeldet ist, lässt das System die Heizung vormittags gedrosselt, da die Sonne die Räume durch die Fenster ohnehin aufwärmt.
 
-Diese Kombination drückt deine laufenden Ausgaben auf ein Minimum. Du machst dich unabhängig von schwankenden Preisen am Energiemarkt. Intelligente Algorithmen regeln den optimalen Mix der Wärmequellen und sorgen dafür, dass die Vorlauftemperatur deiner Heizung so niedrig wie möglich bleibt – das schont den Kessel und deinen Geldbeutel.
+Diese Kombination drückt deine laufenden Ausgaben auf ein Minimum. Du machst dich unabhängig von schwankenden Preisen am Energiemarkt. Intelligente Algorithmen regeln den optimalen Mix der Wärmequellen und sorgen dafür, dass die Vorlauftemperatur deiner Heizung so niedrig wie möglich bleibt –   
+das schont den Kessel und deinen Geldbeutel.
 
 ## Wichtige Überlegungen vor dem Kauf
 Prüfe vor der Investition den Dämmstandard deiner Immobilie. Ein schlecht isoliertes Haus verliert Wärme trotz smarter Technik zu schnell. In einem solchen Fall solltest du zusätzlich über einfache Maßnahmen wie das Dämmen der Heizkörpernischen oder der Rohrleitungen im Keller nachdenken.

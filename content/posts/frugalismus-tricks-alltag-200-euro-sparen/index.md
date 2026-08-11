@@ -18,13 +18,13 @@ social_posted: true
 
 ## Trick 1:<br>Ein Haushaltsbuch führen – aber richtig
 
-Notiere nicht mühsam jeden Kaugummi. Reserviere dir einmal im Monat 20 Minuten für deine Finanzen. Stelle deine Fixkosten den Kategorien Lebensmittel, Mobilität und Freizeit gegenüber. Ein **Haushaltsbuch führen** entlarvt vergessene Abos und unnötige Mitgliedschaften sofort. Allein das Streichen von zwei oder drei ungenutzten Diensten für je 10 Euro spart dir 30 Euro im Monat. Um dein Haushaltsbuch noch effektiver zu gestalten, kannst du auch eine **Budget-App** nutzen, die dir hilft, deine Ausgaben zu verfolgen und zu kategorisieren.
+Notiere nicht mühsam jeden Kaugummi. Reserviere dir einmal im Monat 20 Minuten für deine Finanzen. Stelle deine Fixkosten den Kategorien Lebensmittel, Mobilität und Freizeit gegenüber. Ein **[Haushaltsbuch führen](../../posts/2026-08-07-frugalismus-fuer-den-erf/)** entlarvt vergessene Abos und unnötige Mitgliedschaften sofort. Allein das Streichen von zwei oder drei ungenutzten Diensten für je 10 Euro spart dir 30 Euro im Monat. Um dein Haushaltsbuch noch effektiver zu gestalten, kannst du auch eine **Budget-App** nutzen, die dir hilft, deine Ausgaben zu verfolgen und zu kategorisieren.
 
 ## Trick 2:<br>Die 50-30-20-Regel als Leitplanke
 
 Nutze bewährte **Sparmethoden** für eine klare Struktur. Reserviere 50 Prozent deines Einkommens für Fixkosten wie Miete und Strom. 30 Prozent fließen in deine persönlichen Wünsche, während 20 Prozent direkt in den Vermögensaufbau wandern. Diese Aufteilung zeigt dir sofort, ob deine Fixkosten im Verhältnis zu hoch ausfallen. Liegen diese über dem Limit, optimiere konsequent deine laufenden Verträge. Ein Beispiel: Wenn du 2.000 Euro im Monat verdienst, sollten 1.000 Euro (50%) für Fixkosten, 600 Euro (30%) für persönliche Wünsche und 400 Euro (20%) für den Vermögensaufbau verwendet werden.
 
-## Trick 3:<br>Smarter einkaufen statt teurer kochen
+## Trick 3:<br>S[[marter ein](../../posts/versicherungen-kuendigen-diese-5-poli/)kaufen stat](../../posts/2026-08-06-frugalismus-im-all/)t teurer kochen
 
 Effizientes **Geld sparen im Alltag** beginnt in der Küche. Kaufe Grundnahrungsmittel wie Reis oder Nudeln auf Vorrat, sobald sie im Angebot sind. Erstelle vor dem Wocheneinkauf einen festen Plan und vermeide Spontankäufe im hungrigen Zustand. Ein Vier-Personen-Haushalt spart durch gezielte Planung oft 60 bis 80 Euro monatlich. Das entspricht einer Ersparnis von etwa 15 bis 20 Prozent bei den Lebensmitteln. Eine weitere Möglichkeit, Geld zu sparen, ist der Kauf von **Saisonprodukten**, die oft günstiger sind als importierte Produkte.
 

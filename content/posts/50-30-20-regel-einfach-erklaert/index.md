@@ -45,7 +45,7 @@ Dieser Block sorgt dafür, dass die Budgetierung nicht zur Qual wird. Er dient d
 - **Urlaub:** Rücklagen für die nächste Reise.
 
 ### 3. 20 % für Sparen und Vermögensaufbau (Saves)
-Das ist dein wichtigster Hebel für finanzielle Freiheit. Bevor du konsumierst, bedienst du diesen Topf.
+Das ist dein wichtigster Hebel für [finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freih/). Bevor du konsumierst, bedienst du diesen Topf.
 - **Notgroschen:** Aufbau von 3 bis 4 Nettomonatsgehältern auf einem Tagesgeldkonto.
 - **Altersvorsorge:** Investitionen in breit gestreute ETFs oder Aktien, um dein Finanzwissen in Rendite zu verwandeln.
 - **Schuldentilgung:** Zusätzliche Tilgung von Konsumkrediten oder Dispos.

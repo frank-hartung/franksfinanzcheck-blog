@@ -36,13 +36,14 @@ Ein Tagesgeldkonto ist ein flexibles Sparkonto ohne feste Laufzeit und ohne Kün
 | **Zinssicherheit** | Nicht garantiert | Garantiert |
 | **geeignet für** | Notgroschen, laufende Rücklagen | Längerfristig verfügbares Geld |
 
-**Faustregel:** der Notgroschen gehört aufs Tagesgeld. Geld, das du sicher 1–5 Jahre nicht brauchst, kann ins Festgeld – dort gibt es meist etwas mehr Zins.
+**Faustregel:** der Notgroschen gehört aufs Tagesgeld. Geld, das du sicher 1–5 Jahre nicht brauchst, kann ins Festgeld –   
+dort gibt es meist etwas mehr Zins.
 
 ## So holst du das Beste aus deinem Tagesgeld heraus
 1. **Zins-Hopping:** nach Ablauf der Zinsgarantie das Konto wechseln – der "Lockzins" der neuen Bank ist oft deutlich höher.
 2. **Mehrere Konten:** wer mehr als 100.000 € anlegt, verteilt auf mehrere Banken.
 3. **Zinseszins nutzen:** Zinsen nicht abheben, sondern auf dem Konto lassen – so wächst das Kapital schneller.
-4. **Zinsen vergleichen:** ein Zinsunterschied von 1 Prozentpunkt macht bei 10.000 € immerhin 100 € im Jahr.
+4. **[Zinsen vergleichen](../../posts/festgeld-oder-tagesgeld-2/):** ein Zinsunterschied von 1 Prozentpunkt macht bei 10.000 € immerhin 100 € im Jahr.
 
 
 Ein häufiger Fehler beim Tagesgeld: Das gesamte Ersparte auf ein einziges Konto zu legen. Sinnvoller ist es, mehrere Tagesgeldkonten zu nutzen – etwa für den Notgroschen, die Urlaubskasse und das langfristige Sparen. So bleibt die Übersicht erhalten und du kannst flexibel auf Zinsänderungen reagieren. Zudem solltest du die Einlagensicherung im Blick behalten: Innerhalb der EU sind bis zu 100.000 Euro pro Bank und Kunde geschützt. Wer mehr Geld anlegen möchte, verteilt es auf verschiedene Banken.

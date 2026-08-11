@@ -20,7 +20,7 @@ Du zahlst für 100 Kilometer Fahrt entweder 4,50 Euro oder 15 Euro. Die Entschei
 
 ### Das Wichtigste in Kürze
 * Laden zu Hause kostet meist nur ein Drittel im Vergleich zum Schnelllader.
-* Ein spezieller Stromtarif für E-Autos senkt den Strompreis pro kWh deutlich.
+* Ein spezieller [Stromtarif für](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-hei/) E-Autos senkt den Strompreis pro kWh deutlich.
 * Photovoltaik-Anlagen bieten die günstigste Möglichkeit für volle Akkus.
 * Ladekarten-Apps schützen dich vor überteuerten Preisen an öffentlichen Säulen.
 

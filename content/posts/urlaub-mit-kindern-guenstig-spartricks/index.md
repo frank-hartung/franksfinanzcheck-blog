@@ -31,7 +31,8 @@ Bevor du sparst, kennst du die Kostenstruktur: Bei einer Familienreise (2 Erwach
 - **Aktivitäten & Ausflüge:** 10–15 Prozent
 - **Mietwagen & Transfer:** 5–15 Prozent
 
-Der größte Hebel liegt also bei Unterkunft und Verpflegung – genau dort setzen die wichtigsten Tricks an.
+Der größte Hebel liegt also bei Unterkunft und Verpflegung –   
+genau dort setzen die wichtigsten Tricks an.
 
 ## Trick 1:<br>Kinder-Rabatte systematisch nutzen
 
@@ -89,11 +90,13 @@ Wer flexibel ist, spart mit dem Reisezeitpunkt mehr als mit jedem anderen Trick.
 
 **7. Frühbucher mit kostenloser Stornierung:** Familienreisen früh buchen (beste Preise und Hotel-Auswahl) – aber nur mit kostenloser Stornierung, falls die Pläne sich ändern.
 
-**8. Ausflüge bündeln:** Familienpässe und Kombitickets (Zoo + Schwimmbad + Museum) sind fast überall günstiger als Einzeltickets. Und: Gratis-Aktivitäten einplanen (Strand, Spielplätze, Wanderungen) – die besten Urlaubserinnerungen kosten oft nichts.
+**8. Ausflüge bündeln:** Familienpässe und Kombitickets (Zoo + Schwimmbad + Museum) sind fast überall günstiger als Einzeltickets. Und: Gratis-Aktivitäten einplanen (Strand, Spielplätze, Wanderungen) –   
+die besten Urlaubserinnerungen kosten oft nichts.
 
 **9. Lebensmittel im Supermarkt statt Hotel-Shop:** Der Supermarkt im Urlaubsort ist 30 bis 50 Prozent günstiger als der Hotel-Shop – für Getränke, Snacks und Windeln ein Muss.
 
-**10. Mitnahme-Strategie:** Snacks, Sonnencreme und Notfall-Medikamente von zu Hause mitnehmen – die Urlaubs-Aufschläge für diese Basics sind enorm.
+**10. Mitnahme-Strategie:** Snacks, Sonnencreme und Notfall-Medikamente von zu Hause mitnehmen –   
+die Urlaubs-Aufschläge für diese Basics sind enorm.
 
 ## Die Familien-Spar-Checkliste
 

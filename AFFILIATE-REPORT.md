@@ -1,12 +1,12 @@
 # 🔗 Affiliate-Link-Report
 
-> **Automatisch** – 80 Posts geprüft, 0 mit Problemen, 0 Links korrigiert.
+> **Automatisch** – 81 Posts geprüft, 0 mit Problemen, 1 Links korrigiert.
 
 ## Zusammenfassung
 
-- ✅ Korrekt: 80/80
+- ✅ Korrekt: 81/81
 - ❌ Mit Problemen: 0
-- 🔧 Korrigiert (--fix): 0
+- 🔧 Korrigiert (--fix): 1
 
 ## ℹ️ Generische Links (erlaubt, aber prüfen)
 
