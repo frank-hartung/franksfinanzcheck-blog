@@ -1,14 +1,17 @@
 # 🔗 Affiliate-Link-Report
 
-> **Automatisch** – 78 Posts geprüft, 70 mit Problemen, 0 Links korrigiert.
+> **Automatisch** – 78 Posts geprüft, 77 mit Problemen, 1 Links korrigiert.
 
 ## Zusammenfassung
 
-- ✅ Korrekt: 8/78
-- ❌ Mit Problemen: 70
-- 🔧 Korrigiert (--fix): 0
+- ✅ Korrekt: 1/78
+- ❌ Mit Problemen: 77
+- 🔧 Korrigiert (--fix): 1
 
 ## ❌ Probleme
+
+### frugalismus
+- ❌ KEIN Affiliate-Link vorhanden
 
 ### internet-dsl
 - ❌ KEIN Affiliate-Link vorhanden
@@ -20,6 +23,18 @@
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### strom-sparen
+- ❌ KEIN Affiliate-Link vorhanden
+
+### versicherungen
+- ❌ KEIN Affiliate-Link vorhanden
+
+### 2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich
+- ❌ KEIN Affiliate-Link vorhanden
+
+### 2026-08-06-frugalismus-im-alltag
+- ❌ KEIN Affiliate-Link vorhanden
+
+### 2026-08-07-frugalismus-fuer-den-erfolg
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### 2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen
@@ -37,13 +52,16 @@
 ### 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
 - ❌ KEIN Affiliate-Link vorhanden
 
-### 2026-08-11-preisgarantie-gas-so-schuetzt-du-dich-vor-preiserhoehungen
+### 2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck
 - ❌ KEIN Affiliate-Link vorhanden
 
-### 2026-08-11-preisgarantie-gas-so-sicherst-du-dich-gegen-preisspruenge-ab
+### 50-30-20-regel-einfach-erklaert
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### 5g-home-router-oder-dsl
+- ❌ KEIN Affiliate-Link vorhanden
+
+### 7-gewohnheiten-finanzielle-freiheit
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### balkonkraftwerk-2026-lohnt-sich
@@ -77,6 +95,9 @@
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### flug-buchen-9-tricks-guenstige-tickets
+- ❌ KEIN Affiliate-Link vorhanden
+
+### frugalismus-tricks-alltag-200-euro-sparen
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### gastarife-vergleichen-vor-dem-herbst
@@ -200,7 +221,7 @@
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### urlaubskasse-aufbessern-spartipps
-- ❌ Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9 (erwartet: Pauschalreisen-Vergleich)
+- ❌ KEIN Affiliate-Link vorhanden
 
 ### versicherungen-kuendigen-diese-5-policen
 - ❌ KEIN Affiliate-Link vorhanden
@@ -219,17 +240,6 @@
 
 ### zinseszinseffekt-formel-erklaert
 - ❌ KEIN Affiliate-Link vorhanden
-
-## ℹ️ Generische Links (erlaubt, aber prüfen)
-
-- frugalismus: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
-- versicherungen: Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
-- 2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
-- 2026-08-06-frugalismus-im-alltag: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
-- 2026-08-07-frugalismus-fuer-den-erfolg: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
-- 50-30-20-regel-einfach-erklaert: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
-- 7-gewohnheiten-finanzielle-freiheit: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
-- frugalismus-tricks-alltag-200-euro-sparen: Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre
 
 ---
 *Erzeugt von scripts/affiliate_link_check.py*

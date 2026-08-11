@@ -2,7 +2,7 @@
 title: "Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten"
 description: "Kreditkarte ohne Jahresgebühr finden: Kostenlose Karten, Auslandsgebühren, Abheben und Versicherungen – die wichtigsten Kriterien im Vergleich."
 date: 2026-08-04
-draft: false
+draft: true
 tags: ["Kreditkarte", "Bank", "Gebühren sparen"]
 categories: ["Haushaltskasse & Budgetplanung"]
 pillar: "konto-karten"

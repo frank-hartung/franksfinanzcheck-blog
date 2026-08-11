@@ -2,7 +2,7 @@
 title: "E-Auto laden: So senkst du deine Stromkosten zu Hause"
 description: "E-Auto-Ladekosten senken: Hausstrom, Wallbox, Ladetarife und Ökostrom – so lädst du dein Elektroauto am günstigsten. Mit diesen Tipps sparst du bares Geld."
 date: 2026-08-04
-draft: false
+draft: true
 tags: ["E-Auto", "Strom", "Ladekosten"]
 categories: ["Günstige Strom- & Gastarife"]
 pillar: "strom-sparen"
@@ -53,7 +53,7 @@ Steuere deine Ladezeiten über smarte Apps. Diese starten den Ladevorgang automa
 
 ## Öffentliches Laden:<br>So vermeidest du Kostenfallen
 
-Vergleiche verschiedene Ladekarten und Apps vor dem ersten Anstecken. Die Preise an derselben Säule unterscheiden sich je nach Anbieter oft um 20 Cent oder mehr. Eine gute App zeigt dir den günstigsten Stromtarif für dein E-Auto in Echtzeit an.
+Vergleiche verschiedene Ladekarten und Apps vor dem ersten Anstecken. Die Preise an derselben Säule unterscheiden sich je nach Anbieter oft um 20 Cent oder mehr. Eine gute App zeigt dir den günstigsten [Stromtarif für](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-hei/) dein E-Auto in Echtzeit an.
 
 Nutze Schnelllader (DC) wirklich nur bei Zeitnot oder auf Reisen. Diese Stationen sind teurer und belasten bei dauerhafter Nutzung chemisch den Akku. Für den Alltag im Stadtverkehr reicht das günstigere AC-Laden völlig aus.
 

@@ -2,7 +2,7 @@
 title: "Frugalismus im Alltag: So sparst du jeden Monat bares Geld"
 description: "Entdecke die Vorteile von Frugalismus-Tipps, um im Alltag Geld zu sparen und deine finanzielle Freiheit Schritt für Schritt zu erreichen."
 date: 2026-08-06
-draft: false
+draft: true
 tags: ["Frugalismus Tipps", "Geld sparen im Alltag", "Haushaltsbuch führen", "Sparmethoden"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
