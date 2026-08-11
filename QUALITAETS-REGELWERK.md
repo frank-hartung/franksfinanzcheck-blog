@@ -226,6 +226,11 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (15):** L14 Unidiom-Fangsatz (Frank-Fund „Jahresetag"):
+  Holzrige KI-Komposita-Neubildungen bekommen einen Kanon (auto-fix,
+  Fall-kontrolliert) – Pflege nur in L14_KANON (lektor_guard.py). Neu
+  geborene Faelle meldet das Compound-Radar, Aufnahme hier durch
+  Redaktion. Selbsttest nun 16 Faelle.
 - **11.08.2026 (14):** Inter-Aera ausgerufen (Frank-Wahl nach Font-Palette):
   Ueberschriften UND Covertext = Inter Bold. Montserrat-Thin-Klone entfernt;
   Head-CSS referenziert nur noch Inter (Variable, 400..700) + Playfair-Akzent.

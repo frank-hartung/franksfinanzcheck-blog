@@ -1,6 +1,6 @@
 # ✒️ LEKTOR-REPORT (lektor_guard.py)
 
-**Stand:** 2026-08-11 19:39 UTC · Modus: FIX
+**Stand:** 2026-08-11 22:05 UTC · Modus: FIX
 
 | Regel | Anzahl |
 |---|---|
@@ -16,6 +16,7 @@
 | L11 Werbe-Intensivel (Auto) | 0 |
 | L12 Longsatz-Alarm (Report) | 10 |
 | L13 Doppelanlauf-Detektor (Report) | 0 |
+| L14 Unidiom-Fangsatz (Auto, Kanon) | 0 |
 
 ## Fundstellen (Auswahl)
 

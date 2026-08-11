@@ -59,7 +59,7 @@ So holst du sie dir:
 2. Online-Formular ausfüllen und Identität nachweisen (zum Beispiel per Account-Verifizierung oder PostIdent).
 3. Die Kopie kommt als Brief – dauert erfahrungsgemäß bis zu einer Woche.
 
-Mein Praxistipp: Lege dir einen festen Jahresetag dafür – zum Beispiel jedes Jahr zu deinem Geburtstag. Du siehst dann alles auf einen Blick: Konten, Kredite, Scores, Anfragen. Verschollene Konten oder Verträge, die du längst vergessen hattest, fallen sofort auf. Übrigens lohnt der Blick in die Kopie auch ganz ohne große Pläne: Du lernst, wie Banken dich sehen – ein Wissensvorsprung, den die meisten nie haben.
+Mein Praxistipp: Lege dir einen festen Jahrestermin dafür – zum Beispiel jedes Jahr zu deinem Geburtstag. Du siehst dann alles auf einen Blick: Konten, Kredite, Scores, Anfragen. Verschollene Konten oder Verträge, die du längst vergessen hattest, fallen sofort auf. Übrigens lohnt der Blick in die Kopie auch ganz ohne große Pläne: Du lernst, wie Banken dich sehen – ein Wissensvorsprung, den die meisten nie haben.
 
 Wichtig dabei: Jede dieser Anfragen gilt als reine Selbstauskunft – sie wird nicht gespeichert und senkt deinen Score nicht. Du kannst also völlig unbelastet nachschauen.
 

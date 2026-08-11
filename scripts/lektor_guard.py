@@ -28,7 +28,7 @@
 #        sensationell -> beachtlich, mega- -> sehr …) – Auto-Fix Kanon
 #    L12 LONGSATZ-ALARM: >35 Woerter -> Report
 #
-#  SABOTAGE-SCHUTZ (neu): SELFTEST mit 15 eingefrorenen Lektorats-Faellen
+#  SABOTAGE-SCHUTZ (neu): SELFTEST mit 16 eingefrorenen Lektorats-Faellen
 #  (inkl. Negativ-Fallen „darf unangetastet bleiben") laeuft vor JEDEM
 #  Einsatz; Abweichung -> Exit 2, keine Datei wird angefasst.
 #
@@ -168,6 +168,28 @@ SATZ_MAX_WOERTER = 35
 L13_WHITELIST = {"aachen", "aalen", "aare", "aalst", "aalborg", "aalenau"}
 L13_PAT = re.compile(r"\b([A-ZÄÖÜ][a-zäöüß]+)\b")
 
+# L14 UNIDIOM-FANGSATZ (Frank, 11.08. spaet): KI-Geburtsfehler wie
+# „Jahresetag" (unidio matisch!) bekommen ihren Kanon-Ersatz. AUTO-FIX
+# (deterministisch, kleinbuchstaben-kontrolliert). Neue Funde: hier eintragen,
+# danach heilt die gesamte Flotte automatisch (Geburt/Woche/Politur).
+L14_KANON = [
+    (re.compile(r"\bJahresetag(e?s?)\b", re.I), "Jahrestermin"),
+]
+
+
+def _l14_fix(line, stats):
+    for pat, want in L14_KANON:
+        def f(m, want=want):
+            out = want + (m.group(1) or "")
+            if m.group(0)[0].islower():
+                out = out[0].lower() + out[1:]
+            return out
+        n = len(pat.findall(line))
+        if n:
+            stats["L14"] += n
+            line = pat.sub(f, line)
+    return line
+
 # ------------------------------------------------------------
 # SABOTAGE-SCHUTZ (11.08.2026, Abend): eingefrorene Lektorats-Faelle.
 # Laueft vor JEDEM Einsatz; bei Abweichung Exit 2, bevor eine Datei
@@ -193,6 +215,8 @@ SELFTEST = [
      "Das macht das [Internet schneller machen](../../posts/2026-08-06-turbo-fuers-netz/) zu einer Sache von Millisekunden – das Gefühl, wie eine Seite „anspringt“, zählt.", ""),
     ("L13", "Ddiebesten Tarife findest du hier zuerst von uns ausgewertet und sortiert dargestellt immer.", None, "L13-Doppelanlauf"),
     ("L13neg", "Aachen liegt im Westen und ist eine schoene Stadt zum Wohnen und Entdecken.", None, ""),
+    ("L14", "Mein Praxistipp: Lege dir einen festen Jahresetag dafür.",
+     "Mein Praxistipp: Lege dir einen festen Jahrestermin dafür.", ""),
 ]
 
 # ---------------- L5/L3 Wortlisten ------------------------------------------------
@@ -235,7 +259,7 @@ def unmask(line, store):
 def fresh_stats() -> dict:
     return {"L1": 0, "L1rel": 0, "L2": 0, "L3": 0, "L4": 0, "L5echo": 0, "L5ki": 0,
             "L7": 0, "L8n": 0, "L8meldung": False, "L9": 0, "L10": 0, "L11": 0, "L12": 0,
-            "L13": 0, "L3ki": 0}
+            "L13": 0, "L3ki": 0, "L14": 0}
 
 
 def run_selftest() -> list[str]:
@@ -521,6 +545,8 @@ def lektor_line(line: str, stats, reports=None, fname="", line_no=0, du_dominant
             if reports is not None:
                 reports.append((fname, line_no, "L8-Weichmacher",
                                 f"{stats['L8n']}+ Konjunktive – {line.strip()[:60]}"))
+    # L14 Unidiom-Fangsatz (Auto-Fix, Kanon; Frank 11.08. spaet)
+    line = _l14_fix(line, stats)
     # L10 Zahlenschreibweise (Auto-Fix, Duden)
     n10 = len(ZAHL_PAT.findall(line))
     if n10:
@@ -598,7 +624,7 @@ def main() -> None:
         files = [Path(p) for _n, p in bedarf] + [f for f in files if str(f) not in {p for _n, p in bedarf}]
         print(f"💎 Politur-Modus: KI-Budget {AI_BUDGET} Datei(en), Reihenfolge nach Bedarf (Echoe/Personen-Mix)")
     total_fix = {"L1": 0, "L2": 0, "L3": 0, "L4": 0, "L5echo": 0, "L5ki": 0,
-                 "L7": 0, "L8n": 0, "L9": 0, "L10": 0, "L11": 0, "L12": 0, "L13": 0}
+                 "L7": 0, "L8n": 0, "L9": 0, "L10": 0, "L11": 0, "L12": 0, "L13": 0, "L14": 0}
     all_reports = []
     touched = 0
     used_ai_files = 0
@@ -632,6 +658,7 @@ def main() -> None:
     L.append(f"| L11 Werbe-Intensivel (Auto) | {total_fix['L11']} |")
     L.append(f"| L12 Longsatz-Alarm (Report) | {total_fix['L12']} |")
     L.append(f"| L13 Doppelanlauf-Detektor (Report) | {total_fix['L13']} |")
+    L.append(f"| L14 Unidiom-Fangsatz (Auto, Kanon) | {total_fix['L14']} |")
     if all_reports:
         L += ["", "## Fundstellen (Auswahl)", ""]
         L += [f"- `{f}` Z.{n}: **{t}** {c[:60]}" for f, n, t, c in all_reports[:20]]
