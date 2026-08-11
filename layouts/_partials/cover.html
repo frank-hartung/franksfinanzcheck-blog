@@ -49,13 +49,18 @@
     {{- $webpParts := slice }}
     {{- $avifParts := slice }}
     {{- range $w := slice "620" "720" }}
-        {{- $srcsetParts = $srcsetParts | append (printf "%s %sw" (partial "asset_url.html" (printf "%s/%s/%s" $coverDir $w $coverFile)) $w) }}
-        {{- $webpParts = $webpParts | append (printf "%s %sw" (partial "asset_url.html" (printf "%s/webp/%s/%s.webp" $coverDir $w $coverBase)) $w) }}
-        {{- $avifParts = $avifParts | append (printf "%s %sw" (partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $coverDir $w $coverBase)) $w) }}
+        {{- $pJpg := printf "%s/%s/%s" $coverDir $w $coverFile -}}
+        {{- $pWebp := printf "%s/webp/%s/%s.webp" $coverDir $w $coverBase -}}
+        {{- $pAvif := printf "%s/avif/%s/%s.avif" $coverDir $w $coverBase -}}
+        {{- if os.FileExists (path.Join "static" $pJpg) }}{{ $srcsetParts = $srcsetParts | append (printf "%s %sw" (partial "asset_url.html" $pJpg) $w) }}{{ end -}}
+        {{- if os.FileExists (path.Join "static" $pWebp) }}{{ $webpParts = $webpParts | append (printf "%s %sw" (partial "asset_url.html" $pWebp) $w) }}{{ end -}}
+        {{- if os.FileExists (path.Join "static" $pAvif) }}{{ $avifParts = $avifParts | append (printf "%s %sw" (partial "asset_url.html" $pAvif) $w) }}{{ end -}}
     {{- end }}
     {{- $srcsetParts = $srcsetParts | append (printf "%s 1000w" (partial "asset_url.html" .Params.cover.image)) }}
-    {{- $webpParts = $webpParts | append (printf "%s 1000w" (partial "asset_url.html" (printf "%s/webp/%s.webp" $coverDir $coverBase))) }}
-    {{- $avifParts = $avifParts | append (printf "%s 1000w" (partial "asset_url.html" (printf "%s/avif/%s.avif" $coverDir $coverBase))) }}
+    {{- $pWebpFull := printf "%s/webp/%s.webp" $coverDir $coverBase -}}
+    {{- $pAvifFull := printf "%s/avif/%s.avif" $coverDir $coverBase -}}
+    {{- if os.FileExists (path.Join "static" $pWebpFull) }}{{ $webpParts = $webpParts | append (printf "%s 1000w" (partial "asset_url.html" $pWebpFull)) }}{{ end }}
+    {{- if os.FileExists (path.Join "static" $pAvifFull) }}{{ $avifParts = $avifParts | append (printf "%s 1000w" (partial "asset_url.html" $pAvifFull)) }}{{ end }}
     {{- $imgSrcset = delimit $srcsetParts ", " }}
     {{- $webpSrcset = delimit $webpParts ", " }}
     {{- $avifSrcset = delimit $avifParts ", " }}
