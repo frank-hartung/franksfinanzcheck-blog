@@ -7,7 +7,7 @@ tags: ["Schufa", "Bonität", "Kredit", "Kreditwürdigkeit", "Datenschutz"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank"
-ai_generated: true
+ai_generated: false
 ai_provider: "Content-Engine v2"
 cover:
   image: "images/covers/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft.jpg"
