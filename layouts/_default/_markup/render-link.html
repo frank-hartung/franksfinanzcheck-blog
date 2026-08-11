@@ -1,8 +1,38 @@
 {{- /* Affiliate-Shield Render-Hook (11.08.2026):
-   - Links nach /go/… bekommen rel="sponsored nofollow noopener"
-     (Google-Affiliate-Compliance) + target=_blank + Umami-Event.
-   - Alles andere bleibt exakt wie bisher (Default-Verhalten). */ -}}
+   - /go/-Links bekommen rel="sponsored nofollow noopener" + target=_blank
+     + Umami-Events + **TITLE-TOOLTIP** (Zielname + Werbung - Hover-Transparenz
+     wie bei Profi-Affiliate-Marketern; Fund: das Gateway machte das Ziel
+     unklar, Nutzerin sah in der Statusleiste nur /go/<key>/).
+   - Alles andere bleibt 1:1 Default-Ausgabe. */ -}}
+
+{{- $names := dict
+  "allgemein"            "Check24 Vergleichsportal"
+  "strom"                "Check24 · Stromtarife"
+  "gas"                  "Check24 · Gastarife"
+  "dsl"                  "Check24 · DSL & Internet"
+  "fluege"               "Check24 · Flugvergleich"
+  "handytarife"          "Check24 · Handytarife"
+  "kredit"               "Check24 · Kreditvergleich"
+  "kreditkarte"          "Check24 · Kreditkarten"
+  "kfz-versicherung"     "Check24 · Kfz-Versicherung"
+  "mietwagen"            "Check24 · Mietwagen"
+  "reisen"               "Check24 · Reisen & Urlaub"
+  "girokonto"            "Check24 · Girokonto"
+  "tagesgeld"            "Check24 · Tagesgeld"
+  "haftpflicht"          "Tarifcheck · Haftpflicht"
+  "hausrat"              "Tarifcheck · Hausrat"
+  "unfallversicherung"   "Tarifcheck · Unfallversicherung"
+  "reisekrankenversicherung" "Tarifcheck · Reisekranken"
+  "zahnzusatzversicherung"   "Tarifcheck · Zahnzusatz"
+-}}
+
 {{- $href := .Destination -}}
-{{- $clean := $href | strings.TrimPrefix "/go/" | strings.TrimSuffix "/" -}}
 {{- $isGo := strings.HasPrefix $href "/go/" -}}
-<a href="{{ $href | safeURL }}"{{ if $isGo }} rel="sponsored nofollow noopener" target="_blank" data-umami-event="affiliate_click" data-umami-event-slug="{{ $clean }}"{{ end }}{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+{{- $slug := "" -}}
+{{- if $isGo }}{{ $slug = $href | strings.TrimPrefix "/go/" | strings.TrimSuffix "/" }}{{ end -}}
+{{- $ziel := "" -}}
+{{- if $isGo }}{{ $ziel = index $names $slug | default (print "Partner: " $slug) }}{{ end -}}
+{{- $tooltip := "" -}}
+{{- if $isGo }}{{ $tooltip = print "Weiter zu " $ziel " (Partnerlink = Werbung)" }}{{ end -}}
+
+<a href="{{ $href | safeURL }}"{{ if $isGo }} rel="sponsored nofollow noopener" target="_blank" data-umami-event="affiliate_click" data-umami-event-slug="{{ $slug }}" title="{{ .Title | default $tooltip }}"{{ end }}{{ if not $isGo }}{{ with .Title }} title="{{ . }}"{{ end }}{{ end }}>{{ .Text | safeHTML }}</a>

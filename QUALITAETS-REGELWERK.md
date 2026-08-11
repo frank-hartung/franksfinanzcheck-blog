@@ -105,6 +105,9 @@ Heilung = KI ergänzt **Mehrwert-Module** (kein Fülltext!): Rechenbeispiel mit 
 typische Fehler, Checkliste, +2 FAQ – eingefügt vor Fazit/Disclaimer, nach Gates.
 Neue Artikel: Engine (`--new-only`). Rückstand: Wochen-Audit (`--backlog 3`, Pillars zuerst).
 
+| D10 | CTA-Kasten (gelb) <-> /go/-Gateway-Kontrakt in custom.css | Auto-Heilung |
+| D11 | Hover-Transparenz: /go/-Links tragen Tooltip (Ziel + Werbung) | Auto-Heilung (Hook-Re-Write) |
+
 ### design_guard.py + design_visual.py – 🎨 Verlagshaus-Design-QA (neu 11.08.)
 | Regel/Modul | Inhalt | Lohn/Macht |
 |---|---|---|

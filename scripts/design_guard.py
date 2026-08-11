@@ -53,6 +53,10 @@ EXTERNAL_DENY = re.compile(r"(fonts\.googleapis|fonts\.gstatic|cdn\.jsdelivr|unp
 CTA_CSS = ROOT / "assets" / "css" / "extended" / "custom.css"
 CTA_SELECTOR_FRAGMENTS = ['a[href^="/go/"]', 'a[href*="check24.net"]',
                           'a[href*="partner-versicherung.de"]']
+RENDER_HOOK = ROOT / "layouts" / "_default" / "_markup" / "render-link.html"
+RENDER_HOOK_CANONICAL = '{{- /* Affiliate-Shield Render-Hook (11.08.2026):\n   - /go/-Links bekommen rel="sponsored nofollow noopener" + target=_blank\n     + Umami-Events + **TITLE-TOOLTIP** (Zielname + Werbung - Hover-Transparenz\n     wie bei Profi-Affiliate-Marketern; Fund: das Gateway machte das Ziel\n     unklar, Nutzerin sah in der Statusleiste nur /go/<key>/).\n   - Alles andere bleibt 1:1 Default-Ausgabe. */ -}}\n\n{{- $names := dict\n  "allgemein"            "Check24 Vergleichsportal"\n  "strom"                "Check24 · Stromtarife"\n  "gas"                  "Check24 · Gastarife"\n  "dsl"                  "Check24 · DSL & Internet"\n  "fluege"               "Check24 · Flugvergleich"\n  "handytarife"          "Check24 · Handytarife"\n  "kredit"               "Check24 · Kreditvergleich"\n  "kreditkarte"          "Check24 · Kreditkarten"\n  "kfz-versicherung"     "Check24 · Kfz-Versicherung"\n  "mietwagen"            "Check24 · Mietwagen"\n  "reisen"               "Check24 · Reisen & Urlaub"\n  "girokonto"            "Check24 · Girokonto"\n  "tagesgeld"            "Check24 · Tagesgeld"\n  "haftpflicht"          "Tarifcheck · Haftpflicht"\n  "hausrat"              "Tarifcheck · Hausrat"\n  "unfallversicherung"   "Tarifcheck · Unfallversicherung"\n  "reisekrankenversicherung" "Tarifcheck · Reisekranken"\n  "zahnzusatzversicherung"   "Tarifcheck · Zahnzusatz"\n-}}\n\n{{- $href := .Destination -}}\n{{- $isGo := strings.HasPrefix $href "/go/" -}}\n{{- $slug := "" -}}\n{{- if $isGo }}{{ $slug = $href | strings.TrimPrefix "/go/" | strings.TrimSuffix "/" }}{{ end -}}\n{{- $ziel := "" -}}\n{{- if $isGo }}{{ $ziel = index $names $slug | default (print "Partner: " $slug) }}{{ end -}}\n{{- $tooltip := "" -}}\n{{- if $isGo }}{{ $tooltip = print "Weiter zu " $ziel " (Partnerlink = Werbung)" }}{{ end -}}\n\n<a href="{{ $href | safeURL }}"{{ if $isGo }} rel="sponsored nofollow noopener" target="_blank" data-umami-event="affiliate_click" data-umami-event-slug="{{ $slug }}" title="{{ .Title | default $tooltip }}"{{ end }}{{ if not $isGo }}{{ with .Title }} title="{{ . }}"{{ end }}{{ end }}>{{ .Text | safeHTML }}</a>\n'
+
+
 CTA_CSS_TEMPLATE = '''
 /* AUTO-HEILUNG (design_guard D10, 11.08.2026): Das Affiliate-Shield
    ersetzte direkte Netzwerk-Links durch /go/-Gateway-Links; das CSS
@@ -135,6 +139,24 @@ def audit_css_fonts() -> list[dict]:
         for face in re.findall(r'@font-face\s*\{[^}]+\}', css):
             if "font-display" not in face:
                 out.append({"lvl": "warn", "typ": "D5", "details": f"{p.name}: @font-face ohne font-display"})
+    # D11: /go/-Links MUESSEN einen Hover-Tooltip tragen (Zielname + Werbung).
+    # Vertrag mit Affiliate-Shield. Selbstheilung: Hook neu schreiben.
+    if RENDER_HOOK.exists():
+        hook = RENDER_HOOK.read_text(encoding="utf-8")
+        if 'title="{{' not in hook or "Weiter zu" not in hook:
+            out.append({"lvl": "kritisch", "typ": "D11",
+                        "details": "Render-Hook ohne Ziel-Tooltip - Nutzer erkennt das Affiliate-Ziel nicht (Transparenz-Verlust)!"})
+            if DO_FIX and not DRY_RUN:
+                RENDER_HOOK.write_text(RENDER_HOOK_CANONICAL, encoding="utf-8")
+                out.append({"lvl": "fix", "typ": "D11-auto",
+                            "details": "Render-Hook auf kanonische Version zurueckgeschrieben (Tooltips wieder da)."})
+    else:
+        out.append({"lvl": "kritisch", "typ": "D11",
+                    "details": "render-link.html fehlt komplett!"})
+        if DO_FIX and not DRY_RUN:
+            RENDER_HOOK.parent.mkdir(parents=True, exist_ok=True)
+            RENDER_HOOK.write_text(RENDER_HOOK_CANONICAL, encoding="utf-8")
+
     # D10: CTA-Kontrakt (/go/-Selektoren im Design-System) + Selbstheilung
     if CTA_CSS.exists():
         css = CTA_CSS.read_text(encoding="utf-8")
