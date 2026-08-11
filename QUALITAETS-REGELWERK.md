@@ -226,6 +226,15 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (15):** Font-Guard geboren (Frank zweiter Schubs auf dasselbe
+  G): _woff2_-Dateien trugen nur den NAMEN Montserrat – innen war dreimal
+  dieselbe Thin-Variable-Font. Jetzt verifiziert font_guard.py Familie UND
+  weightClass aus dem Font-Datei-Koerper (kein Vertrauen mehr in Namen),
+  heilt per bake_fonts.py aus gelockten Variable-Fonts in static/fonts/_src/
+  und panzert via 3-Pin-Selbsttest. Verdrahtet: Weekly-Audit (--fix,
+  auto-commit) + Engine Geburt (Report). Seiteneffekt: Alle Browser zeigen
+  jetzt wirklich Montserrat Bold. (Sabotage live: Thin untergeschoben ->
+  gefangen & geheilt.)
 - **11.08.2026 (14):** Font-Pakt eingefroren (Frank-Fund „G bei Geld"):
   Cover werden nur noch in Montserrat Bold gerendert (jetzt fest im Repo
   static/fonts/Montserrat-Bold.ttf); ist sie weg, bricht generate_covers.py
