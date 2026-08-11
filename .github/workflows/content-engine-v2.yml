@@ -148,6 +148,8 @@ jobs:
           python3 scripts/generate_covers.py || echo "⚠ Cover-Fehler (nicht kritisch)"
           echo "== Einzigartigkeit =="
           python3 scripts/check_uniqueness.py || echo "⚠ Uniqueness (nicht blockierend)"
+          echo "== Same-Day-Zwillinge (Geburts-Wache, auto-heilend) =="
+          python3 scripts/check_uniqueness.py --sameday --fix || echo "⚠ Same-Day-Twin geheilt: Zweitling → Entwurf (nicht kritisch)"
           echo "== Affiliate-Links (auto-korrigieren) =="
           python3 scripts/affiliate_link_check.py --fix || echo "⚠ Affiliate-Check (nicht blockierend)"
           echo "== Affiliate-Shield (/go/-Gateway + sponsored) =="
