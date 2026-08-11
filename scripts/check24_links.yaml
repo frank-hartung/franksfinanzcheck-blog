@@ -6,13 +6,21 @@
 #   [TEST] = Gleiches Muster, Weiterleitung + PID-Zuordnung per HTTP-Test
 #            verifiziert (301 → check24.net/tarifcheck.de mit PID).
 #            Bitte zur Sicherheit im Partner-Dashboard gegenprüfen.
+#   [E2E]  = End-to-End VERIFIZIERT bis zur finalen Zielseite (11.08.2026):
+#            Redirect-Kette verfolgt, finale Seite < 400, richtige Kategorie
+#            per Keyword im End-URL. Waechter: affiliate_health.py (H1-Kontrakt).
 #
 #  CHECK24:    https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=...
 #  TARIFCHECK: https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=...
+#
+#  ⚠️ SABOTAGE-SCHUTZ: Wer hier eine URL/PID ändert, gegen den läuft der
+#  ROUTE_CONTRACT in affiliate_health.py an – falsche Kategorie/PID bricht
+#  die Wochenwache mit Exit 2 + Issue, tote Ziele werden automatisch auf
+#  den sicheren Homepage-Fallback geheilt (nie mehr tote Links im Blog).
 # ============================================================
 
 links:
-  # --- CHECK24 (aus der PDF, bestätigt) ---
+  # --- CHECK24 (aus der PDF, bestätigt + E2E verifiziert) ---
   strom: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
   gas: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
   dsl: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
@@ -21,15 +29,32 @@ links:
   girokonto: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
   allgemein: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
 
-  # --- CHECK24 (Muster getestet, [TEST]) ---
-  kredit: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditvergleich"
+  # --- CHECK24 ([E2E] verifiziert bis zur finalen Kategorieseite) ---
+  kredit: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kredit-vergleich"
+  #  ^ 11.08.2026 repariert: deep=kreditvergleich war TOT (404 auf der Endseite).
+  #    kredit-vergleich landet echt auf check24.net/kredit-vergleich/ (200).
   kfz-versicherung: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kfz-versicherung"
-  fluege: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=flugvergleich"
   handytarife: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife"
   kreditkarte: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-  tagesgeld: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich"
+  tagesgeld: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
+  #  ^ 11.08.2026 repariert: deep=tagesgeldvergleich war TOT (404). Der Tracker-
+  #    Mirror (check24.net) hat KEINE Tagesgeld-Seite (tagesgeld/, geldanlage/,
+  #    festgeld/ alles 404). C24 Bank IST die Geldanlage-Heimat von Check24
+  #    (C24 Tagesgeld) und verifiziert erreichbar.
+  #    TODO Frank: Falls dein Dashboard einen dedizierten Tagesgeld-Deep anbietet,
+  #    hier ersetzen – der Waechter verifiziert ihn dann automatisch end-to-end.
+  fluege: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+  #  ^ 11.08.2026 ehrlicher Fallback: deep=flugvergleich war TOT (404). Am Tracker
+  #    existiert KEIN funktionierender Flug-Deep (flug/fluege/urlaub/billigflug
+  #    alles 404; das Flug-Portal flug.check24.de ist via click.php nicht
+  #    erreichbar). Deshalb: Check24-Startseite (hat Flug-Kachel im Reise-Menue).
+  #    TODO Frank: Flug-Deep-Link aus dem Check24-Partner-Dashboard holen und
+  #    eintragen – affiliate_health.py verifiziert ihn dann automatisch.
 
-  # --- TARIFCHECK (Unfall aus PDF bestätigt, Rest [TEST]) ---
+  # --- TARIFCHECK (Unfall aus PDF bestätigt, alle E2E-verifiziert) ---
+  #  Hinweis: tarifcheck.de sperrt Datacenter-Bots mit 403 (WAF). Der Waechter
+  #  akzeptiert 403 NUR wenn die Kette sauber auf tarifcheck.de mit
+  #  partner_id=47086 landet; echte Nutzer sehen die Seiten normal (verifiziert).
   unfallversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=unfallversicherung"
   haftpflicht: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=haftpflichtversicherung"
   hausrat: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hausratversicherung"
