@@ -1,20 +1,20 @@
 # ✒️ LEKTOR-REPORT (lektor_guard.py)
 
-**Stand:** 2026-08-11 17:08 UTC · Modus: FIX
+**Stand:** 2026-08-11 17:22 UTC · Modus: FIX
 
 | Regel | Anzahl |
 |---|---|
 | L1 Doppelwoerter (Auto) | 0 |
 | L2 Fuehl-Phrasen (Auto) | 0 |
-| L3 Personenkonsistenz | 35 |
+| L3 Personenkonsistenz | 33 |
 | L4 Ausrufezeichen/Grenze | 0 |
-| L5 Echo (Report) | 155/0 |
-| L7 Nominalstil-Radar (Report) | 17 |
-| L8 Weichmacher-Dichte (Report) | 143 |
+| L5 Echo (Report) | 159/0 |
+| L7 Nominalstil-Radar (Report) | 18 |
+| L8 Weichmacher-Dichte (Report) | 146 |
 | L9 Satzanfangs-Echo (Report) | 1 |
 | L10 Zahlenschreibweise (Auto) | 0 |
 | L11 Werbe-Intensivel (Auto) | 0 |
-| L12 Longsatz-Alarm (Report) | 9 |
+| L12 Longsatz-Alarm (Report) | 10 |
 
 ## Fundstellen (Auswahl)
 
