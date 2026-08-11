@@ -114,6 +114,6 @@ Durch eine normale Trockenbauwand etwa 10 bis 15 Meter, durch dicke Betonwände 
 
 Wenn die 12 Tipps nicht reichen, liegt es meist an der Hardware: Dann lohnt der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein [Mesh-System](../../posts/wlan-verstaerker-vs-mesh-wlan/). Und wer generell [schnelleres Internet](../../posts/dns-server-aendern-schnelleres-internet/) will, findet im DNS-Ratgeber den nächsten kostenlosen Hebel. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
-👉 **Jetzt den passenden Internet-Tarif finden:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4)
+👉 **Jetzt den passenden Internet-Tarif finden:** [**→ Jetzt vergleichen bei CHECK24**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

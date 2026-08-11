@@ -156,11 +156,52 @@ def load_posts():
     return posts
 
 
+# Gateway-Aufloesung (Affiliate-Shield, 11.08.): /go/<key>/ -> Register-URL,
+# damit ALLE bestehenden Checks (deep, PID, Pillar) weiterhin 1:1 greifen.
+def _load_registry():
+    reg = {}
+    yf = os.path.join(BLOG_DIR, "scripts", "check24_links.yaml")
+    if os.path.exists(yf):
+        for line in open(yf, encoding="utf-8"):
+            m = re.match(r"^\s+([\w-]+):\s*\"(https://[^\"]+)\"", line)
+            if m:
+                reg[m.group(1)] = m.group(2)
+    return reg
+
+
+_REGISTRY = _load_registry()
+
+
+# Gateway-Aufloesung (Affiliate-Shield, 11.08.): /go/<key>/ -> Register-URL,
+# damit alle folgenden Checks (deep, PID, Pillar) unveraendert weiterarbeiten.
+def _load_registry():
+    reg = {}
+    yf = os.path.join(BLOG_DIR, "scripts", "check24_links.yaml")
+    if os.path.exists(yf):
+        for line in open(yf, encoding="utf-8"):
+            ls = line.strip()
+            if ls and not ls.startswith("#") and ':"' in ls and ls.endswith('"'):
+                key, _, rest = ls.partition(':"')
+                url = rest.rstrip('"')
+                if url.startswith("http"):
+                    reg[key.strip()] = url
+    return reg
+
+
+_REGISTRY = _load_registry()
+
+
 def find_affiliate_links(body):
-    """Alle Affiliate-URLs (CHECK24 + Tarifcheck) im Body, normiert + dedupliziert."""
+    """Affiliate-Links (raw ODER /go/<key>/), normiert + dedupliziert."""
     links = set()
     for m in re.finditer(r"https://a\.(?:check24\.net/misc/click\.php\?[^)\s\"']+|partner-versicherung\.de/click\.php\?[^)\s\"']+)", body):
         links.add(norm_url(m.group(0)))
+    # /go/: simpel, robust, escape-frei
+    for token in re.findall(r"/go/[\w-]+/", body):
+        key = token.split("/")[2]
+        url = _REGISTRY.get(key)
+        if url:
+            links.add(norm_url(url))
     return sorted(links)
 
 

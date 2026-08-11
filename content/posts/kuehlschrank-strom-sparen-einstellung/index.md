@@ -109,6 +109,6 @@ Moderne Geräte der Klasse A verursachen etwa 30 bis 45 € Stromkosten. Alte
 **Wie prüfe ich den tatsächlichen Verbrauch meines Kühlschranks?**
 Nutze ein einfaches Strommessgerät für die Steckdose aus dem Baumarkt. Miss den Verbrauch über eine ganze Woche für ein genaues Ergebnis. Rechne diesen Wert dann einfach auf das gesamte Jahr hoch.
 
-👉 **Jetzt Stromtarif prüfen und Wechsel-Bonus sichern:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1)
+👉 **Jetzt Stromtarif prüfen und Wechsel-Bonus sichern:** [**→ Jetzt vergleichen bei CHECK24**](/go/strom/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -29,7 +29,8 @@ on:
       - "Content-Engine v2"          # Herzstück (ersetzt daily-content, entfernt 2026-08-10)
       - "Pinterest-AI"           # Pins würden still ausfallen
       - "Layout-AI"              # Layout-Regressionen still
-      - "FrankAutoOps-Report"    # Ops-Monitoring selbst
+      - "FrankAutoOps-Report"
+      - "Affiliate-Health (Wochenwache)"    # Ops-Monitoring selbst
     types:
       - completed
 

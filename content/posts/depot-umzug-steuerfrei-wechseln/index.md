@@ -107,6 +107,6 @@ Sparpläne werden nicht automatisch übertragen. Du musst sie beim alten Anbiete
 
 Ein Depot-Umzug ist ein Klassiker der [Gebührenoptimierung im Banking](../../posts/gebuehrenfallen-banking-vermeiden/). Es ist die perfekte Gelegenheit für einen Check. Passt dein Anbieter noch zu deinem [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/)? Wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch sucht, findet online schnell den passenden Partner. Mehr Informationen findest du auch im [Ratgeber Konto & Karten](../../pillar/konto-karten/).
 
-👉 **Jetzt [kostenloses Konto](../../posts/kontowechsel-in-20-minuten-wechselserv/) mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
+👉 **Jetzt [kostenloses Konto](../../posts/kontowechsel-in-20-minuten-wechselserv/) mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/girokonto/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

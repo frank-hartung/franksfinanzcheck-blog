@@ -1,0 +1,55 @@
+# ============================================================
+#  AFFILIATE-HEALTH – Wochenwache der Geldverdien-Links
+#
+#  Läuft jeden Montag um 07:45 MESZ (vor dem Backlink-Scout):
+#    H1  Online-Erreichbarkeit + Redirect-Netzwerk-Zugehoerigkeit
+#    H2  PID-Integritaet (pid=80968&aid=18 | partner_id=47086&ad_id=15)
+#    H3  /go/-Gateway-Drift (YAML-Register vs. generierte Seiten)
+#    H4  CTA-Abdeckung (Artikel ohne Affiliate-Link)
+#
+#  Kritischer Fund -> GitHub-Issue (Label: affiliate-health, Dedupe).
+#  Nicht kritisch: Report wird committet, Workflow bleibt gruen.
+#
+#  Manuell: Actions → „Affiliate-Health" → Run workflow (Offline-Test
+#  per Inputs? Einfach Workflow starten – Netz wird erwartet.)
+# ============================================================
+name: Affiliate-Health (Wochenwache)
+
+on:
+  schedule:
+    - cron: "45 5 * * 1"    # Montag 07:45 MESZ (05:45 UTC)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: affiliate-health
+  cancel-in-progress: false
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Live-Gesundheit pruefen (+ Selbstheilung melden)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 scripts/affiliate_health.py --issue || echo "Kritische Funde – Issue erstellt, siehe Report"
+
+      - name: Report committen
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add AFFILIATE-HEALTH-REPORT.md data/affiliate_health_history.jsonl
+          if git diff --cached --quiet; then
+            echo "Kein Update."
+          else
+            git commit -m "chore: Affiliate-Health-Report aktualisiert"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push || { sleep 20; git pull --rebase origin main && git push; }
+          fi

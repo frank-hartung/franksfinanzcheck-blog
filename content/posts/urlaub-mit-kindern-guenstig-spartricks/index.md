@@ -143,6 +143,6 @@ Ja – in fast allen Städten und Regionen gibt es Familienkarten für Bahn, ÖP
 
 Der Familienurlaub wird mit den richtigen Tricks zur [Spar-Erfolgsgeschichte](../../posts/urlaubskasse-aufbessern-spartipps/) – und die [Pauschalreise](../../posts/pauschalreise-buchen-bester-zeitpunkt/) oder die [individuelle Reise mit Mietwagen](../../posts/mietwagen-buchen-so-sparst-du/) sind beides gute Wege. Alle Reisethemen: [Ratgeber Mietwagen & Reisen](../../pillar/mietwagen/).
 
-👉 **Jetzt Familien-Urlaubsangebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9)
+👉 **Jetzt Familien-Urlaubsangebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/reisen/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -122,6 +122,6 @@ Für die meisten: ein [ETF-Sparplan auf einen Welt-ETF](../../posts/2026-08-05-e
 
 Die Altersvorsorge ist ein Puzzle: [Versicherungen sortieren](../../posts/versicherungen-kuendigen-diese-5-policen/), [BU prüfen](../../posts/berufsunfaehigkeitsversicherung-lohnt-sich/), und das freie Geld in einen [langfristigen Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) stecken. Alle Versicherungs- und Vorsorgethemen findest du im [Ratgeber Versicherungen](../../pillar/versicherungen/).
 
-👉 **Jetzt Konto- und Anlageprodukte vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
+👉 **Jetzt Konto- und Anlageprodukte vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/girokonto/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

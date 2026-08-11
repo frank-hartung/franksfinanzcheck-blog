@@ -117,6 +117,6 @@ Ja, die Tilgung kannst du zur Sparquote zählen, da sie deinen Vermögenswert er
 **Wie automatisiere ich das Sparen?**
 Richte am Zahltag einen Dauerauftrag auf ein separates Tagesgeld- oder Sparkonto ein – direkt nach Gehaltseingang. Was auf dem Girokonto nicht auftaucht, wird nicht ausgegeben. Viele [Tagesgeld-Angebote](../../posts/tagesgeld-zinsen-sicher-anlegen/) kannst du online in wenigen Minuten eröffnen.
 
-👉 **Jetzt Tagesgeld- und Anlageangebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich)
+👉 **Jetzt Tagesgeld- und Anlageangebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/tagesgeld/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

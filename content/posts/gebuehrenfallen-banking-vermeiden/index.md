@@ -109,6 +109,6 @@ Vergleiche die Bedingungen für Kontoführung, Karten und Bargeldbezug genau. Ma
 
 Wer seine Bankkosten senkt, schafft die Basis für echten Vermögensaufbau. [Konto wechseln](../../posts/kontowechsel-in-20-minuten-wechselservice/), [Karte prüfen](../../posts/kreditkarte-ohne-jahresgebuehr/) und den [Dispo vermeiden](../../posts/dispozinsen-verstehen-alternativen/) sind die ersten Schritte. Alle weiteren Tipps findest du in unserem [Ratgeber Konto & Karten](../../pillar/konto-karten/).
 
-👉 **Jetzt kostenloses Konto und Kreditkarte vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte)
+👉 **Jetzt kostenloses Konto und Kreditkarte vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/kreditkarte/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
