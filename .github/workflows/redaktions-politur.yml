@@ -35,7 +35,7 @@ jobs:
   politur:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Lektorat mit KI-Budget (L5-Echo/L3-Person, Gates aktiv)
         env:

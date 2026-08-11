@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # ---- Audit-Erweiterung 11.08.: Workspace-Hygiene mit Selbstheilung ----
       - name: Workspace-Guard (Junk/Waisen/Rotation — auto-heilen)

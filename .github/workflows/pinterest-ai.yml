@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Krypto-Bibliothek für Token-Auto-Refresh installieren
         run: pip install -q cryptography

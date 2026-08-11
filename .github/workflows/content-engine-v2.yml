@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # ================= PHASE 0: PRE-FLIGHT =================
       - name: Pre-Flight-Check (Syntax, Keys, Themenpool)
