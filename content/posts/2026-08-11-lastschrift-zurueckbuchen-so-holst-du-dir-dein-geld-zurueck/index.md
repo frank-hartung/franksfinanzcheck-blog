@@ -14,6 +14,7 @@ cover:
   image: "images/covers/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck.jpg"
   alt: "Lastschrift zurückbuchen: So holst du dir dein Geld zurück"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 
 Es kommt selten vor – aber wenn, dann nervt es richtig: Auf deinem Kontoauszug taucht eine Abbuchung auf, die nicht stimmt. Vielleicht doppelt, vielleicht zu hoch, vielleicht von einem Vertrag, den du längst beendet hast.

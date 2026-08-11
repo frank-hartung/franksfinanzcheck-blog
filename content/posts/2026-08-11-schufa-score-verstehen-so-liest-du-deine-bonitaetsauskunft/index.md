@@ -13,6 +13,7 @@ cover:
   image: "images/covers/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft.jpg"
   alt: "Schufa-Score verstehen: So liest du deine Bonitätsauskunft"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 
 Beim Kreditantrag, beim Handyvertrag, bei der Wohnungssuche – immer ist sie im Spiel: deine Bonität. Und in Deutschland heißt das fast immer: **die Schufa**.
