@@ -129,7 +129,7 @@ jobs:
 
       - name: Issue bei fertigem GitHub-Zertifikat (Hinweis auf Full strict)
         if: ${{ env.CHECK4 == 'OK' }}
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const { data: existing } = await github.rest.issues.listForRepo({
@@ -162,7 +162,7 @@ jobs:
 
       - name: Issue bei Problemen erstellen (mit Dedupe)
         if: ${{ env.PROBLEMS != '' }}
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const problems = process.env.PROBLEMS || '';
@@ -207,7 +207,7 @@ jobs:
 
       - name: Offenes Watchdog-Issue schließen (alles wieder grün)
         if: ${{ env.PROBLEMS == '' }}
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const { data: existing } = await github.rest.issues.listForRepo({

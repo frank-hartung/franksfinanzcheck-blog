@@ -51,7 +51,7 @@ jobs:
 
       - name: Bei Ausfall kritischen Pfad prüfen & Issue erstellen (Dedupe)
         if: steps.check.outputs.ok == 'false'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const { data: issues } = await github.rest.issues.listForRepo({
@@ -75,7 +75,7 @@ jobs:
 
       - name: "Selbstheilung – bei Erholung offenes Uptime-Issue schließen"
         if: steps.check.outputs.ok == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const { data: issues } = await github.rest.issues.listForRepo({

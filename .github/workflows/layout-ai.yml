@@ -117,7 +117,7 @@ jobs:
       # ============ ISSUE BEI KRITISCHEN PROBLEMEN (Dedupe) ============
       - name: Issue bei kritischen Layout-Problemen
         if: ${{ !cancelled() && (env.BROWSER_ISSUES == 'true' || failure()) }}
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         continue-on-error: true
         with:
           script: |

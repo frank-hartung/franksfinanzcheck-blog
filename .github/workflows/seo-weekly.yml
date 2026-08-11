@@ -221,7 +221,7 @@ jobs:
         # übrig sind (Exit 1). Erstellt ein GitHub-Issue mit allen Details –
         # der wöchentliche Lauf ist damit zu 100 % autonom.
         if: steps.meta_gate.outcome == 'failure'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');
@@ -255,7 +255,7 @@ jobs:
         # Lücke geschlossen: A11y-Fehler wurden bisher nur geloggt, nie
         # gemeldet. Jetzt automatisches Issue – konsistent zum SEO-Audit.
         if: steps.a11y.outcome == 'failure'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');
@@ -289,7 +289,7 @@ jobs:
 
       - name: Issue bei kritischen SEO-Problemen erstellen
         if: steps.audit.outcome == 'failure'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');
