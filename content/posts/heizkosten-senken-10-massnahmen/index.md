@@ -33,7 +33,7 @@ Diese zehn Maßnahmen sind nach ihrer Wirkung und dem nötigen Aufwand sortiert.
 
 Bevor du aktiv wirst, musst du die Schwachstellen deines Hauses kennen. Die Wärme verschwindet oft unbemerkt an verschiedenen Stellen. In einem typischen Haushalt verteilt sich der Verlust recht deutlich.
 
-Etwa 20 bis 30 % der Energie entweichen durch undichte Fugen und falsches Lüften. Wände und Decken schlucken je nach Dämmzustand weitere 20 bis 30 % der Wärme. Fenster verursachen oft Verluste zwischen 10 und 15 %. Bei Einfamilienhäusern verlierst du über das Dach sogar bis zu 20 %.
+Etwa 20 bis 30 % der Energie entweichen durch undichte Fugen und falsches Lüften. Wände und Decken schlucken je nach Dämmzustand weitere 20 bis 30 % der Wärme. Fenster verursachen oft Verluste zwischen 10 % und 15 %. Bei Einfamilienhäusern verlierst du über das Dach sogar bis zu 20 %.
 
 Zusätzlich sorgen falsch eingestellte Anlagen oder verdeckte Heizkörper für unnötige Kosten. Die gute Nachricht: Die größten Lecks stopfst du ohne teure Handwerker. Genau hier s[etzen die ersten Sch](../../posts/stromfresser-im-haushalt-entlar/)ritte an, um effektiv **Energiekosten senken** zu können.
 

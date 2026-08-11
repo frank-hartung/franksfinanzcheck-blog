@@ -101,7 +101,7 @@ Kombiniere die Faktoren Temperatur, Standort und Pflege für das beste Ergebnis.
 Stelle 7 °C im Kühlraum und minus 18 °C im Gefrierfach ein. Dies schützt deine Lebensmittel und schont gleichzeitig dein Budget. Jedes Grad kälter treibt deine Stromrechnung unnötig in die Höhe.
 
 **Lohnt sich ein neuer Kühlschrank?**
-Bei Geräten, die älter als 15 Jahre sind, rechnet sich der Kauf meistens. Du sparst jährlich zwischen 40 und 60 € an Stromkosten ein. Ein Neugerät finanziert sich so über die Jahre fast von selbst.
+Bei Geräten, die älter als 15 Jahre sind, rechnet sich der Kauf meistens. Du sparst jährlich zwischen 40 € und 60 € an Stromkosten ein. Ein Neugerät finanziert sich so über die Jahre fast von selbst.
 
 **Was kostet ein Kühlschrank im Jahr?**
 Moderne Geräte der Klasse A verursachen etwa 30 bis 45 € Stromkosten. Alte Modelle belasten dein Budget oft mit 80 bis 120 € jährlich. Ein Strommessgerät deckt die exakten Kosten deines alten Geräts auf.

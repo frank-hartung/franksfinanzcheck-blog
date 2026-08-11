@@ -62,7 +62,7 @@ Der Zinseszinseffekt hat genau drei Stellschrauben – und ihre Wirkung ist übe
 
 **2. Die Zeit (Anlagehorizont):** Die Zeit wirkt exponentiell – sie ist die mächtigste Stellschraube. 10 Jahre Anlagehorizont mehr können den Endwert vervielfachen, ohne dass du einen Euro mehr einzahlst.
 
-**3. Die Rendite (Zinssatz):** Auch sie wirkt exponentiell. Der Unterschied zwischen 3 und 6 % ist nach 30 Jahren enorm – bei 100 € monatlich: rund 58.000 € vs. 100.000 €.
+**3. Die Rendite (Zinssatz):** Auch sie wirkt exponentiell. Der Unterschied zwischen 3 % und 6 % ist nach 30 Jahren enorm – bei 100 € monatlich: rund 58.000 € vs. 100.000 €.
 
 Die Praxis-Einordnung: Die Rendite kannst du nur begrenzt steuern (Aktienmarkt statt Sparbuch, Kosten senken), die Zeit ist bei späterem Start unwiederbringlich, und die Rate ist dein direktester Hebel. Deshalb: **Früh starten schlägt [mehr sparen](../../posts/sparquote-berechnen-und-steigern/).**
 

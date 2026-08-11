@@ -47,7 +47,7 @@ Ein Minijob bietet dir besondere Vorteile. Bis zu 556 € monatlich zahlst du k
 
 ## Ideen 4 bis 6:<br>Flexibel vor Ort
 
-**4. Nachhilfe geben.** Fächer wie Mathe, Deutsch oder Englisch sind immer gefragt. Ein einfacher Aushang an Schulen oder Portalen reicht oft aus. Du verdienst zwischen 15 und 35 € pro Stunde. Die Termine legst du flexibel auf Abende oder Wochenenden.
+**4. Nachhilfe geben.** Fächer wie Mathe, Deutsch oder Englisch sind immer gefragt. Ein einfacher Aushang an Schulen oder Portalen reicht oft aus. Du verdienst zwischen 15 € und 35 € pro Stunde. Die Termine legst du flexibel auf Abende oder Wochenenden.
 
 **5. Umzugs- und Möbelhilfe.** Kräftige Helfer werden überall händeringend gesucht. Du unterstützt Menschen beim Umzug oder baust neue Möbel auf. Kalkuliere mit 12 bis 25 € pro Stunde plus Trinkgeld. Der Job ist körperlich fordernd, aber ohne Vorkenntnisse machbar.
 

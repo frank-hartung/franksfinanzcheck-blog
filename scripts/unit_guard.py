@@ -44,6 +44,11 @@ NEW_ONLY = "--new-only" in sys.argv
 NBSP = "\u00a0"
 Z = r"(\d[\d.]*,?\d*)"       # eine Zahl (mit . Tausender / , Komma)
 
+# U5: „zwischen 3 und 6 %" -> „zwischen 3 % und 6 %" (Einheit beiden Zahlen)
+#     Lektorats-Strenge, Fund 11.08.2026 (Artikel zinseszinseffekt).
+R_RANGE_UND = re.compile(
+    r"\b(zwischen|von)\s+(\d[\d.]*,?\d*)\s+und\s+(\d[\d.]*,?\d*)[\s" + NBSP + r"]+([€%])")
+
 # U1/U2 Muster (Wortgrenze links sichert keine Komposita?); wir schützen über
 # Nachbar-Regeln: kein Bindestrich direkt vor „Euro" („…-Euro" bleibt!)
 R_EURO = re.compile(Z + r"[\s" + NBSP + r"]*Euro\b(?![a-zäöüß])")
@@ -75,6 +80,12 @@ def unmask(line, store):
 
 def fix_line(body: str) -> tuple[str, int]:
     n = 0
+    # U5 zuerst (greift vor U3b, damit Einheiten-Verdopplung sauber zuerst)
+    def r_und(m):
+        nonlocal n
+        n += 1
+        return f"{m.group(1)} {m.group(2)}{NBSP}{m.group(4)} und {m.group(3)}{NBSP}{m.group(4)}"
+    body = R_RANGE_UND.sub(r_und, body)
     # U1: Euro -> €
     def r_euro(m):
         nonlocal n

@@ -107,7 +107,7 @@ Und noch ein Punkt: Der Anschluss-Wechsel ist die perfekte Gelegenheit, [das WLA
 Für die meisten Haushalte reichen 100 Mbit/s: Streaming, Homeoffice und Surfen laufen damit problemlos. Familien mit mehreren gleichzeitigen Nutzern nehmen 250 Mbit/s. Höhere Tempi sind Komfort, kein Muss.
 
 **Was kostet Glasfaser im Monat?**
-2026 zwischen 30 und 50 € für 100 bis 250 Mbit/s, inklusive Router-Miete oft etwas mehr. Viele Anbieter geben in der Ausbauphase Rabatte – prüfe die Angebote an deiner Adresse.
+2026 zwischen 30 € und 50 € für 100 bis 250 Mbit/s, inklusive Router-Miete oft etwas mehr. Viele Anbieter geben in der Ausbauphase Rabatte – prüfe die Angebote an deiner Adresse.
 
 **Wann lohnt sich der Wechsel zu Glasfaser?**
 Wenn Glasfaser verfügbar ist und du mehr als 100 Mbit/s brauchst, hohe Uploads hast oder langfristig zukunftssicher sein willst. Wer nur surft und streamt, kann bei DSL bleiben – der [Vergleich](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt, was sich rechnet.

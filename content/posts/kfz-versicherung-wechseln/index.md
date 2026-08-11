@@ -24,7 +24,7 @@ Der 30. November markiert den entscheidenden Stichtag für fast alle Autofahrer.
 
 ## Das Wichtigste in Kürze
 - Stichtag für die reguläre Kündigung ist der 30. November.
-- Jährliche Ersparnis liegt oft zwischen 100 und 400 €.
+- Jährliche Ersparnis liegt oft zwischen 100 € und 400 €.
 - Deine gesammelte Schadenfreiheitsklasse nimmst du einfach mit.
 - Ein Online-Vergleich dauert weniger als 15 Minuten.
 - Bei einer Beitragserhöhung hast du ein Sonderkündigungsrecht.
