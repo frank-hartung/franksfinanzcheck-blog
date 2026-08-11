@@ -1,7 +1,7 @@
 {
- "total": 80,
+ "total": 78,
  "errors": 0,
- "fixed": 1,
+ "fixed": 0,
  "posts": [
   {
    "slug": "frugalismus",
@@ -95,24 +95,6 @@
    "ok": true
   },
   {
-   "slug": "2026-08-07-mietwagen-fuer-den-spaetsommer",
-   "title": "Mietwagen im Spätsommer: Günstig buchen und sparen",
-   "pillar": "mietwagen",
-   "fixed": 0,
-   "errors": [],
-   "infos": [],
-   "ok": true
-  },
-  {
-   "slug": "2026-08-08-dein-tier-im-krankheitsfall",
-   "title": "Tierversicherung: Schutz für dein Tier im Krankhei",
-   "pillar": "versicherungen",
-   "fixed": 0,
-   "errors": [],
-   "infos": [],
-   "ok": true
-  },
-  {
    "slug": "2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen",
    "title": "Stromtarif für Wärmepumpe: So sparst du beim Heize",
    "pillar": "strom-sparen",
@@ -170,7 +152,7 @@
    "slug": "2026-08-11-preisgarantie-gas-so-sicherst-du-dich-gegen-preisspruenge-ab",
    "title": "Preisgarantie Gas: So sicherst du dich gegen Preis",
    "pillar": "konto-karten",
-   "fixed": 1,
+   "fixed": 0,
    "errors": [],
    "infos": [],
    "ok": true
