@@ -106,6 +106,8 @@ jobs:
           python3 scripts/fix_dash_und.py --fix || echo "⚠ Gedankenstrich-Check (nicht kritisch)"
           echo "== Gedankenstrich-am-Zeilenende (deterministisch, selbstheilend) =="
           python3 scripts/fix_dash_eol.py --fix || echo "⚠ Gedankenstrich-EOL-Check (nicht kritisch)"
+          echo "== Zeichenlängen-Gate (Profi: 700-1800 Wörter, selbstheilend via KI) =="
+          python3 scripts/check_length.py --fix || echo "⚠ Längen-Check (nicht kritisch)"
           echo "== Leerzeichen-Generator (Profi-Level, selbstheilend) =="
           python3 scripts/fix_spaces.py || echo "⚠ Leerzeichen-Generator (nicht kritisch)"
           echo "== Rechtschreibung =="

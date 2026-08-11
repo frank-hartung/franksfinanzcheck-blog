@@ -412,8 +412,8 @@ def profi_quality_ok(body, keywords=None):
     text = re.sub(r"\s+", " ", text).lower()
     words = len(re.findall(r"\w+", text))
 
-    if words < 350:
-        problems.append(f"nur {words} Wörter (Profi: 350+)")
+    if words < 700:
+        problems.append(f"nur {words} Wörter (Profi: 700+)")
     h2 = len(re.findall(r"^##\s", body, re.M))
     if h2 < 4:
         problems.append(f"nur {h2} H2-Abschnitte")
@@ -660,7 +660,7 @@ Ab Zeile 3: Der Artikel in Markdown:
 - 4 bis 6 Abschnitte mit H2-Überschriften (##) – strukturiere sie ANDERS als die Pin-Vorlage
 - Mindestens EINE Liste oder Tabelle (Mehrwert, Scannability)
 - Am Ende ein FAQ-Bereich: "## Häufige Fragen" mit 3 Fragen als H3 und Antworten
-- 500 bis 800 Wörter insgesamt – substanziell, aber ohne Blabla
+- 800 bis 1.200 Wörter insgesamt (mindestens 700 – darunter gilt der Artikel als zu kurz und wird abgelehnt) – substanziell, aber ohne Blabla
 - Absätze max. 3–4 Sätze, aktive Sprache ("du"), kurze Sätze (max. ~20 Wörter)
 - ANREDE: {anrede_var} – konsistent durchgehend verwenden
 - PRAXISBEZUG (E-E-A-T): konkrete, plausible Alltagsbeispiele; eigene Erfahrung als

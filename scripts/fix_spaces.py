@@ -88,6 +88,11 @@ def fix_line(line: str) -> tuple[str, int]:
     changed = 0
     orig = line
 
+    # G) „z.B.“ → „z. B.“ (Abkürzung sauber schreiben) – VOR Regel D,
+    #    damit die Abkürzungs-Maskierung die neue Form korrekt schützt.
+    line, n = re.subn(r"([zZ])\.B\.", r"\1. B.", line)
+    changed += n
+
     # B) Listen-Marker normalisieren (3+ Spaces nach Marker → 1)
     line, n = RE_LIST_MARKER.subn(lambda m: m.group(1) + " " + m.group(2), line)
     changed += n
@@ -149,6 +154,21 @@ def fix_body(body: str) -> tuple[str, int]:
     out: list[str] = []
     changed = 0
     for line in lines:
+        if "|" in line:
+            # TABELLENZEILEN: Nur die sicheren Regeln anwenden – nbsp
+            # zwischen Zahl und %/€ sowie „z.B.“ → „z. B.“. Alle anderen
+            # Regeln (Leerzeichen-Kollaps etc.) würden Tabellen-Spacing
+            # zerstören. URLs bleiben maskiert.
+            masked, urls = _mask_urls(line)
+            new = re.sub(r"(\d)[ \u00a0]+([%€])",
+                         lambda m: m.group(1) + NBSP + m.group(2), masked)
+            new = re.sub(r"([zZ])\.B\.", r"\1. B.", new)
+            for tok, u in urls:
+                new = new.replace(tok, u)
+            if new != line:
+                changed += 1
+            out.append(new)
+            continue
         new_line, n = fix_line_safe(line)
         out.append(new_line)
         changed += n
