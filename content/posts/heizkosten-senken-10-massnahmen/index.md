@@ -35,7 +35,7 @@ Bevor du aktiv wirst, musst du die Schwachstellen deines Hauses kennen. Die Wär
 
 Etwa 20 bis 30 % der Energie entweichen durch undichte Fugen und falsches Lüften. Wände und Decken schlucken je nach Dämmzustand weitere 20 bis 30 % der Wärme. Fenster verursachen oft Verluste zwischen 10 % und 15 %. Bei Einfamilienhäusern verlierst du über das Dach sogar bis zu 20 %.
 
-Zusätzlich sorgen falsch eingestellte Anlagen oder verdeckte Heizkörper für unnötige Kosten. Die gute Nachricht: Die größten Lecks stopfst du ohne teure Handwerker. Genau hier s[etzen die ersten Sch](../../posts/stromfresser-im-haushalt-entlar/)ritte an, um effektiv **Energiekosten senken** zu können.
+Zusätzlich sorgen falsch eingestellte Anlagen oder verdeckte Heizkörper für unnötige Kosten. Die gute Nachricht: Die größten Lecks stopfst du ohne teure Handwerker. Genau hier s[etzen die ersten Sch](../../posts/stromfresser-im-haushalt-entlar/)ritte an, um effektiv **[Energiekosten senken](../../posts/stromfresser-im-haushalt-entlar/)** zu können.
 
 ## Maßnahmen 1 bis 4:<br>Ohne Kosten
 
@@ -104,6 +104,6 @@ Bei alten Anlagen über 20 Jahren ist der Tausch fast immer wirtschaftlich sinnv
 **Wann sollte ich meine Heizung warten lassen?**
 Lasse deine Anlage einmal jährlich im Spätsommer von einem Profi prüfen. Eine gewartete Heizung arbeitet effizienter und verbraucht deutlich weniger Brennstoff. Zudem sinkt das Risiko für teure Ausfälle mitten in der kalten Jahreszeit. Bei vielen Gasheizungen ist diese regelmäßige Wartung [sogar gesetzlich vorg](../../posts/gastarife-vergleichen-vor-dem-her/)eschrieben.
 
-👉 **Jetzt Gastarife vergleichen und Heizkosten senken:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3)
+👉 **Jetzt [Gastarife vergleichen](../../posts/gastarife-vergleichen-vor-dem-her/) und [Heizkosten senken](../../posts/waermepumpe-vs-gasheizung-2/):** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

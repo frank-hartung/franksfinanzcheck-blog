@@ -24,9 +24,9 @@ Notiere nicht mühsam jeden Kaugummi. Reserviere dir einmal im Monat 20 Minuten 
 
 Nutze bewährte **Sparmethoden** für eine klare Struktur. Reserviere 50 % deines Einkommens für Fixkosten wie Miete und Strom. 30 % fließen in deine persönlichen Wünsche, während 20 % direkt in den Vermögensaufbau wandern. Diese Aufteilung zeigt dir sofort, ob deine Fixkosten im Verhältnis zu hoch ausfallen. Liegen diese über dem Limit, optimiere konsequent deine laufenden Verträge. Ein Beispiel: Wenn du 2.000 € im Monat verdienst, sollten 1.000 € (50 %) für Fixkosten, 600 € (30 %) für persönliche Wünsche und 400 € (20 %) für den Vermögensaufbau verwendet werden.
 
-## Trick 3:<br>S[[marter ein](../../posts/versicherungen-kuendigen-diese-5-poli/)kaufen stat](../../posts/2026-08-06-frugalismus-im-all/)t teurer kochen
+## Trick 3:<br>S[[marter ein](../../posts/versicherungen-kuendigen-diese-5-poli/)kaufen stat](././posts/2026-08-06-frugalismus-im-all/)t teurer kochen
 
-Effizientes **Geld sparen im Alltag** beginnt in der Küche. Kaufe Grundnahrungsmittel wie Reis oder Nudeln auf Vorrat, sobald sie im Angebot sind. Erstelle vor dem Wocheneinkauf einen festen Plan und vermeide Spontankäufe im hungrigen Zustand. Ein Vier-Personen-Haushalt spart durch gezielte Planung oft 60 bis 80 € monatlich. Das entspricht einer Ersparnis von etwa 15 bis 20 % bei den Lebensmitteln. Eine weitere Möglichkeit, Geld zu sparen, ist der Kauf von **Saisonprodukten**, die oft günstiger sind als importierte Produkte.
+Effizientes **[[Geld spare](../../posts/versicherungen-kuendigen-diese-5-poli/)n im Alltag](../../posts/2026-08-07-frugalismus-fuer-den-erf/)** beginnt in der Küche. Kaufe Grundnahrungsmittel wie Reis oder Nudeln auf Vorrat, sobald sie im Angebot sind. Erstelle vor dem Wocheneinkauf einen festen Plan und vermeide Spontankäufe im hungrigen Zustand. Ein Vier-Personen-Haushalt spart durch gezielte Planung oft 60 bis 80 € monatlich. Das entspricht einer Ersparnis von etwa 15 bis 20 % bei den Lebensmitteln. Eine weitere Möglichkeit, Geld zu sparen, ist der Kauf von **Saisonprodukten**, die oft günstiger sind als importierte Produkte.
 
 ## Trick 4:<br>Jahresverträge einmal im Jahr unter die Lupe nehmen
 

@@ -1,5 +1,5 @@
 {
- "total": 81,
+ "total": 80,
  "errors": 0,
  "fixed": 1,
  "posts": [
@@ -73,15 +73,6 @@
    "ok": true
   },
   {
-   "slug": "2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe",
-   "title": "Internet-Turbo: Warum ich meinen DNS-Server getaus",
-   "pillar": "internet-dsl",
-   "fixed": 0,
-   "errors": [],
-   "infos": [],
-   "ok": true
-  },
-  {
    "slug": "2026-08-06-frugalismus-im-alltag",
    "title": "Frugalismus im Alltag: So sparst du jeden Monat ba",
    "pillar": "frugalismus",
@@ -90,15 +81,6 @@
    "infos": [
     "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
-   "ok": true
-  },
-  {
-   "slug": "2026-08-06-turbo-fuers-netz",
-   "title": "Turbo fürs Netz: DNS-Wechsel für schnelleres Inter",
-   "pillar": "internet-dsl",
-   "fixed": 0,
-   "errors": [],
-   "infos": [],
    "ok": true
   },
   {
@@ -178,6 +160,15 @@
   {
    "slug": "2026-08-11-preisgarantie-gas-so-schuetzt-du-dich-vor-preiserhoehungen",
    "title": "Preisgarantie Gas: So schützt du dich vor Preiserh",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-11-preisgarantie-gas-so-sicherst-du-dich-gegen-preisspruenge-ab",
+   "title": "Preisgarantie Gas: So sicherst du dich gegen Preis",
    "pillar": "konto-karten",
    "fixed": 1,
    "errors": [],

@@ -39,7 +39,7 @@ Die Wahl des Instruments entscheidet über das Ergebnis. Der Vergleich für 50 
 | Banksparplan (Fonds aktiv) | 3–4 % (nach Kosten oft weniger) | 14.600–16.200 € | 1,5–2,5 % pro Jahr |
 | ETF-Sparplan (Welt-ETF) | 6–7 % (h[istorisch) | ](../../posts/tagesgeld-zinsen-sicher-anle/)19.500–22.300 € | 0,2–0,5 % pro Jahr |
 
-Der Unterschied zwischen Tagesgeld und ETF-Sparplan liegt nach 18 Jahren bei 5.000 bis 8.000 € – und zwar bei gleichem Monatsbeitrag. Das ist kein Kleingeld: Es ist der Unterschied zwischen Führerschein-Geschenk und Studienfinanzierung.
+Der Unterschied zwischen [Tagesgeld und](../../posts/tagesgeld-zinsen-sicher-anle/) ETF-Sparplan liegt nach 18 Jahren bei 5.000 bis 8.000 € – und zwar bei gleichem Monatsbeitrag. Das ist kein Kleingeld: Es ist der Unterschied zwischen Führerschein-Geschenk und Studienfinanzierung.
 
 Wichtig zur Ehrlichkeit: Die ETF-Rendite ist keine Garantie, sondern eine historische Erwartung. Kursschwankungen gehören dazu – aber bei 18 Jahren Anlagehorizont gleichen sie sich statistisch weitgehend aus. Wer das Risiko reduzieren will, mischt ETF und Tagesgeld (zum Beispiel 70/30).
 
@@ -56,7 +56,7 @@ Für die meisten Familien ist das **Kinderdepot** die bessere Wahl: Steuerlich e
 
 ## Der 5-Schritte-Startplan
 
-So setzt du den ETF-Sparplan für dein Kind in fünf Schritten um:
+So setzt du den [ETF-Sparplan für](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatl/) dein Kind in fünf Schritten um:
 
 **Schritt 1 – Broker vergleichen (30 Minuten):** Du brauchst einen Anbieter mit kostenlosem Kinderdepot und kostenlosen ETF-Sparplänen. Die großen Neobroker und Direktbanken bieten das inzwischen an. Achte auf: keine Depotgebühr, keine Ordergebühr für den Sparplan, günstige Kosten für den Welt-ETF.
 
@@ -111,7 +111,7 @@ Ja – Wertpapiere sind Sondervermögen: Selbst bei einer Broker-Insolvenz gehö
 **Können auch Großeltern einzahlen?**
 Ja, und das ist sogar steuerlich clever: Schenkungen an Enkel sind bis 200.000 € pro Person und 10 Jahre steuerfrei. Die Einzahlung läuft einfach per Überweisung auf das Verrechnungskonto des Kinderdepots.
 
-Der ETF-Sparplan für Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die [Steuern auf ETF-Gewinne](../../posts/freistellungsauftrag-optimal-nutzen/) erklären, wie du den Pauschbetrag maximal ausschöpfst. Alle Bank[ing-Themen: [Ratg](../../posts/kontowechsel-in-20-minuten-wechselserv/)eber Konto & Karten](../../pillar/konto-karten/).
+Der ETF-Sparplan für Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die [Steuern auf ETF-Gewinne](../../posts/freistellungsauftrag-optimal-nutzen/) erklären, wie du den Pauschbetrag maximal ausschöpfst. Alle Bank[ing-Themen: [Ratg](../../posts/kontowechsel-in-20-mi[nuten-wechselserv](../../posts/kontowechsel-in-20-minuten-wechselserv/)/)Eber Konto & Karten](././pillar/konto-karten/).
 
 👉 **Jetzt kostenloses Konto mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14)
 

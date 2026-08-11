@@ -8,3 +8,7 @@
 {"ts": "2026-08-11T09:44:16Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 81}, "output": {"changes": 12}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-08-11T09:45:03Z", "module": "extend_articles", "action": "apply", "input": {"min_words": 1000, "targets": 30}, "output": {"ok": 2, "failed": 0}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-08-11T09:45:04Z", "module": "fix_spaces", "action": "apply", "input": {"files": 81}, "output": {"fixes": 533}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-11T11:09:11Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 82}, "output": {"changes": 27}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-11T11:09:11Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 3}, "output": {"changes": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-11T11:10:27Z", "module": "extend_articles", "action": "apply", "input": {"min_words": 1000, "targets": 29}, "output": {"ok": 2, "failed": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-11T11:10:27Z", "module": "fix_spaces", "action": "apply", "input": {"files": 82}, "output": {"fixes": 1044}, "status": "ok", "critical": false, "commit": null}
