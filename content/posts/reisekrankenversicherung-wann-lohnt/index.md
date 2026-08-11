@@ -22,7 +22,7 @@ Ein Krankenhausaufenthalt in den USA kann schnell sechsstellige Summen kosten. I
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/mietwagen/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/reisekrankenversicherung/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Das Grundproblem:<br>Die gesetzliche Kasse zahlt im Ausland nur wenig
