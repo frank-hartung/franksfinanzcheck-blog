@@ -2,7 +2,7 @@
 title: "Private Unfallversicherung: Für wen sie sich wirklich lohnt"
 description: "Private Unfallversicherung im Vergleich: Was sie zahlt, was sie kostet und für wen sich der Abschluss lohnt – mit den wichtigsten Kriterien."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Unfallversicherung", "Versicherung", "Absicherung"]
 categories: ["Versicherungen"]
 pillar: "versicherungen"

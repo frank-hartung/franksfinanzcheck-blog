@@ -2,7 +2,7 @@
 title: "Stromfresser entlarven: Diese 3 Geräte kosten Geld"
 description: "Welche Haushaltsgeräte verbrauchen am meisten Strom? So findest du Stromfresser, reduzierst Standby-Kosten und sparst hunderte Euro im Jahr."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Strom sparen", "Energiekosten", "Stromfresser"]
 categories: ["Günstige Strom- & Gastarife"]
 pillar: "strom-sparen"

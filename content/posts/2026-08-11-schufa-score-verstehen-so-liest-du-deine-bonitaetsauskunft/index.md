@@ -58,7 +58,7 @@ So holst du sie dir:
 2. Online-Formular ausfüllen und Identität nachweisen (zum Beispiel per Account-Verifizierung oder PostIdent).
 3. Die Kopie kommt als Brief – dauert erfahrungsgemäß bis zu einer Woche.
 
-Mein Praxistipp: Lege dir einen festen Jahresetag dafür – zum Beispiel jedes Jahr zu deinem Geburtstag. Du siehst dann alles auf einen Blick: Konten, Kredite, Scores, Anfragen. Verschollene Konten oder Verträge, die du längst vergessen hattest, fallen sofort auf.
+Mein Praxistipp: Lege dir einen festen Jahresetag dafür – zum Beispiel jedes Jahr zu deinem Geburtstag. Du siehst dann alles auf einen Blick: Konten, Kredite, Scores, Anfragen. Verschollene Konten oder Verträge, die du längst vergessen hattest, fallen sofort auf. Übrigens lohnt der Blick in die Kopie auch ganz ohne große Pläne: Du lernst, wie Banken dich sehen – ein Wissensvorsprung, den die meisten nie haben.
 
 Wichtig dabei: Jede dieser Anfragen gilt als reine Selbstauskunft – sie wird nicht gespeichert und senkt deinen Score nicht. Du kannst also völlig unbelastet nachschauen.
 
@@ -79,6 +79,8 @@ Als grobe Leitlinie haben sich in der Praxis folgende Richtwerte bewährt:
 Diese Werte sind keine harten Gesetzesgrenzen – jede Bank bewertet anders – aber sie geben die richtige Größenordnung. Die Schufa berechnet zudem Branchenscores zum Beispiel speziell für Banken oder Händler, die von der Basisversion abweichen können.
 
 Zwei Dinge fallen vielen beim ersten Blick auf ihre Kopie auf: Erstens wird ein Umzug munter mitgespeichert (das ist normal und kein Fehler). Und zweitens gibt es keine einzige Aussage „gut“ oder „schlecht“ – nur die Summe der Meldungen. Die exakte Formel ist Betriebsgeheimnis; das Grundgerüst ist bekannt: Zahlungserfahrung schlägt alles andere.
+
+Übrigens aktualisiert sich der Basisscore vierteljährlich – wer heute aufräumt, sieht die Wirkung also zeitnah. Banken und Karten-Anbieter arbeiten zudem mit speziellen Branchenscores, die punktuell anders auffallen können; ein mittlerer Basic-Score kann im Kreditsegment trotzdem durchgehen, wenn die letzte Historie sauber ist.
 
 ## Fehler finden und korrigieren lassen
 
@@ -106,6 +108,8 @@ Halte dir dabei vor Augen: Ein zu Unrecht geführter Negativ-Eintrag kann dich b
 **5. Dispo nicht dauerhaft ausreizen.** Immer wieder am Limit zu hängen, gilt als Warnsignal. Nutze den Dispositionsrahmen als Puffer, nicht als Dauerlösung.
 
 **6. Umzüge sauber melden.** Adresswechsel aktuell halten, verhindert Doppelprofile und veraltete Daten.
+
+Geduld gehört dazu: Der Score ist ein Marathon, kein Sprint. Wer heute zwei, drei Entscheidungen sauber trifft – ungenutzte Konten geschlossen, Konditionsanfragen statt Kreditanfragen, Rechnungen pünktlich – sieht die Wirkung beim nächsten Quartals-Update. Und du tust genau das Richtige, ohne einen Euro dafür auszugeben.
 
 ## Häufige Fragen
 

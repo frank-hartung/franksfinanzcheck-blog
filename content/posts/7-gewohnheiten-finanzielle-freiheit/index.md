@@ -2,7 +2,7 @@
 title: "Finanzielle Freiheit: 7 Gewohnheiten für mehr Unabhängigkeit"
 description: "Finanzielle Unabhängigkeit beginnt im Kopf. Lerne 7 tägliche Routinen kennen, die deinen Vermögensaufbau nachhaltig beschleunigen."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset"]
 categories: ["Geld sparen & Frugalismus"]
 pillar: "frugalismus"

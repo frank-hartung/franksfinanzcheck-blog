@@ -2,7 +2,7 @@
 title: "DNS-Server ändern: Der kostenlose Boost für dein Internet"
 description: "Mit einem DNS-Server-Wechsel surfst du spürbar schneller und sicherer. Schritt-für-Schritt-Anleitung für Windows, Mac, Android und den Router."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["DNS", "Internet", "DSL Tipps"]
 categories: ["Internet- & DSL-Hacks"]
 pillar: "internet-dsl"

@@ -2,7 +2,7 @@
 title: "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung"
 description: "20 erprobte Stromspar-Tipps für den Haushalt: von Standby bis Waschmaschine – so senkst du deinen Stromverbrauch und deine Rechnung spürbar."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Strom sparen", "Energie", "Haushalt"]
 categories: ["Günstige Strom- & Gastarife"]
 pillar: "strom-sparen"

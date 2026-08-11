@@ -2,7 +2,7 @@
 title: "Kfz-Versicherung wechseln: Wann es sich wirklich lohnt"
 description: "Kfz-Versicherung vergleichen und wechseln: Typklassen, Schadenfreiheitsklasse und der beste Zeitpunkt. So sparst du bis zu 400 €."
 date: 2026-08-03
-draft: true
+draft: false
 tags: ["Versicherung", "Kfz", "Sparen"]
 categories: ["Versicherungen"]
 pillar: "versicherungen"

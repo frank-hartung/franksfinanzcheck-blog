@@ -2,7 +2,7 @@
 title: "Gebührenfallen beim Banking: Diese 7 Kosten killst du"
 description: "Konto, Karte, Ausland: Banken verstecken Kosten an vielen Stellen. Diese 7 Gebührenfallen erkennst und umgehst du ab sofort – und sparst 100 Euro pro Jahr."
 date: 2026-08-09T07:20:00Z
-draft: true
+draft: false
 tags: ["Bankgebühren", "Kreditkarte", "Konto", "Sparen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"

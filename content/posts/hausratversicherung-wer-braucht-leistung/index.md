@@ -2,7 +2,7 @@
 title: "Hausratversicherung: Wer sie braucht und was sie leistet"
 description: "Hausratversicherung im Vergleich: Was sie abdeckt, was sie kostet und wie du Unterversicherung vermeidest – inkl. der wichtigsten Leistungen."
 date: 2026-08-04
-draft: true
+draft: false
 tags: ["Hausrat", "Versicherung", "Wohnen"]
 categories: ["Versicherungen"]
 pillar: "versicherungen"
