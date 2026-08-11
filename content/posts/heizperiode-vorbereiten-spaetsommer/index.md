@@ -28,7 +28,7 @@ Das Wichtigste in Kürze:
 
 Dein Gastarif entscheidet massiv über deine Fixkosten im Winter. Im August startet die wichtigste Wechselsaison der Energieversorger. Viele Anbieter passen ihre Konditionen pünktlich zum Herbstbeginn an. Wenn du in der Grundversorgung verharrst, zahlst du oft 20 bis 30 % zu viel.
 
-Ein Wechsel funktioniert online in wenigen Minuten. Dein neuer Anbieter übernimmt die Kündigung in der Regel kostenlos für dich. So lässt sich effektiv die Gasrechnung senken, ohne dass du selbst Briefe schreiben musst. Je nach Verbrauch sparst du durch einen Anbieterwechsel zwischen 150 und 400 € pro Jahr.
+Ein Wechsel funktioniert online in wenigen Minuten. Dein neuer Anbieter übernimmt die Kündigung in der Regel kostenlos für dich. So lässt sich effektiv die Gasrechnung senken, ohne dass du selbst Briefe schreiben musst. Je nach Verbrauch sparst du durch einen Anbieterwechsel zwischen 150 € und 400 € pro Jahr.
 
 Worauf du beim Vergleich achten solltest:
 * Achte auf den Arbeitspreis pro kWh und den Grundpreis.
@@ -42,7 +42,7 @@ Eine schlecht eingestellte Anlage verschwendet bis zu 15 % deiner Energie. Desh
 
 Wenn das Wasser die Wärme optimal transportiert, sinken deine Kosten sofort. Ein hydraulischer Abgleich durch einen Fachbetrieb optimiert die Wärmeverteilung zusätzlich. Das kostet je nach Hausgröße ca. 500 bis 900 €, amortisiert sich aber oft nach wenigen Jahren. Viele Fachbetriebe haben im Spätsommer noch kurzfristige Termine frei.
 
-Programmierbare Thermostate helfen dir zusätzlich beim Sparen. Sie regeln die Wärme automatisch herunter, wenn du nicht zu Hause bist oder schläfst. Moderne Modelle kosten zwischen 20 und 50 € pro Stück. Diese Investition hast du oft schon nach einer Heizperiode wieder eingespielt.
+Programmierbare Thermostate helfen dir zusätzlich beim Sparen. Sie regeln die Wärme automatisch herunter, wenn du nicht zu Hause bist oder schläfst. Moderne Modelle kosten zwischen 20 € und 50 € pro Stück. Diese Investition hast du oft schon nach einer Heizperiode wieder eingespielt.
 
 ## 3. Heizverhalten optimieren
 

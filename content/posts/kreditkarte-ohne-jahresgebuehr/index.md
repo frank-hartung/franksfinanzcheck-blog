@@ -38,7 +38,7 @@ Lockvogelangebote werben gern mit einem kostenlosen ersten Jahr. Lies das Kleing
 
 Die Karte selbst kostet nichts, aber jede Zahlung in Dollar oder Pfund wird teuer. Diese 1 bis 2 % summieren sich im Urlaub schnell zu beachtlichen Beträgen. Wähle für Fernreisen gezielt eine **kostenlose Kreditkarte** ohne Auslandsnutzungsgebühr.
 
-Wer am falschen Automaten Geld zieht, zahlt oft pauschale Gebühren zwischen 4 und 6 €. Eine gute Karte verzichtet auf solche Hürden und erlaubt den Zugriff auf Bargeld an fast jedem Terminal. Prüfe vorab die Mindestbeträge, da manche Banken erst ab 50 € kostenfrei auszahlen.
+Wer am falschen Automaten Geld zieht, zahlt oft pauschale Gebühren zwischen 4 € und 6 €. Eine gute Karte verzichtet auf solche Hürden und erlaubt den Zugriff auf Bargeld an fast jedem Terminal. Prüfe vorab die Mindestbeträge, da manche Banken erst ab 50 € kostenfrei auszahlen.
 
 ## Wann sich eine Karte mit Gebühr lohnt
 
@@ -63,7 +63,7 @@ Debit-Karten buchen Umsätze sofort von deinem Girokonto ab und sind bei vielen 
 ## Häufige Fragen
 
 ### Was kostet eine Kreditkarte im Schnitt?
-Einfache Karten kosten dich heute glücklicherweise 0 € bei vollem Funktionsumfang. Für exklusive Premium-Modelle mit Versicherungen zahlst du zwischen 50 und 150 € pro Jahr.
+Einfache Karten kosten dich heute glücklicherweise 0 € bei vollem Funktionsumfang. Für exklusive Premium-Modelle mit Versicherungen zahlst du zwischen 50 € und 150 € pro Jahr.
 
 ### Kann ich mit einer kostenlosen Karte im Ausland bezahlen?
 Natürlich funktioniert das, allerdings variieren die Konditionen je nach Bank. Achte auf Karten ohne Fremdwährungsgebühr, um die typischen 1 bis 2 % Aufschlag zu vermeiden.

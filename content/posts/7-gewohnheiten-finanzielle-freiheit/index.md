@@ -38,7 +38,7 @@ Verträge für Strom, DSL oder Versicherungen bieten oft ein Einsparpotenzial vo
 
 ## 5. Automatisiere deinen Vermögensaufbau
 
-Richte einen automatischen ETF-Sparplan ein, der direkt nach deinem Gehaltseingang ausführt. Konstanz schlägt den Versuch, den perfekten Einstiegszeitpunkt am Markt zu finden. Schon kleine Summen zwischen 25 und 50 € generieren über die Jahre ein beachtliches passives Einkommen. Der Zinseszins arbeitet für dich, während du dich um wichtigere Dinge kümmerst. Ein Beispiel für die Macht des Zinseszinses:
+Richte einen automatischen ETF-Sparplan ein, der direkt nach deinem Gehaltseingang ausführt. Konstanz schlägt den Versuch, den perfekten Einstiegszeitpunkt am Markt zu finden. Schon kleine Summen zwischen 25 € und 50 € generieren über die Jahre ein beachtliches passives Einkommen. Der Zinseszins arbeitet für dich, während du dich um wichtigere Dinge kümmerst. Ein Beispiel für die Macht des Zinseszinses:
 - Du investierst 100 € im Monat über 30 Jahre mit einer jährlichen Rendite von 5 %.
 - Nach 30 Jahren hast du insgesamt 36.000 € investiert, aber dank des Zinseszinses hast du ein Vermögen von über 70.000 € aufgebaut.
 

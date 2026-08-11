@@ -26,7 +26,7 @@ Ein einzelner Router kann Wände, Decken und dicke Mauern nur begrenzt durchdrin
 
 Ein Repeater empfängt das WLAN-Signal des Routers und sendet es verstärkt weiter. Er wird einfach in eine Steckdose gesteckt und mit dem WLAN verbunden. 
 **Vorteile:**
-- Günstig, zwischen 20 und 50 €
+- Günstig, zwischen 20 € und 50 €
 - Einfache Einrichtung
 - Flexibel einsetzbar, eine Steckdose genügt
 
@@ -48,7 +48,7 @@ Ein Mesh-System besteht aus mehreren gleichartigen Knoten, die untereinander ein
 - Eine einzige SSID, ein einziges Netzwerk
 
 **Nachteile:**
-- Teurer, zwischen 100 und 300 € für 2–3 Knoten
+- Teurer, zwischen 100 € und 300 € für 2–3 Knoten
 - Etwas mehr Einrichtungsaufwand
 
 **Mein Fazit:** für größere Wohnungen, Häuser, mehrere Etagen oder wenn du Video-Streaming und Homeoffice gleichzeitig nutzt, ist Mesh die bessere Investition.

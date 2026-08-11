@@ -58,7 +58,7 @@ Eine weitere Möglichkeit, deine Heizkosten zu senken, ist die **Isolierung** de
 Ja, für den Wechselvorgang fallen keine Gebühren an. Dein neuer Anbieter übernimmt die bürokratische Abwicklung mit dem alten Versorger als Serviceleistung. Es entstehen keine Kosten für die Umstellung deines Zählers.
 
 ### Wie viel kann ich beim Gas sparen?
-Ein Gasvergleich lohnt sich besonders für Haushalte in der Grundversorgung. Hier liegt das Sparpotenzial oft zwischen 10 und 25 % der Gesamtkosten. Bei einem Einfamilienhaus mit 20.000 kWh Verbrauch sparst du so schnell 300 € oder mehr.
+Ein Gasvergleich lohnt sich besonders für Haushalte in der Grundversorgung. Hier liegt das Sparpotenzial oft zwischen 10 % und 25 % der Gesamtkosten. Bei einem Einfamilienhaus mit 20.000 kWh Verbrauch sparst du so schnell 300 € oder mehr.
 
 ### Was passiert, wenn der alte Vertrag noch läuft?
 Du schließt den neuen Vertrag einfach mit Wirkung zum Ende deiner aktuellen Laufzeit ab. Bei einer Preiserhöhung hast du zudem ein Sonderkündigungsrecht. Nutze dieses Recht aktiv, um sofort Gaskosten sparen zu können.
