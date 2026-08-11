@@ -1,16 +1,17 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 11.08.2026 09:46 Uhr (MESZ)
+> Automatisch aktualisiert: 11.08.2026 11:12 Uhr (MESZ)
 
 ## Heutiger Stand
 
-- **Veröffentlicht heute:** 1/2 Artikel
+- **Veröffentlicht heute:** 2/2 Artikel
 - 2026-08-11-preisgarantie-gas-so-schuetzt-du-dich-vor-preiserhoehungen – Preisgarantie Gas: So schützt du dich vor Preiserhöhungen
+- 2026-08-11-preisgarantie-gas-so-sicherst-du-dich-gegen-preisspruenge-ab – Preisgarantie Gas: So sicherst du dich gegen Preissprünge ab
 
 ## System
 
 - **Themenpool:** 123 Themen, **94 frei**
-- **Letzter Content-Commit:** 0e96ab9 2026-08-11 content: neuer Artikel sofort optimiert (Meta, interne Verlinkung)
+- **Letzter Content-Commit:** bc1d8cd 2026-08-11 content: neuer Artikel sofort optimiert (Meta, interne Verlinkung)
 - **Tageslimit:** 2 (steuerbar per Variable MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen
