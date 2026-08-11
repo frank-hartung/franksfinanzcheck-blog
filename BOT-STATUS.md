@@ -1,17 +1,16 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 10.08.2026 22:10 Uhr (MESZ)
+> Automatisch aktualisiert: 11.08.2026 09:46 Uhr (MESZ)
 
 ## Heutiger Stand
 
-- **Veröffentlicht heute:** 2/2 Artikel
-- 2026-08-10-dsl-wechselbonus-sichern – DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
-- 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas – Sicher heizen: So schützt dich eine Gaspreisgarantie
+- **Veröffentlicht heute:** 1/2 Artikel
+- 2026-08-11-preisgarantie-gas-so-schuetzt-du-dich-vor-preiserhoehungen – Preisgarantie Gas: So schützt du dich vor Preiserhöhungen
 
 ## System
 
 - **Themenpool:** 123 Themen, **94 frei**
-- **Letzter Content-Commit:** noch keiner
+- **Letzter Content-Commit:** 0e96ab9 2026-08-11 content: neuer Artikel sofort optimiert (Meta, interne Verlinkung)
 - **Tageslimit:** 2 (steuerbar per Variable MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen
