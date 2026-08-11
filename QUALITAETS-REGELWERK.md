@@ -105,6 +105,16 @@ Heilung = KI ergänzt **Mehrwert-Module** (kein Fülltext!): Rechenbeispiel mit 
 typische Fehler, Checkliste, +2 FAQ – eingefügt vor Fazit/Disclaimer, nach Gates.
 Neue Artikel: Engine (`--new-only`). Rückstand: Wochen-Audit (`--backlog 3`, Pillars zuerst).
 
+### lektor_guard.py – ✒️ Verlags-Lektorat (Zeitungs-/Buchniveau, neu 11.08.)
+| Regel | Inhalt | Automatik |
+|---|---|---|
+| L1 | Wortduplikate („das das") | Auto-Fix (sichere Liste) + Komma-Lookbehind bei Artikeln |
+| L1rel | Relativkaskaden „die die meisten" | NIE auto – korrektes Deutsch! (nur Report) |
+| L2 | Füllphrasen (Bürokratie-Deutsch) mit Kanon-Ersatz | Auto |
+| L3 | Personenkonsistenz Sie↔du | **Nur KI** (--ai) mit Grammatik-Gate (du+Verb-muss) |
+| L4 | Ausrufezeichen-Inflation „!!" -> „!"; >3 pro Artikel = Werbeton-Radar | Auto + Report |
+| L5 | Echo-Wörter (>4 Buchstaben 2× im Satz) | Report; KI-veredelt mit --ai + Gates |
+
 ### brand_guard.py – 🔒 Marken-Lock (höchste Stufe)
 Sperrt in `data/brand_lock.yaml` enthaltene hugo.toml-Bausteine: Willkommens-Titel/Tagline,
 Meta-Description, Affiliate-Disclaimer. **Jede Abweichung wird zurückgerollt.**
@@ -161,6 +171,7 @@ oder einfach den Wert in `data/brand_lock.yaml` ändern und commiten – die Aut
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026 (2):** Verlags-Lektorat `lektor_guard.py` (L1–L5) in die Kette eingebaut.
 - **11.08.2026:** Hoheitskarte Längen-Systeme festgelegt (Posts vs. Pillar, Floor 1.000); R9 Fence-Normalisierung dauerhaft; 56 Alt-Fences geheilt.
 - **10.08.2026:** Regelwerk 1.0. Neu: casing_guard, dash_guard (R1–R8),
   compound_guard, emoji_guard (E1–E5), length_guard, brand_guard,
