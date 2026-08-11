@@ -95,7 +95,7 @@ def now_utc_iso() -> str:
             - datetime.timedelta(minutes=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def save_article(title, desc, body, draft=False, inspiration=None):
+def save_article(title, desc, body, draft=False, inspiration=None, pillar=None):
     """Speichert Artikel als Page-Bundle (Format wie bisherige Pipeline)."""
     date = datetime.date.today().isoformat()
     slug = g.slugify(title)
@@ -128,7 +128,7 @@ def save_article(title, desc, body, draft=False, inspiration=None):
         f"draft: {draft_line}\n"
         'tags: []\n'
         'categories: ["Ratgeber"]\n'
-        'pillar: "konto-karten"\n'
+        'pillar: "' + (pillar or "konto-karten") + '"\n' 
         "author: \"Frank\"\n"
         "ai_generated: true\n"
         f'ai_provider: "Content-Engine v2"\n'
@@ -299,7 +299,7 @@ def main():
         title, desc, body = make_draft(topic, used_titles)
         try:
             filename, slug = save_article(title, desc, body, draft=True,
-                                          inspiration=topic.get("title"))
+                                          inspiration=topic.get("title"), pillar=topic.get("pillar"))
             draft_saved = True
             print(f"  ✓ Entwurf gesichert: {slug} (draft: true)")
         except Exception as exc:  # noqa: BLE001
@@ -311,7 +311,7 @@ def main():
         title, desc, body = result
         try:
             filename, slug = save_article(title, desc, body, draft=False,
-                                          inspiration=topic.get("title"))
+                                          inspiration=topic.get("title"), pillar=topic.get("pillar"))
             print(f"  ✓ Artikel veröffentlicht ({level}): {slug}")
         except Exception as exc:  # noqa: BLE001
             print(f"  ✗ Speichern fehlgeschlagen: {exc}")
