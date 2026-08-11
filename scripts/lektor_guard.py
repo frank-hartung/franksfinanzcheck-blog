@@ -28,7 +28,7 @@
 #        sensationell -> beachtlich, mega- -> sehr …) – Auto-Fix Kanon
 #    L12 LONGSATZ-ALARM: >35 Woerter -> Report
 #
-#  SABOTAGE-SCHUTZ (neu): SELFTEST mit 12 eingefrorenen Lektorats-Faellen
+#  SABOTAGE-SCHUTZ (neu): SELFTEST mit 15 eingefrorenen Lektorats-Faellen
 #  (inkl. Negativ-Fallen „darf unangetastet bleiben") laeuft vor JEDEM
 #  Einsatz; Abweichung -> Exit 2, keine Datei wird angefasst.
 #
@@ -157,6 +157,11 @@ INTENSIV = [
 # L12 LANGE-SAETZE-ALARM (Verlagsstil: >35 Woerter = Sichtungskandidat)
 SATZ_MAX_WOERTER = 35
 
+# L13 DOPPEL-ANLAUF nach Grossbuchstaben („Ddiebesten" <- KI frass das
+# Leerzeichen). Erkennung only: Report (Rekonstruktion ist Einzelfall).
+L13_WHITELIST = {"aachen", "aalen", "aare", "aalst", "aalborg", "aalenau"}
+L13_PAT = re.compile(r"\b([A-ZÄÖÜ][a-zäöüß]+)\b")
+
 # ------------------------------------------------------------
 # SABOTAGE-SCHUTZ (11.08.2026, Abend): eingefrorene Lektorats-Faelle.
 # Laueft vor JEDEM Einsatz; bei Abweichung Exit 2, bevor eine Datei
@@ -180,6 +185,8 @@ SELFTEST = [
     # niemals als Platzhalter-Leiche in der Datei landen:
     ("MASK", "Das macht das [Internet schneller machen](../../posts/2026-08-06-turbo-fuers-netz/) zu einer Sache von Millisekunden – das Gefühl, wie eine Seite „anspringt“, zählt.",
      "Das macht das [Internet schneller machen](../../posts/2026-08-06-turbo-fuers-netz/) zu einer Sache von Millisekunden – das Gefühl, wie eine Seite „anspringt“, zählt.", ""),
+    ("L13", "Ddiebesten Tarife findest du hier zuerst von uns ausgewertet und sortiert dargestellt immer.", None, "L13-Doppelanlauf"),
+    ("L13neg", "Aachen liegt im Westen und ist eine schoene Stadt zum Wohnen und Entdecken.", None, ""),
 ]
 
 # ---------------- L5/L3 Wortlisten ------------------------------------------------
@@ -221,7 +228,8 @@ def unmask(line, store):
 
 def fresh_stats() -> dict:
     return {"L1": 0, "L1rel": 0, "L2": 0, "L3": 0, "L4": 0, "L5echo": 0, "L5ki": 0,
-            "L7": 0, "L8n": 0, "L8meldung": False, "L9": 0, "L10": 0, "L11": 0, "L12": 0}
+            "L7": 0, "L8n": 0, "L8meldung": False, "L9": 0, "L10": 0, "L11": 0, "L12": 0,
+            "L13": 0}
 
 
 def run_selftest() -> list[str]:
@@ -484,6 +492,15 @@ def lektor_line(line: str, stats, reports=None, fname="", line_no=0, du_dominant
                 stats["L12"] += 1
                 if reports is not None:
                     reports.append((fname, line_no, "L12-Longsatz", s_[:70]))
+        # L13 Doppel-Anlauf („Ddiebesten") – Report, kein Auto-Fix
+        for m13 in L13_PAT.finditer(line):
+            wort = m13.group(1)
+            if len(wort) > 2 and wort[0].lower() == wort[1] and wort.lower() not in L13_WHITELIST:
+                stats["L13"] += 1
+                if reports is not None:
+                    reports.append((fname, line_no, "L13-Doppelanlauf",
+                                    f"{wort} in: {line.strip()[:60]}"))
+                break
         for w_ in set(anfaenge):
             if anfaenge.count(w_) >= ANFANG_ECHO_MIN:
                 stats["L9"] += 1
@@ -559,7 +576,7 @@ def main() -> None:
     print(f"✅ Lektor-Selbsttest: {len(SELFTEST)} Fälle grün.")
     files = target_files()
     total_fix = {"L1": 0, "L2": 0, "L3": 0, "L4": 0, "L5echo": 0, "L5ki": 0,
-                 "L7": 0, "L8n": 0, "L9": 0, "L10": 0, "L11": 0, "L12": 0}
+                 "L7": 0, "L8n": 0, "L9": 0, "L10": 0, "L11": 0, "L12": 0, "L13": 0}
     all_reports = []
     touched = 0
     for p in files:
@@ -587,6 +604,7 @@ def main() -> None:
     L.append(f"| L10 Zahlenschreibweise (Auto) | {total_fix['L10']} |")
     L.append(f"| L11 Werbe-Intensivel (Auto) | {total_fix['L11']} |")
     L.append(f"| L12 Longsatz-Alarm (Report) | {total_fix['L12']} |")
+    L.append(f"| L13 Doppelanlauf-Detektor (Report) | {total_fix['L13']} |")
     if all_reports:
         L += ["", "## Fundstellen (Auswahl)", ""]
         L += [f"- `{f}` Z.{n}: **{t}** {c[:60]}" for f, n, t, c in all_reports[:20]]

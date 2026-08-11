@@ -16,6 +16,17 @@ name: Deploy auf GitHub Pages
 on:
   push:
     branches: ["main"]
+    # Deploy-Flut-Bremse (11.08. Spaet, Audit-Punkt 3): Nur Nutzer-Sichtbares
+    # baut die Seite neu. Report-/Bot-Haushalts-Commits, Skripte, CI-Dateien
+    # und data/-Tagebuecher triggen KEINEN Rebuild mehr (halbiert Builds).
+    paths-ignore:
+      - "scripts/**"
+      - ".github/**"
+      - "data/**"
+      - "/*.md"          # Root-Reports (alle *-REPORT.md, STATUS, REGELWERK)
+      - "/.polish_cache.json"
+      - "/.affiliate_report.json"
+      - "/.meta_report.json"
   workflow_dispatch: {}
 
 permissions:

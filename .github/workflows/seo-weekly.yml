@@ -196,6 +196,29 @@ jobs:
           python3 scripts/meta_report.py | tee /tmp/meta_gate_log.txt
           exit ${PIPESTATUS[0]}
 
+      - name: Textbatterie hinterher (Kanon-Ordnung nach KI-/SEO-Edits)
+        # Neuerung 11.08. (Audit-Punkt 2): Alle SEO-Editoren (KI-Keywords,
+        # Meta, interne Links) schreiben Text UND durchliefen bisher keine
+        # Sprach-Wachen -> mittwochs konnte sich falsch gesetzter Text
+        # einschleichen. Jetzt: die komplette Waechter-Sturmkette danach,
+        # selbstheilend, mit eigenem Commit (automatisch mit in Fresh-Sein).
+        run: |
+          python3 scripts/casing_guard.py --fix || echo "⚠ Casing (nicht kritisch)"
+          python3 scripts/dash_guard.py --fix || echo "⚠ Dash (nicht kritisch)"
+          python3 scripts/compound_guard.py --fix || echo "⚠ Compound (nicht kritisch)"
+          python3 scripts/unit_guard.py --fix || echo "⚠ Unit (nicht kritisch)"
+          python3 scripts/emoji_guard.py --fix || echo "⚠ Emoji (nicht kritisch)"
+          python3 scripts/lektor_guard.py --fix || echo "⚠ Lektor (nicht kritisch)"
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "Textbatterie: sauber."
+          else
+            git commit -m "chore: Textbatterie nach SEO-Edits (selbstheilend)"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push || { sleep 20; git pull --rebase origin main && git push; }
+          fi
+
       - name: lastmod für geänderte Artikel setzen (Frische-Signal)
         # Artikel, die in diesem Lauf optimiert wurden (Meta, Rechtschreibung,
         # Links), bekommen lastmod=heute → Hugo rendert article:modified_time

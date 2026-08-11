@@ -9,9 +9,12 @@
 # ============================================================
 name: FrankAutoOps-Report
 
+# HINWEIS (11.08. Spaet): Cron 07:35 MESZ statt 08:00 – raus aus dem
+# Push-Rennen mit Pinterest-AI (08:00) + Content-Engine (08:10), beide
+# committen ebenfalls. Weniger Rebase-Larm, weniger Wartezeit.
 on:
   schedule:
-    - cron: "0 6 * * *"     # 08:00 MESZ
+    - cron: "35 5 * * *"   # 07:35 MESZ (vor dem 08:00-Pulk aus Pinterest/Engine)
   workflow_dispatch: {}
 
 permissions:
