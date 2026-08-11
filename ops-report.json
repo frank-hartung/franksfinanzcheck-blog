@@ -1,0 +1,259 @@
+{
+  "infrastructure": {
+    "hosting": "github-pages",
+    "hosting_detail": "Branch gh-pages via deploy.yml (peaceiris/actions-gh-pages)",
+    "dns_proxy": "cloudflare-proxy",
+    "dns_detail": "Cloudflare nur DNS + Proxy (A: 185.199.108-111.153), KEIN Cloudflare Pages/Workers",
+    "ssl_mode": "full",
+    "ssl_note": "GitHub liefert Wildcard *.github.io; Umstellung auf Full (strict), sobald Watchdog-Check-4 das GitHub-TLS-Zertifikat meldet",
+    "cache_strategy": "cache-buster-v-sha",
+    "cache_note": "Assets max-age=31536000 + ?v=<deploy-sha>; HTML dynamisch (max-age=600). KEIN Cache-Purge noetig.",
+    "deploy_trigger": "github-only",
+    "deploy_note": "push/workflow_dispatch; Content-Bot stoesst Deploy explizit an (GITHUB_TOKEN triggert keine Workflows)",
+    "backup": "github-repo-offsite",
+    "backup_note": "GitHub-Repo = Offsite-Backup (Code+Content+History); S3-Export geplant (Credentials fehlen)",
+    "origin_url": "https://frank-hartung.github.io/franksfinanzcheck-blog/",
+    "live_url": "https://franksfinanzcheck.de/"
+  },
+  "audit": {
+    "today_events": 7,
+    "total_events": 27,
+    "errors": 1,
+    "critical": 1,
+    "last_events": [
+      {
+        "ts": "2026-08-11T00:03:07Z",
+        "module": "fix_spaces",
+        "action": "apply",
+        "input": {
+          "files": 80
+        },
+        "output": {
+          "fixes": 531
+        },
+        "status": "ok",
+        "critical": false,
+        "commit": null
+      },
+      {
+        "ts": "2026-08-11T00:10:31Z",
+        "module": "fix_spaces",
+        "action": "apply",
+        "input": {
+          "files": 80
+        },
+        "output": {
+          "fixes": 487
+        },
+        "status": "ok",
+        "critical": false,
+        "commit": null
+      },
+      {
+        "ts": "2026-08-11T00:13:51Z",
+        "module": "fix_spaces",
+        "action": "apply",
+        "input": {
+          "files": 80
+        },
+        "output": {
+          "fixes": 529
+        },
+        "status": "ok",
+        "critical": false,
+        "commit": null
+      },
+      {
+        "ts": "2026-08-11T00:53:03Z",
+        "module": "fix_dash_eol",
+        "action": "apply",
+        "input": {
+          "files": 3
+        },
+        "output": {
+          "changes": 3
+        },
+        "status": "ok",
+        "critical": false,
+        "commit": null
+      },
+      {
+        "ts": "2026-08-11T08:30:43Z",
+        "module": "fix_linebreaks",
+        "action": "apply",
+        "input": {
+          "files": 80
+        },
+        "output": {
+          "changes": 0
+        },
+        "status": "ok",
+        "critical": false,
+        "commit": null
+      }
+    ]
+  },
+  "playbooks": [
+    {
+      "name": "alert-on-failure",
+      "triggers": []
+    },
+    {
+      "name": "backlink-weekly",
+      "triggers": []
+    },
+    {
+      "name": "bot-watchdog",
+      "triggers": []
+    },
+    {
+      "name": "content-engine-v2",
+      "triggers": []
+    },
+    {
+      "name": "dependabot-automerge",
+      "triggers": []
+    },
+    {
+      "name": "deploy",
+      "triggers": []
+    },
+    {
+      "name": "frankautoops-report",
+      "triggers": []
+    },
+    {
+      "name": "layout-ai",
+      "triggers": []
+    },
+    {
+      "name": "newsletter-ai",
+      "triggers": []
+    },
+    {
+      "name": "pinterest-ai",
+      "triggers": []
+    },
+    {
+      "name": "repin-weekly",
+      "triggers": []
+    },
+    {
+      "name": "seo-weekly",
+      "triggers": []
+    },
+    {
+      "name": "social-ai",
+      "triggers": []
+    },
+    {
+      "name": "update-quarterly",
+      "triggers": []
+    },
+    {
+      "name": "uptime-check",
+      "triggers": []
+    },
+    {
+      "name": "weekly-audit",
+      "triggers": []
+    }
+  ],
+  "commands": [
+    {
+      "ts": "2026-08-11T00:02:45Z",
+      "module": "extend_articles",
+      "action": "apply",
+      "status": "partial"
+    },
+    {
+      "ts": "2026-08-11T00:03:07Z",
+      "module": "fix_linebreaks",
+      "action": "apply",
+      "status": "ok"
+    },
+    {
+      "ts": "2026-08-11T00:03:07Z",
+      "module": "fix_spaces",
+      "action": "apply",
+      "status": "ok"
+    },
+    {
+      "ts": "2026-08-11T00:10:31Z",
+      "module": "fix_spaces",
+      "action": "apply",
+      "status": "ok"
+    },
+    {
+      "ts": "2026-08-11T00:13:51Z",
+      "module": "fix_spaces",
+      "action": "apply",
+      "status": "ok"
+    },
+    {
+      "ts": "2026-08-11T00:53:03Z",
+      "module": "fix_dash_eol",
+      "action": "apply",
+      "status": "ok"
+    },
+    {
+      "ts": "2026-08-11T08:30:43Z",
+      "module": "fix_linebreaks",
+      "action": "apply",
+      "status": "ok"
+    }
+  ],
+  "reports": {
+    "content": {
+      "posts": 74
+    },
+    "quality": {
+      "articles": 74,
+      "avg_score": 0.835,
+      "publish": 30,
+      "draft_autofix": 41,
+      "human_review": [
+        "2026-08-06-frugalismus-im-alltag",
+        "mietwagen-fallen-vermeiden",
+        "stromanbieter-wechseln-2026"
+      ]
+    }
+  },
+  "next_steps": [
+    {
+      "priority": 1,
+      "action": "human-review",
+      "detail": "Artikel unter 0.80: 2026-08-06-frugalismus-im-alltag, mietwagen-fallen-vermeiden, stromanbieter-wechseln-2026"
+    },
+    {
+      "priority": 1,
+      "action": "investigate-errors",
+      "detail": "1 Audit-Fehler – Logs prüfen"
+    },
+    {
+      "priority": 1,
+      "action": "critical-incident",
+      "detail": "Kritische Vorfälle vorhanden – sofort prüfen"
+    },
+    {
+      "priority": 2,
+      "action": "run-content-engine",
+      "detail": "Content-Engine v2 läuft automatisch (Crons 08:10–19:40 MESZ)"
+    },
+    {
+      "priority": 3,
+      "action": "monitor-tls-cert",
+      "detail": "GitHub-TLS-Zertifikat: Watchdog Check 4 meldet, sobald da → Cloudflare SSL auf Full (strict) (kein CF Pages/Workers)"
+    },
+    {
+      "priority": 3,
+      "action": "pinterest-token",
+      "detail": "PINTEREST_ACCESS_TOKEN fehlt → Pinterest-AI postet noch nicht"
+    },
+    {
+      "priority": 3,
+      "action": "s3-backup",
+      "detail": "S3-Export geplant (INFRASTRUKTUR.md §4.5) – Credentials fehlen; GitHub-Repo ist bereits Offsite-Backup"
+    }
+  ]
+}
