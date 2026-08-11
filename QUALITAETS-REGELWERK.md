@@ -105,6 +105,16 @@ Heilung = KI ergänzt **Mehrwert-Module** (kein Fülltext!): Rechenbeispiel mit 
 typische Fehler, Checkliste, +2 FAQ – eingefügt vor Fazit/Disclaimer, nach Gates.
 Neue Artikel: Engine (`--new-only`). Rückstand: Wochen-Audit (`--backlog 3`, Pillars zuerst).
 
+### math_guard.py – 🧮 Faktencheck-Schreibtisch (neu 11.08.)
+| Regel | Inhalt | Automatik |
+|---|---|---|
+| M1 | Rate x Zeiteinheit x Dauer = Endbetrag **nachrechnen** („5–10 €/Tag x 14 Tage = 70–140 €") | Auto-Fix (Behauptung, letztes Zahlenpaar); weiche Formen (rund/ca.) nur melden |
+| M2 | Prozentformeln („X % von Y") | pruefen |
+
+Ausloeser: Artikel „Urlaub mit Kindern" (Beispielrechnung korrekt; dafuer
+der Schutz fuer künftige KI-Halluzinationen, die erfahrungsgemaeß bei
+Geldrechnungen eklatant sind).
+
 ### lektor_guard.py – ✒️ Verlags-Lektorat (Zeitungs-/Buchniveau, neu 11.08.)
 | Regel | Inhalt | Automatik |
 |---|---|---|
