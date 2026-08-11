@@ -37,7 +37,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python3 scripts/brand_guard.py --fix || echo "⚠ Brand-Lock verletzt & geheilt"
-          python3 scripts/length_guard.py --fix --ai --backlog 3
+          python3 scripts/length_guard.py --fix --ai --backlog 3 --scope pillar
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
           git add -A

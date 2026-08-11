@@ -80,6 +80,21 @@ E1 Marken-Emoji an Startseite auto-ergänzen (Themen→Emoji-Mapping, Default �
 E2 Meta-Description bleibt Emojig-arm · E3 Anti-Overuse (max 2) · E4 Mojibake → Auto-Reparatur ·
 E5 Zero-Width-Zeichen (U+200B…) → immer löschen.
 
+## 🏛️ Hoheitskarte (wer regelt was — einmalig festgelegt 11.08.2026)
+
+Bei zwei parallel gebauten Längen-Systemen gilt ab jetzt:
+
+| Klasse | Hoheit | Korridor | Mechanik |
+|---|---|---|---|
+| **Posts** (normal) | `check_length.py` (Generierungs-System) | Floor **1.000** Wörter via `LENGTH_MIN_WORDS` (Repo-Variable, Default in Engine) – Optimum 800–1.400 | Heilung zur Generierungszeit |
+| **Pillar-Seiten** | `length_guard.py --scope pillar` (dieses System) | **2.500–4.000 Wörter**, Heil < 1.800 | Engine + Wochen-Backlog (3/Wo.) |
+
+Damit: Keine Doppel-KI-Kosten, keine Ping-Pong-Loops, getrennte Strenge.
+Dash-Guards (dash_guard.py ≠ fix_dash_eol.py/fix_dash_und.py) koexistieren
+bewusst – nachgewiesen disjunkte Muster.
+
+---
+
 ### length_guard.py – Längen-Korridore (Affiliate-Profi)
 | Typ | Ziel | Warnung | Selbstheilung unter … |
 |---|---|---|---|
@@ -146,6 +161,7 @@ oder einfach den Wert in `data/brand_lock.yaml` ändern und commiten – die Aut
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **11.08.2026:** Hoheitskarte Längen-Systeme festgelegt (Posts vs. Pillar, Floor 1.000); R9 Fence-Normalisierung dauerhaft; 56 Alt-Fences geheilt.
 - **10.08.2026:** Regelwerk 1.0. Neu: casing_guard, dash_guard (R1–R8),
   compound_guard, emoji_guard (E1–E5), length_guard, brand_guard,
   uplift der Workflow-Härtung (Audit-Fixes: Alerting-Blindspot,

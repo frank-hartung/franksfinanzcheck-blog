@@ -59,6 +59,17 @@ DO_FIX = "--fix" in sys.argv
 USE_AI = "--ai" in sys.argv
 DRY_RUN = "--dry-run" in sys.argv
 NEW_ONLY = "--new-only" in sys.argv
+# Hoheits-Aufteilung (11.08.2026 mit Betreiber abgesprochen):
+#   posts  -> check_length.py (Generierungs-eigen)
+#   pillar -> length_guard.py (hier, 2.500+ Wörter)
+# Aufruf in der Engine nur mit --scope pillar; Skript allein -> all.
+SCOPE = "all"
+if "--scope" in sys.argv:
+    _i = sys.argv.index("--scope")
+    if _i + 1 < len(sys.argv):
+        SCOPE = sys.argv[_i + 1].lower()
+        if SCOPE not in ("pillar", "posts", "all"):
+            sys.exit("FEHLER: --scope muss pillar|posts|all sein")
 BACKLOG = int(sys.argv[sys.argv.index("--backlog") + 1]) if "--backlog" in sys.argv else 0
 
 POLICY = {
@@ -186,6 +197,8 @@ def target_files() -> list[Path]:
         dd = ROOT / "content" / d
         if dd.is_dir():
             files += sorted(dd.rglob("index.md"))
+    if SCOPE != "all":
+        files = [f for f in files if classify(f) == SCOPE]
     if NEW_ONLY:
         changed = set()
         try:
