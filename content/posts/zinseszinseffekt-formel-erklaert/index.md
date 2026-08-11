@@ -28,8 +28,7 @@ Zinseszins bedeutet: Du bekommst nicht nur Zinsen auf dein ursprüngliches Kapit
 
 Ein einfaches Beispiel: 1.000 Euro zu 5 Prozent. Nach einem Jahr hast du 1.050 Euro. Im zweiten Jahr bekommst du 5 Prozent auf 1.050 Euro = 52,50 Euro – nicht nur 50 Euro. Der Unterschied klingt klein, aber über Jahrzehnte wird er gewaltig: Das Wachstum beschleunigt sich ständig, weil die Basis jedes Jahr größer wird.
 
-Der Unterschied zur einfachen Verzinsung: Bei 5 Prozent ohne Zinseszins würden 1.000 Euro in 20 Jahren auf 2.000 Euro wachsen (50 Euro pro Jahr). Mit Zinseszins sind es 2.653 Euro –   
-mehr als 650 Euro zusätzlich, allein weil die Zinsen mitgearbeitet haben.
+Der Unterschied zur einfachen Verzinsung: Bei 5 Prozent ohne Zinseszins würden 1.000 Euro in 20 Jahren auf 2.000 Euro wachsen (50 Euro pro Jahr). Mit Zinseszins sind es 2.653 Euro – mehr als 650 Euro zusätzlich, allein weil die Zinsen mitgearbeitet haben.
 
 ## Die Formel & der Rechner
 

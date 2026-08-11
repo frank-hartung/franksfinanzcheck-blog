@@ -31,8 +31,7 @@ Bevor du sparst, kennst du die Kostenstruktur: Bei einer Familienreise (2 Erwach
 - **Aktivitäten & Ausflüge:** 10–15 Prozent
 - **Mietwagen & Transfer:** 5–15 Prozent
 
-Der größte Hebel liegt also bei Unterkunft und Verpflegung –   
-genau dort setzen die wichtigsten Tricks an.
+Der größte Hebel liegt also bei Unterkunft und Verpflegung – genau dort setzen die wichtigsten Tricks an.
 
 ## Trick 1:<br>Kinder-Rabatte systematisch nutzen
 

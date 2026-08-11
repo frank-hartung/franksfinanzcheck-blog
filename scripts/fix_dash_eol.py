@@ -99,6 +99,24 @@ RELATIV_EINLEITER = {
     "mehr", "weniger", "weiter", "weiterhin", "wieder", "zurück",
 }
 
+# NACHTRAGS-EINLEITER → Modus D: Zeilen zusammenfügen, Gedankenstrich BEHALTEN
+# (kein Punkt, keine Großschreibung). Der Gedankenstrich leitet einen
+# betonten Nachtrag ein („…2.653 Euro – mehr als 650 Euro zusätzlich…") –
+# legitim. Nur der künstliche Zeilenumbruch (2+ Spaces → <br>) zerstört den
+# Zusammenhang und wird entfernt. Diese Wörter sind KEINE Hauptsatz-Einleiter,
+# deshalb niemals Punkt (im Gegensatz zu Modus B).
+NACHTRAG_EINLEITER = [
+    r"mehr\s+als", r"weniger\s+als", r"mehr", r"weniger", r"nur", r"auch",
+    r"sogar", r"genau", r"gerade", r"noch", r"schon", r"bereits", r"kaum",
+    r"fast", r"beinahe", r"etwa", r"rund", r"circa", r"zusätzlich", r"allein",
+    r"darunter", r"dabei", r"vor\s+allem", r"insbesondere", r"zum\s+Beispiel",
+    r"z\.\s?B\.", r"und\s+zwar", r"also", r"sprich", r"nämlich",
+    r"vorwiegend", r"überwiegend", r"hauptsächlich", r"vornehmlich",
+    r"allen\s+voran",
+]
+RE_NACHTRAG = re.compile(
+    r"^(?:" + "|".join(NACHTRAG_EINLEITER) + r")\b", re.IGNORECASE)
+
 # Artikel/Demonstrativa mit Sonderbehandlung (Verb-Positions-Heuristik)
 ARTIKEL_DEM = {"der", "die", "das", "den", "dem", "dessen", "deren",
                "ein", "eine", "einer", "einem", "einen"}
@@ -305,6 +323,19 @@ def scan_file(path: str, fix: bool = False) -> dict:
         first_word = m.group(1)
         is_hauptsatz = classify_followup(first_word, nxt)
         if not is_hauptsatz:
+            # Modus D: Nachtrags-Einleiter („mehr als…", „genau dort…",
+            # „nur…", „und zwar…") → nur Umbruch zusammenfügen, Gedankenstrich
+            # behalten (kein Punkt). Der Nachtrag gehört zum selben Satz.
+            if RE_NACHTRAG.match(nxt):
+                if fix:
+                    out.append(line.rstrip() + " " + nxt)
+                    i += 2
+                else:
+                    out.append(line)
+                    i += 1
+                findings.append({"rule": "D", "mode": "nachtrag",
+                                 "line": line.strip()[:80]})
+                continue
             out.append(line)
             i += 1
             continue
