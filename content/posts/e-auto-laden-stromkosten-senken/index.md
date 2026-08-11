@@ -20,7 +20,7 @@ Du zahlst für 100 Kilometer Fahrt entweder 4,50 € oder 15 €. Die Entschei
 
 ### Das Wichtigste in Kürze
 * Laden zu Hause kostet meist nur ein Drittel im Vergleich zum Schnelllader.
-* Ein spezieller [Stromtarif für](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-hei/) E-Autos senkt den Strompreis pro kWh deutlich.
+* Ein spezieller [Stromtarif für](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) E-Autos senkt den Strompreis pro kWh deutlich.
 * Photovoltaik-Anlagen bieten die günstigste Möglichkeit für volle Akkus.
 * Ladekarten-Apps schützen dich vor überteuerten Preisen an öffentlichen Säulen.
 
@@ -43,7 +43,7 @@ Wer 80 % der Energie daheim bezieht, spart am meisten. Du zahlst pro Kilometer 
 
 ## So senkst du die Ladekosten zu Hause
 
-Wähle unbedingt einen passenden [Stromtarif für](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-hei/) dein E-Auto. Viele Versorger bieten Tarife mit reduzierten Netzentgelten an, falls du die Wallbox separat steuern lässt. Ein Vergleich verschiedener Anbieter lohnt sich hier oft schon ab der ersten Kilowattstunde.
+Wähle unbedingt einen passenden [Stromtarif für](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) dein E-Auto. Viele Versorger bieten Tarife mit reduzierten Netzentgelten an, falls du die Wallbox separat steuern lässt. Ein Vergleich verschiedener Anbieter lohnt sich hier oft schon ab der ersten Kilowattstunde.
 
 Investiere in eine intelligente Wallbox mit Lastmanagement. Diese Technik lädt dein Fahrzeug effizienter als eine herkömmliche Steckdose. Zudem erlauben viele moderne Boxen die gezielte Nutzung von günstigem Nachtstrom.
 
@@ -53,7 +53,7 @@ Steuere deine Ladezeiten über smarte Apps. Diese starten den Ladevorgang automa
 
 ## Öffentliches Laden:<br>So vermeidest du Kostenfallen
 
-Vergleiche verschiedene Ladekarten und Apps vor dem ersten Anstecken. Die Preise an derselben Säule unterscheiden sich je nach Anbieter oft um 20 Cent oder mehr. Eine gute App zeigt dir den günstigsten [Stromtarif für](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-hei/) dein E-Auto in Echtzeit an.
+Vergleiche verschiedene Ladekarten und Apps vor dem ersten Anstecken. Die Preise an derselben Säule unterscheiden sich je nach Anbieter oft um 20 Cent oder mehr. Eine gute App zeigt dir den günstigsten [Stromtarif für](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) dein E-Auto in Echtzeit an.
 
 Nutze Schnelllader (DC) wirklich nur bei Zeitnot oder auf Reisen. Diese Stationen sind teurer und belasten bei dauerhafter Nutzung chemisch den Akku. Für den Alltag im Stadtverkehr reicht das günstigere AC-Laden völlig aus.
 

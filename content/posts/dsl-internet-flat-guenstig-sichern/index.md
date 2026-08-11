@@ -54,7 +54,7 @@ Tarife mit 24 Monaten Laufzeit bieten fast immer die höchsten Rabatte. Du binde
 
 ## Schritt 4:<br>Wechseln – so läuft es ab
 
-Wenn du deinen [Internetvertrag wechseln](../../posts/internet-anbieter-wechseln-kuendig/) möchtest, ist der Prozess heute weitgehend automatisiert. Dein neuer Anbieter übernimmt in der Regel die Kündigung beim alten Dienstleister.
+Wenn du deinen [Internetvertrag wechseln](../../posts/internet-anbieter-wechseln-kuendigung/) möchtest, ist der Prozess heute weitgehend automatisiert. Dein neuer Anbieter übernimmt in der Regel die Kündigung beim alten Dienstleister.
 
 1. **Verfügbarkeit prüfen:** Gib deine Adresse in ein Vergleichsportal ein.
 2. **Vergleichen:** Nutze einen DSL-Vergleich, um Preise und Kundenbewertungen zu sichten.
@@ -64,7 +64,7 @@ Wenn du deinen [Internetvertrag wechseln](../../posts/internet-anbieter-wechseln
 
 ## Glasfaser:<br>Wann lohnt sich der Wechsel?
 
-Glasfaser bietet die stabilste Verbindung und sehr hohe Upload-Raten. Ein Wechsel ist sinnvoll, wenn du beruflich riesige Datenmengen versendest oder eine zukunftssichere Leitung wünschst. Die Preise für Glasfaser sind zuletzt gesunken. Oft liegen sie durch Aktionsangebote auf dem Niveau von herkömmlichen DSL-Tarifen. Ein [Internetvertrag wechseln](../../posts/internet-anbieter-wechseln-kuendig/) auf Glasfaser wertet zudem deine Immobilie langfristig auf.
+Glasfaser bietet die stabilste Verbindung und sehr hohe Upload-Raten. Ein Wechsel ist sinnvoll, wenn du beruflich riesige Datenmengen versendest oder eine zukunftssichere Leitung wünschst. Die Preise für Glasfaser sind zuletzt gesunken. Oft liegen sie durch Aktionsangebote auf dem Niveau von herkömmlichen DSL-Tarifen. Ein [Internetvertrag wechseln](../../posts/internet-anbieter-wechseln-kuendigung/) auf Glasfaser wertet zudem deine Immobilie langfristig auf.
 
 ## Häufige Fragen
 

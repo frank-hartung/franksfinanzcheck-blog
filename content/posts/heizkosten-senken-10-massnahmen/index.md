@@ -18,7 +18,7 @@ cover:
 social_posted: true
 ---
 
-Heizen verschlingt rund 70 % deiner Energie im Haushalt. Hier schlummert dein größtes Sparpotenzial, wenn du die richtigen Hebel kennst. Du kannst deine **[Heizkosten senken](../../posts/waermepumpe-vs-gasheizung-2/)**, ohne auf wohlige Wärme zu verzichten. Gehe dabei strategisch vor: Erst optimierst du dein Verhalten, dann investierst du gezielt in Technik.
+Heizen verschlingt rund 70 % deiner Energie im Haushalt. Hier schlummert dein größtes Sparpotenzial, wenn du die richtigen Hebel kennst. Du kannst deine **[Heizkosten senken](../../posts/waermepumpe-vs-gasheizung-2026/)**, ohne auf wohlige Wärme zu verzichten. Gehe dabei strategisch vor: Erst optimierst du dein Verhalten, dann investierst du gezielt in Technik.
 
 Diese zehn Maßnahmen sind nach ihrer Wirkung und dem nötigen Aufwand sortiert. Die meisten Schritte amortisieren sich bereits innerhalb einer einzigen Heizsaison. So nutzt du dein Budget optimal aus und schützt dich vor hohen Nachzahlungen.
 
@@ -42,7 +42,7 @@ Bevor du aktiv wirst, musst du die Schwachstellen deines Hauses kennen. Die Wär
 
 Etwa 20 bis 30 % der Energie entweichen durch undichte Fugen und falsches Lüften. Wände und Decken schlucken je nach Dämmzustand weitere 20 bis 30 % der Wärme. Fenster verursachen oft Verluste zwischen 10 % und 15 %. Bei Einfamilienhäusern verlierst du über das Dach sogar bis zu 20 %.
 
-Zusätzlich sorgen falsch eingestellte Anlagen oder verdeckte Heizkörper für unnötige Kosten. Die gute Nachricht: Die größten Lecks stopfst du ohne teure Handwerker. Genau hier s[etzen die ersten Sch](../../posts/stromfresser-im-haushalt-entlar/)ritte an, um effektiv **[Energiekosten senken](../../posts/stromfresser-im-haushalt-entlar/)** zu können.
+Zusätzlich sorgen falsch eingestellte Anlagen oder verdeckte Heizkörper für unnötige Kosten. Die gute Nachricht: Die größten Lecks stopfst du ohne teure Handwerker. Genau hier s[etzen die ersten Sch](../../posts/stromfresser-im-haushalt-entlarven/)ritte an, um effektiv **[Energiekosten senken](../../posts/stromfresser-im-haushalt-entlarven/)** zu können.
 
 ## Maßnahmen 1 bis 4:<br>Ohne Kosten
 
@@ -109,8 +109,8 @@ Moderne, programmierbare Thermostate regeln die Wärme exakt nach deinem Zeitpla
 Bei alten Anlagen über 20 Jahren ist der Tausch fast immer wirtschaftlich sinnvoll. Mit der staatlichen BEG-Förderung erhältst du bis zu 70 % der Kosten zurückerstattet. Deine jährliche Ersparnis liegt je nach System bei 300 bis 800 €. Unser [Wärmepumpen-Vergleich](../../posts/waermepumpe-vs-gasheizung-2026/) liefert dir weitere Details dazu.
 
 **Wann sollte ich meine Heizung warten lassen?**
-Lasse deine Anlage einmal jährlich im Spätsommer von einem Profi prüfen. Eine gewartete Heizung arbeitet effizienter und verbraucht deutlich weniger Brennstoff. Zudem sinkt das Risiko für teure Ausfälle mitten in der kalten Jahreszeit. Bei vielen Gasheizungen ist diese regelmäßige Wartung [sogar gesetzlich vorg](../../posts/gastarife-vergleichen-vor-dem-her/)eschrieben.
+Lasse deine Anlage einmal jährlich im Spätsommer von einem Profi prüfen. Eine gewartete Heizung arbeitet effizienter und verbraucht deutlich weniger Brennstoff. Zudem sinkt das Risiko für teure Ausfälle mitten in der kalten Jahreszeit. Bei vielen Gasheizungen ist diese regelmäßige Wartung [sogar gesetzlich vorg](../../posts/gastarife-vergleichen-vor-dem-herbst/)eschrieben.
 
-👉 **Jetzt [Gastarife vergleichen](../../posts/gastarife-vergleichen-vor-dem-her/) und [Heizkosten senken](../../posts/waermepumpe-vs-gasheizung-2/):** [**→ Jetzt vergleichen bei CHECK24**](/go/gas/)
+👉 **Jetzt [Gastarife vergleichen](../../posts/gastarife-vergleichen-vor-dem-herbst/) und [Heizkosten senken](../../posts/waermepumpe-vs-gasheizung-2026/):** [**→ Jetzt vergleichen bei CHECK24**](/go/gas/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

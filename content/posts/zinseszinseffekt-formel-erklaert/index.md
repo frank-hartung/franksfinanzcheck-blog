@@ -125,7 +125,7 @@ dann ist er unabhängig von Stimmung und Disziplin.
 Deine Zinsen werden dem Kapital zugeschlagen und werfen im nächsten Jahr selbst Zinsen ab. Dadurch wächst das Geld exponentiell statt linear – je länger die Laufzeit, desto stärker der Effekt.
 
 **Welche Rendite kann ich realistisch erwarten?**
-Ein breit gestreuter Welt-ETF hat historisch 6 bis 8 % pro Jahr geliefert (über lange Zeiträume). [Tagesgeld und](../../posts/tagesgeld-zinsen-sicher-anle/) Festgeld liegen bei 2 bis 3 % – der Zinseszins fällt dort entsprechend kleiner aus.
+Ein breit gestreuter Welt-ETF hat historisch 6 bis 8 % pro Jahr geliefert (über lange Zeiträume). [Tagesgeld und](../../posts/tagesgeld-zinsen-sicher-anlegen/) Festgeld liegen bei 2 bis 3 % – der Zinseszins fällt dort entsprechend kleiner aus.
 
 **Wie viel muss ich sparen, um Millionär zu werden?**
 Bei 7 % Rendite: 250 € monatlich über 45 Jahre ≈ 1 Million Euro. 500 € monatlich über 35 Jahre ≈ 1 Million Euro. Der frühe Start ist der entscheidende Faktor – die [Sparquote](../../posts/sparquote-berechnen-und-steigern/) zeigt, wie du hinkommst.

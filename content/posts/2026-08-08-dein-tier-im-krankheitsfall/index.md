@@ -71,7 +71,7 @@ Du profitierst zudem von einer hohen Sicherheit für deine Finanzplanung. Der Ve
 * **Verzicht auf Kündigung:** Premium-Tarife verzichten nach einer gewissen Vertragslaufzeit auf das ordentliche Kündigungsrecht im Schadensfall. Das gibt dir die Sicherheit, dass du nicht rausgeworfen wirst, wenn dein Tier dauerhaft krank wird.
 
 ### Die Vorteile im Überblick:
-* **[Finanzielle Sicherheit](../../posts/notgroschen-aufbauen-wie-viel-rei/):** Schutz vor existenzbedrohenden Tierarztkosten.
+* **[Finanzielle Sicherheit](../../posts/notgroschen-aufbauen-wie-viel-reicht/):** Schutz vor existenzbedrohenden Tierarztkosten.
 * **Beste medizinische Versorgung:** Auch teure Spezialisten und Kliniken sind bezahlbar.
 * **Chronische Krankheiten:** Übernahme von Kosten für dauerhafte Behandlungen.
 * **Vorsorge-Budget:** Jährliche Zuschüsse für Impfungen und Wurmkuren reduzieren die effektiven Monatskosten.

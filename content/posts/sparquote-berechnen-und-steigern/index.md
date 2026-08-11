@@ -85,7 +85,7 @@ So sieht der realistische Stufenplan aus, den ich dir empfehle:
 
 | Monat | Maßnahme | Ziel-Quote |
 |:--- |:--- |:--- |
-| 1 | [Haushaltsbuch führen](../../posts/haushaltsbuch-fuehren-app-excel-oder-st/), Ausgaben analysieren | 5 % |
+| 1 | [Haushaltsbuch führen](../../posts/haushaltsbuch-fuehren-app-excel-oder-stift/), Ausgaben analysieren | 5 % |
 | 2 | Dauerauftrag einrichten, Abos kündigen | 8 % |
 | 3 | Strom-, Gas-, Internet-Tarife wechseln | 12 % |
 | 4 | Versicherungen prüfen, überflüssige kündigen | 15 % |

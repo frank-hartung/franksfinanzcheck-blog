@@ -103,7 +103,7 @@ Nutze diese drei Strategien gegen die psychologische Falle:
 2. **Grenzen:** Lass deinen Disporahmen von der Bank aktiv senken.
 3. **Automation:** Fülle deinen Notgroschen jeden Monat per Dauerauftrag auf.
 
-Wer diese Schritte konsequent umsetzt, braucht den Dispo kaum noch. Du sparst dir so die teuersten Zinsen deines gesamten Kontos. Deine [finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freih/) beginnt mit der Kontrolle über dein tägliches Banking.
+Wer diese Schritte konsequent umsetzt, braucht den Dispo kaum noch. Du sparst dir so die teuersten Zinsen deines gesamten Kontos. Deine [finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freiheit/) beginnt mit der Kontrolle über dein tägliches Banking.
 
 ## Häufig gestellte Fragen
 
@@ -118,6 +118,6 @@ Für wenige Tage ist er aufgrund der Bequemlichkeit akzeptabel. Als dauerhafte F
 
 Wer den Dispo dauerhaft loswerden will, startet mit einem [Notgroschen-Plan](../../posts/notgroschen-aufbauen-wie-viel-reicht/) und einem ehrlichen [Budget](../../posts/monatsbudget-erstellen-schritt-fuer-schritt/). Prüfe bei einem Kontowechsel direkt die neuen Konditionen für Überziehungen. Viele [kostenlose Konten](../../posts/kostenloses-girokonto-finden/) bieten heute sehr faire Zinssätze an. Weitere Tipps findest du im [Ratgeber Konto & Karten](../../pillar/konto-karten/).
 
-👉 **Jetzt [Ratenkredit vergleichen](../../posts/ratenkredit-bestszins-vergleic/) und Dispo ablösen:** [**→ Jetzt vergleichen bei CHECK24**](/go/kredit/)
+👉 **Jetzt [Ratenkredit vergleichen](../../posts/ratenkredit-bestszins-vergleichen/) und Dispo ablösen:** [**→ Jetzt vergleichen bei CHECK24**](/go/kredit/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
