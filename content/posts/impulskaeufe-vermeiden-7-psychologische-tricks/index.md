@@ -18,6 +18,8 @@ cover:
 social_posted: true
 ---
 
+
+
 Etwa 60 % aller Käufe im Supermarkt oder online geschehen rein impulsiv. Du planst einen Einkauf für 10 € und verlässt den Laden mit einer Rechnung über 45 €? Diese unkontrollierten Ausgaben kosten dich jedes Jahr mehrere tausend Euro. Mit den richtigen psychologischen Kniffen kannst du deine **Impulskäufe vermeiden** und dein Erspartes effektiv schützen.
 
 Das Gehirn reagiert auf Angebote wie auf eine Droge. Ein kurzer Kick durch Dopamin lässt die Vernunft für einen Moment verstummen. Sobald du diese Mechanismen verstehst, gewinnst du die Kontrolle über dein Geld zurück. In diesem Leitfaden erfährst du, wie du deine Kaufimpulse kontrollieren kannst.
@@ -41,7 +43,7 @@ Die digitale Welt macht das Problem noch deutlich schlimmer. Mit "One-Click"-Bes
 
 Dies ist das mächtigste Werkzeug für deine [finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freiheit/). Siehst du ein interessantes Produkt, darfst du es nicht sofort kaufen. Setze es stattdessen auf eine Warteliste für exakt 48 Stunden. In dieser Zeit kühlt dein Belohnungszentrum im Gehirn wieder ab.
 
-Oft stellst du nach zwei Tagen fest, dass der Reiz völlig verflogen ist. Die schicke Jacke für 120 € oder das neue Gadget für 80 € wirken plötzlich blass. Du entscheidest nun wieder mit deinem logischen Verstand statt mit deinen Emotionen. Wer diese Regel befolgt, spart oft hunderte Euro pro Monat.
+Oft stellst du nach zwei Tagen fest, dass der Reiz völlig verflogen ist. Die schicke Jacke für 120 € oder das neue Gadget für 80 € wirken plötzlich blass. Du entscheidest nun wieder mit deinem logischen Verstand statt mit deinen Emotionen. Wer diese Regel befolgt, spart oft hunderte [Euro [pr](../../posts/urlaub-mit-kindern-guenstig-spartricks/)o Monat](../../posts/7-gewohnheiten-finanzielle-freiheit/)-tricks-alltag-200-euro-sparen/).
 
 Besonders beim Online-Shopping hilft es, den Browser-Tab einfach zu schließen. Die meisten Shops speichern deinen Warenkorb für einige Tage. Wenn du den Gegenstand nach zwei Tagen immer noch unbedingt willst, ist es ein bewusster Kauf. In neun von zehn Fällen wirst du den Kauf jedoch einfach vergessen.
 

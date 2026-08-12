@@ -16,13 +16,16 @@ kurzantwort: "Du kannst beim Wechsel deines Stromanbieters in der Regel zwischen
 social_posted: true
 ---
 
-Du willst deinen Strompreis senken? Durchschnittlich kannst du 200–300 € pro Jahr sparen, wenn du deinen Stromanbieter wechselst. Wer den Strom wechseln möchte, spart im Schnitt mehrere hundert Euro pro Jahr – Die meisten sitzen jahrelang im teuren Grundtarif ihres lokalen Versorgers, obwohl ein Wechsel nur wenige Minuten dauert.
+
+
+
+Du willst deinen Strompreis senken? Durchschnittlich kannst du 200–300 € pro Jahr sparen, wenn du deinen Stromanbieter wechselst. Wer den Strom wechseln möchte, spart im Schnitt mehrere hundert [Euro pro](../../posts/urlaub-mit-kindern-guenstig-spartricks/) Jahr – Die meisten sitzen jahrelang im teuren Grundtarif ihres lokalen Versorgers, obwohl ein Wechsel nur wenige Minuten dauert.
 
 
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/strom/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/reisen/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Warum sich ein Wechsel lohnt
@@ -38,7 +41,7 @@ Bevor du vergleichst, brauchst du deinen Jahresverbrauch in Kilowattstunden (kWh
 Vergleichsportale wie CHECK24 zeigen dir alle verfügbaren Tarife auf einen Blick. Achte dabei nicht nur auf den Arbeitspreis pro kWh, sondern auch auf:
 - **Grundpreis** (monatliche Fixkosten)
 - **Vertragslaufzeit und Kündigungsfrist** (12 Monate sind üblich, besser sind 1 Monat)
-- **Boni und Rabatte** (Neukundenbonus, Sofortbonus, Online-Bonus – Vorsicht: Boni werden oft erst nach 12 Monaten ausgezahlt)
+- **Boni und Rabatte** (Neukundenbonus, Sofortbonus, Online-Bonus – Vorsicht: Boni werden oft erst nach [12 Monaten](../../posts/sparquote-berechnen-und-steigern/) ausgezahlt)
 - **Preisgarantie** (mindestens 12 Monate sollten es sein)
 
 ## Schritt 3:<br>Den neuen Tarif abschließen
@@ -60,7 +63,7 @@ Nach dem ersten Jahr lohnt sich der Blick auf die Jahresabrechnung: Wurden alle 
 
 ## Die häufigsten Fehler beim Stromwechsel
 
-1. **Bonus-Fallen übersehen** – Boni, die erst nach 12 Monaten ausgezahlt werden, sind nichts wert, wenn du vorher kündigst.
+1. **Bonus-Fallen übersehen** – Boni, die erst nach [12 Monaten](../../posts/sparquote-berechnen-und-steigern/) ausgezahlt werden, sind nichts wert, wenn du vorher kündigst.
 2. **Nur auf den Arbeitspreis schauen** – der Grundpreis kann kleine Preisvorteile komplett auffressen.
 3. **Vorzeitige Kündigung** – kündigst du während der Mindestlaufzeit, drohen Gebühren.
 4. **Keine Preisgarantie** – ohne Garantie kann der Preis nach 3 Monaten steigen.

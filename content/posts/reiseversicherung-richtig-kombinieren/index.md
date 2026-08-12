@@ -17,6 +17,10 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
+
+
+
+
 Vor jeder Reise stellt sich dieselbe Frage: Welche Versicherung brauche ich – und welche ist rausgeworfenes Geld? Die Reiseportale bieten beim Buchen gleich das „komplette" Versicherungspaket an, und die Versicherer verkaufen Bausteine, die sich bei genauem Hinsehen oft doppeln oder überflüssig sind.
 
 In diesem Artikel sortiere ich die Reiseversicherungen ehrlich: Was du wirklich brauchst, was optional ist – und wie du die richtige Kombination zum fairen Preis bekommst.
@@ -43,7 +47,7 @@ Die Reihenfolge der Priorität ist eindeutig: Auslandskranken zuerst, Reiserück
 
 ## Auslandskrankenversicherung:<br>Pflicht für jede Reise
 
-Die Auslandskrankenversicherung ist die wichtigste Reiseversicherung überhaupt – und die günstigste: **10 bis 30 € pro Jahr** für eine Einzelperson, 20 bis 50 € für Familien. Sie zahlt die Arzt- und Krankenhauskosten, die deine gesetzliche Krankenversicherung im Ausland nicht (oder nur teilweise) übernimmt.
+Die Auslandskrankenversicherung ist die wichtigste [Reiseversicherung](../../posts/reisekrankenversicherung-wann-lohnt/) überhaupt – und die günstigste: **10 bis 30 € pro Jahr** für eine Einzelperson, 20 bis 50 € für Familien. Sie zahlt die Arzt- und Krankenhauskosten, die deine gesetzliche Krankenversicherung im Ausland nicht (oder nur teilweise) übernimmt.
 
 Die Details, die zählen:
 
@@ -71,7 +75,7 @@ Wann sie unnötig ist: Bei günstigen Reisen unter 500 € oder Städtereisen, 
 Die Reisegepäckversicherung klingt praktisch – ist aber für die meisten Reisenden überflüssig. Die Gründe:
 
 - **Geringe Deckung mit hohen Selbstbehalten:** Die typischen Tarife zahlen nur einen Bruchteil des Schadens, oft mit Einzelgrenzen pro Gegenstand (300–500 €).
-- **Doppelte Absicherung:** Die [Hausratversicherung](../../posts/hausratversicherung-wer-braucht-leistung/) deckt Reisegepäck meist mit ab – außerhalb der eigenen Wohnung bis zu 10 % der Versicherungssumme.
+- **Doppelte [Absicherung](../../posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/):** Die [Hausratversicherung](../../posts/hausratversicherung-wer-braucht-leistung/) deckt Reisegepäck meist mit ab – außerhalb der eigenen Wohnung bis zu 10 % der Versicherungssumme.
 - **Seltene Schadensfälle:** Gepäck geht selten verloren – und wenn, dann meist auf Flügen, wo die Airline nach dem Montrealer Übereinkommen haftet (bis ca. 1.600 €).
 
 Wer teure Technik mitnimmt, prüft besser die Hausrat-Deckung oder eine spezielle Elektronik-Versicherung – statt der pauschalen Gepäck-Police.
@@ -97,7 +101,7 @@ Die Reiseportale haben ein perfides Preissystem: Das „Komplett-Paket" (Ausland
 Die Regeln gegen die Kombi-Falle:
 
 1. **Immer die Einzelpreise vergleichen:** Das Paket ist fast immer teurer als die Summe der benötigten Einzelbausteine.
-2. **Doppelten Schutz vermeiden:** Hast du schon eine [Auslandskrankenversicherung über deinen Jahresvertrag](../../posts/reisekrankenversicherung-wann-lohnt/)? Dann brauchst du im Portal nur den Reiserücktritt – falls überhaupt.
+2. **Doppelten Schutz vermeiden:** Hast du schon eine Auslandskrankenversicherung über deinen Jahresvertrag? Dann brauchst du im Portal nur den Reiserücktritt – falls überhaupt.
 3. **Selbstbehalt prüfen:** Manche Portal-Pakete haben hohe Selbstbehalte, die im Schadensfall überraschen.
 
 Die günstigste Kombination: Jahresvertrag Auslandskranken (30 €) + bei teuren Reisen eine separate Reiserücktrittsversicherung vom Versicherer (30–60 €) – statt des Portal-Pakets für 100+ Euro.
@@ -131,7 +135,7 @@ Diese Routine kostet 5 Minuten vor jeder Reise – und erspart im Ernstfall Taus
 ## Häufig gestellte Fragen
 
 **Was kostet eine Auslandskrankenversicherung?**
-10 bis 30 € pro Jahr für Einzelpersonen, 20 bis 50 € für Familien – mit weltweiter Deckung und Rücktransport. Die günstigste Reiseversicherung überhaupt und für jede Reise sinnvoll.
+10 bis 30 € pro Jahr für Einzelpersonen, 20 bis 50 € für Familien – mit weltweiter Deckung und Rücktransport. Die günstigste [Reiseversicherung](../../posts/reisekrankenversicherung-wann-lohnt/) überhaupt und für jede Reise sinnvoll.
 
 **Wann lohnt sich eine Reiserücktrittsversicherung?**
 Bei Reisen ab etwa 1.500 €, bei Vorerkrankungen und bei nicht verschiebbaren Reisen. Bei günstigen, flexiblen Trips ist sie unnötig – die Stornokosten wären gering.
@@ -142,7 +146,7 @@ Innerhalb der EU greift die Europäische Krankenversicherungskarte (EHIC) – si
 Die richtige Reiseversicherung gehört zur [Reise-Planung](../../posts/urlaubskasse-aufbessern-spartipps/) wie der [Mietwagen](../../posts/mietwagen-buchen-so-sparst-du/) und die [Flugbuchung](../../posts/guenstige-fluege-spaetsommer-finden/). Alle Reise- und Versicherungsthemen findest du in den [Ratgebern Mietwagen & Reisen](../../pillar/mietwagen/) und [Versicherungen](../../pillar/versicherungen/).
 
 **Sind Reiseabbruchversicherungen sinnvoll?**
-Eine Reiseabbruchversicherung lohnt sich bei teuren Reisen (ab etwa 1.500 €), wenn du die Reise vorzeitig abbrechen musst – etwa wegen Krankheit oder eines Todesfalls in der Familie. Sie erstattet die nicht genutzten Reiseleistungen und die Rückreisekosten. Bei günstigen Reisen ist das Risiko gering und die Police unnötig – prüfe vor dem Abschluss, ob deine [Hausrat- oder Kreditkarten-Versicherung](../../posts/kreditkarte-ohne-jahresgebuehr/) diesen Baustein schon abdeckt.
+Eine Reiseabbruchversicherung lohnt sich bei teuren Reisen (ab etwa 1.500 €), wenn du die Reise vorzeitig abbrechen musst – etwa wegen Krankheit oder eines Todesfalls in der Familie. Sie erstattet die nicht genutzten Reiseleistungen und die Rückreisekosten. Bei günstigen Reisen ist das Risiko gering und die Police unnötig – prüfe vor dem Abschluss, ob deine Hausrat- oder Kreditkarten-Versicherung diesen Baustein schon abdeckt.
 
 
 👉 **Jetzt Reiseversicherungen vergleichen und abschließen:** [**→ Jetzt vergleichen und sparen**](/go/reisekrankenversicherung/)

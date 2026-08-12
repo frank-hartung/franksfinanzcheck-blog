@@ -1,7 +1,7 @@
 # 🩺 DOKTOR-REPORT (Oberarzt, Gesamtprognose)
 
-**Stand:** 2026-08-12 12:43 UTC · Modus: DRY-RUN
-**Wachen behandelt:** 13 · **0-Exit:** 12 · Funde: 1 · Sabotage-Fehler: 0
+**Stand:** 2026-08-12 14:47 UTC · Modus: VISIT
+**Wachen behandelt:** 14 · **0-Exit:** 13 · Funde: 1 · Sabotage-Fehler: 0
 
 | Wache (Phase) | Zweck | Exit |
 |---|---|---|
@@ -17,6 +17,7 @@
 | `affiliate_marketer.py` (C-Money) | CTA-Routing + Retarget | 0 |
 | `table_guard.py` (B-Semantik) | Tabellen T1-T4 | 0 |
 | `link_guard.py` (C-Money) | Interne Links V1-V2 | 0 |
+| `link_density_guard.py` (D-Ordnung) | Interne Link-Dichte & Duplikate (12.08. Pro-Link-Leck) | 0 |
 | `workspace_guard.py` (D-Ordnung) | Junk/Waisen/Rotation/Billig | 1 |
 
 ## 🟡 Funde (nicht-fatal, dokumentiert)

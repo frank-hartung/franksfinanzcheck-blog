@@ -16,7 +16,12 @@ kurzantwort: "Du kannst ein kostenloses Girokonto ohne Gebühren finden, indem d
 social_posted: true
 ---
 
-120 € im Jahr für nichts? So viel kosten dich durchschnittliche Kontoführungsgebühren von etwa 10 € pro Monat. Viele Banken bieten dieselbe Dienstleistung komplett gratis an. Mit einem schnellen Wechsel holst du dir dieses Geld dauerhaft zurück. Ein **kostenloses Girokonto** spart dir über die Jahre vierstellige Beträge – Geld, das auf deinem Sparkonto oder in einem ETF deutlich besser aufgehoben ist als in der Verwaltung deiner Hausbank. Rechnet man die gesparten 120 € jährlich auf ein Arbeitsleben von 40 Jahren hoch und legt sie zu 7 % Zinsen an, reden wir über ein Endkapital von über 25.000 €.
+
+
+
+
+
+120 € im Jahr für nichts? So viel kosten dich durchschnittliche Kontoführungsgebühren von etwa 10 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/). Viele Banken bieten dieselbe Dienstleistung komplett gratis an. Mit einem schnellen Wechsel holst du dir dieses Geld dauerhaft zurück. Ein **kostenloses Girokonto** spart dir über die Jahre vierstellige Beträge – Geld, das auf deinem Sparkonto oder in einem ETF deutlich besser aufgehoben ist als in der Verwaltung deiner Hausbank. Rechnet man die gesparten 120 € jährlich auf ein Arbeitsleben von 40 Jahren hoch und legt sie zu 7 % Zinsen an, reden wir über ein Endkapital von über 25.000 €.
 
 
 
@@ -29,7 +34,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 * **Echte Null-Euro-Konten:** Sparen dir bis zu 150 € an Gebühren jährlich, wenn du alle Kostenfaktoren (Karten, Buchungen, Depot) einbeziehst.
 * **Bedingte Kostenfreiheit:** Viele Top-Anbieter setzen einen monatlichen Mindestgeldeingang (meist 700 €) voraus. Das muss nicht zwingend Gehalt sein; oft reicht eine Eigenüberweisung von einem Drittkonto.
-* **Digitaler Umzug:** Der gesetzlich geregelte Kontowechsel-Service nach dem Zahlungskontengesetz (ZKG) erledigt den Umzug heute fast vollautomatisch innerhalb von 12 Geschäftstagen.
+* **Digitaler Umzug:** Der gesetzlich geregelte [Kontowechsel](../../posts/kontowechsel-in-20-minuten-wechselservice/)-Service nach dem Zahlungskontengesetz (ZKG) erledigt den Umzug heute fast vollautomatisch innerhalb von 12 Geschäftstagen.
 * **Karten-Check:** Achte darauf, ob eine kostenlose Debitkarte (Visa/Mastercard) ausreicht oder ob du für die klassische Girocard (früher EC-Karte) 10 bis 15 € pro Jahr extra zahlst.
 * **Sicherheitspuffer:** Kündige dein altes Konto erst nach einer zweimonatigen Übergangsphase, um sicherzugehen, dass jede seltene Lastschrift (z. B. Kfz-Steuer oder Versicherungen) erfasst wurde.
 
@@ -70,7 +75,7 @@ Wenn du **Kontoführungsgebühren sparen** willst, hast du meist zwei Optionen. 
 2. **Antrag stellen:** Eröffne dein neues Konto online per Video-Ident. Du brauchst nur deinen Personalausweis und ein Smartphone. Das dauert meist unter zehn Minuten.
 3. **Umzugsservice starten:** Nutze den digitalen Kontowechselservice. Die Bank loggt sich (mit deiner Erlaubnis) in dein altes Konto ein, erkennt Lastschriften von Vermieter, Fitnessstudio und Stromanbieter und informiert diese automatisch.
 4. **Übergangszeit einplanen:** Lass dein altes Konto etwa zwei Monate als Puffer aktiv. Es gibt immer einen "Nachzügler" (z. B. die jährliche Abbuchung des ADAC), der die neue IBAN noch nicht im System hat.
-5. **Daueraufträge kontrollieren:** Übertrage Miete und Sparpläne manuell. Der Wechselservice kann Daueraufträge beim alten Institut löschen, aber beim neuen musst du sie zur Sicherheit oft selbst anlegen.
+5. **Daueraufträge kontrollieren:** Übertrage Miete und Sparpläne manuell. Der [Wechselservice](../../posts/kontowechsel-in-20-minuten-wechselservice/) kann Daueraufträge beim alten Institut löschen, aber beim neuen musst du sie zur Sicherheit oft selbst anlegen.
 6. **Kündigung abschicken:** Beende das alte Vertragsverhältnis schriftlich oder per Klick in der App erst, wenn der Saldo auf Null ist und alle Zahlungen reibungslos über das neue Konto laufen.
 
 ## Wann sich ein gebührenpflichtiges Konto lohnt
@@ -80,10 +85,10 @@ Exklusive Leistungen rechtfertigen manchmal monatliche Kosten von 10 bis 15 €
 ## Häufige Fragen
 
 ### Ist der Kontowechsel wirklich kostenlos?
-Ja, laut Zahlungskontengesetz dürfen Banken für den gesetzlich vorgeschriebenen Wechselservice keine Gebühren berechnen. Auch die Kontoeröffnung ist bei Direktbanken fast immer gratis. Lediglich für den Versand physischer Karten oder den Postversand von Unterlagen können geringe Portokosten anfallen, falls du die digitale Variante ablehnst.
+Ja, laut Zahlungskontengesetz dürfen Banken für den gesetzlich vorgeschriebenen [Wechselservice](../../posts/kontowechsel-in-20-minuten-wechselservice/) keine Gebühren berechnen. Auch die Kontoeröffnung ist bei Direktbanken fast immer gratis. Lediglich für den Versand physischer Karten oder den Postversand von Unterlagen können geringe Portokosten anfallen, falls du die digitale Variante ablehnst.
 
 ### Was passiert mit meinem Dispo?
-Gleiche dein Minus vor dem Wechsel unbedingt aus. Dein neuer Anbieter gewährt dir einen Dispokredit meist erst nach drei monatlichen Gehaltseingängen oder einer Bonitätsprüfung. Ein bestehender Dispo wird beim Schließen des alten Kontos sofort fällig. Wenn du das Geld nicht flüssig hast, kann ein günstiger Ratenkredit zur Umschuldung sinnvoll sein, da Dispozinsen oft bei 10–14 % liegen.
+Gleiche dein Minus vor dem Wechsel unbedingt aus. Dein neuer Anbieter gewährt dir einen Dispokredit meist erst nach drei monatlichen Gehaltseingängen oder einer Bonitätsprüfung. Ein bestehender Dispo wird beim Schließen des alten Kontos sofort fällig. Wenn du das Geld nicht flüssig hast, kann ein günstiger Ratenkredit zur Umschuldung sinnvoll sein, da [Dispozinsen](../../posts/dispozinsen-verstehen-alternativen/) oft bei 10–14 % liegen.
 
 ### Schadet der Wechsel meiner Schufa?
 Ein neues Girokonto führt zu einer kurzfristigen Anfrage bei der Schufa, was den Score minimal beeinflussen kann. Das ist jedoch temporär. Langfristig ist ein stabil geführtes Konto positiv. Du solltest jedoch vermeiden, innerhalb weniger Monate drei oder vier Konten gleichzeitig zu eröffnen. Kündige alte, ungenutzte Konten konsequent, da zu viele offene Kreditlinien (auch Dispos) deine Bonität eher belasten.

@@ -16,7 +16,12 @@ kurzantwort: "Die gesetzliche Kasse zahlt in der Regel nur einen Teil der Kosten
 social_posted: true
 ---
 
-Ein Krankenhausaufenthalt in den USA kann schnell sechsstellige Summen kosten. Innerhalb Europas lauern Kostenfallen, wenn man nur auf die gesetzliche Kasse vertraut. Eine Reisekrankenversicherung kostet nur wenige Euro pro Jahr und schützt genau vor diesen Risiken. Du bekommst weltweite Absicherung für oft unter 30 € Jahresbeitrag.
+
+
+
+
+
+Ein Krankenhausaufenthalt in den USA kann schnell sechsstellige Summen kosten. Innerhalb Europas lauern Kostenfallen, wenn man nur auf die gesetzliche Kasse vertraut. Eine Reisekrankenversicherung kostet nur wenige [Euro pro](../../posts/urlaub-mit-kindern-guenstig-spartricks/) Jahr und schützt genau vor diesen Risiken. Du bekommst weltweite [Absicherung](../../posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/) für oft unter 30 € Jahresbeitrag.
 
 
 
@@ -50,7 +55,7 @@ Die Beiträge sind bemerkenswert günstig:
 | Einzelperson (bis 65 Jahre) | 10–30 € pro Jahr |
 | Familie (inkl. Kinder) | 20–40 € pro Jahr |
 | Senioren (ab 65) | 40–100 € pro Jahr |
-du erhältst weltweite Absicherung – das beste Preis-Leistungs-Verhältnis aller Versicherungen.
+du erhältst weltweite [Absicherung](../../posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/) – das beste Preis-Leistungs-Verhältnis aller Versicherungen.
 
 ## Darauf solltest du beim Vergleich achten
 
@@ -63,7 +68,7 @@ du erhältst weltweite Absicherung – das beste Preis-Leistungs-Verhältnis all
 ## Häufige Fragen
 
 ### Lohnt sich die Reisekrankenversicherung schon für Europa?
-Ja – auch in der EU entstehen Lücken. Für wenige Euro pro Jahr bist du auch in Europa sicher unterwegs. Gerade wer viel reist, sollte nicht darauf verzichten.
+Ja – auch in der EU entstehen Lücken. Für wenige [Euro pro](../../posts/urlaub-mit-kindern-guenstig-spartricks/) Jahr bist du auch in Europa sicher unterwegs. Gerade wer viel reist, sollte nicht darauf verzichten.
 
 ### Was ist, wenn ich chronisch krank bin?
 Viele Tarife decken chronische Erkrankungen ab, solange sie nicht der Anlass der Reise sind. Bei Vorerkrankungen genau die Bedingungen prüfen oder eine spezielle Police wählen.

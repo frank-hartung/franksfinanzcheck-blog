@@ -18,14 +18,17 @@ cover:
 social_posted: true
 ---
 
-Fast 48 % der deutschen Haushalte wissen am Monatsende nicht, wohin ihr Geld verschwand. Das liegt selten an mangelnder Intelligenz. Meistens fehlt einfach eine klare Struktur für die eigenen Finanzen. Wer dauerhaft ein **[Haushaltsbuch führen](../../posts/frugalismus-tricks-alltag-200-euro-sparen/)** möchte, macht den ersten Schritt zu echtem Vermögensaufbau.
+
+
+
+Fast 48 % der deutschen Haushalte wissen am Monatsende nicht, wohin ihr Geld verschwand. Das liegt selten an mangelnder Intelligenz. Meistens fehlt einfach eine klare Struktur für die eigenen Finanzen. Wer dauerhaft ein **[Haushaltsbuch führen](../../posts/frugalismus-tricks-alltag-200-euro-sparen/)** möchte, macht den ersten Schritt zu echtem [Vermögensaufbau](../../posts/sparquote-berechnen-und-steigern/).
 
 Ein Haushaltsbuch wirkt wie eine Diät für dein Bankkonto. Du entdeckst versteckte Kostenfresser und unnötige Abos sofort. Mit diesem System wirst du deine **Ausgaben im Blick behalten**. So bleibt am Ende des Monats spürbar mehr Geld für deine Träume übrig.
 
 Hier lernst du drei bewährte Methoden kennen: App, Excel und den klassischen Stift. Jede Methode hat spezifische Vorteile für unterschiedliche Nutzertypen. Wähle das System, das am besten zu deinem Alltag passt. Nur so bleibst du langfristig motiviert.
 
 ### Das Wichtigste in Kürze
-- Ein Haushaltsbuch spart oft 50 bis 200 € pro Monat ein.
+- Ein Haushaltsbuch spart oft 50 bis 200 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) ein.
 - Apps bieten Automatisierung, während Excel volle Kontrolle ermöglicht.
 - Beschränke dich auf maximal acht Kategorien gegen Überforderung.
 - Regelmäßigkeit ist wichtiger als jedes Detail.
@@ -108,7 +111,7 @@ Ein Haushaltsbuch wird erst durch Gewohnheit zu einem mächtigen Werkzeug. Wenn 
 - **Woche 3:** Analysiere die ersten Zahlen und finde unnötige Kostenfresser.
 - **Woche 4:** Kündige ungenutzte Abos und vergleiche deine laufenden Tarife.
 
-Nach 30 Tagen besitzt du ein realistisches Bild deiner Finanzen. Das ist die Basis für deinen Notgroschen oder einen ETF-Sparplan. Wer seine Zahlen kennt, trifft klügere Entscheidungen beim Konsum. Du sparst automatisch mehr, weil du den Wert deines Geldes besser verstehst.
+Nach 30 Tagen besitzt du ein realistisches Bild deiner Finanzen. Das ist die Basis für deinen Notgroschen oder einen [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/). Wer seine Zahlen kennt, trifft klügere Entscheidungen beim Konsum. Du sparst automatisch mehr, weil du den Wert deines Geldes besser verstehst.
 
 Vermeide typische Fehler wie zu hohe Erwartungen an dich selbst. Ein "schlechter" Monat mit hohen Ausgaben ist niemals eine persönliche Niederlage. Betrachte solche Phasen einfach als wertvolle Information für deine Planung. Dein Haushaltsbuch ist ein Werkzeug, kein Richter über dein Leben.
 

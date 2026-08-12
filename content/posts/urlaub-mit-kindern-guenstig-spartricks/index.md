@@ -17,6 +17,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
+
 Urlaub mit Kindern ist das Schönste – und das Teuerste. Vier Personen, Verpflegung, Aktivitäten, Mietwagen: Die Kosten laufen schnell in die Tausende. Dabei gibt es eine Reihe von Spartricks, die speziell für Familien funktionieren und den Urlaub um 300 € und mehr verbilligen – ohne dass die Kinder auf etwas verzichten müssen.
 
 In diesem Artikel zeige ich dir die 10 wirksamsten Familien-Spartricks, sortiert nach Einsparpotenzial.
@@ -124,13 +125,13 @@ Wer flexibel ist, spart mit dem Reisezeitpunkt mehr als mit jedem anderen Trick.
 
 Damit der Familienurlaub entspannt und günstig wird, hilft ein fester Planungs-Rhythmus – sechs Schritte, verteilt über die Monate vor der Reise:
 
-1. **6 Monate vorher – Budget und Zeitfenster festlegen:** Wie viel soll der Urlaub kosten? Welche Ferienwochen kommen in Frage? Das [Sparziel](../../posts/urlaubskasse-aufbessern-spartipps/) für die Reisekasse definieren.
+1. **6 Monate vorher – Budget und Zeitfenster festlegen:** Wie viel soll der Urlaub kosten? Welche Ferienwochen kommen in Frage? Das Sparziel für die Reisekasse definieren.
 
-2. **5 Monate vorher – Reiseziel und Unterkunft vergleichen:** Die [Familien-Ziele](../../posts/pauschalreise-buchen-bester-zeitpunkt/) mit Kinder-Rabatten prüfen, Appartement vs. Hotel kalkulieren.
+2. **5 Monate vorher – Reiseziel und Unterkunft vergleichen:** Die Familien-Ziele mit Kinder-Rabatten prüfen, Appartement vs. Hotel kalkulieren.
 
-3. **4 Monate vorher – Buchen:** Frühbucher-Tarife mit kostenloser Stornierung sichern – [Pauschalreise](../../posts/pauschalreise-buchen-bester-zeitpunkt/) oder individuelle Planung mit [Mietwagen](../../posts/mietwagen-buchen-so-sparst-du/).
+3. **4 Monate vorher – Buchen:** Frühbucher-Tarife mit kostenloser Stornierung sichern – Pauschalreise oder individuelle Planung mit Mietwagen.
 
-4. **3 Monate vorher – Anreise klären:** [Zug statt Flug](../../posts/guenstige-fluege-spaetsommer-finden/) rechnen, Kindersitze organisieren, Reiseversicherung prüfen.
+4. **3 Monate vorher – Anreise klären:** [Zug statt Flug](../../posts/guenstige-fluege-spaetsommer-finden/) rechnen, Kindersitze organisieren, [Reiseversicherung](../../posts/reiseversicherung-richtig-kombinieren/) prüfen.
 
 5. **1 Monat vorher – Ausflüge planen:** Familienpässe und Kombitickets recherchieren, kostenlose Aktivitäten eintragen.
 
@@ -150,7 +151,7 @@ Ab etwa 4 bis 5 Jahren zahlen Kinder bei vielen Anbietern den vollen Preis – v
 **Lohnt sich die Familienkarte?**
 Ja – in fast allen Städten und Regionen gibt es Familienkarten für Bahn, ÖPNV und Freizeiteinrichtungen, die sich ab dem zweiten Ausflug rechnen. Immer danach fragen, auch im Museum oder Zoo.
 
-Der Familienurlaub wird mit den richtigen Tricks zur [Spar-Erfolgsgeschichte](../../posts/urlaubskasse-aufbessern-spartipps/) – und die [Pauschalreise](../../posts/pauschalreise-buchen-bester-zeitpunkt/) oder die [individuelle Reise mit Mietwagen](../../posts/mietwagen-buchen-so-sparst-du/) sind beides gute Wege. Alle Reisethemen: [Ratgeber Mietwagen & Reisen](../../pillar/mietwagen/).
+Der Familienurlaub wird mit den richtigen Tricks zur Spar-Erfolgsgeschichte – und die Pauschalreise oder die individuelle Reise mit Mietwagen sind beides gute Wege. Alle Reisethemen: [Ratgeber Mietwagen & Reisen](../../pillar/mietwagen/).
 
 👉 **Jetzt Familien-Urlaubsangebote vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/reisen/)
 

@@ -17,6 +17,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
+
 Der durchschnittliche deutsche Haushalt gibt rund 2.900 € pro Jahr für Versicherungen aus – und ein Teil davon ist rausgeworfenes Geld. Viele Policen wurden vor Jahren abgeschlossen, doppeln sich mit anderen Verträgen oder decken Risiken ab, die es gar nicht wert sind, versichert zu werden.
 
 Die gute Nachricht: Mit einer systematischen Bestandsaufnahme erkennst du die überflüssigen Policen – und kündigst sie. In diesem Artikel zeige ich dir die 5 häufigsten Kandidaten und die 4 Policen, die bleiben sollten.
@@ -69,7 +70,7 @@ Prüfe den Rückkaufswert: Viele Policen haben nach Jahren eine garantierte Leis
 
 Der Kfz-Schutzbrief (Pannenhilfe, Abschleppen, Mietwagen bei Panne) kostet 20 bis 60 € pro Jahr und ist oft im Kfz-Vertrag „mit drin". Viele Fahrer:innen haben ihn doppelt – über den ADAC, die Kreditkarte oder den Autohersteller. Prüfe, was du schon hast, bevor du den Baustein weiterzahlst.
 
-Auch andere Zusatzbausteine in der [Kfz-Versicherung](../../posts/kfz-versicherung-wechseln/) lohnen sich oft nicht: Fahrerschutz-Versicherung mit kleinen Summen, Gepäckversicherung oder Mallorca-Police (wenn du ohnehin keine Auslandsfahrten machst). Der [Kfz-Vergleich](../../posts/kfz-versicherung-wechseln/) zeigt, wie viel du durch das Weglassen überflüssiger Bausteine sparst.
+Auch andere Zusatzbausteine in der [Kfz-Versicherung](../../posts/kfz-versicherung-wechseln/) lohnen sich oft nicht: Fahrerschutz-Versicherung mit kleinen Summen, Gepäckversicherung oder Mallorca-Police (wenn du ohnehin keine Auslandsfahrten machst). Der Kfz-Vergleich zeigt, wie viel du durch das Weglassen überflüssiger Bausteine sparst.
 
 ## Die 4 Policen, die wirklich bleiben sollten
 
@@ -77,7 +78,7 @@ Nach dem Ausmisten bleibt das Fundament – diese 4 Policen sind für fast jeden
 
 **1. Privathaftpflicht** (30 bis 60 € im Jahr): Deckt Personen- und Sachschäden, die du anderen zufügst. Die wichtigste Police überhaupt – [hier erklärt](../../posts/privathaftpflicht-warum-pflicht-kosten/).
 
-**2. Hausratversicherung** (60 bis 150 € im Jahr): Schützt deinen Hausrat bei Feuer, Wasser, Einbruch. Für Mieter und Eigentümer gleichermaßen sinnvoll – [hier erklärt](../../posts/hausratversicherung-wer-braucht-leistung/).
+**2. Hausratversicherung** (60 bis 150 € im Jahr): Schützt deinen Hausrat bei Feuer, Wasser, Einbruch. Für Mieter und Eigentümer gleichermaßen sinnvoll – hier erklärt.
 
 **3. Kfz-Haftpflicht** (Pflicht): Deckt Schäden, die du mit dem Auto verursachst. Vollkasko nur bei neuen, teuren Autos sinnvoll.
 
@@ -87,7 +88,7 @@ Nach dem Ausmisten bleibt das Fundament – diese 4 Policen sind für fast jeden
 
 Beim Kündigen gilt: Fristen einhalten und schriftlich kündigen (E-Mail mit Empfangsbestätigung oder Einschreiben). Die meisten Versicherungen haben eine Kündigungsfrist von 3 Monaten zum Ablauf – prüfe deinen Vertrag. Nach einer Beitragserhöhung hast du ein Sonderkündigungsrecht. Das ist oft der perfekte Zeitpunkt zum Wechseln oder Kündigen.
 
-Für Kfz- und [Haftpflicht-Verträge](../../posts/privathaftpflicht-warum-pflicht-kosten/) gilt: Der Wechsel zum 30. November (Wechselstichtag) ist der Klassiker. Plane den Versicherungs-Check einmal im Jahr fest ein – zum Beispiel zum Geburtstag oder Jahresbeginn. So bleibt der Ordner sauber und die Beiträge niedrig.
+Für Kfz- und Haftpflicht-Verträge gilt: Der Wechsel zum 30. November (Wechselstichtag) ist der Klassiker. Plane den Versicherungs-Check einmal im Jahr fest ein – zum Beispiel zum Geburtstag oder Jahresbeginn. So bleibt der Ordner sauber und die Beiträge niedrig.
 
 ## Der jährliche Versicherungs-Check:<br>Die 30-Minuten-Routine
 
@@ -97,7 +98,7 @@ Damit sich überflüssige Policen nicht wieder einschleichen, etablierst du eine
 
 **Schritt 2 – Bewerten (10 Minuten):** Für jede Police drei Fragen: Brauche ich diesen Schutz noch? Doppelt er sich mit einer anderen Police? Zahle ich einen fairen Preis? Die Antworten bestimmen den Stapel: behalten, kündigen, vergleichen.
 
-**Schritt 3 – Handeln (10 Minuten):** Kündigungen schreiben, Wechsel-Vergleiche starten, [Haftpflicht](../../posts/privathaftpflicht-warum-pflicht-kosten/) und [Hausrat](../../posts/hausratversicherung-wer-braucht-leistung/) auf den Prüfstand stellen. Die [Kfz-Versicherung](../../posts/kfz-versicherung-wechseln/) hat ihren eigenen Stichtag (30.11.) – plane den Vergleich separat ein.
+**Schritt 3 – Handeln (10 Minuten):** Kündigungen schreiben, Wechsel-Vergleiche starten, Haftpflicht und Hausrat auf den Prüfstand stellen. Die Kfz-Versicherung hat ihren eigenen Stichtag (30.11.) – plane den Vergleich separat ein.
 
 Der regelmäßige Check ist der einzige Weg, dauerhaft günstige Versicherungen zu haben – und er verhindert, dass sich über die Jahre wieder teure Altverträge ansammeln.
 
@@ -113,8 +114,8 @@ Schriftlich mit Vertragsnummer und Kündigungsfrist – per E-Mail (mit Bestäti
 **Was bringt ein Versicherungs-Check?**
 Ein systematischer Check deckt doppelte, überflüssige oder zu teure Policen auf – realistisch sparen Haushalte 100 bis 400 € pro Jahr, ohne den Schutz zu verschlechtern.
 
-Der Versicherungs-Check ist Teil eines soliden Finanz-Fundaments: erst [Haftpflicht und Hausrat](../../posts/privathaftpflicht-warum-pflicht-kosten/) klären, dann [überflüssige Policen kündigen](../../posts/versicherungen-kuendigen-diese-5-policen/), und das gesparte Geld in den [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) oder [Vermögensaufbau](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) stecken. Alle Versicherungsthemen: [Ratgeber Versicherungen](../../pillar/versicherungen/).
+Der Versicherungs-Check ist Teil eines soliden Finanz-Fundaments: erst Haftpflicht und Hausrat klären, dann [überflüssige Policen kündigen](../../posts/versicherungen-kuendigen-diese-5-policen/), und das gesparte Geld in den Notgroschen oder [Vermögensaufbau](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) stecken. Alle Versicherungsthemen: [Ratgeber Versicherungen](../../pillar/versicherungen/).
 
-👉 **Jetzt Haftpflicht- und [Hausratversicherung vergleichen](../../posts/hausratversicherung-wer-braucht-leistung/):** [**→ Jetzt vergleichen und sparen**](/go/haftpflicht/)
+👉 **Jetzt Haftpflicht- und Hausratversicherung vergleichen:** [**→ Jetzt vergleichen und sparen**](/go/haftpflicht/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -19,6 +19,9 @@ social_posted: true
 
 
 
+
+
+
 ---
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/gas/)
@@ -28,7 +31,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Energieversorger passen ihre Preise häufig zum Beginn der Heizsaison an. Wenn du im August oder September handelst, entgehst du dieser Preisspirale. Wer in der teuren Grundversorgung steckt, zahlt ab Oktober oft deutlich mehr als nötig. Der Wechselprozess dauert online nur wenige Minuten und läuft vollautomatisch im Hintergrund ab. Deine Versorgung ist gesetzlich lückenlos gesichert; du merkst von der Umstellung technisch nichts.
 
-Ein wichtiger Aspekt, den du beachten solltest, ist die **Preisgarantie**. Viele Anbieter bieten eine Preisgarantie von mindestens 12 Monaten an. Dies bedeutet, dass der Anbieter seinen Preis für die Dauer der Garantie nicht erhöhen kann. Eine solche Garantie kann dir helfen, deine Kosten langfristig zu planen und unerwartete Preiserhöhungen zu vermeiden.
+Ein wichtiger Aspekt, den du beachten solltest, ist die **Preisgarantie**. Viele Anbieter bieten eine Preisgarantie von mindestens [12 Monaten](../../posts/sparquote-berechnen-und-steigern/) an. Dies bedeutet, dass der Anbieter seinen Preis für die Dauer der Garantie nicht erhöhen kann. Eine solche Garantie kann dir helfen, deine Kosten langfristig zu planen und unerwartete Preiserhöhungen zu vermeiden.
 
 ## Worauf du beim Gasvergleich achten musst
 
@@ -52,7 +55,7 @@ Es ist auch wichtig, auf die **Kündigungsfrist** zu achten. Eine kurze Kündigu
 3. **Angebot prüfen**: Achte auf das Kleingedruckte bei den Bonuszahlungen. Manche Boni fließen erst nach einem vollen Belieferungsjahr zurück auf dein Konto.
 4. **Abschluss machen**: Fülle das Online-Formular aus. Dein neuer Anbieter kündigt für dich beim alten Versorger und bestätigt dir den Lieferbeginn schriftlich.
 
-Beim Vergleich der Tarife solltest du auch auf die **Vertragslaufzeit** achten. Ein Vertrag mit einer Laufzeit von 12 Monaten bietet eine gute Balance zwischen Planungssicherheit und Flexibilität. Wenn du einen Vertrag mit einer längeren Laufzeit wählst, könntest du in einem teuren Vertrag feststecken, wenn die Preise steigen.
+Beim Vergleich der Tarife solltest du auch auf die **Vertragslaufzeit** achten. Ein Vertrag mit einer Laufzeit von [12 Monaten](../../posts/sparquote-berechnen-und-steigern/) bietet eine gute Balance zwischen Planungssicherheit und Flexibilität. Wenn du einen Vertrag mit einer längeren Laufzeit wählst, könntest du in einem teuren Vertrag feststecken, wenn die Preise steigen.
 
 
 
@@ -63,7 +66,7 @@ Beim Vergleich der Tarife solltest du auch auf die **Vertragslaufzeit** achten. 
 
 Ein günstiger Tarif ist die Basis, aber effizientes Heizen hilft dir zusätzlich, deine [Heizkosten senken](../../posts/waermepumpe-vs-gasheizung-2026/) zu können. Entlüfte alle Heizkörper, bevor du die Thermostate im Herbst das erste Mal aufdrehst. Luft im System behindert den Wärmefluss und treibt den Verbrauch unnötig in die Höhe. Ein professioneller hydraulischer Abgleich optimiert die Wärmeverteilung im ganzen Haus. Schon eine Senkung der Raumtemperatur um ein Grad spart etwa 6 % Energie ein.
 
-Eine weitere Möglichkeit, deine Heizkosten zu senken, ist die **Isolierung** deines Hauses. Eine gute Isolierung kann helfen, die Wärme im Haus zu halten und den Verbrauch zu reduzieren. Du kannst auch überlegen, ob du deine alten Heizkörper durch neue, effizientere Modelle ersetzen möchtest.
+Eine weitere Möglichkeit, deine [Heizkosten](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) zu senken, ist die **Isolierung** deines Hauses. Eine gute Isolierung kann helfen, die Wärme im Haus zu halten und den Verbrauch zu reduzieren. Du kannst auch überlegen, ob du deine alten Heizkörper durch neue, effizientere Modelle ersetzen möchtest.
 
 ## Häufige Fragen
 
@@ -74,7 +77,7 @@ Ja, für den Wechselvorgang fallen keine Gebühren an. Dein neuer Anbieter über
 Ein Gasvergleich lohnt sich besonders für Haushalte in der Grundversorgung. Hier liegt das Sparpotenzial oft zwischen 10 % und 25 % der Gesamtkosten. Bei einem Einfamilienhaus mit 20.000 kWh Verbrauch sparst du so schnell 300 € oder mehr.
 
 ### Was passiert, wenn der alte Vertrag noch läuft?
-Du schließt den neuen Vertrag einfach mit Wirkung zum Ende deiner aktuellen Laufzeit ab. Bei einer Preiserhöhung hast du zudem ein Sonderkündigungsrecht. Nutze dieses Recht aktiv, um sofort Gaskosten sparen zu können.
+Du schließt den neuen Vertrag einfach mit Wirkung zum Ende deiner aktuellen Laufzeit ab. Bei einer Preiserhöhung hast du zudem ein [Sonderkündigungsrecht](../../posts/internet-anbieter-wechseln-kuendigung/). Nutze dieses Recht aktiv, um sofort Gaskosten sparen zu können.
 
 ### Kann ich auch als Mieter einen Gasanbieter wechseln?
 Ja, auch als Mieter kannst du einen Gasanbieter wechseln. Du musst jedoch sicherstellen, dass du die Erlaubnis deines Vermieters hast, bevor du einen neuen Vertrag abschließt.

@@ -34,11 +34,11 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Trick 1:<br>Der richtige Buchungszeitpunkt
 
-Flugpreise schwanken massiv. Wer zu früh bucht, zahlt oft den vollen Preis ohne Frühbucherrabatt. Wer zu lange wartet, wird von Last-Minute-Aufschlägen der Airlines getroffen. Für Kurzstrecken in Europa liegt das ideale Fenster zwischen 4 und 10 Wochen vor dem Abflug. Auf Langstrecken buchst du am besten 3 bis 6 Monate im Voraus, um dein **Reisebudget sparen** zu können. In den Ferienzeiten steigen die Preise fast täglich, je näher der Termin rückt.
+[Flugpreise](../../posts/flug-buchen-9-tricks-guenstige-tickets/) schwanken massiv. Wer zu früh bucht, zahlt oft den vollen Preis ohne Frühbucherrabatt. Wer zu lange wartet, wird von Last-Minute-Aufschlägen der Airlines getroffen. Für Kurzstrecken in Europa liegt das ideale Fenster zwischen 4 und 10 Wochen vor dem Abflug. Auf Langstrecken buchst du am besten 3 bis 6 Monate im Voraus, um dein **Reisebudget sparen** zu können. In den Ferienzeiten steigen die Preise fast täglich, je näher der Termin rückt.
 
 ## Trick 2:<br>Flexible Daten und Flughäfen
 
-Starrheit kostet dich bares Geld. Verschiebe deinen Flug um nur ein bis zwei Tage und spare oft 30 bis 50 € pro Ticket. Vergleiche zudem die Flughäfen in deiner gesamten Region. Ein Abflug vom benachbarten Airport kostet dich zwar etwas mehr Anreisezeit, reduziert die Kosten für **Flugtickets günstig** aber oft massiv. Viele Airlines fliegen kleinere Flughäfen zu deutlich niedrigeren Gebühren an.
+Starrheit kostet dich [bares Geld](../../posts/2026-08-06-frugalismus-im-alltag/). Verschiebe deinen Flug um nur ein bis zwei Tage und spare oft 30 bis 50 € pro Ticket. Vergleiche zudem die Flughäfen in deiner gesamten Region. Ein Abflug vom benachbarten Airport kostet dich zwar etwas mehr Anreisezeit, reduziert die Kosten für **Flugtickets günstig** aber oft massiv. Viele Airlines fliegen kleinere Flughäfen zu deutlich niedrigeren Gebühren an.
 
 ## Trick 3:<br>Vergleichsportale richtig nutzen
 

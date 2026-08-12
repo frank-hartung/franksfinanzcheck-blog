@@ -17,6 +17,10 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
+
+
+
+
 Internetverträge gehören zu den Verträgen, die die meisten Menschen nie wechseln – obwohl sie oft Jahr für Jahr zu viel zahlen. Der Grund ist meist Bequemlichkeit: „Der Wechsel ist doch kompliziert." Das Gegenteil ist der Fall: Seit der Automatisierung durch die Anbieter dauert ein Wechsel nur noch wenige Minuten Arbeit.
 
 In diesem Artikel zeige ich dir, wie du kündigst, wann du sofort rauskommst und wie der Wechsel ohne Internet-Lücke klappt.
@@ -45,7 +49,7 @@ Viele Anbieter versuchen trotzdem, längere Fristen in den AGB zu verstecken. Di
 
 Das Sonderkündigungsrecht erlaubt dir, den Vertrag außerordentlich zu beenden – ohne Frist und ohne Konsequenzen. Die wichtigsten Fälle:
 
-**Preiserhöhung:** Erhöht dein Anbieter den monatlichen Preis (auch nur die Router-Miete!), kannst du innerhalb einer Frist (meist 1 Monat nach Bekanntgabe) fristlos kündigen. Das gilt seit 2021 ausdrücklich auch für Tarifänderungen mit Preiserhöhung.
+**Preiserhöhung:** Erhöht dein Anbieter den monatlichen Preis (auch nur die [Router-Miete](../../posts/router-kaufen-oder-mieten-rechnung/)!), kannst du innerhalb einer Frist (meist 1 Monat nach Bekanntgabe) fristlos kündigen. Das gilt seit 2021 ausdrücklich auch für Tarifänderungen mit Preiserhöhung.
 
 **Umzug:** Zieht dein Anbieter am neuen Wohnort keinen gleichwertigen Anschluss anbieten, hast du ein Sonderkündigungsrecht. Auch wenn du in eine Region ohne DSL-Versorgung des Anbieters ziehst.
 
@@ -62,7 +66,7 @@ Der Wechsel selbst ist heute stark automatisiert. So läuft es:
 1. **Neuen Tarif finden:** Der [Vergleich](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt die Angebote an deiner Adresse – inklusive Wechsel-Boni.
 2. **Auftrag mit Wechsel-Service:** Beim neuen Anbieter gibt es den „Wechsel-Service": Er kümmert sich um die Kündigung beim alten Anbieter und die Terminabstimmung.
 3. **Termin koordinieren:** Der neue Anbieter meldet den Schaltungstermin – idealerweise so, dass der alte Anschluss erst danach abgeschaltet wird. Ein kurzer Doppelbetrieb (beide Anschlüsse 1–2 Wochen) verhindert die Internet-Lücke.
-4. **Router vorbereiten:** Wenn du [einen eigenen Router](../../posts/router-kaufen-oder-mieten-rechnung/) hast, brauchst du nur die Zugangsdaten. Beim Mietgerät schickt der neue Anbieter rechtzeitig sein Gerät.
+4. **Router vorbereiten:** Wenn du einen eigenen Router hast, brauchst du nur die Zugangsdaten. Beim Mietgerät schickt der neue Anbieter rechtzeitig sein Gerät.
 5. **Alten Vertrag abwickeln:** Kündigungsbestätigung abwarten, letzte Rechnung prüfen, Miet-Router zurückschicken.
 
 Der Aufwand liegt bei insgesamt 30 bis 60 Minuten – verteilt auf zwei bis drei Wochen Wartezeit, in der du nichts tun musst.
@@ -110,7 +114,7 @@ Vor dem Wechsel – diese fünf Punkte auf der Checkliste:
 
 1. **Verfügbarkeit geprüft:** Tarif an deiner Adresse verfügbar (Breitbandatlas oder Vergleichsportal)?
 2. **Gesamtkosten kalkuliert:** Preis ab Monat 13 eingerechnet (nicht nur der Lockvogel-Preis)?
-3. **Router geklärt:** [Kauf oder Miete](../../posts/router-kaufen-oder-mieten-rechnung/) – und Mietgebühr im Vergleich berücksichtigt?
+3. **Router geklärt:** Kauf oder Miete – und Mietgebühr im Vergleich berücksichtigt?
 4. **Telefonie mitgenommen:** Rufnummern-Portierung beantragt, wenn du deine Nummer behalten willst?
 5. **Kündigung dokumentiert:** Frist eingehalten, Bestätigung aufbewahrt?
 
@@ -122,9 +126,9 @@ Ein Wechsel ist einfach – aber die Fehler kosten trotzdem Geld und Nerven. Die
 
 2. **Die E-Mail-Adresse vergessen:** Viele Internet-Verträge enthalten eine E-Mail-Adresse des Anbieters. Nach der Kündigung ist sie weg – wer sie für Konten nutzt, verliert den Zugang. Lösung: Vor der Kündigung alle Konten auf eine eigene Adresse umstellen.
 
-3. **Router-Miete doppelt gezahlt:** Der Miet-Router des alten Anbieters muss fristgerecht zurück – sonst läuft die [Miete weiter](../../posts/router-kaufen-oder-mieten-rechnung/). Lösung: Rücksendung sofort nach der Schaltung, Beleg aufbewahren.
+3. **[Router-Miete](../../posts/router-kaufen-oder-mieten-rechnung/) doppelt gezahlt:** Der Miet-Router des alten Anbieters muss fristgerecht zurück – sonst läuft die Miete weiter. Lösung: Rücksendung sofort nach der Schaltung, Beleg aufbewahren.
 
-4. **Keine Preisgarantie gesichert:** Viele Tarife erhöhen den Preis nach 12 Monaten. Lösung: Beim Abschluss auf die Preisgarantie achten oder den Wechsel-Rhythmus bewusst einplanen.
+4. **Keine Preisgarantie gesichert:** Viele Tarife erhöhen den Preis nach [12 Monaten](../../posts/sparquote-berechnen-und-steigern/). Lösung: Beim Abschluss auf die Preisgarantie achten oder den Wechsel-Rhythmus bewusst einplanen.
 
 5. **Nur auf den Lockvogel-Preis geschaut:** Der erste Monat für 0 € klingt gut – entscheidend ist der Preis ab Monat 13. Lösung: Immer die Gesamtkosten über 24 Monate vergleichen.
 

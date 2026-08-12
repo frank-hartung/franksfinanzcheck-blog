@@ -66,7 +66,7 @@ Der Ablauf ist bei fast allen Banken inzwischen gleich und dauert online meist k
 
 Geht es um eine Abbuchung, die du schon länger auf dem Schirm hast, etwa eine Doppelbuchung nach einem Providerwechsel, lohnt der Anruf bei der Hotline deiner Bank. Dort wird die Frist kurz geprüft und der Vorgang direkt erledigt.
 
-Nur am Rande: Für die reine Rückbuchung einer Lastschrift erheben die meisten Banken **keine Gebühren**. Sollte deine Bank eine Gebühr verlangen, lohnt ein kritischer Blick in das Preisverzeichnis – und ein Wechsel kann sich dann ohnehin lohnen. Wie einfach so ein Kontowechsel heute ist, zeigt unser Lesetipp weiter unten.
+Nur am Rande: Für die reine Rückbuchung einer Lastschrift erheben die meisten Banken **keine Gebühren**. Sollte deine Bank eine Gebühr verlangen, lohnt ein kritischer Blick in das Preisverzeichnis – und ein Wechsel kann sich dann ohnehin lohnen. Wie einfach so ein [Kontowechsel](../../posts/kontowechsel-in-20-minuten-wechselservice/) heute ist, zeigt unser Lesetipp weiter unten.
 
 
 

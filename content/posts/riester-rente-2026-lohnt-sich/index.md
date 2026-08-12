@@ -17,6 +17,12 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
+
+
+
+
+
+
 Die Riester-Rente ist das umstrittenste Förderprodukt der deutschen Altersvorsorge. 2026 steht die große Reform an. Was bedeutet das für deinen Vertrag? Solltest du weiterfördern, stilllegen oder kündigen? Die Antwort hängt von deiner persönlichen Situation ab und von einer ehrlichen Rechnung.
 
 In diesem Artikel erkläre ich dir, wie Riester funktioniert, was die Reform 2026 ändert und wie du für deinen Fall die richtige Entscheidung triffst.
@@ -105,7 +111,7 @@ Die ehrliche Einordnung: Riester ist ein Baustein, kein Allheilmittel. Die moder
 
 1. **Gesetzliche Rente** (Pflicht, Basis)
 2. **Betriebliche Altersvorsorge** (bAV – oft mit Arbeitgeber-Zuschuss, meist sehr attraktiv)
-3. **Private Vorsorge:** Riester (für Förderberechtigte) und/oder [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) + [Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/)
+3. **Private Vorsorge:** Riester (für Förderberechtigte) und/oder ETF-Sparplan + [Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/)
 
 Für die meisten ist die Kombination aus bAV und ETF-Sparplan die schlagkräftigste Lösung. Riester kann dazukommen, wenn die Zulagen hoch sind – aber nie als einzige private Vorsorge.
 
@@ -113,7 +119,7 @@ Für die meisten ist die Kombination aus bAV und ETF-Sparplan die schlagkräftig
 
 Wer über Riester nachdenkt, sollte auch die betriebliche Altersvorsorge (bAV) prüfen – sie ist oft die unterschlagene Alternative. Der entscheidende Vorteil: Der Arbeitgeber muss mindestens 15 % Zuschuss zu deinen Beiträgen zahlen. Zusammen mit den Steuervorteilen (bis zu 8 % der Beitragsbemessungsgrenze steuerfrei) ist die bAV für viele die attraktivste Form der privaten Vorsorge.
 
-Die Kombination sieht so aus: bAV für den Arbeitgeber-Zuschuss und die Steuerersparnis, Riester für die Zulagen (wenn du Kinder hast oder gering verdienst), und ein [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) für den Rendite-Teil. Wer alle drei Bausteine nutzt, hat eine breit gestreute Altersvorsorge – und ist nicht von einem Produkt abhängig.
+Die Kombination sieht so aus: bAV für den Arbeitgeber-Zuschuss und die Steuerersparnis, Riester für die Zulagen (wenn du Kinder hast oder gering verdienst), und ein ETF-Sparplan für den Rendite-Teil. Wer alle drei Bausteine nutzt, hat eine breit gestreute Altersvorsorge – und ist nicht von einem Produkt abhängig.
 
 Wichtig bei der bAV: Prüfe die Kosten und die Verzinsung des Vertrags. Manche bAV-Angebote sind trotz Arbeitgeber-Zuschuss unattraktiv, weil die Gebühren hoch sind. Die Faustregel: Wenn der Arbeitgeber mindestens 15 % zuschießt und die Kosten unter 1,5 % liegen, lohnt sich die bAV fast immer.
 
@@ -129,9 +135,9 @@ Nur nach sorgfältiger Rechnung: Zulagen und Steuervorteile müssen zurückgezah
 Die erhaltenen Zulagen und Steuervorteile werden bei der Kündigung zurückgefordert und vom Rückkaufswert abgezogen. Die genaue Summe steht in der Abrechnung der Versicherung.
 
 **Gibt es bessere Alternativen zu Riester?**
-Für die meisten: ein [ETF-Sparplan auf einen Welt-ETF](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) mit historisch 6 bis 8 % Rendite. Wer hohe Zulagen bekommt (Familien, Geringverdiener), kann Riester ergänzend nutzen.
+Für die meisten: ein ETF-Sparplan auf einen Welt-ETF mit historisch 6 bis 8 % Rendite. Wer hohe Zulagen bekommt (Familien, Geringverdiener), kann Riester ergänzend nutzen.
 
-Die Altersvorsorge ist ein Puzzle: [Versicherungen sortieren](../../posts/versicherungen-kuendigen-diese-5-policen/), [BU prüfen](../../posts/berufsunfaehigkeitsversicherung-lohnt-sich/), und das freie Geld in einen [langfristigen Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) stecken. Alle Versicherungs- und Vorsorgethemen findest du im [Ratgeber Versicherungen](../../pillar/versicherungen/).
+Die Altersvorsorge ist ein Puzzle: [Versicherungen sortieren](../../posts/versicherungen-kuendigen-diese-5-policen/), BU prüfen, und das freie Geld in einen langfristigen Sparplan stecken. Alle Versicherungs- und Vorsorgethemen findest du im [Ratgeber Versicherungen](../../pillar/versicherungen/).
 
 👉 **Jetzt Konto- und Anlageprodukte vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/girokonto/)
 

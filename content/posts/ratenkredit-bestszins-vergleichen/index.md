@@ -61,7 +61,7 @@ Das Wichtigste in Kürze:
 Der Sollzins ist der reine Kreditzins, der Effektivzins inklusive aller Kosten. Für den Vergleich ist immer der effektive Jahreszins maßgeblich.
 
 ### Lohnt sich eine Umschuldung immer?
-Nur, wenn die Ersparnis die Kosten übersteigt. Faustregel: Bei Zinsunterschieden von mehr als 2 Prozentpunkten und Restlaufzeiten über 12 Monaten lohnt sich das Rechnen fast immer.
+Nur, wenn die Ersparnis die Kosten übersteigt. Faustregel: Bei Zinsunterschieden von mehr als 2 Prozentpunkten und Restlaufzeiten über [12 Monaten](../../posts/sparquote-berechnen-und-steigern/) lohnt sich das Rechnen fast immer.
 
 ### Wie viel Kredit kann ich mir leisten?
 Die Rate sollte dauerhaft unter 30 % deines Nettoeinkommens bleiben. Bei 2.000 € netto sind das maximal 600 € monatlich – besser ist weniger, denn die Rate muss auch in schlechteren Monaten passen.

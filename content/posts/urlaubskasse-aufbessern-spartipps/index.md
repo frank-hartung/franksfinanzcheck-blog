@@ -51,7 +51,7 @@ Bargeld in der Landeswährung hat zwei Vorteile: Du behältst den Überblick und
 
 ## 7. Reiseversicherung nur, was du brauchst
 
-Eine Auslandskrankenversicherung ist günstig und wichtig. Zusatzpakete wie Reiserücktritt oder Gepäckversicherung lohnen sich nur, wenn sie zum Reisebudget passen. Prüfe vor dem Abschluss, was du bereits über Kreditkarte oder bestehende Policen abgedeckt hast.
+Eine [Auslandskrankenversicherung](../../posts/reisekrankenversicherung-wann-lohnt/) ist günstig und wichtig. Zusatzpakete wie Reiserücktritt oder Gepäckversicherung lohnen sich nur, wenn sie zum Reisebudget passen. Prüfe vor dem Abschluss, was du bereits über Kreditkarte oder bestehende Policen abgedeckt hast.
 
 ### Das Wichtigste in Kürze
 - Buch im Voraus, um zu sparen
@@ -79,7 +79,7 @@ Faustregel: Pauschalreisen in der Hauptsaison 3–6 Monate vorher, Flüge 2–3 
 Wer alle sieben Tipps umsetzt, spart erfahrungsgemäß 15 bis 30 % der Reisekosten – bei 2.000 € Budget sind das 300 bis 600 €.
 
 ### Lohnt sich eine Reiserücktrittsversicherung?
-Bei teuren, früh gebuchten Reisen ja – vor allem bei festen Terminen oder wenn die Familie mitreist. Prüfe vorher, ob deine Kreditkarte schon eine Reiseversicherung enthält. Informiere dich im [Versicherungsvergleich](/go/mietwagen/) über passende Versicherungsmöglichkeiten.
+Bei teuren, früh gebuchten Reisen ja – vor allem bei festen Terminen oder wenn die Familie mitreist. Prüfe vorher, ob deine Kreditkarte schon eine [Reiseversicherung](../../posts/reiseversicherung-richtig-kombinieren/) enthält. Informiere dich im [Versicherungsvergleich](/go/mietwagen/) über passende Versicherungsmöglichkeiten.
 
 ---
 👉 **Jetzt Urlaubsangebote vergleichen und sparen:** [**→ Reiseangebote prüfen**](/go/reisen/)

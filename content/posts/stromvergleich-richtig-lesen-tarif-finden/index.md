@@ -17,9 +17,11 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
+
+
 Stromvergleiche versprechen „bis zu 500 € sparen" – und zeigen dann eine Liste mit Tarifen, die sich auf den ersten Blick kaum unterscheiden. Arbeitspreis, Grundpreis, Sofortbonus, Neukundenbonus, Preisgarantie: Wer nicht genau hinschaut, wählt am Ende einen Tarif, der gar nicht der günstigste ist.
 
-Die gute Nachricht: Stromtarife richtig zu vergleichen ist lernbar. In 20 Minuten hast du den besten Tarif für deinen Haushalt gefunden – wenn du weißt, worauf es ankommt. Genau das zeige ich dir hier Schritt für Schritt.
+Die gute Nachricht: Stromtarife richtig zu vergleichen ist lernbar. In [20 Minuten](../../posts/kontowechsel-in-20-minuten-wechselservice/) hast du den besten Tarif für deinen Haushalt gefunden – wenn du weißt, worauf es ankommt. Genau das zeige ich dir hier Schritt für Schritt.
 
 
 
@@ -42,7 +44,7 @@ Die Konsequenz: Vergleiche immer denselben Verbrauchswert auf demselben Portal �
 
 **Grundpreis (Euro pro Monat):** die fixe Gebühr, die du unabhängig vom Verbrauch zahlst. Sie deckt Zähler, Messstelle und Abrechnung. Bei niedrigem Verbrauch kann ein höherer Arbeitspreis mit niedrigerem Grundpreis günstiger sein.
 
-**Boni (Sofortbonus, Neukundenbonus):** einmalige Rabatte, oft gestaffelt: Sofortbonus bei Vertragsbeginn, Neukundenbonus nach 12 Monaten. Sie senken den effektiven Jahrespreis – aber Achtung: Boni werden oft nur bei pünktlicher Zahlung und nur im ersten Jahr gewährt.
+**Boni (Sofortbonus, Neukundenbonus):** einmalige Rabatte, oft gestaffelt: Sofortbonus bei Vertragsbeginn, Neukundenbonus nach [12 Monaten](../../posts/sparquote-berechnen-und-steigern/). Sie senken den effektiven Jahrespreis – aber Achtung: Boni werden oft nur bei pünktlicher Zahlung und nur im ersten Jahr gewährt.
 
 **Preisgarantie (Monate):** die Zusage, den Arbeitspreis für eine bestimmte Zeit nicht zu erhöhen. 12 Monate sind Standard, 24 Monate besser. Ohne Garantie kann der Preis auch im ersten Jahr steigen.
 
@@ -67,7 +69,7 @@ Rechne deshalb immer zwei Szenarien:
 - **Jahr 1:** Jahrespreis inklusive aller Boni.
 - **Jahr 2:** Jahrespreis ohne Boni (oder mit den Boni, die dauerhaft weiterlaufen).
 
-Viele Wechsler machen es sich zur Strategie, jährlich zu wechseln und jedes Mal den Neukundenbonus mitzunehmen. Das funktioniert – kostet aber jedes Jahr 10 bis 20 Minuten Aufwand. Wer das nicht will, wählt einen soliden Tarif mit Preisgarantie ohne Bonus-Spielchen.
+Viele Wechsler machen es sich zur Strategie, jährlich zu wechseln und jedes Mal den Neukundenbonus mitzunehmen. Das funktioniert – kostet aber jedes Jahr 10 bis [20 Minuten](../../posts/kontowechsel-in-20-minuten-wechselservice/) Aufwand. Wer das nicht will, wählt einen soliden Tarif mit Preisgarantie ohne Bonus-Spielchen.
 
 
 
@@ -128,7 +130,7 @@ Der neue Anbieter informiert deinen alten Anbieter über den Wechsel und kündig
 Die Umstellung dauert in der Regel 2 bis 6 Wochen. Währenddessen bist du durchgehend mit Strom versorgt – ein Wechsel ohne Strom gibt es nicht.
 
 **Kann ich meinen Tarif bei einem Umzug mitnehmen?**
-In den meisten Fällen ja: Viele Anbieter gestatten die Mitnahme des Tarifs an die neue Adresse, sofern sie dort liefern. Beim Umzug in ein anderes Netzgebiet kann sich der Arbeitspreis ändern. Prüfe im Vertrag die Umzugsklausel – sonst hilft das Sonderkündigungsrecht, das bei Umzügen gesetzlich gilt.
+In den meisten Fällen ja: Viele Anbieter gestatten die Mitnahme des Tarifs an die neue Adresse, sofern sie dort liefern. Beim Umzug in ein anderes Netzgebiet kann sich der Arbeitspreis ändern. Prüfe im Vertrag die Umzugsklausel – sonst hilft das [Sonderkündigungsrecht](../../posts/internet-anbieter-wechseln-kuendigung/), das bei Umzügen gesetzlich gilt.
 
 👉 **Jetzt Stromtarife vergleichen und bis zu 300 € sparen:** [**→ Jetzt vergleichen bei CHECK24**](/go/strom/)
 

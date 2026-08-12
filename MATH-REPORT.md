@@ -1,6 +1,6 @@
 # 🧮 MATH-REPORT (math_guard.py)
 
-**Stand:** 2026-08-12 12:43 UTC · Modus: DRY-RUN
+**Stand:** 2026-08-12 14:47 UTC · Modus: FIX
 **Gepruefte Artikel:** 83 · **Auto-Fixes:** 0 · **Hinweise:** 0
 
 🎉 Alle Rechenbeispiele korrekt nachgerechnet (Verlags-Faktencheck).

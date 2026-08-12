@@ -359,6 +359,36 @@ jeder Schreibaktion.
   Geldanlage-Heimat), fluege→ehrlicher Homepage-Fallback (kein Flug-Deep am
   Tracker, TODO Dashboard). affiliate_health.py jetzt E2E mit Kategorie-Vertrag,
   Auto-Heilung auf sicheren Fallback und 17-Faelle-Selbsttest.
+- **12.08.2026 (7):** INTERNAL-LINK-LECK ENTSCHAERFT (Root-Cause-Serie):
+  Komplett-Messung zeigte o 1.1 interne Links/Artikel im HTML, obwohl
+  im Markdown 5.6 standen. DREI Ursachen: (1) internal_linker.py kuerzte
+  Slugs um 3 Zeichen (`tgt_fn[:-3]` – „wechseln"→„wechs" → 404), (2) die
+  Inserts arbeiteten sequentiell mit Alt-Offsets → Verschiebe-Kaskade,
+  Chaos-Texte wie „Zw[eitwagenre](…)gelung" entstanden – 21 Chaos-Zeilen
+  in meiner eigenen heutigen Testrunde (rollbackt!), (3) der Render-Hook
+  (render-link.html) gab relative Markdown-Links WORTWOERTLICH aus →
+  Browser versuchte /posts/posts/xyz/ → 404 unsichtbar. FIXES:
+  - Linker: nie kuerzen (tgt_fn ist sauberer Slug), Inserts geplant
+    rueckwaerts einfuegen, anchor_ok-Qualitaetsfilter (keine „es sich"
+    -Anker mehr), Deckel 9/Artikel (kein Link-Spam), used_targets prueft
+    auch bestehende Datei-Links (kein Dup-Ping-Pong mehr).
+  - render-link.html: relative Posts/Pillar-Links werden absolut-site-
+    kanonisch (/posts/slug/) ergaenzt um doppelte-Slash-Saeuberung.
+  - NEU: scripts/link_density_guard.py (C1 Korridor-Zaehlung 2-9,
+    C2 Ziel-Duplikat-Heilung ab >3 Nennungen mit Anker-Dup-Regel, C3
+    Header-Link-Relikt-Detektor, 5-Finger-Selbsttest) in blog_doctor-
+    Kette eingefuegt (D-Ordnung). Erfolg: ø1.1 → ø5.5 interne Links.
+  - 17 semantisch falsche „pro Monat"-Links (Preiseinheiten in Tabellen
+    sollten keine Links tragen) entlinkt (Text blieb).
+  - Repo-Repair-Beweisstuecke entfernt: 2 alt-kaputte Zeilen in
+    frugalismus-im-alltag (Dauer-Klammer-Bruch + Ueberschrift mit
+    Link-Rest) geheilt.
+  Integrity-FEST: 26 → 28 Dateien (internal_linker, link_density_guard).
+  BEKENNENDE LEKTION: Mein basename()-Bug (Trailing-Slash) loeste einen
+  Phantom-Alarm aus → Version control ERST prüfen, dann handeln; außerdem
+  zeigt das Desaster: Messmethoden-Dokumentation (wie „ø interne Links")
+  muss in KLARTEXT definiert sein (HTML vs Markdown – wir zaehlen jetzt
+  HTML nach Build, nicht mehr MD-Blindheit).
 - **12.08.2026 (6):** Marken-Relaunch Runde 2 (Frank: „Punkte stoeren, Marke nicht
   sauber genug + Logo fuer ganzen Blog"). BEKENNENDE LEKTION: Mein Punktmuster
   mit Alpha `fill=(255,255,255,18)` wurde von Pillow im RGB-Modus still

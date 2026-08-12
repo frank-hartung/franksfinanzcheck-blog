@@ -16,6 +16,11 @@ kurzantwort: "Du kannst deinen Stromverbrauch um etwa 10 % senken, indem du ein
 social_posted: true
 ---
 
+
+
+
+
+
 Du kannst deinen Stromverbrauch um 15 bis 25 % senken, ohne Komfort zu verlieren. Diese Strom-sparen-Tipps helfen dir, deinen Verbrauch sofort zu senken – Diese 20 Tipps sind nach Sofortwirkung und Aufwand sortiert.
 
 
@@ -57,7 +62,7 @@ Mit größeren Investitionen kannst du deinen Stromverbrauch noch mehr reduziere
 17. **Wärmepumpentrockner:** Verbrauchen bis zu 50 % weniger als alte Ablufttrockner. 
 18. **Programmierbare Thermostate:** Heizung automatisch absenken, wenn niemand zu Hause ist. 
 19. **Solar-Balkonkraftwerk:** ein Mini-Solarmodul (400–800 W) am Balkon produziert 300–600 kWh pro Jahr – rechnet sich oft schon nach 3–5 Jahren. 
-20. **Stromtarif wechseln:** der größte Hebel überhaupt – der Unterschied zwischen Grundtarif und günstigstem Anbieter liegt oft bei 200–300 € pro Jahr.
+20. **[Stromtarif](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) wechseln:** der größte Hebel überhaupt – der Unterschied zwischen Grundtarif und günstigstem Anbieter liegt oft bei 200–300 € pro Jahr.
 
 ## Die 3 größten Stromfresser im Haushalt
 Die größten Stromfresser im Haushalt sind: 
@@ -70,7 +75,7 @@ Die größten Stromfresser im Haushalt sind:
 Wer die Sofort-Tipps umsetzt, spart realistisch 100–200 € pro Jahr. Mit Investitionen und Tarifwechsel sind 300–500 € drin – je nach Ausgangslage.
 
 ### Welcher Tipp bringt am meisten?
-Der Stromtarif-Wechsel (Tipp 20) hat den größten Einzel-Effekt. Danach folgen Standby-Vermeidung, Wäschetrocknen an der Luft und der Austausch alter Kühlgeräte.
+Der [Stromtarif](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/)-Wechsel (Tipp 20) hat den größten Einzel-Effekt. Danach folgen Standby-Vermeidung, Wäschetrocknen an der Luft und der Austausch alter Kühlgeräte.
 
 ### Lohnt sich ein Strommessgerät?
 Ja – ein Messgerät (oft kostenlos ausleihbar) zeigt in 24 Stunden, welche Geräte wirklich viel ziehen. Gerade versteckte Dauerläufer werden so sichtbar.

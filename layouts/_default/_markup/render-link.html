@@ -29,6 +29,29 @@
 
 {{- $href := .Destination -}}
 {{- $isGo := strings.HasPrefix $href "/go/" -}}
+
+{{- /* 12.08.2026 (Frank, ROOT-CAUSE des grossen Link-Lecks):
+   Interne Links im Markdown stehen RELATIV (../../posts/slug/) – der
+   Browser loeste sie von /posts/abc/ nach /posts/posts/abc/ auf → 404.
+   Im gerenderten HTML sah man daher KAUM interne Links (messtechnisch
+   „ø 1.1" – der Rest war unsichtbar/404). Hier loesen wir sie absolut auf:
+   ../../posts/slug/  →  site.RelPermalink /posts/slug/ */ -}}
+{{- if and (not $isGo) (strings.HasPrefix $href "../../posts/") -}}
+  {{- $clean := $href | strings.TrimPrefix "../../posts/" -}}
+  {{- $href = print "/posts/" $clean -}}
+{{- else if and (not $isGo) (strings.HasPrefix $href "../../pillar/") -}}
+  {{- $clean := $href | strings.TrimPrefix "../../pillar/" -}}
+  {{- $href = print "/pillar/" $clean -}}
+{{- else if and (not $isGo) (strings.HasPrefix $href "../../") -}}
+  {{- $clean := $href | strings.TrimPrefix "../../" -}}
+  {{- $href = print "/" $clean -}}
+{{- end -}}
+{{- if and (not $isGo) (strings.HasPrefix $href "/") -}}
+  {{- /* URL-Kanonisierung gegen Duplikat-/404-Pfade: ohne Leerzeichen, ohne
+         doppelte Schraegstriche (z. B. bei Caption-Links oder Tippfehlern) */ -}}
+  {{- $href = $href | replaceRE "//+" "/" | safeURL -}}
+{{- end -}}
+
 {{- $slug := "" -}}
 {{- if $isGo }}{{ $slug = $href | strings.TrimPrefix "/go/" | strings.TrimSuffix "/" }}{{ end -}}
 {{- $ziel := "" -}}

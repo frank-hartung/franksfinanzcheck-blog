@@ -18,7 +18,7 @@ social_posted: true
 
 ## 1. Zahle dich zuerst
 
-Überweise am Monatsanfang sofort 10 bis 15 % deines Einkommens auf ein separates Depot oder Tagesgeldkonto. Betrachte diesen Betrag als deine wichtigste Rechnung, die du zuerst begleichst. Was du nicht auf dem Girokonto siehst, gibst du im Alltag nicht aus. Diese einfache Routine sichert deinen langfristigen Vermögensaufbau ohne täglichen Verzicht. Ein Beispiel: Wenn du 2.500 € monatlich verdienst, solltest du 250–375 € auf dein Sparbuch überweisen.
+Überweise am Monatsanfang sofort 10 bis 15 % deines Einkommens auf ein separates Depot oder [Tagesgeldkonto](../../posts/tagesgeld-zinsen-sicher-anlegen/). Betrachte diesen Betrag als deine wichtigste Rechnung, die du zuerst begleichst. Was du nicht auf dem Girokonto siehst, gibst du im Alltag nicht aus. Diese einfache Routine sichert deinen langfristigen [Vermögensaufbau](../../posts/sparquote-berechnen-und-steigern/) ohne täglichen Verzicht. Ein Beispiel: Wenn du 2.500 € monatlich verdienst, solltest du 250–375 € auf dein Sparbuch überweisen.
 
 ## 2. Führe monatlich ein Finanz-Review
 
@@ -26,7 +26,7 @@ Reserviere dir einmal im Monat genau 15 Minuten für deine Zahlen. Gehe deine Ko
 
 ## 3. Hinterfrage jeden Kauf mit der 48-Stunden-Regel
 
-Warte bei jeder ungeplanten Ausgabe über 100 € exakt zwei Tage ab. Die meisten Konsumwünsche verlieren in dieser Zeit ihren Reiz und die emotionale Impulshandlung verpufft. Du sparst so bares Geld, das du stattdessen für produktive Anlagen nutzt. Disziplin bei Konsumgütern ist der schnellste Weg zu echtem Wohlstand. Ein Beispiel für die Anwendung dieser Regel könnte wie folgt aussehen:
+Warte bei jeder ungeplanten Ausgabe über 100 € exakt zwei Tage ab. Die meisten Konsumwünsche verlieren in dieser Zeit ihren Reiz und die emotionale Impulshandlung verpufft. Du sparst so [bares Geld](../../posts/2026-08-06-frugalismus-im-alltag/), das du stattdessen für produktive Anlagen nutzt. Disziplin bei Konsumgütern ist der schnellste Weg zu echtem Wohlstand. Ein Beispiel für die Anwendung dieser Regel könnte wie folgt aussehen:
 - Du siehst ein neues Smartphone, das dich interessiert und das 500 € kostet.
 - Anstatt sofort zu kaufen, wartest du 48 Stunden ab.
 - Nach 48 Stunden überlegst du, ob du das Smartphone wirklich brauchst oder ob es nur ein Impulskauf war.
@@ -38,7 +38,7 @@ Verträge für Strom, DSL oder Versicherungen bieten oft ein Einsparpotenzial vo
 
 ## 5. Automatisiere deinen Vermögensaufbau
 
-Richte einen automatischen ETF-Sparplan ein, der direkt nach deinem Gehaltseingang ausführt. Konstanz schlägt den Versuch, den perfekten Einstiegszeitpunkt am Markt zu finden. Schon kleine Summen zwischen 25 € und 50 € generieren über die Jahre ein beachtliches passives Einkommen. Der Zinseszins arbeitet für dich, während du dich um wichtigere Dinge kümmerst. Ein Beispiel für die Macht des Zinseszinses:
+Richte einen automatischen [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) ein, der direkt nach deinem Gehaltseingang ausführt. Konstanz schlägt den Versuch, den perfekten Einstiegszeitpunkt am Markt zu finden. Schon kleine Summen zwischen 25 € und 50 € generieren über die Jahre ein beachtliches passives Einkommen. Der Zinseszins arbeitet für dich, während du dich um wichtigere Dinge kümmerst. Ein Beispiel für die Macht des Zinseszinses:
 - Du investierst 100 € im Monat über 30 Jahre mit einer jährlichen Rendite von 5 %.
 - Nach 30 Jahren hast du insgesamt 36.000 € investiert, aber dank des Zinseszinses hast du ein Vermögen von über 70.000 € aufgebaut.
 
@@ -49,7 +49,7 @@ Richte einen automatischen ETF-Sparplan ein, der direkt nach deinem Gehaltseinga
 
 ## 6. Bilde dich kontinuierlich weiter
 
-Finanzwissen reduziert dein Risiko und erhöht deine Renditechancen. Lies ein Fachbuch pro Quartal oder höre gezielte Podcasts auf dem Weg zur Arbeit. Wer die Mechanismen der Geldanlage versteht, trifft souveräne Entscheidungen und vermeidet teure Fehler. Dein Wissen ist das Asset mit der höchsten Rendite. Einige empfehlenswerte Bücher für den Einstieg in die Finanzbildung sind "Die Richest Man in Babylon" von George S. Clason oder "Das kleine Buch der großen Geldanlage" von Bodo Schäfer.
+[Finanzwissen](../../posts/50-30-20-regel-einfach-erklaert/) reduziert dein Risiko und erhöht deine Renditechancen. Lies ein Fachbuch pro Quartal oder höre gezielte Podcasts auf dem Weg zur Arbeit. Wer die Mechanismen der Geldanlage versteht, trifft souveräne Entscheidungen und vermeidet teure Fehler. Dein Wissen ist das Asset mit der höchsten Rendite. Einige empfehlenswerte Bücher für den Einstieg in die Finanzbildung sind "Die Richest Man in Babylon" von George S. Clason oder "Das kleine Buch der großen Geldanlage" von Bodo Schäfer.
 
 ## 7. Feiere Fortschritte – und verzeihe Rückschläge
 

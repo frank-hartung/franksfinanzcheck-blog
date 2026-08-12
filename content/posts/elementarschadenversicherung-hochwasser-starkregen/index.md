@@ -18,6 +18,7 @@ cover:
 social_posted: true
 ---
 
+
 Jede zweite Wohnung in Deutschland ist schutzlos gegen Naturgewalten. Ein einziger Starkregen setzt deinen Keller in Minuten unter Wasser und vernichtet deine Ersparnisse. Der Staat hilft dir im Ernstfall nur selten. Erfahre hier, wie du mit einer Elementarschadenversicherung deine Existenz sicherst.
 
 ### Das Wichtigste in Kürze
@@ -107,7 +108,7 @@ Versicherungen decken nur den Geldwert ab. Schütze deine persönlichen Erinneru
 
 **Barrieren schaffen:** Prüfe die Schwellen deiner Fenster und Türen. Kleine Erhöhungen oder mobile Schutzelemente halten Oberflächenwasser effektiv fern. Das ist besonders bei Einfahrten mit Gefälle zum Haus wichtig.
 
-**Technik absichern:** Schütze deine Wärmepumpe oder Photovoltaikanlage vor Hagel und Flut. Kläre mit deinem Versicherer, ob diese Anlagen mitversichert sind. Schäden an moderner Haustechnik erreichen schnell fünfstellige Beträge.
+**Technik absichern:** Schütze deine [Wärmepumpe](../../posts/waermepumpe-vs-gasheizung-2026/) oder Photovoltaikanlage vor Hagel und Flut. Kläre mit deinem Versicherer, ob diese Anlagen mitversichert sind. Schäden an moderner Haustechnik erreichen schnell fünfstellige Beträge.
 
 Dokumentiere deine Wertsachen vorab mit Fotos. Notiere dir deine Versicherungsnummer und lege die Unterlagen digital ab. Im Ernstfall beschleunigt das die Regulierung enorm. Du erhältst dein Geld so wesentlich schneller zurück.
 
@@ -120,9 +121,9 @@ Es gibt derzeit keine gesetzliche Pflicht. Der Staat verlangt aber Eigenverantwo
 Die Preise schwanken je nach Risiko und Wohnort. Du zahlst meist zwischen 20 € und 200 € zusätzlich zur Hausrat. Eine Wohngebäudeversicherung wird um etwa 40 € bis 500 € teurer.
 
 **Was mache ich bei bestehender Hausrat?**
-Rufe deinen Versicherer an und frage nach dem Elementar-Baustein. Vergleiche den Aufpreis mit neuen Tarifen am Markt. Die [Hausratversicherung](../../posts/hausratversicherung-wer-braucht-leistung/) solltest du ohnehin regelmäßig prüfen.
+Rufe deinen Versicherer an und frage nach dem Elementar-Baustein. Vergleiche den Aufpreis mit neuen Tarifen am Markt. Die Hausratversicherung solltest du ohnehin regelmäßig prüfen.
 
-Baue deine Vorsorge auf einem soliden Fundament auf. Wähle zuerst eine [Haftpflicht](../../posts/privathaftpflicht-warum-pflicht-kosten/). Ergänze dann deine [Hausrat mit Elementar-Baustein](../../posts/hausratversicherung-wer-braucht-leistung/) innerhalb deiner [Versicherungs-Strategie](../../pillar/versicherungen/). Du kannst [überflüssige Policen](../../posts/versicherungen-kuendigen-diese-5-policen/) kündigen, um das Budget dafür freizumachen.
+Baue deine Vorsorge auf einem soliden Fundament auf. Wähle zuerst eine [Haftpflicht](../../posts/privathaftpflicht-warum-pflicht-kosten/). Ergänze dann deine Hausrat mit Elementar-Baustein innerhalb deiner [Versicherungs-Strategie](../../pillar/versicherungen/). Du kannst [überflüssige Policen](../../posts/versicherungen-kuendigen-diese-5-policen/) kündigen, um das Budget dafür freizumachen.
 
 **Zahlt die Elementarschadenversicherung auch bei Starkregen ohne Hochwasser?**
 Ja, das ist der Kern des Schutzes. Das Wasser muss von außen in das Gebäude eindringen. Schäden durch offene Fenster bei Regen sind allerdings nicht versichert. Achte auf eine dichte Bauweise deines Hauses.

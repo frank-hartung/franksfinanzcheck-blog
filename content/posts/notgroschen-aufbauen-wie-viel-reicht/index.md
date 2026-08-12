@@ -16,6 +16,11 @@ kurzantwort: "Du solltest etwa 3–6 Monatsgehälter auf der hohen Kante haben, 
 social_posted: true
 ---
 
+
+
+
+
+
 Die Waschmaschine gibt den Geist auf, das Auto braucht neue Reifen, und der Zahnarzt schickt eine Rechnung – du landest ohne Notgroschen schnell auf dem Dispo. Einen Notgroschen aufzubauen ist der wichtigste erste Schritt der Finanzplanung – Der Aufbau einer Sicherheitsreserve ist einfacher, als viele denken. Du brauchst eine Strategie, um deine Finanzen zu sichern.
 
 
@@ -34,7 +39,7 @@ Die Faustregel der Finanz-Community lautet: **3 bis 6 Monatsgehälter**. Konkret
 
 ## Wohin mit dem Notgroschen?
 
-Die Reserve gehört **nicht** aufs Girokonto und nicht in Aktien. Ideal ist ein **Tagesgeldkonto**:
+Die Reserve gehört **nicht** aufs Girokonto und nicht in Aktien. Ideal ist ein **[Tagesgeldkonto](../../posts/tagesgeld-zinsen-sicher-anlegen/)**:
 - Jederzeit verfügbar – oft am selben Tag.
 - Kein Kursrisiko.
 - Meist kostenlos, mit inzwischen wieder attraktiven Zinsen.
@@ -44,7 +49,7 @@ Die Reserve gehört **nicht** aufs Girokonto und nicht in Aktien. Ideal ist ein 
 
 1. **Monatsausgaben berechnen:** alle Fixkosten + Lebensmittel + Puffer zusammenrechnen.
 2. **Ziel setzen:** 3 × Monatsausgaben für den Start – das ist realistisch und reicht meist.
-3. **Dauerauftrag einrichten:** monatlich einen festen Betrag (z. B. 50 oder 100 €) aufs Tagesgeldkonto – direkt nach Gehaltseingang.
+3. **Dauerauftrag einrichten:** monatlich einen festen Betrag (z. B. 50 oder 100 €) aufs [Tagesgeldkonto](../../posts/tagesgeld-zinsen-sicher-anlegen/) – direkt nach Gehaltseingang.
 4. **Extrageld nutzen:** Steuererstattung, Weihnachtsgeld, Prämien gehen zu 50 % in den Notgroschen.
 5. **Verträge entlasten:** Strom-, Handy- oder Versicherungswechsel schafft Platz im Budget – der Unterschied wandert aufs Sparkonto.
 6. **Erst dann investieren:** ist die Reserve voll, kann das Sparen in ETFs oder Aktien umgeleitet werden.

@@ -83,6 +83,9 @@ FEST = {
     "static/images/brand/logo-light.svg",
     "static/favicon.svg",
     "static/apple-touch-icon.png",
+    # Linker-Bewacher (12.08. Profi-Uebau; Root-Cause-Lock gegen Link-Leck):
+    "scripts/internal_linker.py",
+    "scripts/link_density_guard.py",
 }
 
 

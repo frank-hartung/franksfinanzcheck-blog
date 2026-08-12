@@ -28,6 +28,9 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, slug_of
 MAX_LINKS_PER_ARTICLE = 3  # neue Links pro Artikel pro Lauf
+MAX_TOTAL_PER_ARTICLE = 9  # GOLDKORRIDOR-Deckel (12.08.): ueber
+                           # 9 interne Links wirkt wie Link-Spam.
+                           # Artikel am/ueber Deckel: kein Zuwachs.
 MIN_WORDS = 2              # Ankertext min. Wörter (vermeidet generische Links)
 MAX_WORDS = 4              # Ankertext max. Wörter
 
@@ -36,6 +39,34 @@ STOP_ANCHORS = {
     "hier", "dort", "klick", "mehr", "weiter", "diesen artikel", "diesen beitrag",
     "check24", "lesen", "jetzt", "so geht", "tipp", "tricks",
 }
+
+# Funktionswoerter (12.08. Profi-Umbau): zur Qualitaets-Bewertung von Ankern.
+# Regel: Anker MUSS Inhaltswort tragen und darf nicht mit Funktionswort
+# beginnen/enden („mit tagesgeld" ok, „ist der schufa" raus).
+FUNC_WORDS = {
+    "ab", "als", "am", "an", "auch", "auf", "aus", "bei", "beim", "bis", "da",
+    "damit", "das", "dass", "dein", "deine", "den", "der", "die", "dir", "doch",
+    "du", "durch", "ein", "eine", "einem", "einen", "er", "es", "fuer", "geht",
+    "gibt", "hat", "hast", "hier", "ich", "im", "in", "ins", "ist", "ja", "jetzt",
+    "kann", "kannst", "kein", "keine", "machen", "man", "mit", "nach", "nicht",
+    "noch", "nur", "ob", "oder", "schon", "sich", "sie", "sind", "so", "um",
+    "und", "unter", "vom", "von", "vor", "wann", "warum", "was", "wenn", "werden",
+    "wie", "wir", "wird", "wo", "zu", "zum", "zur", "ueber",
+    "für", "über", "können", "müssen", "sollte", "solltest", "werdet",
+}
+
+
+def anchor_ok(phrase: str) -> bool:
+    """Qualitaets-Gate fuer Ankertexte (Profi-Regel):
+    - mindestens 1 Inhaltswort (nicht nur Funktionswoerter)
+    - beginnt UND endet mit Inhaltswort („die besten X" ok, „X ist der" nicht)
+    - jedes Wort >= 2 Zeichen"""
+    ws = [w.strip(",.;:!?") for w in phrase.split()]
+    if not all(len(w) >= 2 for w in ws):
+        return False
+    if ws[0] in FUNC_WORDS or ws[-1] in FUNC_WORDS:
+        return False
+    return any(w not in FUNC_WORDS for w in ws)
 
 
 def parse_frontmatter(content):
@@ -99,19 +130,29 @@ def build_anchor_candidates(pages):
     candidates = []  # (phrase, target_path, score)
     for path, info in pages.items():
         title = info["title"]
-        # Titel-Phrasen: ganze Wörter (2-4) aus dem Titel
+        # Titel-Phrasen: N-Gramme ueber ALLE Positionen (12.08. Profi-Umbau:
+        # vorher nur die ersten 2-3 Titelworte → 381 Kandidaten, 3 Treffer,
+        # interne Verlinkung o.1/Post = SEO-Leck. Jetzt alle Positionen,
+        # Kopf-Position bekommt kleinen Bonus).
         words = re.findall(r"[A-Za-zÄÖÜäöüß0-9-]+", title.lower())
         if len(words) >= 2:
             for n in (2, 3):
-                if len(words) >= n:
-                    phrase = " ".join(words[:n])
-                    if phrase not in STOP_ANCHORS:
-                        candidates.append((phrase, path, info.get("score", 50)))
-        # Keywords (1-3 Wörter)
+                for i in range(0, len(words) - n + 1):
+                    phrase = " ".join(words[i:i + n])
+                    if phrase not in STOP_ANCHORS and anchor_ok(phrase):
+                        bonus = 8 if i == 0 else 0
+                        candidates.append((phrase, path, info.get("score", 50) + bonus))
+        # Keywords: Mehrwort (2-4 Woerter) + spezifische Einzelwoerter >= 6 Z.
+        # (z. B. "schufa", "tagesgeld" – Allerwelt-Anchors bleiben gestoppt)
         for kw in info.get("keywords", [])[:5]:
             kw_l = kw.lower().strip()
-            if 2 <= len(kw_l.split()) <= MAX_WORDS and kw_l not in STOP_ANCHORS:
+            if kw_l in STOP_ANCHORS:
+                continue
+            nw = len(kw_l.split())
+            if 2 <= nw <= MAX_WORDS and anchor_ok(kw_l):
                 candidates.append((kw_l, path, info.get("score", 60) + 10))
+            elif nw == 1 and len(kw_l) >= 6:
+                candidates.append((kw_l, path, info.get("score", 60) + 5))
     return candidates
 
 
@@ -160,9 +201,19 @@ def main():
     print(f"Artikel: {len(pages)} | Kandidaten-Phrasen: {len(candidates)}\n")
 
     total_added = 0
+    lnkrx = re.compile(r"\]\(\.\./\.\./posts/")
     for src_fn, src in sorted(pages.items()):
         added = 0
-        used_targets = set()
+        existing = len(lnkrx.findall(src["body"]))
+        if existing >= MAX_TOTAL_PER_ARTICLE:
+            print(f"  ⏭ {src_fn}: {existing} Links am Deckel – kein Zuwachs")
+            continue
+        max_links_eff = min(max_links, MAX_TOTAL_PER_ARTICLE - existing)
+        # 12.08. Fix (Kreislauf-Fund): bereits verlinkte Ziele im Artikel
+        # zaehlen als BELEGT – sonst baut der Linker Duplikate, die der
+        # Density-Guard danach wieder entlinkt (Ping-Pong, zweimal beobachtet).
+        used_targets = set(re.findall(r"\]\(\.\./\.\./posts/([^)]+)\)",
+                                      src["body"]))
         used_phrases = set()
         # Sortiere Kandidaten nach Themen-Überlappung mit dem Quellartikel
         scored = []
@@ -175,8 +226,9 @@ def main():
             scored.append((overlap * 100 + base_score, phrase, tgt_fn))
         scored.sort(reverse=True)
 
+        planned = []  # (start, end, target, anchor_text)
         for score, phrase, tgt_fn in scored:
-            if added >= max_links:
+            if added >= max_links_eff:
                 break
             if tgt_fn in used_targets:
                 continue
@@ -186,29 +238,42 @@ def main():
             if not anchor:
                 continue
             start, end = anchor
-            target = f"../../posts/{tgt_fn[:-3]}/"  # relativ (Hugo-Subdir: führender Slash = Domain-Wurzel → 404)
+            # tgt_fn IST der Ordner-Slug (kein .md-Rest mehr) – NIE kuerzen!
+            # (12.08. Root-Cause: [:-3] riss „wechseln“ zu „wechs“ → 404.)
+            target = f"../../posts/{tgt_fn}/"  # relativ (Hugo-Subdir-sicher)
             rel = pages[tgt_fn]["path"]
             print(f"  {src_fn}: „{src['body'][start:end].strip()}“ → {tgt_fn} (Score {score})")
-            if apply:
-                # Nur das erste Vorkommen verlinken, Rest unangetastet
-                content = open(src["path"], encoding="utf-8").read()
-                # Position im Gesamt-Dokument (Frontmatter verschiebt Body)
-                fm_match = re.match(r"^---\n.*?\n---\n", content, re.S)
-                offset = fm_match.end() if fm_match else 0
-                abs_start = offset + start
-                abs_end = offset + end
-                # Sicherheitscheck: nichts kaputt machen
-                if content[abs_start - 1] in "[(" or content[abs_end] in "])":
-                    continue
-                old = content[abs_start:abs_end]
-                new = f"[{old}]({target})"
-                content = content[:abs_start] + new + content[abs_end:]
-                with open(src["path"], "w", encoding="utf-8") as f:
-                    f.write(content)
+            planned.append((start, end, target))
             added += 1
             used_targets.add(tgt_fn)
             used_phrases.add(phrase)
             total_added += 1
+
+        # Einfuegen ERST nach kompletter Planung, und zwar RUECKWAERTS
+        # (groesste Position zuerst): so bleiben die Body-Offsets aller
+        # geplanten Inserts gueltig. (12.08. Root-Cause: sequentielle
+        # Sofort-Inserts verschoben Positionen → Chaos-Kaskade, die den
+        # sichtbaren Text zerriss, z. B. „Zw[eitwagenre](…)gelung“.)
+        if apply and planned:
+            content = open(src["path"], encoding="utf-8").read()
+            fm_match = re.match(r"^---\n.*?\n---\n", content, re.S)
+            offset = fm_match.end() if fm_match else 0
+            ok = []
+            for start, end, target in planned:
+                abs_start = offset + start
+                abs_end = offset + end
+                # Sicherheitscheck: nichts kaputt machen
+                if content[abs_start - 1] in "[(" or content[abs_end] in "])":
+                    print(f"  ⚠ {src_fn}: Insert an {start} wegen Nachbar-Zeichen verworfen")
+                    total_added -= 1
+                    continue
+                ok.append((abs_start, abs_end, target))
+            for abs_start, abs_end, target in sorted(ok, reverse=True):
+                old = content[abs_start:abs_end]
+                new = f"[{old}]({target})"
+                content = content[:abs_start] + new + content[abs_end:]
+            with open(src["path"], "w", encoding="utf-8") as f:
+                f.write(content)
 
         if added:
             print(f"  → {src_fn}: {added} Link(s) {'eingefügt' if apply else 'vorgeschlagen'}")

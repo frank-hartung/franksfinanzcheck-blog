@@ -18,7 +18,10 @@ cover:
 social_posted: true
 ---
 
-Verschenkst du jedes Jahr bis zu 150 € an unnötigen Gebühren? Ein Depotwechsel spart dir oft viel Geld und optimiert deine Rendite. Viele Anleger fürchten jedoch das Finanzamt oder komplizierten Papierkram. Dabei ist dein Depot umziehen in Deutschland meist unkompliziert, kostenlos und steuerfrei. Deine Wertpapiere wandern inklusive der historischen Einstandswerte einfach zum neuen Anbieter.
+
+
+
+Verschenkst du jedes Jahr bis zu 150 € an unnötigen Gebühren? Ein Depotwechsel spart dir oft [viel Geld](../../posts/notgroschen-aufbauen-wie-viel-reicht/) und optimiert deine Rendite. Viele Anleger fürchten jedoch das Finanzamt oder komplizierten Papierkram. Dabei ist dein Depot umziehen in Deutschland meist unkompliziert, kostenlos und steuerfrei. Deine Wertpapiere wandern inklusive der historischen Einstandswerte einfach zum neuen Anbieter.
 
 In diesem Ratgeber erfährst du, wie der Wechsel reibungslos gelingt. Ich zeige dir den Prozess Schritt für Schritt. Zudem erfährst du, welche steuerlichen Klippen du umschiffen musst.
 
@@ -40,7 +43,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Hohe Orderkosten oder fehlende ETF-Sparpläne fressen deine Rendite. Neobroker bieten die Depotführung oft komplett kostenlos an. Ein Depotwechsel spart dir so schnell 100 € im Jahr. Deine Wertpapiere übertragen bedeutet keinen Verkauf. Alle Positionen bleiben erhalten.
 
-Du behältst alle Anteile und Laufzeiten. Nur der Ort der Verwahrung ändert sich. Moderne Apps bieten zudem oft eine bessere Übersicht als alte Bank-Interfaces. Ein Depotwechsel ist somit ein klassischer Hebel für deinen Vermögensaufbau. Vergleiche regelmäßig die Konditionen am Markt.
+Du behältst alle Anteile und Laufzeiten. Nur der Ort der Verwahrung ändert sich. Moderne Apps bieten zudem oft eine bessere Übersicht als alte Bank-Interfaces. Ein Depotwechsel ist somit ein klassischer Hebel für deinen [Vermögensaufbau](../../posts/sparquote-berechnen-und-steigern/). Vergleiche regelmäßig die Konditionen am Markt.
 
 ## Was der Übertrag kostet
 
@@ -76,7 +79,7 @@ Zwei Punkte erfordern jedoch deine Aufmerksamkeit:
 
 ## Steuertöpfe und Verlustverrechnung richtig behandeln
 
-Verlusttöpfe sind bares Geld wert. Hast du zum Beispiel 2.000 € Verlust mit Aktien gemacht? Diese Summe mindert deine künftige Steuerlast bei Gewinnen. Vergisst du den Antrag beim Wechsel, schenkst du dem Staat unnötig Geld. Du zahlst dann die volle Abgeltungsteuer auf neue Gewinne.
+Verlusttöpfe sind [bares Geld](../../posts/2026-08-06-frugalismus-im-alltag/) wert. Hast du zum Beispiel 2.000 € Verlust mit Aktien gemacht? Diese Summe mindert deine künftige Steuerlast bei Gewinnen. Vergisst du den Antrag beim Wechsel, schenkst du dem Staat unnötig Geld. Du zahlst dann die volle Abgeltungsteuer auf neue Gewinne.
 
 Stelle den Antrag direkt zusammen mit dem Depotübertrag. Die meisten Banken bieten dafür ein kombiniertes Formular an. Der Übertrag der Töpfe erfolgt oft wenige Tage nach den Wertpapieren. Dokumentiere den Stand deiner Töpfe vorab durch einen Screenshot oder Kontoauszug. So behältst du die volle Kontrolle über deine Steueroptimierung.
 

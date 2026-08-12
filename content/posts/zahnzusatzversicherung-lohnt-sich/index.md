@@ -45,9 +45,9 @@ Die Leistungen hängen vom Tarif ab. Typische Bausteine sind:
 Die Beiträge hängen stark vom Alter ab – je jünger, desto günstiger. Die Beiträge liegen bei:
 | Alter | Beitrag (ca., mit Zahnersatz) |
 |---|---|
-| 20–30 Jahre | 10–20 € pro Monat |
-| 40–50 Jahre | 20–40 € pro Monat |
-| 60+ Jahre | 40–80 € pro Monat |
+| 20–30 Jahre | 10–20 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) |
+| 40–50 Jahre | 20–40 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) |
+| 60+ Jahre | 40–80 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) |
 Dazu kommen meist Wartezeiten – oft 8 Monate für Zahnersatz. Wer den Abschluss lange aufschiebt, zahlt mehr und muss länger warten.
 
 ## Für wen lohnt sich der Abschluss?

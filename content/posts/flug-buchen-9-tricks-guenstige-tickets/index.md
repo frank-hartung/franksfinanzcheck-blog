@@ -17,6 +17,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
+
+
+
 Flugpreise wirken oft wie ein Mysterium: Der Sitz neben dir hat vielleicht 100 € mehr oder weniger gekostet, obwohl ihr denselben Flug gebucht habt. Tatsächlich folgen Flugpreise klaren Mustern – wer sie kennt, zahlt deutlich weniger. Die gute Nachricht: Die neun Tricks in diesem Artikel funktionieren bei jeder Buchung, ohne Glück und ohne Sonderangebote-Jagd.
 
 
@@ -68,7 +71,7 @@ Die Zusatzleistungen sind das Geschäftsmodell der Billig-Airlines – und die F
 
 - **Sitzplatzwahl:** 5 bis 25 € pro Person und Strecke. Wer beim Check-in automatisch zugewiesen bekommt (oft kostenlos oder günstiger), spart.
 - **Priority-Boarding:** 5 bis 15 € – nur nötig, wenn du wirklich zuerst einsteigen willst.
-- **Reiseversicherung:** Die Versicherungen im Buchungsprozess sind oft überteuert – [vergleiche die Konditionen](../../posts/reisekrankenversicherung-wann-lohnt/) separat.
+- **[Reiseversicherung](../../posts/reiseversicherung-richtig-kombinieren/):** Die Versicherungen im Buchungsprozess sind oft überteuert – [vergleiche die Konditionen](../../posts/reisekrankenversicherung-wann-lohnt/) separat.
 - **Zahlungsgebühren:** Manche Airlines verlangen Gebühren für Kreditkartenzahlung – die Überweisung oder Lastschrift ist oft günstiger.
 
 Die Checkliste: Vor dem finalen Klick alle Zusatzleistungen im Warenkorb prüfen – und alles entfernen, was du nicht brauchst.
@@ -122,12 +125,12 @@ Der Wochentag der Buchung ist weniger wichtig als der Buchungszeitpunkt und die 
 **Was kostet Handgepäck extra?**
 Bei Billig-Airlines ist nur ein kleines „Personal Item" (unter dem Sitz) inklusive – ein Handgepäck-Trolley kostet 5 bis 30 € pro Strecke, wenn er nicht im Tarif enthalten ist. Prüfe die Maße vor der Buchung.
 
-Die Flugbuchung ist die halbe Reise – die andere Hälfte sind [Mietwagen](../../posts/mietwagen-buchen-so-sparst-du/) und [Unterkunft](../../posts/last-minute-urlaubsangebote-sichern/). Und wer die [Flugrechte](../../posts/reisekrankenversicherung-wann-lohnt/) kennt, ist bei Verspätung und Ausfall abgesichert. Alle Reisethemen: [Ratgeber Mietwagen & Reisen](../../pillar/mietwagen/).
+Die Flugbuchung ist die halbe Reise – die andere Hälfte sind [Mietwagen](../../posts/mietwagen-buchen-so-sparst-du/) und [Unterkunft](../../posts/last-minute-urlaubsangebote-sichern/). Und wer die Flugrechte kennt, ist bei Verspätung und Ausfall abgesichert. Alle Reisethemen: [Ratgeber Mietwagen & Reisen](../../pillar/mietwagen/).
 
 **Was tun bei Flugverspätung oder -Ausfall?**
 Bei einer Verspätung ab 3 Stunden oder einem Ausfall hast du Anspruch auf Ausgleichszahlungen (250 bis 600 €, je nach Flugdistanz) plus Betreuungsleistungen (Verpflegung, Hotel). Die Airline muss dich informieren – und du kannst die Entschädigung online über die [Fluggastrechte-Portale](../../posts/guenstige-fluege-spaetsommer-finden/) oder direkt bei der Airline geltend machen. Wichtig: Beweise sichern (Boardingkarte, Verspätungs-Mitteilung) und innerhalb der Frist (3 Jahre) einreichen.
 
 
-👉 **Jetzt Flüge vergleichen und günstig buchen:** [**→ Jetzt vergleichen bei CHECK24**](/go/fluege/)
+👉 **Jetzt Flüge vergleichen und [günstig buchen](../../posts/last-minute-urlaubsangebote-sichern/):** [**→ Jetzt vergleichen bei CHECK24**](/go/fluege/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

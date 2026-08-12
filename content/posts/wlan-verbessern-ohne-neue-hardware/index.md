@@ -17,6 +17,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
+
 Bevor du 100 € für einen neuen Router oder [WLAN-Verstärker](../../posts/wlan-verstaerker-vs-mesh-wlan/) ausgibst, solltest du wissen: Die Hälfte aller WLAN-Probleme lässt sich mit Einstellungen und Tricks lösen – kostenlos. Oft liegt es nicht an der Hardware, sondern an Standort, Frequenzwahl oder veralteter Software.
 
 In diesem Artikel bekommst du zwölf Tipps, die dein WLAN sofort spürbar schneller machen. Alles ohne neuen Router, ohne Verstärker, ohne Kabel.
@@ -109,7 +110,7 @@ Die Mess-Regeln für aussagekräftige Ergebnisse:
 - **Am selben Ort messen:** Der Standort des Geräts beeinflusst das Ergebnis – immer vom selben Platz testen.
 - **WLAN vs. Kabel unterscheiden:** Ein Kabel-Test zeigt, was die Leitung hergibt; der WLAN-Test zeigt, was bei dir ankommt. Der Unterschied ist dein WLAN-Verlust.
 
-Praktisch: Wer nach dem Kanalwechsel und der Standort-Optimierung 30 % mehr Tempo misst, weiß, dass die Tricks gewirkt haben. Und wer keine Verbesserung sieht, hat damit ein klares Signal, dass die Hardware das Problem ist. Dann ist der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein [Mesh-System](../../posts/wlan-verstaerker-vs-mesh-wlan/) die nächste Stufe.
+Praktisch: Wer nach dem Kanalwechsel und der Standort-Optimierung 30 % mehr Tempo misst, weiß, dass die Tricks gewirkt haben. Und wer keine Verbesserung sieht, hat damit ein klares Signal, dass die Hardware das Problem ist. Dann ist der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein Mesh-System die nächste Stufe.
 
 
 ## Häufig gestellte Fragen
@@ -121,9 +122,9 @@ Abends nutzen alle Nachbarn gleichzeitig das Internet – die Kanäle sind voll,
 Wenn dein Kanal stark belegt ist, kann der Wechsel das Tempo spürbar verbessern – oft 20 bis 50 %. In ruhigen Gebieten mit wenigen Nachbarn ist der Effekt gering.
 
 **Wie weit reicht WLAN durch Wände?**
-Durch eine normale Trockenbauwand etwa 10 bis 15 Meter, durch dicke Betonwände oft nur 3 bis 5 Meter. Der 5-GHz-Band hat kürzere Reichweite als 2,4 GHz – in Altbauten hilft [Mesh](../../posts/wlan-verstaerker-vs-mesh-wlan/) oder DLAN.
+Durch eine normale Trockenbauwand etwa 10 bis 15 Meter, durch dicke Betonwände oft nur 3 bis 5 Meter. Der 5-GHz-Band hat kürzere Reichweite als 2,4 GHz – in Altbauten hilft Mesh oder DLAN.
 
-Wenn die zwölf Tipps nicht reichen, liegt es meist an der Hardware: Dann lohnt der [Router-Kauf](../../posts/router-kaufen-oder-mieten-rechnung/) oder ein [Mesh-System](../../posts/wlan-verstaerker-vs-mesh-wlan/). Und wer generell [schnelleres Internet](../../posts/dns-server-aendern-schnelleres-internet/) will, findet im DNS-Ratgeber den nächsten kostenlosen Hebel. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
+Wenn die zwölf Tipps nicht reichen, liegt es meist an der Hardware: Dann lohnt der Router-Kauf oder ein Mesh-System. Und wer generell [schnelleres Internet](../../posts/dns-server-aendern-schnelleres-internet/) will, findet im DNS-Ratgeber den nächsten kostenlosen Hebel. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
 👉 **Jetzt den passenden Internet-Tarif finden:** [**→ Jetzt vergleichen bei CHECK24**](/go/dsl/)
 

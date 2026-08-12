@@ -20,7 +20,8 @@ kurzantwort: "Du kannst dein Internet um bis zu 20 % beschleunigen, indem du de
 social_posted: true
 ---
 
-Deine Webseite braucht Sekunden, bis sie lädt, obwohl du für schnelles Internet zahlst? Oft bremst ein veraltetes "Telefonbuch" deinen Browser aus. Mit dem richtigen Kniff sparst du wertvolle Ladezeit und surfst spürbar flüssiger. Hier erfährst du, wie ich meinen DNS-Server getauscht habe und warum das dein Surferlebnis verändert.
+
+Deine Webseite braucht Sekunden, bis sie lädt, obwohl du für [schnelles Internet](../../posts/wlan-verstaerker-vs-mesh-wlan/) zahlst? Oft bremst ein veraltetes "Telefonbuch" deinen Browser aus. Mit dem richtigen Kniff sparst du wertvolle Ladezeit und surfst spürbar flüssiger. Hier erfährst du, wie ich meinen DNS-Server getauscht habe und warum das dein Surferlebnis verändert.
 
 ### Das Wichtigste in Kürze
 * DNS-Server übersetzen Domainnamen in numerische IP-Adressen.
@@ -102,7 +103,7 @@ Was nach wenig klingt, summiert sich: Da eine moderne Nachrichtenseite wie "Spie
 
 Dein DNS-Server protokolliert theoretisch jede Webseite, die du besuchst. Viele Internetanbieter speichern diese Protokolle über längere Zeiträume und nutzen sie teilweise für Marketingzwecke oder müssen sie auf behördliche Anfrage herausgeben. 
 
-Private Anbieter wie Cloudflare oder Quad9 haben strengere Richtlinien. Cloudflare lässt sich jährlich von unabhängigen Wirtschaftsprüfern zertifizieren, um zu belegen, dass IP-Adressen der Nutzer nach 24 Stunden gelöscht werden. So kannst du dein **[Internet schneller machen](../../posts/2026-08-06-turbo-fuers-netz/)** und gleichzeitig deutlich diskreter im Netz unterwegs sein. Wer noch einen Schritt weiter gehen möchte, nutzt "DNS over HTTPS" (DoH), was die DNS-Anfragen zusätzlich verschlüsselt, sodass selbst dein Provider nicht mehr sieht, welche Domains du aufrufst.
+Private Anbieter wie Cloudflare oder Quad9 haben strengere Richtlinien. Cloudflare lässt sich jährlich von unabhängigen Wirtschaftsprüfern zertifizieren, um zu belegen, dass IP-Adressen der Nutzer nach 24 Stunden gelöscht werden. So kannst du dein **Internet schneller machen** und gleichzeitig deutlich diskreter im Netz unterwegs sein. Wer noch einen Schritt weiter gehen möchte, nutzt "DNS over HTTPS" (DoH), was die DNS-Anfragen zusätzlich verschlüsselt, sodass selbst dein Provider nicht mehr sieht, welche Domains du aufrufst.
 
 
 ## Vor- und Nachteile auf einen Blick

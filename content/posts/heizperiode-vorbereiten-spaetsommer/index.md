@@ -16,13 +16,15 @@ kurzantwort: "Du musst im August deine Heizanlage warten lassen, um sicherzustel
 social_posted: true
 ---
 
-Wusstest du, dass du im August hunderte Euro an Energiekosten sparst? Während andere die Sonne genießen, sicherst du dir jetzt die besten Konditionen für den Winter. Wer frühzeitig die [Heizperiode vorbereiten](../../posts/heizkosten-senken-10-massnahmen/) will, handelt sofort. So vermeidest du böse Überraschungen bei der nächsten Abrechnung. Diese drei Schritte bringen dir sofort finanzielle Vorteile.
+
+
+Wusstest du, dass du im August hunderte Euro an [Energiekosten](../../posts/2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen/) sparst? Während andere die Sonne genießen, sicherst du dir jetzt die besten Konditionen für den Winter. Wer frühzeitig die [Heizperiode vorbereiten](../../posts/heizkosten-senken-10-massnahmen/) will, handelt sofort. So vermeidest du böse Überraschungen bei der nächsten Abrechnung. Diese drei Schritte bringen dir sofort finanzielle Vorteile.
 
 Das Wichtigste in Kürze:
 * Gaspreise jetzt vergleichen und Wechsel einleiten.
 * Heizkörper rechtzeitig entlüften und Funktionalität prüfen.
 * Thermostate für die kalte Jahreszeit programmieren.
-* Raumtemperatur moderat senken und Heizkosten sparen.
+* Raumtemperatur moderat senken und [Heizkosten](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) sparen.
 
 
 
@@ -39,7 +41,7 @@ Ein Wechsel funktioniert online in wenigen Minuten. Dein neuer Anbieter übernim
 
 Worauf du beim Vergleich achten solltest:
 * Achte auf den Arbeitspreis pro kWh und den Grundpreis.
-* Wähle eine Preisgarantie von mindestens 12 Monaten.
+* Wähle eine Preisgarantie von mindestens [12 Monaten](../../posts/sparquote-berechnen-und-steigern/).
 * Prüfe die Auszahlungsbedingungen für Neukundenboni genau.
 * Bevorzuge Vertragslaufzeiten von maximal einem Jahr für mehr Flexibilität.
 
@@ -62,7 +64,7 @@ Jedes Grad weniger Raumtemperatur spart etwa sechs Prozent Energie. Wenn du von 
 
 Lüfte dreimal täglich kurz und kräftig bei weit geöffnetem Fenster. Dauerhaft gekippte Fenster lassen nur die Wände auskühlen und treiben die Kosten hoch. Schließe zudem die Türen zu kühleren Räumen konsequent. So bleibt die Wärme dort, wo du sie wirklich benötigst.
 
-Diese einfachen Maßnahmen kosten dich keinen Cent, bringen aber sofortige Ersparnis. Wer diszipliniert lüftet und die Temperatur leicht senkt, schont sein Budget spürbar. Kombiniere diese Tipps mit einem günstigen Tarif für maximale Wirkung. So startest du entspannt in den nächsten Winter.
+Diese einfachen Maßnahmen kosten dich keinen Cent, bringen aber sofortige Ersparnis. Wer diszipliniert lüftet und die Temperatur leicht senkt, schont sein Budget spürbar. Kombiniere diese Tipps mit einem günstigen Tarif für maximale Wirkung. So [startest](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) du entspannt in den nächsten Winter.
 
 ## Die Spätsommer-Checkliste
 
@@ -82,7 +84,7 @@ Der Spätsommer ist ideal, da viele Versorger im August ihre Tarife für den Win
 Das Sparpotenzial ist enorm, besonders beim Wechsel aus der teuren Grundversorgung. Viele Haushalte sparen so 200 bis 500 € pro Jahr ein. Selbst bei einem Wechsel zwischen günstigen Tarifen bleiben oft 100 € übrig. Kombiniert mit richtigem Lüften schützt das dein Bankkonto effektiv.
 
 ### Ist Heizen mit Strom oder Gas günstiger?
-Gas ist für klassische Heizsysteme in der Regel deutlich preiswerter als direkter Strom. Wer jedoch eine effiziente Wärmepumpe nutzt, heizt oft günstiger als mit fossilen Brennstoffen. Vergleiche in jedem Fall deinen aktuellen Tarif mit dem Marktangebot. Nur so behältst du die volle Kontrolle über deine monatlichen Ausgaben.
+Gas ist für klassische [Heizsysteme](../../posts/2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen/) in der Regel deutlich preiswerter als direkter Strom. Wer jedoch eine effiziente [Wärmepumpe](../../posts/waermepumpe-vs-gasheizung-2026/) nutzt, heizt oft günstiger als mit fossilen Brennstoffen. Vergleiche in jedem Fall deinen aktuellen Tarif mit dem Marktangebot. Nur so behältst du die volle Kontrolle über deine monatlichen Ausgaben.
 
 ---
 

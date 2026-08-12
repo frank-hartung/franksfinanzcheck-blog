@@ -40,7 +40,7 @@ Bevor du die Angebote sichtest, klärst du deinen tatsächlichen Bedarf. Die mei
 - **10–20 GB:** Der heutige Standard für die meisten Nutzer. Ideal für Social Media (Instagram, TikTok), regelmäßiges Video-Streaming in der Bahn und mobiles Arbeiten.
 - **30 GB+ bis Unlimited:** Diese Pakete eignen sich für Power-User, die oft HD-Videos streamen, ihr Handy als Hotspot für den Laptop nutzen oder kein festes WLAN zu Hause haben.
 
-Ein günstiger Handytarif muss genau zu deinem Surfverhalten passen. Wer 20 GB bucht, aber nur 3 GB nutzt, wirft jeden Monat zwischen 5 € und 10 € aus dem Fenster. 
+Ein günstiger Handytarif muss genau zu deinem Surfverhalten passen. Wer 20 GB bucht, aber nur 3 GB nutzt, wirft [jeden Monat](../../posts/2026-08-06-frugalismus-im-alltag/) zwischen 5 € und 10 € aus dem Fenster. 
 
 ## Schritt 2:<br>Netzqualität und Anbieterwahl – Wer steckt dahinter?
 
@@ -90,7 +90,7 @@ Den Handyvertrag wechseln funktioniert heute oft innerhalb weniger Werktage und 
 
 1. **Status Quo prüfen:** Schau in deine letzte Rechnung. Wann endet die Mindestlaufzeit? 
 2. **Handytarif vergleichen online:** Nutze Vergleichsportale und filtere nach deinen Mindestanforderungen (z. B. mindestens 15 GB, 5G, monatlich kündbar).
-3. **Wechselbonus mitnehmen:** Viele Anbieter zahlen dir eine Gutschrift zwischen 10 € und 50 €, wenn du deine alte Nummer mitbringst.
+3. **[Wechselbonus](../../posts/dsl-internet-flat-guenstig-sichern/) mitnehmen:** Viele Anbieter zahlen dir eine Gutschrift zwischen 10 € und 50 €, wenn du deine alte Nummer mitbringst.
 4. **Rufnummernmitnahme (Portierung):** Du kannst die Mitnahme zum Vertragsende oder "sofort" (Opt-In beim alten Anbieter setzen) beantragen. Dein neuer Anbieter übernimmt die Kommunikation mit dem alten Provider.
 5. **eSIM nutzen:** Wenn dein Smartphone es unterstützt, wähle eine eSIM. So ist der Tarif oft innerhalb weniger Stunden nach Bestellung aktiviert, ohne dass du auf die Post warten musst.
 

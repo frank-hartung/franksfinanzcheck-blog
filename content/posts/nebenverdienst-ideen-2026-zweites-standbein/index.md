@@ -18,14 +18,18 @@ cover:
 social_posted: true
 ---
 
-Mit 300 € extra im Monat erhöhst du deine Sparquote massiv. Du tilgst Schulden schneller oder füllst deinen Notgroschen in Rekordzeit. Ein zweites Standbein ist der effektivste Hebel für deinen Vermögensaufbau. Hier erfährst du, welche **Nebenverdienst Ideen** 2026 wirklich funktionieren.
+
+
+
+
+Mit 300 € extra im Monat erhöhst du deine Sparquote massiv. Du tilgst Schulden schneller oder füllst deinen Notgroschen in Rekordzeit. Ein zweites Standbein ist der effektivste Hebel für deinen [Vermögensaufbau](../../posts/sparquote-berechnen-und-steigern/). Hier erfährst du, welche **Nebenverdienst Ideen** 2026 wirklich funktionieren.
 
 Ich stelle dir 10 realistische Wege vor. Du erhältst ehrliche Angaben zu Verdienst-Spannen und Start-Hürden. Zudem klären wir die wichtigsten Steuer-Fragen für dein **Zusatzeinkommen**. So erlebst du keine bösen Überraschungen mit dem Finanzamt.
 
 ### Das Wichtigste in Kürze
 * **Steuern:** bis 12.096 € Gesamteinkommen bleibt alles steuerfrei.
 * **Minijobs:** die Grenze liegt 2026 bei 556 € pro Monat.
-* **Fokus:** Nutze das Geld für den Vermögensaufbau, nicht für Konsum.
+* **Fokus:** Nutze das Geld für den [Vermögensaufbau](../../posts/sparquote-berechnen-und-steigern/), nicht für Konsum.
 * **Start:** Beginne klein und teste eine Idee für vier Wochen.
 * **Gewerbe:** Melde regelmäßige Tätigkeiten rechtzeitig beim Amt an.
 
@@ -89,7 +93,7 @@ Beantrage bei schwankendem Einkommen rechtzeitig einen Freibetrag beim Finanzamt
 
 Viele Menschen geben ihr zusätzliches Geld sofort wieder aus. Dein **zweites Standbein** soll aber deine [finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freiheit/) sichern. Erhöhe niemals deinen Lebensstandard parallel zu deinem neuen Einkommen. Das Geld gehört in dein Depot oder auf dein Sparkonto.
 
-Lege vor dem ersten Euro fest, wohin das Geld fließen soll. Priorisiere die Schuldentilgung oder fülle deinen [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) auf. Automatisiere deine Sparraten direkt nach dem Geldeingang. So steigt deine [Sparquote](../../posts/sparquote-berechnen-und-steigern/) jeden Monat messbar an.
+Lege vor dem ersten Euro fest, wohin das Geld fließen soll. Priorisiere die Schuldentilgung oder fülle deinen [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) auf. Automatisiere deine Sparraten direkt nach dem Geldeingang. So steigt deine Sparquote jeden Monat messbar an.
 
 Weitere Tipps zum Sparen findest du in unserem [Frugalismus-Ratgeber](../../pillar/frugalismus/). Lies dort mehr über [Frugalismus im Alltag](../../posts/2026-08-06-frugalismus-im-alltag/) oder entdecke effektive [5 Frugalismus-Tricks](../../posts/frugalismus-tricks-alltag-200-euro-sparen/). Wer weniger ausgibt, muss für das gleiche Vermögen weniger arbeiten.
 

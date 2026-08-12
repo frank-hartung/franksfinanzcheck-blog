@@ -17,6 +17,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
+
+
+
 Die Frage nach dem richtigen Internetanschluss wird jedes Jahr drängender: Glasfaser wird ausgebaut, Kabelnetze werden modernisiert, und die Werbung verspricht überall Höchstgeschwindigkeiten. Doch was brauchst du wirklich – und was kostet es? In diesem Artikel vergleichst du die drei Technologien ehrlich und findest in zehn Minuten den richtigen Anschluss für deinen Haushalt.
 
 
@@ -60,7 +63,7 @@ Die Preise für einen 100-Mbit/s-Anschluss liegen 2026 ungefähr so:
 | Kabel | 25–40 € | 30–45 € | Drossel-Risiko in Spitzenzeiten |
 | Glasfaser | 30–45 € | 35–50 € | Zukunftssicher, oft Ausbau-Rabatte |
 
-Dazu kommen in den ersten 6 bis 12 Monaten oft Neukunden-Boni, die den effektiven Monatspreis um 10 bis 20 € senken. Wichtig: Rechne immer den Preis ab dem zweiten Jahr. Dort enden die meisten Rabatte. Der [Tarifvergleich für DSL und Internet](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt dir die aktuellen Angebote mit allen Bedingungen.
+Dazu kommen in den ersten 6 bis [12 Monaten](../../posts/sparquote-berechnen-und-steigern/) oft Neukunden-Boni, die den effektiven Monatspreis um 10 bis 20 € senken. Wichtig: Rechne immer den Preis ab dem zweiten Jahr. Dort enden die meisten Rabatte. Der [Tarifvergleich für DSL und Internet](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt dir die aktuellen Angebote mit allen Bedingungen.
 
 ## Verfügbarkeit prüfen:<br>Der erste Schritt
 
@@ -119,10 +122,10 @@ Und noch ein Punkt: Der Anschluss-Wechsel ist die perfekte Gelegenheit, [das WLA
 Für die meisten Haushalte reichen 100 Mbit/s: Streaming, Homeoffice und Surfen laufen damit problemlos. Familien mit mehreren gleichzeitigen Nutzern nehmen 250 Mbit/s. Höhere Tempi sind Komfort, kein Muss.
 
 **Was kostet Glasfaser im Monat?**
-2026 zwischen 30 € und 50 € für 100 bis 250 Mbit/s, inklusive Router-Miete oft etwas mehr. Viele Anbieter geben in der Ausbauphase Rabatte – prüfe die Angebote an deiner Adresse.
+2026 zwischen 30 € und 50 € für 100 bis 250 Mbit/s, inklusive [Router-Miete](../../posts/router-kaufen-oder-mieten-rechnung/) oft etwas mehr. Viele Anbieter geben in der Ausbauphase Rabatte – prüfe die Angebote an deiner Adresse.
 
 **Wann lohnt sich der Wechsel zu Glasfaser?**
-Wenn Glasfaser verfügbar ist und du mehr als 100 Mbit/s brauchst, hohe Uploads hast oder langfristig zukunftssicher sein willst. Wer nur surft und streamt, kann bei DSL bleiben – der [Vergleich](../../posts/dsl-internet-flat-guenstig-sichern/) zeigt, was sich rechnet.
+Wenn Glasfaser verfügbar ist und du mehr als 100 Mbit/s brauchst, hohe Uploads hast oder langfristig zukunftssicher sein willst. Wer nur surft und streamt, kann bei DSL bleiben – der Vergleich zeigt, was sich rechnet.
 
 👉 **Jetzt DSL-, Kabel- und Glasfaser-Tarife vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/dsl/)
 

@@ -52,7 +52,7 @@ TV, Receiver, Spielkonsole, WLAN-Router, Kaffeemaschine mit Zeitschaltuhr: Ein e
 ## Was sich langfristig lohnt
 
 - **Kühlgeräte nach 15 Jahren ersetzen** – das ist der Klassiker unter den Stromeffizienz-Maßnahmen.
-- **Tarif prüfen**: Der beste Hebel bleibt der Stromtarif selbst. Wer den Grundversorgungstarif zahlt, verschenkt oft 200 bis 300 € pro Jahr. Ein Wechsel dauert heute nur wenige Minuten – der neue Anbieter übernimmt die Kündigung.
+- **Tarif prüfen**: Der beste Hebel bleibt der [Stromtarif](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) selbst. Wer den Grundversorgungstarif zahlt, verschenkt oft 200 bis 300 € pro Jahr. Ein Wechsel dauert heute nur wenige Minuten – der neue Anbieter übernimmt die Kündigung.
 
 ### Das Wichtigste in Kürze:
 * Kühlgeräte regelmäßig überprüfen

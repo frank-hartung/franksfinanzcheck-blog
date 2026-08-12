@@ -16,6 +16,9 @@ kurzantwort: "Du sparst Geld, wenn du deinen Mietwagen früh buchst und Vollkask
 social_posted: true
 ---
 
+
+
+
 Ein Mietwagen kann den Urlaub flexibel machen, aber auch schnell zum Kostenfresser werden, wenn du am falschen Ende sparst. Wer einen Mietwagen buchen möchte, sollte früh vergleichen – Du kannst günstig und trotzdem sicher fahren, wenn du ein paar Regeln beachtest. Dieser Ratgeber zeigt dir, wie du den besten Mietwagen-Preis findest, ohne in die klassischen Fallen zu tappen.
 
 
@@ -39,11 +42,11 @@ Mietwagenpreise steigen, je näher der Abreisetag rückt. An beliebten Urlaubsor
 
 ## Der Preis-Trick:<br>Vor Ort vs. Online
 
-Am Schalter vor Ort ist der Mietwagen fast immer teurer als online gebucht. Der Verkäufer versucht zusätzlich, dir Versicherungen und Upgrades anzudrehen. Wenn du online bereits die richtige Absicherung gebucht hast, kannst du am Schalter ablehnen. Halte die Buchungsbestätigung mit den gebuchten Leistungen parat.
+Am Schalter vor Ort ist der Mietwagen fast immer teurer als online gebucht. Der Verkäufer versucht zusätzlich, dir Versicherungen und Upgrades anzudrehen. Wenn du online bereits die richtige [Absicherung](../../posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/) gebucht hast, kannst du am Schalter ablehnen. Halte die Buchungsbestätigung mit den gebuchten Leistungen parat.
 
 ## Vollkasko ohne Selbstbeteiligung:<br>Pflicht oder Luxus?
 
-Ohne ausreichende Absicherung kann der Urlaub teuer enden. Die Vollkasko **ohne Selbstbeteiligung** deckt genau diese Fälle ab. Sie kostet wenige Euro pro Tag mehr. Die günstige Variante mit hoher Selbstbeteiligung ist nur etwas für Wagemutige. **Immer die Variante ohne Selbstbeteiligung buchen**. Das Risiko ist es nicht wert.
+Ohne ausreichende [Absicherung](../../posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/) kann der Urlaub teuer enden. Die Vollkasko **ohne Selbstbeteiligung** deckt genau diese Fälle ab. Sie kostet wenige [Euro pro](../../posts/urlaub-mit-kindern-guenstig-spartricks/) Tag mehr. Die günstige Variante mit hoher Selbstbeteiligung ist nur etwas für Wagemutige. **Immer die Variante ohne Selbstbeteiligung buchen**. Das Risiko ist es nicht wert.
 
 ## Weitere Spartipps
 

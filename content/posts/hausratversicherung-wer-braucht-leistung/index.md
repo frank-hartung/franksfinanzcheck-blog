@@ -23,7 +23,7 @@ Ein Rohrbruch flutet dein Wohnzimmer, ein Brand vernichtet die Küche oder Einbr
 * **Grundschutz:** Schützt bei Feuer, Leitungswasser, Sturm, Hagel und Einbruchdiebstahl.
 * **Vermeidung von Kürzungen:** Ein Pauschalwert von ca. 650 €/m² verhindert eine Unterversicherung.
 * **Flexibilität:** Zusatzbausteine für Fahrräder, E-Bikes oder Elementarschäden (Starkregen) sind oft sinnvoll.
-* **Sparpotenzial:** Ein regelmäßiger Check der Konditionen und ein Hausratversicherung Test sparen jährlich bares Geld.
+* **Sparpotenzial:** Ein regelmäßiger Check der Konditionen und ein Hausratversicherung Test sparen jährlich [bares Geld](../../posts/2026-08-06-frugalismus-im-alltag/).
 
 
 

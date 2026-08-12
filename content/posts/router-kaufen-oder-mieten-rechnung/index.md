@@ -17,7 +17,10 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
-Die Router-Miete gehört zu den unscheinbarsten Kostenfallen im Internetvertrag. Vier bis sechs Euro pro Monat klingen harmlos – aber auf die typische Vertragslaufzeit von 24 Monaten summiert sich das auf 100 bis 150 €. Geld für ein Gerät, das du nach der Vertragszeit meist ohnehin zurückgeben musst.
+
+
+
+Die Router-Miete gehört zu den unscheinbarsten Kostenfallen im Internetvertrag. Vier bis sechs [Euro [pr](../../posts/urlaub-mit-kindern-guenstig-spartricks/)o Monat](../../posts/7-gewohnheiten-finanzielle-freiheit/)-tricks-alltag-200-euro-sparen/) klingen harmlos – aber auf die typische Vertragslaufzeit von 24 Monaten summiert sich das auf 100 bis 150 €. Geld für ein Gerät, das du nach der Vertragszeit meist ohnehin zurückgeben musst.
 
 In diesem Artikel rechne ich dir vor, wann sich der Router-Kauf lohnt, welche Fallstricke es gibt und wie du den Wechsel sauber durchziehst.
 
@@ -25,12 +28,12 @@ In diesem Artikel rechne ich dir vor, wann sich der Router-Kauf lohnt, welche Fa
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/dsl/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/reisen/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Die Miet-Falle:<br>Was Router-Miete wirklich kostet
 
-Die Rechnung ist simpel: 5 € Miete pro Monat × 24 Monate = 120 €. Dazu kommt: Nach der Mindestlaufzeit läuft die Miete weiter – bei einem Vertrag, den du nicht kündigst, sind es über 4 Jahre schnell 240 €. Und die gemieteten Geräte sind oft nicht die besten: Viele Anbieter liefern Basis-Router mit mäßigem WLAN.
+Die Rechnung ist simpel: 5 € Miete [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) × 24 Monate = 120 €. Dazu kommt: Nach der Mindestlaufzeit läuft die Miete weiter – bei einem Vertrag, den du nicht kündigst, sind es über 4 Jahre schnell 240 €. Und die gemieteten Geräte sind oft nicht die besten: Viele Anbieter liefern Basis-Router mit mäßigem WLAN.
 
 Der Vergleich zum Kauf: Ein solider WLAN-Router kostet 80 bis 150 €, eine gute Fritzbox 150 bis 250 €. Die Miete über 2 Jahre deckt also bereits den Kaufpreis eines ordentlichen Geräts – und danach gehört dir die Hardware und läuft kostenlos weiter.
 
@@ -102,7 +105,7 @@ Als Orientierung für den Kauf – die Kategorien, nicht konkrete Modelle (die P
 
 **Standard (80–150 €):** Wi-Fi 6, Tri-Band optional, gute Reichweite, oft mit DECT-Telefonbasis. Die beste Wahl für die meisten Familien.
 
-**Premium (150–250 €):** Wi-Fi 6E/7, Mesh-fähig, maximale Reichweite, viele Anschlüsse. Für große Wohnungen, Gamer und Technik-Fans – hier ist eine [Fritzbox](../../posts/wlan-verstaerker-vs-mesh-wlan/) der Klassiker.
+**Premium (150–250 €):** Wi-Fi 6E/7, Mesh-fähig, maximale Reichweite, viele Anschlüsse. Für große Wohnungen, Gamer und Technik-Fans – hier ist eine Fritzbox der Klassiker.
 
 ## Die Anschluss-Wechsel-Strategie:<br>Router-Frage mitdenken
 
@@ -111,7 +114,7 @@ Der perfekte Zeitpunkt für den Router-Kauf ist der Anbieterwechsel: Beim [Wechs
 Die Strategie in drei Schritten:
 
 1. **Vor dem Wechsel:** Prüfen, ob dein Wunsch-Router zum neuen Anschluss passt (DSL, Kabel oder Glasfaser). Die [Anschluss-Wahl](../../posts/glasfaser-dsl-kabel-anschluss-vergleich/) entscheidet über die Router-Kompatibilität.
-2. **Beim Vertragsabschluss:** Den Tarif ohne Router-Miete wählen – das sind 4 bis 6 € Ersparnis pro Monat, also 50 bis 70 € pro Jahr.
+2. **Beim Vertragsabschluss:** Den Tarif ohne Router-Miete wählen – das sind 4 bis 6 € Ersparnis [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/), also 50 bis 70 € pro Jahr.
 3. **Nach dem Wechsel:** Den alten Miet-Router fristgerecht zurückschicken und die Rückgabe bestätigen lassen – sonst läuft die Miete weiter.
 
 Wer diese Strategie umsetzt, spart doppelt: beim Tarif (ohne Miete) und bei der Hardware (einmal kaufen, jahrelang nutzen).
@@ -128,7 +131,7 @@ Für die meisten Haushalte ist ein Wi-Fi-6-Router mit Dual-Band und Gigabit-Port
 **Was passiert mit dem alten Miet-Router?**
 Nach Kündigung der Miete schickst du das Gerät an den Anbieter zurück (frankierter Rücksendeumschlag). Prüfe, ob der Anbieter eine Leihgebühr bis zur Rückgabe berechnet – kündige rechtzeitig und schicke das Gerät sofort zurück.
 
-Wer seinen [Internetvertrag sowieso wechselt](../../posts/internet-anbieter-wechseln-kuendigung/), sollte die Router-Frage gleich mitklären: Viele Anbieter geben Rabatte, wenn du kein Mietgerät nimmst. Und wer sein [WLAN zu Hause verbessern](../../posts/wlan-verbessern-ohne-neue-hardware/) will, findet die Tipps im nächsten Ratgeber. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
+Wer seinen Internetvertrag sowieso wechselt, sollte die Router-Frage gleich mitklären: Viele Anbieter geben Rabatte, wenn du kein Mietgerät nimmst. Und wer sein [WLAN zu Hause verbessern](../../posts/wlan-verbessern-ohne-neue-hardware/) will, findet die Tipps im nächsten Ratgeber. Alle Internet-Themen: [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
 👉 **Jetzt Internet-Tarife ohne Router-Miete vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/dsl/)
 

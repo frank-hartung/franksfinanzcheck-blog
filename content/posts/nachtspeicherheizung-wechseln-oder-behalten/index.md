@@ -17,9 +17,14 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
+
+
+
+
+
 Die Nachtspeicherheizung hat einen schlechten Ruf und in vielen Fällen zu Recht. Sie heizt mit Strom, der nachts in Speichersteinen „gebunkert" und tagsüber abgegeben wird. Was in den 1970er- und 80er-Jahren als günstige Lösung galt, ist heute meist die teuerste Heizform überhaupt.
 
-Aber: Nicht jede Nachtspeicherheizung muss sofort raus. Ob sich der Wechsel 2026 lohnt, hängt von deiner Situation ab – Eigentum oder Miete, Gebäudezustand, Fördermöglichkeiten. In diesem Artikel bekommst du die Rechnung und die Entscheidungs-Kriterien.
+Aber: Nicht jede Nachtspeicherheizung muss sofort raus. Ob sich der Wechsel [2026 lohnt](../../posts/berufsunfaehigkeitsversicherung-lohnt-sich/), hängt von deiner Situation ab – Eigentum oder Miete, Gebäudezustand, Fördermöglichkeiten. In diesem Artikel bekommst du die Rechnung und die Entscheidungs-Kriterien.
 
 
 
@@ -42,7 +47,7 @@ Der entscheidende Punkt: die laufenden Kosten. Die Rechnung für eine 70-Quadrat
 |:--- |:--- |:--- |:--- |
 | Nachtspeicherheizung (Bestand) | 0 € (vorhanden) | 2.000–3.500 € | hoch |
 | Gas-Brennwert (Neu) | 8.000–12.000 € | 1.100–1.600 € | mittel |
-| Wärmepumpe (Neu, gefördert) | 15.000–30.000 € | 700–1.200 € | niedrig |
+| [Wärmepumpe](../../posts/waermepumpe-vs-gasheizung-2026/) (Neu, gefördert) | 15.000–30.000 € | 700–1.200 € | niedrig |
 | Holz-Pellet (Neu) | 12.000–18.000 € | 900–1.400 € | niedrig |
 
 Die Nachtspeicherheizung schlägt bei den laufenden Kosten jede Alternative. Der Unterschied liegt bei 800 bis 2.000 € pro Jahr. Bei modernen, gut gedämmten Geräten und sehr niedrigem Nachtstrom kann die Rechnung etwas besser aussehen, die Grundlogik bleibt aber: Direktstrom-Heizen ist das teuerste Heizen.
@@ -58,7 +63,7 @@ Der Wechsel weg von der Nachtspeicherheizung wird 2026 besonders großzügig gef
 
 Wichtig: Die Boni sind gedeckelt, und die Förderung muss VOR dem Kauf beantragt werden. Ein Energieberater hilft bei Antrag und Umsetzung – dessen Kosten sind ebenfalls förderfähig.
 
-Für eine Wärmepumpe brauchst du außerdem: eine gute Gebäudedämmung (sonst steigen die Betriebskosten), passende Heizkörper (bei Altbau oft Austausch nötig) und einen Platz für die Außeneinheit. Wer das nicht hat, sollte Alternativen wie Gas-Brennwert oder Pellet prüfen.
+Für eine [Wärmepumpe](../../posts/waermepumpe-vs-gasheizung-2026/) brauchst du außerdem: eine gute Gebäudedämmung (sonst steigen die Betriebskosten), passende Heizkörper (bei Altbau oft Austausch nötig) und einen Platz für die Außeneinheit. Wer das nicht hat, sollte Alternativen wie Gas-Brennwert oder Pellet prüfen.
 
 ## Der Sanierungsfahrplan in fünf Schritten
 
@@ -81,7 +86,7 @@ Der gesamte Prozess dauert realistisch 3 bis 6 Monate – plane den Wechsel also
 
 **Als Mieter** hast du gute Karten: Seit 2020 können Mieter von Vermietern verlangen, eine elektrische Speicherheizung zu ersetzen, wenn diese älter als 30 Jahre ist (Modernisierungsverlangen nach § 555c BGB). Der Vermieter muss dann auf eigene Kosten tauschen – und darf einen Teil der Kosten über die Modernisierungsumlage auf die Miete umlegen.
 
-Wichtig für Mieter: Die Umlage ist auf 8 % der Kosten gedeckelt, und die entstehenden Heizkosten-Ersparnisse müssen gegengerechnet werden. In der Praxis bleibt für Mieter meist eine spürbare Entlastung – aber es kann zu einer Mieterhöhung kommen.
+Wichtig für Mieter: Die Umlage ist auf 8 % der Kosten gedeckelt, und die entstehenden [Heizkosten](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/)-Ersparnisse müssen gegengerechnet werden. In der Praxis bleibt für Mieter meist eine spürbare Entlastung – aber es kann zu einer Mieterhöhung kommen.
 
 **Als Eigentümer** trägst du die Investition selbst – mit Förderung und langfristiger Ersparnis. Die Amortisation liegt je nach System und Förderung bei 5 bis 10 Jahren. Danach sparst du 800 bis 1.500 € pro Jahr.
 

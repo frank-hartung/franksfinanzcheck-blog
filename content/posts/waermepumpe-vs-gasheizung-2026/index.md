@@ -16,6 +16,8 @@ kurzantwort: "Du kannst mit einer Wärmepumpe langfristig etwa 30 % bis 50 % d
 social_posted: true
 ---
 
+
+
 Du stehst 2026 vor einer wichtigen Entscheidung: Soll es eine Wärmepumpe oder eine Gasheizung sein? Die neue Heizungsregel schreibt erneuerbare Heiztechnik vor, die Gaspreise steigen und die Förderung für Wärmepumpen ist attraktiv. 
 
 
@@ -55,7 +57,7 @@ Die Anschaffung der Wärmepumpe ist teurer – aber Förderung und niedrigere Be
 
 ## Der große Kosten-Hebel:<br>Der Stromtarif
 
-Eine Wärmepumpe heizt mit Strom – und der Strompreis entscheidet über die Betriebskosten. Ein günstiger Wärmepumpen-Stromtarif senkt die Heizkosten deutlich. 
+Eine Wärmepumpe heizt mit Strom – und der Strompreis entscheidet über die Betriebskosten. Ein günstiger Wärmepumpen-[Stromtarif](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) senkt die [Heizkosten](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) deutlich. 
 
 
 Auch die Förderlandschaft spielt 2026 eine entscheidende Rolle: Die Bundesförderung für effiziente Wärmepumpen übernimmt je nach Einkommen und Tauschgeschwindigkeit einen erheblichen Teil der Anschaffungskosten. Wichtig ist, die Förderung VOR dem Kauf zu beantragen – eine nachträgliche Bezuschussung ist in der Regel nicht möglich. Dazu kommt: Wer eine Ölheizung ersetzt, erhält oft einen zusätzlichen Bonus. Die Kombination aus Förderung und niedrigeren Betriebskosten verkürzt die Amortisationszeit einer Wärmepumpe deutlich – für viele Haushalte lohnt sich der Umstieg damit schneller als gedacht.

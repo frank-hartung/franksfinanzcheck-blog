@@ -66,6 +66,7 @@ KETTE = [
     ("affiliate_marketer.py", ["--fix"],                "C-Money", "CTA-Routing + Retarget"),
     ("table_guard.py",        ["--fix"],                "B-Semantik", "Tabellen T1-T4"),
     ("link_guard.py",         ["--fix"],                "C-Money", "Interne Links V1-V2"),
+    ("link_density_guard.py", ["--fix"],                "D-Ordnung", "Interne Link-Dichte & Duplikate (12.08. Pro-Link-Leck)"),
     ("workspace_guard.py",    ["--fix"],                "D-Ordnung", "Junk/Waisen/Rotation/Billig"),
 ]
 

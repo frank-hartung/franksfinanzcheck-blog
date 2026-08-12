@@ -42,7 +42,7 @@ Der Staat schützt dich nur bei Unfällen im Job, in der Schule oder auf dem dir
 - **Progression:** dieser Turbo erhöht deine Auszahlung überproportional bei schweren Schäden.
 - **Unfallrente:** ab einem bestimmten Invaliditätsgrad zahlt der Versicherer eine lebenslange monatliche Rente.
 - **Krankenhaustagegeld:** Du bekommst für jeden Tag in der Klinik einen festen Geldbetrag.
-- **Gliedertaxe:** Sie legt präzise fest, wie viel Geld du für den Verlust eines Fingers, Beins oder des Sehvermögens erhältst.
+- **Gliedertaxe:** Sie legt präzise fest, wie [viel Geld](../../posts/notgroschen-aufbauen-wie-viel-reicht/) du für den Verlust eines Fingers, Beins oder des Sehvermögens erhältst.
 - **Todesfallleistung:** diese Summe sichert deine Hinterbliebenen finanziell ab, falls ein Unfall tödlich endet.
 
 
@@ -56,9 +56,9 @@ Die monatlichen Beiträge richten sich nach deinem Alter, deinem Beruf und den g
 
 | Baustein | Kosten (ca. Spanne) |
 |---|---|
-| Grundschutz (100.000 € Basissumme) | 5 € – 12 € pro Monat |
-| Komfortschutz (mit Progression & Tagegeld) | 12 € – 25 € pro Monat |
-| Premiumschutz (inkl. Rente & hoher Summe) | 25 € – 45 € pro Monat |
+| Grundschutz (100.000 € Basissumme) | 5 € – 12 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) |
+| Komfortschutz (mit Progression & Tagegeld) | 12 € – 25 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) |
+| Premiumschutz (inkl. Rente & hoher Summe) | 25 € – 45 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) |
 
 Dein Eintrittsalter spielt eine große Rolle. Schließe die Police frühzeitig ab, um dir dauerhaft günstige Konditionen zu sichern. Ein Versicherungsvergleich hilft dir, das beste Preis-Leistungs-Verhältnis zu finden.
 
