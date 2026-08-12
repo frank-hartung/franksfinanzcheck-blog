@@ -21,7 +21,7 @@ Frugalismus ist für mich nie Verzicht um des Verzichts willen gewesen – sonde
 
 ## Frugalismus im Alltag:<br>Die Grundlagen
 
-Wer mit dem Sparen beginnt, braucht zuerst Transparenz. Wie du mit einem Haushaltsbuch deine Ausgaben sichtbar machst und die größten Kostenfresser findest, erkläre ich in [Frugalismus im Alltag: So sparst du jeden Monat bares Geld](../../posts/2026-08-06-frugalismus-im-alltag/) und mit konkreten, sofort umsetzbaren Tricks in [5 Frugalismus-Tricks: So sparst du 200 € pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/).
+Wer mit dem Sparen beginnt, braucht zuerst Transparenz. Wie du mit einem Haushaltsbuch deine Ausgaben sichtbar machst und die größten Kostenfresser findest, erkläre ich in [Frugalismus im Alltag: So sparst du jeden Monat bares Geld](../../posts/2026-08-06-frugalismus-im-alltag/) – mit konkreten, sofort umsetzbaren Tricks aus dem Alltag.
 
 ## Die 50-30-20-Regel:<br>Deine Budget-Formel
 
@@ -29,7 +29,7 @@ Die einfachste Methode, die ich kenne: 50 % für Fixkosten, 30 % für Wünsche
 
 ## Notgroschen und Sicherheit
 
-Bevor du investierst, brauchst du ein finanzielles Polster. Wie groß es wirklich sein muss und wo du es am besten parkst, beantworte ich in [Notgroschen aufbauen: Wie viel Geld reicht wirklich?](../../posts/notgroschen-aufbauen-wie-viel-reicht/) und [Tagesgeld und Zinsen: So parkst du dein Geld sicher](../../posts/tagesgeld-zinsen-sicher-anlegen/).
+Bevor du investierst, brauchst du ein finanzielles Polster. Wie groß es wirklich sein muss und wo du es am besten parkst, erkläre ich dir im [Ratgeber Frugalismus](../../pillar/frugalismus/) und im Artikel [Finanzielle Freiheit: 7 Gewohnheiten](../../posts/7-gewohnheiten-finanzielle-freiheit/).
 
 ## Gewohnheiten für finanzielle Freiheit
 
@@ -41,7 +41,7 @@ Vermögen entsteht durch Wiederholung, nicht durch Einmal-Aktionen. Die sieben G
 Als Faustregel 20 % des Nettoeinkommens – die 50–30–20-Regel zeigt dir, wie das ohne Verbissenheit klappt. Details im [50-30-20-Ratgeber](../../posts/50-30-20-regel-einfach-erklaert/).
 
 ### Wie groß muss mein Notgroschen sein?
-Drei bis sechs Monatsausgaben sind der übliche Richtwert – die genaue Rechnung für deine Situation steht in [Notgroschen aufbauen](../../posts/notgroschen-aufbauen-wie-viel-reicht/).
+Drei bis sechs Monatsausgaben sind der übliche Richtwert – die genaue Rechnung für deine Situation steht in Notgroschen aufbauen.
 
 ### Ist Frugalismus nicht reiner Verzicht?
 Nein – richtig umgesetzt ist er bewusstes Ausgeben für das, was dir wichtig ist. Mehr dazu in [Frugalism../posts/2026-08-07-frugalismus-fuer-den-erfolg/ismus-fuer-den-erfolg/).

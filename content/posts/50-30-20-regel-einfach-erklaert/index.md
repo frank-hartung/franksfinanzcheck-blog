@@ -26,13 +26,13 @@ social_posted: true
 
 
 
-Bleiben dir am Monatsende oft weniger als 100 € auf dem Konto, obwohl du eigentlich gut verdienst? Viele Menschen verlieren trotz eines stabilen Gehalts den Überblick über ihre Ausgaben, weil sie keine klare Struktur verfolgen. Die 50–30–20-Regel löst dieses Problem sofort. Diese einfache Formel, die ursprünglich von der US-Senatorin Elizabeth Warren populär gemacht wurde, strukturiert deine Finanzen ohne komplizierte Tabellen. Du schaffst dir damit eine solide Basis für deinen langfristigen [Vermögensaufbau](../../posts/sparquote-berechnen-und-steigern/) und verhinderst, dass dein Geld unkontrolliert versickert.
+Bleiben dir am Monatsende oft weniger als 100 € auf dem Konto, obwohl du eigentlich gut verdienst? Viele Menschen verlieren trotz eines stabilen Gehalts den Überblick über ihre Ausgaben, weil sie keine klare Struktur verfolgen. Die 50–30–20-Regel löst dieses Problem sofort. Diese einfache Formel, die ursprünglich von der US-Senatorin Elizabeth Warren populär gemacht wurde, strukturiert deine Finanzen ohne komplizierte Tabellen. Du schaffst dir damit eine solide Basis für deinen langfristigen Vermögensaufbau und verhinderst, dass dein Geld unkontrolliert versickert.
 
 ### Das Wichtigste in Kürze
 - **Klare Struktur:** Die 50–30–20-Regel teilt dein Nettoeinkommen in drei unverwechselbare Bereiche auf.
 - **Fixkosten-Deckelung:** Deine Lebenshaltungskosten beanspruchen maximal 50 % deines Budgets.
 - **Lebensqualität:** Du reservierst bewusst 30 % für deinen persönlichen Lebensstil und Spaß – ohne schlechtes Gewissen.
-- **Zukunftssicherung:** Mindestens 20 % fließen direkt in den Notgroschen, die Schuldentilgung oder den [Vermögensaufbau](../../posts/sparquote-berechnen-und-steigern/).
+- **Zukunftssicherung:** Mindestens 20 % fließen direkt in den Notgroschen, die Schuldentilgung oder den Vermögensaufbau.
 - **Automatisierung:** Ein automatisierter Sparplan am Monatsanfang (Pay Yourself First) sichert deinen finanziellen Erfolg dauerhaft.
 
 
@@ -63,8 +63,8 @@ Dieser Block sorgt dafür, dass die Budgetierung nicht zur Qual wird. Er dient d
 
 ### 3. 20 % für Sparen und Vermögensaufbau (Saves)
 Das ist dein wichtigster Hebel für [finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freiheit/). Bevor du konsumierst, bedienst du diesen Topf.
-- **Notgroschen:** Aufbau von 3 bis 4 Nettomonatsgehältern auf einem [Tagesgeldkonto](../../posts/tagesgeld-zinsen-sicher-anlegen/).
-- **[Altersvorsorge](../../posts/riester-rente-2026-lohnt-sich/):** Investitionen in breit gestreute ETFs oder Aktien, um dein Finanzwissen in Rendite zu verwandeln.
+- **Notgroschen:** Aufbau von 3 bis 4 Nettomonatsgehältern auf einem Tagesgeldkonto.
+- **Altersvorsorge:** Investitionen in breit gestreute ETFs oder Aktien, um dein Finanzwissen in Rendite zu verwandeln.
 - **Schuldentilgung:** Zusätzliche Tilgung von Konsumkrediten oder Dispos.
 
 ## Rechenbeispiel:<br>Die Regel in Zahlen
@@ -90,7 +90,7 @@ Nutze einen einfachen **Regel Rechner** oder eine Excel-Tabelle, um deine indivi
 2. **Fixkosten-Inventur:** Erstelle dir zuerst eine einfache Haushaltsbuch-Vorlage. Sammle alle festen Ausgaben der letzten drei bis sechs Monate aus deinen Kontoauszügen. Vergiss dabei keine jährlichen Abbuchungen (wie die Kfz-Steuer), rechne diese auf den Monat herunter.
 3. **Budget-Abgleich:** Berechne deine persönlichen Grenzwerte. Liegen deine Fixkosten über der 50-Prozent-Marke? In Städten wie Berlin oder München ist das oft der Fall. Hier gilt: Der 30-Prozent-Topf muss dann schrumpfen, nicht der Sparanteil.
 4. **Optimierungspotenziale finden:** Überprüfe jeden Posten im 50-Prozent-Block. Ein Wechsel des Stromanbieters spart oft 150 € im Jahr, ein optimierter Mobilfunktarif weitere 20 € im Monat.
-5. **Daueraufträge einrichten:** Automatisiere deinen Erfolg. Sobald dein Gehalt kommt, gehen die 20 % für das Sparen per Dauerauftrag auf ein separates Depot oder [Tagesgeldkonto](../../posts/tagesgeld-zinsen-sicher-anlegen/). Was weg ist, kann nicht mehr für Spontankäufe ausgegeben werden.
+5. **Daueraufträge einrichten:** Automatisiere deinen Erfolg. Sobald dein Gehalt kommt, gehen die 20 % für das Sparen per Dauerauftrag auf ein separates Depot oder Tagesgeldkonto. Was weg ist, kann nicht mehr für Spontankäufe ausgegeben werden.
 
 ## Vor- und Nachteile der Methode
 

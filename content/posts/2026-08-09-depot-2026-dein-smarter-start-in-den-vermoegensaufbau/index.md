@@ -29,7 +29,7 @@ social_posted: true
 
 
 
-2026: Dein Geld auf dem Sparbuch verliert durch die Inflation täglich an Kaufkraft. Historisch gesehen erzielt der Aktienmarkt hingegen Renditen von ca. 7 % bis 9 % pro Jahr. Mit einem Depot sicherst du dir den Zugang zu diesem Wachstum und schützt dein Vermögen aktiv. Während Tagesgeldkonten zwar wieder moderate Zinsen bieten, fressen die Teuerungsrate und die Abgeltungsteuer den realen Ertrag oft komplett auf. Wer langfristig ein [Vermögen aufbauen](../../posts/zinseszinseffekt-formel-erklaert/) will – sei es für die Altersvorsorge,[ das Eigenkapital fü](../../posts/7-gewohnheiten-finanzielle-freiheit/)r eine Immobilie oder die [finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freiheit/) – kommt am Aktienmarkt nicht vorbei.
+2026: Dein Geld auf dem Sparbuch verliert durch die Inflation täglich an Kaufkraft. Historisch gesehen erzielt der Aktienmarkt hingegen Renditen von ca. 7 % bis 9 % pro Jahr. Mit einem Depot sicherst du dir den Zugang zu diesem Wachstum und schützt dein Vermögen aktiv. Während Tagesgeldkonten zwar wieder moderate Zinsen bieten, fressen die Teuerungsrate und die Abgeltungsteuer den realen Ertrag oft komplett auf. Wer langfristig ein Vermögen aufbauen will – sei es für die Altersvorsorge,[ das Eigenkapital fü](../../posts/7-gewohnheiten-finanzielle-freiheit/)r eine Immobilie oder die [finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freiheit/) – kommt am Aktienmarkt nicht vorbei.
 
 
 Dieser Ratgeber zeigt dir den schnellen Weg zum ersten Investment:
@@ -70,7 +70,7 @@ Hier siehst du, welche Konditionen 2026 als marktüblich und fair gelten:
 | **Fremdwährungen** | Echter Wechselkurs | Hohen Aufschlägen (FX-Fees) bei US-Aktien |
 | **Dividenden-Gebühr**| 0 € (Standard) | Gebühren für ausländische Erträge |
 
-Ein günstiges Depot bildet das Fundament für deinen langfristigen [Vermögensaufbau](../../posts/sparquote-berechnen-und-steigern/). Prüfe dein gesamtes Finanz-Setup gründlich vor der ersten Investition am Aktienmarkt. Der [Ratgeber: Konten und Karten strategisch nutzen](../../pillar/konto-karten/) hilft dir dabei, dein Verrechnungskonto und deine Notfallreserven optimal zu koordinieren. Ein wichtiger Punkt 2026: Achte auf die sogenannten "Spreads". Das ist die Differenz zwischen Kauf- und Verkaufskurs. Ein Broker ohne Ordergebühr kann teurer sein, wenn der Spread zu groß ist. Handle daher bevorzugt zu den Öffnungszeiten der Referenzbörse Xetra (9:00 bis 17:30 Uhr).
+Ein günstiges Depot bildet das Fundament für deinen langfristigen Vermögensaufbau. Prüfe dein gesamtes Finanz-Setup gründlich vor der ersten Investition am Aktienmarkt. Der [Ratgeber: Konten und Karten strategisch nutzen](../../pillar/konto-karten/) hilft dir dabei, dein Verrechnungskonto und deine Notfallreserven optimal zu koordinieren. Ein wichtiger Punkt 2026: Achte auf die sogenannten "Spreads". Das ist die Differenz zwischen Kauf- und Verkaufskurs. Ein Broker ohne Ordergebühr kann teurer sein, wenn der Spread zu groß ist. Handle daher bevorzugt zu den Öffnungszeiten der Referenzbörse Xetra (9:00 bis 17:30 Uhr).
 
 ## Der Anmeldeprozess:<br>In zehn Minuten zum Investor
 Die Eröffnung eines Depots erfolgt 2026 vollständig digital und Papierlos. Du benötigst für den Prozess nur deinen Personalausweis und dein Smartphone. Nach der Dateneingabe (Name, Adresse, Steuer-ID) [startest](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) du direkt die gesetzlich vorgeschriebene Identitätsprüfung (Know-Your-Customer-Prozess).
@@ -108,7 +108,7 @@ Dein Geld ist bei einem regulierten EU-Broker gesetzlich bestens geschützt. Ein
 
 Hinterlege sofort nach der Eröffnung einen **Freistellungsauftrag** in der App. Kapitalerträge (Zinsen, Dividenden, Verkaufsgewinne) bleiben bis zu einem Betrag von 1.000 € pro Person (2.000 € bei Ehepaaren) steuerfrei. Die App führt diesen Auftrag meist mit wenigen Klicks im Profilbereich für dich aus.
 
-Ohne diesen Auftrag zieht die Bank die Abgeltungsteuer von 25 % (zzgl. Solidaritätszuschlag und ggf. Kirchensteuer) sofort bei jedem Gewinn ein. Du müsstest dir das Geld dann mühsam über die Steuererklärung im nächsten Jahr zurückholen. Achte auf diesen wichtigen Schritt, damit mehr Gewinn direkt in deinem Depot bleibt und den [Zinseszinseffekt](../../posts/zinseszinseffekt-formel-erklaert/) voll ausnutzen kann. 2026 ist auch die "Vorabpauschale" wieder ein Thema: Da die Zinsen gestiegen sind, bucht der Broker Anfang des Jahres eine kleine Steuerpauschale für thesaurierende (wiederanlegende) ETFs ab. Sorge also immer für ein paar Euro Puffer auf deinem Verrechnungskonto.
+Ohne diesen Auftrag zieht die Bank die Abgeltungsteuer von 25 % (zzgl. Solidaritätszuschlag und ggf. Kirchensteuer) sofort bei jedem Gewinn ein. Du müsstest dir das Geld dann mühsam über die Steuererklärung im nächsten Jahr zurückholen. Achte auf diesen wichtigen Schritt, damit mehr Gewinn direkt in deinem Depot bleibt und den Zinseszinseffekt voll ausnutzen kann. 2026 ist auch die "Vorabpauschale" wieder ein Thema: Da die Zinsen gestiegen sind, bucht der Broker Anfang des Jahres eine kleine Steuerpauschale für thesaurierende (wiederanlegende) ETFs ab. Sorge also immer für ein paar Euro Puffer auf deinem Verrechnungskonto.
 
 ## Die 3 größten Fehler für Einsteiger (und wie du sie vermeidest)
 1. **Hin und Her macht Taschen leer:** Zu häufiges Kaufen und Verkaufen frisst durch Gebühren und Spreads deine Rendite auf. Bleib bei deinem Plan.
@@ -121,13 +121,13 @@ Ohne diesen Auftrag zieht die Bank die Abgeltungsteuer von 25 % (zzgl. Solidari
 Die reine Eröffnung kostet dich bei modernen Brokern heute 0 €. Viele Anbieter ermöglichen dir ETF-Sparpläne bereits ab einer Rate von 1 € pro Monat. Du kannst also auch mit sehr kleinen Beträgen erfolgreich an der Börse starten. Es gibt keine Ausrede mehr, "nicht genug Geld" zum Investieren zu haben.
 
 ### Kann ich mein Depot jederzeit wieder kündigen?
-Ja, dein Depot ist kein Knebelvertrag mit einer festen Mindestlaufzeit. Du kannst es jederzeit ohne Angabe von Gründen auflösen oder zu einem anderen Anbieter wechseln. Ein [Depotübertrag](../../posts/depot-umzug-steuerfrei-wechseln/) zu einem anderen Anbieter ist innerhalb Deutschlands für dich in der Regel kostenlos und gesetzlich geregelt. Die Wertpapiere werden dabei einfach von Depot A nach Depot B geschoben.
+Ja, dein Depot ist kein Knebelvertrag mit einer festen Mindestlaufzeit. Du kannst es jederzeit ohne Angabe von Gründen auflösen oder zu einem anderen Anbieter wechseln. Ein Depotübertrag zu einem anderen Anbieter ist innerhalb Deutschlands für dich in der Regel kostenlos und gesetzlich geregelt. Die Wertpapiere werden dabei einfach von Depot A nach Depot B geschoben.
 
 ### Was passiert, wenn ich mein Handy mit der Broker-App verliere?
 Dein Vermögen bleibt auch bei einem Verlust deines Smartphones absolut sicher. Die App ist durch Passwörter, Gesichtsscan (FaceID) oder PIN-Codes vor fremdem Zugriff geschützt. Selbst wenn jemand die App entsperren könnte: Auszahlungen sind prinzipiell nur auf dein eigenes, fest hinterlegtes Referenzkonto (dein Girokonto) möglich. Ein Dieb kann das Geld also nicht auf sein eigenes Konto überweisen.
 
 ### Sollte ich einen ausschüttenden oder einen thesaurierenden ETF wählen?
-Das kommt auf dein Ziel an. Ein ausschüttender ETF überweist dir Dividenden direkt auf dein Verrechnungskonto – das ist motivierend, weil du regelmäßige Zahlungen siehst. Ein thesaurierender ETF legt die Gewinne automatisch wieder an, was den [Zinseszinseffekt](../../posts/zinseszinseffekt-formel-erklaert/) maximiert und steuerlich (bis zum Erreichen des Freibetrags) oft effizienter ist. 2026 nutzen viele Anleger ausschüttende ETFs, bis der Freibetrag von 1.000 € ausgeschöpft ist, und wechseln danach auf thesaurierende Varianten.
+Das kommt auf dein Ziel an. Ein ausschüttender ETF überweist dir Dividenden direkt auf dein Verrechnungskonto – das ist motivierend, weil du regelmäßige Zahlungen siehst. Ein thesaurierender ETF legt die Gewinne automatisch wieder an, was den Zinseszinseffekt maximiert und steuerlich (bis zum Erreichen des Freibetrags) oft effizienter ist. 2026 nutzen viele Anleger ausschüttende ETFs, bis der Freibetrag von 1.000 € ausgeschöpft ist, und wechseln danach auf thesaurierende Varianten.
 
 ---
 

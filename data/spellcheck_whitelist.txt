@@ -914,3 +914,8 @@ stat
 begründungslos
 >>>>>>> c8351179 (fix(engine): Cover-Commit-Skopus inkl. static/images/covers/ + Rest-Schnittstellen geheilt)
 Welt-ETF-Sparplan
+
+# 12.08.2026 – nach 2-Posts/Tag-Bereinigung
+Frugalismus-Tricks
+Boost
+Internet-Flat

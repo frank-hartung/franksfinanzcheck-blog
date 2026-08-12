@@ -232,7 +232,13 @@ def make_draft(topic, used_titles):
 # ---------------------------------------------------------------------------
 
 def main():
-    max_per_day = int(os.environ.get("MAX_ARTIKEL_PRO_TAG", "2"))
+    # HARTES TAGESLIMIT: Maximal 2 Posts pro Tag (Betriebsregel des Users).
+    # Selbst wenn MAX_ARTIKEL_PRO_TAG höher gesetzt wird, greift das Cap – die
+    # Veröffentlichungs-Regel „nur 2 Posts/Tag" hat Vorrang (12.08.2026).
+    max_per_day = min(int(os.environ.get("MAX_ARTIKEL_PRO_TAG", "2")), 2)
+    if os.environ.get("MAX_ARTIKEL_PRO_TAG", "2") != "2":
+        print(f"⚠ MAX_ARTIKEL_PRO_TAG={os.environ.get('MAX_ARTIKEL_PRO_TAG')} "
+              f"– hartes Cap von 2 Posts/Tag greift.")
     pin_topics = os.environ.get("PIN_TOPICS", "0") == "1"
 
     # Tages-Guard (wie bisherige Pipeline)

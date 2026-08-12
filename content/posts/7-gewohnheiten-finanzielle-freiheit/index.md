@@ -18,7 +18,7 @@ social_posted: true
 
 ## 1. Zahle dich zuerst
 
-Überweise am Monatsanfang sofort 10 bis 15 % deines Einkommens auf ein separates Depot oder [Tagesgeldkonto](../../posts/tagesgeld-zinsen-sicher-anlegen/). Betrachte diesen Betrag als deine wichtigste Rechnung, die du zuerst begleichst. Was du nicht auf dem Girokonto siehst, gibst du im Alltag nicht aus. Diese einfache Routine sichert deinen langfristigen [Vermögensaufbau](../../posts/sparquote-berechnen-und-steigern/) ohne täglichen Verzicht. Ein Beispiel: Wenn du 2.500 € monatlich verdienst, solltest du 250–375 € auf dein Sparbuch überweisen.
+Überweise am Monatsanfang sofort 10 bis 15 % deines Einkommens auf ein separates Depot oder Tagesgeldkonto. Betrachte diesen Betrag als deine wichtigste Rechnung, die du zuerst begleichst. Was du nicht auf dem Girokonto siehst, gibst du im Alltag nicht aus. Diese einfache Routine sichert deinen langfristigen Vermögensaufbau ohne täglichen Verzicht. Ein Beispiel: Wenn du 2.500 € monatlich verdienst, solltest du 250–375 € auf dein Sparbuch überweisen.
 
 ## 2. Führe monatlich ein Finanz-Review
 

@@ -38,17 +38,17 @@ Dabei geht es nicht darum, jeden Cent zweimal umzudrehen, bis es weh tut. Es geh
 ### Das Wichtigste in Kürze
 * Fixkosten durch regelmäßige Vergleiche radikal senken.
 * Konsum hinterfragen und Impulskäufe durch Wartezeiten vermeiden.
-* Ein [Haushaltsbuch führen](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) für die volle Transparenz.
+* Ein Haushaltsbuch führen für die volle Transparenz.
 * Ersparnisse konsequent investieren statt auf dem Girokonto parken.
 * Das Ziel: Eine hohe Sparquote von 30 bis 60 % erreichen.
 
 ## Die Grundlagen des Frugalismus
 Du brauchst ein klares finanzielles Ziel, um langfristig motiviert zu bleiben. Identifiziere zuerst deine größten Preistreiber und hinterfrage jeden Dauerauftrag kritisch. Ein Budgetplan trennt notwendige Lebenshaltungskosten von reinem Luxuskonsum. Prüfe deine Verträge regelmäßig, um versteckte Gebühren und teure Alttarife zu eliminieren.
 
-Das Herzstück des Frugalismus ist die **Sparquote**. Während der Durchschnittsdeutsche etwa 10 % seines Einkommens beiseitelegt, zielen Frugalisten auf 30 %, 50 % oder sogar noch mehr ab. Warum? Weil eine hohe Sparquote die Zeit bis zur finanziellen Freiheit exponentiell verkürzt. Wer 50 % seines Einkommens spart, kann nach etwa 17 Jahren von seinem Vermögen leben (basierend [auf der 4-Prozent](../../posts/zinseszinseffekt-formel-erklaert/)-Regel).
+Das Herzstück des Frugalismus ist die **Sparquote**. Während der Durchschnittsdeutsche etwa 10 % seines Einkommens beiseitelegt, zielen Frugalisten auf 30 %, 50 % oder sogar noch mehr ab. Warum? Weil eine hohe Sparquote die Zeit bis zur finanziellen Freiheit exponentiell verkürzt. Wer 50 % seines Einkommens spart, kann nach etwa 17 Jahren von seinem Vermögen leben (basierend auf der 4-Prozent-Regel).
 
 ## Haushaltsbuch führen
-Wer [Vermögen aufbauen](../../posts/zinseszinseffekt-formel-erklaert/) will, muss seine Zahlen im Griff haben. Ein [Haushaltsbuch führen](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) ist das Fundament deiner finanziellen Freiheit. Dokumentiere jede Ausgabe, damit du versteckte Kostenfresser sofort entlarvst. So entdeckst du Abonnements oder Kleinstbeträge, die sich monatlich oft auf 50 € bis 150 € summieren.
+Wer Vermögen aufbauen will, muss seine Zahlen im Griff haben. Ein Haushaltsbuch führen ist das Fundament deiner finanziellen Freiheit. Dokumentiere jede Ausgabe, damit du versteckte Kostenfresser sofort entlarvst. So entdeckst du Abonnements oder Kleinstbeträge, die sich monatlich oft auf 50 € bis 150 € summieren.
 
 Du hast hierbei die Wahl zwischen klassischen Apps, Excel-Tabellen oder dem analogen Notizbuch. Wichtig ist die Kategorisierung:
 1. **Fixkosten:** Miete, Versicherungen, Internet.

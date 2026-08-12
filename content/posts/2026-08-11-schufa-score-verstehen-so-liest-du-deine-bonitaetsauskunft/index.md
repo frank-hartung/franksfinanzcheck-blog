@@ -130,7 +130,7 @@ Ja. Wer regelmäßig Verträge zuverlässig bedient – Handy, Girokonto, Versic
 
 ---
 
-_Lesetipps zum Weitersparen: [Ratenkredit zum Bestzins vergleichen](/posts/ratenkredit-bestszins-vergleichen/) – und falls dein Konto dauerhaft zwickt: [Kontowechsel in 20 Minuten: Der Wechselservice im Überblick](/posts/kontowechsel-in-20-minuten-wechselservice/)_
+_Lesetipps zum Weitersparen: Ratenkredit zum Bestzins vergleichen – und falls dein Konto dauerhaft zwickt: Kontowechsel in 20 Minuten: Der Wechselservice im Überblick_
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Konditionen vergleichen**](/go/kredit/)
 

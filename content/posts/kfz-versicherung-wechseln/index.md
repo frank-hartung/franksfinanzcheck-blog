@@ -42,13 +42,13 @@ Der 30. November markiert den entscheidenden Stichtag für fast alle Autofahrer.
 ## Das Wichtigste in Kürze
 - Stichtag für die reguläre Kündigung ist der 30. November.
 - Jährliche Ersparnis liegt oft zwischen 100 € und 400 €.
-- Deine gesammelte [Schadenfreiheitsklasse](../../posts/kfz-versicherung-sf-klasse-erklaert/) nimmst du einfach mit.
+- Deine gesammelte Schadenfreiheitsklasse nimmst du einfach mit.
 - Ein Online-Vergleich dauert weniger als 15 Minuten.
-- Bei einer Beitragserhöhung hast du ein [Sonderkündigungsrecht](../../posts/internet-anbieter-wechseln-kuendigung/).
+- Bei einer Beitragserhöhung hast du ein Sonderkündigungsrecht.
 
 ## Was den Preis bestimmt
 
-Vier Faktoren beeinflussen deine Prämie besonders stark. Deine **[SF-Klasse](../../posts/kfz-versicherung-sf-klasse-erklaert/)** spielt die Hauptrolle. Wer über Jahre unfallfrei fährt, sichert sich Rabatte von 50 % und mehr. Die Typklasse bewertet dein Fahrzeugmodell nach statistischen Unfall- und Diebstahlzahlen. In der Regionalklasse fassen Versicherer das Schadensrisiko deines Wohnortes zusammen. Zudem senken eine geringe Fahrleistung und ein privater Garagenstellplatz das Risiko und damit deinen Beitrag.
+Vier Faktoren beeinflussen deine Prämie besonders stark. Deine **SF-Klasse** spielt die Hauptrolle. Wer über Jahre unfallfrei fährt, sichert sich Rabatte von 50 % und mehr. Die Typklasse bewertet dein Fahrzeugmodell nach statistischen Unfall- und Diebstahlzahlen. In der Regionalklasse fassen Versicherer das Schadensrisiko deines Wohnortes zusammen. Zudem senken eine geringe Fahrleistung und ein privater Garagenstellplatz das Risiko und damit deinen Beitrag.
 
 ## Haftpflicht, Teilkasko, Vollkasko – was brauchst du wirklich?
 
@@ -74,9 +74,9 @@ Wähle eine Selbstbeteiligung von etwa 150 € in der Teilkasko oder 300 € i
 ## FAQ
 
 **Kann ich während der Vertragslaufzeit wechseln?**
-ein Wechsel ist möglich, wenn dein Versicherer die Beiträge erhöht. In diesem Fall hast du ein [Sonderkündigungsrecht](../../posts/internet-anbieter-wechseln-kuendigung/) von vier Wochen ab Erhalt der Rechnung. Auch nach einem Schadensfall oder einem Fahrzeugverkauf darfst du den Vertrag vorzeitig beenden.
+ein Wechsel ist möglich, wenn dein Versicherer die Beiträge erhöht. In diesem Fall hast du ein Sonderkündigungsrecht von vier Wochen ab Erhalt der Rechnung. Auch nach einem Schadensfall oder einem Fahrzeugverkauf darfst du den Vertrag vorzeitig beenden.
 
-**Wird die [SF-Klasse](../../posts/kfz-versicherung-sf-klasse-erklaert/) mitgenommen?**
+**Wird die SF-Klasse mitgenommen?**
 Ja, deine mühsam erfahrene Schadenfreiheitsklasse gehört dir persönlich. Dein neuer Versicherer fragt diese Daten nach dem Wechsel einfach beim alten Anbieter ab. Dein Rabatt bleibt dir also erhalten.
 
 **Was passiert, wenn ich umziehe?**

@@ -21,7 +21,7 @@ social_posted: true
 ---
 
 
-Deine Webseite braucht Sekunden, bis sie lädt, obwohl du für [schnelles Internet](../../posts/wlan-verstaerker-vs-mesh-wlan/) zahlst? Oft bremst ein veraltetes "Telefonbuch" deinen Browser aus. Mit dem richtigen Kniff sparst du wertvolle Ladezeit und surfst spürbar flüssiger. Hier erfährst du, wie ich meinen DNS-Server getauscht habe und warum das dein Surferlebnis verändert.
+Deine Webseite braucht Sekunden, bis sie lädt, obwohl du für schnelles Internet zahlst? Oft bremst ein veraltetes "Telefonbuch" deinen Browser aus. Mit dem richtigen Kniff sparst du wertvolle Ladezeit und surfst spürbar flüssiger. Hier erfährst du, wie ich meinen DNS-Server getauscht habe und warum das dein Surferlebnis verändert.
 
 ### Das Wichtigste in Kürze
 * DNS-Server übersetzen Domainnamen in numerische IP-Adressen.

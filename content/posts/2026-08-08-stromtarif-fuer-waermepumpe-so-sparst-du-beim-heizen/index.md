@@ -28,7 +28,7 @@ social_posted: true
 
 
 
-Wusstest du, dass du deine Heizkosten um bis zu 30 % senken kannst? Ein spezieller Wärmepumpentarif macht diesen finanziellen Vorteil möglich. Deine [Wärmepumpe](../../posts/waermepumpe-vs-gasheizung-2026/) benötigt viel Energie, doch dieser Strom muss nicht teuer sein. Wir zeigen dir, wie du den passenden Tarif für dein Haus findest und worauf du bei der Abrechnung achten musst.
+Wusstest du, dass du deine Heizkosten um bis zu 30 % senken kannst? Ein spezieller Wärmepumpentarif macht diesen finanziellen Vorteil möglich. Deine Wärmepumpe benötigt viel Energie, doch dieser Strom muss nicht teuer sein. Wir zeigen dir, wie du den passenden Tarif für dein Haus findest und worauf du bei der Abrechnung achten musst.
 
 
 
@@ -40,7 +40,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 ## Wärmepumpentarif:<br>Die Grundlagen
 Ein Wärmepumpentarif ist ein vergünstigter Stromtarif für deine Heizung. Das Prinzip dahinter ist simpel: Da Wärmepumpen als „steuerbare Verbrauchseinrichtungen“ gelten, dürfen Netzbetreiber sie in Zeiten hoher Netzauslastung kurzzeitig drosseln oder abschalten. Im Gegenzug gewährt dir der Gesetzgeber über den Paragrafen **14a des Energiewirtschaftsgesetzes (EnWG)** deutlich reduzierte Netzentgelte. Da die Netzentgelte einen großen Teil deines Strompreises ausmachen, sinkt dein Arbeitspreis pro Kilowattstunde (kWh) massiv.
 
-Seit Januar 2024 gelten hier neue Regeln: Wer eine neue [Wärmepumpe](../../posts/waermepumpe-vs-gasheizung-2026/) einbaut, muss diese steuerbar machen. Dafür profitierst du von garantierten Rabatten. Du hast dabei meist die Wahl zwischen zwei Modellen:
+Seit Januar 2024 gelten hier neue Regeln: Wer eine neue Wärmepumpe einbaut, muss diese steuerbar machen. Dafür profitierst du von garantierten Rabatten. Du hast dabei meist die Wahl zwischen zwei Modellen:
 1. **Modul 1 (Pauschale):** Du erhältst eine jährliche Gutschrift auf deine Netzentgelte (je nach Region zwischen 110 € und 190 € brutto).
 2. **Modul 2 (Prozentual):** Der Arbeitspreis der Netzentgelte wird um ca. 60 % reduziert. Das lohnt sich vor allem bei sehr hohem Verbrauch.
 
@@ -90,7 +90,7 @@ Der Markt für Heizstrom ist in den letzten Jahren stark gewachsen. Neben lokale
 * Zusätzliche Grundgebühr Zähler: ca. 100 €
 * **Ersparnis: 440 € pro Jahr**
 
-Achte beim Vergleich nicht nur auf den Arbeitspreis pro Kilowattstunde. Die monatliche Grundgebühr spielt eine ebenso wichtige Rolle, besonders wenn dein Haus sehr effizient ist. Wähle am besten einen Vertrag mit einer Preisgarantie von [12 Monaten](../../posts/sparquote-berechnen-und-steigern/). So bist du vor plötzlichen Preissprüngen im Winter geschützt.
+Achte beim Vergleich nicht nur auf den Arbeitspreis pro Kilowattstunde. Die monatliche Grundgebühr spielt eine ebenso wichtige Rolle, besonders wenn dein Haus sehr effizient ist. Wähle am besten einen Vertrag mit einer Preisgarantie von 12 Monaten. So bist du vor plötzlichen Preissprüngen im Winter geschützt.
 
 ## Profi-Tipp:<br>Kaskadenschaltung für Photovoltaik-Besitzer
 Besitzt du eine PV-Anlage? Dann ist die sogenannte **Kaskadenschaltung** die Königsklasse. Hierbei werden zwei Zähler so hintereinander geschaltet, dass du deinen selbst erzeugten Solarstrom vorrangig für den Haushaltsstrom UND die Wärmepumpe nutzen kannst. Gleichzeitig behältst du den Anspruch auf den günstigen Wärmepumpentarif für den Strom, den du zusätzlich aus dem Netz beziehen musst. Das erfordert zwar etwas Aufwand bei der Zählerverdrahtung, maximiert aber deine Eigenverbrauchsquote und minimiert die Heizkosten.

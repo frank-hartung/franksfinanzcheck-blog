@@ -21,19 +21,19 @@ Versicherungen sind ein Thema, bei dem viele entweder zu viel oder zu wenig absi
 
 ## Privathaftpflicht:<br>Die Pflichtversicherung für alle
 
-Ein Missgeschick kann schnell sechsstellige Schäden verursachen – dafür haftest du privat mit deinem gesamten Vermögen. Warum diese Police für jeden die Nummer eins ist und was sie kosten darf, erkläre ich in [Privathaftpflicht: Warum sie Pflicht ist und was sie kostet](../../posts/privathaftpflicht-warum-pflicht-kosten/).
+Ein Missgeschick kann schnell sechsstellige Schäden verursachen – dafür haftest du privat mit deinem gesamten Vermögen. Warum diese Police für jeden die Nummer eins ist und was sie kosten darf, erkläre ich in Privathaftpflicht: Warum sie Pflicht ist und was sie kostet.
 
 ## Hausrat:<br>Wer sie braucht und was sie leistet
 
-Ob sich eine Hausratversicherung lohnt, hängt vor allem vom Wert deines Hausrats ab. Wie du den Versicherungswert richtig bestimmst, welche Gefahren abgedeckt sind und wo die typischen Ausschlüsse lauern, erkläre ich in [Hausratversicherung: Wer sie braucht und was sie leistet](../../posts/hausratversicherung-wer-braucht-leistung/).
+Ob sich eine Hausratversicherung lohnt, hängt vor allem vom Wert deines Hausrats ab. Wie du den Versicherungswert richtig bestimmst, welche Gefahren abgedeckt sind und wo die typischen Ausschlüsse lauern, erkläre ich in Hausratversicherung: Wer sie braucht und was sie leistet.
 
 ## Zahnzusatz:<br>Wann sich der Abschluss lohnt
 
-Implantate und hochwertiger Zahnersatz sind teuer – aber nicht für jeden lohnt sich eine Zusatzversicherung. Die ehrliche Einordnung mit Kostenbeispielen findest du in [Zahnzusatzversicherung: Wann sich der Abschluss lohnt](../../posts/zahnzusatzversicherung-lohnt-sich/).
+Implantate und hochwertiger Zahnersatz sind teuer – aber nicht für jeden lohnt sich eine Zusatzversicherung. Die ehrliche Einordnung mit Kostenbeispielen findest du in Zahnzusatzversicherung: Wann sich der Abschluss lohnt.
 
 ## Unfall- und Reisekrankenversicherung:<br>Für wen sie wirklich sinnvoll sind
 
-Die private Unfallversicherung wird oft überteuert verkauft. Für wen sie sich wirklich lohnt und welche Alternativen es gibt, steht in [Private Unfallversicherung: Für wen sie sich wirklich lohnt](../../posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/). Für Reisen ins Ausland ist dagegen die [Reisekrankenversicherung](../../posts/reisekrankenversicherung-wann-lohnt/) fast immer eine sinnvolle, günstige Ergänzung.
+Die private Unfallversicherung wird oft überteuert verkauft. Für wen sie sich wirklich lohnt und welche Alternativen es gibt, steht in Private Unfallversicherung: Für wen sie sich wirklich lohnt. Für Reisen ins Ausland ist dagegen die Reisekrankenversicherung fast immer eine sinnvolle, günstige Ergänzung.
 
 ## Kfz-Versicherung wechseln:<br>Der jährliche Sparhebel
 
@@ -42,10 +42,10 @@ Zum Wechselstichtag im November/Dezember lohnt sich der Vergleich besonders: Wer
 ## Häufige Fragen
 
 ### Welche Versicherung braucht man wirklich?
-Die Privathaftpflicht ist unverzichtbar, die Hausratversicherung oft sinnvoll. Berufsunfähigkeit und Kfz-Haftpflicht hängen von der Lebenssituation ab. Eine ehrliche Einordnung gibt der [Haftpflicht-Ratgeber](../../posts/privathaftpflicht-warum-pflicht-kosten/).
+Die Privathaftpflicht ist unverzichtbar, die Hausratversicherung oft sinnvoll. Berufsunfähigkeit und Kfz-Haftpflicht hängen von der Lebenssituation ab. Eine ehrliche Einordnung gibt der Haftpflicht-Ratgeber.
 
 ### Lohnt sich eine Zahnzusatzversicherung?
-Ja, wenn du absehbar größere Behandlungen brauchst oder Wert auf hochwertigen Zahnersatz legst. Die Kosten-Nutzen-Rechnung findest du in [Zahnzusatz: Wann sich der Abschluss lohnt](../../posts/zahnzusatzversicherung-lohnt-sich/).
+Ja, wenn du absehbar größere Behandlungen brauchst oder Wert auf hochwertigen Zahnersatz legst. Die Kosten-Nutzen-Rechnung findest du in Zahnzusatz: Wann sich der Abschluss lohnt.
 
 ### Wann sollte ich die Kfz-Versicherung wechseln?
 Zum Stichtag (meist 30. November) mit sechswöchiger Kündigungsfrist. Wer früh vergleicht, sichert sich oft die günstigsten Konditionen – Details im [Kfz-Wechsel-Ratgeber](../../posts/kfz-versicherung-wechseln/).
