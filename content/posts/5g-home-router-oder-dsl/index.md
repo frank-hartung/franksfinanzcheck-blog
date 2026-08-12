@@ -75,7 +75,7 @@ Nur wer am Ende des Tests mit dem Tempo zufrieden ist, sollte den Vertrag behalt
 
 ## Kostenvergleich:<br>5G-Home vs. DSL-Vertrag
 
-Die Preise für 5G-Home liegen 2026 meist zwischen 35 € und 50 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) für 100 bis 250 Mbit/s – mit Laufzeiten von 24 Monaten (mit Router) oder flexibel ohne Router. Im Vergleich:
+Die Preise für 5G-Home liegen 2026 meist zwischen 35 € und 50 € pro Monat für 100 bis 250 Mbit/s – mit Laufzeiten von 24 Monaten (mit Router) oder flexibel ohne Router. Im Vergleich:
 
 | Tarif | Preis/Monat | Tempo | Bindung |
 |:--- |:--- |:--- |:--- |

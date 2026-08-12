@@ -45,7 +45,7 @@ Bevor du aktiv wirst, musst du die Schwachstellen deines Hauses kennen. Die Wär
 
 Etwa 20 bis 30 % der Energie entweichen durch undichte Fugen und falsches Lüften. Wände und Decken schlucken je nach Dämmzustand weitere 20 bis 30 % der Wärme. Fenster verursachen oft Verluste zwischen 10 % und 15 %. Bei Einfamilienhäusern verlierst du über das Dach sogar bis zu 20 %.
 
-Zusätzlich sorgen falsch eingestellte Anlagen oder verdeckte Heizkörper für unnötige Kosten. Die gute Nachricht: Die größten Lecks stopfst du ohne teure Handwerker. Genau hier s[etzen die ersten Sch](../../posts/stromfresser-im-haushalt-entlarven/)ritte an, um effektiv **[[Energiekoste](../../posts/2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen/)n senken](../../posts/stromfresser-im-haushalt-entlarven/)** zu können.
+Zusätzlich sorgen falsch eingestellte Anlagen oder verdeckte Heizkörper für unnötige Kosten. Die gute Nachricht: Die größten Lecks stopfst du ohne teure Handwerker. Genau hier setzen die ersten Schritte an, um effektiv **Energiekosten zu senken** – wer die [Stromfresser im Haushalt entlarvt](../../posts/stromfresser-im-haushalt-entlarven/), findet schnell die größten Hebel.
 
 ## Maßnahmen 1 bis 4:<br>Ohne Kosten
 
@@ -119,6 +119,6 @@ Bei alten Anlagen über 20 Jahren ist der Tausch fast immer wirtschaftlich sinnv
 **Wann sollte ich meine Heizung warten lassen?**
 Lasse deine Anlage einmal jährlich im Spätsommer von einem Profi prüfen. Eine gewartete Heizung arbeitet effizienter und verbraucht deutlich weniger Brennstoff. Zudem sinkt das Risiko für teure Ausfälle mitten in der kalten Jahreszeit. Bei vielen Gasheizungen ist diese regelmäßige Wartung sogar gesetzlich vorgeschrieben.
 
-👉 **Jetzt [Gastarife vergleichen](../../posts/gastarife-vergleichen-vor-dem-herbst/) und [[Heizkoste](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/)n senken](../../posts/waermepumpe-vs-gasheizung-2026/):** [**→ Jetzt vergleichen bei CHECK24**](/go/gas/)
+👉 **Jetzt [Gastarife vergleichen](../../posts/gastarife-vergleichen-vor-dem-herbst/) und [Heizkosten senken](../../posts/waermepumpe-vs-gasheizung-2026/):** [**→ Jetzt vergleichen bei CHECK24**](/go/gas/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

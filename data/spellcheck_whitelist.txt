@@ -913,3 +913,4 @@ posts
 stat
 begründungslos
 >>>>>>> c8351179 (fix(engine): Cover-Commit-Skopus inkl. static/images/covers/ + Rest-Schnittstellen geheilt)
+Welt-ETF-Sparplan

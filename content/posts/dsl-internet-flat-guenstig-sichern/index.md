@@ -49,7 +49,7 @@ Bevor du einen neuen Vertrag abschließt, kläre deinen tatsächlichen Bedarf. D
 - **100–250 Mbit/s:** Familien mit mehreren Geräten profitieren hiervon. Streaming in 4K und größere Downloads laufen parallel flüssig.
 - **250 Mbit/s und mehr:** diese Tarife eignen sich für Profi-Gamer oder Haushalte mit extrem hohem Datenaufkommen.
 
-Die meisten Haushalte kommen mit 100 Mbit/s sehr gut aus. Mehr Bandbreite kostet oft 10 bis 20 € mehr [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/), bringt im Alltag aber selten spürbare Vorteile. Prüfe vorab, welche Technologie bei dir anliegt: DSL, Kabel oder Glasfaser.
+Die meisten Haushalte kommen mit 100 Mbit/s sehr gut aus. Mehr Bandbreite kostet oft 10 bis 20 € mehr pro Monat, bringt im Alltag aber selten spürbare Vorteile. Prüfe vorab, welche Technologie bei dir anliegt: DSL, Kabel oder Glasfaser.
 
 ## Schritt 2:<br>Die Gesamtkosten berechnen
 

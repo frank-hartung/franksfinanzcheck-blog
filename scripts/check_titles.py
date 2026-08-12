@@ -69,6 +69,11 @@ def check_title(title):
     m = TIME_TAIL.search(t)
     if m:
         issues.append(("R3", f"holpriges Zeit-Anhängsel am Ende: {m.group(0)!r}"))
+    # R5: Rohe HTML-Tags im Titel (z. B. „:<br> " nach Überschriften-Doppelpunkt-
+    # Generator) – erscheinen WÖRTLICH im Cover-Bild (Pillow zeichnet Text)
+    # und verunstalten Titel in Listen/Karten. --fix entfernt sie.
+    if re.search(r"<br\s*/?>|</br>|&lt;br&gt;", t, re.I):
+        issues.append(("R5", "rohes <br>-Tag im Titel (Cover-Text-Bug)"))
     if "  " in t:
         issues.append(("R4", "doppelte Leerzeichen"))
     if " :" in t or re.search(r":\s{2,}", t):
@@ -77,11 +82,13 @@ def check_title(title):
 
 
 def fix_title(title):
-    """Deterministische Korrekturen R2–R4 (kein R1-Fix – semantisch)."""
+    """Deterministische Korrekturen R2–R5 (kein R1-Fix – semantisch)."""
     t = title.strip()
     for pat, repl in COMPOUND_FIXES:
         t = re.sub(pat, repl, t)
     t = TIME_TAIL.sub("", t).strip()
+    # R5: HTML-Tags entfernen (inkl. Folge-Leerzeichen vor/nach dem Tag)
+    t = re.sub(r"<br\s*/?>|</br>|&lt;br&gt;", "", t, flags=re.I)
     t = re.sub(r"\s{2,}", " ", t)
     t = re.sub(r"\s+:", ":", t)
     t = re.sub(r":\s{2,}", ": ", t)

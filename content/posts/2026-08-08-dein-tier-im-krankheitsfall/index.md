@@ -124,7 +124,7 @@ Ein vermeintliches Schnäppchen kann sich schnell als Kostenfalle entpuppen. Ach
 
 ## Häufige Fragen
 ### Wie hoch sind die Beiträge für eine Tierversicherung?
-Die Kosten hängen vom Alter, der Rasse und dem Gesundheitszustand deines Tieres ab. Für eine einfache OP-Versicherung zahlst du oft nur 15 € bis 20 €. Eine vollumfängliche **Hundeversicherung** liegt meist zwischen 40 € und 70 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/). Katzen sind in der Regel etwas günstiger und starten beim Vollschutz oft schon bei 25 € bis 30 €.
+Die Kosten hängen vom Alter, der Rasse und dem Gesundheitszustand deines Tieres ab. Für eine einfache OP-Versicherung zahlst du oft nur 15 € bis 20 €. Eine vollumfängliche **Hundeversicherung** liegt meist zwischen 40 € und 70 € pro Monat. Katzen sind in der Regel etwas günstiger und starten beim Vollschutz oft schon bei 25 € bis 30 €.
 
 ### Was ist eine Hundeversicherung und wie unterscheidet sie sich von einer Katzenversicherung?
 Die **Hundeversicherung** ist oft teurer, da Behandlungen (Narkosen, Medikamentendosierung) gewichtsunabhängig berechnet werden und Hunde statistisch häufiger operiert werden müssen (z. B. Kreuzband, Ellbogen). Eine **Katzenversicherung** berücksichtigt spezifische Risiken wie Katzenkrankheiten (FIV, FelV) oder Verletzungen durch Reviereinkämpfe bei Freigängern.

@@ -56,9 +56,9 @@ Die monatlichen Beiträge richten sich nach deinem Alter, deinem Beruf und den g
 
 | Baustein | Kosten (ca. Spanne) |
 |---|---|
-| Grundschutz (100.000 € Basissumme) | 5 € – 12 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) |
-| Komfortschutz (mit Progression & Tagegeld) | 12 € – 25 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) |
-| Premiumschutz (inkl. Rente & hoher Summe) | 25 € – 45 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) |
+| Grundschutz (100.000 € Basissumme) | 5 € – 12 € pro Monat |
+| Komfortschutz (mit Progression & Tagegeld) | 12 € – 25 € pro Monat |
+| Premiumschutz (inkl. Rente & hoher Summe) | 25 € – 45 € pro Monat |
 
 Dein Eintrittsalter spielt eine große Rolle. Schließe die Police frühzeitig ab, um dir dauerhaft günstige Konditionen zu sichern. Ein Versicherungsvergleich hilft dir, das beste Preis-Leistungs-Verhältnis zu finden.
 

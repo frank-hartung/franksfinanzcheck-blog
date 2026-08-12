@@ -25,7 +25,7 @@ social_posted: true
 
 
 
-Die Router-Miete gehört zu den unscheinbarsten Kostenfallen im Internetvertrag. Vier bis sechs [Euro [pr](../../posts/urlaub-mit-kindern-guenstig-spartricks/)o Monat](../../posts/7-gewohnheiten-finanzielle-freiheit/)-tricks-alltag-200-euro-sparen/) klingen harmlos – aber auf die typische Vertragslaufzeit von 24 Monaten summiert sich das auf 100 bis 150 €. Geld für ein Gerät, das du nach der Vertragszeit meist ohnehin zurückgeben musst.
+Die Router-Miete gehört zu den unscheinbarsten Kostenfallen im Internetvertrag. Vier bis sechs Euro pro Monat klingen harmlos – aber auf die typische Vertragslaufzeit von 24 Monaten summiert sich das auf 100 bis 150 €. Geld für ein Gerät, das du nach der Vertragszeit meist ohnehin zurückgeben musst.
 
 In diesem Artikel rechne ich dir vor, wann sich der Router-Kauf lohnt, welche Fallstricke es gibt und wie du den Wechsel sauber durchziehst.
 
@@ -38,7 +38,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Die Miet-Falle:<br>Was Router-Miete wirklich kostet
 
-Die Rechnung ist simpel: 5 € Miete [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) × 24 Monate = 120 €. Dazu kommt: Nach der Mindestlaufzeit läuft die Miete weiter – bei einem Vertrag, den du nicht kündigst, sind es über 4 Jahre schnell 240 €. Und die gemieteten Geräte sind oft nicht die besten: Viele Anbieter liefern Basis-Router mit mäßigem WLAN.
+Die Rechnung ist simpel: 5 € Miete pro Monat × 24 Monate = 120 €. Dazu kommt: Nach der Mindestlaufzeit läuft die Miete weiter – bei einem Vertrag, den du nicht kündigst, sind es über 4 Jahre schnell 240 €. Und die gemieteten Geräte sind oft nicht die besten: Viele Anbieter liefern Basis-Router mit mäßigem WLAN.
 
 Der Vergleich zum Kauf: Ein solider WLAN-Router kostet 80 bis 150 €, eine gute Fritzbox 150 bis 250 €. Die Miete über 2 Jahre deckt also bereits den Kaufpreis eines ordentlichen Geräts – und danach gehört dir die Hardware und läuft kostenlos weiter.
 
@@ -119,7 +119,7 @@ Der perfekte Zeitpunkt für den Router-Kauf ist der Anbieterwechsel: Beim [Wechs
 Die Strategie in drei Schritten:
 
 1. **Vor dem Wechsel:** Prüfen, ob dein Wunsch-Router zum neuen Anschluss passt (DSL, Kabel oder Glasfaser). Die [Anschluss-Wahl](../../posts/glasfaser-dsl-kabel-anschluss-vergleich/) entscheidet über die Router-Kompatibilität.
-2. **Beim Vertragsabschluss:** Den Tarif ohne Router-Miete wählen – das sind 4 bis 6 € Ersparnis [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/), also 50 bis 70 € pro Jahr.
+2. **Beim Vertragsabschluss:** Den Tarif ohne Router-Miete wählen – das sind 4 bis 6 € Ersparnis pro Monat, also 50 bis 70 € pro Jahr.
 3. **Nach dem Wechsel:** Den alten Miet-Router fristgerecht zurückschicken und die Rückgabe bestätigen lassen – sonst läuft die Miete weiter.
 
 Wer diese Strategie umsetzt, spart doppelt: beim Tarif (ohne Miete) und bei der Hardware (einmal kaufen, jahrelang nutzen).

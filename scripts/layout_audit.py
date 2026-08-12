@@ -88,6 +88,61 @@ def check_internal_links():
         OK.append(f"Interne Links: {checked} geprüft, 0 kaputt.")
 
 
+def check_markdown_links():
+    """Prüft die Markdown-QUELLEN auf kaputte/verschachtelte Links
+    (Fund 12.08.: internal_linker-Bot erzeugte „[Euro [pr](../../…/…)o
+    Monat](../../…/)“, „[pro Monat](…)“-Einsprengsel, Links mitten im Wort
+    und Link-Markup in Frontmatter-Keywords). --fix entfernt das Link-Markup
+    und lässt den Anzeigetext stehen (deterministisch, konservativ)."""
+    root = os.path.dirname(BASE)  # Projektwurzel (BASE = public/)
+    files = (glob.glob(os.path.join(root, "content", "posts", "*", "index.md"))
+             + glob.glob(os.path.join(root, "content", "pillar", "*", "index.md")))
+    problems = []
+
+    # 1) Verschachtelt: [Text [Link](url) …](url)  bzw. [Text [Link](url)
+    re_nested = re.compile(r"\[([^\]\n]*\[[^\]\n]*)\]\([^)\n]*\)")
+    # 2) Link mitten im Wort: X[Text](url)Y
+    re_midword = re.compile(r"([a-zäöüßA-ZÄÖÜ0-9])\[([^\]]*)\]\(([^)\n]*)\)")
+    # 3) Link-Markup in Frontmatter-Keywords/Categories
+    re_front = re.compile(r"^(keywords|categories|tags):.*\]\([^)\n]*\)", re.M)
+
+    for f in files:
+        c = open(f, encoding="utf-8").read()
+        lines = c.split("\n")
+        for i, l in enumerate(lines):
+            slug = os.path.basename(os.path.dirname(f))
+            for m in re_nested.finditer(l):
+                problems.append((slug, i + 1, "verschachtelter Link", m.group(0)[:80]))
+            for m in re_midword.finditer(l):
+                problems.append((slug, i + 1, "Link mitten im Wort", m.group(0)[:80]))
+            for m in re_front.finditer(c):
+                problems.append((slug, 0, "Link in Frontmatter", m.group(0)[:60]))
+
+    if problems:
+        CRITICAL.append(f"**{len(problems)} kaputte/verschachtelte Markdown-Links**:")
+        for slug, ln, kind, snippet in problems[:15]:
+            CRITICAL.append(f"  - `{slug}:{ln}` [{kind}] …{snippet}…")
+    else:
+        OK.append("Markdown-Links (Quellen): 0 verschachtelt/kaputt.")
+
+    # --fix: Link-Markup entfernen, Text behalten
+    if "--fix" in sys.argv and problems:
+        fixed = 0
+        for f in files:
+            c = open(f, encoding="utf-8").read()
+            orig = c
+            # Verschachtelte Links: inneres Link-Markup entfernen
+            c = re.sub(r"\[([^\]\n]*)\[([^\]]*)\]\([^)\n]*\)([^\]\n]*)\]\([^)\n]*\)",
+                       lambda m: "[" + m.group(1) + m.group(2) + m.group(3) + "]", c)
+            # Links mitten im Wort: Link-Markup entfernen, Text behalten
+            c = re.sub(r"([a-zäöüßA-ZÄÖÜ0-9])\[([^\]]*)\]\([^)\n]*\)([a-zäöüßA-ZÄÖÜ0-9])",
+                       lambda m: m.group(1) + m.group(2) + m.group(3), c)
+            if c != orig:
+                open(f, "w", encoding="utf-8").write(c)
+                fixed += 1
+        print(f"Markdown-Link-Fix: {fixed} Dateien bereinigt.")
+
+
 def check_covers():
     posts = glob.glob(os.path.join(os.path.dirname(BASE), "content", "posts", "*", "index.md"))
     missing = []
@@ -139,11 +194,16 @@ def check_schema_and_meta():
     no_schema, no_og, no_meta, no_h1 = [], [], [], []
     for page in pages:
         text = open(page, encoding="utf-8", errors="ignore").read()
+        # Redirect-Alias-Seiten (Hugo baut sie für umbenannte Slugs:
+        # <meta http-equiv=refresh> + canonical) sind gewollt – überspringen
+        if re.search(r'http-equiv=["\']?refresh', text) and "canonical" in text:
+            continue
         if '"@type":"Article"' not in text and '"@type": "Article"' not in text:
             no_schema.append(os.path.basename(os.path.dirname(page)))
         if 'og:image' not in text:
             no_og.append(os.path.basename(os.path.dirname(page)))
-        if '<meta name="description"' not in text:
+        # Minifier entfernt die Quotes (name=description) – beides akzeptieren
+        if not re.search(r'<meta[^>]*name=["\']?description["\']?', text):
             no_meta.append(os.path.basename(os.path.dirname(page)))
         if re.search(r"<h1[^>]*>", text) is None:
             no_h1.append(os.path.basename(os.path.dirname(page)))
@@ -245,10 +305,12 @@ def auto_fix_links():
 def main():
     if "--fix" in sys.argv:
         n = auto_fix_links()
+        check_markdown_links()  # verschachtelte/kaputte Markdown-Links heilen
         return 0 if n == 0 else 2
     if not os.path.isdir(BASE):
         print(f"FEHLER: {BASE} existiert nicht – erst `hugo` bauen.")
         return 1
+    check_markdown_links()  # Markdown-Quellen zuerst (unabhängig vom Build)
     check_internal_links()
     check_covers()
     check_alts()

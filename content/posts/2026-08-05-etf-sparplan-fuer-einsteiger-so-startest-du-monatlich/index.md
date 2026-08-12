@@ -56,7 +56,7 @@ Zuerst benötigst du ein Wertpapierdepot bei einer Bank oder einem Broker. Vergl
 
 | Kriterium | Neo-Broker (z. B. Trade Republic, Scalable) | Direktbanken (z. B. ING, DKB) | Hausbank (Sparkasse, Volksbank) |
 | :--- | :--- | :--- | :--- |
-| **Depotgebühr** | 0 € | Meist 0 € (evtl. Bedingungen) | Oft 2–5 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) |
+| **Depotgebühr** | 0 € | Meist 0 € (evtl. Bedingungen) | Oft 2–5 € pro Monat |
 | **Sparplan-Kosten** | Meist dauerhaft 0 € | Oft 0 € auf Aktions-ETFs | Meist 1,0 % bis 2,5 % |
 | **Bedienung** | App-fokussiert, sehr einfach | Web & App, umfangreich | Persönlich oder Web |
 | **Empfehlung** | Ideal für kleine Raten & Einsteiger | Gut für Kombi aus Giro/Depot | Meist zu teuer für ETFs |

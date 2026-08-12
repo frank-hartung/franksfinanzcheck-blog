@@ -6,7 +6,7 @@ draft: false
 tags: ["Impulskäufe", "Sparen", "Konsum"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["Impulskäufe vermeiden", "unnötige Ausgaben stoppen", "Kaufimpulse kontrollieren", "[Geld sparen](../../posts/versicherungen-kuendigen-diese-5-policen/) im Alltag"]
+keywords: ["Impulskäufe vermeiden", "unnötige Ausgaben stoppen", "Kaufimpulse kontrollieren", "Geld sparen im Alltag"]
 author: "Frank"
 ai_generated: true
 ai_provider: "Manuell (Masterplan Blueprint 2)"
@@ -43,7 +43,7 @@ Die digitale Welt macht das Problem noch deutlich schlimmer. Mit "One-Click"-Bes
 
 Dies ist das mächtigste Werkzeug für deine [finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freiheit/). Siehst du ein interessantes Produkt, darfst du es nicht sofort kaufen. Setze es stattdessen auf eine Warteliste für exakt 48 Stunden. In dieser Zeit kühlt dein Belohnungszentrum im Gehirn wieder ab.
 
-Oft stellst du nach zwei Tagen fest, dass der Reiz völlig verflogen ist. Die schicke Jacke für 120 € oder das neue Gadget für 80 € wirken plötzlich blass. Du entscheidest nun wieder mit deinem logischen Verstand statt mit deinen Emotionen. Wer diese Regel befolgt, spart oft hunderte [Euro [pr](../../posts/urlaub-mit-kindern-guenstig-spartricks/)o Monat](../../posts/7-gewohnheiten-finanzielle-freiheit/)-tricks-alltag-200-euro-sparen/).
+Oft stellst du nach zwei Tagen fest, dass der Reiz völlig verflogen ist. Die schicke Jacke für 120 € oder das neue Gadget für 80 € wirken plötzlich blass. Du entscheidest nun wieder mit deinem logischen Verstand statt mit deinen Emotionen. Wer diese Regel befolgt, spart oft hunderte Euro pro Monat.
 
 Besonders beim Online-Shopping hilft es, den Browser-Tab einfach zu schließen. Die meisten Shops speichern deinen Warenkorb für einige Tage. Wenn du den Gegenstand nach zwei Tagen immer noch unbedingt willst, ist es ein bewusster Kauf. In neun von zehn Fällen wirst du den Kauf jedoch einfach vergessen.
 

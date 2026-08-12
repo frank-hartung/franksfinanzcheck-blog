@@ -2,3 +2,4 @@
 {"date": "2026-08-11", "mode": "FIX", "junk": 0, "orphans": 0, "dups": 3, "heavy": 0, "git_mb": 72.0}
 {"date": "2026-08-12", "mode": "FIX", "junk": 0, "orphans": 0, "dups": 0, "heavy": 1, "git_mb": 105.0}
 {"date": "2026-08-12", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 1, "heavy": 1, "git_mb": 113.0, "budget_mb": 153, "budget_level": "kritisch"}
+{"date": "2026-08-12", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 0, "heavy": 1, "git_mb": 23.0, "budget_mb": 63, "budget_level": "gruen"}

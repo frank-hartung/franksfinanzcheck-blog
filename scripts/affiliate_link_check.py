@@ -172,25 +172,6 @@ def _load_registry():
 _REGISTRY = _load_registry()
 
 
-# Gateway-Aufloesung (Affiliate-Shield, 11.08.): /go/<key>/ -> Register-URL,
-# damit alle folgenden Checks (deep, PID, Pillar) unveraendert weiterarbeiten.
-def _load_registry():
-    reg = {}
-    yf = os.path.join(BLOG_DIR, "scripts", "check24_links.yaml")
-    if os.path.exists(yf):
-        for line in open(yf, encoding="utf-8"):
-            ls = line.strip()
-            if ls and not ls.startswith("#") and ':"' in ls and ls.endswith('"'):
-                key, _, rest = ls.partition(':"')
-                url = rest.rstrip('"')
-                if url.startswith("http"):
-                    reg[key.strip()] = url
-    return reg
-
-
-_REGISTRY = _load_registry()
-
-
 def find_affiliate_links(body):
     """Affiliate-Links (raw ODER /go/<key>/), normiert + dedupliziert."""
     links = set()

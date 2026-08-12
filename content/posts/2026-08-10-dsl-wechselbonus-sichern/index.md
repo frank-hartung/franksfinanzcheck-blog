@@ -45,7 +45,7 @@ Ein DSL-Wechselbonus senkt deine effektiven Kosten im ersten Jahr massiv. Oft lo
 | Vorteil | Nachteil |
 |:--- |:--- |
 | Hohe Einmalzahlung (bis 150 €) | Lange Vertragslaufzeit (24 Monate) |
-| Günstiger Effektivpreis [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) | Bonus verfällt oft bei Kündigung |
+| Günstiger Effektivpreis pro Monat | Bonus verfällt oft bei Kündigung |
 | Modernere Hardware inklusive | Aufwendigerer Anbieterwechsel |
 | Möglichkeit, den Anbieter nach Ablauf der Mindestlaufzeit zu wechseln | Mögliche Vertragsstrafen bei vorzeitiger Kündigung |
 

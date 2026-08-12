@@ -1,13 +1,9 @@
 {
- "ts": "2026-08-12T18:06:45+00:00",
- "size_mb": 153,
- "files": 1268,
+ "ts": "2026-08-12T18:14:26+00:00",
+ "size_mb": 63,
+ "files": 1249,
  "limit_mb": 128,
  "limit_files": 10000,
- "level": "kritisch",
- "actions": [
-  "1 Python-Cache-Einträge gelöscht",
-  "Audit-Retention angewendet",
-  "git gc --aggressive"
- ]
+ "level": "gruen",
+ "actions": []
 }

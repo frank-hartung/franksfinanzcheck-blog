@@ -15,7 +15,7 @@ inspiration: "Zweite Welle Gaspreis-Anpassung: Jetzt sichern"
 social_posted: true
 cover:
   image: "images/covers/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg"
-  alt: "Spar-Tipp: 2026 08 12 Preisgarantie Gas So Sicherst Du Dir Guenstige Tarife Fuer 2026"
+  alt: "Preisgarantie Gas: So sicherst du dir günstige Tarife für 2026"
   caption: "Tipp von FranksFinanzcheck"
 ---
 
@@ -65,7 +65,7 @@ Damit der Wechsel reibungslos funktioniert und du keine bösen Überraschungen e
 | **Preisbindung** | Mindestens so lang wie die Vertragslaufzeit | Schutz vor Erhöhungen während der Laufzeit. |
 | **Kündigungsfrist** | Max. 4 Wochen zum Ende der Laufzeit | Schneller Wechsel möglich, falls Preise sinken. |
 | **Boni** | Sofortbonus vs. Neukundenbonus | Sofortboni werden meist nach 60 Tagen gezahlt. |
-| **Ökogas-Option** | Zertifikate prüfen (z.B. ok-power) | Klimaschutz ohne großen Aufpreis möglich. |
+| **Ökogas-Option** | Zertifikate prüfen (z. B. ok-power) | Klimaschutz ohne großen Aufpreis möglich. |
 
 
 Wenn du diese Punkte beachtest, vermeidest du Tarife mit versteckten Kosten. Achte besonders darauf, dass die Kündigung deines alten Vertrags meistens direkt vom neuen Anbieter übernommen wird. Du musst also nicht selbst zum Stift greifen, sofern du nicht eine sehr kurze Frist wegen einer Preiserhöhung einhalten musst.
