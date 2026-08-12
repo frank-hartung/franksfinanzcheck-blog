@@ -18,9 +18,12 @@
 # ============================================================
 name: Uptime-Check
 
+# DEAKTIVIERT als Cron (12.08.2026): uptime-monitor.yml läuft alle 15 Min
+# und erzeugt/schließt das Uptime-Issue. Ein paralleler 6h-Check mit demselben
+# Issue-Label würde Doppel-Alarme/gegenseitiges Schließen verursachen.
+# Dieser Workflow bleibt NUR manuell als Tiefen-Check nutzbar
+# (Backoff + Antwortzeit + Assets-Prüfung).
 on:
-  schedule:
-    - cron: "17 */6 * * *"   # alle 6 Stunden, versetzt zu den Bot-Crons
   workflow_dispatch: {}
 
 permissions:

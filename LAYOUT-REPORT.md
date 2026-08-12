@@ -1,8 +1,8 @@
 # 📐 LAYOUT-REPORT (Layout-Automatisierung)
 
-**Stand:** 2026-08-12 20:56 UTC
+**Stand:** 2026-08-12 21:24 UTC
 
-## ✅ OK (8)
+## ✅ OK (9)
 
 ## ❌ Kritisch
 
@@ -17,3 +17,4 @@ Schema-JSON-LD (Article) auf allen 20 Artikel-Seiten.
 og:image auf allen Artikel-Seiten.
 Meta-Description überall vorhanden.
 H1 überall vorhanden.
+Canonical-Tags auf allen Artikel-Seiten.

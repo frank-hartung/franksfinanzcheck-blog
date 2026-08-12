@@ -202,7 +202,7 @@ def check_alts():
 
 def check_schema_and_meta():
     pages = glob.glob(os.path.join(BASE, "posts", "*", "index.html"))
-    no_schema, no_og, no_meta, no_h1 = [], [], [], []
+    no_schema, no_og, no_meta, no_h1, no_canonical = [], [], [], [], []
     for page in pages:
         text = open(page, encoding="utf-8", errors="ignore").read()
         # Redirect-Alias-Seiten (Hugo baut sie für umbenannte Slugs:
@@ -218,6 +218,9 @@ def check_schema_and_meta():
             no_meta.append(os.path.basename(os.path.dirname(page)))
         if re.search(r"<h1[^>]*>", text) is None:
             no_h1.append(os.path.basename(os.path.dirname(page)))
+        # Canonical-Tag (Self-Referencing auf Artikel-URL) – SEO-Pflicht
+        if not re.search(r'<link[^>]*rel=["\']?canonical["\']?', text):
+            no_canonical.append(os.path.basename(os.path.dirname(page)))
     if no_schema:
         WARN.append(f"Schema Article fehlt auf {len(no_schema)} Seiten: {', '.join(no_schema[:6])}")
     else:
@@ -234,6 +237,11 @@ def check_schema_and_meta():
         WARN.append(f"H1 fehlt auf {len(no_h1)} Seiten.")
     else:
         OK.append("H1 überall vorhanden.")
+    if no_canonical:
+        CRITICAL.append(f"Canonical fehlt auf {len(no_canonical)} Seiten: "
+                        f"{', '.join(no_canonical[:6])}")
+    else:
+        OK.append("Canonical-Tags auf allen Artikel-Seiten.")
 
 
 def write_report():
