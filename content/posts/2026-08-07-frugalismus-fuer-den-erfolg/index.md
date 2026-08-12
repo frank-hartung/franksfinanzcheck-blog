@@ -46,7 +46,7 @@ Du hast hierbei die Wahl zwischen klassischen Apps, Excel-Tabellen oder dem anal
 
 Nach drei Monaten Analyse wirst du Muster erkennen. Oft ist es der tägliche Coffee-to-go oder eine vergessene Fitnessstudio-Mitgliedschaft, die dein Budget unbemerkt aushöhlt.
 
-](././posts/2026-08-06[-frugalismus-im-all/)](../../posts/2026-08-06-frugalismus-im-alltag/)## Spartipps im Alltag
+## Spartipps im Alltag
 Effektives [Geld sparen im Alltag](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) beginnt oft bei den täglichen Gewohnheiten. Wer Mahlzeiten selbst zubereitet statt auswärts zu essen, spart je nach Lebensstil ca. 100 € bis 300 € pro Monat. Nutze das Fahrrad oder den Nahverkehr, um hohe Fixkosten für ein Auto zu vermeiden. Ein durchschnittlicher PKW kostet Unterhalt (Wertverlust, Versicherung, Sprit, Reparaturen) oft zwischen 400 € und 600 € im Monat. Allein der Verzicht darauf macht dich zum finanziellen Überflieger.
 
 Hier findest du attraktive Konditionen für deine Fixkosten: [→ Jetzt Angebote vergleichen](/go/allgemein/)

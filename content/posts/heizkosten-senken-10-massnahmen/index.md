@@ -109,7 +109,7 @@ Moderne, programmierbare Thermostate regeln die Wärme exakt nach deinem Zeitpla
 Bei alten Anlagen über 20 Jahren ist der Tausch fast immer wirtschaftlich sinnvoll. Mit der staatlichen BEG-Förderung erhältst du bis zu 70 % der Kosten zurückerstattet. Deine jährliche Ersparnis liegt je nach System bei 300 bis 800 €. Unser [Wärmepumpen-Vergleich](../../posts/waermepumpe-vs-gasheizung-2026/) liefert dir weitere Details dazu.
 
 **Wann sollte ich meine Heizung warten lassen?**
-Lasse deine Anlage einmal jährlich im Spätsommer von einem Profi prüfen. Eine gewartete Heizung arbeitet effizienter und verbraucht deutlich weniger Brennstoff. Zudem sinkt das Risiko für teure Ausfälle mitten in der kalten Jahreszeit. Bei vielen Gasheizungen ist diese regelmäßige Wartung [sogar gesetzlich vorg](../../posts/gastarife-vergleichen-vor-dem-herbst/)eschrieben.
+Lasse deine Anlage einmal jährlich im Spätsommer von einem Profi prüfen. Eine gewartete Heizung arbeitet effizienter und verbraucht deutlich weniger Brennstoff. Zudem sinkt das Risiko für teure Ausfälle mitten in der kalten Jahreszeit. Bei vielen Gasheizungen ist diese regelmäßige Wartung sogar gesetzlich vorgeschrieben.
 
 👉 **Jetzt [Gastarife vergleichen](../../posts/gastarife-vergleichen-vor-dem-herbst/) und [Heizkosten senken](../../posts/waermepumpe-vs-gasheizung-2026/):** [**→ Jetzt vergleichen bei CHECK24**](/go/gas/)
 

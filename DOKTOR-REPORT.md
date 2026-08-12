@@ -1,6 +1,10 @@
 # 🩺 DOKTOR-REPORT (Oberarzt, Gesamtprognose)
 
+<<<<<<< HEAD
 **Stand:** 2026-08-12 10:13 UTC · Modus: VISIT
+=======
+**Stand:** 2026-08-12 10:44 UTC · Modus: VISIT
+>>>>>>> c8351179 (fix(engine): Cover-Commit-Skopus inkl. static/images/covers/ + Rest-Schnittstellen geheilt)
 **Wachen behandelt:** 12 · **0-Exit:** 11 · Funde: 1 · Sabotage-Fehler: 0
 
 | Wache (Phase) | Zweck | Exit |

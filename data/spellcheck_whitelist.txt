@@ -897,3 +897,19 @@ Payment
 Ratenzahlungs
 Scores
 Tesla
+<<<<<<< HEAD
+=======
+Ident-Verfahren
+EID
+Papierlos
+klimafreundliche
+Klimafreundliche
+Endverbraucher
+Brennstoffe
+Kilowattstunde
+konto-karten
+pillar
+posts
+stat
+begründungslos
+>>>>>>> c8351179 (fix(engine): Cover-Commit-Skopus inkl. static/images/covers/ + Rest-Schnittstellen geheilt)

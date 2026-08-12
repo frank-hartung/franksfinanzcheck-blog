@@ -20,7 +20,11 @@ kurzantwort: "Du kannst jeden Monat etwa 10–20 € sparen, indem du kleine Ä
 social_posted: true
 ---
 
+<<<<<<< HEAD
 Wie viel Geld verlierst du jeden Monat durch unüberlegte Käufe? Oft summieren sich kleine Beträge zu riesigen Summen, die dir später für deine echte Freiheit fehlen. Eine Freundin von mir kaufte ständig teure Kleidung, nur um sie ungetragen im Schrank zu vergessen. Allein für Coffee-to-go und belegte Brötchen beim Bäcker gab sie monatlich über 120 € aus – das sind fast 1.500 € im Jahr, die einfach verpufften. Erst als sie ihre Ausgaben radikal hinterfragte, gewann sie ihre finanzielle Kontrolle zurück. Sie nutzt nun gezielt **Frugalismus-Tipps**, um ihre Sparquote massiv zu erhöhen. So gelingt es ihr, jeden Monat signifikant **[[Geld spare](../../posts/versicherungen-kuendigen-diese-5-policen/)n im Alltag](././posts/2026-08-07-frugalismus-fuer-den-erf/)** zu können.
+=======
+Wie viel Geld verlierst du jeden Monat durch unüberlegte Käufe? Oft summieren sich kleine Beträge zu riesigen Summen, die dir später für deine echte Freiheit fehlen. Eine Freundin von mir kaufte ständig teure Kleidung, nur um sie ungetragen im Schrank zu vergessen. Allein für Coffee-to-go und belegte Brötchen beim Bäcker gab sie monatlich über 120 € aus – das sind fast 1.500 € im Jahr, die einfach verpufften. Erst als sie ihre Ausgaben radikal hinterfragte, gewann sie ihre finanzielle Kontrolle zurück. Sie nutzt nun gezielt **Frugalismus-Tipps**, um ihre Sparquote massiv zu erhöhen. So gelingt es ihr, jeden Monat signifikant **[Geld sparen im Alltag](../../posts/frugalismus-tricks-alltag-200-euro-sparen/)** zu können.
+>>>>>>> c8351179 (fix(engine): Cover-Commit-Skopus inkl. static/images/covers/ + Rest-Schnittstellen geheilt)
 
 
 

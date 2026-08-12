@@ -3,3 +3,8 @@
 =======
 {"date": "2026-08-11", "artikel": 2, "alle_ok": true}
 >>>>>>> 8668b11f (fix(tabelle): ETF-Kinder-Tabelle verlagssauber + table_guard.py (T1-T4, Selbsttest))
+<<<<<<< HEAD
+=======
+{"date": "2026-08-12", "artikel": 1, "alle_ok": false}
+{"date": "2026-08-12", "artikel": 1, "alle_ok": true}
+>>>>>>> c8351179 (fix(engine): Cover-Commit-Skopus inkl. static/images/covers/ + Rest-Schnittstellen geheilt)
