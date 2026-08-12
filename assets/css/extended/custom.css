@@ -80,6 +80,18 @@ h1, h2, h3, h4, h5, h6,
     background: var(--ff-white);
 }
 
+/* Brand-Lockup (12.08. Runde 2, Frank): kanonisches SVG-Logo im Header.
+   Gebacken von scripts/bake_brand.py (Pfade aus Inter Bold — font-unabhaengig).
+   Sabotage-Schutz: brand_guard (SHA-256 in data/brand_lock.yaml) zieht bei
+   Abweichung automatisch das kanonische Original nach. */
+.ff-brand svg { height: 30px; width: auto; display: block; }
+.ff-brand .ff-wm { fill: var(--ff-emerald); }
+html[data-theme="dark"] .ff-brand .ff-wm { fill: #F3F7F5; }
+.ff-brand .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
 .logo a {
     font-weight: 700;
     color: var(--ff-emerald);

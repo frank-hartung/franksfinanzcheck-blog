@@ -359,6 +359,23 @@ jeder Schreibaktion.
   Geldanlage-Heimat), fluege→ehrlicher Homepage-Fallback (kein Flug-Deep am
   Tracker, TODO Dashboard). affiliate_health.py jetzt E2E mit Kategorie-Vertrag,
   Auto-Heilung auf sicheren Fallback und 17-Faelle-Selbsttest.
+- **12.08.2026 (6):** Marken-Relaunch Runde 2 (Frank: „Punkte stoeren, Marke nicht
+  sauber genug + Logo fuer ganzen Blog"). BEKENNENDE LEKTION: Mein Punktmuster
+  mit Alpha `fill=(255,255,255,18)` wurde von Pillow im RGB-Modus still
+  verworfen → Dots renderten KNALLWEISS statt dezent. Konsequenz: Punkte
+  KOMPLETT entfernt (nie wieder Alpha-Tricks auf RGB). NEU (Profi-Look):
+  Kategorie-Badge (Gold-Pille) oben, Titel ruhig zentriert, Markenband unten
+  mit goldenem Haeckchen-Signet + 68px-Wortmarke (weiss/gold). BLOG-LOGO:
+  Selbes Lockup wird site-weite Marke — `scripts/bake_brand.py` backt
+  logo.svg/logo-light.svg/favicon.svg/apple-touch-icon.png DETERMINISTISCH
+  aus Inter-Bold.ttf (Pfade via fonttools = fontlos), Header-Override
+  layouts/_partials/header.html (Rest 1:1 Theme), favicon.ico-Data-URI
+  ersetzt durch Markenhaken. SCHUTZ: brand_guard wacht jetzt ueber SHA-256
+  der 4 Artefakte + Lockup-Marker im Header (Lock data/brand_lock.yaml,
+  Selbstheilung via bake_brand — getestet mit Farbdreher- & Loesch-Angriff:
+  bytegleich zurueckgeheilt). C2-Wache in check_covers neu kalibriert
+  (Brand-Band 0.82–0.97H + Signet-Quadrant C2b). Integrity-Lock: 18→26 Dateien
+  (bake_brand, brand_guard, brand_lock, header.html, 4 Artefakte).
 - **11.08.2026 (3):** affiliate_marketer.py: Schnell-Tipp-Routing-Korrektur (Fehlrouten
   Depot→girokonto, Elementar→handytarife u.a. geheilt), universelles Retarget +
   17-Fälle-Selbsttest als Sabotage-Schutz (Exit 2 vor jeder Datei-Berührung).

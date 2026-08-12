@@ -1,9 +1,9 @@
 # 🔒 BRAND-REPORT (brand_guard.py)
 
-**Stand:** 2026-08-11 17:43 UTC · Modus: FIX
-**Lock:** 4 geschützte Einträge (`data/brand_lock.yaml`)
+**Stand:** 2026-08-12 13:42 UTC · Modus: REPORT
+**Lock:** 8 geschützte Einträge (`data/brand_lock.yaml`) · Marken-Assets: 4 unter SHA-256-Wache
 
-🎉 Alle geschützten Marken-Bausteine sind unverändert (Willkommenstext, Tagline, Meta-Description, Disclaimer).
+🎉 Alle geschützten Marken-Bausteine unverändert (Willkommenstext, Tagline, Meta-Description, Disclaimer) – Logo-Lockup & Artefakte bytegleich kanonisch.
 
 ---
-_Absichtlich ändern: hugo.toml editieren + `python3 scripts/brand_guard.py --set-current` → Lock übernimmt den neuen Stand._
+_Absichtlich ändern: hugo.toml editieren bzw. `bake_brand.py` anpassen + `python3 scripts/brand_guard.py --set-current` → Lock übernimmt den neuen Stand._

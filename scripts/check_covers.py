@@ -67,47 +67,76 @@ def normalize_dash_image(img):
 
 
 # ------------------------------------------------------------
-# C2: BRAND-GATE (12.08., Frank: Marke auf Covers strikt sichtbar)
-#  Brandwalk: Unter dem Chip muss der goldene `brand_check`-Balken
-#  stehen; er misst den goldenen Chip-Rahmen. Pixel-Energie vom Band
-#  selbst: jedes Cover beweist Branding mechanisch, nie blind.
+# C2: BRAND-GATE (12.08. Runde 2, Frank: Marke auf Covers strikt sichtbar)
+#  Signet-Band unten (80–100 % Hoehe): goldene Fuehrungslinie +
+#  goldenes Haeckchen + "check" in Gold. Brandwalk: Energie-Messung
+#  goldener Pixel im Brand-Band — jedes Cover beweist Branding
+#  mechanisch, nie blind. Selbstheilung: generate_covers --slug --force.
 # ------------------------------------------------------------
-BRAND_PROBE_RATIO_MIN = 0.002    # ≥ 0,2 % goldene Pixel im Band
+BRAND_PROBE_RATIO_MIN = 0.004    # ≥ 0,4 % goldene Pixel im Brand-Band
+
+# C2b: Signet-Praesenz links im Band (das goldene Haeckchen-Bildzeichen).
+SIGNET_PROBE_RATIO_MIN = 0.002   # ≥ 0,2 % gold im Signet-Quadrant
 
 
 def brand_strength(image_path):
-    """Energie der Brandzone: viele goldene Pixel im Band → True."""
+    """Energie der Brandzone: viele goldene Pixel im Band → Ratio. None bei Fehler."""
     try:
         from PIL import Image
         img = Image.open(image_path).convert("RGB")
         W, H = img.size
     except Exception:
         return None
-    # Band: Chip-Laenge * Mittelweg-Bereich (Bottom ~H-210..H-130)
-    y0, y1 = int(H * 0.855), int(H * 0.915)
-    x0, x1 = int(W * 0.20), int(W * 0.80)
+    # Brand-Band (12.08. Runde 2): y 80–97 % H, x 10–90 % W
+    y0, y1 = int(H * 0.82), int(H * 0.97)
+    x0, x1 = int(W * 0.10), int(W * 0.90)
     px = img.load()
     gold = total = 0
     for y in range(y0, y1):
         for x in range(x0, x1):
             r, g, b = px[x, y]
             total += 1
-            if r > 180 and 110 < g < 210 and b < 90:   # gold-Rahmen
+            if r > 180 and 110 < g < 210 and b < 90:   # Gold (Linie/Haeckchen/"check")
+                gold += 1
+    return gold / max(1, total)
+
+
+def signet_strength(image_path):
+    """C2b: Goldenes Haeckchen-Signet im linken Band-Quadranten vorhanden?"""
+    try:
+        from PIL import Image
+        img = Image.open(image_path).convert("RGB")
+        W, H = img.size
+    except Exception:
+        return None
+    # Signet-Bereich: links des Wortmarke-Blocks (x 12–26 % W), Mitte des Bands
+    y0, y1 = int(H * 0.855), int(H * 0.93)
+    x0, x1 = int(W * 0.12), int(W * 0.26)
+    px = img.load()
+    gold = total = 0
+    for y in range(y0, y1):
+        for x in range(x0, x1):
+            r, g, b = px[x, y]
+            total += 1
+            if r > 180 and 110 < g < 210 and b < 90:
                 gold += 1
     return gold / max(1, total)
 
 
 def check_brand(covers):
-    """C2 (12.08.): Cover ohne messbaren Brand-Chip → melden (heilbar via Regen)."""
+    """C2+C2b (12.08. R2): Brand-Band + Signet muessen messbar vorhanden sein."""
     out = []
     for it in covers:
         base = os.path.basename(it["image"])
         p = os.path.join(STATIC_DIR, base)
         s = brand_strength(p) if os.path.exists(p) else None
+        g = signet_strength(p) if os.path.exists(p) else None
         if s is None:
             out.append((it, "unlesbar/fehlt"))
         elif s < BRAND_PROBE_RATIO_MIN:
             out.append((it, f"Brandzone {s:.4f} < {BRAND_PROBE_RATIO_MIN}"))
+        elif g is None or g < SIGNET_PROBE_RATIO_MIN:
+            out.append((it, f"Signet {g if g is not None else 'unlesbar'} < {SIGNET_PROBE_RATIO_MIN}"))
     return out
 
 

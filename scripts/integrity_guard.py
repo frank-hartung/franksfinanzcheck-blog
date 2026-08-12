@@ -74,6 +74,15 @@ FEST = {
     # Marken-Design-Bewohner (Frank 12.08. ihr Markendesign dauerhaft bewachen):
     "scripts/generate_covers.py",
     "scripts/check_covers.py",
+    # Marken-Lockup & Artefakte (12.08. Runde 2: Logo = Blog-weite Marke):
+    "scripts/bake_brand.py",
+    "scripts/brand_guard.py",
+    "data/brand_lock.yaml",
+    "layouts/_partials/header.html",
+    "static/images/brand/logo.svg",
+    "static/images/brand/logo-light.svg",
+    "static/favicon.svg",
+    "static/apple-touch-icon.png",
 }
 
 

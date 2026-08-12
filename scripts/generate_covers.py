@@ -226,30 +226,49 @@ def make_cover(title, slug, out_path, force=False):
 
     d = ImageDraw.Draw(img)
 
-    # Dezentes Punktmuster nur oben (Frank 12.08.: unter dem Brand-Band stoerte es,
-    # also unten nur das saubere Band, oben dezente Dots, Ruhe-Stil).
-    for i in range(0, W, 40):
-        for j in range(80, 220, 40):
-            d.ellipse([i, j, i + 6, j + 6], fill=(255, 255, 255, 18))
+    # KEIN Punktmuster mehr (Frank 12.08., Runde 2: Punkte stoeren → raus).
+    # Lektion: alpha=(255,255,255,18) wurde im RGB-Modus still verworfen und
+    # renderte die Dots KNALLWEISS statt dezent. Konsequent FLAECHENFREI.
+    #
+    # Profi-Hierarchie (Pinterest-Look): Kategorie-Badge oben (semantisch
+    # statt dekorativ) → Titel Mitte → Marke unten im Signet-Band.
+    badge_font = load_font(26)
+    badge_txt = "GELD SPAREN & FRUGALISMUS"
+    btw = d.textlength(badge_txt, font=badge_font)
+    bth = badge_font.size
+    pad_x, pad_y = 30, 13
+    bw_box, bh_box = btw + 2 * pad_x, bth + 2 * pad_y
+    bx0 = (W - bw_box) / 2
+    badge_y = 150
+    d.rounded_rectangle([bx0, badge_y, bx0 + bw_box, badge_y + bh_box],
+                        radius=bh_box / 2, outline=GOLD, width=3)
+    d.text((bx0 + pad_x, badge_y + pad_y - 4), badge_txt, font=badge_font, fill=GOLD)
 
-    # Gelber Akzentbalken oben
-    d.rounded_rectangle([120, 120, 180, 132], radius=6, fill=GOLD)
+    # Brand-Zone unten: tiefes, fast schwarzes Emerald-Band + klare
+    # Wortmarke mit goldenem Haeckchen-Signet (FinanzCHECK!).
+    band_y0 = H - 300
+    d.rectangle([0, band_y0, W, H], fill=(7, 46, 34))            # sehr tiefes Gruen
+    d.line([(0, band_y0), (W, band_y0)], fill=GOLD, width=6)     # kraeftige Gold-Fuehrung
 
-    # Marken-Band unten (sauber, foerst das Prinzip Pin-Symmetrie):
-    band_y0, band_y1 = H - 235, H - 55
-    d.rectangle([0, band_y0, W, band_y1], fill=(10, 58, 42))       # tieferes Emerald
-    d.line([(0, band_y0), (W, band_y0)], fill=GOLD, width=4)       # goldene Fuehrungslinie
-    # Brand-Text im Band (Frank-Chip: weiss + goldener Abschluss)
-    brand_font = load_font(46)
-    brand = "FranksFinanzcheck"
-    bw = d.textlength(brand, font=brand_font)
-    bx = (W - bw) / 2
-    text_y = band_y0 + (band_y1 - band_y0 - brand_font.size) // 2 - 6
-    d.text((bx, text_y), brand, font=brand_font, fill=WHITE)
-    d.text((bx + d.textlength("FranksFinanz", font=brand_font), text_y), "check",
-           font=brand_font, fill=GOLD)
-    # Mini-Akzent (kleine gelbe Platte auf dem Band rechts) — kein Raster mehr
-    d.rounded_rectangle([W - 90, band_y0 + 22, W - 46, band_y0 + 34], radius=6, fill=GOLD)
+    brand_font = load_font(68)
+    part1, part2 = "FranksFinanz", "check"
+    w1 = d.textlength(part1, font=brand_font)
+    w2 = d.textlength(part2, font=brand_font)
+    sign = 56                       # Hoehe des Haeckchen-Signets
+    gap = 28
+    total_w = sign + gap + w1 + w2
+    x0 = (W - total_w) / 2
+    cy = band_y0 + (H - band_y0) // 2 + 8
+    # Goldenes Haeckchen mit rundem Gelenk (joint="curve") als Logo-Zeichen
+    hx, hy = x0, cy - sign // 2
+    d.line([(hx + 4, hy + sign * 0.54),
+            (hx + sign * 0.42, hy + sign - 5),
+            (hx + sign, hy + 2)],
+           fill=GOLD, width=12, joint="curve")
+    # Wortmarke, vertikal auf das Haeckchen zentriert
+    ty = cy - brand_font.size * 0.66
+    d.text((x0 + sign + gap, ty), part1, font=brand_font, fill=WHITE)
+    d.text((x0 + sign + gap + w1, ty), part2, font=brand_font, fill=GOLD)
 
     # Titel (zentriert, automatischer Umbruch, Skalierung)
     title_font = load_font(78)
@@ -277,17 +296,13 @@ def make_cover(title, slug, out_path, force=False):
 
     line_h = int(title_font.size * 1.25)
     total_h = len(lines) * line_h
-    y_start = (H // 2) - (total_h // 2) - 60
+    # Titel optisch zentriert im Raum zwischen Badge (endet ~y=202) und Band:
+    zone_top, zone_bottom = 202, band_y0
+    y_start = (zone_top + zone_bottom) // 2 - total_h // 2 - 20
     for i, line in enumerate(lines):
         lw = d.textlength(line, font=title_font)
         x = (W - lw) / 2
         d.text((x, y_start + i * line_h), line, font=title_font, fill=WHITE)
-
-    # Untertitel-Zeile: "Geld sparen & Frugalismus"
-    sub_font = load_font(34)
-    sub = "GELD SPAREN & FRUGALISMUS"
-    sw = d.textlength(sub, font=sub_font)
-    d.text(((W - sw) / 2, y_start + total_h + 50), sub, font=sub_font, fill=CREAM)
 
     img.save(out_path, "JPEG", quality=88)
     print(f"  ✓ Cover: {os.path.basename(out_path)}")

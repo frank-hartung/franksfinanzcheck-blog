@@ -1,6 +1,7 @@
 # 🔒 BRAND-LOCK – geschützte Marken-Bausteine (Single Source of Truth)
 # Geändert/ausgeweitet wird NUR über: python3 scripts/brand_guard.py --set-current
 # (Autowiederherstellung bei Abweichung: siehe scripts/brand_guard.py)
+# Sektion asset:<pfad> = SHA-256 der kanonischen Marken-Artefakte (bake_brand.py)
 
 - key: homeInfoParams.Title
   expected: "Willkommen bei FranksFinanzcheck! 👋"
@@ -10,3 +11,11 @@
   expected: "Geld sparen & Frugalismus: Praxistipps zu Budgetplanung, Strom- & Gastarifen, DSL, Versicherungen und Reisen – so sparst du monatlich bares Geld."
 - key: params.disclaimer
   expected: "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
+- key: asset:static/images/brand/logo.svg
+  expected: "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
+- key: asset:static/images/brand/logo-light.svg
+  expected: "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4"
+- key: asset:static/favicon.svg
+  expected: "7cb1626650f3b20a856e792668c914bba8424c060b6c6f0b7c6e04fdfb0fb6d5"
+- key: asset:static/apple-touch-icon.png
+  expected: "3c2d0bd63fb48baa1e9a47cfb2494d64b5c136be4ed9e621973ad2a54fac4332"
