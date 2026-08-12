@@ -62,6 +62,8 @@ KETTE = [
     ("lektor_guard.py",       ["--fix"],                "A-Text", "Verlags-Lektorat L1-L15"),
     ("hardcases_guard.py",    ["--fix"],                "A-Text", "Deutsche Fest-Fehler H1-H9 (12.08. hinzu)"),
     ("stil_guard.py",         ["--fix"],                "A-Text", "Stil-Qualitaet S1-S8 (12.08. hinzu)"),
+    ("plagiat_guard.py",      ["--fix"],                "B-Semantik", "Originalitaet P1-P5 + Fingerprint-Registry (12.08.)"),
+    ("content_audit.py",      ["--fix"],                "B-Semantik", "Content-Auditor C1-C6: Duenn, Struktur, Platzhalter (12.08.)"),
     ("compound_guard.py",     ["--fix"],                "B-Semantik", "Komposita SEO-Falle"),
     ("math_guard.py",         ["--fix"],                "B-Semantik", "Zahlenbeweis M1-M2"),
     ("affiliate_shield.py",   ["--fix"],                "C-Money", "Auto-Deep + Gateways"),

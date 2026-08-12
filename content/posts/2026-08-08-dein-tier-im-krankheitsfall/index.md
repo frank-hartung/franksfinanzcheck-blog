@@ -24,6 +24,7 @@ social_posted: true
 
 
 
+
 ## Was ist eine Tierversicherung?
 Dieser Schutz erstattet dir hohe Kosten für tierärztliche Behandlungen. Die Versicherung zahlt meist für Operationen, teure Medikamente und aufwendige Diagnosen. Je nach Tierart wählst du eine Hundeversicherung oder eine Katzenversicherung. Damit verhinderst du schmerzhafte Einmalzahlungen aus deinem Ersparten.
 

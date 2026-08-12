@@ -88,6 +88,9 @@ FEST = {
     "scripts/link_density_guard.py",
     "scripts/stil_guard.py",
     "scripts/hardcases_guard.py",
+    "scripts/plagiat_guard.py",
+    "scripts/content_audit.py",
+    "data/content_fingerprints.jsonl",
     # Pillar-Templates (12.08.: Relative-Link-Falle entfernt):
     "layouts/pillar/single.html",
     "layouts/_partials/pillar_box.html",

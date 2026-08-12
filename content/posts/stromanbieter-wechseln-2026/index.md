@@ -22,6 +22,7 @@ social_posted: true
 
 
 
+
 Du willst deinen Strompreis senken? Durchschnittlich kannst du 200–300 € pro Jahr sparen, wenn du deinen Stromanbieter wechselst. Wer den Strom wechseln möchte, spart im Schnitt mehrere hundert [Euro pro](../../posts/urlaub-mit-kindern-guenstig-spartricks/) Jahr – Die meisten sitzen jahrelang im teuren Grundtarif ihres lokalen Versorgers, obwohl ein Wechsel nur wenige Minuten dauert.
 
 
