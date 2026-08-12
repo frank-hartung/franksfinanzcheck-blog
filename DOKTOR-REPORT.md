@@ -1,14 +1,11 @@
 # 🩺 DOKTOR-REPORT (Oberarzt, Gesamtprognose)
 
-<<<<<<< HEAD
-**Stand:** 2026-08-12 10:13 UTC · Modus: VISIT
-=======
-**Stand:** 2026-08-12 10:44 UTC · Modus: VISIT
->>>>>>> c8351179 (fix(engine): Cover-Commit-Skopus inkl. static/images/covers/ + Rest-Schnittstellen geheilt)
-**Wachen behandelt:** 12 · **0-Exit:** 11 · Funde: 1 · Sabotage-Fehler: 0
+**Stand:** 2026-08-12 11:40 UTC · Modus: VISIT
+**Wachen behandelt:** 13 · **0-Exit:** 11 · Funde: 2 · Sabotage-Fehler: 0
 
 | Wache (Phase) | Zweck | Exit |
 |---|---|---|
+| `integrity_guard.py` (0-LOCK) | Kern-Integritaet (Signatruehe nach Drift) | 1 |
 | `casing_guard.py` (A-Text) | Akronyme/Marken (DSL, Check24) | 0 |
 | `dash_guard.py` (A-Text) | Dash-Typografie R1-R9 | 0 |
 | `unit_guard.py` (A-Text) | Euro/Prozent/NBSP | 0 |
@@ -23,6 +20,7 @@
 | `workspace_guard.py` (D-Ordnung) | Junk/Waisen/Rotation/Billig | 1 |
 
 ## 🟡 Funde (nicht-fatal, dokumentiert)
+- `integrity_guard.py`: Kern-Integritaet (Signatruehe nach Drift)
 - `workspace_guard.py`: Junk/Waisen/Rotation/Billig
 
 ---

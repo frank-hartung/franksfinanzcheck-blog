@@ -75,14 +75,12 @@ So setzt du den [ETF-Sparplan für dein Kind](../../posts/2026-08-05-etf-sparpla
 **Schritt 4 – Sparplan einrichten (10 Minuten):** Betrag festlegen (ab 10 bis 25 € möglich), Ausführungstag wählen (zum Beispiel der 1. des Monats) und den Dauerauftrag auf das Verrechnungskonto einrichten. Das Schöne: Der Sparplan läuft automatisch – du musst nichts mehr tun.
 
 **Schritt 5 – Freistellungsauftrag für das Kind einrichten (5 Minuten):** Beim Broker den Sparerpauschbetrag des Kindes (1.000 €) hinterlegen. Damit bleiben die ersten 1.000 € Gewinn pro Jahr steuerfrei – der größte Steuervorteil des Kinderdepots.
-<<<<<<< HEAD
-=======
 
 
 
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/tagesgeld/)
 
->>>>>>> 4c9b3115 (feat(affiliate+integrity): AM7 Mid-CTA (C24-compliant), Integritaets-Lock, Deploy-Marker-Wache)
+
 
 ## Steuern & Freibeträge:<br>Der unterschätzte Vorteil
 
@@ -126,7 +124,7 @@ Ja – Wertpapiere sind Sondervermögen: Selbst bei einer Broker-Insolvenz gehö
 **Können auch Großeltern einzahlen?**
 Ja, und das ist sogar steuerlich clever: Schenkungen an Enkel sind bis 200.000 € pro Person und 10 Jahre steuerfrei. Die Einzahlung läuft einfach per Überweisung auf das Verrechnungskonto des Kinderdepots.
 
-Der [ETF-Sparplan für](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatl/) Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die Steuern auf ETF-Gewinne erklären, wie du den Pauschbetrag optimal ausschöpfst. Alle Bank[ing-Themen: [Ratg](../../posts/kontowechsel-in-20-minuten-wechselserv/)Eber Konto & Karten](././pillar/konto-karten/).
+Der [ETF-Sparplan für](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die Steuern auf ETF-Gewinne erklären, wie du den Pauschbetrag optimal ausschöpfst. Alle Bank[ing-Themen: [Ratg](../../posts/kontowechsel-in-20-minuten-wechselservice/)Eber Konto & Karten](././pillar/konto-karten/).
 
 
 👉 **Jetzt kostenloses Konto mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/girokonto/)

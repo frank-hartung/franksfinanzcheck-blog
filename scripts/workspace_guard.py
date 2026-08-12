@@ -182,11 +182,14 @@ MARKER_END = re.compile(r"^>>>>>>>[^\n]*$", re.M)
 
 
 def sweep_markers(do_fix: bool) -> list:
-    """Scannen von content/ nach Merge-Marker-Resten; --fix macht sie
-    Weg (gewinnt: die Seite mit mehr Material – weil inkompakte Statoefe
-    Dopplungs). Liefert Liste getroffener Dateien."""
+    """Scannt bei (12.08. Bisschen mehr): content/, scripts/*.py, Root-*.md
+    (denn Markierungen haben uns schon Skripte + Reports beschmutzt; das
+    auf Materie herabkam baute den Build einmal kaputt)"""
     betroffen = []
-    for f in list((ROOT / "content").rglob("*.md")):
+    pfade = list((ROOT / "content").rglob("*.md")) \
+          + list((ROOT / "scripts").glob("*.py")) \
+          + list(ROOT.glob("*.md"))
+    for f in pfade:
         t = f.read_text(encoding="utf-8")
         if not (MARKER_START.search(t) and MARKER_END.search(t)):
             continue

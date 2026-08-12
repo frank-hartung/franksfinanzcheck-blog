@@ -231,8 +231,6 @@ jeder Schreibaktion.
   Fall-kontrolliert) – Pflege nur in L14_KANON (lektor_guard.py). Neu
   geborene Faelle meldet das Compound-Radar, Aufnahme hier durch
   Redaktion. Selbsttest nun 16 Faelle.
-<<<<<<< HEAD
-=======
 - **12.08.2026 (4):** Profi-Affiliate-Rundgang abgeschlossen (Frank):
       AM7 Mid-CTA eingefuehrt (In-Text-CTA nach Wort-Mitte, C24-rule inklusive),
       integrity_guard.py als SHA-256-Siegelschloss ueber 16 Kerndateien
@@ -255,7 +253,7 @@ jeder Schreibaktion.
   (0 = sauber, 1 = Fund erlaubt, 2 = Stoppsirene). Ausserdem eigene
   Selbsttest-Phase (7 Faelle) mit Exit 2 vor JEDER Visite. Verankerung:
   eigene Wochenvisite Mi 08:45 MESZ + letzter Beweis in der Engine-Geburt.
->>>>>>> e8fedcfc (feat(doktor): blog_doctor.py - Oberarzt mit Selbstheilung ueber ALLE Automatik)
+
 - **12.08.2026 (1):** Mittwochs-Domino vorab eingefangen & verhindert:
   spellcheck hard-exitete (141 unbekannte Funde – u.a. der eigene Markenname!)
   und riss die gesamte seo-weekly-Kette (Stufen dahinter kamen nie).

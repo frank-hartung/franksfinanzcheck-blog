@@ -50,12 +50,10 @@ NEW_ONLY = "--new-only" in sys.argv
 #   Phase D: Visuell/Persistenz (Datei, Waechter, Geschichte)
 # ------------------------------------------------------------
 KETTE = [
-<<<<<<< HEAD
-=======
     # INTEGRITY ZUERST: bevor irgendwas geschrieben wird, muss der
     # Wellness-Schluss (Frank 12.08. Sabotage-Hoechstlevel) stimmen.
     ("integrity_guard.py",    [],                          "0-LOCK", "Kern-Integritaet (Signatruehe nach Drift)"),
->>>>>>> 4c9b3115 (feat(affiliate+integrity): AM7 Mid-CTA (C24-compliant), Integritaets-Lock, Deploy-Marker-Wache)
+
     # (skript, basis-args, phase, zweck)
     ("casing_guard.py",       ["--fix"],                "A-Text", "Akronyme/Marken (DSL, Check24)"),
     ("dash_guard.py",         ["--fix"],                "A-Text", "Dash-Typografie R1-R9"),
@@ -125,11 +123,8 @@ def main() -> None:
     hard_stop = False
     for script, args, phase, zweck in KETTE:
         rc, tail = run_guard(script, args, phase, DRY)
-<<<<<<< HEAD
-        stop = (rc == 2)
-=======
         stop = (rc >= 2)   # 2 = Sabotage; 3 = Integritaet gebrochen
->>>>>>> 4c9b3115 (feat(affiliate+integrity): AM7 Mid-CTA (C24-compliant), Integritaets-Lock, Deploy-Marker-Wache)
+
         ergebnisse.append({"wache": script, "phase": phase, "zweck": zweck, "exit": rc, "halt": stop})
         print(f"  {'🛑' if stop else '🟢' if rc == 0 else '🟡'} [{phase}] {script}: exit {rc}")
         if stop:

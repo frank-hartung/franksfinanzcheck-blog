@@ -102,7 +102,7 @@ Was nach wenig klingt, summiert sich: Da eine moderne Nachrichtenseite wie "Spie
 
 Dein DNS-Server protokolliert theoretisch jede Webseite, die du besuchst. Viele Internetanbieter speichern diese Protokolle über längere Zeiträume und nutzen sie teilweise für Marketingzwecke oder müssen sie auf behördliche Anfrage herausgeben. 
 
-Private Anbieter wie Cloudflare oder Quad9 haben strengere Richtlinien. Cloudflare lässt sich jährlich von unabhängigen Wirtschaftsprüfern zertifizieren, um zu belegen, dass IP-Adressen der Nutzer nach 24 Stunden gelöscht werden. So kannst du dein **[Internet schneller machen](../../posts/2026-08-06-turbo-fuers-n/)** und gleichzeitig deutlich diskreter im Netz unterwegs sein. Wer noch einen Schritt weiter gehen möchte, nutzt "DNS over HTTPS" (DoH), was die DNS-Anfragen zusätzlich verschlüsselt, sodass selbst dein Provider nicht mehr sieht, welche Domains du aufrufst.
+Private Anbieter wie Cloudflare oder Quad9 haben strengere Richtlinien. Cloudflare lässt sich jährlich von unabhängigen Wirtschaftsprüfern zertifizieren, um zu belegen, dass IP-Adressen der Nutzer nach 24 Stunden gelöscht werden. So kannst du dein **[Internet schneller machen](../../posts/2026-08-06-turbo-fuers-netz/)** und gleichzeitig deutlich diskreter im Netz unterwegs sein. Wer noch einen Schritt weiter gehen möchte, nutzt "DNS over HTTPS" (DoH), was die DNS-Anfragen zusätzlich verschlüsselt, sodass selbst dein Provider nicht mehr sieht, welche Domains du aufrufst.
 
 
 ## Vor- und Nachteile auf einen Blick

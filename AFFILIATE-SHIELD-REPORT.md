@@ -1,5 +1,5 @@
 # 🛡️ AFFILIATE-SHIELD-REPORT
-**Stand:** 2026-08-12 10:13 UTC · Modus: FIX
+**Stand:** 2026-08-12 11:40 UTC · Modus: FIX
 **Register:** 19 Themen-Links (`scripts/check24_links.yaml`) · **Weiterleitungen:** /go/ (19 neu generiert)
 **Artikel angefasst:** 1 · **Links geroutet:** 1
 ## ⚠️ Funde (manuell ins Register aufnehmen)
