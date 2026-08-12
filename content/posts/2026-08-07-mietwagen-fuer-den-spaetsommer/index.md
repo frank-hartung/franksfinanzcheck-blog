@@ -92,6 +92,9 @@ Einige Dinge, die du vor deiner Abfahrt überprüfen solltest:
 * **Notfall-Set**: Ist ein Verbandskasten, ein Warndreieck und die passende Anzahl an Warnwesten an Bord? In vielen Ländern ist das Mitführen von Westen für jeden Insassen Pflicht.
 * **Route**: Programmiere das erste Ziel bereits im WLAN der Mietstation ein, um entspannt loszufahren.
 
+
+
+**Weiterlesen:** [Ratgeber Mietwagen & Reisen](../../pillar/mietwagen/)
 ## Häufige Fragen
 ### Wie kann ich einen günstigen Mietwagen finden?
 Nutze Online-Vergleiche und buche außerhalb der Ferienzeiten. Oft sinken die Preise kurz nach dem Ende der Sommerferien massiv. Auch die Wahl einer Station abseits des Flughafens (z. B. Bahnhof oder Stadtbüro) spart oft die "Airport-Fee", die bis zu 20 % ausmachen kann.

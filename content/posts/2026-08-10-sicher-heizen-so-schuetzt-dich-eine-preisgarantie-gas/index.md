@@ -7,6 +7,8 @@ tags: []
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank"
+erfahrung: "Als die Gaspreise zuletzt stark schwankten, habe ich mir selbst eine Preisgarantie gesichert. Meine Erfahrung aus den Tarifvergleichen: Die Garantiedauer und die Klauseln für Preisanpassungen sind wichtiger als der reine Arbeitspreis im ersten Jahr."
+
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "relaxed"

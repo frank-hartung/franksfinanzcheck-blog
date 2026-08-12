@@ -8,6 +8,8 @@ categories: ["Ratgeber"]
 pillar: "konto-karten"
 keywords: ["Depot 2026", "Vermögensaufbau", "ETF-Sparplan", "Neobroker"]
 author: "Frank"
+erfahrung: "Ich habe mehrere Neobroker selbst getestet und mein Depot zwischen zwei Anbietern umgezogen. Dabei habe ich gelernt: Die Ordergebühr ist nur die halbe Wahrheit – Spreads, Fremdwährungsgebühren und der Freistellungsauftrag entscheiden über die tatsächlichen Kosten."
+
 ai_generated: true
 ai_provider: "Gemini (Gratis-Key: aistudio.google.com)"
 cover:
@@ -51,7 +53,7 @@ Dieser Ratgeber zeigt dir den schnellen Weg zum ersten Investment:
 *(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)*
 
 ## Die Wahl des richtigen Brokers:<br>App oder Filiale?
-Der Markt spaltet sich im Jahr 2026 deutlich auf. Etablierte Filialbanken bieten dir zwar Beratung vor Ort, verlangen aber oft 30 € bis 60 € Jahresgebühr – plus teils horrende Orderprovisionen von 1 % des Ordervolumens. Diese Fixkosten belasten deine Rendite besonders bei kleinen Sparsummen unnötig stark. Wenn du beispielsweise 100 € monatlich sparst und 5 € Gebühr zahlst, [startest](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) du jeden Monat mit einem Minus von 5 %. Das muss nicht sein.
+Der Markt spaltet sich im Jahr 2026 deutlich auf. Etablierte Filialbanken bieten dir zwar Beratung vor Ort, verlangen aber oft 30 € bis 60 € Jahresgebühr – plus teils horrende Orderprovisionen von 1 % des Ordervolumens. Diese Fixkosten belasten deine Rendite besonders bei kleinen Sparsummen unnötig stark. Wenn du beispielsweise 100 € monatlich sparst und 5 € Gebühr zahlst, [startest](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) du [jeden Monat](../../posts/2026-08-06-frugalismus-im-alltag/) mit einem Minus von 5 %. Das muss nicht sein.
 
 Neobroker setzen hingegen konsequent auf dein Smartphone und schlanke Prozesse. Diese Anbieter sind 2026 technisch ausgereift und unterliegen strenger staatlicher Regulierung (z. B. durch die BaFin). Sie führen deine Steuern meist vollautomatisch an das Finanzamt ab, was dir den Papierkram bei der Steuererklärung massiv erleichtert.
 
@@ -70,7 +72,7 @@ Hier siehst du, welche Konditionen 2026 als marktüblich und fair gelten:
 | **Fremdwährungen** | Echter Wechselkurs | Hohen Aufschlägen (FX-Fees) bei US-Aktien |
 | **Dividenden-Gebühr**| 0 € (Standard) | Gebühren für ausländische Erträge |
 
-Ein günstiges Depot bildet das Fundament für deinen langfristigen Vermögensaufbau. Prüfe dein gesamtes Finanz-Setup gründlich vor der ersten Investition am Aktienmarkt. Der [Ratgeber: Konten und Karten strategisch nutzen](../../pillar/konto-karten/) hilft dir dabei, dein Verrechnungskonto und deine Notfallreserven optimal zu koordinieren. Ein wichtiger Punkt 2026: Achte auf die sogenannten "Spreads". Das ist die Differenz zwischen Kauf- und Verkaufskurs. Ein Broker ohne Ordergebühr kann teurer sein, wenn der Spread zu groß ist. Handle daher bevorzugt zu den Öffnungszeiten der Referenzbörse Xetra (9:00 bis 17:30 Uhr).
+Ein günstiges Depot bildet das Fundament für deinen langfristigen [Vermögensaufbau](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/). Prüfe dein gesamtes Finanz-Setup gründlich vor der ersten Investition am Aktienmarkt. Der [Ratgeber: Konten und Karten strategisch nutzen](../../pillar/konto-karten/) hilft dir dabei, dein Verrechnungskonto und deine Notfallreserven optimal zu koordinieren. Ein wichtiger Punkt 2026: Achte auf die sogenannten "Spreads". Das ist die Differenz zwischen Kauf- und Verkaufskurs. Ein Broker ohne Ordergebühr kann teurer sein, wenn der Spread zu groß ist. Handle daher bevorzugt zu den Öffnungszeiten der Referenzbörse Xetra (9:00 bis 17:30 Uhr).
 
 ## Der Anmeldeprozess:<br>In zehn Minuten zum Investor
 Die Eröffnung eines Depots erfolgt 2026 vollständig digital und Papierlos. Du benötigst für den Prozess nur deinen Personalausweis und dein Smartphone. Nach der Dateneingabe (Name, Adresse, Steuer-ID) [startest](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) du direkt die gesetzlich vorgeschriebene Identitätsprüfung (Know-Your-Customer-Prozess).

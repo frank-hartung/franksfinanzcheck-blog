@@ -190,6 +190,21 @@ python3 scripts/pinterest_check.py          # nur prüfen
 python3 scripts/pinterest_check.py --fix    # selbstheilend
 ```
 
+## 9. Affiliate-Profi-Level (12.08.2026)
+
+**Affiliate-Profi-Check** (scripts/affiliate_profi_check.py, in seo-weekly.yml):
+- A1 Offenlegung sichtbar · A2 erfahrung/E-E-A-T je Artikel · A3 interne Links ≥ 2
+- A4 Schema (Article/FAQPage/BreadcrumbList) · A5 Affiliate-Dichte ≤ 5
+- A6 Trust-Box · A7 Autor „Frank" konsistent · A8 CTA je Artikel
+- Selbsttest vor Fix-Aktionen (Sabotage-Schutz) · AFFILIATE-REPORT.md · Audit-Log
+
+**FAQPage-Schema-Fix (12.08.):** plainify wandelte „### Frage" in <h3> um und
+zerstörte den Split – Schema fehlte trotz FAQ-Sektion. Jetzt auf RawContent
+gesplittet, Antwort plainified → FAQPage auf allen Artikeln (Featured Snippets).
+
+**E-E-A-T-Bestand (12.08.):** alle 18 Artikel haben erfahrung-Box, alle haben
+≥ 2 interne Links, Autor einheitlich „Frank" (Redaktion → Frank).
+
 ---
 
 *Diese Datei ist die maßgebliche Referenz. Änderungen an der Infrastruktur

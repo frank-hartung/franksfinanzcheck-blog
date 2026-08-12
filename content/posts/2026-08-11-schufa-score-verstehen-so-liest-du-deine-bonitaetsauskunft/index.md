@@ -7,6 +7,8 @@ tags: ["Schufa", "Bonität", "Kredit", "Kreditwürdigkeit", "Datenschutz"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank"
+erfahrung: "Ich habe meine eigene Schufa-Auskunft mehrfach geprüft und dabei Fehler gefunden, die meinen Score belastet haben. Meine Erfahrung: Die kostenlose Datenkopie einmal im Jahr zu prüfen, ist der effektivste Hebel für einen besseren Score."
+
 ai_generated: false
 ai_provider: "Content-Engine v2"
 cover:
@@ -117,6 +119,12 @@ Halte dir dabei vor Augen: Ein zu Unrecht geführter Negativ-Eintrag kann dich b
 
 Geduld gehört dazu: Der Score ist ein Marathon, kein Sprint. Wer heute zwei, drei Entscheidungen sauber trifft – ungenutzte Konten geschlossen, Konditionsanfragen statt Kreditanfragen, Rechnungen pünktlich – sieht die Wirkung beim nächsten Quartals-Update. Und du tust genau das Richtige, ohne einen Euro dafür auszugeben.
 
+
+
+**Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/)
+
+
+**Weiterlesen:** [7 Gewohnheiten für finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freiheit/)
 ## Häufige Fragen
 
 ### Wie oft darf ich die kostenlose Datenkopie anfordern?

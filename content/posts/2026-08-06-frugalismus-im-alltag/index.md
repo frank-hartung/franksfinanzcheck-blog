@@ -31,7 +31,7 @@ social_posted: true
 
 
 
-Wie viel Geld verlierst du jeden Monat durch unüberlegte Käufe? Oft summieren sich kleine Beträge zu riesigen Summen, die dir später für deine echte Freiheit fehlen. Eine Freundin von mir kaufte ständig teure Kleidung, nur um sie ungetragen im Schrank zu vergessen. Allein für Coffee-to-go und belegte Brötchen beim Bäcker gab sie monatlich über 120 € aus – das sind fast 1.500 € im Jahr, die einfach verpufften. Erst als sie ihre Ausgaben radikal hinterfragte, gewann sie ihre finanzielle Kontrolle zurück. Sie nutzt nun gezielt **[Frugalismus](../../posts/7-gewohnheiten-finanzielle-freiheit/)-Tipps**, um ihre Sparquote massiv zu erhöhen. So gelingt es ihr, jeden Monat signifikant **Geld im Alltag zu sparen** – mit Frugalismus-Tricks gelingt das dauerhaft.
+Wie viel Geld verlierst du jeden Monat durch unüberlegte Käufe? Oft summieren sich kleine Beträge zu riesigen Summen, die dir später für deine echte Freiheit fehlen. Eine Freundin von mir kaufte ständig teure Kleidung, nur um sie ungetragen im Schrank zu vergessen. Allein für Coffee-to-go und belegte Brötchen beim Bäcker gab sie monatlich über 120 € aus – das sind fast 1.500 € im Jahr, die einfach verpufften. Erst als sie ihre Ausgaben radikal hinterfragte, gewann sie ihre finanzielle Kontrolle zurück. Sie nutzt nun gezielt **[Frugalismus](../../posts/7-gewohnheiten-finanzielle-freiheit/)-Tipps**, um ihre Sparquote massiv zu erhöhen. So gelingt es ihr, jeden Monat signifikant **Geld im Alltag zu sparen** – mit [Frugalismus](../../posts/7-gewohnheiten-finanzielle-freiheit/)-Tricks gelingt das dauerhaft.
 
 
 
@@ -59,7 +59,7 @@ Frugalismus schützt dich vor Verschwendung und schafft finanzielle Sicherheit. 
 Stell dir vor, du sparst durch frugale Gewohnheiten monatlich 300 € zusätzlich und legst diese zu 7 % Zinsen am Aktienmarkt an. Nach 20 Jahren hättest du ein Vermögen von über 150.000 € – allein durch die Optimierung deines Alltags. Ein bewussterer Konsum reduziert zudem deinen täglichen Stress, da du weniger Dinge besitzen und pflegen musst. Wer seine Finanzen im Griff hat, blickt deutlich gelassener in die Zukunft.
 
 ## Haushaltsbuch führen
-Ohne Überblick verlierst du deine Ziele schnell aus den Augen. Du solltest daher zwingend ein **Haushaltsbuch führen**, um deine Geldströme genau zu verstehen. Nur wer weiß, wo der "Euro-Leck" ist, kann es stopfen. Ob du eine App nutzt, eine Excel-Tabelle pflegst oder klassisch auf Papier schreibst, bleibt deinem Geschmack überlassen. 
+Ohne Überblick verlierst du deine Ziele schnell aus den Augen. Du solltest daher zwingend ein **[Haushaltsbuch führen](../../posts/2026-08-07-frugalismus-fuer-den-erfolg/)**, um deine Geldströme genau zu verstehen. Nur wer weiß, wo der "Euro-Leck" ist, kann es stopfen. Ob du eine App nutzt, eine Excel-Tabelle pflegst oder klassisch auf Papier schreibst, bleibt deinem Geschmack überlassen. 
 
 Wichtig ist die Unterteilung in Fixkosten (Miete, Versicherungen) und variable Kosten (Essen, Freizeit). Moderne Banking-Apps kategorisieren deine Ausgaben oft schon vollautomatisch. So entdeckst du Einsparpotenziale von ca. 50 € bis 200 € pro Monat, die vorher einfach verschwunden sind. Hier findest du weitere effektive Tricks zum Sparen.
 

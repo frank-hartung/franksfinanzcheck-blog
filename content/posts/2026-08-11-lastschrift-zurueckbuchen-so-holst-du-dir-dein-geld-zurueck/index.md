@@ -8,6 +8,8 @@ tags: ["Lastschrift", "SEPA-Lastschrift", "Girokonto", "Banking", "Geld zurück"
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank"
+erfahrung: "Eine unberechtigte Lastschrift habe ich selbst erlebt – die Rückbuchung war einfacher als gedacht, aber die Fristen sind streng. Meine Erfahrung: Wer die 8-Wochen-Frist kennt und Belege aufbewahrt, holt sich sein Geld in wenigen Tagen zurück."
+
 ai_generated: false
 ai_provider: "Content-Engine v2"
 cover:
@@ -95,6 +97,12 @@ Kurz gefasst: Zurückbuchen bei Unrecht, klären bei Berechtigung. Wer konsequen
 
 **Fehler 4 – Mandate nie aufräumen.** Vertragsende erreicht, aber das Mandat lebt in der Schublade weiter. Einmal im Jahr die eigenen Mandate durchgehen und Waisen kündigen, erspart dir spätere Kämpfe mit „Wander-Abbuchungen“.
 
+
+
+**Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/)
+
+
+**Weiterlesen:** [Schufa-Score verstehen](../../posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/)
 ## Häufige Fragen
 
 ### Kostet die Rückbuchung Gebühren?

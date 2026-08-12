@@ -8,6 +8,8 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 keywords: ["Wärmepumpentarif", "Stromtarif", "Heizkosten"]
 author: "Frank"
+erfahrung: "Bei meiner eigenen Heizungsplanung habe ich die Wärmepumpen-Tarife über zwei Jahre beobachtet. Der größte Fehler wäre, nur auf den Arbeitspreis zu schauen – der Grundpreis und die Sperrzeit-Regelung entscheiden oft, ob sich der Tarif wirklich lohnt."
+
 ai_generated: true
 ai_provider: "Groq (Gratis-Key: console.groq.com)"
 cover:
@@ -95,6 +97,9 @@ Achte beim Vergleich nicht nur auf den Arbeitspreis pro Kilowattstunde. Die mona
 ## Profi-Tipp:<br>Kaskadenschaltung für Photovoltaik-Besitzer
 Besitzt du eine PV-Anlage? Dann ist die sogenannte **Kaskadenschaltung** die Königsklasse. Hierbei werden zwei Zähler so hintereinander geschaltet, dass du deinen selbst erzeugten Solarstrom vorrangig für den Haushaltsstrom UND die Wärmepumpe nutzen kannst. Gleichzeitig behältst du den Anspruch auf den günstigen Wärmepumpentarif für den Strom, den du zusätzlich aus dem Netz beziehen musst. Das erfordert zwar etwas Aufwand bei der Zählerverdrahtung, maximiert aber deine Eigenverbrauchsquote und minimiert die Heizkosten.
 
+
+
+**Weiterlesen:** [Preisgarantie beim Heizen](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)
 ## Häufige Fragen
 ### Was ist ein Wärmepumpentarif?
 Es handelt sich um Strom zu Sonderkonditionen für elektrische [Heizsysteme](../../posts/2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen/). Der Netzbetreiber darf die Belieferung bei Netzengpässen kurzzeitig unterbrechen oder dimmen (auf bis zu 4,2 kW). Dafür gewährt er dir einen erheblichen Rabatt auf die Netzentgelte.

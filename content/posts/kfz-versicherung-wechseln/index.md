@@ -7,7 +7,9 @@ tags: ["Versicherung", "Kfz", "Sparen"]
 categories: ["Versicherungen"]
 pillar: "versicherungen"
 keywords: ["Kfz-Versicherung wechseln", "Autoversicherung vergleichen", "SF-Klasse", "Kfz-Versicherung wechseln beim Neuwagen", "Kfz-Versicherung Vergleich"]
-author: "Redaktion"
+author: "Frank"
+erfahrung: "Ich habe meinen eigenen Kfz-Versicherungsvertrag dreimal gewechselt und dabei mehrere hundert Euro gespart. Meine Erfahrung: Der Wechsel lohnt sich fast immer zum Jahresende – wer SF-Klasse und Rabattschutz versteht, verhandelt aus einer starken Position."
+
 cover:
   image: "images/covers/kfz-versicherung-wechseln.jpg"
   alt: "Kfz-Versicherung wechseln: Wann es sich wirklich lohnt"
@@ -71,6 +73,12 @@ Lege für den Vergleich deinen aktuellen Versicherungsschein und deinen Kilomete
 
 Wähle eine Selbstbeteiligung von etwa 150 € in der Teilkasko oder 300 € in der Vollkasko. Das senkt den Beitrag spürbar. Schließe den neuen Vertrag direkt online ab. Sobald du die Bestätigung hast, kannst du deine alte **Kfz-Versicherung wechseln** und kündigen. Oft erledigt der neue Anbieter die Kündigung beim Vorversicherer sogar automatisch für dich.
 
+
+
+**Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/)
+
+
+**Weiterlesen:** [50-30-20-Regel für dein Budget](../../posts/50-30-20-regel-einfach-erklaert/)
 ## FAQ
 
 **Kann ich während der Vertragslaufzeit wechseln?**

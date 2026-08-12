@@ -38,14 +38,14 @@ Dabei geht es nicht darum, jeden Cent zweimal umzudrehen, bis es weh tut. Es geh
 ### Das Wichtigste in Kürze
 * Fixkosten durch regelmäßige Vergleiche radikal senken.
 * Konsum hinterfragen und Impulskäufe durch Wartezeiten vermeiden.
-* Ein Haushaltsbuch führen für die volle Transparenz.
+* Ein [Haushaltsbuch führen](../../posts/2026-08-06-frugalismus-im-alltag/) für die volle Transparenz.
 * Ersparnisse konsequent investieren statt auf dem Girokonto parken.
 * Das Ziel: Eine hohe Sparquote von 30 bis 60 % erreichen.
 
 ## Die Grundlagen des Frugalismus
 Du brauchst ein klares finanzielles Ziel, um langfristig motiviert zu bleiben. Identifiziere zuerst deine größten Preistreiber und hinterfrage jeden Dauerauftrag kritisch. Ein Budgetplan trennt notwendige Lebenshaltungskosten von reinem Luxuskonsum. Prüfe deine Verträge regelmäßig, um versteckte Gebühren und teure Alttarife zu eliminieren.
 
-Das Herzstück des Frugalismus ist die **Sparquote**. Während der Durchschnittsdeutsche etwa 10 % seines Einkommens beiseitelegt, zielen Frugalisten auf 30 %, 50 % oder sogar noch mehr ab. Warum? Weil eine hohe Sparquote die Zeit bis zur finanziellen Freiheit exponentiell verkürzt. Wer 50 % seines Einkommens spart, kann nach etwa 17 Jahren von seinem Vermögen leben (basierend auf der 4-Prozent-Regel).
+Das Herzstück des [Frugalismus](../../posts/7-gewohnheiten-finanzielle-freiheit/) ist die **Sparquote**. Während der Durchschnittsdeutsche etwa 10 % seines Einkommens beiseitelegt, zielen Frugalisten auf 30 %, 50 % oder sogar noch mehr ab. Warum? Weil eine hohe Sparquote die Zeit bis zur finanziellen Freiheit exponentiell verkürzt. Wer 50 % seines Einkommens spart, kann nach etwa 17 Jahren von seinem Vermögen leben (basierend auf der 4-Prozent-Regel).
 
 ## Haushaltsbuch führen
 Wer Vermögen aufbauen will, muss seine Zahlen im Griff haben. Ein Haushaltsbuch führen ist das Fundament deiner finanziellen Freiheit. Dokumentiere jede Ausgabe, damit du versteckte Kostenfresser sofort entlarvst. So entdeckst du Abonnements oder Kleinstbeträge, die sich monatlich oft auf 50 € bis 150 € summieren.
@@ -93,7 +93,7 @@ Der Frugalismus schützt dich vor der Konsumfalle und schafft echte Sicherheit. 
 Setze dir klare Prioritäten und erstelle einen strikten monatlichen Budgetplan. Vergleiche deine Versicherungen und Tarife regelmäßig – zum Beispiel über einen [Versicherungsvergleich](/go/allgemein/) oder einen [Tarifvergleich](/go/allgemein/). Reduziere unnötigen Besitz und investiere die Differenz in renditestarke Anlagen wie breit gestreute Welt-ETFs.
 
 ### Welche Spartipps sind besonders effektiv?
-Vermeide Impulskäufe durch die 30-Tage-Regel bei größeren Wünschen. Koche öfter selbst und optimiere deine Energiekosten im Haushalt durch effiziente Geräte. Prüfe regelmäßig deine Abonnements und kündige alles, was du nicht aktiv nutzt. Ein radikaler, aber effektiver Tipp ist das „Downsizing“ der Wohnung – weniger Wohnfläche spart nicht nur Miete, sondern auch Nebenkosten und Einrichtungsgeld.
+Vermeide Impulskäufe durch die 30-Tage-Regel bei größeren Wünschen. Koche öfter selbst und optimiere deine [Energiekosten](../../posts/2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen/) im Haushalt durch effiziente Geräte. Prüfe regelmäßig deine Abonnements und kündige alles, was du nicht aktiv nutzt. Ein radikaler, aber effektiver Tipp ist das „Downsizing“ der Wohnung – weniger Wohnfläche spart nicht nur Miete, sondern auch Nebenkosten und Einrichtungsgeld.
 
 ### Verliere ich durch Frugalismus meine sozialen Kontakte?
 Das ist ein weit verbreiteter Irrtum. Frugalismus bedeutet nicht, unsozial zu sein. Statt teurer Restaurantbesuche kannst du Freunde zum gemeinsamen Kochen einladen oder Aktivitäten im Freien organisieren. Ehrliche Kommunikation über deine Ziele hilft: Wahre Freunde unterstützen deinen Weg in die Unabhängigkeit und sind oft sogar dankbar für günstigere Alternativen bei Treffen.

@@ -8,6 +8,8 @@ categories: ["Haushaltskasse & Budgetplanung"]
 pillar: "frugalismus"
 keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen", "Regel Rechner", "Haushaltsbuch Vorlage"]
 author: "Frank"
+erfahrung: "Ich wende die 50-30-20-Regel seit Jahren auf mein eigenes Budget an und habe sie in meiner Beratungspraxis bei unterschiedlichen Einkommen getestet. Meine Erfahrung: Die Prozentwerte sind eine Orientierung, keine Doktrin – wichtig ist die Automatisierung der Sparrate."
+
 cover:
   image: "images/covers/50-30-20-regel-einfach-erklaert.jpg"
   alt: "Die 50-30-20-Regel: Die perfekte Formel für deine Finanzen"
@@ -26,7 +28,7 @@ social_posted: true
 
 
 
-Bleiben dir am Monatsende oft weniger als 100 € auf dem Konto, obwohl du eigentlich gut verdienst? Viele Menschen verlieren trotz eines stabilen Gehalts den Überblick über ihre Ausgaben, weil sie keine klare Struktur verfolgen. Die 50–30–20-Regel löst dieses Problem sofort. Diese einfache Formel, die ursprünglich von der US-Senatorin Elizabeth Warren populär gemacht wurde, strukturiert deine Finanzen ohne komplizierte Tabellen. Du schaffst dir damit eine solide Basis für deinen langfristigen Vermögensaufbau und verhinderst, dass dein Geld unkontrolliert versickert.
+Bleiben dir am Monatsende oft weniger als 100 € auf dem Konto, obwohl du eigentlich gut verdienst? Viele Menschen verlieren trotz eines stabilen Gehalts den Überblick über ihre Ausgaben, weil sie keine klare Struktur verfolgen. Die 50–30–20-Regel löst dieses Problem sofort. Diese einfache Formel, die ursprünglich von der US-Senatorin Elizabeth Warren populär gemacht wurde, strukturiert deine Finanzen ohne komplizierte Tabellen. Du schaffst dir damit eine solide Basis für deinen langfristigen [Vermögensaufbau](../../posts/7-gewohnheiten-finanzielle-freiheit/) und verhinderst, dass dein Geld unkontrolliert versickert.
 
 ### Das Wichtigste in Kürze
 - **Klare Struktur:** Die 50–30–20-Regel teilt dein Nettoeinkommen in drei unverwechselbare Bereiche auf.

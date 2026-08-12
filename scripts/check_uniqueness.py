@@ -53,6 +53,8 @@ def clean_body(content):
     # „Schnell-Tipp von FranksFinanzcheck“-Boxen (identische Boilerplate in
     # jedem Artikel – kein Duplikat, sondern gewollter CTA).
     body = re.sub(r"[👉💡💶][^\n]*?\)", " ", body, flags=re.S)
+    # „Weiterlesen:“-Blöcke (interne Link-Navigation – Boilerplate, kein Inhalt)
+    body = re.sub(r"\*\*Weiterlesen:\*\*[^\n]*", " ", body)
     # ROBUST: ALLE URLs entfernen (unabhängig vom CTA-Format – der Polish
     # variiert den CTA-Text, dadurch blieben URL-Bruchstücke als
     # "Duplikate" im Audit zurück)

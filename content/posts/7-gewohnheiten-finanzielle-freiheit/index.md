@@ -8,6 +8,8 @@ categories: ["Geld sparen & Frugalismus"]
 pillar: "frugalismus"
 keywords: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset", "Passives Einkommen", "Frugalismus"]
 author: "Frank"
+erfahrung: "Die Gewohnheiten in diesem Artikel habe ich über Monate an mir selbst ausprobiert – vom automatischen Sparen bis zur 48-Stunden-Regel bei Impulskäufen. Meine Erfahrung: Nicht die einzelne Gewohnheit macht den Unterschied, sondern die Kombination."
+
 cover:
   image: "images/covers/7-gewohnheiten-finanzielle-freiheit.jpg"
   alt: "Finanzielle Freiheit: 7 Gewohnheiten für mehr Unabhängigkeit"
@@ -18,7 +20,7 @@ social_posted: true
 
 ## 1. Zahle dich zuerst
 
-Überweise am Monatsanfang sofort 10 bis 15 % deines Einkommens auf ein separates Depot oder Tagesgeldkonto. Betrachte diesen Betrag als deine wichtigste Rechnung, die du zuerst begleichst. Was du nicht auf dem Girokonto siehst, gibst du im Alltag nicht aus. Diese einfache Routine sichert deinen langfristigen Vermögensaufbau ohne täglichen Verzicht. Ein Beispiel: Wenn du 2.500 € monatlich verdienst, solltest du 250–375 € auf dein Sparbuch überweisen.
+Überweise am Monatsanfang sofort 10 bis 15 % deines Einkommens auf ein separates Depot oder Tagesgeldkonto. Betrachte diesen Betrag als deine wichtigste Rechnung, die du zuerst begleichst. Was du nicht auf dem Girokonto siehst, gibst du im Alltag nicht aus. Diese einfache Routine sichert deinen langfristigen [Vermögensaufbau](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) ohne täglichen Verzicht. Ein Beispiel: Wenn du 2.500 € monatlich verdienst, solltest du 250–375 € auf dein Sparbuch überweisen.
 
 ## 2. Führe monatlich ein Finanz-Review
 

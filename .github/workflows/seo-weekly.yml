@@ -150,6 +150,16 @@ jobs:
           python3 scripts/affiliate_link_check.py --fix | tee /tmp/aff_log.txt
           exit ${PIPESTATUS[0]}
 
+      - name: Affiliate-Profi-Check (E-E-A-T, Offenlegung, Schema, Dichte – selbstheilend)
+        # FrankAutoOps Profi-Level (12.08.): prüft Offenlegung (A1),
+        # Erfahrungs-Boxen/E-E-A-T (A2), interne Links (A3), Schema (A4),
+        # Affiliate-Dichte (A5), Trust-Box (A6), Autor (A7), CTA (A8).
+        # --fix heilt deterministisch (erfahrung/Pillar-Links/author);
+        # Selbsttest vor Fix-Aktionen (Sabotage-Schutz). Exit 1 → Alarm.
+        run: |
+          python3 scripts/affiliate_profi_check.py --fix | tee /tmp/profi_log.txt
+          exit ${PIPESTATUS[0]}
+
       - name: Affiliate-Fixes committen
         run: |
           git config user.name "SEO-Bot"

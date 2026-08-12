@@ -119,6 +119,9 @@ Private Anbieter wie Cloudflare oder Quad9 haben strengere Richtlinien. Cloudfla
 * **Konfiguration:** Einmaliger Aufwand im Router-Menü nötig.
 * **Lokale Dienste:** In seltenen Fällen können Provider-interne Dienste (wie spezifische IPTV-Angebote) Probleme bereiten, wenn nicht der Provider-DNS genutzt wird.
 
+
+
+**Weiterlesen:** [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/)
 ## Häufige Fragen
 
 ### Ist das Ändern des DNS-Servers sicher?

@@ -92,12 +92,15 @@
 {{- /* ---------- FAQPage-Schema (aus den FAQ-Abschnitten der Artikel) ---------- */ -}}
 {{- if and .IsPage (or (eq .Section "posts") (eq .Section "pillar")) -}}
 {{- $faq := slice -}}
-{{- $chunks := split (plainify .RawContent) "### " -}}
+{{- /* FIX (12.08.): plainify würde "### Frage" zu <h3> umwandeln und den Split
+       bei "### " zerstören – daher auf dem RAW-Content splitten und erst die
+       ANTWORT plainifien (Markdown raus, Struktur bleibt). */ -}}
+{{- $chunks := split .RawContent "### " -}}
 {{- range $chunks -}}
   {{- $lines := split . "\n" -}}
   {{- $q := trim (index $lines 0) " \t\r\n" -}}
   {{- if and (gt (len $q) 5) (findRE "[?]" $q) -}}
-    {{- $answer := trim (delimit (after 1 $lines) " ") " \t\r\n" -}}
+    {{- $answer := trim (plainify (delimit (after 1 $lines) " ")) " \t\r\n" -}}
     {{- if gt (len $answer) 10 -}}
       {{- $faq = $faq | append (dict "@type" "Question" "name" $q
           "acceptedAnswer" (dict "@type" "Answer" "text" $answer)) -}}
