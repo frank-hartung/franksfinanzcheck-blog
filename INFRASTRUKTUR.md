@@ -144,6 +144,32 @@ ROT ≥ 95 / 8.000 (Stufe 1: `public/`, `__pycache__`, Caches, Audit-Retention,
 - Der Remote-Watchdog warnt nur – Aufräumen der Repo-History ist manuell
   (`git gc`, alte Branches) und nur mit Bedacht (kein Force-Push ohne Grund).
 
+## 7. Offsite-Backup & Uptime-Monitor (kostenlos, 12.08.2026)
+
+**Offsite-Backup** (`.github/workflows/backup-offsite.yml`):
+- Täglich 03:00 UTC + manuell (workflow_dispatch) → GitHub-Release `backup-YYYYMMDD-HHMM`
+- Enthält `backup.bundle` (komplette Git-History) + `worktree.zip` (Arbeitskopie)
+- Die letzten 14 Backups bleiben, ältere werden automatisch gelöscht
+- Rollback: Release-Asset herunterladen → `git clone backup.bundle` bzw. Zip entpacken
+- Kosten: 0 € (GitHub Free, Releases unbegrenzt)
+
+**Uptime-Monitor** (`.github/workflows/uptime-monitor.yml`):
+- Alle 15 Minuten: prüft `/`, `/posts/`, `/pillar/` auf HTTP 200 + Inhalt („FranksFinanzcheck")
+- Ausfall → automatisches Issue (Label `uptime`), Wiederherstellung → Issue wird geschlossen;
+  wiederholte Ausfälle ergänzen Kommentare
+- Benachrichtigung: GitHub-Issue-Notification (E-Mail) an den Account-Inhaber
+- Kosten: 0 € (öffentliches Repo → unbegrenzte Actions-Minuten)
+
+**Manuell testen:**
+```bash
+# Backup sofort auslösen
+gh workflow run backup-offsite.yml -R frank-hartung/franksfinanzcheck-blog
+# Uptime sofort prüfen
+gh workflow run uptime-monitor.yml -R frank-hartung/franksfinanzcheck-blog
+# Backups auflisten
+gh release list -R frank-hartung/franksfinanzcheck-blog
+```
+
 ---
 
 *Diese Datei ist die maßgebliche Referenz. Änderungen an der Infrastruktur

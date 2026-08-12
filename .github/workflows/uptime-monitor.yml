@@ -1,0 +1,94 @@
+# ============================================================
+#  UPTIME-MONITOR (kostenlos, GitHub Actions + Issues)
+#  ------------------------------------------------------------
+#  Prüft alle 15 Minuten die Erreichbarkeit der Live-Site:
+#    - https://franksfinanzcheck.de/          (Startseite, 200 + Inhalt)
+#    - https://franksfinanzcheck.de/posts/    (Blog-Übersicht)
+#    - https://franksfinanzcheck.de/pillar/   (Ratgeber-Übersicht)
+#
+#  Bei Ausfall: automatisches GitHub-Issue (Label "uptime") –
+#  der User bekommt die Benachrichtigung per GitHub-E-Mail.
+#  Bei Wiederherstellung: Issue wird automatisch geschlossen.
+#  Wiederholte Ausfälle ergänzen Kommentare im offenen Issue.
+#
+#  Kosten: 0 € – öffentliche Repos haben unbegrenzte
+#  Actions-Minuten auf GitHub Free.
+# ============================================================
+name: Uptime-Monitor
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: URLs prüfen
+        id: check
+        run: |
+          FAILED=""
+          for url in \
+            "https://franksfinanzcheck.de/" \
+            "https://franksfinanzcheck.de/posts/" \
+            "https://franksfinanzcheck.de/pillar/"
+          do
+            CODE=$(curl -s -o /tmp/page.html -w "%{http_code}" \
+              -A "UptimeMonitor/1.0" --max-time 25 "$url")
+            if [ "$CODE" != "200" ]; then
+              FAILED="$FAILED $url(HTTP $CODE)"
+            elif ! grep -qi "FranksFinanzcheck" /tmp/page.html; then
+              FAILED="$FAILED $url(Inhalt fehlt)"
+            fi
+          done
+          if [ -n "$FAILED" ]; then
+            echo "FAILED=$FAILED" >> "$GITHUB_ENV"
+            echo "❌ Probleme: $FAILED"
+          else
+            echo "✅ Alle URLs erreichbar."
+          fi
+
+      - name: Label sicherstellen
+        if: env.FAILED != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create uptime --color "d93f0b" \
+            --description "Uptime-Monitor: Site-Ausfall" 2>/dev/null || true
+
+      - name: Issue öffnen / kommentieren bei Ausfall
+        if: env.FAILED != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TS=$(date -u '+%Y-%m-%d %H:%M UTC')
+          EXISTING=$(gh issue list --state open --label uptime \
+            --json number --jq '.[0].number' 2>/dev/null || echo "")
+          if [ -z "$EXISTING" ]; then
+            BODY=$(printf '**%s** – folgende URLs antworten nicht korrekt:%s\n\nDer Monitor prueft alle 15 Minuten. Das Issue wird automatisch geschlossen, sobald die Site wieder erreichbar ist.' "$TS" "${{ env.FAILED }}")
+            gh issue create --title "Uptime-Alarm: Site nicht erreichbar" \
+              --label uptime \
+              --body "$BODY"
+            echo "Issue erstellt"
+          else
+            BODY=$(printf '**%s** – weiterhin gestoert:%s' "$TS" "${{ env.FAILED }}")
+            gh issue comment "$EXISTING" --body "$BODY"
+            echo "Issue #$EXISTING kommentiert"
+          fi
+
+      - name: Issue schließen bei Erfolg
+        if: env.FAILED == ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          EXISTING=$(gh issue list --state open --label uptime \
+            --json number --jq '.[0].number' 2>/dev/null || echo "")
+          if [ -n "$EXISTING" ]; then
+            gh issue close "$EXISTING" \
+              --comment "✅ **$(date -u '+%Y-%m-%d %H:%M UTC')** – Site wieder erreichbar. Monitor bestätigt: alle URLs antworten mit 200."
+            echo "✅ Issue #$EXISTING geschlossen"
+          fi

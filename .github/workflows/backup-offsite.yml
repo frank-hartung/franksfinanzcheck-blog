@@ -1,0 +1,72 @@
+# ============================================================
+#  OFFSITE-BACKUP (kostenlos, GitHub-Releases)
+#  ------------------------------------------------------------
+#  Täglicher vollständiger Snapshot des Repos als Release:
+#    - backup.bundle  = komplette Git-History (git bundle --all)
+#    - worktree.zip   = Arbeitskopie (alle getrackten Dateien)
+#  Das Backup liegt auf GitHub-Infrastruktur (offsite zur Sandbox)
+#  und bleibt als Release dauerhaft erhalten – Rollback jederzeit
+#  per Download möglich. Alte Backups werden auf die letzten 14
+#  automatisch reduziert (Speicher-Hygiene).
+#
+#  Kosten: 0 € – GitHub Free erlaubt Releases ohne Limit.
+#  Trigger: täglich 03:00 UTC + manuell (workflow_dispatch).
+# ============================================================
+name: Offsite-Backup
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken (komplette History)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Git-Bundle + Arbeitskopie erstellen
+        run: |
+          # Komplette Git-History als Bundle (eigenständiges Backup-Format)
+          git bundle create backup.bundle --all
+          ls -lh backup.bundle
+          # Arbeitskopie (nur getrackte Dateien, ohne .git)
+          git archive --format=zip -o worktree.zip HEAD
+          ls -lh worktree.zip
+
+      - name: Backup-Release erstellen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="backup-$(date +%Y%m%d-%H%M)"
+          SHA="${{ github.sha }}"
+          FILES=$(git ls-files | wc -l)
+          NOTES="Automatisches Offsite-Backup von franksfinanzcheck-blog | Commit: $SHA | Getrackte Dateien: $FILES | backup.bundle = Git-History, worktree.zip = Arbeitskopie"
+          gh release create "$TAG" backup.bundle worktree.zip \
+            --title "Backup $TAG" \
+            --notes "$NOTES"
+          echo "✅ Release $TAG erstellt"
+
+      - name: Alte Backups aufräumen (nur die letzten 14 behalten)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          KEEP=14
+          TAGS=$(gh release list --limit 100 --json tagName \
+            --jq '.[] | select(.tagName | startswith("backup-")) | .tagName' | sort)
+          COUNT=$(echo "$TAGS" | grep -c . || true)
+          if [ "$COUNT" -gt "$KEEP" ]; then
+            TO_DELETE=$(echo "$TAGS" | head -n $((COUNT - KEEP)))
+            for t in $TO_DELETE; do
+              echo "Lösche altes Backup $t"
+              gh release delete "$t" --yes --cleanup-tag
+            done
+          else
+            echo "Backup-Anzahl ($COUNT) im Rahmen (max. $KEEP)."
+          fi
