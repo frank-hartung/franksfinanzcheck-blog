@@ -1,6 +1,6 @@
 {
-  "signed_at": "2026-08-12T11:28:16.335577+00:00",
-  "head": "aec3186e",
+  "signed_at": "2026-08-12T12:08:10.150587+00:00",
+  "head": "c40ae84",
   "files": {
     "assets/css/extended/custom.css": "bec7b22452c70804e13dc1217d8e39fdaff0679fd88d7b72a1868afc0dbb26f1",
     "hugo.toml": "6d2e0a5cb2a1aec0f7ce6d91671d55119e4df7e7be0e08897c5a007b6f143660",
@@ -14,7 +14,7 @@
     "layouts/pillar/list.html": "4847c8d93c6a2c65fd7d63de5414f0e9d4e2859e11394f882decdf5fe49f97b4",
     "layouts/robots.txt": "b1d5ad6a2e48176d433d5230f89beb3669f30e01288d412e61c7de1e12092c90",
     "scripts/affiliate_marketer.py": "f7941fe3f1c4e22451958d49636265d75b3d12b8ecdab837044efd6d44cd85ef",
-    "scripts/blog_doctor.py": "f5fc5053c95720ec330dcb2e72135f80e2028efad752ac51b7f71ba9d23db43f",
+    "scripts/blog_doctor.py": "da650b634afa00f3d7fb1586a4938800a1bfb67920b42b5d1da98e1628fa9124",
     "scripts/check24_links.yaml": "417e752281360a2e06ea926c0ec9e1d8c40f2e82773f8c40ad6cf22ef530a4c5",
     "scripts/lektor_guard.py": "c70777e8f2e47e68363dcb4454dfced2401bc2d4377975152e7968c9f8a4c2dd",
     "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt": "290e3e94c46b151d4923ce8694d82fc1dc0f0947d62583a781859e712a8afbb2"

@@ -275,15 +275,24 @@ def make_cover(title, slug, out_path, force=False):
     sw = d.textlength(sub, font=sub_font)
     d.text(((W - sw) / 2, y_start + total_h + 50), sub, font=sub_font, fill=CREAM)
 
-    # Footer: Branding + Pinterest-Pfeil-Symbol (simplifiziert)
-    brand_font = load_font(40)
+    # Footer-Branding: Marken-Chip (FranksFinanzcheck) – optisch sauber
+    # getrennt (12.08. Frank: das Logo unten war nicht scharf genug:
+    # Jetzt: mehr Abstand, eigener Chip mit goldener Linie oben).
+    brand_font = load_font(44)
     brand = "FranksFinanzcheck"
     bw = d.textlength(brand, font=brand_font)
-    d.text(((W - bw) / 2, H - 170), brand, font=brand_font, fill=GOLD)
+    bx = (W - bw) / 2
+    by = H - 205
+    # Goldfaden (Stehlampe Stimuli) ueber dem Wort
+    d.rounded_rectangle([bx - 26, by - 32, bx + bw + 26, by + brand_font.size + 14],
+                        radius=18, outline=GOLD, width=3)
+    d.text((bx, by), brand, font=brand_font, fill=WHITE)
+    d.text((bx + bw - d.textlength("check", font=brand_font), by), "check",
+           font=brand_font, fill=GOLD)
 
-    # Kleine Pins (pinterest-artige Punkte) unten
+    # Kleine Pins (pinterest-artige Punkte) – weit unten, nie auf dem Text
     for i, cx in enumerate([W // 2 - 60, W // 2, W // 2 + 60]):
-        d.ellipse([cx - 7, H - 105, cx + 7, H - 91], fill=GOLD if i == 1 else (255, 255, 255, 120))
+        d.ellipse([cx - 7, H - 70, cx + 7, H - 56], fill=GOLD if i == 1 else (255, 255, 255, 120))
 
     img.save(out_path, "JPEG", quality=88)
     print(f"  ✓ Cover: {os.path.basename(out_path)}")

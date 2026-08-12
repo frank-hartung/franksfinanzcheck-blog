@@ -238,6 +238,12 @@ jeder Schreibaktion.
       Merge-Marker erweitert (nie wieder roter Build wegen '<'), blog_doctor
       auf 13 Wachen inkl. Lock. ANMERKUNG: Umami bleibt deaktiviert bis die
       Website-ID eingetragen wird (Frank-Handlung, siehe ANLEITUNG-UMAMI).
+- **12.08.2026 (4):** Brand-Chip auf Covern (Frank: „Markenname nicht
+  scharf genug abgebildet"): gold-gerahmter Chip, weisser Text + goldener
+  „check"-Ausweis (44 px Inter Bold), Punkte nie mehr in der Textzone.
+  check_covers.py C2: Brand-Staerke pro Cover pixelbeweis-bar (0,0645 vs.
+  0,002 bei leerem Band) + Selbstheilung per --slug --force-Regen. Alle 77
+  Covers neu, Integritaets-Lock neu signiert.
 - **12.08.2026 (3):** Der Merge-Marker-Vorfall (Deploy-Todestuetze): Die
   Engine-Kettenliessen ungelöste „<<<<<<< HEAD” in mehrere die Artikelfronts.
   W7 Marker-Jaeger in workspace_guard.py (findet + heilt mit material-

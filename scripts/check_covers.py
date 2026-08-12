@@ -66,6 +66,51 @@ def normalize_dash_image(img):
     return img
 
 
+# ------------------------------------------------------------
+# C2: BRAND-GATE (12.08., Frank: Marke auf Covers strikt sichtbar)
+#  Brandwalk: Unter dem Chip muss der goldene `brand_check`-Balken
+#  stehen; er misst den goldenen Chip-Rahmen. Pixel-Energie vom Band
+#  selbst: jedes Cover beweist Branding mechanisch, nie blind.
+# ------------------------------------------------------------
+BRAND_PROBE_RATIO_MIN = 0.002    # ≥ 0,2 % goldene Pixel im Band
+
+
+def brand_strength(image_path):
+    """Energie der Brandzone: viele goldene Pixel im Band → True."""
+    try:
+        from PIL import Image
+        img = Image.open(image_path).convert("RGB")
+        W, H = img.size
+    except Exception:
+        return None
+    # Band: Chip-Laenge * Mittelweg-Bereich (Bottom ~H-210..H-130)
+    y0, y1 = int(H * 0.855), int(H * 0.915)
+    x0, x1 = int(W * 0.20), int(W * 0.80)
+    px = img.load()
+    gold = total = 0
+    for y in range(y0, y1):
+        for x in range(x0, x1):
+            r, g, b = px[x, y]
+            total += 1
+            if r > 180 and 110 < g < 210 and b < 90:   # gold-Rahmen
+                gold += 1
+    return gold / max(1, total)
+
+
+def check_brand(covers):
+    """C2 (12.08.): Cover ohne messbaren Brand-Chip → melden (heilbar via Regen)."""
+    out = []
+    for it in covers:
+        base = os.path.basename(it["image"])
+        p = os.path.join(STATIC_DIR, base)
+        s = brand_strength(p) if os.path.exists(p) else None
+        if s is None:
+            out.append((it, "unlesbar/fehlt"))
+        elif s < BRAND_PROBE_RATIO_MIN:
+            out.append((it, f"Brandzone {s:.4f} < {BRAND_PROBE_RATIO_MIN}"))
+    return out
+
+
 def check(covers):
     problems = []
     for c in covers:
@@ -137,6 +182,7 @@ def main():
     covers = collect_covers()
     problems = check(covers)
     stale = check_stale(covers)
+    brand_bad = check_brand(covers)   # C2 (12.08., Frank): Brand-Chip presenza
 
     # Selbstheilung: Gedankenstrich im Cover-Dateinamen → Bindestrich
     # (wenn die Bindestrich-Datei existiert; --fix schreibt die Referenz um)
@@ -168,15 +214,27 @@ def main():
                                cwd=BLOG_DIR, check=False)
             covers = collect_covers()
             stale = check_stale(covers)
+        if brand_bad:
+            print(f"{len(brand_bad)} Cover ohne messbaren Brand-Chip – generiere neu …")
+            gen = os.path.join(BLOG_DIR, "scripts", "generate_covers.py")
+            for it, warum in brand_bad:
+                print(f"  → {it.get('slug', it['file'])}: {warum}")
+                subprocess.run([sys.executable, gen, "--slug", it.get("slug",
+                                   os.path.splitext(os.path.basename(it["image"]))[0]), "--force"],
+                               cwd=BLOG_DIR, check=False)
+            covers = collect_covers()
+            brand_bad = check_brand(covers)
     elif not os.path.exists(os.path.join(BLOG_DIR, "data", "covers_manifest.json")):
         # Manifest initial befüllen (einmalig, nach Konsistenz-Check):
         # generiert keine Bilder neu, aktualisiert nur die Manifeste.
         subprocess.run([sys.executable, os.path.join(BLOG_DIR, "scripts", "generate_covers.py")],
                        cwd=BLOG_DIR, check=False)
 
-    total = len(problems) + len(stale)
+    total = len(problems) + len(stale) + len(brand_bad)
     print(f"Cover-Check: {len(covers)} Covers | Probleme: {len(problems)} | "
-          f"Stale: {len(stale)}")
+          f"Stale: {len(stale)} | Brand: {len(brand_bad)}")
+    for it, warum in brand_bad:
+        print(f"  ❌ BRAND {it['file']}: {warum}")
     for p in problems:
         print(f"  ❌ {os.path.basename(os.path.dirname(p['file']))}: {p['image']} → fehlt: {', '.join(p['missing'])}")
     for s in stale:
