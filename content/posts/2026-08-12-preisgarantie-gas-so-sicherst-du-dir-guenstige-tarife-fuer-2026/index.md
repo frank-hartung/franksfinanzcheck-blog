@@ -5,7 +5,7 @@ date: 2026-08-12T09:48:00Z
 draft: false
 tags: []
 categories: ["Ratgeber"]
-pillar: "konto-karten"
+pillar: "strom-sparen"
 author: "Frank"
 erfahrung: "Bei meinen eigenen Gasverträgen habe ich die Preisgarantie-Angebote der letzten Jahre verglichen. Meine Erfahrung: Eine lange Garantie ist Gold wert, wenn die Preise steigen – aber nur, wenn der Anbieter die Garantie auch wirklich einhält."
 

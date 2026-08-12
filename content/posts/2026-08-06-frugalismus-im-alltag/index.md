@@ -42,7 +42,7 @@ Wie viel Geld verlierst du jeden Monat durch unüberlegte Käufe? Oft summieren 
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was ist Frugalismus?
-Im Frugalismus triffst du bewusste Entscheidungen, um deine Ressourcen zu schonen. Es geht dabei nicht um bloßen Geiz oder den Verzicht auf jeglichen Spaß. Vielmehr ist es eine Lebenseinstellung, bei der du den Wert von Zeit über den Wert von kurzfristigem Konsum stellst. Du verzichtest nicht auf alles, sondern setzt klare Prioritäten bei deinen Ausgaben. Wer Ballast abwirft, gewinnt wertvolle Zeit und Lebensqualität. 
+Im [Frugalismus](../../posts/7-gewohnheiten-finanzielle-freiheit/) triffst du bewusste Entscheidungen, um deine Ressourcen zu schonen. Es geht dabei nicht um bloßen Geiz oder den Verzicht auf jeglichen Spaß. Vielmehr ist es eine Lebenseinstellung, bei der du den Wert von Zeit über den Wert von kurzfristigem Konsum stellst. Du verzichtest nicht auf alles, sondern setzt klare Prioritäten bei deinen Ausgaben. Wer Ballast abwirft, gewinnt wertvolle Zeit und Lebensqualität. 
 
 Ein zentraler Gedanke ist die Berechnung deines Stundenlohns: Wenn du ein neues Smartphone für 1.000 € kaufen willst und netto 20 € pro Stunde verdienst, musst du dafür 50 Stunden arbeiten. Ist dir das Gerät mehr als eine ganze Arbeitswoche deiner Lebenszeit wert? Diese Lebenseinstellung ebnet dir den Weg zu deiner finanziellen Unabhängigkeit. Mit der richtigen [Strategie für deinen Erfolg](../../posts/2026-08-07-frugalismus-fuer-den-erfolg/) baust du dir langfristig ein stabiles Vermögen auf.
 
@@ -54,7 +54,7 @@ Ein zentraler Gedanke ist die Berechnung deines Stundenlohns: Wenn du ein neues 
 * **Pay Yourself First:** Lege einen festen Sparbetrag direkt am Monatsanfang per Dauerauftrag auf ein separates Konto beiseite.
 
 ## Die Vorteile von Frugalismus
-Frugalismus schützt dich vor Verschwendung und schafft finanzielle Sicherheit. Oft merkst du erst beim genauen Hinsehen, wie viel Geld in Abos oder Kleinkram versickert. Durch effektive **Sparmethoden** lenkst du dieses Kapital in deine Altersvorsorge oder den Immobilienkauf. 
+Frugalismus schützt dich vor Verschwendung und schafft finanzielle Sicherheit. Oft merkst du erst beim genauen Hinsehen, wie viel Geld in Abos oder Kleinkram versickert. Durch effektive **[Sparmethoden](../../posts/2026-08-07-frugalismus-fuer-den-erfolg/)** lenkst du dieses Kapital in deine Altersvorsorge oder den Immobilienkauf. 
 
 Stell dir vor, du sparst durch frugale Gewohnheiten monatlich 300 € zusätzlich und legst diese zu 7 % Zinsen am Aktienmarkt an. Nach 20 Jahren hättest du ein Vermögen von über 150.000 € – allein durch die Optimierung deines Alltags. Ein bewussterer Konsum reduziert zudem deinen täglichen Stress, da du weniger Dinge besitzen und pflegen musst. Wer seine Finanzen im Griff hat, blickt deutlich gelassener in die Zukunft.
 

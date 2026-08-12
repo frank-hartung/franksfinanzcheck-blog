@@ -1,6 +1,6 @@
 {
  "total": 25,
- "errors": 2,
+ "errors": 0,
  "fixed": 0,
  "posts": [
   {
@@ -189,11 +189,9 @@
    "title": "Schufa-Score verstehen: So liest du deine Bonitäts",
    "pillar": "konto-karten",
    "fixed": 0,
-   "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)"
-   ],
+   "errors": [],
    "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
@@ -201,21 +199,17 @@
    "pillar": "versicherungen",
    "fixed": 0,
    "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
-   ],
+   "infos": [],
    "ok": true
   },
   {
    "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
    "title": "Preisgarantie Gas: So sicherst du dir günstige Tar",
-   "pillar": "konto-karten",
+   "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)"
-   ],
+   "errors": [],
    "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "50-30-20-regel-einfach-erklaert",

@@ -229,6 +229,8 @@ jobs:
           echo "== Cover-Stale-Erkennung: Titel geändert → Cover neu rendern =="
           python3 scripts/check_covers.py --fix || echo "⚠ Cover-Stale (nicht blockierend)"
           python3 scripts/internal_linker.py --apply --max 5 || echo "⚠ Linker-Fehler (nicht kritisch)"
+          echo "== Affiliate-Profi-Check (A1-A8, selbstheilend: CTA/E-E-A-T/Links) =="
+          python3 scripts/affiliate_profi_check.py --fix || echo "⚠ Profi-Check (nicht blockierend)"
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
           git add -A

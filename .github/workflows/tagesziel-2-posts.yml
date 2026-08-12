@@ -61,6 +61,8 @@ jobs:
           python3 scripts/check_titles.py --fix || true
           python3 scripts/check_covers.py --fix || true
           python3 scripts/affiliate_link_check.py --fix || true
+          python3 scripts/affiliate_profi_check.py --fix || true
+          python3 scripts/internal_linker.py --apply --max 3 || true
           python3 scripts/pinterest_check.py --fix || true
 
       - name: Artikel committen + pushen

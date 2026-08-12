@@ -34,7 +34,7 @@ Bleiben dir am Monatsende oft weniger als 100 € auf dem Konto, obwohl du eige
 - **Klare Struktur:** Die 50–30–20-Regel teilt dein Nettoeinkommen in drei unverwechselbare Bereiche auf.
 - **Fixkosten-Deckelung:** Deine Lebenshaltungskosten beanspruchen maximal 50 % deines Budgets.
 - **Lebensqualität:** Du reservierst bewusst 30 % für deinen persönlichen Lebensstil und Spaß – ohne schlechtes Gewissen.
-- **Zukunftssicherung:** Mindestens 20 % fließen direkt in den Notgroschen, die Schuldentilgung oder den Vermögensaufbau.
+- **Zukunftssicherung:** Mindestens 20 % fließen direkt in den Notgroschen, die Schuldentilgung oder den [Vermögensaufbau](../../posts/7-gewohnheiten-finanzielle-freiheit/).
 - **Automatisierung:** Ein automatisierter Sparplan am Monatsanfang (Pay Yourself First) sichert deinen finanziellen Erfolg dauerhaft.
 
 

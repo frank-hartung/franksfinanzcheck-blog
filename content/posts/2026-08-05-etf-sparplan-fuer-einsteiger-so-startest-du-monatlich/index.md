@@ -31,7 +31,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Warum ein ETF-Sparplan?
 
-Ein ETF-Sparplan lässt dein Geld automatisch für dich arbeiten. Du investierst regelmäßig feste Beträge in den Aktienmarkt und profitierst massiv vom Zinseszinseffekt. Über Zeiträume von 10 bis 15 Jahren glichen breite Welt-Indizes Schwankungen bisher zuverlässig aus. Ein Kernaspekt ist dabei der sogenannte Durchschnittskosteneffekt (Cost-Average-Effect): Du kaufst bei niedrigen Kursen automatisch mehr Anteile und bei hohen Kursen weniger. Das nimmt den emotionalen Stress aus der Anlage, da du nicht versuchen musst, den „perfekten“ Zeitpunkt für den Kauf zu finden.
+Ein [ETF-Sparplan](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) lässt dein Geld automatisch für dich arbeiten. Du investierst regelmäßig feste Beträge in den Aktienmarkt und profitierst massiv vom Zinseszinseffekt. Über Zeiträume von 10 bis 15 Jahren glichen breite Welt-Indizes Schwankungen bisher zuverlässig aus. Ein Kernaspekt ist dabei der sogenannte Durchschnittskosteneffekt (Cost-Average-Effect): Du kaufst bei niedrigen Kursen automatisch mehr Anteile und bei hohen Kursen weniger. Das nimmt den emotionalen Stress aus der Anlage, da du nicht versuchen musst, den „perfekten“ Zeitpunkt für den Kauf zu finden.
 
 ### Das Wichtigste in Kürze
 * **Niedrige Hürden:** Start bereits ab 1 € (z. B. bei Neo-Brokern) bis 25 € monatlich möglich.

@@ -67,7 +67,7 @@ Hier siehst du, welche Konditionen 2026 als marktüblich und fair gelten:
 | Kostenfaktor | Was 2026 fair ist | Vorsicht bei... |
 |:--- |:--- |:--- |
 | **Depotführung** | 0 € pro Jahr | Monatlichen Grundgebühren |
-| **ETF-Sparplan** | 0 € oder ca. 1 € Fixpreis | Kosten über 1,5 % pro Ausführung |
+| **[ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/)** | 0 € oder ca. 1 € Fixpreis | Kosten über 1,5 % pro Ausführung |
 | **Einzelkauf (Order)** | 1 € bis 5 € pro Trade | Mindestgebühren über 10 € |
 | **Fremdwährungen** | Echter Wechselkurs | Hohen Aufschlägen (FX-Fees) bei US-Aktien |
 | **Dividenden-Gebühr**| 0 € (Standard) | Gebühren für ausländische Erträge |

@@ -48,7 +48,7 @@ Du brauchst ein klares finanzielles Ziel, um langfristig motiviert zu bleiben. I
 Das Herzstück des [Frugalismus](../../posts/7-gewohnheiten-finanzielle-freiheit/) ist die **Sparquote**. Während der Durchschnittsdeutsche etwa 10 % seines Einkommens beiseitelegt, zielen Frugalisten auf 30 %, 50 % oder sogar noch mehr ab. Warum? Weil eine hohe Sparquote die Zeit bis zur finanziellen Freiheit exponentiell verkürzt. Wer 50 % seines Einkommens spart, kann nach etwa 17 Jahren von seinem Vermögen leben (basierend auf der 4-Prozent-Regel).
 
 ## Haushaltsbuch führen
-Wer Vermögen aufbauen will, muss seine Zahlen im Griff haben. Ein Haushaltsbuch führen ist das Fundament deiner finanziellen Freiheit. Dokumentiere jede Ausgabe, damit du versteckte Kostenfresser sofort entlarvst. So entdeckst du Abonnements oder Kleinstbeträge, die sich monatlich oft auf 50 € bis 150 € summieren.
+Wer Vermögen aufbauen will, muss seine Zahlen im Griff haben. Ein [Haushaltsbuch führen](../../posts/2026-08-06-frugalismus-im-alltag/) ist das Fundament deiner finanziellen Freiheit. Dokumentiere jede Ausgabe, damit du versteckte Kostenfresser sofort entlarvst. So entdeckst du Abonnements oder Kleinstbeträge, die sich monatlich oft auf 50 € bis 150 € summieren.
 
 Du hast hierbei die Wahl zwischen klassischen Apps, Excel-Tabellen oder dem analogen Notizbuch. Wichtig ist die Kategorisierung:
 1. **Fixkosten:** Miete, Versicherungen, Internet.

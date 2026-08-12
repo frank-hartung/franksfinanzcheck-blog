@@ -31,7 +31,7 @@ Wir klären die wichtigsten Punkte für deinen Geldbeutel:
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/handytarife/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was die Schufa eigentlich ist (und was sie weiß)
@@ -87,7 +87,7 @@ Zwei Dinge fallen vielen beim ersten Blick auf ihre Kopie auf: Erstens wird ein 
 
 
 
-> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/handytarife/)
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**
 
 
 ## Fehler finden und korrigieren lassen

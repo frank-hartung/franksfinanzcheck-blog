@@ -185,13 +185,46 @@ def _check_autor():
 
 def _check_cta():
     """A8: mind. 1 Affiliate-CTA pro Artikel (Monetarisierung)."""
+    # Pillar → passender /go/-Key für deterministische Selbstheilung
+    PILLAR_CTA = {
+        "versicherungen": "hausrat",
+        "frugalismus": "tagesgeld",
+        "konto-karten": "tagesgeld",
+        "internet-dsl": "dsl",
+        "strom-sparen": "strom",
+        "mietwagen": "mietwagen",
+    }
     for slug in _post_slugs():
         p = os.path.join(BLOG_DIR, "content", "posts", slug, "index.md")
         c = open(p, encoding="utf-8").read()
         n = len(re.findall(r"\]\(/go/[\w-]+/\)", c)) \
             + len(re.findall(r"\]\(https://a\.(?:check24|partner-versicherung)[^)]*\)", c))
-        if n == 0:
-            PROBLEMS.append(("A8", slug, "kein Affiliate-CTA (Monetarisierung)"))
+        if n > 0:
+            continue
+        PROBLEMS.append(("A8", slug, "kein Affiliate-CTA (Monetarisierung)"))
+        if DO_FIX:
+            pm = re.search(r"^pillar:\s*[\"']?([\w-]+)", c, re.M)
+            go_key = PILLAR_CTA.get(pm.group(1) if pm else "", "allgemein")
+            labels = {
+                "hausrat": ("Hausrat- & Gebäudeversicherung vergleichen", "Hausrat"),
+                "tagesgeld": ("Tagesgeld & Anlageangebote vergleichen", "Tagesgeld"),
+                "dsl": ("DSL-Tarife vergleichen", "DSL"),
+                "strom": ("Stromtarife vergleichen", "Strom"),
+                "mietwagen": ("Mietwagen vergleichen", "Mietwagen"),
+                "allgemein": ("Angebote vergleichen", "CHECK24"),
+            }
+            label, _ = labels.get(go_key, labels["allgemein"])
+            parts = c.split("---", 2)
+            body = parts[2]
+            m = re.search(r"^## (Häufige Fragen|Häufig gestellte Fragen|FAQ)", body, re.M)
+            ip = m.start() if m else len(body)
+            cta = (f"\n\n💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Angebote "
+                   f"findest du über unseren Partner-Vergleich: "
+                   f"[**Jetzt {label}**](/go/{go_key}/) – in wenigen Minuten "
+                   f"siehst du, was du sparst.\n")
+            parts[2] = body[:ip] + cta + body[ip:]
+            open(p, "w", encoding="utf-8").write("---".join(parts))
+            FIXED.append(("A8", slug, f"Affiliate-CTA ergänzt (→ /go/{go_key}/)"))
 
 
 # ------------------------------------------------- Sabotage-Schutz
