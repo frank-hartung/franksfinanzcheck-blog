@@ -1,19 +1,21 @@
 # 📐 LAYOUT-REPORT (Layout-Automatisierung)
 
-**Stand:** 2026-08-12 21:24 UTC
+**Stand:** 2026-08-12 21:41 UTC
 
-## ✅ OK (9)
+## ⚠️ Warnungen (2)
+## ✅ OK (8)
 
 ## ❌ Kritisch
 
 ## ⚠️ Warnungen
+Alt-Texte: 1 generisch/fehlend (SEO-Hinweis):
+  - 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026: generisch: Spar-Tipp: 2026 08 12 Dein Haus Sicher S
 
 ## ✅ OK
 Markdown-Links (Quellen): 0 verschachtelt/kaputt.
-Interne Links: 80 geprüft, 0 kaputt.
+Interne Links: 81 geprüft, 0 kaputt.
 Covers: alle Originale + WebP/AVIF-Varianten vorhanden.
-Alt-Texte: alle gesetzt und aussagekräftig.
-Schema-JSON-LD (Article) auf allen 20 Artikel-Seiten.
+Schema-JSON-LD (Article) auf allen 21 Artikel-Seiten.
 og:image auf allen Artikel-Seiten.
 Meta-Description überall vorhanden.
 H1 überall vorhanden.

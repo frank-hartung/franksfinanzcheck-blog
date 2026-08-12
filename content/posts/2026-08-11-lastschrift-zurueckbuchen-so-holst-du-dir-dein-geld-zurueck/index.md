@@ -56,7 +56,7 @@ Wichtig ist der Unterschied zu anderen Zahlungswegen: Eine selbst ausgelöste Ü
 
 Prüfe nach jeder ungewöhnlichen Abbuchung zuerst: Stammt sie aus einem Mandat, das ich selbst erteilt habe – etwa das Abo, das ich vergessen habe? Dann gilt die Acht-Wochen-Frist. Ist dir der Einzug komplett unbekannt, dürfte ein Fall für die längere Frist vorliegen. Im Zweifel hilft deine Bank bei der Einordnung schnell weiter, denn sie sieht die hinterlegte Mandatsreferenz.
 
-## Schritt für Schritt: So buchst du eine Lastschrift zurück
+## Schritt für Schritt:<br>So buchst du eine Lastschrift zurück
 
 Der Ablauf ist bei fast allen Banken inzwischen gleich und dauert online meist keine fünf Minuten:
 

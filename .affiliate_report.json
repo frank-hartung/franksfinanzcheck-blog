@@ -1,5 +1,5 @@
 {
- "total": 24,
+ "total": 25,
  "errors": 2,
  "fixed": 0,
  "posts": [
@@ -194,6 +194,17 @@
    ],
    "infos": [],
    "ok": false
+  },
+  {
+   "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
+   "title": "Dein Haus sicher schützen: Das neue Vorsorge-Updat",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
   },
   {
    "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",

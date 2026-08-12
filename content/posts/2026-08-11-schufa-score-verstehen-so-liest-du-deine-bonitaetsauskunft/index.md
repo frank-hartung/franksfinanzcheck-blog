@@ -51,7 +51,7 @@ Was explizit **nicht** gespeichert wird: dein Gehalt, dein Vermögen, deine Reli
 
 Von allein weiß die Schufa übrigens nichts Neues: Meldungen kommen deutschlandweit von Banken und Firmen. Darum lohnt der Eigen-Check der eigenen Daten so sehr – Fehler schleichen sich häufiger ein, als man denkt.
 
-## Kostenlose Datenkopie: Dein Recht nach der DSGVO
+## Kostenlose Datenkopie:<br>Dein Recht nach der DSGVO
 
 Der wichtigste Satz zuerst: Du musst für den Blick in deine eigene Datei **nichts bezahlen**. Nach Artikel 15 der Datenschutz-Grundverordnung hast du Anspruch auf eine kostenlose Datenkopie in angemessenem Turnus.
 
