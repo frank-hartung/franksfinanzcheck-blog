@@ -1,0 +1,25 @@
+# 🩺 DOKTOR-REPORT (Oberarzt, Gesamtprognose)
+
+**Stand:** 2026-08-12 10:13 UTC · Modus: VISIT
+**Wachen behandelt:** 12 · **0-Exit:** 11 · Funde: 1 · Sabotage-Fehler: 0
+
+| Wache (Phase) | Zweck | Exit |
+|---|---|---|
+| `casing_guard.py` (A-Text) | Akronyme/Marken (DSL, Check24) | 0 |
+| `dash_guard.py` (A-Text) | Dash-Typografie R1-R9 | 0 |
+| `unit_guard.py` (A-Text) | Euro/Prozent/NBSP | 0 |
+| `emoji_guard.py` (A-Text) | Emoji-Zero-Width etc. | 0 |
+| `lektor_guard.py` (A-Text) | Verlags-Lektorat L1-L15 | 0 |
+| `compound_guard.py` (B-Semantik) | Komposita SEO-Falle | 0 |
+| `math_guard.py` (B-Semantik) | Zahlenbeweis M1-M2 | 0 |
+| `affiliate_shield.py` (C-Money) | Auto-Deep + Gateways | 0 |
+| `affiliate_marketer.py` (C-Money) | CTA-Routing + Retarget | 0 |
+| `table_guard.py` (B-Semantik) | Tabellen T1-T4 | 0 |
+| `link_guard.py` (C-Money) | Interne Links V1-V2 | 0 |
+| `workspace_guard.py` (D-Ordnung) | Junk/Waisen/Rotation/Billig | 1 |
+
+## 🟡 Funde (nicht-fatal, dokumentiert)
+- `workspace_guard.py`: Junk/Waisen/Rotation/Billig
+
+---
+_Oberarzt bleibt bis zuletzt: Er loescht nur ueber die offiziellen Guards; Exit 2 einer Wache -> alles haelt._

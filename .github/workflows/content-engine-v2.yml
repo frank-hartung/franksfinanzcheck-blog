@@ -166,6 +166,11 @@ jobs:
           python3 scripts/table_guard.py --fix --new-only || echo "⚠ Tabellen-Funde gemeldet (nicht kritisch)"
           echo "== Redaktionelle Endabnahme (Profi-Gate G1-G5, Zertifikat) =="
           python3 scripts/redaktion_final.py || echo "⚠ Endabnahme: Funde im REDAKTION-FINAL-REPORT (nicht blockierend)"
+<<<<<<< HEAD
+=======
+          echo "== Oberarzt-Beweis nach der Geburt (Kette in Kanonfreiheit) =="
+          python3 scripts/blog_doctor.py --new-only || echo "⚠ Doktor-Befund (nicht kritisch)"
+>>>>>>> e8fedcfc (feat(doktor): blog_doctor.py - Oberarzt mit Selbstheilung ueber ALLE Automatik)
           echo "== Qualitäts-Score (FrankAutoOps, Threshold >= 0.85) =="
           python3 - <<'PYEOF'
           import glob, subprocess, sys, json, os

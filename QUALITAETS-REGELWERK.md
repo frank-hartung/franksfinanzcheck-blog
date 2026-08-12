@@ -231,6 +231,16 @@ jeder Schreibaktion.
   Fall-kontrolliert) – Pflege nur in L14_KANON (lektor_guard.py). Neu
   geborene Faelle meldet das Compound-Radar, Aufnahme hier durch
   Redaktion. Selbsttest nun 16 Faelle.
+<<<<<<< HEAD
+=======
+- **12.08.2026 (2):** Blog-Doktor installiert (Frank-Befehl „Selbstheilung
+  auf Profi-Level fuer die GESAMTE Blogautomatik"): blog_doctor.py fuhrt
+  ALLE 12 Wachen in kanonischer Ordnung mit --fix durch, bricht bei einem
+  Exit 2 (Sabotage) sofort ab und dokumentiert jede Exit-Signatur
+  (0 = sauber, 1 = Fund erlaubt, 2 = Stoppsirene). Ausserdem eigene
+  Selbsttest-Phase (7 Faelle) mit Exit 2 vor JEDER Visite. Verankerung:
+  eigene Wochenvisite Mi 08:45 MESZ + letzter Beweis in der Engine-Geburt.
+>>>>>>> e8fedcfc (feat(doktor): blog_doctor.py - Oberarzt mit Selbstheilung ueber ALLE Automatik)
 - **12.08.2026 (1):** Mittwochs-Domino vorab eingefangen & verhindert:
   spellcheck hard-exitete (141 unbekannte Funde – u.a. der eigene Markenname!)
   und riss die gesamte seo-weekly-Kette (Stufen dahinter kamen nie).
