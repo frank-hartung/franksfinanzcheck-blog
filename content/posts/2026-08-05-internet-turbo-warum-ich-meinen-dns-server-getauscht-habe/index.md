@@ -83,6 +83,11 @@ Ich habe verschiedene Dienste getestet, um die beste Performance zu finden. Hier
 * **Quad9 (9.9.9.9):** Dieser Dienst priorisiert deine Sicherheit. Er gleicht Anfragen mit einer Datenbank für bösartige Webseiten ab und blockiert Phishing-Seiten bereits auf DNS-Ebene, bevor dein Browser sie überhaupt laden kann.
 * **OpenDNS (Cisco):** Ideal für Familien. Hier kannst du (bei Erstellung eines kostenlosen Kontos) ganze Kategorien von Webseiten (z. B. Glücksspiel oder Erotik) zentral für alle Geräte im Haus sperren.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/dsl/)
+
+
 ## Messbare Vorteile:<br>Zahlen, die überzeugen
 
 Um den Erfolg zu kontrollieren, kannst du Tools wie den "DNS Benchmark" von GRC oder "namebench" nutzen. Diese Programme vergleichen die Antwortzeiten hunderter DNS-Server direkt von deinem Anschluss aus. 

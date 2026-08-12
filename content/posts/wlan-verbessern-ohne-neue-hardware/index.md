@@ -63,6 +63,11 @@ Zwei der unterschätztesten WLAN-Tricks:
 
 **Neustart-Routine:** Ein Router, der wochenlang läuft, kann „ermüden" – Speicher voll, Verbindungen veraltet, Wärme-Entwicklung. Ein Neustart alle 1 bis 2 Wochen behebt das: Router vom Strom trennen, 30 Sekunden warten, wieder einstecken. Viele Router bieten eine automatische Neustart-Funktion (zum Beispiel nachts um 4 Uhr) – aktivieren und vergessen.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/dsl/)
+
+
 ## WLAN-Verschlüsselung und versteckte Geräte
 
 Ein offenes oder schwach verschlüsseltes WLAN ist nicht nur ein Sicherheitsrisiko. Es kostet dich auch Tempo, wenn Nachbarn oder Fremde dein Netz mitbenutzen. Die Regeln:

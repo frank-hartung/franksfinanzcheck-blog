@@ -67,6 +67,11 @@ Du kannst deinen Zinssatz für den Dispo aktiv senken lassen. Viele Banken reagi
 
 Nenne den aktuellen Zinssatz deiner Bank und den Branchendurchschnitt. Erwähne sachlich, dass du über einen Wechsel zu einem günstigeren Anbieter nachdenkst. Oft gewährt dir die Bank dann einen Rabatt von 1 % bis 3 %. Das spart dir bei 1.000 € Dispo etwa 30 € im Jahr.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/kredit/)
+
+
 ## Alternative 2:<br>Notgroschen aufbauen
 
 Die nachhaltigste Lösung ist ein Puffer auf einem extra Konto. Ein [Notgroschen](../../posts/notgroschen-aufbauen-wie-viel-reicht/) von 1.000 € bis 3.000 € fängt unerwartete Reparaturen oder Anschaffungen sicher ab. So kannst du den Dispo vermeiden und bleibst finanziell unabhängig. Deine Waschmaschine oder das Auto verursachen dann kein Minus mehr.

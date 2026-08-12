@@ -45,6 +45,11 @@ Vergleichsportale wie CHECK24 zeigen dir alle verfügbaren Tarife auf einen Blic
 
 Den Abschluss machst du direkt online – meist mit wenigen Klicks. Du brauchst dafür nur deine Anschrift, deine Zählernummer und den Zählerstand. Die Kündigung des alten Vertrags übernimmt in der Regel dein neuer Anbieter kostenlos für dich.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
+
+
 ## Schritt 4:<br>Umzugstermin abwarten
 
 Nach dem Abschluss erhältst du eine Bestätigung mit dem Liefertermin. Der Wechsel erfolgt normalerweise zum Monatsersten. Deine Stromversorgung ist dabei durchgehend gesichert – du merkst praktisch nichts davon, außer auf der Rechnung.

@@ -39,6 +39,11 @@ Effizientes **[Geld sparen im Alltag](../../posts/frugalismus-tricks-alltag-200-
 
 Strom, Gas, Internet und Versicherungen kosten dich bei Trägheit unnötig viel Geld. Prüfe diese Verträge einmal jährlich über ein Vergleichsportal. Der Wechsel ist unkompliziert, da neue Anbieter die Kündigung meist komplett übernehmen. Das Einsparpotenzial ist massiv: Beim Wechsel vom teuren Grundtarif zum günstigsten Anbieter sparst du oft 200 bis 300 € pro Jahr. Nutze solche Gelegenheiten konsequent für ein **sparsam leben** ohne Komfortverlust. Ein Beispiel: Wenn du aktuell 100 € im Monat für deinen Internet-Tarif bezahlst, könntest du durch einen Wechsel zu einem günstigeren Anbieter 20 € im Monat sparen.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)
+
+
 ## Trick 5:<br>Automatisch sparen – bevor du es merkst
 
 Überliste dich selbst mit einem simplen Dauerauftrag am Monatsanfang. Überweise 10 % deines Gehalts direkt auf ein separates Tagesgeldkonto oder in ein Depot. Was nicht auf deinem Girokonto landet, gibst du im Alltag auch nicht aus. So wächst dein Notgroschen ganz ohne Disziplin oder tägliches Nachdenken. In Kombination mit der 50–30–20-Regel sicherst du dir langfristig finanzielle Stabilität. Eine weitere Möglichkeit, automatisch zu sparen, ist die Nutzung von **Spar-Apps**, die dir helfen, regelmäßig Geld zu sparen.

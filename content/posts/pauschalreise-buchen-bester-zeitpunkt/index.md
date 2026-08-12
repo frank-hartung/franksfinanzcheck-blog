@@ -69,6 +69,11 @@ Der größte Hebel beim Reisepreis ist der Abflughafen. Wer statt des Heimatflug
 
 Die Rechnung: Hin- und Rückfahrt zum weiter entfernten Flughafen (Zug oder Auto) kostet 30 bis 80 €. Die Ersparnis beim Reisepreis ist meist deutlich höher. Die [Vergleichsportale](../../posts/guenstige-fluege-spaetsommer-finden/) zeigen dir die Preise je Abflughafen auf einen Blick.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/mietwagen/)
+
+
 ## Spartrick 2:<br>Mitte der Woche fliegen
 
 Der Abreisetag beeinflusst den Preis stärker als gedacht: Wer statt Samstag/Sonntag Dienstag oder Mittwoch fliegt, spart bei Pauschalreisen oft 50 bis 150 € pro Person. Der Grund: Die Nachfrage konzentriert sich auf das Wochenende. Die Veranstalter bepreisen das.

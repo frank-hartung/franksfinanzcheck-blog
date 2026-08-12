@@ -69,6 +69,11 @@ Rechne deshalb immer zwei Szenarien:
 
 Viele Wechsler machen es sich zur Strategie, jährlich zu wechseln und jedes Mal den Neukundenbonus mitzunehmen. Das funktioniert – kostet aber jedes Jahr 10 bis 20 Minuten Aufwand. Wer das nicht will, wählt einen soliden Tarif mit Preisgarantie ohne Bonus-Spielchen.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
+
+
 ## Preisgarantie: sinnvoll oder unnötig?
 
 Eine Preisgarantie schützt dich vor Preiserhöhungen während der Laufzeit. Bei 12 Monaten Garantie und 12 Monaten Laufzeit deckt sie die komplette Vertragslaufzeit ab. Das ist der Idealfall.

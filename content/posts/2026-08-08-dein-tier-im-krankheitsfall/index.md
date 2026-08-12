@@ -77,6 +77,11 @@ Du profitierst zudem von einer hohen Sicherheit für deine Finanzplanung. Der Ve
 * **Vorsorge-Budget:** Jährliche Zuschüsse für Impfungen und Wurmkuren reduzieren die effektiven Monatskosten.
 * **Weltweiter Schutz:** Sicherheit auch auf Reisen.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/hunde/)
+
+
 ## Was sind die Nachteile einer Tierversicherung?
 Die laufenden Beiträge belasten dein Budget an jedem Monatsanfang. Das ist die Kehrseite der Medaille: Du zahlst auch dann, wenn dein Tier kerngesund ist. Für kranke oder sehr alte Tiere zahlst du oft deutlich höhere Prämien, oder eine Aufnahme wird sogar ganz abgelehnt. Manche Versicherer schließen Vorerkrankungen, die bereits vor Vertragsabschluss bekannt waren, komplett aus. Auch rassetypische Leiden (z. B. Hüftdysplasie bei Schäferhunden oder Atemwegsprobleme bei Möpsen) sind in günstigen Tarifen manchmal nicht abgedeckt.
 

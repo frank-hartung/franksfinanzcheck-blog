@@ -70,6 +70,11 @@ So gehst du vor: Adresse eingeben, dann siehst du, ob Glasfaser (FTTH) in deiner
 
 Wichtig bei Glasfaser: Auch wenn der Ausbau in deiner Straße läuft, musst du den Hausanschluss oft selbst beauftragen und bezahlen (100 bis 800 €, je nach Anbieter und Förderung). Prüfe, ob dein Anbieter den Hausanschluss kostenlos übernimmt. Das ist bei vielen Ausbauprojekten inzwischen Standard.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/dsl/)
+
+
 ## Glasfaser:<br>Wann der Umstieg Pflicht wird
 
 Glasfaser ist die einzige Technologie, die in den nächsten Jahren nicht an ihr Limit stößt. Während DSL bei 250 Mbit/s endet und Kabel bei hohen Tempi instabil wird, sind Glasfaser-Anschlüsse mit 1.000 Mbit/s und mehr Standard – und die Netze sind für 10 Gbit/s ausgelegt.

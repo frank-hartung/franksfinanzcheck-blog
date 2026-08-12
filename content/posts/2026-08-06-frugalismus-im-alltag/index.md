@@ -64,6 +64,11 @@ Die folgende Tabelle zeigt, wie viel Impact einfache **Sparmethoden** auf dein J
 | **Konsum** | Second-Hand statt Neukauf (Kleidung/Möbel) | 500 € – 1.000 € |
 | **TOTAL** | | **2.000 € – 3.500 €** |
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)
+
+
 ## Die drei größten Hebel im Frugalismus
 Um wirklich massiv **Geld im Alltag zu sparen**, solltest du dich auf die drei größten Ausgabentreiber konzentrieren: Wohnen, Mobilität und Ernährung.
 

@@ -62,6 +62,11 @@ Zusätzlich sorgen falsch eingestellte Anlagen oder verdeckte Heizkörper für u
 
 **7. Reflexionsfolie hinter Heizkörpern anbringen.** Heizkörper an Außenwänden heizen oft die Wand stärker als den Raum. Eine Reflexionsfolie für ca. 10 € lenkt die Wärme aktiv zurück in das Zimmer. Besonders in Altbauten ohne moderne Fassadendämmung ist dieser Effekt deutlich spürbar. Du reduzierst damit den Wärmeverlust nach draußen spürbar.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
+
+
 ## Maßnahmen 8 bis 10:<br>Größer denken
 
 **8. Hydraulischer Abgleich durchführen lassen.** Ein Fachbetrieb stellt deine Anlage so ein, dass jeder Heizkörper exakt die nötige Wassermenge erhält. Ohne diesen Abgleich werden manche Räume zu heiß, während andere kühl bleiben. Du sparst dadurch 5 bis 15 % Heizenergie ein. Der Staat fördert diese Maßnahme zudem mit attraktiven Zuschüssen.

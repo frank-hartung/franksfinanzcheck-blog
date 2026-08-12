@@ -68,6 +68,11 @@ Bei 5 Millimetern Eis steigt der **Gefriertruhe Stromverbrauch** oft um 20 bis
 
 Lasse warme Speisen immer erst vollständig auf Zimmertemperatur abkühlen. Warmer Dampf kondensiert sonst an der Rückwand und gefriert dort sofort. Das spart dir mühsames Abtauen und senkt die Kosten.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
+
+
 ## Tür-Verhalten und Befüllung
 
 Jedes Öffnen der Tür lässt wertvolle Kälte aus dem Gerät entweichen. Überlege dir daher schon vor dem Öffnen, welche Zutaten du benötigst. Schließe die Tür so schnell wie möglich wieder.

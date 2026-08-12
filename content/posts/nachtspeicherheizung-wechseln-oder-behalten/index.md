@@ -72,6 +72,11 @@ Wenn du Eigentümer bist und wechseln willst, so gehst du vor:
 
 Der gesamte Prozess dauert realistisch 3 bis 6 Monate – plane den Wechsel also nicht im November, sondern im Frühjahr oder Sommer.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
+
+
 ## Miete vs. Eigentum:<br>Wer zahlt?
 
 **Als Mieter** hast du gute Karten: Seit 2020 können Mieter von Vermietern verlangen, eine elektrische Speicherheizung zu ersetzen, wenn diese älter als 30 Jahre ist (Modernisierungsverlangen nach § 555c BGB). Der Vermieter muss dann auf eigene Kosten tauschen – und darf einen Teil der Kosten über die Modernisierungsumlage auf die Miete umlegen.

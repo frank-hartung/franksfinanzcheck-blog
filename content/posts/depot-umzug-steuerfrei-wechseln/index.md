@@ -69,6 +69,11 @@ Zwei Punkte erfordern jedoch deine Aufmerksamkeit:
 
 **Steuertöpfe:** Deine Verlustverrechnungstöpfe ziehen nicht automatisch mit um. Diese Töpfe enthalten realisierte Verluste aus Aktien oder Fonds. Du musst die Übertragung der Verlusttöpfe explizit beantragen. Ohne diesen Antrag verfallen deine wertvollen Steuervorteile beim Kontoschluss.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/tagesgeld/)
+
+
 ## Steuertöpfe und Verlustverrechnung richtig behandeln
 
 Verlusttöpfe sind bares Geld wert. Hast du zum Beispiel 2.000 € Verlust mit Aktien gemacht? Diese Summe mindert deine künftige Steuerlast bei Gewinnen. Vergisst du den Antrag beim Wechsel, schenkst du dem Staat unnötig Geld. Du zahlst dann die volle Abgeltungsteuer auf neue Gewinne.

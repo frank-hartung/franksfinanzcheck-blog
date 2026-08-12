@@ -74,6 +74,11 @@ Einige Tipps, um dein **reise Budget** zu planen:
 * **Kaution**: Eine echte Kreditkarte (keine Debitcard!) auf den Namen des Hauptfahrers ist für die Kautionshinterlegung zwingend erforderlich.
 * **Übernahme-Protokoll**: Dokumentiere Altschäden (Kratzer, Dellen) per Foto oder Video und lass sie im Vertrag vermerken.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/mietwagen/)
+
+
 ## Die Vorbereitung auf deinen Roadtrip
 Kontrolliere deine Dokumente vor der Abfahrt gründlich. Du benötigst einen gültigen Personalausweis oder Reisepass, deinen Führerschein (außerhalb der EU oft einen internationalen Führerschein) und die Kreditkarte, mit der du gebucht hast. Lade dir Offline-Karten auf dein Smartphone herunter. So findest du deinen Weg auch in Funklöchern oder bei begrenztem Datenvolumen im Ausland zuverlässig.
 

@@ -77,6 +77,11 @@ Falls du selbst kündigen musst (ohne Wechsel-Service), hilft dieses Gerüst:
 
 Wichtig: Per E-Mail an die offizielle Kündigungsadresse senden und die Empfangsbestätigung aufbewahren. Bei Streit über den Zugang hilft ein Einschreiben mit Rückschein – für 3 bis 4 € zusätzliche Sicherheit.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/dsl/)
+
+
 ## Was Anbieter dir „beim Bleiben" bieten
 
 Wenn du kündigst, wird dein Anbieter mit Rückhol-Angeboten antworten – oft mit Rabatten von 10 bis 20 % oder einem Gratis-Monat. Das ist der Moment zum Verhandeln, auch ohne ernsthafte Wechselabsicht:

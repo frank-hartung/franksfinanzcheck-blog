@@ -82,6 +82,11 @@ Der Klassiker der Mietwagen-Falle: Der Kindersitz kostet bei den Vermietern 5 bi
 
 Wichtig: Die gesetzlichen Vorgaben für Kindersitze im Ausland prüfen (Größe und Alter) – und den Sitz vor der Abfahrt richtig einbauen.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/mietwagen/)
+
+
 ## Trick 6:<br>Nebensaison für Familien
 
 Der größte Preisfaktor im Familienurlaub ist der Reisezeitpunkt: In den Schulferien zahlen Familien oft 30 bis 60 % mehr als in der Nebensaison. Die Kunst: Ferienzeiten clever nutzen.

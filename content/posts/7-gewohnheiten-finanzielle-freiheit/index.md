@@ -42,6 +42,11 @@ Richte einen automatischen ETF-Sparplan ein, der direkt nach deinem Gehaltseinga
 - Du investierst 100 € im Monat über 30 Jahre mit einer jährlichen Rendite von 5 %.
 - Nach 30 Jahren hast du insgesamt 36.000 € investiert, aber dank des Zinseszinses hast du ein Vermögen von über 70.000 € aufgebaut.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/tagesgeld/)
+
+
 ## 6. Bilde dich kontinuierlich weiter
 
 Finanzwissen reduziert dein Risiko und erhöht deine Renditechancen. Lies ein Fachbuch pro Quartal oder höre gezielte Podcasts auf dem Weg zur Arbeit. Wer die Mechanismen der Geldanlage versteht, trifft souveräne Entscheidungen und vermeidet teure Fehler. Dein Wissen ist das Asset mit der höchsten Rendite. Einige empfehlenswerte Bücher für den Einstieg in die Finanzbildung sind "Die Richest Man in Babylon" von George S. Clason oder "Das kleine Buch der großen Geldanlage" von Bodo Schäfer.

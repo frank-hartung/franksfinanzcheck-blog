@@ -54,6 +54,11 @@ Es ist auch wichtig, auf die **Kündigungsfrist** zu achten. Eine kurze Kündigu
 
 Beim Vergleich der Tarife solltest du auch auf die **Vertragslaufzeit** achten. Ein Vertrag mit einer Laufzeit von 12 Monaten bietet eine gute Balance zwischen Planungssicherheit und Flexibilität. Wenn du einen Vertrag mit einer längeren Laufzeit wählst, könntest du in einem teuren Vertrag feststecken, wenn die Preise steigen.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/gas/)
+
+
 ## Der Herbst-Check für deine Heizung
 
 Ein günstiger Tarif ist die Basis, aber effizientes Heizen hilft dir zusätzlich, deine [Heizkosten senken](../../posts/waermepumpe-vs-gasheizung-2026/) zu können. Entlüfte alle Heizkörper, bevor du die Thermostate im Herbst das erste Mal aufdrehst. Luft im System behindert den Wärmefluss und treibt den Verbrauch unnötig in die Höhe. Ein professioneller hydraulischer Abgleich optimiert die Wärmeverteilung im ganzen Haus. Schon eine Senkung der Raumtemperatur um ein Grad spart etwa 6 % Energie ein.

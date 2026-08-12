@@ -56,6 +56,11 @@ Smarte Thermostate kosten im Fachhandel meist zwischen 40 € und 90 € pro S
 | **Programmierbare Regler** | 20 € – 35 € | 10 % – 15 % | Gering |
 | **Smarte WLAN-Systeme** | 45 € – 90 € | 20 % – 31 % | Mittel (App-Setup) |
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
+
+
 ## Das Wichtigste in Kurzform
 * **Hohe Ersparnis:** Reduktion der Energiekosten um bis zu 30 % realistisch.
 * **Komfort:** Bequeme Steuerung per App, Sprache (Alexa/Siri) oder Zeitplan.

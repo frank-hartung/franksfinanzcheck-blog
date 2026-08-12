@@ -66,6 +66,11 @@ Ein Minijob bietet dir besondere Vorteile. Bis zu 556 € monatlich zahlst du k
 
 **8. Dividenden und Zinsen.** Lass dein bereits gespartes Geld für dich arbeiten. Zinsen und Dividenden fließen ganz ohne aktiven Zeitaufwand auf dein Konto. Nutze ein [Tagesgeldkonto](../../posts/tagesgeld-zinsen-sicher-anlegen/) oder einen [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) für den Start. Das ist die passivste Form eines Nebenverdienstes.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/tagesgeld/)
+
+
 ## Ideen 9 und 10:<br>Skalierbar
 
 **9. Digitale Vorlagen und Info-Produkte.** Erstelle hilfreiche Dokumente wie [Vorlagen für Haushaltsbücher](../../posts/monatsbudget-erstellen-schritt-fuer-schritt/). Einmal erstellt, verkaufst du diese Produkte unendlich oft. Dein Verdienst liegt je nach Bekanntheit bei 100 bis 500 € im Monat. Der hohe Aufwand entsteht nur zu Beginn des Projekts.

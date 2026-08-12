@@ -55,6 +55,11 @@ In Deutschland gibt es drei physische Mobilfunknetze: **Deutsche Telekom (D1), V
 
 **Profi-Tipp:** Nutze günstige Handytarife von sogenannten "Zweitmarken" (MVNOs). Du telefonierst im exzellenten Netz der großen Betreiber, zahlst aber oft nur einen Bruchteil des Preises, da auf teure Shop-Infrastruktur verzichtet wird.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/handytarife/)
+
+
 ## Schritt 3:<br>Die 4 wichtigsten Vergleichs-Kriterien
 
 Beim Handytarif vergleichen solltest du dich nicht nur vom Preis blenden lassen. Diese Faktoren bestimmen den langfristigen Nutzwert:

@@ -66,6 +66,11 @@ Bevor du die Einstellungen änderst, solltest du die Vor- und Nachteile abwägen
 * **Zentrale Datensammlung:** Nutzt du den Google-DNS, kennt Google deine besuchten Seiten (sofern du nicht ohnehin Chrome/Android nutzt).
 * **Lokale Dienste:** In seltenen Fällen können interne Dienste im Firmen-VPN Probleme bereiten, wenn der DNS zu strikt eingestellt ist.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/dsl/)
+
+
 ## So stellst du den DNS-Server um:<br>Schritt-für-Schritt-Anleitung
 
 ### Windows (10 & 11)

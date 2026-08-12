@@ -72,6 +72,11 @@ Hier ist eine Übersicht der besten kostenlosen Dienste, mit denen du dein **[In
 | **AdGuard DNS** | 94.140.14.14 | 94.140.15.15 | Filtert Werbung und Tracker heraus |
 | **OpenDNS** | 208.67.222.222 | 208.67.220.220 | Anpassbare Filter & Kinderschutz |
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/dsl/)
+
+
 ## Welche Vorteile hat der Wechsel des DNS-Servers?
 Der größte Vorteil liegt in der Reduzierung der sogenannten „Time to First Byte“. Wenn eine moderne Webseite geladen wird, müssen oft 50 bis 100 verschiedene Domains (für Bilder, Skripte, Werbebanner) aufgelöst werden. Braucht dein Standard-DNS pro Anfrage 50 Millisekunden länger als ein Profi-Dienst, summiert sich das pro Seitenaufruf auf mehrere Sekunden Wartezeit.
 

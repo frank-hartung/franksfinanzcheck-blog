@@ -87,6 +87,11 @@ Der entscheidende Blick auf die letzte Spalte: Bei 30 Jahren und 6 % kommen 64.
 
 Umgekehrt zeigt die Tabelle die Kosten des Zögerns: Wer 10 Jahre wartet, verliert bei 6 % fast 54.000 € Endwert – ohne einen Cent weniger eingezahlt zu haben. Der teuerste Fehler im Vermögensaufbau ist nicht die falsche Anlage, sondern der späte Start.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/tagesgeld/)
+
+
 ## Der 72er-Trick:<br>Verdopplung im Kopf rechnen
 
 Die 72er-Regel ist die einfachste Finanzformel der Welt: **Teile 72 durch den Zinssatz. Das Ergebnis ist die Anzahl der Jahre, bis sich dein Geld verdoppelt.**

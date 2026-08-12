@@ -38,6 +38,11 @@ Du kannst sofort beginnen, deinen Stromverbrauch zu reduzieren.
 9. **Backofen nicht vorheizen:** bei den meisten Gerichten unnötig – spart Strom und Zeit. 
 10. **LED-Lampen:** auch alte Energiesparlampen sind oft reif für den Tausch – LED verbraucht bis zu 80 % weniger.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/gas/)
+
+
 ## Klein investieren (10–50 €)
 Mit kleinen Investitionen kannst du deinen Stromverbrauch weiter reduzieren. 
 11. **Zeitschaltuhren:** für Router, Aquarium-Beleuchtung und Standby-Geräte – schalten automatisch ab. 

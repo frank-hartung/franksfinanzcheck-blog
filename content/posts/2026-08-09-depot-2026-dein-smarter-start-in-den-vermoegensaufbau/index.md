@@ -75,6 +75,11 @@ Meist nutzt du dafür das moderne EID-Verfahren deiner Ausweiskarte. Dabei liest
 
 Sobald der Broker dein Konto freischaltet, überweist du dein erstes Kapital. Nutze dafür dein hinterlegtes Referenzkonto bei deiner Hausbank für maximale Sicherheit. Dank Echtzeitüberweisungen steht das Geld bei vielen Brokern heute bereits nach wenigen Minuten für deinen ersten Kauf bereit.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/tagesgeld/)
+
+
 ## Die erste Investition:<br>Weniger ist mehr
 Viele Neulinge investieren aus Neugier sofort in riskante Trends wie KI-Nischen-ETFs, Krypto-Zertifikate oder Einzelaktien wie Tesla oder Nvidia. Ich rate dir zu Beginn klar zu einem weltweit gestreuten ETF (Exchange Traded Fund). Damit kaufst du Anteile an über 1.500 bis 3.600 Unternehmen gleichzeitig mit nur einem Klick.
 

@@ -73,6 +73,11 @@ Die Zusatzleistungen sind das Geschäftsmodell der Billig-Airlines – und die F
 
 Die Checkliste: Vor dem finalen Klick alle Zusatzleistungen im Warenkorb prüfen – und alles entfernen, was du nicht brauchst.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/mietwagen/)
+
+
 ## Vielfliegerprogramme clever nutzen
 
 Auch Gelegenheitsflieger können von Vielfliegerprogrammen profitieren – ohne Meilen-Jagd. Die Tipps:

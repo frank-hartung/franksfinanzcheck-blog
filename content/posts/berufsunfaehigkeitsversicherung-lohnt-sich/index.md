@@ -74,6 +74,11 @@ Manche Besserverdiener profitieren von starken betrieblichen Versorgungswerken. 
 
 Menschen kurz vor dem Ruhestand brauchen keine neue Versicherung mehr. Wer in fünf Jahren in Rente geht, überbrückt die Zeit oft mit Ersparnissen. Die hohen Beiträge für ältere Einsteiger stehen hier in keinem Verhältnis zum Nutzen. Nutze dein Geld in diesem Alter lieber für den Vermögensaufbau.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)
+
+
 ## Kostencheck:<br>So findest du die günstigste BU
 
 Die Preise für eine monatliche Rente von 1.500 € variieren 2026 stark. Ein Büroangestellter zahlt deutlich weniger als ein Dachdecker oder eine Pflegekraft. Dein Alter beim Abschluss spielt ebenfalls eine entscheidende Rolle für die Beitragshöhe.

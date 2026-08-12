@@ -44,6 +44,11 @@ Starrheit kostet dich bares Geld. Verschiebe deinen Flug um nur ein bis zwei Tag
 
 Vergleichsportale bilden das Fundament deiner Suche. Nutze sie als Werkzeug, um die gesamte Marktlage auf einen Blick zu sondieren. Aktiviere Preisalarme für deine Wunschstrecke und nutze die Kalenderansicht der Portale. So erkennst du sofort, an welchen Tagen die Airlines ihre günstigen Restplatzkontingente freigeben. Prüfe den Endpreis vor der Buchung immer direkt auf der Seite der Fluggesellschaft, um böse Überraschungen zu vermeiden.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/mietwagen/)
+
+
 ## Trick 4:<br>Nur Handgepäck – der Klassiker
 
 Viele Fluggesellschaften berechnen für Koffer mittlerweile 30 bis 60 € extra pro Strecke. Reise nur mit Handgepäck und reduziere deine Kosten sofort. Ein gut gepackter Rucksack reicht für einen Kurztrip im Spätsommer meist völlig aus. Beachte unbedingt die exakten Maße der Airline, meist ca. 55 × 40 × 23 cm. So vermeidest du teure Nachzahlungen direkt am Gate.

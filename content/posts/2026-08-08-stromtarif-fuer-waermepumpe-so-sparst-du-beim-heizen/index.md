@@ -60,6 +60,11 @@ Viele Hausbesitzer verschenken Geld, weil sie ihren Stromtarif nie wechseln. Sie
 | **Steuerbarkeit** | Verpflichtend durch Netzbetreiber | Je nach Anmeldung (EnWG §14a) |
 | **Flexibilität** | Zwei separate Verträge möglich | Nur ein Vertrag für alles |
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
+
+
 ## Wärmepumpentarif:<br>Die Vorteile
 Mit dem passenden Tarif nutzt du günstigen Heizstrom besonders in den Nebenzeiten. Moderne Wärmepumpen sind so konstruiert, dass sie die erzeugte Wärme in einem Pufferspeicher oder direkt im Estrich der Fußbodenheizung für mehrere Stunden zwischenspeichern. So merkst du im Alltag absolut nichts von den rechtlich zulässigen Abschaltzeiten (Sperrzeiten) der Netzbetreiber. Dein Wohnzimmer bleibt dauerhaft warm, während dein Geldbeutel geschont wird.
 

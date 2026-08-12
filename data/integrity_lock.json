@@ -1,0 +1,22 @@
+{
+  "signed_at": "2026-08-12T11:28:16.335577+00:00",
+  "head": "aec3186e",
+  "files": {
+    "assets/css/extended/custom.css": "bec7b22452c70804e13dc1217d8e39fdaff0679fd88d7b72a1868afc0dbb26f1",
+    "hugo.toml": "6d2e0a5cb2a1aec0f7ce6d91671d55119e4df7e7be0e08897c5a007b6f143660",
+    "layouts/_default/_markup/render-link.html": "6854a67cc2fea1e46376a713aefeb0c5b42ca90ff74e4a3ca4e338422ff87902",
+    "layouts/_partials/cover.html": "f96a5ff402634dffc595077ca3648d4e5a79cf061f3d78328102bb804463c152",
+    "layouts/_partials/extend_footer.html": "a4fa2074afc77eae574354a0199aa531fcd796f87eaa58a54b1444dd38f96513",
+    "layouts/_partials/extend_post_content.html": "a0bf5b4c30c5454edfc869dc99b0af0a550f1b2210b60289b57aec937702755e",
+    "layouts/_partials/head.html": "c888f4481bbacf85f6a283b923d673bbe9e734c297f6cbac5317b29eaac047b2",
+    "layouts/_partials/home_clusters.html": "c26a478ad7b7526cd3a00d55d60e5b7bf8d93e56aa294848bca6d326632827be",
+    "layouts/index.sw.js": "1ccb12aef58dca13bc26f7eb1c3e2eefe8ca039dd15de41b3e951fd416383ac6",
+    "layouts/pillar/list.html": "4847c8d93c6a2c65fd7d63de5414f0e9d4e2859e11394f882decdf5fe49f97b4",
+    "layouts/robots.txt": "b1d5ad6a2e48176d433d5230f89beb3669f30e01288d412e61c7de1e12092c90",
+    "scripts/affiliate_marketer.py": "f7941fe3f1c4e22451958d49636265d75b3d12b8ecdab837044efd6d44cd85ef",
+    "scripts/blog_doctor.py": "f5fc5053c95720ec330dcb2e72135f80e2028efad752ac51b7f71ba9d23db43f",
+    "scripts/check24_links.yaml": "417e752281360a2e06ea926c0ec9e1d8c40f2e82773f8c40ad6cf22ef530a4c5",
+    "scripts/lektor_guard.py": "c70777e8f2e47e68363dcb4454dfced2401bc2d4377975152e7968c9f8a4c2dd",
+    "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt": "290e3e94c46b151d4923ce8694d82fc1dc0f0947d62583a781859e712a8afbb2"
+  }
+}

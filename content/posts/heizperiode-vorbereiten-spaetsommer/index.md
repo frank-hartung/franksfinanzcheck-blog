@@ -51,6 +51,11 @@ Wenn das Wasser die Wärme optimal transportiert, sinken deine Kosten sofort. Ei
 
 Programmierbare Thermostate helfen dir zusätzlich beim Sparen. Sie regeln die Wärme automatisch herunter, wenn du nicht zu Hause bist oder schläfst. Moderne Modelle kosten zwischen 20 € und 50 € pro Stück. Diese Investition hast du oft schon nach einer Heizperiode wieder eingespielt.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/gas/)
+
+
 ## 3. Heizverhalten optimieren
 
 Jedes Grad weniger Raumtemperatur spart etwa sechs Prozent Energie. Wenn du von 22 auf 20 Grad reduzierst, schrumpft dein Verbrauch um ca. 12 %. Nutze die Nachtabsenkung konsequent auf 16 bis 18 Grad. Vermeide es jedoch, die Räume komplett auskühlen zu lassen.

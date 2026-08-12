@@ -68,6 +68,14 @@ Tipp: Achte auf die Kofferraumgröße – vier Personen mit Skiausrüstung brauc
 Die Tankregel ist der Klassiker der Mietwagen-Spartricks: Nimm den Tarif „voll zu voll" – du bekommst das Auto mit vollem Tank und gibst es voll wieder zurück. Der Vorteil: Du zahlst nur den Sprit, den du wirklich verbrauchst, und vermeidest die oft überteuerten Tank-Pakete der Vermieter (bis zu 2 € pro Liter Aufpreis).
 
 Die Regeln für den Winter: Die Tankstelle vor der Rückgabe suchen (nicht im Skigebiet – dort sind die Preise oft 20 Cent höher), und den Beleg aufbewahren. Bei Kälte verbraucht das Auto übrigens mehr Sprit (Motorwarmlauf, Heizung, Licht) – plane den Tankbedarf großzügig.
+<<<<<<< HEAD
+=======
+
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/mietwagen/)
+
+>>>>>>> 4c9b3115 (feat(affiliate+integrity): AM7 Mid-CTA (C24-compliant), Integritaets-Lock, Deploy-Marker-Wache)
 
 ## Trick 5:<br>Der richtige Buchungszeitpunkt
 

@@ -68,6 +68,11 @@ Beachte jedoch die Einschränkungen dieser Zusatzleistung. Ein Rabattretter grei
 5. **Begleitetes Fahren:** Junge Fahrer, die mit 17 starten, erhalten bei vielen Anbietern günstigere Konditionen.
 6. **Zahlweise:** Zahle deinen Beitrag einmal im Jahr komplett, um bis zu 5 % gegenüber der Monatszahlung zu sparen.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/unfallversicherung/)
+
+
 ## Jährlicher Wechsel:<br>Wann er sich lohnt
 
 Der Wechsel deiner Versicherung zum 30. November ist ein bewährter Spartrick. Die Preise am Markt schwanken stark, da Versicherer jedes Jahr aggressiv um Neukunden werben. Ein kurzer [Kfz-Vergleich](../../posts/kfz-versicherung-wechseln/) kostet dich nur zehn Minuten Zeit. Du findest dort oft Tarife, die bei identischer Leistung deutlich weniger kosten.

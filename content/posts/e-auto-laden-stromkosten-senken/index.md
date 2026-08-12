@@ -51,6 +51,11 @@ Besonders mit einer eigenen Photovoltaik-Anlage lässt du die Konkurrenz hinter 
 
 Steuere deine Ladezeiten über smarte Apps. Diese starten den Ladevorgang automatisch, wenn die Stromnachfrage sinkt oder die Sonne scheint. So nutzt du dynamische Tarife optimal aus und reduzierst deine jährliche Rechnung.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/gas/)
+
+
 ## Öffentliches Laden:<br>So vermeidest du Kostenfallen
 
 Vergleiche verschiedene Ladekarten und Apps vor dem ersten Anstecken. Die Preise an derselben Säule unterscheiden sich je nach Anbieter oft um 20 Cent oder mehr. Eine gute App zeigt dir den günstigsten [Stromtarif für](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) dein E-Auto in Echtzeit an.

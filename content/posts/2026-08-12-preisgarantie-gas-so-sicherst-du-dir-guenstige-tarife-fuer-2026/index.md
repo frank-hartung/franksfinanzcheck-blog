@@ -62,6 +62,14 @@ Damit der Wechsel reibungslos funktioniert und du keine bösen Überraschungen e
 
 Wenn du diese Punkte beachtest, vermeidest du Tarife mit versteckten Kosten. Achte besonders darauf, dass die Kündigung deines alten Vertrags meistens direkt vom neuen Anbieter übernommen wird. Du musst also nicht selbst zum Stift greifen, sofern du nicht eine sehr kurze Frist wegen einer Preiserhöhung einhalten musst.
 
+<<<<<<< HEAD
+=======
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/gas/)
+
+
+>>>>>>> 4c9b3115 (feat(affiliate+integrity): AM7 Mid-CTA (C24-compliant), Integritaets-Lock, Deploy-Marker-Wache)
 ## Strategien, um nachhaltig deine Gasrechnung sparen zu können
 
 Neben dem Wechsel des Anbieters gibt es weitere Hebel, um die Kosten zu senken. Der günstigste Brennstoff ist der, den du gar nicht erst verbrauchst. Eine Senkung der Raumtemperatur um nur ein Grad kann deinen Verbrauch um ca. sechs Prozent reduzieren. In der Praxis bedeutet das oft eine spürbare Entlastung am Ende des Jahres. Auch das Entlüften der Heizkörper vor der Heizperiode sorgt dafür, dass das System effizient arbeitet und kein wertvolles Gas verschwendet wird.

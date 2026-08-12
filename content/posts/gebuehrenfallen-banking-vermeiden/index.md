@@ -66,6 +66,11 @@ Manuelle Überweisungen am Schalter kosten dich oft 2 € bis 5 € pro Stück
 
 Erledige alle Bankgeschäfte konsequent online. Aktiviere deine Zugangsdaten für das Online-Banking und spare sofort bares Geld. Falls deine Bank sogar für Online-Buchungen Geld verlangt, solltest du sofort reagieren. Ein Wechsel zu einem moderneren Anbieter ist dann unumgänglich.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/kreditkarte/)
+
+
 ## Falle 5:<br>Papierkram-Gebühren
 
 Kontoauszüge per Post kosten oft 0,50 € bis 3 € pro Sendung. Auch Duplikate oder Saldenbestätigungen lässt sich die Bank gut bezahlen. Wer monatlich Briefe erhält, zahlt unnötig bis zu 36 € im Jahr. In der digitalen Welt ist dieser Service längst überholt.

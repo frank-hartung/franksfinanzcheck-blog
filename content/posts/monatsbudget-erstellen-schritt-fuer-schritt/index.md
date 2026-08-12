@@ -79,6 +79,11 @@ Nutze die Macht der Automatisierung für deinen Vermögensaufbau. Richte einen D
 
 Dein Sparziel sollte eine hohe Priorität in deinem Leben haben. Bezahle dich immer selbst zuerst, bevor du Geld für Konsum ausgibst. Erst wenn die Sparrate gesichert ist, planst du den Rest deiner Ausgaben.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)
+
+
 ## Schritt 5:<br>Budget-Kategorien befüllen
 
 Setze nun alle Puzzleteile zu einem Gesamtbild zusammen. Die 50–30–20-Regel bietet dir hierfür eine einfache und bewährte Struktur. Sie teilt dein Geld in drei klare Bereiche auf, damit du den Überblick behältst:

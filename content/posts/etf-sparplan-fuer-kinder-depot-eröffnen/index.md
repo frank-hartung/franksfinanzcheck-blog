@@ -75,6 +75,14 @@ So setzt du den [ETF-Sparplan für dein Kind](../../posts/2026-08-05-etf-sparpla
 **Schritt 4 – Sparplan einrichten (10 Minuten):** Betrag festlegen (ab 10 bis 25 € möglich), Ausführungstag wählen (zum Beispiel der 1. des Monats) und den Dauerauftrag auf das Verrechnungskonto einrichten. Das Schöne: Der Sparplan läuft automatisch – du musst nichts mehr tun.
 
 **Schritt 5 – Freistellungsauftrag für das Kind einrichten (5 Minuten):** Beim Broker den Sparerpauschbetrag des Kindes (1.000 €) hinterlegen. Damit bleiben die ersten 1.000 € Gewinn pro Jahr steuerfrei – der größte Steuervorteil des Kinderdepots.
+<<<<<<< HEAD
+=======
+
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/tagesgeld/)
+
+>>>>>>> 4c9b3115 (feat(affiliate+integrity): AM7 Mid-CTA (C24-compliant), Integritaets-Lock, Deploy-Marker-Wache)
 
 ## Steuern & Freibeträge:<br>Der unterschätzte Vorteil
 

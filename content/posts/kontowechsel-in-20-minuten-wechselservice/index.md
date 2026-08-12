@@ -60,6 +60,11 @@ Im zweiten Schritt beauftragst du den Wechselservice direkt im Online-Banking de
 
 Zum Abschluss prüfst du nach der Umstellung dein altes Konto. Wenn alle Zahlungen über das neue Konto laufen, kündigst du die alte Verbindung schriftlich. Die Kündigung ist meist jederzeit möglich. Dieser letzte Check kostet dich etwa 5 Minuten Aufwand.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/girokonto/)
+
+
 ## Daueraufträge und Lastschriften im Blick behalten
 
 Trotz des Automatismuses solltest du die Umstellung kurz kontrollieren. Prüfe nach etwa 4 Wochen, ob alle Lastschriften vom neuen Konto abgehen. Besonders seltene Abbuchungen wie die jährliche Kfz-Versicherung verdienen einen genauen Blick. Der Wechselservice übersieht solche Termine in Einzelfällen, wenn sie weit in der Vergangenheit liegen.

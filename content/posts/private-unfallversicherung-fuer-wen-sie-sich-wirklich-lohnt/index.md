@@ -45,6 +45,11 @@ Der Staat schützt dich nur bei Unfällen im Job, in der Schule oder auf dem dir
 - **Gliedertaxe:** Sie legt präzise fest, wie viel Geld du für den Verlust eines Fingers, Beins oder des Sehvermögens erhältst.
 - **Todesfallleistung:** diese Summe sichert deine Hinterbliebenen finanziell ab, falls ein Unfall tödlich endet.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/unfallversicherung/)
+
+
 ## Was der Schutz kostet
 
 Die monatlichen Beiträge richten sich nach deinem Alter, deinem Beruf und den gewählten Leistungen. Je nach Anbieter zahlst du für einen soliden Schutz oft weniger als für einen Handyvertrag.

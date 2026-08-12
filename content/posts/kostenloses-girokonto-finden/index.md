@@ -53,6 +53,11 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 3. **Einzelabrechnungen & SMS-TAN:** Das Konto selbst kostet nichts, aber die Bank verlangt Geld für jede SMS-TAN (oft 0,09 € bis 0,15 €) oder für manuelle Buchungen per Beleg. Nutze daher konsequent das App-Verfahren (Push-TAN) und verzichte auf Papier-Kontoauszüge.
 4. **Fremdwährungsgebühren:** Zahlst du im Urlaub in den USA oder der Schweiz, berechnen viele Banken eine "Fremdwährungsgebühr" von 1,5 % bis 2,5 % des Umsatzes. Top-Anbieter verzichten komplett darauf.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/girokonto/)
+
+
 ## Direktbank vs. Neobank:<br>Wo liegt der Unterschied?
 
 Wenn du **Kontoführungsgebühren sparen** willst, hast du meist zwei Optionen. **Direktbanken** (wie die ING, DKB oder Comdirect) sind etablierte Institute ohne Filialen. Sie bieten oft ein Vollsortiment inklusive Depot, Baufinanzierung und Dispo an. 

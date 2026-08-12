@@ -73,6 +73,11 @@ Deine jährliche Gesamtersparnis beläuft sich somit auf 164 €. Dein Balkonkr
 
 Der Erfolg hängt jedoch massiv von der Verschattung ab. Ein Nord-Balkon senkt die Ersparnis oft auf unter 100 € pro Jahr. Dann dauert es 6 bis 8 Jahre bis zum Gewinn. Beobachte vor dem Kauf genau, wie viele Stunden die Sonne ungestört auf deine Fläche scheint.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
+
+
 ## Förderung von Bund und Ländern
 
 Der Staat unterstützt dich indirekt beim Kauf deiner Anlage. Seit 2023 zahlst du beim Erwerb von Solarmodulen keine Mehrwertsteuer. Das spart dir sofort 19 % gegenüber anderen Elektronikprodukten. Viele Städte legen zusätzlich attraktive Förderprogramme mit Zuschüssen von bis zu 500 € auf.

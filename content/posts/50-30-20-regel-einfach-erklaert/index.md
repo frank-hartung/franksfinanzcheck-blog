@@ -69,6 +69,11 @@ Wie sieht das konkret aus? Nehmen wir ein Nettoeinkommen von **2.500 €** an:
 
 Nutze einen einfachen **Regel Rechner** oder eine Excel-Tabelle, um deine individuellen Werte basierend auf deinem Gehalt zu ermitteln. Liegen deine Fixkosten bei 1.500 €, musst du entweder bei den Wünschen kürzen oder deine Fixkosten aktiv senken.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)
+
+
 ## Schritt für Schritt zur eigenen 50-30-20-Planung
 
 1. **Echtes Nettoeinkommen ermitteln:** Nutze dein regelmäßiges Gehalt als Basis. Ignoriere schwankende Boni oder einmaliges Weihnachtsgeld für eine konservative Planung. Diese Extrazahlungen kannst du später als Sonder-Spende in den 20-Prozent-Topf werfen.

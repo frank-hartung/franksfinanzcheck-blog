@@ -83,6 +83,11 @@ Zwei Dinge fallen vielen beim ersten Blick auf ihre Kopie auf: Erstens wird ein 
 
 Übrigens aktualisiert sich der Basisscore vierteljährlich – wer heute aufräumt, sieht die Wirkung also zeitnah. Banken und Karten-Anbieter arbeiten zudem mit speziellen Branchenscores, die punktuell anders auffallen können; ein mittlerer Basic-Score kann im Kreditsegment trotzdem durchgehen, wenn die letzte Historie sauber ist.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/handytarife/)
+
+
 ## Fehler finden und korrigieren lassen
 
 Schätzungen zufolge enthält jede dritte Bonitätsakte schwammige oder überholte Einträge – und einige sind schlicht falsch. Typische Funde in der Datenkopie:

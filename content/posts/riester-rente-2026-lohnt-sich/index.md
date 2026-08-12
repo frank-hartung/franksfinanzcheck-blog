@@ -73,6 +73,11 @@ Die Kehrseite: Für viele andere ist Riester ein schwaches Produkt.
 
 Achtung bei der Kündigung: Du musst die erhaltenen Zulagen und Steuervorteile zurückzahlen. Das kann schnell 2.000 bis 5.000 € sein. Die Rechnung muss also immer den Nettovorteil der Kündigung zeigen: Was bleibt nach Rückzahlung übrig, und was kann ich damit anderweitig erreichen?
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/tagesgeld/)
+
+
 ## Stilllegen vs. kündigen vs. weiterzahlen
 
 Es gibt drei Optionen – und „kündigen" ist nicht immer die beste:

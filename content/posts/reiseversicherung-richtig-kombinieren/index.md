@@ -76,6 +76,11 @@ Die Reisegepäckversicherung klingt praktisch – ist aber für die meisten Reis
 
 Wer teure Technik mitnimmt, prüft besser die Hausrat-Deckung oder eine spezielle Elektronik-Versicherung – statt der pauschalen Gepäck-Police.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/mietwagen/)
+
+
 ## Jahresvertrag vs. Einzelreise
 
 Die wichtigste Kosten-Entscheidung: Jahresvertrag oder Einzelreise-Versicherung?

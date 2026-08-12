@@ -194,6 +194,18 @@ C24_ROUTES = ("tagesgeld", "girokonto")
 C24_ANCHOR = "Jetzt C24 Bank Angebote vergleichen"
 
 
+def mid_cta(pillar: str, reg: dict, artikel_text: str = "") -> str:
+    """AM7 (Frank 12.08.): In-Text-CTA - midlanger Artikel, Conversion
+    weiter hoch, 2-flaechig oben/unten -> Streifen in der Mitte."""
+    route = route_for(artikel_text, pillar) if artikel_text else PILLAR_ROUTE.get(pillar, "allgemein")
+    url = f"/go/{route}/" if route in reg else "/go/allgemein/"
+    anchor = C24_ANCHOR if route in C24_ROUTES else "Vergleichen & sparen"
+    return (
+        f'\n> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: '
+        f'[**{anchor}**]({url})\n'
+    )
+
+
 def build_top_cta(pillar: str, reg: dict, artikel_text: str = "") -> str:
     route = route_for(artikel_text, pillar) if artikel_text else PILLAR_ROUTE.get(pillar, "allgemein")
     url = f"/go/{route}/" if route in reg else "/go/allgemein/"
@@ -251,7 +263,7 @@ def process(path: Path, reg: dict) -> dict:
     affils = go_link("\n".join(body_lines))
     pillar = pillar_of(text)
     has_disclaimer = bool(DISCLAIMER_PAT.search(text))
-    fixes = {"am1": False, "am2": False, "am3": False}
+    fixes = {"am1": False, "am2": False, "am3": False, "am7": False}
     status = []
     if not affils:
         status.append(("AM1", "kein Affiliate-Link", "kritisch"))
@@ -285,6 +297,31 @@ def process(path: Path, reg: dict) -> dict:
                 "*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link "
                 "erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*") + "\n"
             fixes["am3"] = True
+
+    # AM7-MID-CTA (Frank 12.08.): Kellermann-Conversion: ein guter Pro-Marker
+    # sorgt fuer (1) oberen PFad, (2) Text-CTA (middle), (3) Schluss-CTA.
+    # Wir verteilen den Mittel-CTA NUR wo wir unbehindert groessenstefen (>~700
+    # Woerter) und maximal 2 In-Text/gefuehrte Links (kein Werbestreifen!).
+    n_affil = len(list(AFFIL.finditer(text)))
+    if DO_FIX and not DRY_RUN and 0 < n_affil <= 2 and len(text.split()) >= 700:
+        # Einfuegepunkt: halbe Textmitte nach H2-Fortschritt
+        text_lines = text.split("\n")
+        half = len(text.split()) // 2
+        words = 0
+        insert_at = None
+        for j, l in enumerate(text_lines):
+            words += len(l.split())
+            if l.startswith("## ") and words >= half:
+                insert_at = j
+                break
+        if insert_at:
+            route = route_for(text, pillar)
+            # Verdopplung-Pfosten: nie zwei Anker denselben Namen ins selbe Auge
+            if mid_cta(pillar, reg, text).strip() not in text:
+                text_lines = text_lines[:insert_at] + ["", mid_cta(pillar, reg, text), ""] + text_lines[insert_at:]
+                text = "\n".join(text_lines)
+                fixes["am7"] = True
+                status.append(("AM7", f"In-Text-CTA hinzu, Ziel /go/{route}/", "info"))
 
     # RETARGET (universell & sabotage-robust): Jede Schnell-Tipp-Box, deren Route vom
     # Ideal abweicht, wird auf die thematisch beste Route umgeschrieben.

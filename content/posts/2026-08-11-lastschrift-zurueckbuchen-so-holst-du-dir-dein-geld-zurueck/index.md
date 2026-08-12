@@ -68,6 +68,11 @@ Geht es um eine Abbuchung, die du schon länger auf dem Schirm hast, etwa eine D
 
 Nur am Rande: Für die reine Rückbuchung einer Lastschrift erheben die meisten Banken **keine Gebühren**. Sollte deine Bank eine Gebühr verlangen, lohnt ein kritischer Blick in das Preisverzeichnis – und ein Wechsel kann sich dann ohnehin lohnen. Wie einfach so ein Kontowechsel heute ist, zeigt unser Lesetipp weiter unten.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/girokonto/)
+
+
 ## Wann du besser nicht zurückbuchen solltest
 
 Das Rückbuchungsrecht ist stark – aber es ist kein Freifahrtschein. Es dient dem Schutz vor falschen oder unberechtigten Abbuchungen, nicht dem Umgehen berechtigter Forderungen.

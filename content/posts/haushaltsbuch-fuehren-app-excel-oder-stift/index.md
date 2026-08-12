@@ -79,6 +79,11 @@ Ein einfaches Notizbuch mit gezogenen Spalten reicht dafür völlig aus. Es ist 
 
 Stift und Papier eignen sich hervorragend für die ersten vier Wochen. So entwickelst du schnell ein Gefühl für deine täglichen Geldflüsse. Für eine dauerhafte Lösung ist der Aufwand jedoch oft zu hoch. Wechsel danach lieber auf eine digitale Lösung.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)
+
+
 ## So kategorisierst du Ausgaben richtig
 
 Viele Menschen scheitern an einem zu feinen Raster bei den Kategorien. Wer 30 verschiedene Töpfe verwaltet, verliert schnell die Lust am System. Starte deshalb mit maximal acht großen Hauptkategorien für deine Übersicht. Das hält den Aufwand gering und die Motivation hoch.

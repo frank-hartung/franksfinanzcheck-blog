@@ -48,6 +48,11 @@ Beim Tarifvergleich zählt nicht allein die monatliche Grundgebühr der ersten M
 
 Rechne dafür alle Kosten zusammen: Monatspreis mal 24 Monate plus Anschlussgebühr und Router-Miete. Ziehe davon alle Gutschriften und den Wechselbonus ab. Teile diese Summe durch 24. So erkennst du sofort, welcher Anbieter wirklich am günstigsten ist. Viele Provider locken mit 100 bis 300 € Gutschrift für Neukunden. Achte darauf, ob der Preis nach 6 oder 12 Monaten drastisch ansteigt.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
+
+
 ## Schritt 3:<br>Laufzeit clever wählen
 
 Tarife mit 24 Monaten Laufzeit bieten fast immer die höchsten Rabatte. Du bindest dich damit jedoch zwei Jahre an einen Anbieter. Falls du planst umzuziehen oder auf Glasfaser wartest, wähle lieber eine monatlich kündbare Variante. Diese Tarife sind im Grundpreis oft etwas teurer und bieten selten einen hohen Wechselbonus. Wäge Flexibilität gegen die maximale Ersparnis ab.

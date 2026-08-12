@@ -52,6 +52,11 @@ Ein Beispiel für versteckte Gebühren ist die Junge-Fahrer-Gebühr. Wenn du unt
 
 Bei der Übernahme: Das Auto **fotografieren und filmen** – alle Kratzer, Dellen, Felgen und den Innenraum. Die Schadensliste am Schalter unterschreiben lassen ("Schäden am Fahrzeug bestätigt"). Bei der Rückgabe: gemeinsame Prüfung mit dem Mitarbeiter, Zustandsprotokoll unterschreiben lassen. Ohne Beweise zahlt im Zweifel deine Karte. Ein Beispiel: Wenn du ein Auto mit einem Kratzer auf der Tür übernimmst, solltest du dies fotografieren und die Schadensliste am Schalter unterschreiben lassen. Wenn du das Auto dann zurückgibst und der Mitarbeiter behauptet, dass der Kratzer nicht da war, als du das Auto übernommen hast, kannst du mit deinen Fotos und der Schadensliste beweisen, dass der Kratzer bereits vorhanden war.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/mietwagen/)
+
+
 ## Falle 7:<br>Die Abholung am Flughafen
 
 Am Flughafen zahlst du den "Airport-Zuschlag" – manchmal 30 % mehr als in der Stadt. Wer mit öffentlichen Verkehrsmitteln eine Station in der Stadt ansteuert (oft 15–30 Minuten), spart deutlich. Vor allem bei längeren Mietzeiten lohnt sich das. Durch einen **[Mietwagen Vergleich](../../posts/mietwagen-buchen-so-sparst-du/)*[* kannst du](../../posts/versicherungen-kuendigen-diese-5-policen/) die besten Angebote finden und [Geld sparen](../../posts/versicherungen-kuendigen-diese-5-policen/). Ein Beispiel: Wenn du einen Mietwagen am Flughafen für 40 € pro Tag nimmst, aber in der Stadt für 28 € pro Tag, sparst du 12 € pro Tag, wenn du den Mietwagen in der Stadt nimmst.

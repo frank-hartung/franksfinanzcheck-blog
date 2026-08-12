@@ -66,6 +66,11 @@ In der Praxis heißt das: Du kannst den Miet-Router kündigen und deinen eigenen
 
 Wichtig: Prüfe vor dem Kauf, ob dein Router zum Anschlusstyp passt – DSL-Router funktionieren nicht am Kabelanschluss und umgekehrt. Die Verpackung weist den Anschlusstyp aus (DSL/VDSL, Kabel, Glasfaser).
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/dsl/)
+
+
 ## Kompatibilität prüfen:<br>Der häufigste Fehler
 
 Der häufigste Fehler beim Router-Kauf ist die falsche Anschlussart. Bevor du bestellst, klärst du:

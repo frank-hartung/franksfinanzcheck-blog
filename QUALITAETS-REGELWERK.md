@@ -233,6 +233,13 @@ jeder Schreibaktion.
   Redaktion. Selbsttest nun 16 Faelle.
 <<<<<<< HEAD
 =======
+- **12.08.2026 (4):** Profi-Affiliate-Rundgang abgeschlossen (Frank):
+      AM7 Mid-CTA eingefuehrt (In-Text-CTA nach Wort-Mitte, C24-rule inklusive),
+      integrity_guard.py als SHA-256-Siegelschloss ueber 16 Kerndateien
+      (Kritisch=fest stopft, Fest=meldet Sichtung), Deploy-Preflight gegen
+      Merge-Marker erweitert (nie wieder roter Build wegen '<'), blog_doctor
+      auf 13 Wachen inkl. Lock. ANMERKUNG: Umami bleibt deaktiviert bis die
+      Website-ID eingetragen wird (Frank-Handlung, siehe ANLEITUNG-UMAMI).
 - **12.08.2026 (3):** Der Merge-Marker-Vorfall (Deploy-Todestuetze): Die
   Engine-Kettenliessen ungelöste „<<<<<<< HEAD” in mehrere die Artikelfronts.
   W7 Marker-Jaeger in workspace_guard.py (findet + heilt mit material-

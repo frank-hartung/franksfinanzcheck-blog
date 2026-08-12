@@ -72,6 +72,11 @@ Die gefährlichste Falle ist der Lebensstandard-Effekt: Wer mehr verdient, gibt 
 
 Die Gegenstrategie: Bei jeder Gehaltserhöhung wandern 50 % des Zuwachses direkt in den Sparplan. Der Rest darf den Alltag verbessern. So steigt deine Sparquote mit jedem Gehaltsplus automatisch – ohne dass du etwas spürst. Diese Regel hat bei mir den größten Unterschied gemacht.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/tagesgeld/)
+
+
 ## Sparquote bei niedrigem Einkommen
 
 Wer wenig verdient, hat oft das Gefühl, dass Sparen unmöglich ist. Falsch: Gerade bei niedrigen Einkommen zählt jeder Euro, und die Quote lässt sich durch Fixkosten-Senkung massiv verbessern. Wer seine [Strom- und Gasrechnung](../../posts/gastarife-vergleichen-vor-dem-herbst/) optimiert, sein [Girokonto gebührenfrei](../../posts/kostenloses-girokonto-finden/) führt und auf unnötige Versicherungen verzichtet, holt oft 100 bis 200 € pro Monat aus dem Budget. Das sind bei 1.800 € netto satte 5 bis 10 Prozentpunkte Sparquote.

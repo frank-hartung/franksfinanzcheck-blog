@@ -60,6 +60,11 @@ Kleinst-Lebensversicherungen mit 5.000 bis 15.000 € Todesfallsumme stammen of
 
 Prüfe den Rückkaufswert: Viele Policen haben nach Jahren eine garantierte Leistung, die unter den eingezahlten Beiträgen liegt. Der Rückkauf kann trotzdem sinnvoll sein, wenn das Geld anderweitig besser arbeitet – zum Beispiel in einem [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/). Lass dich bei Altverträgen beraten, die Kündigung kann steuerliche Folgen haben.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/hausrat/)
+
+
 ## Kündigen:<br>5. Kfz-Schutzbrief und unnötige Zusatzbausteine
 
 Der Kfz-Schutzbrief (Pannenhilfe, Abschleppen, Mietwagen bei Panne) kostet 20 bis 60 € pro Jahr und ist oft im Kfz-Vertrag „mit drin". Viele Fahrer:innen haben ihn doppelt – über den ADAC, die Kreditkarte oder den Autohersteller. Prüfe, was du schon hast, bevor du den Baustein weiterzahlst.

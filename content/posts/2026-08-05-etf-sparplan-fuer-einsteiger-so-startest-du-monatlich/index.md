@@ -68,6 +68,11 @@ Zuerst benötigst du ein Wertpapierdepot bei einer Bank oder einem Broker. Vergl
 4. **Bestimme den Abbuchungstag:** Wähle den 1. oder 5. eines Monats, idealerweise direkt nach deinem Gehaltseingang (Pay Yourself First).
 5. **Steuer-Tipp:** Richte direkt nach der Eröffnung einen Freistellungsauftrag ein. Bis zu 1.000 € an Gewinnen und Dividenden pro Jahr sind für Singles steuerfrei.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/tagesgeld/)
+
+
 ## Wie viel solltest du investieren?
 
 Deine monatliche Rate muss zu deinem frei verfügbaren Einkommen passen. Eine bewährte Faustformel ist die 50–30–20-Regel: 50 % für Fixkosten, 30 % für Freizeit und 20 % für das Sparen und Investieren. 

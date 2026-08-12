@@ -44,6 +44,11 @@ Vier Faktoren beeinflussen deine Prämie besonders stark. Deine **SF-Klasse** sp
 
 Die Haftpflicht ist gesetzlich vorgeschrieben und unverzichtbar. Wähle hier eine Deckungssumme von pauschal 100 Millionen Euro für Personen- und Sachschäden. Eine Teilkasko schützt dich zusätzlich bei Glasbruch, Diebstahl oder Wildunfällen. Das **Kfz-Versicherung wechseln beim Neuwagen** ist besonders wichtig, da du hier fast immer eine Vollkasko benötigst. Nach etwa fünf bis sieben Jahren reicht bei vielen Fahrzeugen der günstigere Teilkasko-Schutz aus.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/haftpflicht/)
+
+
 ## Die 4 häufigsten Fehler
 
 Verlasse dich niemals auf die automatische Verlängerung deines Vertrages. Ohne Kündigung zahlst du im nächsten Jahr oft unnötig hohe Bestandskundentarife.
