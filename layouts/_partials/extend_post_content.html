@@ -13,7 +13,8 @@
 {{- $pin_desc := .Description | default (.Title | plainify) -}}
 {{- $pin_desc = $pin_desc | plainify | truncate 280 -}}
 {{- $tags := slice -}}
-{{- range first 3 .Params.keywords -}}
+{{- $kws := .Params.keywords | default slice -}}
+{{- range first 3 $kws -}}
   {{- $tag := . | lower -}}
   {{- $tag = replaceRE "ä" "ae" $tag -}}
   {{- $tag = replaceRE "ö" "oe" $tag -}}
