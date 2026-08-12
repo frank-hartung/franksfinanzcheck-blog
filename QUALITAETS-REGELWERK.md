@@ -389,6 +389,19 @@ jeder Schreibaktion.
   zeigt das Desaster: Messmethoden-Dokumentation (wie „ø interne Links")
   muss in KLARTEXT definiert sein (HTML vs Markdown – wir zaehlen jetzt
   HTML nach Build, nicht mehr MD-Blindheit).
+- **12.08.2026 (8):** LEKTOR-ELITE (Frank: „weltbestes Pro-Lektorat“): Zwei Wachen
+  ergaenzt: scripts/stil_guard.py (S1-S8 Stil-Messung: Satzanfangs-Echo ueber
+  Absatzgrenzen, Passiv-Dichte > 28 %, Dass-Ketten, Weiche-Wolke, LIX
+  Lesbarkeit-Median 49.1 Flotte, Absatz-Monster, Vokabular-Diversitaet TTR)
+  und scripts/hardcases_guard.py (H1-H9 deterministische Fest-Fehler mit
+  Auto-Heilung: einzigste→einzige, das selbe→dasselbe, darauf hin→daraufhin,
+  seid/seit, wieder/wider, Pleonasmus-Kanon wie „weisser Schimmel", bißchen,
+  pre-1996-Schreibung mit Schutz-Schleusen gegen Falsch-Positive).
+  Beide in blog_doctor-Kette, Integrity-FEST 30 → 32 Dateien, Wohnplatte
+  (Selbsttest vor jedem Schreiben). ERSTE RUNDE bewiesen: Selbsttest faengt
+  3 echte Design-Bugs in meinen eigenen Regeln ab (Case-Erledigt, Inline-
+  Code-Schutzfehl, m re.I bei Fall 6) – dieser Selbsttest ist die beste
+  Investition heute.
 - **12.08.2026 (6):** Marken-Relaunch Runde 2 (Frank: „Punkte stoeren, Marke nicht
   sauber genug + Logo fuer ganzen Blog"). BEKENNENDE LEKTION: Mein Punktmuster
   mit Alpha `fill=(255,255,255,18)` wurde von Pillow im RGB-Modus still

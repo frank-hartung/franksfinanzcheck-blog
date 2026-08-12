@@ -60,6 +60,8 @@ KETTE = [
     ("unit_guard.py",         ["--fix"],                "A-Text", "Euro/Prozent/NBSP"),
     ("emoji_guard.py",        ["--fix"],                "A-Text", "Emoji-Zero-Width etc."),
     ("lektor_guard.py",       ["--fix"],                "A-Text", "Verlags-Lektorat L1-L15"),
+    ("hardcases_guard.py",    ["--fix"],                "A-Text", "Deutsche Fest-Fehler H1-H9 (12.08. hinzu)"),
+    ("stil_guard.py",         ["--fix"],                "A-Text", "Stil-Qualitaet S1-S8 (12.08. hinzu)"),
     ("compound_guard.py",     ["--fix"],                "B-Semantik", "Komposita SEO-Falle"),
     ("math_guard.py",         ["--fix"],                "B-Semantik", "Zahlenbeweis M1-M2"),
     ("affiliate_shield.py",   ["--fix"],                "C-Money", "Auto-Deep + Gateways"),

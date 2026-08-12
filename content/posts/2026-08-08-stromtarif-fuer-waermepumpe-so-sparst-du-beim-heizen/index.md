@@ -25,6 +25,7 @@ social_posted: true
 
 
 
+
 Wusstest du, dass du deine Heizkosten um bis zu 30 % senken kannst? Ein spezieller Wärmepumpentarif macht diesen finanziellen Vorteil möglich. Deine [Wärmepumpe](../../posts/waermepumpe-vs-gasheizung-2026/) benötigt viel Energie, doch dieser Strom muss nicht teuer sein. Wir zeigen dir, wie du den passenden Tarif für dein Haus findest und worauf du bei der Abrechnung achten musst.
 
 

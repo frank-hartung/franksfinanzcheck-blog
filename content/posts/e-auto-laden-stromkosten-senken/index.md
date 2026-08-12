@@ -24,6 +24,7 @@ social_posted: true
 
 
 
+
 Du zahlst für 100 Kilometer Fahrt entweder 4,50 € oder 15 €. Die Entscheidung liegt allein bei deiner Ladestrategie. Ein Elektrofahrzeug schlägt den Verbrenner bei den Betriebskosten fast immer. Dennoch variieren die Preise massiv zwischen der heimischen Garage und dem Schnelllader an der Autobahn. Mit dem richtigen Wissen drückst du deine E-Auto Ladekosten auf ein Minimum.
 
 ### Das Wichtigste in Kürze

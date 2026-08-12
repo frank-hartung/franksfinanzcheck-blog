@@ -21,6 +21,7 @@ social_posted: true
 
 
 
+
 Stromvergleiche versprechen „bis zu 500 € sparen" – und zeigen dann eine Liste mit Tarifen, die sich auf den ersten Blick kaum unterscheiden. Arbeitspreis, Grundpreis, Sofortbonus, Neukundenbonus, Preisgarantie: Wer nicht genau hinschaut, wählt am Ende einen Tarif, der gar nicht der günstigste ist.
 
 Die gute Nachricht: Stromtarife richtig zu vergleichen ist lernbar. In [20 Minuten](../../posts/kontowechsel-in-20-minuten-wechselservice/) hast du den besten Tarif für deinen Haushalt gefunden – wenn du weißt, worauf es ankommt. Genau das zeige ich dir hier Schritt für Schritt.

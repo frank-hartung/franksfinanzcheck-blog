@@ -1,7 +1,7 @@
 # 🩺 DOKTOR-REPORT (Oberarzt, Gesamtprognose)
 
-**Stand:** 2026-08-12 14:53 UTC · Modus: VISIT
-**Wachen behandelt:** 14 · **0-Exit:** 13 · Funde: 1 · Sabotage-Fehler: 0
+**Stand:** 2026-08-12 15:55 UTC · Modus: VISIT
+**Wachen behandelt:** 16 · **0-Exit:** 15 · Funde: 1 · Sabotage-Fehler: 0
 
 | Wache (Phase) | Zweck | Exit |
 |---|---|---|
@@ -11,6 +11,8 @@
 | `unit_guard.py` (A-Text) | Euro/Prozent/NBSP | 0 |
 | `emoji_guard.py` (A-Text) | Emoji-Zero-Width etc. | 0 |
 | `lektor_guard.py` (A-Text) | Verlags-Lektorat L1-L15 | 0 |
+| `hardcases_guard.py` (A-Text) | Deutsche Fest-Fehler H1-H9 (12.08. hinzu) | 0 |
+| `stil_guard.py` (A-Text) | Stil-Qualitaet S1-S8 (12.08. hinzu) | 0 |
 | `compound_guard.py` (B-Semantik) | Komposita SEO-Falle | 0 |
 | `math_guard.py` (B-Semantik) | Zahlenbeweis M1-M2 | 0 |
 | `affiliate_shield.py` (C-Money) | Auto-Deep + Gateways | 0 |
