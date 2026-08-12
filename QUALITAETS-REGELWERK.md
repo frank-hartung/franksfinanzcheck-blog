@@ -389,6 +389,24 @@ jeder Schreibaktion.
   zeigt das Desaster: Messmethoden-Dokumentation (wie „ø interne Links")
   muss in KLARTEXT definiert sein (HTML vs Markdown – wir zaehlen jetzt
   HTML nach Build, nicht mehr MD-Blindheit).
+- **12.08.2026 (9):** PLAGIAT-KANZLEI + CONTENT-AUDIT (Frank: „weltbeste
+  Plagiats-/Auditor-Automatik"). Zwei neue Wachen in blog_doctor-Kette:
+  scripts/plagiat_guard.py (P1 Shingle-Jaccard 8-Wort-Fenster, P2 Duplikat-
+  Saetze cross-artikel, P3 Boilerplate-Quote, P4 FINGERPRINT-REGISTRY mit
+  SHA-256 + SimHash-64 + Zeitstempel = URHEBERSCHAFTS-Beweis, P5 Klon-
+  Quarantaene bei Jaccard > 0.55: juengerer Artikel → draft:true
+  (reversibel). Selbsttest 8 Faelle. Fund: 0 Klone, 0 Verdacht, 1
+  legitimes Satz-Duplikat (versicherungstypisch). Boilerplate-Kanon
+  erweitert um Disclaimer und Pillar-Kanal-Zeilen.
+  scripts/content_audit.py (C1 Duenn-Alarm <750 Woerter, C2 Struktur-
+  Vollstaendigkeit Fazit/FAQ, C3 Platzhalter-Kanon mit Auto-Fix [Name]
+  → Frank Hartung, Beispiel.com→eigene Domain; TODO/lorem report-only,
+  C4 Zahl ohne €/% fehlt, C5 Jahres-Drift, C6 Titel-Versprechen).
+  Fund heute: 🚨 C2-Systemluecke: kein Artikel hat eine Fazit-Rubrik
+  (echter Auditfund); Roadmap: redaktions-politur-Workflow ergaenzt.
+  Integrity-FEST: 32 -> 35 Dateien (inkl. data/content_fingerprints.jsonl).
+  Lektion: Audit-Messung sah zuerst 77/77 ohne Fazit – Messung korrekt:
+  C2 deckt echte Strukturlücke auf; Auto-Plattencheck wirkt wie beworben.
 - **12.08.2026 (8):** LEKTOR-ELITE (Frank: „weltbestes Pro-Lektorat“): Zwei Wachen
   ergaenzt: scripts/stil_guard.py (S1-S8 Stil-Messung: Satzanfangs-Echo ueber
   Absatzgrenzen, Passiv-Dichte > 28 %, Dass-Ketten, Weiche-Wolke, LIX
