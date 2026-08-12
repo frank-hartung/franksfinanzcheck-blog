@@ -1,12 +1,10 @@
 # 🔐 INTEGRITY-REPORT
 
-**Stand:** 2026-08-12 12:06 UTC · HEAD: `c40ae84`
-**Verlade-Ebene:** 16 Dateien gelockt
+**Stand:** 2026-08-12 12:43 UTC · HEAD: `6afa486`
+**Verlade-Ebene:** 18 Dateien gelockt
 **Gesperrte kritische Knoten:** 7
 
+🎉 Integritaet: Der Kern entspricht exakt dem letzten signierten Zustand.
 
-## 🟠 Festrelevante Abweichungen
-
-- `scripts/blog_doctor.py`
 ---
 _Selbsttest vor jedem Start. Kritisch unterschreitet und Frank heißt Schritt._

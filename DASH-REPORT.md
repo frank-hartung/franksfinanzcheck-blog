@@ -1,6 +1,6 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-08-12 11:40 UTC · Modus: FIX
+**Stand:** 2026-08-12 12:43 UTC · Modus: DRY-RUN
 
 🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
 
@@ -16,7 +16,7 @@
 - `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 36: S3-Konjunktion
 - `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 92: S3-Konjunktion
 - `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 125: S3-Konjunktion
-- `content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md` Zeile 76: S3-Konjunktion
+- `content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md` Zeile 74: S3-Konjunktion
 - `content/posts/5g-home-router-oder-dsl/index.md` Zeile 21: S3-Konjunktion
 - `content/posts/5g-home-router-oder-dsl/index.md` Zeile 32: S3-Konjunktion
 - `content/posts/5g-home-router-oder-dsl/index.md` Zeile 54: S3-Konjunktion

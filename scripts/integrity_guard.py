@@ -71,6 +71,9 @@ FEST = {
     "scripts/affiliate_marketer.py",
     "scripts/lektor_guard.py",
     "scripts/blog_doctor.py",
+    # Marken-Design-Bewohner (Frank 12.08. ihr Markendesign dauerhaft bewachen):
+    "scripts/generate_covers.py",
+    "scripts/check_covers.py",
 }
 
 

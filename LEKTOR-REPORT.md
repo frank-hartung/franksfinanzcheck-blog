@@ -1,6 +1,6 @@
 # ✒️ LEKTOR-REPORT (lektor_guard.py)
 
-**Stand:** 2026-08-12 11:40 UTC · Modus: FIX
+**Stand:** 2026-08-12 12:43 UTC · Modus: DRY-RUN
 
 | Regel | Anzahl |
 |---|---|
@@ -8,7 +8,7 @@
 | L2 Fuehl-Phrasen (Auto) | 0 |
 | L3 Personenkonsistenz | 40 |
 | L4 Ausrufezeichen/Grenze | 0 |
-| L5 Echo (Report) | 170/0 |
+| L5 Echo (Report) | 169/0 |
 | L7 Nominalstil-Radar (Report) | 20 |
 | L8 Weichmacher-Dichte (Report) | 154 |
 | L9 Satzanfangs-Echo (Report) | 2 |

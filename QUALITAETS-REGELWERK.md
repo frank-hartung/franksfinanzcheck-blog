@@ -231,6 +231,14 @@ jeder Schreibaktion.
   Fall-kontrolliert) – Pflege nur in L14_KANON (lektor_guard.py). Neu
   geborene Faelle meldet das Compound-Radar, Aufnahme hier durch
   Redaktion. Selbsttest nun 16 Faelle.
+- **12.08.2026 (5):** Marken-Band statt Punktewand (Frank: „Die Punkte
+  im Hintergrund stoeren"). Neues Footer-Design: tiefes Emerald-Band +
+  goldene Fuehrungslinie + „FranksFinanz" weiss + „check" gold. 77 Covers
+  neu. C2-Gate-Verifikation: Brand-Staerke jetzt 0.034 gold-Pixel-Anteil
+  (vorher 0.0645 Chip-Rahmen) - beide Designs beat die Schwelle seit
+  check_covers 2x sicher. Integritaets-Siegel inkl. generate_covers.py
+  + check_covers.py neu gelockt (18 Dateien). Aenderungen am Marken-Look
+  verlangen jetzt --set-current (siehe ANLEITUNG).
 - **12.08.2026 (4):** Profi-Affiliate-Rundgang abgeschlossen (Frank):
       AM7 Mid-CTA eingefuehrt (In-Text-CTA nach Wort-Mitte, C24-rule inklusive),
       integrity_guard.py als SHA-256-Siegelschloss ueber 16 Kerndateien

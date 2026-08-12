@@ -226,16 +226,30 @@ def make_cover(title, slug, out_path, force=False):
 
     d = ImageDraw.Draw(img)
 
-    # Dezentes Punktmuster oben/unten
+    # Dezentes Punktmuster nur oben (Frank 12.08.: unter dem Brand-Band stoerte es,
+    # also unten nur das saubere Band, oben dezente Dots, Ruhe-Stil).
     for i in range(0, W, 40):
         for j in range(80, 220, 40):
-            d.ellipse([i, j, i + 6, j + 6], fill=(255, 255, 255, 18))
-    for i in range(0, W, 40):
-        for j in range(H - 220, H - 80, 40):
             d.ellipse([i, j, i + 6, j + 6], fill=(255, 255, 255, 18))
 
     # Gelber Akzentbalken oben
     d.rounded_rectangle([120, 120, 180, 132], radius=6, fill=GOLD)
+
+    # Marken-Band unten (sauber, foerst das Prinzip Pin-Symmetrie):
+    band_y0, band_y1 = H - 235, H - 55
+    d.rectangle([0, band_y0, W, band_y1], fill=(10, 58, 42))       # tieferes Emerald
+    d.line([(0, band_y0), (W, band_y0)], fill=GOLD, width=4)       # goldene Fuehrungslinie
+    # Brand-Text im Band (Frank-Chip: weiss + goldener Abschluss)
+    brand_font = load_font(46)
+    brand = "FranksFinanzcheck"
+    bw = d.textlength(brand, font=brand_font)
+    bx = (W - bw) / 2
+    text_y = band_y0 + (band_y1 - band_y0 - brand_font.size) // 2 - 6
+    d.text((bx, text_y), brand, font=brand_font, fill=WHITE)
+    d.text((bx + d.textlength("FranksFinanz", font=brand_font), text_y), "check",
+           font=brand_font, fill=GOLD)
+    # Mini-Akzent (kleine gelbe Platte auf dem Band rechts) — kein Raster mehr
+    d.rounded_rectangle([W - 90, band_y0 + 22, W - 46, band_y0 + 34], radius=6, fill=GOLD)
 
     # Titel (zentriert, automatischer Umbruch, Skalierung)
     title_font = load_font(78)
@@ -274,25 +288,6 @@ def make_cover(title, slug, out_path, force=False):
     sub = "GELD SPAREN & FRUGALISMUS"
     sw = d.textlength(sub, font=sub_font)
     d.text(((W - sw) / 2, y_start + total_h + 50), sub, font=sub_font, fill=CREAM)
-
-    # Footer-Branding: Marken-Chip (FranksFinanzcheck) – optisch sauber
-    # getrennt (12.08. Frank: das Logo unten war nicht scharf genug:
-    # Jetzt: mehr Abstand, eigener Chip mit goldener Linie oben).
-    brand_font = load_font(44)
-    brand = "FranksFinanzcheck"
-    bw = d.textlength(brand, font=brand_font)
-    bx = (W - bw) / 2
-    by = H - 205
-    # Goldfaden (Stehlampe Stimuli) ueber dem Wort
-    d.rounded_rectangle([bx - 26, by - 32, bx + bw + 26, by + brand_font.size + 14],
-                        radius=18, outline=GOLD, width=3)
-    d.text((bx, by), brand, font=brand_font, fill=WHITE)
-    d.text((bx + bw - d.textlength("check", font=brand_font), by), "check",
-           font=brand_font, fill=GOLD)
-
-    # Kleine Pins (pinterest-artige Punkte) – weit unten, nie auf dem Text
-    for i, cx in enumerate([W // 2 - 60, W // 2, W // 2 + 60]):
-        d.ellipse([cx - 7, H - 70, cx + 7, H - 56], fill=GOLD if i == 1 else (255, 255, 255, 120))
 
     img.save(out_path, "JPEG", quality=88)
     print(f"  ✓ Cover: {os.path.basename(out_path)}")
