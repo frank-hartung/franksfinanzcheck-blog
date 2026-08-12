@@ -1,6 +1,6 @@
 # 📣 Social-Media-Status
 
-> Automatisch aktualisiert: 11.08.2026 21:27 UTC
+> Automatisch aktualisiert: 12.08.2026 10:42 UTC
 
 - **Mastodon:** 🟢 aktiv (https://mastodon.social)
 - **LinkedIn:** ⚪ nicht eingerichtet (Achtung: Token läuft ~60 Tage)
@@ -9,8 +9,7 @@
 
 ## Zuletzt gepostet (dieser Lauf)
 
-- Schufa-Score verstehen: So liest du deine Bonitätsauskunft → https://franksfinanzcheck.de/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/
-- Lastschrift zurückbuchen: So holst du dir dein Geld zurück → https://franksfinanzcheck.de/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/
+- Preisgarantie Gas: So sicherst du dir günstige Tarife für 2026 → https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 
 ---
 *Erzeugt von scripts/social_poster.py – Setup: ANLEITUNG-SOCIAL-MEDIA.md*
