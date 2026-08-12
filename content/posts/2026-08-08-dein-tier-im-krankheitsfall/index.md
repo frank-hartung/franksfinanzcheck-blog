@@ -2,7 +2,7 @@
 title: "Tierversicherung: Schutz für dein Tier im Krankheitsfall"
 description: "Dein Tier ist krank? Keine Sorge vor hohen Kosten! Erfahre hier, wie eine Tierversicherung deinen Liebling schützt und dich entlastet. Jetzt lesen!"
 date: 2026-08-08
-draft: true
+draft: false
 tags: ["Tierversicherung", "Hundeversicherung", "Katzenversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"

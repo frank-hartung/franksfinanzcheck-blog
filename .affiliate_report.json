@@ -1,5 +1,5 @@
 {
- "total": 20,
+ "total": 24,
  "errors": 2,
  "fixed": 0,
  "posts": [
@@ -73,6 +73,15 @@
    "ok": true
   },
   {
+   "slug": "2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe",
+   "title": "Internet-Turbo: Warum ich meinen DNS-Server getaus",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
    "slug": "2026-08-06-frugalismus-im-alltag",
    "title": "Frugalismus im Alltag: So sparst du jeden Monat ba",
    "pillar": "frugalismus",
@@ -84,6 +93,15 @@
    "ok": true
   },
   {
+   "slug": "2026-08-06-turbo-fuers-netz",
+   "title": "Turbo fürs Netz: DNS-Wechsel für schnelleres Inter",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
    "slug": "2026-08-07-frugalismus-fuer-den-erfolg",
    "title": "Frugalismus für den Erfolg: Der Weg in die Freihei",
    "pillar": "frugalismus",
@@ -92,6 +110,24 @@
    "infos": [
     "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-07-mietwagen-fuer-den-spaetsommer",
+   "title": "Mietwagen im Spätsommer: Günstig buchen und sparen",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-08-dein-tier-im-krankheitsfall",
+   "title": "Tierversicherung: Schutz für dein Tier im Krankhei",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
    "ok": true
   },
   {
