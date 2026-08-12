@@ -6,7 +6,7 @@ draft: false
 tags: []
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["ETF-Sparplan", "Einsteiger:", "startest"]
+keywords: ["ETF-Sparplan", "ETF für Einsteiger", "Vermögensaufbau"]
 author: "Frank"
 ai_generated: true
 ai_provider: "Groq (Gratis-Key: console.groq.com)"

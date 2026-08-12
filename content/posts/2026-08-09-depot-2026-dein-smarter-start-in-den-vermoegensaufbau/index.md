@@ -6,7 +6,7 @@ draft: false
 tags: []
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-keywords: ["Depot", "2026:", "Dein"]
+keywords: ["Depot 2026", "Vermögensaufbau", "ETF-Sparplan", "Neobroker"]
 author: "Frank"
 ai_generated: true
 ai_provider: "Gemini (Gratis-Key: aistudio.google.com)"

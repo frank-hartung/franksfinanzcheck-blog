@@ -1,6 +1,6 @@
 # 📐 LAYOUT-REPORT (Layout-Automatisierung)
 
-**Stand:** 2026-08-12 18:57 UTC
+**Stand:** 2026-08-12 19:39 UTC
 
 ## ✅ OK (8)
 

@@ -7,7 +7,26 @@
 {{- if .Params.cover.image -}}
   {{- $pin_media = .Params.cover.image | absURL -}}
 {{- end -}}
-{{- $pin_desc := printf "%s – via FranksFinanzcheck" (.Title | plainify) -}}
+{{- /* ANTI-SPAM: Einzigartige Pin-Beschreibung pro Artikel (Pinterest wertet
+       identische Schablonen-Texte als automatisiert/Spam). Basis ist die
+       Meta-Description des Artikels + 2-3 Hashtags aus den Keywords. */ -}}
+{{- $pin_desc := .Description | default (.Title | plainify) -}}
+{{- $pin_desc = $pin_desc | plainify | truncate 280 -}}
+{{- $tags := slice -}}
+{{- range first 3 .Params.keywords -}}
+  {{- $tag := . | lower -}}
+  {{- $tag = replaceRE "ä" "ae" $tag -}}
+  {{- $tag = replaceRE "ö" "oe" $tag -}}
+  {{- $tag = replaceRE "ü" "ue" $tag -}}
+  {{- $tag = replaceRE "ß" "ss" $tag -}}
+  {{- $tag = replaceRE "[^a-z0-9]" "" $tag -}}
+  {{- if and (gt (len $tag) 2) (lt (len $tag) 25) (findRE "^[a-z]" $tag) -}}
+    {{- $tags = $tags | append $tag -}}
+  {{- end -}}
+{{- end -}}
+{{- $tagline := "" -}}
+{{- range $tags -}}{{- $tagline = printf "%s #%s" $tagline . -}}{{- end -}}
+{{- $pin_desc = printf "%s%s" $pin_desc $tagline -}}
 {{- $pin_href := printf "https://pinterest.com/pin/create/button/?url=%s&media=%s&description=%s" ($pin_url | urlquery) ($pin_media | urlquery) ($pin_desc | urlquery) -}}
 {{- /* E-E-A-T: Erfahrungs-Marker (nur wenn Frontmatter `erfahrung:` gesetzt) */ -}}
 {{- partial "experience_box.html" . }}
