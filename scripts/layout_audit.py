@@ -103,6 +103,11 @@ def check_markdown_links():
     re_nested = re.compile(r"\[([^\]\n]*\[[^\]\n]*)\]\([^)\n]*\)")
     # 2) Link mitten im Wort: X[Text](url)Y
     re_midword = re.compile(r"([a-zäöüßA-ZÄÖÜ0-9])\[([^\]]*)\]\(([^)\n]*)\)")
+    # 2b) Link zerschneidet ein Wort: [Textteil](url)Wortfortsetzung
+    #     (Fund 12.08.: „…[ das Eigenkapital fü](../../posts/…/)r eine Immobilie“
+    #     – der Link zerschneidet „für“ in „fü|r“; das Muster ](url)X mit
+    #     direkt angehängtem Buchstaben X wurde bisher übersehen.)
+    re_midword2 = re.compile(r"\[([^\]]*)\]\([^)\n]*\)([a-zäöüß])")
     # 3) Link-Markup in Frontmatter-Keywords/Categories
     re_front = re.compile(r"^(keywords|categories|tags):.*\]\([^)\n]*\)", re.M)
 
@@ -115,6 +120,8 @@ def check_markdown_links():
                 problems.append((slug, i + 1, "verschachtelter Link", m.group(0)[:80]))
             for m in re_midword.finditer(l):
                 problems.append((slug, i + 1, "Link mitten im Wort", m.group(0)[:80]))
+            for m in re_midword2.finditer(l):
+                problems.append((slug, i + 1, "Link zerschneidet Wort", m.group(0)[:80]))
             for m in re_front.finditer(c):
                 problems.append((slug, 0, "Link in Frontmatter", m.group(0)[:60]))
 
@@ -137,6 +144,10 @@ def check_markdown_links():
             # Links mitten im Wort: Link-Markup entfernen, Text behalten
             c = re.sub(r"([a-zäöüßA-ZÄÖÜ0-9])\[([^\]]*)\]\([^)\n]*\)([a-zäöüßA-ZÄÖÜ0-9])",
                        lambda m: m.group(1) + m.group(2) + m.group(3), c)
+            # Wort-zerschneidende Links: Anker + Fortsetzung zusammenfügen
+            # („[Eigenkapital fü](url)r“ → „Eigenkapital für“)
+            c = re.sub(r"\[([^\]]*)\]\([^)\n]*\)([a-zäöüß])",
+                       lambda m: m.group(1) + m.group(2), c)
             if c != orig:
                 open(f, "w", encoding="utf-8").write(c)
                 fixed += 1
