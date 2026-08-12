@@ -16,84 +16,17 @@
     "live_url": "https://franksfinanzcheck.de/"
   },
   "audit": {
-    "today_events": 7,
-    "total_events": 27,
+    "today_events": 0,
+    "total_events": 38,
     "errors": 1,
     "critical": 1,
-    "last_events": [
-      {
-        "ts": "2026-08-11T00:03:07Z",
-        "module": "fix_spaces",
-        "action": "apply",
-        "input": {
-          "files": 80
-        },
-        "output": {
-          "fixes": 531
-        },
-        "status": "ok",
-        "critical": false,
-        "commit": null
-      },
-      {
-        "ts": "2026-08-11T00:10:31Z",
-        "module": "fix_spaces",
-        "action": "apply",
-        "input": {
-          "files": 80
-        },
-        "output": {
-          "fixes": 487
-        },
-        "status": "ok",
-        "critical": false,
-        "commit": null
-      },
-      {
-        "ts": "2026-08-11T00:13:51Z",
-        "module": "fix_spaces",
-        "action": "apply",
-        "input": {
-          "files": 80
-        },
-        "output": {
-          "fixes": 529
-        },
-        "status": "ok",
-        "critical": false,
-        "commit": null
-      },
-      {
-        "ts": "2026-08-11T00:53:03Z",
-        "module": "fix_dash_eol",
-        "action": "apply",
-        "input": {
-          "files": 3
-        },
-        "output": {
-          "changes": 3
-        },
-        "status": "ok",
-        "critical": false,
-        "commit": null
-      },
-      {
-        "ts": "2026-08-11T08:30:43Z",
-        "module": "fix_linebreaks",
-        "action": "apply",
-        "input": {
-          "files": 80
-        },
-        "output": {
-          "changes": 0
-        },
-        "status": "ok",
-        "critical": false,
-        "commit": null
-      }
-    ]
+    "last_events": []
   },
   "playbooks": [
+    {
+      "name": "affiliate-health",
+      "triggers": []
+    },
     {
       "name": "alert-on-failure",
       "triggers": []
@@ -119,6 +52,10 @@
       "triggers": []
     },
     {
+      "name": "design-visual",
+      "triggers": []
+    },
+    {
       "name": "frankautoops-report",
       "triggers": []
     },
@@ -132,6 +69,10 @@
     },
     {
       "name": "pinterest-ai",
+      "triggers": []
+    },
+    {
+      "name": "redaktions-politur",
       "triggers": []
     },
     {
@@ -159,63 +100,51 @@
       "triggers": []
     }
   ],
-  "commands": [
-    {
-      "ts": "2026-08-11T00:02:45Z",
-      "module": "extend_articles",
-      "action": "apply",
-      "status": "partial"
-    },
-    {
-      "ts": "2026-08-11T00:03:07Z",
-      "module": "fix_linebreaks",
-      "action": "apply",
-      "status": "ok"
-    },
-    {
-      "ts": "2026-08-11T00:03:07Z",
-      "module": "fix_spaces",
-      "action": "apply",
-      "status": "ok"
-    },
-    {
-      "ts": "2026-08-11T00:10:31Z",
-      "module": "fix_spaces",
-      "action": "apply",
-      "status": "ok"
-    },
-    {
-      "ts": "2026-08-11T00:13:51Z",
-      "module": "fix_spaces",
-      "action": "apply",
-      "status": "ok"
-    },
-    {
-      "ts": "2026-08-11T00:53:03Z",
-      "module": "fix_dash_eol",
-      "action": "apply",
-      "status": "ok"
-    },
-    {
-      "ts": "2026-08-11T08:30:43Z",
-      "module": "fix_linebreaks",
-      "action": "apply",
-      "status": "ok"
-    }
-  ],
+  "commands": [],
   "reports": {
     "content": {
-      "posts": 74
+      "posts": 76
     },
     "quality": {
-      "articles": 74,
-      "avg_score": 0.835,
-      "publish": 30,
-      "draft_autofix": 41,
+      "articles": 76,
+      "avg_score": 0.802,
+      "publish": 0,
+      "draft_autofix": 42,
       "human_review": [
-        "2026-08-06-frugalismus-im-alltag",
+        "2026-08-07-frugalismus-fuer-den-erfolg",
+        "2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen",
+        "2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen",
+        "2026-08-10-dsl-wechselbonus-sichern",
+        "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck",
+        "50-30-20-regel-einfach-erklaert",
+        "7-gewohnheiten-finanzielle-freiheit",
+        "dsl-internet-flat-guenstig-sichern",
+        "e-auto-laden-stromkosten-senken",
+        "frugalismus-tricks-alltag-200-euro-sparen",
+        "gastarife-vergleichen-vor-dem-herbst",
+        "guenstige-fluege-spaetsommer-finden",
+        "handytarife-vergleichen-guenstigster-tarif",
+        "hausratversicherung-wer-braucht-leistung",
+        "heizperiode-vorbereiten-spaetsommer",
+        "kfz-versicherung-wechseln",
+        "kreditkarte-ohne-jahresgebuehr",
+        "last-minute-urlaubsangebote-sichern",
+        "mietwagen-buchen-so-sparst-du",
         "mietwagen-fallen-vermeiden",
-        "stromanbieter-wechseln-2026"
+        "notgroschen-aufbauen-wie-viel-reicht",
+        "private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt",
+        "privathaftpflicht-warum-pflicht-kosten",
+        "ratenkredit-bestszins-vergleichen",
+        "reisekrankenversicherung-wann-lohnt",
+        "strom-sparen-haushalt-20-tipps",
+        "stromanbieter-wechseln-2026",
+        "stromfresser-im-haushalt-entlarven",
+        "tagesgeld-zinsen-sicher-anlegen",
+        "urlaubskasse-aufbessern-spartipps",
+        "waermepumpe-vs-gasheizung-2026",
+        "wlan-verstaerker-vs-mesh-wlan",
+        "zahnzusatzversicherung-lohnt-sich"
       ]
     }
   },
@@ -223,7 +152,7 @@
     {
       "priority": 1,
       "action": "human-review",
-      "detail": "Artikel unter 0.80: 2026-08-06-frugalismus-im-alltag, mietwagen-fallen-vermeiden, stromanbieter-wechseln-2026"
+      "detail": "Artikel unter 0.80: 2026-08-07-frugalismus-fuer-den-erfolg, 2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen, 2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen, 2026-08-10-dsl-wechselbonus-sichern, 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas"
     },
     {
       "priority": 1,
