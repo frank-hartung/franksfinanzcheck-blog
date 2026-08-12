@@ -233,6 +233,14 @@ jeder Schreibaktion.
   Redaktion. Selbsttest nun 16 Faelle.
 <<<<<<< HEAD
 =======
+- **12.08.2026 (3):** Der Merge-Marker-Vorfall (Deploy-Todestuetze): Die
+  Engine-Kettenliessen ungelöste „<<<<<<< HEAD” in mehrere die Artikelfronts.
+  W7 Marker-Jaeger in workspace_guard.py (findet + heilt mit material-
+  Mehrheitswahl, dokumentiert). Deploy buildet wieder. Zusatz verteilt:
+      spellcheck Whitelist +69 (Marke, Schufa, SEPA, Broker-Vokabeln),
+      „begruendungslos"-Adverb Schutz, 5 Split-Link-Unfalle (internal-linker
+      Wortspaltung) chirurgisch geheilt, oss-version Engine Skopus jetzt
+      inkl. static/images/covers/ (baumitgezwungen Cover-Bote).
 - **12.08.2026 (2):** Blog-Doktor installiert (Frank-Befehl „Selbstheilung
   auf Profi-Level fuer die GESAMTE Blogautomatik"): blog_doctor.py fuhrt
   ALLE 12 Wachen in kanonischer Ordnung mit --fix durch, bricht bei einem

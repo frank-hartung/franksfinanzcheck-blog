@@ -47,11 +47,8 @@ Einige nützliche Tipps für die Suche nach einem [günstigen Mietwagen](../../p
 ## Die Auswahl des richtigen Mietwagens
 Wähle die Fahrzeugklasse nach deinem tatsächlichen Platzbedarf aus, aber kalkuliere das Gepäck großzügig ein. Nichts ist stressiger als ein Koffer, der die Sicht durch die Heckscheibe blockiert. Ein Kleinwagen der Klasse "Economy" verbraucht deutlich weniger Sprit und parkt leichter in engen Küstenorten oder historischen Altstädten. Reist du jedoch mit der Familie oder planst Camping-Equipment ein, bietet ein Kombi oder ein Van den nötigen Komfort, um quengelnde Kinder und Rückenschmerzen zu vermeiden.
 
-<<<<<<< HEAD
 Prüfe vorab immer die [enthaltene](../../posts/urlaub-mit-kindern-guenstig-spartricks/)n Inklusivkilometer. Für einen stationären [Urlaub mit](../../posts/urlaub-mit-kindern-guenstig-spartri/) wenigen Ausflügen reichen oft 100 km pro Tag. Planst du jedoch eine Rundreise, ist "Unbegrenzte Kilometer" (Unlimited Mileage) Pflicht, da jeder Zusatzkilometer am Ende mit 0,30 € bis 0,60 € abgerechnet werden kann. Ein Rundum-Schutz ohne Selbstbeteiligung (LDW – Loss Damage Waiver) bewahrt dich vor hohen Kosten bei Bagatellschäden. Ein kleiner Kratzer an der Felge kostet bei einer hohen Selbstbeteiligung schnell 300 € bis 800 € – Geld, das in deiner Urlaubskasse besser aufgehoben ist.
-=======
-Prüfe vorab immer die [enthaltene](../../posts/urlaub-mit-kindern-guenstig-spartricks/)n Inklusivkilometer. Für einen stationären [Urlaub mit](../../posts/urlaub-mit-kindern-guenstig-spartricks/) wenigen Ausflügen reichen oft 100 km pro Tag. Planst du jedoch eine Rundreise, ist "Unbegrenzte Kilometer" (Unlimited Mileage) Pflicht, da jeder Zusatzkilometer am Ende mit 0,30 € bis 0,60 € abgerechnet werden kann. Ein Rundum-Schutz ohne Selbstbeteiligung (LDW – Loss Damage Waiver) bewahrt dich vor hohen Kosten bei Bagatellschäden. Ein kleiner Kratzer an der Felge kostet bei einer hohen Selbstbeteiligung schnell 300 € bis 800 € – Geld, das in deiner Urlaubskasse besser aufgehoben ist.
->>>>>>> c8351179 (fix(engine): Cover-Commit-Skopus inkl. static/images/covers/ + Rest-Schnittstellen geheilt)
+
 
 Einige Dinge, die du bei der Auswahl des richtigen Mietwagens beachten solltest:
 * **Fahrzeuggröße**: Wähle ein Fahrzeug, das deinen Platzbedarf deckt. Ein "Upgrade" vor Ort klingt verlockend, bedeutet aber oft auch höheren Verbrauch und schwierigere Parkplatzsuche.

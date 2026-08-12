@@ -172,9 +172,42 @@ def rotate_histories() -> list:
     return rotated
 
 
-# ------------------------------------------------------------- W6: Repo-Gewicht
+# ------------------------------------------------------------- W7: Konflikt-Marker
+# (12.08.: Git-Marker in CONTENT brachen das Deploy-Build mittags. Fortan wird
+#  jeder niemals mehr das Stapelschweigen beweisen.)
 
-def git_size_mb() -> float:
+MARKER_START = re.compile(r"^<<<<<<<[^\n]*$", re.M)
+MARKER_MID = re.compile(r"^=======\s*$", re.M)
+MARKER_END = re.compile(r"^>>>>>>>[^\n]*$", re.M)
+
+
+def sweep_markers(do_fix: bool) -> list:
+    """Scannen von content/ nach Merge-Marker-Resten; --fix macht sie
+    Weg (gewinnt: die Seite mit mehr Material – weil inkompakte Statoefe
+    Dopplungs). Liefert Liste getroffener Dateien."""
+    betroffen = []
+    for f in list((ROOT / "content").rglob("*.md")):
+        t = f.read_text(encoding="utf-8")
+        if not (MARKER_START.search(t) and MARKER_END.search(t)):
+            continue
+        betroffen.append(str(f.relative_to(ROOT)))
+        if do_fix:
+            new = re.sub(r"(?ms)^<<<<<<<[^\n]*\n(.*?)^=======$\n(.*?)^>>>>>>>[^\n]*$",
+                         _merge_wahl, t)
+            f.write_text(new, encoding="utf-8")
+    return betroffen
+
+
+def _merge_wahl(m):
+    """Die bessere Seite heil (bevorzugt die Zeilenreichere)."""
+    a, b = m.group(1), m.group(2)
+    la = [l for l in a.split("\n") if l.strip()]
+    lb = [l for l in b.split("\n") if l.strip()]
+    if not lb:
+        return a
+    if not la:
+        return b
+    return a if len(la) >= len(lb) else b
     try:
         import subprocess
         out = subprocess.run(["du", "-sm", ".git"], cwd=ROOT,
@@ -200,6 +233,8 @@ SELFTEST = [
     ("no-dup",       _dup_billig, (["x/a.md", "x/b.md"],), False),
     ("orphan",       lambda a: bool(ORPHAN_PATTERN.match(a)), ("static/images/covers/denne.jpg",), True),
     ("no-orphan",    lambda a: bool(ORPHAN_PATTERN.match(a)), ("content/posts/x/index.md",), False),
+    ("marker-start", lambda t: bool(MARKER_START.search(t)), ("<<<<<<< HEAD\nneu\n=======\nalt\n>>>>>>> x\n",), True),
+    ("marker-clean", lambda t: bool(MARKER_START.search(t)), ("## Alles sauber\n\nKein Bruch.\n",), False),
 ]
 
 
@@ -233,6 +268,7 @@ def main() -> None:
     dups = find_duplicates(files)
     heavy = find_heavy(files)
     rotated = rotate_histories()
+    betroffen = sweep_markers(DO_FIX)   # W7 Marker-Jaeger (12.08.)
     git_mb = git_size_mb()
 
     fixed_junk, fixed_orphans = [], []
@@ -257,8 +293,11 @@ def main() -> None:
     row("W4 Dickschiffe (>300/500 KB)", len(heavy), False)
     row("W5 History-Rotation (>400 Zeilen)", len(rotated), bool(rotated))
     row("W6 Git-Volumen", f"{git_mb:.0f} MB", git_mb < 100)
+    row("W7 Konflikt-Marker (content/)", len(betroffen), bool(betroffen))
 
     details = []
+    if betroffen:
+        details.insert(0, f"🚧 W7 Marker-Dateien ({len(betroffen)}): " + ", ".join(f"`{b}`" for b in betroffen[:12]) + (" (geheilt)" if DO_FIX else ""))
     if junk: details += ["", "🗑 Muell:", *[f"- `{x}`" for x in junk[:20]]]
     if orphans: details += ["", "👻 Phantom-Cover:", *[f"- `{x}`" for x in orphans[:20]]]
     if dups:

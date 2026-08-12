@@ -35,11 +35,8 @@ Ein DNS-Server (Domain Name System) ist im Grunde das Telefonbuch des Internets.
 Der Standard-DNS-Server, der von den meisten Internetanbietern (ISP) wie der Telekom, Vodafone oder O2 automatisch bereitgestellt wird, ist oft nicht die performanteste Lösung. Diese Server stehen unter hoher Last oder sind geografisch nicht optimal angebunden. Das führt zu einer spürbaren Verzögerung (Latenz), bevor der eigentliche Seitenaufbau überhaupt beginnt. Zudem nutzen einige Anbieter DNS-Server, um bestimmte Webseiten im Rahmen von Netzsperren zu blockieren oder – im schlimmsten Fall – um dein Surfverhalten zu Marketingzwecken auszuwerten.
 
 ## Warum sollte man den DNS-Server wechseln?
-<<<<<<< HEAD
 Der Wechsel ist einer der effektivsten **DSL-Tipps**, da er kostenlos ist und sofortige Ergebnisse liefert. Stell dir vor, du suchst eine Nummer in einem Telefonbuch, bei dem jede Seite kl[ebt – genau so f](../../posts/dns-server-aendern-schnelleres-internet/)ühlt sich ein langsamer DNS deines Providers an. Wenn du den **[DNS Server wechseln](../../posts/dns-server-aendern-schnelleres-inter/)** willst, profitierst du von drei zentralen Faktoren:
-=======
-Der Wechsel ist einer der effektivsten **DSL-Tipps**, da er kostenlos ist und sofortige Ergebnisse liefert. Stell dir vor, du suchst eine Nummer in einem Telefonbuch, bei dem jede Seite kl[ebt – genau so f](../../posts/dns-server-aendern-schnelleres-internet/)ühlt sich ein langsamer DNS deines Providers an. Wenn du den **[DNS Server wechseln](../../posts/dns-server-aendern-schnelleres-internet/)** willst, profitierst du von drei zentralen Faktoren:
->>>>>>> c8351179 (fix(engine): Cover-Commit-Skopus inkl. static/images/covers/ + Rest-Schnittstellen geheilt)
+
 
 1. **Schnellere Internetgeschwindigkeit**: Ein optimierter DNS-Server verkürzt die Zeit zwischen dem Klick auf einen Link und dem Beginn des Datentransfers. In Benchmarks sind öffentliche Anbieter wie Cloudflare oft bis zu 30 % schneller als Standard-Provider-Server.
 2. **Unzensierter Zugang**: In Deutschland gibt es immer wieder Sperren für bestimmte Webseiten (z. B. durch die CUII). Ein freier DNS-Server ignoriert diese Sperren und liefert dir die echte IP-Adresse der Zielseite.
@@ -64,11 +61,8 @@ Wenn du eine Fritz! Box nutzt, gehst du wie folgt vor:
 * Trage die bevorzugte und alternative DNS-Adresse ein.
 
 ### Beliebte DNS-Anbieter im Vergleich
-<<<<<<< HEAD
 Hier ist eine Übersicht der besten kostenlosen Dienste, mit denen du dein **[Internet schneller machen](../../posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-h/)** kannst:
-=======
-Hier ist eine Übersicht der besten kostenlosen Dienste, mit denen du dein **[Internet schneller machen](../../posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/)** kannst:
->>>>>>> c8351179 (fix(engine): Cover-Commit-Skopus inkl. static/images/covers/ + Rest-Schnittstellen geheilt)
+
 
 | DNS-Server | Primäre IP | Sekundäre IP | Fokus |
 | :--- | :--- | :--- | :--- |
