@@ -25,6 +25,7 @@ social_posted: true
 
 
 
+
 Ein Krankenhausaufenthalt in den USA kann schnell sechsstellige Summen kosten. Innerhalb Europas lauern Kostenfallen, wenn man nur auf die gesetzliche Kasse vertraut. Eine Reisekrankenversicherung kostet nur wenige [Euro pro](../../posts/urlaub-mit-kindern-guenstig-spartricks/) Jahr und schützt genau vor diesen Risiken. Du bekommst weltweite [Absicherung](../../posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/) für oft unter 30 € Jahresbeitrag.
 
 

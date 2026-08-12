@@ -63,7 +63,8 @@ NEW_ONLY = "--new-only" in sys.argv
 
 MIN_WORDS = 750           # C1
 ZONES_RX = re.compile(
-    r"(```.*?```"
+    r"(\A---.*?^---\s*$"             # Frontmatter (ganz vorne!)
+    r"|```.*?```"
     r"|\[[^\]]*\]\([^)]*\)"
     r"|https?://\S+"
     r"|\|.*\|"                        # Tabellenzeilen
@@ -160,16 +161,20 @@ def audit_body(slug: str, frontmatter: dict, body: str) -> dict:
     return {"issues": issues, "words": len(words)}
 
 
-def apply_c3_fixes(body: str, pfad: Path) -> int:
-    """Nur die C3-Kanon-Faelle: Platzhaltertexte mit System."""
-    masked, origs = zones_mask(body)
+def apply_c3_fixes(full_doc: str, pfad: Path) -> int:
+    """Nur die C3-Kanon-Faelle: Platzhaltertexte mit System.
+
+    12.08. (Selbsttest-Fund!): Die Funktion darf NIE nur den Body
+    zurueckschreiben – das Frontmatter wuerde sonst still verschwinden.
+    Daher: Maske + Fix passieren auf dem GESAMT-Dokument, Frontmatter
+    liegt in den Schutzzonen (wird nicht verändert) und bleibt erhalten."""
+    masked, origs = zones_mask(full_doc)
     n = 0
     for rx, repl in C3_FIXES:
         masked, k = rx.subn(repl, masked)
         n += k
     if n:
-        body = unmask(masked, origs)
-        Path(pfad).write_text(body, encoding="utf-8")
+        Path(pfad).write_text(unmask(masked, origs), encoding="utf-8")
     return n
 
 
@@ -221,6 +226,14 @@ def selftest() -> list:
                    ("Thema Nachbarwiese heute. " * 60) + "\n## Fazit\nx\n## Häufige Fragen\nok")
     if not any("C6" in i for i in r["issues"]):
         fehler.append("Fall 9: C6 Titel-Keyword-Mismatch nicht erkannt")
+    # Fall 10 (12.08. Struktur-Unfall-Sicherung): C3-Fix darf Frontmatter
+    # NIE loeschen – sonst waeren Titel/Daten fuer immer weg.
+    test_path = Path("/tmp/audit_fm.md")
+    test_path.write_text('---\ntitle: "T"\ndate: 2026-01-01\n---\nVon [Name]. ok', encoding="utf-8")
+    k = apply_c3_fixes(test_path.read_text(encoding="utf-8"), test_path)
+    out_doc = test_path.read_text(encoding="utf-8")
+    if k != 1 or not out_doc.startswith('---\ntitle: "T"'):
+        fehler.append("Fall 10: C3-Fix zerstoert Frontmatter!")
     return fehler
 
 
@@ -268,7 +281,7 @@ def main():
         if res["issues"]:
             total_issues += len(res["issues"])
             if DO_FIX:
-                n = apply_c3_fixes(body, pfad)
+                n = apply_c3_fixes(s, pfad)
                 total_fixed += n
                 res = audit_body(slug, fm, Path(pfad).read_text(encoding="utf-8").split("---",2)[-1])
             rows.append({"slug": slug, "issues": res["issues"],

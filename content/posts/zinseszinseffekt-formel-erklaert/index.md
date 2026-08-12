@@ -27,6 +27,7 @@ social_posted: true
 
 
 
+
 Albert Einstein soll den Zinseszins das achte Weltwunder genannt haben – wer die Formel verstanden hat, weiß warum. Der Zinseszinseffekt ist der einzige Mechanismus im Finanzsystem, der aus kleinen regelmäßigen Beträgen über die Zeit ein Vermögen macht, ohne dass du mehr arbeiten musst. Und er funktioniert für jeden – unabhängig vom Einkommen.
 
 In diesem Artikel erkläre ich dir die Formel, zeige dir Rechenbeispiele und Tabellen und verrate, warum die Zeit die wichtigste Zutat ist.

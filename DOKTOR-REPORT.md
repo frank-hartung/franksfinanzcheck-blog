@@ -1,11 +1,11 @@
 # 🩺 DOKTOR-REPORT (Oberarzt, Gesamtprognose)
 
-**Stand:** 2026-08-12 16:24 UTC · Modus: VISIT
-**Wachen behandelt:** 18 · **0-Exit:** 17 · Funde: 1 · Sabotage-Fehler: 0
+**Stand:** 2026-08-12 16:44 UTC · Modus: GEBURT
+**Wachen behandelt:** 18 · **0-Exit:** 16 · Funde: 2 · Sabotage-Fehler: 0
 
 | Wache (Phase) | Zweck | Exit |
 |---|---|---|
-| `integrity_guard.py` (0-LOCK) | Kern-Integritaet (Signatruehe nach Drift) | 0 |
+| `integrity_guard.py` (0-LOCK) | Kern-Integritaet (Signatruehe nach Drift) | 1 |
 | `casing_guard.py` (A-Text) | Akronyme/Marken (DSL, Check24) | 0 |
 | `dash_guard.py` (A-Text) | Dash-Typografie R1-R9 | 0 |
 | `unit_guard.py` (A-Text) | Euro/Prozent/NBSP | 0 |
@@ -25,6 +25,7 @@
 | `workspace_guard.py` (D-Ordnung) | Junk/Waisen/Rotation/Billig | 1 |
 
 ## 🟡 Funde (nicht-fatal, dokumentiert)
+- `integrity_guard.py`: Kern-Integritaet (Signatruehe nach Drift)
 - `workspace_guard.py`: Junk/Waisen/Rotation/Billig
 
 ---

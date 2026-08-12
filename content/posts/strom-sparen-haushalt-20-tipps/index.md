@@ -25,6 +25,7 @@ social_posted: true
 
 
 
+
 Du kannst deinen Stromverbrauch um 15 bis 25 % senken, ohne Komfort zu verlieren. Diese Strom-sparen-Tipps helfen dir, deinen Verbrauch sofort zu senken – Diese 20 Tipps sind nach Sofortwirkung und Aufwand sortiert.
 
 

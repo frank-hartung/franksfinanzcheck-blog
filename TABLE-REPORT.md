@@ -1,7 +1,7 @@
 # 📊 TABLE-REPORT (table_guard.py)
 
-**Stand:** 2026-08-12 16:23 UTC · Modus: FIX
-**Dateien:** 83 · **Funde:** 0 · **Auto-Heilungen:** 0
+**Stand:** 2026-08-12 16:44 UTC · Modus: FIX
+**Dateien:** 1 · **Funde:** 0 · **Auto-Heilungen:** 0
 
 🎉 Alle Tabellen struktur-konsistent und zellen-sauber.
 

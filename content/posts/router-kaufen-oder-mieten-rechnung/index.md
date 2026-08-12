@@ -24,6 +24,7 @@ social_posted: true
 
 
 
+
 Die Router-Miete gehört zu den unscheinbarsten Kostenfallen im Internetvertrag. Vier bis sechs [Euro [pr](../../posts/urlaub-mit-kindern-guenstig-spartricks/)o Monat](../../posts/7-gewohnheiten-finanzielle-freiheit/)-tricks-alltag-200-euro-sparen/) klingen harmlos – aber auf die typische Vertragslaufzeit von 24 Monaten summiert sich das auf 100 bis 150 €. Geld für ein Gerät, das du nach der Vertragszeit meist ohnehin zurückgeben musst.
 
 In diesem Artikel rechne ich dir vor, wann sich der Router-Kauf lohnt, welche Fallstricke es gibt und wie du den Wechsel sauber durchziehst.
