@@ -106,6 +106,18 @@ def find_orphan_covers(files: list, slugs: set) -> list:
 
 # ------------------------------------------------------------- W3: Duplikate
 
+# Billigliste (12.08., Frank-Cleanings): DOPPELT MIT ABSICHT – nie melden.
+# - Gateway-Paare zeigen per Frank-Entscheid auf dasselbe Ziel (fluege≡reisen,
+#   girokonto≡tagesgeld entsprechend C24-Bevoelkerung).
+# - IndexNow-Key muss doppelt existieren (Pflicht-Modell: Wurzel-Endpunkt +
+#   interne abrufbare Quell-Datei – der Guard verifizierte Identitaet 12.08.).
+DUP_BILLIG = [
+    ("static/go/fluege/index.html", "static/go/reisen/index.html"),
+    ("static/go/girokonto/index.html", "static/go/tagesgeld/index.html"),
+    ("scripts/indexnow_key.txt", "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt"),
+]
+
+
 def find_duplicates(files: list) -> dict:
     by_hash = {}
     for p in files:
@@ -113,7 +125,12 @@ def find_duplicates(files: list) -> dict:
             continue
         h = hash_file(p)
         by_hash.setdefault(h, []).append(str(p.relative_to(ROOT)))
-    return {h: v for h, v in by_hash.items() if len(v) > 1}
+    return {h: xs for h, xs in by_hash.items() if len(xs) > 1 and not _dup_billig(xs)}
+
+
+def _dup_billig(xs: list) -> bool:
+    """True, wenn die Gruppe komplett auf der Billigliste steht."""
+    return any(all(b in xs for b in pair) for pair in DUP_BILLIG)
 
 
 # ------------------------------------------------------------- W4: Dickschiffe
