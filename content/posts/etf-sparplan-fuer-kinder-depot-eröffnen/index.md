@@ -24,6 +24,8 @@ social_posted: true
 
 
 
+
+
 Wenn dein Kind 18 wird, soll es einen möglichst guten Start ins Erwachsenenleben haben – finanziell, versteht sich. Das klassische Sparbuch bringt bei 2 % Zinsen kaum etwas, und die meisten Banksparpläne fressen die Rendite durch Gebühren. Ein [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) ist der moderne Weg: kostengünstig, renditestark und mit Steuervorteilen, die viele Eltern übersehen.
 
 In diesem Artikel zeige ich dir, wie du den [ETF-Sparplan für dein Kind](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) Schritt für Schritt aufsetzt – von der Depot-Wahl über die Steuer-Optimierung bis zu den Fallstricken, die du unbedingt kennen solltest.

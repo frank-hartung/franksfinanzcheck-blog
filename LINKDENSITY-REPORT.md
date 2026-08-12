@@ -1,6 +1,6 @@
 # 🔗 LINKDENSITY-REPORT (link_density_guard.py)
 
-**Stand:** 2026-08-12 14:47 UTC · Modus: FIX
+**Stand:** 2026-08-12 14:53 UTC · Modus: FIX
 
 | Kennzahl | Wert | Goldkorridor |
 |---|---|---|

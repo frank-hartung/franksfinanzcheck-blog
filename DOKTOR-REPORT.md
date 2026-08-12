@@ -1,6 +1,6 @@
 # 🩺 DOKTOR-REPORT (Oberarzt, Gesamtprognose)
 
-**Stand:** 2026-08-12 14:47 UTC · Modus: VISIT
+**Stand:** 2026-08-12 14:53 UTC · Modus: VISIT
 **Wachen behandelt:** 14 · **0-Exit:** 13 · Funde: 1 · Sabotage-Fehler: 0
 
 | Wache (Phase) | Zweck | Exit |

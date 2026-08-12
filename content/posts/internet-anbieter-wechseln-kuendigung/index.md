@@ -21,6 +21,8 @@ social_posted: true
 
 
 
+
+
 Internetverträge gehören zu den Verträgen, die die meisten Menschen nie wechseln – obwohl sie oft Jahr für Jahr zu viel zahlen. Der Grund ist meist Bequemlichkeit: „Der Wechsel ist doch kompliziert." Das Gegenteil ist der Fall: Seit der Automatisierung durch die Anbieter dauert ein Wechsel nur noch wenige Minuten Arbeit.
 
 In diesem Artikel zeige ich dir, wie du kündigst, wann du sofort rauskommst und wie der Wechsel ohne Internet-Lücke klappt.

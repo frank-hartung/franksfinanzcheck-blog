@@ -86,6 +86,9 @@ FEST = {
     # Linker-Bewacher (12.08. Profi-Uebau; Root-Cause-Lock gegen Link-Leck):
     "scripts/internal_linker.py",
     "scripts/link_density_guard.py",
+    # Pillar-Templates (12.08.: Relative-Link-Falle entfernt):
+    "layouts/pillar/single.html",
+    "layouts/_partials/pillar_box.html",
 }
 
 

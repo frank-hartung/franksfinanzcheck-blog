@@ -21,6 +21,8 @@ social_posted: true
 
 
 
+
+
 Vor jeder Reise stellt sich dieselbe Frage: Welche Versicherung brauche ich – und welche ist rausgeworfenes Geld? Die Reiseportale bieten beim Buchen gleich das „komplette" Versicherungspaket an, und die Versicherer verkaufen Bausteine, die sich bei genauem Hinsehen oft doppeln oder überflüssig sind.
 
 In diesem Artikel sortiere ich die Reiseversicherungen ehrlich: Was du wirklich brauchst, was optional ist – und wie du die richtige Kombination zum fairen Preis bekommst.

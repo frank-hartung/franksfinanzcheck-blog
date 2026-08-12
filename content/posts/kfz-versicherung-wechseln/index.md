@@ -21,6 +21,8 @@ social_posted: true
 
 
 
+
+
 Mit einem Wechsel deiner Autoversicherung sparst du oft 200 bis 400 € im Jahr. Die Kfz-Haftpflicht gehört nach Miete und Strom zu den größten Fixkosten in deutschen Haushalten. Dennoch lassen viele Autofahrer dieses Sparpotenzial ungenutzt. Dieser Ratgeber zeigt dir, wie du mit minimalem Aufwand deine Kosten senkst.
 
 

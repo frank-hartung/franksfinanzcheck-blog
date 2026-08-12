@@ -22,6 +22,8 @@ social_posted: true
 
 
 
+
+
 ---
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/gas/)

@@ -1,6 +1,6 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-08-12 14:47 UTC · Modus: FIX
+**Stand:** 2026-08-12 14:53 UTC · Modus: FIX
 
 🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
 
@@ -16,11 +16,11 @@
 - `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 36: S3-Konjunktion
 - `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 92: S3-Konjunktion
 - `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 125: S3-Konjunktion
-- `content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md` Zeile 76: S3-Konjunktion
-- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 26: S3-Konjunktion
-- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 37: S3-Konjunktion
-- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 59: S3-Konjunktion
-- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 135: S3-Konjunktion
+- `content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md` Zeile 78: S3-Konjunktion
+- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 28: S3-Konjunktion
+- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 39: S3-Konjunktion
+- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 61: S3-Konjunktion
+- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 137: S3-Konjunktion
 
 ---
 _Deterministisch: Gedankenstrich-Typ, Bis-Striche, Doppelminus · KI-Schiedsrichter (S1/S3) nur mit --ai. Geschützt: Front-Matter, Listen, Tabellen, Überschriften, URLs, Code._

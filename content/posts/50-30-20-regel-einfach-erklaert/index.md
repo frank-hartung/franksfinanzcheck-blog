@@ -21,6 +21,8 @@ social_posted: true
 
 
 
+
+
 Bleiben dir am Monatsende oft weniger als 100 € auf dem Konto, obwohl du eigentlich gut verdienst? Viele Menschen verlieren trotz eines stabilen Gehalts den Überblick über ihre Ausgaben, weil sie keine klare Struktur verfolgen. Die 50–30–20-Regel löst dieses Problem sofort. Diese einfache Formel, die ursprünglich von der US-Senatorin Elizabeth Warren populär gemacht wurde, strukturiert deine Finanzen ohne komplizierte Tabellen. Du schaffst dir damit eine solide Basis für deinen langfristigen [Vermögensaufbau](../../posts/sparquote-berechnen-und-steigern/) und verhinderst, dass dein Geld unkontrolliert versickert.
 
 ### Das Wichtigste in Kürze

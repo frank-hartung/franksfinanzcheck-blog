@@ -21,6 +21,8 @@ social_posted: true
 
 
 
+
+
 Die Waschmaschine gibt den Geist auf, das Auto braucht neue Reifen, und der Zahnarzt schickt eine Rechnung – du landest ohne Notgroschen schnell auf dem Dispo. Einen Notgroschen aufzubauen ist der wichtigste erste Schritt der Finanzplanung – Der Aufbau einer Sicherheitsreserve ist einfacher, als viele denken. Du brauchst eine Strategie, um deine Finanzen zu sichern.
 
 

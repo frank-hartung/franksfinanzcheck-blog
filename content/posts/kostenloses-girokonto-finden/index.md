@@ -21,6 +21,8 @@ social_posted: true
 
 
 
+
+
 120 € im Jahr für nichts? So viel kosten dich durchschnittliche Kontoführungsgebühren von etwa 10 € [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/). Viele Banken bieten dieselbe Dienstleistung komplett gratis an. Mit einem schnellen Wechsel holst du dir dieses Geld dauerhaft zurück. Ein **kostenloses Girokonto** spart dir über die Jahre vierstellige Beträge – Geld, das auf deinem Sparkonto oder in einem ETF deutlich besser aufgehoben ist als in der Verwaltung deiner Hausbank. Rechnet man die gesparten 120 € jährlich auf ein Arbeitsleben von 40 Jahren hoch und legt sie zu 7 % Zinsen an, reden wir über ein Endkapital von über 25.000 €.
 
 
