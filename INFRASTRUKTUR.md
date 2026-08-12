@@ -112,5 +112,39 @@ curl -s https://franksfinanzcheck.de/ | grep -o "v=[a-f0-9]\{7\}" | head -1
 
 ---
 
+## 6. Workspace-Budget & Frühwarnsystem (verbindlich)
+
+**Problem:** Die Agent-Sandbox hat ein hartes Snapshot-Limit von **128 MB / 10.000
+Dateien**. Überschreitungen führen zu nicht gespeicherten Dateien. Haupttreiber:
+`public/` (Hugo-Build, 41 MB), `.git` (51 MB, Cover-History), `static/` (23 MB Covers).
+
+**Lösung – zweistufig:**
+
+```bash
+# 1) LOKALER GUARD (Sandbox-Budget, misst /home/user) – am Ende jeder Sitzung:
+python3 scripts/workspace_guard.py            # prüfen + automatisch aufräumen
+python3 scripts/workspace_guard.py --force    # Stufe-1-Cleanup erzwingen
+python3 scripts/workspace_guard.py --json     # Maschinenstatus
+
+# 2) REMOTE-WATCHDOG (Repo-Größe, GitHub Actions):
+#    .github/workflows/workspace-watchdog.yml – bei jedem Push + täglich 06:00 UTC
+#    > 150 MB → Warning-Annotation · > 250 MB → Error/Exit 1
+```
+
+**Guard-Schwellwerte (MB / Dateien):** GRÜN < 80 / 6.000 · GELB ≥ 80 / 6.000 ·
+ROT ≥ 95 / 8.000 (Stufe 1: `public/`, `__pycache__`, Caches, Audit-Retention,
+`git gc --prune=now --aggressive`) · KRITISCH ≥ 115 / 9.500 (Stufe 2: zusätzlich
+`/tmp`-Artefakte + Snapshot-exkludierte Ordner). Status: `data/workspace_guard.json`.
+
+**Regeln für Agent-Sitzungen:**
+- `public/` nach Builds NICHT liegen lassen – Guard löscht es (gitignored, neu baubar).
+- Bei „Workspace over budget“-Meldung: `python3 scripts/workspace_guard.py --force`
+  als ERSTE Aktion, dann Ursache prüfen (was ist neu gewachsen?).
+- `uploads/` (11 MB Referenzmaterial) und `static/` (Covers) NICHT löschen.
+- Der Remote-Watchdog warnt nur – Aufräumen der Repo-History ist manuell
+  (`git gc`, alte Branches) und nur mit Bedacht (kein Force-Push ohne Grund).
+
+---
+
 *Diese Datei ist die maßgebliche Referenz. Änderungen an der Infrastruktur
 müssen hier dokumentiert werden (Audit-Pflicht).*

@@ -1,0 +1,66 @@
+# ============================================================
+#  WORKSPACE-WATCHDOG – Frühwarnsystem für die Repo-Größe
+#  ------------------------------------------------------------
+#  Das Repo wächst mit jedem Commit (Cover-Bilder, AVIF/WebP-
+#  Varianten, History). Dieser Workflow misst die Checkout-Größe
+#  bei jedem Push + täglich und warnt früh:
+#    > 150 MB  → Warning-Annotation (gelb)
+#    > 250 MB  → Error + Exit 1 (rot – dringend aufräumen)
+#
+#  SOFORTIGE FEHLEROPTIMIERUNG (lokal, Sandbox):
+#    scripts/workspace_guard.py  – misst /home/user gegen das
+#    Snapshot-Budget (128 MB / 10.000 Dateien) und räumt bei
+#    Überschreitung automatisch auf (public/, Caches, git gc).
+#    Läuft am Ende jeder Agent-Sitzung; Status in
+#    data/workspace_guard.json.
+#
+#  Der Workflow selbst löscht NICHTS (kein Force-Push) – er ist
+#  das Frühwarnsystem; die Optimierung übernimmt der Guard bzw.
+#  ein manueller gc-Lauf.
+# ============================================================
+name: Workspace-Watchdog
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 6 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  check-repo-size:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Repo-Größe messen
+        id: size
+        run: |
+          SIZE_KB=$(du -sk . | cut -f1)
+          SIZE_MB=$(( SIZE_KB / 1024 ))
+          echo "SIZE_MB=$SIZE_MB" >> "$GITHUB_ENV"
+          echo "SIZE_KB=$SIZE_KB" >> "$GITHUB_ENV"
+          echo "📦 Repo-Größe: ${SIZE_MB} MB"
+          echo "🗂  Objekte: $(git count-objects -v | grep '^count:' | awk '{print $2}')"
+          echo "📁 Dateien im Checkout: $(find . -type f -not -path './.git/*' | wc -l)"
+
+      - name: Frühwarnung (gelb) – über 150 MB
+        if: env.SIZE_KB > 153600
+        run: |
+          echo "::warning title=Workspace-Watchdog::Repo-Größe ${SIZE_MB} MB – die History wächst (Cover-Bilder, AVIF/WebP). Aufräumen empfohlen: git gc --prune=now --aggressive, alte Branches löschen, ggf. Bilder komprimieren."
+
+      - name: Kritisch (rot) – über 250 MB
+        if: env.SIZE_KB > 256000
+        run: |
+          echo "::error title=Workspace-Watchdog::Repo-Größe ${SIZE_MB} MB – dringend aufräumen! git gc --prune=now, unreachable Objekte entfernen, History-Bereinigung prüfen."
+          exit 1
+
+      - name: Alles ok
+        if: env.SIZE_KB <= 153600
+        run: echo "✅ Repo-Größe ${SIZE_MB} MB – im Rahmen."
