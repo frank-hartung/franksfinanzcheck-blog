@@ -81,12 +81,21 @@ def hash_file(p: Path) -> str:
 
 # ------------------------------------------------------------- W1: Junk
 
+def is_junk(rel: str) -> bool:
+    """Reine Entscheidung (Sabotage-testbar): ist dieser Pfad Muell?"""
+    return any(re.search(rx, rel) for rx in JUNK_PATTERNS)
+
+
 def find_junk(files: list) -> list:
     return [str(p.relative_to(ROOT)) for p in files
-            if any(re.search(rx, str(p.relative_to(ROOT))) for rx in JUNK_PATTERNS)]
+            if is_junk(str(p.relative_to(ROOT)))]
 
 
 # ------------------------------------------------------------- W2: Waisen
+
+ORPHAN_PATTERN = re.compile(
+    r"static/images/covers/(?:\d+/)?(?:avif/|webp/)?([\w-]+)\.(jpg|webp|avif)$")
+
 
 def existing_slugs() -> set:
     slugs = {p.parent.name for p in (ROOT / "content").rglob("index.md")}
@@ -98,10 +107,11 @@ def find_orphan_covers(files: list, slugs: set) -> list:
     out = []
     for p in files:
         rel = str(p.relative_to(ROOT))
-        m = re.match(r"static/images/covers/(?:\d+/)?(?:avif/|webp/)?([\w-]+)\.(jpg|webp|avif)$", rel)
+        m = ORPHAN_PATTERN.match(rel)
         if m and m.group(1) not in slugs:
             out.append(rel)
     return sorted(out)
+
 
 
 # ------------------------------------------------------------- W3: Duplikate
@@ -174,7 +184,47 @@ def git_size_mb() -> float:
         return 0.0
 
 
+# ------------------------------------------------------------
+# SABOTAGE-SCHUTZ (12.08.): eingefrorene Faelle pruefen W1-Billig/
+# Waison-/Junk-Logik und Exit 2, BEVOR irgendetwas geloescht wird.
+# ------------------------------------------------------------
+SELFTEST = [
+    # (Purpose, Eingabe, erwartet)
+    ("junk-bak",     is_junk,  ("layouts/_partials/x.bak",), True),
+    ("junk-swp",     is_junk,  ("assets/css/core.css.swp",), True),
+    ("junk-pycache", is_junk,  ("scripts/__pycache__/lektor.pyc",), True),
+    ("sauber",       is_junk,  ("scripts/lektor_guard.py",), False),
+    ("sauber-md",    is_junk,  ("WORKSPACE-REPORT.md",), False),
+    ("billig-go",    _dup_billig, (["static/go/fluege/index.html", "static/go/reisen/index.html"],), True),
+    ("billig-key",   _dup_billig, (["scripts/indexnow_key.txt", "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt"],), True),
+    ("no-dup",       _dup_billig, (["x/a.md", "x/b.md"],), False),
+    ("orphan",       lambda a: bool(ORPHAN_PATTERN.match(a)), ("static/images/covers/denne.jpg",), True),
+    ("no-orphan",    lambda a: bool(ORPHAN_PATTERN.match(a)), ("content/posts/x/index.md",), False),
+]
+
+
+def run_selftest() -> list[str]:
+    fehler = []
+    for i, (zweck, fn, args, want) in enumerate(SELFTEST, 1):
+        try:
+            got = fn(*args)
+        except Exception as e:
+            fehler.append(f"  Fall {i} ({zweck}): Ausnahme {type(e).__name__}")
+            continue
+        if got != want:
+            fehler.append(f"  Fall {i} ({zweck}): erwartet {want}, bekam {got}")
+    return fehler
+
+
 def main() -> None:
+    # SABOTAGE-SCHUTZ zuerst: Waechter prueft sich selbst, BEVOR er loescht.
+    stf = run_selftest()
+    if stf:
+        print("🛑 WORKSPACE-SELBSTTEST FEHLGESCHLAGEN – Sabotage verhindert.")
+        print("   Kein Feststoff wird entfernt. Bitte workspace_guard.py pruefen:")
+        print("\n".join(stf))
+        sys.exit(2)
+    print(f"✅ Workspace-Selbsttest: {len(SELFTEST)} Faelle gruen.")
     files = iter_tracked_files()
     slugs = existing_slugs()
 

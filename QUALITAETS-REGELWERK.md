@@ -231,6 +231,14 @@ jeder Schreibaktion.
   Fall-kontrolliert) – Pflege nur in L14_KANON (lektor_guard.py). Neu
   geborene Faelle meldet das Compound-Radar, Aufnahme hier durch
   Redaktion. Selbsttest nun 16 Faelle.
+- **12.08.2026 (1):** Mittwochs-Domino vorab eingefangen & verhindert:
+  spellcheck hard-exitete (141 unbekannte Funde – u.a. der eigene Markenname!)
+  und riss die gesamte seo-weekly-Kette (Stufen dahinter kamen nie).
+  Reparatur-Wall: 67 Whitelist-Zuwaeche (Marke, Schufa, SEPA, ETF Welt),
+  Rechtschreib-Schritt jetzt continue-on-error, Pinterest gaeltig gemacht als
+  sauberer Skip bis zum App-Trial (kein Tages-Rot mehr). Plus: ‚vergessene
+  Fitnessstud'io-Mitgliedschaft“-Zeile restauriert (Haesslicher interner Linker-
+  Bug). workspace_guard bekam seinen Selbsttest (10 Faelle, Exit 2).
 - **11.08.2026 (16):** L15 Gedankenstrich-Bruch (Frank „Zeilenumbruch prüfen",
   ETF-Kinder Schritt-5): Engine-Zeilenumbruch-Stil hinterließ Zeilenenden
   „… steuerfrei –  ⏎  der groesste …". jetzt LOT lokalisiert: 35 Bruche

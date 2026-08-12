@@ -82,7 +82,7 @@ Kurz gefasst: Zurückbuchen bei Unrecht, klären bei Berechtigung. Wer konsequen
 
 ## Typische Fehler bei der Lastschrift-Rückbuchung
 
-**Fehler 1 – Die Frist verpassen.** Acht Wochen klingen großzügig, doch wer Kontoauszüge nur quartalsweise sichtet, verliert die bequeme begründungslose Option schnell aus den Augen. Rituale helfen: Wöchentlich drei Minuten in die Umsatzanzeige der Banking-App schauen.
+**Fehler 1 – Die Frist verpassen.** Acht Wochen klingen großzügig, doch wer Kontoauszüge nur quartalsweise sichtet, verliert die bequeme Begründungslose Option schnell aus den Augen. Rituale helfen: Wöchentlich drei Minuten in die Umsatzanzeige der Banking-App schauen.
 
 **Fehler 2 – Lastschrift mit Dauerauftrag verwechseln.** Nur eingelöste Lastschriften lassen sich zurückbuchen. Ein versehentlich doppelt angelegter Dauerauftrag ist eine Überweisung – der Weg zurück führt nur über den Empfänger. Deshalb zahlt es sich aus, den eigenen Zahlungsweg zu kennen.
 

@@ -118,7 +118,7 @@ Ja – Wertpapiere sind Sondervermögen: Selbst bei einer Broker-Insolvenz gehö
 **Können auch Großeltern einzahlen?**
 Ja, und das ist sogar steuerlich clever: Schenkungen an Enkel sind bis 200.000 € pro Person und 10 Jahre steuerfrei. Die Einzahlung läuft einfach per Überweisung auf das Verrechnungskonto des Kinderdepots.
 
-Der [ETF-Sparplan für](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatl/) Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die Steuern auf ETF-Gewinne erklären, wie du den Pauschbetrag optimal ausschöpfst. Alle Bank[ing-Themen: [Ratg](../../posts/kontowechsel-in-20-minuten-wechselserv/)eber Konto & Karten](../../pillar/konto-karten/).
+Der [ETF-Sparplan für](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatl/) Kinder ist die logische Ergänzung zum [eigenen ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die Steuern auf ETF-Gewinne erklären, wie du den Pauschbetrag optimal ausschöpfst. Alle Bank[ing-Themen: [Ratg](../../posts/kontowechsel-in-20-minuten-wechselserv/)Eber Konto & Karten](././pillar/konto-karten/).
 
 👉 **Jetzt kostenloses Konto mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/girokonto/)
 

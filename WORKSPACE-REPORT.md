@@ -2,7 +2,7 @@
 
 **Stand:** 2026-08-12 09:23 UTC · Modus: FIX · Getrackte Dateien: 965 · .git: 105 MB
 
-| Pruefung | Befund | Geheilt |
+| Pruefung | Befund | Status |
 |---|---|---|
 | W1 Muell-Dateien | 0 | ✅ |
 | W2 Phantom-Cover (kein Artikel) | 0 | ✅ |

@@ -45,7 +45,22 @@ jobs:
       - name: Krypto-Bibliothek für Token-Auto-Refresh installieren
         run: pip install -q cryptography
 
+      - name: Pinterest-Bereitschaft prüfen (sauber skip ohne Keys)
+        id: bereit
+        # 12.08.: Kein Secret + keine enc -> kein roter Tageslauf mehr.
+        # Solange der App-Trial wartet, bleibt dieser Workflow leise gruen.
+        env:
+          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+        run: |
+          if [ -z "$PINTEREST_TOKEN_KEY" ] || [ ! -f data/pinterest_tokens.enc ]; then
+            echo "⏭ Pinterest noch nicht eingerichtet (Secret oder Token-Datei fehlt) – ueberspringe ASCIIBBIRN sauber."
+            echo "bereit=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "bereit=true" >> "$GITHUB_OUTPUT"
+
       - name: Pinterest-Engine ausführen (Posten oder Queue)
+        if: steps.bereit.outputs.bereit == 'true'
         env:
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
           PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
@@ -55,13 +70,14 @@ jobs:
         run: python3 scripts/pinterest_engine.py --auto
 
       - name: Status + pinned-Flags committen
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && steps.bereit.outputs.bereit == 'true' }}
         run: |
           git config user.name "Pinterest-Bot"
           git config user.email "pinterest-bot@users.noreply.github.com"
-          # pinterest_tokens.enc: erneuerte (verschlüsselte!) Tokens persistieren,
-          # damit das 60-Tage-Fenster des Refresh-Tokens immer offen bleibt
-          git add PIN-STATUS.md data/pin_queue.yaml data/pinterest_tokens.enc content/posts/
+          # pinterest_tokens.enc ist erst da, wenn du den OAuth-Handschlag
+          # gemacht hast – ohne Datei trotzdem committen (12.08. gehaertet).
+          git add PIN-STATUS.md data/pin_queue.yaml content/posts/ || true
+          [ -f data/pinterest_tokens.enc ] && git add data/pinterest_tokens.enc || true
           if git diff --cached --quiet; then
             echo "Keine Änderungen."
           else

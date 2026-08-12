@@ -44,7 +44,7 @@ Du hast hierbei die Wahl zwischen klassischen Apps, Excel-Tabellen oder dem anal
 2. **Variable Notwendigkeiten:** Lebensmittel, Drogerie, Fahrtkosten.
 3. **Lifestyle/Luxus:** Restaurantbesuche, Streaming-Dienste, Hobby.
 
-Nach drei Monaten Analyse wirst du Muster erkennen. Oft ist es der tägliche Coffee-to-go oder die vergessene [Fitnessstud](../../posts/versicherungen-kuendigen-diese-5-policen/)io-Mitgliedschaft, die dein Budget [[unbemerkt ](../../posts/versicherungen-kuendigen-diese-5-policen/)aushöhlt.
+Nach drei Monaten Analyse wirst du Muster erkennen. Oft ist es der tägliche Coffee-to-go oder eine vergessene Fitnessstudio-Mitgliedschaft, die dein Budget unbemerkt aushöhlt.
 
 ](././posts/2026-08-06[-frugalismus-im-all/)](../../posts/2026-08-06-frugalismus-im-alltag/)## Spartipps im Alltag
 Effektives [Geld sparen im Alltag](../../posts/frugalismus-tricks-alltag-200-euro-sparen/) beginnt oft bei den täglichen Gewohnheiten. Wer Mahlzeiten selbst zubereitet statt auswärts zu essen, spart je nach Lebensstil ca. 100 € bis 300 € pro Monat. Nutze das Fahrrad oder den Nahverkehr, um hohe Fixkosten für ein Auto zu vermeiden. Ein durchschnittlicher PKW kostet Unterhalt (Wertverlust, Versicherung, Sprit, Reparaturen) oft zwischen 400 € und 600 € im Monat. Allein der Verzicht darauf macht dich zum finanziellen Überflieger.
