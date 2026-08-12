@@ -1,0 +1,91 @@
+# ============================================================
+#  PINTEREST-WATCHDOG – täglicher Profi-Check mit Selbstheilung
+#  ------------------------------------------------------------
+#  Läuft täglich 05:30 UTC + manuell:
+#    python3 scripts/pinterest_check.py --fix
+#  - prüft alle Pinterest-Signale (robots.txt, Domain-Verify,
+#    Pin-Button, Description-Einzigartigkeit, Media, Rich-Pin-Meta,
+#    Hashtags, Profil-Link)
+#  - heilt automatisch (Selbstheilung) mit Sabotage-Schutz
+#    (Selbsttest vor jeder Fix-Aktion; Exit 2 = nichts verändert)
+#  - bei verbleibenden Problemen: GitHub-Issue (Label "pinterest")
+#  - Report: PINTEREST-REPORT.md (Commit + Push)
+# ============================================================
+name: Pinterest-Watchdog
+
+on:
+  schedule:
+    - cron: "30 5 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Hugo installieren
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+
+      - name: Seite bauen (für Pin-Button-/og-Checks)
+        env:
+          HUGO_JSDELIVR_SHA: ${{ github.sha }}
+        run: hugo --minify
+
+      - name: Pinterest-Check mit Selbstheilung
+        id: check
+        run: |
+          python3 scripts/pinterest_check.py --fix
+          echo "EXIT=$?" >> "$GITHUB_ENV"
+
+      - name: Report committen + pushen
+        if: always()
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add PINTEREST-REPORT.md
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: PINTEREST-REPORT aktualisiert"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+          fi
+
+      - name: Issue bei Problemen eröffnen
+        if: env.EXIT != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          EXISTING=$(gh issue list --state open --label pinterest \
+            --json number --jq '.[0].number' 2>/dev/null || echo "")
+          TS=$(date -u '+%Y-%m-%d %H:%M UTC')
+          if [ -z "$EXISTING" ]; then
+            gh issue create --title "Pinterest-Check: Probleme gefunden" \
+              --label pinterest \
+              --body "**$TS** – Der Pinterest-Watchdog hat Probleme gefunden (Exit $EXIT). Details im PINTEREST-REPORT.md."
+            echo "Issue erstellt"
+          else
+            gh issue comment "$EXISTING" \
+              --body "**$TS** – weiterhin Probleme (Exit $EXIT)."
+            echo "Issue kommentiert"
+          fi
+
+      - name: Issue bei Erfolg schließen
+        if: env.EXIT == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          EXISTING=$(gh issue list --state open --label pinterest \
+            --json number --jq '.[0].number' 2>/dev/null || echo "")
+          if [ -n "$EXISTING" ]; then
+            gh issue close "$EXISTING" \
+              --comment "✅ **$(date -u '+%Y-%m-%d %H:%M UTC')** – alle Pinterest-Signale im Profi-Bereich."
+            echo "Issue geschlossen"
+          fi

@@ -42,6 +42,9 @@
     {{- if $sha }}{{ $ogImg = printf "%s?v=%s" $ogImg $sha }}{{ end }}
     <meta property="og:image" content="{{ $ogImg }}">
     {{- with .Params.cover.alt }}<meta property="og:image:alt" content="{{ . | plainify }}">{{ end }}
+    {{- /* RICH-PINS: explizite Bildmaße (Covers sind immer 1000x1500, 2:3 – Pinterest empfiehlt die Angabe) */}}
+    <meta property="og:image:width" content="1000">
+    <meta property="og:image:height" content="1500">
   {{- else}}
     <meta property="og:image" content="{{ (path.Join .RelPermalink .Params.cover.image ) | absURL }}">
   {{- end}}

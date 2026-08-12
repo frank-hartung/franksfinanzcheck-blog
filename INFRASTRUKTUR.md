@@ -170,6 +170,26 @@ gh workflow run uptime-monitor.yml -R frank-hartung/franksfinanzcheck-blog
 gh release list -R frank-hartung/franksfinanzcheck-blog
 ```
 
+## 8. Pinterest-Profi-Signale & Watchdog (12.08.2026)
+
+**Pinterest-Check mit Selbstheilung + Sabotage-Schutz** (scripts/pinterest_check.py):
+- P1 robots.txt (Pinterest erlaubt) · P2 p:domain_verify · P3 Pin-Button je Artikel
+- P4 Description einzigartig/≤500 Zeichen/keine Schablone · P5 Media erreichbar
+- P6 Rich-Pin-Meta (og:type/title/description/image/url) · P7 og:image:width/height
+- P8 Hashtags sauber (max. 3, keine Umlaute) · P9 Profil-Link
+- SELBSTTEST läuft VOR jeder Fix-Aktion (Exit 2 = nichts verändert – Sabotage-Schutz)
+- Report: PINTEREST-REPORT.md · Audit-Log
+
+**Watchdog** (.github/workflows/pinterest-watchdog.yml): täglich 05:30 UTC + manuell,
+baut die Site, läuft `pinterest_check.py --fix`, committet den Report, eröffnet/
+schließt automatisch ein Issue (Label `pinterest`) bei Problemen.
+
+**Lokal:**
+```bash
+python3 scripts/pinterest_check.py          # nur prüfen
+python3 scripts/pinterest_check.py --fix    # selbstheilend
+```
+
 ---
 
 *Diese Datei ist die maßgebliche Referenz. Änderungen an der Infrastruktur

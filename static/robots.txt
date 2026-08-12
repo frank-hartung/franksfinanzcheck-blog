@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Pinterest-Crawler explizit erlauben (Rich Pins / Pin-Scraping)
+User-agent: Pinterest
+Allow: /
+
+Sitemap: https://franksfinanzcheck.de/sitemap.xml
