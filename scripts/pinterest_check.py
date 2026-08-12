@@ -74,34 +74,43 @@ def _is_redirect_html(path):
 
 
 def _check_robots():
-    """P1: robots.txt existiert + erlaubt Pinterest."""
-    p = os.path.join(BLOG_DIR, "static", "robots.txt")
+    """P1: robots.txt (layouts/robots.txt = Hugo-Template, gewinnt über static)
+    existiert, erlaubt Pinterest und blockt /go/ (Affiliate-Gateway)."""
+    p = os.path.join(BLOG_DIR, "layouts", "robots.txt")
     if not os.path.exists(p):
-        PROBLEMS.append(("P1", "-", "robots.txt fehlt – Pinterest-Crawler nicht explizit erlaubt"))
+        PROBLEMS.append(("P1", "-", "layouts/robots.txt fehlt – Pinterest-Crawler nicht explizit erlaubt"))
         if DO_FIX:
             robots = (
                 "User-agent: *\n"
                 "Allow: /\n"
+                "Disallow: /go/\n"
                 "\n"
                 "# Pinterest-Crawler explizit erlauben (Rich Pins / Pin-Scraping)\n"
                 "User-agent: Pinterest\n"
                 "Allow: /\n"
                 "\n"
-                "Sitemap: https://franksfinanzcheck.de/sitemap.xml\n"
+                "Sitemap: {{ \"sitemap.xml\" | absURL }}\n"
             )
             os.makedirs(os.path.dirname(p), exist_ok=True)
             with open(p, "w", encoding="utf-8") as f:
                 f.write(robots)
-            FIXED.append(("P1", "-", "robots.txt erstellt (Pinterest erlaubt)"))
+            FIXED.append(("P1", "-", "layouts/robots.txt erstellt (Pinterest erlaubt, /go/ blockt)"))
         return
     t = open(p, encoding="utf-8").read()
     if "Pinterest" not in t:
-        PROBLEMS.append(("P1", "-", "robots.txt blockiert/erwähnt Pinterest nicht"))
+        PROBLEMS.append(("P1", "-", "layouts/robots.txt erwähnt Pinterest nicht"))
         if DO_FIX:
             with open(p, "a", encoding="utf-8") as f:
                 f.write("\n# Pinterest-Crawler explizit erlauben\n"
                         "User-agent: Pinterest\nAllow: /\n")
-            FIXED.append(("P1", "-", "robots.txt um Pinterest-Regel ergänzt"))
+            FIXED.append(("P1", "-", "layouts/robots.txt um Pinterest-Regel ergänzt"))
+    if "Disallow: /go/" not in t:
+        PROBLEMS.append(("P1", "-", "layouts/robots.txt blockt /go/ nicht (Affiliate-Gateway-Hygiene)"))
+        if DO_FIX:
+            t2 = t.replace("Allow: /", "Allow: /\nDisallow: /go/", 1)
+            with open(p, "w", encoding="utf-8") as f:
+                f.write(t2)
+            FIXED.append(("P1", "-", "/go/-Disallow ergänzt"))
 
 
 def _check_domain_verify():
@@ -162,6 +171,64 @@ def _check_pin_buttons():
     for d, slugs in descs.items():
         if len(slugs) > 1:
             PROBLEMS.append(("P4", ", ".join(slugs), "DUPLIKAT-Description (Spam-Risiko)"))
+
+
+def _check_no_redirect_on_article():
+    """P10: Artikel-Seiten dürfen KEINEN eigenen Meta-Refresh/Redirect haben
+    (Pinterest: 'Link leitet an Spam-Webseite weiter' – die gepinnte URL
+    muss direkt den Artikel ausliefern, ohne Weiterleitung)."""
+    for slug in _post_slugs():
+        html_path = os.path.join(PUBLIC, "posts", slug, "index.html")
+        if not os.path.exists(html_path):
+            continue
+        if _is_redirect_html(html_path):
+            PROBLEMS.append(("P10", slug, "Artikel-Seite ist ein Meta-Refresh-Alias – nicht direkt pinnen"))
+
+
+def _check_affiliate_density():
+    """P11: Affiliate-Link-Dichte pro Artikel (Profi-Standard: max. 5)."""
+    import urllib.parse
+    for slug in _post_slugs():
+        p = os.path.join(BLOG_DIR, "content", "posts", slug, "index.md")
+        if not os.path.exists(p):
+            continue
+        c = open(p, encoding="utf-8").read()
+        go = len(re.findall(r"\]\(/go/[\w-]+/\)", c))
+        direct = len(re.findall(r"\]\(https://a\.(?:check24|partner-versicherung)[^)]*\)", c))
+        total = go + direct
+        if total > 5:
+            PROBLEMS.append(("P11", slug, f"{total} Affiliate-Links (> 5 – Profi-Limit)"))
+
+
+def _check_go_links_rel():
+    """P12: /go/-Links im HTML tragen rel='sponsored nofollow' (Transparenz +
+    Pinterest wertet unmarkierte Affiliate-Links als Spam-Signal)."""
+    for slug in _post_slugs():
+        html_path = os.path.join(PUBLIC, "posts", slug, "index.html")
+        if not os.path.exists(html_path):
+            continue
+        h = open(html_path, encoding="utf-8", errors="ignore").read()
+        for m in re.finditer(r'<a[^>]*href="/go/[^"]*"[^>]*>', h):
+            a = m.group(0)
+            if "rel=" not in a or ("nofollow" not in a and "sponsored" not in a):
+                PROBLEMS.append(("P12", slug, "/go/-Link ohne nofollow/sponsored"))
+                break
+
+
+def _check_go_noindex():
+    """P13: /go/-Gateway-Seiten sind noindex,nofollow (keine Affiliate-
+    Landingpages im Index – Pinterest/Google sehen keine 'dünnen' Seiten)."""
+    go_dir = os.path.join(BLOG_DIR, "static", "go")
+    if not os.path.isdir(go_dir):
+        return
+    for d in sorted(os.listdir(go_dir)):
+        p = os.path.join(go_dir, d, "index.html")
+        if not os.path.exists(p):
+            PROBLEMS.append(("P13", d, "/go/<key>/index.html fehlt"))
+            continue
+        h = open(p, encoding="utf-8").read()
+        if "noindex" not in h:
+            PROBLEMS.append(("P13", d, "/go/ ohne noindex"))
 
 
 def _check_rich_pins():
@@ -236,6 +303,10 @@ def main():
         _check_robots()
     _check_domain_verify()
     _check_pin_buttons()
+    _check_no_redirect_on_article()
+    _check_affiliate_density()
+    _check_go_links_rel()
+    _check_go_noindex()
     _check_rich_pins()
     _check_profile_link()
     if not DO_FIX:
