@@ -6,14 +6,14 @@ draft: false
 tags: ["Schufa", "Bonität", "Kredit", "Kreditwürdigkeit", "Datenschutz"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-author: "Frank"
+author: "Frank Hartung"
 erfahrung: "Ich habe meine eigene Schufa-Auskunft mehrfach geprüft und dabei Fehler gefunden, die meinen Score belastet haben. Meine Erfahrung: Die kostenlose Datenkopie einmal im Jahr zu prüfen, ist der effektivste Hebel für einen besseren Score."
 
 ai_generated: false
 ai_provider: "Content-Engine v2"
 cover:
   image: "images/covers/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft.jpg"
-  alt: "Schufa-Score verstehen: So liest du deine Bonitätsauskunft"
+  alt: "Schufa-Datenkopie mit Bonitätsscore wird am Laptop geprüft"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---

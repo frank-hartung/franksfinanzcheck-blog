@@ -7,7 +7,7 @@ tags: []
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 keywords: ["Depot 2026", "Vermögensaufbau", "ETF-Sparplan", "Neobroker"]
-author: "Frank"
+author: "Frank Hartung"
 erfahrung: "Ich habe mehrere Neobroker selbst getestet und mein Depot zwischen zwei Anbietern umgezogen. Dabei habe ich gelernt: Die Ordergebühr ist nur die halbe Wahrheit – Spreads, Fremdwährungsgebühren und der Freistellungsauftrag entscheiden über die tatsächlichen Kosten."
 
 ai_generated: true

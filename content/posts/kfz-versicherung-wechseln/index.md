@@ -7,7 +7,7 @@ tags: ["Versicherung", "Kfz", "Sparen"]
 categories: ["Versicherungen"]
 pillar: "versicherungen"
 keywords: ["Kfz-Versicherung wechseln", "Autoversicherung vergleichen", "SF-Klasse", "Kfz-Versicherung wechseln beim Neuwagen", "Kfz-Versicherung Vergleich"]
-author: "Frank"
+author: "Frank Hartung"
 erfahrung: "Ich habe meinen eigenen Kfz-Versicherungsvertrag dreimal gewechselt und dabei mehrere hundert Euro gespart. Meine Erfahrung: Der Wechsel lohnt sich fast immer zum Jahresende – wer SF-Klasse und Rabattschutz versteht, verhandelt aus einer starken Position."
 
 cover:

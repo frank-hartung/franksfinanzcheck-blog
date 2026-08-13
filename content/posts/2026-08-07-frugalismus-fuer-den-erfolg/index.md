@@ -7,7 +7,7 @@ tags: ["Frugalismus Tipps", "Geld sparen im Alltag", "Haushaltsbuch führen", "S
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["frugalismus tipps", "geld sparen im alltag", "haushaltsbuch führen", "sparmethoden"]
-author: "Frank"
+author: "Frank Hartung"
 ai_generated: true
 ai_provider: "Groq (Gratis-Key: console.groq.com)"
 inspiration: Pin 1 – „5 einfache Frugalismus-Tricks für den Alltag“ (nur Themen-Grundlage, eigenständig formuliert)

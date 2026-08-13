@@ -7,7 +7,7 @@ tags: ["Mietwagen Roadtrip", "Mietwagen günstig buchen", "Reisebudget"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 keywords: ["mietwagen roadtrip", "mietwagen günstig buchen", "reise budget"]
-author: "Frank"
+author: "Frank Hartung"
 ai_generated: true
 ai_provider: "Groq (Gratis-Key: console.groq.com)"
 inspiration: Pin 30 – „Spätsommer-Mietwagen Schnäppchen“ (nur Themen-Grundlage, eigenständig formuliert)

@@ -67,14 +67,30 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   bingVerify = "5079875E367065FE09E09FC61BC077C6"
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
+  # Homepage-<title>-Tag separat vom Marken-Namen (site.Title), der u.a. in
+  # Schema.org (Organization/WebSite "name"), Footer & aria-Labels weiter
+  # als reiner "FranksFinanzcheck" gebraucht wird. Der <title>-Tag der
+  # Startseite bekommt hierdurch zusätzlich Kern-Keywords + Nutzenversprechen
+  # (13.08. SEO-Fix: vorher nur "FranksFinanzcheck" ohne jedes Keyword).
+  homeTitle = "FranksFinanzcheck: Ratgeber für Strom, Gas, DSL & Finanzen"
+
   [params.homeInfoParams]
-    Title = "Willkommen bei FranksFinanzcheck! 👋"
+    Title = "Geld sparen ohne Verzicht: Dein Ratgeber für Strom, Gas, Versicherungen & Finanzen"
     Content = "💰 Geld sparen ohne Gürtel enger zu schnallen – genau darum geht es hier.\n\nJeden Tag erscheint ein neuer, verständlicher Ratgeber: **Strom, Gas und DSL günstiger**, Versicherungen richtig wählen, Konto & Karte ohne Gebührenfallen, dazu Frugalismus-Tricks und Budgetplanung, die wirklich im Alltag funktionieren. Ohne Fachchinesisch, ohne Verkaufsdruck – dafür mit konkreten Zahlen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen.\n\nStöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
 
   [[params.socialIcons]]
     name = "pinterest"
     url = "https://www.pinterest.de/franksfinanzcheck/"
     title = "FranksFinanzcheck auf Pinterest"
+
+  [params.assets]
+    # Bisher zeigte das Organization/Publisher-Logo in allen JSON-LD-Schemas
+    # (WebSite, BlogPosting-Publisher) auf favicon.ico (nur 395 Byte, sehr
+    # niedrige Auflösung). Google empfiehlt ein quadratisches Logo min.
+    # 112x112px. apple-touch-icon.png (180x180, bereits vorhanden) ist die
+    # beste sofort verfügbare Lösung, bis ein dediziertes logo.png angelegt
+    # wird. Wirkt sich auch auf den Browser-Tab-Favicon-Link aus (Verbesserung).
+    favicon = "apple-touch-icon.png"
 
 [menu]
 [[menu.main]]

@@ -7,7 +7,7 @@ tags: ["Frugalismus Tipps", "Geld sparen im Alltag", "Haushaltsbuch führen", "S
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["frugalismus tipps", "geld sparen im alltag", "haushaltsbuch führen", "sparmethoden"]
-author: "Frank"
+author: "Frank Hartung"
 cover:
   image: "images/covers/2026-08-06-frugalismus-im-alltag.jpg"
   alt: "Frugalismus im Alltag: So sparst du jeden Monat bares Geld"
@@ -54,7 +54,7 @@ Ein zentraler Gedanke ist die Berechnung deines Stundenlohns: Wenn du ein neues 
 * **Pay Yourself First:** Lege einen festen Sparbetrag direkt am Monatsanfang per Dauerauftrag auf ein separates Konto beiseite.
 
 ## Die Vorteile von Frugalismus
-Frugalismus schützt dich vor Verschwendung und schafft finanzielle Sicherheit. Oft merkst du erst beim genauen Hinsehen, wie viel Geld in Abos oder Kleinkram versickert. Durch effektive **[Sparmethoden](../../posts/2026-08-07-frugalismus-fuer-den-erfolg/)** lenkst du dieses Kapital in deine Altersvorsorge oder den Immobilienkauf. 
+[Frugalismus](../../posts/7-gewohnheiten-finanzielle-freiheit/) schützt dich vor Verschwendung und schafft finanzielle Sicherheit. Oft merkst du erst beim genauen Hinsehen, wie viel Geld in Abos oder Kleinkram versickert. Durch effektive **[Sparmethoden](../../posts/2026-08-07-frugalismus-fuer-den-erfolg/)** lenkst du dieses Kapital in deine Altersvorsorge oder den Immobilienkauf. 
 
 Stell dir vor, du sparst durch frugale Gewohnheiten monatlich 300 € zusätzlich und legst diese zu 7 % Zinsen am Aktienmarkt an. Nach 20 Jahren hättest du ein Vermögen von über 150.000 € – allein durch die Optimierung deines Alltags. Ein bewussterer Konsum reduziert zudem deinen täglichen Stress, da du weniger Dinge besitzen und pflegen musst. Wer seine Finanzen im Griff hat, blickt deutlich gelassener in die Zukunft.
 
@@ -94,7 +94,7 @@ Besonders das soziale Umfeld kann zur Herausforderung werden. Freunde, die jedes
 
 ## Häufige Fragen
 ### Was ist der erste Schritt, um den Frugalismus zu leben?
-Erfasse zuerst deine gesamten Ausgaben für einen vollen Monat lückenlos. Nur so identifizierst du unnötige Kostenfresser sofort. Mit gezielten **Sparmethoden**, wie dem Eliminieren von Bankgebühren oder dem Wechsel zu einem günstigen Mobilfunkanbieter, steigerst du danach Schritt für Schritt deine monatliche Sparrate.
+Erfasse zuerst deine gesamten Ausgaben für einen vollen Monat lückenlos. Nur so identifizierst du unnötige Kostenfresser sofort. Mit gezielten **[Sparmethoden](../../posts/2026-08-07-frugalismus-fuer-den-erfolg/)**, wie dem Eliminieren von Bankgebühren oder dem Wechsel zu einem günstigen Mobilfunkanbieter, steigerst du danach Schritt für Schritt deine monatliche Sparrate.
 
 ### Wie kann man seine Ausgaben reduzieren, ohne an Lebensqualität zu verlieren?
 Fokussiere dich auf "High-Value-Spending". Gib Geld für Dinge aus, die dir wirklich langfristig Freude bereiten, und streiche alles andere radikal. Oft sind es kostenlose Erlebnisse wie Wandern, Lesen (Bibliothek statt Kauf) oder Sport im Freien, die mehr Zufriedenheit stiften als der Kauf materieller Statussymbole. Vergleiche regelmäßig Tarife für Strom oder Internet, um ohne Komfortverzicht jährlich hunderte Euro zu sparen.

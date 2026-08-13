@@ -7,7 +7,7 @@ tags: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset"]
 categories: ["Geld sparen & Frugalismus"]
 pillar: "frugalismus"
 keywords: ["Finanzielle Freiheit", "Vermögensaufbau", "Sparmindset", "Passives Einkommen", "Frugalismus"]
-author: "Frank"
+author: "Frank Hartung"
 erfahrung: "Die Gewohnheiten in diesem Artikel habe ich über Monate an mir selbst ausprobiert – vom automatischen Sparen bis zur 48-Stunden-Regel bei Impulskäufen. Meine Erfahrung: Nicht die einzelne Gewohnheit macht den Unterschied, sondern die Kombination."
 
 cover:

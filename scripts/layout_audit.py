@@ -209,7 +209,14 @@ def check_schema_and_meta():
         # <meta http-equiv=refresh> + canonical) sind gewollt – überspringen
         if re.search(r'http-equiv=["\']?refresh', text) and "canonical" in text:
             continue
-        if '"@type":"Article"' not in text and '"@type": "Article"' not in text:
+        # 13.08.: Das frühere eigene "Article"-Schema (schema_article.html)
+        # wurde entfernt (Templating-Bug mit doppelt escapten Anführungs-
+        # zeichen + verwies auf nie existierendes /images/logo.png, siehe
+        # Commit-History). Es war ohnehin redundant zum sauberen, theme-
+        # eigenen BlogPosting-Schema. Diese Prüfung akzeptiert daher jetzt
+        # beide Schema-Typen als gültig.
+        if ('"@type":"Article"' not in text and '"@type": "Article"' not in text
+                and '"@type":"BlogPosting"' not in text and '"@type": "BlogPosting"' not in text):
             no_schema.append(os.path.basename(os.path.dirname(page)))
         if 'og:image' not in text:
             no_og.append(os.path.basename(os.path.dirname(page)))
@@ -224,7 +231,7 @@ def check_schema_and_meta():
     if no_schema:
         WARN.append(f"Schema Article fehlt auf {len(no_schema)} Seiten: {', '.join(no_schema[:6])}")
     else:
-        OK.append(f"Schema-JSON-LD (Article) auf allen {len(pages)} Artikel-Seiten.")
+        OK.append(f"Schema-JSON-LD (BlogPosting) auf allen {len(pages)} Artikel-Seiten.")
     if no_og:
         WARN.append(f"og:image fehlt auf {len(no_og)} Seiten.")
     else:

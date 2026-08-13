@@ -7,7 +7,7 @@ tags: ["DNS-Server wechseln", "Internet schneller machen", "DSL-Tipps"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 keywords: ["dns server wechseln", "internet schneller machen", "dsl tipps"]
-author: "Frank"
+author: "Frank Hartung"
 ai_generated: true
 ai_provider: "Groq (Gratis-Key: console.groq.com)"
 inspiration: Pin 6 – „DNS-Server ändern für schnelleres Internet“ (nur Themen-Grundlage, eigenständig formuliert)

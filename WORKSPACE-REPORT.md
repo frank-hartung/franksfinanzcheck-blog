@@ -1,8 +1,8 @@
 # 🧹 WORKSPACE-REPORT
 
-**Stand:** 2026-08-12 18:14 UTC · Modus: REPORT · Getrackte Dateien: 1006 · .git: 23 MB
+**Stand:** 2026-08-13 09:15 UTC · Modus: REPORT · Getrackte Dateien: 429 · .git: 24 MB
 
-**Budget (Säule A):** 63 MB / 1249 Dateien – Level GRUEN
+**Budget (Säule A):** 49 MB / 999 Dateien – Level GRUEN
 
 | Prüfung | Befund | Status |
 |---|---|---|
@@ -11,7 +11,7 @@
 | W3 Duplikate (identische Dateien) | 0 | ✅ |
 | W4 Dickschiffe (>300/500 KB) | 1 | ⚠️ |
 | W5 History-Rotation (>400 Zeilen) | 0 | ✅ |
-| W6 Git-Volumen | 23 MB | ⚠️ |
+| W6 Git-Volumen | 24 MB | ⚠️ |
 | W7 Konflikt-Marker (content/) | 0 | ✅ |
 
 🐘 Dickschiffe:

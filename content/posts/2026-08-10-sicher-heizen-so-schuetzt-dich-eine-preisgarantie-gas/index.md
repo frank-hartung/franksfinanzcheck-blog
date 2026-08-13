@@ -2,11 +2,11 @@
 title: "Sicher heizen: So schützt dich eine Gaspreisgarantie"
 description: "Schütze dich vor steigenden Kosten! Erfahre, wie du mit einer Gaspreisgarantie deine Fixkosten senkst und bares Geld bei der Heizkostenabrechnung sparst."
 date: 2026-08-10T09:29:05Z
-draft: false
+draft: true
 tags: []
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-author: "Frank"
+author: "Frank Hartung"
 erfahrung: "Als die Gaspreise zuletzt stark schwankten, habe ich mir selbst eine Preisgarantie gesichert. Meine Erfahrung aus den Tarifvergleichen: Die Garantiedauer und die Klauseln für Preisanpassungen sind wichtiger als der reine Arbeitspreis im ersten Jahr."
 
 ai_generated: true

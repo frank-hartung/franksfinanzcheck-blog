@@ -6,7 +6,19 @@ draft: false
 tags: []
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-author: "Frank"
+author: "Frank Hartung"
+# Konsolidierung (13.08.): Der ältere, kürzere Zwillingsartikel vom 10.08.
+# ("Sicher heizen: So schützt dich eine Gaspreisgarantie") behandelte exakt
+# dasselbe Thema/dieselbe Inspiration und konkurrierte in der Google-Suche
+# mit diesem, ausführlicheren Artikel (Keyword-Kannibalisierung). Er wurde
+# auf draft gesetzt; alle drei alten URLs (inkl. zweier zuvor fälschlich am
+# Lastschrift-Artikel hängender Alias-Slugs derselben Themenreihe) leiten
+# jetzt hierher weiter.
+aliases: [
+  "/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/",
+  "/posts/2026-08-11-preisgarantie-gas-so-sicherst-du-dich-gegen-preisspruenge-ab/",
+  "/posts/2026-08-11-preisgarantie-gas-so-schuetzt-du-dich-vor-preiserhoehungen/"
+]
 erfahrung: "Bei meinen eigenen Gasverträgen habe ich die Preisgarantie-Angebote der letzten Jahre verglichen. Meine Erfahrung: Eine lange Garantie ist Gold wert, wenn die Preise steigen – aber nur, wenn der Anbieter die Garantie auch wirklich einhält."
 
 ai_generated: true
@@ -17,7 +29,7 @@ inspiration: "Zweite Welle Gaspreis-Anpassung: Jetzt sichern"
 social_posted: true
 cover:
   image: "images/covers/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg"
-  alt: "Preisgarantie Gas: So sicherst du dir günstige Tarife für 2026"
+  alt: "Hand hält Gasrechnung neben Taschenrechner – Tarifvergleich für eine Gaspreisgarantie"
   caption: "Tipp von FranksFinanzcheck"
 ---
 
@@ -94,7 +106,7 @@ Nutze die aktuelle Marktphase, in der die Anbieter um Neukunden kämpfen. Durch 
 
 
 
-**Weiterlesen:** [Preisgarantie beim Heizen](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)
+**Weiterlesen:** [Intelligente Heizsysteme richtig nutzen](../../posts/2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen/)
 ## Häufige Fragen
 
 ### Wie lange sollte eine Preisgarantie idealerweise laufen?

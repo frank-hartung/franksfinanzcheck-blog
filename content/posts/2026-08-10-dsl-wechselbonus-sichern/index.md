@@ -6,7 +6,7 @@ draft: false
 tags: []
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-author: "Frank"
+author: "Frank Hartung"
 erfahrung: "Bei meinem letzten Internetvertrag-Wechsel habe ich die Boni der Anbieter genau verglichen und den Zeitpunkt clever gewählt. Meine Erfahrung: Der Wechselbonus klingt verlockend, aber der Preis ab dem zweiten Jahr entscheidet – und die Kündigungsfrist darf man nie unterschätzen."
 
 ai_generated: true
@@ -16,7 +16,7 @@ engine_level: "relaxed"
 inspiration: DSL-Wechselbonus mitnehmen
 cover:
   image: "images/covers/2026-08-10-dsl-wechselbonus-sichern.jpg"
-  alt: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
+  alt: "Router und Vertragsunterlagen – DSL-Anbieterwechsel mit Wechselbonus"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst einen DSL-Wechselbonus erhalten, wenn du zu einem neuen Anbieter wechselst. Ein Wechselbonus kann in der Regel zwischen 50 € und 200 € liegen. Durch einen DSL-Anbieterwechsel kannst du bessere Tarife und höhere Geschwindigkeiten erhalten."
 

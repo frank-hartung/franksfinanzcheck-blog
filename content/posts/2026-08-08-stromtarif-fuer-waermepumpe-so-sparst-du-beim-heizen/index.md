@@ -7,7 +7,7 @@ tags: ["Wärmepumpentarif", "Stromtarif", "Heizkosten"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 keywords: ["Wärmepumpentarif", "Stromtarif", "Heizkosten"]
-author: "Frank"
+author: "Frank Hartung"
 erfahrung: "Bei meiner eigenen Heizungsplanung habe ich die Wärmepumpen-Tarife über zwei Jahre beobachtet. Der größte Fehler wäre, nur auf den Arbeitspreis zu schauen – der Grundpreis und die Sperrzeit-Regelung entscheiden oft, ob sich der Tarif wirklich lohnt."
 
 ai_generated: true
@@ -99,7 +99,7 @@ Besitzt du eine PV-Anlage? Dann ist die sogenannte **Kaskadenschaltung** die Kö
 
 
 
-**Weiterlesen:** [Preisgarantie beim Heizen](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)
+**Weiterlesen:** [Preisgarantie beim Heizen](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
 ## Häufige Fragen
 ### Was ist ein Wärmepumpentarif?
 Es handelt sich um Strom zu Sonderkonditionen für elektrische [Heizsysteme](../../posts/2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen/). Der Netzbetreiber darf die Belieferung bei Netzengpässen kurzzeitig unterbrechen oder dimmen (auf bis zu 4,2 kW). Dafür gewährt er dir einen erheblichen Rabatt auf die Netzentgelte.

@@ -3,3 +3,4 @@
 {"date": "2026-08-12", "mode": "FIX", "junk": 0, "orphans": 0, "dups": 0, "heavy": 1, "git_mb": 105.0}
 {"date": "2026-08-12", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 1, "heavy": 1, "git_mb": 113.0, "budget_mb": 153, "budget_level": "kritisch"}
 {"date": "2026-08-12", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 0, "heavy": 1, "git_mb": 23.0, "budget_mb": 63, "budget_level": "gruen"}
+{"date": "2026-08-13", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 0, "heavy": 1, "git_mb": 24.0, "budget_mb": 49, "budget_level": "gruen"}

@@ -1,7 +1,17 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-{{- if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
+{{- /* Thin-Content-Schutz (13.08.): Tag-/Kategorie-Archivseiten mit
+       weniger als 4 Artikeln bringen kaum Mehrwert (nur 1 Beitrag pro
+       Tag ist üblich) und verwässern als "Thin Content" die Crawl-
+       Priorität. Sie werden automatisch auf noindex,follow gesetzt und
+       springen selbstständig auf index,follow, sobald genug Artikel
+       dazugekommen sind. Der Linkfluss (follow) bleibt in jedem Fall
+       erhalten. */ -}}
+{{- $isThinTaxonomy := and (eq .Kind "term") (lt (len .Pages) 4) -}}
+{{- if $isThinTaxonomy }}
+<meta name="robots" content="noindex, follow">
+{{- else if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
 <meta name="robots" content="index, follow">
 {{- else }}
 <meta name="robots" content="noindex, nofollow">
@@ -9,7 +19,7 @@
 
 {{- /* Title */}}
 <title>{{ if .IsHome -}}
-{{ site.Title }}
+{{ site.Params.homeTitle | default site.Title }}
 {{- else -}}
 {{- if .Title -}}
 {{- $t := .Title | plainify | replaceRE "\\s+" " " -}}

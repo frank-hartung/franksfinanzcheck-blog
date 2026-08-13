@@ -198,7 +198,13 @@
   }
 </script>
 
-{{- /* ---------- Article-Schema (E-E-A-T, Rich Results) – nur Artikel ---------- */ -}}
-{{- if and (eq .Section "posts") (eq .Kind "page") -}}
-{{- partial "schema_article.html" . -}}
-{{- end -}}
+{{- /* ---------- Article-Schema wurde entfernt (13.08.) ----------
+       Grund: Redundant zum theme-eigenen BlogPosting-Schema
+       (themes/PaperMod/layouts/_partials/templates/schema_json.html),
+       das bereits Headline/Description/Author/Publisher/Datum/Bild
+       sauber ausgibt. Das eigene schema_article.html erzeugte durch
+       einen Templating-Fehler (jsonify auf bereits gequotete Strings)
+       doppelt escapte Anführungszeichen in headline/description/author/
+       logo-URL UND verwies auf ein nie existierendes /images/logo.png
+       (404) – beides verhinderte valide Rich-Results. Ersatzlos entfernt,
+       da die theme-eigene BlogPosting-Ausgabe alle nötigen Felder abdeckt. */ -}}

@@ -3,18 +3,21 @@ title: "Lastschrift zurückbuchen: So holst du dir dein Geld zurück"
 description: Lastschrift zurückbuchen in wenigen Minuten – begründungslos bis zu acht Wochen lang. Hier erfährst du Fristen, Ablauf und die häufigsten Fehler.
 date: 2026-08-11T16:55:00Z
 draft: false
-aliases: ["/posts/2026-08-11-preisgarantie-gas-so-sicherst-du-dich-gegen-preisspruenge-ab/", "/posts/2026-08-11-preisgarantie-gas-so-schuetzt-du-dich-vor-preiserhoehungen/"]
+# 13.08.: Die beiden Preisgarantie-Gas-Alias-Slugs standen hier fälschlich
+# (offensichtlicher Zuordnungsfehler einer früheren Automatisierung –
+# thematisch gehören sie zum Gaspreisgarantie-Artikel, nicht zu Lastschrift).
+# Verschoben nach content/posts/2026-08-12-preisgarantie-gas-.../index.md.
 tags: ["Lastschrift", "SEPA-Lastschrift", "Girokonto", "Banking", "Geld zurück"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-author: "Frank"
+author: "Frank Hartung"
 erfahrung: "Eine unberechtigte Lastschrift habe ich selbst erlebt – die Rückbuchung war einfacher als gedacht, aber die Fristen sind streng. Meine Erfahrung: Wer die 8-Wochen-Frist kennt und Belege aufbewahrt, holt sich sein Geld in wenigen Tagen zurück."
 
 ai_generated: false
 ai_provider: "Content-Engine v2"
 cover:
   image: "images/covers/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck.jpg"
-  alt: "Lastschrift zurückbuchen: So holst du dir dein Geld zurück"
+  alt: "Kontoauszug mit fehlerhafter SEPA-Lastschrift wird kontrolliert"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---

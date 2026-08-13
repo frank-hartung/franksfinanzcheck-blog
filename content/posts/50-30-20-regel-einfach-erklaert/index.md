@@ -7,7 +7,7 @@ tags: ["Budgetierung", "50–30–20", "Haushaltsplanung"]
 categories: ["Haushaltskasse & Budgetplanung"]
 pillar: "frugalismus"
 keywords: ["50 30 20 Regel", "Budgetierung", "Haushaltsplanung", "Finanzwissen", "Regel Rechner", "Haushaltsbuch Vorlage"]
-author: "Frank"
+author: "Frank Hartung"
 erfahrung: "Ich wende die 50-30-20-Regel seit Jahren auf mein eigenes Budget an und habe sie in meiner Beratungspraxis bei unterschiedlichen Einkommen getestet. Meine Erfahrung: Die Prozentwerte sind eine Orientierung, keine Doktrin – wichtig ist die Automatisierung der Sparrate."
 
 cover:
@@ -105,7 +105,7 @@ Kein Finanzsystem ist perfekt. Die 50–30–20-Regel bietet jedoch einen hervor
 
 **Nachteile:**
 - **Ballungsraum-Problem:** Bei sehr hohen Mieten ist die 50-Prozent-Quote oft unrealistisch. Hier musst du auf 60–20–20 ausweichen.
-- **Geringverdiener-Hürde:** Wer 1.200 € netto verdient, kämpft oft schon damit, die 50 % für Miete und Strom einzuhalten. Hier steht die Existenzsicherung vor dem Vermögensaufbau.
+- **Geringverdiener-Hürde:** Wer 1.200 € netto verdient, kämpft oft schon damit, die 50 % für Miete und Strom einzuhalten. Hier steht die Existenzsicherung vor dem [Vermögensaufbau](../../posts/7-gewohnheiten-finanzielle-freiheit/).
 
 ## Was tun, wenn die 50 % nicht reichen?
 
