@@ -1,6 +1,6 @@
 # 🔐 INTEGRITY-REPORT
 
-**Stand:** 2026-08-13 09:50 UTC · HEAD: `ca2659d`
+**Stand:** 2026-08-13 09:59 UTC · HEAD: `29ea562`
 **Verlade-Ebene:** 35 Dateien gelockt
 **Gesperrte kritische Knoten:** 7
 

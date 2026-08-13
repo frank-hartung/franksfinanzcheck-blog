@@ -36,6 +36,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+import yaml
+
 # ---------------------------------------------------------------- Konfiguration
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
@@ -139,21 +141,30 @@ def fix_number_units(body):
 
 
 def load_topics():
-    """Lädt data/topics.yaml (minimalistischer YAML-Parser, nur unser Format)."""
+    """Lädt data/topics.yaml als echtes YAML (13.08.2026 – vorher ein sehr
+    fragiler, zeilenbasierter Mini-Parser, der bei jeder Formatierungs-
+    Abweichung (z. B. durch andere Automatisierungs-Skripte) still falsche
+    Themen/Pillars zusammengewürfelt statt einen Fehler geworfen hat – siehe
+    Commit-Historie zu data/topics.yaml. Ein echter YAML-Parser bricht bei
+    kaputtem Format stattdessen laut mit einer klaren Fehlermeldung ab,
+    statt die Themen falsch zuzuordnen."""
+    try:
+        with open(TOPICS_FILE, encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+    except yaml.YAMLError as exc:
+        sys.exit(f"FEHLER: data/topics.yaml ist kein gültiges YAML mehr – "
+                 f"bitte reparieren, bevor der Bot weiterläuft:\n{exc}")
+    raw_topics = (data or {}).get("topics") or []
     topics = []
-    with open(TOPICS_FILE, encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if line.startswith("- title:"):
-                t = line.split(":", 1)[1].strip().strip("\"'")
-                topics.append({"title": t, "keywords": [], "affiliate_url": None, "pillar": None})
-            elif line.startswith("keywords:") and topics:
-                raw = line.split(":", 1)[1].strip()
-                topics[-1]["keywords"] = [k.strip().strip("\"'") for k in raw.strip("[]").split(",")]
-            elif line.startswith("affiliate_url:") and topics:
-                topics[-1]["affiliate_url"] = line.split(":", 1)[1].strip().strip("\"'")
-            elif line.startswith("pillar:") and topics:
-                topics[-1]["pillar"] = line.split(":", 1)[1].strip().strip("\"'")
+    for t in raw_topics:
+        if not isinstance(t, dict) or not t.get("title"):
+            continue
+        topics.append({
+            "title": str(t["title"]).strip(),
+            "keywords": list(t.get("keywords") or []),
+            "affiliate_url": t.get("affiliate_url"),
+            "pillar": t.get("pillar"),
+        })
     if not topics:
         sys.exit("FEHLER: Keine Themen in data/topics.yaml gefunden.")
     return topics
