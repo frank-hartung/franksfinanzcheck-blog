@@ -213,7 +213,7 @@ jobs:
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
-          git add content/ BESTAND-REPORT.md AFFILIATE-REPORT.md .affiliate_report.json META-REPORT.md .meta_report.json 2>/dev/null || true
+          git add content/ BESTAND-REPORT.md AFFILIATE-REPORT.md .affiliate_report.json META-REPORT.md 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Bestand-Gate: keine Änderungen."
           else
@@ -305,10 +305,17 @@ jobs:
           python3 scripts/set_lastmod.py --git-changed
 
       - name: Meta-Report committen
+        # BUGFIX 13.08.: '.meta_report.json' steht bewusst in .gitignore
+        # (lokaler Cache, siehe .gitignore Zeile 19) – 'git add' auf einen
+        # per .gitignore ausgeschlossenen Pfad OHNE '-f' schlägt fehl und
+        # bricht den Schritt (bash -e) sofort ab. Da dieser Schritt gegen
+        # Ende der 30-teiligen Kette liegt, wurde er faktisch nie erreicht,
+        # solange frühere Schritte (Grammatik/Cover) die Kette vorher schon
+        # abbrachen – jetzt, wo die Kette weiter kommt, greift der Bug direkt.
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
-          git add META-REPORT.md .meta_report.json
+          git add META-REPORT.md
           if git diff --cached --quiet; then
             echo "Report unverändert"
           else
