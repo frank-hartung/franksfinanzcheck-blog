@@ -66,6 +66,7 @@ KETTE = [
     ("content_audit.py",      ["--fix"],                "B-Semantik", "Content-Auditor C1-C6: Duenn, Struktur, Platzhalter (12.08.)"),
     ("compound_guard.py",     ["--fix"],                "B-Semantik", "Komposita SEO-Falle"),
     ("math_guard.py",         ["--fix"],                "B-Semantik", "Zahlenbeweis M1-M2"),
+    ("pillar_guard.py",       [],                       "B-Semantik", "Tote Klartext-Artikelverweise auf Pillar-Seiten (13.08. hinzu, kein --fix: redaktionelle Entscheidung)"),
     ("affiliate_shield.py",   ["--fix"],                "C-Money", "Auto-Deep + Gateways"),
     ("affiliate_marketer.py", ["--fix"],                "C-Money", "CTA-Routing + Retarget"),
     ("table_guard.py",        ["--fix"],                "B-Semantik", "Tabellen T1-T4"),

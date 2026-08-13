@@ -1,25 +1,20 @@
 # 🔗 LINKDENSITY-REPORT (link_density_guard.py)
 
-**Stand:** 2026-08-12 16:44 UTC · Modus: FIX
+**Stand:** 2026-08-13 13:34 UTC · Modus: FIX
 
 | Kennzahl | Wert | Goldkorridor |
 |---|---|---|
-| Artikel | 77 | — |
-| ø interne Links/Artikel | 5.5 | 2–9 |
-| Artikel im Korridor | 91 % | ≥ 85 % |
-| unterversorgt (<2) | 6 | 0 |
-| überladen (>9) | 1 | 0 |
-| Ziel-Duplikate (heilbar offen) | 47 | 0 |
-| Ziel-Duplikate (strukturell, unheilbar) | 4 | Info |
+| Artikel | 9 | — |
+| ø interne Links/Artikel | 1.7 | 2–9 |
+| Artikel im Korridor | 67 % | ≥ 85 % |
+| unterversorgt (<2) | 3 | 0 |
+| überladen (>9) | 0 | 0 |
+| Ziel-Duplikate (heilbar offen) | 0 | 0 |
+| Ziel-Duplikate (strukturell, unheilbar) | 0 | Info |
 
-✅ **Selbstheilung Duplikate:** 45 Folge-Links entlinkt (Text blieb).
-  ⚠ LOW  2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck: 1 Links
-  ⚠ LOW  2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft: 0 Links
-  ⚠ LOW  hausratversicherung-wer-braucht-leistung: 1 Links
-  ⚠ LOW  last-minute-urlaubsangebote-sichern: 1 Links
-  ⚠ LOW  privathaftpflicht-warum-pflicht-kosten: 1 Links
-  ⚠ LOW  wlan-verstaerker-vs-mesh-wlan: 1 Links
-  ⚠ HIGH sparquote-berechnen-und-steigern: 11 Links (Sichtung empfohlen)
+  ⚠ LOW  2026-08-08-dein-tier-im-krankheitsfall: 1 Links
+  ⚠ LOW  2026-08-10-dsl-wechselbonus-sichern: 1 Links
+  ⚠ LOW  2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026: 1 Links
 
 ---
 _Goldkorridor-Regel: siehe QUALITAETS-REGELWERK §12.08(7)._

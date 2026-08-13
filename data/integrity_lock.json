@@ -1,10 +1,10 @@
 {
-  "signed_at": "2026-08-13T11:53:50.291839+00:00",
-  "head": "e974677",
+  "signed_at": "2026-08-13T13:33:44.631821+00:00",
+  "head": "45223cb",
   "files": {
     "assets/css/extended/custom.css": "3c941e57a4ecc96a4c8e78c8dbbb184b17e10af22ab29dd72bb908f5bdbaab88",
     "data/brand_lock.yaml": "9aaa6aad496c2fb4f7f84cb3b09b04c0f4d03eadb6aa69a27511988f69454680",
-    "data/content_fingerprints.jsonl": "f198c755434e5c78fcfa18806f603cc87b9a0c5343d59fec40060e0f14cffe56",
+    "data/content_fingerprints.jsonl": "137466b535699cb13d4d6a56739620daa88104ed668898d4f27f1fdf504397f2",
     "hugo.toml": "ef979013c6e813600d8718ef1488cba7219b95b2b86f1c6e57a155d9d472eeba",
     "layouts/_default/_markup/render-link.html": "aa06d8fad298ef739b97001c0cc7ce9a0c1102bc2df021570314df3d5c296a87",
     "layouts/_partials/cover.html": "f96a5ff402634dffc595077ca3648d4e5a79cf061f3d78328102bb804463c152",
@@ -20,7 +20,7 @@
     "layouts/robots.txt": "3df7f0c139b2091ed323dbf52af502aeb9d42a040708bce636556ce7d16b4cc7",
     "scripts/affiliate_marketer.py": "6c25866467b81e1aea4af81cbbd4317d144a671454d0730c93d53cbad67197f8",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
-    "scripts/blog_doctor.py": "ac98113d49250b67753d2fe12669b0a37b291f0749c9d396a35a0d12fb5c63ac",
+    "scripts/blog_doctor.py": "0d05203198bc563008b454b9bd3c60e4839b00200e9c616112087319ab044532",
     "scripts/brand_guard.py": "e668be495b16d13ee9c13806d6281b08a862cc075888f3abf418a56b6bc92bed",
     "scripts/check24_links.yaml": "417e752281360a2e06ea926c0ec9e1d8c40f2e82773f8c40ad6cf22ef530a4c5",
     "scripts/check_covers.py": "ba7cd294bbd3ce001dd469682434e0ba887d5a2027ec75e27744c1fab24306b1",

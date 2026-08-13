@@ -1,26 +1,26 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-08-12 16:44 UTC · Modus: FIX
+**Stand:** 2026-08-13 13:33 UTC · Modus: DRY-RUN
 
 🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
 
 ## 🎓 Stil-Hinweise (Ebene 2, nur Info bzw. mit --ai aktiv)
 
-- `content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md` Zeile 81: S3-Konjunktion
-- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 31: S3-Konjunktion
-- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 42: S3-Konjunktion
-- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 64: S3-Konjunktion
-- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 140: S3-Konjunktion
-- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 148: S3-Konjunktion
-- `content/posts/frugalismus-tricks-alltag-200-euro-sparen/index.md` Zeile 35: S3-Konjunktion
-- `content/posts/internet-anbieter-wechseln-kuendigung/index.md` Zeile 40: S3-Konjunktion
-- `content/posts/internet-anbieter-wechseln-kuendigung/index.md` Zeile 46: S3-Konjunktion
-- `content/posts/internet-anbieter-wechseln-kuendigung/index.md` Zeile 104: S3-Konjunktion
-- `content/posts/internet-anbieter-wechseln-kuendigung/index.md` Zeile 120: S3-Konjunktion
-- `content/posts/internet-anbieter-wechseln-kuendigung/index.md` Zeile 126: S3-Konjunktion
-- `content/posts/internet-anbieter-wechseln-kuendigung/index.md` Zeile 138: S3-Konjunktion
-- `content/posts/nachtspeicherheizung-wechseln-oder-behalten/index.md` Zeile 90: S3-Konjunktion
-- `content/posts/nachtspeicherheizung-wechseln-oder-behalten/index.md` Zeile 92: S3-Konjunktion
+- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 25: S3-Konjunktion
+- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 34: S3-Konjunktion
+- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 74: S3-Konjunktion
+- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 83: S3-Konjunktion
+- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 87: S3-Konjunktion
+- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 23: S3-Konjunktion
+- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 27: S3-Konjunktion
+- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 39: S3-Konjunktion
+- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 95: S3-Konjunktion
+- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 134: S3-Konjunktion
+- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 141: S3-Konjunktion
+- `content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md` Zeile 97: S3-Konjunktion
+- `content/pillar/internet-dsl/index.md` Zeile 22: S3-Konjunktion
+- `content/pillar/mietwagen/index.md` Zeile 12: S3-Konjunktion
+- `content/pillar/strom-sparen/index.md` Zeile 12: S3-Konjunktion
 
 ---
 _Deterministisch: Gedankenstrich-Typ, Bis-Striche, Doppelminus · KI-Schiedsrichter (S1/S3) nur mit --ai. Geschützt: Front-Matter, Listen, Tabellen, Überschriften, URLs, Code._

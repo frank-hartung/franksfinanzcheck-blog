@@ -1,6 +1,6 @@
 # 🔠 CASING-REPORT (casing_guard.py)
 
-**Stand:** 2026-08-12 16:44 UTC · Modus: FIX
+**Stand:** 2026-08-13 13:33 UTC · Modus: DRY-RUN
 
 🎉 Akronym-Orthografie sauber (C1 + C2, Duden).
 

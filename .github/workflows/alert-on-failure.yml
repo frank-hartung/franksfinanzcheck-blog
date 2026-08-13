@@ -32,6 +32,7 @@ on:
       - "FrankAutoOps-Report"
       - "Affiliate-Health (Wochenwache)"
       - "Design-Visual (Screenshot-Regression)"    # Ops-Monitoring selbst
+      - "Automations-Simulator"       # Pipeline-Regressionsschutz (13.08.)
     types:
       - completed
 

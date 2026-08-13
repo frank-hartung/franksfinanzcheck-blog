@@ -15,3 +15,5 @@
 {"date": "2026-08-13", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 0, "heavy": 1, "git_mb": 25.0, "budget_mb": 45, "budget_level": "gruen"}
 {"date": "2026-08-13", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 0, "heavy": 1, "git_mb": 26.0, "budget_mb": 46, "budget_level": "gruen"}
 {"date": "2026-08-13", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 0, "heavy": 1, "git_mb": 26.0, "budget_mb": 36, "budget_level": "gruen"}
+{"date": "2026-08-13", "mode": "FIX", "junk": 0, "orphans": 0, "dups": 0, "heavy": 1, "git_mb": 26.0, "budget_mb": 36, "budget_level": "gruen"}
+{"date": "2026-08-13", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 0, "heavy": 1, "git_mb": 26.0, "budget_mb": 46, "budget_level": "gruen"}
