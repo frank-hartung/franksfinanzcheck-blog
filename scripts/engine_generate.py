@@ -119,6 +119,22 @@ def write_status(line_extra=None, level="OK"):
     return STATUS_FILE
 
 
+def _log_cadence_event(result: str, topics_tried: int) -> None:
+    """Protokolliert jeden Lauf ins zentrale Audit-Log (data/audit/*.jsonl).
+    Grundlage für scripts/cadence_manager.py, das daraus automatisch die
+    Erfolgsquote berechnet und die Publikationsfrequenz anpasst (13.08.2026,
+    "Profi-SEO-Manager"/"Profi-Affiliate-Marketer"-Betriebsregel)."""
+    try:
+        sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+        from audit_log import log_event
+        log_event(module="engine_generate", action="run",
+                  input={"topics_tried": topics_tried},
+                  output={"result": result},
+                  status="ok" if result == "published" else ("error" if result == "error" else "skip"))
+    except Exception:
+        pass
+
+
 # ---------------------------------------------------------------------------
 # Hilfsfunktionen: Frontmatter + Datei speichern
 # ---------------------------------------------------------------------------
@@ -336,58 +352,67 @@ def main():
         write_status("Keine freien Themen verfügbar.", level="FAIL")
         return 1
 
-    topic = random.choice(freie)
-    keywords = topic.get("keywords")
-    pin = None
-    if pin_topics:
-        try:
-            pin = g.find_pin_for_topic(topic.get("title"), g.load_pinterest_plan())
-        except Exception:  # noqa: BLE001
-            pin = None
+    # 13.08.2026 (Frank, "so wenig wie möglich zu tun"): KEIN Stub-Entwurf
+    # mehr bei Misserfolg. Stattdessen probiert die Engine bis zu
+    # TOPIC_HOP_LIMIT verschiedene Themen durch (je mit vollen 5 Versuchen,
+    # siehe try_generate()) und veröffentlicht NUR, wenn eines davon das
+    # Profi-Gate besteht. Klappt gar keins, wird der Lauf sauber ohne
+    # Artefakt beendet – der nächste Cron-Slot (mehrere pro Publikationstag)
+    # probiert automatisch erneut. Niemand muss je einen Entwurf von Hand
+    # fertigschreiben oder freigeben.
+    TOPIC_HOP_LIMIT = 3
+    random.shuffle(freie)
+    versucht = []
+    result, info, topic = None, "", None
+    for kandidat in freie[:TOPIC_HOP_LIMIT]:
+        keywords = kandidat.get("keywords")
+        pin = None
+        if pin_topics:
+            try:
+                pin = g.find_pin_for_topic(kandidat.get("title"), g.load_pinterest_plan())
+            except Exception:  # noqa: BLE001
+                pin = None
+        print(f"Content-Engine v2 – Quelle: {quelle}, Thema: {kandidat['title'][:60]}")
+        result, info = try_generate(kandidat, keywords, pin, used_titles, max_attempts=5)
+        versucht.append(kandidat["title"][:40])
+        if result:
+            topic = kandidat
+            break
+        print(f"  → Thema verworfen ({info}), nächstes Thema …")
 
-    print(f"Content-Engine v2 gestartet – Quelle: {quelle}, Thema: {topic['title'][:60]}")
-
-    # EBENE 1 – Profi (5 Versuche über beide Provider, siehe try_generate())
-    result, info = try_generate(topic, keywords, pin, used_titles, max_attempts=5)
     level = "profi"
-    # EBENE 2 – Draft-Rettung (13.08.2026: keine Relaxed-Zwischenstufe mehr –
-    # entweder Profi-Niveau oder ehrlicher Entwurf, nichts dazwischen)
-    draft_saved = False
     if not result:
-        print("→ Ebene 2 (Draft-Rettung) …")
-        title, desc, body = make_draft(topic, used_titles)
-        try:
+        # Kein einziges der probierten Themen hat das Profi-Gate erreicht.
+        # Kein Draft, kein Artefakt – einfach sauber beenden. Kein Fehler-
+        # Alarm (Exit 0): Das ist erwartetes Verhalten bei KI-Schwankungen,
+        # kein Betriebsproblem. Themenpool bleibt für den nächsten Slot frei.
+        info_line = f"{len(versucht)} Themen probiert, keins bestand das Profi-Gate: {versucht}"
+        print(f"○ Kein Artikel diesen Lauf – {info_line}")
+        write_status(info_line, level="SKIP")
+        _log_cadence_event("skip", topics_tried=len(versucht))
+        return 0
+
+    title, desc, body = result
+    try:
+        if should_auto_publish(level):
+            filename, slug = save_article(title, desc, body, draft=False,
+                                          inspiration=topic.get("title"), pillar=topic.get("pillar"),
+                                          quality_level=level)
+            print(f"  ✓ Artikel automatisch veröffentlicht ({level}): {slug}")
+        else:
             filename, slug = save_article(title, desc, body, draft=True,
-                                          inspiration=topic.get("title"), pillar=topic.get("pillar"))
-            draft_saved = True
-            print(f"  ✓ Entwurf gesichert: {slug} (draft: true)")
-        except Exception as exc:  # noqa: BLE001
-            print(f"  ✗ Draft konnte nicht gespeichert werden: {exc}")
-            write_status("Kompletter Ausfall – kein Artikel, kein Draft.", level="FAIL")
-            return 1
+                                          inspiration=topic.get("title"), pillar=topic.get("pillar"),
+                                          quality_level=level)
+            print(f"  ✓ Entwurf gesichert (Qualität: {level}, wartet auf manuelle Freigabe): {slug}")
+    except Exception as exc:  # noqa: BLE001
+        print(f"  ✗ Speichern fehlgeschlagen: {exc}")
+        write_status("Kompletter Ausfall – Speicherfehler.", level="FAIL")
+        _log_cadence_event("error", topics_tried=len(versucht))
+        return 1
 
-    if result and not draft_saved:
-        title, desc, body = result
-        try:
-            if should_auto_publish(level):
-                filename, slug = save_article(title, desc, body, draft=False,
-                                              inspiration=topic.get("title"), pillar=topic.get("pillar"),
-                                              quality_level=level)
-                print(f"  ✓ Artikel automatisch veröffentlicht ({level}): {slug}")
-            else:
-                filename, slug = save_article(title, desc, body, draft=True,
-                                              inspiration=topic.get("title"), pillar=topic.get("pillar"),
-                                              quality_level=level)
-                draft_saved = True
-                print(f"  ✓ Entwurf gesichert (Qualität: {level}, wartet auf manuelle Freigabe): {slug}")
-        except Exception as exc:  # noqa: BLE001
-            print(f"  ✗ Speichern fehlgeschlagen: {exc}")
-            write_status("Kompletter Ausfall – Speicherfehler.", level="FAIL")
-            return 1
-
-    status_line = (f"Thema: {topic['title'][:60]} | Ebene: {level} | "
-                   f"{'Entwurf gesichert' if draft_saved else 'veröffentlicht'} | {info}")
-    write_status(status_line, level="OK" if not draft_saved else "DRAFT")
+    status_line = f"Thema: {topic['title'][:60]} | Ebene: {level} | veröffentlicht | {info}"
+    write_status(status_line, level="OK")
+    _log_cadence_event("published", topics_tried=len(versucht))
     return 0
 
 

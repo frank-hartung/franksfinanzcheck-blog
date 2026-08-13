@@ -22,18 +22,21 @@ WICHTIG: Damit seo_audit.py und affiliate_profi_check.py echte Ergebnisse
 liefern (sie lesen z. T. aus public/), MUSS vor diesem Skript ein
 `hugo --minify` gelaufen sein.
 
-Wirkung bei Nicht-Bestehen: Der betroffene Artikel wird automatisch auf
-`draft: true` zurückgestuft (geht NICHT live) und landet damit im normalen
-Freigabe-Issue-Mechanismus wie ein Rescue-Artikel (Ebene 2) – nichts geht
-verloren, nichts wird stillschweigend verworfen.
+Wirkung bei Nicht-Bestehen (13.08.2026, "so wenig wie möglich zu tun"-
+Betriebsregel): Der betroffene Artikel wird NICHT mehr auf `draft: true`
+zurückgestuft (das hätte einen Entwurf hinterlassen, den jemand von Hand
+fertigstellen müsste), sondern komplett VERWORFEN – Content-Datei und
+generierte Cover-Bilder werden gelöscht. Es entsteht kein Artefakt, das
+Aufmerksamkeit braucht. Der nächste Cron-Lauf (mehrere pro Publikationstag)
+versucht automatisch ein neues Thema.
 
 Geprüft werden nur Artikel, die HEUTE erzeugt wurden (Ordner-Datumspräfix)
 und aktuell auf draft:false stehen – also genau die Kandidaten, die dieser
 Lauf gerade live schalten würde.
 
-Exit-Code: immer 0 (das Gate degradiert nie den ganzen Workflow – es setzt
-nur einzelne Artikel auf draft). Mit --strict: Exit 1, falls mindestens
-1 Artikel zurückgestuft wurde (nützlich für CI-Sichtbarkeit/Statistik).
+Exit-Code: immer 0 (das Gate degradiert nie den ganzen Workflow – es
+verwirft nur einzelne Artikel). Mit --strict: Exit 1, falls mindestens
+1 Artikel verworfen wurde (nützlich für CI-Sichtbarkeit/Statistik).
 
 Nutzung:
   python3 scripts/publish_gate.py             # anwenden (Default)
@@ -135,6 +138,25 @@ def affiliate_profi_failures():
     return per_slug, None
 
 
+def discard_article(slug):
+    """Löscht einen durchgefallenen Artikel vollständig: Content-Bundle +
+    generierte Cover-Bilder (alle Größen/Formate). Kein Artefakt bleibt
+    zurück, das jemand von Hand anfassen müsste."""
+    import shutil
+    import glob as _glob
+    bundle_dir = os.path.join(POSTS_DIR, slug)
+    if os.path.isdir(bundle_dir):
+        shutil.rmtree(bundle_dir)
+    # Cover-Varianten: static/images/covers/<slug>.*, .../620/<slug>.*,
+    # .../720/<slug>.*, .../webp/<slug>.*, .../avif/<slug>.*
+    cover_root = os.path.join(BLOG_DIR, "static", "images", "covers")
+    for path in _glob.glob(os.path.join(cover_root, "**", f"{slug}.*"), recursive=True):
+        try:
+            os.remove(path)
+        except OSError:
+            pass
+
+
 def main():
     candidates = todays_live_candidates()
     if not candidates:
@@ -164,15 +186,11 @@ def main():
 
         if reasons:
             gated.append((slug, reasons))
-            print(f"  🛑 {slug}: WIRD AUF ENTWURF ZURÜCKGESTUFT")
+            print(f"  🛑 {slug}: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)")
             for r in reasons:
                 print(f"     - {r}")
             if not DRY_RUN:
-                path = os.path.join(POSTS_DIR, slug, "index.md")
-                content = open(path, encoding="utf-8").read()
-                if re.search(r"^draft:\s*false", content, re.M):
-                    content = re.sub(r"^draft:\s*false", "draft: true", content, count=1, flags=re.M)
-                    open(path, "w", encoding="utf-8").write(content)
+                discard_article(slug)
         else:
             print(f"  ✅ {slug}: alle 3 Prüfungen bestanden – bleibt live")
 
@@ -187,7 +205,7 @@ def main():
         except Exception:
             pass
 
-    print(f"\nErgebnis: {len(gated)}/{len(candidates)} Artikel zurückgestuft.")
+    print(f"\nErgebnis: {len(gated)}/{len(candidates)} Artikel verworfen.")
     if STRICT and gated:
         return 1
     return 0

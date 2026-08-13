@@ -2,7 +2,7 @@
 
 Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung** – gebaut mit Hugo + PaperMod, hostbar kostenlos auf GitHub Pages oder Cloudflare Pages. Die Themen sind abgestimmt auf den **Pinterest-Masterplan** (FranksFinanzcheck, August 2026): Jeder Educational-Pin bekommt einen passenden Blog-Artikel, jeder Transactional-Pin eine eigene CHECK24-Kategorie.
 
-> ⚠️ **Wichtiger Hinweis zur Automatisierung:** Der Bot erzeugt täglich **Entwürfe** (`draft: true`), die du vor dem Veröffentlichen kurz prüfst. **Nicht** automatisch veröffentlichen lassen: Google wertet massenhaft automatisch publizierten KI-Content als Spam („Scaled Content Abuse") und kann die ganze Seite abwerten. Entwurf → prüfen → mit einem Klick veröffentlichen ist der google-sichere Weg.
+> ⚠️ **Hinweis zur Automatisierung (Stand 13.08.2026):** Der Bot veröffentlicht Artikel automatisch, aber NUR wenn sie mehrere harte Qualitäts- und SEO-Gates bestehen (Profi-Qualitäts-Gate, `publish_gate.py`, `quality_score.py` ≥ 0,85) – siehe Abschnitt „Vollautomatik ohne manuelles Eingreifen" unten. Kein manueller Freigabe-Schritt mehr nötig; die Publikationsfrequenz wird zusätzlich automatisch an das Domain-Alter angepasst, um „Scaled Content Abuse"-Risiken bei einer jungen Domain zu vermeiden.
 
 ---
 
@@ -13,7 +13,7 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 | Hugo-Blog | Theme PaperMod (SEO-fertig: Meta-Tags, OpenGraph, JSON-LD, Sitemap, robots.txt, Canonical) |
 | Pflichtseiten | Impressum (mit Platzhaltern), Datenschutz, Über – Werbekennzeichnung inklusive |
 | 2 Beispiel-Artikel | Stromwechsel & Kfz-Versicherung (dienen als Vorlage/Struktur) |
-| Themenpool | `data/topics.yaml` – 175 Themen über alle 6 Pillars (repariert & erweitert 13.08.2026, reicht bei 4 Artikeln/Woche über 1 Jahr), inkl. themenspezifischer CHECK24-Links |
+| Themenpool | `data/topics.yaml` – 175 Themen über alle 6 Pillars (repariert & erweitert 13.08.2026, reicht bei 3-5 Artikeln/Woche über ein halbes bis ganzes Jahr), inkl. themenspezifischer CHECK24-Links |
 | 🤖 Content-Bot | `scripts/generate_drafts.py` – erzeugt täglich frische, einzigartige Artikel-Entwürfe (Titel, Meta-Description, Keywords, strukturiertes Markdown, FAQ, Affiliate-CTA) |
 | ⏰ Täglicher Job | `.github/workflows/daily-content.yml` – läuft automatisch um 07:00 Uhr (Sommerzeit) |
 | 🚀 Deployment | `.github/workflows/deploy.yml` – baut & veröffentlicht kostenlos auf GitHub Pages |
@@ -21,84 +21,86 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 
 ---
 
-## ⚡ Automatik mit manueller Freigabe (Stand 13.08.2026)
+## ⚡ Vollautomatik ohne manuelles Eingreifen (Stand 13.08.2026)
 
-Zwei Workflows sichern an **4 Publikationstagen/Woche (Mo/Mi/Fr/Sa)** je
-**1 fertigen, qualitätsgeprüften Artikel** (= max. 4/Woche statt vorher
-2/Tag = 14/Woche): **„Content-Engine v2"** (`content-engine-v2.yml`,
-mehrere Zeitfenster ab 08:10 MESZ, nur an Publikationstagen) und
-**„Tagesziel 1 Post"** (`tagesziel-1-post.yml`, Nachlauf-Slots an
-denselben Tagen), falls das Tagesziel sonst nicht erreicht würde. Die
-ältere, in dieser Tabelle früher beschriebene „Automatische
-Content-Generierung" (`daily-content.yml`) ist deaktiviert (nur manuell
-startbar) – die Zeiten oben sind daher nicht mehr aktuell, siehe die
-Cron-Zeilen direkt in `content-engine-v2.yml`.
+Betriebsregel (Frank, 13.08.2026): **so wenig wie möglich mit der
+Veröffentlichung zu tun haben.** Das ist inzwischen wörtlich umgesetzt –
+im Normalbetrieb musst du nichts freigeben, nichts fertigschreiben, nichts
+klicken. Zwei Workflows generieren automatisch Artikel und veröffentlichen
+sie, wenn und nur wenn sie **alle** Qualitäts- und SEO-Prüfungen bestehen:
+**„Content-Engine v2"** (`content-engine-v2.yml`, mehrere Zeitfenster ab
+08:10 MESZ) und **„Tagesziel 1 Post"** (`tagesziel-1-post.yml`,
+Nachlauf-Slots), falls das Wochenziel sonst nicht erreicht würde.
 
-**Warum die Frequenz-Reduktion (13.08.2026, von 2/Tag auf 1 Artikel an
-4 Tagen/Woche)?** Tägliches Massen-Publizieren rein KI-generierter
-Artikel ist genau das Muster, das Googles "Scaled Content Abuse"-
-Klassifizierer erkennen soll – besonders riskant bei einer noch jungen
-Domain. Bei einem Nischen-Finanzblog zählt zudem Tiefe/Vertrauen
-(E-E-A-T) mehr als Frequenz: 4 wirklich hilfreiche Artikel/Woche schlagen
-14 durchschnittliche langfristig fast immer. Ändern: Repo-Variable
-`MAX_ARTIKEL_PRO_TAG` (max. 2, hartes Cap im Code) und die Cron-Tage in
-beiden Workflow-Dateien.
+**Warum Vollautomatik hier ohne Google-Nachteil funktioniert:** Google
+bestraft nicht "Automatisierung" an sich, sondern *Content, der die
+Qualitäts-Kriterien nicht erfüllt* ("Scaled Content Abuse" zielt auf
+massenhaften, nicht ausreichend geprüften Content). Solange **nichts**
+live geht, das nicht nachweislich alle Prüfungen besteht, ist es für
+Google irrelevant, ob ein Mensch oder ein Skript den letzten Klick
+gemacht hat. Deshalb: kein manueller Freigabe-Schritt mehr, aber die
+Prüfungen selbst sind strenger als vorher, nicht schwächer.
 
-**Betriebsregel seit 13.08.2026 – nur Profi-Qualität geht automatisch live:**
-- Jeder generierte Artikel durchläuft die volle Qualitäts-Kette (Rechtschreibung,
-  Grammatik, Cover, Meta, interne Links, Affiliate-Guards, …) genau wie zuvor
-  und muss dabei das harte **Profi-Gate** bestehen (`engine_level: "profi"`
-  im Frontmatter). Es gibt seit 13.08.2026 (Nachmittag) **keine abgeschwächte
-  Relaxed-Zwischenstufe mehr** – die gab es zuvor als Kompromiss fürs
-  Tagesziel, wurde aber ersatzlos gestrichen: Ein Artikel ist entweder
-  Profi-Niveau oder er wird gar nicht erst automatisch veröffentlicht.
-- **Nur Profi-Artikel werden automatisch veröffentlicht** (`draft: false`).
-- **Jede Qualitäts-Rettung** (die KI erreicht auch nach 5 Versuchen kein
-  Profi-Niveau) **bleibt als Entwurf** (`draft: true`) liegen
-  (`engine_level: "draft"`) – dafür bekommst du ein Freigabe-Issue.
-- **Hartes Publish-Gate (13.08.2026, `scripts/publish_gate.py`):** Selbst ein
-  als "Profi" eingestufter Artikel geht erst NACH drei zusätzlichen,
-  automatisierten Prüfungen wirklich live – direkt vor dem Deploy-Trigger:
-  1. `check_length.py` – Zeichen-/Wortlänge (700–1800 Wörter)
-  2. `seo_audit.py` – Title-/Description-Länge, Wortzahl, Alt-Texte, Sitemap
-  3. `affiliate_profi_check.py` (A1–A8) – Offenlegung, E-E-A-T-Feld, interne
-     Links, Schema.org, Affiliate-Dichte, Trust-Box, Autor, CTA
-  Besteht ein Artikel eine dieser Prüfungen nicht (auch nach den
-  Selbstheilungs-Läufen davor), wird er automatisch auf `draft: true`
-  zurückgestuft statt live zu gehen – landet dann im normalen
-  Freigabe-Issue. Kein Artikel geht mehr live, ohne dass diese drei
-  Prüfungen tatsächlich bestanden wurden.
-- Für wartende Entwürfe bekommst du automatisch ein **GitHub-Issue**
-  ("📝 Content-Engine: Entwurf wartet auf Freigabe") – erscheint nur, wenn
-  tatsächlich etwas zu prüfen ist, bleibt offen bis du es schließt (kein
-  Spam bei mehreren Artikeln).
-- **Freigeben:** Datei unter `content/posts/<datum-slug>/index.md` öffnen,
-  `draft: true` → `draft: false` ändern, committen – der nächste Deploy
-  veröffentlicht ihn. Oder lokal: `python3 scripts/publish.py <slug>`.
-  Tipp fürs schnelle Freigeben mit wenig Aufwand: verbleibende Entwürfe
-  1x/Woche gesammelt durchgehen, dabei jeweils einen eigenen Satz ins
-  bereits vorhandene `erfahrung:`-Feld ergänzen (günstigster E-E-A-T-Hebel).
-- Das 1-Artikel/Tag-Limit (an Publikationstagen) gilt weiterhin (zählt
-  Artikel, die das Profi-Gate bestanden haben – unabhängig vom draft-Status),
-  es werden also nie mehr Entwürfe angehäuft als geplant.
-- **Modus wechseln:** Repo-Variable `AUTO_PUBLISH` – `profi` (Standard: nur
-  Profi-Artikel automatisch, alles andere Entwurf), `0` (immer manuell,
-  auch Profi-Artikel), `1` (Vollautomatik, alte Betriebsart – nicht empfohlen).
+**Wie das technisch sichergestellt ist:**
+1. **Themen-Hopping statt Kompromiss (13.08., Nachmittag):** Erreicht ein
+   Thema nach 5 Versuchen nicht das harte Profi-Qualitäts-Gate
+   (`engine_level: "profi"`), probiert die Engine automatisch bis zu
+   2 weitere Themen. Es gibt seit heute **keine abgeschwächte
+   "Relaxed"-Zwischenstufe mehr** – ein Artikel ist entweder Profi-Niveau
+   oder er erscheint gar nicht erst.
+2. **Kein Artefakt bei Totalausfall:** Schaffen es alle probierten Themen
+   nicht, wird der Lauf sauber beendet – **kein Entwurf, der auf dich
+   wartet.** Es gibt mehrere Cron-Slots pro Publikationstag; der nächste
+   versucht automatisch neue Themen. Ein Tag ganz ohne neuen Artikel
+   erfordert von dir nichts.
+3. **Hartes Publish-Gate (`scripts/publish_gate.py`):** Direkt vor dem
+   Deploy prüft die Engine zusätzlich drei eigenständige, strengere
+   Kriterien:
+   - `check_length.py` – Zeichen-/Wortlänge (700–1800 Wörter)
+   - `seo_audit.py` – Title-/Description-Länge, Wortzahl, Alt-Texte, Sitemap
+   - `affiliate_profi_check.py` (A1–A8) – Offenlegung, E-E-A-T-Feld,
+     interne Links, Schema.org, Affiliate-Dichte, Trust-Box, Autor, CTA
+   Besteht ein Artikel eine dieser Prüfungen nicht (auch nach den
+   Selbstheilungs-Läufen davor), wird er **komplett verworfen** (Content +
+   Cover gelöscht) statt als Entwurf liegen zu bleiben – auch hier landet
+   nichts auf deinem Tisch.
+4. **`quality_score.py`** (Schwelle 0,85: Rechtschreibung, Meta, Struktur,
+   Typografie, Einzigartigkeit, Affiliate-Präsenz) läuft zusätzlich als
+   zweite, unabhängige Bewertung in der Qualitäts-Kette.
 
-**Warum überhaupt Entwürfe statt automatischer Veröffentlichung?** Google
-bestraft massenhaft automatisch veröffentlichten KI-Content ("Scaled
-Content Abuse"). Kurzes Prüfen + Freigeben schützt dein Ranking – und
-macht die Artikel besser (du ergänzst z. B. eigene Erfahrungen, bevor sie
-live gehen).
+**Publikationsfrequenz wird automatisch verwaltet (`scripts/cadence_manager.py`,
+läuft wöchentlich via `cadence-manager.yml`):**
+Fachliche Entscheidung (Profi-SEO-Manager + Profi-Affiliate-Marketer,
+13.08.2026): Bei einer brandneuen YMYL-Domain (gültig seit 08.08.2026)
+im Solo-Automatikbetrieb ist vorsichtiges, stetiges Wachstum statt
+aggressivem Hochfahren die professionell richtige Wahl.
+
+| Domain-Alter | Ziel-Frequenz |
+|---|---|
+| Woche 0–3 (Monat 1) | 3 Artikel/Woche |
+| Woche 4–7 (Monat 2) | 4 Artikel/Woche |
+| Woche 8–11 (Monat 3) | 5 Artikel/Woche |
+| ab Woche 12 | 5 Artikel/Woche (Dauer-Obergrenze) |
+
+Zusätzliche **Sicherheitsbremse**: Liegt die Erfolgsquote der letzten
+14 Tage (Artikel erfolgreich generiert vs. Themen-Hopping ohne Erfolg)
+unter 50 %, wird die Rampe nicht weiter hochgefahren bzw. um 1 Tag/Woche
+reduziert (Boden: 2/Woche) – ein Symptom für strukturelle Probleme
+(Themenpool, KI-Provider), die zuerst behoben werden sollten. Die
+5/Woche-Obergrenze ist bewusst dauerhaft: mehr würde ohne echte
+Performance-Daten aus der Google Search Console (aktuell kein API-Zugang
+eingerichtet) reines Rätselraten sein. Jede Entscheidung steht in
+`CADENCE-REPORT.md` (wird jede Woche neu geschrieben).
+
+**Modus wechseln (falls du es dir anders überlegst):** Repo-Variable
+`AUTO_PUBLISH` – `profi` (Standard: nur Profi-Artikel automatisch), `0`
+(immer manuell – dann bekommst du wieder Freigabe-Issues für Entwürfe),
+`1` (alte Vollautomatik ohne die zusätzlichen Gates – nicht empfohlen).
 
 **Steuerung:**
 - **Stoppen (Kill-Switch):** GitHub → Actions → „Content-Engine v2" bzw.
-  „Tagesziel 1 Post" → Disable workflow
+  „Tagesziel 1 Post" bzw. „Cadence-Manager" → Disable workflow
 - **Manuell starten:** GitHub → Actions → „Run workflow"
-- **Zurück zur Vollautomatik (nicht empfohlen für YMYL/Google-Sichtbarkeit):**
-  Repository-Variable `AUTO_PUBLISH` auf `1` setzen (GitHub → Settings →
-  Secrets and variables → Actions → Variables). Dann werden auch
-  Qualitäts-Rettungen (Ebene 2) sofort mit `draft: false` gespeichert.
 
 **🔗 Affiliate-Links ändern – so geht's (wichtig!):**
 

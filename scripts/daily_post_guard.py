@@ -95,63 +95,54 @@ def fill_missing():
         return 0, ["Themenpool erschöpft"], "keine freien Themen", False
 
     import random
+    # 13.08.2026 ("so wenig wie möglich zu tun"): kein Stub-Entwurf mehr bei
+    # Misserfolg. Stattdessen Themen-Hopping (bis zu 3 Themen je fehlendem
+    # Artikel, je mit vollen 5 Versuchen) – klappt gar keins, bleibt der
+    # Tag ohne neuen Artikel, OHNE Artefakt. Der nächste Cron-Slot (3/Tag)
+    # probiert automatisch erneut. draft_pending bleibt False in diesem Fall
+    # bewusst (kein Freigabe-Issue nötig – es gibt nichts freizugeben).
+    TOPIC_HOP_LIMIT = 3
     for i in range(missing):
         if published_today() >= TAGESZIEL:
             break
-        # Thema wählen (nicht schon heute verwendet)
-        topic = None
-        for _ in range(len(freie)):
-            cand = random.choice(freie)
-            if cand.get("title") not in [x.get("title") for x in [] if False]:
+        kandidaten = random.sample(freie, min(TOPIC_HOP_LIMIT, len(freie)))
+        result, info, topic = None, "", None
+        for cand in kandidaten:
+            keywords = cand.get("keywords")
+            pin = None
+            try:
+                pin = g.find_pin_for_topic(cand.get("title"), g.load_pinterest_plan())
+            except Exception:  # noqa: BLE001
+                pin = None
+            result, info = eg.try_generate(cand, keywords, pin, used_titles, max_attempts=5)
+            if result:
                 topic = cand
                 break
-        if topic is None:
-            topic = random.choice(freie)
-        keywords = topic.get("keywords")
-        pin = None
-        try:
-            pin = g.find_pin_for_topic(topic.get("title"), g.load_pinterest_plan())
-        except Exception:  # noqa: BLE001
-            pin = None
+            print(f"  → Thema verworfen ({info}): {cand['title'][:50]}")
 
-        result = None
-        level = "profi"
-        result, info = eg.try_generate(topic, keywords, pin, used_titles, max_attempts=5)
         if not result:
-            # Draft-Rettung (wie Engine Ebene 2) – zählt bewusst NICHT als
-            # "created", damit der nächste Slot einen echten Ersatz versucht.
-            try:
-                title, desc, body = eg.make_draft(topic, used_titles)
-                filename, slug = eg.save_article(title, desc, body, draft=True,
-                                                 inspiration=topic.get("title"),
-                                                 pillar=topic.get("pillar"))
-                failed.append(f"{slug} (Draft – Qualitäts-Gate)")
-                draft_pending = True
-                print(f"  ⚠ {slug}: nur Draft gerettet")
-                continue
-            except Exception as exc:  # noqa: BLE001
-                failed.append(str(exc))
-                print(f"  ✗ Generierung fehlgeschlagen: {exc}")
-                continue
+            failed.append(f"{len(kandidaten)} Themen probiert, keins bestand das Profi-Gate")
+            print(f"  ○ Kein Artikel diesen Slot – {len(kandidaten)} Themen ohne Erfolg probiert.")
+            continue
+
         title, desc, body = result
         try:
-            # 13.08.: Freigabe (siehe engine_generate.should_auto_publish) –
-            # nur echte "profi"-Qualität wird automatisch veröffentlicht,
-            # jede Qualitäts-Rettung bleibt Entwurf. Zählt als "erstellt"
-            # (Profi-Gate bestanden), damit das Tages-Cap nicht dauerhaft
-            # "offen" bleibt und immer weiter nachgeneriert.
-            auto_publish_now = eg.should_auto_publish(level)
+            # Freigabe (siehe engine_generate.should_auto_publish): nur echte
+            # "profi"-Qualität wird automatisch veröffentlicht. Zählt als
+            # "erstellt" (Profi-Gate bestanden), damit das Tages-Cap nicht
+            # dauerhaft "offen" bleibt und immer weiter nachgeneriert.
+            auto_publish_now = eg.should_auto_publish("profi")
             filename, slug = eg.save_article(title, desc, body, draft=not auto_publish_now,
                                              inspiration=topic.get("title"),
                                              pillar=topic.get("pillar"),
-                                             quality_level=level)
+                                             quality_level="profi")
             created += 1
             used_titles.add(title.lower())
             if auto_publish_now:
-                print(f"  ✅ Artikel automatisch veröffentlicht ({level}): {slug} ({topic['title'][:50]})")
+                print(f"  ✅ Artikel automatisch veröffentlicht (profi): {slug} ({topic['title'][:50]})")
             else:
                 draft_pending = True
-                print(f"  ✅ Entwurf erstellt ({level}, wartet auf Freigabe): {slug} ({topic['title'][:50]})")
+                print(f"  ✅ Entwurf erstellt (profi, wartet auf Freigabe): {slug} ({topic['title'][:50]})")
 
         except Exception as exc:  # noqa: BLE001
             failed.append(str(exc))
