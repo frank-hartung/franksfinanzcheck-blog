@@ -1,0 +1,85 @@
+name: Deploy-Catchup
+
+# ============================================================
+#  Schließt eine zentrale Lücke (13.08.2026, Frank: "jede Änderung am
+#  Blog gilt auch für die Bestandsdaten"):
+#
+#  GitHub Actions triggert KEINE Folge-Workflows für Commits, die mit dem
+#  eingebauten GITHUB_TOKEN gepusht werden (Schutz vor Endlosschleifen).
+#  Fast alle Wartungs-Workflows in diesem Repo committen ihre Fixes aber
+#  genau so – und deploy.yml triggert regulär nur auf 'push'. Ergebnis:
+#  von 21 Workflows, die echte Änderungen committen, hatten bislang nur
+#  die 2 Artikel-Publish-Workflows (content-engine-v2.yml,
+#  tagesziel-1-post.yml) einen expliziten Deploy-Trigger einprogrammiert.
+#  ALLE anderen 19 (u. a. die wöchentliche SEO-Optimierung, Blog-Doktor,
+#  Cadence-Manager, Affiliate-Health, Layout-AI, Backlink-Automation, …)
+#  konnten den Blog-Inhalt im Repo korrekt reparieren/optimieren – die
+#  Änderung erreichte aber NIE die Live-Seite, außer zufällig durch den
+#  nächsten Artikel-Publish-Lauf.
+#
+#  DIESER WORKFLOW SCHLIESST DIE LÜCKE ZENTRAL (statt 19 Dateien einzeln
+#  zu ändern): läuft nach jedem gelisteten Wartungs-Workflow und prüft,
+#  ob main sich seit dem letzten ERFOLGREICHEN Deploy tatsächlich
+#  verändert hat (echter SHA-Vergleich, nicht nur eine Commit-Message-
+#  Konvention) – wenn ja, wird deploy.yml angestoßen.
+# ============================================================
+
+on:
+  workflow_dispatch: {}
+  workflow_run:
+    workflows:
+      - "Wöchentliche SEO-Optimierung"
+      - "Blog-Doktor (Gesamt-Wochenvisite)"
+      - "Cadence-Manager"
+      - "Automations-Simulator"
+      - "Affiliate-Health (Wochenwache)"
+      - "Backlink-Automation"
+      - "Layout-AI"
+      - "Redaktions-Politur (KI, budgetiert)"
+      - "Quartalsweises Artikel-Update"
+      - "Wöchentliches Einzigartigkeits-Audit"
+      - "Wöchentliches Nach-Pinnen"
+      - "Mastodon-Profil-Sync"
+      - "Mastodon-Manueller-Post"
+      - "Social-Media-AI"
+      - "Newsletter-AI"
+      - "Pinterest-AI"
+      - "Pinterest-Watchdog"
+      - "FrankAutoOps-Report"
+    types:
+      - completed
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  catchup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: main mit letztem erfolgreichen Deploy vergleichen, ggf. anstoßen
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const mainRef = await github.rest.git.getRef({
+              owner: context.repo.owner, repo: context.repo.repo, ref: 'heads/main',
+            });
+            const mainSha = mainRef.data.object.sha;
+
+            const deploys = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner, repo: context.repo.repo,
+              workflow_id: 'deploy.yml', status: 'success', per_page: 1,
+            });
+            const lastDeploySha = deploys.data.workflow_runs[0]?.head_sha;
+
+            if (lastDeploySha === mainSha) {
+              console.log('main unverändert seit letztem erfolgreichen Deploy (' + mainSha.slice(0,7) + ') – nichts zu tun.');
+              return;
+            }
+            console.log('main hat sich seit dem letzten Deploy verändert (' + mainSha.slice(0,7) +
+              ' != ' + (lastDeploySha ? lastDeploySha.slice(0,7) : 'nie deployt') + ') – stoße Deploy an.');
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner, repo: context.repo.repo,
+              workflow_id: 'deploy.yml', ref: 'main',
+            });
+            console.log('✅ Deploy-Workflow ausgelöst.');
