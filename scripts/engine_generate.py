@@ -37,16 +37,41 @@ import generate_drafts as g  # noqa: E402  (nutzt bestehende Generierungs-Logik)
 from check_titles import COMPOUND_FIXES, TIME_TAIL as RE_ANHAENGSEL  # noqa: E402 – Titel-Qualitätsgate (FrankAutoOps)
 
 # ---------------------------------------------------------------------------
-# Manuelle Freigabe (Frank, 13.08.2026): Betriebsregel geändert – der Bot
-# generiert weiterhin bis zu 2 fertige, qualitätsgeprüfte Artikel/Tag, aber
-# veröffentlicht sie NICHT mehr automatisch. Jeder Artikel wird als Entwurf
-# (draft: true) gespeichert, komplett durch die Qualitäts-Kette poliert, und
-# wartet auf manuelle Freigabe durch Frank (GitHub-UI: draft: true -> false,
-# oder `python3 scripts/publish.py <slug>`).
-# Repo-Variable AUTO_PUBLISH=1 (Settings -> Secrets and variables -> Actions
-# -> Variables) schaltet zurück auf Vollautomatik. Default = manuell ("0").
+# Freigabe-Modus (Frank, 13.08.2026 – zweistufig erweitert):
+#   AUTO_PUBLISH=0      -> IMMER manuelle Freigabe (draft:true), egal welche
+#                          Qualitätsstufe erreicht wurde. Sicherste Variante.
+#   AUTO_PUBLISH=profi  -> ZWEISTUFIG (Default): Nur Artikel, die das harte
+#                          Profi-Qualitäts-Gate bestehen, werden automatisch
+#                          veröffentlicht (draft:false). Alles, was nur die
+#                          abgeschwächte Relaxed-Stufe erreicht (oder eine
+#                          echte Qualitäts-Rettung, Ebene 3), bleibt als
+#                          Entwurf liegen und wartet auf dich – das ist die
+#                          unsicherere Sorte Content, bei der ein kurzer
+#                          menschlicher Blick am meisten bringt.
+#   AUTO_PUBLISH=1      -> Vollautomatik wie ursprünglich (nicht empfohlen
+#                          für eine junge YMYL-Domain, siehe README).
+# In jedem Modus: volle Qualitäts-Kette (Rechtschreibung, Grammatik, Cover,
+# Meta, interne Links, Affiliate-Guards, …) läuft unverändert durch – nur
+# die Veröffentlichungs-Entscheidung am Ende ändert sich.
+# Freigeben: GitHub-UI (draft: true -> false) oder `python3 scripts/publish.py
+# <slug>`. Repo-Variable AUTO_PUBLISH steuert den Modus (Settings -> Secrets
+# and variables -> Actions -> Variables).
 # ---------------------------------------------------------------------------
-AUTO_PUBLISH = os.environ.get("AUTO_PUBLISH", "0") == "1"
+def should_auto_publish(quality_level: str) -> bool:
+    """Entscheidet je Artikel, ob er automatisch veröffentlicht werden darf."""
+    mode = os.environ.get("AUTO_PUBLISH", "profi").strip().lower()
+    if mode in ("1", "true", "yes", "all", "immer"):
+        return True
+    if mode in ("0", "false", "no", "nie", "manuell", "manual"):
+        return False
+    # Default/zweistufig: "profi" (oder jeder andere, nicht erkannte Wert –
+    # sicherer Fallback statt versehentlicher Vollautomatik bei Tippfehlern).
+    return quality_level == "profi"
+
+
+# Rückwärtskompatibel (falls andere Skripte/ältere Aufrufe noch das alte,
+# globale Bool-Flag lesen): True nur im reinen Vollautomatik-Modus.
+AUTO_PUBLISH = os.environ.get("AUTO_PUBLISH", "profi").strip().lower() in ("1", "true", "yes", "all", "immer")
 
 
 def normalize_title(title: str) -> str:
@@ -342,11 +367,11 @@ def main():
     if result and not draft_saved:
         title, desc, body = result
         try:
-            if AUTO_PUBLISH:
+            if should_auto_publish(level):
                 filename, slug = save_article(title, desc, body, draft=False,
                                               inspiration=topic.get("title"), pillar=topic.get("pillar"),
                                               quality_level=level)
-                print(f"  ✓ Artikel veröffentlicht ({level}): {slug}")
+                print(f"  ✓ Artikel automatisch veröffentlicht ({level}): {slug}")
             else:
                 filename, slug = save_article(title, desc, body, draft=True,
                                               inspiration=topic.get("title"), pillar=topic.get("pillar"),

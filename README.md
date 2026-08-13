@@ -44,23 +44,33 @@ Domain. Bei einem Nischen-Finanzblog zählt zudem Tiefe/Vertrauen
 `MAX_ARTIKEL_PRO_TAG` (max. 2, hartes Cap im Code) und die Cron-Tage in
 beiden Workflow-Dateien.
 
-**Betriebsregel seit 13.08.2026 – manuelle Freigabe (Standard):**
+**Betriebsregel seit 13.08.2026 – zweistufige Freigabe (Standard):**
 - Jeder generierte Artikel durchläuft die volle Qualitäts-Kette (Rechtschreibung,
-  Grammatik, Cover, Meta, interne Links, Affiliate-Guards, …) genau wie zuvor.
-- Er wird aber **nicht mehr automatisch veröffentlicht**, sondern als
-  **Entwurf** (`draft: true`) gespeichert und wartet auf dein OK.
-- Du bekommst dafür automatisch ein **GitHub-Issue** ("📝 Content-Engine:
-  Entwurf wartet auf Freigabe") – ein Issue bleibt offen, bis du es schließt
-  (kein Spam bei mehreren Artikeln).
+  Grammatik, Cover, Meta, interne Links, Affiliate-Guards, …) genau wie zuvor
+  und erreicht dabei eine von zwei Qualitätsstufen: **Profi** (hartes Gate,
+  volle Kriterien) oder **Relaxed** (abgeschwächtes Gate, z. B. wenn die KI-
+  APIs schwächeln – siehe `engine_level` im Frontmatter jedes Artikels).
+- **Profi-Artikel werden automatisch veröffentlicht** (`draft: false`) – das
+  ist die Mehrheit und braucht keinen manuellen Schritt.
+- **Relaxed-Artikel (und echte Qualitäts-Rettungen, Ebene 3) bleiben als
+  Entwurf** (`draft: true`) liegen – genau die unsicherere Sorte Content,
+  bei der ein kurzer menschlicher Blick am meisten bringt.
+- Für wartende Entwürfe bekommst du automatisch ein **GitHub-Issue**
+  ("📝 Content-Engine: Entwurf wartet auf Freigabe") – erscheint nur, wenn
+  tatsächlich etwas zu prüfen ist, bleibt offen bis du es schließt (kein
+  Spam bei mehreren Artikeln).
 - **Freigeben:** Datei unter `content/posts/<datum-slug>/index.md` öffnen,
   `draft: true` → `draft: false` ändern, committen – der nächste Deploy
   veröffentlicht ihn. Oder lokal: `python3 scripts/publish.py <slug>`.
-  Tipp fürs schnelle Freigeben mit wenig Aufwand: Entwürfe 1x/Woche
-  gesammelt durchgehen, dabei jeweils einen eigenen Satz ins bereits
-  vorhandene `erfahrung:`-Feld ergänzen (günstigster E-E-A-T-Hebel).
+  Tipp fürs schnelle Freigeben mit wenig Aufwand: verbleibende Entwürfe
+  1x/Woche gesammelt durchgehen, dabei jeweils einen eigenen Satz ins
+  bereits vorhandene `erfahrung:`-Feld ergänzen (günstigster E-E-A-T-Hebel).
 - Das 1-Artikel/Tag-Limit (an Publikationstagen) gilt weiterhin (zählt
-  Artikel, die das Qualitäts-Gate bestanden haben – unabhängig vom
-  draft-Status), es werden also nie mehr Entwürfe angehäuft als geplant.
+  Artikel, die mindestens das Relaxed-Gate bestanden haben – unabhängig
+  vom draft-Status), es werden also nie mehr Entwürfe angehäuft als geplant.
+- **Modus wechseln:** Repo-Variable `AUTO_PUBLISH` – `profi` (Standard,
+  zweistufig wie oben), `0` (immer manuell, auch Profi-Artikel), `1`
+  (Vollautomatik, alte Betriebsart).
 
 **Warum überhaupt Entwürfe statt automatischer Veröffentlichung?** Google
 bestraft massenhaft automatisch veröffentlichten KI-Content ("Scaled
@@ -74,8 +84,8 @@ live gehen).
 - **Manuell starten:** GitHub → Actions → „Run workflow"
 - **Zurück zur Vollautomatik (nicht empfohlen für YMYL/Google-Sichtbarkeit):**
   Repository-Variable `AUTO_PUBLISH` auf `1` setzen (GitHub → Settings →
-  Secrets and variables → Actions → Variables). Dann werden Artikel wieder
-  sofort mit `draft: false` gespeichert.
+  Secrets and variables → Actions → Variables). Dann werden auch
+  Relaxed-Artikel wieder sofort mit `draft: false` gespeichert.
 
 **🔗 Affiliate-Links ändern – so geht's (wichtig!):**
 
