@@ -41,6 +41,15 @@ jobs:
           hugo-version: "0.164.0"
           extended: true
 
+      - name: Python-Abhängigkeiten (Cover-Erzeugung/-Validierung)
+        # BUGFIX 13.08.: check_covers.py (weiter unten) brauchte 'pillow' zur
+        # Bilderzeugung – fehlte in diesem Workflow komplett (anders als in
+        # blog-doktor.yml/content-engine-v2.yml/layout-ai.yml, die dieselbe
+        # Bibliothek installieren). Dadurch scheiterte JEDE Cover-Reparatur
+        # hier lautlos mit 'FEHLER: pillow nicht installiert', sobald der
+        # Workflow überhaupt bis zu diesem Schritt kam.
+        run: python3 -m pip install -q pillow pillow-avif-plugin fonttools brotli 2>/dev/null || true
+
       - name: SEO-Audit ausführen
         id: audit
         continue-on-error: true
