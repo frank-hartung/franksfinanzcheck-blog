@@ -208,5 +208,68 @@
   "Zahnzusatzversicherung Test",
   "Zahnversicherung Vergleich",
   "Zahnzusatzversicherung Kosten"
+ ],
+ "Tierversicherung": [
+  "Hundekrankenversicherung",
+  "Katzenversicherung",
+  "Tier-OP-Versicherung",
+  "Hundehaftpflichtversicherung",
+  "Tierarztkosten"
+ ],
+ "Wärmepumpentarif": [
+  "Wärmepumpenstrom",
+  "Heizstrom Vergleich",
+  "Sperrzeiten",
+  "Zweitarifzähler",
+  "Netzentgelte"
+ ],
+ "Depot 2026": [
+  "Depotvergleich 2026",
+  "Bestes Depot 2026",
+  "ETF Sparplan 2026",
+  "Broker Vergleich 2026",
+  "Depotgebühren 2026"
+ ],
+ "Energiekosten": [
+  "Strompreise",
+  "Gaspreise",
+  "Energie sparen",
+  "Heizkosten senken",
+  "Stromanbieter wechseln"
+ ],
+ "DSL-Wechsel": [
+  "Internetanbieter Vergleich",
+  "Wechselbonus",
+  "Kündigungsfrist DSL",
+  "DSL-Verfügbarkeit",
+  "Rufnummernmitnahme"
+ ],
+ "Lastschrift": [
+  "SEPA-Lastschrift",
+  "Bankeinzug",
+  "Lastschriftmandat",
+  "Rücklastschrift",
+  "Einzugsermächtigung"
+ ],
+ "Schufa": [
+  "Schufa Auskunft",
+  "Schufa Score",
+  "Schufa-Eintrag",
+  "Schufa-Recht",
+  "Schufa-Bonität"
+ ],
+ "Hausversicherung": [
+  "Wohngebäudeversicherung",
+  "Hausratversicherung",
+  "Elementarschadenversicherung",
+  "Gebäudeversicherung Vergleich",
+  "Versicherungssumme"
+ ],
+ "Gaspreis": [
+  "Erdgaspreis",
+  "Strompreis",
+  "Heizkosten",
+  "Energiepreis",
+  "Ölpreis"
  ]
 }

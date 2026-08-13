@@ -6,7 +6,7 @@ draft: false
 tags: ["DSL-Wechsel", "Wechselbonus", "Internet sparen"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
-keywords: ["DSL-Wechsel", "Wechselbonus", "Internet sparen"]
+keywords: ["DSL-Wechsel", "Wechselbonus", "Internet sparen", "Internetanbieter Vergleich", "Kündigungsfrist DSL"]
 author: "Frank Hartung"
 erfahrung: "Bei meinem letzten Internetvertrag-Wechsel habe ich die Boni der Anbieter genau verglichen und den Zeitpunkt clever gewählt. Meine Erfahrung: Der Wechselbonus klingt verlockend, aber der Preis ab dem zweiten Jahr entscheidet – und die Kündigungsfrist darf man nie unterschätzen."
 

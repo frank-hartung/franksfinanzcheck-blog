@@ -6,7 +6,7 @@ draft: false
 tags: ["Tierversicherung", "Hundeversicherung", "Katzenversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
-keywords: ["Tierversicherung", "Hundeversicherung", "Katzenversicherung"]
+keywords: ["Tierversicherung", "Hundeversicherung", "Katzenversicherung", "Hundekrankenversicherung", "Tier-OP-Versicherung"]
 author: "Frank Hartung"
 erfahrung: "Als ich für meine eigene Katze eine OP-Versicherung verglichen habe, war ich überrascht, wie stark sich die Tarife bei Alter und Rasse unterscheiden. Meine Erfahrung: Die Beitragshöhe sagt wenig über den tatsächlichen Schutz aus – entscheidend sind die Leistungsgrenzen."
 

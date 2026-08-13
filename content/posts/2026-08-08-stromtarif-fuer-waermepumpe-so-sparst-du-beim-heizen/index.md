@@ -6,7 +6,7 @@ draft: false
 tags: ["Wärmepumpentarif", "Stromtarif", "Heizkosten"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["Wärmepumpentarif", "Stromtarif", "Heizkosten"]
+keywords: ["Wärmepumpentarif", "Stromtarif", "Heizkosten", "Wärmepumpenstrom", "Heizstrom Vergleich"]
 author: "Frank Hartung"
 erfahrung: "Bei meiner eigenen Heizungsplanung habe ich die Wärmepumpen-Tarife über zwei Jahre beobachtet. Der größte Fehler wäre, nur auf den Arbeitspreis zu schauen – der Grundpreis und die Sperrzeit-Regelung entscheiden oft, ob sich der Tarif wirklich lohnt."
 
