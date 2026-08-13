@@ -5,7 +5,7 @@ date: 2026-08-10T10:20:09Z
 draft: false
 tags: []
 categories: ["Ratgeber"]
-pillar: "konto-karten"
+pillar: "internet-dsl"
 author: "Frank Hartung"
 erfahrung: "Bei meinem letzten Internetvertrag-Wechsel habe ich die Boni der Anbieter genau verglichen und den Zeitpunkt clever gewählt. Meine Erfahrung: Der Wechselbonus klingt verlockend, aber der Preis ab dem zweiten Jahr entscheidet – und die Kündigungsfrist darf man nie unterschätzen."
 
@@ -81,12 +81,6 @@ Einige Beispiele für regionale Anbieter:
 * **Ewe**: Lockt mit günstigen Preisen und einer großen Auswahl an Tarifen.
 * **Wilhelm. tel**: Bietet eine Kombination aus DSL und Entertainment-Diensten an.
 
-
-
-**Weiterlesen:** [DNS-Wechsel für schnelleres Internet](../../posts/2026-08-06-turbo-fuers-netz/)
-
-
-**Weiterlesen:** [Internet-Turbo: Warum ich meinen DNS-Server getauscht habe](../../posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/)
 ## Häufige Fragen
 ### Was ist ein DSL-Wechselbonus?
 Ein DSL-Wechselbonus ist eine Geldprämie für deinen Umzug zu einem neuen Internetanbieter. Er dient als Anreiz für Neukunden und senkt deine Gesamtkosten deutlich.

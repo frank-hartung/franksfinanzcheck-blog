@@ -1,8 +1,8 @@
 # 🧹 WORKSPACE-REPORT
 
-**Stand:** 2026-08-13 09:59 UTC · Modus: REPORT · Getrackte Dateien: 429 · .git: 24 MB
+**Stand:** 2026-08-13 10:12 UTC · Modus: REPORT · Getrackte Dateien: 369 · .git: 24 MB
 
-**Budget (Säule A):** 50 MB / 1120 Dateien – Level GRUEN
+**Budget (Säule A):** 45 MB / 1016 Dateien – Level GRUEN
 
 | Prüfung | Befund | Status |
 |---|---|---|

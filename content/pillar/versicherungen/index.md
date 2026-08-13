@@ -3,7 +3,7 @@ title: "Versicherungen: Der große Ratgeber für den richtigen Schutz"
 description: "Versicherungen im Überblick: Haftpflicht, Hausrat, Unfall, Zahnzusatz, Reisekranken- und Kfz-Versicherung – was sich lohnt, was kostet und wer sie braucht."
 date: 2026-08-07
 draft: false
-author: "Frank"
+author: "Frank Hartung"
 categories: ["Ratgeber"]
 build:
   list: never
@@ -17,7 +17,7 @@ Versicherungen sind ein Thema, bei dem viele entweder zu viel oder zu wenig absi
 * Die **Privathaftpflicht** ist die wichtigste Versicherung überhaupt – schon ab rund 30 € im Jahr.
 * **Hausrat** lohnt sich vor allem bei hochwertigem Hausrat; der Wert entscheidet.
 * **Zahnzusatz- und Unfallversicherung** sind Einzelfall-Entscheidungen – hier zählt deine persönliche Situation.
-* **Kfz-Versicherung:** Ein Wechsel zum Stichtag spart oft mehrere Hundert Euro.
+* **Tierversicherung und Hausschutz:** Auch dein Haustier und dein Zuhause verdienen eine durchdachte Absicherung.
 
 ## Privathaftpflicht:<br>Die Pflichtversicherung für alle
 
@@ -35,9 +35,13 @@ Implantate und hochwertiger Zahnersatz sind teuer – aber nicht für jeden lohn
 
 Die private Unfallversicherung wird oft überteuert verkauft. Für wen sie sich wirklich lohnt und welche Alternativen es gibt, steht in Private Unfallversicherung: Für wen sie sich wirklich lohnt. Für Reisen ins Ausland ist dagegen die Reisekrankenversicherung fast immer eine sinnvolle, günstige Ergänzung.
 
-## Kfz-Versicherung wechseln:<br>Der jährliche Sparhebel
+## Tierversicherung:<br>Schutz im Krankheitsfall
 
-Zum Wechselstichtag im November/Dezember lohnt sich der Vergleich besonders: Wer seine Kfz-Versicherung wechselt, spart oft 100 € bis 300 € – bei gleicher Leistung. Wie du richtig vergleichst und typische Fallen vermeidest, erkläre ich in [Kfz-Versicherung wechseln: Wann es sich wirklich lohnt](../../posts/kfz-versicherung-wechseln/).
+Tierarztkosten können bei Operationen oder chronischen Erkrankungen schnell vierstellig werden. Wann sich eine Hunde- oder Katzenkrankenversicherung wirklich lohnt und worauf du beim Vergleich achten solltest, erkläre ich in [Tierversicherung: Schutz für dein Tier im Krankheitsfall](../../posts/2026-08-08-dein-tier-im-krankheitsfall/).
+
+## Wohngebäude- und Hausratschutz:<br>Das Update für 2026
+
+Sturm, Starkregen und Einbruch: Die Anforderungen an eine solide Absicherung fürs Eigenheim haben sich zuletzt spürbar verschärft. Was sich 2026 ändert und worauf du bei deiner Police jetzt achten solltest, steht in [Dein Haus sicher schützen: Das neue Vorsorge-Update 2026](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/).
 
 ## Häufige Fragen
 
@@ -47,8 +51,8 @@ Die Privathaftpflicht ist unverzichtbar, die Hausratversicherung oft sinnvoll. B
 ### Lohnt sich eine Zahnzusatzversicherung?
 Ja, wenn du absehbar größere Behandlungen brauchst oder Wert auf hochwertigen Zahnersatz legst. Die Kosten-Nutzen-Rechnung findest du in Zahnzusatz: Wann sich der Abschluss lohnt.
 
-### Wann sollte ich die Kfz-Versicherung wechseln?
-Zum Stichtag (meist 30. November) mit sechswöchiger Kündigungsfrist. Wer früh vergleicht, sichert sich oft die günstigsten Konditionen – Details im [Kfz-Wechsel-Ratgeber](../../posts/kfz-versicherung-wechseln/).
+### Lohnt sich eine Tierkrankenversicherung?
+Vor allem bei Rassen mit erhöhtem Krankheitsrisiko oder wenn du im Ernstfall keine hohe Rechnung aus eigener Tasche zahlen möchtest. Details im [Tierversicherungs-Ratgeber](../../posts/2026-08-08-dein-tier-im-krankheitsfall/).
 
 ---
 

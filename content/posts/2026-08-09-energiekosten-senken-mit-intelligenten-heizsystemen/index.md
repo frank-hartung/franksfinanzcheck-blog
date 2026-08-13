@@ -22,7 +22,7 @@ social_posted: true
 
 
 
-Zahlst du [jeden Monat](../../posts/2026-08-06-frugalismus-im-alltag/) hunderte Euro für deine Wärme? Mit smarten Lösungen senkst du deine Energiekosten oft um bis zu 30 %. Ich zeige dir, wie diese Technik dein Budget schont und den Komfort steigert.
+Zahlst du jeden Monat hunderte Euro für deine Wärme? Mit smarten Lösungen senkst du deine Energiekosten oft um bis zu 30 %. Ich zeige dir, wie diese Technik dein Budget schont und den Komfort steigert.
 
 Die Energiekosten belasten viele Haushalte in Deutschland massiv. Besonders die Preise für Gas und Fernwärme sind volatil. Ein kluger Umstieg auf moderne Heizsysteme entlastet dein Bankkonto spürbar. Du gewinnst dadurch mehr finanziellen Spielraum für deine restliche Lebensplanung, statt dein Geld sprichwörtlich „zu verheizen“. Für einen durchschnittlichen Haushalt in einer 100-Quadratmeter-Wohnung bedeutet eine Ersparnis von 25 % oft ein Plus von 400 € bis 600 € pro Jahr in der Haushaltskasse.
 
@@ -68,7 +68,7 @@ Smarte Thermostate kosten im Fachhandel meist zwischen 40 € und 90 € pro S
 ## Das Wichtigste in Kurzform
 * **Hohe Ersparnis:** Reduktion der Energiekosten um bis zu 30 % realistisch.
 * **Komfort:** Bequeme Steuerung per App, Sprache (Alexa/Siri) oder Zeitplan.
-* **Intelligenz:** Automatische Erkennung von Lüftungsphasen und Wettervorhersagen spart [bares Geld](../../posts/2026-08-06-frugalismus-im-alltag/).
+* **Intelligenz:** Automatische Erkennung von Lüftungsphasen und Wettervorhersagen spart bares Geld.
 * **Amortisation:** Die Hardware bezahlt sich durch die Ersparnis oft innerhalb von 24 Monaten selbst.
 * **Mietertauglich:** Einfache Nachrüstung erlaubt, da beim Auszug alles spurlos rückbaubar ist.
 

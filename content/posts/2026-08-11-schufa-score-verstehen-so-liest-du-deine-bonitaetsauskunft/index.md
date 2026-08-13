@@ -124,7 +124,7 @@ Geduld gehört dazu: Der Score ist ein Marathon, kein Sprint. Wer heute zwei, dr
 **Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/)
 
 
-**Weiterlesen:** [7 Gewohnheiten für finanzielle Freiheit](../../posts/7-gewohnheiten-finanzielle-freiheit/)
+**Weiterlesen:** [Depot 2026: Dein smarter Start in den Vermögensaufbau](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/)
 ## Häufige Fragen
 
 ### Wie oft darf ich die kostenlose Datenkopie anfordern?

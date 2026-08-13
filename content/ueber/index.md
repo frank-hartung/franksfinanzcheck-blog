@@ -27,7 +27,7 @@ showToc: true
 ## Wie ich teste und arbeite
 
 1. **Ich recherchiere an der Quelle:** Tarifbedingungen, Preisblätter, Anbieterangaben und Verbraucherportale – nicht Hörensagen.
-2. **Ich teste in der Praxis:** Tarife buchen, Apps nutzen, Wechsel durchziehen – so entstehen Artikel wie [„Internet-Turbo: Warum ich meinen DNS-Server getauscht habe"](/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/), in denen ich von eigenen Erfahrungen berichte.
+2. **Ich teste in der Praxis:** Tarife buchen, Apps nutzen, Wechsel durchziehen – so entstehen Artikel wie [„DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"](/posts/2026-08-10-dsl-wechselbonus-sichern/), in denen ich von eigenen Erfahrungen berichte.
 3. **Ich aktualisiere regelmäßig:** Preise und Konditionen ändern sich – ich pflege die wichtigsten Artikel laufend nach.
 4. **Ich kennzeichne Meinung als Meinung:** Wenn etwas eine persönliche Einschätzung ist, steht das auch so da.
 

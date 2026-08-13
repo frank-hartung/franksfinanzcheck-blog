@@ -61,7 +61,7 @@ Ein häufiger Fehler ist die falsche Einschätzung des Gebäudewertes. Wenn dein
 | Sturm & Hagel | Ab Windstärke 8 | Ja | Ja (inkl. Nebengebäude) |
 | Elementarschäden | Nein | Optional | Ja (Pflichtbaustein 2026) |
 | Grobe Fahrlässigkeit | Nein | Teilweise | Ja (voller Verzicht auf Einwand) |
-| Smarte Prävention | Nein | Optional | Ja (mit [50-30-20-Regel](../../posts/50-30-20-regel-einfach-erklaert/) und der monatliche Beitragsrabatt) |
+| Smarte Prävention | Nein | Optional | Ja (mit smarter Budgetplanung und der monatliche Beitragsrabatt) |
 
 ## Nachhaltigkeit und ökologischer Wiederaufbau
 

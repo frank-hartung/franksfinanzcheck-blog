@@ -3,7 +3,7 @@ title: "Konto & Karten: Der große Ratgeber für gebührenfreie Finanzen"
 description: "Kostenloses Girokonto, Kreditkarte ohne Jahresgebühr, Tagesgeld mit Zinsen und Ratenkredit zum Bestzins – der Ratgeber für deine Banking-Kosten."
 date: 2026-08-07
 draft: false
-author: "Frank"
+author: "Frank Hartung"
 categories: ["Ratgeber"]
 build:
   list: never

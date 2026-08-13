@@ -3,7 +3,7 @@ title: "Strom sparen: Der große Ratgeber für niedrige Energiekosten"
 description: "Strom sparen im Haushalt: 20 Tipps, Stromfresser entlarven, Tarifwechsel 2026, Wärmepumpe vs. Gasheizung und E-Auto-Laden – alles im großen Ratgeber."
 date: 2026-08-07
 draft: false
-author: "Frank"
+author: "Frank Hartung"
 categories: ["Ratgeber"]
 build:
   list: never
