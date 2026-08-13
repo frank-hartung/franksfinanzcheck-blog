@@ -24,7 +24,7 @@ liefern (sie lesen z. T. aus public/), MUSS vor diesem Skript ein
 
 Wirkung bei Nicht-Bestehen: Der betroffene Artikel wird automatisch auf
 `draft: true` zurückgestuft (geht NICHT live) und landet damit im normalen
-Freigabe-Issue-Mechanismus wie ein Relaxed-/Rescue-Artikel – nichts geht
+Freigabe-Issue-Mechanismus wie ein Rescue-Artikel (Ebene 2) – nichts geht
 verloren, nichts wird stillschweigend verworfen.
 
 Geprüft werden nur Artikel, die HEUTE erzeugt wurden (Ordner-Datumspräfix)

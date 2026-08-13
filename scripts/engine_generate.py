@@ -2,17 +2,24 @@
 """engine_generate.py – CONTENT-ENGINE v2 (Multi-Fallback-Orchestrierung)
 
 Ersetzt den fragilen Einzel-Lauf der alten Automatisierung durch eine
-3-Ebenen-Fallback-Architektur – damit NIE ein Tag ohne neuen Artikel bleibt:
+2-Ebenen-Fallback-Architektur – damit NIE ein Tag ohne neuen Artikel bleibt,
+OHNE dabei je Content unterhalb des Profi-Qualitäts-Gates zu veröffentlichen:
 
-  EBENE 1 (Normal):   KI-Artikel generieren, Profi-Gate hart (wie bisher),
-                      max. 3 Versuche mit wechselndem Stil/Perspektive.
-  EBENE 2 (Relaxed):  Wenn Ebene 1 scheitert: 2 weitere Versuche mit
-                      reduzierter Schwelle (nur HARTE Kriterien: >= 550 Wörter,
-                      >= 3 H2, keine KI-Floskeln). Artikel wird trotzdem
-                      veröffentlicht – Qualitäts-Gates (Phase 3) polieren nach.
-  EBENE 3 (Draft):    Wenn auch das scheitert: Artikel wird als ENTWURF
-                      (draft: true) mit Issue-Hinweis gespeichert. Der Tag ist
-                      nie verloren, der Mensch kann ihn freigeben.
+  EBENE 1 (Profi):    KI-Artikel generieren, Profi-Gate hart, bis zu
+                      5 Versuche mit wechselndem Stil/Perspektive/Provider.
+                      Nur ein hier bestandener Artikel wird automatisch
+                      veröffentlicht (siehe should_auto_publish()).
+  EBENE 2 (Draft):    Wenn auch alle Versuche scheitern: Artikel wird als
+                      ENTWURF (draft: true) mit Issue-Hinweis gespeichert.
+                      Der Tag ist nie verloren, der Mensch kann ihn
+                      fertigstellen und freigeben.
+
+  13.08.2026 (Frank): Die frühere "Relaxed"-Zwischenstufe (abgeschwächtes
+  Qualitäts-Gate als Kompromiss fürs Tagesziel) wurde ersatzlos entfernt –
+  es soll grundsätzlich keine automatisch veröffentlichten Artikel geben,
+  die nicht das volle Profi-Gate bestanden haben. Ein Tag ohne Profi-Erfolg
+  bekommt jetzt konsequent einen Entwurf statt eines abgeschwächt geprüften
+  Artikels.
 
 Zusätzlich:
   - Multi-Modell: Versuch wechselt automatisch zwischen Gemini und Groq
@@ -37,17 +44,16 @@ import generate_drafts as g  # noqa: E402  (nutzt bestehende Generierungs-Logik)
 from check_titles import COMPOUND_FIXES, TIME_TAIL as RE_ANHAENGSEL  # noqa: E402 – Titel-Qualitätsgate (FrankAutoOps)
 
 # ---------------------------------------------------------------------------
-# Freigabe-Modus (Frank, 13.08.2026 – zweistufig erweitert):
+# Freigabe-Modus (Frank, 13.08.2026 – 13.08. Nachmittag: Relaxed-Stufe
+# ersatzlos entfernt, siehe Modul-Docstring oben):
 #   AUTO_PUBLISH=0      -> IMMER manuelle Freigabe (draft:true), egal welche
 #                          Qualitätsstufe erreicht wurde. Sicherste Variante.
-#   AUTO_PUBLISH=profi  -> ZWEISTUFIG (Default): Nur Artikel, die das harte
-#                          Profi-Qualitäts-Gate bestehen, werden automatisch
-#                          veröffentlicht (draft:false). Alles, was nur die
-#                          abgeschwächte Relaxed-Stufe erreicht (oder eine
-#                          echte Qualitäts-Rettung, Ebene 3), bleibt als
-#                          Entwurf liegen und wartet auf dich – das ist die
-#                          unsicherere Sorte Content, bei der ein kurzer
-#                          menschlicher Blick am meisten bringt.
+#   AUTO_PUBLISH=profi  -> Default: Nur Artikel, die das harte Profi-
+#                          Qualitäts-Gate bestehen, werden automatisch
+#                          veröffentlicht (draft:false). Jede Qualitäts-
+#                          Rettung (Ebene 2, Profi-Gate nicht erreicht)
+#                          bleibt als Entwurf liegen und wartet auf dich –
+#                          es gibt keine Zwischenstufe mehr.
 #   AUTO_PUBLISH=1      -> Vollautomatik wie ursprünglich (nicht empfohlen
 #                          für eine junge YMYL-Domain, siehe README).
 # In jedem Modus: volle Qualitäts-Kette (Rechtschreibung, Grammatik, Cover,
@@ -64,8 +70,11 @@ def should_auto_publish(quality_level: str) -> bool:
         return True
     if mode in ("0", "false", "no", "nie", "manuell", "manual"):
         return False
-    # Default/zweistufig: "profi" (oder jeder andere, nicht erkannte Wert –
-    # sicherer Fallback statt versehentlicher Vollautomatik bei Tippfehlern).
+    # Default "profi": NUR echte Profi-Qualität wird automatisch veröffentlicht.
+    # Es gibt keine Zwischenstufe mehr (Relaxed entfernt, 13.08.2026) – jeder
+    # andere quality_level-Wert (insbesondere "draft"/Qualitäts-Rettung, oder
+    # ein nicht erkannter Modus-Wert) führt sicher zu draft:true statt einer
+    # versehentlichen Vollautomatik bei Tippfehlern.
     return quality_level == "profi"
 
 
@@ -134,10 +143,11 @@ def now_utc_iso() -> str:
 
 def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, quality_level=None):
     """Speichert Artikel als Page-Bundle (Format wie bisherige Pipeline).
-    quality_level: optionale, echte Qualitätsstufe ("profi"/"relaxed") fürs
+    quality_level: optionale, echte Qualitätsstufe ("profi") fürs
     Frontmatter-Feld engine_level – bleibt auch bei draft:true (manuelle
     Freigabe) sichtbar, statt pauschal auf "draft" zu fallen (das bleibt
-    reserviert für echte Qualitäts-Gate-Ausfälle, Ebene 3)."""
+    reserviert für echte Qualitäts-Gate-Ausfälle, Ebene 2). Die frühere
+    Zwischenstufe "relaxed" gibt es seit 13.08.2026 nicht mehr."""
     date = datetime.date.today().isoformat()
     slug = g.slugify(title)
     bundle_dir = os.path.join(g.POSTS_DIR, f"{date}-{slug}")
@@ -161,7 +171,9 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, 
     if inspiration:
         insp_line = f"\ninspiration: {yaml_quote(inspiration)}\n"
     draft_line = "true" if draft else "false"
-    engine_level = quality_level or ("draft" if draft else "relaxed")
+    # engine_level ist jetzt binär: "profi" (Ebene 1 bestanden) oder "draft"
+    # (Ebene 2, Qualitäts-Rettung) – keine "relaxed"-Zwischenstufe mehr.
+    engine_level = quality_level or "draft"
     frontmatter = (
         "---\n"
         f'title: {yaml_quote(title)}\n'
@@ -185,11 +197,15 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, 
 
 
 # ---------------------------------------------------------------------------
-# Ebene 1 + 2: Generieren mit Qualitäts-Schleife (hart / relaxed)
+# Ebene 1: Generieren mit hartem Profi-Qualitäts-Gate (13.08.2026: keine
+# abgeschwächte "Relaxed"-Zwischenstufe mehr – entweder Profi-Niveau oder
+# Ebene 2 / Draft-Rettung, siehe Modul-Docstring oben).
 # ---------------------------------------------------------------------------
 
-def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=3):
-    """Ein Generierungs-Versuch über beide Provider. Liefert (filename|None, info)."""
+def try_generate(topic, keywords, pin, used_titles, max_attempts=5):
+    """Ein Generierungs-Versuch über beide Provider. Liefert (filename|None, info).
+    Prüft IMMER das volle Profi-Gate (g.profi_quality_ok) – kein Fallback auf
+    reduzierte Kriterien mehr."""
     providers = [p for p in ("GEMINI", "GROQ") if os.environ.get(f"{p}_API_KEY")]
     if not providers:
         return None, "kein API-Key"
@@ -223,23 +239,13 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
             print(f"  ✗ Titel-Gate R2: Anhängsel-Muster ohne ':' – Versuch {attempt} verworfen: {title[:60]}")
             continue
 
-        if not relaxed:
-            ok_profi, prob = g.profi_quality_ok(body, keywords)
-            if not ok_profi:
-                print(f"  ⚠ Profi-Gate: {'; '.join(prob[:3])} (Versuch {attempt}/{max_attempts}, {provider})")
-                continue
-        else:
-            # Relaxed: nur HARTE Kriterien (Text darf trotzdem nicht mager sein)
-            text = re.sub(r"[#*_>`|~\[\]()-]", " ", body)
-            words = len(re.findall(r"\w+", text))
-            h2 = len(re.findall(r"^##\s", body, re.M))
-            floskeln = [f for f in g.PROFI_FLOSKELN if f in text.lower()]
-            if words < 550 or h2 < 3 or floskeln:
-                print(f"  ⚠ Relaxed-Gate: {words} Wörter / {h2} H2 / Floskeln {floskeln[:2]} (Versuch {attempt})")
-                continue
+        ok_profi, prob = g.profi_quality_ok(body, keywords)
+        if not ok_profi:
+            print(f"  ⚠ Profi-Gate: {'; '.join(prob[:3])} (Versuch {attempt}/{max_attempts}, {provider})")
+            continue
 
         used_titles.add(title.lower())
-        return (title, desc, body), f"OK via {provider_name} ({'relaxed' if relaxed else 'profi'})"
+        return (title, desc, body), f"OK via {provider_name} (profi)"
     return None, f"{max_attempts} Versuche ohne Erfolg"
 
 
@@ -286,8 +292,8 @@ def main():
     pin_topics = os.environ.get("PIN_TOPICS", "0") == "1"
 
     # Tages-Guard (wie bisherige Pipeline)
-    # 13.08.: Zählt jetzt ALLE heutigen Artikel, die ein Qualitäts-Gate
-    # bestanden haben (profi/relaxed) – unabhängig vom draft-Flag. So bleibt
+    # 13.08.: Zählt jetzt ALLE heutigen Artikel, die das Profi-Qualitäts-Gate
+    # bestanden haben – unabhängig vom draft-Flag. So bleibt
     # das 2/Tag-Cap auch im manuellen Freigabe-Modus (AUTO_PUBLISH=0) korrekt:
     # Frank bekommt trotzdem nur 2 Entwürfe/Tag statt endlos vieler. Nur
     # echte Qualitäts-Rettungen (engine_level: "draft", Ebene 3) zählen NICHT
@@ -341,18 +347,14 @@ def main():
 
     print(f"Content-Engine v2 gestartet – Quelle: {quelle}, Thema: {topic['title'][:60]}")
 
-    # EBENE 1 – Profi
-    result, info = try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=3)
+    # EBENE 1 – Profi (5 Versuche über beide Provider, siehe try_generate())
+    result, info = try_generate(topic, keywords, pin, used_titles, max_attempts=5)
     level = "profi"
-    # EBENE 2 – Relaxed
-    if not result:
-        print("→ Ebene 2 (Relaxed) …")
-        result, info = try_generate(topic, keywords, pin, used_titles, relaxed=True, max_attempts=2)
-        level = "relaxed"
-    # EBENE 3 – Draft-Rettung
+    # EBENE 2 – Draft-Rettung (13.08.2026: keine Relaxed-Zwischenstufe mehr –
+    # entweder Profi-Niveau oder ehrlicher Entwurf, nichts dazwischen)
     draft_saved = False
     if not result:
-        print("→ Ebene 3 (Draft-Rettung) …")
+        print("→ Ebene 2 (Draft-Rettung) …")
         title, desc, body = make_draft(topic, used_titles)
         try:
             filename, slug = save_article(title, desc, body, draft=True,

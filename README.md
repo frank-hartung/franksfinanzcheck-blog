@@ -44,17 +44,18 @@ Domain. Bei einem Nischen-Finanzblog zählt zudem Tiefe/Vertrauen
 `MAX_ARTIKEL_PRO_TAG` (max. 2, hartes Cap im Code) und die Cron-Tage in
 beiden Workflow-Dateien.
 
-**Betriebsregel seit 13.08.2026 – zweistufige Freigabe (Standard):**
+**Betriebsregel seit 13.08.2026 – nur Profi-Qualität geht automatisch live:**
 - Jeder generierte Artikel durchläuft die volle Qualitäts-Kette (Rechtschreibung,
   Grammatik, Cover, Meta, interne Links, Affiliate-Guards, …) genau wie zuvor
-  und erreicht dabei eine von zwei Qualitätsstufen: **Profi** (hartes Gate,
-  volle Kriterien) oder **Relaxed** (abgeschwächtes Gate, z. B. wenn die KI-
-  APIs schwächeln – siehe `engine_level` im Frontmatter jedes Artikels).
-- **Profi-Artikel werden automatisch veröffentlicht** (`draft: false`) – das
-  ist die Mehrheit und braucht keinen manuellen Schritt.
-- **Relaxed-Artikel (und echte Qualitäts-Rettungen, Ebene 3) bleiben als
-  Entwurf** (`draft: true`) liegen – genau die unsicherere Sorte Content,
-  bei der ein kurzer menschlicher Blick am meisten bringt.
+  und muss dabei das harte **Profi-Gate** bestehen (`engine_level: "profi"`
+  im Frontmatter). Es gibt seit 13.08.2026 (Nachmittag) **keine abgeschwächte
+  Relaxed-Zwischenstufe mehr** – die gab es zuvor als Kompromiss fürs
+  Tagesziel, wurde aber ersatzlos gestrichen: Ein Artikel ist entweder
+  Profi-Niveau oder er wird gar nicht erst automatisch veröffentlicht.
+- **Nur Profi-Artikel werden automatisch veröffentlicht** (`draft: false`).
+- **Jede Qualitäts-Rettung** (die KI erreicht auch nach 5 Versuchen kein
+  Profi-Niveau) **bleibt als Entwurf** (`draft: true`) liegen
+  (`engine_level: "draft"`) – dafür bekommst du ein Freigabe-Issue.
 - **Hartes Publish-Gate (13.08.2026, `scripts/publish_gate.py`):** Selbst ein
   als "Profi" eingestufter Artikel geht erst NACH drei zusätzlichen,
   automatisierten Prüfungen wirklich live – direkt vor dem Deploy-Trigger:
@@ -78,11 +79,11 @@ beiden Workflow-Dateien.
   1x/Woche gesammelt durchgehen, dabei jeweils einen eigenen Satz ins
   bereits vorhandene `erfahrung:`-Feld ergänzen (günstigster E-E-A-T-Hebel).
 - Das 1-Artikel/Tag-Limit (an Publikationstagen) gilt weiterhin (zählt
-  Artikel, die mindestens das Relaxed-Gate bestanden haben – unabhängig
-  vom draft-Status), es werden also nie mehr Entwürfe angehäuft als geplant.
-- **Modus wechseln:** Repo-Variable `AUTO_PUBLISH` – `profi` (Standard,
-  zweistufig wie oben), `0` (immer manuell, auch Profi-Artikel), `1`
-  (Vollautomatik, alte Betriebsart).
+  Artikel, die das Profi-Gate bestanden haben – unabhängig vom draft-Status),
+  es werden also nie mehr Entwürfe angehäuft als geplant.
+- **Modus wechseln:** Repo-Variable `AUTO_PUBLISH` – `profi` (Standard: nur
+  Profi-Artikel automatisch, alles andere Entwurf), `0` (immer manuell,
+  auch Profi-Artikel), `1` (Vollautomatik, alte Betriebsart – nicht empfohlen).
 
 **Warum überhaupt Entwürfe statt automatischer Veröffentlichung?** Google
 bestraft massenhaft automatisch veröffentlichten KI-Content ("Scaled
@@ -97,7 +98,7 @@ live gehen).
 - **Zurück zur Vollautomatik (nicht empfohlen für YMYL/Google-Sichtbarkeit):**
   Repository-Variable `AUTO_PUBLISH` auf `1` setzen (GitHub → Settings →
   Secrets and variables → Actions → Variables). Dann werden auch
-  Relaxed-Artikel wieder sofort mit `draft: false` gespeichert.
+  Qualitäts-Rettungen (Ebene 2) sofort mit `draft: false` gespeichert.
 
 **🔗 Affiliate-Links ändern – so geht's (wichtig!):**
 

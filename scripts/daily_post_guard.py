@@ -6,8 +6,9 @@ Betriebsregel (User, 13.08.2026 – reduziert von 2/Tag auf 1 Artikel an 4
 Tagen/Woche): Dieser Guard prüft bei jedem Lauf, wie viele Posts mit
 Veröffentlichungsdatum HEUTE (Qualitäts-Gate bestanden, unabhängig vom
 draft-Flag) im Content liegen, und generiert fehlende Artikel direkt über
-die Content-Engine (try_generate: Profi → Relaxed → Draft-Rettung) – mit
-den gleichen Qualitäts-Gates wie die Engine selbst.
+die Content-Engine (try_generate: Profi → Draft-Rettung, keine Relaxed-
+Zwischenstufe mehr seit 13.08.2026 Nachmittag) – mit den gleichen
+Qualitäts-Gates wie die Engine selbst.
 
 SELBSTHEILUNG:
   - 3 Cron-Slots je Publikationstag (Mo/Mi/Fr/Sa): scheitert ein Lauf
@@ -114,15 +115,10 @@ def fill_missing():
             pin = None
 
         result = None
-        level = "relaxed"
-        for relaxed in (False, True):
-            result, info = eg.try_generate(topic, keywords, pin, used_titles,
-                                           relaxed=relaxed, max_attempts=3 if not relaxed else 2)
-            level = "relaxed" if relaxed else "profi"
-            if result:
-                break
+        level = "profi"
+        result, info = eg.try_generate(topic, keywords, pin, used_titles, max_attempts=5)
         if not result:
-            # Draft-Rettung (wie Engine Ebene 3) – zählt bewusst NICHT als
+            # Draft-Rettung (wie Engine Ebene 2) – zählt bewusst NICHT als
             # "created", damit der nächste Slot einen echten Ersatz versucht.
             try:
                 title, desc, body = eg.make_draft(topic, used_titles)
@@ -139,10 +135,10 @@ def fill_missing():
                 continue
         title, desc, body = result
         try:
-            # 13.08.: zweistufige Freigabe (siehe engine_generate.should_auto_publish)
-            # – "profi"-Qualität wird automatisch veröffentlicht, "relaxed"
-            # bleibt Entwurf. Zählt in beiden Fällen als "erstellt"
-            # (Qualitäts-Gate bestanden), damit das Tages-Cap nicht dauerhaft
+            # 13.08.: Freigabe (siehe engine_generate.should_auto_publish) –
+            # nur echte "profi"-Qualität wird automatisch veröffentlicht,
+            # jede Qualitäts-Rettung bleibt Entwurf. Zählt als "erstellt"
+            # (Profi-Gate bestanden), damit das Tages-Cap nicht dauerhaft
             # "offen" bleibt und immer weiter nachgeneriert.
             auto_publish_now = eg.should_auto_publish(level)
             filename, slug = eg.save_article(title, desc, body, draft=not auto_publish_now,

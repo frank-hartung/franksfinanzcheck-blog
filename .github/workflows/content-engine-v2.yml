@@ -10,8 +10,11 @@
 #       Artikel wird übersprungen" -> 0 Artikel für den Tag.
 #
 #  LÖSUNG (Content-Engine v2):
-#    - 3-Ebenen-Fallback (Profi -> Relaxed -> Draft-Rettung):
-#      NIE ein Tag ohne neuen Artikel.
+#    - 2-Ebenen-Fallback (Profi -> Draft-Rettung; die frühere Relaxed-
+#      Zwischenstufe wurde am 13.08.2026 ersatzlos entfernt – es soll
+#      grundsätzlich keine automatisch veröffentlichten Artikel unterhalb
+#      des Profi-Gates mehr geben):
+#      NIE ein Tag ohne neuen Artikel (im Zweifel als Entwurf).
 #    - Multi-Modell-Rotation (Gemini <-> Groq) gegen Provider-Schwäche.
 #    - Deploy-Trigger mit korrektem execSync-Import.
 #    - ENGINE-STATUS.md Dashboard + Fehler-Alerting bei Komplettausfall.
@@ -69,9 +72,10 @@ jobs:
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
           MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '1' }}
-          # Zweistufige Freigabe (13.08.): Default "profi" = nur Artikel mit
-          # bestandenem Profi-Qualitäts-Gate werden automatisch veröffentlicht,
-          # "relaxed"-Artikel + Qualitäts-Rettungen bleiben Entwurf für Frank.
+          # Freigabe-Modus (13.08.): Default "profi" = nur Artikel mit
+          # bestandenem Profi-Qualitäts-Gate werden automatisch veröffentlicht.
+          # Es gibt keine abgeschwächte Zwischenstufe mehr (Relaxed am
+          # 13.08.2026 entfernt) – jede Qualitäts-Rettung bleibt Entwurf für Frank.
           # "0" = immer manuell, "1" = alte Vollautomatik (Settings -> Secrets
           # and variables -> Actions -> Variables -> AUTO_PUBLISH).
           AUTO_PUBLISH: ${{ vars.AUTO_PUBLISH || 'profi' }}
