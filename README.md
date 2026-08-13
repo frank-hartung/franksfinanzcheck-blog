@@ -55,6 +55,18 @@ beiden Workflow-Dateien.
 - **Relaxed-Artikel (und echte Qualitäts-Rettungen, Ebene 3) bleiben als
   Entwurf** (`draft: true`) liegen – genau die unsicherere Sorte Content,
   bei der ein kurzer menschlicher Blick am meisten bringt.
+- **Hartes Publish-Gate (13.08.2026, `scripts/publish_gate.py`):** Selbst ein
+  als "Profi" eingestufter Artikel geht erst NACH drei zusätzlichen,
+  automatisierten Prüfungen wirklich live – direkt vor dem Deploy-Trigger:
+  1. `check_length.py` – Zeichen-/Wortlänge (700–1800 Wörter)
+  2. `seo_audit.py` – Title-/Description-Länge, Wortzahl, Alt-Texte, Sitemap
+  3. `affiliate_profi_check.py` (A1–A8) – Offenlegung, E-E-A-T-Feld, interne
+     Links, Schema.org, Affiliate-Dichte, Trust-Box, Autor, CTA
+  Besteht ein Artikel eine dieser Prüfungen nicht (auch nach den
+  Selbstheilungs-Läufen davor), wird er automatisch auf `draft: true`
+  zurückgestuft statt live zu gehen – landet dann im normalen
+  Freigabe-Issue. Kein Artikel geht mehr live, ohne dass diese drei
+  Prüfungen tatsächlich bestanden wurden.
 - Für wartende Entwürfe bekommst du automatisch ein **GitHub-Issue**
   ("📝 Content-Engine: Entwurf wartet auf Freigabe") – erscheint nur, wenn
   tatsächlich etwas zu prüfen ist, bleibt offen bis du es schließt (kein

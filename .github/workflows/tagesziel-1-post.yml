@@ -86,6 +86,27 @@ jobs:
           python3 scripts/internal_linker.py --apply --max 3 || true
           python3 scripts/pinterest_check.py --fix || true
 
+      # Hartes Publish-Gate (13.08.2026): siehe content-engine-v2.yml für
+      # die vollständige Begründung. Läuft NACH der Qualitäts-Kette (die
+      # braucht public/ nicht) und VOR dem Commit, damit ein evtl.
+      # zurückgestufter Artikel direkt mit draft:true committet wird.
+      - name: Hugo installieren (für Publish-Gate)
+        if: env.EXIT == '0'
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+
+      - name: Publish-Gate (harte Vor-Veröffentlichungs-Kontrolle)
+        if: env.EXIT == '0'
+        run: |
+          set +e
+          hugo --minify
+          python3 scripts/publish_gate.py --strict
+          if [ $? -ne 0 ]; then
+            echo "DRAFT_PENDING=true" >> "$GITHUB_ENV"
+          fi
+
       - name: Artikel committen + pushen
         if: env.EXIT == '0'
         run: |

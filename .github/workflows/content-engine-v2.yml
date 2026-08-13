@@ -256,6 +256,40 @@ jobs:
         continue-on-error: true
         run: python3 scripts/submit_indexnow.py || echo "⚠ IndexNow-Fehler (nicht kritisch)"
 
+      # ================= PHASE 3.5: HARTES PUBLISH-GATE =================
+      # Betriebsregel (Frank, 13.08.2026): Ein Artikel geht nur dann wirklich
+      # live, wenn er NACH der Qualitäts-/Fix-Kette oben zusätzlich drei
+      # harte Prüfungen besteht: check_length.py (Zeichenlänge), seo_audit.py
+      # (Title/Description/Wortzahl/Alt-Texte/Sitemap) und
+      # affiliate_profi_check.py (A1-A8: Offenlegung, E-E-A-T, interne Links,
+      # Schema, Affiliate-Dichte, Trust-Box, Autor, CTA). Besteht er eine
+      # davon nicht, wird er automatisch auf draft:true zurückgestuft statt
+      # live zu gehen – landet dann im normalen Freigabe-Issue.
+      - name: Hugo installieren (für Publish-Gate)
+        if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+
+      - name: Phase 3.5 – Publish-Gate (harte Vor-Veröffentlichungs-Kontrolle)
+        if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
+        continue-on-error: true
+        run: |
+          hugo --minify
+          python3 scripts/publish_gate.py
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Publish-Gate: keine Artikel zurückgestuft."
+          else
+            git commit -m "content: Publish-Gate hat Artikel ohne bestandene Prüfung auf Entwurf zurückgestuft"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+            echo "🛑 Publish-Gate-Commit gepusht (mind. 1 Artikel zurückgestuft)"
+          fi
+
       # ================= PHASE 4: DEPLOY ANSTOSSEN (FIXED!) =================
       # FIX: execSync MUSS explizit importiert werden (github-script@v7 hat
       # es nicht mehr im globalen Kontext – das crashte die alte Version).
