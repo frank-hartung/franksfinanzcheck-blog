@@ -249,9 +249,13 @@ def post_mastodon(text: str, image: Path | None) -> tuple[bool, str]:
 
 
 def get_status_mastodon(status_id: str) -> dict:
+    """Liest einen Status aus. BEWUSST OHNE Authorization-Header: unser Token
+    hat nur 'write:accounts'+'write:statuses'+'write:media', kein
+    'read:statuses' – ein trotzdem mitgeschickter Bearer-Token ohne
+    passenden Scope führt bei Mastodon zu HTTP 403 (statt ignoriert zu
+    werden). Öffentliche Statuses sind ohne Token lesbar (seit Mastodon 2.7)."""
     req = urllib.request.Request(
         f"{MASTODON_INSTANCE}/api/v1/statuses/{status_id}",
-        headers={"Authorization": f"Bearer {MASTODON_TOKEN}"} if MASTODON_TOKEN else {},
         method="GET",
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
