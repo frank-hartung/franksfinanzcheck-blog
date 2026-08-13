@@ -23,13 +23,26 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 
 ## ⚡ Automatik mit manueller Freigabe (Stand 13.08.2026)
 
-Zwei Workflows sichern täglich bis zu **2 fertige, qualitätsgeprüfte Artikel**:
-**„Content-Engine v2"** (`content-engine-v2.yml`, mehrere Zeitfenster ab 08:10 MESZ)
-und **„Tagesziel 2 Posts"** (`tagesziel-2-posts.yml`, Nachlauf-Slots), falls das
-Tagesziel sonst nicht erreicht würde. Die ältere, in dieser Tabelle früher
-beschriebene „Automatische Content-Generierung" (`daily-content.yml`) ist
-deaktiviert (nur manuell startbar) – die Zeiten oben sind daher nicht mehr
-aktuell, siehe die Cron-Zeilen direkt in `content-engine-v2.yml`.
+Zwei Workflows sichern an **4 Publikationstagen/Woche (Mo/Mi/Fr/Sa)** je
+**1 fertigen, qualitätsgeprüften Artikel** (= max. 4/Woche statt vorher
+2/Tag = 14/Woche): **„Content-Engine v2"** (`content-engine-v2.yml`,
+mehrere Zeitfenster ab 08:10 MESZ, nur an Publikationstagen) und
+**„Tagesziel 1 Post"** (`tagesziel-1-post.yml`, Nachlauf-Slots an
+denselben Tagen), falls das Tagesziel sonst nicht erreicht würde. Die
+ältere, in dieser Tabelle früher beschriebene „Automatische
+Content-Generierung" (`daily-content.yml`) ist deaktiviert (nur manuell
+startbar) – die Zeiten oben sind daher nicht mehr aktuell, siehe die
+Cron-Zeilen direkt in `content-engine-v2.yml`.
+
+**Warum die Frequenz-Reduktion (13.08.2026, von 2/Tag auf 1 Artikel an
+4 Tagen/Woche)?** Tägliches Massen-Publizieren rein KI-generierter
+Artikel ist genau das Muster, das Googles "Scaled Content Abuse"-
+Klassifizierer erkennen soll – besonders riskant bei einer noch jungen
+Domain. Bei einem Nischen-Finanzblog zählt zudem Tiefe/Vertrauen
+(E-E-A-T) mehr als Frequenz: 4 wirklich hilfreiche Artikel/Woche schlagen
+14 durchschnittliche langfristig fast immer. Ändern: Repo-Variable
+`MAX_ARTIKEL_PRO_TAG` (max. 2, hartes Cap im Code) und die Cron-Tage in
+beiden Workflow-Dateien.
 
 **Betriebsregel seit 13.08.2026 – manuelle Freigabe (Standard):**
 - Jeder generierte Artikel durchläuft die volle Qualitäts-Kette (Rechtschreibung,
@@ -38,22 +51,26 @@ aktuell, siehe die Cron-Zeilen direkt in `content-engine-v2.yml`.
   **Entwurf** (`draft: true`) gespeichert und wartet auf dein OK.
 - Du bekommst dafür automatisch ein **GitHub-Issue** ("📝 Content-Engine:
   Entwurf wartet auf Freigabe") – ein Issue bleibt offen, bis du es schließt
-  (kein Spam bei mehreren Artikeln/Tag).
+  (kein Spam bei mehreren Artikeln).
 - **Freigeben:** Datei unter `content/posts/<datum-slug>/index.md` öffnen,
   `draft: true` → `draft: false` ändern, committen – der nächste Deploy
   veröffentlicht ihn. Oder lokal: `python3 scripts/publish.py <slug>`.
-- Das 2-Artikel/Tag-Limit gilt weiterhin (zählt Artikel, die das
-  Qualitäts-Gate bestanden haben – unabhängig vom draft-Status), es werden
-  also nie mehr als 2 Entwürfe/Tag zur Prüfung angehäuft.
+  Tipp fürs schnelle Freigeben mit wenig Aufwand: Entwürfe 1x/Woche
+  gesammelt durchgehen, dabei jeweils einen eigenen Satz ins bereits
+  vorhandene `erfahrung:`-Feld ergänzen (günstigster E-E-A-T-Hebel).
+- Das 1-Artikel/Tag-Limit (an Publikationstagen) gilt weiterhin (zählt
+  Artikel, die das Qualitäts-Gate bestanden haben – unabhängig vom
+  draft-Status), es werden also nie mehr Entwürfe angehäuft als geplant.
 
-**Warum die Umstellung?** Google bestraft massenhaft automatisch
-veröffentlichten KI-Content ("Scaled Content Abuse"). Kurzes Prüfen +
-Freigeben schützt dein Ranking – und macht die Artikel besser (du ergänzst
-z. B. eigene Erfahrungen, bevor sie live gehen).
+**Warum überhaupt Entwürfe statt automatischer Veröffentlichung?** Google
+bestraft massenhaft automatisch veröffentlichten KI-Content ("Scaled
+Content Abuse"). Kurzes Prüfen + Freigeben schützt dein Ranking – und
+macht die Artikel besser (du ergänzst z. B. eigene Erfahrungen, bevor sie
+live gehen).
 
 **Steuerung:**
 - **Stoppen (Kill-Switch):** GitHub → Actions → „Content-Engine v2" bzw.
-  „Tagesziel 2 Posts" → Disable workflow
+  „Tagesziel 1 Post" → Disable workflow
 - **Manuell starten:** GitHub → Actions → „Run workflow"
 - **Zurück zur Vollautomatik (nicht empfohlen für YMYL/Google-Sichtbarkeit):**
   Repository-Variable `AUTO_PUBLISH` auf `1` setzen (GitHub → Settings →

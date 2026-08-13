@@ -1,16 +1,21 @@
 # ============================================================
-#  TAGESZIEL 2 POSTS – tägliche Veröffentlichungs-Garantie
+#  TAGESZIEL 1 POST – Veröffentlichungs-Garantie an Publikationstagen
 #  ------------------------------------------------------------
-#  Betriebsregel (User, 12.08.2026): JEDEN Tag GENAU 2 Posts.
+#  Betriebsregel (User, 13.08.2026 – reduziert von 2/Tag auf 1 Artikel an
+#  4 Tagen/Woche): An Publikationstagen (Mo/Mi/Fr/Sa) mindestens 1 Post.
+#  Grund für die Reduktion: tägliches Massen-Publizieren erhöht das Risiko,
+#  von Google als "Scaled Content Abuse" eingestuft zu werden – besonders
+#  bei einer jungen Domain. Qualität/Tiefe statt Menge (siehe README).
 #
-#  Drei Cron-Slots pro Tag (06:30 / 12:30 / 18:30 UTC) – damit ist
-#  der Tag über mehrere Chancen abgedeckt (Selbstheilung: scheitert
+#  Drei Cron-Slots je Publikationstag (06:30 / 12:30 / 18:30 UTC) – damit
+#  ist der Tag über mehrere Chancen abgedeckt (Selbstheilung: scheitert
 #  ein Lauf an Rate-Limits o. Ä., übernimmt der nächste Slot).
 #
 #  Ablauf je Slot:
-#    1) daily_post_guard.py --fill  – zählt heute veröffentlichte
-#       Posts, generiert fehlende via Content-Engine (Profi→Relaxed
-#       →Draft-Rettung; nie mehr als 2/Tag – Cap der Engine).
+#    1) daily_post_guard.py --fill  – zählt heute qualitätsgeprüfte
+#       Posts (unabhängig vom draft-Flag, siehe engine_generate.py),
+#       generiert fehlende via Content-Engine (Profi→Relaxed→
+#       Draft-Rettung; nie mehr als 1/Tag – Cap der Engine).
 #    2) Qualitätskette (Spellcheck, Zeilenumbrüche, Titel, Cover,
 #       Affiliate) – identisch zur Content-Engine Phase 2.
 #    3) Commit + Push + Deploy-Dispatch (nur wenn Artikel entstanden).
@@ -19,13 +24,15 @@
 #  Concurrency: gleiche Gruppe wie content-engine-v2 ("content-bot") –
 #  Läufe serialisieren sich, keine Doppel-Generierung.
 # ============================================================
-name: Tagesziel 2 Posts
+name: Tagesziel 1 Post
 
 on:
   schedule:
-    - cron: "30 6 * * *"
-    - cron: "30 12 * * *"
-    - cron: "30 18 * * *"
+    # Nur an Publikationstagen (Mo=1, Mi=3, Fr=5, Sa=6) – siehe
+    # content-engine-v2.yml für dieselbe Tages-Auswahl.
+    - cron: "30 6 * * 1,3,5,6"
+    - cron: "30 12 * * 1,3,5,6"
+    - cron: "30 18 * * 1,3,5,6"
   workflow_dispatch: {}
 
 concurrency:
@@ -79,7 +86,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Keine neuen Artikel – Ziel bereits erreicht."
           else
-            git commit -m "content: Tagesziel 2 Posts – fehlende Artikel automatisch generiert"
+            git commit -m "content: Tagesziel 1 Post – fehlender Artikel automatisch generiert"
             git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
             git push
             echo "ARTIKEL_ERSTELLT=true" >> "$GITHUB_ENV"

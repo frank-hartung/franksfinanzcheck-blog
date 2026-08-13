@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
-"""TAGESZIEL-GUARD – sichert täglich 2 veröffentlichte Posts (Profi-Level,
-Selbstheilung) für FranksFinanzcheck.
+"""TAGESZIEL-GUARD – sichert an Publikationstagen mindestens 1 veröffentlichten
+Post (Profi-Level, Selbstheilung) für FranksFinanzcheck.
 
-Betriebsregel (User, 12.08.2026): JEDEN Tag werden GENAU 2 Artikel
-veröffentlicht. Dieser Guard prüft bei jedem Lauf, wie viele Posts mit
-Veröffentlichungsdatum HEUTE (draft: false) im Content liegen, und
-generiert fehlende Artikel direkt über die Content-Engine (try_generate:
-Profi → Relaxed → Draft-Rettung) – mit den gleichen Qualitäts-Gates wie
-die Engine selbst.
+Betriebsregel (User, 13.08.2026 – reduziert von 2/Tag auf 1 Artikel an 4
+Tagen/Woche): Dieser Guard prüft bei jedem Lauf, wie viele Posts mit
+Veröffentlichungsdatum HEUTE (Qualitäts-Gate bestanden, unabhängig vom
+draft-Flag) im Content liegen, und generiert fehlende Artikel direkt über
+die Content-Engine (try_generate: Profi → Relaxed → Draft-Rettung) – mit
+den gleichen Qualitäts-Gates wie die Engine selbst.
 
 SELBSTHEILUNG:
-  - 3 Cron-Slots/Tag (06:30 / 12:30 / 18:30 UTC): scheitert ein Lauf
+  - 3 Cron-Slots je Publikationstag (Mo/Mi/Fr/Sa): scheitert ein Lauf
     (z. B. API-Rate-Limit), versucht der nächste Slot automatisch erneut.
   - Fehlgeschlagene Generation → Exit 1 (Workflow-Alarm via
     alert-on-failure) + Audit-Log; nichts bleibt still.
-  - MAX_ARTIKEL_PRO_TAG-Cap (2) der Engine wird respektiert – es werden
-    nie mehr als 2/Tag veröffentlicht.
+  - MAX_ARTIKEL_PRO_TAG-Cap (Default 1, hart max. 2) der Engine wird
+    respektiert.
 
 Nutzung:
   python3 scripts/daily_post_guard.py          # nur zählen (Exit 0/3)
@@ -33,7 +33,7 @@ import re
 import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TAGESZIEL = 2  # Betriebsregel: genau 2 Posts pro Tag
+TAGESZIEL = 1  # Betriebsregel (13.08.2026): 1 Post an Publikationstagen (Mo/Mi/Fr/Sa)
 
 DO_FILL = "--fill" in sys.argv
 AS_JSON = "--json" in sys.argv
