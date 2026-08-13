@@ -1,6 +1,6 @@
 # 🔤 Grammatik-Report
 
-> **Automatisch** – 9 Artikel geprüft (LanguageTool de-DE), 112 Funde, 0 korrigiert, 112 offen.
+> **Automatisch** – 9 Artikel geprüft (LanguageTool de-DE), 107 Funde, 8 korrigiert, 99 offen.
 
 ## Funde
 
@@ -17,18 +17,14 @@
 - ⚠️ „Viele“ → „viele“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Ein“ → „ein“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
-- ⚠️ „ie “ → „die“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
+- ✅ „diebesten “ → „Stiebenden“ – Möglicher Tippfehler gefunden. (TYPOS)
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
-- ⚠️ „Weltweiter“ → „weltweiter“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Ambulante“ → „ambulante“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
-- ⚠️ „Umfassende“ → „umfassende“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
-- ⚠️ „Sofortige“ → „sofortige“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Bevor“ → „bevor“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Jahre“ → „Jahren“ – Hier scheint ein Buchstabe zu fehlen. (GRAMMAR)
 - ⚠️ „Manche“ → „manche“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Jahre“ → „Jahren“ – Hier scheint ein Buchstabe zu fehlen. (GRAMMAR)
 - ⚠️ „Viele“ → „viele“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
-- ⚠️ „Er“ → „er“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Massive“ → „massive“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Jung“ → „jung“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Jung“ → „jung“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
@@ -48,7 +44,7 @@
 - ⚠️ „it “ → „mit“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „in “ → „ein“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
-- ⚠️ „ie “ → „die“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
+- ✅ „diebesten “ → „Stiebenden“ – Möglicher Tippfehler gefunden. (TYPOS)
 ### 2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/index.md
 - ⚠️ „as “ → „das“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „nthält “ → „enthält“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
@@ -58,7 +54,7 @@
 - ⚠️ „Wenn“ → „wenn“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Zu“ → „zu“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
-- ⚠️ „ie “ → „die“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
+- ✅ „diebesten “ → „Stiebenden“ – Möglicher Tippfehler gefunden. (TYPOS)
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Die“ → „die“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Dein“ → „dein“ – Vorher wurde bereits ‚dich‘ kleingeschrieben. Aus Gründen der Einheitlichkeit ‚d
@@ -77,16 +73,15 @@
 - ⚠️ „ie “ → „die“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „utomatische “ → „automatische“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
-- ⚠️ „ie “ → „die“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
+- ✅ „diebesten “ → „Stiebenden“ – Möglicher Tippfehler gefunden. (TYPOS)
 - ⚠️ „Smarte“ → „smarte“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Manuelle“ → „manuelle“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
-- ⚠️ „So“ → „so“ – Description: Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben
 - ⚠️ „Bei“ → „bei“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 ### 2026-08-10-dsl-wechselbonus-sichern/index.md
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „in “ → „ein“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
-- ⚠️ „ie “ → „die“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
+- ✅ „diebesten “ → „Stiebenden“ – Möglicher Tippfehler gefunden. (TYPOS)
 ### 2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md
 - ⚠️ „ur “ → „nur“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „ie “ → „die“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
@@ -99,7 +94,7 @@
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „ein “ → „dein“ – Vorher wurde bereits ‚deinem‘ kleingeschrieben. Aus Gründen der Einheitlichkeit 
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
-- ⚠️ „ie “ → „die“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
+- ✅ „diebesten “ → „Stiebenden“ – Möglicher Tippfehler gefunden. (TYPOS)
 - ⚠️ „Auch“ → „auch“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „Den“ → „den“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 ### 2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md
@@ -111,7 +106,7 @@
 - ⚠️ „Der“ → „der“ – Folgt dem Doppelpunkt weder ein Substantiv noch eine wörtliche Rede oder ein vol
 - ⚠️ „chwere “ → „Schwere“ – Dieser Satz fängt nicht mit einem großgeschriebenen Wort an. (CASING)
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
-- ⚠️ „ie “ → „die“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
+- ✅ „diebesten “ → „Stiebenden“ – Möglicher Tippfehler gefunden. (TYPOS)
 - ⚠️ „Immer“ → „immer“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 ### 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/index.md
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
@@ -123,7 +118,7 @@
 - ⚠️ „Du“ → „du“ – Vorher wurde bereits ‚deine‘ kleingeschrieben. Aus Gründen der Einheitlichkeit ‚
 - ⚠️ „Dein“ → „dein“ – Vorher wurde bereits ‚deine‘ kleingeschrieben. Aus Gründen der Einheitlichkeit ‚
 - ⚠️ „Deine“ → „deine“ – Vorher wurde bereits ‚deine‘ kleingeschrieben. Aus Gründen der Einheitlichkeit ‚
-- ⚠️ „ie “ → „die“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
+- ✅ „diebesten “ → „Stiebenden“ – Möglicher Tippfehler gefunden. (TYPOS)
 - ⚠️ „Intelligente“ → „intelligente“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 
 ---

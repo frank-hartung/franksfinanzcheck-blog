@@ -1,10 +1,20 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am … – 13 Artikel geprüft, 0 Funde, 0 korrigiert, 0 offen.
+> **Automatisch** erzeugt am … – 13 Artikel geprüft, 11 Funde, 0 korrigiert, 11 offen.
 
 ## Offene Punkte
 
-_Keine offenen Punkte._
+- `Unbekanntes Wort: „zurückzuholen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „zurückzubuchen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Schufa-Ratgeber“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
 
 ---
 *Erzeugt von scripts/spellcheck.py*
