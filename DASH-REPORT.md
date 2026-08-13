@@ -1,6 +1,6 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-08-13 14:33 UTC · Modus: FIX
+**Stand:** 2026-08-13 14:46 UTC · Modus: FIX
 
 🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
 

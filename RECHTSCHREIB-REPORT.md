@@ -7,14 +7,14 @@
 - `Unbekanntes Wort: „zurückzuholen“ (Vorschläge: –)`
 - `Unbekanntes Wort: „zurückzubuchen“ (Vorschläge: –)`
 - `Unbekanntes Wort: „Schufa-Ratgeber“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Ddiebesten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „DStiebendenTarife“ (Vorschläge: –)`
+- `Unbekanntes Wort: „DStiebendenTarife“ (Vorschläge: –)`
+- `Unbekanntes Wort: „DStiebendenTarife“ (Vorschläge: –)`
+- `Unbekanntes Wort: „DStiebendenTarife“ (Vorschläge: –)`
+- `Unbekanntes Wort: „DStiebendenTarife“ (Vorschläge: –)`
+- `Unbekanntes Wort: „DStiebendenTarife“ (Vorschläge: –)`
+- `Unbekanntes Wort: „DStiebendenTarife“ (Vorschläge: –)`
+- `Unbekanntes Wort: „DStiebendenTarife“ (Vorschläge: –)`
 
 ---
 *Erzeugt von scripts/spellcheck.py*

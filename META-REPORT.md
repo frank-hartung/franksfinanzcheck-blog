@@ -33,4 +33,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Gaspreis: So sicherst du dir jetzt günstige T | 59 | 150 | 8 | ✅ |
 
 ---
-*Erzeugt am 2026-08-13 um 14:33 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-08-13 um 14:46 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
