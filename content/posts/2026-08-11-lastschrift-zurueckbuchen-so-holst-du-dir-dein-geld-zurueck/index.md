@@ -10,7 +10,7 @@ draft: false
 tags: ["Lastschrift", "SEPA-Lastschrift", "Girokonto", "Banking", "Geld zurück"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-keywords: ["Lastschrift", "SEPA-Lastschrift", "Girokonto", "Banking", "Geld zurück", "Bankeinzug", "Lastschriftmandat"]
+keywords: ["Lastschrift", "SEPA-Lastschrift", "Girokonto", "Banking", "Geld zurück", "Bankeinzug", "Lastschriftmandat", "Rücklastschrift", "Einzugsermächtigung"]
 author: "Frank Hartung"
 erfahrung: "Eine unberechtigte Lastschrift habe ich selbst erlebt – die Rückbuchung war einfacher als gedacht, aber die Fristen sind streng. Meine Erfahrung: Wer die 8-Wochen-Frist kennt und Belege aufbewahrt, holt sich sein Geld in wenigen Tagen zurück."
 

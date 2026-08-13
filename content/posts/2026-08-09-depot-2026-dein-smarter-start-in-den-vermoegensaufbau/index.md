@@ -6,7 +6,7 @@ draft: false
 tags: ["Depot eröffnen", "ETF", "Vermögensaufbau", "Broker"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-keywords: ["Depot 2026", "Vermögensaufbau", "ETF-Sparplan", "Neobroker", "Depotvergleich 2026", "Bestes Depot 2026"]
+keywords: ["Depot 2026", "Vermögensaufbau", "ETF-Sparplan", "Neobroker", "Depotvergleich 2026", "Bestes Depot 2026", "ETF Sparplan 2026", "Broker Vergleich 2026"]
 author: "Frank Hartung"
 erfahrung: "Ich habe mehrere Neobroker selbst getestet und mein Depot zwischen zwei Anbietern umgezogen. Dabei habe ich gelernt: Die Ordergebühr ist nur die halbe Wahrheit – Spreads, Fremdwährungsgebühren und der Freistellungsauftrag entscheiden über die tatsächlichen Kosten."
 
