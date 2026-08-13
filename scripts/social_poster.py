@@ -132,11 +132,26 @@ def umlaut_free(s: str) -> str:
              .replace("Ä", "Ae").replace("Ö", "Oe").replace("Ü", "Ue").replace("ß", "ss"))
 
 
+ACRONYMS = {"dsl", "etf", "kfz", "sepa", "wlan", "dns", "vpn", "gez", "agb", "eeg", "kwh", "iban", "bic"}
+
+
 def hashtags(tags: list[str], max_tags: int = 3) -> str:
+    """Baut CamelCase-Hashtags aus Artikel-Tags.
+
+    BUGFIX (13.08.): reines .capitalize() pro Wort zerstörte bekannte
+    Abkürzungen (z. B. 'ETF' -> '#Etf', 'DSL' -> '#Dsl') – wirkt auf Mastodon
+    unprofessionell. Bekannte Abkürzungen (ACRONYMS) bleiben jetzt komplett
+    großgeschrieben.
+    """
     result = []
     for tag in tags[:max_tags]:
-        camel = "".join(w.capitalize() for w in umlaut_free(tag).split())
-        camel = re.sub(r"[^A-Za-z0-9]", "", camel)
+        parts = []
+        for w in re.split(r"[\s\-]+", umlaut_free(tag)):
+            core = re.sub(r"[^A-Za-z0-9]", "", w)
+            if not core:
+                continue
+            parts.append(core.upper() if core.lower() in ACRONYMS else core.capitalize())
+        camel = "".join(parts)
         if camel:
             result.append(f"#{camel}")
     if "#Finanzen" not in result:
@@ -225,6 +240,48 @@ def post_mastodon(text: str, image: Path | None) -> tuple[bool, str]:
                 "Authorization": f"Bearer {MASTODON_TOKEN}",
                 "Content-Type": "application/x-www-form-urlencoded",
             },
+        )
+        return True, resp.get("url", "")
+    except urllib.error.HTTPError as exc:
+        return False, f"HTTP {exc.code}: {exc.read().decode()[:200]}"
+    except Exception as exc:
+        return False, str(exc)[:200]
+
+
+def get_status_mastodon(status_id: str) -> dict:
+    req = urllib.request.Request(
+        f"{MASTODON_INSTANCE}/api/v1/statuses/{status_id}",
+        headers={"Authorization": f"Bearer {MASTODON_TOKEN}"} if MASTODON_TOKEN else {},
+        method="GET",
+    )
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return json.loads(resp.read().decode())
+
+
+def edit_mastodon(status_id: str, text: str) -> tuple[bool, str]:
+    """Bearbeitet einen bereits veröffentlichten Status (PUT statt POST) –
+    z. B. um nachträglich bessere Hashtags zu setzen, ohne einen Duplikat-Post
+    zu erzeugen. WICHTIG: Mastodon entfernt beim Edit angehängte Medien, wenn
+    'media_ids[]' nicht erneut mitgeschickt werden – deshalb wird das
+    vorhandene Bild zuerst per GET ausgelesen und unverändert mitgesendet."""
+    try:
+        current = get_status_mastodon(status_id)
+    except Exception as exc:  # noqa: BLE001
+        return False, f"Status nicht lesbar: {exc}"
+    payload = {"status": text}
+    media = current.get("media_attachments") or []
+    if media:
+        payload["media_ids[]"] = media[0]["id"]
+    body = "&".join(f"{k}={urllib.parse.quote(str(v))}" for k, v in payload.items()).encode()
+    try:
+        resp = http_json(
+            f"{MASTODON_INSTANCE}/api/v1/statuses/{status_id}",
+            data=body,
+            headers={
+                "Authorization": f"Bearer {MASTODON_TOKEN}",
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            method="PUT",
         )
         return True, resp.get("url", "")
     except urllib.error.HTTPError as exc:

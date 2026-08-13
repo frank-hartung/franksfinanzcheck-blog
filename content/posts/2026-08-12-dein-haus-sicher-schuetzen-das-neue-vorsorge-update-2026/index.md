@@ -3,7 +3,7 @@ title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
 description: Erfahre, wie du dein Haus 2026 optimal absicherst. Welche Versicherung wirklich zählt und wie sich der Schutz gegen Elementarschäden verändert hat.
 date: 2026-08-12T21:39:22Z
 draft: false
-tags: []
+tags: ["Hausversicherung", "Wohngebäudeversicherung", "Elementarschutz"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"

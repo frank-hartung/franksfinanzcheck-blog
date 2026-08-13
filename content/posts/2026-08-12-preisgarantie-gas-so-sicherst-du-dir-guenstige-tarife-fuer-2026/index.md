@@ -3,7 +3,7 @@ title: "Preisgarantie Gas: So sicherst du dir günstige Tarife für 2026"
 description: Erfahre, warum die Gaspreise 2026 steigen und wie du mit einer Preisgarantie Gas dauerhaft deine Kosten senkst. Jetzt Gasrechnung sparen und wechseln!
 date: 2026-08-12T09:48:00Z
 draft: false
-tags: []
+tags: ["Gaspreis", "Gastarif wechseln", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

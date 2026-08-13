@@ -34,9 +34,10 @@ DEFAULT_INTRO = "🔁 Nochmal ans Herz gelegt:"
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Postet einen bestehenden Artikel manuell auf Mastodon.")
+    ap = argparse.ArgumentParser(description="Postet einen bestehenden Artikel manuell auf Mastodon (oder bearbeitet einen vorhandenen Post).")
     ap.add_argument("--slug", required=True, help="Ordnername unter content/posts/, z. B. 2026-08-12-preisgarantie-gas-...")
-    ap.add_argument("--intro", default=DEFAULT_INTRO, help="Individueller Einleitungssatz (Standard: Spotlight-Hinweis)")
+    ap.add_argument("--intro", default=None, help="Individueller Einleitungssatz (Standard: Spotlight-Hinweis; leerer String = kein Intro)")
+    ap.add_argument("--edit-status-id", default=None, help="Bearbeitet einen VORHANDENEN Status (PUT) statt einen neuen zu posten (POST) – z. B. um Hashtags nachträglich zu korrigieren, ohne Duplikat-Post.")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -58,7 +59,14 @@ def main():
         hook = hook[:200].rsplit(" ", 1)[0] + " …"
     tags = sp.hashtags(fm.get("tags", []))
 
-    text = f"{args.intro}\n\n📌 {title}\n\n{hook}\n\n🔗 {url}\n\n{tags}"
+    # --intro nicht gesetzt -> Standard-Spotlight-Hinweis (neuer Post).
+    # --intro "" (explizit leer) -> KEIN Intro, entspricht 1:1 dem Format
+    # von scripts/social_poster.py::build_post() – wichtig beim Bearbeiten
+    # eines automatisch erzeugten Posts, damit nur die Hashtags korrigiert
+    # werden und der Rest des Textes unverändert bleibt.
+    intro = DEFAULT_INTRO if args.intro is None else args.intro
+    parts = [p for p in (intro, f"📌 {title}", hook, f"🔗 {url}", tags) if p]
+    text = "\n\n".join(parts)
     text = text[:497] + "…" if len(text) > 500 else text
 
     image = sp.cover_path(slug_dir, fm)
@@ -66,6 +74,8 @@ def main():
     print("Post-Text:")
     print(text)
     print(f"Bild: {image if image else '(kein Cover gefunden)'}")
+    if args.edit_status_id:
+        print(f"Modus: BEARBEITEN von Status {args.edit_status_id}")
 
     if args.dry_run:
         print("[DRY-RUN] Es wurde nichts gesendet.")
@@ -74,12 +84,18 @@ def main():
     if not sp.MASTODON_TOKEN:
         sys.exit("FEHLER: Kein MASTODON_ACCESS_TOKEN gesetzt – siehe ANLEITUNG-SOCIAL-MEDIA.md.")
 
-    ok, ref = sp.post_mastodon(text, image)
-    sp.append_log(args.slug, "mastodon-manual", ok, ref)
+    if args.edit_status_id:
+        ok, ref = sp.edit_mastodon(args.edit_status_id, text)
+        sp.append_log(args.slug, "mastodon-manual-edit", ok, ref)
+    else:
+        ok, ref = sp.post_mastodon(text, image)
+        sp.append_log(args.slug, "mastodon-manual", ok, ref)
+
     if not ok:
         sys.exit(f"FEHLER: Mastodon-Post fehlgeschlagen: {ref}")
-    print(f"✅ Gepostet: {ref}")
+    print(f"✅ {'Bearbeitet' if args.edit_status_id else 'Gepostet'}: {ref}")
 
 
 if __name__ == "__main__":
     main()
+

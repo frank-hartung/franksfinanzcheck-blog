@@ -32,6 +32,7 @@ Aufruf (wie bisherige Bot-Umgebung):
   PIN_TOPICS=1 python3 scripts/engine_generate.py
 """
 import datetime
+import json
 import os
 import random
 import re
@@ -157,13 +158,47 @@ def now_utc_iso() -> str:
             - datetime.timedelta(minutes=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, quality_level=None):
+_TITLE_STOPWORDS = {
+    "der", "die", "das", "den", "dem", "des", "und", "oder", "für", "im",
+    "in", "auf", "zu", "ein", "eine", "einen", "einer", "mit", "ohne", "so",
+    "wie", "was", "wer", "wann", "dein", "deine", "deinen", "beim", "bei",
+    "vom", "von", "am", "an", "ist", "sind", "wird", "werden",
+}
+
+
+def _title_keywords(title: str, limit: int = 3) -> list[str]:
+    """Fallback-Tags aus dem Titel, falls ein Thema (data/topics.yaml) keine
+    eigenen 'keywords' mitbringt (~8 % der Themen). Rein wortbasiert, ohne
+    KI-Aufruf – vermeidet, dass diese Artikel trotz Bugfix wieder mit
+    'tags: []' enden."""
+    words = re.findall(r"[A-Za-zÄÖÜäöüß\-]{4,}", title)
+    out: list[str] = []
+    for w in words:
+        if w.lower() in _TITLE_STOPWORDS or w in out:
+            continue
+        out.append(w)
+        if len(out) >= limit:
+            break
+    return out
+
+
+def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, quality_level=None, keywords=None):
     """Speichert Artikel als Page-Bundle (Format wie bisherige Pipeline).
     quality_level: optionale, echte Qualitätsstufe ("profi") fürs
     Frontmatter-Feld engine_level – bleibt auch bei draft:true (manuelle
     Freigabe) sichtbar, statt pauschal auf "draft" zu fallen (das bleibt
     reserviert für echte Qualitäts-Gate-Ausfälle, Ebene 2). Die frühere
-    Zwischenstufe "relaxed" gibt es seit 13.08.2026 nicht mehr."""
+    Zwischenstufe "relaxed" gibt es seit 13.08.2026 nicht mehr.
+
+    keywords: optionale Themen-Keywords (aus data/topics.yaml) – werden zu
+    echten Tags normalisiert (BUGFIX 13.08.2026: diese Funktion schrieb
+    bislang IMMER 'tags: []', unabhängig von vorhandenen Keywords. Dadurch
+    hatten alle über diesen Pfad erzeugten Artikel keine Tags, was u. a.
+    scripts/social_poster.py's Hashtag-Generierung auf den reinen
+    '#Finanzen'-Fallback zurückfallen ließ, statt themenspezifische Hashtags
+    zu bilden). Fehlen einem Thema die 'keywords' (~8 % der Themen in
+    data/topics.yaml), greift _title_keywords() als Fallback, damit auch
+    diese Artikel nicht mit leeren Tags enden."""
     date = datetime.date.today().isoformat()
     slug = g.slugify(title)
     bundle_dir = os.path.join(g.POSTS_DIR, f"{date}-{slug}")
@@ -187,6 +222,8 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, 
     if inspiration:
         insp_line = f"\ninspiration: {yaml_quote(inspiration)}\n"
     draft_line = "true" if draft else "false"
+    kw_source = keywords if keywords else _title_keywords(title)
+    tags = g.normalize_tags(kw_source[:4]) if kw_source else []
     # engine_level ist jetzt binär: "profi" (Ebene 1 bestanden) oder "draft"
     # (Ebene 2, Qualitäts-Rettung) – keine "relaxed"-Zwischenstufe mehr.
     engine_level = quality_level or "draft"
@@ -196,7 +233,7 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, 
         f'description: {yaml_quote(desc)}\n'
         f"date: {now_utc_iso()}\n"
         f"draft: {draft_line}\n"
-        'tags: []\n'
+        f'tags: {json.dumps(tags, ensure_ascii=False)}\n'
         'categories: ["Ratgeber"]\n'
         'pillar: "' + (pillar or "konto-karten") + '"\n' 
         "author: \"Frank Hartung\"\n"
@@ -209,6 +246,8 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, 
     with open(filename, "w", encoding="utf-8") as fh:
         fh.write(frontmatter + body.strip() + "\n" + cta)
     return filename, slug
+
+
 
 
 
@@ -397,12 +436,12 @@ def main():
         if should_auto_publish(level):
             filename, slug = save_article(title, desc, body, draft=False,
                                           inspiration=topic.get("title"), pillar=topic.get("pillar"),
-                                          quality_level=level)
+                                          quality_level=level, keywords=topic.get("keywords"))
             print(f"  ✓ Artikel automatisch veröffentlicht ({level}): {slug}")
         else:
             filename, slug = save_article(title, desc, body, draft=True,
                                           inspiration=topic.get("title"), pillar=topic.get("pillar"),
-                                          quality_level=level)
+                                          quality_level=level, keywords=topic.get("keywords"))
             print(f"  ✓ Entwurf gesichert (Qualität: {level}, wartet auf manuelle Freigabe): {slug}")
     except Exception as exc:  # noqa: BLE001
         print(f"  ✗ Speichern fehlgeschlagen: {exc}")

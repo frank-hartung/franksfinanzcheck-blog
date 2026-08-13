@@ -135,7 +135,7 @@ def fill_missing():
             filename, slug = eg.save_article(title, desc, body, draft=not auto_publish_now,
                                              inspiration=topic.get("title"),
                                              pillar=topic.get("pillar"),
-                                             quality_level="profi")
+                                             quality_level="profi", keywords=topic.get("keywords"))
             created += 1
             used_titles.add(title.lower())
             if auto_publish_now:

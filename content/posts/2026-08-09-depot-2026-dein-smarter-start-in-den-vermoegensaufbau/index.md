@@ -3,7 +3,7 @@ title: "Depot 2026: Dein smarter Start in den Vermögensaufbau"
 description: "Du willst dein erstes Depot eröffnen? Erfahre hier, worauf Anfänger 2026 bei Gebühren, ETF-Sparplänen und Neobrokern unbedingt achten müssen."
 date: 2026-08-09
 draft: false
-tags: []
+tags: ["Depot eröffnen", "ETF", "Vermögensaufbau", "Broker"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 keywords: ["Depot 2026", "Vermögensaufbau", "ETF-Sparplan", "Neobroker"]

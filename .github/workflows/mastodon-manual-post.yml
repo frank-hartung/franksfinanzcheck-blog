@@ -17,7 +17,11 @@ on:
         description: "Ordnername unter content/posts/, z.B. 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026"
         required: true
       intro:
-        description: "Einleitungssatz (optional, Standard: Spotlight-Hinweis)"
+        description: "Einleitungssatz (leer lassen = Standard-Spotlight-Hinweis bei neuem Post; explizit leer + edit_status_id = unverändert lassen)"
+        required: false
+        default: ""
+      edit_status_id:
+        description: "Optional: vorhandenen Status bearbeiten (PUT) statt neu zu posten – z.B. um Hashtags zu korrigieren"
         required: false
         default: ""
       dry_run:
@@ -46,10 +50,16 @@ jobs:
           MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
           POST_SLUG: ${{ github.event.inputs.slug }}
           POST_INTRO: ${{ github.event.inputs.intro }}
+          POST_EDIT_ID: ${{ github.event.inputs.edit_status_id }}
           POST_DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
           CMD=(python3 scripts/mastodon_manual_post.py --slug "$POST_SLUG")
-          if [ -n "$POST_INTRO" ]; then
+          if [ -n "$POST_EDIT_ID" ]; then
+            # Beim Bearbeiten IMMER --intro mitgeben (auch leer!), damit das
+            # Skript nicht den Standard-Spotlight-Satz einfügt, sondern
+            # exakt das gewünschte Format (leer = wie automatischer Post).
+            CMD+=(--edit-status-id "$POST_EDIT_ID" --intro "$POST_INTRO")
+          elif [ -n "$POST_INTRO" ]; then
             CMD+=(--intro "$POST_INTRO")
           fi
           if [ "$POST_DRY_RUN" = "true" ]; then
