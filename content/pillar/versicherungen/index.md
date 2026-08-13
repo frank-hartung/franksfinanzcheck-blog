@@ -28,7 +28,7 @@ Sturm, Starkregen und Einbruch: Die Anforderungen an eine solide Absicherung fü
 
 ## Weitere wichtige Versicherungen im Überblick
 
-Neben Tier- und Wohngebäudeschutz lohnt sich für die meisten Menschen vor allem eine **Privathaftpflichtversicherung** – schon ab rund 30 € im Jahr sichert sie dich gegen Schäden ab, für die du sonst mit deinem gesamten Vermögen haften würdest. Bei **Zahnzusatz-, Unfall- und Reisekrankenversicherung** kommt es dagegen stark auf deine persönliche Situation an: Wer absehbar größere Zahnbehandlungen braucht, für den lohnt sich eine Zusatzversicherung; für Auslandsreisen ist eine Reisekrankenversicherung fast immer eine sinnvolle, günstige Ergänzung.
+Neben Tier- und Wohngebäudeschutz lohnt sich für die meisten Menschen vor allem eine **Privathaftpflichtversicherung** – schon ab rund 30 € im Jahr sichert sie dich gegen Schäden ab, für die du sonst mit deinem gesamten Vermögen haften würdest. Bei **Zahnzusatz-, Unfall- und Reisekrankenversicherung** kommt es dagegen stark auf deine persönliche Situation an: Wer absehbar größere Zahnbehandlungen braucht, für den lohnt sich eine Zusatzversicherung; für Auslandsreisen ist eine Reisekrankenversicherung fast immer eine sinnvolle, günstige Ergänzung.
 
 ## Häufige Fragen
 

@@ -1,19 +1,8 @@
 {
- "total": 25,
+ "total": 13,
  "errors": 0,
  "fixed": 0,
  "posts": [
-  {
-   "slug": "frugalismus",
-   "title": "Frugalismus: Der große Ratgeber für finanzielle Fr",
-   "pillar": "",
-   "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
-   ],
-   "ok": true
-  },
   {
    "slug": "internet-dsl",
    "title": "Internet & DSL: Der große Ratgeber für schnelles N",
@@ -26,15 +15,6 @@
   {
    "slug": "konto-karten",
    "title": "Konto & Karten: Der große Ratgeber für gebührenfre",
-   "pillar": "",
-   "fixed": 0,
-   "errors": [],
-   "infos": [],
-   "ok": true
-  },
-  {
-   "slug": "mietwagen",
-   "title": "Mietwagen & Reisen: Der große Ratgeber zum Geld sp",
    "pillar": "",
    "fixed": 0,
    "errors": [],
@@ -59,66 +39,6 @@
    "infos": [
     "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
-   "ok": true
-  },
-  {
-   "slug": "2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich",
-   "title": "ETF-Sparplan für Einsteiger: So startest du monatl",
-   "pillar": "frugalismus",
-   "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
-   ],
-   "ok": true
-  },
-  {
-   "slug": "2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe",
-   "title": "Internet-Turbo: Warum ich meinen DNS-Server getaus",
-   "pillar": "internet-dsl",
-   "fixed": 0,
-   "errors": [],
-   "infos": [],
-   "ok": true
-  },
-  {
-   "slug": "2026-08-06-frugalismus-im-alltag",
-   "title": "Frugalismus im Alltag: So sparst du jeden Monat ba",
-   "pillar": "frugalismus",
-   "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
-   ],
-   "ok": true
-  },
-  {
-   "slug": "2026-08-06-turbo-fuers-netz",
-   "title": "Turbo fürs Netz: DNS-Wechsel für schnelleres Inter",
-   "pillar": "internet-dsl",
-   "fixed": 0,
-   "errors": [],
-   "infos": [],
-   "ok": true
-  },
-  {
-   "slug": "2026-08-07-frugalismus-fuer-den-erfolg",
-   "title": "Frugalismus für den Erfolg: Der Weg in die Freihei",
-   "pillar": "frugalismus",
-   "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
-   ],
-   "ok": true
-  },
-  {
-   "slug": "2026-08-07-mietwagen-fuer-den-spaetsommer",
-   "title": "Mietwagen im Spätsommer: Günstig buchen und sparen",
-   "pillar": "mietwagen",
-   "fixed": 0,
-   "errors": [],
-   "infos": [],
    "ok": true
   },
   {
@@ -160,16 +80,7 @@
   {
    "slug": "2026-08-10-dsl-wechselbonus-sichern",
    "title": "DSL-Wechselbonus sichern: So sparst du beim Intern",
-   "pillar": "konto-karten",
-   "fixed": 0,
-   "errors": [],
-   "infos": [],
-   "ok": true
-  },
-  {
-   "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-   "title": "Sicher heizen: So schützt dich eine Gaspreisgarant",
-   "pillar": "konto-karten",
+   "pillar": "internet-dsl",
    "fixed": 0,
    "errors": [],
    "infos": [],
@@ -204,39 +115,8 @@
   },
   {
    "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-   "title": "Preisgarantie Gas: So sicherst du dir günstige Tar",
+   "title": "Gaspreis: So sicherst du dir jetzt günstige Tarife",
    "pillar": "strom-sparen",
-   "fixed": 0,
-   "errors": [],
-   "infos": [],
-   "ok": true
-  },
-  {
-   "slug": "50-30-20-regel-einfach-erklaert",
-   "title": "Die 50-30-20-Regel: Die perfekte Formel für deine ",
-   "pillar": "frugalismus",
-   "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
-   ],
-   "ok": true
-  },
-  {
-   "slug": "7-gewohnheiten-finanzielle-freiheit",
-   "title": "Finanzielle Freiheit: 7 Gewohnheiten für mehr Unab",
-   "pillar": "frugalismus",
-   "fixed": 0,
-   "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
-   ],
-   "ok": true
-  },
-  {
-   "slug": "kfz-versicherung-wechseln",
-   "title": "Kfz-Versicherung wechseln: Wann es sich wirklich l",
-   "pillar": "versicherungen",
    "fixed": 0,
    "errors": [],
    "infos": [],

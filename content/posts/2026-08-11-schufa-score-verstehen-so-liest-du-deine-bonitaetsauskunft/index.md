@@ -32,7 +32,7 @@ Wir klären die wichtigsten Punkte für deinen Geldbeutel:
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**
+💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was die Schufa eigentlich ist (und was sie weiß)

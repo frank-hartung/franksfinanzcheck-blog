@@ -29,7 +29,7 @@ Die Zeiten, in denen ein einfacher Basisschutz ausreichte, sind vorbei. In der P
 
 Testergebnisse unabhängiger Institute machen deutlich: Die reine Brandabsicherung ist nur noch ein Bruchteil dessen, was du heute benötigst. Wer sein Eigentum heute betrachtet, muss die Gebäudehülle als Gesamtsystem verstehen. Jedes Leck im Dach oder jeder Riss im Mauerwerk kann durch extreme Druckverhältnisse bei Stürmen zu massiven Folgeschäden führen. Eine moderne Police fängt genau diese Szenarien ab. Sie bietet dir finanzielle Sicherheit, wenn die Naturkräfte unberechenbar werden.
 
-## Die Elementarschaden-Reform 2026: Was jetzt gilt
+## Die Elementarschaden-Reform 2026:<br>Was jetzt gilt
 
 Seit Beginn des Jahres 2026 hat sich die Landschaft der Gebäudeabsicherung grundlegend verändert. Gesetzliche Neuregelungen haben dazu geführt, dass der Schutz gegen Elementarschäden kein optionaler Zusatz mehr ist. In vielen Bundesländern wurde eine Versicherungspflicht oder zumindest eine strenge Opt-out-Regelung eingeführt. Das Ziel ist klar: Der Staat will bei Katastrophenfällen nicht mehr als alleiniger Retter einspringen müssen. Für dich bedeutet das, dass du deinen Versicherungsschutz aktiv prüfen und gegebenenfalls anpassen musst.
 
@@ -50,7 +50,7 @@ Diese Systeme melden Unregelmäßigkeiten direkt auf dein Smartphone. So kannst 
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife für Hausrat- und Gebäudeversicherung findest du über unseren Partner-Vergleich: [**Jetzt Hausratversicherung vergleichen**](/go/hausrat/) – in wenigen Minuten siehst du, was dein aktueller Vertrag im Vergleich wirklich kostet.
 
-## Wertermittlung: So verhinderst du eine Unterversicherung
+## Wertermittlung:<br>So verhinderst du eine Unterversicherung
 
 Ein häufiger Fehler ist die falsche Einschätzung des Gebäudewertes. Wenn dein Tarif auf veralteten Daten basiert, zahlst du im Ernstfall drauf. Die Baukosten sind in den letzten Jahren kontinuierlich gestiegen. Eine Summe, die vor zehn Jahren angemessen war, reicht heute oft nicht mehr für einen kompletten Wiederaufbau. Hier greift das Prinzip des gleitenden Neuwertes. Das bedeutet, dass sich die Versicherungssumme automatisch an die Preisentwicklung im Baugewerbe anpasst.
 

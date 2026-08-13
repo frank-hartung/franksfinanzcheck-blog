@@ -19,15 +19,15 @@ Strom und Gas gehören zu den größten Posten im Haushaltsbudget – und zu den
 * **Intelligente Heizsysteme** senken den Verbrauch automatisch, ohne dass du auf Komfort verzichten musst.
 * Eine **Gaspreisgarantie** schützt dich vor der nächsten Preiserhöhung – wenn du die Bedingungen genau prüfst.
 
-## Wärmepumpe: Mit dem richtigen Stromtarif richtig sparen
+## Wärmepumpe:<br>Mit dem richtigen Stromtarif richtig sparen
 
 Eine Wärmepumpe ist nur so wirtschaftlich wie der Stromtarif, mit dem sie läuft. Worauf es bei Wärmepumpentarifen ankommt, welche Fallstricke es gibt und wie du die Heizkosten spürbar senkst, erkläre ich in [Stromtarif für Wärmepumpe: So sparst du beim Heizen](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/).
 
-## Intelligente Heizsysteme: Energiekosten automatisch senken
+## Intelligente Heizsysteme:<br>Energiekosten automatisch senken
 
 Smarte Thermostate und intelligente Heizsteuerungen sparen bares Geld, ohne dass du ständig selbst nachjustieren musst. Welche Systeme sich lohnen und wie viel du damit realistisch einsparst, zeige ich in [Intelligente Heizsysteme: So senkst du Energiekosten](../../posts/2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen/).
 
-## Gaspreisgarantie: Dich vor der nächsten Preiserhöhung schützen
+## Gaspreisgarantie:<br>Dich vor der nächsten Preiserhöhung schützen
 
 Die Gaspreise stehen 2026 erneut unter Druck. Wie eine Preisgarantie funktioniert, worauf du im Kleingedruckten achten musst und wie du dir jetzt einen günstigen Tarif sicherst, steht in [Preisgarantie Gas: So sicherst du dir günstige Tarife für 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/).
 
@@ -38,7 +38,7 @@ Unabhängig vom konkreten Tarif gilt: Vergleiche mindestens einmal im Jahr Arbei
 ## Häufige Fragen
 
 ### Wie viel kann ich beim Stromanbieter-Wechsel sparen?
-Je nach Region und Verbrauch sind 150 € bis 300 € pro Jahr realistisch. Entscheidend ist der Vergleich von Arbeitspreis, Grundgebühr und Einmalboni.
+Je nach Region und Verbrauch sind 150 € bis 300 € pro Jahr realistisch. Entscheidend ist der Vergleich von Arbeitspreis, Grundgebühr und Einmalboni.
 
 ### Lohnt sich eine Wärmepumpe 2026?
 Das hängt stark von Dämmung, Vorlauftemperatur und dem gewählten Stromtarif ab. Die vollständige Einordnung findest du im Wärmepumpen-Ratgeber oben.

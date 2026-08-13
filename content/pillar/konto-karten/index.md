@@ -18,11 +18,11 @@ Beim Geld anlegen, absichern und zurückholen verschenken viele Menschen bares G
 * Bei einer **unberechtigten Lastschrift** hast du bis zu 8 Wochen Zeit, dir dein Geld zurückzuholen – wenn du weißt, wie.
 * Dein **Schufa-Score** entscheidet über Kreditkonditionen und Vertragsabschlüsse – ihn zu kennen und zu prüfen lohnt sich immer.
 
-## Depot & ETF: Dein Einstieg in den Vermögensaufbau
+## Depot & ETF:<br>Dein Einstieg in den Vermögensaufbau
 
 Ein Depot eröffnest du heute in wenigen Minuten – die eigentliche Arbeit beginnt bei der Wahl des richtigen Brokers, der ersten Investition und dem Blick auf Steuern und Sicherheit. Die wichtigsten Schritte für Einsteiger erkläre ich in [Depot 2026: Dein smarter Start in den Vermögensaufbau](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/).
 
-## Lastschrift zurückbuchen: Dein Geld sicher zurückholen
+## Lastschrift zurückbuchen:<br>Dein Geld sicher zurückholen
 
 Eine unberechtigte oder falsche Lastschrift ist ärgerlich, aber meistens unkompliziert zu klären – wenn du die Fristen kennst. Wie die Rückbuchung Schritt für Schritt funktioniert und worauf du bei den Belegen achten solltest, steht in [Lastschrift zurückbuchen: So holst du dir dein Geld zurück](../../posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/).
 
@@ -37,7 +37,7 @@ Unabhängig von den konkreten Themen oben gilt: Ein kostenloses Girokonto ist he
 ## Häufige Fragen
 
 ### Wie viel Geld brauche ich für den Einstieg ins Depot?
-Bei modernen Brokern kostet die Eröffnung 0 €, ETF-Sparpläne sind oft schon ab 1 € im Monat möglich. Details im Depot-Ratgeber oben.
+Bei modernen Brokern kostet die Eröffnung 0 €, ETF-Sparpläne sind oft schon ab 1 € im Monat möglich. Details im Depot-Ratgeber oben.
 
 ### Wie lange habe ich Zeit, eine Lastschrift zurückzubuchen?
 Bei berechtigten Zahlungen ohne Mandat in der Regel 8 Wochen. Die genauen Fristen und Schritte stehen im Lastschrift-Ratgeber oben.
