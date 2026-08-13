@@ -9,7 +9,14 @@
 ============================================================ -}}
 
 {{- /* ---------- Meta-Basics ---------- */ -}}
-{{- if and (eq .Kind "home") (site.Params.description) -}}
+{{- /* 13.08.2026 Bugfix: content/_index.md hat ein eigenes description-
+       Frontmatter-Feld, das die Theme-eigene head.html bereits als
+       <meta name="description"> rendert (PaperMod: .Description-Fallback).
+       Dieser Block hier lief bisher IMMER zusätzlich auf der Startseite,
+       unabhängig davon – das erzeugte zwei (teils inhaltlich abweichende)
+       description-Tags im HTML. Nur noch rendern, wenn die Seite selbst
+       keine eigene Description gesetzt hat (Fallback-Fall). */ -}}
+{{- if and (eq .Kind "home") (not .Description) (site.Params.description) -}}
 <meta name="description" content="{{ site.Params.description }}">
 {{- end -}}
 {{- with site.Params.author -}}

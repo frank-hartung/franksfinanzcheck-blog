@@ -4,11 +4,11 @@
 # Sektion asset:<pfad> = SHA-256 der kanonischen Marken-Artefakte (bake_brand.py)
 
 - key: homeInfoParams.Title
-  expected: "Willkommen bei FranksFinanzcheck! 👋"
+  expected: "Geld sparen ohne Verzicht: Dein Ratgeber für Strom, Gas, Versicherungen & Finanzen"
 - key: homeInfoParams.Content
-  expected: "💰 Geld sparen ohne Gürtel enger zu schnallen – genau darum geht es hier.\\n\\nJeden Tag erscheint ein neuer, verständlicher Ratgeber: **Strom, Gas und DSL günstiger**, Versicherungen richtig wählen, Konto & Karte ohne Gebührenfallen, dazu Frugalismus-Tricks und Budgetplanung, die wirklich im Alltag funktionieren. Ohne Fachchinesisch, ohne Verkaufsdruck – dafür mit konkreten Zahlen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen.\\n\\nStöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+  expected: "💰 Geld sparen ohne Gürtel enger zu schnallen – genau darum geht es hier.\\n\\nRegelmäßig erscheint ein neuer, verständlicher Ratgeber: **Strom, Gas und Internet günstiger**, Versicherungen richtig wählen und Konto & Karte ohne Gebührenfallen. Ohne Fachchinesisch, ohne Verkaufsdruck – dafür mit konkreten Zahlen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen.\\n\\nStöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
 - key: params.description
-  expected: "Geld sparen & Frugalismus: Praxistipps zu Budgetplanung, Strom- & Gastarifen, DSL, Versicherungen und Reisen – so sparst du monatlich bares Geld."
+  expected: "Geld sparen bei Strom, Gas, Internet und Versicherungen: Praxistipps und ehrliche Tarifvergleiche – so sparst du monatlich bares Geld."
 - key: params.disclaimer
   expected: "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 - key: asset:static/images/brand/logo.svg

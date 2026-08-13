@@ -1,6 +1,6 @@
 # 🎯 AFFILIATE-MARKETING-REPORT
 
-**Stand:** 2026-08-13 10:28 UTC · Modus: REPORT
+**Stand:** 2026-08-13 11:53 UTC · Modus: REPORT
 **Artikel:** 9 · **Kritisch:** 0 · **Autofixes:** 0
 
 ## 🟡 AM2 – Erste CTA sehr spaet (>50% Artikel) (1)

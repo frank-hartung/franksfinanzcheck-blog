@@ -95,8 +95,22 @@ DEEP_HINTS = [
 
 def route_for(text: str, pillar: str = "") -> str:
     """Wählt den konversionsstärksten Deep-Link. Erst Thema aus dem Artikel
-    (Titel + Tags + Intro), dann sauberer Pillar-Fallback."""
-    ctx = text.lower()[:1200]
+    (Titel + Tags + Intro), dann sauberer Pillar-Fallback.
+
+    13.08.2026 BUGFIX: Scannte bisher den KOMPLETTEN Dateiinhalt inkl.
+    YAML-Frontmatter (auch # Kommentarzeilen darin!) statt nur den
+    eigentlichen Artikeltext. Ein Frontmatter-Kommentar, der zufällig ein
+    Themen-Schlüsselwort als Teilstring enthielt (z. B. "gaspreis" in
+    "Gaspreisgarantie-Artikel"), reichte damit aus, um die Affiliate-Route
+    eines völlig anderen Artikels (hier: ein Girokonto/Lastschrift-Artikel)
+    fälschlich umzubiegen. Jetzt wird das Frontmatter (zwischen den ersten
+    beiden '---'-Zeilen) vor der Analyse abgeschnitten."""
+    body = text
+    if body.startswith("---"):
+        parts = body.split("---", 2)
+        if len(parts) == 3:
+            body = parts[2]
+    ctx = body.lower()[:1200]
     for pat, key in DEEP_HINTS:
         if pat.search(ctx):
             return key
@@ -326,10 +340,17 @@ def process(path: Path, reg: dict) -> dict:
     # RETARGET (universell & sabotage-robust): Jede Schnell-Tipp-Box, deren Route vom
     # Ideal abweicht, wird auf die thematisch beste Route umgeschrieben.
     # Register-Gate gegen 404. Sabotage-Test ist global (selftest) aktiv.
+    # 13.08.2026 BUGFIX: Dieser Block prüfte DO_FIX bisher NICHT – lief also
+    # auch im reinen Report-/Check-Modus und schrieb Dateien um, ohne dass
+    # --fix übergeben wurde (reproduzierbar am Lastschrift-Artikel gefunden:
+    # ein Frontmatter-KOMMENTAR enthielt zufällig die Zeichenkette "gaspreis"
+    # (aus "Gaspreisgarantie-Artikel") und route_for() scannte damals den
+    # kompletten Dateiinhalt inkl. Frontmatter/Kommentare statt nur den
+    # Artikeltext – siehe Fix in route_for() weiter oben).
     marker = "Schnell-Tipp von FranksFinanzcheck"
     best = route_for(text, pillar)
     cur_route_m = re.search(marker + r".*?/go/([\w-]+)/", text, re.S)
-    if best and best in reg and cur_route_m:
+    if DO_FIX and not DRY_RUN and best and best in reg and cur_route_m:
         cur_route = cur_route_m.group(1)
         if cur_route != best:
             new_text, n = re.subn(

@@ -1,4 +1,4 @@
 ---
 title: "FranksFinanzcheck"
-description: "Geld sparen & Frugalismus: Praxistipps zu Budgetplanung, Strom- & Gastarifen, DSL, Versicherungen und Reisen – so sparst du monatlich bares Geld."
+description: "Geld sparen bei Strom, Gas, Internet und Versicherungen: Praxistipps und ehrliche Tarifvergleiche – so sparst du monatlich bares Geld."
 ---
