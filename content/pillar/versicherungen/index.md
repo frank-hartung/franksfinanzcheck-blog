@@ -39,7 +39,7 @@ Die private Unfallversicherung wird oft überteuert verkauft. Für wen sie sich 
 
 Tierarztkosten können bei Operationen oder chronischen Erkrankungen schnell vierstellig werden. Wann sich eine Hunde- oder Katzenkrankenversicherung wirklich lohnt und worauf du beim Vergleich achten solltest, erkläre ich in [Tierversicherung: Schutz für dein Tier im Krankheitsfall](../../posts/2026-08-08-dein-tier-im-krankheitsfall/).
 
-## Wohngebäude- und Hausratschutz:<br>Das Update für 2026
+## Wohngebäude- und Hausratversicherung:<br>Das Update für 2026
 
 Sturm, Starkregen und Einbruch: Die Anforderungen an eine solide Absicherung fürs Eigenheim haben sich zuletzt spürbar verschärft. Was sich 2026 ändert und worauf du bei deiner Police jetzt achten solltest, steht in [Dein Haus sicher schützen: Das neue Vorsorge-Update 2026](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/).
 

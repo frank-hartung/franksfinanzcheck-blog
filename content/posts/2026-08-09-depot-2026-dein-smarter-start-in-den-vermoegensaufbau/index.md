@@ -131,6 +131,8 @@ Dein Vermögen bleibt auch bei einem Verlust deines Smartphones absolut sicher. 
 ### Sollte ich einen ausschüttenden oder einen thesaurierenden ETF wählen?
 Das kommt auf dein Ziel an. Ein ausschüttender ETF überweist dir Dividenden direkt auf dein Verrechnungskonto – das ist motivierend, weil du regelmäßige Zahlungen siehst. Ein thesaurierender ETF legt die Gewinne automatisch wieder an, was den Zinseszinseffekt maximiert und steuerlich (bis zum Erreichen des Freibetrags) oft effizienter ist. 2026 nutzen viele Anleger ausschüttende ETFs, bis der Freibetrag von 1.000 € ausgeschöpft ist, und wechseln danach auf thesaurierende Varianten.
 
+**Weiterlesen:** [Schufa-Score verstehen: So liest du deine Bonitätsauskunft](../../posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/)
+
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/girokonto/)

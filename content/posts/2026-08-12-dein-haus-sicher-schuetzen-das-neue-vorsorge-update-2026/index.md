@@ -71,7 +71,7 @@ Auch die Entsorgung von Trümmern erfolgt heute nach strengeren ökologischen Vo
 
 
 
-**Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/)
+**Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · [Tierversicherung: Schutz für dein Tier im Krankheitsfall](../../posts/2026-08-08-dein-tier-im-krankheitsfall/)
 ## Häufige Fragen
 
 ### Was passiert, wenn ich keine Elementarschadenversicherung abschließe?

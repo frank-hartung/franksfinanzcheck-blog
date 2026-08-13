@@ -28,3 +28,5 @@
 {"date": "2026-08-12", "modus": "FIX", "kritisch": 0, "autofix": 0}
 {"date": "2026-08-12", "modus": "FIX", "kritisch": 0, "autofix": 0}
 {"date": "2026-08-12", "modus": "FIX", "kritisch": 0, "autofix": 0}
+{"date": "2026-08-13", "modus": "REPORT", "kritisch": 0, "autofix": 1}
+{"date": "2026-08-13", "modus": "REPORT", "kritisch": 0, "autofix": 0}

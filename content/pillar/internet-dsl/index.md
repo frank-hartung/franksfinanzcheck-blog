@@ -15,7 +15,7 @@ Langsames oder überteuertes Internet kostet dich jeden Monat bares Geld – mei
 ### Das Wichtigste in Kürze
 
 * Die **DSL-Flat** lässt sich mit dem Vergleich schnell um mehrere Hundert Euro im Jahr senken.
-* Ein **Wechselbonus** bringt beim Anbieterwechsel oft 50 € bis 200 € zusätzlich.
+* Ein **Wechselbonus** bringt beim Anbieterwechsel oft 50 € bis 200 € zusätzlich.
 * Kündigungsfrist und Laufzeit vorher prüfen, damit der Wechsel reibungslos klappt.
 
 ## Der Tarifvergleich:<br>DSL-Wechselbonus mitnehmen
@@ -28,7 +28,7 @@ Der größte Hebel ist der Tarif: Viele Haushalte zahlen jahrelang für Leistung
 Über den Vergleich von Leistung, Preis und Wechselkonditionen – Schritt für Schritt erklärt im [DSL-Wechselbonus-Ratgeber](../../posts/2026-08-10-dsl-wechselbonus-sichern/).
 
 ### Lohnt sich ein Anbieterwechsel wirklich?
-In den meisten Fällen ja: Bestandskunden zahlen häufig 20 bis 30 € mehr im Monat als Neukunden für denselben Anschluss. Details dazu im [DSL-Wechselbonus-Ratgeber](../../posts/2026-08-10-dsl-wechselbonus-sichern/).
+In den meisten Fällen ja: Bestandskunden zahlen häufig 20 bis 30 € mehr im Monat als Neukunden für denselben Anschluss. Details dazu im [DSL-Wechselbonus-Ratgeber](../../posts/2026-08-10-dsl-wechselbonus-sichern/).
 
 ---
 

@@ -132,7 +132,14 @@ def _check_internal_links():
 
 
 def _check_schema():
-    """A4: Article + FAQPage + BreadcrumbList + Person im HTML."""
+    """A4: BlogPosting (bzw. Article) + FAQPage + BreadcrumbList im HTML.
+
+    13.08.2026: Das früher separate "Article"-Schema (layouts/_partials/
+    schema_article.html) wurde entfernt (Templating-Bug: doppelt escapte
+    Anführungszeichen + Verweis auf nie existierendes /images/logo.png).
+    Es war redundant zum sauberen, theme-eigenen BlogPosting-Schema, das
+    dieselben Felder abdeckt. Diese Prüfung akzeptiert daher beide Typen.
+    """
     for slug in _post_slugs():
         html_path = os.path.join(PUBLIC, "posts", slug, "index.html")
         if not os.path.exists(html_path):
@@ -140,9 +147,12 @@ def _check_schema():
         if _is_redirect_html(html_path):
             continue
         h = open(html_path, encoding="utf-8", errors="ignore").read()
-        for schema in ["Article", "FAQPage", "BreadcrumbList"]:
+        for schema in ["FAQPage", "BreadcrumbList"]:
             if f'"@type":"{schema}"' not in h and f'"@type": "{schema}"' not in h:
                 PROBLEMS.append(("A4", slug, f"{schema}-Schema fehlt"))
+        if ('"@type":"Article"' not in h and '"@type": "Article"' not in h
+                and '"@type":"BlogPosting"' not in h and '"@type": "BlogPosting"' not in h):
+            PROBLEMS.append(("A4", slug, "Article/BlogPosting-Schema fehlt"))
 
 
 def _check_dichte():

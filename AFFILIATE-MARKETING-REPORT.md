@@ -1,9 +1,11 @@
 # 🎯 AFFILIATE-MARKETING-REPORT
 
-**Stand:** 2026-08-12 16:44 UTC · Modus: FIX
-**Artikel:** 1 · **Kritisch:** 0 · **Autofixes:** 0
+**Stand:** 2026-08-13 10:28 UTC · Modus: REPORT
+**Artikel:** 9 · **Kritisch:** 0 · **Autofixes:** 0
 
-🎉 Alle Money-Pages: CTA frueh + Disclaimer komplett. Pro-Level.
+## 🟡 AM2 – Erste CTA sehr spaet (>50% Artikel) (1)
+
+- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md`
 
 ---
 _Conversion: CTA frueh sichtbar + Werbekennzeichnung oben. Google und LG sind zufrieden._

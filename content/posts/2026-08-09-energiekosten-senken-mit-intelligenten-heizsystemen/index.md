@@ -85,6 +85,9 @@ Prüfe vor der Investition den Dämmstandard deiner Immobilie. Ein schlecht isol
 * **Staatliche Förderung:** Für größere Maßnahmen, wie den hydraulischen Abgleich in Kombination mit einer smarten Steuerung, gibt es oft Zuschüsse vom BAFA oder der KfW. Informiere dich hierzu vorab, da Anträge meist vor Vorhabensbeginn gestellt werden müssen.
 * **Batterielaufzeit:** Achte auf Modelle, die mit Standard-AA-Batterien arbeiten und eine Laufzeit von mindestens zwei Heizperioden versprechen.
 
+
+
+**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · [Stromtarif für Wärmepumpe: So sparst du beim Heizen](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/)
 ## Häufige Fragen
 ### Wie hoch sind die Anschaffungskosten für ein intelligentes Heizsystem wirklich?
 Die Kosten hängen stark von der Anzahl deiner Heizkörper ab. Ein solides Starter-Set für eine Drei-Zimmer-Wohnung (Zentrale + 3 Thermostate) kostet oft zwischen 180 € und 320 €. Für ein komplettes Einfamilienhaus mit 10–12 Heizkörpern solltest du mit etwa 700 € bis 950 € kalkulieren. Wer auf Angebote bei Black Friday oder ähnlichen Aktionen wartet, spart oft zusätzlich 20 %.
