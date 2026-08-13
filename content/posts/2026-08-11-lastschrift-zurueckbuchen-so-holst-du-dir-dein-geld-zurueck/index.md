@@ -10,6 +10,7 @@ draft: false
 tags: ["Lastschrift", "SEPA-Lastschrift", "Girokonto", "Banking", "Geld zurück"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
+keywords: ["Lastschrift", "SEPA-Lastschrift", "Girokonto", "Banking", "Geld zurück"]
 author: "Frank Hartung"
 erfahrung: "Eine unberechtigte Lastschrift habe ich selbst erlebt – die Rückbuchung war einfacher als gedacht, aber die Fristen sind streng. Meine Erfahrung: Wer die 8-Wochen-Frist kennt und Belege aufbewahrt, holt sich sein Geld in wenigen Tagen zurück."
 
@@ -88,7 +89,7 @@ Drei Situationen, in denen du besser zweimal hinschaust:
 * **Die Abbuchung war korrekt, nur ungelegen:** Etwa weil das Konto knapp war. Dann trägst du neben dem eigentlichen Betrag möglicherweise Rückbuchungsgebühren des Gläubigers, denn diese Kosten sind deine Seite der Bewirtschaftung.
 * **Missverständnis im eigenen Haushalt:** Häufig stammen „unbekannte“ Abbuchungen vom Partner oder von Abos, die du selbst vergessen hast. Erst prüfen, dann zurückbuchen – sonst gibt es unnötigen Ärger mit Anbietern, bei denen du eigentlich bleiben willst.
 
-Kurz gefasst: Zurückbuchen bei Unrecht, klären bei Berechtigung. Wer konsequent unterscheidet, hält sich stressfrei und seine Bonität sauber.
+Kurz gefasst: Zurückbuchen bei Unrecht, klären bei Berechtigung. Wer konsequent unterscheidet, hält sich stressfrei und seine [Bonität](../../posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/) sauber.
 
 ## Typische Fehler bei der Lastschrift-Rückbuchung
 

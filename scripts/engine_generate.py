@@ -182,7 +182,7 @@ def _title_keywords(title: str, limit: int = 3) -> list[str]:
     return out
 
 
-def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, quality_level=None, keywords=None):
+def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, quality_level=None, keywords=None, ai_provider=None):
     """Speichert Artikel als Page-Bundle (Format wie bisherige Pipeline).
     quality_level: optionale, echte Qualitätsstufe ("profi") fürs
     Frontmatter-Feld engine_level – bleibt auch bei draft:true (manuelle
@@ -198,7 +198,24 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, 
     '#Finanzen'-Fallback zurückfallen ließ, statt themenspezifische Hashtags
     zu bilden). Fehlen einem Thema die 'keywords' (~8 % der Themen in
     data/topics.yaml), greift _title_keywords() als Fallback, damit auch
-    diese Artikel nicht mit leeren Tags enden."""
+    diese Artikel nicht mit leeren Tags enden. Zusätzlich (Bugfix desselben
+    Tages, gleiches Muster): diese Funktion schrieb bislang GAR KEIN
+    'keywords:'-Feld ins Frontmatter (nur 'tags:') – dabei lesen mehrere
+    SEO-Skripte (internal_linker.py, meta_optimizer.py, profi_polish.py,
+    profi_text_check.py, seo_audit.py, keyword_optimizer.py) genau dieses
+    Feld für Keyword-Abdeckungs-Checks, interne Verlinkung und Meta-Tipps.
+    Ohne dieses Feld liefen diese Checks für jeden Artikel aus dieser
+    Pipeline still leer/degradiert. Wird jetzt ebenfalls geschrieben.
+
+    ai_provider: der TATSÄCHLICH verwendete KI-Provider (z. B. "Groq
+    (Gratis-Key: console.groq.com)"), von try_generate() durchgereicht.
+    BUGFIX 13.08.2026: wurde bisher komplett ignoriert und stattdessen immer
+    hart der Wert "Content-Engine v2" geschrieben – identisches Bugmuster wie
+    bei 'tags: []'. Dadurch war im Frontmatter nicht mehr nachvollziehbar,
+    ob Gemini oder Groq einen Artikel geschrieben hat (wichtig fürs
+    Provider-Qualitäts-Monitoring). Fällt ohne Angabe weiterhin auf
+    "Content-Engine v2" zurück (z. B. für Ebene-2-Draft-Rettung ohne
+    LLM-Aufruf)."""
     date = datetime.date.today().isoformat()
     slug = g.slugify(title)
     bundle_dir = os.path.join(g.POSTS_DIR, f"{date}-{slug}")
@@ -227,6 +244,7 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, 
     # engine_level ist jetzt binär: "profi" (Ebene 1 bestanden) oder "draft"
     # (Ebene 2, Qualitäts-Rettung) – keine "relaxed"-Zwischenstufe mehr.
     engine_level = quality_level or "draft"
+    provider_label = ai_provider or "Content-Engine v2"
     frontmatter = (
         "---\n"
         f'title: {yaml_quote(title)}\n'
@@ -236,9 +254,10 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, 
         f'tags: {json.dumps(tags, ensure_ascii=False)}\n'
         'categories: ["Ratgeber"]\n'
         'pillar: "' + (pillar or "konto-karten") + '"\n' 
+        f'keywords: {json.dumps(kw_source, ensure_ascii=False)}\n'
         "author: \"Frank Hartung\"\n"
         "ai_generated: true\n"
-        f'ai_provider: "Content-Engine v2"\n'
+        f'ai_provider: {yaml_quote(provider_label)}\n'
         f"engine_level: \"{engine_level}\"\n"
         f"{insp_line}"
         "---\n"
@@ -246,6 +265,7 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, 
     with open(filename, "w", encoding="utf-8") as fh:
         fh.write(frontmatter + body.strip() + "\n" + cta)
     return filename, slug
+
 
 
 
@@ -300,7 +320,7 @@ def try_generate(topic, keywords, pin, used_titles, max_attempts=5):
             continue
 
         used_titles.add(title.lower())
-        return (title, desc, body), f"OK via {provider_name} (profi)"
+        return (title, desc, body, provider_name), f"OK via {provider_name} (profi)"
     return None, f"{max_attempts} Versuche ohne Erfolg"
 
 
@@ -431,17 +451,19 @@ def main():
         _log_cadence_event("skip", topics_tried=len(versucht))
         return 0
 
-    title, desc, body = result
+    title, desc, body, provider_name = result
     try:
         if should_auto_publish(level):
             filename, slug = save_article(title, desc, body, draft=False,
                                           inspiration=topic.get("title"), pillar=topic.get("pillar"),
-                                          quality_level=level, keywords=topic.get("keywords"))
+                                          quality_level=level, keywords=topic.get("keywords"),
+                                          ai_provider=provider_name)
             print(f"  ✓ Artikel automatisch veröffentlicht ({level}): {slug}")
         else:
             filename, slug = save_article(title, desc, body, draft=True,
                                           inspiration=topic.get("title"), pillar=topic.get("pillar"),
-                                          quality_level=level, keywords=topic.get("keywords"))
+                                          quality_level=level, keywords=topic.get("keywords"),
+                                          ai_provider=provider_name)
             print(f"  ✓ Entwurf gesichert (Qualität: {level}, wartet auf manuelle Freigabe): {slug}")
     except Exception as exc:  # noqa: BLE001
         print(f"  ✗ Speichern fehlgeschlagen: {exc}")

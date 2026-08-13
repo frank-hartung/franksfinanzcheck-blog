@@ -6,6 +6,7 @@ draft: false
 tags: ["Schufa", "Bonität", "Kredit", "Kreditwürdigkeit", "Datenschutz"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
+keywords: ["Schufa", "Bonität", "Kredit", "Kreditwürdigkeit", "Datenschutz"]
 author: "Frank Hartung"
 erfahrung: "Ich habe meine eigene Schufa-Auskunft mehrfach geprüft und dabei Fehler gefunden, die meinen Score belastet haben. Meine Erfahrung: Die kostenlose Datenkopie einmal im Jahr zu prüfen, ist der effektivste Hebel für einen besseren Score."
 
@@ -134,7 +135,7 @@ Die DSGVO sieht eine kostenlose Kopie in angemessenem Abstand vor – in der Pra
 Nein. Deine eigenen Auskünfte und Konditionsanfragen sind für andere nicht sichtbar und bleiben ohne Wirkung auf den Score. Sichtbar bleiben echte Kreditanfragen – und eben nur ein Jahr lang.
 
 ### Kann ich einen guten Score bekommen, obwohl ich nie einen Kredit hatte?
-Ja. Wer regelmäßig Verträge zuverlässig bedient – Handy, Girokonto, Versicherungen – und keine Zahlungsstörungen hat, baut eine solide Historie auf. Ein Score entsteht nicht durch Kredite allein, sondern durch nachweisliche Zuverlässigkeit über Zeit.
+Ja. Wer regelmäßig Verträge zuverlässig bedient – Handy, [Girokonto](../../posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/), Versicherungen – und keine Zahlungsstörungen hat, baut eine solide Historie auf. Ein Score entsteht nicht durch Kredite allein, sondern durch nachweisliche Zuverlässigkeit über Zeit.
 
 ---
 

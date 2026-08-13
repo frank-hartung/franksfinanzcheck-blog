@@ -51,7 +51,7 @@ Smarte Thermostate kosten im Fachhandel meist zwischen 40 € und 90 € pro S
 
 **Nachteile:**
 * **Abhängigkeit von Technik:** Ohne WLAN oder bei leeren Batterien funktionieren smarte Funktionen nur eingeschränkt (manuelle Steuerung bleibt meist möglich).
-* **Datenschutz:** Deine Heizprofile geben Aufschluss darüber, wann du zu Hause bist. Setze daher auf namhafte Hersteller mit europäischem Serverstandort.
+* **[Datenschutz](../../posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/):** Deine Heizprofile geben Aufschluss darüber, wann du zu Hause bist. Setze daher auf namhafte Hersteller mit europäischem Serverstandort.
 * **Anschaffungshürde:** Bei einem Haus mit 12 Heizkörpern entstehen Initialkosten von rund 600 € bis 800 €.
 
 | Systemtyp | Kosten pro Raum | Einsparpotenzial | Aufwand Installation |

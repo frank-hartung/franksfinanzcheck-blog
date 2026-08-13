@@ -6,6 +6,7 @@ draft: false
 tags: ["Hausversicherung", "Wohngebäudeversicherung", "Elementarschutz"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
+keywords: ["Hausversicherung", "Wohngebäudeversicherung", "Elementarschutz"]
 author: "Frank Hartung"
 erfahrung: "Als ich meine eigene Hausrat- und Gebäudeversicherung überprüft habe, war ich überrascht, wie stark sich die Tarife bei Elementarschäden unterscheiden. Meine Erfahrung: Die richtige Versicherungssumme und ein ehrlicher Blick auf die Elementar-Klausel sind wichtiger als der monatliche Beitrag – genau das habe ich in diesem Artikel für dich aufbereitet."
 

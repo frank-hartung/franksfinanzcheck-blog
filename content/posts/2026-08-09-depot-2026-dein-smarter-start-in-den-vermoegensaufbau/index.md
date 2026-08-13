@@ -83,7 +83,7 @@ Meist nutzt du dafür das moderne EID-Verfahren deiner Ausweiskarte. Dabei liest
 1. **App laden oder Website öffnen:** Wähle deinen Favoriten aus dem Vergleich.
 2. **Daten eingeben:** Halte deine Steuer-ID (findest du auf deinem Gehaltszettel) bereit.
 3. **Ident-Verfahren:** Nutze EID für den schnellsten Abschluss.
-4. **Referenzkonto verknüpfen:** Gib dein normales Girokonto für Auszahlungen an.
+4. **Referenzkonto verknüpfen:** Gib dein normales [Girokonto](../../posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/) für Auszahlungen an.
 5. **Ersteinzahlung:** Überweise einen kleinen Betrag (z. B. 10 €), um die Verbindung zu testen.
 
 Sobald der Broker dein Konto freischaltet, überweist du dein erstes Kapital. Nutze dafür dein hinterlegtes Referenzkonto bei deiner Hausbank für maximale Sicherheit. Dank Echtzeitüberweisungen steht das Geld bei vielen Brokern heute bereits nach wenigen Minuten für deinen ersten Kauf bereit.

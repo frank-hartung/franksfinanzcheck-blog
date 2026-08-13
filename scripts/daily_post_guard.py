@@ -125,7 +125,7 @@ def fill_missing():
             print(f"  ○ Kein Artikel diesen Slot – {len(kandidaten)} Themen ohne Erfolg probiert.")
             continue
 
-        title, desc, body = result
+        title, desc, body, provider_name = result
         try:
             # Freigabe (siehe engine_generate.should_auto_publish): nur echte
             # "profi"-Qualität wird automatisch veröffentlicht. Zählt als
@@ -135,7 +135,8 @@ def fill_missing():
             filename, slug = eg.save_article(title, desc, body, draft=not auto_publish_now,
                                              inspiration=topic.get("title"),
                                              pillar=topic.get("pillar"),
-                                             quality_level="profi", keywords=topic.get("keywords"))
+                                             quality_level="profi", keywords=topic.get("keywords"),
+                                             ai_provider=provider_name)
             created += 1
             used_titles.add(title.lower())
             if auto_publish_now:
