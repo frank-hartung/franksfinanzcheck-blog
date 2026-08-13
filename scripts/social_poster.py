@@ -158,11 +158,27 @@ def build_post(fm: dict, slug: str) -> str:
 
 
 def cover_path(slug_dir: Path, fm: dict) -> Path | None:
+    """Löst den Cover-Pfad auf.
+
+    BUGFIX (13.08.): 'cover.image' in der Frontmatter ist – wie vom Theme via
+    '| absURL' behandelt (layouts/_partials/cover.html) – site-root-relativ
+    (z. B. 'images/covers/<slug>.jpg' -> static/images/covers/<slug>.jpg),
+    NICHT relativ zum Page-Bundle-Ordner. Die alte Version suchte fälschlich
+    unter content/posts/<slug>/images/covers/... (existiert nie, da alle
+    Cover unter static/ liegen) und fand dadurch NIE ein Bild – jeder bisherige
+    Mastodon-Post ging ohne Bild raus. Fällt zur Sicherheit weiterhin auf einen
+    Page-Bundle-Pfad zurück, falls doch mal ein Artikel sein Cover als
+    Bundle-Resource mitbringt.
+    """
     m = re.search(r"image:\s*[\"']?(.*?)[\"']?\s*$", fm.get("raw", ""), re.MULTILINE)
     if not m:
         return None
-    p = slug_dir / m.group(1)
-    return p if p.is_file() else None
+    rel = m.group(1)
+    static_candidate = ROOT / "static" / rel
+    if static_candidate.is_file():
+        return static_candidate
+    bundle_candidate = slug_dir / rel
+    return bundle_candidate if bundle_candidate.is_file() else None
 
 
 def http_json(url: str, data=None, headers=None, method="POST") -> dict:

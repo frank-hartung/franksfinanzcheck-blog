@@ -1,0 +1,68 @@
+name: Mastodon-Manueller-Post
+
+# Postet einen bestehenden, bereits veröffentlichten Artikel gezielt manuell
+# auf Mastodon (z. B. an Tagen ohne neuen Blogartikel als "Spotlight-Post").
+# Rührt "social_posted" NICHT an -> beeinflusst die normale Automatik
+# (scripts/social_poster.py, .github/workflows/social-ai.yml) nicht.
+#
+# Auslösen: Actions -> "Mastodon-Manueller-Post" -> Run workflow,
+# slug + optional intro-Text angeben.
+#
+# Benötigt Secret MASTODON_ACCESS_TOKEN (Scope 'write:statuses'+'write:media').
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Ordnername unter content/posts/, z.B. 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026"
+        required: true
+      intro:
+        description: "Einleitungssatz (optional, Standard: Spotlight-Hinweis)"
+        required: false
+        default: ""
+      dry_run:
+        description: "Nur anzeigen, nichts senden (true/false)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Manuellen Mastodon-Post senden
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+          POST_SLUG: ${{ github.event.inputs.slug }}
+          POST_INTRO: ${{ github.event.inputs.intro }}
+          POST_DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: |
+          CMD=(python3 scripts/mastodon_manual_post.py --slug "$POST_SLUG")
+          if [ -n "$POST_INTRO" ]; then
+            CMD+=(--intro "$POST_INTRO")
+          fi
+          if [ "$POST_DRY_RUN" = "true" ]; then
+            CMD+=(--dry-run)
+          fi
+          "${CMD[@]}"
+
+
+      - name: Log committen
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name "FrankAutoOps Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/social_log.jsonl
+          git diff --cached --quiet || git commit -m "chore: manueller Mastodon-Post geloggt [skip ci]"
+          git push
