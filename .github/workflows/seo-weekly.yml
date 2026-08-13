@@ -174,6 +174,55 @@ jobs:
             echo "✅ Affiliate-Fixes gepusht"
           fi
 
+      - name: Bestand-Gate (aktuelle Publish-Gate-Regeln auch auf Bestandsartikel anwenden)
+        # Frank-Beschluss 13.08.: Die harte Publish-Gate-Prüfung
+        # (check_length.py + seo_audit.py + affiliate_profi_check.py), die
+        # neue Artikel bestehen müssen, galt bisher NUR für druckfrische
+        # Kandidaten (publish_gate.py verwirft sie sonst). Bestandsartikel
+        # wurden nie dagegen geprüft. bestand_gate.py schließt die Lücke,
+        # aber NICHT-DESTRUKTIV: heilt über die bestehenden Fixer
+        # (meta_optimizer/affiliate_profi_check --fix) und LÖSCHT NIE einen
+        # bereits veröffentlichten Artikel. Exit 1 nur, wenn nach dem
+        # Heilungsversuch etwas übrig bleibt, das echte Textarbeit braucht.
+        id: bestand
+        continue-on-error: true
+        run: |
+          hugo --minify > /dev/null 2>&1
+          python3 scripts/bestand_gate.py | tee /tmp/bestand_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Bestand-Gate-Fixes + Report committen
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add content/ BESTAND-REPORT.md AFFILIATE-REPORT.md .affiliate_report.json META-REPORT.md .meta_report.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Bestand-Gate: keine Änderungen."
+          else
+            git commit -m "seo: Bestand-Gate – bestehende Artikel gegen aktuelle Publish-Regeln geheilt"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push  # AUDIT-FIX: Rebase-Schutz
+          fi
+
+      - name: Issue bei nicht automatisch heilbaren Bestandsartikeln
+        # Greift NUR, wenn nach der Heilung noch etwas übrig ist (Exit 1).
+        # Betroffene Artikel werden NIE gelöscht (siehe bestand_gate.py) –
+        # nur gemeldet, damit ein Mensch echte Textarbeit leisten kann.
+        if: steps.bestand.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let details = 'Bestand-Gate hat Artikel gefunden, die die aktuellen Publish-Gate-Regeln nicht (mehr) erfüllen.';
+            try { details = fs.readFileSync('BESTAND-REPORT.md', 'utf-8'); } catch (e) {}
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '📋 Bestand-Gate: bestehende Artikel brauchen Aufmerksamkeit',
+              body: details + '\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow (Bestand-Gate). Betroffene Artikel wurden NICHT gelöscht.'
+            });
+            console.log('✅ Issue erstellt');
+
       - name: Cover-Validierung (alle Varianten – VOLLAUTOMATISCH)
         # Prüft für jeden Post, dass ALLE Cover-Varianten (620/720/avif/webp
         # + responsive) existieren. --fix zieht fehlende Varianten automatisch
