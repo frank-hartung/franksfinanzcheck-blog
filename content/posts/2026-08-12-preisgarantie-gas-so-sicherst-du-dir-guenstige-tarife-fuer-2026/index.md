@@ -6,7 +6,7 @@ draft: false
 tags: ["Gaspreis", "Gastarif wechseln", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["Gaspreis", "Gastarif wechseln", "Heizkosten senken", "Erdgaspreis", "Strompreis", "Heizkosten", "Energiepreis"]
+keywords: ["Gaspreis", "Gastarif wechseln", "Heizkosten senken", "Erdgaspreis", "Strompreis", "Heizkosten", "Energiepreis", "Ölpreis"]
 author: "Frank Hartung"
 # Konsolidierung (13.08.): Der ältere, kürzere Zwillingsartikel vom 10.08.
 # ("Sicher heizen: So schützt dich eine Gaspreisgarantie") behandelte exakt

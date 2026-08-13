@@ -6,7 +6,7 @@ draft: false
 tags: ["Schufa", "Bonität", "Kredit", "Kreditwürdigkeit", "Datenschutz"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-keywords: ["Schufa", "Bonität", "Kredit", "Kreditwürdigkeit", "Datenschutz", "Schufa Auskunft", "Schufa Score", "Schufa-Eintrag", "Schufa-Recht"]
+keywords: ["Schufa", "Bonität", "Kredit", "Kreditwürdigkeit", "Datenschutz", "Schufa Auskunft", "Schufa Score", "Schufa-Eintrag", "Schufa-Recht", "Schufa-Bonität"]
 author: "Frank Hartung"
 erfahrung: "Ich habe meine eigene Schufa-Auskunft mehrfach geprüft und dabei Fehler gefunden, die meinen Score belastet haben. Meine Erfahrung: Die kostenlose Datenkopie einmal im Jahr zu prüfen, ist der effektivste Hebel für einen besseren Score."
 

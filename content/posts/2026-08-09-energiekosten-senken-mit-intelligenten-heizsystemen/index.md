@@ -6,7 +6,7 @@ draft: false
 tags: ["Energiekosten", "Heizsysteme", "Energiesparen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["Energiekosten", "Heizsysteme", "Energiesparen", "Strompreise", "Gaspreise", "Energie sparen", "Heizkosten senken"]
+keywords: ["Energiekosten", "Heizsysteme", "Energiesparen", "Strompreise", "Gaspreise", "Energie sparen", "Heizkosten senken", "Stromanbieter wechseln"]
 author: "Frank Hartung"
 erfahrung: "Bei der Optimierung meiner eigenen Heizung habe ich zuerst die Thermostate ausgetauscht, bevor ich über neue Technik nachgedacht habe. Meine Erfahrung: Intelligente Heizsysteme lohnen sich erst, wenn die Basics (Dämmung, Hydraulik) stimmen."
 
