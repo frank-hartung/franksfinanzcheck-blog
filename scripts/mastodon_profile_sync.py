@@ -60,14 +60,45 @@ AVATAR_DESCRIPTION = (
     "signalgelben Haken."
 )
 HEADER_DESCRIPTION = (
-    "Bannerbild mit dem FranksFinanzcheck-Signet (dunkelgrünes Quadrat mit "
-    "gelbem Haken), Schriftzug 'FranksFinanzcheck' und dem Slogan 'Geld sparen "
-    "bei Strom, Gas, Internet & Versicherungen' auf dunkelgrünem Hintergrund."
+    "Banner mit FranksFinanzcheck-Logo, Schriftzug und Slogan 'Geld sparen bei "
+    "Strom, Gas, Internet & Versicherungen' auf dunkelgrünem Hintergrund."
 )
 
 AVATAR = ROOT / "static" / "images" / "social" / "mastodon-avatar.png"
 HEADER = ROOT / "static" / "images" / "social" / "mastodon-header.png"
 REPORT = ROOT / "MASTODON-PROFILE-REPORT.md"
+
+# Mastodon-Grenzwerte (siehe GET /api/v2/instance -> configuration.accounts),
+# lokal vorab geprüft statt erst per HTTP 422 vom Server zu erfahren.
+LIMITS = {
+    "display_name": 40,
+    "note": 500,
+    "avatar_description": 150,
+    "header_description": 150,
+    "field_name": 255,
+    "field_value": 255,
+}
+
+
+def validate_lengths():
+    errors = []
+    if len(DISPLAY_NAME) > LIMITS["display_name"]:
+        errors.append(f"display_name zu lang ({len(DISPLAY_NAME)}/{LIMITS['display_name']})")
+    if len(NOTE) > LIMITS["note"]:
+        errors.append(f"note zu lang ({len(NOTE)}/{LIMITS['note']})")
+    if len(AVATAR_DESCRIPTION) > LIMITS["avatar_description"]:
+        errors.append(
+            f"avatar_description zu lang ({len(AVATAR_DESCRIPTION)}/{LIMITS['avatar_description']})"
+        )
+    if len(HEADER_DESCRIPTION) > LIMITS["header_description"]:
+        errors.append(
+            f"header_description zu lang ({len(HEADER_DESCRIPTION)}/{LIMITS['header_description']})"
+        )
+    for name, value in FIELDS:
+        if len(name) > LIMITS["field_name"] or len(value) > LIMITS["field_value"]:
+            errors.append(f"Feld '{name}' überschreitet 255 Zeichen (Name oder Wert)")
+    if errors:
+        sys.exit("FEHLER: Mastodon-Profil-Sync abgebrochen (Limit-Prüfung):\n  - " + "\n  - ".join(errors))
 
 
 def build_multipart(fields, files):
@@ -106,6 +137,8 @@ def main():
     if not MASTODON_TOKEN and not DRY_RUN:
         print_setup_hint()
         return
+
+    validate_lengths()
 
     fields = [
         ("display_name", DISPLAY_NAME),
