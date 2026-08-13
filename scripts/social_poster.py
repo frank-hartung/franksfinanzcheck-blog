@@ -270,6 +270,10 @@ def edit_mastodon(status_id: str, text: str) -> tuple[bool, str]:
     vorhandene Bild zuerst per GET ausgelesen und unverändert mitgesendet."""
     try:
         current = get_status_mastodon(status_id)
+    except urllib.error.HTTPError as exc:
+        if exc.code == 404:
+            return False, f"Status {status_id} existiert nicht (mehr) – nichts zu bearbeiten."
+        return False, f"Status nicht lesbar: HTTP {exc.code}"
     except Exception as exc:  # noqa: BLE001
         return False, f"Status nicht lesbar: {exc}"
     payload = {"status": text}
