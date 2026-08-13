@@ -1,0 +1,56 @@
+name: Mastodon-Profil-Sync
+
+# Setzt Anzeigename, Bio, Profilfelder, Avatar & Header des
+# Mastodon-Accounts @FranksFinanzcheck@mastodon.social passend zur
+# aktuellen Content-Ausrichtung des Blogs (Themen, Rhythmus, Branding/Logo).
+#
+# Bewusst KEIN Cronjob: Profil-/Branding-Texte sind redaktionelle
+# Entscheidungen (anders als die Publikationscadence, siehe cadence-manager.yml).
+# Manuell auslösen, wenn sich Content-Fokus oder Branding erkennbar ändern:
+# Actions -> "Mastodon-Profil-Sync" -> Run workflow.
+#
+# Benötigt Secret MASTODON_ACCESS_TOKEN mit Scope 'write:accounts'
+# (zusätzlich zu 'write:statuses'+'write:media' für social-ai.yml).
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Nur anzeigen, nichts an Mastodon senden (true/false)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Mastodon-Profil aktualisieren
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            python3 scripts/mastodon_profile_sync.py --dry-run
+          else
+            python3 scripts/mastodon_profile_sync.py
+          fi
+
+      - name: Report committen
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name "FrankAutoOps Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add MASTODON-PROFILE-REPORT.md
+          git diff --cached --quiet || git commit -m "chore: Mastodon-Profil-Sync-Report aktualisiert [skip ci]"
+          git push
