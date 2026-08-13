@@ -30,7 +30,7 @@ Die Energiekosten belasten viele Haushalte in Deutschland massiv. Besonders die 
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/strom/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** DStiebendenTarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/strom/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Wie funktionieren intelligente Heizsysteme?

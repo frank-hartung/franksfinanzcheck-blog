@@ -29,7 +29,7 @@ Warum zahlst du Monat für Monat zu viel für dein Internet? Weil Treue im DSL-M
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/dsl/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** DStiebendenTarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/dsl/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## DSL-Anbieter vergleichen

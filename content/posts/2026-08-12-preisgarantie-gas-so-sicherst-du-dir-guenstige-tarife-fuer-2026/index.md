@@ -47,7 +47,7 @@ Hast du den letzten Brief deines Gasanbieters schon genauer gelesen oder wandert
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Tarifrechner starten**](/go/gas/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** DStiebendenTarife findest du über unseren Partner-Vergleich: [**Tarifrechner starten**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 

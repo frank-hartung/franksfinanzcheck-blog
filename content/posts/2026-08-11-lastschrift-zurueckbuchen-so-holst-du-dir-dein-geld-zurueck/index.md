@@ -36,7 +36,7 @@ Wir klären die wichtigsten Fragen für dein Konto:
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Jetzt C24 Bank Angebote vergleichen**](/go/girokonto/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** DStiebendenTarife findest du über unseren Partner-Vergleich: [**Jetzt C24 Bank Angebote vergleichen**](/go/girokonto/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Dein Rückbuchungsrecht bei der SEPA-Lastschrift

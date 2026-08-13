@@ -49,7 +49,7 @@ Dieser Ratgeber zeigt dir den schnellen Weg zum ersten Investment:
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/tagesgeld/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** DStiebendenTarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/tagesgeld/)
 *(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)*
 
 ## Die Wahl des richtigen Brokers:<br>App oder Filiale?
