@@ -55,6 +55,16 @@ FIELDS = [
     ("Themen:", "#Strom #Gas #DSL #Versicherungen"),
 ]
 
+AVATAR_DESCRIPTION = (
+    "FranksFinanzcheck-Logo: dunkelgrünes, abgerundetes Quadrat mit einem "
+    "signalgelben Haken."
+)
+HEADER_DESCRIPTION = (
+    "Bannerbild mit dem FranksFinanzcheck-Signet (dunkelgrünes Quadrat mit "
+    "gelbem Haken), Schriftzug 'FranksFinanzcheck' und dem Slogan 'Geld sparen "
+    "bei Strom, Gas, Internet & Versicherungen' auf dunkelgrünem Hintergrund."
+)
+
 AVATAR = ROOT / "static" / "images" / "social" / "mastodon-avatar.png"
 HEADER = ROOT / "static" / "images" / "social" / "mastodon-header.png"
 REPORT = ROOT / "MASTODON-PROFILE-REPORT.md"
@@ -97,7 +107,12 @@ def main():
         print_setup_hint()
         return
 
-    fields = [("display_name", DISPLAY_NAME), ("note", NOTE)]
+    fields = [
+        ("display_name", DISPLAY_NAME),
+        ("note", NOTE),
+        ("avatar_description", AVATAR_DESCRIPTION),
+        ("header_description", HEADER_DESCRIPTION),
+    ]
     for i, (name, value) in enumerate(FIELDS):
         fields.append((f"fields_attributes[{i}][name]", name))
         fields.append((f"fields_attributes[{i}][value]", value))
