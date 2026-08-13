@@ -31,23 +31,31 @@ def main():
         print(f"List-Fehler (nicht kritisch): {e}")
         return 1
     for issue in existing:
-        if issue.get("title", "").startswith("⚠ Content-Engine") and not issue.get("pull_request"):
+        title = issue.get("title", "")
+        if (title.startswith("⚠ Content-Engine") or title.startswith("📝 Content-Engine")) and not issue.get("pull_request"):
+
             print(f"Issue existiert bereits: #{issue['number']}")
             return 0
 
     body = (
-        "Die Content-Engine v2 hat einen Artikel nur als **ENTWURF** sichern können, "
-        "weil die automatische Qualitätsprüfung (oder die KI-APIs) die Profi-Schwelle "
-        "nicht erreicht hat.\n\n"
+        "Es liegt mindestens 1 neuer Artikel als **ENTWURF** (`draft: true`) bereit.\n\n"
+        "Das kann zwei Gründe haben:\n"
+        "1. **Normalfall (seit 13.08.):** Manuelle Freigabe ist aktiv "
+        "(`AUTO_PUBLISH` ist nicht auf `1` gesetzt) – der Artikel hat die "
+        "Qualitätsprüfung bestanden und wartet nur auf dein OK.\n"
+        "2. **Ausnahme:** Die automatische Qualitätsprüfung (oder die KI-APIs) "
+        "hat die Profi-Schwelle nicht erreicht (`engine_level: \"draft\"` im "
+        "Frontmatter) – dann bitte kurz gegenlesen/nachbessern.\n\n"
         "**Bitte prüfen:**\n"
         "1. `ENGINE-STATUS.md` ansehen (Ebene, Fehler)\n"
         "2. Den Entwurf unter `content/posts/` suchen (`draft: true`)\n"
-        "3. Artikel fertigstellen und `draft: false` setzen – der nächste Deploy "
-        "veröffentlicht ihn.\n\n"
+        "3. Freigeben: `draft: false` setzen (oder `python3 scripts/publish.py <slug>`) "
+        "– der nächste Deploy veröffentlicht ihn.\n\n"
         "_Automatisch erstellt von der Content-Engine v2._"
     )
-    data = json.dumps({"title": "⚠ Content-Engine: Entwurf wartet auf Freigabe",
+    data = json.dumps({"title": "📝 Content-Engine: Entwurf wartet auf Freigabe",
                        "body": body}).encode()
+
     req = urllib.request.Request(api, data=data, headers=headers, method="POST")
     try:
         with urllib.request.urlopen(req, timeout=20) as resp:

@@ -36,6 +36,18 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 import generate_drafts as g  # noqa: E402  (nutzt bestehende Generierungs-Logik)
 from check_titles import COMPOUND_FIXES, TIME_TAIL as RE_ANHAENGSEL  # noqa: E402 – Titel-Qualitätsgate (FrankAutoOps)
 
+# ---------------------------------------------------------------------------
+# Manuelle Freigabe (Frank, 13.08.2026): Betriebsregel geändert – der Bot
+# generiert weiterhin bis zu 2 fertige, qualitätsgeprüfte Artikel/Tag, aber
+# veröffentlicht sie NICHT mehr automatisch. Jeder Artikel wird als Entwurf
+# (draft: true) gespeichert, komplett durch die Qualitäts-Kette poliert, und
+# wartet auf manuelle Freigabe durch Frank (GitHub-UI: draft: true -> false,
+# oder `python3 scripts/publish.py <slug>`).
+# Repo-Variable AUTO_PUBLISH=1 (Settings -> Secrets and variables -> Actions
+# -> Variables) schaltet zurück auf Vollautomatik. Default = manuell ("0").
+# ---------------------------------------------------------------------------
+AUTO_PUBLISH = os.environ.get("AUTO_PUBLISH", "0") == "1"
+
 
 def normalize_title(title: str) -> str:
     """Deterministische Titel-Normalisierung (FrankAutoOps-Gate R2):
@@ -95,8 +107,12 @@ def now_utc_iso() -> str:
             - datetime.timedelta(minutes=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def save_article(title, desc, body, draft=False, inspiration=None, pillar=None):
-    """Speichert Artikel als Page-Bundle (Format wie bisherige Pipeline)."""
+def save_article(title, desc, body, draft=False, inspiration=None, pillar=None, quality_level=None):
+    """Speichert Artikel als Page-Bundle (Format wie bisherige Pipeline).
+    quality_level: optionale, echte Qualitätsstufe ("profi"/"relaxed") fürs
+    Frontmatter-Feld engine_level – bleibt auch bei draft:true (manuelle
+    Freigabe) sichtbar, statt pauschal auf "draft" zu fallen (das bleibt
+    reserviert für echte Qualitäts-Gate-Ausfälle, Ebene 3)."""
     date = datetime.date.today().isoformat()
     slug = g.slugify(title)
     bundle_dir = os.path.join(g.POSTS_DIR, f"{date}-{slug}")
@@ -120,6 +136,7 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None):
     if inspiration:
         insp_line = f"\ninspiration: {yaml_quote(inspiration)}\n"
     draft_line = "true" if draft else "false"
+    engine_level = quality_level or ("draft" if draft else "relaxed")
     frontmatter = (
         "---\n"
         f'title: {yaml_quote(title)}\n'
@@ -129,16 +146,17 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None):
         'tags: []\n'
         'categories: ["Ratgeber"]\n'
         'pillar: "' + (pillar or "konto-karten") + '"\n' 
-        "author: \"Frank\"\n"
+        "author: \"Frank Hartung\"\n"
         "ai_generated: true\n"
         f'ai_provider: "Content-Engine v2"\n'
-        f"engine_level: \"{'draft' if draft else 'relaxed'}\"\n"
+        f"engine_level: \"{engine_level}\"\n"
         f"{insp_line}"
         "---\n"
     )
     with open(filename, "w", encoding="utf-8") as fh:
         fh.write(frontmatter + body.strip() + "\n" + cta)
     return filename, slug
+
 
 
 # ---------------------------------------------------------------------------
@@ -242,13 +260,20 @@ def main():
     pin_topics = os.environ.get("PIN_TOPICS", "0") == "1"
 
     # Tages-Guard (wie bisherige Pipeline)
+    # 13.08.: Zählt jetzt ALLE heutigen Artikel, die ein Qualitäts-Gate
+    # bestanden haben (profi/relaxed) – unabhängig vom draft-Flag. So bleibt
+    # das 2/Tag-Cap auch im manuellen Freigabe-Modus (AUTO_PUBLISH=0) korrekt:
+    # Frank bekommt trotzdem nur 2 Entwürfe/Tag statt endlos vieler. Nur
+    # echte Qualitäts-Rettungen (engine_level: "draft", Ebene 3) zählen NICHT
+    # mit – für die soll weiter ein Ersatzartikel versucht werden.
     today = datetime.date.today().isoformat()
     published_today = 0
     for path in g.list_post_paths():
         if os.path.basename(os.path.dirname(path)).startswith(today):
             content = open(path, encoding="utf-8").read()
-            if "draft: false" in content:
-                published_today += 1
+            if 'engine_level: "draft"' in content or "engine_level: 'draft'" in content:
+                continue
+            published_today += 1
     if published_today >= max_per_day:
         print(f"Bereits {published_today}/{max_per_day} Artikel heute – nichts zu tun.")
         write_status(f"Tageslimit erreicht ({published_today}/{max_per_day}).")
@@ -316,9 +341,17 @@ def main():
     if result and not draft_saved:
         title, desc, body = result
         try:
-            filename, slug = save_article(title, desc, body, draft=False,
-                                          inspiration=topic.get("title"), pillar=topic.get("pillar"))
-            print(f"  ✓ Artikel veröffentlicht ({level}): {slug}")
+            if AUTO_PUBLISH:
+                filename, slug = save_article(title, desc, body, draft=False,
+                                              inspiration=topic.get("title"), pillar=topic.get("pillar"),
+                                              quality_level=level)
+                print(f"  ✓ Artikel veröffentlicht ({level}): {slug}")
+            else:
+                filename, slug = save_article(title, desc, body, draft=True,
+                                              inspiration=topic.get("title"), pillar=topic.get("pillar"),
+                                              quality_level=level)
+                draft_saved = True
+                print(f"  ✓ Entwurf gesichert (Qualität: {level}, wartet auf manuelle Freigabe): {slug}")
         except Exception as exc:  # noqa: BLE001
             print(f"  ✗ Speichern fehlgeschlagen: {exc}")
             write_status("Kompletter Ausfall – Speicherfehler.", level="FAIL")

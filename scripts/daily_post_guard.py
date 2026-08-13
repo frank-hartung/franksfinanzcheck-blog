@@ -40,13 +40,16 @@ AS_JSON = "--json" in sys.argv
 
 
 def published_today():
-    """Anzahl heute veröffentlichter Posts (Frontmatter date + draft:false).
-    Zählt über das date-Feld (Hugo-Richtigkeit), Ordnername als Fallback."""
+    """Anzahl heute erstellter, qualitätsgeprüfter Artikel (unabhängig vom
+    draft-Flag – siehe engine_generate.AUTO_PUBLISH). Zählt über das
+    date-Feld (Hugo-Richtigkeit), Ordnername als Fallback. Echte
+    Qualitäts-Rettungen (engine_level: "draft", Ebene 3) zählen NICHT mit,
+    damit für sie weiter ein Ersatzartikel versucht wird."""
     today = datetime.date.today().isoformat()
     n = 0
     for f in glob.glob(os.path.join(BLOG_DIR, "content", "posts", "*", "index.md")):
         c = open(f, encoding="utf-8").read()
-        if "draft: true" in c:
+        if 'engine_level: "draft"' in c or "engine_level: 'draft'" in c:
             continue
         m = re.search(r"^date:\s*[\"']?([^\"'\n]+)", c, re.M)
         d = m.group(1).strip()[:10] if m else ""
@@ -106,13 +109,16 @@ def fill_missing():
             pin = None
 
         result = None
+        level = "relaxed"
         for relaxed in (False, True):
             result, info = eg.try_generate(topic, keywords, pin, used_titles,
                                            relaxed=relaxed, max_attempts=3 if not relaxed else 2)
+            level = "relaxed" if relaxed else "profi"
             if result:
                 break
         if not result:
-            # Draft-Rettung (wie Engine Ebene 3)
+            # Draft-Rettung (wie Engine Ebene 3) – zählt bewusst NICHT als
+            # "created", damit der nächste Slot einen echten Ersatz versucht.
             try:
                 title, desc, body = eg.make_draft(topic, used_titles)
                 filename, slug = eg.save_article(title, desc, body, draft=True,
@@ -127,12 +133,21 @@ def fill_missing():
                 continue
         title, desc, body = result
         try:
-            filename, slug = eg.save_article(title, desc, body, draft=False,
+            # 13.08.: manuelle Freigabe (siehe engine_generate.AUTO_PUBLISH) –
+            # Standard ist jetzt draft:true, der Artikel zählt aber trotzdem
+            # als "erstellt" (Qualitäts-Gate bestanden), damit das 2/Tag-Cap
+            # nicht dauerhaft "offen" bleibt und immer weiter nachgeneriert.
+            filename, slug = eg.save_article(title, desc, body, draft=not eg.AUTO_PUBLISH,
                                              inspiration=topic.get("title"),
-                                             pillar=topic.get("pillar"))
+                                             pillar=topic.get("pillar"),
+                                             quality_level=level)
             created += 1
             used_titles.add(title.lower())
-            print(f"  ✅ Artikel erstellt: {slug} ({topic['title'][:50]})")
+            if eg.AUTO_PUBLISH:
+                print(f"  ✅ Artikel erstellt: {slug} ({topic['title'][:50]})")
+            else:
+                print(f"  ✅ Entwurf erstellt (wartet auf Freigabe): {slug} ({topic['title'][:50]})")
+
         except Exception as exc:  # noqa: BLE001
             failed.append(str(exc))
             print(f"  ✗ Speichern fehlgeschlagen: {exc}")

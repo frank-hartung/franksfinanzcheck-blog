@@ -67,6 +67,11 @@ jobs:
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
           MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '2' }}
+          # Manuelle Freigabe (13.08.): Default "0" = jeder Artikel wird als
+          # Entwurf gespeichert und muss von Frank freigegeben werden. Auf
+          # "1" setzen (Settings -> Secrets and variables -> Actions ->
+          # Variables -> AUTO_PUBLISH), um zur alten Vollautomatik zurückzukehren.
+          AUTO_PUBLISH: ${{ vars.AUTO_PUBLISH || '0' }}
           PIN_TOPICS: "1"
         run: python3 scripts/engine_generate.py
 

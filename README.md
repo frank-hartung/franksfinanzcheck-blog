@@ -21,28 +21,44 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 
 ---
 
-## ⚡ Vollautomatik (kein tägliches Pushen nötig)
+## ⚡ Automatik mit manueller Freigabe (Stand 13.08.2026)
 
-Der Workflow **„Automatische Content-Generierung"** läuft abgestimmt auf deine Pinterest-Zeiten:
+Zwei Workflows sichern täglich bis zu **2 fertige, qualitätsgeprüfte Artikel**:
+**„Content-Engine v2"** (`content-engine-v2.yml`, mehrere Zeitfenster ab 08:10 MESZ)
+und **„Tagesziel 2 Posts"** (`tagesziel-2-posts.yml`, Nachlauf-Slots), falls das
+Tagesziel sonst nicht erreicht würde. Die ältere, in dieser Tabelle früher
+beschriebene „Automatische Content-Generierung" (`daily-content.yml`) ist
+deaktiviert (nur manuell startbar) – die Zeiten oben sind daher nicht mehr
+aktuell, siehe die Cron-Zeilen direkt in `content-engine-v2.yml`.
 
-| Uhrzeit (DE) | Was passiert |
-|---|---|
-| **08:00** | Deine Pinterest-Pins erscheinen |
-| **08:10** | Der Bot generiert 1 einzigartigen Artikel aus einem freien Pin-Thema und VERÖFFENTLICHT ihn automatisch |
-| **19:30** | Deine abendlichen Pinterest-Pins erscheinen |
-| **19:40** | Der Bot generiert + veröffentlicht den 2. Artikel des Tages |
+**Betriebsregel seit 13.08.2026 – manuelle Freigabe (Standard):**
+- Jeder generierte Artikel durchläuft die volle Qualitäts-Kette (Rechtschreibung,
+  Grammatik, Cover, Meta, interne Links, Affiliate-Guards, …) genau wie zuvor.
+- Er wird aber **nicht mehr automatisch veröffentlicht**, sondern als
+  **Entwurf** (`draft: true`) gespeichert und wartet auf dein OK.
+- Du bekommst dafür automatisch ein **GitHub-Issue** ("📝 Content-Engine:
+  Entwurf wartet auf Freigabe") – ein Issue bleibt offen, bis du es schließt
+  (kein Spam bei mehreren Artikeln/Tag).
+- **Freigeben:** Datei unter `content/posts/<datum-slug>/index.md` öffnen,
+  `draft: true` → `draft: false` ändern, committen – der nächste Deploy
+  veröffentlicht ihn. Oder lokal: `python3 scripts/publish.py <slug>`.
+- Das 2-Artikel/Tag-Limit gilt weiterhin (zählt Artikel, die das
+  Qualitäts-Gate bestanden haben – unabhängig vom draft-Status), es werden
+  also nie mehr als 2 Entwürfe/Tag zur Prüfung angehäuft.
 
-**Wie es funktioniert:**
-- Themen kommen **direkt aus deinem Pinterest-Plan** (`data/pinterest_plan.yaml`, 62 Pins)
-- Der Artikel wird **automatisch veröffentlicht** (`draft: false`) – kein manueller Schritt
-- Sind alle Pin-Themen abgedeckt, greift automatisch der erweiterte Themenpool (`topics.yaml`)
-- Einzigartigkeits-Check + Anti-Copy-Prompt stellen sicher, dass kein Pin-Text 1:1 kopiert wird
-- Max. 2 Artikel/Tag (1 pro Lauf) – Google-konform, kein Content-Spam
+**Warum die Umstellung?** Google bestraft massenhaft automatisch
+veröffentlichten KI-Content ("Scaled Content Abuse"). Kurzes Prüfen +
+Freigeben schützt dein Ranking – und macht die Artikel besser (du ergänzst
+z. B. eigene Erfahrungen, bevor sie live gehen).
 
 **Steuerung:**
-- **Stoppen (Kill-Switch):** GitHub → Actions → „Automatische Content-Generierung" → Disable workflow
+- **Stoppen (Kill-Switch):** GitHub → Actions → „Content-Engine v2" bzw.
+  „Tagesziel 2 Posts" → Disable workflow
 - **Manuell starten:** GitHub → Actions → „Run workflow"
-- **Wieder auf Entwurfs-Modus:** Im Workflow `AUTO_PUBLISH: "0"` setzen (dann musst du wieder freigeben)
+- **Zurück zur Vollautomatik (nicht empfohlen für YMYL/Google-Sichtbarkeit):**
+  Repository-Variable `AUTO_PUBLISH` auf `1` setzen (GitHub → Settings →
+  Secrets and variables → Actions → Variables). Dann werden Artikel wieder
+  sofort mit `draft: false` gespeichert.
 
 **🔗 Affiliate-Links ändern – so geht's (wichtig!):**
 
