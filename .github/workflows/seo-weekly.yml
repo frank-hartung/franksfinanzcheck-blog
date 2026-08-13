@@ -130,6 +130,11 @@ jobs:
         # Wöchentliche Komplettprüfung: Grammatik, Zeichensetzung,
         # Kontext-Fehler in allen Posts – eindeutige Korrekturen werden
         # automatisch angewendet (Stil-Fälle nur im Report).
+        # BUGFIX 13.08.: fehlendes continue-on-error ließ diesen (rein
+        # informativen) Schritt bei verbleibenden Stil-Funden den GESAMTEN
+        # Workflow abbrechen – alle nachfolgenden Schritte (Cover-Check,
+        # Meta-Gate, A11y, IndexNow, Bestand-Gate) liefen dadurch nie.
+        continue-on-error: true
         run: |
           python3 scripts/grammar_check.py --fix | tee /tmp/grammar_log.txt
           exit ${PIPESTATUS[0]}
@@ -137,6 +142,10 @@ jobs:
       - name: Lesbarkeits-Audit aller Artikel
         # Wöchentliche Komplettprüfung der Lesbarkeit – meldet Artikel
         # unter der Top-Level-Schwelle (Score < 75) im Log/Report.
+        # BUGFIX 13.08.: identisches Muster wie oben – rein informativer
+        # Report-Schritt ohne continue-on-error hätte die Kette abbrechen
+        # können.
+        continue-on-error: true
         run: |
           python3 scripts/readability_check.py | tee /tmp/read_audit.txt
           exit ${PIPESTATUS[0]}
