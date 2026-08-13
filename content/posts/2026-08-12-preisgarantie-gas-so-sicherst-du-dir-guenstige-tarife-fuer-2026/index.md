@@ -1,5 +1,5 @@
 ---
-title: "Gaspreis: So sicherst du dir günstige Tarife für das Jahr 2026"
+title: "Gaspreis: So sicherst du dir jetzt günstige Tarife für 2026"
 description: Erfahre, warum die Gaspreise 2026 steigen und wie du mit einer Preisgarantie Gas dauerhaft deine Kosten senkst. Jetzt Gasrechnung sparen und wechseln!
 date: 2026-08-12T09:48:00Z
 draft: false
