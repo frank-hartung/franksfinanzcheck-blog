@@ -1,0 +1,130 @@
+# ============================================================
+#  AFFILIATE-INTEGRITÄTS-WACHE (täglich) – scripts/affiliate_integrity_gate.py
+#  ------------------------------------------------------------
+#  Auftrag (Frank, 14.08.2026): "Die Affiliate-Links wurden beschädigt.
+#  Bitte dauerhaft beheben (Automatik und Selbstheilung), indem die
+#  Veröffentlichung nur vorgenommen wird, wenn alle Links funktionieren
+#  und tatsächlich im Blog erscheinen. Ansonsten soll sofort eine
+#  Reparatur erfolgen."
+#
+#  Hintergrund: Am 14.08.2026 hatten 8 Live-Artikel beschädigte
+#  Affiliate-CTA-Boxen (dangling Markdown-Links, verstümmelter Text,
+#  ein Rohlink zum falschen Partner) – unbemerkt bis zur manuellen
+#  Meldung. Die bestehende Prüfung dieser Klasse von Schäden
+#  (scripts/bestand_gate.py -> affiliate_integrity_gate.py) lief bis
+#  dahin nur EINMAL PRO WOCHE über seo-weekly.yml (Mittwoch). Das
+#  erfüllt NICHT die Anforderung "sofort" – ein neuer Schaden hätte im
+#  schlimmsten Fall fast eine Woche unbemerkt live bleiben können.
+#
+#  Dieser eigenständige, bewusst schlanke Workflow schließt die Lücke:
+#  läuft TÄGLICH, prüft und heilt AUSSCHLIESSLICH die Affiliate-Link-
+#  Integrität (AI1-AI4: vollständige Markdown-Links, nur registrierte
+#  /go/-Redirects, Text-Plausibilität, Render-Beweis im gebauten HTML)
+#  – bewusst OHNE die breiteren, langsameren wöchentlichen SEO-/Meta-
+#  Heilungsketten aus seo-weekly.yml anzufassen, um das Risiko
+#  unbeabsichtigter Seiteneffekte durch eine höhere Lauffrequenz gering
+#  zu halten.
+#
+#  Ablauf: Hugo-Build -> affiliate_integrity_gate.py (prüft + heilt +
+#  baut bei Heilung automatisch neu, um den Render-Beweis danach erneut
+#  zu führen) -> bei Änderungen committen + pushen -> Deploy explizit
+#  anstoßen (GITHUB_TOKEN-Commits lösen den push-Trigger in deploy.yml
+#  NICHT aus, siehe content-engine-v2.yml) -> bei weiterhin bestehenden
+#  Problemen automatisch ein GitHub-Issue eröffnen.
+# ============================================================
+name: Affiliate-Integritäts-Wache (täglich)
+
+on:
+  schedule:
+    - cron: "0 5 * * *"    # täglich 07:00 MESZ (05:00 UTC) – vor dem Content-Engine-Hauptslot (08:10)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  integritaet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten
+        run: |
+          pip install --quiet pyyaml
+          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
+
+      - name: Hugo installieren
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+
+      - name: Hugo-Build (Voraussetzung für Render-Beweis AI4)
+        run: hugo --minify
+
+      - name: Affiliate-Integritäts-Gate ausführen (prüfen + sofort heilen)
+        id: gate
+        continue-on-error: true
+        run: |
+          python3 scripts/affiliate_integrity_gate.py | tee /tmp/integrity_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Reparatur + Report committen
+        run: |
+          git config user.name "Affiliate-Integrity-Bot"
+          git config user.email "affiliate-integrity-bot@users.noreply.github.com"
+          # BUGFIX (14.08.2026, siehe uniqueness-guard.yml/seo-weekly.yml):
+          # 'git add' mit mehreren Pfaden bricht OHNE IRGENDETWAS zu stagen
+          # ab, wenn auch nur EIN Pfad fehlt – deshalb pro Pfad ein eigener
+          # add-Aufruf statt eines gemeinsamen.
+          git add content/ 2>/dev/null || true
+          git add AFFILIATE-INTEGRITY-REPORT.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Affiliate-Integritäts-Wache: keine Änderungen."
+          else
+            git commit -m "fix(content): Affiliate-Integritäts-Wache – defekte CTA-Box(en) automatisch geheilt (täglich)"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+            echo "GEHEILT=true" >> "$GITHUB_ENV"
+          fi
+
+      - name: Deploy anstoßen (nur wenn tatsächlich repariert wurde)
+        if: env.GEHEILT == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy.yml',
+              ref: 'main',
+            });
+            console.log('✅ Deploy ausgelöst.');
+
+      - name: Issue bei weiterhin bestehenden Problemen (z. B. nicht registrierter /go/-Key)
+        # Greift NUR, wenn nach der Selbstheilung noch etwas übrig ist
+        # (z. B. Render-Beweis scheitert trotz Heilung, oder ein Link
+        # verweist auf einen nicht in check24_links.yaml registrierten
+        # Key – das kann affiliate_integrity_gate.py nicht selbst lösen,
+        # das braucht eine redaktionelle/registrierungsseitige Korrektur).
+        if: steps.gate.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let details = 'Affiliate-Integritäts-Wache hat Artikel gefunden, deren CTA-Boxen NICHT automatisch vollständig geheilt werden konnten.';
+            try { details = fs.readFileSync('AFFILIATE-INTEGRITY-REPORT.md', 'utf-8'); } catch (e) {}
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🔗 Affiliate-Integritäts-Wache: CTA-Boxen brauchen Aufmerksamkeit',
+              body: details + '\n\n---\nAutomatisch erstellt von der täglichen Affiliate-Integritäts-Wache. Betroffene Artikel wurden NICHT gelöscht.'
+            });
+            console.log('✅ Issue erstellt');

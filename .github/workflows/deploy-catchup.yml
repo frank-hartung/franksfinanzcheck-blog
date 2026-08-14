@@ -47,6 +47,7 @@ on:
       - "Pinterest-AI"
       - "Pinterest-Watchdog"
       - "FrankAutoOps-Report"
+      - "Affiliate-Integritäts-Wache (täglich)"
     types:
       - completed
 

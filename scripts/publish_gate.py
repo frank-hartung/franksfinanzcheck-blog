@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """publish_gate.py – Harte Vor-Publish-Kontrolle (13.08.2026)
 
-Betriebsregel (Frank, 13.08.2026): Zukünftige Artikel werden nur dann
-tatsächlich live geschaltet, wenn sie DREI automatische Prüfungen bestehen:
+Betriebsregel (Frank, 13.08.2026, erweitert 14.08.2026): Zukünftige Artikel
+werden nur dann tatsächlich live geschaltet, wenn sie VIER automatische
+Prüfungen bestehen:
 
   1. check_length.py          – Zeichen-/Wortlänge (700-1800 Wörter)
   2. seo_audit.py              – Title/Description-Länge, Wortzahl, Alt-Texte,
@@ -10,6 +11,18 @@ tatsächlich live geschaltet, wenn sie DREI automatische Prüfungen bestehen:
   3. affiliate_profi_check.py  – A1-A8: Offenlegung, E-E-A-T-Feld, interne
                                   Links, Schema.org, Affiliate-Dichte,
                                   Trust-Box, Autor, CTA-Vorhandensein
+  4. affiliate_integrity_gate.py – AI1-AI4: strukturell vollständige CTA-
+                                  Markdown-Links, nur registrierte /go/-
+                                  Redirects (keine rohen Partner-URLs),
+                                  Text-Plausibilität an der CTA, UND Render-
+                                  Beweis (Link erscheint tatsächlich im
+                                  gebauten HTML unter public/, nicht nur im
+                                  Markdown-Quelltext). Grund: Vorfall
+                                  14.08.2026, bei dem 8 Live-Artikel
+                                  beschädigte CTA-Boxen hatten, die von den
+                                  ersten drei Prüfungen NICHT erkannt wurden
+                                  (siehe Kopfkommentar in
+                                  affiliate_integrity_gate.py).
 
 Läuft NACH der bestehenden Qualitäts-/Selbstheilungs-Kette (Rechtschreibung,
 Meta-Optimierung, interne Verlinkung, affiliate_profi_check --fix, …) und
@@ -138,6 +151,24 @@ def affiliate_profi_failures():
     return per_slug, None
 
 
+def affiliate_integrity_failures():
+    """Slugs mit strukturell defekten/nicht gerenderten CTA-Boxen (14.08.2026,
+    4. hartes Kriterium – siehe scripts/affiliate_integrity_gate.py).
+    Läuft im --dry-run-Modus, da hier NUR geprüft wird: Heilung für
+    Bestandsdaten passiert separat in bestand_gate.py; ein druckfrischer
+    Kandidat, der hier durchfällt, wird stattdessen verworfen (Ebene 2:
+    neues Thema statt kaputte Links live zu schalten)."""
+    data = _run_json(["scripts/affiliate_integrity_gate.py", "--dry-run", "--json"])
+    if not data:
+        return {}, "affiliate_integrity_gate.py: keine Auswertung möglich (public/ gebaut?)"
+    per_slug = {}
+    for slug, info in data.get("findings", {}).items():
+        per_slug[slug] = info.get("problems", [])
+    for slug, msg in data.get("render_problems", {}).items():
+        per_slug.setdefault(slug, []).append(msg)
+    return per_slug, None
+
+
 def discard_article(slug):
     """Löscht einen durchgefallenen Artikel vollständig: Content-Bundle +
     generierte Cover-Bilder (alle Größen/Formate). Kein Artefakt bleibt
@@ -168,11 +199,14 @@ def main():
     len_fail, len_warn = check_length_failures()
     seo_fail, seo_warn = seo_audit_failures()
     aff_fail, aff_warn = affiliate_profi_failures()
+    integ_fail, integ_warn = affiliate_integrity_failures()
     for w in (len_warn, seo_warn):
         if w:
             print(f"⚠ {w}")
     if aff_warn:
         print(f"⚠ {aff_warn}")
+    if integ_warn:
+        print(f"⚠ {integ_warn}")
 
     gated = []
     for slug in candidates:
@@ -183,6 +217,9 @@ def main():
             reasons.append("SEO-Audit (seo_audit.py) nicht bestanden")
         if slug in aff_fail:
             reasons.append("Profi-Affiliate-Check nicht bestanden: " + "; ".join(aff_fail[slug]))
+        if slug in integ_fail:
+            reasons.append("Affiliate-Link-Integrität nicht bestanden (defekte/nicht gerenderte CTA): "
+                            + "; ".join(integ_fail[slug]))
 
         if reasons:
             gated.append((slug, reasons))
@@ -192,7 +229,7 @@ def main():
             if not DRY_RUN:
                 discard_article(slug)
         else:
-            print(f"  ✅ {slug}: alle 3 Prüfungen bestanden – bleibt live")
+            print(f"  ✅ {slug}: alle 4 Prüfungen bestanden – bleibt live")
 
     if gated:
         try:

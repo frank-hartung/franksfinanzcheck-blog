@@ -7,9 +7,10 @@
 #  Veröffentlichungsroutine auch für die bestehenden Artikel gilt, und
 #  dass jede Änderung am Blog auch für die Bestandsdaten gilt."
 #
-#  HINTERGRUND: scripts/publish_gate.py prüft die 3 harten Kriterien
-#  (check_length.py, seo_audit.py, affiliate_profi_check.py) NUR für
-#  Artikel, die HEUTE neu erzeugt wurden (todays_live_candidates()) –
+#  HINTERGRUND: scripts/publish_gate.py prüft die 4 harten Kriterien
+#  (check_length.py, seo_audit.py, affiliate_profi_check.py,
+#  affiliate_integrity_gate.py) NUR für Artikel, die HEUTE neu erzeugt
+#  wurden (todays_live_candidates()) –
 #  by design, weil es bei Nicht-Bestehen den Artikel komplett VERWIRFT
 #  (discard_article() löscht Content + Cover). Das ist für druckfrische,
 #  noch nirgends verlinkte/indexierte Kandidaten die richtige, radikale
@@ -22,13 +23,16 @@
 #
 #  DIESES SKRIPT SCHLIESST DIE LÜCKE, aber NICHT-DESTRUKTIV:
 #    1. Prüft ALLE aktuell live geschalteten Artikel (nicht nur die
-#       heutigen) mit denselben drei Funktionen aus publish_gate.py –
+#       heutigen) mit denselben vier Funktionen aus publish_gate.py –
 #       echte Wiederverwendung, kein Parallel-Code. Jede künftige
 #       Verschärfung/Änderung der Gate-Logik gilt dadurch automatisch
 #       auch hier, ohne dass dieses Skript angefasst werden muss.
 #    2. Für jeden Fund wird die passende bestehende Selbstheilung
 #       versucht (meta_optimizer.py --fix für SEO-Mängel,
-#       affiliate_profi_check.py --fix für A1-A8), danach erneut
+#       affiliate_profi_check.py --fix für A1-A8,
+#       affiliate_integrity_gate.py [ohne --dry-run, heilt also
+#       tatsächlich] für defekte/nicht gerenderte CTA-Boxen – 14.08.2026,
+#       Frank: "sofortige Reparatur" für Bestandsschäden), danach erneut
 #       geprüft.
 #    3. Was danach IMMER NOCH nicht besteht, wird NIEMALS gelöscht,
 #       sondern klar für redaktionelle Prüfung gemeldet
@@ -85,7 +89,7 @@ def live_slugs() -> list[str]:
 
 
 def run_gate():
-    """Importiert publish_gate.py und ruft dieselben drei Prüf-Funktionen
+    """Importiert publish_gate.py und ruft dieselben vier Prüf-Funktionen
     auf, die auch für druckfrische Artikel gelten – echte Wiederverwendung,
     kein Parallel-Code. Setzt daher voraus, dass vorher `hugo --minify`
     gelaufen ist (wie publish_gate.py selbst dokumentiert)."""
@@ -96,12 +100,14 @@ def run_gate():
     length_failed, length_err = pg.check_length_failures()
     seo_failed, seo_err = pg.seo_audit_failures()
     affiliate_failed, affiliate_err = pg.affiliate_profi_failures()
+    integrity_failed, integrity_err = pg.affiliate_integrity_failures()
 
     return {
         "length": length_failed,
         "seo": seo_failed,
         "affiliate": affiliate_failed,
-    }, [e for e in (length_err, seo_err, affiliate_err) if e]
+        "integrity": integrity_failed,
+    }, [e for e in (length_err, seo_err, affiliate_err, integrity_err) if e]
 
 
 def rebuild_hugo() -> bool:
@@ -126,6 +132,13 @@ def heal(dimension: str) -> None:
     elif dimension == "affiliate":
         subprocess.run([sys.executable, str(SCRIPTS / "affiliate_profi_check.py"), "--fix"],
                         cwd=ROOT, capture_output=True, text=True, timeout=180)
+    elif dimension == "integrity":
+        # OHNE --dry-run: heilt tatsächlich (regeneriert defekte CTA-Boxen
+        # komplett neu über affiliate_marketer.py-Vorlagen) statt nur zu
+        # melden – das ist die vom Nutzer geforderte "sofortige Reparatur"
+        # für bereits veröffentlichte Bestandsartikel.
+        subprocess.run([sys.executable, str(SCRIPTS / "affiliate_integrity_gate.py")],
+                        cwd=ROOT, capture_output=True, text=True, timeout=180)
     # "length" (zu kurz/zu lang) ist nicht automatisch heilbar – braucht
     # echte Textarbeit, wird nur gemeldet.
 
@@ -134,7 +147,9 @@ def main():
     all_slugs = set(live_slugs())
     findings, errors = run_gate()
 
-    affected = {s for s in (findings["length"] | findings["seo"] | set(findings["affiliate"].keys()))
+    affected = {s for s in (findings["length"] | findings["seo"]
+                             | set(findings["affiliate"].keys())
+                             | set(findings["integrity"].keys()))
                 if s in all_slugs}
 
     healed_dims = []
@@ -145,6 +160,9 @@ def main():
         if affected & set(findings["affiliate"].keys()):
             heal("affiliate")
             healed_dims.append("affiliate")
+        if affected & set(findings["integrity"].keys()):
+            heal("integrity")
+            healed_dims.append("integrity")
         if healed_dims and rebuild_hugo():
             findings, errors = run_gate()  # erneut prüfen nach Heilungsversuch
 
@@ -153,10 +171,13 @@ def main():
             "length": s in findings["length"],
             "seo": s in findings["seo"],
             "affiliate": findings["affiliate"].get(s, []),
+            "integrity": findings["integrity"].get(s, []),
         }
         for s in all_slugs
         if s in findings["length"] or s in findings["seo"] or s in findings["affiliate"]
+        or s in findings["integrity"]
     }
+
 
     if AS_JSON:
         result = {
@@ -182,8 +203,9 @@ def main():
     if not still_affected:
         lines.append(
             "🎉 Alle bestehenden Artikel erfüllen die aktuelle Publish-Gate-Prüfung "
-            "(check_length.py + seo_audit.py + affiliate_profi_check.py) – "
-            "keine Reparatur nötig, oder erfolgreich automatisch geheilt."
+            "(check_length.py + seo_audit.py + affiliate_profi_check.py + "
+            "affiliate_integrity_gate.py) – keine Reparatur nötig, oder erfolgreich "
+            "automatisch geheilt."
         )
     else:
         lines.append("### Weiterhin auffällig (NICHT gelöscht – zur redaktionellen Prüfung):")
@@ -196,11 +218,14 @@ def main():
                 lines.append("- ⚠️ SEO-Mangel laut seo_audit.py besteht nach meta_optimizer.py --fix weiter")
             for msg in detail["affiliate"]:
                 lines.append(f"- ⚠️ {msg}")
+            for msg in detail["integrity"]:
+                lines.append(f"- ⚠️ Affiliate-Link-Integrität (CTA defekt/nicht gerendert), Selbstheilung fehlgeschlagen: {msg}")
             lines.append("")
         lines.append(
             "---\n_Bestandsartikel werden NIE automatisch gelöscht (anders als druckfrische Kandidaten in "
             "publish_gate.py) – nur geheilt oder gemeldet, da sie bereits veröffentlicht/indexiert sein können._"
         )
+
 
     report_text = "\n".join(lines)
     print(report_text)

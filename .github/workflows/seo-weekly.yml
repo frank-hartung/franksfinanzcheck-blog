@@ -195,14 +195,18 @@ jobs:
           fi
 
       - name: Bestand-Gate (aktuelle Publish-Gate-Regeln auch auf Bestandsartikel anwenden)
-        # Frank-Beschluss 13.08.: Die harte Publish-Gate-Prüfung
-        # (check_length.py + seo_audit.py + affiliate_profi_check.py), die
-        # neue Artikel bestehen müssen, galt bisher NUR für druckfrische
+        # Frank-Beschluss 13.08., erweitert 14.08.: Die harte Publish-Gate-
+        # Prüfung (check_length.py + seo_audit.py + affiliate_profi_check.py
+        # + seit 14.08. affiliate_integrity_gate.py – strukturell intakte
+        # UND tatsächlich im gebauten HTML gerenderte CTA-Links), die neue
+        # Artikel bestehen müssen, galt bisher NUR für druckfrische
         # Kandidaten (publish_gate.py verwirft sie sonst). Bestandsartikel
         # wurden nie dagegen geprüft. bestand_gate.py schließt die Lücke,
         # aber NICHT-DESTRUKTIV: heilt über die bestehenden Fixer
-        # (meta_optimizer/affiliate_profi_check --fix) und LÖSCHT NIE einen
-        # bereits veröffentlichten Artikel. Exit 1 nur, wenn nach dem
+        # (meta_optimizer/affiliate_profi_check --fix, sowie seit 14.08.
+        # affiliate_integrity_gate.py, das defekte CTA-Boxen komplett neu
+        # generiert statt zu flicken) und LÖSCHT NIE einen bereits
+        # veröffentlichten Artikel. Exit 1 nur, wenn nach dem
         # Heilungsversuch etwas übrig bleibt, das echte Textarbeit braucht.
         id: bestand
         continue-on-error: true
@@ -222,6 +226,7 @@ jobs:
           git add content/ 2>/dev/null || true
           git add BESTAND-REPORT.md 2>/dev/null || true
           git add AFFILIATE-REPORT.md 2>/dev/null || true
+          git add AFFILIATE-INTEGRITY-REPORT.md 2>/dev/null || true
           git add .affiliate_report.json 2>/dev/null || true
           git add META-REPORT.md 2>/dev/null || true
           if git diff --cached --quiet; then
