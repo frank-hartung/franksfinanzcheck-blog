@@ -1,15 +1,16 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 14.08.2026 09:47 Uhr (MESZ)
+> Automatisch aktualisiert: 14.08.2026 16:39 Uhr (MESZ)
 
 ## Heutiger Stand
 
-- **Veröffentlicht heute:** 0/2 Artikel
+- **Veröffentlicht heute:** 1/2 Artikel
+- 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden – Gasrechnung senken: Fehler im Spätsommer vermeiden
 
 ## System
 
 - **Themenpool:** 175 Themen, **171 frei**
-- **Letzter Content-Commit:** a2b8528 2026-08-14 content: neuer Artikel sofort optimiert (Meta, interne Verlinkung)
+- **Letzter Content-Commit:** 47876ed 2026-08-14 content: Publish-Gate hat Artikel ohne bestandene Prüfung auf Entwurf zurückgestuft
 - **Tageslimit:** 2 (steuerbar per Variable MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen
