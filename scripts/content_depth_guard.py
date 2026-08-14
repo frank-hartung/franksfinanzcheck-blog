@@ -212,7 +212,15 @@ def main():
 
         heal_result = None
         if not DRY_RUN and (analysis["faq_count"] < MIN_FAQ or not analysis["has_edge_case"]):
-            ok, detail = heal_article(a)
+            try:
+                ok, detail = heal_article(a)
+            except Exception as exc:  # noqa: BLE001
+                # Sicherheitsnetz: ein unerwarteter Fehler (z. B. fehlende
+                # Abhängigkeit, API-Ausfall) darf NIE den ganzen Lauf/Report
+                # verhindern (14.08.2026, im Live-Test gefunden: ein
+                # ungefangener ModuleNotFoundError ließ den Report für ALLE
+                # Artikel ausfallen, nicht nur für den betroffenen).
+                ok, detail = False, f"unerwarteter Fehler: {exc}"
             heal_result = detail
             if ok:
                 healed.append(a["slug"])
