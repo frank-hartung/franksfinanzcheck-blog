@@ -119,6 +119,10 @@ Das hängt von der Art der Garantie ab. Bei einer eingeschränkten Preisgarantie
 ### Was passiert, wenn mein Gasanbieter während der Preisgarantie pleitegeht?
 In Deutschland ist die Energieversorgung gesetzlich gesichert. Sollte ein Anbieter zahlungsunfähig werden, springt sofort der örtliche Grundversorger ein. Du sitzt also niemals im Kalten. In einem solchen Fall hast du zudem ein Sonderkündigungsrecht und kannst dir über einen Vergleichsportal sofort wieder einen günstigen Wahltarif suchen.
 
+
+### Was passiert mit meinem Gaspreis, wenn ich in eine neue Wohnung ziehe, die mit einer anderen Gasversorgungstechnologie ausgestattet ist?
+Wenn du in eine Wohnung ziehst, die mit einer anderen Gasversorgungstechnologie ausgestattet ist, wie zum Beispiel einer Gastank-Anlage, musst du possibly einen neuen Vertrag mit deinem Gasanbieter abschließen. In diesem Fall solltest du dich vorher über die spezifischen Konditionen und Tarife informieren, die für diese Art von Gasversorgung gelten. Es ist auch ratsam, vorher einen Vergleich von verschiedenen Anbietern durchzuführen, um den besten Tarif für deine neue Wohnung zu finden.
+
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/gas/)

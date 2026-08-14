@@ -85,6 +85,10 @@ In der Regel sind fest installierte Anlagen auf dem Dach über die Gebäudeversi
 ### Wie oft sollte ich meinen Versicherungsschutz überprüfen?
 Experten empfehlen einen Check alle zwei bis drei Jahre oder nach jeder größeren baulichen Veränderung. Da sich die gesetzlichen Rahmenbedingungen und die klimatischen Risiken schnell ändern, ist ein regelmäßiges Update wichtig. Ein kurzer Abgleich deiner aktuellen Gebäudedaten mit den Leistungen deines Tarifs stellt sicher, dass keine Deckungslücken entstehen. Besonders nach den Reformen von 2026 ist eine Prüfung für jeden Eigentümer dringend ratsam.
 
+
+### Wie sind Ferienhäuser oder Zweitwohnsitze in Bezug auf die Elementarschaden-Versicherungspflicht 2026 zu behandeln?
+Ferienhäuser oder Zweitwohnsitze fallen in der Regel auch unter die neue Versicherungspflicht. Du musst dich also auch für diese Immobilien um einen entsprechenden Schutz kümmern. Es gibt jedoch spezielle Tarife, die auf die Bedürfnisse von Ferienhäusern oder Zweitwohnsitzen zugeschnitten sind, daher solltest du dich bei deinem Versicherer nach diesen Möglichkeiten erkundigen.
+
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=hausratversicherung)

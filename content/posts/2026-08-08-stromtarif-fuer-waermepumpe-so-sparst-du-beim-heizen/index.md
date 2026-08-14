@@ -112,6 +112,10 @@ Keine Sorge: Dein Haus kühlt nicht sofort aus. Die Sperrzeiten dauern meist nur
 ### Kann ich den Wärmepumpentarif auch für eine Klimaanlage nutzen?
 Ja, sofern die Klimaanlage fest installiert ist und als Heizung dient. Da Klimaanlagen technisch gesehen Luft-Luft-Wärmepumpen sind, fallen sie unter die gleichen Regelungen für steuerbare Verbrauchseinrichtungen nach §14a EnWG.
 
+
+### Ich habe eine alte Wärmepumpe, die nicht steuerbar ist – kann ich trotzdem einen Wärmepumpentarif nutzen?
+Du kannst immer noch einen Wärmepumpentarif abschließen, aber die Vorteile sind begrenzt. Ohne Steuerbarkeit bekommst du keine reduzierten Netzentgelte nach §14a EnWG. Du solltest dich an deinen Netzbetreiber wenden, um zu prüfen, ob es individuelle Lösungen oder alternative Tarife gibt, die für deine Situation geeignet sind.
+
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/strom/)

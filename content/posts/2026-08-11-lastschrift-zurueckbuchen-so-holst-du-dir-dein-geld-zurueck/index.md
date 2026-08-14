@@ -118,6 +118,10 @@ Die Buchung wird storniert, der Vertrag bleibt streng genommen bestehen. War die
 ### Kann meine Bank die Rückbuchung ablehnen?
 Bei einer unberechtigten Abbuchung innerhalb der 13-Monats-Frist oder einer normalen Lastschrift innerhalb von acht Wochen ist die Rückbuchung dein gutes Recht. Erst wenn die Fristen verstrichen sind oder Missbrauchsverdacht vorliegt, kann die Bank ablehnen. Dann solltest du auf eine schriftliche Begründung bestehen.
 
+
+### Was passiert, wenn ich eine Lastschrift zurückbuchen lassen möchte, aber mein Konto ist bereits gesperrt oder geschlossen?
+Wenn dein Konto gesperrt oder geschlossen ist, kann die Rückbuchung einer Lastschrift komplizierter werden. In diesem Fall solltest du dich direkt an deine Bank wenden, um die Möglichkeiten einer Rückbuchung zu klären. Die Bank kann in solchen Fällen einen besonderen Prozess anbieten, um die Rückbuchung zu ermöglichen, oder alternative Lösungen vorschlagen, um dein Geld zurückzubekommen.
+
 ---
 
 _Lesetipps zum Weitersparen: Kostenloses Girokonto finden – worauf es wirklich ankommt und Gebührenfallen beim Banking vermeiden_

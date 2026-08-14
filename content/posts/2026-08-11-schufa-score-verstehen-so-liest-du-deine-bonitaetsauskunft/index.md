@@ -137,6 +137,10 @@ Nein. Deine eigenen Auskünfte und Konditionsanfragen sind für andere nicht sic
 ### Kann ich einen guten Score bekommen, obwohl ich nie einen Kredit hatte?
 Ja. Wer regelmäßig Verträge zuverlässig bedient – Handy, [Girokonto](../../posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/), Versicherungen – und keine Zahlungsstörungen hat, baut eine solide Historie auf. Ein Score entsteht nicht durch Kredite allein, sondern durch nachweisliche Zuverlässigkeit über Zeit.
 
+
+### Was passiert mit meiner Schufa-Auskunft, wenn ich ins Ausland ziehe?
+Wenn du ins Ausland ziehst, bleibt deine Schufa-Auskunft in Deutschland bestehen, solange du noch geschäftliche Beziehungen hier hast. Du solltest dich jedoch um eine Löschung deiner Daten bemühen, wenn du alle Verbindungen nach Deutschland abgebrochen hast. In der Regel ist das aber nur möglich, wenn du nachweislich mindestens 3 Jahre keine geschäftlichen Beziehungen mehr in Deutschland hattest.
+
 ---
 
 _Lesetipps zum Weitersparen: Ratenkredit zum Bestzins vergleichen – und falls dein Konto dauerhaft zwickt: Kontowechsel in 20 Minuten: Der Wechselservice im Überblick_
