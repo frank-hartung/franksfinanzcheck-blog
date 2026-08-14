@@ -182,7 +182,9 @@ jobs:
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
-          git add content/ AFFILIATE-REPORT.md .affiliate_report.json
+          git add content/ 2>/dev/null || true
+          git add AFFILIATE-REPORT.md 2>/dev/null || true
+          git add .affiliate_report.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Keine Affiliate-Änderungen."
           else
@@ -213,7 +215,15 @@ jobs:
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
-          git add content/ BESTAND-REPORT.md AFFILIATE-REPORT.md .affiliate_report.json META-REPORT.md 2>/dev/null || true
+          # BUGFIX (14.08.2026): 'git add' mit mehreren Pfaden bricht OHNE
+          # IRGENDETWAS zu stagen ab, wenn auch nur EIN Pfad fehlt (anders
+          # als bei .gitignore-Treffern) – deshalb pro Pfad ein eigener
+          # add-Aufruf statt eines gemeinsamen (siehe uniqueness-guard.yml).
+          git add content/ 2>/dev/null || true
+          git add BESTAND-REPORT.md 2>/dev/null || true
+          git add AFFILIATE-REPORT.md 2>/dev/null || true
+          git add .affiliate_report.json 2>/dev/null || true
+          git add META-REPORT.md 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Bestand-Gate: keine Änderungen."
           else

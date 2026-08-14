@@ -68,7 +68,18 @@ jobs:
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
-          git add content/ WEB-UNIQUENESS-REPORT.md data/web_uniqueness_cache.json 2>/dev/null || true
+          # BUGFIX (14.08.2026, im Live-Test gefunden): 'git add' bricht mit
+          # einem FATAL-Fehler UND OHNE IRGENDEINE Datei zu stagen ab, wenn
+          # auch nur EIN Pfad im selben Aufruf nicht existiert (anders als
+          # bei .gitignore-Treffern, die git add nur überspringt) – hier
+          # existiert data/web_uniqueness_cache.json nur, wenn der optionale
+          # Web-Duplikat-Check mit API-Key lief. Ohne Key wurde durch das
+          # gemeinsame 'git add ... || true' bisher STILL GAR NICHTS
+          # committet, auch nicht der immer vorhandene Report. Deshalb: pro
+          # Pfad ein eigener add-Aufruf.
+          git add content/ 2>/dev/null || true
+          git add WEB-UNIQUENESS-REPORT.md 2>/dev/null || true
+          git add data/web_uniqueness_cache.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Web-Uniqueness-Guard: keine Änderungen."
           else
@@ -105,7 +116,8 @@ jobs:
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
-          git add content/ CONTENT-DEPTH-REPORT.md 2>/dev/null || true
+          git add content/ 2>/dev/null || true
+          git add CONTENT-DEPTH-REPORT.md 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Content-Depth-Guard: keine Änderungen."
           else
