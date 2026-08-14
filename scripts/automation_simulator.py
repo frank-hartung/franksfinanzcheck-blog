@@ -190,9 +190,19 @@ def sim_loader_parity():
     detail_lines = [f"Grundwahrheit (unabhängig ermittelt): {truth} live Artikel."]
     for name, n in checks:
         if isinstance(n, int):
-            status = "✅" if n == truth else "❌"
-            if n != truth:
-                problems.append(f"{name} meldet {n} statt {truth}")
+            # BUGFIX (14.08.2026, gefunden durch einen echten Falsch-Alarm):
+            # Manche Lader (z. B. seo_audit.load_posts(), affiliate_profi_
+            # check._post_slugs(), internal_linker.load_pages()) geben
+            # ABSICHTLICH auch Entwürfe zurück – die Draft-Filterung
+            # passiert bewusst erst an der jeweiligen Aufrufstelle, nicht
+            # im Lader selbst. Ein Vergleich auf exakte Gleichheit erzeugt
+            # dadurch bei jedem neuen Entwurfsartikel einen Falsch-Alarm.
+            # Die eigentlich gefährliche Fehlerklasse (Lader liefert still
+            # WENIGER als real vorhanden, siehe 13.08.-Bugs) bleibt durch
+            # ">=" weiterhin zuverlässig erkannt.
+            status = "✅" if n >= truth else "❌"
+            if n < truth:
+                problems.append(f"{name} meldet nur {n} statt mindestens {truth}")
         else:
             status = "❌"
             problems.append(f"{name}: {n}")

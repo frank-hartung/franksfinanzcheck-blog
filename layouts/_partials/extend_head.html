@@ -22,7 +22,16 @@
 {{- with site.Params.author -}}
 <meta name="author" content="{{ . }}">
 {{- end -}}
-<meta name="robots" content="index, follow">
+
+{{- /* BUGFIX (14.08.2026, gefunden beim Bau von web_uniqueness_guard.py):
+       Dieser Block rendert unconditional 'index, follow' - unabhängig von
+       der Thin-Content-noindex-Logik in layouts/_partials/head.html
+       (Tag-/Kategorie-Seiten mit < 4 Artikeln -> noindex,follow). Dadurch
+       hatte JEDE Seite der Website ZWEI widersprüchliche robots-Meta-Tags
+       im <head> (z. B. auf jeder Thin-Tag-Seite gleichzeitig 'noindex,
+       follow' UND 'index, follow'). head.html deckt bereits ALLE Fälle
+       ab (Thin-Taxonomie, Produktion, Nicht-Produktion) – dieser
+       redundante, konfliktträchtige zweite Tag entfällt ersatzlos. */ -}}
 
 {{- /* ---------- Verifikationen ---------- */ -}}
 {{- with site.Params.pinterestVerify -}}

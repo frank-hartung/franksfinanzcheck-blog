@@ -1,13 +1,9 @@
 {
- "ts": "2026-08-14T09:47:41+00:00",
- "size_mb": 2255,
- "files": 21345,
+ "ts": "2026-08-14T11:05:59+00:00",
+ "size_mb": 48,
+ "files": 1668,
  "limit_mb": 128,
  "limit_files": 10000,
- "level": "kritisch",
- "actions": [
-  ".cache/ gelöscht (−20 MB)",
-  "1 Python-Cache-Einträge gelöscht",
-  "Audit-Retention angewendet"
- ]
+ "level": "gruen",
+ "actions": []
 }

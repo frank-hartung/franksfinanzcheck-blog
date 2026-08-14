@@ -1,6 +1,6 @@
 # 🧪 SIMULATION-REPORT (automation_simulator.py)
 
-**Stand:** 2026-08-14 08:41 UTC
+**Stand:** 2026-08-14 11:07 UTC
 **Checks:** 7 · **Fehlgeschlagen:** 0 · **Selbstgeheilt:** 0
 
 ## ✅ SIM-A: Themen-Pool (data/topics.yaml)
@@ -11,11 +11,11 @@
 ## ✅ SIM-B: Lade-Paritäts-Check (Kern-Regressionsschutz)
 ```
 Grundwahrheit (unabhängig ermittelt): 9 live Artikel.
-  ✅ seo_audit.load_posts(): 9
+  ✅ seo_audit.load_posts(): 10
   ✅ keyword_optimizer.load_articles(): 9
-  ✅ affiliate_profi_check._post_slugs(): 9
-  ✅ internal_linker.load_pages(): 9
-  ✅ quality_score.py --report: 9
+  ✅ affiliate_profi_check._post_slugs(): 10
+  ✅ internal_linker.load_pages(): 10
+  ✅ quality_score.py --report: 10
 ```
 
 ## ✅ SIM-C: Synthetischer Artikel-Lifecycle (Tags/Keywords/Provider)
@@ -25,7 +25,7 @@ Testartikel erzeugt und geprüft. Alles ok.
 
 ## ✅ SIM-D: Mastodon-Hashtag/Cover-Regressionstest
 ```
-3 aktuelle Artikel geprüft. Alles ok.
+2 aktuelle Artikel geprüft. Alles ok.
 ```
 
 ## ✅ SIM-E: publish_gate.py --dry-run
@@ -38,7 +38,7 @@ Exit 0. Publish-Gate: keine heutigen Live-Kandidaten – nichts zu prüfen.
 ```
 Exit 0. Domain-Alter: 0 Wochen seit 2026-08-08
 Ramp-Ziel (ohne Bremse): 3/Woche
-Erfolgsquote: noch zu wenig Daten (1 Events in 14 Tagen) – Sicherheitsbremse inaktiv
+Erfolgsquote: noch zu wenig Daten (2 Events in 14 Tagen) – Sicherheitsbremse inaktiv
 → Ziel-Frequenz: 3/Woche (Mo, Mi, Fr)
   Aktuell konfiguriert: 3/Woche
   Keine Änderung nötig.

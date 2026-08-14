@@ -1,14 +1,9 @@
 # 🤝 AFFILIATE-REPORT
 
-**Stand:** 2026-08-14 09:47 UTC · Modus: FIX
+**Stand:** 2026-08-14 11:06 UTC · Modus: CHECK
 
-Probleme: 2 · Geheilt: 2
+Probleme: 1 · Geheilt: 0
 
 | Code | Artikel | Problem |
 |---|---|---|
-| A2 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | kein erfahrung-Feld (E-E-A-T) |
-| A3 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | nur 0 interne Links (< 2) |
-
-**Selbstheilung:**
-- [A2] 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke: erfahrung ergänzt (generischer Profi-Baustein)
-- [A3] 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke: Pillar-Link ergänzt (→ konto-karten)
+| A3 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | nur 1 interne Links (< 2) |

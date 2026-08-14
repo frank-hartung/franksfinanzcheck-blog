@@ -1,10 +1,10 @@
 {
-  "signed_at": "2026-08-13T13:33:44.631821+00:00",
-  "head": "45223cb",
+  "signed_at": "2026-08-14T11:05:53.060855+00:00",
+  "head": "bccae0c",
   "files": {
     "assets/css/extended/custom.css": "3c941e57a4ecc96a4c8e78c8dbbb184b17e10af22ab29dd72bb908f5bdbaab88",
     "data/brand_lock.yaml": "9aaa6aad496c2fb4f7f84cb3b09b04c0f4d03eadb6aa69a27511988f69454680",
-    "data/content_fingerprints.jsonl": "137466b535699cb13d4d6a56739620daa88104ed668898d4f27f1fdf504397f2",
+    "data/content_fingerprints.jsonl": "6f39a49daac10d9d6c443e7e5c6f7d075d6438e9cf26001deed193b24850172b",
     "hugo.toml": "ef979013c6e813600d8718ef1488cba7219b95b2b86f1c6e57a155d9d472eeba",
     "layouts/_default/_markup/render-link.html": "aa06d8fad298ef739b97001c0cc7ce9a0c1102bc2df021570314df3d5c296a87",
     "layouts/_partials/cover.html": "f96a5ff402634dffc595077ca3648d4e5a79cf061f3d78328102bb804463c152",

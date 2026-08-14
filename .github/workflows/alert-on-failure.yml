@@ -33,6 +33,7 @@ on:
       - "Affiliate-Health (Wochenwache)"
       - "Design-Visual (Screenshot-Regression)"    # Ops-Monitoring selbst
       - "Automations-Simulator"       # Pipeline-Regressionsschutz (13.08.)
+      - "Unique-Content-Guard"        # Duplicate-Content/Themen-Tiefe (14.08.)
     types:
       - completed
 
