@@ -1,8 +1,8 @@
 # 📌 PINTEREST-REPORT
 
-**Stand:** 2026-08-14 15:14 UTC · Modus: FIX
+**Stand:** 2026-08-14 20:07 UTC · Modus: FIX
 
-Probleme: 10 · Geheilt: 0
+Probleme: 11 · Geheilt: 0
 
 | Code | Artikel | Problem |
 |---|---|---|
@@ -15,4 +15,5 @@ Probleme: 10 · Geheilt: 0
 | P3 | 2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft | Seite nicht gebaut (public fehlt?) |
 | P3 | 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026 | Seite nicht gebaut (public fehlt?) |
 | P3 | 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026 | Seite nicht gebaut (public fehlt?) |
+| P3 | 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden | Seite nicht gebaut (public fehlt?) |
 | P3 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | Seite nicht gebaut (public fehlt?) |

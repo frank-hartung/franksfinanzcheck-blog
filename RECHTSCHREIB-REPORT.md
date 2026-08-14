@@ -1,6 +1,6 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am … – 14 Artikel geprüft, 30 Funde, 6 korrigiert, 24 offen.
+> **Automatisch** erzeugt am … – 14 Artikel geprüft, 24 Funde, 0 korrigiert, 24 offen.
 
 ## Offene Punkte
 

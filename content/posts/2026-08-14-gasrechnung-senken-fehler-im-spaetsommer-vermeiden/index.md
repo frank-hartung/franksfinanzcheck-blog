@@ -97,7 +97,7 @@ Tausche deine alten, manuellen Drehregler gegen moderne Technik aus. Analoge The
 
 Die Heizung liefert immer die gleiche maximale Wärme ab – egal ob der Regler auf Stufe 3 oder 5 steht. Stufe 5 bedeutet nur, dass das Ventil erst bei 28 Grad schließt. Nutze stattdessen smarte Thermostate für deine Räume. Du programmierst sie einfach nach deinem individuellen Tagesablauf.
 
-Die Wohnung ist warm, wenn du von der Arbeit kommst. Nachts senkt das System die Temperatur automatisch ab. Das verhindert, dass du den ganzen Tag lang umsonst durchheizst. Mit dieser Technik reduzierst du deine Heizkosten oft ganz ohne Komfortverzicht.
+Die Wohnung ist warm, wenn du von der Arbeit kommst. Nachts senkt das System die Temperatur automatisch ab. Das verhindert, dass du den ganzen Tag lang umsonst durchheizst. Mit dieser Technik reduzierst du deine [Heizkosten](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) oft ganz ohne Komfortverzicht.
 
 ## Häufige Fragen
 
