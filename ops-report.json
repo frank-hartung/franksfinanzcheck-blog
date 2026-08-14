@@ -17,7 +17,7 @@
   },
   "audit": {
     "today_events": 0,
-    "total_events": 53,
+    "total_events": 76,
     "errors": 1,
     "critical": 1,
     "last_events": []
@@ -29,6 +29,10 @@
     },
     {
       "name": "alert-on-failure",
+      "triggers": []
+    },
+    {
+      "name": "automation-simulator",
       "triggers": []
     },
     {
@@ -48,11 +52,19 @@
       "triggers": []
     },
     {
+      "name": "cadence-manager",
+      "triggers": []
+    },
+    {
       "name": "content-engine-v2",
       "triggers": []
     },
     {
       "name": "dependabot-automerge",
+      "triggers": []
+    },
+    {
+      "name": "deploy-catchup",
       "triggers": []
     },
     {
@@ -69,6 +81,14 @@
     },
     {
       "name": "layout-ai",
+      "triggers": []
+    },
+    {
+      "name": "mastodon-manual-post",
+      "triggers": []
+    },
+    {
+      "name": "mastodon-profile-sync",
       "triggers": []
     },
     {
@@ -127,24 +147,17 @@
   "commands": [],
   "reports": {
     "content": {
-      "posts": 19
+      "posts": 9
     },
     "quality": {
-      "articles": 19,
-      "avg_score": 0.834,
-      "publish": 5,
-      "draft_autofix": 13,
-      "human_review": [
-        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026"
-      ]
+      "articles": 9,
+      "avg_score": 0.838,
+      "publish": 2,
+      "draft_autofix": 7,
+      "human_review": []
     }
   },
   "next_steps": [
-    {
-      "priority": 1,
-      "action": "human-review",
-      "detail": "Artikel unter 0.80: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026"
-    },
     {
       "priority": 1,
       "action": "investigate-errors",
