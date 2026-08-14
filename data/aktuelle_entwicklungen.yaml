@@ -1,0 +1,106 @@
+# ============================================================
+#  AKTUELLE-ENTWICKLUNGEN – kuratierter Signal-Pool für den
+#  Willkommenstext (scripts/willkommenstext_guard.py)
+#  ------------------------------------------------------------
+#  Auftrag (Frank, 14.08.2026): Der Willkommenstext soll "aktuelle
+#  Entwicklungen, neue Regelungen, frische Erkenntnisse,
+#  Marktveränderungen" widerspiegeln – ohne dass eine KI dafür
+#  konkrete Gesetze/Paragraphen/Preise HALLUZINIERT (Haftungsrisiko:
+#  ein falsch zitiertes Gesetz oder ein erfundener Preis wäre
+#  schlimmer als ein etwas generischerer Text).
+#
+#  DESHALB: Dieser Pool ist die SINGLE SOURCE OF TRUTH für "harte"
+#  Aufhänger – von einem Menschen (oder einem Agenten mit Web-
+#  Recherche-Zugriff, siehe SEO-STANDARDS-2026.md als Vorbild für
+#  diese Arbeitsweise) geprüft und eingetragen. Die KI-Generierung
+#  in willkommenstext_guard.py DARF NUR aus diesem Pool zitieren/
+#  paraphrasieren, NICHT eigene Fakten erfinden (siehe Prompt-Regeln
+#  im Skript).
+#
+#  ROTATION: willkommenstext_guard.py wählt pro Lauf EINEN Eintrag
+#  aus (nach Kalenderwoche, deterministisch – siehe SIGNAL_INDEX in
+#  data/willkommenstext_history.jsonl), damit der Aufhänger nicht
+#  jede Woche der gleiche ist, aber reproduzierbar bleibt.
+#
+#  FRISCHHALTUNG (analog SEO-STANDARDS-2026.md Kapitel 5): Wenn ein
+#  Eintrag durch `bis` abgelaufen ist, wird er von der Rotation
+#  automatisch übersprungen (siehe skip_expired() im Skript) – die
+#  Datei braucht deshalb regelmäßigen Nachschub, sonst schrumpft der
+#  Pool über die Zeit. Frank/Agent sollte bei jeder größeren Zins-,
+#  Energiepreis- oder Gesetzesänderung einen neuen Eintrag ergänzen
+#  ("Aktualisiere data/aktuelle_entwicklungen.yaml um <Thema>").
+#
+#  Felder je Eintrag:
+#    id        eindeutiger Schlüssel (nie wiederverwenden, auch nach
+#              Ablauf nicht – History-Einträge referenzieren ihn)
+#    kategorie energie | versicherung | konto | internet | saisonal |
+#              seo_qualitaet (rein intern, siehe Skript-Kommentar –
+#              beeinflusst NUR den Ton/Rahmen, taucht nie wörtlich
+#              als Jargon im Besuchertext auf)
+#    ab        gültig ab (ISO-Datum) – vor diesem Datum nicht wählbar
+#    bis       gültig bis (ISO-Datum, leer = unbefristet/evergreen)
+#    hook      der eigentliche Aufhänger: eine kurze, SICHERE (nicht
+#              überprüfbare Einzelfakten wie Paragraphen/exakte Cent-
+#              Beträge enthaltende) Beobachtung, die die KI natürlich
+#              in 1 Satz einbauen darf/soll.
+# ============================================================
+
+- id: energie-herbst-nachzahlung
+  kategorie: energie
+  ab: "2026-01-01"
+  bis: ""
+  hook: "Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher."
+
+- id: energie-jahreswechsel-wechselfenster
+  kategorie: energie
+  ab: "2026-01-01"
+  bis: ""
+  hook: "Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel."
+
+- id: versicherung-beitragsanpassung-jahresende
+  kategorie: versicherung
+  ab: "2026-01-01"
+  bis: ""
+  hook: "Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen statt sie automatisch zu verlängern."
+
+- id: konto-gebuehren-transparenz
+  kategorie: konto
+  ab: "2026-01-01"
+  bis: ""
+  hook: "Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich inzwischen öfter als nur beim Kontowechsel."
+
+- id: internet-tarifdschungel-bandbreite
+  kategorie: internet
+  ab: "2026-01-01"
+  bis: ""
+  hook: "Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr als der reine Anbieterwechsel."
+
+- id: zinsumfeld-tagesgeld
+  kategorie: konto
+  ab: "2026-01-01"
+  bis: ""
+  hook: "Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen Monaten wieder fallen."
+
+- id: seo-qualitaet-e-e-a-t
+  kategorie: seo_qualitaet
+  ab: "2026-01-01"
+  bis: ""
+  hook: "Google bewertet Ratgeberseiten zunehmend danach, ob echte Erfahrung und nachvollziehbare Quellen hinter den Tipps stehen statt nur oberflächlicher Zusammenfassungen."
+
+- id: energie-variable-vs-fest
+  kategorie: energie
+  ab: "2026-01-01"
+  bis: ""
+  hook: "Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt auf den eigenen Verbrauch an."
+
+- id: versicherung-vergleichsportale-nicht-vollstaendig
+  kategorie: versicherung
+  ab: "2026-01-01"
+  bis: ""
+  hook: "Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste Ergebnis nimmt, lässt oft bares Geld liegen."
+
+- id: saisonal-fruehjahrsputz-vertraege
+  kategorie: saisonal
+  ab: "2026-01-01"
+  bis: ""
+  hook: "Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet an einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne spontane Wechsel übers Jahr verteilt."

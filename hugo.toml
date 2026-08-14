@@ -75,8 +75,8 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   homeTitle = "FranksFinanzcheck: Ratgeber für Strom, Gas, DSL & Finanzen"
 
   [params.homeInfoParams]
-    Title = "Geld sparen ohne Verzicht: Dein Ratgeber für Strom, Gas, Versicherungen & Finanzen"
-    Content = "💰 Geld sparen ohne Gürtel enger zu schnallen – genau darum geht es hier.\n\nRegelmäßig erscheint ein neuer, verständlicher Ratgeber: **Strom, Gas und Internet günstiger**, Versicherungen richtig wählen und Konto & Karte ohne Gebührenfallen. Ohne Fachchinesisch, ohne Verkaufsdruck – dafür mit konkreten Zahlen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen.\n\nStöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+    Title = "Strom, Gas, Internet, Versicherungen, Konto: Spar-Ratgeber ohne Fachchinesisch"
+    Content = "💰 Geld sparen, ohne den Alltag einzuschränken – genau darum geht's.\n\nHier erscheint regelmäßig ein neuer, gut verständlicher Ratgeber: **Strom, Gas und Internet günstiger**, Versicherungen richtig wählen, Konto & Karte ohne Gebührenfallen. Gerade bei Girokonten ändern sich Bedingungen und Gebühren inzwischen häufiger als früher – ein kurzer Check pro Jahr reicht meist schon. Keine Verkaufsfloskeln, dafür konkrete Zahlen, ehrliche Vor- und Nachteile und Anleitungen zum direkten Umsetzen.\n\nStöbere dich durch – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
 
   [[params.socialIcons]]
     name = "pinterest"

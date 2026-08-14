@@ -1,0 +1,144 @@
+# ============================================================
+#  WILLKOMMENSTEXT-REFRESH – ständige SEO-Optimierung des
+#  Startseiten-Willkommenstexts mit sofortiger Selbstheilung
+#  (scripts/willkommenstext_guard.py)
+#
+#  Auftrag (Frank, 14.08.2026): "Optimiere fortlaufend den
+#  Willkommenstext … niemals langweilig … immer als SEO-Unique-
+#  Content erkennbar … ständige Automatisierung mit sofortiger
+#  Selbstheilung: Wenn der Text an Einzigartigkeit verliert, SEO-
+#  Trends sich ändern, neue Gesetze/Tarife/Energiepreise/Finanzregeln
+#  erscheinen oder Suchmaschinen neue Qualitätsrichtlinien
+#  veröffentlichen → automatisch anpassen."
+#
+#  DREI AUSLÖSER-WEGE:
+#    1. SCHEDULE (wöchentlich): Grund-Rhythmus, damit der Text auch
+#       ohne externes Ereignis nicht "einschläft" (Alters-Kriterium
+#       in willkommenstext_guard.py, Standard 7 Tage).
+#    2. PUSH-TRIGGER auf genau die beiden Dateien, die "neue
+#       Entwicklungen" tragen: data/aktuelle_entwicklungen.yaml
+#       (kuratierte Fakten zu Gesetzen/Tarifen/Energiepreisen) und
+#       SEO-STANDARDS-2026.md (aktueller SEO-Regelstand). Ein Push
+#       auf einen dieser Pfade heißt "es gibt etwas Neues" → SOFORTIGE
+#       Reaktion mit --force, statt auf den nächsten Wochenlauf zu
+#       warten.
+#    3. WORKFLOW_DISPATCH: manuell/on-demand.
+#
+#  SELBSTHEILUNG OHNE KI-ABHÄNGIGKEIT: willkommenstext_guard.py nutzt
+#  GROQ_API_KEY/GEMINI_API_KEY falls vorhanden, fällt sonst auf eine
+#  kuratierte, geprüfte Rotation zurück (siehe Skript-Kopf) – der Lauf
+#  schlägt dadurch nie fehl, nur weil ein Secret fehlt oder abgelaufen
+#  ist.
+# ============================================================
+name: Willkommenstext-Refresh
+
+on:
+  schedule:
+    - cron: "0 6 * * 0"    # wöchentlich Sonntag 08:00 MESZ (06:00 UTC)
+  push:
+    paths:
+      - "data/aktuelle_entwicklungen.yaml"
+      - "SEO-STANDARDS-2026.md"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten
+        run: |
+          pip install --quiet pyyaml
+          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
+
+      - name: Hugo installieren
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+
+      - name: Hugo-Build (Voraussetzung für Render-Beweis)
+        run: hugo --minify
+
+      - name: Willkommenstext-Guard ausführen
+        id: guard
+        continue-on-error: true
+        run: |
+          # Bei einem Push auf die Signal-Quellen (neue Entwicklung/neuer
+          # SEO-Stand) SOFORT reagieren (--force), statt auf das nächste
+          # wöchentliche Alters-/Uniqueness-Kriterium zu warten. Bei
+          # Zeitplan/manuellem Lauf entscheidet das Skript selbst.
+          if [ "${{ github.event_name }}" = "push" ]; then
+            ARGS="--force"
+          else
+            ARGS=""
+          fi
+          python3 scripts/willkommenstext_guard.py $ARGS | tee /tmp/willkommenstext_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Änderungen + Reports committen
+        run: |
+          git config user.name "Willkommenstext-Bot"
+          git config user.email "willkommenstext-bot@users.noreply.github.com"
+          # BUGFIX (14.08.2026, siehe uniqueness-guard.yml/seo-weekly.yml):
+          # 'git add' mit mehreren Pfaden bricht OHNE IRGENDETWAS zu stagen
+          # ab, wenn auch nur EIN Pfad fehlt – deshalb pro Pfad ein eigener
+          # add-Aufruf statt eines gemeinsamen.
+          git add hugo.toml 2>/dev/null || true
+          git add data/brand_lock.yaml 2>/dev/null || true
+          git add data/willkommenstext_history.jsonl 2>/dev/null || true
+          git add data/integrity_lock.json 2>/dev/null || true
+          git add data/integrity_history.jsonl 2>/dev/null || true
+          git add WILLKOMMENSTEXT-REPORT.md 2>/dev/null || true
+          git add BRAND-REPORT.md 2>/dev/null || true
+          git add INTEGRITY-REPORT.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Willkommenstext-Refresh: keine Änderungen."
+          else
+            git commit -m "content: Willkommenstext automatisch aufgefrischt (SEO-Unique-Content-Automatik)"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+            echo "AKTUALISIERT=true" >> "$GITHUB_ENV"
+          fi
+
+      - name: Deploy anstoßen (nur bei tatsächlicher Änderung)
+        if: env.AKTUALISIERT == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy.yml',
+              ref: 'main',
+            });
+            console.log('✅ Deploy ausgelöst.');
+
+      - name: Issue bei Fehlschlag (z. B. Render-Beweis nicht bestanden)
+        if: steps.guard.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let details = 'willkommenstext_guard.py ist mit Exit-Code ungleich 0 fehlgeschlagen.';
+            try { details = fs.readFileSync('WILLKOMMENSTEXT-REPORT.md', 'utf-8'); } catch (e) {}
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🌱 Willkommenstext-Refresh: Lauf nicht vollständig erfolgreich',
+              body: details + '\n\n---\nAutomatisch erstellt vom Willkommenstext-Refresh-Workflow.'
+            });
+            console.log('✅ Issue erstellt');

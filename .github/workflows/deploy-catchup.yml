@@ -48,6 +48,7 @@ on:
       - "Pinterest-Watchdog"
       - "FrankAutoOps-Report"
       - "Affiliate-Integritäts-Wache (täglich)"
+      - "Willkommenstext-Refresh"
     types:
       - completed
 

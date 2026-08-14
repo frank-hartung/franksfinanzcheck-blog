@@ -35,6 +35,7 @@ on:
       - "Automations-Simulator"       # Pipeline-Regressionsschutz (13.08.)
       - "Unique-Content-Guard"        # Duplicate-Content/Themen-Tiefe (14.08.)
       - "Affiliate-Integritäts-Wache (täglich)"    # CTA-Link-Selbstheilung (14.08.)
+      - "Willkommenstext-Refresh"     # SEO-Unique-Content-Automatik Startseite (14.08.)
     types:
       - completed
 
