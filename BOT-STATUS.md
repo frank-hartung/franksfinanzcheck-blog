@@ -1,17 +1,15 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 11.08.2026 22:25 Uhr (MESZ)
+> Automatisch aktualisiert: 14.08.2026 09:47 Uhr (MESZ)
 
 ## Heutiger Stand
 
-- **Veröffentlicht heute:** 2/2 Artikel
-- 2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck – Lastschrift zurückbuchen: So holst du dir dein Geld zurück
-- 2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft – Schufa-Score verstehen: So liest du deine Bonitätsauskunft
+- **Veröffentlicht heute:** 0/2 Artikel
 
 ## System
 
-- **Themenpool:** 123 Themen, **94 frei**
-- **Letzter Content-Commit:** noch keiner
+- **Themenpool:** 175 Themen, **171 frei**
+- **Letzter Content-Commit:** a2b8528 2026-08-14 content: neuer Artikel sofort optimiert (Meta, interne Verlinkung)
 - **Tageslimit:** 2 (steuerbar per Variable MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen
