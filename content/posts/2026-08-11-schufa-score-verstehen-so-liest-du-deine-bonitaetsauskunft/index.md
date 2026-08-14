@@ -32,7 +32,7 @@ Wir klären die wichtigsten Punkte für deinen Geldbeutel:
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** DStiebendenTarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/kredit/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was die Schufa eigentlich ist (und was sie weiß)
@@ -88,7 +88,7 @@ Zwei Dinge fallen vielen beim ersten Blick auf ihre Kopie auf: Erstens wird ein 
 
 
 
-> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/kredit/)
 
 
 ## Fehler finden und korrigieren lassen
