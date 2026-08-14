@@ -1,9 +1,9 @@
 # 📐 LAYOUT-REPORT (Layout-Automatisierung)
 
-**Stand:** 2026-08-14 11:05 UTC
+**Stand:** 2026-08-14 13:38 UTC
 
 ## ⚠️ Warnungen (2)
-## ✅ OK (8)
+## ✅ OK (9)
 
 ## ❌ Kritisch
 
@@ -20,3 +20,4 @@ og:image auf allen Artikel-Seiten.
 Meta-Description überall vorhanden.
 H1 überall vorhanden.
 Canonical-Tags auf allen Artikel-Seiten.
+Startseiten-Paginierung: 9 Artikel-Karten geprüft, 0 artikelfremde (Rechtsseiten bleiben draußen).

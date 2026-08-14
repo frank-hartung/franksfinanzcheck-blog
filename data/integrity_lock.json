@@ -1,6 +1,6 @@
 {
-  "signed_at": "2026-08-14T12:45:00.460926+00:00",
-  "head": "84a98de",
+  "signed_at": "2026-08-14T13:37:13.011367+00:00",
+  "head": "deb075a",
   "files": {
     "assets/css/extended/custom.css": "3c941e57a4ecc96a4c8e78c8dbbb184b17e10af22ab29dd72bb908f5bdbaab88",
     "data/brand_lock.yaml": "329f1685ddc260465ac252eb6eccf716edad4556e0324e95b56f0a1e2106d2ff",
@@ -10,7 +10,7 @@
     "layouts/_partials/cover.html": "f96a5ff402634dffc595077ca3648d4e5a79cf061f3d78328102bb804463c152",
     "layouts/_partials/extend_footer.html": "a4fa2074afc77eae574354a0199aa531fcd796f87eaa58a54b1444dd38f96513",
     "layouts/_partials/extend_post_content.html": "bdef63485c95568ed9216c9d4446c460d7d7a6f97a99cee8b88935fea4b634ea",
-    "layouts/_partials/head.html": "0cac7701d208ca7bfa82fb1d086304552cd8b093deb419a9f87e33851f26ba88",
+    "layouts/_partials/head.html": "b5d13afaeb9b8f41883da177a36517f500b455eecb77048e1f7b87a681c10092",
     "layouts/_partials/header.html": "60b47627b726d8f71c0cb9ba4302752dbfe0c0f4853c8d389ac18f54409508a4",
     "layouts/_partials/home_clusters.html": "c26a478ad7b7526cd3a00d55d60e5b7bf8d93e56aa294848bca6d326632827be",
     "layouts/_partials/pillar_box.html": "c9f3e598255ca292094ef5fc93bfd565adb05f3c5c1f8957dfb4d6c1d4ac5a34",

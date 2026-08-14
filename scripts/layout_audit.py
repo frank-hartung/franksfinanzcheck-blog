@@ -251,6 +251,50 @@ def check_schema_and_meta():
         OK.append("Canonical-Tags auf allen Artikel-Seiten.")
 
 
+def check_home_pagination_purity():
+    """L7 (14.08.2026, Frank: 'Datenschutzerklärung, Impressum, Über mich
+    und diesen Blog unter dem Blogartikel. Bitte dauerhaft optimieren.'):
+    verhindert das Wiederauftreten eines echten Hugo-Templating-Bugs, bei
+    dem Rechtsseiten (Datenschutz/Impressum/Über) als vollwertige
+    Artikel-Karten in der Start­seiten-Paginierung erschienen (Root Cause:
+    layouts/_partials/head.html rief .Paginator OHNE Argument auf – das
+    fällt intern auf .RegularPages zurück, was auf der Startseite ALLE
+    Top-Level-Einzelseiten einschließt, nicht nur echte Blogartikel. Da
+    Hugo die Paginierung EINMAL PRO SEITE cached und head.html VOR dem
+    Body-Template rendert, hat dieser zu weite Aufruf die komplette
+    Startseiten-Paginierung "vergiftet"). Fix: siehe head.html-Kommentar.
+
+    Diese Prüfung liest JEDE gebaute Startseiten-Paginierungsseite
+    (public/index.html, public/page/N/index.html) und stellt sicher, dass
+    JEDE 'post link to …'-Artikelkarte tatsächlich auf /posts/… zeigt –
+    keine Rechts-/Info-Seite darf dort als Artikel-Karte auftauchen."""
+    home_pages = [os.path.join(BASE, "index.html")]
+    home_pages += sorted(glob.glob(os.path.join(BASE, "page", "*", "index.html")))
+    foreign = []
+    checked_cards = 0
+    for page in home_pages:
+        if not os.path.isfile(page):
+            continue
+        text = open(page, encoding="utf-8", errors="ignore").read()
+        for m in re.finditer(
+            r'aria-label="post link to ([^"]*)"\s+href=([^\s>]+)', text
+        ):
+            checked_cards += 1
+            title, href = m.group(1), m.group(2).strip('"')
+            if not href.startswith(("/posts/", "https://franksfinanzcheck.de/posts/")):
+                foreign.append(f"{os.path.relpath(page, BASE)}: „{html.unescape(title)}“ → {href}")
+    if foreign:
+        CRITICAL.append(
+            f"**{len(foreign)} artikelfremde Karte(n) in der Startseiten-Paginierung** "
+            f"(Rechts-/Info-Seiten dürfen dort NIE als Artikel-Karte erscheinen):"
+        )
+        for f in foreign:
+            CRITICAL.append(f"  - {f}")
+    else:
+        OK.append(f"Startseiten-Paginierung: {checked_cards} Artikel-Karten geprüft, "
+                   f"0 artikelfremde (Rechtsseiten bleiben draußen).")
+
+
 def write_report():
     lines = ["# 📐 LAYOUT-REPORT (Layout-Automatisierung)", ""]
     lines.append("**Stand:** " + __import__("datetime").datetime.now().strftime("%Y-%m-%d %H:%M UTC"))
@@ -341,6 +385,7 @@ def main():
     check_covers()
     check_alts()
     check_schema_and_meta()
+    check_home_pagination_purity()
     write_report()
     return 1 if CRITICAL else 0
 
