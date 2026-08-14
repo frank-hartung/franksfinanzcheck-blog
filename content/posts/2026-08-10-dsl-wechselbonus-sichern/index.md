@@ -74,7 +74,7 @@ Ein **Cashback DSL** über Portale wie Check24 oder Verivox funktioniert oft and
 
 **Der typische Zeitplan:**
 1. **Bestellung:** Du schließt den Vertrag online ab und sicherst dir den Bonus.
-2. **Bestätigung:** Du erhältst eine Bestätigung, in der der Bonus explizit aufgeführt ist.
+2. **Bestätigung:** Du erhältst eine Bestätigung, in der Bonus explizit aufgeführt ist.
 3. **Anschaltung:** Der Techniker kommt oder schaltet die Leitung fernab frei (Aktivierung).
 4. **Prüfphase:** Der Anbieter wartet meist die Widerrufsfrist ab (14 Tage).
 5. **Auszahlung:** Nach ca. 4 bis 12 Wochen wird der Bonus gutgeschrieben oder überwiesen.
