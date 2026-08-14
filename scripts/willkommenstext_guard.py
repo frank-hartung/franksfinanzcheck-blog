@@ -103,6 +103,14 @@ CORE_CATEGORIES = ["strom", "gas", "internet", "versicherung", "konto"]
 # KI-Floskeln, die in KEINEM Profi-Text vorkommen dürfen (identische Liste
 # wie scripts/generate_drafts.py PROFI_FLOSKELN / scripts/extend_articles.py
 # – bewusst dupliziert, siehe dortige Konvention, statt Cross-Import).
+# Marken-Stimme: Der gesamte Blog spricht Leser konsequent informell mit
+# "du" an (siehe Original-Text "Dein Ratgeber", "dein Geld arbeitet für
+# dich" sowie SYSTEM_ANREDE in generate_drafts.py für Artikel). Eine KI
+# darf hier NIEMALS in die formelle "Sie"-Anrede kippen (14.08.2026,
+# live entdeckt: Gemini generierte "Ich erkläre Ihnen…" – inkonsistente
+# Markenstimme gegenüber jedem anderen Text auf der Seite).
+FORMAL_ANREDE_RX = re.compile(r"\b(Sie|Ihnen|Ihrem|Ihrer|Ihren|Ihres|Ihr|Ihre)\b")
+
 BANNED_PHRASES = [
     "in der heutigen schnelllebigen welt", "in der heutigen zeit",
     "es ist wichtig zu beachten", "zusammenfassend lässt sich sagen",
@@ -391,6 +399,10 @@ def validate_candidate(title: str, content: str, history: list[dict]) -> list[st
     if hits:
         problems.append("KI-Floskel(n) gefunden: " + ", ".join(hits))
 
+    formal_hits = FORMAL_ANREDE_RX.findall(title + " " + content)
+    if formal_hits:
+        problems.append(f"formelle 'Sie'-Anrede statt Marken-'du' gefunden: {set(formal_hits)}")
+
     mentioned = [c for c in CORE_CATEGORIES if c in low or (c == "versicherung" and "versicherung" in low)]
     if len(mentioned) < 3:
         problems.append(f"zu wenige Kern-Kategorien erwähnt ({mentioned})")
@@ -454,10 +466,13 @@ def build_prompt(signal: dict, month_year: str) -> str:
 deutschen Finanz-Ratgeber-Blogs "FranksFinanzcheck" (Themen: Strom, Gas,
 Internet/DSL, Versicherungen, Konto & Karten).
 
-STIL: menschlich, klar, aktiv, modern. KEINE KI-Floskeln (verboten u. a.:
-"In der heutigen Zeit", "Zusammenfassend lässt sich sagen", "Tauche ein",
-"Entdecke", "Der Schlüssel zum Erfolg", "Es ist wichtig zu beachten").
-Kurze, aktive Sätze. Kein Werbesprech, kein Verkaufsdruck.
+STIL: menschlich, klar, aktiv, modern. Sprich den Leser durchgehend mit
+dem informellen "du" an (NIEMALS "Sie"/"Ihnen"/"Ihr" – die gesamte Seite
+duzt konsequent, eine formelle Anrede wäre ein Markenbruch). KEINE
+KI-Floskeln (verboten u. a.: "In der heutigen Zeit", "Zusammenfassend
+lässt sich sagen", "Tauche ein", "Entdecke", "Der Schlüssel zum Erfolg",
+"Es ist wichtig zu beachten"). Kurze, aktive Sätze. Kein Werbesprech,
+kein Verkaufsdruck.
 
 AKTUELLER AUFHÄNGER (baue ihn natürlich in EINEM Satz ein, erfinde KEINE
 zusätzlichen Fakten, Zahlen, Gesetze oder Paragraphen dazu):

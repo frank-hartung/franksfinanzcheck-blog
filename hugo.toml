@@ -75,8 +75,8 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   homeTitle = "FranksFinanzcheck: Ratgeber für Strom, Gas, DSL & Finanzen"
 
   [params.homeInfoParams]
-    Title = "FranksFinanzcheck: Mehr Durchblick bei Versicherungen, Strom und Girokonto"
-    Content = "Schluss mit komplizierten Tabellen und versteckten Kosten. FranksFinanzcheck bringt Klarheit in Ihren Finanzalltag. Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich inzwischen öfter als nur beim Kontowechsel. Ich erkläre Ihnen alle Details ganz ohne Fachchinesisch.\n\nOb es um den passenden Tarif für Strom, das Internet oder die richtige Versicherung geht: Hier zählen Fakten. Sie finden bei mir **konkrete Zahlen** sowie ehrliche Vor- und Nachteile zu jedem Angebot. Ich verzichte auf Verkaufsdruck und zeige Ihnen stattdessen, wie Sie Ihre Fixkosten im August 2026 optimieren 📈. 💡"
+    Title = "Geld sparen ohne Verzicht: Ratgeber für Strom, Gas, Internet & Versicherungen"
+    Content = "⚡ Weniger zahlen, ohne dass sich dein Alltag ändert – das ist das Ziel hier.\n\nRegelmäßig ein neuer, klar geschriebener Ratgeber: Strom, Gas und **Internet günstiger**, Versicherungen ohne Kleingedrucktes und Konto & Karte ohne Gebührenfallen. Beim Internet-Tarif zahlen viele für mehr Tempo, als sie im Alltag wirklich brauchen – ein realistischer Bedarfscheck spart oft mehr als der bloße Anbieterwechsel. Ohne Fachchinesisch, ohne Verkaufsdruck – dafür mit Zahlen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen.\n\nStöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich. 🚀"
 
   [[params.socialIcons]]
     name = "pinterest"
