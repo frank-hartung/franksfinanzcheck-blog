@@ -46,7 +46,7 @@ Der Repeater ist eine günstige Methode, um die Reichweite um ein paar Meter zu 
 
 Für das einfache Beantworten von E-Mails in der Küche reicht das völlig aus. Wenn du jedoch 4K-Filme streamen oder an Videokonferenzen teilnehmen willst, stößt diese Technik schnell an ihre Grenzen. Achte beim Kauf darauf, dass der Repeater "Crossband Reporting" unterstützt. Hierbei nutzt das Gerät unterschiedliche Frequenzbänder (2,4 GHz und 5 GHz) für den Empfang und den Versand, was den Geschwindigkeitsverlust etwas abfedert.
 
-## Die Alternative: Powerline (DLAN)
+## Die Alternative:<br>Powerline (DLAN)
 wenn Wände zu dick für Funkwellen sind, gibt es noch einen weiteren Trick für schnelles Internet zu Hause: Powerline-Adapter. Diese nutzen das vorhandene Stromnetz im Haus als Datenleitung. Du steckst einen Adapter in die Nähe des Routers und verbindest beide mit einem LAN-Kabel. Den zweiten Adapter steckst du dort ein, wo du Internet brauchst.
 
 Dieser Weg ist ideal für Altbauten mit meterdicken Wänden oder Stahlbetondecken. Aber Vorsicht: Die Qualität der Verbindung hängt stark von der Qualität deiner Stromleitungen ab. Wenn die Waschmaschine oder der Kühlschrank anspringt, kann es zu kurzzeitigen Störungen kommen. Zudem sollten die Adapter direkt in der Wandsteckdose stecken, nicht in einer Mehrfachleiste, da diese das Signal massiv filtern.
@@ -95,7 +95,7 @@ So gehst du vor:
 
 Erst als das Verschieben des Routers nicht mehr reichte, habe ich über Hardware-Erweiterungen nachgedacht. Denke auch daran, den Router regelmäßig neu zu starten. Ein wöchentlicher Reboot leert den Cache und behebt oft kleine Software-Hänger, die sich mit der Zeit einschleichen.
 
-## Fazit: Schnelles Internet zu Hause genießen
+## Fazit:<br>Schnelles Internet zu Hause genießen
 Am Ende ist es eine Kombination aus der richtigen Hardware und einer klugen Platzierung. Mein persönliches Fazit nach vielen Versuchen: Spare nicht an der falschen Stelle. Ein stabiles Mesh-System hat meinen Alltag im Homeoffice massiv erleichtert. Es ist eine Investition in deine Lebensqualität und Produktivität.
 
 Es gibt nichts Nervigeres als ein ruckelndes Bild in einer wichtigen Videokonferenz. Nimm dir die Zeit, deine Umgebung zu analysieren. Manchmal reicht ein kleiner Standortwechsel des Routers – weg vom Boden, hin auf ein Regal – schon aus, um die Reichweite um 20% zu steigern. In anderen Fällen ist die Investition in moderne Technik wie Wi-Fi 6 der einzige Weg, um langfristig Ruhe zu haben.

@@ -1,7 +1,7 @@
 {
- "total": 14,
- "errors": 0,
- "fixed": 1,
+ "total": 13,
+ "errors": 1,
+ "fixed": 0,
  "posts": [
   {
    "slug": "internet-dsl",
@@ -109,24 +109,17 @@
    "title": "Dein Haus sicher schützen: Das neue Vorsorge-Updat",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=hausratversicherung (erwartet: Hausrat-Vergleich)"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
    "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
    "title": "Gaspreis: So sicherst du dir jetzt günstige Tarife",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
-   "infos": [],
-   "ok": true
-  },
-  {
-   "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
-   "title": "WLAN verbessern: So bringst du Speed in jede Ecke",
-   "pillar": "konto-karten",
-   "fixed": 1,
    "errors": [],
    "infos": [],
    "ok": true

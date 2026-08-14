@@ -95,7 +95,7 @@ Zwei Dinge fallen vielen beim ersten Blick auf ihre Kopie auf: Erstens wird ein 
 
 Schätzungen zufolge enthält jede dritte Bonitätsakte schwammige oder überholte Einträge – und einige sind schlicht falsch. Typische Funde in der Datenkopie:
 
-* ein aufgelöstes Girokonto taucht als offen auf,
+* ein aufgelöstes [Girokonto](../../posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/) taucht als offen auf,
 * ein abgezahlter Kredit wird weiter als laufend geführt,
 * ein negativer Eintrag ist längst erledigt, aber nicht als erledigt markiert,
 * Adressen oder Namensvarianten mutieren über Jahre weiter.
