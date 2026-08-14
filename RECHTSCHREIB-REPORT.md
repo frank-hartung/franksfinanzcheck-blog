@@ -1,6 +1,6 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am … – 13 Artikel geprüft, 18 Funde, 0 korrigiert, 18 offen.
+> **Automatisch** erzeugt am … – 14 Artikel geprüft, 30 Funde, 6 korrigiert, 24 offen.
 
 ## Offene Punkte
 
@@ -22,6 +22,12 @@
 - `Unbekanntes Wort: „Verfügbarkeitscheck“ (Vorschläge: –)`
 - `Unbekanntes Wort: „zurückzubekommen“ (Vorschläge: –)`
 - `Unbekanntes Wort: „possibly“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Leon“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Isolationsschicht“ (Vorschläge: –)`
+- `Unbekanntes Wort: „heizst“ (Vorschläge: –)`
+- `Unbekanntes Wort: „durchheizst“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Umwälzpumpe“ (Vorschläge: –)`
+- `Unbekanntes Wort: „herauslassen“ (Vorschläge: –)`
 
 ---
 *Erzeugt von scripts/spellcheck.py*

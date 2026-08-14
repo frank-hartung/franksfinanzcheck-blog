@@ -1,6 +1,6 @@
 # 🩺 DOKTOR-REPORT (Oberarzt, Gesamtprognose)
 
-**Stand:** 2026-08-14 09:47 UTC · Modus: GEBURT
+**Stand:** 2026-08-14 16:39 UTC · Modus: GEBURT
 **Wachen behandelt:** 19 · **0-Exit:** 18 · Funde: 1 · Sabotage-Fehler: 0
 
 | Wache (Phase) | Zweck | Exit |

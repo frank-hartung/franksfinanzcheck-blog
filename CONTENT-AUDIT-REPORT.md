@@ -1,20 +1,24 @@
 # 🔎 CONTENT-AUDIT-REPORT (content_audit.py)
 
-**Stand:** 2026-08-14 09:47 UTC
+**Stand:** 2026-08-14 16:39 UTC
 
 ## 🎯 Wichtigster Befund (fuer redaktionellen Ausbau)
 
-🔢 Abstrakte Texte ohne Zahlen – jeder Geld-Text braucht einen Zahlen-Anker im Fliesstext.
+🚨 **Systemische Struktur-Lücke:** Niemand hat eine Fazit-/Zusammenfassung-Rubrik – das senkt Abschlussrate und Leser-Retention. Loesung: redaktions-politur.yml im Budget-Modus kann pro Artikel eine 2-3-Zeilen-Fazit-Rubrik ergaenzen.
 
-**Artikel:** 1 · **mit Funden:** 1 · **Funde gesamt:** 1 · **C3 auto-geheilt:** 0
+**Artikel:** 2 · **mit Funden:** 2 · **Funde gesamt:** 2 · **C3 auto-geheilt:** 0
 
 | Kategorie | Funde |
 |---|---|
+| C2 | 1 |
 | C4 | 1 |
 
 ### Funde pro Artikel (Top 20)
 
-**`2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke`** (1511w)
+**`2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden`** (1116w)
+  - C2 kein Fazit (h2/h3)
+
+**`2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke`** (1512w)
   - C4 keine konkrete Zahl mit Euro/Prozent im Fliesstext
 
 

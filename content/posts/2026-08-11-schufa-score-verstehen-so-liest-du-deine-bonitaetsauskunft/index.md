@@ -19,6 +19,7 @@ cover:
 social_posted: true
 ---
 
+
 Beim Kreditantrag, beim Handyvertrag, bei der Wohnungssuche – immer ist sie im Spiel: deine Bonität. Und in Deutschland heißt das fast immer: **die Schufa**.
 
 Viele kennen ihre Schufa-Auskunft aus Hörensagen, wenige aus eigener Anschauung. Dabei darfst du jederzeit kostenlos nachlesen, was über dich gespeichert ist – und du kannst aktiv dafür sorgen, dass dein Score wächst. Hier erfährst du, wie die Datenkopie funktioniert, wie du den Score liest und welche Schritte deine Bonität spürbar verbessern.
@@ -108,7 +109,7 @@ Halte dir dabei vor Augen: Ein zu Unrecht geführter Negativ-Eintrag kann dich b
 
 **1. Zahl nichts zu spät.** Der Score lebt von Zuverlässigkeit. Rechnungen immer fristgerecht begleichen – notfalls per Dauerüberweisung oder Kalendererinnerung.
 
-**2. Konten mit Maß.** Jedes Girokonto, jede Kreditkarte hinterlässt eine Meldung. Alte, ungenutzte Konten sauber kündigen, statt sie als Leichname mitzuschleppen.
+**2. Konten mit Maß.** Jedes [Girokonto](../../posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/), jede Kreditkarte hinterlässt eine Meldung. Alte, ungenutzte Konten sauber kündigen, statt sie als Leichname mitzuschleppen.
 
 **3. Konditionsanfrage statt Kreditanfrage.** Beim Zinsvergleich kommt es auf den Unterschied an: Die „Anfrage Konditionen“ taucht in der Akte für andere nicht sichtbar und belastet den Score nicht. Die harte „Anfrage Kredit“ dagegen meldet echte Kreditabsicht – viele davon auf dem Haufen wirken riskant. Seriöse Vergleiche setzen von sich aus auf die neutrale Variante.
 
