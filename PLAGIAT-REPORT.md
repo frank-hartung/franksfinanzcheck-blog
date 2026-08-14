@@ -1,7 +1,7 @@
 # 🧬 PLAGIAT-REPORT (plagiat_guard.py)
 
-**Stand:** 2026-08-13 13:33 UTC · Modus: FIX/QUARANTAENE
-**Artikel:** 9 · **Fingerprints neu:** 9
+**Stand:** 2026-08-14 09:47 UTC · Modus: FIX/QUARANTAENE
+**Artikel:** 1 · **Fingerprints neu:** 1
 
 | Stufe | Schwelle | Funde | Aktion |
 |---|---|---|---|
@@ -9,7 +9,7 @@
 | P1 Klon | Jaccard > 0.55 | 0 | Quarantaene |
 | P2 Duplikat-Saetze | identisch, ≥7 W. | 0 | Report |
 | P3 Boilerplate | > 30 % | 0 | Report |
-| P4 Registry-Eintraege | — | 9 | append-only |
+| P4 Registry-Eintraege | — | 1 | append-only |
 
 🎉 Kein interner Content-Diebstahl, keine Klone, Boilerplate im Korridor.
 

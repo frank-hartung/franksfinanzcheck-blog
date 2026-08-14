@@ -10,7 +10,7 @@ build:
 keywords: ["Strom sparen", "Energiekosten senken", "Stromanbieter wechseln", "Gaspreis", "Wärmepumpe"]
 ---
 
-Strom und Gas gehören zu den größten Posten im Haushaltsbudget – und zu den Kosten, die du mit klugen Entscheidungen am schnellsten senken kannst. In diesem Ratgeber bündele ich alles, was ich aus meiner eigenen Energie-Budgetplanung und den Vergleichen der letzten Jahre gelernt habe: vom Heiztarif über intelligente Heizsysteme bis zur Gaspreisgarantie.
+Strom und Gas gehören zu den größten Posten im Haushaltsbudget und zu den Kosten, die du mit klugen Entscheidungen am schnellsten senken kannst. In diesem Ratgeber bündele ich alles, was ich aus meiner eigenen Energie-Budgetplanung und den Vergleichen der letzten Jahre gelernt habe: vom Heiztarif über intelligente Heizsysteme bis zur Gaspreisgarantie.
 
 ### Das Wichtigste in Kürze
 
