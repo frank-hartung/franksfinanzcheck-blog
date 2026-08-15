@@ -17,7 +17,7 @@
   },
   "audit": {
     "today_events": 0,
-    "total_events": 76,
+    "total_events": 101,
     "errors": 1,
     "critical": 1,
     "last_events": []
@@ -25,6 +25,10 @@
   "playbooks": [
     {
       "name": "affiliate-health",
+      "triggers": []
+    },
+    {
+      "name": "affiliate-integrity-daily",
       "triggers": []
     },
     {
@@ -124,6 +128,10 @@
       "triggers": []
     },
     {
+      "name": "uniqueness-guard",
+      "triggers": []
+    },
+    {
       "name": "update-quarterly",
       "triggers": []
     },
@@ -140,6 +148,10 @@
       "triggers": []
     },
     {
+      "name": "willkommenstext-refresh",
+      "triggers": []
+    },
+    {
       "name": "workspace-watchdog",
       "triggers": []
     }
@@ -147,12 +159,12 @@
   "commands": [],
   "reports": {
     "content": {
-      "posts": 9
+      "posts": 11
     },
     "quality": {
-      "articles": 9,
-      "avg_score": 0.838,
-      "publish": 2,
+      "articles": 11,
+      "avg_score": 0.847,
+      "publish": 4,
       "draft_autofix": 7,
       "human_review": []
     }
