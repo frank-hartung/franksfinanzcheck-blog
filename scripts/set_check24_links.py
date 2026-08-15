@@ -79,21 +79,14 @@ def replace_in_text(content, links):
     return content, total
 
 
-def check_word_breaks(md_files, links):
+def check_word_breaks(posts_dir, links):
     """Sicherheits-Check: Meldet URLs, die MITTEN IN WÖRTERN stecken
-    (Zeichen vor der URL ist ein Buchstabe). Sollte nie vorkommen.
-
-    BUGFIX (13.08.2026, identisches Muster wie der früher in seo_audit.py
-    gefundene Bug): iterierte vorher über os.listdir(posts_dir) +
-    fn.endswith(".md") – die Seite nutzt aber ausschließlich Page-Bundles
-    (content/posts/<slug>/index.md), keine flachen .md-Dateien direkt im
-    Ordner. Dadurch fand diese Funktion IMMER 0 Probleme, unabhängig vom
-    echten Zustand ('os.listdir' liefert Ordnernamen, keine "*.md" haben).
-    Nimmt jetzt direkt die bereits bundle-aufgelöste Pfadliste entgegen
-    (dieselbe wie main() für den eigentlichen Ersetzungslauf nutzt)."""
+    (Zeichen vor der URL ist ein Buchstabe). Sollte nie vorkommen."""
     problems = []
-    for path in md_files:
-        fn = os.path.relpath(path, BLOG_DIR)
+    for fn in sorted(os.listdir(posts_dir)):
+        if not fn.endswith(".md"):
+            continue
+        path = os.path.join(posts_dir, fn)
         with open(path, encoding="utf-8") as f:
             content = f.read()
         for m in re.finditer(r"https?://", content):
@@ -113,14 +106,8 @@ def process_file(path, links, dry_run):
     return total, os.path.basename(path)
 
 
-def verify(md_files, links):
-    """Meldet verbleibende Standard-Check24-URLs (Kategorien ohne Link-Eintrag).
-
-    BUGFIX (13.08.2026, identisches Muster wie check_word_breaks() oben):
-    iterierte vorher ebenfalls über os.listdir(posts_dir) + ".md"-Endung und
-    fand dadurch IMMER 0 Restlinks – selbst wenn tatsächlich unpersonalisierte
-    (nicht-monetarisierte) CHECK24-Links übrig gewesen wären. Nimmt jetzt
-    die bundle-aufgelöste Pfadliste entgegen."""
+def verify(posts_dir, links):
+    """Meldet verbleibende Standard-Check24-URLs (Kategorien ohne Link-Eintrag)."""
     personal_values = list(links.values())
     leftovers = []
     for path in md_files:
@@ -165,7 +152,7 @@ def main():
 
     print(f"\nGesamt: {grand_total} Link(s) " + ("betroffen (Vorschau)." if dry_run else "ersetzt."))
 
-    leftovers = verify(md_files, links)
+    leftovers = verify(POSTS_DIR, links)
     if leftovers:
         print("\n⚠ Diese Standard-Check24-Links bleiben übrig (für diese Kategorien fehlt")
         print("  noch ein Link in scripts/check24_links.yaml):")
@@ -175,7 +162,7 @@ def main():
     else:
         print("✓ Alle Standard-Check24-Links sind durch deine persönlichen Links ersetzt.")
 
-    word_breaks = check_word_breaks(md_files, links)
+    word_breaks = check_word_breaks(POSTS_DIR, links)
     if word_breaks:
         print("\n⚠ ACHTUNG: URLs mitten in Wörtern gefunden (Sicherheits-Check):")
         for fn, snippet in word_breaks[:10]:

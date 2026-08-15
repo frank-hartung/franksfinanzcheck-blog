@@ -1,0 +1,43 @@
+{{- /* ============================================================
+     schema_article.html – Article-JSON-LD (E-E-A-T / Rich Results)
+     Wird auf jeder Artikel-Seite (posts/*) ausgegeben.
+     Enthält: headline, description, author (Person), publisher,
+     datePublished, dateModified, image, mainEntityOfPage.
+     ============================================================ */ -}}
+{{- $title := .Title | plainify | htmlUnescape -}}
+{{- $desc := or .Description (.Summary | plainify) -}}
+{{- $img := "" -}}
+{{- with .Params.cover -}}
+  {{- $img = printf "%s%s" site.BaseURL (replaceRE "^/" "" .image) -}}
+{{- end -}}
+{{- $published := .Date.Format "2006-01-02T15:04:05Z" -}}
+{{- $modified := .Lastmod.Format "2006-01-02T15:04:05Z" -}}
+{{- if eq $modified "0001-01-01T00:00:00Z" }}{{ $modified = $published }}{{ end -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ $title | jsonify }},
+  "description": {{ $desc | plainify | htmlUnescape | jsonify }},
+  "image": {{ $img | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": "Frank",
+    "url": {{ (site.BaseURL | string) | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "FranksFinanzcheck",
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ (printf "%simages/logo.png" site.BaseURL) | jsonify }}
+    }
+  },
+  "datePublished": {{ $published | jsonify }},
+  "dateModified": {{ $modified | jsonify }},
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink | jsonify }}
+  }
+}
+</script>

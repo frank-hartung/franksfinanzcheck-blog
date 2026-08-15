@@ -49,21 +49,13 @@ def clean_body(content):
     body = parts[2] if len(parts) == 3 else content
     # Werbekennzeichnung (variiert in Zeilenumbrüchen)
     body = re.sub(r"\*?Dieser Artikel enthält Affiliate-Links.*?(Mehrkosten|Mehrkosten\.)\*?", " ", body, flags=re.S)
-    # Affiliate-CTA-Blöcke (👉 ... Link ...) – inkl. 💡/💶-Varianten der
-    # „Schnell-Tipp von FranksFinanzcheck“-Boxen (identische Boilerplate in
-    # jedem Artikel – kein Duplikat, sondern gewollter CTA).
-    body = re.sub(r"[👉💡💶][^\n]*?\)", " ", body, flags=re.S)
-    # „Weiterlesen:“-Blöcke (interne Link-Navigation – Boilerplate, kein Inhalt)
-    body = re.sub(r"\*\*Weiterlesen:\*\*[^\n]*", " ", body)
+    # Affiliate-CTA-Blöcke (👉 ... Link ...)
+    body = re.sub(r"👉.*?\)", " ", body, flags=re.S)
     # ROBUST: ALLE URLs entfernen (unabhängig vom CTA-Format – der Polish
     # variiert den CTA-Text, dadurch blieben URL-Bruchstücke als
     # "Duplikate" im Audit zurück)
     body = re.sub(r"https?://[^\s)\"']+", " ", body)
     body = re.sub(r"www\.[^\s)\"']+", " ", body)
-    # IP-Adressen entfernen (z. B. DNS-Server 8.8.8.8 / 1.1.1.1 – technische
-    # Fakten, die in Fachartikeln identisch sein MÜSSEN und keine Duplikate
-    # sind; Fund: 2 DNS-Artikel teilten 17 „Phrasen“ aus lauter IPs).
-    body = re.sub(r"\b\d{1,3}(?:\.\d{1,3}){3}\b", " ", body)
     # Markdown-Links: nur den Ankertext behalten. Interne Link-ZIELE
     # (../../posts/slug/) sind Navigation, kein Inhalt – sonst erzeugen
     # identische Link-Ziele in mehreren Artikeln falsche "Duplikate".

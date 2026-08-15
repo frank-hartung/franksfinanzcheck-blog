@@ -61,7 +61,7 @@ SLUG_DEEP = {
     "kostenloses-girokonto-finden": ("c24bank&cat=14", "C24 Girokonto"),
     "notgroschen-aufbauen-wie-viel-reicht": ("c24bank&cat=14", "C24 Girokonto"),
     "kreditkarte-ohne-jahresgebuehr": ("kreditkarte", "Kreditkarten-Vergleich"),
-    "ratenkredit-bestszins-vergleichen": ("kredit-vergleich", "Kreditvergleich"),
+    "ratenkredit-bestszins-vergleichen": ("kreditvergleich", "Kreditvergleich"),
     "tagesgeld-zinsen-sicher-anlegen": ("tagesgeldvergleich", "Tagesgeld-Vergleich"),
     # Versicherungen (CHECK24)
     "kfz-versicherung-wechseln": ("kfz-versicherung", "Kfz-Versicherung"),
@@ -76,13 +76,9 @@ SLUG_DEEP = {
     "urlaub-mit-kindern-guenstig-spartricks": ("pauschalreisen-vergleich&cat=9", "Pauschalreisen-Vergleich"),
     "mietwagen-im-winter-schnaeppchen-tricks": ("mietwagen-preisvergleich&cat=10", "Mietwagen-Vergleich"),
     "festgeld-oder-tagesgeld-2026": ("tagesgeldvergleich", "Tagesgeld-Vergleich"),
-    "dispozinsen-verstehen-alternativen": ("kredit-vergleich", "Kreditvergleich"),
+    "dispozinsen-verstehen-alternativen": ("kreditvergleich", "Kreditvergleich"),
     "gebuehrenfallen-banking-vermeiden": ("kreditkarte", "Kreditkarten-Vergleich"),
     "reiseversicherung-richtig-kombinieren": ("kfz-versicherung", "Kfz-Versicherung"),
-    # 12.08.2026: Hausschutz/Eigenheim → Tarifcheck Hausrat (thematischer Deep-Link)
-    "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": ("hausratversicherung", "Hausrat-Vergleich"),
-    "2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft": ("kredit-vergleich", "Kreditvergleich"),
-    "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
 }
 
 # Artikel, die Tarifcheck (partner-versicherung.de) nutzen statt CHECK24
@@ -170,6 +166,25 @@ def _load_registry():
             m = re.match(r"^\s+([\w-]+):\s*\"(https://[^\"]+)\"", line)
             if m:
                 reg[m.group(1)] = m.group(2)
+    return reg
+
+
+_REGISTRY = _load_registry()
+
+
+# Gateway-Aufloesung (Affiliate-Shield, 11.08.): /go/<key>/ -> Register-URL,
+# damit alle folgenden Checks (deep, PID, Pillar) unveraendert weiterarbeiten.
+def _load_registry():
+    reg = {}
+    yf = os.path.join(BLOG_DIR, "scripts", "check24_links.yaml")
+    if os.path.exists(yf):
+        for line in open(yf, encoding="utf-8"):
+            ls = line.strip()
+            if ls and not ls.startswith("#") and ':"' in ls and ls.endswith('"'):
+                key, _, rest = ls.partition(':"')
+                url = rest.rstrip('"')
+                if url.startswith("http"):
+                    reg[key.strip()] = url
     return reg
 
 

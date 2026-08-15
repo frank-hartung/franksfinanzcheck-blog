@@ -68,10 +68,8 @@ def status_of(words: int) -> str:
         return "zu-kurz"
     if words > MAX_WORDS:
         return "zu-lang"
-    if words < OPT_MIN:
+    if words < OPT_MIN or words > OPT_MAX:
         return "unter-optimum"
-    if words > OPT_MAX:
-        return "ueber-optimum"
     return "ok"
 
 
@@ -115,10 +113,8 @@ def main():
             issues = [a for a in arts if a["status"] in ("zu-kurz", "zu-lang")]
 
     ok = sum(1 for a in arts if a["status"] == "ok")
-    unter = sum(1 for a in arts if a["status"] == "unter-optimum")
-    ueber = sum(1 for a in arts if a["status"] == "ueber-optimum")
-    print(f"Längen-Check: {len(arts)} Artikel | ok: {ok} | unter-Optimum: {unter} "
-          f"| über-Optimum: {ueber} "
+    opt = sum(1 for a in arts if a["status"] == "unter-optimum")
+    print(f"Längen-Check: {len(arts)} Artikel | ok: {ok} | unter-Optimum: {opt} "
           f"| zu-kurz: {sum(1 for a in arts if a['status'] == 'zu-kurz')} "
           f"| zu-lang: {sum(1 for a in arts if a['status'] == 'zu-lang')}")
     print(f"Zielbandbreite: {MIN_WORDS}-{MAX_WORDS} Wörter "
@@ -126,15 +122,14 @@ def main():
     for a in sorted(issues, key=lambda x: x["words"]):
         print(f"  ❌ [{a['status']}] {a['slug']}: {a['words']} Wörter / "
               f"{a['chars']} Zeichen")
-    # Ausserhalb des Optimums nur als Hinweis (kein Fehler)
+    # Unter-Optimum nur als Hinweis (kein Fehler)
     for a in sorted(arts, key=lambda x: x["words"]):
-        if a["status"] in ("unter-optimum", "ueber-optimum"):
-            richtung = "unter" if a["status"] == "unter-optimum" else "über"
-            print(f"  ℹ️ [{richtung}-Optimum] {a['slug']}: {a['words']} Wörter")
+        if a["status"] == "unter-optimum":
+            print(f"  ℹ️ [unter-Optimum] {a['slug']}: {a['words']} Wörter")
 
     if as_json:
         print(json.dumps({
-            "total": len(arts), "ok": ok, "unter_optimum": unter, "ueber_optimum": ueber,
+            "total": len(arts), "ok": ok, "unter_optimum": opt,
             "zu_kurz": sum(1 for a in arts if a["status"] == "zu-kurz"),
             "zu_lang": sum(1 for a in arts if a["status"] == "zu-lang"),
             "min_words": MIN_WORDS, "max_words": MAX_WORDS,

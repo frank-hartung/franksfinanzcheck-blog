@@ -1,16 +1,17 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 14.08.2026 19:57 Uhr (MESZ)
+> Automatisch aktualisiert: 11.08.2026 22:25 Uhr (MESZ)
 
 ## Heutiger Stand
 
-- **Veröffentlicht heute:** 1/2 Artikel
-- 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden – Gasrechnung senken: Fehler im Spätsommer vermeiden
+- **Veröffentlicht heute:** 2/2 Artikel
+- 2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck – Lastschrift zurückbuchen: So holst du dir dein Geld zurück
+- 2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft – Schufa-Score verstehen: So liest du deine Bonitätsauskunft
 
 ## System
 
-- **Themenpool:** 175 Themen, **171 frei**
-- **Letzter Content-Commit:** 9c86c97 2026-08-14 content: Redaktions-Politur (KI-Gates, Budget 3) - Echoe/Personen geheilt
+- **Themenpool:** 123 Themen, **94 frei**
+- **Letzter Content-Commit:** noch keiner
 - **Tageslimit:** 2 (steuerbar per Variable MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen

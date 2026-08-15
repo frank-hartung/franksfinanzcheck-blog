@@ -31,34 +31,23 @@ def main():
         print(f"List-Fehler (nicht kritisch): {e}")
         return 1
     for issue in existing:
-        title = issue.get("title", "")
-        if (title.startswith("⚠ Content-Engine") or title.startswith("📝 Content-Engine")) and not issue.get("pull_request"):
-
+        if issue.get("title", "").startswith("⚠ Content-Engine") and not issue.get("pull_request"):
             print(f"Issue existiert bereits: #{issue['number']}")
             return 0
 
     body = (
-        "Es liegt mindestens 1 neuer Artikel als **ENTWURF** (`draft: true`) bereit.\n\n"
-        "Grund: Die automatische Qualitätsprüfung (oder die KI-APIs) hat das "
-        "Profi-Qualitäts-Gate nicht erreicht (`engine_level: \"draft\"` im "
-        "Frontmatter, Ebene-2-Rettung). Es gibt seit 13.08.2026 keine "
-        "abgeschwächte Zwischenstufe mehr, die trotzdem automatisch "
-        "veröffentlicht würde – entweder Profi-Niveau oder Entwurf für dich.\n\n"
+        "Die Content-Engine v2 hat einen Artikel nur als **ENTWURF** sichern können, "
+        "weil die automatische Qualitätsprüfung (oder die KI-APIs) die Profi-Schwelle "
+        "nicht erreicht hat.\n\n"
         "**Bitte prüfen:**\n"
         "1. `ENGINE-STATUS.md` ansehen (Ebene, Fehler)\n"
         "2. Den Entwurf unter `content/posts/` suchen (`draft: true`)\n"
-        "3. Fertigstellen und freigeben: `draft: false` setzen (oder "
-        "`python3 scripts/publish.py <slug>`) – der nächste Deploy "
-        "veröffentlicht ihn, sofern er auch das harte Publish-Gate "
-        "(`scripts/publish_gate.py`) besteht.\n\n"
-        "_Hinweis: Nur echte Profi-Qualität wird automatisch veröffentlicht. "
-        "Modus ändern: Repo-Variable `AUTO_PUBLISH` (`profi` = Standard, `0` = immer "
-        "manuell, `1` = Vollautomatik).\n\n"
+        "3. Artikel fertigstellen und `draft: false` setzen – der nächste Deploy "
+        "veröffentlicht ihn.\n\n"
         "_Automatisch erstellt von der Content-Engine v2._"
     )
-    data = json.dumps({"title": "📝 Content-Engine: Entwurf wartet auf Freigabe",
+    data = json.dumps({"title": "⚠ Content-Engine: Entwurf wartet auf Freigabe",
                        "body": body}).encode()
-
     req = urllib.request.Request(api, data=data, headers=headers, method="POST")
     try:
         with urllib.request.urlopen(req, timeout=20) as resp:

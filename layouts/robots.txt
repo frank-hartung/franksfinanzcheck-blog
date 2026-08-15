@@ -2,8 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /go/
 
-# Pinterest-Crawler explizit erlauben (Rich Pins / Pin-Scraping)
-User-agent: Pinterest
-Allow: /
-
 Sitemap: {{ "sitemap.xml" | absURL }}

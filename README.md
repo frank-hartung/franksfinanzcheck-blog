@@ -21,86 +21,28 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 
 ---
 
-## ⚡ Vollautomatik ohne manuelles Eingreifen (Stand 13.08.2026)
+## ⚡ Vollautomatik (kein tägliches Pushen nötig)
 
-Betriebsregel (Frank, 13.08.2026): **so wenig wie möglich mit der
-Veröffentlichung zu tun haben.** Das ist inzwischen wörtlich umgesetzt –
-im Normalbetrieb musst du nichts freigeben, nichts fertigschreiben, nichts
-klicken. Zwei Workflows generieren automatisch Artikel und veröffentlichen
-sie, wenn und nur wenn sie **alle** Qualitäts- und SEO-Prüfungen bestehen:
-**„Content-Engine v2"** (`content-engine-v2.yml`, mehrere Zeitfenster ab
-08:10 MESZ) und **„Tagesziel 1 Post"** (`tagesziel-1-post.yml`,
-Nachlauf-Slots), falls das Wochenziel sonst nicht erreicht würde.
+Der Workflow **„Automatische Content-Generierung"** läuft abgestimmt auf deine Pinterest-Zeiten:
 
-**Warum Vollautomatik hier ohne Google-Nachteil funktioniert:** Google
-bestraft nicht "Automatisierung" an sich, sondern *Content, der die
-Qualitäts-Kriterien nicht erfüllt* ("Scaled Content Abuse" zielt auf
-massenhaften, nicht ausreichend geprüften Content). Solange **nichts**
-live geht, das nicht nachweislich alle Prüfungen besteht, ist es für
-Google irrelevant, ob ein Mensch oder ein Skript den letzten Klick
-gemacht hat. Deshalb: kein manueller Freigabe-Schritt mehr, aber die
-Prüfungen selbst sind strenger als vorher, nicht schwächer.
-
-**Wie das technisch sichergestellt ist:**
-1. **Themen-Hopping statt Kompromiss (13.08., Nachmittag):** Erreicht ein
-   Thema nach 5 Versuchen nicht das harte Profi-Qualitäts-Gate
-   (`engine_level: "profi"`), probiert die Engine automatisch bis zu
-   2 weitere Themen. Es gibt seit heute **keine abgeschwächte
-   "Relaxed"-Zwischenstufe mehr** – ein Artikel ist entweder Profi-Niveau
-   oder er erscheint gar nicht erst.
-2. **Kein Artefakt bei Totalausfall:** Schaffen es alle probierten Themen
-   nicht, wird der Lauf sauber beendet – **kein Entwurf, der auf dich
-   wartet.** Es gibt mehrere Cron-Slots pro Publikationstag; der nächste
-   versucht automatisch neue Themen. Ein Tag ganz ohne neuen Artikel
-   erfordert von dir nichts.
-3. **Hartes Publish-Gate (`scripts/publish_gate.py`):** Direkt vor dem
-   Deploy prüft die Engine zusätzlich drei eigenständige, strengere
-   Kriterien:
-   - `check_length.py` – Zeichen-/Wortlänge (700–1800 Wörter)
-   - `seo_audit.py` – Title-/Description-Länge, Wortzahl, Alt-Texte, Sitemap
-   - `affiliate_profi_check.py` (A1–A8) – Offenlegung, E-E-A-T-Feld,
-     interne Links, Schema.org, Affiliate-Dichte, Trust-Box, Autor, CTA
-   Besteht ein Artikel eine dieser Prüfungen nicht (auch nach den
-   Selbstheilungs-Läufen davor), wird er **komplett verworfen** (Content +
-   Cover gelöscht) statt als Entwurf liegen zu bleiben – auch hier landet
-   nichts auf deinem Tisch.
-4. **`quality_score.py`** (Schwelle 0,85: Rechtschreibung, Meta, Struktur,
-   Typografie, Einzigartigkeit, Affiliate-Präsenz) läuft zusätzlich als
-   zweite, unabhängige Bewertung in der Qualitäts-Kette.
-
-**Publikationsfrequenz wird automatisch verwaltet (`scripts/cadence_manager.py`,
-läuft wöchentlich via `cadence-manager.yml`):**
-Fachliche Entscheidung (Profi-SEO-Manager + Profi-Affiliate-Marketer,
-13.08.2026): Bei einer brandneuen YMYL-Domain (gültig seit 08.08.2026)
-im Solo-Automatikbetrieb ist vorsichtiges, stetiges Wachstum statt
-aggressivem Hochfahren die professionell richtige Wahl.
-
-| Domain-Alter | Ziel-Frequenz |
+| Uhrzeit (DE) | Was passiert |
 |---|---|
-| Woche 0–3 (Monat 1) | 3 Artikel/Woche |
-| Woche 4–7 (Monat 2) | 4 Artikel/Woche |
-| Woche 8–11 (Monat 3) | 5 Artikel/Woche |
-| ab Woche 12 | 5 Artikel/Woche (Dauer-Obergrenze) |
+| **08:00** | Deine Pinterest-Pins erscheinen |
+| **08:10** | Der Bot generiert 1 einzigartigen Artikel aus einem freien Pin-Thema und VERÖFFENTLICHT ihn automatisch |
+| **19:30** | Deine abendlichen Pinterest-Pins erscheinen |
+| **19:40** | Der Bot generiert + veröffentlicht den 2. Artikel des Tages |
 
-Zusätzliche **Sicherheitsbremse**: Liegt die Erfolgsquote der letzten
-14 Tage (Artikel erfolgreich generiert vs. Themen-Hopping ohne Erfolg)
-unter 50 %, wird die Rampe nicht weiter hochgefahren bzw. um 1 Tag/Woche
-reduziert (Boden: 2/Woche) – ein Symptom für strukturelle Probleme
-(Themenpool, KI-Provider), die zuerst behoben werden sollten. Die
-5/Woche-Obergrenze ist bewusst dauerhaft: mehr würde ohne echte
-Performance-Daten aus der Google Search Console (aktuell kein API-Zugang
-eingerichtet) reines Rätselraten sein. Jede Entscheidung steht in
-`CADENCE-REPORT.md` (wird jede Woche neu geschrieben).
-
-**Modus wechseln (falls du es dir anders überlegst):** Repo-Variable
-`AUTO_PUBLISH` – `profi` (Standard: nur Profi-Artikel automatisch), `0`
-(immer manuell – dann bekommst du wieder Freigabe-Issues für Entwürfe),
-`1` (alte Vollautomatik ohne die zusätzlichen Gates – nicht empfohlen).
+**Wie es funktioniert:**
+- Themen kommen **direkt aus deinem Pinterest-Plan** (`data/pinterest_plan.yaml`, 62 Pins)
+- Der Artikel wird **automatisch veröffentlicht** (`draft: false`) – kein manueller Schritt
+- Sind alle Pin-Themen abgedeckt, greift automatisch der erweiterte Themenpool (`topics.yaml`)
+- Einzigartigkeits-Check + Anti-Copy-Prompt stellen sicher, dass kein Pin-Text 1:1 kopiert wird
+- Max. 2 Artikel/Tag (1 pro Lauf) – Google-konform, kein Content-Spam
 
 **Steuerung:**
-- **Stoppen (Kill-Switch):** GitHub → Actions → „Content-Engine v2" bzw.
-  „Tagesziel 1 Post" bzw. „Cadence-Manager" → Disable workflow
+- **Stoppen (Kill-Switch):** GitHub → Actions → „Automatische Content-Generierung" → Disable workflow
 - **Manuell starten:** GitHub → Actions → „Run workflow"
+- **Wieder auf Entwurfs-Modus:** Im Workflow `AUTO_PUBLISH: "0"` setzen (dann musst du wieder freigeben)
 
 **🔗 Affiliate-Links ändern – so geht's (wichtig!):**
 

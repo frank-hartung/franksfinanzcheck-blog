@@ -90,6 +90,7 @@ FEST = {
     "scripts/hardcases_guard.py",
     "scripts/plagiat_guard.py",
     "scripts/content_audit.py",
+    "scripts/fazit_schmiede.py",
     "data/content_fingerprints.jsonl",
     # Pillar-Templates (12.08.: Relative-Link-Falle entfernt):
     "layouts/pillar/single.html",

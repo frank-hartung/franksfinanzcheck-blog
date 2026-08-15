@@ -44,26 +44,11 @@ def norm(s):
 
 
 def load_articles():
-    """Lädt Artikel als Page-Bundles (content/posts/<slug>/index.md).
-
-    BUGFIX (13.08.2026, identisches Muster wie der zuvor in seo_audit.py
-    gefundene Bug): iterierte vorher über os.listdir(POSTS_DIR) +
-    fn.endswith(".md") – die Seite nutzt aber ausschließlich Page-Bundles,
-    keine flachen .md-Dateien direkt in POSTS_DIR. os.listdir() liefert hier
-    nur Ordnernamen (keiner endet auf ".md"), wodurch diese Funktion IMMER
-    eine leere Liste zurückgab und das gesamte Tool seit Einführung der
-    Page-Bundles als stiller No-Op lief (meldete '0 Artikel' bzw. fälschlich
-    '✅ Alle Artikel keyword-optimiert auf Profi-Niveau' für 0 geprüfte
-    Artikel). 'file' bleibt als '<slug>/index.md' erhalten, damit
-    os.path.join(POSTS_DIR, a['file']) an anderen Stellen (z. B.
-    apply_suggestions()) unverändert funktioniert."""
     arts = []
-    for slug in sorted(os.listdir(POSTS_DIR)):
-        bundle_dir = os.path.join(POSTS_DIR, slug)
-        index_path = os.path.join(bundle_dir, "index.md")
-        if not os.path.isdir(bundle_dir) or not os.path.isfile(index_path):
+    for fn in sorted(os.listdir(POSTS_DIR)):
+        if not fn.endswith(".md"):
             continue
-        content = open(index_path, encoding="utf-8").read()
+        content = open(os.path.join(POSTS_DIR, fn), encoding="utf-8").read()
         parts = content.split("---", 2)
         fm = parts[1] if len(parts) > 1 else ""
         body = parts[2] if len(parts) == 3 else content
@@ -77,26 +62,10 @@ def load_articles():
         title = get("title")
         desc = get("description")
         kw_raw = get("keywords")
-        # BUGFIX (13.08.2026): 'keywords:' steht als YAML/JSON-Liste im
-        # Frontmatter (z. B. ["Tierversicherung", "Hundeversicherung"]).
-        # Die generische get()-Regex fängt nur ein optionales EINZELNES
-        # Anführungszeichen ab, nicht die eckigen Klammern – dadurch blieben
-        # bislang "[" und "]" am ersten bzw. letzten Element kleben (z. B.
-        # main_kw wurde '["Tierversicherung"' statt 'Tierversicherung'),
-        # was Titel-/Description-/Slug-Keyword-Abgleiche unbemerkt zum
-        # Scheitern brachte. Jetzt: falls die Rohfassung wie eine Liste
-        # aussieht, echtes JSON-Parsing statt naives Komma-Split.
-        kw_raw_stripped = kw_raw.strip()
-        if kw_raw_stripped.startswith("[") and kw_raw_stripped.endswith("]"):
-            try:
-                kws = [str(k).strip() for k in json.loads(kw_raw_stripped) if str(k).strip()]
-            except (json.JSONDecodeError, ValueError):
-                kws = [k.strip().strip('"\'') for k in kw_raw_stripped[1:-1].split(",") if k.strip()]
-        else:
-            kws = [k.strip() for k in kw_raw.split(",") if k.strip()]
+        kws = [k.strip() for k in kw_raw.split(",") if k.strip()]
         arts.append({
-            "file": os.path.join(slug, "index.md"),
-            "slug": slug,
+            "file": fn,
+            "slug": fn[:-3],
             "title": title,
             "description": desc,
             "keywords": kws,

@@ -1,15 +1,17 @@
 # 🎓 REDAKTIONS-FINAL-REPORT (Endabnahme)
 
-**Stand:** 2026-08-14 16:39 UTC
+**Stand:** 2026-08-11 21:58 UTC
+
 **Artikel:** 2
 
-## 🟢 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+## 🟢 2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck
 
   verlagsreif ✅ (G1–G5 bestanden)
 
-## 🔴 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
+## 🟢 2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft
 
-- G1 Entwurf-Status (nicht live)
+
+  verlagsreif ✅ (G1–G5 bestanden)
 
 ---
 _Endabnahme = letzte Instanz vor der Welt. Gates G1–G5; Sabotage->Exit 2._

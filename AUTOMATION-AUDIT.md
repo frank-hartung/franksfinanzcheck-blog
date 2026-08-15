@@ -81,25 +81,3 @@ Empfehlung: in `scripts/_archiv/` verschieben oder im Kopf als „manuell" kennz
 ---
 
 *Nächstes Audit empfohlen: Quartalsweise (passt zum Artikel-Update-Rhythmus).*
----
-
-## Nachtrag 12.08.2026 – Profi-Level-Optimierung
-
-**Umfang jetzt:** 24 Workflows + 75 Skripte.
-
-| # | Befund | Maßnahme |
-|---|---|---|
-| 1 | `content-engine-v2.yml` rief noch die **veralteten** `fix_dash_breaks.py` + `fix_heading_breaks.py` (ersetzt durch `fix_linebreaks.py`) – Doppel-/Alt-Logik | ✅ Aufrufe entfernt, **Skripte gelöscht** (`git rm`) |
-| 2 | `uptime-check` (6 h) + `uptime-monitor` (15 min) teilten das **Issue-Label `uptime`** → Doppel-Alarme/gegenseitiges Schließen möglich | ✅ `uptime-check` auf **manuell** gestellt (Cron entfernt); `uptime-monitor` ist der aktive Monitor mit Auto-Close |
-| 3 | **Canonical-Tag** wurde nie automatisch geprüft | ✅ `layout_audit.py`: canonical-Check ergänzt (alle Artikel-Seiten OK) |
-| 4 | 1 totes Skript (`set_check24_links`) | ✅ belassen (einmaliges Setup, Referenz-Doku) |
-
-**Geprüft & OK (kein Handlungsbedarf):** canonical überall korrekt (Artikel/Startseite/Pillar/Paginierung),
-404-Seite vorhanden, Umami-Analytics + Search-Console-Verifizierung aktiv, E-E-A-T-Erfahrungsboxen auf allen
-Artikeln, FAQPage-Schema auf allen Artikeln, interne Verlinkung ≥ 2, Affiliate-Dichte ≤ 4, robots.txt Pinterest-ok.
-
-**Profi-Signale gesamt (aktiv überwacht):** layout_audit (Links/Meta/Schema/Canonical/Alts),
-affiliate_profi_check (A1-A8), pinterest_check (P1-P13), check_length, check_titles, check_uniqueness,
-workspace_guard (Budget+Selbsttest), uptime-monitor (15 min), backup-offsite (täglich).
-
-*Nächstes Audit empfohlen: Quartalsweise.*

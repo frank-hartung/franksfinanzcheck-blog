@@ -1,17 +1,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-{{- /* Thin-Content-Schutz (13.08.): Tag-/Kategorie-Archivseiten mit
-       weniger als 4 Artikeln bringen kaum Mehrwert (nur 1 Beitrag pro
-       Tag ist üblich) und verwässern als "Thin Content" die Crawl-
-       Priorität. Sie werden automatisch auf noindex,follow gesetzt und
-       springen selbstständig auf index,follow, sobald genug Artikel
-       dazugekommen sind. Der Linkfluss (follow) bleibt in jedem Fall
-       erhalten. */ -}}
-{{- $isThinTaxonomy := and (eq .Kind "term") (lt (len .Pages) 4) -}}
-{{- if $isThinTaxonomy }}
-<meta name="robots" content="noindex, follow">
-{{- else if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
+{{- if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
 <meta name="robots" content="index, follow">
 {{- else }}
 <meta name="robots" content="noindex, nofollow">
@@ -19,7 +9,7 @@
 
 {{- /* Title */}}
 <title>{{ if .IsHome -}}
-{{ site.Params.homeTitle | default site.Title }}
+{{ site.Title }}
 {{- else -}}
 {{- if .Title -}}
 {{- $t := .Title | plainify | replaceRE "\\s+" " " -}}
@@ -92,33 +82,10 @@
        Browser wählt exakt dieselbe Größe wie im <picture>. */ -}}
 {{- $lcpCover := "" }}{{- $lcpDir := "" }}{{- $lcpBase := "" }}{{- $lcpSizes := "(min-width: 768px) 620px, 100vw" }}
 {{- $isList := or (eq .Kind "home") (eq .Kind "section") (eq .Kind "term") }}
-{{- if $isList }}
-  {{- /* BUGFIX (14.08.2026, Frank: Rechtsseiten erschienen als Artikel-
-         Karten auf /page/2/): .Paginator OHNE Argument faellt intern auf
-         .RegularPages zurueck. Auf der Startseite umfasst .RegularPages
-         ALLE Top-Level-Einzelseiten (auch Datenschutz/Impressum/Ueber,
-         die kein eigenes 'Section' haben) -- nicht nur die Artikel unter
-         'posts'. Hugo cached die Paginierung EINMAL PRO SEITE beim
-         ERSTEN Aufruf; da head.html VOR dem Body-Template
-         (layouts/_default/list.html) rendert, hat dieser zu weite aufruf
-         hier bislang die GESAMTE Startseiten-Paginierung uebernommen --
-         die Rechtsseiten landeten dadurch als Artikel-Karten auf
-         Folgeseiten. Fix: dieselbe, exakt gefilterte Kollektion wie
-         layouts/_default/list.html EXPLIZIT an .Paginate uebergeben --
-         identischer Aufruf = ein einziger, konsistenter, korrekter
-         Cache-Eintrag, unabhaengig davon, welches Template zuerst
-         paginiert. */ -}}
-  {{- $lcpListPages := union .RegularPages .Sections }}
-  {{- if eq .Kind "home" }}
-    {{- $lcpListPages = where site.RegularPages "Section" "eq" "posts" }}
-    {{- $lcpListPages = where $lcpListPages "Params.hiddenInHomeList" "!=" "true" }}
-  {{- end }}
-  {{- $lcpPaginator := .Paginate $lcpListPages }}
-  {{- if and (gt (len $lcpPaginator.Pages) 0) (eq $lcpPaginator.PageNumber 1) }}
-    {{- with index $lcpPaginator.Pages 0 }}
-      {{- with .Params.cover.image }}
-        {{- $lcpCover = . }}{{- $lcpDir = path.Dir . }}{{- $lcpBase = strings.TrimSuffix (path.Ext (path.Base .)) (path.Base .) }}
-      {{- end }}
+{{- if and $isList (gt (len .Paginator.Pages) 0) (eq .Paginator.PageNumber 1) }}
+  {{- with index .Paginator.Pages 0 }}
+    {{- with .Params.cover.image }}
+      {{- $lcpCover = . }}{{- $lcpDir = path.Dir . }}{{- $lcpBase = strings.TrimSuffix (path.Ext (path.Base .)) (path.Base .) }}
     {{- end }}
   {{- end }}
 {{- else if and .Params.cover.image (eq .Kind "page") }}

@@ -156,15 +156,19 @@ def load_topics():
                  f"bitte reparieren, bevor der Bot weiterläuft:\n{exc}")
     raw_topics = (data or {}).get("topics") or []
     topics = []
-    for t in raw_topics:
-        if not isinstance(t, dict) or not t.get("title"):
-            continue
-        topics.append({
-            "title": str(t["title"]).strip(),
-            "keywords": list(t.get("keywords") or []),
-            "affiliate_url": t.get("affiliate_url"),
-            "pillar": t.get("pillar"),
-        })
+    with open(TOPICS_FILE, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith("- title:"):
+                t = line.split(":", 1)[1].strip().strip("\"'")
+                topics.append({"title": t, "keywords": [], "affiliate_url": None, "pillar": None})
+            elif line.startswith("keywords:") and topics:
+                raw = line.split(":", 1)[1].strip()
+                topics[-1]["keywords"] = [k.strip().strip("\"'") for k in raw.strip("[]").split(",")]
+            elif line.startswith("affiliate_url:") and topics:
+                topics[-1]["affiliate_url"] = line.split(":", 1)[1].strip().strip("\"'")
+            elif line.startswith("pillar:") and topics:
+                topics[-1]["pillar"] = line.split(":", 1)[1].strip().strip("\"'")
     if not topics:
         sys.exit("FEHLER: Keine Themen in data/topics.yaml gefunden.")
     return topics

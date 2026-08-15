@@ -88,72 +88,6 @@ def check_internal_links():
         OK.append(f"Interne Links: {checked} geprüft, 0 kaputt.")
 
 
-def check_markdown_links():
-    """Prüft die Markdown-QUELLEN auf kaputte/verschachtelte Links
-    (Fund 12.08.: internal_linker-Bot erzeugte „[Euro [pr](../../…/…)o
-    Monat](../../…/)“, „[pro Monat](…)“-Einsprengsel, Links mitten im Wort
-    und Link-Markup in Frontmatter-Keywords). --fix entfernt das Link-Markup
-    und lässt den Anzeigetext stehen (deterministisch, konservativ)."""
-    root = os.path.dirname(BASE)  # Projektwurzel (BASE = public/)
-    files = (glob.glob(os.path.join(root, "content", "posts", "*", "index.md"))
-             + glob.glob(os.path.join(root, "content", "pillar", "*", "index.md")))
-    problems = []
-
-    # 1) Verschachtelt: [Text [Link](url) …](url)  bzw. [Text [Link](url)
-    re_nested = re.compile(r"\[([^\]\n]*\[[^\]\n]*)\]\([^)\n]*\)")
-    # 2) Link mitten im Wort: X[Text](url)Y
-    re_midword = re.compile(r"([a-zäöüßA-ZÄÖÜ0-9])\[([^\]]*)\]\(([^)\n]*)\)")
-    # 2b) Link zerschneidet ein Wort: [Textteil](url)Wortfortsetzung
-    #     (Fund 12.08.: „…[ das Eigenkapital fü](../../posts/…/)r eine Immobilie“
-    #     – der Link zerschneidet „für“ in „fü|r“; das Muster ](url)X mit
-    #     direkt angehängtem Buchstaben X wurde bisher übersehen.)
-    re_midword2 = re.compile(r"\[([^\]]*)\]\([^)\n]*\)([a-zäöüß])")
-    # 3) Link-Markup in Frontmatter-Keywords/Categories
-    re_front = re.compile(r"^(keywords|categories|tags):.*\]\([^)\n]*\)", re.M)
-
-    for f in files:
-        c = open(f, encoding="utf-8").read()
-        lines = c.split("\n")
-        for i, l in enumerate(lines):
-            slug = os.path.basename(os.path.dirname(f))
-            for m in re_nested.finditer(l):
-                problems.append((slug, i + 1, "verschachtelter Link", m.group(0)[:80]))
-            for m in re_midword.finditer(l):
-                problems.append((slug, i + 1, "Link mitten im Wort", m.group(0)[:80]))
-            for m in re_midword2.finditer(l):
-                problems.append((slug, i + 1, "Link zerschneidet Wort", m.group(0)[:80]))
-            for m in re_front.finditer(c):
-                problems.append((slug, 0, "Link in Frontmatter", m.group(0)[:60]))
-
-    if problems:
-        CRITICAL.append(f"**{len(problems)} kaputte/verschachtelte Markdown-Links**:")
-        for slug, ln, kind, snippet in problems[:15]:
-            CRITICAL.append(f"  - `{slug}:{ln}` [{kind}] …{snippet}…")
-    else:
-        OK.append("Markdown-Links (Quellen): 0 verschachtelt/kaputt.")
-
-    # --fix: Link-Markup entfernen, Text behalten
-    if "--fix" in sys.argv and problems:
-        fixed = 0
-        for f in files:
-            c = open(f, encoding="utf-8").read()
-            orig = c
-            # Verschachtelte Links: inneres Link-Markup entfernen
-            c = re.sub(r"\[([^\]\n]*)\[([^\]]*)\]\([^)\n]*\)([^\]\n]*)\]\([^)\n]*\)",
-                       lambda m: "[" + m.group(1) + m.group(2) + m.group(3) + "]", c)
-            # Links mitten im Wort: Link-Markup entfernen, Text behalten
-            c = re.sub(r"([a-zäöüßA-ZÄÖÜ0-9])\[([^\]]*)\]\([^)\n]*\)([a-zäöüßA-ZÄÖÜ0-9])",
-                       lambda m: m.group(1) + m.group(2) + m.group(3), c)
-            # Wort-zerschneidende Links: Anker + Fortsetzung zusammenfügen
-            # („[Eigenkapital fü](url)r“ → „Eigenkapital für“)
-            c = re.sub(r"\[([^\]]*)\]\([^)\n]*\)([a-zäöüß])",
-                       lambda m: m.group(1) + m.group(2), c)
-            if c != orig:
-                open(f, "w", encoding="utf-8").write(c)
-                fixed += 1
-        print(f"Markdown-Link-Fix: {fixed} Dateien bereinigt.")
-
-
 def check_covers():
     posts = glob.glob(os.path.join(os.path.dirname(BASE), "content", "posts", "*", "index.md"))
     missing = []
@@ -202,36 +136,21 @@ def check_alts():
 
 def check_schema_and_meta():
     pages = glob.glob(os.path.join(BASE, "posts", "*", "index.html"))
-    no_schema, no_og, no_meta, no_h1, no_canonical = [], [], [], [], []
+    no_schema, no_og, no_meta, no_h1 = [], [], [], []
     for page in pages:
         text = open(page, encoding="utf-8", errors="ignore").read()
-        # Redirect-Alias-Seiten (Hugo baut sie für umbenannte Slugs:
-        # <meta http-equiv=refresh> + canonical) sind gewollt – überspringen
-        if re.search(r'http-equiv=["\']?refresh', text) and "canonical" in text:
-            continue
-        # 13.08.: Das frühere eigene "Article"-Schema (schema_article.html)
-        # wurde entfernt (Templating-Bug mit doppelt escapten Anführungs-
-        # zeichen + verwies auf nie existierendes /images/logo.png, siehe
-        # Commit-History). Es war ohnehin redundant zum sauberen, theme-
-        # eigenen BlogPosting-Schema. Diese Prüfung akzeptiert daher jetzt
-        # beide Schema-Typen als gültig.
-        if ('"@type":"Article"' not in text and '"@type": "Article"' not in text
-                and '"@type":"BlogPosting"' not in text and '"@type": "BlogPosting"' not in text):
+        if '"@type":"Article"' not in text and '"@type": "Article"' not in text:
             no_schema.append(os.path.basename(os.path.dirname(page)))
         if 'og:image' not in text:
             no_og.append(os.path.basename(os.path.dirname(page)))
-        # Minifier entfernt die Quotes (name=description) – beides akzeptieren
-        if not re.search(r'<meta[^>]*name=["\']?description["\']?', text):
+        if '<meta name="description"' not in text:
             no_meta.append(os.path.basename(os.path.dirname(page)))
         if re.search(r"<h1[^>]*>", text) is None:
             no_h1.append(os.path.basename(os.path.dirname(page)))
-        # Canonical-Tag (Self-Referencing auf Artikel-URL) – SEO-Pflicht
-        if not re.search(r'<link[^>]*rel=["\']?canonical["\']?', text):
-            no_canonical.append(os.path.basename(os.path.dirname(page)))
     if no_schema:
         WARN.append(f"Schema Article fehlt auf {len(no_schema)} Seiten: {', '.join(no_schema[:6])}")
     else:
-        OK.append(f"Schema-JSON-LD (BlogPosting) auf allen {len(pages)} Artikel-Seiten.")
+        OK.append(f"Schema-JSON-LD (Article) auf allen {len(pages)} Artikel-Seiten.")
     if no_og:
         WARN.append(f"og:image fehlt auf {len(no_og)} Seiten.")
     else:
@@ -244,55 +163,6 @@ def check_schema_and_meta():
         WARN.append(f"H1 fehlt auf {len(no_h1)} Seiten.")
     else:
         OK.append("H1 überall vorhanden.")
-    if no_canonical:
-        CRITICAL.append(f"Canonical fehlt auf {len(no_canonical)} Seiten: "
-                        f"{', '.join(no_canonical[:6])}")
-    else:
-        OK.append("Canonical-Tags auf allen Artikel-Seiten.")
-
-
-def check_home_pagination_purity():
-    """L7 (14.08.2026, Frank: 'Datenschutzerklärung, Impressum, Über mich
-    und diesen Blog unter dem Blogartikel. Bitte dauerhaft optimieren.'):
-    verhindert das Wiederauftreten eines echten Hugo-Templating-Bugs, bei
-    dem Rechtsseiten (Datenschutz/Impressum/Über) als vollwertige
-    Artikel-Karten in der Start­seiten-Paginierung erschienen (Root Cause:
-    layouts/_partials/head.html rief .Paginator OHNE Argument auf – das
-    fällt intern auf .RegularPages zurück, was auf der Startseite ALLE
-    Top-Level-Einzelseiten einschließt, nicht nur echte Blogartikel. Da
-    Hugo die Paginierung EINMAL PRO SEITE cached und head.html VOR dem
-    Body-Template rendert, hat dieser zu weite Aufruf die komplette
-    Startseiten-Paginierung "vergiftet"). Fix: siehe head.html-Kommentar.
-
-    Diese Prüfung liest JEDE gebaute Startseiten-Paginierungsseite
-    (public/index.html, public/page/N/index.html) und stellt sicher, dass
-    JEDE 'post link to …'-Artikelkarte tatsächlich auf /posts/… zeigt –
-    keine Rechts-/Info-Seite darf dort als Artikel-Karte auftauchen."""
-    home_pages = [os.path.join(BASE, "index.html")]
-    home_pages += sorted(glob.glob(os.path.join(BASE, "page", "*", "index.html")))
-    foreign = []
-    checked_cards = 0
-    for page in home_pages:
-        if not os.path.isfile(page):
-            continue
-        text = open(page, encoding="utf-8", errors="ignore").read()
-        for m in re.finditer(
-            r'aria-label="post link to ([^"]*)"\s+href=([^\s>]+)', text
-        ):
-            checked_cards += 1
-            title, href = m.group(1), m.group(2).strip('"')
-            if not href.startswith(("/posts/", "https://franksfinanzcheck.de/posts/")):
-                foreign.append(f"{os.path.relpath(page, BASE)}: „{html.unescape(title)}“ → {href}")
-    if foreign:
-        CRITICAL.append(
-            f"**{len(foreign)} artikelfremde Karte(n) in der Startseiten-Paginierung** "
-            f"(Rechts-/Info-Seiten dürfen dort NIE als Artikel-Karte erscheinen):"
-        )
-        for f in foreign:
-            CRITICAL.append(f"  - {f}")
-    else:
-        OK.append(f"Startseiten-Paginierung: {checked_cards} Artikel-Karten geprüft, "
-                   f"0 artikelfremde (Rechtsseiten bleiben draußen).")
 
 
 def write_report():
@@ -375,17 +245,14 @@ def auto_fix_links():
 def main():
     if "--fix" in sys.argv:
         n = auto_fix_links()
-        check_markdown_links()  # verschachtelte/kaputte Markdown-Links heilen
         return 0 if n == 0 else 2
     if not os.path.isdir(BASE):
         print(f"FEHLER: {BASE} existiert nicht – erst `hugo` bauen.")
         return 1
-    check_markdown_links()  # Markdown-Quellen zuerst (unabhängig vom Build)
     check_internal_links()
     check_covers()
     check_alts()
     check_schema_and_meta()
-    check_home_pagination_purity()
     write_report()
     return 1 if CRITICAL else 0
 

@@ -36,21 +36,11 @@ INTERNAL_LINKS_MIN = 2
 
 
 def load_posts():
-    """Lädt Artikel als Page-Bundles (content/posts/<slug>/index.md).
-
-    13.08.2026 BUGFIX: Vorher wurde mit os.listdir(POSTS_DIR) + fn.endswith(".md")
-    nach flachen .md-Dateien direkt in POSTS_DIR gesucht – die Seite nutzt aber
-    ausschließlich Page-Bundles (content/posts/<slug>/index.md). Das listete
-    IMMER 0 Artikel und der komplette Audit lief seit Einführung als No-Op
-    ("Alles auf Profi-Niveau", ohne je einen Artikel geprüft zu haben).
-    """
     posts = []
-    for slug in sorted(os.listdir(POSTS_DIR)):
-        bundle_dir = os.path.join(POSTS_DIR, slug)
-        index_path = os.path.join(bundle_dir, "index.md")
-        if not os.path.isdir(bundle_dir) or not os.path.isfile(index_path):
+    for fn in sorted(os.listdir(POSTS_DIR)):
+        if not fn.endswith(".md"):
             continue
-        content = open(index_path, encoding="utf-8").read()
+        content = open(os.path.join(POSTS_DIR, fn), encoding="utf-8").read()
         fm = content.split("---", 2)
         body = fm[2] if len(fm) == 3 else content
 
@@ -59,8 +49,7 @@ def load_posts():
             return m.group(1).strip() if m else ""
 
         posts.append({
-            "file": slug,
-            "slug": slug,
+            "file": fn,
             "title": get("title"),
             "description": get("description"),
             "keywords": get("keywords"),
@@ -81,8 +70,7 @@ def audit_post(p):
     h2s = len(re.findall(r"^##\s", p["body"], re.M))
     images = re.findall(r"!\[([^\]]*)\]", p["body"])
     no_alt = sum(1 for a in images if not a.strip())
-    internal = len(re.findall(
-        r"\[[^\]]+\]\(/posts/|\[[^\]]+\]\(\./|\[[^\]]+\]\(\.\./\.\./posts/", p["body"]))
+    internal = len(re.findall(r"\[[^\]]+\]\(/posts/|\[[^\]]+\]\(\./", p["body"]))
 
     # Titel
     if title_len < TITLE_MIN:
@@ -140,7 +128,7 @@ def audit_sitemap(posts):
     for p in posts:
         if p["draft"]:
             continue
-        slug = p["slug"]
+        slug = p["file"][:-3]
         if slug not in sitemap:
             missing.append(slug)
     return [f"{len(missing)} Artikel fehlen in sitemap.xml: {missing[:5]}" if missing else ""]

@@ -212,15 +212,6 @@ def smart_wrap(title, font, max_width, draw):
 
 
 def make_cover(title, slug, out_path, force=False):
-    # DEFENSIV (Selbstheilung): HTML-Tags aus dem Titel strippen, damit
-    # rohe Tags (z. B. „:<br> ") nie wörtlich im Cover-Bild erscheinen
-    # (Pillow zeichnet Text ohne HTML-Parsing – Fund: frugalismus-fuer-
-    # den-erfolg zeigte „Erfolg:<br> Der" auf dem Cover).
-    title = re.sub(r"<br\s*/?>|</br>|&lt;br&gt;|&amp;nbsp;|&nbsp;", "", title,
-                   flags=re.I)
-    title = re.sub(r"\s{2,}", " ", title).strip()
-    title = re.sub(r"\s+:", ":", title)
-    title = re.sub(r":\s{2,}", ": ", title)
     W, H = 1000, 1500
     # Vertikaler Verlauf Smaragdgrün → dunkel
     img = Image.new("RGB", (W, H))

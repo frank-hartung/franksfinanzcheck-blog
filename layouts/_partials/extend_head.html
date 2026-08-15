@@ -9,29 +9,13 @@
 ============================================================ -}}
 
 {{- /* ---------- Meta-Basics ---------- */ -}}
-{{- /* 13.08.2026 Bugfix: content/_index.md hat ein eigenes description-
-       Frontmatter-Feld, das die Theme-eigene head.html bereits als
-       <meta name="description"> rendert (PaperMod: .Description-Fallback).
-       Dieser Block hier lief bisher IMMER zusätzlich auf der Startseite,
-       unabhängig davon – das erzeugte zwei (teils inhaltlich abweichende)
-       description-Tags im HTML. Nur noch rendern, wenn die Seite selbst
-       keine eigene Description gesetzt hat (Fallback-Fall). */ -}}
-{{- if and (eq .Kind "home") (not .Description) (site.Params.description) -}}
+{{- if and (eq .Kind "home") (site.Params.description) -}}
 <meta name="description" content="{{ site.Params.description }}">
 {{- end -}}
 {{- with site.Params.author -}}
 <meta name="author" content="{{ . }}">
 {{- end -}}
-
-{{- /* BUGFIX (14.08.2026, gefunden beim Bau von web_uniqueness_guard.py):
-       Dieser Block rendert unconditional 'index, follow' - unabhängig von
-       der Thin-Content-noindex-Logik in layouts/_partials/head.html
-       (Tag-/Kategorie-Seiten mit < 4 Artikeln -> noindex,follow). Dadurch
-       hatte JEDE Seite der Website ZWEI widersprüchliche robots-Meta-Tags
-       im <head> (z. B. auf jeder Thin-Tag-Seite gleichzeitig 'noindex,
-       follow' UND 'index, follow'). head.html deckt bereits ALLE Fälle
-       ab (Thin-Taxonomie, Produktion, Nicht-Produktion) – dieser
-       redundante, konfliktträchtige zweite Tag entfällt ersatzlos. */ -}}
+<meta name="robots" content="index, follow">
 
 {{- /* ---------- Verifikationen ---------- */ -}}
 {{- with site.Params.pinterestVerify -}}
@@ -108,15 +92,12 @@
 {{- /* ---------- FAQPage-Schema (aus den FAQ-Abschnitten der Artikel) ---------- */ -}}
 {{- if and .IsPage (or (eq .Section "posts") (eq .Section "pillar")) -}}
 {{- $faq := slice -}}
-{{- /* FIX (12.08.): plainify würde "### Frage" zu <h3> umwandeln und den Split
-       bei "### " zerstören – daher auf dem RAW-Content splitten und erst die
-       ANTWORT plainifien (Markdown raus, Struktur bleibt). */ -}}
-{{- $chunks := split .RawContent "### " -}}
+{{- $chunks := split (plainify .RawContent) "### " -}}
 {{- range $chunks -}}
   {{- $lines := split . "\n" -}}
   {{- $q := trim (index $lines 0) " \t\r\n" -}}
   {{- if and (gt (len $q) 5) (findRE "[?]" $q) -}}
-    {{- $answer := trim (plainify (delimit (after 1 $lines) " ")) " \t\r\n" -}}
+    {{- $answer := trim (delimit (after 1 $lines) " ") " \t\r\n" -}}
     {{- if gt (len $answer) 10 -}}
       {{- $faq = $faq | append (dict "@type" "Question" "name" $q
           "acceptedAnswer" (dict "@type" "Answer" "text" $answer)) -}}
@@ -214,13 +195,7 @@
   }
 </script>
 
-{{- /* ---------- Article-Schema wurde entfernt (13.08.) ----------
-       Grund: Redundant zum theme-eigenen BlogPosting-Schema
-       (themes/PaperMod/layouts/_partials/templates/schema_json.html),
-       das bereits Headline/Description/Author/Publisher/Datum/Bild
-       sauber ausgibt. Das eigene schema_article.html erzeugte durch
-       einen Templating-Fehler (jsonify auf bereits gequotete Strings)
-       doppelt escapte Anführungszeichen in headline/description/author/
-       logo-URL UND verwies auf ein nie existierendes /images/logo.png
-       (404) – beides verhinderte valide Rich-Results. Ersatzlos entfernt,
-       da die theme-eigene BlogPosting-Ausgabe alle nötigen Felder abdeckt. */ -}}
+{{- /* ---------- Article-Schema (E-E-A-T, Rich Results) – nur Artikel ---------- */ -}}
+{{- if and (eq .Section "posts") (eq .Kind "page") -}}
+{{- partial "schema_article.html" . -}}
+{{- end -}}

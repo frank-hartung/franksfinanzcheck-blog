@@ -26,7 +26,6 @@ import json
 import os
 import re
 import sys
-import time
 import urllib.error
 import urllib.request
 
@@ -164,14 +163,6 @@ def mark_pinned(post):
 # Main
 # ---------------------------------------------------------------------------
 
-# ANTI-SPAM-RATE-LIMIT (Pinterest): Max. Pins PRO LAUF + Pause dazwischen.
-# Pinterest flaggt massenhaftes Pinnen in kurzer Zeit als Spam (Fehler
-# „möglicher Spam“ beim manuellen Pinnen). Daher: 3 Pins pro Workflow-Lauf,
-# je 45 s Abstand – statt 10 am Stück. Über PINS_PRO_TAG konfigurierbar.
-PINS_PRO_TAG = int(os.environ.get("PINS_PRO_TAG", "3"))
-PIN_PAUSE_S = int(os.environ.get("PIN_PAUSE_S", "45"))
-
-
 def main():
     dry_run = "--dry-run" in sys.argv
     list_boards = "--list-boards" in sys.argv
@@ -198,7 +189,7 @@ def main():
         return 0
 
     if dry_run:
-        for p in unpinned[:PINS_PRO_TAG]:
+        for p in unpinned[:10]:
             print(f"  - {p['slug']}: {pin_text(p)[:90]}…")
         print(f"Würde {len(unpinned)} Pins erstellen.")
         return 0
@@ -206,7 +197,7 @@ def main():
     if not TOKEN or not BOARD_ID:
         # QUEUE-MODUS: vorbereiten, sauber skippen (kein Fehler!)
         queue = [{"slug": p["slug"], "title": p["title"], "text": pin_text(p),
-                  "cover": p["cover"]} for p in unpinned[:PINS_PRO_TAG]]
+                  "cover": p["cover"]} for p in unpinned[:10]]
         n = write_queue(queue)
         lines = [f"**Modus:** Queue (kein PINTEREST_ACCESS_TOKEN/BOARD_ID)",
                  "", f"- {n} Pins vorbereitet in `data/pin_queue.yaml`",
@@ -221,14 +212,12 @@ def main():
 
     # POSTING-MODUS
     ok, fail = 0, 0
-    for p in unpinned[:PINS_PRO_TAG]:
+    for p in unpinned[:10]:
         try:
             api_post_pin(TOKEN, BOARD_ID, p)
             mark_pinned(p)
             ok += 1
             print(f"  ✓ Pin erstellt: {p['slug']}")
-            if ok < min(PINS_PRO_TAG, len(unpinned)):
-                time.sleep(PIN_PAUSE_S)  # Anti-Spam-Abstand
         except urllib.error.HTTPError as e:
             fail += 1
             detail = e.read().decode()[:150] if hasattr(e, "read") else ""

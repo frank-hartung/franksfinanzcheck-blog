@@ -132,26 +132,11 @@ def umlaut_free(s: str) -> str:
              .replace("Ä", "Ae").replace("Ö", "Oe").replace("Ü", "Ue").replace("ß", "ss"))
 
 
-ACRONYMS = {"dsl", "etf", "kfz", "sepa", "wlan", "dns", "vpn", "gez", "agb", "eeg", "kwh", "iban", "bic"}
-
-
 def hashtags(tags: list[str], max_tags: int = 3) -> str:
-    """Baut CamelCase-Hashtags aus Artikel-Tags.
-
-    BUGFIX (13.08.): reines .capitalize() pro Wort zerstörte bekannte
-    Abkürzungen (z. B. 'ETF' -> '#Etf', 'DSL' -> '#Dsl') – wirkt auf Mastodon
-    unprofessionell. Bekannte Abkürzungen (ACRONYMS) bleiben jetzt komplett
-    großgeschrieben.
-    """
     result = []
     for tag in tags[:max_tags]:
-        parts = []
-        for w in re.split(r"[\s\-]+", umlaut_free(tag)):
-            core = re.sub(r"[^A-Za-z0-9]", "", w)
-            if not core:
-                continue
-            parts.append(core.upper() if core.lower() in ACRONYMS else core.capitalize())
-        camel = "".join(parts)
+        camel = "".join(w.capitalize() for w in umlaut_free(tag).split())
+        camel = re.sub(r"[^A-Za-z0-9]", "", camel)
         if camel:
             result.append(f"#{camel}")
     if "#Finanzen" not in result:
@@ -173,27 +158,11 @@ def build_post(fm: dict, slug: str) -> str:
 
 
 def cover_path(slug_dir: Path, fm: dict) -> Path | None:
-    """Löst den Cover-Pfad auf.
-
-    BUGFIX (13.08.): 'cover.image' in der Frontmatter ist – wie vom Theme via
-    '| absURL' behandelt (layouts/_partials/cover.html) – site-root-relativ
-    (z. B. 'images/covers/<slug>.jpg' -> static/images/covers/<slug>.jpg),
-    NICHT relativ zum Page-Bundle-Ordner. Die alte Version suchte fälschlich
-    unter content/posts/<slug>/images/covers/... (existiert nie, da alle
-    Cover unter static/ liegen) und fand dadurch NIE ein Bild – jeder bisherige
-    Mastodon-Post ging ohne Bild raus. Fällt zur Sicherheit weiterhin auf einen
-    Page-Bundle-Pfad zurück, falls doch mal ein Artikel sein Cover als
-    Bundle-Resource mitbringt.
-    """
     m = re.search(r"image:\s*[\"']?(.*?)[\"']?\s*$", fm.get("raw", ""), re.MULTILINE)
     if not m:
         return None
-    rel = m.group(1)
-    static_candidate = ROOT / "static" / rel
-    if static_candidate.is_file():
-        return static_candidate
-    bundle_candidate = slug_dir / rel
-    return bundle_candidate if bundle_candidate.is_file() else None
+    p = slug_dir / m.group(1)
+    return p if p.is_file() else None
 
 
 def http_json(url: str, data=None, headers=None, method="POST") -> dict:
@@ -240,56 +209,6 @@ def post_mastodon(text: str, image: Path | None) -> tuple[bool, str]:
                 "Authorization": f"Bearer {MASTODON_TOKEN}",
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-        )
-        return True, resp.get("url", "")
-    except urllib.error.HTTPError as exc:
-        return False, f"HTTP {exc.code}: {exc.read().decode()[:200]}"
-    except Exception as exc:
-        return False, str(exc)[:200]
-
-
-def get_status_mastodon(status_id: str) -> dict:
-    """Liest einen Status aus. BEWUSST OHNE Authorization-Header: unser Token
-    hat nur 'write:accounts'+'write:statuses'+'write:media', kein
-    'read:statuses' – ein trotzdem mitgeschickter Bearer-Token ohne
-    passenden Scope führt bei Mastodon zu HTTP 403 (statt ignoriert zu
-    werden). Öffentliche Statuses sind ohne Token lesbar (seit Mastodon 2.7)."""
-    req = urllib.request.Request(
-        f"{MASTODON_INSTANCE}/api/v1/statuses/{status_id}",
-        method="GET",
-    )
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        return json.loads(resp.read().decode())
-
-
-def edit_mastodon(status_id: str, text: str) -> tuple[bool, str]:
-    """Bearbeitet einen bereits veröffentlichten Status (PUT statt POST) –
-    z. B. um nachträglich bessere Hashtags zu setzen, ohne einen Duplikat-Post
-    zu erzeugen. WICHTIG: Mastodon entfernt beim Edit angehängte Medien, wenn
-    'media_ids[]' nicht erneut mitgeschickt werden – deshalb wird das
-    vorhandene Bild zuerst per GET ausgelesen und unverändert mitgesendet."""
-    try:
-        current = get_status_mastodon(status_id)
-    except urllib.error.HTTPError as exc:
-        if exc.code == 404:
-            return False, f"Status {status_id} existiert nicht (mehr) – nichts zu bearbeiten."
-        return False, f"Status nicht lesbar: HTTP {exc.code}"
-    except Exception as exc:  # noqa: BLE001
-        return False, f"Status nicht lesbar: {exc}"
-    payload = {"status": text}
-    media = current.get("media_attachments") or []
-    if media:
-        payload["media_ids[]"] = media[0]["id"]
-    body = "&".join(f"{k}={urllib.parse.quote(str(v))}" for k, v in payload.items()).encode()
-    try:
-        resp = http_json(
-            f"{MASTODON_INSTANCE}/api/v1/statuses/{status_id}",
-            data=body,
-            headers={
-                "Authorization": f"Bearer {MASTODON_TOKEN}",
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            method="PUT",
         )
         return True, resp.get("url", "")
     except urllib.error.HTTPError as exc:

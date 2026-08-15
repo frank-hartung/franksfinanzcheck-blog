@@ -2,8 +2,7 @@
 {"date": "2026-08-11T10:16:20.870305+00:00", "slug": "2026-08-10-dsl-wechselbonus-sichern", "platform": "mastodon", "ok": true, "ref": "https://mastodon.social/@FranksFinanzcheck/117076353285770653"}
 {"date": "2026-08-11T21:27:49.277022+00:00", "slug": "2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft", "platform": "mastodon", "ok": true, "ref": "https://mastodon.social/@FranksFinanzcheck/117078993709291838"}
 {"date": "2026-08-11T21:27:50.386073+00:00", "slug": "2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck", "platform": "mastodon", "ok": true, "ref": "https://mastodon.social/@FranksFinanzcheck/117078993782377143"}
+<<<<<<< HEAD
 {"date": "2026-08-12T10:42:54.597812+00:00", "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026", "platform": "mastodon", "ok": true, "ref": "https://mastodon.social/@FranksFinanzcheck/117082120148901785"}
-{"date": "2026-08-13T10:45:21.091087+00:00", "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "platform": "mastodon", "ok": true, "ref": "https://mastodon.social/@FranksFinanzcheck/117087792014871631"}
-{"date": "2026-08-13T12:35:30.266006+00:00", "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026", "platform": "mastodon-manual", "ok": true, "ref": "https://mastodon.social/@FranksFinanzcheck/117088225188039445"}
-{"date": "2026-08-13T13:00:41.611714+00:00", "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026", "platform": "mastodon-manual-edit", "ok": true, "ref": "https://mastodon.social/@FranksFinanzcheck/117088225188039445"}
-{"date": "2026-08-14T20:16:41.897840+00:00", "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden", "platform": "mastodon", "ok": true, "ref": "https://mastodon.social/@FranksFinanzcheck/117095700995062634"}
+=======
+>>>>>>> c8351179 (fix(engine): Cover-Commit-Skopus inkl. static/images/covers/ + Rest-Schnittstellen geheilt)
