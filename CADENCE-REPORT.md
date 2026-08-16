@@ -1,8 +1,8 @@
 # 📅 CADENCE-REPORT (automatische Publikationsfrequenz)
 
-**Stand:** 2026-08-13 11:17 UTC
+**Stand:** 2026-08-16 05:57 UTC
 
-- Domain-Alter: 0 Wochen (Launch 2026-08-08)
+- Domain-Alter: 1 Wochen (Launch 2026-08-08)
 - Ramp-Ziel laut Zeitplan: 3/Woche
 - Erfolgsquote (letzte 14 Tage): noch keine ausreichenden Daten
 - Sicherheitsbremse aktiv: nein
