@@ -1,31 +1,38 @@
 # 🧪 SIMULATION-REPORT (automation_simulator.py)
 
-**Stand:** 2026-08-15 05:00 UTC
-**Checks:** 7 · **Fehlgeschlagen:** 0 · **Selbstgeheilt:** 0
+**Stand:** 2026-08-16 05:06 UTC
+**Checks:** 7 · **Fehlgeschlagen:** 4 · **Selbstgeheilt:** 0
 
-## ✅ SIM-A: Themen-Pool (data/topics.yaml)
+## ❌ SIM-A: Themen-Pool (data/topics.yaml)
 ```
-175 Themen geladen. Alles ok.
-```
-
-## ✅ SIM-B: Lade-Paritäts-Check (Kern-Regressionsschutz)
-```
-Grundwahrheit (unabhängig ermittelt): 10 live Artikel.
-  ✅ seo_audit.load_posts(): 11
-  ✅ keyword_optimizer.load_articles(): 10
-  ✅ affiliate_profi_check._post_slugs(): 11
-  ✅ internal_linker.load_pages(): 11
-  ✅ quality_score.py --report: 11
+Parse-Fehler UND Wiederherstellung fehlgeschlagen: while scanning a simple key
+  in "<unicode string>", line 24, column 1:
+    -title:"Die50-30-20-Regeleinfach ... 
+    ^
+could not find expected ':'
+  in "<unicode string>", line 25, column 1:
+    pillar:"frugalismus"
+    ^
 ```
 
-## ✅ SIM-C: Synthetischer Artikel-Lifecycle (Tags/Keywords/Provider)
+## ❌ SIM-B: Lade-Paritäts-Check (Kern-Regressionsschutz)
 ```
-Testartikel erzeugt und geprüft. Alles ok.
+Grundwahrheit (unabhängig ermittelt): 75 live Artikel.
+  ❌ seo_audit.load_posts(): 0
+  ❌ keyword_optimizer.load_articles(): 0
+  ✅ affiliate_profi_check._post_slugs(): 80
+  ✅ internal_linker.load_pages(): 80
+  ✅ quality_score.py --report: 80
 ```
 
-## ✅ SIM-D: Mastodon-Hashtag/Cover-Regressionstest
+## ❌ SIM-C: Synthetischer Artikel-Lifecycle (Tags/Keywords/Provider)
 ```
-2 aktuelle Artikel geprüft. Alles ok.
+FEHLER: save_article() got an unexpected keyword argument 'quality_level'
+```
+
+## ❌ SIM-D: Mastodon-Hashtag/Cover-Regressionstest
+```
+3 aktuelle Artikel geprüft. zinseszinseffekt-formel-erklaert: Cover in Frontmatter referenziert, aber cover_path() findet die Datei nicht (Regression des Cover-Lade-Bugs?); zahnzusatzversicherung-lohnt-sich: Cover in Frontmatter referenziert, aber cover_path() findet die Datei nicht (Regression des Cover-Lade-Bugs?); wlan-verstaerker-vs-mesh-wlan: Cover in Frontmatter referenziert, aber cover_path() findet die Datei nicht (Regression des Cover-Lade-Bugs?)
 ```
 
 ## ✅ SIM-E: publish_gate.py --dry-run
@@ -51,4 +58,4 @@ Alle erwarteten Report-Dateien vorhanden.
 ```
 
 ---
-🎉 Gesamte Automatik-Pipeline simuliert geprüft – alles funktioniert wie erwartet.
+⚠️ **Mindestens ein Check ist fehlgeschlagen und wurde NICHT automatisch behoben** (Code-Bugs/Redaktionsentscheidungen werden bewusst nicht blind gepatcht). Das bestehende Fehler-Alerting erstellt bei einem fehlgeschlagenen CI-Lauf automatisch ein Issue.
