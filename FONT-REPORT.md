@@ -1,6 +1,6 @@
 # 🔤 FONT-REPORT
 
-**Stand:** 2026-08-12 13:42 UTC · Modus: REPORT
+**Stand:** 2026-08-17 06:05 UTC · Modus: FIX
 **Vertrag:** 5 Fonts · **Funde:** 0 · **Geheilt:** 0
 
 🎉 Alle Fonts erfuellen ihr Versprechen (Name + Gewicht aus dem Datei-Koerper bewiesen).
