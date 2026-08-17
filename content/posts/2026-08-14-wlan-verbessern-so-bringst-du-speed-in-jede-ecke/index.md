@@ -19,6 +19,7 @@ cover:
   image: "images/covers/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.jpg"
   alt: "WLAN-Repeater vs. Mesh-WLAN – schneller Internet-Tipp"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 
 # WLAN verbessern: So bringst du Speed in jede Ecke
