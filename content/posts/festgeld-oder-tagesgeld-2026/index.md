@@ -18,6 +18,9 @@ cover:
 social_posted: true
 ---
 
+# Festgeld oder Tagesgeld 2026: Wo dein Geld richtig liegt
+
+
 
 
 

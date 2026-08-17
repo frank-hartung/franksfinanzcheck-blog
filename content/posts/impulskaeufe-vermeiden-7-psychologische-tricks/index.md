@@ -18,6 +18,9 @@ cover:
 social_posted: true
 ---
 
+# Impulskäufe vermeiden: 7 Tricks, die dein Budget retten
+
+
 
 
 Etwa 60 % aller Käufe im Supermarkt oder online geschehen rein impulsiv. Du planst einen Einkauf für 10 € und verlässt den Laden mit einer Rechnung über 45 €? Diese unkontrollierten Ausgaben kosten dich jedes Jahr mehrere tausend Euro. Mit den richtigen psychologischen Kniffen kannst du deine **Impulskäufe vermeiden** und dein Erspartes effektiv schützen.

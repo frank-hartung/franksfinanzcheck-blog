@@ -16,6 +16,9 @@ kurzantwort: "Dein Fernseher, Computer und Kühlschrank verbrauchen am meisten S
 social_posted: true
 ---
 
+# Stromfresser entlarven: Diese 3 Geräte kosten Geld
+
+
 Die Stromrechnung steigt – aber du weißt nicht, warum? Oft sind es unbemerkte Dauerläufer, die Jahr für Jahr hunderte Euro kosten. Stromfresser zu finden lohnt sich: Oft stecken nur wenige Geräte hinter der hohen Rechnung. Wir zeigen dir, welche Geräte die größten Stromfresser sind. Und was du dagegen tun kannst.
 
 

@@ -15,9 +15,12 @@ inspiration: "Zweite Welle Gaspreis-Anpassung: Jetzt sichern"
 social_posted: true
 cover:
   image: "images/covers/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg"
-  alt: "Spar-Tipp: 2026 08 12 Preisgarantie Gas So Sicherst Du Dir Guenstige Tarife Fuer 2026"
+  alt: "Tipp von FranksFinanzcheck"
   caption: "Tipp von FranksFinanzcheck"
 ---
+
+# Preisgarantie Gas: So sicherst du dir günstige Tarife für 2026
+
 
 
 

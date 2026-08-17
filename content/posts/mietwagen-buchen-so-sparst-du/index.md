@@ -16,6 +16,9 @@ kurzantwort: "Du sparst Geld, wenn du deinen Mietwagen früh buchst und Vollkask
 social_posted: true
 ---
 
+# Günstigen Mietwagen buchen: So sparst du im Urlaub
+
+
 
 
 

@@ -16,6 +16,9 @@ kurzantwort: "Du solltest etwa 3–6 Monatsgehälter auf der hohen Kante haben, 
 social_posted: true
 ---
 
+# Notgroschen aufbauen: Wie viel Geld reicht wirklich?
+
+
 
 
 

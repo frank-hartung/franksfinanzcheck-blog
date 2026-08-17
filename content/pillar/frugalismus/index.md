@@ -10,6 +10,9 @@ build:
 keywords: ["Frugalismus", "Geld sparen im Alltag", "Finanzielle Freiheit", "50 30 20 Regel", "Notgroschen"]
 ---
 
+# Frugalismus: Der große Ratgeber für finanzielle Freiheit
+
+
 Frugalismus ist für mich nie Verzicht um des Verzichts willen gewesen – sondern die kluge Entscheidung, Geld dorthin zu lenken, wo es wirklich zählt. Über Monate habe ich getestet, welche Sparmethoden im Alltag durchhaltbar sind. In diesem Ratgeber bündele ich das komplette Wissen: von der Budget-Formel über den Notgroschen bis zu den Gewohnheiten, die Vermögen aufbauen.
 
 ### Das Wichtigste in Kürze

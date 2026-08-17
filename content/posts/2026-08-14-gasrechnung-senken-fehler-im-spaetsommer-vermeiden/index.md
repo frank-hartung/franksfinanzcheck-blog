@@ -17,10 +17,13 @@ engine_level: "profi"
 inspiration: Heizperiode vorbereiten im Spätsommer
 cover:
   image: "images/covers/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.jpg"
-  alt: "Spar-Tipp: 2026 08 14 Gasrechnung Senken Fehler Im Spaetsommer Vermeiden"
+  alt: "Tipp von FranksFinanzcheck"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
 ---
+
+# Gasrechnung senken: Fehler im Spätsommer vermeiden
+
 
 
 Stell dir vor, du verschenkst jedes Jahr 300 € an deinen Energieversorger. Das passiert vielen Haushalten, die den richtigen Moment im Spätsommer verpassen. Mein Nachbar Leon erlebte genau das im letzten Jahr. Als im Oktober der erste Frost kam, gluckerte seine Heizung nur noch.

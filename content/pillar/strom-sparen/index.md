@@ -10,6 +10,9 @@ build:
 keywords: ["Strom sparen", "Energiekosten senken", "Stromanbieter wechseln", "Stromfresser", "Wärmepumpe"]
 ---
 
+# Strom sparen: Der große Ratgeber für niedrige Energiekosten
+
+
 Strom ist einer der größten Posten im Haushaltsbudget – und einer, den du mit klugen Entscheidungen deutlich senken kannst. In diesem Ratgeber bündele ich alles, was ich aus meiner eigenen Energie-Budgetplanung und den Vergleichen der letzten Jahre gelernt habe: von den größten Stromfressern über den Tarifwechsel bis zur Frage Wärmepumpe oder Gasheizung.
 
 ### Das Wichtigste in Kürze

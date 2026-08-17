@@ -18,6 +18,9 @@ cover:
 social_posted: true
 ---
 
+# Urlaub mit Kindern: So sparst du 300 Euro pro Familienreise
+
+
 Urlaub mit Kindern ist das Schönste – und das Teuerste. Vier Personen, Verpflegung, Aktivitäten, Mietwagen: Die Kosten laufen schnell in die Tausende. Dabei gibt es eine Reihe von Spartricks, die speziell für Familien funktionieren und den Urlaub um 300 € und mehr verbilligen – ohne dass die Kinder auf etwas verzichten müssen.
 
 In diesem Artikel zeige ich dir die 10 wirksamsten Familien-Spartricks, sortiert nach Einsparpotenzial.

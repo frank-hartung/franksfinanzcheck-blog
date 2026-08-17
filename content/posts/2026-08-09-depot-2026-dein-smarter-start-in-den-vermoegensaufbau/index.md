@@ -18,6 +18,9 @@ kurzantwort: "Du solltest auf niedrige Gebühren achten, in der Regel zwischen 0
 social_posted: true
 ---
 
+# Depot 2026: Dein smarter Start in den Vermögensaufbau
+
+
 
 
 

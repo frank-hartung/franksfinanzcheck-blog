@@ -2,7 +2,7 @@
 title: "Turbo fürs Netz: DNS-Wechsel für schnelleres Internet"
 description: "DNS-Server wechseln: So machst du dein Internet spürbar schneller – Schritt für Schritt erklärt, mit den besten kostenlosen Anbietern."
 date: 2026-08-06
-draft: true
+draft: false
 tags: ["DNS-Server wechseln", "Internet schneller machen", "DSL-Tipps"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -19,6 +19,9 @@ cover:
 kurzantwort: "Du kannst dein Internet um bis zu 20 % beschleunigen, indem du den DNS-Server wechselst. Ein Wechsel zu einem kostenlosen Anbieter wie Google Public DNS oder Cloudflare DNS kann helfen. Mit wenigen Schritten kannst du deinen DNS-Server ändern und somit deine Online-Geschwindigkeit erhöhen."
 social_posted: true
 ---
+
+# Turbo fürs Netz: DNS-Wechsel für schnelleres Internet
+
 
 
 

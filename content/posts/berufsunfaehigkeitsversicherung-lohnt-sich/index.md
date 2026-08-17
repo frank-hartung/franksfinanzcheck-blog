@@ -18,6 +18,9 @@ cover:
 social_posted: true
 ---
 
+# Berufsunfähigkeitsversicherung: Für wen sie sich 2026 lohnt
+
+
 
 
 

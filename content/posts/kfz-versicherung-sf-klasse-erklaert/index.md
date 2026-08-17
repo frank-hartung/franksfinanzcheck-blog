@@ -18,6 +18,9 @@ cover:
 social_posted: true
 ---
 
+# SF-Klasse einfach erklärt: So steigst du in die beste Stufe
+
+
 
 
 

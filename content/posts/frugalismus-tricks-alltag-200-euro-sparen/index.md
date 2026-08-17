@@ -16,6 +16,9 @@ kurzantwort: "Du kannst mit der 50–30–20-Regel beginnen, bei der 50 % deine
 social_posted: true
 ---
 
+# 5 Frugalismus-Tricks: So sparst du 200 € pro Monat
+
+
 
 
 

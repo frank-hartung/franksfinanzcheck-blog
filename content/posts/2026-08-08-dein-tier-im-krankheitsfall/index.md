@@ -2,7 +2,7 @@
 title: "Tierversicherung: Schutz für dein Tier im Krankheitsfall"
 description: "Dein Tier ist krank? Keine Sorge vor hohen Kosten! Erfahre hier, wie eine Tierversicherung deinen Liebling schützt und dich entlastet. Jetzt lesen!"
 date: 2026-08-08
-draft: true
+draft: false
 tags: ["Tierversicherung", "Hundeversicherung", "Katzenversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
@@ -17,6 +17,9 @@ cover:
 kurzantwort: "Eine Tierversicherung deckt in der Regel 50 bis 90 % der Tierarztkosten ab. So kannst du dich auf die Genesung deines Tieres konzentrieren, anstatt dich um die Kosten zu sorgen. Mit einer monatlichen Prämie von ca. 20 € bis 50 € schützt du dein Tier und deine Finanzen."
 social_posted: true
 ---
+
+# Tierversicherung: Schutz für dein Tier im Krankheitsfall
+
 
 
 

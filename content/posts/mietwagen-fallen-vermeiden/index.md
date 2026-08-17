@@ -16,6 +16,9 @@ kurzantwort: "Versteckte Kosten beim Mietwagen können schnell 20 € pro Tag o
 social_posted: true
 ---
 
+# Mietwagen-Fallen vermeiden: Versicherung & Kaution im Urlaub
+
+
 
 
 

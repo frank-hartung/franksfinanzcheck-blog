@@ -20,6 +20,9 @@ kurzantwort: "Du kannst deine finanzielle Freiheit erreichen, indem du jeden Mon
 social_posted: true
 ---
 
+# Frugalismus für den Erfolg:<br> Der Weg in die Freiheit
+
+
 
 
 

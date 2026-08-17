@@ -18,6 +18,9 @@ cover:
 social_posted: true
 ---
 
+# Elementarschadenversicherung: Hochwasser, Starkregen & Co.
+
+
 
 Jede zweite Wohnung in Deutschland ist schutzlos gegen Naturgewalten. Ein einziger Starkregen setzt deinen Keller in Minuten unter Wasser und vernichtet deine Ersparnisse. Der Staat hilft dir im Ernstfall nur selten. Erfahre hier, wie du mit einer Elementarschadenversicherung deine Existenz sicherst.
 

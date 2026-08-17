@@ -2,7 +2,7 @@
 title: "Internet-Turbo: Warum ich meinen DNS-Server getauscht habe"
 description: "Du willst deinen DNS-Server wechseln? Ich erkläre dir, wie ich mein Internet spürbar beschleunigt habe und warum Standard-Einstellungen oft bremsen."
 date: 2026-08-05
-draft: true
+draft: false
 tags: ["DNS-Server wechseln", "Internet schneller machen", "DSL-Tipps"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -19,6 +19,9 @@ cover:
 kurzantwort: "Du kannst dein Internet um bis zu 20 % beschleunigen, indem du deinen DNS-Server wechselst. Viele Standard-Einstellungen sind nicht optimal konfiguriert und bremsen daher das Internet. Ein Wechsel zu einem schnelleren DNS-Server wie Cloudflare oder Google kann helfen, die Ladezeiten zu verkürzen."
 social_posted: true
 ---
+
+# Internet-Turbo: Warum ich meinen DNS-Server getauscht habe
+
 
 
 

@@ -5,6 +5,9 @@ draft: false
 showToc: true
 ---
 
+# Über mich und diesen Blog
+
+
 <div class="ff-author-hero" style="display:flex; gap:28px; align-items:flex-start; flex-wrap:wrap; margin: 8px 0 32px; padding: 28px; background:linear-gradient(135deg,#EAF4EF 0%,#fff 60%); border-radius:16px; border:1px solid rgba(14,90,67,.15);">
   {{< autor-foto >}}
   <div style="flex:1 1 320px;">

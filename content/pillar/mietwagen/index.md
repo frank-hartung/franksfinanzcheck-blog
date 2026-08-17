@@ -10,6 +10,9 @@ build:
 keywords: ["Mietwagen buchen", "Mietwagen günstig", "Flüge sparen", "Last Minute", "Urlaub sparen"]
 ---
 
+# Mietwagen & Reisen: Der große Ratgeber zum Geld sparen
+
+
 Reisen ist Lebensqualität – aber die Kosten lassen sich mit den richtigen Tricks massiv senken. Aus meinen eigenen Urlaubsplanungen weiß ich: Der Unterschied zwischen „teuer gebucht" und „klug gebucht" liegt oft bei mehreren Hundert Euro. In diesem Ratgeber findest du alle Strategien, die ich selbst nutze – von der Mietwagen-Buchung bis zum Last-Minute-Schnäppchen.
 
 ### Das Wichtigste in Kürze

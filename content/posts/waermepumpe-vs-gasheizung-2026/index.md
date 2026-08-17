@@ -16,6 +16,9 @@ kurzantwort: "Du kannst mit einer Wärmepumpe langfristig etwa 30 % bis 50 % d
 social_posted: true
 ---
 
+# Wärmepumpe vs. Gasheizung: Was sich 2026 wirklich lohnt
+
+
 
 
 Du stehst 2026 vor einer wichtigen Entscheidung: Soll es eine Wärmepumpe oder eine Gasheizung sein? Die neue Heizungsregel schreibt erneuerbare Heiztechnik vor, die Gaspreise steigen und die Förderung für Wärmepumpen ist attraktiv. 

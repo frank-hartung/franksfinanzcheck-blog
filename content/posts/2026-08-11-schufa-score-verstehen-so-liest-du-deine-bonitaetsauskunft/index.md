@@ -16,6 +16,9 @@ cover:
 social_posted: true
 ---
 
+# Schufa-Score verstehen: So liest du deine Bonitätsauskunft
+
+
 Beim Kreditantrag, beim Handyvertrag, bei der Wohnungssuche – immer ist sie im Spiel: deine Bonität. Und in Deutschland heißt das fast immer: **die Schufa**.
 
 Viele kennen ihre Schufa-Auskunft aus Hörensagen, wenige aus eigener Anschauung. Dabei darfst du jederzeit kostenlos nachlesen, was über dich gespeichert ist – und du kannst aktiv dafür sorgen, dass dein Score wächst. Hier erfährst du, wie die Datenkopie funktioniert, wie du den Score liest und welche Schritte deine Bonität spürbar verbessern.

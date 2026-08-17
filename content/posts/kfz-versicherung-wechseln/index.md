@@ -16,6 +16,9 @@ kurzantwort: "Du sparst bis zu 400 €, wenn du deine Kfz-Versicherung wechsels
 social_posted: true
 ---
 
+# Kfz-Versicherung wechseln: Wann es sich wirklich lohnt
+
+
 
 
 

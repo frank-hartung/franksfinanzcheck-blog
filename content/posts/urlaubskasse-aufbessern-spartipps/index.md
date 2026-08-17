@@ -16,6 +16,9 @@ kurzantwort: "Du kannst deine Urlaubskasse aufbessern, indem du früh buchst und
 social_posted: true
 ---
 
+# Urlaubskasse aufbessern: 7 Spartipps für den Sommerurlaub
+
+
 Mit diesen 7 Spartipps kannst du deine Urlaubskasse aufbessern und den Sommerurlaub genießen, ohne in Schulden zu stecken. Wer im [Urlaub sparen](../../posts/pauschalreise-buchen-bester-zeitpunkt/) möchte, startet am besten mit einer eigenen Urlaubskasse – Die meisten Tipps kosten nur wenige Minuten Zeit und sparen trotzdem dreistellige Beträge.
 
 

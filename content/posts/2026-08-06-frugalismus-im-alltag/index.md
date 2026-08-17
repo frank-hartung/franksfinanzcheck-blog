@@ -20,6 +20,9 @@ kurzantwort: "Du kannst jeden Monat etwa 10–20 € sparen, indem du kleine Ä
 social_posted: true
 ---
 
+# Frugalismus im Alltag: So sparst du jeden Monat bares Geld
+
+
 
 
 

@@ -16,6 +16,9 @@ kurzantwort: "Eine Zahnzusatzversicherung lohnt sich für gesetzlich Versicherte
 social_posted: true
 ---
 
+# Zahnzusatzversicherung: Wann sich der Abschluss lohnt
+
+
 Ein Implantat kostet schnell 2.000 bis 3.000 €. Die gesetzliche Kasse übernimmt nur einen Festzuschuss von rund 60 % der Regelversorgung. Die Zahnzusatzversicherung schließt diese Lücke. Doch sie lohnt sich nicht für jeden. Du bekommst hier einen Ratgeber, der zeigt, wann der Abschluss sinnvoll ist und worauf du achten musst.
 
 

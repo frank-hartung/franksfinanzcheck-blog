@@ -16,6 +16,9 @@ kurzantwort: "Eine Hausratversicherung deckt Schäden an deinem Eigentum ab, wie
 social_posted: true
 ---
 
+# Hausratversicherung: Wer sie braucht und was sie leistet
+
+
 
 
 Ein Rohrbruch flutet dein Wohnzimmer, ein Brand vernichtet die Küche oder Einbrecher räumen die Wohnung leer. Solche Schäden kosten dich ohne Schutz schnell fünfstellige Summen. Eine leistungsstarke Hausratversicherung ersetzt dir den kompletten Neuwert deiner Möbel, Technik und Kleidung. Das bedeutet: Auch wenn dein fünf Jahre alter Fernseher gestohlen wird, zahlt die Versicherung den Preis für ein vergleichbares Neugerät. In diesem Ratgeber erfährst du, wie du deinen Hausrat absichern kannst und worauf du beim Hausratversicherung-Tarifvergleich achten musst.

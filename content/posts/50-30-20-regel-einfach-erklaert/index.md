@@ -16,6 +16,9 @@ kurzantwort: "Du verteilst dein Gehalt in drei Teile: 50 % für Fixkosten, 30 
 social_posted: true
 ---
 
+# Die 50-30-20-Regel: Die perfekte Formel für deine Finanzen
+
+
 
 
 

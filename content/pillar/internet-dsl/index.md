@@ -10,6 +10,9 @@ build:
 keywords: ["Internet schneller machen", "DSL Tarife", "DNS Server", "WLAN verbessern", "Handytarife vergleichen"]
 ---
 
+# Internet & DSL: Der große Ratgeber für schnelles Netz
+
+
 Langsames Internet kostet dich jeden Tag Zeit – und oft auch Geld, weil du mehr für deinen Tarif zahlst als nötig. In diesem Ratgeber fasse ich zusammen, was ich selbst ausprobiert habe: kostenlose DNS-Optimierung, WLAN-Härtung und der Tarifvergleich, der den Unterschied macht. Das Beste: Einige Hebel kosten nichts und wirken sofort.
 
 ### Das Wichtigste in Kürze

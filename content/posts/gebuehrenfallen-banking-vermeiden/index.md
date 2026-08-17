@@ -18,6 +18,9 @@ cover:
 social_posted: true
 ---
 
+# Gebührenfallen beim Banking: Diese 7 Kosten killst du
+
+
 
 Zahlst du jedes Jahr bis zu 150 € für heiße Luft? Banken zapfen dein Konto oft heimlich über das Kleingedruckte an. Kontoführung, Karten oder der Auslandseinsatz summieren sich für Durchschnittshaushalte auf beachtliche Beträge. Dabei bekommst du für diesen Preis meist keine nennenswerte Gegenleistung.
 

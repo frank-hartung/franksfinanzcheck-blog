@@ -16,6 +16,9 @@ kurzantwort: "Die Privathaftpflicht deckt Schäden an anderen Personen oder Sach
 social_posted: true
 ---
 
+# Privathaftpflicht: Warum sie Pflicht ist und was sie kostet
+
+
 Du öffnest versehentlich die Tür zu schnell und triffst den Nachbarn, der die Treppe herunterfällt. Der Schaden: mehrere zehntausend Euro. Ohne Privathaftpflicht bleibst du auf den Kosten sitzen – und musst womöglich dein Leben lang abzahlen. Diese Versicherung ist die wichtigste überhaupt, weil sie genau solche Fälle abdeckt. Und sie kostet weniger als ein Kinobesuch [pro Monat](../../posts/frugalismus-tricks-alltag-200-euro-sparen/).
 
 

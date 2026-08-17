@@ -17,6 +17,9 @@ cover:
 social_posted: true
 ---
 
+# Lastschrift zurückbuchen: So holst du dir dein Geld zurück
+
+
 Es kommt selten vor – aber wenn, dann nervt es richtig: Auf deinem Kontoauszug taucht eine Abbuchung auf, die nicht stimmt. Vielleicht doppelt, vielleicht zu hoch, vielleicht von einem Vertrag, den du längst beendet hast.
 
 Die gute Nachricht: Bei einer **SEPA-Lastschrift** bist du als Kontoinhaber am längeren Hebel. Du kannst die Lastschrift zurückbuchen lassen – innerhalb der Frist sogar ohne Angabe von Gründen. Hier erfährst du, welche Fristen gelten, wie du Schritt für Schritt vorgehst und welche Fehler teuer werden können.
