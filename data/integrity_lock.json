@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "signed_at": "2026-08-15T19:24:08.139225+00:00",
   "head": "4f43c62",
+=======
+  "signed_at": "2026-08-17T16:48:41.014201+00:00",
+  "head": "cb4598f",
+>>>>>>> 6f69840 (fix(automation): Redundante Automatik entfernt, Report-Spam beseitigt)
   "files": {
     "assets/css/extended/custom.css": "3c941e57a4ecc96a4c8e78c8dbbb184b17e10af22ab29dd72bb908f5bdbaab88",
     "data/brand_lock.yaml": "2858fc032bed093ef805548accbcc665e801a3385616aeb06416d5a84656cb60",
@@ -20,7 +25,10 @@
     "layouts/robots.txt": "b1d5ad6a2e48176d433d5230f89beb3669f30e01288d412e61c7de1e12092c90",
     "scripts/affiliate_marketer.py": "f7941fe3f1c4e22451958d49636265d75b3d12b8ecdab837044efd6d44cd85ef",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
+<<<<<<< HEAD
     "scripts/blog_doctor.py": "940bde1e2d465112c7fa3f580b94572bfa088b0188fc079b0a239c4db907eb52",
+=======
+>>>>>>> 6f69840 (fix(automation): Redundante Automatik entfernt, Report-Spam beseitigt)
     "scripts/brand_guard.py": "e668be495b16d13ee9c13806d6281b08a862cc075888f3abf418a56b6bc92bed",
     "scripts/check24_links.yaml": "417e752281360a2e06ea926c0ec9e1d8c40f2e82773f8c40ad6cf22ef530a4c5",
     "scripts/check_covers.py": "ba7cd294bbd3ce001dd469682434e0ba887d5a2027ec75e27744c1fab24306b1",
