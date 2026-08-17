@@ -1,6 +1,6 @@
 # 🧪 SIMULATION-REPORT (automation_simulator.py)
 
-**Stand:** 2026-08-16 05:06 UTC
+**Stand:** 2026-08-17 05:53 UTC
 **Checks:** 7 · **Fehlgeschlagen:** 4 · **Selbstgeheilt:** 0
 
 ## ❌ SIM-A: Themen-Pool (data/topics.yaml)
