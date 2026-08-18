@@ -36,10 +36,6 @@
       "triggers": []
     },
     {
-      "name": "automation-simulator",
-      "triggers": []
-    },
-    {
       "name": "backlink-weekly",
       "triggers": []
     },
@@ -48,15 +44,11 @@
       "triggers": []
     },
     {
-      "name": "blog-doktor",
+      "name": "blog-health-daily",
       "triggers": []
     },
     {
       "name": "bot-watchdog",
-      "triggers": []
-    },
-    {
-      "name": "cadence-manager",
       "triggers": []
     },
     {
@@ -76,10 +68,6 @@
       "triggers": []
     },
     {
-      "name": "design-visual",
-      "triggers": []
-    },
-    {
       "name": "frankautoops-report",
       "triggers": []
     },
@@ -96,19 +84,11 @@
       "triggers": []
     },
     {
-      "name": "newsletter-ai",
-      "triggers": []
-    },
-    {
       "name": "pinterest-ai",
       "triggers": []
     },
     {
       "name": "pinterest-watchdog",
-      "triggers": []
-    },
-    {
-      "name": "redaktions-politur",
       "triggers": []
     },
     {
@@ -124,19 +104,7 @@
       "triggers": []
     },
     {
-      "name": "tagesziel-1-post",
-      "triggers": []
-    },
-    {
-      "name": "uniqueness-guard",
-      "triggers": []
-    },
-    {
       "name": "update-quarterly",
-      "triggers": []
-    },
-    {
-      "name": "uptime-check",
       "triggers": []
     },
     {
@@ -144,15 +112,7 @@
       "triggers": []
     },
     {
-      "name": "weekly-audit",
-      "triggers": []
-    },
-    {
       "name": "willkommenstext-refresh",
-      "triggers": []
-    },
-    {
-      "name": "workspace-watchdog",
       "triggers": []
     }
   ],
