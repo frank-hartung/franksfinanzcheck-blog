@@ -1,19 +1,19 @@
 # 📌 PINTEREST-REPORT
 
-**Stand:** 2026-08-17 08:04 UTC · Modus: FIX
+**Stand:** 2026-08-18 07:26 UTC · Modus: FIX
 
-Probleme: 234 · Geheilt: 1
+Probleme: 244 · Geheilt: 1
 
 | Code | Artikel | Problem |
 |---|---|---|
 | P1 | - | layouts/robots.txt erwähnt Pinterest nicht |
 | P4 | 2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich | Schablonen-Description (via FranksFinanzcheck) |
-| P3 | 2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe | Seite nicht gebaut (public fehlt?) |
+| P4 | 2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe | Schablonen-Description (via FranksFinanzcheck) |
 | P4 | 2026-08-06-frugalismus-im-alltag | Schablonen-Description (via FranksFinanzcheck) |
-| P3 | 2026-08-06-turbo-fuers-netz | Seite nicht gebaut (public fehlt?) |
+| P4 | 2026-08-06-turbo-fuers-netz | Schablonen-Description (via FranksFinanzcheck) |
 | P4 | 2026-08-07-frugalismus-fuer-den-erfolg | Schablonen-Description (via FranksFinanzcheck) |
-| P3 | 2026-08-07-mietwagen-fuer-den-spaetsommer | Seite nicht gebaut (public fehlt?) |
-| P3 | 2026-08-08-dein-tier-im-krankheitsfall | Seite nicht gebaut (public fehlt?) |
+| P4 | 2026-08-07-mietwagen-fuer-den-spaetsommer | Schablonen-Description (via FranksFinanzcheck) |
+| P4 | 2026-08-08-dein-tier-im-krankheitsfall | Schablonen-Description (via FranksFinanzcheck) |
 | P4 | 2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen | Schablonen-Description (via FranksFinanzcheck) |
 | P4 | 2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau | Schablonen-Description (via FranksFinanzcheck) |
 | P4 | 2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen | Schablonen-Description (via FranksFinanzcheck) |
@@ -24,7 +24,7 @@ Probleme: 234 · Geheilt: 1
 | P4 | 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026 | Schablonen-Description (via FranksFinanzcheck) |
 | P4 | 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026 | Schablonen-Description (via FranksFinanzcheck) |
 | P4 | 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden | Schablonen-Description (via FranksFinanzcheck) |
-| P3 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | Seite nicht gebaut (public fehlt?) |
+| P4 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | Schablonen-Description (via FranksFinanzcheck) |
 | P4 | 50-30-20-regel-einfach-erklaert | Schablonen-Description (via FranksFinanzcheck) |
 | P4 | 5g-home-router-oder-dsl | Schablonen-Description (via FranksFinanzcheck) |
 | P4 | 7-gewohnheiten-finanzielle-freiheit | Schablonen-Description (via FranksFinanzcheck) |
@@ -92,10 +92,18 @@ Probleme: 234 · Geheilt: 1
 | P4 | zinseszinseffekt-formel-erklaert | Schablonen-Description (via FranksFinanzcheck) |
 | P7 | 2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich | og:image:width fehlt (Rich-Pin-Maße) |
 | P7 | 2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich | og:image:height fehlt (Rich-Pin-Maße) |
+| P7 | 2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe | og:image:width fehlt (Rich-Pin-Maße) |
+| P7 | 2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe | og:image:height fehlt (Rich-Pin-Maße) |
 | P7 | 2026-08-06-frugalismus-im-alltag | og:image:width fehlt (Rich-Pin-Maße) |
 | P7 | 2026-08-06-frugalismus-im-alltag | og:image:height fehlt (Rich-Pin-Maße) |
+| P7 | 2026-08-06-turbo-fuers-netz | og:image:width fehlt (Rich-Pin-Maße) |
+| P7 | 2026-08-06-turbo-fuers-netz | og:image:height fehlt (Rich-Pin-Maße) |
 | P7 | 2026-08-07-frugalismus-fuer-den-erfolg | og:image:width fehlt (Rich-Pin-Maße) |
 | P7 | 2026-08-07-frugalismus-fuer-den-erfolg | og:image:height fehlt (Rich-Pin-Maße) |
+| P7 | 2026-08-07-mietwagen-fuer-den-spaetsommer | og:image:width fehlt (Rich-Pin-Maße) |
+| P7 | 2026-08-07-mietwagen-fuer-den-spaetsommer | og:image:height fehlt (Rich-Pin-Maße) |
+| P7 | 2026-08-08-dein-tier-im-krankheitsfall | og:image:width fehlt (Rich-Pin-Maße) |
+| P7 | 2026-08-08-dein-tier-im-krankheitsfall | og:image:height fehlt (Rich-Pin-Maße) |
 | P7 | 2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen | og:image:width fehlt (Rich-Pin-Maße) |
 | P7 | 2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen | og:image:height fehlt (Rich-Pin-Maße) |
 | P7 | 2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau | og:image:width fehlt (Rich-Pin-Maße) |
@@ -116,6 +124,8 @@ Probleme: 234 · Geheilt: 1
 | P7 | 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026 | og:image:height fehlt (Rich-Pin-Maße) |
 | P7 | 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden | og:image:width fehlt (Rich-Pin-Maße) |
 | P7 | 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden | og:image:height fehlt (Rich-Pin-Maße) |
+| P7 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | og:image:width fehlt (Rich-Pin-Maße) |
+| P7 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | og:image:height fehlt (Rich-Pin-Maße) |
 | P7 | 50-30-20-regel-einfach-erklaert | og:image:width fehlt (Rich-Pin-Maße) |
 | P7 | 50-30-20-regel-einfach-erklaert | og:image:height fehlt (Rich-Pin-Maße) |
 | P7 | 5g-home-router-oder-dsl | og:image:width fehlt (Rich-Pin-Maße) |
