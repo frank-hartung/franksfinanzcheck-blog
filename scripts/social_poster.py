@@ -272,7 +272,7 @@ def build_post(fm: dict, slug: str) -> str:
     # Hook auf max. 240 Zeichen am Wortende kürzen
     if len(hook) > 240:
         hook = hook[:240].rsplit(" ", 1)[0] + " …"
-    tags = hashtags(fm.get("tags", []), pillar=_pillar(fm))
+    tags = hashtags(fm.get("tags", []), pillar=_pillar(fm), fm=fm)
     text = f"📌 {title}\n\n{hook}\n\n🔗 {url}\n\n{tags}"
     return text[:497] + "…" if len(text) > 500 else text
 
