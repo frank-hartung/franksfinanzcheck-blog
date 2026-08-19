@@ -41,10 +41,18 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
-    if args.slug in ("__seo_heal__", "seo-heal"):
+    if args.slug in ("__seo_heal__", "seo-heal", "__seo_dedupe__", "seo-dedupe"):
         import mastodon_seo
+        extra = []
         if args.dry_run and "--dry-run" not in sys.argv:
-            sys.argv.append("--dry-run")
+            extra.append("--dry-run")
+        if args.slug in ("__seo_dedupe__", "seo-dedupe"):
+            extra.append("--delete-dupes")
+        for a in extra:
+            if a not in sys.argv:
+                sys.argv.append(a)
+        mastodon_seo.DRY_RUN = "--dry-run" in sys.argv
+        mastodon_seo.DELETE_DUPES = "--delete-dupes" in sys.argv
         mastodon_seo.main()
         return
 
