@@ -82,11 +82,23 @@
        Browser wählt exakt dieselbe Größe wie im <picture>. */ -}}
 {{- $lcpCover := "" }}{{- $lcpDir := "" }}{{- $lcpBase := "" }}{{- $lcpSizes := "(min-width: 768px) 620px, 100vw" }}
 {{- $isList := or (eq .Kind "home") (eq .Kind "section") (eq .Kind "term") }}
-{{- if and $isList (gt (len .Paginator.Pages) 0) (eq .Paginator.PageNumber 1) }}
-  {{- with index .Paginator.Pages 0 }}
+{{- /* Kein .Paginator im Head: der erste Zugriff sperrt die Seitenmenge.
+       Sonst ignoriert list.html das gefilterte .Paginate (nur Posts) –
+       Startseite mischt Impressum/Über-mich ein und /posts/page/N/ gerät
+       aus dem Tritt. LCP-Cover kommt aus derselben Menge wie die Liste. */}}
+{{- $isPagerPage := findRE `/page/\d+/?$` .RelPermalink }}
+{{- if and $isList (not $isPagerPage) }}
+  {{- $lcpPages := .RegularPages }}
+  {{- if .IsHome }}
+    {{- $lcpPages = where site.RegularPages "Section" "eq" "posts" }}
+    {{- $lcpPages = where $lcpPages "Params.hiddenInHomeList" "!=" "true" }}
+  {{- end }}
+  {{- if gt (len $lcpPages) 0 }}
+  {{- with index $lcpPages 0 }}
     {{- with .Params.cover.image }}
       {{- $lcpCover = . }}{{- $lcpDir = path.Dir . }}{{- $lcpBase = strings.TrimSuffix (path.Ext (path.Base .)) (path.Base .) }}
     {{- end }}
+  {{- end }}
   {{- end }}
 {{- else if and .Params.cover.image (eq .Kind "page") }}
   {{- $lcpCover = .Params.cover.image }}{{- $lcpDir = path.Dir .Params.cover.image }}
