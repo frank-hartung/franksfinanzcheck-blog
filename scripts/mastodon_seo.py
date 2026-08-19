@@ -134,18 +134,22 @@ def article_index() -> dict[str, tuple[Path, dict]]:
     return idx
 
 
+def _hashtags_in_html(content: str) -> list[str]:
+    return re.findall(r"#<span>([^<]+)</span>", content or "")
+
+
 def audit(status: dict, slug: str | None, fm: dict | None) -> list[str]:
     issues: list[str] = []
     text = _plain(status.get("content") or "")
     media = status.get("media_attachments") or []
-    tags = [t.get("name", "") for t in (status.get("tags") or [])]
+    display_tags = _hashtags_in_html(status.get("content") or "")
     if status.get("visibility") != "public":
         issues.append("nicht öffentlich")
     if status.get("language") not in (None, "de"):
         issues.append(f"Sprache={status.get('language')} (soll de)")
     if len(text) > 500:
         issues.append(f"zu lang ({len(text)} Zeichen)")
-    if not SLUG_RX.search(text) and not SLUG_RX.search(status.get("content") or ""):
+    if not SLUG_RX.search(status.get("content") or "") and not SLUG_RX.search(text):
         issues.append("kein kanonischer Artikel-Link")
     if GO_LINK_RX.search(text):
         issues.append("Affiliate-/go/-Link im Toot")
@@ -159,19 +163,17 @@ def audit(status: dict, slug: str | None, fm: dict | None) -> list[str]:
             issues.append("generischer Bild-Alt")
         elif len(desc) < 24:
             issues.append("Bild-Alt zu kurz")
-    if len(tags) < 2:
-        issues.append(f"zu wenige Hashtags ({len(tags)})")
-    mashed = [t for t in tags if t.lower() == t and len(t) > 16 and t != "finanzen"]
+    if len(display_tags) < 2:
+        issues.append(f"zu wenige Hashtags ({len(display_tags)})")
+    mashed = [t for t in display_tags if t == t.lower() and len(t) > 16 and t.lower() != "finanzen"]
     if mashed:
         issues.append("Hashtags nicht CamelCase: " + ", ".join(mashed[:3]))
     if fm is not None and slug:
         wanted = seo_hashtags(fm.get("tags") or [], _pillar(fm))
         want_set = {w.lstrip("#").lower() for w in wanted.split()}
-        have_set = {t.lower() for t in tags}
-        if want_set - have_set and mashed or (len(tags) <= 1 and want_set):
-            if "Hashtags nicht CamelCase" not in " ".join(issues):
-                if want_set - have_set:
-                    issues.append("Hashtags unvollständig/nicht SEO")
+        have_set = {t.lower() for t in display_tags}
+        if want_set - have_set and (mashed or len(display_tags) <= 1):
+            issues.append("Hashtags unvollständig/nicht SEO")
     return issues
 
 
