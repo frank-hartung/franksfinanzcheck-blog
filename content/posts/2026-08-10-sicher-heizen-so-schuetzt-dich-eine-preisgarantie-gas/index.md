@@ -19,7 +19,6 @@ cover:
   alt: "Sicher heizen: So schützt dich eine Gaspreisgarantie"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Eine Gas-Preisgarantie fixiert den Energiepreis für einen Zeitraum von meist 12 bis 24 Monaten und schützt Verbraucher so vor unvorhersehbaren Preiserhöhungen am Markt. Da staatliche Abgaben und Steuern rund 25 bis 50 Prozent des Gesamtpreises ausmachen, sorgt insbesondere eine Vollpreisgarantie für langfristige Planungssicherheit und stabilere Heizkosten."
-social_posted: true
 ---
 
 # Sicher heizen: So schützt dich eine Gaspreisgarantie

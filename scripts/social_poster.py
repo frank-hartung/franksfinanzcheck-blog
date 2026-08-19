@@ -158,11 +158,21 @@ def build_post(fm: dict, slug: str) -> str:
 
 
 def cover_path(slug_dir: Path, fm: dict) -> Path | None:
+    """Löst den Cover-Pfad auf.
+
+    'cover.image' ist site-root-relativ (images/covers/<slug>.jpg →
+    static/images/covers/<slug>.jpg), nicht relativ zum Page-Bundle.
+    Fallback: Bundle-Resource, falls ein Artikel das Cover lokal mitbringt.
+    """
     m = re.search(r"image:\s*[\"']?(.*?)[\"']?\s*$", fm.get("raw", ""), re.MULTILINE)
     if not m:
         return None
-    p = slug_dir / m.group(1)
-    return p if p.is_file() else None
+    rel = m.group(1)
+    static_candidate = ROOT / "static" / rel
+    if static_candidate.is_file():
+        return static_candidate
+    bundle_candidate = slug_dir / rel
+    return bundle_candidate if bundle_candidate.is_file() else None
 
 
 def http_json(url: str, data=None, headers=None, method="POST") -> dict:
