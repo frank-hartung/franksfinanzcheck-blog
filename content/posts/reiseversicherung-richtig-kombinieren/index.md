@@ -20,26 +20,9 @@ social_posted: true
 
 # Reiseversicherung: Diese Kombination ist die richtige
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Vor jeder Reise stellt sich dieselbe Frage: Welche Versicherung brauche ich – und welche ist rausgeworfenes Geld? Die Reiseportale bieten beim Buchen gleich das „komplette" Versicherungspaket an, und die Versicherer verkaufen Bausteine, die sich bei genauem Hinsehen oft doppeln oder überflüssig sind.
 
 In diesem Artikel sortiere ich die Reiseversicherungen ehrlich: Was du wirklich brauchst, was optional ist – und wie du die richtige Kombination zum fairen Preis bekommst.
-
-
 
 ---
 
@@ -61,7 +44,7 @@ Die Reihenfolge der Priorität ist eindeutig: Auslandskranken zuerst, Reiserück
 
 ## Auslandskrankenversicherung:<br>Pflicht für jede Reise
 
-Die Auslandskrankenversicherung ist die wichtigste [Reiseversicherung](../../posts/reisekrankenversicherung-wann-lohnt/) überhaupt – und die günstigste: **10 bis 30 € pro Jahr** für eine Einzelperson, 20 bis 50 € für Familien. Sie zahlt die Arzt- und Krankenhauskosten, die deine gesetzliche Krankenversicherung im Ausland nicht (oder nur teilweise) übernimmt.
+Die Auslandskrankenversicherung ist die wichtigste Reiseversicherung überhaupt – und die günstigste: **10 bis 30 € pro Jahr** für eine Einzelperson, 20 bis 50 € für Familien. Sie zahlt die Arzt- und Krankenhauskosten, die deine gesetzliche Krankenversicherung im Ausland nicht (oder nur teilweise) übernimmt.
 
 Die Details, die zählen:
 
@@ -89,15 +72,12 @@ Wann sie unnötig ist: Bei günstigen Reisen unter 500 € oder Städtereisen, 
 Die Reisegepäckversicherung klingt praktisch – ist aber für die meisten Reisenden überflüssig. Die Gründe:
 
 - **Geringe Deckung mit hohen Selbstbehalten:** Die typischen Tarife zahlen nur einen Bruchteil des Schadens, oft mit Einzelgrenzen pro Gegenstand (300–500 €).
-- **Doppelte [Absicherung](../../posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/):** Die [Hausratversicherung](../../posts/hausratversicherung-wer-braucht-leistung/) deckt Reisegepäck meist mit ab – außerhalb der eigenen Wohnung bis zu 10 % der Versicherungssumme.
+- **Doppelte Absicherung:** Die Hausratversicherung deckt Reisegepäck meist mit ab – außerhalb der eigenen Wohnung bis zu 10 % der Versicherungssumme.
 - **Seltene Schadensfälle:** Gepäck geht selten verloren – und wenn, dann meist auf Flügen, wo die Airline nach dem Montrealer Übereinkommen haftet (bis ca. 1.600 €).
 
 Wer teure Technik mitnimmt, prüft besser die Hausrat-Deckung oder eine spezielle Elektronik-Versicherung – statt der pauschalen Gepäck-Police.
 
-
-
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/mietwagen/)
-
 
 ## Jahresvertrag vs. Einzelreise
 
@@ -137,18 +117,17 @@ Die beste Versicherung ist die, die du im Schadensfall wirklich dabei hast. Desh
 
 2. **Reiserücktritt prüfen:** Deckt dein Vertrag den Reisepreis? Sind alle Mitreisenden (vor allem Kinder) eingeschlossen? Ist die Vorerkrankungs-Klausel für deine Situation ok?
 
-3. **Doppelte Policen aussortieren:** Bietet deine [Kreditkarte](../../posts/kreditkarte-ohne-jahresgebuehr/) oder Hausrat bereits Reiseschutz? Dann nichts doppelt abschließen.
+3. **Doppelte Policen aussortieren:** Bietet deine Kreditkarte oder Hausrat bereits Reiseschutz? Dann nichts doppelt abschließen.
 
-4. **Dokumente digital sichern:** Versicherungsnachweise, [Reiseunterlagen](../../posts/last-minute-urlaubsangebote-sichern/) und Notfallnummern in einer Cloud-App ablegen – im Schadensfall erreichbar.
+4. **Dokumente digital sichern:** Versicherungsnachweise, Reiseunterlagen und Notfallnummern in einer Cloud-App ablegen – im Schadensfall erreichbar.
 
 5. **Notfallnummern notieren:** Die 24-Stunden-Hotline deiner Versicherung im Handy speichern – im Ausland hilft sie bei Arztwahl und Organisation.
 
 Diese Routine kostet 5 Minuten vor jeder Reise – und erspart im Ernstfall Tausende Euro und viel Stress.
 
-
 ## Fazit: Reiseversicherung: Diese Kombination ist die richtige schlau nutzen
 
-Sich gezielt mit dem Thema **[Reiseversicherung](../../posts/reisekrankenversicherung-wann-lohnt/): Diese Kombination ist die richtige** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und bares Geld zu sparen. Buche deinen Mietwagen immer frühzeitig und achte auf faire Tankregelungen sowie ausreichenden Versicherungsschutz, um Kostenfallen vor Ort zu umgehen. Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀
+Sich gezielt mit dem Thema **Reiseversicherung: Diese Kombination ist die richtige** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und bares Geld zu sparen. Buche deinen Mietwagen immer frühzeitig und achte auf faire Tankregelungen sowie ausreichenden Versicherungsschutz, um Kostenfallen vor Ort zu umgehen. Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀
 
 ## Häufig gestellte Fragen
 
@@ -161,11 +140,10 @@ Bei Reisen ab etwa 1.500 €, bei Vorerkrankungen und bei nicht verschiebbaren 
 **Zahlt die gesetzliche Krankenkasse im Ausland?**
 Innerhalb der EU greift die Europäische Krankenversicherungskarte (EHIC) – sie deckt aber nur Behandlungen, die auch in Deutschland von der GKV übernommen werden, und keine Rücktransporte. Außerhalb der EU besteht oft gar kein Schutz – die private Auslandskrankenversicherung schließt die Lücken.
 
-Die richtige Reiseversicherung gehört zur [Reise-Planung](../../posts/urlaubskasse-aufbessern-spartipps/) wie der [Mietwagen](../../posts/mietwagen-buchen-so-sparst-du/) und die [Flugbuchung](../../posts/guenstige-fluege-spaetsommer-finden/). Alle Reise- und Versicherungsthemen findest du in den [Ratgebern Mietwagen & Reisen](../../pillar/mietwagen/) und [Versicherungen](../../pillar/versicherungen/).
+Die richtige Reiseversicherung gehört zur Reise-Planung wie der Mietwagen und die Flugbuchung. Alle Reise- und Versicherungsthemen findest du in den [Ratgebern Mietwagen & Reisen](../../pillar/mietwagen/) und [Versicherungen](../../pillar/versicherungen/).
 
 **Sind Reiseabbruchversicherungen sinnvoll?**
 Eine Reiseabbruchversicherung lohnt sich bei teuren Reisen (ab etwa 1.500 €), wenn du die Reise vorzeitig abbrechen musst – etwa wegen Krankheit oder eines Todesfalls in der Familie. Sie erstattet die nicht genutzten Reiseleistungen und die Rückreisekosten. Bei günstigen Reisen ist das Risiko gering und die Police unnötig – prüfe vor dem Abschluss, ob deine Hausrat- oder Kreditkarten-Versicherung diesen Baustein schon abdeckt.
-
 
 ---
 
@@ -173,8 +151,6 @@ Eine Reiseabbruchversicherung lohnt sich bei teuren Reisen (ab etwa 1.500 €),
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 
-
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -32,7 +32,6 @@ FEHLER: save_article() got an unexpected keyword argument 'quality_level'
 
 ## ❌ SIM-D: Mastodon-Hashtag/Cover-Regressionstest
 ```
-3 aktuelle Artikel geprüft. zinseszinseffekt-formel-erklaert: Cover in Frontmatter referenziert, aber cover_path() findet die Datei nicht (Regression des Cover-Lade-Bugs?); zahnzusatzversicherung-lohnt-sich: Cover in Frontmatter referenziert, aber cover_path() findet die Datei nicht (Regression des Cover-Lade-Bugs?); wlan-verstaerker-vs-mesh-wlan: Cover in Frontmatter referenziert, aber cover_path() findet die Datei nicht (Regression des Cover-Lade-Bugs?)
 ```
 
 ## ✅ SIM-E: publish_gate.py --dry-run

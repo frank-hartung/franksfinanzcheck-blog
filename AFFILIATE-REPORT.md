@@ -1,12 +1,12 @@
 # 🔗 Affiliate-Link-Report
 
-> **Automatisch** – 78 Posts geprüft, 77 mit Problemen, 1 Links korrigiert.
+> **Automatisch** – 50 Posts geprüft, 50 mit Problemen, 0 Links korrigiert.
 
 ## Zusammenfassung
 
-- ✅ Korrekt: 1/78
-- ❌ Mit Problemen: 77
-- 🔧 Korrigiert (--fix): 1
+- ✅ Korrekt: 0/50
+- ❌ Mit Problemen: 50
+- 🔧 Korrigiert (--fix): 0
 
 ## ❌ Probleme
 
@@ -28,13 +28,7 @@
 ### versicherungen
 - ❌ KEIN Affiliate-Link vorhanden
 
-### 2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich
-- ❌ KEIN Affiliate-Link vorhanden
-
-### 2026-08-06-frugalismus-im-alltag
-- ❌ KEIN Affiliate-Link vorhanden
-
-### 2026-08-07-frugalismus-fuer-den-erfolg
+### 2026-08-08-dein-tier-im-krankheitsfall
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### 2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen
@@ -55,13 +49,22 @@
 ### 2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck
 - ❌ KEIN Affiliate-Link vorhanden
 
-### 50-30-20-regel-einfach-erklaert
+### 2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft
+- ❌ KEIN Affiliate-Link vorhanden
+
+### 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
+- ❌ KEIN Affiliate-Link vorhanden
+
+### 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+- ❌ KEIN Affiliate-Link vorhanden
+
+### 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+- ❌ KEIN Affiliate-Link vorhanden
+
+### 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### 5g-home-router-oder-dsl
-- ❌ KEIN Affiliate-Link vorhanden
-
-### 7-gewohnheiten-finanzielle-freiheit
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### balkonkraftwerk-2026-lohnt-sich
@@ -76,15 +79,6 @@
 ### dispozinsen-verstehen-alternativen
 - ❌ KEIN Affiliate-Link vorhanden
 
-### dns-server-aendern-schnelleres-internet
-- ❌ KEIN Affiliate-Link vorhanden
-
-### dsl-internet-flat-guenstig-sichern
-- ❌ KEIN Affiliate-Link vorhanden
-
-### e-auto-laden-stromkosten-senken
-- ❌ KEIN Affiliate-Link vorhanden
-
 ### elementarschadenversicherung-hochwasser-starkregen
 - ❌ KEIN Affiliate-Link vorhanden
 
@@ -97,34 +91,16 @@
 ### flug-buchen-9-tricks-guenstige-tickets
 - ❌ KEIN Affiliate-Link vorhanden
 
-### frugalismus-tricks-alltag-200-euro-sparen
-- ❌ KEIN Affiliate-Link vorhanden
-
-### gastarife-vergleichen-vor-dem-herbst
-- ❌ KEIN Affiliate-Link vorhanden
-
 ### gebuehrenfallen-banking-vermeiden
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### glasfaser-dsl-kabel-anschluss-vergleich
 - ❌ KEIN Affiliate-Link vorhanden
 
-### guenstige-fluege-spaetsommer-finden
-- ❌ KEIN Affiliate-Link vorhanden
-
-### handytarife-vergleichen-guenstigster-tarif
-- ❌ KEIN Affiliate-Link vorhanden
-
 ### haushaltsbuch-fuehren-app-excel-oder-stift
 - ❌ KEIN Affiliate-Link vorhanden
 
-### hausratversicherung-wer-braucht-leistung
-- ❌ KEIN Affiliate-Link vorhanden
-
 ### heizkosten-senken-10-massnahmen
-- ❌ KEIN Affiliate-Link vorhanden
-
-### heizperiode-vorbereiten-spaetsommer
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### impulskaeufe-vermeiden-7-psychologische-tricks
@@ -136,28 +112,10 @@
 ### kfz-versicherung-sf-klasse-erklaert
 - ❌ KEIN Affiliate-Link vorhanden
 
-### kfz-versicherung-wechseln
-- ❌ KEIN Affiliate-Link vorhanden
-
 ### kontowechsel-in-20-minuten-wechselservice
 - ❌ KEIN Affiliate-Link vorhanden
 
-### kostenloses-girokonto-finden
-- ❌ KEIN Affiliate-Link vorhanden
-
-### kreditkarte-ohne-jahresgebuehr
-- ❌ KEIN Affiliate-Link vorhanden
-
 ### kuehlschrank-strom-sparen-einstellung
-- ❌ KEIN Affiliate-Link vorhanden
-
-### last-minute-urlaubsangebote-sichern
-- ❌ KEIN Affiliate-Link vorhanden
-
-### mietwagen-buchen-so-sparst-du
-- ❌ KEIN Affiliate-Link vorhanden
-
-### mietwagen-fallen-vermeiden
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### mietwagen-im-winter-schnaeppchen-tricks
@@ -172,22 +130,7 @@
 ### nebenverdienst-ideen-2026-zweites-standbein
 - ❌ KEIN Affiliate-Link vorhanden
 
-### notgroschen-aufbauen-wie-viel-reicht
-- ❌ KEIN Affiliate-Link vorhanden
-
 ### pauschalreise-buchen-bester-zeitpunkt
-- ❌ KEIN Affiliate-Link vorhanden
-
-### private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt
-- ❌ KEIN Affiliate-Link vorhanden
-
-### privathaftpflicht-warum-pflicht-kosten
-- ❌ KEIN Affiliate-Link vorhanden
-
-### ratenkredit-bestszins-vergleichen
-- ❌ KEIN Affiliate-Link vorhanden
-
-### reisekrankenversicherung-wann-lohnt
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### reiseversicherung-richtig-kombinieren
@@ -202,40 +145,16 @@
 ### sparquote-berechnen-und-steigern
 - ❌ KEIN Affiliate-Link vorhanden
 
-### strom-sparen-haushalt-20-tipps
-- ❌ KEIN Affiliate-Link vorhanden
-
-### stromanbieter-wechseln-2026
-- ❌ KEIN Affiliate-Link vorhanden
-
-### stromfresser-im-haushalt-entlarven
-- ❌ KEIN Affiliate-Link vorhanden
-
 ### stromvergleich-richtig-lesen-tarif-finden
-- ❌ KEIN Affiliate-Link vorhanden
-
-### tagesgeld-zinsen-sicher-anlegen
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### urlaub-mit-kindern-guenstig-spartricks
 - ❌ KEIN Affiliate-Link vorhanden
 
-### urlaubskasse-aufbessern-spartipps
-- ❌ KEIN Affiliate-Link vorhanden
-
 ### versicherungen-kuendigen-diese-5-policen
 - ❌ KEIN Affiliate-Link vorhanden
 
-### waermepumpe-vs-gasheizung-2026
-- ❌ KEIN Affiliate-Link vorhanden
-
 ### wlan-verbessern-ohne-neue-hardware
-- ❌ KEIN Affiliate-Link vorhanden
-
-### wlan-verstaerker-vs-mesh-wlan
-- ❌ KEIN Affiliate-Link vorhanden
-
-### zahnzusatzversicherung-lohnt-sich
 - ❌ KEIN Affiliate-Link vorhanden
 
 ### zinseszinseffekt-formel-erklaert

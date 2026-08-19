@@ -7,7 +7,6 @@ showToc: true
 
 # Über mich und diesen Blog
 
-
 <div class="ff-author-hero" style="display:flex; gap:28px; align-items:flex-start; flex-wrap:wrap; margin: 8px 0 32px; padding: 28px; background:linear-gradient(135deg,#EAF4EF 0%,#fff 60%); border-radius:16px; border:1px solid rgba(14,90,67,.15);">
   {{< autor-foto >}}
   <div style="flex:1 1 320px;">
@@ -30,7 +29,7 @@ showToc: true
 ## Wie ich teste und arbeite
 
 1. **Ich recherchiere an der Quelle:** Tarifbedingungen, Preisblätter, Anbieterangaben und Verbraucherportale – nicht Hörensagen.
-2. **Ich teste in der Praxis:** Tarife buchen, Apps nutzen, Wechsel durchziehen – so entstehen Artikel wie [„Internet-Turbo: Warum ich meinen DNS-Server getauscht habe"](/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/), in denen ich von eigenen Erfahrungen berichte.
+2. **Ich teste in der Praxis:** Tarife buchen, Apps nutzen, Wechsel durchziehen – so entstehen Artikel wie „Internet-Turbo: Warum ich meinen DNS-Server getauscht habe", in denen ich von eigenen Erfahrungen berichte.
 3. **Ich aktualisiere regelmäßig:** Preise und Konditionen ändern sich – ich pflege die wichtigsten Artikel laufend nach.
 4. **Ich kennzeichne Meinung als Meinung:** Wenn etwas eine persönliche Einschätzung ist, steht das auch so da.
 

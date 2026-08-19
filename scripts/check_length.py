@@ -8,6 +8,14 @@ Stellt sicher, dass alle Blogartikel die Ziel-Länge haben (Profi-Format):
   OPT_MAX    = 1400  (oberes Optimum)
   MAX_WORDS  = 1800  (hartes Maximum – darüber: „zu lang")
 
+DAUERVORGABE ZEICHENLÄNGE (festgelegt 19.08.2026, Blog-Launch 08.08.2026):
+  Empfohlen pro Blogartikel 6.000–10.000 Zeichen Fließtext
+  (≈ 800–1.400 Wörter; empirisch aus dem Bestand: Median 9.124 Zeichen
+  bei 6,96 Zeichen/Wort). Die Zeichen-Empfehlung wird ausgewiesen und
+  als Hinweis gemeldet – die HARTEN Gates bleiben wortbasiert
+  (Hoheitskarte QUALITAETS-REGELWERK.md: Posts check_length.py,
+  Pillar length_guard.py).
+
 Gemessen wird im FLIESSTEXT (Frontmatter, Code-Blöcke, HTML, Bild-Markup
 raus; Markdown-Links werden auf ihren Anzeigetext reduziert). Zusätzlich
 zur Wortzahl wird die Zeichenzahl (mit Leerzeichen) ausgewiesen.
@@ -39,6 +47,12 @@ MIN_WORDS = int(os.environ.get("LENGTH_MIN_WORDS") or 700)
 OPT_MIN = int(os.environ.get("LENGTH_OPT_MIN") or 800)
 OPT_MAX = int(os.environ.get("LENGTH_OPT_MAX") or 1400)
 MAX_WORDS = int(os.environ.get("LENGTH_MAX_WORDS") or 1800)
+
+# DAUERVORGABE (19.08.2026): empfohlene Zeichenlänge pro Blogartikel
+# (Fließtext, inkl. Leerzeichen). Empirisch: Median 9.124 Zeichen,
+# 6,96 Zeichen/Wort im Bestand. Empfehlung = Hinweis, kein hartes Gate.
+OPT_CHARS_MIN = int(os.environ.get("LENGTH_OPT_CHARS_MIN") or 6000)
+OPT_CHARS_MAX = int(os.environ.get("LENGTH_OPT_CHARS_MAX") or 10000)
 
 RE_CODE = re.compile(r"```.*?```", re.S)
 RE_HTML = re.compile(r"<[^>]+>")
@@ -119,6 +133,9 @@ def main():
           f"| zu-lang: {sum(1 for a in arts if a['status'] == 'zu-lang')}")
     print(f"Zielbandbreite: {MIN_WORDS}-{MAX_WORDS} Wörter "
           f"(Optimum {OPT_MIN}-{OPT_MAX})")
+    print(f"Zeichen-Empfehlung (Dauervorgabe 19.08.2026): "
+          f"{OPT_CHARS_MIN:,}-{OPT_CHARS_MAX:,} Zeichen"
+          .replace(",", "."))
     for a in sorted(issues, key=lambda x: x["words"]):
         print(f"  ❌ [{a['status']}] {a['slug']}: {a['words']} Wörter / "
               f"{a['chars']} Zeichen")
@@ -126,6 +143,13 @@ def main():
     for a in sorted(arts, key=lambda x: x["words"]):
         if a["status"] == "unter-optimum":
             print(f"  ℹ️ [unter-Optimum] {a['slug']}: {a['words']} Wörter")
+    # Zeichen-Empfehlung: Hinweis, kein Fehler (harte Gates bleiben Wörter)
+    for a in sorted(arts, key=lambda x: x["chars"]):
+        if a["chars"] < OPT_CHARS_MIN or a["chars"] > OPT_CHARS_MAX:
+            band = "unter" if a["chars"] < OPT_CHARS_MIN else "über"
+            print(f"  ℹ️ [Zeichen-Empfehlung] {a['slug']}: {a['chars']:,} "
+                  f"Zeichen ({band} {OPT_CHARS_MIN:,}-{OPT_CHARS_MAX:,})"
+                  .replace(",", "."))
 
     if as_json:
         print(json.dumps({
@@ -133,6 +157,10 @@ def main():
             "zu_kurz": sum(1 for a in arts if a["status"] == "zu-kurz"),
             "zu_lang": sum(1 for a in arts if a["status"] == "zu-lang"),
             "min_words": MIN_WORDS, "max_words": MAX_WORDS,
+            "opt_chars_min": OPT_CHARS_MIN, "opt_chars_max": OPT_CHARS_MAX,
+            "ausserhalb_zeichen_empfehlung":
+                sum(1 for a in arts
+                    if a["chars"] < OPT_CHARS_MIN or a["chars"] > OPT_CHARS_MAX),
             "items": arts,
         }, ensure_ascii=False))
     return 1 if issues else 0

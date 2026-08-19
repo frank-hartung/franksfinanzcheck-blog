@@ -20,28 +20,9 @@ social_posted: true
 
 # Riester-Rente 2026: Weiterfördern, stilllegen oder kündigen?
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Die Riester-Rente ist das umstrittenste Förderprodukt der deutschen Altersvorsorge. 2026 steht die große Reform an. Was bedeutet das für deinen Vertrag? Solltest du weiterfördern, stilllegen oder kündigen? Die Antwort hängt von deiner persönlichen Situation ab und von einer ehrlichen Rechnung.
 
 In diesem Artikel erkläre ich dir, wie Riester funktioniert, was die Reform 2026 ändert und wie du für deinen Fall die richtige Entscheidung triffst.
-
-
 
 ---
 
@@ -87,16 +68,13 @@ Die Kehrseite: Für viele andere ist Riester ein schwaches Produkt.
 
 **Alleinstehende ohne Kinder mit gutem Einkommen:** die Grundzulage von 175 € ist im Verhältnis zum Mindestbeitrag (4 % des rentenversicherungspflichtigen Einkommens, rund 1.750 bis 2.100 €) gering. Bei höheren Steuersätzen hilft der Steuervorteil, aber die Kosten und die schlechte Rendite vieler Verträge fressen den Vorteil oft auf.
 
-**Verträge mit hohen Kosten:** Ältere Versicherungs-Riesterverträge mit 5 % Abschlusskosten und jährlicher Verwaltungsgebühr sind schwer zu retten. Eine ehrliche Kostenanalyse zeigt oft: Ein [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) hätte deutlich mehr erwirtschaftet.
+**Verträge mit hohen Kosten:** Ältere Versicherungs-Riesterverträge mit 5 % Abschlusskosten und jährlicher Verwaltungsgebühr sind schwer zu retten. Eine ehrliche Kostenanalyse zeigt oft: Ein ETF-Sparplan hätte deutlich mehr erwirtschaftet.
 
 **Kurz vor der Rente:** Wer in wenigen Jahren ohnehin in Rente geht und kaum Zulagen bekommen hat, sollte die Kündigung (oder das Stilllegen) ernsthaft prüfen.
 
 Achtung bei der Kündigung: Du musst die erhaltenen Zulagen und Steuervorteile zurückzahlen. Das kann schnell 2.000 bis 5.000 € sein. Die Rechnung muss also immer den Nettovorteil der Kündigung zeigen: Was bleibt nach Rückzahlung übrig, und was kann ich damit anderweitig erreichen?
 
-
-
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/tagesgeld/)
-
 
 ## Stilllegen vs. kündigen vs. weiterzahlen
 
@@ -117,7 +95,7 @@ Bevor du irgendetwas entscheidest, analysiere deinen Vertrag:
 3. **Welche Rendite:** Was hat der Vertrag in den letzten 5 Jahren wirklich erwirtschaftet (nach Kosten)?
 4. **Förderquote:** Wie viel Zulage und Steuerersparnis bekommst du pro Jahr im Verhältnis zu deinem Eigenbeitrag?
 
-Mit diesen vier Zahlen kannst du Riester mit einem [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) vergleichen: historisch erzielen Welt-ETFs langfristig 6 bis 8 % pro Jahr vor Kosten. Die meisten Riester-Verträge liegen deutlich darunter. Die Förderung muss diese Differenz ausgleichen.
+Mit diesen vier Zahlen kannst du Riester mit einem ETF-Sparplan vergleichen: historisch erzielen Welt-ETFs langfristig 6 bis 8 % pro Jahr vor Kosten. Die meisten Riester-Verträge liegen deutlich darunter. Die Förderung muss diese Differenz ausgleichen.
 
 ## Alternativen:<br>Was du mit dem Geld machen könntest
 
@@ -125,7 +103,7 @@ Die ehrliche Einordnung: Riester ist ein Baustein, kein Allheilmittel. Die moder
 
 1. **Gesetzliche Rente** (Pflicht, Basis)
 2. **Betriebliche Altersvorsorge** (bAV – oft mit Arbeitgeber-Zuschuss, meist sehr attraktiv)
-3. **Private Vorsorge:** Riester (für Förderberechtigte) und/oder [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) + [Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/)
+3. **Private Vorsorge:** Riester (für Förderberechtigte) und/oder ETF-Sparplan + [Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/)
 
 Für die meisten ist die Kombination aus bAV und ETF-Sparplan die schlagkräftigste Lösung. Riester kann dazukommen, wenn die Zulagen hoch sind – aber nie als einzige private Vorsorge.
 
@@ -139,10 +117,9 @@ Wichtig bei der bAV: Prüfe die Kosten und die Verzinsung des Vertrags. Manche b
 
 Und falls du Riester beitragsfrei stellst, aber noch Zulagen erhalten willst: Prüfe, ob du den Mindestbeitrag (4 % des Vorjahreseinkommens, gedeckelt) weiterhin leisten kannst. Dann fließen Zulagen und Steuervorteile weiter, und dein Geld arbeitet mit Förderung.
 
-
 ## Fazit: Riester-Rente 2026: Weiterfördern, stilllegen oder kündigen? schlau nutzen
 
-Sich gezielt mit dem Thema **Riester-Rente 2026: Weiterfördern, stilllegen oder kündigen?** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und [bares Geld](../../posts/2026-08-06-frugalismus-im-alltag/) zu sparen. Nutze attraktive [Tagesgeld](../../posts/tagesgeld-zinsen-sicher-anlegen/)-Angebote der C24 Bank, um dein Erspartes flexibel, sicher und rentabel vor der Inflation zu schützen. Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀
+Sich gezielt mit dem Thema **Riester-Rente 2026: Weiterfördern, stilllegen oder kündigen?** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und bares Geld zu sparen. Nutze attraktive Tagesgeld-Angebote der C24 Bank, um dein Erspartes flexibel, sicher und rentabel vor der Inflation zu schützen. Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀
 
 ## Häufig gestellte Fragen
 
