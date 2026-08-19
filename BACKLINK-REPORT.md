@@ -39,7 +39,6 @@ Ich würde mich freuen, Finanztip Community mit einem Beitrag zu unterstützen. 
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/7-gewohnheiten-finanzielle-freiheit/
 
 Beste Grüße
 Frank Hartung
@@ -59,7 +58,6 @@ Ich würde mich freuen, r/Finanzen (Reddit) mit einem Beitrag zu unterstützen. 
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/
 
 Beste Grüße
 Frank Hartung
@@ -79,7 +77,6 @@ Ich würde mich freuen, Geld.de Blog-Verzeichnis mit einem Beitrag zu unterstüt
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/
 
 Beste Grüße
 Frank Hartung
@@ -99,7 +96,6 @@ Ich würde mich freuen, Finanzblogs.de mit einem Beitrag zu unterstützen. Als B
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/
 
 Beste Grüße
 Frank Hartung
@@ -119,7 +115,6 @@ Ich würde mich freuen, Blog-Verzeichnis von Blogger.de mit einem Beitrag zu unt
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/
 
 Beste Grüße
 Frank Hartung
@@ -139,7 +134,6 @@ Ich würde mich freuen, Gastartikel auf Sparkonto.org mit einem Beitrag zu unter
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/7-gewohnheiten-finanzielle-freiheit/
 
 Beste Grüße
 Frank Hartung
@@ -159,7 +153,6 @@ Ich würde mich freuen, Gastartikel auf Finanzfluss-Blog mit einem Beitrag zu un
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/
 
 Beste Grüße
 Frank Hartung
@@ -179,7 +172,6 @@ Ich würde mich freuen, Gastartikel auf Geld-Magazin.de mit einem Beitrag zu unt
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/7-gewohnheiten-finanzielle-freiheit/
 
 Beste Grüße
 Frank Hartung
@@ -199,7 +191,6 @@ Ich würde mich freuen, Linktausch mit Sparblog24 mit einem Beitrag zu unterstü
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/7-gewohnheiten-finanzielle-freiheit/
 
 Beste Grüße
 Frank Hartung
@@ -219,7 +210,6 @@ Ich würde mich freuen, Check24-Partnerportal Forum mit einem Beitrag zu unterst
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/
 
 Beste Grüße
 Frank Hartung
@@ -239,7 +229,6 @@ Ich würde mich freuen, Trustpilot/Verbraucherportale-Artikel mit einem Beitrag 
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/
 
 Beste Grüße
 Frank Hartung
@@ -259,7 +248,6 @@ Ich würde mich freuen, LinkedIn-Artikel mit einem Beitrag zu unterstützen. Als
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/
 
 Beste Grüße
 Frank Hartung
@@ -279,7 +267,6 @@ Ich würde mich freuen, Gastartikel auf MeinGeldBlog mit einem Beitrag zu unters
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/50-30-20-regel-einfach-erklaert/
 
 Beste Grüße
 Frank Hartung
@@ -299,7 +286,6 @@ Ich würde mich freuen, Finanzblog-Verzeichnis Sparwelt mit einem Beitrag zu unt
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/7-gewohnheiten-finanzielle-freiheit/
 
 Beste Grüße
 Frank Hartung
@@ -319,7 +305,6 @@ Ich würde mich freuen, Antworten auf Gutefrage.net mit einem Beitrag zu unterst
 
 Der Artikel ist faktenbasiert, mit konkreten Zahlen und ohne Werbeversprechen. Gerne liefere ich auch einen exklusiven Beitrag nur für euch.
 
-Mein Blog: https://frank-hartung.github.io/franksfinanzcheck-blog/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/
 
 Beste Grüße
 Frank Hartung

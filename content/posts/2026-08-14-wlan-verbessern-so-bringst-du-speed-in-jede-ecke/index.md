@@ -24,12 +24,9 @@ social_posted: true
 
 # WLAN verbessern: So bringst du Speed in jede Ecke
 
-
 Kennst du das Gefühl, wenn der Ladebalken beim Serien-Streaming plötzlich einfriert? Du verlierst die Verbindung genau in dem Moment, in dem es am spannendsten wird. Ich kenne diesen Frust aus meinem eigenen Wohnzimmer. Lange Zeit habe ich mich mit Funklöchern in der Küche und Verbindungsabbrüchen im Schlafzimmer herumgeschlagen. Mein Ziel war klar: Ich wollte mein [WLAN verbessern](../../posts/wlan-verbessern-ohne-neue-hardware/) und im ganzen Haus eine stabile Verbindung genießen. 
 
 Ich teile meine Erfahrungen mit dir und zeige dir, welcher Weg für dich der richtige ist. Du willst dein [WLAN verbessern](../../posts/wlan-verbessern-ohne-neue-hardware/) und im ganzen Haus eine stabile Verbindung genießen. Ich erkläre dir, wie du das erreichen kannst. Ein stabiles Heimnetz ist heute kein Luxus mehr, sondern die Basis für Homeoffice, Entertainment und Smart Home. Wer hier am falschen Ende spart, zahlt oft mit Zeit und Nerven drauf.
-
-
 
 ---
 
@@ -63,17 +60,14 @@ Ich habe ein Mesh-Set in meinem Haus verteilt. Ein Gerät hängt direkt am DSL-A
 Ein weiterer Vorteil ist die intelligente Steuerung. Das System erkennt selbstständig, auf welchem Kanal am wenigsten los ist, und lenkt deine Geräte aktiv um. Wenn du also dein WLAN verbessern willst und ein größeres Haus oder eine verwinkelte Wohnung hast, ist Mesh die nachhaltigste Investition.
 
 ## Praktische DSL Hacks für mehr Speed
-Bevor du Geld für neue Hardware ausgibst, solltest du einige einfache Tricks testen. Ich nenne sie meine persönlichen [DSL hacks](../../posts/wlan-verstaerker-vs-mesh-wlan/), die oft schon kleine Wunder bewirken. Zuerst habe ich meinen Router aus der Versenkung geholt. Er sollte so frei wie möglich stehen, am besten auf Augenhöhe und nicht im Schrank. 
+Bevor du Geld für neue Hardware ausgibst, solltest du einige einfache Tricks testen. Ich nenne sie meine persönlichen DSL hacks, die oft schon kleine Wunder bewirken. Zuerst habe ich meinen Router aus der Versenkung geholt. Er sollte so frei wie möglich stehen, am besten auf Augenhöhe und nicht im Schrank. 
 
 Hier sind drei konkrete Hebel, die sofort wirken:
 1. **Frequenzbänder trennen:** Viele Router fassen 2,4 GHz (langsam, hohe Reichweite) und 5 GHz (schnell, geringe Reichweite) unter einem Namen zusammen. In dicht besiedelten Gebieten ist das 2,4-GHz-Band oft völlig überlastet. Gib den Bändern in den Einstellungen unterschiedliche Namen (z. B. "MeinWLAN_5G") und zwinge deine schnellen Geräte wie Laptop oder Apple TV in das 5-GHz-Netz.
-2. **[DNS-Server ändern](../../posts/dns-server-aendern-schnelleres-internet/):** Standardmäßig nutzt dein Router den DNS-Server deines Providers. Dieser ist oft langsam. Wenn du in den Router-Einstellungen auf Google (8.8.8.8) oder Cloudflare (1.1.1.1) umstellst, bauen sich Webseiten spürbar schneller auf.
+2. **DNS-Server ändern:** Standardmäßig nutzt dein Router den DNS-Server deines Providers. Dieser ist oft langsam. Wenn du in den Router-Einstellungen auf Google (8.8.8.8) oder Cloudflare (1.1.1.1) umstellst, bauen sich Webseiten spürbar schneller auf.
 3. **Kanalbreite anpassen:** Im 5-GHz-Band kannst du oft die Kanalbreite von 20 MHz auf 80 MHz oder sogar 160 MHz erhöhen. Das ist wie der Ausbau einer Landstraße zur Autobahn – es passen einfach mehr Daten gleichzeitig durch.
 
-
-
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/dsl/)
-
 
 ## Den richtigen Weg für dein Zuhause finden
 Welche Lösung ist nun die beste für dich? Das hängt stark von deiner Wohnsituation und deinem Budget ab. Ich habe die Erfahrung gemacht, dass man sich diese Entscheidung nicht zu schwer machen sollte. Hier ist eine detaillierte Übersicht, die mir bei der Planung geholfen hat:
@@ -104,13 +98,11 @@ Am Ende ist es eine Kombination aus der richtigen Hardware und einer klugen Plat
 
 Es gibt nichts Nervigeres als ein ruckelndes Bild in einer wichtigen Videokonferenz. Nimm dir die Zeit, deine Umgebung zu analysieren. Manchmal reicht ein kleiner Standortwechsel des Routers – weg vom Boden, hin auf ein Regal – schon aus, um die Reichweite um 20% zu steigern. In anderen Fällen ist die Investition in moderne Technik wie Wi-Fi 6 der einzige Weg, um langfristig Ruhe zu haben.
 
-
-
 **Weiterlesen:** [Ratgeber Konto Karten](../../pillar/konto-karten/)
 ## Häufige Fragen
 
 ### Hilft ein Alufolien-Reflektor wirklich?
-Ich habe das tatsächlich mal aus Neugier getestet. Theoretisch kann eine gebogene Schicht Alufolie hinter den Antennen das Signal in eine bestimmte Richtung lenken. In der Praxis ist der Effekt aber minimal und sieht zudem im Wohnzimmer ziemlich unschön aus. Moderne Router mit internen Antennen lassen sich so ohnehin kaum beeinflussen. Da sind richtige [DSL hacks](../../posts/wlan-verstaerker-vs-mesh-wlan/) wie die Kanaloptimierung oder das Upgrade auf ein Mesh-System deutlich effektiver.
+Ich habe das tatsächlich mal aus Neugier getestet. Theoretisch kann eine gebogene Schicht Alufolie hinter den Antennen das Signal in eine bestimmte Richtung lenken. In der Praxis ist der Effekt aber minimal und sieht zudem im Wohnzimmer ziemlich unschön aus. Moderne Router mit internen Antennen lassen sich so ohnehin kaum beeinflussen. Da sind richtige DSL hacks wie die Kanaloptimierung oder das Upgrade auf ein Mesh-System deutlich effektiver.
 
 ### Kann ich Repeater verschiedener Hersteller mischen?
 Das funktioniert in der Regel über den WPS-Standard ganz gut. Ich habe jedoch festgestellt, dass Geräte vom selben Hersteller oft besser harmonieren. Besonders bei Mesh-Systemen ist es zwingend erforderlich, bei einer Marke zu bleiben. Nur so können die Funktionen wie "Seamless Roaming" oder automatische Updates reibungslos funktionieren. Wenn du also dein WLAN verbessern willst, bleibe am besten innerhalb eines Ökosystems (z. B. AVM, ASUS oder TP-Link).

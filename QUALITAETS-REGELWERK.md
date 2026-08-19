@@ -96,10 +96,24 @@ bewusst – nachgewiesen disjunkte Muster.
 ---
 
 ### length_guard.py – Längen-Korridore (Affiliate-Profi)
-| Typ | Ziel | Warnung | Selbstheilung unter … |
-|---|---|---|---|
-| posts | 1.200–2.200 Wörter | < 1.000 | 900 |
-| pillar | 2.500–4.000 Wörter | < 1.800 | 1.800 |
+| Typ | Ziel | Warnung | Selbstheilung unter … | **Zeichen-Empfehlung (Dauervorgabe)** |
+|---|---|---|---|---|
+| posts | 1.200–2.200 Wörter | < 1.000 | 900 | **6.000–10.000 Zeichen** Fließtext |
+| pillar | 2.500–4.000 Wörter | < 1.800 | 1.800 | ≈ 17.500–28.000 Zeichen |
+
+### 📌 DAUERVORGABEN Veröffentlichung (festgelegt 19.08.2026 – verbindlich)
+
+- **Blog-Launch: 08.08.2026.** Kein Artikel darf je ein Datum vor dem 08.08.2026
+  tragen. Der vor dem Launch datierte Alt-Bestand (36 Posts) wurde am 19.08.2026
+  **dauerhaft gelöscht** (inkl. Covers, Manifest, Pins, Fingerprints, interner Links).
+- **Veröffentlichungsintervall: 3 Artikel pro Woche – Mo, Mi, Fr.**
+  Haupt-Slot 08:10 MESZ (06:10 UTC), Fallback-Slots 16:10/19:40 MESZ.
+  Umgesetzt in `.github/workflows/content-engine-v2.yml` (cron `10 6 * * 1,3,5`).
+  Definition siehe `CADENCE-REPORT.md`.
+- **Empfohlene Zeichenlänge pro Blogartikel: 6.000–10.000 Zeichen** Fließtext
+  (≈ 800–1.400 Wörter; empirisch: Median 9.124 Zeichen bei 6,96 Zeichen/Wort).
+  Ausgewiesen und überwacht von `check_length.py` (Konstanten `OPT_CHARS_MIN/MAX`,
+  Env `LENGTH_OPT_CHARS_MIN/MAX`); harte Gates bleiben wortbasiert (Hoheitskarte oben).
 
 Heilung = KI ergänzt **Mehrwert-Module** (kein Fülltext!): Rechenbeispiel mit Jahr,
 typische Fehler, Checkliste, +2 FAQ – eingefügt vor Fazit/Disclaimer, nach Gates.

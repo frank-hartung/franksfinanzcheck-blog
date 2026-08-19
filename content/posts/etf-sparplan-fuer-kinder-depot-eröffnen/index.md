@@ -20,29 +20,9 @@ social_posted: true
 
 # ETF-Sparplan für Kinder: So baust du sinnvoll Vermögen auf
 
+Wenn dein Kind 18 wird, soll es einen möglichst guten Start ins Erwachsenenleben haben – finanziell, versteht sich. Das klassische Sparbuch bringt bei 2 % Zinsen kaum etwas, und die meisten Banksparpläne fressen die Rendite durch Gebühren. Ein ETF-Sparplan ist der moderne Weg: kostengünstig, renditestark und mit Steuervorteilen, die viele Eltern übersehen.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Wenn dein Kind 18 wird, soll es einen möglichst guten Start ins Erwachsenenleben haben – finanziell, versteht sich. Das klassische Sparbuch bringt bei 2 % Zinsen kaum etwas, und die meisten Banksparpläne fressen die Rendite durch Gebühren. Ein [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) ist der moderne Weg: kostengünstig, renditestark und mit Steuervorteilen, die viele Eltern übersehen.
-
-In diesem Artikel zeige ich dir, wie du den [ETF-Sparplan für dein Kind](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) Schritt für Schritt aufsetzt – von der Depot-Wahl über die Steuer-Optimierung bis zu den Fallstricken, die du unbedingt kennen solltest.
-
-
+In diesem Artikel zeige ich dir, wie du den ETF-Sparplan für dein Kind Schritt für Schritt aufsetzt – von der Depot-Wahl über die Steuer-Optimierung bis zu den Fallstricken, die du unbedingt kennen solltest.
 
 ---
 
@@ -53,7 +33,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Der größte Vorteil beim Sparen für Kinder ist die Zeit. Ein Kind, das mit 1 Jahr zu sparen beginnt, hat 17 Jahre Anlagehorizont bis zur Volljährigkeit – und danach ein ganzes Leben. Genau diese Zeit macht den [Zinseszinseffekt](../../posts/zinseszinseffekt-formel-erklaert/) so mächtig: Frühe Beiträge wirken Jahrzehnte länger als spätere.
 
-Ein Beispiel: 50 € monatlich ab Geburt, 6 % Rendite, bis zum 18. Geburtstag: rund 19.400 €. [Startest](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) du erst mit 10 Jahren, sind es nur noch rund 6.100 € – bei derselben Monatsrate. Wer spät beginnt, muss für dasselbe Ergebnis die Rate mehr als verdreifachen.
+Ein Beispiel: 50 € monatlich ab Geburt, 6 % Rendite, bis zum 18. Geburtstag: rund 19.400 €. Startest du erst mit 10 Jahren, sind es nur noch rund 6.100 € – bei derselben Monatsrate. Wer spät beginnt, muss für dasselbe Ergebnis die Rate mehr als verdreifachen.
 
 Dazu kommt der pädagogische Effekt: Ein Depot, das das Kind ab dem Teenager-Alter mitverfolgen darf, lehrt mehr über Geld als jedes Buch. Viele Banken bieten dafür kindgerechte Apps mit Sparzielen und Übersichten.
 
@@ -63,13 +43,13 @@ Die Wahl des Instruments entscheidet über das Ergebnis. Der Vergleich für 50 
 
 | Anlageform | Typische Rendite p. a. | Endwert nach 18 Jahren* | Laufende Kosten |
 |:--- |:--- |:--- |:--- |
-| Sparbuch / [Tagesgeld](../../posts/tagesgeld-zinsen-sicher-anlegen/) | 2–3 % | rund 13.000–14.300 € | Keine |
+| Sparbuch / Tagesgeld | 2–3 % | rund 13.000–14.300 € | Keine |
 | Banksparplan (aktiver Fonds) | 3–4 % **nach Kosten** | rund 14.300–15.800 € | 1,5–2,5 % pro Jahr |
 | ETF-Sparplan (Welt-ETF) | 6–7 % (historisch) | rund 19.400–21.500 € | 0,2–0,5 % pro Jahr |
 
 *\*Sparrate 50 € monatlich, monatliche Verzinsung, Werte gerundet. Historie ist keine Garantie für die Zukunft.*
 
-Der Unterschied zwischen [Tagesgeld](../../posts/tagesgeld-zinsen-sicher-anlegen/) und ETF-Sparplan liegt nach 18 Jahren bei 5.000 bis 8.000 € – und zwar bei gleichem Monatsbeitrag. Das ist kein Kleingeld: Es ist der Unterschied zwischen Führerschein-Geschenk und Studienfinanzierung.
+Der Unterschied zwischen Tagesgeld und ETF-Sparplan liegt nach 18 Jahren bei 5.000 bis 8.000 € – und zwar bei gleichem Monatsbeitrag. Das ist kein Kleingeld: Es ist der Unterschied zwischen Führerschein-Geschenk und Studienfinanzierung.
 
 Wichtig zur Ehrlichkeit: Die ETF-Rendite ist keine Garantie, sondern eine historische Erwartung. Kursschwankungen gehören dazu – aber bei 18 Jahren Anlagehorizont gleichen sie sich statistisch weitgehend aus. Wer das Risiko reduzieren will, mischt ETF und Tagesgeld (zum Beispiel 70/30).
 
@@ -97,11 +77,7 @@ So setzt du den ETF-Sparplan für dein Kind in fünf Schritten um:
 
 **Schritt 5 – Freistellungsauftrag für das Kind einrichten (5 Minuten):** Beim Broker den Sparerpauschbetrag des Kindes (1.000 €) hinterlegen. Damit bleiben die ersten 1.000 € Gewinn pro Jahr steuerfrei – der größte Steuervorteil des Kinderdepots.
 
-
-
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**C24 Bank Angebote vergleichen**](/go/tagesgeld/)
-
-
 
 ## Steuern & Freibeträge:<br>Der unterschätzte Vorteil
 
@@ -150,7 +126,6 @@ Ja – Wertpapiere sind Sondervermögen: Selbst bei einer Broker-Insolvenz gehö
 Ja, und das ist sogar steuerlich clever: Schenkungen an Enkel sind bis 200.000 € pro Person und 10 Jahre steuerfrei. Die Einzahlung läuft einfach per Überweisung auf das Verrechnungskonto des Kinderdepots.
 
 Der ETF-Sparplan für Kinder ist die logische Ergänzung zum eigenen ETF-Sparplan – und wer sein [erstes Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/) noch nicht eröffnet hat, findet dort den Einstieg. Die Steuern auf ETF-Gewinne erklären, wie du den Pauschbetrag optimal ausschöpfst. Alle Bank[ing-Themen: [Ratg](../../posts/kontowechsel-in-20-minuten-wechselservice/)Eber Konto & Karten](././pillar/konto-karten/).
-
 
 👉 **Jetzt [kostenloses Konto](../../posts/kontowechsel-in-20-minuten-wechselservice/) mit Depot vergleichen:** [**→ Jetzt vergleichen bei CHECK24**](/go/girokonto/)
 

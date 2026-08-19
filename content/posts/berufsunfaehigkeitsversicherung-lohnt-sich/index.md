@@ -20,22 +20,6 @@ social_posted: true
 
 # Berufsunfähigkeitsversicherung: Für wen sie sich 2026 lohnt
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Deine Arbeitskraft ist über zwei Millionen € wert. Wenn du gesund bleibst, verdienst du dieses Vermögen bis zur Rente. Doch was passiert bei einem schweren Schicksalsschlag? Eine Berufsunfähigkeitsversicherung schützt dich vor dem finanziellen Ruin.
 
 Sichere deine Existenz ab, bevor du an andere Investitionen denkst. Rund 30 € bis 150 € monatlich investierst du in diesen Schutz. Über 40 Jahre zahlst du so einen hohen fünfstelligen Betrag ein. Wir klären jetzt, ob sich dieser Einsatz für dich wirklich auszahlt.
@@ -46,8 +30,6 @@ Sichere deine Existenz ab, bevor du an andere Investitionen denkst. Rund 30 €
 * Psychische Erkrankungen sind heute der Hauptgrund für Berufsunfähigkeit.
 * Die staatliche Hilfe reicht im Ernstfall kaum für die Miete.
 * Früher Abschluss spart dir dauerhaft hohe Versicherungsbeiträge.
-
-
 
 ---
 
@@ -76,7 +58,7 @@ Der Staat hilft dir in dieser Situation nur sehr wenig. Die gesetzliche Erwerbsm
 
 Ob eine BU lohnt sich, erkennst du an deiner Abhängigkeit vom Gehalt. Fachkräfte mit teurer Ausbildung wie Ärzte oder Ingenieure brauchen diesen Schutz zwingend. Wenn sie ihren speziellen Job verlieren, bricht das gesamte finanzielle Kartenhaus zusammen. Ein einfacher Jobwechsel ist oft nicht ohne massive Gehaltseinbußen möglich.
 
-Selbstständige und Freiberufler tragen ein besonders hohes Risiko. Sie haben keinen Arbeitgeber, der im Krankheitsfall monatelang Lohn fortzahlt. Eine betriebliche [Absicherung](../../posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/) fehlt ihnen meistens komplett. Für sie ist die Einkommensabsicherung deshalb die wichtigste Versicherung überhaupt.
+Selbstständige und Freiberufler tragen ein besonders hohes Risiko. Sie haben keinen Arbeitgeber, der im Krankheitsfall monatelang Lohn fortzahlt. Eine betriebliche Absicherung fehlt ihnen meistens komplett. Für sie ist die Einkommensabsicherung deshalb die wichtigste Versicherung überhaupt.
 
 Junge Familien sollten das Haupteinkommen unbedingt absichern. Fällt der Verdiener aus, leidet die ganze Familie unter dem Geldmangel. Ein früher Abschluss ist für junge Eltern zudem sehr günstig. Die monatlichen Beiträge bleiben dann über die gesamte Laufzeit niedrig.
 
@@ -92,10 +74,7 @@ Manche Besserverdiener profitieren von starken betrieblichen Versorgungswerken. 
 
 Menschen kurz vor dem Ruhestand brauchen keine neue Versicherung mehr. Wer in fünf Jahren in Rente geht, überbrückt die Zeit oft mit Ersparnissen. Die hohen Beiträge für ältere Einsteiger stehen hier in keinem Verhältnis zum Nutzen. Nutze dein Geld in diesem Alter lieber für den [Vermögensaufbau](../../posts/sparquote-berechnen-und-steigern/).
 
-
-
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)
-
 
 ## Kostencheck:<br>So findest du die günstigste BU
 
@@ -110,7 +89,7 @@ Die Preise für eine monatliche Rente von 1.500 € variieren 2026 stark. Ein B
 
 Vergleiche verschiedene Anbieter gründlich vor deiner Unterschrift. Zwischen dem günstigsten und teuersten Tarif liegen oft 40 % Preisunterschied. Nutze dafür unabhängige Makler oder bewährte Vergleichsportale im Internet. Achte dabei immer auf die Details im Kleingedruckten der Verträge.
 
-Kombiniere deine Policen klug, um weitere Rabatte zu erhalten. Manchmal gewährt dein Anbieter Nachlässe, wenn du auch die [Kfz-Versicherung](../../posts/kfz-versicherung-wechseln/) dort führst. Schließe aber niemals einen schlechten Vertrag ab, nur weil er im Paket günstig wirkt. Die Qualität der Bedingungen steht bei der Arbeitskraftabsicherung immer an erster Stelle.
+Kombiniere deine Policen klug, um weitere Rabatte zu erhalten. Manchmal gewährt dein Anbieter Nachlässe, wenn du auch die Kfz-Versicherung dort führst. Schließe aber niemals einen schlechten Vertrag ab, nur weil er im Paket günstig wirkt. Die Qualität der Bedingungen steht bei der Arbeitskraftabsicherung immer an erster Stelle.
 
 ## Fazit: Berufsunfähigkeitsversicherung: Für wen sie sich 2026 lohnt schlau nutzen
 
@@ -134,7 +113,7 @@ Diese Versicherung dient eher als Notlösung für Risikoberufe. Sie ersetzt kein
 
 ## Die BU-Rente richtig dimensionieren
 
-Wie [viel Geld](../../posts/notgroschen-aufbauen-wie-viel-reicht/) brauchst du im Ernstfall wirklich jeden Monat? Deine Rente sollte etwa 75 % bis 85 % deines aktuellen Nettoeinkommens betragen. So deckst du deine Fixkosten und hast Puffer für unvorhergesehene Ausgaben. Berücksichtige dabei auch eventuelle staatliche Rentenansprüche bei Erwerbsminderung.
+Wie viel Geld brauchst du im Ernstfall wirklich jeden Monat? Deine Rente sollte etwa 75 % bis 85 % deines aktuellen Nettoeinkommens betragen. So deckst du deine Fixkosten und hast Puffer für unvorhergesehene Ausgaben. Berücksichtige dabei auch eventuelle staatliche Rentenansprüche bei Erwerbsminderung.
 
 Bei einem Nettoverdienst von 2.800 € solltest du etwa 2.200 € absichern. Wenn der Staat 900 € zahlt, muss die private BU 1.300 € leisten. Höhere Renten führen zwangsläufig zu höheren monatlichen Beiträgen. Starte bei knappem Budget lieber mit einer kleineren Summe und steigere dich später.
 
@@ -153,7 +132,7 @@ Der beste Zeitpunkt für den Abschluss ist so früh wie möglich. In jungen Jahr
 **Was passiert bei Berufswechsel?**
 Dein Schutz bleibt bei einem guten Vertrag in vollem Umfang bestehen. Wichtig ist der Verzicht auf die abstrakte Verweisung im Regelwerk. Informiere deine Versicherung trotzdem über einen neuen Job. Manchmal sinkt dein Beitrag sogar, wenn der neue Beruf weniger riskant ist.
 
-Deine [finanzielle Sicherheit](../../posts/notgroschen-aufbauen-wie-viel-reicht/) beginnt immer mit der [Absicherung](../../posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/) existenzieller Risiken. Zuerst brauchst du eine [Haftpflicht](../../posts/privathaftpflicht-warum-pflicht-kosten/), danach folgt sofort der Einkommensschutz durch die BU. Oft ist sie wichtiger für deine Zukunft als eine private Rentenversicherung. Wenn du deine [Policen sortiert](../../posts/versicherungen-kuendigen-diese-5-policen/), sparst du viel Geld für den Vermögensaufbau. Investiere das gesparte Kapital sinnvoll in die [Altersvorsorge mit ETFs](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/). Mehr Tipps findest du in unserem [Ratgeber Versicherungen](../../pillar/versicherungen/).
+Deine finanzielle Sicherheit beginnt immer mit der Absicherung existenzieller Risiken. Zuerst brauchst du eine Haftpflicht, danach folgt sofort der Einkommensschutz durch die BU. Oft ist sie wichtiger für deine Zukunft als eine private Rentenversicherung. Wenn du deine [Policen sortiert](../../posts/versicherungen-kuendigen-diese-5-policen/), sparst du viel Geld für den Vermögensaufbau. Investiere das gesparte Kapital sinnvoll in die Altersvorsorge mit ETFs. Mehr Tipps findest du in unserem [Ratgeber Versicherungen](../../pillar/versicherungen/).
 
 👉 **Jetzt Versicherungen vergleichen und sparen:** [**→ Jetzt vergleichen bei CHECK24**](/go/kfz-versicherung/)
 
