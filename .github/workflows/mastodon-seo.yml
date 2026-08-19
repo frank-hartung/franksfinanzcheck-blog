@@ -46,12 +46,14 @@ jobs:
           MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
         run: |
           ARGS=()
+          echo "inputs dry_run='${{ github.event.inputs.dry_run }}' delete_dupes='${{ github.event.inputs.delete_dupes }}'"
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             ARGS+=(--dry-run)
           fi
           if [ "${{ github.event.inputs.delete_dupes }}" = "true" ]; then
             ARGS+=(--delete-dupes)
           fi
+          echo "starte: python3 scripts/mastodon_seo.py ${ARGS[*]}"
           python3 scripts/mastodon_seo.py "${ARGS[@]}"
 
       - name: Report committen
