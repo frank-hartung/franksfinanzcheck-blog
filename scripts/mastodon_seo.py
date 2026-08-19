@@ -205,6 +205,7 @@ def heal_one(status: dict, slug: str, slug_dir: Path, fm: dict, issues: list[str
     need_text = any(
         i.startswith("Hashtag") or i.startswith("zu wenige") or i.startswith("kein kanon")
         or i.startswith("Affiliate") or i.startswith("zu lang") or i.startswith("Sprache")
+        or "Keyword" in i or i.startswith("Primär")
         for i in issues
     )
     need_cover = "kein Cover" in issues
