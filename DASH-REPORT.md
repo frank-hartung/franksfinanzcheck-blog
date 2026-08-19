@@ -1,11 +1,26 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-08-19 15:20 UTC · Modus: FIX+KI
+**Stand:** 2026-08-19 15:58 UTC · Modus: REPORT
 
-## ✅ Automatisch korrigiert (2 Dateien)
+🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
 
-- `content/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/index.md`: Regel-Fixes 9, KI-Umformulierungen 0
-- `content/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/index.md`: Regel-Fixes 7, KI-Umformulierungen 0
+## 🎓 Stil-Hinweise (Ebene 2, nur Info bzw. mit --ai aktiv)
+
+- `content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md` Zeile 70: S3-Konjunktion
+- `content/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/index.md` Zeile 79: S1-Doppelschub
+- `content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md` Zeile 25: S3-Konjunktion
+- `content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md` Zeile 40: S3-Konjunktion
+- `content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md` Zeile 72: S3-Konjunktion
+- `content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md` Zeile 74: S3-Konjunktion
+- `content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md` Zeile 78: S3-Konjunktion
+- `content/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/index.md` Zeile 28: S3-Konjunktion
+- `content/pillar/frugalismus/index.md` Zeile 42: S1-Doppelschub
+- `content/pillar/internet-dsl/index.md` Zeile 14: S3-Konjunktion
+- `content/pillar/mietwagen/index.md` Zeile 14: S3-Konjunktion
+- `content/pillar/mietwagen/index.md` Zeile 25: S3-Konjunktion
+- `content/pillar/mietwagen/index.md` Zeile 37: S3-Konjunktion
+- `content/pillar/mietwagen/index.md` Zeile 45: S3-Konjunktion
+- `content/pillar/strom-sparen/index.md` Zeile 14: S3-Konjunktion
 
 ---
 _Deterministisch: Gedankenstrich-Typ, Bis-Striche, Doppelminus · KI-Schiedsrichter (S1/S3) nur mit --ai. Geschützt: Front-Matter, Listen, Tabellen, Überschriften, URLs, Code._
