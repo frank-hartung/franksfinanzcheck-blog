@@ -6,6 +6,11 @@
 
 ## 🟢 2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck
 
+> ⚠️ **KADENZ-BEREINIGUNG 19.08.2026:** Dieser Report bezieht sich auf den Alt-Bestand.
+> Die genannten Artikel (Sa/So/Di-Termine + Evergreen-Bestand) wurden vollständig gelöscht –
+> der Blog zeigt jetzt nur noch Mo/Mi/Fr-Artikel (Details: `CADENCE-REPORT.md`).
+
+
   verlagsreif ✅ (G1–G5 bestanden)
 
 ## 🟢 2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft

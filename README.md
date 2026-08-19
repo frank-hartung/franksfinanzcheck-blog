@@ -2,7 +2,7 @@
 
 Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung** – gebaut mit Hugo + PaperMod, hostbar kostenlos auf GitHub Pages oder Cloudflare Pages. Die Themen sind abgestimmt auf den **Pinterest-Masterplan** (FranksFinanzcheck, August 2026): Jeder Educational-Pin bekommt einen passenden Blog-Artikel, jeder Transactional-Pin eine eigene CHECK24-Kategorie.
 
-> ⚠️ **Hinweis zur Automatisierung (Stand 13.08.2026):** Der Bot veröffentlicht Artikel automatisch, aber NUR wenn sie mehrere harte Qualitäts- und SEO-Gates bestehen (Profi-Qualitäts-Gate, `publish_gate.py`, `quality_score.py` ≥ 0,85) – siehe Abschnitt „Vollautomatik ohne manuelles Eingreifen" unten. Kein manueller Freigabe-Schritt mehr nötig; die Publikationsfrequenz wird zusätzlich automatisch an das Domain-Alter angepasst, um „Scaled Content Abuse"-Risiken bei einer jungen Domain zu vermeiden.
+> ⚠️ **Hinweis zur Automatisierung (Stand 13.08.2026):** Der Bot veröffentlicht Artikel automatisch, aber NUR wenn sie mehrere harte Qualitäts- und SEO-Gates bestehen (Profi-Qualitäts-Gate, `publish_gate.py`, `quality_score.py` ≥ 0,85) – siehe Abschnitt „Vollautomatik ohne manuelles Eingreifen" unten. Kein manueller Freigabe-Schritt mehr nötig; die Publikationsfrequenz ist fix auf Mo/Mi/Fr mit 2–3 Artikeln pro Tag begrenzt, um „Scaled Content Abuse"-Risiken bei einer jungen Domain zu vermeiden (DAUERVORGABE, siehe CADENCE-REPORT.md).
 
 ---
 
@@ -13,8 +13,8 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 | Hugo-Blog | Theme PaperMod (SEO-fertig: Meta-Tags, OpenGraph, JSON-LD, Sitemap, robots.txt, Canonical) |
 | Pflichtseiten | Impressum (mit Platzhaltern), Datenschutz, Über – Werbekennzeichnung inklusive |
 | 2 Beispiel-Artikel | Stromwechsel & Kfz-Versicherung (dienen als Vorlage/Struktur) |
-| Themenpool | `data/topics.yaml` – 175 Themen über alle 6 Pillars (repariert & erweitert 13.08.2026, reicht bei 3-5 Artikeln/Woche über ein halbes bis ganzes Jahr), inkl. themenspezifischer CHECK24-Links |
-| 🤖 Content-Bot | `scripts/generate_drafts.py` – erzeugt täglich frische, einzigartige Artikel-Entwürfe (Titel, Meta-Description, Keywords, strukturiertes Markdown, FAQ, Affiliate-CTA) |
+| Themenpool | `data/topics.yaml` – 175 Themen über alle 6 Pillars (repariert & erweitert 13.08.2026; bei 2–3 Artikeln an Mo/Mi/Fr reicht der Pool über ein halbes Jahr), inkl. themenspezifischer CHECK24-Links |
+| 🤖 Content-Bot | `scripts/generate_drafts.py` – erzeugt an Publikationstagen (Mo/Mi/Fr) frische, einzigartige Artikel-Entwürfe (Titel, Meta-Description, Keywords, strukturiertes Markdown, FAQ, Affiliate-CTA) |
 | ⏰ Täglicher Job | `.github/workflows/daily-content.yml` – läuft automatisch um 07:00 Uhr (Sommerzeit) |
 | 🚀 Deployment | `.github/workflows/deploy.yml` – baut & veröffentlicht kostenlos auf GitHub Pages |
 | 📤 Publish-Helfer | `scripts/publish.py` – Entwürfe mit einem Befehl veröffentlichen |
@@ -23,25 +23,25 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 
 ## ⚡ Vollautomatik (kein tägliches Pushen nötig)
 
-Der Workflow **„Automatische Content-Generierung"** läuft abgestimmt auf deine Pinterest-Zeiten:
+Der Workflow **„Content-Engine v2“** veröffentlicht **nur montags, mittwochs und freitags – 2 bis 3 Artikel pro Publikationstag** (DAUERVORGABE, siehe `CADENCE-REPORT.md`):
 
 | Uhrzeit (DE) | Was passiert |
 |---|---|
-| **08:00** | Deine Pinterest-Pins erscheinen |
-| **08:10** | Der Bot generiert 1 einzigartigen Artikel aus einem freien Pin-Thema und VERÖFFENTLICHT ihn automatisch |
-| **19:30** | Deine abendlichen Pinterest-Pins erscheinen |
-| **19:40** | Der Bot generiert + veröffentlicht den 2. Artikel des Tages |
+| **08:10** | Haupt-Slot: Die Engine füllt das Tagesziel (2–3 Artikel) aus dem Pinterest-Plan bzw. Themenpool auf und VERÖFFENTLICHT sie automatisch |
+| **16:10 / 19:40** | Fallback-Slots: greifen nur, wenn der Haupt-Slot gescheitert ist (Selbstheilung) |
 
 **Wie es funktioniert:**
 - Themen kommen **direkt aus deinem Pinterest-Plan** (`data/pinterest_plan.yaml`, 62 Pins)
-- Der Artikel wird **automatisch veröffentlicht** (`draft: false`) – kein manueller Schritt
+- Artikel werden **automatisch veröffentlicht** (`draft: false`) – kein manueller Schritt
 - Sind alle Pin-Themen abgedeckt, greift automatisch der erweiterte Themenpool (`topics.yaml`)
 - Einzigartigkeits-Check + Anti-Copy-Prompt stellen sicher, dass kein Pin-Text 1:1 kopiert wird
-- Max. 2 Artikel/Tag (1 pro Lauf) – Google-konform, kein Content-Spam
+- **Harter Wochentags-Guard:** auch manuelle Workflow-Starts veröffentlichen an Di/Do/Sa/So nichts (Notfall: `FORCE_PUBLISH_ANY_DAY=1` setzen)
+- Tagesmenge steuerbar: `MIN_ARTIKEL_PRO_TAG` (Default 2) / `MAX_ARTIKEL_PRO_TAG` (Default 3)
+- Die Engine erzwingt mindestens 2 Artikel pro Publikationstag (Dauervorgabe-Floor); empfohlen: Repository-Variablen `MAX_ARTIKEL_PRO_TAG=3` / `MIN_ARTIKEL_PRO_TAG=2` setzen
 
 **Steuerung:**
-- **Stoppen (Kill-Switch):** GitHub → Actions → „Automatische Content-Generierung" → Disable workflow
-- **Manuell starten:** GitHub → Actions → „Run workflow"
+- **Stoppen (Kill-Switch):** GitHub → Actions → „Content-Engine v2“ → Disable workflow
+- **Manuell starten:** GitHub → Actions → „Run workflow“
 - **Wieder auf Entwurfs-Modus:** Im Workflow `AUTO_PUBLISH: "0"` setzen (dann musst du wieder freigeben)
 
 **🔗 Affiliate-Links ändern – so geht's (wichtig!):**
@@ -67,7 +67,7 @@ Hashtags) über die Pinterest API v5. Jeder Artikel wird nur einmal gepinnt
 
 Der Workflow **„Wöchentliche SEO-Optimierung"** läuft jeden Mittwoch 07:00 Uhr (DE):
 
-1. **SEO-Audit** (`python3 scripts/seo_audit.py`): prüft alle 30+ Artikel auf
+1. **SEO-Audit** (`python3 scripts/seo_audit.py`): prüft alle Artikel auf
    Titel-Länge (30-65 Zeichen), Meta-Description (70-165), Keywords, H2-Struktur,
    Alt-Texte, interne Links, Wortanzahl (min. 300) und Sitemap-Konsistenz.
    Bei Problemen → automatisches GitHub-Issue mit Details.

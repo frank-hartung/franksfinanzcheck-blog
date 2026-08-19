@@ -1,11 +1,11 @@
 ---
-title: "WLAN verbessern: So bringst du Speed in jede Ecke – DSL hac…"
+title: "WLAN verbessern: So bringst du Speed in jede Ecke"
 description: "Du willst dein WLAN verbessern? Ich zeige dir, ob ein Repeater oder Mesh-WLAN für schnelles Internet zu Hause besser ist. Plus: Die besten DSL Hacks!"
 date: 2026-08-14T09:43:18Z
 draft: false
 tags: ["Wlan verbessern", "DSL-Hacks", "Schnelles Internet zuhause"]
 categories: ["Ratgeber"]
-pillar: "konto-karten"
+pillar: "internet-dsl"
 keywords: ["wlan verbessern", "dsl hacks", "schnelles internet zuhause"]
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
@@ -24,9 +24,9 @@ social_posted: true
 
 # WLAN verbessern: So bringst du Speed in jede Ecke
 
-Kennst du das Gefühl, wenn der Ladebalken beim Serien-Streaming plötzlich einfriert? Du verlierst die Verbindung genau in dem Moment, in dem es am spannendsten wird. Ich kenne diesen Frust aus meinem eigenen Wohnzimmer. Lange Zeit habe ich mich mit Funklöchern in der Küche und Verbindungsabbrüchen im Schlafzimmer herumgeschlagen. Mein Ziel war klar: Ich wollte mein [WLAN verbessern](../../posts/wlan-verbessern-ohne-neue-hardware/) und im ganzen Haus eine stabile Verbindung genießen. 
+Kennst du das Gefühl, wenn der Ladebalken beim Serien-Streaming plötzlich einfriert? Du verlierst die Verbindung genau in dem Moment, in dem es am spannendsten wird. Ich kenne diesen Frust aus meinem eigenen Wohnzimmer. Lange Zeit habe ich mich mit Funklöchern in der Küche und Verbindungsabbrüchen im Schlafzimmer herumgeschlagen. Mein Ziel war klar: Ich wollte mein WLAN verbessern und im ganzen Haus eine stabile Verbindung genießen. 
 
-Ich teile meine Erfahrungen mit dir und zeige dir, welcher Weg für dich der richtige ist. Du willst dein [WLAN verbessern](../../posts/wlan-verbessern-ohne-neue-hardware/) und im ganzen Haus eine stabile Verbindung genießen. Ich erkläre dir, wie du das erreichen kannst. Ein stabiles Heimnetz ist heute kein Luxus mehr, sondern die Basis für Homeoffice, Entertainment und Smart Home. Wer hier am falschen Ende spart, zahlt oft mit Zeit und Nerven drauf.
+Ich teile meine Erfahrungen mit dir und zeige dir, welcher Weg für dich der richtige ist. Du willst dein WLAN verbessern und im ganzen Haus eine stabile Verbindung genießen. Ich erkläre dir, wie du das erreichen kannst. Ein stabiles Heimnetz ist heute kein Luxus mehr, sondern die Basis für Homeoffice, Entertainment und Smart Home. Wer hier am falschen Ende spart, zahlt oft mit Zeit und Nerven drauf.
 
 ---
 
@@ -98,7 +98,7 @@ Am Ende ist es eine Kombination aus der richtigen Hardware und einer klugen Plat
 
 Es gibt nichts Nervigeres als ein ruckelndes Bild in einer wichtigen Videokonferenz. Nimm dir die Zeit, deine Umgebung zu analysieren. Manchmal reicht ein kleiner Standortwechsel des Routers – weg vom Boden, hin auf ein Regal – schon aus, um die Reichweite um 20% zu steigern. In anderen Fällen ist die Investition in moderne Technik wie Wi-Fi 6 der einzige Weg, um langfristig Ruhe zu haben.
 
-**Weiterlesen:** [Ratgeber Konto Karten](../../pillar/konto-karten/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/)
 ## Häufige Fragen
 
 ### Hilft ein Alufolien-Reflektor wirklich?

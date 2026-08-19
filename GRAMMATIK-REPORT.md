@@ -4,6 +4,11 @@
 
 ## Funde
 
+> ⚠️ **KADENZ-BEREINIGUNG 19.08.2026:** Dieser Report bezieht sich auf den Alt-Bestand.
+> Die genannten Artikel (Sa/So/Di-Termine + Evergreen-Bestand) wurden vollständig gelöscht –
+> der Blog zeigt jetzt nur noch Mo/Mi/Fr-Artikel (Details: `CADENCE-REPORT.md`).
+
+
 ### 2026-08-11-gaspreisschock-so-nutzt-du-die-preisgarantie-gas-richtig/index.md
 - ⚠️ „Ein“ → „ein“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)
 - ⚠️ „etzt “ → „jetzt“ – Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben. (CASING)

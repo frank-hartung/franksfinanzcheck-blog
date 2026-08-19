@@ -277,15 +277,18 @@ SILO „STROM SPAREN"
 | Vorgabe | Wert | Umsetzung |
 |---|---|---|
 | **Blog-Launch** | **08.08.2026** – kein Artikel mit Datum davor; vor dem Launch datierter Alt-Bestand (36 Posts) am 19.08.2026 dauerhaft gelöscht | Frontmatter-`date:` ≥ 2026-08-08 |
-| **Veröffentlichungsintervall** | **3 Artikel/Woche – Mo, Mi, Fr** · Haupt-Slot 08:10 MESZ, Fallbacks 16:10/19:40 MESZ | `content-engine-v2.yml` (cron `10 6 * * 1,3,5`), Definition in `CADENCE-REPORT.md` |
+| **Bestands-Kadenz** | Blog zeigt Artikel **nur an Mo/Mi/Fr**: 38 Off-Kadenz-Posts (08.08. Sa, 08.09. So, 08.11. Di + 32 Evergreen vom 09.08.) am 19.08.2026 vollständig gelöscht – Bestand: 6 Posts (je 2 an Mo 08.10., Mi 08.12., Fr 08.14.) | `CADENCE-REPORT.md` Regel 3 |
+| **Veröffentlichungsintervall** | **Nur Mo, Mi, Fr – 2–3 Artikel pro Publikationstag** (≈ 6–9/Woche) · Haupt-Slot 08:10 MESZ, Fallbacks 16:10/19:40 MESZ · harter Wochentags-Guard + 2er-Floor im Skript | `content-engine-v2.yml` (cron `10 6 * * 1,3,5`), `engine_generate.py` (`PUBLICATION_DAYS`, Floor für `MIN/MAX_ARTIKEL_PRO_TAG`), Definition in `CADENCE-REPORT.md` |
 | **Empfohlene Zeichenlänge pro Blogartikel** | **6.000–10.000 Zeichen** Fließtext (≈ 800–1.400 Wörter; Median-Bestand: 9.124 Zeichen) | `check_length.py` (`OPT_CHARS_MIN/MAX`, Env `LENGTH_OPT_CHARS_MIN/MAX`) |
 | Pillar-Seiten (keine Blogartikel) | 2.500–4.000 Wörter (≈ 17.500–28.000 Zeichen) | `length_guard.py` (Hoheitskarte `QUALITAETS-REGELWERK.md`) |
 
 ## 4.1 Die vollautomatisierte Content-Pipeline (IST)
 
 ```
-3× PRO WOCHE Mo/Mi/Fr 08:10 MESZ (content-engine-v2.yml – Dauervorgabe, s. 4.0)
-  Themenfindung (topics.yaml-Pool, 149 Themen, refill bei Leerung)
+MO/MI/FR 08:10 MESZ (content-engine-v2.yml – Dauervorgabe, s. 4.0)
+  2–3 Artikel pro Publikationstag (MIN/MAX_ARTIKEL_PRO_TAG, Default 2–3;
+  harter Wochentags-Guard: Di/Do/Sa/So wird nie veröffentlicht)
+  Themenfindung (topics.yaml-Pool, 175 Themen, refill bei Leerung)
   → Artikel generieren (generate_drafts.py, KI mit Groq/Gemini, 1.200+ Wörter)
   → Qualitäts-Pipeline:
        Rechtschreibung (spellcheck.py inkl. Check 3b/3c)
@@ -365,7 +368,7 @@ Body:
 - **Meta-Description:** Du verlierst monatlich den Überblick? So führst du ein Haushaltsbuch, das wirklich funktioniert – mit App, Excel oder Stift. Inkl. kostenloser Vorlage.
 - **Gliederung (H2):** Warum ein Haushaltsbuch den größten Hebel hat · Methode 1: Die App (Vor- & Nachteile) · Methode 2: Excel-Vorlage · Methode 3: Stift & Papier · So kategorisierst du Ausgaben richtig · Der 30-Tage-Startplan · Häufige Fehler beim Haushaltsbuch
 - **FAQ:** Welche App ist am besten? / Wie viel Zeit kostet Führen pro Woche? / Was bringt ein Haushaltsbuch wirklich?
-- **Interne Links:** `haushaltsbuch-fuehren-app-excel-oder-stift`, `impulskaeufe-vermeiden-7-psychologische-tricks`, `monatsbudget-erstellen-schritt-fuer-schritt`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Verbraucherzentrale (Haushaltsbuch-Vorlage), Finanztip (Budget-Tipps), Stiftung Warentest (Banking-Apps-Test)
 - **Affiliate-CTA:** Generisch CHECK24 (Konto-Check) → `deep=c24bank&cat=14`
 
@@ -374,7 +377,7 @@ Body:
 - **Meta-Description:** 60 % aller Käufe sind Impulskäufe. Diese 7 psychologischen Tricks helfen dir, unnötige Ausgaben sofort zu stoppen – ohne Spaßverzicht.
 - **Gliederung (H2):** Warum kaufen wir impulsiv? · Trick 1: Die 48-Stunden-Regel · Trick 2: Einkaufsliste & Budget-Cash · Trick 3: Newsletter abbestellen · Trick 4: Warenkorb-Sperre · Trick 5: Kosten pro Nutzung rechnen · Trick 6: Trigger erkennen · Trick 7: Belohnung umlenken · Was das im Jahr bringt
 - **FAQ:** Was sind typische Impulskäufe? / Wie überwinde ich Kaufreiz im Laden? / Helfen Kreditkarten-Hacks?
-- **Interne Links:** `haushaltsbuch-fuehren-app-excel-oder-stift`, `impulskaeufe-vermeiden-7-psychologische-tricks`, `monatsbudget-erstellen-schritt-fuer-schritt`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Verbraucherzentrale (Konsumkompetenz), Destatis (Konsumausgaben), Stiftung Warentest (Geldratgeber)
 - **Affiliate-CTA:** Generisch CHECK24
 
@@ -383,7 +386,7 @@ Body:
 - **Meta-Description:** In 6 Schritten zum Monatsbudget: So planst du Fixkosten, Sparen und Spaß realistisch – mit fertiger Vorlage zum Sofort-Download.
 - **Gliederung (H2):** Warum ein Budget ohne Plan scheitert · Schritt 1: Einnahmen erfassen · Schritt 2: Fixkosten auflisten · Schritt 3: Variable Kosten ehrlich schätzen · Schritt 4: Sparziel festlegen · Schritt 5: Budget-Kategorien befüllen · Schritt 6: Monatlich nachjustieren · Die 50-30-20-Variante als Startpunkt
 - **FAQ:** Wie viel sollte ich monatlich sparen? / Was tun bei Budget-Überschreitung? / Brauche ich eine App dafür?
-- **Interne Links:** `haushaltsbuch-fuehren-app-excel-oder-stift`, `impulskaeufe-vermeiden-7-psychologische-tricks`, `monatsbudget-erstellen-schritt-fuer-schritt`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Verbraucherzentrale (Haushaltsrechner), Finanztip (Budgetierung), Bundesbank (Geld & Haushalt)
 - **Affiliate-CTA:** Generisch CHECK24
 
@@ -392,7 +395,7 @@ Body:
 - **Meta-Description:** Deine Sparquote verrät, wie schnell du Vermögen aufbaust. So berechnest du sie richtig und steigerst sie Schritt für Schritt auf 30 %.
 - **Gliederung (H2):** Was ist die Sparquote und warum zählt sie? · Formel & Rechenbeispiel · Deine aktuelle Quote ermitteln · Die 4 Stellschrauben (Einnahmen, Fixkosten, Variable, Automatisierung) · Gehaltserhöhung = Sparquote? · Sparquote bei niedrigem Einkommen · Der 12-Monats-Plan von 5 % auf 30 %
 - **FAQ:** Was ist eine gute Sparquote? / Zählt die Tilgung zur Sparquote? / Wie automatisiere ich Sparen?
-- **Interne Links:** `haushaltsbuch-fuehren-app-excel-oder-stift`, `impulskaeufe-vermeiden-7-psychologische-tricks`, `monatsbudget-erstellen-schritt-fuer-schritt`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Stiftung Warentest (Sparen & Anlegen), Finanztip (Sparquote), Bundesbank (Geldpolitik & Sparen)
 - **Affiliate-CTA:** Generisch CHECK24 (Depot/Tagesgeld)
 
@@ -401,7 +404,7 @@ Body:
 - **Meta-Description:** Bis zu 300 € monatlich extra: Diese 10 Nebenverdienst-Ideen funktionieren 2026 wirklich – mit Steuer-Regeln und realistischen Verdienst-Spannen.
 - **Gliederung (H2):** Lohnt sich ein Nebenjob überhaupt? · Ideen 1–3: Digital (Freelance, Content, Handmade) · Ideen 4–6: Flexibel (Lieferung, Nachhilfe, Umzüge) · Ideen 7–8: Kapitalbasiert (Vermietung, Dividenden) · Ideen 9–10: Skalierbar (Info-Produkte, Coaching) · Steuerfreibetrag & Anmeldung · So vermeidest du den Nebenjob-Trugschluss
 - **FAQ:** Wie viel darf ich steuerfrei dazuverdienen? / Brauche ich ein Gewerbe? / Was bringt am schnellsten Geld?
-- **Interne Links:** `haushaltsbuch-fuehren-app-excel-oder-stift`, `impulskaeufe-vermeiden-7-psychologische-tricks`, `monatsbudget-erstellen-schritt-fuer-schritt`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Finanzamt/BZSt (Freibeträge), Verbraucherzentrale (Nebenjobs), Arbeitsagentur (Minijob-Zentrale)
 - **Affiliate-CTA:** Generisch CHECK24
 
@@ -412,7 +415,7 @@ Body:
 - **Meta-Description:** Arbeitspreis, Bonus, Preisgarantie – ein Stromvergleich verwirrt. So erkennst du den wirklich günstigsten Tarif in 20 Minuten und wechselst sicher.
 - **Gliederung (H2):** Warum Vergleichsportale unterschiedliche Preise zeigen · Die 4 wichtigsten Kennzahlen (Arbeitspreis, Grundpreis, Bonus, Garantie) · Versteckte Kosten erkennen · Neukunden-Boni richtig einrechnen · Preisgarantie: sinnvoll oder unnötig? · So wechselst du ohne Risiko (Kündigung übernimmt der neue Anbieter) · Was du bei Ökostrom beachten solltest
 - **FAQ:** Ist der Wechsel wirklich kostenlos? / Was passiert mit meiner Kündigung? / Wie lange dauert der Wechsel?
-- **Interne Links:** `2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen`, `2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen`, `balkonkraftwerk-2026-lohnt-sich`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Bundesnetzagentur (Strompreis-Monitor), Verbraucherzentrale (Tarifwechsel), CHECK24 Ratgeber
 - **Affiliate-CTA:** CHECK24 Strom → `deep=stromanbieter-wechseln&cat=1`
 
@@ -421,7 +424,7 @@ Body:
 - **Meta-Description:** Kühlschrank und Gefriertruhe sind Dauerläufer. Mit 7 Einstellungen und Gewohnheiten sparst du bis zu 80 € Strom im Jahr.
 - **Gliederung (H2):** Warum Kühlgeräte bis zu 20 % des Haushaltsstroms fressen · Die richtige Temperatur (7 °C / −18 °C) · Standort & Abstand · Abtauen & Eis vermeiden · Tür-Verhalten & Befüllung · Altgerät vs. Effizienzklasse A · Wann sich ein Neukauf lohnt (Amortisation)
 - **FAQ:** Welche Temperatur ist optimal? / Lohnt sich ein neuer Kühlschrank? / Was kostet ein Kühlschrank im Jahr?
-- **Interne Links:** `2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen`, `2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen`, `balkonkraftwerk-2026-lohnt-sich`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** EU-Energielabel (ec.europa.eu), Verbraucherzentrale (Gerätestrom), ÖKO-TEST (Kühlschrank-Test)
 - **Affiliate-CTA:** CHECK24 Strom → `deep=stromanbieter-wechseln&cat=1`
 
@@ -430,7 +433,7 @@ Body:
 - **Meta-Description:** Heizen ist der größte Energieposten. Diese 10 Maßnahmen senken deine Heizkosten spürbar – viele amortisieren sich schon in einer Saison.
 - **Gliederung (H2):** Wo die Heizkosten wirklich entstehen · Maßnahmen 1–4: Ohne Kosten (Heizkörper frei, richtig lüften, Thermostat, Türen zu) · Maßnahmen 5–7: Kleine Investition (Dichtungen, Thermostat-Tausch, Reflexionsfolie) · Maßnahmen 8–10: Größer denken (Hydraulischer Abgleich, Heizkurve, Dämmung) · Die Amortisations-Tabelle · Förderung durch die BEG
 - **FAQ:** Welche Raumtemperatur ist optimal? / Was bringt ein Thermostat-Tausch? / Lohnt sich der Heizungstausch 2026?
-- **Interne Links:** `2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen`, `2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen`, `balkonkraftwerk-2026-lohnt-sich`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** BMWK (Heizen & Energieeffizienz), Verbraucherzentrale (Heizkosten), CO2-online/Heizspiegel
 - **Affiliate-CTA:** CHECK24 Gas → `deep=gasanbieter-wechseln&cat=3`
 
@@ -439,7 +442,7 @@ Body:
 - **Meta-Description:** Nachtspeicherheizungen gelten als Stromfresser. Ob sich ein Wechsel 2026 lohnt und welche Alternativen es gibt – mit Rechenbeispiel.
 - **Gliederung (H2):** So funktioniert eine Nachtspeicherheizung · Was sie wirklich kostet (Strom vs. Gas vs. Wärmepumpe) · Das Wärmepumpen-Förderprogramm · Der Sanierungsfahrplan in 5 Schritten · Miete vs. Eigentum: Wer zahlt? · Rechenbeispiel: 70 m² Wohnung
 - **FAQ:** Ist die Nachtspeicherheizung verboten? / Was kostet der Austausch? / Gibt es Förderung?
-- **Interne Links:** `2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen`, `2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen`, `balkonkraftwerk-2026-lohnt-sich`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** BMWK (BEG-Förderung), Verbraucherzentrale (Heizungswechsel), Stiftung Warentest (Wärmepumpen)
 - **Affiliate-CTA:** CHECK24 Gas/Strom → `deep=gasanbieter-wechseln&cat=3`
 
@@ -448,7 +451,7 @@ Body:
 - **Meta-Description:** Balkonkraftwerke sind günstiger denn je. So prüfst du, ob sich Stecker-Solar bei dir lohnt – inkl. Förderung, Anmeldung und Rechenbeispiel.
 - **Gliederung (H2):** Was ein Balkonkraftwerk kann (und was nicht) · Kosten & Leistung 2026 · Amortisationsrechnung mit echtem Ertrag · Förderung von Bund & Ländern · Anmeldung im Marktstammdatenregister · Balkon, Garten oder Garage: Standort-Check · Typische Fehler beim Kauf
 - **FAQ:** Brauche ich einen Elektriker? / Was bringt ein 800-Watt-Modul im Jahr? / Ist die Anmeldung Pflicht?
-- **Interne Links:** `2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen`, `2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen`, `balkonkraftwerk-2026-lohnt-sich`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** BMWK (Solarpaket I), Verbraucherzentrale (Balkonkraftwerk), Stiftung Warentest (Stecker-Solar-Test)
 - **Affiliate-CTA:** CHECK24 Strom → `deep=stromanbieter-wechseln&cat=1`
 
@@ -459,7 +462,7 @@ Body:
 - **Meta-Description:** Kontowechsel klingt lästig – ist es aber nicht: Der kostenlose Wechselservice erledigt alles. So wechselst du dein Girokonto in 20 Minuten.
 - **Gliederung (H2):** Warum ein Kontowechsel bis zu 200 € im Jahr bringt · Was der Wechselservice automatisch erledigt · Schritt 1–5: Der Wechsel in 20 Minuten · Daueraufträge & Lastschriften im Blick · Den alten Kontostand richtig nutzen · Fallen beim Kontowechsel vermeiden
 - **FAQ:** Kostet der Wechselservice etwas? / Was mache ich mit meinem alten Konto? / Wie lange dauert der Wechsel?
-- **Interne Links:** `2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau`, `2026-08-10-dsl-wechselbonus-sichern`, `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Verbraucherzentrale (Kontowechsel), Stiftung Warentest (Girokonto-Vergleich), BaFin (Einlagensicherung)
 - **Affiliate-CTA:** CHECK24 C24 Bank → `deep=c24bank&cat=14`
 
@@ -468,7 +471,7 @@ Body:
 - **Meta-Description:** Rund 10–14 % Zinsen zahlt, wer den Dispo nutzt. So vermeidest du Dispozinsen – mit 5 günstigen Alternativen für den Notfall.
 - **Gliederung (H2):** So hoch sind die Dispozinsen 2026 (Überblick) · Rechenbeispiel: 1.000 € für 30 Tage · Warum Banken den Dispo lieben · Alternative 1: Dispo senken lassen · Alternative 2: Notgroschen aufbauen · Alternative 3: Ratenkredit (Kostenvergleich!) · Alternative 4: kostenloses Konto mit Rahmen · Alternative 5: Budget-Fix
 - **FAQ:** Kann ich meinen Dispo-Zinssatz verhandeln? / Was kostet ein Ratenkredit im Vergleich? / Ist der Dispo eine gute Notlösung?
-- **Interne Links:** `2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau`, `2026-08-10-dsl-wechselbonus-sichern`, `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Stiftung Warentest (Dispozinsen), Verbraucherzentrale (Girokonto), Bundesbank (Zinsstatistik)
 - **Affiliate-CTA:** CHECK24 Kredit → `deep=kreditvergleich`
 
@@ -477,7 +480,7 @@ Body:
 - **Meta-Description:** Tagesgeld flexibel, Festgeld mehr Zins? So entscheidest du, wo dein Geld 2026 am besten liegt – mit aktuellen Zins-Einordnungen und Sicherheits-Regeln.
 - **Gliederung (H2):** Der aktuelle Zinsmarkt kurz erklärt · Tagesgeld: Vorteile & Grenzen · Festgeld: Laufzeiten & Zinsstaffel · Der Zinseszinseffekt im Vergleich · Sicherheit: Einlagensicherung verstehen · Zins-Hopping: Legale Strategie oder Aufwand? · Die Entscheidungs-Matrix
 - **FAQ:** Ist mein Geld bei Banken sicher? / Was bringt Zins-Hopping? / Wie viel sollte ich auf Tagesgeld halten?
-- **Interne Links:** `2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau`, `2026-08-10-dsl-wechselbonus-sichern`, `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** BaFin (Einlagensicherung), Bundesbank (Zinsen), Stiftung Warentest (Festgeld)
 - **Affiliate-CTA:** CHECK24 Tagesgeld → `deep=tagesgeldvergleich`
 
@@ -486,7 +489,7 @@ Body:
 - **Meta-Description:** Depot wechseln ist einfacher als gedacht: Der Übertrag läuft automatisch, Steuern fallen keine an. So klappt der Depot-Umzug steuersicher.
 - **Gliederung (H2):** Warum ein Depotwechsel sich lohnen kann · Was der Übertrag kostet (Überblick) · Schritt 1–6: Der Depotübertrag · Steuern beim Übertrag: Was du wissen musst (Einstandswerte!) · Steuertöpfe & Verlustverrechnung · Was bei ausländischen Brokern anders ist · Die 5 häufigsten Fehler
 - **FAQ:** Kostet ein Depotwechsel Geld? / Muss ich Gewinne versteuern? / Was passiert mit meinen Sparplänen?
-- **Interne Links:** `depot-2026-dein-smarter-start-in-den-vermoegensaufbau`, `2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau`, `2026-08-10-dsl-wechselbonus-sichern`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** BaFin (Depotübertrag), Stiftung Warentest (Depotvergleich), Verbraucherzentrale (Wertpapierübertrag)
 - **Affiliate-CTA:** Generisch CHECK24 (Konto)
 
@@ -495,7 +498,7 @@ Body:
 - **Meta-Description:** Konto, Karte, Ausland: Banken verstecken Kosten an vielen Stellen. Diese 7 Gebührenfallen erkennst und umgehst du ab sofort.
 - **Gliederung (H2):** Die unsichtbaren Kontogebühren · Falle 1: Auslandseinsatz-Gebühr · Falle 2: Bargeldautomaten-Fremdgebühr · Falle 3: Konto mit „Servicepauschale" · Falle 4: Kreditkarten-Jahresgebühr · Falle 5: Überweisungsgebühren (SEPA) · Falle 6: Post-Versand & Papierkram · Falle 7: Verwahrentgelte (Negativzinsen-Reste)
 - **FAQ:** Welche Kreditkarte ist im Ausland kostenlos? / Was kostet Geld abheben in der EU? / Wie finde ich ein wirklich kostenloses Konto?
-- **Interne Links:** `2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau`, `2026-08-10-dsl-wechselbonus-sichern`, `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Stiftung Warentest (Bankgebühren), Verbraucherzentrale (Kontowechsel), EU-Kommission (SEPA-Gebühren)
 - **Affiliate-CTA:** CHECK24 Kreditkarte → `deep=kreditkarte`
 
@@ -506,7 +509,7 @@ Body:
 - **Meta-Description:** Die BU ist die teuerste Police – und für viele unnötig. Für wen sich der Abschluss 2026 wirklich lohnt und wie du Kosten sparst.
 - **Gliederung (H2):** Was die BU absichert (und was nicht) · Der Fall, den keiner kommen sieht: Zahlen & Wahrscheinlichkeiten · Für wen die BU ein Muss ist (Fachkräfte, Selbstständige, junge Familien) · Für wen sie sich nicht lohnt (Beamte, Haushalte mit Polster) · Kostencheck: So findest du die günstigste BU · Gesundheitsfragen ehrlich beantworten · Alternative: Grundfähigkeitsversicherung & Co.
 - **FAQ:** Wie viel kostet eine BU im Monat? / Wann muss ich die BU abschließen? / Was passiert bei Berufswechsel?
-- **Interne Links:** `2026-08-08-dein-tier-im-krankheitsfall`, `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026`, `berufsunfaehigkeitsversicherung-lohnt-sich`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** GDV (BU-Statistik), Stiftung Warentest (BU-Test), Verbraucherzentrale (Berufsunfähigkeit)
 - **Affiliate-CTA:** Tarifcheck → `deep=unfallversicherung` (plus Hinweis auf Vergleichsportal)
 
@@ -515,7 +518,7 @@ Body:
 - **Meta-Description:** Viele Haushalte zahlen für überflüssige Policen. Diese 5 Versicherungen kannst du meist kündigen – und bis zu 400 € im Jahr sparen.
 - **Gliederung (H2):** Der Versicherungs-Ordner: Erst Bestandsaufnahme · Kündigen: 1. Handy-/Elektronikversicherung · Kündigen: 2. Reisegepäckversicherung · Kündigen: 3. Doppelte Hausrat (Altverträge) · Kündigen: 4. Kleinst-Lebensversicherungen · Kündigen: 5. Zusatzpolice „Kfz-Schutzbrief" · Die 4 Policen, die wirklich bleiben sollten · Kündigungsfristen richtig nutzen
 - **FAQ:** Welche Versicherungen sind Pflicht? / Wie kündige ich nach der neuen Frist? / Was bringt ein Versicherungs-Check?
-- **Interne Links:** `2026-08-08-dein-tier-im-krankheitsfall`, `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026`, `berufsunfaehigkeitsversicherung-lohnt-sich`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Verbraucherzentrale (Versicherungs-Check), GDV (Versicherungslexikon), Stiftung Warentest (Versicherungen)
 - **Affiliate-CTA:** Tarifcheck (Haftpflicht/Hausrat) → `deep=haftpflichtversicherung|hausratversicherung`
 
@@ -524,7 +527,7 @@ Body:
 - **Meta-Description:** Starkregen, Hochwasser, Schneedruck: Nur jede zweite Wohnung ist geschützt. So prüfst du, ob sich die Elementarschadenversicherung für dich lohnt.
 - **Gliederung (H2):** Was die Elementarschadenversicherung abdeckt · Warum die Hausrat/Kfz allein nicht reicht · Wer ein hohes Risiko hat (Zonierung!) · Kosten & Selbstbeteiligung · Der Staat hilft nur bei versicherten Schäden · So wechselst du in den Tarif · 3 Schritte zur Entscheidung
 - **FAQ:** Ist die Elementarschadenversicherung Pflicht? / Was kostet sie im Jahr? / Was mache ich bei bestehender Hausrat?
-- **Interne Links:** `2026-08-08-dein-tier-im-krankheitsfall`, `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026`, `berufsunfaehigkeitsversicherung-lohnt-sich`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** GDV (ZÜRS-Zonierung), Verbraucherzentrale (Elementarschäden), Stiftung Warentest (Elementarschaden-Test)
 - **Affiliate-CTA:** Tarifcheck → `deep=hausratversicherung`
 
@@ -533,7 +536,7 @@ Body:
 - **Meta-Description:** SF-Klasse 1/2, Prozente, Rabattretter: So funktioniert die Kfz-Versicherung wirklich – und so holst du den besten Preis heraus.
 - **Gliederung (H2):** Was die SF-Klasse ist und wie sie wächst · Typklasse & Regionalklasse: Die unbekannten Preistreiber · Schadenfreiheit sichern: Rabattretter & Co. · Die 6 größten Rabatte (Werkstattbindung, Telematik, online) · Jährlicher Wechsel: Wann er sich lohnt · So liest du das Vergleichsangebot richtig
 - **FAQ:** Wie lange dauert es bis SF-Klasse 35? / Was passiert nach einem Unfall? / Kann ich Prozente von Eltern übernehmen?
-- **Interne Links:** `2026-08-08-dein-tier-im-krankheitsfall`, `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026`, `berufsunfaehigkeitsversicherung-lohnt-sich`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** GDV (Typklassen), Stiftung Warentest (Kfz-Versicherung), Verbraucherzentrale (Kfz-Wechsel)
 - **Affiliate-CTA:** CHECK24 Kfz → `deep=kfz-versicherung`
 
@@ -542,7 +545,7 @@ Body:
 - **Meta-Description:** Die Riester-Reform kommt – aber was heißt das für deinen Vertrag? So entscheidest du 2026: fördern, stilllegen oder kündigen.
 - **Gliederung (H2):** Wie Riester funktioniert (Grundzulage, Kinderzulage, Steuervorteil) · Die Reform 2026: Was sich ändert · Für wen Riester weiterhin lohnt (Familien mit Kindern!) · Für wen sich die Kündigung lohnt · Stilllegen vs. kündigen vs. weiterzahlen · Der Kosten-Check deines Vertrags · Alternativen (ETF-Sparplan, betriebliche Altersvorsorge)
 - **FAQ:** Soll ich meinen Riester kündigen? / Was passiert mit den Zulagen bei Kündigung? / Gibt es bessere Alternativen?
-- **Interne Links:** `depot-2026-dein-smarter-start-in-den-vermoegensaufbau`, `2026-08-08-dein-tier-im-krankheitsfall`, `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Bundesministerium für Arbeit (Riester), Verbraucherzentrale (Riester-Analyse), Stiftung Warentest (Riester-Test)
 - **Affiliate-CTA:** Generisch CHECK24 (Konto) + Tarifcheck
 
@@ -553,7 +556,7 @@ Body:
 - **Meta-Description:** Glasfaser, DSL oder Kabel – welcher Internetanschluss lohnt sich 2026 für dich? Der Vergleich von Tempo, Preis und Verfügbarkeit.
 - **Gliederung (H2):** Die 3 Technologien kurz erklärt · Tempo im Alltag: Was du wirklich brauchst (50/100/250/1000 Mbit) · Preis-Leistungs-Vergleich 2026 · Verfügbarkeit prüfen (Ausbaugebiete) · Glasfaser: Wann der Umstieg Pflicht wird · Kabel: Die Drossel-Falle im Abend · Die Entscheidungs-Tabelle
 - **FAQ:** Wie schnell muss Internet wirklich sein? / Was kostet Glasfaser im Monat? / Wann lohnt sich der Wechsel?
-- **Interne Links:** `5g-home-router-oder-dsl`, `glasfaser-dsl-kabel-anschluss-vergleich`, `internet-anbieter-wechseln-kuendigung`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Bundesnetzagentur (Breitbandatlas), Verbraucherzentrale (Internetverträge), CHECK24 Ratgeber
 - **Affiliate-CTA:** CHECK24 DSL → `deep=dsl-anbieterwechsel&cat=4`
 
@@ -562,7 +565,7 @@ Body:
 - **Meta-Description:** Der Miet-Router kostet dich oft 5 € pro Monat – auf 2 Jahre über 120 €. Wann sich Kaufen lohnt und was du beim Wechsel beachten musst.
 - **Gliederung (H2):** Die Miet-Falle: Was Router-Miete wirklich kostet · Wann Mieten sinnvoll ist (Fritzbox-Update, Support) · Die Kauf-Rechnung (Amortisation nach 12–18 Monaten) · Router-Freiheit: Dein Recht auf eigene Hardware · Kompatibilität prüfen (Anschlussart!) · WLAN-Qualität: Worauf du beim Kauf achtest · Die 3 besten Preis-Leistungs-Router (Kategorien)
 - **FAQ:** Darf ich den Router selbst kaufen? / Welcher Router ist der beste? / Was passiert mit dem alten Miet-Router?
-- **Interne Links:** `5g-home-router-oder-dsl`, `glasfaser-dsl-kabel-anschluss-vergleich`, `internet-anbieter-wechseln-kuendigung`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Bundesnetzagentur (Router-Freiheit), Stiftung Warentest (Router-Test), Verbraucherzentrale (Internetvertrag)
 - **Affiliate-CTA:** CHECK24 DSL → `deep=dsl-anbieterwechsel&cat=4`
 
@@ -571,7 +574,7 @@ Body:
 - **Meta-Description:** Kein Internetvertrag ist eine Lebensbindung: So kündigst du richtig, nutzt Sonderkündigungsrechte und wechselst ohne Stress zum günstigeren Tarif.
 - **Gliederung (H2):** Kündigungsfristen 2026: Was gesetzlich gilt · Sonderkündigungsrecht: Wann du sofort rauskommst (Preiserhöhung, Umzug) · Der Wechsel-Ablauf ohne Internet-Lücke · Kündigung per Musterbrief (Vorlage) · Was Anbieter dir „beim Bleiben" bieten · Die besten Wechsel-Zeitpunkte (Neukunden-Boni) · Checkliste: Alle Leistungen im Blick
 - **FAQ:** Wann darf ich vorzeitig kündigen? / Wie kündige ich sicher? / Gibt es Wechsel-Boni?
-- **Interne Links:** `5g-home-router-oder-dsl`, `glasfaser-dsl-kabel-anschluss-vergleich`, `internet-anbieter-wechseln-kuendigung`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Verbraucherzentrale (Kündigung & Sonderkündigung), Bundesnetzagentur (Verbraucherservice), CHECK24 Ratgeber
 - **Affiliate-CTA:** CHECK24 DSL → `deep=dsl-anbieterwechsel&cat=4`
 
@@ -580,7 +583,7 @@ Body:
 - **Meta-Description:** Langsames WLAN? Diese 12 Einstellungen und Tricks verbessern dein WLAN sofort – ohne einen Euro für neue Hardware auszugeben.
 - **Gliederung (H2):** Der richtige Router-Standort · Frequenzwahl: 2,4 vs. 5 GHz · Kanal-Check & Nachbarn · Firmware-Update & Neustart-Routine · WLAN-Verschlüsselung & versteckte Geräte · DLAN-Optimierung statt Kabelverlegung · Die 12-Tipps-Checkliste
 - **FAQ:** Warum ist mein WLAN abends langsam? / Was bringt ein Kanalwechsel? / Wie weit reicht WLAN durch Wände?
-- **Interne Links:** `5g-home-router-oder-dsl`, `glasfaser-dsl-kabel-anschluss-vergleich`, `internet-anbieter-wechseln-kuendigung`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Bundesnetzagentur (Funkfrequenzen), Stiftung Warentest (WLAN-Router), Verbraucherzentrale (Internet)
 - **Affiliate-CTA:** CHECK24 DSL → `deep=dsl-anbieterwechsel&cat=4`
 
@@ -589,7 +592,7 @@ Body:
 - **Meta-Description:** Kein Glasfaser, aber 5G-Abdeckung? Der 5G-Home-Router ist für viele eine echte DSL-Alternative. Wann er sich lohnt – und wann nicht.
 - **Gliederung (H2):** So funktioniert 5G-Home · Tempo & Latenz im Vergleich zu DSL/Kabel · Die 5G-Abdeckung realistisch prüfen · Kostenvergleich: 5G-Home vs. DSL-Vertrag · Datenvolumen: Die unbekannte Grenze · Für wen sich 5G-Home lohnt (Land, Pendler, Zweitwohnsitz) · Die 3 Fallstricke beim 5G-Vertrag
 - **FAQ:** Wie schnell ist 5G-Home wirklich? / Was passiert bei Datenlimit? / Kann ich 5G-Home mitnehmen?
-- **Interne Links:** `5g-home-router-oder-dsl`, `glasfaser-dsl-kabel-anschluss-vergleich`, `internet-anbieter-wechseln-kuendigung`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Bundesnetzagentur (5G-Abdeckung), Verbraucherzentrale (Mobilfunk), CHECK24 Ratgeber
 - **Affiliate-CTA:** CHECK24 Handy → `deep=handytarife`
 
@@ -600,7 +603,7 @@ Body:
 - **Meta-Description:** Im Winter sind Mietwagen bis zu 60 % günstiger. Mit diesen 7 Tricks sicherst du Schnäppchen für Skireise und Winterurlaub.
 - **Gliederung (H2):** Warum Winter-Mietwagen so günstig sind · Trick 1: Abholzeitpunkt clever wählen · Trick 2: Winterreifen-Check (Pflicht!) · Trick 3: Skigebiete: Kleinwagen statt SUV · Trick 4: Voll bis voll & Tankregel · Trick 5: Der richtige Buchungszeitpunkt · Trick 6: Versicherungskombination · Trick 7: Stornobedingungen nutzen
 - **FAQ:** Muss ich Winterreifen extra buchen? / Wann bucht man den Winter-Mietwagen? / Was kostet Mietwagen im Winter?
-- **Interne Links:** `flug-buchen-9-tricks-guenstige-tickets`, `mietwagen-im-winter-schnaeppchen-tricks`, `pauschalreise-buchen-bester-zeitpunkt`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** ADAC (Mietwagen-Tipps), Verbraucherzentrale (Mietwagen), CHECK24 Ratgeber
 - **Affiliate-CTA:** CHECK24 Mietwagen → `deep=mietwagen-preisvergleich&cat=10`
 
@@ -609,7 +612,7 @@ Body:
 - **Meta-Description:** Frühbucher oder Last Minute? Der beste Buchungszeitpunkt für Pauschalreisen hängt vom Ziel ab. Mit 6 Spartricks und den besten Zeitfenstern.
 - **Gliederung (H2):** Frühbucher vs. Last Minute: Die Wahrheit · Die besten Buchungszeitfenster je Ziel · Der Preisverlauf verstehen (5 Muster) · Spartrick 1: Flexibel beim Abflughafen · Spartrick 2: Mitte der Woche fliegen · Spartrick 3: Zubuchungen geschickt wählen · Der Pauschalreise-Vorteil: Sicherheit & Recht
 - **FAQ:** Wann ist die günstigste Buchungszeit? / Ist Last Minute günstiger? / Was schützt die Pauschalreise?
-- **Interne Links:** `flug-buchen-9-tricks-guenstige-tickets`, `mietwagen-im-winter-schnaeppchen-tricks`, `pauschalreise-buchen-bester-zeitpunkt`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Verbraucherzentrale (Reiserecht), ADAC (Reise-Tipps), Stiftung Warentest (Reisen)
 - **Affiliate-CTA:** CHECK24 Pauschalreisen → `deep=pauschalreisen-vergleich&cat=9`
 
@@ -618,7 +621,7 @@ Body:
 - **Meta-Description:** Bis zu 40 % sparen beim Flug: Diese 9 bewährten Tricks funktionieren bei jeder Buchung – von Suchfenstern bis Versteckte-Gebühren-Falle.
 - **Gliederung (H2):** Der richtige Suchzeitpunkt · Flexible Ziele & Daten nutzen · Abflughafen-Vergleich (Umfeld) · Die 7-Tage-Regel für Inlandsflüge · Handgepäck-Tarife richtig lesen · Versteckte Kosten: Sitzplatz, Priority, Versicherung · Vielfliegerprogramme clever nutzen · Der Buchungs-Check vor dem Klick
 - **FAQ:** Wann sind Flüge am günstigsten? / Lohnt sich der Geheimtipp „Dienstag buchen"? / Was kostet Handgepäck extra?
-- **Interne Links:** `flug-buchen-9-tricks-guenstige-tickets`, `mietwagen-im-winter-schnaeppchen-tricks`, `pauschalreise-buchen-bester-zeitpunkt`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Verbraucherzentrale (Fluggastrechte), ADAC (Reiserecht), Stiftung Warentest (Reisen)
 - **Affiliate-CTA:** CHECK24 Flug → `deep=flugvergleich`
 
@@ -627,7 +630,7 @@ Body:
 - **Meta-Description:** Reiserücktritt, Auslandskranken, Gepäck – welche Reiseversicherungen du wirklich brauchst und wie du sie günstig kombinierst.
 - **Gliederung (H2):** Die 3 wichtigsten Reiseversicherungen · Auslandskrankenversicherung: Pflicht für jede Reise · Reiserücktrittsversicherung: Wann sie sich lohnt · Gepäckversicherung: Meist überflüssig · Jahresvertrag vs. Einzelreise · Die Kombi-Falle der Reiseportale · So findest du den günstigsten Schutz
 - **FAQ:** Was kostet eine Auslandskrankenversicherung? / Wann lohnt Reiserücktritt? / Zahlt die GKV im Ausland?
-- **Interne Links:** `flug-buchen-9-tricks-guenstige-tickets`, `mietwagen-im-winter-schnaeppchen-tricks`, `pauschalreise-buchen-bester-zeitpunkt`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** Verbraucherzentrale (Reiseversicherung), Stiftung Warentest (Reiseversicherungs-Test), GDV (Reiseversicherung)
 - **Affiliate-CTA:** Tarifcheck → `deep=reisekrankenversicherung`
 
@@ -636,7 +639,7 @@ Body:
 - **Meta-Description:** Familienurlaub muss nicht teuer sein: Diese 10 Spartricks senken die Reisekosten mit Kindern um bis zu 300 € – ohne Spaßverlust.
 - **Gliederung (H2):** Die größten Kostenposten im Familienurlaub · Trick 1: Kinder-Rabatte systematisch nutzen · Trick 2: Verpflegung & Selbstversorgung · Trick 3: Familienzimmer vs. Appartement · Trick 4: Bahn statt Flug (Familien-Bonus) · Trick 5: Mietwagen ohne Kindersitz-Miete · Trick 6: Nebensaison für Familien · Trick 7–10: die restlichen Spartricks · Die Familien-Spar-Checkliste
 - **FAQ:** Ab wann ist Urlaub mit Kindern günstiger? / Was kostet ein Kindersitz im Mietwagen? / Lohnt sich die Familienkarte?
-- **Interne Links:** `flug-buchen-9-tricks-guenstige-tickets`, `mietwagen-im-winter-schnaeppchen-tricks`, `pauschalreise-buchen-bester-zeitpunkt`
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Externe Quellen:** ADAC (Familienreisen), Verbraucherzentrale (Reiserecht), Stiftung Warentest (Reisen)
 - **Affiliate-CTA:** CHECK24 Mietwagen/Pauschalreisen → `deep=mietwagen-preisvergleich&cat=10` / `deep=pauschalreisen-vergleich&cat=9`
 

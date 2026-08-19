@@ -5,6 +5,11 @@
 
 ## 📐 Flotten-Lesbarkeit (LIX)
 
+> ⚠️ **KADENZ-BEREINIGUNG 19.08.2026:** Dieser Report bezieht sich auf den Alt-Bestand.
+> Die genannten Artikel (Sa/So/Di-Termine + Evergreen-Bestand) wurden vollständig gelöscht –
+> der Blog zeigt jetzt nur noch Mo/Mi/Fr-Artikel (Details: `CADENCE-REPORT.md`).
+
+
 | Median | Schnitt | Zielkorridor |
 |---|---|---|
 | 49.2 | 49.2 | 35-50 (Ratgeber-Gut) |

@@ -3,6 +3,11 @@
 **Geprüfte Live-Artikel:** 9 · **Automatisch geheilt:** 5 (2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen, 2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck, 2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft, 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026, 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026)
 
 ### 2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen
+
+> ⚠️ **KADENZ-BEREINIGUNG 19.08.2026:** Dieser Report bezieht sich auf den Alt-Bestand.
+> Die genannten Artikel (Sa/So/Di-Termine + Evergreen-Bestand) wurden vollständig gelöscht –
+> der Blog zeigt jetzt nur noch Mo/Mi/Fr-Artikel (Details: `CADENCE-REPORT.md`).
+
 „Stromtarif für Wärmepumpe: So sparst du beim Heizen“
 - ⚠️ weiterhin keine Sonderfall-Behandlung erkennbar
 - ℹ️ Heilungsversuch: neue FAQ ergänzt (Provider: Groq): „Ich habe eine alte Wärmepumpe, die nicht steuerbar ist – kann ich trotzdem einen Wärmepumpentarif nutzen?“

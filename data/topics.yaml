@@ -15,728 +15,655 @@
 #  zugeordnet – siehe Commit-Historie). Exakte Duplikate entfernt,
 #  29 neue Themen ergänzt (Frequenz-Reduktion auf 4 Artikel/Woche:
 #  Pool reicht damit für weit über ein Jahr Vorlauf).
+#  19.08.2026: Erneute Whitespace-Korruption (Fazit-Schmiede-Lauf) aus
+#  der Git-Historie zurückgerollt – Pool wieder vollständig lesbar.
+#  Kadenz jetzt: 2-3 Artikel pro Publikationstag (Mo/Mi/Fr).
 # ============================================================
 
 topics:
   - title: "5 einfache Frugalismus-Tricks für den Alltag"
     pillar: "frugalismus"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
--title:"Die50-30-20-Regeleinfacherklärt"
-pillar:"frugalismus"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18"
--title:"7GewohnheitenfürfinanzielleFreiheit"
-pillar:"frugalismus"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18"
--title:"Notgroschenaufbauen:Wievielreichtwirklich?"
-pillar:"frugalismus"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18"
-
-#---EP:Strom&Gas---------------------------------------
--title:"StromfresserimHaushaltentlarven"
-pillar:"strom-sparen"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Stromfresserfinden","StromsparenTipps","Energiekostensenken","StandbyKosten"]
+  - title: "Die 50-30-20-Regel einfach erklärt"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+  - title: "7 Gewohnheiten für finanzielle Freiheit"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+  - title: "Notgroschen aufbauen: Wie viel reicht wirklich?"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+  - title: "Stromfresser im Haushalt entlarven"
+    pillar: "strom-sparen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
--title:"HeizperiodevorbereitenimSpätsommer"
-pillar:"strom-sparen"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
-keywords:["Gasrechnungsenken","Heizkostensparen","HerbstVorbereitung","Heizungprüfen"]
+    keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]
+  - title: "Heizperiode vorbereiten im Spätsommer"
+    pillar: "strom-sparen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
-
-#---EP:Internet&DSL------------------------------------
--title:"WLAN-Verstärkervs.Mesh-WLAN:Wasbrauchstduwirklich?"
-pillar:"internet-dsl"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["WLANverbessern","DSLHacks","SchnellesInternetzuhause","MeshNetzwerk"]
+    keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
+  - title: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
+    pillar: "internet-dsl"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
--title:"DNS-ServerändernfürschnelleresInternet"
-pillar:"internet-dsl"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["DNSServerwechseln","Internetschnellermachen","DSLTipps"]
+    keywords: ["WLAN verbessern", "DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk"]
+  - title: "DNS-Server ändern für schnelleres Internet"
+    pillar: "internet-dsl"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-
-#---EP:Reisen--------------------------------------------
--title:"Urlaubskassecleveraufbessern"
-pillar:"mietwagen"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
-keywords:["Urlaubsparen","ReisebudgetTipps","Günstigreisen"]
+    keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps"]
+  - title: "Urlaubskasse clever aufbessern"
+    pillar: "mietwagen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
+    keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig reisen"]
   - title: "Mietwagen-Fallen im Urlaub vermeiden"
     pillar: "mietwagen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
-keywords:["MietwagenTipps","UrlaubMietwagen","Reisekostensparen"]
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
-
-#---TP:CHECK24-Kategorien(Transactional) ----------------
+    keywords: ["Mietwagen Tipps", "Urlaub Mietwagen", "Reisekosten sparen"]
   - title: "Stromanbieter wechseln und bis zu 300 Euro sparen"
     pillar: "strom-sparen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Stromanbieterwechseln","Stromvergleich","Stromkostensparen2026"]
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
--title:"GastarifevergleichenvordemHerbst"
-pillar:"strom-sparen"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
-keywords:["Gasvergleich","Gaskostensparen","Heizkostensenken"]
+    keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten sparen 2026"]
+  - title: "Gastarife vergleichen vor dem Herbst"
+    pillar: "strom-sparen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
--title:"DSL-undInternet-Flatgünstigsichern"
-pillar:"internet-dsl"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["DSLVergleich","Internetvertragwechseln","GünstigesInternet","Wechselbonus"]
+    keywords: ["Gasvergleich", "Gaskosten sparen", "Heizkosten senken"]
+  - title: "DSL- und Internet-Flat günstig sichern"
+    pillar: "internet-dsl"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
--title:"KostenlosesGirokontoohneGebührenfinden"
-pillar:"konto-karten"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
-keywords:["KostenlosesGirokonto","GirokontoVergleich","Kontoführungsgebührensparen"]
+    keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus"]
+  - title: "Kostenloses Girokonto ohne Gebühren finden"
+    pillar: "konto-karten"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
--title:"GünstigenRatenkreditmitBestzinssichern"
-pillar:"konto-karten"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditvergleich"
-keywords:["Kreditvergleich","Ratenkreditgünstig","Umschuldungsparen"]
+    keywords: ["Kostenloses Girokonto", "Girokonto Vergleich", "Kontoführungsgebühren sparen"]
+  - title: "Günstigen Ratenkredit mit Bestzins sichern"
+    pillar: "konto-karten"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditvergleich"
--title:"Kfz-Versicherungvergleichenundsparen"
-pillar:"versicherungen"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kfz-versicherung"
-keywords:["KfzVersicherungwechseln","Autoversicherungvergleichen","SparmethodenAuto"]
+    keywords: ["Kreditvergleich", "Ratenkredit günstig", "Umschuldung sparen"]
+  - title: "Kfz-Versicherung vergleichen und sparen"
+    pillar: "versicherungen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kfz-versicherung"
--title:"Last-MinuteUrlaubsangebotesichern"
-pillar:"mietwagen"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
-keywords:["LastMinuteUrlaub","Reiseangebotegünstig","SommerurlaubSchnäppchen"]
+    keywords: ["Kfz Versicherung wechseln", "Autoversicherung vergleichen", "Sparmethoden Auto"]
+  - title: "Last-Minute Urlaubsangebote sichern"
+    pillar: "mietwagen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
--title:"GünstigenMietwagenfürdenUrlaubbuchen"
-pillar:"mietwagen"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
-keywords:["Mietwagenbuchen","GünstigeMietwagen","MietwagenVergleich"]
+    keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Sommerurlaub Schnäppchen"]
+  - title: "Günstigen Mietwagen für den Urlaub buchen"
+    pillar: "mietwagen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
--title:"GünstigeFlügefürdenSpätsommerfinden"
-pillar:"mietwagen"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=flugvergleich"
-keywords:["Flugticketsgünstig","Flugvergleich","Reisebudgetsparen"]
+    keywords: ["Mietwagen buchen", "Günstige Mietwagen", "Mietwagen Vergleich"]
+  - title: "Günstige Flüge für den Spätsommer finden"
+    pillar: "mietwagen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=flugvergleich"
-
-#---Erweiterung:weitereNischen(laufendergänzbar) -----
+    keywords: ["Flugtickets günstig", "Flugvergleich", "Reisebudget sparen"]
   - title: "Handytarife vergleichen: So findest du den günstigsten Tarif"
     pillar: "internet-dsl"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife"
-keywords:["Handytarifvergleichen","Handyvertragwechseln","GünstigerHandytarif"]
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife"
--title:"Privathaftpflicht:WarumsiePflichtistundwassiekostet"
-pillar:"versicherungen"
-affiliate_url:"https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=haftpflichtversicherung"
-keywords:["Privathaftpflicht","HaftpflichtversicherungVergleich","HaftpflichtKosten"]
+    keywords: ["Handytarif vergleichen", "Handyvertrag wechseln", "Günstiger Handytarif"]
+  - title: "Privathaftpflicht: Warum sie Pflicht ist und was sie kostet"
+    pillar: "versicherungen"
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=haftpflichtversicherung"
--title:"Hausratversicherung:Wersiebrauchtundwassieleistet"
-pillar:"versicherungen"
-affiliate_url:"https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hausratversicherung"
-keywords:["Hausratversicherungvergleichen","Hausratabsichern","HausratKosten"]
+    keywords: ["Privathaftpflicht", "Haftpflichtversicherung Vergleich", "Haftpflicht Kosten"]
+  - title: "Hausratversicherung: Wer sie braucht und was sie leistet"
+    pillar: "versicherungen"
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hausratversicherung"
--title:"Reisekrankenversicherung:Wannsiesichwirklichlohnt"
-pillar:"versicherungen"
-affiliate_url:"https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=reisekrankenversicherung"
-keywords:["Reisekrankenversicherung","Auslandskrankenversicherung","Reiseschutz"]
+    keywords: ["Hausratversicherung vergleichen", "Hausrat absichern", "Hausrat Kosten"]
+  - title: "Reisekrankenversicherung: Wann sie sich wirklich lohnt"
+    pillar: "versicherungen"
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=reisekrankenversicherung"
--title:"Zahnzusatzversicherung:LohntsichderAbschluss?"
-pillar:"versicherungen"
-affiliate_url:"https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=zahnzusatzversicherung"
-keywords:["Zahnzusatzversicherung","Zahnarztkostensparen","Zahnersatzversichern"]
+    keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschutz"]
+  - title: "Zahnzusatzversicherung: Lohnt sich der Abschluss?"
+    pillar: "versicherungen"
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=zahnzusatzversicherung"
--title:"KreditkarteohneJahresgebühr:DiebestenkostenlosenKarten"
-pillar:"konto-karten"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-keywords:["KreditkarteohneGebühren","KreditkartenVergleich","KostenloseKreditkarte"]
+    keywords: ["Zahnzusatzversicherung", "Zahnarztkosten sparen", "Zahnersatz versichern"]
+  - title: "Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten"
+    pillar: "konto-karten"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
--title:"TagesgeldundZinsen:SoparkstdudeinGeldsicher"
-pillar:"konto-karten"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich"
-keywords:["Tagesgeld","Zinsenvergleichen","Geldsicheranlegen"]
+    keywords: ["Kreditkarte ohne Gebühren", "Kreditkarten Vergleich", "Kostenlose Kreditkarte"]
+  - title: "Tagesgeld und Zinsen: So parkst du dein Geld sicher"
+    pillar: "konto-karten"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich"
+    keywords: ["Tagesgeld", "Zinsen vergleichen", "Geld sicher anlegen"]
   - title: "E-Auto laden: So senkst du deine Stromkosten"
     pillar: "strom-sparen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["E-AutoLadekosten","StromtarifE-Auto","Wallboxsparen"]
+    keywords: ["E-Auto Ladekosten", "Stromtarif E-Auto", "Wallbox sparen"]
   - title: "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung"
     pillar: "strom-sparen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["StromsparenTipps","Energiekostensenken","Stromverbrauchreduzieren"]
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
--title:"Wärmepumpevs.Gasheizung:Waslohntsich2026?"
-pillar:"strom-sparen"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
-keywords:["Wärmepumpe","HeizungVergleich","Heizkostensenken"]
+    keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren"]
+  - title: "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?"
+    pillar: "strom-sparen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
-
-#---ErweiterungRunde2:weitereNischen(laufendergänzbar) -----
+    keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken"]
   - title: "Photovoltaik: Lohnt sich eine Solaranlage 2026?"
     pillar: "strom-sparen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Photovoltaik","SolaranlageKosten","Stromselbsterzeugen"]
+    keywords: ["Photovoltaik", "Solaranlage Kosten", "Strom selbst erzeugen"]
   - title: "Balkonkraftwerk: Der einfache Einstieg in die Solarenergie"
     pillar: "strom-sparen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Balkonkraftwerk","Mini-Solaranlage","Stecker-Solargerät"]
+    keywords: ["Balkonkraftwerk", "Mini-Solaranlage", "Stecker-Solargerät"]
   - title: "Festgeld vs. Tagesgeld: Wo gibt es die besten Zinsen?"
     pillar: "konto-karten"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich"
-keywords:["Festgeld","Zinsenvergleichen","Geldanlegen"]
+    keywords: ["Festgeld", "Zinsen vergleichen", "Geld anlegen"]
   - title: "Umzug: Diese Versicherungen und Verträge musst du ummelden"
     pillar: "versicherungen"
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15"
-keywords:["UmzugCheckliste","Verträgeummelden","Umzugsparen"]
+    keywords: ["Umzug Checkliste", "Verträge ummelden", "Umzug sparen"]
   - title: "Kabel-Internet vs. DSL: Was ist 2026 die bessere Wahl?"
     pillar: "internet-dsl"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["KabelInternet","DSLVergleich","Internetanbieter"]
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
--title:"Altersvorsorge:DiebestenWegefürdeineRente"
-pillar:"konto-karten"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18"
--title:"Heizölkaufen:WannistderbesteZeitpunkt?"
-pillar:"strom-sparen"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
-keywords:["HeizölPreise","Heizölbestellen","Heizkostensenken"]
-  - title: "Glasfaserausbau: Wann lohnt sich der Anschluss?"
-    pillar: "internet-dsl"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["Glasfaser","Glasfaseranschluss","SchnellesInternet"]
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
--title:"StromtariffürWärmepumpe:SosparstdubeimHeizen"
-pillar:"strom-sparen"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Wärmepumpen-Tarif","StromtarifHeizen","Heizkostensenken"]
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
--title:"Hauskauffinanzieren:Darlehencleververgleichen"
-pillar:"konto-karten"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditvergleich"
-keywords:["Baufinanzierung","Immobilienkredit","HauskaufFinanzierung"]
-    affiliate_url: "https://www.check24.de/baufinanzierung/"
--title:"PrivateUnfallversicherung:Fürwensiesichwirklichlohnt"
-pillar:"versicherungen"
-affiliate_url:"https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=unfallversicherung"
-keywords:["Unfallversicherung","PrivateUnfallversicherung","Absicherung"]
-    affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=unfallversicherung"
-
-#---NEU:Themen-NachschubAugust2026(6Pillars) ----------
-  - title: "Photovoltaik: Lohnt sich eine Solaranlage 2026?"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Photovoltaik","Solaranlage","Stromkostensenken"]
-    pillar: "strom-sparen"
-  - title: "Balkonkraftwerk: Der einfache Einstieg in die Solarenergie"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Balkonkraftwerk","Solar","Stecker-Solar"]
-    pillar: "strom-sparen"
-  - title: "Festgeld vs. Tagesgeld: Wo gibt es die besten Zinsen?"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich"
-keywords:["Festgeld","Tagesgeld","Zinsenvergleichen"]
-    pillar: "konto-karten"
-  - title: "Umzug: Diese Versicherungen und Verträge musst du ummelden"
-    affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15"
-keywords:["Umzug","Versicherungenummelden","Verträge"]
-    pillar: "versicherungen"
+    keywords: ["Kabel Internet", "DSL Vergleich", "Internetanbieter"]
   - title: "Altersvorsorge: Die besten Wege für deine Rente"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
-pillar:"konto-karten"
--title:"Heizölkaufen:WannistderbesteZeitpunkt?"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
-keywords:["Heizöl","Heizölpreis","Energiekosten"]
-    pillar: "strom-sparen"
-  - title: "Stromtarif für Wärmepumpe: So sparst du beim Heizen"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Wärmepumpentarif","Stromtarif","Heizkosten"]
-    pillar: "strom-sparen"
-  - title: "Hauskauf finanzieren: Darlehen clever vergleichen"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditvergleich"
-keywords:["Baufinanzierung","Hauskauf","Darlehen"]
     pillar: "konto-karten"
-  - title: "Zweite Welle Gaspreis-Anpassung: Jetzt sichern"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
-keywords:["Gaspreis","Gastarifwechseln","Heizkostensenken"]
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+  - title: "Heizöl kaufen: Wann ist der beste Zeitpunkt?"
     pillar: "strom-sparen"
-  - title: "DSL-Wechselbonus mitnehmen: So klappt der Anbieterwechsel"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["DSLWechsel","Wechselbonus","Internetsparen"]
-    pillar: "internet-dsl"
-  - title: "Kabel-Internet vs. DSL: Was ist 2026 die bessere Wahl?"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["KabelInternet","DSLVergleich","Breitband"]
-    pillar: "internet-dsl"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
+    keywords: ["Heizöl Preise", "Heizöl bestellen", "Heizkosten senken"]
   - title: "Glasfaserausbau: Wann lohnt sich der Anschluss?"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["Glasfaser","Fiber","SchnellesInternet"]
     pillar: "internet-dsl"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["Glasfaser", "Glasfaseranschluss", "Schnelles Internet"]
+  - title: "Stromtarif für Wärmepumpe: So sparst du beim Heizen"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Wärmepumpen-Tarif", "Stromtarif Heizen", "Heizkosten senken"]
+  - title: "Hauskauf finanzieren: Darlehen clever vergleichen"
+    pillar: "konto-karten"
+    affiliate_url: "https://www.check24.de/baufinanzierung/"
+    keywords: ["Baufinanzierung", "Immobilienkredit", "Hauskauf Finanzierung"]
+  - title: "Private Unfallversicherung: Für wen sie sich wirklich lohnt"
+    pillar: "versicherungen"
+    affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=unfallversicherung"
+    keywords: ["Unfallversicherung", "Private Unfallversicherung", "Absicherung"]
+  - title: "Zweite Welle Gaspreis-Anpassung: Jetzt sichern"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
+    keywords: ["Gaspreis", "Gastarif wechseln", "Heizkosten senken"]
+  - title: "DSL-Wechselbonus mitnehmen: So klappt der Anbieterwechsel"
+    pillar: "internet-dsl"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["DSL Wechsel", "Wechselbonus", "Internet sparen"]
   - title: "Depot eröffnen: Worauf Anfänger 2026 achten sollten"
+    pillar: "konto-karten"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
-pillar:"konto-karten"
--title:"ETF-SparplanfürEinsteiger:Sostartestdumonatlich"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18"
-pillar:"frugalismus"
--title:"Riester-Rente:Lohntsiesich2026noch?"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18"
-pillar:"konto-karten"
--title:"Kfz-VersicherungfürFahranfänger:SosparstdubeimEinstieg"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kfz-versicherung"
-keywords:["KfzVersicherung","Fahranfänger","AutoVersicherung"]
+  - title: "ETF-Sparplan für Einsteiger: So startest du monatlich"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+  - title: "Riester-Rente: Lohnt sie sich 2026 noch?"
+    pillar: "konto-karten"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+  - title: "Kfz-Versicherung für Fahranfänger: So sparst du beim Einstieg"
     pillar: "versicherungen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kfz-versicherung"
+    keywords: ["Kfz Versicherung", "Fahranfänger", "Auto Versicherung"]
   - title: "Hund & Katze: Lohnt sich eine Tierversicherung?"
+    pillar: "versicherungen"
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hundekrankenversicherung"
-keywords:["Tierversicherung","Hundeversicherung","Katzenversicherung"]
-    pillar: "versicherungen"
+    keywords: ["Tierversicherung", "Hundeversicherung", "Katzenversicherung"]
   - title: "Büroausstattung: Diese Kosten kannst du von der Steuer absetzen"
+    pillar: "frugalismus"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
-pillar:"frugalismus"
--title:"MietwagenmitElektroauto:SoklapptdieFahrtindenUrlaub"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
-keywords:["E-AutoMietwagen","Elektromobilität","Urlaub"]
+  - title: "Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub"
     pillar: "mietwagen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
+    keywords: ["E-Auto Mietwagen", "Elektromobilität", "Urlaub"]
   - title: "Campingurlaub 2026: So hältst du die Kosten im Rahmen"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
-keywords:["Camping","Urlaubsparen","Campingplatz"]
     pillar: "mietwagen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
+    keywords: ["Camping", "Urlaub sparen", "Campingplatz"]
   - title: "Krankenzusatzversicherung: Welche Bausteine sich lohnen"
+    pillar: "versicherungen"
     affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=zahnzusatzversicherung"
-keywords:["Krankenzusatz","Versicherung","Zahnzusatz"]
-    pillar: "versicherungen"
+    keywords: ["Krankenzusatz", "Versicherung", "Zahnzusatz"]
   - title: "Strom sparen im Sommer: 10 Tipps für heiße Monate"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["StromsparenSommer","Energiekosten","Klimaanlage"]
     pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Strom sparen Sommer", "Energiekosten", "Klimaanlage"]
   - title: "Smart Home: Diese Geräte sparen wirklich Strom"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["SmartHome","Energiesparen","SmarteSteckdosen"]
     pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Smart Home", "Energie sparen", "Smarte Steckdosen"]
   - title: "Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung"
+    pillar: "internet-dsl"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife"
-keywords:["Handyvertragkündigen","Mobilfunksparen","Tarifwechsel"]
-    pillar: "internet-dsl"
-
+    keywords: ["Handyvertrag kündigen", "Mobilfunk sparen", "Tarifwechsel"]
   - title: "Billig fliegen im Winter: 10 Geheimtipps"
+    pillar: "mietwagen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=flugvergleich"
-keywords:["Flugvergleich","Billigflüge","Reisekostensparen"]
-    pillar: "mietwagen"
-
+    keywords: ["Flugvergleich", "Billigflüge", "Reisekosten sparen"]
   - title: "Kreditkarten mit Reiseversicherung im Test"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-keywords:["Kreditkarten","Reiseversicherung","Versicherungsvergleich"]
     pillar: "konto-karten"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
+    keywords: ["Kreditkarten", "Reiseversicherung", "Versicherungsvergleich"]
   - title: "DSL-Tarife im Vergleich: Welcher ist der beste?"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["DSL-Tarife","Internetvergleich","DSL-Anbieter"]
     pillar: "internet-dsl"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["DSL-Tarife", "Internetvergleich", "DSL-Anbieter"]
   - title: "Versicherungen im Überblick: Was brauchst du wirklich?"
-    affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15"
-keywords:["Versicherungen","Versicherungsvergleich","Risikomanagement"]
     pillar: "versicherungen"
-
+    affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15"
+    keywords: ["Versicherungen", "Versicherungsvergleich", "Risikomanagement"]
   - title: "Mietwagen für die Stadt: Kleine Autos im Vergleich"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
-keywords:["Mietwagen","Stadtverkehr","KleineAutos"]
     pillar: "mietwagen"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
+    keywords: ["Mietwagen", "Stadtverkehr", "Kleine Autos"]
   - title: "Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
-keywords:["Kontoeröffnen","Schufa","KontoohneSchufa"]
     pillar: "konto-karten"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
+    keywords: ["Konto eröffnen", "Schufa", "Konto ohne Schufa"]
   - title: "Internetflat mit hoher Geschwindigkeit: Welche Anbieter bieten was?"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["Internetflat","HoheGeschwindigkeit","Anbietervergleich"]
     pillar: "internet-dsl"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["Internetflat", "Hohe Geschwindigkeit", "Anbietervergleich"]
   - title: "Kreditkarten mit Bonusprogramm: Welche sind die besten?"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-keywords:["Kreditkarten","Bonusprogramm","Kreditkartenvergleich"]
     pillar: "konto-karten"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
+    keywords: ["Kreditkarten", "Bonusprogramm", "Kreditkartenvergleich"]
   - title: "Energieeffizienz im Haushalt: 5 einfache Maßnahmen"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Energieeffizienz","Haushalt","Energiesparen"]
     pillar: "strom-sparen"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Energieeffizienz", "Haushalt", "Energie sparen"]
   - title: "10 Tipps für günstige Reiseversicherungen"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
-keywords:["Reiseversicherung","Versicherungsvergleich","GünstigeVersicherungen"]
     pillar: "versicherungen"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
+    keywords: ["Reiseversicherung", "Versicherungsvergleich", "Günstige Versicherungen"]
   - title: "Strompreis-Anpassung im Sommer ausnutzen"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Strompreis","Energiekosten","Stromsparen"]
     pillar: "strom-sparen"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Strompreis", "Energiekosten", "Stromsparen"]
   - title: "Kreditkarten mit guten Rewards-Programmen"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-keywords:["Kreditkarte","Rewards-Programm","Kartenvergleich"]
     pillar: "konto-karten"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
+    keywords: ["Kreditkarte", "Rewards-Programm", "Kartenvergleich"]
   - title: "DSL-Tarife mit hoher Geschwindigkeit vergleichen"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["DSL-Tarif","Internetgeschwindigkeit","Tarifevergleichen"]
     pillar: "internet-dsl"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["DSL-Tarif", "Internetgeschwindigkeit", "Tarife vergleichen"]
   - title: "Mietwagen-Kosten im Ausland minimieren"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
-keywords:["Mietwagen","Ausland","Kostenminimieren"]
     pillar: "mietwagen"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
+    keywords: ["Mietwagen", "Ausland", "Kosten minimieren"]
   - title: "Günstige Gasanbieter für den Haushalt finden"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
-keywords:["Gasanbieter","GünstigeAnbieter","Haushalt"]
     pillar: "strom-sparen"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
+    keywords: ["Gasanbieter", "Günstige Anbieter", "Haushalt"]
   - title: "Versicherungsvergleich für junge Erwachsene"
-    affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15"
-keywords:["Versicherungsvergleich","JungeErwachsene","Versicherungen"]
     pillar: "versicherungen"
-
+    affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15"
+    keywords: ["Versicherungsvergleich", "Junge Erwachsene", "Versicherungen"]
   - title: "Schnellstes Internet für Zuhause finden"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["SchnellesInternet","Zuhause","Internetanbieter"]
     pillar: "internet-dsl"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["Schnelles Internet", "Zuhause", "Internetanbieter"]
   - title: "Kontoeröffnung mit günstigen Gebühren"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
-keywords:["Kontoeröffnung","GünstigeGebühren","Kontenvergleich"]
     pillar: "konto-karten"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
+    keywords: ["Kontoeröffnung", "Günstige Gebühren", "Kontenvergleich"]
   - title: "Mietwagen-Verträge vor dem Urlaub checken"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
-keywords:["Mietwagen","Verträge","Urlaub"]
     pillar: "mietwagen"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
+    keywords: ["Mietwagen", "Verträge", "Urlaub"]
   - title: "Energiekosten im Haushalt senken mit Smart-Home-Geräten"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Energiekosten","Smart-Home-Geräte","Haushalt"]
     pillar: "strom-sparen"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Energiekosten", "Smart-Home-Geräte", "Haushalt"]
   - title: "Günstige Kreditkarten für den Alltag finden"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-keywords:["Kreditkarte","GünstigeKarten","Alltag"]
     pillar: "konto-karten"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
+    keywords: ["Kreditkarte", "Günstige Karten", "Alltag"]
   - title: "10 Tipps für günstige Reisekreditkarten"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-keywords:["Reisekreditkarten","günstigeKarten","Reisekostensparen"]
     pillar: "konto-karten"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
+    keywords: ["Reisekreditkarten", "günstige Karten", "Reisekosten sparen"]
   - title: "Versteckte Kosten im Mietwagenvertrag entschlüsseln"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
-keywords:["Mietwagenvertrag","versteckteKosten","Urlaubskasse"]
     pillar: "mietwagen"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
+    keywords: ["Mietwagenvertrag", "versteckte Kosten", "Urlaubskasse"]
   - title: "Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst"
+    pillar: "frugalismus"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
-pillar:"frugalismus"
-
--title:"DiebestenTarifefüreingünstigesHandy-Abonnement"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife"
-keywords:["günstigesHandy-Abonnement","Tarifvergleich","Mobilfunk"]
+  - title: "Die besten Tarife für ein günstiges Handy-Abonnement"
     pillar: "internet-dsl"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife"
+    keywords: ["günstiges Handy-Abonnement", "Tarifvergleich", "Mobilfunk"]
   - title: "So kannst du deine Heizkosten um 20 % senken"
+    pillar: "strom-sparen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
-keywords:["Heizkostensparen","energiesparendeTipps","Heizperiode"]
-    pillar: "strom-sparen"
-
+    keywords: ["Heizkosten sparen", "energiesparende Tipps", "Heizperiode"]
   - title: "Die Vorteile einer Kreditkarten-Versicherung"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-keywords:["Kreditkarten-Versicherung","Reiseversicherung","Kreditkarten-Schutz"]
     pillar: "versicherungen"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
+    keywords: ["Kreditkarten-Versicherung", "Reiseversicherung", "Kreditkarten-Schutz"]
   - title: "Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung"
+    pillar: "frugalismus"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
-pillar:"frugalismus"
-
--title:"DSL-TarifeimVergleich:DiegünstigstenAnbieter"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["DSL-Tarife","günstigeAnbieter","Internetvergleich"]
+  - title: "DSL-Tarife im Vergleich: Die günstigsten Anbieter"
     pillar: "internet-dsl"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["DSL-Tarife", "günstige Anbieter", "Internetvergleich"]
   - title: "Wie du deine Bankgebühren um 50 % reduzieren kannst"
+    pillar: "konto-karten"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
-keywords:["Bankgebührensparen","Konto-gebühren","Gebühren-reduzierung"]
-    pillar: "konto-karten"
-
+    keywords: ["Bankgebühren sparen", "Konto-gebühren", "Gebühren-reduzierung"]
   - title: "Die verschiedenen Arten von Reiseversicherungen im Vergleich"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
-keywords:["Reiseversicherungen","Versicherungsarten","Reise-Schutz"]
     pillar: "versicherungen"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
+    keywords: ["Reiseversicherungen", "Versicherungsarten", "Reise-Schutz"]
   - title: "5 einfache Schritte zum Aufbau eines Notgroschens"
+    pillar: "frugalismus"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
-pillar:"frugalismus"
-
--title:"DiebestenMietwagen-AnbieterfürjungeFahrer"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
-keywords:["Mietwagen-Anbieter","jungeFahrer","Mietwagen-Tarife"]
+  - title: "Die besten Mietwagen-Anbieter für junge Fahrer"
     pillar: "mietwagen"
-
-  - title: "Günstige Reiseversicherungen für den Winterurlaub"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
-keywords:["Reiseversicherungen","Winterurlaub","Versicherungsvergleich"]
-    pillar: "versicherungen"
-
-  - title: "10 Tipps für günstige Reiseversicherungen im Ausland"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
-keywords:["Reiseversicherung","Auslandsreise","Versicherungstipps"]
-    pillar: "versicherungen"
-
-  - title: "Wie du mit einem Smart-Plug Energie sparen kannst"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Smart-Plug","Energiesparen","Haushaltsgeräte"]
-    pillar: "strom-sparen"
-
-  - title: "Die besten Kreditkarten für den Alltag im Vergleich"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-keywords:["Kreditkarte","Alltag","Vergleich"]
-    pillar: "konto-karten"
-
-  - title: "Günstige Internet-Tarife für Zuhause finden"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["Internet-Tarife","Zuhause","Günstig"]
-    pillar: "internet-dsl"
-
-  - title: "Die Vorteile von Frugalismus für dein Finanzbudget"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
-pillar:"frugalismus"
-
--title:"Strompreis-Entwicklung:WiedudichvorhohenKostenschützenkannst"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Strompreis","Entwicklung","Kostensparen"]
-    pillar: "strom-sparen"
-
-  - title: "Versicherungen im Vergleich: Was du wissen musst"
-    affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15"
-keywords:["Versicherungen","Vergleich","Wissenswertes"]
-    pillar: "versicherungen"
-
-  - title: "DSL-Anbieter wechseln: Wie du den besten Tarif findest"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-keywords:["DSL-Anbieter","Wechsel","Tarif"]
-    pillar: "internet-dsl"
-
-  - title: "Günstige Kreditkarten für den Online-Einkauf"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-keywords:["Kreditkarte","Online-Einkauf","Günstig"]
-    pillar: "konto-karten"
-
-  - title: "Mietwagen-Verträge: Was du vor dem Unterschreiben wissen musst"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
-keywords:["Mietwagen","Verträge","Wissenswertes"]
-    pillar: "mietwagen"
-
-  - title: "Günstige Reiseversicherungen für den Sommerurlaub finden"
+    keywords: ["Mietwagen-Anbieter", "junge Fahrer", "Mietwagen-Tarife"]
+  - title: "Günstige Reiseversicherungen für den Winterurlaub"
+    pillar: "versicherungen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
-keywords:["Reiseversicherung","Sommerurlaub","Versicherungsvergleich"]
+    keywords: ["Reiseversicherungen", "Winterurlaub", "Versicherungsvergleich"]
+  - title: "10 Tipps für günstige Reiseversicherungen im Ausland"
     pillar: "versicherungen"
-
-  - title: "Stromkosten senken mit cleveren Haushaltsgeräten"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Stromkosten","Haushaltsgeräte","Energieeffizienz"]
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
+    keywords: ["Reiseversicherung", "Auslandsreise", "Versicherungstipps"]
+  - title: "Wie du mit einem Smart-Plug Energie sparen kannst"
     pillar: "strom-sparen"
-
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Smart-Plug", "Energie sparen", "Haushaltsgeräte"]
   - title: "Die besten Kreditkarten für den Alltag im Vergleich"
+    pillar: "konto-karten"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-keywords:["Kreditkarten","Alltag","Vergleich"]
-    pillar: "konto-karten"
-
-  - title: "Wie du deine monatlichen Ausgaben reduzieren kannst"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
-pillar:"frugalismus"
-
--title:"Mietwagen-TarifeimVergleichfürdenUrlaub"
-affiliate_url:"https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
-keywords:["Mietwagen","Tarife","Vergleich"]
-    pillar: "mietwagen"
-
-  - title: "Die Vorteile einer kostenlosen Kreditkarten-Umstellung"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-keywords:["Kreditkarten","Umstellung","Kostenlos"]
-    pillar: "konto-karten"
-
-  - title: "Günstige Versicherungen für dein Zuhause finden"
-    affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hausratversicherung"
-keywords:["Versicherungen","Zuhause","Günstig"]
-    pillar: "versicherungen"
-
-  - title: "Stromspar-Apps im Test für den Haushalt"
-    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-keywords:["Stromspar-Apps","Haushalt","Test"]
-    pillar: "strom-sparen"
-
-  - title: "Jahreskosten fürs Auto minimieren"
-    keywords: ["Autokosten", "Versicherungen", "Kraftstoff"]
-    pillar: "frugalismus"
-
-  - title: "Günstige Reisezeitpunkte für den Urlaub"
-    keywords: ["Reise", "Urlaub", "SparTipps"]
-    pillar: "mietwagen"
-
-  - title: "Die richtige Absicherung für dein Haus"
-    keywords: ["Haus", "Versicherung", "Schutz"]
-    pillar: "versicherungen"
-
-  - title: "Internet-Tarife im Vergleich"
-    keywords: ["Internet", "Tarif", "Vergleich"]
-    pillar: "internet-dsl"
-
-  - title: "Kreditkarten mit guten Leistungen"
-    keywords: ["Kreditkarte", "Leistungen", "Vorteile"]
-    pillar: "konto-karten"
-
-  - title: "Energiekosten senken mit kleinen Veränderungen"
-    keywords: ["Energie", "Kosten", "SparTipps"]
-    pillar: "strom-sparen"
-
-  - title: "Preiswerter DSL-Anschluss für Zuhause"
-    keywords: ["DSL", "Anschluss", "Preiswert"]
-    pillar: "internet-dsl"
-
-  - title: "Reiseversicherungen im Test"
-    keywords: ["Reise", "Versicherung", "Test"]
-    pillar: "versicherungen"
-
-  - title: "Wie du deine monatlichen Ausgaben reduzieren kannst"
-    keywords: ["Ausgaben", "Reduzieren", "SparTipps"]
-    pillar: "frugalismus"
-
-  - title: "Günstige Tarife fürs Handy"
-    keywords: ["Handy", "Tarife", "Günstig"]
-    pillar: "internet-dsl"
-
-  - title: "Checkliste für den Kauf einer Hausratversicherung"
-    keywords: ["Hausrat", "Versicherung", "Checkliste"]
-    pillar: "versicherungen"
-
-  - title: "Die besten Kreditkarten für Reisen"
-    keywords: ["Kreditkarte", "Reise", "Vorteile"]
-    pillar: "konto-karten"
-
-  - title: "Energieeffizienz zu Hause verbessern"
-    keywords: ["Energie", "Effizienz", "Zuhause"]
-    pillar: "strom-sparen"
-
-  - title: "Jahresvergleich für deine Versicherungen"
-    keywords: ["Versicherung", "Vergleich", "Jahresvergleich"]
-    pillar: "versicherungen"
-
-  - title: "Günstige Angebote für Internet und TV"
-    keywords: ["Internet", "TV", "Günstig"]
-    pillar: "internet-dsl"
-
-  - title: "SparTipps für den Alltag"
-    keywords: ["SparTipps", "Alltag", "Geld"]
-    pillar: "frugalismus"
-
-  - title: "Günstige Reiseversicherungen für den Urlaub vergleichen"
-    keywords: ["Reiseversicherung", "Urlaub", "Vergleich"]
-    pillar: "versicherungen"
-
-  - title: "Energiekosten senken mit intelligenten Heizsystemen"
-    keywords: ["Energiekosten", "Heizsysteme", "Energiesparen"]
-    pillar: "strom-sparen"
-
-  - title: "Kreditkarten mit attraktiven Prämien und Leistungen"
-    keywords: ["Kreditkarten", "Prämien", "Leistungen"]
-    pillar: "konto-karten"
-
-  - title: "Die besten DSL-Tarife für Zuhause und unterwegs"
-    keywords: ["DSL-Tarife", "Zuhause", "unterwegs"]
-    pillar: "internet-dsl"
-
-  - title: "Wie du beim Mietwagenkauf Geld sparen kannst"
-    keywords: ["Mietwagenkauf", "Geld sparen", "Tipps"]
-    pillar: "mietwagen"
-
-  - title: "Haushaltskosten reduzieren mit einfachen Mitteln"
-    keywords: ["Haushaltskosten", "reduzieren", "Mitteln"]
-    pillar: "frugalismus"
-
-  - title: "Versicherungen für dein Fahrzeug und dich"
-    keywords: ["Versicherungen", "Fahrzeug", "Schutz"]
-    pillar: "versicherungen"
-
-  - title: "Internet-Speed optimieren mit dem richtigen Router"
-    keywords: ["Internet-Speed", "Router", "Optimieren"]
-    pillar: "internet-dsl"
-
-  - title: "Günstige Kredite für deine Finanzierung finden"
-    keywords: ["Kredite", "Finanzierung", "günstig"]
-    pillar: "konto-karten"
-
-  - title: "Energieeffiziente Geräte für dein Zuhause"
-    keywords: ["Energieeffiziente", "Geräte", "Zuhause"]
-    pillar: "strom-sparen"
-
-  - title: "Dein Mietwagen im Ausland am besten buchen"
-    keywords: ["Mietwagen", "Ausland", "Buchen"]
-    pillar: "mietwagen"
-
-  - title: "Finanzielle Unabhängigkeit mit einfachen Schritten"
-    keywords: ["Finanzielle Unabhängigkeit", "Schritte", "Freiheit"]
-    pillar: "frugalismus"
-
-  - title: "Die richtige Kreditkarte für deine Bedürfnisse"
-    keywords: ["Kreditkarte", "Bedürfnisse", "Auswahl"]
-    pillar: "konto-karten"
-
-  - title: "DSL-Anbieter wechseln und Geld sparen"
-    keywords: ["DSL-Anbieter", "Wechseln", "Geld sparen"]
-    pillar: "internet-dsl"
-
-  - title: "Reise- und Unfallversicherungen im Vergleich"
-    keywords: ["Reiseversicherung", "Unfallversicherung", "Vergleich"]
-    pillar: "versicherungen"
-
-  - title: "Strom und Gas vergleichen und sparen"
-    keywords: ["Strom", "Gas", "Vergleichen", "Sparen"]
-    pillar: "strom-sparen"
-
-  - title: "Dein Online-Banking und Kontomanagement optimieren"
-    keywords: ["Online-Banking", "Kontomanagement", "Optimieren"]
-    pillar: "konto-karten"
-
-  - title: "10 Tipps für günstige Reiseversicherungen"
-    keywords: ["Reiseversicherung", "günstig", "Versicherungen"]
-    pillar: "versicherungen"
-
-  - title: "Energiekosten senken mit Smart-Home-Geräten"
-    keywords: ["Smart-Home", "Energiekosten", "Strom sparen"]
-    pillar: "strom-sparen"
-
-  - title: "Wie du deine monatlichen Bankgebühren reduzieren kannst"
-    keywords: ["Bankgebühren", "reduzieren", "Konto"]
-    pillar: "konto-karten"
-
-  - title: "Die Vorteile von Prepaid-Karten für den Urlaub"
-    keywords: ["Prepaid-Karten", "Urlaub", "Karten"]
-    pillar: "konto-karten"
-
+    keywords: ["Kreditkarte", "Alltag", "Vergleich"]
   - title: "Günstige Internet-Tarife für Zuhause finden"
-    keywords: ["Internet-Tarife", "günstig", "DSL"]
     pillar: "internet-dsl"
-
-  - title: "5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest"
-    keywords: ["Mietwagen", "Fehler", "vermeiden"]
-    pillar: "mietwagen"
-
-  - title: "Die besten Strategien für den Aufbau eines Notgroschens"
-    keywords: ["Notgroschen", "Aufbau", "Strategien"]
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["Internet-Tarife", "Zuhause", "Günstig"]
+  - title: "Die Vorteile von Frugalismus für dein Finanzbudget"
     pillar: "frugalismus"
-
-  - title: "Vergleich von Hausratversicherungen und wie du sparst"
-    keywords: ["Hausratversicherung", "Vergleich", "sparen"]
-    pillar: "versicherungen"
-
-  - title: "Strompreis-Anpassung: Wie du dich vor hohen Kosten schützt"
-    keywords: ["Strompreis", "Anpassung", "schützen"]
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+  - title: "Strompreis-Entwicklung: Wie du dich vor hohen Kosten schützen kannst"
     pillar: "strom-sparen"
-
-  - title: "Günstige Kreditkarten für den Alltag finden"
-    keywords: ["Kreditkarten", "günstig", "Alltag"]
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Strompreis", "Entwicklung", "Kosten sparen"]
+  - title: "Versicherungen im Vergleich: Was du wissen musst"
+    pillar: "versicherungen"
+    affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15"
+    keywords: ["Versicherungen", "Vergleich", "Wissenswertes"]
+  - title: "DSL-Anbieter wechseln: Wie du den besten Tarif findest"
+    pillar: "internet-dsl"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["DSL-Anbieter", "Wechsel", "Tarif"]
+  - title: "Günstige Kreditkarten für den Online-Einkauf"
     pillar: "konto-karten"
-
-  - title: "Die besten Apps für das Sparen von Geld"
-    keywords: ["Apps", "sparen", "Geld"]
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
+    keywords: ["Kreditkarte", "Online-Einkauf", "Günstig"]
+  - title: "Mietwagen-Verträge: Was du vor dem Unterschreiben wissen musst"
+    pillar: "mietwagen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
+    keywords: ["Mietwagen", "Verträge", "Wissenswertes"]
+  - title: "Günstige Reiseversicherungen für den Sommerurlaub finden"
+    pillar: "versicherungen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
+    keywords: ["Reiseversicherung", "Sommerurlaub", "Versicherungsvergleich"]
+  - title: "Stromkosten senken mit cleveren Haushaltsgeräten"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Stromkosten", "Haushaltsgeräte", "Energieeffizienz"]
+  - title: "Wie du deine monatlichen Ausgaben reduzieren kannst"
     pillar: "frugalismus"
-
-  - title: "Die Vorteile von Online-Konten und wie du sie nutzt"
-    keywords: ["Online-Konten", "Vorteile", "nutzen"]
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+  - title: "Mietwagen-Tarife im Vergleich für den Urlaub"
+    pillar: "mietwagen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
+    keywords: ["Mietwagen", "Tarife", "Vergleich"]
+  - title: "Die Vorteile einer kostenlosen Kreditkarten-Umstellung"
     pillar: "konto-karten"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
+    keywords: ["Kreditkarten", "Umstellung", "Kostenlos"]
+  - title: "Günstige Versicherungen für dein Zuhause finden"
+    pillar: "versicherungen"
+    affiliate_url: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hausratversicherung"
+    keywords: ["Versicherungen", "Zuhause", "Günstig"]
+  - title: "Stromspar-Apps im Test für den Haushalt"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Stromspar-Apps", "Haushalt", "Test"]
+  - title: "Jahreskosten fürs Auto minimieren"
+    pillar: "frugalismus"
+    keywords: ["Autokosten", "Versicherungen", "Kraftstoff"]
+  - title: "Günstige Reisezeitpunkte für den Urlaub"
+    pillar: "mietwagen"
+    keywords: ["Reise", "Urlaub", "SparTipps"]
+  - title: "Die richtige Absicherung für dein Haus"
+    pillar: "versicherungen"
+    keywords: ["Haus", "Versicherung", "Schutz"]
+  - title: "Internet-Tarife im Vergleich"
+    pillar: "internet-dsl"
+    keywords: ["Internet", "Tarif", "Vergleich"]
+  - title: "Kreditkarten mit guten Leistungen"
+    pillar: "konto-karten"
+    keywords: ["Kreditkarte", "Leistungen", "Vorteile"]
+  - title: "Energiekosten senken mit kleinen Veränderungen"
+    pillar: "strom-sparen"
+    keywords: ["Energie", "Kosten", "SparTipps"]
+  - title: "Preiswerter DSL-Anschluss für Zuhause"
+    pillar: "internet-dsl"
+    keywords: ["DSL", "Anschluss", "Preiswert"]
+  - title: "Reiseversicherungen im Test"
+    pillar: "versicherungen"
+    keywords: ["Reise", "Versicherung", "Test"]
+  - title: "Günstige Tarife fürs Handy"
+    pillar: "internet-dsl"
+    keywords: ["Handy", "Tarife", "Günstig"]
+  - title: "Checkliste für den Kauf einer Hausratversicherung"
+    pillar: "versicherungen"
+    keywords: ["Hausrat", "Versicherung", "Checkliste"]
+  - title: "Die besten Kreditkarten für Reisen"
+    pillar: "konto-karten"
+    keywords: ["Kreditkarte", "Reise", "Vorteile"]
+  - title: "Energieeffizienz zu Hause verbessern"
+    pillar: "strom-sparen"
+    keywords: ["Energie", "Effizienz", "Zuhause"]
+  - title: "Jahresvergleich für deine Versicherungen"
+    pillar: "versicherungen"
+    keywords: ["Versicherung", "Vergleich", "Jahresvergleich"]
+  - title: "Günstige Angebote für Internet und TV"
+    pillar: "internet-dsl"
+    keywords: ["Internet", "TV", "Günstig"]
+  - title: "SparTipps für den Alltag"
+    pillar: "frugalismus"
+    keywords: ["SparTipps", "Alltag", "Geld"]
+  - title: "Günstige Reiseversicherungen für den Urlaub vergleichen"
+    pillar: "versicherungen"
+    keywords: ["Reiseversicherung", "Urlaub", "Vergleich"]
+  - title: "Energiekosten senken mit intelligenten Heizsystemen"
+    pillar: "strom-sparen"
+    keywords: ["Energiekosten", "Heizsysteme", "Energiesparen"]
+  - title: "Kreditkarten mit attraktiven Prämien und Leistungen"
+    pillar: "konto-karten"
+    keywords: ["Kreditkarten", "Prämien", "Leistungen"]
+  - title: "Die besten DSL-Tarife für Zuhause und unterwegs"
+    pillar: "internet-dsl"
+    keywords: ["DSL-Tarife", "Zuhause", "unterwegs"]
+  - title: "Wie du beim Mietwagenkauf Geld sparen kannst"
+    pillar: "mietwagen"
+    keywords: ["Mietwagenkauf", "Geld sparen", "Tipps"]
+  - title: "Haushaltskosten reduzieren mit einfachen Mitteln"
+    pillar: "frugalismus"
+    keywords: ["Haushaltskosten", "reduzieren", "Mitteln"]
+  - title: "Versicherungen für dein Fahrzeug und dich"
+    pillar: "versicherungen"
+    keywords: ["Versicherungen", "Fahrzeug", "Schutz"]
+  - title: "Internet-Speed optimieren mit dem richtigen Router"
+    pillar: "internet-dsl"
+    keywords: ["Internet-Speed", "Router", "Optimieren"]
+  - title: "Günstige Kredite für deine Finanzierung finden"
+    pillar: "konto-karten"
+    keywords: ["Kredite", "Finanzierung", "günstig"]
+  - title: "Energieeffiziente Geräte für dein Zuhause"
+    pillar: "strom-sparen"
+    keywords: ["Energieeffiziente", "Geräte", "Zuhause"]
+  - title: "Dein Mietwagen im Ausland am besten buchen"
+    pillar: "mietwagen"
+    keywords: ["Mietwagen", "Ausland", "Buchen"]
+  - title: "Finanzielle Unabhängigkeit mit einfachen Schritten"
+    pillar: "frugalismus"
+    keywords: ["Finanzielle Unabhängigkeit", "Schritte", "Freiheit"]
+  - title: "Die richtige Kreditkarte für deine Bedürfnisse"
+    pillar: "konto-karten"
+    keywords: ["Kreditkarte", "Bedürfnisse", "Auswahl"]
+  - title: "DSL-Anbieter wechseln und Geld sparen"
+    pillar: "internet-dsl"
+    keywords: ["DSL-Anbieter", "Wechseln", "Geld sparen"]
+  - title: "Reise- und Unfallversicherungen im Vergleich"
+    pillar: "versicherungen"
+    keywords: ["Reiseversicherung", "Unfallversicherung", "Vergleich"]
+  - title: "Strom und Gas vergleichen und sparen"
+    pillar: "strom-sparen"
+    keywords: ["Strom", "Gas", "Vergleichen", "Sparen"]
+  - title: "Dein Online-Banking und Kontomanagement optimieren"
+    pillar: "konto-karten"
+    keywords: ["Online-Banking", "Kontomanagement", "Optimieren"]
+  - title: "Energiekosten senken mit Smart-Home-Geräten"
+    pillar: "strom-sparen"
+    keywords: ["Smart-Home", "Energiekosten", "Strom sparen"]
+  - title: "Wie du deine monatlichen Bankgebühren reduzieren kannst"
+    pillar: "konto-karten"
+    keywords: ["Bankgebühren", "reduzieren", "Konto"]
+  - title: "Die Vorteile von Prepaid-Karten für den Urlaub"
+    pillar: "konto-karten"
+    keywords: ["Prepaid-Karten", "Urlaub", "Karten"]
+  - title: "5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest"
+    pillar: "mietwagen"
+    keywords: ["Mietwagen", "Fehler", "vermeiden"]
+  - title: "Die besten Strategien für den Aufbau eines Notgroschens"
+    pillar: "frugalismus"
+    keywords: ["Notgroschen", "Aufbau", "Strategien"]
+  - title: "Vergleich von Hausratversicherungen und wie du sparst"
+    pillar: "versicherungen"
+    keywords: ["Hausratversicherung", "Vergleich", "sparen"]
+  - title: "Strompreis-Anpassung: Wie du dich vor hohen Kosten schützt"
+    pillar: "strom-sparen"
+    keywords: ["Strompreis", "Anpassung", "schützen"]
+  - title: "Die besten Apps für das Sparen von Geld"
+    pillar: "frugalismus"
+    keywords: ["Apps", "sparen", "Geld"]
+  - title: "Die Vorteile von Online-Konten und wie du sie nutzt"
+    pillar: "konto-karten"
+    keywords: ["Online-Konten", "Vorteile", "nutzen"]
+
+  # --- Erweiterung 13.08.2026: 29 neue Themen (Frequenz-Reduktion auf 4/Woche) ---
+  - title: "Fixkosten-Check: In 30 Minuten dein größtes Sparpotenzial finden"
+    pillar: "frugalismus"
+    keywords: ["Fixkosten senken", "Sparpotenzial finden", "Haushaltsbudget prüfen"]
+
+  - title: "Frugal leben mit Familie: So klappt Sparen auch mit Kindern"
+    pillar: "frugalismus"
+    keywords: ["Frugalismus Familie", "Sparen mit Kindern", "Familienbudget"]
+
+  - title: "Haushaltsbuch-Apps im Vergleich: Die beste kostenlose Lösung"
+    pillar: "frugalismus"
+    keywords: ["Haushaltsbuch App", "Ausgaben tracken", "Budgetplanung App"]
+
+  - title: "30-Tage-Konsumverzicht-Challenge: So sparst du ohne Verzicht auf Dauer"
+    pillar: "frugalismus"
+    keywords: ["Konsumverzicht", "Spar-Challenge", "Weniger konsumieren"]
+
+  - title: "Balkonkraftwerk-Förderung: Diese Zuschüsse gibt es noch"
+    pillar: "strom-sparen"
+    keywords: ["Balkonkraftwerk Förderung", "Solaranlage Zuschuss", "Steckersolar"]
+
+  - title: "Stromspeicher fürs Eigenheim: Lohnt sich die Anschaffung?"
+    pillar: "strom-sparen"
+    keywords: ["Stromspeicher kaufen", "Batteriespeicher Solar", "Photovoltaik Speicher"]
+
+  - title: "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler noch lohnt"
+    pillar: "strom-sparen"
+    keywords: ["Nachtstrom", "Doppeltarifzähler", "Stromtarif Nacht"]
+
+  - title: "Heizkostenabrechnung prüfen: So findest du Fehler in 10 Minuten"
+    pillar: "strom-sparen"
+    keywords: ["Heizkostenabrechnung prüfen", "Nebenkostenabrechnung Fehler", "Heizkosten zu hoch"]
+
+  - title: "Stromanbieter-Insolvenz: Was du jetzt wissen musst"
+    pillar: "strom-sparen"
+    keywords: ["Stromanbieter Pleite", "Grundversorgung Strom", "Anbieterinsolvenz"]
+
+  - title: "Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick"
+    pillar: "strom-sparen"
+    keywords: ["Energieausweis", "Energieausweis Kosten", "Energieeffizienzklasse Haus"]
+
+  - title: "5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt"
+    pillar: "internet-dsl"
+    keywords: ["5G Router", "DSL Alternative", "Mobilfunk statt DSL"]
+
+  - title: "Störung beim Internetanbieter: Diese Rechte hast du"
+    pillar: "internet-dsl"
+    keywords: ["Internetstörung Rechte", "Minderung Internetausfall", "Anbieter Entschädigung"]
+
+  - title: "VPN für Zuhause: Brauchst du das wirklich?"
+    pillar: "internet-dsl"
+    keywords: ["VPN Zuhause", "VPN sinnvoll", "Internet Sicherheit"]
+
+  - title: "Router-Sicherheit: So schützt du dein Heimnetzwerk in 15 Minuten"
+    pillar: "internet-dsl"
+    keywords: ["Router absichern", "Heimnetzwerk Sicherheit", "WLAN Passwort ändern"]
+
+  - title: "Internettarif kündigen: Fristen und Fallstricke im Überblick"
+    pillar: "internet-dsl"
+    keywords: ["Internetvertrag kündigen", "Kündigungsfrist DSL", "Vertragsfalle Internet"]
+
+  - title: "Girokonto für Studenten: Die besten kostenlosen Angebote"
+    pillar: "konto-karten"
+    keywords: ["Girokonto Studenten", "Kostenloses Konto Studium", "Studentenkonto Vergleich"]
+
+  - title: "Dispo-Zinsen senken: So verhandelst du mit deiner Bank"
+    pillar: "konto-karten"
+    keywords: ["Dispozinsen senken", "Überziehungszinsen", "Bank verhandeln"]
+
+  - title: "Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung"
+    pillar: "konto-karten"
+    keywords: ["Konto wechseln", "Kontowechsel Anleitung", "Girokonto kündigen"]
+
+  - title: "Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren"
+    pillar: "konto-karten"
+    keywords: ["Kreditkarte Ausland", "Auslandsgebühren vermeiden", "Reisekreditkarte"]
+
+  - title: "Schufa-Eintrag löschen lassen: So gehst du richtig vor"
+    pillar: "konto-karten"
+    keywords: ["Schufa Eintrag löschen", "Negativeintrag entfernen", "Bonität verbessern"]
+
+  - title: "Elementarschadenversicherung: Warum sie zunehmend wichtiger wird"
+    pillar: "versicherungen"
+    keywords: ["Elementarschadenversicherung", "Hochwasser versichern", "Naturgefahren Versicherung"]
+
+  - title: "Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab"
+    pillar: "versicherungen"
+    keywords: ["Rechtsschutzversicherung", "Rechtsschutz Leistungen", "Rechtsstreit versichern"]
+
+  - title: "Risikolebensversicherung für Familien: Die richtige Summe finden"
+    pillar: "versicherungen"
+    keywords: ["Risikolebensversicherung", "Versicherungssumme berechnen", "Familie absichern"]
+
+  - title: "Fahrradversicherung fürs E-Bike: Lohnt sich der Schutz?"
+    pillar: "versicherungen"
+    keywords: ["Fahrradversicherung", "E-Bike versichern", "Fahrraddiebstahl Schutz"]
+
+  - title: "Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick"
+    pillar: "versicherungen"
+    keywords: ["Versicherung Selbstständige", "Absicherung Freiberufler", "Existenzgründer Versicherung"]
+
+  - title: "Wohnmobil mieten statt kaufen: Was günstiger ist"
+    pillar: "mietwagen"
+    keywords: ["Wohnmobil mieten", "Wohnmobil kaufen oder mieten", "Camper Vergleich"]
+
+  - title: "Interrail und Bahncard: Günstig mit dem Zug durch Europa"
+    pillar: "mietwagen"
+    keywords: ["Interrail", "Bahncard sparen", "Zugreise Europa günstig"]
+
+  - title: "Auslandskrankenversicherung für Familien: Was sie kosten darf"
+    pillar: "mietwagen"
+    keywords: ["Auslandskrankenversicherung Familie", "Reisekrankenversicherung Kosten", "Familienreiseschutz"]
+
+  - title: "Flugverspätung: So bekommst du deine Entschädigung"
+    pillar: "mietwagen"
+    keywords: ["Flugverspätung Entschädigung", "Fluggastrechte", "Entschädigung beantragen"]

@@ -3,6 +3,11 @@
 **Stand:** 2026-08-17 17:34 UTC
 
 ## ❌ Kritisch (1)
+
+> ⚠️ **KADENZ-BEREINIGUNG 19.08.2026:** Dieser Report bezieht sich auf den Alt-Bestand.
+> Die genannten Artikel (Sa/So/Di-Termine + Evergreen-Bestand) wurden vollständig gelöscht –
+> der Blog zeigt jetzt nur noch Mo/Mi/Fr-Artikel (Details: `CADENCE-REPORT.md`).
+
 ## ⚠️ Warnungen (6)
 ## ✅ OK (2)
 
