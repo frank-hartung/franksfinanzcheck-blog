@@ -227,6 +227,30 @@ def post_mastodon(text: str, image: Path | None) -> tuple[bool, str]:
         return False, str(exc)[:200]
 
 
+def edit_mastodon(status_id: str, text: str, image: Path | None = None) -> tuple[bool, str]:
+    """Aktualisiert einen vorhandenen Status (PUT), optional mit neuem Cover."""
+    media_id = mastodon_upload_media(image) if image else None
+    payload = {"status": text}
+    if media_id:
+        payload["media_ids[]"] = media_id
+    body = "&".join(f"{k}={urllib.parse.quote(str(v))}" for k, v in payload.items()).encode()
+    try:
+        resp = http_json(
+            f"{MASTODON_INSTANCE}/api/v1/statuses/{status_id}",
+            data=body,
+            headers={
+                "Authorization": f"Bearer {MASTODON_TOKEN}",
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            method="PUT",
+        )
+        return True, resp.get("url", "")
+    except urllib.error.HTTPError as exc:
+        return False, f"HTTP {exc.code}: {exc.read().decode()[:200]}"
+    except Exception as exc:
+        return False, str(exc)[:200]
+
+
 # ------------------------------------------------------------------ LinkedIn
 
 def post_linkedin(text: str, url: str) -> tuple[bool, str]:

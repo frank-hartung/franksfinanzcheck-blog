@@ -85,7 +85,11 @@ def main():
         sys.exit("FEHLER: Kein MASTODON_ACCESS_TOKEN gesetzt – siehe ANLEITUNG-SOCIAL-MEDIA.md.")
 
     if args.edit_status_id:
-        ok, ref = sp.edit_mastodon(args.edit_status_id, text)
+        # Leeres Intro = Original-Format des Auto-Posters beibehalten
+        # (Cover nachziehen, ohne Spotlight-Satz).
+        if not intro:
+            text = sp.build_post(fm, args.slug)
+        ok, ref = sp.edit_mastodon(args.edit_status_id, text, image)
         sp.append_log(args.slug, "mastodon-manual-edit", ok, ref)
     else:
         ok, ref = sp.post_mastodon(text, image)
