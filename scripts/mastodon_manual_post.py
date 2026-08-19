@@ -41,6 +41,13 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
+    if args.slug in ("__seo_heal__", "seo-heal"):
+        import mastodon_seo
+        if args.dry_run and "--dry-run" not in sys.argv:
+            sys.argv.append("--dry-run")
+        mastodon_seo.main()
+        return
+
     slug_dir = sp.POSTS_DIR / args.slug
     index_md = slug_dir / "index.md"
     if not index_md.is_file():
