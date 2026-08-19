@@ -18,6 +18,7 @@ cover:
   image: "images/covers/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg"
   alt: "Tipp von FranksFinanzcheck"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 
 # Gaspreisgarantie: So sicherst du dir günstige Tarife für 2026

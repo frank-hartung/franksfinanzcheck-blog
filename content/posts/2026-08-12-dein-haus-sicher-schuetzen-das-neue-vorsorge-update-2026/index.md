@@ -19,6 +19,7 @@ cover:
   image: "images/covers/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg"
   alt: "Einfamilienhaus bei Unwetter – Wohngebäudeversicherung als Schutz vor Sturm- und Wasserschäden"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 
 # Dein Haus sicher schützen: Das neue Vorsorge-Update 2026

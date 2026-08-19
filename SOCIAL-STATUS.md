@@ -1,18 +1,18 @@
 # 📣 Social-Media-Status
 
-> Automatisch aktualisiert: 19.08.2026 19:43 UTC
+> Automatisch aktualisiert: 19.08.2026 19:47 UTC
 
 - **Mastodon:** 🟢 aktiv (https://mastodon.social)
 - **LinkedIn:** ⚪ nicht eingerichtet (Achtung: Token läuft ~60 Tage)
-- **Offene Artikel in der Queue:** 4
+- **Offene Artikel in der Queue:** 0
 - **Max. Posts pro Lauf:** 4
 
 ## Zuletzt gepostet (dieser Lauf)
 
-- Energiediebe stoppen: So kannst du Stromfresser finden → https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/
-- DSL Vergleich: So findest du günstigeres Internet → https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
-- Privathaftpflicht: Warum sie so wichtig ist und was sie kostet → https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
-- Kostenloses Girokonto: So findest du ein Konto ohne Gebühren → https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
+- Preisgarantie Gas: So sicherst du günstige Tarife für 2026 → https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
+- Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 → https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
+- Sicher heizen: So schützt dich eine Gaspreisgarantie → https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
+- DSL-Wechselbonus sichern: So sparst du beim Internetvertrag → https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 
 ---
 *Erzeugt von scripts/social_poster.py – Setup: ANLEITUNG-SOCIAL-MEDIA.md*

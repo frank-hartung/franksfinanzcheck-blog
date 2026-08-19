@@ -20,6 +20,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst einen DSL-Wechselbonus erhalten, wenn du zu einem neuen Anbieter wechselst. Ein Wechselbonus kann in der Regel zwischen 50 € und 200 € liegen. Durch einen DSL-Anbieterwechsel kannst du bessere Tarife und höhere Geschwindigkeiten erhalten."
 
+social_posted: true
 ---
 
 # DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
