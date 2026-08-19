@@ -1,16 +1,10 @@
 # 🔐 INTEGRITY-REPORT
 
-**Stand:** 2026-08-19 15:21 UTC · HEAD: `615f2ed`
-**Verlade-Ebene:** 0 Dateien gelockt
+**Stand:** 2026-08-19 17:23 UTC · HEAD: `c521e8c`
+**Verlade-Ebene:** 36 Dateien gelockt
 **Gesperrte kritische Knoten:** 7
 
-## 🛑 KRITISCHE Abweichungen (hartn-foot lle)
+🎉 Integritaet: Der Kern entspricht exakt dem letzten signierten Zustand.
 
-- `hugo.toml (neu ohne Signatur)`
-- `layouts/_partials/head.html (neu ohne Signatur)`
-- `layouts/_partials/extend_footer.html (neu ohne Signatur)`
-- `layouts/robots.txt (neu ohne Signatur)`
-- `layouts/_default/_markup/render-link.html (neu ohne Signatur)`
-- `scripts/check24_links.yaml (neu ohne Signatur)`
 ---
 _Selbsttest vor jedem Start. Kritisch unterschreitet und Frank heißt Schritt._

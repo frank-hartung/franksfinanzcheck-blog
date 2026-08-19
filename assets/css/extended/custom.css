@@ -668,15 +668,68 @@ input:focus-visible {
     main.main > section.ff-clusters { order: 5; }
 }
 
+/* ============================================================
+   PILLAR-HUB & THEMENWELTEN (Ratgeber-Zentrale /pillar/)
+   ============================================================ */
+.ff-pillar-hero {
+    background: linear-gradient(165deg, var(--ff-emerald) 0%, var(--ff-emerald-dark) 100%);
+    border-radius: 16px;
+    padding: 32px 28px;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 24px rgba(14, 90, 67, 0.2);
+}
+
+@media (max-width: 600px) {
+    .ff-pillar-hero {
+        padding: 20px 18px;
+        margin-bottom: 20px;
+    }
+    .ff-pillar-hero h1 {
+        font-size: 1.6em !important;
+    }
+}
+
+/* Tabellen auf Pillar-Seiten sauber responsiv & scrollbar */
+.post-content table,
+.ff-spar-matrix table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.post-content table th,
+.ff-spar-matrix table th {
+    background: var(--ff-emerald);
+    color: #fff;
+    padding: 10px 14px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.post-content table td,
+.ff-spar-matrix table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.post-content table tr:nth-child(even) td {
+    background: rgba(14, 90, 67, 0.03);
+}
+
 /* AUTO-HEILUNG (design_guard D10, 11.08.2026): Das Affiliate-Shield
    ersetzte direkte Netzwerk-Links durch /go/-Gateway-Links; das CSS
    des gelben CTA-Kastens feuerte nur fuer die rohen Domains – Kasten
    fiel aus. Dieser Block wird bei Fehlen automatisch wiederhergestellt. */
-.post-content p:has(> a[href^="/go/"]) {
+.post-content p:has(> a[href^="/go/"]),
+.post-content p:has(> a[href*="check24.net"]),
+.post-content p:has(> a[href*="partner-versicherung.de"]) {
     background: rgba(255, 179, 0, 0.10);
     border: 1px dashed rgba(255, 179, 0, 0.6);
     border-radius: 10px; padding: 14px 18px;
     text-align: center; display: flex; flex-direction: column;
     align-items: center; gap: 8px; margin: 22px auto; max-width: 520px;
 }
-.post-content p:has(> a[href^="/go/"]) strong { display: block; margin-bottom: 4px; }
+.post-content p:has(> a[href^="/go/"]) strong,
+.post-content p:has(> a[href*="check24.net"]) strong,
+.post-content p:has(> a[href*="partner-versicherung.de"]) strong { display: block; margin-bottom: 4px; }

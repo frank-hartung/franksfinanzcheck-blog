@@ -2,11 +2,28 @@
 
 <article class="post-single">
   <header class="post-header">
-    {{ partial "breadcrumbs.html" . }}
-    <h1 class="post-title entry-hint-parent">
-      {{ .Title | safeHTML }}</h1>
-    <div class="post-meta">
-      <span style="font-size:.9em; color:#666;">Ratgeber von Frank · {{ .Date.Format "2. Januar 2006" }} · {{ .ReadingTime }} Min. Lesezeit</span>
+    <nav class="breadcrumbs" aria-label="Breadcrumb" style="font-size:.85em; margin-bottom:12px; color:#666;">
+      <a href="{{ "/" | relURL }}" style="color:#0E5A43; text-decoration:none;">Start</a>
+      <span style="margin:0 6px;">/</span>
+      <a href="{{ "pillar/" | relURL }}" style="color:#0E5A43; text-decoration:none;">Ratgeber</a>
+      <span style="margin:0 6px;">/</span>
+      <span style="color:#555;">{{ .Title | plainify | truncate 45 }}</span>
+    </nav>
+
+    <h1 class="post-title entry-hint-parent" style="color:#0E5A43; font-weight:800; font-size:2em; line-height:1.25; margin-bottom:12px;">
+      {{ .Title | safeHTML }}
+    </h1>
+
+    <div class="post-meta" style="display:flex; flex-wrap:wrap; align-items:center; gap:12px; font-size:.88em; color:#555; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid rgba(14,90,67,.15);">
+      <span style="display:inline-flex; align-items:center; gap:4px; font-weight:600; color:#0E5A43;">
+        <span>✍️</span> Ratgeber von Frank Hartung
+      </span>
+      <span>·</span>
+      <span>📅 Stand: {{ .Date.Format "2. Januar 2006" }}</span>
+      <span>·</span>
+      <span>⏱️ {{ .ReadingTime }} Min. Lesezeit</span>
+      <span>·</span>
+      <span style="background:var(--ff-emerald-soft); color:#0E5A43; padding:2px 8px; border-radius:999px; font-weight:600; font-size:.82em;">Geprüfter Praxis-Leitfaden</span>
     </div>
   </header>
 
@@ -19,10 +36,22 @@
   {{- /* ---------- Alle Artikel in diesem Ratgeber (Cluster) ---------- */}}
   {{- $clusterPosts := where site.RegularPages ".Params.pillar" .File.ContentBaseName }}
   {{- if gt (len $clusterPosts) 0 }}
-  <div style="margin:32px 0 8px; padding-top:20px; border-top:2px solid rgba(14,90,67,.15);">
-    <h2 style="font-family:'Inter',sans-serif; font-weight:700; color:#0E5A43; margin-bottom:4px; font-size:1.35em;">Alle Artikel im Ratgeber</h2>
-    <p style="color:#555; font-size:.95em; margin-bottom:16px;">Diese Beiträge gehören zu diesem Ratgeber – sieh dich in Ruhe um:</p>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px;">
+  <div style="margin:36px 0 12px; padding:24px 20px; background:#F7FBF9; border:1px solid rgba(14,90,67,.18); border-radius:14px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+      <div>
+        <h2 style="font-family:'Inter',sans-serif; font-weight:800; color:#0E5A43; margin:0 0 4px; font-size:1.35em;">
+          📚 Alle vertiefenden Artikel in diesem Ratgeber
+        </h2>
+        <p style="color:#555; font-size:.92em; margin:0;">
+          Detaillierte Anleitungen, Schritt-für-Schritt-Vergleiche und Praxistests zu diesem Thema:
+        </p>
+      </div>
+      <span style="font-size:.82em; font-weight:700; background:#0E5A43; color:#fff; padding:4px 10px; border-radius:999px;">
+        {{ len $clusterPosts }} Beiträge
+      </span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:18px;">
       {{- range $clusterPosts }}
       {{- $rCover := .Params.cover.image }}
       {{- $rDir := "" }}{{ $rFile := "" }}{{ $rBase := "" }}
@@ -31,7 +60,7 @@
         {{- $rBase = strings.TrimSuffix (path.Ext $rFile) $rFile }}
       {{- end }}
       <a href="{{ printf "posts/%s/" .File.ContentBaseName | relURL }}" aria-label="Weiterlesen: {{ .Title | plainify }}"
-         style="display:flex; flex-direction:column; background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; overflow:hidden; text-decoration:none; box-shadow:0 1px 4px rgba(0,0,0,.06); transition:transform .18s ease, box-shadow .18s ease;">
+         style="display:flex; flex-direction:column; background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; overflow:hidden; text-decoration:none; box-shadow:0 2px 6px rgba(0,0,0,.05); transition:transform .18s ease, box-shadow .18s ease;">
         {{- if $rCover }}
         <span style="display:block; position:relative;">
           <img loading="lazy" src="{{ partial "asset_url.html" (printf "%s/620/%s" $rDir $rFile) }}" alt="{{ .Params.cover.alt | default .Title | plainify }}"
@@ -40,9 +69,10 @@
         {{- else }}
         <span style="display:block; width:100%; padding-top:40%; background:linear-gradient(160deg,#0E5A43,#0B4A36);"></span>
         {{- end }}
-        <span style="display:block; padding:12px 14px;">
-          <strong style="font-family:'Inter',sans-serif; font-size:.95em; line-height:1.35; color:#0E5A43; display:block; margin-bottom:6px;">{{ .Title | plainify }}</strong>
-          {{- with .Description }}<span style="font-size:.82em; color:#555; line-height:1.45; display:block;">{{ . | plainify | truncate 100 }}</span>{{ end }}
+        <span style="display:block; padding:14px 16px; flex:1; display:flex; flex-direction:column;">
+          <strong style="font-family:'Inter',sans-serif; font-size:1.02em; line-height:1.35; color:#0E5A43; display:block; margin-bottom:6px; font-weight:700;">{{ .Title | plainify }}</strong>
+          {{- with .Description }}<span style="font-size:.84em; color:#555; line-height:1.45; display:block; margin-bottom:10px; flex:1;">{{ . | plainify | truncate 110 }}</span>{{ end }}
+          <span style="font-size:.82em; color:#0E5A43; font-weight:700; margin-top:auto;">Jetzt lesen →</span>
         </span>
       </a>
       {{- end }}
@@ -52,15 +82,19 @@
 
   {{- /* ---------- Verwandte Ratgeber (Cluster-Vernetzung) ---------- */}}
   {{- $pillars := slice "strom-sparen" "versicherungen" "mietwagen" "frugalismus" "internet-dsl" "konto-karten" }}
+  {{- $labels := dict "strom-sparen" "⚡ Strom & Gas" "versicherungen" "🛡️ Versicherungen" "mietwagen" "🚗 Mietwagen & Reisen" "frugalismus" "🌱 Frugalismus" "internet-dsl" "🌐 Internet & DSL" "konto-karten" "💳 Konto & Karten" }}
   {{- $others := slice }}
   {{- range $pillars }}{{ if ne . $.File.ContentBaseName }}{{ $others = $others | append . }}{{ end }}{{ end }}
   {{- if gt (len $others) 0 }}
   <div style="margin:28px 0 8px; padding-top:20px; border-top:2px solid rgba(14,90,67,.15);">
-    <h2 style="font-family:'Inter',sans-serif; font-weight:700; color:#0E5A43; margin-bottom:16px; font-size:1.15em;">Weitere Ratgeber auf FranksFinanzcheck</h2>
+    <h2 style="font-family:'Inter',sans-serif; font-weight:700; color:#0E5A43; margin-bottom:14px; font-size:1.15em;">Weitere Ratgeber auf FranksFinanzcheck</h2>
     <div style="display:flex; flex-wrap:wrap; gap:10px;">
       {{- range $others }}
-        {{- with site.GetPage (printf "pillar/%s" .) }}
-        <a href="{{ printf "posts/%s/" .File.ContentBaseName | relURL }}" style="background:var(--ff-emerald-soft); color:#0E5A43; border:1px solid rgba(14,90,67,.25); border-radius:999px; padding:8px 16px; font-size:.88em; font-weight:600; text-decoration:none;">{{ .Title | plainify | replaceRE "^.*?: " "" | truncate 40 }}</a>
+        {{- $otherSlug := . }}
+        {{- with site.GetPage (printf "pillar/%s" $otherSlug) }}
+        <a href="{{ printf "pillar/%s/" $otherSlug | relURL }}" style="background:var(--ff-emerald-soft); color:#0E5A43; border:1px solid rgba(14,90,67,.25); border-radius:999px; padding:8px 16px; font-size:.88em; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:4px; transition:background .15s ease;">
+          {{ index $labels $otherSlug | default (.Title | plainify | replaceRE "^.*?: " "") }} →
+        </a>
         {{- end }}
       {{- end }}
     </div>

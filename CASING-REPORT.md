@@ -1,10 +1,8 @@
 # 🔠 CASING-REPORT (casing_guard.py)
 
-**Stand:** 2026-08-19 15:58 UTC · Modus: REPORT
+**Stand:** 2026-08-19 17:23 UTC · Modus: FIX
 
-## 🔍 Befunde (1 Dateien)
-
-- `content/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/index.md`: 1 Korrektur(en)
+🎉 Akronym-Orthografie sauber (C1 + C2, Duden).
 
 ---
 _C1 kanonische Akronym-Schreibweise (dsl→DSL) · C2 Durchkopplung (DSL Tarif→DSL-Tarif). Front-Matter = SEO-Safe-Zone (Keywords bleiben klein)._

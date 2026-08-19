@@ -11,8 +11,8 @@ showToc: true
   {{< autor-foto >}}
   <div style="flex:1 1 320px;">
     <p style="margin:0 0 4px; font-size:.85em; font-weight:700; letter-spacing:.06em; color:#0E5A43;">AUTOR &AMP; BETREIBER</p>
-    <h2 style="margin:0 0 10px; font-family:'Montserrat',sans-serif; font-size:1.9em; color:#2E2E33;">Frank Hartung</h2>
-    <p style="margin:0 0 12px; font-size:1.02em; line-height:1.6; color:#333;">Mein Name ist Frank Hartung – ich beschäftige mich seit über 10 Jahren intensiv mit privater Finanzplanung, Tarifvergleichen und den Fragen, die im Alltag wirklich Geld sparen. Auf FranksFinanzcheck teile ich, was ich selbst recherchiert, getestet und in der Praxis erlebt habe.</p>
+    <h2 style="margin:0 0 10px; font-family:'Inter',sans-serif; font-weight:800; font-size:1.9em; color:#2E2E33;">Frank Hartung</h2>
+    <p style="margin:0 0 12px; font-size:1.02em; line-height:1.6; color:#333;">Mein Name ist Frank Hartung – ich beschäftige mich seit über 10 Jahren intensiv mit privater Finanzplanung, Tarifvergleichen und den Hebeln, die im Alltag wirklich bares Geld sparen. Auf FranksFinanzcheck teile ich erprobte Strategien, verifizierte Rechnungen und echte Praxiserfahrungen.</p>
     <p style="margin:0; font-size:.9em; color:#555;"><strong>Kontakt:</strong> frankhartung@web.de · <a href="https://www.pinterest.de/franksfinanzcheck/" rel="me" style="color:#0E5A43;">Pinterest</a></p>
   </div>
 </div>

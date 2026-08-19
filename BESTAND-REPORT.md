@@ -1,7 +1,16 @@
 # 📋 BESTAND-REPORT (bestand_gate.py)
 
-**Geprüfte Live-Artikel:** 6 · **Heilung versucht:** – · **Weiterhin auffällig:** 0
+**Geprüfte Live-Artikel:** 10 · **Heilung versucht:** – · **Weiterhin auffällig:** 2
 
 ⚠️ Auswertungsfehler: public/sitemap.xml fehlt – bitte hugo --minify ausführen
 
-🎉 Alle bestehenden Artikel erfüllen die aktuelle Publish-Gate-Prüfung (check_length.py + seo_audit.py + affiliate_profi_check.py + affiliate_integrity_gate.py) – keine Reparatur nötig, oder erfolgreich automatisch geheilt.
+### Weiterhin auffällig (NICHT gelöscht – zur redaktionellen Prüfung):
+
+#### 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+- ⚠️ Länge außerhalb 700-1800 Wörter (braucht echte Textarbeit, nicht automatisch heilbar)
+
+#### 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
+- ⚠️ Länge außerhalb 700-1800 Wörter (braucht echte Textarbeit, nicht automatisch heilbar)
+
+---
+_Bestandsartikel werden NIE automatisch gelöscht (anders als druckfrische Kandidaten in publish_gate.py) – nur geheilt oder gemeldet, da sie bereits veröffentlicht/indexiert sein können._

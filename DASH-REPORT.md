@@ -1,6 +1,6 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-08-19 15:58 UTC · Modus: REPORT
+**Stand:** 2026-08-19 17:23 UTC · Modus: FIX
 
 🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
 
@@ -14,13 +14,8 @@
 - `content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md` Zeile 74: S3-Konjunktion
 - `content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md` Zeile 78: S3-Konjunktion
 - `content/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/index.md` Zeile 28: S3-Konjunktion
-- `content/pillar/frugalismus/index.md` Zeile 42: S1-Doppelschub
-- `content/pillar/internet-dsl/index.md` Zeile 14: S3-Konjunktion
-- `content/pillar/mietwagen/index.md` Zeile 14: S3-Konjunktion
-- `content/pillar/mietwagen/index.md` Zeile 25: S3-Konjunktion
+- `content/pillar/mietwagen/index.md` Zeile 29: S1-Doppelschub
 - `content/pillar/mietwagen/index.md` Zeile 37: S3-Konjunktion
-- `content/pillar/mietwagen/index.md` Zeile 45: S3-Konjunktion
-- `content/pillar/strom-sparen/index.md` Zeile 14: S3-Konjunktion
 
 ---
 _Deterministisch: Gedankenstrich-Typ, Bis-Striche, Doppelminus · KI-Schiedsrichter (S1/S3) nur mit --ai. Geschützt: Front-Matter, Listen, Tabellen, Überschriften, URLs, Code._

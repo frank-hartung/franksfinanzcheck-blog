@@ -69,6 +69,8 @@ SLUG_DEEP = {
     "heizkosten-senken-10-massnahmen": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
     "nachtspeicherheizung-wechseln-oder-behalten": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
+    "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
+    "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
     "5g-home-router-oder-dsl": ("handytarife", "Handytarif-Vergleich"),
     "2026-08-10-dsl-wechselbonus-sichern": ("dsl-anbieterwechsel&cat=4", "DSL-Tarifvergleich"),
     "flug-buchen-9-tricks-guenstige-tickets": ("flugvergleich", "Flugvergleich"),
@@ -156,37 +158,15 @@ def load_posts():
     return posts
 
 
-# Gateway-Aufloesung (Affiliate-Shield, 11.08.): /go/<key>/ -> Register-URL,
-# damit ALLE bestehenden Checks (deep, PID, Pillar) weiterhin 1:1 greifen.
+import yaml
+
 def _load_registry():
-    reg = {}
     yf = os.path.join(BLOG_DIR, "scripts", "check24_links.yaml")
     if os.path.exists(yf):
-        for line in open(yf, encoding="utf-8"):
-            m = re.match(r"^\s+([\w-]+):\s*\"(https://[^\"]+)\"", line)
-            if m:
-                reg[m.group(1)] = m.group(2)
-    return reg
-
-
-_REGISTRY = _load_registry()
-
-
-# Gateway-Aufloesung (Affiliate-Shield, 11.08.): /go/<key>/ -> Register-URL,
-# damit alle folgenden Checks (deep, PID, Pillar) unveraendert weiterarbeiten.
-def _load_registry():
-    reg = {}
-    yf = os.path.join(BLOG_DIR, "scripts", "check24_links.yaml")
-    if os.path.exists(yf):
-        for line in open(yf, encoding="utf-8"):
-            ls = line.strip()
-            if ls and not ls.startswith("#") and ':"' in ls and ls.endswith('"'):
-                key, _, rest = ls.partition(':"')
-                url = rest.rstrip('"')
-                if url.startswith("http"):
-                    reg[key.strip()] = url
-    return reg
-
+        with open(yf, encoding="utf-8") as f:
+            data = yaml.safe_load(f) or {}
+            return data.get("links", {})
+    return {}
 
 _REGISTRY = _load_registry()
 

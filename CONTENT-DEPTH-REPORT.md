@@ -1,21 +1,42 @@
 # 🧠 CONTENT-DEPTH-REPORT (content_depth_guard.py)
 
-**Geprüfte Live-Artikel:** 9 · **Automatisch geheilt:** 5 (2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen, 2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck, 2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft, 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026, 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026)
+**Geprüfte Live-Artikel:** 10 · **Automatisch geheilt:** 0 (–)
 
-### 2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen
+### 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+„Preisgarantie Gas: So sicherst du günstige Tarife für 2026“
+- ⚠️ nur 3 FAQ-Einträge (< 4)
+- ℹ️ Heilungsversuch: kein API-Key/keine Antwort verfügbar
 
-> ⚠️ **KADENZ-BEREINIGUNG 19.08.2026:** Dieser Report bezieht sich auf den Alt-Bestand.
-> Die genannten Artikel (Sa/So/Di-Termine + Evergreen-Bestand) wurden vollständig gelöscht –
-> der Blog zeigt jetzt nur noch Mo/Mi/Fr-Artikel (Details: `CADENCE-REPORT.md`).
+### 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+„Gasrechnung senken: Fehler im Spätsommer vermeiden“
+- ⚠️ nur 3 FAQ-Einträge (< 4)
+- ⚠️ keine erkennbare Sonderfall-/Ausnahme-Behandlung
+- ℹ️ Heilungsversuch: kein API-Key/keine Antwort verfügbar
 
-„Stromtarif für Wärmepumpe: So sparst du beim Heizen“
-- ⚠️ weiterhin keine Sonderfall-Behandlung erkennbar
-- ℹ️ Heilungsversuch: neue FAQ ergänzt (Provider: Groq): „Ich habe eine alte Wärmepumpe, die nicht steuerbar ist – kann ich trotzdem einen Wärmepumpentarif nutzen?“
+### 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
+„WLAN verbessern: So bringst du stabilen Speed in jede Ecke“
+- ⚠️ keine erkennbare Sonderfall-/Ausnahme-Behandlung
+- ℹ️ Heilungsversuch: kein API-Key/keine Antwort verfügbar
 
-### 2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft
-„Schufa-Score verstehen: So liest du deine Bonitätsauskunft“
-- ⚠️ weiterhin keine Sonderfall-Behandlung erkennbar
-- ℹ️ Heilungsversuch: neue FAQ ergänzt (Provider: Groq): „Was passiert mit meiner Schufa-Auskunft, wenn ich ins Ausland ziehe?“
+### 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+„Kostenloses Girokonto: So findest du ein Konto ohne Gebühren“
+- ⚠️ keine erkennbare Sonderfall-/Ausnahme-Behandlung
+- ℹ️ Heilungsversuch: kein API-Key/keine Antwort verfügbar
+
+### 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
+„Privathaftpflicht: Warum sie so wichtig ist und was sie kostet“
+- ⚠️ keine erkennbare Sonderfall-/Ausnahme-Behandlung
+- ℹ️ Heilungsversuch: kein API-Key/keine Antwort verfügbar
+
+### 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
+„DSL Vergleich: So findest du günstigeres Internet“
+- ⚠️ nur 3 FAQ-Einträge (< 4)
+- ℹ️ Heilungsversuch: kein API-Key/keine Antwort verfügbar
+
+### 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+„Energiediebe stoppen: So kannst du Stromfresser finden“
+- ⚠️ keine erkennbare Sonderfall-/Ausnahme-Behandlung
+- ℹ️ Heilungsversuch: kein API-Key/keine Antwort verfügbar
 
 ---
 _H2-Breite (Themenabdeckung) ist nicht automatisch heilbar – eine neue Sektion braucht redaktionelle Einordnung, wo sie inhaltlich sinnvoll hinpasst. FAQ-Tiefe und Sonderfälle werden per KI automatisch ergänzt (Provider: Groq/Gemini, dieselbe Stimme wie neue Artikel), inklusive automatischem Rollback, falls die Ergänzung Länge oder Qualitäts-Gate verletzt._
