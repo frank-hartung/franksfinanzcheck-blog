@@ -39,6 +39,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import social_poster as sp  # noqa: E402
 
 DRY_RUN = "--dry-run" in sys.argv
+DELETE_DUPES = "--delete-dupes" in sys.argv or os.environ.get("MASTODON_DELETE_DUPES") == "1"
 REPORT = sp.ROOT / "MASTODON-SEO-REPORT.md"
 ACCOUNT = os.environ.get("MASTODON_ACCOUNT") or "FranksFinanzcheck"
 
