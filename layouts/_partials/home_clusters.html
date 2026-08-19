@@ -1,25 +1,25 @@
-{{- /* Home-Clusters – Profi-Übersicht der 6 Themenwelten auf der Startseite */ -}}
-<section class="ff-clusters" aria-label="Themenwelten" style="margin:28px 0 8px;">
+{{- /* Home-Clusters – 6 Themenwelten. Relative Links ohne führenden Slash
+       (Hugo-Subdir-sicher). Fehlende Pillar-Seiten werden still übersprungen. */ -}}
+{{- $pillars := slice "strom-sparen" "internet-dsl" "versicherungen" "konto-karten" "frugalismus" "mietwagen" }}
+{{- $labels := dict "strom-sparen" "⚡" "internet-dsl" "🌐" "versicherungen" "🛡️" "konto-karten" "🏦" "frugalismus" "💰" "mietwagen" "🚗" }}
+{{- $names := dict "strom-sparen" "Strom & Gas sparen" "internet-dsl" "Internet & DSL" "versicherungen" "Versicherungen" "konto-karten" "Konto & Karten" "frugalismus" "Frugalismus & Budget" "mietwagen" "Mietwagen & Reise" }}
+{{- $blurbs := dict "strom-sparen" "Tarife vergleichen, Nachzahlungen vermeiden, bis zu 300 € sparen" "internet-dsl" "DSL-Vergleich, Wechselbonus, WLAN-Tipps – günstiger surfen" "versicherungen" "Haftpflicht, Hausrat & Co. – nur was du wirklich brauchst" "konto-karten" "Girokonto ohne Gebühren, Karten clever wählen" "frugalismus" "50-30-20-Regel, Notgroschen, Alltagstricks ohne Verzicht" "mietwagen" "Fallen vermeiden, Urlaubskasse clever aufbessern" }}
+<section class="ff-clusters" aria-label="Themenwelten" style="margin:28px 0 8px; padding-top:24px; border-top:2px solid rgba(14,90,67,.15);">
   <h2 style="font-family:'Inter',sans-serif; font-weight:800; color:#0E5A43; font-size:1.25em; margin:0 0 12px;">Finde deinen Spar-Hebel – 6 Themenwelten</h2>
   <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;">
-    <a href="/pillar/strom-sparen/" style="background:#fff;border:1px solid rgba(14,90,67,.15);border-left:5px solid #0E5A43;border-radius:12px;padding:14px 16px;text-decoration:none;display:flex;flex-direction:column;gap:6px;">
-      <span style="font-size:1.4em;">⚡</span><strong style="color:#0E5A43;">Strom & Gas sparen</strong><span style="font-size:.85em;color:#555;line-height:1.4;">Tarife vergleichen, Nachzahlungen vermeiden, bis zu 300 € sparen</span><span style="font-size:.82em;color:#0E5A43;font-weight:700;margin-top:4px;">Zum Ratgeber →</span>
-    </a>
-    <a href="/pillar/internet-dsl/" style="background:#fff;border:1px solid rgba(14,90,67,.15);border-left:5px solid #0E5A43;border-radius:12px;padding:14px 16px;text-decoration:none;display:flex;flex-direction:column;gap:6px;">
-      <span style="font-size:1.4em;">🌐</span><strong style="color:#0E5A43;">Internet & DSL</strong><span style="font-size:.85em;color:#555;line-height:1.4;">DSL-Vergleich, Wechselbonus, WLAN-Tipps – günstiger surfen</span><span style="font-size:.82em;color:#0E5A43;font-weight:700;margin-top:4px;">Zum Ratgeber →</span>
-    </a>
-    <a href="/pillar/versicherungen/" style="background:#fff;border:1px solid rgba(14,90,67,.15);border-left:5px solid #FFB300;border-radius:12px;padding:14px 16px;text-decoration:none;display:flex;flex-direction:column;gap:6px;">
-      <span style="font-size:1.4em;">🛡️</span><strong style="color:#0E5A43;">Versicherungen</strong><span style="font-size:.85em;color:#555;line-height:1.4;">Haftpflicht, Hausrat & Co. – nur was du wirklich brauchst</span><span style="font-size:.82em;color:#0E5A43;font-weight:700;margin-top:4px;">Zum Ratgeber →</span>
-    </a>
-    <a href="/pillar/konto-karten/" style="background:#fff;border:1px solid rgba(14,90,67,.15);border-left:5px solid #FFB300;border-radius:12px;padding:14px 16px;text-decoration:none;display:flex;flex-direction:column;gap:6px;">
-      <span style="font-size:1.4em;">🏦</span><strong style="color:#0E5A43;">Konto & Karten</strong><span style="font-size:.85em;color:#555;line-height:1.4;">Girokonto ohne Gebühren, Karten clever wählen</span><span style="font-size:.82em;color:#0E5A43;font-weight:700;margin-top:4px;">Zum Ratgeber →</span>
-    </a>
-    <a href="/pillar/frugalismus/" style="background:#fff;border:1px solid rgba(14,90,67,.15);border-left:5px solid #0E5A43;border-radius:12px;padding:14px 16px;text-decoration:none;display:flex;flex-direction:column;gap:6px;">
-      <span style="font-size:1.4em;">💰</span><strong style="color:#0E5A43;">Frugalismus & Budget</strong><span style="font-size:.85em;color:#555;line-height:1.4;">50-30-20-Regel, Notgroschen, Alltagstricks ohne Verzicht</span><span style="font-size:.82em;color:#0E5A43;font-weight:700;margin-top:4px;">Zum Ratgeber →</span>
-    </a>
-    <a href="/pillar/mietwagen/" style="background:#fff;border:1px solid rgba(14,90,67,.15);border-left:5px solid #0E5A43;border-radius:12px;padding:14px 16px;text-decoration:none;display:flex;flex-direction:column;gap:6px;">
-      <span style="font-size:1.4em;">🚗</span><strong style="color:#0E5A43;">Mietwagen & Reise</strong><span style="font-size:.85em;color:#555;line-height:1.4;">Fallen vermeiden, Urlaubskasse clever aufbessern</span><span style="font-size:.82em;color:#0E5A43;font-weight:700;margin-top:4px;">Zum Ratgeber →</span>
-    </a>
+    {{- range $pillars }}
+      {{- with site.GetPage (printf "pillar/%s" .) }}
+      {{- $key := .File.ContentBaseName }}
+      {{- $count := len (where site.RegularPages ".Params.pillar" $key) }}
+      <a href="pillar/{{ $key }}/" aria-label="Zum Ratgeber: {{ index $names $key | default .Title }}"
+         style="background:#fff;border:1px solid rgba(14,90,67,.15);border-left:5px solid #0E5A43;border-radius:12px;padding:14px 16px;text-decoration:none;display:flex;flex-direction:column;gap:6px;">
+        <span style="font-size:1.4em;" aria-hidden="true">{{ index $labels $key | default "📘" }}</span>
+        <strong style="color:#0E5A43;">{{ index $names $key | default (.Title | plainify) }}</strong>
+        <span style="font-size:.85em;color:#555;line-height:1.4;">{{ index $blurbs $key | default (.Description | plainify | truncate 90) }}</span>
+        <span style="font-size:.82em;color:#0E5A43;font-weight:700;margin-top:4px;">{{ if gt $count 0 }}{{ $count }} Artikel →{{ else }}Zum Ratgeber →{{ end }}</span>
+      </a>
+      {{- end }}
+    {{- end }}
   </div>
-  <p style="font-size:.82em;color:#666;margin:10px 0 0;">Tipp: Jeder Ratgeber ist einer Welt zugeordnet – so findest du in 2 Klicks die passende Spartaktik <em>und</em> den direkten Tarif-Vergleich.</p>
+  <p style="font-size:.82em;color:#666;margin:10px 0 0;">Tipp: Jeder Ratgeber ist einer Welt zugeordnet – so findest du in zwei Klicks die passende Spartaktik <em>und</em> den direkten Tarif-Vergleich.</p>
 </section>

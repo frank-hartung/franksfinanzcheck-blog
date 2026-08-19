@@ -30,11 +30,6 @@
 </header>
 {{- end }}
 
-{{- if eq .Section "posts" }}
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"CollectionPage","name":{{ .Title | jsonify }},"description":{{ .Description | jsonify }},"url":{{ .Permalink | jsonify }},"isPartOf":{"@type":"WebSite","name":"FranksFinanzcheck","url":"https://franksfinanzcheck.de/"}}
-</script>
-{{- end }}
 {{- if .Content }}
 <div class="post-content md-content">
   {{- if not (.Param "disableAnchoredHeadings") }}
