@@ -1,8 +1,9 @@
 # 🧩 COMPOUND-REPORT (compound_guard.py)
 
-**Stand:** 2026-08-19 15:20 UTC · Modus: FIX+KI
+**Stand:** 2026-08-19 15:58 UTC · Modus: REPORT
 
-🎉 Keine Komposita-Fehler gefunden (Profi-Level).
+## Regelwerk-Treffer: 1 (→ mit --fix anwenden)
+
 
 ---
 _Schützt: Front-Matter (Titel/Keywords = SEO-Freiraum), URLs, Code, Eigennamen. Hausform: Kompositum oder Durchkopplung._
