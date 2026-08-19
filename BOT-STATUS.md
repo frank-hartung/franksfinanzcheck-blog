@@ -1,10 +1,10 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 19.08.2026 17:14 Uhr (MESZ)
+> Automatisch aktualisiert: 19.08.2026 19:05 Uhr (MESZ)
 
 ## Heutiger Stand
 
-- **Veröffentlicht heute:** 2/3 Artikel
+- **Veröffentlicht heute:** 2/2 Artikel
 - 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet – DSL Vergleich: So findest du günstigeres Internet
 - 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden – Energiediebe stoppen: So kannst du Stromfresser finden
 
@@ -12,7 +12,7 @@
 
 - **Themenpool:** 175 Themen, **164 frei**
 - **Letzter Content-Commit:** noch keiner
-- **Tageslimit:** 2–3 Artikel pro Publikationstag (Mo/Mi/Fr; steuerbar per Variablen MIN_ARTIKEL_PRO_TAG / MAX_ARTIKEL_PRO_TAG)
+- **Tageslimit:** 2–2 Artikel pro Publikationstag (Mo/Mi/Fr; steuerbar per Variablen MIN_ARTIKEL_PRO_TAG / MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen
 
