@@ -1,7 +1,7 @@
 {
- "total": 12,
+ "total": 14,
  "errors": 12,
- "fixed": 0,
+ "fixed": 2,
  "posts": [
   {
    "slug": "frugalismus",
@@ -134,6 +134,24 @@
    ],
    "infos": [],
    "ok": false
+  },
+  {
+   "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+   "title": "DSL Vergleich: So findest du günstigeres Internet",
+   "pillar": "konto-karten",
+   "fixed": 1,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+   "title": "Energiediebe stoppen: So kannst du Stromfresser fi",
+   "pillar": "konto-karten",
+   "fixed": 1,
+   "errors": [],
+   "infos": [],
+   "ok": true
   }
  ]
 }

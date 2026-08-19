@@ -1,5 +1,5 @@
 ---
-title: "WLAN verbessern: So bringst du Speed in jede Ecke"
+title: "WLAN verbessern: So bringst du stabilen Speed in jede Ecke"
 description: "Du willst dein WLAN verbessern? Ich zeige dir, ob ein Repeater oder Mesh-WLAN für schnelles Internet zu Hause besser ist. Plus: Die besten DSL Hacks!"
 date: 2026-08-14T09:43:18Z
 draft: false
@@ -34,21 +34,21 @@ Ich teile meine Erfahrungen mit dir und zeige dir, welcher Weg für dich der ric
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Warum das Signal oft im Keller landet
-bevor wir zu den Lösungen kommen, müssen wir verstehen, warum das Internet schwächelt. In meiner alten Wohnung war der Router im Flur hinter einer dicken Kommode versteckt. Das sah ordentlich aus, war aber für das Signal eine Katastrophe. Jede Wand, jede Tür und sogar Wasserleitungen dämpfen die Funkwellen massiv. 
+Bevor wir zu den Lösungen kommen, müssen wir verstehen, warum das Internet schwächelt. In meiner alten Wohnung war der Router im Flur hinter einer dicken Kommode versteckt. Das sah ordentlich aus, war aber für das Signal eine Katastrophe. Jede Wand, jede Tür und sogar Wasserleitungen dämpfen die Funkwellen massiv. 
 
 Physikalisch gesehen sind WLAN-Wellen elektromagnetische Signale im 2,4-GHz- oder 5-GHz-Bereich. Massive Baustoffe wie Stahlbeton wirken wie ein Schutzschild. Besonders tückisch sind Fußbodenheizungen: Das darin zirkulierende Wasser absorbiert die Funkwellen fast vollständig. Wenn du also versuchst, das Signal vom Erdgeschoss ins Obergeschoss zu schicken, ist die Heizung dein größter Feind. 
 
 Du solltest auch prüfen, ob deine Einrichtung das Signal behindert. Ein großer Spiegel oder eine Mikrowelle können den Empfang stören. Metallbeschichtete Isolierglasfenster oder Brandschutztüren sind ebenfalls echte "WLAN-Killer". Oft reicht schon ein massiver Kleiderschrank zwischen Router und Laptop, um die Datenrate von 100 Mbit/s auf magere 5 Mbit/s einbrechen zu lassen.
 
 ## Der WLAN-Repeater als schnelle Hilfe
-der klassische Verstärker, auch Repeater genannt, ist für viele die erste Wahl. Du steckst das Gerät in eine Steckdose, die sich etwa auf halbem Weg zwischen Router und Funkloch befindet. Der Repeater schnappt sich das vorhandene Signal und sendet es erneut aus. 
+Der klassische Verstärker, auch Repeater genannt, ist für viele die erste Wahl. Du steckst das Gerät in eine Steckdose, die sich etwa auf halbem Weg zwischen Router und Funkloch befindet. Der Repeater schnappt sich das vorhandene Signal und sendet es erneut aus. 
 
 Der Repeater ist eine günstige Methode, um die Reichweite um ein paar Meter zu verlängern. Allerdings hat diese Technik einen Haken: Sie halbiert oft die Bandbreite. Das liegt am sogenannten "Half-Duplex-Verfahren". Da der Repeater gleichzeitig mit dem Router und deinem Endgerät kommunizieren muss, kann er nicht gleichzeitig senden und empfangen. Er teilt die Zeitfenster auf, was die Geschwindigkeit halbiert. 
 
 Für das einfache Beantworten von E-Mails in der Küche reicht das völlig aus. Wenn du jedoch 4K-Filme streamen oder an Videokonferenzen teilnehmen willst, stößt diese Technik schnell an ihre Grenzen. Achte beim Kauf darauf, dass der Repeater "Crossband Reporting" unterstützt. Hierbei nutzt das Gerät unterschiedliche Frequenzbänder (2,4 GHz und 5 GHz) für den Empfang und den Versand, was den Geschwindigkeitsverlust etwas abfedert.
 
 ## Die Alternative:<br>Powerline (DLAN)
-wenn Wände zu dick für Funkwellen sind, gibt es noch einen weiteren Trick für schnelles Internet zu Hause: Powerline-Adapter. Diese nutzen das vorhandene Stromnetz im Haus als Datenleitung. Du steckst einen Adapter in die Nähe des Routers und verbindest beide mit einem LAN-Kabel. Den zweiten Adapter steckst du dort ein, wo du Internet brauchst.
+Wenn Wände zu dick für Funkwellen sind, gibt es noch einen weiteren Trick für schnelles Internet zu Hause: Powerline-Adapter. Diese nutzen das vorhandene Stromnetz im Haus als Datenleitung. Du steckst einen Adapter in die Nähe des Routers und verbindest beide mit einem LAN-Kabel. Den zweiten Adapter steckst du dort ein, wo du Internet brauchst.
 
 Dieser Weg ist ideal für Altbauten mit meterdicken Wänden oder Stahlbetondecken. Aber Vorsicht: Die Qualität der Verbindung hängt stark von der Qualität deiner Stromleitungen ab. Wenn die Waschmaschine oder der Kühlschrank anspringt, kann es zu kurzzeitigen Störungen kommen. Zudem sollten die Adapter direkt in der Wandsteckdose stecken, nicht in einer Mehrfachleiste, da diese das Signal massiv filtern.
 

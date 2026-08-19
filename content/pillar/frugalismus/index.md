@@ -31,7 +31,7 @@ Die einfachste Methode, die ich kenne: 50 % für Fixkosten, 30 % für Wünsche
 
 ## Notgroschen und Sicherheit
 
-Bevor du investierst, brauchst du ein finanzielles Polster. Wie groß es wirklich sein muss und wo du es am besten parkst, beantworte ich in Notgroschen aufbauen: Wie viel Geld reicht wirklich? und Tagesgeld und Zinsen: So parkst du dein Geld sicher.
+Bevor du investierst, brauchst du ein finanzielles Polster. Wie groß es wirklich sein muss und wo du es am besten parkst, beantworte ich in Notgroschen aufbauen: Wie viel Geld reicht wirklich? Und Tagesgeld und Zinsen: So parkst du dein Geld sicher.
 
 ## Gewohnheiten für finanzielle Freiheit
 

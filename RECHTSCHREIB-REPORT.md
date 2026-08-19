@@ -1,41 +1,60 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am … – 78 Artikel geprüft, 32 Funde, 0 korrigiert, 32 offen.
+> **Automatisch** erzeugt am … – 15 Artikel geprüft, 79 Funde, 8 korrigiert, 71 offen.
 
 ## Offene Punkte
 
-- `Unbekanntes Wort: „posts“ (Vorschläge: –)`
-- `Unbekanntes Wort: „posts“ (Vorschläge: –)`
-- `Unbekanntes Wort: „BaFin“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Market“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Maker“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Gettex“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Payment“ (Vorschläge: –)`
-- `Unbekanntes Wort: „FX-Fees“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Know-Your-Customer-Prozess“ (Vorschläge: –)`
-- `Unbekanntes Wort: „NFC-Schnittstelle“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Ident-Verfahren“ (Vorschläge: –)`
-- `Unbekanntes Wort: „KI-Nischen-ETFs“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Krypto-Zertifikate“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Tesla“ (Vorschläge: –)`
-- `Unbekanntes Wort: „ACWI“ (Vorschläge: –)`
-- `Unbekanntes Wort: „FaceID“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Chargeback“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Online-Banking-Ansicht“ (Vorschläge: –)`
-- `Description: Substantive klein „begründungslos“ → „Begründungslos“`
-- `Unbekanntes Wort: „Ratenzahlungs“ (Vorschläge: –)`
-- `Unbekanntes Wort: „DS-GVO“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Scores“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Basic-Score“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Löschungsbeleg“ (Vorschläge: –)`
-- `Unbekanntes Wort: „ETF-Gewinne“ (Vorschläge: –)`
-- `Unbekanntes Wort: „pillar“ (Vorschläge: –)`
-- `Unbekanntes Wort: „konto-karten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „stat“ (Vorschläge: –)`
-- `Unbekanntes Wort: „posts“ (Vorschläge: –)`
-- `Unbekanntes Wort: „posts“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Automate“ (Vorschläge: –)`
-- `Unbekanntes Wort: „eschrieben“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Frugalismus-Tricks“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Boost“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Internet-Flat“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Fixpreis-Garantie“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Wechseltairf“ (Vorschläge: –)`
+- `Unbekanntes Wort: „exkludieren“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Cashbacks“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Starkregenereignisse“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Opt-out-Regelung“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Unaufmerksamkeiten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „vergünstigte“ (Vorschläge: –)`
+- `Unbekanntes Wort: „wiederaufbauen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Leon“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Isolationsschicht“ (Vorschläge: –)`
+- `Unbekanntes Wort: „heizst“ (Vorschläge: –)`
+- `Unbekanntes Wort: „durchheizst“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Umwälzpumpe“ (Vorschläge: –)`
+- `Unbekanntes Wort: „herauslassen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Entertainment“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Home“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Metallbeschichtete“ (Vorschläge: –)`
+- `Unbekanntes Wort: „WLAN-Repeater“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Crossband“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Reporting“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Powerline“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Powerline-Adapter“ (Vorschläge: –)`
+- `Unbekanntes Wort: „meterdicken“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Gamechanger“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Seamless“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Mesh-Set“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Hacks“ (Vorschläge: –)`
+- `Unbekanntes Wort: „hacks“ (Vorschläge: –)`
+- `Unbekanntes Wort: „MeinWLAN“ (Vorschläge: –)`
+- `Unbekanntes Wort: „WLAN-Repeater“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Powerline“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Mesh-WLAN-System“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Plug“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Play“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Speedtest-App“ (Vorschläge: –)`
+- `Unbekanntes Wort: „ruckelndes“ (Vorschläge: –)`
+- `Unbekanntes Wort: „hacks“ (Vorschläge: –)`
+- `Unbekanntes Wort: „WPS-Standard“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Mesh-Systemen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Seamless“ (Vorschläge: –)`
+- `Unbekanntes Wort: „AVM“ (Vorschläge: –)`
+- `Unbekanntes Wort: „ASUS“ (Vorschläge: –)`
+- `Unbekanntes Wort: „TP-Link“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Smart-Home-Lampen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Routermodelle“ (Vorschläge: –)`
+- `Unbekanntes Wort: „AC-Standard“ (Vorschläge: –)`
+- … und 21 weitere
 
 ---
 *Erzeugt von scripts/spellcheck.py*

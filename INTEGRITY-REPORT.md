@@ -1,17 +1,16 @@
 # 🔐 INTEGRITY-REPORT
 
-<<<<<<< HEAD
-**Stand:** 2026-08-15 19:24 UTC · HEAD: `4f43c62`
-**Verlade-Ebene:** 36 Dateien gelockt
-=======
-**Stand:** 2026-08-17 16:48 UTC · HEAD: `cb4598f`
-**Verlade-Ebene:** 35 Dateien gelockt
->>>>>>> 6f69840 (fix(automation): Redundante Automatik entfernt, Report-Spam beseitigt)
+**Stand:** 2026-08-19 15:21 UTC · HEAD: `615f2ed`
+**Verlade-Ebene:** 0 Dateien gelockt
 **Gesperrte kritische Knoten:** 7
 
+## 🛑 KRITISCHE Abweichungen (hartn-foot lle)
 
-## 🟠 Festrelevante Abweichungen
-
-- `scripts/blog_doctor.py`
+- `hugo.toml (neu ohne Signatur)`
+- `layouts/_partials/head.html (neu ohne Signatur)`
+- `layouts/_partials/extend_footer.html (neu ohne Signatur)`
+- `layouts/robots.txt (neu ohne Signatur)`
+- `layouts/_default/_markup/render-link.html (neu ohne Signatur)`
+- `scripts/check24_links.yaml (neu ohne Signatur)`
 ---
 _Selbsttest vor jedem Start. Kritisch unterschreitet und Frank heißt Schritt._

@@ -1,5 +1,5 @@
 ---
-title: "Blog"
+title: "Blog: Erfolgreiche Strategien für mehr Reichweite und Leser"
 description: "Alle Ratgeber von FranksFinanzcheck: Strom, Gas, Internet, Versicherungen und Frugalismus – verständlich und mit konkreten Zahlen."
 # Nach der Bestandsbereinigung (6 Posts, pagerSize 8) existiert /posts/page/2/
 # nicht mehr und lieferte 404. Aliase erzeugen Redirect-Seiten (canonical +
@@ -18,4 +18,8 @@ aliases:
   - /posts/page/10/
   - /posts/page/11/
   - /posts/page/12/
+cover:
+  image: "images/covers/_index.jpg"
+  alt: "Spar-Tipp: _Index"
+  caption: "Tipp von FranksFinanzcheck"
 ---

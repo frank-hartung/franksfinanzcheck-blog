@@ -1,10 +1,8 @@
 # 🤖 ENGINE-STATUS (Content-Engine v2)
 
-**Letzter Lauf:** 2026-08-19 (manuell, Kadenz-Optimierung)
+**Letzter Lauf:** 2026-08-19 15:17 UTC
 **Status:** OK
 
-Kadenz umgestellt (DAUERVORGABE): 2–3 Artikel pro Publikationstag, NUR Mo/Mi/Fr.
-Bestand auf 6 Posts bereinigt (38 Off-Kadenz-Posts vollständig gelöscht),
-Themenpool repariert (175 Themen). Details: CADENCE-REPORT.md.
+2 Artikel heute (live: 2) | Ziel: 2-2 an Mo/Mi/Fr
 
 _Wird bei jedem Lauf der Content-Engine v2 aktualisiert._

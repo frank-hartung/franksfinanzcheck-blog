@@ -1,31 +1,11 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-08-15 19:24 UTC · Modus: FIX
+**Stand:** 2026-08-19 15:20 UTC · Modus: FIX+KI
 
-🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
+## ✅ Automatisch korrigiert (2 Dateien)
 
-## 🎓 Stil-Hinweise (Ebene 2, nur Info bzw. mit --ai aktiv)
-
-> ⚠️ **KADENZ-BEREINIGUNG 19.08.2026:** Dieser Report bezieht sich auf den Alt-Bestand.
-> Die genannten Artikel (Sa/So/Di-Termine + Evergreen-Bestand) wurden vollständig gelöscht –
-> der Blog zeigt jetzt nur noch Mo/Mi/Fr-Artikel (Details: `CADENCE-REPORT.md`).
-
-
-- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 19: S3-Konjunktion
-- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 28: S3-Konjunktion
-- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 68: S3-Konjunktion
-- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 77: S3-Konjunktion
-- `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 81: S3-Konjunktion
-- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 20: S3-Konjunktion
-- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 24: S3-Konjunktion
-- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 36: S3-Konjunktion
-- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 92: S3-Konjunktion
-- `content/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/index.md` Zeile 129: S3-Konjunktion
-- `content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md` Zeile 87: S3-Konjunktion
-- `content/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/index.md` Zeile 81: S1-Doppelschub
-- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 37: S3-Konjunktion
-- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 48: S3-Konjunktion
-- `content/posts/5g-home-router-oder-dsl/index.md` Zeile 70: S3-Konjunktion
+- `content/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/index.md`: Regel-Fixes 9, KI-Umformulierungen 0
+- `content/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/index.md`: Regel-Fixes 7, KI-Umformulierungen 0
 
 ---
 _Deterministisch: Gedankenstrich-Typ, Bis-Striche, Doppelminus · KI-Schiedsrichter (S1/S3) nur mit --ai. Geschützt: Front-Matter, Listen, Tabellen, Überschriften, URLs, Code._

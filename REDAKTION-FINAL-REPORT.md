@@ -1,20 +1,13 @@
 # 🎓 REDAKTIONS-FINAL-REPORT (Endabnahme)
 
-**Stand:** 2026-08-11 21:58 UTC
-
+**Stand:** 2026-08-19 15:21 UTC
 **Artikel:** 2
 
-## 🟢 2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck
-
-> ⚠️ **KADENZ-BEREINIGUNG 19.08.2026:** Dieser Report bezieht sich auf den Alt-Bestand.
-> Die genannten Artikel (Sa/So/Di-Termine + Evergreen-Bestand) wurden vollständig gelöscht –
-> der Blog zeigt jetzt nur noch Mo/Mi/Fr-Artikel (Details: `CADENCE-REPORT.md`).
-
+## 🟢 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
 
   verlagsreif ✅ (G1–G5 bestanden)
 
-## 🟢 2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft
-
+## 🟢 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
 
   verlagsreif ✅ (G1–G5 bestanden)
 

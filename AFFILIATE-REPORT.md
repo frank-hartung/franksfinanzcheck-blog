@@ -1,50 +1,18 @@
-# 🔗 Affiliate-Link-Report
+# 🤝 AFFILIATE-REPORT
 
-> **Automatisch** – 12 Posts geprüft, 12 mit Problemen, 0 Links korrigiert.
+**Stand:** 2026-08-19 15:23 UTC · Modus: FIX
 
-## Zusammenfassung
+Probleme: 4 · Geheilt: 4
 
-- ✅ Korrekt: 0/12
-- ❌ Mit Problemen: 12
-- 🔧 Korrigiert (--fix): 0
+| Code | Artikel | Problem |
+|---|---|---|
+| A2 | 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet | kein erfahrung-Feld (E-E-A-T) |
+| A2 | 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden | kein erfahrung-Feld (E-E-A-T) |
+| A3 | 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet | nur 0 interne Links (< 2) |
+| A3 | 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden | nur 0 interne Links (< 2) |
 
-## ❌ Probleme
-
-### frugalismus
-- ❌ KEIN Affiliate-Link vorhanden
-
-### internet-dsl
-- ❌ KEIN Affiliate-Link vorhanden
-
-### konto-karten
-- ❌ KEIN Affiliate-Link vorhanden
-
-### mietwagen
-- ❌ KEIN Affiliate-Link vorhanden
-
-### strom-sparen
-- ❌ KEIN Affiliate-Link vorhanden
-
-### versicherungen
-- ❌ KEIN Affiliate-Link vorhanden
-
-### 2026-08-10-dsl-wechselbonus-sichern
-- ❌ KEIN Affiliate-Link vorhanden
-
-### 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
-- ❌ KEIN Affiliate-Link vorhanden
-
-### 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
-- ❌ KEIN Affiliate-Link vorhanden
-
-### 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
-- ❌ KEIN Affiliate-Link vorhanden
-
-### 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
-- ❌ KEIN Affiliate-Link vorhanden
-
-### 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
-- ❌ KEIN Affiliate-Link vorhanden
-
----
-*Erzeugt von scripts/affiliate_link_check.py*
+**Selbstheilung:**
+- [A2] 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet: erfahrung ergänzt (generischer Profi-Baustein)
+- [A2] 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden: erfahrung ergänzt (generischer Profi-Baustein)
+- [A3] 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet: Pillar-Link ergänzt (→ konto-karten)
+- [A3] 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden: Pillar-Link ergänzt (→ konto-karten)
