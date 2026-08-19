@@ -30,6 +30,11 @@
 </header>
 {{- end }}
 
+{{- if eq .Section "posts" }}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage","name":{{ .Title | jsonify }},"description":{{ .Description | jsonify }},"url":{{ .Permalink | jsonify }},"isPartOf":{"@type":"WebSite","name":"FranksFinanzcheck","url":"https://franksfinanzcheck.de/"}}
+</script>
+{{- end }}
 {{- if .Content }}
 <div class="post-content md-content">
   {{- if not (.Param "disableAnchoredHeadings") }}
@@ -39,6 +44,20 @@
 {{- end }}
 
 {{- $pages := union .RegularPages .Sections }}
+
+{{- /* Profi-Filterleiste nur auf /posts/ – erhöht Reichweite & interne Verlinkung */ -}}
+{{- if eq .Section "posts" }}
+<nav class="ff-filter-bar" aria-label="Themen filtern" style="display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 8px;">
+  <a href="/pillar/strom-sparen/" style="background:#0E5A43;color:#fff;padding:6px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">⚡ Strom</a>
+  <a href="/pillar/strom-sparen/" style="background:#0E5A43;color:#fff;padding:6px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">🔥 Gas</a>
+  <a href="/pillar/internet-dsl/" style="background:#0E5A43;color:#fff;padding:6px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">🌐 Internet & DSL</a>
+  <a href="/pillar/versicherungen/" style="background:#0E5A43;color:#fff;padding:6px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">🛡️ Versicherungen</a>
+  <a href="/pillar/frugalismus/" style="background:#fff;color:#0E5A43;border:2px solid #0E5A43;padding:4px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">💰 Frugalismus</a>
+  <a href="/pillar/konto-karten/" style="background:#fff;color:#0E5A43;border:2px solid #0E5A43;padding:4px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">🏦 Konto</a>
+  <a href="/pillar/mietwagen/" style="background:#fff;color:#0E5A43;border:2px solid #0E5A43;padding:4px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">🚗 Reise</a>
+</nav>
+<p style="font-size:.82em; color:#5a6b64; margin:0 0 18px;">Tipp: Ein Klick bringt dich in die passende Ratgeber-Welt – dort sind alle Artikel thematisch gebündelt.</p>
+{{- end }}
 
 {{- if .IsHome }}
 {{- $pages = where site.RegularPages "Section" "eq" "posts" }}

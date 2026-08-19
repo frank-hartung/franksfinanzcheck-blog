@@ -4,11 +4,11 @@
 # Sektion asset:<pfad> = SHA-256 der kanonischen Marken-Artefakte (bake_brand.py)
 
 - key: homeInfoParams.Title
-  expected: "Willkommen bei FranksFinanzcheck! 👋"
+  expected: "Weniger zahlen, mehr behalten: Dein Spar-Ratgeber für Strom, Gas, Internet & Versicherungen"
 - key: homeInfoParams.Content
-  expected: "💰 Geld sparen ohne Gürtel enger zu schnallen – genau darum geht es hier.\\n\\nMontags, mittwochs und freitags erscheinen zwei bis drei neue, verständliche Ratgeber: **Strom, Gas und DSL günstiger**, Versicherungen richtig wählen, Konto & Karte ohne Gebührenfallen, dazu Frugalismus-Tricks und Budgetplanung, die wirklich im Alltag funktionieren. Ohne Fachchinesisch, ohne Verkaufsdruck – dafür mit konkreten Zahlen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen.\\n\\nStöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+  expected: "💰 Weniger Fixkosten ohne Verzicht – genau dafür ist FranksFinanzcheck da. Wenn im Herbst die Nachzahlungen für Strom und Gas ins Haus flattern, lohnt sich ein Tarifcheck vorher statt teuer nachzuzahlen.\\n\\nMontags, mittwochs und freitags bekommst du einen neuen Ratgeber: Strom und Gas günstiger, Internet nach Bedarf wählen, Versicherungen ohne Kleingedrucktes und Konto ohne Gebührenfalle. Ohne Fachchinesisch, ohne Verkaufsdruck – mit konkreten Euro-Beträgen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitung.\\n\\nStarte mit deiner höchsten Rechnung – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
 - key: params.description
-  expected: "Geld sparen & Frugalismus: Praxistipps zu Budgetplanung, Strom- & Gastarifen, DSL, Versicherungen und Reisen – so sparst du monatlich bares Geld."
+  expected: "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
 - key: params.disclaimer
   expected: "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 - key: asset:static/images/brand/logo.svg
