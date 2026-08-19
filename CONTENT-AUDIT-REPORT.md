@@ -1,6 +1,6 @@
 # 🔎 CONTENT-AUDIT-REPORT (content_audit.py)
 
-**Stand:** 2026-08-19 17:23 UTC
+**Stand:** 2026-08-19 17:27 UTC
 
 ## 🎯 Wichtigster Befund (fuer redaktionellen Ausbau)
 
