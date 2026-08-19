@@ -1,145 +1,147 @@
 {
- "total": 14,
- "errors": 12,
- "fixed": 2,
+ "total": 16,
+ "errors": 0,
+ "fixed": 0,
  "posts": [
   {
    "slug": "frugalismus",
-   "title": "Frugalismus: Der große Ratgeber für finanzielle Fr",
+   "title": "Frugalismus & Budget: Der große Ratgeber für finan",
    "pillar": "",
    "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
-   "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "internet-dsl",
-   "title": "Internet & DSL: Der große Ratgeber für schnelles N",
+   "title": "Internet, DSL & Mobilfunk: Der große Ratgeber für ",
    "pillar": "",
    "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
-   ],
+   "errors": [],
    "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "konto-karten",
    "title": "Konto & Karten: Der große Ratgeber für gebührenfre",
    "pillar": "",
    "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
-   ],
+   "errors": [],
    "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "mietwagen",
    "title": "Mietwagen & Reisen: Der große Ratgeber zum Geld sp",
    "pillar": "",
    "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
-   ],
+   "errors": [],
    "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "strom-sparen",
-   "title": "Strom sparen: Der große Ratgeber für niedrige Ener",
+   "title": "Strom & Gas sparen: Der große Ratgeber für niedrig",
    "pillar": "",
    "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
-   ],
+   "errors": [],
    "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "versicherungen",
    "title": "Versicherungen: Der große Ratgeber für den richtig",
    "pillar": "",
    "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
-   "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "2026-08-10-dsl-wechselbonus-sichern",
    "title": "DSL-Wechselbonus sichern: So sparst du beim Intern",
    "pillar": "internet-dsl",
    "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
-   ],
+   "errors": [],
    "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
    "title": "Sicher heizen: So schützt dich eine Gaspreisgarant",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
-   ],
+   "errors": [],
    "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
    "title": "Dein Haus sicher schützen: Das neue Vorsorge-Updat",
    "pillar": "versicherungen",
    "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
-   "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-   "title": "Preisgarantie Gas: So sicherst du dir günstige Tar",
+   "title": "Preisgarantie Gas: So sicherst du günstige Tarife ",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
-   ],
+   "errors": [],
    "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
    "title": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
-   ],
+   "errors": [],
    "infos": [],
-   "ok": false
+   "ok": true
   },
   {
    "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
-   "title": "WLAN verbessern: So bringst du Speed in jede Ecke",
+   "title": "WLAN verbessern: So bringst du stabilen Speed in j",
    "pillar": "internet-dsl",
    "fixed": 0,
-   "errors": [
-    "KEIN Affiliate-Link vorhanden"
-   ],
+   "errors": [],
    "infos": [],
-   "ok": false
+   "ok": true
+  },
+  {
+   "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+   "title": "Kostenloses Girokonto: So findest du ein Konto ohn",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet",
+   "title": "Privathaftpflicht: Warum sie so wichtig ist und wa",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
   },
   {
    "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
    "title": "DSL Vergleich: So findest du günstigeres Internet",
-   "pillar": "konto-karten",
-   "fixed": 1,
+   "pillar": "internet-dsl",
+   "fixed": 0,
    "errors": [],
    "infos": [],
    "ok": true
@@ -147,8 +149,8 @@
   {
    "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
    "title": "Energiediebe stoppen: So kannst du Stromfresser fi",
-   "pillar": "konto-karten",
-   "fixed": 1,
+   "pillar": "strom-sparen",
+   "fixed": 0,
    "errors": [],
    "infos": [],
    "ok": true

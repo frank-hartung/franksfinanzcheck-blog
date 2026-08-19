@@ -21,9 +21,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 ---
 
-# DSL Vergleich: So findest du günstigeres Internet
+# DSL-Vergleich: So findest du günstigeres Internet
 
-Zahlst du jeden Monat fast 50 € für deinen Internetanschluss?  
+Zahlst du jeden Monat fast 50 € für deinen Internetanschluss?  
 Dein Nachbar bekommt die gleiche Leistung wahrscheinlich für die Hälfte.  
 Du zahlst eine unnötige Treue-Steuer an deinen alten Anbieter.  
 Ein systematischer DSL-Vergleich hilft dir aus dieser Kostenfalle – und günstigeres Internet ist oft nur wenige Klicks entfernt.
@@ -159,7 +159,7 @@ Rechne immer mit dem Effektivpreis über 24 Monate, wähle die Bandbreite nach d
 So sicherst du dir günstiges Internet ohne Risiko und ohne Ausfallzeiten.  
 Trag dir am besten gleich eine Erinnerung ein, den Vergleich zum Ende deiner Mindestlaufzeit zu wiederholen.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
 ## Häufige Fragen
 
 ### Wie lange dauert es, den Internetvertrag zu wechseln?

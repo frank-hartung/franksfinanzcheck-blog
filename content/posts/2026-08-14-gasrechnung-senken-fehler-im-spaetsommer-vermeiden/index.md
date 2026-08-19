@@ -37,7 +37,7 @@ Hier sind die wichtigsten Schritte für deine Planung:
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Kostenlos vergleichen**](/go/allgemein/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Kostenlos vergleichen**](/go/strom/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Der erste Fehler:<br>Die Wartung auf die lange Bank schieben
@@ -103,7 +103,7 @@ Sich gezielt mit dem Thema **Gasrechnung senken: Fehler im Spätsommer vermeiden
 
 
 
-**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · [Preisgarantie Gas: So sicherst du dir günstige Tarife für 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Sicher heizen: So schützt dich eine Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · [Preisgarantie Gas: So sicherst du günstige Tarife für 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
 ## Häufige Fragen
 
 ### Wann ist der beste Zeitpunkt für die Entlüftung der Heizkörper?

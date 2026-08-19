@@ -1,36 +1,28 @@
 {
-<<<<<<< HEAD
-  "signed_at": "2026-08-15T19:24:08.139225+00:00",
-  "head": "4f43c62",
-=======
-  "signed_at": "2026-08-17T16:48:41.014201+00:00",
-  "head": "cb4598f",
->>>>>>> 6f69840 (fix(automation): Redundante Automatik entfernt, Report-Spam beseitigt)
+  "signed_at": "2026-08-19T17:27:48.525720+00:00",
+  "head": "49d50f4",
   "files": {
-    "assets/css/extended/custom.css": "3c941e57a4ecc96a4c8e78c8dbbb184b17e10af22ab29dd72bb908f5bdbaab88",
-    "data/brand_lock.yaml": "2858fc032bed093ef805548accbcc665e801a3385616aeb06416d5a84656cb60",
-    "data/content_fingerprints.jsonl": "9a682bbe82eb6f248964a8ad66d34b2d79edc6480e4e10801042b4ede1314485",
-    "hugo.toml": "6d2e0a5cb2a1aec0f7ce6d91671d55119e4df7e7be0e08897c5a007b6f143660",
+    "assets/css/extended/custom.css": "8a773e659ecc2dad33d6401a4f078fba011fc5771206483f762b0feabf2c7f3e",
+    "data/brand_lock.yaml": "66603d40d61c3916bb5aa97db0a62d7cf8264527b776498efc9a127a4163fb0c",
+    "data/content_fingerprints.jsonl": "1dc9819ff7d08efa7c03bbcc2f8a1d7253d2202d36eaa07843afa7557f5f63fe",
+    "hugo.toml": "a4a1d8ff2259a01a5c73e072511f610fa37b5b7e0d2dbf7fc3be9f704a425fea",
     "layouts/_default/_markup/render-link.html": "aa06d8fad298ef739b97001c0cc7ce9a0c1102bc2df021570314df3d5c296a87",
     "layouts/_partials/cover.html": "f96a5ff402634dffc595077ca3648d4e5a79cf061f3d78328102bb804463c152",
     "layouts/_partials/extend_footer.html": "a4fa2074afc77eae574354a0199aa531fcd796f87eaa58a54b1444dd38f96513",
     "layouts/_partials/extend_post_content.html": "a0bf5b4c30c5454edfc869dc99b0af0a550f1b2210b60289b57aec937702755e",
-    "layouts/_partials/head.html": "f73695b574d75d455b3b7f4395c70c064d467fce42b72d3547fa2863b90fc942",
+    "layouts/_partials/head.html": "60593adc450464781755efe6209fc92c08fc52a32eeccdccd7635e162f74647b",
     "layouts/_partials/header.html": "60b47627b726d8f71c0cb9ba4302752dbfe0c0f4853c8d389ac18f54409508a4",
-    "layouts/_partials/home_clusters.html": "c26a478ad7b7526cd3a00d55d60e5b7bf8d93e56aa294848bca6d326632827be",
+    "layouts/_partials/home_clusters.html": "3caf87074673644ab0d595bb416c7913194ab1ddc9ce4a6dd537020237b2abbb",
     "layouts/_partials/pillar_box.html": "c9f3e598255ca292094ef5fc93bfd565adb05f3c5c1f8957dfb4d6c1d4ac5a34",
     "layouts/index.sw.js": "1ccb12aef58dca13bc26f7eb1c3e2eefe8ca039dd15de41b3e951fd416383ac6",
-    "layouts/pillar/list.html": "4847c8d93c6a2c65fd7d63de5414f0e9d4e2859e11394f882decdf5fe49f97b4",
-    "layouts/pillar/single.html": "be35a1669264afab63e388d15e9245e188e91c02f86e97482c9f08deaed476d7",
+    "layouts/pillar/list.html": "f38c32d3d6a87d42585f135d4b2436178e2829ddbfe8624754573ebb6bb87eb0",
+    "layouts/pillar/single.html": "eff18d9f48dc3499d154ed47663bdc54f74bc5ee3a072de4e79f3924b7c7ad11",
     "layouts/robots.txt": "b1d5ad6a2e48176d433d5230f89beb3669f30e01288d412e61c7de1e12092c90",
     "scripts/affiliate_marketer.py": "f7941fe3f1c4e22451958d49636265d75b3d12b8ecdab837044efd6d44cd85ef",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
-<<<<<<< HEAD
     "scripts/blog_doctor.py": "940bde1e2d465112c7fa3f580b94572bfa088b0188fc079b0a239c4db907eb52",
-=======
->>>>>>> 6f69840 (fix(automation): Redundante Automatik entfernt, Report-Spam beseitigt)
     "scripts/brand_guard.py": "e668be495b16d13ee9c13806d6281b08a862cc075888f3abf418a56b6bc92bed",
-    "scripts/check24_links.yaml": "417e752281360a2e06ea926c0ec9e1d8c40f2e82773f8c40ad6cf22ef530a4c5",
+    "scripts/check24_links.yaml": "9470c86e682c7d7969dc17fac1b4b23dad68da06e36d4407a017364d334a12a0",
     "scripts/check_covers.py": "ba7cd294bbd3ce001dd469682434e0ba887d5a2027ec75e27744c1fab24306b1",
     "scripts/content_audit.py": "10d0ad1d8bac688c8d72c24036e7e0d331dc478bb33cf62581a4388f723055d4",
     "scripts/fazit_schmiede.py": "5f4d66a0ef8331c0f24b118a5cb59f49e7370bdd10cd57301bd0aca9679d3e42",

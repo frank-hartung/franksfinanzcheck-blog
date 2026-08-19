@@ -28,7 +28,7 @@ Ein Moment der Unachtsamkeit auf dem Fahrrad, ein Radfahrer stürzt und ist mona
 ### Das Wichtigste in Kürze
 * Du haftest privat unbegrenzt – die Haftpflicht übernimmt berechtigte Forderungen.
 * Eine Deckungssumme von mindestens 10, besser 50 Millionen € ist heute Standard.
-* Gute Tarife kosten Singles ab etwa 40–70 € im Jahr, Familien ab 60–100 €.
+* Gute Tarife kosten Singles ab etwa 40–70 € im Jahr, Familien ab 60–100 €.
 * Die Versicherung wehrt auch unberechtigte Forderungen ab – passiver Rechtsschutz inklusive.
 
 ---
@@ -50,12 +50,12 @@ Die gute Nachricht: Der Markt ist hart umkämpft, und starke Tarife sind erstaun
 
 | Lebenssituation | Guter Tarif (pro Jahr) | Hinweis |
 | :--- | :--- | :--- |
-| Single | ca. 40–70 € | Oft mit 150 € Selbstbeteiligung noch günstiger |
-| Paar | ca. 50–90 € | Partner im Vertrag mitversichert |
-| Familie mit Kindern | ca. 60–100 € | Kinder bis zum Ende der Ausbildung mitversichert |
-| Senioren | ca. 40–80 € | Spezialtarife mit Pflege-Extras verfügbar |
+| Single | ca. 40–70 € | Oft mit 150 € Selbstbeteiligung noch günstiger |
+| Paar | ca. 50–90 € | Partner im Vertrag mitversichert |
+| Familie mit Kindern | ca. 60–100 € | Kinder bis zum Ende der Ausbildung mitversichert |
+| Senioren | ca. 40–80 € | Spezialtarife mit Pflege-Extras verfügbar |
 
-Ein Preisunterschied von 30 € im Jahr sollte nie das Hauptkriterium sein. Wichtiger ist, dass die Leistungen zu deinem Leben passen. Alte Verträge aus den 2000er-Jahren haben oft nur 3 Millionen € Deckung und kennen moderne Bausteine gar nicht – ein Wechsel lohnt sich hier fast immer doppelt: bessere Leistung zum niedrigeren Preis.
+Ein Preisunterschied von 30 € im Jahr sollte nie das Hauptkriterium sein. Wichtiger ist, dass die Leistungen zu deinem Leben passen. Alte Verträge aus den 2000er-Jahren haben oft nur 3 Millionen € Deckung und kennen moderne Bausteine gar nicht – ein Wechsel lohnt sich hier fast immer doppelt: bessere Leistung zum niedrigeren Preis.
 
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/haftpflicht/)
 
@@ -80,9 +80,9 @@ Prüfe außerdem einmal im Jahr, ob deine Lebenssituation noch zum Tarif passt. 
 
 ## Fazit:<br>Maximaler Schutz für minimales Geld
 
-Kaum eine Versicherung hat ein besseres Preis-Leistungs-Verhältnis: Für 40 bis 100 € im Jahr schützt dich die Privathaftpflicht vor dem finanziellen Totalschaden. Achte auf mindestens 10 Millionen € Deckungssumme, Ausfalldeckung und die Bausteine für Gefälligkeitsschäden und deliktunfähige Kinder. Wenn dein Vertrag älter als fünf Jahre ist, vergleiche die Konditionen – die Chancen stehen gut, dass du für weniger Geld deutlich mehr Schutz bekommst.
+Kaum eine Versicherung hat ein besseres Preis-Leistungs-Verhältnis: Für 40 bis 100 € im Jahr schützt dich die Privathaftpflicht vor dem finanziellen Totalschaden. Achte auf mindestens 10 Millionen € Deckungssumme, Ausfalldeckung und die Bausteine für Gefälligkeitsschäden und deliktunfähige Kinder. Wenn dein Vertrag älter als fünf Jahre ist, vergleiche die Konditionen – die Chancen stehen gut, dass du für weniger Geld deutlich mehr Schutz bekommst.
 
-**Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · [Dein Haus sicher schützen: Das neue Vorsorge-Update 2026](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/)
+**Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · [Dein Haus sicher schützen: Das neue Vorsorge-Update 2026](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) · [Kostenloses Girokonto: So findest du ein Konto ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/)
 ## Häufige Fragen
 
 ### Ist die Privathaftpflicht gesetzlich vorgeschrieben?

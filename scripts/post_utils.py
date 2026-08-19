@@ -16,7 +16,7 @@ def list_post_paths():
     """Alle Post-Dateien (Bundles + Legacy), sortiert, dedupliziert."""
     paths = glob.glob(os.path.join(POSTS_DIR, "*.md"))
     paths += glob.glob(os.path.join(POSTS_DIR, "*", "index.md"))
-    return sorted(set(paths))
+    return sorted(set(p for p in paths if not p.endswith("_index.md")))
 
 
 def slug_of(path):

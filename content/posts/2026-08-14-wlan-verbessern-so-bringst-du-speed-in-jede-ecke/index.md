@@ -98,7 +98,7 @@ Am Ende ist es eine Kombination aus der richtigen Hardware und einer klugen Plat
 
 Es gibt nichts Nervigeres als ein ruckelndes Bild in einer wichtigen Videokonferenz. Nimm dir die Zeit, deine Umgebung zu analysieren. Manchmal reicht ein kleiner Standortwechsel des Routers – weg vom Boden, hin auf ein Regal – schon aus, um die Reichweite um 20% zu steigern. In anderen Fällen ist die Investition in moderne Technik wie Wi-Fi 6 der einzige Weg, um langfristig Ruhe zu haben.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [DSL Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
 ## Häufige Fragen
 
 ### Hilft ein Alufolien-Reflektor wirklich?

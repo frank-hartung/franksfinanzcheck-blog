@@ -2,8 +2,8 @@
        (Hugo-Subdir-sicher). Fehlende Pillar-Seiten werden still übersprungen. */ -}}
 {{- $pillars := slice "strom-sparen" "internet-dsl" "versicherungen" "konto-karten" "frugalismus" "mietwagen" }}
 {{- $labels := dict "strom-sparen" "⚡" "internet-dsl" "🌐" "versicherungen" "🛡️" "konto-karten" "🏦" "frugalismus" "💰" "mietwagen" "🚗" }}
-{{- $names := dict "strom-sparen" "Strom & Gas sparen" "internet-dsl" "Internet & DSL" "versicherungen" "Versicherungen" "konto-karten" "Konto & Karten" "frugalismus" "Frugalismus & Budget" "mietwagen" "Mietwagen & Reise" }}
-{{- $blurbs := dict "strom-sparen" "Tarife vergleichen, Nachzahlungen vermeiden, bis zu 300 € sparen" "internet-dsl" "DSL-Vergleich, Wechselbonus, WLAN-Tipps – günstiger surfen" "versicherungen" "Haftpflicht, Hausrat & Co. – nur was du wirklich brauchst" "konto-karten" "Girokonto ohne Gebühren, Karten clever wählen" "frugalismus" "50-30-20-Regel, Notgroschen, Alltagstricks ohne Verzicht" "mietwagen" "Fallen vermeiden, Urlaubskasse clever aufbessern" }}
+{{- $names := dict "strom-sparen" "Strom & Gas sparen" "internet-dsl" "Internet & DSL" "versicherungen" "Versicherungen" "konto-karten" "Konto & Karten" "frugalismus" "Frugalismus & Budget" "mietwagen" "Mietwagen & Reisen" }}
+{{- $blurbs := dict "strom-sparen" "Tarife vergleichen, Nachzahlungen vermeiden, bis zu 800 € sparen" "internet-dsl" "DSL-Vergleich, Wechselbonus, WLAN-Tipps – günstiger surfen" "versicherungen" "Haftpflicht, Hausrat & Co. – nur was du wirklich brauchst" "konto-karten" "Girokonto ohne Gebühren, Karten clever wählen" "frugalismus" "50–30–20-Regel, Notgroschen, Alltagstricks ohne Verzicht" "mietwagen" "Fallen vermeiden, Urlaubskasse clever aufbessern" }}
 <section class="ff-clusters" aria-label="Themenwelten" style="margin:28px 0 8px; padding-top:24px; border-top:2px solid rgba(14,90,67,.15);">
   <h2 style="font-family:'Inter',sans-serif; font-weight:800; color:#0E5A43; font-size:1.25em; margin:0 0 12px;">Finde deinen Spar-Hebel – 6 Themenwelten</h2>
   <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;">
@@ -11,7 +11,7 @@
       {{- with site.GetPage (printf "pillar/%s" .) }}
       {{- $key := .File.ContentBaseName }}
       {{- $count := len (where site.RegularPages ".Params.pillar" $key) }}
-      <a href="pillar/{{ $key }}/" aria-label="Zum Ratgeber: {{ index $names $key | default .Title }}"
+      <a href="{{ printf "pillar/%s/" $key | relURL }}" aria-label="Zum Ratgeber: {{ index $names $key | default .Title }}"
          style="background:#fff;border:1px solid rgba(14,90,67,.15);border-left:5px solid #0E5A43;border-radius:12px;padding:14px 16px;text-decoration:none;display:flex;flex-direction:column;gap:6px;">
         <span style="font-size:1.4em;" aria-hidden="true">{{ index $labels $key | default "📘" }}</span>
         <strong style="color:#0E5A43;">{{ index $names $key | default (.Title | plainify) }}</strong>

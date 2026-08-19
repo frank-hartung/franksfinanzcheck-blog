@@ -3,46 +3,312 @@
 {{- /* ============================================================
     pillar/list.html – Ratgeber-Übersicht (/pillar/)
     ------------------------------------------------------------
-    Zeigt alle 6 Pillar-Ratgeber als Karten. Die Pillars sind per
-    Frontmatter 'build: list: never' aus ALLEN Hugo-Listen
-    ausgeschlossen (Commit 6a1c81a, damit sie nicht als Post-Karten
-    in Startseite/Kategorien/Tags erscheinen) – dadurch war die
-    Sektionsübersicht /pillar/ leer. Dieses Template listet die
-    6 Ratgeber EXPLIZIT per site.GetPage (funktioniert trotz
-    'list: never', verifiziert in 6a1c81a).
-
-    Relative Links "<slug>/" – kein führender Slash (Subdir-Bug).
+    Zeigt die große Ratgeber-Zentrale von FranksFinanzcheck.
+    Strukturiert nach 6 Kern-Themenwelten mit Spar-Matrix,
+    Conversion-Elementen, E-E-A-T-Vertrauenssignalen und
+    optimierten internen Verlinkungen.
 ============================================================ */ -}}
 
-<header class="page-header">
-  <h1 class="post-title entry-hint-parent">{{ .Title | default "Ratgeber" }}</h1>
-  {{- if .Description }}
-  <div class="post-description">{{ .Description | markdownify }}</div>
-  {{- end }}
+{{- $pillars := slice "strom-sparen" "internet-dsl" "versicherungen" "konto-karten" "frugalismus" "mietwagen" }}
+{{- $labels := dict "strom-sparen" "⚡" "internet-dsl" "🌐" "versicherungen" "🛡️" "konto-karten" "💳" "frugalismus" "🌱" "mietwagen" "🚗" }}
+{{- $names := dict "strom-sparen" "Strom & Gas sparen" "internet-dsl" "Internet, DSL & Handy" "versicherungen" "Versicherungen & Vorsorge" "konto-karten" "Konto, Karten & Zinsen" "frugalismus" "Frugalismus & Budget" "mietwagen" "Mietwagen & Reisen" }}
+{{- $savings := dict "strom-sparen" "Bis zu 800 € / Jahr" "internet-dsl" "Bis zu 350 € / Jahr" "versicherungen" "Bis zu 500 € / Jahr" "konto-karten" "Bis zu 180 € / Jahr" "frugalismus" "Über 200 € / Monat" "mietwagen" "Bis zu 400 € / Reise" }}
+{{- $topics := dict "strom-sparen" (slice "Stromanbieter wechseln" "Gaspreisgarantien" "Stromfresser im Standby" "Heizkosten senken") "internet-dsl" (slice "DSL-Wechselbonus" "WLAN optimieren" "DNS-Tuning" "Günstige Handytarife") "versicherungen" (slice "Privathaftpflicht" "Wohngebäude & Hausrat" "Kfz-Versicherungswechsel" "Zahnzusatz") "konto-karten" (slice "Kostenloses Girokonto" "C24 Bank Vergleich" "Kreditkarten ohne Jahresgebühr" "Tagesgeld-Zinsen") "frugalismus" (slice "50–30–20-Regel" "Notgroschen aufbauen" "Ausgaben-Tracking" "Konsum-Gewohnheiten") "mietwagen" (slice "Mietwagen ohne Kautionsfalle" "Vollkasko ohne Selbstbeteiligung" "Günstige Flüge" "Last-Minute-Buchung") }}
+{{- $ctas := dict "strom-sparen" (dict "url" "/go/strom/" "text" "Stromtarife vergleichen") "internet-dsl" (dict "url" "/go/dsl/" "text" "DSL-Tarife vergleichen") "versicherungen" (dict "url" "/go/haftpflicht/" "text" "Haftpflicht vergleichen") "konto-karten" (dict "url" "/go/girokonto/" "text" "Girokonto vergleichen") "frugalismus" (dict "url" "/go/tagesgeld/" "text" "Tagesgeld vergleichen") "mietwagen" (dict "url" "/go/mietwagen/" "text" "Mietwagen vergleichen") }}
+
+<header class="ff-pillar-hero" style="background:linear-gradient(165deg, #0E5A43 0%, #083829 100%); color:#fff; border-radius:16px; padding:32px 28px; margin-bottom:28px; box-shadow:0 8px 24px rgba(14,90,67,.2);">
+  <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,179,0,.18); border:1px solid rgba(255,179,0,.45); color:#FFD54F; padding:6px 14px; border-radius:999px; font-size:.82em; font-weight:700; text-transform:uppercase; letter-spacing:.04em; margin-bottom:14px;">
+    <span>🧭</span> DIE GROSSEN THEMENWELTEN · FRANKSFINANZCHECK
+  </div>
+  <h1 style="color:#fff; font-size:2.1em; line-height:1.25; margin:0 0 12px; font-weight:800; letter-spacing:-0.02em;">
+    {{ .Title | default "Ratgeber: Die 6 großen Sparthemen im Überblick" }}
+  </h1>
+  <p style="color:rgba(255,255,255,.92); font-size:1.05em; line-height:1.6; max-width:820px; margin:0 0 20px;">
+    {{ .Description | default "Die großen Spar-Ratgeber auf FranksFinanzcheck: Strom & Gas sparen, Versicherungen, Internet & DSL, Konto & Karten, Frugalismus sowie Mietwagen & Reisen – spare jährlich bis zu 2.000 € Fixkosten." | markdownify }}
+  </p>
+
+  <div style="display:flex; flex-wrap:wrap; gap:12px; padding-top:16px; border-top:1px solid rgba(255,255,255,.15);">
+    <div style="display:inline-flex; align-items:center; gap:6px; font-size:.85em; color:rgba(255,255,255,.95); background:rgba(255,255,255,.1); padding:5px 12px; border-radius:8px;">
+      <span>🛡️</span> <strong>100 % unabhängig & kostenlos</strong>
+    </div>
+    <div style="display:inline-flex; align-items:center; gap:6px; font-size:.85em; color:rgba(255,255,255,.95); background:rgba(255,255,255,.1); padding:5px 12px; border-radius:8px;">
+      <span>💶</span> <strong>Bis zu 2.000 € Sparpotenzial / Jahr</strong>
+    </div>
+    <div style="display:inline-flex; align-items:center; gap:6px; font-size:.85em; color:rgba(255,255,255,.95); background:rgba(255,255,255,.1); padding:5px 12px; border-radius:8px;">
+      <span>⏱️</span> <strong>In 3–5 Min. zum Besttarif</strong>
+    </div>
+    <div style="display:inline-flex; align-items:center; gap:6px; font-size:.85em; color:rgba(255,255,255,.95); background:rgba(255,255,255,.1); padding:5px 12px; border-radius:8px;">
+      <span>🔄</span> <strong>Stand: August 2026 geprüft</strong>
+    </div>
+  </div>
 </header>
 
+{{- /* ---------- Schnellnavigation / Filter-Leiste ---------- */ -}}
+<nav aria-label="Themen-Schnellnavigation" style="margin-bottom:24px;">
+  <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+    <span style="font-size:.85em; font-weight:700; color:#0E5A43; margin-right:4px;">Direkt zum Thema:</span>
+    {{- range $pillars }}
+      {{- $k := . }}
+      <a href="#pillar-{{ $k }}" style="background:#fff; color:#0E5A43; border:1px solid rgba(14,90,67,.22); border-radius:999px; padding:6px 14px; font-size:.85em; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px; box-shadow:0 1px 3px rgba(0,0,0,.04); transition:all .15s ease;">
+        <span>{{ index $labels $k }}</span> {{ index $names $k }}
+      </a>
+    {{- end }}
+  </div>
+</nav>
+
 {{- if .Content }}
-<div class="post-content md-content">
+<div class="post-content md-content" style="margin-bottom:28px;">
   {{- partial "anchored_headings.html" ((.Content | partial "nbsp_sicherung.html") | safeHTML) }}
 </div>
 {{- end }}
 
-{{- $pillars := slice "strom-sparen" "versicherungen" "mietwagen" "frugalismus" "internet-dsl" "konto-karten" }}
-{{- $labels := dict "strom-sparen" "⚡" "versicherungen" "🛡️" "mietwagen" "🚗" "frugalismus" "🌱" "internet-dsl" "🌐" "konto-karten" "💳" }}
+{{- /* ---------- 6 Große Pillar-Master-Karten ---------- */ -}}
+<section aria-label="Ratgeber Übersicht" style="margin:28px 0;">
+  <h2 style="font-family:'Inter',sans-serif; color:#0E5A43; font-size:1.55em; font-weight:800; margin-bottom:18px; border-bottom:2px solid rgba(255,179,0,.5); padding-bottom:8px;">
+    Alle 6 Themen-Ratgeber im Detail
+  </h2>
 
-<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-top:24px;">
-  {{- range $pillars }}
-    {{- with site.GetPage (printf "pillar/%s" .) }}
-    {{- $count := len (where site.RegularPages ".Params.pillar" .File.ContentBaseName) }}
-    <a href="{{ .File.ContentBaseName }}/" aria-label="Zum Ratgeber: {{ .Title | plainify }}"
-       style="display:flex; flex-direction:column; background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:14px; padding:22px 20px; text-decoration:none; box-shadow:0 2px 6px rgba(0,0,0,.06); transition:transform .18s ease, box-shadow .18s ease;">
-      <span style="font-size:2em; line-height:1;" aria-hidden="true">{{ index $labels .File.ContentBaseName | default "📘" }}</span>
-      <strong style="font-family:'Inter',sans-serif; color:#0E5A43; font-size:1.12em; line-height:1.35; margin:12px 0 6px;">{{ .Title | plainify }}</strong>
-      <span style="font-size:.88em; color:#555; line-height:1.5; flex:1;">{{ .Description | plainify | truncate 130 }}</span>
-      <span style="margin-top:14px; font-size:.85em; color:#0E5A43; font-weight:700;">{{ $count }} Artikel →</span>
-    </a>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:22px;">
+    {{- range $pillars }}
+      {{- $key := . }}
+      {{- with site.GetPage (printf "pillar/%s" $key) }}
+      {{- $count := len (where site.RegularPages ".Params.pillar" $key) }}
+      {{- $cta := index $ctas $key }}
+      <article id="pillar-{{ $key }}" style="display:flex; flex-direction:column; background:#fff; border:1px solid rgba(14,90,67,.18); border-top:5px solid #0E5A43; border-radius:14px; padding:24px 22px; box-shadow:0 3px 12px rgba(14,90,67,.08); transition:transform .2s ease, box-shadow .2s ease;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+          <span style="font-size:2.2em; line-height:1;" aria-hidden="true">{{ index $labels $key }}</span>
+          <span style="background:rgba(255,179,0,.15); color:#996500; border:1px solid rgba(255,179,0,.5); padding:4px 10px; border-radius:999px; font-size:.78em; font-weight:700;">
+            {{ index $savings $key }}
+          </span>
+        </div>
+
+        <h3 style="font-family:'Inter',sans-serif; font-size:1.25em; line-height:1.35; color:#0E5A43; margin:0 0 8px; font-weight:700;">
+          <a href="{{ $key }}/" style="color:#0E5A43; text-decoration:none;">{{ index $names $key }}</a>
+        </h3>
+
+        <p style="font-size:.9em; color:#444; line-height:1.55; margin:0 0 14px; flex:1;">
+          {{ .Description | plainify }}
+        </p>
+
+        {{- $sublist := index $topics $key }}
+        {{- if $sublist }}
+        <div style="background:#F7FBF9; border:1px solid rgba(14,90,67,.1); border-radius:8px; padding:10px 12px; margin-bottom:16px;">
+          <span style="font-size:.78em; font-weight:700; color:#0E5A43; text-transform:uppercase; display:block; margin-bottom:6px;">Schwerpunkte im Ratgeber:</span>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            {{- range $sublist }}
+            <span style="font-size:.78em; background:#fff; border:1px solid rgba(14,90,67,.15); color:#2E2E33; padding:2px 8px; border-radius:4px;">{{ . }}</span>
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+
+        <div style="display:flex; flex-direction:column; gap:8px; margin-top:auto; padding-top:14px; border-top:1px solid rgba(14,90,67,.12);">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:.82em; color:#666; font-weight:600;">
+              {{ if gt $count 0 }}📚 {{ $count }} vertiefende Artikel{{ else }}📖 Umfassender Leitfaden{{ end }}
+            </span>
+            <a href="{{ $key }}/" style="color:#0E5A43; font-weight:700; font-size:.88em; text-decoration:none;">
+              Zum Ratgeber →
+            </a>
+          </div>
+
+          {{- if $cta }}
+          <a href="{{ $cta.url }}" rel="sponsored nofollow noopener" target="_blank"
+             style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:#FFB300; color:#2E2E33; font-weight:700; font-size:.88em; padding:8px 16px; border-radius:999px; text-decoration:none; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,.08); transition:background .15s ease;">
+            <span>⚡</span> {{ $cta.text }} →
+          </a>
+          {{- end }}
+        </div>
+      </article>
+      {{- end }}
     {{- end }}
-  {{- end }}
-</div>
+  </div>
+</section>
+
+{{- /* ---------- Spar-Matrix: Schnelle Übersicht der Einsparpotenziale ---------- */ -}}
+<section aria-label="Spar-Matrix" style="margin:36px 0; background:#F7FBF9; border:1px solid rgba(14,90,67,.18); border-radius:14px; padding:24px;">
+  <h2 style="font-family:'Inter',sans-serif; color:#0E5A43; font-size:1.35em; font-weight:800; margin:0 0 8px;">
+    📊 Die FranksFinanzcheck Spar-Matrix auf einen Blick
+  </h2>
+  <p style="font-size:.92em; color:#555; margin:0 0 16px; line-height:1.5;">
+    So viel kannst du durch einen Anbieter- oder Tarifwechsel in jedem Bereich sparen:
+  </p>
+
+  <div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; font-size:.88em; text-align:left; background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.05);">
+      <thead>
+        <tr style="background:#0E5A43; color:#fff;">
+          <th style="padding:10px 14px; font-weight:700;">Themenbereich</th>
+          <th style="padding:10px 14px; font-weight:700;">Durchschnittliche Ersparnis</th>
+          <th style="padding:10px 14px; font-weight:700;">Zeitaufwand</th>
+          <th style="padding:10px 14px; font-weight:700;">Empfohlener Hebel</th>
+          <th style="padding:10px 14px; font-weight:700;">Direkter Vergleich</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:10px 14px; font-weight:600;"><a href="strom-sparen/" style="color:#0E5A43; text-decoration:none;">⚡ Strom & Gas</a></td>
+          <td style="padding:10px 14px; color:#0E5A43; font-weight:700;">300 – 800 € / Jahr</td>
+          <td style="padding:10px 14px;">ca. 5 Minuten</td>
+          <td style="padding:10px 14px;">Tarifwechsel mit 12-Monats-Preisgarantie</td>
+          <td style="padding:10px 14px;"><a href="/go/strom/" rel="sponsored nofollow noopener" target="_blank" style="background:#FFB300; color:#2E2E33; padding:4px 10px; border-radius:999px; text-decoration:none; font-weight:700; font-size:.85em; display:inline-block;">Stromvergleich →</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:10px 14px; font-weight:600;"><a href="internet-dsl/" style="color:#0E5A43; text-decoration:none;">🌐 Internet & DSL</a></td>
+          <td style="padding:10px 14px; color:#0E5A43; font-weight:700;">150 – 350 € / Jahr</td>
+          <td style="padding:10px 14px;">ca. 8 Minuten</td>
+          <td style="padding:10px 14px;">DSL-Wechselbonus & Router-Check</td>
+          <td style="padding:10px 14px;"><a href="/go/dsl/" rel="sponsored nofollow noopener" target="_blank" style="background:#FFB300; color:#2E2E33; padding:4px 10px; border-radius:999px; text-decoration:none; font-weight:700; font-size:.85em; display:inline-block;">DSL-Vergleich →</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:10px 14px; font-weight:600;"><a href="versicherungen/" style="color:#0E5A43; text-decoration:none;">🛡️ Versicherungen</a></td>
+          <td style="padding:10px 14px; color:#0E5A43; font-weight:700;">200 – 500 € / Jahr</td>
+          <td style="padding:10px 14px;">ca. 10 Minuten</td>
+          <td style="padding:10px 14px;">Haftpflicht & Kfz-Wechsel zum Stichtag</td>
+          <td style="padding:10px 14px;"><a href="/go/haftpflicht/" rel="sponsored nofollow noopener" target="_blank" style="background:#FFB300; color:#2E2E33; padding:4px 10px; border-radius:999px; text-decoration:none; font-weight:700; font-size:.85em; display:inline-block;">Tarifcheck →</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:10px 14px; font-weight:600;"><a href="konto-karten/" style="color:#0E5A43; text-decoration:none;">💳 Konto & Karten</a></td>
+          <td style="padding:10px 14px; color:#0E5A43; font-weight:700;">80 – 180 € / Jahr</td>
+          <td style="padding:10px 14px;">ca. 5 Minuten</td>
+          <td style="padding:10px 14px;">Gebührenfreies C24 Girokonto + Tagesgeld</td>
+          <td style="padding:10px 14px;"><a href="/go/girokonto/" rel="sponsored nofollow noopener" target="_blank" style="background:#FFB300; color:#2E2E33; padding:4px 10px; border-radius:999px; text-decoration:none; font-weight:700; font-size:.85em; display:inline-block;">C24 Bank →</a></td>
+        </tr>
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:10px 14px; font-weight:600;"><a href="frugalismus/" style="color:#0E5A43; text-decoration:none;">🌱 Frugalismus</a></td>
+          <td style="padding:10px 14px; color:#0E5A43; font-weight:700;">ab 200 € / Monat</td>
+          <td style="padding:10px 14px;">Dauerhaft</td>
+          <td style="padding:10px 14px;">50–30–20-Regel & Notgroschen</td>
+          <td style="padding:10px 14px;"><a href="/go/tagesgeld/" rel="sponsored nofollow noopener" target="_blank" style="background:#FFB300; color:#2E2E33; padding:4px 10px; border-radius:999px; text-decoration:none; font-weight:700; font-size:.85em; display:inline-block;">Tagesgeld →</a></td>
+        </tr>
+        <tr>
+          <td style="padding:10px 14px; font-weight:600;"><a href="mietwagen/" style="color:#0E5A43; text-decoration:none;">🚗 Mietwagen & Reisen</a></td>
+          <td style="padding:10px 14px; color:#0E5A43; font-weight:700;">100 – 400 € / Reise</td>
+          <td style="padding:10px 14px;">ca. 5 Minuten</td>
+          <td style="padding:10px 14px;">Vollkasko ohne SB + faire Tankregelung</td>
+          <td style="padding:10px 14px;"><a href="/go/mietwagen/" rel="sponsored nofollow noopener" target="_blank" style="background:#FFB300; color:#2E2E33; padding:4px 10px; border-radius:999px; text-decoration:none; font-weight:700; font-size:.85em; display:inline-block;">Mietwagen →</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{{- /* ---------- Die Frank-Methode: 4 Schritte zu 2.000 € mehr im Jahr ---------- */ -}}
+<section aria-label="Spar-Methode" style="margin:36px 0;">
+  <h2 style="font-family:'Inter',sans-serif; color:#0E5A43; font-size:1.4em; font-weight:800; margin-bottom:16px;">
+    🎯 Franks 4-Schritte-Methode: So optimierst du deine Finanzen ohne Verzicht
+  </h2>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px;">
+    <div style="background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; padding:18px;">
+      <div style="font-size:1.8em; font-weight:800; color:#0E5A43; line-height:1; margin-bottom:8px;">01</div>
+      <h3 style="font-size:1.05em; color:#0E5A43; margin:0 0 6px; font-weight:700;">Fixkosten-Inventur</h3>
+      <p style="font-size:.86em; color:#555; line-height:1.45; margin:0;">
+        Kontoauszüge der letzten drei Monate scannen: Welche wiederkehrenden Posten für Strom, Gas, DSL, Abos und Versicherungen fallen wirklich an?
+      </p>
+    </div>
+
+    <div style="background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; padding:18px;">
+      <div style="font-size:1.8em; font-weight:800; color:#0E5A43; line-height:1; margin-bottom:8px;">02</div>
+      <h3 style="font-size:1.05em; color:#0E5A43; margin:0 0 6px; font-weight:700;">Überflüssiges kündigen</h3>
+      <p style="font-size:.86em; color:#555; line-height:1.45; margin:0;">
+        Doppelte Policen, ungenutzte Streaming-Dienste und alte Zusatzoptionen sofort kündigen – gesetzlich meist monatlich möglich.
+      </p>
+    </div>
+
+    <div style="background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; padding:18px;">
+      <div style="font-size:1.8em; font-weight:800; color:#0E5A43; line-height:1; margin-bottom:8px;">03</div>
+      <h3 style="font-size:1.05em; color:#0E5A43; margin:0 0 6px; font-weight:700;">Tarifvergleich nutzen</h3>
+      <p style="font-size:.86em; color:#555; line-height:1.45; margin:0;">
+        Über unsere geprüften Vergleichsrechner die Bestkonditionen mit Preisgarantie und Wechselbonus sichern – der neue Anbieter übernimmt die Kündigung.
+      </p>
+    </div>
+
+    <div style="background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; padding:18px;">
+      <div style="font-size:1.8em; font-weight:800; color:#0E5A43; line-height:1; margin-bottom:8px;">04</div>
+      <h3 style="font-size:1.05em; color:#0E5A43; margin:0 0 6px; font-weight:700;">Überschuss anlegen</h3>
+      <p style="font-size:.86em; color:#555; line-height:1.45; margin:0;">
+        Das monatlich gesparte Geld direkt per Dauerauftrag auf ein zinsstarkes Tagesgeldkonto oder in den Notgroschen lenken.
+      </p>
+    </div>
+  </div>
+</section>
+
+{{- /* ---------- FAQ-Sektion ---------- */ -}}
+<section aria-label="Häufige Fragen" style="margin:36px 0; border-top:2px solid rgba(14,90,67,.15); padding-top:24px;">
+  <h2 style="font-family:'Inter',sans-serif; color:#0E5A43; font-size:1.4em; font-weight:800; margin-bottom:16px;">
+    Häufige Fragen zu den Spar-Ratgebern & Tarifvergleichen
+  </h2>
+
+  <div style="display:flex; flex-direction:column; gap:12px;">
+    <details style="background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:10px; padding:14px 16px;">
+      <summary style="font-weight:700; color:#0E5A43; cursor:pointer; font-size:.95em;">
+        Kostet mich die Nutzung der Ratgeber und Tarifvergleiche etwas?
+      </summary>
+      <div style="margin-top:8px; font-size:.88em; color:#444; line-height:1.5;">
+        Nein, alle Ratgeber, Rechner und Anleitungen auf FranksFinanzcheck sind zu 100 % kostenlos für dich. Wenn du über einen unserer Links einen Vertrag abschließt oder wechselst, erhalten wir eine Vergütung vom Anbieter – für dich entstehen absolut keine Mehrkosten.
+      </div>
+    </details>
+
+    <details style="background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:10px; padding:14px 16px;">
+      <summary style="font-weight:700; color:#0E5A43; cursor:pointer; font-size:.95em;">
+        Kann beim Wechsel von Strom, Gas oder DSL die Versorgung unterbrochen werden?
+      </summary>
+      <div style="margin-top:8px; font-size:.88em; color:#444; line-height:1.5;">
+        Nein. In Deutschland ist die durchgehende Versorgung gesetzlich garantiert (§ 36 EnWG). Bei Strom und Gas springt im unwahrscheinlichsten Fall immer der örtliche Grundversorger ein. Auch beim DSL-Wechsel sorgt das Telekommunikationsgesetz für einen nahtlosen Übergang.
+      </div>
+    </details>
+
+    <details style="background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:10px; padding:14px 16px;">
+      <summary style="font-weight:700; color:#0E5A43; cursor:pointer; font-size:.95em;">
+        Wie oft sollte ich meine Fixkosten und Verträge überprüfen?
+      </summary>
+      <div style="margin-top:8px; font-size:.88em; color:#444; line-height:1.5;">
+        Als Faustregel empfehle ich einen jährlichen Check im Spätsommer/Herbst: Vor Beginn der Heizperiode lassen sich Strom- und Gastarife optimal verhandeln, im November steht der Kfz-Versicherungswechsel an, und DSL-Verträge können nach der Mindestlaufzeit monatlich gekündigt werden.
+      </div>
+    </details>
+
+    <details style="background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:10px; padding:14px 16px;">
+      <summary style="font-weight:700; color:#0E5A43; cursor:pointer; font-size:.95em;">
+        Wie unabhängig sind die Empfehlungen auf FranksFinanzcheck?
+      </summary>
+      <div style="margin-top:8px; font-size:.88em; color:#444; line-height:1.5;">
+        Frank empfiehlt ausschließlich Tarife und Produkte, die er selbst geprüft hat und unter denselben Bedingungen auch Freunden und Familie empfehlen würde. Konditionen, Testkriterien und Kündigungsfristen werden regelmäßig auf den neuesten Stand gebracht.
+      </div>
+    </details>
+  </div>
+</section>
+
+{{- /* ---------- CollectionPage + ItemList Schema.org JSON-LD ---------- */ -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Ratgeber: Die großen Sparthemen im Überblick",
+  "description": "Die großen Spar-Ratgeber von FranksFinanzcheck: Strom & Gas sparen, Internet & DSL, Versicherungen, Konto & Karten, Frugalismus und Mietwagen.",
+  "url": {{ .Permalink | jsonify }},
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "FranksFinanzcheck",
+    "url": {{ site.BaseURL | jsonify }}
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {{- range $i, $p := $pillars }}
+      {{- with site.GetPage (printf "pillar/%s" $p) }}
+      {{- if $i }},{{ end }}
+      {
+        "@type": "ListItem",
+        "position": {{ add $i 1 }},
+        "name": {{ .Title | plainify | jsonify }},
+        "url": {{ .Permalink | jsonify }}
+      }
+      {{- end }}
+      {{- end }}
+    ]
+  }
+}
+</script>
 
 {{- end }}{{/* end main */}}

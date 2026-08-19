@@ -128,8 +128,8 @@
 ) | jsonify | safeJS }}</script>
 {{- end -}}
 
-{{- /* ---------- CollectionPage (/posts/-Hub, nicht Pagination) ---------- */ -}}
-{{- if and (eq .Kind "section") (eq .Section "posts") (not (findRE `/page/\d+/?$` .RelPermalink)) -}}
+{{- /* ---------- CollectionPage (/posts/- und /pillar/-Hub, nicht Pagination) ---------- */ -}}
+{{- if and (eq .Kind "section") (or (eq .Section "posts") (eq .Section "pillar")) (not (findRE `/page/\d+/?$` .RelPermalink)) -}}
 <script type="application/ld+json">{{ (dict
   "@context" "https://schema.org"
   "@type" "CollectionPage"
@@ -226,7 +226,7 @@
   }
 </script>
 
-{{- /* ---------- Article-Schema (E-E-A-T, Rich Results) – nur Artikel ---------- */ -}}
-{{- if and (eq .Section "posts") (eq .Kind "page") -}}
+{{- /* ---------- Article-Schema (E-E-A-T, Rich Results) – Artikel & Pillar-Ratgeber ---------- */ -}}
+{{- if and (or (eq .Section "posts") (eq .Section "pillar")) (eq .Kind "page") -}}
 {{- partial "schema_article.html" . -}}
 {{- end -}}
