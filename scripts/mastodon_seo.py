@@ -261,26 +261,45 @@ def upload_with_alt(image: Path, description: str) -> str | None:
         return None
 
 
-def edit_status_keep_media(status_id: str, text: str, media_id: str | None) -> tuple[bool, str]:
-    payload = {"status": text, "language": "de"}
-    if media_id:
-        payload["media_ids[]"] = media_id
-    body = "&".join(f"{k}={urllib.parse.quote(str(v))}" for k, v in payload.items()).encode()
-    try:
-        resp = sp.http_json(
-            f"{sp.MASTODON_INSTANCE}/api/v1/statuses/{status_id}",
-            data=body,
-            headers={
-                "Authorization": f"Bearer {sp.MASTODON_TOKEN}",
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            method="PUT",
-        )
-        return True, resp.get("url", "")
-    except urllib.error.HTTPError as exc:
-        return False, f"HTTP {exc.code}: {exc.read().decode()[:200]}"
-    except Exception as exc:
-        return False, str(exc)[:200]
+def edit_status(
+    status_id: str,
+    text: str,
+    media_ids: list[str] | None = None,
+    media_alt: tuple[str, str] | None = None,
+) -> tuple[bool, str]:
+    """PUT Status. media_ids immer mitsenden, sonst hängt Mastodon das Bild ab."""
+    pairs = [("status", text), ("language", "de")]
+    if media_ids:
+        for mid in media_ids:
+            pairs.append(("media_ids[]", mid))
+    if media_alt:
+        mid, desc = media_alt
+        pairs.append(("media_attributes[][id]", mid))
+        pairs.append(("media_attributes[][description]", desc[:1500]))
+    body = "&".join(f"{k}={urllib.parse.quote(str(v))}" for k, v in pairs).encode()
+    last = ""
+    for _ in range(4):
+        try:
+            resp = sp.http_json(
+                f"{sp.MASTODON_INSTANCE}/api/v1/statuses/{status_id}",
+                data=body,
+                headers={
+                    "Authorization": f"Bearer {sp.MASTODON_TOKEN}",
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                method="PUT",
+            )
+            return True, resp.get("url", "")
+        except urllib.error.HTTPError as exc:
+            last = f"HTTP {exc.code}: {exc.read().decode()[:180]}"
+            if exc.code in (429, 502, 503):
+                _sleep_retry()
+                continue
+            return False, last
+        except Exception as exc:
+            last = str(exc)[:180]
+            _sleep_retry()
+    return False, last
 
 
 def write_report(rows: list[dict], dupes: dict[str, int], healed: int) -> None:
