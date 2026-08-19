@@ -1,11 +1,11 @@
 {
-  "signed_at": "2026-08-19T17:27:48.525720+00:00",
-  "head": "49d50f4",
+  "signed_at": "2026-08-19T17:47:32.251650+00:00",
+  "head": "b64e06c",
   "files": {
     "assets/css/extended/custom.css": "8a773e659ecc2dad33d6401a4f078fba011fc5771206483f762b0feabf2c7f3e",
-    "data/brand_lock.yaml": "66603d40d61c3916bb5aa97db0a62d7cf8264527b776498efc9a127a4163fb0c",
+    "data/brand_lock.yaml": "576256e257488e6b2295ad59881af9899f80516093db8e55262e2f343f8b7f51",
     "data/content_fingerprints.jsonl": "1dc9819ff7d08efa7c03bbcc2f8a1d7253d2202d36eaa07843afa7557f5f63fe",
-    "hugo.toml": "a4a1d8ff2259a01a5c73e072511f610fa37b5b7e0d2dbf7fc3be9f704a425fea",
+    "hugo.toml": "2fbcf43a7ea9ea4369e5073b2b5699ec44d327c0cdc9a9136ac20f6e09ca01e3",
     "layouts/_default/_markup/render-link.html": "aa06d8fad298ef739b97001c0cc7ce9a0c1102bc2df021570314df3d5c296a87",
     "layouts/_partials/cover.html": "f96a5ff402634dffc595077ca3648d4e5a79cf061f3d78328102bb804463c152",
     "layouts/_partials/extend_footer.html": "a4fa2074afc77eae574354a0199aa531fcd796f87eaa58a54b1444dd38f96513",
