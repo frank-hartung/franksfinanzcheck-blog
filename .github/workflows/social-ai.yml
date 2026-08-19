@@ -2,10 +2,11 @@
 #  SOCIAL-MEDIA-AI (automatisches Posten neuer Artikel)
 #
 #  Postet neue Artikel automatisch auf Mastodon (kostenlos) und
-#  optional LinkedIn. Läuft 2× täglich NACH den Content-Crons,
-#  damit frisch veröffentlichte Artikel zeitnah geteilt werden:
+#  optional LinkedIn. Gleiche Kadenz wie der Blog (Mo/Mi/Fr),
+#  jeweils NACH den Content-Crons:
 #    - morgens 09:15 MESZ  (nach dem 08:10-Artikel)
 #    - abends  20:45 MESZ  (nach dem 19:40-Artikel)
+#  Di/Do/Sa/So: kein automatischer Toot (Skript-Wache + Cron).
 #
 #  Das Skript postet nur Artikel OHNE "social_posted: true" im
 #  Front-Matter und setzt das Flag danach – keine Doppelposts.
@@ -21,8 +22,8 @@ name: Social-Media-AI
 
 on:
   schedule:
-    - cron: "15 7 * * *"    # 09:15 MESZ (Sommerzeit!)
-    - cron: "45 18 * * *"   # 20:45 MESZ (Sommerzeit!)
+    - cron: "15 7 * * 1,3,5"    # 09:15 MESZ – Mo/Mi/Fr nach 08:10
+    - cron: "45 18 * * 1,3,5"   # 20:45 MESZ – Mo/Mi/Fr nach 19:40
   workflow_dispatch: {}
 
 permissions:
@@ -46,6 +47,7 @@ jobs:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           LINKEDIN_PERSON_URN: ${{ vars.LINKEDIN_PERSON_URN }}
           SOCIAL_MAX_PRO_LAUF: ${{ vars.SOCIAL_MAX_PRO_LAUF || '4' }}
+          SOCIAL_FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
         run: python3 scripts/social_poster.py
 
       - name: Flags & Status committen
