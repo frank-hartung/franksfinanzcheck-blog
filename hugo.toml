@@ -68,8 +68,8 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
   [params.homeInfoParams]
-    Title = "Weniger zahlen, mehr behalten: Dein Spar-Ratgeber für Strom, Gas, Internet & Versicherungen"
-    Content = "💰 Weniger Fixkosten ohne Verzicht – genau dafür ist FranksFinanzcheck da. Wenn im Herbst die Nachzahlungen für Strom und Gas ins Haus flattern, lohnt sich ein Tarifcheck vorher statt teuer nachzuzahlen.\n\nMontags, mittwochs und freitags bekommst du einen neuen Ratgeber: Strom und Gas günstiger, Internet nach Bedarf wählen, Versicherungen ohne Kleingedrucktes und Konto ohne Gebührenfalle. Ohne Fachchinesisch, ohne Verkaufsdruck – mit konkreten Euro-Beträgen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitung.\n\nStarte mit deiner höchsten Rechnung – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+    Title = "Bis zu 2.000 € im Jahr sparen: dein unabhängiger Finanz-Ratgeber"
+    Content = "💰 Bis zu 2.000 € weniger Fixkosten im Jahr – ohne Verzicht, ohne Verkaufsdruck. FranksFinanzcheck ist ein unabhängiger Ratgeber für **Strom, Gas, Internet, Versicherungen und Konto**, von Frank Hartung aus über 10 Jahren eigener Finanzpraxis.\n\nIm Herbst und Winter flattern die teuren Energie-Nachzahlungen ins Haus – wer vorher vergleicht, spart oft mehrere hundert Euro. Montags, mittwochs und freitags gibt es einen neuen Ratgeber mit konkreten Euro-Beträgen und ehrlichen Vor- und Nachteilen. Kein Fachchinesisch, jeder Beitrag in zehn Minuten lesbar.\n\nStarte mit deiner höchsten Rechnung – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
 
   [[params.socialIcons]]
     name = "pinterest"

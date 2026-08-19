@@ -131,135 +131,107 @@ BANNED_PHRASES = [
 # ------------------------------------------------------------------
 FALLBACK_POOL = [
     {
-        "signal_id": "energie-herbst-nachzahlung",
-        "title": "Geld sparen ohne Verzicht: Dein Ratgeber für Strom, Gas, Versicherungen & Finanzen",
+        "signal_id": 'energie-herbst-nachzahlung',
+        "title": 'Bis zu 2.000 € im Jahr sparen: dein unabhängiger Finanz-Ratgeber',
         "content": (
-            "💰 Geld sparen, ohne den Gürtel enger zu schnallen – genau darum geht es hier.\n\n"
-            "Regelmäßig erscheint ein neuer, verständlicher Ratgeber: **Strom, Gas und Internet günstiger**, "
-            "Versicherungen richtig wählen und Konto & Karte ohne Gebührenfallen. Gerade im Herbst und Winter "
-            "kommen die teuren Nachzahlungen – wer vorher vergleicht, spart oft mehrere hundert Euro im Jahr. "
-            "Ohne Fachchinesisch, ohne Verkaufsdruck – dafür mit konkreten Zahlen, ehrlichen Vor- und Nachteilen "
-            "und Schritt-für-Schritt-Anleitungen.\n\n"
-            "Stöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+            "💰 Bis zu 2.000 € weniger Fixkosten im Jahr – ohne Verzicht, ohne Verkaufsdruck. FranksFinanzcheck ist ein unabhängiger Ratgeber für **Strom, Gas, Internet, Versicherungen und Konto**, von Frank Hartung aus über 10 Jahren eigener Finanzpraxis.\n\n"
+            "Im Herbst und Winter flattern die teuren Energie-Nachzahlungen ins Haus – wer vorher vergleicht, spart oft mehrere hundert Euro. Montags, mittwochs und freitags gibt es einen neuen Ratgeber mit konkreten Euro-Beträgen und ehrlichen Vor- und Nachteilen. Kein Fachchinesisch, jeder Beitrag in zehn Minuten lesbar.\n\n"
+            "Starte mit deiner höchsten Rechnung – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
         ),
     },
     {
-        "signal_id": "energie-jahreswechsel-wechselfenster",
-        "title": "Strom, Gas, Versicherungen & Finanzen: Dein ehrlicher Spar-Ratgeber",
+        "signal_id": 'energie-jahreswechsel-wechselfenster',
+        "title": 'Strom, Gas & Versicherungen vergleichen: dein ehrlicher Spar-Ratgeber',
         "content": (
-            "💡 Sparen heißt hier nicht verzichten, sondern besser vergleichen.\n\n"
-            "Regelmäßig ein neuer, klar geschriebener Ratgeber zu **Strom, Gas, Internet, Versicherungen und "
-            "Konto & Karte** – mit echten Zahlen statt Werbeversprechen. Rund um den Jahreswechsel ändern viele "
-            "Versorger ihre Preise neu, genau dann lohnt sich ein Wechsel am meisten. Kein Fachchinesisch, kein "
-            "Verkaufsdruck: nur ehrliche Vor- und Nachteile und Schritt-für-Schritt-Anleitungen zum Nachmachen.\n\n"
-            "Schau dich um – dein Geld sollte für dich arbeiten, nicht umgekehrt. 🚀"
+            "💡 Bis zu 2.000 € im Jahr behalten statt verschenken – das Versprechen von FranksFinanzcheck. Ich vergleiche **Strom, Gas, Internet, Versicherungen und Konto** mit echten Zahlen statt Werbeversprechen, aus über 10 Jahren eigener Finanzpraxis.\n\n"
+            "Rund um den Jahreswechsel kündigen viele Versorger ihre Preise neu an – genau dann lohnt sich ein Wechsel am meisten, oft mit mehreren hundert Euro Ersparnis. Montags, mittwochs und freitags erscheint ein neuer Ratgeber mit ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen zum Nachmachen. Kein Fachchinesisch, kein Verkaufsdruck.\n\n"
+            "Greif dir deinen teuersten Vertrag vor – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
         ),
     },
     {
-        "signal_id": "versicherung-beitragsanpassung-jahresende",
-        "title": "Dein Ratgeber für Strom, Gas, Versicherungen & Konto – ehrlich erklärt",
+        "signal_id": 'versicherung-beitragsanpassung-jahresende',
+        "title": 'Versicherungen, Strom & Konto: dein jährlicher Finanz-Check zum Sparen',
         "content": (
-            "📊 Weniger zahlen, ohne auf etwas zu verzichten – das ist das Versprechen dieses Blogs.\n\n"
-            "Regelmäßig neue, verständliche Ratgeber zu **Strom, Gas und Internet**, zu Versicherungen und zu "
-            "Konto & Karte ohne versteckte Gebühren. Viele Versicherer verschicken ihre Beitragsanpassung zum "
-            "Jahresende – der jährliche Vergleich lohnt sich fast immer mehr als das automatische Verlängern. "
-            "Ohne Fachchinesisch, ohne Verkaufsdruck: nur konkrete Zahlen, ehrliche Vor- und Nachteile, klare "
-            "Schritt-für-Schritt-Anleitungen.\n\n"
-            "Stöbere durch die Ratgeber – dein Geld arbeitet ab heute für dich. 🚀"
-        ),
-    },
-    {
-        "signal_id": "konto-gebuehren-transparenz",
-        "title": "Strom, Gas, Internet, Versicherungen, Konto: Spar-Ratgeber ohne Fachchinesisch",
-        "content": (
-            "💰 Geld sparen, ohne den Alltag einzuschränken – genau darum geht's.\n\n"
-            "Hier erscheint regelmäßig ein neuer, gut verständlicher Ratgeber: **Strom, Gas und Internet "
-            "günstiger**, Versicherungen richtig wählen, Konto & Karte ohne Gebührenfallen. Gerade bei "
-            "Girokonten ändern sich Bedingungen und Gebühren inzwischen häufiger als früher – ein kurzer Check "
-            "pro Jahr reicht meist schon. Keine Verkaufsfloskeln, dafür konkrete Zahlen, ehrliche Vor- und "
-            "Nachteile und Anleitungen zum direkten Umsetzen.\n\n"
-            "Stöbere dich durch – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
-        ),
-    },
-    {
-        "signal_id": "internet-tarifdschungel-bandbreite",
-        "title": "Geld sparen ohne Verzicht: Ratgeber für Strom, Gas, Internet & Versicherungen",
-        "content": (
-            "⚡ Weniger zahlen, ohne dass sich dein Alltag ändert – das ist das Ziel hier.\n\n"
-            "Regelmäßig ein neuer, klar geschriebener Ratgeber: Strom, Gas und **Internet günstiger**, "
-            "Versicherungen ohne Kleingedrucktes und Konto & Karte ohne Gebührenfallen. Beim Internet-Tarif "
-            "zahlen viele für mehr Tempo, als sie im Alltag wirklich brauchen – ein realistischer Bedarfscheck "
-            "spart oft mehr als der bloße Anbieterwechsel. Ohne Fachchinesisch, ohne Verkaufsdruck – dafür mit "
-            "Zahlen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen.\n\n"
-            "Stöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich. 🚀"
-        ),
-    },
-    {
-        "signal_id": "zinsumfeld-tagesgeld",
-        "title": "Dein ehrlicher Ratgeber für Strom, Gas, Versicherungen, Konto & Karte",
-        "content": (
-            "💰 Sparen, ohne zu verzichten – dafür ist dieser Blog da.\n\n"
-            "Regelmäßig ein neuer, verständlicher Ratgeber zu **Strom, Gas und Internet**, zu Versicherungen "
-            "und zu Konto & Karte ohne Gebührenfallen. Bei Tagesgeld und Zinsangeboten lohnt sich gerade jetzt "
-            "der genaue Blick auf befristete Lockzinsen, die nach wenigen Monaten wieder fallen. Ohne "
-            "Fachchinesisch, ohne Verkaufsdruck: konkrete Zahlen, ehrliche Vor- und Nachteile, Schritt-für-"
-            "Schritt erklärt.\n\n"
-            "Stöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
-        ),
-    },
-    {
-        "signal_id": "seo-qualitaet-e-e-a-t",
-        "title": "Strom, Gas, Versicherungen & Finanzen: Ratgeber mit echten Erfahrungen",
-        "content": (
-            "🔍 Sparen beginnt mit ehrlichen Informationen, nicht mit Werbeversprechen.\n\n"
-            "Jeder Ratgeber hier zu **Strom, Gas, Internet**, Versicherungen und Konto & Karte basiert auf "
-            "echten Vergleichen und nachvollziehbaren Zahlen statt austauschbaren Floskeln. Kein Fachchinesisch, "
-            "kein Verkaufsdruck – dafür klare Vor- und Nachteile und Schritt-für-Schritt-Anleitungen, die du "
-            "direkt umsetzen kannst.\n\n"
+            "📊 Hunderte Euro im Jahr liegen oft nur in unbeachteten Verträgen – FranksFinanzcheck zeigt, wo. Ich zerlege **Strom, Gas, Internet, Versicherungen und Konto** in konkrete Euro-Beträge, ehrliche Vor- und Nachteile und klare Anleitungen, geprüft aus über 10 Jahren eigener Finanzpraxis.\n\n"
+            "Viele Versicherer schicken ihre Beitragsanpassung zum Jahresende – wer dann einmal vergleicht statt automatisch zu verlängern, spart oft spürbar. Montags, mittwochs und freitags gibt es einen neuen Ratgeber, ohne Fachchinesisch und ohne Verkaufsdruck.\n\n"
             "Stöbere durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
         ),
     },
     {
-        "signal_id": "energie-variable-vs-fest",
-        "title": "Geld sparen ohne Verzicht: Dein Ratgeber für Strom, Gas & Versicherungen",
+        "signal_id": 'konto-gebuehren-transparenz',
+        "title": 'Girokonto, Strom & Gas: dein Ratgeber gegen versteckte Fixkosten',
         "content": (
-            "💰 Weniger zahlen, ohne den Alltag einzuschränken – darum geht's hier.\n\n"
-            "Regelmäßig ein neuer, verständlicher Ratgeber: **Strom, Gas und Internet günstiger**, "
-            "Versicherungen richtig wählen, Konto & Karte ohne Gebührenfallen. Zwischen variablen Tarifen und "
-            "Festpreisverträgen gibt es aktuell wieder größere Unterschiede – pauschale Empfehlungen greifen da "
-            "zu kurz, es kommt auf den eigenen Verbrauch an. Ohne Fachchinesisch, ohne Verkaufsdruck: konkrete "
-            "Zahlen, ehrliche Vor- und Nachteile, klare Anleitungen.\n\n"
-            "Stöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich. 🚀"
+            "💰 Versteckte Gebühren und alte Tarife kosten deutsche Haushalte oft bis zu 2.000 € im Jahr – FranksFinanzcheck holt dieses Geld zurück. Ich vergleiche **Strom, Gas, Internet, Versicherungen und Konto** mit konkreten Euro-Beträgen statt Werbeversprechen, aus über 10 Jahren eigener Finanzpraxis.\n\n"
+            "Bei Girokonten ändern sich Gebühren heute deutlich häufiger als früher – ein kurzer Check pro Jahr reicht meist schon. Montags, mittwochs und freitags gibt es einen neuen Ratgeber mit ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen. Kein Fachchinesisch, kein Verkaufsdruck.\n\n"
+            "Starte mit deiner höchsten Rechnung – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
         ),
     },
     {
-        "signal_id": "versicherung-vergleichsportale-nicht-vollstaendig",
-        "title": "Dein Ratgeber für Strom, Gas, Versicherungen & Konto – ohne Verkaufsdruck",
+        "signal_id": 'internet-tarifdschungel-bandbreite',
+        "title": 'Internet, Strom & Gas günstiger: dein Ratgeber für weniger Fixkosten',
         "content": (
-            "💰 Sparen, ohne etwas aufzugeben – dafür gibt's diesen Blog.\n\n"
-            "Regelmäßig ein neuer, klar geschriebener Ratgeber: **Strom, Gas und Internet günstiger**, "
-            "Versicherungen richtig wählen, Konto & Karte ohne Gebührenfallen. Vergleichsportale zeigen selten "
-            "alle Anbieter am Markt – wer nur das erste Ergebnis nimmt, lässt oft bares Geld liegen. Ohne "
-            "Fachchinesisch: konkrete Zahlen, ehrliche Vor- und Nachteile, Schritt-für-Schritt-Anleitungen zum "
-            "Nachmachen.\n\n"
-            "Stöbere dich durch – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+            "⚡ Weniger Fixkosten, ohne dass sich dein Alltag ändert – dafür ist FranksFinanzcheck da. Ich vergleiche **Strom, Gas, Internet, Versicherungen und Konto** mit konkreten Euro-Beträgen und ehrlichen Vor- und Nachteilen, geprüft aus über 10 Jahren eigener Finanzpraxis.\n\n"
+            "Beim Internet-Tarif zahlen viele für mehr Tempo, als sie im Alltag wirklich brauchen – ein realistischer Bedarfscheck spart oft mehrere hundert Euro im Jahr, mehr als jeder Anbieterwechsel. Montags, mittwochs und freitags erscheint ein neuer Ratgeber mit Schritt-für-Schritt-Anleitungen. Kein Fachchinesisch, kein Verkaufsdruck.\n\n"
+            "Stöbere durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
         ),
     },
     {
-        "signal_id": "saisonal-fruehjahrsputz-vertraege",
-        "title": "Strom, Gas, Versicherungen, Konto: Dein jährlicher Spar-Check",
+        "signal_id": 'zinsumfeld-tagesgeld',
+        "title": 'Konto, Tagesgeld & Versicherungen: dein Ratgeber für mehr vom Monat',
         "content": (
-            "🧾 Einmal im Jahr richtig vergleichen bringt oft mehr als viele einzelne spontane Wechsel.\n\n"
-            "Hier erscheint regelmäßig ein neuer, verständlicher Ratgeber zu **Strom, Gas und Internet**, zu "
-            "Versicherungen und zu Konto & Karte ohne Gebührenfallen. Ein kompletter Vertrags-Check an einem "
-            "Nachmittag deckt erfahrungsgemäß mehr Sparpotenzial auf als Einzelaktionen übers Jahr verteilt. "
-            "Ohne Fachchinesisch, ohne Verkaufsdruck – dafür konkrete Zahlen und Schritt-für-Schritt-"
-            "Anleitungen.\n\n"
-            "Stöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+            "💰 Mehr vom Monat behalten statt verschenken – das ist das Ziel von FranksFinanzcheck. Ich vergleiche **Strom, Gas, Internet, Versicherungen und Konto** mit konkreten Euro-Beträgen statt Werbeversprechen, aus über 10 Jahren eigener Finanzpraxis.\n\n"
+            "Bei Tagesgeld und Zinsangeboten lohnt sich der genaue Blick auf befristete Neukunden-Zinsen, die nach wenigen Monaten wieder fallen – wer hier nicht aufpasst, verliert schnell mehrere hundert Euro Zinsen im Jahr. Montags, mittwochs und freitags gibt es einen neuen Ratgeber mit ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen. Kein Fachchinesisch.\n\n"
+            "Stöbere durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
         ),
     },
+    {
+        "signal_id": 'seo-qualitaet-e-e-a-t',
+        "title": 'Finanz-Ratgeber mit echter Erfahrung: Strom, Gas, Versicherungen & Konto',
+        "content": (
+            "🔍 Echte Erfahrung statt austauschbarer Floskeln – darauf baue ich bei FranksFinanzcheck. Jeder Ratgeber zu **Strom, Gas, Internet, Versicherungen und Konto** beruht auf selbst geprüften Vergleichen und konkreten Euro-Beträgen, gesammelt in über 10 Jahren eigener Finanzpraxis.\n\n"
+            "Google bewertet Ratgeber heute zunehmend danach, ob echte Erfahrung dahintersteht – genau das liefert dieser Blog. Montags, mittwochs und freitags erscheint ein neuer Ratgeber mit ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen. Kein Fachchinesisch, kein Verkaufsdruck.\n\n"
+            "Stöbere durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+        ),
+    },
+    {
+        "signal_id": 'energie-variable-vs-fest',
+        "title": 'Strom & Gas richtig wählen: dein Ratgeber für variabel oder Festpreis',
+        "content": (
+            "💰 Bis zu 2.000 € im Jahr weniger Fixkosten – ohne Verzicht. Bei FranksFinanzcheck vergleiche ich **Strom, Gas, Internet, Versicherungen und Konto** mit konkreten Euro-Beträgen statt Werbeversprechen, geprüft aus über 10 Jahren eigener Finanzpraxis.\n\n"
+            "Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder größere Preisunterschiede – pauschale Empfehlungen greifen da zu kurz, es kommt auf deinen Verbrauch an. Montags, mittwochs und freitags gibt es einen neuen Ratgeber mit ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen. Kein Fachchinesisch, kein Verkaufsdruck.\n\n"
+            "Stöbere durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+        ),
+    },
+    {
+        "signal_id": 'versicherung-vergleichsportale-nicht-vollstaendig',
+        "title": 'Versicherungen richtig vergleichen: dein unabhängiger Finanz-Ratgeber',
+        "content": (
+            "💰 Wer nur das erste Vergleichsportal-Ergebnis nimmt, lässt oft mehrere hundert Euro im Jahr liegen. FranksFinanzcheck vergleicht **Strom, Gas, Internet, Versicherungen und Konto** mit konkreten Euro-Beträgen und ehrlichen Vor- und Nachteilen, geprüft aus über 10 Jahren eigener Finanzpraxis.\n\n"
+            "Vergleichsportale zeigen selten alle Anbieter am Markt – deshalb lohnt ein zweiter, unabhängiger Blick. Montags, mittwochs und freitags erscheint ein neuer Ratgeber mit Schritt-für-Schritt-Anleitungen zum Nachmachen. Kein Fachchinesisch, kein Verkaufsdruck.\n\n"
+            "Greif dir deinen teuersten Vertrag vor – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+        ),
+    },
+    {
+        "signal_id": 'saisonal-fruehjahrsputz-vertraege',
+        "title": 'Einmal im Jahr vergleichen: dein Spar-Check für Strom, Gas & Versicherung',
+        "content": (
+            "🧾 Ein Nachmittag Vertrags-Check deckt oft bis zu 2.000 € Sparpotenzial im Jahr auf. FranksFinanzcheck zerlegt **Strom, Gas, Internet, Versicherungen und Konto** in konkrete Euro-Beträge, ehrliche Vor- und Nachteile und klare Anleitungen, geprüft aus über 10 Jahren eigener Finanzpraxis.\n\n"
+            "Ein kompletter Check an einem Tag bringt erfahrungsgemäß mehr als viele kleine spontane Wechsel übers Jahr verteilt. Montags, mittwochs und freitags gibt es einen neuen Ratgeber mit Schritt-für-Schritt-Anleitungen zum direkten Umsetzen. Kein Fachchinesisch, kein Verkaufsdruck.\n\n"
+            "Stöbere durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+        ),
+    },
+
 ]
 
+
+# Profi-Affiliate-Marketing-Merkmal: Ein überzeugender Willkommenstext
+# QUANTIFIZIERT den Nutzen (konkrete Euro-Beträge / Zahlen / Prozent) statt
+# nur in Werbefloskeln zu sprechen – das ist das entscheidende Unterschieds-
+# merkmal zwischen „irgendeinem Blog" und Profi-Copy mit Konversionskraft.
+# Der Check ist bewusst großzügig (€ ODER Wort „Euro" ODER ≥2-stellige Zahl)
+# und zwingt sowohl die KI als auch jede Fallback-Variante zu Konkretisierung.
+# (19.08.2026, Frank: „Profi-Blogger & Profi-Affiliate-Marketer Niveau".)
+PRO_KONKRET_RX = re.compile(r"€|Euro|\d{2,}")
 
 # ------------------------------------------------------------------ Hilfsfunktionen
 
@@ -407,6 +379,11 @@ def validate_candidate(title: str, content: str, history: list[dict]) -> list[st
     if len(mentioned) < 3:
         problems.append(f"zu wenige Kern-Kategorien erwähnt ({mentioned})")
 
+    # PROFI-NIVEAU: Nutzen muss quantifiziert sein (€ / „Euro" / Zahl) – siehe
+    # PRO_KONKRET_RX. Ohne Konkretisierung ist es kein Profi-Affiliate-Text.
+    if not PRO_KONKRET_RX.search(content):
+        problems.append("keine Konkretisierung (€ / Euro / Zahl) – nicht Profi-Niveau")
+
     if '"' in content or '"' in title:
         problems.append("enthält doppelte Anführungszeichen (TOML-Konflikt)")
 
@@ -485,6 +462,11 @@ PFLICHT-INHALT:
   Konto (natürlich im Fließtext, kein Aufzählungs-Stakkato).
 - Betone: ohne Fachchinesisch, ohne Verkaufsdruck, mit konkreten Zahlen und
   ehrlichen Vor-/Nachteilen.
+- QUANTIFIZIERE den Nutzen zwingend mit einer konkreten Angabe – z. B.
+  „bis zu 2.000 € im Jahr", „mehrere hundert Euro" oder „in zehn Minuten".
+  Ein Text ohne €, „Euro" oder Zahl ist KEIN Profi-Text und wird verworfen.
+- Erwähne Frank Hartung / über 10 Jahre Erfahrung als Vertrauens- und
+  E-E-A-T-Signal (ein Satz, natürlich, nicht werblich).
 - 1-2 passende Emojis (nicht mehr).
 
 FORMAT (exakt, keine weiteren Zeilen davor/danach):

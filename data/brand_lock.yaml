@@ -4,9 +4,9 @@
 # Sektion asset:<pfad> = SHA-256 der kanonischen Marken-Artefakte (bake_brand.py)
 
 - key: homeInfoParams.Title
-  expected: "Weniger zahlen, mehr behalten: Dein Spar-Ratgeber für Strom, Gas, Internet & Versicherungen"
+  expected: "Bis zu 2.000 € im Jahr sparen: dein unabhängiger Finanz-Ratgeber"
 - key: homeInfoParams.Content
-  expected: "💰 Weniger Fixkosten ohne Verzicht – genau dafür ist FranksFinanzcheck da. Wenn im Herbst die Nachzahlungen für Strom und Gas ins Haus flattern, lohnt sich ein Tarifcheck vorher statt teuer nachzuzahlen.\\n\\nMontags, mittwochs und freitags bekommst du einen neuen Ratgeber: Strom und Gas günstiger, Internet nach Bedarf wählen, Versicherungen ohne Kleingedrucktes und Konto ohne Gebührenfalle. Ohne Fachchinesisch, ohne Verkaufsdruck – mit konkreten Euro-Beträgen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitung.\\n\\nStarte mit deiner höchsten Rechnung – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+  expected: "💰 Bis zu 2.000 € weniger Fixkosten im Jahr – ohne Verzicht, ohne Verkaufsdruck. FranksFinanzcheck ist ein unabhängiger Ratgeber für **Strom, Gas, Internet, Versicherungen und Konto**, von Frank Hartung aus über 10 Jahren eigener Finanzpraxis.\\n\\nIm Herbst und Winter flattern die teuren Energie-Nachzahlungen ins Haus – wer vorher vergleicht, spart oft mehrere hundert Euro. Montags, mittwochs und freitags gibt es einen neuen Ratgeber mit konkreten Euro-Beträgen und ehrlichen Vor- und Nachteilen. Kein Fachchinesisch, jeder Beitrag in zehn Minuten lesbar.\\n\\nStarte mit deiner höchsten Rechnung – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
 - key: params.description
   expected: "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
 - key: params.disclaimer
