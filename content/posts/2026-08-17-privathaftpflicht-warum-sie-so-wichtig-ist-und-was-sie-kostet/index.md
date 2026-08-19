@@ -19,6 +19,7 @@ cover:
   image: "images/covers/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.jpg"
   alt: "Privathaftpflicht: Schutz vor Millionenrisiken ab 5 Euro im Monat"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 
 # Privathaftpflicht: Warum sie so wichtig ist und was sie kostet

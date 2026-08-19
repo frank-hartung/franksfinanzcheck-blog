@@ -19,6 +19,7 @@ cover:
   image: "images/covers/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg"
   alt: "Kostenloses Girokonto ohne Gebühren finden – Spar-Tipp von FranksFinanzcheck"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 
 # Kostenloses Girokonto: So findest du ein Konto ohne Gebühren

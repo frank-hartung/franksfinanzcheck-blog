@@ -19,6 +19,7 @@ cover:
   image: "images/covers/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.jpg"
   alt: "Energiediebe stoppen: Stromfresser im Haushalt finden – Spar-Tipp"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 
 # Energiediebe stoppen: So kannst du Stromfresser finden

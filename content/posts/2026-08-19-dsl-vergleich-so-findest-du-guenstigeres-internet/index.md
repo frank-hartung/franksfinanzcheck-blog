@@ -19,6 +19,7 @@ cover:
   image: "images/covers/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.jpg"
   alt: "DSL-Vergleich: günstigeres Internet finden – Spar-Tipp von FranksFinanzcheck"
   caption: "Tipp von FranksFinanzcheck"
+social_posted: true
 ---
 
 # DSL-Vergleich: So findest du günstigeres Internet
