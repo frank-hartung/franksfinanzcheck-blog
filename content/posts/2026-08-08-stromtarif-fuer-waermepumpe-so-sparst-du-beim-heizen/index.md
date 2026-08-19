@@ -53,7 +53,7 @@ Seit Januar 2024 gelten hier neue Regeln: Wer eine neue [Wärmepumpe](../../post
 1. **Modul 1 (Pauschale):** Du erhältst eine jährliche Gutschrift auf deine Netzentgelte (je nach Region zwischen 110 € und 190 € brutto).
 2. **Modul 2 (Prozentual):** Der Arbeitspreis der Netzentgelte wird um ca. 60 % reduziert. Das lohnt sich vor allem bei sehr hohem Verbrauch.
 
-Du benötigst für den maximalen Spareffekt oft einen eigenen Stromzähler für die Wärmepumpe. Prüfe vorab, ob sich der zusätzliche Grundpreis für diesen Zähler für dich rechnet. Bei einem hohen Strombedarf von über 3.000 kWh lohnt sich die Trennung fast immer. Weitere Tipps findest du im [Ratgeber: Strom sparen](../../pillar/strom-sparen/).
+Du benötigst für den maximalen Spareffekt oft einen eigenen Stromzähler für die [Wärmepumpe](../../posts/waermepumpe-vs-gasheizung-2026/). Prüfe vorab, ob sich der zusätzliche Grundpreis für diesen Zähler für dich rechnet. Bei einem hohen Strombedarf von über 3.000 kWh lohnt sich die Trennung fast immer. Weitere Tipps findest du im [Ratgeber: Strom sparen](../../pillar/strom-sparen/).
 
 ### Das Wichtigste in Kürze
 * Ein Wärmepumpentarif spart oft **300 € bis 600 €** pro Jahr im Vergleich zum Standardtarif.

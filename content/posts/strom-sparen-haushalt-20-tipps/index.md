@@ -103,7 +103,7 @@ Das Wichtigste in Kürze:
 * Ladegeräte abziehen 
 * Kühlschrank-Temperatur überprüfen 
 * Wäsche an der Luft trocknen 
-* Stromtarif wechseln 
+* [Stromtarif](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) wechseln 
 
 👉 **Jetzt [Stromtarif vergleichen](../../posts/stromvergleich-richtig-lesen-tarif-finden/) und sofort sparen:** [**→ Strompreise prüfen**](/go/strom/)
 

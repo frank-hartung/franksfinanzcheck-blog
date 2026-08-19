@@ -125,7 +125,7 @@ Die ehrliche Einordnung: Riester ist ein Baustein, kein Allheilmittel. Die moder
 
 1. **Gesetzliche Rente** (Pflicht, Basis)
 2. **Betriebliche Altersvorsorge** (bAV – oft mit Arbeitgeber-Zuschuss, meist sehr attraktiv)
-3. **Private Vorsorge:** Riester (für Förderberechtigte) und/oder ETF-Sparplan + [Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/)
+3. **Private Vorsorge:** Riester (für Förderberechtigte) und/oder [ETF-Sparplan](../../posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/) + [Depot](../../posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/)
 
 Für die meisten ist die Kombination aus bAV und ETF-Sparplan die schlagkräftigste Lösung. Riester kann dazukommen, wenn die Zulagen hoch sind – aber nie als einzige private Vorsorge.
 

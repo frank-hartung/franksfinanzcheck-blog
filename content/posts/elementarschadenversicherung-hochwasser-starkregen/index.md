@@ -51,7 +51,7 @@ Die Bedingungen unterscheiden sich je nach Anbieter deutlich. Achte besonders au
 
 ## Warum Hausrat und Kfz allein nicht reichen
 
-Deine Hausratversicherung schützt nur dein bewegliches Eigentum im Haus. Ohne Zusatzbaustein zahlst du bei einer Flut alles selbst. Die Wohngebäudeversicherung wiederum deckt nur die Immobilie ab. Auch hier fehlt ohne Erweiterung der Schutz gegen Naturgewalten.
+Deine Hausratversicherung schützt nur dein bewegliches Eigentum im Haus. Ohne Zusatzbaustein zahlst du bei einer Flut alles selbst. Die [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) wiederum deckt nur die Immobilie ab. Auch hier fehlt ohne Erweiterung der Schutz gegen Naturgewalten.
 
 Deine Kfz-Teilkasko übernimmt zwar Überschwemmungsschäden an deinem Auto. Das hilft dir bei einem vollgelaufenen Keller jedoch nicht weiter. Du musst also aktiv deinen Hausrat erweitern, um die finanzielle Lücke zu schließen. Nur 54 % der deutschen Gebäude besitzen aktuell diesen umfassenden Schutz.
 

@@ -27,7 +27,7 @@ social_posted: true
 
 Kennst du das Gefühl, wenn der Ladebalken beim Serien-Streaming plötzlich einfriert? Du verlierst die Verbindung genau in dem Moment, in dem es am spannendsten wird. Ich kenne diesen Frust aus meinem eigenen Wohnzimmer. Lange Zeit habe ich mich mit Funklöchern in der Küche und Verbindungsabbrüchen im Schlafzimmer herumgeschlagen. Mein Ziel war klar: Ich wollte mein [WLAN verbessern](../../posts/wlan-verbessern-ohne-neue-hardware/) und im ganzen Haus eine stabile Verbindung genießen. 
 
-Ich teile meine Erfahrungen mit dir und zeige dir, welcher Weg für dich der richtige ist. Du willst dein WLAN verbessern und im ganzen Haus eine stabile Verbindung genießen. Ich erkläre dir, wie du das erreichen kannst. Ein stabiles Heimnetz ist heute kein Luxus mehr, sondern die Basis für Homeoffice, Entertainment und Smart Home. Wer hier am falschen Ende spart, zahlt oft mit Zeit und Nerven drauf.
+Ich teile meine Erfahrungen mit dir und zeige dir, welcher Weg für dich der richtige ist. Du willst dein [WLAN verbessern](../../posts/wlan-verbessern-ohne-neue-hardware/) und im ganzen Haus eine stabile Verbindung genießen. Ich erkläre dir, wie du das erreichen kannst. Ein stabiles Heimnetz ist heute kein Luxus mehr, sondern die Basis für Homeoffice, Entertainment und Smart Home. Wer hier am falschen Ende spart, zahlt oft mit Zeit und Nerven drauf.
 
 
 
@@ -110,7 +110,7 @@ Es gibt nichts Nervigeres als ein ruckelndes Bild in einer wichtigen Videokonfer
 ## Häufige Fragen
 
 ### Hilft ein Alufolien-Reflektor wirklich?
-Ich habe das tatsächlich mal aus Neugier getestet. Theoretisch kann eine gebogene Schicht Alufolie hinter den Antennen das Signal in eine bestimmte Richtung lenken. In der Praxis ist der Effekt aber minimal und sieht zudem im Wohnzimmer ziemlich unschön aus. Moderne Router mit internen Antennen lassen sich so ohnehin kaum beeinflussen. Da sind richtige DSL hacks wie die Kanaloptimierung oder das Upgrade auf ein Mesh-System deutlich effektiver.
+Ich habe das tatsächlich mal aus Neugier getestet. Theoretisch kann eine gebogene Schicht Alufolie hinter den Antennen das Signal in eine bestimmte Richtung lenken. In der Praxis ist der Effekt aber minimal und sieht zudem im Wohnzimmer ziemlich unschön aus. Moderne Router mit internen Antennen lassen sich so ohnehin kaum beeinflussen. Da sind richtige [DSL hacks](../../posts/wlan-verstaerker-vs-mesh-wlan/) wie die Kanaloptimierung oder das Upgrade auf ein Mesh-System deutlich effektiver.
 
 ### Kann ich Repeater verschiedener Hersteller mischen?
 Das funktioniert in der Regel über den WPS-Standard ganz gut. Ich habe jedoch festgestellt, dass Geräte vom selben Hersteller oft besser harmonieren. Besonders bei Mesh-Systemen ist es zwingend erforderlich, bei einer Marke zu bleiben. Nur so können die Funktionen wie "Seamless Roaming" oder automatische Updates reibungslos funktionieren. Wenn du also dein WLAN verbessern willst, bleibe am besten innerhalb eines Ökosystems (z. B. AVM, ASUS oder TP-Link).

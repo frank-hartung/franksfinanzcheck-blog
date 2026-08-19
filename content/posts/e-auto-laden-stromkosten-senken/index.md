@@ -107,6 +107,6 @@ Ständiges Laden am DC-Schnelllader führt zu einer schnelleren Alterung der Akk
 
 ---
 
-👉 **Jetzt den passenden Stromtarif fürs E-Auto finden:** [**→ Stromtarife vergleichen**](/go/strom/)
+👉 **Jetzt den passenden [Stromtarif](../../posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/) fürs E-Auto finden:** [**→ Stromtarife vergleichen**](/go/strom/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -138,7 +138,7 @@ Tarife mit „unbegrenztem" Datenvolumen für Zuhause gibt es – sie kosten abe
 
 **Backup für den Hauptanschluss:** Ein günstiger 5G-Tarif mit kleinem Datenvolumen (10 bis 20 €) sichert dich ab, wenn [DSL oder Kabel](../../posts/glasfaser-dsl-kabel-anschluss-vergleich/) ausfällt – gerade im Homeoffice ein beruhigendes Sicherheitsnetz. Im Ernstfall teilst du das Handy-Hotspot oder steckst die SIM in den 5G-Router.
 
-**Zweitwohnung und Camping:** Der 5G-Router wandert mit: In der Zweitwohnung, im Ferienhaus oder beim Camping-Urlaub hast du überall schnelles Internet – ohne Verträge an jedem Ort. [Handy-Tarife mit großem Datenvolumen](../../posts/handytarife-vergleichen-guenstigster-tarif/) sind dafür die Basis.
+**Zweitwohnung und Camping:** Der 5G-Router wandert mit: In der Zweitwohnung, im Ferienhaus oder beim Camping-Urlaub hast du überall [schnelles Internet](../../posts/wlan-verstaerker-vs-mesh-wlan/) – ohne Verträge an jedem Ort. [Handy-Tarife mit großem Datenvolumen](../../posts/handytarife-vergleichen-guenstigster-tarif/) sind dafür die Basis.
 
 **Übergangsphase beim Umzug:** Wer umzieht und auf den neuen Anschluss wartet, überbrückt die Zeit mit 5G-Home – monatlich kündbar, sofort verfügbar. Das ist oft die stressfreieste Lösung.
 

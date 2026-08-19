@@ -90,7 +90,7 @@ Sich gezielt mit dem Thema **Kfz-Versicherung wechseln: Wann es sich [wirklich l
 ein Wechsel ist möglich, wenn dein Versicherer die Beiträge erhöht. In diesem Fall hast du ein [Sonderkündigungsrecht](../../posts/internet-anbieter-wechseln-kuendigung/) von vier Wochen ab Erhalt der Rechnung. Auch nach einem Schadensfall oder einem Fahrzeugverkauf darfst du den Vertrag vorzeitig beenden.
 
 **Wird die [SF-Klasse](../../posts/kfz-versicherung-sf-klasse-erklaert/) mitgenommen?**
-Ja, deine mühsam erfahrene Schadenfreiheitsklasse gehört dir persönlich. Dein neuer Versicherer fragt diese Daten nach dem Wechsel einfach beim alten Anbieter ab. Dein Rabatt bleibt dir also erhalten.
+Ja, deine mühsam erfahrene [Schadenfreiheitsklasse](../../posts/kfz-versicherung-sf-klasse-erklaert/) gehört dir persönlich. Dein neuer Versicherer fragt diese Daten nach dem Wechsel einfach beim alten Anbieter ab. Dein Rabatt bleibt dir also erhalten.
 
 **Was passiert, wenn ich umziehe?**
 Ein Umzug allein ist kein Kündigungsgrund. Dein Versicherer stuft dich jedoch in die neue Regionalklasse deines Wohnorts ein. Dadurch kann sich dein Beitrag geringfügig ändern. Melde die neue Adresse zeitnah deiner Versicherung.

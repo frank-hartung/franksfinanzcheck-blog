@@ -69,7 +69,7 @@ Die Beiträge sind bemerkenswert günstig:
 | Einzelperson (bis 65 Jahre) | 10–30 € pro Jahr |
 | Familie (inkl. Kinder) | 20–40 € pro Jahr |
 | Senioren (ab 65) | 40–100 € pro Jahr |
-du erhältst weltweite Absicherung – das beste Preis-Leistungs-Verhältnis aller Versicherungen.
+du erhältst weltweite [Absicherung](../../posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/) – das beste Preis-Leistungs-Verhältnis aller Versicherungen.
 
 
 

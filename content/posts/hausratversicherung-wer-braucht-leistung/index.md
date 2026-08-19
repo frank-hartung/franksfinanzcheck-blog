@@ -21,7 +21,7 @@ social_posted: true
 
 
 
-Ein Rohrbruch flutet dein Wohnzimmer, ein Brand vernichtet die Küche oder Einbrecher räumen die Wohnung leer. Solche Schäden kosten dich ohne Schutz schnell fünfstellige Summen. Eine leistungsstarke Hausratversicherung ersetzt dir den kompletten Neuwert deiner Möbel, Technik und Kleidung. Das bedeutet: Auch wenn dein fünf Jahre alter Fernseher gestohlen wird, zahlt die Versicherung den Preis für ein vergleichbares Neugerät. In diesem Ratgeber erfährst du, wie du deinen Hausrat absichern kannst und worauf du beim Hausratversicherung-Tarifvergleich achten musst.
+Ein Rohrbruch flutet dein Wohnzimmer, ein Brand vernichtet die Küche oder Einbrecher räumen die Wohnung leer. Solche Schäden kosten dich ohne Schutz schnell fünfstellige Summen. Eine leistungsstarke [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) ersetzt dir den kompletten Neuwert deiner Möbel, Technik und Kleidung. Das bedeutet: Auch wenn dein fünf Jahre alter Fernseher gestohlen wird, zahlt die Versicherung den Preis für ein vergleichbares Neugerät. In diesem Ratgeber erfährst du, wie du deinen Hausrat absichern kannst und worauf du beim Hausratversicherung-Tarifvergleich achten musst.
 
 **Das Wichtigste in Kurzform:**
 * **Neuwert-Ersatz:** Ersetzt Einrichtung und Technik zum aktuellen Neupreis, nicht zum Zeitwert.

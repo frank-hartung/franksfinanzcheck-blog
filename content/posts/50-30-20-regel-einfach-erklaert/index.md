@@ -112,7 +112,7 @@ Kein Finanzsystem ist perfekt. Die 50–30–20-Regel bietet jedoch einen hervor
 
 **Nachteile:**
 - **Ballungsraum-Problem:** Bei sehr hohen Mieten ist die 50-Prozent-Quote oft unrealistisch. Hier musst du auf 60–20–20 ausweichen.
-- **Geringverdiener-Hürde:** Wer 1.200 € netto verdient, kämpft oft schon damit, die 50 % für Miete und Strom einzuhalten. Hier steht die Existenzsicherung vor dem Vermögensaufbau.
+- **Geringverdiener-Hürde:** Wer 1.200 € netto verdient, kämpft oft schon damit, die 50 % für Miete und Strom einzuhalten. Hier steht die Existenzsicherung vor dem [Vermögensaufbau](../../posts/sparquote-berechnen-und-steigern/).
 
 ## Was tun, wenn die 50 % nicht reichen?
 

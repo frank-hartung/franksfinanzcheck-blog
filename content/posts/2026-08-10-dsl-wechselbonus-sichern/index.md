@@ -49,7 +49,7 @@ Einige Beispiele für DSL-Anbieter und ihre Angebote:
 * **Telefónica**: Bietet eine Vielzahl von Tarifen mit unterschiedlichen Geschwindigkeiten an.
 
 ## Vor- und Nachteile eines DSL-Wechselbonus
-Ein DSL-Wechselbonus senkt deine effektiven Kosten im ersten Jahr massiv. Oft locken Anbieter zudem mit einem attraktiven Cashback DSL. Dennoch hat die Sache einen kleinen Haken. Du bindest dich meist für 24 Monate an den neuen Vertrag. Lies das Kleingedruckte zu den Auszahlungsfristen deshalb ganz genau.
+Ein DSL-[Wechselbonus](../../posts/dsl-internet-flat-guenstig-sichern/) senkt deine effektiven Kosten im ersten Jahr massiv. Oft locken Anbieter zudem mit einem attraktiven Cashback DSL. Dennoch hat die Sache einen kleinen Haken. Du bindest dich meist für 24 Monate an den neuen Vertrag. Lies das Kleingedruckte zu den Auszahlungsfristen deshalb ganz genau.
 
 | Vorteil | Nachteil |
 |:--- |:--- |

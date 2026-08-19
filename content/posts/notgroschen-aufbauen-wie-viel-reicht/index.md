@@ -97,7 +97,7 @@ Nein, aber das ist sein Job nicht. Er ist eine Versicherung gegen finanzielle Sc
 
 Das Wichtigste in Kürze:
 - Baue einen Notgroschen auf, um finanzielle Sicherheit zu gewährleisten.
-- Verwende ein Tagesgeldkonto für deine Reserve.
+- Verwende ein [Tagesgeldkonto](../../posts/tagesgeld-zinsen-sicher-anlegen/) für deine Reserve.
 - Vermeide häufige Fehler wie zu kleines Planen oder Vermischen des Notgroschens.
 - Überprüfe regelmäßig deine Finanzen und passe deinen Notgroschen an.
 
