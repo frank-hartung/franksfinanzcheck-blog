@@ -94,6 +94,7 @@ def read_frontmatter(index_md: Path) -> dict:
         "description": field("description"),
         "kurzantwort": field("kurzantwort"),
         "tags": list_field("tags"),
+        "pillar": field("pillar"),
         "draft": field("draft").lower() == "true",
         "broken": False,
         "raw": fm,
@@ -127,21 +128,62 @@ def find_unposted() -> list[Path]:
     return list(reversed(bundles))  # neueste Slugs (YYYY-MM-DD-…) zuerst
 
 
+ACRONYMS = {
+    "dsl", "etf", "kfz", "sepa", "wlan", "dns", "vpn", "gez", "agb",
+    "eeg", "kwh", "iban", "bic", "seo", "ai",
+}
+PILLAR_TAGS = {
+    "internet-dsl": ["DSL", "InternetSparen"],
+    "strom-sparen": ["StromSparen", "Energiekosten"],
+    "versicherungen": ["Versicherungen", "Vorsorge"],
+    "konto-karten": ["Girokonto", "KontoGebuehren"],
+}
+GENERIC_ALT_RX = re.compile(
+    r"^(tipp von franksfinanzcheck|cover|bild|image|foto)\.?$", re.I
+)
+
+
 def umlaut_free(s: str) -> str:
     return (s.replace("ä", "ae").replace("ö", "oe").replace("ü", "ue")
              .replace("Ä", "Ae").replace("Ö", "Oe").replace("Ü", "Ue").replace("ß", "ss"))
 
 
-def hashtags(tags: list[str], max_tags: int = 3) -> str:
-    result = []
-    for tag in tags[:max_tags]:
-        camel = "".join(w.capitalize() for w in umlaut_free(tag).split())
-        camel = re.sub(r"[^A-Za-z0-9]", "", camel)
-        if camel:
-            result.append(f"#{camel}")
+def _tag_token(word: str) -> str:
+    core = re.sub(r"[^A-Za-z0-9]", "", umlaut_free(word))
+    if not core:
+        return ""
+    return core.upper() if core.lower() in ACRONYMS else core.capitalize()
+
+
+def _pillar(fm: dict) -> str:
+    m = re.search(r'(?m)^pillar:\s*["\']?([^\s"\']+)', fm.get("raw") or "")
+    return m.group(1) if m else ""
+
+
+def hashtags(tags: list[str], max_tags: int = 3, pillar: str = "") -> str:
+    """CamelCase-Hashtags, Akronyme bleiben groß (DSL/WLAN). Pillar-Fallback."""
+    raw = list(tags or [])
+    if not raw and pillar:
+        raw = list(PILLAR_TAGS.get(pillar, []))
+    result, seen = [], set()
+    for tag in raw[:max_tags]:
+        camel = "".join(_tag_token(w) for w in re.split(r"[\s\-/]+", tag))
+        if not camel or camel.lower() in seen:
+            continue
+        seen.add(camel.lower())
+        result.append(f"#{camel}")
     if "#Finanzen" not in result:
         result.append("#Finanzen")
-    return " ".join(result)
+    return " ".join(result[:5])
+
+
+def cover_alt_text(fm: dict, title: str) -> str:
+    """Mastodon-Alt (A11y + Fediverse-SEO). Kein Generic-„Tipp von …“."""
+    m = re.search(r'(?m)^\s+alt:\s*["\']?(.*?)["\']?\s*$', fm.get("raw") or "")
+    alt = (m.group(1).strip() if m else "") or ""
+    if not alt or GENERIC_ALT_RX.match(alt) or len(alt) < 24:
+        alt = f"{title} – unabhängiger Spar-Tipp von FranksFinanzcheck"
+    return alt[:400]
 
 
 def build_post(fm: dict, slug: str) -> str:
@@ -152,7 +194,7 @@ def build_post(fm: dict, slug: str) -> str:
     # Hook auf max. 240 Zeichen am Wortende kürzen
     if len(hook) > 240:
         hook = hook[:240].rsplit(" ", 1)[0] + " …"
-    tags = hashtags(fm.get("tags", []))
+    tags = hashtags(fm.get("tags", []), pillar=_pillar(fm))
     text = f"📌 {title}\n\n{hook}\n\n🔗 {url}\n\n{tags}"
     return text[:497] + "…" if len(text) > 500 else text
 
@@ -183,17 +225,23 @@ def http_json(url: str, data=None, headers=None, method="POST") -> dict:
 
 # ------------------------------------------------------------------ Mastodon
 
-def mastodon_upload_media(image: Path) -> str | None:
+def mastodon_upload_media(image: Path, description: str = "") -> str | None:
     boundary = "----socialposter42"
     name = image.name
-    body = (
+    parts = b""
+    if description:
+        parts += (
+            f"--{boundary}\r\nContent-Disposition: form-data; name=\"description\""
+            f"\r\n\r\n{description}\r\n"
+        ).encode()
+    parts += (
         f"--{boundary}\r\nContent-Disposition: form-data; name=\"file\"; "
         f"filename=\"{name}\"\r\nContent-Type: image/jpeg\r\n\r\n"
     ).encode() + image.read_bytes() + f"\r\n--{boundary}--\r\n".encode()
     try:
         resp = http_json(
             f"{MASTODON_INSTANCE}/api/v2/media",
-            data=body,
+            data=parts,
             headers={
                 "Authorization": f"Bearer {MASTODON_TOKEN}",
                 "Content-Type": f"multipart/form-data; boundary={boundary}",
@@ -205,9 +253,9 @@ def mastodon_upload_media(image: Path) -> str | None:
         return None
 
 
-def post_mastodon(text: str, image: Path | None) -> tuple[bool, str]:
-    media_id = mastodon_upload_media(image) if image else None
-    payload = {"status": text, "visibility": "public"}
+def post_mastodon(text: str, image: Path | None, alt: str = "") -> tuple[bool, str]:
+    media_id = mastodon_upload_media(image, alt) if image else None
+    payload = {"status": text, "visibility": "public", "language": "de"}
     if media_id:
         payload["media_ids[]"] = media_id
     body = "&".join(f"{k}={urllib.parse.quote(str(v))}" for k, v in payload.items()).encode()
@@ -354,16 +402,18 @@ def main() -> None:
         text = build_post(fm, slug)
         url = f"{BASE_URL}/posts/{slug}/"
         image = cover_path(slug_dir, fm)
+        alt = cover_alt_text(fm, fm.get("title") or slug)
         print(f"  → {slug}")
 
         if DRY_RUN:
             print("    [DRY-RUN] Würde posten:")
             print("    " + text.replace("\n", "\n    "))
+            print(f"    Alt: {alt}")
             continue
 
         any_success = False
         if MASTODON_TOKEN:
-            ok, ref = post_mastodon(text, image)
+            ok, ref = post_mastodon(text, image, alt)
             append_log(slug, "mastodon", ok, ref)
             print(f"    Mastodon: {'✅ ' + ref if ok else '❌ ' + ref}")
             any_success |= ok
@@ -387,6 +437,14 @@ def main() -> None:
     # Komplettausfall = echter Fehler (→ Fehler-Alerting greift)
     if not DRY_RUN and batch and not posted_lines and failures:
         sys.exit("FEHLER: Alle Social-Posts in diesem Lauf sind fehlgeschlagen.")
+
+    # Selbstheilung: alle Live-Toots auf Profi-SEO prüfen (Alt, Hashtags, Link)
+    if not DRY_RUN and MASTODON_TOKEN:
+        try:
+            import mastodon_seo
+            mastodon_seo.main()
+        except Exception as exc:
+            print(f"⚠ Mastodon-SEO-Wache übersprungen: {exc}")
 
 
 if __name__ == "__main__":
