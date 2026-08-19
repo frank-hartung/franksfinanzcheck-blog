@@ -14,7 +14,6 @@ ai_provider: "Content-Engine v2"
 engine_level: "relaxed"
 
 inspiration: "Zweite Welle Gaspreis-Anpassung: Jetzt sichern"
-social_posted: true
 cover:
   image: "images/covers/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg"
   alt: "Tipp von FranksFinanzcheck"
