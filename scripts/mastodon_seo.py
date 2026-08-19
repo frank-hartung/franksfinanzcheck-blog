@@ -336,12 +336,62 @@ def write_report(rows: list[dict], dupes: dict[str, int], healed: int) -> None:
     REPORT.write_text("\n".join(lines), encoding="utf-8")
 
 
+def delete_status(status_id: str) -> tuple[bool, str]:
+    try:
+        req = urllib.request.Request(
+            f"{sp.MASTODON_INSTANCE}/api/v1/statuses/{status_id}",
+            headers={"Authorization": f"Bearer {sp.MASTODON_TOKEN}"},
+            method="DELETE",
+        )
+        with urllib.request.urlopen(req, timeout=45) as resp:
+            resp.read()
+        return True, "gelöscht"
+    except urllib.error.HTTPError as exc:
+        return False, f"HTTP {exc.code}: {exc.read().decode()[:160]}"
+    except Exception as exc:
+        return False, str(exc)[:160]
+
+
+def delete_newer_duplicates(statuses: list[dict]) -> list[str]:
+    """Pro Artikel-Slug nur den ältesten Toot behalten."""
+    by_slug: dict[str, list[dict]] = defaultdict(list)
+    for st in statuses:
+        m = SLUG_RX.search(st.get("content") or "")
+        if m:
+            by_slug[m.group(1)].append(st)
+    log: list[str] = []
+    for slug, items in sorted(by_slug.items()):
+        items = sorted(items, key=lambda s: s.get("created_at") or "")
+        if len(items) < 2:
+            continue
+        keep, extras = items[0], items[1:]
+        print(f"  Duplikate {slug}: behalte {keep['id']}, lösche {len(extras)}")
+        for extra in extras:
+            if DRY_RUN or not sp.MASTODON_TOKEN:
+                log.append(f"würde löschen {extra['id']} ({slug})")
+                continue
+            ok, ref = delete_status(extra["id"])
+            msg = f"{'gelöscht' if ok else 'FEHLER'} {extra['id']} ({slug}) {ref}"
+            print("   ", msg)
+            log.append(msg)
+            sp.append_log(slug, "mastodon-dedupe", ok, extra.get("url") or extra["id"])
+            _sleep_retry()
+    return log
+
+
 def main() -> None:
     if not DRY_RUN and not sp.MASTODON_TOKEN:
         print("Kein MASTODON_ACCESS_TOKEN – nur öffentlicher Audit (keine Heilung).")
     articles = article_index()
     statuses = fetch_all_statuses()
     print(f"📚 {len(statuses)} Live-Toots, {len(articles)} Artikel im Repo.")
+
+    if DELETE_DUPES:
+        print("🧹 Duplikate: jüngere Toots zum selben Artikel entfernen…")
+        for line in delete_newer_duplicates(statuses):
+            print("   ", line)
+        statuses = fetch_all_statuses()
+        print(f"📚 nach Dedup: {len(statuses)} Live-Toots.")
 
     slug_counts: dict[str, int] = defaultdict(int)
     rows: list[dict] = []
