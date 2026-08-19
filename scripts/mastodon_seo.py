@@ -134,18 +134,22 @@ def article_index() -> dict[str, tuple[Path, dict]]:
     return idx
 
 
+def _hashtags_in_html(content: str) -> list[str]:
+    return re.findall(r"#<span>([^<]+)</span>", content or "")
+
+
 def audit(status: dict, slug: str | None, fm: dict | None) -> list[str]:
     issues: list[str] = []
     text = _plain(status.get("content") or "")
     media = status.get("media_attachments") or []
-    tags = [t.get("name", "") for t in (status.get("tags") or [])]
+    display_tags = _hashtags_in_html(status.get("content") or "")
     if status.get("visibility") != "public":
         issues.append("nicht öffentlich")
     if status.get("language") not in (None, "de"):
         issues.append(f"Sprache={status.get('language')} (soll de)")
     if len(text) > 500:
         issues.append(f"zu lang ({len(text)} Zeichen)")
-    if not SLUG_RX.search(text) and not SLUG_RX.search(status.get("content") or ""):
+    if not SLUG_RX.search(status.get("content") or "") and not SLUG_RX.search(text):
         issues.append("kein kanonischer Artikel-Link")
     if GO_LINK_RX.search(text):
         issues.append("Affiliate-/go/-Link im Toot")
@@ -159,19 +163,17 @@ def audit(status: dict, slug: str | None, fm: dict | None) -> list[str]:
             issues.append("generischer Bild-Alt")
         elif len(desc) < 24:
             issues.append("Bild-Alt zu kurz")
-    if len(tags) < 2:
-        issues.append(f"zu wenige Hashtags ({len(tags)})")
-    mashed = [t for t in tags if t.lower() == t and len(t) > 16 and t != "finanzen"]
+    if len(display_tags) < 2:
+        issues.append(f"zu wenige Hashtags ({len(display_tags)})")
+    mashed = [t for t in display_tags if t == t.lower() and len(t) > 16 and t.lower() != "finanzen"]
     if mashed:
         issues.append("Hashtags nicht CamelCase: " + ", ".join(mashed[:3]))
     if fm is not None and slug:
         wanted = seo_hashtags(fm.get("tags") or [], _pillar(fm))
         want_set = {w.lstrip("#").lower() for w in wanted.split()}
-        have_set = {t.lower() for t in tags}
-        if want_set - have_set and mashed or (len(tags) <= 1 and want_set):
-            if "Hashtags nicht CamelCase" not in " ".join(issues):
-                if want_set - have_set:
-                    issues.append("Hashtags unvollständig/nicht SEO")
+        have_set = {t.lower() for t in display_tags}
+        if want_set - have_set and (mashed or len(display_tags) <= 1):
+            issues.append("Hashtags unvollständig/nicht SEO")
     return issues
 
 
@@ -180,26 +182,13 @@ def _pillar(fm: dict) -> str:
     return pm.group(1) if pm else ""
 
 
-def put_media_description(media_id: str, description: str) -> tuple[bool, str]:
-    body = urllib.parse.urlencode({"description": description[:1500]}).encode()
-    try:
-        sp.http_json(
-            f"{sp.MASTODON_INSTANCE}/api/v1/media/{media_id}",
-            data=body,
-            headers={
-                "Authorization": f"Bearer {sp.MASTODON_TOKEN}",
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            method="PUT",
-        )
-        return True, "alt gesetzt"
-    except urllib.error.HTTPError as exc:
-        return False, f"HTTP {exc.code}: {exc.read().decode()[:160]}"
-    except Exception as exc:
-        return False, str(exc)[:160]
+def _sleep_retry():
+    import time
+    time.sleep(2.5)
 
 
 def heal_one(status: dict, slug: str, slug_dir: Path, fm: dict, issues: list[str]) -> list[str]:
+    """Heilt einen Toot, ohne vorhandene Medien zu verlieren."""
     done: list[str] = []
     if DRY_RUN or not sp.MASTODON_TOKEN:
         return done
@@ -211,32 +200,38 @@ def heal_one(status: dict, slug: str, slug_dir: Path, fm: dict, issues: list[str
     )
     need_cover = "kein Cover" in issues
     need_alt = any("Bild-Alt" in i or "generischer" in i for i in issues)
+    existing = [m["id"] for m in (status.get("media_attachments") or [])]
+    alt = cover_alt(fm, fm.get("title") or slug)
 
-    if need_text or need_cover:
-        text = build_seo_post(fm, slug)
-        image = sp.cover_path(slug_dir, fm) if need_cover else None
-        # Wenn wir das Cover neu hochladen, Alt gleich mitgeben
-        if image is not None:
-            alt = cover_alt(fm, fm.get("title") or slug)
+    if need_cover:
+        image = sp.cover_path(slug_dir, fm)
+        if not image:
+            return ["kein Cover-File im Repo"]
+        mid = None
+        for _ in range(3):
             mid = upload_with_alt(image, alt)
-            ok, ref = edit_status_keep_media(status["id"], text, mid)
-            if ok:
-                done.append("Text+Cover geheilt")
-                return done
-            done.append(f"Text-Heilung fehlgeschlagen: {ref}")
-        else:
-            ok, ref = sp.edit_mastodon(status["id"], text, None)
-            if ok:
-                done.append("Text/Hashtags geheilt")
-            else:
-                done.append(f"Text-Heilung fehlgeschlagen: {ref}")
+            if mid:
+                break
+            _sleep_retry()
+        ok, ref = edit_status(status["id"], build_seo_post(fm, slug), media_ids=[mid] if mid else None)
+        done.append("Cover+Alt angehängt" if ok else f"Cover-Heilung fehlgeschlagen: {ref}")
+        _sleep_retry()
+        return done
 
-    if need_alt and not need_cover:
-        media = status.get("media_attachments") or []
-        if media:
-            alt = cover_alt(fm, fm.get("title") or slug)
-            ok, ref = put_media_description(media[0]["id"], alt)
-            done.append("Alt gesetzt" if ok else f"Alt fehlgeschlagen: {ref}")
+    if need_text or need_alt:
+        ok, ref = edit_status(
+            status["id"],
+            build_seo_post(fm, slug),
+            media_ids=existing or None,
+            media_alt=(existing[0], alt) if existing and need_alt else None,
+        )
+        if ok:
+            done.append("Text/Hashtags geheilt" if need_text else "ok")
+            if existing and need_alt:
+                done.append("Alt mitgesetzt")
+        else:
+            done.append(f"Heilung fehlgeschlagen: {ref}")
+        _sleep_retry()
     return done
 
 
@@ -266,26 +261,45 @@ def upload_with_alt(image: Path, description: str) -> str | None:
         return None
 
 
-def edit_status_keep_media(status_id: str, text: str, media_id: str | None) -> tuple[bool, str]:
-    payload = {"status": text, "language": "de"}
-    if media_id:
-        payload["media_ids[]"] = media_id
-    body = "&".join(f"{k}={urllib.parse.quote(str(v))}" for k, v in payload.items()).encode()
-    try:
-        resp = sp.http_json(
-            f"{sp.MASTODON_INSTANCE}/api/v1/statuses/{status_id}",
-            data=body,
-            headers={
-                "Authorization": f"Bearer {sp.MASTODON_TOKEN}",
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            method="PUT",
-        )
-        return True, resp.get("url", "")
-    except urllib.error.HTTPError as exc:
-        return False, f"HTTP {exc.code}: {exc.read().decode()[:200]}"
-    except Exception as exc:
-        return False, str(exc)[:200]
+def edit_status(
+    status_id: str,
+    text: str,
+    media_ids: list[str] | None = None,
+    media_alt: tuple[str, str] | None = None,
+) -> tuple[bool, str]:
+    """PUT Status. media_ids immer mitsenden, sonst hängt Mastodon das Bild ab."""
+    pairs = [("status", text), ("language", "de")]
+    if media_ids:
+        for mid in media_ids:
+            pairs.append(("media_ids[]", mid))
+    if media_alt:
+        mid, desc = media_alt
+        pairs.append(("media_attributes[][id]", mid))
+        pairs.append(("media_attributes[][description]", desc[:1500]))
+    body = "&".join(f"{k}={urllib.parse.quote(str(v))}" for k, v in pairs).encode()
+    last = ""
+    for _ in range(4):
+        try:
+            resp = sp.http_json(
+                f"{sp.MASTODON_INSTANCE}/api/v1/statuses/{status_id}",
+                data=body,
+                headers={
+                    "Authorization": f"Bearer {sp.MASTODON_TOKEN}",
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                method="PUT",
+            )
+            return True, resp.get("url", "")
+        except urllib.error.HTTPError as exc:
+            last = f"HTTP {exc.code}: {exc.read().decode()[:180]}"
+            if exc.code in (429, 502, 503):
+                _sleep_retry()
+                continue
+            return False, last
+        except Exception as exc:
+            last = str(exc)[:180]
+            _sleep_retry()
+    return False, last
 
 
 def write_report(rows: list[dict], dupes: dict[str, int], healed: int) -> None:
