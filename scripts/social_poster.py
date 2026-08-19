@@ -444,6 +444,19 @@ def append_log(slug: str, platform: str, ok: bool, ref: str) -> None:
         }, ensure_ascii=False) + "\n")
 
 
+def berlin_now() -> datetime:
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.now(ZoneInfo("Europe/Berlin"))
+    except Exception:
+        return datetime.now(timezone.utc)
+
+
+def on_publish_cadence(now: datetime | None = None) -> bool:
+    """True nur an Blog-Tagen Mo/Mi/Fr (Europe/Berlin)."""
+    return (now or berlin_now()).weekday() in CADENCE_WEEKDAYS
+
+
 # -------------------------------------------------------------------- Main
 
 def main() -> None:
