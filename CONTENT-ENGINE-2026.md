@@ -1,8 +1,8 @@
 # 🧠 CONTENT-ENGINE 2026 – Autonome Themen-Pipeline für franksfinanzcheck.de
-**Stand:** 09.08.2026 · **Basis:** 70 Artikel, 6 Pillars, 161 Themen-Pool
+**Stand:** 19.08.2026 · **Basis:** 6 Live-Artikel (Mo/Mi/Fr-Kadenz), 6 Pillars, 175 Themen-Pool
 **Strategie:** Die 6 bestehenden Silos (Sparen/Tarife/Versicherungen/Internet/Reisen) sind gefüllt. Die Engine erschließt jetzt die **fehlenden Wachstumsfelder**: Geldanlage & ETFs, Altersvorsorge, Steuern, Vermögensaufbau, Finanzpsychologie, Wirtschaft & Märkte.
 
-> Diese Datei ist die **Arbeitsgrundlage der autonomen Content-Engine**: Themen-Pipeline (Schritt 1), SEO-Blueprints (Schritt 2), 30-Tage-Kalender (Schritt 4). Die Artikel (Schritt 3) werden über die bestehende Qualitäts-Pipeline (7 Gates) produziert und täglich vom Content-Bot veröffentlicht.
+> Diese Datei ist die **Arbeitsgrundlage der autonomen Content-Engine**: Themen-Pipeline (Schritt 1), SEO-Blueprints (Schritt 2), 30-Tage-Kalender (Schritt 4). Die Artikel (Schritt 3) werden über die bestehende Qualitäts-Pipeline (7 Gates) produziert und an Publikationstagen (Mo/Mi/Fr, 2–3 Artikel pro Tag) vom Content-Bot veröffentlicht.
 
 ---
 
@@ -93,77 +93,77 @@
 - **Meta-Title:** „ETF-Sparplan für Kinder: So legst du richtig an" (48 Z.)
 - **Meta-Description:** „Depot für Kinder eröffnen, Sparplan einrichten, Steuern verstehen: So startest du den ETF-Sparplan für dein Kind – Schritt für Schritt, ab 10 € monatlich." (157 Z.)
 - **Artikelstruktur:** H1 → Kurzantwort → Warum Kindersparen wichtig ist · Die 3 Wege (Sparbuch, Banksparplan, ETF) · Depot für Kinder: Konto-Formen (Kinderdepot, Treuhandkonto) · Der 5-Schritte-Startplan · Steuern & Freibeträge (Sparerpauschbetrag des Kindes) · Fallstricke (Schenkungsteuer, Kontrolle ab 18) · FAQ (5)
-- **Interne Links:** → `etf-sparplan-fuer-einsteiger`, `depot-2026`, `freistellungsauftrag` (C4), `sparquote` → Pillar konto-karten
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Affiliate-CTA:** CHECK24 C24 Bank (Konto) + Tagesgeld
 
 ## Blueprint B1: ETF-Rente statt Riester
 - **Meta-Title:** „ETF-Rente statt Riester: Der ehrliche Vergleich 2026"
 - **Meta-Description:** „Riester oder ETF-Sparplan für die Rente? Kosten, Rendite und Förderung im direkten Vergleich – mit Rechenbeispiel für 3 Lebenssituationen." (150 Z.)
 - **Artikelstruktur:** H1 → Kurzantwort → So funktionieren beide Systeme · Die Kosten-Rechnung (TER vs. Effektivkosten) · Die Rendite-Rechnung (6 % vs. 2 %) · Förderung richtig einordnen (Zulagen, Steuervorteil) · 3 Fallbeispiele (Familie, Single, Geringverdiener) · Die Entscheidungs-Matrix · FAQ (5)
-- **Interne Links:** → `riester-rente-2026-lohnt-sich`, `etf-sparplan-fuer-einsteiger`, `berufsunfaehigkeitsversicherung`, `depot-umzug` → Pillar versicherungen
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Affiliate-CTA:** CHECK24 Konto (C24)
 
 ## Blueprint C1: Steuererklärung für Anfänger
 - **Meta-Title:** „Steuererklärung für Anfänger: Die 5 wichtigsten Formulare"
 - **Meta-Description:** „Zum ersten Mal Steuererklärung? Anlage N, Werbungskosten, Belege: So machst du es richtig – mit Checkliste und Fristen 2026." (143 Z.)
 - **Artikelstruktur:** H1 → Kurzantwort → Muss ich überhaupt? (Pflicht vs. freiwillig) · Die 5 wichtigsten Formulare (Anlage N, Vorsorgeaufwand, Kapital, Kind, Sonstiges) · Werbungskosten-Pauschale verstehen · Der 7-Schritte-Ablauf · Fristen & Digitalisierung (Elster, Apps) · Die 5 häufigsten Fehler · FAQ (5)
-- **Interne Links:** → `nebenverdienst-ideen` (Freibeträge), `festgeld-oder-tagesgeld`, `freistellungsauftrag` → Pillar konto-karten
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Affiliate-CTA:** CHECK24 Konto/Kredit
 
 ## Blueprint C3: Steuern auf ETF-Gewinne
 - **Meta-Title:** „Steuern auf ETF-Gewinne: Teilfreistellung & Abgeltungsteuer"
 - **Meta-Description:** „26,375 % Abgeltungsteuer, 30 % Teilfreistellung, Vorabpauschale: So werden ETF-Gewinne 2026 besteuert – einfach erklärt mit Beispielen." (152 Z.)
 - **Artikelstruktur:** H1 → Kurzantwort → Die 3 Steuerarten (Abgeltungsteuer, Solidaritätszuschlag, Kirchensteuer) · Teilfreistellung: Der ETF-Steuervorteil · Vorabpauschale verstehen · Verluste & Verlusttöpfe · Freistellungsauftrag & Nichtveranlagung · Steuerbeispiele in Tabellen · FAQ (5)
-- **Interne Links:** → `etf-sparplan-fuer-einsteiger`, `depot-2026`, `freistellungsauftrag` → Pillar konto-karten
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Affiliate-CTA:** CHECK24 Konto
 
 ## Blueprint D1: Zinseszinseffekt
 - **Meta-Title:** „Zinseszinseffekt: Die Formel, die dein Geld vermehrt"
 - **Meta-Description:** „Wie Zinseszins funktioniert, mit Formel, Rechenbeispielen und Tabellen: So wachsen 100 € monatlich in 30 Jahren zu 100.000 € – verständlich erklärt." (150 Z.)
 - **Artikelstruktur:** H1 → Kurzantwort → Was ist Zinseszins? · Die Formel & der Rechner · Die 3 Stellschrauben (Rate, Zeit, Rendite) · Die Macht der Zeit (Tabellen 10/20/30 Jahre) · Der 72er-Trick · Warum die Zeit wichtiger ist als die Rate · FAQ (5)
-- **Interne Links:** → `etf-sparplan-fuer-einsteiger`, `sparquote`, `50-30-20-regel` → Pillar frugalismus
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Affiliate-CTA:** CHECK24 Tagesgeld/Depot
 
 ## Blueprint E1: Psychologie des Konsums
 - **Meta-Title:** „Warum wir Geld ausgeben: Die Psychologie des Konsums"
 - **Meta-Description:** „Kaufpsychologie erklärt: Warum dein Gehirn Konsum will und wie du es austrickst – mit 6 wissenschaftlich belegten Mechanismen und Gegenstrategien." (148 Z.)
 - **Artikelstruktur:** H1 → Kurzantwort → Der Belohnungskreislauf · Mechanismen 1–3 (Verlustaversion, Sozialer Vergleich, Status) · Mechanismen 4–6 (Gewöhnung, Sunk Cost, Verfügbarkeit) · Die 6 Gegenstrategien · Das 30-Tage-Experiment · FAQ (5)
-- **Interne Links:** → `impulskaeufe-vermeiden`, `frugalismus-tricks`, `monatsbudget`, `7-gewohnheiten` → Pillar frugalismus
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Affiliate-CTA:** CHECK24 Konto (generisch)
 
 ## Blueprint D5: Der 100-Euro-Plan
 - **Meta-Title:** „100 € monatlich anlegen: Der Plan zum Vermögen"
 - **Meta-Description:** „Mit 100 € im Monat zum Vermögen: So funktioniert der Plan – mit Rechenbeispielen, den 3 besten Anlageformen und Automatisierungs-Tipps." (145 Z.)
 - **Artikelstruktur:** H1 → Kurzantwort → Warum 100 € reichen · Der Rechenweg (Tabellen 10–40 Jahre) · Die 3 Anlageformen (ETF, Tagesgeld, Mix) · Automatisieren statt vergessen · Was bei Gehaltserhöhung passiert · FAQ (5)
-- **Interne Links:** → `etf-sparplan-fuer-einsteiger`, `zinseszins` (D1), `notgroschen`, `sparquote` → Pillar frugalismus
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Affiliate-CTA:** CHECK24 Tagesgeld/Depot
 
 ## Blueprint E2: Lifestyle-Inflation
 - **Meta-Title:** „Lifestyle-Inflation: Warum mehr Geld nicht glücklicher macht"
 - **Meta-Description:** „Mehr Gehalt, mehr Ausgaben – die Lifestyle-Falle. So erkennst du sie, stoppst sie und machst aus Gehaltserhöhungen echten Vermögensaufbau." (150 Z.)
 - **Artikelstruktur:** H1 → Kurzantwort → Was ist Lifestyle-Inflation? · Die 4 Mechanismen (Gewöhnung, Peer-Druck, Status, Bequemlichkeit) · Das Rechenbeispiel (5 % mehr Gehalt, 5 % mehr Ausgaben) · Die 50/50-Regel für Gehaltserhöhungen · FAQ (5)
-- **Interne Links:** → `sparquote`, `7-gewohnheiten`, `monatsbudget`, `frugalismus-fuer-den-erfolg` → Pillar frugalismus
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Affiliate-CTA:** CHECK24 Konto
 
 ## Blueprint F1: Inflation einfach erklärt
 - **Meta-Title:** „Inflation einfach erklärt: Was sie mit deinem Geld macht"
 - **Meta-Description:** „Inflation 2026 verstehen: Ursachen, Auswirkungen auf Sparer & Kreditnehmer, Schutz-Strategien – mit Beispielen und den 3 besten Gegenmitteln." (147 Z.)
 - **Artikelstruktur:** H1 → Kurzantwort → Was ist Inflation? · Warum entsteht sie? (Nachfrage, Angebot, Geldmenge) · Die Auswirkungen (Sparer, Kreditnehmer, Immobilien) · Der VW-Index & Kerninflation · Die 3 Schutz-Strategien · FAQ (5)
-- **Interne Links:** → `tagesgeld-zinsen`, `festgeld-oder-tagesgeld`, `etf-sparplan`, `waermepumpe-vs-gasheizung` → Pillar konto-karten
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Affiliate-CTA:** CHECK24 Tagesgeld
 
 ## Blueprint G3: Gehaltsverhandlung
 - **Meta-Title:** „Gehaltsverhandlung: 7 Tipps für mehr Geld"
 - **Meta-Description:** „Mehr Gehalt durch bessere Verhandlung: Die 7 bewährten Tipps mit Formulierungen, Timing und Argumenten – fürs nächste Mitarbeitergespräch." (148 Z.)
 - **Artikelstruktur:** H1 → Kurzantwort → Warum die meisten nicht verhandeln · Tipp 1–3 (Vorbereitung, Marktdaten, Timing) · Tipp 4–7 (Argumente, Stille, Paket, Plan B) · Der Gesprächsleitfaden · Was nach der Zusage zählt · FAQ (5)
-- **Interne Links:** → `nebenverdienst-ideen`, `sparquote`, `monatsbudget` → Pillar frugalismus
+- **Interne Links:** *(werden nach dem Mo/Mi/Fr-Aufbau neu verdrahtet – Alt-Bestand am 19.08.2026 gelöscht)*
 - **Affiliate-CTA:** CHECK24 Konto
 
 ---
 
 # SCHRITT 4: 30-TAGE-CONTENT-KALENDER
 
-**Strategie:** 2 Artikel/Tag (bestehende Bot-Automatik) – je 1 aus den neuen Themenfeldern + 1 Auffrischung/Cluster-Verstärkung. Evergreen (E) und Trend (T) im Wechsel. Reihenfolge baut Wissen logisch auf (Grundlagen zuerst, Anwendungen danach).
+**Strategie:** 2–3 Artikel pro Publikationstag (Mo/Mi/Fr, bestehende Bot-Automatik) – je 1–2 aus den neuen Themenfeldern + 1 Auffrischung/Cluster-Verstärkung. Evergreen (E) und Trend (T) im Wechsel. Reihenfolge baut Wissen logisch auf (Grundlagen zuerst, Anwendungen danach).
 
 | Tag | Artikel (Priorität) | Typ | Interne Verlinkung zu |
 |---|---|---|---|

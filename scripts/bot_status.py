@@ -57,8 +57,15 @@ def main():
     except Exception:
         pass
 
-    # 4) Tageslimit (aus Env, wenn gesetzt)
-    limit = os.environ.get("MAX_ARTIKEL_PRO_TAG", "2")
+    # 4) Tageslimit (aus Env, wenn gesetzt) – DAUERVORGABE: 2-3 Artikel
+    #    pro Publikationstag (Mo/Mi/Fr), Defaults + Floor wie in engine_generate.py
+    try:
+        limit = max(int(os.environ.get("MAX_ARTIKEL_PRO_TAG") or "3"), 2)
+        min_limit = max(int(os.environ.get("MIN_ARTIKEL_PRO_TAG") or "2"), 2)
+        if min_limit > limit:
+            min_limit = limit
+    except ValueError:
+        limit, min_limit = 3, 2
 
     lines = [
         "# 🤖 Bot-Status",
@@ -74,13 +81,13 @@ def main():
         "",
         f"- **Themenpool:** {pool_msg}",
         f"- **Letzter Content-Commit:** {last_content}",
-        f"- **Tageslimit:** {limit} (steuerbar per Variable MAX_ARTIKEL_PRO_TAG)",
+        f"- **Tageslimit:** {min_limit}–{limit} Artikel pro Publikationstag (Mo/Mi/Fr; steuerbar per Variablen MIN_ARTIKEL_PRO_TAG / MAX_ARTIKEL_PRO_TAG)",
         "",
         "## Bei Problemen",
         "",
         "- Offene Issues prüfen (Fehler-Alerting erstellt automatisch eins)",
         "- API-Keys: Settings → Secrets and variables → Actions",
-        "- Workflow manuell starten: Actions → „Automatische Content-Generierung“ → Run workflow",
+        "- Workflow manuell starten: Actions → „Content-Engine v2“ → Run workflow",
         "",
         "---",
         "*Erzeugt von scripts/bot_status.py am Ende jedes Bot-Laufs.*",

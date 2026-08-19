@@ -6,6 +6,11 @@
 
 ## 🎓 Stil-Hinweise (Ebene 2, nur Info bzw. mit --ai aktiv)
 
+> ⚠️ **KADENZ-BEREINIGUNG 19.08.2026:** Dieser Report bezieht sich auf den Alt-Bestand.
+> Die genannten Artikel (Sa/So/Di-Termine + Evergreen-Bestand) wurden vollständig gelöscht –
+> der Blog zeigt jetzt nur noch Mo/Mi/Fr-Artikel (Details: `CADENCE-REPORT.md`).
+
+
 - `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 19: S3-Konjunktion
 - `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 28: S3-Konjunktion
 - `content/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/index.md` Zeile 68: S3-Konjunktion

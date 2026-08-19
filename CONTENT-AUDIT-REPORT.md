@@ -4,6 +4,11 @@
 
 ## 🎯 Wichtigster Befund (fuer redaktionellen Ausbau)
 
+> ⚠️ **KADENZ-BEREINIGUNG 19.08.2026:** Dieser Report bezieht sich auf den Alt-Bestand.
+> Die genannten Artikel (Sa/So/Di-Termine + Evergreen-Bestand) wurden vollständig gelöscht –
+> der Blog zeigt jetzt nur noch Mo/Mi/Fr-Artikel (Details: `CADENCE-REPORT.md`).
+
+
 📏 Viele Artikel sind substanzarm – Ausbau ueber die Engine-Vorlagen folgt.
 
 **Artikel:** 80 · **mit Funden:** 27 · **Funde gesamt:** 28 · **C3 auto-geheilt:** 0

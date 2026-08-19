@@ -20,8 +20,16 @@ Zusätzlich:
   - ENGINE-STATUS.md: Zustands-Dashboard mit letztem Lauf, Ebene, Fehlern.
   - Exit-Codes: 0 = ok (auch Draft-Rettung), 1 = kompletter Ausfall (-> Alert).
 
+Kadenz (DAUERVORGABE, Frank, 19.08.2026):
+  - Publikation NUR montags, mittwochs, freitags (harter Wochentags-Guard,
+    gilt auch für workflow_dispatch; Notfall: FORCE_PUBLISH_ANY_DAY=1).
+  - 2-3 Artikel pro Publikationstag: MIN_ARTIKEL_PRO_TAG (Default 2) bis
+    MAX_ARTIKEL_PRO_TAG (Default 3) – die Schleife füllt das Tageslimit auf,
+    Entwürfe zählen mit. Dauervorgabe-Floor: Werte unter 2 werden auf 2
+    angehoben (Workflow-Legacy-Fallback „1" kann die Kadenz nicht drücken).
+
 Aufruf (wie bisherige Bot-Umgebung):
-  GROQ_API_KEY=... GEMINI_API_KEY=... AFFILIATE_URL=... MAX_ARTIKEL_PRO_TAG=2 \
+  GROQ_API_KEY=... GEMINI_API_KEY=... AFFILIATE_URL=... MAX_ARTIKEL_PRO_TAG=3 \
   PIN_TOPICS=1 python3 scripts/engine_generate.py
 """
 import datetime
@@ -231,35 +239,35 @@ def make_draft(topic, used_titles):
 # Main
 # ---------------------------------------------------------------------------
 
-def main():
-    max_per_day = int(os.environ.get("MAX_ARTIKEL_PRO_TAG", "2"))
-    pin_topics = os.environ.get("PIN_TOPICS", "0") == "1"
+# DAUERVORGABE (Frank, 19.08.2026): Der Blog veröffentlicht AUSSCHLIESSLICH
+# montags, mittwochs und freitags (Mo=0, Mi=2, Fr=4) – 2 bis 3 Artikel pro
+# Publikationstag. Dieser Wochentags-Guard gilt auch für manuelle
+# workflow_dispatch-Läufe. Notfall-Override (z. B. Nachhol-Bedarf):
+#   FORCE_PUBLISH_ANY_DAY=1
+# Tagesziel: MIN_ARTIKEL_PRO_TAG (Default 2) bis MAX_ARTIKEL_PRO_TAG
+# (Default 3) – steuerbar über die gleichnamigen Env-Variablen /
+# GitHub-Actions-Variablen.
+PUBLICATION_DAYS = {0, 2, 4}  # Montag, Mittwoch, Freitag
 
-    # Tages-Guard (wie bisherige Pipeline)
+
+def count_articles_today():
+    """Zaehlt alle HEUTE erzeugten Artikel-Bundles (live UND Entwurf) –
+    Entwuerfe zaehlen mit, sonst wuerde die Schleife bei schwacher KI
+    beliebig viele Drafts ablegen."""
     today = datetime.date.today().isoformat()
-    published_today = 0
+    n = 0
     for path in g.list_post_paths():
         if os.path.basename(os.path.dirname(path)).startswith(today):
-            content = open(path, encoding="utf-8").read()
-            if "draft: false" in content:
-                published_today += 1
-    if published_today >= max_per_day:
-        print(f"Bereits {published_today}/{max_per_day} Artikel heute – nichts zu tun.")
-        write_status(f"Tageslimit erreicht ({published_today}/{max_per_day}).")
-        return 0
+            n += 1
+    return n
 
-    used_titles = g.existing_titles()
-    if pin_topics:
-        topics = g.load_pin_topics()
-        quelle = "Pinterest-Plan"
-        freie = [t for t in topics if not g.topic_already_covered(t["title"], used_titles)]
-        if not freie:
-            topics = g.load_topics()
-            quelle = "Themenpool"
-    else:
-        topics = g.load_topics()
-        quelle = "Themenpool"
-    freie = [t for t in topics if not g.topic_already_covered(t["title"], used_titles)]
+
+def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
+    """Erzeugt EINEN Artikel (Profi -> Relaxed -> Draft-Rettung).
+    Liefert (level, draft_saved) oder None bei fatalem Fehler."""
+    freie = [t for t in topics
+             if not g.topic_already_covered(t["title"], used_titles)
+             and id(t) not in used_topics]
     if not freie:
         print("Themenpool erschöpft – KI-Nachschub startet …")
         try:
@@ -267,13 +275,15 @@ def main():
         except Exception as exc:  # noqa: BLE001
             print(f"  ⚠ refill fehlgeschlagen: {exc}")
         topics = g.load_topics()
-        freie = [t for t in topics if not g.topic_already_covered(t["title"], used_titles)]
+        freie = [t for t in topics
+                 if not g.topic_already_covered(t["title"], used_titles)
+                 and id(t) not in used_topics]
     if not freie:
         print("✗ Keine freien Themen – Abbruch.")
-        write_status("Keine freien Themen verfügbar.", level="FAIL")
-        return 1
+        return None
 
     topic = random.choice(freie)
+    used_topics.add(id(topic))
     keywords = topic.get("keywords")
     pin = None
     if pin_topics:
@@ -282,7 +292,7 @@ def main():
         except Exception:  # noqa: BLE001
             pin = None
 
-    print(f"Content-Engine v2 gestartet – Quelle: {quelle}, Thema: {topic['title'][:60]}")
+    print(f"Content-Engine v2 – Quelle: {quelle}, Thema: {topic['title'][:60]}")
 
     # EBENE 1 – Profi
     result, info = try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=3)
@@ -300,12 +310,13 @@ def main():
         try:
             filename, slug = save_article(title, desc, body, draft=True,
                                           inspiration=topic.get("title"), pillar=topic.get("pillar"))
+            used_titles.add(title.lower())  # Draft-Thema nicht doppelt ziehen
             draft_saved = True
             print(f"  ✓ Entwurf gesichert: {slug} (draft: true)")
         except Exception as exc:  # noqa: BLE001
             print(f"  ✗ Draft konnte nicht gespeichert werden: {exc}")
             write_status("Kompletter Ausfall – kein Artikel, kein Draft.", level="FAIL")
-            return 1
+            return None
 
     if result and not draft_saved:
         title, desc, body = result
@@ -316,11 +327,80 @@ def main():
         except Exception as exc:  # noqa: BLE001
             print(f"  ✗ Speichern fehlgeschlagen: {exc}")
             write_status("Kompletter Ausfall – Speicherfehler.", level="FAIL")
-            return 1
+            return None
 
     status_line = (f"Thema: {topic['title'][:60]} | Ebene: {level} | "
                    f"{'Entwurf gesichert' if draft_saved else 'veröffentlicht'} | {info}")
-    write_status(status_line, level="OK" if not draft_saved else "DRAFT")
+    print(f"  → {status_line}")
+    return level, draft_saved, status_line
+
+
+def main():
+    max_per_day = int(os.environ.get("MAX_ARTIKEL_PRO_TAG") or "3")
+    min_per_day = int(os.environ.get("MIN_ARTIKEL_PRO_TAG") or "2")
+    # DAUERVORGABE-Floor: An Publikationstagen (Mo/Mi/Fr) erscheinen MINDESTENS
+    # 2 Artikel. Der Workflow-Legacy-Fallback „1“ (vars.MAX_ARTIKEL_PRO_TAG
+    # leer) darf die Kadenz nicht unter das Mindestziel drücken; wer weniger
+    # will, ändert zuerst die Dauervorgabe (CADENCE-REPORT.md). Die Variablen
+    # im Repo (Settings → Actions → Variables) können das Ziel nur ANHEBEN:
+    # empfohlen MAX_ARTIKEL_PRO_TAG=3 und MIN_ARTIKEL_PRO_TAG=2.
+    if max_per_day < 2:
+        max_per_day = 2
+    if min_per_day < 2:
+        min_per_day = 2
+    if min_per_day > max_per_day:
+        min_per_day = max_per_day
+    pin_topics = os.environ.get("PIN_TOPICS", "0") == "1"
+
+    # Wochentags-Guard (DAUERVORGABE: nur Mo/Mi/Fr publizieren)
+    weekday = datetime.date.today().weekday()
+    if weekday not in PUBLICATION_DAYS and os.environ.get("FORCE_PUBLISH_ANY_DAY") != "1":
+        day = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"][weekday]
+        print(f"Kein Publikationstag ({day}) – Mo/Mi/Fr-Vorgabe: nichts zu tun.")
+        write_status(f"Kein Publikationstag ({day}) – Publikation nur Mo/Mi/Fr (2-3 Artikel).")
+        return 0
+
+    # Tages-Guard (zählt live + Drafts)
+    published_today = count_articles_today()
+    if published_today >= max_per_day:
+        print(f"Bereits {published_today}/{max_per_day} Artikel heute – nichts zu tun.")
+        write_status(f"Tageslimit erreicht ({published_today}/{max_per_day}).")
+        return 0
+
+    used_titles = g.existing_titles()
+    used_topics = set()
+    if pin_topics:
+        topics = g.load_pin_topics()
+        quelle = "Pinterest-Plan"
+        freie = [t for t in topics if not g.topic_already_covered(t["title"], used_titles)]
+        if not freie:
+            topics = g.load_topics()
+            quelle = "Themenpool"
+    else:
+        topics = g.load_topics()
+        quelle = "Themenpool"
+
+    # 2-3 Artikel pro Publikationstag: bis zum Tageslimit auffüllen
+    results = []
+    while count_articles_today() < max_per_day:
+        out = publish_one_article(topics, quelle, pin_topics, used_titles, used_topics)
+        if out is None:
+            break
+        level, draft_saved, status_line = out
+        results.append(status_line)
+
+    total = count_articles_today()
+    if total == 0:
+        write_status("Kompletter Ausfall – kein Artikel, kein Draft.", level="FAIL")
+        return 1
+    levels = ", ".join(r.split("|")[1].strip() for r in results)
+    live = total - sum(1 for r in results if "Entwurf gesichert" in r)
+    note = (f"{total} Artikel heute ({'live: ' + str(live) if live else 'nur Entwürfe'}) | "
+            f"Ziel: {min_per_day}-{max_per_day} an Mo/Mi/Fr")
+    if total < min_per_day:
+        note += " | ⚠ unter Mindestziel"
+    write_status(note, level="OK")
+    print(f"✅ {note}")
     return 0
 
 

@@ -106,10 +106,22 @@ bewusst – nachgewiesen disjunkte Muster.
 - **Blog-Launch: 08.08.2026.** Kein Artikel darf je ein Datum vor dem 08.08.2026
   tragen. Der vor dem Launch datierte Alt-Bestand (36 Posts) wurde am 19.08.2026
   **dauerhaft gelöscht** (inkl. Covers, Manifest, Pins, Fingerprints, interner Links).
-- **Veröffentlichungsintervall: 3 Artikel pro Woche – Mo, Mi, Fr.**
+- **Veröffentlichungsintervall: nur Mo, Mi, Fr – 2–3 Artikel pro Publikationstag.**
   Haupt-Slot 08:10 MESZ (06:10 UTC), Fallback-Slots 16:10/19:40 MESZ.
-  Umgesetzt in `.github/workflows/content-engine-v2.yml` (cron `10 6 * * 1,3,5`).
+  Umgesetzt in `.github/workflows/content-engine-v2.yml` (cron `10 6 * * 1,3,5`)
+  plus hartem Wochentags-Guard in `scripts/engine_generate.py`
+  (`PUBLICATION_DAYS = {0,2,4}` – gilt auch für manuelle Läufe;
+  Notfall-Override `FORCE_PUBLISH_ANY_DAY=1`). Tagesmenge:
+  `MIN_ARTIKEL_PRO_TAG` (Default 2) bis `MAX_ARTIKEL_PRO_TAG` (Default 3);
+  die Engine erzwingt per Dauervorgabe-Floor mindestens 2 (der Workflow-
+  Legacy-Fallback „1“ kann die Kadenz nicht drücken). Empfohlen:
+  Repository-Variablen `MAX_ARTIKEL_PRO_TAG=3` / `MIN_ARTIKEL_PRO_TAG=2`.
   Definition siehe `CADENCE-REPORT.md`.
+- **Bestands-Kadenz: Der Blog zeigt Artikel nur an Mo/Mi/Fr.** Am 19.08.2026
+  wurden 38 Off-Kadenz-Posts vollständig gelöscht (08.08. Sa ×2, 08.09. So ×2,
+  08.11. Di ×2 + 32 Evergreen-Posts vom 09.08. So) – inkl. Covers, Manifest,
+  Pin-Queue, Fingerprints, Affiliate-Report, IndexNow-Log und interner Links.
+  Verblieben: 6 Posts, je 2 an Mo 08.10., Mi 08.12. und Fr 08.14.
 - **Empfohlene Zeichenlänge pro Blogartikel: 6.000–10.000 Zeichen** Fließtext
   (≈ 800–1.400 Wörter; empirisch: Median 9.124 Zeichen bei 6,96 Zeichen/Wort).
   Ausgewiesen und überwacht von `check_length.py` (Konstanten `OPT_CHARS_MIN/MAX`,

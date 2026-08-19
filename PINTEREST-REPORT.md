@@ -1,3 +1,8 @@
+
+> ⚠️ **KADENZ-BEREINIGUNG 19.08.2026:** Dieser Report bezieht sich auf den Alt-Bestand.
+> Die genannten Artikel (Sa/So/Di-Termine + Evergreen-Bestand) wurden vollständig gelöscht –
+> der Blog zeigt jetzt nur noch Mo/Mi/Fr-Artikel (Details: `CADENCE-REPORT.md`).
+
 # 📌 PINTEREST-REPORT
 
 **Stand:** 2026-08-19 07:26 UTC · Modus: FIX
