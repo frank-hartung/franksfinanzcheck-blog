@@ -182,26 +182,13 @@ def _pillar(fm: dict) -> str:
     return pm.group(1) if pm else ""
 
 
-def put_media_description(media_id: str, description: str) -> tuple[bool, str]:
-    body = urllib.parse.urlencode({"description": description[:1500]}).encode()
-    try:
-        sp.http_json(
-            f"{sp.MASTODON_INSTANCE}/api/v1/media/{media_id}",
-            data=body,
-            headers={
-                "Authorization": f"Bearer {sp.MASTODON_TOKEN}",
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            method="PUT",
-        )
-        return True, "alt gesetzt"
-    except urllib.error.HTTPError as exc:
-        return False, f"HTTP {exc.code}: {exc.read().decode()[:160]}"
-    except Exception as exc:
-        return False, str(exc)[:160]
+def _sleep_retry():
+    import time
+    time.sleep(2.5)
 
 
 def heal_one(status: dict, slug: str, slug_dir: Path, fm: dict, issues: list[str]) -> list[str]:
+    """Heilt einen Toot, ohne vorhandene Medien zu verlieren."""
     done: list[str] = []
     if DRY_RUN or not sp.MASTODON_TOKEN:
         return done
@@ -213,32 +200,38 @@ def heal_one(status: dict, slug: str, slug_dir: Path, fm: dict, issues: list[str
     )
     need_cover = "kein Cover" in issues
     need_alt = any("Bild-Alt" in i or "generischer" in i for i in issues)
+    existing = [m["id"] for m in (status.get("media_attachments") or [])]
+    alt = cover_alt(fm, fm.get("title") or slug)
 
-    if need_text or need_cover:
-        text = build_seo_post(fm, slug)
-        image = sp.cover_path(slug_dir, fm) if need_cover else None
-        # Wenn wir das Cover neu hochladen, Alt gleich mitgeben
-        if image is not None:
-            alt = cover_alt(fm, fm.get("title") or slug)
+    if need_cover:
+        image = sp.cover_path(slug_dir, fm)
+        if not image:
+            return ["kein Cover-File im Repo"]
+        mid = None
+        for _ in range(3):
             mid = upload_with_alt(image, alt)
-            ok, ref = edit_status_keep_media(status["id"], text, mid)
-            if ok:
-                done.append("Text+Cover geheilt")
-                return done
-            done.append(f"Text-Heilung fehlgeschlagen: {ref}")
-        else:
-            ok, ref = sp.edit_mastodon(status["id"], text, None)
-            if ok:
-                done.append("Text/Hashtags geheilt")
-            else:
-                done.append(f"Text-Heilung fehlgeschlagen: {ref}")
+            if mid:
+                break
+            _sleep_retry()
+        ok, ref = edit_status(status["id"], build_seo_post(fm, slug), media_ids=[mid] if mid else None)
+        done.append("Cover+Alt angehängt" if ok else f"Cover-Heilung fehlgeschlagen: {ref}")
+        _sleep_retry()
+        return done
 
-    if need_alt and not need_cover:
-        media = status.get("media_attachments") or []
-        if media:
-            alt = cover_alt(fm, fm.get("title") or slug)
-            ok, ref = put_media_description(media[0]["id"], alt)
-            done.append("Alt gesetzt" if ok else f"Alt fehlgeschlagen: {ref}")
+    if need_text or need_alt:
+        ok, ref = edit_status(
+            status["id"],
+            build_seo_post(fm, slug),
+            media_ids=existing or None,
+            media_alt=(existing[0], alt) if existing and need_alt else None,
+        )
+        if ok:
+            done.append("Text/Hashtags geheilt" if need_text else "ok")
+            if existing and need_alt:
+                done.append("Alt mitgesetzt")
+        else:
+            done.append(f"Heilung fehlgeschlagen: {ref}")
+        _sleep_retry()
     return done
 
 
