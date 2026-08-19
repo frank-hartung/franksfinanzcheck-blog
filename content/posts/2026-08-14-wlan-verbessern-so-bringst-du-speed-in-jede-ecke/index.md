@@ -1,5 +1,5 @@
 ---
-title: "WLAN verbessern: So bringst du Speed in jede Ecke"
+title: "WLAN verbessern: So bringst du Speed in jede Ecke – DSL hac…"
 description: "Du willst dein WLAN verbessern? Ich zeige dir, ob ein Repeater oder Mesh-WLAN für schnelles Internet zu Hause besser ist. Plus: Die besten DSL Hacks!"
 date: 2026-08-14T09:43:18Z
 draft: false
