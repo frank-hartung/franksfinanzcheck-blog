@@ -1,0 +1,68 @@
+# ============================================================
+#  MASTODON-SEO (Prüfung + Selbstheilung)
+#
+#  Täglich NACH den Social-Läufen: prüft alle Live-Toots
+#  (Alt-Text, CamelCase-Hashtags, Cover, language=de, Link)
+#  und heilt per PUT. Neue Posts kommen bereits SEO-fertig
+#  aus scripts/social_poster.py – diese Wache fängt Drift ab.
+#
+#  Manuell: Actions → „Mastodon-SEO“ → Run workflow
+#  Dedup:   Actions → Mastodon-Manueller-Post → Slug __seo_dedupe__
+# ============================================================
+name: Mastodon-SEO
+
+on:
+  schedule:
+    - cron: "30 7 * * *"    # 09:30 MESZ – nach Social 09:15
+    - cron: "0 19 * * *"    # 21:00 MESZ – nach Social 20:45
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Nur prüfen, nichts heilen (true/false)"
+        required: false
+        default: "false"
+      delete_dupes:
+        description: "Jüngere Doppel-Toots zum selben Artikel löschen (true/false)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mastodon-seo
+  cancel-in-progress: false
+
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Mastodon-SEO prüfen + heilen
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+        run: |
+          ARGS=()
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS+=(--dry-run)
+          fi
+          if [ "${{ github.event.inputs.delete_dupes }}" = "true" ]; then
+            ARGS+=(--delete-dupes)
+          fi
+          python3 scripts/mastodon_seo.py "${ARGS[@]}"
+
+      - name: Report committen
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add MASTODON-SEO-REPORT.md data/social_log.jsonl
+          if git diff --cached --quiet; then
+            echo "Nichts zu committen."
+          else
+            git commit -m "chore: Mastodon-SEO-Report / Selbstheilung [skip ci]"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+          fi
