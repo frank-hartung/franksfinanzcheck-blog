@@ -53,6 +53,10 @@ LINKEDIN_URN = os.environ.get("LINKEDIN_PERSON_URN", "").strip()
 MAX_PER_RUN = int(os.environ.get("SOCIAL_MAX_PRO_LAUF") or "4")
 DRY_RUN = "--dry-run" in sys.argv
 MARK_ALL = "--mark-all-posted" in sys.argv
+FORCE = "--force" in sys.argv or os.environ.get("SOCIAL_FORCE") == "1"
+# Wie Content-Engine v2: nur Montag / Mittwoch / Freitag (Europe/Berlin).
+CADENCE_WEEKDAYS = {0, 2, 4}
+CADENCE_NAMES = {0: "Montag", 2: "Mittwoch", 4: "Freitag"}
 
 
 # ------------------------------------------------------------- Hilfsfunktionen
@@ -420,7 +424,8 @@ def write_status(posted: list[str], remaining: int) -> None:
         f"- **Mastodon:** {'🟢 aktiv' if MASTODON_TOKEN else '⚪ nicht eingerichtet'} ({MASTODON_INSTANCE})",
         f"- **LinkedIn:** {'🟢 aktiv' if LINKEDIN_TOKEN else '⚪ nicht eingerichtet'} (Achtung: Token läuft ~60 Tage)",
         f"- **Offene Artikel in der Queue:** {remaining}",
-        f"- **Max. Posts pro Lauf:** {MAX_PER_RUN}", "",
+        f"- **Max. Posts pro Lauf:** {MAX_PER_RUN}",
+        "- **Kadenz:** Montag / Mittwoch / Freitag (wie der Blog)", "",
     ]
     if posted:
         lines += ["## Zuletzt gepostet (dieser Lauf)", ""]
@@ -466,6 +471,17 @@ def main() -> None:
         print("  4. Optional: Variable MASTODON_INSTANCE (Default: https://mastodon.social)")
         print("  Details: ANLEITUNG-SOCIAL-MEDIA.md")
         print("=" * 68)
+        return
+
+    now_bln = berlin_now()
+    if not FORCE and not on_publish_cadence(now_bln):
+        wd = ("Montag", "Dienstag", "Mittwoch", "Donnerstag",
+              "Freitag", "Samstag", "Sonntag")[now_bln.weekday()]
+        print(f"📅 Kadenz-Wache: heute {wd} {now_bln:%d.%m.%Y} – "
+              "Blog & Mastodon nur Mo/Mi/Fr. Kein Toot.")
+        print("   Manuell trotzdem posten: --force oder SOCIAL_FORCE=1")
+        unposted = find_unposted()
+        write_status([], len(unposted))
         return
 
     unposted = find_unposted()
