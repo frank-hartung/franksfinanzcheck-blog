@@ -133,11 +133,28 @@ ACRONYMS = {
     "eeg", "kwh", "iban", "bic", "seo", "ai",
 }
 PILLAR_TAGS = {
-    "internet-dsl": ["DSL", "InternetSparen"],
-    "strom-sparen": ["StromSparen", "Energiekosten"],
-    "versicherungen": ["Versicherungen", "Vorsorge"],
-    "konto-karten": ["Girokonto", "KontoGebuehren"],
+    "internet-dsl": ["DSL", "Internet"],
+    "strom-sparen": ["Stromsparen", "Energiekosten"],
+    "versicherungen": ["Versicherung", "Vorsorge"],
+    "konto-karten": ["Girokonto", "Sparen"],
 }
+# Suchbare Fediverse-Keywords (kurz, folgen/suchen Menschen wirklich).
+# Lange Klebeschreib-Tags (#KontofuehrungsgebuehrenSparen) ranken nicht.
+KEYWORD_HINTS = [
+    (r"wechselbonus", ["DSL", "Wechselbonus"]),
+    (r"preisgarantie|gaspreisgarantie|gaspreis", ["Gaspreis", "Preisgarantie"]),
+    (r"gasrechnung|heizkosten|heizen", ["Gasrechnung", "Heizkosten"]),
+    (r"\bwlan\b", ["WLAN", "Internet"]),
+    (r"dsl.?vergleich|günstigeres internet|guenstiges internet", ["DSL", "DSLVergleich"]),
+    (r"girokonto|kontoführungs|kontofuehrungs", ["Girokonto", "Konto"]),
+    (r"haftpflicht", ["Privathaftpflicht", "Versicherung"]),
+    (r"wohngebäude|wohngebaeude|elementar|hausversicherung", ["Wohngebaeude", "Versicherung"]),
+    (r"stromfresser|energiedieb", ["Stromsparen", "Energiekosten"]),
+]
+WEAK_TAG_RX = re.compile(
+    r"gebuehren|fuehrungs|vergleich$|zuhause|vorbereitung|hacks$", re.I
+)
+MAX_TAG_LEN = 20
 GENERIC_ALT_RX = re.compile(
     r"^(tipp von franksfinanzcheck|cover|bild|image|foto)\.?$", re.I
 )
@@ -160,21 +177,82 @@ def _pillar(fm: dict) -> str:
     return m.group(1) if m else ""
 
 
-def hashtags(tags: list[str], max_tags: int = 3, pillar: str = "") -> str:
-    """CamelCase-Hashtags, Akronyme bleiben groß (DSL/WLAN). Pillar-Fallback."""
-    raw = list(tags or [])
-    if not raw and pillar:
-        raw = list(PILLAR_TAGS.get(pillar, []))
-    result, seen = [], set()
-    for tag in raw[:max_tags]:
-        camel = "".join(_tag_token(w) for w in re.split(r"[\s\-/]+", tag))
-        if not camel or camel.lower() in seen:
+def _to_hashtag(phrase: str) -> str:
+    camel = "".join(_tag_token(w) for w in re.split(r"[\s\-/]+", phrase or ""))
+    return camel
+
+
+def _keyword_corpus(fm: dict) -> str:
+    parts = [
+        fm.get("title") or "",
+        fm.get("kurzantwort") or "",
+        fm.get("description") or "",
+        " ".join(fm.get("tags") or []),
+        " ".join(fm.get("keywords") or []),
+        fm.get("pillar") or _pillar(fm),
+    ]
+    return " ".join(parts)
+
+
+def pro_keywords(fm: dict, max_tags: int = 3) -> list[str]:
+    """3–4 suchbare Keywords: 1–2 Primär + Cluster + #Finanzen.
+
+    Profi-Regeln (Mastodon/Fediverse):
+    - kurz (≤ 20 Zeichen), CamelCase, Akronyme groß
+    - primäres Suchwort aus Titel (DSL, Girokonto, Gaspreis …)
+    - kein Klebe-Tag aus ganzen Sätzen
+    - thematisch korrekt (Gas ≠ #Stromsparen)
+    """
+    corpus = _keyword_corpus(fm)
+    picked: list[str] = []
+    seen: set[str] = set()
+
+    def add(token: str) -> None:
+        if not token or token.lower() in seen:
+            return
+        if token.lower() == "finanzen":
+            return
+        if len(token) > MAX_TAG_LEN:
+            return
+        if any(token.lower().startswith(p.lower()) or p.lower().startswith(token.lower()) for p in picked):
+            return
+        seen.add(token.lower())
+        picked.append(token)
+
+    for rx, hints in KEYWORD_HINTS:
+        if re.search(rx, corpus, re.I):
+            for h in hints:
+                add(h)
+        if len(picked) >= max_tags:
+            break
+
+    for raw in (fm.get("tags") or []) + (fm.get("keywords") or []):
+        token = _to_hashtag(raw)
+        if not token or WEAK_TAG_RX.search(token) or len(token) > MAX_TAG_LEN:
             continue
-        seen.add(camel.lower())
-        result.append(f"#{camel}")
-    if "#Finanzen" not in result:
-        result.append("#Finanzen")
-    return " ".join(result[:5])
+        add(token)
+        if len(picked) >= max_tags:
+            break
+
+    if len(picked) < 2:
+        for h in PILLAR_TAGS.get(fm.get("pillar") or _pillar(fm), []):
+            add(h)
+            if len(picked) >= 2:
+                break
+
+    picked = picked[:max_tags]
+    picked.append("Finanzen")
+    return picked
+
+
+def hashtags(tags: list[str], max_tags: int = 3, pillar: str = "", fm: dict | None = None) -> str:
+    """Profi-Keywords als Hashtags. `tags`/`pillar` bleiben API-kompatibel."""
+    data = dict(fm or {})
+    if tags and not data.get("tags"):
+        data["tags"] = tags
+    if pillar and not data.get("pillar"):
+        data["pillar"] = pillar
+    return " ".join(f"#{k}" for k in pro_keywords(data, max_tags=max_tags))
 
 
 def cover_alt_text(fm: dict, title: str) -> str:

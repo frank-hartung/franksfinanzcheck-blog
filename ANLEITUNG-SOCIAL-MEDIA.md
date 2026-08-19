@@ -8,7 +8,7 @@ Link, Cover-Bild (Mastodon) und Hashtags aus deinen Artikel-Tags.
 
 **Mastodon-SEO + Selbstheilung:** `.github/workflows/mastodon-seo.yml` – täglich
 09:30 und 21:00 MESZ sowie manuell (*Actions → Mastodon-SEO*). Prüft alle
-Live-Toots (Cover, Bild-Alt, CamelCase-Hashtags, `language=de`, kanonischer Link,
+Live-Toots (Cover, Bild-Alt, Profi-Keywords/Hashtags, `language=de`, kanonischer Link,
 kein Affiliate-`/go/` im Toot) und heilt per PUT. Duplikate: Option
 `delete_dupes` oder Slug `__seo_dedupe__`. Report: `MASTODON-SEO-REPORT.md`.
 

@@ -70,8 +70,8 @@ def tag_token(word: str) -> str:
     return core.upper() if core.lower() in ACRONYMS else core.capitalize()
 
 
-def seo_hashtags(tags: list[str], pillar: str = "", max_tags: int = 3) -> str:
-    return sp.hashtags(tags, max_tags=max_tags, pillar=pillar)
+def seo_hashtags(tags: list[str], pillar: str = "", max_tags: int = 3, fm: dict | None = None) -> str:
+    return sp.hashtags(tags, max_tags=max_tags, pillar=pillar, fm=fm)
 
 
 def cover_alt(fm: dict, title: str) -> str:
@@ -169,12 +169,20 @@ def audit(status: dict, slug: str | None, fm: dict | None) -> list[str]:
     mashed = [t for t in display_tags if t == t.lower() and len(t) > 16 and t.lower() != "finanzen"]
     if mashed:
         issues.append("Hashtags nicht CamelCase: " + ", ".join(mashed[:3]))
-    if fm is not None and slug:
-        wanted = seo_hashtags(fm.get("tags") or [], _pillar(fm))
-        want_set = {w.lstrip("#").lower() for w in wanted.split()}
+    long_tags = [t for t in display_tags if len(t) > 20 and t.lower() != "finanzen"]
+    if long_tags:
+        issues.append("Keywords zu lang: " + ", ".join(long_tags[:3]))
+    if fm is not None:
+        wanted = [k.lstrip("#") for k in seo_hashtags(fm.get("tags") or [], _pillar(fm), fm=fm).split()]
+        want_set = {w.lower() for w in wanted}
         have_set = {t.lower() for t in display_tags}
-        if want_set - have_set and (mashed or len(display_tags) <= 1):
-            issues.append("Hashtags unvollständig/nicht SEO")
+        primary = [w for w in wanted if w.lower() != "finanzen"]
+        if primary and primary[0].lower() not in have_set:
+            issues.append(f"Primär-Keyword fehlt: #{primary[0]}")
+        extra_weak = have_set - want_set - {"finanzen"}
+        # Cluster-Mismatch: Gas-Artikel mit Stromsparen o. ä.
+        if extra_weak and primary:
+            issues.append("Keywords nicht Profi-Set")
     return issues
 
 
