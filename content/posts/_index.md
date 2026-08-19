@@ -2,9 +2,10 @@
 title: "Alle Ratgeber im Überblick – Strom, Gas, Internet & Finanzen clever sparen"
 description: "Alle Ratgeber von FranksFinanzcheck an einem Ort: Strom- & Gas-Vergleiche, DSL & Internet günstiger, Versicherungen verständlich erklärt und Frugalismus-Tricks mit konkreten Zahlen – unabhängig & praxisgetestet."
 keywords: ["Strom sparen", "Gasvergleich", "DSL Vergleich", "Versicherungen", "Frugalismus", "Geld sparen", "Girokonto", "Mietwagen"]
+# /posts/page/1/ und /posts/page/2/ existieren wieder als echte Paginator-
+# Seiten (10 Posts, pagerSize 8). Aliase nur für höhere Seiten, sonst
+# kollidiert Hugo (Build-Abbruch) mit der echten Pagination.
 aliases:
-  - /posts/page/1/
-  - /posts/page/2/
   - /posts/page/3/
   - /posts/page/4/
   - /posts/page/5/
@@ -29,7 +30,7 @@ Du willst **monatlich bares Geld sparen**, ohne stundenlang Tarife zu wälzen? G
 
 Montags, mittwochs und freitags erscheinen **2–3 neue Ratgeber**. So bleibst du am Ball, ohne den Überblick zu verlieren.
 
-### Deine 5 Themenwelten
+### Deine 7 Themenwelten
 
 Finde direkt den Bereich, der dich am meisten interessiert – alle Artikel sind dort gebündelt und untereinander verlinkt:
 
@@ -49,9 +50,7 @@ Finde direkt den Bereich, der dich am meisten interessiert – alle Artikel sind
 2. **Tiefer einsteigen:** Jeder Artikel verlinkt am Ende auf den passenden **Pillar-Ratgeber** und verwandte Beiträge – so baust du dir dein Wissen Schritt für Schritt auf.
 3. **Direkt handeln:** In jedem Ratgeber findest du einen **Partner-Vergleich (CHECK24)** – damit prüfst du in 2 Minuten, was du konkret sparen kannst. Für dich ohne Mehrkosten, für den Blog eine kleine Provision (mehr dazu im [Disclaimer](/datenschutz/)).
 
-{{< callout type="tip" >}}
-**Noch schneller ans Ziel?** Nutze unsere Pillar-Übersicht als Startpunkt: [**Alle Ratgeber-Themen entdecken →**](/pillar/)
-{{< /callout >}}
+> 💡 **Noch schneller ans Ziel?** Nutze unsere Pillar-Übersicht als Startpunkt: [**Alle Ratgeber-Themen entdecken →**](/pillar/)
 
 ## Warum FranksFinanzcheck?
 
@@ -60,9 +59,7 @@ Finde direkt den Bereich, der dich am meisten interessiert – alle Artikel sind
 - **Erfahrung aus der Praxis:** Tipps, die der Autor selbst nutzt und regelmäßig prüft (siehe [Über mich](/ueber/)).
 - **Geprüfte Qualität:** Rechtschreibung, Grammatik, Lesbarkeit und Aktualität werden automatisch bei jedem Artikel geprüft.
 
-{{< callout type="info" >}}
-**Transparenz:** Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link einen Tarif abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig.
-{{< /callout >}}
+> **Transparenz:** Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link einen Tarif abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig.
 
 ## Häufige Fragen zum Blog
 
@@ -73,7 +70,7 @@ Drei Mal pro Woche (Mo/Mi/Fr) mit je 2–3 Ratgebern. So ist immer etwas Neues d
 Für alle, die **ohne Gürtel enger schnallen** sparen wollen: Mieter, Familien, Berufstätige und alle, die ihre Fixkosten (Strom, Gas, Internet, Versicherungen) dauerhaft senken möchten.
 
 ### Wie finde ich den richtigen Artikel für mich?
-Nutze die **5 Themenwelten oben** oder die Tag-Liste am Ende jedes Artikels. Verwandte Beiträge werden automatisch vorgeschlagen – ein Klick und du bist im nächsten passenden Ratgeber.
+Nutze die **7 Themenwelten oben** oder die Tag-Liste am Ende jedes Artikels. Verwandte Beiträge werden automatisch vorgeschlagen – ein Klick und du bist im nächsten passenden Ratgeber.
 
 ### Sind die Vergleiche wirklich unabhängig?
 Ja. Wir vergleichen über **CHECK24** (Deutschlands größtes Vergleichsportal) und zeigen dir die Konditionen transparent. Die Reihenfolge richtet sich nach Preis und Leistung – nicht nach Provision.

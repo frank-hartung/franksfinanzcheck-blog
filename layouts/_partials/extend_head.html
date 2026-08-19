@@ -128,6 +128,37 @@
 ) | jsonify | safeJS }}</script>
 {{- end -}}
 
+{{- /* ---------- CollectionPage (/posts/-Hub, nicht Pagination) ---------- */ -}}
+{{- if and (eq .Kind "section") (eq .Section "posts") (not (findRE `/page/\d+/?$` .RelPermalink)) -}}
+<script type="application/ld+json">{{ (dict
+  "@context" "https://schema.org"
+  "@type" "CollectionPage"
+  "name" .Title
+  "description" .Description
+  "url" .Permalink
+  "isPartOf" (dict "@type" "WebSite" "name" "FranksFinanzcheck" "url" site.BaseURL)
+) | jsonify | safeJS }}</script>
+{{- end -}}
+
+{{- /* ---------- BreadcrumbList (Artikel + Pillars + /posts/) ---------- */ -}}
+{{- if and (not .IsHome) (or (eq .Section "posts") (eq .Section "pillar")) -}}
+{{- $crumbs := slice (dict "@type" "ListItem" "position" 1 "name" "Start" "item" site.BaseURL) -}}
+{{- if and (eq .Section "posts") (ne .Kind "section") -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 2 "name" "Blog" "item" (printf "%sposts/" site.BaseURL)) -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 3 "name" (.Title | plainify) "item" .Permalink) -}}
+{{- else if and (eq .Section "pillar") (ne .Kind "section") -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 2 "name" "Ratgeber" "item" (printf "%spillar/" site.BaseURL)) -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 3 "name" (.Title | plainify) "item" .Permalink) -}}
+{{- else -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 2 "name" (.Title | plainify) "item" .Permalink) -}}
+{{- end -}}
+<script type="application/ld+json">{{ (dict
+  "@context" "https://schema.org"
+  "@type" "BreadcrumbList"
+  "itemListElement" $crumbs
+) | jsonify | safeJS }}</script>
+{{- end -}}
+
 {{- /* ---------- Privacy-Analytics (Umami, cookieless) ---------- */ -}}
 {{- /* DSGVO-freundliche Reichweitenmessung: keine Cookies, keine
        personenbezogenen Daten (IP wird gehasht), keine Daten an Google.

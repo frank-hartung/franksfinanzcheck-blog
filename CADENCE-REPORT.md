@@ -45,15 +45,16 @@
    (Ramp-Logik) existiert nicht mehr – dieser Report ist die verbindliche
    Definition. Änderungen nur noch per ausdrücklichem Beschluss Franks
    (Dokumentation hier + Kapitel 4.0 im Master-System).
-5. **Pagination-Fix (19.08.2026):** Mit nur 6 Posts und `pagerSize = 8`
-   existieren `/posts/page/2/` (und höhere) nicht mehr – bisher 404.
-   `content/posts/_index.md` und `content/_index.md` legen Aliase
-   `/posts/page/1/`–`/12/` → `/posts/` bzw. `/page/1/`–`/12/` → `/` an
-   (canonical + noindex + meta-refresh). Sobald wieder mehr als 8 Posts
-   da sind, erzeugt Hugo echte Pagination-Seiten und überspringt den
-   jeweiligen Alias. Zusätzlich: `layouts/_partials/head.html` greift
-   nicht mehr auf `.Paginator` zu (erster Zugriff sperrt die Seitenmenge
-   und hat die Startseiten-Liste verfälscht).
+5. **Pagination-Fix (19.08.2026, nachgeschärft am selben Abend):** Mit nur
+   6 Posts und `pagerSize = 8` existierten `/posts/page/2/` (und höhere)
+   nicht mehr – bisher 404. `content/_index.md` aliasiert nur noch
+   `/page/3/`–`/12/` → `/`, `content/posts/_index.md` nur noch
+   `/posts/page/3/`–`/12/` → `/posts/`: Seit 10 Posts erzeugt Hugo
+   `/page/2/` und `/posts/page/2/` wieder selbst – ein Alias auf dieselbe
+   URL kann den Build (`hugo --minify`) hart abbrechen. Zusätzlich:
+   `layouts/_partials/head.html` greift nicht mehr auf `.Paginator` zu
+   (erster Zugriff sperrt die Seitenmenge und hat die Startseiten-Liste
+   verfälscht).
 
 ## Empfohlene Zeichenlänge pro Blogartikel (Dauervorgabe, same Tag festgelegt)
 

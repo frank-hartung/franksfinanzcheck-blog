@@ -1,7 +1,23 @@
+{{- /* Callout: paired ({{< callout type="tip" >}}…{{< /callout >}}) oder
+       unpaarig mit text="…". type: info | tip | warning */ -}}
 {{- $type := .Get "type" | default "info" -}}
-{{- $text := .Get "text" | default "Hinweis" -}}
+{{- $text := .Get "text" | default "" -}}
+{{- $inner := .Inner | default "" -}}
+{{- $body := cond (gt (len (trim $inner " \t\r\n")) 0) $inner $text -}}
 {{- $color := "border-left:4px solid #3b82f6; background:#eff6ff;" -}}
-{{- if eq $type "warning" }}{{ $color = "border-left:4px solid #eab308; background:#fefce8;" }}{{- end -}}
+{{- $label := "ℹ Hinweis" -}}
+{{- if eq $type "warning" -}}
+  {{- $color = "border-left:4px solid #eab308; background:#fefce8;" -}}
+  {{- $label = "⚠ Wichtiger Hinweis" -}}
+{{- else if eq $type "tip" -}}
+  {{- $color = "border-left:4px solid #0E5A43; background:#EAF4EF;" -}}
+  {{- $label = "💡 Tipp" -}}
+{{- end -}}
 <div style="{{ $color }} border-radius:6px; padding:12px 16px; margin:16px 0;">
-  <strong>{{ if eq $type "warning" }}⚠ Wichtiger Hinweis{{ else }}ℹ Hinweis{{ end }}:</strong> {{ $text }}
+  <strong>{{ $label }}:</strong>
+  {{- if gt (len (trim $inner " \t\r\n")) 0 }}
+  <div style="margin-top:6px;">{{ $inner | markdownify }}</div>
+  {{- else }}
+  {{ $body }}
+  {{- end }}
 </div>

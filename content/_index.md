@@ -1,11 +1,9 @@
 ---
 title: "FranksFinanzcheck"
 description: "Geld sparen bei Strom, Gas, Internet und Versicherungen: Praxistipps und ehrliche Tarifvergleiche – so sparst du monatlich bares Geld."
-# Verwaiste Startseiten-Pagination (nach Bestandsbereinigung). Existiert
-# /page/N/ wieder als echte Paginator-Seite, überspringt Hugo den Alias.
+# /page/1/ und /page/2/ existieren wieder (10 Posts, pagerSize 8).
+# Aliase nur für höhere Seiten – sonst kollidiert Hugo mit der Pagination.
 aliases:
-  - /page/1/
-  - /page/2/
   - /page/3/
   - /page/4/
   - /page/5/
