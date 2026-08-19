@@ -1,4 +1,4 @@
-FrankAutoOps-Report 2026-08-18
+FrankAutoOps-Report 2026-08-19
   Infrastruktur: github-pages + cloudflare-proxy (SSL full, Cache: cache-buster-v-sha)
   Artikel: 80 | Ø-Score: 0.745 (publish 0 / draft 0 / review 80)
   Audit heute: 0 Events | Fehler: 1
