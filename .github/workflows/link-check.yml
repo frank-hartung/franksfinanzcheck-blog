@@ -50,7 +50,9 @@ jobs:
       - name: Interne Links prüfen
         id: links
         continue-on-error: true
-        run: bash scripts/check_internal_links.sh | tee linkcheck.log
+        run: |
+          set -o pipefail
+          bash scripts/check_internal_links.sh | tee linkcheck.log
 
       - name: Label sicherstellen
         if: steps.links.outcome == 'failure'
