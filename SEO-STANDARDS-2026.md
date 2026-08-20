@@ -98,7 +98,7 @@ und "On-Page SEO Factors 2026" (Stand Juni-Juli 2026).*
   automatisiert abfragen, ob eine URL tatsächlich im Google-Index steht
   (Scraping von `site:`-Suchen verstößt gegen Googles Nutzungsbedingungen
   und ist unzuverlässig). Für echte Indexierungsdaten ist die **Google
-  Search Console API** nötig (siehe `ANLEITUNG-GOOGLE-SEARCH-CONSOLE.md`,
+  Search Console API** nötig (siehe `docs/ANLEITUNG-GOOGLE-SEARCH-CONSOLE.md`,
   noch nicht eingerichtet – wie schon bei `cadence_manager.py` erwähnt).
 - **Web-Duplikat-Suche ist stichprobenartig**: `web_uniqueness_guard.py`
   prüft einzelne Textphrasen, keine vollständige Volltext-Gegenprüfung wie

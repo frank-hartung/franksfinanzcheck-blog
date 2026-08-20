@@ -3,7 +3,7 @@
 **Festgelegt:** 19.08.2026 · **Gültigkeit:** dauerhaft (keine dynamische Anpassung)
 **Umsetzung:** `.github/workflows/content-engine-v2.yml` + harter Wochentags-Guard in
 `scripts/engine_generate.py` · Verbindlich auch in
-`MASTER-SYSTEM-FRANKSFINANZCHECK.md` (Kapitel 4.0) und `QUALITAETS-REGELWERK.md`.
+`docs/MASTER-SYSTEM-FRANKSFINANZCHECK.md` (Kapitel 4.0) und `QUALITAETS-REGELWERK.md`.
 
 ## Regelwerk
 

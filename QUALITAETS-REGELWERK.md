@@ -271,7 +271,7 @@ jeder Schreibaktion.
       (Kritisch=fest stopft, Fest=meldet Sichtung), Deploy-Preflight gegen
       Merge-Marker erweitert (nie wieder roter Build wegen '<'), blog_doctor
       auf 13 Wachen inkl. Lock. ANMERKUNG: Umami bleibt deaktiviert bis die
-      Website-ID eingetragen wird (Frank-Handlung, siehe ANLEITUNG-UMAMI).
+      Website-ID eingetragen wird (Frank-Handlung, siehe docs/ANLEITUNG-UMAMI-ANALYTICS.md).
 - **12.08.2026 (4):** Brand-Chip auf Covern (Frank: „Markenname nicht
   scharf genug abgebildet"): gold-gerahmter Chip, weisser Text + goldener
   „check"-Ausweis (44 px Inter Bold), Punkte nie mehr in der Textzone.
