@@ -14,7 +14,7 @@ name: FrankAutoOps-Report
 # committen ebenfalls. Weniger Rebase-Larm, weniger Wartezeit.
 on:
   schedule:
-    - cron: "35 5 * * *"   # 07:35 MESZ (vor dem 08:00-Pulk aus Pinterest/Engine)
+    - cron: "35 5 * * 1"   # Mo 07:35 MESZ – wöchentlich (Profi-Cleanup 20.08.: Report-Flut reduziert)
   workflow_dispatch: {}
 
 permissions:
