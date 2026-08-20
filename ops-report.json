@@ -1,176 +1,184 @@
 {
- "infrastructure": {
-  "hosting": "github-pages",
-  "hosting_detail": "Branch gh-pages via deploy.yml (peaceiris/actions-gh-pages)",
-  "dns_proxy": "cloudflare-proxy",
-  "dns_detail": "Cloudflare nur DNS + Proxy (A: 185.199.108-111.153), KEIN Cloudflare Pages/Workers",
-  "ssl_mode": "full",
-  "ssl_note": "GitHub liefert Wildcard *.github.io; Umstellung auf Full (strict), sobald Watchdog-Check-4 das GitHub-TLS-Zertifikat meldet",
-  "cache_strategy": "cache-buster-v-sha",
-  "cache_note": "Assets max-age=31536000 + ?v=<deploy-sha>; HTML dynamisch (max-age=600). KEIN Cache-Purge noetig.",
-  "deploy_trigger": "github-only",
-  "deploy_note": "push/workflow_dispatch; Content-Bot stoesst Deploy explizit an (GITHUB_TOKEN triggert keine Workflows)",
-  "backup": "github-repo-offsite",
-  "backup_note": "GitHub-Repo = Offsite-Backup (Code+Content+History); S3-Export geplant (Credentials fehlen)",
-  "origin_url": "https://frank-hartung.github.io/franksfinanzcheck-blog/",
-  "live_url": "https://franksfinanzcheck.de/"
- },
- "audit": {
-  "today_events": 0,
-  "total_events": 101,
-  "errors": 1,
-  "critical": 1,
-  "last_events": []
- },
- "playbooks": [
-  {
-   "name": "affiliate-health",
-   "triggers": []
+  "infrastructure": {
+    "hosting": "github-pages",
+    "hosting_detail": "Branch gh-pages via deploy.yml (peaceiris/actions-gh-pages)",
+    "dns_proxy": "cloudflare-proxy",
+    "dns_detail": "Cloudflare nur DNS + Proxy (A: 185.199.108-111.153), KEIN Cloudflare Pages/Workers",
+    "ssl_mode": "full",
+    "ssl_note": "GitHub liefert Wildcard *.github.io; Umstellung auf Full (strict), sobald Watchdog-Check-4 das GitHub-TLS-Zertifikat meldet",
+    "cache_strategy": "cache-buster-v-sha",
+    "cache_note": "Assets max-age=31536000 + ?v=<deploy-sha>; HTML dynamisch (max-age=600). KEIN Cache-Purge noetig.",
+    "deploy_trigger": "github-only",
+    "deploy_note": "push/workflow_dispatch; Content-Bot stoesst Deploy explizit an (GITHUB_TOKEN triggert keine Workflows)",
+    "backup": "github-repo-offsite",
+    "backup_note": "GitHub-Repo = Offsite-Backup (Code+Content+History); S3-Export geplant (Credentials fehlen)",
+    "origin_url": "https://frank-hartung.github.io/franksfinanzcheck-blog/",
+    "live_url": "https://franksfinanzcheck.de/"
   },
-  {
-   "name": "affiliate-integrity-daily",
-   "triggers": []
+  "audit": {
+    "today_events": 0,
+    "total_events": 116,
+    "errors": 1,
+    "critical": 1,
+    "last_events": []
   },
-  {
-   "name": "alert-on-failure",
-   "triggers": []
+  "playbooks": [
+    {
+      "name": "affiliate-health",
+      "triggers": []
+    },
+    {
+      "name": "affiliate-integrity-daily",
+      "triggers": []
+    },
+    {
+      "name": "alert-on-failure",
+      "triggers": []
+    },
+    {
+      "name": "backlink-weekly",
+      "triggers": []
+    },
+    {
+      "name": "backup-offsite",
+      "triggers": []
+    },
+    {
+      "name": "blog-health-daily",
+      "triggers": []
+    },
+    {
+      "name": "bot-watchdog",
+      "triggers": []
+    },
+    {
+      "name": "content-engine-v2",
+      "triggers": []
+    },
+    {
+      "name": "dependabot-automerge",
+      "triggers": []
+    },
+    {
+      "name": "deploy-catchup",
+      "triggers": []
+    },
+    {
+      "name": "deploy",
+      "triggers": []
+    },
+    {
+      "name": "frankautoops-report",
+      "triggers": []
+    },
+    {
+      "name": "layout-ai",
+      "triggers": []
+    },
+    {
+      "name": "mastodon-manual-post",
+      "triggers": []
+    },
+    {
+      "name": "mastodon-profile-sync",
+      "triggers": []
+    },
+    {
+      "name": "mastodon-seo",
+      "triggers": []
+    },
+    {
+      "name": "pinterest-ai",
+      "triggers": []
+    },
+    {
+      "name": "pinterest-watchdog",
+      "triggers": []
+    },
+    {
+      "name": "repin-weekly",
+      "triggers": []
+    },
+    {
+      "name": "seo-weekly",
+      "triggers": []
+    },
+    {
+      "name": "social-ai",
+      "triggers": []
+    },
+    {
+      "name": "update-quarterly",
+      "triggers": []
+    },
+    {
+      "name": "uptime-monitor",
+      "triggers": []
+    },
+    {
+      "name": "willkommenstext-refresh",
+      "triggers": []
+    }
+  ],
+  "commands": [],
+  "reports": {
+    "content": {
+      "posts": 10
+    },
+    "quality": {
+      "articles": 10,
+      "avg_score": 0.714,
+      "publish": 0,
+      "draft_autofix": 0,
+      "human_review": [
+        "2026-08-10-dsl-wechselbonus-sichern",
+        "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
+        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+        "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet",
+        "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+        "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden"
+      ]
+    }
   },
-  {
-   "name": "backlink-weekly",
-   "triggers": []
-  },
-  {
-   "name": "backup-offsite",
-   "triggers": []
-  },
-  {
-   "name": "blog-health-daily",
-   "triggers": []
-  },
-  {
-   "name": "bot-watchdog",
-   "triggers": []
-  },
-  {
-   "name": "content-engine-v2",
-   "triggers": []
-  },
-  {
-   "name": "dependabot-automerge",
-   "triggers": []
-  },
-  {
-   "name": "deploy-catchup",
-   "triggers": []
-  },
-  {
-   "name": "deploy",
-   "triggers": []
-  },
-  {
-   "name": "frankautoops-report",
-   "triggers": []
-  },
-  {
-   "name": "layout-ai",
-   "triggers": []
-  },
-  {
-   "name": "mastodon-manual-post",
-   "triggers": []
-  },
-  {
-   "name": "mastodon-profile-sync",
-   "triggers": []
-  },
-  {
-   "name": "pinterest-ai",
-   "triggers": []
-  },
-  {
-   "name": "pinterest-watchdog",
-   "triggers": []
-  },
-  {
-   "name": "repin-weekly",
-   "triggers": []
-  },
-  {
-   "name": "seo-weekly",
-   "triggers": []
-  },
-  {
-   "name": "social-ai",
-   "triggers": []
-  },
-  {
-   "name": "update-quarterly",
-   "triggers": []
-  },
-  {
-   "name": "uptime-monitor",
-   "triggers": []
-  },
-  {
-   "name": "willkommenstext-refresh",
-   "triggers": []
-  }
- ],
- "commands": [],
- "reports": {
-  "content": {
-   "posts": 80
-  },
-  "quality": {
-   "articles": 80,
-   "avg_score": 0.745,
-   "publish": 0,
-   "draft_autofix": 0,
-   "human_review": [
-    "2026-08-10-dsl-wechselbonus-sichern",
-    "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-    "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
-    "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-    "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-    "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke"
-   ]
-  }
- },
- "next_steps": [
-  {
-   "priority": 1,
-   "action": "human-review",
-   "detail": ""
-  },
-  {
-   "priority": 1,
-   "action": "investigate-errors",
-   "detail": "1 Audit-Fehler – Logs prüfen"
-  },
-  {
-   "priority": 1,
-   "action": "critical-incident",
-   "detail": "Kritische Vorfälle vorhanden – sofort prüfen"
-  },
-  {
-   "priority": 2,
-   "action": "run-content-engine",
-   "detail": "Content-Engine v2 läuft automatisch (Crons 08:10–19:40 MESZ)"
-  },
-  {
-   "priority": 3,
-   "action": "monitor-tls-cert",
-   "detail": "GitHub-TLS-Zertifikat: Watchdog Check 4 meldet, sobald da → Cloudflare SSL auf Full (strict) (kein CF Pages/Workers)"
-  },
-  {
-   "priority": 3,
-   "action": "pinterest-token",
-   "detail": "PINTEREST_ACCESS_TOKEN fehlt → Pinterest-AI postet noch nicht"
-  },
-  {
-   "priority": 3,
-   "action": "s3-backup",
-   "detail": "S3-Export geplant (INFRASTRUKTUR.md §4.5) – Credentials fehlen; GitHub-Repo ist bereits Offsite-Backup"
-  }
- ]
+  "next_steps": [
+    {
+      "priority": 1,
+      "action": "human-review",
+      "detail": "Artikel unter 0.80: 2026-08-10-dsl-wechselbonus-sichern, 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas, 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026, 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026, 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden"
+    },
+    {
+      "priority": 1,
+      "action": "investigate-errors",
+      "detail": "1 Audit-Fehler – Logs prüfen"
+    },
+    {
+      "priority": 1,
+      "action": "critical-incident",
+      "detail": "Kritische Vorfälle vorhanden – sofort prüfen"
+    },
+    {
+      "priority": 2,
+      "action": "run-content-engine",
+      "detail": "Content-Engine v2 läuft automatisch (Crons 08:10–19:40 MESZ)"
+    },
+    {
+      "priority": 3,
+      "action": "monitor-tls-cert",
+      "detail": "GitHub-TLS-Zertifikat: Watchdog Check 4 meldet, sobald da → Cloudflare SSL auf Full (strict) (kein CF Pages/Workers)"
+    },
+    {
+      "priority": 3,
+      "action": "pinterest-token",
+      "detail": "PINTEREST_ACCESS_TOKEN fehlt → Pinterest-AI postet noch nicht"
+    },
+    {
+      "priority": 3,
+      "action": "s3-backup",
+      "detail": "S3-Export geplant (INFRASTRUKTUR.md §4.5) – Credentials fehlen; GitHub-Repo ist bereits Offsite-Backup"
+    }
+  ]
 }
