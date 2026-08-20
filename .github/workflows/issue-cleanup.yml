@@ -18,17 +18,17 @@ name: Erledigte Fehlermeldungen dauerhaft löschen
 
 on:
   schedule:
-    - cron: "0 6 * * 1" # jeden Montag 06:00 UTC
+    - cron: "0 6 * * 1" # jeden Montag 06:00 UTC (Schonfrist 14 Tage)
   workflow_dispatch:
     inputs:
       grace_days:
-        description: "Schonfrist in Tagen (wie lange geschlossene Meldungen behalten werden)"
+        description: "Schonfrist in Tagen (0 = sofort löschen)"
         required: false
-        default: "14"
+        default: "0"
       dry_run:
-        description: "Nur anzeigen, was gelöscht würde (true/false)"
+        description: "Nur anzeigen ohne zu löschen? (true/false)"
         required: false
-        default: "true"
+        default: "false"
 
 permissions:
   contents: read
@@ -44,6 +44,7 @@ jobs:
       - name: Geschlossene Fehlermeldungen dauerhaft löschen
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
-          GRACE_DAYS: ${{ github.event.inputs.grace_days || '14' }}
+          # Zeitplan → 14 Tage Schonfrist · manueller Lauf → 0 Tage (sofort)
+          GRACE_DAYS: ${{ github.event_name == 'schedule' && '14' || (github.event.inputs.grace_days || '0') }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: bash scripts/cleanup_issues.sh
