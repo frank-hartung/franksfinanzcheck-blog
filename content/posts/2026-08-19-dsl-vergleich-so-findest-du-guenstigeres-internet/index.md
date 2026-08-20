@@ -160,7 +160,7 @@ Rechne immer mit dem Effektivpreis über 24 Monate, wähle die Bandbreite nach d
 So sicherst du dir günstiges Internet ohne Risiko und ohne Ausfallzeiten.  
 Trag dir am besten gleich eine Erinnerung ein, den Vergleich zum Ende deiner Mindestlaufzeit zu wiederholen.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl-gibt-es-nicht/) · [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
 ## Häufige Fragen
 
 ### Wie lange dauert es, den Internetvertrag zu wechseln?
