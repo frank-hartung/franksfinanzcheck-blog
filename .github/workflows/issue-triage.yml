@@ -1,0 +1,57 @@
+# ============================================================
+#  TRIAGE: Erledigte / obsolete Fehlermeldungen schließen
+#
+#  Schließt eine Liste von Issue-Nummern (kommagetrennt) mit
+#  Kommentar – nur wenn das Issue noch OFFEN ist (idempotent).
+#
+#  Voreingestellt: die 14 beim Triage-Durchgang (20.08.2026) als
+#  "erledigt" oder "obsolet" eingestuften Meldungen.
+#  (#15 – leeres A11y-Issue – optional ergänzen: einfach "15" ans Ende.)
+#
+#  Danach löscht der Wochen-Cleanup ("Erledigte Fehlermeldungen
+#  dauerhaft löschen") diese geschlossenen Bot-Meldungen nach 14 Tagen.
+# ============================================================
+name: Issues aufräumen (Triage)
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_numbers:
+        description: "Issue-Nummern, kommagetrennt (z. B. 3,4,5,7)"
+        required: true
+        default: "3,4,5,7,11,13,16,17,18,19,20,21,22,27"
+      comment:
+        description: "Kommentar beim Schließen"
+        required: false
+        default: "✅ Erledigt bzw. obsolet – beim Triage-Durchgang automatisch geschlossen. Wird vom Wochen-Cleanup nach 14 Tagen dauerhaft gelöscht."
+
+permissions:
+  issues: write
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Issues schließen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          INPUT="${{ github.event.inputs.issue_numbers }}"
+          KOMMENTAR="${{ github.event.inputs.comment }}"
+          IFS=',' read -ra NUMS <<< "$INPUT"
+          GESCHLOSSEN=0
+          for n in "${NUMS[@]}"; do
+            n="$(echo "$n" | tr -d ' ')"
+            [ -z "$n" ] && continue
+            STATE="$(gh issue view "$n" --repo "$GITHUB_REPOSITORY" --json state --jq .state 2>/dev/null || echo 'closed')"
+            if [ "$STATE" = "open" ]; then
+              gh issue close "$n" --repo "$GITHUB_REPOSITORY" --reason completed --comment "$KOMMENTAR"
+              echo "→ #$n geschlossen"
+              GESCHLOSSEN=$((GESCHLOSSEN + 1))
+            else
+              echo "→ #$n bereits geschlossen oder existiert nicht – übersprungen"
+            fi
+          done
+          echo ""
+          echo "Fertig: $GESCHLOSSEN Issue(s) geschlossen."
