@@ -1,0 +1,120 @@
+# ============================================================
+#  QUALITÄTS-GATE: Build + interne Links prüfen
+#
+#  Macht den Blog fehlerresistenter: Jeder Build wird zusätzlich
+#  auf DEFEKTE INTERNE LINKS geprüft (Rendering-Ebene – erkennt auch
+#  Theme-Links, /go/-Weiterleitungen, Bilder und Menü-Links).
+#
+#  Bei kaputten Links  →  Issue "🔗 Defekte interne Links gefunden"
+#                          (Label auto-report, ohne Duplikate)
+#  Bei sauberem Build  →  offenes Link-Issue wird automatisch geschlossen
+#
+#  Läuft: bei Pull Requests, täglich um 05:00 UTC und manuell.
+#  (Affiliate-/Extern-/Anker-Links werden bewusst NICHT geprüft.)
+# ============================================================
+name: Qualitäts-Gate (Build + interne Links)
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: linkcheck-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Hugo installieren
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+
+      - name: Seite bauen
+        run: hugo --minify
+
+      - name: Interne Links prüfen
+        id: links
+        continue-on-error: true
+        run: bash scripts/check_internal_links.sh | tee linkcheck.log
+
+      - name: Label sicherstellen
+        if: steps.links.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create auto-report --repo "$GITHUB_REPOSITORY" \
+            --color "d73a4a" \
+            --description "Automatisch erkannte Fehlermeldung" --force || true
+
+      - name: Defekte Links melden (Issue)
+        if: steps.links.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="🔗 Defekte interne Links gefunden"
+          FUNDE="$(grep 'KAPUTT:' linkcheck.log | sed 's/^/  /' || true)"
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
+          BODY=$(cat <<EOF
+          ## Automatisch erkannte defekte interne Links
+
+          **Run:** [${GITHUB_RUN_ID}](${RUN_URL})
+          **Commit:** \`${GITHUB_SHA:0:8}\`
+
+          \`\`\`
+          ${FUNDE:-Details im Run-Log oben.}
+          \`\`\`
+
+          Diese Meldung wird automatisch geschlossen, sobald alle internen Links
+          wieder funktionieren, und nach der Aufräum-Frist dauerhaft gelöscht.
+          EOF
+          )
+
+          EXISTING="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label auto-report \
+            --json number,title \
+            --jq -r --arg t "$TITLE" '.[] | select(.title == $t) | .number' | head -n 1)"
+
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" \
+              --body "Erneuter Fund bei [Run ${GITHUB_RUN_ID}](${RUN_URL}) (Commit \`${GITHUB_SHA:0:8}\`)."
+            echo "→ Bestehendes Issue #${EXISTING} aktualisiert."
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "$TITLE" --label auto-report --body "$BODY"
+            echo "→ Neues Issue erstellt."
+          fi
+
+      - name: Meldung schließen (alles grün)
+        if: steps.links.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="🔗 Defekte interne Links gefunden"
+          for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label auto-report \
+            --json number,title \
+            --jq -r --arg t "$TITLE" '.[] | select(.title == $t) | .number'); do
+            gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
+              --comment "✅ Behoben: Alle internen Links funktionieren wieder ([Run](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}))."
+            echo "→ Issue #$n geschlossen."
+          done
+
+      - name: Gate-Status (rot bei kaputten Links)
+        if: steps.links.outcome == 'failure'
+        run: |
+          echo "❌ Es wurden defekte interne Links gefunden (siehe Issue + Log oben)."
+          exit 1

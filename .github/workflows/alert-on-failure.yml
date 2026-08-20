@@ -91,10 +91,52 @@ jobs:
             ];
             const body = lines.join('\n');
 
+            // Label "auto-report" sicherstellen (zentrales Fehlermeldungs-Label).
+            // Darüber werden erledigte Meldungen später automatisch aufgeräumt.
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'auto-report',
+                color: 'd73a4a',
+                description: 'Automatisch erkannte Fehlermeldung'
+              });
+            } catch (e) { /* Label existiert bereits – ok */ }
+
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: '⚠️ Workflow fehlgeschlagen: ' + wfName + ' (' + conclusion + ')',
-              body: body
+              body: body,
+              labels: ['auto-report']
             });
             console.log('✅ Issue erstellt für ' + wfName);
+
+  # ------------------------------------------------------------
+  #  AUTO-CLOSE: Behobene Fehlermeldungen automatisch schließen
+  #
+  #  Läuft der beobachtete Workflow wieder GRÜN, wird das zugehörige
+  #  offene Issue (Label auto-report) geschlossen. Die dauerhafte
+  #  Löschung übernimmt der Workflow "Erledigte Fehlermeldungen
+  #  dauerhaft löschen" nach Ablauf der Schonfrist.
+  # ------------------------------------------------------------
+  resolve:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Behobene Fehlermeldung schließen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          WF_NAME="${{ github.event.workflow_run.name }}"
+          RUN_URL="${{ github.event.workflow_run.html_url }}"
+
+          for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --label auto-report --json number,title \
+            --jq -r --arg w "$WF_NAME" \
+            '.[] | select(.title | startswith("⚠️ Workflow fehlgeschlagen: " + $w)) | .number'); do
+            gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
+              --comment "✅ Behoben: \`${WF_NAME}\` läuft wieder fehlerfrei ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
+            echo "→ Issue #$n geschlossen."
+          done
+          echo "Auto-Close-Prüfung abgeschlossen."

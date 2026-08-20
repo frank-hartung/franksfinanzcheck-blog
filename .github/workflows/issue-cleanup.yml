@@ -1,0 +1,49 @@
+# ============================================================
+#  ERLEDIGTE FEHLERMELDUNGEN DAUERHAFT LÖSCHEN
+#
+#  Löscht geschlossene, automatisch erzeugte Issues (Autor
+#  github-actions[bot]), die älter als GRACE_DAYS sind, ENDGÜLTIG
+#  vom Repo. Ergebnis: Auf GitHub bleiben nur OFFENE Fehlermeldungen
+#  sichtbar – erledigte verschwinden dauerhaft.
+#
+#  ACHTUNG:
+#    • Löschen ist endgültig und benötigt einen Admin-PAT (Secret GH_PAT).
+#    • Manuell geschriebene Issues von DIR sind nie betroffen
+#      (nur Bots als Autor).
+#    • Manuelle Ausführung ist standardmäßig ein DRY-RUN (zeigt nur,
+#      was gelöscht würde) – zum echten Löschen "false" setzen.
+#    • Zeitplan läuft automatisch mit echtem Löschen (Schonfrist 14 Tage).
+# ============================================================
+name: Erledigte Fehlermeldungen dauerhaft löschen
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # jeden Montag 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      grace_days:
+        description: "Schonfrist in Tagen (wie lange geschlossene Meldungen behalten werden)"
+        required: false
+        default: "14"
+      dry_run:
+        description: "Nur anzeigen, was gelöscht würde (true/false)"
+        required: false
+        default: "true"
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Geschlossene Fehlermeldungen dauerhaft löschen
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          GRACE_DAYS: ${{ github.event.inputs.grace_days || '14' }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: bash scripts/cleanup_issues.sh
