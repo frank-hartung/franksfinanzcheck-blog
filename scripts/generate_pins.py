@@ -28,7 +28,7 @@ import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
-from post_utils import list_post_paths
+from post_utils import list_post_paths, slug_of
 
 BASE_URL = os.environ.get("BLOG_BASE_URL", "https://franksfinanzcheck.de")
 API = "https://api.pinterest.com/v5"
@@ -43,9 +43,9 @@ def load_posts():
         d = re.search(r"^description:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
         c = re.search(r'^cover:\s*\n\s*image:\s*["\']?(.+?)["\']?\s*$', content, re.M)
         pinned = re.search(r"^pinned:\s*(true|false)", content, re.M)
-        slug = fn[:-3]
+        slug = slug_of(path)
         posts.append({
-            "file": fn,
+            "file": os.path.basename(path),
             "slug": slug,
             "title": (m.group(1) if m else slug).strip(),
             "description": (d.group(1) if d else "").strip(),
