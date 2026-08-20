@@ -2,7 +2,7 @@ name: Blog-Gesundheits-Check (täglich)
 
 on:
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "45 5 * * *"   # 07:45 MESZ – entzerrt (Profi-Cleanup 20.08.)
   workflow_dispatch: {}
 
 permissions:

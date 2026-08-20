@@ -36,7 +36,7 @@ name: Affiliate-Integritäts-Wache (täglich)
 
 on:
   schedule:
-    - cron: "0 5 * * *"    # täglich 07:00 MESZ (05:00 UTC) – vor dem Content-Engine-Hauptslot (08:10)
+    - cron: "0 4 * * *"    # 06:00 MESZ – vor dem Content-Engine-Hauptslot (08:10 MESZ)
   workflow_dispatch: {}
 
 permissions:

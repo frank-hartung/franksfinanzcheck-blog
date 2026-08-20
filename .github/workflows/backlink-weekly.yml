@@ -18,7 +18,7 @@ name: Backlink-Automation
 
 on:
   schedule:
-    - cron: "0 6 * * 1"    # Mo 08:00 MESZ (06:00 UTC)
+    - cron: "0 9 * * 1"    # Mo 11:00 MESZ – entzerrt (Profi-Cleanup 20.08.)
   workflow_dispatch: {}
 
 permissions:

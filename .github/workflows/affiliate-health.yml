@@ -22,7 +22,7 @@ name: Affiliate-Health (Wochenwache)
 
 on:
   schedule:
-    - cron: "45 5 * * 1"    # Montag 07:45 MESZ (05:45 UTC)
+    - cron: "30 9 * * 1"    # Montag 11:30 MESZ – entzerrt (Profi-Cleanup 20.08.)
   workflow_dispatch: {}
 
 permissions:

@@ -19,7 +19,7 @@ on:
     branches: [main, master]
   pull_request:
   schedule:
-    - cron: "0 5 * * *"
+    - cron: "15 1 * * *"   # 03:15 MESZ – nachts (kein Push, nur Prüfung+Issue)
   workflow_dispatch: {}
 
 permissions:

@@ -17,7 +17,7 @@ name: Wöchentliche SEO-Optimierung
 
 on:
   schedule:
-    - cron: "0 5 * * 3"    # Mittwoch 07:00 Uhr MESZ (05:00 UTC)
+    - cron: "0 8 * * 3"    # Mittwoch 10:00 MESZ – entzerrt (Profi-Cleanup 20.08.)
   workflow_dispatch: {}
 
 permissions:

@@ -15,7 +15,7 @@ name: Pinterest-Watchdog
 
 on:
   schedule:
-    - cron: "30 5 * * *"
+    - cron: "30 4 * * *"   # 06:30 MESZ – entzerrt (Profi-Cleanup 20.08.)
   workflow_dispatch: {}
 
 permissions:

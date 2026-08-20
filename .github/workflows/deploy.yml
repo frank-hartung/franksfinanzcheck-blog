@@ -24,6 +24,7 @@ on:
       - ".github/**"
       - "data/**"
       - "/*.md"          # Root-Reports (alle *-REPORT.md, STATUS, REGELWERK)
+      - "docs/**"        # Einmal-Doku (Profi-Cleanup 20.08.) – kein Deploy nötig
       - "/.polish_cache.json"
       - "/.affiliate_report.json"
       - "/.meta_report.json"
