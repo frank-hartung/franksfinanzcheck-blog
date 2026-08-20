@@ -2,10 +2,9 @@ baseURL = "https://franksfinanzcheck.de/"
 title = "FranksFinanzcheck"
 theme = "PaperMod"
 
-# RSS komplett deaktiviert (Entscheidung 10.08.2026 – nicht erwünscht):
-# Hugo erzeugt dann weder index.xml noch Sektions-Feeds; der Head-Link
-# rel=alternate auf den Feed entfällt bei PaperMod automatisch mit.
-disableKinds = ["RSS"]
+# RSS (Entscheidung 20.08.2026: für Pinterest-Auto-Publish wieder aktiviert).
+# Nur der HOME-Feed wird erzeugt (/index.xml); Sektions-Feeds bleiben aus.
+# Das Layout layouts/_default/rss.xml ist Pinterest-optimiert (Bild + Beschreibung).
 
 # Keine automatische Titel-Umwandlung (Title-Case) durch Hugo:
 # Taxonomie-Terme (Tags/Kategorien) werden EXAKT wie im Frontmatter
@@ -33,7 +32,15 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   isPlainText = true
 
 [outputs]
-  home = ["HTML", "SWJS"]  # RSS raus (disableKinds in hugo.toml oben)
+  home = ["HTML", "RSS", "SWJS"]  # RSS = Pinterest-Feed unter /index.xml
+  section = ["HTML"]              # keine Sektions-Feeds (nur der Home-Feed)
+  page = ["HTML"]
+
+# RSS-Feed: letzte 50 Artikel (deckt alle Publikationen ab;
+# Pinterest pinnt beim ersten Verbinden die vorhandenen Artikel einmalig)
+[services]
+  [services.rss]
+    limit = 50
 
 [markup]
   [markup.goldmark]
