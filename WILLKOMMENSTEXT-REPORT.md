@@ -1,26 +1,26 @@
 # 🌱 WILLKOMMENSTEXT-REPORT (willkommenstext_guard.py)
 
-**Stand:** 2026-08-14 12:45 UTC · Modus: REFRESHED
-**Auslöser:** manuell/Trigger erzwungen (--force)
-**Signal:** `konto-gebuehren-transparenz` · **Quelle:** fallback · **Brand-/Integrity-Lock neu signiert:** ✅ · **Render-Beweis:** ✅
+**Stand:** 2026-08-20 15:35 UTC · Modus: REFRESHED
+**Auslöser:** manuell/Trigger erzwungen (--force); SEO-STANDARDS-2026.md wurde seit der letzten Anpassung aktualisiert
+**Signal:** `internet-tarifdschungel-bandbreite` · **Quelle:** ai:gemini · **Brand-/Integrity-Lock neu signiert:** ✅ · **Render-Beweis:** ✅
 
 ### Vorher (Titel)
-> FranksFinanzcheck: Mehr Durchblick bei Versicherungen, Strom und Girokonto
+> Bis zu 2.000 € im Jahr sparen: dein unabhängiger Finanz-Ratgeber
 
 ### Nachher (Titel)
-> Geld sparen ohne Verzicht: Ratgeber für Strom, Gas, Internet & Versicherungen
+> Weniger Fixkosten, mehr vom Leben: Dein ehrlicher Check für Strom, Gas und Versicherungen
 
 ### Vorher (Content)
-> Schluss mit komplizierten Tabellen und versteckten Kosten. FranksFinanzcheck bringt Klarheit in Ihren Finanzalltag. Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich inzwischen öfter als nur beim Kontowechsel. Ich erkläre Ihnen alle Details ganz ohne Fachchinesisch.
+> 💰 Bis zu 2.000 € weniger Fixkosten im Jahr – ohne Verzicht, ohne Verkaufsdruck. FranksFinanzcheck ist ein unabhängiger Ratgeber für **Strom, Gas, Internet, Versicherungen und Konto**, von Frank Hartung aus über 10 Jahren eigener Finanzpraxis.
 
-Ob es um den passenden Tarif für Strom, das Internet oder die richtige Versicherung geht: Hier zählen Fakten. Sie finden bei mir **konkrete Zahlen** sowie ehrliche Vor- und Nachteile zu jedem Angebot. Ich verzichte auf Verkaufsdruck und zeige Ihnen stattdessen, wie Sie Ihre Fixkosten im August 2026 optimieren 📈. 💡
+Im Herbst und Winter flattern die teuren Energie-Nachzahlungen ins Haus – wer vorher vergleicht, spart oft mehrere hundert Euro. Montags, mittwochs und freitags gibt es einen neuen Ratgeber mit konkreten Euro-Beträgen und ehrlichen Vor- und Nachteilen. Kein Fachchinesisch, jeder Beitrag in zehn Minuten lesbar.
+
+Starte mit deiner höchsten Rechnung – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀
 
 ### Nachher (Content)
-> ⚡ Weniger zahlen, ohne dass sich dein Alltag ändert – das ist das Ziel hier.
+> Ich bin Frank Hartung und bringe seit über 10 Jahren Klarheit in deine Verträge. Hier gibt es kein Fachchinesisch und keinen Verkaufsdruck, sondern ehrliche Analysen zu Strom, Gas und Versicherungen. Ich nenne dir konkrete Zahlen und zeige dir offen alle Vor- und Nachteile auf.
 
-Regelmäßig ein neuer, klar geschriebener Ratgeber: Strom, Gas und **Internet günstiger**, Versicherungen ohne Kleingedrucktes und Konto & Karte ohne Gebührenfallen. Beim Internet-Tarif zahlen viele für mehr Tempo, als sie im Alltag wirklich brauchen – ein realistischer Bedarfscheck spart oft mehr als der bloße Anbieterwechsel. Ohne Fachchinesisch, ohne Verkaufsdruck – dafür mit Zahlen, ehrlichen Vor- und Nachteilen und Schritt-für-Schritt-Anleitungen.
-
-Stöbere dich durch die Ratgeber – dein Geld arbeitet ab heute für dich. 🚀
+Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr als der reine Anbieterwechsel. Mit meinen Tipps optimierst du deine monatlichen Fixkosten und behältst so bis zu **1.800 € im Jahr** mehr für dich übrig. 💡
 
 ---
 _Automatisch erzeugt/geheilt – Änderungen an diesem Text NUR über dieses Skript, sonst stellt brand_guard.py den letzten signierten Stand wieder her._
