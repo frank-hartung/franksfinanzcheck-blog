@@ -37,7 +37,7 @@ fi
 # Ohne Admin-PAT kann GitHub keine Issues löschen (GITHUB_TOKEN reicht nicht!).
 if [ -z "${GH_TOKEN:-}" ]; then
   cat <<'EOF'
-ℹ️  GH_TOKEN ist nicht gesetzt – überspringe das Löschen.
+❌ GH_TOKEN (Secret GH_PAT) ist NICHT gesetzt – Löschen nicht möglich!
 
 Damit erledigte Fehlermeldungen DAUERHAFT verschwinden, brauchst du ein
 Personal Access Token (PAT) eines Repo-Admins:
@@ -51,7 +51,7 @@ Personal Access Token (PAT) eines Repo-Admins:
 
 Mehr dazu: ANLEITUNG-ISSUE-MANAGEMENT.md
 EOF
-  exit 0
+  exit 1
 fi
 
 CUTOFF="$(date -u -d "${GRACE_DAYS} days ago" +%s 2>/dev/null || echo 0)"
@@ -70,6 +70,7 @@ fi
 DELETED=0
 KEPT=0
 SKIPPED=0
+CANDIDATES=0
 
 for line in "${ISSUES[@]}"; do
   [ -z "$line" ] && continue
@@ -84,6 +85,8 @@ for line in "${ISSUES[@]}"; do
     KEPT=$((KEPT + 1))
     continue
   fi
+
+  CANDIDATES=$((CANDIDATES + 1))
 
   if [ "$DRY_RUN" = "true" ]; then
     echo "[DRY-RUN] würde löschen: #${num} (geschlossen ${closed}) – ${title}"
@@ -102,3 +105,14 @@ done
 
 echo ""
 echo "Fertig: ${DELETED} gelöscht · ${KEPT} innerhalb der Schonfrist behalten · ${SKIPPED} übersprungen."
+
+# Selbst-Diagnose: Wenn im ECHT-Modus Kandidaten vorhanden waren, aber KEINE
+# gelöscht wurde, stimmt etwas nicht (Token fehlt / keine Admin-Rechte).
+if [ "$DRY_RUN" != "true" ] && [ "$CANDIDATES" -gt 0 ] && [ "$DELETED" -eq 0 ]; then
+  echo ""
+  echo "⚠️  WARNUNG: Es waren ${CANDIDATES} Meldungen zum Löschen vorgesehen,"
+  echo "    aber KEINE wurde gelöscht. Mögliche Ursachen:"
+  echo "      1. Secret GH_PAT fehlt oder ist falsch benannt (muss exakt \"GH_PAT\" heißen)"
+  echo "      2. Der Token-Account ist kein ADMIN des Repos (Löschen braucht Admin-Rechte)"
+  exit 1
+fi
