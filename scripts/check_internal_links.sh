@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Prüft, dass alle INTERNEN Links (href/src mit absolutem Pfad) auf existierende
-# Dateien zeigen. Externe Links (http/https, Affiliate-Links, mailto, tel, #Anker …)
-# werden bewusst übersprungen, um Falschmeldungen zu vermeiden.
+# Prüft, dass alle INTERNEN Links (href/src) auf existierende Dateien zeigen –
+# sowohl absolute (/pillar/…) als auch relative (../../pillar/…) Links.
+# Externe Links (http/https, Affiliate-Links, mailto, tel, #Anker …) werden
+# bewusst übersprungen, um Falschmeldungen zu vermeiden.
 #
 # Erwartete Umgebungsvariablen:
 #   OUTPUT_DIR   Verzeichnis mit dem gebauten Blog (Standard: public)
@@ -20,6 +21,9 @@ found=0
 broken=0
 
 while IFS= read -r file; do
+  # Verzeichnis der aktuellen Datei (für relative Link-Auflösung)
+  file_dir="$(dirname "$file")"
+
   # href/src extrahieren – egal ob "doppelt", 'einfach' oder ohne Anführungszeichen
   # (Hugo entfernt beim Minifizieren oft die Anführungszeichen – deshalb robust matchen)
   links="$(grep -oE "(href|src)=(\"[^\"]*\"|'[^']*'|[^[:space:]'\">]*)" "$file" 2>/dev/null \
@@ -35,16 +39,21 @@ while IFS= read -r file; do
     path="${path%%\?*}"
     [ -z "$path" ] && continue
 
-    # Optionalen Unterpfad abziehen
+    # Optionalen Unterpfad abziehen (nur bei absoluten Links relevant)
     if [ -n "$SITE_PREFIX" ] && [[ "$path" == "$SITE_PREFIX"* ]]; then
       path="${path#"$SITE_PREFIX"}"
     fi
-
-    # Nur absolute Pfade prüfen; relative Links benötigen Datei-Kontext → überspringen
-    [[ "$path" == /* ]] || continue
     [ -z "$path" ] && continue
 
-    target="${OUTPUT_DIR}${path}"
+    # Ziel auflösen:
+    #   absolut  (/pillar/…)  → OUTPUT_DIR + Pfad
+    #   relativ  (../../…)    → relativ zum Verzeichnis der aktuellen Datei
+    if [[ "$path" == /* ]]; then
+      target="${OUTPUT_DIR}${path}"
+    else
+      target="$(realpath -m "${file_dir}/${path}" 2>/dev/null || echo "${file_dir}/${path}")"
+    fi
+
     found=$((found + 1))
 
     if [ -d "$target" ]; then
