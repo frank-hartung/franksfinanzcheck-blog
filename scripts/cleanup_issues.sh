@@ -56,6 +56,13 @@ fi
 
 CUTOFF="$(date -u -d "${GRACE_DAYS} days ago" +%s 2>/dev/null || echo 0)"
 
+# Klare Status-Zeile, damit das Log sofort zeigt, was passiert
+if [ "$DRY_RUN" = "true" ]; then
+  echo "MODE: DRY-RUN (zeigt nur an – löscht nichts) · Schonfrist: ${GRACE_DAYS} Tage"
+else
+  echo "MODE: ECHT-LÖSCHEN · Schonfrist: ${GRACE_DAYS} Tage"
+fi
+
 # Alle geschlossenen Bot-Issues mit Schließzeitpunkt einsammeln (TSV)
 mapfile -t ISSUES < <(gh issue list --repo "$REPO" --state closed \
   --author "$BOT_AUTHOR" --limit 1000 \
@@ -63,9 +70,12 @@ mapfile -t ISSUES < <(gh issue list --repo "$REPO" --state closed \
   --jq '.[] | select(.closedAt != null) | [.number, .closedAt, .title] | @tsv' 2>/dev/null || true)
 
 if [ "${#ISSUES[@]}" -eq 0 ]; then
-  echo "Keine geschlossenen Bot-Issues vorhanden – nichts zu tun."
+  echo "Keine geschlossenen Bot-Issues (Autor: ${BOT_AUTHOR}) gefunden – nichts zu tun."
+  echo "→ Falls es welche gibt, die hier fehlen: Autor-Filter BOT_AUTHOR prüfen."
   exit 0
 fi
+
+echo "Geschlossene Bot-Issues gefunden: ${#ISSUES[@]}"
 
 DELETED=0
 KEPT=0
