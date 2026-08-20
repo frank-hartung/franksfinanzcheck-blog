@@ -7,7 +7,7 @@
 {{- if .Params.cover.image -}}
   {{- $pin_media = .Params.cover.image | absURL -}}
 {{- end -}}
-{{- $pin_desc := printf "%s – via FranksFinanzcheck" (.Title | plainify) -}}
+{{- $pin_desc := (or .Description .Title) | plainify -}}
 {{- $pin_href := printf "https://pinterest.com/pin/create/button/?url=%s&media=%s&description=%s" ($pin_url | urlquery) ($pin_media | urlquery) ($pin_desc | urlquery) -}}
 {{- /* E-E-A-T: Erfahrungs-Marker (nur wenn Frontmatter `erfahrung:` gesetzt) */ -}}
 {{- partial "experience_box.html" . }}
