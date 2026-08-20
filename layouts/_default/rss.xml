@@ -1,0 +1,49 @@
+{{- /* Pinterest-optimierter RSS-2.0-Feed (Home).
+      - Nur BLOG-Artikel (Section "posts") – keine Rechts-/Pillar-Seiten.
+      - Jedes Item trägt Titel, Link, Meta-Description und das Cover-Bild
+        (enclosure + media:content + media:thumbnail) → Pinterest baut daraus
+        automatisch Pins (2:3, 1000×1500).
+      - RSS 2.* (nicht Atom) – Pflicht für Pinterests "Auto-publish".
+*/ -}}
+{{- $pages := where site.RegularPages "Section" "posts" -}}
+{{- $pages = where $pages "Params.hiddenInRss" "!=" true -}}
+{{- $limit := site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}
+{{- $pages = $pages | first $limit -}}
+{{- end -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>{{ site.Title }}</title>
+    <link>{{ site.BaseURL }}</link>
+    <description>{{ with site.Params.description }}{{ . }}{{ end }}</description>
+    <language>{{ site.Language.Locale }}</language>
+    {{- with site.Copyright }}
+    <copyright>{{ . | markdownify | plainify }}</copyright>
+    {{- end }}
+    {{- if and (not .Date.IsZero) (gt (len $pages) 0) }}
+    <lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- end }}
+    {{- with .OutputFormats.Get "RSS" }}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{- end }}
+    {{- range $pages }}
+    <item>
+      <title>{{ .Title | plainify }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      <guid isPermaLink="true">{{ .Permalink }}</guid>
+      <description>{{ with .Description | html }}{{ . }}{{ else }}{{ .Summary | plainify | html }}{{ end }}</description>
+      {{- with .Params.cover.image }}
+      {{- $img := . | absURL }}
+      <enclosure url="{{ $img }}" type="image/jpeg" />
+      <media:content url="{{ $img }}" medium="image" type="image/jpeg" />
+      <media:thumbnail url="{{ $img }}" />
+      {{- end }}
+    </item>
+    {{- end }}
+  </channel>
+</rss>
