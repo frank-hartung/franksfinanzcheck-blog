@@ -89,7 +89,7 @@ jobs:
 
           EXISTING="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label auto-report \
             --json number,title \
-            --jq -r --arg t "$TITLE" '.[] | select(.title == $t) | .number' | head -n 1)"
+            | jq -r --arg t "$TITLE" '.[] | select(.title == $t) | .number' | head -n 1)"
 
           if [ -n "$EXISTING" ]; then
             gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" \
@@ -109,7 +109,7 @@ jobs:
           TITLE="🔗 Defekte interne Links gefunden"
           for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label auto-report \
             --json number,title \
-            --jq -r --arg t "$TITLE" '.[] | select(.title == $t) | .number'); do
+            | jq -r --arg t "$TITLE" '.[] | select(.title == $t) | .number'); do
             gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
               --comment "✅ Behoben: Alle internen Links funktionieren wieder ([Run](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}))."
             echo "→ Issue #$n geschlossen."

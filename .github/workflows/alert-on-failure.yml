@@ -133,7 +133,7 @@ jobs:
 
           for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
             --label auto-report --json number,title \
-            --jq -r --arg w "$WF_NAME" \
+            | jq -r --arg w "$WF_NAME" \
             '.[] | select(.title | startswith("⚠️ Workflow fehlgeschlagen: " + $w)) | .number'); do
             gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
               --comment "✅ Behoben: \`${WF_NAME}\` läuft wieder fehlerfrei ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
