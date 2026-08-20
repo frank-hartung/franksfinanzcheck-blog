@@ -20,8 +20,10 @@ found=0
 broken=0
 
 while IFS= read -r file; do
-  links="$(grep -oE '(href|src)="[^"]*"' "$file" 2>/dev/null \
-    | sed -E 's/^(href|src)="([^"]*)"/\2/' || true)"
+  # href/src extrahieren – egal ob "doppelt", 'einfach' oder ohne Anführungszeichen
+  # (Hugo entfernt beim Minifizieren oft die Anführungszeichen – deshalb robust matchen)
+  links="$(grep -oE "(href|src)=(\"[^\"]*\"|'[^']*'|[^[:space:]'\">]*)" "$file" 2>/dev/null \
+    | sed -E "s/^(href|src)=//; s/^[\"']//; s/[\"']$//" || true)"
 
   for link in $links; do
     case "$link" in
