@@ -44,7 +44,8 @@ jobs:
           for n in "${NUMS[@]}"; do
             n="$(echo "$n" | tr -d ' ')"
             [ -z "$n" ] && continue
-            STATE="$(gh issue view "$n" --repo "$GITHUB_REPOSITORY" --json state --jq .state 2>/dev/null || echo 'closed')"
+            # gh liefert "OPEN"/"CLOSED" → für Vergleich auf Kleinschreibung normieren
+            STATE="$(gh issue view "$n" --repo "$GITHUB_REPOSITORY" --json state --jq .state 2>/dev/null | tr '[:upper:]' '[:lower:]' || echo 'closed')"
             if [ "$STATE" = "open" ]; then
               gh issue close "$n" --repo "$GITHUB_REPOSITORY" --reason completed --comment "$KOMMENTAR"
               echo "→ #$n geschlossen"
@@ -55,3 +56,6 @@ jobs:
           done
           echo ""
           echo "Fertig: $GESCHLOSSEN Issue(s) geschlossen."
+          if [ "$GESCHLOSSEN" -eq 0 ]; then
+            echo "⚠️  Hinweis: 0 Issues geschlossen – war die Nummern-Liste korrekt?"
+          fi
