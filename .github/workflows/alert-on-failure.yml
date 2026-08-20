@@ -36,6 +36,7 @@ on:
       - "Unique-Content-Guard"        # Duplicate-Content/Themen-Tiefe (14.08.)
       - "Affiliate-Integritäts-Wache (täglich)"    # CTA-Link-Selbstheilung (14.08.)
       - "Willkommenstext-Refresh"     # SEO-Unique-Content-Automatik Startseite (14.08.)
+      - "Blog-Gesundheits-Check (täglich)"   # tägliche Selbstheilung – hatte kein eigenes Alerting
     types:
       - completed
 

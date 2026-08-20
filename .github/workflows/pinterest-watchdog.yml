@@ -43,23 +43,25 @@ jobs:
       - name: Pinterest-Check mit Selbstheilung
         id: check
         run: |
+          set +e
           python3 scripts/pinterest_check.py --fix
-          echo "EXIT=$?" >> "$GITHUB_ENV"
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+          set -e
 
       - name: Report committen + pushen
         if: always()
         run: |
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
-          git add PINTEREST-REPORT.md
+          git add -A
           if ! git diff --cached --quiet; then
-            git commit -m "chore: PINTEREST-REPORT aktualisiert"
+            git commit -m "chore: Pinterest-Selbstheilung + Report"
             git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
             git push
           fi
 
       - name: Issue bei Problemen eröffnen
-        if: env.EXIT != '0'
+        if: steps.check.outputs.exit != '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -69,16 +71,16 @@ jobs:
           if [ -z "$EXISTING" ]; then
             gh issue create --title "Pinterest-Check: Probleme gefunden" \
               --label pinterest \
-              --body "**$TS** – Der Pinterest-Watchdog hat Probleme gefunden (Exit $EXIT). Details im PINTEREST-REPORT.md."
+              --body "**$TS** – Der Pinterest-Watchdog hat Probleme gefunden (Exit ${{ steps.check.outputs.exit }}). Details im PINTEREST-REPORT.md."
             echo "Issue erstellt"
           else
             gh issue comment "$EXISTING" \
-              --body "**$TS** – weiterhin Probleme (Exit $EXIT)."
+              --body "**$TS** – weiterhin Probleme (Exit ${{ steps.check.outputs.exit }})."
             echo "Issue kommentiert"
           fi
 
       - name: Issue bei Erfolg schließen
-        if: env.EXIT == '0'
+        if: steps.check.outputs.exit == '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
