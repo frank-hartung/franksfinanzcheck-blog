@@ -26,10 +26,10 @@
 name: Wöchentliches Nach-Pinnen
 
 on:
-  schedule:
-    - cron: "0 14 * * 1"    # Montag 16:00 MESZ (14:00 UTC)
-    # AUDIT-FIX: Zeitslot-Kollision mit pinterest-ai (ebenfalls Mo 17:30,
-    # beide pushen!) -> repin auf 16:00 verschoben.
+  # 20.08.2026: Automatisches Pinnen übernimmt jetzt Pinterests
+  # RSS-Auto-publish (Feed: https://franksfinanzcheck.de/index.xml).
+  # Dieser Workflow bleibt nur für MANUELLE Läufe erhalten –
+  # kein automatisches Pinnen mehr (verhindert Doppel-Pins).
   workflow_dispatch: {}
 
 permissions:

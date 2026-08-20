@@ -22,10 +22,9 @@
 name: Pinterest-AI
 
 on:
-  schedule:
-    - cron: "0 6 * * *"     # 08:00 MESZ (Morgen-Peak)
-    - cron: "30 17 * * *"   # 19:30 MESZ (Abend-Peak)
-    - cron: "30 15 * * 1"   # Montag 17:30 MESZ (Wochen-Rotation)
+  # 20.08.2026: Automatisches Pinnen übernimmt jetzt Pinterests
+  # RSS-Auto-publish (Feed: https://franksfinanzcheck.de/index.xml).
+  # Keine Zeitplan-Läufe mehr – nur noch manuell startbar.
   workflow_dispatch: {}
 
 permissions:
