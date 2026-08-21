@@ -1,6 +1,6 @@
 # 🤖 ENGINE-STATUS (Content-Engine v2)
 
-**Letzter Lauf:** 2026-08-21 13:53 UTC
+**Letzter Lauf:** 2026-08-21 15:52 UTC
 **Status:** OK
 
 Tageslimit erreicht (2/2).
