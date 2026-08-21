@@ -1,17 +1,15 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 19.08.2026 19:05 Uhr (MESZ)
+> Automatisch aktualisiert: 21.08.2026 08:13 Uhr (MESZ)
 
 ## Heutiger Stand
 
-- **Veröffentlicht heute:** 2/2 Artikel
-- 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet – DSL Vergleich: So findest du günstigeres Internet
-- 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden – Energiediebe stoppen: So kannst du Stromfresser finden
+- **Veröffentlicht heute:** 0/2 Artikel
 
 ## System
 
-- **Themenpool:** 175 Themen, **164 frei**
-- **Letzter Content-Commit:** noch keiner
+- **Themenpool:** 175 Themen, **167 frei**
+- **Letzter Content-Commit:** 491b55e 2026-08-21 content: Publish-Gate hat Artikel ohne bestandene Prüfung auf Entwurf zurückgestuft
 - **Tageslimit:** 2–2 Artikel pro Publikationstag (Mo/Mi/Fr; steuerbar per Variablen MIN_ARTIKEL_PRO_TAG / MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen
