@@ -1,60 +1,60 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am … – 15 Artikel geprüft, 79 Funde, 8 korrigiert, 71 offen.
+> **Automatisch** erzeugt am … – 19 Artikel geprüft, 189 Funde, 3 korrigiert, 186 offen.
 
 ## Offene Punkte
 
-- `Unbekanntes Wort: „Frugalismus-Tricks“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Boost“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Internet-Flat“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Fixpreis-Garantie“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Wechseltairf“ (Vorschläge: –)`
-- `Unbekanntes Wort: „exkludieren“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Spontankäufen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „selbstgekochtes“ (Vorschläge: –)`
+- `Unbekanntes Wort: „App-Abos“ (Vorschläge: –)`
+- `Unbekanntes Wort: „zinsstarkes“ (Vorschläge: –)`
+- `Unbekanntes Wort: „unverzinsten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Dispokredite“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Disziplinschwächen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Spontankäufen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Ausgaben-Tracker“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Motivationsschub“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Zins-Pockets“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Mesh-Repeater“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Highspeed“ (Vorschläge: –)`
+- `Unbekanntes Wort: „datenschutzfreundlicher“ (Vorschläge: –)`
+- `Unbekanntes Wort: „SIM-Only-Tarife“ (Vorschläge: –)`
+- `Unbekanntes Wort: „SIM-Only-Handytarif“ (Vorschläge: –)`
 - `Unbekanntes Wort: „Cashbacks“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Starkregenereignisse“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Opt-out-Regelung“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Unaufmerksamkeiten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „vergünstigte“ (Vorschläge: –)`
-- `Unbekanntes Wort: „wiederaufbauen“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Leon“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Isolationsschicht“ (Vorschläge: –)`
-- `Unbekanntes Wort: „heizst“ (Vorschläge: –)`
-- `Unbekanntes Wort: „durchheizst“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Umwälzpumpe“ (Vorschläge: –)`
-- `Unbekanntes Wort: „herauslassen“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Entertainment“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Home“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Metallbeschichtete“ (Vorschläge: –)`
-- `Unbekanntes Wort: „WLAN-Repeater“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Crossband“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Reporting“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Powerline“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Powerline-Adapter“ (Vorschläge: –)`
-- `Unbekanntes Wort: „meterdicken“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Gamechanger“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Seamless“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Mesh-Set“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Hacks“ (Vorschläge: –)`
-- `Unbekanntes Wort: „hacks“ (Vorschläge: –)`
-- `Unbekanntes Wort: „MeinWLAN“ (Vorschläge: –)`
-- `Unbekanntes Wort: „WLAN-Repeater“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Powerline“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Mesh-WLAN-System“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Plug“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Play“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Speedtest-App“ (Vorschläge: –)`
-- `Unbekanntes Wort: „ruckelndes“ (Vorschläge: –)`
-- `Unbekanntes Wort: „hacks“ (Vorschläge: –)`
-- `Unbekanntes Wort: „WPS-Standard“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Mesh-Systemen“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Seamless“ (Vorschläge: –)`
+- `Unbekanntes Wort: „WGs“ (Vorschläge: –)`
+- `Unbekanntes Wort: „VDSL-Anschluss“ (Vorschläge: –)`
+- `Unbekanntes Wort: „ausgebremst“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Billig-Repeater“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Allnet-Flat“ (Vorschläge: –)`
+- `Unbekanntes Wort: „SMS-Flat“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Highspeed-Datenvolumen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „DSL-Anbieterwechsel“ (Vorschläge: –)`
+- `Unbekanntes Wort: „novellierten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „TKG“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Umschaltetag“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Upstreams“ (Vorschläge: –)`
 - `Unbekanntes Wort: „AVM“ (Vorschläge: –)`
-- `Unbekanntes Wort: „ASUS“ (Vorschläge: –)`
-- `Unbekanntes Wort: „TP-Link“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Smart-Home-Lampen“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Routermodelle“ (Vorschläge: –)`
-- `Unbekanntes Wort: „AC-Standard“ (Vorschläge: –)`
-- … und 21 weitere
+- `Unbekanntes Wort: „Pocket-Unterkonten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Banking-Gebühren“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Smartphone-App“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Pockets“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Lastschriftenempfänger“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Kautionssicherheit“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Revolving“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Tagesgeld-Pockets“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Dispokredits“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Sondertilgungsmöglichkeiten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Sondertilgungsrechten“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Schufa-neutrale“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Schufa-frei“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Vollkaskoschutz“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Nachtanken“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Navi“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Abzocke“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Kautions“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Debitkarten-Falle“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Voucher“ (Vorschläge: –)`
+- … und 136 weitere
 
 ---
 *Erzeugt von scripts/spellcheck.py*

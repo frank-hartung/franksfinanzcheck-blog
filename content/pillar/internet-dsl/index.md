@@ -43,7 +43,7 @@ Wie du den Markt systematisch analysierst und günstige Tarife für deine Region
 ### Worauf du beim DSL-Vergleich achten solltest:
 1. **Effektiver Monatspreis:** Berechne den Preis über 24 Monate inklusive aller Boni, Freimonate, Bereitstellungsentgelte und Router-Kosten.
 2. **Benötigte Bandbreite:** Für Singles und Paare genügen oft 50 bis 100&nbsp;Mbit/s. Familien oder WGs mit parallelem 4K-Streaming und Homeoffice profitieren von 100 bis 250&nbsp;Mbit/s.
-3. **Hardware-Optionen:** Prüfe, ob du deinen vorhandenen Router weiternutzen kannst, statt monatliche Mietgebühren beim Provider zu zahlen.
+3. **Hardware-Optionen:** Prüfe, ob du deinen vorhandenen Router Weiternutzen kannst, statt monatliche Mietgebühren beim Provider zu zahlen.
 
 👉 **Jetzt regionale DSL- und Glasfaser-Angebote prüfen:** [**→ Jetzt DSL-Tarife vergleichen**](/go/dsl/)
 

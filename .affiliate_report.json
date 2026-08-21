@@ -1,7 +1,7 @@
 {
- "total": 16,
+ "total": 18,
  "errors": 0,
- "fixed": 0,
+ "fixed": 2,
  "posts": [
   {
    "slug": "frugalismus",
@@ -151,6 +151,24 @@
    "title": "Energiediebe stoppen: So kannst du Stromfresser fi",
    "pillar": "strom-sparen",
    "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-21-gasrechnung-senken-clevere-tipps-fuer-den-spaetsommer",
+   "title": "Gasrechnung senken: Clevere Tipps für den Spätsomm",
+   "pillar": "konto-karten",
+   "fixed": 1,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-21-watt-diebe-stoppen-stromfresser-finden-und-geld-sparen",
+   "title": "Watt-Diebe stoppen: Stromfresser finden und Geld s",
+   "pillar": "konto-karten",
+   "fixed": 1,
    "errors": [],
    "infos": [],
    "ok": true

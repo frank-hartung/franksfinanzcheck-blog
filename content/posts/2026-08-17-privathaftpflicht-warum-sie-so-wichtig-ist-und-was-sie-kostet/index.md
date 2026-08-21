@@ -1,6 +1,6 @@
 ---
-title: "Privathaftpflicht: Warum sie so wichtig ist und was sie kostet"
-description: "Schon 5 € im Monat schützen dich vor Millionenrisiken: Ich erkläre dir, was eine gute Privathaftpflicht leisten muss, was sie kostet und worauf du achten solltest."
+title: "Privathaftpflicht: Warum sie wichtig ist und was sie kostet"
+description: "Schütze dich vor dem finanziellen Ruin: Erfahre hier, warum die Privathaftpflicht so wichtig ist und wie wenig sie dich kostet. Jetzt den Check machen!"
 date: 2026-08-17T06:12:00Z
 draft: false
 tags: ["Privathaftpflicht", "Haftpflichtversicherung Vergleich", "Haftpflicht Kosten"]

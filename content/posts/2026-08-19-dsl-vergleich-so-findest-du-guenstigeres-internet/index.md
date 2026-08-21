@@ -1,5 +1,5 @@
 ---
-title: "DSL Vergleich: So findest du günstigeres Internet"
+title: "DSL Vergleich: So findest du den günstigsten Internettarif"
 description: Nutze einen DSL Vergleich und erfahre, wie du einfach deinen Internetvertrag wechseln kannst, um dauerhaft günstiges internet zu nutzen. Jetzt sparen!
 date: 2026-08-19T15:16:19Z
 draft: false
@@ -102,7 +102,7 @@ Er kündigt in deinem Namen und klärt den Umschalttermin.
 Dieser Prozess sorgt dafür, dass deine Ausfallzeit minimal bleibt.  
 Gesetzlich darf die Unterbrechung nicht länger als einen Arbeitstag dauern.  
 In der Realität merkst du oft nur für wenige Minuten etwas.  
-Falls Probleme auftreten, muss dein alter Anbieter dich weiterversorgen.  
+Falls Probleme auftreten, muss dein alter Anbieter dich Weiterversorgen.  
 Du bist rechtlich also sehr gut gegen Internetausfälle abgesichert.
 
 
