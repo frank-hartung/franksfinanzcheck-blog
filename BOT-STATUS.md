@@ -1,6 +1,6 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 21.08.2026 08:13 Uhr (MESZ)
+> Automatisch aktualisiert: 21.08.2026 13:53 Uhr (MESZ)
 
 ## Heutiger Stand
 
@@ -9,7 +9,7 @@
 ## System
 
 - **Themenpool:** 175 Themen, **167 frei**
-- **Letzter Content-Commit:** 491b55e 2026-08-21 content: Publish-Gate hat Artikel ohne bestandene Prüfung auf Entwurf zurückgestuft
+- **Letzter Content-Commit:** noch keiner
 - **Tageslimit:** 2–2 Artikel pro Publikationstag (Mo/Mi/Fr; steuerbar per Variablen MIN_ARTIKEL_PRO_TAG / MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen
