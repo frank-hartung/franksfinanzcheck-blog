@@ -2,7 +2,7 @@
 title: "Watt-Diebe stoppen: Stromfresser finden und Geld sparen"
 description: Lerne, wie du gezielt Stromfresser finden und deine laufenden Kosten reduzieren kannst. Tipps für weniger Verbrauch und echte Ersparnis im Alltag.
 date: 2026-08-21T08:08:28Z
-draft: true
+draft: false
 tags: []
 categories: ["Ratgeber"]
 pillar: "konto-karten"
