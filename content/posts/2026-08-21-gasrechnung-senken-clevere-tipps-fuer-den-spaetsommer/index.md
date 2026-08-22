@@ -2,7 +2,7 @@
 title: "Gasrechnung senken: Clevere Tipps für den Spätsommer"
 description: Erfahre, wie du effektiv deine Gasrechnung senken kannst. Mit der richtigen Herbst Vorbereitung sparst du Heizkosten und bleibst im Winter entspannt.
 date: 2026-08-21T08:08:09Z
-draft: true
+draft: false
 tags: []
 categories: ["Ratgeber"]
 pillar: "konto-karten"
