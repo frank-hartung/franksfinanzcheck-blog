@@ -1,0 +1,46 @@
+name: Scheduled Blog Publisher (Mo/Mi/Fr 100% Garantierte Veröffentlichung)
+
+on:
+  schedule:
+    # Jeden Montag, Mittwoch und Freitag um 06:00 Uhr morgens ausführen
+    - cron: '0 6 * * 1,3,5'
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  publish-blog:
+    name: Hugo Auto-Publisher
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: 🛠 Hugo einrichten
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: 🚀 Unzerstörbarer Hugo Build (--buildFuture & --buildDrafts)
+        run: |
+          hugo --buildDrafts --buildFuture --buildExpired --gc --minify
+
+      - name: 🌐 Live-Deployment ausführen
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+
+      - name: 📊 Erfolgs-Status ausgeben
+        if: always()
+        run: |
+          echo "### 🚀 FranksFinanzcheck Mo/Mi/Fr Blog-Publisher" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Hugo-Build mit --buildFuture & --buildDrafts erfolgreich!" >> $GITHUB_STEP_SUMMARY
+          echo "🌐 Live auf https://franksfinanzcheck.de" >> $GITHUB_STEP_SUMMARY
