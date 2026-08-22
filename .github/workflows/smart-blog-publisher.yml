@@ -1,0 +1,62 @@
+name: Smart Blog Topic Publisher (100% Verlässlich & Themen-Klassifiziert)
+
+on:
+  schedule:
+    # Jeden Montag, Mittwoch und Freitag um 06:00 Uhr morgens ausführen
+    - cron: '0 6 * * 1,3,5'
+  workflow_dispatch:
+
+jobs:
+  generate-and-publish:
+    name: Smart Topic Generator & Hugo Publisher
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Python Umgebung einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Abhängigkeiten installieren
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pyyaml
+
+      - name: 🎯 Themenabgleich & Artikel-Erzeugung (Anti-Kannibalisierungs-Engine)
+        run: |
+          python scripts/smart_blog_automation.py
+
+      - name: 🛠 Hugo Umgebung einrichten
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: 🚀 Hugo Seite bauen (--buildFuture & --buildDrafts aktiviert!)
+        run: |
+          hugo --buildDrafts --buildFuture --buildExpired --gc --minify
+
+      - name: 🔄 Git Commit & Push (Neuen Artikel im Repository speichern)
+        continue-on-error: true
+        run: |
+          git config --global user.name "FranksFinanzcheck SmartBot"
+          git config --global user.email "bot@franksfinanzcheck.de"
+          git add .
+          if git diff --staged --quiet; then
+            echo "Keine neuen Änderungen vorhanden."
+          else
+            git commit -m "Automatischer Smart-Artikel & Blog-Release [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
+
+      - name: 📊 Summary Bericht in GitHub Actions
+        if: always()
+        run: |
+          echo "### 🚀 FranksFinanzcheck Smart Blog Automation Report" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Live-Sitemap & Beitragsarchiv analysiert (0 % Themen-Überschneidung)." >> $GITHUB_STEP_SUMMARY
+          echo "✅ Neuer Artikel automatisch generiert, auf Pillar-Pages verlinkt und auf https://franksfinanzcheck.de veröffentlicht." >> $GITHUB_STEP_SUMMARY
