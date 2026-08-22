@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /go/
-
-Sitemap: {{ "sitemap.xml" | absURL }}
-
-# Pinterest-Crawler explizit erlauben
-User-agent: Pinterest
-Allow: /
