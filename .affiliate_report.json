@@ -1,7 +1,7 @@
 {
  "total": 18,
  "errors": 0,
- "fixed": 2,
+ "fixed": 4,
  "posts": [
   {
    "slug": "frugalismus",
@@ -128,7 +128,7 @@
   },
   {
    "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet",
-   "title": "Privathaftpflicht: Warum sie so wichtig ist und wa",
+   "title": "Privathaftpflicht: Warum sie wichtig ist und was s",
    "pillar": "versicherungen",
    "fixed": 0,
    "errors": [],
@@ -139,7 +139,7 @@
   },
   {
    "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
-   "title": "DSL Vergleich: So findest du günstigeres Internet",
+   "title": "DSL Vergleich: So findest du den günstigsten Inter",
    "pillar": "internet-dsl",
    "fixed": 0,
    "errors": [],
@@ -156,17 +156,17 @@
    "ok": true
   },
   {
-   "slug": "2026-08-21-gasrechnung-senken-clevere-tipps-fuer-den-spaetsommer",
-   "title": "Gasrechnung senken: Clevere Tipps für den Spätsomm",
+   "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
+   "title": "Mehr Freiheit durch Verzicht? Clevere Frugalismus ",
    "pillar": "konto-karten",
-   "fixed": 1,
+   "fixed": 3,
    "errors": [],
    "infos": [],
    "ok": true
   },
   {
-   "slug": "2026-08-21-watt-diebe-stoppen-stromfresser-finden-und-geld-sparen",
-   "title": "Watt-Diebe stoppen: Stromfresser finden und Geld s",
+   "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+   "title": "Preisgarantie Gas: So schützt du dich vor Preisspr",
    "pillar": "konto-karten",
    "fixed": 1,
    "errors": [],

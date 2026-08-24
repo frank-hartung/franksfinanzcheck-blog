@@ -1,6 +1,6 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am … – 19 Artikel geprüft, 189 Funde, 3 korrigiert, 186 offen.
+> **Automatisch** erzeugt am … – 21 Artikel geprüft, 320 Funde, 29 korrigiert, 291 offen.
 
 ## Offene Punkte
 
@@ -54,7 +54,7 @@
 - `Unbekanntes Wort: „Kautions“ (Vorschläge: –)`
 - `Unbekanntes Wort: „Debitkarten-Falle“ (Vorschläge: –)`
 - `Unbekanntes Wort: „Voucher“ (Vorschläge: –)`
-- … und 136 weitere
+- … und 241 weitere
 
 ---
 *Erzeugt von scripts/spellcheck.py*

@@ -1,6 +1,6 @@
 # 🩺 AFFILIATE-HEALTH-REPORT (E2E)
 
-**Stand:** 2026-08-21 08:12 UTC
+**Stand:** 2026-08-24 08:34 UTC
 **Routen:** 19 · **E2E geprüft:** offline-Modus **· WAF-Hinweise:** 0
 **Status:** 🟢 Alles gesund
 

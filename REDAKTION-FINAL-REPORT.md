@@ -1,13 +1,13 @@
 # 🎓 REDAKTIONS-FINAL-REPORT (Endabnahme)
 
-**Stand:** 2026-08-21 08:12 UTC
+**Stand:** 2026-08-24 08:34 UTC
 **Artikel:** 2
 
-## 🟢 2026-08-21-gasrechnung-senken-clevere-tipps-fuer-den-spaetsommer
+## 🟢 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
 
   verlagsreif ✅ (G1–G5 bestanden)
 
-## 🔴 2026-08-21-watt-diebe-stoppen-stromfresser-finden-und-geld-sparen
+## 🔴 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
 
 - G2 Wort-Doppler verblieben
 
