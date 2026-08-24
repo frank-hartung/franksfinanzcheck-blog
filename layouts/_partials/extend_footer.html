@@ -103,3 +103,11 @@
   // kein JS-Einblenden nötig (LCP-optimiert).
 })();
 </script>
+
+{{- /* ---------- Premium Blog Enhancements: GSAP + UX-Microinteractions ----------
+     First-party/self-hosted, kein Tracking, keine Cookies.
+     GSAP/ScrollTrigger werden nur für progressive Motion genutzt; ff-premium.js
+     fällt bei prefers-reduced-motion oder fehlendem GSAP sauber auf Vanilla zurück. */ -}}
+<script defer src="{{ partial "asset_url.html" "premium/vendor/gsap.min.js" }}"></script>
+<script defer src="{{ partial "asset_url.html" "premium/vendor/ScrollTrigger.min.js" }}"></script>
+<script defer src="{{ partial "asset_url.html" "premium/ff-premium.js" }}"></script>
