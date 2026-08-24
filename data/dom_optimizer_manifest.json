@@ -1,0 +1,303 @@
+{
+  "version": 1,
+  "generatedBy": "scripts/dom_size_optimizer.py",
+  "generatedAt": "2026-08-24T11:15:42+00:00",
+  "budgets": {
+    "maxElements": 700,
+    "maxDepth": 15,
+    "maxDirectChildren": 120,
+    "maxInlineSvg": 4,
+    "maxInlineSvgPaths": 8
+  },
+  "strategy": {
+    "externalizeComplexSvg": true,
+    "avoidDecorativeInlineSvg": true,
+    "preferAriaLabelOverHiddenTextNodesWhenEquivalent": true,
+    "limitAboveFoldWrappers": true,
+    "auditBuiltHtml": "hugo --minify && python3 scripts/dom_size_optimizer.py --check"
+  },
+  "summary": {
+    "pages": 141,
+    "maxElements": 477,
+    "maxDepth": 13,
+    "maxDirectChildren": 97,
+    "maxInlineSvg": 3,
+    "maxInlineSvgPaths": 1
+  },
+  "worstByElements": [
+    {
+      "path": "public/datenschutz/index.html",
+      "elements": 477,
+      "maxDepth": 13,
+      "maxDirectChildren": 97,
+      "maxDirectChildrenNode": "div.post-content.md-content",
+      "inlineSvg": 2,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/index.html",
+      "elements": 454,
+      "maxDepth": 13,
+      "maxDirectChildren": 62,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/index.html",
+      "elements": 442,
+      "maxDepth": 13,
+      "maxDirectChildren": 62,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/index.html",
+      "elements": 435,
+      "maxDepth": 13,
+      "maxDirectChildren": 56,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/index.html",
+      "elements": 424,
+      "maxDepth": 13,
+      "maxDirectChildren": 59,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/index.html",
+      "elements": 416,
+      "maxDepth": 13,
+      "maxDirectChildren": 60,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/pillar/index.html",
+      "elements": 404,
+      "maxDepth": 10,
+      "maxDirectChildren": 41,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 1,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/index.html",
+      "elements": 397,
+      "maxDepth": 13,
+      "maxDirectChildren": 60,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/index.html",
+      "elements": 371,
+      "maxDepth": 13,
+      "maxDirectChildren": 59,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/index.html",
+      "elements": 368,
+      "maxDepth": 13,
+      "maxDirectChildren": 59,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    }
+  ],
+  "worstByDepth": [
+    {
+      "path": "public/datenschutz/index.html",
+      "elements": 477,
+      "maxDepth": 13,
+      "maxDirectChildren": 97,
+      "maxDirectChildrenNode": "div.post-content.md-content",
+      "inlineSvg": 2,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-10-dsl-wechselbonus-sichern/index.html",
+      "elements": 364,
+      "maxDepth": 13,
+      "maxDirectChildren": 57,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/index.html",
+      "elements": 435,
+      "maxDepth": 13,
+      "maxDirectChildren": 56,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/index.html",
+      "elements": 368,
+      "maxDepth": 13,
+      "maxDirectChildren": 59,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.html",
+      "elements": 357,
+      "maxDepth": 13,
+      "maxDirectChildren": 57,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/index.html",
+      "elements": 366,
+      "maxDepth": 13,
+      "maxDirectChildren": 59,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/index.html",
+      "elements": 397,
+      "maxDepth": 13,
+      "maxDirectChildren": 60,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/index.html",
+      "elements": 371,
+      "maxDepth": 13,
+      "maxDirectChildren": 59,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.html",
+      "elements": 365,
+      "maxDepth": 13,
+      "maxDirectChildren": 60,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/index.html",
+      "elements": 424,
+      "maxDepth": 13,
+      "maxDirectChildren": 59,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    }
+  ],
+  "worstByChildren": [
+    {
+      "path": "public/datenschutz/index.html",
+      "elements": 477,
+      "maxDepth": 13,
+      "maxDirectChildren": 97,
+      "maxDirectChildrenNode": "div.post-content.md-content",
+      "inlineSvg": 2,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/index.html",
+      "elements": 442,
+      "maxDepth": 13,
+      "maxDirectChildren": 62,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/index.html",
+      "elements": 454,
+      "maxDepth": 13,
+      "maxDirectChildren": 62,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/index.html",
+      "elements": 397,
+      "maxDepth": 13,
+      "maxDirectChildren": 60,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.html",
+      "elements": 365,
+      "maxDepth": 13,
+      "maxDirectChildren": 60,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/index.html",
+      "elements": 416,
+      "maxDepth": 13,
+      "maxDirectChildren": 60,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/index.html",
+      "elements": 368,
+      "maxDepth": 13,
+      "maxDirectChildren": 59,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/index.html",
+      "elements": 366,
+      "maxDepth": 13,
+      "maxDirectChildren": 59,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/index.html",
+      "elements": 371,
+      "maxDepth": 13,
+      "maxDirectChildren": 59,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    },
+    {
+      "path": "public/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/index.html",
+      "elements": 424,
+      "maxDepth": 13,
+      "maxDirectChildren": 59,
+      "maxDirectChildrenNode": "head",
+      "inlineSvg": 3,
+      "inlineSvgPaths": 0
+    }
+  ]
+}
