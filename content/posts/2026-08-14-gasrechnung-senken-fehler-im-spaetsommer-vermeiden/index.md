@@ -6,7 +6,7 @@ draft: false
 tags: ["Gasrechnung senken", "Heizkosten sparen", "Herbst vorbereitung"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["gasrechnung senken", "heizkosten sparen", "herbst vorbereitung"]
+keywords: ["gasrechnung senken", "heizkosten sparen", "herbst vorbereitung", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken"]
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
@@ -17,9 +17,11 @@ engine_level: "profi"
 inspiration: Heizperiode vorbereiten im Spätsommer
 cover:
   image: "images/covers/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.jpg"
-  alt: "Tipp von FranksFinanzcheck"
+  alt: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
+pin_title: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
+pin_description: "*Werbung | Möchtest du deine Gasrechnung senken? Vermeide diese typischen Fehler bei der Herbst Vorbereitung und starte entspannt und sparsam in die Heizsaison. Mehr Spartipps auf FranksFinanzcheck! #gasrechnungsenken #heizkostensparen #herbstvorbereitung"
 ---
 
 # Gasrechnung senken: Fehler im Spätsommer vermeiden

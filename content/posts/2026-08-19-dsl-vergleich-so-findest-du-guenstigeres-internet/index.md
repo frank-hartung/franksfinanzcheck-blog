@@ -6,7 +6,7 @@ draft: false
 tags: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
-keywords: ["dsl vergleich", "internetvertrag wechseln", "günstiges internet"]
+keywords: ["dsl vergleich", "internetvertrag wechseln", "günstiges internet", "DSL-Vergleich"]
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
@@ -20,6 +20,8 @@ cover:
   alt: "DSL-Vergleich: günstigeres Internet finden – Spar-Tipp von FranksFinanzcheck"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
+pin_title: "DSL Vergleich: So findest du den günstigsten Internettarif"
+pin_description: "*Werbung | Nutze einen DSL Vergleich und erfahre, wie du einfach deinen Internetvertrag wechseln kannst, um dauerhaft günstiges internet zu nutzen. Jetzt sparen! Mehr Spartipps auf FranksFinanzcheck! #dslvergleich #internetvertragwechseln #guenstigesinternet"
 ---
 
 # DSL-Vergleich: So findest du günstigeres Internet

@@ -6,7 +6,7 @@ draft: false
 tags: ["Kostenloses Girokonto", "Girokonto Vergleich", "Kontoführungsgebühren sparen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-keywords: ["kostenloses girokonto", "girokonto vergleich", "kontoführungsgebühren sparen"]
+keywords: ["kostenloses girokonto", "girokonto vergleich", "kontoführungsgebühren sparen", "Girokonto vergleichen", "Konto ohne Gebühren"]
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
@@ -20,6 +20,8 @@ cover:
   alt: "Kostenloses Girokonto ohne Gebühren finden – Spar-Tipp von FranksFinanzcheck"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
+pin_title: "Kostenloses Girokonto: So findest du ein Konto ohne Gebühren"
+pin_description: "*Werbung | Du zahlst noch Kontoführungsgebühren? Ich zeige dir, wie du ein wirklich kostenloses Girokonto findest, versteckte Kosten erkennst und in 15 Minuten wechselst. Mehr Spartipps auf FranksFinanzcheck! #kostenlosesgirokonto #girokontovergleich #girokontovergleichen"
 ---
 
 # Kostenloses Girokonto: So findest du ein Konto ohne Gebühren

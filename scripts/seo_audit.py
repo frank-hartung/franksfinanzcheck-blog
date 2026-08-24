@@ -27,8 +27,10 @@ import sys
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 PUBLIC_DIR = os.path.join(BLOG_DIR, "public")
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+from post_utils import list_post_paths, slug_of  # noqa: E402
 
-# SEO-Schwellenwerte (Google-Best-Practices)
+# SEO-Schwellenwerte (Google-Best-Practices 2026)
 TITLE_MIN, TITLE_MAX = 30, 65
 DESC_MIN, DESC_MAX = 70, 165
 WORDS_MIN = 300
@@ -36,25 +38,37 @@ INTERNAL_LINKS_MIN = 2
 
 
 def load_posts():
+    """Alle Posts (Page-Bundles + Legacy .md) – draft-fähig gefiltert im main."""
     posts = []
-    for fn in sorted(os.listdir(POSTS_DIR)):
-        if not fn.endswith(".md"):
-            continue
-        content = open(os.path.join(POSTS_DIR, fn), encoding="utf-8").read()
+    for path in list_post_paths():
+        content = open(path, encoding="utf-8").read()
         fm = content.split("---", 2)
         body = fm[2] if len(fm) == 3 else content
+        fm_txt = fm[1] if len(fm) > 1 else ""
 
-        def get(key):
-            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm[1], re.M) if len(fm) > 1 else None
+        def get(key, src=fm_txt):
+            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", src, re.M)
             return m.group(1).strip() if m else ""
 
+        # keywords als Liste oder Komma-String
+        kw_m = re.search(r"^keywords:\s*\[(.*?)\]", fm_txt, re.M)
+        if kw_m:
+            keywords = ", ".join(
+                k.strip().strip("\"'") for k in kw_m.group(1).split(",") if k.strip()
+            )
+        else:
+            keywords = get("keywords")
+
+        cover_m = re.search(r'image:\s*[\"\']?([^\"\'\n]+)', fm_txt)
         posts.append({
-            "file": fn,
+            "file": slug_of(path) + ".md",
+            "path": path,
+            "slug": slug_of(path),
             "title": get("title"),
             "description": get("description"),
-            "keywords": get("keywords"),
-            "cover": get("cover"),
-            "draft": "draft: true" in (fm[1] if len(fm) > 1 else ""),
+            "keywords": keywords,
+            "cover": cover_m.group(1).strip() if cover_m else "",
+            "draft": "draft: true" in fm_txt,
             "body": body,
         })
     return posts
@@ -128,7 +142,7 @@ def audit_sitemap(posts):
     for p in posts:
         if p["draft"]:
             continue
-        slug = p["file"][:-3]
+        slug = p.get("slug") or p["file"][:-3]
         if slug not in sitemap:
             missing.append(slug)
     return [f"{len(missing)} Artikel fehlen in sitemap.xml: {missing[:5]}" if missing else ""]
