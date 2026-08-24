@@ -351,6 +351,13 @@ def main():
             # Einzel-Lauf/Force: Manifest immer aktualisieren; Gesamtlauf:
             # fehlende Einträge nachtragen (Stale-Erkennung lückenlos).
             manifest_set(slug, title)
+    try:
+        from lcp_image_optimizer import build_manifest as build_lcp_manifest, write_manifest as write_lcp_manifest
+        write_lcp_manifest(build_lcp_manifest())
+        print("  ✓ LCP-Manifest aktualisiert (data/lcp_images.json)")
+    except Exception as exc:
+        print(f"WARNUNG: LCP-Manifest konnte nicht aktualisiert werden: {exc}")
+
     print(f"\nFertig: {covers} Cover erstellt, {frontmatter} Frontmatter ergänzt, "
           f"{variants} responsive Varianten nachgezogen "
           f"(von {len(files)} Artikeln).")

@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "generatedBy": "scripts/lcp_image_optimizer.py",
+  "generatedAt": "2026-08-24T10:47:27+00:00",
+  "strategy": {
+    "preloadFormat": "avif",
+    "widths": [
+      360,
+      480,
+      620,
+      720
+    ],
+    "noOversized1000wInPreload": true,
+    "priority": "fetchpriority=high + loading=eager for LCP candidates"
+  },
+  "pages": {
+    "/": {
+      "image": "images/covers/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.jpg",
+      "type": "home",
+      "reason": "erstes sichtbares Listen-Cover",
+      "sizes": "(min-width: 768px) 620px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/": {
+      "image": "images/covers/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.jpg",
+      "type": "section",
+      "reason": "erstes sichtbares Listen-Cover",
+      "sizes": "(min-width: 768px) 620px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-10-dsl-wechselbonus-sichern/": {
+      "image": "images/covers/2026-08-10-dsl-wechselbonus-sichern.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/": {
+      "image": "images/covers/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/": {
+      "image": "images/covers/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/": {
+      "image": "images/covers/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/": {
+      "image": "images/covers/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/": {
+      "image": "images/covers/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/": {
+      "image": "images/covers/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/": {
+      "image": "images/covers/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/": {
+      "image": "images/covers/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/": {
+      "image": "images/covers/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/": {
+      "image": "images/covers/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/": {
+      "image": "images/covers/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    }
+  }
+}

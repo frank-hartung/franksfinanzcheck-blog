@@ -123,3 +123,13 @@ python3 -m pip install pillow pillow-avif-plugin
 ```
 
 Die bestehenden Workflows installieren Pillow bereits. `generate_covers.py` nutzt jetzt dieselbe Optimierungslogik wie `image_optimizer.py`, damit neue Artikel automatisch die gleichen Mobile-/Desktop-Varianten erhalten.
+
+## LCP-Kopplung
+
+`image_optimizer.py --fix` aktualisiert zusätzlich automatisch:
+
+```txt
+data/lcp_images.json
+```
+
+Dieses Manifest wird von `scripts/lcp_image_optimizer.py` erzeugt und vom Hugo-Head genutzt, um pro Seite den richtigen LCP-Bild-Preload zu setzen.

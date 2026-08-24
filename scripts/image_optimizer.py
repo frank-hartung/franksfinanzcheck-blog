@@ -278,11 +278,19 @@ def main() -> int:
             changed.extend(optimize_cover_image(source, force=args.force))
 
     manifest = build_manifest(sources)
+    lcp_manifest = "data/lcp_images.json"
     if args.fix or args.force:
         write_manifest(manifest)
+        # LCP-Preload-Manifest direkt mitziehen, damit neue/geänderte Cover
+        # ohne manuellen Schritt im kritischen Pfad landen.
+        try:
+            import lcp_image_optimizer
+            lcp_image_optimizer.write_manifest(lcp_image_optimizer.build_manifest())
+        except Exception as exc:
+            print(f"WARNUNG: LCP-Manifest konnte nicht aktualisiert werden: {exc}")
 
     problems = check_sources(sources)
-    report = {"sources": len(sources), "changed": len(changed), "removed": len(removed), "problems": problems, "manifest": rel(MANIFEST)}
+    report = {"sources": len(sources), "changed": len(changed), "removed": len(removed), "problems": problems, "manifest": rel(MANIFEST), "lcpManifest": lcp_manifest}
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2))
     else:
