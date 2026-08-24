@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "generatedBy": "scripts/cls_optimizer.py",
+  "generatedAt": "2026-08-24T12:14:22+00:00",
+  "strategy": {
+    "heroReveal": "opacity-only",
+    "heroMoney": "no text rewrite; reserve inline width",
+    "imageDimensions": "required"
+  },
+  "guards": {
+    "heroOpacityOnly": true,
+    "noMoneyTextRewrite": true,
+    "heroMoneyWidthReserved": true
+  },
+  "summary": {
+    "pages": 141,
+    "images": 196,
+    "imagesWithoutDimensions": 0,
+    "maxLcpCandidates": 1
+  },
+  "worst": []
+}

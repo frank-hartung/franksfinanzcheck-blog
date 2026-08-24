@@ -88,30 +88,17 @@
   }
 
   function animateMoneyWithGsap() {
+    // CLS guard: never animate the numeric text content inside the hero paragraph.
+    // Changing "0 €" → "1.800 €" changes inline width and can create tiny CLS.
+    // Use paint-only emphasis instead; the final text is present in HTML from first paint.
     if (prefersReducedMotion || !win.gsap) return;
     qsa('.home-info strong').forEach(function (el) {
-      var text = el.textContent;
-      var match = text.match(/(\d[\d\.\s]*)(\s*(?:€|Euro))/i);
-      if (!match) return;
-
-      var target = parseInt(match[1].replace(/\D/g, ''), 10);
-      if (!target || target > 1000000) return;
-
-      var suffix = match[2].trim().replace(/^Euro$/i, 'Euro');
-      var state = { value: 0 };
-      var format = new Intl.NumberFormat('de-DE');
-
-      win.gsap.to(state, {
-        value: target,
-        duration: 1.25,
-        ease: 'power2.out',
-        onUpdate: function () {
-          el.textContent = format.format(Math.round(state.value)) + ' ' + suffix;
-        }
-      });
+      win.gsap.fromTo(el,
+        { filter: 'brightness(1.28)' },
+        { filter: 'brightness(1)', duration: 1.1, ease: 'power2.out', clearProps: 'filter' }
+      );
     });
   }
-
 
   function isLcpCriticalElement(el) {
     return !!(el && (
@@ -178,9 +165,11 @@
 
     var heroItems = qsa('.home-info .entry-header h1, .home-info .entry-content p, .ff-home-ctas a, .ff-trust-row span');
     if (heroItems.length) {
-      gsap.set(heroItems, { autoAlpha: 0, y: 24 });
+      // CLS guard: opacity-only hero reveal. Moving the hero paragraph with y/transform
+      // can be reported as a layout-shift culprit even when the score is tiny.
+      gsap.set(heroItems, { autoAlpha: 0 });
       gsap.timeline({ defaults: { ease: 'power3.out' } })
-        .to(heroItems, { autoAlpha: 1, y: 0, duration: 0.72, stagger: 0.06, clearProps: 'transform,opacity,visibility' });
+        .to(heroItems, { autoAlpha: 1, duration: 0.52, stagger: 0.04, clearProps: 'opacity,visibility' });
     }
 
     setupVanillaReveals();
