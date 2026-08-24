@@ -88,14 +88,13 @@
   }
 
   function animateMoneyWithGsap() {
-    // CLS guard: never animate the numeric text content inside the hero paragraph.
-    // Changing "0 €" → "1.800 €" changes inline width and can create tiny CLS.
-    // Use paint-only emphasis instead; the final text is present in HTML from first paint.
+    // LCP/CLS guard: never rewrite numeric hero text. The final amount is
+    // present in HTML from first paint; JS may only apply paint-only emphasis.
     if (prefersReducedMotion || !win.gsap) return;
     qsa('.home-info strong').forEach(function (el) {
       win.gsap.fromTo(el,
-        { filter: 'brightness(1.28)' },
-        { filter: 'brightness(1)', duration: 1.1, ease: 'power2.out', clearProps: 'filter' }
+        { filter: 'brightness(1.24)' },
+        { filter: 'brightness(1)', duration: 1.0, ease: 'power2.out', clearProps: 'filter' }
       );
     });
   }
@@ -163,13 +162,14 @@
     var gsap = win.gsap;
     gsap.config({ nullTargetWarn: false });
 
-    var heroItems = qsa('.home-info .entry-header h1, .home-info .entry-content p, .ff-home-ctas a, .ff-trust-row span');
-    if (heroItems.length) {
-      // CLS guard: opacity-only hero reveal. Moving the hero paragraph with y/transform
-      // can be reported as a layout-shift culprit even when the score is tiny.
-      gsap.set(heroItems, { autoAlpha: 0 });
+    // LCP text guard: the hero H1/paragraph may become the LCP element.
+    // Never hide or move it with JS. Only non-text hero controls get a small
+    // opacity-only enhancement after first paint.
+    var heroEnhancements = qsa('.ff-home-ctas a, .ff-trust-row span');
+    if (heroEnhancements.length) {
+      gsap.set(heroEnhancements, { autoAlpha: 0 });
       gsap.timeline({ defaults: { ease: 'power3.out' } })
-        .to(heroItems, { autoAlpha: 1, duration: 0.52, stagger: 0.04, clearProps: 'opacity,visibility' });
+        .to(heroEnhancements, { autoAlpha: 1, duration: 0.45, stagger: 0.035, clearProps: 'opacity,visibility' });
     }
 
     setupVanillaReveals();

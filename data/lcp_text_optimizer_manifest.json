@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "generatedBy": "scripts/lcp_text_optimizer.py",
+  "generatedAt": "2026-08-24T12:21:36+00:00",
+  "strategy": {
+    "heroTextVisibleFromFirstPaint": true,
+    "noHeroTextTransform": true,
+    "noHeroMoneyTextRewrite": true,
+    "animateOnlyNonTextHeroControls": true
+  },
+  "guards": {
+    "heroTextNotInGsapSelector": true,
+    "heroEnhancementsOnly": true,
+    "noHeroYTransform": true,
+    "noMoneyTextRewrite": true,
+    "cssHeroTextVisible": true,
+    "heroMoneyWidthReserved": true
+  }
+}
