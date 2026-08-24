@@ -102,7 +102,11 @@ def build_manifest() -> dict[str, Any]:
             "imageDimensions": "required",
         },
         "guards": {
-            "heroOpacityOnly": "gsap.set(heroItems, { autoAlpha: 0 })" in js and "y: 24" not in js,
+            "heroOpacityOnly": (
+                ("gsap.set(heroItems, { autoAlpha: 0 })" in js or "var heroEnhancements = qsa('.ff-home-ctas a, .ff-trust-row span')" in js)
+                and "y: 24" not in js
+                and "y: 0" not in js
+            ),
             "noMoneyTextRewrite": "format(Math.round(state.value))" not in js,
             "heroMoneyWidthReserved": ".first-entry.home-info .entry-content strong" in css and "min-width: 7ch" in css,
         },

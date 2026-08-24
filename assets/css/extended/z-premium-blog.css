@@ -481,9 +481,17 @@ button:focus-visible {
   content-visibility: visible !important;
 }
 
-/* CLS guard: reserve the final width of the hero money value from first paint.
-   The text is no longer numerically rewritten by JS, but this also protects
-   future edits that keep a highlighted euro amount in the hero paragraph. */
+/* LCP text render guard: the home hero H1/paragraph are potential LCP text
+   candidates. Keep them visible and untransformed from first paint. */
+.first-entry.home-info .entry-header h1,
+.first-entry.home-info .entry-content,
+.first-entry.home-info .entry-content p {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* CLS guard for highlighted hero euro values: reserve final inline width. */
 .first-entry.home-info .entry-content strong {
   display: inline-block;
   min-width: 7ch;
