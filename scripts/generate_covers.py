@@ -285,16 +285,51 @@ def make_cover(title, slug, out_path, force=False):
     print(f"  ✓ Responsive/Modern: {len(modern)} Varianten für {os.path.basename(out_path)}")
 
 
-def ensure_cover_in_frontmatter(md_path, slug):
+def _title_from_content(content):
+    m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
+    if not m:
+        return None
+    return re.sub(r"<[^>]+>", "", m.group(1)).strip()
+
+
+def ensure_cover_in_frontmatter(md_path, slug, title=None):
+    """Legt Cover-Frontmatter an ODER heilt generische Alt-Texte.
+
+    Alt-Text = Artikel-Titel (keywordreich, natürlich) – nie „Spar-Tipp: 2026…".
+    """
     with open(md_path, encoding="utf-8") as f:
         content = f.read()
-    if re.search(r"^cover:", content, re.M):
-        return False  # Cover existiert bereits
+    plain_title = title or _title_from_content(content) or slug.replace("-", " ")
+    plain_title = re.sub(r"<[^>]+>", "", plain_title).strip()
     image_path = f"images/covers/{slug}.jpg"   # OHNE Slash: Hugo absURL + Subdir-BaseURL
+
+    if re.search(r"^cover:", content, re.M):
+        # Alt heilen wenn generisch/slug-basiert
+        m_alt = re.search(r'^(\s*alt:\s*)["\']?(.+?)["\']?\s*$', content, re.M)
+        if m_alt:
+            old_alt = m_alt.group(2).strip()
+            # Nur generische/slug-basierte Alts heilen – bewusst keywordreiche
+            # Alt-Texte (z. B. szenische Beschreibungen) bleiben erhalten.
+            bad = (
+                old_alt.startswith("Spar-Tipp:")
+                or old_alt == "Tipp von FranksFinanzcheck"
+                or re.search(r"\b20\d{2}\s+0\d\s+\d{2}\b", old_alt)
+                or (plain_title and len(old_alt) < 12)
+            )
+            if bad and plain_title:
+                content = (
+                    content[: m_alt.start()]
+                    + f'{m_alt.group(1)}"{plain_title}"'
+                    + content[m_alt.end():]
+                )
+                with open(md_path, "w", encoding="utf-8") as f:
+                    f.write(content)
+                return True
+        return False
     block = (
         f"cover:\n"
         f'  image: "{image_path}"\n'
-        f'  alt: "Spar-Tipp: {slug.replace("-", " ").title()}"\n'
+        f'  alt: "{plain_title}"\n'
         f'  caption: "Tipp von FranksFinanzcheck"\n'
     )
     # Nach dem Frontmatter-Ende (---) einfügen, vor der ersten Inhaltszeile
@@ -345,12 +380,18 @@ def main():
             covers += 1
         if ensure_responsive_variants(out_path, force=force or bool(only_slug)):
             variants += 1
-        if ensure_cover_in_frontmatter(path, slug):
+        if ensure_cover_in_frontmatter(path, slug, title=title):
             frontmatter += 1
         if only_slug or force or slug not in load_manifest():
             # Einzel-Lauf/Force: Manifest immer aktualisieren; Gesamtlauf:
             # fehlende Einträge nachtragen (Stale-Erkennung lückenlos).
             manifest_set(slug, title)
+        else:
+            # Auch bei bestehendem Cover: Manifest-Titel syncen wenn Force
+            # (Stale-Erkennung braucht aktuellen Titel)
+            m = load_manifest()
+            if m.get(slug, {}).get("title") != title:
+                manifest_set(slug, title)
     try:
         from lcp_image_optimizer import build_manifest as build_lcp_manifest, write_manifest as write_lcp_manifest
         write_lcp_manifest(build_lcp_manifest())

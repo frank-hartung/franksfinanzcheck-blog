@@ -29,6 +29,8 @@ import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+from post_utils import list_post_paths, slug_of  # noqa: E402
 
 DENSITY_MIN = 0.003
 DENSITY_MAX = 0.03
@@ -44,11 +46,10 @@ def norm(s):
 
 
 def load_articles():
+    """Page-Bundles + Legacy – alle veröffentlichten Artikel."""
     arts = []
-    for fn in sorted(os.listdir(POSTS_DIR)):
-        if not fn.endswith(".md"):
-            continue
-        content = open(os.path.join(POSTS_DIR, fn), encoding="utf-8").read()
+    for path in list_post_paths():
+        content = open(path, encoding="utf-8").read()
         parts = content.split("---", 2)
         fm = parts[1] if len(parts) > 1 else ""
         body = parts[2] if len(parts) == 3 else content
@@ -61,11 +62,16 @@ def load_articles():
 
         title = get("title")
         desc = get("description")
-        kw_raw = get("keywords")
-        kws = [k.strip() for k in kw_raw.split(",") if k.strip()]
+        kw_m = re.search(r"^keywords:\s*\[(.*?)\]", fm, re.M)
+        if kw_m:
+            kws = [k.strip().strip("\"'") for k in kw_m.group(1).split(",") if k.strip()]
+        else:
+            kws = [k.strip().strip("\"'") for k in get("keywords").split(",") if k.strip()]
+        slug = slug_of(path)
         arts.append({
-            "file": fn,
-            "slug": fn[:-3],
+            "file": slug + ".md",
+            "path": path,
+            "slug": slug,
             "title": title,
             "description": desc,
             "keywords": kws,
@@ -229,7 +235,7 @@ def apply_suggestions(articles, suggestions):
         to_add = new_kws[:2]
         if not to_add:
             continue
-        fn = os.path.join(POSTS_DIR, a["file"])
+        fn = a.get("path") or os.path.join(POSTS_DIR, a["file"])
         content = open(fn, encoding="utf-8").read()
         # Keywords-Liste im Frontmatter erweitern
         import re as _re

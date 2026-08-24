@@ -37,6 +37,7 @@ KI-Artikel (engine_generate.py)
    ├─► profi_text_check.py      Stil-Gate (Schwelle)
    ├─► readability_check.py     Lesbarkeits-Gate (> 75)
    ├─► check_titles.py          Titel-Gate
+   ├─► pinterest_seo_healer.py  Pinterest+Google SEO (Titel/Cover/Pin/KW)*
    ├─► generate_covers.py       Titelbilder (Manifest-selbstheilend*)
    ├─► check_uniqueness.py      Duplikat-Audit
    ├─► affiliate_link_check.py  Check24-/Tarifcheck-Link-Pflege
@@ -478,3 +479,21 @@ jeder Schreibaktion.
 
 > _Dieses Dokument pflegen heißt: Wenn eine Regel hinzukommt oder sich ändert,
 > hier in die Tabelle. Das Regelwerk lebt – aber es vergisst nie._
+
+
+### pinterest_seo_healer.py – Pinterest + Google SEO (Agentur, Stand 24.08.2026)
+Zentrale Selbstheilung für **bestehende und zukünftige** Beiträge:
+
+| Regel | Inhalt | Automatik |
+|---|---|---|
+| H1 | Titel 30–60 Z., `Hauptkeyword: Untertitel`, keine Ellipsis/hängende Präp. | Auto |
+| H2 | Meta-Description 120–160 Z., Keyword vorn | Auto |
+| H3 | ≥3 Keywords (Phrasen, keine Stoppwörter) | Auto |
+| H4 | Cover-Alt = Titel (nie „Spar-Tipp: 2026…") | Auto |
+| H5 | Cover 1000×1500 (2:3), Brand-Band, Stale-Titel → neu | via generate/check_covers |
+| H6 | `pin_title` ≤100, `pin_description` ≤500 + `*Werbung \|` + max. 3 ASCII-Hashtags | Auto |
+| H7 | Tags aus Keywords (Related + Pinterest) | Auto |
+
+**Verdrahtung:** Content-Engine v2 Phase 3 · seo-weekly · pinterest-watchdog (vor Hugo-Build).
+**Aufruf:** `python3 scripts/pinterest_seo_healer.py --fix`
+**Report:** `PINTEREST-SEO-HEALER-REPORT.md`

@@ -6,7 +6,7 @@ draft: false
 tags: ["Wlan verbessern", "DSL-Hacks", "Schnelles Internet zuhause"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
-keywords: ["wlan verbessern", "dsl hacks", "schnelles internet zuhause"]
+keywords: ["wlan verbessern", "dsl hacks", "schnelles internet zuhause", "DSL-Vergleich", "Internetvertrag wechseln", "günstiges Internet"]
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
@@ -20,6 +20,8 @@ cover:
   alt: "WLAN-Repeater vs. Mesh-WLAN – schneller Internet-Tipp"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
+pin_title: "WLAN verbessern: So bringst du stabilen Speed in jede Ecke"
+pin_description: "*Werbung | Du willst dein WLAN verbessern? Ich zeige dir, ob ein Repeater oder Mesh-WLAN für schnelles Internet zu Hause besser ist. Plus: Die besten DSL Hacks! Mehr Spartipps auf FranksFinanzcheck! #wlanverbessern #dslhacks #schnellesinternetzuhause"
 ---
 
 # WLAN verbessern: So bringst du Speed in jede Ecke

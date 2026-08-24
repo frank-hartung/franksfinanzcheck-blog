@@ -59,40 +59,73 @@ def load_posts():
         c = re.search(r'^cover:\s*\n\s*image:\s*["\']?(.+?)["\']?\s*$', content, re.M)
         pinned = re.search(r"^pinned:\s*(true|false)", content, re.M)
         tags = re.search(r"^tags:\s*\[(.*?)\]", content, re.M)
-        slug = os.path.basename(os.path.dirname(path))
+        kws = re.search(r"^keywords:\s*\[(.*?)\]", content, re.M)
+        pt = re.search(r"^pin_title:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
+        pd = re.search(r"^pin_description:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
+        # Bundle- und Legacy-Slug
+        if os.path.basename(path) == "index.md":
+            slug = os.path.basename(os.path.dirname(path))
+        else:
+            slug = os.path.basename(path)[:-3]
+        kw_list = [t.strip().strip('"') for t in (kws.group(1).split(",") if kws else []) if t.strip()]
+        tag_list = [t.strip().strip('"') for t in (tags.group(1).split(",") if tags else []) if t.strip()]
         posts.append({
             "slug": slug, "path": path, "content": content,
             "title": (m.group(1) if m else slug).strip().replace("<br>", " "),
             "description": (d.group(1) if d else "").strip(),
             "cover": (c.group(1) if c else "").strip(),
-            "tags": [t.strip().strip('"') for t in (tags.group(1).split(",") if tags else [])],
+            "tags": tag_list or kw_list,
+            "keywords": kw_list,
+            "pin_title": (pt.group(1).strip() if pt else ""),
+            "pin_description": (pd.group(1).strip() if pd else ""),
             "pinned": (pinned.group(1) if pinned else "false") == "true",
         })
     return posts
 
 
+def _ascii_tag(s):
+    s = s.lower()
+    for a, b in (("ä", "ae"), ("ö", "oe"), ("ü", "ue"), ("ß", "ss")):
+        s = s.replace(a, b)
+    return s
+
+
 def hashtags_for(post):
-    """Erzeugt 3–4 relevante Hashtags aus Tags + Titel (ohne Sonderzeichen)."""
-    pool = [t for t in post["tags"] if t] + [post["slug"].replace("-", " ")]
+    """Erzeugt max. 3 ASCII-Hashtags (Pinterest 2026: keine Umlaute)."""
+    pool = [t for t in (post.get("tags") or []) if t]
+    pool += [t for t in (post.get("keywords") or []) if t]
+    pool += [post["slug"].replace("-", " ")]
     tags = []
     for p in pool:
-        words = re.findall(r"[a-zäöüß0-9]+", p.lower())
+        words = re.findall(r"[a-z0-9]+", _ascii_tag(p))
         tag = "".join(words)
         if 3 <= len(tag) <= 24 and tag not in tags:
             tags.append(tag)
-        if len(tags) >= 4:
+        if len(tags) >= 3:
             break
     return " ".join("#" + t for t in tags)
 
 
+def pin_title_of(post):
+    """Pin-Titel: Frontmatter pin_title (SEO-geheilt) oder Titel ≤100."""
+    t = (post.get("pin_title") or post["title"] or post["slug"]).strip()
+    t = re.sub(r"<[^>]+>", "", t)
+    return t[:100]
+
+
 def pin_text(post):
-    """Optimierter Pin-Text: Kennzeichnung + Description + CTA + Hashtags (≤ 500 Zeichen)."""
-    desc = post["description"]
-    if not desc:
-        desc = post["title"]
+    """Optimierter Pin-Text: Kennzeichnung + Description + CTA + Hashtags (≤ 500).
+
+    Nutzt vorgeheiltes pin_description aus dem Frontmatter (pinterest_seo_healer),
+    falls vorhanden – sonst baut den Text frisch.
+    """
+    if post.get("pin_description"):
+        text = post["pin_description"].replace("&", "und")
+        return text[:500]
+    desc = post["description"] or post["title"]
+    desc = desc.replace("&", "und")
     hashtags = hashtags_for(post)
-    # Werbekennzeichnung (deutsches Recht): Artikel enthalten Affiliate-Links,
-    # daher Pins vorangestellt als Werbung deklarieren.
+    # Werbekennzeichnung (deutsches Recht): Artikel enthalten Affiliate-Links.
     text = f"*Werbung | {desc} Mehr Spartipps auf FranksFinanzcheck! {hashtags}"
     return text[:500]
 
@@ -140,7 +173,7 @@ def api_post_pin(token, board_id, post):
                          "data": f"{BASE_URL}/{post['cover']}"},
         "description": pin_text(post),
         "link": f"{BASE_URL}/posts/{post['slug']}/",
-        "title": post["title"][:100],
+        "title": pin_title_of(post),
     }
     req = urllib.request.Request(f"{API}/pins", data=json.dumps(body).encode(),
                                  headers={"Authorization": f"Bearer {token}",
@@ -196,7 +229,7 @@ def main():
 
     if not TOKEN or not BOARD_ID:
         # QUEUE-MODUS: vorbereiten, sauber skippen (kein Fehler!)
-        queue = [{"slug": p["slug"], "title": p["title"], "text": pin_text(p),
+        queue = [{"slug": p["slug"], "title": pin_title_of(p), "text": pin_text(p),
                   "cover": p["cover"]} for p in unpinned[:10]]
         n = write_queue(queue)
         lines = [f"**Modus:** Queue (kein PINTEREST_ACCESS_TOKEN/BOARD_ID)",

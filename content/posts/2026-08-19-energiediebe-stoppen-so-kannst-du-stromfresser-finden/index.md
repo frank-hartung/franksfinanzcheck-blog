@@ -6,7 +6,7 @@ draft: false
 tags: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["stromfresser finden", "strom sparen tipps", "energiekosten senken", "standby kosten"]
+keywords: ["stromfresser finden", "strom sparen tipps", "energiekosten senken", "standby kosten", "Energiediebe stoppen"]
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
@@ -20,6 +20,8 @@ cover:
   alt: "Energiediebe stoppen: Stromfresser im Haushalt finden – Spar-Tipp"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
+pin_title: "Energiediebe stoppen: So kannst du Stromfresser finden"
+pin_description: "*Werbung | Willst du endlich deine Energiekosten senken? In diesem Guide lernst du, wie du gezielt Stromfresser finden und sofort bares Geld sparen kannst. Mehr Spartipps auf FranksFinanzcheck! #stromfresserfinden #stromsparentipps #energiekostensenken"
 ---
 
 # Energiediebe stoppen: So kannst du Stromfresser finden

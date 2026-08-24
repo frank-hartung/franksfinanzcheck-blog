@@ -1,9 +1,9 @@
 ---
-title: "Preisgarantie Gas: So sicherst du günstige Tarife für 2026"
+title: "Preisgarantie Gas: So sicherst du günstige Tarife"
 description: Erfahre, warum die Gaspreise 2026 steigen und wie du mit einer Preisgarantie Gas dauerhaft deine Kosten senkst. Jetzt Gasrechnung sparen und wechseln!
 date: 2026-08-12T09:48:00Z
 draft: false
-tags: []
+tags: ["Preisgarantie Gas", "Preisgarantie", "sicherst", "günstige"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank"
@@ -16,9 +16,12 @@ engine_level: "relaxed"
 inspiration: "Zweite Welle Gaspreis-Anpassung: Jetzt sichern"
 cover:
   image: "images/covers/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg"
-  alt: "Tipp von FranksFinanzcheck"
+  alt: "Preisgarantie Gas: So sicherst du günstige Tarife für"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
+keywords: ["Preisgarantie Gas", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken"]
+pin_title: "Preisgarantie Gas: So sicherst du günstige Tarife"
+pin_description: "*Werbung | Erfahre, warum die Gaspreise 2026 steigen und wie du mit einer Preisgarantie Gas dauerhaft deine Kosten senkst. Jetzt Gasrechnung sparen und wechseln! Mehr Spartipps auf FranksFinanzcheck! #preisgarantiegas #gaspreisgarantie #gastarifwechseln"
 ---
 
 # Gaspreisgarantie: So sicherst du dir günstige Tarife für 2026

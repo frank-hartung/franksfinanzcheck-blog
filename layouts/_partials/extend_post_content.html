@@ -7,7 +7,18 @@
 {{- if .Params.cover.image -}}
   {{- $pin_media = .Params.cover.image | absURL -}}
 {{- end -}}
-{{- $pin_desc := (or .Description .Title) | plainify -}}
+{{- /* Pinterest-SEO 2026: vorgeheilte pin_description (Healer) bevorzugen;
+       sonst Meta-Description + Werbekennzeichnung. Max. 500 Zeichen. */ -}}
+{{- $pin_desc := "" -}}
+{{- with .Params.pin_description -}}
+  {{- $pin_desc = . | plainify -}}
+{{- else -}}
+  {{- $base := (or .Description .Title) | plainify -}}
+  {{- $pin_desc = printf "*Werbung | %s Mehr Spartipps auf FranksFinanzcheck!" $base -}}
+{{- end -}}
+{{- if gt (len $pin_desc) 500 -}}
+  {{- $pin_desc = slicestr $pin_desc 0 497 | printf "%s…" -}}
+{{- end -}}
 {{- $pin_href := printf "https://pinterest.com/pin/create/button/?url=%s&media=%s&description=%s" ($pin_url | urlquery) ($pin_media | urlquery) ($pin_desc | urlquery) -}}
 {{- /* E-E-A-T: Erfahrungs-Marker (nur wenn Frontmatter `erfahrung:` gesetzt) */ -}}
 {{- partial "experience_box.html" . }}

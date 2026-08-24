@@ -77,14 +77,30 @@ def check_title(title):
 
 
 def fix_title(title):
-    """Deterministische Korrekturen R2–R4 (kein R1-Fix – semantisch)."""
+    """Deterministische Korrekturen R1–R4.
+
+    R1 (Doppelpunkt-Konvention) wird über pinterest_seo_healer.ensure_colon_title
+    geheilt, falls importierbar – sonst bleiben R2–R4.
+    """
     t = title.strip()
+    # Ellipsis-Reste (Meta-Optimizer-Kürzung) entfernen
+    t = re.sub(r"[…\.]{1,}$", "", t).rstrip()
     for pat, repl in COMPOUND_FIXES:
         t = re.sub(pat, repl, t)
     t = TIME_TAIL.sub("", t).strip()
     t = re.sub(r"\s{2,}", " ", t)
     t = re.sub(r"\s+:", ":", t)
     t = re.sub(r":\s{2,}", ": ", t)
+    # R1: Doppelpunkt erzwingen wenn Titel lang ohne :
+    if len(t) > TITLE_NO_COLON_MAX and ":" not in t:
+        try:
+            from pinterest_seo_healer import ensure_colon_title, strip_ellipsis
+            t = ensure_colon_title(strip_ellipsis(t))
+        except Exception:
+            words = t.split()
+            if len(words) >= 4:
+                mid = max(2, len(words) // 2)
+                t = f"{' '.join(words[:mid])}: {' '.join(words[mid:])}"
     if len(t) < REST_MIN and title != t:
         # Anhängsel-Entfernung hat den Titel entkernt → Änderung verwerfen
         t = title.strip()
@@ -93,8 +109,18 @@ def fix_title(title):
 
 def collect():
     posts = []
-    for pattern in ["content/posts/*/index.md", "content/pillar/*/index.md"]:
+    # Page-Bundles + Legacy-Posts + Pillars
+    patterns = [
+        "content/posts/*/index.md",
+        "content/posts/*.md",
+        "content/pillar/*/index.md",
+    ]
+    seen = set()
+    for pattern in patterns:
         for f in glob.glob(os.path.join(BLOG_DIR, pattern)):
+            if f.endswith("_index.md") or f in seen:
+                continue
+            seen.add(f)
             content = open(f, encoding="utf-8").read()
             m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
             if m:

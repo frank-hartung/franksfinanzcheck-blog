@@ -90,6 +90,23 @@ Der Workflow **„Wöchentliche SEO-Optimierung"** läuft jeden Mittwoch 07:00 U
 3. **Optional KI-Vorschläge:** `python3 scripts/keyword_optimizer.py --ai`
    schlägt verwandte LSI-Keywords pro Artikel vor (nutzt deine Gratis-KI-Keys).
 
+**📌 Pinterest- + Google-SEO-Healer (Agentur-Selbstheilung, Stand 24.08.2026):**
+
+`python3 scripts/pinterest_seo_healer.py --fix` hält **alle** Beiträge
+(bestehend + neu) dauerhaft auf Profi-Niveau:
+
+| Feld | Google 2026 | Pinterest 2026 |
+|---|---|---|
+| Titel / Cover-Text | 30–60 Z., `Hauptkeyword: Untertitel` | Pin-Titel ≤100 (Feed ~40) |
+| Meta-Description | 120–160 Z., Keyword + CTA | Pin-Text ≤500, `*Werbung \| …`, max. 3 ASCII-Hashtags |
+| Cover | og:image 1000×1500, Alt = Titel | 2:3, Text-Overlay, Brand-Band |
+| Keywords | ≥3 Phrasen in Titel/Desc/H2 | Hashtags aus Keywords |
+
+Läuft automatisch in **Content-Engine v2** (Phase 3), **seo-weekly** und
+**pinterest-watchdog** (vor dem Hugo-Build). Report: `PINTEREST-SEO-HEALER-REPORT.md`.
+Neue Artikel bekommen Keywords + `pin_title`/`pin_description` bereits beim
+Speichern (`engine_generate.py`).
+
 **♿ Automatische Barrierefreiheit (WCAG 2.1, Top-Niveau):**
 
 Der Blog ist barrierefrei umgesetzt und wird wöchentlich geprüft

@@ -1,15 +1,17 @@
 ---
-title: "Haushaltsbuch führen: App, Excel oder Stift – Was spart im…"
+title: "Haushaltsbuch führen: App, Excel oder Stift im Vergleich"
 date: 2026-08-21T06:00:00+02:00
 draft: false
 description: "Du willst ein Haushaltsbuch führen und bares Geld sparen? Ob App, Excel oder Stift – wir zeigen dir, was wirklich funktioniert. Hol dir jetzt den Überblick!"
-keywords: ["Haushaltsbuch Führen", "Haushaltsbuch App", "Excel Haushaltsbuch", "Ausgaben Im Blick Behalten", "Budgetierung Tipps"]
+keywords: ["Haushaltsbuch Führen", "Haushaltsbuch App", "Excel Haushaltsbuch", "Ausgaben Im Blick Behalten", "Budgetierung Tipps", "Budget planen"]
 categories: ["Geld Sparen & Frugalismus"]
 tags: ["Haushaltsbuch", "Budgetierung", "Ausgaben", "Frugalismus", "Sparmethoden"]
 cover:
   image: "images/covers/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.jpg"
   alt: "Haushaltsbuch führen: App, Excel oder Papier im großen Vergleich"
   caption: "Tipp von FranksFinanzcheck"
+pin_title: "Haushaltsbuch führen: App, Excel oder Stift im Vergleich"
+pin_description: "*Werbung | Du willst ein Haushaltsbuch führen und bares Geld sparen? Ob App, Excel oder Stift – wir zeigen dir, was wirklich funktioniert. Hol dir jetzt den Überblick! Mehr Spartipps auf FranksFinanzcheck! #haushaltsbuchfuehren #haushaltsbuchapp #excelhaushaltsbuch"
 ---
 
 # Haushaltsbuch führen: App, Excel oder Stift – Was spart im Alltag wirklich Geld?

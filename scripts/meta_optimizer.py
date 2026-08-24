@@ -419,14 +419,49 @@ def fix_meta(a, use_ai):
                 if len(new_title) > TITLE_OPT_MAX:
                     new_title = new_title[:TITLE_OPT_MAX - 1].rstrip() + "…"
             elif tl > TITLE_OPT_MAX:
-                new_title = a["title"][:TITLE_OPT_MAX - 1].rstrip() + "…"
-        # Länge final begrenzen (KI kann überziehen)
-        if new_title and len(new_title) > TITLE_MAX + 5:
-            new_title = new_title[:TITLE_MAX - 1].rstrip() + "…"
+                # Semantisch kürzen – NIE mit „…" (zerstört Cover + Pinterest-SEO)
+                t0 = a["title"]
+                if ":" in t0:
+                    head, tail = t0.split(":", 1)
+                    budget = TITLE_OPT_MAX - len(head) - 2
+                    tail = tail.strip()
+                    if budget > 10:
+                        tcut = tail[:budget]
+                        sp = tcut.rfind(" ")
+                        if sp > 8:
+                            tcut = tcut[:sp]
+                        new_title = f"{head.strip()}: {tcut.strip()}"
+                    else:
+                        new_title = head.strip()[:TITLE_OPT_MAX]
+                else:
+                    cut = t0[:TITLE_OPT_MAX]
+                    sp = cut.rfind(" ")
+                    new_title = cut[:sp] if sp > 20 else cut
+        # Länge final begrenzen (KI kann überziehen) – ohne Ellipsis
+        if new_title and len(new_title) > TITLE_MAX:
+            if ":" in new_title:
+                head, tail = new_title.split(":", 1)
+                budget = TITLE_MAX - len(head) - 2
+                tail = tail.strip()
+                if budget > 10:
+                    tcut = tail[:budget]
+                    sp = tcut.rfind(" ")
+                    if sp > 8:
+                        tcut = tcut[:sp]
+                    new_title = f"{head.strip()}: {tcut.strip()}"
+                else:
+                    new_title = head.strip()[:TITLE_MAX]
+            else:
+                cut = new_title[:TITLE_MAX]
+                sp = cut.rfind(" ")
+                new_title = cut[:sp] if sp > 20 else cut
         # Titel-Gate auch auf Fallback/Kürzung anwenden (deterministische
         # Korrekturen: Komposita-Bindestriche, Zeit-Anhängsel, Whitespace)
         if new_title:
             new_title = _title_gate(new_title, a["title"], reject_no_colon=False)
+        # Ellipsis-Reste aus älteren Läufen entfernen
+        if new_title:
+            new_title = new_title.rstrip("….").rstrip()
         if new_title:
             old_line = re.search(r'^title:.*$', content, re.M)
             if old_line:

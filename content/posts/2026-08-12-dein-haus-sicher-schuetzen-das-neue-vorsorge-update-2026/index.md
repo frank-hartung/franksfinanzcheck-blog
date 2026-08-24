@@ -6,7 +6,7 @@ draft: false
 tags: ["Hausversicherung", "Wohngebäudeversicherung", "Elementarschutz"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
-keywords: ["Hausversicherung", "Wohngebäudeversicherung", "Elementarschutz", "Hausratversicherung", "Elementarschadenversicherung", "Gebäudeversicherung Vergleich", "Versicherungssumme"]
+keywords: ["Hausversicherung", "Wohngebäudeversicherung", "Elementarschutz", "Hausratversicherung", "Elementarschadenversicherung", "Gebäudeversicherung Vergleich", "Versicherungssumme", "Dein Haus sicher schützen"]
 author: "Frank Hartung"
 erfahrung: "Als ich meine eigene Hausrat- und Gebäudeversicherung überprüft habe, war ich überrascht, wie stark sich die Tarife bei Elementarschäden unterscheiden. Meine Erfahrung: Die richtige Versicherungssumme und ein ehrlicher Blick auf die Elementar-Klausel sind wichtiger als der monatliche Beitrag – genau das habe ich in diesem Artikel für dich aufbereitet."
 
@@ -20,6 +20,8 @@ cover:
   alt: "Einfamilienhaus bei Unwetter – Wohngebäudeversicherung als Schutz vor Sturm- und Wasserschäden"
   caption: "Tipp von FranksFinanzcheck"
 social_posted: true
+pin_title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
+pin_description: "*Werbung | Erfahre, wie du dein Haus 2026 optimal absicherst. Welche Versicherung wirklich zählt und wie sich der Schutz gegen Elementarschäden verändert hat. Mehr Spartipps auf FranksFinanzcheck! #hausversicherung #wohngebaeudeversicherung #elementarschutz"
 ---
 
 # Dein Haus sicher schützen: Das neue Vorsorge-Update 2026

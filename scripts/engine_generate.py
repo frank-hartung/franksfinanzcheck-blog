@@ -103,9 +103,49 @@ def now_utc_iso() -> str:
             - datetime.timedelta(minutes=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def save_article(title, desc, body, draft=False, inspiration=None, pillar=None):
-    """Speichert Artikel als Page-Bundle (Format wie bisherige Pipeline)."""
+def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
+                 keywords=None):
+    """Speichert Artikel als Page-Bundle (Format wie bisherige Pipeline).
+
+    Schreibt von Anfang an Pinterest-/Google-SEO-Felder (keywords, pin_*),
+    damit der Healer und die Pin-Engine sofort greifen.
+    """
     date = datetime.date.today().isoformat()
+    # Titel-Gate vor Speichern (Doppelpunkt-Konvention für Cover)
+    try:
+        from pinterest_seo_healer import (
+            ensure_colon_title, strip_ellipsis, keywords_from_title,
+            build_pin_title, build_pin_description, extend_description,
+        )
+        title = ensure_colon_title(strip_ellipsis(normalize_title(title)))
+        if len(title) > 60:
+            # SERP-Kappung ohne Ellipsis-Müll
+            if ":" in title:
+                head, tail = title.split(":", 1)
+                budget = 60 - len(head) - 2
+                tail = tail.strip()
+                if budget > 10:
+                    tcut = tail[:budget]
+                    sp = tcut.rfind(" ")
+                    if sp > 8:
+                        tcut = tcut[:sp]
+                    title = f"{head.strip()}: {tcut.strip()}"
+                else:
+                    title = head.strip()[:60]
+            else:
+                title = title[:60]
+        kws = keywords_from_title(title, keywords or [])
+        desc = extend_description(desc or "", kws, title)
+        pin_t = build_pin_title(title)
+        pin_d = build_pin_description(title, desc, kws, g.slugify(title))
+    except Exception as _seo_err:
+        print(f"  ⚠ SEO-Preflight übersprungen: {_seo_err}")
+        kws = list(keywords or [])[:5] or [title.split(":")[0].strip() or "Geld sparen"]
+        while len(kws) < 3:
+            kws.append("Geld sparen")
+        pin_t = title[:100]
+        pin_d = f"*Werbung | {(desc or title)[:350]} Mehr Spartipps auf FranksFinanzcheck!"
+
     slug = g.slugify(title)
     bundle_dir = os.path.join(g.POSTS_DIR, f"{date}-{slug}")
     if os.path.exists(bundle_dir):
@@ -128,16 +168,21 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None):
     if inspiration:
         insp_line = f"\ninspiration: {yaml_quote(inspiration)}\n"
     draft_line = "true" if draft else "false"
+    kw_yaml = "[" + ", ".join(f'"{k}"' for k in kws[:8]) + "]"
+    tag_yaml = "[" + ", ".join(f'"{k}"' for k in kws[:4]) + "]"
     frontmatter = (
         "---\n"
         f'title: {yaml_quote(title)}\n'
         f'description: {yaml_quote(desc)}\n'
         f"date: {now_utc_iso()}\n"
         f"draft: {draft_line}\n"
-        'tags: []\n'
+        f"tags: {tag_yaml}\n"
         'categories: ["Ratgeber"]\n'
-        'pillar: "' + (pillar or "konto-karten") + '"\n' 
+        'pillar: "' + (pillar or "konto-karten") + '"\n'
         "author: \"Frank\"\n"
+        f"keywords: {kw_yaml}\n"
+        f'pin_title: {yaml_quote(pin_t)}\n'
+        f'pin_description: {yaml_quote(pin_d)}\n'
         "ai_generated: true\n"
         f'ai_provider: "Content-Engine v2"\n'
         f"engine_level: \"{'draft' if draft else 'relaxed'}\"\n"
@@ -308,8 +353,11 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
         print("→ Ebene 3 (Draft-Rettung) …")
         title, desc, body = make_draft(topic, used_titles)
         try:
-            filename, slug = save_article(title, desc, body, draft=True,
-                                          inspiration=topic.get("title"), pillar=topic.get("pillar"))
+            filename, slug = save_article(
+                title, desc, body, draft=True,
+                inspiration=topic.get("title"), pillar=topic.get("pillar"),
+                keywords=keywords,
+            )
             used_titles.add(title.lower())  # Draft-Thema nicht doppelt ziehen
             draft_saved = True
             print(f"  ✓ Entwurf gesichert: {slug} (draft: true)")
@@ -321,8 +369,11 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
     if result and not draft_saved:
         title, desc, body = result
         try:
-            filename, slug = save_article(title, desc, body, draft=False,
-                                          inspiration=topic.get("title"), pillar=topic.get("pillar"))
+            filename, slug = save_article(
+                title, desc, body, draft=False,
+                inspiration=topic.get("title"), pillar=topic.get("pillar"),
+                keywords=keywords,
+            )
             print(f"  ✓ Artikel veröffentlicht ({level}): {slug}")
         except Exception as exc:  # noqa: BLE001
             print(f"  ✗ Speichern fehlgeschlagen: {exc}")
