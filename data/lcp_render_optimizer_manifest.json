@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "generatedBy": "scripts/lcp_render_optimizer.py",
+  "generatedAt": "2026-08-24T12:00:49+00:00",
+  "strategy": {
+    "neverRevealHideLcp": true,
+    "excludeLcpFromIntersectionReveal": true,
+    "defensiveCssGuard": true
+  },
+  "summary": {
+    "pages": 141,
+    "pagesWithLcpCandidate": 13,
+    "maxLcpCandidatesPerPage": 1
+  },
+  "codeGuards": {
+    "jsHasLcpCriticalFilter": true,
+    "cssHasLcpGuard": true
+  },
+  "worst": []
+}

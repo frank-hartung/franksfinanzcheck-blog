@@ -112,6 +112,15 @@
     });
   }
 
+
+  function isLcpCriticalElement(el) {
+    return !!(el && (
+      (el.matches && el.matches('[data-ff-lcp="candidate"], .lcp-card')) ||
+      (el.querySelector && el.querySelector('[data-ff-lcp="candidate"]')) ||
+      (el.closest && el.closest('[data-ff-lcp="candidate"], .lcp-card'))
+    ));
+  }
+
   function setupVanillaReveals() {
     if (prefersReducedMotion) return;
     var revealSelector = [
@@ -129,7 +138,10 @@
     ].join(',');
 
     var items = qsa(revealSelector).filter(function (el) {
-      return !el.closest('.home-info');
+      // Never hide the LCP candidate. Hiding above-the-fold images until an
+      // IntersectionObserver callback causes Lighthouse "render delay" even when
+      // the image resource has already loaded.
+      return !el.closest('.home-info') && !isLcpCriticalElement(el);
     });
 
     if (!('IntersectionObserver' in win)) {
