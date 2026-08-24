@@ -20,7 +20,6 @@ Deshalb wurden GSAP-Effekte als **progressive enhancement** eingebaut: Die Seite
 assets/css/extended/z-premium-blog.css
 static/premium/ff-premium.js
 static/premium/vendor/gsap.min.js
-static/premium/vendor/ScrollTrigger.min.js
 static/premium/vendor/README.md
 tools/update-gsap-vendor.sh
 ```
@@ -29,11 +28,11 @@ Außerdem wurde `layouts/_partials/extend_footer.html` erweitert, damit die Java
 
 ## Features
 
-### 1. GSAP + ScrollTrigger
+### 1. GSAP ohne ScrollTrigger-Reflow
 
-- Hero-Intro auf der Startseite.
-- Sanfte Scroll-Reveals für Artikelkarten und Artikelabschnitte.
-- Sehr dezente Parallax-/Zoom-Bewegung auf Coverbildern.
+- Hero-Intro auf der Startseite per GSAP-Timeline.
+- Sanfte Scroll-Reveals für Artikelkarten und Artikelabschnitte per IntersectionObserver.
+- Kein ScrollTrigger im Runtime-Pfad, damit Lighthouse keine erzwungenen Layout-/Reflow-Messungen aus ScrollTrigger meldet.
 - Animiertes Geld-Highlight, z. B. `1.800 €` im Startseiten-Hero.
 
 ### 2. Premium-Look
@@ -79,7 +78,6 @@ bash tools/update-gsap-vendor.sh 3.13.0
 assets/css/extended/z-premium-blog.css
 static/premium/ff-premium.js
 static/premium/vendor/gsap.min.js
-static/premium/vendor/ScrollTrigger.min.js
 static/premium/vendor/README.md
 tools/update-gsap-vendor.sh
 ```

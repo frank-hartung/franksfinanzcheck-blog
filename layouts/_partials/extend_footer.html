@@ -102,10 +102,10 @@
 })();
 </script>
 
-{{- /* ---------- Premium Blog Enhancements: GSAP + UX-Microinteractions ----------
+{{- /* ---------- Premium Blog Enhancements: GSAP + reflow-sichere UX-Microinteractions ----------
      First-party/self-hosted, kein Tracking, keine Cookies.
-     GSAP/ScrollTrigger werden nur für progressive Motion genutzt; ff-premium.js
-     fällt bei prefers-reduced-motion oder fehlendem GSAP sauber auf Vanilla zurück. */ -}}
+     GSAP animiert nur zeitbasierte Hero-Microinteractions; Scroll-Effekte laufen
+     bewusst über IntersectionObserver statt ScrollTrigger, damit Lighthouse keine
+     erzwungenen Layout-/Reflow-Messungen aus ScrollTrigger meldet. */ -}}
 <script defer src="{{ partial "asset_url.html" "premium/vendor/gsap.min.js" }}"></script>
-<script defer src="{{ partial "asset_url.html" "premium/vendor/ScrollTrigger.min.js" }}"></script>
 <script defer src="{{ partial "asset_url.html" "premium/ff-premium.js" }}"></script>

@@ -468,3 +468,15 @@ button:focus-visible {
     will-change: auto;
   }
 }
+
+/* LCP render-delay guard: never let reveal animations hide or transform the
+   above-the-fold LCP image/card before first paint. */
+.lcp-card,
+.lcp-card.ff-will-reveal,
+.lcp-card .ff-will-reveal,
+[data-ff-lcp="candidate"],
+[data-ff-lcp="candidate"].ff-will-reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  content-visibility: visible !important;
+}

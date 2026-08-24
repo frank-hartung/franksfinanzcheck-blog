@@ -1,5 +1,5 @@
 /* FranksFinanzcheck Premium Blog Enhancements
-   Dependencies: optional GSAP + ScrollTrigger. Without them this file falls back to vanilla IntersectionObserver.
+   Dependencies: optional GSAP. Scroll-based effects use IntersectionObserver to avoid ScrollTrigger forced reflows.
    Privacy: no tracking, no cookies, no external calls except browser-level same-origin prefetch on user intent.
 */
 (function () {
@@ -39,31 +39,45 @@
 
   function setupProgressBar() {
     var shell = doc.createElement('div');
+    var maxScroll = 1;
     shell.className = 'ff-progress-shell';
     shell.setAttribute('aria-hidden', 'true');
     shell.innerHTML = '<span class="ff-progress-bar"></span>';
     doc.body.appendChild(shell);
 
+    function measure() {
+      // Geometry read is batched outside the hot scroll path to avoid forced reflow.
+      maxScroll = Math.max(1, root.scrollHeight - win.innerHeight);
+    }
+
     function update() {
       var scrollTop = win.pageYOffset || root.scrollTop || 0;
-      var maxScroll = Math.max(1, root.scrollHeight - win.innerHeight);
       var progress = clamp(scrollTop / maxScroll, 0, 1);
       root.style.setProperty('--ff-scroll-progress', progress.toFixed(4));
       doc.body.classList.toggle('ff-scrolled', scrollTop > 10);
     }
 
+    measure();
     update();
     win.addEventListener('scroll', function () { requestTick(update); }, { passive: true });
-    win.addEventListener('resize', function () { requestTick(update); }, { passive: true });
+    win.addEventListener('resize', function () { requestTick(function () { measure(); update(); }); }, { passive: true });
+    win.addEventListener('load', function () { requestTick(function () { measure(); update(); }); }, { once: true, passive: true });
   }
 
   function setupCardPointerGlow() {
     qsa('.post-entry').forEach(function (card) {
+      var rect = null;
+      function measure() {
+        rect = card.getBoundingClientRect();
+      }
+      card.addEventListener('pointerenter', measure, { passive: true });
       card.addEventListener('pointermove', function (event) {
-        var rect = card.getBoundingClientRect();
+        // Use cached geometry; never measure layout in the pointermove hot path.
+        if (!rect) return;
         card.style.setProperty('--ff-card-x', (event.clientX - rect.left) + 'px');
         card.style.setProperty('--ff-card-y', (event.clientY - rect.top) + 'px');
       }, { passive: true });
+      card.addEventListener('pointerleave', function () { rect = null; }, { passive: true });
     });
   }
 
@@ -91,16 +105,20 @@
         value: target,
         duration: 1.25,
         ease: 'power2.out',
-        scrollTrigger: win.ScrollTrigger ? {
-          trigger: el,
-          start: 'top 88%',
-          once: true
-        } : undefined,
         onUpdate: function () {
           el.textContent = format.format(Math.round(state.value)) + ' ' + suffix;
         }
       });
     });
+  }
+
+
+  function isLcpCriticalElement(el) {
+    return !!(el && (
+      (el.matches && el.matches('[data-ff-lcp="candidate"], .lcp-card')) ||
+      (el.querySelector && el.querySelector('[data-ff-lcp="candidate"]')) ||
+      (el.closest && el.closest('[data-ff-lcp="candidate"], .lcp-card'))
+    ));
   }
 
   function setupVanillaReveals() {
@@ -120,7 +138,10 @@
     ].join(',');
 
     var items = qsa(revealSelector).filter(function (el) {
-      return !el.closest('.home-info');
+      // Never hide the LCP candidate. Hiding above-the-fold images until an
+      // IntersectionObserver callback causes Lighthouse "render delay" even when
+      // the image resource has already loaded.
+      return !el.closest('.home-info') && !isLcpCriticalElement(el);
     });
 
     if (!('IntersectionObserver' in win)) {
@@ -143,14 +164,16 @@
   }
 
   function setupGsapMotion() {
-    if (prefersReducedMotion || !win.gsap || !win.ScrollTrigger) {
+    // Forced-reflow optimizer: do not use ScrollTrigger for blog scroll effects.
+    // ScrollTrigger must measure layout for start/end positions; Lighthouse reports
+    // that work as forced reflow. IntersectionObserver gives the same editorial
+    // reveal feel without synchronous geometry reads.
+    if (prefersReducedMotion || !win.gsap) {
       setupVanillaReveals();
       return;
     }
 
     var gsap = win.gsap;
-    var ScrollTrigger = win.ScrollTrigger;
-    gsap.registerPlugin(ScrollTrigger);
     gsap.config({ nullTargetWarn: false });
 
     var heroItems = qsa('.home-info .entry-header h1, .home-info .entry-content p, .ff-home-ctas a, .ff-trust-row span');
@@ -160,49 +183,7 @@
         .to(heroItems, { autoAlpha: 1, y: 0, duration: 0.72, stagger: 0.06, clearProps: 'transform,opacity,visibility' });
     }
 
-    qsa('.post-entry').forEach(function (el, index) {
-      gsap.from(el, {
-        autoAlpha: 0,
-        y: 34,
-        duration: 0.78,
-        delay: Math.min(index * 0.025, 0.16),
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-          once: true
-        }
-      });
-    });
-
-    qsa('.post-content > p, .post-content > ul, .post-content > ol, .post-content > blockquote, .post-content > table, .post-content > h2, .post-content > h3').forEach(function (el) {
-      gsap.from(el, {
-        autoAlpha: 0,
-        y: 26,
-        duration: 0.66,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 90%',
-          once: true
-        }
-      });
-    });
-
-    qsa('.entry-cover img').forEach(function (img) {
-      gsap.to(img, {
-        yPercent: -3,
-        scale: 1.045,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: img,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true
-        }
-      });
-    });
-
+    setupVanillaReveals();
     animateMoneyWithGsap();
   }
 

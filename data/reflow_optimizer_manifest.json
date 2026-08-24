@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "generatedBy": "scripts/reflow_optimizer.py",
+  "generatedAt": "2026-08-24T11:48:39+00:00",
+  "budgets": {
+    "maxScrollTriggerScripts": 0,
+    "maxScrollTriggerUsages": 0,
+    "maxHotPathGeometryReads": 0
+  },
+  "strategy": {
+    "noScrollTriggerInRuntime": true,
+    "scrollReveals": "IntersectionObserver",
+    "heroMotion": "GSAP timeline only, no layout measuring plugin",
+    "geometryReads": "batch or cache outside scroll/pointermove hot paths"
+  },
+  "audits": [
+    {
+      "file": "static/premium/ff-premium.js",
+      "scrollTriggerUsages": 0,
+      "geometryReads": {
+        "offsetWidth": 0,
+        "offsetHeight": 0,
+        "offsetTop": 0,
+        "offsetLeft": 0,
+        "clientWidth": 0,
+        "clientHeight": 0,
+        "scrollWidth": 0,
+        "scrollHeight": 1,
+        "getBoundingClientRect": 1
+      },
+      "hotPathGeometryReads": 0
+    }
+  ],
+  "scrollTriggerScriptsInBuiltHtml": 0
+}
