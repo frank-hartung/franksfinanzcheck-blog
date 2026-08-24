@@ -42,9 +42,13 @@
     {{- $coverBase := strings.TrimSuffix (path.Ext $coverFile) $coverFile }}
     {{- $coverDir := path.Dir .Params.cover.image }}
     {{- $imgdl = partial "asset_url.html" .Params.cover.image }}
-    {{- /* Responsive srcset: 620px (Listen) + 720px (Singles) + 1000px Original.
-           Die Varianten liegen unter static/images/covers/{620,720}/ und werden
-           von generate_covers.py erzeugt. → spart Download (Lighthouse). */}}
+    {{- /* Responsive srcset: bewusst nur 620px + 720px.
+           Die 1000px-Originale bleiben als Fallback-/OG-Dateien erhalten,
+           werden aber NICHT mehr als Kandidat angeboten. Grund: Chrome wählt
+           auf HiDPI/Preload-Konstellationen sonst trotz 620px Layoutbreite
+           häufig die 1000px-Variante → Lighthouse "Bildübermittlung verbessern".
+           720px ist für Listen und Single-Cover im aktuellen Layout ausreichend
+           und spart pro Cover deutlich Downloadvolumen. */}}
     {{- $srcsetParts := slice }}
     {{- $webpParts := slice }}
     {{- $avifParts := slice }}
@@ -56,11 +60,6 @@
         {{- if os.FileExists (path.Join "static" $pWebp) }}{{ $webpParts = $webpParts | append (printf "%s %sw" (partial "asset_url.html" $pWebp) $w) }}{{ end -}}
         {{- if os.FileExists (path.Join "static" $pAvif) }}{{ $avifParts = $avifParts | append (printf "%s %sw" (partial "asset_url.html" $pAvif) $w) }}{{ end -}}
     {{- end }}
-    {{- $srcsetParts = $srcsetParts | append (printf "%s 1000w" (partial "asset_url.html" .Params.cover.image)) }}
-    {{- $pWebpFull := printf "%s/webp/%s.webp" $coverDir $coverBase -}}
-    {{- $pAvifFull := printf "%s/avif/%s.avif" $coverDir $coverBase -}}
-    {{- if os.FileExists (path.Join "static" $pWebpFull) }}{{ $webpParts = $webpParts | append (printf "%s 1000w" (partial "asset_url.html" $pWebpFull)) }}{{ end }}
-    {{- if os.FileExists (path.Join "static" $pAvifFull) }}{{ $avifParts = $avifParts | append (printf "%s 1000w" (partial "asset_url.html" $pAvifFull)) }}{{ end }}
     {{- $imgSrcset = delimit $srcsetParts ", " }}
     {{- $webpSrcset = delimit $webpParts ", " }}
     {{- $avifSrcset = delimit $avifParts ", " }}

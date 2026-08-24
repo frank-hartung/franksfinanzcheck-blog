@@ -112,7 +112,9 @@ def save_modern_variants(img, out_path, force=False):
     # AVIF (nur wenn verfügbar)
     if AVIF_OK:
         for w in (W, 620, 720):
-            store("avif", w, ".avif", {"format": "AVIF", "quality": 50, "speed": 6})
+            # Q45 ist bei den grafischen FranksFinanzcheck-Covern deutlich
+            # kleiner als PNG/JPEG/WebP und bleibt für Text-Cover scharf genug.
+            store("avif", w, ".avif", {"format": "AVIF", "quality": 45, "speed": 6})
 
     return made
 

@@ -9,7 +9,13 @@
             {{- if site.Title }}
             <a href="{{ "" | absLangURL }}" accesskey="h" title="{{ $label_text }} (Alt + H)"
                class="ff-brand" aria-label="FranksFinanzcheck – zur Startseite">
-                {{- readFile "static/images/brand/logo.svg" | safeHTML }}
+                {{- /* DOM-Optimierung: Logo nicht mehr inline als SVG-Pfade rendern.
+                     Das externe SVG reduziert DOM-Knoten, DOM-Tiefe und HTML-Gewicht;
+                     die Wortmarke bleibt weiterhin first-party und cache-busted. */ -}}
+                <picture class="ff-brand-logo" aria-hidden="true">
+                    <source media="(prefers-color-scheme: dark)" srcset="{{ partial "asset_url.html" "images/brand/logo-light.svg" }}">
+                    <img src="{{ partial "asset_url.html" "images/brand/logo.svg" }}" width="262" height="30" alt="" decoding="async">
+                </picture>
                 <span class="sr-only">FranksFinanzcheck</span>
             </a>
             {{- end }}

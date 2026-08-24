@@ -79,7 +79,9 @@
 {{- /* Das LCP-Element ist das Cover-Bild (eager+high). Ohne Preload wird es
        erst NACH CSS-Parsing+Layout entdeckt (Discovery ~40 ms) – Preload mit
        imagesrcset/imagesizes startet den Download PARALLEL zum HTML und der
-       Browser wählt exakt dieselbe Größe wie im <picture>. */ -}}
+       Browser wählt exakt dieselbe Größe wie im <picture>. Wichtig: kein
+       1000w-Kandidat im Preload, damit Chrome bei HiDPI nicht vorschnell die
+       übergroße Originaldatei lädt. */ -}}
 {{- $lcpCover := "" }}{{- $lcpDir := "" }}{{- $lcpBase := "" }}{{- $lcpSizes := "(min-width: 768px) 620px, 100vw" }}
 {{- $isList := or (eq .Kind "home") (eq .Kind "section") (eq .Kind "term") }}
 {{- /* Kein .Paginator im Head: der erste Zugriff sperrt die Seitenmenge.
@@ -107,7 +109,7 @@
 {{- end }}
 {{- if $lcpCover }}
 <link rel="preload" as="image" fetchpriority="high"
-  imagesrcset="{{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "620" $lcpBase) }} 620w, {{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "720" $lcpBase) }} 720w, {{ partial "asset_url.html" (printf "%s/avif/%s.avif" $lcpDir $lcpBase) }} 1000w"
+  imagesrcset="{{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "620" $lcpBase) }} 620w, {{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "720" $lcpBase) }} 720w"
   imagesizes="{{ $lcpSizes }}">
 {{- end }}
 
