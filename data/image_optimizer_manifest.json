@@ -1,0 +1,1488 @@
+{
+  "tool": "scripts/image_optimizer.py",
+  "profile": "covers",
+  "widths": [
+    360,
+    480,
+    620,
+    720
+  ],
+  "fullWidth": 1000,
+  "quality": {
+    "jpeg": 82,
+    "webp": 78,
+    "avif": 45
+  },
+  "images": [
+    {
+      "source": "static/images/covers/2026-08-10-dsl-wechselbonus-sichern.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-10-dsl-wechselbonus-sichern.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 18656
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-10-dsl-wechselbonus-sichern.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 10674
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-10-dsl-wechselbonus-sichern.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 6016
+        },
+        {
+          "path": "static/images/covers/480/2026-08-10-dsl-wechselbonus-sichern.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 27559
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-10-dsl-wechselbonus-sichern.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 14862
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-10-dsl-wechselbonus-sichern.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 8057
+        },
+        {
+          "path": "static/images/covers/620/2026-08-10-dsl-wechselbonus-sichern.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 38701
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-10-dsl-wechselbonus-sichern.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 18998
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-10-dsl-wechselbonus-sichern.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 9772
+        },
+        {
+          "path": "static/images/covers/720/2026-08-10-dsl-wechselbonus-sichern.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 48315
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-10-dsl-wechselbonus-sichern.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 21972
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-10-dsl-wechselbonus-sichern.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 11713
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-10-dsl-wechselbonus-sichern.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 31294
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-10-dsl-wechselbonus-sichern.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 14883
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 15984
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 9134
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5306
+        },
+        {
+          "path": "static/images/covers/480/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 23878
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 12856
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 6756
+        },
+        {
+          "path": "static/images/covers/620/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 33414
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 16754
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 8724
+        },
+        {
+          "path": "static/images/covers/720/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 42069
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 19382
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 9930
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 26990
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 12293
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 16713
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 9574
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5448
+        },
+        {
+          "path": "static/images/covers/480/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 25022
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 13484
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 6976
+        },
+        {
+          "path": "static/images/covers/620/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 35335
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 17658
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 9102
+        },
+        {
+          "path": "static/images/covers/720/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 44027
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 20440
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 10434
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 28584
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 13273
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 16414
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 9502
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5565
+        },
+        {
+          "path": "static/images/covers/480/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 25157
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 13556
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 7091
+        },
+        {
+          "path": "static/images/covers/620/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 35022
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 17768
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 9082
+        },
+        {
+          "path": "static/images/covers/720/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 43695
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 20486
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 10449
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 28646
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 13190
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 15967
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 9048
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5088
+        },
+        {
+          "path": "static/images/covers/480/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 24158
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 12984
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 6743
+        },
+        {
+          "path": "static/images/covers/620/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 33705
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 16770
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 8475
+        },
+        {
+          "path": "static/images/covers/720/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 42185
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 19428
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 9782
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 27198
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 12194
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 16789
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 9622
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5526
+        },
+        {
+          "path": "static/images/covers/480/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 25267
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 13650
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 7113
+        },
+        {
+          "path": "static/images/covers/620/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 35263
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 17646
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 9137
+        },
+        {
+          "path": "static/images/covers/720/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 43833
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 20594
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 10395
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 28560
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 12869
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 16879
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 9826
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5611
+        },
+        {
+          "path": "static/images/covers/480/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 25785
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 13834
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 7167
+        },
+        {
+          "path": "static/images/covers/620/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 36052
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 18102
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 9201
+        },
+        {
+          "path": "static/images/covers/720/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 44606
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 20708
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 10323
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 29318
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 13316
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 18250
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 10440
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5854
+        },
+        {
+          "path": "static/images/covers/480/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 26555
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 14430
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 7612
+        },
+        {
+          "path": "static/images/covers/620/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 37322
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 18604
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 9392
+        },
+        {
+          "path": "static/images/covers/720/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 47059
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 21526
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 11242
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 29986
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 14283
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 15357
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 8712
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5243
+        },
+        {
+          "path": "static/images/covers/480/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 22475
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 12020
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 6304
+        },
+        {
+          "path": "static/images/covers/620/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 31331
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 15426
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 8072
+        },
+        {
+          "path": "static/images/covers/720/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 39759
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 18760
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 9499
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 26068
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 11662
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 16433
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 9298
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5377
+        },
+        {
+          "path": "static/images/covers/480/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 24533
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 13302
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 6835
+        },
+        {
+          "path": "static/images/covers/620/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 34193
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 17224
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 8966
+        },
+        {
+          "path": "static/images/covers/720/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 43019
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 19750
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 10169
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 27760
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 12460
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 16034
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 9420
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5334
+        },
+        {
+          "path": "static/images/covers/480/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 23072
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 12922
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 7306
+        },
+        {
+          "path": "static/images/covers/620/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 31978
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 17158
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 9908
+        },
+        {
+          "path": "static/images/covers/720/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 40436
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 19048
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 10488
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 26850
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 16501
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 15117
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 8772
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5010
+        },
+        {
+          "path": "static/images/covers/480/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 22050
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 12406
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 6980
+        },
+        {
+          "path": "static/images/covers/620/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 30302
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 16414
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 9388
+        },
+        {
+          "path": "static/images/covers/720/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 38274
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 18396
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 9781
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 25764
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 15961
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 16443
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 9130
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5362
+        },
+        {
+          "path": "static/images/covers/480/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 24350
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 12976
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 6674
+        },
+        {
+          "path": "static/images/covers/620/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 34155
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 16768
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 8463
+        },
+        {
+          "path": "static/images/covers/720/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 42694
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 19424
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 9814
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 26768
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 12309
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 18027
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 10290
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5799
+        },
+        {
+          "path": "static/images/covers/480/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 26466
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 14250
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 7641
+        },
+        {
+          "path": "static/images/covers/620/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 37009
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 18336
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 9473
+        },
+        {
+          "path": "static/images/covers/720/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 46389
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 21274
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 11449
+        },
+        {
+          "path": "static/images/covers/webp/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 29746
+        },
+        {
+          "path": "static/images/covers/avif/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 14371
+        }
+      ]
+    }
+  ]
+}

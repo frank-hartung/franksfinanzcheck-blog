@@ -11,8 +11,22 @@
              „LCP nicht bewertet") und das Bild früh lädt.
            - Alle weiteren Listen-Covers: lazy (unterhalb des Folds). */}}
     {{- $fetchPriority := "" }}
-    {{- if $.IsSingle }}{{ $fetchPriority = "high" }}{{ end }}
-    {{- if $.IsFirst }}{{ $loading = "eager" }}{{ $fetchPriority = "high" }}{{ end }}
+    {{- $isLcpCandidate := false }}
+    {{- if $.IsSingle }}{{ $fetchPriority = "high" }}{{ $isLcpCandidate = true }}{{ end }}
+    {{- if $.IsFirst }}{{ $loading = "eager" }}{{ $fetchPriority = "high" }}{{ $isLcpCandidate = true }}{{ end }}
+    {{- if $.IsSingle }}
+      {{- $lcpManifest := dict -}}
+      {{- if os.FileExists "data/lcp_images.json" -}}{{- $lcpManifest = (readFile "data/lcp_images.json" | transform.Unmarshal) -}}{{- end -}}
+      {{- with $lcpManifest.pages }}
+        {{- with index . $.cxt.RelPermalink }}
+          {{- if eq .image $.cxt.Params.cover.image }}
+            {{- $loading = "eager" }}{{- $fetchPriority = "high" }}{{- $isLcpCandidate = true -}}
+          {{- end }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+    {{- if not $fetchPriority }}{{ $fetchPriority = "low" }}{{ end }}
+    {{- $fcpImageRole := cond $isLcpCandidate "lcp" "deferred" }}
     {{- $addLink := (and site.Params.cover.linkFullImages $.IsSingle) }}
     {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) }}
     {{- $alt := (.Params.cover.alt | default .Params.cover.caption | plainify) }}
@@ -42,13 +56,16 @@
     {{- $coverBase := strings.TrimSuffix (path.Ext $coverFile) $coverFile }}
     {{- $coverDir := path.Dir .Params.cover.image }}
     {{- $imgdl = partial "asset_url.html" .Params.cover.image }}
-    {{- /* Responsive srcset: 620px (Listen) + 720px (Singles) + 1000px Original.
-           Die Varianten liegen unter static/images/covers/{620,720}/ und werden
-           von generate_covers.py erzeugt. → spart Download (Lighthouse). */}}
+    {{- /* Responsive srcset: Mobile 360/480, Desktop 620/720.
+           Die 1000px-Originale bleiben als Fallback-/OG-Dateien erhalten,
+           werden aber NICHT mehr als Kandidat angeboten. Grund: Chrome wählt
+           auf HiDPI/Preload-Konstellationen sonst trotz kleiner Layoutbreite
+           häufig die 1000px-Variante → Lighthouse "Bildübermittlung verbessern".
+           Die Varianten erzeugt scripts/image_optimizer.py automatisch. */}}
     {{- $srcsetParts := slice }}
     {{- $webpParts := slice }}
     {{- $avifParts := slice }}
-    {{- range $w := slice "620" "720" }}
+    {{- range $w := slice "360" "480" "620" "720" }}
         {{- $pJpg := printf "%s/%s/%s" $coverDir $w $coverFile -}}
         {{- $pWebp := printf "%s/webp/%s/%s.webp" $coverDir $w $coverBase -}}
         {{- $pAvif := printf "%s/avif/%s/%s.avif" $coverDir $w $coverBase -}}
@@ -56,11 +73,6 @@
         {{- if os.FileExists (path.Join "static" $pWebp) }}{{ $webpParts = $webpParts | append (printf "%s %sw" (partial "asset_url.html" $pWebp) $w) }}{{ end -}}
         {{- if os.FileExists (path.Join "static" $pAvif) }}{{ $avifParts = $avifParts | append (printf "%s %sw" (partial "asset_url.html" $pAvif) $w) }}{{ end -}}
     {{- end }}
-    {{- $srcsetParts = $srcsetParts | append (printf "%s 1000w" (partial "asset_url.html" .Params.cover.image)) }}
-    {{- $pWebpFull := printf "%s/webp/%s.webp" $coverDir $coverBase -}}
-    {{- $pAvifFull := printf "%s/avif/%s.avif" $coverDir $coverBase -}}
-    {{- if os.FileExists (path.Join "static" $pWebpFull) }}{{ $webpParts = $webpParts | append (printf "%s 1000w" (partial "asset_url.html" $pWebpFull)) }}{{ end }}
-    {{- if os.FileExists (path.Join "static" $pAvifFull) }}{{ $avifParts = $avifParts | append (printf "%s 1000w" (partial "asset_url.html" $pAvifFull)) }}{{ end }}
     {{- $imgSrcset = delimit $srcsetParts ", " }}
     {{- $webpSrcset = delimit $webpParts ", " }}
     {{- $avifSrcset = delimit $avifParts ", " }}
@@ -85,14 +97,14 @@
 
     {{- /* <picture> mit Format-Kaskade: AVIF → WebP → JPEG (Fallback).
            Browser wählt das kleinste unterstützte Format; das srcset
-           liefert zusätzlich die passende Größe (620/720/1000px). */}}
+           liefert zusätzlich die passende Größe (360/480/620/720px). */}}
     <picture>
     {{- if $avifSrcset }}<source type="image/avif" srcset="{{ $avifSrcset }}" sizes="{{ $imgSizes }}">{{- end }}
     {{- if $webpSrcset }}<source type="image/webp" srcset="{{ $webpSrcset }}" sizes="{{ $imgSizes }}">{{- end }}
     {{- if $cover -}}
         {{/* i.e it is present in page bundle */}}
         {{- if (and (in $processableFormats $cover.MediaType.SubType) ($responsiveImages) (eq $prod true)) }}
-            <img loading="{{$loading}}" decoding="async"
+            <img loading="{{$loading}}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" data-ff-fcp-image="{{ $fcpImageRole }}"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }}
                 srcset='{{- range $size := $sizes -}}
                             {{- if (ge $cover.Width $size) }}
                                 {{- printf "%s %s" (($cover.Resize (printf "%sx" $size)).Permalink) (printf "%sw," $size) }}
@@ -104,11 +116,11 @@
                 width="{{ $cover.Width }}" height="{{ $cover.Height }}"
                 alt="{{ $alt }}">
         {{- else }}{{/* Unprocessable image or responsive images disabled */}}
-            <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
+            <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" data-ff-fcp-image="{{ $fcpImageRole }}"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }} src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
         {{- end }}
     {{- else }}
         {{- /* For absolute urls and external links, no img processing here */}}
-        <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
+        <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" data-ff-fcp-image="{{ $fcpImageRole }}"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }} src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
     {{- end }}
     </picture>
 

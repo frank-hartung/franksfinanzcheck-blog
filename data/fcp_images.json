@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "generatedBy": "scripts/fcp_image_optimizer.py",
+  "generatedAt": "2026-08-24T10:57:52+00:00",
+  "strategy": {
+    "goal": "Bildrequests dürfen FCP nicht verzögern und nicht mit dem LCP-Cover konkurrieren.",
+    "maxHighPriorityImagesPerPage": 1,
+    "requireDimensions": true,
+    "requireAsyncDecoding": true,
+    "deferNonCriticalImages": true
+  },
+  "inputs": {
+    "lcpManifestPages": 14,
+    "imageManifestSources": 14
+  },
+  "policies": [
+    {
+      "role": "logo",
+      "selector": "img[data-ff-fcp-image=\"logo\"]",
+      "loading": "eager",
+      "decoding": "async",
+      "fetchpriority": "low",
+      "reason": "kleines Logo darf FCP nicht mit LCP-Bild konkurrieren"
+    },
+    {
+      "role": "lcp",
+      "selector": "img[data-ff-lcp=\"candidate\"]",
+      "loading": "eager",
+      "decoding": "async",
+      "fetchpriority": "high",
+      "reason": "nur der echte Above-the-fold-Bildkandidat bekommt hohe Priorität"
+    },
+    {
+      "role": "deferred",
+      "selector": "img[data-ff-fcp-image=\"deferred\"]",
+      "loading": "lazy",
+      "decoding": "async",
+      "fetchpriority": "low",
+      "reason": "Nicht-kritische Bilder nach FCP/LCP verschieben"
+    }
+  ]
+}

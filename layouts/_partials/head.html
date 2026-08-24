@@ -75,41 +75,62 @@
 
 {{- /* bundle all required css */}}
 {{- /* Add extended css after theme style */ -}}
-{{- /* ---------- Kritischer Pfad: LCP-Cover-Preload ---------- */ -}}
-{{- /* Das LCP-Element ist das Cover-Bild (eager+high). Ohne Preload wird es
-       erst NACH CSS-Parsing+Layout entdeckt (Discovery ~40 ms) – Preload mit
-       imagesrcset/imagesizes startet den Download PARALLEL zum HTML und der
-       Browser wählt exakt dieselbe Größe wie im <picture>. */ -}}
+{{- /* ---------- Kritischer Pfad: automatischer LCP-Bild-Preload ---------- */ -}}
+{{- /* scripts/lcp_image_optimizer.py schreibt data/lcp_images.json. Das Manifest
+       bestimmt pro Seite den wahrscheinlich größten Above-the-fold-Bildkandidaten
+       und hält Preload, sizes und srcset synchron mit cover.html. Fallback:
+       deterministische Hugo-Erkennung, falls das Manifest lokal fehlt. */ -}}
 {{- $lcpCover := "" }}{{- $lcpDir := "" }}{{- $lcpBase := "" }}{{- $lcpSizes := "(min-width: 768px) 620px, 100vw" }}
-{{- $isList := or (eq .Kind "home") (eq .Kind "section") (eq .Kind "term") }}
-{{- /* Kein .Paginator im Head: der erste Zugriff sperrt die Seitenmenge.
-       Sonst ignoriert list.html das gefilterte .Paginate (nur Posts) –
-       Startseite mischt Impressum/Über-mich ein und /posts/page/N/ gerät
-       aus dem Tritt. LCP-Cover kommt aus derselben Menge wie die Liste. */}}
-{{- $isPagerPage := findRE `/page/\d+/?$` .RelPermalink }}
-{{- if and $isList (not $isPagerPage) }}
-  {{- $lcpPages := .RegularPages }}
-  {{- if .IsHome }}
-    {{- $lcpPages = where site.RegularPages "Section" "eq" "posts" }}
-    {{- $lcpPages = where $lcpPages "Params.hiddenInHomeList" "!=" "true" }}
-  {{- end }}
-  {{- if gt (len $lcpPages) 0 }}
-  {{- with index $lcpPages 0 }}
-    {{- with .Params.cover.image }}
-      {{- $lcpCover = . }}{{- $lcpDir = path.Dir . }}{{- $lcpBase = strings.TrimSuffix (path.Ext (path.Base .)) (path.Base .) }}
-    {{- end }}
-  {{- end }}
-  {{- end }}
-{{- else if and .Params.cover.image (eq .Kind "page") }}
-  {{- $lcpCover = .Params.cover.image }}{{- $lcpDir = path.Dir .Params.cover.image }}
-  {{- $lcpBase = strings.TrimSuffix (path.Ext (path.Base .Params.cover.image)) (path.Base .Params.cover.image) }}
-  {{- $lcpSizes = "(min-width: 768px) 720px, 100vw" }}
-{{- end }}
-{{- if $lcpCover }}
-<link rel="preload" as="image" fetchpriority="high"
-  imagesrcset="{{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "620" $lcpBase) }} 620w, {{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "720" $lcpBase) }} 720w, {{ partial "asset_url.html" (printf "%s/avif/%s.avif" $lcpDir $lcpBase) }} 1000w"
+{{- $lcpWidths := slice "360" "480" "620" "720" -}}
+{{- $pageKey := .RelPermalink -}}
+{{- $lcpManifest := dict -}}
+{{- if os.FileExists "data/lcp_images.json" -}}{{- $lcpManifest = (readFile "data/lcp_images.json" | transform.Unmarshal) -}}{{- end -}}
+{{- with $lcpManifest.pages -}}
+    {{- with index . $pageKey -}}
+      {{- with .image }}{{- $lcpCover = . -}}{{- end -}}
+      {{- with .sizes }}{{- $lcpSizes = . -}}{{- end -}}
+      {{- with .widths }}{{- $lcpWidths = . -}}{{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- if not $lcpCover -}}
+  {{- $isList := or (eq .Kind "home") (eq .Kind "section") (eq .Kind "term") -}}
+  {{- $isPagerPage := findRE `/page/\d+/?$` .RelPermalink -}}
+  {{- if and $isList (not $isPagerPage) -}}
+    {{- $lcpPages := .RegularPages -}}
+    {{- if .IsHome -}}
+      {{- $lcpPages = where site.RegularPages "Section" "eq" "posts" -}}
+      {{- $lcpPages = where $lcpPages "Params.hiddenInHomeList" "!=" "true" -}}
+    {{- end -}}
+    {{- if gt (len $lcpPages) 0 -}}
+      {{- with index $lcpPages 0 -}}
+        {{- with .Params.cover.image }}{{- $lcpCover = . -}}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else if and .Params.cover.image (eq .Kind "page") -}}
+    {{- $lcpCover = .Params.cover.image -}}
+    {{- $lcpSizes = "(min-width: 768px) 720px, 100vw" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $lcpCover -}}
+{{- $lcpDir = path.Dir $lcpCover -}}
+{{- $lcpBase = strings.TrimSuffix (path.Ext (path.Base $lcpCover)) (path.Base $lcpCover) -}}
+{{- $lcpSrcset := slice -}}
+{{- range $w := $lcpWidths -}}
+  {{- $ws := printf "%v" $w -}}
+  {{- $candidate := printf "%s/avif/%s/%s.avif" $lcpDir $ws $lcpBase -}}
+  {{- if os.FileExists (path.Join "static" $candidate) -}}
+    {{- $lcpSrcset = $lcpSrcset | append (printf "%s %sw" (partial "asset_url.html" $candidate) $ws) -}}
+  {{- end -}}
+{{- end -}}
+{{- if gt (len $lcpSrcset) 0 -}}
+{{- $lcpSrcsetAttr := delimit $lcpSrcset ", " -}}
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" data-ff-lcp-optimizer="true"
+  {{ printf "imagesrcset=%q" $lcpSrcsetAttr | safeHTMLAttr }}
   imagesizes="{{ $lcpSizes }}">
-{{- end }}
+{{- end -}}
+{{- end -}}
 
 {{- /* ---------- Kritischer Pfad: preload für Fonts ---------- */ -}}
 {{- /* Die Fonts hängen sonst NACH dem CSS im kritischen Pfad

@@ -75,46 +75,18 @@ except ImportError:
 
 
 def save_modern_variants(img, out_path, force=False):
-    """Speichert WebP- und AVIF-Varianten (1000/620/720px) für ein Cover.
+    """Erzeugt responsive JPEG/WebP/AVIF-Varianten über das zentrale
+    Profi-Tool scripts/image_optimizer.py.
 
-    Struktur:
-        webp/<name>.webp          avif/<name>.avif          (1000px)
-        webp/620/<name>.webp      avif/620/<name>.avif      (620px)
-        webp/720/<name>.webp      avif/720/<name>.avif      (720px)
-
-    AVIF ~50 % kleiner als WebP, WebP ~30-50 % kleiner als JPEG –
-    so liefert <picture> jedem Browser das kleinste passende Format.
-
-    force=True (Einzel-Slug-Neugenerierung): existierende Varianten werden
-    überschrieben – sonst zeigten sie nach einer Titel-Änderung weiter den
-    ALTEN Cover-Text (stille Inkonsistenz, gefunden beim Riester-Cover).
+    Damit haben Cover-Generierung, CI-Checks und Theme-Templates exakt dieselbe
+    Breiten-/Qualitätslogik für Mobile und Desktop.
     """
-    W, H = img.size
-    base = os.path.dirname(out_path)
-    name = os.path.basename(out_path)
-    made = []
-
-    def store(fmt_dir, w, ext, save_kwargs):
-        d = os.path.join(base, fmt_dir, str(w) if w != W else "")
-        os.makedirs(d, exist_ok=True)
-        vpath = os.path.join(d, os.path.splitext(name)[0] + ext)
-        if os.path.exists(vpath) and not force:
-            return  # bereits vorhanden – nicht neu encodieren
-        v = img if w == W else img.resize((w, int(H * w / W)), Image.LANCZOS)
-        v.save(vpath, **save_kwargs)
-        made.append(os.path.relpath(vpath, base))
-
-    # WebP (immer)
-    store("webp", W, ".webp", {"format": "WEBP", "quality": 80, "method": 6})
-    store("webp", 620, ".webp", {"format": "WEBP", "quality": 80, "method": 6})
-    store("webp", 720, ".webp", {"format": "WEBP", "quality": 80, "method": 6})
-
-    # AVIF (nur wenn verfügbar)
-    if AVIF_OK:
-        for w in (W, 620, 720):
-            store("avif", w, ".avif", {"format": "AVIF", "quality": 50, "speed": 6})
-
-    return made
+    try:
+        from image_optimizer import optimize_cover_image
+    except Exception as exc:
+        print(f"WARNUNG: image_optimizer konnte nicht geladen werden: {exc}")
+        return []
+    return optimize_cover_image(out_path, image=img, force=force)
 
 
 def load_font(size):
@@ -307,23 +279,10 @@ def make_cover(title, slug, out_path, force=False):
     img.save(out_path, "JPEG", quality=88)
     print(f"  ✓ Cover: {os.path.basename(out_path)}")
 
-    # --- Responsive Varianten (srcset): 620px und 720px Breite ---
-    # Die Covers werden in Listen (620px) und Single-Seiten (720px) angezeigt.
-    # Ohne kleinere Varianten lädt der Browser immer das 1000px-Original →
-    # Lighthouse "Properly size images". Die Varianten werden first-party von
-    # GitHub Pages ausgeliefert (Cache-Busting via ?v=<SHA> in asset_url.html).
-    for variant_w in (620, 720):
-        scale = variant_w / W
-        vh = int(H * scale)
-        v = img.resize((variant_w, vh), Image.LANCZOS)
-        vdir = os.path.join(os.path.dirname(out_path), str(variant_w))
-        os.makedirs(vdir, exist_ok=True)
-        v.save(os.path.join(vdir, os.path.basename(out_path)), "JPEG", quality=82, optimize=True)
-    print(f"  ✓ Responsive: 620px + 720px für {os.path.basename(out_path)}")
-
-    # Moderne Formate (WebP + AVIF) für alle Größen
+    # Responsive Varianten + moderne Formate über das zentrale Profi-Tool.
+    # Mobile: 360/480, Desktop: 620/720, Full-Fallback: 1000 WebP/AVIF.
     modern = save_modern_variants(img, out_path, force=force)
-    print(f"  ✓ Modern: {len(modern)} WebP/AVIF-Varianten für {os.path.basename(out_path)}")
+    print(f"  ✓ Responsive/Modern: {len(modern)} Varianten für {os.path.basename(out_path)}")
 
 
 def ensure_cover_in_frontmatter(md_path, slug):
@@ -349,37 +308,17 @@ def ensure_cover_in_frontmatter(md_path, slug):
 
 
 def ensure_responsive_variants(out_path, force=False):
-    """Erzeugt 620px-/720px-JPEGs und WebP/AVIF-Varianten für ein bestehendes
+    """Erzeugt Mobile-/Desktop-JPEGs und WebP/AVIF-Varianten für ein bestehendes
     Cover. Ohne force nur falls fehlend (Nachzieh-Funktion); mit force werden
     ALLE Varianten neu aus der (ggf. neu generierten) JPG erzeugt – wichtig,
     wenn sich die Cover-Generierung (z. B. Titel-Umbruch) geändert hat."""
     if not os.path.exists(out_path):
         return False
-    img = Image.open(out_path)
-    W, H = img.size
-    made = False
-    # JPEG 620/720
-    for variant_w in (620, 720):
-        vpath = os.path.join(os.path.dirname(out_path), str(variant_w), os.path.basename(out_path))
-        if force or not os.path.exists(vpath):
-            scale = variant_w / W
-            vh = int(H * scale)
-            v = img.resize((variant_w, vh), Image.LANCZOS)
-            os.makedirs(os.path.dirname(vpath), exist_ok=True)
-            v.save(vpath, "JPEG", quality=82, optimize=True)
-            made = True
-    # WebP/AVIF (mit force: alte Dateien entfernen, damit neu erzeugt wird)
-    if force:
-        base = os.path.splitext(os.path.basename(out_path))[0]
-        for sub in ("webp", "avif"):
-            for f in glob.glob(os.path.join(os.path.dirname(out_path), sub, "**", "*"),
-                               recursive=True):
-                if os.path.isfile(f) and os.path.basename(f).startswith(base):
-                    os.remove(f)
+    img = Image.open(out_path).convert("RGB")
     modern = save_modern_variants(img, out_path, force=force)
-    if modern:
-        made = True
-    return made
+    return bool(modern)
+
+
 def main():
     force = "--force" in sys.argv  # alle Covers neu generieren (neue Umbruch-Regel)
     only_slug = None
@@ -412,6 +351,19 @@ def main():
             # Einzel-Lauf/Force: Manifest immer aktualisieren; Gesamtlauf:
             # fehlende Einträge nachtragen (Stale-Erkennung lückenlos).
             manifest_set(slug, title)
+    try:
+        from lcp_image_optimizer import build_manifest as build_lcp_manifest, write_manifest as write_lcp_manifest
+        write_lcp_manifest(build_lcp_manifest())
+        print("  ✓ LCP-Manifest aktualisiert (data/lcp_images.json)")
+    except Exception as exc:
+        print(f"WARNUNG: LCP-Manifest konnte nicht aktualisiert werden: {exc}")
+    try:
+        from fcp_image_optimizer import build_manifest as build_fcp_manifest, write_manifest as write_fcp_manifest
+        write_fcp_manifest(build_fcp_manifest())
+        print("  ✓ FCP-Manifest aktualisiert (data/fcp_images.json)")
+    except Exception as exc:
+        print(f"WARNUNG: FCP-Manifest konnte nicht aktualisiert werden: {exc}")
+
     print(f"\nFertig: {covers} Cover erstellt, {frontmatter} Frontmatter ergänzt, "
           f"{variants} responsive Varianten nachgezogen "
           f"(von {len(files)} Artikeln).")

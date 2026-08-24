@@ -1,11 +1,11 @@
 """Cover-Validierung (vollautomatisch, Top-Level) für FranksFinanzcheck.
 
 Prüft für JEDEN Post/Pillar mit cover-Feld, dass ALLE Cover-Varianten
-existieren:
+existieren und die Modern-Formate echte Dateien im passenden Format sind:
   - Original (static/images/covers/<datei>)
-  - 620/, 720/ (JPEG-Varianten)
+  - 360/, 480/, 620/, 720/ (JPEG-Varianten)
   - avif/, webp/ (Original-Formate)
-  - avif/620/, avif/720/, webp/620/, webp/720/ (responsive Varianten)
+  - avif/360/, avif/480/, avif/620/, avif/720/ sowie WebP-Pendants
 
 Hintergrund: Beim Umbenennen eines Posts (z. B. Datumskorrektur) wurden
 bisher nur die Original-JPGs mitbenannt – AVIF/WebP-Varianten fehlten
@@ -30,14 +30,21 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_DIR = os.path.join(BLOG_DIR, "static", "images", "covers")
 
 # Varianten-Unterordner, die für jede Cover-Datei existieren müssen
-VARIANTS = ["620", "720", "avif", "webp", "avif/620", "avif/720", "webp/620", "webp/720"]
+VARIANTS = [
+    "360", "480", "620", "720",
+    "avif", "webp",
+    "avif/360", "avif/480", "avif/620", "avif/720",
+    "webp/360", "webp/480", "webp/620", "webp/720",
+]
 
 
 def collect_covers():
     """Alle cover.image-Pfade aus Posts + Pillar-Seiten."""
     covers = []
-    for pattern in ["content/posts/*/index.md", "content/pillar/*/index.md"]:
+    for pattern in ["content/posts/*.md", "content/posts/*/index.md", "content/pillar/*/index.md"]:
         for f in glob.glob(os.path.join(BLOG_DIR, pattern)):
+            if os.path.basename(f) == "_index.md":
+                continue
             content = open(f, encoding="utf-8").read()
             m = re.search(r'^cover:\s*\n\s*image:\s*"?([^"\n]+)"?', content, re.M)
             if m:
@@ -140,6 +147,27 @@ def check_brand(covers):
     return out
 
 
+def looks_like_avif(path):
+    """True, wenn die Datei wirklich ein AVIF/ISO-BMFF-Container ist.
+
+    Regression-Guard: Es gab .avif-Dateien, die in Wahrheit PNG/JPEG waren.
+    Browser/Lighthouse sahen dadurch große Ressourcen trotz AVIF-Endung.
+    """
+    try:
+        head = open(path, "rb").read(32)
+    except Exception:
+        return False
+    return b"ftyp" in head[:16] and (b"avif" in head[:32] or b"avis" in head[:32])
+
+
+def looks_like_webp(path):
+    try:
+        head = open(path, "rb").read(16)
+    except Exception:
+        return False
+    return head.startswith(b"RIFF") and b"WEBP" in head[:16]
+
+
 def check(covers):
     problems = []
     for c in covers:
@@ -152,22 +180,26 @@ def check(covers):
             continue
         missing = []
         for v in VARIANTS:
-            # Varianten: 620/<base>.jpg, avif/<stem>.avif, avif/620/<stem>.avif, ...
+            # Varianten: 360/<base>.jpg, avif/<stem>.avif, avif/360/<stem>.avif, ...
             if "/" in v:
                 sub, w = v.split("/")
-                if sub in ("620", "720"):
+                if sub in ("360", "480", "620", "720"):
                     p = os.path.join(STATIC_DIR, sub, base)
                 else:  # avif/620, avif/720, webp/620, webp/720
                     ext = "avif" if sub == "avif" else "webp"
                     p = os.path.join(STATIC_DIR, sub, w, f"{stem}.{ext}")
             else:
-                if v in ("620", "720"):
+                if v in ("360", "480", "620", "720"):
                     p = os.path.join(STATIC_DIR, v, base)
                 else:
                     ext = "avif" if v == "avif" else "webp"
                     p = os.path.join(STATIC_DIR, v, f"{stem}.{ext}")
             if not os.path.exists(p):
                 missing.append(v)
+            elif v.startswith("avif") and not looks_like_avif(p):
+                missing.append(f"{v}:BAD_FORMAT")
+            elif v.startswith("webp") and not looks_like_webp(p):
+                missing.append(f"{v}:BAD_FORMAT")
         if missing:
             problems.append({"file": c["file"], "image": img, "missing": missing})
     return problems
