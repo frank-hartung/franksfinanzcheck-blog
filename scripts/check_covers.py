@@ -3,9 +3,9 @@
 Prüft für JEDEN Post/Pillar mit cover-Feld, dass ALLE Cover-Varianten
 existieren und die Modern-Formate echte Dateien im passenden Format sind:
   - Original (static/images/covers/<datei>)
-  - 620/, 720/ (JPEG-Varianten)
+  - 360/, 480/, 620/, 720/ (JPEG-Varianten)
   - avif/, webp/ (Original-Formate)
-  - avif/620/, avif/720/, webp/620/, webp/720/ (responsive Varianten)
+  - avif/360/, avif/480/, avif/620/, avif/720/ sowie WebP-Pendants
 
 Hintergrund: Beim Umbenennen eines Posts (z. B. Datumskorrektur) wurden
 bisher nur die Original-JPGs mitbenannt – AVIF/WebP-Varianten fehlten
@@ -30,7 +30,12 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_DIR = os.path.join(BLOG_DIR, "static", "images", "covers")
 
 # Varianten-Unterordner, die für jede Cover-Datei existieren müssen
-VARIANTS = ["620", "720", "avif", "webp", "avif/620", "avif/720", "webp/620", "webp/720"]
+VARIANTS = [
+    "360", "480", "620", "720",
+    "avif", "webp",
+    "avif/360", "avif/480", "avif/620", "avif/720",
+    "webp/360", "webp/480", "webp/620", "webp/720",
+]
 
 
 def collect_covers():
@@ -175,16 +180,16 @@ def check(covers):
             continue
         missing = []
         for v in VARIANTS:
-            # Varianten: 620/<base>.jpg, avif/<stem>.avif, avif/620/<stem>.avif, ...
+            # Varianten: 360/<base>.jpg, avif/<stem>.avif, avif/360/<stem>.avif, ...
             if "/" in v:
                 sub, w = v.split("/")
-                if sub in ("620", "720"):
+                if sub in ("360", "480", "620", "720"):
                     p = os.path.join(STATIC_DIR, sub, base)
                 else:  # avif/620, avif/720, webp/620, webp/720
                     ext = "avif" if sub == "avif" else "webp"
                     p = os.path.join(STATIC_DIR, sub, w, f"{stem}.{ext}")
             else:
-                if v in ("620", "720"):
+                if v in ("360", "480", "620", "720"):
                     p = os.path.join(STATIC_DIR, v, base)
                 else:
                     ext = "avif" if v == "avif" else "webp"

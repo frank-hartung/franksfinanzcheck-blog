@@ -103,9 +103,10 @@ def check_covers():
             continue
         base = rel.rsplit(".", 1)[0]
         stem = os.path.basename(base)
-        for variant in [f"webp/{stem}.webp", f"avif/{stem}.avif",
-                        f"webp/620/{stem}.webp", f"avif/620/{stem}.avif",
-                        f"webp/720/{stem}.webp", f"avif/720/{stem}.avif"]:
+        variants = [f"webp/{stem}.webp", f"avif/{stem}.avif"]
+        for w in ("360", "480", "620", "720"):
+            variants.extend([f"webp/{w}/{stem}.webp", f"avif/{w}/{stem}.avif"])
+        for variant in variants:
             if not os.path.exists(os.path.join(os.path.dirname(BASE), "static", "images", "covers", variant)):
                 missing.append((os.path.basename(os.path.dirname(f)), f"images/covers/{variant} fehlt"))
     if missing:

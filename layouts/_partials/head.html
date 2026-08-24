@@ -109,7 +109,7 @@
 {{- end }}
 {{- if $lcpCover }}
 <link rel="preload" as="image" fetchpriority="high"
-  imagesrcset="{{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "620" $lcpBase) }} 620w, {{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "720" $lcpBase) }} 720w"
+  imagesrcset="{{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "360" $lcpBase) }} 360w, {{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "480" $lcpBase) }} 480w, {{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "620" $lcpBase) }} 620w, {{ partial "asset_url.html" (printf "%s/avif/%s/%s.avif" $lcpDir "720" $lcpBase) }} 720w"
   imagesizes="{{ $lcpSizes }}">
 {{- end }}
 

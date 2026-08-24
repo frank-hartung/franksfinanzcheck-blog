@@ -56,13 +56,22 @@
       <span style="display:block; position:relative;">
         {{- if $rCover -}}
           <picture>
-            {{- $rAvif := printf "%s/avif/%s.avif" $rDir $rBase -}}
-            {{- $rWebp := printf "%s/webp/%s.webp" $rDir $rBase -}}
-            {{- if os.FileExists (path.Join "static" $rAvif) }}<source type="image/avif" srcset="{{ partial "asset_url.html" $rAvif }} 1x">{{ end }}
-            {{- if os.FileExists (path.Join "static" $rWebp) }}<source type="image/webp" srcset="{{ partial "asset_url.html" $rWebp }} 1x">{{ end }}
-            <img loading="lazy" src="{{ partial "asset_url.html" (printf "%s/620/%s" $rDir $rFile) }}"
+            {{- $rSizes := "(min-width: 900px) 280px, (min-width: 600px) 45vw, 100vw" -}}
+            {{- $rAvifParts := slice -}}{{- $rWebpParts := slice -}}{{- $rJpgParts := slice -}}
+            {{- range $w := slice "360" "480" "620" -}}
+              {{- $rAvif := printf "%s/avif/%s/%s.avif" $rDir $w $rBase -}}
+              {{- $rWebp := printf "%s/webp/%s/%s.webp" $rDir $w $rBase -}}
+              {{- $rJpg := printf "%s/%s/%s" $rDir $w $rFile -}}
+              {{- if os.FileExists (path.Join "static" $rAvif) }}{{ $rAvifParts = $rAvifParts | append (printf "%s %sw" (partial "asset_url.html" $rAvif) $w) }}{{ end -}}
+              {{- if os.FileExists (path.Join "static" $rWebp) }}{{ $rWebpParts = $rWebpParts | append (printf "%s %sw" (partial "asset_url.html" $rWebp) $w) }}{{ end -}}
+              {{- if os.FileExists (path.Join "static" $rJpg) }}{{ $rJpgParts = $rJpgParts | append (printf "%s %sw" (partial "asset_url.html" $rJpg) $w) }}{{ end -}}
+            {{- end -}}
+            {{- if gt (len $rAvifParts) 0 }}<source type="image/avif" srcset="{{ delimit $rAvifParts ", " }}" sizes="{{ $rSizes }}">{{ end }}
+            {{- if gt (len $rWebpParts) 0 }}<source type="image/webp" srcset="{{ delimit $rWebpParts ", " }}" sizes="{{ $rSizes }}">{{ end }}
+            <img loading="lazy" decoding="async" src="{{ partial "asset_url.html" (printf "%s/360/%s" $rDir $rFile) }}"
+                 {{- if gt (len $rJpgParts) 0 }} srcset="{{ delimit $rJpgParts ", " }}" sizes="{{ $rSizes }}"{{ end }}
                  alt="{{ .Params.cover.alt | default .Title | plainify }}"
-                 width="620" height="930"
+                 width="360" height="540"
                  style="width:100%; height:auto; display:block;">
           </picture>
         {{- else -}}

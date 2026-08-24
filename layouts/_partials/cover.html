@@ -42,17 +42,16 @@
     {{- $coverBase := strings.TrimSuffix (path.Ext $coverFile) $coverFile }}
     {{- $coverDir := path.Dir .Params.cover.image }}
     {{- $imgdl = partial "asset_url.html" .Params.cover.image }}
-    {{- /* Responsive srcset: bewusst nur 620px + 720px.
+    {{- /* Responsive srcset: Mobile 360/480, Desktop 620/720.
            Die 1000px-Originale bleiben als Fallback-/OG-Dateien erhalten,
            werden aber NICHT mehr als Kandidat angeboten. Grund: Chrome wählt
-           auf HiDPI/Preload-Konstellationen sonst trotz 620px Layoutbreite
+           auf HiDPI/Preload-Konstellationen sonst trotz kleiner Layoutbreite
            häufig die 1000px-Variante → Lighthouse "Bildübermittlung verbessern".
-           720px ist für Listen und Single-Cover im aktuellen Layout ausreichend
-           und spart pro Cover deutlich Downloadvolumen. */}}
+           Die Varianten erzeugt scripts/image_optimizer.py automatisch. */}}
     {{- $srcsetParts := slice }}
     {{- $webpParts := slice }}
     {{- $avifParts := slice }}
-    {{- range $w := slice "620" "720" }}
+    {{- range $w := slice "360" "480" "620" "720" }}
         {{- $pJpg := printf "%s/%s/%s" $coverDir $w $coverFile -}}
         {{- $pWebp := printf "%s/webp/%s/%s.webp" $coverDir $w $coverBase -}}
         {{- $pAvif := printf "%s/avif/%s/%s.avif" $coverDir $w $coverBase -}}
@@ -84,7 +83,7 @@
 
     {{- /* <picture> mit Format-Kaskade: AVIF → WebP → JPEG (Fallback).
            Browser wählt das kleinste unterstützte Format; das srcset
-           liefert zusätzlich die passende Größe (620/720/1000px). */}}
+           liefert zusätzlich die passende Größe (360/480/620/720px). */}}
     <picture>
     {{- if $avifSrcset }}<source type="image/avif" srcset="{{ $avifSrcset }}" sizes="{{ $imgSizes }}">{{- end }}
     {{- if $webpSrcset }}<source type="image/webp" srcset="{{ $webpSrcset }}" sizes="{{ $imgSizes }}">{{- end }}
