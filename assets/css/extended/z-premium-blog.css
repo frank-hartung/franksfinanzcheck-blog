@@ -480,3 +480,13 @@ button:focus-visible {
   transform: none !important;
   content-visibility: visible !important;
 }
+
+/* CLS guard: reserve the final width of the hero money value from first paint.
+   The text is no longer numerically rewritten by JS, but this also protects
+   future edits that keep a highlighted euro amount in the hero paragraph. */
+.first-entry.home-info .entry-content strong {
+  display: inline-block;
+  min-width: 7ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
