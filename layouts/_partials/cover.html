@@ -25,6 +25,8 @@
         {{- end }}
       {{- end }}
     {{- end }}
+    {{- if not $fetchPriority }}{{ $fetchPriority = "low" }}{{ end }}
+    {{- $fcpImageRole := cond $isLcpCandidate "lcp" "deferred" }}
     {{- $addLink := (and site.Params.cover.linkFullImages $.IsSingle) }}
     {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) }}
     {{- $alt := (.Params.cover.alt | default .Params.cover.caption | plainify) }}
@@ -102,7 +104,7 @@
     {{- if $cover -}}
         {{/* i.e it is present in page bundle */}}
         {{- if (and (in $processableFormats $cover.MediaType.SubType) ($responsiveImages) (eq $prod true)) }}
-            <img loading="{{$loading}}" decoding="async"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }}
+            <img loading="{{$loading}}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" data-ff-fcp-image="{{ $fcpImageRole }}"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }}
                 srcset='{{- range $size := $sizes -}}
                             {{- if (ge $cover.Width $size) }}
                                 {{- printf "%s %s" (($cover.Resize (printf "%sx" $size)).Permalink) (printf "%sw," $size) }}
@@ -114,11 +116,11 @@
                 width="{{ $cover.Width }}" height="{{ $cover.Height }}"
                 alt="{{ $alt }}">
         {{- else }}{{/* Unprocessable image or responsive images disabled */}}
-            <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }} src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
+            <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" data-ff-fcp-image="{{ $fcpImageRole }}"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }} src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
         {{- end }}
     {{- else }}
         {{- /* For absolute urls and external links, no img processing here */}}
-        <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }} src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
+        <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" data-ff-fcp-image="{{ $fcpImageRole }}"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }} src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
     {{- end }}
     </picture>
 

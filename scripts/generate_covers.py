@@ -357,6 +357,12 @@ def main():
         print("  ✓ LCP-Manifest aktualisiert (data/lcp_images.json)")
     except Exception as exc:
         print(f"WARNUNG: LCP-Manifest konnte nicht aktualisiert werden: {exc}")
+    try:
+        from fcp_image_optimizer import build_manifest as build_fcp_manifest, write_manifest as write_fcp_manifest
+        write_fcp_manifest(build_fcp_manifest())
+        print("  ✓ FCP-Manifest aktualisiert (data/fcp_images.json)")
+    except Exception as exc:
+        print(f"WARNUNG: FCP-Manifest konnte nicht aktualisiert werden: {exc}")
 
     print(f"\nFertig: {covers} Cover erstellt, {frontmatter} Frontmatter ergänzt, "
           f"{variants} responsive Varianten nachgezogen "

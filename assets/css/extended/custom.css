@@ -85,6 +85,16 @@ h1, h2, h3, h4, h5, h6,
    Sabotage-Schutz: brand_guard (SHA-256 in data/brand_lock.yaml) zieht bei
    Abweichung automatisch das kanonische Original nach. */
 .ff-brand svg { height: 30px; width: auto; display: block; }
+/* FCP-/DOM-Optimierung: Header-Logo wird als externes SVG-Bild geladen statt
+   inline in den DOM injiziert. Dimensionen sind reserviert, Fetch-Priority ist
+   niedrig, damit das Logo nicht mit dem LCP-Cover konkurriert. */
+.ff-brand-logo,
+.ff-brand-logo img {
+    display: block;
+    width: 262px;
+    max-width: min(262px, 62vw);
+    height: 30px;
+}
 .ff-brand .ff-wm { fill: var(--ff-emerald); }
 html[data-theme="dark"] .ff-brand .ff-wm { fill: #F3F7F5; }
 .ff-brand .sr-only {

@@ -133,3 +133,11 @@ data/lcp_images.json
 ```
 
 Dieses Manifest wird von `scripts/lcp_image_optimizer.py` erzeugt und vom Hugo-Head genutzt, um pro Seite den richtigen LCP-Bild-Preload zu setzen.
+
+Zusätzlich wird aktualisiert:
+
+```txt
+data/fcp_images.json
+```
+
+Dieses Manifest kommt von `scripts/fcp_image_optimizer.py` und prüft, dass nicht-kritische Bilder den FCP-Pfad nicht belasten.

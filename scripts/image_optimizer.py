@@ -288,9 +288,14 @@ def main() -> int:
             lcp_image_optimizer.write_manifest(lcp_image_optimizer.build_manifest())
         except Exception as exc:
             print(f"WARNUNG: LCP-Manifest konnte nicht aktualisiert werden: {exc}")
+        try:
+            import fcp_image_optimizer
+            fcp_image_optimizer.write_manifest(fcp_image_optimizer.build_manifest())
+        except Exception as exc:
+            print(f"WARNUNG: FCP-Manifest konnte nicht aktualisiert werden: {exc}")
 
     problems = check_sources(sources)
-    report = {"sources": len(sources), "changed": len(changed), "removed": len(removed), "problems": problems, "manifest": rel(MANIFEST), "lcpManifest": lcp_manifest}
+    report = {"sources": len(sources), "changed": len(changed), "removed": len(removed), "problems": problems, "manifest": rel(MANIFEST), "lcpManifest": lcp_manifest, "fcpManifest": "data/fcp_images.json"}
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2))
     else:

@@ -68,7 +68,7 @@
             {{- end -}}
             {{- if gt (len $rAvifParts) 0 }}<source type="image/avif" srcset="{{ delimit $rAvifParts ", " }}" sizes="{{ $rSizes }}">{{ end }}
             {{- if gt (len $rWebpParts) 0 }}<source type="image/webp" srcset="{{ delimit $rWebpParts ", " }}" sizes="{{ $rSizes }}">{{ end }}
-            <img loading="lazy" decoding="async" src="{{ partial "asset_url.html" (printf "%s/360/%s" $rDir $rFile) }}"
+            <img loading="lazy" decoding="async" fetchpriority="low" data-ff-fcp-image="deferred" src="{{ partial "asset_url.html" (printf "%s/360/%s" $rDir $rFile) }}"
                  {{- if gt (len $rJpgParts) 0 }} srcset="{{ delimit $rJpgParts ", " }}" sizes="{{ $rSizes }}"{{ end }}
                  alt="{{ .Params.cover.alt | default .Title | plainify }}"
                  width="360" height="540"
