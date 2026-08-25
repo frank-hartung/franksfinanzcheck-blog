@@ -1,0 +1,21 @@
+# Hugo Konfiguration fuer FranksFinanzcheck.de (100% Premium-Ausfallsicher)
+baseURL: "https://franksfinanzcheck.de/"
+languageCode: "de-de"
+title: "FranksFinanzcheck"
+
+# ==============================================================================
+# 🛡️ GARANTIE: ALLE ARTIKEL, HTML-BLOCKS & DRAFTS WERDEN IMMER PERFEKT GEBAUT!
+# ==============================================================================
+buildDrafts: true   # Publiziert Artikel selbst dann, wenn draft: true gesetzt ist
+buildFuture: true   # Publiziert Artikel selbst dann, wenn Datum/Zeitzone in der Zukunft liegt
+buildExpired: true  # Publiziert Artikel selbst dann, wenn ein Ablaufdatum gesetzt ist
+ignoreFiles: []     # Verhindert das falsche Ignorieren von Markdown-Dateien
+
+# Renders HTML Callout Boxes (.ff-experience, .ff-trust, styling) natively
+markup:
+  goldmark:
+    renderer:
+      unsafe: true  # Erlaubt das Rendern von HTML-Boxen (Gelber Kasten & Autor-Trust-Box)
+
+enableRobotsTXT: true
+paginate: 10
