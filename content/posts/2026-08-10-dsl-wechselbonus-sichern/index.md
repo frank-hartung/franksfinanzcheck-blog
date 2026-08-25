@@ -108,6 +108,9 @@ Ja, viele Anbieter zahlen den Wechselbonus unabhängig von der Übertragungstech
 ### Muss ich meinen alten Vertrag selbst kündigen?
 Nein. Bei einem regulären Wechsel übernimmt der neue Provider die Kündigung bei deinem Altanbieter und regelt auch die Mitnahme deiner bisherigen Festnetznummern.
 
+### Kann ich den Bonus mit weiteren Aktionen kombinieren?
+In den meisten Fällen ja: Startguthaben, Hardware-Nachlässe und der Wechselbonus lassen sich bei Online-Bestellungen über Vergleichsportale miteinander kombinieren.
+
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/dsl/)

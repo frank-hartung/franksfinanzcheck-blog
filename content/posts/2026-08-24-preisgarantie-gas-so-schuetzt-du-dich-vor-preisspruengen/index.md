@@ -42,6 +42,7 @@ Gegenüber Tarifen ohne Preisbindung bietet ein Festpreistarif folgende Kernvort
 * **Wechselprämien nutzen:** Wettbewerbsanbieter belohnen Neukunden mit attraktiven Einmalboni von **100 € bis 220 €**, die deine Effektivkosten weiter drücken.
 * **Schutz vor CO2-Preissprüngen:** Tarife mit vollständiger Festpreisbindung federn auch schrittweise Erhöhungen der gesetzlichen Emissionszertifikate für die Vertragslaufzeit ab.
 * **Verlässliche Monatsabschläge:** Dein monatlicher Abschlagsbetrag bleibt über die gesamte Laufzeit von 12 bis 24 Monaten stabil und absolut planbar für dein Haushaltsbudget.
+* **Automatischer Kündigungsservice:** Beim regulären Wechsel wickelt der neue Energieversorger alle Formalitäten mit deinem alten Anbieter geräuschlos und pünktlich ab.
 
 ## Kostenanalyse: 20.000 kWh Verbrauch bei Marktschwankungen
 
@@ -63,6 +64,7 @@ Damit der Schutz im Ernstfall auch rechtssicher greift, solltest du die Allgemei
 2. **Umgang mit staatlichen Abgaben:** Fast alle modernen Tarife enthalten eine sogenannte *eingeschränkte Preisgarantie* (auch Nettopreisgarantie genannt). Sie deckt Energie- und Netzkosten ab, gibt gesetzliche Steueränderungen aber weiter – das ist der faire Branchenstandard.
 3. **Kündigungsfrist nach Ablauf der Garantie:** Achte darauf, dass sich der Vertrag nach Ablauf der Garantiezeit maximal um einen Monat verlängert (gesetzlicher Standard nach § 309 Nr. 9 BGB). So kannst du nach einem Jahr sofort wieder in den günstigsten Tarif wechseln.
 4. **Verzicht auf Kautionszahlungen:** Seriöse Versorger verlangen weder Vorkasse noch Kautionen, sondern buchen die Abschläge monatlich per Lastschrift ab.
+5. **Rechtzeitige Erinnerungsfunktion:** Notiere dir etwa zehn Monate nach Vertragsabschluss einen Termin, um rechtzeitig vor Ablauf der Preisgarantie die Tarife erneut zu prüfen.
 
 ## Schritt-für-Schritt: Gasanbieter mit Preisgarantie wechseln
 
