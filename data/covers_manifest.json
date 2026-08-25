@@ -1,35 +1,35 @@
 {
  "2026-08-10-dsl-wechselbonus-sichern": {
   "title": "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag",
-  "ts": "2026-08-12T13:35:03+00:00"
+  "ts": "2026-08-25T12:52:25+00:00"
  },
  "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
   "title": "Sicher heizen: So schützt dich eine Gaspreisgarantie",
-  "ts": "2026-08-12T13:35:05+00:00"
+  "ts": "2026-08-25T12:52:28+00:00"
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-08-24T13:57:40+00:00"
+  "ts": "2026-08-25T13:09:57+00:00"
  },
  "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
   "title": "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026",
-  "ts": "2026-08-19T13:31:25+00:00"
+  "ts": "2026-08-25T12:52:31+00:00"
  },
  "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
   "title": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
-  "ts": "2026-08-19T13:31:25+00:00"
+  "ts": "2026-08-25T12:52:36+00:00"
  },
  "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
   "title": "WLAN verbessern: So bringst du stabilen Speed in jede Ecke",
-  "ts": "2026-08-19T15:23:13+00:00"
+  "ts": "2026-08-25T12:52:39+00:00"
  },
  "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
   "title": "DSL Vergleich: So findest du den günstigsten Internettarif",
-  "ts": "2026-08-21T08:13:49+00:00"
+  "ts": "2026-08-25T12:52:48+00:00"
  },
  "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
   "title": "Energiediebe stoppen: So kannst du Stromfresser finden",
-  "ts": "2026-08-19T15:21:05+00:00"
+  "ts": "2026-08-25T12:52:51+00:00"
  },
  "_index": {
   "title": "Blog",
@@ -37,11 +37,11 @@
  },
  "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
   "title": "Kostenloses Girokonto: So findest du ein Konto ohne Gebühren",
-  "ts": "2026-08-19T15:56:46+00:00"
+  "ts": "2026-08-25T12:52:43+00:00"
  },
  "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
-  "title": "Privathaftpflicht: Warum sie wichtig ist und was sie kostet",
-  "ts": "2026-08-21T08:13:47+00:00"
+  "title": "Privathaftpflicht: Warum sie so wichtig ist und was sie",
+  "ts": "2026-08-25T13:10:05+00:00"
  },
  "2026-08-21-gasrechnung-senken-clevere-tipps-fuer-den-spaetsommer": {
   "title": "Gasrechnung senken: Clevere Tipps für den Spätsommer",
@@ -61,10 +61,38 @@
  },
  "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
   "title": "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht",
-  "ts": "2026-08-24T13:57:00+00:00"
+  "ts": "2026-08-25T12:52:54+00:00"
  },
  "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
   "title": "Preisgarantie Gas: So schützt du dich vor Preissprüngen",
-  "ts": "2026-08-24T08:34:37+00:00"
+  "ts": "2026-08-25T12:52:57+00:00"
+ },
+ "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
+  "title": "Internet & DSL wechseln: Praxis-Tipps",
+  "ts": "2026-08-25T13:09:59+00:00"
+ },
+ "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
+  "title": "Sparen im Herbst: Die besten Spartipps für die goldene",
+  "ts": "2026-08-25T13:10:02+00:00"
+ },
+ "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann": {
+  "title": "Geld sparen im Alltag: Einfache Tipps, die jeder umsetzen",
+  "ts": "2026-08-25T13:10:08+00:00"
+ },
+ "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
+  "title": "So findest du den richtigen: DSL-Tarif für dein Zuhause",
+  "ts": "2026-08-25T13:10:10+00:00"
+ },
+ "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife": {
+  "title": "Gas-Anbieter wechseln: Praxis-Tipps für günstige Tarife",
+  "ts": "2026-08-25T13:10:13+00:00"
+ },
+ "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst": {
+  "title": "Strom sparen im Haushalt: Die besten Tipps für den Herbst",
+  "ts": "2026-08-25T13:10:15+00:00"
+ },
+ "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
+  "title": "Wohngebäudeversicherung Vergleich: Worauf du achten musst",
+  "ts": "2026-08-25T13:10:17+00:00"
  }
 }

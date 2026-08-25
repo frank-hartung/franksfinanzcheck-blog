@@ -71,6 +71,8 @@ SLUG_DEEP = {
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
+    "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
+    "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
     "5g-home-router-oder-dsl": ("handytarife", "Handytarif-Vergleich"),
     "2026-08-10-dsl-wechselbonus-sichern": ("dsl-anbieterwechsel&cat=4", "DSL-Tarifvergleich"),
     "flug-buchen-9-tricks-guenstige-tickets": ("flugvergleich", "Flugvergleich"),

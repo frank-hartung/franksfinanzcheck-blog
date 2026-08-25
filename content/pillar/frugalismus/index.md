@@ -33,7 +33,7 @@ Frugalismus bedeutet für mich nicht knauseriger Verzicht oder extremes Knausern
 
 ---
 
-## Frugalismus im Alltag:<br>Die größten Sparhebel
+## Frugalismus im Alltag: Die größten Sparhebel
 
 Wer mit dem systematischen Sparen beginnt, braucht vor allem eines: Transparenz über die eigenen Zahlungsströme. Erst wenn du siehst, wohin dein Geld jeden Monat fließt, kannst du gezielt ansetzen.
 
@@ -49,7 +49,7 @@ Wer mit dem systematischen Sparen beginnt, braucht vor allem eines: Transparenz 
 
 ---
 
-## Notgroschen aufbauen:<br>Wie viel Geld reicht wirklich?
+## Notgroschen aufbauen: Wie viel Geld reicht wirklich?
 
 Der Notgroschen ist dein persönlicher Stoßdämpfer gegen unvorhersehbare Lebensereignisse – sei es eine teure Autoreparatur, eine defekte Waschmaschine oder eine unerwartete Nebenkostennachzahlung.
 

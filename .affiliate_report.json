@@ -1,7 +1,7 @@
 {
- "total": 18,
+ "total": 25,
  "errors": 0,
- "fixed": 4,
+ "fixed": 0,
  "posts": [
   {
    "slug": "frugalismus",
@@ -92,7 +92,7 @@
   },
   {
    "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-   "title": "Preisgarantie Gas: So sicherst du günstige Tarife ",
+   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
    "pillar": "strom-sparen",
    "fixed": 0,
    "errors": [],
@@ -109,9 +109,47 @@
    "ok": true
   },
   {
+   "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel",
+   "title": "Internet & DSL wechseln: Praxis-Tipps",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+   "title": "Sparen im Herbst: Die besten Spartipps für die gol",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
    "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
    "title": "WLAN verbessern: So bringst du stabilen Speed in j",
    "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife",
+   "title": "Gas-Anbieter wechseln: Praxis-Tipps für günstige T",
+   "pillar": "strom-sparen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst",
+   "title": "Strom sparen im Haushalt: Die besten Tipps für den",
+   "pillar": "strom-sparen",
    "fixed": 0,
    "errors": [],
    "infos": [],
@@ -128,7 +166,29 @@
   },
   {
    "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet",
-   "title": "Privathaftpflicht: Warum sie wichtig ist und was s",
+   "title": "Privathaftpflicht: Warum sie so wichtig ist und wa",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann",
+   "title": "Geld sparen im Alltag: Einfache Tipps, die jeder u",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst",
+   "title": "Wohngebäudeversicherung Vergleich: Worauf du achte",
    "pillar": "versicherungen",
    "fixed": 0,
    "errors": [],
@@ -156,19 +216,30 @@
    "ok": true
   },
   {
-   "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
-   "title": "Mehr Freiheit durch Verzicht? Clevere Frugalismus ",
-   "pillar": "konto-karten",
-   "fixed": 3,
+   "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+   "title": "So findest du den richtigen: DSL-Tarif für dein Zu",
+   "pillar": "internet-dsl",
+   "fixed": 0,
    "errors": [],
    "infos": [],
    "ok": true
   },
   {
+   "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
+   "title": "Frugalismus-Tipps: Mehr Freiheit durch klugen Verz",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
    "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
    "title": "Preisgarantie Gas: So schützt du dich vor Preisspr",
-   "pillar": "konto-karten",
-   "fixed": 1,
+   "pillar": "strom-sparen",
+   "fixed": 0,
    "errors": [],
    "infos": [],
    "ok": true

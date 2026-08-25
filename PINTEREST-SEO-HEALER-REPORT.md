@@ -1,8 +1,8 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-08-24 13:59 UTC · **Modus:** CHECK
+**Stand:** 2026-08-25 13:12 UTC · **Modus:** CHECK
 
-- Artikel: **14**
+- Artikel: **19**
 - Geheilt: **0**
 - Offene Issues: **0**
 - Covers: nicht angefasst
@@ -25,15 +25,20 @@
 | ✅ | `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` | — |
 | ✅ | `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` | — |
 | ✅ | `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden` | — |
+| ✅ | `2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel` | — |
+| ✅ | `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` | — |
 | ✅ | `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` | — |
+| ✅ | `2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife` | — |
+| ✅ | `2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst` | — |
 | ✅ | `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` | — |
 | ✅ | `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | — |
+| ✅ | `2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann` | — |
+| ✅ | `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | — |
 | ✅ | `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` | — |
 | ✅ | `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` | — |
-| ✅ | `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier` | — |
-| ✅ | `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` | — |
-| ✅ | `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` *(draft)* | — |
-| ✅ | `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` *(draft)* | — |
+| ✅ | `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` | — |
+| ✅ | `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` | — |
+| ✅ | `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` | — |
 
 ---
 *Erzeugt von `scripts/pinterest_seo_healer.py` – Teil der FrankAutoOps-Selbstheilung.*

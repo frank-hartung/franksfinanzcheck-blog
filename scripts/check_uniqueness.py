@@ -48,21 +48,22 @@ def clean_body(content):
     parts = content.split("---", 2)
     body = parts[2] if len(parts) == 3 else content
     # Werbekennzeichnung (variiert in Zeilenumbrüchen)
-    body = re.sub(r"\*?Dieser Artikel enthält Affiliate-Links.*?(Mehrkosten|Mehrkosten\.)\*?", " ", body, flags=re.S)
-    # Affiliate-CTA-Blöcke (👉 ... Link ...)
+    body = re.sub(r"\*?_?Dieser Artikel enthält Affiliate-Links.*?(?:Mehrkosten|Mehrkosten\.)_?\*?", " ", body, flags=re.S)
+    body = re.sub(r"\(Dieser Artikel enthält Affiliate-Links.*?\)", " ", body, flags=re.S)
+    # UI-Callout-Blöcke & CTAs (Schnell-Tipp, Spar-Tipp, Weiterlesen, Conversion-Buttons)
+    body = re.sub(r"💡\s*\*\*Schnell-Tipp.*?(?:\n\n|\Z)", " ", body, flags=re.S)
+    body = re.sub(r">\s*💶\s*\*\*Spar-Tipp.*?(?:\n\n|\Z)", " ", body, flags=re.S)
     body = re.sub(r"👉.*?\)", " ", body, flags=re.S)
-    # ROBUST: ALLE URLs entfernen (unabhängig vom CTA-Format – der Polish
-    # variiert den CTA-Text, dadurch blieben URL-Bruchstücke als
-    # "Duplikate" im Audit zurück)
+    body = re.sub(r"\*\*Weiterlesen:\*\*.*?(?:\n\n|\Z)", " ", body, flags=re.S)
+    # ROBUST: ALLE URLs entfernen (unabhängig vom CTA-Format)
     body = re.sub(r"https?://[^\s)\"']+", " ", body)
     body = re.sub(r"www\.[^\s)\"']+", " ", body)
-    # Markdown-Links: nur den Ankertext behalten. Interne Link-ZIELE
-    # (../../posts/slug/) sind Navigation, kein Inhalt – sonst erzeugen
-    # identische Link-Ziele in mehreren Artikeln falsche "Duplikate".
+    # Markdown-Links: nur den Ankertext behalten
     body = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", body)
     # FAQ-Intro-Standardsätze
     body = re.sub(r"## Häufige Fragen", " ", body)
-    # Übrige Markdown-Syntax
+    # Übrige Markdown-Syntax & HTML-Tags (<br>)
+    body = re.sub(r"<[^>]+>", " ", body)
     body = re.sub(r"[*_#>`|~-]{1,}", " ", body)
     return body
 
