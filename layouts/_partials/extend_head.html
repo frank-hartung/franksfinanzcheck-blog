@@ -40,11 +40,6 @@
        sind komplett eliminiert (kein Render-Blocking). */ -}}
 
 {{- /* ---------- Consent-Banner: LCP-/CLS-optimierte Anzeige ---------- */ -}}
-{{- /* Der Banner ist im Markup ab dem ERSTEN PAINT sichtbar (kein spätes
-       JS-Einblenden → kein LCP-Element-Rendering-Delay). Dieses Mini-Skript
-       läuft synchron im Head – VOR dem Body-Rendering – und blendet den
-       Banner für Rückkehrer aus (Cookie vorhanden → Klasse am <html>).
-       CSS: html.ff-consent-set #ff-consent-banner { display:none } */ -}}
 <script>
 (function () {
   try {
@@ -57,8 +52,6 @@
 <noscript><style>#ff-consent-banner{display:none}</style></noscript>
 
 {{- /* ---------- E-E-A-T: Person-Schema (Autor mit Foto) ---------- */ -}}
-{{- /* Unterstützt Googles Autoren-Bewertung: identische @id auf allen
-       Seiten → Google verknüpft Artikel, Über-Seite und Autor. */ -}}
 {{- $authorPhoto := "images/frank-hartung.jpg" | absURL -}}
 {{- if .IsPage -}}
 <script type="application/ld+json">{{ (dict
@@ -69,7 +62,7 @@
   "url" (printf "%sueber/" site.BaseURL)
   "image" $authorPhoto
   "jobTitle" "Autor & Betreiber von FranksFinanzcheck"
-  "knowsAbout" (slice "Geld sparen" "Frugalismus" "Tarifvergleiche" "Versicherungen" "Privatfinanzen")
+  "knowsAbout" (slice "Geld sparen" "Frugalismus" "Tarifvergleiche" "Versicherungen" "Privatfinanzen" "DSL" "Stromvergleich" "Gasvergleich")
   "sameAs" (slice "https://www.pinterest.de/franksfinanzcheck/")
 ) | jsonify | safeJS }}</script>
 {{- end -}}
@@ -89,18 +82,33 @@
 ) | jsonify | safeJS }}</script>
 {{- end -}}
 
-{{- /* ---------- FAQPage-Schema (aus den FAQ-Abschnitten der Artikel) ---------- */ -}}
+{{- /* ---------- FAQPage-Schema (Featured Snippets & AI Overviews) ---------- */ -}}
 {{- if and .IsPage (or (eq .Section "posts") (eq .Section "pillar")) -}}
 {{- $faq := slice -}}
-{{- $chunks := split (plainify .RawContent) "### " -}}
-{{- range $chunks -}}
-  {{- $lines := split . "\n" -}}
-  {{- $q := trim (index $lines 0) " \t\r\n" -}}
-  {{- if and (gt (len $q) 5) (findRE "[?]" $q) -}}
-    {{- $answer := trim (delimit (after 1 $lines) " ") " \t\r\n" -}}
-    {{- if gt (len $answer) 10 -}}
-      {{- $faq = $faq | append (dict "@type" "Question" "name" $q
-          "acceptedAnswer" (dict "@type" "Answer" "text" $answer)) -}}
+{{- $raw := .RawContent -}}
+{{- $faqSection := "" -}}
+{{- if findRE "(?i)##\\s+(?:Häufige Fragen|FAQ|Fragen\\s*&\\s*Antworten)" $raw -}}
+  {{- $parts := splitRE "(?i)##\\s+(?:Häufige Fragen|FAQ|Fragen\\s*&\\s*Antworten)" $raw -}}
+  {{- if gt (len $parts) 1 -}}
+    {{- $faqSection = index $parts 1 -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $faqSection }}{{ $faqSection = $raw }}{{ end -}}
+{{- $chunks := split $faqSection "### " -}}
+{{- range $i, $chunk := $chunks -}}
+  {{- if gt $i 0 -}}
+    {{- $lines := split $chunk "\n" -}}
+    {{- $q := trim (index $lines 0) " \t\r\n" | plainify | htmlUnescape -}}
+    {{- if and (gt (len $q) 5) (findRE "[?]" $q) -}}
+      {{- $ansLines := after 1 $lines -}}
+      {{- $ansText := delimit $ansLines "\n" -}}
+      {{- $ansClean := index (split $ansText "\n---") 0 -}}
+      {{- $ansClean = index (split $ansClean "\n## ") 0 -}}
+      {{- $ansFinal := trim (plainify $ansClean) " \t\r\n" | htmlUnescape -}}
+      {{- if gt (len $ansFinal) 10 -}}
+        {{- $faq = $faq | append (dict "@type" "Question" "name" $q
+            "acceptedAnswer" (dict "@type" "Answer" "text" $ansFinal)) -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
@@ -111,7 +119,7 @@
 {{- /* ---------- OpenGraph article-Tags ---------- */ -}}
 <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
 <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
-<meta property="article:author" content="{{ site.Params.author }}">
+<meta property="article:author" content="Frank Hartung">
 <meta property="article:section" content="{{ with .Params.categories }}{{ index . 0 }}{{ else }}Ratgeber{{ end }}">
 {{- end -}}
 
@@ -120,10 +128,11 @@
 <script type="application/ld+json">{{ (dict
   "@context" "https://schema.org"
   "@type" "WebSite"
+  "@id" (printf "%s#website" site.BaseURL)
   "name" site.Title
   "url" site.BaseURL
   "description" site.Params.description
-  "publisher" (dict "@type" "Organization" "name" site.Title "url" site.BaseURL
+  "publisher" (dict "@type" "Organization" "@id" (printf "%s#organization" site.BaseURL) "name" site.Title "url" site.BaseURL
                     "sameAs" (slice "https://www.pinterest.de/franksfinanzcheck/"))
 ) | jsonify | safeJS }}</script>
 {{- end -}}
@@ -160,21 +169,12 @@
 {{- end -}}
 
 {{- /* ---------- Privacy-Analytics (Umami, cookieless) ---------- */ -}}
-{{- /* DSGVO-freundliche Reichweitenmessung: keine Cookies, keine
-       personenbezogenen Daten (IP wird gehasht), keine Daten an Google.
-       - consentRequired=true: Skript lädt erst nach "Alle akzeptieren"
-         (bzw. vor der ersten Entscheidung gar nicht) – striktester Modus.
-       - consentRequired=false: lädt immer, respektiert aber den
-         Do-Not-Track-Header des Browsers (data-do-not-track).
-       Opt-out jederzeit: Browser-DNT aktivieren oder Cookie-Einstellungen.
-       Ausführliche Infos: ANLEITUNG-UMAMI-ANALYTICS.md + Datenschutz. */ -}}
 {{- with site.Params.umami.websiteId -}}
 {{- $umamiSrc := site.Params.umami.src | default "https://cloud.umami.is/script.js" -}}
 {{- $umamiHost := site.Params.umami.hostUrl | default "" -}}
 {{- $consent := site.Params.umami.consentRequired | default true -}}
 <script>
 (function () {
-  // Nur laden, wenn keine Einwilligung nötig ODER Cookie = "all" (oder noch keine Entscheidung)
   var KEY = 'ff_cookie_consent';
   function getConsent() {
     try {
@@ -191,13 +191,12 @@
   s.async = true;
   s.src = '{{ $umamiSrc }}';
   s.setAttribute('data-website-id', '{{ . }}');
-  s.setAttribute('data-do-not-track', 'true');   // DNT des Browsers respektieren
-  s.setAttribute('data-cache', 'false');          // keine Daten im localStorage
-  s.setAttribute('data-host-url', '{{ $umamiHost }}'); // leer = Cloud-Default
+  s.setAttribute('data-do-not-track', 'true');
+  s.setAttribute('data-cache', 'false');
+  s.setAttribute('data-host-url', '{{ $umamiHost }}');
   d.head.appendChild(s);
   window.__umamiLoaded = true;
 
-  // Falls der Nutzer später "Alle akzeptieren" wählt → nachladen
   document.addEventListener('ffConsentChange', function (e) {
     if (e.detail === 'all' && !window.__umamiLoaded) {
       window.__umamiLoaded = true;
@@ -207,7 +206,7 @@
       s2.setAttribute('data-website-id', '{{ . }}');
       s2.setAttribute('data-do-not-track', 'true');
       s2.setAttribute('data-cache', 'false');
-      s2.setAttribute('data-host-url', '{{ $umamiHost }}'); // leer = Cloud-Default
+      s2.setAttribute('data-host-url', '{{ $umamiHost }}');
       d.head.appendChild(s2);
     }
   });
@@ -215,18 +214,14 @@
 </script>
 {{- end -}}
 
-{{- /* Service Worker: Langzeit-Caching auf GitHub Pages (Cache-TTL ist dort
-       hart auf 10 Minuten gesetzt – der SW liefert wiederholte Besuche sofort
-       aus dem lokalen Cache, siehe sw.js). First-party, keine Drittanbieter.
-       Frühe Registrierung im Head → Installation startet sofort und die
-       kritischen Fonts werden direkt precached. */ -}}
+{{- /* Service Worker: Langzeit-Caching auf GitHub Pages */ -}}
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('{{ "sw.js" | relURL }}').catch(function () {});
   }
 </script>
 
-{{- /* ---------- Article-Schema (E-E-A-T, Rich Results) – Artikel & Pillar-Ratgeber ---------- */ -}}
+{{- /* ---------- Article-Schema (E-E-A-T, Rich Results) ---------- */ -}}
 {{- if and (or (eq .Section "posts") (eq .Section "pillar")) (eq .Kind "page") -}}
 {{- partial "schema_article.html" . -}}
 {{- end -}}

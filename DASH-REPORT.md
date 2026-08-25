@@ -1,11 +1,15 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-08-24 08:34 UTC · Modus: FIX+KI
+**Stand:** 2026-08-25 13:33 UTC · Modus: REPORT
 
-## ✅ Automatisch korrigiert (2 Dateien)
+🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
 
-- `content/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/index.md`: Regel-Fixes 1, KI-Umformulierungen 0
-- `content/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/index.md`: Regel-Fixes 4, KI-Umformulierungen 0
+## 🎓 Stil-Hinweise (Ebene 2, nur Info bzw. mit --ai aktiv)
+
+- `content/posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/index.md` Zeile 37: S3-Konjunktion
+- `content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md` Zeile 26: S3-Konjunktion
+- `content/pillar/mietwagen/index.md` Zeile 29: S1-Doppelschub
+- `content/pillar/mietwagen/index.md` Zeile 37: S3-Konjunktion
 
 ---
 _Deterministisch: Gedankenstrich-Typ, Bis-Striche, Doppelminus · KI-Schiedsrichter (S1/S3) nur mit --ai. Geschützt: Front-Matter, Listen, Tabellen, Überschriften, URLs, Code._

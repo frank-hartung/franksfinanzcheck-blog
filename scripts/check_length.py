@@ -89,21 +89,21 @@ def status_of(words: int) -> str:
 
 def collect():
     arts = []
-    for pattern in ("content/posts/*/index.md", "content/posts/*.md"):
-        for f in glob.glob(os.path.join(BLOG_DIR, pattern)):
-            content = open(f, encoding="utf-8").read()
-            body = clean_body(content)
-            words, chars = measure(body)
-            m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
-            title = m.group(1).strip() if m else ""
-            arts.append({
-                "file": f,
-                "slug": os.path.basename(os.path.dirname(f)),
-                "title": title,
-                "words": words,
-                "chars": chars,
-                "status": status_of(words),
-            })
+    from post_utils import list_post_paths, slug_of
+    for f in list_post_paths():
+        content = open(f, encoding="utf-8").read()
+        body = clean_body(content)
+        words, chars = measure(body)
+        m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
+        title = m.group(1).strip() if m else ""
+        arts.append({
+            "file": f,
+            "slug": slug_of(f),
+            "title": title,
+            "words": words,
+            "chars": chars,
+            "status": status_of(words),
+        })
     return arts
 
 

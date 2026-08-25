@@ -1,43 +1,76 @@
 {{- /* ============================================================
      schema_article.html – Article-JSON-LD (E-E-A-T / Rich Results)
-     Wird auf jeder Artikel-Seite (posts/*) ausgegeben.
-     Enthält: headline, description, author (Person), publisher,
-     datePublished, dateModified, image, mainEntityOfPage.
+     Wird auf jeder Artikel-Seite (posts/* & pillar/*) ausgegeben.
+     Enthält: headline, description, author (Person mit E-E-A-T ID),
+     publisher (Organization), datePublished, dateModified, image,
+     mainEntityOfPage, inLanguage, keywords, isPartOf.
      ============================================================ */ -}}
 {{- $title := .Title | plainify | htmlUnescape -}}
-{{- $desc := or .Description (.Summary | plainify) -}}
+{{- $desc := or .Description (.Summary | plainify) | htmlUnescape -}}
 {{- $img := "" -}}
 {{- with .Params.cover -}}
-  {{- $img = printf "%s%s" site.BaseURL (replaceRE "^/" "" .image) -}}
+  {{- if .image -}}
+    {{- $img = printf "%s%s" site.BaseURL (replaceRE "^/" "" .image) -}}
+  {{- end -}}
 {{- end -}}
 {{- $published := .Date.Format "2006-01-02T15:04:05Z" -}}
 {{- $modified := .Lastmod.Format "2006-01-02T15:04:05Z" -}}
-{{- if eq $modified "0001-01-01T00:00:00Z" }}{{ $modified = $published }}{{ end -}}
+{{- if or (eq $modified "0001-01-01T00:00:00Z") (lt .Lastmod .Date) }}{{ $modified = $published }}{{ end -}}
+{{- $kwList := slice -}}
+{{- with .Params.keywords -}}
+  {{- $kwList = . -}}
+{{- else -}}
+  {{- with .Params.tags -}}
+    {{- $kwList = . -}}
+  {{- end -}}
+{{- end -}}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
+  "@id": {{ (printf "%s#article" .Permalink) | jsonify }},
+  "isPartOf": {
+    "@type": "WebSite",
+    "@id": {{ (printf "%s#website" site.BaseURL) | jsonify }},
+    "name": "FranksFinanzcheck",
+    "url": {{ site.BaseURL | jsonify }}
+  },
   "headline": {{ $title | jsonify }},
-  "description": {{ $desc | plainify | htmlUnescape | jsonify }},
-  "image": {{ $img | jsonify }},
+  "description": {{ $desc | jsonify }},
+  "inLanguage": "de-DE",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink | jsonify }}
+  },
+  {{- if $img }}
+  "image": {
+    "@type": "ImageObject",
+    "url": {{ $img | jsonify }},
+    "width": 1000,
+    "height": 1500
+  },
+  {{- end }}
   "author": {
     "@type": "Person",
-    "name": "Frank",
-    "url": {{ (site.BaseURL | string) | jsonify }}
+    "@id": {{ (printf "%s#frank-hartung" site.BaseURL) | jsonify }},
+    "name": "Frank Hartung",
+    "url": {{ (printf "%sueber/" site.BaseURL) | jsonify }},
+    "jobTitle": "Finanzexperte & Redaktionsleiter"
   },
   "publisher": {
     "@type": "Organization",
+    "@id": {{ (printf "%s#organization" site.BaseURL) | jsonify }},
     "name": "FranksFinanzcheck",
+    "url": {{ site.BaseURL | jsonify }},
     "logo": {
       "@type": "ImageObject",
       "url": {{ (printf "%simages/logo.png" site.BaseURL) | jsonify }}
     }
   },
   "datePublished": {{ $published | jsonify }},
-  "dateModified": {{ $modified | jsonify }},
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": {{ .Permalink | jsonify }}
-  }
+  "dateModified": {{ $modified | jsonify }}
+  {{- if gt (len $kwList) 0 }},
+  "keywords": {{ delimit $kwList ", " | jsonify }}
+  {{- end }}
 }
 </script>

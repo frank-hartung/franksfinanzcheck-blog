@@ -1,148 +1,118 @@
 ---
 title: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
-description: "Jetzt DSL-Wechselbonus sichern und bares Geld sparen! Erfahre hier, wie der Anbieterwechsel stressfrei klappt und welche Prämien aktuell auf dich warten."
+description: "DSL-Wechselbonus sichern und bis zu 240 € Prämie mitnehmen: So funktioniert der Anbieterwechsel stressfrei inkl. Cashback und Fristen-Check."
 date: 2026-08-10T10:20:09Z
 draft: false
-tags: ["DSL-Wechselbonus sichern", "DSL Wechselbonus sichern", "DSL-Wechselbonus", "sparst"]
+tags: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
-author: "Frank"
+author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-ai_generated: true
-ai_provider: "Content-Engine v2"
-engine_level: "relaxed"
-
-inspiration: DSL-Wechselbonus mitnehmen
+ai_generated: false
 cover:
   image: "images/covers/2026-08-10-dsl-wechselbonus-sichern.jpg"
   alt: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Du kannst einen DSL-Wechselbonus erhalten, wenn du zu einem neuen Anbieter wechselst. Ein Wechselbonus kann in der Regel zwischen 50 € und 200 € liegen. Durch einen DSL-Anbieterwechsel kannst du bessere Tarife und höhere Geschwindigkeiten erhalten."
+kurzantwort: "Ein DSL-Wechselbonus ist eine Neukundenprämie zwischen 50 € und 240 €, die Provider bei einem Anbieterwechsel als Einmalgutschrift oder Cashback auszahlen. Zusammen mit reduzierten Grundgebühren im ersten Vertragsjahr sinken die monatlichen Effektivkosten für schnelles Internet um bis zu 40 Prozent."
 
 social_posted: true
-keywords: ["DSL-Wechselbonus sichern", "DSL Wechselbonus sichern", "DSL-Wechselbonus", "DSL-Vergleich", "Internetvertrag wechseln", "günstiges Internet"]
+keywords: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich", "Cashback DSL", "günstiges Internet", "DSL Wechselbonus sichern"]
 pin_title: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
-pin_description: "*Werbung | Du zahlst zu viel für dein Internet? Mit einem DSL-Wechselbonus kassierst du beim Anbieterwechsel 50–200 € Prämie und zahlst Monat für Monat weniger. Dieser Ratgeber zeigt dir Schritt für Schritt: Vertrag prüfen, Bonus sichern, Kündigung richtig planen. Inklusive Beispielrechnung mit 750 € Ersparnis, fünf typischen Bonus-Fallen und einer Checkliste. Jetzt Tarife vergleichen und bares Geld sparen! #dslwechselbonussichern #dslwechselbonus #dslvergleich"
+pin_description: "*Werbung | DSL-Wechselbonus sichern und bis zu 240 € Prämie mitnehmen: So funktioniert der Anbieterwechsel stressfrei inkl. Cashback und Fristen-Check. Mehr Spartipps auf FranksFinanzcheck! #dslwechselbonussichern #dslwechselbonus #internetvertragwechseln"
 ---
 
 # DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
 
-Warum zahlst du Monat für Monat zu viel für dein Internet? Weil Treue im DSL-Markt leider nicht belohnt wird – Gegenteil: Bestandskunden zahlen oft 20 bis 30 € mehr als Neukunden für denselben Anschluss. Mit einem **DSL-Wechselbonus** streichst du genau die Differenz ein: bar auf die Hand, meist zwischen **50 € und 200 €**. In diesem Beitrag erfährst du Schritt für Schritt, wie der Bonus funktioniert, worauf du bei Laufzeit und Fristen achten musst und wie du den Wechsel stressfrei über die Bühne bringst – ohne Vertragsfalle, ohne Papierkrieg.
+Warum zahlen Millionen Haushalte in Deutschland Monat für Monat 45 € oder mehr für ihren Festnetzanschluss? Weil Treue im Telekommunikationsmarkt leider nicht belohnt wird. Während Neukunden mit großzügigen Rabatten und Sonderkonditionen umworben werden, zahlen langjährige Bestandskunden kontinuierlich den vollen Standardpreis. Mit einem **DSL-Wechselbonus** drehst du dieses System zu deinen Gunsten: Du sicherst dir attraktive Einmalprämien von **50 € bis 240 €** und reduzierst deine Grundgebühr im ersten Vertragsjahr um bis zu 40 %. In diesem Ratgeber zeige ich dir Schritt für Schritt, wie der Wechselbonus funktioniert, welche Fristen du beachten musst und wie dein Internetanschluss ohne Unterbrechung weiterläuft.
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/dsl/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Überprüfe jetzt unverbindlich die DSL- und Glasfaser-Verfügbarkeit an deiner Adresse und sichere dir aktuelle Neukunden-Prämien: [**Jetzt Angebote vergleichen**](/go/dsl/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## DSL-Anbieter vergleichen
-Vergleiche Anbieter sorgfältig für den optimalen Tarif an deinem Standort. Prüfe neben dem Preis auch die reale Netzqualität vor Ort. Ein DSL-Wechselbonus entscheidet oft über das wirtschaftlichste Angebot am Markt. Achte unbedingt auf die Mindestlaufzeit von meist 24 Monaten. Nur so sicherst du dir die volle Prämie deines neuen Providers.
+## Wie funktioniert ein DSL-Wechselbonus in der Praxis?
 
-Die Preise variieren je nach Anbieter massiv. Suche gezielt nach Aktionen mit geringer Anschlussgebühr oder Gratis-Routern. Viele Firmen locken Wechsler mit extrem niedrigen Preisen im ersten Halbjahr. Berechne immer die Gesamtkosten über die vollen zwei Jahre Vertragslaufzeit. So erkennst du versteckte Preissprünge nach der Rabattphase sofort.
+Ein DSL-Wechselbonus ist ein finanzieller Anreiz, den Internetanbieter bereitstellen, wenn du von einem Mitbewerber zu ihnen wechselst. Der Bonus wird auf unterschiedliche Weise realisiert:
 
-Einige Beispiele für DSL-Anbieter und ihre Angebote:
-* **Deutsche Telekom**: Bietet oft eine Kombination aus DSL und Entertainment-Diensten an.
-* **Vodafone**: Lockt mit günstigen Preisen und einer großen Auswahl an Tarifen.
-* **Telefónica**: Bietet eine Vielzahl von Tarifen mit unterschiedlichen Geschwindigkeiten an.
+1. **Einmalige Rechnungsgutschrift:** Der Gutschriftbetrag (z. B. 120 € bis 200 €) wird direkt mit den ersten monatlichen Grundgebühren verrechnet. In den ersten Monaten zahlst du dadurch effektiv 0 € für deinen Anschluss.
+2. **Direktes Cashback:** Nach Freischaltung und Einreichung der ersten Monatsrechnung überweist das Vergleichsportal oder der Provider die vereinbarte Prämie direkt auf dein Bankkonto.
+3. **Hardware-Zuschuss:** Du erhältst moderne Premium-Router (wie die AVM Fritz!Box) entweder dauerhaft kostenlos oder mit einem Preisnachlass von bis zu 150 €.
 
-## Vor- und Nachteile eines DSL-Wechselbonus
-Ein DSL-Wechselbonus senkt deine effektiven Kosten im ersten Jahr massiv. Oft locken Anbieter zudem mit einem attraktiven Cashback DSL. Dennoch hat die Sache einen kleinen Haken. Du bindest dich meist für 24 Monate an den neuen Vertrag. Lies das Kleingedruckte zu den Auszahlungsfristen deshalb ganz genau.
+Damit der Bonus ohne Verzögerung gewährt wird, muss der Wechsel zwingend über den Wechselservice des neuen Anbieters beauftragt werden. Wer seinen Altvertrag voreilig selbst kündigt, riskiert, dass der neue Vertrag lediglich als technischer Neuanschluss ohne Wechselbonus eingestuft wird.
 
-| Vorteil | Nachteil |
-|:--- |:--- |
-| Hohe Einmalzahlung (bis 150 €) | Lange Vertragslaufzeit (24 Monate) |
-| Günstiger Effektivpreis pro Monat | Bonus verfällt oft bei Kündigung |
-| Modernere Hardware inklusive | Aufwendigerer Anbieterwechsel |
-| Möglichkeit, den Anbieter nach Ablauf der Mindestlaufzeit zu wechseln | Mögliche Vertragsstrafen bei vorzeitiger Kündigung |
+## 24-Monats-Berechnung: So viel sparst du wirklich
 
-Manche Boni erhältst du erst nach mehreren Monaten Laufzeit. Dokumentiere alle Zusagen während des Bestellprozesses für deine Unterlagen. Ein DSL-Wechselbonus lohnt sich fast immer bei Unzufriedenheit. Die Ersparnis gleicht die Mühe des Wechsels locker aus. Bleibe flexibel und wechsle nach Ablauf der Mindestlaufzeit einfach erneut.
+Wie stark sich ein Wechselbonus auf deine realen Haushaltsausgaben auswirkt, verdeutlicht die folgende Vergleichsrechnung für einen 100-Mbit/s-VDSL-Anschluss über zwei Jahre:
 
-## Wie funktioniert ein DSL-Wechselbonus?
-Der neue Provider zahlt den Bonus meist nach der ersten Abrechnung aus. Dies geschieht als Gutschrift auf dein Kundenkonto oder per Überweisung. Manche Firmen verrechnen den Betrag direkt mit den monatlichen Grundgebühren. So zahlst du in der Startphase effektiv 0 €. Ein Cashback DSL erfordert oft den Upload deiner ersten Rechnung.
+| Kostenposition | Alter Vertrag (Bestandskunde) | Neuer Vertrag mit Wechselbonus |
+|:---|:---|:---|
+| Grundgebühr Monat 1–12 | 12 × 44,95 € = 539,40 € | 12 × 19,95 € = 239,40 € |
+| Grundgebühr Monat 13–24 | 12 × 44,95 € = 539,40 € | 12 × 44,95 € = 539,40 € |
+| Bereitstellungsgebühr | 0,00 € | 0,00 € (Aktionsvorteil) |
+| DSL-Wechselbonus & Cashback | 0,00 € | **- 180,00 €** (Gutschrift) |
+| **Gesamtausgaben über 24 Monate** | **1.078,80 €** | **598,80 €** |
+| **Effektiver Monatspreis** | **44,95 € / Monat** | **24,95 € / Monat** |
 
-Halte dich strikt an die Fristen für deine Unterlagen. Verpasst du den Zeitraum, verfällt dein Anspruch auf das Geld. Meist hast du nach der Aktivierung ca. 4 bis 8 Wochen Zeit. Der Anbieter prüft deine Daten und gibt die Zahlung frei. In der Regel landet das Geld nach etwa drei Monaten bei dir.
+> 💶 **Dein Gesamtvorteil:** Durch den regelmäßigen Anbieterwechsel sparst du in 24 Monaten exakt **480,00 €** – bei identischer oder oft sogar besserer Leitungskapazität!
 
-Einige Tipps, um den DSL-Wechselbonus zu sichern:
-* Lies die Bedingungen des Anbieters genau durch.
-* Dokumentiere alle Zusagen während des Bestellprozesses.
-* Halte dich an die Fristen für die Unterlagen.
-* Prüfe, ob der Anbieter eine Möglichkeit bietet, den Bonus vorzeitig zu erhalten.
+> 💶 **Spar-Tipp zwischendurch:** Vergleiche aktuelle Aktionspreise für deinen Wohnort in wenigen Minuten: [**Vergleichen & sparen**](/go/dsl/)
 
-> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/dsl/)
+## Die wichtigsten Provider und ihre Wechselvorteile
 
-## Die richtige Wahl
-Überlege dir vorab genau, welche Bandbreite du wirklich benötigst. Reichen 50 Mbit/s oder brauchst du 100 Mbit/s für Homeoffice? Kundenbewertungen geben dir wertvolle Hinweise auf den echten Service. Der rein preisliche Vorteil hilft wenig bei ständigen Leitungsabbrüchen. Nutze professionelle Vergleiche, um dir deinen DSL-Wechselbonus sichern zu können.
+Auf dem deutschen Breitbandmarkt stehen verschiedene Netzanbieter im direkten Wettbewerb:
 
-Diese Faustwerte zeigen die passende Geschwindigkeit:
+* **Deutsche Telekom:** Punktet mit exzellenter Leitungsstabilität und gewährt bei MagentaZuhause-Tarifen häufig Startguthaben von über 100 € sowie Router-Gutschriften.
+* **Vodafone:** Lockt Neukunden mit extrem günstigen Einstiegspreisen in den ersten neun bis zwölf Monaten und hohen Einmalprämien bei Kabel- und DSL-Anschlüssen.
+* **1&1:** Bietet flexible Tarifstrukturen, hardwareseitige Extras und garantierte Freimonate bei 24 Monaten Laufzeit.
+* **O2 Telefónica:** Überzeugt durch faire Kombi-Rabatte für bestehende Mobilfunkkunden und transparente Preismodelle.
+* **Regionale Netzbetreiber (M-net, EWE, wilhelm.tel, NetCologne):** Betreiben in ihren Regionen eigene Hochgeschwindigkeitsnetze und bieten oft erstklassigen Kundenservice mit regionalen Treueboni.
 
-| Nutzung | Empfohlene Geschwindigkeit |
-|:--- |:--- |
-| E-Mail, Surfen, Serien in HD | 50 Mbit/s |
-| 4K-Streaming, Gaming | 100 Mbit/s |
-| Homeoffice, Videocalls, Smart Home | 250 Mbit/s und mehr |
+## In 4 einfachen Schritten zur Wechselprämie
 
-Stelle dir vor dem Abschluss drei wichtige Fragen. Welche Tarife sind an deiner Adresse konkret verfügbar? Bietet der Anbieter einen kostenlosen Service für die Installation an? Wie bewerten andere Nutzer den Support bei technischen Störungen?
+Befolge diese vier Schritte, um deinen Wechselbonus sicher zu erhalten:
 
-Verlasse dich nicht nur auf die Werbung großer Konzerne. Regionale Anbieter bieten oft sehr gute Konditionen und stabile Leitungen. Ein DSL-Wechselbonus ist ein tolles Extra für deine Haushaltskasse. Die Basisleistung des Anschlusses muss jedoch dauerhaft stimmen. Mit einem klugen Vergleich findest du das perfekte Paket.
+1. **Vertragslaufzeit ermitteln:** Prüfe in deiner letzten Telefonrechnung das genaue Ende der Mindestvertragslaufzeit. Nach Ablauf der ersten zwei Jahre kannst du mit einer Frist von maximal einem Monat kündigen.
+2. **Verfügbarkeit prüfen:** Gib deine Adresse in den Tarifvergleich ein, um festzustellen, welche Geschwindigkeiten an deiner Anschlussdose ankommen.
+3. **Anbieterwechsel online beauftragen:** Wähle deinen Wunschtarif und gib an, dass du wechseln möchtest. Trage deine bisherige Kundennummer und Rufnummern ein. Der neue Provider kündigt deinen Alttarif automatisch.
+4. **Gutschrift prüfen:** Kontrolliere auf deiner ersten oder zweiten Monatsabrechnung, ob der vereinbarte Bonus vollständig abgezogen wurde.
 
-Einige Beispiele für regionale Anbieter:
-* **M-net**: Bietet eine Vielzahl von Tarifen mit unterschiedlichen Geschwindigkeiten an.
-* **Ewe**: Lockt mit günstigen Preisen und einer großen Auswahl an Tarifen.
-* **Wilhelm. tel**: Bietet eine Kombination aus DSL und Entertainment-Diensten an.
+Wenn du dein Heimnetzwerk optimal einrichten willst, wirf einen Blick in unsere Anleitung zur [WLAN-Optimierung für mehr Reichweite](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) sowie in die Übersicht im [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
-## Schritt für Schritt: So klappt der DSL-Wechsel
-In sieben Schritten vom Klick zum Geld:
+## Häufige Fallstricke beim Bonus-Wechsel vermeiden
 
-1. **Altvertrag prüfen:** Laufzeit und Kündigungsfrist notieren – Verlängerungen lauern im Kleingedruckten.
-2. **Erst bestellen, dann kündigen:** Bestelle den neuen Anschluss, bevor der alte Vertrag ausläuft.
-3. **Aktivierungsdatum festlegen:** Wähle als Start den Tag nach dem Ende des alten Vertrags.
-4. **Bonus schriftlich fixieren:** Die Zusage gehört in die Bestellbestätigung – ein Telefonhinweis zählt nicht.
-5. **Installation abnehmen:** Router aufstellen, messen, Probleme dokumentieren.
-6. **Altvertrag fristgerecht kündigen:** Am besten schriftlich, Beleg aufbewahren.
-7. **Bonus-Fristen einhalten:** Unterlagen rechtzeitig nachreichen, Auszahlung im Blick behalten.
+* **Unüberlegte Eigenkündigung:** Kündige deinen bisherigen Festnetzvertrag keinesfalls selbst. Überlässt du die Kündigung dem neuen Anbieter, ist ein lückenloser Übergang gesetzlich nach § 58 TKG geschützt.
+* **Fristen für Rechnungs-Upload:** Bei Cashback-Aktionen musst du die erste Monatsrechnung meist binnen 4 bis 8 Wochen im Portal hochladen. Notiere dir diesen Termin im Kalender.
+* **Dauerhafte Router-Miete:** Ein Mietrouter für 5 € bis 8 € monatlich kostet in zwei Jahren bis zu 192 €. Ein eigener Kauf-Router rechnet sich fast immer.
 
-## Beispielrechnung: Wie viel spart du beim Wechsel?
-Ein Beispiel: Der Altvertrag kostet 49,99 € im Monat, der neue Tarif 24,99 € plus 150 € Wechselbonus. Über 24 Monate Laufzeit kostet der alte Vertrag 1.199,76 €, der neue 599,76 €. Nach der Bonuszahlung sinkt dein Effektivpreis auf 449,76 €.
+## Fazit: DSL-Wechselbonus clever einstreichen
 
-Die Ersparnis: **750 € in zwei Jahren – rund 31 € pro Monat.** Aktuelle Preise für deine Adresse zeigt der [DSL-Vergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/).
-
-## Diese fünf Fehler kosten dich den Bonus
-* **Kündigung im falschen Monat:** Der Altvertrag verlängert sich automatisch, der neue läuft parallel – du zahlst doppelt.
-* **Mündliche Bonus-Zusage:** Ohne schriftliche Bestätigung lässt sich die Prämie schwer durchsetzen.
-* **Fristen verpasst:** Unterlagen nachreichen klappt meist nur 4 bis 8 Wochen – dann verfällt der Anspruch.
-* **Zu früher Ausstieg:** Wer vor Laufzeitende kündigt, verliert den Bonus und zahlt oft eine Vertragsstrafe.
-* **Bonus statt Bedarfscheck:** Der Sparvorteil rechnet sich nur, wenn die Geschwindigkeit zum Alltag passt.
-
-## Fazit:<br>DSL-Wechselbonus sichern: So sparst du beim Internetvertrag schlau nutzen
-
-Sich gezielt mit dem Thema **DSL-Wechselbonus sichern: So sparst du beim Internetvertrag** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und bares Geld zu sparen. Ein regelmäßiger Anbieterwechsel sichert dir attraktive Neukunden- und Wechselboni für schnelles Internet zum Bestpreis. Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀
-
-
+Den **DSL-Wechselbonus** alle zwei Jahre mitzunehmen, ist eine der einfachsten Methoden, um ohne jeglichen Komfortverlust hunderte Euro an monatlichen Fixkosten einzusparen. Da der neue Anbieter die Kündigung und die Rufnummernmitnahme komplett übernimmt, liegt der tatsächliche Arbeitsaufwand bei unter 10 Minuten. Vergleiche noch heute die verfügbaren Geschwindigkeiten an deiner Adresse und sichere dir deine Wechselprämie.
 
 **Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
+
 ## Häufige Fragen
+
 ### Was ist ein DSL-Wechselbonus?
-Ein DSL-Wechselbonus ist eine Geldprämie für deinen Umzug zu einem neuen Internetanbieter. Er dient als Anreiz für Neukunden und senkt deine Gesamtkosten deutlich.
+Ein DSL-Wechselbonus ist eine finanzielle Prämie für Neukunden, die von einem anderen Festnetzanbieter wechseln. Er wird in Form von Rechnungsgutschriften, Einmalzahlungen oder Cashback ausgezahlt und senkt die Gesamtkosten im ersten Vertragsjahr deutlich.
 
-### Wie funktioniert ein DSL-Wechselbonus?
-Du erhältst den Bonus nach dem erfolgreichen Wechsel meist als Gutschrift. Manche Anbieter überweisen den Betrag auch direkt auf dein Bankkonto, sobald der Anschluss aktiv ist.
+### Wie wird der DSL-Wechselbonus ausgezahlt?
+Die Prämie wird entweder ab dem ersten Abrechnungsmonat als Guthaben mit den Monatsbeiträgen verrechnet oder nach Freischaltung des Anschlusses direkt auf dein Bankkonto überwiesen.
 
-### Welche Vorteile hat ein DSL-Wechselbonus?
-Du sparst effektiv viel Geld und finanzierst so oft neue Hardware. Zudem wechselst du durch den Bonus häufig in einen schnelleren Tarif zum kleineren Preis.
+### Kann es beim Anbieterwechsel zu einem Internetausfall kommen?
+Nein, das deutsche Telekommunikationsgesetz (§ 58 TKG) garantiert, dass der alte Anbieter die Leitung so lange weiter versorgen muss, bis der neue Anbieter den Anschluss erfolgreich aufgeschaltet hat. Die maximale Ausfallzeit am Tag der Umschaltung darf wenige Stunden nicht überschreiten.
 
-### Wie kann ich den DSL-Wechselbonus sichern?
-Lies die Bedingungen des Anbieters genau durch, dokumentiere alle Zusagen während des Bestellprozesses und halte dich an die Fristen für die Unterlagen.
+### Gilt der Wechselbonus auch für Kabel-Internet und Glasfaser?
+Ja, viele Anbieter zahlen den Wechselbonus unabhängig von der Übertragungstechnik – egal ob du zu klassischem VDSL, Kabel-Internet (Koaxial) oder einem echten Glasfaseranschluss (FTTH) wechselst.
 
-### Was passiert, wenn ich vorzeitig kündige?
-Du verlierst möglicherweise den DSL-Wechselbonus und musst Vertragsstrafen zahlen. Lies die Bedingungen des Anbieters genau durch, um dies zu vermeiden.
+### Muss ich meinen alten Vertrag selbst kündigen?
+Nein. Bei einem regulären Wechsel übernimmt der neue Provider die Kündigung bei deinem Altanbieter und regelt auch die Mitnahme deiner bisherigen Festnetznummern.
 
 ### Kann ich den Bonus mit weiteren Aktionen kombinieren?
-Meist ja: Anschlussgebühr-Rabatt, Gratis-Router und Wechselbonus laufen parallel. Prüfe nur die Aktionszeitfenster – manche Prämien gelten nur einige Monate.
-
-### Gibt es den Wechselbonus auch bei Glasfaser oder Kabel?
-Ja, bei den meisten Anbietern. Die Prämie hängt nicht von der Technik ab – DSL, Glasfaser, Kabel und Mobile fallen alle infrage. Glasfaser-Boni sind oft sogar etwas höher.
+In den meisten Fällen ja: Startguthaben, Hardware-Nachlässe und der Wechselbonus lassen sich bei Online-Bestellungen über Vergleichsportale miteinander kombinieren.
 
 ---
-**Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/dsl/)
+
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -1,6 +1,6 @@
 {{- /* Pinterest-optimierter RSS-2.0-Feed (Home).
       - Nur BLOG-Artikel (Section "posts") – keine Rechts-/Pillar-Seiten.
-      - Jedes Item trägt Titel, Link, Meta-Description und das Cover-Bild
+      - Jedes Item trägt Titel, Link, Meta-Description / Pin-Description und das Cover-Bild
         (enclosure + media:content + media:thumbnail) → Pinterest baut daraus
         automatisch Pins (2:3, 1000×1500).
       - RSS 2.* (nicht Atom) – Pflicht für Pinterests "Auto-publish".
@@ -36,7 +36,7 @@
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       <guid isPermaLink="true">{{ .Permalink }}</guid>
-      <description>{{ with .Description | html }}{{ . }}{{ else }}{{ .Summary | plainify | html }}{{ end }}</description>
+      <description>{{ with or .Params.pin_description .Description | html }}{{ . }}{{ else }}{{ .Summary | plainify | html }}{{ end }}</description>
       {{- with .Params.cover.image }}
       {{- $img := . | absURL }}
       <enclosure url="{{ $img }}" type="image/jpeg" />

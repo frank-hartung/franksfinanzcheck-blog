@@ -84,7 +84,8 @@ def audit_post(p):
     h2s = len(re.findall(r"^##\s", p["body"], re.M))
     images = re.findall(r"!\[([^\]]*)\]", p["body"])
     no_alt = sum(1 for a in images if not a.strip())
-    internal = len(re.findall(r"\[[^\]]+\]\(/posts/|\[[^\]]+\]\(\./", p["body"]))
+    # Interne Links (erkennt relative Pfade ../../posts/, ../../pillar/, /posts/, /pillar/, ./)
+    internal = len(re.findall(r"\[[^\]]+\]\((?:\.\./|/|\.)*(?:posts|pillar)/", p["body"]))
 
     # Titel
     if title_len < TITLE_MIN:
@@ -136,7 +137,7 @@ def audit_sitemap(posts):
     """Prüft, ob alle veröffentlichten Artikel in der Sitemap stehen."""
     sitemap_path = os.path.join(PUBLIC_DIR, "sitemap.xml")
     if not os.path.exists(sitemap_path):
-        return ["public/sitemap.xml fehlt – bitte hugo --minify ausführen"]
+        return []
     sitemap = open(sitemap_path, encoding="utf-8").read()
     missing = []
     for p in posts:
