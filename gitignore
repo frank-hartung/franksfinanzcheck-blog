@@ -1,0 +1,29 @@
+# ==============================================================================
+# Hugo Professional .gitignore - FranksFinanzcheck.de
+# Verhindert Git-Ballast, Cache-Leichen & Konflikte bei Builds
+# ==============================================================================
+
+# Generated build output (NIEMALS in Git committen!)
+public/
+resources/_gen/
+.hugo_build.lock
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Node / Package Caches
+node_modules/
+npm-debug.log*
+
+# Python Caches (fuer Automation-Skripte)
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Temporary / Draft Backup files
+*.bak
+*.tmp
+*~
