@@ -282,16 +282,25 @@ DEMO_MODE=1 python3 scripts/generate_drafts.py   # erzeugt Test-Entwurf
 
 ---
 
-## 📌 Pinterest-Integration (Masterplan August 2026)
+## 📌 Pinterest-Integration (Masterplan August 2026, Premium-Phase 2)
 
-Der Themenpool `data/topics.yaml` ist 1:1 aus deinem Pinterest-Masterplan abgeleitet:
+Der Themenpool `data/topics.yaml` ist 1:1 aus deinem Pinterest-Masterplan
+(`data/pinterest_plan.yaml`, 62 Pins) abgeleitet.
 
-**Educational-Pins (EP) → Blog-Artikel**
-Die 10 wiederkehrenden EP-Themen (Frugalismus-Tricks, 50-30-20-Regel, Stromfresser, WLAN vs. Mesh, Urlaubskasse, finanzielle Freiheit, Notgroschen, Heizperiode, DNS-Server, Mietwagen-Fallen) sind als Themen im Pool. Tipp: Ändere die **DESTINATION URL** deiner EP-Pins von `pinterest.de/franksfinanzcheck/` auf den jeweiligen Blog-Artikel – so bekommen die Pins eine SEO-wertvolle Zielseite statt nur dein Profil.
+**Premium-Regel (automatisch durchgesetzt):** `Pin → eigener Blogartikel → Affiliate-CTA`.
+Nie direkt aufs Pinterest-Profil (Sackgasse) und nie nackt auf CHECK24 (Spam-Signal).
 
-**Transactional-Pins (TP) → CHECK24**
-Die TP-Pins (Strom, Gas, DSL, Girokonto, Kredit, Kfz, Reisen, Mietwagen, Flüge) sind ebenfalls im Pool – mit dem passenden CHECK24-Link pro Artikel (`affiliate_url`). Die Blog-Artikel verlinken damit automatisch auf die richtige Vergleichs-Kategorie.
+**So wird das verlinkt (alle Schichten automatisch, s. `PINTEREST-PREMIUM-STRATEGIE.md` § 12–14):**
 
-**Neue Artikel = neue Pin-Ideen:** Jeder vom Bot erzeugte Entwurf kann als Vorlage für einen neuen Pin dienen (Titel + Kernaussagen → Infografik).
+| Schicht | Skript | Aufgabe |
+|---|---|---|
+| Zielseite | `scripts/pinterest_link_healer.py` | Weist jeden der 62 Pins per Scoring auf den bestmöglichen Artikel/Pillar-Seite (UTM inkl.) |
+| Premium-Texte | `scripts/pinterest_pin_text_sync.py` | Überträgt die kuratierten Pin-Titel/-Beschreibungen + `pinwand` in die Artikel (1:1 + Board-Gate) |
+| Zielseiten-Garantie | `scripts/pinterest_link_guard.py` | LOCAL: Slug-Existenz/Draft/Domain/UTM/URL-Form · LIVE (CI): HTTP 200 + Domain-Bleibepflicht + Rich-Pin-Meta |
+| Posting | `scripts/pinterest_engine.py` | Pinnt neue Artikel per API v5 auf das **richtige der 6 Boards** (Routing per Pinwand/Pillar, Board-Auto-Creation), Drafts nie |
+| Profil | `scripts/pinterest_profile_audit.py` | Live-Profil (Name/Bio/Boards) vs. Premium-Soll → Copy-Paste-Report |
+| Rich Pins | Hugo-Templates + `layouts/_default/rss.xml` | og:image (sauber, 1000×1500), Pin-It-Button auf jedem Artikel, RSS-Auto-Publish mit Cover + Premium-Description |
 
-**Fertiger Verlinkungsplan:** In `Pinterest-Blog-Verlinkungsplan.xlsx` findest du alle 62 Pins mit der jeweils passenden Blog-URL (nach Domain-Ersetzung einfach im Pinterest-Bulk-Editor eintragen).
+**Transactional-Pins (TP) → CHECK24:** Die TP-Pins (Strom, Gas, DSL, Girokonto, Kredit, Kfz, Reisen, Mietwagen, Flüge) sind im Pool – mit dem passenden CHECK24-Link pro Artikel (`affiliate_url` über `scripts/check24_links.yaml`). Manuelle TP-Pins immer über die eigene Gateway-URL `franksfinanzcheck.de/go/<kategorie>/` pinnen (nie nackten CHECK24-Link).
+
+**Zielseiten-Zuordnung aller Pins im Blick:** `PINTEREST-LINK-REPORT.md` (Zuordnung + Scores + Content-Lücken) · `PINTEREST-LINK-GUARD-REPORT.md` (Reachability) · `PINTEREST-PROFILE-REPORT.md` (Profil-Soll-Abgleich).

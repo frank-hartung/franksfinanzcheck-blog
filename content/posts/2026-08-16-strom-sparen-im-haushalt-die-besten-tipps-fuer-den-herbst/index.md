@@ -18,8 +18,9 @@ kurzantwort: "Im Herbst steigt der Stromverbrauch durch frühere Dunkelheit und 
 
 social_posted: true
 keywords: ["Strom sparen im Haushalt", "Stromfresser finden", "Stromkosten senken", "Stromtarif vergleichen", "Energieeffizienz", "Frugalismus", "Geld sparen"]
-pin_title: "Strom sparen im Haushalt: Die besten Tipps für den Herbst"
-pin_description: "*Werbung | Strom sparen im Haushalt: Mit diesen 8 Praxistipps für Beleuchtung, Standby, Elektrogeräte und Tarifwechsel senkst du deine Stromrechnung um bis zu 460 €. Mehr Spartipps auf FranksFinanzcheck! #stromsparenimhaushalt #stromfresserfinden #stromkostensenken"
+pin_title: "Stromfresser finden: So sparst du bis zu 300 € im Jahr"
+pin_description: "*Werbung | Mit einem 15-€-Messgerät findest du jeden heimlichen Stromfresser in deiner Wohnung: Wir zeigen Schritt für Schritt, wie du misst, was die Messwerte bedeuten und welche Geräte sich zuerst lohnen. Bis zu 300 € Sparpotenzial – jetzt nachmessen!"
+pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
 # Strom sparen im Haushalt: Die besten Tipps für den Herbst

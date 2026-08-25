@@ -18,8 +18,9 @@ kurzantwort: "Erfolgreiches Sparen im Alltag basiert nicht auf radikalem Verzich
 
 social_posted: true
 keywords: ["Geld sparen im Alltag", "Alltagsspartipps", "Sparen ohne Verzicht", "Fixkosten reduzieren", "Haushaltsbudget planen", "Frugalismus"]
-pin_title: "Geld sparen im Alltag: Einfache Tipps, die jeder umsetzen"
-pin_description: "*Werbung | Geld sparen im Alltag: 10 sofort umsetzbare Spartipps für Haushalt, Einkaufen, Verträge und Finanzen. Baue mühelos 3.500 € Notgroschen auf! Mehr Spartipps auf FranksFinanzcheck! #geldsparenimalltag #alltagsspartipps #sparenohneverzicht"
+pin_title: 5 einfache Frugalismus-Tricks für den Alltag
+pin_description: "*Werbung | Geld sparen ohne Verzicht-Stress: Diese 5 praxiserprobten Frugalismus-Tricks senken deine Alltagsausgaben ab Tag 1 – von der 24-Stunden-Regel bis zum No-Spend-Weekend. Jetzt alle Tricks im Guide nachlesen."
+pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 ---
 
 # Geld sparen im Alltag: Einfache Tipps, die jeder umsetzen kann

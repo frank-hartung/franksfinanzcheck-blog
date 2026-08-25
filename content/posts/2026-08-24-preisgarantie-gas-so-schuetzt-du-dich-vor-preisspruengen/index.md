@@ -18,8 +18,9 @@ kurzantwort: "Eine vertragliche Gaspreisgarantie sichert Verbraucher gegen unerw
 
 social_posted: true
 keywords: ["Preisgarantie Gas", "Gaspreissprünge", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Gaspreisgarantie"]
-pin_title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
-pin_description: "*Werbung | Preisgarantie Gas: So schützt du dich vor extremen Preissprüngen am Energiemarkt. Klauseln, Tarife und Spartipps im Check – spare bis zu 580 € pro Jahr. Mehr Spartipps auf FranksFinanzcheck! #preisgarantiegas #gaspreisspruenge #gastarifwechseln"
+pin_title: "Gastarife vergleichen: Jetzt vor der Heizperiode wechseln"
+pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel – bevor die Heizperiode die Preise hochtreibt. Vergleiche jetzt Gastarife mit Preisgarantie und Wechselboni. 5 Minuten Aufwand, mehrere hundert Euro Ersparnis möglich. Jetzt Angebote sichern!"
+pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
 # Gaspreisgarantie: So schützt du dich vor Preissprüngen

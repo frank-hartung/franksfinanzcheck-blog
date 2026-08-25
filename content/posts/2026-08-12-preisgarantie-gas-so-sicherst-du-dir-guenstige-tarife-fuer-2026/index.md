@@ -18,8 +18,9 @@ kurzantwort: "Eine verlässliche Preisgarantie für Gas sichert den Arbeits- und
 
 social_posted: true
 keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise absichern", "Gasanbieter Festpreis", "Heizkosten 2026 senken", "Preisgarantie Gas"]
-pin_title: "Preisgarantie Gas: So sicherst du günstige Tarife"
-pin_description: "*Werbung | Preisgarantie Gas 2026: Schütze dich vor steigenden Gaspreisen und CO2-Abgaben. Erfahre alles über feste Arbeitspreise, Sonderkündigung und spare bis 650 €. Mehr Spartipps auf FranksFinanzcheck! #preisgarantiegas2026 #gaspreiseabsichern #gasanbieterfestpreis"
+pin_title: Gaspreise steigen? Jetzt Tarif mit Preisgarantie sichern
+pin_description: "*Werbung | Vor der Heizsaison ziehen viele Anbieter die Preise an – mit einer Preisgarantie von 12 bis 24 Monaten bist du dagegen gefeit: Jetzt Gastarife mit fester Preisbindung vergleichen und teure Preissprünge einfach aussitzen. 5 Minuten Aufwand, ein Jahr Ruhe. Jetzt sichern!"
+pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
 # Gaspreisgarantie: So sicherst du dir günstige Tarife für 2026
