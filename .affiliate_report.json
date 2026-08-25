@@ -1,5 +1,5 @@
 {
- "total": 25,
+ "total": 31,
  "errors": 0,
  "fixed": 0,
  "posts": [
@@ -225,6 +225,26 @@
    "ok": true
   },
   {
+   "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+   "title": "Haushaltsbuch führen: App, Excel oder Papier?",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+   "title": "Mietwagen buchen ohne Kaution: So umgehst du die F",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
    "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
    "title": "Frugalismus-Tipps: Mehr Freiheit durch klugen Verz",
    "pillar": "frugalismus",
@@ -239,6 +259,44 @@
    "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
    "title": "Preisgarantie Gas: So schützt du dich vor Preisspr",
    "pillar": "strom-sparen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet",
+   "title": "DNS-Server wechseln: Schnelleres und sichereres In",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
+   "title": "Kfz-Versicherung Vergleich 2026: Bis zu 800 € pro ",
+   "pillar": "versicherungen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-28-handytarif-vergleichen-2026-guenstige-tarife",
+   "title": "Handytarif vergleichen 2026: Günstige Tarife ab 4,",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-08-28-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
+   "title": "Tagesgeld-Zinsen 2026: Die besten Zinssätze im Ver",
+   "pillar": "konto-karten",
    "fixed": 0,
    "errors": [],
    "infos": [],
