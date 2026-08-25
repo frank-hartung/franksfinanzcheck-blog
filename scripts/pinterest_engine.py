@@ -201,9 +201,31 @@ def mark_pinned(post):
 # Main
 # ---------------------------------------------------------------------------
 
+def heal_pin_links() -> None:
+    """Premium-Guard: Vor jedem Lauf sicherstellen, dass kein Pin auf das
+    Pinterest-Profil (Traffic-Sackgasse) oder direkt auf CHECK24 (Spam-Signal)
+    zeigt. Heilt data/pinterest_plan.yaml auf die jeweils beste eigene
+    Blogseite. Faellt der Healer aus, laeuft die Engine normal weiter."""
+    healer = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                          "pinterest_link_healer.py")
+    if not os.path.exists(healer):
+        return
+    try:
+        import subprocess
+        r = subprocess.run([sys.executable, healer, "--apply"],
+                           capture_output=True, text=True, timeout=120)
+        print("Link-Healer:", (r.stdout or r.stderr).strip().splitlines()[0]
+              if (r.stdout or r.stderr).strip() else "ok")
+    except Exception as e:  # nie den Pin-Lauf blockieren
+        print(f"Link-Healer uebersprungen: {e}")
+
+
 def main():
     dry_run = "--dry-run" in sys.argv
     list_boards = "--list-boards" in sys.argv
+
+    if not list_boards:
+        heal_pin_links()
 
     posts = load_posts()
     unpinned = [p for p in posts if not p["pinned"]]
