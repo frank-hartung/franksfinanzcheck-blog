@@ -18,8 +18,9 @@ kurzantwort: "Wer im Spätsommer (August bis Oktober) seine Heizungsanlage warte
 
 social_posted: true
 keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie"]
-pin_title: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
-pin_description: "*Werbung | Gasrechnung senken vor der Heizperiode: Vermeide die 5 teuersten Spätsommer-Fehler bei Heizung, Thermostaten und Tarifen und spare bis zu 720 €. Mehr Spartipps auf FranksFinanzcheck! #gasrechnungsenken #heizkostensenken #gastarifwechseln"
+pin_title: "Heizperiode vorbereiten: 6 Schritte gegen hohe Gasrechnungen"
+pin_description: "*Werbung | Wer die Heizperiode schon im Spätsommer vorbereitet, spart richtig Geld: Heizung entlüften, Thermostate clever einstellen, Gasvertrag prüfen – unsere 6-Schritte-Checkliste macht dein Zuhause fit für den Winter. Jetzt abhaken!"
+pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
 # Gasrechnung senken: Fehler im Spätsommer vermeiden

@@ -18,8 +18,9 @@ kurzantwort: "Einen Mietwagen komplett ohne Kaution gibt es in der Praxis nur in
 
 social_posted: false
 keywords: ["Mietwagen buchen", "Mietwagen ohne Kaution", "Mietwagen Kaution Kreditkarte", "Vollkasko ohne Selbstbeteiligung", "Mietwagen Fallen", "Mietwagen Versicherung", "günstige Mietwagen"]
-pin_title: "Mietwagen buchen ohne Kaution: So umgehst du die Fallen"
-pin_description: "*Werbung | Mietwagen buchen ohne Kaution? Wie du die Kautionsfalle umgehst, welche Vollkasko ohne Selbstbeteiligung wirklich schützt und wo du bis zu 40 % am Urlaubsort sparst. Mehr Reisetipps auf FranksFinanzcheck! #mietwagenbuchen #mietwagenohnekaution #vollkaskoohneselbstbeteiligung"
+pin_title: "Mietwagen-Fallen im Urlaub: 7 Kostenfallen & wie du sie umgehst"
+pin_description: "*Werbung | Versteckte Kosten beim Mietwagen? Nicht mit uns: Diese 7 Fallen – von der Vollkasko-Masche bis zur Tankregelung – kosten Urlauber jedes Jahr Hunderte Euro. So schützt du dich vor bösen Überraschungen am Schalter. Jetzt lesen!"
+pinwand: "Günstig reisen | Reisebudget & Mietwagen"
 ---
 
 # Mietwagen buchen ohne Kaution: So umgehst du die Fallen im Urlaub

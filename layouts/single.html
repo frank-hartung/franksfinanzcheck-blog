@@ -1,6 +1,12 @@
 {{- define "main" }}
 
 <article class="post-single">
+  {{- /* Premium Pin-It (25.08.2026): floating Button – Leser pinnen
+         direkt von der Artikel-Seite (Viral-Loop + Rich-Pin-Signale).
+         Nur echte Posts mit Cover (2:3-Bild für den Pin-Prefill). */ -}}
+  {{- if and (eq .Section "posts") (not .Draft) .Params.cover.image }}
+  {{ partial "pin_button.html" (slice "float" .) }}
+  {{- end }}
   <header class="post-header">
     {{ partial "breadcrumbs.html" . }}
     <h1 class="post-title entry-hint-parent">
@@ -60,6 +66,10 @@
   {{- partial "extend_post_content.html" . }}
 
   <footer class="post-footer">
+    {{- /* Premium Pin-It (Footer-Variante für Mobile/Artikel-Ende) */ -}}
+    {{- if and (eq .Section "posts") (not .Draft) .Params.cover.image }}
+    <div class="ff-pin-footer" style="margin:4px 0 14px;">{{ partial "pin_button.html" (slice "footer" .) }}</div>
+    {{- end }}
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
     <ul class="post-tags">
       {{- range ($.GetTerms $tags) }}

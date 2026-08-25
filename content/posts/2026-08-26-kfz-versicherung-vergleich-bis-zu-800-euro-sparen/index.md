@@ -18,8 +18,9 @@ kurzantwort: "Der günstigste Zeitpunkt für einen Kfz-Versicherungsvergleich is
 
 social_posted: false
 keywords: ["Kfz Versicherung Vergleich", "Kfz Versicherung wechseln", "Autoversicherung Vergleich", "Schadenfreiheitsklasse", "Kfz Versicherung kündigen", "Kfz Haftpflicht", "Teilkasko Vollkasko", "30. November Kündigungsfrist"]
-pin_title: "Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen"
-pin_description: "*Werbung | Kfz-Versicherung Vergleich 2026: Mit diesen 7 Tipps holst du bis zu 800 € Beitragsersparnis raus – Kündigungsfrist 30.11., SF-Klasse, Werkstattbindung & Deckungssumme. Mehr Versicherungs-Tipps auf FranksFinanzcheck! #kfzversicherungvergleich #kfzversicherungwechseln #autoversicherung"
+pin_title: "Kfz-Versicherung wechseln bis 30.11.: Jetzt vergleichen & sparen"
+pin_description: "*Werbung | Stichtag 30.11. nicht verpassen: Bis dahin kannst du deine Kfz-Versicherung für das neue Jahr wechseln – Vergleiche zeigen immer wieder mehrere hundert Euro Sparpotenzial. Jetzt Tarife mit deinen Fahrzeugdaten durchrechnen und günstig ins neue Jahr starten!"
+pinwand: "Versicherungen clever wechseln & sparen"
 ---
 
 # Kfz-Versicherung Vergleich 2026: Bis zu 800 € pro Jahr sparen

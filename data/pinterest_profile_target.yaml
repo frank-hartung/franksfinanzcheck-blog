@@ -1,0 +1,49 @@
+# ============================================================
+#  PINTEREST-PROFIL – SOLL-ZUSTAND (Premium, 25.08.2026)
+#
+#  Single Source of Truth für das Pinterest-Profil
+#  de.pinterest.com/franksfinanzcheck.
+#
+#  WIE SIE GENUTZT WIRD:
+#    scripts/pinterest_profile_audit.py vergleicht mit Token
+#    das LIVE-Profil (GET /v5/me + /v5/boards) mit diesem
+#    Soll-Zustand und schreibt PINTEREST-PROFILE-REPORT.md –
+#    inkl. Copy-Paste-Liste für jede Abweichung.
+#
+#    OHNE Token: Der Audit liefert diesen Text als
+#    Copy-Paste-Checkliste (manueller Abgleich im Dashboard).
+#
+#  Textbausteine = PINTEREST-PREMIUM-STRATEGIE.md § 2 & § 3.
+#  Änderungen hier wirken auf den nächsten Audit-Lauf.
+# ============================================================
+
+profile:
+  username: franksfinanzcheck
+  display_name: "FranksFinanzcheck | Geld sparen & Tarife clever wechseln"
+  bio: "Dein Praxis-Ratgeber für weniger Fixkosten & mehr vom Leben 💡 Ehrliche Spartipps zu Strom, Gas, DSL, Versicherungen & Budget – verständlich erklärt, mit konkreten Euro-Beträgen. Über 10 Jahre Erfahrung im Tarif-Dschungel. 📌 Jede Woche neue Finanz-Hacks & Checklisten zum Speichern. 👉 Alle Guides: franksfinanzcheck.de (enthält Affiliate-Links)"
+  website: "https://franksfinanzcheck.de/"
+  # Locales/Region, wie im Dashboard gewählt
+  locale: "de"
+  # Profilbild-Datei im Repo (Upload: Einstellungen → Öffentliches Profil bearbeiten → Foto)
+  profile_photo: "static/images/social/pinterest-profilbild-marke-1000.png"
+
+# Verifizierte Website (Claim-Datei muss im Live-Root liegen)
+domain_claim:
+  file: "static/pinterest-e238f.html"
+  meta_value: "e238ffd88bd085648a14bd1d52d72405"
+
+# Boards = identisch zu data/pinterest_boards.yaml (Name + Beschreibung).
+# Hier bewusst NUR Referenz – der Audit liest die Boards aus
+# data/pinterest_boards.yaml, damit es eine Quelle gibt.
+
+# Premium-Mindeststandard:
+#   - Board mit < 5 Pins = "zu leer" (wird im Report gemeldet)
+#   - Board "Gemischt" o. ä. ohne Keyword = verwässert Topical Authority
+min_pins_per_board: 5
+
+# Pflicht-Signale, die das Profil tragen muss (werden per Report geprüft)
+required:
+  - "Business-Account (nicht privat)"
+  - "Verifizierte Website franksfinanzcheck.de (Claim + p:domain_verify)"
+  - "Werbekennzeichnung in Bio ('enthält Affiliate-Links')"
+  - "Kein leerer Board-Bestand (< 5 Pins)"

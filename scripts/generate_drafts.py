@@ -1016,6 +1016,24 @@ def category_from_pin(pin):
     return None
 
 
+def pillar_from_pinwand(pinwand):
+    """Pillar aus Board-Name – Single Source of Truth: data/pinterest_boards.yaml.
+    Damit tragen Plan-Artikel die KORREKTE Pillar (Cluster-Linking + Board-Routing)
+    statt des Defaults 'konto-karten'."""
+    try:
+        import yaml as _yaml
+        cfg = _yaml.safe_load(open(
+            os.path.join(BLOG_DIR, "data", "pinterest_boards.yaml"), encoding="utf-8")) or {}
+    except Exception:
+        return None
+    pw = re.sub(r"\s+", " ", (pinwand or "").strip().lower())
+    for b in cfg.get("boards", []):
+        if re.sub(r"\s+", " ", (b.get("name") or "").strip().lower()) == pw:
+            pillars = b.get("pillars") or []
+            return pillars[0] if pillars else None
+    return None
+
+
 def load_pin_topics():
     """Lädt Themen direkt aus dem Pinterest-Plan (data/pinterest_plan.yaml).
     Jeder Pin wird zu einem Themen-Eintrag – die Pins sind damit die
@@ -1024,7 +1042,12 @@ def load_pin_topics():
     WICHTIG: Jeder Pin bekommt den PASSENDEN Affiliate-Link aus
     scripts/check24_links.yaml zugewiesen (basierend auf Ziel-URL/Pinwand).
     Ändern sich die Links, genügt ein Update der check24_links.yaml –
-    neue Artikel nutzen dann automatisch die neuen Links."""
+    neue Artikel nutzen dann automatisch die neuen Links.
+
+    Premium (25.08.2026): Themen tragen zusätzlich pinwand + pillar
+    (Board-Routing) und die kuratierten Pin-Texte (pin_titel/pin_
+    beschreibung) – die Engine schreibt sie in das Artikel-Frontmatter,
+    damit PINs mit Premium-Text auf dem richtigen Board landen."""
     pins = load_pinterest_plan()
     aff_links = load_affiliate_links()
     topics = []
@@ -1035,11 +1058,17 @@ def load_pin_topics():
         kws = [k.strip() for k in (p.get("keywords") or "").split(",") if k.strip()]
         cat = category_from_pin(p)
         affiliate = aff_links.get(cat) or aff_links.get("allgemein")
+        pinwand = (p.get("pinwand") or "").strip()
         topics.append({
             "title": titel,
             "keywords": kws[:5] or ["Geld sparen", "Ratgeber"],
             "affiliate_url": affiliate,
             "pin_category": cat,
+            "pinwand": pinwand,
+            "pillar": pillar_from_pinwand(pinwand),
+            "pin_typ": (p.get("typ") or "EP").strip(),
+            "pin_titel": titel,
+            "pin_beschreibung": (p.get("beschreibung") or "").strip(),
         })
     return topics
 

@@ -13,8 +13,13 @@
 | 2 | **Dieses Strategie-Dokument** mit Copy-Paste-Paketen für Profil & Boards | ✅ im Repo |
 | 3 | **3 Premium-Pin-Vorlagen** (1000×1500px, Marken-CD) als Design-Referenz | ✅ `static/images/pins/` |
 | 4 | Live-Profil umgestellt (Bio, Boards, Cover) | ⏳ Job für dich (Copy-Paste-Pakete unten, ~20 Min.) |
+| 5 | **LIVE-Link-Guard**: jede Pin-Zielseite (Plan + Queue + alle Artikel) täglich per HTTP verifiziert – 200, eigene Domain, Rich-Pin-Meta | ✅ `scripts/pinterest_link_guard.py` (Phase 2, § 13) |
+| 6 | **Pin-Text-Sync**: Premium-Texte des Masterplans fließen in die Artikel (bestehend + zukünftig), 1:1-Zuordnung + Board-Gate | ✅ `scripts/pinterest_pin_text_sync.py` (Phase 2, § 13) |
+| 7 | **Multi-Board-Engine**: Pins landen automatisch auf dem richtigen der 6 Boards (Board-Auto-Creation, Routing per Pinwand/Pillar) | ✅ `pinterest_engine.py` (Phase 2, § 13) |
+| 8 | **Profil-Audit**: Live-Profil (Name/Bio/Boards) wird gegen den Premium-Soll-Zustand geprüft, inkl. Copy-Paste-Report | ✅ `scripts/pinterest_profile_audit.py` (Phase 2, § 14) |
+| 9 | **Pin-It-Button auf jedem Artikel** (floating + Footer) + sauberes `og:image` (Rich-Pin-Fix) | ✅ Templates (Phase 2, § 13) |
 
-**Warum 4 nicht automatisiert geht:** Pinterest sperrt jeden Dritt-Zugriff auf Profil-Einstellungen ohne OAuth-Token – Bio, Board-Namen und Board-Beschreibungen änderst du in deinem Dashboard in Minuten (Texte liegen unten fertig). Sobald dein API-Token aktiv ist (`ANLEITUNG-PINTEREST-API.md`), erledigt die Engine das Pin-Posting.
+**Warum 4 nicht automatisiert geht:** Pinterest sperrt jeden Dritt-Zugriff auf Profil-Einstellungen ohne OAuth-Token – Bio, Board-Namen und Board-Beschreibungen änderst du in deinem Dashboard in Minuten (Texte liegen unten fertig). Sobald dein API-Token aktiv ist (`ANLEITUNG-PINTEREST-API.md`), erledigt die Engine das Pin-Posting **und** der Profil-Audit prüft danach automatisch, ob das Live-Profil mit dem Soll-Zustand übereinstimmt (§ 14).
 
 ---
 
@@ -314,6 +319,21 @@ Max. **3 Hashtags, ASCII-only** (Umlaute killen die Hashtag-Indexierung: `#spare
 
 ---
 
+**PHASE 2 (25.08.2026, Premium-Upgrade „zuverlässiges Verlinken + Profil-Audit"):**
+- `scripts/pinterest_link_guard.py` (NEU) – Zielseiten-Garantie: LOCAL (Slug-Existenz, Draft-Schutz, eigene Domain, UTM, Permalink-Form) + LIVE (HTTP 200, Domain-Bleibepflicht, Rich-Pin-Meta, kein Meta-Refresh). Prüft Plan + Queue + alle Artikel-Permalinks. Report `PINTEREST-LINK-GUARD-REPORT.md`.
+- `scripts/pinterest_pin_text_sync.py` (NEU) – Premium-Pin-Texte aus dem Masterplan in die Artikel (1:1-Zuordnung + Board-Gate, Schwelle 1,20, idempotent, Sabotage-Schutz). 13 von 25 Bestandsartikeln tragen jetzt den Premium-Text ihres Masterplan-Pins + das `pinwand`-Feld.
+- `scripts/pinterest_profile_audit.py` (NEU) – Live-Profil vs. Premium-Soll (`data/pinterest_profile_target.yaml`), Copy-Paste-Report. Läuft bei jedem „Pinterest-AI"-Run.
+- `data/pinterest_boards.yaml` (NEU) – 6 Premium-Boards als Single Source of Truth (Namen, Beschreibungen, Pillar-Mapping, Default).
+- `scripts/pinterest_engine.py` – Multi-Board-Routing (Pinwand/Pillar → Board), Board-API-Auflösung + Cache + Auto-Creation, Drafts werden nie gepinnt (Bugfix), `--audit-profile`.
+- `scripts/pinterest_seo_healer.py` – H6: gültige Premium-Pin-Texte werden nicht mehr deterministisch überschrieben.
+- `scripts/generate_drafts.py` + `scripts/engine_generate.py` – Plan-Themen tragen `pinwand`/`pillar` (korrektes Silo statt Default) + Premium-Pin-Texte ab Geburt.
+- `layouts/_partials/pin_button.html` (NEU) + `layouts/single.html` – Premium Pin-It-Button (floating + Footer) auf jedem Artikel.
+- `layouts/_partials/templates/opengraph.html` – `og:image` ohne Query-String (Rich-Pin-Zuverlässigkeit), Maße/Alt bleiben.
+- `layouts/_default/rss.xml` – Channel-`<image>` (Feed-Bild für Auto-Publish).
+- `.github/workflows/pinterest-watchdog.yml` – + Pin-Text-Sync (Drift) + LIVE-Link-Guard mit eigenem Issue-Pfad.
+- `.github/workflows/pinterest-ai.yml` – + Profil-Audit-Step; Commit um Report/Board-Cache erweitert.
+- `ANLEITUNG-PINTEREST-API.md` – Scopes (profile:read), Multi-Board-Verfahren, neuer Automatik-Plan.
+
 ## 11. ANHANG: UTM-Konvention & „Welcher Pin bringt Provision?"
 
 Attribution läuft bewusst in **zwei getrennten Ebenen** (Industrie-Standard — Netzwerk-Ebene vs. Analytics-Ebene), damit keine falsche Kanal-Zuordnung entsteht:
@@ -407,3 +427,90 @@ Vollständige Liste mit Ziel-URLs: `PINTEREST-LINK-REPORT.md`.
 > Empfehlung: Diese 17 Themen in `data/topics.yaml` nach vorn priorisieren –
 > dann schließt die Content-Engine die Lücken automatisch, und der Healer
 > hängt die Pins beim nächsten Lauf selbsttätig auf die neuen Artikel um.
+
+---
+
+## 13. PHASE 2 (25.08.2026): Premium-Link-Guard, Pin-Text-Sync & Multi-Board-Engine
+
+**Ziel:** „Bestehende UND zukünftige Pins verlinken zuverlässig auf die richtige
+Blogseite – auf Premium-Level." Dafür laufen ab sofort drei Guards **vor JEDEM
+Pin-Lauf** (automatisch in der Engine, unabhängig von Workflow/Manual/RSS):
+
+### 13.1 `scripts/pinterest_link_guard.py` – die harte Zielseiten-Garantie
+
+| Ebene | Prüfung |
+|---|---|
+| **LOCAL** (offline, jeder Lauf) | L1 Zielslug existiert im Repo (kein 404-Slug) · L2 kein Draft als Ziel · L3 nie fremde Domain (Profil/CHECK24) · L4 UTM-Attribution vorhanden · L5 URL exakt in Hugos Permalink-Form (Datumspräfix, Trailing-Slash) |
+| **LIVE** (CI, täglich im Watchdog) | V1 HTTP 200 · V2 finale URL bleibt auf `franksfinanzcheck.de` (keine Weiterleitung auf Fremddomains) · V3 `og:title` + `og:image` vorhanden (Rich-Pin-Scraping) · V4 kein Meta-Refresh-Alias |
+
+Geprüft werden **alle** Pin-Ziele: 62 Masterplan-Pins + Pin-Queue + die
+Permalinks **aller** veröffentlichten Artikel (die Basis jeder zukünftigen Pin).
+Report: `PINTEREST-LINK-GUARD-REPORT.md` · Bei Problemen: GitHub-Issue (Watchdog).
+
+### 13.2 `scripts/pinterest_pin_text_sync.py` – Premium-Texte statt generischem Build
+
+Jeder Artikel trägt die **kuratierten Pin-Texte** des Masterplans (Hook → Nutzen
+mit Zahl → CTA) + das `pinwand`-Feld für das Board-Routing. Gegenmaßnahmen gegen
+Fehlpaarungen:
+
+- **1:1-Zuordnung:** Ein Plan-Pin wird nur an den Artikel vergeben, der sein
+  *bestes* Ziel ist (Score ≥ 1,20). Ein Artikel erhält den stärksten Pin, der ihn gewählt hat.
+- **Board-Gate:** Weicht die Pinwand des Pins (→ Pillar) von der Artikel-Pillar ab →
+  kein Match (Cross-Silo-Texte wie „Handytarif" × „Frugalismus-Pin" sind ausgeschlossen).
+- **Idempotent + Sabotage-Schutz:** Selbsttest vor jedem Schreiblauf; zweiter Lauf = 0 Änderungen.
+
+Zukünftig: Die Content-Engine schreibt Plan-Texte bereits **beim Erstellen** in die
+Frontmatter (`pin_titel`/`pin_beschreibung`/`pinwand`), der SEO-Healer überschreibt
+gültige Premium-Texte nicht mehr (H6 „gültiger Text bleibt").
+
+### 13.3 `pinterest_engine.py` – Multi-Board-Routing + Draft-Schutz
+
+- Jeder Pin geht auf das Board seiner Pinwand/Pillar (`data/pinterest_boards.yaml`,
+  6 Premium-Boards, Single Source of Truth – auch Quelle für Profil-Audit).
+- Board-IDs per API + Cache (`data/pinterest_boards_cache.json`, TTL 14 Tage);
+  fehlende Boards werden angelegt (Scope `boards:write`, `PINTEREST_CREATE_BOARDS=0` zum Ausschalten).
+- **Drafts werden nie gepinnt** (Seite nicht live = toter Pin) – zuvor ein latenter Bug.
+- `--list-boards` markiert SOLL-Boards; `--audit-profile` startet den Profil-Audit.
+
+### 13.4 Template-/Rich-Pin-Fixes
+
+- **Pin-It-Button** auf jedem Artikel (`layouts/_partials/pin_button.html`):
+  floating Leiste (Desktop) + Footer-Button – Prefill = geheltes `pin_description`,
+  Bild = 2:3-Cover. Leser pinnen direkt von der Seite (Viral-Loop + Fresh-Signale).
+- **`og:image` ohne Query-String** (Rich-Pin-Scraper ist bei `?v=<SHA>` unzuverlässig):
+  saubere URL im Meta-Tag, Cache-Busting bleibt im Seiten-`<img>` (LCP-Nutzen bleibt erhalten).
+- **RSS-Feed-Bild** (`<image>`-Channel-Element) für Pinterests Auto-Publish-Anzeige.
+- Ergebnis-Checks: `pinterest_check.py` (P3 Pin-Button, P6/P7 Rich-Pin-Meta) läuft
+  weiterhin im täglichen Watchdog gegen einen echten Hugo-Build.
+
+**Befehle (manuell):**
+```bash
+python3 scripts/pinterest_link_guard.py             # LOCAL-Check (offline)
+python3 scripts/pinterest_link_guard.py --live      # + LIVE-HTTP-Verifikation
+python3 scripts/pinterest_pin_text_sync.py          # Dry-Run
+python3 scripts/pinterest_pin_text_sync.py --apply  # Premium-Texte schreiben
+```
+
+## 14. PHASE 2 (25.08.2026): Profil-Audit (Live vs. Premium-Soll)
+
+`scripts/pinterest_profile_audit.py` vergleicht das LIVE-Profil mit dem
+Soll-Zustand aus `data/pinterest_profile_target.yaml` (+ Boards aus
+`data/pinterest_boards.yaml`):
+
+| Check | Inhalt |
+|---|---|
+| A1–A3 | Display-Name, Bio (Keyword-Dichte + Affiliate-Offenlegung), Website |
+| A4–A6 | Alle 6 SOLL-Boards vorhanden? Exakte Namen? SEO-Beschreibungen? |
+| A7 | Mindestens 5 Pins je Board (leere Boards verwässern Topical Authority) |
+| A8 | Business-Account |
+
+**Ohne Token:** Der Audit liefert das komplette Copy-Paste-Paket (Soll-Zustand)
+als Dashboard-Checkliste – der Lauf bleibt grün (Reporting, kein Fehler-Alerting).
+**Mit Token:** LIVE-Abgleich per API v5 (`/me` + `/boards`); Abweichungen werden
+als ❌ mit aktuellem Wert + Soll-Wert gemeldet. Scope `profile:read` in der
+Developer-App ergänzen (ANLEITUNG-PINTEREST-API.md, Schritt 1b), sonst prüft der
+Audit nur die Boards (vorhandene Scopes reichen dafür).
+
+Report: `PINTEREST-PROFILE-REPORT.md` · Läuft automatisch bei jedem „Pinterest-AI"-Run.
+**Manuelle Checkpunkte** (nicht per API prüfbar: Profilbild, Board-Cover, Claim):
+stehen als Checkboxen unten im Report.

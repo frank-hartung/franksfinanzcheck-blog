@@ -18,8 +18,9 @@ kurzantwort: "Tagesgeld ist 2026 mit Zinssätzen zwischen 1,8 und 3,2 Prozent wi
 
 social_posted: false
 keywords: ["Tagesgeld", "Tagesgeldkonto", "Tagesgeldzinsen", "Zinsen vergleichen", "Geld sicher anlegen", "Notgroschen", "Festgeld", "Einlagensicherung"]
-pin_title: "Tagesgeld-Zinsen 2026: Die besten Zinssätze"
-pin_description: "*Werbung | Tagesgeld-Zinsen 2026 im Vergleich: Wo es die höchsten Zinsen gibt, wie Einlagensicherung funktioniert und warum Tagesgeld als Notgroschen besser ist als Sparbuch und Girokonto. Mehr Finanz-Tipps auf FranksFinanzcheck! #tagesgeld #tagesgeldzinsen #notgroschen"
+pin_title: "Wohin mit dem Notgroschen? Tagesgeld & Co. clever nutzen"
+pin_description: "*Werbung | Dein Notfall-Polster auf dem Girokonto verliert jeden Tag an Wert: Wir vergleichen die smarten Parkplätze – Tagesgeld, Geldmarkt, verzinste Unterkonten – und zeigen, was wirklich sicher UND schnell verfügbar ist. Jetzt Zinsen mitnehmen!"
+pinwand: "Budget & Haushaltskasse: clever planen"
 ---
 
 # Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich

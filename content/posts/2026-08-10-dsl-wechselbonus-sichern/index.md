@@ -18,8 +18,9 @@ kurzantwort: "Ein DSL-Wechselbonus ist eine Neukundenprämie zwischen 50 € un
 
 social_posted: true
 keywords: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich", "Cashback DSL", "günstiges Internet", "DSL Wechselbonus sichern"]
-pin_title: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
-pin_description: "*Werbung | DSL-Wechselbonus sichern und bis zu 240 € Prämie mitnehmen: So funktioniert der Anbieterwechsel stressfrei inkl. Cashback und Fristen-Check. Mehr Spartipps auf FranksFinanzcheck! #dslwechselbonussichern #dslwechselbonus #internetvertragwechseln"
+pin_title: "DSL-Wechselbonus mitnehmen: Cashback & Rabatte sichern"
+pin_description: "*Werbung | Beim DSL-Wechsel winken aktuell Wechselboni von bis zu 200 € – als Cashback, Gutschrift oder Hardware-Rabatt. Wir zeigen, wie du Bonus UND günstigen Tarif kombinierst, ohne in die Vertragsfalle zu tappen. Jetzt Angebote vergleichen und Bonus kassieren!"
+pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
 # DSL-Wechselbonus sichern: So sparst du beim Internetvertrag

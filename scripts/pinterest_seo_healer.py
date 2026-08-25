@@ -654,15 +654,28 @@ def heal_article(a: dict) -> tuple[bool, list[str]]:
         content = fm_set_cover_alt(content, good_alt)
         actions.append(f"Cover-Alt → {good_alt[:50]}")
 
-    # H6 Pin-SEO
+    # H6 Pin-SEO (Premium 25.08.2026): Existierendes, GÜLTIGES Premium-Text-
+    # material (aus pinterest_pin_text_sync.py / Masterplan) wird NICHT
+    # überschrieben – nur fehlende oder ungültige Felder werden
+    # deterministisch nachgeheilt.
     pin_title = build_pin_title(title)
     pin_desc = build_pin_description(title, desc, kws, a["slug"])
-    if a["pin_title"] != pin_title:
+    # Titel: & ist erlaubt (nur Button-Beschreibungen müssen &-frei sein)
+    pin_title_ok = (bool(a["pin_title"].strip())
+                    and len(a["pin_title"]) <= PIN_TITLE_MAX)
+    pin_desc_ok = (bool(a["pin_description"].strip())
+                   and 40 <= len(a["pin_description"]) <= PIN_DESC_MAX
+                   and "&" not in a["pin_description"])
+    if not pin_title_ok:
         content = fm_set(content, "pin_title", pin_title)
         actions.append("pin_title gesetzt")
-    if a["pin_description"] != pin_desc:
+    else:
+        pin_title = a["pin_title"].strip()  # Premium-Text behalten
+    if not pin_desc_ok:
         content = fm_set(content, "pin_description", pin_desc)
         actions.append("pin_description gesetzt")
+    else:
+        pin_desc = a["pin_description"].strip()  # Premium-Text behalten
 
     # Cover-Pfad sicherstellen
     if not a["cover"]:

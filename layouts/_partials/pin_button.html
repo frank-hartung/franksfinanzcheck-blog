@@ -1,0 +1,47 @@
+{{- /* ============================================================
+    PREMIUM PIN-IT BUTTON (Pinterest, 25.08.2026)
+    ------------------------------------------------------------
+    Jeder Artikel bekommt einen Pin-It-Button (Viral-Loop: Leser
+    pinnen direkt von der Seite → Reichweite + Rich-Pin-Signale).
+
+    - Modus "float":  vertikale Pinterest-rote Leiste links
+                      (nur Desktop ≥ 1000px, position: fixed)
+    - Modus "footer": runder Pin-It-Button am Artikel-Ende
+
+    Prefill: pin_description (SEO-geheilt, ≤ 500 Z., max. 3 ASCII-
+    Hashtags) oder Meta-Description; Bild: das 2:3-Cover.
+    Rohe &-Zeichen werden zu "und" (Pin-Description-Sauberkeit,
+    entspricht scripts/pinterest_engine.py).
+============================================================ */ -}}
+{{- $mode := index . 0 }}
+{{- $page := index . 1 }}
+{{- $desc := ($page.Params.pin_description | default $page.Description | default $page.Title) }}
+{{- $desc = replace $desc "&" "und" }}
+{{- $url := $page.Permalink | urlquery }}
+{{- $media := ($page.Params.cover.image | absURL) | urlquery }}
+{{- $pinBtn := printf "https://www.pinterest.de/pin/create/button/?url=%s&media=%s&description=%s" $url $media ($desc | urlquery) }}
+{{- $svg := `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>` }}
+{{- if eq $mode "float" }}
+<a class="ff-pin-float" href="{{ $pinBtn }}" target="_blank" rel="nofollow noopener"
+   aria-label="Diesen Artikel auf Pinterest pinnen" title="Auf Pinterest pinnen">
+  {{ $svg | safeHTML }}
+  <span class="ff-pin-float-label" aria-hidden="true">Pin It</span>
+</a>
+<style>
+.ff-pin-float{position:fixed;left:16px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;align-items:center;gap:8px;z-index:40;text-decoration:none}
+@media (min-width:1000px){.ff-pin-float{display:flex}}
+.ff-pin-float svg{width:22px;height:22px}
+.ff-pin-float{background:#e60023;color:#fff;border-radius:999px;padding:12px 9px;box-shadow:0 4px 14px rgba(230,0,35,.32);transition:transform .15s ease,box-shadow .15s ease}
+.ff-pin-float:hover{transform:translateY(calc(-50% - 2px));box-shadow:0 6px 20px rgba(230,0,35,.48)}
+.ff-pin-float-label{writing-mode:vertical-rl;font:700 11px/1.1 'Inter',-apple-system,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+</style>
+{{- else }}
+<a class="ff-pin-btn" href="{{ $pinBtn }}" target="_blank" rel="nofollow noopener">
+  {{ $svg | safeHTML }}<span>Auf Pinterest pinnen</span>
+</a>
+<style>
+.ff-pin-btn{display:inline-flex;align-items:center;gap:9px;background:#e60023;color:#fff;border-radius:999px;padding:10px 20px;text-decoration:none;font:600 14px/1.2 'Inter',-apple-system,sans-serif;box-shadow:0 3px 10px rgba(230,0,35,.25);transition:transform .15s ease,box-shadow .15s ease}
+.ff-pin-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(230,0,35,.4)}
+.ff-pin-btn svg{width:18px;height:18px;flex:none}
+</style>
+{{- end }}

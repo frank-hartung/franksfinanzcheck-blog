@@ -37,10 +37,13 @@
 
 {{- if .Params.cover.image -}}
   {{- if (ne .Params.cover.relative true) }}
-    {{- $sha := getenv "HUGO_JSDELIVR_SHA" }}
-    {{- $ogImg := .Params.cover.image | absURL }}
-    {{- if $sha }}{{ $ogImg = printf "%s?v=%s" $ogImg $sha }}{{ end }}
-    <meta property="og:image" content="{{ $ogImg }}">
+    {{- /* PREMIUM-PINTEREST-FIX (25.08.2026): og:image OHNE Query-String
+           (kein ?v=<SHA>-Cache-Busting). Pinterests Rich-Pin-Scraper ist
+           bei Query-Strings in og:image teils unzuverlässig – saubere URL
+           = zuverlässigere Pin-Bilder. Cache-Frische der Covern bleibt
+           über die ?v=<SHA>-Parameter im Seiten-<img> (cover.html)
+           gewährleistet; für Pinterest zählt die Stabilität. */ -}}
+    <meta property="og:image" content="{{ .Params.cover.image | absURL }}">
     <meta property="og:image:width" content="1000">
     <meta property="og:image:height" content="1500">
     {{- with .Params.cover.alt }}<meta property="og:image:alt" content="{{ . | plainify }}">{{ end }}

@@ -1,0 +1,56 @@
+# ============================================================
+#  PINTEREST-BOARD-ROUTING (Premium, 25.08.2026)
+#
+#  Zentrale Quelle für die 6 Premium-Boards des Profils
+#  (de.pinterest.com/franksfinanzcheck) und für die
+#  Board-Zuordnung bei auto-generierten Pins.
+#
+#  WIE SIE GENUTZT WIRD:
+#    1) scripts/pinterest_engine.py
+#       - postet jeden Pin auf das Board, das zur Pillar des
+#         Artikels passt (pillar → board unten)
+#       - Board-IDs werden live per API aufgelöst und in
+#         data/pinterest_boards_cache.json zwischengespeichert
+#         (verfällt nach PINTEREST_BOARD_CACHE_TTL Tage, Default 14)
+#       - Fallback: Variable PINTEREST_BOARD_ID (Default-Board)
+#    2) scripts/pinterest_profile_audit.py
+#       - vergleicht das LIVE-Profil (Namen, Boards, Beschreibungen)
+#         mit diesem Soll-Zustand → PINTEREST-PROFILE-REPORT.md
+#    3) data/pinterest_plan.yaml
+#       - die 62 Masterplan-Pins tragen im Feld "pinwand" exakt
+#         diese Board-Namen (kompatibel geblieben, 25.08. vereinheitlicht)
+#
+#  WICHTIG: Namen sind SEO-aktive Suchbegriffe – Änderungen hier
+#  wirken sofort auf die Engine (Board-Neuanlage beim nächsten Lauf
+#  mit Token). Board-Beschreibungen = Premium-Vorgaben aus
+#  PINTEREST-PREMIUM-STRATEGIE.md § 3.2.
+# ============================================================
+
+boards:
+  - name: "Geld sparen im Alltag | Frugalismus-Tipps"
+    pillars: [frugalismus]
+    description: "Geld sparen im Alltag leicht gemacht: Frugalismus-Tipps, Sparmethoden & Finanz-Hacks, die wirklich funktionieren – von der 24-Stunden-Regel bis zum No-Spend-Weekend. Ehrlich, verständlich, mit konkreten Euro-Beträgen. Ideal für alle, die ohne Verzichtsgefühl jeden Monat 100 € und mehr freischaufeln wollen."
+
+  - name: "Budget & Haushaltskasse: clever planen"
+    pillars: [konto-karten]
+    description: "Budgetierung ohne Stress: Hier dreht sich alles um die 50-30-20-Regel, Haushaltsbuch, Notgroschen & cleveres Planen mit dem Gehalt. Mit Beispielrechnungen, Checklisten und Schritt-für-Schritt-Anleitungen für dein Budget – egal ob 1.500 € oder 3.500 € netto. So hast du am Monatsende endlich Geld übrig."
+
+  - name: "Strom & Gas sparen | Tarife clever wechseln"
+    pillars: [strom-sparen]
+    description: "Stromkosten & Heizkosten senken: Stromfresser finden, Energiefresser stoppen, Strom- und Gastarife clever wechseln – mit Preisgarantie, Wechselbonus und Checklisten zum Abhaken. Dazu verständliche Guides rund um Gasrechnung, Abschlag und Heizperiode. Spartipps mit echten Euro-Beträgen statt leerer Versprechen."
+
+  - name: "Internet & DSL | WLAN-Tipps & Tarife"
+    pillars: [internet-dsl]
+    description: "Schnelleres Internet ohne mehr zu zahlen: WLAN verbessern, Mesh vs. Repeater, DNS-Tricks und die besten DSL-Tarife mit Wechselbonus. Verständliche Anleitungen für jedes Gerät – von der Fritzbox bis zum Smartphone. Für ein Zuhause ohne Funklöcher und ohne zu teure Verträge."
+
+  - name: "Günstig reisen | Reisebudget & Mietwagen"
+    pillars: [mietwagen]
+    description: "Günstig reisen ohne Abstriche: Reisebudget clever planen, Urlaubskasse aufbessern, Mietwagen-Fallen vermeiden und Last-Minute-Schnäppchen sichern. Mit Checklisten für Buchung, Abholung und Rückgabe des Mietwagens plus Spartaktiken für Flüge und Unterkünfte. Mehr Urlaub fürs Geld – jedes Jahr."
+
+  - name: "Versicherungen clever wechseln & sparen"
+    pillars: [versicherungen]
+    description: "Versicherungen verstehen & wechseln: Kfz-Versicherung zum Stichtag 30.11., Privathaftpflicht, Wohngebäudeversicherung & Co. – was du wirklich brauchst und was du kündigen kannst. Vergleichen, Hunderte Euro sparen und typische Vertragsfallen vermeiden. Ehrlich erklärt, ohne Fachchinesisch."
+
+# Default-Board, wenn kein Pillar-Match passt (z. B. Artikel ohne
+# pillar-Feld): der erste Eintrag oben.
+default_board_index: 0

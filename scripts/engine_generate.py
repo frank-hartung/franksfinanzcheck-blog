@@ -104,11 +104,16 @@ def now_utc_iso() -> str:
 
 
 def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
-                 keywords=None):
+                 keywords=None, pinwand=None, pin_title=None, pin_description=None):
     """Speichert Artikel als Page-Bundle (Format wie bisherige Pipeline).
 
     Schreibt von Anfang an Pinterest-/Google-SEO-Felder (keywords, pin_*),
     damit der Healer und die Pin-Engine sofort greifen.
+
+    Premium (25.08.2026): Bei Plan-Themen übernimmt die Funktion die
+    kuratierten Masterplan-Texte (pin_title/pin_description) und die
+    pinwand für das Multi-Board-Routing – gültige Premium-Texte haben
+    Vorrang vor dem deterministischen Build.
     """
     date = datetime.date.today().isoformat()
     # Titel-Gate vor Speichern (Doppelpunkt-Konvention für Cover)
@@ -138,6 +143,16 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
         desc = extend_description(desc or "", kws, title)
         pin_t = build_pin_title(title)
         pin_d = build_pin_description(title, desc, kws, g.slugify(title))
+        # Premium-Pin-Texte aus dem Masterplan (wenn gültig) VOR den Build
+        # (Titel: & erlaubt – nur Beschreibungen werden &-frei saniert)
+        if pin_title and len(pin_title) <= 100:
+            pin_t = pin_title.strip()
+        if pin_description:
+            d = re.sub(r"\s+", " ", str(pin_description).strip()).replace("&", "und")
+            if not d.startswith("*Werbung"):
+                d = f"*Werbung | {d}"
+            if 40 <= len(d) <= 500:
+                pin_d = d[:500]
     except Exception as _seo_err:
         print(f"  ⚠ SEO-Preflight übersprungen: {_seo_err}")
         kws = list(keywords or [])[:5] or [title.split(":")[0].strip() or "Geld sparen"]
@@ -170,6 +185,7 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
     draft_line = "true" if draft else "false"
     kw_yaml = "[" + ", ".join(f'"{k}"' for k in kws[:8]) + "]"
     tag_yaml = "[" + ", ".join(f'"{k}"' for k in kws[:4]) + "]"
+    pinwand_line = f"pinwand: {yaml_quote(pinwand)}\n" if pinwand else ""
     frontmatter = (
         "---\n"
         f'title: {yaml_quote(title)}\n'
@@ -181,6 +197,7 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
         'pillar: "' + (pillar or "konto-karten") + '"\n'
         "author: \"Frank\"\n"
         f"keywords: {kw_yaml}\n"
+        f"{pinwand_line}"
         f'pin_title: {yaml_quote(pin_t)}\n'
         f'pin_description: {yaml_quote(pin_d)}\n'
         "ai_generated: true\n"
@@ -357,6 +374,9 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
                 title, desc, body, draft=True,
                 inspiration=topic.get("title"), pillar=topic.get("pillar"),
                 keywords=keywords,
+                pinwand=topic.get("pinwand"),
+                pin_title=topic.get("pin_titel"),
+                pin_description=topic.get("pin_beschreibung"),
             )
             used_titles.add(title.lower())  # Draft-Thema nicht doppelt ziehen
             draft_saved = True
@@ -373,6 +393,9 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
                 title, desc, body, draft=False,
                 inspiration=topic.get("title"), pillar=topic.get("pillar"),
                 keywords=keywords,
+                pinwand=topic.get("pinwand"),
+                pin_title=topic.get("pin_titel"),
+                pin_description=topic.get("pin_beschreibung"),
             )
             print(f"  ✓ Artikel veröffentlicht ({level}): {slug}")
         except Exception as exc:  # noqa: BLE001

@@ -21,6 +21,13 @@
     <link>{{ site.BaseURL }}</link>
     <description>{{ with site.Params.description }}{{ . }}{{ end }}</description>
     <language>{{ site.Language.Locale }}</language>
+    {{- /* Feed-Bild (Premium 25.08.2026): Pinterest nutzt das Channel-Image
+           für die Feed-Anzeige – saubere 512×512-Marke, ohne Query-String. */ -}}
+    <image>
+      <title>{{ site.Title }}</title>
+      <url>{{ "pinterest-app-icon.png" | absURL }}</url>
+      <link>{{ site.BaseURL }}</link>
+    </image>
     {{- with site.Copyright }}
     <copyright>{{ . | markdownify | plainify }}</copyright>
     {{- end }}

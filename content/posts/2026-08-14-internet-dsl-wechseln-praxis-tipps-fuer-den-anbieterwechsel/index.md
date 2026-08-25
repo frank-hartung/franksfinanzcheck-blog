@@ -18,8 +18,9 @@ kurzantwort: "Ein Anbieterwechsel bei Internet und DSL dauert online nur etwa 10
 
 social_posted: true
 keywords: ["DSL wechseln", "Internet Anbieterwechsel", "DSL Tarifvergleich", "Highspeed Internet", "Router mieten oder kaufen", "Internet & DSL wechseln"]
-pin_title: "Internet & DSL wechseln: Praxis-Tipps"
-pin_description: "*Werbung | Internet und DSL wechseln: Spare bis zu 380 € im Jahr, sichere dir Neukunden-Boni und vermeide Ausfallzeiten. Schritt-für-Schritt Praxis-Anleitung. Mehr Spartipps auf FranksFinanzcheck! #dslwechseln #internetanbieterwechsel #dsltarifvergleich"
+pin_title: "DSL & Internet Flat: Schnell surfen ab 9,99 €/Monat"
+pin_description: "*Werbung | Du zahlst noch über 30 € für dein Internet? DSL- und Kabeltarife gibt es schon ab 9,99 € im Monat – mit Wechselbonus und Fritzbox-Rabatt obendrauf. Vergleichen, wechseln, sparen: Der Wechsel-Service übernimmt sogar die Kündigung. Jetzt Speed checken!"
+pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
 # Internet & DSL wechseln: Praxis-Tipps für den Anbieterwechsel

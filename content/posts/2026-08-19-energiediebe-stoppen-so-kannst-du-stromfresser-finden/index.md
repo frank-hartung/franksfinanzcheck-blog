@@ -18,8 +18,9 @@ kurzantwort: "Heimliche Stromfresser wie veraltete Kühlgeräte, ungeregelte Hei
 
 social_posted: true
 keywords: ["Energiediebe stoppen", "Stromfresser finden", "Strom sparen Haushalt", "Standby Stromfresser", "Stromkosten senken", "Stromanbieter wechseln"]
-pin_title: "Energiediebe stoppen: So kannst du Stromfresser finden"
-pin_description: "*Werbung | Energiediebe stoppen: Die größten heimlichen Stromfresser im Haushalt entlarven, Standby-Kosten eliminieren und bis zu 420 € Stromkosten sparen. Mehr Spartipps auf FranksFinanzcheck! #energiediebestoppen #stromfresserfinden #stromsparenhaushalt"
+pin_title: "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe"
+pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr und Sofort-Tipps gegen Standby-Kosten. Jetzt checken und bis zu 300 € im Jahr sparen."
+pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
 # Energiediebe stoppen: So kannst du Stromfresser finden

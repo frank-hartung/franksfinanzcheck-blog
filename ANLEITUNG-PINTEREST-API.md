@@ -34,6 +34,10 @@ Gehe auf **https://developers.pinterest.com/** → **„My apps"** → **„Conn
 
 Dann **„Submit"** klicken.
 
+**Scopes (Premium 25.08.2026):** Unter „Requested scopes" mindestens ankreuzen:
+`boards:read`, `boards:write`, `pins:read`, `pins:write` – plus `profile:read`,
+damit der **Profil-Audit** (Name/Bio/Website des Live-Profils) laufen kann.
+
 ### 1c. Wichtig: Freigabe abwarten! ⏳
 Pinterest prüft jede App **manuell** – die Freigabe („Trial access") kann **mehrere Tage dauern** [1](https://docs.mixpost.app/services/social/pinterest/). Du bekommst eine **E-Mail**, sobald deine App freigeschaltet ist. Erst danach kannst du den Token erzeugen (Schritt 2).
 
@@ -76,29 +80,47 @@ PINTEREST_TOKEN_KEY=<schluessel> python3 scripts/pinterest_auth.py --status
 > länger als 60 Tage pausiert, ist nie wieder Handarbeit nötig.
 > Das klassische Secret `PINTEREST_ACCESS_TOKEN` bleibt als Fallback weiter nutzbar.
 
-## Schritt 3: Board-ID ermitteln (1 Minute)
+## Schritt 3: Boards – werden automatisch gemanagt (Premium 25.08.2026)
 
-Sobald du den Token hast, sag mir Bescheid – ich führe dann aus:
+Die Engine nutzt **kein einzelnes Board** mehr, sondern das 6-Board-System aus
+`data/pinterest_boards.yaml` (Premium-Board-Architektur, s.
+PINTEREST-PREMIUM-STRATEGIE.md § 3). Jeder Pin wird auf das Board seiner
+Pinwand/Pillar geroutet:
+
+| Pillar des Artikels | Board |
+|---|---|
+| `frugalismus` | Geld sparen im Alltag \| Frugalismus-Tipps |
+| `konto-karten` | Budget & Haushaltskasse: clever planen |
+| `strom-sparen` | Strom & Gas sparen \| Tarife clever wechseln |
+| `internet-dsl` | Internet & DSL \| WLAN-Tipps & Tarife |
+| `mietwagen` | Günstig reisen \| Reisebudget & Mietwagen |
+| `versicherungen` | Versicherungen clever wechseln & sparen |
+
+Board-IDs werden live per API aufgelöst und gecacht
+(`data/pinterest_boards_cache.json`, TTL 14 Tage); **fehlende Boards werden
+automatisch angelegt** (Scope `boards:write`, Beschreibung aus der
+Konfiguration). `PINTEREST_BOARD_ID` ist nur noch optionales Fallback-Board.
+Zum Prüfen:
 
 ```bash
-PINTEREST_ACCESS_TOKEN=pina_DEIN_TOKEN python3 scripts/generate_pins.py --list-boards
+PINTEREST_ACCESS_TOKEN=pina_DEIN_TOKEN python3 scripts/pinterest_engine.py --list-boards
+# zeigt alle Live-Boards; SOLL-Boards aus der Konfiguration sind mit [SOLL] markiert
 ```
 
-Das zeigt alle deine Boards mit ihren IDs, z. B.:
-```
-1234567890123456789  ←  Geld sparen & Frugalismus
-9876543210987654321  ←  Haushaltskasse & Budgetplanung
-```
+> Automatische Board-Anlage deaktivieren: Variable `PINTEREST_CREATE_BOARDS=0`.
 
 ## Schritt 4: Im GitHub-Repo hinterlegen (2 Minuten)
 
-**Token als Secret:**
+**Token als Secret (empfohlen: OAuth mit Auto-Refresh, s. Schritt 2):**
 1. GitHub → Repo → **Settings → Secrets and variables → Actions**
-2. **New repository secret** → Name: `PINTEREST_ACCESS_TOKEN` → Wert: dein Token
+2. **New repository secret** → `PINTEREST_TOKEN_KEY` (Schlüssel aus Schritt 2a)
+3. `data/pinterest_tokens.enc` committen (AES-256-verschlüsselt – sicher, auch im öffentlichen Repo)
 
-**Board-ID als Variable:**
-1. Tab **„Variables"** → **New repository variable**
-2. Name: `PINTEREST_BOARD_ID` → Wert: die Board-ID (z. B. für „Geld sparen & Frugalismus")
+**Alternativ (Klassik):** Secret `PINTEREST_ACCESS_TOKEN` = dein `pina_...`-Token
+(läuft nach 30 Tagen ab, kein Auto-Refresh).
+
+**Optionale Variablen:** `PINTEREST_BOARD_ID` (Fallback-Board),
+`PINTEREST_CREATE_BOARDS` (Default `1`), `PINTEREST_ROTATE_DAYS` (Default `60`).
 
 ---
 
@@ -106,10 +128,11 @@ Das zeigt alle deine Boards mit ihren IDs, z. B.:
 
 | Wann | Was passiert |
 |---|---|
-| **Montag 17:30 Uhr (DE)** | Der Workflow „Wöchentliches Nach-Pinnen" findet alle Artikel mit `pinned: false` und erstellt für jeden einen Pin (Cover-Bild + Beschreibung + Artikel-URL) |
-| Danach | Die Artikel werden als „gepinnt" markiert (`pinned: true`) – jeder Artikel wird nur **einmal** gepinnt |
+| **Jeder Pin-Lauf** (Workflow „Pinterest-AI", manuell startbar) | 1) Link-Healer + Pin-Text-Sync (Premium-Guards) · 2) alle `pinned: false`-Artikel werden als Pins auf das richtige Board gepinnt · 3) **Profil-Audit**: Live-Profil vs. Premium-Soll → `PINTEREST-PROFILE-REPORT.md` |
+| **Täglich 06:30 MESZ** (Workflow „Pinterest-Watchdog") | Alle Pinterest-Signale gecheckt (robots, Domain-Verify, Pin-Button, Rich-Pin-Meta, …) + **LIVE-Link-Guard**: jede Pin-Zielseite muss 200 liefern, auf der eigenen Domain bleiben und Rich-Pin-Meta tragen → `PINTEREST-LINK-GUARD-REPORT.md` |
+| Danach | Ge-pinnte Artikel werden `pinned: true` markiert – jeder Artikel wird nur **einmal** gepinnt; Refresh-Kandidaten (> 60 Tage) werden in der Queue geführt |
 
-**Manuell testen:** GitHub → Actions → „Wöchentliches Nach-Pinnen" → Run workflow
+**Manuell testen:** GitHub → Actions → „Pinterest-AI" → Run workflow
 **Stoppen:** Workflow deaktivieren (Kill-Switch)
 
 ---
@@ -120,7 +143,9 @@ Das zeigt alle deine Boards mit ihren IDs, z. B.:
 Nein. Die Pinterest API v5 ist kostenlos. Für dein Pensum (2–15 Pins/Woche) sind die Limits völlig ausreichend.
 
 **Welches Board wird benutzt?**
-Das Board, dessen ID du als `PINTEREST_BOARD_ID` hinterlegst. Du kannst später auch mehrere Boards nacheinander nutzen (Variable ändern) – oder das Skript erweitern, damit es pro Thema das passende Board wählt.
+Automatisch das Board zur Pinwand/Pillar des Artikels (6-Board-System aus
+`data/pinterest_boards.yaml`, s. Schritt 3). Board-Namen/Beschreibungen dort
+ändern → gilt ab dem nächsten Lauf. `PINTEREST_BOARD_ID` ist nur Fallback.
 
 **Was, wenn ein Pin fehlschlägt?**
 Das Skript meldet den Fehler im Workflow-Log und macht mit dem nächsten Artikel weiter. Der Artikel bleibt `pinned: false` und wird beim nächsten Lauf erneut versucht.

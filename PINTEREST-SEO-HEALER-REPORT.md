@@ -1,10 +1,10 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-08-25 13:33 UTC · **Modus:** CHECK
+**Stand:** 2026-08-25 22:08 UTC · **Modus:** CHECK
 
-- Artikel: **19**
+- Artikel: **25**
 - Geheilt: **0**
-- Offene Issues: **0**
+- Offene Issues: **8**
 - Covers: nicht angefasst
 
 ## Kriterien 2026 (Agentur-Standard)
@@ -37,8 +37,14 @@
 | ✅ | `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` | — |
 | ✅ | `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` | — |
 | ✅ | `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` | — |
+| ✅ | `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier` | — |
+| ⚠️ | `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` | Titel zu lang (65 > 60); Description zu lang (171) |
 | ✅ | `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` | — |
 | ✅ | `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` | — |
+| ⚠️ | `2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet` | Titel zu lang (69 > 60); Description zu lang (181) |
+| ⚠️ | `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | Titel zu lang (61 > 60); Description zu lang (167) |
+| ⚠️ | `2026-08-28-handytarif-vergleichen-2026-guenstige-tarife` | Titel zu lang (63 > 60) |
+| ⚠️ | `2026-08-28-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` | Description zu lang (175) |
 
 ---
 *Erzeugt von `scripts/pinterest_seo_healer.py` – Teil der FrankAutoOps-Selbstheilung.*
