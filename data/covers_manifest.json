@@ -1,35 +1,75 @@
 {
  "2026-08-10-dsl-wechselbonus-sichern": {
   "title": "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag",
-  "ts": "2026-08-25T12:52:25+00:00"
+  "ts": "2026-08-25T16:23:19+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": "bis zu 240 € sparen"
+  }
  },
  "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
   "title": "Sicher heizen: So schützt dich eine Gaspreisgarantie",
-  "ts": "2026-08-25T12:52:28+00:00"
+  "ts": "2026-08-25T16:23:23+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": "bis zu 650 € sparen"
+  }
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-08-25T13:09:57+00:00"
+  "ts": "2026-08-25T16:23:29+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
  },
  "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
   "title": "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026",
-  "ts": "2026-08-25T12:52:31+00:00"
+  "ts": "2026-08-25T16:23:26+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
  },
  "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
   "title": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
-  "ts": "2026-08-25T12:52:36+00:00"
+  "ts": "2026-08-25T16:23:33+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": "bis zu 720 € sparen"
+  }
  },
  "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
   "title": "WLAN verbessern: So bringst du stabilen Speed in jede Ecke",
-  "ts": "2026-08-25T12:52:39+00:00"
+  "ts": "2026-08-25T16:23:43+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
  },
  "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
   "title": "DSL Vergleich: So findest du den günstigsten Internettarif",
-  "ts": "2026-08-25T12:52:48+00:00"
+  "ts": "2026-08-25T16:24:07+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": "bis zu 360 € sparen"
+  }
  },
  "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
   "title": "Energiediebe stoppen: So kannst du Stromfresser finden",
-  "ts": "2026-08-25T12:52:51+00:00"
+  "ts": "2026-08-25T16:24:11+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": "bis zu 420 € sparen"
+  }
  },
  "_index": {
   "title": "Blog",
@@ -37,70 +77,155 @@
  },
  "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
   "title": "Kostenloses Girokonto: So findest du ein Konto ohne Gebühren",
-  "ts": "2026-08-25T12:52:43+00:00"
+  "ts": "2026-08-25T16:23:54+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": "bis zu 180 € sparen"
+  }
  },
  "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
   "title": "Privathaftpflicht: Warum sie so wichtig ist und was sie",
-  "ts": "2026-08-25T13:10:05+00:00"
+  "ts": "2026-08-25T16:23:57+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
  },
  "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
   "title": "Haushaltsbuch führen: App, Excel oder Papier?",
-  "ts": "2026-08-25T14:03:57+00:00"
+  "ts": "2026-08-25T16:24:18+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": "bis zu 430 € im Monat sparen"
+  }
  },
  "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
   "title": "Mietwagen buchen ohne Kaution: So umgehst du die Fallen im Urlaub",
-  "ts": "2026-08-25T14:03:57+00:00"
+  "ts": "2026-08-25T16:24:21+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": "bis zu 40 % sparen"
+  }
  },
  "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
   "title": "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht",
-  "ts": "2026-08-25T12:52:54+00:00"
+  "ts": "2026-08-25T16:24:25+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": "bis zu 450 € im Monat sparen"
+  }
  },
  "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
   "title": "Preisgarantie Gas: So schützt du dich vor Preissprüngen",
-  "ts": "2026-08-25T12:52:57+00:00"
+  "ts": "2026-08-25T16:24:28+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": "bis zu 580 € im Jahr sparen"
+  }
  },
  "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
   "title": "Internet & DSL wechseln: Praxis-Tipps",
-  "ts": "2026-08-25T13:09:59+00:00"
+  "ts": "2026-08-25T16:23:36+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": "bis zu 380 € im Jahr sparen"
+  }
  },
  "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
   "title": "Sparen im Herbst: Die besten Spartipps für die goldene",
-  "ts": "2026-08-25T13:10:02+00:00"
+  "ts": "2026-08-25T16:23:40+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": "bis zu 1.250 € sparen"
+  }
  },
  "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann": {
   "title": "Geld sparen im Alltag: Einfache Tipps, die jeder umsetzen",
-  "ts": "2026-08-25T13:10:08+00:00"
+  "ts": "2026-08-25T16:24:01+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
  },
  "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
   "title": "So findest du den richtigen: DSL-Tarif für dein Zuhause",
-  "ts": "2026-08-25T13:10:10+00:00"
+  "ts": "2026-08-25T16:24:14+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
  },
  "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife": {
   "title": "Gas-Anbieter wechseln: Praxis-Tipps für günstige Tarife",
-  "ts": "2026-08-25T13:10:13+00:00"
+  "ts": "2026-08-25T16:23:47+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": "bis zu 680 € sparen"
+  }
  },
  "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst": {
   "title": "Strom sparen im Haushalt: Die besten Tipps für den Herbst",
-  "ts": "2026-08-25T13:10:15+00:00"
+  "ts": "2026-08-25T16:23:51+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": "bis zu 460 € sparen"
+  }
  },
  "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
   "title": "Wohngebäudeversicherung Vergleich: Worauf du achten musst",
-  "ts": "2026-08-25T13:10:17+00:00"
+  "ts": "2026-08-25T16:24:04+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": "bis zu 340 € sparen"
+  }
  },
  "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
   "title": "DNS-Server wechseln: Schnelleres und sichereres Internet in 5 Minuten",
-  "ts": "2026-08-25T14:03:59+00:00"
+  "ts": "2026-08-25T16:24:32+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
  },
  "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
   "title": "Kfz-Versicherung Vergleich 2026: Bis zu 800 € pro Jahr sparen",
-  "ts": "2026-08-25T14:04:00+00:00"
+  "ts": "2026-08-25T16:24:35+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
  },
  "2026-08-28-handytarif-vergleichen-2026-guenstige-tarife": {
   "title": "Handytarif vergleichen 2026: Günstige Tarife ab 4,99 € im Monat",
-  "ts": "2026-08-25T14:04:02+00:00"
+  "ts": "2026-08-25T16:24:38+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": "bis zu 360 € im Jahr sparen"
+  }
  },
  "2026-08-28-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
   "title": "Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich",
-  "ts": "2026-08-25T14:04:03+00:00"
+  "ts": "2026-08-25T16:24:42+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
  }
 }
