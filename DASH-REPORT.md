@@ -1,6 +1,6 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-08-25 13:33 UTC · Modus: REPORT
+**Stand:** 2026-08-25 14:12 UTC · Modus: REPORT
 
 🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
 
