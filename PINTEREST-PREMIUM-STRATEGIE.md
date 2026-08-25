@@ -73,7 +73,7 @@ Dein Praxis-Ratgeber für weniger Fixkosten & mehr vom Leben 💡 Ehrliche Spart
 | Punkt | Premium-Standard | Wo |
 |---|---|---|
 | Account-Typ | **Business-Account** (nicht privat) | Einstellungen → Konto |
-| Website-Anpruch | ✅ erledigt (`pinterest-e238f.html`) | Einstellungen → Beanspruchte Konten |
+| Website-Anspruch | ✅ erledigt (`pinterest-e238f.html`) | Einstellungen → Beanspruchte Konten |
 | Profilbild | **Frank-Foto** (nicht nur Logo) – Gesichter schaffen im Finanz-Bereich Vertrauen; Logo als Fallback. ✅ **Fertige Premium-Dateien in `static/images/social/`:** `pinterest-profilbild-marke-1000.png` (Foto + Gold-Ring + Check-Badge, empfohlen) oder `pinterest-profilbild-1000.png` (cleane Studio-Variante); je auch als 400px-Version | Profil bearbeiten → Foto |
 | ~~Titelbild~~ | Entfällt – Pinterest bietet KEIN Profil-Titelbild (das ist YouTube/Facebook). Premium-Ersatz: **Board-Cover gezielt setzen** (s. Schritt 3.3) – sie wirken auf dem Profil wie ein Header | — |
 | Rich Pins | Aktiviert (Artikel-Pins) – PaperMod liefert OG/JSON-LD bereits; 1× validieren | developers.pinterest.com/tools/url-debugger |
@@ -165,7 +165,7 @@ Versicherungen verstehen & wechseln: Kfz-Versicherung zum Stichtag 30.11., Priva
 
 Der Ist-Stand (grüne Fläche + Badge + Headline + Brand-Band) ist sauber, aber **austauschbar**. Die drei Hebel, die Premium-Accounts von Amateur-Pins trennen:
 
-1. **Die Spar-Zahl als Design-Anker.** Nichts zieht im Finanz-Feed stärker als eine konkrete Euro-Zahl in Gold: „**−300 €/Jahr**", „**abuso 9,99 €/Monat**" (TP-Pins), „**50 / 30 / 20**" (Erklär-Pins). Die Zahl bekommt die größte visuelle Ebene nach der Headline.
+1. **Die Spar-Zahl als Design-Anker.** Nichts zieht im Finanz-Feed stärker als eine konkrete Euro-Zahl in Gold: „**−300 €/Jahr**", „**ab 9,99 €/Monat**" (TP-Pins), „**50 / 30 / 20**" (Erklär-Pins). Die Zahl bekommt die größte visuelle Ebene nach der Headline.
 2. **Emotion über Bild-Ebene.** Oberes Drittel: stilisierte Fotomotive/Illustrationen zum Thema (Steckdose, Heizung, Smartphone mit WLAN-Wellen, Auto am Strand). Menschen/Situationen schlagen reine Farbflächen bei Outbound-CTR spürbar – besonders bei „Mietwagen-Fallen" & „Urlaubskasse".
 3. **Klarer Pin-Typ pro Template.** Drei Template-Familien reichen für das gesamte Jahr – Konsistenz = Markenwirkung:
    - **T1 „Ersparnis-Pin" (TP):** Pillar-Badge → Headline → **Gold-Pille mit Euro-Betrag** → Brand-Band → dezenter `*Werbung`-Hinweis unten
@@ -337,3 +337,73 @@ utm_source=franksfinanzcheck · utm_medium=affiliate · utm_campaign=<kategorie>
 1. **TP-Pins NIEMALS nackt auf `check24.de` pinnen** — ohne Tracker keine Provision! Für manuelle Transactional-Pins immer die eigene Gateway-URL nutzen: `https://franksfinanzcheck.de/go/<kategorie>/` (eigene Domain, kein Shortener → Pinterest-Konform + PID sicher).
 2. **Fail-safe aktiv:** Der Wochen-Wächter (`affiliate_health.py`, ROUTE_CONTRACT) prüft die Tracker weiterhin wöchentlich E2E. Sollte ein Netzwerk die UTM-Parameter je ablehnen, „heilt" der Wächter auf den bekannten Zustand zurück — PID/aid/deep stehen unverändert am Anfang der Query, Tracking kann nicht brechen. *(Hinweis 25.08.: Sandbox-Netz blockierte Live-E2E per TLS – die nächste reguläre Wochenwache verifiziert die UTM-Links live; bei Problemen greift der Fallback automatisch.)*
 3. **GUID im RSS bleibt UTM-frei** — sonst denkt Pinterest, alte Artikel seien neu und wirft dein Pin-Archiv durcheinander.
+
+---
+
+## 12. Zielseiten-System: Jeder Pin auf die richtige Blogseite (25.08.2026)
+
+**Der teuerste Fehler im alten Zustand:** 50 von 62 Pins zeigten zurück auf
+`pinterest.de/franksfinanzcheck/` – also auf das eigene Profil. Das ist eine
+**Traffic-Sackgasse**: kein Blog-Besuch, kein Affiliate-Kontakt, kein Umsatz,
+und für Pinterest das Signal eines Kontos ohne Mehrwert-Ziel. Weitere 12 Pins
+(alle TP) zeigten **direkt auf `check24.de`** – das ist doppelt schädlich:
+Pinterest wertet direkte Affiliate-Ziele als Spam-Signal, und der komplette
+SEO- und Retargeting-Wert der eigenen Domain verpufft.
+
+### 12.1 Die Premium-Regel
+
+```
+Pin  →  eigener Blogartikel  →  Affiliate-CTA (/go/<kategorie>/)
+```
+
+Der Artikel dazwischen ist kein Umweg, sondern der Wertschöpfungsschritt:
+Er baut Vertrauen auf, rankt zusätzlich bei Google, hält den Besucher in der
+eigenen Domain und macht den Klick messbar.
+
+### 12.2 Automatik: `scripts/pinterest_link_healer.py`
+
+| Was | Wie |
+|---|---|
+| Zielsuche | Keyword-, Titel- und Pillar-Scoring über alle veröffentlichten Artikel |
+| Schwelle | ab Score **1.10** echter Artikel, darunter die thematische Pillar-Seite (nie eine „ungefähr passende" Seite) |
+| URL-Form | exakt wie `pinterest_engine.py`: `/posts/<ordnername inkl. Datum>/` + Pin-UTM – so entstehen keine 404 |
+| Affiliate | die alte CHECK24-Kategorie geht nicht verloren, sie wandert ins Feld `check24_kategorie` (der Bot setzt daraus den CTA im Artikel) |
+| Report | `PINTEREST-LINK-REPORT.md` – Zuordnung, Score und Restrisiko je Pin |
+
+Befehle:
+```bash
+python3 scripts/pinterest_link_healer.py          # Dry-Run (nur Report)
+python3 scripts/pinterest_link_healer.py --apply  # Plan schreiben
+```
+
+### 12.3 Dauerhafte Absicherung (zukünftige Pins)
+
+Der Healer läuft als **Guard direkt in `pinterest_engine.py`** (Funktion
+`heal_pin_links()`), also bei jedem Pin-Lauf automatisch vor dem Posten –
+unabhängig davon, ob die Engine per Workflow, RSS-Nachlauf oder manuell startet.
+Damit gilt die Regel automatisch auch für jeden neuen Pin: Kein Pin kann künftig
+auf das Profil oder nackt auf CHECK24 gehen. Neu erscheinende Artikel werden
+zusätzlich automatisch als besseres Ziel übernommen, sobald sie live sind.
+
+### 12.4 Ergebnis
+
+| Kennzahl | Vorher | Nachher |
+|---|---|---|
+| Pins auf Profil-Sackgasse | 50 | **0** |
+| Pins direkt auf CHECK24 | 12 | **0** |
+| Pins auf passgenauen Artikel | 0 | **45** |
+| Pins auf thematische Pillar-Seite | 0 | 17 (Content-Lücke, s. u.) |
+| Tote Ziele (404-Prüfung gegen Repo) | – | **0** |
+
+### 12.5 Die 17 Content-Lücken = deine nächsten Artikel
+
+Für 17 Pins gibt es noch keinen passgenauen Artikel; sie zeigen sauber auf die
+Pillar-Seite. Diese Themen sind die **höchsten Umsatzhebel**, weil die Pins
+bereits existieren und Traffic liefern – es fehlt nur die Landingpage.
+Schwerpunkte: **Reisebudget/Urlaubskasse (6 Pins)**, **50-30-20-Regel (3)**,
+**Notgroschen (2)**, **Money-Habits (2)**, WLAN/Mesh, DNS, Ratenkredit.
+Vollständige Liste mit Ziel-URLs: `PINTEREST-LINK-REPORT.md`.
+
+> Empfehlung: Diese 17 Themen in `data/topics.yaml` nach vorn priorisieren –
+> dann schließt die Content-Engine die Lücken automatisch, und der Healer
+> hängt die Pins beim nächsten Lauf selbsttätig auf die neuen Artikel um.
