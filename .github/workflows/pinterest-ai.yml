@@ -52,7 +52,6 @@ jobs:
           PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
         run: |
           if [ -z "$PINTEREST_TOKEN_KEY" ] || [ ! -f data/pinterest_tokens.enc ]; then
-            echo "⏭ Pinterest noch nicht eingerichtet (Secret oder Token-Datei fehlt) – ueberspringe ASCIIBBIRN sauber."
             echo "bereit=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
