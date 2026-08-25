@@ -137,7 +137,7 @@ Bei einem Nettoeinkommen von 2.500 € bedeutet das: 1.250 € Fixkosten, 750 �
 | Coffee-to-go & Snacks bewusster kaufen | 60 € |
 | **Gesamt** | **bis zu 430 €** |
 
-> 💶 **Spar-Tipp zwischendurch:** Einer der schnellsten Sparhebel ist der [Wechsel zu einem kostenlosen Girokonto](/go/girokonto/). Viele Banken kassieren noch 7 € bis 12 € pro Monat Grundgebühr – das summiert sich auf 84 € bis 144 € pro Jahr.
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Jetzt C24 Bank Angebote vergleichen**](/go/tagesgeld/)
 
 ## Häufige Anfängerfehler und wie du sie vermeidest
 

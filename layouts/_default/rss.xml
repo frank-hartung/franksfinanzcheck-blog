@@ -33,7 +33,11 @@
     {{- range $pages }}
     <item>
       <title>{{ .Title | plainify }}</title>
-      <link>{{ .Permalink }}</link>
+      {{- /* UTM (Premium 25.08.2026): Dieser Feed läuft AUSSCHLIESSLICH über
+             Pinterests Auto-publish → Item-Links tragen die Kanal-Markierung,
+             damit Umami Pin-Traffic sauber zuordnet. Die <guid> bleibt bewusst
+             die reine Permalink (stabile Identität, kein Re-Crawl-Flattern). */ -}}
+      <link>{{ .Permalink }}?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=rss-autopublish</link>
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       <guid isPermaLink="true">{{ .Permalink }}</guid>
       <description>{{ with or .Params.pin_description .Description | html }}{{ . }}{{ else }}{{ .Summary | plainify | html }}{{ end }}</description>

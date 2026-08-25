@@ -17,31 +17,42 @@
 #  ROUTE_CONTRACT in affiliate_health.py an – falsche Kategorie/PID bricht
 #  die Wochenwache mit Exit 2 + Issue, tote Ziele werden automatisch auf
 #  den sicheren Homepage-Fallback geheilt (nie mehr tote Links im Blog).
+#
+#  📊 UTM-ATTRIBUTION (25.08.2026, Pinterest-Premium-Paket):
+#  Jeder Link trägt kanalneutrale Kampagnen-Marker:
+#    utm_source=franksfinanzcheck · utm_medium=affiliate · utm_campaign=<kategorie>
+#  → Das CHECK24-Partner-Dashboard kann Klicks/Abschlüsse je Kategorie
+#    auswerten; der KANAL (Pinterest/Google/…) wird zur Vermeidung falscher
+#    Zuordnung NICHT hier hartkodiert, sondern über Entry-UTMs am Artikel
+#    gemessen (Umami, siehe PINTEREST-PREMIUM-STRATEGIE.md §11).
+#  Fail-safe: Lehnen die Tracker die Parameter ab, heilt die Wochenwache
+#  automatisch zurück auf den bekannten Zustand – PID/aid/deep bleiben
+#  unverändert am Anfang der Query.
 # ============================================================
 
 links:
   # --- CHECK24 (aus der PDF, bestätigt + E2E verifiziert) ---
-  strom: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
-  gas: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
-  dsl: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
-  mietwagen: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
-  reisen: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
-  girokonto: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
-  allgemein: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+  strom: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=strom"
+  gas: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=gas"
+  dsl: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=dsl"
+  mietwagen: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=mietwagen"
+  reisen: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=reisen"
+  girokonto: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=girokonto"
+  allgemein: "https://a.check24.net/misc/click.php?pid=80968&aid=18&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=portal"
 
   # --- CHECK24 ([E2E] verifiziert bis zur finalen Kategorieseite) ---
-  kredit: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kredit-vergleich"
+  kredit: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kredit-vergleich&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=kredit"
   #  ^ 11.08.2026 repariert: deep=kreditvergleich war TOT (404 auf der Endseite).
   #    kredit-vergleich landet echt auf check24.net/kredit-vergleich/ (200).
-  kfz-versicherung: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kfz-versicherung"
-  handytarife: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife"
-  kreditkarte: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
-  tagesgeld: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
+  kfz-versicherung: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kfz-versicherung&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=kfz-versicherung"
+  handytarife: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=handytarife"
+  kreditkarte: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=kreditkarte"
+  tagesgeld: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=tagesgeld"
   #  ^ [PDF/Frank 11.08.2026 bestaetigt]: Es gibt im Check24-Partnerprogramm
   #    KEINEN eigenen Tagesgeld-Link – der offizielle Deep ist c24bank&cat=14
   #    (C24 Bank = Check24s Geldanlage-Heimat). WICHTIG: Bei Verlinkung immer
   #    „C24 Bank" nennen (Tooltips render-link.html + Gateway-Text shield).
-  fluege: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
+  fluege: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=fluege"
   #  ^ [PDF/Frank 11.08.2026 bestaetigt]: Das ist der offizielle Flug-Deep-Link
   #    aus dem Partnerprogramm (Check24 buendelt Flug mit Pauschalreisen, cat=9).
   #    NICHT „flugvergleich" o.ae. raten – solche Pfade sind 404-tot!
@@ -50,12 +61,12 @@ links:
   #  Hinweis: tarifcheck.de sperrt Datacenter-Bots mit 403 (WAF). Der Waechter
   #  akzeptiert 403 NUR wenn die Kette sauber auf tarifcheck.de mit
   #  partner_id=47086 landet; echte Nutzer sehen die Seiten normal (verifiziert).
-  unfallversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=unfallversicherung"
-  haftpflicht: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=haftpflichtversicherung"
-  hausrat: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hausratversicherung"
-  zahnzusatzversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=zahnzusatzversicherung"
-  reisekrankenversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=reisekrankenversicherung"
-  hunde: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hundekrankenversicherung"
+  unfallversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=unfallversicherung&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=unfallversicherung"
+  haftpflicht: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=haftpflichtversicherung&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=haftpflicht"
+  hausrat: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hausratversicherung&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=hausrat"
+  zahnzusatzversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=zahnzusatzversicherung&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=zahnzusatzversicherung"
+  reisekrankenversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=reisekrankenversicherung&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=reisekrankenversicherung"
+  hunde: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hundekrankenversicherung&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=hunde"
   #  ^ [E2E 11.08.2026]: Tracker akzeptiert den Deep ->
   #    tarifcheck.de/hundekrankenversicherung/ (produkt-exakt, PID wandert mit).
   #    Kurzform deep=hunde (-> hunde.html) funktioniert ebenfalls, aber dieser

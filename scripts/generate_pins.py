@@ -31,6 +31,9 @@ POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, slug_of
 
 BASE_URL = os.environ.get("BLOG_BASE_URL", "https://franksfinanzcheck.de")
+# UTM-Attribution (Premium 25.08.2026) – wie pinterest_engine.PIN_UTM:
+# Analytics-Kanalzuordnung in Umami, Affiliate-Links bleiben kanalneutral.
+PIN_UTM = "?utm_source=pinterest&utm_medium=social&utm_campaign=pins"
 API = "https://api.pinterest.com/v5"
 
 
@@ -145,7 +148,7 @@ def main():
         print("\n(Vorschau – nichts wird gepinnt)")
         for p in to_pin:
             print(f"  • {p['title'][:60]}")
-            print(f"    → {BASE_URL}/posts/{p['slug']}/")
+            print(f"    → {BASE_URL}/posts/{p['slug']}/{PIN_UTM}")
         return
 
     ok = 0
@@ -155,7 +158,7 @@ def main():
             image = BASE_URL + image
         elif not image.startswith("http"):
             image = f"{BASE_URL}/images/covers/{p['slug']}.jpg"
-        link = f"{BASE_URL}/posts/{p['slug']}/"
+        link = f"{BASE_URL}/posts/{p['slug']}/{PIN_UTM}"
         # Werbekennzeichnung (deutsches Recht): Artikel enthalten Affiliate-Links
         desc = "*Werbung | " + (p["description"] or p["title"])[:478]
         desc += "\n\n#GeldSparen #Spartipps #FranksFinanzcheck"

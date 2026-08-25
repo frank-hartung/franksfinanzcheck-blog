@@ -34,6 +34,11 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import list_post_paths  # noqa: E402
 
 BASE_URL = os.environ.get("BLOG_BASE_URL", "https://franksfinanzcheck.de")
+# UTM-Attribution (Premium 25.08.2026): Pins verlinken Artikel MIT
+# Kanal-Markierung → Umami weist Sessions/Absprünge/Events dem Kanal
+# „pinterest" sauber zu (Transaktions-Attribution = Analytics-Ebene, die
+# Affiliate-Links selbst bleiben kanalneutral, siehe check24_links.yaml).
+PIN_UTM = "?utm_source=pinterest&utm_medium=social&utm_campaign=pins"
 API = "https://api.pinterest.com/v5"
 # Token-Priorität: 1) Auto-Refresh aus data/pinterest_tokens.enc (pinterest_auth.py –
 # Token läuft nach 30 Tagen ab, refresh hält ihn automatisch am Leben)
@@ -147,7 +152,7 @@ def write_queue(queue):
             f"- slug: \"{p['slug']}\"",
             f"  title: \"{p['title'][:100]}\"",
             f"  description: \"{p['text']}\"",
-            f"  link: \"{BASE_URL}/posts/{p['slug']}/\"",
+            f"  link: \"{BASE_URL}/posts/{p['slug']}/{PIN_UTM}\"",
             f"  image: \"{BASE_URL}/{p['cover']}\"",
             "",
         ]
@@ -172,7 +177,7 @@ def api_post_pin(token, board_id, post):
         "media_source": {"source_type": "image_url", "content_type": "image/jpeg",
                          "data": f"{BASE_URL}/{post['cover']}"},
         "description": pin_text(post),
-        "link": f"{BASE_URL}/posts/{post['slug']}/",
+        "link": f"{BASE_URL}/posts/{post['slug']}/{PIN_UTM}",
         "title": pin_title_of(post),
     }
     req = urllib.request.Request(f"{API}/pins", data=json.dumps(body).encode(),
