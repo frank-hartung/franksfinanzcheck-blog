@@ -38,6 +38,14 @@ jobs:
         with:
           hugo-version: "0.164.0"
           extended: true
+          
+      - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte)
+        # Frontmatter heilen BEVOR Hugo baut – Pin-Button + og-Tags lesen
+        # pin_description/Titel aus dem geheilten Content.
+        continue-on-error: true
+        run: |
+          python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin 2>/dev/null || true
+          python3 scripts/pinterest_seo_healer.py --fix || true
 
       - name: Seite bauen (für Pin-Button-/og-Checks)
         env:
