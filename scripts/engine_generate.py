@@ -43,6 +43,8 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import generate_drafts as g  # noqa: E402  (nutzt bestehende Generierungs-Logik)
 from check_titles import COMPOUND_FIXES, TIME_TAIL as RE_ANHAENGSEL  # noqa: E402 – Titel-Qualitätsgate (FrankAutoOps)
+from post_utils import safe_title_cut  # noqa: E402 – Wortgrenzen-Kürzung (nie Wortbruch)
+import cadence_guard  # noqa: E402 – Single Source of Truth für die Kadenz
 
 
 def normalize_title(title: str) -> str:
@@ -124,22 +126,12 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
             build_pin_title, build_pin_description, extend_description,
         )
         title = ensure_colon_title(strip_ellipsis(normalize_title(title)))
+        # SERP-Kappung NUR an Wortgrenzen (safe_title_cut) – harte
+        # [:60]-Slices haben Titel mitten im Wort kaputtgeschnitten
+        # ("…Tarife – Gastari") und damit die Cover-Texte unvollständig
+        # gemacht (Befund 26.08.2026).
         if len(title) > 60:
-            # SERP-Kappung ohne Ellipsis-Müll
-            if ":" in title:
-                head, tail = title.split(":", 1)
-                budget = 60 - len(head) - 2
-                tail = tail.strip()
-                if budget > 10:
-                    tcut = tail[:budget]
-                    sp = tcut.rfind(" ")
-                    if sp > 8:
-                        tcut = tcut[:sp]
-                    title = f"{head.strip()}: {tcut.strip()}"
-                else:
-                    title = head.strip()[:60]
-            else:
-                title = title[:60]
+            title = safe_title_cut(title, 60)
         kws = keywords_from_title(title, keywords or [])
         desc = extend_description(desc or "", kws, title)
         pin_t = build_pin_title(title)
@@ -311,17 +303,25 @@ def make_draft(topic, used_titles):
 # Tagesziel: MIN_ARTIKEL_PRO_TAG (Default 2) bis MAX_ARTIKEL_PRO_TAG
 # (Default 3) – steuerbar über die gleichnamigen Env-Variablen /
 # GitHub-Actions-Variablen.
-PUBLICATION_DAYS = {0, 2, 4}  # Montag, Mittwoch, Freitag
+#
+# WICHTIG (26.08.2026): PUBLICATION_DAYS kommt aus cadence_guard.py –
+# der EINEN Kadenz-Definition für Engine, Guards und Deploy-Gate.
+# (Die frühere lokale Kopie hier konnte sich davon driften.)
+PUBLICATION_DAYS = cadence_guard.PUBLICATION_DAYS
 
 
 def count_articles_today():
-    """Zaehlt alle HEUTE erzeugten Artikel-Bundles (live UND Entwurf) –
+    """Zaehlt alle HEUTE VERÖFFENTLICHTE Artikel (live UND Entwurf) –
     Entwuerfe zaehlen mit, sonst wuerde die Schleife bei schwacher KI
-    beliebig viele Drafts ablegen."""
+    beliebig viele Drafts ablegen.
+
+    Gezählt wird über das Frontmatter-`date:`-Feld (Single Source of
+    Truth, s. cadence_guard) – nicht über den Ordner-Datumspräfix, der
+    bei Re-Queue/Re-Dating (heilende Wachen) bewusst alt bleibt."""
     today = datetime.date.today().isoformat()
     n = 0
-    for path in g.list_post_paths():
-        if os.path.basename(os.path.dirname(path)).startswith(today):
+    for p in cadence_guard.load_posts():
+        if p["date"].isoformat() == today:
             n += 1
     return n
 
@@ -438,7 +438,24 @@ def main():
         write_status(f"Kein Publikationstag ({day}) – Publikation nur Mo/Mi/Fr (2-3 Artikel).")
         return 0
 
-    # Tages-Guard (zählt live + Drafts)
+    # KADENZ-Selbstheilung (26.08.2026): Posts aus der Re-Queue
+    # (cadence_wait: true) bis zum Tageslimit promoten. Das ist die
+    # Content-Seite des Heil-Kreises: Artikel, die cadence_guard --fix
+    # wegen eines Kadenz-Verstoßes offline genommen hat (Deploy-Gate,
+    # Blog-Health, Engine-Preflight), gehen hier am nächsten
+    # Publikationstag wieder live – IMMER innerhalb des Tageslimits
+    # (2–3), mit neuem Veröffentlichungsdatum. Der Loop unten füllt
+    # den Rest des Tages mit neuen Artikeln auf.
+    try:
+        promoted = cadence_guard.requeue_to_capacity(
+            cadence_guard.load_posts(), max_per_day)
+        if promoted:
+            print(f"♻️ Cadence-Re-Queue: {len(promoted)} Post(s) wieder live "
+                  f"(Tageslimit {max_per_day} gewahrt).")
+    except Exception as exc:  # noqa: BLE001 – Heilung darfs nicht bremsen
+        print(f"⚠ Cadence-Re-Queue fehlgeschlagen (nicht kritisch): {exc}")
+
+    # Tages-Guard (zählt live + Drafts, Datum-Feld-basiert)
     published_today = count_articles_today()
     if published_today >= max_per_day:
         print(f"Bereits {published_today}/{max_per_day} Artikel heute – nichts zu tun.")

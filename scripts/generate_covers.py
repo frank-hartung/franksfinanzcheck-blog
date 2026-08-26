@@ -442,6 +442,24 @@ def make_cover(title, slug, out_path, force=False, badge=None, savings=None):
             # Wort-Hyphenation als allerletzte Option (nur bei Übergrößen)
             lines = wrap_text_no_hang(title, title_font, max_w, d)
 
+    # ABSOLUTE-CLIP-PROOF (26.08.2026): Der Cover-Text darf NIEMALS aus
+    # dem Bild laufen. Selbst wenn Wort-Umbruch scheitert (ein einziges
+    # Wort > max_w), wird die Zeile zeichenweise getrennt. Dies ist die
+    # allerletzte Notstufe – bei den üblichen Titeln (≤ 60 Zeichen,
+    # safe_title_cut) wird sie nie erreicht.
+    for i, l in enumerate(lines):
+        if d.textlength(l, font=title_font) > max_w:
+            parts, cur = [], ""
+            for ch in l:
+                if cur and d.textlength(cur + ch, font=title_font) > max_w:
+                    parts.append(cur)
+                    cur = ch
+                else:
+                    cur += ch
+            if cur:
+                parts.append(cur)
+            lines[i:i + 1] = parts
+
     line_h = int(title_font.size * 1.25)
     total_h = len(lines) * line_h
 
@@ -472,7 +490,10 @@ def make_cover(title, slug, out_path, force=False, badge=None, savings=None):
     zone_top = badge_y + bh_box + 26        # Badge (endet ~y=202) + Luft
     zone_bottom = trust_y - 30              # oberhalb der Trust-Line
     block_h = total_h + pill_gap + pill_box_h
-    y_start = (zone_top + zone_bottom) // 2 - block_h // 2
+    # CLAMP (26.08.2026): Bei pathologisch hohen Blöcken (sehr viele
+    # Zeilen + Pille) darf der Block die Zone nicht nach OBEN verlassen –
+    # sonst würde der obere Titeltext unter das Badge laufen/abgeschnitten.
+    y_start = max((zone_top + zone_bottom) // 2 - block_h // 2, zone_top + 4)
 
     # Titel zeichnen – mit GOLD-Akzenten auf Zahlen („5 Tricks", „800 €"),
     # Premium-Blickfang im Feed. Wortweise, damit die Zentrierung exakt bleibt.

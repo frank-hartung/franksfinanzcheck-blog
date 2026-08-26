@@ -1,5 +1,5 @@
 ---
-title: "Sparen im Herbst: Die besten Spartipps für die goldene"
+title: "Sparen im Herbst: Spartipps für die goldene Jahreszeit"
 description: "Sparen im Herbst: Mit diesen 7 praxiserprobten Spartipps für Heizung, Versicherungen, Kfz-Wechsel & Haushaltsbudget sparst du bis zu 1.250 €."
 date: 2026-08-14T08:35:12Z
 draft: false

@@ -45,7 +45,57 @@
    (Ramp-Logik) existiert nicht mehr – dieser Report ist die verbindliche
    Definition. Änderungen nur noch per ausdrücklichem Beschluss Franks
    (Dokumentation hier + Kapitel 4.0 im Master-System).
-5. **Pagination-Fix (19.08.2026, nachgeschärft am selben Abend):** Mit nur
+5. **Hartes Vor-Veröffentlichungs-Gate + Selbstheilung (26.08.2026,
+   nach Fund von 7 Kadenz-Verstößen + 6 unvollständigen Titeln/Cover-Texten):**
+   Die Kadenz ist nicht mehr nur „vorgeschrieben“, sondern wird VOR JEDEM
+   Publish technisch erzwungen – ein Verstoß kann nicht mehr live gehen,
+   egal welcher Pfad (manueller Commit, `publish.py`, Content-Engine,
+   `workflow_dispatch`) ihn in `main` bringt:
+   - **`scripts/cadence_guard.py` – die Kadenz-Wache (Single Source of
+     Truth).** Prüft `Mo/Mi/Fr` + `2–3/Tag` gegen das FRONTMATTER-Datum
+     (nicht den Ordner-Namen – bleibt bei Re-Queue stabil). Modus:
+     `--check` (Bericht), `--fix` (Selbstheilung: Off-Day/Über-Max-Posts →
+     `draft: true` + `cadence_wait: true`, d. h. Re-Queue in den nächsten
+     Publikationstag – Content geht nie verloren), `--selftest` (Exit 2
+     bricht jede CI-Stage ab, wenn das Gate selbst defekt ist).
+     Report: `CADENCE-GATE-REPORT.md` (eingecommittet).
+   - **Deploy-Gate** (`deploy.yml`): vor JEDEM Hugo-Build läuft
+     Selbsttest → `cadence_guard --fix` → `check_titles --fix` →
+     `check_covers --fix`; Heilungen werden konvergent gepusht (der
+     Folge-Deploy findet einen sauberen Zustand). Erst danach Build.
+   - **Publish-Gate** (`publish_gate.py`, Engine-Level): zählte bisher
+     nur Ordner-Präfix-Posts des Tages; zählt jetzt auch Frontmatter-
+     Datum = heute (Re-Queue-Promotions) und prüft **5. harte Prüfung:
+     Cover-Text-Komplettheit** (`check_titles` R5 – Titel mit
+     unvollständigem/hängendem Ende wird verworfen, wenn neu, bzw.
+     als Re-Queue auf draft zurückgestuft).
+   - **Content-Engine v2**: Phase 0.5 (Kadenz-Selbsttest + `--fix` vor
+     JEDEM Slot) und Phase 6 (`engine_issue.py --deficit` – sichtbares
+     GitHub-Issue, wenn am Tagesende unter Mindestziel liegt; schließt
+     sich selbst, sobald das Minimum wieder erfüllt ist).
+   - **Blog-Health (täglich 07:45 MESZ):** `cadence --selftest` + `--fix`
+     + Titel-/Cover-Gate heilen auch ZWISCHEN den Publishing-Slots.
+   - **`scripts/publish.py`:** manuelles Publizieren unterliegt der
+     SELBEN Routine (Regel 2); Verstoß wird hart blockiert (Notfall:
+     `--force-cadence`/`FORCE_PUBLISH_ANY_DAY=1`, sichtbar im Commit-Log).
+     Veröffentlichen setzt das Frontmatter-Datum auf heute (Re-Dating).
+   - **`safe_title_cut()` in `post_utils.py`:** zentrales Kürzen von
+     Titeln an Wortgrenzen (nie mitten im Wort, nie mit hängendem
+     Gedankenstrich) – ersetzt alle harten `title[:60]`-Slices in
+     `meta_optimizer.py` und `engine_generate.py`. Die Ursache der
+     unvollständigen Cover-Texte vom 26.08.
+   - **`check_covers.py` C4:** verifiziert für JEDES Cover, dass der
+     komplette Titel im Textbereich rendert (1:1-Nachbau des
+     Render-Flows inkl. Zeilenbruch + Zeichen-Hard-Wrap); `--fix`
+     rendert Verstöße neu. `generate_covers.py` selbst hat jetzt
+     Zeichen-Hard-Wrap + Y-Start-Clamp als letzte Sicherheitslinie.
+   - **Vorgang am 26.08.2026 (Beleg):** 7 Verstöße geheilt
+     (5 Off-Day: 08.16. Sa ×2, 08.18. So ×2, 08.20. So; 2 Over-Cap:
+     08.14. Fr, 08.26. Mi) → 18 live, jeder Tag exakt 2–3 · 6
+     unvollständige Titel repariert (Wortbruch durch alte `[:60]`-
+     Kürzung) + ihre Covers neu gerendert. Ergebnis: Bestand 100 %
+     konform, alle Gates grün.
+6. **Pagination-Fix (19.08.2026, nachgeschärft am selben Abend):** Mit nur
    6 Posts und `pagerSize = 8` existierten `/posts/page/2/` (und höhere)
    nicht mehr – bisher 404. `content/_index.md` aliasiert nur noch
    `/page/3/`–`/12/` → `/`, `content/posts/_index.md` nur noch
@@ -64,4 +114,4 @@
   via `LENGTH_OPT_CHARS_MIN/MAX`); harte Gates bleiben wortbasiert
 
 ---
-_Stand: 19.08.2026 · Bestand: 6 Posts (2× Mo 08.10., 2× Mi 08.12., 2× Fr 08.14.) + 6 Pillar-Seiten_
+_Stand: 26.08.2026 · Bestand: 18 live (2–3 an jedem Publikationstag 08.10.–08.26.) + 7 Re-Queue-Entwürfe (`cadence_wait`) + 6 Pillar-Seiten · Hartes Gate + Selbstheilung aktiv (Regel 5, Report: `CADENCE-GATE-REPORT.md`)_

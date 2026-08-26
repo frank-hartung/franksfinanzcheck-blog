@@ -72,19 +72,51 @@ STRICT = "--strict" in sys.argv
 
 
 def todays_live_candidates():
-    """Slugs, die heute erzeugt wurden UND aktuell draft:false sind –
-    also die Kandidaten, die dieser Lauf gerade veröffentlichen würde."""
+    """Slugs, die dieser Lauf gerade live schalten würde:
+      (1) NEUE Artikel: Ordner-Präfix = heute, aktuell draft:false
+      (2) Re-Queue-Promotions (26.08.2026): Frontmatter-Datum = heute,
+          Ordner-Präfix bleibt alt (stabile URLs/Covers) – die zählen
+          ebenfalls als "heute live geschaltet" und müssen das Gate
+          ebenso bestehen."""
     today = datetime.date.today().isoformat()
     candidates = []
     for path in glob.glob(os.path.join(POSTS_DIR, "*", "index.md")):
         slug = os.path.basename(os.path.dirname(path))
-        if not slug.startswith(today):
-            continue
         content = open(path, encoding="utf-8").read()
         if re.search(r"^draft:\s*true", content, re.M):
             continue
-        candidates.append(slug)
+        if slug.startswith(today):
+            candidates.append(slug)
+            continue
+        m = re.search(r"(?m)^date:\s*[\"']?(\d{4}-\d{2}-\d{2})", content)
+        if m and m.group(1) == today:
+            candidates.append(slug)
     return candidates
+
+
+def title_integrity_failures(candidates):
+    """Cover-Text-Komplettheit (26.08.2026): Titel mit R5-Verstoß
+    (vermutlich unvollständig/abgebrochen) dürfen nicht live gehen –
+    der Cover-Text würde unvollständig abgebildet.
+
+    Rückgabe: Set der Slugs mit R5-Verstoß. Die Haupt-Schleife entscheidet
+    anhand des Ordner-Präfixes, was passiert:
+      NEUE Artikel (Präfix = heute) → Verwurf (Betriebsregel 13.08.2026),
+      Re-Queue-Posts (alter Ordner) → draft (Content bleibt erhalten)."""
+    from check_titles import check_title
+    failed = set()
+    for slug in candidates:
+        path = os.path.join(POSTS_DIR, slug, "index.md")
+        if not os.path.exists(path):
+            continue
+        content = open(path, encoding="utf-8").read()
+        m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
+        if not m:
+            continue
+        issues = check_title(m.group(1))
+        if any(rule == "R5" for rule, _ in issues):
+            failed.add(slug)
+    return failed
 
 
 def _run_json(cmd):
@@ -196,10 +228,12 @@ def main():
 
     print(f"Publish-Gate: {len(candidates)} Kandidat(en) für heute → {candidates}")
 
+    today = datetime.date.today().isoformat()
     len_fail, len_warn = check_length_failures()
     seo_fail, seo_warn = seo_audit_failures()
     aff_fail, aff_warn = affiliate_profi_failures()
     integ_fail, integ_warn = affiliate_integrity_failures()
+    r5_fail = title_integrity_failures(candidates)
     for w in (len_warn, seo_warn):
         if w:
             print(f"⚠ {w}")
@@ -209,6 +243,7 @@ def main():
         print(f"⚠ {integ_warn}")
 
     gated = []
+    demoted = []
     for slug in candidates:
         reasons = []
         if slug in len_fail:
@@ -220,16 +255,39 @@ def main():
         if slug in integ_fail:
             reasons.append("Affiliate-Link-Integrität nicht bestanden (defekte/nicht gerenderte CTA): "
                             + "; ".join(integ_fail[slug]))
+        if slug in r5_fail:
+            reasons.append("Cover-Text-Komplettheit (check_titles R5) nicht bestanden – "
+                           "Titel vermutlich unvollständig")
 
         if reasons:
-            gated.append((slug, reasons))
-            print(f"  🛑 {slug}: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)")
-            for r in reasons:
-                print(f"     - {r}")
-            if not DRY_RUN:
-                discard_article(slug)
-        else:
-            print(f"  ✅ {slug}: alle 4 Prüfungen bestanden – bleibt live")
+            if slug.startswith(today):
+                # NEUER Artikel: Verwurf (Betriebsregel 13.08.2026:
+                # kein Artefakt – der nächste Slot erzeugt frischen Content)
+                gated.append((slug, reasons))
+                print(f"  🛑 {slug}: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)")
+                for r in reasons:
+                    print(f"     - {r}")
+                if not DRY_RUN:
+                    discard_article(slug)
+            else:
+                # Re-Dated/Re-Queue-Post (alter Ordner): Content war
+                # bereits akzeptiert – NIE löschen. Auf draft zurück-
+                # stufen + Re-Queue-Flag entfernen (sonst würde der
+                # nächste Slot denselben Post erneut promoten).
+                # Frank korrigiert (z. B. den Titel) und gibt frei.
+                gated.append((slug, reasons))
+                demoted.append(slug)
+                print(f"  🛑 {slug}: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten")
+                for r in reasons:
+                    print(f"     - {r}")
+                if not DRY_RUN:
+                    path = os.path.join(POSTS_DIR, slug, "index.md")
+                    content = open(path, encoding="utf-8").read()
+                    content = re.sub(r"(?m)^draft:\s*false\s*$", "draft: true",
+                                     content, count=1)
+                    content = re.sub(r"(?m)^cadence_wait:\s*true\s*$\n?", "",
+                                     content, count=1)
+                    open(path, "w", encoding="utf-8").write(content)
 
     if gated:
         try:
@@ -237,12 +295,14 @@ def main():
             from audit_log import log_event
             log_event(module="publish_gate", action="gate",
                       input={"candidates": candidates},
-                      output={"gated": [g[0] for g in gated]},
+                      output={"gated": [g[0] for g in gated],
+                              "demoted": demoted},
                       status="gated")
         except Exception:
             pass
 
-    print(f"\nErgebnis: {len(gated)}/{len(candidates)} Artikel verworfen.")
+    print(f"\nErgebnis: {len(gated)}/{len(candidates)} Artikel am Gate scheitern "
+          f"({len(gated) - len(demoted)} verworfen, {len(demoted)} → draft).")
     if STRICT and gated:
         return 1
     return 0

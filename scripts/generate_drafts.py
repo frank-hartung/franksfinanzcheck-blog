@@ -1064,6 +1064,23 @@ def main():
     if not os.path.isdir(POSTS_DIR):
         os.makedirs(POSTS_DIR, exist_ok=True)
     auto_publish = os.environ.get("AUTO_PUBLISH", "0") == "1"
+
+    # KADENZ-HARD-GATE (26.08.2026, Defense-in-Depth): Auch ein direkter
+    # Aufruf dieses Legacy-Skripts mit AUTO_PUBLISH=1 veröffentlicht NUR
+    # an Mo/Mi/Fr (Dauervorgabe, CADENCE-REPORT.md Regel 2). Die Engine
+    # (engine_generate.py) hat denselben Guard; hier schützt er den
+    # Fall "Skript wird direkt mit AUTO_PUBLISH=1 ausgeführt".
+    # Entwürfe (AUTO_PUBLISH ungesetzt/0) sind davon unberührt.
+    if auto_publish and os.environ.get("FORCE_PUBLISH_ANY_DAY") != "1":
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import cadence_guard
+        today = datetime.date.today()
+        if not cadence_guard.is_publication_day(today):
+            print(f"🛑 KADENZ-GATE: Heute ist {cadence_guard.DAYS_DE[today.weekday()]} "
+                  f"– automatische Veröffentlichung nur Mo/Mi/Fr (Dauervorgabe).")
+            print("   Notfall-Override: FORCE_PUBLISH_ANY_DAY=1 (bewusst, bleibt im Log).")
+            return
+
     pin_topics = os.environ.get("PIN_TOPICS", "0") == "1"
     # Tages-Limit: Wie viele Artikel dürfen pro Tag veröffentlicht werden?
     # (Guard gegen mehrere Workflow-Läufe pro Tag – GitHub-Crons können

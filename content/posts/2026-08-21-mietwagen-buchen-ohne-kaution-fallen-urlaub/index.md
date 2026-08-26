@@ -1,5 +1,5 @@
 ---
-title: "Mietwagen ohne Kaution: So umgehst du alle Fallen – Vollkas"
+title: "Mietwagen ohne Kaution: So umgehst du alle Fallen"
 description: "Mietwagen ohne Kaution buchen: Kautionsfalle umgehen, Vollkasko ohne Selbstbeteiligung prüfen und so bis zu 40 Prozent am Urlaubsort sparen."
 date: 2026-08-21T06:10:00Z
 draft: false

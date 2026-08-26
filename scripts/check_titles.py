@@ -51,6 +51,89 @@ TIME_TAIL = re.compile(r"\b(dieses Jahr|dieses Monat|im Jahr 20\d\d)\s*\.?$")
 TITLE_NO_COLON_MAX = 45  # R1: länger ohne Doppelpunkt → Cover-Umbruch kaputt
 REST_MIN = 20            # R3: Rest nach Anhängsel-Entfernung muss aussagekräftig sein
 
+# R5 (26.08.2026): Legitime Titel-Endwörter in Kleinschreibung.
+# Hintergrund: Kürzungsbugs haben Titel mitten im Wort / mitten im Satz
+# kaputtgelassen ("…Tarife – Gastari", "…und was sie", "…Vollkas").
+# Deutscher Titel mit großem (Nomen/Eigenwort) oder Zahl/€/%-Ende ist
+# per se ok; KLEINGESCHRIEBENE Endwörter müssen auf dieser Liste stehen,
+# sonst meldet R5 "vermutlich unvollständiger Titel". Falsch-Positiv =
+# Gate blockiert den Artikel bis Freigabe (sicher); die Liste ist
+# bewusst großzügig für typische Ratgeber-Endungen.
+R5_END_WHITELIST = {
+    # Verben (Person/Infinitiv), die Titles ordentlich beenden
+    "ist", "sind", "war", "waren", "hat", "haben", "kann", "können",
+    "kannst", "muss", "müssen", "musst", "will", "willst", "sollst",
+    "darfst", "magst", "möchte", "lohnt", "kostet",
+    "kosten", "spart", "sparen", "spare", "senkt", "senken", "schützt",
+    "schützen", "zahlt", "zahlen", "funktioniert", "funktionieren",
+    "bleibt", "bleiben", "wird", "werden", "wächst", "wachsen", "fällt",
+    "fallen", "steigt", "steigen", "sinkt", "sinken", "endet", "enden",
+    "passt", "passen", "reicht", "reichen", "fehlt", "fehlen", "zählt",
+    "zählen", "bringt", "bringen", "macht", "machen", "gibt", "geben",
+    "nimmt", "nehmen", "nutzt", "nutzen", "testest", "testen", "prüfst",
+    "prüfen", "wählst", "wählen", "vergleichst", "vergleichen", "buchst",
+    "buchen", "findest", "finden", "verstehst", "verstehen", "erreichst",
+    "erreichen", "gewinnst", "gewinnen", "kündigst", "kündigen",
+    "wechselst", "wechseln", "sicherst", "sichern", "planst", "planen",
+    "investierst", "investieren", "anlegst", "anlegen", "versicherst",
+    "versichern", "heizt", "heizen", "ladest", "laden", "installierst",
+    "installieren", "einrichtest", "einrichten", "richtest", "richten",
+    "steuerst", "steuern", "behältst", "behalten", "kontrollierst",
+    "kontrollieren", "überprüfst", "überprüfen", "kalkulierst",
+    "kalkulieren", "betrachtet", "betrachten", "beobachtet", "beobachten",
+    "spürst", "spüren", "sichtest", "sichten", "vermeidest", "vermeiden",
+    "erzielst", "erringst", "erringen", "abgeben", "bezahlen", "bemerken",
+    "sammeln", "einreichen", "beantragst", "beantragen", "bestellst",
+    "bestellen", "versendest", "versenden", "ermitteln", "ermittelt",
+    "zeigt", "zeigen", "weiß", "wissen", "siehst", "sehen", "hörst",
+    "hören", "liest", "lesen", "schreibst", "schreiben", "suchst",
+    "suchen", "startest", "starten", "läufst", "laufen", "klickst",
+    "klicken", "tippst", "tippen", "suchst", "suche", "sucht", "sucht",
+    # Infinitive (nach „zum/zur" oder als Endung)
+    "sparen", "zahlen", "buchen", "wählen", "wechseln", "sichern",
+    "senken", "finden", "testen", "prüfen", "vergleichen", "kalkulieren",
+    "planen", "investieren", "anlegen", "versichern", "schützen",
+    "heizen", "laden", "installieren", "einrichten", "nutzen",
+    "verstehen", "erreichen", "gewinnen", "kündigen", "beobachten",
+    "bemerken", "vergleichen", "betrachten", "spüren", "sammeln",
+    "bezahlen", "sichten", "beantragen", "bestellen", "ermitteln",
+    "zeigen", "wissen", "sehen", "hören", "lesen", "schreiben",
+    "suchen", "starten", "laufen", "klicken", "tippen", "ausprobieren",
+    "nachholen", "nachrüsten", "ausbauen", "nachweisen", "vorführen",
+    # Adjektive / Partizipien
+    "wichtig", "günstig", "einfach", "leicht", "schnell", "zügig",
+    "bequem", "komfortabel", "sicher", "fair", "ehrlich", "transparent",
+    "unabhängig", "verständlich", "kostenlos", "neu", "alt", "gut",
+    "schlecht", "billig", "billiger", "teurer", "mehr", "weniger",
+    "richtig", "falsch", "klar", "voll", "leer", "warm", "kalt",
+    "frisch", "sauber", "stabil", "flexibel", "mobil", "digital",
+    "smart", "clever", "schlau", "klug", "sinnvoll", "lohnend",
+    "rentabel", "wertvoll", "ausreichend", "perfekt", "optimal",
+    "ideal", "praktisch", "konkret", "real", "direkt", "automatisch",
+    "wirklich", "echt", "extra", "besonders", "gratis", "bar", "cash",
+    "umsetzbar", "praxistauglich", "alltagstauglich", "nachhaltig",
+    # Substantive in Kleinschreibung (seltener, aber valide)
+    "geld", "zinsen", "zins", "tarif", "tarife", "kosten", "preis",
+    "preiswerte", "konto", "karte", "karten", "rate", "raten", "bonus",
+    "boni", "rabatt", "prämie", "prämien", "guthaben", "depot",
+    "sparplan", "etf", "etfs", "fonds", "aktie", "aktien", "anleihe",
+    "anleihen", "dividende", "dividenden", "rendite", "versicherung",
+    "versicherungen", "police", "vertrag", "verträge", "anbieter",
+    "vergleich", "ratgeber", "tipps", "tricks", "ideen", "fehler",
+    "fallen", "hacks", "checkliste", "leitfaden", "übersicht",
+    "analyse", "strategie", "strategien", "methode", "methoden",
+    "gewohnheiten", "regel", "regeln", "gründe", "gründe", "fragen",
+    "antworten", "lösungen", "vorteile", "nachteile", "effekt",
+    "effekte", "nutzen", "risiko", "risiken", "sicherheit", "sicherung",
+    "abdeckung", "deckung", "schutz", "vorsorge", "verzicht",
+    "freiheit", "budget", "budgets", "planung", "plan", "kontrolle",
+    "buch", "app", "apps", "excel", "papier", "online", "offline",
+    "internet", "dsl", "wlan", "router", "glasfaser", "netz", "handy",
+    "handys", "smartphone", "mietwagen", "urlaub", "reise", "reisen",
+    "flug", "flüge", "ticket", "tickets", "laufzeit", "kündigung",
+    "notgroschen", "haushalt", "budgetplanung", "sparen", "sammeln",
+}
+
 
 def check_title(title):
     """Gibt Liste von (rule, message) zurück."""
@@ -73,6 +156,37 @@ def check_title(title):
         issues.append(("R4", "doppelte Leerzeichen"))
     if " :" in t or re.search(r":\s{2,}", t):
         issues.append(("R4", "Leerzeichen vor/mehrfach nach Doppelpunkt"))
+
+    # R5 (26.08.2026): vermutlicher UNVOLLSTÄNDIGER Titel (Truncation-
+    # Wächter). Der Cover-Text wird aus dem Titel gerendert – ein
+    # mitten im Wort/Satz abgebrochener Titel macht den Cover-Text
+    # unvollständig (Befund: „…Tarife – Gastari“ o. ä.). Detection:
+    #   - Endet mit hängendem Konnektor (–, —, -, ,, ;) → sofort FAIL
+    #   - Sonst: letztes Wort ohne Satz-Punktierung; groß (Nomen) oder
+    #     Zahl/€/% → ok; Kleinschreibung MUSS auf R5_END_WHITELIST
+    #     stehen (legitime Endung), sonst FAIL.
+    # --fix kann R5 NICHTEINHEITEN (der fehlende Teil ist verloren) –
+    # das Gate meldet den Titel zur Freigabe/Korrektur (publish_gate
+    # hält neue Artikel zurück, Bestands-Titel werden beim nächsten
+    # Lauf sichtbar).
+    t_plain = re.sub(r"<[^>]+>", "", t).strip()
+    if t_plain:
+        last_ch = t_plain[-1]
+        if last_ch in "–—-,;":
+            issues.append(("R5", "Titel endet mit hängendem Konnektor "
+                                 f"(„…{t_plain[-12:]}“) – vermutlich unvollständig"))
+        elif not last_ch in ".!?":
+            words = t_plain.split()
+            last_word = re.sub(r"[.,;:!?\-–—\"'„“»«…]+$", "", words[-1]).strip()
+            if not last_word:
+                issues.append(("R5", "Titel endet ohne Endwort – vermutlich unvollständig"))
+            elif last_word[0].isupper():
+                pass  # Großes Endwort (Nomen/Eigenwort) = valide Titel-Endung
+            elif re.fullmatch(r"[\d.,\s%€]+$", last_word):
+                pass  # Zahl/€/%-Ende („…800 €", „…2026") = valide
+            elif last_word not in R5_END_WHITELIST:
+                issues.append(("R5", f"Titel endet in kleingeschriebenem „{last_word}“ – "
+                                     "vermutlich unvollständig (Truncation-Check)"))
     return issues
 
 

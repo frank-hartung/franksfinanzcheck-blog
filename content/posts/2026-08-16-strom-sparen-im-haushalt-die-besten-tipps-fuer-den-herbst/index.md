@@ -2,7 +2,9 @@
 title: "Strom sparen im Haushalt: Die besten Tipps für den Herbst"
 description: "Ströme sparen im Haushalt: Mit diesen 8 Praxistipps für Beleuchtung, Standby, Elektrogeräte & Tarifwechsel senkst du deine Stromrechnung um bis zu 460 €."
 date: 2026-08-16T08:35:12Z
-draft: false
+draft: true
+cadence_demoted: 2026-08-26T13:46:19Z
+cadence_wait: true
 tags: ["Strom sparen", "Haushalt Strom sparen", "Stromverbrauch senken", "Stromtarif wechseln", "Standby Stromfresser"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

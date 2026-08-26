@@ -25,7 +25,7 @@ import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
-from post_utils import list_post_paths, slug_of
+from post_utils import list_post_paths, slug_of, safe_title_cut
 import groq_config
 CACHE_FILE = os.path.join(BLOG_DIR, ".meta_cache.json")
 
@@ -398,46 +398,21 @@ def fix_meta(a, use_ai):
                         break
                     if len(new_title) + len(addon) <= TITLE_OPT_MAX:
                         new_title += addon
-                # Final abschneiden, falls über Ziel
-                if len(new_title) > TITLE_OPT_MAX:
-                    new_title = new_title[:TITLE_OPT_MAX - 1].rstrip() + "…"
+                # Final kürzen, falls über Ziel – NUR an Wortgrenzen
+                # (safe_title_cut: nie mitten im Wort, sonst kaputte
+                #  Cover-Texte; Fix vom Befund 26.08.2026)
+                if new_title and len(new_title) > TITLE_OPT_MAX:
+                    new_title = safe_title_cut(new_title, TITLE_OPT_MAX)
             elif tl > TITLE_OPT_MAX:
-                # Semantisch kürzen – NIE mit „…" (zerstört Cover + Pinterest-SEO)
-                t0 = a["title"]
-                if ":" in t0:
-                    head, tail = t0.split(":", 1)
-                    budget = TITLE_OPT_MAX - len(head) - 2
-                    tail = tail.strip()
-                    if budget > 10:
-                        tcut = tail[:budget]
-                        sp = tcut.rfind(" ")
-                        if sp > 8:
-                            tcut = tcut[:sp]
-                        new_title = f"{head.strip()}: {tcut.strip()}"
-                    else:
-                        new_title = head.strip()[:TITLE_OPT_MAX]
-                else:
-                    cut = t0[:TITLE_OPT_MAX]
-                    sp = cut.rfind(" ")
-                    new_title = cut[:sp] if sp > 20 else cut
-        # Länge final begrenzen (KI kann überziehen) – ohne Ellipsis
+                # Semantisch kürzen – NIE mit „…", NIE mitten im Wort
+                # (safe_title_cut bricht bei „Keyword: Untertitel"-Titeln
+                #  das Untertitel-Ende und fällt sonst auf den kompletten
+                #  Keyword-Kopf zurück; Fix vom Befund 26.08.2026)
+                new_title = safe_title_cut(a["title"], TITLE_OPT_MAX)
+        # Länge final begrenzen (KI kann überziehen) – ohne Ellipsis,
+        # ohne Wortbruch (safe_title_cut)
         if new_title and len(new_title) > TITLE_MAX:
-            if ":" in new_title:
-                head, tail = new_title.split(":", 1)
-                budget = TITLE_MAX - len(head) - 2
-                tail = tail.strip()
-                if budget > 10:
-                    tcut = tail[:budget]
-                    sp = tcut.rfind(" ")
-                    if sp > 8:
-                        tcut = tcut[:sp]
-                    new_title = f"{head.strip()}: {tcut.strip()}"
-                else:
-                    new_title = head.strip()[:TITLE_MAX]
-            else:
-                cut = new_title[:TITLE_MAX]
-                sp = cut.rfind(" ")
-                new_title = cut[:sp] if sp > 20 else cut
+            new_title = safe_title_cut(new_title, TITLE_MAX)
         # Titel-Gate auch auf Fallback/Kürzung anwenden (deterministische
         # Korrekturen: Komposita-Bindestriche, Zeit-Anhängsel, Whitespace)
         if new_title:
