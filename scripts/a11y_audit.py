@@ -48,9 +48,11 @@ def hex_rgb(h):
 
 # Dateien, die bewusst minimal sind und NICHT geprüft werden:
 #  - google*.html: Verifikationsdatei (Google verlangt exakten Inhalt)
+#  - pinterest-*.html: Pinterest-Verifizierung (gleiche Logik)
 #  - page/N/: automatische Redirect-Seiten (leiten sofort weiter)
+#  - go/: Affiliate-Redirect-Seiten (leiten sofort weiter, keine echten Seiten)
 #  - BingSiteAuth.xml: keine HTML-Seite
-SKIP_PATTERNS = ("google", "page/", "BingSiteAuth")
+SKIP_PATTERNS = ("google", "pinterest-", "page/", "go/", "BingSiteAuth")
 
 
 def collect_html_files():
@@ -71,7 +73,10 @@ def collect_html_files():
 
 
 def audit_page(path):
-    html = open(path, encoding="utf-8").read()
+    try:
+        html = open(path, encoding="utf-8", errors="ignore").read()
+    except OSError as e:
+        return os.path.relpath(path, PUBLIC_DIR), [f"Datei nicht lesbar: {e}"]
     issues = []
     name = os.path.relpath(path, PUBLIC_DIR)
 
@@ -82,20 +87,46 @@ def audit_page(path):
     h1s = len(re.findall(r"<h1[\s>]", html))
     if h1s != 1:
         issues.append(f"{h1s} h1 (erwartet: 1)")
-    # Bilder ohne alt
+    # Bilder ohne alt-Text. WICHTIG: Ein nacktes `alt`-Attribut ist nach
+    # HTML5 identisch mit alt="" (dekorativ) – Hugo --minify kürzt leere
+    # Attribute genau so. Wir zählen also nur Bilder, die gar kein
+    # alt-Attribut haben (Attribut beginnt nach Whitespace).
     for m in re.finditer(r"<img[^>]*>", html):
-        if 'alt=' not in m.group(0):
+        if not re.search(r"(?<=\s)alt(?![a-zA-Z0-9_-])", m.group(0)):
             issues.append("img ohne alt-Text")
     if 'class="skip-link"' not in html and "class=skip-link" not in html:
         issues.append("Skip-Link fehlt")
     return name, issues
 
 
-def audit_css():
+def audit_css(sampled_htmls=()):
     issues = []
-    css_files = [os.path.join(PUBLIC_DIR, "assets", "css", f)
-                 for f in os.listdir(os.path.join(PUBLIC_DIR, "assets", "css"))]
-    css = "\n".join(open(f, encoding="utf-8").read() for f in css_files if os.path.exists(f))
+    # CSS kann in diesem Setup an zwei Orten liegen:
+    #   1. als .css-Dateien irgendwo unter public/ (klassisch assets/css/)
+    #   2. INLINE in <style>-Blöcken der HTML-Seiten (dieses Theme inlined
+    #      alle Styles; Hugo --minify erzeugt KEINE assets/css/-Struktur).
+    #
+    # FIX (#81): Früher erwartete die Funktion starr public/assets/css/ und
+    # crashte mit FileNotFoundError, wenn der Ordner fehlte. Folge: stdout
+    # blieb leer, /tmp/a11y_log.txt war leer und das Auto-Issue bekam einen
+    # leeren Body. Jetzt: robustes os.walk über alles + Inline-CSS, nie crashen.
+    css_parts = []
+    for root, _dirs, names in os.walk(PUBLIC_DIR):
+        for n in names:
+            if n.endswith(".css"):
+                try:
+                    with open(os.path.join(root, n), encoding="utf-8", errors="ignore") as fh:
+                        css_parts.append(fh.read())
+                except OSError:
+                    pass
+    for html in sampled_htmls:
+        for m in re.finditer(r"<style[^>]*>(.*?)</style>", html, re.S):
+            css_parts.append(m.group(1))
+    css = "\n".join(css_parts)
+
+    if not css.strip():
+        issues.append("Kein CSS auffindbar (weder Dateien noch inline) – CSS-Grundlagen nicht prüfbar")
+        return issues
 
     if "focus-visible" not in css:
         issues.append("Fokus-Styles (focus-visible) fehlen")
@@ -142,11 +173,17 @@ def main():
         sys.exit(0)
 
     page_results = []
+    sampled_htmls = []
     for path in collect_html_files():
         name, issues = audit_page(path)
         page_results.append({"seite": name, "probleme": issues})
+        try:
+            with open(path, encoding="utf-8", errors="ignore") as fh:
+                sampled_htmls.append(fh.read())
+        except OSError:
+            pass
 
-    css_issues = audit_css()
+    css_issues = audit_css(sampled_htmls)
     contrast_results = audit_contrast()
 
     total_issues = sum(len(p["probleme"]) for p in page_results) + len(css_issues)
