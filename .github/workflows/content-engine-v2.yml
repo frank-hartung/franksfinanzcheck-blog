@@ -248,6 +248,8 @@ jobs:
           python3 scripts/meta_optimizer.py --fix --ai || echo "⚠ Meta-Fehler (nicht kritisch)"
           echo "== Titel-Gate nach Meta-Optimierung (selbstheilend) =="
           python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate (nicht blockierend)"
+          echo "== Pinterest/Google-SEO-Healer (Titel, Cover-Text, Pin-SEO, Keywords) =="
+          python3 scripts/pinterest_seo_healer.py --fix || echo "⚠ Pinterest-SEO-Healer (nicht blockierend)"
           echo "== Cover-Stale-Erkennung: Titel geändert → Cover neu rendern =="
           python3 scripts/check_covers.py --fix || echo "⚠ Cover-Stale (nicht blockierend)"
           python3 scripts/internal_linker.py --apply --max 5 || echo "⚠ Linker-Fehler (nicht kritisch)"
