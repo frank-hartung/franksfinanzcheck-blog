@@ -45,6 +45,9 @@ jobs:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
+      - name: Python-Abhängigkeiten installieren
+        run: |
+          python3 -m pip install -q pyyaml cryptography 2>/dev/null || true
       - name: Top-Artikel aktualisieren (KI, Qualitäts-Verifikation)
         id: update
         continue-on-error: true
