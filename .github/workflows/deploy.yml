@@ -34,7 +34,7 @@ jobs:
 
       - name: Merge-Marker-Schutz
         run: |
-          if grep -rn "<<<<<<<" content/ layouts/ static/ hugo.toml; then
+          if grep -rnI "<<<<<<<" content/ layouts/ static/ hugo.toml; then
             echo "FEHLER: Unaufgelöste Merge-Marker gefunden!"
             exit 1
           fi
