@@ -2,42 +2,12 @@
      Nur in der posts-Sektion rendern – NICHT auf Rechtsseiten
      (Impressum, Datenschutz) oder anderen Einzelseiten. */ -}}
 {{- if eq .Section "posts" -}}
-{{- $pin_url := .Permalink -}}
-{{- $pin_media := "" -}}
-{{- if .Params.cover.image -}}
-  {{- $pin_media = .Params.cover.image | absURL -}}
-{{- end -}}
-{{- /* Pinterest-SEO 2026: vorgeheilte pin_description (Healer) bevorzugen;
-       sonst Meta-Description + Werbekennzeichnung. Max. 500 Zeichen. */ -}}
-{{- $pin_desc := "" -}}
-{{- with .Params.pin_description -}}
-  {{- $pin_desc = . | plainify -}}
-{{- else -}}
-  {{- $base := (or .Description .Title) | plainify -}}
-  {{- $pin_desc = printf "*Werbung | %s Mehr Spartipps auf FranksFinanzcheck!" $base -}}
-{{- end -}}
-{{- if gt (len $pin_desc) 500 -}}
-  {{- $pin_desc = slicestr $pin_desc 0 497 | printf "%s…" -}}
-{{- end -}}
-{{- $pin_href := printf "https://pinterest.com/pin/create/button/?url=%s&media=%s&description=%s" ($pin_url | urlquery) ($pin_media | urlquery) ($pin_desc | urlquery) -}}
 {{- /* E-E-A-T: Erfahrungs-Marker (nur wenn Frontmatter `erfahrung:` gesetzt) */ -}}
 {{- partial "experience_box.html" . }}
 {{- /* E-E-A-T: Vertrauens-Box (Autor, Qualifikation, Transparenz) */ -}}
 {{- partial "trust_box.html" . }}
-<div class="pin-article" style="text-align:center; margin:28px 0 8px;">
-  <a href="{{ $pin_href }}"
-     target="_blank"
-     rel="noopener nofollow"
-     title="Diesen Artikel auf Pinterest pinnen"
-     style="display:inline-flex; align-items:center; gap:10px; padding:12px 26px; border-radius:999px;
-            background:#e60023; color:#fff; text-decoration:none; font-weight:700; font-size:1.02em;
-            box-shadow:0 2px 8px rgba(0,0,0,.18); transition:transform .15s ease, box-shadow .15s ease;">
-    <span class="ff-icon-pinterest" aria-hidden="true">📌</span>
-    <span>Pin diesen Artikel<span aria-hidden="true"> 📌</span></span>
-  </a>
-  <p style="font-size:.82em; color:var(--secondary); margin:8px 0 0;">Du findest diesen Beitrag auch als Infografik auf
-    <a href="https://www.pinterest.de/franksfinanzcheck/" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600;">meinem Pinterest-Profil</a>.</p>
-</div>
+{{- /* Pin-It-Button sitzt im Single-Layout (Float + Footer) – hier kein
+       dritter roter CTA, sonst Conversion-Kannibalisierung. */ -}}
 
 {{- /* ---------- Related Posts (interne Verlinkung / SEO) – PROFI ---------- */ -}}
 {{- /* Nutzt Hugos semantisches Related-Matching (keywords/tags/categories,

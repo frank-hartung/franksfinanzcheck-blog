@@ -63,10 +63,8 @@ def audit_and_heal_markdown_files():
 
             modified = False
             
-            # 1. Check draft status
-            if 'draft: true' in content:
-                content = content.replace('draft: true', 'draft: false')
-                modified = True
+            # 1. Draft-Status NIEMALS automatisch auf false setzen.
+            #    Entwürfe gehen nur über publish.py / Content-Engine v2 live.
                 
             # 2. Check title quotes
             t_match = re.search(r'title:\s*([^\n]+)\n', content)

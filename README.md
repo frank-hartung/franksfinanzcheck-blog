@@ -15,7 +15,7 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 | 2 Beispiel-Artikel | Stromwechsel & Kfz-Versicherung (dienen als Vorlage/Struktur) |
 | Themenpool | `data/topics.yaml` – 175 Themen über alle 6 Pillars (repariert & erweitert 13.08.2026; bei 2–3 Artikeln an Mo/Mi/Fr reicht der Pool über ein halbes Jahr), inkl. themenspezifischer CHECK24-Links |
 | 🤖 Content-Bot | `scripts/generate_drafts.py` – erzeugt an Publikationstagen (Mo/Mi/Fr) frische, einzigartige Artikel-Entwürfe (Titel, Meta-Description, Keywords, strukturiertes Markdown, FAQ, Affiliate-CTA) |
-| ⏰ Täglicher Job | `.github/workflows/daily-content.yml` – läuft automatisch um 07:00 Uhr (Sommerzeit) |
+| ⏰ Publikations-Job | `.github/workflows/content-engine-v2.yml` – Mo/Mi/Fr 08:10 MESZ (Fallback 16:10 / 19:40) |
 | 🚀 Deployment | `.github/workflows/deploy.yml` – baut & veröffentlicht kostenlos auf GitHub Pages |
 | 📤 Publish-Helfer | `scripts/publish.py` – Entwürfe mit einem Befehl veröffentlichen |
 
@@ -49,7 +49,7 @@ Der Workflow **„Content-Engine v2“** veröffentlicht **nur montags, mittwoch
 Alle Affiliate-Links liegen zentral in **`scripts/check24_links.yaml`**. Ändern sich deine Links (z. B. neue PID, neues Link-Format, neue Partnerprogramme):
 
 1. **Neue Artikel (Bot):** Einfach die Links in `scripts/check24_links.yaml` aktualisieren – der Bot weist neuen Artikeln automatisch die passenden Links zu (Pin → Kategorie → Link). Die Zuordnung erfolgt über die Ziel-URL des Pins (z. B. `check24.de/strom/` → Strom-Link) bzw. die Pinwand.
-2. **Bestehende Artikel:** `python3 scripts/set_check24_links.py --topics` ausführen – ersetzt alle alten Links in allen Artikeln + Themenpool durch die neuen aus der YAML (sicherer Wortgrenzen-Check inklusive).
+2. **Bestehende Artikel:** `python3 scripts/affiliate_shield.py --fix` routet alle Affiliate-Links über das `/go/`-Gateway; `python3 scripts/affiliate_link_check.py --fix` prüft Kategorie und PID.
 3. **Generischer Link (GitHub-Variable):** Falls nötig, in GitHub unter Settings → Secrets and variables → Actions die Variable `AFFILIATE_URL` aktualisieren.
 
 **📌 Automatisches Nach-Pinnen bei Pinterest (montags 17:30 Uhr):**

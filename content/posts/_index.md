@@ -2,20 +2,9 @@
 title: "Alle Ratgeber im Überblick – Strom, Gas, Internet & Finanzen clever sparen"
 description: "Alle Ratgeber von FranksFinanzcheck an einem Ort: Strom- & Gas-Vergleiche, DSL & Internet günstiger, Versicherungen verständlich erklärt und Frugalismus-Tricks mit konkreten Zahlen – unabhängig & praxisgetestet."
 keywords: ["Strom sparen", "Gasvergleich", "DSL Vergleich", "Versicherungen", "Frugalismus", "Geld sparen", "Girokonto", "Mietwagen"]
-# /posts/page/1/ und /posts/page/2/ existieren wieder als echte Paginator-
-# Seiten (10 Posts, pagerSize 8). Aliase nur für höhere Seiten, sonst
-# kollidiert Hugo (Build-Abbruch) mit der echten Pagination.
-aliases:
-  - /posts/page/3/
-  - /posts/page/4/
-  - /posts/page/5/
-  - /posts/page/6/
-  - /posts/page/7/
-  - /posts/page/8/
-  - /posts/page/9/
-  - /posts/page/10/
-  - /posts/page/11/
-  - /posts/page/12/
+# Keine Pagination-Aliase: Bei pagerSize 8 und 25+ Posts existieren
+# /posts/page/2/–/posts/page/4/ als echte Seiten. Ein Alias auf dieselbe
+# URL bricht `hugo --minify` hart ab.
 cover:
   image: "images/covers/_index.jpg"
   alt: "Alle Ratgeber von FranksFinanzcheck – Strom, Gas, Internet, Versicherungen und Frugalismus mit konkreten Spartipps"
@@ -60,9 +49,9 @@ Finde direkt den Bereich, der dich am meisten interessiert – alle Artikel sind
 
 > **Transparenz:** Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link einen Tarif abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig.
 
-## Fazit: Alle Ratgeber im Überblick – Strom, Gas, Internet & Finanzen clever sparen schlau nutzen
+## Fazit: Starte dort, wo die nächste Rechnung am höchsten ist
 
-Sich gezielt mit dem Thema **Alle Ratgeber im Überblick – Strom, Gas, Internet & Finanzen clever sparen** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und bares Geld zu sparen. Indem du die Tarife vergleichst und regelmäßig wechselst, holst du ohne Komfortverzicht das Maximum aus deinem Haushaltsbudget heraus. Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀
+Du musst nicht alles auf einmal umstellen. Ein Tarifwechsel bei Strom, Gas oder Internet bringt oft mehr als ein Jahr mühsames Kleinsparen – und dauert selten länger als 15 Minuten. Such dir oben die Themenwelt, die zu deiner teuersten Fixkosten-Position passt, und geh den ersten Schritt noch heute.
 
 ## Häufige Fragen zum Blog
 
@@ -73,7 +62,7 @@ Drei Mal pro Woche (Mo/Mi/Fr) mit je 2–3 Ratgebern. So ist immer etwas Neues d
 Für alle, die **ohne Gürtel enger schnallen** sparen wollen: Mieter, Familien, Berufstätige und alle, die ihre Fixkosten (Strom, Gas, Internet, Versicherungen) dauerhaft senken möchten.
 
 ### Wie finde ich den richtigen Artikel für mich?
-Nutze die **7 Themenwelten oben** oder die Tag-Liste am Ende jedes Artikels. Verwandte Beiträge werden automatisch vorgeschlagen – ein Klick und du bist im nächsten passenden Ratgeber.
+Nutze die **6 Themenwelten oben** oder die Tag-Liste am Ende jedes Artikels. Verwandte Beiträge werden automatisch vorgeschlagen – ein Klick und du bist im nächsten passenden Ratgeber.
 
 ### Sind die Vergleiche wirklich unabhängig?
 Ja. Wir vergleichen über **CHECK24** (Deutschlands größtes Vergleichsportal) und zeigen dir die Konditionen transparent. Die Reihenfolge richtet sich nach Preis und Leistung – nicht nach Provision.

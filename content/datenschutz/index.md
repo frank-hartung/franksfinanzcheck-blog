@@ -5,9 +5,6 @@ draft: false
 showToc: true
 ---
 
-# Datenschutzerklärung
-
-
 ## 1. Datenschutz auf einen Blick
 
 ### Verantwortliche Stelle
@@ -46,7 +43,7 @@ Zur Auslieferung der Website wird das Content-Delivery-Network (CDN) **Cloudflar
 
 ### Schriftarten (lokal gehostet)
 
-Diese Website verwendet Schriftarten der Familie **Montserrat**, **Playfair Display** und **Inter**. Die Schriftdateien werden **nicht** von externen Schriftarten-Diensten (z. B. Google Fonts) geladen, sondern liegen **lokal bei unserem Hosting** und werden direkt von dort ausgeliefert.
+Diese Website verwendet Schriftarten der Familie **Inter** und **Playfair Display**. Die Schriftdateien werden **nicht** von externen Schriftarten-Diensten (z. B. Google Fonts) geladen, sondern liegen **lokal bei unserem Hosting** und werden direkt von dort ausgeliefert.
 
 **Beim Aufruf dieser Website wird daher keine Verbindung zu den Servern von Google (fonts.googleapis.com, fonts.gstatic.com) aufgebaut und es werden keine Daten (insbesondere keine IP-Adresse) an Google übermittelt.**
 

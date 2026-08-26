@@ -20,9 +20,8 @@ social_posted: true
 keywords: ["Privathaftpflicht", "Privathaftpflichtversicherung", "Haftpflichtversicherung Kosten", "Haftpflicht Vergleich", "Deckungssumme Haftpflicht"]
 pin_title: "Privathaftpflicht: Warum sie so wichtig ist und was sie"
 pin_description: "*Werbung | Privathaftpflichtversicherung: Warum sie für jeden unverzichtbar ist, welche Schäden sie abdeckt und wie du Top-Schutz ab 3,50 € im Monat findest. Mehr Spartipps auf FranksFinanzcheck! #privathaftpflicht #haftpflichtvergleich #deckungssummehaftpflicht"
+pinwand: "Versicherungen clever wechseln & sparen"
 ---
-
-# Privathaftpflicht: Warum sie so wichtig ist und was sie kostet
 
 Ein kleiner Moment der Unachtsamkeit im Alltag kann das gesamte finanzielle Fundament zerstören. Du übersiehst als Fußgänger einen herannahenden Radfahrer, der schwer stürzt, oder stößt im Freundeskreis versehentlich ein teures technisches Gerät um. Nach dem Bürgerlichen Gesetzbuch (§ 823 BGB) bist du verpflichtet, schuldhaft zugefügte Schäden in unbegrenzter Höhe zu ersetzen – und zwar mit deinem gesamten gegenwärtigen Vermögen, deinen monatlichen Einkünften und künftigen Erträgen. Die **Privathaftpflicht** ist aus diesem Grund die mit weitem Abstand unverzichtbarste Versicherung für jeden Bundesbürger. In diesem Ratgeber erfährst du, worauf es beim Leistungskatalog ankommt und wie du optimalen Schutz für wenige Euro im Monat buchst.
 

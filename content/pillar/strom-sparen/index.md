@@ -9,9 +9,6 @@ build:
   list: never
 keywords: ["Strom sparen", "Gasanbieter wechseln", "Stromfresser", "Gaspreisgarantie", "Heizkosten senken"]
 ---
-
-# Strom & Gas sparen: Der große Ratgeber für niedrige Energiekosten
-
 Strom und Gas machen in deutschen Haushalten oft den größten Block der variablen Nebenkosten aus. Wer jahrelang im teuren Grundversorgungstarif bleibt, zahlt hunderte Euro zu viel. Mit der richtigen Kombination aus verbrauchsreduzierenden Maßnahmen im Alltag und einem regelmäßigen Tarifwechsel holst du dir deine finanzielle Kontrolle zurück. In diesem umfassenden Ratgeber bündele ich alle Strategien für spürbar niedrigere Energiekosten.
 
 ### Das Wichtigste auf einen Blick

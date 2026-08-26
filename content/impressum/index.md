@@ -5,9 +5,6 @@ draft: false
 showToc: false
 ---
 
-# Impressum
-
-
 ## Angaben gemäß § 5 DDG
 
 **Betreiber und Diensteanbieter dieser Website:**
