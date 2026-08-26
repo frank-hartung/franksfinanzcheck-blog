@@ -46,8 +46,8 @@ jobs:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
-      - name: Krypto-Bibliothek für Token-Auto-Refresh installieren
-        run: pip install -q cryptography
+      - name: Krypto- und YAML-Bibliotheken für Token-Auto-Refresh & Pins installieren
+        run: pip install -q pyyaml cryptography
 
       - name: Artikel bei Pinterest nachpinnen
         env:
