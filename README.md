@@ -319,7 +319,25 @@ Nie direkt aufs Pinterest-Profil (Sackgasse) und nie nackt auf CHECK24 (Spam-Sig
 | Zielseiten-Garantie | `scripts/pinterest_link_guard.py` | LOCAL: Slug-Existenz/Draft/Domain/UTM/URL-Form · LIVE (CI): HTTP 200 + Domain-Bleibepflicht + Rich-Pin-Meta |
 | Posting | `scripts/pinterest_engine.py` | Pinnt neue Artikel per API v5 auf das **richtige der 6 Boards** (Routing per Pinwand/Pillar, Board-Auto-Creation), Drafts nie |
 | Profil | `scripts/pinterest_profile_audit.py` | Live-Profil (Name/Bio/Boards) vs. Premium-Soll → Copy-Paste-Report |
-| Rich Pins | Hugo-Templates + `layouts/_default/rss.xml` | og:image (sauber, 1000×1500), Pin-It-Button auf jedem Artikel, RSS-Auto-Publish mit Cover + Premium-Description |
+| Rich Pins | Hugo-Templates + `layouts/_default/rss.xml` | og:image (sauber, 1000×1500), Pin-It-Button auf jedem Artikel, RSS-Auto-Publish mit Cover + Premium-Description |- **26.08.2026 (Spam-Schutz):** `spam_guard.py` neu – dauerhafter
+  Spam-Schutz mit sofortiger Selbstheilung für alle vier Kanäle
+  (Blog B1–B8, RSS-Feed F1–F6, CSV-Upload C1–C8, Pinterest-API A1–A4;
+  Details: `SPAM-SCHUTZ.md`). Kern: Cross-Channel-Pin-Registry
+  (`data/pin_history.jsonl`, Repeat-Fenster 30 Tage, Füllung auch aus
+  den RSS-Live-Pins via `--sync-pins`), API-Rate-Limits 10/h + 40/Tag
+  mit eskalierender Pause (1 h → 24 h → 7 Tage) bei Spam-/Rate-
+  Antworten, `--gen-csv` (kanonisches Pinterest-Bulk-Format,
+  Kadenz-verteiltes Scheduling) + CSV-Validator mit Live-Link-Check.
+  Eingebunden: Deploy-Gate (vor Publish), Content-Engine v2 (neue
+  Artikel), Pinterest-Watchdog (täglich + sync-pins), Blog-Health
+  (täglich) – und UNBYPASSBAR in `pinterest_engine.py` /
+  `generate_pins.py` (A1–A4 im Code). Erster Beleg-Lauf: 20 Posts
+  geheilt (B8: `*Werbung`-Präfix in `pin_description` – ohne diesen
+  Fix hätte die API Pin-Texte ohne Werbekennzeichnung erstellt),
+  danach 0 harte Funde, 18 live / 7 draft (Kadenz unverändert).
+  Selftest: 27 eingefrorene Fälle inkl. Regression „B2-warn +
+  B8-hard → heilen, nie demoten“.
+
 
 **Transactional-Pins (TP) → CHECK24:** Die TP-Pins (Strom, Gas, DSL, Girokonto, Kredit, Kfz, Reisen, Mietwagen, Flüge) sind im Pool – mit dem passenden CHECK24-Link pro Artikel (`affiliate_url` über `scripts/check24_links.yaml`). Manuelle TP-Pins immer über die eigene Gateway-URL `franksfinanzcheck.de/go/<kategorie>/` pinnen (nie nackten CHECK24-Link).
 
