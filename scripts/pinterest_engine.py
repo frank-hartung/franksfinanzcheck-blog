@@ -297,12 +297,12 @@ def write_queue(queue):
              "# (wird nach erfolgreichem Posting geleert)", ""]
     for p in queue:
         lines += [
-            f"- slug: \"{p['slug']}\"",
-            f"  board: \"{p.get('board', '')}\"",
-            f"  title: \"{p['title'][:100]}\"",
-            f"  description: \"{p['text']}\"",
-            f"  link: \"{BASE_URL}/posts/{p['slug']}/{PIN_UTM}\"",
-            f"  image: \"{BASE_URL}/{p['cover']}\"",
+            f'- slug: "{p["slug"]}"',
+            f'  board: "{p.get("board", "")}"',
+            f'  title: "{p["title"][:100]}"',
+            f'  description: "{p["text"]}"',
+            f'  link: "{BASE_URL}/posts/{p["slug"]}/{PIN_UTM}"',
+            f'  image: "{BASE_URL}/{p["cover"]}"',
             "",
         ]
     with open(QUEUE_FILE, "w", encoding="utf-8") as fh:
@@ -464,6 +464,20 @@ def main():
         return 0
 
     # POSTING-MODUS (Multi-Board-Routing)
+    # SPAM-WACHE (26.08.2026): Daueraufsicht über den API-Kanal –
+    # A1 Rate-Limit/Pause blockiert das gesamte Posting, A2 prüft jeden
+    # Pin vor der Erstellung, A3 reagiert auf Spam-/Rate-Antworten der
+    # API (eskalierende Pause), A4 protokolliert jede Erstellung in der
+    # Cross-Channel-Pin-Registry. Unbypassbar: läuft IM Engine-Code.
+    import spam_guard as sg
+    pre_ok, pre_msg = sg.api_preflight()
+    if not pre_ok:
+        write_status(["**Modus:** Auto-Posting (BLOCKIERT durch Spam-Wache)",
+                      "", f"- {pre_msg}",
+                      "- NÄCHSTER LAUF: automatisch (Zähler laufen ab)"])
+        print(f"Spam-Wache: {pre_msg} – nichts gepostet (keine Spam-Risiken).")
+        return 0
+
     board_map = resolve_boards(TOKEN, board_config) if board_config[0] else {}
     if not board_map and not BOARD_ID:
         print("FEHLER: Kein Board auflösbar (API) und PINTEREST_BOARD_ID fehlt – "
@@ -479,15 +493,34 @@ def main():
             fail += 1
             print(f"  ✗ {p['slug']}: kein Board-ID für „{board_name}“ – übersprungen")
             continue
+        # SPAM-WACHE A2: Pre-Create-Check (Claim/Stuffing/Repeat/Disclosure)
+        pin_ok, pin_reasons = sg.api_check_pin({
+            "title": pin_title_of(p),
+            "description": pin_text(p),
+            "link": f"{BASE_URL}/posts/{p['slug']}/{PIN_UTM}",
+            "media": f"{BASE_URL}/{p['cover']}",
+            "aff_links": len(re.findall(r"\]\(/go/", p["content"]))})
+        if not pin_ok:
+            fail += 1
+            print(f"  ✗ {p['slug']}: Spam-Wache: " + ", ".join(pin_reasons))
+            continue
         try:
             api_post_pin(TOKEN, bid, p)
             mark_pinned(p)
+            sg.api_record_created({
+                "title": pin_title_of(p),
+                "description": pin_text(p),
+                "link": f"{BASE_URL}/posts/{p['slug']}/{PIN_UTM}",
+                "media": f"{BASE_URL}/{p['cover']}",
+                "board": board_name, "source": "engine"})
             ok += 1
             print(f"  ✓ Pin erstellt: {p['slug']} → [{board_name}]")
         except urllib.error.HTTPError as e:
             fail += 1
             detail = e.read().decode()[:150] if hasattr(e, "read") else ""
-            print(f"  ✗ {p['slug']}: HTTP {e.code} {detail}")
+            pause = sg.api_record_error(e.code, detail)
+            print(f"  ✗ {p['slug']}: HTTP {e.code} {detail}"
+                  + (f" → {pause}" if pause else ""))
         except Exception as e:  # noqa: BLE001
             fail += 1
             print(f"  ✗ {p['slug']}: {e}")
