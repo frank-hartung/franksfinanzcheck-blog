@@ -52,6 +52,24 @@ jobs:
           HUGO_JSDELIVR_SHA: ${{ github.sha }}
         run: hugo --minify
 
+      - name: Spam-Wache (Google/Pinterest – Blog, Feed, CSV, API + Live-Pin-Sync)
+        # Dauerauftrag (26.08.2026): täglich ALLE 4 Kanäle prüfen + heilen:
+        #   Blog (Claims/Stuffing/Disclosure/Originalität/Klon),
+        #   RSS-Feed /index.xml (Quelle des Pinterest-Auto-Publish),
+        #   CSV (falls vorhanden), API (Rate-Limits + Pause-Zustand).
+        # --sync-pins registriert die LIVE-Pins der Boards (inkl. RSS-Auto-
+        # Publish) in data/pin_history.jsonl → API- und CSV-Kanal dürfen nie
+        # denselben Artikel (< 30 Tage) erneut pinnen. Repeat-Pin ist das
+        # häufigste Spam-Signal gegen das Konto.
+        # Selftest-Schutz: ohne grünen Selftest wird NICHTS verändert.
+        env:
+          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+          PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+        run: |
+          python3 scripts/spam_guard.py --selftest
+          python3 scripts/spam_guard.py --check blog feed csv api --fix || true
+          python3 scripts/spam_guard.py --sync-pins || true
+
       - name: Pinterest-Check mit Selbstheilung
         id: check
         run: |
