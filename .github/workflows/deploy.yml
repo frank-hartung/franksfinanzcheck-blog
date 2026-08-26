@@ -34,7 +34,7 @@ jobs:
 
       - name: Merge-Marker-Schutz
         run: |
-          if grep -rnI "<<<<<<<" content/ layouts/ static/ hugo.toml; then
+          if grep -rnI "<<" "<<" "<<" content/ layouts/ static/ hugo.toml; then
             echo "FEHLER: Unaufgelöste Merge-Marker gefunden!"
             exit 1
           fi
@@ -77,6 +77,19 @@ jobs:
 
       - name: Build (für Publish-Gate + Publish)
         run: hugo --minify
+
+      # ================= SPAM-WACHE (Google + Pinterest, 26.08.2026) =================
+      # Dauerauftrag: Blog, RSS-Feed (/index.xml = Quelle des Pinterest-
+      # Auto-Publish), CSV-Upload und Pinterest-API spamfrei halten.
+      # --fix heilt SOFORT (Blog: Disclosure/Pin-Kennzeichnung einfügen oder
+      # Spam-Artikel auf draft, Feed: Spezial-Heiler; CSV: Neu-Schreibung;
+      # API: Rate-Zustand). Niemals Content-Verlust. Heilungen + Report
+      # landen über das Gate-Heilungsdiff automatisch im Repo.
+      - name: Spam-Selftest (Wache muss lauffähig sein)
+        run: python3 scripts/spam_guard.py --selftest
+
+      - name: Spam-Gate (Blog, RSS-Feed, CSV, API – selbstheilend)
+        run: python3 scripts/spam_guard.py --check blog feed csv api --fix || echo "⚠ Spam-Gate – Funde in SPAM-REPORT.md (selbstgeheilt, kein Content-Verlust)"
 
       - name: Publish-Gate (5 harte Prüfungen inkl. Cover-Text-Komplettheit)
         run: python3 scripts/publish_gate.py
