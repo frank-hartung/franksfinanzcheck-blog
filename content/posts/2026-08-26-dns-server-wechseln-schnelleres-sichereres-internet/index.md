@@ -68,7 +68,7 @@ Quad9 (9.9.9.9), Cloudflare mit Malware-Schutz (1.1.1.2) und der Family-Server (
 
 ### Cloudflare (1.1.1.1) – der Schnellste
 
-* **IPs:** 1.1.1.1 und 1.0.0.1 (IPv6: 2606:4700:4700::1111 und ::1001)
+* **IPs:** 1.1.1.1 und 1.0.0.1 (IPv6: 2606:4700:4700:1111 und:1001)
 * **Besonderheit:** Beste Latenz, strenges Datenschutz-Versprechen, keine Verkaufslogiken.
 * **Versionen:**
   - `1.1.1.2 / 1.0.0.2` – mit Malware-Schutz
@@ -76,7 +76,7 @@ Quad9 (9.9.9.9), Cloudflare mit Malware-Schutz (1.1.1.2) und der Family-Server (
 
 ### Google Public DNS (8.8.8.8) – der Zuverlässigste
 
-* **IPs:** 8.8.8.8 und 8.8.4.4 (IPv6: 2001:4860:4860::8888 und :8844)
+* **IPs:** 8.8.8.8 und 8.8.4.4 (IPv6: 2001:4860:4860:8888 und:8844)
 * **Besonderheit:** Hohe Verfügbarkeit, weltweit verteilt. Google erhebt aber Nutzungsdaten, auch wenn keine Werbeprofile daraus gebaut werden.
 
 ### Quad9 (9.9.9.9) – der Sicherheits-Beste
@@ -84,7 +84,7 @@ Quad9 (9.9.9.9), Cloudflare mit Malware-Schutz (1.1.1.2) und der Family-Server (
 * **IPs:** 9.9.9.9 und 149.112.112.112
 * **Besonderheit:** Gemeinnützige Stiftung, blockiert aktiv Bedrohungen (über 100 Mio. Einträge in der Bedrohungsdatenbank), keine Speicherung personenbezogener Daten.
 
-## Anleitung: DNS-Server an der FritzBox ändern (empfohlen)
+## Anleitung:<br>DNS-Server an der FritzBox ändern (empfohlen)
 
 Wenn du den DNS-Server direkt in deinem Router änderst, gilt die Einstellung automatisch für **alle Geräte im Heimnetz** – Handy, Smart-TV, Laptop, Spielekonsole. Bei einer AVM FritzBox gehst du so vor:
 
@@ -134,21 +134,21 @@ Unter Android 13/14 ab Version 9 kannst du systemweit "Private DNS" festlegen:
 - **Smart-Home-Probleme:** Einige ältere Smart-TVs, Drucker und IoT-Geräte kommen mit Dritt-DNS nicht zurecht. Sollte ein Gerät aussteigen, wechsle testweise zurück oder trage den DNS nur am Endgerät ein.
 - **DoH/DoT aktivieren:** Wer ganz sicher gehen will, aktiviert in Windows 11, Firefox oder Chrome "DNS over HTTPS" (DoH) – dann ist die DNS-Anfrage selbst verschlüsselt.
 
-## DNS + Tarif optimieren: Die doppelte Ersparnis
+## DNS + Tarif optimieren:<br>Die doppelte Ersparnis
 
-Ein schneller DNS-Server verbessert die Antwortzeiten – er ersetzt aber keine gute Bandbreite. Wenn du trotz DNS-Wechsel noch lange Ladezeiten, Streaming-Ruckler oder langsame Downloads hast, liegt das meist an einem überlasteten oder zu langsamen Tarif. Ein [DSL-Vergleich](/go/dsl/) zeigt dir in zwei Minuten, ob ein Wechsel auf eine höhere Bandbreite oder einen günstigeren Anbieter bis zu **380 € über 24 Monate** spart – wie ich es in meinem [Ratgeber zum DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) detailliert vorgerechnet habe.
+Ein schneller DNS-Server verbessert die Antwortzeiten – er ersetzt aber keine gute Bandbreite. Wenn du trotz DNS-Wechsel noch lange Ladezeiten, Streaming-Ruckler oder langsame Downloads hast, liegt das meist an einem überlasteten oder zu langsamen Tarif. Ein [DSL-Vergleich](/go/dsl/) zeigt dir in zwei Minuten, ob ein Wechsel auf eine höhere Bandbreite oder einen günstigeren Anbieter bis zu **380 € über 24 Monate** spart – wie ich es in meinem [Ratgeber zum DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) detailliert vorgerechnet habe.
 
 | Optimierung | Aufwand | Effekt | Kosten |
 |:---|---:|:---|---:|
-| DNS-Server wechseln | 5 Min. | 10-30 ms schnellere Antworten, mehr Sicherheit | 0 € |
-| WLAN optimieren (Mesh/Kanal) | 30 Min. | bessere Abdeckung, weniger Latenz im Funknetz | 0-120 € |
-| [DSL-Tarif wechseln](/go/dsl/) | 15 Min. | höhere Bandbreite, bis 380 € Ersparnis | 0 € |
+| DNS-Server wechseln | 5 Min. | 10-30 ms schnellere Antworten, mehr Sicherheit | 0 € |
+| WLAN optimieren (Mesh/Kanal) | 30 Min. | bessere Abdeckung, weniger Latenz im Funknetz | 0-120 € |
+| [DSL-Tarif wechseln](/go/dsl/) | 15 Min. | höhere Bandbreite, bis 380 € Ersparnis | 0 € |
 
-## Fazit: 5 Minuten, die sich dauerhaft auszahlen
+## Fazit:<br>5 Minuten, die sich dauerhaft auszahlen
 
 Der DNS-Server-Wechsel ist einer der einfachsten und effektivsten Internet-Tuning-Maßnahmen, die es gibt. Für **null Euro** bekommst du spürbar schnellere Ladezeiten, mehr Privatsphäre vor deinem Provider und einen eingebauten Malware-Schutz. Meine klare Empfehlung: Setze ihn direkt im Router (z. B. an der FritzBox) ab, damit alle Geräte im Haushalt automatisch davon profitieren. Wenn du im Anschluss noch deinen Tarif prüfst, holst du das Maximum an Geschwindigkeit und Preis heraus.
 
-**Weiterlesen:** [WLAN verbessern: Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
+**Weiterlesen:** [WLAN verbessern: Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
 
 ## Häufige Fragen
 

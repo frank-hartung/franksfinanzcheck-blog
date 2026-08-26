@@ -1,6 +1,6 @@
 ---
 title: "Alle Ratgeber im Überblick – Strom, Gas, Internet & Finanzen clever sparen"
-description: "Alle Ratgeber von FranksFinanzcheck an einem Ort: Strom- & Gas-Vergleiche, DSL & Internet günstiger, Versicherungen verständlich erklärt und Frugalismus-Tricks mit konkreten Zahlen – unabhängig & praxisgetestet."
+description: "Alle Ratgeber von FranksFinanzcheck an einem Ort: Strom- & Gas-Vergleiche, DSL & Internet günstiger, Versicherungen verständlich erklärt und Frugalismus-Tricks mit konkreten Zahlen – unabhängig & Praxis-getestet."
 keywords: ["Strom sparen", "Gasvergleich", "DSL Vergleich", "Versicherungen", "Frugalismus", "Geld sparen", "Girokonto", "Mietwagen"]
 # Keine Pagination-Aliase: Bei pagerSize 8 und 25+ Posts existieren
 # /posts/page/2/–/posts/page/4/ als echte Seiten. Ein Alias auf dieselbe
@@ -11,7 +11,7 @@ cover:
   caption: "FranksFinanzcheck – verständlich, unabhängig, mit konkreten Zahlen"
 ---
 
-> 💡 **Kurz & knapp:** Hier findest du **alle Ratgeber von FranksFinanzcheck** – sortiert nach Aktualität, mit klaren Spartipps für Strom, Gas, Internet, Versicherungen und Frugalismus. Jeder Artikel: verständlich erklärt, mit konkreten Euro-Beträgen, Vor- und Nachteilen und Schritt-für-Schritt-Anleitung.
+> 💡 **Kurz & knapp:** Hhierfindest du **alle Ratgeber von FranksFinanzcheck** – sortiert nach Aktualität, mit klaren Spartipps für Strom, Gas, Internet, Versicherungen und Frugalismus. Jeder Artikel: verständlich erklärt, mit konkreten Euro-Beträgen, Vor- und Nachteilen und Schritt-für-Schritt-Anleitung.
 
 ## Was dich hier erwartet
 
@@ -19,7 +19,7 @@ Du willst **monatlich bares Geld sparen**, ohne stundenlang Tarife zu wälzen? G
 
 Montags, mittwochs und freitags erscheinen **2–3 neue Ratgeber**. So bleibst du am Ball, ohne den Überblick zu verlieren.
 
-### Deine 6 Themenwelten
+### Ddeine6 Themenwelten
 
 Finde direkt den Bereich, der dich am meisten interessiert – alle Artikel sind dort gebündelt und untereinander verlinkt:
 

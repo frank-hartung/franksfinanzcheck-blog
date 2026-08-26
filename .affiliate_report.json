@@ -92,7 +92,7 @@
   },
   {
    "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
+   "title": "Preisgarantie Gas: So sicherst du günstige Tarife ",
    "pillar": "strom-sparen",
    "fixed": 0,
    "errors": [],
@@ -110,7 +110,7 @@
   },
   {
    "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel",
-   "title": "Internet & DSL wechseln: Praxis-Tipps",
+   "title": "Internet & DSL wechseln: Praxis-Tipps – Highspeed ",
    "pillar": "internet-dsl",
    "fixed": 0,
    "errors": [],
@@ -226,18 +226,16 @@
   },
   {
    "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
-   "title": "Haushaltsbuch führen: App, Excel oder Papier?",
-   "pillar": "frugalismus",
+   "title": "Haushaltsbuch führen: App, Excel oder Papier? – Au",
+   "pillar": "konto-karten",
    "fixed": 0,
    "errors": [],
-   "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
-   ],
+   "infos": [],
    "ok": true
   },
   {
    "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-   "title": "Mietwagen buchen ohne Kaution: So umgehst du die F",
+   "title": "Mietwagen ohne Kaution: So umgehst du alle Fallen ",
    "pillar": "mietwagen",
    "fixed": 0,
    "errors": [],
@@ -275,7 +273,7 @@
   },
   {
    "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
-   "title": "Handytarif vergleichen 2026: Günstige Tarife ab 4,",
+   "title": "Handytarif 2026 vergleichen: Günstige Tarife ab 4,",
    "pillar": "internet-dsl",
    "fixed": 0,
    "errors": [],
