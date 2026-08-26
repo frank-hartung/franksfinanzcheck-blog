@@ -115,7 +115,6 @@ jobs:
         run: |
           python3 scripts/pinterest_seo_healer.py --fix | tee /tmp/pinseo_log.txt
           exit ${PIPESTATUS[0]}
-
       - name: Pinterest-SEO-Healer-Änderungen committen
         if: always()
         run: |
@@ -131,9 +130,7 @@ jobs:
             git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
             git push
           fi
-
           exit ${PIPESTATUS[0]}
-
       - name: Meta-Änderungen committen
         if: steps.meta.outcome == 'success'
         run: |
