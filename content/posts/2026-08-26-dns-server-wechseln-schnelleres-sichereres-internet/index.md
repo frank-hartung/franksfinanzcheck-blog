@@ -52,7 +52,7 @@ Unabhängige Messwerkzeuge wie DNSPerf vergleichen täglich tausende DNS-Server 
 | Google | 8.8.8.8 | 8.8.4.4 | 12 ms |
 | Quad9 | 9.9.9.9 | 149.112.112.112 | 14 ms |
 | Deutsche Telekom (Standard) | automatisch | automatisch | 24 ms |
-| Vodafone/1&1 (Standard) | automatisch | automatisch | 22-35 ms |
+| Vodafone/1&1 (Standard) | automatisch | automatisch | 22–35 ms |
 
 *(Quellen: DNSPerf.com, eigene Messungen per `dig`/`nslookup`, August 2026)*
 
@@ -140,8 +140,8 @@ Ein schneller DNS-Server verbessert die Antwortzeiten – er ersetzt aber keine 
 
 | Optimierung | Aufwand | Effekt | Kosten |
 |:---|---:|:---|---:|
-| DNS-Server wechseln | 5 Min. | 10-30 ms schnellere Antworten, mehr Sicherheit | 0 € |
-| WLAN optimieren (Mesh/Kanal) | 30 Min. | bessere Abdeckung, weniger Latenz im Funknetz | 0-120 € |
+| DNS-Server wechseln | 5 Min. | 10–30 ms schnellere Antworten, mehr Sicherheit | 0 € |
+| WLAN optimieren (Mesh/Kanal) | 30 Min. | bessere Abdeckung, weniger Latenz im Funknetz | 0–120 € |
 | [DSL-Tarif wechseln](/go/dsl/) | 15 Min. | höhere Bandbreite, bis 380 € Ersparnis | 0 € |
 
 ## Fazit:<br>5 Minuten, die sich dauerhaft auszahlen

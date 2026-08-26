@@ -20,3 +20,5 @@
 {"ts": "2026-08-26T01:10:48Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 25}, "output": {"changed": 5}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-08-26T01:10:57Z", "module": "pinterest_link_guard", "action": "local", "input": {"targets": 30}, "output": {"problems": 0}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-08-26T01:10:58Z", "module": "pinterest_pin_text_sync", "action": "check", "input": {"posts": 25}, "output": {"changed": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-26T10:06:11Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 31}, "output": {"changes": 100}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-08-26T10:06:11Z", "module": "fix_spaces", "action": "apply", "input": {"files": 31}, "output": {"fixes": 387}, "status": "ok", "critical": false, "commit": null}

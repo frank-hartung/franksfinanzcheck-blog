@@ -52,7 +52,7 @@ Die folgende Tabelle zeigt die Kostenentwicklung bei einem angenommenen Preisspr
 |:---|:---|:---|:---|
 | **Flexibler Grundversorger** | 12,50 Cent / kWh | 15,20 Cent / kWh (ab Nov.) | **2.880,00 €** |
 | **Tarif mit 12 Mon. Preisgarantie** | **8,80 Cent / kWh** | **8,80 Cent / kWh (stabil)** | **1.760,00 €** |
-| **Ersparnis mit Preisgarantie** | — | — | **1.120,00 € Ersparnis!** |
+| **Ersparnis mit Preisgarantie** | – | – | **1.120,00 € Ersparnis!** |
 
 > 💶 **Spar-Tipp zwischendurch:** Schütze deine Finanzen vor teuren Preiserhöhungen und vergleiche geprüfte Gastarife online: [**Vergleichen & sparen**](/go/gas/)
 

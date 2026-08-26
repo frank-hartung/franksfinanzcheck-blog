@@ -61,7 +61,7 @@ Achte beim Tarifvergleich auf folgende Qualitätsmerkmale, um langfristig sicher
 |:---|:---|:---|:---|:---|
 | Grundversorgungstarif Stadtwerk | 14,50 € (174 €/Jahr) | 12,80 Cent (2.560 €) | **2.734,00 €** | Basis |
 | Alternativer Tarif (ohne Bonus) | 9,90 € (118,80 €/Jahr) | 9,20 Cent (1.840 €) | **1.958,80 €** | **775,20 €** |
-| Empfohlener Wechseltarif (inkl. Bonus) | 11,00 € (132 €/Jahr) | 9,50 Cent (1.900 €) | **2.032,00 € - 180 € Bonus = 1.852,00 €** | **882,00 €** |
+| Empfohlener Wechseltarif (inkl. Bonus) | 11,00 € (132 €/Jahr) | 9,50 Cent (1.900 €) | **2.032,00 € – 180 € Bonus = 1.852,00 €** | **882,00 €** |
 
 > 💶 **Ersparnis-Hinweis:** Vertiefende Einblicke in vertragliche Schutzmechanismen findest du in unserem Ratgeber über [Verlässliche Preisgarantien bei Gasverträgen](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/).
 

@@ -69,7 +69,7 @@ Ein typisches Einfamilienhaus verbraucht pro Jahr rund 20.000 kWh Gas für Raum
 | Zwischensumme ohne Rabatte | 2.710,00 € | 1.900,00 € |
 | Neukundenbonus & Sofortbonus | 0,00 € | **- 160,00 €** |
 | **Gesamtkosten im 1. Jahr** | **2.710,00 €** | **1.740,00 €** |
-| **Reale jährliche Ersparnis** | — | **970,00 € Ersparnis** |
+| **Reale jährliche Ersparnis** | – | **970,00 € Ersparnis** |
 
 > 💶 **Spar-Tipp zwischendurch:** Berechne deine individuelle Ersparnis mit deiner Postleitzahl und deinem Jahresverbrauch: [**Vergleichen & sparen**](/go/gas/)
 
@@ -91,7 +91,7 @@ Eine **Gaspreisgarantie** schützt dich vor bösen finanziellen Überraschungen 
 ## Häufige Fragen
 
 ### Was bedeutet eine Gaspreisgarantie?
-Eine Gaspreisgarantie ist eine vertragliche Vereinbarung, bei der der Energieversorger zusichert, den Arbeitspreis (pro kWh) und den Grundpreis für einen bestimmten Zeitraum nicht zu erhöhen.
+Eine Gaspreisgarantie ist eine vertragliche Vereinbarung, bei der Energieversorger zusichert, den Arbeitspreis (pro kWh) und den Grundpreis für einen bestimmten Zeitraum nicht zu erhöhen.
 
 ### Was passiert bei einer Gaspreiserhöhung trotz Preisgarantie?
 Erhöht ein Anbieter außerhalb der Garantiebedingungen die Preise (oder steigen Steuern bei einer eingeschränkten Garantie), hast du nach § 41 Abs. 5 EnWG ein gesetzliches Sonderkündigungsrecht und kannst den Vertrag fristlos beenden.

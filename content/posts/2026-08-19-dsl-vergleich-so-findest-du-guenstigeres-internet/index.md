@@ -70,7 +70,7 @@ Welche Geschwindigkeit passt zu deinen Anforderungen? Die folgende Übersicht hi
 * **Kabel-Internet (DOCSIS):** Nutzt das Breitbandkabelnetz des Fernsehers. Bietet hohe Download-Raten bis zu 1.000 Mbit/s zum günstigen Preis, teilt sich die Kapazität jedoch mit den Nachbarn (Shared Medium).
 * **Echte Glasfaser (FTTH):** Bringt Lichtwellenleiter bis direkt in den Wohnraum. Es bietet maximale Geschwindigkeiten, höchste Ausfallsicherheit und hohe Upload-Kapazitäten.
 
-## In 3 Schritten zum neuen Internetanschluss
+## In drei Schritten zum neuen Internetanschluss
 
 1. **Verfügbarkeits-Check machen:** Trage deine genaue Adresse in den Tarifrechner ein, um zu sehen, welche Bandbreiten und Technologien bei dir verfügbar sind.
 2. **Wunschtarif auswählen & Wechsel beauftragen:** Wähle deinen bevorzugten Tarif und beauftrage den neuen Provider mit der Kündigung deines Alttarifs.

@@ -81,7 +81,7 @@ Nutze bei ohnehin geplanten Online-Käufen Cashback-Portale. Du erhältst 2 bis 
 
 ## Wie du ein nachhaltiges Haushaltsbudget aufstellst
 
-Um deine Finanzen dauerhaft im Griff zu behalten, empfiehlt sich die bewährte 50-30-20-Budgetregel:
+Um deine Finanzen dauerhaft im Griff zu behalten, empfiehlt sich die bewährte 50–30–20-Budgetregel:
 - **50 % Grundbedürfnisse:** Miete, Strom, Lebensmittel, notwendige Versicherungen und Mobilität.
 - **30 % Persönliche Wünsche:** Urlaube, Hobbys, Restaurantbesuche, Kino und Freizeit.
 - **20 % Vermögensaufbau & Schuldentilgung:** Dauerauftrag auf das Tagesgeldkonto oder in breit gestreute ETF-Sparpläne.
@@ -100,7 +100,7 @@ Alltagssparen funktioniert nicht durch eiserne Willenskraft, sondern durch kluge
 Als Faustregel gelten 3 bis 6 Netto-Monatsgehälter, die auf einem jederzeit verfügbaren Tagesgeldkonto geparkt werden, um unerwartete Reparaturen oder Lebenskrisen abzufedern.
 
 ### Wie führe ich am einfachsten ein Haushaltsbuch?
-Entweder mit einer einfachen Excel-Tabelle, einer kostenlosen Budget-App (z. B. Finanzguru) oder der klassischen 50-30-20-Regel: 50 % Grundbedürfnisse, 30 % persönliche Wünsche, 20 % Sparen & Vermögensaufbau.
+Entweder mit einer einfachen Excel-Tabelle, einer kostenlosen Budget-App (z. B. Finanzguru) oder der klassischen 50–30–20-Regel: 50 % Grundbedürfnisse, 30 % persönliche Wünsche, 20 % Sparen & Vermögensaufbau.
 
 ### Ist Sparen im Alltag nicht mit zu viel Verzicht verbunden?
 Ganz im Gegenteil: Durch das Beseitigen unnötiger Ausgaben und überteuerter Verträge bleibt mehr Geld für die Dinge, die dir wirklich Freude bereiten.

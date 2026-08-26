@@ -23,7 +23,7 @@ pin_description: "Am Mietwagen-Schalter läuft das Spielchen immer gleich ab: Dr
 pinwand: "Günstig reisen | Reisebudget & Mietwagen"
 ---
 
-Die Vorfreude auf den Urlaub ist groß – doch am Mietwagenschalter am Flughafen folgt oft das böse Erwachen: Die freundliche Mitarbeiterin verlangt eine **Kaution zwischen 900 € und 2.500 €**, die auf der Kreditkarte blockiert wird. Wer keine echte Kreditkarte hat oder das Limit nicht freihält, steht ohne Auto da. Und selbst wenn alles klappt, lauern mit "Selbstbeteiligung", "Zusatzfahrer-Gebühr", "Tankregelung" und "Reifenschutz" weitere Kostenfallen, die den anfänglichen Schnäppchenpreis schnell verdoppeln. In diesem Ratgeber erkläre ich dir, wie du einen **Mietwagen ohne Kaution** buchen kannst (oder die Kaution auf ein Minimum drückst), welche Versicherung wirklich schützt und wie du am Urlaubsort bis zu **40 Prozent** sparst.
+Die Vorfreude auf den Urlaub ist groß – doch am Mietwagenschalter am Flughafen folgt oft das böse Erwachen: Die freundliche Mitarbeiterin verlangt eine **Kaution zwischen 900 € und 2.500 €**, die auf der Kreditkarte blockiert wird. Wer keine echte Kreditkarte hat oder das Limit nicht freihält, steht ohne Auto da. Und selbst wenn alles klappt, lauern mit "Selbstbeteiligung", "Zusatzfahrer-Gebühr", "Tankregelung" und "Reifenschutz" weitere Kostenfallen, die den anfänglichen Schnäppchenpreis schnell verdoppeln. In diesem Ratgeber erkläre ich dir, wie du einen **Mietwagen ohne Kaution** buchen kannst (oder die Kaution auf ein Minimum drückst), welche Versicherung wirklich schützt und wie du am Urlaubsort bis zu **40 %** sparst.
 
 ---
 
@@ -81,13 +81,13 @@ Selbst wenn du online bereits eine Vollkasko ohne Selbstbeteiligung gebucht hast
 
 ### 5. Die "Flughafen-Zuschlag"-Falle
 
-Mietwagen direkt am Flughafen sind aufgrund von Konzessionsgebühren oft 15 bis 25 Prozent teurer als im Stadtzentrum.
+Mietwagen direkt am Flughafen sind aufgrund von Konzessionsgebühren oft 15 bis 25 % teurer als im Stadtzentrum.
 
 **So umgehst du sie:** Vergleiche im Preisvergleich beide Standorte. Oft lohnt sich ein 10-minütiges Taxi zur Stadtfiliale – bei einer Woche Mietdauer kann die Ersparnis 80 € bis 150 € betragen.
 
 ## Die 6-Schritt-Checkliste für die sichere Buchung
 
-1. **Früh vergleichen:** Buche mindestens 4 bis 6 Wochen vor Abreise. Last-Minute-Preise am Flughafen sind 30 bis 50 Prozent teurer.
+1. **Früh vergleichen:** Buche mindestens 4 bis 6 Wochen vor Abreise. Last-Minute-Preise am Flughafen sind 30 bis 50 % teurer.
 2. **"Vollkasko ohne Selbstbeteiligung" auswählen:** Bereits im Buchungsprozess, nicht erst am Schalter.
 3. **Tankregelung "Voll-Voll" bestätigen:** In den Buchungsdetails prüfen.
 4. **Kaution notieren:** Steht in den Mietbedingungen. Ziel: unter 300 €.

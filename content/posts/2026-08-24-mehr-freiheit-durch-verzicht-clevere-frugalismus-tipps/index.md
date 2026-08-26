@@ -77,7 +77,7 @@ Bevor du an der Börse investierst, baue drei bis sechs Monatsausgaben als eiser
 | Ungenutzte Abos kündigen | 20 Minuten | **45,00 €** | **540,00 €** |
 | Meal Prep & geplanter Wocheneinkauf | 2 Stunden / Woche | **140,00 €** | **1.680,00 €** |
 | Verzicht auf Spontankäufe (72-Std.-Regel) | 0 Minuten | **120,00 €** | **1.440,00 €** |
-| **Summe Ersparnis** | — | **380,00 € / Monat** | **4.560,00 € / Jahr** |
+| **Summe Ersparnis** | – | **380,00 € / Monat** | **4.560,00 € / Jahr** |
 
 Wer wissen möchte, wie man auch beim Girokonto und bei den Fixkosten die Kosten auf 0 € drückt, liest unseren Ratgeber [Kostenloses Girokonto: So findest du ein Konto ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) sowie den umfassenden [Ratgeber: Frugalismus & Budget](../../pillar/frugalismus/) und den [Ratgeber: Konto & Karten](../../pillar/konto-karten/).
 
