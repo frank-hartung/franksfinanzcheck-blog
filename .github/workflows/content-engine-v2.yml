@@ -334,7 +334,8 @@ jobs:
       - name: Phase 5 – Status-Dashboards aktualisieren
         if: ${{ always() }}
         env:
-                    MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}
+
+          MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}     
           MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
         run: |
           python3 scripts/bot_status.py || true
