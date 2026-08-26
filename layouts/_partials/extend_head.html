@@ -87,9 +87,9 @@
 {{- $raw := .RawContent -}}
 {{- $faqSection := "" -}}
 {{- if findRE "(?i)##\\s+(?:Häufige Fragen|FAQ|Fragen\\s*&\\s*Antworten)" $raw -}}
-  {{- $parts := splitRE "(?i)##\\s+(?:Häufige Fragen|FAQ|Fragen\\s*&\\s*Antworten)" $raw -}}
-  {{- if gt (len $parts) 1 -}}
-    {{- $faqSection = index $parts 1 -}}
+  {{- $m := findRESubmatch "(?is)^.*?##\\s+(?:Häufige Fragen|FAQ|Fragen\\s*&\\s*Antworten)\\s*([\\s\\S]*)$" $raw -}}
+  {{- if and $m (gt (len (index $m 0)) 1) -}}
+    {{- $faqSection = index (index $m 0) 1 -}}
   {{- end -}}
 {{- end -}}
 {{- if not $faqSection }}{{ $faqSection = $raw }}{{ end -}}
