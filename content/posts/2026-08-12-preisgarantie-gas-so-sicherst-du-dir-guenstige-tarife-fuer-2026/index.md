@@ -1,5 +1,5 @@
 ---
-title: "Preisgarantie Gas: So sicherst du günstige Tarife"
+title: "Preisgarantie Gas: So sicherst du günstige Tarife – Gastari"
 description: "Preisgarantie Gas 2026: Schütze dich vor steigenden Gaspreisen & CO2-Abgaben. Erfahre alles über feste Arbeitspreise, Sonderkündigung & spare bis 650 €."
 date: 2026-08-12T08:35:12Z
 draft: false

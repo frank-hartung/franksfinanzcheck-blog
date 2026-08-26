@@ -1,5 +1,5 @@
 ---
-title: "Internet & DSL wechseln: Praxis-Tipps"
+title: "Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet"
 description: "Internet & DSL wechseln: Spare bis zu 380 € im Jahr, sichere dir Neukunden-Boni und vermeide Ausfallzeiten. Schritt-für-Schritt Praxis-Anleitung."
 date: 2026-08-14T08:35:12Z
 draft: false
