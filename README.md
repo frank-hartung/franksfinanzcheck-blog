@@ -2,7 +2,7 @@
 
 Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung** – gebaut mit Hugo + PaperMod, hostbar kostenlos auf GitHub Pages oder Cloudflare Pages. Die Themen sind abgestimmt auf den **Pinterest-Masterplan** (FranksFinanzcheck, August 2026): Jeder Educational-Pin bekommt einen passenden Blog-Artikel, jeder Transactional-Pin eine eigene CHECK24-Kategorie.
 
-> ⚠️ **Hinweis zur Automatisierung (Stand 13.08.2026):** Der Bot veröffentlicht Artikel automatisch, aber NUR wenn sie mehrere harte Qualitäts- und SEO-Gates bestehen (Profi-Qualitäts-Gate, `publish_gate.py`, `quality_score.py` ≥ 0,85) – siehe Abschnitt „Vollautomatik ohne manuelles Eingreifen" unten. Kein manueller Freigabe-Schritt mehr nötig; die Publikationsfrequenz ist fix auf Mo/Mi/Fr mit 2–3 Artikeln pro Tag begrenzt, um „Scaled Content Abuse"-Risiken bei einer jungen Domain zu vermeiden (DAUERVORGABE, siehe CADENCE-REPORT.md).
+> ⚠️ **Hinweis zur Automatisierung (Stand 26.08.2026):** Der Bot veröffentlicht Artikel automatisch, aber NUR wenn sie mehrere harte Qualitäts- und SEO-Gates bestehen (Profi-Qualitäts-Gate, `publish_gate.py`, `quality_score.py` ≥ 0,85) – siehe Abschnitt „Vollautomatik ohne manuelles Eingreifen" unten. Kein manueller Freigabe-Schritt mehr nötig; die Publikationsfrequenz ist fix auf Mo/Mi/Fr mit 2–3 Artikeln pro Tag begrenzt, um „Scaled Content Abuse"-Risiken bei einer jungen Domain zu vermeiden (DAUERVORGABE, siehe CADENCE-REPORT.md). **Seit 26.08.2026 wird die Routine HART erzwungen:** Vor jedem Publish (Deploy, Engine, manuell) prüft und heilt ein Gate-Komplex (`cadence_guard.py` + `publish_gate.py` + Titel-/Cover-Gates) Kadenz und Cover-Text-Komplettheit automatisch – Verstöße können nicht mehr live gehen, der Bestand heilt sich selbst (Details: `CADENCE-REPORT.md` Regel 5).
 
 ---
 
@@ -38,6 +38,25 @@ Der Workflow **„Content-Engine v2“** veröffentlicht **nur montags, mittwoch
 - **Harter Wochentags-Guard:** auch manuelle Workflow-Starts veröffentlichen an Di/Do/Sa/So nichts (Notfall: `FORCE_PUBLISH_ANY_DAY=1` setzen)
 - Tagesmenge steuerbar: `MIN_ARTIKEL_PRO_TAG` (Default 2) / `MAX_ARTIKEL_PRO_TAG` (Default 3)
 - Die Engine erzwingt mindestens 2 Artikel pro Publikationstag (Dauervorgabe-Floor); empfohlen: Repository-Variablen `MAX_ARTIKEL_PRO_TAG=3` / `MIN_ARTIKEL_PRO_TAG=2` setzen
+
+**🔒 Hartes Vor-Veröffentlichungs-Gate + Selbstheilung (26.08.2026):**
+Die Routine wird nicht nur in der Engine eingehalten, sondern VOR JEDEM
+Publish technisch erzwungen – egal welcher Pfad einen Artikel nach `main`
+bringt (Deploy, Engine, manueller Commit, `publish.py`):
+
+| Stage | Was passiert |
+|---|---|
+| **Deploy-Gate** (`deploy.yml`) | Vor jedem Hugo-Build: Kadenz-Selbsttest → `cadence_guard.py --fix` (Zurückstufung + Re-Queue bei Verstößen) → Titel-Gate → Cover-Gate → Build. Heilungen werden gepusht. |
+| **Engine-Phase 0.5** | Vor JEDEM Slot: Kadenz-Gate stellt die Tageszahl auf den korrekten Stand (Selbstheilung) |
+| **Engine-Publish-Gate** | 5 harte Prüfungen inkl. **Cover-Text-Komplettheit** (unvollständiger Titel → Verwurf bzw. Zurückstufung) |
+| **Engine-Phase 6** | `engine_issue.py --deficit`: Tagesende unter Minimum → sichtbares, auto-schließendes Issue |
+| **Blog-Health (täglich)** | Heilt auch ZWISCHEN den Publishing-Slots (Kadenz, Titel, Covers) |
+| **`publish.py` (manuell)** | Gleiche Routine wie die Automation – Verstoß blockiert hart (Notfall: `--force-cadence`) |
+
+Dazu: zentrale Titel-Kürzung an Wortgrenzen (`post_utils.safe_title_cut()`,
+nie mitten im Wort) und `check_covers.py` C4, die für jedes Cover
+verifiziert, dass der komplette Titel im Textbereich rendert.
+Report: `CADENCE-GATE-REPORT.md` · Regelwerk: `CADENCE-REPORT.md` Regel 5.
 
 **Steuerung:**
 - **Stoppen (Kill-Switch):** GitHub → Actions → „Content-Engine v2“ → Disable workflow

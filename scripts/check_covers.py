@@ -249,13 +249,135 @@ def check_stale(covers):
     return stale
 
 
+# ------------------------------------------------------------
+# C4: COVER-TEXT-KOMPLETTHEIT (26.08.2026, Frank: „Cover-Texte werden
+#  nicht vollständig abgebildet"):
+#  Simuliert das exakte Titel-Rendering von generate_covers.make_cover
+#  (gleicher Font, gleiche Geometrie, gleicher Wrap) und beweist für
+#  jeden Post:
+#    a) ALLE Zeilen passen in die Canvas-Breite (kein seitlicher Cut),
+#    b) der Block (Titel + Spar-Pille) passt in die vertikale Zone
+#       (kein Cut oben/unten, kein Overlap mit Badge/Trust-Line),
+#    c) der COMPLETTE Frontmatter-Titel wird gerendert (solange a+b
+#       gelten und safe_title_cut den Titel nicht abbrechen lässt).
+#  Verstoß → Cover ist text-unvollständig → --fix rendert neu (die
+#  make_cover-Seite hat seither ABSOLUTE-CLIP-PROOF, das Re-Rendering
+#  ist also immer heilend).
+# ------------------------------------------------------------
+
+
+def _parse_cover_inputs(md_path):
+    """description/savings/pillar aus dem Frontmatter (für Pille/Badge
+    exakt wie generate_covers.main ableitet)."""
+    try:
+        content = open(md_path, encoding="utf-8").read()
+    except Exception:
+        return "", None, None
+    dm = re.search(r'^description:\s*["\']?(.+?)["\']?\s*$', content, re.M)
+    sm = re.search(r'^savings:\s*["\']?(.+?)["\']?\s*$', content, re.M)
+    pm = re.search(r'^pillar:\s*["\']?([\w\-]+)["\']?\s*$', content, re.M)
+    return (dm.group(1) if dm else "",
+            sm.group(1) if sm else None,
+            pm.group(1) if pm else None)
+
+
+def check_text_fit(covers):
+    """C4: Simulierte Render-Geometrie vs. Canvas. Rückgabe: Probleme."""
+    try:
+        from PIL import Image, ImageDraw
+    except Exception as _no_pil:  # noqa: BLE001
+        print(f"ℹ️ C4 (Cover-Text-Komplettheit) übersprungen: Pillow fehlt ({_no_pil}).")
+        return []
+    sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+    try:
+        import generate_covers as gc
+    except Exception as _no_gc:  # noqa: BLE001
+        print(f"ℹ️ C4 übersprungen: generate_covers nicht importierbar ({_no_gc}).")
+        return []
+
+    # Geometrie 1:1 aus make_cover (W=1000, H=1500):
+    W, H = 1000, 1500
+    margin = 90
+    max_w = W - 2 * margin
+    badge_y = 150
+    trust_y = (H - 300) - 70          # 1130
+    zone_top = badge_y + 52 + 26      # 228 – strengste Variante (größtes Badge-Box)
+    zone_bottom = trust_y - 30        # 1100
+
+    probe = Image.new("RGB", (W, 8))
+    d = ImageDraw.Draw(probe)
+    problems = []
+    for c in covers:
+        title = (c.get("title") or "").strip()
+        if not title:
+            continue
+        slug = os.path.splitext(os.path.basename(c["image"]))[0]
+        # --- exakte Reproduktion der make_cover-Skalierungslogik ---
+        title_font = gc.load_font(78)
+        lines = gc.smart_wrap(title, title_font, max_w, d)
+        for size in (78, 68, 58, 50, 44, 38, 32):
+            title_font = gc.load_font(size)
+            lines = gc.smart_wrap(title, title_font, max_w, d)
+            if len(lines) <= 3 and all(d.textlength(l, font=title_font) <= max_w
+                                        for l in lines):
+                break
+        if len(lines) > 6 or any(d.textlength(l, font=title_font) > max_w
+                                 for l in lines):
+            title_font = gc.load_font(32)
+            lines = gc.smart_wrap(title, title_font, max_w, d)
+            if any(d.textlength(l, font=title_font) > max_w for l in lines):
+                lines = gc.wrap_text_no_hang(title, title_font, max_w, d)
+        # Zeilenweise Hard-Wrap (Spiegel des ABSOLUTE-CLIP-PROOF)
+        for i, l in enumerate(lines):
+            if d.textlength(l, font=title_font) > max_w:
+                parts, cur = [], ""
+                for ch in l:
+                    if cur and d.textlength(cur + ch, font=title_font) > max_w:
+                        parts.append(cur)
+                        cur = ch
+                    else:
+                        cur += ch
+                if cur:
+                    parts.append(cur)
+                lines[i:i + 1] = parts
+        line_h = int(title_font.size * 1.25)
+        total_h = len(lines) * line_h
+        # Spar-Pille (gleiche Ableitung wie make_cover)
+        desc, savings, pillar = _parse_cover_inputs(c["file"])
+        try:
+            pill_text = gc.extract_savings(title, desc, savings) or ""
+        except Exception:  # noqa: BLE001
+            pill_text = ""
+        pill_font = None
+        if pill_text:
+            for psize in (58, 52, 46, 40, 34):
+                pf = gc.load_font(psize)
+                if d.textlength(pill_text, font=pf) + 2 * 46 <= W - 160:
+                    pill_font = pf
+                    break
+        pill_gap = 58 if pill_font else 0
+        pill_box_h = (pill_font.size + 2 * 22) if pill_font else 0
+        block_h = total_h + pill_gap + pill_box_h
+        y_start = max((zone_top + zone_bottom) // 2 - block_h // 2, zone_top + 4)
+        content_bottom = y_start + block_h  # konservativ (Pille voll gezeichnet)
+        ok_w = all(d.textlength(l, font=title_font) <= max_w for l in lines)
+        ok_h = y_start >= zone_top - 2 and content_bottom <= zone_bottom + 2
+        if not (ok_w and ok_h):
+            why = "Breite" if not ok_w else "Höhe"
+            problems.append({"file": c["file"], "slug": slug,
+                             "reason": f"Cover-Text {why}: {len(lines)} Zeilen, "
+                                       f"Block {block_h}px"})
+    return problems
+
+
 def main():
     fix = "--fix" in sys.argv
     as_json = "--json" in sys.argv
     covers = collect_covers()
     problems = check(covers)
     stale = check_stale(covers)
-    brand_bad = check_brand(covers)   # C2 (12.08., Frank): Brand-Chip presenza
+    brand_bad = check_brand(covers)   # C2 (12.08., Frank): Brand-Chip presencia
+    text_bad = check_text_fit(covers)  # C4 (26.08.): Cover-Text-Komplettheit
 
     # Selbstheilung: Gedankenstrich im Cover-Dateinamen → Bindestrich
     # (wenn die Bindestrich-Datei existiert; --fix schreibt die Referenz um)
@@ -297,15 +419,27 @@ def main():
                                cwd=BLOG_DIR, check=False)
             covers = collect_covers()
             brand_bad = check_brand(covers)
+        if text_bad:
+            # C4-Heilung: ABSOLUTE-CLIP-PROOF rendert garantiert komplett
+            print(f"{len(text_bad)} Cover mit unvollständigem Text – generiere neu …")
+            gen = os.path.join(BLOG_DIR, "scripts", "generate_covers.py")
+            for t in text_bad:
+                print(f"  → {t['slug']}: {t['reason']}")
+                subprocess.run([sys.executable, gen, "--slug", t["slug"], "--force"],
+                               cwd=BLOG_DIR, check=False)
+            covers = collect_covers()
+            text_bad = check_text_fit(covers)
     elif not os.path.exists(os.path.join(BLOG_DIR, "data", "covers_manifest.json")):
         # Manifest initial befüllen (einmalig, nach Konsistenz-Check):
         # generiert keine Bilder neu, aktualisiert nur die Manifeste.
         subprocess.run([sys.executable, os.path.join(BLOG_DIR, "scripts", "generate_covers.py")],
                        cwd=BLOG_DIR, check=False)
 
-    total = len(problems) + len(stale) + len(brand_bad)
+    total = len(problems) + len(stale) + len(brand_bad) + len(text_bad)
     print(f"Cover-Check: {len(covers)} Covers | Probleme: {len(problems)} | "
-          f"Stale: {len(stale)} | Brand: {len(brand_bad)}")
+          f"Stale: {len(stale)} | Brand: {len(brand_bad)} | Text: {len(text_bad)}")
+    for t in text_bad:
+        print(f"  ❌ TEXT {t['slug']}: {t['reason']}")
     for it, warum in brand_bad:
         print(f"  ❌ BRAND {it['file']}: {warum}")
     for p in problems:
@@ -316,8 +450,9 @@ def main():
 
     if as_json:
         print(json.dumps({"total": len(covers), "problems": len(problems),
-                          "stale": len(stale),
-                          "items": problems + stale}, ensure_ascii=False))
+                          "stale": len(stale), "text": len(text_bad),
+                          "items": problems + stale + text_bad},
+                         ensure_ascii=False))
     return 1 if total else 0
 
 

@@ -123,6 +123,28 @@ bewusst – nachgewiesen disjunkte Muster.
   08.11. Di ×2 + 32 Evergreen-Posts vom 09.08. So) – inkl. Covers, Manifest,
   Pin-Queue, Fingerprints, Affiliate-Report, IndexNow-Log und interner Links.
   Verblieben: 6 Posts, je 2 an Mo 08.10., Mi 08.12. und Fr 08.14.
+- **Hartes Vor-Veröffentlichungs-Gate + Selbstheilung (26.08.2026 –
+  verbindlich):** Die Routine wird VOR JEDEM Publish technisch erzwungen,
+  nicht nur in der Engine vorgesehen: `cadence_guard.py` (Kadenz-Wache,
+  Single Source of Truth, `--selftest` bricht CI ab, wenn das Gate defekt
+  ist; `--fix` heilt Off-Day/Über-Max → `draft` + `cadence_wait`
+  Re-Queue, Content geht nie verloren) läuft im **Deploy-Gate** (vor
+  jedem Hugo-Build), in **Content-Engine Phase 0.5** (vor jedem Slot)
+  und in der **Blog-Health-Wache** (täglich 07:45 MESZ).
+  `publish_gate.py` prüft zusätzlich **Cover-Text-Komplettheit**
+  (R5: unvollständiger Titel → neuer Artikel wird verworfen,
+  Re-Queue wird auf draft zurückgestuft); `publish.py` blockiert
+  manuelle Freigaben gegen die Routine hart (Notfall:
+  `--force-cadence`/`FORCE_PUBLISH_ANY_DAY=1`). Titel-Kürzung läuft
+  zentral durch `post_utils.safe_title_cut()` (Wortgrenze, nie mitten im
+  Wort, nie mit hängendem Gedankenstrich) — die Ursache der 6
+  unvollständigen Cover-Texte vom 26.08. `check_covers.py` C4
+  verifiziert für jedes Cover die vollständige Text-Renderbarkeit
+  (1:1-Nachbau des Render-Flows; `--fix` rendert neu).
+  Untertages-Ziel-Defizite macht `engine_issue.py --deficit` (Phase 6)
+  sichtbar (auto-schließendes Issue). Report: `CADENCE-GATE-REPORT.md`.
+  Beleg 26.08: 7 Verstöße geheilt (5 Off-Day + 2 Over-Cap) → 18 live,
+  jeder Tag exakt 2–3; 6 Titel repariert + Covers neu gerendert.
 - **Empfohlene Zeichenlänge pro Blogartikel: 6.000–10.000 Zeichen** Fließtext
   (≈ 800–1.400 Wörter; empirisch: Median 9.124 Zeichen bei 6,96 Zeichen/Wort).
   Ausgewiesen und überwacht von `check_length.py` (Konstanten `OPT_CHARS_MIN/MAX`,
@@ -224,6 +246,11 @@ jeder Schreibaktion.
 | Schwache KI-Antwort → kein Artikel | Engine v2 (3-Ebenen-Fallback) |
 | Artikel zu dünn | length_guard (KI-Module, Gate-verifiziert) |
 | Titel geändert → Cover alt | check_covers Manifest-Abgleich (--fix) |
+| Titel unvollständig (Wortbruch) | safe_title_cut (Vermeidung) + check_titles R5 → publish_gate (Verwurf/Draft) |
+| Cover-Text abgeschnitten/veraltete Darstellung | check_covers C4 (--fix rendert neu) + Zeichen-Hard-Wrap/Clamp in generate_covers |
+| Kadenz-Verstoß (Off-Day/Über-Max) | cadence_guard --fix (Zurückstufung + Re-Queue; Deploy/Engine/Health) |
+| Tagesende unter Mindestziel | engine_issue --deficit (Issue, auto-schließend) |
+| Kadenz-Gate selbst defekt | cadence_guard --selftest (Exit 2 bricht CI ab) |
 | Pinterest-Token läuft ab | pinterest_auth.py (Continuous Refresh, AES) |
 | Push-Race zwischen Bots | Rebase-Guards + Concurrency in allen Write-Workflows |
 | Bot komplett stumm | bot-watchdog → Issue |
@@ -238,7 +265,7 @@ jeder Schreibaktion.
 `LENGTH-REPORT.md` · `DASH-REPORT.md` · `COMPOUND-REPORT.md` · `EMOJI-REPORT.md` ·
 `CASING-REPORT.md` · `BRAND-REPORT.md` · `SEO-REPORT.md` · `LAYOUT-REPORT.md` ·
 `BOT-STATUS.md` · `ENGINE-STATUS.md` · `PIN-STATUS.md` · `SOCIAL-STATUS.md` ·
-`AFFILIATE-REPORT.md` · `BACKLINK-REPORT.md` · `GRAMMATIK-REPORT.md` · `META-REPORT.md`
+`AFFILIATE-REPORT.md` · `BACKLINK-REPORT.md` · `GRAMMATIK-REPORT.md` · `META-REPORT.md` ·\n`CADENCE-GATE-REPORT.md`
 
 ## 🛠️ Playbooks (typische Eingriffe)
 
@@ -252,6 +279,28 @@ jeder Schreibaktion.
 | Wassertemperaturen | `BOT-STATUS.md` / `ENGINE-STATUS.md` jederzeit auf der Repo-Seite sichtbar |
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
+
+- **26.08.2026:** Hartes Vor-Veröffentlichungs-Gate + Selbstheilung für
+  die DAUERVORGABEN: (1) `cadence_guard.py` neu –
+  Kadenz-Wache (Mo/Mi/Fr, 2–3/Tag, Frontmatter-Datum als Single Source
+  of Truth) mit `--selftest` (CI-Abort), `--fix` (Zurückstufung +
+  Re-Queue, nie Datenverlust) und `CADENCE-GATE-REPORT.md`; wired in
+  Deploy-Gate (vor Hugo-Build), Content-Engine v2 (Phase 0.5 vor jedem
+  Slot), Blog-Health-Wache (täglich). (2) `publish_gate.py`: 5. harte
+  Prüfung „Cover-Text-Komplettheit“ (R5) + Kandidaten zählen jetzt auch
+  Frontmatter-Datum = heute (Re-Queue-Promotion); neuer R5-Titel →
+  Verwurf, Re-Queue → draft. (3) `publish.py`: Routine-Block für
+  manuelle Freigaben (Notfall `--force-cadence`/`FORCE_PUBLISH_ANY_DAY=1`),
+  Re-Dating auf den Freigabetag. (4) `post_utils.safe_title_cut()` –
+  zentrale Wortgrenzen-Kürzung ersetzt alle harten `[:60]`-Slices
+  (meta_optimizer, engine_generate); Ursache der 6 unvollständigen
+  Cover-Texte behoben. (5) `check_covers.py` C4: 1:1-Render-Nachbau
+  prüft jedes Cover auf vollständigen Titel-Text; `generate_covers.py`
+  mit Zeichen-Hard-Wrap + Y-Start-Clamp (absolute Clip-Sicherheit).
+  (6) `engine_issue.py --deficit` (Phase 6): auto-schließendes Issue
+  bei unter Tagesminimum. Beleg-Lauf: 7 Verstöße geheilt (5 Off-Day +
+  2 Over-Cap) → 18 live, exakt 2–3/Tag; 6 Titel repariert, 6 Covers
+  neu gerendert, alle Gates grün.
 
 - **11.08.2026 (15):** L14 Unidiom-Fangsatz (Frank-Fund „Jahresetag"):
   Holzrige KI-Komposita-Neubildungen bekommen einen Kanon (auto-fix,

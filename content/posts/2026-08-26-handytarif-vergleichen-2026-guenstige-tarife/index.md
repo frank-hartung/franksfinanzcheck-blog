@@ -2,7 +2,9 @@
 title: "Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €"
 description: "Handytarif vergleichen 2026: Allnet-Flats ab 4,99 €, 5G-Tarife unter 15 € und wann sich LTE noch lohnt. Mit der 8-Punkte-Checkliste bis zu 360 € im Jahr sparen."
 date: 2026-08-26T06:20:00Z
-draft: false
+draft: true
+cadence_demoted: 2026-08-26T13:46:19Z
+cadence_wait: true
 tags: ["Handytarif vergleichen", "Handytarif Vergleich", "Günstiger Handytarif", "Allnet Flat", "5G Tarif", "Handyvertrag wechseln"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"

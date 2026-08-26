@@ -1,5 +1,5 @@
 ---
-title: "Privathaftpflicht: Warum sie so wichtig ist und was sie"
+title: "Privathaftpflicht: Warum so wichtig und was sie kostet"
 description: "Privathaftpflichtversicherung: Warum sie für jeden unverzichtbar ist, welche Schäden sie abdeckt und wie du Top-Schutz ab 3,50 € im Monat findest."
 date: 2026-08-17T08:35:12Z
 draft: false
