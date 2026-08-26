@@ -102,6 +102,32 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python3 scripts/meta_optimizer.py --fix --ai | tee /tmp/meta_log.txt
+                - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte, Keywords)
+        # Agentur-Selbstheilung: erzwingt Doppelpunkt-Titel, SERP-Längen,
+        # Cover-Alt=Titel, pin_title/pin_description, Keywords ≥3, Cover 2:3.
+        # Läuft NACH meta_optimizer, damit Ellipsis-/Titel-Schäden geheilt werden.
+        id: pinseo
+        continue-on-error: true
+        run: |
+          python3 scripts/pinterest_seo_healer.py --fix | tee /tmp/pinseo_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Pinterest-SEO-Healer-Änderungen committen
+        if: always()
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add content/ static/images/covers/ data/covers_manifest.json \
+                  data/lcp_images.json data/fcp_images.json \
+                  PINTEREST-SEO-HEALER-REPORT.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Keine Pinterest/SEO-Heiler-Änderungen"
+          else
+            git commit -m "seo: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte)"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+          fi
+
           exit ${PIPESTATUS[0]}
 
       - name: Meta-Änderungen committen
