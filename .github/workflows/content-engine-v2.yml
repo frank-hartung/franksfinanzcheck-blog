@@ -80,7 +80,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
-          MAX_ARTIKEL_PRO_TAG: MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}
+          MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}
           MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
           # Freigabe-Modus (13.08.): Default "profi" = nur Artikel mit
           # bestandenem Profi-Qualitäts-Gate werden automatisch veröffentlicht.
@@ -161,8 +161,6 @@ jobs:
           python3 scripts/readability_check.py --new-only || echo "⚠ Lesbarkeit (nicht blockierend)"
           echo "== Titel-Gate (check_titles, selbstheilend) =="
           python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate (nicht blockierend)"
-          echo "== Pinterest/Google-SEO-Healer (Titel, Cover-Text, Pin-SEO, Keywords) =="
-          python3 scripts/pinterest_seo_healer.py --fix || echo "⚠ Pinterest-SEO-Healer (nicht blockierend)"
           echo "== Cover generieren =="
           pip install -q pillow pillow-avif-plugin
           python3 scripts/generate_covers.py || echo "⚠ Cover-Fehler (nicht kritisch)"
@@ -334,7 +332,7 @@ jobs:
       - name: Phase 5 – Status-Dashboards aktualisieren
         if: ${{ always() }}
         env:
-          MAX_ARTIKEL_PRO_TAG: ${{ MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}
+                    MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}
           MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
         run: |
           python3 scripts/bot_status.py || true
