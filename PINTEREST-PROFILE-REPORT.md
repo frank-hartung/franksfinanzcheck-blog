@@ -1,6 +1,6 @@
 # 🏆 PINTEREST-PROFILE-REPORT (Premium-Profil-Audit)
 
-**Profil:** [https://de.pinterest.com/franksfinanzcheck/](https://de.pinterest.com/franksfinanzcheck/) · **Stand:** 25.08.2026 22:08 UTC · **Modus:** MANUELL (kein Token)
+**Profil:** [https://de.pinterest.com/franksfinanzcheck/](https://de.pinterest.com/franksfinanzcheck/) · **Stand:** 26.08.2026 00:59 UTC · **Modus:** MANUELL (kein Token)
 
 **Abweichungen:** 9 · **Soll-Zustand:** `data/pinterest_profile_target.yaml` + `data/pinterest_boards.yaml`
 
@@ -40,43 +40,34 @@ Dein Praxis-Ratgeber für weniger Fixkosten & mehr vom Leben 💡 Ehrliche Spart
 
 **Board-Namen + Beschreibungen** (Board → Bearbeiten):
 
-### Geld sparen im Alltag | Frugalismus-Tipps
-```
-Geld sparen im Alltag leicht gemacht: Frugalismus-Tipps, Sparmethoden & Finanz-Hacks, die wirklich funktionieren – von der 24-Stunden-Regel bis zum No-Spend-Weekend. Ehrlich, verständlich, mit konkreten Euro-Beträgen. Ideal für alle, die ohne Verzichtsgefühl jeden Monat 100 € und mehr freischaufeln wollen.
-```
 
-### Budget & Haushaltskasse: clever planen
-```
-Budgetierung ohne Stress: Hier dreht sich alles um die 50-30-20-Regel, Haushaltsbuch, Notgroschen & cleveres Planen mit dem Gehalt. Mit Beispielrechnungen, Checklisten und Schritt-für-Schritt-Anleitungen für dein Budget – egal ob 1.500 € oder 3.500 € netto. So hast du am Monatsende endlich Geld übrig.
-```
 
-### Strom & Gas sparen | Tarife clever wechseln
-```
-Stromkosten & Heizkosten senken: Stromfresser finden, Energiefresser stoppen, Strom- und Gastarife clever wechseln – mit Preisgarantie, Wechselbonus und Checklisten zum Abhaken. Dazu verständliche Guides rund um Gasrechnung, Abschlag und Heizperiode. Spartipps mit echten Euro-Beträgen statt leerer Versprechen.
-```
 
-### Internet & DSL | WLAN-Tipps & Tarife
-```
-Schnelleres Internet ohne mehr zu zahlen: WLAN verbessern, Mesh vs. Repeater, DNS-Tricks und die besten DSL-Tarife mit Wechselbonus. Verständliche Anleitungen für jedes Gerät – von der Fritzbox bis zum Smartphone. Für ein Zuhause ohne Funklöcher und ohne zu teure Verträge.
-```
 
-### Günstig reisen | Reisebudget & Mietwagen
-```
-Günstig reisen ohne Abstriche: Reisebudget clever planen, Urlaubskasse aufbessern, Mietwagen-Fallen vermeiden und Last-Minute-Schnäppchen sichern. Mit Checklisten für Buchung, Abholung und Rückgabe des Mietwagens plus Spartaktiken für Flüge und Unterkünfte. Mehr Urlaub fürs Geld – jedes Jahr.
-```
 
 ### Versicherungen clever wechseln & sparen
 ```
 Versicherungen verstehen & wechseln: Kfz-Versicherung zum Stichtag 30.11., Privathaftpflicht, Wohngebäudeversicherung & Co. – was du wirklich brauchst und was du kündigen kannst. Vergleichen, Hunderte Euro sparen und typische Vertragsfallen vermeiden. Ehrlich erklärt, ohne Fachchinesisch.
 ```
 
+**Board-Cover:** `static/images/boards/cover-versicherungen.png` (als Cover-Bild in der Board-Bearbeitung hochladen)
+
 ## Manuelle Checkpunkte (nicht per API prüfbar)
 
 - [ ] Profilbild: `static/images/social/pinterest-profilbild-marke-1000.png` (Foto + Gold-Ring + Badge) hochgeladen
-- [ ] Board-Cover: 6er-Set aus `static/images/boards/` je Board gesetzt
-- [ ] Business-Account aktiv (Einstellungen → Konto)
+- [ ] Board-Cover: 6er-Set hochgeladen (Zuordnung siehe Board-Liste oben)
+- [ ] Business-Account aktiv (Einstellungen → Konto) – Anzeigename/Bio/Website nur im Business-Konto voll editierbar
 - [ ] Verifizierte Website: `franksfinanzcheck.de` (Claim-Datei + `p:domain_verify` liegen live)
 - [ ] Rich Pins aktiviert (1× validieren: developers.pinterest.com/tools/url-debugger)
+
+## Board-Cover-Zuordnung (Premium, 26.08.2026)
+
+- **Geld sparen im Alltag | Frugalismus-Tipps** → `static/images/boards/cover-geld-sparen.png`
+- **Budget & Haushaltskasse: clever planen** → `static/images/boards/cover-budget.png`
+- **Strom & Gas sparen | Tarife clever wechseln** → `static/images/boards/cover-strom-gas.png`
+- **Internet & DSL | WLAN-Tipps & Tarife** → `static/images/boards/cover-internet-dsl.png`
+- **Günstig reisen | Reisebudget & Mietwagen** → `static/images/boards/cover-reisen.png`
+- **Versicherungen clever wechseln & sparen** → `static/images/boards/cover-versicherungen.png`
 
 ---
 

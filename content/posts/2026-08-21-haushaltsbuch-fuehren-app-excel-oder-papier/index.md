@@ -5,7 +5,7 @@ date: 2026-08-21T06:10:00Z
 draft: false
 tags: ["Haushaltsbuch führen", "Haushaltsbuch App", "Budgetplanung", "50 30 20 Regel", "Ausgaben tracken"]
 categories: ["Ratgeber"]
-pillar: "frugalismus"
+pillar: "konto-karten"
 author: "Frank Hartung"
 erfahrung: "Ich führe seit über acht Jahren selbst ein digitales Haushaltsbuch, habe Dutzende Apps und Excel-Vorlagen ausprobiert und meine Fixkosten dabei von 1.940 € auf 1.510 € im Monat gedrückt. Die Tipps in diesem Artikel stammen aus meiner eigenen Buchführung, nicht aus einem Lehrbuch."
 
@@ -19,15 +19,16 @@ kurzantwort: "Ein Haushaltsbuch funktioniert nur dann dauerhaft, wenn die Method
 social_posted: false
 keywords: ["Haushaltsbuch führen", "Haushaltsbuch App", "Excel Haushaltsbuch Vorlage", "Ausgaben tracken", "50 30 20 Regel", "Budgetplanung", "Fixkosten senken"]
 pin_title: "Haushaltsbuch führen: App, Excel oder Papier?"
-pin_description: "*Werbung | Haushaltsbuch führen leicht gemacht: App, Excel-Tabelle oder Stift und Papier im ehrlichen Vergleich – mit der 50-30-20-Regel bis zu 430 € im Monat sparen. Mehr Spartipps auf FranksFinanzcheck! #haushaltsbuchfuehren #haushaltsbuchapp #budgetplanung"
-pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
+pin_description: "Haushaltsplanung, die im Alltag hält: App, Excel-Tabelle oder Stift im ehrlichen Vergleich. Mit der 50-30-20-Regel und einem einfachen Wochen-Ritual sparst du bis zu 430 Euro im Monat. Jetzt die Vorlage und Tipps lesen."
+pinwand: "Budget & Haushaltskasse: clever planen"
 ---
+
 
 Am Monatsende ist das Konto leer, und du hast keine Ahnung, wohin das Geld eigentlich geflossen ist? Diese Frage stellen sich laut einer Auswertung der Stiftung Warentest rund **60 Prozent aller deutschen Haushalte**. Einmal im Monat fünf Minuten investiert, reichen oft schon, um das zu ändern: Wer konsequent **Haushaltsbuch führt**, verschafft sich nicht nur einen klaren Überblick über Einnahmen und Ausgaben, sondern deckt auch teure Abos, ungünstige Tarife und monatliche Konsum-Schlupflöcher auf. In der Praxis stellt sich aber schnell die Frage nach dem richtigen Werkzeug: Soll es eine smarte **Haushaltsbuch-App** sein, eine frei anpassbare **Excel-Tabelle** oder doch das klassische Stift-und-Papier-Buch? In diesem Ratgeber vergleiche ich alle drei Methoden ehrlich, zeige dir die **50-30-20-Regel** als einfaches Budget-System und wie du damit bis zu **430 € im Monat** sparen kannst.
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Parke deinen monatlichen Überschuss auf einem dauerhaft kostenlosen Tagesgeldkonto mit attraktiver Verzinsung: [**Jetzt C24 Bank Tagesgeld vergleichen**](/go/tagesgeld/)  
+💡 **Schnell-Tipp von FranksFinanzcheck:** Parke deinen monatlichen Überschuss auf einem dauerhaft kostenlosen [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) mit attraktiver Verzinsung: [**Jetzt C24 Bank Tagesgeld vergleichen**](/go/tagesgeld/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Warum Haushaltsbuch führen 2026 wichtiger ist denn je
@@ -128,7 +129,7 @@ Bei einem Nettoeinkommen von 2.500 € bedeutet das: 1.250 € Fixkosten, 750 �
 | Sparpotenzial | Typische Monatsersparnis |
 |:---|---:|
 | Drei ungenutzte Streaming-/Abo-Dienste | 27 € |
-| Girokonto ohne Kontoführungsgebühren statt 9,90 €/Monat | 120 €/Jahr |
+| Girokonto ohne [Kontoführungsgebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) statt 9,90 €/Monat | 120 €/Jahr |
 | Stromanbieter wechseln (3.500 kWh, 42 → 28 ct/kWh) | 40 € |
 | DSL-Tarif wechseln (44 € → 24 €) | 20 € |
 | Kfz-Versicherung vergleichen (Haftpflicht, jährlich) | ca. 17 € |

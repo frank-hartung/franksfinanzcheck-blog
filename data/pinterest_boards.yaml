@@ -17,7 +17,7 @@
 #       - vergleicht das LIVE-Profil (Namen, Boards, Beschreibungen)
 #         mit diesem Soll-Zustand → PINTEREST-PROFILE-REPORT.md
 #    3) data/pinterest_plan.yaml
-#       - die 62 Masterplan-Pins tragen im Feld "pinwand" exakt
+#       - die 73 Masterplan-Pins tragen im Feld "pinwand" exakt
 #         diese Board-Namen (kompatibel geblieben, 25.08. vereinheitlicht)
 #
 #  WICHTIG: Namen sind SEO-aktive Suchbegriffe – Änderungen hier

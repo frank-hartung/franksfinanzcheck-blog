@@ -9,7 +9,7 @@
 
 | # | Deliverable | Status |
 |---|---|---|
-| 1 | **Masterplan `data/pinterest_plan.yaml` komplett überarbeitet** – 62 Pins auf Premium-Level | ✅ im Repo |
+| 1 | **Masterplan `data/pinterest_plan.yaml` komplett überarbeitet** – 73 Pins auf Premium-Level | ✅ im Repo |
 | 2 | **Dieses Strategie-Dokument** mit Copy-Paste-Paketen für Profil & Boards | ✅ im Repo |
 | 3 | **3 Premium-Pin-Vorlagen** (1000×1500px, Marken-CD) als Design-Referenz | ✅ `static/images/pins/` |
 | 4 | Live-Profil umgestellt (Bio, Boards, Cover) | ⏳ Job für dich (Copy-Paste-Pakete unten, ~20 Min.) |
@@ -37,7 +37,7 @@
 
 | # | Problem im alten Plan | Beispiel | Fix |
 |---|---|---|---|
-| S1 | **Massenduplikate** – 62 Pins, aber nur ~15 echte Themen | „5 einfache Frugalismus-Tricks" wortgleich an Tag 1, 7, 13, 19, 26 | 62/62 Pins jetzt individuell (Fresh-Pin-Varianten) |
+| S1 | **Massenduplikate** – 73 Pins, aber nur ~15 echte Themen | „5 einfache Frugalismus-Tricks" wortgleich an Tag 1, 7, 13, 19, 26 | 73/73 Pins jetzt individuell (Fresh-Pin-Varianten) |
 | S2 | **Mitten im Wort abgeschnittene Beschreibungen** | „…wie Du Standby-" | Vollständige Texte, ≤ 500 Zeichen |
 | S3 | **Tippfehler in Keywords & URLs** | „50 30 20 reget", „Internet-Fiat", `pinterest.denrankstinanzcheck` (2× kaputt!) | Alle korrigiert |
 | S4 | **4 Pins ohne Typ** (EP/TP leer) | Tag 3, 9, 13, 22 | Alle typisiert: 50 EP / 12 TP |
@@ -227,7 +227,7 @@ Max. **3 Hashtags, ASCII-only** (Umlaute killen die Hashtag-Indexierung: `#spare
 |---|---|
 | Pinterest erlaubt Affiliate-Links, **verbietet aber Tarnung** | TP-Pins verlinken direkt auf `check24.de/...` – KEINE URL-Shortener, keine mehrstufigen Redirects |
 | Offenlegung der Affiliate-Natur | Jedes TP-Pin startet mit `*Werbung |` (im Masterplan eingebaut) + Bio enthält „(enthält Affiliate-Links)" |
-| Kein Spam-Verhalten | Max. 10 Pins/Tag, keine Duplikat-Flut → dank 62 einzigartiger Pins erledigt; Fresh-Pins statt Repins derselben URL am selben Tag |
+| Kein Spam-Verhalten | Max. 10 Pins/Tag, keine Duplikat-Flut → dank 73 einzigartiger Pins erledigt; Fresh-Pins statt Repins derselben URL am selben Tag |
 | Ausgewogenheit | 50 EP : 12 TP ≈ **80 % Mehrwert / 20 % Monetarisierung** – genau das Mischungsverhältnis, das Affiliate-Accounts vor Drosselung schützt |
 | Keine irreführenden Sparversprechen | Euro-Angaben immer als „bis zu" / „mehrere hundert Euro möglich" (im Masterplan durchgängig so gelöst) |
 | Blog-Seite | Disclaimer bereits brand-gelockt ✅ |
@@ -295,7 +295,7 @@ Max. **3 Hashtags, ASCII-only** (Umlaute killen die Hashtag-Indexierung: `#spare
 
 ## 10. Changelog Repo (25.08.2026)
 
-- `data/pinterest_plan.yaml` – 62 Pins Premium-überarbeitet (s. Tabelle 1.2, S1–S7)
+- `data/pinterest_plan.yaml` – 73 Pins Premium-überarbeitet (s. Tabelle 1.2, S1–S7)
 - `PINTEREST-PREMIUM-STRATEGIE.md` – dieses Dokument
 - `static/images/pins/premium-pin-stromfresser.png` – Template-Referenz T2 (Listen-Pin, EP)
 - `static/images/pins/premium-pin-50-30-20.png` – Template-Referenz T3 (Erklär-Pin, EP)
@@ -362,7 +362,7 @@ utm_source=franksfinanzcheck · utm_medium=affiliate · utm_campaign=<kategorie>
 
 ## 12. Zielseiten-System: Jeder Pin auf die richtige Blogseite (25.08.2026)
 
-**Der teuerste Fehler im alten Zustand:** 50 von 62 Pins zeigten zurück auf
+**Der teuerste Fehler im alten Zustand:** 50 von 73 Pins zeigten zurück auf
 `pinterest.de/franksfinanzcheck/` – also auf das eigene Profil. Das ist eine
 **Traffic-Sackgasse**: kein Blog-Besuch, kein Affiliate-Kontakt, kein Umsatz,
 und für Pinterest das Signal eines Kontos ohne Mehrwert-Ziel. Weitere 12 Pins
@@ -443,7 +443,7 @@ Pin-Lauf** (automatisch in der Engine, unabhängig von Workflow/Manual/RSS):
 | **LOCAL** (offline, jeder Lauf) | L1 Zielslug existiert im Repo (kein 404-Slug) · L2 kein Draft als Ziel · L3 nie fremde Domain (Profil/CHECK24) · L4 UTM-Attribution vorhanden · L5 URL exakt in Hugos Permalink-Form (Datumspräfix, Trailing-Slash) |
 | **LIVE** (CI, täglich im Watchdog) | V1 HTTP 200 · V2 finale URL bleibt auf `franksfinanzcheck.de` (keine Weiterleitung auf Fremddomains) · V3 `og:title` + `og:image` vorhanden (Rich-Pin-Scraping) · V4 kein Meta-Refresh-Alias |
 
-Geprüft werden **alle** Pin-Ziele: 62 Masterplan-Pins + Pin-Queue + die
+Geprüft werden **alle** Pin-Ziele: 73 Masterplan-Pins + Pin-Queue + die
 Permalinks **aller** veröffentlichten Artikel (die Basis jeder zukünftigen Pin).
 Report: `PINTEREST-LINK-GUARD-REPORT.md` · Bei Problemen: GitHub-Issue (Watchdog).
 

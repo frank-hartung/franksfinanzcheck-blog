@@ -1,80 +1,90 @@
-# 🔗 Anleitung: Deine persönlichen CHECK24-Links – mit nur einer Partner-ID
+# 🔗 Anleitung: CHECK24- & Tarifcheck-Links (zentrale Pflege)
 
-Deine Artikel verlinken aktuell direkt auf die CHECK24-Kategorieseiten – **ohne deine persönliche Partner-ID bekommst du keine Provision**. Ein kleines Skript setzt deine Partnerlinks in **allen** Artikeln automatisch ein. Du brauchst nur **eine** Zahl: deine CHECK24-Partner-ID.
+Die Affiliate-Links dieses Blogs liegen **zentral** in
+`scripts/check24_links.yaml`. Alle Artikel verlinken über das eigene
+Gateway `https://franksfinanzcheck.de/go/<kategorie>/` – Artikel selbst
+bleiben sauber und unabhängig von PID/Deep-Änderungen.
 
----
-
-## Schritt 1 – Partner-ID finden (einmalig)
-
-Deine CHECK24-Partner-ID ist die **Ziffernfolge** in deinem persönlichen Empfehlungslink aus dem CHECK24-Partnerprogramm:
-
-```
-https://www.check24.de/?pi=123456789
-                          └──┬───┘
-                     DEINE Partner-ID
-```
-
-> **Falls dein Link ein anderes Format hat** (z. B. `?partner=…` statt `?pi=…`): Das Skript erkennt das automatisch, wenn du ihm **einen** Beispiel-Link gibst (siehe Schritt 2, Variante B).
-
-## Schritt 2 – Links einsetzen (ein Befehl)
-
-**Variante A – nur die ID (Standard):**
-```bash
-# Vorschau (ändert nichts):
-python3 scripts/set_check24_links.py --id 123456789 --dry-run
-
-# Alle Artikel ersetzen:
-python3 scripts/set_check24_links.py --id 123456789
-```
-
-**Variante B – Beispiel-Link (falls dein Format anders ist):**
-```bash
-python3 scripts/set_check24_links.py --beispiel "https://www.check24.de/?pi=123456789"
-```
-Das Skript erkennt Parameter und ID aus diesem einen Link und baut daraus automatisch alle Kategorien-Links (Strom, Gas, DSL, Girokonto, Kredit, Kfz, Reisen, Mietwagen, Flüge + allgemein).
-
-**ID dauerhaft speichern (danach reicht ein Aufruf ohne Argumente):**
-```bash
-python3 scripts/set_check24_links.py --id 123456789 --save
-python3 scripts/set_check24_links.py          # nutzt die gespeicherte ID
-```
-
-## Schritt 3 – Auch den Bot versorgen (empfohlen)
-
-```bash
-python3 scripts/set_check24_links.py --id 123456789 --topics
-```
-Damit werden auch die Links im Themenpool (`data/topics.yaml`) ersetzt – **alle künftigen Bot-Artikel enthalten automatisch deine Partnerlinks**.
-
-## Schritt 4 – Prüfen & hochladen
-
-```bash
-# Kontrolle: Wie viele persönliche Links sind drin? (sollte ~19 sein)
-grep -rc "pi=123456789" content/posts/ | grep -v ":0" | wc -l
-
-# Alles committen und pushen (GitHub Pages baut automatisch neu):
-git add -A
-git commit -m "affiliate: persönliche CHECK24-Links in allen Artikeln eingesetzt"
-git push
-```
+**Wichtig:** Die frühere Anleitung mit `scripts/set_check24_links.py` ist
+**nicht mehr gültig** (das Skript existiert nicht mehr). Änderungen nimmt
+man heute ausschließlich in `scripts/check24_links.yaml` vor.
 
 ---
 
-## ℹ️ So funktioniert das Skript
+## 1. Partner-Pfad prüfen / aktualisieren
 
-- Ersetzt alle Standard-Links (`https://www.check24.de/strom/` usw.) durch deine persönlichen Links (`https://www.check24.de/strom/?pi=DEINE_ID`)
-- **Idempotent:** Beim zweiten Aufruf passiert nichts („0 ersetzt") – keine doppelten Parameter
-- **Sicher:** Deine ID wird in `scripts/check24_id.txt` gespeichert, die in `.gitignore` steht – sie wird **nie** ins Repository committet
-- **Kontrolle:** Am Ende meldet das Skript, falls ein Link übrig geblieben ist
-- `--dry-run` zeigt vorab alles an, ohne etwas zu ändern
+Öffne `scripts/check24_links.yaml` und passe die Werte an:
 
-## ❓ Häufige Fragen
+```yaml
+strom: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=strom"
+```
 
-**Muss ich das nach jedem neuen Artikel wiederholen?**
-Nein – wenn du einmal `--topics` ausgeführt hast, enthalten künftige Bot-Artikel automatisch deine Links.
+- **CHECK24:** `.../misc/click.php?pid=<PID>&aid=<AID>&deep=<kategorie>`
+- **Tarifcheck:** `.../click.php?partner_id=<PID>&ad_id=15&deep=<kategorie>`
+- Tracker, die die UTM-Parameter nicht akzeptieren, werden von der
+  Wochenwache automatisch auf den bekannten Zustand zurückgeheilt.
 
-**Wie teste ich, ob die Links funktionieren?**
-Link in einem privaten Browserfenster öffnen: Er muss auf CHECK24 weiterleiten und `?pi=DEINE_ID` in der Adressleiste enthalten. Den ersten Test-Kauf am besten mit einem kleinen Betrag machen.
+**Merkregel:** `pid=80968`/`partner_id=47086` kommen aus deinem
+Partner-Dashboard. Deep-Pfade aus dem Partnerprogramm (PDF) verwenden –
+**niemals** Kategorien erraten.
 
-**Kann ich das Skript bedenkenlos mehrfach ausführen?**
-Ja – bereits ersetzte Links werden erkannt und übersprungen.
+## 2. Gateway (/go/) neu generieren
+
+```bash
+python3 scripts/affiliate_shield.py --fix
+```
+
+- erzeugt/aktualisiert alle `static/go/<kategorie>/index.html`
+- jedes Gateway hat `noindex,nofollow,noarchive`
+- der Bot-Wächter `affiliate_health.py` prüft E2E, dass jede Route auf
+  die richtige Kategorie und die richtige PID zeigt.
+
+## 3. Bestehende Artikel abgleichen (falls nötig)
+
+```bash
+python3 scripts/affiliate_link_check.py --fix
+python3 scripts/affiliate_profi_check.py --fix
+```
+
+- `affiliate_link_check.py` ersetzt generische CTAs durch passende
+  Deep-Links und prüft Kategorie/PID.
+- `affiliate_profi_check.py` stellt Offenlegung, E-E-A-T, Trust-Box und
+  CTA-Slots sicher.
+
+## 4. Neue Bot-Artikel
+
+Der Content-Bot liest die Kategorie-Zuordnung ebenfalls aus
+`data/pinterest_plan.yaml` (`check24_kategorie`) und rückt sie vor dem
+Speichern in das `/go/`-Gateway um. Ein Ändern von
+`scripts/check24_links.yaml` wirkt also sofort auf alle **neuen** Artikel;
+für Bestand reicht Schritt 2 + 3.
+
+## 5. Verifizieren
+
+```bash
+# Jede im Blog verwendete /go/Route muss im Register stehen
+python3 scripts/affiliate_integrity_gate.py
+python3 scripts/affiliate_health.py --no-net
+```
+
+Test im Browser: `https://franksfinanzcheck.de/go/strom/` sollte auf
+Check24 mit deiner PID weiterleiten und die Seite
+`https://franksfinanzcheck.de/go/strom/` selbst darf **keinen** Index
+bekommen (Quelle: `robots.txt` + `<meta name="robots" content="noindex,...">`).
+
+---
+
+## FAQ
+
+**Ändert sich der Link pro Kategorie?**
+Ja – jede Kategorie hat einen eigenen `deep`-Pfad. Der Blog verwendet pro
+Thema genau die passende Kategorie statt eines generischen Portals.
+
+**Muss ich Artikel-Handarbeit machen?**
+Nein. Die Artikel verlinken nur `/go/<kategorie>/` und bleiben damit
+vollständig unabhängig von PID/Deep-Änderungen.
+
+**Wie testet man einen Link?**
+Link in einem privaten Browserfenster öffnen: Er muss auf die richtige
+Check24-Kategorie mit deiner PID weiterleiten. Ersten Test-Kauf am besten
+mit kleinem Betrag.

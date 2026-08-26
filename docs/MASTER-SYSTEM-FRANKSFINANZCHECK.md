@@ -304,7 +304,7 @@ MO/MI/FR 08:10 MESZ (content-engine-v2.yml – Dauervorgabe, s. 4.0)
 WÖCHENTLICH (seo-weekly.yml)   Mo 08:40
   → SEO-Audit, lastmod-Updates, interne Verlinkung nachziehen, Report
 WÖCHENTLICH (backlink-weekly.yml) Do 08:50 → Backlink-Report + Outreach-Vorbereitung
-WÖCHENTLICH (repin-weekly.yml)   → Pinterest-Repins (62-Pin-Plan; AKTIVIERUNG fehlt: PINTEREST_ACCESS_TOKEN)
+WÖCHENTLICH (repin-weekly.yml)   → Pinterest-Repins (73-Pin-Plan; AKTIVIERUNG fehlt: PINTEREST_ACCESS_TOKEN)
 VIERTELJÄHRLICH (update-quarterly.yml) → Evergreen-Aktualisierung
 TÄGLICH 10:30 (bot-watchdog.yml) → Selbstüberwachung (4 Checks, Issue bei Störung)
 IMMER (alert-on-failure.yml) → Fehler-Benachrichtigung
@@ -351,7 +351,7 @@ Body:
 
 | Kanal | Status | Plan |
 |---|---|---|
-| **Pinterest** | ⏳ Workflow `repin-weekly.yml` bereit, 62-Pin-Plan (`data/pinterest_plan.yaml`) – **fehlt: PINTEREST_ACCESS_TOKEN** (Du bist dran) + Board-ID-Variable | Aktivieren, sobald Token da |
+| **Pinterest** | ⏳ Workflow `repin-weekly.yml` bereit, 73-Pin-Plan (`data/pinterest_plan.yaml`) – **fehlt: PINTEREST_ACCESS_TOKEN** (Du bist dran) + Board-ID-Variable | Aktivieren, sobald Token da |
 | **LinkedIn / Instagram / Facebook** | ❌ Noch keine Automation | Ausbaustufe 2 (nach Pinterest): 3 Posts je Artikel (Textbausteine in `generate_social_posts.py`) – als neue Workflow-Idee notiert |
 | **Newsletter** | ❌ Noch kein System | Siehe 6.4 (Funnel + Anbieter-Empfehlung) |
 
@@ -767,7 +767,7 @@ Automatisierung: Newsletter-Aufbau-Workflow ergänzt daily-content.yml (Liste de
 
 | Phase | Ziel | Maßnahmen | KPI |
 |---|---|---|---|
-| **1. Fundament** (0–2k/Monat, jetzt) | 100 Artikel, alle Gates grün, Pinterest aktiv | 2 Artikel/Tag → 4 Artikel/Tag (Variable `MAX_ARTIKEL_PRO_TAG=4` setzen!), Pinterest-Token, Newsletter-Start | 39 → 100 Artikel, 62 Pins |
+| **1. Fundament** (0–2k/Monat, jetzt) | 100 Artikel, alle Gates grün, Pinterest aktiv | 2 Artikel/Tag → 4 Artikel/Tag (Variable `MAX_ARTIKEL_PRO_TAG=4` setzen!), Pinterest-Token, Newsletter-Start | 39 → 100 Artikel, 73 Pins |
 | **2. Autorität** (2–10k, Monat 3–8) | Top-10-Rankings Long-Tail, erste Short-Tail | FAQ-Schema, GSC-Auswertung, Backlinks (Finanzblogroll, 6 Gastartikel), E-Book-Start | 100+ Keywords in Top 20 |
 | **3. Wachstum** (10–50k, Monat 9–18) | Featured Snippets, Video/Aufbau | Kurzvideo-Skripte (Social), Newsletter 2.000+, Produktvergleiche, Kooperationen | 1.000+ Rankings |
 | **4. Dominanz** (50–100k, Monat 19–30) | Short-Tail, Marke | Kurs-Launch, Podcast-Gäste, PR, zweites Standbein (YouTube) | 5.000+ Rankings, 20 % Direkt-Traffic |
@@ -796,7 +796,7 @@ Automatisierung: Newsletter-Aufbau-Workflow ergänzt daily-content.yml (Liste de
 
 | # | Aktion | Aufwand |
 |---|---|---|
-| 1 | Pinterest-Token erzeugen → `PINTEREST_ACCESS_TOKEN` + `PINTEREST_BOARD_ID` Secrets → repin-weekly aktivieren (62-Pin-Plan liegt bereit) | 10 min |
+| 1 | Pinterest-Token erzeugen → `PINTEREST_ACCESS_TOKEN` + `PINTEREST_BOARD_ID` Secrets → repin-weekly aktivieren (73-Pin-Plan liegt bereit) | 10 min |
 | 2 | Variable `MAX_ARTIKEL_PRO_TAG=4` setzen (Zeitfenster stehen bereit) | 2 min |
 | 3 | FAQPage- + Breadcrumb-Schema implementieren (nächster SEO-Commit) | 1 h |
 | 4 | „Über Frank"-Seite (E-E-A-T) + GSC-Domain-Property | 30 min |

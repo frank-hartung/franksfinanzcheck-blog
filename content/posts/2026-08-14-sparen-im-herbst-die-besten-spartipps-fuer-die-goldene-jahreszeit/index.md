@@ -18,8 +18,8 @@ kurzantwort: "Der Herbst ist die lukrativste Spar-Saison des Jahres. Durch den S
 
 social_posted: true
 keywords: ["Sparen im Herbst", "Herbst Spartipps", "Fixkosten senken", "Kfz Stichtag 30 November", "Finanzen optimieren", "Frugalismus", "Geld sparen"]
-pin_title: "Sparen im Herbst: Die besten Spartipps für die goldene"
-pin_description: "*Werbung | Sparen im Herbst: Mit diesen 7 praxiserprobten Spartipps für Heizung, Versicherungen, Kfz-Wechsel und Haushaltsbudget sparst du bis zu 1.250 €. Mehr Spartipps auf FranksFinanzcheck! #sparenimherbst #herbstspartipps #fixkostensenken"
+pin_title: Mit diesen 5 Frugalismus-Tricks sparst du jeden Monat dreistellig
+pin_description: "100 €, 150 €, 200 € mehr am Monatsende – ohne harte Diät fürs Leben: Diese 5 Frugalismus-Tricks zielen genau auf die größten Geldfresser des Alltags, von Abo-Leichen über Meal Prep bis zur Einkaufslisten-Regel. Jetzt durchrechnen!"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 ---
 
@@ -62,10 +62,10 @@ Statt teurer Indoor-Spielplätze oder Freizeitparks bietet der Herbst wunderbare
 
 | Sparmaßnahme | Zeitaufwand | Typische Ersparnis |
 |:---|:---|:---|
-| Kfz-Versicherung wechseln (bis 30.11.) | 30 Minuten | **180–350 €** |
+| [Kfz-Versicherung wechseln](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) (bis 30.11.) | 30 Minuten | **180–350 €** |
 | [Heizung entlüften](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) & Thermostate einstellen | 45 Minuten | **160–240 €** |
 | Strom- & Gastarif optimieren | 20 Minuten | **300–450 €** |
-| Privathaftpflicht & Hausrat anpassen | 25 Minuten | **80–150 €** |
+| [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) & Hausrat anpassen | 25 Minuten | **80–150 €** |
 | Saisonales Einkaufen & Kochen | fortlaufend | **150–250 €** |
 | **Gesamtes Einsparpotenzial** | **ca. 2 Stunden** | **bis zu 1.440 €** |
 

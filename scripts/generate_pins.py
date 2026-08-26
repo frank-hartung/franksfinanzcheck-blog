@@ -116,7 +116,7 @@ def main():
     try:
         import pinterest_auth
         token = pinterest_auth.get_access_token() or os.environ.get("PINTEREST_ACCESS_TOKEN", "").strip()
-    except Exception as _auth_err:
+    except BaseException as _auth_err:  # noqa: BLE001 – auch SystemExit aus defekter Token-Datei abfangen
         print(f"⚠ Pinterest-Token-Refresh übersprungen ({_auth_err}) – nutze Env-Token.")
         token = os.environ.get("PINTEREST_ACCESS_TOKEN", "").strip()
     board_id = os.environ.get("PINTEREST_BOARD_ID", "").strip()

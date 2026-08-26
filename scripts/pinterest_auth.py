@@ -73,16 +73,23 @@ def _save(token_data: dict) -> None:
 
 
 def _load() -> dict | None:
-    """Liest und entschlüsselt das Token-Paket (None, wenn nicht vorhanden)."""
+    """Liest und entschlüsselt das Token-Paket (None, wenn nicht vorhanden).
+
+    Bei fehlendem/falschem Schlüssel wird NICHT mehr das ganze Skript
+    beendet (SystemExit), sondern None zurückgegeben – die Pinterest-Engine
+    fällt dann sauber auf den klassischen Env-Token (PINTEREST_ACCESS_TOKEN)
+    zurück. Nur der explizite CLI-Status-Befehl alarmiert weiterhin.
+    """
     if not TOKEN_FILE.exists():
         return None
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
     raw = TOKEN_FILE.read_bytes()
     try:
         return json.loads(AESGCM(_key_bytes()).decrypt(raw[:12], raw[12:], None))
-    except Exception as exc:
-        sys.exit(f"FEHLER: data/pinterest_tokens.enc nicht entschlüsselbar "
-                 f"(falscher PINTEREST_TOKEN_KEY?): {exc}")
+    except Exception as exc:  # noqa: BLE001
+        print(f"⚠ data/pinterest_tokens.enc nicht entschlüsselbar "
+              f"(falscher PINTEREST_TOKEN_KEY?) – nutze Env-Token: {exc}")
+        return None
 
 
 # ---------------------------------------------------------------- OAuth-Calls

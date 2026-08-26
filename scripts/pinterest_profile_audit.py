@@ -9,10 +9,10 @@ mit dem Soll-Zustand aus `data/pinterest_profile_target.yaml` +
 Copy-Paste-Anleitung für jede Abweichung.
 
 Prüft (mit Token, API v5):
-  A1  Display-Name      (full_name)      gegen Soll
-  A2  Bio               (description)    gegen Soll (Keyword-Dichte,
+  A1  Display-Name      (full_name)       gegen Soll
+  A2  Bio               (about)           gegen Soll (Keyword-Dichte,
                                           Affiliate-Offenlegung)
-  A3  Website           (website)        gegen Soll
+  A3  Website           (website_url)     gegen Soll
   A4  Board-Vollstand   alle 6 Premium-Boards vorhanden?
   A5  Board-Namen       exakte Übereinstimmung (SEO-Meeting-Point)
   A6  Board-Description  SEO-Texte wie im Soll (≤ 500 Zeichen)
@@ -20,13 +20,20 @@ Prüft (mit Token, API v5):
                                           die Topical Authority)
   A8  Account-Typ       business
 
+API v5 (WICHTIG, FIX 26.08.):
+  - GET /v5/user_account  (NICHT /me – /me existiert in v5 nicht)
+  - Profilfelder: full_name, about, website_url, account_type,
+    username, profile_image, board_count, pin_count, follower_count
+  - Die alten Schlüssel "description" und "website" gibt es in der
+    /v5/user_account-Antwort nicht und würden immer leer bleiben.
+
 Ohne Token (oder ohne profile:read-Scope):
   Der Audit liefert das komplette Copy-Paste-Paket aus dem
   Soll-Zustand als manuelle Checkliste – der Lauf bleibt grün
   (Konvention: Reporting, kein Fehler-Alerting).
 
 API-Scopes: boards:read + boards:write (vorhanden) reichen für
-Boards; für Name/Bio/Website zusätzlich `profile:read` in der
+Boards; für Name/Bio/Website zusätzlich `user_accounts:read` in der
 Pinterest-Developer-App aktivieren (siehe ANLEITUNG-PINTEREST-API.md).
 
 Ausgabe: PINTEREST-PROFILE-REPORT.md
@@ -58,6 +65,22 @@ REPORT = os.path.join(BLOG_DIR, "PINTEREST-PROFILE-REPORT.md")
 API = "https://api.pinterest.com/v5"
 PROFILE_URL = "https://de.pinterest.com/franksfinanzcheck/"
 AS_JSON = "--json" in sys.argv
+
+# v5-Feldnamen (Fix 26.08.): Der Namespace der /user_account-Antwort
+# nutzt `about` und `website_url` – `description`/`website` existieren nicht.
+USER_FIELDS = "full_name,about,website_url,account_type,username,board_count,pin_count,follower_count"
+
+# Board-Cover-Zuordnung (Premium, 26.08.): Die Dateien liegen in
+# static/images/boards/*.png und sind im Dashboard bei jeder Board-Bearbeitung
+# als Cover hochzuladen. Name → Datei ist hier fest definiert (Single Source).
+BOARD_COVERS = {
+    "Geld sparen im Alltag | Frugalismus-Tipps": "images/boards/cover-geld-sparen.png",
+    "Budget & Haushaltskasse: clever planen": "images/boards/cover-budget.png",
+    "Strom & Gas sparen | Tarife clever wechseln": "images/boards/cover-strom-gas.png",
+    "Internet & DSL | WLAN-Tipps & Tarife": "images/boards/cover-internet-dsl.png",
+    "Günstig reisen | Reisebudget & Mietwagen": "images/boards/cover-reisen.png",
+    "Versicherungen clever wechseln & sparen": "images/boards/cover-versicherungen.png",
+}
 
 
 # ---------------------------------------------------------------- Token
@@ -129,14 +152,14 @@ def main() -> int:
         api_notes.append("Kein PINTEREST_ACCESS_TOKEN/Tokens-Datei – "
                          "Copy-Paste-Checkliste unten (Dashboard-Abgleich).")
     else:
-        st, me = api_get("/me", token)
+        st, me = api_get(f"/user_account?fields={urllib.parse.quote(USER_FIELDS)}", token)
         if st == 200:
             profile_live = me
         else:
             err = me.get("error") or me.get("message") or me.get("detail") or f"HTTP {st}"
-            api_notes.append(f"/me nicht verfügbar ({err}). Name/Bio/Website "
+            api_notes.append(f"/user_account nicht verfügbar ({err}). Name/Bio/Website "
                              "werden aus dem Soll-Zustand als Checkliste geliefert. "
-                             "→ Scope `profile:read` in der Pinterest-Developer-App "
+                             "→ Scope `user_accounts:read` in der Pinterest-Developer-App "
                              "hinzufügen (ANLEITUNG-PINTEREST-API.md, Abschnitt Scopes).")
         st, boards_resp = api_get("/boards?page_size=100&board_fields=id,name,description,pins_count", token)
         if st == 200:
@@ -148,14 +171,21 @@ def main() -> int:
     checks: list[tuple[str, str, bool, str, str, str]] = []  # code, name, ok, status, aktuell, soll
     a_ok, a_st = diff_status(profile_live.get("full_name", ""), prof.get("display_name", ""))
     checks.append(("A1", "Display-Name", a_ok, a_st, profile_live.get("full_name", "–"), prof.get("display_name", "")))
-    b_ok, b_st = diff_status(profile_live.get("description", ""), prof.get("bio", ""))
-    checks.append(("A2", "Bio (500 Z.)", b_ok, b_st, (profile_live.get("description", "–") or "–")[:120], prof.get("bio", "")))
-    c_ok, c_st = diff_status(profile_live.get("website", ""), prof.get("website", ""))
-    checks.append(("A3", "Website", c_ok, c_st, profile_live.get("website", "–") or "–", prof.get("website", "")))
+    b_ok, b_st = diff_status(profile_live.get("about", ""), prof.get("bio", ""))
+    checks.append(("A2", "Bio (500 Z.)", b_ok, b_st, (profile_live.get("about", "–") or "–")[:120], prof.get("bio", "")))
+    c_ok, c_st = diff_status(profile_live.get("website_url", ""), prof.get("website", ""))
+    checks.append(("A3", "Website", c_ok, c_st, profile_live.get("website_url", "–") or "–", prof.get("website", "")))
     acct = profile_live.get("account_type", "")
     if acct:
         checks.append(("A8", "Account-Typ", acct.lower() == "business",
                        acct or "–", acct or "–", "business"))
+    # Counts (pure Info, machen das Profil-Leistungsbild im Report sichtbar)
+    profile_stats = {
+        "username": profile_live.get("username", "–"),
+        "board_count": profile_live.get("board_count", "–"),
+        "pin_count": profile_live.get("pin_count", "–"),
+        "follower_count": profile_live.get("follower_count", "–"),
+    }
 
     # ---------------- A4–A7 Boards
     live_by_name = {}
@@ -200,6 +230,14 @@ def main() -> int:
     lines += ["## Profil", "", "| Check | Status | Aktuell | Soll |", "|---|---|---|---|"]
     for code, name, ok, status, act, soll in checks:
         lines.append(f"| {code} {name} | {'✅' if ok else '❌'} {status} | {act[:80]} | {soll[:80]} |")
+    # Profil-Kennzahlen nur als Info-Zeile, wenn LIVE-API (sonst kein Wert).
+    if mode == "LIVE-API":
+        lines += ["", "### Live-Kennzahlen", "",
+                  f"- **Username:** {profile_stats.get('username', '–')}",
+                  f"- **Boards:** {profile_stats.get('board_count', '–')}",
+                  f"- **Pins:** {profile_stats.get('pin_count', '–')}",
+                  f"- **Follower:** {profile_stats.get('follower_count', '–')}",
+                  ""]
     lines += ["", "## Boards", "", "| Board | Status | Pins | Beschreibung (Live) |", "|---|---|---|---|"]
     for r in board_rows:
         lines.append(f"| {r['name']} | {'✅' if r['status'] == 'OK' else '❌'} {r['status']} | {r['pins'] if r['pins'] is not None else '–'} | {r.get('desc_live', '')} |")
@@ -222,10 +260,14 @@ def main() -> int:
         lines.append("**Board-Namen + Beschreibungen** (Board → Bearbeiten):")
         for b in boards_cfg:
             lines.append("")
-            lines.append(f"### {b['name']}")
-            lines.append("```")
-            lines.append(b.get("description", ""))
-            lines.append("```")
+        lines.append(f"### {b['name']}")
+        lines.append("```")
+        lines.append(b.get("description", ""))
+        lines.append("```")
+        cover = BOARD_COVERS.get(b["name"])
+        if cover:
+            lines.append("")
+            lines.append(f"**Board-Cover:** `static/{cover}` (als Cover-Bild in der Board-Bearbeitung hochladen)")
         if extra:
             lines.append("")
             lines.append("**Boards auflösen/umbenennen** (nicht im Soll-Zustand): "
@@ -236,10 +278,12 @@ def main() -> int:
         "## Manuelle Checkpunkte (nicht per API prüfbar)",
         "",
         "- [ ] Profilbild: `static/images/social/pinterest-profilbild-marke-1000.png` (Foto + Gold-Ring + Badge) hochgeladen",
-        "- [ ] Board-Cover: 6er-Set aus `static/images/boards/` je Board gesetzt",
-        "- [ ] Business-Account aktiv (Einstellungen → Konto)",
+        "- [ ] Board-Cover: 6er-Set hochgeladen (Zuordnung siehe Board-Liste oben)",
+        "- [ ] Business-Account aktiv (Einstellungen → Konto) – Anzeigename/Bio/Website nur im Business-Konto voll editierbar",
         "- [ ] Verifizierte Website: `franksfinanzcheck.de` (Claim-Datei + `p:domain_verify` liegen live)",
         "- [ ] Rich Pins aktiviert (1× validieren: developers.pinterest.com/tools/url-debugger)",
+        "", "## Board-Cover-Zuordnung (Premium, 26.08.2026)", "",
+        *[f"- **{name}** → `static/{cover}`" for name, cover in BOARD_COVERS.items()],
         "",
         "---",
         "",

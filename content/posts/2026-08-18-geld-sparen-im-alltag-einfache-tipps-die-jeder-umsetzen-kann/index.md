@@ -18,8 +18,8 @@ kurzantwort: "Erfolgreiches Sparen im Alltag basiert nicht auf radikalem Verzich
 
 social_posted: true
 keywords: ["Geld sparen im Alltag", "Alltagsspartipps", "Sparen ohne Verzicht", "Fixkosten reduzieren", "Haushaltsbudget planen", "Frugalismus"]
-pin_title: 5 einfache Frugalismus-Tricks für den Alltag
-pin_description: "*Werbung | Geld sparen ohne Verzicht-Stress: Diese 5 praxiserprobten Frugalismus-Tricks senken deine Alltagsausgaben ab Tag 1 – von der 24-Stunden-Regel bis zum No-Spend-Weekend. Jetzt alle Tricks im Guide nachlesen."
+pin_title: "Frugalismus für Einsteiger: 5 Tricks, die sofort funktionieren"
+pin_description: "Frugalismus klingt nach Verzicht – ist aber cleveres Priorisieren: Diese 5 Einsteiger-Tricks zeigen, wie du ohne Verzichtsgefühl 100 € und mehr im Monat freischaufelst. Inklusive der beliebten 30-Tage-Wunschliste. Jetzt starten!"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 ---
 

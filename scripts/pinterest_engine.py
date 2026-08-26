@@ -57,7 +57,7 @@ API = "https://api.pinterest.com/v5"
 try:
     import pinterest_auth
     TOKEN = pinterest_auth.get_access_token() or os.environ.get("PINTEREST_ACCESS_TOKEN", "")
-except Exception as _auth_err:
+except BaseException as _auth_err:  # noqa: BLE001 – auch SystemExit aus defekter Token-Datei abfangen
     print(f"⚠ Pinterest-Token-Refresh übersprungen ({_auth_err}) – nutze Env-Token.")
     TOKEN = os.environ.get("PINTEREST_ACCESS_TOKEN", "")
 BOARD_ID = os.environ.get("PINTEREST_BOARD_ID", "")
@@ -275,8 +275,11 @@ def pin_text(post):
     desc = post["description"] or post["title"]
     desc = desc.replace("&", "und")
     hashtags = hashtags_for(post)
-    # Werbekennzeichnung (deutsches Recht): Artikel enthalten Affiliate-Links.
-    text = f"*Werbung | {desc} Mehr Spartipps auf FranksFinanzcheck! {hashtags}"
+    # Werbekennzeichnung kam bereits über pin_description (Pin-Sync, Single
+    # Source of Truth). Fallback hier NICHT generisch als *Werbung markieren,
+    # sonst werden EP-Pins fälschlich als Werbung gekennzeichnet. TP-Pins
+    # tragen ihren `*Werbung |`-Prefix in der synchronisierten Beschreibung.
+    text = f"{desc} Mehr Spartipps auf FranksFinanzcheck! {hashtags}"
     return text[:500]
 
 
@@ -393,7 +396,7 @@ def main():
         print((r.stdout or "") + (r.stderr or ""))
         return r.returncode
 
-    if not list_boards:
+    if not list_boards and not dry_run:
         heal_pin_links()
         heal_pin_text_sync()
 

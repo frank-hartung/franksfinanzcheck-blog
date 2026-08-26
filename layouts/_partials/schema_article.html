@@ -64,7 +64,7 @@
     "url": {{ site.BaseURL | jsonify }},
     "logo": {
       "@type": "ImageObject",
-      "url": {{ (printf "%simages/logo.png" site.BaseURL) | jsonify }}
+      "url": {{ (printf "%simages/brand/logo.svg" site.BaseURL) | jsonify }}
     }
   },
   "datePublished": {{ $published | jsonify }},
