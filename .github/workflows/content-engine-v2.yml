@@ -59,6 +59,10 @@ jobs:
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
+        
+      - name: Python-Abhängigkeiten installieren
+        run: |
+          python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli 2>/dev/null || true
 
       # ================= PHASE 0: PRE-FLIGHT =================
       - name: Pre-Flight-Check (Syntax, Keys, Themenpool)
@@ -76,7 +80,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
-          MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '1' }}
+          MAX_ARTIKEL_PRO_TAG: MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}
+          MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
           # Freigabe-Modus (13.08.): Default "profi" = nur Artikel mit
           # bestandenem Profi-Qualitäts-Gate werden automatisch veröffentlicht.
           # Es gibt keine abgeschwächte Zwischenstufe mehr (Relaxed am
@@ -327,7 +332,8 @@ jobs:
       - name: Phase 5 – Status-Dashboards aktualisieren
         if: ${{ always() }}
         env:
-          MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '1' }}
+          MAX_ARTIKEL_PRO_TAG: ${{ MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}
+          MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
         run: |
           python3 scripts/bot_status.py || true
           git config user.name "Content-Bot"
