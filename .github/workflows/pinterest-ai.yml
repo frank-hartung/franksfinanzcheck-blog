@@ -73,7 +73,7 @@ jobs:
           git config user.email "pinterest-bot@users.noreply.github.com"
           # pinterest_tokens.enc ist erst da, wenn du den OAuth-Handschlag
           # gemacht hast – ohne Datei trotzdem committen (12.08. gehaertet).
-                    git add PIN-STATUS.md data/pin_queue.yaml content/posts/ 2>/dev/null || true
+          git add PIN-STATUS.md data/pin_queue.yaml content/posts/ 2>/dev/null || true
           [ -f data/pinterest_tokens.enc ] && git add data/pinterest_tokens.enc 2>/dev/null || true
           [ -f data/pinterest_boards_cache.json ] && git add data/pinterest_boards_cache.json 2>/dev/null || true
           if git diff --cached --quiet; then
