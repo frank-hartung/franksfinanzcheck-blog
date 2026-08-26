@@ -41,20 +41,19 @@ jobs:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
-      - name: Krypto-Bibliothek für Token-Auto-Refresh installieren
-        run: pip install -q cryptography
+      - name: Krypto- und YAML-Bibliotheken für Token-Auto-Refresh & Engine installieren
+        run: pip install -q pyyaml cryptography
 
       - name: Pinterest-Bereitschaft prüfen (sauber skip ohne Keys)
         id: bereit
         # 12.08.: Kein Secret + keine enc -> kein roter Tageslauf mehr.
-        # Solange der App-Trial wartet, bleibt dieser Workflow leise gruen.
+        # Token-Quelle 1: PINTEREST_TOKEN_KEY + data/pinterest_tokens.enc
+        # Token-Quelle 2: PINTEREST_ACCESS_TOKEN Secret
+        # Ohne Token: Engine läuft im Queue-Modus (data/pin_queue.yaml + PIN-STATUS.md)
         env:
+          PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
           PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
         run: |
-          if [ -z "$PINTEREST_TOKEN_KEY" ] || [ ! -f data/pinterest_tokens.enc ]; then
-            echo "bereit=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
           echo "bereit=true" >> "$GITHUB_OUTPUT"
 
       - name: Pinterest-Engine ausführen (Posten oder Queue)
@@ -74,8 +73,7 @@ jobs:
           git config user.email "pinterest-bot@users.noreply.github.com"
           # pinterest_tokens.enc ist erst da, wenn du den OAuth-Handschlag
           # gemacht hast – ohne Datei trotzdem committen (12.08. gehaertet).
-          git add PIN-STATUS.md data/pin_queue.yaml content/posts/ || true
-          [ -f data/pinterest_tokens.enc ] && git add data/pinterest_tokens.enc || true
+         git add PIN-STATUS.md
           if git diff --cached --quiet; then
             echo "Keine Änderungen."
           else
