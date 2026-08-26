@@ -570,6 +570,25 @@ Unbypassbar: A1–A4 laufen im Code von `pinterest_engine.py` /
 `generate_pins.py` (importiert, nicht Workflow-Schritt).| Spam-Profil (Claims, Stuffing, Disclosure, Klon) | spam_guard --fix (Blog: Disclosure/Pin-Text einfügen oder hart → draft; Feed: Spezial-Heiler; CSV: Neu-Schreibung; nie Content-Verlust) |
 | Repeat-Pin (gleicher Artikel 2×, beliebiger Kanal) | Pin-Registry `data/pin_history.jsonl` + 30-Tage-Rotation (A2/C7 blockiert, `--sync-pins` füllt aus RSS-Live-Pins) |
 | Pinterest-API-Rate-/Spam-Antwort (429/403) | spam_guard A3 (eskalierende Pause 1 h → 24 h → 7 Tage, State `data/spam_state.json`, Reset nur `--reset-pause`) |
-| Spam-Wache selbst defekt | spam_guard --selftest (Exit 2 bricht CI ab; läuft vor jeder --fix-Aktion) |
+| Spam-Wache selbst defekt | spam_guard --selftest (Exit 2 bricht CI ab; läuft vor jeder --fix-Aktion) |`CADENCE-GATE-REPORT.md` · `SPAM-REPORT.md` (plus `data/spam_state.json`,
+`data/pin_history.jsonl`, `data/spam_history.jsonl`)- **26.08.2026 (Spam-Schutz):** `spam_guard.py` neu – dauerhafter
+  Spam-Schutz mit sofortiger Selbstheilung für alle vier Kanäle
+  (Blog B1–B8, RSS-Feed F1–F6, CSV-Upload C1–C8, Pinterest-API A1–A4;
+  Details: `SPAM-SCHUTZ.md`). Kern: Cross-Channel-Pin-Registry
+  (`data/pin_history.jsonl`, Repeat-Fenster 30 Tage, Füllung auch aus
+  den RSS-Live-Pins via `--sync-pins`), API-Rate-Limits 10/h + 40/Tag
+  mit eskalierender Pause (1 h → 24 h → 7 Tage) bei Spam-/Rate-
+  Antworten, `--gen-csv` (kanonisches Pinterest-Bulk-Format,
+  Kadenz-verteiltes Scheduling) + CSV-Validator mit Live-Link-Check.
+  Eingebunden: Deploy-Gate (vor Publish), Content-Engine v2 (neue
+  Artikel), Pinterest-Watchdog (täglich + sync-pins), Blog-Health
+  (täglich) – und UNBYPASSBAR in `pinterest_engine.py` /
+  `generate_pins.py` (A1–A4 im Code). Erster Beleg-Lauf: 20 Posts
+  geheilt (B8: `*Werbung`-Präfix in `pin_description` – ohne diesen
+  Fix hätte die API Pin-Texte ohne Werbekennzeichnung erstellt),
+  danach 0 harte Funde, 18 live / 7 draft (Kadenz unverändert).
+  Selftest: 27 eingefrorene Fälle inkl. Regression „B2-warn +
+  B8-hard → heilen, nie demoten“.
+
 
 
