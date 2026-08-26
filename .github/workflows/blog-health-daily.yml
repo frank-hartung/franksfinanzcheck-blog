@@ -18,7 +18,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v7
-      - run: pip install pyyaml
+      - run: pip install -q pyyaml pillow pillow-avif-plugin
+
+      # KADENZ-SICHERUNG (26.08.2026): die tägliche Wache stellt sicher,
+      # dass die Dauervorgabe (Mo/Mi/Fr, 2–3 Artikel/Tag – CADENCE-REPORT.md
+      # Regel 2) auch ZWISCHEN den Publishing-Slots eingehalten wird:
+      # Selbsttest (Gate muss lauffähig sein) + Selbstheilung (Zurückstufung
+      # + Re-Queue) + Titel-Gate (R1–R5) + Cover-Gate (Varianten, Stale,
+      # Brand, C4 Text-Komplettheit). Heilungen landen im Commit unten.
+      - run: python3 scripts/cadence_guard.py --selftest
+      - run: python3 scripts/cadence_guard.py --fix
+      - run: python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate – Funde im Log (R5 heilt nicht automatisch)"
+      - run: python3 scripts/check_covers.py --fix || echo "⚠ Cover-Gate – Funde im Log"
+
       - run: python3 scripts/blog_health_gate.py
       - run: |
           git config user.name "Agent (Arena.ai)"
