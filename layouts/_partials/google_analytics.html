@@ -9,7 +9,7 @@
     siehe `layouts/_partials/extend_head.html` / `site.Params.umami`.
     Soll klassisches GA4 genutzt werden, folgt hier der Standard-Tag,
     solange `site.Config.Services.GoogleAnalytics.ID` gesetzt ist.
--}}
+*/ -}}
 {{- with site.Config.Services.GoogleAnalytics.ID -}}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
     <script>
