@@ -1,0 +1,21 @@
+{{- /* Google Analytics (muss im Hugo-Partial-Resolve-Ordner existieren).
+
+    Dieses Partial wird von PaperMod (und der Site-`head.html`) im
+    Produktions-Build referenziert. Die Datei fehlte bisher vollständig
+    (weder Site noch Theme) → `hugo --minify` brach mit „partial
+    "google_analytics.html" not found“ ab.
+
+    Analytics ist hier deaktiviert: Um Umami (DSGVO-freundlich) zu nutzen,
+    siehe `layouts/_partials/extend_head.html` / `site.Params.umami`.
+    Soll klassisches GA4 genutzt werden, folgt hier der Standard-Tag,
+    solange `site.Config.Services.GoogleAnalytics.ID` gesetzt ist.
+-}}
+{{- with site.Config.Services.GoogleAnalytics.ID -}}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ . }}');
+    </script>
+{{- end -}}

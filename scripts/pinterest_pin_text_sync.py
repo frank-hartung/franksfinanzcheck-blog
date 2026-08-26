@@ -14,7 +14,8 @@ Meta-Description bauen und die Board-Zuordnung per Pillar-Fallback
 raten. Der Sync schließt diese Lücke in beiden Richtungen:
 
   S1  pin_title        ← Plan-Pin-Titel (kuratiert, keyword-first)
-  S2  pin_description  ← Plan-Pin-Beschreibung (mit *Werbung |, ≤ 500 Z.)
+  S2  pin_description  ← Plan-Pin-Beschreibung (Werbung-Kennzeichnung wie im Plan: TP-Pins
+                          mit `*Werbung |`, EP-Pins ohne – ≤ 500 Z.)
   S3  pinwand          ← Board-Name aus dem Plan (Multi-Board-Routing)
 
 Matching: Artikel → bester Plan-Pin via Token-Scoring (identische
@@ -57,6 +58,7 @@ AS_JSON = "--json" in sys.argv
 
 PIN_TITLE_MAX = 100
 PIN_DESC_MAX = 500
+SELF_TARGET_BONUS = 2.0  # bevorzugt den eigenen Artikel-Ziel-Pin
 PIN_DESC_MIN = 40          # kürzer = sicherheitshalber deterministisch neu
 MIN_SYNC_SCORE = 1.20      # etwas konservativer als Link-Healer (1.10):
                            # hier wird Text ÜBERSCHRIEBEN – nur klare Matches
@@ -126,17 +128,42 @@ def pin_title_valid(t: str) -> bool:
 
 
 def clean_pin_description(beschreibung: str) -> str:
-    """Premium-Beschreibung aus dem Plan → pin_description-fertig."""
+    """Premium-Beschreibung aus dem Plan → pin_description-fertig.
+
+    Die Werbekennzeichnung kommt 1:1 aus dem Plan (Single Source of Truth):
+    TP/Affiliate-Pins enthalten `*Werbung |`, EP-Pins nicht. Die Funktion
+    ergänzt keinen Prefix mehr, damit EP-Pins nicht fälschlich als Werbung
+    markiert werden (Dauervorgabe „nur Affiliate/TP-Pins“).
+    """
     t = (beschreibung or "").strip().replace("&", "und")
     t = re.sub(r"\s+", " ", t)
-    if not t.startswith("*Werbung"):
-        t = f"*Werbung | {t}"
     return t[:PIN_DESC_MAX]
 
 
 def pin_desc_valid(d: str) -> bool:
     d = (d or "").strip()
     return len(d) >= PIN_DESC_MIN and len(d) <= PIN_DESC_MAX and "&" not in d
+
+
+def pin_target_slug(pin: dict) -> str:
+    """Slug des Artikel-Ziels eines Plan-Pins (blog_url/url → /posts/<slug>/)."""
+    u = (pin.get("blog_url") or pin.get("url") or "")
+    m = re.search(r"/posts/(\d{4}-\d{2}-\d{2}-[^/?]+)/", u)
+    return m.group(1) if m else ""
+
+
+def match_score(post: dict, pin: dict, board_pillar: dict | None) -> float:
+    """Score des Pins für den Artikel inkl. Self-Target-Bonus.
+
+    Ein Pin, dessen Ziel-URL exakt der Artikel ist (blog_url == slug), soll
+    bevorzugt diesen Artikel bedienen – das verhindert, dass ein Artikel
+    seinen eigenen Premium-Text an einen thematisch ähnlichen, aber falschen
+    Artikel verliert (z. B. Haushaltsbuch-Pin an den Frugalismus-Artikel).
+    """
+    s = score(post, pin, board_pillar)
+    if s > 0 and pin_target_slug(pin) == post["slug"]:
+        s += SELF_TARGET_BONUS
+    return s
 
 
 # ---------------------------------------------------------------- Matching
@@ -240,13 +267,13 @@ def _selftest() -> list[str]:
     c3 = fm_set(c, "pinwand", "Strom & Gas sparen | Tarife clever wechseln")
     if "pinwand:" not in c3 or c3.count("pinwand:") != 1:
         fehler.append("fm_set anlegen defekt")
-    # Werbekennzeichnung
-    d = clean_pin_description("Heizkosten senken: 6 Tipps")
-    if not d.startswith("*Werbung | "):
-        fehler.append("Werbung-Prefix defekt")
-    d2 = clean_pin_description("*Werbung | schon gekennzeichnet")
-    if d2.count("*Werbung") != 1:
-        fehler.append("Werbung-Prefix doppelt")
+    # Werbekennzeichnung: Nur TP/Affiliate-Pins tragen *Werbung, EP-Pins nicht.
+    d_ep = clean_pin_description("Heizkosten senken: 6 Tipps")
+    if "*Werbung" in d_ep:
+        fehler.append("EP-Pin darf kein *Werbung tragen")
+    d_tp = clean_pin_description("*Werbung | Top-Tarife vergleichen")
+    if d_tp.count("*Werbung") != 1 or not d_tp.startswith("*Werbung | "):
+        fehler.append("TP-Pin Werbung-Prefix defekt")
     # &-Sanierung
     if "&" in clean_pin_description("Strom & Gas"):
         fehler.append("&-Sanierung defekt")
@@ -264,7 +291,7 @@ def _selftest() -> list[str]:
     # Board-Gate: cross-Silo-Match MUSS abgelehnt werden
     wrong = {"title": "Handytarif vergleichen 2026", "description": "Günstige Tarife",
              "tags": ["Handytarif"], "keywords": ["tarife vergleichen"],
-             "slug": "2026-08-28-handytarif", "pinwand": "", "pillar": "internet-dsl"}
+             "slug": "2026-08-26-handytarif", "pinwand": "", "pillar": "internet-dsl"}
     frugal_pin = {"titel": "Frugalismus für Einsteiger", "keywords": "frugalismus tipps",
                   "beschreibung": "Geld sparen ohne Verzicht",
                   "pinwand": "Geld sparen im Alltag | Frugalismus-Tipps"}
@@ -297,17 +324,22 @@ def main() -> int:
     # Folge: Kein Artikel kriegt fremden Premium-Text ("DNS-Pin" auf
     # "DSL-Wechsel-Artikel"), und mehrere Pins dürfen denselben Artikel
     # als Ziel haben (Rotation-Kandidaten), der Artikel nimmt den stärksten.
+    # Jeder Plan-Pin wählt seinen besten Artikel. Der Self-Target-Bonus stellt
+    # sicher, dass ein Pin genau seinen eigenen Artikel bedient, statt an einen
+    # thematisch ähnlichen Artikel verloren zu gehen. Dadurch wird die
+    # 1:1-Zuordnung (Artikel ↔ eigener Premium-Pin) robust.
     pin_best: dict[int, tuple[float, int]] = {}
     for i, pin in enumerate(pins):
-        best_sc, best_j = -1.0, -1
+        best_sc, best_rs, best_j = -1.0, -1.0, -1
         for j, post in enumerate(posts):
             if post["draft"]:
                 continue  # Drafts sind nicht live → kein Pin-Ziel
-            sc = score(post, pin, board_pillar)
+            sc = match_score(post, pin, board_pillar)
+            rs = score(post, pin, board_pillar)
             if sc > best_sc:
-                best_sc, best_j = sc, j
+                best_sc, best_rs, best_j = sc, rs, j
         if best_sc >= MIN_SYNC_SCORE and best_j >= 0:
-            pin_best[i] = (best_sc, best_j)
+            pin_best[i] = (best_sc, best_rs, best_j)
 
     for j, post in enumerate(posts):
         if post["draft"]:
@@ -315,13 +347,13 @@ def main() -> int:
                          "match": "keine (Draft – beim Publizieren automatisch)",
                          "changed": False})
             continue
-        candidates = [(sc, i) for i, (sc, aj) in pin_best.items() if aj == j]
+        candidates = [(sc, rs, i) for i, (sc, rs, aj) in pin_best.items() if aj == j]
         if not candidates:
             rows.append({"slug": post["slug"], "pin": "-", "score": 0.0,
                          "match": "keine (Pin-Ziel ist ein anderer Artikel)",
                          "changed": False})
             continue
-        sc, idx = max(candidates)
+        sc, rs, idx = max(candidates)
         pin = pins[idx]
         new_title = str(pin.get("titel", "")).strip()[:PIN_TITLE_MAX]
         new_desc = clean_pin_description(str(pin.get("beschreibung", "")))
@@ -330,7 +362,7 @@ def main() -> int:
         # Plausibilität: Premium-Text muss auch gültig sein
         if not pin_title_valid(new_title) or not pin_desc_valid(new_desc):
             issues.append(f"{post['slug']}: Plan-Pin-Text ungültig (Tag {pin.get('tag')})")
-            rows.append({"slug": post["slug"], "pin": pin.get("tag"), "score": sc,
+            rows.append({"slug": post["slug"], "pin": pin.get("tag"), "score": rs,
                          "match": "Text ungültig", "changed": False})
             continue
 
@@ -344,7 +376,7 @@ def main() -> int:
         do_d = (post["pin_description"] != new_desc)
         do_w = (post["pinwand"] != new_pinwand)
         if not (do_t or do_d or do_w):
-            rows.append({"slug": post["slug"], "pin": pin.get("tag"), "score": sc,
+            rows.append({"slug": post["slug"], "pin": pin.get("tag"), "score": rs,
                          "match": "identisch", "changed": False})
             continue
         if do_t:
@@ -356,7 +388,7 @@ def main() -> int:
         if DO_APPLY:
             open(post["path"], "w", encoding="utf-8").write(content)
         changed += 1
-        rows.append({"slug": post["slug"], "pin": pin.get("tag"), "score": sc,
+        rows.append({"slug": post["slug"], "pin": pin.get("tag"), "score": rs,
                      "match": f"Pin {pin.get('tag')} „{new_title[:40]}…“",
                      "changed": True,
                      "feld": [f for f, d in (("pin_title", do_t),

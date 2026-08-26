@@ -12,7 +12,7 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 |---|---|
 | Hugo-Blog | Theme PaperMod (SEO-fertig: Meta-Tags, OpenGraph, JSON-LD, Sitemap, robots.txt, Canonical) |
 | Pflichtseiten | Impressum (mit Platzhaltern), Datenschutz, Über – Werbekennzeichnung inklusive |
-| 2 Beispiel-Artikel | Stromwechsel & Kfz-Versicherung (dienen als Vorlage/Struktur) |
+| Artikelbestand | 25+ veröffentlichte Ratgeber über alle 6 Pillars (Aktualisierung: 08/2026) |
 | Themenpool | `data/topics.yaml` – 175 Themen über alle 6 Pillars (repariert & erweitert 13.08.2026; bei 2–3 Artikeln an Mo/Mi/Fr reicht der Pool über ein halbes Jahr), inkl. themenspezifischer CHECK24-Links |
 | 🤖 Content-Bot | `scripts/generate_drafts.py` – erzeugt an Publikationstagen (Mo/Mi/Fr) frische, einzigartige Artikel-Entwürfe (Titel, Meta-Description, Keywords, strukturiertes Markdown, FAQ, Affiliate-CTA) |
 | ⏰ Publikations-Job | `.github/workflows/content-engine-v2.yml` – Mo/Mi/Fr 08:10 MESZ (Fallback 16:10 / 19:40) |
@@ -31,7 +31,7 @@ Der Workflow **„Content-Engine v2“** veröffentlicht **nur montags, mittwoch
 | **16:10 / 19:40** | Fallback-Slots: greifen nur, wenn der Haupt-Slot gescheitert ist (Selbstheilung) |
 
 **Wie es funktioniert:**
-- Themen kommen **direkt aus deinem Pinterest-Plan** (`data/pinterest_plan.yaml`, 62 Pins)
+- Themen kommen **direkt aus deinem Pinterest-Plan** (`data/pinterest_plan.yaml`, 73 Pins)
 - Artikel werden **automatisch veröffentlicht** (`draft: false`) – kein manueller Schritt
 - Sind alle Pin-Themen abgedeckt, greift automatisch der erweiterte Themenpool (`topics.yaml`)
 - Einzigartigkeits-Check + Anti-Copy-Prompt stellen sicher, dass kein Pin-Text 1:1 kopiert wird
@@ -123,10 +123,10 @@ Der Blog ist barrierefrei umgesetzt und wird wöchentlich geprüft
 - **Nach jeder Bot-Veröffentlichung** läuft `scripts/check_uniqueness.py` automatisch mit:
   - Findet der Check kritische Duplikate (≥5 gleiche 7-Wort-Phrasen oder Pin-Konflikt),
     bricht der Workflow AB → der Artikel wird NICHT veröffentlicht. Das Log zeigt, was zu tun ist.
-- **Wöchentlich (montags 07:00 Uhr):** Der Workflow „Wöchentliches Einzigartigkeits-Audit"
-  prüft alle Artikel und erstellt bei Problemen automatisch ein **GitHub-Issue** –
-  du siehst es auf einen Blick im Repo (Tab „Issues").
-- **Manuell:** `python3 scripts/check_uniqueness.py` (oder `--strict`)
+- **Bei jedem Bot-Lauf** (Mo/Mi/Fr) wird `check_uniqueness.py --sameday --fix` ausgeführt;
+  der `seo-weekly`-Lauf prüft die Bestandsartikel im Rahmen des Qualitäts-Gates.
+- **Manuell (jederzeit):** `python3 scripts/check_uniqueness.py` (oder `--strict`) –
+  bei Verstößen wird im selben Zug ein normales GitHub-Issue angelegt.
 
 > Hinweis: Im Winter (MEZ) verschiebt sich die UTC-Zeit automatisch – deutsche Uhrzeit (08:10/19:40) bleibt gleich.
 
@@ -252,7 +252,7 @@ DEMO_MODE=1 python3 scripts/generate_drafts.py   # erzeugt Test-Entwurf
 - [ ] **Datenschutzerklärung** anpassen (Generator wie eRecht24/IT-Recht Kanzlei empfohlen)
 - [ ] **Affiliate-Links kennzeichnen** – im Blog bereits eingebaut (Hinweis + Disclaimer in `hugo.toml`)
 - [ ] **CHECK24-Partnerprogramm** – Anmeldung (z. B. über das Awin-Netzwerk), Voraussetzung: eigene Website
-- [ ] **Persönliche Partnerlinks einsetzen** – siehe `ANLEITUNG-CHECK24-LINKS.md` (`python3 scripts/set_check24_links.py --topics`)
+- [ ] **Persönliche Partnerlinks einsetzen** – zentral in `scripts/check24_links.yaml` pflegen und mit `python3 scripts/affiliate_shield.py --fix` + `python3 scripts/affiliate_link_check.py --fix` in Artikel/Gateway übernehmen (siehe `ANLEITUNG-CHECK24-LINKS.md`)
 - [ ] **Steuer** – Provisionen sind Einkünfte (Steuererklärung!)
 - [ ] **Marke:** keine Domain mit „check24" im Namen verwenden
 
@@ -285,7 +285,7 @@ DEMO_MODE=1 python3 scripts/generate_drafts.py   # erzeugt Test-Entwurf
 ## 📌 Pinterest-Integration (Masterplan August 2026, Premium-Phase 2)
 
 Der Themenpool `data/topics.yaml` ist 1:1 aus deinem Pinterest-Masterplan
-(`data/pinterest_plan.yaml`, 62 Pins) abgeleitet.
+(`data/pinterest_plan.yaml`, 73 Pins) abgeleitet.
 
 **Premium-Regel (automatisch durchgesetzt):** `Pin → eigener Blogartikel → Affiliate-CTA`.
 Nie direkt aufs Pinterest-Profil (Sackgasse) und nie nackt auf CHECK24 (Spam-Signal).
@@ -294,7 +294,7 @@ Nie direkt aufs Pinterest-Profil (Sackgasse) und nie nackt auf CHECK24 (Spam-Sig
 
 | Schicht | Skript | Aufgabe |
 |---|---|---|
-| Zielseite | `scripts/pinterest_link_healer.py` | Weist jeden der 62 Pins per Scoring auf den bestmöglichen Artikel/Pillar-Seite (UTM inkl.) |
+| Zielseite | `scripts/pinterest_link_healer.py` | Weist jeden der 73 Pins per Scoring auf den bestmöglichen Artikel/Pillar-Seite (UTM inkl.) |
 | Premium-Texte | `scripts/pinterest_pin_text_sync.py` | Überträgt die kuratierten Pin-Titel/-Beschreibungen + `pinwand` in die Artikel (1:1 + Board-Gate) |
 | Zielseiten-Garantie | `scripts/pinterest_link_guard.py` | LOCAL: Slug-Existenz/Draft/Domain/UTM/URL-Form · LIVE (CI): HTTP 200 + Domain-Bleibepflicht + Rich-Pin-Meta |
 | Posting | `scripts/pinterest_engine.py` | Pinnt neue Artikel per API v5 auf das **richtige der 6 Boards** (Routing per Pinwand/Pillar, Board-Auto-Creation), Drafts nie |

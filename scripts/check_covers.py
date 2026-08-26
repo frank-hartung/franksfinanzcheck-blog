@@ -131,7 +131,19 @@ def signet_strength(image_path):
 
 
 def check_brand(covers):
-    """C2+C2b (12.08. R2): Brand-Band + Signet muessen messbar vorhanden sein."""
+    """C2+C2b (12.08. R2): Brand-Band + Signet muessen messbar vorhanden sein.
+
+    Pillow ist eine OPTIONALE Abhängigkeit für die Pixel-Messung. Wenn sie
+    fehlt (z. B. lokaler Report-Lauf ohne pip install pillow), meldet die
+    Wache sauber „übersprungen“ statt alle Covers fälschlich als
+    unbrandet/unlesbar abzulehnen (Exit 1 im Report-Modus).
+    """
+    try:
+        from PIL import Image  # noqa: F401
+    except Exception as _no_pil:  # noqa: BLE001
+        print(f"ℹ️ Brand-Gate übersprungen: Pillow nicht installiert ({_no_pil}). "
+              f"Läuft ohne PIL, keine falschen BRAND-Fehler.")
+        return []
     out = []
     for it in covers:
         base = os.path.basename(it["image"])

@@ -23,3 +23,6 @@ __pycache__/
 *.tmp
 *~
 .polish_cache.json
+
+# Analog zu .affiliate_report.json: lokaler/generierter Audit-Cache
+.meta_report.json

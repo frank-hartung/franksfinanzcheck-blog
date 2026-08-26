@@ -1,0 +1,17 @@
+{{- /* ============================================================
+    schema_json.html – LEER (Bewusster Site-Override)
+    ------------------------------------------------------------
+    Das PaperMod-Theme rendert hier pro Seite ein zusätzliches
+    BlogPosting-/Organization-/Breadcrumb-JSON-LD (inkl. articleBody).
+
+    PROBLEM: Auf jeder Artikel-Seite gab es dadurch ZWEI Artikel-
+    Strukturdaten (BlogPosting aus schema_json.html UND Article aus
+    schema_article.html) plus eine zweite BreadcrumbList. Das ist für
+    Google/Rich Results unklar, bläht das HTML auf und transportiert
+    unnötig den kompletten articleBody.
+
+    LÖSUNG: Die Site nutzt die eigenen, schlankeren E-E-A-T-Schemata
+    aus extend_head.html (Organization/WebSite, Person, ProfilePage,
+    FAQPage, BreadcrumbList) und schema_article.html (Article).
+    Dieser Override entfernt die themeseitigen Duplikate vollständig.
+============================================================ -}}

@@ -10,7 +10,7 @@
 #    - pinterest.de/... → Educational-Pin (generischer Link)
 #
 #  PREMIUM-ÜBERARBEITUNG 25.08.2026 (Agentur-Standard):
-#    - 62 Pins jetzt 100 % individuell: jeder Pin eigener Titel,
+#    - 73 Pins jetzt 100 % individuell: jeder Pin eigener Titel,
 #      eigene Beschreibung, eigene Keyword-Fokussierung (Fresh-Pin-
 #      Varianten statt 1:1-Duplikate)
 #    - Beschreibungen vollständig (keine Mid-Word-Abbrüche mehr),
@@ -496,10 +496,10 @@ pins:
   typ: EP
   titel: Wohin mit dem Notgroschen? Tagesgeld & Co. clever nutzen
   pinwand: 'Budget & Haushaltskasse: clever planen'
-  url: https://franksfinanzcheck.de/posts/2026-08-28-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Dein Notfall-Polster auf dem Girokonto verliert jeden Tag an Wert: Wir vergleichen die smarten Parkplätze – Tagesgeld, Geldmarkt, verzinste Unterkonten – und zeigen, was wirklich sicher UND schnell verfügbar ist. Jetzt Zinsen mitnehmen!'
   keywords: notgroschen anlegen, tagesgeld vergleich, geld sicher parken, zinsen notfallgeld
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-28-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   link_score: 1.8222
   link_quelle: artikel
 - tag: 24
@@ -664,4 +664,114 @@ pins:
   keywords: mietwagen tricks profis, autovermietung tipps, urlaub auto mieten sicher, mietwagen betrug vermeiden
   blog_url: https://franksfinanzcheck.de/pillar/mietwagen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   link_score: 0.8156
+  link_quelle: pillar
+- tag: 32
+  typ: EP
+  titel: 'Sicher heizen: Gaspreisgarantie gegen den Preisschock'
+  pinwand: Strom & Gas sparen | Tarife clever wechseln
+  url: https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  beschreibung: 'Eine Gaspreisgarantie nimmt dir den Winter-Schock: faire Tarife, klare Laufzeit, kein Zittern vor der Abschlagsrechnung. So schützt du dein Haushaltsbudget und sparst bis zu 650 Euro bei den Heizkosten. Jetzt die Checkliste lesen.'
+  keywords: sicher heizen, gaspreisgarantie, gastarif wechseln, heizkosten senken
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.0
+  link_quelle: artikel
+- tag: 33
+  typ: EP
+  titel: 'Dein Haus sicher schützen: Das Vorsorge-Update 2026'
+  pinwand: Versicherungen clever wechseln & sparen
+  url: https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  beschreibung: 'Hausrat, Elementarschäden, Unterversicherung: Das Vorsorge-Update 2026 zeigt dir, welche Policen wirklich schützen und wo du bei deiner Immobilie Geld sparst. Ein Check, der sich in Minuten rechnet. Jetzt lesen.'
+  keywords: haus sicher schützen, hausratversicherung, elementarschaden, unterversicherung, wohngebäudeversicherung
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.0
+  link_quelle: artikel
+- tag: 34
+  typ: EP
+  titel: 'Internet und DSL wechseln: Praxis-Tipps ohne Ausfall'
+  pinwand: Internet & DSL | WLAN-Tipps & Tarife
+  url: https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  beschreibung: 'DSL-Anbieterwechsel ohne Internet-Loch: Portierung, Kündigung durch den Neuanbieter und der echte Effektivpreis über 24 Monate. Wer diese 4 Phasen kennt, spart 280 bis 380 Euro und behält jederzeit Anschluss. Jetzt die Schritt-für-Schritt-Anleitung lesen.'
+  keywords: dsl wechseln, internet anbieterwechsel, dsl tarifvergleich, highspeed internet, router mieten oder kaufen
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.0
+  link_quelle: artikel
+- tag: 35
+  typ: EP
+  titel: 'Gas-Anbieter wechseln: So sparst du bis zu 680 Euro'
+  pinwand: Strom & Gas sparen | Tarife clever wechseln
+  url: https://franksfinanzcheck.de/posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  beschreibung: 'Gaswechsel leicht gemacht: Preisgarantie, Kündigungsfristen und die Fallstricke im Kleingedruckten. Mit diesen Praxis-Tipps wechselst du stressfrei und sparst bis zu 680 Euro bei den Heizkosten. Jetzt die 10-Minuten-Anleitung lesen.'
+  keywords: gas anbieter wechseln, gastarif wechseln, gaspreisvergleich, gaskosten senken, preisgarantie
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.0
+  link_quelle: artikel
+- tag: 36
+  typ: EP
+  titel: 'Privathaftpflicht: Warum sie unverzichtbar ist'
+  pinwand: Versicherungen clever wechseln & sparen
+  url: https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  beschreibung: 'Ein unachtsamer Moment, ein Millionenschaden: Die Privathaftpflicht ist die wichtigste Versicherung überhaupt. Hier lernst du, welche Schäden sie abdeckt und wie du Top-Schutz ab rund 35 Euro im Jahr findest. Jetzt lesen.'
+  keywords: privathaftpflicht, haftpflichtversicherung, deckungssumme haftpflicht, haftpflicht vergleich
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.0
+  link_quelle: artikel
+- tag: 37
+  typ: EP
+  titel: 'Wohngebäudeversicherung: Worauf du wirklich achten musst'
+  pinwand: Versicherungen clever wechseln & sparen
+  url: https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  beschreibung: 'Unwetter, Starkregen, Feuer: Die Wohngebäudeversicherung entscheidet im Ernstfall über dein Haus. Wir zeigen dir die wichtigen Klauseln, den Elementarschutz und wie du bis zu 340 Euro sparst. Jetzt den Vergleich lesen.'
+  keywords: wohngebäudeversicherung vergleich, elementarschutz, gebäudeversicherung, haus versicherung vergleich
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.0
+  link_quelle: artikel
+- tag: 38
+  typ: EP
+  titel: 'Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen'
+  pinwand: Internet & DSL | WLAN-Tipps & Tarife
+  url: https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  beschreibung: 'DSL, Kabel oder Glasfaser? Der richtige Tarif hängt von deinem Bedarf ab, nicht vom Marketing. Diese Anleitung hilft dir, Bandbreite, Preis und Laufzeit richtig zu kombinieren und nicht mehr zu zahlen als nötig. Jetzt lesen.'
+  keywords: dsl tarif finden, internet geschwindigkeit bedarf, dsl vs kabel, günstiger internetanschluss
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.0
+  link_quelle: artikel
+- tag: 39
+  typ: EP
+  titel: 'Haushaltsbuch führen: App, Excel oder Papier?'
+  pinwand: 'Budget & Haushaltskasse: clever planen'
+  url: https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  beschreibung: 'Haushaltsplanung, die im Alltag hält: App, Excel-Tabelle oder Stift im ehrlichen Vergleich. Mit der 50-30-20-Regel und einem einfachen Wochen-Ritual sparst du bis zu 430 Euro im Monat. Jetzt die Vorlage und Tipps lesen.'
+  keywords: haushaltsbuch führen, haushaltsbuch app, excel haushaltsbuch, 50 30 20 regel, ausgaben tracken
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.0
+  link_quelle: artikel
+- tag: 40
+  typ: EP
+  titel: 'Preisgarantie Gas: So schützt du dich vor Preissprüngen'
+  pinwand: Strom & Gas sparen | Tarife clever wechseln
+  url: https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  beschreibung: 'Der Spätsommer ist die beste Zeit für den Gaswechsel: bevor die Heizperiode die Preise anzieht. Vergleiche Tarife mit Preisgarantie und Wechselbonus, in nur 5 Minuten Aufwand. Jetzt die Schritt-für-Schritt-Anleitung lesen.'
+  keywords: preisgarantie gas, gaspreissprünge, gastarif wechseln, gasvergleich, heizkosten senken
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.0
+  link_quelle: artikel
+- tag: 41
+  typ: EP
+  titel: 'Handytarif 2026 vergleichen: Allnet-Flats ab 4,99 Euro'
+  pinwand: Internet & DSL | WLAN-Tipps & Tarife
+  url: https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  beschreibung: 'Handytarife vergleichen 2026: Allnet-Flats ab 4,99 Euro, 5G unter 15 Euro und wann sich LTE noch lohnt. Mit der 8-Punkte-Checkliste entscheidest du in Minuten und sparst bis zu 360 Euro im Jahr. Jetzt die Vergleichsanleitung lesen.'
+  keywords: handytarif vergleichen, allnet flat, 5g tarif, günstiger handytarif, handyvertrag wechseln
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.0
+  link_quelle: artikel
+- tag: 42
+  typ: EP
+  titel: 'Kfz-Versicherung zum 30. November: 3 Fehler, die Geld kosten'
+  pinwand: Versicherungen clever wechseln & sparen
+  url: https://franksfinanzcheck.de/pillar/versicherungen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  beschreibung: 'Der Wechselstichtag 30. November ist die Gelegenheit: Wer bei Kfz, Haftpflicht und Hausrat klug vorgeht, spart hunderte Euro. Diese 3 typischen Fehler solltest du vermeiden. Jetzt den Versicherungs-Guide lesen.'
+  keywords: kfz versicherung wechseln, versicherungen vergleichen, stichtag versicherung, sparen versicherung
+  blog_url: https://franksfinanzcheck.de/pillar/versicherungen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.0
   link_quelle: pillar

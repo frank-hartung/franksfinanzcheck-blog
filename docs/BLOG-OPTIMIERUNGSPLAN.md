@@ -134,7 +134,7 @@
 | 12 | **Umami-Selfhosting / Analytics-Ausbau** | Aktuell cookieless – mit Umami-Dashboard Conversion-Pfade (Affiliate-Klicks) messen | 1 Tag |
 | 13 | **Mehrsprachigkeit (EN)** | Englische Version der Top-20-Artikel → internationaler Traffic (Nische „Frugalismus“ ist global) | groß |
 | 14 | **Digitaler Produktverkauf** | Z. B. „Sparplan-Excel“ oder „CHECK24-Wechsel-Checkliste“ als PDF (5–15 €) – erste Monetarisierung unabhängig von Affiliate | 1–2 Tage |
-| 15 | **Pinterest voll ausrollen** | 62-Pin-Plan liegt bereit – sobald API-Token da: automatisierte Pins, Board-Strategie, Pin-Optimierung nach Impressions | laufend |
+| 15 | **Pinterest voll ausrollen** | 73-Pin-Plan liegt bereit – sobald API-Token da: automatisierte Pins, Board-Strategie, Pin-Optimierung nach Impressions | laufend |
 
 ### Kontinuierliche Qualitäts-Schleife (bereits aktiv, ausbauen)
 

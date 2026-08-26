@@ -18,8 +18,8 @@ kurzantwort: "Eine Gaspreisgarantie sichert deinen Arbeitspreis und Grundpreis f
 
 social_posted: true
 keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich"]
-pin_title: "Sicher heizen: So schützt dich eine Gaspreisgarantie"
-pin_description: "*Werbung | Sicher heizen mit Gaspreisgarantie: Schütze dein Haushaltsbudget vor Preissprüngen, sichere dir faire Tarife und spare bis zu 650 € bei den Heizkosten. Mehr Spartipps auf FranksFinanzcheck! #sicherheizen #gaspreisgarantie #gastarifwechseln"
+pin_title: "Sicher heizen: Gaspreisgarantie gegen den Preisschock"
+pin_description: "Eine Gaspreisgarantie nimmt dir den Winter-Schock: faire Tarife, klare Laufzeit, kein Zittern vor der Abschlagsrechnung. So schützt du dein Haushaltsbudget und sparst bis zu 650 Euro bei den Heizkosten. Jetzt die Checkliste lesen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 

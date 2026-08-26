@@ -1,0 +1,60 @@
+{{- /* get-page-images (Hugo-Partial-Kompatibilität)
+
+    PaperMod referenziert die Bild-Auslesefunktion an zwei Stellen:
+      - `partial "templates/_funcs/get-page-images" .` (Theme-intern)
+      - `partial "_funcs/get-page-images" .` (in einigen Overrides/OG-Partials)
+
+    Hugo löst `partial "_funcs/get-page-images"` unterhalb von
+    `layouts/_partials/_funcs/get-page-images.html` auf – genau dort muss
+    die Datei liegen. Die Funktion selbst existiert im Theme unter
+    `templates/_funcs/`. Dieser Site-Alias stellt sicher, dass beide
+    Aufruf-Schreibweisen auflösbar sind und der Build nicht mit „partial
+    not found“ abbricht.
+-}}
+{{- $imgs := slice }}
+{{- $imgParams := .Params.images }}
+{{- $resources := .Resources.ByType "image" -}}
+{{/* Find featured image resources if the images parameter is empty. */}}
+{{- if not $imgParams }}
+  {{- $featured := $resources.GetMatch "*feature*" -}}
+  {{- if not $featured }}{{ $featured = $resources.GetMatch "{*cover*,*thumbnail*}" }}{{ end -}}
+  {{- with $featured }}
+    {{- $imgs = $imgs | append (dict
+      "Image" .
+      "RelPermalink" .RelPermalink
+      "Permalink" .Permalink) }}
+  {{- end }}
+{{- end }}
+{{/* Use the first one of site images as the fallback. */}}
+{{- if and (not $imgParams) (not $imgs) }}
+  {{- with site.Params.images }}
+    {{- $imgParams = first 1 . }}
+  {{- end }}
+{{- end }}
+{{/* Parse page's images parameter. */}}
+{{- range $imgParams }}
+  {{- $img := . }}
+  {{- $url := urls.Parse $img }}
+  {{- if eq $url.Scheme "" }}
+    {{/* Internal image. */}}
+    {{- with $resources.GetMatch $img -}}
+      {{/* Image resource. */}}
+      {{- $imgs = $imgs | append (dict
+        "Image" .
+        "RelPermalink" .RelPermalink
+        "Permalink" .Permalink) }}
+    {{- else }}
+      {{- $imgs = $imgs | append (dict
+        "RelPermalink" (relURL $img)
+        "Permalink" (absURL $img)
+      ) }}
+    {{- end }}
+  {{- else }}
+    {{/* External image */}}
+    {{- $imgs = $imgs | append (dict
+      "RelPermalink" $img
+      "Permalink" $img
+    ) }}
+  {{- end }}
+{{- end }}
+{{- return $imgs }}

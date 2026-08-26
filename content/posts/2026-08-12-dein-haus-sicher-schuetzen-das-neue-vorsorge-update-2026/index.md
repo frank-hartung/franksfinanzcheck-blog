@@ -18,8 +18,8 @@ kurzantwort: "Das Vorsorge-Update 2026 für Hausbesitzer und Mieter umfasst den 
 
 social_posted: true
 keywords: ["Dein Haus sicher schützen", "Hausversicherung", "Hausratversicherung", "Elementarschadenversicherung", "Wohngebäudeversicherung", "Unterversicherung vermeiden", "Vorsorge-Update"]
-pin_title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
-pin_description: "*Werbung | Dein Haus sicher schützen: Das Vorsorge-Update 2026 für Hausrat und Elementarschäden. So schützt du deine Immobilie vor Unwettern und sparst bares Geld. Mehr Spartipps auf FranksFinanzcheck! #deinhaussicherschuetzen #hausversicherung #hausratversicherung"
+pin_title: "Dein Haus sicher schützen: Das Vorsorge-Update 2026"
+pin_description: "Hausrat, Elementarschäden, Unterversicherung: Das Vorsorge-Update 2026 zeigt dir, welche Policen wirklich schützen und wo du bei deiner Immobilie Geld sparst. Ein Check, der sich in Minuten rechnet. Jetzt lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
 ---
 

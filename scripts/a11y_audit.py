@@ -129,6 +129,18 @@ def audit_contrast():
 def main():
     as_json = "--json" in sys.argv
 
+    # Robustheit: Das Audit braucht den Hugo-Build (public/). Wird das Skript
+    # lokal oder in einem Pre-Build-Schritt aufgerufen, darf es NICHT mit einer
+    # Traceback crashen – es meldet den fehlenden Build sauber und bricht nicht
+    # die Kette (der Aufrufer steuert über Exit-Code 0 = ohne Befund).
+    if not os.path.isdir(PUBLIC_DIR):
+        print("Barrierefreiheits-Audit: public/ fehlt – Hugo-Build vorher ausführen, Überspringe Audit.")
+        if as_json:
+            print(json.dumps({"seiten": 0, "css_probleme": [], "kontrast": [],
+                              "gesamt_probleme": 0, "uebersprungen": True},
+                             ensure_ascii=False, indent=2))
+        sys.exit(0)
+
     page_results = []
     for path in collect_html_files():
         name, issues = audit_page(path)
