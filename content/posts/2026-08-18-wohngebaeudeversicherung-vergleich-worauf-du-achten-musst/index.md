@@ -21,7 +21,7 @@ kurzantwort: "Eine leistungsstarke Wohngebäudeversicherung ist für jeden Hause
 social_posted: true
 keywords: ["Wohngebäudeversicherung Vergleich", "Gebäudeversicherung Elementarschutz", "Haus Versicherung Vergleich", "Wohngebäude Tarifcheck", "Grobe Fahrlässigkeit Gebäude", "Wohngebäudeversicherung"]
 pin_title: "Wohngebäudeversicherung: Worauf du wirklich achten musst"
-pin_description: "Unwetter, Starkregen, Feuer: Die Wohngebäudeversicherung entscheidet im Ernstfall über dein Haus. Wir zeigen dir die wichtigen Klauseln, den Elementarschutz und wie du bis zu 340 Euro sparst. Jetzt den Vergleich lesen."
+pin_description: "*Werbung | Unwetter, Starkregen, Feuer: Die Wohngebäudeversicherung entscheidet im Ernstfall über dein Haus. Wir zeigen dir die wichtigen Klauseln, den Elementarschutz und wie du bis zu 340 Euro sparst. Jetzt den Vergleich lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
 ---
 
@@ -93,7 +93,7 @@ Muss die Familie nach einem Brand oder schweren Wasserschaden monatelang in ein 
 
 Die Wohngebäudeversicherung ist neben der [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) die wichtigste Absicherung für Immobilienbesitzer. Spare nicht an elementaren Schutzbausteinen wie dem Starkregenschutz oder dem Verzicht auf grobe Fahrlässigkeit, sondern optimiere den Beitrag durch einen transparenten Marktvergleich.
 
-**Weiterlesen:** [Pillar Versicherungen](../../pillar/versicherungen/) · Haus sicher schützen: Vorsorge Update 2026 · [Geld sparen im Alltag](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/)
+**Weiterlesen:** [Pillar Versicherungen](../../pillar/versicherungen/) · Haus sicher schützen: Vorsorge Update 2026 · Geld sparen im Alltag
 
 ## Häufige Fragen
 

@@ -50,7 +50,7 @@ Wie du den Markt systematisch analysierst und günstige Tarife für deine Region
 
 Selbst der schnellste Glasfaser- oder VDSL-Anschluss nützt wenig, wenn das Funksignal in der Wohnung durch dicke Wände, Decken oder Störquellen ausgebremst wird.
 
-Praktische Anleitungen zur Beseitigung von Funklöchern und zur Einrichtung eines stabilen Heimnetzwerks findest du in unserem Praxisbericht [WLAN verbessern: So bringst du stabilen Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/).
+Praktische Anleitungen zur Beseitigung von Funklöchern und zur Einrichtung eines stabilen Heimnetzwerks findest du in unserem Praxisbericht WLAN verbessern: So bringst du stabilen Speed in jede Ecke.
 
 ### Die 3 wichtigsten WLAN-Sofortmaßnahmen:
 * **Router freistehend platzieren:** Nicht in Schränken, hinter dem Fernseher oder auf dem Boden verstecken, sondern leicht erhöht und zentral im Raum aufstellen.

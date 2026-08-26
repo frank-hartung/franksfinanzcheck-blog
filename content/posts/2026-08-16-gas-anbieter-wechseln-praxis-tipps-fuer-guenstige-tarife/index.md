@@ -21,7 +21,7 @@ kurzantwort: "Der Wechsel des Gasanbieters ist in wenigen Minuten erledigt: Halt
 social_posted: true
 keywords: ["Gas-Anbieter wechseln", "Gasanbieter Wechsel", "Günstige Gastarife", "Gas Preisvergleich", "Gaskosten reduzieren", "Gas Anbieter wechseln", "Gas-Anbieter"]
 pin_title: "Gas-Anbieter wechseln: So sparst du bis zu 680 Euro"
-pin_description: "Gaswechsel leicht gemacht: Preisgarantie, Kündigungsfristen und die Fallstricke im Kleingedruckten. Mit diesen Praxis-Tipps wechselst du stressfrei und sparst bis zu 680 Euro bei den Heizkosten. Jetzt die 10-Minuten-Anleitung lesen."
+pin_description: "*Werbung | Gaswechsel leicht gemacht: Preisgarantie, Kündigungsfristen und die Fallstricke im Kleingedruckten. Mit diesen Praxis-Tipps wechselst du stressfrei und sparst bis zu 680 Euro bei den Heizkosten. Jetzt die 10-Minuten-Anleitung lesen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 

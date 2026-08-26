@@ -21,7 +21,7 @@ kurzantwort: "Den optimalen DSL-Tarif findest du durch die passende Wahl der Ban
 social_posted: true
 keywords: ["DSL Tarif finden", "Internet Geschwindigkeit Bedarf", "DSL vs Kabel", "Günstiger Internetanschluss", "DSL Tarifberatung", "So findest du den richtigen", "DSL-Tarif"]
 pin_title: "Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen"
-pin_description: DSL, Kabel oder Glasfaser? Der richtige Tarif hängt von deinem Bedarf ab, nicht vom Marketing. Diese Anleitung hilft dir, Bandbreite, Preis und Laufzeit richtig zu kombinieren und nicht mehr zu zahlen als nötig. Jetzt lesen.
+pin_description: "*Werbung | DSL, Kabel oder Glasfaser? Der richtige Tarif hängt von deinem Bedarf ab, nicht vom Marketing. Diese Anleitung hilft dir, Bandbreite, Preis und Laufzeit richtig zu kombinieren und nicht mehr zu zahlen als nötig. Jetzt lesen."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 

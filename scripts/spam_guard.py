@@ -551,7 +551,13 @@ def g_of(el, tag):
 def parse_feed():
     if not os.path.exists(FEED_LOCAL):
         return None
-    root = ET.parse(FEED_LOCAL).getroot()
+    try:
+        root = ET.parse(FEED_LOCAL).getroot()
+    except ET.ParseError as e:
+        # Ungültiges XML = Feed-Deathshot: Pinterests Auto-Publish kann
+        # den Feed dann nicht parsen. Nicht crashen, sondern als harten
+        # F1-Fund melden (PREM-Audit 26.08.2026).
+        return {"tag": "PARSE-ERROR", "items": [], "error": str(e)}
     items = []
     for it in root.iter("item"):
         def g(tag):
@@ -575,6 +581,11 @@ def check_feed():
         return [("F0", "info",
                  "public/index.xml fehlt (noch kein Build) – Feed-Check "
                  "übersprungen")], None
+    if feed.get("error"):
+        return [("F1", "hard",
+                 f"Feed ist kein valides XML: {feed['error']} – "
+                 f"Pinterest-Auto-Publish wird BLOCKIERT (Escaping in "
+                 f"layouts/rss.xml prüfen, PREM-Audit 26.08.2026)")], None
     findings = []
     items = feed["items"]
 
@@ -959,4 +970,522 @@ def fix_csv(path, findings, kept):
         w.writerows(kept)
     audit({"module": "spam_guard", "action": "csv-fix", "file": path,
            "kept": len(kept)})
-    return [f"CSV neu geschrieben: {len(kept)} Zeilen behalten"]→ Nächste Nachricht: spam_guard.py Teil 3/3 (API-Kanal A1–A4 + Selftest + Report + CLI).
+    return [f"CSV neu geschrieben: {len(kept)} Zeilen behalten"]
+
+
+# ------------------------------------------------------------------ A: API
+def _parse_ts(ts):
+    try:
+        return datetime.datetime.fromisoformat((ts or "").replace("Z", "+00:00"))
+    except (ValueError, AttributeError, TypeError):
+        return None
+
+
+def _in_pause(state):
+    """(aktiv, until) – Eskalations-Pause aus dem State lesen."""
+    until = _parse_ts(state.get("pause_until", ""))
+    if until and until > now_utc():
+        return True, until
+    return False, until
+
+
+def api_preflight():
+    """A1: Rate-Limit (10/h, 40/Tag) + Eskalations-Pause prüfen. → (ok, msg).
+    Rein lokal (State-Datei) – keine API-Kommunikation, deterministisch."""
+    state = load_state()
+    in_pause, until = _in_pause(state)
+    if in_pause:
+        mins = max(1, int((until - now_utc()).total_seconds() // 60) + 1)
+        return False, (f"Eskalations-Pause aktiv bis {state.get('pause_until')} "
+                       f"(~{mins} Min) – API-Kanal pausiert (A3)")
+    now = now_utc()
+    hour_ago = now - datetime.timedelta(hours=1)
+    day_ago = now - datetime.timedelta(days=1)
+    in_hour = in_day = 0
+    for ts in state.get("created", []):
+        t = _parse_ts(ts)
+        if t is None:
+            continue
+        if t >= hour_ago:
+            in_hour += 1
+        if t >= day_ago:
+            in_day += 1
+    if in_hour >= MAX_PER_HOUR or in_day >= MAX_PER_DAY:
+        return False, (f"Rate-Limit erreicht: {in_hour}/{MAX_PER_HOUR} pro "
+                       f"Std., {in_day}/{MAX_PER_DAY} pro Tag (A1)")
+    return True, (f"Rate-OK ({in_hour}/{MAX_PER_HOUR} Std., "
+                  f"{in_day}/{MAX_PER_DAY} Tag)")
+
+
+def api_check_pin(pin):
+    """A2: Pre-Create-Check pro Pin. → (ok, [reasons]). Deterministisch.
+    pin = {title, description, link, media, aff_links}."""
+    reasons = []
+    title = (pin.get("title") or "").strip()
+    desc = (pin.get("description") or "").strip()
+    link = (pin.get("link") or "").strip()
+    media = (pin.get("media") or "").strip()
+    try:
+        aff = int(pin.get("aff_links") or 0)
+    except (TypeError, ValueError):
+        aff = 0
+
+    if not title:
+        reasons.append("Title fehlt")
+    elif len(title) > 100:
+        reasons.append(f"Title {len(title)} Zeichen (> 100)")
+    if not link:
+        reasons.append("Link fehlt (Pin ohne Ziel = wertlos)")
+    elif not link.startswith(BASE_URL + "/"):
+        reasons.append(f"Link außerhalb der Domain: {link[:60]}")
+    elif any(s in link.lower() for s in SHORTENERS):
+        reasons.append("URL-Kürzer verboten (Pinterest)")
+    elif norm_link(link) in history_links_recent():
+        reasons.append(f"Repeat-Pin (< {ROTATION_DAYS} Tage) – wichtigstes "
+                       f"Spam-Signal gegen das Konto")
+    if not media:
+        reasons.append("Media fehlt (Pin ohne Bild)")
+    elif not media.startswith("https://"):
+        reasons.append("Media-URL nicht https")
+    if any(re.search(p, title + " " + desc, re.I) for p in CLAIMS_HARD):
+        reasons.append("Garantie-/Versprechen-Claim (Misleading Claims)")
+    tw = re.findall(r"[a-zäöüß]{4,}", title.lower())
+    if tw and max(Counter(tw).values()) >= MAX_STUFF_TITLE:
+        reasons.append("Title-Keyword-Stuffing")
+    if aff > 0 and "Werbung" not in desc:
+        reasons.append("Affiliate-Ziel ohne *Werbung-Kennzeichnung")
+    return (not reasons, reasons)
+
+
+def api_record_created(pin):
+    """A4: jede Creation → Rate-Counter + Cross-Channel-Registry + Audit."""
+    state = load_state()
+    state.setdefault("created", []).append(now_iso())
+    save_state(state)
+    history_append({
+        "link": norm_link(pin.get("link", "")),
+        "image_key": norm_link(pin.get("media", "")),
+        "title": (pin.get("title") or "")[:100],
+        "board": pin.get("board", ""),
+        "source": pin.get("source", "api"),
+    })
+    audit({"module": "spam_guard", "action": "api-created",
+           "link": pin.get("link", ""), "board": pin.get("board", ""),
+           "source": pin.get("source", "api")})
+
+
+def api_record_error(code, detail=""):
+    """A3: Response-Guard. Kritischer Fehler → Eskalations-Pause (1h→24h→7d).
+    Rückgabe: Pause-Meldung (str) oder None (unkritischer Fehler)."""
+    detail = detail or ""
+    critical = (code in (401, 403, 429)
+                or re.search(r"(spam|abuse|suspicious|too many|rate limit|"
+                             r"unusual|quota)", detail, re.I) is not None)
+    state = load_state()
+    if not critical:
+        if state.get("error_streak"):
+            state["error_streak"] = 0
+            save_state(state)
+        return None
+    streak = int(state.get("error_streak") or 0) + 1
+    hours = PAUSE_ESCALATION_H[min(streak - 1, len(PAUSE_ESCALATION_H) - 1)]
+    until = now_utc() + datetime.timedelta(hours=hours)
+    state["error_streak"] = streak
+    state["pause_until"] = until.strftime("%Y-%m-%dT%H:%M:%SZ")
+    save_state(state)
+    audit({"module": "spam_guard", "action": "api-error", "code": code,
+           "streak": streak, "pause_h": hours, "detail": detail[:120]})
+    return f"Eskalations-Pause {hours} h (Fehler #{streak}, HTTP {code})"
+
+
+def api_postrun():
+    """Nach jedem API-Lauf: abgelaufene Pausen räumen, Counter trimmen (1 Tag)."""
+    state = load_state()
+    changed = False
+    if state.get("pause_until") and not _in_pause(state)[0]:
+        state.pop("pause_until", None)
+        changed = True
+    day_ago = now_utc() - datetime.timedelta(days=1)
+    trimmed = [ts for ts in state.get("created", [])
+               if (_parse_ts(ts) or now_utc()) >= day_ago]
+    if trimmed != state.get("created", []):
+        state["created"] = trimmed
+        changed = True
+    if changed:
+        save_state(state)
+
+
+def _resolve_token():
+    token = os.environ.get("PINTEREST_ACCESS_TOKEN", "")
+    if token:
+        return token
+    try:
+        import pinterest_auth
+        return pinterest_auth.get_access_token() or ""
+    except BaseException:  # noqa: BLE001 – defekte Token-Datei darf nicht
+        return ""         # den Watchdog crashen lassen
+
+
+def sync_pins():
+    """Live-Pins der Boards → pin_history.jsonl (Cross-Channel-Dedup-Quelle:
+    RSS-Auto-Publish, API, CSV dürfen nie denselben Link < 30 Tage pinnen).
+    Ohne Token: sauberer Skip (Exit 0)."""
+    token = _resolve_token()
+    if not token:
+        print("sync-pins: kein Token – übersprungen (Feed-Checks überwachen "
+              "den RSS-Kanal weiterhin).")
+        return 0
+    try:
+        import io
+        import warnings
+        from contextlib import redirect_stdout
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            import pinterest_engine as pe
+            with redirect_stdout(io.StringIO()):
+                board_cfg = pe.load_board_config()
+        mapping = pe.resolve_boards(token, board_cfg)
+    except Exception as e:  # noqa: BLE001
+        print(f"⚠ sync-pins: Board-Auflösung fehlgeschlagen ({e}) – "
+              f"übersprungen.")
+        return 0
+    added = 0
+    for name, bid in (mapping or {}).items():
+        try:
+            data = pe.api_get(f"/boards/{bid}/pins?page_size=100", token)
+        except Exception as e:  # noqa: BLE001
+            print(f"⚠ sync-pins: Board '{name}' nicht lesbar ({e})")
+            continue
+        for item in data.get("items", []):
+            link = norm_link(item.get("link") or "")
+            if not link or not any(d in link for d in DOMAINS):
+                continue
+            imgs = item.get("images") or {}
+            img_url = next(iter(imgs.values()), "") if isinstance(imgs, dict) else ""
+            if history_append({"link": link,
+                               "image_key": norm_link(img_url),
+                               "title": (item.get("title") or "")[:100],
+                               "board": name, "source": "sync"}):
+                added += 1
+    audit({"module": "spam_guard", "action": "sync-pins", "added": added})
+    print(f"sync-pins: {added} Live-Pins neu in der Registry.")
+    return 0
+
+
+# ---------------------------------------------------------------- Selftest
+def run_selftest():
+    """SABOTAGE-SCHUTZ: eingefrorene Testfälle für ALLE 4 Kanäle.
+    Läuft in einem isolierten Temp-Verzeichnis (berührt keinen echten State).
+    Fehlschlag → Exit 2 → jede --fix-Aktion / jeder Deploy wird abgebrochen,
+    BEVOR etwas geändert wird."""
+    global STATE_FILE, HISTORY_FILE, AUDIT_FILE, FEED_LOCAL
+    results = []
+    tmp = tempfile.mkdtemp(prefix="spam_guard_selftest_")
+    saved = (STATE_FILE, HISTORY_FILE, AUDIT_FILE, FEED_LOCAL)
+    st_file = os.path.join(tmp, "spam_state.json")
+    hist_file = os.path.join(tmp, "pin_history.jsonl")
+    aud_file = os.path.join(tmp, "spam_history.jsonl")
+    feed_file = os.path.join(tmp, "index.xml")
+
+    def check(name, cond):
+        results.append((name, bool(cond)))
+        print(("  ✓ " if cond else "  ✗ ") + name)
+
+    STATE_FILE, HISTORY_FILE, AUDIT_FILE, FEED_LOCAL = (
+        st_file, hist_file, aud_file, feed_file)
+    try:
+        now = now_utc()
+        fmt = "%Y-%m-%dT%H:%M:%SZ"
+        # ---- A1: Rate-Limit (Stunde + Tag)
+        save_state({"created": [
+            (now - datetime.timedelta(minutes=2 * i + 1)).strftime(fmt)
+            for i in range(MAX_PER_HOUR)]})
+        ok, msg = api_preflight()
+        check(f"A1 blockt bei {MAX_PER_HOUR} Pins/Stunde",
+              (not ok) and "Rate-Limit" in msg)
+        save_state({"created": [
+            (now - datetime.timedelta(minutes=2 * i + 1)).strftime(fmt)
+            for i in range(MAX_PER_DAY)]})
+        ok, msg = api_preflight()
+        check(f"A1 blockt bei {MAX_PER_DAY} Pins/Tag",
+              (not ok) and "Rate-Limit" in msg)
+        save_state({"created": [
+            (now - datetime.timedelta(minutes=5 * i + 1)).strftime(fmt)
+            for i in range(3)]})
+        ok, msg = api_preflight()
+        check("A1 lässt unter Limit durch", ok)
+        # ---- A3: Eskalations-Pause 1h → 24h → 168h
+        save_state({})
+        p1 = api_record_error(429, "Too Many Requests")
+        check("A3 1. Fehler → Pause 1 h", bool(p1) and "1 h" in p1)
+        ok, _m = api_preflight()
+        check("A3 aktive Pause blockiert preflight", not ok)
+        p2 = api_record_error(403, "Abuse detected")
+        check("A3 2. Fehler → Eskalation 24 h", bool(p2) and "24 h" in p2)
+        p3 = api_record_error(403, "suspicious activity")
+        check("A3 3. Fehler → Eskalation 168 h",
+              bool(p3) and "168 h" in p3)
+        save_state({})
+        save_state({})
+        check("A3 unkritischer Fehler setzt Streak auf 0",
+              api_record_error(500, "internal") is None
+              and not load_state().get("error_streak"))
+        # ---- A2: Pre-Create-Check (frozen Pin-Fälle)
+        good = {"title": "Tagesgeld Zinsen 2026: Der Vergleich",
+                "description": "Ein Blick auf die Zinsen und Konditionen.",
+                "link": BASE_URL + "/posts/2026-01-01-test/",
+                "media": BASE_URL + "/images/covers/test.jpg",
+                "aff_links": 0}
+        ok, _r = api_check_pin(good)
+        check("A2 sauberer Pin durch", ok)
+        ok, r = api_check_pin(dict(good, title="100 % sicherer Gewinn garantiert"))
+        check("A2 blockt Garantie-Claim", not ok)
+        ok, r = api_check_pin(dict(good, aff_links=2))
+        check("A2 verlangt *Werbung bei Affiliate-Ziel",
+              not ok and any("Werbung" in x for x in r))
+        ok, r = api_check_pin(dict(good, link="https://bit.ly/xyz"))
+        check("A2 blockt URL-Kürzer", not ok)
+        ok, r = api_check_pin(dict(good, link=BASE_URL + "/posts/x/?utm=1".replace("?utm=1", "/x")))
+        check("A2 akzeptiert sauberen Domain-Link", ok)
+        history_append({"ts": now_iso(),
+                        "link": norm_link(BASE_URL + "/posts/2026-01-01-test/"),
+                        "image_key": "test"})
+        ok, r = api_check_pin(good)
+        check("A2 blockt Repeat-Pin (< 30 Tage)",
+              not ok and any("Repeat" in x for x in r))
+        # ---- A4: Creation-Registry + Postrun
+        before = len(history_load())
+        api_record_created(dict(good, link=BASE_URL + "/posts/2026-01-02-neu/",
+                                board="B", source="engine"))
+        check("A4 registriert Creation in der History",
+              len(history_load()) == before + 1)
+        save_state({"pause_until": (now - datetime.timedelta(minutes=5))
+                   .strftime(fmt), "created": [
+            (now - datetime.timedelta(days=3)).strftime(fmt)]})
+        api_postrun()
+        st = load_state()
+        check("postrun räumt abgelaufene Pause + trimmt Counter",
+              not st.get("pause_until") and len(st.get("created", [])) == 0)
+        # ---- C: CSV (frozen Datei, ohne Netzwerk)
+        csv_file = os.path.join(tmp, "pins_upload.csv")
+        with open(csv_file, "w", encoding="utf-8-sig", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=CSV_COLUMNS)
+            w.writeheader()
+            w.writerow({"Title": "Ein " * 40 + "Titel",
+                        "Media URL": BASE_URL + "/images/covers/a.jpg",
+                        "Pinterest board": "B",
+                        "Description": "Sauberer Text ohne Claims.",
+                        "Link": BASE_URL + "/posts/2026-01-03-a/",
+                        "Publish date": "", "Keywords": ""})
+            w.writerow({"Title": "Kürzer-Pin",
+                        "Media URL": BASE_URL + "/images/covers/b.jpg",
+                        "Pinterest board": "B",
+                        "Description": "Test.",
+                        "Link": "https://bit.ly/kurz", "Publish date": "",
+                        "Keywords": ""})
+        findings, kept = check_csv(csv_file, check_network=False)
+        check("C blockt URL-Kürzer-Zeile, behält saubere (mit Kürzung)",
+              len(kept) == 1 and any("Kürzer" in m for _r, s, m in findings
+                                     if s == "hard"))
+        # ---- F: Feed (frozen XML)
+        with open(feed_file, "w", encoding="utf-8") as f:
+            f.write('<?xml version="1.0"?><rss version="2.0"><channel>'
+                    "<title>t</title><link>https://x.de/</link>"
+                    "<description>d</description>"
+                    "<item><title>Ein völlig normaler Testtitel hier</title>"
+                    f"<link>{BASE_URL}/posts/2026-01-04-f/</link>"
+                    f"<description>{'Eine saubere Feed-Beschreibung ohne Auffälligkeiten. ' * 3}</description>"
+                    "<guid>g1</guid>"
+                    f"<pubDate>{now.strftime('%a, %d %b %Y %H:%M:%S +0000')}</pubDate>"
+                    "</item></channel></rss>")
+        ffindings, _feed = check_feed()
+        check("F meldet fehlendes Cover (F4)",
+              any(r == "F4" for r, _s, _m in ffindings))
+    finally:
+        STATE_FILE, HISTORY_FILE, AUDIT_FILE, FEED_LOCAL = saved
+        import shutil
+        shutil.rmtree(tmp, ignore_errors=True)
+
+    failed = [n for n, ok in results if not ok]
+    if failed:
+        print(f"🛑 SPAM-SELFTEST FEHLGESCHLAGEN ({len(failed)}/{len(results)}):")
+        for n in failed:
+            print("   ✗ " + n)
+        return 2
+    print(f"✅ SPAM-SELFTEST bestanden ({len(results)} eingefrorene Fälle, "
+          f"alle 4 Kanäle).")
+    return 0
+
+
+# ------------------------------------------------------------------ Report
+def write_report(sections):
+    """SPAM-REPORT.md – letzter Lauf, Funde, Heilungen, API-Zustand."""
+    now = now_utc()
+    now_str = now.strftime("%Y-%m-%d %H:%M UTC")
+    state = load_state()
+    in_pause, until = _in_pause(state)
+    if in_pause:
+        mins = max(1, int((until - now).total_seconds() // 60) + 1)
+        pause_line = (f"🔴 aktiv bis {state.get('pause_until')} (~{mins} Min)"
+                      f" (Streak {state.get('error_streak', 0)})")
+    else:
+        pause_line = "🟢 keine Pause"
+    day_ago = now - datetime.timedelta(days=1)
+    created = [t for t in (state.get("created") or [])
+               if (_parse_ts(t) or now) >= day_ago]
+    hour_ct = sum(1 for t in created
+                  if (_parse_ts(t) or now) >= now - datetime.timedelta(hours=1))
+    hard_total = sum(1 for _t, fs, _h in sections for f in fs
+                     if f[1] == "hard")
+    lines = [
+        "# 🛡️ SPAM-REPORT (spam_guard.py)",
+        "",
+        f"**Stand:** {now_str} · Modus: " + ("FIX" if DO_FIX else "CHECK"),
+        "",
+        f"**API-Status:** Pause: {pause_line} · Rate (24h): {len(created)}/{MAX_PER_DAY} "
+        f"(davon letzte Std.: {hour_ct}/{MAX_PER_HOUR})",
+        "",
+    ]
+    for title, findings, healed in sections:
+        lines += [f"## {title}", ""]
+        if not findings:
+            lines.append("- keine Funde")
+        for rule, sev, msg in findings:
+            mark = "🔴" if sev == "hard" else ("🟡" if sev == "warn" else "ℹ️")
+            lines.append(f"- {mark} [{rule}] {msg}")
+        if healed:
+            lines += ["", "**Geheilt:**"]
+            lines += [f"- ✅ {h}" for h in healed]
+        lines.append("")
+    lines += ["## Fazit", "",
+              "✅ Spamfrei: keine harten Funde." if hard_total == 0
+              else f"🔴 {hard_total} harte Funde – Details oben (Heilung via "
+                   f"--fix; API-Pausen werden NIE automatisch zurückgesetzt, "
+                   f"nur per --reset-pause).",
+              "", "---",
+              "_Wache: Blog B1–B8 · Feed F1–F6 · CSV C1–C8 · API A1–A4 – "
+              "Dauerauftrag, niemals Content-Verlust._"]
+    with open(REPORT, "w", encoding="utf-8") as fh:
+        fh.write("\n".join(lines))
+    return hard_total == 0
+
+
+# --------------------------------------------------------------------- CLI
+def main():
+    if "--selftest" in sys.argv:
+        return run_selftest()
+    if "--reset-pause" in sys.argv:
+        state = load_state()
+        state.pop("pause_until", None)
+        state["error_streak"] = 0
+        save_state(state)
+        audit({"module": "spam_guard", "action": "pause-reset", "by": "manual"})
+        print("✅ API-Pause manuell zurückgesetzt.")
+        return 0
+    if "--gen-csv" in sys.argv:
+        max_n = None
+        if "--max" in sys.argv:
+            try:
+                max_n = int(sys.argv[sys.argv.index("--max") + 1])
+            except (ValueError, IndexError):
+                pass
+        path, n = gen_csv(max_n)
+        print(f"✅ Kanonischer CSV generiert: {path} ({n} Zeilen).")
+        return 0
+    if "--api-preflight" in sys.argv:
+        ok, msg = api_preflight()
+        print(msg)
+        return 0 if ok else 1
+    if "--api-postrun" in sys.argv:
+        api_postrun()
+        print("✅ API-Post-Run-Sync abgeschlossen (State bereinigt).")
+        return 0
+    if "--sync-pins" in sys.argv:
+        return sync_pins()
+
+    # Standard: --check [Kanal …] [--fix] [--file CSV]
+    channels = []
+    if "--check" in sys.argv:
+        i = sys.argv.index("--check")
+        for a in sys.argv[i + 1:]:
+            if a in ("blog", "feed", "csv", "api"):
+                channels.append(a)
+            else:
+                break
+    if not channels:
+        channels = ["blog", "feed", "csv", "api"]
+
+    # SABOTAGE-SCHUTZ: Selftest vor jeder --fix-Aktion.
+    # Exit 2 → nichts wird verändert (Deploy/Watchdog bricht sauber ab).
+    if DO_FIX and not DRY_RUN:
+        rc = run_selftest()
+        if rc != 0:
+            print("🛑 --fix abgebrochen: Selftest fehlgeschlagen "
+                  "(Sabotage-Schutz, nichts verändert).")
+            return 2
+
+    csv_file = os.path.join(BLOG_DIR, "data", "pins_upload.csv")
+    if "--file" in sys.argv:
+        try:
+            csv_file = sys.argv[sys.argv.index("--file") + 1]
+        except IndexError:
+            pass
+
+    sections = []
+    for ch in channels:
+        if ch == "blog":
+            findings_map = check_blog()
+            findings = [(r, s, f"{slug}: {m}")
+                        for slug, (_p, fs) in sorted(findings_map.items())
+                        for (r, s, m) in fs]
+            healed = fix_blog(findings_map) if DO_FIX else []
+            sections.append(("B: Blog (B1–B8)", findings, healed))
+        elif ch == "feed":
+            findings, _feed = check_feed()
+            healed = fix_feed(findings) if DO_FIX else []
+            sections.append(("F: RSS-Feed /index.xml (F1–F6)", findings, healed))
+        elif ch == "csv":
+            if not os.path.exists(csv_file):
+                sections.append(
+                    ("C: Pinterest-Bulk-CSV (C1–C8)",
+                     [("C0", "info", "CSV-Datei nicht vorhanden – Kanal "
+                                      "übersprungen (optional, --gen-csv)")],
+                     []))
+            else:
+                findings, kept = check_csv(csv_file)
+                healed = fix_csv(csv_file, findings, kept) if DO_FIX else []
+                sections.append((f"C: CSV {os.path.basename(csv_file)} "
+                                 f"(C1–C8)", findings, healed))
+        elif ch == "api":
+            ok, msg = api_preflight()
+            api_findings = [("A1", "hard" if not ok else "info", msg)]
+            if not _resolve_token():
+                api_findings.append((
+                    "A2", "info",
+                    "kein Token – Pre-Create-Checks (A2/A4) laufen "
+                    "library-seitig in der Pinterest-Engine "
+                    "(spam_guard.api_check_pin / api_record_created)"))
+            sections.append(("A: Pinterest-API (A1–A4)", api_findings, []))
+
+    write_report(sections)
+    hard = [f for _t, fs, _h in sections for f in fs if f[1] == "hard"]
+    if AS_JSON:
+        print(json.dumps({
+            "hard": len(hard),
+            "sections": [{"name": t, "findings": [list(f) for f in fs],
+                          "healed": h} for t, fs, h in sections]},
+            ensure_ascii=False, indent=1))
+    else:
+        for t, fs, h in sections:
+            print(f"== {t}: {len(fs)} Funde"
+                  + (f", {len(h)} Heilungen" if h else ""))
+            for r, s, m in fs:
+                mark = "🔴" if s == "hard" else ("🟡" if s == "warn" else "ℹ️")
+                print(f"   {mark} [{r}] {m}")
+    audit({"module": "spam_guard", "action": "run", "channels": channels,
+           "fix": DO_FIX, "hard": len(hard)})
+    return 1 if hard else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

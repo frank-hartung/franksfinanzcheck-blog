@@ -1,8 +1,20 @@
 {{- /* Pinterest-optimierter RSS-2.0-Feed (Home).
-      Hugo 0.146+ nutzt layouts/rss.xml (nicht layouts/_default/rss.xml).
       - Nur BLOG-Artikel (Section "posts") – keine Rechts-/Pillar-Seiten.
-      - Cover als enclosure + media:content → Pinterest Auto-publish (2:3, 1000×1500).
-      - RSS 2.0 (nicht Atom) – Pflicht für Pinterests Auto-publish.
+      - Jedes Item trägt Titel, Link, Meta-Description / Pin-Description und das Cover-Bild
+        (enclosure + media:content + media:thumbnail) → Pinterest baut daraus
+        automatisch Pins (2:3, 1000×1500).
+      - RSS 2.0 (nicht Atom) – Pflicht für Pinterests "Auto-publish".
+      - PREM-AUDIT 26.08.2026 (KERN-FIX): ALLE dynamischen Werte werden
+        deterministisch XML-escapt. `plainify` liefert einen "safe"-Typ,
+        der Hugos Auto-Escaping umgeht – `| html` darauf ist ein No-Op.
+        Deshalb: erst `printf "%s"` (Rückführung auf rohen String), dann
+        `| html` (exakt einmal escaped, Double-Escaping ausgeschlossen).
+        Vorher: "Internet & DSL wechseln" machte den FEED als XML ungültig
+        → Pinterests Auto-Publish blockiert. Wache dagegen: spam_guard.py
+        F1 (pruft jeden Build auf valides XML).
+      - ABSPiegelung: layouts/rss.xml und layouts/_default/rss.xml müssen
+        IDENTISCH bleiben (je nach Hugo-Version wird das eine oder andere
+        Layout bevorzugt – 0.164.0 nimmt _default, empirisch verifiziert).
 */ -}}
 {{- $pages := where site.RegularPages "Section" "posts" -}}
 {{- $pages = where $pages "Params.hiddenInRss" "!=" true -}}
@@ -16,17 +28,19 @@
   xmlns:content="http://purl.org/rss/1.0/modules/content/"
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>{{ site.Title }}</title>
-    <link>{{ site.BaseURL }}</link>
-    <description>{{ with site.Params.description }}{{ . }}{{ end }}</description>
-    <language>{{ site.Language.LanguageCode | default "de-DE" }}</language>
+    <title>{{ printf "%s" (site.Title) | html }}</title>
+    <link>{{ printf "%s" (site.BaseURL) | html }}</link>
+    <description>{{ with site.Params.description }}{{ printf "%s" . | html }}{{ end }}</description>
+    <language>{{ printf "%s" (site.Language.Locale | default "de-DE") | html }}</language>
+    {{- /* Feed-Bild (Premium 25.08.2026): Pinterest nutzt das Channel-Image
+           für die Feed-Anzeige – saubere 512×512-Marke, ohne Query-String. */ -}}
     <image>
-      <title>{{ site.Title }}</title>
-      <url>{{ "pinterest-app-icon.png" | absURL }}</url>
-      <link>{{ site.BaseURL }}</link>
+      <title>{{ printf "%s" (site.Title) | html }}</title>
+      <url>{{ "pinterest-app-icon.png" | absURL | html }}</url>
+      <link>{{ printf "%s" (site.BaseURL) | html }}</link>
     </image>
     {{- with site.Copyright }}
-    <copyright>{{ . | markdownify | plainify }}</copyright>
+    <copyright>{{ printf "%s" (. | markdownify | plainify) | html }}</copyright>
     {{- end }}
     {{- if and (not .Date.IsZero) (gt (len $pages) 0) }}
     <lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
@@ -36,16 +50,20 @@
     {{- end }}
     {{- range $pages }}
     <item>
-      <title>{{ .Title | plainify }}</title>
+      <title>{{ printf "%s" (.Title | plainify) | html }}</title>
+      {{- /* UTM (Premium 25.08.2026): Dieser Feed läuft AUSSCHLIESSLICH über
+             Pinterests Auto-publish → Item-Links tragen die Kanal-Markierung,
+             damit Umami Pin-Traffic sauber zuordnet. Die <guid> bleibt bewusst
+             die reine Permalink (stabile Identität, kein Re-Crawl-Flattern). */ -}}
       <link>{{ .Permalink }}?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=rss-autopublish</link>
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
-      <guid isPermaLink="true">{{ .Permalink }}</guid>
-      <description>{{ with or .Params.pin_description .Description | html }}{{ . }}{{ else }}{{ .Summary | plainify | html }}{{ end }}</description>
+      <guid isPermaLink="true">{{ printf "%s" (.Permalink) | html }}</guid>
+      <description>{{ $desc := or (.Params.pin_description) (.Description) }}{{ if $desc }}{{ printf "%s" $desc | html }}{{ else }}{{ printf "%s" (.Summary | plainify) | html }}{{ end }}</description>
       {{- with .Params.cover.image }}
       {{- $img := . | absURL }}
-      <enclosure url="{{ $img }}" type="image/jpeg" />
-      <media:content url="{{ $img }}" medium="image" type="image/jpeg" />
-      <media:thumbnail url="{{ $img }}" />
+      <enclosure url="{{ printf "%s" $img | html }}" type="image/jpeg" />
+      <media:content url="{{ printf "%s" $img | html }}" medium="image" type="image/jpeg" />
+      <media:thumbnail url="{{ printf "%s" $img | html }}" />
       {{- end }}
     </item>
     {{- end }}

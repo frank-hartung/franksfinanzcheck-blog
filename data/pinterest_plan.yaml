@@ -78,12 +78,12 @@ pins:
   typ: EP
   titel: 'WLAN-Verstärker vs. Mesh-WLAN: Was lohnt sich wirklich?'
   pinwand: Internet & DSL | WLAN-Tipps & Tarife
-  url: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: Funklöcher im Schlafzimmer, Ruckeln im Homeoffice? Wir erklären verständlich den Unterschied zwischen WLAN-Repeater und Mesh-System – mit Kostenvergleich und klarer Empfehlung für jede Wohnungsgröße. Jetzt lesen!
   keywords: wlan verbessern, mesh wlan oder repeater, wlan verstärker, schnelles internet zuhause
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.4321
-  link_quelle: artikel
+  blog_url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 0.5755
+  link_quelle: pillar
 - tag: 3
   typ: EP
   titel: 'Urlaubskasse clever aufbessern: 7 Tipps für mehr Reisebudget'
@@ -92,7 +92,7 @@ pins:
   beschreibung: 'Mehr Geld für den nächsten Urlaub – ohne Nebenjob: 7 alltagstaugliche Tricks, mit denen du deine Reisekasse Monat für Monat füllst. Inklusive Mini-Sparplan, der sich nach 6 Monaten schon als Wochenendtrip bemerkbar macht. Jetzt lesen!'
   keywords: urlaubskasse aufbessern, reisebudget tipps, urlaub sparen, günstig reisen
   blog_url: https://franksfinanzcheck.de/pillar/mietwagen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 0.6952
+  link_score: 0.6968
   link_quelle: pillar
 - tag: 4
   typ: EP
@@ -123,7 +123,7 @@ pins:
   keywords: gasvergleich, gastarife wechseln, gaskosten sparen, heizkosten senken
   check24_kategorie: https://www.check24.de/gas/
   blog_url: https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.8692
+  link_score: 1.8653
   link_quelle: artikel
 - tag: 5
   typ: EP
@@ -133,7 +133,7 @@ pins:
   beschreibung: 'Wer die Heizperiode schon im Spätsommer vorbereitet, spart richtig Geld: Heizung entlüften, Thermostate clever einstellen, Gasvertrag prüfen – unsere 6-Schritte-Checkliste macht dein Zuhause fit für den Winter. Jetzt abhaken!'
   keywords: gasrechnung senken, heizkosten sparen, heizperiode checkliste, herbst vorbereitung
   blog_url: https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.2875
+  link_score: 1.5083
   link_quelle: artikel
 - tag: 6
   typ: EP
@@ -143,7 +143,7 @@ pins:
   beschreibung: 'Mehr Tempo fürs Internet – ganz ohne neuen Tarif: Der Wechsel des DNS-Servers dauert 5 Minuten und macht dein Surfen spürbar schneller und sicherer. Unsere Schritt-für-Schritt-Anleitung zeigt, wie es auf PC, Handy und Router klappt.'
   keywords: dns server wechseln, internet schneller machen, dsl tipps, dns einrichten
   blog_url: https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.6772
+  link_score: 1.4921
   link_quelle: artikel
 - tag: 6
   typ: EP
@@ -153,17 +153,17 @@ pins:
   beschreibung: 'Versteckte Kosten beim Mietwagen? Nicht mit uns: Diese 7 Fallen – von der Vollkasko-Masche bis zur Tankregelung – kosten Urlauber jedes Jahr Hunderte Euro. So schützt du dich vor bösen Überraschungen am Schalter. Jetzt lesen!'
   keywords: mietwagen fallen, mietwagen tipps urlaub, mietwagen kaution, reisekosten sparen
   blog_url: https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 2.3968
+  link_score: 2.3705
   link_quelle: artikel
 - tag: 7
   typ: EP
   titel: 'Frugalismus für Einsteiger: 5 Tricks, die sofort funktionieren'
   pinwand: Geld sparen im Alltag | Frugalismus-Tipps
-  url: https://franksfinanzcheck.de/posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Frugalismus klingt nach Verzicht – ist aber cleveres Priorisieren: Diese 5 Einsteiger-Tricks zeigen, wie du ohne Verzichtsgefühl 100 € und mehr im Monat freischaufelst. Inklusive der beliebten 30-Tage-Wunschliste. Jetzt starten!'
   keywords: frugalismus für einsteiger, geld sparen lernen, spartipps alltag, achtsam konsumieren
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.64
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.3556
   link_quelle: artikel
 - tag: 7
   typ: TP
@@ -190,22 +190,22 @@ pins:
   typ: EP
   titel: Diese 5 Geräte treiben deine Stromrechnung in die Höhe
   pinwand: Strom & Gas sparen | Tarife clever wechseln
-  url: https://franksfinanzcheck.de/posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/pillar/strom-sparen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Trockner, Heizlüfter, alte Kühltruhe: Die größten Stromfresser stehen oft unauffällig in der Ecke – und kosten bis zu 250 € im Jahr. Wir zeigen die Top 5 inklusive Verbrauchskosten und den günstigsten Alternativen. Jetzt nachrechnen!'
   keywords: stromfresser haushalt, stromverbrauch senken, energie sparen, stromrechnung zu hoch
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.3938
-  link_quelle: artikel
+  blog_url: https://franksfinanzcheck.de/pillar/strom-sparen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 0.9739
+  link_quelle: pillar
 - tag: 9
   typ: EP
   titel: Repeater oder Mesh? So bekommst du WLAN in jeden Winkel
   pinwand: Internet & DSL | WLAN-Tipps & Tarife
-  url: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Schwaches WLAN im Arbeitszimmer muss nicht sein: Wir vergleichen Repeater, Powerline und Mesh-Systeme – mit Preisen, Vor- und Nachteilen und einer klaren Empfehlung für Mietwohnung, Reihenhaus und Altbau. Jetzt die passende Lösung finden!'
   keywords: wlan repeater oder mesh, wlan verbessern, powerline vs mesh, internet im ganzen haus
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.8481
-  link_quelle: artikel
+  blog_url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 0.58
+  link_quelle: pillar
 - tag: 9
   typ: EP
   titel: 'Mehr Geld für den Urlaub: So polsterst du deine Reisekasse auf'
@@ -255,7 +255,7 @@ pins:
   beschreibung: 'Bevor die ersten kalten Nächte kommen, ist deine Heizsaison-Checkliste dran: Thermostate smart einstellen, Heizkörper entlüften, Abschlag und Gaspreise prüfen. Wer jetzt 30 Minuten investiert, spart den ganzen Winter. Jetzt lesen!'
   keywords: heizung vorbereiten, gasvertrag prüfen, heizsaison checkliste, energiekosten senken herbst
   blog_url: https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.3124
+  link_score: 1.3099
   link_quelle: artikel
 - tag: 12
   typ: EP
@@ -265,7 +265,7 @@ pins:
   beschreibung: Webseiten laden zäh, obwohl der Tarif schnell ist? Oft bremst nur der DNS-Server deines Anbieters. Wir zeigen, wie du in 5 Minuten auf schnelle, sichere Alternativen wechselst – kostenlos, ganz legal, ohne Zusatzsoftware. Jetzt Anleitung lesen!
   keywords: dns ändern anleitung, internet schneller machen, langsame webseiten, dsl optimieren
   blog_url: https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.6521
+  link_score: 1.4376
   link_quelle: artikel
 - tag: 12
   typ: TP
@@ -276,7 +276,7 @@ pins:
   keywords: ratenkredit vergleich, umschulden sparen, kredit bestzins, dispo ablösen
   check24_kategorie: https://www.check24.de/kredit/
   blog_url: https://franksfinanzcheck.de/pillar/frugalismus/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 0.6385
+  link_score: 0.602
   link_quelle: pillar
 - tag: 13
   typ: EP
@@ -286,7 +286,7 @@ pins:
   beschreibung: 'Fantasie-Schäden nach der Rückgabe, überteuerte Zusatzversicherung am Tresen, versteckte Gebühren: Mietwagen-Fallen haben viele Gesichter. Wir zeigen die 7 fiesesten – und wie du dich mit 3 Fotos und 1 Frage schützt. Jetzt lesen!'
   keywords: mietwagen abzocke vermeiden, mietwagen versicherung, urlaub tipps, mietwagen rückgabe
   blog_url: https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.2516
+  link_score: 1.2298
   link_quelle: artikel
 - tag: 13
   typ: EP
@@ -327,18 +327,18 @@ pins:
   keywords: kfz versicherung wechseln, autoversicherung vergleich, kfz wechsel stichtag, versicherung sparen
   check24_kategorie: https://www.check24.de/kfz-versicherung/
   blog_url: https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 2.0964
+  link_score: 2.1063
   link_quelle: artikel
 - tag: 15
   typ: EP
   titel: WLAN-Probleme? Verstärker vs. Mesh – der große Vergleich
   pinwand: Internet & DSL | WLAN-Tipps & Tarife
-  url: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Calls, die einfrieren, und Serien, die puffern: Wenn dein WLAN streikt, hilft selten ein neuer Tarif – meist fehlt es an der Abdeckung. Repeater oder Mesh? Wir vergleichen Technik, Kosten und Aufwand im großen Praxis-Check. Jetzt lesen!'
   keywords: wlan probleme lösen, mesh wlan test, wlan abdeckung verbessern, homeoffice internet
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.4742
-  link_quelle: artikel
+  blog_url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 0.8043
+  link_quelle: pillar
 - tag: 16
   typ: EP
   titel: 'Urlaub trotz kleinem Budget: 7 Tricks für deine Reisekasse'
@@ -347,7 +347,7 @@ pins:
   beschreibung: 'Kleines Budget, großer Urlaub? Geht: Mit Nebensaison-Trick, Flugalarm und cleverer Unterkunftswahl reist du für die Hälfte. 7 konkrete Spartaktiken für deinen nächsten Trip – mit Zahlenbeispielen. Jetzt sparen lernen!'
   keywords: urlaub kleines budget, günstig verreisen, reiseschnäppchen finden, sparurlaub tipps
   blog_url: https://franksfinanzcheck.de/pillar/mietwagen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 0.7327
+  link_score: 0.7339
   link_quelle: pillar
 - tag: 16
   typ: EP
@@ -378,7 +378,7 @@ pins:
   keywords: last minute urlaub, reiseangebote günstig, pauschalreise schnäppchen, sommerurlaub last minute
   check24_kategorie: https://www.check24.de/reisen/
   blog_url: https://franksfinanzcheck.de/pillar/mietwagen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 0.96
+  link_score: 0.9612
   link_quelle: pillar
 - tag: 18
   typ: EP
@@ -388,7 +388,7 @@ pins:
   beschreibung: 'Die Heizperiode kostet im Schnitt über 1.000 € pro Jahr – mit 6 einfachen To-dos drückst du diese Rechnung spürbar: Thermostat-Strategie, Abschlag anpassen, Zugluft stoppen und mehr. Die komplette Spar-Checkliste auf dem Blog!'
   keywords: heizkosten senken, heizung sparen tipps, gas abschlag anpassen, winter vorbereitung wohnung
   blog_url: https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.3224
+  link_score: 1.32
   link_quelle: artikel
 - tag: 18
   typ: EP
@@ -398,7 +398,7 @@ pins:
   beschreibung: 'Du brauchst keinen teureren Tarif für schnelleres Netz – nur den richtigen DNS-Server: Unsere Anleitung zeigt den Wechsel für Windows, Mac, Android, iPhone und Fritzbox – jeweils in unter 5 Minuten. Kostenlos, sicher, jederzeit rückgängig zu machen. Jetzt lesen!'
   keywords: dns server ändern, fritzbox dns, internet beschleunigen, dns anleitung handy
   blog_url: https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.5782
+  link_score: 1.7643
   link_quelle: artikel
 - tag: 19
   typ: EP
@@ -408,7 +408,7 @@ pins:
   beschreibung: 'Klauseln, Tankregelungen, Kautionen: Beim Mietwagen entscheiden Details über entspannten Urlaub oder Ärger. Unser großer Fallen-Check zeigt, worauf du bei Buchung, Abholung und Rückgabe achten musst – mit Checkliste zum Speichern!'
   keywords: mietwagen buchen tipps, mietwagen checkliste, vollkasko ohne selbstbeteiligung, tankregelung
   blog_url: https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.5753
+  link_score: 1.5781
   link_quelle: artikel
 - tag: 19
   typ: EP
@@ -429,7 +429,7 @@ pins:
   keywords: mietwagen buchen günstig, mietwagen vergleich, auto mieten urlaub, mietwagen ohne kaution
   check24_kategorie: https://www.check24.de/mietwagen/
   blog_url: https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.6051
+  link_score: 1.607
   link_quelle: artikel
 - tag: 20
   typ: EP
@@ -455,12 +455,12 @@ pins:
   typ: EP
   titel: 'Mesh-WLAN oder Repeater: 5 Unterschiede, die du kennen musst'
   pinwand: Internet & DSL | WLAN-Tipps & Tarife
-  url: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Bevor du Geld für die falsche Lösung ausgibst: 5 entscheidende Unterschiede zwischen Mesh-System und WLAN-Repeater – Geschwindigkeit, Einrichtung, Kosten, Roaming und Zukunftssicherheit. Danach weißt du genau, was in DEINE Wohnung passt. Jetzt lesen!'
   keywords: mesh wlan vs repeater unterschied, wlan system vergleich, wlan einrichten, mesh lohnt sich
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.5873
-  link_quelle: artikel
+  blog_url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 0.5782
+  link_quelle: pillar
 - tag: 22
   typ: EP
   titel: 'Reisebudget-Tricks: So bleibt nach dem Urlaub noch Geld übrig'
@@ -469,7 +469,7 @@ pins:
   beschreibung: 'Der schlimmste Urlaubsfrevel: die Kreditkartenrechnung danach. Mit diesen 7 Budgetierungs-Tricks planst du realistisch, baust Puffer ein und hältst dich daran – vom Tagesbudget bis zur 80/20-Regel für Extras. So kommst du schuldenfrei zurück. Jetzt lesen!'
   keywords: reisebudget planen, urlaub kostenkontrolle, tagesbudget urlaub, geld im urlaub sparen
   blog_url: https://franksfinanzcheck.de/pillar/mietwagen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 0.8374
+  link_score: 0.8386
   link_quelle: pillar
 - tag: 22
   typ: TP
@@ -480,7 +480,7 @@ pins:
   keywords: flugtickets günstig, flugvergleich, billigflüge finden, preisalarm flug
   check24_kategorie: https://www.check24.de/fluege/
   blog_url: https://franksfinanzcheck.de/pillar/mietwagen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 0.6463
+  link_score: 0.6078
   link_quelle: pillar
 - tag: 23
   typ: EP
@@ -500,7 +500,7 @@ pins:
   beschreibung: 'Dein Notfall-Polster auf dem Girokonto verliert jeden Tag an Wert: Wir vergleichen die smarten Parkplätze – Tagesgeld, Geldmarkt, verzinste Unterkonten – und zeigen, was wirklich sicher UND schnell verfügbar ist. Jetzt Zinsen mitnehmen!'
   keywords: notgroschen anlegen, tagesgeld vergleich, geld sicher parken, zinsen notfallgeld
   blog_url: https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.8222
+  link_score: 1.9384
   link_quelle: artikel
 - tag: 24
   typ: EP
@@ -510,18 +510,18 @@ pins:
   beschreibung: 'Keine Lust auf die Nachforderung im Frühjahr? Dann jetzt handeln: Unser großer Heizperiode-Check deckt Verbrauch, Vertrag und Verhalten ab – mit Richtwerten, um deinen Abschlag zu prüfen, bevor die Rechnung kommt. Jetzt lesen!'
   keywords: gasrechnung nachzahlung vermeiden, abschlag prüfen, heizperiode tipps, gasverbrauch senken
   blog_url: https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.52
+  link_score: 1.5176
   link_quelle: artikel
 - tag: 24
   typ: EP
   titel: 'Der DNS-Hack: So holst du mehr aus deiner Internetleitung'
   pinwand: Internet & DSL | WLAN-Tipps & Tarife
-  url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Kleiner Eingriff, spürbarer Effekt: Ein alternativer DNS-Server verkürzt Ladezeiten, filtert oft sogar Schadsoftware und schützt deine Privatsphäre besser als der Standard deines Anbieters. Wir zeigen alle Schritte – auch für Laien. Jetzt Anleitung speichern!'
   keywords: dns hack, dns privatsphäre, schnelleres wlan, internet tipps und tricks
-  blog_url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0961
-  link_quelle: pillar
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.1029
+  link_quelle: artikel
 - tag: 25
   typ: TP
   titel: Gaspreise steigen? Jetzt Tarif mit Preisgarantie sichern
@@ -531,7 +531,7 @@ pins:
   keywords: gas preisgarantie, gaspreise 2026, gastarif sichern, gasrechnung sparen
   check24_kategorie: https://www.check24.de/gas/
   blog_url: https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.5204
+  link_score: 1.8752
   link_quelle: artikel
 - tag: 25
   typ: EP
@@ -541,17 +541,17 @@ pins:
   beschreibung: 'Am Mietwagen-Schalter läuft das Spielchen immer gleich ab: Druck für teure Zusatzpakete. So bleibst du cool und sparst: vorab Vollkasko ohne Selbstbeteiligung buchen, Kaution realistisch einplanen, Übergabeprotokoll mit Fotos sichern. Alle Details im Guide!'
   keywords: mietwagen zusatzversicherung, mietwagen kaution, vollkasko mietwagen, mietwagen abholung tipps
   blog_url: https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.7591
+  link_score: 1.7628
   link_quelle: artikel
 - tag: 26
   typ: EP
   titel: 'Sparen wie die Profis: 5 Frugalismus-Tricks gegen die Geldfalle Alltag'
   pinwand: Geld sparen im Alltag | Frugalismus-Tipps
-  url: https://franksfinanzcheck.de/posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Der Alltag ist die teuerste Geldfalle überhaupt: 5 Euro hier, 12 Euro da – macht am Monatsende schnell 300 €. Diese 5 Frugalismus-Tricks der Profis schließen genau diese Lecks, ohne dass dein Leben ärmer wird. Jetzt lesen und Löcher stopfen!'
   keywords: profis sparen tricks, geldfalle alltag, ausgaben senken, frugal leben
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.2771
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.1772
   link_quelle: artikel
 - tag: 26
   typ: EP
@@ -561,17 +561,17 @@ pins:
   beschreibung: 'Theorie war gestern: Wir rechnen die 50-30-20-Regel mit 2.000 €, 2.800 € und 3.500 € netto komplett durch – inklusive Tipps, wenn deine Fixkosten über 50 % liegen (das ist bei vielen Mieten der Fall). Dein Budget, dein Plan, 10 Minuten. Jetzt lesen!'
   keywords: 50 30 20 beispielrechnung, budget mit 2000 euro netto, fixkosten senken, budgetierung beispiel
   blog_url: https://franksfinanzcheck.de/pillar/frugalismus/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 0.6727
+  link_score: 0.6364
   link_quelle: pillar
 - tag: 27
   typ: EP
   titel: 'Stromfresser-Checkliste: Wo dein Geld unbemerkt verpufft'
   pinwand: Strom & Gas sparen | Tarife clever wechseln
-  url: https://franksfinanzcheck.de/posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Diese Checkliste gehört an jeden Kühlschrank: Die 10 häufigsten Stromfallen im Haushalt – mit jährlichen Kosten in Euro und der jeweils wichtigsten Gegenmaßnahme. Abhaken und sparen: So holst du dir bis zu 300 € im Jahr zurück. Jetzt lesen!'
   keywords: strom sparen checkliste, stromfresser liste, stromkosten senken, haushalt energie tipps
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.58
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.3638
   link_quelle: artikel
 - tag: 27
   typ: TP
@@ -592,7 +592,7 @@ pins:
   beschreibung: 'Ein Zimmer mit Empfang, das nächste ohne – das Kästchen aus dem Elektromarkt hilft da oft nur halb: Wir zeigen, wann ein 30-€-Repeater reicht, wann nur ein Mesh-System Ruhe bringt und was beide Lösungen wirklich kosten. Jetzt lesen!'
   keywords: funkloch wlan, wlan verstärker sinnvoll, mesh system kosten, wlan abdeckung wohnung
   blog_url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0812
+  link_score: 0.4566
   link_quelle: pillar
 - tag: 28
   typ: EP
@@ -602,7 +602,7 @@ pins:
   beschreibung: 'Keine Lust auf einen Samstagsjob? Muss auch nicht sein: Diese 7 Geldquellen stecken in deinem Alltag – vom Abo-Audit über die Steuererstattung bis zum Flohmarkt-Wochenende. Realistisch: 300–800 € extra fürs nächste Reiseziel. Jetzt die Liste durchgehen!'
   keywords: urlaubskasse aufbessern, geld nebenbei ohne nebenjob, abo audit, urlaub finanzieren
   blog_url: https://franksfinanzcheck.de/pillar/mietwagen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 0.6824
+  link_score: 0.5253
   link_quelle: pillar
 - tag: 29
   typ: EP
@@ -633,7 +633,7 @@ pins:
   keywords: mietwagen schnäppchen, goldener september urlaub, mietwagen tagespreis, günstig auto mieten
   check24_kategorie: https://www.check24.de/mietwagen/
   blog_url: https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.1203
+  link_score: 1.1216
   link_quelle: artikel
 - tag: 30
   typ: EP
@@ -643,7 +643,7 @@ pins:
   beschreibung: 'Der Worst Case: erste Kältewelle, Heizung rattert, Gaspreis gestiegen. Dagegen hilft nur früh dran sein: Wartung, Einstellungen, Vertrag – unsere Übersicht priorisiert alle Maßnahmen nach Wirkung und Kosten. In 1 Stunde erledigt, den ganzen Winter gespart. Jetzt lesen!'
   keywords: heizung wartung, winterfest machen wohnung, spätsommer heizung, gaskosten senken
   blog_url: https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.2949
+  link_score: 1.2937
   link_quelle: artikel
 - tag: 31
   typ: EP
@@ -653,7 +653,7 @@ pins:
   beschreibung: 'Das beste Upgrade für dein Internet kostet nichts: Mit dem richtigen DNS-Server starten Seiten schneller, Streaming läuft stabiler und deine Daten sind besser geschützt. Unsere Bild-für-Bild-Anleitung führt dich durch jedes Gerät. Jetzt ausprobieren!'
   keywords: internet tuning kostenlos, dns wechseln tutorial, schneller surfen, dns sicherheit
   blog_url: https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.8649
+  link_score: 1.7616
   link_quelle: artikel
 - tag: 31
   typ: EP
@@ -663,7 +663,7 @@ pins:
   beschreibung: 'Von der Buchung bis zur Rückgabe: 7 Profi-Tricks, mit denen du Mietwagen-Maschen aus dem Weg gehst – inklusive dem Foto-Protokoll, das dich vor unberechtigten Schadensforderungen schützt, und der Tank-Frage, die du IMMER stellen solltest. Jetzt lesen und entspannt fahren!'
   keywords: mietwagen tricks profis, autovermietung tipps, urlaub auto mieten sicher, mietwagen betrug vermeiden
   blog_url: https://franksfinanzcheck.de/pillar/mietwagen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 0.8156
+  link_score: 0.797
   link_quelle: pillar
 - tag: 32
   typ: EP
@@ -673,7 +673,7 @@ pins:
   beschreibung: 'Eine Gaspreisgarantie nimmt dir den Winter-Schock: faire Tarife, klare Laufzeit, kein Zittern vor der Abschlagsrechnung. So schützt du dein Haushaltsbudget und sparst bis zu 650 Euro bei den Heizkosten. Jetzt die Checkliste lesen.'
   keywords: sicher heizen, gaspreisgarantie, gastarif wechseln, heizkosten senken
   blog_url: https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0
+  link_score: 2.3089
   link_quelle: artikel
 - tag: 33
   typ: EP
@@ -683,7 +683,7 @@ pins:
   beschreibung: 'Hausrat, Elementarschäden, Unterversicherung: Das Vorsorge-Update 2026 zeigt dir, welche Policen wirklich schützen und wo du bei deiner Immobilie Geld sparst. Ein Check, der sich in Minuten rechnet. Jetzt lesen.'
   keywords: haus sicher schützen, hausratversicherung, elementarschaden, unterversicherung, wohngebäudeversicherung
   blog_url: https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0
+  link_score: 2.7889
   link_quelle: artikel
 - tag: 34
   typ: EP
@@ -693,17 +693,17 @@ pins:
   beschreibung: 'DSL-Anbieterwechsel ohne Internet-Loch: Portierung, Kündigung durch den Neuanbieter und der echte Effektivpreis über 24 Monate. Wer diese 4 Phasen kennt, spart 280 bis 380 Euro und behält jederzeit Anschluss. Jetzt die Schritt-für-Schritt-Anleitung lesen.'
   keywords: dsl wechseln, internet anbieterwechsel, dsl tarifvergleich, highspeed internet, router mieten oder kaufen
   blog_url: https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0
+  link_score: 2.4791
   link_quelle: artikel
 - tag: 35
   typ: EP
   titel: 'Gas-Anbieter wechseln: So sparst du bis zu 680 Euro'
   pinwand: Strom & Gas sparen | Tarife clever wechseln
-  url: https://franksfinanzcheck.de/posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Gaswechsel leicht gemacht: Preisgarantie, Kündigungsfristen und die Fallstricke im Kleingedruckten. Mit diesen Praxis-Tipps wechselst du stressfrei und sparst bis zu 680 Euro bei den Heizkosten. Jetzt die 10-Minuten-Anleitung lesen.'
   keywords: gas anbieter wechseln, gastarif wechseln, gaspreisvergleich, gaskosten senken, preisgarantie
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.5507
   link_quelle: artikel
 - tag: 36
   typ: EP
@@ -713,28 +713,28 @@ pins:
   beschreibung: 'Ein unachtsamer Moment, ein Millionenschaden: Die Privathaftpflicht ist die wichtigste Versicherung überhaupt. Hier lernst du, welche Schäden sie abdeckt und wie du Top-Schutz ab rund 35 Euro im Jahr findest. Jetzt lesen.'
   keywords: privathaftpflicht, haftpflichtversicherung, deckungssumme haftpflicht, haftpflicht vergleich
   blog_url: https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0
+  link_score: 2.7529
   link_quelle: artikel
 - tag: 37
   typ: EP
   titel: 'Wohngebäudeversicherung: Worauf du wirklich achten musst'
   pinwand: Versicherungen clever wechseln & sparen
-  url: https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/pillar/versicherungen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Unwetter, Starkregen, Feuer: Die Wohngebäudeversicherung entscheidet im Ernstfall über dein Haus. Wir zeigen dir die wichtigen Klauseln, den Elementarschutz und wie du bis zu 340 Euro sparst. Jetzt den Vergleich lesen.'
   keywords: wohngebäudeversicherung vergleich, elementarschutz, gebäudeversicherung, haus versicherung vergleich
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0
-  link_quelle: artikel
+  blog_url: https://franksfinanzcheck.de/pillar/versicherungen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.0462
+  link_quelle: pillar
 - tag: 38
   typ: EP
   titel: 'Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen'
   pinwand: Internet & DSL | WLAN-Tipps & Tarife
-  url: https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  beschreibung: 'DSL, Kabel oder Glasfaser? Der richtige Tarif hängt von deinem Bedarf ab, nicht vom Marketing. Diese Anleitung hilft dir, Bandbreite, Preis und Laufzeit richtig zu kombinieren und nicht mehr zu zahlen als nötig. Jetzt lesen.'
+  url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  beschreibung: DSL, Kabel oder Glasfaser? Der richtige Tarif hängt von deinem Bedarf ab, nicht vom Marketing. Diese Anleitung hilft dir, Bandbreite, Preis und Laufzeit richtig zu kombinieren und nicht mehr zu zahlen als nötig. Jetzt lesen.
   keywords: dsl tarif finden, internet geschwindigkeit bedarf, dsl vs kabel, günstiger internetanschluss
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0
-  link_quelle: artikel
+  blog_url: https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 0.8562
+  link_quelle: pillar
 - tag: 39
   typ: EP
   titel: 'Haushaltsbuch führen: App, Excel oder Papier?'
@@ -743,7 +743,7 @@ pins:
   beschreibung: 'Haushaltsplanung, die im Alltag hält: App, Excel-Tabelle oder Stift im ehrlichen Vergleich. Mit der 50-30-20-Regel und einem einfachen Wochen-Ritual sparst du bis zu 430 Euro im Monat. Jetzt die Vorlage und Tipps lesen.'
   keywords: haushaltsbuch führen, haushaltsbuch app, excel haushaltsbuch, 50 30 20 regel, ausgaben tracken
   blog_url: https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0
+  link_score: 2.4912
   link_quelle: artikel
 - tag: 40
   typ: EP
@@ -753,25 +753,25 @@ pins:
   beschreibung: 'Der Spätsommer ist die beste Zeit für den Gaswechsel: bevor die Heizperiode die Preise anzieht. Vergleiche Tarife mit Preisgarantie und Wechselbonus, in nur 5 Minuten Aufwand. Jetzt die Schritt-für-Schritt-Anleitung lesen.'
   keywords: preisgarantie gas, gaspreissprünge, gastarif wechseln, gasvergleich, heizkosten senken
   blog_url: https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0
+  link_score: 2.6927
   link_quelle: artikel
 - tag: 41
   typ: EP
   titel: 'Handytarif 2026 vergleichen: Allnet-Flats ab 4,99 Euro'
   pinwand: Internet & DSL | WLAN-Tipps & Tarife
-  url: https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Handytarife vergleichen 2026: Allnet-Flats ab 4,99 Euro, 5G unter 15 Euro und wann sich LTE noch lohnt. Mit der 8-Punkte-Checkliste entscheidest du in Minuten und sparst bis zu 360 Euro im Jahr. Jetzt die Vergleichsanleitung lesen.'
   keywords: handytarif vergleichen, allnet flat, 5g tarif, günstiger handytarif, handyvertrag wechseln
-  blog_url: https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.266
   link_quelle: artikel
 - tag: 42
   typ: EP
   titel: 'Kfz-Versicherung zum 30. November: 3 Fehler, die Geld kosten'
   pinwand: Versicherungen clever wechseln & sparen
-  url: https://franksfinanzcheck.de/pillar/versicherungen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  url: https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
   beschreibung: 'Der Wechselstichtag 30. November ist die Gelegenheit: Wer bei Kfz, Haftpflicht und Hausrat klug vorgeht, spart hunderte Euro. Diese 3 typischen Fehler solltest du vermeiden. Jetzt den Versicherungs-Guide lesen.'
   keywords: kfz versicherung wechseln, versicherungen vergleichen, stichtag versicherung, sparen versicherung
-  blog_url: https://franksfinanzcheck.de/pillar/versicherungen/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
-  link_score: 1.0
-  link_quelle: pillar
+  blog_url: https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/?utm_source=pinterest&utm_medium=social&utm_campaign=pins
+  link_score: 1.7218
+  link_quelle: artikel

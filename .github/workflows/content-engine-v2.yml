@@ -21,7 +21,7 @@
 #
 #  Publikations-Frequenz (13.08.2026, Google-Sichtbarkeits-Audit): von
 #  2 Artikeln/Tag (14/Woche) reduziert und seit 13.08. (Nachmittag) NICHT
-#  mehr fest codiert – scripts/cadence_manager.py passt die Cron-Tage
+#  mehr fest codiert – die feste Mo/Mi/Fr-Schlüsselung (cadence_guard)
 #  unten automatisch an (Ramp nach Domain-Alter + Sicherheitsbremse bei
 #  niedriger Erfolgsquote, siehe dortige Doku + CADENCE-REPORT.md). Die
 #  konkreten Wochentage in den Cron-Zeilen sind daher nur eine Momentaufnahme
@@ -82,12 +82,19 @@ jobs:
       # auf einer korrekten Tageszahl aufbaut und kein 4./5. Artikel live
       # gehen kann. Report: CADENCE-GATE-REPORT.md.
       - name: Phase 0.5 – Kadenz-Gate sicherstellen (Selbsttest + Selbstheilung)
+        # PREM-AUDIT 26.08.2026: nach jeder Kadenz-Heilung (Zurückstufung
+        # → draft, URL verschwindet aus dem Build) sofort die kontextuellen
+        # Links auf die betroffenen Posts in andern live Artikeln entlinken
+        # (draft_link_healer) – IM SELBEN COMMIT, damit der Push nie defekte
+        # interne Links nach main bringt (Issue #85).
         run: |
           python3 scripts/cadence_guard.py --selftest
           python3 scripts/cadence_guard.py --fix
+          python3 scripts/draft_link_healer.py --selftest
+          python3 scripts/draft_link_healer.py --fix
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
-          git add content/ CADENCE-GATE-REPORT.md
+          git add content/ CADENCE-GATE-REPORT.md DRAFT-LINK-REPORT.md
           if git diff --cached --quiet; then
             echo "Kadenz-Gate: Bestand bereits konform."
           else

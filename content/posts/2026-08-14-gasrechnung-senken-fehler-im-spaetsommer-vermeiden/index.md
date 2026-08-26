@@ -19,7 +19,7 @@ kurzantwort: "Wer im Spätsommer (August bis Oktober) seine Heizungsanlage warte
 social_posted: true
 keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie"]
 pin_title: "Heizperiode vorbereiten: 6 Schritte gegen hohe Gasrechnungen"
-pin_description: "Wer die Heizperiode schon im Spätsommer vorbereitet, spart richtig Geld: Heizung entlüften, Thermostate clever einstellen, Gasvertrag prüfen – unsere 6-Schritte-Checkliste macht dein Zuhause fit für den Winter. Jetzt abhaken!"
+pin_description: "*Werbung | Wer die Heizperiode schon im Spätsommer vorbereitet, spart richtig Geld: Heizung entlüften, Thermostate clever einstellen, Gasvertrag prüfen – unsere 6-Schritte-Checkliste macht dein Zuhause fit für den Winter. Jetzt abhaken!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
@@ -78,7 +78,7 @@ Wie du deinen Gasvertrag optimal absicherst, erklären wir ausführlich im Beitr
 
 Die **Gasrechnung senken** funktioniert am effektivsten, wenn du vor dem Start der Kälteperiode handelst. Die Kombination aus entlüfteten Heizkörpern, smarten Thermostaten und einem optimierten Gastarif mit Preisgarantie entlastet deine Haushaltskasse um bis zu 720 € im Jahr. Nutze die warmen Spätsommertage, um deine Heizung fit zu machen.
 
-**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Sicher heizen: So schützt dich eine Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · [Preisgarantie Gas](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): So sicherst du [günstige Tarife](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/) für 2026
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Sicher heizen: So schützt dich eine Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · [Preisgarantie Gas](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): So sicherst du günstige Tarife für 2026
 
 ## Häufige Fragen
 

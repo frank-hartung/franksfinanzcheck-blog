@@ -76,7 +76,7 @@ Befolge diese vier Schritte, um deinen Wechselbonus sicher zu erhalten:
 3. **Anbieterwechsel online beauftragen:** Wähle deinen Wunschtarif und gib an, dass du wechseln möchtest. Trage deine bisherige Kundennummer und Rufnummern ein. Der neue Provider kündigt deinen Alttarif automatisch.
 4. **Gutschrift prüfen:** Kontrolliere auf deiner ersten oder zweiten Monatsabrechnung, ob der vereinbarte Bonus vollständig abgezogen wurde.
 
-Wenn du dein Heimnetzwerk optimal einrichten willst, wirf einen Blick in unsere Anleitung zur [WLAN-Optimierung für mehr Reichweite](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) sowie in die Übersicht im [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
+Wenn du dein Heimnetzwerk optimal einrichten willst, wirf einen Blick in unsere Anleitung zur WLAN-Optimierung für mehr Reichweite sowie in die Übersicht im [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
 ## Häufige Fallstricke beim Bonus-Wechsel vermeiden
 
@@ -88,7 +88,7 @@ Wenn du dein Heimnetzwerk optimal einrichten willst, wirf einen Blick in unsere 
 
 Den **DSL-Wechselbonus** alle zwei Jahre mitzunehmen, ist eine der einfachsten Methoden, um ohne jeglichen Komfortverlust hunderte Euro an monatlichen Fixkosten einzusparen. Da der neue Anbieter die Kündigung und die Rufnummernmitnahme komplett übernimmt, liegt der tatsächliche Arbeitsaufwand bei unter 10 Minuten. Vergleiche noch heute die verfügbaren Geschwindigkeiten an deiner Adresse und sichere dir deine Wechselprämie.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · WLAN verbessern: So bringst du Speed in jede Ecke
 
 ## Häufige Fragen
 

@@ -21,7 +21,7 @@ kurzantwort: "Im Herbst steigt der Stromverbrauch durch frühere Dunkelheit und 
 social_posted: true
 keywords: ["Strom sparen im Haushalt", "Stromfresser finden", "Stromkosten senken", "Stromtarif vergleichen", "Energieeffizienz", "Frugalismus", "Geld sparen"]
 pin_title: "Stromfresser-Checkliste: Wo dein Geld unbemerkt verpufft"
-pin_description: "Diese Checkliste gehört an jeden Kühlschrank: Die 10 häufigsten Stromfallen im Haushalt – mit jährlichen Kosten in Euro und der jeweils wichtigsten Gegenmaßnahme. Abhaken und sparen: So holst du dir bis zu 300 € im Jahr zurück. Jetzt lesen!"
+pin_description: "*Werbung | Diese Checkliste gehört an jeden Kühlschrank: Die 10 häufigsten Stromfallen im Haushalt – mit jährlichen Kosten in Euro und der jeweils wichtigsten Gegenmaßnahme. Abhaken und sparen: So holst du dir bis zu 300 € im Jahr zurück. Jetzt lesen!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
@@ -80,7 +80,7 @@ Der größte finanzielle Hebel bleibt der Arbeitspreis pro Kilowattstunde. Wer n
 
 Effektives Stromsparen erfordert keinen Verzicht auf Lebensqualität. Mit sparsamer LED-Technik, dem Vermeiden von Standby-Kosten und einem günstigen Stromtarif mit Preisgarantie senkst du deine Nebenkosten dauerhaft und nachhaltig.
 
-**Weiterlesen:** [Pillar Strom & Gas sparen](../../pillar/strom-sparen/) · [Gasanbieter wechseln: Praxis-Tipps](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/) · [Gasrechnung senken im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/)
+**Weiterlesen:** [Pillar Strom & Gas sparen](../../pillar/strom-sparen/) · Gasanbieter wechseln: Praxis-Tipps · [Gasrechnung senken im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/)
 
 ## Häufige Fragen
 

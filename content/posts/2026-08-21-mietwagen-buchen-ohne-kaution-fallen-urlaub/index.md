@@ -19,7 +19,7 @@ kurzantwort: "Einen Mietwagen komplett ohne Kaution gibt es in der Praxis nur in
 social_posted: false
 keywords: ["Mietwagen buchen", "Mietwagen ohne Kaution", "Mietwagen Kaution Kreditkarte", "Vollkasko ohne Selbstbeteiligung", "Mietwagen Fallen", "Mietwagen Versicherung", "günstige Mietwagen"]
 pin_title: "Zusatzversicherung, Kaution & Co.: Mietwagen-Fallen entschärft"
-pin_description: "Am Mietwagen-Schalter läuft das Spielchen immer gleich ab: Druck für teure Zusatzpakete. So bleibst du cool und sparst: vorab Vollkasko ohne Selbstbeteiligung buchen, Kaution realistisch einplanen, Übergabeprotokoll mit Fotos sichern. Alle Details im Guide!"
+pin_description: "*Werbung | Am Mietwagen-Schalter läuft das Spielchen immer gleich ab: Druck für teure Zusatzpakete. So bleibst du cool und sparst: vorab Vollkasko ohne Selbstbeteiligung buchen, Kaution realistisch einplanen, Übergabeprotokoll mit Fotos sichern. Alle Details im Guide!"
 pinwand: "Günstig reisen | Reisebudget & Mietwagen"
 ---
 
@@ -129,7 +129,7 @@ Sollte der Vermieter Wochen nach dem Urlaub plötzlich Beträge für "angebliche
 
 Einen Mietwagen ohne Kaution zu buchen ist im Ausland selten möglich, aber du kannst die Kaution durch kluge Tarifwahl auf 100 € bis 300 € drücken und das Risiko auf null stellen. Die drei wichtigsten Regeln lauten: **Vergleiche online, buche mit Vollkasko ohne Selbstbeteiligung und lehne Zusatzverkäufe am Schalter konsequent ab.** Dann steht einem entspannten Urlaub ohne böse Überraschungen nichts mehr im Weg.
 
-**Weiterlesen:** [Geld sparen im Alltag: Einfache Tipps](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/) · [Pillar: Mietwagen & Reisen](../../pillar/mietwagen/) · [Reisekrankenversicherung: Was wirklich schützt](/go/reisekrankenversicherung/)
+**Weiterlesen:** Geld sparen im Alltag: Einfache Tipps · [Pillar: Mietwagen & Reisen](../../pillar/mietwagen/) · [Reisekrankenversicherung: Was wirklich schützt](/go/reisekrankenversicherung/)
 
 ## Häufige Fragen
 

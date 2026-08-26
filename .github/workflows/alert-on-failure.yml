@@ -18,6 +18,8 @@ on:
   workflow_run:
     workflows:
       - "Deploy auf GitHub Pages"
+      - "Qualitäts-Gate (Build + interne Links)"   # PREM-AUDIT: war blind – rote Runs + Issues #85 nur zufällig auffällig
+      - "Deploy-Catchup"                            # PREM-AUDIT: ohne ihn treibt ein Bot-Commit den Live-Stand nie nach
       - "Wöchentliche SEO-Optimierung"
       - "Backlink-Automation"
       - "Wöchentliches Nach-Pinnen"
@@ -26,12 +28,20 @@ on:
       - "Social-Media-AI"
       - "Content-Engine v2"          # Herzstück (ersetzt daily-content, entfernt 2026-08-10)
       - "Pinterest-AI"           # Pins würden still ausfallen
+      - "Pinterest-Watchdog"     # PREM-AUDIT: Spam-/SEO-Wache lief still aus
       - "Layout-AI"              # Layout-Regressionen still
       - "FrankAutoOps-Report"
       - "Affiliate-Health (Wochenwache)"
       - "Affiliate-Integritäts-Wache (täglich)"    # CTA-Link-Selbstheilung (14.08.)
       - "Willkommenstext-Refresh"     # SEO-Unique-Content-Automatik Startseite (14.08.)
       - "Blog-Gesundheits-Check (täglich)"   # tägliche Selbstheilung – hatte kein eigenes Alerting
+      - "Uptime-Monitor"         # PREM-AUDIT: Site-Ausfall nur per Zufall bemerkt
+      - "Mastodon-Profil-Sync"   # PREM-AUDIT: Social-Kanal still
+      - "Mastodon-SEO"           # PREM-AUDIT: Social-Kanal still
+      - "Offsite-Backup"         # PREM-AUDIT: Backup-Versagen wäre still fatal
+      - "Issues aufräumen (Triage)"          # PREM-AUDIT: Vollabdeckung
+      - "Erledigte Fehlermeldungen dauerhaft löschen"
+      - "Dependabot Auto-Merge"
     types:
       - completed
 

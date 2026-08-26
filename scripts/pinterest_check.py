@@ -122,11 +122,26 @@ def _check_domain_verify():
     PROBLEMS.append(("P2", "-", "pinterestVerify fehlt in hugo.toml"))
 
 
+def _is_draft(slug):
+    """PREM-AUDIT 26.08.2026: Draft-Erkennung – Drafts werden mit
+    buildDrafts=false NICHT gebaut (bewusst!). Sie dürfen in KEINEM
+    HTML-Check als 'Seite nicht gebaut' auffallen (Falschalarm; die
+    Kadenz-Wache re-queued sie, sie gehen später wieder live)."""
+    p = os.path.join(BLOG_DIR, "content", "posts", slug, "index.md")
+    try:
+        head = open(p, encoding="utf-8").read(4000)
+    except OSError:
+        return False
+    return bool(re.search(r"^draft:\s*true\s*$", head, re.M))
+
+
 def _check_pin_buttons():
     """P3 + P4 + P5 + P8: Pin-Button, Description, Media, Hashtags pro Artikel."""
     import urllib.parse
     descs = {}
     for slug in _post_slugs():
+        if _is_draft(slug):
+            continue  # Draft: keine gebaut Seite (buildDrafts=false) – kein Fund
         html_path = os.path.join(PUBLIC, "posts", slug, "index.html")
         if not os.path.exists(html_path):
             PROBLEMS.append(("P3", slug, "Seite nicht gebaut (public fehlt?)"))

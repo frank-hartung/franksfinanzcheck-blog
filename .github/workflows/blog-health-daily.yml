@@ -31,6 +31,12 @@ jobs:
       - run: python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate – Funde im Log (R5 heilt nicht automatisch)"
       - run: python3 scripts/check_covers.py --fix || echo "⚠ Cover-Gate – Funde im Log"
 
+      # DRAFT-LINK-GATE (PREM-AUDIT 26.08.2026): heilt auch ZWISCHEN den
+      # Publishing-Slots tote Post-Links (Kadenz-Heilung → URL weg aus dem
+      # Build → kontextuelle Links defekt; Issue #85). Ankertext bleibt 1:1.
+      - run: python3 scripts/draft_link_healer.py --selftest
+      - run: python3 scripts/draft_link_healer.py --fix
+
       - run: python3 scripts/blog_health_gate.py
       - run: |
           git config user.name "Agent (Arena.ai)"

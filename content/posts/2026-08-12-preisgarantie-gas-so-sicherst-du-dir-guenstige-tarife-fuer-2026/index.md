@@ -84,7 +84,7 @@ Weitere praxisnahe Ratschläge zur Vorbereitung deiner Heizungsanlage findest du
 
 Eine **Preisgarantie für Gas** nimmt dir die Sorge vor unkalkulierbaren Preiserhöhungen und spart bares Geld. Wer aus der teuren Grundversorgung zu einem geprüften Anbieter mit 12 Monaten Preisbindung wechselt, entlastet die Haushaltskasse um bis zu 650 € im Jahr.
 
-**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Gasrechnung senken im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) · [Praxis-Tipps zum Gasanbieterwechsel](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/)
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Gasrechnung senken im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) · Praxis-Tipps zum Gasanbieterwechsel
 
 ## Häufige Fragen
 

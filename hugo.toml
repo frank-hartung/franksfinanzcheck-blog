@@ -1,7 +1,8 @@
 baseURL = "https://franksfinanzcheck.de/"
 title = "FranksFinanzcheck"
 theme = "PaperMod"
-languageCode = "de-DE"
+# PREM-AUDIT 26.08.2026: languageCode ist seit Hugo 0.158 deprecated
+# (Build-Warnung bei jedem Deploy) – `locale` (unten) ist der Nachfolger.
 
 # RSS (Entscheidung 20.08.2026: für Pinterest-Auto-Publish wieder aktiviert).
 # Nur der HOME-Feed wird erzeugt (/index.xml); Sektions-Feeds bleiben aus.

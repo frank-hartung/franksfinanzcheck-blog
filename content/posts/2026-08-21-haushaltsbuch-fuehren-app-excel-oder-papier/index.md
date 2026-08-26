@@ -19,7 +19,7 @@ kurzantwort: "Ein Haushaltsbuch funktioniert nur dann dauerhaft, wenn die Method
 social_posted: false
 keywords: ["Haushaltsbuch führen", "Haushaltsbuch App", "Excel Haushaltsbuch Vorlage", "Ausgaben tracken", "50 30 20 Regel", "Budgetplanung", "Fixkosten senken"]
 pin_title: "Haushaltsbuch führen: App, Excel oder Papier?"
-pin_description: "Haushaltsplanung, die im Alltag hält: App, Excel-Tabelle oder Stift im ehrlichen Vergleich. Mit der 50-30-20-Regel und einem einfachen Wochen-Ritual sparst du bis zu 430 Euro im Monat. Jetzt die Vorlage und Tipps lesen."
+pin_description: "*Werbung | Haushaltsplanung, die im Alltag hält: App, Excel-Tabelle oder Stift im ehrlichen Vergleich. Mit der 50-30-20-Regel und einem einfachen Wochen-Ritual sparst du bis zu 430 Euro im Monat. Jetzt die Vorlage und Tipps lesen."
 pinwand: "Budget & Haushaltskasse: clever planen"
 ---
 
@@ -150,7 +150,7 @@ Bei einem Nettoeinkommen von 2.500 € bedeutet das: 1.250 € Fixkosten, 750�
 
 Ob App, Excel oder Papier – der entscheidende Erfolgsfaktor ist nicht das Werkzeug, sondern die **Gewohnheit**. Meine klare Empfehlung nach acht Jahren eigener Buchführung: Starte mit der integrierten Ausgabenanalyse deiner Banking-App. Sie kostet dich nichts, nimmt dir den größten Teil der Arbeit ab und liefert dir in der ersten Woche bereits belastbare Erkenntnisse. Wenn du später mehr Tiefe und Kontrolle willst, kannst du jederzeit auf eine Excel-Tabelle umsteigen. Wichtig ist nur eines: **Fange heute damit an**. Ein Monat ohne Haushaltsbuch ist ein Monat, in dir womöglich hunderte Euro durch die Finger rinnen.
 
-**Weiterlesen:** [Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · [Geld sparen im Alltag: Einfache Tipps](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/) · [Pillar: Konto & Karten](../../pillar/konto-karten/)
+**Weiterlesen:** [Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · Geld sparen im Alltag: Einfache Tipps · [Pillar: Konto & Karten](../../pillar/konto-karten/)
 
 ## Häufige Fragen
 

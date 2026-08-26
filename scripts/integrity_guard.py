@@ -91,7 +91,12 @@ FEST = {
     "scripts/plagiat_guard.py",
     "scripts/content_audit.py",
     "scripts/fazit_schmiede.py",
-    "data/content_fingerprints.jsonl",
+    # PREM-AUDIT 26.08.2026: data/content_fingerprints.jsonl AUS dem Lock –
+    # das ist eine MUTIERENDE Registry (die Engine appendet jeden Lauf),
+    # kein Kern-Code: im Lock erzeugt sie PERMANENT falsche Abweichungen
+    # (chronisch roter Doktor, DOKTOR-REPORT "Sabotage-Fehler"). Ihre
+    # Integritaet tragen Git + data/audit_history.jsonl (Append-Only),
+    # nicht ein statischer Fingerprint.
     # Pillar-Templates (12.08.: Relative-Link-Falle entfernt):
     "layouts/pillar/single.html",
     "layouts/_partials/pillar_box.html",

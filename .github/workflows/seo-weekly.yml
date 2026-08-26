@@ -81,15 +81,20 @@ jobs:
         # Fügt kontextuelle Links zwischen thematisch passenden Artikeln ein
         # (max. 3 neue Links pro Lauf, natürliche Anker, keine Duplikate).
         # → stärkt die interne Linkstruktur (SEO), ohne Spam-Muster.
+        # PREM-AUDIT 26.08.2026: der Linker verlinkt NUR auf Live-Artikel
+        # (Draft-/Zukunfts-Posts sind aus dem Ziel-Pool ausgeschlossen) und
+        # der Draft-Link-Heiler räumt danach sicherheitsshalb tote Ziele
+        # (Kadenz-Heilungen anderer Läufe) aus – IM SELBEN COMMIT.
         run: |
           python3 scripts/internal_linker.py --apply --max 5 | tee /tmp/internal_link_log.txt
+          python3 scripts/draft_link_healer.py --fix
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
           git add -A
           if git diff --cached --quiet; then
             echo "Keine neuen internen Links (Struktur bereits dicht)."
           else
-            git commit -m "seo: interne Verlinkung ausgebaut (kontextuelle Links)"
+            git commit -m "seo: interne Verlinkung ausgebaut (kontextuelle Links, nur Live-Ziele)"
             git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
             git push  # AUDIT-FIX: Rebase-Schutz
           fi

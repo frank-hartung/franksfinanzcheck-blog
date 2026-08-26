@@ -33,11 +33,19 @@ jobs:
           fetch-depth: 0
 
       - name: Merge-Marker-Schutz
+        # PREM-AUDIT 26.08.2026: Das alte Muster (grep "<<" "<<" "<<")
+        # behandelte die doppelten Anführungszeichen als DATEINAMEN →
+        # Exit 2 (Datei fehlt), das in der if-Sicht "kein Fund" bedeutete:
+        # der Schutz war SILENT inaktiv. Jetzt: echtes Git-Marker-Pattern
+        # (<<<<<<</>>>>>>> mit Branch-Zeile), nur Textdateien, saubere
+        # Exit-Codes.
         run: |
-          if grep -rnI "<<" "<<" "<<" content/ layouts/ static/ hugo.toml; then
-            echo "FEHLER: Unaufgelöste Merge-Marker gefunden!"
+          if grep -rnE '^(<{7,} |={7,}$|>{7,} )' content/ layouts/ static/ hugo.toml \
+              --include='*.md' --include='*.html' --include='*.toml' --include='*.yaml' --include='*.yml'; then
+            echo "FEHLER: Unaufgelöste Merge-Marker gefunden! Build abgebrochen."
             exit 1
           fi
+          echo "✅ Keine Merge-Marker."
 
       # ================= HARTES VOR-VERÖFFENTLICHUNGSGATE (26.08.2026) =================
       # ZWANGSVORGABE: Vor JEDEM Publish muss der Blog die Publikationsroutine
@@ -68,6 +76,18 @@ jobs:
 
       - name: Cover-Gate (Varianten, Stale, Brand, C4 Text-Komplettheit – selbstheilend)
         run: python3 scripts/check_covers.py --fix || echo "⚠ Cover-Gate – Funde im Log"
+
+      # ================= DRAFT-LINK-GATE (PREM-AUDIT 26.08.2026) =================
+      # Kadenz-Heilung stuft Posts auf draft (Re-Queue) zurück – ihre URLs
+      # verschwinden aus dem Build, kontextuelle Links in live Artikeln
+      # wären dann LIVE defekt (Issue #85: 19 tote Links). Der Heiler
+      # entlinkt solche Ziele BEVOR dem Build (Ankertext bleibt 1:1,
+      # idempotent). Safety-Net für jeden Pfad (manueller Commit, Bot, …).
+      - name: Draft-Link-Selbsttest (Gate muss lauffähig sein)
+        run: python3 scripts/draft_link_healer.py --selftest
+
+      - name: Draft-Link-Gate (defekte Post-Ziele entlinken, Report)
+        run: python3 scripts/draft_link_healer.py --fix
 
       - name: Hugo installieren
         uses: peaceiris/actions-hugo@v3

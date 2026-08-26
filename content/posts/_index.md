@@ -24,7 +24,7 @@ Montags, mittwochs und freitags erscheinen **2–3 neue Ratgeber**. So bleibst d
 Finde direkt den Bereich, der dich am meisten interessiert – alle Artikel sind dort gebündelt und untereinander verlinkt:
 
 - ⚡ **[Strom & Gas sparen](/pillar/strom-sparen/)** – [Stromfresser finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/), [Gasrechnung senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) und bis zu 800 € im Jahr sparen
-- 🌐 **[Internet, DSL & Handy](/pillar/internet-dsl/)** – [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/), WLAN in [jede Ecke bringen](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) und [DSL vergleichen](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
+- 🌐 **[Internet, DSL & Handy](/pillar/internet-dsl/)** – [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/), WLAN in jede Ecke bringen und [DSL vergleichen](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
 - 🛡️ **[Versicherungen & Vorsorge](/pillar/versicherungen/)** – [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) und [Hausrat & Wohngebäude](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) verständlich erklärt
 - 💳 **[Konto, Karten & Zinsen](/pillar/konto-karten/)** – [Kostenloses Girokonto](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) finden, Gebührenfallen vermeiden und Zinsen sichern
 - 🌱 **[Frugalismus & Budget](/pillar/frugalismus/)** – 50–30–20-Regel, Notgroschen aufbauen und finanzielle Gelassenheit erreichen

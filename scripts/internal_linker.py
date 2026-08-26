@@ -157,12 +157,31 @@ def build_anchor_candidates(pages):
 
 
 def load_pages():
-    """Lädt alle Artikel mit Metadaten."""
+    """Lädt alle NUR LIVE Artikel mit Metadaten.
+
+    PREM-AUDIT 26.08.2026 (KERN-FIX defekte interne Links): Drafts und
+    Zukunfts-Posts werden NICHT als Link-Ziele angeboten. Früher verlinkte
+    der Linker auch auf draft: true – jedesmal, wenn die Kadenz-Wache so
+    einen Post auf Re-Queue zurückgestuft hat, wurde die URL aus dem Build
+    entfernt und alle Links auf sie zu waren LIVE defekt (Issue #85,
+    19 tote Links). Drafts dürfen später von draft_link_healer.py
+    kontrolliert werden; der Linker baut die Struktur auf, sobald der
+    Post wieder live geht (next run)."""
+    import datetime
+    today = datetime.date.today().isoformat()
     pages = {}
+    skipped = 0
     for path in list_post_paths():
         slug = slug_of(path)
         content = open(path, encoding="utf-8").read()
         fm, body = parse_frontmatter(content)
+        if fm.get("draft") is True or fm.get("draft") == "true":
+            skipped += 1
+            continue
+        d_raw = str(fm.get("date") or "")[:10]
+        if d_raw and d_raw > today:
+            skipped += 1
+            continue
         title = fm.get("title", slug)
         keywords = [k.strip().lower() for k in (fm.get("keywords") or [])]
         tags = [t.strip().lower() for t in (fm.get("tags") or [])]
@@ -174,6 +193,9 @@ def load_pages():
             "score": 50 + 10 * min(len(keywords), 3),
             "path": path,
         }
+    if skipped:
+        print(f"(Linker-Scope: {skipped} Draft-/Zukunfts-Posts als Ziele "
+              f"ausgeschlossen)")
     return pages
 
 
