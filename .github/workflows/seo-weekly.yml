@@ -104,7 +104,7 @@ jobs:
           python3 scripts/meta_optimizer.py --fix --ai | tee /tmp/meta_log.txt
                     exit ${PIPESTATUS[0]}
 
-          - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte, Keywords)
+      - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte, Keywords)
         # Agentur-Selbstheilung: erzwingt Doppelpunkt-Titel, SERP-Längen,
         # Cover-Alt=Titel, pin_title/pin_description, Keywords ≥3, Cover 2:3.
         # Läuft NACH meta_optimizer, damit Ellipsis-/Titel-Schäden geheilt werden.
@@ -128,7 +128,7 @@ jobs:
             git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
             git push
           fi
-        - name: Meta-Änderungen committen
+      - name: Meta-Änderungen committen
         if: steps.meta.outcome == 'success'
         run: |
           git config user.name "SEO-Bot"
