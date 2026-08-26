@@ -73,6 +73,29 @@ jobs:
           python3 scripts/bot_preflight.py
           echo "PREFLIGHT_OK=true" >> "$GITHUB_ENV"
 
+      # ================= PHASE 0.5: KADENZ-SICHERUNG (26.08.2026) =================
+      # SELBSTHEILUNG VOR JEDEM SLOT: (1) Kadenz-Gate muss lauffähig sein
+      # (Selbsttest, sonst bricht der Lauf ab – ein kaputtes Gate darf
+      # nicht still weiterarbeiten), (2) bestehende Verstöße gegen die
+      # Dauervorgabe (Mo/Mi/Fr, 2–3/Tag, CADENCE-REPORT.md Regel 2) werden
+      # SOFORT geheilt (Zurückstufung + Re-Queue), damit der heutige Slot
+      # auf einer korrekten Tageszahl aufbaut und kein 4./5. Artikel live
+      # gehen kann. Report: CADENCE-GATE-REPORT.md.
+      - name: Phase 0.5 – Kadenz-Gate sicherstellen (Selbsttest + Selbstheilung)
+        run: |
+          python3 scripts/cadence_guard.py --selftest
+          python3 scripts/cadence_guard.py --fix
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add content/ CADENCE-GATE-REPORT.md
+          if git diff --cached --quiet; then
+            echo "Kadenz-Gate: Bestand bereits konform."
+          else
+            git commit -m "fix(cadence): Kadenz-Selbstheilung vor Slot (Zurückstufung + Re-Queue)"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+          fi
+
       # ================= PHASE 1: GENERIEREN (Multi-Fallback) =================
       - name: Phase 1 – Artikel generieren (Engine v2, 3 Ebenen)
         env:
@@ -270,96 +293,4 @@ jobs:
       - name: Phase 3 – IndexNow-Ping
         if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
         continue-on-error: true
-        run: python3 scripts/submit_indexnow.py || echo "⚠ IndexNow-Fehler (nicht kritisch)"
-
-      # ================= PHASE 3.5: HARTES PUBLISH-GATE =================
-      # Betriebsregel (Frank, 13.08.2026): Ein Artikel geht nur dann wirklich
-      # live, wenn er NACH der Qualitäts-/Fix-Kette oben zusätzlich drei
-      # harte Prüfungen besteht: check_length.py (Zeichenlänge), seo_audit.py
-      # (Title/Description/Wortzahl/Alt-Texte/Sitemap) und
-      # affiliate_profi_check.py (A1-A8: Offenlegung, E-E-A-T, interne Links,
-      # Schema, Affiliate-Dichte, Trust-Box, Autor, CTA). Besteht er eine
-      # davon nicht, wird er automatisch auf draft:true zurückgestuft statt
-      # live zu gehen – landet dann im normalen Freigabe-Issue.
-      - name: Hugo installieren (für Publish-Gate)
-        if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: "0.164.0"
-          extended: true
-
-      - name: Phase 3.5 – Publish-Gate (harte Vor-Veröffentlichungs-Kontrolle)
-        if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
-        continue-on-error: true
-        run: |
-          hugo --minify
-          python3 scripts/publish_gate.py
-          git config user.name "Content-Bot"
-          git config user.email "content-bot@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "Publish-Gate: keine Artikel zurückgestuft."
-          else
-            git commit -m "content: Publish-Gate hat Artikel ohne bestandene Prüfung auf Entwurf zurückgestuft"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
-            echo "🛑 Publish-Gate-Commit gepusht (mind. 1 Artikel zurückgestuft)"
-          fi
-
-      # ================= PHASE 4: DEPLOY ANSTOSSEN (FIXED!) =================
-      # FIX: execSync MUSS explizit importiert werden (github-script@v7 hat
-      # es nicht mehr im globalen Kontext – das crashte die alte Version).
-      - name: Phase 4 – Deploy-Workflow anstoßen
-        if: ${{ !cancelled() }}
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const { execSync } = require('child_process');
-            const last = execSync('git log -1 --format=%s').toString().trim();
-            const isContent = last.startsWith('content:');
-            if (!isContent) {
-              console.log('Kein Content-Commit in diesem Lauf – kein Deploy nötig.');
-              return;
-            }
-            console.log('Content-Commit gefunden – stoße Deploy-Workflow an …');
-            await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'deploy.yml',
-              ref: 'main',
-            });
-            console.log('✅ Deploy-Workflow ausgelöst.');
-
-      # ================= PHASE 5: STATUS-DASHBOARD =================
-      - name: Phase 5 – Status-Dashboards aktualisieren
-        if: ${{ always() }}
-        env:
-
-          MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}     
-          MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
-        run: |
-          python3 scripts/bot_status.py || true
-          git config user.name "Content-Bot"
-          git config user.email "content-bot@users.noreply.github.com"
-          git add BOT-STATUS.md ENGINE-STATUS.md
-          if git diff --cached --quiet; then
-            echo "Status unverändert."
-          else
-            git commit -m "chore: Bot-Status aktualisiert"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
-          fi
-
-      # ================= WATCHDOG-INFO (nur bei Draft-Rettung) =================
-      - name: Hinweis bei Entwurf (nur relevant, falls AUTO_PUBLISH=0 gesetzt ist)
-        if: ${{ env.ARTIKEL_ERSTELLT == 'true' && !cancelled() }}
-        continue-on-error: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if grep -q "Entwurf gesichert" ENGINE-STATUS.md; then
-            echo "⚠ Ein Artikel wurde als ENTWURF gesichert (Profi-Gate nicht erreicht)."
-            python3 scripts/engine_issue.py || echo "⚠ Issue-Fehler (nicht kritisch)"
-          else
-            echo "Kein Entwurf – alles gut."
-          fi
+        run: python3 scripts/submit_indexnow.py || echo 
