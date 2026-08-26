@@ -39,13 +39,74 @@ jobs:
             exit 1
           fi
 
+      # ================= HARTES VOR-VERÖFFENTLICHUNGSGATE (26.08.2026) =================
+      # ZWANGSVORGABE: Vor JEDEM Publish muss der Blog die Publikationsroutine
+      # (nur Mo/Mi/Fr, 2–3 Artikel/Tag – CADENCE-REPORT.md Regel 2) und die
+      # Titel-/Cover-Komplettheit erfüllen. Verstoß → SOFORTIGE SELBSTHEILUNG:
+      #   • Kadenz-Verstoß  → Zurückstufung auf draft + Re-Queue
+      #     (cadence_guard.py --fix) – der Live-Blog wird sofort korrekt
+      #   • Titel-Verstoß   → deterministische Fixes (check_titles --fix);
+      #     R5 (unvollständig) → publish_gate verworfen (neu) bzw.
+      #     zurückgestuft (Re-Queue)
+      #   • Cover-Mängel    → Varianten/Stale/Brand/Text neu gerendert
+      #     (check_covers.py --fix)
+      # So kann ein Verstoß NIEMALS live gehen – egal welcher Pfad
+      # (manueller Commit, publish.py, Bot, …) ihn in main gebracht hat.
+      # Die Heilungen werden gepusht (konvergent: der ausgelöste
+      # Folge-Deploy findet einen sauberen Zustand und pusht nichts mehr).
+      - name: Py-Abhängigkeiten für Gate-Chain
+        run: python3 -m pip install -q pyyaml pillow pillow-avif-plugin 2>/dev/null || python3 -m pip install -q --break-system-packages pyyaml pillow pillow-avif-plugin
+
+      - name: Kadenz-Selbsttest (Gate muss lauffähig sein, sonst kein Build)
+        run: python3 scripts/cadence_guard.py --selftest
+
+      - name: Kadenz-Gate (Mo/Mi/Fr, 2–3/Tag – heilt Verstöße, Report)
+        run: python3 scripts/cadence_guard.py --fix
+
+      - name: Titel-Gate (R1–R5, inkl. Truncation-Wächter, selbstheilend)
+        run: python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate – Funde im Log (R5 heilt nicht automatisch, publish_gate greift)"
+
+      - name: Cover-Gate (Varianten, Stale, Brand, C4 Text-Komplettheit – selbstheilend)
+        run: python3 scripts/check_covers.py --fix || echo "⚠ Cover-Gate – Funde im Log"
+
       - name: Hugo installieren
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: "0.164.0"
           extended: true
 
-      - name: Build
+      - name: Build (für Publish-Gate + Publish)
+        run: hugo --minify
+
+      - name: Publish-Gate (5 harte Prüfungen inkl. Cover-Text-Komplettheit)
+        run: python3 scripts/publish_gate.py
+
+      - name: Gate-Heilungsdiff merken (alle Gates, inkl. Publish-Gate)
+        id: gate_diff
+        run: |
+          if git status --short | grep -q .; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Gate hat den Bestand geheilt – Commit + Rebuild folgen."
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Gate-Heilungen committen (konvergent)
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Gate: keine Heilungen nötig."
+          else
+            git commit -m "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+            git push
+            echo "✅ Gate-Heilungen gepusht – Folge-Deploy prüft erneut (konvergent)."
+          fi
+
+      - name: Rebuild nach Heilungen (nur wenn sich Content geändert hat)
+        if: steps.gate_diff.outputs.changed == 'true'
         run: hugo --minify
 
       - name: Deploy auf gh-pages
