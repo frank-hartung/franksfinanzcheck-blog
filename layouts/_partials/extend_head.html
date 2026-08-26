@@ -9,13 +9,12 @@
 ============================================================ -}}
 
 {{- /* ---------- Meta-Basics ---------- */ -}}
-{{- if and (eq .Kind "home") (site.Params.description) -}}
-<meta name="description" content="{{ site.Params.description }}">
-{{- end -}}
+{{- /* Description setzt head.html bereits kanonisch (Seite > Section > Site). */ -}}
 {{- with site.Params.author -}}
 <meta name="author" content="{{ . }}">
 {{- end -}}
-<meta name="robots" content="index, follow">
+{{- /* robots/description kommen aus head.html – hier NICHT duplizieren,
+       sonst überschreibt index,follow ein noindex (Drafts/Dev). */ -}}
 
 {{- /* ---------- Verifikationen ---------- */ -}}
 {{- with site.Params.pinterestVerify -}}
@@ -184,7 +183,9 @@
   }
   var consentRequired = {{ $consent }};
   var c = getConsent();
-  var shouldLoad = !consentRequired || c === 'all' || c === null;
+  // DSGVO: Bei consentRequired NUR nach explizitem "Alle akzeptieren" laden.
+  // Erstbesucher (c === null) dürfen NICHT getrackt werden.
+  var shouldLoad = consentRequired ? (c === 'all') : (c !== 'necessary');
   if (!shouldLoad) return;
 
   var d = document, s = d.createElement('script');

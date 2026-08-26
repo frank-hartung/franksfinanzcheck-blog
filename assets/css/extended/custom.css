@@ -281,6 +281,7 @@ html[data-theme="dark"] .ff-brand .ff-wm { fill: #F3F7F5; }
     align-items: center;
 }
 
+.post-content a[href^="/go/"],
 .post-content a[href*="check24.net"],
 .post-content a[href*="partner-versicherung.de"] {
     display: inline-flex;
@@ -303,8 +304,10 @@ html[data-theme="dark"] .ff-brand .ff-wm { fill: #F3F7F5; }
 /* Das <strong> im CTA-Button ist ein Flex-Item (inline wird in Flex-
    Containern blockifiziert) – deshalb NICHT dehnen lassen:
    flex: 0 1 auto + overflow hidden. */
+.post-content p:has(> a[href^="/go/"]) a strong,
 .post-content p:has(> a[href*="check24.net"]) a strong,
 .post-content p:has(> a[href*="partner-versicherung.de"]) a strong,
+.post-content a[href^="/go/"] > strong,
 .post-content a[href*="check24.net"] > strong,
 .post-content a[href*="partner-versicherung.de"] > strong {
     flex: 0 1 auto;
@@ -314,6 +317,7 @@ html[data-theme="dark"] .ff-brand .ff-wm { fill: #F3F7F5; }
     text-overflow: ellipsis;
 }
 
+.post-content a[href^="/go/"]:hover,
 .post-content a[href*="check24.net"]:hover,
 .post-content a[href*="partner-versicherung.de"]:hover {
     background: var(--ff-yellow-dark);

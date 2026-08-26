@@ -47,7 +47,7 @@ TOPICS_FILE = os.path.join(BLOG_DIR, "data", "topics.yaml")
 PINTEREST_PLAN = os.path.join(BLOG_DIR, "data", "pinterest_plan.yaml")
 
 MAX_ARTICLES = int(os.environ.get("MAX_ARTIKEL_PRO_LAUF", "1"))
-AUTHOR = os.environ.get("BLOG_AUTHOR") or "Frank"
+AUTHOR = os.environ.get("BLOG_AUTHOR") or "Frank Hartung"
 # E-E-A-T: Autor immer setzen – kein leerer Author (Google braucht die
 # Autoren-Zuordnung für die E-E-A-T-Bewertung)
 AFFILIATE_URL = os.environ.get("AFFILIATE_URL") or "https://a.check24.net/misc/click.php?pid=80968&aid=18"
@@ -730,6 +730,8 @@ def parse_article(raw, topic, angle_name):
     desc = desc[:155]
     # Code-Fences entfernen, falls die KI welche setzt
     body = re.sub(r"^```[a-zA-Z]*\s*$", "", body, flags=re.M).strip()
+    # Kein zweites H1: Layout rendert den Titel bereits.
+    body = re.sub(r"^# [^\n]+\n+", "", body, count=1).strip()
     return title, desc, body
 
 
@@ -761,7 +763,7 @@ def validate_frontmatter(path):
             elif f == "keywords:":
                 add += "keywords: []\n"
             elif f == "author:":
-                add += "author: \"Frank\"\n"
+                add += "author: \"Frank Hartung\"\n"
             elif f == "title:":
                 add += 'title: "Artikel"\n'
             elif f == "description:":

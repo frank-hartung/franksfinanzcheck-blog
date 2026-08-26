@@ -298,16 +298,22 @@ def main():
         sys.exit(2)
     print(f"✅ Pinterest-Selbsttest ok (Modus: {'FIX' if DO_FIX else 'CHECK'})")
 
+    public_ready = os.path.isdir(PUBLIC)
+    if not public_ready:
+        print("ℹ️  public/ fehlt (kein Hugo-Build) – HTML-Checks P3/P6/P7/P10/P12 übersprungen.")
+
     # Erst prüfen, dann fixen (Reihenfolge: P1 → P2 → P3-8 → P9)
     if DO_FIX:
         _check_robots()
     _check_domain_verify()
-    _check_pin_buttons()
-    _check_no_redirect_on_article()
+    if public_ready:
+        _check_pin_buttons()
     _check_affiliate_density()
-    _check_go_links_rel()
     _check_go_noindex()
-    _check_rich_pins()
+    if public_ready:
+        _check_no_redirect_on_article()
+        _check_go_links_rel()
+        _check_rich_pins()
     _check_profile_link()
     if not DO_FIX:
         _check_robots()  # im CHECK-Modus nur melden

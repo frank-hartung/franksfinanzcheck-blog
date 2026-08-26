@@ -104,7 +104,8 @@ def now_utc_iso() -> str:
 
 
 def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
-                 keywords=None, pinwand=None, pin_title=None, pin_description=None):
+                 keywords=None, pinwand=None, pin_title=None, pin_description=None,
+                 level="profi"):
     """Speichert Artikel als Page-Bundle (Format wie bisherige Pipeline).
 
     Schreibt von Anfang an Pinterest-/Google-SEO-Felder (keywords, pin_*),
@@ -195,17 +196,18 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
         f"tags: {tag_yaml}\n"
         'categories: ["Ratgeber"]\n'
         'pillar: "' + (pillar or "konto-karten") + '"\n'
-        "author: \"Frank\"\n"
+        "author: \"Frank Hartung\"\n"
         f"keywords: {kw_yaml}\n"
         f"{pinwand_line}"
         f'pin_title: {yaml_quote(pin_t)}\n'
         f'pin_description: {yaml_quote(pin_d)}\n'
         "ai_generated: true\n"
         f'ai_provider: "Content-Engine v2"\n'
-        f"engine_level: \"{'draft' if draft else 'relaxed'}\"\n"
+        f"engine_level: \"{'draft' if draft else level}\"\n"
         f"{insp_line}"
         "---\n"
     )
+    body = re.sub(r"^\s*# [^\n]+\n+", "", body.strip(), count=1)
     with open(filename, "w", encoding="utf-8") as fh:
         fh.write(frontmatter + body.strip() + "\n" + cta)
     return filename, slug
@@ -377,6 +379,7 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
                 pinwand=topic.get("pinwand"),
                 pin_title=topic.get("pin_titel"),
                 pin_description=topic.get("pin_beschreibung"),
+                level="draft",
             )
             used_titles.add(title.lower())  # Draft-Thema nicht doppelt ziehen
             draft_saved = True
@@ -396,6 +399,7 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
                 pinwand=topic.get("pinwand"),
                 pin_title=topic.get("pin_titel"),
                 pin_description=topic.get("pin_beschreibung"),
+                level=level,
             )
             print(f"  ✓ Artikel veröffentlicht ({level}): {slug}")
         except Exception as exc:  # noqa: BLE001

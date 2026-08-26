@@ -9,9 +9,6 @@ build:
   list: never
 keywords: ["Mietwagen buchen", "Mietwagen günstig", "Mietwagen Fallen", "Flüge sparen", "Urlaubskasse aufbessern"]
 ---
-
-# Mietwagen & Reisen: Der große Ratgeber zum Geld sparen
-
 Ein Urlaub soll Erholung und unvergessliche Erlebnisse bringen – doch bei der Buchung von Mietwagen, Flügen und Pauschalreisen lauern zahlreiche Kostenfallen. Vor allem an den Schaltern der Autovermieter am Urlaubsflughafen versuchen viele Anbieter, teure Zusatzversicherungen zu verkaufen oder mit unfairen Tankregelungen abzukassieren. In diesem Ratgeber zeige ich dir, wie du deinen Mietwagen zum echten Bestpreis buchst, versteckte Schalter-Fallen umgehst und bei der Urlaubsplanung hunderte Euro sparst.
 
 ### Das Wichtigste auf einen Blick

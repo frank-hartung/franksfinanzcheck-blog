@@ -1,72 +1,53 @@
-{{- $authorEmail := "" }}
-{{- with site.Params.author }}
-  {{- if reflect.IsMap . }}
-    {{- with .email }}
-      {{- $authorEmail = . }}
-    {{- end }}
-  {{- end }}
-{{- end }}
-
-{{- $authorName := "" }}
-{{- with site.Params.author }}
-  {{- if reflect.IsMap . }}
-    {{- with .name }}
-      {{- $authorName = . }}
-    {{- end }}
-  {{- else }}
-    {{- $authorName  = . }}
-  {{- end }}
-{{- end }}
-
-{{- $pctx := . }}
-{{- if .IsHome }}{{ $pctx = site }}{{ end }}
-{{- $pages := slice }}
-{{- if or $.IsHome $.IsSection }}
-{{- $pages = $pctx.RegularPages }}
-{{- else }}
-{{- $pages = $pctx.Pages }}
-{{- end }}
+{{- /* Pinterest-optimierter RSS-2.0-Feed (Home).
+      Hugo 0.146+ nutzt layouts/rss.xml (nicht layouts/_default/rss.xml).
+      - Nur BLOG-Artikel (Section "posts") – keine Rechts-/Pillar-Seiten.
+      - Cover als enclosure + media:content → Pinterest Auto-publish (2:3, 1000×1500).
+      - RSS 2.0 (nicht Atom) – Pflicht für Pinterests Auto-publish.
+*/ -}}
+{{- $pages := where site.RegularPages "Section" "posts" -}}
 {{- $pages = where $pages "Params.hiddenInRss" "!=" true -}}
-{{- $limit := site.Config.Services.RSS.Limit }}
-{{- if ge $limit 1 }}
-{{- $pages = $pages | first $limit }}
-{{- end }}
+{{- $limit := site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}
+{{- $pages = $pages | first $limit -}}
+{{- end -}}
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>{{ if eq .Title site.Title }}{{ site.Title }}{{ else }}{{ with .Title }}{{ . }} on {{ end }}{{ site.Title }}{{ end }}</title>
-    <link>{{ .Permalink }}</link>
-    <description>Recent content {{ if ne .Title site.Title }}{{ with .Title }}in {{ . }} {{ end }}{{ end }}on {{ site.Title }}</description>
-    {{- with site.Params.images }}
+    <title>{{ site.Title }}</title>
+    <link>{{ site.BaseURL }}</link>
+    <description>{{ with site.Params.description }}{{ . }}{{ end }}</description>
+    <language>{{ site.Language.LanguageCode | default "de-DE" }}</language>
     <image>
       <title>{{ site.Title }}</title>
-      <url>{{ index . 0 | absURL }}</url>
-      <link>{{ index . 0 | absURL }}</link>
+      <url>{{ "pinterest-app-icon.png" | absURL }}</url>
+      <link>{{ site.BaseURL }}</link>
     </image>
+    {{- with site.Copyright }}
+    <copyright>{{ . | markdownify | plainify }}</copyright>
     {{- end }}
-    <generator>Hugo</generator>
-    <language>{{ site.Language.Locale }}</language>{{ with $authorEmail }}
-    <managingEditor>{{.}}{{ with $authorName }} ({{ . }}){{ end }}</managingEditor>{{ end }}{{ with $authorEmail }}
-    <webMaster>{{ . }}{{ with $authorName }} ({{ . }}){{ end }}</webMaster>{{ end }}{{ with site.Copyright }}
-    <copyright>{{ . | markdownify | plainify | strings.TrimPrefix "© " }}</copyright>{{ end }}{{ if not .Date.IsZero }}
-    <lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
+    {{- if and (not .Date.IsZero) (gt (len $pages) 0) }}
+    <lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- end }}
     {{- with .OutputFormats.Get "RSS" }}
     {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{- end }}
     {{- range $pages }}
-    {{- if and (ne .Layout `search`) (ne .Layout `archives`) }}
     <item>
       <title>{{ .Title | plainify }}</title>
-      <link>{{ .Permalink }}</link>
+      <link>{{ .Permalink }}?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=rss-autopublish</link>
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
-      {{- with $authorEmail }}<author>{{ . }}{{ with $authorName }} ({{ . }}){{ end }}</author>{{ end }}
-      <guid>{{ .Permalink }}</guid>
-      <description>{{ with .Description | html }}{{ . }}{{ else }}{{ .Summary | html }}{{ end -}}</description>
-      {{- if and site.Params.ShowFullTextinRSS .Content }}
-      <content:encoded>{{ (printf "<![CDATA[%s]]>" .Content) | safeHTML }}</content:encoded>
+      <guid isPermaLink="true">{{ .Permalink }}</guid>
+      <description>{{ with or .Params.pin_description .Description | html }}{{ . }}{{ else }}{{ .Summary | plainify | html }}{{ end }}</description>
+      {{- with .Params.cover.image }}
+      {{- $img := . | absURL }}
+      <enclosure url="{{ $img }}" type="image/jpeg" />
+      <media:content url="{{ $img }}" medium="image" type="image/jpeg" />
+      <media:thumbnail url="{{ $img }}" />
       {{- end }}
     </item>
-    {{- end }}
     {{- end }}
   </channel>
 </rss>
