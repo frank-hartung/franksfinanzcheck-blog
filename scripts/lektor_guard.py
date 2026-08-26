@@ -63,7 +63,9 @@ ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / "LEKTOR-REPORT.md"
 HISTORY = ROOT / "data" / "lektor_history.jsonl"
 
-GROQ_KEY = os.environ.get("GROQ_API_KEY", "").strip()
+import groq_config
+
+GROQ_KEY = groq_config.api_key()
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 
 DO_FIX = "--fix" in sys.argv
@@ -378,13 +380,10 @@ Antworte NUR mit dem korrigierten Satz, nichts anderes."""
             continue
         try:
             if provider == "groq":
-                req = urllib.request.Request(
-                    "https://api.groq.com/openai/v1/chat/completions",
-                    data=json.dumps({"model": "llama-3.3-70b-versatile", "temperature": 0.2, "max_tokens": 500,
-                                     "messages": [{"role": "user", "content": prompt}]}).encode(),
-                    headers={"Authorization": f"Bearer {key}"}, method="POST")
-                with urllib.request.urlopen(req, timeout=60) as r:
-                    out = json.loads(r.read())["choices"][0]["message"]["content"].strip()
+                out = groq_config.chat(
+                    prompt, temperature=0.2, max_tokens=500, timeout=60,
+                    raise_on_error=True,
+                ) or ""
             else:
                 req = urllib.request.Request(
                     "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
@@ -422,13 +421,10 @@ Markdown bleibt, keine Faktaenderung. Antworte NUR mit dem neuen Satz."""
             continue
         try:
             if provider == "groq":
-                req = urllib.request.Request(
-                    "https://api.groq.com/openai/v1/chat/completions",
-                    data=json.dumps({"model": "llama-3.3-70b-versatile", "temperature": 0.2, "max_tokens": 500,
-                                     "messages": [{"role": "user", "content": prompt}]}).encode(),
-                    headers={"Authorization": f"Bearer {key}"}, method="POST")
-                with urllib.request.urlopen(req, timeout=60) as r:
-                    out = json.loads(r.read())["choices"][0]["message"]["content"].strip()
+                out = groq_config.chat(
+                    prompt, temperature=0.2, max_tokens=500, timeout=60,
+                    raise_on_error=True,
+                ) or ""
             else:
                 req = urllib.request.Request(
                     "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",

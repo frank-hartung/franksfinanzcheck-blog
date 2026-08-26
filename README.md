@@ -182,6 +182,7 @@ Dann im GitHub-Repo: **Settings → Secrets and variables → Actions → New re
 - `BLOG_AUTHOR` → Name, der unter den Artikeln steht (Standard: „Redaktion")
 - `AFFILIATE_URL` → dein CHECK24-Partnerlink (Standard: Platzhalter)
 - `MAX_ARTIKEL_PRO_LAUF` → Artikel pro Lauf (Standard: 1)
+- `GROQ_MODEL` → Groq-Modell (Standard: `openai/gpt-oss-120b`; zentrales Modul `scripts/groq_config.py`. `llama-3.3-70b-versatile` ist seit 16.08.2026 abgeschaltet und wird automatisch gemappt.)
 
 **Ab jetzt:** Jeden Morgen um 05:00 UTC (07:00 Uhr Sommerzeit in DE) erzeugt der Bot automatisch einen frischen Artikel-Entwurf im Repo. Du bekommst keine E-Mail – einfach mal in `content/posts/` reinschauen.
 

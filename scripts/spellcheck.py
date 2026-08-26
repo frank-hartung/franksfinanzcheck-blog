@@ -38,6 +38,8 @@ import json
 import glob
 import subprocess
 
+import groq_config
+
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 WHITELIST_FILE = os.path.join(BLOG_DIR, "data", "spellcheck_whitelist.txt")
@@ -746,15 +748,7 @@ def ai_decide(article, problems):
             pass
     if not text and groq_key:
         try:
-            body = {"model": "llama-3.3-70b-versatile",
-                    "messages": [{"role": "user", "content": prompt}], "max_tokens": 500}
-            req = urllib.request.Request(
-                "https://api.groq.com/openai/v1/chat/completions",
-                data=json.dumps(body).encode(),
-                headers={"Content-Type": "application/json",
-                         "Authorization": f"Bearer {groq_key}", "User-Agent": ua})
-            resp = json.loads(urllib.request.urlopen(req, timeout=90).read())
-            text = resp["choices"][0]["message"]["content"].strip()
+            text = groq_config.chat(prompt, max_tokens=500, timeout=90)
         except Exception:
             pass
     if not text:

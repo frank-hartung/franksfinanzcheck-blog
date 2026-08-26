@@ -53,7 +53,9 @@ POSTS_DIRS = [ROOT / "content" / "posts", ROOT / "content" / "pillar"]
 REPORT = ROOT / "DASH-REPORT.md"
 HISTORY = ROOT / "data" / "dash_guard_history.jsonl"
 
-GROQ_KEY = os.environ.get("GROQ_API_KEY", "").strip()
+import groq_config
+
+GROQ_KEY = groq_config.api_key()
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 
 DO_FIX = "--fix" in sys.argv
@@ -229,15 +231,16 @@ def ai_call(prompt: str) -> str | None:
     msgs = [{"role": "user", "content": prompt}]
     try:
         if GROQ_KEY:
-            req = urllib.request.Request(
-                "https://api.groq.com/openai/v1/chat/completions",
-                data=json.dumps({"model": "llama-3.3-70b-versatile", "messages": [
+            return groq_config.chat(
+                messages=[
                     {"role": "system", "content": "Du bist ein deutscher Profi-Lektor (Duden, Webtypografie). Antworte NUR mit JSON."},
-                    *msgs], "temperature": 0.1, "max_tokens": 900}).encode(),
-                headers={"Authorization": f"Bearer {GROQ_KEY}", "Content-Type": "application/json"},
-                method="POST")
-            with urllib.request.urlopen(req, timeout=60) as r:
-                return json.loads(r.read())["choices"][0]["message"]["content"]
+                    *msgs,
+                ],
+                temperature=0.1,
+                max_tokens=900,
+                timeout=60,
+                raise_on_error=True,
+            )
     except Exception as e:
         print(f"  ⚠ Groq: {e}")
     try:

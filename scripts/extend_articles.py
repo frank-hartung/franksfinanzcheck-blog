@@ -37,6 +37,7 @@ import urllib.error
 import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import groq_config
 MIN_WORDS = int(os.environ.get("LENGTH_MIN_WORDS") or 700)  # env-steuerbar (Audit 11.08.)
 # Zielzone relativ zum Floor (Audit 11.08.): nie unter der Schwelle landen,
 # sonst Heilungs-Loop. Floor 1000 -> Ziel 1150-1350.
@@ -86,27 +87,9 @@ def _retry(fn, attempts=3, base_delay=4.0):
 
 
 def call_groq(prompt):
-    key = os.environ.get("GROQ_API_KEY")
-    if not key:
-        return None
-    body = {
-        "model": os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile"),
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.4,
-        "max_tokens": 4000,
-    }
-    data = json.dumps(body).encode("utf-8")
-
-    def _call():
-        resp = http_json(
-            "https://api.groq.com/openai/v1/chat/completions",
-            data=data,
-            headers={"Content-Type": "application/json",
-                     "Authorization": f"Bearer {key}"},
-        )
-        return resp["choices"][0]["message"]["content"]
-
-    return _retry(_call)
+    return groq_config.chat(
+        prompt, temperature=0.4, max_tokens=4000, raise_on_error=True,
+    )
 
 
 def call_gemini(prompt):

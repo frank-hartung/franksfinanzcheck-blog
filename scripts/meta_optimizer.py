@@ -26,6 +26,7 @@ import sys
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, slug_of
+import groq_config
 CACHE_FILE = os.path.join(BLOG_DIR, ".meta_cache.json")
 
 TITLE_MIN, TITLE_MAX = 30, 60
@@ -170,18 +171,9 @@ def ai_description(a):
         except Exception:
             pass
 
-    groq_key = os.environ.get("GROQ_API_KEY", "")
-    if groq_key:
+    if groq_config.available():
         try:
-            body = {"model": "llama-3.3-70b-versatile",
-                    "messages": [{"role": "user", "content": prompt}], "max_tokens": 100}
-            req = urllib.request.Request(
-                "https://api.groq.com/openai/v1/chat/completions",
-                data=json.dumps(body).encode(),
-                headers={"Content-Type": "application/json",
-                         "Authorization": f"Bearer {groq_key}", "User-Agent": ua})
-            resp = json.loads(urllib.request.urlopen(req, timeout=60).read())
-            text = resp["choices"][0]["message"]["content"].strip()
+            text = groq_config.chat(prompt, max_tokens=100, timeout=60)
             if text:
                 cache[key_id] = text
                 json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
@@ -239,18 +231,9 @@ def ai_title(a):
         except Exception:
             pass
 
-    groq_key = os.environ.get("GROQ_API_KEY", "")
-    if groq_key:
+    if groq_config.available():
         try:
-            body = {"model": "llama-3.3-70b-versatile",
-                    "messages": [{"role": "user", "content": prompt}], "max_tokens": 80}
-            req = urllib.request.Request(
-                "https://api.groq.com/openai/v1/chat/completions",
-                data=json.dumps(body).encode(),
-                headers={"Content-Type": "application/json",
-                         "Authorization": f"Bearer {groq_key}", "User-Agent": ua})
-            resp = json.loads(urllib.request.urlopen(req, timeout=60).read())
-            text = resp["choices"][0]["message"]["content"].strip()
+            text = groq_config.chat(prompt, max_tokens=80, timeout=60)
             if text:
                 cache[key_id] = text
                 json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)

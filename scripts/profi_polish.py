@@ -33,6 +33,7 @@ import urllib.request
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, slug_of
+import groq_config
 CACHE_FILE = os.path.join(BLOG_DIR, ".polish_cache.json")
 
 
@@ -161,16 +162,7 @@ Liefere NUR den vollständigen polierten Markdown-Text (ohne Frontmatter, ohne E
 
     if groq_key:
         try:
-            body = {"model": "llama-3.3-70b-versatile",
-                    "messages": [{"role": "user", "content": prompt}],
-                    "max_tokens": 4000}
-            req = urllib.request.Request(
-                "https://api.groq.com/openai/v1/chat/completions",
-                data=json.dumps(body).encode(),
-                headers={"Content-Type": "application/json",
-                         "Authorization": f"Bearer {groq_key}", "User-Agent": ua})
-            resp = json.loads(urllib.request.urlopen(req, timeout=120).read())
-            text = resp["choices"][0]["message"]["content"].strip()
+            text = groq_config.chat(prompt, max_tokens=4000, timeout=120)
             if text:
                 cache[key] = text
                 json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
