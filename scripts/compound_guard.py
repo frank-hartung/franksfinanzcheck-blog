@@ -136,31 +136,33 @@ def target_files():
 # ---------------------------------------------------- KI-Schiedsrichter
 
 def ai_call(system: str, prompt: str) -> str | None:
-    for provider, key, url, payload in (
-        ("groq", GROQ_KEY, "https://api.groq.com/openai/v1/chat/completions",
-         {"model": "llama-3.3-70b-versatile", "temperature": 0.0, "max_tokens": 300,
-          "messages": [{"role": "system", "content": system}, {"role": "user", "content": prompt}]}),
-        ("gemini", GEMINI_KEY, "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
-         {"systemInstruction": {"parts": [{"text": system}]},
-          "contents": [{"parts": [{"text": prompt}]}],
-          "generationConfig": {"temperature": 0.0, "maxOutputTokens": 300}}),
-    ):
-        if not key:
-            continue
+    if GROQ_KEY:
         try:
-            headers = {"Content-Type": "application/json"}
-            if provider == "groq":
-                headers["Authorization"] = f"Bearer {key}"
-            else:
-                headers["x-goog-api-key"] = key
-            req = urllib.request.Request(url, data=json.dumps(payload).encode(),
-                                         headers=headers, method="POST")
+            out = groq_config.chat(
+                prompt, system=system, temperature=0.0, max_tokens=300, timeout=45,
+            )
+            if out:
+                return out
+        except Exception as e:
+            print(f"  ⚠ groq: {e}")
+    if GEMINI_KEY:
+        try:
+            url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
+            payload = {
+                "systemInstruction": {"parts": [{"text": system}]},
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {"temperature": 0.0, "maxOutputTokens": 300},
+            }
+            req = urllib.request.Request(
+                url, data=json.dumps(payload).encode(),
+                headers={"Content-Type": "application/json", "x-goog-api-key": GEMINI_KEY},
+                method="POST",
+            )
             with urllib.request.urlopen(req, timeout=45) as r:
                 data = json.loads(r.read())
-            return (data["choices"][0]["message"]["content"] if provider == "groq"
-                    else data["candidates"][0]["content"]["parts"][0]["text"])
+            return data["candidates"][0]["content"]["parts"][0]["text"]
         except Exception as e:
-            print(f"  ⚠ {provider}: {e}")
+            print(f"  ⚠ gemini: {e}")
     return None
 
 

@@ -36,6 +36,7 @@ import urllib.error
 import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import groq_config
 
 RE_FAQ_START = re.compile(
     r"^#{1,2}\s*(Häufige Fragen|Häufig gestellte Fragen|Häufige Fragen \(FAQ\)|FAQ)\s*$",
@@ -110,21 +111,10 @@ def _llm_call(prompt: str, provider: str) -> str | None:
     """Ruft Groq oder Gemini an. Liefert Antwort-Text oder None."""
     try:
         if provider == "GROQ":
-            key = os.environ.get("GROQ_API_KEY", "")
-            url = "https://api.groq.com/openai/v1/chat/completions"
-            data = json.dumps({
-                "model": os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile"),
-                "messages": [{"role": "user", "content": prompt}],
-                "temperature": 0.1,
-                "max_tokens": 2000,
-            }).encode()
-            req = urllib.request.Request(url, data=data, headers={
-                "Authorization": f"Bearer {key}", "Content-Type": "application/json",
-                "User-Agent": "Mozilla/5.0 (Finanzblog-Automation)"})
-            with urllib.request.urlopen(req, timeout=60) as r:
-                out = json.loads(r.read().decode())["choices"][0]["message"]["content"]
+            out = groq_config.chat(prompt, temperature=0.1, max_tokens=2000, timeout=60)
+            if out:
                 time.sleep(4)  # Rate-Limit-Schutz (Gratis-Key)
-                return out
+            return out
         else:
             key = os.environ.get("GEMINI_API_KEY", "")
             url = ("https://generativelanguage.googleapis.com/v1beta/models/"

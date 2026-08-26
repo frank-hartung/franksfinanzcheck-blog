@@ -31,6 +31,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import list_post_paths, slug_of  # noqa: E402
+import groq_config  # noqa: E402
 
 DENSITY_MIN = 0.003
 DENSITY_MAX = 0.03
@@ -173,19 +174,9 @@ def _call_ai(prompt):
         except Exception:
             pass
 
-    groq_key = os.environ.get("GROQ_API_KEY", "")
-    if groq_key:
+    if groq_config.available():
         try:
-            body = {"model": "llama-3.3-70b-versatile",
-                    "messages": [{"role": "user", "content": prompt}], "max_tokens": 200}
-            req = urllib.request.Request(
-                "https://api.groq.com/openai/v1/chat/completions",
-                data=json.dumps(body).encode(),
-                headers={"Content-Type": "application/json",
-                         "Authorization": f"Bearer {groq_key}",
-                         "User-Agent": ua})
-            resp = json.loads(urllib.request.urlopen(req, timeout=60).read())
-            return resp["choices"][0]["message"]["content"]
+            return groq_config.chat(prompt, max_tokens=200, timeout=60)
         except Exception:
             pass
     return None

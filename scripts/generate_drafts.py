@@ -42,6 +42,7 @@ import yaml
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, slug_of
+import groq_config
 TOPICS_FILE = os.path.join(BLOG_DIR, "data", "topics.yaml")
 
 PINTEREST_PLAN = os.path.join(BLOG_DIR, "data", "pinterest_plan.yaml")
@@ -499,29 +500,13 @@ def _retry(fn, attempts=4, base_delay=5):
 
 
 def call_groq(prompt):
-    key = os.environ.get("GROQ_API_KEY")
-    if not key:
-        return None
-    body = {
-        "model": os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile"),
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": prompt},
-        ],
-        "temperature": 0.9,
-        "max_tokens": 1800,
-    }
-    data = json.dumps(body).encode("utf-8")
-
-    def _call():
-        resp = http_json(
-            "https://api.groq.com/openai/v1/chat/completions",
-            data=data,
-            headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"},
-        )
-        return resp["choices"][0]["message"]["content"]
-
-    return _retry(_call)
+    return groq_config.chat(
+        prompt,
+        system=SYSTEM_PROMPT,
+        temperature=0.9,
+        max_tokens=1800,
+        raise_on_error=True,
+    )
 
 
 def call_gemini(prompt):

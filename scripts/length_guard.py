@@ -52,7 +52,9 @@ ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / "LENGTH-REPORT.md"
 HISTORY = ROOT / "data" / "length_history.jsonl"
 
-GROQ_KEY = os.environ.get("GROQ_API_KEY", "").strip()
+import groq_config
+
+GROQ_KEY = groq_config.api_key()
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 
 DO_FIX = "--fix" in sys.argv
@@ -105,15 +107,10 @@ def ai(system: str, prompt: str, max_tokens: int = 3500) -> str | None:
             continue
         try:
             if provider == "groq":
-                req = urllib.request.Request(
-                    "https://api.groq.com/openai/v1/chat/completions",
-                    data=json.dumps({"model": "llama-3.3-70b-versatile", "temperature": 0.3,
-                                     "max_tokens": max_tokens,
-                                     "messages": [{"role": "system", "content": system},
-                                                  {"role": "user", "content": prompt}]}).encode(),
-                    headers={"Authorization": f"Bearer {key}"}, method="POST")
-                with urllib.request.urlopen(req, timeout=120) as r:
-                    return json.loads(r.read())["choices"][0]["message"]["content"]
+                return groq_config.chat(
+                    prompt, system=system, temperature=0.3,
+                    max_tokens=max_tokens, timeout=120, raise_on_error=True,
+                )
             else:
                 req = urllib.request.Request(
                     "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",

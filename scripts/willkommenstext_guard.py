@@ -77,6 +77,8 @@ import urllib.request
 
 import yaml
 
+import groq_config
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HUGO_TOML = os.path.join(ROOT, "hugo.toml")
 SIGNALS_YAML = os.path.join(ROOT, "data", "aktuelle_entwicklungen.yaml")
@@ -477,25 +479,9 @@ CONTENT: <Text, 300-600 Zeichen, 2-3 Absätze getrennt durch \\n\\n, darf
 
 
 def call_groq(prompt: str):
-    key = os.environ.get("GROQ_API_KEY")
-    if not key:
-        return None
-    body = json.dumps({
-        "model": os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile"),
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": 1.0,
-        "max_tokens": 500,
-    }).encode("utf-8")
-
-    def _call():
-        resp = http_json(
-            "https://api.groq.com/openai/v1/chat/completions",
-            data=body,
-            headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"},
-        )
-        return resp["choices"][0]["message"]["content"]
-
-    return _retry(_call)
+    return groq_config.chat(
+        prompt, temperature=1.0, max_tokens=500, raise_on_error=True,
+    )
 
 
 def call_gemini(prompt: str):
