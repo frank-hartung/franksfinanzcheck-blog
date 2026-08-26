@@ -566,6 +566,10 @@ Abuse, UWG-Claims, Pinterest-Spamregeln) – komplementär zu den
 inhaltlichen Guards, keine Überschneidung. Cross-Channel-Dedup über
 `data/pin_history.jsonl` (RSS-Auto-Publish, API, CSV, `--sync-pins`).
 Unbypassbar: A1–A4 laufen im Code von `pinterest_engine.py` /
-`generate_pins.py` (importiert, nicht Workflow-Schritt).
+
+`generate_pins.py` (importiert, nicht Workflow-Schritt).| Spam-Profil (Claims, Stuffing, Disclosure, Klon) | spam_guard --fix (Blog: Disclosure/Pin-Text einfügen oder hart → draft; Feed: Spezial-Heiler; CSV: Neu-Schreibung; nie Content-Verlust) |
+| Repeat-Pin (gleicher Artikel 2×, beliebiger Kanal) | Pin-Registry `data/pin_history.jsonl` + 30-Tage-Rotation (A2/C7 blockiert, `--sync-pins` füllt aus RSS-Live-Pins) |
+| Pinterest-API-Rate-/Spam-Antwort (429/403) | spam_guard A3 (eskalierende Pause 1 h → 24 h → 7 Tage, State `data/spam_state.json`, Reset nur `--reset-pause`) |
+| Spam-Wache selbst defekt | spam_guard --selftest (Exit 2 bricht CI ab; läuft vor jeder --fix-Aktion) |
 
 
