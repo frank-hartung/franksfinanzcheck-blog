@@ -161,6 +161,8 @@ jobs:
           python3 scripts/readability_check.py --new-only || echo "⚠ Lesbarkeit (nicht blockierend)"
           echo "== Titel-Gate (check_titles, selbstheilend) =="
           python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate (nicht blockierend)"
+          echo "== Pinterest/Google-SEO-Healer (Titel, Cover-Text, Pin-SEO, Keywords) =="
+          python3 scripts/pinterest_seo_healer.py --fix || echo "⚠ Pinterest-SEO-Healer (nicht blockierend)"
           echo "== Cover generieren =="
           pip install -q pillow pillow-avif-plugin
           python3 scripts/generate_covers.py || echo "⚠ Cover-Fehler (nicht kritisch)"
