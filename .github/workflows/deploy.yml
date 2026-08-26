@@ -1,0 +1,57 @@
+# ============================================================
+#  DEPLOY AUF GITHUB PAGES (Branch gh-pages)
+#
+#  Baut die Hugo-Website bei jedem Push auf 'main' sowie bei
+#  manueller / Workflow-Auslösung (workflow_dispatch) und
+#  pusht das erzeugte public/ in den Branch 'gh-pages'.
+#
+#  Hosting: GitHub Pages (Custom Domain: franksfinanzcheck.de)
+# ============================================================
+name: Deploy auf GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Merge-Marker-Schutz
+        run: |
+          if grep -rn "<<<<<<<" content/ layouts/ static/ hugo.toml; then
+            echo "FEHLER: Unaufgelöste Merge-Marker gefunden!"
+            exit 1
+          fi
+
+      - name: Hugo installieren
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy auf gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          cname: franksfinanzcheck.de
