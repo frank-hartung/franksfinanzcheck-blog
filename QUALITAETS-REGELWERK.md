@@ -546,3 +546,26 @@ Zentrale Selbstheilung für **bestehende und zukünftige** Beiträge:
 **Verdrahtung:** Content-Engine v2 Phase 3 · seo-weekly · pinterest-watchdog (vor Hugo-Build).
 **Aufruf:** `python3 scripts/pinterest_seo_healer.py --fix`
 **Report:** `PINTEREST-SEO-HEALER-REPORT.md`
+---
+
+## Datei 9/10: `QUALITAETS-REGELWERK.md` (4 gezielte Ergänzungen)
+
+**Ergänzung 1** — Neue Guard-Sektion. In der Datei die Zeile suchen:
+`## 🛡️ Schutzzonen (gelten über allen Guards)`
+und **direkt DARÜBER** folgenden Block einfügen (ein Leerzeile davor):
+
+```markdown
+### spam_guard.py – 🛡️ Spam-Wache (Google + Pinterest, neu 26.08.2026)
+
+Dauerauftrag: Die vier Pin-/Publikations-Kanäle (Blog, RSS-Feed,
+CSV-Upload, Pinterest-API) spamfrei halten – harte Funde heilen
+sofort (Self-Healing), `--selftest` (eingefrorene Fälle, Exit 2 = CI-
+Abort) schützt jede Fix-Aktion. Regeldetails + Schwellen + Nutzung:
+`SPAM-SCHUTZ.md`. Hoheit: Spam-/Policy-Ebene (Google Scaled Content
+Abuse, UWG-Claims, Pinterest-Spamregeln) – komplementär zu den
+inhaltlichen Guards, keine Überschneidung. Cross-Channel-Dedup über
+`data/pin_history.jsonl` (RSS-Auto-Publish, API, CSV, `--sync-pins`).
+Unbypassbar: A1–A4 laufen im Code von `pinterest_engine.py` /
+`generate_pins.py` (importiert, nicht Workflow-Schritt).
+
+
