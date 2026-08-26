@@ -82,7 +82,7 @@ Wer noch mehr aus seinem bestehenden Vertrag herausholen will, liest am besten u
 
 Ein fundierter **DSL-Vergleich** deckt versteckte Preistreiber auf und sorgt dafür, dass du für stabiles Highspeed-Internet nicht mehr bezahlst als unbedingt nötig. Wer alle zwei Jahre pünktlich zum Ende der Mindestvertragslaufzeit vergleicht und wechselt, spart dauerhaft zwischen 300 € und 360 € ein.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag · [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/): So sparst du beim Internetvertrag · [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
 
 ## Häufige Fragen
 

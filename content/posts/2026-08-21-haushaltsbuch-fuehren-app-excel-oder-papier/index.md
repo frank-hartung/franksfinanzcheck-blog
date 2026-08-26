@@ -110,7 +110,7 @@ Viele Menschen geben das Haushaltsbuch nach wenigen Wochen wieder auf, weil sie 
 
 * **50 % des Nettoeinkommens → Fixkosten & Bedürfnisse:** Miete, Energie, Lebensmittel, Versicherungen, ÖPNV-Ticket, notwendige Abos.
 * **30 % → Wünsche & Freizeit:** Restaurantbesuche, Urlaub, Streaming, Shopping, Hobbys.
-* **20 % → Sparen & Vermögensaufbau:** Notgroschen auf dem Tagesgeldkonto, ETF-Sparplan, Sondertilgung.
+* **20 % → Sparen & Vermögensaufbau:** Notgroschen auf dem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/), ETF-Sparplan, Sondertilgung.
 
 Bei einem Nettoeinkommen von 2.500 € bedeutet das: 1.250 € Fixkosten, 750 € Freizeit, 500 € Sparrate. Wer die Fixkosten durch [einen kostenlosen Girokonto-Wechsel](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/), Versicherungs- und Energievergleiche auf 1.000 € drückt, kann die Sparrate auf 750 € erhöhen, ohne am Lebensstandard zu rühren.
 
@@ -155,7 +155,7 @@ Ob App, Excel oder Papier – der entscheidende Erfolgsfaktor ist nicht das Werk
 ## Häufige Fragen
 
 ### Was ist die beste kostenlose Haushaltsbuch-App?
-Für die meisten Nutzer ist die in das Girokonto integrierte Ausgabenanalyse die beste kostenlose Lösung – etwa bei der C24 Bank, DKB oder ING. Wer eine separate App bevorzugt, findet mit „Out of Milk", „Budget Planner" oder „Moneypilot" solide Gratis-Angebote.
+Für die meisten Nutzer ist die in das Girokonto integrierte Ausgabenanalyse die beste kostenlose Lösung – etwa bei der [C24 Bank](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/), DKB oder ING. Wer eine separate App bevorzugt, findet mit „Out of Milk", „Budget Planner" oder „Moneypilot" solide Gratis-Angebote.
 
 ### Wie lange sollte man ein Haushaltsbuch führen?
 Mindestens drei Monate, um ein realistisches Bild der eigenen Ausgaben zu erhalten. Wer dauerhaft sparen möchte, führt es am besten lebenslang weiter – nach der Eingewöhnung wird es zur 5-Minuten-Routine pro Woche.
