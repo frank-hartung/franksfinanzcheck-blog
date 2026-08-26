@@ -1,16 +1,3 @@
-{{- /* get-page-images (Hugo-Partial-Kompatibilität)
-
-    PaperMod referenziert die Bild-Auslesefunktion an zwei Stellen:
-      - `partial "templates/_funcs/get-page-images" .` (Theme-intern)
-      - `partial "_funcs/get-page-images" .` (in einigen Overrides/OG-Partials)
-
-    Hugo löst `partial "_funcs/get-page-images"` unterhalb von
-    `layouts/_partials/_funcs/get-page-images.html` auf – genau dort muss
-    die Datei liegen. Die Funktion selbst existiert im Theme unter
-    `templates/_funcs/`. Dieser Site-Alias stellt sicher, dass beide
-    Aufruf-Schreibweisen auflösbar sind und der Build nicht mit „partial
-    not found“ abbricht.
--}}
 {{- $imgs := slice }}
 {{- $imgParams := .Params.images }}
 {{- $resources := .Resources.ByType "image" -}}
