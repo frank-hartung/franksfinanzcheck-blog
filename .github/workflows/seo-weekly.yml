@@ -105,9 +105,8 @@ jobs:
                     exit ${PIPESTATUS[0]}
 
       - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte, Keywords)
-        # Agentur-Selbstheilung: erzwingt Doppelpunkt-Titel, SERP-Längen,
-        ...
-                - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte, Keywords)
+        # Agentur-Selbstheilung: erzwingt Doppelpunkt-Titel, SERP-Längen, ...
+      - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte, Keywords)
         # Agentur-Selbstheilung: erzwingt Doppelpunkt-Titel, SERP-Längen,
         # Cover-Alt=Titel, pin_title/pin_description, Keywords ≥3, Cover 2:3.
         # Läuft NACH meta_optimizer, damit Ellipsis-/Titel-Schäden geheilt werden.
