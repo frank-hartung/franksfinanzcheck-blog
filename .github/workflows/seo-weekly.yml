@@ -41,7 +41,7 @@ jobs:
           hugo-version: "0.164.0"
           extended: true
 
-           - name: Python-Abhängigkeiten (SEO, PyYAML, Crypto, Pillow)
+      - name: Python-Abhängigkeiten (SEO, PyYAML, Crypto, Pillow)
         # BUGFIX 13.08. / 26.08.: pyyaml, cryptography, pillow, fonttools, brotli
         run: python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli 2>/dev/null || true
 
@@ -102,6 +102,11 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python3 scripts/meta_optimizer.py --fix --ai | tee /tmp/meta_log.txt
+                    exit ${PIPESTATUS[0]}
+
+      - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte, Keywords)
+        # Agentur-Selbstheilung: erzwingt Doppelpunkt-Titel, SERP-Längen,
+        ...
                 - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte, Keywords)
         # Agentur-Selbstheilung: erzwingt Doppelpunkt-Titel, SERP-Längen,
         # Cover-Alt=Titel, pin_title/pin_description, Keywords ≥3, Cover 2:3.
