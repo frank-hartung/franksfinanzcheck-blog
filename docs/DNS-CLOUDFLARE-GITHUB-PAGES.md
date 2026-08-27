@@ -25,6 +25,33 @@ GitHub-Pages-Referenz-IPs (für A-Records):
 
 ---
 
+## 🏆 PFLEGELEICHTESTE & DAUERHAFTESTE EMPFEHLUNG (Agentur-Entscheidung)
+
+**Graues Wölkchen (DNS only), Cloudflare bleibt DNS-Anbieter, GitHub Pages
+macht HTTPS.** Einmal eingerichtet, läuft es dauerhaft ohne Wartung:
+
+| Kriterium | **Grau (DNS only) – EMPFOHLEN** | Orange (Proxy + Zertifikats-Tanz) |
+|---|---|---|
+| Zertifikat | GitHub (Let's Encrypt), **Auto-Renewal für immer** | Edge Cloudflare; Origin-Zertifikat kann nach 90 T. **Fehler 526** werfen |
+| Wartung | **0 Aufwand dauerhaft** | alle ~60–90 Tage ggf. grau/orange schalten |
+| Fehlerquellen für Crawler | keine (direkt zu GitHub) | Bot Fight Mode, Security Level, Rocket Loader, WAF |
+| Performance/Cache | GitHub-CDN (Fastly, global) reicht für statischen Blog völlig | Cloudflare-CDN (Mehrwert nur bei hohem Traffic nötig) |
+| Du bleibst bei Cloudflare | **ja** (DNS-Zone bleibt dort) | ja |
+
+**Warum das für DIESEN Blog die Premium-Wahl ist:** Es ist eine kleine
+statische Hugo-Seite ohne dynamische Requests, ohne Login, ohne Formulare –
+es gibt nichts, was ein Proxy-Caching oder eine WAF schützen müsste. GitHub
+Pages stellt TLS, CDN und Skalierung kostenlos und automatisch bereit. Damit
+entfällt jede Dauerbaustelle (Zertifikats-Tanz, 526-Fehler, Bot-Blocking) –
+und der Pinterest-Crawler hat eine stabile, unveränderliche Zieladresse.
+
+**Faustregel:** Proxy (orange) lohnt sich erst, wenn du gezielt Cloudflare-
+Features brauchst (z. B. Redirect-Rules im großen Stil, Rate-Limiting bei
+starkem Bot-Traffic, Workers). Für einen Affiliate-Ratgeber-Blog ist das
+nicht der Fall – **grau ist hier das professionelle Setup.**
+
+---
+
 ## Empfohlener Weg (einfach & robust für einen statischen Blog): Cloudflare-Proxy AUS, GitHub direkt
 
 Ein kleiner statischer Hugo-Blog braucht keinen Proxy davor – GitHub Pages
