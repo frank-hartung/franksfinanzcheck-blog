@@ -18,7 +18,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Im Herbst steigt der Stromverbrauch durch frühere Dunkelheit und mehr Zeit in den eigenen vier Wänden um 20 bis 30 Prozent. Durch den Umstieg auf LED-Leuchtmittel, schaltbare Steckdosenleisten, Eco-Programme bei Großgeräten und einen Tarifwechsel sparst du in einem 3-Personen-Haushalt jährlich bis zu 460 €."
 
-social_posted: true
+social_posted: false
 keywords: ["Strom sparen im Haushalt", "Stromfresser finden", "Stromkosten senken", "Stromtarif vergleichen", "Energieeffizienz", "Frugalismus", "Geld sparen"]
 pin_title: "Stromfresser-Checkliste: Wo dein Geld unbemerkt verpufft"
 pin_description: "*Werbung | Diese Checkliste gehört an jeden Kühlschrank: Die 10 häufigsten Stromfallen im Haushalt – mit jährlichen Kosten in Euro und der jeweils wichtigsten Gegenmaßnahme. Abhaken und sparen: So holst du dir bis zu 300 € im Jahr zurück. Jetzt lesen!"

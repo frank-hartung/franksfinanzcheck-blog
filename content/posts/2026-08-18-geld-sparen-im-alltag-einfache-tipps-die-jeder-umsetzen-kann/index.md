@@ -18,7 +18,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Erfolgreiches Sparen im Alltag basiert nicht auf radikalem Verzicht, sondern auf automatisierten Prozessen: Trenne Ausgaben mit einem 3-Konten-Modell, kündige ungenutzte Abos, kaufe mit Einkaufszettel ein und parke deine Ersparnisse auf einem verzinsten Tagesgeldkonto. So sparst du ohne Mühe 200 € bis 450 € pro Monat."
 
-social_posted: true
+social_posted: false
 keywords: ["Geld sparen im Alltag", "Alltagsspartipps", "Sparen ohne Verzicht", "Fixkosten reduzieren", "Haushaltsbudget planen", "Frugalismus"]
 pin_title: "Frugalismus für Einsteiger: 5 Tricks, die sofort funktionieren"
 pin_description: "*Werbung | Frugalismus klingt nach Verzicht – ist aber cleveres Priorisieren: Diese 5 Einsteiger-Tricks zeigen, wie du ohne Verzichtsgefühl 100 € und mehr im Monat freischaufelst. Inklusive der beliebten 30-Tage-Wunschliste. Jetzt starten!"
