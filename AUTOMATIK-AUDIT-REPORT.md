@@ -197,14 +197,42 @@ Auftragsgemäß wurden die Stufe-1-Quick-Wins **konkret gebaut** (nicht nur empf
 | **Restore-Drill** (Backup-Beweis) | `scripts/restore_drill.sh` + **Patch 2** (`restore-drill.yml`, quartalsweise, inkl. Hugo-Beweis-Build) | 2 Tests: unvollständiges Bundle → **laut failed** (Fehlererkennung bewiesen); vollständiges Bundle → 972 Dateien, 26 Artikel, Rechtsseiten ✓ |
 | **Seasonal-Pin-Refresh** | **Patch 2**: `pinterest-ai.yml` erhält monatlichen Cron (2. des Monats, 20:00 MESZ) – Engine arbeitet die Refresh-Queue (>60 Tage) ab, vollständig innerhalb der spam_guard-Limits (10/h, 40/Tag, 30-Tage-Repeat) | Kalender-Simulation: kein Konflikt mit anderen Pin-/Push-Pfaden ✓ |
 
-**Patch-Kette (Reihenfolge einhalten):**
-1. PR #88 mergen (Scripts + Doku)
+**Patch-Kette (Reihenfolge einhalten: 1 → 2 → 3):**
+1. PR #88 gemergt (Scripts + Doku) ✓
 2. `git apply patches/automatik-audit-2026-08-27-workflows.patch` (7 Fixes + Härtung)
 3. `git apply patches/automatik-audit-stage2-2026-08-27-workflows.patch` (4 neue Automatiken)
+4. `git apply patches/automatik-audit-stage3-2026-08-27-workflows.patch` (Anker-Gate & Zeilenumbruch-Schutz)
 
-Ende-zu-Ende bewiesen: Frisch-Cloned main → Patch 1 ✓ → Patch 2 ✓ → 31 Workflows valides YAML, 132 Run-Steps Shell-OK, Kalender 10 Tage inkl. neuer Crons alles grün.
+```bash
+git checkout main && git pull
+git apply patches/automatik-audit-2026-08-27-workflows.patch
+git apply patches/automatik-audit-stage2-2026-08-27-workflows.patch
+git apply patches/automatik-audit-stage3-2026-08-27-workflows.patch
+git add .github/workflows && git commit -m "fix(automatik): Workflow-Fixes Stufe 1+2+3 aus Agentur-Audit" && git push
+```
+
+Ende-zu-Ende bewiesen: Frisch-Cloned main → Patch 1 ✓ → Patch 2 ✓ → Patch 3 ✓ → alle Workflows valides YAML, alle Run-Steps Shell-OK, Kalender 10 Tage inkl. neuer Crons alles grün.
 
 **Noch offen (brauchen Franks Accounts/Zugänge):** GSC-Indexierungs-Wächter (Search-Console-API-Zugang), Pinterest-Analytics-Feedback-Schleife (Token mit read_ads-Scope), Awin-Provisionsimport. Vorbereitet in §7 Stufe 2 Nr. 1/2/9.
+
+---
+
+## 11 · Anker-Bereinigung & Slug-Konsistenz (Fazit-Fix)
+
+### 11.1 Ursachen-Analyse
+Der Hugo-Goldmark-Markdown-Renderer entfernt HTML-Tags wie `<br>` beim Bilden von Überschriften-Ankern (`id="..."`). Stand im Markdown bisher:
+```markdown
+## Fazit:<br>Ein 30-Minuten-Vergleich, der sich auszahlt
+```
+wurde `<br>` ohne Leerzeichen herausgeschnitten → Hugo bildete den Anker `id="fazitein-30-minuten-vergleich-der-sich-auszahlt"` (Wortkollision „Fazit“ + „Ein“). Gleiches galt für alle Überschriften mit Doppelpunkt und Umbruch (`24-Monats-Berechnung:<br>So ...` → `24-monats-berechnungso-...`).
+
+### 11.2 Durchgeführte Korrektur
+1. **Bestand normalisiert:** Alle 101 Überschriften in 25 Posts, Pillar-Seiten und Impressum auf `:<br> ` (mit Leerzeichen nach `<br>`) umgestellt.
+2. **Nach dem nächsten Deploy:** Der Anker wechselt sauber von `#fazitein-…` zu `#fazit-ein-…`.
+3. **URL-Sicherheit:** Bestehende URLs (wie `/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/`) laden die Seite weiterhin unverändert mit HTTP 200. Lediglich das Fragment springt nun präzise zum Absatz.
+4. **Verweis-Audit:** 0 interne Verweise auf alte Anker im Repository vorhanden (geprüft). Keine externen Backlinks auf das Fragment bekannt.
+5. **Automatik-Härtung:** `scripts/fix_linebreaks.py` (`_apply_heading_breaks`) setzt ab sofort deterministisch `:<br> ` und heilt Bestandsüberschriften ohne Leerzeichen automatisch.
+6. **CI-Gate (Patch 3):** `deploy.yml` und `blog-health-daily.yml` führen `fix_linebreaks.py` als Vor-Build-Schutz aus – Sabotage- und Regressionsschutz für jeden künftigen Bot- oder Autorenlauf.
 
 ---
 

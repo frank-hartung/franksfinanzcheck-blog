@@ -57,7 +57,7 @@ Achte beim Tarifvergleich auf folgende Qualitätsmerkmale, um langfristig sicher
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/gas/)
 
 
-## Beispielrechnung:<br>Grundversorgung vs. Wechseltarif
+## Beispielrechnung:<br> Grundversorgung vs. Wechseltarif
 
 | Tarifart | Grundpreis / Monat | Arbeitspreis / kWh | Gesamtkosten bei 20.000 kWh | Ersparnis im 1. Jahr |
 |:---|:---|:---|:---|:---|
@@ -69,20 +69,20 @@ Achte beim Tarifvergleich auf folgende Qualitätsmerkmale, um langfristig sicher
 
 ## Der 3-Schritte-Ablauf beim Gasanbieterwechsel
 
-### Schritt 1:<br>Verbrauchsdaten & Zählernummer bereithalten
+### Schritt 1:<br> Verbrauchsdaten & Zählernummer bereithalten
 Schnappe dir deine letzte Gasrechnung. Dort findest du deinen genauen Jahresverbrauch in Kilowattstunden (kWh), deine Zählernummer und die elfstellige Zählpunktbezeichnung. Wer erst kürzlich eingezogen ist, nutzt Richtwerte: ca. 12.000 kWh für eine Wohnung, ca. 20.000 kWh für ein Einfamilienhaus.
 
-### Schritt 2:<br>Postleitzahl & Verbrauch eingeben
+### Schritt 2:<br> Postleitzahl & Verbrauch eingeben
 Gib im Tarifrechner deine Postleitzahl und den Jahresverbrauch ein. Filtere die Ergebnisse nach 12-monatiger Laufzeit und Preisgarantie. Vergleiche den effektiven kWh-Preis transparent und lies die detaillierten Tarifbedingungen.
 
-### Schritt 3:<br>Online-Antrag absenden
+### Schritt 3:<br> Online-Antrag absenden
 Fülle das Online-Formular in etwa 5 Minuten aus. Der neue Versorger kündigt deinen bisherigen Vertrag automatisch zum nächstmöglichen Termin und informiert den zuständigen Verteilnetzbetreiber. Du musst dich um nichts weiter kümmern und erhältst nach wenigen Tagen die offizielle Vertragsbestätigung per E-Mail.
 
-## Sonderfall:<br>Preiserhöhung und Sonderkündigungsrecht
+## Sonderfall:<br> Preiserhöhung und Sonderkündigungsrecht
 
 Wenn dein bisheriger Gasversorger eine Preiserhöhung ankündigt, hast du ein gesetzliches Sonderkündigungsrecht nach § 41 EnWG. Die Kündigungsfrist beträgt in der Regel zwei Wochen ab Erhalt des Informationsschreibens. In diesem speziellen Fall solltest du ausnahmsweise selbst schriftlich oder per E-Mail kündigen, um die kurze Frist nicht zu versäumen, und im Wechselantrag beim neuen Anbieter vermerken, dass du bereits wegen einer Preiserhöhung gekündigt hast. Dadurch wechselst du zum Datum der Preisanpassung nahtlos in den neuen Spartarif.
 
-## Fazit:<br>Keine Angst vor dem Wechsel – es lohnt sich immer
+## Fazit:<br> Keine Angst vor dem Wechsel – es lohnt sich immer
 
 Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst. Dank strenger Verbraucherschutzgesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist.
 

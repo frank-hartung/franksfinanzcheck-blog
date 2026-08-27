@@ -31,7 +31,7 @@ Ein stabiler und schneller Internetanschluss gehört heute zur absoluten Grundve
 
 ---
 
-## DSL-Tarifvergleich:<br>Wechselbonus sichern und dauerhaft sparen
+## DSL-Tarifvergleich:<br> Wechselbonus sichern und dauerhaft sparen
 
 Viele Verbraucher bleiben über Jahre beim selben Anbieter, obwohl die zweijährige Mindestvertragslaufzeit längst abgelaufen ist. Nach 24 Monaten entfallen jedoch die anfänglichen Rabatte, und der Vertrag wird spürbar teurer.
 
@@ -46,7 +46,7 @@ Wie du den Markt systematisch analysierst und günstige Tarife für deine Region
 
 ---
 
-## WLAN im ganzen Haus verbessern:<br>Speed in jeder Ecke
+## WLAN im ganzen Haus verbessern:<br> Speed in jeder Ecke
 
 Selbst der schnellste Glasfaser- oder VDSL-Anschluss nützt wenig, wenn das Funksignal in der Wohnung durch dicke Wände, Decken oder Störquellen ausgebremst wird.
 
@@ -59,7 +59,7 @@ Praktische Anleitungen zur Beseitigung von Funklöchern und zur Einrichtung eine
 
 ---
 
-## Handytarife vergleichen:<br>Schluss mit teuren 24-Monats-Knebelverträgen
+## Handytarife vergleichen:<br> Schluss mit teuren 24-Monats-Knebelverträgen
 
 Beim Mobilfunk gilt eine einfache Grundregel: Kaufe dein Smartphone idealerweise separat und buche dazu einen flexiblen SIM-Only-Tarif. Tarife mit Allnet-Flat, SMS-Flat und 15 bis 30&nbsp;GB Highspeed-Datenvolumen im 5G-Netz gibt es heute bereits für unter 10&nbsp;€ bis 15&nbsp;€ pro Monat.
 

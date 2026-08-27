@@ -67,7 +67,7 @@ Ob DSL, Mobilfunk, Strom, Gas oder Versicherungen: Anbieter belohnen Wechsellust
 ### 10. Cashback- und Bonusprogramme clever mitnehmen
 Nutze bei ohnehin geplanten Online-Käufen Cashback-Portale. Du erhältst 2 bis 8 % deines Rechnungsbetrags als echte Barauszahlung auf dein Konto zurück.
 
-## Beispiel:<br>Monatliche Alltagsersparnis im Detail
+## Beispiel:<br> Monatliche Alltagsersparnis im Detail
 
 | Sparbereich | Vorher (ungesteuert) | Nachher (optimiert) | Monatliche Ersparnis |
 |:---|:---|:---|:---|
@@ -90,7 +90,7 @@ Um deine Finanzen dauerhaft im Griff zu behalten, empfiehlt sich die bewährte 5
 
 Wenn du diese Aufteilung konsequent einhältst, baust du völlig ohne Verzichtgefühle jeden Monat Vermögen auf.
 
-## Fazit:<br>Gewohnheiten schlagen Disziplin
+## Fazit:<br> Gewohnheiten schlagen Disziplin
 
 Alltagssparen funktioniert nicht durch eiserne Willenskraft, sondern durch kluge Systeme. Wenn Einzahlungen auf das Tagesgeldkonto automatisiert sind und Ausgabenbudgets klar begrenzt werden, wächst dein Vermögen Monat für Monat wie von selbst.
 

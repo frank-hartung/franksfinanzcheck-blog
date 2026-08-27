@@ -1,0 +1,33 @@
+diff --git a/.github/workflows/blog-health-daily.yml b/.github/workflows/blog-health-daily.yml
+index 965a362..9fb5575 100644
+--- a/.github/workflows/blog-health-daily.yml
++++ b/.github/workflows/blog-health-daily.yml
+@@ -37,6 +37,10 @@ jobs:
+       - run: python3 scripts/draft_link_healer.py --selftest
+       - run: python3 scripts/draft_link_healer.py --fix
+ 
++      # ANKER- & ZEILENUMBRUCH-GATE (27.08.2026): Überschriften mit <br>
++      # behalten immer ein Leerzeichen (<br> ), saubere #fazit-ein-... Slugs.
++      - run: python3 scripts/fix_linebreaks.py || echo "⚠ Zeilenumbruch-Generator"
++
+       - run: python3 scripts/blog_health_gate.py
+       - run: |
+           git config user.name "Agent (Arena.ai)"
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+index 73d51cc..62dbce0 100644
+--- a/.github/workflows/deploy.yml
++++ b/.github/workflows/deploy.yml
+@@ -89,6 +89,13 @@ jobs:
+       - name: Draft-Link-Gate (defekte Post-Ziele entlinken, Report)
+         run: python3 scripts/draft_link_healer.py --fix
+ 
++      # ================= ANKER- & ZEILENUMBRUCH-GATE (27.08.2026) =================
++      # Stellt sicher, dass alle Überschriften mit <br> ein Leerzeichen (<br> )
++      # haben, damit Hugo-Anker-Slugs wie #fazit-ein-... (statt #fazitein-...)
++      # sauber erzeugt werden. Heilt Bestandsmängel vor dem Build.
++      - name: Anker- & Zeilenumbruch-Gate (selbstheilend)
++        run: python3 scripts/fix_linebreaks.py || echo "⚠ Zeilenumbruch-Gate – Funde im Log"
++
+       - name: Hugo installieren
+         uses: peaceiris/actions-hugo@v3
+         with:

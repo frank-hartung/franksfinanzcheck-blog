@@ -30,7 +30,7 @@ Ein kleiner Moment der Unachtsamkeit im Alltag kann das gesamte finanzielle Fund
 💡 **Schnell-Tipp von FranksFinanzcheck:** Vergleiche jetzt aktuelle Testsieger-Tarife mit mindestens 50 Millionen Euro Deckungssumme ab 3,50 € im Monat: [**Kostenlos vergleichen**](/go/haftpflicht/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Die gesetzliche Haftung:<br>Warum Schäden in die Millionen gehen
+## Die gesetzliche Haftung:<br> Warum Schäden in die Millionen gehen
 
 Viele Menschen glauben, bei kleineren Missgeschicken mit ein paar hundert Euro davonzukommen. Doch die wahre existenzielle Gefahr liegt bei schwerwiegenden Personenschäden:
 
@@ -68,7 +68,7 @@ Trotz des existenziellen Schutzumfangs zählt die Haftpflichtversicherung zu den
 
 Wer neben Haftungsrisiken auch sein Gebäude oder seine Wohnung optimal absichern möchte, findet wertvolle Ratschläge in unserem Beitrag zum [Gebäudeschutz und Vorsorge-Updates](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) sowie in der [Themenübersicht Versicherungen](../../pillar/versicherungen/).
 
-## Fazit:<br>Unverzichtbarer Basisschutz für jeden Geldbeutel
+## Fazit:<br> Unverzichtbarer Basisschutz für jeden Geldbeutel
 
 Die **Privathaftpflicht** bildet das Fundament jeder soliden Absicherung. Für den Gegenwert einer Tasse Kaffee im Monat schützt sie dein gesamtes Privatvermögen vor ruinösen Schadenersatzansprüchen und bewahrt deine finanzielle Unabhängigkeit.
 
