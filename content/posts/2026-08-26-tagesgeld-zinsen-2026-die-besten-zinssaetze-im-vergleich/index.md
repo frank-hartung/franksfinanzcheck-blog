@@ -16,7 +16,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Tagesgeld ist 2026 mit Zinssätzen zwischen 1,8 und 3,2 Prozent wieder eine echte Alternative für den Notgroschen: Dein Geld ist täglich verfügbar, durch die EU-Einlagensicherung bis 100.000 € pro Person und Bank abgesichert und du bekommst deutlich mehr Zinsen als auf dem Girokonto (0,0 %). Die höchsten Zinsen findest du über einen Tagesgeldvergleich, achte dabei auf einen möglichst langen Zins-Garantiezeitraum (6 bis 12 Monate) und die Herkunftsland-Einlagensicherung."
 
-social_posted: false
+social_posted: true
 keywords: ["Tagesgeld", "Tagesgeldkonto", "Tagesgeldzinsen", "Zinsen vergleichen", "Geld sicher anlegen", "Notgroschen", "Festgeld", "Einlagensicherung"]
 pin_title: "Wohin mit dem Notgroschen? Tagesgeld & Co. clever nutzen"
 pin_description: "*Werbung | Dein Notfall-Polster auf dem Girokonto verliert jeden Tag an Wert: Wir vergleichen die smarten Parkplätze – Tagesgeld, Geldmarkt, verzinste Unterkonten – und zeigen, was wirklich sicher UND schnell verfügbar ist. Jetzt Zinsen mitnehmen!"
