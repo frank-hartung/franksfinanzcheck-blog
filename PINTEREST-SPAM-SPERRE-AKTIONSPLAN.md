@@ -36,18 +36,23 @@ aktiv** (Test schlägt mit SSL-Fehler fehl). Wenn Pinterests Crawler die Seite
 nicht sicher öffnen kann, wertet er jeden Link als **tot (404)** → genau das
 ist „Link-Spam“ für Pinterest. **Das zuerst reparieren:**
 
-**Fix (1 Klick, von dir – dieses API-Token darf Pages-Einstellungen nicht
-ändern, 403):** GitHub → Repo **Settings → Pages** → Bereich *Custom domain*:
-1. Bei **„Enforce HTTPS“** das Häkchen **setzen** (aktuell aus). Falls es sich
-   nicht setzen lässt: kurz warten (GitHub stellt das Zertifikat automatisch
-   aus, sobald die DNS-A-/CNAME-Einträge auf GitHub Pages zeigen), dann erneut.
-2. Domain `franksfinanzcheck.de` bleibt eingetragen (CNAME gepflegt, Pages-
-   Status `built`); nach Aktivieren 10–30 Min. warten.
-3. Testen: `https://franksfinanzcheck.de/` lädt ohne Warnung, ebenso
-   `https://franksfinanzcheck.de/pinterest-e238f.html` (Claim-Datei).
-4. **Rich-Pin-Debugger** https://developers.pinterest.com/tools/url-debugger/
-   mit einer Artikel-URL: liefert er jetzt statt 404 die OG-Daten, ist das der
-   stärkste Beweis für den Appeal.
+**Fix (von dir – dieses API-Token darf Pages-Einstellungen nicht ändern, 403):**
+Ursache ist **nicht** GitHub selbst, sondern die **DNS-/Proxy-Schicht**:
+Die Domain ist bei **Cloudflare** und zeigt auf die Cloudflare-Proxy-IPs
+(`104.21.18.115` / `172.67.181.202`), nicht auf GitHub Pages
+(`185.199.108–111.153`). Dadurch kann GitHub kein Zertifikat ausstellen
+und der Crawler hängt ggf. an der Cloudflare-Firewall.
+
+➡️ **Vollständige Schritt-für-Schritt-Reparatur (mit exakten Einträgen):**
+**`docs/DNS-CLOUDFLARE-GITHUB-PAGES.md`**
+
+Kurzform:
+1. Cloudflare → DNS: Apex `A`-Records auf die 4 GitHub-IPs, `www` als
+   `CNAME` auf `frank-hartung.github.io`, je **DNS only (graues Wölkchen)**.
+2. 10–60 Min. warten, bis GitHub das Zertifikat ausgestellt hat.
+3. GitHub → Repo **Settings → Pages** → **„Enforce HTTPS“** Häkchen setzen.
+4. `https://franksfinanzcheck.de/` + Claim-Datei prüfen, dann den
+   Rich-Pin-Debugger laufen lassen.
 
 ### 🛠️ Technisch zusätzlich abgesichert (heute eingebaut)
 
