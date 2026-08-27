@@ -49,11 +49,19 @@ def main():
     except Exception as e:
         pool_msg = f"Fehler: {e}"
 
-    # 3) Letzter Content-Commit
+    # 3) Letzter Publikationstag (AUDIT-FIX 27.08.2026: content-basiert statt
+    #    `git log --grep='^content:'` – Commit-Messages verschwinden bei
+    #    History-Konsolidierungen, der Artikelbestand nicht.)
     last_content = "?"
     try:
-        r = os.popen("git log -1 --format='%h %ad %s' --date=short --grep='^content:'").read().strip()
-        last_content = r if r else "noch keiner"
+        import publish_day_check as pdc
+        expected = pdc.last_publish_day()
+        live, drafts = pdc.articles_on(expected)
+        last_content = (
+            f"{expected.isoformat()} "
+            f"({['Mo','Di','Mi','Do','Fr','Sa','So'][expected.weekday()]}.): "
+            f"{len(live)} live, {len(drafts)} Entwurf(e)"
+        )
     except Exception:
         pass
 
