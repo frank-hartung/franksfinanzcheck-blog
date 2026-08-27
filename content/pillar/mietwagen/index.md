@@ -20,7 +20,7 @@ Ein Urlaub soll Erholung und unvergessliche Erlebnisse bringen – doch bei der 
 
 ---
 
-## Spartabelle:<br> Mietwagen-Optionen im Vergleich
+## Spartabelle: Mietwagen-Optionen im Vergleich
 
 | Buchungsbaustein | Vor Ort am Flughafen-Schalter | Vorab im Online-Vergleich | Deine Ersparnis |
 |---|---|---|---|
