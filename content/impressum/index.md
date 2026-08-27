@@ -17,7 +17,7 @@ Deutschland
 **Kontakt:**
 - E-Mail: frankhartung@web.de
 
-## Verantwortlich für den Inhalt<br>nach § 18 Abs. 2 MStV
+## Verantwortlich für den Inhalt<br> nach § 18 Abs. 2 MStV
 
 Frank Hartung
 Karl-Marx-Str. 13

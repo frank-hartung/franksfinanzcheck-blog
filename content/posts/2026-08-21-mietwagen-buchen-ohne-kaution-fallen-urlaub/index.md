@@ -94,7 +94,7 @@ Mietwagen direkt am Flughafen sind aufgrund von Konzessionsgebühren oft 15 bis 
 5. **Echte Kreditkarte freihalten:** Das Limit muss mindestens die Kaution plus 200 € Puffer abdecken. Debitkarten nur, wenn der Vermieter sie ausdrücklich akzeptiert.
 6. **Bei Übernahme 15 Minuten Zeit nehmen:** Gemeinsam mit dem Mitarbeiter jeden Kratzer, jede Delle und jeden Steinschlag dokumentieren, fotografieren und im Protokoll festhalten.
 
-## Echte Zahlen:<br>Drei Mietwagen-Szenarien im Vergleich
+## Echte Zahlen:<br> Drei Mietwagen-Szenarien im Vergleich
 
 | Szenario | Grundpreis (7 Tage) | Versicherung | Kaution | Zusatzkosten | Gesamt (7 Tage) |
 |:---|---:|---:|---:|---:|---:|
@@ -116,7 +116,7 @@ Drei Kriterien sind entscheidend:
 
 > 💡 **Tipp:** Wenn du keine Kreditkarte hast oder dein Limit für die Kaution nicht reicht, kann ein [gebührenfreies Girokonto mit Kreditkarte](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) oder ein [gebührenfreies Kreditkarten-Konto](/go/kreditkarte/) eine sinnvolle Lösung sein.
 
-## Nach der Rückgabe:<br>So wehrst du dich gegen ungerechtfertigte Abbuchungen
+## Nach der Rückgabe:<br> So wehrst du dich gegen ungerechtfertigte Abbuchungen
 
 Sollte der Vermieter Wochen nach dem Urlaub plötzlich Beträge für "angebliche Kratzer" oder "Tankdifferenz" abbuchen, gehe so vor:
 
@@ -125,7 +125,7 @@ Sollte der Vermieter Wochen nach dem Urlaub plötzlich Beträge für "angebliche
 3. **Kreditkarten-Chargeback:** Bei ungerechtfertigten Abbuchungen kannst du innerhalb von 120 Tagen über deine Kreditkartenfirma eine Rückbuchung beantragen.
 4. **Schlichtungsstelle anrufen:** Bei ausländischen Anbietern hilft die europäische Schlichtungsstelle für Mietwagenstreitigkeiten (European Car Rental Conciliation Service).
 
-## Fazit:<br>Vorbereitung schlägt Schnäppchenjagd
+## Fazit:<br> Vorbereitung schlägt Schnäppchenjagd
 
 Einen Mietwagen ohne Kaution zu buchen ist im Ausland selten möglich, aber du kannst die Kaution durch kluge Tarifwahl auf 100 € bis 300 € drücken und das Risiko auf null stellen. Die drei wichtigsten Regeln lauten: **Vergleiche online, buche mit Vollkasko ohne Selbstbeteiligung und lehne Zusatzverkäufe am Schalter konsequent ab.** Dann steht einem entspannten Urlaub ohne böse Überraschungen nichts mehr im Weg.
 

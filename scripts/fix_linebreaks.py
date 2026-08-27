@@ -235,7 +235,10 @@ def _apply_heading_breaks(body: str) -> tuple[str, int]:
     """Design-Vorgabe (vom User explizit gewünscht): Teilüberschriften (H2/H3)
     mit Doppelpunkt bekommen nach dem Doppelpunkt ein <br> – der Untertitel
     beginnt auf einer neuen Zeile. Deterministisch (keine KI nötig).
-    Ausgenommen: FAQ-Fragen (Schema!), klein beginnende Untertitel."""
+    Ausgenommen: FAQ-Fragen (Schema!), klein beginnende Untertitel.
+    WICHTIG (Anker-Konsistenz): Nach <br> MUSS ein Leerzeichen folgen (<br> ),
+    damit Hugo-Slugs wie 'Fazit: Ein ...' als #fazit-ein-... statt #fazitein-...
+    gerendert werden. Bestandsüberschriften ohne Leerzeichen werden geheilt."""
     lines = body.split("\n")
     out: list[str] = []
     changed = 0
@@ -246,12 +249,17 @@ def _apply_heading_breaks(body: str) -> tuple[str, int]:
                 in_faq = True
             elif re.match(r"^#{1,2}\s+", line):
                 in_faq = False
-        if re.match(r"^#{2,3}\s+", line) and not in_faq and ":<br>" not in line:
-            m = RE_HEADING_COLON.match(line)
-            if m and not RE_LOWER_START.match(m.group(4)):
-                out.append(m.group(1) + " " + m.group(2) + ":<br>" + m.group(4))
+        if re.match(r"^#{2,3}\s+", line) and not in_faq:
+            # 1. Existierende :<br> ohne Leerzeichen heilen: :<br>(\S) -> :<br> \1
+            if re.search(r":<br>[^\s]", line):
+                line = re.sub(r":<br>([^\s])", r":<br> \1", line)
                 changed += 1
-                continue
+            # 2. Neue :<br> setzen (falls noch kein <br> vorhanden)
+            elif ":<br>" not in line and ":<br " not in line:
+                m = RE_HEADING_COLON.match(line)
+                if m and not RE_LOWER_START.match(m.group(4)):
+                    line = m.group(1) + " " + m.group(2) + ":<br> " + m.group(4)
+                    changed += 1
         out.append(line)
     return "\n".join(out), changed
 
