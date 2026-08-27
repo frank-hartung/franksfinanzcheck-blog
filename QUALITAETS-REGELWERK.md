@@ -52,6 +52,26 @@ Fehler dürfen nie die Veröffentlichung stoppen, aber sie werden sichtbar gemac
 
 ## 🔠 Regeln im Detail
 
+### heading_guard.py – Überschriften-Hygiene (27.08.2026, anker-stabil)
+| Regel | Inhalt | Verhalten |
+|---|---|---|
+| H1 | `<br>` (alle Varianten `<br>`, `<br/>`, `<br />`) in ATX-Überschriften → genau ein Leerzeichen | Auto-Fix, **nur wenn der Goldmark-Anker (`id=…`) vor/nach identisch bleibt** – sonst Block (externen Links/Pinterest-Pins-Schutz) |
+| H2 | `<br>` am Überschriften-Ende (ohne Folgetext) → Tag weg | Auto-Fix (anker-stabil) |
+| H3 | Sonstiges Roh-HTML in Überschriften (`<span>` etc.) | nur Meldung, kein Auto-Fix |
+
+**Warum:** `<br>` in Überschriften zerstört die TOC-Darstellung (sichtbares
+Artefakt „Fazit:\ Ein …“ statt „Fazit: Ein …“), wirkt im Artikel wie ein
+fehlendes Leerzeichen und ist SEO-/Barrierefreiheits-Risiko. Heilung immer
+mit Anker-Beweis (Live-Fall: `#fazit-ein-30-minuten-vergleich-der-sich-auszahlt`
+blieb identisch). Selbsttest mit 10 eingefrorenen Fällen (Exit 2 = Stop).
+Wired: Doktor-Kette (Phase A, erste Text-Wache), Blog-Health-Wache (täglich –
+`blog_health_gate.py` ruft die Wache nach deren Selbsttest anker-stabil auf),
+Content-Engine v2 (via Doktor `--new-only` – jeder neue Artikel wird bei der
+Geburt geheilt). Deploy-Gate-Anbindung als fertiger Patch bereit:
+`patches/heading-gate-2026-08-27-workflows.patch` (einmalig anwenden).
+Report: `HEADING-REPORT.md`, Historie: `data/heading_guard_history.jsonl`.
+Erstheilung 27.08.2026: 101 Überschriften in 32 Dateien, 0 blockiert.
+
 ### casing_guard.py – Akronym-Orthografie (Duden, deterministisch)
 | Regel | Inhalt | Beispiel |
 |---|---|---|
@@ -280,6 +300,19 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **27.08.2026:** `heading_guard.py` neu – Überschriften-Hygiene H1–H3
+  (Anlass: Live-Befund „Fazit:<br> Ein 30-Minuten-Vergleich“, TOC-Artefakt
+  „Fazit:\\ Ein“). Heilt `<br>` in Überschriften anker-stabil (Goldmark-
+  Slug vor/nach als Beweis; Block, wenn Anker kollabieren würde).
+  Erstheilung: 101 Überschriften / 32 Dateien / 0 blockiert.
+  Wired: Doktor-Kette Phase A (erste Text-Wache), Blog-Health-Wache
+  (täglich, integriert in `blog_health_gate.py` inkl. Sabotage-Stop),
+  Engine via Doktor `--new-only`; Deploy-Gate als Patch bereit
+  (`patches/heading-gate-2026-08-27-workflows.patch`).
+  `--selftest` mit 10 eingefrorenen Fällen (Exit 2 = Sabotage-Stop).
+  Nebenbehebung: `blog_health_gate.py --dry-run` Selbsttest-Falle
+  (Heillogik schrieb im Dry-Run nie → Selbsttest scheiterte) behoben –
+  Selbsttest testet jetzt auf TEMP-Dateien beweisbar echt.
 - **26.08.2026:** Hartes Vor-Veröffentlichungs-Gate + Selbstheilung für
   die DAUERVORGABEN: (1) `cadence_guard.py` neu –
   Kadenz-Wache (Mo/Mi/Fr, 2–3/Tag, Frontmatter-Datum als Single Source

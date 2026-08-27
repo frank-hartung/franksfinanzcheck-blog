@@ -71,7 +71,7 @@ Statt teurer Indoor-Spielplätze oder Freizeitparks bietet der Herbst wunderbare
 
 > 💶 **Finanz-Tipp:** Mehr über effektive Sparstrategien und bewusste Konsumentscheidungen findest du in unserem Grundlagen-Leitfaden zum [Frugalismus & Vermögensaufbau](../../pillar/frugalismus/).
 
-## Fazit:<br> Nutze den Herbst für deinen persönlichen Kassensturz
+## Fazit: Nutze den Herbst für deinen persönlichen Kassensturz
 
 Der Herbst ist kein Grund für trübe Stimmung, sondern die perfekte Gelegenheit, deine Finanzen auf Vordermann zu bringen. Indem du bestehende Verträge hinterfragst, den Kfz-Stichtag nutzt und dein Zuhause energieeffizient machst, gehst du mit einem deutlichen Plus auf dem Girokonto ins neue Jahr.
 

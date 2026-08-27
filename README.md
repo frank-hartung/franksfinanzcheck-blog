@@ -46,11 +46,12 @@ bringt (Deploy, Engine, manueller Commit, `publish.py`):
 
 | Stage | Was passiert |
 |---|---|
-| **Deploy-Gate** (`deploy.yml`) | Vor jedem Hugo-Build: Kadenz-Selbsttest → `cadence_guard.py --fix` (Zurückstufung + Re-Queue bei Verstößen) → Titel-Gate → Cover-Gate → Build. Heilungen werden gepusht. |
+| **Deploy-Gate** (`deploy.yml`) | Vor jedem Hugo-Build: Kadenz-Selbsttest → `cadence_guard.py --fix` (Zurückstufung + Re-Queue bei Verstößen) → Titel-Gate → Cover-Gate → Build. Heilungen werden gepusht. Heading-Gate-Anbindung (27.08.) als fertiger Patch bereit: `patches/heading-gate-2026-08-27-workflows.patch`. |
 | **Engine-Phase 0.5** | Vor JEDEM Slot: Kadenz-Gate stellt die Tageszahl auf den korrekten Stand (Selbstheilung) |
 | **Engine-Publish-Gate** | 5 harte Prüfungen inkl. **Cover-Text-Komplettheit** (unvollständiger Titel → Verwurf bzw. Zurückstufung) |
 | **Engine-Phase 6** | `engine_issue.py --deficit`: Tagesende unter Minimum → sichtbares, auto-schließendes Issue |
-| **Blog-Health (täglich)** | Heilt auch ZWISCHEN den Publishing-Slots (Kadenz, Titel, Covers) |
+| **Blog-Health (täglich)** | Heilt auch ZWISCHEN den Publishing-Slots: Kadenz, Titel, Covers + Überschriften-Hygiene (`blog_health_gate.py` ruft seit 27.08. `heading_guard.py` anker-stabil auf – kein `<br>` in Überschriften, TOC-/Leerzeichen-Fehlerwurzel) |
+| **Doktor-Kette / Engine** | `blog_doctor.py` (Phase A, erste Text-Wache) heilt jeden NEUEN Artikel bei der Geburt (`--new-only` via Content-Engine v2) und bei jeder Visite |
 | **`publish.py` (manuell)** | Gleiche Routine wie die Automation – Verstoß blockiert hart (Notfall: `--force-cadence`) |
 
 Dazu: zentrale Titel-Kürzung an Wortgrenzen (`post_utils.safe_title_cut()`,

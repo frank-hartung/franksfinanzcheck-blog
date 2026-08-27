@@ -1,0 +1,56 @@
+commit afdeb57e36ea2b16d29706ac860a2226f0a0818c
+Author: frank-hartung <313369010+frank-hartung@users.noreply.github.com>
+Date:   Thu Aug 27 11:12:07 2026 +0000
+
+    feat(gate): heading_guard in die Blogautomatik verdrahtet – Selbstheilung auf allen vier Pfaden
+    
+    Deploy-Gate (vor jedem Hugo-Build, konvergenter Auto-Commit) ·
+    Blog-Health-Wache (täglich 07:45) · Content-Engine v2 (via Doktor
+    --new-only) · Doktor-Kette (Phase A, erste Text-Wache). Doku:
+    README-Gate-Tabelle + QUALITAETS-REGELWERK (Regeln im Detail +
+    Änderungsjournal).
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+diff --git a/.github/workflows/blog-health-daily.yml b/.github/workflows/blog-health-daily.yml
+index bd8e624..e693d5f 100644
+--- a/.github/workflows/blog-health-daily.yml
++++ b/.github/workflows/blog-health-daily.yml
+@@ -37,6 +37,12 @@ jobs:
+       - run: python3 scripts/draft_link_healer.py --selftest
+       - run: python3 scripts/draft_link_healer.py --fix
+ 
++      # HEADING-GATE (27.08.2026): <br> in Überschriften (TOC-Artefakte
++      # „Fazit:\ Ein“, wirkt wie fehlendes Leerzeichen) – täglich anker-
++      # stabil heilen, damit auch zwischen den Slots nichts verrottet.
++      - run: python3 scripts/heading_guard.py --selftest
++      - run: python3 scripts/heading_guard.py --fix
++
+       - run: python3 scripts/blog_health_gate.py
+       - run: |
+           git config user.name "Agent (Arena.ai)"
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+index 00daa6e..125fec5 100644
+--- a/.github/workflows/deploy.yml
++++ b/.github/workflows/deploy.yml
+@@ -89,6 +89,20 @@ jobs:
+       - name: Draft-Link-Gate (defekte Post-Ziele entlinken, Report)
+         run: python3 scripts/draft_link_healer.py --fix
+ 
++      # ================= HEADING-GATE (27.08.2026) =================
++      # Wurzelheilung des Premium-Befunds „Fazit:<br> Ein 30-Minuten-
++      # Vergleich": <br> in Überschriften zerstört die TOC-Darstellung
++      # („Fazit:\ Ein …"), wirkt wie ein fehlendes Leerzeichen und ist
++      # ein SEO-/Barrierefreiheits-Risiko. Der Guard heilt anker-stabil
++      # (beweisbar gleiche id=… – externe Links/Pinterest-Pins brechen
++      # NIE) und verhindert, dass solche Überschriften je wieder live
++      # gehen. Heilungen landen über das Gate-Heilungsdiff im Repo.
++      - name: Heading-Selbsttest (Wache muss lauffähig sein)
++        run: python3 scripts/heading_guard.py --selftest
++
++      - name: Heading-Gate (kein <br> in Überschriften – anker-stabil heilend)
++        run: python3 scripts/heading_guard.py --fix
++
+       - name: Hugo installieren
+         uses: peaceiris/actions-hugo@v3
+         with:

@@ -26,6 +26,11 @@
 #    • EINZIGE sichere Heilung: fehlende description aus dem Titel
 #      ableiten (SEO-Pflichtfeld). Kein automatisches H1-Injizieren
 #      (Posts bringen H1 selbst mit, Listen-Seiten liefert der Theme).
+#    • ZUSÄTZLICH seit 27.08.2026: Überschriften-Hygiene über
+#      heading_guard.py (H1–H3, anker-stabil) – <br> in Überschriften
+#      (TOC-Artefakte „Fazit:\ Ein“, wirkt wie fehlendes Leerzeichen)
+#      gehört zur täglichen Grundhygiene. Deren Selbsttest MUSS grün
+#      sein, bevor dieses Gate schreibt (Sabotage-Stop, Exit 2).
 #    • Report: BLOG-GESUNDHEIT-REPORT.md (transparent, was passierte).
 #
 #  Bewusst KEINE Duplikate der spezialisierten Wachen (casing/dash/
@@ -61,9 +66,13 @@ DRAFT_RX = re.compile(r"^draft:\s*true\s*$", re.M)
 
 # ---------------------------------------------------------------- Heilung
 
-def fix_article(path: str) -> list[str]:
+def fix_article(path: str, dry: bool | None = None) -> list[str]:
     """Sichere Heilung EINER Seite. Liefert Liste der durchgeführten Fixes
-    (leer = nichts verändert). DRAFT-SCHUTZ: Entwürfe werden nie angefasst."""
+    (leer = nichts verändert). DRAFT-SCHUTZ: Entwürfe werden nie angefasst.
+    `dry=None` → globaler DRY_RUN-Modus; `dry=False` → echter Schreib-Test
+    (aufruft nur der Selbsttest auf TEMP-Dateien – so bleibt auch --dry-run
+    beweisbar, FIX 27.08.: vorher scheiterte der Selbsttest im Dry-Run,
+    weil die Heillogik dort nie schrieb)."""
     try:
         with open(path, encoding="utf-8") as f:
             content = f.read()
@@ -89,7 +98,8 @@ def fix_article(path: str) -> list[str]:
     # sonst klebt es am letzten Frontmatter-Wert (TOML kaputt). FRONT_RX hat
     # das \n vor --- konsumiert → hier wiederherstellen.
     new_content = f"---\n{fm}\n---\n{body}"
-    if new_content != content and not DRY_RUN:
+    _dry = DRY_RUN if dry is None else dry
+    if new_content != content and not _dry:
         with open(path, "w", encoding="utf-8") as f:
             f.write(new_content)
     return ["description ergänzt (aus Titel)"] if new_content != content else []
@@ -109,7 +119,7 @@ def _selftest() -> list[str]:
         tmp = tf.name
     try:
         before = open(tmp, encoding="utf-8").read()
-        fx = fix_article(tmp)
+        fx = fix_article(tmp, dry=False)
         after = open(tmp, encoding="utf-8").read()
         if fx or after != before:
             fehler.append("Draft-Schutz verletzt: Entwurf wurde angefasst (Veröffentlichungs-Gefahr!)")
@@ -120,7 +130,7 @@ def _selftest() -> list[str]:
         tf.write('---\ntitle: "Testseite"\n---\n\nText')
         tmp2 = tf.name
     try:
-        fx = fix_article(tmp2)
+        fx = fix_article(tmp2, dry=False)
         healed = open(tmp2, encoding="utf-8").read()
         if not fx or "description:" not in healed or 'author: "Frank Hartung"---' in healed:
             fehler.append("description-Heilung defekt oder Frontmatter kaputt reconstruiert")
@@ -139,6 +149,20 @@ def main() -> int:
             print(f"   {e}")
         return 2
 
+    # HEADING-WACHE (27.08.2026): <br> in Überschriften (TOC-Artefakte
+    # „Fazit:\ Ein“, wirkt wie fehlendes Leerzeichen) gehört zur täglichen
+    # Grundhygiene. Hausregel: deren Selbsttest MUSS grün sein, BEVOR
+    # dieses Gate irgendetwas schreibt (Sabotage-Stop, Exit 2).
+    import subprocess
+    heading_st = subprocess.run(
+        [sys.executable, os.path.join(ROOT, "scripts", "heading_guard.py"), "--selftest"],
+        capture_output=True, text=True, timeout=300,
+    )
+    if heading_st.returncode != 0:
+        print("🛑 HEADING-GUARD-SELBSTTEST FEHLGESCHLAGEN – keine Heilung, keine Writes.")
+        print((heading_st.stdout + heading_st.stderr)[-400:])
+        return 2
+
     pages = sorted(glob.glob(os.path.join(ROOT, "content", "**", "*.md"), recursive=True))
     drafts = 0
     healed = []   # (relpath, [fixes])
@@ -154,6 +178,20 @@ def main() -> int:
         fx = fix_article(p)
         if fx:
             healed.append((os.path.relpath(p, ROOT), fx))
+
+    # HEADING-HEILUNG (nach der Description-Runde): anker-stabil, idempotent.
+    # blockiert=0 → Exit 0; blockiert>0 → Exit 1 (Fund, keine Sabotage).
+    heading_mode = "--dry-run" if DRY_RUN else "--fix"
+    heading_run = subprocess.run(
+        [sys.executable, os.path.join(ROOT, "scripts", "heading_guard.py"), heading_mode],
+        capture_output=True, text=True, timeout=600,
+    )
+    heading_summary = ""
+    for zeile in (heading_run.stdout or "").splitlines():
+        if zeile.startswith("Heading-Guard:"):
+            heading_summary = zeile
+            break
+    heading_exit = heading_run.returncode
 
     now = datetime.datetime.now(datetime.timezone.utc)
     lines = [
@@ -173,6 +211,11 @@ def main() -> int:
         lines.append("✅ Keine sicherheitsrelevanten Lücken gefunden (Description überall vorhanden).")
     lines += [
         "",
+        f"**Überschriften-Hygiene (heading_guard {heading_mode}):** "
+        + (heading_summary or f"exit {heading_exit} – Details: HEADING-REPORT.md"),
+    ]
+    lines += [
+        "",
         "_Drafts werden bewusst nie angefasst (Veröffentlichung = publish.py/Content-Engine). "
         "Spezial-Heilungen (Typografie, Affiliate, SEO-Tiefe …) laufen über die eigene Wachen-Kette._",
     ]
@@ -184,7 +227,9 @@ def main() -> int:
     print(report)
     for rel, fx in healed:
         print(f"  ✅ {rel}: {'; '.join(fx)}")
-    return 0
+    # Exit-Code ehrlich weiterreichen: 1 = unheilbare Funde (Ankerschutz),
+    # 2 = Sabotage. Sonst 0.
+    return heading_exit if heading_exit in (1, 2) else 0
 
 
 if __name__ == "__main__":
