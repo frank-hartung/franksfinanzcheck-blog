@@ -192,6 +192,75 @@ Erst wenn Pinterest die Freigabe bestätigt hat:
 
 ---
 
+## 6. Anhang: Konkrete Fremdaccounts zum Repinnen (verifiziert aktiv, Stand 27.08.2026)
+
+**Warum das sicher ist:** Ein repinnter Pin behält den **Original-Link**
+(urlaubsguru.de usw.), nicht `franksfinanzcheck.de`. Es entsteht also **kein
+einziger Link auf die gesperrte Domain** – null Risiko, aber ein echtes
+„Kurator“-Signal für dein Konto.
+
+### 6.1 Accounts, die auf Pinterest wirklich aktiv sind
+
+| Account (Pinterest-Handle) | Follower | Themen | Auf dein Board |
+|---|---|---|---|
+| **Urlaubsguru** – `pinterest.com/urlaubsguru` | ~29,7 Tsd. | Reisen, Urlaub Deutschland/Europa, Geheimtipps | 🗺️ Günstig reisen |
+| **Reiseuhu** – `pinterest.com/reiseuhu` | ~8 Tsd. | Urlaubsdeals, Roadtrips, Reiseplanung | 🗺️ Günstig reisen |
+| **Urlaubstracker** – `pinterest.com/urlaubstracker` | groß | Reiseschnäppchen, Last-Minute, Flüge/Hotels | 🗺️ Günstig reisen |
+| **Clever Finance Girls** (Katja Groesser) – `pinterest.com/cleverfinancegirls` | ~3,9 Tsd. | Budget, Sparpläne, Geld organisieren, Finanzen für Frauen | 💰 Budget & Haushaltskasse · Geld sparen |
+| **freaky finance** – `pinterest.com/freakyfinance` | ~1,4 Tsd. | Sparen, ETF/Vermögensaufbau, Finanz-Blogger-Content (kuratiert große Pinnwände) | 💰 Geld sparen (Thema „Sparen“ passt; Fokus liegt eher auf Investieren) |
+
+> ⚠️ **Ehrliche Lage zu 3 deiner 6 Boards:** Für **Strom & Gas**, **Internet & DSL**
+> und **Versicherungen** gibt es auf Pinterest praktisch **keine etablierten
+> deutschen Marken-Accounts** (Energie-/Versicherungsthemen sind nicht
+> „pinterestig“; Stiftung Warentest/Verbraucherzentrale/Finanztip sind dort
+> nicht aktiv gepflegt). Diese Boards füllst du am besten über **gezielte
+> Suchbegriffe** (siehe 6.3) mit guten Infografiken/Checklisten oder mit
+> allgemeinen „Haushalt sparen“-Pins der Finance-Curatoren oben.
+
+### 6.2 So funktioniert das Repinnen (Schritt für Schritt)
+
+1. Auf Pinterest einloggen → **Suchleiste** nutzen oder einen Account-Link
+   oben öffnen.
+2. Passenden Pin öffnen (Bild + Text kurz prüfen: seriös, hilfreich, zum
+   Board-Thema passend).
+3. Roten Button **„Speichern“** klicken → im Dialog **dein eigenes Board**
+   wählen (das passende der 6) → bestätigen.
+4. Fertig: Der Pin erscheint auf deinem Board, Link bleibt beim Urheber.
+
+**Regeln während der Sperre:**
+- ✅ Nur **repinnen** (fremde Inhalte) – **keine** eigenen Pins, **keine**
+  Links auf franksfinanzcheck.de.
+- ✅ Lieber wenige **hochwertige** Pins (viele Saves, seriöse Domain, klare
+  Grafik) als Massenware – Boards voller Spam-Pins schaden dir selbst.
+- ✅ **Tempo menschlich halten:** 2–4 Pins pro Tag, verteilt über ein paar
+  Tage – nicht 15 in 10 Minuten am Stück.
+- ✅ Auf alle 6 Boards verteilen, damit kein Board leer wirkt.
+- ❌ Keine Pins von zwielichtigen Shopping-/Schnäppchen-Seiten, keine
+  „Schnell reich“-Inhalte, keine reinen Werbe-Pins.
+
+### 6.3 Suchbegriffe pro Board (zum Selber-Finden guter Pins)
+
+- **Geld sparen / Frugalismus:** `geld sparen im alltag`, `sparchallenge`,
+  `spartipps haushalt`, `no spend`, `haushaltstipps geld`, `52 wochen sparen`
+- **Budget & Haushaltskasse:** `haushaltsbuch vorlage`, `budget planen`,
+  `50 30 20 regel`, `budgetierung`, `finanzen organisieren`
+- **Strom & Gas sparen:** `strom sparen tipps`, `energie sparen haushalt`,
+  `heizkosten sparen`, `stromfresser`, `energiesparen`
+- **Internet & DSL:** `wlan verbessern`, `wlan tipps`, `handyvertrag
+  vergleichen` (nur wenige gute Pins – hier reichen 1–2)
+- **Günstig reisen:** `günstig reisen`, `urlaubstipps`, `reisebudget`,
+  `mietwagen tipps`, `urlaub in deutschland`, `roadtrip deutschland`
+- **Versicherungen:** `versicherungen checkliste`, `privathaftpflicht`,
+  `hausrat versicherung` (sehr dünn – 1–2 passende Spar-/Checklisten-Pins
+  genügen; Rest über allgemeine Finanzen-Inhalte auffüllen)
+
+**Menge:** Ziel sind ~10–15 fremde Pins insgesamt, gleichmäßig verteilt
+(Reise & Budget können mehr abbekommen, Strom/DSL/Versicherung je 1–3).
+Nach der Entsperrung mischst du deine eigenen Pins dazu (50/50 in den ersten
+Wochen).
+
+---
+
 _Erstellt als Premium-Agentur-Dokument, 27.08.2026. Quellen: Pinterest Community
 Guidelines (Spam & Affiliate-Policy), UWG-Werbekennzeichnung, Repo-Soll-Zustand
 (`data/pinterest_boards.yaml`, `data/pinterest_profile_target.yaml`)._
