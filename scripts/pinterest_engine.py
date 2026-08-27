@@ -451,14 +451,39 @@ def main():
                   "cover": p["cover"], "board": board_name_for(p, board_config)}
                  for p in unpinned[:10]]
         n = write_queue(queue)
-        lines = [f"**Modus:** Queue (kein PINTEREST_ACCESS_TOKEN)",
-                 "", f"- {n} Pins vorbereitet in `data/pin_queue.yaml`",
-                 f"- {len(unpinned)} Artikel warten aufs Posting",
-                 f"- {len(refresh)} Refresh-Kandidaten (älter als {ROTATE_DAYS} Tage)",
-                 "",
-                 "**So aktivierst du das Posting:** Pinterest Developer App → Token als "
-                 "Secret `PINTEREST_ACCESS_TOKEN` (Board-Routing läuft automatisch, "
-                 "siehe `data/pinterest_boards.yaml`; Fallback-Board optional: `PINTEREST_BOARD_ID`)."]
+        # DOMAIN-SPERR-WACHE (27.08.2026): Solange Pinterest die Domain
+        # gesperrt hat, darf KEIN Pin (weder API noch manuell noch RSS-
+        # Auto-Publish) gesetzt werden. Die Queue ist nur VORBEREITUNG.
+        blocked_reason = ""
+        try:
+            import spam_guard as sg
+            _blocked, blocked_reason = sg.domain_blocked()
+        except Exception:
+            _blocked = False
+        if _blocked:
+            lines = ["**Modus:** Queue (kein PINTEREST_ACCESS_TOKEN) – "
+                     "🔴 **DOMAIN BEI PINTEREST GESPERRT**",
+                     "",
+                     f"- 🔴 **Sperrgrund:** {blocked_reason}",
+                     "- ❗ **NICHT manuell pinnen, NICHT RSS-Auto-Publish aktiv,**",
+                     "  solange die Sperre besteht (jeder Pin-Versuch verschärft die",
+                     "  Abstrafung bis zur Kontolöschung). Vorgehen Schritt für Schritt:",
+                     "  **`PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md`**",
+                     "- Die Queue unten ist nur VORBEREITUNG für die Zeit NACH der",
+                     "  Entsperrung – dann getaktet 2–3 Pins/Tag, niemals alle auf einmal.",
+                     "",
+                     f"- {n} Pins vorbereitet in `data/pin_queue.yaml`",
+                     f"- {len(unpinned)} Artikel warten aufs Posting (nach Entsperrung)",
+                     f"- {len(refresh)} Refresh-Kandidaten (älter als {ROTATE_DAYS} Tage)"]
+        else:
+            lines = [f"**Modus:** Queue (kein PINTEREST_ACCESS_TOKEN)",
+                     "", f"- {n} Pins vorbereitet in `data/pin_queue.yaml`",
+                     f"- {len(unpinned)} Artikel warten aufs Posting",
+                     f"- {len(refresh)} Refresh-Kandidaten (älter als {ROTATE_DAYS} Tage)",
+                     "",
+                     "**So aktivierst du das Posting:** Pinterest Developer App → Token als "
+                     "Secret `PINTEREST_ACCESS_TOKEN` (Board-Routing läuft automatisch, "
+                     "siehe `data/pinterest_boards.yaml`; Fallback-Board optional: `PINTEREST_BOARD_ID`)."]
         write_status(lines)
         print("Kein Token – Pin-Queue geschrieben, Workflow skippt sauber (kein Fehler).")
         return 0

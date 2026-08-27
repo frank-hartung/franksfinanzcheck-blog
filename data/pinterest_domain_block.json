@@ -1,0 +1,5 @@
+{
+ "since": "2026-08-27T13:58:16Z",
+ "reason": "Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026.",
+ "policy": "Keine Pins (API/CSV/RSS) auf franksfinanzcheck.de, bis Pinterest die Domain wieder freigegeben hat. Aufhebung nur manuell nach Bestätigung: --domain-unblock."
+}

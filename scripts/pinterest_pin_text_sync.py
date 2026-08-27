@@ -14,8 +14,11 @@ Meta-Description bauen und die Board-Zuordnung per Pillar-Fallback
 raten. Der Sync schließt diese Lücke in beiden Richtungen:
 
   S1  pin_title        ← Plan-Pin-Titel (kuratiert, keyword-first)
-  S2  pin_description  ← Plan-Pin-Beschreibung (Werbung-Kennzeichnung wie im Plan: TP-Pins
-                          mit `*Werbung |`, EP-Pins ohne – ≤ 500 Z.)
+  S2  pin_description  ← Plan-Pin-Beschreibung (Werbe-Kennzeichnung UWG/Pinterest:
+                          Jeder Artikel-Pin auf einen Affiliate-Artikel (/go/-Links,
+                          alle Blog-Artikel) trägt zwingend `*Werbung |` – der Prefix
+                          wird auch dann ergänzt, wenn der kuratierte Plan-Pin ein
+                          reiner EP-Educational-Pin ohne Prefix ist. ≤ 500 Z.)
   S3  pinwand          ← Board-Name aus dem Plan (Multi-Board-Routing)
 
 Matching: Artikel → bester Plan-Pin via Token-Scoring (identische
@@ -127,16 +130,23 @@ def pin_title_valid(t: str) -> bool:
     return bool(t) and len(t) <= PIN_TITLE_MAX
 
 
-def clean_pin_description(beschreibung: str) -> str:
+def clean_pin_description(beschreibung: str, affiliate: bool = False) -> str:
     """Premium-Beschreibung aus dem Plan → pin_description-fertig.
 
-    Die Werbekennzeichnung kommt 1:1 aus dem Plan (Single Source of Truth):
-    TP/Affiliate-Pins enthalten `*Werbung |`, EP-Pins nicht. Die Funktion
-    ergänzt keinen Prefix mehr, damit EP-Pins nicht fälschlich als Werbung
-    markiert werden (Dauervorgabe „nur Affiliate/TP-Pins“).
+    Werbekennzeichnung (Stand 27.08.2026, UWG + Pinterest-Richtlinie):
+    Jeder Artikel auf franksfinanzcheck.de enthält Affiliate-Links
+    (/go/ → CHECK24). Jeder Pin, der auf einen solchen Artikel verlinkt,
+    IST damit Werbung und MUSS mit `*Werbung |` gekennzeichnet sein.
+    - affiliate=True (Artikel-Pin mit /go/-Links): Prefix zwingend
+      gesetzt – er wird ergänzt, falls der Plan-Pin (z. B. ein reiner
+      EP-Educational-Pin) ihn nicht trägt.
+    - affiliate=False (redaktioneller Pin ohne Affiliate-Ziel): kein
+      Prefix (z. B. reine Pillar-/Inspirations-Pins).
     """
     t = (beschreibung or "").strip().replace("&", "und")
     t = re.sub(r"\s+", " ", t)
+    if affiliate and not t.lstrip().startswith("*Werbung"):
+        t = f"*Werbung | {t}"
     return t[:PIN_DESC_MAX]
 
 
@@ -243,12 +253,17 @@ def load_posts() -> list:
             if not m:
                 return []
             return [t.strip().strip('"') for t in m.group(1).split(",") if t.strip()]
+        # Affiliate-Status: Artikel enthält /go/-Partnerlinks → jeder Pin
+        # auf diesen Artikel ist rechtlich Werbung (*Werbung-Pflicht).
+        _body = content.split("---", 2)[2] if len(content.split("---", 2)) == 3 else ""
+        affiliate = bool(re.search(r"\]\(/go/", _body))
         posts.append({
             "slug": slug_of(path), "path": path, "content": content,
             "title": fm("title"), "description": fm("description"),
             "tags": fm_list("tags"), "keywords": fm_list("keywords"),
             "pin_title": fm("pin_title"), "pin_description": fm("pin_description"),
             "pinwand": fm("pinwand"), "pillar": fm("pillar"),
+            "affiliate": affiliate,
             "draft": re.search(r"^draft:\s*true", content, re.M) is not None,
         })
     return posts
@@ -356,7 +371,8 @@ def main() -> int:
         sc, rs, idx = max(candidates)
         pin = pins[idx]
         new_title = str(pin.get("titel", "")).strip()[:PIN_TITLE_MAX]
-        new_desc = clean_pin_description(str(pin.get("beschreibung", "")))
+        new_desc = clean_pin_description(str(pin.get("beschreibung", "")),
+                                         affiliate=bool(post.get("affiliate")))
         new_pinwand = str(pin.get("pinwand", "")).strip()
 
         # Plausibilität: Premium-Text muss auch gültig sein

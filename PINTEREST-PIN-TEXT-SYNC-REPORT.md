@@ -1,6 +1,6 @@
 # 🖋 PINTEREST-PIN-TEXT-SYNC-REPORT (Premium-Pin-Texte)
 
-**Stand:** 26.08.2026 23:43 UTC · **Modus:** APPLY
+**Stand:** 27.08.2026 14:04 UTC · **Modus:** DRY-RUN
 
 **Regel:** Jeder Artikel trägt die Premium-Texte des besten Masterplan-Pins
 (Schwelle 1.2) + das `pinwand`-Feld für das Multi-Board-Routing.

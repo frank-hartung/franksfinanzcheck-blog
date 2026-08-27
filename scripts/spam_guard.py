@@ -73,6 +73,12 @@ import cadence_guard as cad                                # noqa: E402
 
 REPORT = os.path.join(BLOG_DIR, "SPAM-REPORT.md")
 STATE_FILE = os.path.join(BLOG_DIR, "data", "spam_state.json")
+# Domain-Block-Notbremse (27.08.2026): Pinterest hat franksfinanzcheck.de
+# wegen Spam gesperrt → Datei vorhanden = JEGLICHES Auto-Posting blockiert,
+# bis die Domain nach erfolgreicher Prüfung wieder freigegeben ist.
+# Schalten: python3 scripts/spam_guard.py --domain-block "Grund"
+# Aufheben: python3 scripts/spam_guard.py --domain-unblock
+DOMAIN_BLOCK_FILE = os.path.join(BLOG_DIR, "data", "pinterest_domain_block.json")
 HISTORY_FILE = os.path.join(BLOG_DIR, "data", "pin_history.jsonl")
 AUDIT_FILE = os.path.join(BLOG_DIR, "data", "spam_history.jsonl")
 FEED_LOCAL = os.path.join(BLOG_DIR, "public", "index.xml")
@@ -784,6 +790,13 @@ def check_csv(path, check_network=True):
             errs.append("C3: Garantie-Claim im Pin-Text (Misleading)")
 
         # C4 Description-Regeln (Disclosure VOR der Kürzung → ≤ 500 gesamt)
+        # Werbe-Kennzeichnung (UWG + Pinterest-Richtlinie 27.08.2026): Jeder
+        # Pin-Link führt auf einen Blog-Artikel mit Affiliate-Links (/go/ →
+        # CHECK24) → jeder Artikel-Pin IST Werbung und MUSS "*Werbung |"
+        # tragen. Fehlt der Prefix, wird er ergänzt (rechtssicher). Redak-
+        # tionelle Pins auf /pillar/ ohne Affiliate-Links werden vom Generator
+        # gar nicht erzeugt; kämen sie doch vor, bleibt der Prefix erlaubt
+        # (konservative Offenlegung ist nie ein Spam-Signal – fehlende schon).
         if link and "Werbung" not in desc:
             desc = "*Werbung | " + desc
             heals.append("*Werbung-Disclosure ergänzt")
@@ -989,9 +1002,56 @@ def _in_pause(state):
     return False, until
 
 
+# ---------------------------------------------------------------- A0: Domain-Block
+def domain_blocked():
+    """(True, reason) wenn Pinterest die Domain gesperrt hat (Datei vorhanden).
+    Env-Override: PINTEREST_DOMAIN_BLOCKED=1 blockiert, =0 hebt die Datei auf
+    (z. B. für Tests). Die Aufhebung nach echter Entsperrung MUSS manuell per
+    --domain-unblock erfolgen – nie automatisch."""
+    env = os.environ.get("PINTEREST_DOMAIN_BLOCKED", "").strip()
+    if env == "1":
+        return True, "PINTEREST_DOMAIN_BLOCKED=1 (env)"
+    if env == "0":
+        return False, ""
+    try:
+        with open(DOMAIN_BLOCK_FILE, encoding="utf-8") as f:
+            d = json.load(f)
+        return True, (d.get("reason") or "Domain bei Pinterest gesperrt")
+    except Exception:
+        return False, ""
+
+
+def domain_block_set(reason, since=None):
+    data = {"since": since or now_iso(),
+            "reason": reason or "Domain bei Pinterest als Spam markiert",
+            "policy": ("Keine Pins (API/CSV/RSS) auf franksfinanzcheck.de, "
+                       "bis Pinterest die Domain wieder freigegeben hat. "
+                       "Aufhebung nur manuell nach Bestätigung: --domain-unblock.")}
+    with open(DOMAIN_BLOCK_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=1)
+    audit({"module": "spam_guard", "action": "domain-block-set",
+           "reason": data["reason"]})
+    return data
+
+
+def domain_block_clear():
+    try:
+        os.remove(DOMAIN_BLOCK_FILE)
+    except FileNotFoundError:
+        pass
+    audit({"module": "spam_guard", "action": "domain-block-cleared",
+           "by": "manual"})
+
+
 def api_preflight():
-    """A1: Rate-Limit (10/h, 40/Tag) + Eskalations-Pause prüfen. → (ok, msg).
-    Rein lokal (State-Datei) – keine API-Kommunikation, deterministisch."""
+    """A0/A1: Domain-Block + Rate-Limit (10/h, 40/Tag) + Eskalations-Pause.
+    → (ok, msg). Rein lokal (State-Dateien) – deterministisch."""
+    blocked, reason = domain_blocked()
+    if blocked:
+        return False, (f"DOMAIN GESPERRT (A0): {reason} – KEINE Pins "
+                       f"auf {BASE_URL}, bis Pinterest die Domain wieder "
+                       f"freigegeben hat (--domain-unblock). Siehe "
+                       f"PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md.")
     state = load_state()
     in_pause, until = _in_pause(state)
     if in_pause:
@@ -1193,6 +1253,11 @@ def run_selftest():
 
     STATE_FILE, HISTORY_FILE, AUDIT_FILE, FEED_LOCAL = (
         st_file, hist_file, aud_file, feed_file)
+    # Selftest isoliert auch die Domain-Notbremse: Die A1/A3-Fälle testen
+    # Rate-Limit/Eskalation, nicht den Domain-Status (dieser hat einen
+    # eigenen expliziten A0-Testfall unten).
+    _saved_env = os.environ.get("PINTEREST_DOMAIN_BLOCKED")
+    os.environ["PINTEREST_DOMAIN_BLOCKED"] = "0"
     try:
         now = now_utc()
         fmt = "%Y-%m-%dT%H:%M:%SZ"
@@ -1301,8 +1366,20 @@ def run_selftest():
         ffindings, _feed = check_feed()
         check("F meldet fehlendes Cover (F4)",
               any(r == "F4" for r, _s, _m in ffindings))
+        # ---- A0: Domain-Notbremse (env-override + api_preflight)
+        os.environ["PINTEREST_DOMAIN_BLOCKED"] = "1"
+        ok0, msg0 = api_preflight()
+        check("A0 Domain-Block blockiert preflight",
+              (not ok0) and "DOMAIN" in msg0.upper())
+        os.environ["PINTEREST_DOMAIN_BLOCKED"] = "0"
+        ok0b, _msg0b = api_preflight()
+        check("A0 ohne Block ist preflight frei", ok0b)
     finally:
         STATE_FILE, HISTORY_FILE, AUDIT_FILE, FEED_LOCAL = saved
+        if _saved_env is None:
+            os.environ.pop("PINTEREST_DOMAIN_BLOCKED", None)
+        else:
+            os.environ["PINTEREST_DOMAIN_BLOCKED"] = _saved_env
         import shutil
         shutil.rmtree(tmp, ignore_errors=True)
 
@@ -1323,6 +1400,11 @@ def write_report(sections):
     now = now_utc()
     now_str = now.strftime("%Y-%m-%d %H:%M UTC")
     state = load_state()
+    blocked, block_reason = domain_blocked()
+    if blocked:
+        domain_line = f"🔴 GESPERRT – {block_reason} (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)"
+    else:
+        domain_line = "🟢 freigegeben (keine Notbremse)"
     in_pause, until = _in_pause(state)
     if in_pause:
         mins = max(1, int((until - now).total_seconds() // 60) + 1)
@@ -1341,6 +1423,8 @@ def write_report(sections):
         "# 🛡️ SPAM-REPORT (spam_guard.py)",
         "",
         f"**Stand:** {now_str} · Modus: " + ("FIX" if DO_FIX else "CHECK"),
+        "",
+        f"**Domain-Status (Pinterest):** {domain_line}",
         "",
         f"**API-Status:** Pause: {pause_line} · Rate (24h): {len(created)}/{MAX_PER_DAY} "
         f"(davon letzte Std.: {hour_ct}/{MAX_PER_HOUR})",
@@ -1382,6 +1466,28 @@ def main():
         audit({"module": "spam_guard", "action": "pause-reset", "by": "manual"})
         print("✅ API-Pause manuell zurückgesetzt.")
         return 0
+    if "--domain-block" in sys.argv:
+        i = sys.argv.index("--domain-block")
+        reason = sys.argv[i + 1] if i + 1 < len(sys.argv) and not sys.argv[i + 1].startswith("--") else ""
+        data = domain_block_set(reason)
+        print(f"🔴 Domain-Notbremse AKTIV seit {data['since']}: {data['reason']}")
+        print("   Alle Auto-Pinning-Kanäle (Engine/CSV/RSS) blockieren jetzt.")
+        print("   Aufheben NUR nach Bestätigung der Entsperrung durch Pinterest:")
+        print("   python3 scripts/spam_guard.py --domain-unblock")
+        return 0
+    if "--domain-unblock" in sys.argv:
+        domain_block_clear()
+        print("✅ Domain-Notbremse AUFGEHOBEN – Pin-Kanäle wieder frei.")
+        print("   Nur nach Bestätigung ausführen, dass Pinterest die Domain")
+        print("   wieder freigegeben hat (Test-Pin ohne Link + Appeal-Bestätigung).")
+        return 0
+    if "--domain-status" in sys.argv:
+        blocked, reason = domain_blocked()
+        if blocked:
+            print(f"🔴 Domain GESPERRT: {reason}")
+        else:
+            print("🟢 Domain nicht blockiert (keine Notbremsen-Datei).")
+        return 1 if blocked else 0
     if "--gen-csv" in sys.argv:
         max_n = None
         if "--max" in sys.argv:

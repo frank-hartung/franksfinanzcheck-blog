@@ -1,6 +1,6 @@
 # 🔗 PINTEREST-LINK-REPORT (Premium-Zielseiten-Check)
 
-**Stand:** 26.08.2026 23:43 UTC · **Modus:** APPLY (Plan geschrieben)
+**Stand:** 27.08.2026 14:00 UTC · **Modus:** APPLY (Plan geschrieben)
 
 **Premium-Regel:** Pin → eigener Blogartikel → Affiliate-CTA. Nie direkt auf CHECK24 (Spam-Signal + verschenkter SEO-Wert) und nie zurück aufs Pinterest-Profil (Traffic-Sackgasse).
 

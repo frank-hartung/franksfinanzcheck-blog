@@ -1,6 +1,8 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-08-27 13:15 UTC · Modus: FIX
+**Stand:** 2026-08-27 14:04 UTC · Modus: CHECK
+
+**Domain-Status (Pinterest):** 🔴 GESPERRT – Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026. (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
@@ -24,20 +26,16 @@
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
-- ℹ️ [F-OK] Feed sauber: 18 Items, Kadenz-konform, Cover vorhanden, keine Duplikate
-
-## C: Pinterest-Bulk-CSV (C1–C8)
-
-- ℹ️ [C0] CSV-Datei nicht vorhanden – Kanal übersprungen (optional, --gen-csv)
+- ℹ️ [F0] public/index.xml fehlt (noch kein Build) – Feed-Check übersprungen
 
 ## A: Pinterest-API (A1–A4)
 
-- ℹ️ [A1] Rate-OK (0/10 Std., 0/40 Tag)
+- 🔴 [A1] DOMAIN GESPERRT (A0): Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026. – KEINE Pins auf https://franksfinanzcheck.de, bis Pinterest die Domain wieder freigegeben hat (--domain-unblock). Siehe PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md.
 - ℹ️ [A2] kein Token – Pre-Create-Checks (A2/A4) laufen library-seitig in der Pinterest-Engine (spam_guard.api_check_pin / api_record_created)
 
 ## Fazit
 
-✅ Spamfrei: keine harten Funde.
+🔴 1 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
 
 ---
 _Wache: Blog B1–B8 · Feed F1–F6 · CSV C1–C8 · API A1–A4 – Dauerauftrag, niemals Content-Verlust._

@@ -7,6 +7,24 @@ ohne manuelles Pinnen, über Pinterests eigene „Auto-publish"-Funktion.
 
 ---
 
+> ## 🚨 WICHTIG (Stand 27.08.2026): Domain ist bei Pinterest gesperrt!
+>
+> Solange die Sperre von `franksfinanzcheck.de` besteht, **darf RSS-Auto-publish
+> NICHT verbunden/aktiv sein**: Ein laufender Feed würde täglich neue Pins auf
+> die gesperrte Domain setzen und die Abstrafung bis zur Account-Sperre
+> verschärfen. Falls die Verbindung bereits besteht: **sofort trennen**
+> (Pinterest → Settings → *Create Pins in bulk* → *Auto-publish* → Feed entfernen).
+>
+> Erst **nach** der bestätigten Entsperrung (Appeal, siehe
+> `PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md`) hier weitermachen — und dann mit
+> getaktetem Start beginnen (2–3 Pins/Tag, nicht der volle Feed auf einmal).
+> Die technischen RSS-Vorbereitungen unten sind davon unabhängig und bleiben
+> sinnvoll.
+
+---
+
+---
+
 ## 1. Was wurde technisch geändert?
 
 RSS war am 10.08.2026 deaktiviert (`disableKinds = ["RSS"]`). Für die

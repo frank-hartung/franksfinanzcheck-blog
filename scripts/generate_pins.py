@@ -47,6 +47,7 @@ def load_posts():
         c = re.search(r'^cover:\s*\n\s*image:\s*["\']?(.+?)["\']?\s*$', content, re.M)
         pinned = re.search(r"^pinned:\s*(true|false)", content, re.M)
         slug = slug_of(path)
+        draft = re.search(r"^draft:\s*true", content, re.M) is not None
         posts.append({
             "file": os.path.basename(path),
             "slug": slug,
@@ -54,6 +55,9 @@ def load_posts():
             "description": (d.group(1) if d else "").strip(),
             "cover": (c.group(1) if c else "").strip(),
             "pinned": (pinned.group(1) if pinned else "false") == "true",
+            # Drafts sind nicht live → ein Pin darauf ist ein toter Link
+            # (= Spam-Signal bei Pinterest). Niemals pinnen.
+            "draft": draft,
             "path": path,
             "content": content,
         })
@@ -138,14 +142,32 @@ def main():
         sys.exit("FEHLER: PINTEREST_BOARD_ID fehlt – erst mit --list-boards ermitteln.")
 
     posts = load_posts()
-    to_pin = [p for p in posts if not p["pinned"]]
-    print(f"{len(posts)} Artikel gefunden, davon {len(to_pin)} noch nicht gepinnt.")
+    live = [p for p in posts if not p["draft"]]
+    drafts_skip = len(posts) - len(live)
+    to_pin = [p for p in live if not p["pinned"]]
+    print(f"{len(live)} live-Artikel gefunden ({drafts_skip} Drafts ausgenommen), "
+          f"davon {len(to_pin)} noch nicht gepinnt.")
     if not to_pin:
         print("✅ Alles ist bereits gepinnt – nichts zu tun.")
         return
 
+    # DOMAIN-SPERR-WACHE (27.08.2026): Bei aktiver Domain-Sperre bei
+    # Pinterest KEINE Pins absetzen (auch nicht manuell angestoßen) –
+    # jeder Pin-Versuch auf eine gesperrte Domain verschärft die Abstrafung.
+    try:
+        import spam_guard as sg
+        blocked, reason = sg.domain_blocked()
+    except Exception:
+        blocked, reason = False, ""
+    if blocked and not dry_run:
+        sys.exit(f"🔴 STOP: Domain bei Pinterest gesperrt – {reason}. "
+                 "Keine Pins abgesetzt. Vorgehen: PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md. "
+                 "Aufhebung nach Bestätigung: python3 scripts/spam_guard.py --domain-unblock")
+
     if dry_run:
         print("\n(Vorschau – nichts wird gepinnt)")
+        if blocked:
+            print("🔴 ACHTUNG: Domain ist gesperrt – nach Entsperrung getaktet posten!")
         for p in to_pin:
             print(f"  • {p['title'][:60]}")
             print(f"    → {BASE_URL}/posts/{p['slug']}/{PIN_UTM}")
