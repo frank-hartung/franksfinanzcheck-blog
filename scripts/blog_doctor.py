@@ -55,6 +55,7 @@ KETTE = [
     ("integrity_guard.py",    [],                          "0-LOCK", "Kern-Integritaet (Signatruehe nach Drift)"),
 
     # (skript, basis-args, phase, zweck)
+    ("heading_guard.py",      ["--fix"],                "A-Text", "Überschriften-Hygiene H1-H3: kein <br>, Anker-stabil (27.08. hinzu)"),
     ("casing_guard.py",       ["--fix"],                "A-Text", "Akronyme/Marken (DSL, Check24)"),
     ("dash_guard.py",         ["--fix"],                "A-Text", "Dash-Typografie R1-R9"),
     ("unit_guard.py",         ["--fix"],                "A-Text", "Euro/Prozent/NBSP"),
