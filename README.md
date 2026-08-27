@@ -71,16 +71,21 @@ Alle Affiliate-Links liegen zentral in **`scripts/check24_links.yaml`**. Ändern
 2. **Bestehende Artikel:** `python3 scripts/affiliate_shield.py --fix` routet alle Affiliate-Links über das `/go/`-Gateway; `python3 scripts/affiliate_link_check.py --fix` prüft Kategorie und PID.
 3. **Generischer Link (GitHub-Variable):** Falls nötig, in GitHub unter Settings → Secrets and variables → Actions die Variable `AFFILIATE_URL` aktualisieren.
 
-**📌 Automatisches Nach-Pinnen bei Pinterest (montags 17:30 Uhr):**
+**📌 Automatisches Pinnen bei Pinterest (RSS-Auto-Publish):**
 
-Der Workflow **„Wöchentliches Nach-Pinnen"** erstellt jeden Montag um 17:30 Uhr (DE)
-automatisch Pins für alle neuen Blog-Artikel (Cover-Bild, Beschreibung, Artikel-URL,
-Hashtags) über die Pinterest API v5. Jeder Artikel wird nur einmal gepinnt
-(`pinned: true`-Flag im Frontmatter).
+Seit 20.08.2026 pinnpt **Pinterests eigener RSS-Auto-Publish** (Feed:
+`https://franksfinanzcheck.de/index.xml`) neue Artikel automatisch – der
+Feed ist dafür optimiert (Cover 1000×1500 als enclosure, Pin-Description,
+`*Werbung`-Kennzeichnung, spam-geprüft durch `spam_guard.py` F1). Der
+frühere Workflow „Wöchentliches Nach-Pinnen" wurde am 27.08.2026 entfernt
+(Doppel-Struktur). Manuelle Pin-Läufe (z. B. Queue abarbeiten, Board-
+Routing über 6 Boards) laufen über **Actions → „Pinterest-AI" → Run
+workflow** (`pinterest_engine.py`); Rate-Limits und 30-Tage-Repeat-Schutz
+setzt `spam_guard.py` durch.
 
 **Einmalige Einrichtung (~10 Min.):** Siehe `ANLEITUNG-PINTEREST-API.md`
 - Pinterest-Developer-App + Access-Token → Secret `PINTEREST_ACCESS_TOKEN`
-- Board-ID (`python3 scripts/generate_pins.py --list-boards`) → Variable `PINTEREST_BOARD_ID`
+- Board-ID (`python3 scripts/pinterest_engine.py --list-boards`) → Variable `PINTEREST_BOARD_ID`
 
 **🔍 Automatische SEO-Optimierung (wöchentlich, kostenlos, Profi-Niveau):**
 
@@ -200,10 +205,10 @@ Dann im GitHub-Repo: **Settings → Secrets and variables → Actions → New re
 **Optional (Repository variables):**
 - `BLOG_AUTHOR` → Name, der unter den Artikeln steht (Standard: „Redaktion")
 - `AFFILIATE_URL` → dein CHECK24-Partnerlink (Standard: Platzhalter)
-- `MAX_ARTIKEL_PRO_LAUF` → Artikel pro Lauf (Standard: 1)
+- `MIN_ARTIKEL_PRO_TAG` / `MAX_ARTIKEL_PRO_TAG` → Artikel pro Publikationstag (Standard: 2–3, nur Mo/Mi/Fr – Dauervorgabe, siehe `CADENCE-REPORT.md`)
 - `GROQ_MODEL` → Groq-Modell (Standard: `openai/gpt-oss-120b`; zentrales Modul `scripts/groq_config.py`. `llama-3.3-70b-versatile` ist seit 16.08.2026 abgeschaltet und wird automatisch gemappt.)
 
-**Ab jetzt:** Jeden Morgen um 05:00 UTC (07:00 Uhr Sommerzeit in DE) erzeugt der Bot automatisch einen frischen Artikel-Entwurf im Repo. Du bekommst keine E-Mail – einfach mal in `content/posts/` reinschauen.
+**Ab jetzt:** An Publikationstagen (Mo/Mi/Fr) um 08:10 Uhr (DE) erzeugt und veröffentlicht die **Content-Engine v2** automatisch 2–3 Artikel (Fallback-Slots 16:10/19:40, falls der Haupt-Slot an API-Limits scheitert). Nur Artikel, die das Profi-Qualitäts-Gate bestehen, gehen live – alles andere wird als Entwurf gesichert und per Issue gemeldet.
 
 ### 5. Entwürfe veröffentlichen
 
@@ -294,7 +299,7 @@ DEMO_MODE=1 python3 scripts/generate_drafts.py   # erzeugt Test-Entwurf
 
 **Warum Entwürfe statt automatischer Veröffentlichung?** Google bestraft massenhaft automatisch veröffentlichten KI-Content. Kurzes Prüfen + Freigeben schützt dein Ranking – und macht die Artikel besser (du ergänzt z. B. eigene Erfahrungen).
 
-**Wie oft erscheint neuer Content?** Standard: 1 Entwurf pro Tag. Über `MAX_ARTIKEL_PRO_LAUF` (Variable) oder den Cron im Workflow anpassbar.
+**Wie oft erscheint neuer Content?** Dauervorgabe: 2–3 Artikel an Publikationstagen (Mo/Mi/Fr), gesteuert über `MIN_ARTIKEL_PRO_TAG` / `MAX_ARTIKEL_PRO_TAG` und erzwungen durch `cadence_guard.py` (Details: `CADENCE-REPORT.md`).
 
 **Kann ich den Bot stoppen?** GitHub → Actions → Workflow „Tägliche Content-Generierung" → Disable workflow.
 
