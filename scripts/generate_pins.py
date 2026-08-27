@@ -44,6 +44,8 @@ def load_posts():
         content = open(path, encoding="utf-8").read()
         m = re.search(r"^title:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
         d = re.search(r"^description:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
+        pt = re.search(r"^pin_title:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
+        pd = re.search(r"^pin_description:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
         c = re.search(r'^cover:\s*\n\s*image:\s*["\']?(.+?)["\']?\s*$', content, re.M)
         pinned = re.search(r"^pinned:\s*(true|false)", content, re.M)
         slug = slug_of(path)
@@ -51,8 +53,10 @@ def load_posts():
         posts.append({
             "file": os.path.basename(path),
             "slug": slug,
-            "title": (m.group(1) if m else slug).strip(),
-            "description": (d.group(1) if d else "").strip(),
+            # Premium-Pin-Texte (kuratiert via pinterest_pin_text_sync) haben
+            # Vorrang; Fallback ist Artikel-Titel/Meta-Description.
+            "title": (pt.group(1) if pt else (m.group(1) if m else slug)).strip()[:100],
+            "description": (pd.group(1) if pd else (d.group(1) if d else "")).strip(),
             "cover": (c.group(1) if c else "").strip(),
             "pinned": (pinned.group(1) if pinned else "false") == "true",
             # Drafts sind nicht live → ein Pin darauf ist ein toter Link
@@ -164,25 +168,47 @@ def main():
                  "Keine Pins abgesetzt. Vorgehen: PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md. "
                  "Aufhebung nach Bestätigung: python3 scripts/spam_guard.py --domain-unblock")
 
+    # CANARY: Max. Pins pro Lauf (nach Domain-Sperre kein Massen-Posten).
+    # Im Dry-Run wird NICHT abgebrochen – er zeigt nur die Vorschau.
+    if dry_run:
+        run_cap = 3
+    else:
+        try:
+            import spam_guard as sg
+            _ok_pre, pre_msg = sg.api_preflight()
+            if not _ok_pre:
+                sys.exit(f"🔴 STOP (Spam-Wache): {pre_msg}")
+            run_cap = sg.api_run_capacity()
+        except Exception:
+            run_cap = 3
+    run_list = to_pin[:run_cap] if not dry_run else to_pin
+    print(f"Canary-Limit: {run_cap} Pin(s)/Lauf "
+          f"({len(to_pin)} offen – Rest bleibt geparkt).")
+
     if dry_run:
         print("\n(Vorschau – nichts wird gepinnt)")
         if blocked:
             print("🔴 ACHTUNG: Domain ist gesperrt – nach Entsperrung getaktet posten!")
-        for p in to_pin:
+        for p in run_list:
             print(f"  • {p['title'][:60]}")
             print(f"    → {BASE_URL}/posts/{p['slug']}/{PIN_UTM}")
         return
 
     ok = 0
-    for p in to_pin:
+    for p in run_list:
         image = p["cover"]
         if image.startswith("/"):
             image = BASE_URL + image
         elif not image.startswith("http"):
             image = f"{BASE_URL}/images/covers/{p['slug']}.jpg"
         link = f"{BASE_URL}/posts/{p['slug']}/{PIN_UTM}"
-        # Werbekennzeichnung (deutsches Recht): Artikel enthalten Affiliate-Links
-        desc = "*Werbung | " + (p["description"] or p["title"])[:478]
+        # Werbekennzeichnung (deutsches Recht): Artikel enthalten Affiliate-
+        # Links. Die kuratierte pin_description traegt bereits *Werbung;
+        # nur der Fallback bekommt den Prefix (Doppel-Prefix vermeiden).
+        base = (p["description"] or p["title"]).strip().replace("&", "und")
+        if not base.lstrip().startswith("*Werbung"):
+            base = "*Werbung | " + base
+        desc = base[:478]
         desc += "\n\n#GeldSparen #Spartipps #FranksFinanzcheck"
         try:
             result = create_pin(token, board_id, p["title"], desc, link, image)

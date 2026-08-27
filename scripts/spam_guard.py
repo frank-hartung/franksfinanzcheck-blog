@@ -107,6 +107,12 @@ CSV_SCHEDULE_DAYS_AHEAD = 30   # C1: Pinterest-Scheduling-Horizont
 ROTATION_DAYS = 30             # C7/A2: gleicher Link < 30 Tage = Repeat-Pin
 MAX_PER_HOUR = int(os.environ.get("PINTEREST_MAX_PINS_PER_HOUR", "10"))  # A1
 MAX_PER_DAY = int(os.environ.get("PINTEREST_MAX_PINS_PER_DAY", "40"))    # A1
+# Canary-Schutz (27.08.2026, nach Domain-Sperre): Nach der Entsperrung
+# KEIN Massen-Posten auf einmal (das war ein Auslöser der Spam-Markierung).
+# Pro Lauf/Workflow werden höchstens so viele Pins neu erstellt – der Rest
+# bleibt sicher für den nächsten Lauf in der Queue. Nach 2–3 Wochen sauberen
+# Betriebs kann der Wert per Env angehoben werden (z. B. 5).
+MAX_PINS_PER_RUN = int(os.environ.get("PINTEREST_MAX_PINS_PER_RUN", "3"))  # A1b
 PAUSE_ESCALATION_H = (1, 24, 168)   # A3: 1. Fehler 1h, 2. 24h, 3.+ 7 Tage
 
 # HART = konkrete Garantie-/Versprechen (UWG-kritisch, Pinterest "Misleading
@@ -1077,6 +1083,30 @@ def api_preflight():
                   f"{in_day}/{MAX_PER_DAY} Tag)")
 
 
+def api_run_capacity():
+    """A1b: Max. neue Pins, die DIESER Lauf erstellen darf.
+    = min(Canary-Limit pro Lauf, Restkontingent Stunde, Restkontingent Tag).
+    Damit kein Workflow-Lauf nach einer Entsperrung auf einmal 10+ Pins
+    absetzt (Massen-Post-Verhalten war Mit-Auslöser der Spam-Markierung)."""
+    state = load_state()
+    now = now_utc()
+    hour_ago = now - datetime.timedelta(hours=1)
+    day_ago = now - datetime.timedelta(days=1)
+    in_hour = in_day = 0
+    for ts in state.get("created", []):
+        t = _parse_ts(ts)
+        if t is None:
+            continue
+        if t >= hour_ago:
+            in_hour += 1
+        if t >= day_ago:
+            in_day += 1
+    cap = min(MAX_PINS_PER_RUN,
+              max(0, MAX_PER_HOUR - in_hour),
+              max(0, MAX_PER_DAY - in_day))
+    return cap
+
+
 def api_check_pin(pin):
     """A2: Pre-Create-Check pro Pin. → (ok, [reasons]). Deterministisch.
     pin = {title, description, link, media, aff_links}."""
@@ -1374,6 +1404,16 @@ def run_selftest():
         os.environ["PINTEREST_DOMAIN_BLOCKED"] = "0"
         ok0b, _msg0b = api_preflight()
         check("A0 ohne Block ist preflight frei", ok0b)
+        # ---- A1b: Canary-Kapazität (max. Pins pro Lauf)
+        save_state({})
+        cap = api_run_capacity()
+        check(f"A1b Canary-Kapazität ≤ {MAX_PINS_PER_RUN} bei leerem State",
+              cap == MAX_PINS_PER_RUN)
+        save_state({"created": [
+            (now - datetime.timedelta(minutes=3)).strftime(fmt)
+            for _ in range(MAX_PER_HOUR - 1)]})
+        cap2 = api_run_capacity()
+        check("A1b Kapazität schrumpft mit Stundenkontingent", cap2 == 1)
     finally:
         STATE_FILE, HISTORY_FILE, AUDIT_FILE, FEED_LOCAL = saved
         if _saved_env is None:

@@ -2,10 +2,62 @@
 
 **Profil:** https://de.pinterest.com/franksfinanzcheck/
 **Domain:** https://franksfinanzcheck.de
-**Stand:** 27.08.2026 · **Status:** 🔴 Domain bei Pinterest gesperrt (Spam-Markierung)
+**Stand:** 27.08.2026 (Update abends) · **Status:** 🔴 Domain bei Pinterest
+gesperrt (Spam-Markierung, Fehler 404 beim Crawlen) · 🟢 **API-Trial-Zugang
+für die App „FranksFinanzcheck Blog“ heute GENEHMIGT**
 **Zuständigkeits-Hinweis:** Dieses Dokument beantwortet die Frage *„Soll ich die
 fehlenden Pins jetzt manuell hinterlegen?“* mit **KLAR: NEIN — solange die
 Sperre besteht.** Begründung und Schritte unten.
+
+---
+
+## ⭐ UPDATE 27.08.: API-Zugang genehmigt — aber das ist (noch) keine Entsperrung
+
+Die heutige Pinterest-Mail bedeutet: Deine **Entwickler-App** ist freigegeben
+(Trial access) → Du darfst jetzt Tokens erzeugen und die API nutzen.
+**Das ist getrennt von der Domain-Sperre zu sehen:**
+
+| Was freigegeben ist | Was (noch) gesperrt ist |
+|---|---|
+| App darf API-Aufrufe machen (Boards/Pins im **eigenen** Konto lesen & schreiben) | Die **Domain** `franksfinanzcheck.de` bleibt als Spam/404 markiert |
+
+➡️ **Erlaubt & sinnvoll JETZT:** Token einrichten, **Lese-Zugriffe** (Profil-Audit,
+Boards auslesen) laufen lassen, Profil/Boards über die API prüfen.
+➡️ **Verboten JETZT:** Pins posten, die auf die gesperrte Domain verlinken.
+Die Domain-Notbremse blockt das weiterhin (hebe sie NICHT vor der nachgewiesenen
+Entsperrung auf). Trial-Hinweis: Pins sind auf dein eigenes Konto beschränkt;
+Massen-Posting an einen gesperrten Link gefährdet den frischen App-Zugang zusätzlich.
+
+### 🔑 Wahrscheinlichste Sperr-Ursache gefunden: HTTPS auf der Domain AUS
+
+Der GitHub-Pages-Status der Live-Domain zeigt **`https_enforced: false`** –
+die Site wird auf `http://franksfinanzcheck.de` ausgeliefert, **HTTPS ist nicht
+aktiv** (Test schlägt mit SSL-Fehler fehl). Wenn Pinterests Crawler die Seite
+nicht sicher öffnen kann, wertet er jeden Link als **tot (404)** → genau das
+ist „Link-Spam“ für Pinterest. **Das zuerst reparieren:**
+
+**Fix (1 Klick, von dir – dieses API-Token darf Pages-Einstellungen nicht
+ändern, 403):** GitHub → Repo **Settings → Pages** → Bereich *Custom domain*:
+1. Bei **„Enforce HTTPS“** das Häkchen **setzen** (aktuell aus). Falls es sich
+   nicht setzen lässt: kurz warten (GitHub stellt das Zertifikat automatisch
+   aus, sobald die DNS-A-/CNAME-Einträge auf GitHub Pages zeigen), dann erneut.
+2. Domain `franksfinanzcheck.de` bleibt eingetragen (CNAME gepflegt, Pages-
+   Status `built`); nach Aktivieren 10–30 Min. warten.
+3. Testen: `https://franksfinanzcheck.de/` lädt ohne Warnung, ebenso
+   `https://franksfinanzcheck.de/pinterest-e238f.html` (Claim-Datei).
+4. **Rich-Pin-Debugger** https://developers.pinterest.com/tools/url-debugger/
+   mit einer Artikel-URL: liefert er jetzt statt 404 die OG-Daten, ist das der
+   stärkste Beweis für den Appeal.
+
+### 🛠️ Technisch zusätzlich abgesichert (heute eingebaut)
+
+- **Canary-Limit:** Nach der Entsperrung postet jeder Lauf **maximal 3 Pins**
+  (`PINTEREST_MAX_PINS_PER_RUN`, Default 3; Rest bleibt sicher in der Queue) –
+  kein Massen-Posting mehr, das die Sperre mit ausgelöst hat.
+- **`generate_pins.py`** nutzt jetzt die kuratierten Premium-Pin-Texte
+  (`pin_title`/`pin_description`) und respektiert Notbremse + Canary + Draft-Schutz.
+- **API-Anleitung korrigiert:** Der Scope für den Profil-Audit heißt
+  `user_accounts:read` (nicht `profile:read`, das es in der v5-API nicht gibt).
 
 ---
 
@@ -66,9 +118,14 @@ Konto pinnst massiv auf eine neue Domain“*. Die Reparatur muss deshalb auf
 
 - [ ] **RSS-Auto-Publish trennen**, falls aktiv (Pinterest → Settings →
       *Create Pins in bulk* → *Auto-publish* → Feed entfernen).
-- [ ] **Keine neuen Pins manuell anlegen** (auch nicht ohne Link).
-- [ ] Keine API-Token-Aktivität (die Notbremse blockiert das eh — Status
-      prüfen: `python3 scripts/spam_guard.py --domain-status`).
+- [ ] **Keine neuen Pins manuell anlegen** (auch nicht ohne Link) — auch
+      nicht über die jetzt freigeschaltete API.
+- [ ] **API-Token einrichten ist erlaubt** (Lese-Zugriff!): Die App ist
+      freigegeben → nach `ANLEITUNG-PINTEREST-API.md` OAuth durchführen
+      (`--auth-url` → `--exchange`). Mit Token den **Live-Profil-Audit**
+      laufen lassen (`scripts/pinterest_profile_audit.py`), um Name/Bio/
+      Boards/Verifikation direkt auszulesen. **Posting blockt die Notbremse
+      automatisch** (Status: `python3 scripts/spam_guard.py --domain-status`).
 - [ ] **Offene Pins im Profil NICHT löschen.** Massenlöschung ist selbst ein
       Spam-Signal. Stehen lassen, ggf. später über den Support klären.
 
@@ -95,11 +152,16 @@ für den Review „menschlich & seriös“:
 
 ### PHASE 2 — Domain technisch vorbereiten (während der Prüfung)
 
+- [ ] **🔴 ZUERST: HTTPS aktivieren** (vermutliche Sperr-Ursache, siehe oben):
+      GitHub **Settings → Pages → „Enforce HTTPS“** Häkchen setzen, bis
+      `https://franksfinanzcheck.de/` sauber lädt. Ohne HTTPS bleibt jeder
+      Link für Pinterests Crawler ein 404 — der Appeal hat dann kaum Chance.
 - [ ] **Domain-Claim prüfen/erneuern:** Claim-Datei `static/pinterest-e238f.html`
       liegt aus, `<p:domain_verify>` im Head. Nach Deploy im Dashboard
       *Settings → Claimed accounts* bestätigen, dass `franksfinanzcheck.de`
       verifiziert ist. Eine verifizierte Domain wird deutlich seltener als Spam
-      eingestuft.
+      eingestuft. (Mit API-Token lässt sich der Claim-Status jetzt auch live
+      prüfen.)
 - [ ] **Rich Pins validieren** (erst, wenn die Domain wieder erreichbar ist):
       https://developers.pinterest.com/tools/url-debugger/ mit einer
       Artikel-URL. OpenGraph/Structured-Daten sind im Hugo-Theme bereits
@@ -146,10 +208,14 @@ für den Review „menschlich & seriös“:
 
 Erst wenn Pinterest die Freigabe bestätigt hat:
 
+- [ ] **Verifizieren, dass die Domain wirklich wieder „durch“ ist:** Erst
+      einen einzelnen Test-Pin OHNE Link setzen (nur Bild) oder den Rich-Pin-
+      Debugger erfolgreich durchlaufen lassen. Kein 403/404/Block-Hinweis mehr.
 - [ ] Notbremse aufheben:
       `python3 scripts/spam_guard.py --domain-unblock`
-- [ ] **Erste Woche: 2–3 eigene Pins pro Tag**, dann auf 4–5 steigern —
-      **niemals** die 18 Pins an einem Tag.
+- [ ] **Canary-Start: maximal 3 Pins im ERSTEN Lauf** (ist jetzt der Default:
+      `PINTEREST_MAX_PINS_PER_RUN=3`), dann 2–3 pro Tag, nach 2–3 Wochen
+      sauberen Betriebs auf 4–5 steigern — **niemals** die 18 Pins an einem Tag.
 - [ ] **Fertige Artefakte nutzen** (alles vorbereitet):
   - **Bulk-Upload-CSV:** `data/pins_upload.csv` — 18 Pins, fertig getaktet
     (3/Tag an Publikationstagen), mit `*Werbung`-Kennzeichnung, Board-Routing
@@ -157,9 +223,12 @@ Erst wenn Pinterest die Freigabe bestätigt hat:
     die Scheduling-Daten frisch sind:
     `python3 scripts/spam_guard.py --gen-csv --max 50`
     Upload: Pinterest → *Create → Pins in bulk (CSV)* → Datei hochladen.
-  - **Oder API:** `PINTEREST_ACCESS_TOKEN` setzen, dann postet
-    `pinterest-ai.yml` getaktet über die Engine (A1-Limit 10/Std., 40/Tag
-    ist eingebaut).
+    (Das Scheduling-Feld in der CSV taktet von selbst – auch dort gilt:
+    nicht alle Termine auf denselben Tag legen.)
+  - **Oder API:** `PINTEREST_ACCESS_TOKEN` (jetzt freigeschaltet) setzen, dann
+    postet `pinterest-ai.yml` über die Engine — **Canary-Limit 3/Lauf +
+    A1-Limit 10/Std., 40/Tag** sind eingebaut; die 6 Boards werden automatisch
+    angelegt/routet.
   - **Manuell einzeln:** `data/pin_queue.yaml` (10 Pins) + `PIN-STATUS.md`.
 - [ ] **Mischung pflegen:** Eigene Pins weiter mit Re-Pins fremder Inhalte
       mischen (ca. 50/50 in den ersten 4 Wochen).
@@ -179,6 +248,9 @@ Erst wenn Pinterest die Freigabe bestätigt hat:
 | **Draft-Schutz in `generate_pins.py`** | Draft-Artikel (nicht live) werden nicht mehr gepinnt — tote Links sind ein Spam-Signal. |
 | **Profile-Audit vollständig** | Copy-Paste-Report enthält jetzt alle **6 Boards** mit Beschreibung + Cover-Zuordnung (vorher nur 1 Board durch Einrückungsfehler). |
 | **Fertige Bulk-CSV** | `data/pins_upload.csv` (18 Pins, getaktet, gekennzeichnet) als sicherer Upload-Start nach Entsperrung. |
+| **Canary-Posting-Limit** | Nach Entsperrung postet jeder Lauf max. 3 Pins (`api_run_capacity()` / `PINTEREST_MAX_PINS_PER_RUN`); Rest bleibt in der Queue. Verhindert das Massen-Posting-Muster, das die Sperre mit auslöste. |
+| **Premium-Texte im Legacy-Lauf** | `generate_pins.py` nutzt `pin_title`/`pin_description` aus dem Frontmatter (statt generischer Meta-Texte), kein doppelter `*Werbung`-Prefix. |
+| **Scope korrigiert** | Profil-Audit braucht `user_accounts:read` (v5-API; `profile:read` existiert nicht) — in `ANLEITUNG-PINTEREST-API.md` berichtigt. |
 
 ---
 

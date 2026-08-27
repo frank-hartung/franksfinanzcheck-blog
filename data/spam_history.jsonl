@@ -22,8 +22,8 @@
 {"ts": "2026-08-26T23:43:42Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet", "rules": ["B1", "B2", "B8"]}
 {"ts": "2026-08-26T23:43:42Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife", "rules": ["B2", "B8"]}
 {"ts": "2026-08-26T23:43:42Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich", "rules": ["B8"]}
-{"ts": "2026-08-26T23:43:42Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 20}
 {"ts": "2026-08-26T23:43:42Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": false, "hard": 0}
+{"ts": "2026-08-26T23:43:42Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 20}
 {"ts": "2026-08-26T23:43:54Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas", "rules": ["B2"]}
 {"ts": "2026-08-26T23:43:54Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026", "rules": ["B2"]}
 {"ts": "2026-08-26T23:43:54Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel", "rules": ["B2"]}
@@ -239,3 +239,4 @@
 {"ts": "2026-08-27T14:00:28Z", "module": "spam_guard", "action": "csv-gen", "rows": 18, "file": "pins_upload.csv"}
 {"ts": "2026-08-27T14:03:39Z", "module": "spam_guard", "action": "run", "channels": ["csv"], "fix": false, "hard": 18}
 {"ts": "2026-08-27T14:04:17Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "api"], "fix": false, "hard": 1}
+{"ts": "2026-08-27T15:39:29Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "api"], "fix": false, "hard": 1}

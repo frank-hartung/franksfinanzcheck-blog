@@ -34,9 +34,16 @@ Gehe auf **https://developers.pinterest.com/** → **„My apps"** → **„Conn
 
 Dann **„Submit"** klicken.
 
-**Scopes (Premium 25.08.2026):** Unter „Requested scopes" mindestens ankreuzen:
-`boards:read`, `boards:write`, `pins:read`, `pins:write` – plus `profile:read`,
-damit der **Profil-Audit** (Name/Bio/Website des Live-Profils) laufen kann.
+**Scopes (Premium, Stand 27.08.2026):** Unter „Requested scopes" mindestens ankreuzen:
+`boards:read`, `boards:write`, `pins:read`, `pins:write` – plus
+**`user_accounts:read`**, damit der **Profil-Audit** (Name/Bio/Website des
+Live-Profils via `/v5/user_account`) laufen kann.
+⚠️ Wichtig: In der Pinterest-API **v5 gibt es den Scope `profile:read` nicht**
+(der hieße früher so und führt zu leeren Audit-Ergebnissen) – es muss
+`user_accounts:read` sein. Hinweis: Die Domain-Notbremse blockt Postings,
+solange `franksfinanzcheck.de` bei Pinterest als Spam/404 markiert ist;
+Lese-Zugriffe (Audit, `--list-boards`) sind mit dem freigeschalteten
+Trial-Zugang sofort möglich und unbedenklich.
 
 ### 1c. Wichtig: Freigabe abwarten! ⏳
 Pinterest prüft jede App **manuell** – die Freigabe („Trial access") kann **mehrere Tage dauern** [1](https://docs.mixpost.app/services/social/pinterest/). Du bekommst eine **E-Mail**, sobald deine App freigeschaltet ist. Erst danach kannst du den Token erzeugen (Schritt 2).
