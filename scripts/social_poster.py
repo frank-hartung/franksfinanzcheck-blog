@@ -106,15 +106,36 @@ def read_frontmatter(index_md: Path) -> dict:
 
 
 def set_social_flag(index_md: Path) -> None:
-    """Fügt 'social_posted: true' in die Frontmatter ein (idempotent)."""
+    """Setzt 'social_posted: true' in der Frontmatter (idempotent).
+
+    WICHTIG (Bugfix): Früher wurde bei JEDEM vorhandenen 'social_posted:' früh
+    zurückgesprungen – auch bei 'social_posted: false'. Das Flag wurde damit
+    NIE auf true geflippt, der Artikel blieb dauerhaft in find_unposted() und
+    wurde bei jedem Mo/Mi/Fr-Lauf ERNEUT gepostet (Dopplungen im Feed).
+
+    Jetzt: existiert die Zeile im Frontmatter, wird sie auf 'true' gesetzt;
+    fehlt sie, wird sie eingefügt. Nur der Frontmatter-Block wird angefasst –
+    gleichlautende Erwähnungen im Fließtext bleiben unberührt.
+    """
     text = index_md.read_text(encoding="utf-8")
-    if re.search(r"^social_posted:", text, re.MULTILINE):
-        return
     span = _frontmatter_span(text)
     if not span:
         return
-    _, fence_start, _ = span
-    new_text = text[:fence_start] + "social_posted: true\n" + text[fence_start:]
+    fm, fence_start, _ = span
+
+    if re.search(r"(?m)^social_posted:", fm):
+        new_fm, n = re.subn(
+            r"(?m)^social_posted:.*$", "social_posted: true", fm, count=1
+        )
+        if n == 0 or new_fm == fm:
+            return  # steht bereits exakt so da -> keine sinnlose Schreiblast
+        # text[:4] = öffnendes '---\n'; ab fence_start folgt der Rest unverändert.
+        # NICHT text[:fence_start] verwenden - das würde die alte Frontmatter
+        # zusätzlich behalten und den Block verdoppeln.
+        new_text = text[:4] + new_fm + text[fence_start:]
+    else:
+        new_text = text[:fence_start] + "social_posted: true\n" + text[fence_start:]
+
     index_md.write_text(new_text, encoding="utf-8")
 
 
@@ -141,6 +162,10 @@ PILLAR_TAGS = {
     "strom-sparen": ["Stromsparen", "Energiekosten"],
     "versicherungen": ["Versicherung", "Vorsorge"],
     "konto-karten": ["Girokonto", "Sparen"],
+    # Der Blog hat 6 Pillar – diese beiden fehlten in der Registry, ihre
+    # Artikel bekamen dadurch nur den generischen #Finanzen-Fallback.
+    "mietwagen": ["Mietwagen", "Reise"],
+    "frugalismus": ["Frugalismus", "Geldsparen"],
 }
 # Suchbare Fediverse-Keywords (kurz, folgen/suchen Menschen wirklich).
 # Lange Klebeschreib-Tags (#KontofuehrungsgebuehrenSparen) ranken nicht.
@@ -154,6 +179,12 @@ KEYWORD_HINTS = [
     (r"haftpflicht", ["Privathaftpflicht", "Versicherung"]),
     (r"wohngebäude|wohngebaeude|elementar|hausversicherung", ["Wohngebaeude", "Versicherung"]),
     (r"stromfresser|energiedieb", ["Stromsparen", "Energiekosten"]),
+    # Themen der jüngeren Artikel (Mietwagen, Frugalismus, Handy, Tagesgeld)
+    # liefen bisher ohne treffende Keywords ins generische #Finanzen.
+    (r"mietwagen|leihwagen|kaution", ["Mietwagen", "Reise"]),
+    (r"frugalismus|konsumverzicht|haushaltsbuch|50.?30.?20", ["Frugalismus", "Geldsparen"]),
+    (r"handytarif|mobilfunk|sim.?karte", ["Handytarif", "Mobilfunk"]),
+    (r"tagesgeld|zinssatz|festgeld|zinsen", ["Tagesgeld", "Zinsen"]),
 ]
 WEAK_TAG_RX = re.compile(
     r"gebuehren|fuehrungs|vergleich$|zuhause|vorbereitung|hacks$", re.I

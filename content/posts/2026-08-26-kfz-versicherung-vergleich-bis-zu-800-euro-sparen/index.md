@@ -16,7 +16,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Der günstigste Zeitpunkt für einen Kfz-Versicherungsvergleich ist jedes Jahr zwischen August und November: Bis zum 30.11. muss die Kündigung beim alten Versicherer vorliegen. Mit Werkstattbindung, höherer Selbstbeteiligung (150 € TK / 300 € VK), Rabattschutz, der korrekten Jahreskilometerleistung und dem Vergleich von 80+ Tarifen lässt sich der Beitrag um durchschnittlich 300 € bis 800 € pro Jahr senken – bei gleichem oder sogar besserem Leistungsumfang."
 
-social_posted: false
+social_posted: true
 keywords: ["Kfz-Versicherung Vergleich", "Kfz-Versicherung wechseln", "Autoversicherung Vergleich", "Schadenfreiheitsklasse", "Kfz-Versicherung kündigen", "Kfz Haftpflicht", "Teilkasko Vollkasko", "30. November Kündigungsfrist"]
 pin_title: "Kfz-Versicherung wechseln bis 30.11.: Jetzt vergleichen & sparen"
 pin_description: "*Werbung | Stichtag 30.11. nicht verpassen: Bis dahin kannst du deine Kfz-Versicherung für das neue Jahr wechseln – Vergleiche zeigen immer wieder mehrere hundert Euro Sparpotenzial. Jetzt Tarife mit deinen Fahrzeugdaten durchrechnen und günstig ins neue Jahr starten!"

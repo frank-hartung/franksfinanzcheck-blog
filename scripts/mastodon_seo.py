@@ -53,6 +53,10 @@ PILLAR_TAGS = {
     "strom-sparen": ["StromSparen", "Energiekosten"],
     "versicherungen": ["Versicherungen", "Vorsorge"],
     "konto-karten": ["Girokonto", "KontoGebuehren"],
+    # Spiegelbild zu scripts/social_poster.py – beide Registries müssen die
+    # 6 Pillar des Blogs kennen, sonst weicht die SEO-Prüfung vom Poster ab.
+    "mietwagen": ["Mietwagen", "Reise"],
+    "frugalismus": ["Frugalismus", "Geldsparen"],
 }
 
 GENERIC_ALT = re.compile(

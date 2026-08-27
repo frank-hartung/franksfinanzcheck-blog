@@ -90,6 +90,11 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
     url = "https://www.pinterest.de/franksfinanzcheck/"
     title = "FranksFinanzcheck auf Pinterest"
 
+  [[params.socialIcons]]
+    name = "mastodon"
+    url = "https://mastodon.social/@FranksFinanzcheck"
+    title = "FranksFinanzcheck auf Mastodon"
+
 [menu]
 [[menu.main]]
     identifier = "home"
