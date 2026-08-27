@@ -42,18 +42,33 @@ DRY_RUN = "--dry-run" in sys.argv
 
 DISPLAY_NAME = "FranksFinanzcheck 💰 Geld sparen"
 
+# Bio auf Agentur-Niveau: Nutzen zuerst (konkrete Ersparnis), dann Themen,
+# dann Rhythmus, dann Transparenz, zum Schluss die Interaktions-Aufforderung.
+# Mehrzeilig, weil Mastodon Absätze rendert – eine Textwand liest niemand.
+# 393/500 Zeichen (Limit-Prüfung siehe validate_lengths()).
 NOTE = (
-    "💰 Geld sparen ohne Verzicht: Ehrliche Ratgeber zu Strom, Gas, Internet & DSL, "
-    "Versicherungen sowie Konto & Karten – verständlich erklärt, mit konkreten Zahlen "
-    "und ohne Verkaufsdruck. Regelmäßig neue Artikel (mehrmals pro Woche) auf "
-    "franksfinanzcheck.de. 🤖 Inhalte KI-unterstützt erstellt, automatisiert "
-    "veröffentlicht und redaktionell geprüft. Fragen beantworte ich gerne persönlich!"
+    "💰 Jährlich 1.000 €+ an Fixkosten sparen – mit ehrlichen Ratgebern statt Verkaufsdruck.\n\n"
+    "🧭 6 Ratgeber-Welten: Strom & Gas · DSL & Internet · Versicherungen · Konto & Karten · Mietwagen · Frugalismus\n\n"
+    "🗓 Frische Artikel jeden Mo, Mi & Fr – konkret, mit Zahlen, redaktionell geprüft.\n\n"
+    "🤖 KI-unterstützt erstellt & automatisch veröffentlicht.\n\n"
+    "❓ Fragen zu deinen Verträgen? Ich antworte persönlich 👇"
 )
 
+# Mastodon erlaubt maximal 4 Profilfelder – daher bewusst die 4 mit dem
+# höchsten Nutzen: Einstieg, Ratgeber-Übersicht, Themen, Zweitkanal.
+# Verifizierte Links (grüner Haken) brauchen rel="me" auf der Zielseite.
 FIELDS = [
-    ("Website:", "https://franksfinanzcheck.de"),
-    ("Themen:", "#Strom #Gas #DSL #Versicherungen"),
+    ("Web:", "https://franksfinanzcheck.de"),
+    ("Ratgeber:", "https://franksfinanzcheck.de/pillar/"),
+    ("Themen:", "#StromGas #DSL #Versicherung #Girokonto #Mietwagen #Frugalismus"),
+    ("Pinterest:", "https://www.pinterest.de/franksfinanzcheck/"),
 ]
+
+# Das Profil war bisher NICHT im Instanz-Verzeichnis und nicht über die
+# Fediverse-Suche auffindbar – für einen Publikationsaccount ein direkter
+# Reichweitenverlust. Beides wird jetzt aktiv mitgesendet.
+DISCOVERABLE = True
+INDEXABLE = True
 
 AVATAR_DESCRIPTION = (
     "FranksFinanzcheck-Logo: dunkelgrünes, abgerundetes Quadrat mit einem "
@@ -77,6 +92,7 @@ LIMITS = {
     "header_description": 150,
     "field_name": 255,
     "field_value": 255,
+    "fields": 4,
 }
 
 
@@ -94,6 +110,9 @@ def validate_lengths():
         errors.append(
             f"header_description zu lang ({len(HEADER_DESCRIPTION)}/{LIMITS['header_description']})"
         )
+    if len(FIELDS) > LIMITS["fields"]:
+        # Mastodon verwirft still die überzähligen Felder – lieber hier laut sein.
+        errors.append(f"zu viele Profilfelder ({len(FIELDS)}/{LIMITS['fields']})")
     for name, value in FIELDS:
         if len(name) > LIMITS["field_name"] or len(value) > LIMITS["field_value"]:
             errors.append(f"Feld '{name}' überschreitet 255 Zeichen (Name oder Wert)")
@@ -145,6 +164,9 @@ def main():
         ("note", NOTE),
         ("avatar_description", AVATAR_DESCRIPTION),
         ("header_description", HEADER_DESCRIPTION),
+        # Mastodon erwartet Booleans im Multipart-Body als "true"/"false".
+        ("discoverable", "true" if DISCOVERABLE else "false"),
+        ("indexable", "true" if INDEXABLE else "false"),
     ]
     for i, (name, value) in enumerate(FIELDS):
         fields.append((f"fields_attributes[{i}][name]", name))
@@ -154,9 +176,14 @@ def main():
     if DRY_RUN:
         print("[DRY-RUN] Würde folgendes Mastodon-Profil setzen:")
         print(f"  display_name ({len(DISPLAY_NAME)} Zeichen): {DISPLAY_NAME}")
-        print(f"  note ({len(NOTE)} Zeichen): {NOTE}")
+        print(f"  note ({len(NOTE)} Zeichen):")
+        for line in NOTE.splitlines():
+            print(f"    | {line}")
+        print(f"  Profilfelder ({len(FIELDS)}/{LIMITS['fields']}):")
         for n, v in FIELDS:
-            print(f"  field: {n} = {v}")
+            print(f"    field: {n} = {v}")
+        print(f"  discoverable: {DISCOVERABLE}  (Instanz-Verzeichnis)")
+        print(f"  indexable:    {INDEXABLE}  (Fediverse-Suche)")
         print(f"  avatar: {AVATAR} ({'vorhanden' if AVATAR.is_file() else 'FEHLT'})")
         print(f"  header: {HEADER} ({'vorhanden' if HEADER.is_file() else 'FEHLT'})")
         return
@@ -185,14 +212,29 @@ def main():
     print(f"  avatar: {data.get('avatar')}")
     print(f"  header: {data.get('header')}")
 
+    print(f"  discoverable: {data.get('discoverable')}")
+    print(f"  indexable: {data.get('indexable')}")
+    for f in data.get("fields") or []:
+        print(f"  field: {f.get('name')} = {f.get('value')}")
+
     now = datetime.now(timezone.utc).strftime("%d.%m.%Y %H:%M UTC")
+    # Nur bestätigte Server-Werte in den Report – nicht die lokalen Wunschwerte.
+    field_rows = "\n".join(
+        f"| {f.get('name')} | {f.get('value')} | {'✅' if f.get('verified_at') else '—'} |"
+        for f in (data.get("fields") or [])
+    ) or "| – | – | – |"
     REPORT.write_text(
         "# 🐘 Mastodon-Profil-Sync\n\n"
         f"> Zuletzt synchronisiert: {now}\n\n"
         f"- **Anzeigename:** {data.get('display_name')}\n"
         f"- **Bio:** {data.get('note', '')[:400]}\n"
         f"- **Avatar:** {data.get('avatar')}\n"
-        f"- **Header:** {data.get('header')}\n\n"
+        f"- **Header:** {data.get('header')}\n"
+        f"- **Im Instanz-Verzeichnis (discoverable):** {data.get('discoverable')}\n"
+        f"- **Für Suche freigegeben (indexable):** {data.get('indexable')}\n\n"
+        "## Profilfelder\n\n"
+        "| Feld | Wert | Verifiziert |\n|---|---|---|\n"
+        f"{field_rows}\n\n"
         "---\n"
         "*Erzeugt von scripts/mastodon_profile_sync.py – bewusst kein Cronjob, "
         "sondern manuell auslösbar über Actions → Mastodon-Profil-Sync → Run workflow, "

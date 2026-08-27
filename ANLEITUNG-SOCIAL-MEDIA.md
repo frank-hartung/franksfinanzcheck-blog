@@ -73,10 +73,46 @@ python3 scripts/social_poster.py --dry-run   # zeigt Post-Texte, sendet nichts
 | `SOCIAL_MAX_PRO_LAUF` | `4` | Max. Posts pro Lauf (Schutz vor Dauerfeuer) |
 | `MASTODON_INSTANCE` | `https://mastodon.social` | Andere Instanz nutzen |
 
+## 🏆 Premium-Profil (Mastodon)
+
+Ein Publikationsaccount wird nicht am Einzelpost gemessen, sondern am Profil:
+Wer über einen Toot stolpert, entscheidet dort in wenigen Sekunden, ob er folgt.
+`scripts/mastodon_profile_sync.py` hält dieses Profil auf Agentur-Niveau.
+
+**Was gesetzt wird**
+
+| Element | Inhalt | Warum |
+|---|---|---|
+| Bio (393/500 Z.) | Nutzen zuerst („1.000 €+ sparen“), dann 6 Ratgeber-Welten, Rhythmus Mo/Mi/Fr, KI-Transparenz, Frage-Aufruf | Mehrzeilig statt Textwand – Mastodon rendert Absätze |
+| 4 Profilfelder | `Web:` · `Ratgeber:` · `Themen:` · `Pinterest:` | 4 ist das Maximum – jedes Feld muss arbeiten |
+| `discoverable` | `true` | Profil erscheint im Instanz-Verzeichnis |
+| `indexable` | `true` | Profil ist über die Fediverse-Suche auffindbar |
+
+**Blog ↔ Profil-Verzahnung**
+
+- `Web:` zeigt auf die Startseite, `Ratgeber:` direkt auf `/pillar/`
+  (alle 6 Sparthemen auf einen Blick) – kein Umweg über die Navigation.
+- Der Blog verlinkt zurück: Mastodon-Icon im Footer (`hugo.toml` →
+  `params.socialIcons`) plus `<link rel="me">` aus `params.mastodonUrl`.
+- Dieses `rel="me"` ist die Voraussetzung für den **grünen Haken** am
+  `Web:`-Feld: Mastodon prüft, ob die verlinkte Seite zurückverweist.
+
+```bash
+python3 scripts/mastodon_profile_sync.py --dry-run   # zeigt Bio, Felder, Flags
+```
+
+Ausgelöst wird der Sync bewusst **manuell** (Actions → *Mastodon-Profil-Sync* →
+*Run workflow*), weil Profiltexte redaktionelle Entscheidungen sind. Das Token
+braucht zusätzlich den Scope `write:accounts`, sonst antwortet die API mit 403.
+
 ## ❓ FAQ
 
 - **Doppelte Posts?** Nein – das Skript setzt `social_posted: true` ins
   Front-Matter und überspringt markierte Artikel (Deduplikation).
+  *Historie:* Genau hier steckte ein Bug – ein bereits vorhandenes
+  `social_posted: false` wurde nie auf `true` geflippt, wodurch betroffene
+  Artikel bei **jedem** Lauf erneut gepostet wurden. Seit dem Fix in
+  `set_social_flag()` wird die Zeile zuverlässig umgeschrieben.
 - **Welcher Text wird gepostet?** Titel + dein `kurzantwort:`-Feld (bester Hook!)
   bzw. die Description + Link + bis zu 3 Hashtags aus den Artikel-Tags + `#Finanzen`.
 - **Bilder?** Mastodon: Das Cover-Bild wird automatisch hochgeladen.
