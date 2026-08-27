@@ -18,7 +18,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Der Wechsel des Gasanbieters ist in wenigen Minuten erledigt: Halte deine letzte Jahresabrechnung mit Zählernummer und Vorjahresverbrauch bereit, wähle einen Tarif mit 12 Monaten Preisgarantie und überlasse die Kündigung dem neuen Versorger. Eine unterbrechungsfreie Gaslieferung ist gesetzlich garantiert."
 
-social_posted: true
+social_posted: false
 keywords: ["Gas-Anbieter wechseln", "Gasanbieter Wechsel", "Günstige Gastarife", "Gas Preisvergleich", "Gaskosten reduzieren", "Gas Anbieter wechseln", "Gas-Anbieter"]
 pin_title: "Gas-Anbieter wechseln: So sparst du bis zu 680 Euro"
 pin_description: "*Werbung | Gaswechsel leicht gemacht: Preisgarantie, Kündigungsfristen und die Fallstricke im Kleingedruckten. Mit diesen Praxis-Tipps wechselst du stressfrei und sparst bis zu 680 Euro bei den Heizkosten. Jetzt die 10-Minuten-Anleitung lesen."

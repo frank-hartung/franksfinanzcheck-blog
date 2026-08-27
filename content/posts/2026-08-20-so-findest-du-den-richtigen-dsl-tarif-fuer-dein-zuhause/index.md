@@ -18,7 +18,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Den optimalen DSL-Tarif findest du durch die passende Wahl der Bandbreite: Für 1-2 Personen reichen 50 Mbit/s, Familien und Homeoffice-Nutzer wählen 100 bis 250 Mbit/s. Berechne immer den Effektivpreis über 24 Monate inklusive Boni und miete keine überteuerten Router, um bis zu 380 € über die Laufzeit zu sparen."
 
-social_posted: true
+social_posted: false
 keywords: ["DSL Tarif finden", "Internet Geschwindigkeit Bedarf", "DSL vs Kabel", "Günstiger Internetanschluss", "DSL Tarifberatung", "So findest du den richtigen", "DSL-Tarif"]
 pin_title: "Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen"
 pin_description: "*Werbung | DSL, Kabel oder Glasfaser? Der richtige Tarif hängt von deinem Bedarf ab, nicht vom Marketing. Diese Anleitung hilft dir, Bandbreite, Preis und Laufzeit richtig zu kombinieren und nicht mehr zu zahlen als nötig. Jetzt lesen."

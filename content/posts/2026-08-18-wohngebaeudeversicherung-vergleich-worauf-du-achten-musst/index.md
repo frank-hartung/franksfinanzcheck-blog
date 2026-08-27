@@ -18,7 +18,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Eine leistungsstarke Wohngebäudeversicherung ist für jeden Hauseigentümer existentiell. Achte im Tarifvergleich unbedingt auf den Einschluss von Elementarschäden (Starkregen, Hochwasser, Schneedruck), den Verzicht auf die Einrede der groben Fahrlässigkeit, gleitenden Neuwertfaktor und Überspannungsschutz. Durch Tarifvergleiche sparst du bis zu 340 € im Jahr."
 
-social_posted: true
+social_posted: false
 keywords: ["Wohngebäudeversicherung Vergleich", "Gebäudeversicherung Elementarschutz", "Haus Versicherung Vergleich", "Wohngebäude Tarifcheck", "Grobe Fahrlässigkeit Gebäude", "Wohngebäudeversicherung"]
 pin_title: "Wohngebäudeversicherung: Worauf du wirklich achten musst"
 pin_description: "*Werbung | Unwetter, Starkregen, Feuer: Die Wohngebäudeversicherung entscheidet im Ernstfall über dein Haus. Wir zeigen dir die wichtigen Klauseln, den Elementarschutz und wie du bis zu 340 Euro sparst. Jetzt den Vergleich lesen."
