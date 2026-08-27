@@ -179,3 +179,17 @@
 {"ts": "2026-08-27T12:56:08Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet", "rules": ["B1", "B2"]}
 {"ts": "2026-08-27T12:56:08Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife", "rules": ["B2"]}
 {"ts": "2026-08-27T12:56:08Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 0}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas", "rules": ["B2"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026", "rules": ["B2"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel", "rules": ["B2"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife", "rules": ["B2"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren", "rules": ["B2"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet", "rules": ["B2"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden", "rules": ["B1"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause", "rules": ["B1", "B2"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier", "rules": ["B2"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub", "rules": ["B2"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen", "rules": ["B2"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet", "rules": ["B1", "B2"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife", "rules": ["B2"]}
+{"ts": "2026-08-27T12:58:06Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 0}
