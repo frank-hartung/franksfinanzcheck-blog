@@ -186,13 +186,35 @@ Die Automatisierung ist eines der umfangreichsten Setups, die wir bei einer Ein-
 
 ---
 
+## 10 · Stufe 2 – Umsetzung (27.08., gleicher Tag)
+
+Auftragsgemäß wurden die Stufe-1-Quick-Wins **konkret gebaut** (nicht nur empfohlen):
+
+| Baustein | Umsetzung | Test-Nachweis |
+|---|---|---|
+| **Kollisions-Kalender** (permanente Simulation) | `scripts/automation_calendar.py` – simuliert alle Crons minute-genau (Europe/Berlin), prüft 9 Invarianten (I1–I9: Reihenfolge Wachen↔Engine↔Social, keine gleichzeitigen Pusher, Fallback-Reihenfolge, Winterzeit-Proof). Einbau wöchentlich in FrankAutoOps via **Patch 2** | 7-Tage-Lauf: 23 Crons, 742 Events ✓ · DST-Fenster 23.–27.10.: Zeitumstellung korrekt abgebildet (gedoppelte 02-h-Stunde), alle Invarianten ✓ · über Patch-Kette: 25 Crons, 1061 Events ✓ |
+| **Wochen-Digest als Issue** | `scripts/weekly_digest.py` + **Patch 2** (`weekly-digest.yml`, Mo 20:00 MESZ, Label `digest`, Auto-Close der Vorwoche) | Echtdaten-Lauf: 5 Artikel, 4 Toots, 55 Wachen-Funde, Themenpool 151/175 korrekt erhoben ✓ |
+| **Restore-Drill** (Backup-Beweis) | `scripts/restore_drill.sh` + **Patch 2** (`restore-drill.yml`, quartalsweise, inkl. Hugo-Beweis-Build) | 2 Tests: unvollständiges Bundle → **laut failed** (Fehlererkennung bewiesen); vollständiges Bundle → 972 Dateien, 26 Artikel, Rechtsseiten ✓ |
+| **Seasonal-Pin-Refresh** | **Patch 2**: `pinterest-ai.yml` erhält monatlichen Cron (2. des Monats, 20:00 MESZ) – Engine arbeitet die Refresh-Queue (>60 Tage) ab, vollständig innerhalb der spam_guard-Limits (10/h, 40/Tag, 30-Tage-Repeat) | Kalender-Simulation: kein Konflikt mit anderen Pin-/Push-Pfaden ✓ |
+
+**Patch-Kette (Reihenfolge einhalten):**
+1. PR #88 mergen (Scripts + Doku)
+2. `git apply patches/automatik-audit-2026-08-27-workflows.patch` (7 Fixes + Härtung)
+3. `git apply patches/automatik-audit-stage2-2026-08-27-workflows.patch` (4 neue Automatiken)
+
+Ende-zu-Ende bewiesen: Frisch-Cloned main → Patch 1 ✓ → Patch 2 ✓ → 31 Workflows valides YAML, 132 Run-Steps Shell-OK, Kalender 10 Tage inkl. neuer Crons alles grün.
+
+**Noch offen (brauchen Franks Accounts/Zugänge):** GSC-Indexierungs-Wächter (Search-Console-API-Zugang), Pinterest-Analytics-Feedback-Schleife (Token mit read_ads-Scope), Awin-Provisionsimport. Vorbereitet in §7 Stufe 2 Nr. 1/2/9.
+
+---
+
 ## 8 · Betriebs-Empfehlungen (Agentur-Betriebsrat)
 
 1. **Nie wieder History-Rewrite auf main** (der 27.08.-Squash hat alle Commit-Bezüge der Watchdogs getötet – das war die Ursache für S4-Blindheit). Wenn Aufräumen nötig ist: neuen Branch + normalen Merge-PR.
 2. **Patch aus PR #88 zeitnah applizieren** – bis dahin laufen S1/S3–S7 in der Alt-Version weiter (S2-Shell-Fix wirkt erst mit Patch; die anderen Fixes sind im Branch bzw. Patch).
 3. **Erwartungshorizont Watchdog:** Nach dem Patch ist ein Issue von Bot-Watchdog **immer** ein echter Befund (vorher: sonntags Fehlalarm).
 4. **CI-Verbrauch:** Public Repo = kostenlos; die Fixes sparen trotzdem ~30–40 Build-Läufe/Woche (Doppel-Builds weg, konvergente Gate-Deploys statt 4 paralleler).
-5. **Nächste Sprint-Kandidaten aus Stufe 1 in dieser Reihenfolge: 2 → 1 → 3 → 5 → 4.**
+5. **Nächste Sprint-Kandidaten (Stufe 2, offene Bausteine): GSC-Wächter → Pinterest-Analytics → Awin-Import.** Stufe 1 ist komplett umgesetzt (§10).
 
 ---
 

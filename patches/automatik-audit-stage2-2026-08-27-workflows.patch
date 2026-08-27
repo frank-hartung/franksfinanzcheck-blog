@@ -1,0 +1,161 @@
+diff --git a/.github/workflows/alert-on-failure.yml b/.github/workflows/alert-on-failure.yml
+index d5ba00c..2d95590 100644
+--- a/.github/workflows/alert-on-failure.yml
++++ b/.github/workflows/alert-on-failure.yml
+@@ -42,6 +42,8 @@ on:
+       - "Mastodon-SEO"           # PREM-AUDIT: Social-Kanal still
+       - "Offsite-Backup"         # PREM-AUDIT: Backup-Versagen wäre still fatal
+       - "Issues aufräumen (Triage)"          # PREM-AUDIT: Vollabdeckung
++      - "Wochen-Digest (Automatik)"    # AGENTUR-STUFE-2: Kanal-Übersicht
++      - "Restore-Drill"                # AGENTUR-STUFE-2: Backup-Beweis
+       - "Erledigte Fehlermeldungen dauerhaft löschen"
+       - "Dependabot Auto-Merge"
+     types:
+diff --git a/.github/workflows/frankautoops-report.yml b/.github/workflows/frankautoops-report.yml
+index de75eef..a3074df 100644
+--- a/.github/workflows/frankautoops-report.yml
++++ b/.github/workflows/frankautoops-report.yml
+@@ -38,6 +38,14 @@ jobs:
+         run: |
+           python3 scripts/audit_log.py --cleanup || true
+ 
++      - name: Automatik-Kalender-Simulation (Invarianten I1–I9)
++        # AGENTUR-STUFE-2: simuliert ALLE Crons der nächsten 7 Tage
++        # (Europe/Berlin, inkl. Winterzeit-Wechsel) und prüft die
++        # betrieblichen Invarianten. Verstoß → Lauf rot → Fehler-Alerting.
++        run: |
++          python3 scripts/automation_calendar.py --days 8 > KOLLISIONS-KALENDER.md || true
++          python3 scripts/automation_calendar.py --days 8 --check-only || echo "⚠ Invarianten-Verstoß im Automatik-Kalender (Details: KOLLISIONS-KALENDER.md)"
++
+       - name: Ops-Report erzeugen (JSON + Markdown)
+         run: |
+           # JSON (maschinenlesbar) als Artefakt speichern
+diff --git a/.github/workflows/pinterest-ai.yml b/.github/workflows/pinterest-ai.yml
+index c649161..6ad5557 100644
+--- a/.github/workflows/pinterest-ai.yml
++++ b/.github/workflows/pinterest-ai.yml
+@@ -22,9 +22,18 @@
+ name: Pinterest-AI
+ 
+ on:
+-  # 20.08.2026: Automatisches Pinnen übernimmt jetzt Pinterests
++  # 20.08.2026: Automatisches Pinnen übernimmt Pinterests
+   # RSS-Auto-publish (Feed: https://franksfinanzcheck.de/index.xml).
+-  # Keine Zeitplan-Läufe mehr – nur noch manuell startbar.
++  #
++  # AGENTUR-STUFE-2 (27.08.2026): SEASONAL-REFRESH wieder aktiviert –
++  # monatlich am 2. des Monats, 20:00 MESZ (18:00 UTC), am Pinterest-
++  # Peak-Fenster. Die Engine pinnt ausschließlich innerhalb der
++  # spam_guard.py-Limits (10/h, 40/Tag, 30-Tage-Repeat-Sperre) und
++  # arbeitet die Queue (Refresh-Kandidaten > 60 Tage, PINTEREST_
++  # ROTATE_DAYS) ab. Pinterest belohnt frische Pins mit Reichweite –
++  # gerade vor Saison-Themen (Heizung/Gas ab Sep, Weihnachten ab Okt).
++  schedule:
++    - cron: "0 18 2 * *"     # 2. des Monats, 20:00 MESZ / 19:00 MEZ
+   workflow_dispatch: {}
+ 
+ permissions:
+diff --git a/.github/workflows/restore-drill.yml b/.github/workflows/restore-drill.yml
+new file mode 100644
+index 0000000..4be313a
+--- /dev/null
++++ b/.github/workflows/restore-drill.yml
+@@ -0,0 +1,48 @@
++# ============================================================
++#  RESTORE-DRILL (Agentur-Stufe-2, 27.08.2026)
++#  ------------------------------------------------------------
++#  Ein nie getestetes Backup ist kein Backup. Dieser Drill beweist
++#  QUARTALSWEISE, dass das tägliche Offsite-Backup (backup-offsite.yml
++#  → Release-Asset backup.bundle) vollständig wiederherstellbar ist:
++#
++#    Bundle aus dem neuesten backup-*-Release laden → Klon →
++#    Struktur-Verifikation (HEAD, hugo.toml, ≥20 Artikel, Impressum,
++#    Datenschutz) → Beweis-Build mit Hugo → lautes Rot bei Defekt
++#    (Fehler-Alerting öffnet ein Issue).
++#
++#  Termin: 1. Jan/Apr/Jul/Okt 05:00 UTC – bewusst VOR dem Quartals-
++#  Artikel-Update (06:00 UTC); das Backup des Vortages reicht als
++#  Beweisobjekt.
++#  Lokal testbar: bash scripts/restore_drill.sh --bundle <datei.bundle>
++# ============================================================
++name: Restore-Drill
++
++on:
++  schedule:
++    - cron: "0 5 1 1,4,7,10 *"   # 1. Jan/Apr/Jul/Okt ~07:00 MEZ/MESZ
++  workflow_dispatch: {}
++
++permissions:
++  contents: read
++
++concurrency:
++  group: restore-drill
++  cancel-in-progress: false
++
++jobs:
++  drill:
++    runs-on: ubuntu-latest
++    steps:
++      - name: Repository auschecken (nur für das Skript)
++        uses: actions/checkout@v4
++
++      - name: Hugo installieren (für den Beweis-Build)
++        uses: peaceiris/actions-hugo@v3
++        with:
++          hugo-version: "0.164.0"
++          extended: true
++
++      - name: Restore-Drill ausführen (neuestes backup-*-Release)
++        env:
++          GH_TOKEN: ${{ github.token }}
++        run: bash scripts/restore_drill.sh
+diff --git a/.github/workflows/weekly-digest.yml b/.github/workflows/weekly-digest.yml
+new file mode 100644
+index 0000000..688cab6
+--- /dev/null
++++ b/.github/workflows/weekly-digest.yml
+@@ -0,0 +1,44 @@
++# ============================================================
++#  WOCHEN-DIGEST (Agentur-Stufe-2, 27.08.2026)
++#  ------------------------------------------------------------
++#  Jeden Montag 20:00 MESZ (18:00 UTC): kompiliert ALLE Automatik-
++#  Kanäle der letzten Woche zu EINEM GitHub-Issue (Label `digest`):
++#  Artikel, Mastodon, Pinterest-Pins, Spam-Funde, Audit-Events,
++#  fehlgeschlagene Workflow-Läufe, Themenpool, Engine-Status.
++#  Der Vorwochen-Digest wird automatisch geschlossen (max. 1 offen).
++#
++#  Montag abends gewählt: Die Woche ist komplett (So = letzter Tag),
++#  keine Kollision mit den Mo-Morgen-Werken (06:45–11:30 UTC) und
++#  dem Pinterest-Peak (19–22 Uhr DE) – der Digest braucht nur Lese-
++#  Zugriffe + Issue-Recht, pusht NICHT nach main.
++# ============================================================
++name: Wochen-Digest (Automatik)
++
++on:
++  schedule:
++    - cron: "0 18 * * 1"    # Mo 20:00 MESZ / 19:00 MEZ
++  workflow_dispatch: {}
++
++permissions:
++  contents: read
++  issues: write
++
++concurrency:
++  group: weekly-digest
++  cancel-in-progress: false
++
++jobs:
++  digest:
++    runs-on: ubuntu-latest
++    steps:
++      - name: Repository auschecken
++        uses: actions/checkout@v4
++
++      - name: Python-Abhängigkeiten
++        run: python3 -m pip install -q pyyaml
++
++      - name: Wochen-Digest erzeugen + als Issue veröffentlichen
++        env:
++          GITHUB_TOKEN: ${{ github.token }}
++          GITHUB_REPOSITORY: ${{ github.repository }}
++        run: python3 scripts/weekly_digest.py
