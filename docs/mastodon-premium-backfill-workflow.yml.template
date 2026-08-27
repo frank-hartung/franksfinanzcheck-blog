@@ -1,0 +1,61 @@
+name: Mastodon-Premium-Backfill
+
+# Premium-Agentur-Level: Ergänzt fehlende Blogbeiträge im Mastodon-Profil
+# Vorlage – nach .github/workflows/mastodon-premium-backfill.yml kopieren
+# (benötigt workflows-Permission, daher als Template hier)
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Nur analysieren, nichts zurücksetzen (true/false)"
+        required: false
+        default: "true"
+      live_profile_sync:
+        description: "Mastodon-Profil live synchronisieren (true/false)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mastodon-premium-backfill
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Premium-Backfill Analyse
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
+            python3 scripts/mastodon_premium_backfill.py
+          else
+            python3 scripts/mastodon_premium_backfill.py --dry-run
+          fi
+      - name: Mastodon-Profil-Sync Dry-Run
+        run: python3 scripts/mastodon_profile_sync.py --dry-run
+      - name: Mastodon-Profil-Sync Live
+        if: ${{ github.event.inputs.live_profile_sync == 'true' }}
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+        run: python3 scripts/mastodon_profile_sync.py
+      - name: Reports committen
+        run: |
+          git config user.name "FrankAutoOps Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add MASTODON-PREMIUM-ERGÄNZUNG.md MASTODON-PROFILE-REPORT.md SOCIAL-STATUS.md content/posts/*/index.md || true
+          git diff --cached --quiet || git commit -m "chore: Mastodon Premium-Ergänzung [skip ci]"
+          git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
+          git push
