@@ -16,7 +16,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Der Herbst ist die lukrativste Spar-Saison des Jahres. Durch den Stichtag der Kfz-Versicherung (30. November), das Optimieren der Heizungsanlage, das Bündeln von Sachversicherungen und saisonale Vorratskäufe lassen sich bis zu 1.250 € an jährlichen Fix- und Konsumkosten einsparen."
 
-social_posted: false
+social_posted: true
 keywords: ["Sparen im Herbst", "Herbst Spartipps", "Fixkosten senken", "Kfz Stichtag 30 November", "Finanzen optimieren", "Frugalismus", "Geld sparen"]
 pin_title: Mit diesen 5 Frugalismus-Tricks sparst du jeden Monat dreistellig
 pin_description: "*Werbung | 100 €, 150 €, 200 € mehr am Monatsende – ohne harte Diät fürs Leben: Diese 5 Frugalismus-Tricks zielen genau auf die größten Geldfresser des Alltags, von Abo-Leichen über Meal Prep bis zur Einkaufslisten-Regel. Jetzt durchrechnen!"

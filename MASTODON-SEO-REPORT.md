@@ -1,8 +1,8 @@
 # 🐘 Mastodon-SEO-Report
 
-> Automatisch: 28.08.2026 02:12 UTC 
+> Automatisch: 28.08.2026 21:57 UTC 
 
-- **Geprüfte Toots:** 14
+- **Geprüfte Toots:** 18
 - **Mit Befund:** 0
 - **Geheilt:** 0
 - **Duplikate (gleicher Artikel, nur gemeldet):** keine
@@ -11,6 +11,10 @@
 
 | Status | Artikel | Befunde | Heilung |
 |---|---|---|---|
+| [117175368018829119](https://mastodon.social/@FranksFinanzcheck/117175368018829119) | `2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel` | ✓ | — |
+| [117175367931013681](https://mastodon.social/@FranksFinanzcheck/117175367931013681) | `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` | ✓ | — |
+| [117175367809569093](https://mastodon.social/@FranksFinanzcheck/117175367809569093) | `2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife` | ✓ | — |
+| [117175367721713622](https://mastodon.social/@FranksFinanzcheck/117175367721713622) | `2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst` | ✓ | — |
 | [117170702380992898](https://mastodon.social/@FranksFinanzcheck/117170702380992898) | `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier` | ✓ | — |
 | [117170702068147363](https://mastodon.social/@FranksFinanzcheck/117170702068147363) | `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` | ✓ | — |
 | [117170701831212006](https://mastodon.social/@FranksFinanzcheck/117170701831212006) | `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` | ✓ | — |

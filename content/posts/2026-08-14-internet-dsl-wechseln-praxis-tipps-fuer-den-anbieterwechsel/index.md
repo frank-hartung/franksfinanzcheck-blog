@@ -16,7 +16,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein Anbieterwechsel bei Internet und DSL dauert online nur etwa 10 Minuten. Durch Neukundenboni, reduzierte Grundgebühren in den ersten Monaten und Cashback sparst du durchschnittlich 280 € bis 380 € im Jahr. Kündige niemals selbst, sondern überlasse den Wechselprozess dem neuen Anbieter, um Ausfallzeiten zu verhindern."
 
-social_posted: false
+social_posted: true
 keywords: ["DSL wechseln", "Internet Anbieterwechsel", "DSL Tarifvergleich", "Highspeed Internet", "Router mieten oder kaufen", "Internet & DSL wechseln"]
 pin_title: "Internet und DSL wechseln: Praxis-Tipps ohne Ausfall"
 pin_description: "*Werbung | DSL-Anbieterwechsel ohne Internet-Loch: Portierung, Kündigung durch den Neuanbieter und der echte Effektivpreis über 24 Monate. Wer diese 4 Phasen kennt, spart 280 bis 380 Euro und behält jederzeit Anschluss. Jetzt die Schritt-für-Schritt-Anleitung lesen."
