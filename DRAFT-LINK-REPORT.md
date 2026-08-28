@@ -1,6 +1,6 @@
 # 🔗 DRAFT-LINK-REPORT (draft_link_healer.py)
 
-**Stand:** 2026-08-28 02:11 UTC · Modus: FIX
+**Stand:** 2026-08-28 02:12 UTC · Modus: FIX
 
 ## Bestand
 
