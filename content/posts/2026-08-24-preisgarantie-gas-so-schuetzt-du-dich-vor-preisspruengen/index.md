@@ -16,7 +16,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Eine vertragliche Gaspreisgarantie sichert Verbraucher gegen unerwartete Preiserhöhungen an den europäischen Handelsplätzen ab. Durch das rechtzeitige Fixieren des Arbeitspreises und das Meiden variabler Grundversorgertarife lassen sich bei 20.000 kWh Gasbedarf bis zu 580 € pro Jahr einsparen."
 
-social_posted: false
+social_posted: true
 keywords: ["Preisgarantie Gas", "Gaspreissprünge", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Gaspreisgarantie"]
 pin_title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
 pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel: bevor die Heizperiode die Preise anzieht. Vergleiche Tarife mit Preisgarantie und Wechselbonus, in nur 5 Minuten Aufwand. Jetzt die Schritt-für-Schritt-Anleitung lesen."

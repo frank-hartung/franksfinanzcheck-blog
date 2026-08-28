@@ -16,7 +16,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Einen Mietwagen komplett ohne Kaution gibt es in der Praxis nur in Ausnahmefällen, aber du kannst die Kaution deutlich senken und das Risiko auf null reduzieren: Buche ein Angebot mit 'Vollkasko ohne Selbstbeteiligung' über einen deutschen Vergleichsanbieter, hinterlege eine echte Kreditkarte (keine Debitkarte) und lehne jede Zusatzversicherung am Schalter konsequent ab. So vermeidest du die typische 900-€-bis-1.500-€-Blockierung und sparst gegenüber der Buchung vor Ort bis zu 40 Prozent."
 
-social_posted: false
+social_posted: true
 keywords: ["Mietwagen buchen", "Mietwagen ohne Kaution", "Mietwagen Kaution Kreditkarte", "Vollkasko ohne Selbstbeteiligung", "Mietwagen Fallen", "Mietwagen Versicherung", "günstige Mietwagen"]
 pin_title: "Zusatzversicherung, Kaution & Co.: Mietwagen-Fallen entschärft"
 pin_description: "*Werbung | Am Mietwagen-Schalter läuft das Spielchen immer gleich ab: Druck für teure Zusatzpakete. So bleibst du cool und sparst: vorab Vollkasko ohne Selbstbeteiligung buchen, Kaution realistisch einplanen, Übergabeprotokoll mit Fotos sichern. Alle Details im Guide!"

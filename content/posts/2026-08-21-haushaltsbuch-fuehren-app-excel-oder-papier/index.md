@@ -16,7 +16,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein Haushaltsbuch funktioniert nur dann dauerhaft, wenn die Methode zu deinem Alltag passt: Für die meisten Menschen ist eine kostenlose Banking-App mit automatischer Kategorisierung am bequemsten, Zahlen-Fans fahren mit einer Excel-Tabelle flexibler, und für wenige Konten ist Stift und Papier nach wie vor schnell. Wer konsequent alle Ausgaben erfasst, spart im Schnitt 15 bis 20 Prozent der Monatsausgaben – oft 300 € bis 430 € pro Monat."
 
-social_posted: false
+social_posted: true
 keywords: ["Haushaltsbuch führen", "Haushaltsbuch App", "Excel Haushaltsbuch Vorlage", "Ausgaben tracken", "50 30 20 Regel", "Budgetplanung", "Fixkosten senken"]
 pin_title: "Haushaltsbuch führen: App, Excel oder Papier?"
 pin_description: "*Werbung | Haushaltsplanung, die im Alltag hält: App, Excel-Tabelle oder Stift im ehrlichen Vergleich. Mit der 50-30-20-Regel und einem einfachen Wochen-Ritual sparst du bis zu 430 Euro im Monat. Jetzt die Vorlage und Tipps lesen."

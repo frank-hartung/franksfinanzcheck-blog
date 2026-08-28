@@ -16,7 +16,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Frugalismus bedeutet nicht knauseriger Verzicht, sondern das bewusste Eliminieren von Konsumausgaben ohne Mehrwert. Durch die 50–30–20-Budgetmethode, das Kappen unnötiger Verträge und den automatisierten Vermögensaufbau behalten Frugalisten monatlich zwischen 350 € und 600 € mehr für Notgroschen und ETF-Sparpläne übrig."
 
-social_posted: false
+social_posted: true
 keywords: ["Frugalismus Tipps", "Geld sparen im Alltag", "50 30 20 Regel", "Finanzielle Freiheit", "Notgroschen aufbauen", "Tagesgeld Zinsen", "Frugalismus-Tipps"]
 pin_title: "Finanzielle Freiheit beginnt im Kopf: 7 Gewohnheiten, die zählen"
 pin_description: "*Werbung | Vom Gehalt allein wird niemand frei – entscheidend ist, was daraus wird: 7 Gewohnheiten, mit denen du dein Geld-Mindset neu verlegst, Konsumfallen aushebelst und Monat für Monat Vermögen aufbaust. Jetzt den Guide lesen!"
