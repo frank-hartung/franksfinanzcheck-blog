@@ -1,6 +1,6 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-08-27 13:15 UTC
+**Letzter Lauf:** 2026-08-28 01:06 UTC
 
 **Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
@@ -15,6 +15,7 @@
 - ✅ 2026-08-21 (Freitag): 2
 - ✅ 2026-08-24 (Montag): 2
 - ✅ 2026-08-26 (Mittwoch): 3
+- ✅ 2026-08-28 (Freitag): 3
 
 ## Aktiver Befund
 
@@ -22,6 +23,8 @@
 
 ## Letzte Heilungen
 
-- – (nichts in diesem Lauf)
+- Aus Re-Queue live gesetzt: `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke`
+- Aus Re-Queue live gesetzt: `2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife`
+- Aus Re-Queue live gesetzt: `2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst`
 
 _Wird von `cadence_guard.py` bei jedem Kadenz-Lauf aktualisiert (Deploy-Gate, Content-Engine, Blog-Health)._
