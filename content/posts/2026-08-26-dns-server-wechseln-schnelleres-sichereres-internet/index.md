@@ -17,7 +17,7 @@ cover:
 kurzantwort: "Beim DNS-Server-Wechsel trägst du in FritzBox, Router oder Endgerät zwei IP-Adressen eines schnellen öffentlichen DNS-Anbieters ein – etwa 1.1.1.1 (Cloudflare), 8.8.8.8 (Google) oder 9.9.9.9 (Quad9). Das beschleunigt das Aufrufen von Webseiten um 10 bis 30 Millisekunden, blockiert aktiv Malware- und Phishing-Domains und verhindert, dass dein Internetanbieter dein Surfverhalten über DNS mitliest. Die Einrichtung dauert pro Gerät 5 Minuten und ist kostenlos."
 
 social_posted: true
-keywords: ["DNS-Server wechseln", "DNS-Server ändern", "Bester DNS-Server", "FritzBox DNS ändern", "Cloudflare DNS", "Google DNS", "Schnelleres Internet", "DNS Sicherheit", "Quad9 DNS"]
+keywords: ["DNS-Server wechseln", "DNS-Server ändern", "Bester DNS-Server", "FritzBox DNS ändern", "Cloudflare DNS", "Google DNS", "Schnelleres Internet", "DNS Sicherheit"]
 pin_title: "DNS wechseln leicht gemacht: Mehr Tempo ohne neuen Tarif"
 pin_description: "*Werbung | Du brauchst keinen teureren Tarif für schnelleres Netz – nur den richtigen DNS-Server: Unsere Anleitung zeigt den Wechsel für Windows, Mac, Android, iPhone und Fritzbox – jeweils in unter 5 Minuten. Kostenlos, sicher, jederzeit rückgängig zu machen. Jetzt lesen!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"

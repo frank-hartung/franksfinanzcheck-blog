@@ -1,5 +1,5 @@
 ---
-title: "Haushaltsbuch führen: App, Excel oder Papier?"
+title: "Haushaltsbuch führen: App, Excel oder Stift im Vergleich"
 description: "Haushaltsbuch führen leicht gemacht: App, Excel-Tabelle oder Stift und Papier im ehrlichen Vergleich – mit der 50-30-20-Regel bis zu 430 € im Monat sparen."
 date: 2026-08-21T06:10:00Z
 draft: false
