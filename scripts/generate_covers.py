@@ -637,6 +637,12 @@ def main():
             content = f.read()
         m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
         title = (m.group(1) if m else slug).strip()
+        # Vorschau darf <br>/&nbsp; für Premium-Umbruch tragen –
+        # Cover-Text bleibt reiner Klartext (smart_wrap nach Doppelpunkt).
+        title = re.sub(r"<[^>]+>", " ", title)
+        title = (title.replace("&nbsp;", " ").replace("\u00a0", " ")
+                 .replace("&amp;", "&"))
+        title = re.sub(r"\s+", " ", title).strip()
         # Premium 25.08.: Pillar-Badge + Spar-Pille automatisch ableiten.
         # Frontmatter-Override: `pillar: "strom-sparen"` (Badge) und
         # `savings: "bis zu 300 € im Jahr sparen"` (Pille, wörtlich).
