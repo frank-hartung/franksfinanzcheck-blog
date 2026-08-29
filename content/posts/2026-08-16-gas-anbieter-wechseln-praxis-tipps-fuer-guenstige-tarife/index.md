@@ -38,7 +38,7 @@ Die Hauptursache für überhöhte Heizkosten ist schlichte Trägheit und mangeln
 - **Lieferunterbrechungen:** Die Sorge, mitten im Winter in einer kalten Wohnung zu sitzen, ist weit verbreitet – aber rechtlich völlig ausgeschlossen.
 - **Bürokratischer Aufwand:** Man erwartet endlose Formulare und schwierige Verhandlungen mit dem bisherigen Versorger.
 
-In der Praxis ist die Gasversorgung in Deutschland gesetzlich durch das Energiewirtschaftsgesetz (EnWG) lückenlos geschützt. Das Gas fließt physikalisch durch dieselben Leitungen und Zähler wie zuvor, und der neue Anbieter übernimmt die formelle Abwicklung und Kündigung beim alten Anbieter komplett für dich. Selbst im extrem unwahrscheinlichen Fall einer Anbieterinsolvenz springt der örtliche Grundversorger gesetzlich vorgeschrieben sofort ein (Ersatzversorgung), ohne dass die Gaszufuhr auch nur für eine Sekunde unterbrochen wird.
+In der Praxis ist die Gasversorgung in Deutschland gesetzlich durch das Energiewirtschafts­gesetz (EnWG) lückenlos geschützt. Das Gas fließt physikalisch durch dieselben Leitungen und Zähler wie zuvor, und der neue Anbieter übernimmt die formelle Abwicklung und Kündigung beim alten Anbieter komplett für dich. Selbst im extrem unwahrscheinlichen Fall einer Anbieterinsolvenz springt der örtliche Grundversorger gesetzlich vorgeschrieben sofort ein (Ersatzversorgung), ohne dass die Gaszufuhr auch nur für eine Sekunde unterbrochen wird.
 
 ## Die 6 wichtigsten Kriterien für die Tarifwahl
 
@@ -83,7 +83,7 @@ Wenn dein bisheriger Gasversorger eine Preiserhöhung ankündigt, hast du ein ge
 
 ## Fazit: Keine Angst vor dem Wechsel – es lohnt sich immer
 
-Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst. Dank strenger Verbraucherschutzgesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist.
+Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst. Dank strenger Verbraucher­schutz­gesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist.
 
 **Weiterlesen:** [Pillar Strom & Gas sparen](../../pillar/strom-sparen/) · [Gasrechnung senken im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) · [Günstige Tarife mit Preisgarantie](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
 

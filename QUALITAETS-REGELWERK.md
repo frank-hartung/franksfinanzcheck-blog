@@ -21,6 +21,7 @@ KI-Artikel (engine_generate.py)
    │
    ├─► profi_polish.py          KI-Feinschliff
    ├─► fix_linebreaks.py        Zeilenfluss (Markdown)
+   ├─► ↔️ umbruch_guard.py      Premium-Zeilenumbruch (Komposita, U+00AD)
    ├─► fix_spaces.py            Leerzeichen-Hygiene
    ├─► spellcheck.py            Rechtschreibung (Hunspell, de-DE)
    ├─► grammar_check.py         Grammatik (LanguageTool)
@@ -72,7 +73,32 @@ Geburt geheilt). Deploy-Gate-Anbindung als fertiger Patch bereit:
 Report: `HEADING-REPORT.md`, Historie: `data/heading_guard_history.jsonl`.
 Erstheilung 27.08.2026: 101 Überschriften in 32 Dateien, 0 blockiert.
 
-### casing_guard.py – Akronym-Orthografie (Duden, deterministisch)
+### ↔️ umbruch_guard.py – Premium-Zeilenumbruch (29.08.2026)
+| Regel | Inhalt | Verhalten |
+|---|---|---|
+| U1 | Kompositum ab **24 Zeichen** ohne Trennstelle → weiche Trennstelle (U+00AD) an Morphem-Grenzen | Auto-Fix (`--fix`), Default = Report |
+| U2 | Bruchstücke mindestens **5 Zeichen** (keine Splitter) | deterministisch |
+| U3 | Fugen-s-Falle: kollidiert „NACH“- mit „VOR“-Stelle (Abstand ≤ 3) → **VOR** gewinnt (`schlichtungs｜stelle`, nicht `schlichtung｜sstelle`) | deterministisch |
+| U4 | ANKER-BEWEIS: Überschriften nur heilen, wenn der Goldmark-Anker identisch bleibt (U+00AD ist kein Buchstabe → fällt weg) | sonst blockiert + Meldung |
+| U5 | Schutz: Frontmatter, Code, HTML-Tags, Linkziele, URLs, /go/-Pfade, E-Mails | nie angefasst |
+| U6 | Idempotent: zweiter Lauf findet nichts mehr | Selbsttest |
+
+**Warum:** Deutsche Monster-Komposita („Universalschlichtungsstelle“, 27 Zeichen)
+kennen keine Leerzeichen – und weil die Haus-Regel *automatische* Silbentrennung
+verbietet (`hyphens: manual` – „Wörter werden nie getrennt“), bleibt dem Browser
+nur der Notfall-Umbruch: er bricht MITTEN im Wort („Universalschlichtungsst“ /
+„elle“). Das wirkt kaputt, nicht premium. Die Wache setzt die Trennstellen
+dorthin, wo ein Lektor sie setzen würde – an die Morphem-Grenze. Unsichtbar im
+Wort, sichtbar als korrekter Bindestrich, WENN umgebrochen wird.
+Erstfall 29.08.2026: Impressum, Abschnitt *Verbraucherstreitbeilegung /
+Universalschlichtungsstelle* (Überschrift + Fließtext, Anker nachgewiesen
+identisch). Report: `UMBRUCH-REPORT.md`.
+Rollout ganzer Blog: `python3 scripts/umbruch_guard.py --fix`
+(Rechtschreib-/Grammatik-Wachen sind U+00AD-fest: `spellcheck.py`,
+`grammar_check.py` rechnen die Trennstellen vor dem Check heraus,
+Offsets bleiben gültig).
+
+### ### casing_guard.py – Akronym-Orthografie (Duden, deterministisch)
 | Regel | Inhalt | Beispiel |
 |---|---|---|
 | C1 | Kanonische Akronym-Form (auch Satzanfang) | `dsl` → `DSL`, `etfs` → `ETFs`, `cashback` → `Cashback` |

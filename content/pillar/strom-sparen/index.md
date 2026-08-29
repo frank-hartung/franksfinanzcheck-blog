@@ -85,7 +85,7 @@ Wie du die Fallstricke bei der Heizkostenabrechnung meidest, erläutere ich ausf
 Ein durchschnittlicher Vier-Personen-Haushalt spart beim Wechsel aus der Grundversorgung in einen günstigen Alternativtarif zwischen 200&nbsp;€ und 400&nbsp;€ bei Strom sowie zwischen 300&nbsp;€ und 600&nbsp;€ bei Gas pro Jahr.
 
 ### Kann mir während des Wechselprozesses der Strom oder das Gas abgestellt werden?
-Nein, das ist rechtlich unmöglich. Gemäß §&nbsp;36 des Energiewirtschaftsgesetzes (EnWG) ist die unterbrechungsfreie Belieferung gesetzlich garantiert. Kommt es zu Verzögerungen, springt automatisch der lokale Grundversorger ein.
+Nein, das ist rechtlich unmöglich. Gemäß §&nbsp;36 des Energiewirtschafts­gesetzes (EnWG) ist die unterbrechungsfreie Belieferung gesetzlich garantiert. Kommt es zu Verzögerungen, springt automatisch der lokale Grundversorger ein.
 
 ### Was bedeutet eine eingeschränkte Preisgarantie?
 Eine eingeschränkte Preisgarantie deckt die reinen Beschaffungs- und Netzkosten ab. Steuern, Abgaben und staatliche Umlagen können theoretisch weitergegeben werden. Eine volle Preisgarantie schützt vor fast allen Preissteigerungen.

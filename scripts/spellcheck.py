@@ -221,7 +221,10 @@ def extract_words(body, whitelist):
     words = []
     # Bindestriche nur in der Wortmitte erlauben (kein "-" am Ende:
     # "Strom-, DSL- und …" → "DSL" statt "DSL-")
-    for m in re.finditer(r"[A-Za-zÄÖÜäöüß0-9]+(?:-[A-Za-zÄÖÜäöüß0-9]+)*", text):
+    # U+00AD (weiche Trennstelle aus scripts/umbruch_guard.py) zählt als
+    # Wortbestandteil – sonst würde „Verbraucher\u00adschlichtungsstelle“
+    # als zwei Wörter geprüft und „schlichtungs“ als Fehler gemeldet.
+    for m in re.finditer(r"[A-Za-zÄÖÜäöüß0-9]+(?:[\u00ad-][A-Za-zÄÖÜäöüß0-9]+)*", text):
         w = m.group(0)
         # Abkürzungen + Whitelist ignorieren
         if w.lower().rstrip(".") in ABKUERZUNGEN or w.lower() in whitelist:
@@ -234,14 +237,23 @@ def extract_words(body, whitelist):
 
 
 def batch_hunspell(words):
-    """Prüft Wörter per Hunspell-Batch. Liefert Set der fehlerhaften Wörter."""
+    """Prüft Wörter per Hunspell-Batch. Liefert Set der fehlerhaften Wörter.
+
+    Weiche Trennstellen (U+00AD) werden vor dem Check entfernt und die
+    Treffer anschliessend auf das ORIGINALWort zurückgemappt – die
+    Offset-Logik der Aufrufer bleibt damit exakt erhalten.
+    """
     if not words:
         return set()
+    clean = [w.replace("\u00ad", "") for w in words]
     r = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
-                       input="\n".join(words) + "\n",
+                       input="\n".join(clean) + "\n",
                        capture_output=True, text=True)
     out = r.stdout.strip()
-    return set(out.split("\n")) if out else set()
+    if not out:
+        return set()
+    bad_clean = set(out.split("\n"))
+    return {w for w, c in zip(words, clean) if c in bad_clean}
 
 
 def is_noun_capitalized(word):
@@ -252,6 +264,7 @@ def is_noun_capitalized(word):
       Adjektiv oder Pronomen – z. B. 'erreichst', 'deine', 'finanzielle').
     - Die GROSSform muss ein Hunspell-TREFFER sein.
     Nur dann liegt ein kleingeschriebenes Nomen vor ('geld'→'Geld')."""
+    word = word.replace("\u00ad", "")
     if not word or word[0].isupper():
         return False
     # Kleinform: bekannt → kein Nomen-Fall (Verb/Adjektiv)
@@ -268,6 +281,7 @@ def is_noun_capitalized(word):
 
 def suggestions(word):
     """Hunspell-Korrekturvorschläge."""
+    word = word.replace("\u00ad", "")
     r = subprocess.run(["hunspell", "-d", "de_DE"],
                        input=word + "\n", capture_output=True, text=True)
     lines = [l for l in r.stdout.strip().split("\n") if l.strip()]

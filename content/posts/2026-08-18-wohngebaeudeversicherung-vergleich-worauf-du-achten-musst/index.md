@@ -103,7 +103,7 @@ Faustregel: Stellst du dein Haus auf den Kopf und schüttelst es, fällt alles h
 ### Muss ich meine Photovoltaikanlage extra versichern?
 Aufdach-Solaranlagen können meist gegen geringen Aufpreis oder beitragsfrei in die Wohngebäudeversicherung integriert werden. Melde die Anlage immer unverzüglich dem Gebäudeversicherer.
 
-### Was bedeutet „Unterversicherungsverzicht“?
+### Was bedeutet „Unter­versicherungs­verzicht“?
 Wird die Wohnflächenberechnung korrekt nach den Vorgaben des Versicherers vorgenommen, verzichtet dieser im Schadensfall auf die Prüfung einer Unterversicherung und reguliert Schäden in voller Höhe.
 
 ### Wer zahlt die Wohngebäudeversicherung bei Mietobjekten?

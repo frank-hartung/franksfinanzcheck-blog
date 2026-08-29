@@ -60,8 +60,8 @@ Beim Abschluss oder der Überprüfung einer Hausrat- oder Wohngebäudepolice sol
 ### 1. Verzicht auf die Einrede der groben Fahrlässigkeit
 Verlässt du für eine Stunde das Haus, während die Waschmaschine läuft oder ein Fenster gekippt ist, werfen Versicherer bei Alttarifen oft "grobe Fahrlässigkeit" vor und kürzen die Auszahlung um bis zu 50 %. Moderne Top-Tarife verzichten zu 100 % auf diese Einrede und zahlen den Schaden in voller Höhe.
 
-### 2. Unterversicherungsverzicht
-Damit der Versicherer im Totalschadenfall nicht prüft, ob dein Hausrat mehr wert war als die vereinbarte Versicherungssumme, wähle eine pauschale Mindestsumme von **650 € pro Quadratmeter Wohnfläche**. Bei einer 90-m²-Wohnung entspricht das einer pauschalen Versicherungssumme von **58.500 €**. In diesem Fall verzichtet die Gesellschaft garantiert auf jegliche Unterversicherungskürzung.
+### 2. Unter­versicherungs­verzicht
+Damit der Versicherer im Totalschadenfall nicht prüft, ob dein Hausrat mehr wert war als die vereinbarte Versicherungssumme, wähle eine pauschale Mindestsumme von **650 € pro Quadratmeter Wohnfläche**. Bei einer 90-m²-Wohnung entspricht das einer pauschalen Versicherungssumme von **58.500 €**. In diesem Fall verzichtet die Gesellschaft garantiert auf jegliche Unter­versicherungs­kürzung.
 
 ### 3. Fahrraddiebstahl & Cyber-Schutz
 Wer teure E-Bikes oder Fahrräder besitzt, sollte eine 24-Stunden-Fahrradklausel ohne Nachtzeitbeschränkung einschließen. Auch Phishing-Schäden beim Online-Banking sind in modernen Hausrat-Tarifen bis zu bestimmten Höchstgrenzen (z. B. 5.000 € bis 10.000 €) mitversichert.
@@ -79,7 +79,7 @@ Entgegen der landläufigen Meinung ist eine lückenlose Absicherung erstaunlich 
 | **Gesamtkosten pro Jahr** | **155,00 €** | **103,00 €** |
 | **Effektive Kosten pro Monat** | **12,92 € / Monat** | **8,58 € / Monat** |
 
-Wer neben dem Hausrat auch die persönliche Absicherung auf Vordermann bringen will, sollte einen Blick in unsere [Erklärung zur Privathaftpflichtversicherung](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) werfen oder die Übersicht im [Ratgeber: Versicherungen](../../pillar/versicherungen/) durchstöbern.
+Wer neben dem Hausrat auch die persönliche Absicherung auf Vordermann bringen will, sollte einen Blick in unsere [Erklärung zur Privat­haftpflicht­versicherung](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) werfen oder die Übersicht im [Ratgeber: Versicherungen](../../pillar/versicherungen/) durchstöbern.
 
 ## Fazit: Dein Haus mit zeitgemäßen Klauseln schützen
 
@@ -95,7 +95,7 @@ Als Faustformel gilt: Stellst du dein Haus gedanklich auf den Kopf und schüttel
 ### Warum reicht eine Standard-Hausratversicherung bei Starkregen nicht aus?
 Standard-Tarife leisten nur bei Leitungswasserschäden (z. B. geplatztes Rohr im Haus). Dringt Regenwasser von außen über Kellerfenster oder Lichtschächte ein, handelt es sich um einen Elementarschaden, der separat mitversichert werden muss.
 
-### Was bedeutet Unterversicherungsverzicht?
+### Was bedeutet Unter­versicherungs­verzicht?
 Wenn du mindestens 650 € Versicherungssumme pro Quadratmeter vereinbarst, verzichtet die Versicherung im Schadensfall darauf, den Gesamtwert deiner Möbel zu schätzen, und zahlt den Schaden bis zur Versicherungssumme ungekürzt aus.
 
 ### Zahlt die Versicherung, wenn ich ein gekipptes Fenster bei Regen offen lasse?

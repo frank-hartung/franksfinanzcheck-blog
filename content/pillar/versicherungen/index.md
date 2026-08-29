@@ -24,7 +24,7 @@ Beim Thema Versicherungen machen viele Verbraucher einen von zwei kostspieligen 
 
 | Priorität | Versicherungsart | Typische Jahreskosten | Relevanz |
 |---|---|---|---|
-| 🔴 **Pflicht** | Privathaftpflichtversicherung | 35–65&nbsp;€ | Absolutes Muss für jeden Haushalt |
+| 🔴 **Pflicht** | Privat­haftpflicht­versicherung | 35–65&nbsp;€ | Absolutes Muss für jeden Haushalt |
 | 🔴 **Pflicht** | Kfz-Haftpflicht (für Fahrzeughalter) | Variabel | Gesetzlich vorgeschrieben |
 | 🟡 **Sehr sinnvoll** | Wohngebäude (für Eigentümer) | 250–600&nbsp;€ | Schutz vor Unwetter & Feuer |
 | 🟡 **Sinnvoll** | Hausratversicherung (inkl. Elementar) | 50–120&nbsp;€ | Bei wertvollem Inventar |
@@ -55,7 +55,7 @@ Einen umfassenden Überblick über die aktuellen Standards, Elementarschaden-Erw
 ### Wichtige Klauseln für deinen Hausrat- & Gebäudeschutz:
 * **Verzicht auf Einrede der groben Fahrlässigkeit:** Dein Versicherer zahlt auch dann, wenn eine brennende Kerze kurz unbeaufsichtigt blieb oder ein gekipptes Fenster bei Starkregen offen stand.
 * **Elementarschäden (Naturgefahren):** Schutz bei Überschwemmung, Rückstau, Schneedruck und Erdrutsch.
-* **Unterversicherungsverzicht:** Vereinbare einen pauschalen Wert pro Quadratmeter (meist 650&nbsp;€/m²), damit im Schadenfall keine prozentualen Abzüge erfolgen.
+* **Unter­versicherungs­verzicht:** Vereinbare einen pauschalen Wert pro Quadratmeter (meist 650&nbsp;€/m²), damit im Schadenfall keine prozentualen Abzüge erfolgen.
 
 👉 **Hausratversicherung online vergleichen:** [**→ Jetzt Hausratversicherung prüfen**](/go/hausrat/)
 
@@ -86,12 +86,12 @@ Jedes Jahr im Herbst werben Kfz-Versicherer mit neuen Konditionen. Da sich Typkl
 ## Häufige Fragen zu Versicherungen
 
 ### Welche Versicherungen sind in Deutschland wirklich Pflicht?
-Gesetzlich vorgeschrieben sind die Krankenversicherung für alle Bürger sowie die Kfz-Haftpflichtversicherung für Halter von Kraftfahrzeugen. Aus existenzieller Sicht ist zudem eine Privathaftpflichtversicherung für jeden Erwachsenen unverzichtbar.
+Gesetzlich vorgeschrieben sind die Krankenversicherung für alle Bürger sowie die Kfz-Haftpflichtversicherung für Halter von Kraftfahrzeugen. Aus existenzieller Sicht ist zudem eine Privat­haftpflicht­versicherung für jeden Erwachsenen unverzichtbar.
 
 ### Wie kündige ich eine bestehende Versicherung richtig?
 Die meisten Sachversicherungen (wie Haftpflicht oder Hausrat) haben eine Kündigungsfrist von drei Monaten zum Ablauf des Versicherungsjahres. Nach einem gemeldeten Schadenfall oder einer Beitragserhöhung ohne Leistungsverbesserung hast du zudem ein vierwöchiges Sonderkündigungsrecht.
 
-### Warum brauche ich eine Elementarschadenversicherung?
+### Warum brauche ich eine Elementar­schaden­versicherung?
 Die normale Wohngebäude- oder Hausratversicherung zahlt standardmäßig nur bei Schäden durch Feuer, Leitungswasser, Sturm und Hagel. Schäden durch Starkregen, Rückstau aus der Kanalisation oder Hochwasser sind nur über den Zusatzbaustein Elementargefahren gedeckt.
 
 ### Was kostet eine gute Privathaftpflicht für Singles bzw. Familien?

@@ -8,7 +8,7 @@ author: "Frank Hartung"
 
 ## Fixkosten senken ohne Verzicht – Dein persönlicher Sparplan
 
-Jeden Monat buchen Energieversorger, Telekommunikationsanbieter, Banken und Versicherungen feste Beträge von deinem Girokonto ab. Viele dieser Verträge laufen seit Jahren unverändert – und genau hier verschenken die meisten Haushalte in Deutschland zwischen 500&nbsp;€ und 2.000&nbsp;€ pro Jahr. 
+Jeden Monat buchen Energieversorger, Telekommunikations­anbieter, Banken und Versicherungen feste Beträge von deinem Girokonto ab. Viele dieser Verträge laufen seit Jahren unverändert – und genau hier verschenken die meisten Haushalte in Deutschland zwischen 500&nbsp;€ und 2.000&nbsp;€ pro Jahr. 
 
 Auf **FranksFinanzcheck** zerlege ich die komplexen Tarifwelten in verständliche, praxisnahe Leitfäden. Statt trockenem Fachchinesisch bekommst du konkrete Euro-Beträge, transparente Vor- und Nachteile, rechtssichere Checklisten und den direkten Weg zum besten Angebot.
 

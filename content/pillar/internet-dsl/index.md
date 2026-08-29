@@ -72,7 +72,7 @@ Beim Mobilfunk gilt eine einfache Grundregel: Kaufe dein Smartphone idealerweise
 ## Häufige Fragen zu DSL, Internet und Mobilfunk
 
 ### Wie lange dauert die Umstellung beim DSL-Anbieterwechsel?
-Der Wechselprozess dauert in der Regel zwei bis vier Wochen. Gemäß dem novellierten Telekommunikationsgesetz (TKG) darf die Unterbrechung beim Anbieterwechsel am Umschaltetag höchstens einen Kalendertag dauern.
+Der Wechselprozess dauert in der Regel zwei bis vier Wochen. Gemäß dem novellierten Telekommunikations­gesetz (TKG) darf die Unterbrechung beim Anbieterwechsel am Umschaltetag höchstens einen Kalendertag dauern.
 
 ### Kann ich meinen DSL-Vertrag monatlich kündigen?
 Ja. Sobald die anfängliche Mindestvertragslaufzeit (in der Regel 24 Monate) abgelaufen ist, verlängert sich der Vertrag auf unbestimmte Zeit und kann jederzeit mit einer Frist von einem Monat gekündigt werden.

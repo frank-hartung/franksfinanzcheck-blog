@@ -31,9 +31,9 @@ Diese Website nutzt **Affiliate-Partnerprogramme** (CHECK24, Tarifcheck) sowie e
 
 ### Hosting
 
-Diese Website wird bei einem externen Dienstleister gehostet: **GitHub Pages** (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA), erreichbar unter **franksfinanzcheck.de**. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. GitHub unterhält Serverstandorte auch außerhalb der EU; eine Verarbeitung der IP-Adresse kann daher außerhalb der EU (insbesondere in den USA) erfolgen. Mit dem Hoster besteht eine Auftragsverarbeitungsvereinbarung (Standardvertragsklauseln gemäß Art. 46 DSGVO).
+Diese Website wird bei einem externen Dienstleister gehostet: **GitHub Pages** (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA), erreichbar unter **franksfinanzcheck.de**. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. GitHub unterhält Serverstandorte auch außerhalb der EU; eine Verarbeitung der IP-Adresse kann daher außerhalb der EU (insbesondere in den USA) erfolgen. Mit dem Hoster besteht eine Auftragsverarbeitungsvereinbarung (Standard­vertrags­klauseln gemäß Art. 46 DSGVO).
 
-**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren, stabilen und effizienten Bereitstellung der Website). Mit dem Hoster wird ein **Auftragsverarbeitungsvertrag (AVV)** gemäß Art. 28 DSGVO geschlossen.
+**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren, stabilen und effizienten Bereitstellung der Website). Mit dem Hoster wird ein **Auftragsverarbeitungs­vertrag (AVV)** gemäß Art. 28 DSGVO geschlossen.
 
 ### Content-Delivery-Network (Cloudflare)
 

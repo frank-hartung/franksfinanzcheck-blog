@@ -99,7 +99,7 @@ Ein DSL-Wechselbonus ist eine finanzielle Prämie für Neukunden, die von einem 
 Die Prämie wird entweder ab dem ersten Abrechnungsmonat als Guthaben mit den Monatsbeiträgen verrechnet oder nach Freischaltung des Anschlusses direkt auf dein Bankkonto überwiesen.
 
 ### Kann es beim Anbieterwechsel zu einem Internetausfall kommen?
-Nein, das deutsche Telekommunikationsgesetz (§ 58 TKG) garantiert, dass der alte Anbieter die Leitung so lange weiter versorgen muss, bis der neue Anbieter den Anschluss erfolgreich aufgeschaltet hat. Die maximale Ausfallzeit am Tag der Umschaltung darf wenige Stunden nicht überschreiten.
+Nein, das deutsche Telekommunikations­gesetz (§ 58 TKG) garantiert, dass der alte Anbieter die Leitung so lange weiter versorgen muss, bis der neue Anbieter den Anschluss erfolgreich aufgeschaltet hat. Die maximale Ausfallzeit am Tag der Umschaltung darf wenige Stunden nicht überschreiten.
 
 ### Gilt der Wechselbonus auch für Kabel-Internet und Glasfaser?
 Ja, viele Anbieter zahlen den Wechselbonus unabhängig von der Übertragungstechnik – egal ob du zu klassischem VDSL, Kabel-Internet (Koaxial) oder einem echten Glasfaseranschluss (FTTH) wechselst.

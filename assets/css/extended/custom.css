@@ -41,8 +41,8 @@ html body {
     text-rendering: optimizeLegibility;
 }
 
-/* Deutscher Text: Silbentrennung für besseren Zeilenfall
-/* Top-Level-Darstellung: KEINE automatische Silbentrennung
+/* Deutscher Text: Silbentrennung für besseren Zeilenfall.
+   Top-Level-Darstellung: KEINE automatische Silbentrennung
    (User-Vorgabe – Wörter werden nie getrennt; Zahlen+Einheiten
    sind per &nbsp; fest verbunden) */
 .post-content,
@@ -50,6 +50,46 @@ html body {
 .entry-content {
     hyphens: manual;
     -webkit-hyphens: manual;
+}
+
+/* ---------- Premium-Zeilenumbruch (29.08.2026) ----------
+   Lange deutsche Komposita („Universalschlichtungsstelle“) kennen im
+   Deutschen keine Leerzeichen – der Browser darf nur dort trennen, wo
+   der Text eine Stelle erlaubt. Die Stellen setzt der Redakteur bzw.
+   scripts/umbruch_guard.py als weiches Trennzeichen (U+00AD):
+   unsichtbar im Wort, sichtbar als korrekter Bindestrich, WENN
+   umgebrochen wird. Dieses CSS sorgt dafür, dass sie sauber wirken:
+     • hyphens: manual – keine AUTOMATISCHE Trennung (Haus-Regel bleibt)
+     • word-break: normal statt dem Theme-Default break-word: der
+       Browser bricht nicht mitten im Wort, solange es nicht nötig ist
+     • overflow-wrap: break-word – Notfallnetz: läuft nie aus dem Container
+     • Überschriften: gleichmäßige Zeilen (balance) und auf dem Handy
+       eine fluide Größe, damit die 32-px-H2 nicht vierzeilig wird. */
+.post-content,
+.md-content,
+.entry-content {
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+.post-content h2,
+.post-content h3,
+.md-content h2,
+.md-content h3,
+.post-title {
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: manual;
+    -webkit-hyphens: manual;
+    text-wrap: balance;
+}
+
+@media (max-width: 600px) {
+    .post-content h2,
+    .md-content h2 {
+        font-size: clamp(1.3rem, 6.2vw, 1.7rem);
+        line-height: 1.25;
+    }
 }
 
 /* Lesefluss: ausgewogenere Zeilenenden statt frühzeitige Umbrüche */

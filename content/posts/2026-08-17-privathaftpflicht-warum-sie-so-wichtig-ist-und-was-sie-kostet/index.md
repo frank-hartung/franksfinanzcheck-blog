@@ -47,7 +47,7 @@ Veraltete Versicherungspolicen aus den 1990er- oder 2000er-Jahren enthalten oft 
 4. **Schäden bei Gefälligkeitshandlungen:** Hilfst du einem Nachbarn beim Tragen von Möbeln oder einem Umzug und geht dabei etwas zu Bruch, reguliert ein zeitgemäßer Tarif den Schaden ohne Beanstandung.
 5. **Schutz bei deliktunfähigen Kindern:** Kinder unter 7 Jahren (im fließenden Straßenverkehr unter 10 Jahren) haften nach dem Gesetz nicht. Komfort-Tarife schließen diese Schäden ein, damit Freundschaften und der Hausfrieden in der Nachbarschaft gewahrt bleiben.
 
-## Was kostet eine erstklassige Privathaftpflichtversicherung?
+## Was kostet eine erstklassige Privat­haftpflicht­versicherung?
 
 Trotz des existenziellen Schutzumfangs zählt die Haftpflichtversicherung zu den preiswertesten Policen am Versicherungsmarkt. Die folgende Übersicht zeigt die typische Preisspanne:
 
@@ -83,7 +83,7 @@ Nein, im Gegensatz zur Kfz-Haftpflichtversicherung ist die Privathaftpflicht fre
 Ja, Mietsachschäden (z. B. Brandflecken im Parkett, ein gesprungener Waschtisch im Badezimmer oder zerkratzte Türen) sind in modernen Tarifen abgedeckt. Reine Abnutzung durch normalen Gebrauch fällt nicht darunter.
 
 ### Was passiert bei Schäden durch Haustiere?
-Kleintiere wie Katzen, Vögel, Hamster oder Meerschweinchen sind über die Privathaftpflicht automatisch mitversichert. Für Hunde und Pferde ist hingegen eine separate Tierhalterhaftpflichtversicherung erforderlich.
+Kleintiere wie Katzen, Vögel, Hamster oder Meerschweinchen sind über die Privathaftpflicht automatisch mitversichert. Für Hunde und Pferde ist hingegen eine separate Tierhalter­haftpflicht­versicherung erforderlich.
 
 ### Wie melde ich einen Schaden richtig?
 Melde den Schaden unverzüglich (am besten innerhalb von 3 Tagen) deiner Versicherung. Mache Fotos, notiere Kontaktdaten von Zeugen und unterschreibe vorab niemals ein Schuldanerkenntnis gegenüber dem Geschädigten.
