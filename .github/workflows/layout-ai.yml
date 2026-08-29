@@ -70,8 +70,7 @@ jobs:
             echo "Keine Cover-Fixes nötig."
           else
             git commit -m "fix: Layout-Automatisierung – Cover-Varianten nachgezogen"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
+            scripts/git_sync.sh --push-only
             echo "✅ Cover-Fixes gepusht"
           fi
 
@@ -110,8 +109,7 @@ jobs:
             echo "Report unverändert."
           else
             git commit -m "chore: LAYOUT-REPORT aktualisiert"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
+            scripts/git_sync.sh --push-only
           fi
 
       # ============ ISSUE BEI KRITISCHEN PROBLEMEN (Dedupe) ============

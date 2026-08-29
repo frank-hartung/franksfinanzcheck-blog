@@ -133,8 +133,7 @@ jobs:
             echo "Gate: keine Heilungen nötig."
           else
             git commit -m "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
+            scripts/git_sync.sh --push-only
             echo "✅ Gate-Heilungen gepusht – Folge-Deploy prüft erneut (konvergent)."
           fi
 

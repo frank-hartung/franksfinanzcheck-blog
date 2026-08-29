@@ -114,9 +114,7 @@ jobs:
             echo "Willkommenstext-Refresh: keine Änderungen."
           else
             git commit -m "content: Willkommenstext automatisch aufgefrischt (SEO-Unique-Content-Automatik)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
-            echo "AKTUALISIERT=true" >> "$GITHUB_ENV"
+            SYNC_OK_VAR=AKTUALISIERT scripts/git_sync.sh --push-only
           fi
 
       - name: Deploy anstoßen (nur bei tatsächlicher Änderung)

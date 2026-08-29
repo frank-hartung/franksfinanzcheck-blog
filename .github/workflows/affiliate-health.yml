@@ -56,6 +56,5 @@ jobs:
             echo "Kein Update."
           else
             git commit -m "chore+heal: Affiliate-Health E2E (Report${{ github.event_name == 'schedule' && ', Wochenwache' || '' }})"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push || { sleep 20; git pull --rebase origin main && git push; }
+            scripts/git_sync.sh --push-only
           fi

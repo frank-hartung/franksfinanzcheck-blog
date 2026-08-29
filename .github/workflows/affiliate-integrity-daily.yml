@@ -94,9 +94,7 @@ jobs:
             echo "Affiliate-Integritäts-Wache: keine Änderungen."
           else
             git commit -m "fix(content): Affiliate-Integritäts-Wache – defekte CTA-Box(en) automatisch geheilt (täglich)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
-            echo "GEHEILT=true" >> "$GITHUB_ENV"
+            SYNC_OK_VAR=GEHEILT scripts/git_sync.sh --push-only
           fi
 
       - name: Deploy anstoßen (nur wenn tatsächlich repariert wurde)

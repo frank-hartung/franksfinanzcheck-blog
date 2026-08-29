@@ -73,8 +73,7 @@ jobs:
             echo "Keine Keyword-Änderungen"
           else
             git commit -m "seo: LSI-Keywords für neue Artikel ergänzt (KI-Vorschläge)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push  # AUDIT-FIX: Rebase-Schutz
+            scripts/git_sync.sh --push-only
           fi
 
       - name: Interne Verlinkung automatisch ausbauen
@@ -95,8 +94,7 @@ jobs:
             echo "Keine neuen internen Links (Struktur bereits dicht)."
           else
             git commit -m "seo: interne Verlinkung ausgebaut (kontextuelle Links, nur Live-Ziele)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push  # AUDIT-FIX: Rebase-Schutz
+            scripts/git_sync.sh --push-only
           fi
 
       - name: Meta-Daten-Optimierung (Title/Description/Keywords)
@@ -130,8 +128,7 @@ jobs:
             echo "Keine Pinterest/SEO-Heiler-Änderungen"
           else
             git commit -m "seo: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
+            scripts/git_sync.sh --push-only
           fi
       - name: Meta-Änderungen committen
         if: steps.meta.outcome == 'success'
@@ -143,8 +140,7 @@ jobs:
             echo "Keine Meta-Änderungen"
           else
             git commit -m "seo: Meta-Daten optimiert (Title/Description/Keywords)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push  # AUDIT-FIX: Rebase-Schutz
+            scripts/git_sync.sh --push-only
           fi
 
       - name: Rechtschreib- & Groß-Klein-Prüfung aller Artikel (Top-Level)
@@ -213,8 +209,7 @@ jobs:
             echo "Keine Affiliate-Änderungen."
           else
             git commit -m "seo: Affiliate-Deep-Links korrigiert (vollautomatisch)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push  # AUDIT-FIX: Rebase-Schutz
+            scripts/git_sync.sh --push-only
             echo "✅ Affiliate-Fixes gepusht"
           fi
 
@@ -257,8 +252,7 @@ jobs:
             echo "Bestand-Gate: keine Änderungen."
           else
             git commit -m "seo: Bestand-Gate – bestehende Artikel gegen aktuelle Publish-Regeln geheilt"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push  # AUDIT-FIX: Rebase-Schutz
+            scripts/git_sync.sh --push-only
           fi
 
       - name: Issue bei nicht automatisch heilbaren Bestandsartikeln
@@ -297,8 +291,7 @@ jobs:
             echo "Keine Cover-Änderungen."
           else
             git commit -m "seo: Cover-Varianten nachgezogen (vollautomatisch)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push  # AUDIT-FIX: Rebase-Schutz
+            scripts/git_sync.sh --push-only
             echo "✅ Cover-Fixes gepusht"
           fi
 
@@ -332,8 +325,7 @@ jobs:
           if git diff --cached --quiet; then echo "Textbatterie: sauber."
           else
             git commit -m "chore: Textbatterie nach SEO-Edits (selbstheilend)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push || { sleep 20; git pull --rebase origin main && git push; }
+            scripts/git_sync.sh --push-only
           fi
 
       - name: lastmod für geänderte Artikel setzen (Frische-Signal)
@@ -359,8 +351,7 @@ jobs:
             echo "Report unverändert"
           else
             git commit -m "seo: Meta-Report aktualisiert (vollautomatisch)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push  # AUDIT-FIX: Rebase-Schutz
+            scripts/git_sync.sh --push-only
           fi
 
       - name: Issue bei verbleibenden Meta-Problemen (kein manuelles Sichten nötig)
@@ -430,8 +421,7 @@ jobs:
             echo "Keine Änderungen"
           else
             git commit -m "seo: Bing-Indexierungs-Status aktualisiert"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push  # AUDIT-FIX: Rebase-Schutz
+            scripts/git_sync.sh --push-only
           fi
 
       - name: Issue bei kritischen SEO-Problemen erstellen
