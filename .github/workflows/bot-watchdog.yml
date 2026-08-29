@@ -6,13 +6,33 @@
 #  Fehler), meldet sich sonst niemand – es käme einfach kein Artikel.
 #
 #  Der Watchdog prüft täglich:
-#    1) Wurde in den letzten ~30 h ein Artikel committet?
-#       (2 Posts/Tag erwartet → 30h-Fenster fängt Wochenend-/Feiertags-
-#        Ruhe ab und erkennt trotzdem einen kompletten Ausfall)
+#    1) Ist die Automatisierung selbst noch wach?
+#       1a) META: Läuft die Produktions-Wache (Inhaltsprüfung) noch?
+#       1b) FALLBACK: Publikationstag-Bilanz (nur wenn 1a nicht greift)
 #    2) Sind alle Bot-Skripte syntaktisch valide?
-#    3) Ist die Live-Site auf dem neuesten Content-Commit (Deploy ok)?
+#    3) Ist der neueste Artikel live (Deploy ok)?
 #    4) Ist das GitHub-TLS-Zertifikat für franksfinanzcheck.de ausgestellt?
 #       (Wenn ja → Hinweis-Issue: Cloudflare auf "Full (strict)" umstellen)
+#
+#  UMSTELLUNG AUF PUBLIKATIONSTAGE (29.08.2026):
+#    Check 1 war ein starres Zeitfenster ("kein Artikel in 30 h") gegen
+#    die Annahme "2 Artikel/Tag". Die Dauervorgabe lautet aber
+#    Mo/Mi/Fr – zwischen Freitag 06:10 UTC und Sonntag 08:30 UTC liegen
+#    50,3 Stunden. Der Check schlug also JEDEN SONNTAG an, völlig
+#    grundlos (nachgerechnet, nicht geschätzt). Verschärft man die
+#    Schwelle stattdessen auf 26 h, wären es 8 Fehlalarme in 14 Tagen.
+#    Ein Zeitfenster ist das falsche Modell für einen Wochenplan.
+#
+#    Neu: bewertet wird der letzte ABGESCHLOSSENE Publikationstag
+#    (Mo/Mi/Fr) gegen das Mindestziel – Quelle ist cadence_guard,
+#    dieselbe Definition wie in Engine und Deploy-Gate.
+#
+#    Die Inhaltsprüfung selbst liegt in der PRODUKTIONS-WACHE (PR #1):
+#    sie ist publikationstags-bewusst, kennt die drei Engine-Slots und
+#    unterscheidet neue Artikel von Recycling. Bot-Watchdog prüft hier
+#    nur, ob dieser Wächter noch lebt (Meta-Ebene) – und behält die
+#    Bilanz als Fallback, falls die Produktions-Wache fehlt oder
+#    stehengeblieben ist. So gibt es keine doppelten Issues.
 #
 #  Bei Problemen: automatisch GitHub-Issue (mit Dedupe – kein Spam).
 #  Manuell starten: Actions → Bot-Watchdog → Run workflow
@@ -27,6 +47,7 @@ on:
 permissions:
   contents: read
   issues: write
+  actions: read      # für `gh run list` (Meta-Check: läuft die Wache noch?)
 
 jobs:
   watchdog:
@@ -39,26 +60,101 @@ jobs:
 
       - name: Watchdog-Prüfungen
         id: checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
         run: |
           PROBLEMS=""
           NOW=$(date +%s)
 
-          # 1) Letzter Content-Commit (letzte 30h)
-          LAST_TS=$(git log -1 --format=%ct --grep="^content:" || true)
-          if [ -z "$LAST_TS" ]; then
+          # 1a) META-CHECK: Läuft die Produktions-Wache noch?
+          #     Die Inhaltsprüfung selbst ist dorthin ausgelagert (sie ist
+          #     publikationstags-bewusst und kennt die drei Engine-Slots).
+          #     Hier wird nur überwacht, dass der Wächter nicht selbst
+          #     einschläft – genau die Lücke, die dieser Watchdog füllt.
+          SEIT26H=$(date -u -d '26 hours ago' +%Y-%m-%dT%H:%M:%SZ)
+          WACHE_RUNS=$(gh run list --workflow=produktions-wache.yml \
+                         --created ">$SEIT26H" --json databaseId --jq 'length' \
+                         2>/tmp/gh_wache.err || echo "-1")
+          if [ "$WACHE_RUNS" = "-1" ]; then
+            echo "Produktions-Wache nicht gefunden – dieser Watchdog prüft die Bilanz selbst."
+            echo "CHECK1A=NOEXIST" >> "$GITHUB_ENV"
+            WACHE_DA=0
+          elif [ "$WACHE_RUNS" = "0" ]; then
             PROBLEMS="$PROBLEMS
-          - **Kein Artikel seit Beginn** – noch nie ein Content-Commit"
-            echo "CHECK1=FAIL" >> "$GITHUB_ENV"
+          - **Produktions-Wache hat in den letzten 26 h nicht gedreht** – die Ausfall-Erkennung ist derzeit blind. Workflow prüfen (Cron aktiv? Repo inaktiv?)"
+            echo "CHECK1A=FAIL" >> "$GITHUB_ENV"
+            WACHE_DA=0
           else
-            AGE=$(( (NOW - LAST_TS) / 3600 ))
-            echo "Letzter Content-Commit vor ${AGE} h"
-            if [ "$AGE" -gt 30 ]; then
-              PROBLEMS="$PROBLEMS
-          - **Kein Artikel in den letzten ${AGE} h** (erwartet: 2/Tag) – Bot prüfen"
-              echo "CHECK1=FAIL" >> "$GITHUB_ENV"
-            else
-              echo "CHECK1=OK" >> "$GITHUB_ENV"
-            fi
+            echo "Produktions-Wache aktiv: $WACHE_RUNS Lauf/Läufe in den letzten 26 h."
+            echo "CHECK1A=OK" >> "$GITHUB_ENV"
+            WACHE_DA=1
+          fi
+
+          # 1b) PUBLIKATIONSTAG-BILANZ – immer berechnen und berichten,
+          #     aber nur alarmieren, wenn die Produktions-Wache nicht
+          #     aktiv ist (sonst meldet diese bereits -> keine Doppel-Issues).
+          #     Bewertet wird der letzte ABGESCHLOSSENE Publikationstag:
+          #     heute zählt erst ab 18:30 UTC, wenn alle drei Slots
+          #     (06:10 / 14:10 / 17:40 UTC) gelaufen sind.
+          python3 - <<'PYEOF' > /tmp/bilanz.env
+          import datetime, os, sys
+          sys.path.insert(0, "scripts")
+          import cadence_guard as cg
+
+          names = ["Montag", "Dienstag", "Mittwoch", "Donnerstag",
+                   "Freitag", "Samstag", "Sonntag"]
+          today = datetime.date.today()
+          now = datetime.datetime.now(datetime.timezone.utc)
+          minute = now.hour * 60 + now.minute
+          minimum = int(os.environ.get("MIN_ARTIKEL_PRO_TAG") or "2")
+
+          day = None
+          for back in range(0, 10):
+              d = today - datetime.timedelta(days=back)
+              if d.weekday() not in cg.PUBLICATION_DAYS:
+                  continue
+              if d == today and minute < (18 * 60 + 30):
+                  continue          # heute läuft noch
+              day = d
+              break
+
+          if day is None:
+              print("BILANZ_TAG=-")
+              print("BILANZ_COUNT=0")
+              print("BILANZ_MIN=%d" % minimum)
+              print("BILANZ_STATUS=SKIP")
+              print('BILANZ_TEXT="kein abgeschlossener Publikationstag im Pruefbereich"')
+          else:
+              count = len(cg.published_on(cg.load_posts(), day))
+              status = "OK" if count >= minimum else ("FAIL" if count == 0 else "WARN")
+              print("BILANZ_TAG=%s" % day.isoformat())
+              print("BILANZ_COUNT=%d" % count)
+              print("BILANZ_MIN=%d" % minimum)
+              print("BILANZ_STATUS=%s" % status)
+              print('BILANZ_TEXT="%s %s: %d/%d Artikel"' % (
+                  names[day.weekday()], day.isoformat(), count, minimum))
+          PYEOF
+          cat /tmp/bilanz.env
+
+          BILANZ_STATUS=$(grep '^BILANZ_STATUS=' /tmp/bilanz.env | cut -d= -f2)
+          BILANZ_COUNT=$(grep  '^BILANZ_COUNT='  /tmp/bilanz.env | cut -d= -f2)
+          BILANZ_MIN=$(grep    '^BILANZ_MIN='    /tmp/bilanz.env | cut -d= -f2)
+          BILANZ_TAG=$(grep    '^BILANZ_TAG='    /tmp/bilanz.env | cut -d= -f2)
+          # Anführungszeichen aus der Env-Datei entfernen, sonst landen sie
+          # mit im Log. Ohne diese Zeile ist BILANZ_TEXT unter `set -u`
+          # ungesetzt und der Schritt bricht ab.
+          BILANZ_TEXT=$(grep '^BILANZ_TEXT=' /tmp/bilanz.env | cut -d= -f2- | sed 's/^"//; s/"$//')
+          echo "CHECK1B=$BILANZ_STATUS" >> "$GITHUB_ENV"
+          echo "BILANZ_TEXT=$BILANZ_TEXT" >> "$GITHUB_ENV"
+
+          # Alarm NUR als Fallback, wenn die Produktions-Wache nicht greift.
+          if [ "$WACHE_DA" = "0" ] && [ "$BILANZ_STATUS" = "FAIL" ]; then
+            PROBLEMS="$PROBLEMS
+          - **Kein Artikel am Publikationstag ${BILANZ_TAG}** (0 von ${BILANZ_MIN}) – Engine prüfen (Phase 1: Tageslimit, Themenpool oder API-Keys)"
+          elif [ "$WACHE_DA" = "0" ] && [ "$BILANZ_STATUS" = "WARN" ]; then
+            PROBLEMS="$PROBLEMS
+          - **Nur ${BILANZ_COUNT} von ${BILANZ_MIN} Artikeln am Publikationstag ${BILANZ_TAG}**"
           fi
 
           # 2) Skript-Syntax
@@ -71,26 +167,48 @@ jobs:
             echo "CHECK2=OK" >> "$GITHUB_ENV"
           fi
 
-          # 3) Live-Site aktuell? Der robusteste Check: den NEUESTEN Artikel aus
-          #    dem letzten Content-Commit nehmen und seine Live-URL per HTTP
-          #    prüfen (HTTP 200 = veröffentlicht).
-          LAST_SHA=$(git log -1 --format=%h --grep="^content:" || true)
-          if [ -n "$LAST_SHA" ]; then
-            NEWEST_SLUG=$(git show --stat --format="" "$LAST_SHA" | grep -o "content/posts/[^/]*" | sort -u | tail -1 | sed 's|content/posts/||')
-            if [ -n "$NEWEST_SLUG" ]; then
+          # 3) Live-Site aktuell? Den neuesten Artikel über das FRONTMATTER
+          #    bestimmen statt über `git log --grep="^content:"` – das matchte
+          #    auch reine Qualitäts-Commits ("content: Qualitäts-Fixes …")
+          #    und lieferte dann einen falschen Slug.
+          NEWEST_SLUG=$(python3 - <<'PYEOF'
+          import datetime, glob, os, re
+
+          best = None
+          for p in (glob.glob("content/posts/*/index.md")
+                    + glob.glob("content/posts/*.md")):
+              try:
+                  c = open(p, encoding="utf-8").read()
+              except OSError:
+                  continue
+              if re.search(r"(?m)^draft:\s*true\s*$", c):
+                  continue
+              m = re.search(r"(?m)^date:\s*[\"']?(\d{4}-\d{2}-\d{2})", c)
+              if not m:
+                  continue
+              d = datetime.date.fromisoformat(m.group(1))
+              if best is None or d > best[0]:
+                  slug = (os.path.basename(os.path.dirname(p))
+                          if os.path.basename(p) == "index.md"
+                          else os.path.basename(p)[:-3])
+                  best = (d, slug)
+          print(best[1] if best else "")
+          PYEOF
+          )
+          if [ -n "$NEWEST_SLUG" ]; then
               STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "https://franksfinanzcheck.de/posts/${NEWEST_SLUG}/")
               if [ "$STATUS" != "200" ]; then
                 PROBLEMS="$PROBLEMS
           - **Neuester Artikel nicht live (HTTP ${STATUS})** – ${NEWEST_SLUG} (Deploy prüfen)"
                 echo "CHECK3=FAIL" >> "$GITHUB_ENV"
               else
-                echo "CHECK3=OK (${NEWEST_SLUG} → 200)"
+                echo "CHECK3=OK (${NEWEST_SLUG} → 200)" >> "$GITHUB_ENV"
+                echo "Live-Site aktuell: ${NEWEST_SLUG} → HTTP 200"
               fi
-            else
-              echo "CHECK3=SKIP (kein Slug im Commit)"
-            fi
           else
-            echo "CHECK3=SKIP (kein Content-Commit)"
+            echo "CHECK3=FAIL" >> "$GITHUB_ENV"
+            PROBLEMS="$PROBLEMS
+          - **Kein veröffentlichter Artikel in content/posts/ gefunden** – Deploy kann nicht geprüft werden"
           fi
 
           # 4) GitHub-TLS-Zertifikat für franksfinanzcheck.de ausgestellt?
@@ -117,7 +235,8 @@ jobs:
         run: |
           echo "## 🤖 Watchdog-Ergebnis" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Check 1 (Artikel in 30h): ${{ env.CHECK1 }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Check 1a (Produktions-Wache aktiv): ${{ env.CHECK1A }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Check 1b (Publikationstag-Bilanz): ${{ env.CHECK1B }} – ${{ env.BILANZ_TEXT }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Check 2 (Skript-Syntax): ${{ env.CHECK2 }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Check 3 (Live-Site): ${{ env.CHECK3 }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Check 4 (GitHub-TLS-Zertifikat): ${{ env.CHECK4 }}" >> "$GITHUB_STEP_SUMMARY"
@@ -187,10 +306,12 @@ jobs:
               problems,
               '',
               '### Nächste Schritte',
-              '1. **API-Keys prüfen:** Settings → Secrets and variables → Actions (GROQ/GEMINI)',
-              '2. **Workflow-Log ansehen:** Actions → „Content-Engine v2“ → letzter Lauf',
-              '3. **Manuell nachhelfen:** Actions → „Content-Engine v2“ → Run workflow',
-              '4. **Deploy prüfen:** Actions → „Deploy auf GitHub Pages“ → letzter Lauf',
+              '1. **Artikel-Bilanz ansehen:** `PRODUKTIONS-STATUS.md` im Repo (oder Actions → „Produktions-Wache (Content-Engine)“)",
+              '2. **Workflow-Log ansehen:** Actions → „Content-Engine v2“ → letzter Lauf → Schritt „Phase 1 – Artikel generieren“",
+              '3. **API-Keys prüfen:** Settings → Secrets and variables → Actions (GROQ/GEMINI)',
+              '4. **Manuell nachhelfen:** Actions → „Content-Engine v2“ → Run workflow',
+              '5. **Deploy prüfen:** Actions → „Deploy auf GitHub Pages“ → letzter Lauf',
+              '6. **Nur Mo/Mi/Fr:** Dienstage, Donnerstage und Wochenenden sind publikationsfrei – dort ist „kein Artikel“ korrekt, kein Fehler.',
               '',
               'Das Issue wird automatisch geschlossen, sobald der nächste Watchdog-Lauf alles grün meldet.',
               '',
