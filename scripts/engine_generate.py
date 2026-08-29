@@ -326,6 +326,104 @@ def count_articles_today():
     return n
 
 
+# ---------------------------------------------------------------------------
+#  RECYCLING ZÄHLT NICHT ALS NEUPRODUKTION  (Fix 29.08.2026)
+#  ---------------------------------------------------------------------------
+#  DEADLOCK-BEFUND (Issue #97): requeue_to_capacity() durfte die komplette
+#  Tageskapazität mit umdatierten Alt-Posts (cadence_wait) füllen. Der
+#  Tages-Guard zählte diese anschließend als Produktion -> der Erzeugungs-
+#  Loop lief nie an -> 0 neue Artikel, an JEDEM Publikationstag.
+#  Sichtbar wurde das nur indirekt: ENGINE-STATUS.md meldete
+#  "Tageslimit erreicht (2/2)", während nichts Neues mehr entstand.
+#
+#  Gegenmaßnahme, zweistufig:
+#    1. RESERVE: MIN_NEUE_PRO_TAG Slot(s) bleiben für echte neue Artikel
+#       frei – die Re-Queue darf sie nicht auffüllen.
+#    2. TRENNUNG: Die Tagesbilanz unterscheidet "neu" und "recycelt".
+#       Nur "neu" erfüllt das Produktionsziel. Ein Tag mit 0 neuen
+#       Artikeln wird als DEADLOCK gemeldet, nicht als Erfolg.
+# ---------------------------------------------------------------------------
+MIN_NEUE_PRO_TAG = int(os.environ.get("MIN_NEUE_PRO_TAG") or "1")
+
+
+def ist_recycelt(post, promoted_slugs):
+    """Ein heute datierter Post gilt als RECYCLING, wenn
+
+      a) er in DIESEM Lauf von requeue_to_capacity() aus der
+         Warteschlange promotet wurde, ODER
+      b) sein Ordner-Datumspräfix nicht zum `date:`-Feld passt.
+
+    (b) ist der eigentlich wichtige Fall: Pro Publikationstag laufen
+    DREI Engine-Slots (06:10 / 14:10 / 17:40 UTC). Was Slot 06:10
+    recycelt hat, muss Slot 14:10 ebenfalls als Recycling erkennen –
+    sonst zählt der zweite Slot die Wiederverwertung des ersten als
+    Neuproduktion und stoppt (derselbe Deadlock, nur eine Slot-Ebene
+    später).
+
+    Hintergrund zu (b): Bei Re-Queue/Re-Dating bleibt der Ordnerpräfix
+    bewusst alt (stabile URLs, Covers, interne Links) – nur das
+    `date:`-Feld wird auf heute gesetzt. Genau diese Divergenz ist das
+    verlässliche, dauerhafte Erkennungsmerkmal.
+
+    Fehlklassifikation ist bewusst FAIL-SAFE: ein fälschlich als
+    „recycelt" geltender neuer Artikel führt zu MEHR Produktion
+    (nach oben durch das Tageslimit gedeckelt) – nicht zum Stillstand.
+    """
+    if post["slug"] in promoted_slugs:
+        return True
+    m = re.match(r"(\d{4}-\d{2}-\d{2})", post["slug"])
+    if not m:
+        return False          # kein Präfix -> nicht bewertbar -> zählt als neu
+    try:
+        return datetime.date.fromisoformat(m.group(1)) != post["date"]
+    except ValueError:
+        return False
+
+
+def tages_bilanz(posts, promoted_slugs, max_per_day, min_per_day):
+    """Trennt ECHTE Neuproduktion von recycelten Re-Queue-Posts.
+
+    Bewusst rein (keine Seiteneffekte) -> regressionstestbar.
+    """
+    today = datetime.date.today().isoformat()
+    heute = [p for p in posts if p["date"].isoformat() == today]
+    recycelt = [p for p in heute if ist_recycelt(p, promoted_slugs)]
+    neu = [p for p in heute if not ist_recycelt(p, promoted_slugs)]
+    return {
+        "total": len(heute),
+        "neu": len(neu),
+        "recycelt": len(recycelt),
+        "recycle_kapazitaet": max(0, max_per_day - MIN_NEUE_PRO_TAG),
+        "ziel_neu": min_per_day,
+        "slots_frei": max(0, max_per_day - len(heute)),
+        "neu_noetig": max(0, min_per_day - len(neu)),
+    }
+
+
+def produktions_entscheidung(bilanz, max_per_day, min_per_day):
+    """Entscheidet, ob (noch) ein neuer Artikel erzeugt werden muss.
+
+    Liefert (entscheidung, meldung); entscheidung ist
+    'WEITER' | 'STOP' | 'DEADLOCK'.
+    """
+    if bilanz["neu"] == 0 and bilanz["total"] >= max_per_day:
+        return ("DEADLOCK",
+                f"RECYCLE-DEADLOCK: {bilanz['total']}/{max_per_day} Posts heute sind "
+                f"ausschließlich Re-Queue-Recycling – 0 neue Artikel. "
+                f"Warteschlange (cadence_wait) prüfen bzw. MIN_NEUE_PRO_TAG erhöhen.")
+    if bilanz["total"] >= max_per_day:
+        return ("STOP",
+                f"Tageslimit erreicht ({bilanz['total']}/{max_per_day} · "
+                f"{bilanz['neu']} neu, {bilanz['recycelt']} recycelt).")
+    if bilanz["neu"] >= min_per_day:
+        return ("STOP",
+                f"Neuproduktion erfüllt ({bilanz['neu']}/{min_per_day} neu, "
+                f"{bilanz['recycelt']} recycelt, {bilanz['total']}/{max_per_day} gesamt).")
+    return ("WEITER",
+            f"{bilanz['slots_frei']} Slot(s) frei, "
+            f"{bilanz['neu_noetig']} neue Artikel nötig.")
+
+
 def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
     """Erzeugt EINEN Artikel (Profi -> Relaxed -> Draft-Rettung).
     Liefert (level, draft_saved) oder None bei fatalem Fehler."""
@@ -446,20 +544,30 @@ def main():
     # Publikationstag wieder live – IMMER innerhalb des Tageslimits
     # (2–3), mit neuem Veröffentlichungsdatum. Der Loop unten füllt
     # den Rest des Tages mit neuen Artikeln auf.
+    promoted_slugs = set()
     try:
+        # RESERVE (Fix 29.08.2026): mindestens MIN_NEUE_PRO_TAG Slot(s)
+        # bleiben für echte Neuproduktion frei – sonst erstickt die
+        # Re-Queue die Engine (Deadlock, s. tages_bilanz).
+        recycle_kap = max(0, max_per_day - MIN_NEUE_PRO_TAG)
         promoted = cadence_guard.requeue_to_capacity(
-            cadence_guard.load_posts(), max_per_day)
+            cadence_guard.load_posts(), recycle_kap)
+        promoted_slugs = {p["slug"] for p in promoted}
         if promoted:
             print(f"♻️ Cadence-Re-Queue: {len(promoted)} Post(s) wieder live "
-                  f"(Tageslimit {max_per_day} gewahrt).")
+                  f"(Recycle-Kapazität {recycle_kap} · "
+                  f"Reserve für neue Artikel: {MIN_NEUE_PRO_TAG}).")
     except Exception as exc:  # noqa: BLE001 – Heilung darfs nicht bremsen
         print(f"⚠ Cadence-Re-Queue fehlgeschlagen (nicht kritisch): {exc}")
 
-    # Tages-Guard (zählt live + Drafts, Datum-Feld-basiert)
-    published_today = count_articles_today()
-    if published_today >= max_per_day:
-        print(f"Bereits {published_today}/{max_per_day} Artikel heute – nichts zu tun.")
-        write_status(f"Tageslimit erreicht ({published_today}/{max_per_day}).")
+    # Tages-Guard (NEU 29.08.2026: trennt echte Produktion von Recycling)
+    bilanz = tages_bilanz(cadence_guard.load_posts(), promoted_slugs,
+                          max_per_day, min_per_day)
+    entscheidung, meldung = produktions_entscheidung(bilanz, max_per_day, min_per_day)
+    if entscheidung != "WEITER":
+        print(meldung)
+        write_status(meldung,
+                     level=("WARN" if entscheidung == "DEADLOCK" else "OK"))
         return 0
 
     used_titles = g.existing_titles()
@@ -475,23 +583,33 @@ def main():
         topics = g.load_topics()
         quelle = "Themenpool"
 
-    # 2-3 Artikel pro Publikationstag: bis zum Tageslimit auffüllen
+    # 2-3 Artikel pro Publikationstag: bis zum Tageslimit auffüllen –
+    # aber NUR so lange, wie das NEU-Ziel noch nicht erreicht ist
+    # (Recycling erfüllt das Ziel nicht, s. tages_bilanz).
     results = []
-    while count_articles_today() < max_per_day:
+    while True:
         out = publish_one_article(topics, quelle, pin_topics, used_titles, used_topics)
         if out is None:
             break
         level, draft_saved, status_line = out
         results.append(status_line)
+        bilanz = tages_bilanz(cadence_guard.load_posts(), promoted_slugs,
+                              max_per_day, min_per_day)
+        entscheidung, meldung = produktions_entscheidung(bilanz, max_per_day, min_per_day)
+        if entscheidung != "WEITER":
+            break
 
-    total = count_articles_today()
+    total = bilanz["total"]
     if total == 0:
         write_status("Kompletter Ausfall – kein Artikel, kein Draft.", level="FAIL")
         return 1
     levels = ", ".join(r.split("|")[1].strip() for r in results)
     live = total - sum(1 for r in results if "Entwurf gesichert" in r)
-    note = (f"{total} Artikel heute ({'live: ' + str(live) if live else 'nur Entwürfe'}) | "
+    note = (f"{total} Artikel heute ({'live: ' + str(live) if live else 'nur Entwürfe'})"
+            f" · {bilanz['neu']} NEU · {bilanz['recycelt']} recycelt | "
             f"Ziel: {min_per_day}-{max_per_day} an Mo/Mi/Fr")
+    if bilanz["neu"] == 0:
+        note += " | ⚠ KEINE Neuproduktion – Recycling zählt nicht als Produktion"
     if total < min_per_day:
         note += " | ⚠ unter Mindestziel"
     write_status(note, level="OK")
