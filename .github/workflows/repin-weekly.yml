@@ -67,7 +67,5 @@ jobs:
             echo "Keine Änderungen – nichts zu committen."
           else
             git commit -m "content: Artikel als gepinnt markiert (Pinterest)"
-            # AUDIT-FIX: Rebase-Schutz gegen Push-Race mit anderen Bots
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push || { sleep 20; git pull --rebase origin main && git push; }
+            scripts/git_sync.sh --push-only
           fi

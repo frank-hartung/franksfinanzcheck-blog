@@ -80,8 +80,7 @@ jobs:
             echo "Keine Artikel aktualisiert."
           else
             git commit -m "content: Quartalsweises Artikel-Update – Top-Artikel aufgefrischt (Frische-Signal)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push  # AUDIT-FIX: Rebase-Schutz
+            scripts/git_sync.sh --push-only
           fi
 
       - name: Aktualisierte Artikel bei IndexNow einreichen

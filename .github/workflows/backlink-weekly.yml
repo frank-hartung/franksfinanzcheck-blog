@@ -50,6 +50,5 @@ jobs:
             echo "Keine Änderungen – Report ist aktuell."
           else
             git commit -m "backlinks: wöchentlicher Scout-Report generiert"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push  # AUDIT-FIX: Rebase-Schutz
+            scripts/git_sync.sh --push-only
           fi

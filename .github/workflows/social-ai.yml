@@ -59,7 +59,6 @@ jobs:
             echo "Nichts zu committen."
           else
             git commit -m "social: neue Artikel auf Social Media geteilt"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
+            scripts/git_sync.sh --push-only
             echo "✅ Social-Update gepusht"
           fi

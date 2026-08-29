@@ -65,6 +65,5 @@ jobs:
             echo "Nichts zu committen."
           else
             git commit -m "chore: Mastodon-SEO-Report / Selbstheilung [skip ci]"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
+            scripts/git_sync.sh --push-only
           fi

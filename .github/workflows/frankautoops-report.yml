@@ -56,8 +56,7 @@ jobs:
             echo "Report unverändert."
           else
             git commit -m "chore: FrankAutoOps-Report $(date +%F)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
+            scripts/git_sync.sh --push-only
             echo "✅ Report gepusht"
           fi
 

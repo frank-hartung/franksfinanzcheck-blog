@@ -99,8 +99,7 @@ jobs:
             echo "Kadenz-Gate: Bestand bereits konform."
           else
             git commit -m "fix(cadence): Kadenz-Selbstheilung vor Slot (Zurückstufung + Re-Queue)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
+            scripts/git_sync.sh --push-only
           fi
 
       # ================= PHASE 1: GENERIEREN (Multi-Fallback) =================
@@ -133,10 +132,8 @@ jobs:
           if git status --short content/ data/ | grep -q .; then
             git add content/ data/ static/images/covers/
             git commit -m "content: neuer Artikel automatisch generiert und veröffentlicht"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
+            SYNC_OK_VAR=ARTIKEL_ERSTELLT scripts/git_sync.sh --push-only
             echo "✅ Phase-1-Commit: Artikel (oder Entwurf) veröffentlicht"
-            echo "ARTIKEL_ERSTELLT=true" >> "$GITHUB_ENV"
           else
             echo "Kein neuer Artikel – nichts zu committen."
             echo "ARTIKEL_ERSTELLT=false" >> "$GITHUB_ENV"
@@ -262,8 +259,7 @@ jobs:
             echo "Keine Qualitäts-Fixes."
           else
             git commit -m "content: Qualitäts-Fixes (Rechtschreibung, Grammatik, Cover, Polish)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
+            scripts/git_sync.sh --push-only
             echo "✅ Folge-Commit: Qualitäts-Fixes gepusht"
           fi
 
@@ -292,8 +288,7 @@ jobs:
             echo "Keine Optimierungs-Änderungen."
           else
             git commit -m "content: neuer Artikel sofort optimiert (Meta, interne Verlinkung)"
-            git pull --rebase --autostash origin main 2>/dev/null || git rebase --abort 2>/dev/null || true
-            git push
+            scripts/git_sync.sh --push-only
             echo "✅ Optimierungs-Commit gepusht"
           fi
 
