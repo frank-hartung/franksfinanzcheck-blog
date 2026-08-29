@@ -129,7 +129,7 @@ Sollte der Vermieter Wochen nach dem Urlaub plötzlich Beträge für "angebliche
 
 Einen Mietwagen ohne Kaution zu buchen ist im Ausland selten möglich, aber du kannst die Kaution durch kluge Tarifwahl auf 100 € bis 300 € drücken und das Risiko auf null stellen. Die drei wichtigsten Regeln lauten: **Vergleiche online, buche mit Vollkasko ohne Selbstbeteiligung und lehne Zusatzverkäufe am Schalter konsequent ab.** Dann steht einem entspannten Urlaub ohne böse Überraschungen nichts mehr im Weg.
 
-**Weiterlesen:** Geld sparen im Alltag: Einfache Tipps · [Pillar: Mietwagen & Reisen](../../pillar/mietwagen/) · [Reisekrankenversicherung: Was wirklich schützt](/go/reisekrankenversicherung/)
+**Weiterlesen:** Geld sparen im Alltag: Einfache Tipps · [Pillar: Mietwagen & Reisen](../../pillar/mietwagen/) · [Reisekranken­versicherung: Was wirklich schützt](/go/reisekrankenversicherung/)
 
 ## Häufige Fragen
 

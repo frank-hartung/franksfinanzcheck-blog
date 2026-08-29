@@ -98,15 +98,39 @@ def chunk_text(text, size=MAX_CHUNK):
     return chunks
 
 
+SHY = "\u00ad"   # weiche Trennstelle aus scripts/umbruch_guard.py
+
+
+def strip_shy(text):
+    """Entfernt weiche Trennstellen (U+00AD) für den LanguageTool-Check.
+
+    LanguageTool würde „Verbraucher\u00adschlichtungsstelle“ sonst als zwei
+    Wörter lesen („schlichtungs“ = unbekannt) und falsch „korrigieren“.
+    Rückgabe: (sauberer Text, Offset-Tabelle zurück in den Originaltext).
+    Ist keine Trennstelle enthalten, bleibt der Text unverändert (table=None).
+    """
+    if SHY not in text:
+        return text, None
+    chars, table = [], []
+    for i, ch in enumerate(text):
+        if ch == SHY:
+            continue
+        chars.append(ch)
+        table.append(i)
+    table.append(len(text))
+    return "".join(chars), table
+
+
 def lt_check(text, whitelist):
     """LanguageTool-Check eines Texts. Liefert Liste von Matches (gefiltert)."""
     if not text.strip():
         return []
     results = []
     for chunk in chunk_text(text):
+        chunk_lt, table = strip_shy(chunk)   # U+00AD raus, Offsets gerettet
         data = urllib.parse.urlencode({
             "language": "de-DE",
-            "text": chunk,
+            "text": chunk_lt,
             "enabledOnly": "false",
         }).encode()
         req = urllib.request.Request(API_URL, data=data,
@@ -126,7 +150,10 @@ def lt_check(text, whitelist):
                 continue
             offset = m.get("offset", 0)
             length = m.get("length", 0)
-            word = chunk[offset:offset + length]
+            word = chunk_lt[offset:offset + length]
+            if table:  # Offsets zurück in den Originaltext rechnen
+                end = min(offset + length, len(chunk_lt))
+                offset, length = table[offset], max(table[end] - table[offset], length)
             # Whitelist: Wort ignorieren
             wl_key = word.lower().strip(".,;:!?")
             if wl_key in whitelist:

@@ -32,7 +32,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Warum eine Gaspreisgarantie für 2026 so entscheidend ist
 
-Die Gasrechnung setzt sich aus mehreren variablen Bausteinen zusammen: der eigentlichen Energiebeschaffung, den Netzentgelten für den Gastransport, Steuern, Abgaben sowie der nationalen CO2-Abgabe nach dem Brennstoffemissionshandelsgesetz. Während Stadtwerke in der Grundversorgung Preisänderungen mit einer Vorlauffrist von sechs Wochen an die Verbraucher weitergeben dürfen, friert ein Festpreisvertrag die Kosten für die vereinbarte Vertragslaufzeit ein.
+Die Gasrechnung setzt sich aus mehreren variablen Bausteinen zusammen: der eigentlichen Energiebeschaffung, den Netzentgelten für den Gastransport, Steuern, Abgaben sowie der nationalen CO2-Abgabe nach dem Brennstoffemissionshandels­gesetz. Während Stadtwerke in der Grundversorgung Preisänderungen mit einer Vorlauffrist von sechs Wochen an die Verbraucher weitergeben dürfen, friert ein Festpreisvertrag die Kosten für die vereinbarte Vertragslaufzeit ein.
 
 ### Die wichtigsten Vorteile auf einen Blick:
 - **Budget-Klarheit:** Deine monatlichen Abschlagszahlungen bleiben während der gesamten Erstlaufzeit auf den Cent genau stabil.
@@ -98,7 +98,7 @@ Bei einer vollumfänglichen oder eingeschränkten Preisgarantie umfasst der Schu
 Du kannst bereits drei bis sechs Monate vor Ablauf deines bestehenden Vertrags einen neuen Tarif abschließen und den Lieferbeginn vordatieren lassen.
 
 ### Kann die Gaszufuhr beim Wechsel unterbrochen werden?
-Nein. Die unterbrechungsfreie Belieferung ist durch das Energiewirtschaftsgesetz rechtlich zu 100 % abgesichert.
+Nein. Die unterbrechungsfreie Belieferung ist durch das Energiewirtschafts­gesetz rechtlich zu 100 % abgesichert.
 
 ### Was ist der Unterschied zwischen Kilowattstunden und Kubikmetern?
 Der Gaszähler misst das Volumen in Kubikmetern (m³). Auf der Rechnung wird dieser Wert über den Brennwert und die Zustandszahl in Kilowattstunden (kWh) umgerechnet.

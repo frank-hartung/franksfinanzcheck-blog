@@ -80,7 +80,7 @@ Geld auf dem Girokonto wird nicht nur durch Gebühren, sondern auch durch die In
 Steht eine größere Anschaffung, ein Autokauf oder eine Umschuldung eines teuren Dispokredits an, ist ein unabhängiger Kreditvergleich unverzichtbar. Die Zinsunterschiede zwischen der Hausbank und dem günstigsten Online-Anbieter betragen bei einem Kredit von 10.000&nbsp;€ oft über 500&nbsp;€ bis 1.000&nbsp;€ an reinen Zinskosten.
 
 * **Verwendungszweck angeben:** Zweckgebundene Kredite (z.&nbsp;B. für ein Auto) sind deutlich günstiger als Kredite zur freien Verwendung.
-* **Sondertilgungsmöglichkeiten prüfen:** Wähle Verträge mit kostenlosen Sondertilgungsrechten, um den Kredit jederzeit schneller abbezahlen zu können.
+* **Sonder­tilgungsmöglichkeiten prüfen:** Wähle Verträge mit kostenlosen Sondertilgungsrechten, um den Kredit jederzeit schneller abbezahlen zu können.
 * **Schufa-neutrale Konditionsanfrage:** Seriöse Vergleichsrechner führen nur Konditionsanfragen durch, die deinen Schufa-Score nicht belasten.
 
 👉 **Ratenkredite neutral und Schufa-frei vergleichen:** [**→ Jetzt Kreditangebote prüfen**](/go/kredit/)

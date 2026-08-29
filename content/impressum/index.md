@@ -9,9 +9,9 @@ showToc: false
 
 **Betreiber und Diensteanbieter dieser Website:**
 
-Frank Hartung
-Karl-Marx-Str. 13
-19376 Ruhner Berge OT Marnitz
+Frank Hartung<br>
+Karl-Marx-Str. 13<br>
+19376 Ruhner Berge OT Marnitz<br>
 Deutschland
 
 **Kontakt:**
@@ -19,9 +19,9 @@ Deutschland
 
 ## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
 
-Frank Hartung
-Karl-Marx-Str. 13
-19376 Ruhner Berge OT Marnitz
+Frank Hartung<br>
+Karl-Marx-Str. 13<br>
+19376 Ruhner Berge OT Marnitz<br>
 Deutschland
 
 ---
@@ -52,9 +52,9 @@ Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unt
 
 Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Solltest du trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
 
-## Verbraucherstreitbeilegung / Universalschlichtungsstelle
+## Verbraucher­streit­beilegung / Universal­schlichtungs­stelle
 
-Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen (§ 36 Abs. 1 VSBG).
+Wir sind nicht bereit und nicht verpflichtet, an Streit­beilegungs­verfahren vor einer Verbraucher­schlichtungs­stelle teilzunehmen (§ 36 Abs. 1 VSBG).
 
 ---
 

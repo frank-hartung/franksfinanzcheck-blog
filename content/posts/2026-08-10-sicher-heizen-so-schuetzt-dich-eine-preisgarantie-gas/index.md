@@ -42,7 +42,7 @@ Um den genauen Leistungsumfang einer Garantie zu beurteilen, hilft ein Blick auf
 
 1. **Beschaffung und Vertrieb (ca. 45–55 %):** Die eigentlichen Kosten für den Einkauf des Erdgases und den Kundenservice des Versorgers. Genau diesen Hauptanteil sichert jede seriöse Preisgarantie verbindlich ab.
 2. **Netzentgelte und Messstellenbetrieb (ca. 20–25 %):** Staatlich regulierte Gebühren für die Instandhaltung der Leitungsnetze und die Bereitstellung des Zählers.
-3. **Steuern, gesetzliche Umlagen und CO2-Preis (ca. 25–30 %):** Abgaben wie Erdgassteuer, Konzessionsabgaben, Mehrwertsteuer und der CO2-Aufschlag nach dem Brennstoffemissionshandelsgesetz.
+3. **Steuern, gesetzliche Umlagen und CO2-Preis (ca. 25–30 %):** Abgaben wie Erdgassteuer, Konzessionsabgaben, Mehrwertsteuer und der CO2-Aufschlag nach dem Brennstoffemissionshandels­gesetz.
 
 ## Eingeschränkte vs. volle Gaspreisgarantie im Vergleich
 
@@ -100,7 +100,7 @@ Erhöht ein Anbieter außerhalb der Garantiebedingungen die Preise (oder steigen
 Für die meisten Haushalte ist eine Laufzeit von 12 Monaten ideal. So bist du für die gesamte Heizperiode abgesichert und kannst nach einem Jahr erneut die Konditionen vergleichen.
 
 ### Kann die Gasversorgung beim Anbieterwechsel unterbrochen werden?
-Nein, die unterbrechungsfreie Belieferung mit Gas ist in Deutschland gesetzlich durch die Grundversorgungsverordnung garantiert. Es besteht zu keinem Zeitpunkt die Gefahr, dass die Heizung kalt bleibt.
+Nein, die unterbrechungsfreie Belieferung mit Gas ist in Deutschland gesetzlich durch die Grundversorgungs­verordnung garantiert. Es besteht zu keinem Zeitpunkt die Gefahr, dass die Heizung kalt bleibt.
 
 ### Wann ist der beste Zeitpunkt für den Gasanbieterwechsel?
 Der Spätsommer (August bis Oktober) ist der optimale Zeitpunkt. So stellst du vor Beginn der kühlen Monate sicher, dass dein günstiger Tarif mit Preisgarantie aktiv ist.
