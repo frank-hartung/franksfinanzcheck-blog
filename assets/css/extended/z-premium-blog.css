@@ -498,3 +498,97 @@ button:focus-visible {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
+
+/* ==========================================================================
+   Premium line breaking: never leave a single word alone on the last line
+   --------------------------------------------------------------------------
+   balance -> short, self-contained blocks (headings, FAQ questions, teasers):
+              distributes the words evenly across all lines.
+   pretty  -> running text: prevents orphans (one word alone in the last line).
+
+   Problem this solves: the FAQ question "Kann beim Wechsel von Strom, Gas
+   oder DSL die Versorgung unterbrochen werden?" wrapped so that "werden?"
+   was left dangling on the last line - and it did not line up with "Kann".
+
+   The misalignment has a second, structural cause: every browser applies
+       summary { display: list-item; list-style: disclosure-closed inside; }
+   With list-style-position "inside" the triangle sits INSIDE the first line,
+   so the first line starts behind the marker while every following line
+   starts at the text edge - i.e. one marker width further left. The block
+   below rebuilds the summary as a flex row, which puts the marker beside the
+   text: all lines then start at exactly the same x position.
+
+   Both text-wrap properties are progressive enhancement. Browsers without
+   support keep the current behaviour (graceful degradation), which is why the
+   FAQ questions additionally carry hard spaces (see layouts/pillar/list.html).
+   Reference: https://developer.mozilla.org/docs/Web/CSS/text-wrap
+   ========================================================================== */
+
+/* Short, self-contained blocks -> even lines */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dt,
+summary,
+figcaption,
+blockquote,
+.post-title,
+.entry-title,
+.post-description {
+  text-wrap: balance;
+}
+
+/* Running text -> no orphan on the last line */
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+/* FAQ answers: in the pillar template they are bare <div>, not <p>,
+   so they need their own rule.
+   .toc is excluded on purpose: that is the table of contents, and its
+   summary stays exactly as the theme renders it. */
+details:not(.toc) > div {
+  text-wrap: pretty;
+}
+
+/* --------------------------------------------------------------------------
+   Multi-line FAQ questions: every line starts at the same x position.
+   Previously the browser default (list-style-position: inside) pushed the
+   second line to the left of the first word.
+   :not(.toc) keeps the table of contents untouched - short texts and FAQ
+   blocks are the only ones that need this, and the ToC has its own styling.
+   -------------------------------------------------------------------------- */
+details:not(.toc) > summary {
+  display: flex;
+  align-items: flex-start;
+  gap: .55em;
+  list-style: none;
+  text-wrap: balance;
+}
+
+/* Remove the native disclosure triangle in every engine */
+details:not(.toc) > summary::-webkit-details-marker {
+  display: none;
+}
+
+details:not(.toc) > summary::marker {
+  content: "";
+}
+
+/* Own triangle: sits beside the text, rotates when the answer opens */
+details:not(.toc) > summary::before {
+  content: "▸";
+  flex: 0 0 auto;
+  color: #0E5A43;
+  opacity: .8;
+  transition: transform .18s ease;
+}
+
+details:not(.toc)[open] > summary::before {
+  transform: rotate(90deg);
+}
