@@ -34,6 +34,12 @@ Alle Affiliate-Links sind als Werbung gekennzeichnet. Die redaktionellen Inhalte
 
 ---
 
+## Hinweis zu KI-unterstützten Inhalten
+
+Dieser Blog nutzt KI-Werkzeuge (generative KI) als Unterstützung bei der Erstellung von Artikeln, Grafiken und Cover-Bildern. Alle Inhalte werden vor der Veröffentlichung vom Betreiber redaktionell geprüft und freigegeben; die inhaltliche Verantwortung für das Veröffentlichte liegt beim Betreiber. Die KI-Unterstützung wird hiermit im Sinne der Transparenzanliegen der EU-KI-Verordnung (Verordnung (EU) 2024/1689, Art. 50 – anwendbar seit 2. August 2026) offen ausgewiesen. Auf dieser Website selbst kommt keine KI zum Einsatz, die direkt mit Besuchern interagiert (insbesondere kein Chatbot).
+
+---
+
 ## Haftung für Inhalte
 
 Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
@@ -58,4 +64,4 @@ Wir sind nicht bereit und nicht verpflichtet, an Streit­beilegungs­verfahren v
 
 ---
 
-*Stand: August 2026*
+*Stand: 30. August 2026*

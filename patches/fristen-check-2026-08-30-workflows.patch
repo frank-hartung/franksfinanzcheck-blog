@@ -1,0 +1,101 @@
+diff --git a/.github/workflows/alert-on-failure.yml b/.github/workflows/alert-on-failure.yml
+index 35493c9..4c392e1 100644
+--- a/.github/workflows/alert-on-failure.yml
++++ b/.github/workflows/alert-on-failure.yml
+@@ -36,6 +36,7 @@ on:
+       - "Willkommenstext-Refresh"     # SEO-Unique-Content-Automatik Startseite (14.08.)
+       - "Blog-Gesundheits-Check (täglich)"   # tägliche Selbstheilung – hatte kein eigenes Alerting
+       - "Uptime-Monitor"         # PREM-AUDIT: Site-Ausfall nur per Zufall bemerkt
++      - "Fristen-Check (Recht)"  # PREM-AUDIT: Rechts-Fristen/Erinnerungen liefen still
+       - "Mastodon-Profil-Sync"   # PREM-AUDIT: Social-Kanal still
+       - "Mastodon-SEO"           # PREM-AUDIT: Social-Kanal still
+       - "Offsite-Backup"         # PREM-AUDIT: Backup-Versagen wäre still fatal
+diff --git a/.github/workflows/fristen-check.yml b/.github/workflows/fristen-check.yml
+new file mode 100644
+index 0000000..55633d1
+--- /dev/null
++++ b/.github/workflows/fristen-check.yml
+@@ -0,0 +1,83 @@
++# ============================================================
++#  FRISTEN-CHECK (RECHT) – kostenloses Erinnerungssystem
++#  Fristen-Check + Issue-Eskalation
++#
++#  Prüft TÄGLICH (07:55 MESZ):
++#    1. Fristen aus data/recht-fristen.yaml
++#       (Rechtstexte-Halbjahrescheck, KI-VO-Kennzeichnung 02.12.2026,
++#        DPF-Zertifizierung, Affiliate-Partnerbedingungen,
++#        Rechtslage-Screening, BFSG-Bewertung)
++#         → Erinnerungs-Issue (Label `frist`) bei Fälligkeits-Nähe
++#         → Eskalation (Label `frist-eskalation` + Kommentar)
++#           am Stichtag, nach 14 und nach 30 Tagen
++#    2. Sofort-Prüfungen:
++#         → Veraltungs-Scan (TMG/TTDSG/OS-Plattform-Reste im Content)
++#         → Stand-Alter von Impressum & Datenschutz (max. 12 Monate)
++#    3. Schreibt FRISTEN-REPORT.md + data/fristen_state.json
++#
++#  ERLEDIGT MARKIEREN:
++#    Actions → "Fristen-Check (Recht)" → Run workflow →
++#    Eingabe `erledigt=<frist-id>` (mehrere mit Komma) →
++#    Frist wird neu terminiert, Issue automatisch geschlossen.
++#
++#  Manuell: wie oben ohne Eingabe = sofortiger Check-Lauf.
++# ============================================================
++name: Fristen-Check (Recht)
++
++on:
++  schedule:
++    - cron: "55 5 * * *"    # täglich 07:55 MESZ (06:55 MEZ im Winter)
++  workflow_dispatch:
++    inputs:
++      erledigt:
++        description: "Frist-ID(s) als erledigt markieren (kommagetrennt, z. B. dpf-zertifizierung-pruefen)"
++        required: false
++        default: ""
++      nur_scan:
++        description: "Nur Sofort-Prüfungen (Veraltungs-Scan + Stand-Alter)"
++        type: boolean
++        required: false
++        default: false
++
++permissions:
++  contents: write
++  issues: write
++
++concurrency:
++  group: fristen-check
++  cancel-in-progress: false
++
++jobs:
++  fristen:
++    runs-on: ubuntu-latest
++    timeout-minutes: 10
++    steps:
++      - name: Repository auschecken
++        uses: actions/checkout@v4
++
++      - name: Python-Abhängigkeiten installieren
++        run: python3 -m pip install -q pyyaml
++
++      - name: Fristen prüfen + Issues eskalieren
++        env:
++          GH_TOKEN: ${{ github.token }}
++          GITHUB_REPOSITORY: ${{ github.repository }}
++          FRISTEN_DONE: ${{ github.event.inputs.erledigt }}
++          FRISTEN_SCAN_ONLY: ${{ github.event.inputs.nur_scan }}
++        run: |
++          ARGS=""
++          if [ -n "$FRISTEN_DONE" ]; then ARGS="$ARGS --done $FRISTEN_DONE"; fi
++          if [ "$FRISTEN_SCAN_ONLY" = "true" ]; then ARGS="$ARGS --scan-only"; fi
++          python3 scripts/fristen_check.py $ARGS
++
++      - name: Report & State committen
++        run: |
++          git config user.name "Fristen-Bot"
++          git config user.email "fristen-bot@users.noreply.github.com"
++          git add FRISTEN-REPORT.md data/recht-fristen.yaml data/fristen_state.json
++          if git diff --cached --quiet; then
++            echo "Keine Fristen-Änderungen – kein Commit nötig."
++          else
++            git commit -m "chore: Fristen-Report aktualisiert [skip ci]"
++            scripts/git_sync.sh --push-only
++          fi
