@@ -110,6 +110,39 @@ curl -sI http://franksfinanzcheck.de | grep -iE "^HTTP|location"
 curl -s https://franksfinanzcheck.de/ | grep -o "v=[a-f0-9]\{7\}" | head -1
 ```
 
+## 6. Rechts-Fristen-Erinnerungssystem (30.08.2026)
+
+```
+data/recht-fristen.yaml          # Fristen-Kalender (redaktionell gepflegt)
+data/fristen_state.json          # Erledigungen + Issue-/Eskalations-Marker (Bot)
+scripts/fristen_check.py         # Auswertung + Scan + Eskalation
+.github/workflows/fristen-check.yml   # täglich 07:55 MESZ – LIEGT ALS PATCH BEREIT:
+patches/fristen-check-2026-08-30-workflows.patch  # (Agent-Token ohne workflows-Scope;
+                                   #  einmalig anwenden + committen, dann aktiv)
+FRISTEN-REPORT.md                # generierter Status-Report
+```
+
+- **Fristen:** Rechtstexte-Halbjahrescheck (Generator-Abgleich eRecht24 Basis /
+  Dr. Schwenke), KI-VO-Kennzeichnung Bestandssysteme (02.12.2026),
+  DPF-Zertifikats-Check GitHub/Cloudflare (quartalsweise),
+  Affiliate-Partnerbedingungen (quartalsweise), Rechtslage-Screening
+  (quartalsweise), BFSG-Scope-Bewertung (einmalig).
+- **Eskalation:** GitHub-Issues, Label `frist` (Erinnerung, ab konfigurierter
+  Fälligkeits-Nähe) → `frist-eskalation` (am Stichtag, +14 Tage, +30 Tage –
+  jeweils genau ein Kommentar, Marker im State-File).
+- **Sofort-Prüfungen täglich:** Veraltungs-Scan der Live-Verzeichnisse
+  (content/, layouts/, static/) nach TMG/TTDSG/OS-Plattform/Privacy-Shield/
+  Safe-Harbor-Resten (Fund = hartes Eskalations-Issue) + Stand-Alter der
+  Rechtstexte (max. 365 Tage).
+- **Erledigen:** Workflow „Fristen-Check (Recht)" manuell starten mit
+  `erledigt=<frist-id>` → Frist neu terminiert, Issue geschlossen.
+  (Nur Issue schließen genügt nicht – Bot legt sonst neu an, gewollt.)
+- **Fail-Safety:** Der Workflow selbst steht in der zentralen
+  Fehler-Alerting-Liste (alert-on-failure.yml). Fristen-Überschreitung
+  erzeugt bewusst KEINEN roten Run, sondern eigene Issues (klare Trennung
+  Technik-Fehler vs. fachliche Frist).
+- **Doku:** Abgleich-Historie der Rechtstexte: `RECHT-UPDATE-REPORT.md`.
+
 ---
 
 *Diese Datei ist die maßgebliche Referenz. Änderungen an der Infrastruktur

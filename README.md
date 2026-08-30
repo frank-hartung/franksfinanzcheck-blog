@@ -282,6 +282,11 @@ DEMO_MODE=1 python3 scripts/generate_drafts.py   # erzeugt Test-Entwurf
 - [ ] **Steuer** – Provisionen sind Einkünfte (Steuererklärung!)
 - [ ] **Marke:** keine Domain mit „check24" im Namen verwenden
 
+**Rechtstexte-Status (30.08.2026):** Impressum + Datenschutz auf Generator-Niveau aktuell (Abgleich gegen eRecht24 Basis 1.50 – Diffs & Begründungen: `RECHT-UPDATE-REPORT.md`). Neu seit 30.08.: Drittlandtransfer USA über **EU-US Data Privacy Framework** (Art. 45 DSGVO) für GitHub Pages/Cloudflare, **KI-Transparenzhinweis** (Art. 50 EU-KI-VO, seit 02.08.2026) im Impressum.
+
+**⏰ Fristen-Erinnerungssystem (kostenlos, eingebaut 30.08.2026):** `data/recht-fristen.yaml` + `scripts/fristen_check.py` + Workflow „Fristen-Check (Recht)" (täglich 07:55 MESZ) erinnern an Rechts-Fristen (Halbjahres-Rechtstexte-Abgleich, KI-VO-Kennzeichnung 02.12.2026, DPF-Zertifikats-Check, Partnerbedingungen, Rechtslage-Screening) und eskalieren über GitHub-Issues (`frist` → `frist-eskalation`, Stufen +0/+14/+30 Tage). Zusätzlich täglicher Veraltungs-Scan (TMG/TTDSG/OS-Plattform-Reste) + Stand-Alter-Prüfung der Rechtstexte. Aktueller Stand: `FRISTEN-REPORT.md`. Erledigen: Actions → „Fristen-Check (Recht)" → Run workflow → `erledigt=<frist-id>`.
+**Workflow-Anbindung als Patch bereit** (Push durch Agent-Token ohne `workflows`-Scope blockiert, gleiche Situation wie Heading-Gate 27.08.): `patches/fristen-check-2026-08-30-workflows.patch` – einmalig einspielen mit `git apply patches/fristen-check-2026-08-30-workflows.patch && git add .github && git commit -m "ci: Fristen-Check-Workflow" && git push` (lokal oder mit vollwertigem Token). Bis dahin läuft der Check manuell: `python3 scripts/fristen_check.py` (Issue-Eskalation mit `GH_TOKEN` gesetzt).
+
 ---
 
 ## 🔍 SEO-Checkliste nach dem Launch

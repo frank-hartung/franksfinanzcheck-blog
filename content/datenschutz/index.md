@@ -31,13 +31,17 @@ Diese Website nutzt **Affiliate-Partnerprogramme** (CHECK24, Tarifcheck) sowie e
 
 ### Hosting
 
-Diese Website wird bei einem externen Dienstleister gehostet: **GitHub Pages** (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA), erreichbar unter **franksfinanzcheck.de**. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. GitHub unterhält Serverstandorte auch außerhalb der EU; eine Verarbeitung der IP-Adresse kann daher außerhalb der EU (insbesondere in den USA) erfolgen. Mit dem Hoster besteht eine Auftragsverarbeitungsvereinbarung (Standard­vertrags­klauseln gemäß Art. 46 DSGVO).
+Diese Website wird bei einem externen Dienstleister gehostet: **GitHub Pages** (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA), erreichbar unter **franksfinanzcheck.de**. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. GitHub unterhält Serverstandorte auch außerhalb der EU; eine Verarbeitung der IP-Adresse kann daher außerhalb der EU (insbesondere in den USA) erfolgen.
+
+Der Datentransfer in die USA ist rechtlich abgesichert: **GitHub ist unter dem EU-US Data Privacy Framework (DPF) zertifizert.** Die EU-Kommission hat für DPF-zertifizierte Unternehmen mit Beschluss vom 10.07.2023 ein angemessenes Datenschutzniveau im Sinne von **Art. 45 DSGVO** festgestellt (Bestätigung durch das Gericht der EU vom 03.09.2025, Rs. T-553/23 „Latombe"). Der aktuelle Zertifizierungsstatus ist öffentlich einsehbar unter [dataprivacyframework.gov](https://www.dataprivacyframework.gov/). Zusätzlich besteht mit dem Hoster ein **Auftragsverarbeitungs­vertrag (AVV) gemäß Art. 28 DSGVO**.
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren, stabilen und effizienten Bereitstellung der Website). Mit dem Hoster wird ein **Auftragsverarbeitungs­vertrag (AVV)** gemäß Art. 28 DSGVO geschlossen.
 
 ### Content-Delivery-Network (Cloudflare)
 
-Zur Auslieferung der Website wird das Content-Delivery-Network (CDN) **Cloudflare** (Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA) eingesetzt. Beim Abruf einer Seite wird deine IP-Adresse sowie technische Daten (Browsertyp, Betriebssystem, Referrer, Uhrzeit der Anfrage) an die Server von Cloudflare übermittelt. Cloudflare betreibt Serverstandorte weltweit; eine Verarbeitung der IP-Adresse kann daher auch außerhalb der EU (insbesondere in den USA) erfolgen. Cloudflare bietet ein Datenverarbeitungsabkommen an und verarbeitet die Daten nach eigenen Angaben ausschließlich zur Auslieferung der angeforderten Inhalte und zur Fehleranalyse – nicht zu Werbezwecken.
+Zur Auslieferung der Website wird das Content-Delivery-Network (CDN) **Cloudflare** (Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA) eingesetzt. Beim Abruf einer Seite wird deine IP-Adresse sowie technische Daten (Browsertyp, Betriebssystem, Referrer, Uhrzeit der Anfrage) an die Server von Cloudflare übermittelt. Cloudflare betreibt Serverstandorte weltweit; eine Verarbeitung der IP-Adresse kann daher auch außerhalb der EU (insbesondere in den USA) erfolgen.
+
+Auch hier ist der Datentransfer in die USA abgesichert: **Cloudflare ist unter dem EU-US Data Privacy Framework (DPF) zertifiziert**, sodass die Übermittlung auf den Angemessenheitsbeschluss der EU-Kommission vom 10.07.2023 (**Art. 45 DSGVO**) gestützt werden kann (Status prüfbar unter [dataprivacyframework.gov](https://www.dataprivacyframework.gov/)). Cloudflare verarbeitet die Daten nach eigenen Angaben ausschließlich zur Auslieferung der angeforderten Inhalte und zur Fehleranalyse – nicht zu Werbezwecken.
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer schnellen und zuverlässigen Auslieferung der Website-Inhalte). Weitere Informationen: [www.cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/).
 
@@ -235,4 +239,6 @@ Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne des 
 
 ## 15. Aktualität und Änderung dieser Datenschutzerklärung
 
-Diese Datenschutzerklärung ist aktuell gültig (**Stand: August 2026**). Durch die Weiterentwicklung dieser Website oder aufgrund geänderter gesetzlicher bzw. behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern. Die jeweils aktuelle Fassung findest du jederzeit auf dieser Seite.
+Diese Datenschutzerklärung ist aktuell gültig (**Stand: 30. August 2026**). Durch die Weiterentwicklung dieser Website oder aufgrund geänderter gesetzlicher bzw. behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern. Die jeweils aktuelle Fassung findest du jederzeit auf dieser Seite.
+
+**Letzte Überarbeitung:** 30. August 2026 – Drittlandtransfer in die USA auf das EU-US Data Privacy Framework (Art. 45 DSGVO) für GitHub Pages und Cloudflare umgestellt; Impressum um KI-Transparenzhinweis (Art. 50 EU-KI-VO) ergänzt.

@@ -1,0 +1,167 @@
+# ============================================================
+#  RECHTS-FRISTENKALENDER (Quelle für scripts/fristen_check.py)
+#
+#  Wofür? Rechtspflichten und Best-Practice-Intervalle dieses
+#  Affiliate-Blogs (Impressum, Datenschutz, KI-VO, DPF,
+#  Partnerprogramme) werden nie "fertig" – sie müssen regelmäßig
+#  geprüft werden. Dieses File definiert WANN.
+#
+#  Wie funktioniert der Zyklus?
+#    1. .github/workflows/fristen-check.yml läuft TÄGLICH (07:55 MESZ)
+#    2. scripts/fristen_check.py wertet diese Datei aus:
+#         - Erinnerung  (Label `frist`, grünes Issue)  → ab `erinnerung_ab_tage` vor Fälligkeit
+#         - Eskalation  (Label `frist-eskalation`, rot) → am Stichtag, nach 14 und nach 30 Tagen
+#       Zusätzlich täglich: Veraltungs-Scan (TMG/TTDSG/OS-Plattform-Reste)
+#       und Stand-Alter der Rechtstexte (max. 12 Monate).
+#    3. Erledigt? GitHub → Actions → "Fristen-Check (Recht)" →
+#       "Run workflow" → Eingabe `erledigt=<Frist-ID>` (mehrere mit Komma).
+#       Dann wird die Frist neu terminiert (Intervall) bzw. abgeschlossen
+#       (einmalig) und das offene Issue automatisch geschlossen.
+#
+#  WICHTIG: Erledigungs-Daten stehen NICHT hier, sondern in
+#  data/fristen_state.json (wird vom Skript verwaltet) – damit
+#  die Kommentare dieser Datei erhalten bleiben.
+# ============================================================
+
+fristen:
+
+  # ------------------------------------------------------------
+  # 1) Rechtstexte halbjährlich gegen kostenlosen Generator abgleichen
+  #    (eRecht24 Basis-Generator, kostenloser Dr.-Schwenke-Generator)
+  # ------------------------------------------------------------
+  - id: rechtstexte-halbjahrescheck
+    titel: "Rechtstexte-Abgleich mit kostenlosem Generator (eRecht24 Basis / Dr. Schwenke)"
+    kategorie: "Rechtstexte"
+    beschreibung: >
+      Impressum und Datenschutzerklärung im kostenlosen Generator neu
+      erzeugen, mit dem Live-Stand abgleichen und Deltas übernehmen.
+      Erinnerung an den RECHT-UPDATE-REPORT.md (Doku der letzten Diffs).
+    faellig_am: "2027-02-28"          # 30.08.2026 + 182 Tage
+    intervall_tage: 182
+    erinnerung_ab_tage: 21
+    eskalation_nach_tagen: [0, 14, 30]
+    checkliste:
+      - "eRecht24 Basis-Generator (e-recht24.de, kostenlos) mit den echten Profildaten ausfüllen: Frank Hartung, Karl-Marx-Str. 13, 19376 Ruhner Berge OT Marnitz, frankhartung@web.de"
+      - "Alternativ/ergänzend: kostenloser Dr.-Schwenke-Generator (dr-schwenke.de)"
+      - "Impressum-Diff gegen content/impressum/index.md (nur Deltas übernehmen, Struktur/Anker erhalten)"
+      - "Datenschutz-Diff gegen content/datenschutz/index.md (Hosting/CDN/Fonts/Umami/Consent/Affiliate-Abschnitte sind standortspezifisch!)"
+      - "Stand-Datum in beiden Seiten erneuern + Überarbeitungszeile ergänzen"
+      - "Änderungen + Begründung in RECHT-UPDATE-REPORT.md dokumentieren"
+      - "Deploy abwarten und Live-Seite stichprobenartig prüfen"
+
+  # ------------------------------------------------------------
+  # 2) EU-KI-VO Art. 50 – maschinenlesbare Kennzeichnung
+  #    (Übergangsfrist für Bestandssysteme bis 02.12.2026)
+  # ------------------------------------------------------------
+  - id: ki-vo-kennzeichnung-bestand
+    titel: "KI-VO: maschinenlesbare KI-Kennzeichnung für Bestandssysteme (Frist 02.12.2026)"
+    kategorie: "KI-Verordnung"
+    beschreibung: >
+      Seit 02.08.2026 gelten die Transparenzpflichten nach Art. 50
+      EU-KI-VO; für Systeme, die schon vorher im Einsatz waren, gilt
+      für die MASCHINENLESBARE Kennzeichnung synthetischer Inhalte eine
+      Nachfrist bis 02.12.2026. Der Blog erzeugt Artikel/Grafiken
+      KI-gestützt → bewerten, ob über den Impressum-Hinweis (vorhanden
+      seit 30.08.2026) hinaus ein maschinenlesbares Signal nötig/sinnvoll
+      ist (z. B. Meta-Angabe im Artikel-Template oder Kennzeichnung im
+      Footer). Kein Chatbot im Einsatz → Art. 50 Abs. 1 nicht einschlägig.
+    faellig_am: "2026-12-02"
+    einmalig: true
+    erinnerung_ab_tage: 30
+    eskalation_nach_tagen: [0, 14, 30]
+    checkliste:
+      - "Rechtslage-Stand prüfen (e-recht24.de News / IT-Recht-Kanzlei): Kennzeichnungspflicht für redaktionell geprüfte Ratgeber-Texte aktuell?"
+      - "Entscheiden: reicht der Impressum-Hinweis (Status quo) oder Artikel-/Footer-Kennzeichnung ergänzen?"
+      - "Falls ja: Hinweis-Partial/Shortcode im Theme ergänzen und auf KI-generierte Bilder (Covers) anwenden"
+      - "Ergebnis im RECHT-UPDATE-REPORT.md festhalten (auch wenn: keine Änderung nötig)"
+
+  # ------------------------------------------------------------
+  # 3) EU-US Data Privacy Framework: Zertifizierung prüfen
+  #    (GitHub Pages + Cloudflare sind DPF-zertifiziert – Status kann
+  #     sich ändern; Rechtsmittel EuGH C-703/25 P anhängig)
+  # ------------------------------------------------------------
+  - id: dpf-zertifizierung-pruefen
+    titel: "DPF-Zertifizierung GitHub & Cloudflare prüfen (Datentransfer USA)"
+    kategorie: "DSGVO / Drittlandtransfer"
+    beschreibung: >
+      Die Datenschutzerklärung stützt den USA-Transfer auf den
+      Angemessenheitsbeschluss (Art. 45 DSGVO, DPF). Das trägt nur,
+      solange GitHub (Pages) und Cloudflare AKTIV zertifiziert sind.
+      Quartalsweise auf dataprivacyframework.gov prüfen; falls ein
+      Anbieter rausfällt oder das DPF gekippt wird (EuGH C-703/25 P):
+      Text auf AVV + Standardvertragsklauseln (Art. 46 DSGVO) umstellen.
+    faellig_am: "2026-11-29"          # 30.08.2026 + 91 Tage
+    intervall_tage: 91
+    erinnerung_ab_tage: 14
+    eskalation_nach_tagen: [0, 14, 30]
+    checkliste:
+      - "dataprivacyframework.gov/list → Suche 'GitHub Inc.' → Status Active?"
+      - "dataprivacyframework.gov/list → Suche 'Cloudflare Inc.' → Status Active?"
+      - "Kurz-Check: EuGH C-703/25 P (Latombe-Rechtsmittel) entschieden? → Falls DPF gekippt: Datenschutzerklärung § 2 umschreiben (AVV/SCC)"
+
+  # ------------------------------------------------------------
+  # 4) Affiliate-Partnerprogramme: Bedingungen & Werbekennzeichnung
+  # ------------------------------------------------------------
+  - id: affiliate-partnerbedingungen
+    titel: "Partnerbedingungen CHECK24 / Tarifcheck / Awin prüfen (Werbekennzeichnung)"
+    kategorie: "Affiliate / UWG"
+    beschreibung: >
+      Partnerprogramm-Bedingungen ändern sich; die Werbekennzeichnung
+      (§ 5a UWG, § 18 Abs. 3 MStV) muss stimmen. Quartalsweise die
+      Programmbedingungen in Awin/CHECK24/Tarifcheck sichten und die
+      Kennzeichnung auf Impressum, Über-Seite und in Artikeln prüfen
+      (der Affiliate-Integrity-Wache läuft täglich – hier der manuelle
+      Blick auf die Vertragsbedingungen selbst).
+    faellig_am: "2026-11-29"          # 30.08.2026 + 91 Tage
+    intervall_tage: 91
+    erinnerung_ab_tage: 14
+    eskalation_nach_tagen: [0, 14, 30]
+    checkliste:
+      - "Awin-Dashboard: CHECK24-Programmbedingungen (Provisionen, zulässige Werbung) auf Änderungen prüfen"
+      - "Tarifcheck-Partnerbereich: Bedingungen prüfen"
+      - "Stichprobe 3 Artikel: Affiliate-Links als Werbung erkennbar (CTA-Box/rel=sponsored/Kennzeichnung)?"
+      - "Impressum + Über-Seite: Programmliste noch vollständig/korrekt?"
+
+  # ------------------------------------------------------------
+  # 5) Rechtslage-Screening (Gesetzesänderungen beobachten)
+  # ------------------------------------------------------------
+  - id: rechtslage-screening
+    titel: "Rechtslage-Screening: DSGVO-Reform, KI-VO, neue Pflichten (News-Check)"
+    kategorie: "Rechtsbeobachtung"
+    beschreibung: >
+      Kurzer Screening-Check (15 Min): Gab es Änderungen, die diesen
+      Blog betreffen? Beobachtungspunkte Stand 08/2026: Digital-Omnibus-
+      Paket (geplante DSGVO-Änderungen, Verhandlungsstand), KI-VO
+      Folgeakte (Code of Practice Kennzeichnung), EuGH C-703/25 P (DPF),
+      etwaige neue Button-/Informationspflichten (Widerrufsbutton gilt
+      nur bei eigenem Online-Vertragsabschluss – Blog nicht in Scope).
+    faellig_am: "2026-11-29"          # 30.08.2026 + 91 Tage
+    intervall_tage: 91
+    erinnerung_ab_tage: 14
+    eskalation_nach_tagen: [0, 14, 30]
+    checkliste:
+      - "e-recht24.de/news + it-recht-kanzlei.de News der letzten 3 Monate überfliegen"
+      - "Betroffen? → Rechtstexte sofort anpassen (nicht auf Halbjahres-Termin warten)"
+      - "Nicht betroffen? → Issue mit 'nicht relevant, Stand <Datum>' schließen + erledigt markieren"
+
+  # ------------------------------------------------------------
+  # 6) BFSG Barrierefreiheit – einmalige Bewertung (Empfehlung)
+  # ------------------------------------------------------------
+  - id: bfsg-barrierefreiheit-bewertung
+    titel: "BFSG/Barrierefreiheit: Scope-Bewertung dokumentieren (Empfehlung)"
+    kategorie: "Barrierefreiheit"
+    beschreibung: >
+      Das Barrierefreiheitsstärkungsgesetz (seit 28.06.2025) trifft
+      v. a. E-Commerce-Dienstleistungen. Ein reiner Content-/Affiliate-
+      Blog ohne eigenen Verkaufsprozess ist nach h.M. nicht unmittelbar
+      in Scope – das sollte EINMAL begründet dokumentiert werden
+      (Absicherung + Goodwill; a11y_audit.py arbeitet ohnehin laufend
+      an der Zugänglichkeit). Reine Dokumentationsaufgabe.
+    faellig_am: "2026-10-31"
+    einmalig: true
+    erinnerung_ab_tage: 21
+    eskalation_nach_tagen: [0, 14]
+    gewicht: empfohlen
+    checkliste:
+      - "Kurz-Bewertung (3–5 Sätze) in RECHT-UPDATE-REPORT.md ergänzen: warum kein BFSG-Scope"
+      - "a11y-Status (A11Y-Report) kurz referenzieren als Goodwill-Nachweis"
