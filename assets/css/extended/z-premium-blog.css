@@ -413,6 +413,25 @@ h3:hover .ff-heading-copy,
   background: color-mix(in srgb, var(--ff-accent) 14%, transparent);
 }
 
+/* Premium hanging indent for the mini TOC: the JS splits each entry into a
+   number span and a title span (see ff-premium.js, createMiniToc). The grid
+   puts the number in its own column, so a wrapped title line starts at the
+   same x as the first word after the number - never under the number.
+   tabular-nums makes "1."..."9." equally wide, so the title column lines up
+   across all entries as well. */
+.ff-mini-toc a.ff-mini-toc--num {
+  display: grid;
+  /* fixed number column (the JS only ever lists 1.-9. here): the title column
+     starts at the same x in every entry */
+  grid-template-columns: 1.2em 1fr;
+  column-gap: .45ch;
+}
+
+.ff-mini-toc__num {
+  justify-self: end; /* numbers align on their right edge, classic TOC look */
+  font-variant-numeric: tabular-nums;
+}
+
 @media (max-width: 1240px) {
   .ff-mini-toc { display: none; }
 }

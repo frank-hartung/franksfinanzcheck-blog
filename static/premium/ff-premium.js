@@ -224,7 +224,26 @@
     var links = headings.slice(0, 9).map(function (heading) {
       var a = doc.createElement('a');
       a.href = '#' + heading.id;
-      a.textContent = heading.textContent.replace(/[§#]+/g, '').trim();
+      var label = heading.textContent.replace(/[§#]+/g, '').trim();
+      // Premium hanging indent: split the leading "N." off the label so the
+      // wrapped lines of the title align with the first word after the number
+      // (grid columns in .ff-mini-toc a.ff-mini-toc--num, see z-premium-blog.css).
+      var m = /^(\d{1,3}\.)\s+(.+)$/.exec(label);
+      if (m) {
+        a.className = 'ff-mini-toc--num';
+        a.setAttribute('aria-label', label);
+        var num = doc.createElement('span');
+        num.className = 'ff-mini-toc__num';
+        num.textContent = m[1];
+        num.setAttribute('aria-hidden', 'true');
+        var txt = doc.createElement('span');
+        txt.className = 'ff-mini-toc__txt';
+        txt.textContent = m[2];
+        a.appendChild(num);
+        a.appendChild(txt);
+      } else {
+        a.textContent = label;
+      }
       nav.appendChild(a);
       return a;
     });
