@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-08-30 16:38 UTC · Modus: FIX
+**Stand:** 2026-08-30 17:30 UTC · Modus: FIX
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
@@ -13,7 +13,6 @@
 - 🟡 [B2] 2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife: Superlativ ohne Einschränkung (ohne\s+risiko)
 - 🟡 [B2] 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet: Superlativ ohne Einschränkung (\bhöchst(?:e|er|es)\b)
-- 🟡 [B1] 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden: Keyword-Stuffing (ein Signal): Text: 'kwh' ×20 (3.8 % Dichte)
 - 🟡 [B1] 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause: Keyword-Stuffing (ein Signal): Text: 'mbit' ×18 (3.5 % Dichte)
 - 🟡 [B2] 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
