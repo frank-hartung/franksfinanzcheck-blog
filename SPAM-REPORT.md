@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-08-30 18:41 UTC · Modus: FIX
+**Stand:** 2026-08-30 19:31 UTC · Modus: FIX
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
@@ -9,7 +9,7 @@
 - 🟡 [B2] 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel: Superlativ ohne Einschränkung (\bhöchst(?:e|er|es)\b)
-- 🟡 [B1] 2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife: Keyword-Stuffing (ein Signal): Text: 'zeile' ×54 (5.9 % Dichte)
+- 🟡 [B1] 2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife: Keyword-Stuffing (ein Signal): Text: 'zeile' ×54 (7.1 % Dichte)
 - 🟡 [B2] 2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife: Superlativ ohne Einschränkung (ohne\s+risiko)
 - 🟡 [B2] 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet: Superlativ ohne Einschränkung (\bhöchst(?:e|er|es)\b)
