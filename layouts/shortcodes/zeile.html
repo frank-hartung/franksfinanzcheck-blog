@@ -1,0 +1,46 @@
+{{- /* KIND-SHORTCODE zu tarif: eine Zeile (ein Merkmal) */ -}}
+{{- $parent := .Parent -}}
+{{- if not $parent -}}
+  {{- errorf "zeile: muss innerhalb von {{< tarif >}} verwendet werden (%s)" .Position -}}
+{{- end -}}
+{{- $grand := $parent.Parent -}}
+
+{{- $label := .Get "label" -}}
+{{- $card  := .Get "card_label" | default $label -}}
+{{- $tone  := .Get "tone" | default "mid" -}}
+{{- $hl    := eq (.Get "highlight" | default "false") "true" -}}
+{{- $value := trim .Inner " \n\r\t" -}}
+
+{{- /* Zeile an den aktuellen Tarif anhängen */ -}}
+{{- $tv := $grand.Scratch.Get "tv" -}}
+{{- $ti := $grand.Scratch.Get "current_tarif_idx" -}}
+{{- $tariffs := $tv.tariffs -}}
+{{- $t := index $tariffs $ti -}}
+{{- $row := dict
+    "label"      $label
+    "card_label" $card
+    "tone"       $tone
+    "highlight"  $hl
+    "value"      $value
+-}}
+{{- $tRows := $t.rows | append $row -}}
+{{- $t = merge $t (dict "rows" $tRows) -}}
+{{- /* Slice manuell ersetzen (Hugo hat keine direkte Index-Zuweisung) */ -}}
+{{- $newTariffs := slice -}}
+{{- range $ii, $vv := $tariffs -}}
+  {{- if eq $ii $ti -}}
+    {{- $newTariffs = $newTariffs | append $t -}}
+  {{- else -}}
+    {{- $newTariffs = $newTariffs | append $vv -}}
+  {{- end -}}
+{{- end -}}
+{{- $tariffs = $newTariffs -}}
+
+{{- /* Beim ERSTEN Tarif das label in die globale labels-Liste aufnehmen
+       (andere Tarife sollten identische Zeilenreihenfolge haben). */ -}}
+{{- $labels := $tv.labels -}}
+{{- if eq $ti 0 -}}
+  {{- $labels = $labels | append $label -}}
+{{- end -}}
+
+{{- $grand.Scratch.Set "tv" (merge $tv (dict "tariffs" $tariffs "labels" $labels)) -}}

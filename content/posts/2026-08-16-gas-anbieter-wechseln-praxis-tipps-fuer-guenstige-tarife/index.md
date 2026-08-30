@@ -4,7 +4,7 @@ description: "Gas-Anbieter wechseln & im 1. Jahr bis 882 € sparen: die besten 
 date: 2026-08-28T01:05:14Z
 draft: false
 cadence_demoted: 2026-08-26T13:46:19Z
-lastmod: 2026-08-30T14:25:00Z
+lastmod: 2026-08-30T15:00:00Z
 tags: ["Gas-Anbieter wechseln", "Gastarif Vergleich", "Gaspreisgarantie", "Heizkosten senken", "Energie sparen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -60,22 +60,51 @@ Achte beim Tarifvergleich auf folgende Qualitätsmerkmale, um langfristig sicher
 
 ## Beispielrechnung: Grundversorgung vs. Wechseltarif
 
-_Musterhaushalt mit 20.000 kWh Jahresverbrauch (Einfamilienhaus, ca. 120 m², 4 Personen) · Stand: August 2026_
+{{< tarifvergleich
+    title="💰 Beispielrechnung: Grundversorgung vs. Wechseltarif"
+    subtitle="Musterhaushalt mit 20.000 kWh Jahresverbrauch (Einfamilienhaus, ca. 120 m², 4 Personen) · Stand: August 2026"
+    footnote="Der Neukunden-Bonus wird üblicherweise mit der ersten Jahresabrechnung verrechnet und gilt nur im ersten Vertragsjahr. Ab dem zweiten Jahr liegt die Ersparnis beim empfohlenen Wechseltarif bei soliden **702 € pro Jahr** – ohne jede Einschränkung. Regionale Preisunterschiede sind möglich; prüfe deinen persönlichen Tarif in unter 2 Minuten mit deiner Postleitzahl."
+    cta_url="/go/gas/" >}}
 
-| Merkmal | ❌ Grundversorgung (Stadtwerk) | ⚡ Alternativer Tarif | 🏆 **Wechseltarif (Empfehlung)** |
-|:---|:---|:---|:---|
-| Grundpreis / Monat | 14,50 € (174 €/Jahr) | 9,90 € (118,80 €/Jahr) | 11,00 € (132 €/Jahr) |
-| Arbeitspreis pro kWh | 12,80 Ct | 9,20 Ct | 9,50 Ct |
-| Jahreskosten (20.000 kWh) | **2.734 €** | **1.959 €** | **2.032 €** |
-| Neukunden-Bonus (Jahr 1) | — | — | **−180 €** |
-| **⚡ Effektivkosten 1. Jahr** | **2.734 €** | **1.959 €** | **🟢 1.852 €** |
-| **Ersparnis im 1. Jahr** | — | **−775 €** | **🟢 −882 €** |
-| Ersparnis ab dem 2. Jahr | — | **−775 €** | **−702 €** |
-| Preisgarantie | ✕ keine | ✓ 12 Monate | ✓ **12 Monate** |
-| Vertragslaufzeit | unbegrenzt | 12 Monate | **12 Monate** |
-| Jetzt vergleichen | — | [Tarife prüfen →](/go/gas/ "Weiter zu Check24 · Gastarife (Partnerlink = Werbung)") | [🏆 Zum Spartarif →](/go/gas/ "Weiter zu Check24 · Gastarife (Partnerlink = Werbung)") |
+  {{< tarif name="Grundversorgung (Stadtwerk)" tag="❌ Bisher" tone="bad" cta_text="Nicht empfohlen" cta_muted="true" >}}
+    {{< zeile label="Grundpreis / Monat" >}}14,50 €<br><small>174 € / Jahr</small>{{< /zeile >}}
+    {{< zeile label="Arbeitspreis pro kWh" >}}12,80 Ct{{< /zeile >}}
+    {{< zeile label="Jahreskosten (20.000 kWh)" >}}**2.734 €**{{< /zeile >}}
+    {{< zeile label="Neukunden-Bonus (Jahr 1)" tone="muted" >}}—{{< /zeile >}}
+    {{< zeile label="Effektivkosten 1. Jahr" highlight="true" tone="bad" >}}**2.734 €**{{< /zeile >}}
+    {{< zeile label="Ersparnis im 1. Jahr" tone="muted" >}}—{{< /zeile >}}
+    {{< zeile label="Ersparnis ab 2. Jahr" tone="muted" >}}—{{< /zeile >}}
+    {{< zeile label="Preisgarantie" tone="bad" >}}✕ keine{{< /zeile >}}
+    {{< zeile label="Vertragslaufzeit" >}}unbegrenzt{{< /zeile >}}
+  {{< /tarif >}}
 
-> 💡 **Hinweis:** Der Neukunden-Bonus wird üblicherweise mit der ersten Jahresabrechnung verrechnet und gilt nur im ersten Vertragsjahr. Ab dem zweiten Jahr liegt die Ersparnis beim empfohlenen Wechseltarif bei soliden **702 € pro Jahr** – ohne jede Einschränkung. Regionale Preisunterschiede sind möglich; prüfe deinen persönlichen Tarif in unter 2 Minuten mit deiner Postleitzahl. Vertiefende Einblicke in vertragliche Schutzmechanismen findest du in unserem Ratgeber über [Verlässliche Preisgarantien bei Gasverträgen](../2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/).
+  {{< tarif name="Alternativer Tarif" tag="⚡ Solide" tone="mid" cta_text="Tarife prüfen →" >}}
+    {{< zeile label="Grundpreis / Monat" >}}9,90 €<br><small>118,80 € / Jahr</small>{{< /zeile >}}
+    {{< zeile label="Arbeitspreis pro kWh" >}}9,20 Ct{{< /zeile >}}
+    {{< zeile label="Jahreskosten (20.000 kWh)" >}}**1.959 €**{{< /zeile >}}
+    {{< zeile label="Neukunden-Bonus (Jahr 1)" tone="muted" >}}—{{< /zeile >}}
+    {{< zeile label="Effektivkosten 1. Jahr" highlight="true" >}}**1.959 €**{{< /zeile >}}
+    {{< zeile label="Ersparnis im 1. Jahr" tone="good" >}}**−775 €**{{< /zeile >}}
+    {{< zeile label="Ersparnis ab 2. Jahr" tone="good" >}}**−775 €**{{< /zeile >}}
+    {{< zeile label="Preisgarantie" tone="good" >}}✓ 12 Monate{{< /zeile >}}
+    {{< zeile label="Vertragslaufzeit" >}}12 Monate{{< /zeile >}}
+  {{< /tarif >}}
+
+  {{< tarif name="Wechseltarif (Empfehlung)" tag="🏆 Tipp" tone="good" win="true" cta_text="🏆 Jetzt zum Spartarif" >}}
+    {{< zeile label="Grundpreis / Monat" >}}11,00 €<br><small>132 € / Jahr</small>{{< /zeile >}}
+    {{< zeile label="Arbeitspreis pro kWh" >}}9,50 Ct{{< /zeile >}}
+    {{< zeile label="Jahreskosten (20.000 kWh)" >}}**2.032 €**{{< /zeile >}}
+    {{< zeile label="Neukunden-Bonus (Jahr 1)" tone="good" >}}**−180 €**{{< /zeile >}}
+    {{< zeile label="Effektivkosten 1. Jahr" highlight="true" tone="good" >}}**1.852 €**{{< /zeile >}}
+    {{< zeile label="Ersparnis im 1. Jahr" tone="good" >}}**−882 €**{{< /zeile >}}
+    {{< zeile label="Ersparnis ab 2. Jahr" tone="good" >}}**−702 €**{{< /zeile >}}
+    {{< zeile label="Preisgarantie" tone="good" >}}✓ **12 Monate**{{< /zeile >}}
+    {{< zeile label="Vertragslaufzeit" >}}**12 Monate**{{< /zeile >}}
+  {{< /tarif >}}
+
+{{< /tarifvergleich >}}
+
+> 💶 **Ersparnis-Hinweis:** Vertiefende Einblicke in vertragliche Schutzmechanismen findest du in unserem Ratgeber über [Verlässliche Preisgarantien bei Gasverträgen](../2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/).
 
 ## Der 3-Schritte-Ablauf beim Gasanbieterwechsel
 
@@ -123,4 +152,13 @@ Vom Absenden des Antrags bis zur ersten Belieferung vergehen im Schnitt 3 bis 6 
 
 ### 📌 Diesen Spartipp auf Pinterest merken
 
-[![Gas-Anbieter wechseln: Bis 882 € pro Jahr sparen – ohne Risiko](/images/pins/premium-pin-gaswechsel-882-euro.jpg)](/images/pins/premium-pin-gaswechsel-882-euro.jpg "Pin für Pinterest – Gas-Anbieter wechseln: bis 882 € sparen")
+[![Gas-Anbieter wechseln: Bis 882 € pro Jahr sparen – ohne Risiko](/images/pins/premium-pin-gaswechsel-882-euro.jpg)](/images/pins/premium-pin-gaswechsel-882-euro.jpg "Pin-Variante A: Vorher/Nachher-Vergleich")
+
+<details style="margin-top:12px;background:var(--ff-emerald-soft,#EAF4EF);border-radius:8px;padding:10px 14px">
+<summary style="cursor:pointer;font-weight:700;color:var(--ff-emerald-dark,#0A4634)">🔁 Weitere Pin-Motive zum Merken & Teilen</summary>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+<a href="/images/pins/premium-pin-gaswechsel-3-schritte.jpg"><img src="/images/pins/premium-pin-gaswechsel-3-schritte.jpg" alt="Pin-Variante B: In 3 Schritten zum günstigen Tarif" style="border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.1);width:100%"></a>
+<a href="/images/pins/premium-pin-gaswechsel-shock.jpg"><img src="/images/pins/premium-pin-gaswechsel-shock.jpg" alt="Pin-Variante C: Du zahlst zu viel – bis 882 € sparen" style="border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.1);width:100%"></a>
+</div>
+<p style="margin:10px 0 0;font-size:.85rem;color:var(--ff-emerald-dark,#0A4634)">Drei Motive für A/B-Tests auf Pinterest: Variante A (klassischer Vergleich), Variante B (3-Schritte-Anleitung), Variante C (Shock-Headline mit durchgestrichenem Alt-Preis).</p>
+</details>

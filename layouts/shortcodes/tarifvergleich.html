@@ -1,0 +1,192 @@
+{{- /* ============================================================
+    TARIFVERGLEICH – Premium-Preisvergleich (Shortcode)
+    ------------------------------------------------------------
+    Nested-Shortcode (v2 ohne Regex-Parsing von .Inner, sondern mit
+    Scratch-Stack):
+
+      {{< tarifvergleich title="..." subtitle="..." footnote="..." cta_url="/go/gas/" >}}
+        {{< tarif name="..." tag="..." tone="bad|mid|good" win="true" cta_text="..." >}}
+          {{< zeile label="Grundpreis" >}}14,50 €{{< /zeile >}}
+          {{< zeile label="Jahreskosten" highlight="true" tone="good" >}}1.852 €{{< /zeile >}}
+        {{< /tarif >}}
+      {{< /tarifvergleich >}}
+
+    Die Kind-Shortcodes "tarif" und "zeile" schreiben ihre Daten in
+    einen Scratch-Stack, der Eltern-Shortcode rendert am Ende die
+    Tabelle und die Mobile-Cards.
+============================================================ */ -}}
+{{- $title     := .Get "title" | default "💰 Tarifvergleich" -}}
+{{- $subtitle  := .Get "subtitle" -}}
+{{- $footnote  := .Get "footnote" -}}
+{{- $defaultCta:= .Get "cta_url" | default "" -}}
+
+{{- /* Scratch initialisieren, Stack der Tarife */ -}}
+{{- .Scratch.Set "tv" (dict "tariffs" slice "labels" slice "rows" slice) -}}
+{{- .Scratch.Set "in_tarif" false -}}
+{{- .Inner -}}
+
+{{- $tv     := .Scratch.Get "tv" -}}
+{{- $tariffs:= $tv.tariffs -}}
+{{- $labels := $tv.labels -}}
+<div class="ff-tarifvergleich">
+  <div class="ff-tv-head">
+    <h3 class="ff-tv-title">{{ $title | safeHTML }}</h3>
+    {{- with $subtitle }}<p class="ff-tv-sub">{{ . | safeHTML }}</p>{{- end }}
+  </div>
+
+  <div class="ff-tv-tablewrap">
+    <table class="ff-tv-table">
+      <thead>
+        <tr>
+          <th class="ff-tv-corner">Merkmal</th>
+          {{- range $ti, $t := $tariffs -}}
+            <th class="ff-tv-col ff-tv-col--{{ $t.tone }}{{ if $t.win }} ff-tv-col--win{{ end }}">
+              {{- with $t.tag }}<span class="ff-tv-badge ff-tv-badge--{{ $t.tone }}">{{ . | safeHTML }}</span>{{ end -}}
+              <span class="ff-tv-name">{{ $t.name | safeHTML }}</span>
+            </th>
+          {{- end }}
+        </tr>
+      </thead>
+      <tbody>
+        {{- range $li, $lab := $labels -}}
+          {{- $hl := false -}}
+          {{- range $t := $tariffs -}}
+            {{- $r := index $t.rows $li -}}
+            {{- if $r.highlight }}{{- $hl = true -}}{{- end -}}
+          {{- end -}}
+          <tr class="{{ if $hl }}ff-tv-row--hl{{ end }}">
+            <td class="ff-tv-corner">{{ $lab | safeHTML }}</td>
+            {{- range $ti, $t := $tariffs -}}
+              {{- $r := index $t.rows $li -}}
+              <td class="ff-tv-col ff-tv-col--{{ $t.tone }}{{ if eq $r.tone "good" }} ff-tv-good{{ else if eq $r.tone "bad" }} ff-tv-bad{{ else if eq $r.tone "muted" }} ff-tv-muted{{ end }}">{{ $r.value | safeHTML }}</td>
+            {{- end }}
+          </tr>
+        {{- end }}
+        <tr>
+          <td class="ff-tv-corner"></td>
+          {{- range $t := $tariffs -}}
+            <td class="ff-tv-col ff-tv-col--{{ $t.tone }} ff-tv-cta">
+              {{- if $t.cta_muted -}}
+                <span class="ff-tv-btn ff-tv-btn--muted">{{ $t.cta_text | safeHTML }}</span>
+              {{- else if $t.cta_url -}}
+                <a class="ff-tv-btn" href="{{ $t.cta_url | safeURL }}" title="Weiter zum Anbieter (Partnerlink = Werbung)">{{ $t.cta_text | safeHTML }}</a>
+              {{- else if and $t.cta_text $defaultCta -}}
+                <a class="ff-tv-btn" href="{{ $defaultCta | safeURL }}" title="Weiter zum Anbieter (Partnerlink = Werbung)">{{ $t.cta_text | safeHTML }}</a>
+              {{- end }}
+            </td>
+          {{- end }}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {{- /* Mobile Cards */ -}}
+  <div class="ff-tv-cards">
+    {{- range $t := $tariffs -}}
+      <div class="ff-tv-card ff-tv-card--{{ $t.tone }}{{ if $t.win }} ff-tv-card--win{{ end }}">
+        <div class="ff-tv-card-head">
+          <h4 class="ff-tv-card-name">{{ $t.name | safeHTML }}</h4>
+          {{- with $t.tag }}<span class="ff-tv-card-badge ff-tv-card-badge--{{ $t.tone }}">{{ . | safeHTML }}</span>{{ end -}}
+        </div>
+        <div class="ff-tv-card-grid">
+          {{- $hl := false -}}{{- $hlVal := "" -}}{{- $hlTone := "" -}}
+          {{- range $r := $t.rows -}}
+            {{- if $r.highlight -}}
+              {{- $hl = true -}}{{- $hlVal = $r.value -}}{{- $hlTone = $r.tone -}}
+            {{- else -}}
+              <div class="ff-tv-card-item">
+                <div class="ff-tv-card-label">{{ or $r.card_label $r.label | safeHTML }}</div>
+                <div class="ff-tv-card-value{{ if eq $r.tone "good" }} ff-tv-card-value--good{{ else if eq $r.tone "bad" }} ff-tv-card-value--bad{{ end }}">{{ $r.value | safeHTML }}</div>
+              </div>
+            {{- end -}}
+          {{- end -}}
+        </div>
+        {{- if $hl -}}
+          <div class="ff-tv-card-hl{{ if eq $hlTone "bad" }} ff-tv-card-hl--bad{{ else if eq $hlTone "muted" }} ff-tv-card-hl--muted{{ end }}">{{ $hlVal | safeHTML }}</div>
+        {{- end -}}
+        {{- if $t.cta_text -}}
+          <div class="ff-tv-card-cta">
+            {{- if $t.cta_muted -}}
+              <span class="ff-tv-btn ff-tv-btn--muted">{{ $t.cta_text | safeHTML }}</span>
+            {{- else -}}
+              {{- $btnUrl := $t.cta_url | default $defaultCta -}}
+              {{- if $btnUrl -}}
+                <a class="ff-tv-btn" href="{{ $btnUrl | safeURL }}">{{ $t.cta_text | safeHTML }}</a>
+              {{- else -}}
+                <span class="ff-tv-btn ff-tv-btn--muted">{{ $t.cta_text | safeHTML }}</span>
+              {{- end -}}
+            {{- end -}}
+          </div>
+        {{- end -}}
+      </div>
+    {{- end -}}
+  </div>
+
+  {{- with $footnote }}
+  <div class="ff-tv-footnote"><strong>💡 Hinweis:</strong> {{ . | markdownify }}</div>
+  {{- end -}}
+</div>
+
+{{- /* Inline-CSS (1x pro Seite via id-Attribut) */ -}}
+<style id="ff-tv-style-once">
+.ff-tarifvergleich{--emerald:#0E5A43;--emerald-dark:#0A4634;--emerald-soft:#EAF4EF;--anthra:#2E2E33;--yellow:#FFB300;--yellow-soft:#FFF8DC;--red:#B42318;--red-soft:#FDECEC;--muted:#6b7280;--muted-soft:#f3f4f6;--border:#dce6e1;--white:#fff;--shadow:0 8px 24px rgba(15,52,43,.08);--shadow-win:0 12px 36px rgba(14,90,67,.18);border-radius:14px;overflow:hidden;margin:24px 0}
+.ff-tv-head{padding:14px 18px;background:linear-gradient(135deg,var(--emerald) 0%,var(--emerald-dark) 100%);color:#fff}
+.ff-tv-title{margin:0;font-size:1.15rem;font-weight:700;letter-spacing:-.01em}
+.ff-tv-sub{margin:4px 0 0;font-size:.85rem;opacity:.9}
+.ff-tv-tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff}
+.ff-tv-table{width:100%;min-width:620px;border-collapse:separate;border-spacing:0;font-size:.95rem}
+.ff-tv-table th,.ff-tv-table td{padding:13px 14px;text-align:center;border-bottom:1px solid var(--border);vertical-align:middle;white-space:nowrap}
+.ff-tv-table th{font-size:.78rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);background:#f8fbf9;font-weight:700;position:sticky;top:0}
+.ff-tv-table th.ff-tv-corner,.ff-tv-table td.ff-tv-corner{text-align:left;position:sticky;left:0;z-index:3;background:#fff;font-weight:600;white-space:normal;min-width:170px}
+.ff-tv-table thead th.ff-tv-corner{background:#f8fbf9;z-index:4}
+.ff-tv-col--bad{background:var(--red-soft)}
+.ff-tv-col--mid{background:var(--muted-soft)}
+.ff-tv-col--good{background:var(--emerald-soft)}
+th.ff-tv-col--win{position:relative;box-shadow:inset 0 3px 0 var(--emerald);padding-top:28px}
+th.ff-tv-col--win::before{content:"🏆 Beste Wahl";position:absolute;top:0;left:0;right:0;padding:4px 0;background:var(--emerald);color:#fff;font-size:.7rem;letter-spacing:.8px;font-weight:700;text-transform:uppercase}
+.ff-tv-badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:.72rem;font-weight:700;margin-bottom:6px;color:#fff}
+.ff-tv-badge--good{background:var(--emerald)}
+.ff-tv-badge--mid{background:var(--muted)}
+.ff-tv-badge--bad{background:var(--red)}
+.ff-tv-name{display:block;font-size:1rem;font-weight:700;color:var(--anthra);margin-top:2px}
+.ff-tv-row--hl td{background:#fff9e6 !important;font-weight:700;border-top:2px solid var(--yellow);border-bottom:2px solid var(--yellow);font-size:1.05rem}
+.ff-tv-row--hl td.ff-tv-corner{background:#fff9e6 !important}
+.ff-tv-good{color:var(--emerald-dark);font-weight:700}
+.ff-tv-bad{color:var(--red);font-weight:700}
+.ff-tv-muted{color:var(--muted)}
+.ff-tv-cta{padding:10px 14px 16px !important;border-bottom:none !important}
+.ff-tv-btn{display:inline-block;padding:10px 16px;border-radius:8px;background:var(--emerald);color:#fff !important;text-decoration:none!important;font-weight:700;font-size:.88rem;box-shadow:0 2px 8px rgba(14,90,67,.28);transition:transform .15s,box-shadow .15s;border:none;cursor:pointer;white-space:normal}
+.ff-tv-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(14,90,67,.4)}
+.ff-tv-btn--muted{background:#94a3b8;box-shadow:none;cursor:default}
+.ff-tv-footnote{padding:12px 18px;background:var(--yellow-soft);border-top:1px solid #f5e08a;font-size:.85rem;color:#5c4b00}
+.ff-tv-footnote p{margin:0}
+.ff-tv-footnote p:last-child{margin-bottom:0}
+@media (max-width:640px){
+  .ff-tv-tablewrap{overflow:visible}
+  .ff-tv-table{display:none}
+  .ff-tv-cards{display:grid;gap:14px;padding:16px;background:#f8fbf9}
+}
+@media (min-width:641px){.ff-tv-cards{display:none}}
+.ff-tv-card{background:#fff;border-radius:12px;padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden;border-top:5px solid var(--muted)}
+.ff-tv-card--good{border-top-color:var(--emerald);box-shadow:var(--shadow-win)}
+.ff-tv-card--bad{border-top-color:var(--red)}
+.ff-tv-card--win::after{content:"🏆 Beste Wahl";position:absolute;top:12px;right:12px;background:var(--emerald);color:#fff;padding:3px 10px;border-radius:999px;font-size:.7rem;font-weight:700;letter-spacing:.5px}
+.ff-tv-card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:8px;flex-wrap:wrap}
+.ff-tv-card-name{font-size:1.05rem;font-weight:700;margin:0;color:var(--anthra)}
+.ff-tv-card-badge{font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;color:#fff;text-transform:uppercase;letter-spacing:.4px}
+.ff-tv-card-badge--good{background:var(--emerald)}
+.ff-tv-card-badge--mid{background:var(--muted)}
+.ff-tv-card-badge--bad{background:var(--red)}
+.ff-tv-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.ff-tv-card-item{border-bottom:1px dashed var(--border);padding-bottom:8px}
+.ff-tv-card-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.ff-tv-card-value{font-size:.95rem;font-weight:700;margin-top:2px;color:var(--anthra)}
+.ff-tv-card-value small{color:var(--muted);font-weight:400;display:block;margin-top:1px}
+.ff-tv-card-value--good{color:var(--emerald-dark)}
+.ff-tv-card-value--bad{color:var(--red)}
+.ff-tv-card-hl{margin-top:14px;padding:12px;border-radius:8px;text-align:center;background:var(--emerald-soft);font-weight:700;color:var(--emerald-dark);font-size:1.1rem}
+.ff-tv-card-hl--bad{background:var(--red-soft);color:var(--red)}
+.ff-tv-card-hl--muted{background:var(--muted-soft);color:var(--muted)}
+.ff-tv-card-cta{margin-top:14px;text-align:center}
+.ff-tv-card-cta .ff-tv-btn{display:block}
+</style>

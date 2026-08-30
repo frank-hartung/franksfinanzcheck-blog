@@ -1,0 +1,41 @@
+{{- /* KIND-SHORTCODE zu tarifvergleich: ein Tarif (eine Spalte / eine Karte).
+       Schreibt seine Daten (und die seiner Kinder) auf den Scratch-Stack
+       des Eltern-Shortcodes. */ -}}
+{{- $parent := .Parent -}}
+{{- if not $parent -}}
+  {{- errorf "tarif: muss innerhalb von {{< tarifvergleich >}} verwendet werden (%s)" .Position -}}
+{{- end -}}
+
+{{- $tone  := .Get "tone" | default "mid" -}}
+{{- $win   := eq (.Get "win" | default "false") "true" -}}
+{{- $tag   := .Get "tag" | default "" -}}
+{{- $name  := .Get "name" -}}
+{{- $ctaT  := .Get "cta_text" | default "" -}}
+{{- $ctaU  := .Get "cta_url" | default "" -}}
+{{- $ctaM  := eq (.Get "cta_muted" | default "false") "true" -}}
+
+{{- /* Neues Tarif-Objekt in den Scratch-Stack pushen. Wir initialisieren
+       ein leeres rows-Slice und markieren den Eltern-Scratch als "in Tarif",
+       damit Kind-zeilen an dieses Objekt angehängt werden. */ -}}
+{{- $newTarif := dict
+    "tone"      $tone
+    "win"       $win
+    "tag"       $tag
+    "name"      $name
+    "cta_text"  $ctaT
+    "cta_url"   $ctaU
+    "cta_muted" $ctaM
+    "rows"      slice
+    "rowIndex"  0
+-}}
+{{- $tv := $parent.Scratch.Get "tv" -}}
+{{- $tariffs := $tv.tariffs | append $newTarif -}}
+{{- $parent.Scratch.Set "tv" (merge $tv (dict "tariffs" $tariffs)) -}}
+{{- $parent.Scratch.Set "in_tarif" true -}}
+{{- $parent.Scratch.Set "current_tarif_idx" (sub (len $tariffs) 1) -}}
+
+{{- /* Kinder (zeile-Shortcodes) ausführen – die schreiben selbst
+       auf .Parent.Scratch ihre Zeilen an den aktuellen Tarif. */ -}}
+{{- .Inner -}}
+
+{{- $parent.Scratch.Set "in_tarif" false -}}
