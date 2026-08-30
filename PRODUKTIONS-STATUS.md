@@ -1,15 +1,15 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-08-29 20:08 UTC  
+**Stand:** 2026-08-30 20:08 UTC  
 **Stufe:** OK  
 **Befund:** Letzter Publikationstag (2026-08-28): 3 Artikel – Ziel erfüllt.
 
 | Kennzahl | Wert |
 |---|---|
-| Heute | 2026-08-29 (Samstag) |
+| Heute | 2026-08-30 (Sonntag) |
 | Publikationstag heute | nein |
 | Artikel letzter Publikationstag (2026-08-28) | 3 |
-| Letzter Artikel überhaupt | 2026-08-28 (1 Tage her) |
+| Letzter Artikel überhaupt | 2026-08-28 (2 Tage her) |
 | Live-Artikel gesamt | 21 |
 | Mindestziel/Tag | 2 |
 
