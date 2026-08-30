@@ -149,16 +149,3 @@ Vom Absenden des Antrags bis zur ersten Belieferung vergehen im Schnitt 3 bis 6 
 ---
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
-### 📌 Diesen Spartipp auf Pinterest merken
-
-[![Gas-Anbieter wechseln: Bis 882 € pro Jahr sparen – ohne Risiko](/images/pins/premium-pin-gaswechsel-882-euro.jpg)](/images/pins/premium-pin-gaswechsel-882-euro.jpg "Pin-Variante A: Vorher/Nachher-Vergleich")
-
-<details style="margin-top:12px;background:var(--ff-emerald-soft,#EAF4EF);border-radius:8px;padding:10px 14px">
-<summary style="cursor:pointer;font-weight:700;color:var(--ff-emerald-dark,#0A4634)">🔁 Weitere Pin-Motive zum Merken & Teilen</summary>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
-<a href="/images/pins/premium-pin-gaswechsel-3-schritte.jpg"><img src="/images/pins/premium-pin-gaswechsel-3-schritte.jpg" alt="Pin-Variante B: In 3 Schritten zum günstigen Tarif" style="border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.1);width:100%"></a>
-<a href="/images/pins/premium-pin-gaswechsel-shock.jpg"><img src="/images/pins/premium-pin-gaswechsel-shock.jpg" alt="Pin-Variante C: Du zahlst zu viel – bis 882 € sparen" style="border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.1);width:100%"></a>
-</div>
-<p style="margin:10px 0 0;font-size:.85rem;color:var(--ff-emerald-dark,#0A4634)">Drei Motive für A/B-Tests auf Pinterest: Variante A (klassischer Vergleich), Variante B (3-Schritte-Anleitung), Variante C (Shock-Headline mit durchgestrichenem Alt-Preis).</p>
-</details>
