@@ -200,6 +200,7 @@ def load_posts():
         m = re.search(r"^title:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
         d = re.search(r"^description:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
         c = re.search(r'^cover:\s*\n\s*image:\s*["\']?(.+?)["\']?\s*$', content, re.M)
+        pi = re.search(r'^pin_image:\s*["\']?(.+?)["\']?\s*$', content, re.M)
         pinned = re.search(r"^pinned:\s*(true|false)", content, re.M)
         draft = re.search(r"^draft:\s*(true|false)", content, re.M)
         tags = re.search(r"^tags:\s*\[(.*?)\]", content, re.M)
@@ -219,7 +220,7 @@ def load_posts():
             "slug": slug, "path": path, "content": content,
             "title": (m.group(1) if m else slug).strip().replace("<br>", " "),
             "description": (d.group(1) if d else "").strip(),
-            "cover": (c.group(1) if c else "").strip(),
+            "cover": ((pi.group(1) if pi else "") or (c.group(1) if c else "")).strip(),
             "tags": tag_list or kw_list,
             "keywords": kw_list,
             "pin_title": (pt.group(1).strip() if pt else ""),

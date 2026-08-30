@@ -662,3 +662,94 @@ details:not(.toc)[open] > summary::before {
   padding-inline-start: 1.6rem;
   list-style-position: outside;
 }
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE TABELLEN (Premium-Level, 30.08.2026)
+   Problem: Breite Markdown-Tabellen (z. B. Tarifvergleiche) laufen auf
+   Mobil aus dem Container.
+   Loesung:
+     1. Wrapper mit horizontalem Scroll (auch ohne JS automatisch,
+        weil <pre>, <table> etc. im Browser overflow ausloesen – ABER
+        in PaperMod war .post-content overflow-wrap: break-word aktiv,
+        was Tabellenzellen zerriss. Ueberschreiben fuer Tabellen.)
+     2. Ab 640px Card-Ansicht via .ff-tarifkarten Klasse (optional fuer
+        ausgewaehlte Premium-Tabellen).
+     3. Markierung der besten Spalte mit .ff-col-win.
+   -------------------------------------------------------------------------- */
+.post-content table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: separate;
+  border-spacing: 0;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+.post-content table thead,
+.post-content table tbody,
+.post-content table tr {
+  display: table;
+  width: 100%;
+  table-layout: auto;
+}
+.post-content table th,
+.post-content table td {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.post-content table th:first-child,
+.post-content table td:first-child {
+  text-align: left;
+  white-space: normal;
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--theme);
+  min-width: 180px;
+}
+.post-content table thead th:first-child {
+  z-index: 4;
+  background: var(--code-bg);
+}
+.post-content table thead th {
+  background: var(--code-bg);
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+.post-content table tr {
+  display: table-row;
+}
+.post-content table tr:hover td {
+  background: color-mix(in srgb, var(--ff-emerald-soft) 60%, transparent);
+}
+.post-content table tr:hover td:first-child {
+  background: color-mix(in srgb, var(--ff-emerald-soft) 60%, transparent);
+}
+
+/* Gewinnerspalte hervorheben (erste Daten-Spalte nach Index = .ff-col-win) */
+.post-content table td.ff-col-win,
+.post-content table th.ff-col-win {
+  background: var(--ff-emerald-soft);
+  color: var(--ff-emerald-dark);
+  position: relative;
+  font-weight: 700;
+}
+.post-content table td.ff-col-win::after {
+  content: "🏆";
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: .75rem;
+}
+
+/* Fussnoten unter Tabellen (Blockquote nach der Tabelle) */
+.post-content table + blockquote {
+  margin-top: 12px;
+  border-left: 4px solid var(--ff-yellow);
+  background: color-mix(in srgb, var(--ff-yellow) 12%, transparent);
+  color: var(--ff-anthracite);
+  font-size: .9rem;
+}
