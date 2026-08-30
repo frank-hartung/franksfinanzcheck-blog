@@ -327,7 +327,6 @@ body.ff-scrolled .header {
 
 .post-content table {
   border-radius: var(--ff-radius-md);
-  overflow: hidden;
   box-shadow: 0 8px 24px rgba(15, 52, 43, .06);
 }
 
@@ -740,4 +739,37 @@ details:not(.toc)[open] > summary::before {
   background: color-mix(in srgb, var(--ff-yellow) 12%, transparent);
   color: var(--ff-anthracite);
   font-size: .9rem;
+}
+
+/* --------------------------------------------------------------------------
+   ZUSAeTZLICHE LESBARKEITS-REGELN FUER MARKDOWN-TABELLEN (30.08.2026)
+   - Kopfzellen duerfen umbrechen (kein white-space:nowrap mehr, das war
+     der Grund fuer "UEberschriften werden abgeschnitten")
+   - Sanfter Schatten-Indikator rechts fuer horizontalen Scroll-Hinweis
+   - Max-Zellbreite fuer lange Labelspalten
+   -------------------------------------------------------------------------- */
+.post-content table thead th {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  hyphens: manual;
+  line-height: 1.3;
+}
+.post-content table tbody td {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+.post-content table {
+  min-width: 560px; /* ab hier wird gescrollt */
+}
+/* Scroll-Hinweis bei schmalen Screens */
+@media (max-width: 720px) {
+  .post-content .post-content table,
+  .post-content table {
+    background:
+      radial-gradient(farthest-side at 100% 50%, rgba(14,90,67,.18), transparent 70%) right / 18px 100% no-repeat,
+      #fff;
+    background-attachment: local, local, scroll;
+  }
 }
