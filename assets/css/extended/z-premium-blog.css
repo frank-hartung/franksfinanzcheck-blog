@@ -592,3 +592,54 @@ details:not(.toc) > summary::before {
 details:not(.toc)[open] > summary::before {
   transform: rotate(90deg);
 }
+
+/* --------------------------------------------------------------------------
+   Premium list alignment: every wrapped line starts on the same x position.
+   --------------------------------------------------------------------------
+   Context: the Datenschutzerklärung (/datenschutz/) uses an ordered list
+   in "Deine Rechte als betroffene Person" ("1. Auskunft …"). If a list is
+   rendered with list-style-position: inside, the number sits inside the
+   first line while wrapped lines jump back to the very left of the
+   container - a visible kink in the reading line.
+
+   The fix locks the marker outside the content box and gives the list a
+   deterministic gutter:
+     • list-style-position: outside  -> marker sits in the gutter
+     • fixed padding-inline-start     -> the content box (all lines) starts
+                                         at the same x, even for "10." / "12."
+     • display: list-item on li       -> no layout alias changes the marker
+                                            or turns the number into text.
+   The rule targets only content lists (.post-content / .md-content), so
+   navigation, the ToC and the footer lists stay untouched.
+   -------------------------------------------------------------------------- */
+.post-content ol,
+.post-content ul,
+.md-content ol,
+.md-content ul {
+  list-style-position: outside;
+  padding-inline-start: 1.75rem;
+}
+
+.post-content ol > li,
+.post-content ul > li,
+.md-content ol > li,
+.md-content ul > li {
+  display: list-item;
+  padding-inline-start: .15rem;
+  text-indent: 0;
+}
+
+/* Nested lists: keep the hanging indent of the parent item and add a small
+   visual step instead of collapsing onto the parent text. */
+.post-content ol ol,
+.post-content ol ul,
+.post-content ul ol,
+.post-content ul ul,
+.md-content ol ol,
+.md-content ol ul,
+.md-content ul ol,
+.md-content ul ul {
+  margin-top: .35rem;
+  padding-inline-start: 1.6rem;
+  list-style-position: outside;
+}
