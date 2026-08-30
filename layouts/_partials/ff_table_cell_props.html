@@ -1,0 +1,22 @@
+{{- /* ============================================================
+    ff_table_cell_props – Helfer fuer den Table-Render-Hook
+    ------------------------------------------------------------
+    Liefert pro Zelle: { "len": sichtbare Zeichenlaenge, "num": ist
+    die Zelle rein numerisch (Geld-/Prozent-/Zahlenwerte)? }
+
+    Eingabe: bereits gerendertes Zellen-HTML (aus .THead/.TBody).
+    - Tags werden entfernt
+    - HTML-Entities (z. B. &nbsp;) werden als Leerzeichen gezaehlt
+    - Nicht-ASCII (Umlaute, €, –) zaehlt als 1 Zeichen
+    - Numerik: nur Ziffern, Punkte, Kommas, %, €, $, Rechenzeichen,
+      Waehrungs-/Bereichssymbole – aber mindestens eine Ziffer
+============================================================ */ -}}
+{{- $t := . | string -}}
+{{- $one := $t | replaceRE "<[^>]*>" " " | replaceRE "&[a-zA-Z#0-9]+;" " " | replaceRE "[\\x{00A0}\\x{202F}\\x{2007}\\x{2009}]" " " | replaceRE "[[:space:]]+" " " -}}
+{{- $ascii := $one | replaceRE "[^\\x00-\\x7F]" "x" -}}
+{{- $l := len $ascii -}}
+{{- $num := false -}}
+{{- if and (gt $l 0) (lt $l 26) (findRE "[0-9]" $one) (findRE "^[0-9.,%€$£¥\\s\\-–—+×()/≈~<>*·=]*$" $one) -}}
+  {{- $num = true -}}
+{{- end -}}
+{{- return (dict "len" $l "num" $num) -}}

@@ -1,0 +1,19 @@
+{{- /* ============================================================
+    ff_table_add_cell – Spaltenstatistik aktualisieren (Render-Hook)
+    ------------------------------------------------------------
+    Render-Hooks haben einen eingeschraenkten Funktionssatz
+    (kein "set"); die Statistik-Slice wird deshalb neu aufgebaut:
+    first/after + append. Liefert die aktualisierte $stats-Slice.
+============================================================ */ -}}
+{{- $stats := .stats -}}
+{{- $ci := .ci -}}
+{{- $p := partial "ff_table_cell_props.html" .cell -}}
+{{- $s := index $stats $ci -}}
+{{- $s = merge $s (dict "max" (math.Max $s.max $p.len) "num" (add $s.num (cond $p.num 1 0)) "cnt" (add $s.cnt 1)) -}}
+{{- $before := first $ci $stats -}}
+{{- $after := after (add $ci 1) $stats -}}
+{{- $out := $before | append $s -}}
+{{- range $after -}}
+  {{- $out = $out | append . -}}
+{{- end -}}
+{{- return $out -}}

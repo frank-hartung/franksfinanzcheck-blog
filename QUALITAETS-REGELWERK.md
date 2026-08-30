@@ -98,6 +98,28 @@ Rollout ganzer Blog: `python3 scripts/umbruch_guard.py --fix`
 `grammar_check.py` rechnen die Trennstellen vor dem Check heraus,
 Offsets bleiben gültig).
 
+### 📊 render-table.html – Premium-Tabellen-System (30.08.2026, Agentur-Level)
+
+| Regel | Inhalt | Verhalten |
+|---|---|---|
+| R1 | Jede Markdown-Tabelle wird vom Render-Hook `layouts/_default/_markup/render-table.html` in `.ff-table-scroll` (Scroll-Container) + `.ff-tbl` mit `<colgroup>`-Breiten gewickelt | automatisch, gilt auch für **zukünftige** Tabellen |
+| R2 | Spaltenbreiten sind **inhaltsbasiert**: Zeichenlängen je Spalte, Labelspalte ≥ 180 px, Numerik-Spalten kompakt; `min-width` pro Tabelle (300–640 px) statt globalem 560 px | kein unnötiges Scrollen bei 2-Spalten-Tabellen |
+| R3 | Numerik-Spalten (Geld-/Prozentwerte, erkannt über Zellinhalt, `&nbsp;`-fest) → rechtsbündig, `tabular-nums`, `nowrap` bei kurzen Werten | ruhige Zahlenkolonnen |
+| R4 | Ausrichtung aus dem Markdown-Separator (`:---`, `:---:`, `---:`) → `.ff-tbl-a-left/-center/-right` | semantisch, ohne Inline-Styles |
+| R5 | Sticky-Kopf (Smaragd, weiss) + Sticky-Labelspalte, Zebra, Hover, abgerundeter Container, Scroll-Fade auf Mobil | Lesbarkeit & Orientierung |
+| R6 | Haus-Regeln bleiben: `hyphens: manual`, kein `overflow-wrap: anywhere` in Zellen, `word-break: normal` | UMBRUCH-Report-konform |
+| R7 | VERBOTEN: `display:block` auf `.ff-tbl`/`.ff-tv-table`/`.ff-es-table`, `min-width` auf generische `.post-content table` – bricht Sticky & mobile Karten | design_guard-Vertrag |
+| R8 | Shortcodes `tarifvergleich` + `einspartabelle` tragen eigene Premium-Overrides (`ff-tv-style-premium`, `ff-es-style-premium`): Tabelle im Wrapper, Sticky-Z-Lagen, **mobil Karten statt Tabelle** (`display:none !important`) | keine Doppel-Anzeige Tabelle+Karten |
+
+**Warum:** Das Theme rendert Tabellen als `display:block`-Scrollcontainer – dadurch
+brachen `border-collapse`, Sticky-Kopf/-Spalte, Spaltenbreiten und die mobile
+Card-Ansicht der Premium-Shortcodes (die generische `.post-content table`-Regel
+überschrieb `display:none` der Karten-Fallback). Der Hook liefert jetzt sauberes
+Markup (`role="region"`, `scope="col"`, `<colgroup>`), CSS in
+`assets/css/extended/z-premium-blog.css` („TABELLEN-SYSTEM“). Verifiziert mit
+Hugo-WASM-Engine (0.147) + Produktions-Hugo 0.164 (identische Hook-API).
+`table_guard.py` arbeitet unverändert auf dem Markdown-Quelltext.
+
 ### ### casing_guard.py – Akronym-Orthografie (Duden, deterministisch)
 | Regel | Inhalt | Beispiel |
 |---|---|---|
