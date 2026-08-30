@@ -4,7 +4,7 @@ description: "Gas-Anbieter wechseln & im 1. Jahr bis 882 € sparen: die besten 
 date: 2026-08-28T01:05:14Z
 draft: false
 cadence_demoted: 2026-08-26T13:46:19Z
-lastmod: 2026-08-30T15:00:00Z
+lastmod: 2026-08-30T16:30:00Z
 tags: ["Gas-Anbieter wechseln", "Gastarif Vergleich", "Gaspreisgarantie", "Heizkosten senken", "Energie sparen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -66,7 +66,7 @@ Achte beim Tarifvergleich auf folgende Qualitätsmerkmale, um langfristig sicher
     footnote="Der Neukunden-Bonus wird üblicherweise mit der ersten Jahresabrechnung verrechnet und gilt nur im ersten Vertragsjahr. Ab dem zweiten Jahr liegt die Ersparnis beim empfohlenen Wechseltarif bei soliden **702 € pro Jahr** – ohne jede Einschränkung. Regionale Preisunterschiede sind möglich; prüfe deinen persönlichen Tarif in unter 2 Minuten mit deiner Postleitzahl."
     cta_url="/go/gas/" >}}
 
-  {{< tarif name="Grundversorgung (Stadtwerk)" tag="❌ Bisher" tone="bad" cta_text="Nicht empfohlen" cta_muted="true" >}}
+  {{< tarif name="Grundversorgung" tag="❌ Stadtwerk" tone="bad" cta_text="Nicht empfohlen" cta_muted="true" >}}
     {{< zeile label="Grundpreis / Monat" >}}14,50 €<br><small>174 € / Jahr</small>{{< /zeile >}}
     {{< zeile label="Arbeitspreis pro kWh" >}}12,80 Ct{{< /zeile >}}
     {{< zeile label="Jahreskosten (20.000 kWh)" >}}**2.734 €**{{< /zeile >}}
@@ -78,7 +78,7 @@ Achte beim Tarifvergleich auf folgende Qualitätsmerkmale, um langfristig sicher
     {{< zeile label="Vertragslaufzeit" >}}unbegrenzt{{< /zeile >}}
   {{< /tarif >}}
 
-  {{< tarif name="Alternativer Tarif" tag="⚡ Solide" tone="mid" cta_text="Tarife prüfen →" >}}
+  {{< tarif name="Alternativ-Tarif" tag="⚡ Solide" tone="mid" cta_text="Tarife prüfen →" >}}
     {{< zeile label="Grundpreis / Monat" >}}9,90 €<br><small>118,80 € / Jahr</small>{{< /zeile >}}
     {{< zeile label="Arbeitspreis pro kWh" >}}9,20 Ct{{< /zeile >}}
     {{< zeile label="Jahreskosten (20.000 kWh)" >}}**1.959 €**{{< /zeile >}}
@@ -90,7 +90,7 @@ Achte beim Tarifvergleich auf folgende Qualitätsmerkmale, um langfristig sicher
     {{< zeile label="Vertragslaufzeit" >}}12 Monate{{< /zeile >}}
   {{< /tarif >}}
 
-  {{< tarif name="Wechseltarif (Empfehlung)" tag="🏆 Tipp" tone="good" win="true" cta_text="🏆 Jetzt zum Spartarif" >}}
+  {{< tarif name="Wechseltarif" tag="🏆 Empfehlung" tone="good" win="true" cta_text="🏆 Jetzt wechseln" >}}
     {{< zeile label="Grundpreis / Monat" >}}11,00 €<br><small>132 € / Jahr</small>{{< /zeile >}}
     {{< zeile label="Arbeitspreis pro kWh" >}}9,50 Ct{{< /zeile >}}
     {{< zeile label="Jahreskosten (20.000 kWh)" >}}**2.032 €**{{< /zeile >}}

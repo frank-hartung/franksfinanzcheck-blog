@@ -129,64 +129,153 @@
 
 {{- /* Inline-CSS (1x pro Seite via id-Attribut) */ -}}
 <style id="ff-tv-style-once">
-.ff-tarifvergleich{--emerald:#0E5A43;--emerald-dark:#0A4634;--emerald-soft:#EAF4EF;--anthra:#2E2E33;--yellow:#FFB300;--yellow-soft:#FFF8DC;--red:#B42318;--red-soft:#FDECEC;--muted:#6b7280;--muted-soft:#f3f4f6;--border:#dce6e1;--white:#fff;--shadow:0 8px 24px rgba(15,52,43,.08);--shadow-win:0 12px 36px rgba(14,90,67,.18);border-radius:14px;overflow:hidden;margin:24px 0}
+.ff-tarifvergleich{
+  --emerald:#0E5A43;--emerald-dark:#0A4634;--emerald-soft:#EAF4EF;
+  --anthra:#2E2E33;--yellow:#FFB300;--yellow-soft:#FFF8DC;
+  --red:#B42318;--red-soft:#FDECEC;--muted:#52606d;--muted-soft:#f3f4f6;
+  --border:#dce6e1;--white:#fff;
+  --shadow:0 8px 24px rgba(15,52,43,.08);
+  --shadow-win:0 12px 36px rgba(14,90,67,.18);
+  border-radius:14px;overflow:hidden;margin:24px 0;
+  background:#fff;
+}
 .ff-tv-head{padding:14px 18px;background:linear-gradient(135deg,var(--emerald) 0%,var(--emerald-dark) 100%);color:#fff}
 .ff-tv-title{margin:0;font-size:1.15rem;font-weight:700;letter-spacing:-.01em}
-.ff-tv-sub{margin:4px 0 0;font-size:.85rem;opacity:.9}
+.ff-tv-sub{margin:4px 0 0;font-size:.85rem;opacity:.92;line-height:1.4}
 .ff-tv-tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff}
-.ff-tv-table{width:100%;min-width:620px;border-collapse:separate;border-spacing:0;font-size:.95rem}
-.ff-tv-table th,.ff-tv-table td{padding:13px 14px;text-align:center;border-bottom:1px solid var(--border);vertical-align:middle;white-space:nowrap}
-.ff-tv-table th{font-size:.78rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);background:#f8fbf9;font-weight:700;position:sticky;top:0}
-.ff-tv-table th.ff-tv-corner,.ff-tv-table td.ff-tv-corner{text-align:left;position:sticky;left:0;z-index:3;background:#fff;font-weight:600;white-space:normal;min-width:170px}
-.ff-tv-table thead th.ff-tv-corner{background:#f8fbf9;z-index:4}
+.ff-tv-table{
+  width:100%;min-width:720px;border-collapse:separate;border-spacing:0;
+  font-size:.95rem;table-layout:fixed;
+}
+.ff-tv-table th,.ff-tv-table td{
+  padding:14px 16px;text-align:center;border-bottom:1px solid var(--border);
+  vertical-align:middle;word-break:normal;overflow-wrap:break-word;
+  hyphens:manual;
+}
+.ff-tv-table th{
+  font-size:.8rem;color:var(--muted);background:#f8fbf9;font-weight:700;
+  position:sticky;top:0;z-index:3;line-height:1.3;
+  white-space:normal; /* Überschriften UMFLIESSEN statt abgeschnitten */
+}
+.ff-tv-table td{
+  white-space:normal; /* Zellen dürfen umbrechen */
+}
+.ff-tv-table th strong,.ff-tv-table td strong{font-weight:700}
+.ff-tv-table th.ff-tv-corner,.ff-tv-table td.ff-tv-corner{
+  text-align:left;position:sticky;left:0;z-index:4;
+  background:#fff;font-weight:600;
+  width:180px;min-width:180px;max-width:200px;
+  box-shadow:2px 0 6px rgba(15,52,43,.04);
+}
+.ff-tv-table thead th.ff-tv-corner{
+  background:#f8fbf9;z-index:5;min-width:180px;
+  box-shadow:2px 0 6px rgba(15,52,43,.06);
+}
+.ff-tv-table col.ff-tv-col-col{width:calc((100% - 180px) / 3);}
+.ff-tv-table th:not(.ff-tv-corner){min-width:170px}
 .ff-tv-col--bad{background:var(--red-soft)}
 .ff-tv-col--mid{background:var(--muted-soft)}
 .ff-tv-col--good{background:var(--emerald-soft)}
-th.ff-tv-col--win{position:relative;box-shadow:inset 0 3px 0 var(--emerald);padding-top:28px}
-th.ff-tv-col--win::before{content:"🏆 Beste Wahl";position:absolute;top:0;left:0;right:0;padding:4px 0;background:var(--emerald);color:#fff;font-size:.7rem;letter-spacing:.8px;font-weight:700;text-transform:uppercase}
-.ff-tv-badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:.72rem;font-weight:700;margin-bottom:6px;color:#fff}
+th.ff-tv-col--win{position:relative;box-shadow:inset 0 4px 0 var(--emerald);padding-top:32px}
+th.ff-tv-col--win::before{
+  content:"🏆 Beste Wahl";position:absolute;top:0;left:0;right:0;
+  padding:6px 0;background:var(--emerald);color:#fff;
+  font-size:.72rem;letter-spacing:.6px;font-weight:700;text-transform:uppercase;
+}
+.ff-tv-badge{
+  display:block;padding:4px 8px;border-radius:999px;font-size:.72rem;font-weight:700;
+  margin:0 auto 8px;color:#fff;line-height:1.2;
+}
 .ff-tv-badge--good{background:var(--emerald)}
 .ff-tv-badge--mid{background:var(--muted)}
 .ff-tv-badge--bad{background:var(--red)}
-.ff-tv-name{display:block;font-size:1rem;font-weight:700;color:var(--anthra);margin-top:2px}
-.ff-tv-row--hl td{background:#fff9e6 !important;font-weight:700;border-top:2px solid var(--yellow);border-bottom:2px solid var(--yellow);font-size:1.05rem}
+.ff-tv-name{display:block;font-size:1rem;font-weight:700;color:var(--anthra);margin-top:4px;line-height:1.25}
+.ff-tv-row--hl td{
+  background:#fff9e6 !important;font-weight:700;
+  border-top:2px solid var(--yellow);border-bottom:2px solid var(--yellow);
+  font-size:1.05rem;
+}
 .ff-tv-row--hl td.ff-tv-corner{background:#fff9e6 !important}
 .ff-tv-good{color:var(--emerald-dark);font-weight:700}
 .ff-tv-bad{color:var(--red);font-weight:700}
 .ff-tv-muted{color:var(--muted)}
-.ff-tv-cta{padding:10px 14px 16px !important;border-bottom:none !important}
-.ff-tv-btn{display:inline-block;padding:10px 16px;border-radius:8px;background:var(--emerald);color:#fff !important;text-decoration:none!important;font-weight:700;font-size:.88rem;box-shadow:0 2px 8px rgba(14,90,67,.28);transition:transform .15s,box-shadow .15s;border:none;cursor:pointer;white-space:normal}
-.ff-tv-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(14,90,67,.4)}
+.ff-tv-cta{padding:12px 14px 16px !important;border-bottom:none !important}
+.ff-tv-btn{
+  display:inline-block;padding:10px 16px;border-radius:8px;background:var(--emerald);
+  color:#fff !important;text-decoration:none!important;font-weight:700;font-size:.88rem;
+  box-shadow:0 2px 8px rgba(14,90,67,.28);
+  transition:transform .15s,box-shadow .15s;border:none;cursor:pointer;
+  white-space:normal;text-align:center;line-height:1.3;
+}
+.ff-tv-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(14,90,67,.4);color:#fff!important}
 .ff-tv-btn--muted{background:#94a3b8;box-shadow:none;cursor:default}
-.ff-tv-footnote{padding:12px 18px;background:var(--yellow-soft);border-top:1px solid #f5e08a;font-size:.85rem;color:#5c4b00}
+.ff-tv-footnote{
+  padding:12px 18px;background:var(--yellow-soft);border-top:1px solid #f5e08a;
+  font-size:.85rem;color:#5c4b00;line-height:1.5;
+}
 .ff-tv-footnote p{margin:0}
 .ff-tv-footnote p:last-child{margin-bottom:0}
+small{color:var(--muted);font-weight:400;display:block;margin-top:2px;font-size:.78rem}
+
+/* MOBILE CARDS */
 @media (max-width:640px){
   .ff-tv-tablewrap{overflow:visible}
   .ff-tv-table{display:none}
   .ff-tv-cards{display:grid;gap:14px;padding:16px;background:#f8fbf9}
 }
 @media (min-width:641px){.ff-tv-cards{display:none}}
-.ff-tv-card{background:#fff;border-radius:12px;padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden;border-top:5px solid var(--muted)}
+.ff-tv-card{
+  background:#fff;border-radius:12px;padding:18px;box-shadow:var(--shadow);
+  position:relative;overflow:hidden;border-top:5px solid var(--muted);
+}
 .ff-tv-card--good{border-top-color:var(--emerald);box-shadow:var(--shadow-win)}
 .ff-tv-card--bad{border-top-color:var(--red)}
-.ff-tv-card--win::after{content:"🏆 Beste Wahl";position:absolute;top:12px;right:12px;background:var(--emerald);color:#fff;padding:3px 10px;border-radius:999px;font-size:.7rem;font-weight:700;letter-spacing:.5px}
-.ff-tv-card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:8px;flex-wrap:wrap}
-.ff-tv-card-name{font-size:1.05rem;font-weight:700;margin:0;color:var(--anthra)}
-.ff-tv-card-badge{font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;color:#fff;text-transform:uppercase;letter-spacing:.4px}
+.ff-tv-card--win::after{
+  content:"🏆 Beste Wahl";position:absolute;top:12px;right:12px;
+  background:var(--emerald);color:#fff;padding:4px 10px;border-radius:999px;
+  font-size:.7rem;font-weight:700;letter-spacing:.4px;
+}
+.ff-tv-card-head{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  margin-bottom:14px;gap:10px;flex-wrap:wrap;
+}
+.ff-tv-card-name{font-size:1.05rem;font-weight:700;margin:0;color:var(--anthra);line-height:1.25}
+.ff-tv-card-badge{
+  font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;color:#fff;
+  text-transform:uppercase;letter-spacing:.4px;flex:none;
+}
 .ff-tv-card-badge--good{background:var(--emerald)}
 .ff-tv-card-badge--mid{background:var(--muted)}
 .ff-tv-card-badge--bad{background:var(--red)}
 .ff-tv-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
 .ff-tv-card-item{border-bottom:1px dashed var(--border);padding-bottom:8px}
-.ff-tv-card-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
-.ff-tv-card-value{font-size:.95rem;font-weight:700;margin-top:2px;color:var(--anthra)}
-.ff-tv-card-value small{color:var(--muted);font-weight:400;display:block;margin-top:1px}
+.ff-tv-card-label{
+  font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;
+  line-height:1.3;margin-bottom:2px;
+}
+.ff-tv-card-value{
+  font-size:.95rem;font-weight:700;color:var(--anthra);line-height:1.3;
+}
+.ff-tv-card-value small{color:var(--muted);font-weight:400;display:block;margin-top:1px;font-size:.78rem}
 .ff-tv-card-value--good{color:var(--emerald-dark)}
 .ff-tv-card-value--bad{color:var(--red)}
-.ff-tv-card-hl{margin-top:14px;padding:12px;border-radius:8px;text-align:center;background:var(--emerald-soft);font-weight:700;color:var(--emerald-dark);font-size:1.1rem}
+.ff-tv-card-hl{
+  margin-top:14px;padding:14px;border-radius:8px;text-align:center;
+  background:var(--emerald-soft);font-weight:700;color:var(--emerald-dark);font-size:1.15rem;
+  line-height:1.3;
+}
 .ff-tv-card-hl--bad{background:var(--red-soft);color:var(--red)}
 .ff-tv-card-hl--muted{background:var(--muted-soft);color:var(--muted)}
 .ff-tv-card-cta{margin-top:14px;text-align:center}
 .ff-tv-card-cta .ff-tv-btn{display:block}
+
+/* Scrollbar-Hinweis bei schmalen Viewports */
+@media (max-width:900px){
+  .ff-tv-tablewrap{
+    background:linear-gradient(to right, #fff 0%, #fff calc(100% - 28px), rgba(255,255,255,0) 100%),
+               linear-gradient(to right, rgba(0,0,0,.08), transparent 16px) right / 28px 100% no-repeat,
+               radial-gradient(farthest-side at 100% 50%, rgba(15,52,43,.18), transparent 70%) right / 20px 100% no-repeat,
+               #fff;
+  }
+}
 </style>
