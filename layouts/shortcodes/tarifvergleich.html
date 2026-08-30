@@ -227,3 +227,175 @@ small{color:var(--muted);font-weight:400;display:block;margin-top:2px;font-size:
 .ff-tv-card-cta{margin-top:14px;text-align:center}.ff-tv-card-cta .ff-tv-btn{display:block}
 @media (max-width:900px){.ff-tv-tablewrap{background:linear-gradient(to right,#fff 0%,#fff calc(100% - 28px),rgba(255,255,255,0) 100%),linear-gradient(to right,rgba(0,0,0,.08),transparent 16px) right/28px 100% no-repeat,radial-gradient(farthest-side at 100% 50%,rgba(15,52,43,.18),transparent 70%) right/20px 100% no-repeat,#fff}}
 </style>
+
+<style id="ff-tv-style-premium">
+/* ==========================================================================
+   V2 · PREMIUM-OVERRIDE (30.08.2026)
+   --------------------------------------------------------------------------
+   Analog ff-es-style-premium: Die generischen Theme-Regeln ".post-content
+   table" (Spezifitaet .post-content table) schlugen die Komponentenklassen
+   (.ff-tv-table) – dadurch zeigte der Browser mobil TABELLE UND KARTEN
+   gleichzeitig an (display:block ueberschrieb display:none) und die
+   Sticky-/Spaltenbreiten-Regeln griffen nicht. Alle Werte deshalb hier im
+   Komponenten-Scope mit hoeherer Spezifitaet neu gesetzt.
+   ========================================================================== */
+
+/* Wrapper: scrollt kontrolliert, nicht die <table> selbst */
+.post-content .ff-tarifvergleich .ff-tv-tablewrap {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+  background: #fff;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(14, 90, 67, .35) #eef4f1;
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap::-webkit-scrollbar {
+  height: 10px;
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap::-webkit-scrollbar-track {
+  background: #eef4f1;
+  border-radius: 999px;
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap::-webkit-scrollbar-thumb {
+  background: rgba(14, 90, 67, .35);
+  border-radius: 999px;
+}
+
+/* <table> wieder echte Tabelle: display:table statt display:block */
+.post-content .ff-tarifvergleich .ff-tv-tablewrap .ff-tv-table {
+  display: table;
+  width: 100%;
+  min-width: 700px;
+  max-width: 100%;
+  margin: 0;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: visible;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: manual;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  background: #fff;
+}
+
+/* Kopf- und Datenzellen: generische Theme-Texturen zuruecknehmen */
+.post-content .ff-tarifvergleich .ff-tv-tablewrap th,
+.post-content .ff-tarifvergleich .ff-tv-tablewrap td {
+  vertical-align: middle;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: manual;
+  line-height: 1.35;
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap thead th {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  height: auto;
+  background: #f8fbf9;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Optimierte Spaltenbreite: Labelspalte 200px, Datenspalten 175px+ */
+.post-content .ff-tarifvergleich .ff-tv-tablewrap th.ff-tv-corner,
+.post-content .ff-tarifvergleich .ff-tv-tablewrap td.ff-tv-corner {
+  text-align: left;
+  padding: 13px 15px;
+  width: 200px;
+  min-width: 190px;
+  max-width: 220px;
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap thead th.ff-tv-corner {
+  position: sticky;
+  left: 0;
+  z-index: 8;
+  background: #f8fbf9;
+  box-shadow: 2px 0 6px rgba(15, 52, 43, .08);
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap tbody td.ff-tv-corner {
+  position: sticky;
+  left: 0;
+  z-index: 7;
+  background: #fff;
+  box-shadow: 2px 0 6px rgba(15, 52, 43, .04);
+  font-weight: 600;
+  color: var(--anthra);
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap th:not(.ff-tv-corner),
+.post-content .ff-tarifvergleich .ff-tv-tablewrap td:not(.ff-tv-corner) {
+  min-width: 175px;
+}
+
+/* Zellfarben wiederherstellen – auch gegen :nth-child- und :hover-Regeln */
+.post-content .ff-tarifvergleich .ff-tv-tablewrap tbody td.ff-tv-col--bad {
+  background: var(--red-soft);
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap tbody td.ff-tv-col--mid {
+  background: var(--muted-soft);
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap tbody td.ff-tv-col--good {
+  background: var(--emerald-soft);
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap tbody td.ff-tv-corner {
+  background: #fff;
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap tbody tr:hover td.ff-tv-col--bad {
+  background: #fdf3f1;
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap tbody tr:hover td.ff-tv-col--mid {
+  background: #eef0f2;
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap tbody tr:hover td.ff-tv-col--good {
+  background: #e7f5ee;
+}
+.post-content .ff-tarifvergleich .ff-tv-tablewrap tbody tr:hover td.ff-tv-corner {
+  background: #f4faf7;
+}
+
+/* Mobil: Tabelle wirklich ausblenden, Premium-Karten zeigen */
+@media (max-width: 640px) {
+  .post-content .ff-tarifvergleich .ff-tv-tablewrap {
+    overflow: visible;
+    border-radius: 0;
+    background: #f8fbf9;
+    scrollbar-width: none;
+  }
+  .post-content .ff-tarifvergleich .ff-tv-tablewrap::-webkit-scrollbar {
+    display: none;
+  }
+  .post-content .ff-tarifvergleich .ff-tv-tablewrap .ff-tv-table {
+    display: none !important;
+  }
+  .post-content .ff-tarifvergleich .ff-tv-cards {
+    display: grid;
+    gap: 14px;
+    padding: 16px;
+    background: #f8fbf9;
+  }
+}
+
+@media (min-width: 641px) {
+  .post-content .ff-tarifvergleich .ff-tv-cards {
+    display: none;
+  }
+}
+
+/* Scroll-Hinweis in der Uebergangsbreite (641–900px) */
+@media (max-width: 900px) and (min-width: 641px) {
+  .post-content .ff-tarifvergleich .ff-tv-tablewrap {
+    background:
+      linear-gradient(to right, #fff 0%, #fff calc(100% - 24px), rgba(255, 255, 255, 0) 100%),
+      linear-gradient(to right, rgba(0, 0, 0, .08), transparent 14px) right / 28px 100% no-repeat,
+      radial-gradient(farthest-side at 100% 50%, rgba(15, 52, 43, .18), transparent 70%) right / 18px 100% no-repeat,
+      #fff;
+  }
+}
+</style>

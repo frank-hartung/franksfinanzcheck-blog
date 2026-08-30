@@ -1,0 +1,136 @@
+{{- /* ============================================================
+    RENDER-HOOK: Markdown-Tabellen (Premium-Level, 30.08.2026)
+    ------------------------------------------------------------
+    Problem (Frank-Fund): generische Markdown-Tabellen wurden vom
+    Theme als display:block-Scrollcontainer gerendert – dadurch
+    brachen border-collapse, Sticky-Kopf/-Spalte, Spaltenbreiten
+    und die mobile Card-Ansicht der Premium-Shortcodes. Ausserdem
+    erzwang min-width:560px auch bei schmalen 2-Spalten-Tabellen
+    horizontales Scrollen.
+
+    Loesung (Profi-Agentur-Level):
+      1. .ff-table-scroll  = Wrapper mit kontrolliertem
+         horizontalem Scroll (Sticky funktioniert darin sauber).
+      2. .ff-tbl + <colgroup> = inhaltsbasierte Spaltenbreiten
+         (Laenge der Zelleninhalte, Numerik-Spalten kompakt).
+      3. Ausrichtungsklassen .ff-tbl-a-left/-center/-right aus dem
+         Markdown-Separator (:---, :---:, ---:).
+      4. Numerik-Spalten: rechtsbuendig + tabellarische Ziffern
+         (+ nowrap bei kurzen Werten).
+      5. Sticky-Kopfzeile + Sticky-Labelspalte (CSS in
+         z-premium-blog.css, Tabellen-System).
+
+    Kontext (Hugo >= 0.141): .THead, .TBody, .Attributes.
+    Zellen-Text ist bereits gerendertes HTML (inkl. Link-Hooks).
+    Gilt automatisch fuer ALLE Markdown-Tabellen – auch zukuenftige.
+============================================================ */ -}}
+{{- $colCount := 0 -}}
+{{- range .THead -}}
+  {{- if gt (len .) $colCount }}{{- $colCount = len . }}{{- end -}}
+{{- end -}}
+{{- range .TBody -}}
+  {{- if gt (len .) $colCount }}{{- $colCount = len . }}{{- end -}}
+{{- end -}}
+{{- if lt $colCount 2 }}{{- $colCount = 2 }}{{- end -}}
+
+{{- /* --- Pass 1: Spaltenstatistik (max. Laenge, Numerik-Anteil) --- */ -}}
+{{- $stats := slice -}}
+{{- range seq 0 (sub $colCount 1) -}}
+  {{- $stats = $stats | append (dict "max" 0 "num" 0 "cnt" 0) -}}
+{{- end -}}
+
+{{- /* Zelle in die Spaltenstatistik einrechnen (ohne "set" –
+       Render-Hook-Funktionssatz) */ -}}
+{{- range .THead -}}
+  {{- range $ci, $cell := . -}}
+    {{- if lt $ci $colCount -}}
+      {{- $stats = partial "ff_table_add_cell.html" (dict "stats" $stats "ci" $ci "cell" $cell.Text) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- range .TBody -}}
+  {{- range $ci, $cell := . -}}
+    {{- if lt $ci $colCount -}}
+      {{- $stats = partial "ff_table_add_cell.html" (dict "stats" $stats "ci" $ci "cell" $cell.Text) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* --- Pass 2: Spaltenbreiten (Anteile + min-width) --- */ -}}
+{{- $cols := slice -}}
+{{- $total := 0 -}}
+{{- $labelCap := 34 -}}
+{{- if eq $colCount 2 }}{{- $labelCap = 45 }}{{- end -}}
+{{- range $i, $s := $stats -}}
+  {{- $m := $s.max -}}
+  {{- if lt $m 6 }}{{- $m = 6 }}{{- end -}}
+  {{- $numCol := false -}}
+  {{- if and (gt $s.cnt 0) (ge (mul $s.num 2) $s.cnt) }}{{- $numCol = true }}{{- end -}}
+  {{- $share := $m -}}
+  {{- if $numCol -}}
+    {{- if gt $share 18 }}{{- $share = 18 }}{{- end -}}
+    {{- $share = add $share 1 -}}
+  {{- else -}}
+    {{- if gt $share 40 }}{{- $share = 40 }}{{- end -}}
+    {{- $share = add $share 2 -}}
+  {{- end -}}
+  {{- if eq $i 0 -}}
+    {{- if gt $share $labelCap }}{{- $share = $labelCap }}{{- end -}}
+    {{- if lt $share 14 }}{{- $share = 14 }}{{- end -}}
+  {{- end -}}
+  {{- $minPx := 140 -}}
+  {{- if eq $i 0 }}{{- $minPx = 180 -}}
+  {{- else if $numCol }}{{- $minPx = 120 -}}
+  {{- end -}}
+  {{- $nowrap := and $numCol (le $m 16) -}}
+  {{- $cols = $cols | append (dict "max" $m "num" $numCol "share" $share "minPx" $minPx "nowrap" $nowrap) -}}
+  {{- $total = add $total $share -}}
+{{- end -}}
+
+{{- $minW := 0 -}}
+{{- range $c := $cols }}{{- $minW = add $minW $c.minPx }}{{- end -}}
+{{- if lt $minW 300 }}{{- $minW = 300 }}{{- end -}}
+{{- if gt $minW 640 }}{{- $minW = 640 }}{{- end -}}
+
+<div class="ff-table-scroll" role="region" aria-label="Tabelle">
+  <table class="ff-tbl" style="min-width: {{ $minW }}px"
+    {{- range $k, $v := .Attributes }}{{- if $v }} {{ $k }}="{{ $v | transform.HTMLEscape }}"{{- end }}{{- end }}>
+    <colgroup>
+      {{- range $c := $cols -}}
+        {{- if gt $total 0 -}}
+          <col style="width: {{ printf "%.1f" (div (mul $c.share 100.0) (float $total)) }}%">
+        {{- end -}}
+      {{- end -}}
+    </colgroup>
+    <thead>
+      {{- range .THead -}}
+        <tr>
+          {{- range $ci, $cell := . -}}
+            {{- $c := index $cols $ci -}}
+            {{- $align := or $cell.Alignment "left" -}}
+            {{- if eq $ci 0 }}{{- $align = "left" }}{{- end -}}
+            {{- if $c.num }}{{- $align = "right" }}{{- end -}}
+            <th scope="col" class="ff-tbl-th ff-tbl-a-{{ $align }}{{ if and (eq $ci 0) (gt $colCount 1) }} ff-tbl-corner{{ end }}">{{ $cell.Text }}</th>
+          {{- end -}}
+        </tr>
+      {{- end -}}
+    </thead>
+    <tbody>
+      {{- range .TBody -}}
+        <tr>
+          {{- range $ci, $cell := . -}}
+            {{- if lt $ci $colCount -}}
+              {{- $c := index $cols $ci -}}
+              {{- $align := or $cell.Alignment "left" -}}
+              {{- if eq $ci 0 }}{{- $align = "left" }}{{- end -}}
+              {{- if $c.num }}{{- $align = "right" }}{{- end -}}
+              <td class="ff-tbl-td ff-tbl-a-{{ $align }}{{ if and (eq $ci 0) (gt $colCount 1) }} ff-tbl-corner{{ end }}{{ if $c.num }} ff-tbl-num{{ end }}{{ if $c.nowrap }} ff-tbl-nowrap{{ end }}">{{ $cell.Text }}</td>
+            {{- else -}}
+              <td class="ff-tbl-td"></td>
+            {{- end -}}
+          {{- end -}}
+        </tr>
+      {{- end -}}
+    </tbody>
+  </table>
+</div>
