@@ -188,3 +188,221 @@ th.ff-es-col--win::before{content:"🏆 Ersparnis";position:absolute;top:0;left:
 .ff-es-btn--card{display:block;margin-top:10px}
 @media (max-width:900px){.ff-es-tablewrap{background:linear-gradient(to right,#fff 0%,#fff calc(100% - 28px),rgba(255,255,255,0) 100%),linear-gradient(to right,rgba(0,0,0,.08),transparent 16px) right/28px 100% no-repeat,radial-gradient(farthest-side at 100% 50%,rgba(15,52,43,.18),transparent 70%) right/20px 100% no-repeat,#fff}}
 </style>
+
+<style id="ff-es-style-premium">
+/* ==========================================================================
+   V2 · PREMIUM-OVERRIDE
+   --------------------------------------------------------------------------
+   Warum dieser Block? Die generischen Theme-Regeln " .post-content table "
+   (Spezifitaet .post-content table) haben hoehere Spezifitaet als die
+   Komponentenklassen (.ff-es-table). Dadurch setzten sie z.B. display:block,
+   min-width:560px, sticky-Texturen und mobile "display:block" und liessen
+   die Spaltenbreiten der Einspartabelle ausreissen – die Tabelle blieb auch
+   mobil sichtbar und die Kosten-/Ersparnis-Spalten wirkten gequetscht.
+   Deshalb alle Werte hier im Komponenten-Scope mit bewusst hoeherer
+   Spezifitaet neu setzen (Profi-Layout: exakte Spaltenanteile, ruhige
+   Zahlenlaengen, Scroll/Hover-Kontrolle).
+   ========================================================================== */
+
+/* Wrapper: scrollt kontrolliert, nicht der <table> selbst */
+.post-content .ff-einspar .ff-es-tablewrap,
+.post-content .ff-einspar .ff-es-tablewrap .ff-es-table,
+.post-content .ff-einspar .ff-es-tablewrap th,
+.post-content .ff-einspar .ff-es-tablewrap td {
+  box-sizing: border-box;
+}
+.post-content .ff-einspar .ff-es-tablewrap {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+  background: #fff;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(14, 90, 67, .35) #eef4f1;
+}
+.post-content .ff-einspar .ff-es-tablewrap::-webkit-scrollbar {
+  height: 10px;
+}
+.post-content .ff-einspar .ff-es-tablewrap::-webkit-scrollbar-track {
+  background: #eef4f1;
+  border-radius: 999px;
+}
+.post-content .ff-einspar .ff-es-tablewrap::-webkit-scrollbar-thumb {
+  background: rgba(14, 90, 67, .35);
+  border-radius: 999px;
+}
+
+/* <table> wieder echte Tabelle: display:table statt display:block */
+.post-content .ff-einspar .ff-es-tablewrap .ff-es-table {
+  display: table;
+  width: 100%;
+  min-width: 700px;
+  max-width: 100%;
+  margin: 0;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: visible;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: manual;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  background: #fff;
+}
+
+/* Kopf- und Datenzellen: generische Theme-Texturen zuruecknehmen */
+.post-content .ff-einspar .ff-es-tablewrap th,
+.post-content .ff-einspar .ff-es-tablewrap td {
+  vertical-align: middle;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  hyphens: manual;
+  line-height: 1.35;
+}
+.post-content .ff-einspar .ff-es-tablewrap thead th {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  height: auto;
+  background: #f8fbf9;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Optimierte Spaltenbreite: 4 Spalten, klare Hierarchie */
+.post-content .ff-einspar .ff-es-tablewrap th.ff-es-corner,
+.post-content .ff-einspar .ff-es-tablewrap td.ff-es-corner {
+  text-align: left;
+  padding: 14px;
+  width: 200px;
+  min-width: 200px;
+  max-width: 230px;
+}
+.post-content .ff-einspar .ff-es-tablewrap thead th.ff-es-corner {
+  position: sticky;
+  left: 0;
+  z-index: 8;
+  background: #f8fbf9;
+  box-shadow: 2px 0 6px rgba(15, 52, 43, .08);
+}
+.post-content .ff-einspar .ff-es-tablewrap tbody td.ff-es-corner {
+  position: sticky;
+  left: 0;
+  z-index: 7;
+  background: #fff;
+  box-shadow: 2px 0 6px rgba(15, 52, 43, .04);
+}
+
+.post-content .ff-einspar .ff-es-tablewrap .ff-es-col--bad {
+  width: 165px;
+  min-width: 160px;
+  max-width: 200px;
+}
+.post-content .ff-einspar .ff-es-tablewrap .ff-es-col--good {
+  width: 165px;
+  min-width: 160px;
+  max-width: 200px;
+}
+.post-content .ff-einspar .ff-es-tablewrap .ff-es-col--win {
+  width: 170px;
+  min-width: 165px;
+  max-width: 200px;
+}
+
+/* Zellfarben wiederherstellen – auch gegen :nth-child- und :hover-Regeln */
+.post-content .ff-einspar .ff-es-tablewrap tbody td.ff-es-col--bad {
+  background: var(--red-soft);
+}
+.post-content .ff-einspar .ff-es-tablewrap tbody td.ff-es-col--good {
+  background: var(--emerald-soft);
+}
+.post-content .ff-einspar .ff-es-tablewrap tbody td.ff-es-col--win {
+  background: var(--yellow-soft);
+}
+.post-content .ff-einspar .ff-es-tablewrap tbody td.ff-es-corner {
+  background: #fff;
+}
+.post-content .ff-einspar .ff-es-tablewrap tbody tr.ff-es-sum td {
+  background: #fff9e6 !important;
+}
+.post-content .ff-einspar .ff-es-tablewrap tbody tr.ff-es-sum td.ff-es-corner {
+  background: #fff9e6 !important;
+}
+
+/* Sanfte, komponenteneigene Hover-Logik */
+.post-content .ff-einspar .ff-es-tablewrap tbody tr:hover td.ff-es-corner {
+  background: #f4faf7;
+}
+.post-content .ff-einspar .ff-es-tablewrap tbody tr:hover td.ff-es-col--bad {
+  background: #fdf3f1;
+}
+.post-content .ff-einspar .ff-es-tablewrap tbody tr:hover td.ff-es-col--good {
+  background: #e7f5ee;
+}
+.post-content .ff-einspar .ff-es-tablewrap tbody tr:hover td.ff-es-col--win {
+  background: #fff4d2;
+}
+
+/* Zahlen: tabellarisch, ruhig, nicht gequetscht */
+.post-content .ff-einspar .ff-es-tablewrap .ff-es-amount,
+.post-content .ff-einspar .ff-es-tablewrap .ff-es-col--bad,
+.post-content .ff-einspar .ff-es-tablewrap .ff-es-col--good {
+  font-variant-numeric: tabular-nums;
+}
+.post-content .ff-einspar .ff-es-tablewrap td strong {
+  font-size: 1rem;
+}
+.post-content .ff-einspar .ff-es-tablewrap .ff-es-amount strong {
+  font-size: 1.12rem;
+}
+.post-content .ff-einspar .ff-es-tablewrap td small {
+  display: block;
+  font-size: .78rem;
+  margin-top: 3px;
+  opacity: .85;
+}
+
+/* Mobil: Tabelle wirklich ausblenden, Premium-Karten zeigen */
+@media (max-width: 640px) {
+  .post-content .ff-einspar .ff-es-tablewrap {
+    overflow: visible;
+    border-radius: 0;
+    background: #f8fbf9;
+    scrollbar-width: none;
+  }
+  .post-content .ff-einspar .ff-es-tablewrap::-webkit-scrollbar {
+    display: none;
+  }
+  .post-content .ff-einspar .ff-es-tablewrap .ff-es-table {
+    display: none !important;
+  }
+  .post-content .ff-einspar .ff-es-cards {
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    background: #f8fbf9;
+  }
+}
+
+@media (min-width: 641px) {
+  .post-content .ff-einspar .ff-es-cards {
+    display: none;
+  }
+}
+
+/* Scroll-Hinweis in der Uebergangsbreite (641–900px) */
+@media (max-width: 900px) and (min-width: 641px) {
+  .post-content .ff-einspar .ff-es-tablewrap {
+    background:
+      linear-gradient(to right, #fff 0%, #fff calc(100% - 24px), rgba(255, 255, 255, 0) 100%),
+      linear-gradient(to right, rgba(0, 0, 0, .08), transparent 14px) right / 28px 100% no-repeat,
+      radial-gradient(farthest-side at 100% 50%, rgba(15, 52, 43, .18), transparent 70%) right / 18px 100% no-repeat,
+      #fff;
+  }
+}
+</style>
