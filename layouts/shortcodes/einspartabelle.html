@@ -1,0 +1,190 @@
+{{- /* ============================================================
+    EINSPARTABELLE – Premium-Einsparvergleich (Shortcode, v1 final)
+    ------------------------------------------------------------
+    Pro Zeile: Massnahme · Vorher (alter Verbraucher) · Nachher
+    (optimiert) · Ersparnis/Jahr. Nutzt <template data-ff>-Marker
+    fuer die Kommunikation mit Kind-Shortcodes (kein Scratch –
+    funktioniert in Hugo 0.13x bis 0.164+).
+============================================================ */ -}}
+{{- $title     := .Get "title" | default "💰 Einsparpotenziale im direkten Vergleich" -}}
+{{- $subtitle  := .Get "subtitle" -}}
+{{- $footnote  := .Get "footnote" -}}
+{{- $ctaUrl    := .Get "cta_url"  | default "/go/strom/" -}}
+{{- $ctaText   := .Get "cta_text" | default "Stromanbieter vergleichen →" -}}
+{{- $inner     := trim .Inner "\n\r\t " -}}
+
+{{- $zeilePat := `(?s)<template data-ff="row"([^>]*)></template>` -}}
+{{- $summePat := `(?s)<template data-ff="sum"([^>]*)></template>` -}}
+
+{{- $labPat := `(?s).*data-label="([^"]*)".*` -}}
+{{- $vmPat  := `(?s).*data-vm="([^"]*)".*` -}}
+{{- $vsPat  := `(?s).*data-vs="([^"]*)".*` -}}
+{{- $nmPat  := `(?s).*data-nm="([^"]*)".*` -}}
+{{- $nsPat  := `(?s).*data-ns="([^"]*)".*` -}}
+{{- $ePat   := `(?s).*data-e="([^"]*)".*` -}}
+
+{{- $rows := slice -}}
+{{- range $m := findRE $zeilePat $inner -}}
+  {{- $a := replaceRE $zeilePat "$1" $m -}}
+  {{- $lab := replaceRE $labPat "$1" $a | htmlUnescape -}}{{- if eq $lab $a }}{{- $lab = "" -}}{{- end -}}
+  {{- $vm  := replaceRE $vmPat  "$1" $a | htmlUnescape -}}{{- if eq $vm  $a }}{{- $vm  = "" -}}{{- end -}}
+  {{- $vs  := replaceRE $vsPat  "$1" $a | htmlUnescape -}}{{- if eq $vs  $a }}{{- $vs  = "" -}}{{- end -}}
+  {{- $nm  := replaceRE $nmPat  "$1" $a | htmlUnescape -}}{{- if eq $nm  $a }}{{- $nm  = "" -}}{{- end -}}
+  {{- $ns  := replaceRE $nsPat  "$1" $a | htmlUnescape -}}{{- if eq $ns  $a }}{{- $ns  = "" -}}{{- end -}}
+  {{- $er  := replaceRE $ePat   "$1" $a | htmlUnescape -}}{{- if eq $er  $a }}{{- $er  = "" -}}{{- end -}}
+  {{- $vorCell  := printf "<strong>%s</strong>" $vm -}}{{- if gt (len $vs) 0 }}{{- $vorCell  = printf "%s<br><small>%s</small>" $vorCell  $vs -}}{{- end -}}
+  {{- $nachCell := printf "<strong>%s</strong>" $nm -}}{{- if gt (len $ns) 0 }}{{- $nachCell = printf "%s<br><small>%s</small>" $nachCell $ns -}}{{- end -}}
+  {{- $erCell   := printf "<strong>%s</strong>" $er -}}
+  {{- $rows = $rows | append (dict
+        "label"    $lab
+        "vorher"   $vorCell
+        "nachher"  $nachCell
+        "ersparnis" $erCell
+    ) -}}
+{{- end -}}
+
+{{- $summe := dict -}}
+{{- with (findRE $summePat $inner 1) -}}
+  {{- $a := replaceRE $summePat "$1" (index . 0) -}}
+  {{- $lab := replaceRE $labPat "$1" $a | htmlUnescape -}}{{- if eq $lab $a }}{{- $lab = "" -}}{{- end -}}
+  {{- $vm  := replaceRE $vmPat  "$1" $a | htmlUnescape -}}{{- if eq $vm  $a }}{{- $vm  = "" -}}{{- end -}}
+  {{- $vs  := replaceRE $vsPat  "$1" $a | htmlUnescape -}}{{- if eq $vs  $a }}{{- $vs  = "" -}}{{- end -}}
+  {{- $nm  := replaceRE $nmPat  "$1" $a | htmlUnescape -}}{{- if eq $nm  $a }}{{- $nm  = "" -}}{{- end -}}
+  {{- $ns  := replaceRE $nsPat  "$1" $a | htmlUnescape -}}{{- if eq $ns  $a }}{{- $ns  = "" -}}{{- end -}}
+  {{- $er  := replaceRE $ePat   "$1" $a | htmlUnescape -}}{{- if eq $er  $a }}{{- $er  = "" -}}{{- end -}}
+  {{- $vorCell  := printf "<strong>%s</strong>" $vm -}}{{- if gt (len $vs) 0 }}{{- $vorCell  = printf "%s<br><small>%s</small>" $vorCell  $vs -}}{{- end -}}
+  {{- $nachCell := printf "<strong>%s</strong>" $nm -}}{{- if gt (len $ns) 0 }}{{- $nachCell = printf "%s<br><small>%s</small>" $nachCell $ns -}}{{- end -}}
+  {{- $erCell   := printf "<strong>%s</strong>" $er -}}
+  {{- $summe = dict
+        "label"     $lab
+        "vorher"    $vorCell
+        "nachher"   $nachCell
+        "ersparnis" $erCell
+    -}}
+{{- end -}}
+
+<div class="ff-einspar">
+  <div class="ff-es-head">
+    <h3 class="ff-es-title">{{ $title | safeHTML }}</h3>
+    {{- with $subtitle }}<p class="ff-es-sub">{{ . | safeHTML }}</p>{{- end }}
+  </div>
+
+  <div class="ff-es-tablewrap">
+    <table class="ff-es-table">
+      <thead>
+        <tr>
+          <th class="ff-es-corner">Maßnahme</th>
+          <th class="ff-es-col ff-es-col--bad">❌ Vorher<br><small>Alter Verbraucher</small></th>
+          <th class="ff-es-col ff-es-col--good">✅ Nachher<br><small>Optimierte Lösung</small></th>
+          <th class="ff-es-col ff-es-col--win">🏆 Ersparnis<br><small>pro Jahr</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{- range $r := $rows -}}
+          <tr>
+            <td class="ff-es-corner">{{ $r.label | safeHTML }}</td>
+            <td class="ff-es-col ff-es-col--bad ff-es-bad">{{ $r.vorher | safeHTML }}</td>
+            <td class="ff-es-col ff-es-col--good ff-es-good">{{ $r.nachher | safeHTML }}</td>
+            <td class="ff-es-col ff-es-col--win ff-es-amount">{{ $r.ersparnis | safeHTML }}</td>
+          </tr>
+        {{- end -}}
+        {{- with $summe -}}
+        <tr class="ff-es-sum">
+          <td class="ff-es-corner"><strong>{{ .label | safeHTML }}</strong></td>
+          <td class="ff-es-col ff-es-col--bad">{{ .vorher | safeHTML }}</td>
+          <td class="ff-es-col ff-es-col--good">{{ .nachher | safeHTML }}</td>
+          <td class="ff-es-col ff-es-col--win ff-es-amount">{{ .ersparnis | safeHTML }}</td>
+        </tr>
+        {{- end -}}
+        <tr>
+          <td class="ff-es-corner"></td>
+          <td class="ff-es-col ff-es-col--bad ff-es-muted"><small>teuer</small></td>
+          <td class="ff-es-col ff-es-col--good ff-es-muted"><small>effizienter</small></td>
+          <td class="ff-es-col ff-es-col--win ff-es-cta">
+            <a class="ff-es-btn" href="{{ $ctaUrl | safeURL }}" title="Stromanbieter vergleichen (Partnerlink = Werbung)">
+              {{ $ctaText | safeHTML }}
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ff-es-cards">
+    {{- range $r := $rows -}}
+      <div class="ff-es-card">
+        <h4 class="ff-es-card-label">{{ $r.label | safeHTML }}</h4>
+        <div class="ff-es-card-grid">
+          <div class="ff-es-card-item ff-es-card-item--bad">
+            <div class="ff-es-card-k">❌ Vorher</div>
+            <div class="ff-es-card-v ff-es-bad">{{ $r.vorher | safeHTML }}</div>
+          </div>
+          <div class="ff-es-card-item ff-es-card-item--good">
+            <div class="ff-es-card-k">✅ Nachher</div>
+            <div class="ff-es-card-v ff-es-good">{{ $r.nachher | safeHTML }}</div>
+          </div>
+        </div>
+        <div class="ff-es-card-sum">🏆 {{ $r.ersparnis | safeHTML }}</div>
+      </div>
+    {{- end -}}
+    {{- with $summe -}}
+    <div class="ff-es-card ff-es-card--sum">
+      <div class="ff-es-card-sum ff-es-card-sum--big">
+        {{ .ersparnis | safeHTML }}<br><small>Gesamtersparnis pro Jahr</small>
+      </div>
+      <a class="ff-es-btn ff-es-btn--card" href="{{ $ctaUrl | safeURL }}">{{ $ctaText | safeHTML }}</a>
+    </div>
+    {{- end -}}
+  </div>
+
+  {{- with $footnote }}
+  <div class="ff-es-footnote"><strong>💡 Hinweis:</strong> {{ . | safeHTML }}</div>
+  {{- end -}}
+</div>
+
+<style id="ff-es-style-once">
+.ff-einspar{--emerald:#0E5A43;--emerald-dark:#0A4634;--emerald-soft:#EAF4EF;--anthra:#2E2E33;--yellow:#FFB300;--yellow-soft:#FFF8DC;--red:#B42318;--red-soft:#FDECEC;--muted:#52606d;--muted-soft:#f3f4f6;--border:#dce6e1;--shadow:0 8px 24px rgba(15,52,43,.08);--shadow-win:0 12px 36px rgba(14,90,67,.18);border-radius:14px;overflow:hidden;margin:24px 0;background:#fff;box-shadow:var(--shadow)}
+.ff-es-head{padding:14px 18px;background:linear-gradient(135deg,var(--emerald) 0%,var(--emerald-dark) 100%);color:#fff}
+.ff-es-title{margin:0;font-size:1.15rem;font-weight:700;letter-spacing:-.01em}
+.ff-es-sub{margin:4px 0 0;font-size:.85rem;opacity:.92;line-height:1.4}
+.ff-es-tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff}
+.ff-es-table{width:100%;min-width:720px;border-collapse:separate;border-spacing:0;font-size:.95rem;table-layout:fixed}
+.ff-es-table th,.ff-es-table td{padding:14px 14px;text-align:center;border-bottom:1px solid var(--border);vertical-align:middle;word-break:normal;overflow-wrap:break-word;hyphens:manual;white-space:normal;line-height:1.35}
+.ff-es-table th{font-size:.78rem;color:var(--muted);background:#f8fbf9;font-weight:700;position:sticky;top:0;z-index:3;line-height:1.25}
+.ff-es-table th small{display:block;font-weight:500;font-size:.72rem;margin-top:3px;color:var(--muted);opacity:.85}
+.ff-es-table td strong{font-weight:800;font-size:1rem}
+.ff-es-table td small{display:block;font-weight:500;font-size:.78rem;margin-top:3px;color:inherit;opacity:.85}
+.ff-es-corner{text-align:left;position:sticky;left:0;z-index:4;background:#fff;font-weight:600;width:200px;min-width:200px;max-width:230px;box-shadow:2px 0 6px rgba(15,52,43,.04)}
+.ff-es-table thead th.ff-es-corner{background:#f8fbf9;z-index:5;box-shadow:2px 0 6px rgba(15,52,43,.06)}
+.ff-es-col{min-width:150px}
+.ff-es-col--bad{background:var(--red-soft)}.ff-es-col--good{background:var(--emerald-soft)}.ff-es-col--win{background:var(--yellow-soft);font-weight:700;color:var(--emerald-dark);position:relative}
+th.ff-es-col--win{position:relative;box-shadow:inset 0 4px 0 var(--emerald);padding-top:28px;color:var(--muted)}
+th.ff-es-col--win::before{content:"🏆 Ersparnis";position:absolute;top:0;left:0;right:0;padding:5px 0;background:var(--emerald);color:#fff;font-size:.7rem;letter-spacing:.5px;font-weight:700;text-transform:uppercase}
+.ff-es-bad strong{color:var(--red)}.ff-es-good strong{color:var(--emerald-dark)}
+.ff-es-amount strong{font-size:1.12rem}
+.ff-es-muted{font-weight:500!important}.ff-es-muted small{opacity:.7}
+.ff-es-sum td{background:#fff9e6!important;font-weight:700;border-top:2px solid var(--yellow);border-bottom:2px solid var(--yellow);font-size:.98rem}
+.ff-es-sum td.ff-es-corner{background:#fff9e6!important}
+.ff-es-cta{padding:10px 12px 14px!important;border-bottom:none!important}
+.ff-es-btn{display:inline-block;padding:9px 14px;border-radius:8px;background:var(--emerald);color:#fff!important;text-decoration:none!important;font-weight:700;font-size:.85rem;box-shadow:0 2px 8px rgba(14,90,67,.28);transition:transform .15s,box-shadow .15s;border:none;cursor:pointer;white-space:normal;text-align:center;line-height:1.3}
+.ff-es-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(14,90,67,.4);color:#fff!important}
+.ff-es-footnote{padding:12px 18px;background:var(--yellow-soft);border-top:1px solid #f5e08a;font-size:.85rem;color:#5c4b00;line-height:1.5}
+.ff-es-footnote p{margin:0}.ff-es-footnote p:last-child{margin-bottom:0}
+@media (max-width:640px){.ff-es-tablewrap{overflow:visible}.ff-es-table{display:none}.ff-es-cards{display:grid;gap:12px;padding:16px;background:#f8fbf9}}
+@media (min-width:641px){.ff-es-cards{display:none}}
+.ff-es-card{background:#fff;border-radius:12px;padding:16px;box-shadow:var(--shadow);border-left:5px solid var(--emerald)}
+.ff-es-card-label{font-size:1rem;font-weight:700;margin:0 0 12px;color:var(--anthra);line-height:1.3}
+.ff-es-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.ff-es-card-item{padding:10px 12px;border-radius:8px}
+.ff-es-card-item--bad{background:var(--red-soft)}.ff-es-card-item--good{background:var(--emerald-soft)}
+.ff-es-card-k{font-size:.7rem;font-weight:700;letter-spacing:.3px;text-transform:uppercase;margin-bottom:4px}
+.ff-es-card-item--bad .ff-es-card-k{color:var(--red)}.ff-es-card-item--good .ff-es-card-k{color:var(--emerald-dark)}
+.ff-es-card-v{font-size:.92rem;font-weight:700;line-height:1.35}.ff-es-card-v small{display:block;font-weight:500;font-size:.76rem;margin-top:3px;opacity:.85}
+.ff-es-card-sum{margin-top:12px;padding:12px;border-radius:8px;text-align:center;background:var(--yellow-soft);color:var(--emerald-dark);font-weight:800;font-size:1.1rem}
+.ff-es-card-sum small{font-weight:500;font-size:.78rem;color:#5c4b00;display:block;margin-top:4px}
+.ff-es-card--sum{border-left-color:var(--yellow);background:var(--yellow-soft);text-align:center}
+.ff-es-card-sum--big{font-size:1.35rem;color:var(--emerald-dark);background:transparent;padding:6px 0}
+.ff-es-card-sum--big small{font-size:.8rem;color:var(--muted)}
+.ff-es-btn--card{display:block;margin-top:10px}
+@media (max-width:900px){.ff-es-tablewrap{background:linear-gradient(to right,#fff 0%,#fff calc(100% - 28px),rgba(255,255,255,0) 100%),linear-gradient(to right,rgba(0,0,0,.08),transparent 16px) right/28px 100% no-repeat,radial-gradient(farthest-side at 100% 50%,rgba(15,52,43,.18),transparent 70%) right/20px 100% no-repeat,#fff}}
+</style>

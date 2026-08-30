@@ -1,17 +1,35 @@
-{{- /* ZEILE (Kind von tarif) – v5: .Inner wird per markdownify gerendert,
-       damit **bold** und <br>-Tags funktionieren; Ergebnis in ein
-       <template data-ff>-Marker-Paar verpackt, damit der
-       Grosseltern-Shortcode es sicher per Regex aus .Inner fischen
-       kann. Keine Scratch-Abhaengigkeit. */ -}}
-{{- $label     := .Get "label" -}}
-{{- $cardLabel := .Get "card_label" | default (.Get "card-label") | default $label -}}
-{{- $tone      := .Get "tone" | default "default" -}}
-{{- $highlight := .Get "highlight" | default "false" -}}
-{{- $rawValue  := trim .Inner "\n\r\t " -}}
-{{- /* Markdown rendern, umschliessende <p>-Tags entfernen und
-       verbliebene &lt;br&gt;-Escapes wieder zu <br> machen (Goldmark
-       filtert inline-HTML in shortcode-Inhalten sonst gern heraus). */ -}}
-{{- $value := $rawValue | markdownify -}}
-{{- $value = replaceRE `(?s)^\s*<p>(.*)</p>\s*$` "$1" $value -}}
-{{- $value = $value | safeHTML -}}
-<template data-ff="zeile" data-label="{{ $label | htmlEscape }}" data-card-label="{{ $cardLabel | htmlEscape }}" data-tone="{{ $tone }}" data-highlight="{{ $highlight }}"></template>{{ $value }}<template data-ff="/zeile"></template>
+{{- /* ZEILE – von BEIDEN Eltern-Shortcodes (einspartabelle UND
+       tarifvergleich) nutzbar. Wir erkennen an der Position bzw.
+       am Parent-Namen, welche Attribute gemeint sind.
+       Fuer einspartabelle: label, vorher, nachher, ersparnis.
+       Fuer tarifvergleich:  label, card_label, tone, highlight
+                             (Wert kommt aus .Inner). */ -}}
+{{- $parentName := "" -}}
+{{- with .Parent -}}{{- $parentName = .Name -}}{{- end -}}
+{{- if eq $parentName "einspartabelle" -}}
+  {{- $label      := .Get "label" -}}
+  {{- $vorherMain := .Get "vorher-main" -}}
+  {{- $vorherSub  := .Get "vorher-sub" | default "" -}}
+  {{- $nachMain   := .Get "nachher-main" -}}
+  {{- $nachSub    := .Get "nachher-sub" | default "" -}}
+  {{- $ersparnis  := .Get "ersparnis" -}}
+  {{- $_ := trim .Inner "\n\r\t " -}}
+  <template data-ff="row"
+            data-label="{{ $label | htmlEscape }}"
+            data-vm="{{ $vorherMain | htmlEscape }}"
+            data-vs="{{ $vorherSub | htmlEscape }}"
+            data-nm="{{ $nachMain | htmlEscape }}"
+            data-ns="{{ $nachSub | htmlEscape }}"
+            data-e="{{ $ersparnis | htmlEscape }}"></template>
+{{- else -}}
+  {{- /* Fallback: Altes Verhalten fuer tarifvergleich */ -}}
+  {{- $label     := .Get "label" -}}
+  {{- $cardLabel := .Get "card_label" | default (.Get "card-label") | default $label -}}
+  {{- $tone      := .Get "tone" | default "default" -}}
+  {{- $highlight := .Get "highlight" | default "false" -}}
+  {{- $rawValue  := trim .Inner "\n\r\t " -}}
+  {{- $value := $rawValue | markdownify -}}
+  {{- $value = replaceRE `(?s)^\s*<p>(.*)</p>\s*$` "$1" $value -}}
+  {{- $value = $value | safeHTML -}}
+  <template data-ff="zeile" data-label="{{ $label | htmlEscape }}" data-card-label="{{ $cardLabel | htmlEscape }}" data-tone="{{ $tone }}" data-highlight="{{ $highlight }}"></template>{{ $value }}<template data-ff="/zeile"></template>
+{{- end -}}
