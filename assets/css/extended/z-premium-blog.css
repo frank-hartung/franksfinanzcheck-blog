@@ -685,29 +685,20 @@ details:not(.toc)[open] > summary::before {
   border-collapse: separate;
   border-spacing: 0;
   word-break: normal;
-  overflow-wrap: normal;
-}
-.post-content table thead,
-.post-content table tbody,
-.post-content table tr {
-  display: table;
-  width: 100%;
-  table-layout: auto;
+  overflow-wrap: break-word;
 }
 .post-content table th,
 .post-content table td {
-  white-space: nowrap;
-  vertical-align: middle;
+  vertical-align: top;
 }
 .post-content table th:first-child,
 .post-content table td:first-child {
   text-align: left;
-  white-space: normal;
   position: sticky;
   left: 0;
   z-index: 2;
   background: var(--theme);
-  min-width: 180px;
+  min-width: 160px;
 }
 .post-content table thead th:first-child {
   z-index: 4;
@@ -718,9 +709,6 @@ details:not(.toc)[open] > summary::before {
   position: sticky;
   top: 0;
   z-index: 3;
-}
-.post-content table tr {
-  display: table-row;
 }
 .post-content table tr:hover td {
   background: color-mix(in srgb, var(--ff-emerald-soft) 60%, transparent);
