@@ -1,0 +1,15 @@
+{{- /* SUMME – Kind von einspartabelle: die abschliessende Summenzeile. */ -}}
+{{- $vorherMain := .Get "vorher-main" -}}
+{{- $vorherSub  := .Get "vorher-sub" | default "" -}}
+{{- $nachMain   := .Get "nachher-main" -}}
+{{- $nachSub    := .Get "nachher-sub" | default "" -}}
+{{- $ersparnis  := .Get "ersparnis" -}}
+{{- $label      := .Get "label" | default "Summe der Maßnahmen" -}}
+{{- $_ := trim .Inner "\n\r\t " -}}
+<template data-ff="sum"
+          data-label="{{ $label | htmlEscape }}"
+          data-vm="{{ $vorherMain | htmlEscape }}"
+          data-vs="{{ $vorherSub | htmlEscape }}"
+          data-nm="{{ $nachMain | htmlEscape }}"
+          data-ns="{{ $nachSub | htmlEscape }}"
+          data-e="{{ $ersparnis | htmlEscape }}"></template>
