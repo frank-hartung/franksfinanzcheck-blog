@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-08-31 18:32 UTC · Modus: CHECK
+**Stand:** 2026-08-31 18:46 UTC · Modus: FIX
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
