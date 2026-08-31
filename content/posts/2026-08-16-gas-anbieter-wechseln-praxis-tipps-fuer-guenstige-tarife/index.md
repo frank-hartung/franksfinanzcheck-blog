@@ -4,7 +4,7 @@ description: "Gas-Anbieter wechseln & im 1. Jahr bis 882 € sparen: die besten 
 date: 2026-08-28T01:05:14Z
 draft: false
 cadence_demoted: 2026-08-26T13:46:19Z
-lastmod: 2026-08-30T16:30:00Z
+lastmod: 2026-08-31
 tags: ["Gas-Anbieter wechseln", "Gastarif Vergleich", "Gaspreisgarantie", "Heizkosten senken", "Energie sparen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -120,6 +120,18 @@ Fülle das Online-Formular in etwa 5 Minuten aus. Der neue Versorger kündigt de
 ## Sonderfall: Preiserhöhung und Sonderkündigungsrecht
 
 Wenn dein bisheriger Gasversorger eine Preiserhöhung ankündigt, hast du ein gesetzliches Sonderkündigungsrecht nach § 41 EnWG. Die Kündigungsfrist beträgt in der Regel zwei Wochen ab Erhalt des Informationsschreibens. In diesem speziellen Fall solltest du ausnahmsweise selbst schriftlich oder per E-Mail kündigen, um die kurze Frist nicht zu versäumen, und im Wechselantrag beim neuen Anbieter vermerken, dass du bereits wegen einer Preiserhöhung gekündigt hast. Dadurch wechselst du zum Datum der Preisanpassung nahtlos in den neuen Spartarif.
+
+<!-- premium-length-2026 -->
+
+## Sonderkündigung und Preiserhöhung – der Brief, der zählt
+
+Steht in einem Schreiben „wir passen den Arbeitspreis an“, läuft die Sonderkündigungsfrist. Datum des Zugangs notieren, Frist im Brief prüfen (oft 2 Wochen). Kündigung schriftlich mit Kundennummer, Zählernummer, Bezug auf das Erhöhungsschreiben. Parallel neuen Tarif abschließen, Lieferbeginn = Ende des alten.
+
+Wer die Frist verpasst, bleibt im erhöhten Tarif bis zur nächsten ordentlichen Kündigung. Kalender-Foto des Briefes am Kühlschrank ist unspektakulär und wirksam.
+
+## 3-Schritte-Ablauf ohne Lücke
+
+Verbrauch und Zähler von der Jahresrechnung. Vergleich mit Preisgarantie-Filter. Auftrag, Bestätigung, Abschlag nach 6 Wochen gegen Zählerstand. Der Grundversorger oder Alt-Anbieter wird automatisch abgelöst. Du heizt durch, die Rechnung wechselt den Absender.
 
 ## Fazit: Keine Angst vor dem Wechsel – es lohnt sich immer
 

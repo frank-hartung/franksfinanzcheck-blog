@@ -65,6 +65,7 @@ KETTE = [
     ("stil_guard.py",         ["--fix"],                "A-Text", "Stil-Qualitaet S1-S8 (12.08. hinzu)"),
     ("plagiat_guard.py",      ["--fix"],                "B-Semantik", "Originalitaet P1-P5 + Fingerprint-Registry (12.08.)"),
     ("content_audit.py",      ["--fix"],                "B-Semantik", "Content-Auditor C1-C6: Duenn, Struktur, Platzhalter (12.08.)"),
+    ("length_guard.py",       ["--fix"],                "B-Semantik", "Premium-Zeichenlänge Google+Pinterest (SSOT length_policy.py)"),
     ("fazit_schmiede.py",     ["--fix"],                "B-Semantik", "Fazit- & FAQ-Schmiede mit Selbstheilung"),
     ("compound_guard.py",     ["--fix"],                "B-Semantik", "Komposita SEO-Falle"),
     ("math_guard.py",         ["--fix"],                "B-Semantik", "Zahlenbeweis M1-M2"),

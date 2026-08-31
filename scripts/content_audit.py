@@ -61,7 +61,7 @@ HISTORY = ROOT / "data" / "audit_history.jsonl"
 DO_FIX = "--fix" in sys.argv
 NEW_ONLY = "--new-only" in sys.argv
 
-MIN_WORDS = 750           # C1
+MIN_WORDS = 1400          # C1 Premium-Floor (≈ 10.000 Zeichen)
 ZONES_RX = re.compile(
     r"(\A---.*?^---\s*$"             # Frontmatter (ganz vorne!)
     r"|```.*?```"
@@ -188,7 +188,7 @@ def selftest() -> list:
         fehler.append("Fall 1: dünn nicht erkannt")
     # Fall 2: guter Artikel (genug Wörter, Fazit, FAQ, Zahl) leer
     # 80 Wiederholungen von 7 Woertern = 560. Muessen > 750 sein → 120x.
-    good_body = ("Dieser Text handelt vom Geld sparen im Haushalt. " * 120 +
+    good_body = ("Dieser Text handelt vom Geld sparen im Haushalt. " * 220 +
                  "\n\n## Fazit\nDas war es. Zahl 50 € spart.\n## Häufige Fragen\nF1?")
     r = audit_body("t2", fm, good_body)
     if any("C1" in i or "C2" in i or "C4" in i for i in r["issues"]):

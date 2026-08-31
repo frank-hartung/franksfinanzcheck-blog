@@ -1,4 +1,5 @@
 ---
+lastmod: 2026-08-31
 title: "Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen"
 description: "Kfz-Versicherung Vergleich 2026: Mit 7 Tipps holst du bis zu 800 € Ersparnis - Kündigungsfrist 30.11., SF-Klasse & Werkstattbindung."
 date: 2026-08-26T06:10:00Z
@@ -145,6 +146,22 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 | Premium-Fahrzeug, SF 30, Werkstattneuling | 200–400 € |
 
 *Quellen: eigene Vertragsvergleiche 2016–2026, Stiftung Warentest Finanztest (Ausgaben 2024–2026), CHECK24-Wechselstudie.*
+
+<!-- premium-length-2026 -->
+
+## Stichtag 30.11. – der Kalender, der 800 € wert sein kann
+
+Kfz-Verträge zum Kalenderjahr: Kündigung meist bis 30.11., 30.09. bei manchen. Wer im Oktober vergleicht, hat Ruhe. Wer am 29.11. anfängt, unterschreibt Fehler ( falsche SF-Klasse, vergessene Werkstattbindung).
+
+SF-Klasse aus der Vorversicherung übernehmen, nicht schätzen. Zweitwagenregelung, Fahrerkreis eng, Kilometer ehrlich plus Puffer 2.000 km. Werkstattbindung spart 10–20 %, bindet dich an das Netz – bei einem 8 Jahre alten Auto oft okay, beim Leasing prüfe die Leasingbedingungen.
+
+Ein 30-Minuten-Vergleich im Oktober schlägt jeden „Treue-Rabatt“, der in Wahrheit ein Nicht-Wechsel-Aufschlag ist.
+
+<!-- premium-length-2026-b -->
+
+## SF-Klasse und Zweitwagen – wo 800 € herkommen
+
+Die SF-Klasse ist der größte Hebel nach Regionalklasse. Falsch übertragen = falscher Preis. Zweitwagenregelung über den Erstvertrag, Fahrerkreis nicht „alle“, Kilometer mit Puffer. Werkstattbindung nur, wenn das Netz in deinem Umkreis Werkstätten hat, zu denen du auch fährst. 30.11. in den Kalender, Vergleich in KW 42, nicht in KW 48.
 
 ## Fazit: Ein 30-Minuten-Vergleich, der sich auszahlt
 

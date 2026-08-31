@@ -1,4 +1,5 @@
 ---
+lastmod: 2026-08-31
 title: "Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet"
 description: "Internet & DSL wechseln: Spare bis zu 380 € im Jahr, sichere dir Neukunden-Boni und vermeide Ausfallzeiten. Schritt-für-Schritt Praxis-Anleitung."
 date: 2026-08-14T08:35:12Z
@@ -74,6 +75,36 @@ Nach Erhalt der Auftragsbestätigung und des Schalttermins schließt du deinen n
 ## Router mieten oder kaufen: Was rechnet sich mehr?
 
 Viele Anbieter bieten bei Vertragsabschluss WLAN-Router zur Miete für 4,99 € bis 7,99 € pro Monat an. Auf 24 Monate gerechnet summiert sich die Miete auf 120 € bis 190 €. Ein eigener Markenrouter (z. B. AVM FRITZ! Box 7530 AX oder 7590 AX) kostet einmalig zwischen 140 € und 220 € und kann über viele Jahre hinweg und über mehrere Anbieterwechsel genutzt werden. Dank der gesetzlichen Routerfreiheit in Deutschland bist du nicht an Geräte deines Internetanbieters gebunden und sparst langfristig viel Geld. Wer den Router nach vier oder fünf Jahren im Gebrauchtmarkt weiterverkauft, erzielt oft noch 40 bis 50 % des ursprünglichen Anschaffungspreises. Damit das neue Gerät in jeder Ecke der Wohnung wirklich volle Geschwindigkeit liefert, haben wir die besten Tricks in WLAN verbessern: Mehr Speed in jeder Ecke zusammengestellt.
+
+<!-- premium-length-2026 -->
+
+## Die 4 Phasen ohne Panik und ohne Leerlauf
+
+**Phase 1 – Inventur (30 Minuten).** Altvertrag: Beginn, Mindestlaufzeit, ob du schon monatlich kündbar bist, Router-Eigentum, aktuelle Messwerte (Kabeltest). Ohne Kabeltest weißt du nicht, ob ein Wechsel die Speed-Probleme löst oder nur den Preis.
+
+**Phase 2 – Auswahl (20 Minuten).** Verfügbarkeit an der Adresse, Effektivpreis über 24 Monate, Upload für Homeoffice, Hardware-Freiheit. Zwei Favoriten notieren, falls der Erste eine Ablehnung schickt.
+
+**Phase 3 – Auftrag.** Online, Widerruf bekannt, Liefertermin in der Bestätigung. Der neue Anbieter übernimmt die Kündigung in den meisten Fällen. Du kündigst nur selbst, wenn das ausdrücklich gewünscht wird – sonst entstehen Doppelkündigungen und Chaos.
+
+**Phase 4 – Umschalttag.** Laut TKG max. ein Tag Unterbrechung. Handy-Hotspot als Backup, wichtige Uploads vorher. Router des neuen Anbieters erst anschließen, wenn die Leitungsfreischaltung bestätigt ist. Alte Box 14 Tage aufbewahren, bis der Zugang stabil ist.
+
+## Router mieten oder kaufen – die 24-Monats-Rechnung
+
+Miete 6 € × 24 = 144 €, du gibst das Gerät am Ende zurück. Kauf FritzBox 120–180 €, nutzt du über zwei Verträge = 4–6 Jahre, Kosten unter 40 € pro 24 Monate. Wer wechselt, nimmt den eigenen Router mit – das ist der unterschätzte Hebel, weil du WLAN-Einstellungen, Mesh und Gäste-Netz nicht jedes Mal neu aufsetzt.
+
+Ausnahme: Der neue Anbieter erzwingt seine Box am Glasfaser-Modem. Dann Bridge-Modus + eigene Box dahinter, oder du akzeptierst die Miete für 24 Monate und kaufst danach.
+
+## Nach dem Wechsel: 14-Tage-Protokoll
+
+Täglich einmal Kabel-Speedtest, ping, ob TV-App und VPN laufen. Weicht der Durchschnitt um mehr als 30 % vom Vertrag ab, Störung ticketen – nicht erst nach drei Monaten. Die Entstörung in den ersten 14 Tagen ist psychologisch und vertraglich einfacher als nach einem halben Jahr Dulden.
+
+<!-- premium-length-2026-b -->
+
+## Der Umschalttag ohne Homeoffice-Kollaps
+
+Lege den Wechseltag nicht auf den Montag mit der wichtigsten Videokonferenz. Dienstag oder Mittwoch, Hotspot getestet, wichtige Uploads am Vortag. Router-Zugangsdaten des neuen Anbieters aus der Mail kopiert, nicht erst um 9 Uhr suchen. Nach 4 Stunden Stabilität: altes Gerät in den Karton, 14 Tage stehen lassen. Dann erst zurückschicken, mit Foto des Labels.
+
+Wer so plant, erinnert den Wechsel als 20-Minuten-Aktion. Wer nicht plant, erinnert ihn als den Tag ohne Netz.
 
 ## Fazit: Mit minimalem Aufwand hunderte Euro sparen
 

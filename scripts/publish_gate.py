@@ -5,7 +5,7 @@ Betriebsregel (Frank, 13.08.2026, erweitert 14.08.2026): Zukünftige Artikel
 werden nur dann tatsächlich live geschaltet, wenn sie VIER automatische
 Prüfungen bestehen:
 
-  1. check_length.py          – Zeichen-/Wortlänge (700-1800 Wörter)
+  1. check_length.py          – Zeichenlänge Premium (Floor 10.000, Optimum 12.000–18.000)
   2. seo_audit.py              – Title/Description-Länge, Wortzahl, Alt-Texte,
                                   Sitemap-Konsistenz
   3. affiliate_profi_check.py  – A1-A8: Offenlegung, E-E-A-T-Feld, interne

@@ -1,29 +1,18 @@
 #!/usr/bin/env python3
 """Zeichenlängen-Gate (deterministisch, selbstheilend) für FranksFinanzcheck.
 
-Stellt sicher, dass alle Blogartikel die Ziel-Länge haben (Profi-Format):
+Premium-Korridor (Google YMYL + Pinterest-Landing, SSOT length_policy.py):
 
-  MIN_WORDS  = 700   (hartes Minimum – darunter gilt der Artikel als „zu kurz")
-  OPT_MIN    = 800   (unteres Optimum – darunter: „unter Optimum", kein Fehler)
-  OPT_MAX    = 1400  (oberes Optimum)
-  MAX_WORDS  = 1800  (hartes Maximum – darüber: „zu lang")
-
-DAUERVORGABE ZEICHENLÄNGE (festgelegt 19.08.2026, Blog-Launch 08.08.2026):
-  Empfohlen pro Blogartikel 6.000–10.000 Zeichen Fließtext
-  (≈ 800–1.400 Wörter; empirisch aus dem Bestand: Median 9.124 Zeichen
-  bei 6,96 Zeichen/Wort). Die Zeichen-Empfehlung wird ausgewiesen und
-  als Hinweis gemeldet – die HARTEN Gates bleiben wortbasiert
-  (Hoheitskarte QUALITAETS-REGELWERK.md: Posts check_length.py,
-  Pillar length_guard.py).
+  Posts Floor   10.000 Zeichen  (hartes Minimum)
+  Posts Optimum 12.000–18.000 Zeichen
+  Posts Maximum 22.000 Zeichen  (darüber: „zu lang“)
 
 Gemessen wird im FLIESSTEXT (Frontmatter, Code-Blöcke, HTML, Bild-Markup
-raus; Markdown-Links werden auf ihren Anzeigetext reduziert). Zusätzlich
-zur Wortzahl wird die Zeichenzahl (mit Leerzeichen) ausgewiesen.
+raus; Markdown-Links auf Anzeigetext reduziert).
 
 Selbstheilung:
-  --fix       ruft für alle Artikel unter MIN_WORDS die KI-Verlängerung auf
-              (scripts/extend_articles.py) und prüft danach erneut.
-  (ohne --fix) nur melden; Exit 1 bei zu kurzen/zu langen Artikeln.
+  --fix  ruft scripts/extend_articles.py für alle Artikel unter dem Floor
+         und prüft danach erneut.
 
 Nutzung:
   python3 scripts/check_length.py             # nur melden (Exit 0/1)
@@ -36,17 +25,16 @@ import os
 import re
 import sys
 import json
-import glob
 import subprocess
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+import length_policy as lp  # noqa: E402
 
-# Schwellen via Env ueberschreibbar (Audit 11.08.: Affiliate-Floor 1000 in der
-# Engine per Variable LENGTH_MIN_WORDS gesetzt - siehe content-engine-v2.yml)
-MIN_CHARS = int(os.environ.get("LENGTH_MIN_CHARS") or 8000)
-OPT_MIN_CHARS = int(os.environ.get("LENGTH_OPT_CHARS_MIN") or 10000)
-OPT_MAX_CHARS = int(os.environ.get("LENGTH_OPT_CHARS_MAX") or 20000)
-MAX_CHARS = int(os.environ.get("LENGTH_MAX_CHARS") or 25000)
+MIN_CHARS = lp.POSTS["target_min_chars"]
+OPT_MIN_CHARS = lp.POSTS["opt_min_chars"]
+OPT_MAX_CHARS = lp.POSTS["opt_max_chars"]
+MAX_CHARS = lp.POSTS["fat_chars"]
 
 RE_CODE = re.compile(r"```.*?```", re.S)
 RE_HTML = re.compile(r"<[^>]+>")
@@ -65,10 +53,9 @@ def clean_body(content: str) -> str:
     return body
 
 
-def measure(body: str):
-    words = len(body.split())
-    chars = len(body)
-    return words, chars
+def measure_file(content: str):
+    """SSOT: dieselbe Messung wie length_guard / length_policy."""
+    return lp.measure(content)
 
 
 def status_of(chars: int) -> str:
@@ -86,8 +73,9 @@ def collect():
     from post_utils import list_post_paths, slug_of
     for f in list_post_paths():
         content = open(f, encoding="utf-8").read()
-        body = clean_body(content)
-        words, chars = measure(body)
+        if re.search(r"^draft:\s*true\s*$", content[:2500], re.M):
+            continue
+        words, chars = measure_file(content)
         m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
         title = m.group(1).strip() if m else ""
         arts.append({
@@ -116,7 +104,6 @@ def main():
                             os.path.join(BLOG_DIR, "scripts", "extend_articles.py"),
                             "--min-chars", str(MIN_CHARS)],
                            cwd=BLOG_DIR, check=False)
-            # Erneut messen
             arts = collect()
             issues = [a for a in arts if a["status"] in ("zu-kurz", "zu-lang")]
 
@@ -130,7 +117,6 @@ def main():
     for a in sorted(issues, key=lambda x: x["chars"]):
         print(f"  ❌ [{a['status']}] {a['slug']}: {a['chars']} Zeichen / "
               f"{a['words']} Wörter")
-    # Unter-Optimum nur als Hinweis (kein Fehler)
     for a in sorted(arts, key=lambda x: x["chars"]):
         if a["status"] == "unter-optimum":
             print(f"  ℹ️ [unter-Optimum] {a['slug']}: {a['chars']} Zeichen")

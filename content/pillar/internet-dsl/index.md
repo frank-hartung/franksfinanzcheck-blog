@@ -1,4 +1,5 @@
 ---
+lastmod: 2026-08-31
 title: "Internet, DSL & Mobilfunk: Der große Ratgeber für schnelles Netz"
 description: "Schnelleres Internet & günstigere Tarife: DSL-Wechselbonus sichern, WLAN im ganzen Haus verbessern, DNS-Tuning und die besten Handytarife."
 date: 2026-08-08
@@ -68,6 +69,92 @@ Beim Mobilfunk gilt eine einfache Grundregel: Kaufe dein Smartphone idealerweise
 👉 **Günstige SIM-Only & Handytarife vergleichen:** [**→ Jetzt Handytarife vergleichen**](/go/handytarife/)
 
 ---
+
+<!-- premium-length-2026 -->
+
+## Der 12-Monats-Plan für Netz und Mobilfunk
+
+Ein Silo lebt von Wiederholung, nicht von einem einmaligen Wechsel. Deshalb gehört Internet in denselben Kalender wie Strom und Versicherung.
+
+**Januar.** Speedtest-Kabel + WLAN an drei Orten. Foto der Werte. Weicht Kabel um mehr als 30 % vom Vertrag ab, Entstörung – nicht erst den Tarif wechseln.
+
+**März.** Mobilfunk: drei Monats-Verbrauchsdaten im Handy. Tarif gegen Realität. SIM-Only, wenn das Handy abbezahlt ist.
+
+**Juni.** DSL/Glasfaser-Vertrag: Laufzeitende prüfen. Liegt es in den nächsten 16 Wochen, Vergleich starten, Bonusbedingungen lesen, eigenen Router klären.
+
+**September.** WLAN-Herbstcheck: Mesh-Knoten, Firmware, Gäste-WLAN, IoT getrennt. Homeoffice-Platz messen, bevor die dunkle Jahreszeit Videocalls verdichtet.
+
+**November.** Black-Friday-Tarife nur mit Effektivpreis über 24 Monate. Die 1-€-erste-Monate sind selten das günstigste Paket.
+
+## Cluster: welche Artikel du in welcher Reihenfolge liest
+
+1. Bedarf und Technik – [richtigen DSL-Tarif finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/)
+2. Preis und Fallen – [DSL-Vergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
+3. Bonus – [Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/)
+4. Prozess – [Anbieterwechsel Praxis](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
+5. Funk – [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
+6. Feinschliff – [DNS wechseln](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/)
+7. Mobil – [Handytarif 2026](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/)
+
+Die Reihenfolge verhindert, dass du 1 Gbit kaufst und dann merkst, dass der Router im Schrank steht.
+
+## Rechenbeispiel Haushalt 2026: Festnetz + zwei SIM
+
+Alt: 44,99 € DSL nach Rabattphase + 2 × 29,99 € Handy im 24-Monats-Bündel mit abbezahltem Smartphone = 104,97 €. Neu: 34,50 € effektiv DSL inkl. Bonus / 24 Monate + 2 × 9,99 € SIM-Only 15 GB = 54,48 €. Differenz **50,49 € im Monat, 605 € im Jahr**. Zeitaufwand: ein Nachmittag plus Umschalttag. Das ist der größte Hebel im Silo, größer als jedes Mesh-Marketing.
+
+## Typische Silo-Fehler
+
+- Nur Handy wechseln, DSL seit 2019 unangetastet (oder umgekehrt)
+- Glasfaser bestellen, ohne die Inhouse-Verkabelung zu klären
+- Mesh kaufen, bevor der Kabeltest am Router stimmt
+- Bonus mitnehmen und in Monat 13 den teuren Folgepreis übersehen
+- Familienkarte mit 50 GB für ein Kind, das 95 % im WLAN ist
+
+## FAQ-Ergänzung zum Ratgeber
+
+### Lohnt Glasfaser, wenn VDSL 250 schon da ist?
+
+Ja, wenn Upload, Ping und Stabilität für dich zählen (VPN, Videokonferenzen, Upload großer Dateien) und der Hausanschluss ohne vierstellige Extra-Rechnung kommt. Nein, wenn du 80 € mehr zahlst für 900 Mbit, von denen WLAN 80 ausliefert.
+
+### Kann ich während des Wechsels kündigen?
+
+Widerruf 14 Tage. Danach bindet die Mindestlaufzeit. Deshalb den Vertrag lesen, bevor du klickst – nicht danach.
+
+### Ist 5G zu Hause ein Ersatz für DSL?
+
+Als Backup oder in der Bauphase ja. Als Dauerlösung nur, wenn das Datenvolumen und der Ping alltagstauglich sind und du Drosselgrenzen kennst. Homeoffice mit VPN auf gedrosseltem 5G ist Frust.
+
+Dieses Silo ist dann fertig, wenn du einmal im Jahr 40 Minuten investierst – nicht wenn du jeden Monat einen neuen Router kaufst.
+
+<!-- premium-length-2026-b -->
+
+## Technik-Entscheid 2026: VDSL, Kabel, FTTH, Hybrid
+
+Die Verfügbarkeitskarte lügt höflich. „Bis zu 250 Mbit“ heißt: an der Straße, nicht in deiner Dose, nicht in deinem WLAN. Deshalb drei Messungen, bevor du unterschreibst.
+
+**Messung A – Leitungsqualität.** Ein Techniker- oder Selbsttest am Abschluss (Teilnehmeranschluss, Glasfaser-ONT). Liegt der Sync 40 % unter der Werbung, ist der Tarif falsch, nicht dein Router.
+
+**Messung B – Inhouse.** 15 m CAT7 zur FritzBox schlägt 15 m Powerline durch die Spülmaschine. Wer neu baut oder renoviert, legt Leerrohr. Wer mietet, verhandelt eine Dose im Arbeitszimmer, nicht nur im Flur.
+
+**Messung C – Funk.** Dieselbe Speedtest-App, drei Orte, 19 Uhr. Unter 30 % der Leitung ist Mesh- oder Positionsthema, kein Grund für 1 Gbit.
+
+Hybrid (DSL+LTE) ist Backup, kein Dauerzustand. Das LTE-Volumen ist gedrosselt, VPN leidet, der Ping tanzt. Als Baustellenlösung drei Monate okay, als „wir haben ja Hybrid“-Dauerlösung teuer und nervig.
+
+## Provider-Wechselrecht nach TKG – was du 2026 wirklich hast
+
+Nach der Mindestlaufzeit monatlich kündbar, Umschaltung max. ein Kalendertag, Entstörung mit gesetzlicher Frist. Das steht im Gesetz, nicht in der Kulanzabteilung. Wenn der Wechseltag überschritten wird, dokumentieren (Ping, Traceroute, Ticketnummer) und Minderungsanspruch ansprechen. Die meisten Fälle lösen sich mit einem Ticket am Umschaltmorgen – aber nur, wenn du den Hotspot parat hast und nicht drei Stunden in der Warteschleife ohne Protokoll verbringst.
+
+Rufnummern und E-Mail-Adressen @anbieter.de sind kein Grund zu bleiben. Domain und Mail besser selbst hosten oder bei einem unabhängigen Postfach. Wer 24 Monate bleibt, weil „die E-Mail“, zahlt eine emotionale Miete.
+
+## Hardware-Parkour ohne Neu-Kauf-Zwang
+
+Eine solide FritzBox aus 2023/24 trägt 2026 noch VDSL 250 und FTTH im Bridge hinter dem ONT. Mesh-Repeater derselben Generation halten mit. Der Zwang zur Provider-Box ist oft Firmware-Politik, nicht Physik. Bridge-Modus schriftlich erfragen, bevor du die eigene Box in den Schrank stellst.
+
+Stromkosten: Router + zwei Mesh-Knoten + Switch ≈ 15–25 Watt dauerhaft ≈ 40–70 €/Jahr. Das rechtfertigt keinen Billig-Repeater, der alle zwei Tage neu startet. Es rechtfertigt Zeitsteuerung nachts, wenn niemand streamt.
+
+## Inhaltsverzeichnis für interne Links (Silo-Hygiene)
+
+Jeder neue Artikel in diesem Cluster sollte auf diese Pillar zeigen – einmal, mit verständlichem Anker, nicht fünfmal. Die Pillar zeigt auf die sieben Vertiefungen. So entsteht Topical Authority, ohne Keyword-Spam. Pinterest-Pins aus dem Board „Internet & DSL“ landen auf dem passenden Vertiefungsartikel, nicht auf dieser Übersicht, sobald der Artikel existiert. Die Übersicht bleibt der Hub für Menschen, die noch nicht wissen, welche Teildisziplin ihr Problem ist.
 
 ## Häufige Fragen zu DSL, Internet und Mobilfunk
 

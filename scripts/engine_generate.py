@@ -255,7 +255,7 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
             words = len(re.findall(r"\w+", text))
             h2 = len(re.findall(r"^##\s", body, re.M))
             floskeln = [f for f in g.PROFI_FLOSKELN if f in text.lower()]
-            if words < 550 or h2 < 3 or floskeln:
+            if words < 1400 or h2 < 5 or floskeln:
                 print(f"  ⚠ Relaxed-Gate: {words} Wörter / {h2} H2 / Floskeln {floskeln[:2]} (Versuch {attempt})")
                 continue
 

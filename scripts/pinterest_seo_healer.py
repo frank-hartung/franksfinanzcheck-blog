@@ -48,6 +48,7 @@ DESC_MIN, DESC_MAX = 70, 160
 DESC_OPT_MIN, DESC_OPT_MAX = 120, 160
 PIN_TITLE_MAX = 100
 PIN_TITLE_OPT = 60
+PIN_DESC_MIN = 220
 PIN_DESC_MAX = 500
 KEYWORDS_MIN = 3
 HASHTAG_MAX = 3
@@ -664,7 +665,7 @@ def heal_article(a: dict) -> tuple[bool, list[str]]:
     pin_title_ok = (bool(a["pin_title"].strip())
                     and len(a["pin_title"]) <= PIN_TITLE_MAX)
     pin_desc_ok = (bool(a["pin_description"].strip())
-                   and 40 <= len(a["pin_description"]) <= PIN_DESC_MAX
+                   and PIN_DESC_MIN <= len(a["pin_description"]) <= PIN_DESC_MAX
                    and "&" not in a["pin_description"])
     if not pin_title_ok:
         content = fm_set(content, "pin_title", pin_title)
