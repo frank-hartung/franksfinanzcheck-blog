@@ -34,7 +34,7 @@
 #       kaputten Zeilen werden ersetzt. Minimaler Diff, maximale Wirkung.
 #
 #  Umgebung:
-#    BRANCH       Zielbranch                    (Default: main)
+#    BRANCH       Zielbranch (Default: GITHUB_REF_NAME, sonst main)
 #    GIT_USER     Committer-Name                (Default: Automation-Bot)
 #    GIT_MAIL     Committer-E-Mail
 #    DRY_RUN=1    nur anzeigen, nichts pushen
@@ -51,7 +51,10 @@
 # ============================================================
 set -Eeuo pipefail
 
-BRANCH="${BRANCH:-main}"
+# Auf GitHub Actions immer den tatsächlich ausgecheckten Ref verwenden.
+# So kann ein workflow_dispatch auf einem Prüf-/Feature-Branch niemals
+# versehentlich dessen HEAD nach main pushen.
+BRANCH="${BRANCH:-${GITHUB_REF_NAME:-main}}"
 GIT_USER="${GIT_USER:-Automation-Bot}"
 GIT_MAIL="${GIT_MAIL:-automation-bot@users.noreply.github.com}"
 DRY_RUN="${DRY_RUN:-0}"
