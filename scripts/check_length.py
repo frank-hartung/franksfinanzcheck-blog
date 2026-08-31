@@ -43,16 +43,10 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Schwellen via Env ueberschreibbar (Audit 11.08.: Affiliate-Floor 1000 in der
 # Engine per Variable LENGTH_MIN_WORDS gesetzt - siehe content-engine-v2.yml)
-MIN_WORDS = int(os.environ.get("LENGTH_MIN_WORDS") or 700)
-OPT_MIN = int(os.environ.get("LENGTH_OPT_MIN") or 800)
-OPT_MAX = int(os.environ.get("LENGTH_OPT_MAX") or 1400)
-MAX_WORDS = int(os.environ.get("LENGTH_MAX_WORDS") or 1800)
-
-# DAUERVORGABE (19.08.2026): empfohlene Zeichenlänge pro Blogartikel
-# (Fließtext, inkl. Leerzeichen). Empirisch: Median 9.124 Zeichen,
-# 6,96 Zeichen/Wort im Bestand. Empfehlung = Hinweis, kein hartes Gate.
-OPT_CHARS_MIN = int(os.environ.get("LENGTH_OPT_CHARS_MIN") or 6000)
-OPT_CHARS_MAX = int(os.environ.get("LENGTH_OPT_CHARS_MAX") or 10000)
+MIN_CHARS = int(os.environ.get("LENGTH_MIN_CHARS") or 8000)
+OPT_MIN_CHARS = int(os.environ.get("LENGTH_OPT_CHARS_MIN") or 10000)
+OPT_MAX_CHARS = int(os.environ.get("LENGTH_OPT_CHARS_MAX") or 20000)
+MAX_CHARS = int(os.environ.get("LENGTH_MAX_CHARS") or 25000)
 
 RE_CODE = re.compile(r"```.*?```", re.S)
 RE_HTML = re.compile(r"<[^>]+>")
@@ -77,12 +71,12 @@ def measure(body: str):
     return words, chars
 
 
-def status_of(words: int) -> str:
-    if words < MIN_WORDS:
+def status_of(chars: int) -> str:
+    if chars < MIN_CHARS:
         return "zu-kurz"
-    if words > MAX_WORDS:
+    if chars > MAX_CHARS:
         return "zu-lang"
-    if words < OPT_MIN or words > OPT_MAX:
+    if chars < OPT_MIN_CHARS or chars > OPT_MAX_CHARS:
         return "unter-optimum"
     return "ok"
 
@@ -102,7 +96,7 @@ def collect():
             "title": title,
             "words": words,
             "chars": chars,
-            "status": status_of(words),
+            "status": status_of(chars),
         })
     return arts
 
@@ -116,11 +110,11 @@ def main():
     if fix:
         short = [a for a in arts if a["status"] == "zu-kurz"]
         if short:
-            print(f"{len(short)} Artikel unter {MIN_WORDS} Wörtern – "
+            print(f"{len(short)} Artikel unter {MIN_CHARS} Zeichen – "
                   f"starte KI-Verlängerung …")
             subprocess.run([sys.executable,
                             os.path.join(BLOG_DIR, "scripts", "extend_articles.py"),
-                            "--min", str(MIN_WORDS)],
+                            "--min-chars", str(MIN_CHARS)],
                            cwd=BLOG_DIR, check=False)
             # Erneut messen
             arts = collect()
@@ -131,36 +125,22 @@ def main():
     print(f"Längen-Check: {len(arts)} Artikel | ok: {ok} | unter-Optimum: {opt} "
           f"| zu-kurz: {sum(1 for a in arts if a['status'] == 'zu-kurz')} "
           f"| zu-lang: {sum(1 for a in arts if a['status'] == 'zu-lang')}")
-    print(f"Zielbandbreite: {MIN_WORDS}-{MAX_WORDS} Wörter "
-          f"(Optimum {OPT_MIN}-{OPT_MAX})")
-    print(f"Zeichen-Empfehlung (Dauervorgabe 19.08.2026): "
-          f"{OPT_CHARS_MIN:,}-{OPT_CHARS_MAX:,} Zeichen"
-          .replace(",", "."))
-    for a in sorted(issues, key=lambda x: x["words"]):
-        print(f"  ❌ [{a['status']}] {a['slug']}: {a['words']} Wörter / "
-              f"{a['chars']} Zeichen")
+    print(f"Zielbandbreite: {MIN_CHARS}-{MAX_CHARS} Zeichen "
+          f"(Optimum {OPT_MIN_CHARS}-{OPT_MAX_CHARS})")
+    for a in sorted(issues, key=lambda x: x["chars"]):
+        print(f"  ❌ [{a['status']}] {a['slug']}: {a['chars']} Zeichen / "
+              f"{a['words']} Wörter")
     # Unter-Optimum nur als Hinweis (kein Fehler)
-    for a in sorted(arts, key=lambda x: x["words"]):
-        if a["status"] == "unter-optimum":
-            print(f"  ℹ️ [unter-Optimum] {a['slug']}: {a['words']} Wörter")
-    # Zeichen-Empfehlung: Hinweis, kein Fehler (harte Gates bleiben Wörter)
     for a in sorted(arts, key=lambda x: x["chars"]):
-        if a["chars"] < OPT_CHARS_MIN or a["chars"] > OPT_CHARS_MAX:
-            band = "unter" if a["chars"] < OPT_CHARS_MIN else "über"
-            print(f"  ℹ️ [Zeichen-Empfehlung] {a['slug']}: {a['chars']:,} "
-                  f"Zeichen ({band} {OPT_CHARS_MIN:,}-{OPT_CHARS_MAX:,})"
-                  .replace(",", "."))
+        if a["status"] == "unter-optimum":
+            print(f"  ℹ️ [unter-Optimum] {a['slug']}: {a['chars']} Zeichen")
 
     if as_json:
         print(json.dumps({
             "total": len(arts), "ok": ok, "unter_optimum": opt,
             "zu_kurz": sum(1 for a in arts if a["status"] == "zu-kurz"),
             "zu_lang": sum(1 for a in arts if a["status"] == "zu-lang"),
-            "min_words": MIN_WORDS, "max_words": MAX_WORDS,
-            "opt_chars_min": OPT_CHARS_MIN, "opt_chars_max": OPT_CHARS_MAX,
-            "ausserhalb_zeichen_empfehlung":
-                sum(1 for a in arts
-                    if a["chars"] < OPT_CHARS_MIN or a["chars"] > OPT_CHARS_MAX),
+            "min_chars": MIN_CHARS, "max_chars": MAX_CHARS,
             "items": arts,
         }, ensure_ascii=False))
     return 1 if issues else 0

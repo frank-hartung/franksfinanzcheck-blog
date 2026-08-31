@@ -75,8 +75,8 @@ if "--scope" in sys.argv:
 BACKLOG = int(sys.argv[sys.argv.index("--backlog") + 1]) if "--backlog" in sys.argv else 0
 
 POLICY = {
-    "posts":  {"target_min": 1200, "target_max": 2200, "warn": 1000, "heal": 900,  "fat": 2800},
-    "pillar": {"target_min": 2500, "target_max": 4000, "warn": 1800, "heal": 1800, "fat": 5000},
+    "posts":  {"target_min_chars": 10000, "target_max_chars": 20000, "warn_chars": 8000, "heal_chars": 7500,  "fat_chars": 25000},
+    "pillar": {"target_min_chars": 20000, "target_max_chars": 35000, "warn_chars": 15000, "heal_chars": 12000, "fat_chars": 40000},
 }
 
 
@@ -86,7 +86,11 @@ def classify(path: Path) -> str:
 
 def measure(text: str) -> tuple[int, int]:
     """Wörter & Zeichen des eigentlichen Artikels (ohne Front-Matter/Code/Tabellen-Sep)."""
-    t = re.sub(r"^---.*?^---", "", text, flags=re.S | re.M)
+    t = text
+    if t.startswith("---"):
+        parts = t.split("---", 2)
+        if len(parts) >= 3:
+            t = parts[2]
     t = re.sub(r"```.*?```", "", t, flags=re.S)
     t = re.sub(r"^\|[-| :]*\|$", "", t, flags=re.M)
     chars = len(re.sub(r"\s+", " ", t).strip())
@@ -126,18 +130,19 @@ def ai(system: str, prompt: str, max_tokens: int = 3500) -> str | None:
     return None
 
 
-def heal(text: str, typ: str, words: int) -> tuple[str | None, int]:
-    """KI-Erweiterung. Gibt (neuer_text, zusätzliche_wörter) zurück – oder (None, 0)."""
-    target = POLICY[typ]["target_min"]
-    need = max(350, target - words)
+def heal(text: str, typ: str, chars: int) -> tuple[str | None, int]:
+    """KI-Erweiterung. Gibt (neuer_text, zusätzliche_zeichen) zurück – oder (None, 0)."""
+    target = POLICY[typ]["target_min_chars"]
+    need_chars = max(2000, target - chars)
+    need_words = need_chars // 7
     title = fm_field(text, "title")
     kw = fm_field(text, "kurzantwort")
     system = (
         "Du erweiterst deutsche Finanz-Ratgeber (Blog „Franks Finanzcheck\", Du-Form, "
         "locker-sachlich, ehrlich – keine Werbung, keine Übertreibung). Du lieferst "
         "NUR neue Markdown-Abschnitte, nie Fülltext. Zahlen mit Stand-Jahr versehen.")
-    prompt = f"""Der Artikel „{title}" hat nur {words} Wörter – Zielkorridor: {target}–{POLICY[typ]['target_max']}.
-Er braucht ca. {need}-{need + 250} Wörter an zusätzlichem MEHRWERT.
+    prompt = f"""Der Artikel „{title}" hat nur {chars} Zeichen – Zielkorridor: {target}–{POLICY[typ]['target_max_chars']}.
+Er braucht ca. {need_words}-{need_words + 200} Wörter an zusätzlichem MEHRWERT.
 
 Kurzantwort/Kern des Artikels: {kw[:300]}
 
@@ -172,8 +177,8 @@ Einsteiger-tauglich. Gib NUR Markdown aus."""
         return None, 0
     if "Hinweis" in text and "Hinweis" not in new_text:  # Disclaimer intakt?
         return None, 0
-    new_words, _ = measure(new_text)
-    if new_words <= words or new_words > POLICY[typ]["fat"]:
+    new_words, new_chars = measure(new_text)
+    if new_chars <= chars or new_chars > POLICY[typ]["fat_chars"]:
         return None, 0
     # lastmod-Frische-Signal setzen
     today = date.today().isoformat()
@@ -183,7 +188,7 @@ Einsteiger-tauglich. Gib NUR Markdown aus."""
         new_text = re.sub(r"^(---\n.*?^date:.*$)",
                           r"\1\nlastmod: " + today, new_text, count=1,
                           flags=re.S | re.M)
-    return new_text, new_words - words
+    return new_text, new_chars - chars
 
 
 # ------------------------------------------------------------ Datei-Scan
@@ -221,13 +226,13 @@ def main() -> None:
         w, c = measure(text)
         typ = classify(p)
         pol = POLICY[typ]
-        status = ("🔴 heilen" if w < pol["heal"] else
-                  "🟡 kurz" if w < pol["warn"] else
-                  "🟢 ok" if w <= pol["fat"] else "🟠 lang")
+        status = ("🔴 heilen" if c < pol["heal_chars"] else
+                  "🟡 kurz" if c < pol["warn_chars"] else
+                  "🟢 ok" if c <= pol["fat_chars"] else "🟠 lang")
         row = {"file": str(p.relative_to(ROOT)), "typ": typ, "w": w, "c": c, "status": status}
         rows.append(row)
         if status == "🔴 heilen":
-            heal_candidates.append((p, text, w, typ))
+            heal_candidates.append((p, text, c, typ))
 
     # Heil-Reihenfolge: Pillars zuerst, dann kürzeste zuerst
     heal_candidates.sort(key=lambda x: (x[3] != "pillar", x[2]))
@@ -236,13 +241,13 @@ def main() -> None:
 
     healed, failed = [], []
     if DO_FIX and USE_AI and not DRY_RUN and (GROQ_KEY or GEMINI_KEY):
-        for p, text, w, typ in heal_candidates:
-            print(f"  🩹 Heile ({w} Wörter, {typ}): {p.parent.name}")
-            new_text, plus = heal(text, typ, w)
+        for p, text, c, typ in heal_candidates:
+            print(f"  🩹 Heile ({c} Zeichen, {typ}): {p.parent.name}")
+            new_text, plus = heal(text, typ, c)
             if new_text and new_text != text:
                 p.write_text(new_text, encoding="utf-8")
-                healed.append((p.parent.name, w, w + plus))
-                print(f"    ✅ +{plus} Wörter → {w + plus}")
+                healed.append((p.parent.name, c, c + plus))
+                print(f"    ✅ +{plus} Zeichen → {c + plus}")
             else:
                 failed.append(p.parent.name)
                 print("    ⚠ verworfen (Gate oder KI ohne brauchbare Antwort)")
@@ -250,26 +255,25 @@ def main() -> None:
     # Report
     buckets = {"🔴": 0, "🟡": 0, "🟢": 0, "🟠": 0}
     for r in rows:
-        buckets[r["status"][0] + r["status"][1]] if False else None
         buckets[r["status"].split()[0]] += 1
     mode = "DRY-RUN" if DRY_RUN else ("FIX+KI" + f" backlog={BACKLOG}" if BACKLOG else "FIX+KI" if DO_FIX and USE_AI else "FIX" if DO_FIX else "REPORT")
     L = ["# 📏📝 LENGTH-REPORT (length_guard.py)", "",
          f"**Stand:** {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC · Modus: {mode}", "",
          f"**Geprüft:** {len(rows)} Seiten | 🔴 {buckets['🔴']} · 🟡 {buckets['🟡']} · 🟢 {buckets['🟢']} · 🟠 {buckets['🟠']}",
          "",
-         "**Korridor (Affiliate-Profi):** Posts 1.200–2.200 Wörter (heil < 900) · "
-         "Pillar 2.500–4.000 (heil < 1.800)", ""]
+         "**Korridor (Affiliate-Profi):** Posts 10.000–20.000 Zeichen (heil < 7.500) · "
+         "Pillar 20.000–35.000 Zeichen (heil < 12.000)", ""]
     if healed:
         L += ["## ✅ Geheilt (Selbstheilung, KI-Erweiterung mit Gate)", ""]
-        L += [f"- `{n}`: {a} → {b} Wörter" for n, a, b in healed]
+        L += [f"- `{n}`: {a} → {b} Zeichen" for n, a, b in healed]
         L.append("")
     if failed:
         L += ["## ⚠ Heilung verworfen (Gate) – manueller Blick empfohlen", ""]
         L += [f"- `{n}`" for n in failed]; L.append("")
-    short = sorted((r for r in rows if r["status"] != "🟢 ok"), key=lambda r: r["w"])[:20]
+    short = sorted((r for r in rows if r["status"] != "🟢 ok"), key=lambda r: r["c"])[:20]
     if short:
         L += ["## Kürzeste Seiten außerhalb des Korridors", ""]
-        L += [f"- {r['status']} `{r['file']}`: **{r['w']} Wörter** ({r['c']:,} Zeichen, {r['typ']})".replace(",", ".")
+        L += [f"- {r['status']} `{r['file']}`: **{r['c']:,} Zeichen** ({r['w']} Wörter, {r['typ']})".replace(",", ".")
               for r in short]
     L += ["", "---", "_Selbstheilung: ⚠ Modul-Erweiterung durch KI, verifiziert (Links/Disclaimer/Länge). "
           "Nur --ai heilt; ohne Keys bleibt es ein Report._"]
