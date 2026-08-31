@@ -1,0 +1,14 @@
+--- .github/workflows/pinterest-watchdog.yml	2026-08-31 15:53:31.292120485 +0000
++++ /home/user/vorschlag-w-pinterest-watchdog.yml	2026-08-31 15:55:49.768819915 +0000
+@@ -46,6 +46,11 @@
+         run: |
+           python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin 2>/dev/null || true
+           python3 scripts/pinterest_seo_healer.py --fix || true
++      - name: Pinterest-Trust-Shield (T1-T12) - prüft, meldet, heilt nichts
++        # §6: läuft vor dem Hugo-Build; reportet PINTEREST-TRUST-REPORT.md.
++        # continue-on-error hält den Watchdog grün – nur Bericht, keine Heilung.
++        continue-on-error: true
++        run: python3 scripts/pinterest_trust_shield.py
+ 
+       - name: Seite bauen (für Pin-Button-/og-Checks)
+         env:
