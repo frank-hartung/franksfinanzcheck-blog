@@ -1,6 +1,6 @@
 # 🏆 PINTEREST-PROFILE-REPORT (Premium-Profil-Audit)
 
-**Profil:** [https://de.pinterest.com/franksfinanzcheck/](https://de.pinterest.com/franksfinanzcheck/) · **Stand:** 26.08.2026 00:59 UTC · **Modus:** MANUELL (kein Token)
+**Profil:** [https://de.pinterest.com/franksfinanzcheck/](https://de.pinterest.com/franksfinanzcheck/) · **Stand:** 31.08.2026 17:10 UTC · **Modus:** MANUELL (kein Token)
 
 **Abweichungen:** 9 · **Soll-Zustand:** `data/pinterest_profile_target.yaml` + `data/pinterest_boards.yaml`
 

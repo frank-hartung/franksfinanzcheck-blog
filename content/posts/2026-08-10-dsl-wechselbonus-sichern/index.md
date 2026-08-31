@@ -103,7 +103,7 @@ Manche zahlen per Überweisung aufs Giro, manche als Gutschrift auf die Rechnung
 
 Wechselt du innerhalb derselben Gruppe (Marke A zu Marke A-Discount), entfällt der Neukundenbonus oft. 12 Monate Pause oder ein anderer Konzern ist die übliche Hürde.
 
-## In 4 Schritten, ohne den Bonus zu verspielen
+## In vier Schritten, ohne den Bonus zu verspielen
 
 1. Altvertrag-Status: monatlich kündbar? Sonst Starttermin des neuen Vertrags auf das Ende legen.
 2. Bonusbedingungen als PDF speichern.
@@ -116,7 +116,7 @@ Der Bonus ist die Kirsche. Der Kuchen ist der Effektivpreis. Wer nur der Kirsche
 
 Den **DSL-Wechselbonus** alle zwei Jahre mitzunehmen, ist eine der einfachsten Methoden, um ohne jeglichen Komfortverlust hunderte Euro an monatlichen Fixkosten einzusparen. Da der neue Anbieter die Kündigung und die Rufnummernmitnahme komplett übernimmt, liegt der tatsächliche Arbeitsaufwand bei unter 10 Minuten. Vergleiche noch heute die verfügbaren Geschwindigkeiten an deiner Adresse und sichere dir deine Wechselprämie.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · WLAN verbessern: So bringst du Speed in jede Ecke
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du Speed in jede Ecke
 
 ## Häufige Fragen
 

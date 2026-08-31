@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-08-31
-title: "WLAN verbessern: <br> So bringst du stabilen Speed"
+title: "WLAN verbessern: So bringst du stabilen Speed in jede Ecke"
 description: "WLAN verbessern leicht gemacht: Router richtig positionieren, Mesh-WLAN einrichten, Störquellen beseitigen & maximale Geschwindigkeit im ganzen Haus."
 date: 2026-08-28T01:05:14Z
 draft: false

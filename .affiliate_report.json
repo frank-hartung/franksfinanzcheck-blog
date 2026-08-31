@@ -1,5 +1,5 @@
 {
- "total": 31,
+ "total": 30,
  "errors": 0,
  "fixed": 0,
  "posts": [
@@ -92,7 +92,7 @@
   },
   {
    "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-   "title": "Preisgarantie Gas: So sicherst du günstige Tarife ",
+   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
    "pillar": "strom-sparen",
    "fixed": 0,
    "errors": [],
@@ -119,7 +119,7 @@
   },
   {
    "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-   "title": "Sparen im Herbst: Die besten Spartipps für die gol",
+   "title": "Sparen im Herbst: Spartipps für die goldene Jahres",
    "pillar": "frugalismus",
    "fixed": 0,
    "errors": [],
@@ -166,7 +166,7 @@
   },
   {
    "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet",
-   "title": "Privathaftpflicht: Warum sie so wichtig ist und wa",
+   "title": "Privathaftpflicht: Warum so wichtig und was sie ko",
    "pillar": "versicherungen",
    "fixed": 0,
    "errors": [],
@@ -177,7 +177,7 @@
   },
   {
    "slug": "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann",
-   "title": "Geld sparen im Alltag: Einfache Tipps, die jeder u",
+   "title": "Geld sparen im Alltag: Tipps, die jeder umsetzen k",
    "pillar": "frugalismus",
    "fixed": 0,
    "errors": [],
@@ -226,7 +226,7 @@
   },
   {
    "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
-   "title": "Haushaltsbuch führen: App, Excel oder Papier? – Au",
+   "title": "Haushaltsbuch führen: App, Excel oder Stift im Ver",
    "pillar": "konto-karten",
    "fixed": 0,
    "errors": [],
@@ -235,7 +235,7 @@
   },
   {
    "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-   "title": "Mietwagen ohne Kaution: So umgehst du alle Fallen ",
+   "title": "Mietwagen ohne Kautionsfallen: So sparst du im Url",
    "pillar": "mietwagen",
    "fixed": 0,
    "errors": [],
@@ -265,15 +265,6 @@
   {
    "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet",
    "title": "DNS-Server wechseln: Schnelleres und sichereres In",
-   "pillar": "internet-dsl",
-   "fixed": 0,
-   "errors": [],
-   "infos": [],
-   "ok": true
-  },
-  {
-   "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
-   "title": "Handytarif 2026 vergleichen: Günstige Tarife ab 4,",
    "pillar": "internet-dsl",
    "fixed": 0,
    "errors": [],

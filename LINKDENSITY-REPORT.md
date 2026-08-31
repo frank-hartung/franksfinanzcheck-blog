@@ -1,11 +1,11 @@
 # 🔗 LINKDENSITY-REPORT (link_density_guard.py)
 
-**Stand:** 2026-08-26 00:46 UTC · Modus: REPORT
+**Stand:** 2026-08-31 17:11 UTC · Modus: FIX
 
 | Kennzahl | Wert | Goldkorridor |
 |---|---|---|
 | Artikel | 25 | — |
-| ø interne Links/Artikel | 3.6 | 2–9 |
+| ø interne Links/Artikel | 3.4 | 2–9 |
 | Artikel im Korridor | 100 % | ≥ 85 % |
 | unterversorgt (<2) | 0 | 0 |
 | überladen (>9) | 0 | 0 |

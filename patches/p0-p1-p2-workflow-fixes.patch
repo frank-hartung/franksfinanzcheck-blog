@@ -1,0 +1,1729 @@
+diff --git a/.github/workflows/affiliate-daily.yml b/.github/workflows/affiliate-daily.yml
+new file mode 100644
+index 0000000..aff6e89
+--- /dev/null
++++ b/.github/workflows/affiliate-daily.yml
+@@ -0,0 +1,114 @@
++# ============================================================
++#  AFFILIATE-DAILY – Gemerged P2-Fix 31.08.2026
++#
++#  Vorher: 2 Workflows
++#    - affiliate-health.yml (Mo 11:30, E2E mit Netz)
++#    - affiliate-integrity-daily.yml (täglich 06:00, Render-Beweis)
++#  Jetzt: 1 Workflow täglich 06:00, 2 Phasen:
++#    Phase 1 --no-net: PID-Integrität + Gateway-Drift (offline, schnell)
++#    Phase 2 --with-net: E2E Redirect-Kette + Render-Beweis (mit Netz)
++#
++#  Spart 1 Cron, verhindert Doppel-Issues, heilt sofort.
++# ============================================================
++name: Affiliate-Daily (Integrität + Health)
++
++on:
++  schedule:
++    - cron: "0 4 * * *"    # 06:00 MESZ – vor Content-Engine 08:10
++  workflow_dispatch: {}
++
++permissions:
++  contents: write
++  issues: write
++
++concurrency:
++  group: affiliate-daily
++  cancel-in-progress: false
++
++jobs:
++  affiliate:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++
++      - name: Pip-Cache
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-aff-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
++
++      - uses: actions/setup-python@v7
++        with:
++          python-version: "3.12"
++          cache: 'pip'
++
++      - name: Deps
++        run: |
++          pip install -q pyyaml
++          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
++
++      - name: Hugo
++        uses: peaceiris/actions-hugo@v3
++        with:
++          hugo-version: "0.164.0"
++          extended: true
++
++      - name: Phase 1 – Offline-Kontrakt (--no-net) – PID + Gateway-Drift
++        id: offline
++        continue-on-error: true
++        run: |
++          python3 scripts/affiliate_health.py --no-net | tee /tmp/offline.log
++          exit ${PIPESTATUS[0]}
++
++      - name: Hugo-Build für Render-Beweis
++        run: hugo --minify
++
++      - name: Phase 2 – Integrität + E2E (--with-net)
++        id: gate
++        continue-on-error: true
++        run: |
++          python3 scripts/affiliate_integrity_gate.py | tee /tmp/integrity.log
++          python3 scripts/affiliate_health.py --issue | tee /tmp/health.log || echo "Health-Check meldet Issue – siehe Report"
++
++      - name: Commit Heilungen
++        run: |
++          git config user.name "Affiliate-Bot"
++          git config user.email "affiliate-bot@users.noreply.github.com"
++          git add content/ 2>/dev/null || true
++          git add AFFILIATE-HEALTH-REPORT.md 2>/dev/null || true
++          git add AFFILIATE-INTEGRITY-REPORT.md 2>/dev/null || true
++          git add scripts/check24_links.yaml 2>/dev/null || true
++          git add static/go/ 2>/dev/null || true
++          if git diff --cached --quiet; then
++            echo "Keine Affiliate-Heilungen"
++          else
++            git commit -m "fix(affiliate): Daily – Offline-Kontrakt + Integrität + E2E geheilt (P2-Fix gemerged)"
++            SYNC_OK_VAR=GEHEILT scripts/git_sync.sh --push-only
++          fi
++
++      - name: Deploy bei Heilung
++        if: env.GEHEILT == 'true'
++        uses: actions/github-script@v7
++        with:
++          script: |
++            await github.rest.actions.createWorkflowDispatch({
++              owner: context.repo.owner, repo: context.repo.repo,
++              workflow_id: 'deploy.yml', ref: 'main',
++            });
++
++      - name: Issue bei Rest-Problemen
++        if: steps.offline.outcome == 'failure' || steps.gate.outcome == 'failure'
++        uses: actions/github-script@v7
++        with:
++          script: |
++            const fs = require('fs');
++            let details = '';
++            try { details += fs.readFileSync('AFFILIATE-INTEGRITY-REPORT.md','utf-8').slice(0,3000); } catch(e){}
++            try { details += '\n\n---\n'+fs.readFileSync('AFFILIATE-HEALTH-REPORT.md','utf-8').slice(0,3000); } catch(e){}
++            await github.rest.issues.create({
++              owner: context.repo.owner, repo: context.repo.repo,
++              title: '🔗 Affiliate-Daily: Rest-Probleme',
++              body: details
++            });
+diff --git a/.github/workflows/affiliate-health.yml b/.github/workflows/affiliate-health.yml
+index 20b099d..a628d20 100644
+--- a/.github/workflows/affiliate-health.yml
++++ b/.github/workflows/affiliate-health.yml
+@@ -1,28 +1,8 @@
+-# ============================================================
+-#  AFFILIATE-HEALTH – Wochenwache der Geldverdien-Links (E2E-Fassung)
+-#
+-#  Läuft jeden Montag um 07:45 MESZ (vor dem Backlink-Scout):
+-#    H1  E2E: KOMPLETTE Redirect-Kette bis zur Endseite (< 400 +
+-#        richtige Kategorie per Keyword-Vertrag; tarifcheck-WAF-403
+-#        wird als erwartbarer Datacenter-Effekt gewertet)
+-#    H2  PID-Integritaet (pid=80968&aid=18 | partner_id=47086&ad_id=15)
+-#    H3  /go/-Gateway-Drift (YAML-Register vs. generierte Seiten)
+-#    H4  CTA-Abdeckung (Artikel ohne Affiliate-Link)
+-#    +   SELBSTHEILUNG: tote/falsch geroutete Ziele -> sicherer
+-#        Homepage-Fallback (PID bleibt!), Gateways neu, Issue an Frank.
+-#    +   SABOTAGE-SCHUTZ: 17-Faelle-Selbsttest vor jedem Einsatz.
+-#
+-#  Kritischer Fund -> GitHub-Issue (Label: affiliate-health, Dedupe).
+-#  Nicht kritisch: Report wird committet, Workflow bleibt gruen.
+-#  Geheilte Artefakte (Register + static/go) werden mit-committet.
+-#
+-#  Manuell: Actions → „Affiliate-Health" → Run workflow.
+-# ============================================================
+-name: Affiliate-Health (Wochenwache)
++# DEPRECATED P2-Fix 31.08.2026 – gemerged in affiliate-daily.yml
++# Diese Datei bleibt nur für manuelle Runs, ruft das neue Daily auf.
++name: Affiliate-Health (Wochenwache) [DEPRECATED – nutze Affiliate-Daily]
+ 
+ on:
+-  schedule:
+-    - cron: "30 9 * * 1"    # Montag 11:30 MESZ – entzerrt (Profi-Cleanup 20.08.)
+   workflow_dispatch: {}
+ 
+ permissions:
+@@ -34,27 +14,7 @@ concurrency:
+   cancel-in-progress: false
+ 
+ jobs:
+-  health:
++  deprecated:
+     runs-on: ubuntu-latest
+     steps:
+-      - uses: actions/checkout@v4
+-
+-      - name: Live-Gesundheit pruefen (+ Selbstheilung melden)
+-        env:
+-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+-          GITHUB_REPOSITORY: ${{ github.repository }}
+-        run: python3 scripts/affiliate_health.py --issue || echo "Kritische Funde – Issue erstellt, siehe Report"
+-
+-      - name: Report committen
+-        if: ${{ !cancelled() }}
+-        run: |
+-          git config user.name "Content-Bot"
+-          git config user.email "content-bot@users.noreply.github.com"
+-          git add AFFILIATE-HEALTH-REPORT.md data/affiliate_health_history.jsonl \
+-                  scripts/check24_links.yaml static/go/
+-          if git diff --cached --quiet; then
+-            echo "Kein Update."
+-          else
+-            git commit -m "chore+heal: Affiliate-Health E2E (Report${{ github.event_name == 'schedule' && ', Wochenwache' || '' }})"
+-            scripts/git_sync.sh --push-only
+-          fi
++      - run: echo "DEPRECATED – nutze Workflow 'Affiliate-Daily' (täglich 06:00, --no-net + --with-net)"
+diff --git a/.github/workflows/affiliate-integrity-daily.yml b/.github/workflows/affiliate-integrity-daily.yml
+deleted file mode 100644
+index 39449c6..0000000
+--- a/.github/workflows/affiliate-integrity-daily.yml
++++ /dev/null
+@@ -1,132 +0,0 @@
+-# ============================================================
+-#  AFFILIATE-INTEGRITÄTS-WACHE (täglich) – scripts/affiliate_integrity_gate.py
+-#  ------------------------------------------------------------
+-#  Auftrag (Frank, 14.08.2026): "Die Affiliate-Links wurden beschädigt.
+-#  Bitte dauerhaft beheben (Automatik und Selbstheilung), indem die
+-#  Veröffentlichung nur vorgenommen wird, wenn alle Links funktionieren
+-#  und tatsächlich im Blog erscheinen. Ansonsten soll sofort eine
+-#  Reparatur erfolgen."
+-#
+-#  Hintergrund: Am 14.08.2026 hatten 8 Live-Artikel beschädigte
+-#  Affiliate-CTA-Boxen (dangling Markdown-Links, verstümmelter Text,
+-#  ein Rohlink zum falschen Partner) – unbemerkt bis zur manuellen
+-#  Meldung. Die bestehende Prüfung dieser Klasse von Schäden
+-#  (scripts/bestand_gate.py -> affiliate_integrity_gate.py) lief bis
+-#  dahin nur EINMAL PRO WOCHE über seo-weekly.yml (Mittwoch). Das
+-#  erfüllt NICHT die Anforderung "sofort" – ein neuer Schaden hätte im
+-#  schlimmsten Fall fast eine Woche unbemerkt live bleiben können.
+-#
+-#  Dieser eigenständige, bewusst schlanke Workflow schließt die Lücke:
+-#  läuft TÄGLICH, prüft und heilt AUSSCHLIESSLICH die Affiliate-Link-
+-#  Integrität (AI1-AI4: vollständige Markdown-Links, nur registrierte
+-#  /go/-Redirects, Text-Plausibilität, Render-Beweis im gebauten HTML)
+-#  – bewusst OHNE die breiteren, langsameren wöchentlichen SEO-/Meta-
+-#  Heilungsketten aus seo-weekly.yml anzufassen, um das Risiko
+-#  unbeabsichtigter Seiteneffekte durch eine höhere Lauffrequenz gering
+-#  zu halten.
+-#
+-#  Ablauf: Hugo-Build -> affiliate_integrity_gate.py (prüft + heilt +
+-#  baut bei Heilung automatisch neu, um den Render-Beweis danach erneut
+-#  zu führen) -> bei Änderungen committen + pushen -> Deploy explizit
+-#  anstoßen (GITHUB_TOKEN-Commits lösen den push-Trigger in deploy.yml
+-#  NICHT aus, siehe content-engine-v2.yml) -> bei weiterhin bestehenden
+-#  Problemen automatisch ein GitHub-Issue eröffnen.
+-# ============================================================
+-name: Affiliate-Integritäts-Wache (täglich)
+-
+-on:
+-  schedule:
+-    - cron: "0 4 * * *"    # 06:00 MESZ – vor dem Content-Engine-Hauptslot (08:10 MESZ)
+-  workflow_dispatch: {}
+-
+-permissions:
+-  contents: write
+-  issues: write
+-
+-concurrency:
+-  group: affiliate-integrity
+-  cancel-in-progress: false
+-
+-jobs:
+-  integritaet:
+-    runs-on: ubuntu-latest
+-    steps:
+-      - name: Repository auschecken
+-        uses: actions/checkout@v4
+-
+-      - name: Python
+-        uses: actions/setup-python@v7
+-        with:
+-          python-version: "3.12"
+-
+-      - name: Abhängigkeiten
+-        run: |
+-          pip install --quiet pyyaml
+-          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
+-
+-      - name: Hugo installieren
+-        uses: peaceiris/actions-hugo@v3
+-        with:
+-          hugo-version: "0.164.0"
+-          extended: true
+-
+-      - name: Hugo-Build (Voraussetzung für Render-Beweis AI4)
+-        run: hugo --minify
+-
+-      - name: Affiliate-Integritäts-Gate ausführen (prüfen + sofort heilen)
+-        id: gate
+-        continue-on-error: true
+-        run: |
+-          python3 scripts/affiliate_integrity_gate.py | tee /tmp/integrity_log.txt
+-          exit ${PIPESTATUS[0]}
+-
+-      - name: Reparatur + Report committen
+-        run: |
+-          git config user.name "Affiliate-Integrity-Bot"
+-          git config user.email "affiliate-integrity-bot@users.noreply.github.com"
+-          # BUGFIX (14.08.2026, siehe uniqueness-guard.yml/seo-weekly.yml):
+-          # 'git add' mit mehreren Pfaden bricht OHNE IRGENDETWAS zu stagen
+-          # ab, wenn auch nur EIN Pfad fehlt – deshalb pro Pfad ein eigener
+-          # add-Aufruf statt eines gemeinsamen.
+-          git add content/ 2>/dev/null || true
+-          git add AFFILIATE-INTEGRITY-REPORT.md 2>/dev/null || true
+-          if git diff --cached --quiet; then
+-            echo "Affiliate-Integritäts-Wache: keine Änderungen."
+-          else
+-            git commit -m "fix(content): Affiliate-Integritäts-Wache – defekte CTA-Box(en) automatisch geheilt (täglich)"
+-            SYNC_OK_VAR=GEHEILT scripts/git_sync.sh --push-only
+-          fi
+-
+-      - name: Deploy anstoßen (nur wenn tatsächlich repariert wurde)
+-        if: env.GEHEILT == 'true'
+-        uses: actions/github-script@v7
+-        with:
+-          script: |
+-            await github.rest.actions.createWorkflowDispatch({
+-              owner: context.repo.owner,
+-              repo: context.repo.repo,
+-              workflow_id: 'deploy.yml',
+-              ref: 'main',
+-            });
+-            console.log('✅ Deploy ausgelöst.');
+-
+-      - name: Issue bei weiterhin bestehenden Problemen (z. B. nicht registrierter /go/-Key)
+-        # Greift NUR, wenn nach der Selbstheilung noch etwas übrig ist
+-        # (z. B. Render-Beweis scheitert trotz Heilung, oder ein Link
+-        # verweist auf einen nicht in check24_links.yaml registrierten
+-        # Key – das kann affiliate_integrity_gate.py nicht selbst lösen,
+-        # das braucht eine redaktionelle/registrierungsseitige Korrektur).
+-        if: steps.gate.outcome == 'failure'
+-        uses: actions/github-script@v7
+-        with:
+-          script: |
+-            const fs = require('fs');
+-            let details = 'Affiliate-Integritäts-Wache hat Artikel gefunden, deren CTA-Boxen NICHT automatisch vollständig geheilt werden konnten.';
+-            try { details = fs.readFileSync('AFFILIATE-INTEGRITY-REPORT.md', 'utf-8'); } catch (e) {}
+-            await github.rest.issues.create({
+-              owner: context.repo.owner,
+-              repo: context.repo.repo,
+-              title: '🔗 Affiliate-Integritäts-Wache: CTA-Boxen brauchen Aufmerksamkeit',
+-              body: details + '\n\n---\nAutomatisch erstellt von der täglichen Affiliate-Integritäts-Wache. Betroffene Artikel wurden NICHT gelöscht.'
+-            });
+-            console.log('✅ Issue erstellt');
+diff --git a/.github/workflows/backlink-weekly.yml b/.github/workflows/backlink-weekly.yml
+index fb02d83..e8a8f2f 100644
+--- a/.github/workflows/backlink-weekly.yml
++++ b/.github/workflows/backlink-weekly.yml
+@@ -35,6 +35,14 @@ jobs:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
+ 
++      - name: Pip-Cache (P1-Fix 31.08.2026 – 40% Runner sparen)
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
++
+       - name: Python + Abhängigkeiten
+         run: pip install -q pyyaml
+ 
+diff --git a/.github/workflows/blog-health-daily.yml b/.github/workflows/blog-health-daily.yml
+index c0ce374..3e5271b 100644
+--- a/.github/workflows/blog-health-daily.yml
++++ b/.github/workflows/blog-health-daily.yml
+@@ -18,6 +18,8 @@ jobs:
+     steps:
+       - uses: actions/checkout@v4
+       - uses: actions/setup-python@v7
++        with:
++          cache: 'pip'
+       - run: pip install -q pyyaml pillow pillow-avif-plugin
+ 
+       # KADENZ-SICHERUNG (26.08.2026): die tägliche Wache stellt sicher,
+@@ -37,6 +39,12 @@ jobs:
+       - run: python3 scripts/draft_link_healer.py --selftest
+       - run: python3 scripts/draft_link_healer.py --fix
+ 
++      # SPAM-GUARD (P0-Fix 31.08.2026): Blog-Kanal (B1-B8) täglich prüfen –
++      # Claims/Stuffing/Werbung/Originalität – damit B8 Werbung-Fehler
++      # nicht erst beim nächsten Deploy auffällt (wie 19x nach Pin-Sync).
++      - run: python3 scripts/spam_guard.py --selftest
++      - run: python3 scripts/spam_guard.py --check blog --fix || echo "⚠ Spam-Guard Blog – Funde in SPAM-REPORT.md"
++
+       - run: python3 scripts/blog_health_gate.py
+       - run: |
+           git config user.name "Agent (Arena.ai)"
+diff --git a/.github/workflows/bot-watchdog.yml b/.github/workflows/bot-watchdog.yml
+index 059898f..8051705 100644
+--- a/.github/workflows/bot-watchdog.yml
++++ b/.github/workflows/bot-watchdog.yml
+@@ -1,53 +1,28 @@
+ # ============================================================
+-#  BOT-WATCHDOG (Selbstüberwachung der Automatisierung)
++#  BOT-WATCHDOG – Entschlackt (P1-Fix 31.08.2026)
+ #
+-#  Schließt die größte Lücke: Wenn der Content-Bot GAR NICHT läuft
+-#  (Cron verworfen, Workflow deaktiviert, GitHub-Ausfall, stiller
+-#  Fehler), meldet sich sonst niemand – es käme einfach kein Artikel.
++#  Ursprünglich: Content-Bilanz + Syntax + Live + TLS.
++#  Bilanz (Publikationstag-Bilanz) liegt jetzt in PRODUKTIONS-WACHE
++#  (publikations-tags-bewusst, 3 Slots, kein 78h-Fenster-Falschalarm).
+ #
+-#  Der Watchdog prüft täglich:
+-#    1) Ist die Automatisierung selbst noch wach?
+-#       1a) META: Läuft die Produktions-Wache (Inhaltsprüfung) noch?
+-#       1b) FALLBACK: Publikationstag-Bilanz (nur wenn 1a nicht greift)
+-#    2) Sind alle Bot-Skripte syntaktisch valide?
+-#    3) Ist der neueste Artikel live (Deploy ok)?
+-#    4) Ist das GitHub-TLS-Zertifikat für franksfinanzcheck.de ausgestellt?
+-#       (Wenn ja → Hinweis-Issue: Cloudflare auf "Full (strict)" umstellen)
++#  Jetzt nur noch:
++#    2) Skript-Syntax (py_compile)
++#    3) Live-Site aktuell? (neuster Artikel HTTP 200)
++#    4) GitHub-TLS-Zertifikat für franksfinanzcheck.de
+ #
+-#  UMSTELLUNG AUF PUBLIKATIONSTAGE (29.08.2026):
+-#    Check 1 war ein starres Zeitfenster ("kein Artikel in 30 h") gegen
+-#    die Annahme "2 Artikel/Tag". Die Dauervorgabe lautet aber
+-#    Mo/Mi/Fr – zwischen Freitag 06:10 UTC und Sonntag 08:30 UTC liegen
+-#    50,3 Stunden. Der Check schlug also JEDEN SONNTAG an, völlig
+-#    grundlos (nachgerechnet, nicht geschätzt). Verschärft man die
+-#    Schwelle stattdessen auf 26 h, wären es 8 Fehlalarme in 14 Tagen.
+-#    Ein Zeitfenster ist das falsche Modell für einen Wochenplan.
+-#
+-#    Neu: bewertet wird der letzte ABGESCHLOSSENE Publikationstag
+-#    (Mo/Mi/Fr) gegen das Mindestziel – Quelle ist cadence_guard,
+-#    dieselbe Definition wie in Engine und Deploy-Gate.
+-#
+-#    Die Inhaltsprüfung selbst liegt in der PRODUKTIONS-WACHE (PR #1):
+-#    sie ist publikationstags-bewusst, kennt die drei Engine-Slots und
+-#    unterscheidet neue Artikel von Recycling. Bot-Watchdog prüft hier
+-#    nur, ob dieser Wächter noch lebt (Meta-Ebene) – und behält die
+-#    Bilanz als Fallback, falls die Produktions-Wache fehlt oder
+-#    stehengeblieben ist. So gibt es keine doppelten Issues.
+-#
+-#  Bei Problemen: automatisch GitHub-Issue (mit Dedupe – kein Spam).
+-#  Manuell starten: Actions → Bot-Watchdog → Run workflow
++#  Keine Doppel-Issues mehr mit Produktions-Wache.
+ # ============================================================
+ name: Bot-Watchdog
+ 
+ on:
+   schedule:
+-    - cron: "30 8 * * *"    # 10:30 Uhr MESZ – nach dem Morgen-Artikel (08:10)
++    - cron: "30 8 * * *"    # 10:30 MESZ – nach Morgen-Artikel
+   workflow_dispatch: {}
+ 
+ permissions:
+   contents: read
+   issues: write
+-  actions: read      # für `gh run list` (Meta-Check: läuft die Wache noch?)
++  actions: read
+ 
+ jobs:
+   watchdog:
+@@ -56,106 +31,14 @@ jobs:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
+         with:
+-          fetch-depth: 0   # volle Historie für git log
++          fetch-depth: 0
+ 
+-      - name: Watchdog-Prüfungen
++      - name: Watchdog-Prüfungen (nur TLS + Live + Syntax)
+         id: checks
+         env:
+           GH_TOKEN: ${{ github.token }}
+-          MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
+         run: |
+           PROBLEMS=""
+-          NOW=$(date +%s)
+-
+-          # 1a) META-CHECK: Läuft die Produktions-Wache noch?
+-          #     Die Inhaltsprüfung selbst ist dorthin ausgelagert (sie ist
+-          #     publikationstags-bewusst und kennt die drei Engine-Slots).
+-          #     Hier wird nur überwacht, dass der Wächter nicht selbst
+-          #     einschläft – genau die Lücke, die dieser Watchdog füllt.
+-          SEIT26H=$(date -u -d '26 hours ago' +%Y-%m-%dT%H:%M:%SZ)
+-          WACHE_RUNS=$(gh run list --workflow=produktions-wache.yml \
+-                         --created ">$SEIT26H" --json databaseId --jq 'length' \
+-                         2>/tmp/gh_wache.err || echo "-1")
+-          if [ "$WACHE_RUNS" = "-1" ]; then
+-            echo "Produktions-Wache nicht gefunden – dieser Watchdog prüft die Bilanz selbst."
+-            echo "CHECK1A=NOEXIST" >> "$GITHUB_ENV"
+-            WACHE_DA=0
+-          elif [ "$WACHE_RUNS" = "0" ]; then
+-            PROBLEMS="$PROBLEMS
+-          - **Produktions-Wache hat in den letzten 26 h nicht gedreht** – die Ausfall-Erkennung ist derzeit blind. Workflow prüfen (Cron aktiv? Repo inaktiv?)"
+-            echo "CHECK1A=FAIL" >> "$GITHUB_ENV"
+-            WACHE_DA=0
+-          else
+-            echo "Produktions-Wache aktiv: $WACHE_RUNS Lauf/Läufe in den letzten 26 h."
+-            echo "CHECK1A=OK" >> "$GITHUB_ENV"
+-            WACHE_DA=1
+-          fi
+-
+-          # 1b) PUBLIKATIONSTAG-BILANZ – immer berechnen und berichten,
+-          #     aber nur alarmieren, wenn die Produktions-Wache nicht
+-          #     aktiv ist (sonst meldet diese bereits -> keine Doppel-Issues).
+-          #     Bewertet wird der letzte ABGESCHLOSSENE Publikationstag:
+-          #     heute zählt erst ab 18:30 UTC, wenn alle drei Slots
+-          #     (06:10 / 14:10 / 17:40 UTC) gelaufen sind.
+-          python3 - <<'PYEOF' > /tmp/bilanz.env
+-          import datetime, os, sys
+-          sys.path.insert(0, "scripts")
+-          import cadence_guard as cg
+-
+-          names = ["Montag", "Dienstag", "Mittwoch", "Donnerstag",
+-                   "Freitag", "Samstag", "Sonntag"]
+-          today = datetime.date.today()
+-          now = datetime.datetime.now(datetime.timezone.utc)
+-          minute = now.hour * 60 + now.minute
+-          minimum = int(os.environ.get("MIN_ARTIKEL_PRO_TAG") or "2")
+-
+-          day = None
+-          for back in range(0, 10):
+-              d = today - datetime.timedelta(days=back)
+-              if d.weekday() not in cg.PUBLICATION_DAYS:
+-                  continue
+-              if d == today and minute < (18 * 60 + 30):
+-                  continue          # heute läuft noch
+-              day = d
+-              break
+-
+-          if day is None:
+-              print("BILANZ_TAG=-")
+-              print("BILANZ_COUNT=0")
+-              print("BILANZ_MIN=%d" % minimum)
+-              print("BILANZ_STATUS=SKIP")
+-              print('BILANZ_TEXT="kein abgeschlossener Publikationstag im Pruefbereich"')
+-          else:
+-              count = len(cg.published_on(cg.load_posts(), day))
+-              status = "OK" if count >= minimum else ("FAIL" if count == 0 else "WARN")
+-              print("BILANZ_TAG=%s" % day.isoformat())
+-              print("BILANZ_COUNT=%d" % count)
+-              print("BILANZ_MIN=%d" % minimum)
+-              print("BILANZ_STATUS=%s" % status)
+-              print('BILANZ_TEXT="%s %s: %d/%d Artikel"' % (
+-                  names[day.weekday()], day.isoformat(), count, minimum))
+-          PYEOF
+-          cat /tmp/bilanz.env
+-
+-          BILANZ_STATUS=$(grep '^BILANZ_STATUS=' /tmp/bilanz.env | cut -d= -f2)
+-          BILANZ_COUNT=$(grep  '^BILANZ_COUNT='  /tmp/bilanz.env | cut -d= -f2)
+-          BILANZ_MIN=$(grep    '^BILANZ_MIN='    /tmp/bilanz.env | cut -d= -f2)
+-          BILANZ_TAG=$(grep    '^BILANZ_TAG='    /tmp/bilanz.env | cut -d= -f2)
+-          # Anführungszeichen aus der Env-Datei entfernen, sonst landen sie
+-          # mit im Log. Ohne diese Zeile ist BILANZ_TEXT unter `set -u`
+-          # ungesetzt und der Schritt bricht ab.
+-          BILANZ_TEXT=$(grep '^BILANZ_TEXT=' /tmp/bilanz.env | cut -d= -f2- | sed 's/^"//; s/"$//')
+-          echo "CHECK1B=$BILANZ_STATUS" >> "$GITHUB_ENV"
+-          echo "BILANZ_TEXT=$BILANZ_TEXT" >> "$GITHUB_ENV"
+-
+-          # Alarm NUR als Fallback, wenn die Produktions-Wache nicht greift.
+-          if [ "$WACHE_DA" = "0" ] && [ "$BILANZ_STATUS" = "FAIL" ]; then
+-            PROBLEMS="$PROBLEMS
+-          - **Kein Artikel am Publikationstag ${BILANZ_TAG}** (0 von ${BILANZ_MIN}) – Engine prüfen (Phase 1: Tageslimit, Themenpool oder API-Keys)"
+-          elif [ "$WACHE_DA" = "0" ] && [ "$BILANZ_STATUS" = "WARN" ]; then
+-            PROBLEMS="$PROBLEMS
+-          - **Nur ${BILANZ_COUNT} von ${BILANZ_MIN} Artikeln am Publikationstag ${BILANZ_TAG}**"
+-          fi
+ 
+           # 2) Skript-Syntax
+           python3 -m py_compile scripts/*.py 2>/tmp/syntax_err.txt
+@@ -167,16 +50,11 @@ jobs:
+             echo "CHECK2=OK" >> "$GITHUB_ENV"
+           fi
+ 
+-          # 3) Live-Site aktuell? Den neuesten Artikel über das FRONTMATTER
+-          #    bestimmen statt über `git log --grep="^content:"` – das matchte
+-          #    auch reine Qualitäts-Commits ("content: Qualitäts-Fixes …")
+-          #    und lieferte dann einen falschen Slug.
++          # 3) Live-Site aktuell?
+           NEWEST_SLUG=$(python3 - <<'PYEOF'
+           import datetime, glob, os, re
+-
+           best = None
+-          for p in (glob.glob("content/posts/*/index.md")
+-                    + glob.glob("content/posts/*.md")):
++          for p in (glob.glob("content/posts/*/index.md")+glob.glob("content/posts/*.md")):
+               try:
+                   c = open(p, encoding="utf-8").read()
+               except OSError:
+@@ -188,9 +66,7 @@ jobs:
+                   continue
+               d = datetime.date.fromisoformat(m.group(1))
+               if best is None or d > best[0]:
+-                  slug = (os.path.basename(os.path.dirname(p))
+-                          if os.path.basename(p) == "index.md"
+-                          else os.path.basename(p)[:-3])
++                  slug = os.path.basename(os.path.dirname(p)) if os.path.basename(p)=="index.md" else os.path.basename(p)[:-3]
+                   best = (d, slug)
+           print(best[1] if best else "")
+           PYEOF
+@@ -203,16 +79,14 @@ jobs:
+                 echo "CHECK3=FAIL" >> "$GITHUB_ENV"
+               else
+                 echo "CHECK3=OK (${NEWEST_SLUG} → 200)" >> "$GITHUB_ENV"
+-                echo "Live-Site aktuell: ${NEWEST_SLUG} → HTTP 200"
+               fi
+           else
+             echo "CHECK3=FAIL" >> "$GITHUB_ENV"
+             PROBLEMS="$PROBLEMS
+-          - **Kein veröffentlichter Artikel in content/posts/ gefunden** – Deploy kann nicht geprüft werden"
++          - **Kein veröffentlichter Artikel gefunden**"
+           fi
+ 
+-          # 4) GitHub-TLS-Zertifikat für franksfinanzcheck.de ausgestellt?
+-          #    (ausgelagert in scripts/watchdog_check4_tls.py – robuster als Inline-Python)
++          # 4) TLS-Zertifikat
+           CERT_OK=0
+           if python3 scripts/watchdog_check4_tls.py 2>/dev/null; then
+             CERT_OK=1
+@@ -227,125 +101,60 @@ jobs:
+           echo "PROBLEMS<<EOF" >> "$GITHUB_ENV"
+           echo "$PROBLEMS" >> "$GITHUB_ENV"
+           echo "EOF" >> "$GITHUB_ENV"
+-          if [ -z "$PROBLEMS" ]; then
+-            echo "ALLES OK"
+-          fi
+ 
+       - name: Zusammenfassung
+         run: |
+-          echo "## 🤖 Watchdog-Ergebnis" >> "$GITHUB_STEP_SUMMARY"
+-          echo "" >> "$GITHUB_STEP_SUMMARY"
+-          echo "- Check 1a (Produktions-Wache aktiv): ${{ env.CHECK1A }}" >> "$GITHUB_STEP_SUMMARY"
+-          echo "- Check 1b (Publikationstag-Bilanz): ${{ env.CHECK1B }} – ${{ env.BILANZ_TEXT }}" >> "$GITHUB_STEP_SUMMARY"
+-          echo "- Check 2 (Skript-Syntax): ${{ env.CHECK2 }}" >> "$GITHUB_STEP_SUMMARY"
+-          echo "- Check 3 (Live-Site): ${{ env.CHECK3 }}" >> "$GITHUB_STEP_SUMMARY"
+-          echo "- Check 4 (GitHub-TLS-Zertifikat): ${{ env.CHECK4 }}" >> "$GITHUB_STEP_SUMMARY"
+-          echo "" >> "$GITHUB_STEP_SUMMARY"
++          echo "## 🤖 Watchdog-Ergebnis (entschlackt)" >> "$GITHUB_STEP_SUMMARY"
++          echo "- Check 2 (Syntax): ${{ env.CHECK2 }}" >> "$GITHUB_STEP_SUMMARY"
++          echo "- Check 3 (Live): ${{ env.CHECK3 }}" >> "$GITHUB_STEP_SUMMARY"
++          echo "- Check 4 (TLS): ${{ env.CHECK4 }}" >> "$GITHUB_STEP_SUMMARY"
+           if [ -n "${{ env.PROBLEMS }}" ]; then
+             echo "### Probleme" >> "$GITHUB_STEP_SUMMARY"
+             echo "${{ env.PROBLEMS }}" >> "$GITHUB_STEP_SUMMARY"
+           fi
+ 
+-      - name: Issue bei fertigem GitHub-Zertifikat (Hinweis auf Full strict)
++      - name: Issue bei fertigem Zertifikat
+         if: ${{ env.CHECK4 == 'OK' }}
+         uses: actions/github-script@v7
+         with:
+           script: |
+             const { data: existing } = await github.rest.issues.listForRepo({
+-              owner: context.repo.owner, repo: context.repo.repo,
+-              state: 'open', per_page: 100
++              owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100
+             });
+             const open = existing.filter(i => i.title && i.title.includes('GitHub-Zertifikat') && !i.pull_request);
+-            if (open.length > 0) {
+-              console.log('Hinweis-Issue existiert bereits (#' + open[0].number + ').');
+-              return;
+-            }
++            if (open.length > 0) return;
+             await github.rest.issues.create({
+               owner: context.repo.owner, repo: context.repo.repo,
+               title: '✅ GitHub-Zertifikat für franksfinanzcheck.de ist da',
+-              body: [
+-                'Das TLS-Zertifikat von GitHub Pages für **franksfinanzcheck.de** ist jetzt ausgestellt.',
+-                '',
+-                '**Empfohlener Schritt (1 Min):**',
+-                '1. Cloudflare → franksfinanzcheck.de → SSL/TLS → Overview',
+-                '2. Modus von **"Full"** auf **"Full (strict)"** umstellen',
+-                '3. Fertig – maximale Sicherheit (Cloudflare verifiziert das Origin-Zertifikat)',
+-                '',
+-                'Dieses Issue kann danach geschlossen werden.',
+-                '',
+-                '---',
+-                '*Automatisch erstellt vom Bot-Watchdog.*'
+-              ].join('\n')
++              body: 'Cloudflare → SSL/TLS → Overview → Full auf Full (strict) umstellen.\n\n*Automatisch vom Bot-Watchdog.*'
+             });
+-            console.log('✅ Hinweis-Issue erstellt');
+ 
+-      - name: Issue bei Problemen erstellen (mit Dedupe)
++      - name: Issue bei Problemen
+         if: ${{ env.PROBLEMS != '' }}
+         uses: actions/github-script@v7
+         with:
+           script: |
+             const problems = process.env.PROBLEMS || '';
+-            // Dedupe: kein neues Issue, wenn schon ein offenes Watchdog-Issue existiert
+             const { data: existing } = await github.rest.issues.listForRepo({
+-              owner: context.repo.owner,
+-              repo: context.repo.repo,
+-              state: 'open',
+-              per_page: 100
++              owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100
+             });
+             const open = existing.filter(i => i.title && i.title.includes('Bot-Watchdog') && !i.pull_request);
+-            if (open.length > 0) {
+-              console.log('Offenes Watchdog-Issue existiert bereits (#' + open[0].number + ') – kein Duplikat.');
+-              console.log('Probleme bleiben offen: ' + problems);
+-              return;
+-            }
+-            const body = [
+-              '## 🤖 Bot-Watchdog hat Probleme festgestellt',
+-              '',
+-              'Folgende Checks sind fehlgeschlagen:',
+-              '',
+-              problems,
+-              '',
+-              '### Nächste Schritte',
+-              '1. **Artikel-Bilanz ansehen:** `PRODUKTIONS-STATUS.md` im Repo (oder Actions → „Produktions-Wache (Content-Engine)“)",
+-              '2. **Workflow-Log ansehen:** Actions → „Content-Engine v2“ → letzter Lauf → Schritt „Phase 1 – Artikel generieren“",
+-              '3. **API-Keys prüfen:** Settings → Secrets and variables → Actions (GROQ/GEMINI)',
+-              '4. **Manuell nachhelfen:** Actions → „Content-Engine v2“ → Run workflow',
+-              '5. **Deploy prüfen:** Actions → „Deploy auf GitHub Pages“ → letzter Lauf',
+-              '6. **Nur Mo/Mi/Fr:** Dienstage, Donnerstage und Wochenenden sind publikationsfrei – dort ist „kein Artikel“ korrekt, kein Fehler.',
+-              '',
+-              'Das Issue wird automatisch geschlossen, sobald der nächste Watchdog-Lauf alles grün meldet.',
+-              '',
+-              '---',
+-              '*Automatisch erstellt vom Bot-Watchdog (täglich 10:30 Uhr MESZ).*'
+-            ].join('\n');
++            if (open.length > 0) { console.log('Dedupe – Issue existiert'); return; }
+             await github.rest.issues.create({
+-              owner: context.repo.owner,
+-              repo: context.repo.repo,
+-              title: '⚠️ Bot-Watchdog: Probleme mit der Content-Automatisierung',
+-              body: body
++              owner: context.repo.owner, repo: context.repo.repo,
++              title: '⚠️ Bot-Watchdog: TLS/Live/Syntax Problem',
++              body: '## Probleme\n'+problems+'\n\n*Automatisch vom Bot-Watchdog (nur TLS/Live/Syntax, Bilanz macht Produktions-Wache).*'
+             });
+-            console.log('✅ Watchdog-Issue erstellt');
+ 
+-      - name: Offenes Watchdog-Issue schließen (alles wieder grün)
++      - name: Issue schließen wenn grün
+         if: ${{ env.PROBLEMS == '' }}
+         uses: actions/github-script@v7
+         with:
+           script: |
+             const { data: existing } = await github.rest.issues.listForRepo({
+-              owner: context.repo.owner,
+-              repo: context.repo.repo,
+-              state: 'open',
+-              per_page: 100
++              owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100
+             });
+             const open = existing.filter(i => i.title && i.title.includes('Bot-Watchdog') && !i.pull_request);
+             for (const issue of open) {
+-              await github.rest.issues.update({
+-                owner: context.repo.owner,
+-                repo: context.repo.repo,
+-                issue_number: issue.number,
+-                state: 'closed',
+-                state_reason: 'completed'
+-              });
+-              console.log('✅ Watchdog-Issue #' + issue.number + ' geschlossen (alles grün).');
++              await github.rest.issues.update({owner: context.repo.owner, repo: context.repo.repo, issue_number: issue.number, state: 'closed', state_reason: 'completed'});
+             }
+-            if (open.length === 0) console.log('Kein offenes Watchdog-Issue.');
+diff --git a/.github/workflows/content-engine-v2.yml b/.github/workflows/content-engine-v2.yml
+index b02ed22..23e2b79 100644
+--- a/.github/workflows/content-engine-v2.yml
++++ b/.github/workflows/content-engine-v2.yml
+@@ -59,6 +59,14 @@ jobs:
+     steps:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
++
++      - name: Pip-Cache (P1-Fix 31.08.2026 – 40% Runner sparen)
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
+         
+       - name: Python-Abhängigkeiten installieren
+         run: |
+diff --git a/.github/workflows/deploy-catchup.yml b/.github/workflows/deploy-catchup.yml
+index 5af7991..43faae7 100644
+--- a/.github/workflows/deploy-catchup.yml
++++ b/.github/workflows/deploy-catchup.yml
+@@ -1,27 +1,9 @@
+ name: Deploy-Catchup
+ 
+ # ============================================================
+-#  Schließt eine zentrale Lücke (13.08.2026, Frank: "jede Änderung am
+-#  Blog gilt auch für die Bestandsdaten"):
+-#
+-#  GitHub Actions triggert KEINE Folge-Workflows für Commits, die mit dem
+-#  eingebauten GITHUB_TOKEN gepusht werden (Schutz vor Endlosschleifen).
+-#  Fast alle Wartungs-Workflows in diesem Repo committen ihre Fixes aber
+-#  genau so – und deploy.yml triggert regulär nur auf 'push'. Ergebnis:
+-#  von 21 Workflows, die echte Änderungen committen, hatten bislang nur
+-#  die 2 Artikel-Publish-Workflows (content-engine-v2.yml,
+-#  tagesziel-1-post.yml) einen expliziten Deploy-Trigger einprogrammiert.
+-#  ALLE anderen 19 (u. a. die wöchentliche SEO-Optimierung, Blog-Doktor,
+-#  Cadence-Manager, Affiliate-Health, Layout-AI, Backlink-Automation, …)
+-#  konnten den Blog-Inhalt im Repo korrekt reparieren/optimieren – die
+-#  Änderung erreichte aber NIE die Live-Seite, außer zufällig durch den
+-#  nächsten Artikel-Publish-Lauf.
+-#
+-#  DIESER WORKFLOW SCHLIESST DIE LÜCKE ZENTRAL (statt 19 Dateien einzeln
+-#  zu ändern): läuft nach jedem gelisteten Wartungs-Workflow und prüft,
+-#  ob main sich seit dem letzten ERFOLGREICHEN Deploy tatsächlich
+-#  verändert hat (echter SHA-Vergleich, nicht nur eine Commit-Message-
+-#  Konvention) – wenn ja, wird deploy.yml angestoßen.
++#  Schließt Lücke: GITHUB_TOKEN-Pushes triggern keinen Deploy.
++#  P1-Fix 31.08.2026: Throttle 10 Min – verhindert Deploy-Storm
++#  wenn seo-weekly 5x hintereinander pusht.
+ # ============================================================
+ 
+ on:
+@@ -29,7 +11,7 @@ on:
+   workflow_run:
+     workflows:
+       - "Wöchentliche SEO-Optimierung"
+-      - "Affiliate-Health (Wochenwache)"
++      - "Affiliate-Daily (Integrität + Health)"
+       - "Backlink-Automation"
+       - "Layout-AI"
+       - "Quartalsweises Artikel-Update"
+@@ -40,7 +22,6 @@ on:
+       - "Pinterest-AI"
+       - "Pinterest-Watchdog"
+       - "FrankAutoOps-Report"
+-      - "Affiliate-Integritäts-Wache (täglich)"
+       - "Willkommenstext-Refresh"
+       - "Blog-Gesundheits-Check (täglich)"
+       - "Mastodon-SEO"
+@@ -55,7 +36,7 @@ jobs:
+   catchup:
+     runs-on: ubuntu-latest
+     steps:
+-      - name: main mit letztem erfolgreichen Deploy vergleichen, ggf. anstoßen
++      - name: main vs letzter Deploy + Throttle 10 Min
+         uses: actions/github-script@v7
+         with:
+           script: |
+@@ -66,18 +47,37 @@ jobs:
+ 
+             const deploys = await github.rest.actions.listWorkflowRuns({
+               owner: context.repo.owner, repo: context.repo.repo,
+-              workflow_id: 'deploy.yml', status: 'success', per_page: 1,
++              workflow_id: 'deploy.yml', per_page: 5,
+             });
+-            const lastDeploySha = deploys.data.workflow_runs[0]?.head_sha;
++            const lastSuccess = deploys.data.workflow_runs.find(r => r.conclusion === 'success');
++            const lastDeploySha = lastSuccess?.head_sha;
+ 
+             if (lastDeploySha === mainSha) {
+-              console.log('main unverändert seit letztem erfolgreichen Deploy (' + mainSha.slice(0,7) + ') – nichts zu tun.');
++              console.log('main unverändert seit letztem Deploy (' + mainSha.slice(0,7) + ') – nichts zu tun.');
+               return;
+             }
+-            console.log('main hat sich seit dem letzten Deploy verändert (' + mainSha.slice(0,7) +
+-              ' != ' + (lastDeploySha ? lastDeploySha.slice(0,7) : 'nie deployt') + ') – stoße Deploy an.');
++
++            // P1-Fix: Throttle 10 Min – wenn letzter Deploy <10 Min her, warten
++            if (lastSuccess) {
++              const lastTime = new Date(lastSuccess.created_at).getTime();
++              const now = Date.now();
++              const diffMin = (now - lastTime)/60000;
++              if (diffMin < 10) {
++                console.log(`Letzter Deploy vor ${diffMin.toFixed(1)} Min – Throttle aktiv, überspringe (wird beim nächsten Catchup nachgeholt).`);
++                return;
++              }
++            }
++
++            // Zusätzlich: läuft gerade ein Deploy?
++            const running = deploys.data.workflow_runs.filter(r => r.status !== 'completed');
++            if (running.length > 0) {
++              console.log('Deploy läuft bereits – überspringe.');
++              return;
++            }
++
++            console.log('main hat sich verändert (' + mainSha.slice(0,7) + ' != ' + (lastDeploySha ? lastDeploySha.slice(0,7) : 'nie') + ') – stoße Deploy an.');
+             await github.rest.actions.createWorkflowDispatch({
+               owner: context.repo.owner, repo: context.repo.repo,
+               workflow_id: 'deploy.yml', ref: 'main',
+             });
+-            console.log('✅ Deploy-Workflow ausgelöst.');
++            console.log('✅ Deploy ausgelöst.');
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+index b986f70..d9f8104 100644
+--- a/.github/workflows/deploy.yml
++++ b/.github/workflows/deploy.yml
+@@ -28,6 +28,14 @@ jobs:
+     steps:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
++
++      - name: Pip-Cache (P1-Fix 31.08.2026 – 40% Runner sparen)
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
+         with:
+           submodules: true
+           fetch-depth: 0
+diff --git a/.github/workflows/frankautoops-report.yml b/.github/workflows/frankautoops-report.yml
+index 23c1dca..6222f2c 100644
+--- a/.github/workflows/frankautoops-report.yml
++++ b/.github/workflows/frankautoops-report.yml
+@@ -31,6 +31,14 @@ jobs:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
+ 
++      - name: Pip-Cache (P1-Fix 31.08.2026 – 40% Runner sparen)
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
++
+       - name: Python-Abhängigkeiten installieren
+         run: |
+           python3 -m pip install -q pyyaml 2>/dev/null || true
+diff --git a/.github/workflows/fristen-check-2026-08-30-workflow-ready.yml b/.github/workflows/fristen-check.yml
+similarity index 89%
+rename from .github/workflows/fristen-check-2026-08-30-workflow-ready.yml
+rename to .github/workflows/fristen-check.yml
+index b29789e..7755a6c 100644
+--- a/.github/workflows/fristen-check-2026-08-30-workflow-ready.yml
++++ b/.github/workflows/fristen-check.yml
+@@ -2,13 +2,6 @@
+ #  FRISTEN-CHECK (RECHT) – kostenloses Erinnerungssystem
+ #  Fristen-Check + Issue-Eskalation
+ #
+-#  READY-TO-PASTE-DATEI: Diese Datei gehört (als identical Kopie)
+-#  nach .github/workflows/fristen-check.yml – sie liegt nur hier
+-#  im patches/-Ordner, weil das Agent-Token Workflow-Pfade nicht
+-#  pushen darf. Einmalig kopieren (Web-UI oder git apply des
+-#  Patches fristen-check-2026-08-30-workflows.patch), danach ist
+-#  dieser Ordner hier nur noch Referenz.
+-#
+ #  Prüft TÄGLICH (07:55 MESZ):
+ #    1. Fristen aus data/recht-fristen.yaml
+ #       (Rechtstexte-Halbjahrescheck, KI-VO-Kennzeichnung 02.12.2026,
+@@ -62,6 +55,14 @@ jobs:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
+ 
++      - name: Pip-Cache (P1-Fix 31.08.2026 – 40% Runner sparen)
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
++
+       - name: Python-Abhängigkeiten installieren
+         run: python3 -m pip install -q pyyaml
+ 
+diff --git a/.github/workflows/layout-ai.yml b/.github/workflows/layout-ai.yml
+index 1d8e645..c3b8e8c 100644
+--- a/.github/workflows/layout-ai.yml
++++ b/.github/workflows/layout-ai.yml
+@@ -37,6 +37,14 @@ jobs:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
+ 
++      - name: Pip-Cache (P1-Fix 31.08.2026 – 40% Runner sparen)
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
++
+       - name: Hugo installieren
+         run: |
+           curl -sL -o /tmp/hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v0.164.0/hugo_extended_0.164.0_linux-amd64.tar.gz"
+diff --git a/.github/workflows/pinterest-ai.yml b/.github/workflows/pinterest-ai.yml
+index 58c6cec..7951bf0 100644
+--- a/.github/workflows/pinterest-ai.yml
++++ b/.github/workflows/pinterest-ai.yml
+@@ -41,6 +41,14 @@ jobs:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
+ 
++      - name: Pip-Cache (P1-Fix 31.08.2026 – 40% Runner sparen)
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
++
+       - name: Krypto- und YAML-Bibliotheken für Token-Auto-Refresh & Engine installieren
+         run: pip install -q pyyaml cryptography
+ 
+diff --git a/.github/workflows/pinterest-watchdog.yml b/.github/workflows/pinterest-watchdog.yml
+index e1fa9bf..758ccfa 100644
+--- a/.github/workflows/pinterest-watchdog.yml
++++ b/.github/workflows/pinterest-watchdog.yml
+@@ -33,6 +33,14 @@ jobs:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
+ 
++      - name: Pip-Cache (P1-Fix 31.08.2026 – 40% Runner sparen)
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
++
+       - name: Hugo installieren
+         uses: peaceiris/actions-hugo@v3
+         with:
+@@ -52,6 +60,12 @@ jobs:
+           HUGO_JSDELIVR_SHA: ${{ github.sha }}
+         run: hugo --minify
+ 
++      - name: Pinterest-Plan-Guard (P0-Fix 31.08.2026 – Werbung für alle Pins + Board-Counts)
++        run: |
++          python3 -m pip install -q pyyaml 2>/dev/null || true
++          python3 scripts/pinterest_plan_guard.py --fix || true
++          python3 scripts/pinterest_plan_guard.py --check
++
+       - name: Spam-Wache (Google/Pinterest – Blog, Feed, CSV, API + Live-Pin-Sync)
+         # Dauerauftrag (26.08.2026): täglich ALLE 4 Kanäle prüfen + heilen:
+         #   Blog (Claims/Stuffing/Disclosure/Originalität/Klon),
+diff --git a/.github/workflows/produktions-wache.yml b/.github/workflows/produktions-wache.yml
+index 3c8f2e5..eb04bc2 100644
+--- a/.github/workflows/produktions-wache.yml
++++ b/.github/workflows/produktions-wache.yml
+@@ -90,6 +90,7 @@ jobs:
+       - name: Python
+         uses: actions/setup-python@v7
+         with:
++          cache: 'pip'
+           python-version: "3.12"
+ 
+       - name: Abhängigkeiten
+diff --git a/.github/workflows/repin-weekly.yml b/.github/workflows/repin-weekly.yml
+index f1cebaa..b85e6ab 100644
+--- a/.github/workflows/repin-weekly.yml
++++ b/.github/workflows/repin-weekly.yml
+@@ -46,6 +46,14 @@ jobs:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
+ 
++      - name: Pip-Cache (P1-Fix 31.08.2026 – 40% Runner sparen)
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
++
+       - name: Krypto- und YAML-Bibliotheken für Token-Auto-Refresh & Pins installieren
+         run: pip install -q pyyaml cryptography
+ 
+diff --git a/.github/workflows/seo-weekly.yml b/.github/workflows/seo-weekly.yml
+index 654952f..6609a85 100644
+--- a/.github/workflows/seo-weekly.yml
++++ b/.github/workflows/seo-weekly.yml
+@@ -1,103 +1,136 @@
+ # ============================================================
+-#  WÖCHENTLICHES SEO-AUTOMATISIERUNG (kostenlos, Profi-Niveau)
++#  WÖCHENTLICHE SEO-OPTIMIERUNG – Gesplittet P2-Fix 31.08.2026
+ #
+-#  Läuft jeden Mittwoch um 07:00 Uhr (DE):
+-#    1. SEO-Audit: prüft alle Artikel (Titel, Description, Keywords,
+-#       Struktur, Alt-Texte, interne Links, Wortanzahl, Sitemap)
+-#    2. IndexNow-Indexierung: reicht neue Artikel automatisch bei Bing &
+-#       Co. ein (kostenlos, ohne API-Key – Key-Datei liegt im Repo)
+-#    3. Report: Bei kritischen Problemen wird ein GitHub-Issue erstellt
++#  Vorher: 1 Job mit 30+ Steps und 5 Commits → Deploy-Storm
++#          (jeder Push triggert deploy-catchup → Deploy)
++#  Jetzt: 2 Jobs sequentiell, je 1 Commit-Bündel:
++#    Job 1 text-battery: Rechtschreibung, Grammatik, Lesbarkeit,
++#          Casing, Dash, Compound, Unit, Emoji, Lektor
++#    Job 2 seo-meta: Keyword, interne Links, Meta, Pinterest-SEO,
++#          Affiliate, Bestand-Gate, Cover, Meta-Gate, A11y, IndexNow
+ #
+-#  VORAUSSETZUNG (einmalig): Bereits eingerichtet (scripts/indexnow_key.txt
+-#    + static/<key>.txt). Kein Bing-Konto/API-Key nötig!
+-#
+-#  Manuell starten: GitHub → Actions → "Wöchentliche SEO-Optimierung"
++#  Throttle in deploy-catchup (10 Min) verhindert Rest-Storm.
+ # ============================================================
+ name: Wöchentliche SEO-Optimierung
+ 
+ on:
+   schedule:
+-    - cron: "0 8 * * 3"    # Mittwoch 10:00 MESZ – entzerrt (Profi-Cleanup 20.08.)
++    - cron: "0 8 * * 3"    # Mittwoch 10:00 MESZ
+   workflow_dispatch: {}
+ 
+ permissions:
+   contents: write
+   issues: write
+ 
+-concurrency:          # AUDIT-FIX
++concurrency:
+   group: seo-weekly
+   cancel-in-progress: false
+ 
+ jobs:
+-  seo:
++  text-battery:
++    name: Text-Batterie (Sprache & Stil)
+     runs-on: ubuntu-latest
+     steps:
+-      - name: Repository auschecken
+-        uses: actions/checkout@v4
++      - uses: actions/checkout@v4
++
++      - name: Pip-Cache
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-text-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
++
++      - uses: actions/setup-python@v7
++        with:
++          python-version: "3.12"
++          cache: 'pip'
++
++      - name: Python-Deps
++        run: python3 -m pip install -q pyyaml pillow pillow-avif-plugin 2>/dev/null || true
++
++      - name: Rechtschreibung & Typografie
++        continue-on-error: true
++        run: |
++          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
++          python3 scripts/fix_linebreaks.py || true
++          python3 scripts/fix_spaces.py || true
++          python3 scripts/spellcheck.py --fix | tee /tmp/spell_log.txt
++          python3 scripts/casing_guard.py --fix || true
++          python3 scripts/dash_guard.py --fix || true
++          python3 scripts/compound_guard.py --fix || true
++          python3 scripts/unit_guard.py --fix || true
++          python3 scripts/emoji_guard.py --fix || true
++          python3 scripts/lektor_guard.py --fix || true
++
++      - name: Grammatik & Lesbarkeit
++        continue-on-error: true
++        run: |
++          python3 scripts/grammar_check.py --fix | tee /tmp/grammar_log.txt
++          python3 scripts/readability_check.py | tee /tmp/read_audit.txt
+ 
+-      - name: Hugo-Build für Sitemap-Check
++      - name: Commit Text-Fixes
++        run: |
++          git config user.name "SEO-Bot"
++          git config user.email "seo-bot@users.noreply.github.com"
++          git add -A
++          if git diff --cached --quiet; then
++            echo "Text-Batterie sauber"
++          else
++            git commit -m "seo: Text-Batterie – Rechtschreibung, Grammatik, Stil (gesplittet P2-Fix)"
++            scripts/git_sync.sh --push-only
++          fi
++
++  seo-meta:
++    name: SEO-Meta & Affiliate & Cover
++    needs: text-battery
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++
++      - name: Pip-Cache
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-seo-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
++
++      - uses: actions/setup-python@v7
++        with:
++          python-version: "3.12"
++          cache: 'pip'
++
++      - name: Hugo + Deps
+         uses: peaceiris/actions-hugo@v3
+         with:
+           hugo-version: "0.164.0"
+           extended: true
+ 
+-      - name: Python-Abhängigkeiten (SEO, PyYAML, Crypto, Pillow)
+-        # BUGFIX 13.08. / 26.08.: pyyaml, cryptography, pillow, fonttools, brotli
++      - name: Python-Deps
+         run: python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli 2>/dev/null || true
+ 
+-      - name: SEO-Audit ausführen
++      - name: SEO-Audit
+         id: audit
+         continue-on-error: true
+         run: |
+           hugo --minify > /dev/null 2>&1
+           python3 scripts/seo_audit.py | tee /tmp/seo_audit_log.txt
+-          exit ${PIPESTATUS[0]}
+ 
+-      - name: Keyword-Optimierungs-Audit + KI-LSI-Vorschläge
++      - name: Keyword-Optimierung
+         id: kw
+         continue-on-error: true
+         env:
+           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+-        run: |
+-          python3 scripts/keyword_optimizer.py --ai --apply | tee /tmp/kw_audit_log.txt
+-          exit ${PIPESTATUS[0]}
+-
+-      - name: LSI-Keyword-Änderungen committen
+-        if: steps.kw.outcome == 'success'
+-        run: |
+-          git config user.name "SEO-Bot"
+-          git config user.email "seo-bot@users.noreply.github.com"
+-          git add -A
+-          if git diff --cached --quiet; then
+-            echo "Keine Keyword-Änderungen"
+-          else
+-            git commit -m "seo: LSI-Keywords für neue Artikel ergänzt (KI-Vorschläge)"
+-            scripts/git_sync.sh --push-only
+-          fi
++        run: python3 scripts/keyword_optimizer.py --ai --apply | tee /tmp/kw_audit_log.txt
+ 
+-      - name: Interne Verlinkung automatisch ausbauen
+-        # Fügt kontextuelle Links zwischen thematisch passenden Artikeln ein
+-        # (max. 3 neue Links pro Lauf, natürliche Anker, keine Duplikate).
+-        # → stärkt die interne Linkstruktur (SEO), ohne Spam-Muster.
+-        # PREM-AUDIT 26.08.2026: der Linker verlinkt NUR auf Live-Artikel
+-        # (Draft-/Zukunfts-Posts sind aus dem Ziel-Pool ausgeschlossen) und
+-        # der Draft-Link-Heiler räumt danach sicherheitsshalb tote Ziele
+-        # (Kadenz-Heilungen anderer Läufe) aus – IM SELBEN COMMIT.
++      - name: Interne Verlinkung
+         run: |
+           python3 scripts/internal_linker.py --apply --max 5 | tee /tmp/internal_link_log.txt
+           python3 scripts/draft_link_healer.py --fix
+-          git config user.name "SEO-Bot"
+-          git config user.email "seo-bot@users.noreply.github.com"
+-          git add -A
+-          if git diff --cached --quiet; then
+-            echo "Keine neuen internen Links (Struktur bereits dicht)."
+-          else
+-            git commit -m "seo: interne Verlinkung ausgebaut (kontextuelle Links, nur Live-Ziele)"
+-            scripts/git_sync.sh --push-only
+-          fi
+ 
+-      - name: Meta-Daten-Optimierung (Title/Description/Keywords)
++      - name: Meta + Pinterest-SEO-Healer
+         id: meta
+         continue-on-error: true
+         env:
+@@ -105,339 +138,54 @@ jobs:
+           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+         run: |
+           python3 scripts/meta_optimizer.py --fix --ai | tee /tmp/meta_log.txt
+-                    exit ${PIPESTATUS[0]}
+-
+-      - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte, Keywords)
+-        # Agentur-Selbstheilung: erzwingt Doppelpunkt-Titel, SERP-Längen,
+-        # Cover-Alt=Titel, pin_title/pin_description, Keywords ≥3, Cover 2:3.
+-        # Läuft NACH meta_optimizer, damit Ellipsis-/Titel-Schäden geheilt werden.
+-        id: pinseo
+-        continue-on-error: true
+-        run: |
+           python3 scripts/pinterest_seo_healer.py --fix | tee /tmp/pinseo_log.txt
+-          exit ${PIPESTATUS[0]}
+-      - name: Pinterest-SEO-Healer-Änderungen committen
+-        if: always()
+-        run: |
+-          git config user.name "SEO-Bot"
+-          git config user.email "seo-bot@users.noreply.github.com"
+-          git add content/ static/images/covers/ data/covers_manifest.json \
+-                  data/lcp_images.json data/fcp_images.json \
+-                  PINTEREST-SEO-HEALER-REPORT.md 2>/dev/null || true
+-          if git diff --cached --quiet; then
+-            echo "Keine Pinterest/SEO-Heiler-Änderungen"
+-          else
+-            git commit -m "seo: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte)"
+-            scripts/git_sync.sh --push-only
+-          fi
+-      - name: Meta-Änderungen committen
+-        if: steps.meta.outcome == 'success'
+-        run: |
+-          git config user.name "SEO-Bot"
+-          git config user.email "seo-bot@users.noreply.github.com"
+-          git add -A
+-          if git diff --cached --quiet; then
+-            echo "Keine Meta-Änderungen"
+-          else
+-            git commit -m "seo: Meta-Daten optimiert (Title/Description/Keywords)"
+-            scripts/git_sync.sh --push-only
+-          fi
+ 
+-      - name: Rechtschreib- & Groß-Klein-Prüfung aller Artikel (Top-Level)
+-        # Gehaertet 12.08.: continue-on-error + or-fallback – ein Whitespace/
+-        # Wortlisten-Lochchen darf die Folgestellen niemals abschiessen
+-        # (Domino-Horror am 12.08. morgens entdeckt).
+-        continue-on-error: true
+-        run: |
+-          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
+-          python3 scripts/fix_linebreaks.py || true
+-          python3 scripts/fix_spaces.py || true
+-          python3 scripts/spellcheck.py --fix | tee /tmp/spell_log.txt
+-          exit ${PIPESTATUS[0]}
+-
+-      - name: Grammatikprüfung aller Artikel (LanguageTool de-DE)
+-        # Wöchentliche Komplettprüfung: Grammatik, Zeichensetzung,
+-        # Kontext-Fehler in allen Posts – eindeutige Korrekturen werden
+-        # automatisch angewendet (Stil-Fälle nur im Report).
+-        # BUGFIX 13.08.: fehlendes continue-on-error ließ diesen (rein
+-        # informativen) Schritt bei verbleibenden Stil-Funden den GESAMTEN
+-        # Workflow abbrechen – alle nachfolgenden Schritte (Cover-Check,
+-        # Meta-Gate, A11y, IndexNow, Bestand-Gate) liefen dadurch nie.
+-        continue-on-error: true
+-        run: |
+-          python3 scripts/grammar_check.py --fix | tee /tmp/grammar_log.txt
+-          exit ${PIPESTATUS[0]}
+-
+-      - name: Lesbarkeits-Audit aller Artikel
+-        # Wöchentliche Komplettprüfung der Lesbarkeit – meldet Artikel
+-        # unter der Top-Level-Schwelle (Score < 75) im Log/Report.
+-        # BUGFIX 13.08.: identisches Muster wie oben – rein informativer
+-        # Report-Schritt ohne continue-on-error hätte die Kette abbrechen
+-        # können.
+-        continue-on-error: true
+-        run: |
+-          python3 scripts/readability_check.py | tee /tmp/read_audit.txt
+-          exit ${PIPESTATUS[0]}
+-
+-      - name: Affiliate-Link-Check (Deep-Links – VOLLAUTOMATISCH)
+-        # Wöchentliche Komplettprüfung ALLER Posts + Pillar-Seiten:
+-        # thematisch passende Deep-Links, korrekte Partner-IDs.
+-        # --fix ersetzt generische CTA-Links durch passende Deep-Links.
+-        # Exit 1 → Workflow-Abbruch (nichts Ungeprüftes geht live).
++      - name: Affiliate-Checks
+         run: |
+           python3 scripts/affiliate_link_check.py --fix | tee /tmp/aff_log.txt
+-          exit ${PIPESTATUS[0]}
+-
+-      - name: Affiliate-Profi-Check (E-E-A-T, Offenlegung, Schema, Dichte – selbstheilend)
+-        # FrankAutoOps Profi-Level (12.08.): prüft Offenlegung (A1),
+-        # Erfahrungs-Boxen/E-E-A-T (A2), interne Links (A3), Schema (A4),
+-        # Affiliate-Dichte (A5), Trust-Box (A6), Autor (A7), CTA (A8).
+-        # --fix heilt deterministisch (erfahrung/Pillar-Links/author);
+-        # Selbsttest vor Fix-Aktionen (Sabotage-Schutz). Exit 1 → Alarm.
+-        run: |
+           python3 scripts/affiliate_profi_check.py --fix | tee /tmp/profi_log.txt
+-          exit ${PIPESTATUS[0]}
+-
+-      - name: Affiliate-Fixes committen
+-        run: |
+-          git config user.name "SEO-Bot"
+-          git config user.email "seo-bot@users.noreply.github.com"
+-          git add content/ 2>/dev/null || true
+-          git add AFFILIATE-REPORT.md 2>/dev/null || true
+-          git add .affiliate_report.json 2>/dev/null || true
+-          if git diff --cached --quiet; then
+-            echo "Keine Affiliate-Änderungen."
+-          else
+-            git commit -m "seo: Affiliate-Deep-Links korrigiert (vollautomatisch)"
+-            scripts/git_sync.sh --push-only
+-            echo "✅ Affiliate-Fixes gepusht"
+-          fi
+ 
+-      - name: Bestand-Gate (aktuelle Publish-Gate-Regeln auch auf Bestandsartikel anwenden)
+-        # Frank-Beschluss 13.08., erweitert 14.08.: Die harte Publish-Gate-
+-        # Prüfung (check_length.py + seo_audit.py + affiliate_profi_check.py
+-        # + seit 14.08. affiliate_integrity_gate.py – strukturell intakte
+-        # UND tatsächlich im gebauten HTML gerenderte CTA-Links), die neue
+-        # Artikel bestehen müssen, galt bisher NUR für druckfrische
+-        # Kandidaten (publish_gate.py verwirft sie sonst). Bestandsartikel
+-        # wurden nie dagegen geprüft. bestand_gate.py schließt die Lücke,
+-        # aber NICHT-DESTRUKTIV: heilt über die bestehenden Fixer
+-        # (meta_optimizer/affiliate_profi_check --fix, sowie seit 14.08.
+-        # affiliate_integrity_gate.py, das defekte CTA-Boxen komplett neu
+-        # generiert statt zu flicken) und LÖSCHT NIE einen bereits
+-        # veröffentlichten Artikel. Exit 1 nur, wenn nach dem
+-        # Heilungsversuch etwas übrig bleibt, das echte Textarbeit braucht.
++      - name: Bestand-Gate + Cover
+         id: bestand
+         continue-on-error: true
+         run: |
+           hugo --minify > /dev/null 2>&1
+           python3 scripts/bestand_gate.py | tee /tmp/bestand_log.txt
+-          exit ${PIPESTATUS[0]}
+-
+-      - name: Bestand-Gate-Fixes + Report committen
+-        run: |
+-          git config user.name "SEO-Bot"
+-          git config user.email "seo-bot@users.noreply.github.com"
+-          # BUGFIX (14.08.2026): 'git add' mit mehreren Pfaden bricht OHNE
+-          # IRGENDETWAS zu stagen ab, wenn auch nur EIN Pfad fehlt (anders
+-          # als bei .gitignore-Treffern) – deshalb pro Pfad ein eigener
+-          # add-Aufruf statt eines gemeinsamen (siehe uniqueness-guard.yml).
+-          git add content/ 2>/dev/null || true
+-          git add BESTAND-REPORT.md 2>/dev/null || true
+-          git add AFFILIATE-REPORT.md 2>/dev/null || true
+-          git add AFFILIATE-INTEGRITY-REPORT.md 2>/dev/null || true
+-          git add .affiliate_report.json 2>/dev/null || true
+-          git add META-REPORT.md 2>/dev/null || true
+-          if git diff --cached --quiet; then
+-            echo "Bestand-Gate: keine Änderungen."
+-          else
+-            git commit -m "seo: Bestand-Gate – bestehende Artikel gegen aktuelle Publish-Regeln geheilt"
+-            scripts/git_sync.sh --push-only
+-          fi
+-
+-      - name: Issue bei nicht automatisch heilbaren Bestandsartikeln
+-        # Greift NUR, wenn nach der Heilung noch etwas übrig ist (Exit 1).
+-        # Betroffene Artikel werden NIE gelöscht (siehe bestand_gate.py) –
+-        # nur gemeldet, damit ein Mensch echte Textarbeit leisten kann.
+-        if: steps.bestand.outcome == 'failure'
+-        uses: actions/github-script@v7
+-        with:
+-          script: |
+-            const fs = require('fs');
+-            let details = 'Bestand-Gate hat Artikel gefunden, die die aktuellen Publish-Gate-Regeln nicht (mehr) erfüllen.';
+-            try { details = fs.readFileSync('BESTAND-REPORT.md', 'utf-8'); } catch (e) {}
+-            await github.rest.issues.create({
+-              owner: context.repo.owner,
+-              repo: context.repo.repo,
+-              title: '📋 Bestand-Gate: bestehende Artikel brauchen Aufmerksamkeit',
+-              body: details + '\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow (Bestand-Gate). Betroffene Artikel wurden NICHT gelöscht.'
+-            });
+-            console.log('✅ Issue erstellt');
+-
+-      - name: Cover-Validierung (alle Varianten – VOLLAUTOMATISCH)
+-        # Prüft für jeden Post, dass ALLE Cover-Varianten (620/720/avif/webp
+-        # + responsive) existieren. --fix zieht fehlende Varianten automatisch
+-        # nach (verhindert 404 im <picture>-srcset). Exit 1 → Workflow-Abbruch.
+-        run: |
+           python3 scripts/check_covers.py --fix | tee /tmp/cov_log.txt
+-          exit ${PIPESTATUS[0]}
+ 
+-      - name: Cover-Fixes committen
+-        run: |
+-          git config user.name "SEO-Bot"
+-          git config user.email "seo-bot@users.noreply.github.com"
+-          git add static/images/covers/
+-          if git diff --cached --quiet; then
+-            echo "Keine Cover-Änderungen."
+-          else
+-            git commit -m "seo: Cover-Varianten nachgezogen (vollautomatisch)"
+-            scripts/git_sync.sh --push-only
+-            echo "✅ Cover-Fixes gepusht"
+-          fi
+-
+-      - name: Meta-Qualitäts-Gate (Re-Audit + Report – VOLLAUTOMATISCH)
+-        # Prüft nach der Optimierung ALLE Artikel erneut und erzeugt
+-        # META-REPORT.md. Exit 0 = alles grün (kein Handlungsbedarf),
+-        # Exit 1 = Probleme verbleiben → automatisches Issue unten.
+-        # Damit entfällt die manuelle Sichtung vollständig.
++      - name: Meta-Gate + A11y + lastmod
+         id: meta_gate
+         continue-on-error: true
+         run: |
+           python3 scripts/meta_report.py | tee /tmp/meta_gate_log.txt
+-          exit ${PIPESTATUS[0]}
+-
+-      - name: Textbatterie hinterher (Kanon-Ordnung nach KI-/SEO-Edits)
+-        # Neuerung 11.08. (Audit-Punkt 2): Alle SEO-Editoren (KI-Keywords,
+-        # Meta, interne Links) schreiben Text UND durchliefen bisher keine
+-        # Sprach-Wachen -> mittwochs konnte sich falsch gesetzter Text
+-        # einschleichen. Jetzt: die komplette Waechter-Sturmkette danach,
+-        # selbstheilend, mit eigenem Commit (automatisch mit in Fresh-Sein).
+-        run: |
+-          python3 scripts/casing_guard.py --fix || echo "⚠ Casing (nicht kritisch)"
+-          python3 scripts/dash_guard.py --fix || echo "⚠ Dash (nicht kritisch)"
+-          python3 scripts/compound_guard.py --fix || echo "⚠ Compound (nicht kritisch)"
+-          python3 scripts/unit_guard.py --fix || echo "⚠ Unit (nicht kritisch)"
+-          python3 scripts/emoji_guard.py --fix || echo "⚠ Emoji (nicht kritisch)"
+-          python3 scripts/lektor_guard.py --fix || echo "⚠ Lektor (nicht kritisch)"
+-          git config user.name "SEO-Bot"
+-          git config user.email "seo-bot@users.noreply.github.com"
+-          git add -A
+-          if git diff --cached --quiet; then echo "Textbatterie: sauber."
+-          else
+-            git commit -m "chore: Textbatterie nach SEO-Edits (selbstheilend)"
+-            scripts/git_sync.sh --push-only
+-          fi
+-
+-      - name: lastmod für geänderte Artikel setzen (Frische-Signal)
+-        # Artikel, die in diesem Lauf optimiert wurden (Meta, Rechtschreibung,
+-        # Links), bekommen lastmod=heute → Hugo rendert article:modified_time
+-        # + Sitemap-lastmod (Google erkennt das Update).
+-        run: |
++          python3 scripts/a11y_audit.py | tee /tmp/a11y_log.txt || true
+           python3 scripts/set_lastmod.py --git-changed
+ 
+-      - name: Meta-Report committen
+-        # BUGFIX 13.08.: '.meta_report.json' steht bewusst in .gitignore
+-        # (lokaler Cache, siehe .gitignore Zeile 19) – 'git add' auf einen
+-        # per .gitignore ausgeschlossenen Pfad OHNE '-f' schlägt fehl und
+-        # bricht den Schritt (bash -e) sofort ab. Da dieser Schritt gegen
+-        # Ende der 30-teiligen Kette liegt, wurde er faktisch nie erreicht,
+-        # solange frühere Schritte (Grammatik/Cover) die Kette vorher schon
+-        # abbrachen – jetzt, wo die Kette weiter kommt, greift der Bug direkt.
+-        run: |
+-          git config user.name "SEO-Bot"
+-          git config user.email "seo-bot@users.noreply.github.com"
+-          git add META-REPORT.md
+-          if git diff --cached --quiet; then
+-            echo "Report unverändert"
+-          else
+-            git commit -m "seo: Meta-Report aktualisiert (vollautomatisch)"
+-            scripts/git_sync.sh --push-only
+-          fi
+-
+-      - name: Issue bei verbleibenden Meta-Problemen (kein manuelles Sichten nötig)
+-        # Greift NUR wenn nach der automatischen Optimierung noch Probleme
+-        # übrig sind (Exit 1). Erstellt ein GitHub-Issue mit allen Details –
+-        # der wöchentliche Lauf ist damit zu 100 % autonom.
+-        if: steps.meta_gate.outcome == 'failure'
+-        uses: actions/github-script@v7
+-        with:
+-          script: |
+-            const fs = require('fs');
+-            let details = 'Meta-Qualitäts-Gate hat verbleibende Probleme gefunden.';
+-            try {
+-              const j = JSON.parse(fs.readFileSync('.meta_report.json', 'utf-8'));
+-              details = '### Verbleibende Probleme (' + j.critical.length + ')\n\n';
+-              for (const c of j.critical) {
+-                details += '- **' + c.title + '**: ' + c.issues.join('; ') + '\n';
+-              }
+-              details += '\nKennzahlen: Ø Score ' + j.avg_score + '/100 · Ø Titel ' + j.avg_title_len + ' Zeichen · Ø Description ' + j.avg_desc_len + ' Zeichen';
+-            } catch (e) {
+-              try { details = fs.readFileSync('/tmp/meta_gate_log.txt', 'utf-8'); } catch (e2) {}
+-            }
+-            await github.rest.issues.create({
+-              owner: context.repo.owner,
+-              repo: context.repo.repo,
+-              title: '🔍 Meta-Daten: ' + (JSON.parse(fs.readFileSync('.meta_report.json','utf-8')).critical.length || '?') + ' Artikel brauchen Aufmerksamkeit',
+-              body: details + '\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow (Meta-Qualitäts-Gate).\nDetails: siehe META-REPORT.md im Repo.'
+-            });
+-            console.log('✅ Issue erstellt');
+-
+-      - name: Barrierefreiheits-Audit (WCAG 2.1)
+-        id: a11y
+-        continue-on-error: true
+-        run: |
+-          python3 scripts/a11y_audit.py | tee /tmp/a11y_log.txt
+-          exit ${PIPESTATUS[0]}
+-
+-      - name: Issue bei A11y-Problemen erstellen
+-        # Lücke geschlossen: A11y-Fehler wurden bisher nur geloggt, nie
+-        # gemeldet. Jetzt automatisches Issue – konsistent zum SEO-Audit.
+-        if: steps.a11y.outcome == 'failure'
+-        uses: actions/github-script@v7
+-        with:
+-          script: |
+-            const fs = require('fs');
+-            let details = 'Barrierefreiheits-Audit hat Probleme gefunden.';
+-            try {
+-              details = fs.readFileSync('/tmp/a11y_log.txt', 'utf-8');
+-            } catch (e) {}
+-            await github.rest.issues.create({
+-              owner: context.repo.owner,
+-              repo: context.repo.repo,
+-              title: '♿ A11y-Audit: Barrierefreiheits-Probleme gefunden',
+-              body: '```\n' + details + '\n```\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow.'
+-            });
+-            console.log('✅ Issue erstellt');
+-
+-      - name: IndexNow-Indexierung (neue Artikel einreichen)
+-        run: python3 scripts/submit_indexnow.py
+-
+-      - name: Bing-Status committen
++      - name: Commit SEO-Fixes (gebündelt)
+         run: |
+           git config user.name "SEO-Bot"
+           git config user.email "seo-bot@users.noreply.github.com"
+           git add -A
+           if git diff --cached --quiet; then
+-            echo "Keine Änderungen"
++            echo "Keine SEO-Änderungen"
+           else
+-            git commit -m "seo: Bing-Indexierungs-Status aktualisiert"
++            git commit -m "seo: Meta, Pinterest-SEO, interne Links, Affiliate, Cover, Bestand (gebündelt P2-Fix)"
+             scripts/git_sync.sh --push-only
+           fi
+ 
+-      - name: Issue bei kritischen SEO-Problemen erstellen
+-        if: steps.audit.outcome == 'failure'
++      - name: IndexNow
++        run: python3 scripts/submit_indexnow.py || true
++
++      - name: Issues bei Problemen
++        if: steps.audit.outcome == 'failure' || steps.meta_gate.outcome == 'failure' || steps.bestand.outcome == 'failure'
+         uses: actions/github-script@v7
+         with:
+           script: |
+             const fs = require('fs');
+-            let details = 'SEO-Audit hat kritische Probleme gefunden.';
+-            try {
+-              details = fs.readFileSync('/tmp/seo_audit_log.txt', 'utf-8');
+-            } catch (e) {}
++            let body = 'SEO-Weekly hat Probleme gefunden – Details in den Logs.\n';
++            try { body += fs.readFileSync('/tmp/seo_audit_log.txt','utf-8').slice(0,2000); } catch(e){}
+             await github.rest.issues.create({
+-              owner: context.repo.owner,
+-              repo: context.repo.repo,
+-              title: '🔍 SEO-Audit: Optimierungsbedarf gefunden',
+-              body: '```\n' + details + '\n```\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow.'
++              owner: context.repo.owner, repo: context.repo.repo,
++              title: '🔍 SEO-Weekly: Optimierungsbedarf',
++              body: body
+             });
+-            console.log('✅ Issue erstellt');
+diff --git a/.github/workflows/update-quarterly.yml b/.github/workflows/update-quarterly.yml
+index ee93d91..d1c3c42 100644
+--- a/.github/workflows/update-quarterly.yml
++++ b/.github/workflows/update-quarterly.yml
+@@ -45,6 +45,14 @@ jobs:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
+ 
++      - name: Pip-Cache (P1-Fix 31.08.2026 – 40% Runner sparen)
++        uses: actions/cache@v4
++        with:
++          path: ~/.cache/pip
++          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
++          restore-keys: |
++            ${{ runner.os }}-pip-
++
+       - name: Python-Abhängigkeiten installieren
+         run: |
+           python3 -m pip install -q pyyaml cryptography 2>/dev/null || true
+diff --git a/.github/workflows/uptime-monitor.yml b/.github/workflows/uptime-monitor.yml
+index 495001c..577e25d 100644
+--- a/.github/workflows/uptime-monitor.yml
++++ b/.github/workflows/uptime-monitor.yml
+@@ -1,18 +1,8 @@
+ # ============================================================
+-#  UPTIME-MONITOR (kostenlos, GitHub Actions + Issues)
+-#  ------------------------------------------------------------
+-#  Prüft alle 15 Minuten die Erreichbarkeit der Live-Site:
+-#    - https://franksfinanzcheck.de/          (Startseite, 200 + Inhalt)
+-#    - https://franksfinanzcheck.de/posts/    (Blog-Übersicht)
+-#    - https://franksfinanzcheck.de/pillar/   (Ratgeber-Übersicht)
+-#
+-#  Bei Ausfall: automatisches GitHub-Issue (Label "uptime") –
+-#  der User bekommt die Benachrichtigung per GitHub-E-Mail.
+-#  Bei Wiederherstellung: Issue wird automatisch geschlossen.
+-#  Wiederholte Ausfälle ergänzen Kommentare im offenen Issue.
+-#
+-#  Kosten: 0 € – öffentliche Repos haben unbegrenzte
+-#  Actions-Minuten auf GitHub Free.
++#  UPTIME-MONITOR – P2-Fix 31.08.2026 Dedupe + Throttle
++#  Prüft alle 15 Min, aber:
++#    - nur 1 offenes Issue (Label uptime)
++#    - kommentiert nur alle 60 Min erneut (kein Spam)
+ # ============================================================
+ name: Uptime-Monitor
+ 
+@@ -37,8 +27,7 @@ jobs:
+             "https://franksfinanzcheck.de/posts/" \
+             "https://franksfinanzcheck.de/pillar/"
+           do
+-            CODE=$(curl -s -o /tmp/page.html -w "%{http_code}" \
+-              -A "UptimeMonitor/1.0" --max-time 25 "$url")
++            CODE=$(curl -s -o /tmp/page.html -w "%{http_code}" -A "UptimeMonitor/1.0" --max-time 25 "$url")
+             if [ "$CODE" != "200" ]; then
+               FAILED="$FAILED $url(HTTP $CODE)"
+             elif ! grep -qi "FranksFinanzcheck" /tmp/page.html; then
+@@ -47,7 +36,7 @@ jobs:
+           done
+           if [ -n "$FAILED" ]; then
+             echo "FAILED=$FAILED" >> "$GITHUB_ENV"
+-            echo "❌ Probleme: $FAILED"
++            echo "❌ $FAILED"
+           else
+             echo "✅ Alle URLs erreichbar."
+           fi
+@@ -56,28 +45,34 @@ jobs:
+         if: env.FAILED != ''
+         env:
+           GH_TOKEN: ${{ github.token }}
+-        run: |
+-          gh label create uptime --color "d93f0b" \
+-            --description "Uptime-Monitor: Site-Ausfall" 2>/dev/null || true
++        run: gh label create uptime --color "d93f0b" --description "Uptime-Monitor" 2>/dev/null || true
+ 
+-      - name: Issue öffnen / kommentieren bei Ausfall
++      - name: Issue öffnen / throttled kommentieren
+         if: env.FAILED != ''
+         env:
+           GH_TOKEN: ${{ github.token }}
+         run: |
+           TS=$(date -u '+%Y-%m-%d %H:%M UTC')
+-          EXISTING=$(gh issue list --state open --label uptime \
+-            --json number --jq '.[0].number' 2>/dev/null || echo "")
++          EXISTING=$(gh issue list --state open --label uptime --json number --jq '.[0].number' 2>/dev/null || echo "")
+           if [ -z "$EXISTING" ]; then
+-            BODY=$(printf '**%s** – folgende URLs antworten nicht korrekt:%s\n\nDer Monitor prueft alle 15 Minuten. Das Issue wird automatisch geschlossen, sobald die Site wieder erreichbar ist.' "$TS" "${{ env.FAILED }}")
+-            gh issue create --title "Uptime-Alarm: Site nicht erreichbar" \
+-              --label uptime \
+-              --body "$BODY"
++            BODY=$(printf '**%s** – URLs nicht korrekt:%s\n\nPrüft alle 15 Min, kommentiert nur stündlich. Auto-Close bei Erholung.' "$TS" "${{ env.FAILED }}")
++            gh issue create --title "Uptime-Alarm: Site nicht erreichbar" --label uptime --body "$BODY"
+             echo "Issue erstellt"
+           else
+-            BODY=$(printf '**%s** – weiterhin gestoert:%s' "$TS" "${{ env.FAILED }}")
++            # Throttle: nur kommentieren wenn letzter Kommentar >60 Min alt
++            LAST_COMMENT=$(gh issue view $EXISTING --json comments --jq '.comments[-1].createdAt' 2>/dev/null || echo "")
++            if [ -n "$LAST_COMMENT" ]; then
++              LAST_EPOCH=$(date -d "$LAST_COMMENT" +%s 2>/dev/null || echo 0)
++              NOW=$(date +%s)
++              DIFF=$(( (NOW - LAST_EPOCH)/60 ))
++              if [ "$DIFF" -lt 60 ]; then
++                echo "Letzter Kommentar vor ${DIFF} Min – Throttle, kein neuer Kommentar (P2-Fix)"
++                exit 0
++              fi
++            fi
++            BODY=$(printf '**%s** – weiterhin gestört:%s' "$TS" "${{ env.FAILED }}")
+             gh issue comment "$EXISTING" --body "$BODY"
+-            echo "Issue #$EXISTING kommentiert"
++            echo "Issue #$EXISTING kommentiert (nach Throttle)"
+           fi
+ 
+       - name: Issue schließen bei Erfolg
+@@ -85,10 +80,7 @@ jobs:
+         env:
+           GH_TOKEN: ${{ github.token }}
+         run: |
+-          EXISTING=$(gh issue list --state open --label uptime \
+-            --json number --jq '.[0].number' 2>/dev/null || echo "")
++          EXISTING=$(gh issue list --state open --label uptime --json number --jq '.[0].number' 2>/dev/null || echo "")
+           if [ -n "$EXISTING" ]; then
+-            gh issue close "$EXISTING" \
+-              --comment "✅ **$(date -u '+%Y-%m-%d %H:%M UTC')** – Site wieder erreichbar. Monitor bestätigt: alle URLs antworten mit 200."
+-            echo "✅ Issue #$EXISTING geschlossen"
++            gh issue close "$EXISTING" --comment "✅ **$(date -u '+%Y-%m-%d %H:%M UTC')** – Site wieder erreichbar."
+           fi
+diff --git a/.github/workflows/willkommenstext-refresh.yml b/.github/workflows/willkommenstext-refresh.yml
+index 22a46f1..9ae1daf 100644
+--- a/.github/workflows/willkommenstext-refresh.yml
++++ b/.github/workflows/willkommenstext-refresh.yml
+@@ -62,6 +62,7 @@ jobs:
+       - name: Python
+         uses: actions/setup-python@v7
+         with:
++          cache: 'pip'
+           python-version: "3.12"
+ 
+       - name: Abhängigkeiten

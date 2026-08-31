@@ -146,7 +146,7 @@ LED-Förderungen kommen und gehen. Der Hebel ist der Preis pro Lumen und die Leb
 
 ## Interne Verlinkung als Nutzerführung
 
-Die Vertiefungen oben sind bewusst nach „Verbrauch → Preis → Saison“ sortiert. Ein Pin zu „Stromfresser“ darf nicht auf die Gas-Preisgarantie landen. Das Board-Routing in der Pinterest-Engine hängt am Pillar-Feld – deshalb bleibt `pillar: strom-sparen` in den Artikeln sakrosankt.
+Die Vertiefungen oben sind bewusst nach „Verbrauch → Preis → Saison“ sortiert. Ein PIN zu „Stromfresser“ darf nicht auf die Gas-Preisgarantie landen. Das Board-Routing in der Pinterest-Engine hängt am Pillar-Feld – deshalb bleibt `pillar: strom-sparen` in den Artikeln sakrosankt.
 
 <!-- premium-length-2026-c -->
 

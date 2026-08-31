@@ -139,7 +139,7 @@ Minute 0–20: Kreditkarte – Deckung, Länder, Fahrzeugklasse, Dauer. Fehlt di
 
 ## Saison, Führerschein, Länderregeln
 
-In der Hochsaison (Juli/August, Schulferien) sind Mittelklassewagen am Mittelmeer oft 48 Stunden vor Abholung ausverkauft – oder nur noch zu Schalterpreisen da. Wer flexibel in der Fahrzeugklasse ist (Kleinwagen statt Kompakt), rettet die Buchung. Führerschein: In manchen Ländern reicht der EU-Schein, in anderen will die Vermietung den internationalen. Das steht in den AGB der Buchung, nicht im Reiseführer. Unter 21 / über 70 gelten Zuschläge; die gehören in den Effektivpreis, bevor du „9 €/Tag“ feierst.
+In der Hochsaison (Juli/August, Schulferien) sind Mittelklassewagen am Mittelmeer oft 48 Stunden vor Abholung ausverkauft – oder nur noch zu Schalterpreisen da. Wer flexibel in der Fahrzeugklasse ist (Kleinwagen statt Kompakt), rettet die Buchung. Führerschein: In manchen Ländern reicht der EU-Schein, in anderen will die Vermietung den internationalen. Das steht in den AGB der Buchung, nicht im Reiseführer. Unter 21 / über 70 gelten Zuschläge; die gehören in den Effektivpreis, bevor du „9 €/Tag“ feierst.
 
 Winterreifen, Vignette, Umweltplakette: in den Alpen und in Städten mit Zufahrtsregeln ein extra Satz in der Checkliste. Wer das am Schalter kauft, zahlt den Touristenpreis.
 

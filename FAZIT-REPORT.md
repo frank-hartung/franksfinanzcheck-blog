@@ -1,14 +1,14 @@
 # 🔨 FAZIT-REPORT (fazit_schmiede.py)
 
-**Stand:** 2026-08-25 12:46 UTC · Modus: REPORT
+**Stand:** 2026-08-31 17:11 UTC · Modus: FIX
 
-**Geprüfte Artikel:** 12 · **Fehlende Fazits:** 2 · **Fehlende FAQs:** 0
+**Geprüfte Artikel:** 25 · **Fehlende Fazits:** 0 · **Fehlende FAQs:** 0
 **Automatisch geheilt:** 0
 
 | Artikel (Slug) | Route | Fazit vorhanden? | FAQ vorhanden? | Status |
 |---|---|---|---|---|
-| `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` | `allgemein` | ❌ Nein | ✅ Ja | **⚠️ unvollständig** |
-| `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` | `gas` | ❌ Nein | ✅ Ja | **⚠️ unvollständig** |
+
+🎉 **Alle Artikel vollständig! Jedes Stück hat ein Fazit und eine FAQ-Rubrik.**
 
 ---
 _Autarke Content-Schmiede: Deterministiche Veredelung basierend auf Affiliate-Themenkontext._

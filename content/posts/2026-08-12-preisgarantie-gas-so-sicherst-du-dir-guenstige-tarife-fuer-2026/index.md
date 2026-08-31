@@ -24,7 +24,7 @@ pin_description: "*Werbung | Vor der Heizsaison ziehen viele Anbieter die Preise
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
-Wer seine Heizkosten für das kommende Jahr kalkulierbar und bezahlbar halten möchte, muss sich frühzeitig mit den Entwicklungen auf den Energiemärkten auseinandersetzen. Gesetzliche Vorgaben wie der schrittweise ansteigende CO2-Preis, schwankende Großhandelspreise an den europäischen Energiebörsen und steigende Netzentgelte sorgen für Unsicherheit bei den Verbrauchern. Eine **Preisgarantie für Gas** ist das effektivste Instrument, um dein Haushaltsbudget vor bösen Überraschungen bei der nächsten Jahresabrechnung zu schützen. In diesem ausführlichen Ratgeber erfährst du, wie unterschiedliche Garantieformen funktionieren, welche Tarifmodelle für 2026 die beste Balance aus Sicherheit und Ersparnis bieten und wie du bis zu **650 €** sparen kannst.
+Wer seine Heizkosten für das kommende Jahr kalkulierbar und bezahlbar halten möchte, muss sich frühzeitig mit den Entwicklungen auf den Energiemärkten auseinandersetzen. Gesetzliche Vorgaben wie der schrittweise ansteigende CO2-Preis, schwankende Großhandelspreise an den europäischen Energiebörsen und steigende Netzentgelte sorgen für Unsicherheit bei den Verbrauchern. Eine **Preisgarantie für Gas** ist das effektivste Instrument, um dein Haushaltsbudget vor bösen Überraschungen bei der nächsten Jahresabrechnung zu schützen. In diesem ausführlichen Ratgeber erfährst du, wie unterschiedliche Garantieformen funktionieren, welche Tarifmodelle für 2026 die passende Balance aus Sicherheit und Ersparnis bieten und wie du bis zu **650 €** sparen kannst.
 
 ---
 
@@ -101,7 +101,7 @@ Wer im Sommer wechselt, sichert den Preis vor der Heizsaison. Wer im November we
 
 - Zählernummer und Jahresverbrauch (letzte Abrechnung) griffbereit
 - Malus-freie Schufa-Klausel? Manche Anbieter lehnen ohne Begründung ab – zweiten Tarif in Reserve halten
-- Sepa-Mandat nur an den Versorger, nie an dubiose „Wechselservices“ mit Vollmacht über alles
+- SEPA-Mandat nur an den Versorger, nie an dubiose „Wechselservices“ mit Vollmacht über alles
 - Bestätigungsmail speichern, Kundenportal-Login anlegen, Abschlag nach 6 Wochen gegen Zählerstand prüfen
 - Kalendereintrag 8 Wochen vor Ablauf: erneut vergleichen
 

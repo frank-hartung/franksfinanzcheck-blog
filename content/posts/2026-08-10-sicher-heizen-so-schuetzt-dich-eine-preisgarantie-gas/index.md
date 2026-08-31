@@ -125,7 +125,7 @@ Für die meisten Haushalte ist eine Laufzeit von 12 Monaten ideal. So bist du f�
 ### Kann die Gasversorgung beim Anbieterwechsel unterbrochen werden?
 Nein, die unterbrechungsfreie Belieferung mit Gas ist in Deutschland gesetzlich durch die Grundversorgungs­verordnung garantiert. Es besteht zu keinem Zeitpunkt die Gefahr, dass die Heizung kalt bleibt.
 
-### Wann ist der beste Zeitpunkt für den Gasanbieterwechsel?
+### Wann ist der passende Zeitpunkt für den Gasanbieterwechsel?
 Der Spätsommer (August bis Oktober) ist der optimale Zeitpunkt. So stellst du vor Beginn der kühlen Monate sicher, dass dein günstiger Tarif mit Preisgarantie aktiv ist.
 
 ---
