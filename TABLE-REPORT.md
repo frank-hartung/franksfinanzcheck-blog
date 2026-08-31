@@ -1,6 +1,6 @@
 # 📊 TABLE-REPORT (table_guard.py)
 
-**Stand:** 2026-08-31 17:11 UTC · Modus: FIX
+**Stand:** 2026-08-31 18:27 UTC · Modus: DRY-RUN
 **Dateien:** 31 · **Funde:** 0 · **Auto-Heilungen:** 0
 
 🎉 Alle Tabellen struktur-konsistent und zellen-sauber.

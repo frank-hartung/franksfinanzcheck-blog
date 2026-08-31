@@ -1,6 +1,6 @@
 # 🩺 DOKTOR-REPORT (Oberarzt, Gesamtprognose)
 
-**Stand:** 2026-08-31 17:11 UTC · Modus: VISIT
+**Stand:** 2026-08-31 18:27 UTC · Modus: DRY-RUN
 **Wachen behandelt:** 21 · **0-Exit:** 21 · Funde: 0 · Sabotage-Fehler: 0
 
 | Wache (Phase) | Zweck | Exit |

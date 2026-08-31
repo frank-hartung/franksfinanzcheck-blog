@@ -1,6 +1,6 @@
 # 🔗 LINK-REPORT (link_guard.py)
 
-**Stand:** 2026-08-31 17:11 UTC · Modus: FIX
+**Stand:** 2026-08-31 18:27 UTC · Modus: DRY-RUN
 **Dateien:** 31 · **Geheilte Links:** 0 · **Unheilbare Funde:** 0
 
 🎉 Alle internen Links verifiziert – keine Totstellen.

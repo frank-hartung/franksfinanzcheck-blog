@@ -1,6 +1,6 @@
 # 🧬 PLAGIAT-REPORT (plagiat_guard.py)
 
-**Stand:** 2026-08-31 17:11 UTC · Modus: FIX/QUARANTAENE
+**Stand:** 2026-08-31 18:27 UTC · Modus: FIX/QUARANTAENE
 **Artikel:** 25 · **Fingerprints neu:** 25
 
 | Stufe | Schwelle | Funde | Aktion |
