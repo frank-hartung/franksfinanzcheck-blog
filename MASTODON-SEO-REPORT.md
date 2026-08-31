@@ -1,8 +1,8 @@
 # 🐘 Mastodon-SEO-Report
 
-> Automatisch: 28.08.2026 22:00 UTC 
+> Automatisch: 31.08.2026 07:17 UTC 
 
-- **Geprüfte Toots:** 18
+- **Geprüfte Toots:** 21
 - **Mit Befund:** 0
 - **Geheilt:** 0
 - **Duplikate (gleicher Artikel, nur gemeldet):** keine
@@ -11,6 +11,9 @@
 
 | Status | Artikel | Befunde | Heilung |
 |---|---|---|---|
+| [117188897097849988](https://mastodon.social/@FranksFinanzcheck/117188897097849988) | `2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann` | ✓ | — |
+| [117188896944541163](https://mastodon.social/@FranksFinanzcheck/117188896944541163) | `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | ✓ | — |
+| [117188896807408670](https://mastodon.social/@FranksFinanzcheck/117188896807408670) | `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` | ✓ | — |
 | [117175368018829119](https://mastodon.social/@FranksFinanzcheck/117175368018829119) | `2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel` | ✓ | — |
 | [117175367931013681](https://mastodon.social/@FranksFinanzcheck/117175367931013681) | `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` | ✓ | — |
 | [117175367809569093](https://mastodon.social/@FranksFinanzcheck/117175367809569093) | `2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife` | ✓ | — |
