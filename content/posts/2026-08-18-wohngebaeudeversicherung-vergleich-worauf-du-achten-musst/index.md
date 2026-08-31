@@ -2,11 +2,8 @@
 lastmod: 2026-08-31
 title: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
 description: "Wohngebäudeversicherung Vergleich: Schütze deine Immobilie vor Unwetter, Starkregen & Feuer. Wichtige Klauseln, Elementarschutz & Spartipps bis zu 340 €."
-date: 2026-08-31T04:02:49Z
-draft: true
-cadence_wait: true
-cadence_grund: "kadenz: Re-Queue-Flag wiederhergestellt (verloren)"
-cadence_demoted: 2026-08-26T13:46:19Z
+date: 2026-08-31T13:47:31Z
+draft: false
 tags: ["Wohngebäudeversicherung", "Elementarschadenversicherung", "Gebäudeversicherung Vergleich", "Hausratversicherung", "Immobilien absichern"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
