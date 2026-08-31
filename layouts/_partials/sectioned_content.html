@@ -1,0 +1,23 @@
+{{- /* ============================================================
+     sectioned_content.html – DOM-Budget für lange Ratgeber
+
+     Goldmark rendert alle Markdown-Blöcke als direkte Kinder von
+     .post-content. Lange Artikel überschreiten dadurch das Lighthouse-
+     Budget von 60 Kindern pro Eltern-Element, obwohl die Gesamtdomgröße
+     unkritisch ist.
+
+     Die gerenderten H2-Abschnitte werden deshalb in kleine, neutrale
+     DOM-Gruppen geteilt. display:contents (CSS) hält das bestehende
+     Layout pixelgleich; Überschriften-IDs, Sprunglinks, strukturierte
+     Daten und Affiliate-Links bleiben unverändert.
+
+     Nur von Goldmark erzeugte H2 mit id werden erkannt. Dadurch bleiben
+     manuelle, ggf. bereits verschachtelte HTML-Blöcke unangetastet.
+     ============================================================ */ -}}
+{{- $content := printf "%s" . -}}
+{{- if findRE `<h2 id="[^"]+"[^>]*>` $content -}}
+  {{- $content = replaceRE `(<h2 id="[^"]+"[^>]*>)` `</div><div class="ff-content-chunk">$1` $content -}}
+  {{- printf `<div class="ff-content-chunk">%s</div>` $content | safeHTML -}}
+{{- else -}}
+  {{- $content | safeHTML -}}
+{{- end -}}

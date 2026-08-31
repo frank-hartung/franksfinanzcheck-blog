@@ -29,7 +29,9 @@
 
   {{- if .Content }}
   <div class="post-content md-content">
-    {{- partial "anchored_headings.html" ((.Content | partial "nbsp_sicherung.html") | safeHTML) }}
+    {{- $articleContent := .Content | partial "nbsp_sicherung.html" -}}
+    {{- $articleContent = partial "anchored_headings.html" ($articleContent | safeHTML) -}}
+    {{- partial "sectioned_content.html" ($articleContent | safeHTML) -}}
   </div>
   {{- end }}
 

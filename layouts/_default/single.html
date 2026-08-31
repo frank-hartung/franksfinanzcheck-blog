@@ -57,9 +57,11 @@
 
   {{- if .Content }}
   <div class="post-content md-content">
-    {{- if not (.Param "disableAnchoredHeadings") }}
-    {{- partial "anchored_headings.html" ((.Content | partial "nbsp_sicherung.html") | safeHTML) -}}
-    {{- else }}{{ (.Content | partial "nbsp_sicherung.html") | safeHTML }}{{ end }}
+    {{- $articleContent := .Content | partial "nbsp_sicherung.html" -}}
+    {{- if not (.Param "disableAnchoredHeadings") -}}
+      {{- $articleContent = partial "anchored_headings.html" ($articleContent | safeHTML) -}}
+    {{- end -}}
+    {{- partial "sectioned_content.html" ($articleContent | safeHTML) -}}
   </div>
   {{- end }}
 

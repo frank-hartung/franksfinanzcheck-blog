@@ -120,7 +120,14 @@
       '.post-content > h3',
       '.md-content > p',
       '.md-content > h2',
-      '.md-content > h3'
+      '.md-content > h3',
+      '.ff-content-chunk > p',
+      '.ff-content-chunk > ul',
+      '.ff-content-chunk > ol',
+      '.ff-content-chunk > blockquote',
+      '.ff-content-chunk > table',
+      '.ff-content-chunk > h2',
+      '.ff-content-chunk > h3'
     ].join(',');
 
     var items = qsa(revealSelector).filter(function (el) {
