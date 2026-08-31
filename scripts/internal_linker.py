@@ -26,7 +26,7 @@ import yaml
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
-from post_utils import list_post_paths, slug_of
+from post_utils import build_state, list_post_paths, slug_of
 MAX_LINKS_PER_ARTICLE = 3  # neue Links pro Artikel pro Lauf
 MAX_TOTAL_PER_ARTICLE = 9  # GOLDKORRIDOR-Deckel (12.08.): ueber
                            # 9 interne Links wirkt wie Link-Spam.
@@ -167,19 +167,19 @@ def load_pages():
     19 tote Links). Drafts dürfen später von draft_link_healer.py
     kontrolliert werden; der Linker baut die Struktur auf, sobald der
     Post wieder live geht (next run)."""
-    import datetime
-    today = datetime.date.today().isoformat()
     pages = {}
     skipped = 0
     for path in list_post_paths():
         slug = slug_of(path)
         content = open(path, encoding="utf-8").read()
         fm, body = parse_frontmatter(content)
-        if fm.get("draft") is True or fm.get("draft") == "true":
-            skipped += 1
-            continue
-        d_raw = str(fm.get("date") or "")[:10]
-        if d_raw and d_raw > today:
+        # Build-Teilnahme exakt nach den Hugo-Gates (post_utils.build_state):
+        # draft · Zukunfts-ZEITSTEMPEL · abgelaufen. Die frühere
+        # Tag-Genauigkeit (date[:10] > today) ließ einen am selben Tag später
+        # terminierten Post "live" erscheinen → der Linker setzte Links auf
+        # Seiten, die der Build gerade nicht erzeugt (Issue #129).
+        ok, _grund = build_state(content)
+        if not ok:
             skipped += 1
             continue
         title = fm.get("title", slug)

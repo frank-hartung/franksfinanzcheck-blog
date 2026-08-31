@@ -153,3 +153,91 @@ def frontmatter_date(content):
     import re as _re
     m = _re.search(r"^date:\s*[\"']?(\d{4}-\d{2}-\d{2})", content, _re.M)
     return m.group(1) if m else None
+
+
+# ---------------------------------------------------------------------------
+# Build-Zustand eines Posts – exakt nach den Hugo-Gates (Issue #129)
+#
+# hugo.toml setzt drei harte Publikations-Gates:
+#   buildDrafts=false · buildFuture=false · buildExpired=false
+# Eine Seite erscheint also NUR dann im Build (und nur dann funktioniert
+# ihre URL live), wenn sie weder Entwurf ist, noch in der Zukunft liegt,
+# noch abgelaufen ist.
+#
+# WARUM EIGENE FUNKTION: Die Link-Skripte verglichen "Zukunfts-Post" bisher
+# nur auf TAG-Genauigkeit (date[:10] > today). Ein Post, der am selben Tag
+# um 18:00 UTC terminiert ist, galt als "live" – der Build um 03:15 UTC hat
+# ihn aber nicht erzeugt (Hugo vergleicht den KOMPLETTEN Zeitstempel).
+# Ergebnis: fröhlich verlinkte Nicht-Build-Seiten, rotes Qualitäts-Gate,
+# Issue #129. build_state() spiegelt deshalb Hugos Semantik 1:1.
+# ---------------------------------------------------------------------------
+
+def parse_hugo_time(raw):
+    """Frontmatter-Zeitwert → aware datetime (UTC). None bei unparsebar.
+    Akzeptiert: 2026-08-26 · 2026-08-26T06:10:00Z · 2026-08-26T06:10:00+02:00
+    · 2026-08-26 06:10:00 +0200 · Quotes drumherum. Naive Werte gelten – wie
+    bei Hugo ohne --timezone – als UTC, reine Datumswerte als Mitternacht UTC."""
+    import datetime as _dt
+    import re as _re
+    if raw is None:
+        return None
+    s = str(raw).strip().strip("\"'").strip()
+    if not s:
+        return None
+    s = s.replace("Z", "+00:00")                        # ...T06:10:00Z
+    s = _re.sub(r"([+-]\d{2})(\d{2})$", r"\1:\2", s)    # +0200 → +02:00
+    s = _re.sub(r"\s+([+-]\d{2}:\d{2})$", r"\1", s)     # " … +02:00" anhängen
+    s = _re.sub(r"^(\d{4}-\d{2}-\d{2})[ T]", r"\1T", s)  # Leerzeichen → T
+    try:
+        t = _dt.datetime.fromisoformat(s)
+    except ValueError:
+        m = _re.match(r"^(\d{4})-(\d{2})-(\d{2})", s)   # nur Datum (00:00 UTC)
+        if not m:
+            return None
+        try:
+            return _dt.datetime(*(int(x) for x in m.groups()),
+                                tzinfo=_dt.timezone.utc)
+        except ValueError:
+            return None
+    if t.tzinfo is None:
+        t = t.replace(tzinfo=_dt.timezone.utc)
+    return t.astimezone(_dt.timezone.utc)
+
+
+def _fm_value(content, key):
+    """Rohen Frontmatter-Wert eines Schlüssels lesen (erste Trefferzeile)."""
+    import re as _re
+    m = _re.search(rf"^{_re.escape(key)}:\s*(.+?)\s*$", content, _re.M)
+    return m.group(1).strip("\"'") if m else ""
+
+
+def _fm_bool(value):
+    """Frontmatter-Boolean → True/False, None wenn Schlüssel fehlt/leer."""
+    if not value:
+        return None
+    v = str(value).strip().lower()
+    if v in ("true", "yes", "1"):
+        return True
+    if v in ("false", "no", "0"):
+        return False
+    return None
+
+
+def build_state(content, now=None):
+    """Ist diese Content-Datei im aktuellen Hugo-Build sichtbar?
+
+    Rückgabe: (sichtbar: bool, grund: str). `grund` beschreibt den Grund nur
+    bei sichtbar=False ("Draft …", "Zukunfts-Post (…)", "abgelaufen (…)").
+    `now` ist injizierbar (deterministische Selbsttests)."""
+    import datetime as _dt
+    now = now or _dt.datetime.now(_dt.timezone.utc)
+    if _fm_bool(_fm_value(content, "draft")) is True:
+        return False, "Draft (Kadenz-Re-Queue)"
+    date = parse_hugo_time(_fm_value(content, "date"))
+    if date is not None and date > now:
+        return False, f"Zukunfts-Post ({date.strftime('%Y-%m-%d %H:%M UTC')})"
+    exp_raw = _fm_value(content, "expiryDate") or _fm_value(content, "expireDate")
+    exp = parse_hugo_time(exp_raw)
+    if exp is not None and exp <= now:
+        return False, f"abgelaufen ({exp_raw})"
+    return True, "live"

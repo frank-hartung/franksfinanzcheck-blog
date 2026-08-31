@@ -52,6 +52,53 @@
   {{- $href = $href | replaceRE "//+" "/" | safeURL -}}
 {{- end -}}
 
+{{- /* ---- PUBLIKATIONS-GUARD (Issue #129, 31.08.2026) --------------------
+   Links auf Artikel, die Hugo NICHT baut, zeigen live ins Leere (404) und
+   lassen das Qualitaets-Gate rot werden. Non-Build-Ziele entstehen durch die
+   harten Publikations-Gates aus hugo.toml (buildDrafts/buildFuture/
+   buildExpired = false): ein Post ist draft (z. B. Kadenz-Re-Queue durch
+   cadence_guard.py --fix), Zukunfts-datiert oder geloescht.
+   Fund #129: vier zurueckgestufte Posts → vier tote Links in den Ratgebern.
+
+   Loesung auf Rendering-Ebene – verlustfrei statt "entlinken":
+     betroffener Link wird zu Klartext (Ankertext 1:1 erhalten). Sobald der
+     Ziel-Artikel wieder im Build ist, lebt der Link automatisch auf; die
+     kuratierten Listen (Cluster-Reihenfolge in content/pillar/) bleiben
+     dauerhaft intakt statt bei jedem Hin-und-Her Schaden zu nehmen.
+   Greift NUR fuer einsegmentige /posts/- und /pillar/-Ziele (Paginierung
+   /posts/page/2/ bleibt unberuehrt). */ -}}
+{{- $tot := false -}}
+{{- if not $isGo -}}
+  {{- $pruefung := $href | replaceRE "^https?://(www\\.)?franksfinanzcheck\\.de" "" -}}
+  {{- $pruefung = $pruefung | replaceRE "[?#].*$" "" -}}
+  {{- $bereich := "" -}}
+  {{- if strings.HasPrefix $pruefung "/posts/" }}{{ $bereich = "posts" -}}
+  {{- else if strings.HasPrefix $pruefung "/pillar/" }}{{ $bereich = "pillar" }}{{ end -}}
+  {{- if $bereich -}}
+    {{- $linkZiel := $pruefung | strings.TrimPrefix (print "/" $bereich "/") | strings.TrimSuffix "/" -}}
+    {{- if and $linkZiel (not (strings.Contains $linkZiel "/")) -}}
+      {{- $page := site.GetPage (printf "/%s/%s" $bereich $linkZiel) -}}
+      {{- if not $page -}}
+        {{- /* Kein Build-Ziel: nicht vorhanden, draft oder versteckt. */ -}}
+        {{- $tot = true -}}
+      {{- else if $page.Draft -}}
+        {{- $tot = true -}}
+      {{- else if $page.Date.After now -}}
+        {{- $tot = true -}}
+      {{- else -}}
+        {{- /* buildExpired=false: Ablauf-Datum (expiryDate/expireDate) erreicht? */ -}}
+        {{- $ablauf := or ($page.Params.expiryDate) ($page.Params.expireDate) -}}
+        {{- if $ablauf -}}
+          {{- $tag := printf "%.10s" (printf "%v" $ablauf) -}}
+          {{- if findRE `^[0-9]{4}-[0-9]{2}-[0-9]{2}$` $tag -}}
+            {{- if not (time.AsTime $tag).After now }}{{ $tot = true }}{{ end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 {{- $slug := "" -}}
 {{- if $isGo }}{{ $slug = $href | strings.TrimPrefix "/go/" | strings.TrimSuffix "/" }}{{ end -}}
 {{- $ziel := "" -}}
@@ -59,4 +106,9 @@
 {{- $tooltip := "" -}}
 {{- if $isGo }}{{ $tooltip = print "Weiter zu " $ziel " (Partnerlink = Werbung)" }}{{ end -}}
 
+{{- if $tot -}}
+  {{- /* Ziel ist nicht im Build → Ankertext als Klartext (kein 404-Link). */ -}}
+  {{- .Text | safeHTML -}}
+{{- else -}}
 <a href="{{ $href | safeURL }}"{{ if $isGo }} rel="sponsored nofollow noopener" target="_blank" data-umami-event="affiliate_click" data-umami-event-slug="{{ $slug }}" title="{{ .Title | default $tooltip }}"{{ end }}{{ if not $isGo }}{{ with .Title }} title="{{ . }}"{{ end }}{{ end }}>{{ .Text | safeHTML }}</a>
+{{- end -}}
