@@ -1,129 +1,735 @@
+# ============================================================
+#  BACKLINK-PROSPECTS – kuratierte Quelle (Premium, 31.08.2026)
+#  NICHT vom Scout überschreiben. Laufzeit-CRM liegt in
+#  data/backlink_state.json (Status, last_checked, Notizen).
+#
+#  Typen: community | gastartikel | digital-pr | resource |
+#         pinterest | podcast | partnerschaft | unlinked
+#  Status im YAML = Startwert; State überschreibt.
+#  ungeeignet = bewusst raus (Spam-Risiko / tot / falsche Nische)
+# ============================================================
+meta:
+  brand: FranksFinanzcheck
+  site: https://franksfinanzcheck.de/
+  author: Frank Hartung
+  weekly_capacity: 5
+  north_star: Editorial verdiente Links (relevant, DE-Verbraucher, würden auch ohne Google existieren)
+  signature: |
+    Frank Hartung
+    FranksFinanzcheck – unabhängige Ratgeber zu Strom, Gas, DSL, Versicherungen & Budget
+    https://franksfinanzcheck.de/
+    Pinterest: https://www.pinterest.de/franksfinanzcheck/
+
+do_not:
+  - Linkkauf, PBNs, Guest-Post-Farmen, Linktausch-Schemes
+  - Blog-Verzeichnisse / allgemeinen Katalog-Spam
+  - Automatisches Einreichen oder Bot-Kommentare
+  - Exact-Match-Anker auf Affiliate-Seiten (/go/)
+  - Gastbeitrag = 1:1-Republish eines Live-Artikels (Duplicate Content)
+  - nackte CHECK24-Links als Pitch-Ziel
+  - mehr als 5 Outreach-Aktionen pro Woche (Kapazität + Spam-Fußabdruck)
+
+campaigns:
+  - id: kfz-stichtag-2026
+    name: Kfz-Wechselsaison 2026 (Stichtag 30.11.)
+    window: ["2026-09-01", "2026-11-30"]
+    hero_slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+    asset: kfz-wechselkalender-2026
+    channels: [digital-pr, pinterest, community]
+    note: Pinterest 30–45 Tage voraus pinnen. PR-Pitches ab 01.09. mit fertigen Zitaten.
+
+  - id: heizperiode-2026
+    name: Heizperiode / Gaspreisgarantie
+    window: ["2026-08-15", "2026-11-30"]
+    hero_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+    asset: gas-preisgarantie-baum
+    channels: [digital-pr, pinterest, community]
+
+  - id: black-friday-dsl-2026
+    name: Black Friday / DSL-Wechselbonus
+    window: ["2026-10-15", "2026-11-30"]
+    hero_slug: 2026-08-10-dsl-wechselbonus-sichern
+    asset: dsl-wechsel-checkliste
+    channels: [digital-pr, pinterest]
+
 prospects:
-- name: Finanztip Community
-  type: community
-  url: https://www.finanztip.de/community/
-  topic: Geld sparen, Versicherungen
-  approach: Qualitativ hochwertige Antworten auf Fragen zu Stromtarifen/Girokonten
-    geben – Profil-Link in Signatur (nofollow, aber Referral-Traffic + Autorität).
-  fit: 5
-  status: neu
-  last_checked: '2026-08-07'
-- name: r/Finanzen (Reddit)
-  type: community
-  url: https://www.reddit.com/r/Finanzen/
-  topic: Allgemeine Finanzen
-  approach: Wöchentlich 1 hilfreiche Antwort mit Link nur wo kontextuell wertvoll
-    (Reddit bestraft offenes Spammen).
-  fit: 4
-  status: neu
-  last_checked: '2026-08-07'
-- name: Geld.de Blog-Verzeichnis
-  type: verzeichnis
-  url: https://www.geld.de/blog/
-  topic: Finanzblogs
-  approach: Blog in der Kategorie 'Geld sparen' einreichen (kurze Beschreibung + Link).
-  fit: 3
-  status: neu
-  last_checked: '2026-08-07'
-- name: Finanzblogs.de
-  type: verzeichnis
-  url: https://finanzblogs.de/
-  topic: Finanzblogs Deutschland
-  approach: Blog-Verzeichnis-Eintrag mit Kategorien 'Sparen', 'Versicherungen'.
-  fit: 4
-  status: neu
-  last_checked: '2026-08-07'
-- name: Blog-Verzeichnis von Blogger.de
-  type: verzeichnis
-  url: https://www.blogger.de/
-  topic: Allgemein
-  approach: Profil + Blog eintragen (dofollow-Link aus Profil).
-  fit: 2
-  status: neu
-  last_checked: '2026-08-07'
-- name: Gastartikel auf Sparkonto.org
-  type: gastartikel
-  url: https://www.sparkonto.org/
-  topic: Sparen, Zinsen
-  approach: 'Gastartikel-Anfrage: ''5 Fehler beim Tagesgeld-Vergleich'' – Platzierung
-    mit 1-2 Links zum eigenen Blog.'
-  fit: 4
-  status: neu
-  last_checked: '2026-08-07'
-- name: Gastartikel auf Finanzfluss-Blog
-  type: gastartikel
-  url: https://www.finanzfluss.de/
-  topic: Finanzen allgemein
-  approach: 'Kontaktformular: Gastbeitrag zu ''Stromkosten senken 2026'' anbieten
-    (hohe Domain-Autorität).'
-  fit: 4
-  status: neu
-  last_checked: '2026-08-07'
-- name: Gastartikel auf Geld-Magazin.de
-  type: gastartikel
-  url: https://www.geld-magazin.de/
-  topic: Geld sparen
-  approach: Gastbeitrag '10 Spartipps für den Alltag' mit Autoren-Bio + Blog-Link.
-  fit: 3
-  status: neu
-  last_checked: '2026-08-07'
-- name: Linktausch mit Sparblog24
-  type: linktausch
-  url: https://www.sparblog24.de/
-  topic: Sparen
-  approach: Gegenseitige Verlinkung in passenden Artikeln (relevante Nachbar-Nische,
-    gleiche Zielgruppe).
-  fit: 3
-  status: neu
-  last_checked: '2026-08-07'
-- name: Check24-Partnerportal Forum
-  type: community
-  url: https://www.check24.de/partner/
-  topic: CHECK24-Partner
-  approach: Im Partner-Forum aktiv werden, Austausch mit anderen Affiliates, ggf.
-    Kooperationen.
-  fit: 3
-  status: neu
-  last_checked: '2026-08-07'
-- name: Trustpilot/Verbraucherportale-Artikel
-  type: press
-  url: https://www.trustpilot.com/
-  topic: Verbraucherschutz
-  approach: 'Experten-Kommentar zu Versicherungs-/Tarifvergleichen anbieten (HARO-Alternativen:
-    pressebox.de).'
-  fit: 2
-  status: neu
-  last_checked: '2026-08-07'
-- name: LinkedIn-Artikel
-  type: community
-  url: https://www.linkedin.com/
-  topic: Persönliche Marke
-  approach: Artikel auf LinkedIn veröffentlichen (mit Link zum Blog) – baut Autoren-Autorität
-    auf.
-  fit: 3
-  status: neu
-  last_checked: '2026-08-07'
-- name: Gastartikel auf MeinGeldBlog
-  type: gastartikel
-  url: https://www.meingeldblog.de/
-  topic: Finanzen
-  approach: Gastbeitrag-Anfrage mit Themenliste (Konto, Sparen, Versicherungen).
-  fit: 3
-  status: neu
-  last_checked: '2026-08-07'
-- name: Finanzblog-Verzeichnis Sparwelt
-  type: verzeichnis
-  url: https://www.sparwelt.de/
-  topic: Sparen, Gutscheine
-  approach: Redaktionelle Einreichung (Pressebereich) mit Blog-Beschreibung.
-  fit: 2
-  status: neu
-  last_checked: '2026-08-07'
-- name: Antworten auf Gutefrage.net
-  type: community
-  url: https://www.gutefrage.net/
-  topic: Finanzfragen
-  approach: Hilfreiche Antworten mit Quellen-Link zum Blog (nur wo sinnvoll).
-  fit: 3
-  status: neu
-  last_checked: '2026-08-07'
+  # ---------- COMMUNITY (Traffic + E-E-A-T, meist nofollow/ugc) ----------
+  - id: finanztip-community
+    name: Finanztip Community
+    type: community
+    url: https://www.finanztip.de/community/
+    contact: "Kein Pitch. Profil anlegen, 2–3 echte Antworten/Woche."
+    topic: Strom, Gas, Versicherungen, Girokonto
+    keywords: [Stromtarif, Gaspreis, Kfz-Versicherung, Girokonto, Tagesgeld]
+    approach: Hochwertige Antworten. Link nur, wenn die Frage nach einer Anleitung verlangt – sonst Signatur.
+    pitch_angle: Du bist der ruhige Praktiker mit Euro-Beträgen, kein Finfluencer.
+    fit: 5
+    authority: 5
+    effort: 2
+    link_type: ugc
+    value: [traffic, eeat, brand]
+    seasonal: [all]
+    status: neu
+    preferred_keywords: [Kfz-Versicherung, Gaspreis, Strom]
+    follow_up_days: 0
+    why_premium: Höchste thematische Passung im DE-Verbrauchermarkt. Nofollow, aber Referral + Entity.
+
+  - id: reddit-finanzen
+    name: r/Finanzen
+    type: community
+    url: https://www.reddit.com/r/Finanzen/
+    contact: "Kein Pitch an Mods. 1 hilfreiche Antwort/Woche, Link nur kontextuell."
+    topic: Persönliche Finanzen DE
+    keywords: [Tagesgeld, Versicherungen, Sparen, Strom]
+    approach: Karma zuerst. Self-Promotion-Regel beachten. Maximal 1 Link in 10 Kommentaren.
+    pitch_angle: Rechenbeispiel statt Blog-Werbung. Community bestraft overt Self-Promo hart.
+    fit: 5
+    authority: 4
+    effort: 2
+    link_type: ugc
+    value: [traffic, brand, eeat]
+    seasonal: [all]
+    status: neu
+    preferred_keywords: [Tagesgeld, Kfz-Versicherung, Haushaltsbuch]
+    follow_up_days: 0
+    why_premium: Größtes DE-Finanzforum. Ein guter Kommentar > 20 Directory-Links.
+
+  - id: reddit-de-edv
+    name: r/de_EDV
+    type: community
+    url: https://www.reddit.com/r/de_EDV/
+    contact: "Technik-Fragen zu WLAN/DNS/DSL beantworten, nie als Serie."
+    topic: Heimnetz, DNS, WLAN, DSL
+    keywords: [DNS, WLAN, DSL, Fritzbox]
+    approach: Nur wo du echten Technik-Mehrwert lieferst (DNS-Wechsel, Mesh vs. Repeater).
+    pitch_angle: Technik-Hilfe, Blog-Link nur als „ausführliche Anleitung mit Bildern“.
+    fit: 4
+    authority: 3
+    effort: 2
+    link_type: ugc
+    value: [traffic, brand]
+    seasonal: [all]
+    status: neu
+    preferred_slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
+    preferred_keywords: [DNS, WLAN]
+    follow_up_days: 0
+    why_premium: Seltene Topical-Authority außerhalb reiner Finanz-Bubbles.
+
+  - id: gutefrage-finanzen
+    name: Gutefrage.net Finanzen
+    type: community
+    url: https://www.gutefrage.net/tag/finanzen
+    contact: "Profil mit Klarnamen. 1–2 fundierte Antworten/Woche, Quelle nur am Ende."
+    topic: Alltagsfinanzen, Versicherungen, Tarife
+    keywords: [Haftpflicht, Stromanbieter, Kfz-Versicherung]
+    approach: Lange, vollständige Antworten (E-E-A-T). Kein Copy-Paste aus dem Blog.
+    pitch_angle: Du beantwortest die Frage komplett – Link ist Kür, nicht Pflicht.
+    fit: 3
+    authority: 3
+    effort: 2
+    link_type: ugc
+    value: [traffic, brand]
+    seasonal: [all]
+    status: neu
+    preferred_keywords: [Privathaftpflicht, Strom]
+    follow_up_days: 0
+    why_premium: Sichtbarkeit in Google-SERP-Snippets (People-also-ask). ugc, kein SEO-Wunder.
+
+  - id: linkedin-artikel
+    name: LinkedIn-Artikel (Autoren-Entity)
+    type: community
+    url: https://www.linkedin.com/
+    contact: "Eigenes Profil. 1 Artikel/Monat, 2 Kommentare/Woche in DE-Finanzgruppen."
+    topic: Persönliche Marke Frank Hartung
+    keywords: [Tarifwechsel, Fixkosten, Verbraucher]
+    approach: Native LinkedIn-Artikel mit Link im ersten Kommentar (nicht im Body-Spam).
+    pitch_angle: B2C-Sparlogik für Berufstätige – „Fixkosten vor ETF“.
+    fit: 4
+    authority: 4
+    effort: 3
+    link_type: nofollow
+    value: [eeat, brand]
+    seasonal: [all]
+    status: neu
+    preferred_keywords: [Kfz-Versicherung, Fixkosten, Haushaltsbuch]
+    follow_up_days: 0
+    why_premium: Entity-Building für E-E-A-T, nicht für PageRank. Journalisten googeln Autoren.
+
+  - id: stiftung-warentest-community
+    name: Stiftung Warentest Community
+    type: community
+    url: https://community.test.de/
+    contact: "Mitlesen, gezielt zu Tarif-/Versicherungs-Threads beitragen."
+    topic: Versicherungen, Energie, Telekommunikation
+    keywords: [Haftpflicht, Kfz-Versicherung, Strom]
+    approach: Niemals gegen Warentest-Ergebnisse argumentieren. Ergänzen mit Praxis-Checklisten.
+    pitch_angle: Praxis-Übersetzung der Test-Urteile in Euro-Beträge für den Haushalt.
+    fit: 4
+    authority: 5
+    effort: 3
+    link_type: ugc
+    value: [eeat, brand]
+    seasonal: [all]
+    status: neu
+    preferred_keywords: [Privathaftpflicht, Kfz-Versicherung]
+    follow_up_days: 0
+    why_premium: Höchste Vertrauens-Nachbarschaft im DE-Verbrauchermarkt.
+
+  # ---------- GASTARTIKEL (echte Bylines, exklusiv, nie Republish) ----------
+  - id: sparkonto-org
+    name: Sparkonto.org
+    type: gastartikel
+    url: https://www.sparkonto.org/
+    contact: "Kontaktformular / Impressum-Mail. Betreff mit konkretem Titel."
+    topic: Sparen, Zinsen, Tagesgeld
+    keywords: [Tagesgeld, Zinsen, Sparkonto, Festgeld]
+    approach: Exklusiver Gastbeitrag „5 Fehler beim Tagesgeld-Vergleich 2026“ – 1 Bio-Link.
+    pitch_angle: Lockzinsen vs. Effektivzins nach 6 Monaten. Keine Produktwerbung.
+    fit: 5
+    authority: 3
+    effort: 4
+    link_type: dofollow
+    value: [seo, eeat]
+    seasonal: [all]
+    status: neu
+    preferred_slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
+    preferred_keywords: [Tagesgeld, Zinsen]
+    follow_up_days: 7
+    why_premium: Thematisch chirurgisch passend. Kleine DA, aber echte Leser + editorial.
+
+  - id: meingeldblog
+    name: MeinGeldBlog
+    type: gastartikel
+    url: https://www.meingeldblog.de/
+    contact: "Impressum / Kontakt. Themenliste mit 3 exklusiven Winkeln anbieten."
+    topic: Konto, Sparen, Versicherungen
+    keywords: [Girokonto, Sparen, Versicherungen]
+    approach: 3 Themen zur Wahl, exklusiv, 1.200–1.800 Wörter, 1 kontextueller Link + Bio.
+    pitch_angle: Alltagsfinanzen ohne Börsen-Jargon – Lücke neben ETF-lastigen DE-Blogs.
+    fit: 4
+    authority: 3
+    effort: 4
+    link_type: dofollow
+    value: [seo, eeat]
+    seasonal: [all]
+    status: neu
+    preferred_slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+    preferred_keywords: [Girokonto, Sparen]
+    follow_up_days: 7
+    why_premium: Nachbar-Nische, gleiche Zielgruppe, redaktionell.
+
+  - id: finanzfluss-stretch
+    name: Finanzfluss (Stretch-Pitch)
+    type: gastartikel
+    url: https://www.finanzfluss.de/
+    contact: "Redaktion / Kooperationen. Nur mit einzigartigem Datensatz oder Tool."
+    topic: Finanzen allgemein
+    keywords: [Fixkosten, Versicherungen, Sparen]
+    approach: KEIN Standard-Gastbeitrag. Nur Pitch, wenn Asset „Was kostet der Haushalt 2026?“ steht.
+    pitch_angle: Originaltabelle Fixkosten DE 2026 – die sie selbst nicht bauen.
+    fit: 5
+    authority: 5
+    effort: 5
+    link_type: dofollow
+    value: [seo, eeat, brand]
+    seasonal: [all]
+    status: neu
+    preferred_keywords: [Fixkosten, Haushaltsbuch]
+    follow_up_days: 14
+    why_premium: Höchste DA der Nische. Ohne Original-Asset nicht pitchen – sonst Verbrennen.
+
+  - id: utopia-de
+    name: Utopia.de
+    type: gastartikel
+    url: https://utopia.de/
+    contact: "Redaktion@ / Gastbeiträge-Seite. Winkel Nachhaltigkeit × Sparen."
+    topic: Nachhaltig sparen, Verbrauch, Energie
+    keywords: [Frugalismus, Strom sparen, Nachhaltigkeit]
+    approach: Exklusiv „Frugalismus ohne Verzichts-Moral – Fixkosten zuerst“.
+    pitch_angle: Weniger kaufen hilft dem Klima UND dem Konto. Keine Affiliate-CTAs im Gasttext.
+    fit: 4
+    authority: 4
+    effort: 4
+    link_type: dofollow
+    value: [seo, eeat, brand]
+    seasonal: [all]
+    status: neu
+    preferred_slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
+    preferred_keywords: [Frugalismus, Strom sparen]
+    follow_up_days: 10
+    why_premium: Große DE-Reichweite außerhalb der Finanzbubble = diverser Linkgraph.
+
+  - id: smarticular
+    name: Smarticular
+    type: gastartikel
+    url: https://www.smarticular.net/
+    contact: "Redaktion. DIY/Haushalt × Euro-Beträge."
+    topic: Haushalt, Selbermachen, Sparen
+    keywords: [Strom sparen, Haushalt, Frugalismus]
+    approach: Praxis-Stück „Stromfresser finden ohne teure Gadgets“ – Checkliste anbieten.
+    pitch_angle: Low-Tech-Sparen, das zu ihrer DIY-Leserschaft passt.
+    fit: 4
+    authority: 4
+    effort: 4
+    link_type: dofollow
+    value: [seo, brand]
+    seasonal: [9, 10, 11]
+    status: neu
+    preferred_slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+    preferred_keywords: [Stromfresser, Haushalt]
+    follow_up_days: 10
+    why_premium: Evergreen-Trafficanchor, thematisch nah, keine Finanz-Link-Nachbarschaft.
+
+  - id: geld-magazin
+    name: Geld-Magazin.de
+    type: gastartikel
+    url: https://www.geld-magazin.de/
+    contact: "Redaktion / Gastbeitrag-Hinweis."
+    topic: Geld sparen im Alltag
+    keywords: [Sparen, Budget, Alltag]
+    approach: Exklusiv „10 Alltags-Spartipps mit Euro-Beträgen 2026“ – ohne Lockangebote.
+    pitch_angle: Konkrete Beträge, Stand-Jahr, keine Clickbait-Versprechen.
+    fit: 3
+    authority: 2
+    effort: 3
+    link_type: mixed
+    value: [seo]
+    seasonal: [all]
+    status: neu
+    preferred_slug: 2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann
+    preferred_keywords: [Sparen, Alltag]
+    follow_up_days: 10
+    why_premium: Nur pitchen, wenn Impressum/Redaktion echt wirkt. Sonst skippen.
+
+  # ---------- DIGITAL PR (Zitate, Presse, höchster DA-Hebel) ----------
+  - id: versicherungsbote
+    name: Versicherungsbote.de
+    type: digital-pr
+    url: https://www.versicherungsbote.de/
+    contact: "Redaktion. Experten-Kurzkommentar (80–120 Wörter) anbieten, kein Gastessay."
+    topic: Kfz, Haftpflicht, Wohngebäude
+    keywords: [Kfz-Versicherung, Haftpflicht, Wohngebäude]
+    approach: 3 fertige Zitate zur Wechselsaison / Stichtag 30.11. – Journalist kopiert, du wirst genannt.
+    pitch_angle: Verbraucher-Übersetzung, keine Makler-Sprache. Zahl + Frist + 1 Fehler.
+    quotes:
+      - "Zum 30. November endet für die meisten Kfz-Verträge die Frist – wer erst im Dezember vergleicht, bleibt ein Jahr länger im teuren Tarif."
+      - "Der teuerste Fehler ist nicht der falsche Tarif, sondern der nicht gemachte Vergleich vor der Wechselsaison."
+      - "Verbraucher brauchen keine Makler-Sprache, sondern eine Zahl, eine Frist und den einen typischen Fehler."
+    fit: 5
+    authority: 4
+    effort: 2
+    link_type: mixed
+    value: [seo, eeat, brand]
+    seasonal: [9, 10, 11]
+    status: neu
+    preferred_slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+    preferred_keywords: [Kfz-Versicherung]
+    follow_up_days: 5
+    why_premium: Fachmedien verlinken Quellen. 2 Stunden Aufwand, DA weit über Gastblogs.
+
+  - id: chip-finanzen
+    name: CHIP.de Ratgeber Finanzen/Energie
+    type: digital-pr
+    url: https://www.chip.de/news/finanzen/
+    contact: "Redaktion Ratgeber. Daten/Checkliste, kein Werbetext."
+    topic: Strom, DSL, Tarife
+    keywords: [Strom sparen, DSL, Stromfresser]
+    approach: Fertige Checkliste „8 Stromfresser mit €/Jahr“ + Quellen. Angebot als Expertenquelle.
+    pitch_angle: Nutzwert mit Zahlen, Stand 2026, unabhängig.
+    quotes:
+      - "Ein alter Kühlschrank kann leicht 80 bis 120 Euro Strom im Jahr verbrennen – oft mehr als LED-Umrüstung im ganzen Haus."
+      - "Standby-Leisten sind langweilig, aber sie sind der einzige Hebel, den jeder Haushalt heute Abend umsetzen kann."
+      - "Ohne Jahresverbrauch in kWh bleibt jeder Stromvergleich ein Ratespiel."
+    fit: 4
+    authority: 5
+    effort: 3
+    link_type: mixed
+    value: [seo, traffic, brand]
+    seasonal: [9, 10, 11]
+    status: neu
+    preferred_slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+    preferred_keywords: [Stromfresser, Strom]
+    follow_up_days: 7
+    why_premium: Massenreichweite. Ein CHIP-Zitat > 50 Directory-Links.
+
+  - id: computerbild-internet
+    name: COMPUTER BILD Internet/WLAN
+    type: digital-pr
+    url: https://www.computerbild.de/internet/
+    contact: "Redaktion Internet. DNS/WLAN/DSL-Praxis."
+    topic: WLAN, DNS, DSL
+    keywords: [WLAN, DNS, DSL, Mesh]
+    approach: Kurzkommentar + Mini-Anleitung „DNS wechseln in 4 Schritten“ als Quellenangebot.
+    pitch_angle: Alltags-Netz, nicht Sysadmin. Fritzbox-first.
+    fit: 4
+    authority: 5
+    effort: 3
+    link_type: mixed
+    value: [seo, traffic, brand]
+    seasonal: [all]
+    status: neu
+    preferred_slug: 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
+    preferred_keywords: [WLAN, DNS, DSL]
+    follow_up_days: 7
+    why_premium: Technik-DA, diversifiziert weg von reinen Finanzlinks.
+
+  - id: heise-netzwerk
+    name: heise online (c't / Netzwerk)
+    type: digital-pr
+    url: https://www.heise.de/
+    contact: "Nur mit substanziellem Technik-Winkel (DNS, IPv6, DoH). Kein Spartipp-Pitch."
+    topic: DNS, Heimnetz
+    keywords: [DNS, DoH, Fritzbox]
+    approach: Leserbrief/Expertenhinweis zu DNS-Wechsel – nur wenn der Text technisch wasserdicht ist.
+    pitch_angle: Sicherheit + Speed, keine Affiliate-Story.
+    fit: 3
+    authority: 5
+    effort: 4
+    link_type: mixed
+    value: [eeat, brand]
+    seasonal: [all]
+    status: neu
+    preferred_slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
+    preferred_keywords: [DNS]
+    follow_up_days: 14
+    why_premium: Stretch. Ein heise-Mention ist Entity-Gold – nur mit Substanz.
+
+  - id: t-online-ratgeber
+    name: t-online Ratgeber
+    type: digital-pr
+    url: https://www.t-online.de/finanzen/
+    contact: "Ratgeber-Redaktion. Saisonale Expertenzitate (Kfz, Heizen)."
+    topic: Verbraucherfinanzen
+    keywords: [Kfz-Versicherung, Heizkosten, Strom]
+    approach: 3 Zitate à 90 Wörter, ready-to-paste, plus 1-Zeilen-Bio.
+    pitch_angle: Frist + Zahl + typischer Fehler. Journalisten lieben fertige Sätze.
+    quotes:
+      - "Wer den Stichtag 30.11. kennt und den Kfz-Vergleich trotzdem aufschiebt, verschenkt oft 300 bis 800 Euro im Jahr."
+      - "Bei Gas zählt im Spätsommer die Preisgarantie – nicht der niedrigste Abschlag auf der ersten Rechnung."
+      - "Ein Tarifwechsel ist kein Rendite-Versprechen, sondern das Aufräumen einer Fixkosten-Baustelle."
+    fit: 4
+    authority: 5
+    effort: 2
+    link_type: mixed
+    value: [seo, traffic, brand]
+    seasonal: [9, 10, 11, 12]
+    status: neu
+    preferred_slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+    preferred_keywords: [Kfz-Versicherung, Heizkosten]
+    follow_up_days: 5
+    why_premium: Reichweiten-PR. Nofollow möglich, Brand-Search folgt.
+
+  - id: pressebox
+    name: Pressebox.de (Kfz-/Heiz-Presseinfo)
+    type: digital-pr
+    url: https://www.pressebox.de/
+    contact: "Eigenes Presseinfo-Konto. 1 Meldung pro Saison, keine Serie."
+    topic: Kfz-Wechselsaison, Heizperiode
+    keywords: [Kfz-Versicherung, Stichtag, Gaspreisgarantie]
+    approach: Eine sachliche Presseinfo mit Kalender + 3 Zitaten. Kein Superlativ, kein „beste Tarife“.
+    pitch_angle: Service-Meldung für Redaktionen, die den Stichtag 30.11. jedes Jahr brauchen.
+    fit: 4
+    authority: 3
+    effort: 3
+    link_type: mixed
+    value: [brand, seo]
+    seasonal: [9, 10, 11]
+    status: neu
+    preferred_slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+    preferred_keywords: [Kfz-Versicherung]
+    follow_up_days: 0
+    why_premium: Multiplikator, keine Linkfarm – 1× pro Kampagne, dann schweigen.
+
+  - id: openpr
+    name: openPR (nur Spiegel der Presseinfo)
+    type: digital-pr
+    url: https://www.openpr.de/
+    contact: "Dieselbe Meldung wie Pressebox, nicht extra erfinden."
+    topic: Kfz-Wechselsaison
+    keywords: [Kfz-Versicherung]
+    approach: Spiegeln, nicht spammen. Maximal 1 Text identisch auf 2 Portalen.
+    pitch_angle: Distribution, nicht Linkbuilding-Kern.
+    fit: 2
+    authority: 2
+    effort: 1
+    link_type: mixed
+    value: [brand]
+    seasonal: [9, 10, 11]
+    status: neu
+    preferred_keywords: [Kfz-Versicherung]
+    follow_up_days: 0
+    why_premium: Nur als Verteiler der EINEN Saison-Meldung. Kein OpenPR-Dauerfeuer.
+
+  - id: focus-online-finanzen
+    name: FOCUS Online Finanzen (Stretch)
+    type: digital-pr
+    url: https://www.focus.de/finanzen/
+    contact: "Nur über fertige Zitate + Originaldaten. Kaltakquise ohne Asset = Verbrennen."
+    topic: Verbraucherfinanzen
+    keywords: [Kfz-Versicherung, Fixkosten]
+    approach: Wie t-online, aber nur mit Kalender-Asset oder Originaltabelle.
+    pitch_angle: Service-Stück zum Stichtag, Experte aus der Praxis.
+    fit: 4
+    authority: 5
+    effort: 5
+    link_type: mixed
+    value: [seo, brand, eeat]
+    seasonal: [9, 10, 11]
+    status: neu
+    preferred_slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+    preferred_keywords: [Kfz-Versicherung]
+    follow_up_days: 10
+    why_premium: Stretch-PR. Erst nach Versicherungsbote/t-online-Erfolg.
+
+  # ---------- RESOURCE / ROUNDUP ----------
+  - id: finanzblogs-roundup
+    name: Finanzblogs.de (nur wenn redaktionelle Liste)
+    type: resource
+    url: https://finanzblogs.de/
+    contact: "Kurze Mail: fehlender Eintrag, 2-Zeilen-Warum, 1 URL."
+    topic: DE-Finanzblogs
+    keywords: [Finanzblog, Sparen]
+    approach: Resource-Page-Pitch, KEIN Verzeichnis-Formular-Spam. Wenn es ein Katalog ohne Redaktion ist → skip.
+    pitch_angle: Unabhängige Tarif-/Fixkosten-Nische, die den ETF-lastigen Listen fehlt.
+    fit: 3
+    authority: 2
+    effort: 1
+    link_type: dofollow
+    value: [seo]
+    seasonal: [all]
+    status: neu
+    preferred_keywords: [Sparen, Versicherungen]
+    follow_up_days: 14
+    why_premium: Nur wertvoll als kuratierte Ressource. Sonst ignorieren.
+
+  # ---------- PINTEREST (Traffic-Maschine + Embed-Backlinks) ----------
+  - id: pinterest-embed-assets
+    name: Pinterest-Infografiken zum Einbetten
+    type: pinterest
+    url: https://www.pinterest.de/franksfinanzcheck/
+    contact: "Kein Outreach zuerst: Asset bauen, Embed-Code auf die Artikelseite, dann PR."
+    topic: Alle 6 Pillars
+    keywords: [Stromfresser, Kfz-Versicherung, Budget, DSL]
+    approach: "Jede Infografik trägt „Grafik: FranksFinanzcheck“ + kanonische URL. Andere Blogs betten ein = dofollow."
+    pitch_angle: Visual, das Redaktionen stehlen-mit-Quellenangabe wollen.
+    fit: 5
+    authority: 3
+    effort: 3
+    link_type: dofollow
+    value: [seo, traffic, conversion]
+    seasonal: [all]
+    status: neu
+    preferred_keywords: [Stromfresser, Kfz-Versicherung]
+    follow_up_days: 0
+    why_premium: Pinterest-Pins sind nofollow. EMBEDS anderer Blogs sind die eigentlichen Backlinks.
+
+  - id: pinterest-creator-collab
+    name: Pinterest-Creator (DE Sparen/Haushalt)
+    type: pinterest
+    url: https://www.pinterest.de/
+    contact: "2–3 thematisch passende DE-Creator (Haushalt, Familie, Sparen). Co-Pin, kein Linktausch."
+    topic: Haushalt, Sparen, Reisen
+    keywords: [Sparen, Haushaltskasse, Mietwagen]
+    approach: Gemeinsames Idea-Pin oder Board-Beitrag. Jeder verlinkt auf den eigenen Guide.
+    pitch_angle: Reichweite tauschen, nicht Links. Disclosure, wenn kommerziell.
+    fit: 4
+    authority: 3
+    effort: 3
+    link_type: nofollow
+    value: [traffic, conversion, brand]
+    seasonal: [all]
+    status: neu
+    preferred_keywords: [Sparen, Mietwagen]
+    follow_up_days: 7
+    why_premium: Affiliate-Traffic > PageRank. Pinterest ist der Vertriebskanal, Google der Moat.
+
+  # ---------- PODCAST ----------
+  - id: podcast-verbraucher
+    name: DE-Verbraucher-/Spar-Podcasts
+    type: podcast
+    url: https://www.listennotes.com/search/?q=sparen%20versicherung%20deutschland
+    contact: "3 Episode-Ideen, 90-Sekunden-Bio, 3 Soundbites. Kein 'Darf ich Werbung machen'."
+    topic: Fixkosten, Versicherungen, Tarifwechsel
+    keywords: [Kfz-Versicherung, Fixkosten, Frugalismus]
+    approach: Pitch an 2–3 passende Shows (Haushalt/Sparen, nicht Börse). Shownotes-Link = Backlink.
+    pitch_angle: „Warum Fixkosten vor dem ETF kommen“ – Gegenposition zum Standard-Finanzpodcast.
+    fit: 4
+    authority: 3
+    effort: 4
+    link_type: dofollow
+    value: [eeat, brand, seo]
+    seasonal: [all]
+    status: neu
+    preferred_keywords: [Fixkosten, Kfz-Versicherung]
+    follow_up_days: 10
+    why_premium: Shownotes sind editorial dofollow + Autoritätssignal.
+
+  # ---------- PARTNERSCHAFT (kein Linktausch) ----------
+  - id: check24-partner-content
+    name: CHECK24-Partnerprogramm (Co-Content, nicht Forum-Spam)
+    type: partnerschaft
+    url: https://www.check24.de/partner/
+    contact: "Partner-Newsletter / Account-Manager: saisonale Co-Assets (Kfz, DSL)."
+    topic: CHECK24-Kategorien
+    keywords: [Kfz-Versicherung, DSL, Strom]
+    approach: Nachfragen, ob Partner-Cases oder Datencharts mit Quellenangabe nutzbar sind. Forum nur lesen.
+    pitch_angle: Du lieferst Verbraucher-Übersetzung, die das Netzwerk nicht hat.
+    fit: 4
+    authority: 4
+    effort: 3
+    link_type: sponsored
+    value: [conversion, brand]
+    seasonal: [9, 10, 11]
+    status: neu
+    preferred_slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+    preferred_keywords: [Kfz-Versicherung, DSL]
+    follow_up_days: 14
+    why_premium: Affiliate-Manager-Hebel. rel=sponsored, aber Conversion + ggf. Pressezitat.
+
+  - id: haushaltsblog-collab
+    name: Haushalts-/Familienblogs (komplementär)
+    type: partnerschaft
+    url: https://franksfinanzcheck.de/pillar/
+    contact: "1 komplementärer Blog (Rezepte/Familie/Haushalt). Gemeinsamer Guide, jeder ein Kapitel."
+    topic: Haushaltskasse, Sparen im Alltag
+    keywords: [Haushaltsbuch, Sparen, Strom]
+    approach: Co-created Guide, jeder verlinkt editorisch weil der Text es braucht – kein 'du ich'.
+    pitch_angle: Du lieferst Tarif-/Versicherungs-Kapitel, die sie nicht schreiben wollen.
+    fit: 4
+    authority: 2
+    effort: 4
+    link_type: dofollow
+    value: [seo, traffic]
+    seasonal: [all]
+    status: neu
+    preferred_slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+    preferred_keywords: [Haushaltsbuch, Sparen]
+    follow_up_days: 10
+    why_premium: Organische Nachbarschaft, nicht Reciprocal-Schema.
+
+  # ---------- UNLINKED MENTIONS ----------
+  - id: unlinked-mentions
+    name: Unverlinkte Markennennungen
+    type: unlinked
+    url: https://www.google.com/search?q=%22FranksFinanzcheck%22+OR+%22Frank+Hartung%22+Finanzcheck
+    contact: "Monatlich 10 Min. Suche. Höfliche Mail: 'Danke für die Erwähnung, hier der kanonische Link'."
+    topic: Marke
+    keywords: [FranksFinanzcheck, Frank Hartung]
+    approach: Brand-Search + Mastodon/Pinterest-Reposts scannen. Nie fordern, immer danken.
+    pitch_angle: Hilfsangebot (aktueller Link, Bildrechte, Korrektur).
+    fit: 5
+    authority: 3
+    effort: 2
+    link_type: dofollow
+    value: [seo, brand]
+    seasonal: [all]
+    status: pausiert
+    preferred_keywords: [FranksFinanzcheck]
+    follow_up_days: 7
+    why_premium: Höchste Conversion-Rate aller Outreach-Typen. Erst sinnvoll, sobald Erwähnungen existieren.
+
+  # ---------- BEWUSST AUSGESCHLOSSEN (Audit 31.08.2026) ----------
+  - id: retired-linktausch-sparblog24
+    name: Linktausch Sparblog24
+    type: partnerschaft
+    url: https://www.sparblog24.de/
+    contact: "—"
+    topic: Sparen
+    keywords: []
+    approach: Nicht anfassen.
+    pitch_angle: —
+    fit: 1
+    authority: 1
+    effort: 5
+    link_type: dofollow
+    value: []
+    seasonal: [all]
+    status: ungeeignet
+    preferred_keywords: []
+    follow_up_days: 0
+    why_premium: —
+    retire_reason: "Google Spam-Policy 2026: excessive link exchanges = Link-Schema, domain-level Risiko."
+
+  - id: retired-blogger-de
+    name: Blog-Verzeichnis Blogger.de
+    type: resource
+    url: https://www.blogger.de/
+    contact: "—"
+    topic: Allgemein
+    keywords: []
+    approach: Nicht einreichen.
+    pitch_angle: —
+    fit: 1
+    authority: 1
+    effort: 1
+    link_type: dofollow
+    value: []
+    seasonal: [all]
+    status: ungeeignet
+    preferred_keywords: []
+    follow_up_days: 0
+    why_premium: —
+    retire_reason: "Generisches Blog-Verzeichnis. SpamBrain wertet Katalog-Links 2026 nicht (oder negativ)."
+
+  - id: retired-geld-de-blog
+    name: Geld.de Blog-Verzeichnis
+    type: resource
+    url: https://www.geld.de/blog/
+    contact: "—"
+    topic: Finanzblogs
+    keywords: []
+    approach: Nicht einreichen.
+    pitch_angle: —
+    fit: 1
+    authority: 1
+    effort: 1
+    link_type: dofollow
+    value: []
+    seasonal: [all]
+    status: ungeeignet
+    preferred_keywords: []
+    follow_up_days: 0
+    why_premium: —
+    retire_reason: "Verzeichnis-Spam, historisch oft tot. Aufwand ohne Editorial-Wert."
+
+  - id: retired-sparwelt
+    name: Sparwelt Blog-Verzeichnis
+    type: resource
+    url: https://www.sparwelt.de/
+    contact: "—"
+    topic: Sparen, Gutscheine
+    keywords: []
+    approach: Nicht als Directory einreichen.
+    pitch_angle: —
+    fit: 1
+    authority: 2
+    effort: 1
+    link_type: nofollow
+    value: []
+    seasonal: [all]
+    status: ungeeignet
+    preferred_keywords: []
+    follow_up_days: 0
+    why_premium: —
+    retire_reason: "Gutschein-Portal, keine redaktionelle Blog-Liste. Falsche Nachbarschaft."
+
+  - id: retired-trustpilot-generic
+    name: Trustpilot (generisch)
+    type: digital-pr
+    url: https://www.trustpilot.com/
+    contact: "—"
+    topic: Verbraucherschutz
+    keywords: []
+    approach: Kein Fake-Review, kein 'bitte verlinkt uns'.
+    pitch_angle: —
+    fit: 1
+    authority: 3
+    effort: 5
+    link_type: nofollow
+    value: []
+    seasonal: [all]
+    status: ungeeignet
+    preferred_keywords: []
+    follow_up_days: 0
+    why_premium: —
+    retire_reason: "Kein journalistischer Pitch-Kanal. Reviews ≠ Backlinks. UWG-Risiko."

@@ -1,0 +1,83 @@
+# ============================================================
+#  LINKABLE ASSETS – FranksFinanzcheck (Premium, 31.08.2026)
+#  Das sind die Magneten, auf die ANDERE freiwillig verlinken.
+#  Kein Outreach-Spam: Assets bauen → Digital-PR / Embeds / Roundups.
+# ============================================================
+assets:
+  - id: kfz-wechselkalender-2026
+    name: Kfz-Wechselsaison-Kalender 2026 (Stichtag 30.11.)
+    format: kalender-infografik
+    status: geplant
+    pillar: versicherungen
+    source_slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+    why: Journalisten und Haushaltsblogs brauchen JEDES Jahr denselben Stichtag – wer die sauberste Grafik hat, wird zitiert.
+    pitch_to: [digital-pr, resource, pinterest]
+    seasonal: [9, 10, 11]
+    deliverable: "1000×1500 Pin + 1200×628 Press-Cut + Einbett-HTML mit Quellenzeile „Grafik: FranksFinanzcheck“"
+    effort_hours: 3
+    seo_value: 5
+
+  - id: stromfresser-checkliste
+    name: Stromfresser-Checkliste (Haushalt, mit €/Jahr)
+    format: checkliste-infografik
+    status: geplant
+    pillar: strom-sparen
+    source_slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+    why: Evergreen-Zitatmagnet. CHIP, Computerbild, Haushaltsblogs verlinken Checklisten, keine Meinungsartikel.
+    pitch_to: [digital-pr, pinterest, gastartikel]
+    seasonal: [all]
+    deliverable: 1-Seiten-Checkliste (Druck + Pin) mit 8 Geräten und realistischen Spannen, Quelle + Stand-Jahr
+    effort_hours: 2
+    seo_value: 5
+
+  - id: budget-50-30-20-vorlage
+    name: 50-30-20-Budgetvorlage (netto, DE-tauglich)
+    format: vorlage
+    status: geplant
+    pillar: konto-karten
+    source_slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+    why: Downloadbare Vorlage = natürliche Backlinks von „Budget-Tools“-Roundups. Pinterest-Save-Magnet.
+    pitch_to: [resource, pinterest, community]
+    seasonal: [1, 2, 12]
+    deliverable: ODS/PDF-Vorlage + Pin T3, Einbett-Snippet
+    effort_hours: 2
+    seo_value: 4
+
+  - id: dsl-wechsel-checkliste
+    name: DSL-Wechsel-Checkliste (Bonus, Kündigung, Router)
+    format: checkliste
+    status: geplant
+    pillar: internet-dsl
+    source_slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+    why: Saisonhebel Black Friday / Jahresende. Technik-Redaktionen verlinken Checklisten.
+    pitch_to: [digital-pr, pinterest]
+    seasonal: [10, 11, 12]
+    deliverable: 1-Seiten-Checkliste + Pin
+    effort_hours: 2
+    seo_value: 4
+
+  - id: gas-preisgarantie-baum
+    name: Gaspreisgarantie-Entscheidungsbaum
+    format: infografik
+    status: geplant
+    pillar: strom-sparen
+    source_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+    why: Heizperiode = Suchvolumen. Ein Entscheidungsbaum wird häufiger eingebettet als Fließtext.
+    pitch_to: [digital-pr, pinterest]
+    seasonal: [8, 9, 10, 11]
+    deliverable: Infografik 1000×1500 + Press-Cut
+    effort_hours: 3
+    seo_value: 5
+
+  - id: haushalt-kosten-2026
+    name: „Was kostet der Haushalt 2026?“ – Originaltabelle
+    format: datensatz
+    status: geplant
+    pillar: frugalismus
+    source_slug: 2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann
+    why: Originaldaten sind 2026 der härteste Editorial-Link. Eine saubere, sourced Tabelle zu Strom/Gas/DSL/Haftpflicht/Kfz wird zitiert.
+    pitch_to: [digital-pr, gastartikel, resource]
+    seasonal: [all]
+    deliverable: Tabelle mit Quellen (Destatis, Verivox-Spannen, CHECK24-Marktbeobachtung – KEINE erfundenen Preise) + Stand-Datum
+    effort_hours: 4
+    seo_value: 5

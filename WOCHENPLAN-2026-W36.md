@@ -14,7 +14,7 @@
 | Affiliate-Kette | 🟢 | 19 CHECK24-Routen E2E gesund, /go/-Gateway + rel=sponsored |
 | **Pinterest-Vertrieb** | 🔴 | **Komplettes System fertig (73-Pin-Plan, 6 Boards, 10 Pins in Queue, 18 Artikel warten) – aber OHNE Token läuft nichts. Aktuell erreicht dich null Pinterest-Traffic.** |
 | **Messung** | 🔴 | Umami nicht aktiviert (`hugo.toml` → `websiteId` leer). Du steuerst blind. |
-| Backlinks | 🟡 | 15 Opportunities + Outreach-Texte fertig vorbereitet, 0 umgesetzt |
+| Backlinks | 🟡 | Premium-Scout steht (7 Kanäle, Wochenpack à 5, CRM). 0 umgesetzt – diese Woche 3 Aktionen aus `BACKLINK-REPORT.md` |
 | Social | 🟡 | Mastodon aktiv · LinkedIn nicht eingerichtet |
 
 **Agentur-Fazit:** Dein Engpass ist nicht Content und nicht Technik – es ist **Distribution**. Die Woche gehört Pinterest, Messung und den ersten Backlinks.
@@ -51,17 +51,17 @@ Ohne Zahlen kein Wachstums-Steuerung – aktuell weißt du nicht, ob ein Pin 0 o
 3. **Bing Webmaster:** `BingSiteAuth.xml` liegt ebenfalls bereit – Account checken/anlegen.
 4. **UTM-Disziplin:** Pinterest-Links tragen bereits `?utm_source=pinterest…` – in Umami/GSC siehst du dann sauber, welcher Kanal liefert.
 
-### 🟡 Hebel 4: Backlink-Sprint – 3 × 15 Minuten (Impact: ⭐⭐⭐⭐ langfristig | Aufwand: 45 Min, Mi/Do)
+### 🟡 Hebel 4: Backlink-Sprint Premium – 3 × 15 Minuten (Impact: ⭐⭐⭐⭐ langfristig | Aufwand: 45 Min, Mi/Do)
 
-Junge Domain = Autorität fehlt. Drei der 15 vorbereiteten Quellen diese Woche anfassen (Texte fertig in `BACKLINK-REPORT.md`):
+Junge Domain = Autorität fehlt. **Verdiente Editorial-Links**, keine Verzeichnisse (Google 2026 wertet Katalog-/Tausch-Links domain-level ab). Copy steht im Wochenpack von `BACKLINK-REPORT.md`, Doktrin in `BACKLINK-PREMIUM-STRATEGIE.md`:
 
 | Tag | Aktion | Quelle |
 |---|---|---|
-| Mi | 2–3 **hilfreiche Antworten** in der Finanztip Community (Profil-Link in der Signatur, nicht spammen) | finanztip.de/community |
-| Mi | Blog bei **2 Verzeichnissen** eintragen (Finanzblogs.de, Sparwelt) | Copy-Paste-Texte im Report |
-| Do | **1 Gastartikel-Pitch** senden (z. B. Sparkonto.org – Betreff + Text stehen fertig) | E-Mail-Vorlage im Report |
+| Mi | 2–3 **hilfreiche Antworten** in der Finanztip Community (Profil-Link in der Signatur, Link nur wenn die Frage eine Anleitung verlangt) | finanztip.de/community |
+| Do | **1 Digital-PR-Pitch** mit 3 fertigen Zitaten (Kfz-Stichtag 30.11.) – z. B. Versicherungsbote oder t-online | Copy im Report |
+| Do/Fr | **1 Gastbeitrag-Pitch** aus dem Wochenpack (aktuell Utopia.de – Frugalismus/Fixkosten; Alternative Sparkonto.org) – **kein** Republish | E-Mail-Vorlage im Report |
 
-**Anti-Regel:** Kein Linkkauf, kein Massen-Eintragen – nur die 5 sauberen Quellen. Qualität schlägt Masse.
+**Anti-Regel:** Kein Linkkauf, kein Linktausch, keine Blog-Verzeichnisse (Blogger.de/Sparwelt/Geld.de), kein Auto-Submit. Nach dem Senden: `python3 scripts/backlink_automation.py --mark <id>=kontaktiert`.
 
 ### 🟢 Hebel 5: Saisonhebel Kfz-Versicherung ausspielen (Impact: ⭐⭐⭐⭐ | Aufwand: 15 Min, Mi/Fr)
 
