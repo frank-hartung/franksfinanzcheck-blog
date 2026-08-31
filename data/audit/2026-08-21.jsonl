@@ -1,5 +1,0 @@
-{"ts": "2026-08-21T08:10:12Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 18}, "output": {"changes": 6}, "status": "ok", "critical": false, "commit": null}
-{"ts": "2026-08-21T08:10:12Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 2}, "output": {"changes": 3}, "status": "ok", "critical": false, "commit": null}
-{"ts": "2026-08-21T08:11:31Z", "module": "extend_articles", "action": "apply", "input": {"min_words": 1000, "targets": 2}, "output": {"ok": 2, "failed": 0}, "status": "ok", "critical": false, "commit": null}
-{"ts": "2026-08-21T08:11:31Z", "module": "fix_spaces", "action": "apply", "input": {"files": 18}, "output": {"fixes": 115}, "status": "ok", "critical": false, "commit": null}
-{"ts": "2026-08-21T08:13:49Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 2, "fixed": 2}, "status": "issues", "critical": false, "commit": null}

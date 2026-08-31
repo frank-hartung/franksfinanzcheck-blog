@@ -26,6 +26,43 @@ __pycache__/
 
 # Analog zu .affiliate_report.json: lokaler/generierter Audit-Cache
 .meta_report.json
+.affiliate_report.json
+.indexnow_submitted.json
+.keyword_suggestions.json
+.grammar_report.json
+.spellcheck_report.json
+ops-report.json
+
+# Auto-generierte Reports (Profi-Cleanup 31.08.2026 – halten Root sauber)
+# Workflows schreiben diese bei Bedarf neu, sie müssen nicht versioniert werden
+# Nur im Root ignorieren, docs/ enthält strategische Dokumente
+/*-REPORT.md
+/*-STATUS.md
+/ENGINE-STATUS.md
+/BOT-STATUS.md
+/PIN-STATUS.md
+/OPS-REPORT.md
+/WOCHENPLAN-*.md
+/BESTAND-REPORT.md
+/DOKTOR-REPORT.md
+/DRAFT-LINK-REPORT.md
+
+# Einmalige Patches & Archiv (erledigt, nicht mehr benötigt)
+patches/
+scripts/_archiv/
+
+# Große Binär-Assets, die nicht im Repo liegen sollten (extern lagern)
+static/videos/
+*.mp4
+*.mov
+
+# Docs-Binär-Assets (extern lagern, nicht versionieren)
+docs/*.pdf
+docs/*.xlsx
+docs/font-palette-preview.png
+
+# Audit-Logs nur 3 aktuellste behalten (ältere löschen)
+# data/audit/ wird via Workflow gepflegt, alte Logs nicht committen
 
 # Test-Venvs (lokal, 26.08.2026)
 .venv-test/
