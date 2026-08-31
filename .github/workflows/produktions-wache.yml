@@ -121,6 +121,15 @@ jobs:
           posts = cg.load_posts()
           live = [p for p in posts if not p["draft"]]
 
+          # PARK-ZUSTÄNDE (31.08.2026, Premium-Fix nach Issue #129): ein Tag
+          # ohne Artikel ist eine andere Baustelle, wenn fertig geparkte
+          # Artikel in der Re-Queue liegen oder von einem Gate gehalten werden.
+          # Quelle ist die Kadenz-Wache selbst (keine zweite Zähllogik).
+          queue_n = sum(1 for p in posts if p.get("state") == "queue")
+          hold_posts = [p for p in posts if p.get("state") == "hold"]
+          hold_alt = max([(p.get("age_days") or 0) for p in hold_posts],
+                         default=0)
+
           # letzter Publikationstag <= heute
           last_pub = today
           for back in range(0, 8):
@@ -174,7 +183,20 @@ jobs:
           else:
               meldung = f"Letzter Publikationstag ({last_pub.isoformat()}): {count_last} Artikel – Ziel erfüllt."
 
+          if queue_n or hold_posts:
+                teile = []
+                if queue_n:
+                    teile.append(f"{queue_n} förderfähig in der Re-Queue")
+                if hold_posts:
+                    teile.append(f"{len(hold_posts)} von Gates gehalten "
+                                 f"(ältester {hold_alt} Tage: "
+                                 f"{hold_posts[0].get('grund') or 'Grund unbekannt'})")
+                meldung += " – Bestand: " + ", ".join(teile)
+
           out = {
+            "queued_posts": queue_n,
+            "held_posts": len(hold_posts),
+            "held_max_age_days": hold_alt,
             "today": today.isoformat(),
             "today_is_publication_day": is_pub,
             "last_publication_day": last_pub.isoformat(),
@@ -202,6 +224,8 @@ jobs:
               f.write(f"| Letzter Artikel überhaupt | {last_article.isoformat() if last_article else '–'}"
                       f"{(' (' + str(age_days) + ' Tage her)') if age_days is not None else ''} |\n")
               f.write(f"| Live-Artikel gesamt | {len(live)} |\n")
+              f.write(f"| Förderfähig in der Re-Queue | {queue_n} |\n")
+              f.write(f"| Von Gates gehalten (braucht Korrektur) | {len(hold_posts)} |\n")
               f.write(f"| Mindestziel/Tag | {minimum} |\n\n")
               f.write("_Wird bei jedem Lauf aktualisiert (auch bei Leerlauf) – diese Datei kann nicht einfrieren._\n")
 
