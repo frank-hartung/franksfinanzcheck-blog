@@ -1,6 +1,6 @@
 # 🔗 DRAFT-LINK-REPORT (draft_link_healer.py)
 
-**Stand:** 2026-08-31 16:38 UTC · Modus: FIX
+**Stand:** 2026-08-31 17:45 UTC · Modus: FIX
 
 ## Gemeldet: Ziel gerade nicht im Build (1)
 
