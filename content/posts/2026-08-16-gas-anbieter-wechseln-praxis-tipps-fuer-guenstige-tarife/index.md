@@ -127,7 +127,7 @@ Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, 
 
 👉 **Jetzt vergleichen und sparen:** [**→ Bis 882 € sparen – Angebote vergleichen**](/go/gas/)
 
-**Weiterlesen:** [Pillar Strom & Gas sparen](../../pillar/strom-sparen/) · [Gasrechnung senken im Spätsommer](../2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) · [Günstige Tarife mit Preisgarantie](../2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
+**Weiterlesen:** [Pillar Strom & Gas sparen](../../pillar/strom-sparen/) · [Gasrechnung senken im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) · [Günstige Tarife mit Preisgarantie](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
 
 ## Häufige Fragen
 

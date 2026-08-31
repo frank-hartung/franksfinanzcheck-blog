@@ -74,7 +74,7 @@ Diese Website nutzt zur Reichweitenmessung das datenschutzfreundliche Analyse-To
 - **Cloud-Variante:** Die Daten werden auf den Servern von Umami verarbeitet (weitere Informationen: [umami.is/privacy](https://umami.is/privacy)). Umami verarbeitet nach eigenen Angaben keine personenbezogenen Daten.
 - **Self-hosted-Variante:** Die Daten liegen auf einem eigenen Server (je nach Hosting in der EU oder im Rahmen der gültigen Datenschutz-Abkommen mit dem Hosting-Anbieter).
 
-**Einwilligung:** Der Einsatz erfolgt nach deiner Wahl im Consent-Banner – entweder erst nach „Alle akzeptieren" (strenger Modus) oder cookieless ohne Einwilligung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Verbesserung der Website). Du kannst die Messung jederzeit verhindern, indem du in deinem Browser den **Do-Not-Track-Header** aktivierst oder im Consent-Banner „Nur notwendige" wählst.
+**Einwilligung:** Der Einsatz erfolgt nach deiner Wahl im Consent-Banner – entweder erst nach „Alle akzeptieren" (strenger Modus) oder cookieless ohne Einwilligung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Verbesserung der Website). **Aktuell aktiv ist der cookieless-Modus ohne Einwilligung** (Art. 6 Abs. 1 lit. f DSGVO). Du kannst die Messung jederzeit verhindern, indem du in deinem Browser den **Do-Not-Track-Header** aktivierst oder im Consent-Banner „Nur notwendige" wählst.
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. a DSGVO (Einwilligung) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse), je nach gewähltem Modus. § 25 TDDDG ist nicht einschlägig, da keine Cookies gesetzt werden.
 
