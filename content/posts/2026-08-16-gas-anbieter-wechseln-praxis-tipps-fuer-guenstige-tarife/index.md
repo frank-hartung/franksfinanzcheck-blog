@@ -19,8 +19,8 @@ kurzantwort: "Der Wechsel des Gasanbieters ist in wenigen Minuten erledigt: Halt
 
 social_posted: true
 keywords: ["Gas-Anbieter wechseln", "Gasanbieter Wechsel", "Günstige Gastarife", "Gas Preisvergleich", "Gaskosten reduzieren", "Gas Anbieter wechseln", "Gas-Anbieter", "Grundversorgung Gas Vergleich"]
-pin_title: "Gas-Anbieter wechseln: Bis 882 € pro Jahr sparen – ohne Risiko"
-pin_description: "*Werbung | Gaswechsel leicht gemacht: Preisgarantie, Kündigungsfristen und die Fallstricke im Kleingedruckten. Mit diesen Praxis-Tipps wechselst du stressfrei und sparst bis zu 882 Euro im 1. Jahr bei den Heizkosten. Jetzt die 10-Minuten-Anleitung lesen."
+pin_title: "Gas-Anbieter wechseln: So sparst du bis zu 680 Euro"
+pin_description: "*Werbung | Gaswechsel leicht gemacht: Preisgarantie, Kündigungsfristen und die Fallstricke im Kleingedruckten. Mit diesen Praxis-Tipps wechselst du stressfrei und sparst bis zu 680 Euro bei den Heizkosten. Jetzt die 10-Minuten-Anleitung lesen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_image: "images/pins/premium-pin-gaswechsel-882-euro.jpg"
 ---
@@ -43,7 +43,7 @@ In der Praxis ist die Gasversorgung in Deutschland gesetzlich durch das Energiew
 
 ## Die 6 wichtigsten Kriterien für die Tarifwahl
 
-Achte beim Tarifvergleich auf folgende Qualitätsmerkmale, um langfristig sicher und ohne Risiko zu sparen:
+Achte beim Tarifvergleich auf folgende Qualitätsmerkmale, um langfristig sicher und mit gesetzlich abgesicherter Weiterversorgung zu sparen:
 
 1. **Echte Preisgarantie (mindestens 12 Monate):** Wähle Tarife mit einer eingeschränkten oder vollen Preisgarantie, die für die gesamte Vertragslaufzeit gilt. Achte darauf, dass sie mindestens Arbeitspreis und Grundpreis absichert und nicht vorzeitig ausläuft.
 2. **Vertragslaufzeit maximal 12 Monate:** Binde dich nicht für 24 Monate, um flexibel auf künftige Preissenkungen am Energiemarkt reagieren zu können.
@@ -62,41 +62,41 @@ Achte beim Tarifvergleich auf folgende Qualitätsmerkmale, um langfristig sicher
 {{< tarifvergleich
     title="💰 Beispielrechnung: Grundversorgung vs. Wechseltarif"
     subtitle="Musterhaushalt mit 20.000 kWh Jahresverbrauch (Einfamilienhaus, ca. 120 m², 4 Personen) · Stand: August 2026"
-    footnote="Der Neukunden-Bonus wird üblicherweise mit der ersten Jahresabrechnung verrechnet und gilt nur im ersten Vertragsjahr. Ab dem zweiten Jahr liegt die Ersparnis beim empfohlenen Wechseltarif bei soliden **702 € pro Jahr** – ohne jede Einschränkung. Regionale Preisunterschiede sind möglich; prüfe deinen persönlichen Tarif in unter 2 Minuten mit deiner Postleitzahl."
+    footnote="Der Neukunden-Bonus wird üblicherweise mit der ersten Jahresabrechnung verrechnet und gilt nur im ersten Vertragsjahr. Ab dem zweiten Jahr liegt die Ersparnis beim empfohlenen Wechseltarif bei soliden **702 € pro Jahr** – ohne jede Einschränkung. Regionale Preisunterschiede sind möglich; prüfe deinen persönlichen Tarif in unter 2 Minuten mit deiner Postleitzahl."
     cta_url="/go/gas/" >}}
 
   {{< tarif name="Grundversorgung" tag="❌ Stadtwerk" tone="bad" cta_text="Nicht empfohlen" cta_muted="true" >}}
-    {{< zeile label="Grundpreis / Monat" >}}14,50 €<br><small>174 € / Jahr</small>{{< /zeile >}}
+    {{< zeile label="Grundpreis / Monat" >}}14,50 €<br><small>174 € / Jahr</small>{{< /zeile >}}
     {{< zeile label="Arbeitspreis pro kWh" >}}12,80 Ct{{< /zeile >}}
-    {{< zeile label="Jahreskosten (20.000 kWh)" >}}**2.734 €**{{< /zeile >}}
-    {{< zeile label="Neukunden-Bonus (Jahr 1)" tone="muted" >}}—{{< /zeile >}}
-    {{< zeile label="Effektivkosten 1. Jahr" highlight="true" tone="bad" >}}**2.734 €**{{< /zeile >}}
-    {{< zeile label="Ersparnis im 1. Jahr" tone="muted" >}}—{{< /zeile >}}
-    {{< zeile label="Ersparnis ab 2. Jahr" tone="muted" >}}—{{< /zeile >}}
+    {{< zeile label="Jahreskosten (20.000 kWh)" >}}**2.734 €**{{< /zeile >}}
+    {{< zeile label="Neukunden-Bonus (Jahr 1)" tone="muted" >}} – {{< /zeile >}}
+    {{< zeile label="Effektivkosten 1. Jahr" highlight="true" tone="bad" >}}**2.734 €**{{< /zeile >}}
+    {{< zeile label="Ersparnis im 1. Jahr" tone="muted" >}} – {{< /zeile >}}
+    {{< zeile label="Ersparnis ab 2. Jahr" tone="muted" >}} – {{< /zeile >}}
     {{< zeile label="Preisgarantie" tone="bad" >}}✕ keine{{< /zeile >}}
     {{< zeile label="Vertragslaufzeit" >}}unbegrenzt{{< /zeile >}}
   {{< /tarif >}}
 
   {{< tarif name="Alternativ-Tarif" tag="⚡ Solide" tone="mid" cta_text="Tarife prüfen →" >}}
-    {{< zeile label="Grundpreis / Monat" >}}9,90 €<br><small>118,80 € / Jahr</small>{{< /zeile >}}
+    {{< zeile label="Grundpreis / Monat" >}}9,90 €<br><small>118,80 € / Jahr</small>{{< /zeile >}}
     {{< zeile label="Arbeitspreis pro kWh" >}}9,20 Ct{{< /zeile >}}
-    {{< zeile label="Jahreskosten (20.000 kWh)" >}}**1.959 €**{{< /zeile >}}
-    {{< zeile label="Neukunden-Bonus (Jahr 1)" tone="muted" >}}—{{< /zeile >}}
-    {{< zeile label="Effektivkosten 1. Jahr" highlight="true" >}}**1.959 €**{{< /zeile >}}
-    {{< zeile label="Ersparnis im 1. Jahr" tone="good" >}}**−775 €**{{< /zeile >}}
-    {{< zeile label="Ersparnis ab 2. Jahr" tone="good" >}}**−775 €**{{< /zeile >}}
+    {{< zeile label="Jahreskosten (20.000 kWh)" >}}**1.959 €**{{< /zeile >}}
+    {{< zeile label="Neukunden-Bonus (Jahr 1)" tone="muted" >}} – {{< /zeile >}}
+    {{< zeile label="Effektivkosten 1. Jahr" highlight="true" >}}**1.959 €**{{< /zeile >}}
+    {{< zeile label="Ersparnis im 1. Jahr" tone="good" >}}**−775 €**{{< /zeile >}}
+    {{< zeile label="Ersparnis ab 2. Jahr" tone="good" >}}**−775 €**{{< /zeile >}}
     {{< zeile label="Preisgarantie" tone="good" >}}✓ 12 Monate{{< /zeile >}}
     {{< zeile label="Vertragslaufzeit" >}}12 Monate{{< /zeile >}}
   {{< /tarif >}}
 
   {{< tarif name="Wechseltarif" tag="🏆 Empfehlung" tone="good" win="true" cta_text="🏆 Jetzt wechseln" >}}
-    {{< zeile label="Grundpreis / Monat" >}}11,00 €<br><small>132 € / Jahr</small>{{< /zeile >}}
+    {{< zeile label="Grundpreis / Monat" >}}11,00 €<br><small>132 € / Jahr</small>{{< /zeile >}}
     {{< zeile label="Arbeitspreis pro kWh" >}}9,50 Ct{{< /zeile >}}
-    {{< zeile label="Jahreskosten (20.000 kWh)" >}}**2.032 €**{{< /zeile >}}
-    {{< zeile label="Neukunden-Bonus (Jahr 1)" tone="good" >}}**−180 €**{{< /zeile >}}
-    {{< zeile label="Effektivkosten 1. Jahr" highlight="true" tone="good" >}}**1.852 €**{{< /zeile >}}
-    {{< zeile label="Ersparnis im 1. Jahr" tone="good" >}}**−882 €**{{< /zeile >}}
-    {{< zeile label="Ersparnis ab 2. Jahr" tone="good" >}}**−702 €**{{< /zeile >}}
+    {{< zeile label="Jahreskosten (20.000 kWh)" >}}**2.032 €**{{< /zeile >}}
+    {{< zeile label="Neukunden-Bonus (Jahr 1)" tone="good" >}}**−180 €**{{< /zeile >}}
+    {{< zeile label="Effektivkosten 1. Jahr" highlight="true" tone="good" >}}**1.852 €**{{< /zeile >}}
+    {{< zeile label="Ersparnis im 1. Jahr" tone="good" >}}**−882 €**{{< /zeile >}}
+    {{< zeile label="Ersparnis ab 2. Jahr" tone="good" >}}**−702 €**{{< /zeile >}}
     {{< zeile label="Preisgarantie" tone="good" >}}✓ **12 Monate**{{< /zeile >}}
     {{< zeile label="Vertragslaufzeit" >}}**12 Monate**{{< /zeile >}}
   {{< /tarif >}}
@@ -134,7 +134,7 @@ Verbrauch und Zähler von der Jahresrechnung. Vergleich mit Preisgarantie-Filter
 
 ## Fazit: Keine Angst vor dem Wechsel – es lohnt sich immer
 
-Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst. Dank strenger Verbraucher­schutz­gesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist. Bei einem typischen Familienhaushalt mit 20.000 kWh Verbrauch sparst du **im ersten Jahr bis 882 €** – und auch dauerhaft bleiben mehrere hundert Euro auf deinem Konto.
+Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst. Dank strenger Verbraucher­schutz­gesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist. Bei einem typischen Familienhaushalt mit 20.000 kWh Verbrauch sparst du **im ersten Jahr bis 882 €** – und auch dauerhaft bleiben mehrere hundert Euro auf deinem Konto.
 
 👉 **Jetzt vergleichen und sparen:** [**→ Bis 882 € sparen – Angebote vergleichen**](/go/gas/)
 

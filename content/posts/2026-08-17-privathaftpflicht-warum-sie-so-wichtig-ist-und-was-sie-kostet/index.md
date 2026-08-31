@@ -124,7 +124,7 @@ Ja, Mietsachschäden (z. B. Brandflecken im Parkett, ein gesprungener Waschtisc
 Kleintiere wie Katzen, Vögel, Hamster oder Meerschweinchen sind über die Privathaftpflicht automatisch mitversichert. Für Hunde und Pferde ist hingegen eine separate Tierhalter­haftpflicht­versicherung erforderlich.
 
 ### Wie melde ich einen Schaden richtig?
-Melde den Schaden unverzüglich (am besten innerhalb von 3 Tagen) deiner Versicherung. Mache Fotos, notiere Kontaktdaten von Zeugen und unterschreibe vorab niemals ein Schuldanerkenntnis gegenüber dem Geschädigten.
+Melde den Schaden unverzüglich (am attraktiven innerhalb von 3 Tagen) deiner Versicherung. Mache Fotos, notiere Kontaktdaten von Zeugen und unterschreibe vorab niemals ein Schuldanerkenntnis gegenüber dem Geschädigten.
 
 ### Kann ich eine bestehende Haftpflichtversicherung wechseln?
 Ja, mit einer Frist von drei Monaten zum Ablauf des Versicherungsjahres kannst du deinen alten Vertrag kündigen und in einen günstigeren Tarif mit besseren Leistungen wechseln.

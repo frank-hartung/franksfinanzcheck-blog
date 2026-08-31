@@ -28,7 +28,7 @@ Der Brief der Kfz-Versicherung flattert ins Haus, und mit ihm oft eine saftige B
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Starte jetzt den kostenlosen Vergleich und finde den günstigsten Tarif für dein Fahrzeug: [**Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)  
+💡 **Schnell-Tipp von FranksFinanzcheck:** Starte jetzt den kostenlosen Vergleich und finde den besonders günstigen Tarif für dein Fahrzeug: [**Kfz-Versicherung vergleichen**](/go/haftpflicht/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Die drei Bausteine der Kfz-Versicherung
@@ -115,9 +115,9 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 1. **Letzte Jahresrechnung und Fahrzeugschein bereitlegen.**
 2. **Aktuelle SF-Klasse, Jahreskilometer, gewünschte SB ermitteln.**
 3. **Vergleichsrechner starten:** [Jetzt Kfz-Versicherung vergleichen](/go/kfz-versicherung/).
-4. **Mindestens 5 bis 10 der günstigsten Angebote öffnen** und das Kleingedruckte prüfen (Deckungssumme, Mallorca-Police, Fahrerschutz, Wildunfall mit allen Tieren, grobe Fahrlässigkeit).
+4. **Mindestens 5 bis 10 der besonders günstigen Angebote öffnen** und das Kleingedruckte prüfen (Deckungssumme, Mallorca-Police, Fahrerschutz, Wildunfall mit allen Tieren, grobe Fahrlässigkeit).
 5. **Neuen Vertrag bis 30.11. Abschließen.**
-6. **Alten Vertrag schriftlich kündigen** (am besten per Einschreiben oder über das Kundenportal) und die Kündigungsbestätigung abwarten.
+6. **Alten Vertrag schriftlich kündigen** (am attraktiven per Einschreiben oder über das Kundenportal) und die Kündigungsbestätigung abwarten.
 
 ## Was eine gute Police unbedingt enthalten sollte
 
@@ -132,7 +132,7 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 ## Häufige Irrtümer
 
 - ❌ *"Direktversicherer sind immer schlecht im Schadensfall."* Tatsächlich schneiden Direktversicherer in Tests (Stiftung Warentest, Finanztip) regelmäßig mindestens so gut ab wie klassische Anbieter.
-- ❌ *"Alte Verträge sind immer die günstigsten."* Das Gegenteil ist der Fall: Alttarife aus den 2000er Jahren liegen im Schnitt 25 bis 40 % über aktuellen Vergleichstarifen.
+- ❌ *"Alte Verträge sind immer die besonders günstigen."* Das Gegenteil ist der Fall: Alttarife aus den 2000er Jahren liegen im Schnitt 25 bis 40 % über aktuellen Vergleichstarifen.
 - ❌ *"Bei einem Wechsel verliere ich meine SF-Klasse."* Nein, die SF-Klasse ist an den Fahrer gebunden und wird 1:1 übertragen.
 - ❌ *"Eine Kündigung per E-Mail reicht."* Rechtlich ist die Textform ausreichend, aber der Versicherer muss den Eingang bestätigen. Sicherer ist das Online-Kundenportal oder ein Einschreiben.
 
@@ -167,7 +167,7 @@ Die SF-Klasse ist der größte Hebel nach Regionalklasse. Falsch übertragen = f
 
 Der **Kfz-Versicherungsvergleich** ist einer der schnellsten und lukrativsten Sparhebel im deutschen Versicherungsdschungel. 30 bis 45 Minuten investiert, bringt im Schnitt eine Ersparnis von mehreren hundert Euro pro Jahr – über die Vertragslaufzeit von mehreren Jahren gerechnet sind das leicht **1.500 € bis 4.000 €**. Nutze die Wochen bis zum 30.11., um deinen bestehenden Tarif zu prüfen und bei Bedarf zu wechseln.
 
-**Weiterlesen:** [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) · Wohngebäudeversicherung Vergleich · [Pillar: Versicherungen](../../pillar/versicherungen/)
+**Weiterlesen:** [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) · [[Wohngebäudeversicherun](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/)g Vergleich](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/) · [Pillar: Versicherungen](../../pillar/versicherungen/)
 
 ## Häufige Fragen
 

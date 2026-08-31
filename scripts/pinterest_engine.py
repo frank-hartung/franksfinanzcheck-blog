@@ -275,20 +275,21 @@ def pin_title_of(post):
 def pin_text(post):
     """Optimierter Pin-Text: Kennzeichnung + Description + CTA + Hashtags (≤ 500).
 
-    Nutzt vorgeheiltes pin_description aus dem Frontmatter (pinterest_seo_healer),
-    falls vorhanden – sonst baut den Text frisch.
+    Agentur-Fix 31.08.2026: ALLE Pins tragen `*Werbung |`, da alle Artikel
+    Affiliate-Links enthalten – UWG + Pinterest-Ad-Policy. Nutzt vorgeheiltes
+    pin_description aus dem Frontmatter (pinterest_seo_healer), falls vorhanden.
     """
     if post.get("pin_description"):
         text = post["pin_description"].replace("&", "und")
+        if not text.lstrip().startswith("*Werbung"):
+            text = "*Werbung | " + text
         return text[:500]
     desc = post["description"] or post["title"]
     desc = desc.replace("&", "und")
     hashtags = hashtags_for(post)
-    # Werbekennzeichnung kam bereits über pin_description (Pin-Sync, Single
-    # Source of Truth). Fallback hier NICHT generisch als *Werbung markieren,
-    # sonst werden EP-Pins fälschlich als Werbung gekennzeichnet. TP-Pins
-    # tragen ihren `*Werbung |`-Prefix in der synchronisierten Beschreibung.
-    text = f"{desc} Mehr Spartipps auf FranksFinanzcheck! {hashtags}"
+    # Agentur-Fix 31.08.2026: ALLE Pins mit Werbung-Kennzeichnung (UWG)
+    # – auch der Fallback (deterministische Texte) muss compliant sein.
+    text = f"*Werbung | {desc} Mehr Spartipps auf FranksFinanzcheck! {hashtags}"
     return text[:500]
 
 

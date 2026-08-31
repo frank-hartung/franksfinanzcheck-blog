@@ -14,8 +14,9 @@ Meta-Description bauen und die Board-Zuordnung per Pillar-Fallback
 raten. Der Sync schließt diese Lücke in beiden Richtungen:
 
   S1  pin_title        ← Plan-Pin-Titel (kuratiert, keyword-first)
-  S2  pin_description  ← Plan-Pin-Beschreibung (Werbung-Kennzeichnung wie im Plan: TP-Pins
-                          mit `*Werbung |`, EP-Pins ohne – ≤ 500 Z.)
+  S2  pin_description  ← Plan-Pin-Beschreibung (Werbung-Kennzeichnung: seit 31.08.2026
+                          tragen ALLE Pins `*Werbung |`, da alle Artikel Affiliate-Links
+                          enthalten – UWG + Pinterest-Ad-Policy, ≤ 500 Z.)
   S3  pinwand          ← Board-Name aus dem Plan (Multi-Board-Routing)
 
 Matching: Artikel → bester Plan-Pin via Token-Scoring (identische
@@ -130,13 +131,23 @@ def pin_title_valid(t: str) -> bool:
 def clean_pin_description(beschreibung: str) -> str:
     """Premium-Beschreibung aus dem Plan → pin_description-fertig.
 
-    Die Werbekennzeichnung kommt 1:1 aus dem Plan (Single Source of Truth):
-    TP/Affiliate-Pins enthalten `*Werbung |`, EP-Pins nicht. Die Funktion
-    ergänzt keinen Prefix mehr, damit EP-Pins nicht fälschlich als Werbung
-    markiert werden (Dauervorgabe „nur Affiliate/TP-Pins“).
+    Agentur-Fix 31.08.2026: ALLE Pins tragen `*Werbung |`, da alle Artikel
+    Affiliate-Links (/go/) enthalten – UWG §5a + Pinterest Ad-Policy.
+    Single Source of Truth bleibt der Plan, aber die Funktion stellt sicher,
+    dass der Prefix existiert (idempotent) – kein EP-Pin ohne Kennzeichnung.
     """
     t = (beschreibung or "").strip().replace("&", "und")
     t = re.sub(r"\s+", " ", t)
+    if not t.lstrip().startswith("*Werbung"):
+        t = "*Werbung | " + t
+    # Kürzung an Wortgrenze
+    if len(t) > PIN_DESC_MAX:
+        cut = t[:PIN_DESC_MAX]
+        sp = cut.rfind(" ")
+        if sp > 0:
+            t = cut[:sp].rstrip(" –—-:,;")
+        else:
+            t = cut
     return t[:PIN_DESC_MAX]
 
 
@@ -267,10 +278,10 @@ def _selftest() -> list[str]:
     c3 = fm_set(c, "pinwand", "Strom & Gas sparen | Tarife clever wechseln")
     if "pinwand:" not in c3 or c3.count("pinwand:") != 1:
         fehler.append("fm_set anlegen defekt")
-    # Werbekennzeichnung: Nur TP/Affiliate-Pins tragen *Werbung, EP-Pins nicht.
+    # Werbekennzeichnung: Agentur-Fix 31.08.2026 – ALLE Pins tragen *Werbung
     d_ep = clean_pin_description("Heizkosten senken: 6 Tipps")
-    if "*Werbung" in d_ep:
-        fehler.append("EP-Pin darf kein *Werbung tragen")
+    if not d_ep.startswith("*Werbung | ") or d_ep.count("*Werbung") != 1:
+        fehler.append("Werbung-Prefix fehlt (Agentur-Fix: alle Pins)")
     d_tp = clean_pin_description("*Werbung | Top-Tarife vergleichen")
     if d_tp.count("*Werbung") != 1 or not d_tp.startswith("*Werbung | "):
         fehler.append("TP-Pin Werbung-Prefix defekt")

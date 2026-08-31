@@ -1,6 +1,6 @@
 # 🧱 HEADING-REPORT (heading_guard.py)
 
-**Stand:** 2026-08-31 05:48 UTC · Modus: FIX
+**Stand:** 2026-08-31 17:10 UTC · Modus: DRY-RUN
 
 Regeln: **H1** `<br>` in Überschriften → Leerzeichen (nur bei anker-stabilem Beweis, Auto-Fix) · **H2** `<br>` am Ende → Wegfall (anker-stabil) · **H3** sonstiges Roh-HTML → nur Meldung.
 

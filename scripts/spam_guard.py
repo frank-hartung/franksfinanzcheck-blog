@@ -272,9 +272,15 @@ def safe_word_cut(s, max_len):
 
 def clean_body(content):
     """Fließtext ohne Frontmatter + Template-Bausteine (Parität zu
-    check_uniqueness/brand_guard)."""
+    check_uniqueness/brand_guard). Premium-Fix 31.08.2026: Shortcodes
+    ({{< zeile >}} etc.) werden komplett entfernt – sonst zählt
+    'zeile' als Keyword-Stuffing (B1-False-Positive)."""
     parts = content.split("---", 2)
     body = parts[2] if len(parts) == 3 else content
+    # Hugo Shortcodes entfernen ({{< ... >}} / {{% ... %}})
+    body = re.sub(r"{{<.*?>}}", " ", body, flags=re.S)
+    body = re.sub(r"{{%.*?%}}", " ", body, flags=re.S)
+    body = re.sub(r"<[^>]+>", " ", body)
     body = re.sub(
         r"\*?_?Dieser Artikel enthält Affiliate-Links.*?keine Mehrkosten\.\)?\*?",
         " ", body, flags=re.S)

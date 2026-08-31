@@ -26,7 +26,7 @@ pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 
 
 
-Klettert deine jährliche Stromabrechnung trotz sparsamer Gewohnheiten immer weiter nach oben? In fast jedem Haushalt verbergen sich heimliche **Energiediebe**, die rund um die Uhr teuren Strom aus der Steckdose ziehen – selbst dann, wenn niemand zu Hause ist oder alle Geräte scheinbar ausgeschaltet sind. Veraltete Haushaltsgeräte, daueraktive Unterhaltungselektronik und ineffiziente Netzteile treiben den Jahresverbrauch unbemerkt um hunderte Kilowattstunden in die Höhe. In diesem Ratgeber zeige ich dir, wie du **Stromfresser finden** und eliminieren kannst, um bis zu **420 €** pro Jahr einzusparen.
+Klettert deine jährliche Stromabrechnung trotz sparsamer Gewohnheiten immer weiter nach oben? In fast jedem Haushalt verbergen sich heimliche **Energiediebe**, die rund um die Uhr teuren Strom aus der Steckdose ziehen – selbst dann, wenn niemand zu Hause ist oder alle Geräte scheinbar ausgeschaltet sind. Veraltete Haushaltsgeräte, daueraktive Unterhaltungselektronik und ineffiziente Netzteile treiben den Jahresverbrauch unbemerkt um hunderte Kilowattstunden in die Höhe. In diesem Ratgeber zeige ich dir, wie du **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und eliminieren kannst, um bis zu **420 €** pro Jahr einzusparen.
 
 ---
 
@@ -123,7 +123,7 @@ Geräte über 80 € Stromkosten/Jahr auf die Ersatzliste. A-Klasse-Kühlschran
 1. Steckerleiste TV/Audio, nachts aus.
 2. Eco-Programme, volle Maschine, 1.400 Touren.
 3. Router-Zeitsteuerung 1–6 Uhr, wenn niemand wach ist (Smarthome-Ausnahme).
-4. Zählerstand jeden 1. – der Herbstanstieg wird sichtbar, bevor die Abrechnung kommt.
+4. Zählerstand jeden 1 – der Herbstanstieg wird sichtbar, bevor die Abrechnung kommt.
 
 Energiediebe sind selten dramatisch. Sie sind langweilig und dauerhaft. Genau deshalb gewinnt, wer misst statt rätselt.
 

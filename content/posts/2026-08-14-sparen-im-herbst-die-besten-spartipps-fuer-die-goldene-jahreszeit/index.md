@@ -31,7 +31,7 @@ Wenn die Tage kürzer werden und die Blätter sich bunt färben, beginnt für cl
 💡 **Schnell-Tipp von FranksFinanzcheck:** Überprüfe deine Absicherung und spare bei elementaren Policen: [**Haftpflichtversicherung vergleichen**](/go/kfz-versicherung/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Die 7 besten Sparhebel für den Herbst
+## Die 7 attraktiven Sparhebel für den Herbst
 
 ### 1. Kfz-Versicherungswechsel zum Stichtag 30. November
 Der 30. November ist der wichtigste Stichtag für Autofahrer in Deutschland. Nahezu alle Kfz-Versicherungsverträge enden zum 31. Dezember und können bis Ende November mit einmonatiger Frist gekündigt werden. Da die Versicherer im Herbst einen intensiven Preiskampf um Neukunden austragen, bringt ein Wechsel bei identischen oder verbesserten Leistungen oft eine Ersparnis von **180 € bis 350 €** im Jahr. Achte dabei besonders auf freie Werkstattwahl, eine Deckungssumme von mindestens 100 Millionen Euro für Personen- und Sachschäden sowie ausreichenden Schutz bei Marderbissen und Folgeschäden.
@@ -76,9 +76,9 @@ Statt teurer Indoor-Spielplätze oder Freizeitparks bietet der Herbst wunderbare
 
 ## Herbst als Kassensturz, nicht als Konsum-Saison
 
-Der Kalender schiebt dir Halloween, Black Friday und Weihnachten in drei Monate. Wer im September kein Budget für Dezember hat, zahlt im Januar Dispo. Deshalb ist der Herbst der beste Moment für den Jahres-Schnitt – nicht der 1. Januar, wenn die Motivation schon verbraucht ist.
+Der Kalender schiebt dir Halloween, Black Friday und Weihnachten in drei Monate. Wer im September kein Budget für Dezember hat, zahlt im Januar Dispo. Deshalb ist der Herbst der passende Moment für den Jahres-Schnitt – nicht der 1. Januar, wenn die Motivation schon verbraucht ist.
 
-**Fixkosten-Nachmittag.** Strom, Gas, DSL, Mobilfunk, Haftpflicht, Giro. Alles, was älter als 12 Monate ist, in den Vergleich. Ziel: 30–80 € im Monat, die du in den Weihnachtstopf oder den Notgroschen schiebst.
+**Fixkosten-Nachmittag.** Strom, Gas, DSL, Mobilfunk, Haftpflicht, Giro. Alles, was älter als 12 Monate ist, in den Vergleich. Ziel: 30–80 € im Monat, die du in den Weihnachtstopf oder den [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) schiebst.
 
 **Kleidung und Sport.** Second-Hand für Herbstjacken, Skischuhe leihen statt kaufen, wenn du drei Tage in den Alpen bist. Kosten pro Nutzung.
 
@@ -100,7 +100,7 @@ Wenn der Herbst so läuft, startest du ins neue Jahr mit Puffer statt mit Rechnu
 
 Ein Unterkonto oder Umschlag „Dezember“ ab 1.9.: 4 × 50–150 € je nach Haushalt. Geschenke, Bahn, Essen. Was im Umschlag ist, darf raus. Was nicht drin ist, wird nicht per Dispo geholt. Das ist langweiliger als Black Friday und verhindert den Januar, in dem jeder Spartipp zu spät kommt.
 
-Parallel: Energie- und DSL-Vergleich im selben Monat, Ertrag auf dasselbe Konto. Der Herbst wird so zum Einzahl-Monat, nicht zum Ausgabe-Monat.
+Parallel: Energie- und [DSL-Vergleich](../../posts/2026-08-10-dsl-wechselbonus-sichern/) im selben Monat, Ertrag auf dasselbe Konto. Der Herbst wird so zum Einzahl-Monat, nicht zum Ausgabe-Monat.
 
 <!-- premium-length-2026-c -->
 
