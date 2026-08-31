@@ -155,8 +155,8 @@ Bei zwei parallel gebauten Längen-Systemen gilt ab jetzt:
 
 | Klasse | Hoheit | Korridor | Mechanik |
 |---|---|---|---|
-| **Posts** (normal) | `check_length.py` (Generierungs-System) | Floor **1.000** Wörter via `LENGTH_MIN_WORDS` (Repo-Variable, Default in Engine) – Optimum 800–1.400 | Heilung zur Generierungszeit |
-| **Pillar-Seiten** | `length_guard.py --scope pillar` (dieses System) | **2.500–4.000 Wörter**, Heil < 1.800 | Engine + Wochen-Backlog (3/Wo.) |
+| **Posts** (normal) | `check_length.py` + `length_guard.py` (SSOT `length_policy.py`) | Floor **10.000 Zeichen** · Optimum **12.000–18.000** · heil < 10.000 | Heilung zur Generierung + tägliche/wöchentliche Wache |
+| **Pillar-Seiten** | `length_guard.py` (SSOT `length_policy.py`) | Floor **12.000 Zeichen** · Optimum **15.000–32.000** · heil < 12.000 | Engine + tägliche Wache (Backlog 3) + Weekly (Backlog 5) |
 
 Damit: Keine Doppel-KI-Kosten, keine Ping-Pong-Loops, getrennte Strenge.
 Dash-Guards (dash_guard.py ≠ fix_dash_eol.py/fix_dash_und.py) koexistieren
@@ -164,11 +164,11 @@ bewusst – nachgewiesen disjunkte Muster.
 
 ---
 
-### length_guard.py – Längen-Korridore (Affiliate-Profi)
-| Typ | Ziel | Warnung | Selbstheilung unter … | **Zeichen-Empfehlung (Dauervorgabe)** |
+### length_guard.py – Längen-Korridore (Premium Google + Pinterest, 31.08.2026)
+| Typ | Ziel | Warnung | Selbstheilung unter … | **Zeichen-Dauervorgabe (Premium)** |
 |---|---|---|---|---|
-| posts | 1.200–2.200 Wörter | < 1.000 | 900 | **6.000–10.000 Zeichen** Fließtext |
-| pillar | 2.500–4.000 Wörter | < 1.800 | 1.800 | ≈ 17.500–28.000 Zeichen |
+| posts | 12.000–18.000 Zeichen (≈ 1.700–2.500 Wörter) | < 12.000 | **10.000** | Floor **10.000**, Optimum **12.000–18.000**, fett ab 22.000 |
+| pillar | 15.000–32.000 Zeichen (≈ 2.100–4.500 Wörter) | < 15.000 | **12.000** | Floor **12.000**, Optimum **15.000–32.000**, fett ab 38.000 |
 
 ### 📌 DAUERVORGABEN Veröffentlichung (festgelegt 19.08.2026 – verbindlich)
 
@@ -213,10 +213,14 @@ bewusst – nachgewiesen disjunkte Muster.
   sichtbar (auto-schließendes Issue). Report: `CADENCE-GATE-REPORT.md`.
   Beleg 26.08: 7 Verstöße geheilt (5 Off-Day + 2 Over-Cap) → 18 live,
   jeder Tag exakt 2–3; 6 Titel repariert + Covers neu gerendert.
-- **Empfohlene Zeichenlänge pro Blogartikel: 6.000–10.000 Zeichen** Fließtext
-  (≈ 800–1.400 Wörter; empirisch: Median 9.124 Zeichen bei 6,96 Zeichen/Wort).
-  Ausgewiesen und überwacht von `check_length.py` (Konstanten `OPT_CHARS_MIN/MAX`,
-  Env `LENGTH_OPT_CHARS_MIN/MAX`); harte Gates bleiben wortbasiert (Hoheitskarte oben).
+- **Empfohlene Zeichenlänge pro Blogartikel (Premium, 31.08.2026): 12.000–18.000 Zeichen**
+  Fließtext (≈ 1.700–2.500 Wörter; Floor 10.000 Zeichen). Begründung: Google
+  rankt YMYL-Finance-Ratgeber nach Tiefe, nicht nach Wortzahl – unter 10.000
+  Zeichen gelten Check24-/Tarif-Artikel gegen Portale als dünn. Pinterest
+  bewertet die Landingpage über Dwell-Time; Pin-Titel 40–100 Z. (opt. 60),
+  Pin-Description 220–500 Z. (opt. 280–480). SSOT: `scripts/length_policy.py`.
+  Überwacht von `check_length.py` (Posts) und `length_guard.py` (Posts+Pillar);
+  Engine-Prompt und Profi-Gate erzwingen denselben Floor bei der Geburt.
 
 Heilung = KI ergänzt **Mehrwert-Module** (kein Fülltext!): Rechenbeispiel mit Jahr,
 typische Fehler, Checkliste, +2 FAQ – eingefügt vor Fazit/Disclaimer, nach Gates.
@@ -239,14 +243,7 @@ Echtes Verfahren wie bei Grossverlagen (Percy/Chromatic): nur deutlich leichter.
 | M1 | Rate x Zeiteinheit x Dauer = Endbetrag **nachrechnen** („5–10 €/Tag x 14 Tage = 70–140 €") | Auto-Fix (Behauptung, letztes Zahlenpaar); weiche Formen (rund/ca.) nur melden |
 | M2 | Prozentformeln („X % von Y") | pruefen |
 
-Ausloeser: Artikel „Urlaub mit Kindern" (Beispielrechnung korrekt; dafuer
-der Schutz fuer künftige KI-Halluzinationen, die erfahrungsgemaeß bei
-Geldrechnungen eklatant sind).
-
-### lektor_guard.py – ✒️ Verlags-Lektorat (Zeitungs-/Buchniveau, neu 11.08., Zielredaktion am Abend)
-| Regel | Inhalt | Automatik |
-|---|---|---|
-| L1 | Wortduplikate („das das") | Auto-Fix (sichere Liste) + Komma-Lookbehind bei Artikeln |
+Ausloeser: Artikel „Urlaub mit Kindern" (Beispielrechnung korrekt; daichere Liste) + Komma-Lookbehind bei Artikeln |
 | L1rel | Relativkaskaden „die die meisten" | NIE auto – korrektes Deutsch! (nur Report) |
 | L2 | Füllphrasen (Bürokratie-Deutsch) mit Kanon-Ersatz | Auto |
 | L3 | Personenkonsistenz Sie↔du | **Nur KI** (--ai) mit Grammatik-Gate (du+Verb-muss) |
@@ -347,6 +344,18 @@ jeder Schreibaktion.
 | Wassertemperaturen | `BOT-STATUS.md` / `ENGINE-STATUS.md` jederzeit auf der Repo-Seite sichtbar |
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
+
+- **31.08.2026:** Premium-Zeichenlänge Google + Pinterest dauerhaft verdrahtet.
+  SSOT `scripts/length_policy.py`: Posts Floor 10.000 / Optimum 12.000–18.000,
+  Pillar Floor 12.000 / Optimum 15.000–32.000. Engine-Prompt 1.500–2.200 Wörter
+  (statt 800–1.200), Groq/Gemini `max_tokens` 6.000, Profi-Gate ≥ 1.400 Wörter
+  und ≥ 10.000 Zeichen, 5 H2 + 4 FAQ. `length_guard` heilt unter dem Floor
+  (nicht erst unter 7.500). Verdrahtung: Content-Engine Phase 2, Blog-Health
+  (täglich Backlog 3), SEO-Weekly (Backlog 5), Blog-Doktor-Kette, Publish-Gate
+  (`check_length.py`). Pinterest Pin-Description-Minimum 220 Zeichen.
+  Workflow-Verdrahtung (Health täglich Backlog 3, Engine `--scope all`,
+  SEO-Weekly Backlog 5): `patches/premium-length-2026-08-31-workflows.patch`
+  (einmalig anwenden, braucht `workflows`-Recht).
 
 - **27.08.2026:** `heading_guard.py` neu – Überschriften-Hygiene H1–H3
   (Anlass: Live-Befund „Fazit:<br> Ein 30-Minuten-Vergleich“, TOC-Artefakt

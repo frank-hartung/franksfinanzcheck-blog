@@ -38,11 +38,12 @@ import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 import groq_config
-MIN_WORDS = int(os.environ.get("LENGTH_MIN_WORDS") or 700)  # env-steuerbar (Audit 11.08.)
-# Zielzone relativ zum Floor (Audit 11.08.): nie unter der Schwelle landen,
-# sonst Heilungs-Loop. Floor 1000 -> Ziel 1150-1350.
-TARGET_MIN = None  # berechnet sich aus MIN_WORDS
-TARGET_MAX = None  # "" 
+import length_policy as lp
+MIN_CHARS = int(os.environ.get("LENGTH_MIN_CHARS") or lp.POSTS["target_min_chars"])
+MIN_WORDS = int(os.environ.get("LENGTH_MIN_WORDS") or max(1400, MIN_CHARS // 7))
+# Zielzone relativ zum Floor: nie unter der Schwelle landen, sonst Heilungs-Loop.
+TARGET_MIN = None
+TARGET_MAX = None 
 
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
@@ -88,7 +89,7 @@ def _retry(fn, attempts=3, base_delay=4.0):
 
 def call_groq(prompt):
     return groq_config.chat(
-        prompt, temperature=0.4, max_tokens=4000, raise_on_error=True,
+        prompt, temperature=0.4, max_tokens=6000, raise_on_error=True,
     )
 
 
@@ -124,6 +125,12 @@ def article_words(path):
     return clean_words(body), body
 
 
+def article_chars(path):
+    c = open(path, encoding="utf-8").read()
+    _w, chars = lp.measure(c)
+    return chars
+
+
 def build_prompt(title, keywords, body, target_min, target_max):
     kw = ", ".join(keywords[:5]) if keywords else ""
     return (
@@ -150,7 +157,7 @@ def build_prompt(title, keywords, body, target_min, target_max):
     )
 
 
-def extend_article(path, min_words, dry=False):
+def extend_article(path, min_words, dry=False, min_chars=None):
     """Versucht, einen Artikel zu verlängern. Rückgabe (ok, info)."""
     content = open(path, encoding="utf-8").read()
     parts = content.split("---", 2)
@@ -159,8 +166,10 @@ def extend_article(path, min_words, dry=False):
     front = parts[1]
     body = parts[2]
     words, _ = article_words(path)
-    if words >= min_words:
-        return True, f"bereits {words} Wörter (≥ {min_words})"
+    chars = article_chars(path)
+    floor_chars = min_chars if min_chars is not None else MIN_CHARS
+    if words >= min_words and chars >= floor_chars:
+        return True, f"bereits {words} Wörter / {chars} Zeichen"
 
     m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', front, re.M)
     title = m.group(1).strip() if m else ""
@@ -193,8 +202,10 @@ def extend_article(path, min_words, dry=False):
         nh2 = len(re.findall(r"^##\s", new_body, re.M))
         low = new_body.lower()
         floskeln = [f for f in PROFI_FLOSKELN if f in low]
-        if nw < max(min_words, words + 50):
-            print(f"    ✗ {name}: nur {nw} Wörter (Ziel ≥ {max(min_words, words + 50)})")
+        new_chars = len(re.sub(r"\s+", " ", new_body).strip())
+        if nw < max(min_words, words + 50) or new_chars < floor_chars:
+            print(f"    ✗ {name}: nur {nw} Wörter / {new_chars} Zeichen "
+                  f"(Ziel ≥ {max(min_words, words + 50)} Wörter und ≥ {floor_chars} Zeichen)")
             continue
         if nh2 < 4:
             print(f"    ✗ {name}: nur {nh2} H2-Abschnitte")
@@ -215,16 +226,22 @@ def extend_article(path, min_words, dry=False):
 def main():
     global TARGET_MIN, TARGET_MAX
     min_words = MIN_WORDS
+    min_chars = MIN_CHARS
     TARGET_MIN = min_words + 150
-    TARGET_MAX = min_words + 350
+    TARGET_MAX = min_words + 800
     if "--min" in sys.argv:
         min_words = int(sys.argv[sys.argv.index("--min") + 1])
+    if "--min-chars" in sys.argv:
+        min_chars = int(sys.argv[sys.argv.index("--min-chars") + 1])
+        min_words = max(min_words, min_chars // 7)
+        TARGET_MIN = min_words + 150
+        TARGET_MAX = min_words + 800
     dry = "--dry" in sys.argv
     only = None
     if "--slug" in sys.argv:
         only = sys.argv[sys.argv.index("--slug") + 1]
 
-    heal_per_run = int(os.environ.get("LENGTH_HEAL_PER_RUN") or "2")
+    heal_per_run = int(os.environ.get("LENGTH_HEAL_PER_RUN") or "8")
     files = sorted(glob.glob(os.path.join(BLOG_DIR, "content", "posts", "*", "index.md")))
     targets = []
     for f in files:
@@ -232,10 +249,11 @@ def main():
         if only and slug != only:
             continue
         w, _ = article_words(f)
-        if w < min_words:
+        c = article_chars(f)
+        if w < min_words or c < min_chars:
             targets.append((f, slug, w))
     if not targets:
-        print(f"Keine Artikel unter {min_words} Wörtern – alles im Rahmen.")
+        print(f"Keine Artikel unter {min_words} Wörtern / {min_chars} Zeichen – alles im Rahmen.")
         return 0
 
     if len(targets) > heal_per_run:
@@ -246,7 +264,7 @@ def main():
     failed = []
     for f, slug, w in targets[:heal_per_run]:
         print(f"  ▶ {slug} ({w} Wörter)")
-        ok, info = extend_article(f, min_words, dry=dry)
+        ok, info = extend_article(f, min_words, dry=dry, min_chars=min_chars)
         if ok:
             ok_count += 1
         else:

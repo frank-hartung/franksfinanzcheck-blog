@@ -428,14 +428,15 @@ def profi_quality_ok(body, keywords=None):
     text = re.sub(r"\s+", " ", text).lower()
     words = len(re.findall(r"\w+", text))
 
-    if words < 700:
-        problems.append(f"nur {words} Wörter (Profi: 700+)")
+    chars = len(re.sub(r"\s+", " ", body).strip())
+    if words < 1400 or chars < 10000:
+        problems.append(f"nur {words} Wörter / {chars} Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen)")
     h2 = len(re.findall(r"^##\s", body, re.M))
-    if h2 < 4:
-        problems.append(f"nur {h2} H2-Abschnitte")
+    if h2 < 5:
+        problems.append(f"nur {h2} H2-Abschnitte (Premium: ≥5)")
     faq = len(re.findall(r"^###\s.*\?", body, re.M))
-    if faq < 2:
-        problems.append(f"nur {faq} FAQ-Fragen")
+    if faq < 4:
+        problems.append(f"nur {faq} FAQ-Fragen (Premium: ≥4)")
     floskeln = [f for f in PROFI_FLOSKELN if f in text]
     if floskeln:
         problems.append(f"KI-Floskeln: {', '.join(floskeln[:2])}")
@@ -504,7 +505,7 @@ def call_groq(prompt):
         prompt,
         system=SYSTEM_PROMPT,
         temperature=0.9,
-        max_tokens=1800,
+        max_tokens=6000,
         raise_on_error=True,
     )
 
@@ -657,10 +658,11 @@ Ab Zeile 3: Der Artikel in Markdown:
 - Keine Überschrift für den Titel am Anfang (Titel steht schon in Zeile 1)
 - Einleitung mit starkem HAKEN: Nutzenversprechen, konkrete Frage oder überraschende Zahl –
   KEIN generischer Einstieg ("In der heutigen Zeit…", "Geld sparen ist wichtig…")
-- 4 bis 6 Abschnitte mit H2-Überschriften (##) – strukturiere sie ANDERS als die Pin-Vorlage
+- 5 bis 8 Abschnitte mit H2-Überschriften (##) – strukturiere sie ANDERS als die Pin-Vorlage
+- Pflicht-Module (kein Fülltext): ein Rechenbeispiel mit Jahr, eine Tabelle ODER Checkliste, ein Abschnitt „Typische Fehler“
 - Mindestens EINE Liste oder Tabelle (Mehrwert, Scannability)
-- Am Ende ein FAQ-Bereich: "## Häufige Fragen" mit 3 Fragen als H3 und Antworten
-- 800 bis 1.200 Wörter insgesamt (mindestens 700 – darunter gilt der Artikel als zu kurz und wird abgelehnt) – substanziell, aber ohne Blabla
+- Am Ende ein FAQ-Bereich: "## Häufige Fragen" mit 5 Fragen als H3 und Antworten
+- 1.500 bis 2.200 Wörter insgesamt (mindestens 1.400 Wörter / 10.000 Zeichen – darunter gilt der Artikel als zu kurz und wird abgelehnt). Zielkorridor Premium: 12.000–18.000 Zeichen Fließtext. Substanz, keine Floskeln.
 - Absätze max. 3–4 Sätze, aktive Sprache ("du"), kurze Sätze (max. ~20 Wörter)
 - ANREDE: {anrede_var} – konsistent durchgehend verwenden
 - PRAXISBEZUG (E-E-A-T): konkrete, plausible Alltagsbeispiele; eigene Erfahrung als

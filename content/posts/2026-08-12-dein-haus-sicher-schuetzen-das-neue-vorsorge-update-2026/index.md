@@ -1,4 +1,5 @@
 ---
+lastmod: 2026-08-31
 title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
 description: "Dein Haus sicher schützen: das Vorsorge-Update 2026 für Hausrat & Elementarschäden. So schützt du deine Immobilie vor Unwettern und sparst bares Geld."
 date: 2026-08-12T08:15:00Z
@@ -80,6 +81,38 @@ Entgegen der landläufigen Meinung ist eine lückenlose Absicherung erstaunlich 
 | **Effektive Kosten pro Monat** | **12,92 € / Monat** | **8,58 € / Monat** |
 
 Wer neben dem Hausrat auch die persönliche Absicherung auf Vordermann bringen will, sollte einen Blick in unsere [Erklärung zur Privat­haftpflicht­versicherung](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) werfen oder die Übersicht im [Ratgeber: Versicherungen](../../pillar/versicherungen/) durchstöbern.
+
+<!-- premium-length-2026 -->
+
+## Drei Säulen, die 2026 zusammengehören
+
+**1. Gebäude.** Feuer, Leitungswasser, Sturm/Hagel, Elementar. Ohne Elementar ist die Starkregen-Lücke offen. Gleitender Neuwert, grobe Fahrlässigkeit, Ableitungsrohre, Photovoltaik.
+
+**2. Hausrat.** Bewegliche Dinge, Fahrräder (Klausel), Wertsachen-Grenze, grobe Fahrlässigkeit, Überspannung. Unterversicherung vermeiden: Summe = was Neuanschaffung wirklich kostet, nicht was die Einrichtung vor 15 Jahren gekostet hat.
+
+**3. Haftpflicht.** Für Eigentümer zusätzlich Haus- und Grundbesitzerhaftpflicht, wenn vermietet oder das Gebäude nicht nur selbst bewohnt wird. Streupflicht, Dachziegel, nicht geräumter Weg – das landet nicht in der Privat­haftpflicht allein, wenn ein Objekt dazwischenhängt.
+
+## Elementar 2026: Pflichtgefühl gegen Markt
+
+Politisch wird über Pflichtversicherung diskutiert, abgeschlossen ist sie nicht flächendeckend. Praktisch heißt das: Wer in ZÜRS 3–4 unversichert bleibt, trägt ein existenzielles Risiko. Angebote einholen, auch wenn sie teuer sind – und parallel Rückstauklappen, Geländeanpassung, wichtige Technik nicht im Keller. Prävention senkt nicht immer die Prämie, aber den Schaden.
+
+## Klauseln, die nach dem Schaden zu spät kommen
+
+- Neuwert statt Zeitwert bei Hausrat
+- Aufräum- und Abbruchkosten ausreichend hoch
+- Hotelkosten nach Unbewohnbarkeit, mind. 150–200 Tage
+- Datenrettung und Schlossänderung nach Einbruch
+- Ableitungsrohre auf dem Grundstück
+
+Ein Vorsorge-Update ist kein neuer Vertrag um des Wechsels willen. Es ist ein Nachmittag mit den drei PDFs, einem Marker und der Frage: Würde ich das morgen nach einem Sturm noch für fair halten? Wenn nein, vergleichen und nahtlos ersetzen.
+
+<!-- premium-length-2026-b -->
+
+## Der 60-Minuten-Vorsorge-Abend für Eigentümer
+
+Minute 0–15: Drei PDFs öffnen (Gebäude, Hausrat, Haftpflicht). Deckung, SB, Elementar ja/nein, Datum der letzten Anpassung. Minute 15–30: Wohnfläche, Wert 1914 oder Wertermittlung, PV- und WP-Liste. Minute 30–45: Fotos von Dach, Kellerabgang, Rückstauklappe – nicht für Instagram, für den Schadenfall. Minute 45–60: Vergleichsfilter setzen oder Termin mit Makler, der Klauseln erklärt, nicht nur den Preis.
+
+Wer das einmal im Jahr macht, braucht kein „Vorsorge-Update“-Gefühl mehr, sondern eine Checkliste mit Datum. Genau das unterscheidet ein gepflegtes Risiko von Hoffnung.
 
 ## Fazit: Dein Haus mit zeitgemäßen Klauseln schützen
 

@@ -1,4 +1,5 @@
 ---
+lastmod: 2026-08-31
 title: "Versicherungen: Der große Ratgeber für den richtigen Schutz"
 description: "Versicherungen im Überblick: Privathaftpflicht, Wohngebäude, Hausrat, Kfz, Zahnzusatz und Unfallversicherung – welcher Schutz wirklich unverzichtbar ist."
 date: 2026-08-08
@@ -82,6 +83,77 @@ Jedes Jahr im Herbst werben Kfz-Versicherer mit neuen Konditionen. Da sich Typkl
 👉 **Kfz-Versicherung vergleichen und Jahresprämie senken:** [**→ Jetzt Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)
 
 ---
+
+<!-- premium-length-2026 -->
+
+## Die Pyramide in der Praxis 2026
+
+**Existenz (immer):** Privat­haftpflicht, Krankenversicherung (gesetzlich/privat wie bestehend), bei Eigentum Wohngebäude inkl. Elementar-Entscheidung.
+
+**Hoch (oft):** Berufsunfähigkeit je nach Beruf und Absicherung durch den Staat, Kfz wenn Auto, Hausrat wenn der Hausstand teurer ist als der Selbstbehalt-Schmerz.
+
+**Niedrig (selten Pflicht):** Zahnzusatz nach Gebiss und Eigenanteil, Unfall nur bei Lücken zur BU, Glas, Handy, Garantieverlängerung – meist schlechte Rendite.
+
+Wer von unten nach oben kauft, spart die 12 Mini-Policen, die im Schaden nicht tragen.
+
+## Cluster-Reihenfolge
+
+1. [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
+2. [Wohngebäude-Vergleich](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/)
+3. [Haus-Vorsorge 2026](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/)
+4. [Kfz-Vergleich](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/)
+
+Kfz hat den Kalender (30.11.). Haftpflicht hat keinen – und genau deshalb bleibt sie jahrelang unangetastet, obwohl 20 € und drei Klauseln fehlen.
+
+## Rechenbeispiel Haushalt mit Auto und Eigentum
+
+Haftpflicht Familie 90 €, Gebäude 520 € inkl. Elementar, Hausrat 180 €, Kfz 640 € nach Vergleich (vorher 1.050 €). Summe 1.430 € statt 1.840 €. Differenz **410 €**, und die Deckung ist besser (50 Mio., Elementar, grobe Fahrlässigkeit). Sparen heißt hier nicht streichen, sondern passen.
+
+## Was du 2026 nicht brauchst
+
+Brillenversicherung bei 120 € Rahmen alle drei Jahre. Kaffeemaschinen-Police. Reise-Einzelabschlüsse, wenn du drei Reisen machst – Jahrespolice rechnen. Restschuldversicherung auf den Kredit, bevor der Kredit selbst verglichen ist.
+
+## FAQ-Ergänzung
+
+### Kann ich alle Versicherungen bei einem Konzern bündeln?
+
+Bündelrabatt nur, wenn er die Summe der besten Einzelpolicen unterbietet. Haftpflicht woanders, Kfz woanders ist normal und oft günstiger.
+
+### Wie oft vergleichen?
+
+Kfz jedes Jahr zum Stichtag. Haftpflicht alle 2–3 Jahre oder nach Familienänderung. Gebäude nach Sanierung, Photovoltaik, Wertsteigerung – sonst Unterversicherung.
+
+Versichern heißt: existenzielle Löcher schließen. Alles andere ist ein Abo mit anderem Namen.
+
+<!-- premium-length-2026-b -->
+
+## Wechselprozess ohne Deckungslücke
+
+Neue Police schriftlich bestätigt, Beginn-Datum = Ende-Datum alt + 0 Tage Lücke. Bei Kfz oft Jahreswechsel, bei Haftpflicht jederzeit mit Frist. Vorschäden angeben. Bank/Gläubiger bei Gebäude informieren, Abtretung mitziehen.
+
+Kündigung alt erst nach Bestätigung neu. Screenshot + PDF im Ordner „Versicherungen 2026“. Das ist unspektakulär und verhindert den unversicherten Dienstag.
+
+## Selbstbeteiligung als Hebel, nicht als Falle
+
+500 € SB bei Kfz-Vollkasko lohnt, wenn du Schäden unter 500 € selbst trägst und die Prämie klar sinkt. 1.500 € SB bei Hausrat kann bei einem 800-€-Fahrraddiebstahl bedeuten, dass du faktisch unversichert warst. SB an die Reserve koppeln: SB nie höher als 10 % des Notgroschens.
+
+## Inflation der Summen
+
+Hausrat alle 3 Jahre anpassen. Gebäude gleitend, trotzdem nach Anbau/PV prüfen. Haftpflicht 50 Mio. als Standard, nicht 5 Mio. aus einem Altvertrag 2012. Unterversicherung ist der stille Rabatt, den du im Schaden teuer zurückzahlst.
+
+## Was Vergleichsportale nicht filtern
+
+Annahmequoten in Elementarzonen, Wartezeiten Zahn, Klausel-Wortlaut grobe Fahrlässigkeit, Deliktunfähigkeit Kinder. Deshalb nach dem Preisvergleich das Bedingungswerk der Top-2 lesen – 20 Minuten, die 20.000 € Schadenabzug verhindern können.
+
+<!-- premium-length-2026-c -->
+
+## Ein Nachmittag, vier Verträge, keine Lücke
+
+Haftpflicht, Gebäude oder Hausrat, Kfz wenn Auto, Rest ehrlich in die Pyramide. PDF-Ordner, Klauseln markieren, SB an den Notgroschen koppeln, Elementar bewusst ja oder nein. Neue Police bestätigt, alte gekündigt, 0 Tage Lücke. Kfz in KW 42, Rest wenn sich Leben ändert oder alle 24–36 Monate.
+
+Unterversicherung ist der Rabatt, den du im Schaden zurückzahlst. Summen anfassen nach PV, Anbau, neuem Hausstand. 50 Millionen Haftpflicht als Default, nicht als Luxus. Mini-Policen für Brille und Kaffeemaschine fliegen, bevor du über „zu teure Versicherungen“ klagst.
+
+Diese Pillar ist fertig, wenn du die vier PDFs findest, ohne zu suchen, und das Datum der letzten Prüfung kennst.
 
 ## Häufige Fragen zu Versicherungen
 

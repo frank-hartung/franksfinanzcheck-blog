@@ -53,6 +53,7 @@ REPORT = ROOT / "LENGTH-REPORT.md"
 HISTORY = ROOT / "data" / "length_history.jsonl"
 
 import groq_config
+import length_policy as lp
 
 GROQ_KEY = groq_config.api_key()
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
@@ -74,28 +75,9 @@ if "--scope" in sys.argv:
             sys.exit("FEHLER: --scope muss pillar|posts|all sein")
 BACKLOG = int(sys.argv[sys.argv.index("--backlog") + 1]) if "--backlog" in sys.argv else 0
 
-POLICY = {
-    "posts":  {"target_min_chars": 10000, "target_max_chars": 20000, "warn_chars": 8000, "heal_chars": 7500,  "fat_chars": 25000},
-    "pillar": {"target_min_chars": 20000, "target_max_chars": 35000, "warn_chars": 15000, "heal_chars": 12000, "fat_chars": 40000},
-}
-
-
-def classify(path: Path) -> str:
-    return "pillar" if "pillar" in path.parts else "posts"
-
-
-def measure(text: str) -> tuple[int, int]:
-    """Wörter & Zeichen des eigentlichen Artikels (ohne Front-Matter/Code/Tabellen-Sep)."""
-    t = text
-    if t.startswith("---"):
-        parts = t.split("---", 2)
-        if len(parts) >= 3:
-            t = parts[2]
-    t = re.sub(r"```.*?```", "", t, flags=re.S)
-    t = re.sub(r"^\|[-| :]*\|$", "", t, flags=re.M)
-    chars = len(re.sub(r"\s+", " ", t).strip())
-    words = len(re.sub(r"[|#*>\[\]()]", " ", t).split())
-    return words, chars
+POLICY = lp.POLICY
+classify = lp.classify
+measure = lp.measure
 
 
 def fm_field(text: str, name: str) -> str:
@@ -157,7 +139,7 @@ eines konkreten Anbieters; keine Wiederholung vorhandener Inhalte; Ton: hilfsber
 Einsteiger-tauglich. Gib NUR Markdown aus."""
 
     addition = (ai(system, prompt) or "").strip()
-    if not addition or len(addition.split()) < need * 0.5:
+    if not addition or len(addition.split()) < need_words * 0.5:
         return None, 0
 
     # Einfügepunkt: vor „## Fazit", sonst vor endständigem Disclaimer/---, sonst ans Ende
@@ -227,7 +209,7 @@ def main() -> None:
         typ = classify(p)
         pol = POLICY[typ]
         status = ("🔴 heilen" if c < pol["heal_chars"] else
-                  "🟡 kurz" if c < pol["warn_chars"] else
+                  "🟡 kurz" if c < pol["opt_min_chars"] else
                   "🟢 ok" if c <= pol["fat_chars"] else "🟠 lang")
         row = {"file": str(p.relative_to(ROOT)), "typ": typ, "w": w, "c": c, "status": status}
         rows.append(row)
@@ -261,8 +243,8 @@ def main() -> None:
          f"**Stand:** {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC · Modus: {mode}", "",
          f"**Geprüft:** {len(rows)} Seiten | 🔴 {buckets['🔴']} · 🟡 {buckets['🟡']} · 🟢 {buckets['🟢']} · 🟠 {buckets['🟠']}",
          "",
-         "**Korridor (Affiliate-Profi):** Posts 10.000–20.000 Zeichen (heil < 7.500) · "
-         "Pillar 20.000–35.000 Zeichen (heil < 12.000)", ""]
+         "**Korridor (Premium Google+Pinterest):** Posts "
+         + lp.corridor_label("posts") + " · Pillar " + lp.corridor_label("pillar"), ""]
     if healed:
         L += ["## ✅ Geheilt (Selbstheilung, KI-Erweiterung mit Gate)", ""]
         L += [f"- `{n}`: {a} → {b} Zeichen" for n, a, b in healed]
