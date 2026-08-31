@@ -1,6 +1,6 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-08-31 17:10 UTC · Modus: FIX
+**Stand:** 2026-08-31 17:11 UTC · Modus: FIX
 
 🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
 
@@ -14,10 +14,10 @@
 - `content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md` Zeile 26: S3-Konjunktion
 - `content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md` Zeile 102: S3-Konjunktion
 - `content/posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/index.md` Zeile 103: S3-Konjunktion
-- `content/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/index.md` Zeile 95: S3-Konjunktion
-- `content/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/index.md` Zeile 107: S1-Doppelschub
+- `content/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/index.md` Zeile 96: S3-Konjunktion
+- `content/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/index.md` Zeile 108: S1-Doppelschub
 - `content/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/index.md` Zeile 132: S3-Konjunktion
-- `content/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/index.md` Zeile 91: S3-Konjunktion
+- `content/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/index.md` Zeile 92: S3-Konjunktion
 - `content/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/index.md` Zeile 99: S3-Konjunktion
 - `content/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/index.md` Zeile 149: S3-Konjunktion
 - `content/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/index.md` Zeile 166: S3-Konjunktion

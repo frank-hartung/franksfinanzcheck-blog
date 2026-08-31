@@ -1,6 +1,6 @@
 # 🎭 STIL-REPORT (stil_guard.py)
 
-**Stand:** 2026-08-31 17:10 UTC
+**Stand:** 2026-08-31 17:11 UTC
 **Artikel:** 25 · **mit Stil-Funden:** 25
 
 ## 📐 Flotten-Lesbarkeit (LIX)
@@ -20,9 +20,9 @@
 ### 📗 Leicht lesbar (Top 5)
 
 - `2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann` — LIX 50.4
-- `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` — LIX 51.0
+- `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` — LIX 51.1
 - `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` — LIX 51.8
-- `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` — LIX 52.1
+- `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` — LIX 52.2
 - `2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel` — LIX 52.8
 
 ## 🔧 Fundstellen (fuer redaktionelle Politur mit --ai-budget)
@@ -45,7 +45,7 @@
 ### `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst`
 - S1 Satzanfang-Echo: „die“ ×4
 - S4 Weiche-Wolke 6.2/100W
-- S6 LIX 57.3 > 55 (schwer lesbar)
+- S6 LIX 57.4 > 55 (schwer lesbar)
 
 ### `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub`
 - S1 Satzanfang-Echo: „die“ ×14

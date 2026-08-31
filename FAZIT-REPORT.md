@@ -1,6 +1,6 @@
 # 🔨 FAZIT-REPORT (fazit_schmiede.py)
 
-**Stand:** 2026-08-31 17:10 UTC · Modus: REPORT
+**Stand:** 2026-08-31 17:11 UTC · Modus: FIX
 
 **Geprüfte Artikel:** 25 · **Fehlende Fazits:** 0 · **Fehlende FAQs:** 0
 **Automatisch geheilt:** 0

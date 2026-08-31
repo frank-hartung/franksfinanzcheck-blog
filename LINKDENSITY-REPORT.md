@@ -1,6 +1,6 @@
 # 🔗 LINKDENSITY-REPORT (link_density_guard.py)
 
-**Stand:** 2026-08-31 17:10 UTC · Modus: FIX
+**Stand:** 2026-08-31 17:11 UTC · Modus: FIX
 
 | Kennzahl | Wert | Goldkorridor |
 |---|---|---|
@@ -12,7 +12,6 @@
 | Ziel-Duplikate (heilbar offen) | 0 | 0 |
 | Ziel-Duplikate (strukturell, unheilbar) | 1 | Info |
 
-✅ **Selbstheilung Duplikate:** 7 Folge-Links entlinkt (Text blieb).
 
 ---
 _Goldkorridor-Regel: siehe QUALITAETS-REGELWERK §12.08(7)._
