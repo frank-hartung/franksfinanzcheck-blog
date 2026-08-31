@@ -62,6 +62,14 @@ except BaseException as _auth_err:  # noqa: BLE001 – auch SystemExit aus defek
     TOKEN = os.environ.get("PINTEREST_ACCESS_TOKEN", "")
 BOARD_ID = os.environ.get("PINTEREST_BOARD_ID", "")
 ROTATE_DAYS = int(os.environ.get("PINTEREST_ROTATE_DAYS", "60"))
+# T9 ANTI-FLOODING (24.08.2026 aus 08c97ab8 zurueckgeholt, 31.08. erneut verifiziert):
+# spam_guard limitiert pro Stunde/Tag (A1: 10/h, 40/Tag), aber nichts bremst die
+# Einzelaufrufe innerhalb EINES Laufs - 10 Pins in Sekundenfolge sind genau das Muster,
+# das Pinterest als "Link leitet an Spam-Webseite weiter" meldet. Cap + Pause schliessen
+# genau diese Lücke, die der Trust-Shield (T9) meldet.
+PINS_PRO_TAG = max(1, min(3, int(os.environ.get("PINS_PRO_TAG", "2"))))
+PIN_PAUSE_S = max(45, int(os.environ.get("PIN_PAUSE_S", "45")))
+
 CREATE_BOARDS = os.environ.get("PINTEREST_CREATE_BOARDS", "1") != "0"
 QUEUE_FILE = os.path.join(BLOG_DIR, "data", "pin_queue.yaml")
 STATUS_FILE = os.path.join(BLOG_DIR, "PIN-STATUS.md")
@@ -441,7 +449,8 @@ def main():
             board = board_name_for(p, board_config)
             print(f"  - {p['slug']} → [{board}] {pin_text(p)[:80]}…")
         print(f"Würde {len(unpinned)} Pins erstellen (Multi-Board-Routing "
-              f"{'aktiv' if board_config[0] else 'aus: Fallback-Board'}).")
+              f"{'aktiv' if board_config[0] else 'aus: Fallback-Board'}). "
+              f"Im echten Lauf greift das T9-Cap: {PINS_PRO_TAG}/Lauf, {PIN_PAUSE_S}s Pause.")
         return 0
 
     if not TOKEN:
@@ -450,11 +459,12 @@ def main():
         # beim Posten per Routing ermittelt (Board-Auto-Creation).
         queue = [{"slug": p["slug"], "title": pin_title_of(p), "text": pin_text(p),
                   "cover": p["cover"], "board": board_name_for(p, board_config)}
-                 for p in unpinned[:10]]
+                 for p in unpinned[:PINS_PRO_TAG]]
         n = write_queue(queue)
         lines = [f"**Modus:** Queue (kein PINTEREST_ACCESS_TOKEN)",
                  "", f"- {n} Pins vorbereitet in `data/pin_queue.yaml`",
                  f"- {len(unpinned)} Artikel warten aufs Posting",
+                 f"- Rate-Limit: max. {PINS_PRO_TAG} Pins/Lauf, {PIN_PAUSE_S}s Pause",
                  f"- {len(refresh)} Refresh-Kandidaten (älter als {ROTATE_DAYS} Tage)",
                  "",
                  "**So aktivierst du das Posting:** Pinterest Developer App → Token als "
@@ -486,7 +496,8 @@ def main():
         return 1
 
     ok, fail = 0, 0
-    for p in unpinned[:10]:
+    batch = unpinned[:PINS_PRO_TAG]
+    for i, p in enumerate(batch):
         board_name = board_name_for(p, board_config)
         bid = board_map.get(board_name) or board_map.get(
             board_config[2]) or BOARD_ID
@@ -516,6 +527,10 @@ def main():
                 "board": board_name, "source": "engine"})
             ok += 1
             print(f"  ✓ Pin erstellt: {p['slug']} → [{board_name}]")
+            # T9: Pause nur nach tatsächlicher Erstellung, nicht nach Skip/Fehler -
+            # und nicht nach dem letzten Pin des Batches.
+            if i + 1 < len(batch):
+                time.sleep(PIN_PAUSE_S)
         except urllib.error.HTTPError as e:
             fail += 1
             detail = e.read().decode()[:150] if hasattr(e, "read") else ""
@@ -529,6 +544,7 @@ def main():
     write_status([f"**Modus:** Auto-Posting (Multi-Board, "
                   f"{len(board_map) or 1} Boards aufgelöst)",
                   "", f"- {ok} Pins erstellt, {fail} Fehler",
+                  f"- Rate-Limit: max. {PINS_PRO_TAG}/Lauf, {PIN_PAUSE_S}s Pause",
                   f"- {len(refresh)} Refresh-Kandidaten für die nächste Runde"])
     print(f"Fertig: {ok} Pins erstellt, {fail} Fehler.")
     return 0 if fail == 0 else 1

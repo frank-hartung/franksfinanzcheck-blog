@@ -109,3 +109,8 @@ Nach 48 h Pause + URL-Debugger ohne Klärung:
 | T12 | p:domain_verify |
 
 Report: `PINTEREST-TRUST-REPORT.md`. Läuft im Pinterest-Watchdog (vor Hugo-Build).
+
+T9 wird in `scripts/pinterest_engine.py` gesetzt (`PINS_PRO_TAG`, `PIN_PAUSE_S`, per
+Environment korrigierbar). Der Watchdog-Aufruf des Shields selbst steht bewusst noch aus –
+die Workflow-Datei ist aus der betreuenden Arena-Session nicht schreibbar. Bis dahin prüft
+der Shield manuell (bzw. bei jedem Shield-Lauf) und meldet Befunde im Report.
