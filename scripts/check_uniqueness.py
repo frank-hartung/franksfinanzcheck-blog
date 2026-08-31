@@ -167,16 +167,29 @@ def run_selftest() -> list:
 
 
 def heal_twin(path_younger: str) -> bool:
-    """Setzt den juengeren Zweitling auf draft:true (stopft Publication)."""
-    with open(path_younger, encoding="utf-8") as f:
-        src = f.read()
-    m = re.search(r"(?m)^draft:\s*false\s*$", src)
-    if not m:
-        return False
-    src = src[:m.start()] + "draft: true" + src[m.end():]
-    with open(path_younger, "w", encoding="utf-8") as f:
-        f.write(src)
-    return True
+    """Setzt den juengeren Zweitling auf draft:true (stopft Publication) und
+    markiert die Zurückhaltung als BEWUSST (park_state.hold).
+
+    Warum das Markieren nötig ist: ohne Grund-Feld sähe der Post für die
+    Kadenz-Wache aus wie ein verlegendes Re-Queue-Flag und würde beim nächsten
+    Slot wieder promotingiert – das Qualitäts-Gate würde ihn erneut halten:
+    Ping-Pong statt Zustand. Mit `cadence_grund` ist die Hemmung explizit und
+    sichtbar (CADENCE-GATE-REPORT.md, Abschnitt Re-Queue-Integrität)."""
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import park_state
+    except Exception:                      # Fallback: nur draft (altes Bild)
+        with open(path_younger, encoding="utf-8") as f:
+            src = f.read()
+        m = re.search(r"(?m)^draft:\s*false\s*$", src)
+        if not m:
+            return False
+        with open(path_younger, "w", encoding="utf-8") as f:
+            f.write(src[:m.start()] + "draft: true" + src[m.end():])
+        return True
+    return park_state.hold(path_younger,
+                           "duplikat (same-day-twin: älterer Titel ist "
+                           "kanonisch, Zusammenführung nötig)")
 
 
 def main():

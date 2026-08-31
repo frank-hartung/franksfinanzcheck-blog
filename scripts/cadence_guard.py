@@ -27,6 +27,17 @@ Warum diese Wache existiert (Befund 26.08.2026):
                                 nie veröffentlicht
     4. blog-health-daily.yml  – tägliche Selbstheilung (auch ohne Deploy)
 
+Park-Zustände (SSOT scripts/park_state.py, 31.08.2026):
+  Jeder Zurückstufungs-Schreibvorgang nennt seinen Grund, damit ein geparkter
+  Post nie wieder mehrdeutig ist:
+    queue  draft:true + cadence_wait:true        → wird automatisch gefördert
+    hold   draft:true + cadence_grund (ohne wait)→ braucht Korrektur, wird
+           bewusst NICHT gefördert (publish_gate, check_uniqueness)
+    manual draft:true ohne cadence_*             → Franks Entwurf, nie anfassen
+    lost   draft:true + cadence_demoted ohne wait/grund → Bug (Flag verloren,
+           Post für immer unsichtbar): wird von --fix / --integrity rearmt.
+  Der Selbsttest friert alle fünf Zustände + Idempotenz + Promotion-Hygiene ein.
+
 Selbstheilung (sofortig, konvergent, nichts geht verloren):
   • Verstöße (off-day published / > MAX an einem Tag) werden auf
     `draft: true` zurückgestuft UND mit `cadence_wait: true` in die
@@ -49,6 +60,10 @@ Aufruf:
   python3 scripts/cadence_guard.py --check     # nur prüfen, Exit 1 bei Verstoß
   python3 scripts/cadence_guard.py --fix       # prüfen + heilen (Zurückstufung
                                                #   + Re-Queue + Report)
+  python3 scripts/cadence_guard.py --integrity # nur Park-Zustände klären
+                                               #   (rearmen/bereinigen, ohne
+                                               #   Kadenz-Heilung und ohne
+                                               #   Promotion – für Wartung)
   python3 scripts/cadence_guard.py --requeue   # wartende Posts bis zum
                                                #   Tageslimit promoten (Engine)
   python3 scripts/cadence_guard.py --selftest  # Selbsttest mit Fixtures
@@ -71,6 +86,11 @@ REPORT_PATH = os.path.join(BLOG_DIR, "CADENCE-GATE-REPORT.md")
 
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import slug_of, frontmatter_date  # noqa: E402
+import park_state  # noqa: E402  (SSOT für draft/cadence_wait/cadence_demoted/cadence_grund)
+
+# Halte-Frist: so lange darf ein Post höchstens geparkt (hold) bleiben, bevor
+# der Report ihn als Content-Verlust markiert (31.08.2026, Issue #129-Folge).
+HOLD_WARN_TAGE = 7
 
 # ---------------------------------------------------------------------------
 # DAUERVORGABE (CADENCE-REPORT.md Regel 2, 19.08.2026): Mo/Mi/Fr, 2–3/Tag.
@@ -149,6 +169,7 @@ def load_posts(posts_dir=None):
             day = datetime.date.fromisoformat(date_iso)
         except ValueError:
             continue
+        park = park_state.read(content)
         posts.append({
             "path": path,
             "slug": slug_of(path),
@@ -156,6 +177,11 @@ def load_posts(posts_dir=None):
             "date_raw": raw_iso or date_iso,
             "draft": bool(re.search(r"(?m)^draft:\s*true\s*$", content)),
             "wait": bool(re.search(r"(?m)^cadence_wait:\s*true\s*$", content)),
+            # Park-Zustand (single source of truth: scripts/park_state.py)
+            "state": park["state"],          # live|queue|hold|manual|lost
+            "grund": park["grund"],
+            "demoted": park["demoted"],
+            "age_days": park["age_days"],
         })
     return posts
 
@@ -206,54 +232,15 @@ def find_violations(posts, min_d, max_d):
 
 
 def _set_frontmatter_flag(path, key, value=True):
-    """Setzt/ersetzt eine Flag-Zeile im Frontmatter (nach `draft:`).
-    value=False entfernt die Zeile. Idempotent, berührt sonst nichts."""
-    with open(path, encoding="utf-8") as f:
-        lines = f.readlines()
-    # Frontmatter-Region: zwischen den ersten zwei '---'
-    if not (lines and lines[0].strip() == "---"):
-        return False
-    try:
-        end = next(i for i in range(1, len(lines)) if lines[i].strip() == "---")
-    except StopIteration:
-        return False
-
-    key_re = re.compile(rf"^{re.escape(key)}:.*$", re.M)
-    existing = [i for i in range(1, end) if lines[i].startswith(key + ":")]
-    draft_i = next((i for i in range(1, end)
-                    if lines[i].startswith("draft:")), None)
-    anchor = (draft_i + 1) if draft_i is not None else end
-
-    if value is False:
-        if existing:
-            del lines[existing[0]]
-            # (bei mehreren Duplikaten nur das erste entfernen;
-            #  Duplikate wären ohnehin ein Frontmatter-Fehler)
-        else:
-            return False
-    else:
-        text = f"{key}: {value}\n" if not isinstance(value, bool) else \
-            f"{key}: {'true' if value else 'false'}\n"
-        if existing:
-            lines[existing[0]] = text
-        else:
-            lines.insert(anchor, text)
-
-    with open(path, "w", encoding="utf-8") as f:
-        f.writelines(lines)
-    return True
+    """Abgelegt in park_state.set_field (SSOT) – hier nur als Kompatibilitäts-
+    Alias, damit es genau EINE Implementierung der Frontmatter-Schreibweise
+    gibt. value=False/None entfernt die Zeile."""
+    return park_state.set_field(path, key, None if value is False else value)
 
 
 def _set_draft(path, draft):
-    with open(path, encoding="utf-8") as f:
-        content = f.read()
-    new = re.sub(r"(?m)^draft:\s*(true|false)\s*$",
-                 f"draft: {'true' if draft else 'false'}", content, count=1)
-    if new != content:
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(new)
-        return True
-    return False
+    """Alias auf park_state (draft-Zeile schreiben, sonst nichts)."""
+    return park_state.set_draft(path, draft)
 
 
 def _set_date(path, iso):
@@ -269,7 +256,12 @@ def _set_date(path, iso):
 
 
 def demote(posts, paths, reason, do_fix):
-    """Stuft Verstöße auf draft: true + cadence_wait: true zurück."""
+    """Stuft Verstöße auf draft zurück UND legt sie verbindlich in die
+    Re-Queue (park_state.park: draft + cadence_wait + Zeitstempel + Grund).
+
+    Draft-Schutz bleibt absolute Regel: ein bereits geparkter Post wird hier
+    nicht noch einmal angefasst (dafür sorgt queue_integrity(), das den
+    Zustand explizit unterscheidt: queue / hold / manual / lost)."""
     healed = []
     by_path = {p["path"]: p for p in posts}
     for path in paths:
@@ -278,12 +270,69 @@ def demote(posts, paths, reason, do_fix):
             continue
         if not do_fix:
             continue
-        if _set_draft(path, True):
-            _set_frontmatter_flag(path, "cadence_wait", True)
-            _set_frontmatter_flag(path, "cadence_demoted", now_utc_iso())
+        grund = f"kadenz: {reason}" if reason else "kadenz"
+        if park_state.park(path, grund, now_utc_iso(), do_fix=True):
             healed.append(p)
             print(f"  🛡️  {p['slug']} → draft + Re-Queue ({reason})")
     return healed
+
+
+def queue_integrity(posts, do_fix=False, verbose=None):
+    """Re-Queue-INTEGRITÄT: macht den Park-Zustand wieder eindeutig.
+
+    Fund der Klasse (Issue #129/Nachlese): Posts, deren `cadence_wait`-Flag
+    auf einem der vielen Schreibwege verloren ging, sind für die Automatik
+    nicht mehr von Franks manuellen Entwürfen zu unterscheiden – sie bleiben
+    für immer unsichtbar (4 fertige Artikel) und ihre fehlenden URLs
+    produzierten die defekten internen Links.
+
+    Regeln (in dieser Reihenfolge, mehrfaches Laufen ist idempotent):
+      lost   → Flag rearmen (NUR das Flag; Content und draft bleiben).
+               publicationstag + Tageslimit entscheiden weiterhin allein über
+               die Promotion, ein verlorener Post geht also nicht ungefragt
+               live.
+      stale  → Park-Rest an einem live-Post (cadence_wait, Grund oder
+               Demoted-Marke) ist Müll der letzten Promotion → entfernen.
+      hold   → Bewusste Blockade (publish_gate/check_uniqueness). Wird NIE
+               rearmt, aber ab HOLD_WARN_TAGE im Report als Content-Verlust
+               markiert (Verlust-Radar).
+      manual → nie anfassen (Frank-Schutz).
+    Rückgabe: dict(rearmed, cleaned, holds, aging).
+    `verbose` (Default: wie do_fix) – Funde werden beim reinen Prüfen leise
+    gezählt, damit ein Audit-Lauf nicht doppelt meldet."""
+    if verbose is None:
+        verbose = do_fix
+    out = {"rearmed": [], "cleaned": [], "holds": [], "aging": []}
+    for p in posts:
+        if p["state"] == "lost":
+            if do_fix:
+                park_state.rearm(p["path"], "kadenz: Re-Queue-Flag "
+                                            "wiederhergestellt (verloren)",
+                                 now_utc_iso(), do_fix=True)
+            out["rearmed"].append(p)
+            if verbose:
+                print(f"  🔁  {p['slug']} → Re-Queue-Flag wiederhergestellt "
+                      f"(draft behalten, Promotion folgt am nächsten Slot)")
+        elif p["state"] == "live" and park_state.rest_fields(p):
+            # Rest einer Promotion: Park-Feld an einem live-Post. Harmlos,
+            # aber der Zustand ist mehrdeutig – und eine saubere Promotion sähe
+            # später wieder aus wie ein "lost"-Fall.
+            out["cleaned"].append(p)
+            if do_fix:
+                park_state.clean_stale(p["path"], do_fix=True)
+            if verbose:
+                print(f"  🧹  {p['slug']} → Park-Rest am live-Post "
+                      f"({', '.join(park_state.rest_fields(p))}): "
+                      f"{'entfernt' if do_fix else 'geprüft (weg mit --fix)'}")
+        elif p["state"] == "hold":
+            out["holds"].append(p)
+            if (p["age_days"] or 0) > HOLD_WARN_TAGE:
+                out["aging"].append(p)
+                if verbose:
+                    print(f"  ⚠️  {p['slug']} seit {p['age_days']} Tagen "
+                          f"gehalten ({p['grund']}) – bitte korrigieren "
+                          f"oder freigeben")
+    return out
 
 
 def requeue_to_capacity(posts, max_d, do_fix=True, now_fn=None):
@@ -308,15 +357,18 @@ def requeue_to_capacity(posts, max_d, do_fix=True, now_fn=None):
             break
         iso = now_fn()
         _set_date(p["path"], iso)
-        _set_draft(p["path"], False)
-        _set_frontmatter_flag(p["path"], "cadence_wait", False)
+        # release() = draft: false + SÄMTLICHE Park-Felder weg. Das ist der
+        # entscheidende Unterschied zum alten Einzelflaggen-Löschen: danach ist
+        # der Post wieder eindeutig "live" und kann nicht als "lost" fehl-
+        # gedeutet werden (und ein spätes Gate-Halten schreibt seinen Grund).
+        park_state.release(p["path"], do_fix=True)
         promoted.append(p)
         print(f"  ♻️  Re-Queue → live: {p['slug']} (neu datiert {today.isoformat()})")
     return promoted
 
 
 def write_report(off_day, over_cap, under_days, healed, promoted,
-                 min_d, max_d, count_by_day=None):
+                 min_d, max_d, count_by_day=None, integrity=None):
     now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     L = [
         "# 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)",
@@ -352,6 +404,41 @@ def write_report(off_day, over_cap, under_days, healed, promoted,
         for day, n in under_days:
             L.append(f"- ⚠️ {day.isoformat()} ({DAYS_DE[day.weekday()]}): "
                      f"nur {n} von {min_d}–{max_d} (Fallback-Slots heilen nach)")
+    # ---------- Re-Queue-Integrität (Park-Zustände) ----------
+    posts_all = load_posts()
+    states = {"queue": [], "hold": [], "manual": [], "lost": []}
+    for p in posts_all:
+        if p["state"] in states:
+            states[p["state"]].append(p)
+    L += ["", "## Re-Queue-Integrität (Park-Zustände)", "",
+          f"- 🕓 in der Re-Queue (werden am nächsten Slot gefördert): "
+          f"**{len(states['queue'])}**",
+          f"- ✋ gehalten (Korrektur nötig, NIEMALS automatisch): "
+          f"**{len(states['hold'])}**",
+          f"- ✍️ manuelle Entwürfe (von der Automatik unberührt): "
+          f"**{len(states['manual'])}**",
+          f"- 🔁 wiederhergestellte Re-Queue-Flags: "
+          f"**{len(integrity['rearmed']) if integrity else 0}**",
+          f"- 🧹 Park-Reste an live-Posts (gefunden, weg mit --fix): "
+          f"**{len(integrity['cleaned']) if integrity else 0}**", ""]
+    if states["hold"]:
+        L.append("### Gehaltene Posts (bitte prüfen/freigeben)")
+        L.append("")
+        for p in sorted(states["hold"], key=lambda x: x["slug"]):
+            age = p["age_days"]
+            war = f" · seit {age} Tagen" if age is not None else ""
+            fahne = "⚠️ " if (age or 0) > HOLD_WARN_TAGE else ""
+            L.append(f"- {fahne}`{p['slug']}` – {p['grund'] or 'Grund unbekannt'}"
+                     f"{war}")
+        L.append("")
+    if integrity and integrity["aging"]:
+        L.append(f"> 🛑 **Verlust-Radar:** {len(integrity['aging'])} Post(s) "
+                 f"liegen länger als {HOLD_WARN_TAGE} Tage gehalten fest – "
+                 f"jeder davon ist ein fertiger Artikel, der nicht sichtbar "
+                 f"ist. Korrigieren und `draft: false` setzen (oder "
+                 f"`cadence_grund`-Zeile löschen) → der nächste Slot fördert.")
+        L.append("")
+
     L += ["", "## Letzte Heilungen", ""]
     if healed:
         for p in healed:
@@ -382,9 +469,18 @@ def _count_by_day(posts):
 
 def run_audit(posts_dir=None, do_fix=False):
     """Audit + optionale Heilung. Rückgabe: (off_day, over_cap,
-    under_days, healed, promoted)."""
+    under_days, healed, promoted, integrity).
+
+    Reihenfolge ist Absicht: erst Park-Zustände klären (rearmen/bereinigen),
+    dann Kadenz heilen, dann Re-Queue bis zum Tageslimit füllen – so wird ein
+    wiederhergestellter Post im selben Lauf gefördert, statt auf den nächsten
+    Tag zu warten, und die Integrität bleibt trotzdem unabhängig davon
+    erhalten (Promotion entscheidet allein Publikationstag + Kapazität)."""
     min_d, max_d = effective_limits()
     posts = load_posts(posts_dir)
+    integrity = queue_integrity(posts, do_fix=do_fix)
+    if do_fix and (integrity["rearmed"] or integrity["cleaned"]):
+        posts = load_posts(posts_dir)          # reparierte Zustandsdaten sehen
     off_day, over_cap, under_days = find_violations(posts, min_d, max_d)
 
     healed = []
@@ -404,9 +500,22 @@ def run_audit(posts_dir=None, do_fix=False):
         promoted = requeue_to_capacity(posts, max_d, do_fix=True)
         posts = load_posts(posts_dir)
 
+    # Report-Sicht auf die Park-Zustände (nach allen Heilungen, ohne
+    # nochmal zu reparieren – der Pass oben ist idempotent).
+    integrity_report = queue_integrity(load_posts(posts_dir), do_fix=False,
+                                       verbose=False)
     write_report(off_day, over_cap, under_days, healed, promoted, min_d, max_d,
-                 count_by_day=_count_by_day(posts))
-    return off_day, over_cap, under_days, healed, promoted
+                 count_by_day=_count_by_day(posts), integrity=integrity_report)
+    return off_day, over_cap, under_days, healed, promoted, integrity
+
+
+def load_post_state(posts_root, slug):
+    """Park-Felder eines Fixtures lesen – True, wenn NOCH eins steht.
+    Nur für den Selbsttest (Reinigungs-Nachweis)."""
+    path = os.path.join(posts_root, slug, "index.md")
+    content = open(path, encoding="utf-8").read()
+    st = park_state.read(content)
+    return bool(st["wait"] or st["demoted"] or st["grund"])
 
 
 def run_selftest():
@@ -416,12 +525,20 @@ def run_selftest():
     errors = []
     min_d, max_d = 2, 3
 
-    def mk(tmp, slug, date_raw, draft, wait=False):
+    def mk(tmp, slug, date_raw, draft, wait=False, demoted=None,
+           grund=None):
         d = os.path.join(tmp, "content", "posts", slug)
         os.makedirs(d, exist_ok=True)
+        extra = ""
+        if wait:
+            extra += "cadence_wait: true\n"
+        if demoted:
+            extra += f"cadence_demoted: {demoted}\n"
+        if grund:
+            extra += f'cadence_grund: "{grund}"\n'
         fm = (f"---\ntitle: \"{slug[:20]}\"\n"
               f"description: \"Test\"\ndate: {date_raw}\ndraft: {'true' if draft else 'false'}\n"
-              + (f"cadence_wait: {'true' if wait else 'false'}\n" if wait else "")
+              + extra
               + 'categories: ["Ratgeber"]\n---\n\nBody.\n')
         with open(os.path.join(d, "index.md"), "w", encoding="utf-8") as f:
             f.write(fm)
@@ -441,6 +558,20 @@ def run_selftest():
         mk(tmp, "2026-08-19-wartend-a", "2026-08-10T06:00:00Z", True, wait=True)
         mk(tmp, "2026-08-19-wartend-b", "2026-08-11T06:00:00Z", True, wait=True)
         mk(tmp, "2026-08-19-draft-frei", "2026-08-19T00:00:00Z", True)  # NICHT warten
+        # Park-Zustände (31.08.2026 – Issue #129-Nachlese): verlorenes Flag,
+        # bewusste Gate-Hemmung, Re-Queue-Rest an einem Live-Post.
+        mk(tmp, "2026-08-20-verloren-a", "2026-08-31T04:02:49Z", True,
+           demoted="2026-08-26T13:46:19Z")
+        mk(tmp, "2026-08-20-gehemmt-b", "2026-08-30T06:00:00Z", True,
+           demoted="2026-08-30T06:05:00Z",
+           grund="publish-gate: Zeichenlänge nicht bestanden")
+        mk(tmp, "2026-08-10-stale-flag", "2026-08-10T04:00:00Z", False,
+           wait=True, demoted="2026-08-09T06:00:00Z")  # Promotion ohne
+                                                       # Feldbereinigung
+        # derselbe Rest, nur als Grund-Marke ohne Flag (Live-Artikel mit
+        # Gate-Spur) – muss ebenfalls weg, sonst bleibt er ewig stehen
+        mk(tmp, "2026-08-12-rest-marke", "2026-08-12T04:00:00Z", False,
+           grund="publish-gate: Rest nach Freigabe")
 
         posts = load_posts(posts_root)
         off_day, over_cap, _ = find_violations(posts, min_d, max_d)
@@ -463,6 +594,53 @@ def run_selftest():
             errors.append("Off-Day-Posts wurden nicht in die Re-Queue gelegt")
         if any(p["wait"] for p in posts if p["slug"] == "2026-08-19-draft-frei"):
             errors.append("Fremd-Entwurf wurde angefasst (Draft-Schutz verletzt)")
+
+        # Park-Zustände müssen unterscheidbar sein (SSOT park_state)
+        states = {p["slug"]: p["state"] for p in posts}
+        for slug, want in (("2026-08-19-wartend-a", "queue"),
+                           ("2026-08-19-draft-frei", "manual"),
+                           ("2026-08-17-mo-post-a", "live"),
+                           ("2026-08-20-verloren-a", "lost"),
+                           ("2026-08-20-gehemmt-b", "hold")):
+            if states.get(slug) != want:
+                errors.append(f"Park-Zustand {slug}: {states.get(slug)} "
+                              f"statt {want}")
+
+        # Integritäts-Pass: rearmt verlorene Flags, lässt Hemmung + manuelle
+        # Entwürfe unberührt, idempotent.
+        integ = queue_integrity(load_posts(posts_root), do_fix=True)
+        if [p["slug"] for p in integ["rearmed"]] != ["2026-08-20-verloren-a"]:
+            errors.append(f"Rearm falsch: {[p['slug'] for p in integ['rearmed']]}")
+        again = queue_integrity(load_posts(posts_root), do_fix=True)
+        if again["rearmed"] or again["cleaned"]:
+            errors.append("Integritäts-Pass nicht idempotent")
+        post_fix = {p["slug"]: p for p in load_posts(posts_root)}
+        pf = post_fix["2026-08-20-verloren-a"]
+        if not (pf["wait"] and pf["draft"] and pf["state"] == "queue"):
+            errors.append("Rearm hat draft/Inhalt verändert oder wirkt nicht")
+        body = open(os.path.join(posts_root, "2026-08-20-verloren-a",
+                                 "index.md"), encoding="utf-8").read()
+        if "Body." not in body:
+            errors.append("Rearm hat den Body beschädigt")
+        held = post_fix["2026-08-20-gehemmt-b"]
+        if held["wait"] or held["state"] != "hold":
+            errors.append("Gate-Hemmung wurde rearmt (verbotene Promotion!)")
+        if post_fix["2026-08-19-draft-frei"]["state"] != "manual":
+            errors.append("Manueller Entwurf durch Integrität verändert")
+
+        # Stale-Rest an einem LIVE-Post wird entfernt (sonst sieht jede
+        # saubere Promotion später wie ein "lost"-Fall aus).
+        stale = [p["slug"] for p in integ["cleaned"]]
+        if "2026-08-10-stale-flag" not in stale:
+            errors.append(f"Stale-Flag nicht bereinigt: {stale}")
+        if load_post_state(posts_root, "2026-08-10-stale-flag"):
+            errors.append("Stale-Flag steht noch im Frontmatter")
+        if "2026-08-12-rest-marke" not in stale:
+            errors.append(f"Grund-Marke am live-Post nicht bereinigt: {stale}")
+        rest = {p["slug"]: p for p in load_posts(posts_root)}["2026-08-12-rest-marke"]
+        if rest["state"] != "live" or rest["draft"] or rest["grund"]:
+            errors.append("live-Post durch Rest-Bereinigung beschädigt "
+                          f"(state: {rest['state']})")
 
         # Re-Queue-Kapazität: Mi 2026-08-19 hat 2 live; requeue-to-max-3
         # dürfte genau 1 der 2 Wartenden fördern (den ältesten). Für
@@ -492,6 +670,16 @@ def run_selftest():
         if len(mi_live) != 3:
             errors.append(f"Re-Queue-Resultat falsch: {len(mi_live)} live am Mi "
                           f"(erwartet 3 = Cap)")
+        # Promotion räumt ALLE Park-Felder ab – sonst wäre der nächste
+        # Hin-und-Her wieder ein "lost"-Fall (Ursache von Issue #129).
+        if not promoted:
+            errors.append("Re-Queue fördert nichts (Kapazitäts-Regression?)")
+        else:
+            promoted_now = {p["slug"]: p for p in posts}[promoted[0]["slug"]]
+            if (promoted_now["wait"] or promoted_now["demoted"]
+                    or promoted_now["grund"] or promoted_now["state"] != "live"):
+                errors.append("Promotion hat Park-Felder nicht vollständig "
+                              f"geräumt: {promoted_now}")
 
     return errors
 
@@ -505,22 +693,71 @@ def main():
             for e in errs:
                 print(f"   - {e}")
             sys.exit(2)
-        print("✅ CADENCE-SELFTEST bestanden (Off-Day, Over-Cap, Re-Queue, Draft-Schutz).")
+        print("✅ CADENCE-SELFTEST bestanden (Off-Day, Over-Cap, Re-Queue, "
+              "Draft-Schutz, Park-Zustände queue/hold/manual/lost/stale, "
+              "Promotion-Hygiene, Idempotenz).")
         sys.exit(0)
 
     do_fix = "--fix" in args
+    if "--integrity" in args:
+        # Nur die Park-Zustände klären – KEINE Kadenz-Heilung, KEINE
+        # Promotion. Für Wartung von Hand und für CI-Schritte, die Flags
+        # reparieren sollen, ohne den Veröffentlichungszeitpunkt zu verschieben.
+        posts = load_posts()
+        integ = queue_integrity(posts, do_fix=True)
+        posts = load_posts()
+        min_d, max_d = effective_limits()
+        off_day, over_cap, under_days = find_violations(posts, min_d, max_d)
+        write_report(off_day, over_cap, under_days, [], [], min_d, max_d,
+                     count_by_day=_count_by_day(posts),
+                     integrity=queue_integrity(posts, do_fix=False))
+        print(f"Re-Queue-Integrität: {len(integ['rearmed'])} Flag(s) "
+              f"wiederhergestellt, {len(integ['cleaned'])} Rest-Flag(s) "
+              f"bereinigt, {len(integ['holds'])} gehalten, "
+              f"{len(integ['aging'])} davon über Frist.")
+        sys.exit(0)
     if "--requeue" in args:
         _, max_d = effective_limits()
+        posts = load_posts()
+        # Vor der Förderung die Park-Zustände klären: ein "lost"-Post wäre
+        # sonst unsichtbar, obwohl er fertig und förderfähig ist.
+        queue_integrity(posts, do_fix=True)
         posts = load_posts()
         promoted = requeue_to_capacity(posts, max_d, do_fix=True)
         min_d, _ = effective_limits()
         off_day, over_cap, under_days = find_violations(load_posts(), min_d, max_d)
         write_report(off_day, over_cap, under_days, [], promoted, min_d, max_d,
-                     count_by_day=_count_by_day(load_posts()))
+                     count_by_day=_count_by_day(load_posts()),
+                     integrity=queue_integrity(load_posts(), do_fix=False,
+                                                verbose=False))
         print(f"Re-Queue: {len(promoted)} Post(s) bis zum Tageslimit promoted.")
         sys.exit(0)
 
-    off_day, over_cap, under_days, healed, _ = run_audit(do_fix=do_fix)
+    lost = [p for p in load_posts() if p["state"] == "lost"]
+    if lost and not do_fix and "--integrity" not in args:
+        # Verlorene Re-Queue-Flags = stiller Content-Verlust: im Prüfmodus
+        # harter Fund (1), damit die Kette nicht "alles grün" meldet, während
+        # fertige Artikel unsichtbar liegen. --fix heilt sie.
+        print(f"🛑 {len(lost)} Post(s) in der Kadenz-Parkliste OHNE "
+              f"cadence_wait-Feld – die Flagge ist verloren, die Artikel "
+              f"bleiben dauerhaft unsichtbar.")
+        for p in lost:
+            print(f"   - {p['slug']} (gedemotet {p['demoted'] or '?'})")
+        print("   Heilung: python3 scripts/cadence_guard.py --fix "
+              "(setzt nur das Flag – keine Promotion, kein Publish)")
+        sys.exit(1)
+
+    off_day, over_cap, under_days, healed, promoted, integrity = run_audit(
+        do_fix=do_fix)
+    if integrity["rearmed"] or integrity["cleaned"]:
+        ruhm = "bereinigt" if do_fix else "gefunden (weg mit --fix)"
+        print(f"🔧 Re-Queue-Integrität: {len(integrity['rearmed'])} Flag(s) "
+              f"wiederhergestellt, {len(integrity['cleaned'])} Park-Rest(e) "
+              f"an live-Posts {ruhm}.")
+    if integrity["aging"]:
+        print(f"⚠️  Verlust-Radar: {len(integrity['aging'])} gehaltene(r) "
+              f"Post(s) länger als {HOLD_WARN_TAGE} Tage (siehe "
+              f"CADENCE-GATE-REPORT.md).")
     total = len(off_day) + len(over_cap)
     if total == 0:
         print(f"✅ Kadenz sauber: nur Mo/Mi/Fr, keine Über-Max-Tage "

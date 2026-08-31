@@ -31,6 +31,7 @@ POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import list_post_paths, slug_of, frontmatter_date  # noqa: E402
 import cadence_guard  # noqa: E402 – Single Source of Truth für die Kadenz
+import park_state     # noqa: E402 – Park-Zustand (draft/cadence_*-Felder)
 
 
 def published_count_today():
@@ -41,17 +42,31 @@ def published_count_today():
 
 
 def publish(path):
+    """Manuelle Freigabe eines Entwurfs – über die Park-Maschine (SSOT).
+
+    Neu (31.08.2026): draft:false UND sämtliche cadence_*-Felder weg
+    (sonst bleibt ein "stale"-Rest stehen, den die Kadenz-Wache als
+    Störung melden müsste) und Re-Dating auf HEUTE – bisher nur in der
+    Kurzform "date: JJJJ-MM-TT" wirksam. Ein Post mit Vollzeitstempel
+    (z. B. "date: 2026-08-18T04:02:49Z" oder ein in die Zukunft
+    terminierter Re-Queue-Wert) behielt sein altes Datum: er erschien
+    zurückdatiert oder – bei Zukunfts-Datum – gar nicht im Build
+    (buildFuture=false), obwohl er freigegeben war. Genau diese
+    Nicht-Build-Situation war der Nährboden der defekten internen Links
+    (Issue #129)."""
     with open(path, encoding="utf-8") as f:
         content = f.read()
     if "draft: true" not in content:
         print(f"  – übersprungen (kein Entwurf): {slug_of(path)}")
         return 0
-    content = content.replace("draft: true", "draft: false", 1)
-    # Entwurfs-Datum durch heutiges Datum ersetzen (wird beim Veröffentlichen neu datiert)
-    content = re.sub(r"^date: \d{4}-\d{2}-\d{2}$", f"date: {__import__('datetime').date.today().isoformat()}", content, count=1, flags=re.M)
+    # 1) Datum auf heute (egal welches Format), 2) Park-Felder räumen,
+    #    3) draft: false – alles über die regulären Schreiber.
+    heute = datetime.date.today().isoformat()
+    content = re.sub(r"(?m)^date:\s*.*$", f"date: {heute}", content, count=1)
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
-    print(f"  ✓ veröffentlicht: {slug_of(path)}")
+    park_state.release(path, do_fix=True)      # draft:false + cadence_* weg
+    print(f"  ✓ veröffentlicht: {slug_of(path)} (neu datiert {heute})")
     return 1
 
 

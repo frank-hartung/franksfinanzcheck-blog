@@ -157,6 +157,7 @@ Bei zwei parallel gebauten Längen-Systemen gilt ab jetzt:
 |---|---|---|---|
 | **Posts** (normal) | `check_length.py` + `length_guard.py` (SSOT `length_policy.py`) | Floor **10.000 Zeichen** · Optimum **12.000–18.000** · heil < 10.000 | Heilung zur Generierung + tägliche/wöchentliche Wache |
 | **Pillar-Seiten** | `length_guard.py` (SSOT `length_policy.py`) | Floor **12.000 Zeichen** · Optimum **15.000–32.000** · heil < 12.000 | Engine + tägliche Wache (Backlog 3) + Weekly (Backlog 5) |
+| **Park-Zustand eines Posts** (`draft` + `cadence_wait` + `cadence_demoted` + `cadence_grund`) | `scripts/park_state.py` (SSOT) – geschrieben wird **ausschließlich** über `park()` / `hold()` / `release()` / `rearm()` | queue → automatisch förderbar · hold → blockiert (Grund notiert) · manual → unantastbar · lost → wird rearmt | `cadence_guard.py --fix` (Deploy/Engine/Health) und `--integrity` (Wartung ohne Promotion) |
 
 Damit: Keine Doppel-KI-Kosten, keine Ping-Pong-Loops, getrennte Strenge.
 Dash-Guards (dash_guard.py ≠ fix_dash_eol.py/fix_dash_und.py) koexistieren
@@ -314,8 +315,14 @@ jeder Schreibaktion.
 | Titel unvollständig (Wortbruch) | safe_title_cut (Vermeidung) + check_titles R5 → publish_gate (Verwurf/Draft) |
 | Cover-Text abgeschnitten/veraltete Darstellung | check_covers C4 (--fix rendert neu) + Zeichen-Hard-Wrap/Clamp in generate_covers |
 | Kadenz-Verstoß (Off-Day/Über-Max) | cadence_guard --fix (Zurückstufung + Re-Queue; Deploy/Engine/Health) |
+| Link zeigt auf eine Seite, die der Build nicht erzeugt (Draft/Zukunfts-
+  Zeitstempel/abgelaufen/gelöscht) | Render-Guard in `layouts/_default/_markup/render-link.html` (Ankertext als
+  Klartext, Link lebt bei Rückkehr selbst auf) + `draft_link_healer` (entlinkt im
+  Inhalt nur noch dauerhaft gelöschte Ziele; SSOT: `post_utils.build_state`) |
 | Tagesende unter Mindestziel | engine_issue --deficit (Issue, auto-schließend) |
 | Kadenz-Gate selbst defekt | cadence_guard --selftest (Exit 2 bricht CI ab) |
+| Re-Queue-Flagge verloren → fertig geparkter Post bleibt für immer unsichtbar (Root-Cause von #129) | `cadence_guard.py --fix` ruft `queue_integrity()` (Park-Zustand via `park_state.py`): rearmt `lost`, bereinigt `stale`, respektiert `hold`/`manual`; `--check` meldet es als Fehler |
+| bewusste Gate-Hemmung wird vergessen / führt zu Ping-Pong | `publish_gate.py` + `check_uniqueness.py` schreiben ihren Grund (`cadence_grund`) → `hold` wird nie automatisch gefördert, aber ab 7 Tagen im Report markiert (Verlust-Radar) |
 | Pinterest-Token läuft ab | pinterest_auth.py (Continuous Refresh, AES) |
 | Push-Race zwischen Bots | Rebase-Guards + Concurrency in allen Write-Workflows |
 | Bot komplett stumm | bot-watchdog → Issue |
@@ -344,6 +351,67 @@ jeder Schreibaktion.
 | Wassertemperaturen | `BOT-STATUS.md` / `ENGINE-STATUS.md` jederzeit auf der Repo-Seite sichtbar |
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
+
+- **31.08.2026 (3):** PARK-ZUSTAND digitalisiert – Root-Cause der
+  Kadenz-Nebenwirkungen (Folge #129, Premium-Level). Vorher war
+  `draft: true` ohne `cadence_wait` MEHRDEUTIG: manueller Entwurf, bewusste
+  Gate-Hemmung oder verlorene Flagge – für die Automatik nicht
+  unterscheidbar. Folge: vier fertige Artikel lagen dauerhaft unsichtbar im
+  Bestand (heute 1 statt 2–3 Live-Artikel), und ihre fehlenden URLs waren
+  genau die defekten internen Links aus #129.
+  NEU: `scripts/park_state.py` ist die einzige Stelle, die
+  `draft`/`cadence_wait`/`cadence_demoted`/`cadence_grund` schreibt, und
+  jeder Griff nennt einen Grund:
+    - `park()`   → Kadenz: draft + Re-Queue (automatisch förderbar)
+    - `hold()`   → publish_gate/check_uniqueness: draft + Grund, KEINE
+                   Re-Queue (menschliche Korrektur nötig) – verhindert das
+                   Ping-Pong „Gates halten → Kadenz fördert erneut"
+    - `release()`→ Promotion: draft:false UND alle Park-Felder weg
+                   (sonst sieht jede saubere Promotion später „lost" aus)
+    - `rearm()`  → repariert `lost`, ohne `draft` oder den Body anzufassen;
+                   das ursprüngliche `cadence_demoted`-Datum bleibt
+                   (ehrliches Wartealter im Report)
+  `cadence_guard.py` bekommt `queue_integrity()` (in `--fix` + `--requeue`
+  aktiv, eigener Modus `--integrity` für Wartung ohne Promotion) und meldet
+  im Report die Zustandspalette inkl. Verlust-Radar ab `HOLD_WARN_TAGE=7`.
+  `--check` exitet 1, wenn verlorene Flaggen gefunden werden – „alles grün"
+  ist jetzt nur noch möglich, wenn wirklich nichts im Verborgenen liegt.
+  Selbsttest: 7 → 20 Prüfstellen (Off-Day, Over-Cap, Re-Queue, Draft-Schutz,
+  die fünf Park-Zustände queue/hold/manual/lost/stale, Idempotenz,
+  Body-Schutz, Promotion-Hygiene).
+  Nebenbefund der breiteren stale-Regel (reicht `cadence_wait` alone würde sie
+  nie sehen): 3 live-Artikel trugen noch `cadence_demoted` von der
+  26.08.-Demotion – Rest einer Promotion, über `park_state.clean_stale()`
+  entfernt (1 Zeile je Post, `draft: false` unangetastet). Und die
+  manuelle Freigabe (`publish.py`) datierte nur `date: JJJJ-MM-TT` um – bei
+  Vollzeitstempeln blieb das Datum stehen, ein Zukunfts-Datum hätte den
+  Artikel trotz Freigabe unsichtbar gemacht (wieder der #129-Zustand); jetzt
+  Re-Dating auf heute + `release()` über denselben Owner.
+
+- **31.08.2026 (2):** Defekte interne Links nach Kadenz-Zurückstufung –
+  Root-Cause-Schicht (Issue #129). Die Kadenz-Wache stuft Over-Capacity-Posts
+  auf `draft: true` zurück; ihre URLs fallen aus dem Build, aber Links in
+  Ratgebern/Artikeln blieben stehen → 404 + rotes Gate. Der Draft-Link-Heiler
+  entlinkte daraufhin IM MARKDOWN – und genau das war die Schwachstelle:
+  Jeder Hin-und-Her-Promotion hat kuratierte Listen dauerhaft ausgedünnt
+  (Fund: „Cluster-Reihenfolge" in content/pillar/*, Einträge nur noch als
+  Resttext). Außerdem verglichen Heiler UND internal_linker „Zukunfts-Post"
+  nur auf TAG-Genauigkeit, Hugo vergleicht den ZEITSTEMPEL (buildFuture=false)
+  → ein heute 18:00 terminierter Post galt „live", der 03:15-Build baute ihn
+  nicht. NEU, in dieser Reihenfolge:
+  1. SSOT `post_utils.build_state()`/`parse_hugo_time()` – Build-Teilnahme
+     exakt nach hugo.toml (draft · Zukunfts-Zeitstempel · Ablauf-Datum).
+  2. Render-Guard in `layouts/_default/_markup/render-link.html`: Links auf
+     Nicht-Build-Ziele werden zur Laufzeit zu Klartext (Ankertext 1:1, kein
+     Content-Verlust, Link kommt von selbst zurück). Gilt für einsegmentige
+     /posts/- und /pillar/-Ziele; /go/ und Paginierung bleiben unberührt.
+  3. `draft_link_healer.py` heilt damit nur noch DAUERHAFT tote Ziele
+     (Datei weg) und meldet transiente; `--strict` reaktiviert das
+     Altverhalten. `internal_linker.py` bietet nur noch Build-Ziele an.
+  4. 5 am 31.08. entlinkte Ratgeber-/Artikel-Links wieder hergestellt.
+  Selbsttest: 11 Fälle (inkl. Zeitstempel-Präzision + Konvergenz).
+  Beweis: Build gegen Head – Link-Inventar byte-identisch außer dem einen
+  toten Link; `check_internal_links.sh` 1869 Links / 0 defekt.
 
 - **31.08.2026:** Premium-Zeichenlänge Google + Pinterest dauerhaft verdrahtet.
   SSOT `scripts/length_policy.py`: Posts Floor 10.000 / Optimum 12.000–18.000,

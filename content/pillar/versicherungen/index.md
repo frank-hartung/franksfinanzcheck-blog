@@ -99,7 +99,7 @@ Wer von unten nach oben kauft, spart die 12 Mini-Policen, die im Schaden nicht t
 ## Cluster-Reihenfolge
 
 1. [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
-2. Wohngebäude-Vergleich
+2. [Wohngebäude-Vergleich](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/)
 3. [Haus-Vorsorge 2026](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/)
 4. [Kfz-Vergleich](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/)
 
