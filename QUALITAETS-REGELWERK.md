@@ -353,6 +353,9 @@ jeder Schreibaktion.
   (nicht erst unter 7.500). Verdrahtung: Content-Engine Phase 2, Blog-Health
   (täglich Backlog 3), SEO-Weekly (Backlog 5), Blog-Doktor-Kette, Publish-Gate
   (`check_length.py`). Pinterest Pin-Description-Minimum 220 Zeichen.
+  Workflow-Verdrahtung (Health täglich Backlog 3, Engine `--scope all`,
+  SEO-Weekly Backlog 5): `patches/premium-length-2026-08-31-workflows.patch`
+  (einmalig anwenden, braucht `workflows`-Recht).
 
 - **27.08.2026:** `heading_guard.py` neu – Überschriften-Hygiene H1–H3
   (Anlass: Live-Befund „Fazit:<br> Ein 30-Minuten-Vergleich“, TOC-Artefakt
