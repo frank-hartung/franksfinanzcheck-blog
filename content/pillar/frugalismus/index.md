@@ -90,7 +90,7 @@ Frugalismus scheitert nicht an fehlenden Tricks, sondern an fehlendem Rhythmus. 
 
 ## Cluster-Reihenfolge
 
-1. [Geld sparen im Alltag](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/)
+1. Geld sparen im Alltag
 2. [Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
 3. [Haushaltsbuch](../../posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/)
 4. [Sparen im Herbst](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)

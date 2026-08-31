@@ -1,7 +1,9 @@
 # 🤝 AFFILIATE-REPORT
 
-**Stand:** 2026-08-31 12:06 UTC · Modus: CHECK
+**Stand:** 2026-08-31 12:54 UTC · Modus: CHECK
 
-Probleme: 0 · Geheilt: 0
+Probleme: 1 · Geheilt: 0
 
-✅ Alle Affiliate-Profi-Signale erfüllt.
+| Code | Artikel | Problem |
+|---|---|---|
+| A3 | 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife | nur 1 interne Links (< 2) |
