@@ -159,13 +159,13 @@ Bei einigen Discountern ist der telefonische Kundenservice kostenpflichtig (0900
 
 ## Zusatz-Tipp: Combo-Angebote nutzen
 
-Viele Anbieter geben deutliche Rabatte, wenn du **Handy + Festnetz/DSL aus einer Hand** buchst. Die Kombination kann bis zu 20 € pro Monat gegenüber Einzelverträgen sparen. Aber Achtung: Vergleiche vor Abschluss unbedingt die Einzelpreise – manchmal ist der Paket-Preis trotzdem teurer als ein Diskont-Handytarif plus separater DSL-Tarif. Einen DSL-Tarif findest du über den [DSL-Vergleich](/go/dsl/), wie in meinem [Ratgeber zum richtigen DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) beschrieben.
+Viele Anbieter geben deutliche Rabatte, wenn du **Handy + Festnetz/DSL aus einer Hand** buchst. Die Kombination kann bis zu 20 € pro Monat gegenüber Einzelverträgen sparen. Aber Achtung: Vergleiche vor Abschluss unbedingt die Einzelpreise – manchmal ist der Paket-Preis trotzdem teurer als ein Diskont-Handytarif plus separater DSL-Tarif. Einen DSL-Tarif findest du über den [DSL-Vergleich](/go/dsl/), wie in meinem [Ratgeber zum richtigen DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) beschrieben.
 
 ## Fazit: Jetzt vergleichen lohnt sich wie nie
 
 Der Mobilfunkmarkt ist 2026 so günstig wie nie zuvor. Allnet-Flats mit 5G gibt es unter 10 €, und trotzdem zahlen Millionen Kunden noch 25–40 € für veraltete Verträge. Mit einem 15-minütigen Vergleich und Wechsel kannst du ohne Komfortverlust zwischen **200 € und 360 € pro Jahr** sparen. Prüfe Netz, Volumen und Kleingedrucktes systematisch – der Aufwand macht sich dauerhaft bezahlt.
 
-**Weiterlesen:** [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) · WLAN verbessern: Speed in jede Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
+**Weiterlesen:** [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · WLAN verbessern: Speed in jede Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
 
 ## Häufige Fragen
 
