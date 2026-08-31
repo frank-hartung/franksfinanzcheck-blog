@@ -88,3 +88,24 @@ Nach 48 h Pause + URL-Debugger ohne Klärung:
 ---
 
 *Ergänzt am 12.08.2026 · Teil der FrankAutoOps-Dokumentation.*
+
+## 6. Trust-Shield (automatisch, Stand 24.08.2026)
+
+`python3 scripts/pinterest_trust_shield.py --fix` prüft und heilt 12 Anti-Spam-Signale:
+
+| Code | Signal |
+|---|---|
+| T1 | Pin-Ziel = Artikel-URL (nie /go/, nie Shortener) |
+| T2 | Kein Meta-Refresh/JS-Redirect auf Artikeln |
+| T3 | max. 5 Affiliate-Links, nur über /go/ + sponsored |
+| T4 | Werbekennzeichnung (*Werbung \| in pin_description) |
+| T5 | E-E-A-T: author + erfahrung |
+| T6 | ≥2 interne Links, keine dünnen Seiten |
+| T7 | Cover 2:3 + pin_title/pin_description |
+| T8 | robots: Pinterestbot Allow, /go/ Disallow |
+| T9 | Rate-Limit max. 2–3 Pins/Lauf, ≥45 s Pause |
+| T10 | RSS mit Cover-Enclosure (Auto-Publish) |
+| T11 | /go/* noindex |
+| T12 | p:domain_verify |
+
+Report: `PINTEREST-TRUST-REPORT.md`. Läuft im Pinterest-Watchdog (vor Hugo-Build).
