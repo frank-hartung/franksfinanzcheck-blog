@@ -2,7 +2,7 @@
 title: "Geld sparen im Alltag: Tipps, die jeder umsetzen kann"
 description: "Geld sparen im Alltag: 10 sofort umsetzbare Spartipps für Haushalt, Einkaufen, Verträge & Finanzen. Baue mühelos 3.500 € Notgroschen auf!"
 date: 2026-08-31T04:02:49Z
-draft: false
+draft: true
 cadence_demoted: 2026-08-26T13:46:19Z
 tags: ["Geld sparen im Alltag", "Spartipps", "Haushaltsbuch", "Tagesgeldkonto", "Fixkosten senken"]
 categories: ["Ratgeber"]
