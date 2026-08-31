@@ -1,6 +1,5 @@
 # 🛡️ AFFILIATE-SHIELD-REPORT
-**Stand:** 2026-08-31 17:11 UTC · Modus: FIX
-**Register:** 19 Themen-Links (`scripts/check24_links.yaml`) · **Weiterleitungen:** /go/ (19 neu generiert)
+**Stand:** 2026-08-31 18:27 UTC · Modus: DRY-RUN
 **Artikel angefasst:** 0 · **Links geroutet:** 0
 ---
 _/go/-Gateway + rel=sponsored/nofollow + robots-sperre = Profi-Affiliate-Niveau._

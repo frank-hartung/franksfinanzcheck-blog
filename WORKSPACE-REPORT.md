@@ -1,6 +1,6 @@
 # 🧹 WORKSPACE-REPORT
 
-**Stand:** 2026-08-31 17:11 UTC · Modus: FIX · Getrackte Dateien: 872 · .git: 26 MB
+**Stand:** 2026-08-31 18:27 UTC · Modus: FIX · Getrackte Dateien: 875 · .git: 25 MB
 
 | Pruefung | Befund | Geheilt |
 |---|---|---|
@@ -9,7 +9,7 @@
 | W3 Duplikate (identische Dateien) | 1 | ⚠️ |
 | W4 Dickschiffe (>300/500 KB) | 6 | ⚠️ |
 | W5 History-Rotation (>400 Zeilen) | 2 | ✅ |
-| W6 Git-Volumen | 26 MB | ✅ |
+| W6 Git-Volumen | 25 MB | ✅ |
 | W7 Konflikt-Marker (content/) | 0 | ✅ |
 
 👯 Duplikate:
@@ -24,8 +24,8 @@
 - `static/fonts/_src/Inter-var.ttf`: 856 KB
 
 📜 Rotiert (gestutzt auf juengste 400 Zeilen):
-- `data/spam_history.jsonl` (401 Zeilen)
-- `data/stil_history.jsonl` (406 Zeilen)
+- `data/spam_history.jsonl` (403 Zeilen)
+- `data/stil_history.jsonl` (425 Zeilen)
 
 ---
 _Warrant: Junk/Waisen/Rotation heilen sich selbst; Dickschiffe/Duplikate/Git-Historie REPORT-ONLY (Loeschung bleibt Chef-Sache)._

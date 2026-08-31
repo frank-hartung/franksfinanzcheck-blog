@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-08-31 17:45 UTC · Modus: FIX
+**Stand:** 2026-08-31 18:27 UTC · Modus: CHECK
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
@@ -10,7 +10,7 @@
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
-- ℹ️ [F-OK] Feed sauber: 24 Items, Kadenz-konform, Cover vorhanden, keine Duplikate
+- ℹ️ [F0] public/index.xml fehlt (noch kein Build) – Feed-Check übersprungen
 
 ## C: Pinterest-Bulk-CSV (C1–C8)
 

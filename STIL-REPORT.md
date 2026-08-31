@@ -1,6 +1,6 @@
 # 🎭 STIL-REPORT (stil_guard.py)
 
-**Stand:** 2026-08-31 17:11 UTC
+**Stand:** 2026-08-31 18:27 UTC
 **Artikel:** 25 · **mit Stil-Funden:** 25
 
 ## 📐 Flotten-Lesbarkeit (LIX)
