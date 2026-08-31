@@ -291,6 +291,14 @@ body.ff-scrolled .header {
   text-wrap: pretty;
 }
 
+/* DOM-Budget: sectioned_content.html teilt lange Markdown-Inhalte in
+   kleine Gruppen. display:contents erzeugt keine zusätzliche Layout-Box,
+   sodass Typografie, Abstände, Tabellen und Affiliate-CTAs pixelgleich
+   bleiben. Die Gruppierung wirkt ausschließlich auf die DOM-Struktur. */
+.ff-content-chunk {
+  display: contents;
+}
+
 .post-content h2,
 .post-content h3,
 .md-content h2,

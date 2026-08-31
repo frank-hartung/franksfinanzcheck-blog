@@ -9,7 +9,7 @@
  *   - Title/H1 vorhanden
  *   - Ladezeit (networkidle0) als LCP-Näherung
  *
- * Ausgabe: JSON auf stdout + Exit 0 (ok) / 1 (kritisch: JS-Fehler oder 4xx).
+ * Ausgabe: JSON auf stdout + Exit 0 (ok) / 1 (Fehler oder Budget-Warnung).
  *
  * Aufruf:
  *   LAYOUT_BASE=/pfad/zum/public LAYOUT_PORT=8099 CHROME_PATH=... node scripts/layout_browser_check.js
@@ -51,6 +51,7 @@ async function auditPage(browser, url, viewport) {
   let domCount = 0;
   let domDepth = 0;
   let maxChildren = 0;
+  let maxChildrenElement = '';
   page.on('pageerror', e => errors.push('JS: ' + e.message));
   page.on('console', m => { if (m.type() === 'error') errors.push('console: ' + m.text()); });
   page.on('response', r => { if (r.status() >= 400) httpErrors.push(r.status() + ' ' + r.url()); });
@@ -60,18 +61,39 @@ async function auditPage(browser, url, viewport) {
   const loadMs = Date.now() - t0;
   const metrics = await page.evaluate(() => {
     const all = document.querySelectorAll('*');
-    let depth = 0, maxKids = 0;
+    let depth = 0, maxKids = 0, maxKidsNode = null;
     for (const el of all) {
       let d = 0, n = el;
       while (n && n !== document.documentElement) { d++; n = n.parentElement; }
       if (d > depth) depth = d;
-      if (el.children.length > maxKids) maxKids = el.children.length;
+      if (el.children.length > maxKids) {
+        maxKids = el.children.length;
+        maxKidsNode = el;
+      }
     }
-    return { count: all.length, depth, maxKids };
+
+    // Kompakter, stabiler DOM-Pfad: macht den Report direkt reparierbar,
+    // statt pauschal (und bei langen Artikeln oft falsch) den <head> zu nennen.
+    const describe = (el) => {
+      const parts = [];
+      while (el && el.nodeType === 1 && parts.length < 5) {
+        let part = el.tagName.toLowerCase();
+        if (el.id) {
+          part += '#' + el.id;
+        } else if (el.classList.length) {
+          part += '.' + Array.from(el.classList).slice(0, 2).join('.');
+        }
+        parts.unshift(part);
+        el = el.parentElement;
+      }
+      return parts.join(' > ');
+    };
+    return { count: all.length, depth, maxKids, maxKidsElement: describe(maxKidsNode) };
   });
   domCount = metrics.count;
   domDepth = metrics.depth;
   maxChildren = metrics.maxKids;
+  maxChildrenElement = metrics.maxKidsElement;
   const title = await page.title();
   const h1 = await page.evaluate(() => document.querySelector('h1') ? document.querySelector('h1').textContent.trim().slice(0, 60) : null);
   await page.close();
@@ -83,11 +105,11 @@ async function auditPage(browser, url, viewport) {
   // deutlich früher als Frühwarnsystem, damit nie ein Problem entsteht):
   if (domCount > 900) issues.push(`DOM ${domCount} > 900 Elemente (Budget: <900, Lighthouse-Warnung: 1400)`);
   if (domDepth > 28) issues.push(`DOM-Tiefe ${domDepth} > 28 (Lighthouse-Warnung: 32)`);
-  if (maxChildren > 58) issues.push(`Max. Kinder ${maxChildren} > 58 (Lighthouse-Warnung: 60) – meist der <head>, prüfen ob unnötige Meta/Scripts dazukamen`);
+  if (maxChildren > 58) issues.push(`Max. Kinder ${maxChildren} > 58 (Lighthouse-Warnung: 60) – Element: ${maxChildrenElement || 'unbekannt'}`);
   if (!title) issues.push('kein <title>');
   if (!h1) issues.push('kein <h1>');
 
-  return { url, viewport: viewport.width + 'x' + viewport.height, domCount, domDepth, maxChildren, loadMs, title: title.slice(0, 60), h1, issues };
+  return { url, viewport: viewport.width + 'x' + viewport.height, domCount, domDepth, maxChildren, maxChildrenElement, loadMs, title: title.slice(0, 60), h1, issues };
 }
 
 (async () => {
@@ -115,10 +137,14 @@ async function auditPage(browser, url, viewport) {
 
   const critical = results.filter(r => r.issues.length > 0);
   // Aggregierte DOM-Messwerte für den Log (Frühwarn-Dashboard)
+  const maxChildrenResult = results.reduce((max, current) =>
+    current.maxChildren > max.maxChildren ? current : max
+  );
   const agg = {
     maxElements: Math.max(...results.map(r => r.domCount)),
     maxDepth: Math.max(...results.map(r => r.domDepth)),
-    maxChildren: Math.max(...results.map(r => r.maxChildren)),
+    maxChildren: maxChildrenResult.maxChildren,
+    maxChildrenElement: maxChildrenResult.maxChildrenElement,
     avgLoadMs: Math.round(results.reduce((s, r) => s + r.loadMs, 0) / results.length),
   };
   const summary = {

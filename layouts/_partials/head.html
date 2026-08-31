@@ -282,5 +282,11 @@
 {{- partial "google_analytics.html" . }}
 {{- partial "templates/opengraph.html" . }}
 {{- partial "templates/twitter_cards.html" . }}
+{{- /* Posts und Pillar haben bereits ein präziseres Article- und
+       BreadcrumbList-Schema in extend_head.html. PaperMods generisches
+       BlogPosting + BreadcrumbList dort nicht ein zweites Mal ausgeben. */ -}}
+{{- $hasCustomArticleSchema := and (or (eq .Section "posts") (eq .Section "pillar")) (eq .Kind "page") -}}
+{{- if not $hasCustomArticleSchema -}}
 {{- partial "templates/schema_json.html" . }}
+{{- end -}}
 {{- end -}}
