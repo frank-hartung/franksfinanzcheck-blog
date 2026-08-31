@@ -4,7 +4,6 @@ title: "WLAN verbessern: <br> So bringst du stabilen Speed"
 description: "WLAN verbessern leicht gemacht: Router richtig positionieren, Mesh-WLAN einrichten, Störquellen beseitigen & maximale Geschwindigkeit im ganzen Haus."
 date: 2026-08-28T01:05:14Z
 draft: false
-cadence_demoted: 2026-08-26T13:46:19Z
 tags: ["WLAN verbessern", "WLAN-Empfang", "Mesh WLAN", "Internet schneller machen"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"

@@ -3,7 +3,6 @@ title: "Gas-Anbieter wechseln: Praxis-Tipps für günstige Tarife"
 description: "Gas-Anbieter wechseln & im 1. Jahr bis 882 € sparen: die besten Praxis-Tipps zu Preisgarantien, Kündigungsfristen, Fallstricken und dem Online-Wechsel – mit…"
 date: 2026-08-28T01:05:14Z
 draft: false
-cadence_demoted: 2026-08-26T13:46:19Z
 lastmod: 2026-08-31
 tags: ["Gas-Anbieter wechseln", "Gastarif Vergleich", "Gaspreisgarantie", "Heizkosten senken", "Energie sparen"]
 categories: ["Ratgeber"]

@@ -281,13 +281,29 @@ def main():
                 for r in reasons:
                     print(f"     - {r}")
                 if not DRY_RUN:
+                    # park_state.hold() statt Hand-Regex: draft: true,
+                    # cadence_wait bewusst WEG – und der Grund bleibt
+                    # dokumentiert stehen. Genau das fehlte bisher: ohne
+                    # Grund-Feld war "draft ohne cadence_wait" mehrdeutig
+                    # (manueller Entwurf? Gate-Hemmung? verlorenes Flag?)
+                    # und die Kadenz-Wache konnte die Hemmung nicht von einem
+                    # Bug unterscheiden. Jetzt: cadence_guard queue_integrity()
+                    # hält diesen Post korrekt zurück und meldet ihn im Report.
                     path = os.path.join(POSTS_DIR, slug, "index.md")
-                    content = open(path, encoding="utf-8").read()
-                    content = re.sub(r"(?m)^draft:\s*false\s*$", "draft: true",
-                                     content, count=1)
-                    content = re.sub(r"(?m)^cadence_wait:\s*true\s*$\n?", "",
-                                     content, count=1)
-                    open(path, "w", encoding="utf-8").write(content)
+                    try:
+                        sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+                        import park_state
+                        grund = "publish-gate: " + "; ".join(reasons)
+                        if len(grund) > 180:      # Grund bleibt lesbar
+                            grund = grund[:177] + "…"
+                        park_state.hold(path, grund)
+                    except Exception as exc:      # nie am Gate scheitern
+                        print(f"  ⚠ {slug}: park_state nicht nutzbar "
+                              f"({exc}) – nur draft gesetzt")
+                        content = open(path, encoding="utf-8").read()
+                        content = re.sub(r"(?m)^draft:\s*false\s*$",
+                                         "draft: true", content, count=1)
+                        open(path, "w", encoding="utf-8").write(content)
 
     if gated:
         try:
