@@ -32,6 +32,7 @@ import os
 import re
 import sys
 import tempfile
+import time
 import urllib.error
 import urllib.request
 
@@ -52,6 +53,8 @@ REPORT_FILE = os.path.join(BLOG_DIR, "BACKLINK-REPORT.md")
 SITE = "https://franksfinanzcheck.de"
 UA = ("Mozilla/5.0 (compatible; FranksFinanzcheck-BacklinkScout/2.0; "
       "+https://franksfinanzcheck.de/)")
+HTTP_BUDGET_SECONDS = 45.0
+HTTP_REQUEST_TIMEOUT_SECONDS = 8.0
 
 OPEN_STATUSES = ("neu", "vorbereitet", "kontaktiert", "follow-up")
 CLOSED_STATUSES = ("gewonnen", "abgelehnt", "pausiert", "ungeeignet")
@@ -245,32 +248,49 @@ def stars(n):
 
 
 # ----------------------------------------------------------------- HTTP
-def http_check(url, timeout=8):
+def http_check(url, timeout=HTTP_REQUEST_TIMEOUT_SECONDS, deadline=None):
+    """Liefert einen HTTP-Status oder ``None`` – Netzwerkfehler werfen nie.
+
+    ``deadline`` ist ein absoluter ``time.monotonic()``-Zeitpunkt. Dadurch
+    teilen sich HEAD und der optionale GET-Fallback dasselbe Restbudget.
+    """
     headers = {"User-Agent": UA, "Accept": "text/html"}
+
+    def request(method):
+        try:
+            request_timeout = float(timeout)
+            if request_timeout <= 0:
+                return None
+            if deadline is not None:
+                remaining = float(deadline) - time.monotonic()
+                if remaining <= 0:
+                    return None
+                request_timeout = min(request_timeout, remaining)
+            # urllib akzeptiert positive Floats; ein winziger Rest darf den
+            # Gesamt-Scout nicht noch einmal um den vollen Timeout verlängern.
+            request_timeout = max(0.001, request_timeout)
+            req = urllib.request.Request(url, method=method, headers=headers)
+            with urllib.request.urlopen(req, timeout=request_timeout) as resp:
+                code = getattr(resp, "status", None)
+            return int(code) if code is not None else None
+        except urllib.error.HTTPError as exc:
+            try:
+                return int(exc.code)
+            except (TypeError, ValueError):
+                return None
+        except Exception:
+            return None
+
     try:
-        req = urllib.request.Request(url, method="HEAD", headers=headers)
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            return resp.status
-    except urllib.error.HTTPError as e:
-        if e.code in (403, 401, 405, 429):
-            return e.code
-        try:
-            req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
-                return resp.status
-        except urllib.error.HTTPError as e2:
-            return e2.code
-        except Exception:
-            return None
+        code = request("HEAD")
+        if code is not None and (code < 400 or code in (401, 403, 405, 429)):
+            return code
+        return request("GET")
     except Exception:
-        try:
-            req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
-                return resp.status
-        except urllib.error.HTTPError as e:
-            return e.code
-        except Exception:
-            return None
+        # Letzte Sicherung des öffentlichen Vertrags: HTTP darf den Scout
+        # weder wegen einer kaputten URL noch wegen einer Mock-/TLS-Eigenheit
+        # abbrechen.
+        return None
 
 
 def reachable_label(code):
@@ -723,6 +743,48 @@ def write_report(meta, prospects, articles, assets, campaigns, weekly, today):
         fh.write("\n".join(lines))
 
 
+def write_crash_report(error, today=None):
+    """Schreibt bei einem unerwarteten Scout-Fehler einen commitbaren Report."""
+    today = today or dt.date.today()
+    kind = type(error).__name__
+    detail = re.sub(r"\s+", " ", str(error)).strip() or "ohne Fehlermeldung"
+    detail = detail.replace("`", "'")[:500]
+    lines = [
+        f"# ⚠️ Backlink-Report – Scout-Warnung {today.isoformat()}",
+        "",
+        "> Der Premium-Scout ist unerwartet abgebrochen. Der Fehler wurde ",
+        "> abgefangen, als Report dokumentiert und beendet den Wochenjob bewusst ",
+        "> mit Exit 0. So löst ein flüchtiger HTTP-/Datenfehler keine neue ",
+        "> Workflow-Fehlerspirale aus.",
+        "",
+        "## Diagnose",
+        "",
+        f"- **Fehlertyp:** `{kind}`",
+        f"- **Meldung:** {detail}",
+        "- **Nächster Schritt:** Run-Log prüfen und Scout danach manuell neu starten.",
+        "",
+        "## Sicherheits-Gate bleibt aktiv",
+        "",
+        "- Kein Auto-Submit und keine automatisch versendeten Outreach-Nachrichten.",
+        "- Kein Linktausch und keine Verzeichniseinträge.",
+        "- Nie `/go/` als Pitch-Ziel verwenden.",
+        "",
+        "_Automatisch erzeugt von `scripts/backlink_automation.py`._",
+        "",
+    ]
+    fd, temp_path = tempfile.mkstemp(prefix=".backlink-report-", dir=BLOG_DIR)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            fh.write("\n".join(lines))
+        os.replace(temp_path, REPORT_FILE)
+    except Exception:
+        try:
+            os.unlink(temp_path)
+        except OSError:
+            pass
+        raise
+
+
 # ----------------------------------------------------------------- CLI helpers
 def apply_mark(state, spec):
     if "=" not in spec:
@@ -877,6 +939,11 @@ def run_selftest():
     check("Jeder VALID_TYPE hat ein Template",
           all(t in RENDERERS for t in VALID_TYPES))
 
+    # 9. Kaputte URLs dürfen niemals den wöchentlichen Scout abbrechen
+    check("HTTP-Check wirft bei kaputter URL nie",
+          http_check("://kaputt", timeout=0.01,
+                     deadline=time.monotonic() + 0.05) is None)
+
     failed = [n for n, ok in results if not ok]
     if failed:
         print(f"🛑 BACKLINK-SELFTEST FEHLGESCHLAGEN ({len(failed)}/{len(results)}):")
@@ -923,16 +990,31 @@ def main():
     print(f"Backlink-Scout Premium: {len(prospects)} Prospects, "
           f"{len(articles)} Live-Artikel, {len(assets)} Assets")
 
+    http_deadline = (None if no_net else
+                     time.monotonic() + HTTP_BUDGET_SECONDS)
+    budget_skipped = 0
     for p in prospects:
         status = p.get("status") or "neu"
         if no_net or not p.get("url") or status in CLOSED_STATUSES:
             p["_reachable"] = p.get("last_checked") and "–" or "–"
             continue
-        code = http_check(p["url"])
-        p["_reachable"] = reachable_label(code)
+        if time.monotonic() >= http_deadline:
+            p["_reachable"] = "⏭️ HTTP-Budget ausgeschöpft"
+            budget_skipped += 1
+            continue
+        code = http_check(p["url"], timeout=HTTP_REQUEST_TIMEOUT_SECONDS,
+                          deadline=http_deadline)
+        if code is None and time.monotonic() >= http_deadline:
+            p["_reachable"] = "⏭️ HTTP-Budget ausgeschöpft"
+        else:
+            p["_reachable"] = reachable_label(code)
         rec = state.setdefault("prospects", {}).setdefault(p["id"], {})
         rec["last_checked"] = today.isoformat()
         p["last_checked"] = today.isoformat()
+
+    if budget_skipped:
+        print(f"HTTP-Budget ({HTTP_BUDGET_SECONDS:g}s) ausgeschöpft – "
+              f"{budget_skipped} Checks auf den nächsten Lauf verschoben.")
 
     campaigns = active_campaigns(data, today)
     capacity = int(meta.get("weekly_capacity") or 5)
@@ -949,5 +1031,25 @@ def main():
     return 0
 
 
+def run_cli():
+    """Hält nur den automatischen Scout fehlertolerant; Selftest/CRM bleiben strikt."""
+    strict_modes = ("--selftest", "--mark", "--note")
+    if any(flag in sys.argv[1:] for flag in strict_modes):
+        return main()
+    try:
+        return main()
+    except Exception as exc:
+        detail = re.sub(r"\s+", " ", str(exc)).strip() or "ohne Fehlermeldung"
+        print(f"::warning title=Backlink-Scout abgefangen::{type(exc).__name__}: "
+              f"{detail[:500]}", file=sys.stderr)
+        try:
+            write_crash_report(exc)
+            print(f"Warnreport: {os.path.relpath(REPORT_FILE, BLOG_DIR)}")
+        except Exception as report_exc:
+            print(f"::warning title=Warnreport nicht schreibbar::"
+                  f"{type(report_exc).__name__}: {report_exc}", file=sys.stderr)
+        return 0
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run_cli())

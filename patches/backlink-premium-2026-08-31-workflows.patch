@@ -30,13 +30,32 @@
  # ============================================================
  name: Backlink-Automation
  
-@@ -38,17 +38,20 @@
-       - name: Python + Abhängigkeiten
-         run: pip install -q pyyaml
+@@ -31,24 +31,37 @@
+ jobs:
+   backlink-scout:
+     runs-on: ubuntu-latest
++    timeout-minutes: 15
+     steps:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
++        with:
++          fetch-depth: 0
  
+-      - name: Python + Abhängigkeiten
+-        run: pip install -q pyyaml
++      - name: Python 3.11 einrichten
++        uses: actions/setup-python@v5
++        with:
++          python-version: "3.11"
++
++      - name: Python-Abhängigkeiten robust installieren
++        run: |
++          python -m pip install --disable-pip-version-check \
++            --retries 5 --timeout 30 pyyaml
++
 +      - name: Selftest (Sabotage-Schutz)
 +        run: python3 scripts/backlink_automation.py --selftest
-+
+ 
        - name: Backlink-Scout ausführen
          run: python3 scripts/backlink_automation.py
  
