@@ -1,10 +1,9 @@
 ---
 title: "So findest du den richtigen: DSL-Tarif für dein Zuhause"
 description: "DSL Tarif finden: So findest du den richtigen DSL-Tarif für dein Zuhause: Bandbreiten-Bedarf, DSL vs. Kabel & Glasfaser, Sparpotenziale und die besten Tarife…"
-date: 2026-08-20T08:35:12Z
-draft: true
+date: 2026-08-31T04:02:49Z
+draft: false
 cadence_demoted: 2026-08-26T13:46:19Z
-cadence_wait: true
 tags: ["DSL Tarif finden", "Internet Bandbreite", "DSL Vergleich", "Glasfaser vs DSL", "Kabel Internet"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"

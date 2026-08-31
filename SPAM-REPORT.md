@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-08-30 20:47 UTC · Modus: FIX
+**Stand:** 2026-08-31 04:03 UTC · Modus: FIX
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
@@ -24,7 +24,7 @@
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
-- ℹ️ [F-OK] Feed sauber: 21 Items, Kadenz-konform, Cover vorhanden, keine Duplikate
+- ℹ️ [F-OK] Feed sauber: 24 Items, Kadenz-konform, Cover vorhanden, keine Duplikate
 
 ## C: Pinterest-Bulk-CSV (C1–C8)
 
