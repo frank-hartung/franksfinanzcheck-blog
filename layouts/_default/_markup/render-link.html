@@ -110,6 +110,16 @@
 {{- if .Page -}}{{- with .Page.File -}}{{- $artikelPfad = .Path | default "" -}}{{- end -}}{{- end -}}
 {{- $pillar := "" -}}
 {{- if .Page }}{{ $pillar = .Page.Params.pillar | default "" }}{{ end -}}
+{{- /* Artikel-Slug für Awin-SubID (Klicks→Umsatz). Aus dem Quelldatei-Pfad extrahieren.
+   Hugo .File.Path ist content-relativ: posts/<slug>/index.md (oder content/posts/<slug>/).
+   Robust: letzte Verzeichnisebene = Slug (bei index.md), sonst Dateiname ohne .md. */ -}}
+{{- $artikelSlug := "" -}}
+{{- $artikelBase := path.Base $artikelPfad -}}
+{{- if eq $artikelBase "index.md" -}}
+  {{- $artikelSlug = path.Base (path.Dir $artikelPfad) -}}
+{{- else if $artikelBase -}}
+  {{- $artikelSlug = $artikelBase | strings.TrimSuffix ".md" -}}
+{{- end -}}
 
 {{- if $tot -}}
   {{- /* Ziel ist nicht im Build → Ankertext als Klartext (kein 404-Link). */ -}}
@@ -121,5 +131,14 @@
    (Ziel), data-umami-event-article = Quelldatei, data-umami-event-pillar = Pillar.
    Damit kann `scripts/click_attribution.py` Klicks exakt einem Artikel zuordnen
    (Content-Priorisierung nach Umsatz-Hebel statt nur Traffic). */ -}}
-<a href="{{ $href | safeURL }}"{{ if $isGo }} rel="sponsored nofollow noopener" target="_blank" data-umami-event="affiliate_click" data-umami-event-slug="{{ $slug }}" data-umami-event-article="{{ $artikelPfad }}" data-umami-event-pillar="{{ $pillar }}" title="{{ .Title | default $tooltip }}"{{ end }}{{ if not $isGo }}{{ with .Title }} title="{{ . }}"{{ end }}{{ end }}>{{ .Text | safeHTML }}</a>
+{{- /* Awin-SubID: Der /go/-Link trägt ?subid=<artikelslug>, damit der Gateway
+   sie an Awin weitergibt (Klicks→Umsatz pro Artikel). Nur wenn ein Slug bekannt
+   und nicht bereits vorhanden. */ -}}
+{{- $goHref := $href -}}
+{{- if and $isGo $artikelSlug -}}
+  {{- if not (strings.Contains $href "subid=") -}}
+    {{- $goHref = print $href "?subid=" $artikelSlug -}}
+  {{- end -}}
+{{- end -}}
+<a href="{{ $goHref | safeURL }}"{{ if $isGo }} rel="sponsored nofollow noopener" target="_blank" data-umami-event="affiliate_click" data-umami-event-slug="{{ $slug }}" data-umami-event-article="{{ $artikelPfad }}" data-umami-event-pillar="{{ $pillar }}" title="{{ .Title | default $tooltip }}"{{ end }}{{ if not $isGo }}{{ with .Title }} title="{{ . }}"{{ end }}{{ end }}>{{ .Text | safeHTML }}</a>
 {{- end -}}

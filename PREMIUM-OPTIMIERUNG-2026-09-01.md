@@ -155,8 +155,8 @@ Beide Skripte laufen wöchentlich im **Premium-Governance-Workflow** (gepatcht):
 | Baustein | Warum | Vorbereitung |
 |---|---|---|
 | **Google-Indexierungs-Wächter** | IndexNow deckt Bing/Naver/Yandex; Google bleibt Hauptkanal. Search-Console-API → wöchentlich „neu indexiert?" als Issue | API-Zugang nötig; Muster in Scorecard/Issues vorhanden |
-| **Pinterest-API-Live-Fetch** | Der `--fetch`-Pfad braucht ein Token mit `read_ads`-Scope; ohne Token fällt die Schleife auf die Datei zurück | Grundgerüst gebaut |
-| **Awin-Provisions-Import** | SubID→Artikel-Mapping → verbindet Klick-Tracking mit Umsatz | Klick-Attribution liefert die Artikel-Zuordnung |
+| **Pinterest-API-Live-Fetch** | `--fetch` zieht Boards→Pins→Pin-Analytics live über API v5 (Token mit `read_ads`); ohne Token Fallback auf `data/pinterest_perf.yaml`. **UMGESETZT + selbsterprobt** | `pinterest_perf_feedback.py` `_fetch_live`; Scope `read_ads` in `pinterest_auth.py` |
+| **Awin-Provisions-Import** | SubID→Artikel-Mapping über `data/subid_map.yaml`; `/go/-Link` trägt `?subid=<slug>`, Gateway reicht es an Awin weiter. Scorecard zeigt Umsatz-Hebel. **UMGESETZT + selbsterprobt** | `scripts/awin_provisions.py`; `_render_awin` in Scorecard; Awin-Step im Governance-Workflow |
 | **Stil-Sprint (menschengeführt)** | 100 Lektorat-Report-Funde brauchen Urteilskraft, nicht Auto-Fix | Scorecard priorisiert sie |
 
 ---
@@ -171,10 +171,14 @@ python3 scripts/secrets_age_guard.py --selftest
 python3 scripts/editorial_scorecard.py --selftest
 
 # Wöchentlich (oder manuell via Workflow "Premium-Governance")
-python3 scripts/editorial_scorecard.py            # Scorecard
+python3 scripts/editorial_scorecard.py            # Scorecard (inkl. Awin-Umsatz-Hebel)
 python3 scripts/decay_radar.py --as-of +180d      # Frische-Forecast
 python3 scripts/cwv_guard.py --public public/     # nach Hugo-Build
 python3 scripts/secrets_age_guard.py              # Secrets-Ampel
+
+# Awin-Umsatz (Klicks -> Provision) — nach jedem Transaktions-Export
+python3 scripts/awin_provisions.py --gen-subid-map   # einmalig: data/subid_map.yaml
+python3 scripts/awin_provisions.py --awin-csv data/awin_transactions.csv
 
 # Secrets-Log pflegen (in den jeweiligen Erfolgs-Workflows)
 python3 scripts/secrets_age_guard.py --record-success PINTEREST_ACCESS_TOKEN
@@ -187,7 +191,7 @@ python3 scripts/secrets_age_guard.py --record-success PINTEREST_ACCESS_TOKEN
 > git apply patches/premium-governance-2026-09-01-workflows.patch
 > git add .github && git commit -m "ci: Premium-Governance + Engine-Fixes" && git push
 > ```
-> Der Patch enthält: **`premium-governance.yml`** (neu), **`deploy-catchup.yml`** (F1: Engine + Premium-Governance in Deploy-Trigger), **`content-engine-v2.yml`** (F2: Phase 4 + S2-Heredoc-Fix). Die Skripte, der README-Abschnitt und dieser Report sind dagegen bereits gepusht (laufen ohne den Patch nicht: `premium-governance.yml` fehlt bis dahin).
+> Der Patch enthält: **`premium-governance.yml`** (neu, inkl. **Awin-Provisions-Import**-Step + `data/awin_provisions.json`/`data/subid_map.yaml` im Commit), **`deploy-catchup.yml`** (F1: Engine + Premium-Governance in Deploy-Trigger), **`content-engine-v2.yml`** (F2: Phase 4 + S2-Heredoc-Fix). Die Skripte, der README-Abschnitt und dieser Report sind dagegen bereits gepusht (laufen ohne den Patch nicht: `premium-governance.yml` fehlt bis dahin).
 
 ---
 

@@ -82,10 +82,10 @@ index 5af7991..77badb6 100644
  
 diff --git a/.github/workflows/premium-governance.yml b/.github/workflows/premium-governance.yml
 new file mode 100644
-index 0000000..58a5e20
+index 0000000..916d268
 --- /dev/null
 +++ b/.github/workflows/premium-governance.yml
-@@ -0,0 +1,158 @@
+@@ -0,0 +1,172 @@
 +# ============================================================
 +#  PREMIUM-GOVERNANCE (Chefredakteur-Scorecard + Decay + CWV + Secrets)
 +#
@@ -194,6 +194,18 @@ index 0000000..58a5e20
 +          python3 scripts/click_attribution.py | tee /tmp/clicks.log
 +          exit ${PIPESTATUS[0]}
 +
++      # ---------- 7) AWIN-PROVISIONS-IMPORT (Klicks → Umsatz) ----------
++      # Liest den Awin-Transaktions-Export (data/awin_transactions.csv) und
++      # aggregiert Provisionen pro Artikel (SubID→Slug). DSGVO-sicher: nur
++      # Summen, keine Kundendaten. Der Import läuft nur, wenn der CSV vorliegt;
++      # sonst meldet das Skript "keine Daten" (kein Abbruch).
++      - name: Awin-Provisions-Import
++        id: awin
++        continue-on-error: true
++        run: |
++          python3 scripts/awin_provisions.py | tee /tmp/awin.log
++          exit ${PIPESTATUS[0]}
++
 +      - name: Erfolgreiche Secrets vermerken (pro Kanal)
 +        if: always()
 +        env:
@@ -211,19 +223,20 @@ index 0000000..58a5e20
 +          git config user.name "Governance-Bot"
 +          git config user.email "governance-bot@users.noreply.github.com"
 +          git add EDITORIAL-SCORECARD.md DECAY-REPORT.md CWV-REPORT.md SECRETS-REPORT.md 2>/dev/null || true
-+          git add PINTEREST-PERF-REPORT.md CLICK-REPORT.md 2>/dev/null || true
++          git add PINTEREST-PERF-REPORT.md CLICK-REPORT.md AWIN-REPORT.md 2>/dev/null || true
 +          git add data/decay_queue.json data/cwv_manifest.json data/secrets_state.json 2>/dev/null || true
 +          git add data/pinterest_weights.yaml data/click_stats.json data/pinterest_perf_history.jsonl 2>/dev/null || true
++          git add data/awin_provisions.json data/subid_map.yaml 2>/dev/null || true
 +          if git diff --cached --quiet; then
 +            echo "Governance: keine Änderungen."
 +          else
-+            git commit -m "governance: Scorecard + Decay + CWV + Secrets + Pinterest-Perf + Klick-Attribution (wöchentlich)"
++            git commit -m "governance: Scorecard + Decay + CWV + Secrets + Pinterest-Perf + Klick-Attribution + Awin (wöchentlich)"
 +            scripts/git_sync.sh --push-only
 +          fi
 +
 +      # ---------- GEBÜNDELTES ISSUE ----------
 +      - name: Governance-Issue bei Handlungsbedarf
-+        if: failure() || steps.scorecard.outcome == 'failure' || steps.decay.outcome == 'failure' || steps.cwv.outcome == 'failure' || steps.secrets.outcome == 'failure' || steps.pinperf.outcome == 'failure' || steps.clicks.outcome == 'failure'
++        if: failure() || steps.scorecard.outcome == 'failure' || steps.decay.outcome == 'failure' || steps.cwv.outcome == 'failure' || steps.secrets.outcome == 'failure' || steps.pinperf.outcome == 'failure' || steps.clicks.outcome == 'failure' || steps.awin.outcome == 'failure'
 +        uses: actions/github-script@v7
 +        with:
 +          script: |
@@ -235,6 +248,7 @@ index 0000000..58a5e20
 +            try { body += '### Secrets\n\n```\n' + fs.readFileSync('/tmp/secrets.log', 'utf-8') + '\n```\n'; } catch (e) {}
 +            try { body += '### Pinterest-Performance\n\n```\n' + fs.readFileSync('/tmp/pinperf.log', 'utf-8') + '\n```\n'; } catch (e) {}
 +            try { body += '### Klick-Attribution\n\n```\n' + fs.readFileSync('/tmp/clicks.log', 'utf-8') + '\n```\n'; } catch (e) {}
++            try { body += '### Awin-Provisions\n\n```\n' + fs.readFileSync('/tmp/awin.log', 'utf-8') + '\n```\n'; } catch (e) {}
 +            body += '\n---\nAutomatisch vom Premium-Governance-Workflow (Label: governance).';
 +            await github.rest.issues.create({
 +              owner: context.repo.owner,
