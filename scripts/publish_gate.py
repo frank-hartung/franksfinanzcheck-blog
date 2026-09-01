@@ -2,7 +2,7 @@
 """publish_gate.py – Harte Vor-Publish-Kontrolle (13.08.2026)
 
 Betriebsregel (Frank, 13.08.2026, erweitert 14.08.2026): Zukünftige Artikel
-werden nur dann tatsächlich live geschaltet, wenn sie VIER automatische
+werden nur dann tatsächlich live geschaltet, wenn sie SIEBEN automatische
 Prüfungen bestehen:
 
   1. check_length.py          – Zeichenlänge Premium (Floor 10.000, Optimum 12.000–18.000)
@@ -201,6 +201,71 @@ def affiliate_integrity_failures():
     return per_slug, None
 
 
+
+def readability_failures(candidates):
+    """Live-Kandidaten mit Lesbarkeits-Score unter Top-Level (75) finden.
+
+    Der Publish-Pfad bewertet bewusst pro Kandidat. Fällt der Prüfer selbst
+    aus, gilt fail-closed: kein neuer Artikel darf ungeprüft live gehen.
+    """
+    try:
+        from readability_check import load_article, analyze
+    except Exception as exc:
+        reason = f"Lesbarkeitsprüfung nicht verfügbar: {exc}"
+        return {slug: [reason] for slug in candidates}, None
+
+    failed = {}
+    for slug in candidates:
+        path = os.path.join(POSTS_DIR, slug, "index.md")
+        error = "Lesbarkeitsprüfung lieferte kein Ergebnis"
+        try:
+            article = load_article(path)
+            result = analyze(article) if article else None
+        except Exception as exc:
+            result = None
+            error = f"Lesbarkeitsprüfung nicht auswertbar: {exc}"
+        if not result:
+            failed[slug] = [error]
+            continue
+        if result.get("score", 0) < 75:
+            detail = "; ".join(result.get("issues", [])) or "Score unter 75"
+            failed[slug] = [
+                f"Lesbarkeits-Score {result.get('score', 0)}/100 (Mindestwert 75): {detail}"
+            ]
+    return failed, None
+
+
+def textverstaendnis_failures(candidates):
+    """Harte R2/R3/R5/R7/R8-URL-Verstöße pro Kandidat finden.
+
+    R4 und R8-Anker bleiben bewusst Review-Hinweise; die deterministisch
+    harten Regeln blockieren dagegen jede neue Veröffentlichung.
+    """
+    try:
+        from textverstaendnis_guard import (
+            split_body, load_terminologie, check_article,
+        )
+        hard_rules = {
+            "R2-KEYWORD-DUMP", "R3-TERMINOLOGIE",
+            "R5-ABSATZ-HART", "R7-INTRO-FORMEL",
+            "R8-URL-LEERZEICHEN",
+        }
+        term = load_terminologie()
+        failed = {}
+        for slug in candidates:
+            path = os.path.join(POSTS_DIR, slug, "index.md")
+            body = split_body(open(path, encoding="utf-8").read())
+            finds = [f for f in check_article(
+                os.path.join("content", "posts", slug, "index.md"),
+                body, term
+            ) if f[1] in hard_rules]
+            if finds:
+                failed[slug] = [f"{rule}: {detail}" for _, rule, detail, _ in finds[:5]]
+        return failed, None
+    except Exception as exc:
+        reason = f"Textverständnisprüfung nicht verfügbar: {exc}"
+        return {slug: [reason] for slug in candidates}, None
+
 def discard_article(slug):
     """Löscht einen durchgefallenen Artikel vollständig: Content-Bundle +
     generierte Cover-Bilder (alle Größen/Formate). Kein Artefakt bleibt
@@ -234,6 +299,8 @@ def main():
     aff_fail, aff_warn = affiliate_profi_failures()
     integ_fail, integ_warn = affiliate_integrity_failures()
     r5_fail = title_integrity_failures(candidates)
+    readability_fail, readability_warn = readability_failures(candidates)
+    understanding_fail, understanding_warn = textverstaendnis_failures(candidates)
     for w in (len_warn, seo_warn):
         if w:
             print(f"⚠ {w}")
@@ -241,6 +308,10 @@ def main():
         print(f"⚠ {aff_warn}")
     if integ_warn:
         print(f"⚠ {integ_warn}")
+    if readability_warn:
+        print(f"⚠ {readability_warn}")
+    if understanding_warn:
+        print(f"⚠ {understanding_warn}")
 
     gated = []
     demoted = []
@@ -258,6 +329,10 @@ def main():
         if slug in r5_fail:
             reasons.append("Cover-Text-Komplettheit (check_titles R5) nicht bestanden – "
                            "Titel vermutlich unvollständig")
+        if slug in readability_fail:
+            reasons.append("Lesbarkeits-Gate nicht bestanden: " + "; ".join(readability_fail[slug]))
+        if slug in understanding_fail:
+            reasons.append("Textverständnis-Gate nicht bestanden: " + "; ".join(understanding_fail[slug]))
 
         if reasons:
             if slug.startswith(today):
