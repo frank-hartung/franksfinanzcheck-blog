@@ -121,8 +121,12 @@ def strip_shy(text):
     return "".join(chars), table
 
 
+API_FAILURES = 0   # hochgezählt bei nicht erreichbarer LanguageTool-API
+
+
 def lt_check(text, whitelist):
     """LanguageTool-Check eines Texts. Liefert Liste von Matches (gefiltert)."""
+    global API_FAILURES
     if not text.strip():
         return []
     results = []
@@ -139,6 +143,9 @@ def lt_check(text, whitelist):
         try:
             resp = json.loads(urllib.request.urlopen(req, timeout=60).read())
         except Exception as e:
+            # Toter-Gate-Schutz (01.09.2026, Audit): API-Fehler wurden bisher
+            # still geschluckt -> Report meldete dauerhaft „0 Funde“.
+            API_FAILURES += 1
             print(f"  ⚠️ LanguageTool-Fehler: {e}")
             time.sleep(5)
             continue
@@ -277,6 +284,10 @@ def main():
         if problems:
             all_problems.append({"file": a["file"], "title": a["title"], "problems": problems})
             print(f"  {a['file']}: {len(problems)} Funde")
+        if API_FAILURES > 3:
+            print("🛑 Circuit-Breaker: LanguageTool-API mehrfach nicht erreichbar – "
+                  "Abbruch, der Report markiert den Gate als nicht auswertbar.")
+            break
 
     # Anwenden (rückwärts)
     fixed_count = 0
@@ -300,24 +311,34 @@ def main():
     # Report
     total = sum(len(e["problems"]) for e in all_problems)
     still = [p for e in all_problems for p in e["problems"] if not p.get("applied")]
+    api_down = API_FAILURES > 0 and total == 0
     lines = [
         "# 🔤 Grammatik-Report", "",
         f"> **Automatisch** – {len(articles)} Artikel geprüft (LanguageTool de-DE), "
         f"{total} Funde, {fixed_count} korrigiert, {len(still)} offen.", "",
-        "## Funde", "",
     ]
-    for e in all_problems:
-        lines.append(f"### {e['file']}")
-        for p in e["problems"]:
-            mark = "✅" if p.get("applied") else "⚠️"
-            lines.append(f"- {mark} „{p['word']}“ → „{p['fix']}“ – {p['reason'][:80]}")
+    if api_down:
+        lines += [f"🛑 **LanguageTool-API NICHT erreichbar** ({API_FAILURES} fehlgeschlagene "
+                  "Requests) – dieser Gate ist aktuell NICHT auswertbar. Bitte API-Erreichbarkeit "
+                  "prüfen (api.languagetool.org); sonst liefert der Report dauerhaft 0 Funde.",
+                  "",
+                  "## Funde", "", "_(keine – API down)_"]
+    else:
+        lines.append("## Funde")
+        for e in all_problems:
+            lines.append(f"### {e['file']}")
+            for p in e["problems"]:
+                mark = "✅" if p.get("applied") else "⚠️"
+                lines.append(f"- {mark} „{p['word']}“ → „{p['fix']}“ – {p['reason'][:80]}")
     lines += ["", "---", "*Erzeugt von scripts/grammar_check.py (LanguageTool Public API)*"]
     open(REPORT_FILE, "w", encoding="utf-8").write("\n".join(lines))
     json.dump({"articles": len(articles), "total": total, "fixed": fixed_count,
-               "open": len(still)}, open(JSON_FILE, "w", encoding="utf-8"))
+               "open": len(still), "api_failures": API_FAILURES},
+              open(JSON_FILE, "w", encoding="utf-8"))
 
-    print(f"\nFertig: {total} Funde, {fixed_count} korrigiert, {len(still)} offen.")
-    sys.exit(1 if still else 0)
+    print(f"\nFertig: {total} Funde, {fixed_count} korrigiert, {len(still)} offen "
+          f"(API-Fehler: {API_FAILURES}).")
+    sys.exit(2 if api_down else (1 if still else 0))
 
 
 if __name__ == "__main__":

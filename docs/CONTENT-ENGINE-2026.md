@@ -3,6 +3,8 @@
 **Strategie:** Die 6 bestehenden Silos (Sparen/Tarife/Versicherungen/Internet/Reisen) sind gefüllt. Die Engine erschließt jetzt die **fehlenden Wachstumsfelder**: Geldanlage & ETFs, Altersvorsorge, Steuern, Vermögensaufbau, Finanzpsychologie, Wirtschaft & Märkte.
 
 > Diese Datei ist die **Arbeitsgrundlage der autonomen Content-Engine**: Themen-Pipeline (Schritt 1), SEO-Blueprints (Schritt 2), 30-Tage-Kalender (Schritt 4). Die Artikel (Schritt 3) werden über die bestehende Qualitäts-Pipeline (7 Gates) produziert und an Publikationstagen (Mo/Mi/Fr, 2–3 Artikel pro Tag) vom Content-Bot veröffentlicht.
+>
+> **Seit 01.09.2026 (Audit-Umsetzung):** Die Pipeline wurde um die Verständnis-Gates R1–R10 erweitert (`duplikat_guard`, `textverstaendnis_guard`, gehärteter `readability_check`, `link_guard`, ehrlicher `grammar_check`, `length_guard`-R9-Duplikatschutz, `quality_score`-Lesbarkeitsgewicht). Neue Artikel, die harte Regeln verletzen, werden als `draft: true` geparkt („Entwurf statt Publikation“) statt still publiziert. Details: `QUALITAETS-REGELWERK.md`, Abschnitt „Verständnis-Guards R1–R10“.
 
 ---
 

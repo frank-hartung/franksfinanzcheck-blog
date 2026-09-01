@@ -26,7 +26,7 @@ pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 
 
 
-Klettert deine jährliche Stromabrechnung trotz sparsamer Gewohnheiten immer weiter nach oben? In fast jedem Haushalt verbergen sich heimliche **Energiediebe**, die rund um die Uhr teuren Strom aus der Steckdose ziehen – selbst dann, wenn niemand zu Hause ist oder alle Geräte scheinbar ausgeschaltet sind. Veraltete Haushaltsgeräte, daueraktive Unterhaltungselektronik und ineffiziente Netzteile treiben den Jahresverbrauch unbemerkt um hunderte Kilowattstunden in die Höhe. In diesem Ratgeber zeige ich dir, wie du **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und eliminieren kannst, um bis zu **420 €** pro Jahr einzusparen.
+Klettert deine jährliche Stromabrechnung trotz sparsamer Gewohnheiten immer weiter nach oben? In fast jedem Haushalt verbergen sich heimliche **Energiediebe**, die rund um die Uhr teuren Strom aus der Steckdose ziehen – selbst dann, wenn niemand zu Hause ist oder alle Geräte scheinbar ausgeschaltet sind. Veraltete Haushaltsgeräte, daueraktive Unterhaltungselektronik und ineffiziente Netzteile treiben den Jahresverbrauch unbemerkt um hunderte Kilowattstunden in die Höhe. Ich zeige dir, wie du **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und eliminieren kannst, um bis zu **420&nbsp;€** pro Jahr einzusparen.
 
 ---
 
@@ -112,7 +112,13 @@ Praktische Anleitungen zur jahreszeitlichen Fixkostenoptimierung findest du in u
 
 ## Messen in einer Woche – das Protokoll, das Schätzungen ersetzt
 
-Tag 1: Kühlschrank 24 Stunden. Tag 2: Gefriertruhe. Tag 3: Desktop-PC inkl. Monitor und Dock im Alltag. Tag 4: TV-Ecke Standby über Nacht. Tag 5: Waschmaschine ein Eco-Gang vs. 60 °C. Tag 6: Trockner ein Vollgang. Tag 7: Alles, was „immer an“ ist (Pumpe, NAS, alter Decoder).
+- Tag 1: Kühlschrank 24 Stunden
+- Tag 2: Gefriertruhe
+- Tag 3: Desktop-PC inkl. Monitor und Dock im Alltag
+- Tag 4: TV-Ecke Standby über Nacht
+- Tag 5: Waschmaschine ein Eco-Gang vs. 60 °C
+- Tag 6: Trockner ein Vollgang
+- Tag 7: Alles, was „immer an“ ist (Pumpe, NAS, alter Decoder)
 
 Formel: gemessene Watt × Stunden × 365 / 1000 × Arbeitspreis. 12 Watt Dauerbetrieb = 105 kWh ≈ 32–38 € im Jahr. Fünf solche Geräte sind ein Restaurantbesuch pro Monat, unsichtbar.
 
@@ -131,7 +137,10 @@ Energiediebe sind selten dramatisch. Sie sind langweilig und dauerhaft. Genau de
 
 ## Ersatzentscheidung mit Amortisation, nicht mit schlechtem Gewissen
 
-Nur weil ein Gerät alt ist, muss es nicht morgen neu sein. Rechnung: (alter kWh − neuer kWh) × Preis × Jahre bis du sowieso tauschst. Unter 3 Jahren Amortisation: tauschen, wenn das Geld da ist. Über 8 Jahren: erst einstellen, abtauen, Standort ändern. Die Truhe im Keller auf −18 °C statt −24 °C ist ein 0-€-Hebel, der oft 10–20 % ihres Verbrauchs holt.
+Nur weil ein Gerät alt ist, muss es nicht morgen neu sein. Rechnung: (alter kWh − neuer kWh) × Preis × Jahre bis du sowieso tauschst.
+
+Unter 3 Jahren Amortisation: tauschen, wenn das Geld da ist. Über 8 Jahren: erst einstellen, abtauen, Standort ändern. Die Truhe im Keller auf −18 °C statt −24 °C ist ein 0-€-Hebel, der oft 10–20 % ihres Verbrauchs holt.
+
 
 ## Fazit: Erst messen, dann gezielt Energiediebe stoppen
 

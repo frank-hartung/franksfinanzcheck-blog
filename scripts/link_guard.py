@@ -42,7 +42,10 @@ DO_FIX = "--fix" in sys.argv
 DRY_RUN = "--dry-run" in sys.argv
 NEW_ONLY = "--new-only" in sys.argv
 
-REL_LINK = re.compile(r"\]\((\.\./\.\./(?:posts|pillar)/)([^)\s]+?)(/?)\)")
+# V2 (01.09.2026): [^)] erfasst auch URLs MIT Leerzeichen (z. B. "zu Hause"-Slugs),
+# die vorher stillschweigend ignoriert wurden -> stille 404-Fabrik.
+# REL_LINK: erfasst auch URLs MIT Leerzeichen („zu Hause“-Slugs)
+REL_LINK = re.compile(r"\]\((\.\./\.\./(?:posts|pillar)/)([^)]*?)(/?)\)")
 GO_LINK = re.compile(r"\]\(/go/([\w-]+)/\)")
 
 
@@ -65,6 +68,11 @@ def known_go_keys() -> set:
             if ls and not ls.startswith("#") and ": " in ls and '"' in ls:
                 reg.add(ls.split(":")[0].strip())
     return reg
+
+
+def space_norm(slug: str) -> str:
+    """Leerzeichen-Slug („zu Hause“) -> ohne Whitespace, lowercase."""
+    return re.sub(r"\s+", "", slug).lower()
 
 
 def heal_slug(broken: str, register: dict) -> str:
@@ -103,12 +111,22 @@ SELFTEST = [
     ("2026-08-06-turbo-fuers-n", {"2026-08-06-turbo-fuers-netz": ""}, "2026-08-06-turbo-fuers-netz"),
     ("gibt-es-gar-nicht-xyz", {"tagesgeld-zinsen": "", "dsl-wechsel": ""}, ""),
     ("kfz-versicherung-wechseln-extrailang", {"kfz-versicherung-wechseln": ""}, "kfz-versicherung-wechseln"),
+    # V1-SPACE (01.09.2026): Leerzeichen-Slug, wie "…-dsl-tarif-fuer-dein-zu Hause"
+    ("2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause",
+     {"2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": ""},
+     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause"),
 ]
 
 
 def run_selftest() -> list:
     fehler = []
     for i, (broken, reg, want) in enumerate(SELFTEST, 1):
+        # Fall 7 (V1-SPACE) läuft über space_norm statt heal_slug
+        if i == len(SELFTEST):
+            got = space_norm(broken)
+            if got != want:
+                fehler.append(f"  Fall {i}: „{broken}“ → erwartet „{want or '—'}“, bekam „{got or '—'}“")
+            continue
         got = heal_slug(broken, reg)
         if got != want:
             fehler.append(f"  Fall {i}: „{broken}“ → erwartet „{want or '—'}“, bekam „{got or '—'}“")
@@ -123,6 +141,15 @@ def scan_file(path: Path, register: dict, gow: set) -> tuple:
     def repl_rel(m):
         nonlocal fixes
         prefix, slug, slash = m.group(1), m.group(2), m.group(3)
+        # Leerzeichen-Slug („zu Hause“) heilen: Whitespace entfernen + lowercase
+        if " " in slug:
+            slug_norm = space_norm(slug)
+            if slug_norm in register:
+                fixes += 1
+                reports.append(("V1-SPACE", f"{slug} -> {slug_norm} (Leerzeichen entfernt)"))
+                return f"](../../{register[slug_norm]}/{slug_norm}{slash})"
+            reports.append(("V1-SPACE", f"Leerzeichen-Slug ohne Ziel: {slug} (manuell pruefen!)"))
+            return m.group(0)
         # Sektionsfehler zuerst: exakten Slug in FALSCHER Sektion?
         if slug in register:
             want = "posts" if "posts" in prefix else "pillar"

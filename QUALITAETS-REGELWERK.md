@@ -43,11 +43,54 @@ KI-Artikel (engine_generate.py)
    ├─► check_uniqueness.py      Duplikat-Audit
    ├─► affiliate_link_check.py  Check24-/Tarifcheck-Link-Pflege
    ├─► check_covers.py --fix    *Cover-Stale-Erkennung über Manifest
-   └─► generate_kurzantworten.py  💡-Box „Kurz & knapp"
+   ├─► generate_kurzantworten.py  💡-Box „Kurz & knapp"
+   │
+   ├─► 🧠 duplikat_guard.py       R1 Duplikate (parkt neue Artikel)
+   ├─► 🧠 textverstaendnis_guard.py R2-R5/R7/R8 Verständnis (parkt neue Artikel)
+   ├─► 🔗 link_guard.py           Links (Slugs, Ziele, UTM)
+   ├─► 📖 absorb_whitelist.py     Rechtschreib-Rauschen (Komposita → Whitelist)
+   └─► 🩺 grammar_check.py        Grammatik-Gate (ehrlich: Exit 2 bei API-Ausfall)
 ```
 
 Ausführung aller Regeln: **niemals blockierend** (`|| echo "nicht kritisch"`).
 Fehler dürfen nie die Veröffentlichung stoppen, aber sie werden sichtbar gemacht.
+**Ausnahme (01.09.2026):** Die Verständnis-Gates (R1/R2/R3/R6/R7/R8) parken neue
+Artikel als `draft: true` statt sie still zu publizieren („Entwurf statt
+Publikation“ – siehe unten).
+
+---
+
+## 🧠 Verständnis-Guards R1–R10 (Inkraft 01.09.2026)
+
+Umsetzung des `TEXTVERSTAENDNIS-AUDIT-REPORT.md`. Zielwerte (6-Monats-Horizont):
+Flesch-Amstad Ø ≥ 62 · LIX-Median ≤ 48 · Ø Satzlänge ≤ 15 · >25-Wort-Sätze < 10 % ·
+offene Rechtschreib-Funde < 30 · 0 Duplikate · 0 Keyword-Dumps · 0 Intro-Formeln.
+
+| Regel | Skript | Definition & Schwelle | Verhalten |
+|---|---|---|---|
+| R1 | `duplikat_guard.py` | Exakte Absatz-Duplikate (SHA-256) + Near-Duplikate (Ratio ≥ 0,85), H2-Sektions-Duplikate (≥ 0,85), Premium-Anhänge (5er-Shingles); Boilerplate (Disclaimer/„Weiterlesen“) ausgeschlossen | `--new-only` blockierend; Bestand Report + `--fix` (ältere Version entfernen) |
+| R2 | `textverstaendnis_guard.py` | Keyword-Dump: Fließtext-Absatz > 200 Zeichen, > 12 Kommas, > 40 Tokens, ≤ 2 Verben | hart, blockierend |
+| R3 | `textverstaendnis_guard.py` + `data/terminologie.yaml` | Je Konzept ein Leitbegriff (z. B. „DNS-Server“); Synonyme > `max_synonyme` im Artikel → Fund; Ersterwähnung darf erklären | hart, blockierend |
+| R4 | `textverstaendnis_guard.py` | Satzanfangs-Echo: gleicher Anfang > 20 % der Fließtextsätze ODER > 4×/1.000 Wörter | weich (Report) |
+| R5 | `textverstaendnis_guard.py` + `r5_absatz_splitter.py` | Fließtext-Absatz > 4 Sätze → Fund; > 6 Sätze → hart; Splitter teilt an Satzgrenzen (2+3) | hart ab > 6 Sätzen; Splitter für Bestand |
+| R6 | `readability_check.py` (gehärtet) | Flesch ≥ 60, Ø Satzlänge ≤ 16, >25-Wort-Sätze < 10 %, Keyword-Dumps & Absatzlängen separat gemessen, Silbenzählung deutsch korrigiert (End-e nicht abgezogen, -ion/-ie-Endungen), Satzlängen-SD als Metrik | `--new-only` blockierend |
+| R7 | `textverstaendnis_guard.py` | Intro-Formel „In diesem Ratgeber/Artikel/…“ → 0 Toleranz | hart, blockierend; Engine-Prompt rotiert 8 Öffnungen |
+| R8 | `textverstaendnis_guard.py` + `link_guard.py` | Ankertext-Substantive gegen Titel/Slug des Ziels; Leerzeichen im Slug → hart | hart bei Leerzeichen-Slug; Ziel-Mismatch weich |
+| R9 | `length_guard.py` | Längen-Selbstheilung prüft neue Module gegen vorhandenen Text: 5er-Wort-Shingle-Overlap > 40 % → Modul verworfen | verhindert Duplikat-Erzeugung |
+| R10 | `quality_score.py` | Lesbarkeit jetzt mit Gewicht 0,20 im Score (vorher 0,00 trotz Docstring-Versprechen) | Publish/Draft-Entscheidung |
+
+**Blockierender Mechanismus „Entwurf statt Publikation“** (`content-engine-v2.yml`,
+Phase 2): Nach allen Lektorats-Gates laufen `duplikat_guard --new-only`,
+`textverstaendnis_guard --new-only` und `readability_check --new-only`. Bei harten
+Funden werden betroffene neue Artikel (≤ 3) auf `draft: true` gesetzt und der
+Schritt bricht mit Exit 1 ab – der Artikel bleibt Entwurf, bis er manuell
+freigegeben wird. Sind mehr als 3 Artikel betroffen, greift der Circuit-Breaker:
+NICHTS wird geparkt, die Guards selbst gelten als fehlerhaft.
+
+**Wöchentlicher Verständnis-Report** (`seo-weekly.yml`): `duplikat_guard` und
+`textverstaendnis_guard` laufen als Komplett-Audit über alle Artikel;
+`absorb_whitelist.py` senkt das Rechtschreib-Rauschen (Wörter, die in ≥ 3
+Artikeln als „unbekannt“ auftauchen, werden in die Whitelist übernommen).
 
 ---
 
@@ -310,7 +353,11 @@ jeder Schreibaktion.
 | Was schiefgehen kann | Wer heilt es |
 |---|---|
 | Schwache KI-Antwort → kein Artikel | Engine v2 (3-Ebenen-Fallback) |
-| Artikel zu dünn | length_guard (KI-Module, Gate-verifiziert) |
+| Artikel zu dünn | length_guard (KI-Module, Gate-verifiziert; seit 01.09.2026 R9-Shingle-Check gegen Duplikat-Erzeugung) |
+| Neuer Artikel verletzt Verständnis-Regeln (R1/R2/R3/R6/R7/R8) | Verständnis-Gates in content-engine-v2.yml parken ihn als draft (Entwurf statt Publikation) |
+| Absätze > 4 Sätze im Bestand | `r5_absatz_splitter.py --apply` (Satzgrenzen-Split 2+3, Abkürzungs-Schutz) |
+| Hunspell kennt korrekte Komposita nicht (Rauschen) | `absorb_whitelist.py --apply` (Wort in ≥ 3 Artikeln „unbekannt“ → Whitelist) |
+| LanguageTool-API down | grammar_check: Report-Banner „API nicht erreichbar“ + Exit 2 (kein falsch-grün) |
 | Titel geändert → Cover alt | check_covers Manifest-Abgleich (--fix) |
 | Titel unvollständig (Wortbruch) | safe_title_cut (Vermeidung) + check_titles R5 → publish_gate (Verwurf/Draft) |
 | Cover-Text abgeschnitten/veraltete Darstellung | check_covers C4 (--fix rendert neu) + Zeichen-Hard-Wrap/Clamp in generate_covers |

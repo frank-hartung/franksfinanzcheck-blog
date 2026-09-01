@@ -658,12 +658,23 @@ Ab Zeile 3: Der Artikel in Markdown:
 - Keine Überschrift für den Titel am Anfang (Titel steht schon in Zeile 1)
 - Einleitung mit starkem HAKEN: Nutzenversprechen, konkrete Frage oder überraschende Zahl –
   KEIN generischer Einstieg ("In der heutigen Zeit…", "Geld sparen ist wichtig…")
+- VERBOTEN: die Schablone „In diesem Ratgeber zeige/erfährst/erkläre ich dir …“ am
+  Einleitungsende. Nutze stattdessen eine dieser 8 Öffnungen (rotieren, nie doppelt):
+  1) Schritt-für-Schritt-Versprechen  2) Zahlen-These  3) Irrtum widerlegen
+  4) Vergleich/Analogie  5) Warnung + Konsequenz  6) Mini-Geschichte
+  7) Checkliste-Vorab („Drei Dinge zählen: …“)  8) Frage an den Leser
 - 5 bis 8 Abschnitte mit H2-Überschriften (##) – strukturiere sie ANDERS als die Pin-Vorlage
 - Pflicht-Module (kein Fülltext): ein Rechenbeispiel mit Jahr, eine Tabelle ODER Checkliste, ein Abschnitt „Typische Fehler“
 - Mindestens EINE Liste oder Tabelle (Mehrwert, Scannability)
 - Am Ende ein FAQ-Bereich: "## Häufige Fragen" mit 5 Fragen als H3 und Antworten
 - 1.500 bis 2.200 Wörter insgesamt (mindestens 1.400 Wörter / 10.000 Zeichen – darunter gilt der Artikel als zu kurz und wird abgelehnt). Zielkorridor Premium: 12.000–18.000 Zeichen Fließtext. Substanz, keine Floskeln.
-- Absätze max. 3–4 Sätze, aktive Sprache ("du"), kurze Sätze (max. ~20 Wörter)
+- Absätze max. 3–4 Sätze (eine Idee pro Absatz), aktive Sprache ("du"),
+  kurze Sätze (max. ~20 Wörter); nach einem langen Satz folgen 1–2 kurze (Satzrhythmus)
+- KEINE Komma-Listen: nie mehr als 15 Begriffe in einer Aufzählung hintereinander;
+  stattdessen Tabellen oder Listen mit je einem erklärenden Satz
+- TERMINOLOGIE: pro Artikel EINEN Leitbegriff für das Hauptkonzept wählen und
+  durchgehend verwenden; Synonyme höchstens einmal als Erklärung bei Ersterwähnung
+  (z. B. „DNS-Server (auch Namensauflösung oder Resolver genannt)“)
 - ANREDE: {anrede_var} – konsistent durchgehend verwenden
 - PRAXISBEZUG (E-E-A-T): konkrete, plausible Alltagsbeispiele; eigene Erfahrung als
   Formulierung erlaubt ("Ich habe…", "In der Praxis…") – aber KEINE erfundenen Fakten,

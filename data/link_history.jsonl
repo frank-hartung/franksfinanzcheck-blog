@@ -43,3 +43,11 @@
 {"date": "2026-08-31", "modus": "FIX", "geheilt": 0, "tot": 0}
 {"date": "2026-08-31", "modus": "FIX", "geheilt": 0, "tot": 0}
 {"date": "2026-08-31", "modus": "DRY-RUN", "geheilt": 0, "tot": 0}
+{"date": "2026-09-01", "modus": "DRY-RUN", "geheilt": 0, "tot": 0}
+{"date": "2026-09-01", "modus": "FIX", "geheilt": 0, "tot": 0}
+{"date": "2026-09-01", "modus": "FIX", "geheilt": 0, "tot": 0}
+{"date": "2026-09-01", "modus": "FIX", "geheilt": 1, "tot": 0}
+{"date": "2026-09-01", "modus": "DRY-RUN", "geheilt": 0, "tot": 0}
+{"date": "2026-09-01", "modus": "REPORT", "geheilt": 0, "tot": 0}
+{"date": "2026-09-01", "modus": "REPORT", "geheilt": 0, "tot": 0}
+{"date": "2026-09-01", "modus": "REPORT", "geheilt": 0, "tot": 0}

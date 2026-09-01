@@ -102,8 +102,6 @@ Der richtige DSL-Tarif ist der, der an deinen drei teuersten Stunden des Tages t
 
 Ein Paar mit Homeoffice landet realistisch bei 100 Bandbreite Down / 20–40 Mbit/s Up. 50 Geschwindigkeit reichen, bis das zweite Homeoffice dazukommt. 1 Gbit/s ist Komfort und Zukunft, kein Muss – außer du lädst täglich große Videoprojekte.
 
-## DSL, Kabel, Glasfaser: die ehrliche Entscheidung 2026
-
 **VDSL/Vectoring.** Weit verfügbar, Upload oft 20–40 Megabit/s bei 100/250 Down. Gut, solange die Kupferlänge zur Tiefbaukante nicht zu lang ist. Abend-Drossel durch Nachbarn ist seltener als bei Kabel, aber möglich.
 
 **Kabel (DOCSIS).** Hohe Down-Zahlen, Upload historisch schwächer, in neuen Netzen besser. In der Nachbarschaft mit vielen Streamern schwankt die Last. Test in der Straße schlägt die Broschüre.
@@ -125,13 +123,19 @@ Wenn du diese vier Regeln einhältst, ist fast jeder seriöse Tarif „der richt
 
 ## Upload ist das vergessene Kriterium
 
-Homeoffice mit VPN, zwei Kameras, Cloud. 10 Bandbreite Upload sind 2018. 2026 willst du 20–40, bei Glasfaser gerne symmetrisch. Ein 250-Down/40-Up schlägt 1000-Down/50-Up im Alltag, wenn WLAN den Down sowieso kürzt. Im Vergleichsfilter Upload sichtbar machen, sonst kaufst du Marketing.
+Homeoffice mit VPN, zwei Kameras, Cloud. 10 Mbit/s Upload sind 2018.
+
+2026 willst du 20–40, bei Glasfaser gerne symmetrisch. Ein 250-Down/40-Up schlägt 1000-Down/50-Up im Alltag, wenn WLAN den Down sowieso kürzt. Im Vergleichsfilter Upload sichtbar machen, sonst kaufst du Marketing.
+
 
 <!-- premium-length-2026-c -->
 
 ## Ein Abend, drei Zahlen, ein Tarif
 
-Notiere Vertragsspeed, Kabel-Ist, WLAN-Ist am Schreibtisch. Liegt Kabel klar unter Vertrag: Entstörung, kein Wechsel aus Versehen. Liegt Kabel gut und WLAN schlecht: Funk zuerst. Liegen beide gut und der Effektivpreis ist nach 24 Monaten hoch: wechseln. Diese drei Zahlen verhindern 80 % der Fehlkäufe im [DSL-Vergleich](../../posts/2026-08-10-dsl-wechselbonus-sichern/).
+Notiere Vertragsspeed, Kabel-Ist, WLAN-Ist am Schreibtisch. Liegt Kabel klar unter Vertrag: Entstörung, kein Wechsel aus Versehen.
+
+Liegt Kabel gut und WLAN schlecht: Funk zuerst. Liegen beide gut und der Effektivpreis ist nach 24 Monaten hoch: wechseln. Diese drei Zahlen verhindern 80 % der Fehlkäufe im [DSL-Vergleich](../../posts/2026-08-10-dsl-wechselbonus-sichern/).
+
 
 
 ## Mehr als nur Zahlen: Latenz, Upload und Stabilität
@@ -141,11 +145,6 @@ Viele Tarife werben mit hohen Download-Werten, verschweigen aber den Upload. Fü
 Auch die Latenz (Ping) spielt eine Rolle: Werte unter 20 Millisekunden sorgen für flüssiges Gaming und schnelle Reaktionen bei Video-Meetings. Glasfaser punktet hier, Kabel schwankt je nach Auslastung in der Nachbarschaft, VDSL ist meist stabil, aber von der Leitungslänge abhängig.
 
 Ein letzter Punkt: Stabilität schlägt Maximalwert. Ein Tarif, der abends konstant 90 liefert, ist mehr wert als einer, der tagsüber 250 verspricht und abends auf 40 einbricht. Frage im Bekanntenkreis nach Erfahrungswerten in deiner Straße – das ist oft ehrlicher als die Karte des Anbieters.
-
-## Upload ist das vergessene Kriterium
-
-Homeoffice mit VPN, zwei Kameras, Cloud. 10 Mbit/s Upload sind 2018. 2026 willst du 20–40, bei Glasfaser gerne symmetrisch. Ein 250-Down/40-Up schlägt 1000-Down/50-Up im Alltag, wenn WLAN den Down sowieso kürzt. Im Vergleichsfilter Upload sichtbar machen, sonst kaufst du Marketing.
-
 
 ## Fazit: Bedarfsgenau buchen und regelmäßig wechseln
 

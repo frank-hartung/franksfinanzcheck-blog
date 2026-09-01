@@ -1,0 +1,55 @@
+# Terminologie-Kanon (R3) – FranksFinanzcheck
+#
+# Ein Konzept = EIN Leitbegriff pro Artikel. Bei der Ersterwähnung darf der
+# Artikel Synonyme einmalig ERKLÄREN („DNS-Server (auch Namensauflösung oder
+# Resolver genannt)“), danach nur noch den Leitbegriff verwenden.
+#
+# Der Guard (textverstaendnis_guard.py R3) zählt pro Artikel die Vorkommen
+# der Synonyme. Sind mehr als `max_synonyme` Vorkommen vorhanden (und der
+# Leitbegriff mindestens 3×), wird der Artikel gemeldet.
+#
+# Erweiterung: einfach neuen Eintrag ergänzen. `kontext` ist optional und
+# begrenzt die Prüfung auf Artikel, die dieses Wort enthalten (verhindert
+# False-Positives in themenfremden Artikeln).
+
+begriffe:
+  dns:
+    leitbegriff: "DNS-Server"
+    synonyme:
+      - "Resolver"
+      - "Namensauflösung"
+      - "Namensserver"
+      - "Namensauflösung-Server"
+    max_synonyme: 3
+    kontext: "DNS"
+  mietwagen:
+    leitbegriff: "Mietwagen"
+    synonyme:
+      - "Leihwagen"
+      - "Mietauto"
+      - "Mieterauto"
+    max_synonyme: 2
+    kontext: "Mietwagen"
+  girokonto:
+    leitbegriff: "Girokonto"
+    synonyme:
+      - "Gehaltskonto"
+      - "Bankkonto"
+      - "Kontomodell"
+    max_synonyme: 2
+    kontext: "Konto"
+  kfz:
+    leitbegriff: "Kfz-Versicherung"
+    synonyme:
+      - "Autoversicherung"
+      - "PKW-Versicherung"
+      - "Kfz-Haftpflicht"
+    max_synonyme: 2
+    kontext: "Kfz"
+  tagesgeld:
+    leitbegriff: "Tagesgeldkonto"
+    synonyme:
+      - "Tagesgeld"
+      - "Sichtkonto"
+    max_synonyme: 3
+    kontext: "Tagesgeld"
