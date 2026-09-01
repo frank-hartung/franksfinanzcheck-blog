@@ -152,6 +152,13 @@ python3 scripts/secrets_age_guard.py --record-success PINTEREST_ACCESS_TOKEN
 
 **Hinweis:** Die Workflows starten automatisch über GitHub Actions. `premium-governance.yml` läuft montags; die Fixes in `deploy-catchup.yml`/`content-engine-v2.yml` greifen ab dem nächsten Lauf.
 
+> **⚙️ Einspielung der Workflow-Änderungen** (dieser Agent-Token hat **kein** `workflows`-Scope → `.github/workflows/*` lässt sich nicht von hier pushen; das ist dieselbe Einschränkung wie bei den bisherigen Audit-Patches). Alle drei Workflow-Änderungen liegen als Patch bei:
+> ```bash
+> git apply patches/premium-governance-2026-09-01-workflows.patch
+> git add .github && git commit -m "ci: Premium-Governance + Engine-Fixes" && git push
+> ```
+> Der Patch enthält: **`premium-governance.yml`** (neu), **`deploy-catchup.yml`** (F1: Engine + Premium-Governance in Deploy-Trigger), **`content-engine-v2.yml`** (F2: Phase 4 + S2-Heredoc-Fix). Die Skripte, der README-Abschnitt und dieser Report sind dagegen bereits gepusht (laufen ohne den Patch nicht: `premium-governance.yml` fehlt bis dahin).
+
 ---
 
 ## 7 · Fazit

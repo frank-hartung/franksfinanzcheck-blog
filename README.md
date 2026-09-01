@@ -212,7 +212,14 @@ python3 scripts/cwv_guard.py --public public/   # nach Hugo-Build
 python3 scripts/secrets_age_guard.py            # Secrets-Ampel
 ```
 
-**Dabei behoben (echte Produktions-Bugs):** `Content-Engine v2` + `Premium-Governance` wurden in die Deploy-Trigger-Kette (`deploy-catchup.yml`) aufgenommen — Engine-Artikel werden jetzt **automatisch deployt**; und die in README versprochene Engine-**Phase 4** (`BOT-STATUS.md` + kadenz-bewusste Tagesdefizit-Wache) wurde ergänzt. Details & Belege: `PREMIUM-OPTIMIERUNG-2026-09-01.md`.
+**Dabei behoben (echte Produktions-Bugs):** `Content-Engine v2` + `Premium-Governance` wurden in die Deploy-Trigger-Kette (`deploy-catchup.yml`) aufgenommen — Engine-Artikel werden jetzt **automatisch deployt**; und die in README versprochene Engine-**Phase 4** (`BOT-STATUS.md` + kadenz-bewusste Tagesdefizit-Wache) wurde ergänzt, ebenso die kaputte Heredoc-Shell-Syntax in Phase 2 (S2).
+
+> **⚠️ Workflow-Änderungen liegen als Patch vor** (Agent-Token ohne `workflows`-Scope kann `.github/workflows/*` nicht pushen — vgl. bisherige Audits). Einmalig einspielen:
+> ```bash
+> git apply patches/premium-governance-2026-09-01-workflows.patch &&
+> git add .github && git commit -m "ci: Premium-Governance + Engine-Fixes" && git push
+> ```
+> Betrifft: `premium-governance.yml` (neu), `deploy-catchup.yml` (F1), `content-engine-v2.yml` (F2 + S2-Fix). Details & Belege: `PREMIUM-OPTIMIERUNG-2026-09-01.md`.
 
 ---
 
