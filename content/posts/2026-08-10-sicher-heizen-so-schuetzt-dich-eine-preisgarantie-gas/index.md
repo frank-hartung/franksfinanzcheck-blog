@@ -24,7 +24,7 @@ pin_description: "*Werbung | Eine Gaspreisgarantie nimmt dir den Winter-Schock: 
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
-Zahlst du monatlich über 160 € für deinen Gasabschlag? Viele Haushalte in Deutschland stecken unbemerkt im teuren Grundversorgungstarif ihres lokalen Stadtwerks fest oder erleben nach der Heizperiode böse Nachzahlungs-Überraschungen. Mit einer vertraglich fixierten **Gaspreisgarantie** schützt du dein Haushaltsbudget zuverlässig vor steigenden Energiepreisen und unkalkulierbaren Börsenschwankungen. In diesem Ratgeber erfährst du, wie Preisgarantien funktionieren, wo der Unterschied zwischen einer Voll- und einer eingeschränkten Garantie liegt und wie du dir rechtzeitig günstige Konditionen sicherst.
+Zahlst du monatlich über 160 € für deinen Gasabschlag? Viele Haushalte in Deutschland stecken unbemerkt im teuren Grundversorgungstarif ihres lokalen Stadtwerks fest oder erleben nach der Heizperiode böse Nachzahlungs-Überraschungen. Mit einer vertraglich fixierten **Gaspreisgarantie** schützt du dein Haushaltsbudget zuverlässig vor steigenden Energiepreisen und unkalkulierbaren Börsenschwankungen. Vor dem Abschluss lohnt ein genauer Blick auf drei Punkte: wie Preisgarantien funktionieren, wo der Unterschied zwischen einer Voll- und einer eingeschränkten Garantie liegt und wie du dir rechtzeitig günstige Konditionen sicherst.
 
 ---
 
@@ -91,7 +91,9 @@ Eine Preisgarantie ist kein Allheilmittel. Sie friert den Arbeitspreis und oft d
 
 **Eingeschränkt:** Der Energieanteil steht fest, staatliche Umlagen dürfen durchgereicht werden. 2022/23 hat das Haushalte kalt erwischt. **Voll:** Auch Steuern und Umlagen bleiben intern, der Versorger trägt das Risiko – teurer im Stickerpreis, ruhiger in der Abrechnung.
 
-Bei 18.000 kWh Gasverbrauch und 11 Cent Arbeitspreis sind 1.980 € Energiekosten. Steigt der Markt um 3 Cent, zahlst du ohne Garantie 540 € extra. Mit 12-Monats-Vollgarantie bleibt die 1.980-€-Linie stehen. Die Prämie dafür sitzt im etwas höheren Startpreis – oft 0,4–0,8 Cent. 18.000 × 0,6 Cent = 108 € „Versicherungsprämie“. Gegen 540 € Risiko ist das rechnerisch klar.
+Bei 18.000 kWh Gasverbrauch und 11 Cent Arbeitspreis sind 1.980 € Energiekosten. Steigt der Markt um 3 Cent, zahlst du ohne Garantie 540 € extra.
+
+Mit 12-Monats-Vollgarantie bleibt die 1.980-€-Linie stehen. Die Prämie dafür sitzt im etwas höheren Startpreis – oft 0,4–0,8 Cent. 18.000 × 0,6 Cent = 108 € „Versicherungsprämie“. Gegen 540 € Risiko ist das rechnerisch klar.
 
 ## Drei Situationen, in denen du trotz Garantie wechseln solltest
 

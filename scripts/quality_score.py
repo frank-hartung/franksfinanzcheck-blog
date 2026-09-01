@@ -158,9 +158,22 @@ def score_article(path: str) -> dict:
         aff -= 0.5
     parts["affiliate"] = max(0.0, aff)
 
-    # Gesamt: gewichteter Mittelwert (Struktur & Typografie wichtiger)
-    weights = {"spelling": 0.25, "meta": 0.2, "structure": 0.2,
-               "typography": 0.15, "uniqueness": 0.1, "affiliate": 0.1}
+    # 7) Lesbarkeit (R10 – Audit 01.09.2026): bisher stand nur im Docstring,
+    # dass Lesbarkeit gemessen wird – jetzt wird sie wirklich gewichtet.
+    # Nutzt readability_check.analyze (gehärtete Schwellen vom 01.09.2026).
+    try:
+        from readability_check import load_article, analyze
+        ra = load_article(os.path.join(BLOG_DIR, path))
+        rb = analyze(ra) if ra else None
+        parts["readability"] = max(0.0, rb["score"] / 100.0) if rb else 0.5
+    except Exception:
+        parts["readability"] = 0.5  # unbekannt
+
+    # Gesamt: gewichteter Mittelwert (Lesbarkeit & Rechtschreibung am
+    # schwersten; Struktur & Meta folgen – verhindert „publish" für Dumps)
+    weights = {"spelling": 0.2, "meta": 0.15, "structure": 0.15,
+               "typography": 0.1, "uniqueness": 0.1, "affiliate": 0.1,
+               "readability": 0.2}
     total = sum(parts[k] * weights[k] for k in weights)
     verdict = "publish" if total >= THRESHOLD_PUBLISH else (
         "draft+autofix" if total >= THRESHOLD_REVIEW else "human-review")

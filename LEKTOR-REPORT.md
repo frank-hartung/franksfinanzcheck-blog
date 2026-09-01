@@ -1,6 +1,6 @@
 # ✒️ LEKTOR-REPORT (lektor_guard.py)
 
-**Stand:** 2026-08-31 18:27 UTC · Modus: DRY-RUN
+**Stand:** 2026-09-01 08:00 UTC · Modus: REPORT
 
 | Regel | Anzahl |
 |---|---|

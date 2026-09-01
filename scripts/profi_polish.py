@@ -115,6 +115,12 @@ REGELN:
     Erstattungsfähigkeit" → "ob die Kosten erstattet werden"). Vermeide
     Nominalstil ("die Übernahme der Kosten" → "die Kasse übernimmt die Kosten").
     Ziel: Ø Satzlänge unter 15 Wörter, Flesch-Score über 60.
+11c. TEXTVERSTÄNDNIS (Verlagsregel, 01.09.2026): Ersetze die Schablone
+    "In diesem Ratgeber zeige/erfährst/erkläre ich dir …" durch eine individuelle
+    Öffnung (Schritt-Versprechen, Zahlen-These, Irrtum, Analogie, Warnung,
+    Mini-Geschichte, Checkliste, Frage). Zerlege Komma-Ketten über 15 Begriffe in
+    Tabellen oder Listen mit Erklärungen. Vereinheitliche Synonyme auf EINEN
+    Leitbegriff pro Konzept (Synonyme nur einmal als Erklärung bei Ersterwähnung).
 12. TOP-LEVEL-DARSTELLUNG: Jeder Absatz ist 3-4 Sätze lang, behandelt genau EINEN
     Gedanken und endet an einer sinnvollen Stelle (keine Textwände). Schreibe
     Wörter NIE mit Silbentrennung. Zwischen einer Zahl und ihrer Einheit steht

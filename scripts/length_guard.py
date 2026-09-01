@@ -112,6 +112,21 @@ def ai(system: str, prompt: str, max_tokens: int = 3500) -> str | None:
     return None
 
 
+def shingle_overlap(a: str, b: str, n: int = 5) -> float:
+    """Anteil der 5er-Wort-Shingles von b, die auch in a vorkommen (0–1).
+    R9 (01.09.2026): verhindert, dass die Längen-Selbstheilung vorhandene
+    Kapitel wortnah dupliziert (DNS-Artikel-Duplikat 08/2026)."""
+    wa = re.findall(r"[a-zäöüß0-9]+", a.lower())
+    wb = re.findall(r"[a-zäöüß0-9]+", b.lower())
+    if len(wa) < n or len(wb) < n:
+        return 0.0
+    sa = {tuple(wa[i:i + n]) for i in range(len(wa) - n + 1)}
+    sb = {tuple(wb[i:i + n]) for i in range(len(wb) - n + 1)}
+    if not sb:
+        return 0.0
+    return len(sa & sb) / len(sb)
+
+
 def heal(text: str, typ: str, chars: int) -> tuple[str | None, int]:
     """KI-Erweiterung. Gibt (neuer_text, zusätzliche_zeichen) zurück – oder (None, 0)."""
     target = POLICY[typ]["target_min_chars"]
@@ -140,6 +155,12 @@ Einsteiger-tauglich. Gib NUR Markdown aus."""
 
     addition = (ai(system, prompt) or "").strip()
     if not addition or len(addition.split()) < need_words * 0.5:
+        return None, 0
+
+    # R9-Duplikatschutz: Erweiterung verwerfen, wenn sie vorhandene Inhalte
+    # wortnah wiederholt (> 40 % Shingle-Überlappung mit dem Artikeltext).
+    if shingle_overlap(addition, text) > 0.4:
+        print("    ⚠ R9 verworfen: Erweiterung wiederholt vorhandene Inhalte (Shingle-Overlap > 40 %)")
         return None, 0
 
     # Einfügepunkt: vor „## Fazit", sonst vor endständigem Disclaimer/---, sonst ans Ende

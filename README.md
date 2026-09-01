@@ -157,6 +157,41 @@ Der Blog ist barrierefrei umgesetzt und wird wöchentlich geprüft
 
 ---
 
+## 🧠 Verständnis-Qualität (seit 01.09.2026, Audit-Umsetzung)
+
+Die Verständnis-Gates aus dem `TEXTVERSTAENDNIS-AUDIT-REPORT.md` sind als
+lauffähige Skripte umgesetzt und in die Pipeline integriert:
+
+| Skript | Was es prüft | Blockiert? |
+|---|---|---|
+| `scripts/duplikat_guard.py` (R1) | Exakte/Near-Duplikate, Doppel-Kapitel, Premium-Anhänge | `--new-only` → parkt neue Artikel |
+| `scripts/textverstaendnis_guard.py` (R2–R5, R7, R8) | Keyword-Dumps, Terminologie-Mix, Satzanfangs-Echo, Absatz-Monster, Intro-Formeln, Ankertext-Kohärenz | `--new-only` → parkt neue Artikel |
+| `scripts/readability_check.py` (R6, gehärtet) | Flesch ≥ 60, Ø Satzlänge ≤ 16, >25-Wort-Sätze < 10 %, Dumps, Satzlängen-SD | `--new-only` |
+| `scripts/link_guard.py` (R8-URL) | Kaputte Slugs (auch Leerzeichen-Slugs), Ziele, UTM | `--fix` selbstheilend |
+| `scripts/grammar_check.py` | LanguageTool-Grammatik – ehrlich bei API-Ausfall (Exit 2, kein falsch-grün) | bei API-down |
+| `scripts/length_guard.py` (R9) | Längen-Korridore + Duplikatschutz der KI-Selbstheilung (Shingle-Overlap > 40 % → verworfen) | – |
+| `scripts/quality_score.py` (R10) | Gesamt-Score mit Lesbarkeits-Gewicht 0,20 | publish/draft/human-review |
+| `scripts/absorb_whitelist.py` | Senkt Rechtschreib-Rauschen: Komposita in ≥ 3 Artikeln → Whitelist | – |
+| `scripts/r5_absatz_splitter.py` | Splittet Absätze > 4 Sätze an Satzgrenzen („eine Idee pro Absatz“) | – |
+
+**Schnell-Checks:**
+
+```bash
+python3 scripts/duplikat_guard.py --selftest          # Selbsttests
+python3 scripts/textverstaendnis_guard.py --selftest  # 8 Fälle
+python3 scripts/textverstaendnis_guard.py             # Flotten-Audit (hart/weich)
+python3 scripts/readability_check.py                  # Lesbarkeits-Audit
+python3 scripts/duplikat_guard.py --fix               # Duplikate entfernen
+python3 scripts/r5_absatz_splitter.py --apply         # Absätze splitten
+```
+
+Neue Artikel, die harte Regeln verletzen, werden in `content-engine-v2.yml`
+automatisch auf `draft: true` geparkt („Entwurf statt Publikation“) – sie
+erscheinen erst nach manueller Freigabe. Der wöchentliche Lauf
+(`seo-weekly.yml`) auditert die gesamte Flotte.
+
+---
+
 ## 🚀 In 15 Minuten live
 
 ### 1. Repository anlegen & hochladen

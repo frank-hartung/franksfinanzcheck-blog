@@ -130,7 +130,10 @@ Wer die Frist verpasst, bleibt im erhöhten Tarif bis zur nächsten ordentlichen
 
 ## 3-Schritte-Ablauf ohne Lücke
 
-Verbrauch und Zähler von der Jahresrechnung. Vergleich mit Preisgarantie-Filter. Auftrag, Bestätigung, Abschlag nach 6 Wochen gegen Zählerstand. Der Grundversorger oder Alt-Anbieter wird automatisch abgelöst. Du heizt durch, die Rechnung wechselt den Absender.
+Verbrauch und Zähler von der Jahresrechnung. Vergleich mit Preisgarantie-Filter.
+
+Auftrag, Bestätigung, Abschlag nach 6 Wochen gegen Zählerstand. Der Grundversorger oder Alt-Anbieter wird automatisch abgelöst. Du heizt durch, die Rechnung wechselt den Absender.
+
 
 ## Fazit: Keine Angst vor dem Wechsel – es lohnt sich immer
 

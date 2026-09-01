@@ -24,7 +24,10 @@ pin_description: "*Werbung | Ein unachtsamer Moment, ein Millionenschaden: Die P
 pinwand: "Versicherungen clever wechseln & sparen"
 ---
 
-Ein kleiner Moment der Unachtsamkeit im Alltag kann das gesamte finanzielle Fundament zerstören. Du übersiehst als Fußgänger einen herannahenden Radfahrer, der schwer stürzt, oder stößt im Freundeskreis versehentlich ein teures technisches Gerät um. Nach dem Bürgerlichen Gesetzbuch (§ 823 BGB) bist du verpflichtet, schuldhaft zugefügte Schäden in unbegrenzter Höhe zu ersetzen – und zwar mit deinem gesamten gegenwärtigen Vermögen, deinen monatlichen Einkünften und künftigen Erträgen. Die **Privathaftpflicht** ist aus diesem Grund die mit weitem Abstand unverzichtbare Versicherung für jeden Bundesbürger. In diesem Ratgeber erfährst du, worauf es beim Leistungskatalog ankommt und wie du optimalen Schutz für wenige Euro im Monat buchst.
+Ein kleiner Moment der Unachtsamkeit im Alltag kann das gesamte finanzielle Fundament zerstören. Du übersiehst als Fußgänger einen herannahenden Radfahrer, der schwer stürzt, oder stößt im Freundeskreis versehentlich ein teures technisches Gerät um.
+
+Nach dem Bürgerlichen Gesetzbuch (§ 823 BGB) bist du verpflichtet, schuldhaft zugefügte Schäden in unbegrenzter Höhe zu ersetzen – und zwar mit deinem gesamten gegenwärtigen Vermögen, deinen monatlichen Einkünften und künftigen Erträgen. Die **Privathaftpflicht** ist aus diesem Grund die mit weitem Abstand unverzichtbare Versicherung für jeden Bundesbürger. Worauf es beim Leistungskatalog ankommt und wie du optimalen Schutz für wenige Euro im Monat buchst, erfährst du jetzt.
+
 
 ---
 

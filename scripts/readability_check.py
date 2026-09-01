@@ -27,12 +27,15 @@ import json
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
-# Top-Level-Schwellen
-SCORE_MIN = 50
-SENT_MAX = 20
-LONG_WORD_MAX = 18
-NESTED_MAX = 12
-ABSATZ_MAX_SENT = 6
+# Top-Level-Schwellen (gehärtet 01.09.2026 – Audit: vorher zu lasch)
+SCORE_MIN = 60              # war 50
+SENT_MAX = 16               # war 20
+LONG_WORD_MAX = 15          # war 18
+NESTED_MAX = 10             # war 12
+ABSATZ_MAX_SENT = 4         # war 6
+# Keyword-Dump-Grenze (R2): einzelne Zeile/Block > 500 Zeichen mit > 12 Kommas
+DUMP_MAX_LEN = 500
+DUMP_MAX_COMMAS = 12
 
 PASSIV_RE = re.compile(r'\b(wird|werden|wurde|wurden|kann .{1,20} werden|muss .{1,20} werden|sollte .{1,20} werden)\b', re.I)
 
@@ -89,15 +92,29 @@ def load_article(path):
 
 
 def count_syllables(word):
-    """Silbenzählung (deutsch, vereinfacht): Vokalgruppen zählen."""
-    word = word.lower()
-    # Umlaute normalisieren
-    word = word.replace('ä', 'a').replace('ö', 'o').replace('ü', 'u')
-    groups = re.findall(r'[aeiouy]+', word)
-    # Stummes e am Ende abziehen (häufig im Deutschen)
-    n = len(groups)
-    if word.endswith('e') and n > 1:
-        n -= 1
+    """Silbenzählung (deutsch, 01.09.2026 gehärtet).
+
+    Audit-Fund: die alte Heuristik zog bei jedem Wort auf „-e“ eine Silbe
+    ab („danke“ → 1 statt 2) und verzerrte den Flesch-Score systematisch.
+    Im Deutschen ist das End-e nach Konsonant fast immer eine eigene Silbe
+    (dan-ke, ma-che, Ta-bel-le). Neue Regeln:
+      - Vokalgruppen (inkl. Diphthonge ei/au/eu/äu/ie) je 1 Silbe
+      - End-e: NICHT mehr abziehen
+      - „ie“ am Wortende nach mehreren Silben zählt 2 (Fa-mi-li-e, Stu-di-e)
+        – außer in Einsilblern (die, wie, nie, sie)
+    """
+    word = word.lower().replace('ä', 'a').replace('ö', 'o').replace('ü', 'u')
+    n = len(re.findall(r'[aeiouy]+', word))
+    # Endung „-ion“ (ti-on, si-on, li-on): die „io“-Gruppe zählt als 1,
+    # gesprochen sind es aber 2 Silben (In-for-ma-ti-on, Mil-li-on,
+    # Vi-si-on, Re-gi-on).
+    if re.search(r'ion$', word):
+        n += 1
+    # „ie" am Wortende ist nach mehreren Silben meist 2-silbig
+    # (Fa-mi-li-e, Stu-di-e, Se-ri-e, Li-li-e) – außer in Einsilblern
+    # (die, wie, nie, sie), dort ist n == 1 und der Zuschlag entfällt.
+    elif n > 1 and word.endswith('ie') and len(word) >= 4:
+        n += 1
     return max(1, n)
 
 
@@ -123,18 +140,22 @@ def analyze(a):
     long_words = [w for w in words if len(w) > 12]
     long_pct = 100 * len(long_words) / n_words if words else 0
 
-    # Schachtelsätze (> 25 Wörter) – NUR echte Fließtext-Sätze:
-    # Sätze, die wie Listen-Einträge beginnen (durch Markdown-Glättung
-    # zusammengeklebt), werden ausgeschlossen
-    def _looks_like_list(s):
-        first = s.strip().lower()
-        return bool(re.match(r'^(alte|geräte|tv|router|kaffee|ein|eine|der|die|das|nicht|wlan|kühl|standby)\b', first)) and len(first) > 40
-    nested = [s for s in sentences
-              if len(re.findall(r'\b\w+\b', s)) > 25 and not _looks_like_list(s)]
+    # Schachtelsätze (> 25 Wörter) – NUR echte Fließtext-Sätze
+    # (Listen-Zeilen wurden oben bereits entfernt; kein Notbehelf mehr)
+    nested = [s for s in sentences if len(re.findall(r'\b\w+\b', s)) > 25]
     nested_pct = 100 * len(nested) / n_sents
 
+    # Keyword-Dumps (R2): Komma-Ketten als eigene Metrik zählen –
+    # sie verzerren sonst Satzlängen-Maxima und verstecken sich vor der Messung
+    raw = open(os.path.join(POSTS_DIR, a['file']), encoding='utf-8').read()
+    raw_body = raw.split('---', 2)[2]
+    dumps = 0
+    for line in raw_body.split('\n'):
+        if len(line) > DUMP_MAX_LEN and line.count(',') > DUMP_MAX_COMMAS:
+            dumps += 1
+
     # Absatzlängen (Roh-Body vor Glättung – nutze Original)
-    c = open(os.path.join(POSTS_DIR, a['file']), encoding='utf-8').read()
+    c = raw
     raw_body = c.split('---', 2)[2]
     paras = [p for p in raw_body.split('\n\n') if len(re.findall(r'\b\w+\b', p)) > 1
              and not p.strip().startswith(('#', '*', '-', '|', '>', '<'))]
@@ -175,14 +196,26 @@ def analyze(a):
     if long_paras:
         score -= 5
         issues.append(f"{len(long_paras)} Absätze > {ABSATZ_MAX_SENT} Sätze")
+    if dumps:
+        score -= 10
+        issues.append(f"{dumps} Keyword-Dump(s) (Komma-Ketten > {DUMP_MAX_LEN} Zeichen)")
     if passiv_count > 8:
         score -= 5
         issues.append(f"{passiv_count} Passiv-Formulierungen")
+
+    # Satzlängen-Streuung (SD) als Info-Metrik – monotone Satzrhythmen
+    # (alle Sätze gleich lang) sind schwer lesbar
+    sent_lens = [len(re.findall(r'\b\w+\b', s)) for s in sentences]
+    sd = 0.0
+    if len(sent_lens) > 1:
+        mean = sum(sent_lens) / len(sent_lens)
+        sd = (sum((x - mean) ** 2 for x in sent_lens) / (len(sent_lens) - 1)) ** 0.5
 
     return {
         'file': a['file'], 'flesch': round(flesch, 1), 'wps': round(wps, 1),
         'word_len': round(avg_word_len, 1), 'long_pct': round(long_pct, 1),
         'nested_pct': round(nested_pct, 1), 'long_paras': len(long_paras),
+        'dumps': dumps, 'sat_len_sd': round(sd, 1),
         'passiv': passiv_count, 'score': max(0, min(100, score)), 'issues': issues,
     }
 
@@ -199,6 +232,9 @@ def main():
         glob.glob(os.path.join(POSTS_DIR, "*.md"))
         + glob.glob(os.path.join(POSTS_DIR, "*", "index.md"))
     )
+    # Inhaltsverzeichnis (_index.md) ist keine Lesbarkeits-Messgröße
+    paths = [p for p in paths if os.path.basename(os.path.dirname(p)) != "posts"
+             or os.path.basename(p) != "_index.md"]
 
     if new_only:
         # Nur Artikel, die heute publiziert wurden (draft ausgeschlossen)
@@ -228,13 +264,13 @@ def main():
         return
 
     print(f"Lesbarkeits-Audit: {len(results)} Artikel | Ø Score {avg:.0f}/100")
-    print(f"{'Score':>5} {'Flesch':>7} {'Satz':>5} {'Wort':>5} {'Lang%':>6} {'Schacht%':>8}  Artikel")
-    print('-' * 80)
+    print(f"{'Score':>5} {'Flesch':>7} {'Satz':>5} {'Wort':>5} {'Lang%':>6} {'Schacht%':>8} {'Dump':>5}  Artikel")
+    print('-' * 86)
     for r in results:
         mark = '✅' if r['score'] >= 75 else ('⚠️' if r['score'] >= 60 else '❌')
         print(f"{mark} {r['score']:4d} {r['flesch']:6.0f} {r['wps']:5.1f} {r['word_len']:5.1f} "
-              f"{r['long_pct']:5.1f} {r['nested_pct']:7.1f}  {r['file'][:40]}")
-    print('-' * 80)
+              f"{r['long_pct']:5.1f} {r['nested_pct']:7.1f} {r['dumps']:5d}  {r['file'][:40]}")
+    print('-' * 86)
     below = [r for r in results if r['score'] < 75]
     print(f"\nUnter Top-Level (Score < 75): {len(below)} Artikel")
     if below and new_only:
