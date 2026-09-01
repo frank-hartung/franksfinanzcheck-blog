@@ -192,6 +192,30 @@ erscheinen erst nach manueller Freigabe. Der wöchentliche Lauf
 
 ---
 
+## 🗞️ Premium-Governance (Chefredakteur-Cockpit, seit 01.09.2026)
+
+Die Blogautomatik prüfte schon viel — jetzt **steuert** sie auch. Der Workflow **„Premium-Governance"** (Mo 07:15 MESZ) bündelt vier Wachen, die zuvor fehlten, auf **eine** Ampel:
+
+| Wache | Skript | Was es misst |
+|---|---|---|
+| **Chefredakteur-Scorecard** | `scripts/editorial_scorecard.py` | Gesamt-Score **/100** + Ampel über Content, Decay, CWV, Lektorat, Secrets → `EDITORIAL-SCORECARD.md` |
+| **Content-Decay-Radar** | `scripts/decay_radar.py` | Welche YMYL-/Stichtag-Artikel (Kfz 30.11., Gas/Strom, DSL, Zinsen) **veralten** → priorisierte Refresh-Queue (`data/decay_queue.json`, `--as-of` für Forecast) |
+| **Core-Web-Vitals-Wächter** | `scripts/cwv_guard.py` | Bild-Budget, LCP-Cover, Render-Blocking, CLS (img ohne width/height) → Ampel GREEN/AMBER/RED (`CWV-REPORT.md`) |
+| **Secrets-/Token-Alters-Wache** | `scripts/secrets_age_guard.py` | „Zuletzt erfolgreich genutzt"-Log gegen 30-Tage-Pinterest-/45-Tage-Mastodon-Token → verhindert **lautlosen Kanaltod** (`SECRETS-REPORT.md`) |
+
+Bei Handlungsbedarf öffnet der Lauf **ein** gebündeltes GitHub-Issue (Label `governance`). Alle Reports werden committet (Selbstheilungs-Doku).
+
+```bash
+python3 scripts/editorial_scorecard.py          # Scorecard
+python3 scripts/decay_radar.py --as-of +180d    # Frische-Forecast
+python3 scripts/cwv_guard.py --public public/   # nach Hugo-Build
+python3 scripts/secrets_age_guard.py            # Secrets-Ampel
+```
+
+**Dabei behoben (echte Produktions-Bugs):** `Content-Engine v2` + `Premium-Governance` wurden in die Deploy-Trigger-Kette (`deploy-catchup.yml`) aufgenommen — Engine-Artikel werden jetzt **automatisch deployt**; und die in README versprochene Engine-**Phase 4** (`BOT-STATUS.md` + kadenz-bewusste Tagesdefizit-Wache) wurde ergänzt. Details & Belege: `PREMIUM-OPTIMIERUNG-2026-09-01.md`.
+
+---
+
 ## 🚀 In 15 Minuten live
 
 ### 1. Repository anlegen & hochladen

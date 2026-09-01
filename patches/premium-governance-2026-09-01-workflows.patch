@@ -1,0 +1,220 @@
+diff --git a/.github/workflows/content-engine-v2.yml b/.github/workflows/content-engine-v2.yml
+index b02ed22..5db888f 100644
+--- a/.github/workflows/content-engine-v2.yml
++++ b/.github/workflows/content-engine-v2.yml
+@@ -214,7 +214,12 @@ jobs:
+           echo "== Oberarzt-Beweis nach der Geburt (Kette in Kanonfreiheit) =="
+           python3 scripts/blog_doctor.py --new-only || echo "⚠ Doktor-Befund (nicht kritisch)"
+           echo "== Qualitäts-Score (FrankAutoOps, Threshold >= 0.85) =="
+-          python3 - <<'PYEOF'
++          # S2-FIX (Agentur-Audit): `|| echo` gehörte auf dieselbe Zeile wie das
++          # Heredoc-BEGINN. Vorher stand es als eigene Zeile nach `PYEOF` –
++          # ungültige Shell-Syntax: Phase 2 lief ab hier "scheinbar grün" weiter,
++          # aber Kommando nach `PYEOF` (Cover-Validierung, Kurzantworten,
++          # Commit der Qualitäts-Fixes) wurden NIE ausgeführt.
++          python3 - <<'PYEOF' || echo "⚠ Qualitäts-Score (nicht kritisch)"
+           import glob, subprocess, sys, json, os
+           import datetime
+           sys.path.insert(0, "scripts")
+@@ -247,7 +252,6 @@ jobs:
+                   open(p, "w", encoding="utf-8").write(c.replace("draft: false", "draft: true", 1))
+                   print(f"  → {r['slug']} auf draft gesetzt (Score {r['score']})")
+           PYEOF
+-          || echo "⚠ Qualitäts-Score (nicht kritisch)"
+           echo "== Cover-Validierung (auto-nachziehen) =="
+           python3 scripts/check_covers.py --fix || echo "⚠ Cover-Varianten (nicht blockierend)"
+           echo "== Kurzantworten (Featured-Snippet-Box) =="
+@@ -296,3 +300,35 @@ jobs:
+         if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
+         continue-on-error: true
+         run: python3 scripts/submit_indexnow.py || echo 
++
++      # ================= PHASE 4: STATUS & TAGESDEFIZIT (26.08.2026) =================
++      # Reaktivierte verwaiste Wachen (Agentur-Audit S5): Der Lauf hält BOT-STATUS.md
++      # aktuell und meldet am Tagesende ein Defizit gegen die Dauervorgabe
++      # (Mo/Mi/Fr, MIN_ARTIKEL_PRO_TAG) als auto-zu-schließendes Issue. Läuft auch
++      # nach Teilfehlern (if: always), damit ein Ausfall sichtbar wird.
++      - name: Phase 4 – Status & Tagesdefizit-Wache
++        if: ${{ !cancelled() }}
++        continue-on-error: true
++        env:
++          GH_TOKEN: ${{ github.token }}
++          MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
++          AUTO_PUBLISH: ${{ vars.AUTO_PUBLISH || 'profi' }}
++        run: |
++          python3 scripts/bot_status.py || echo "⚠ BOT-STATUS (nicht kritisch)"
++          # Defizit-Wache: nur an Publikationstagen (Mo/Mi/Fr) einstellen, damit
++          # Fr->So-Lücke (Wochenende) keinen Fehlalarm erzeugt.
++          DOW=$(date +%u)
++          if [ "$DOW" = "1" ] || [ "$DOW" = "3" ] || [ "$DOW" = "5" ]; then
++            python3 scripts/engine_issue.py --deficit || echo "⚠ Defizit-Wache: kein Tagesdefizit (oder Fehler)"
++          else
++            echo "Kein Publikationstag ($DOW) – Defizit-Wache übersprungen."
++          fi
++          git config user.name "Content-Bot"
++          git config user.email "content-bot@users.noreply.github.com"
++          git add BOT-STATUS.md 2>/dev/null || true
++          if git diff --cached --quiet; then
++            echo "BOT-STATUS unverändert."
++          else
++            git commit -m "docs: BOT-STATUS.md aktualisiert (Phase 4)"
++            scripts/git_sync.sh --push-only
++          fi
+diff --git a/.github/workflows/deploy-catchup.yml b/.github/workflows/deploy-catchup.yml
+index 5af7991..77badb6 100644
+--- a/.github/workflows/deploy-catchup.yml
++++ b/.github/workflows/deploy-catchup.yml
+@@ -29,6 +29,7 @@ on:
+   workflow_run:
+     workflows:
+       - "Wöchentliche SEO-Optimierung"
++      - "Content-Engine v2"
+       - "Affiliate-Health (Wochenwache)"
+       - "Backlink-Automation"
+       - "Layout-AI"
+@@ -44,6 +45,7 @@ on:
+       - "Willkommenstext-Refresh"
+       - "Blog-Gesundheits-Check (täglich)"
+       - "Mastodon-SEO"
++      - "Premium-Governance"
+     types:
+       - completed
+ 
+diff --git a/.github/workflows/premium-governance.yml b/.github/workflows/premium-governance.yml
+new file mode 100644
+index 0000000..d88476f
+--- /dev/null
++++ b/.github/workflows/premium-governance.yml
+@@ -0,0 +1,132 @@
++# ============================================================
++#  PREMIUM-GOVERNANCE (Chefredakteur-Scorecard + Decay + CWV + Secrets)
++#
++#  Die "Blatt-Steuerung" für FranksFinanzcheck – wöchentlich (Mo 07:15 MESZ):
++#   1. Chefredakteur-Scorecard  – eine zentrale Ampel über ALLE Signale
++#   2. Content-Decay-Radar       – welche YMYL-/Stichtag-Artikel veralten
++#   3. Core-Web-Vitals-Wächter    – Performance-Soll-Ist (nach Hugo-Build)
++#   4. Secrets-/Token-Alters-Wache – lautloser Kanaltod-Prävention
++#
++#  Bei Handlungsbedarf wird EIN gebündeltes GitHub-Issue (Label `governance`)
++#  geöffnet. Alle Reports/Manifeste werden committet (Selbstheilung-Doku).
++#
++#  Kein API-Key nötig; nur Umgebungsvariablen für die Secrets-Wache lesen.
++# ============================================================
++name: Premium-Governance
++
++on:
++  schedule:
++    - cron: "15 5 * * 1"    # Montag 07:15 MESZ – Redaktions-Checkpoint
++  workflow_dispatch: {}
++
++permissions:
++  contents: write
++  issues: write
++
++concurrency:
++  group: premium-governance
++  cancel-in-progress: false
++
++jobs:
++  governance:
++    runs-on: ubuntu-latest
++    steps:
++      - name: Repository auschecken
++        uses: actions/checkout@v4
++
++      - name: Hugo installieren (für CWV-Build)
++        uses: peaceiris/actions-hugo@v3
++        with:
++          hugo-version: "0.164.0"
++          extended: true
++
++      - name: Python-Abhängigkeiten
++        run: python3 -m pip install -q pyyaml 2>/dev/null || true
++
++      - name: Hugo-Build (für Core-Web-Vitals-Wächter)
++        run: hugo --minify > /dev/null 2>&1 || true
++
++      # ---------- 1) CHEFREDAKTEUR-SCORECARD ----------
++      - name: Chefredakteur-Scorecard
++        id: scorecard
++        continue-on-error: true
++        run: |
++          python3 scripts/editorial_scorecard.py | tee /tmp/scorecard.log
++          exit ${PIPESTATUS[0]}
++
++      # ---------- 2) CONTENT-DECAY-RADAR ----------
++      - name: Content-Decay-Radar
++        id: decay
++        continue-on-error: true
++        run: |
++          python3 scripts/decay_radar.py | tee /tmp/decay.log
++          exit ${PIPESTATUS[0]}
++
++      # ---------- 3) CORE-WEB-VITALS-WÄCHTER ----------
++      - name: Core-Web-Vitals-Wächter
++        id: cwv
++        continue-on-error: true
++        run: |
++          python3 scripts/cwv_guard.py --public public/ | tee /tmp/cwv.log
++          exit ${PIPESTATUS[0]}
++
++      # ---------- 4) SECRETS-/TOKEN-ALTERS-WACHE ----------
++      - name: Secrets-/Token-Alters-Wache
++        id: secrets
++        continue-on-error: true
++        env:
++          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
++          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
++          PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
++          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
++          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
++        run: |
++          python3 scripts/secrets_age_guard.py | tee /tmp/secrets.log
++          exit ${PIPESTATUS[0]}
++
++      - name: Erfolgreiche Secrets vermerken (pro Kanal)
++        if: always()
++        env:
++          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
++          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
++        run: |
++          # Nur vermerken, wenn das Secret wirklich gesetzt & genutzt wurde.
++          if [ -n "${GROQ_API_KEY:-}" ]; then python3 scripts/secrets_age_guard.py --record-success GROQ_API_KEY || true; fi
++          if [ -n "${GEMINI_API_KEY:-}" ]; then python3 scripts/secrets_age_guard.py --record-success GEMINI_API_KEY || true; fi
++
++      # ---------- COMMIT (Reports + Manifeste) ----------
++      - name: Reports & Manifeste committen
++        if: always()
++        run: |
++          git config user.name "Governance-Bot"
++          git config user.email "governance-bot@users.noreply.github.com"
++          git add EDITORIAL-SCORECARD.md DECAY-REPORT.md CWV-REPORT.md SECRETS-REPORT.md 2>/dev/null || true
++          git add data/decay_queue.json data/cwv_manifest.json data/secrets_state.json 2>/dev/null || true
++          if git diff --cached --quiet; then
++            echo "Governance: keine Änderungen."
++          else
++            git commit -m "governance: Chefredakteur-Scorecard + Decay + CWV + Secrets (wöchentlich)"
++            scripts/git_sync.sh --push-only
++          fi
++
++      # ---------- GEBÜNDELTES ISSUE ----------
++      - name: Governance-Issue bei Handlungsbedarf
++        if: failure() || steps.scorecard.outcome == 'failure' || steps.decay.outcome == 'failure' || steps.cwv.outcome == 'failure' || steps.secrets.outcome == 'failure'
++        uses: actions/github-script@v7
++        with:
++          script: |
++            const fs = require('fs');
++            let body = '## 🗞️ Governance-Report (wöchentlich)\n\n';
++            try { body += '### Scorecard\n\n```\n' + fs.readFileSync('EDITORIAL-SCORECARD.md', 'utf-8') + '\n```\n'; } catch (e) {}
++            try { body += '### Decay-Radar\n\n```\n' + fs.readFileSync('/tmp/decay.log', 'utf-8') + '\n```\n'; } catch (e) {}
++            try { body += '### CWV\n\n```\n' + fs.readFileSync('/tmp/cwv.log', 'utf-8') + '\n```\n'; } catch (e) {}
++            try { body += '### Secrets\n\n```\n' + fs.readFileSync('/tmp/secrets.log', 'utf-8') + '\n```\n'; } catch (e) {}
++            body += '\n---\nAutomatisch vom Premium-Governance-Workflow (Label: governance).';
++            await github.rest.issues.create({
++              owner: context.repo.owner,
++              repo: context.repo.repo,
++              title: '🗞️ Governance-Report: Redaktionelle & technische Handlungsfelder',
++              body: body,
++              labels: ['governance']
++            });
++            console.log('✅ Governance-Issue erstellt');

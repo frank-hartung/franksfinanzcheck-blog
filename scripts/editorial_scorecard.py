@@ -1,0 +1,297 @@
+#!/usr/bin/env python3
+"""
+EDITORIAL-SCORECARD – Chefredakteur-Scorecard für FranksFinanzcheck
+
+Ein Chefredakteur einer großen Zeitung will EINE zentrale Kennzahl-Anzeige:
+"Wie gesund ist mein Blatt?" Dieses Skript bündelt alle relevanten Signale
+(Content, Kadenz, Qualität, Lektorat, Affiliate, Decay, CWV, Secrets) zu einer
+single Scorecard mit Ampel und Handlungsempfehlungen – für den wöchentlichen
+Redaktions-Report.
+
+Der Scorecard ist bewusst SCHNELL (keine teuren KI-Calls): er liest die
+vorhandenen Daten/Reports der spezialisierten Wachen und ergänzt nur leichte
+Inline-Zählungen aus `content/`.
+
+AUSGABE:
+  - `EDITORIAL-SCORECARD.md` – Scorecard
+  - `--issue`                 – GitHub-Issue-Body (bei Score < 75)
+  - `--selftest`
+
+Exit-Codes: 0 = Score ≥ 75, 1 = Handlungsbedarf (Score < 75), 2 = Selftest/Fehler.
+
+Nutzung:
+  python3 scripts/editorial_scorecard.py            # erzeugen + ausgeben
+  python3 scripts/editorial_scorecard.py --issue    # zusätzlich Issue-Body
+  python3 scripts/editorial_scorecard.py --selftest
+"""
+import glob
+import json
+import os
+import re
+import sys
+import datetime
+import statistics
+
+BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+import post_utils  # noqa: E402
+
+REPORT = os.path.join(BLOG_DIR, "EDITORIAL-SCORECARD.md")
+TODAY = datetime.date.today()
+
+DATA = lambda name: os.path.join(BLOG_DIR, "data", name)
+_DECAY_Q = DATA("decay_queue.json")
+_CWV_M = DATA("cwv_manifest.json")
+_SECRETS_S = DATA("secrets_state.json")
+
+
+def _read_json(path, default=None):
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return default
+
+
+def _count_live_drafts():
+    live = drafts = 0
+    slugs = post_utils.list_post_paths()
+    for p in slugs:
+        try:
+            t = open(p, encoding="utf-8").read()
+        except OSError:
+            continue
+        if post_utils.slug_of(p) == "_index":
+            continue
+        if "draft: false" in t:
+            live += 1
+        elif "draft: true" in t:
+            drafts += 1
+    return live, drafts
+
+
+def _pillar_counts():
+    counts = {}
+    for p in post_utils.list_post_paths():
+        try:
+            t = open(p, encoding="utf-8").read()
+        except OSError:
+            continue
+        m = re.search(r"^pillar:\s*[\"']?([^\"'\n]+)", t, re.M)
+        if m:
+            key = m.group(1).strip().strip("'\"")
+            counts[key] = counts.get(key, 0) + 1
+    return counts
+
+
+def _avg_readability():
+    """Nimmt, falls vorhanden, den letzten Lesbarkeits-Report als Basis."""
+    scores = []
+    # VERSTAENDNIS-REPORT / LENGTH-REPORT liefern teils Scores; hier lesen wir
+    # die Datei, falls vorhanden, nach "Flesch". Sonst None.
+    for rep in ("VERSTAENDNIS-REPORT.md", "LENGTH-REPORT.md"):
+        fp = os.path.join(BLOG_DIR, rep)
+        if os.path.exists(fp):
+            try:
+                t = open(fp, encoding="utf-8").read()
+                for m in re.findall(r"Flesch[^\d]*(\d{2,3})", t, re.I):
+                    v = int(m)
+                    if 0 <= v <= 100:
+                        scores.append(v)
+            except OSError:
+                pass
+    if not scores:
+        return None
+    return round(statistics.mean(scores), 1)
+
+
+def _lektor_findings():
+    fp = os.path.join(BLOG_DIR, "LEKTOR-REPORT.md")
+    if not os.path.exists(fp):
+        return None
+    try:
+        t = open(fp, encoding="utf-8").read()
+    except OSError:
+        return None
+    # Zähle "Lx" Regel-Zeilen (Report-Tabelle) grob
+    n = 0
+    for m in re.findall(r"\| L\d+ [^|]+ \|\s*(\d+)\s*\|", t):
+        n += int(m)
+    return n
+
+
+def collect():
+    """Sammelt alle Daten für die Scorecard."""
+    live, drafts = _count_live_drafts()
+    pillars = _pillar_counts()
+    decay = _read_json(_DECAY_Q, {"count": 0, "queue": []})
+    cwv = _read_json(_CWV_M, {})
+    secrets = _read_json(_SECRETS_S, {"entries": {}})
+    readability = _avg_readability()
+    lektor = _lektor_findings()
+
+    # Secrets: Anzahl fehlender/"roter" Einträge über Env
+    # (SCORECARD nutzt denselben Ansatz minimal: nur rot, wenn gesetzt aber stale)
+    secret_red = 0
+    for var, ent in (secrets.get("entries") or {}).items():
+        ls = ent.get("last_success")
+        if ls:
+            age = (TODAY - datetime.date.fromisoformat(ls)).days
+            if age > 60:
+                secret_red += 1
+
+    return {
+        "date": TODAY.isoformat(),
+        "live": live, "drafts": drafts,
+        "pillars": pillars, "pillar_count": len(pillars),
+        "decay_count": decay.get("count", 0),
+        "cwv_verdict": cwv.get("verdict", "UNKNOWN"),
+        "cwv_findings": len(cwv.get("findings", [])),
+        "readability": readability,
+        "lektor": lektor,
+        "secret_red": secret_red,
+        "secret_entries": len(secrets.get("entries") or {}),
+    }
+
+
+def _score(d) -> int:
+    """Gesamtscore 0..100."""
+    s = 100
+    # Content-Gesundheit: ein leerer/dünner Bestand = Problemlage
+    if d["live"] < 15:
+        s -= 15
+    # Freshness blass: viele decay = Frische-Druck
+    s -= min(30, d["decay_count"] * 3)
+    # CWV rot
+    if d["cwv_verdict"] == "RED":
+        s -= 15
+    elif d["cwv_verdict"] == "AMBER":
+        s -= 7
+    # Lesbarkeit (wenn bekannt)
+    if d["readability"] is not None:
+        if d["readability"] < 60:
+            s -= 10
+        elif d["readability"] < 70:
+            s -= 4
+    # Lektorat
+    if d["lektor"] is not None:
+        if d["lektor"] > 60:
+            s -= 10
+        elif d["lektor"] > 25:
+            s -= 4
+    # Secrets tot
+    s -= min(15, d["secret_red"] * 5)
+    return max(0, min(100, s))
+
+
+def _ampel(score):
+    if score >= 85:
+        return "GREEN"
+    if score >= 70:
+        return "AMBER"
+    return "RED"
+
+
+def render(d, score):
+    ampel = _ampel(score)
+    lines = [
+        "# 🏆 Chefredakteur-Scorecard",
+        f"**Stand:** {d['date']} · **Auftrag:** Redaktionelle Gesamt-Steuerung",
+        "",
+        f"## Gesamt-Score: **{score}/100** · Ampel: **{ampel}**",
+        "",
+        "| Kennzahl | Wert | Ampel |",
+        "|---|---|---|",
+        f"| Veröffentlichte Artikel | {d['live']} | {'🟢' if d['live'] >= 15 else '🔴'} |",
+        f"| Entwürfe (Warteschlange) | {d['drafts']} | 🟡 |",
+        f"| Pillars / Themen-Cluster | {d['pillar_count']} | 🟢 |",
+        f"| Decay-Kandidaten (STALE+DECAYING) | {d['decay_count']} | "
+        f"{'🟢' if d['decay_count'] == 0 else ('🟡' if d['decay_count'] <= 5 else '🔴')} |",
+        f"| Core-Web-Vitals | {d['cwv_verdict']} | "
+        f"{'🟢' if d['cwv_verdict'] == 'GREEN' else ('🟡' if d['cwv_verdict'] == 'AMBER' else '🔴')} |",
+        f"| Ø Lesbarkeit (Flesch) | {d['readability'] or 'n/a'} | "
+        f"{'🟢' if (d['readability'] or 100) >= 70 else '🟡'} |",
+        f"| Lektorat-Befunde | {d['lektor'] or 'n/a'} | "
+        f"{'🟢' if (d['lektor'] or 0) <= 25 else '🟡'} |",
+        f"| Tote Secrets | {d['secret_red']} | "
+        f"{'🟢' if d['secret_red'] == 0 else '🔴'} |",
+        "",
+        "## Pillar-Verteilung",
+        "",
+        _render_pillars(d["pillars"]),
+        "",
+        "## Handlungsempfehlungen",
+        "",
+    ]
+    recs = []
+    if d["decay_count"] > 0:
+        recs.append(f"**{d['decay_count']}** Artikel veralten – `scripts/decay_radar.py` zeigt die "
+                    "priorisierte Refresh-Queue (Stichtag-/Tarif-Themen zuerst).")
+    if d["cwv_verdict"] != "GREEN":
+        recs.append("Core-Web-Vitals unter Soll – `scripts/cwv_guard.py` für Befunde; "
+                    "Covers als AVIF/WebP, Bilder < 220 KB, `<img>` mit width/height.")
+    if d["secret_red"] > 0:
+        recs.append("Tote/schwache Secrets – `scripts/secrets_age_guard.py` prüfen "
+                    "(Pinterest 30-Tage-Token, Mastodon, KI-Keys).")
+    if d["lektor"] is not None and d["lektor"] > 25:
+        recs.append(f"**{d['lektor']}** Lektorat-Befunde – `scripts/lektor_guard.py --fix` "
+                    "(Doppelwörter, Füll-Phrasen, Person-Mix).")
+    if d["drafts"] > 0:
+        recs.append(f"**{d['drafts']}** Artikel in der Entwurf-Warteschlange – manuelle "
+                    "Qualitätsfreigabe prüfen (Kadenz- bzw. Qualitäts-Gate).")
+    if not recs:
+        recs.append("Keine akuten Handlungsfelder – Frequenz halten (Mo/Mi/Fr), "
+                    "Decay & CWV weiter beobachten.")
+    for r in recs:
+        lines.append(f"- {r}")
+    lines += ["", "_Erzeugt von `scripts/editorial_scorecard.py` (Chefredakteur-View)._"]
+    return "\n".join(lines) + "\n"
+
+
+def _render_pillars(counts):
+    if not counts:
+        return "_Keine Pillar-Zuordnung gefunden._"
+    rows = ["| Pillar | Artikel |", "|---|---|"]
+    for k in sorted(counts):
+        rows.append(f"| {k} | {counts[k]} |")
+    return "\n".join(rows)
+
+
+def _selftest():
+    failures = []
+    # _ampel Grenzen
+    if _ampel(90) != "GREEN" or _ampel(75) != "AMBER" or _ampel(50) != "RED":
+        failures.append("Ampel-Grenzen")
+    # _score monoton (mehr decay = schlechter)
+    a = _score({"live": 20, "decay_count": 0, "cwv_verdict": "GREEN",
+                "readability": 80, "lektor": 10, "secret_red": 0})
+    b = _score({"live": 20, "decay_count": 8, "cwv_verdict": "RED",
+                "readability": 50, "lektor": 80, "secret_red": 3})
+    if not (a > b):
+        failures.append("Score-Monotonie: a={}, b={}".format(a, b))
+    if failures:
+        print("❌ SCORECARD-SELFTEST FEHLGESCHLAGEN:")
+        for f in failures:
+            print("   -", f)
+        return 2
+    print("✅ SCORECARD-SELFTEST bestanden (Ampel-Grenzen, Score-Monotonie).")
+    return 0
+
+
+def main():
+    if "--selftest" in sys.argv:
+        return _selftest()
+    d = collect()
+    score = _score(d)
+    rep = render(d, score)
+    with open(REPORT, "w", encoding="utf-8") as f:
+        f.write(rep)
+    print(rep)
+    if "--issue" in sys.argv and score < 75:
+        print("\n===== ISSUE BODY =====\n")
+        print(f"## 🏆 Chefredakteur-Scorecard: **{score}/100** ({_ampel(score)})\n\n{rep}")
+    return 0 if score >= 75 else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
