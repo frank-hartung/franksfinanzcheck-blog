@@ -1,0 +1,30 @@
+# SubID → Artikel-Zuordnung (Awin 'Click Reference' = Artikel-Slug).
+# Generiert: 2026-09-01
+# Tragt hier manuelle Abweichungen ein (falls SubID != Slug).
+
+mapping:
+  "2026-08-10-dsl-wechselbonus-sichern": "2026-08-10-dsl-wechselbonus-sichern"
+  "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas"
+  "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026"
+  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026"
+  "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden"
+  "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel"
+  "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit"
+  "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke"
+  "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife": "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife"
+  "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst": "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst"
+  "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren"
+  "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet"
+  "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann": "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann"
+  "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst"
+  "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet"
+  "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden"
+  "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause"
+  "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier"
+  "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub"
+  "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps"
+  "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
+  "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet"
+  "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife"
+  "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen"
+  "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich"

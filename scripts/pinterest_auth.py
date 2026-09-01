@@ -48,7 +48,10 @@ TOKEN_FILE = ROOT / "data" / "pinterest_tokens.enc"
 OAUTH_URL = "https://api.pinterest.com/v5/oauth/token"
 AUTHORIZE_URL = "https://www.pinterest.com/oauth/"
 REDIRECT_URI = "https://franksfinanzcheck.de/pinterest-oauth"
-SCOPES = "boards:read,boards:write,pins:read,pins:write"
+# read_ads = PIN-ANALYTICS/Pin-Metriken (Impressions, Outbound-Clicks, Saves)
+# für die Performance-Feedback-Schleife. Ohne diesen Scope liefert die API v5
+# keine Pin-Metriken. Die anderen Scopes bleiben für Board-/Pin-Verwaltung.
+SCOPES = "boards:read,boards:write,pins:read,pins:write,read_ads"
 
 
 # ------------------------------------------------------------ Krypto (AES-GCM)

@@ -95,11 +95,32 @@ GO_NAMES = {
 
 
 def generate_go_pages(reg: dict) -> int:
-    """Erzeugt die statischen Weiterleitungen static/go/<key>/index.html."""
+    """Erzeugt die statischen Weiterleitungen static/go/<key>/index.html.
+
+    Awin-SubID-Förderung (Klicks→Umsatz, 01.09.2026): Der /go/-Link am Artikel
+    trägt ?subid=<artikelslug>. Das kleine JS liest diese aus location.search und
+    hängt sie vor dem Weiterleiten als &subid= an die Affiliate-URL. Fallback
+    (kein JS): die Meta-Refresh auf {url} bleibt byte-identisch = check_gateway
+    (registry URL als Substring) und noindex/Sponsored bleiben unangetastet."""
     GO_DIR.mkdir(parents=True, exist_ok=True)
     count = 0
     tpl = """<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow,noarchive">
+<script>
+// Awin-SubID-Förderung (Klicks→Umsatz per Artikel, 01.09.2026): Der /go/-Link am
+// Artikel trägt ?subid=<artikelslug>. Dieses Script hängt sie vor dem Weiterleiten
+// als &subid= an die Affiliate-URL an. Führt SYNCHRON im head aus (läuft vor dem
+// Meta-Refresh), damit die Attribution zuverlässig greift. Ohne subid: unverändert.
+(function () {
+  try {
+    var m = new URLSearchParams(location.search).get('subid');
+    if (!m) return;
+    var base = "{url}";
+    var finalUrl = base + (base.indexOf('?') >= 0 ? '&' : '?') + 'subid=' + encodeURIComponent(m);
+    location.replace(finalUrl);
+  } catch (e) { /* Fallback auf Meta-Refresh unten */ }
+})();
+</script>
 <meta http-equiv="refresh" content="0; url={url}">
 <link rel="canonical" href="{url}">
 <title>Weiter zu {zielname} | FranksFinanzcheck</title>
