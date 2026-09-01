@@ -1,0 +1,13 @@
+diff --git a/.github/workflows/blog-health-daily.yml b/.github/workflows/blog-health-daily.yml
+index a524fc0f..fd55a546 100644
+--- a/.github/workflows/blog-health-daily.yml
++++ b/.github/workflows/blog-health-daily.yml
+@@ -47,7 +47,7 @@ jobs:
+       #    werden aber im Report sichtbar und vom Heiler bereinigt).
+       - run: python3 scripts/textverstaendnis_guard.py --selftest
+       - run: python3 scripts/fix_r8_anker.py --selftest
+-      - run: python3 scripts/fix_r8_anker.py --fix || echo "⚠ R8-Anker-Heiler: Restfunde siehe TEXTVERSTAENDNIS-REPORT.md"
++      - run: python3 scripts/fix_r8_anker.py --fix || echo "⚠ R8-Anker-Heiler – Restfunde siehe TEXTVERSTAENDNIS-REPORT.md"
+       - run: python3 scripts/textverstaendnis_guard.py
+ 
+       - run: python3 scripts/blog_health_gate.py

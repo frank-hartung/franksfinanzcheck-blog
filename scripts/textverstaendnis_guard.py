@@ -158,6 +158,11 @@ def check_article(rel: str, body: str, term: dict) -> list:
                           f"{len(para)} Zeichen, {commas} Kommas, kaum Verben: {para[:110]}…", para[:40]))
 
     # ---------- R3 Terminologie ----------
+    # Nur FLIESSTEXT zählen (wie R4/R5): Überschriften, Tabellen, Listen,
+    # Zitate, CTA-Boxen und Hugo-Shortcodes sind Struktur, keine Textbegriffe
+    # (Mess-Artefakt, 01.09.2026 – sonst zählen „Tagesgeld“ in H2-Titeln,
+    # Tabellenspalten und „👉 Jetzt Tagesgeld vergleichen“-CTAs als Synonyme).
+    flow_text = " ".join(flow_paragraphs(body))
     for konzept, cfg in term.items():
         leit = cfg.get("leitbegriff", "")
         syns = cfg.get("synonyme", [])
@@ -165,8 +170,13 @@ def check_article(rel: str, body: str, term: dict) -> list:
             continue
         if cfg.get("kontext") and cfg["kontext"] not in body:
             continue
-        leit_count = len(re.findall(re.escape(leit), body, re.I))
-        syn_counts = [(s, len(re.findall(re.escape(s), body, re.I))) for s in syns]
+        # Wortgrenzen mit Bindestrich-Ausschluss: „Tagesgeld“ darf weder in
+        # „Tagesgeldkonto“ noch in Komposita wie „Tagesgeld-Zinsen“ zählen
+        # (Teilstring-/Kompositum-Artefakt, 01.09.2026).
+        def word_re(w: str) -> str:
+            return r"(?<![\w-])" + re.escape(w) + r"(?![\w-])"
+        leit_count = len(re.findall(word_re(leit), flow_text, re.I))
+        syn_counts = [(s, len(re.findall(word_re(s), flow_text, re.I))) for s in syns]
         total_syn = sum(c for _, c in syn_counts)
         max_syn = cfg.get("max_synonyme", 2)
         if leit_count >= 3 and total_syn > max_syn:

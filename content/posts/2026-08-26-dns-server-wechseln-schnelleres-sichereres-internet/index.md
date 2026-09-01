@@ -24,9 +24,9 @@ pin_description: "*Werbung | Du brauchst keinen teureren Tarif für schnelleres 
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
-Wusstest du, dass dein Internetanbieter jede einzelne Webseite, die du aufrufst, theoretisch mitlesen kann – auch im privaten Inkognito-Modus? Der Grund ist der **DNS-Server** deines Providers (auch Namensauflösung oder Resolver genannt): Er ist so etwas wie das Telefonbuch des Internets und übersetzt Domainnamen wie `franksfinanzcheck.de` in die zugehörige IP-Adresse.
+Wusstest du, dass dein Internetanbieter jede einzelne Webseite, die du aufrufst, theoretisch mitlesen kann – auch im privaten Inkognito-Modus? Der Grund ist der **DNS-Server** deines Providers (auch Namensauflösung oder Resolver genannt). Er ist so etwas wie das Telefonbuch des Internets: Er übersetzt Domainnamen wie `franksfinanzcheck.de` in die zugehörige IP-Adresse.
 
-Die meisten Haushalte nutzen automatisch den DNS-Server ihres Anbieters, ohne zu wissen, dass es schnellere, privatere und sicherere Alternativen gibt. Ein **DNS-Server-Wechsel** ist kostenlos, in fünf Minuten erledigt und kann Ladezeiten spürbar verkürzen. Welche Anbieter 2026 die wichtigsten sind ([Ratgeber Internet &amp; DSL](../../pillar/internet-dsl/)), wie du die Einstellung an FritzBox, Windows, Android und iPhone änderst und warum ein Wechsel auch ein Sicherheitsgewinn ist – das erfährst du jetzt.
+Die meisten Haushalte nutzen automatisch den DNS-Server ihres Anbieters, ohne zu wissen, dass es schnellere, privatere und sicherere Alternativen gibt. Ein **DNS-Server-Wechsel** ist kostenlos, in fünf Minuten erledigt und kann Ladezeiten spürbar verkürzen. Welche Anbieter 2026 die wichtigsten sind, zeigt der [Ratgeber Internet &amp; DSL](../../pillar/internet-dsl/). Wie du die Einstellung an FritzBox, Windows, Android und iPhone änderst und warum der Wechsel ein Sicherheitsgewinn ist – das erfährst du jetzt.
 
 
 ---
@@ -38,7 +38,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Immer wenn du im Browser eine Adresse wie `www.google.de` eingibst, läuft im Hintergrund ein technischer Vorgang ab:
 
-1. Dein Browser fragt den **DNS-Resolver** (standardmäßig den deines Internetanbieters): "Welche IP-Adresse gehört zu `www.google.de`?"
+1. Dein Browser fragt den **DNS-Server** (standardmäßig den deines Internetanbieters): "Welche IP-Adresse gehört zu `www.google.de`?"
 2. Der DNS-Server schlägt die Adresse nach und antwortet mit `142.250.185.195`.
 3. Dein Browser baut eine verschlüsselte Verbindung zu dieser IP auf.
 
@@ -62,7 +62,7 @@ Unabhängige Messwerkzeuge wie DNSPerf vergleichen täglich tausende DNS-Server 
 
 ### 2. Mehr Datenschutz
 
-Der DNS-Server deines Anbieters sieht **jede Domain**, die du besuchst – auch wenn die Webseite selbst per HTTPS verschlüsselt ist. Zwar ist in Deutschland die kommerzielle Weitergabe von Surf-Daten ohne Einwilligung nicht erlaubt, aber Auswertungen zu Netzmanagement und Strafverfolgung sind möglich. Öffentliche DNS-Anbieter wie Cloudflare und Quad9 verpflichten sich, keine personenbezogenen Nutzerdaten länger als 24 bis 48 Stunden zu speichern und keine Werbeprofile zu erstellen.
+Jede Domain, die du besuchst, sieht der DNS-Server deines Anbieters – auch wenn die Webseite selbst per HTTPS verschlüsselt ist. Zwar ist in Deutschland die kommerzielle Weitergabe von Surf-Daten ohne Einwilligung nicht erlaubt, aber Auswertungen zu Netzmanagement und Strafverfolgung sind möglich. Öffentliche DNS-Anbieter wie Cloudflare und Quad9 verpflichten sich, keine personenbezogenen Nutzerdaten länger als 24 bis 48 Stunden zu speichern und keine Werbeprofile zu erstellen.
 
 ### 3. Eingebauter Phishing- und Malware-Schutz
 
@@ -88,7 +88,7 @@ Quad9 (9.9.9.9), Cloudflare mit Malware-Schutz (1.1.1.2) und der Family-Server (
 * **IPs:** 9.9.9.9 und 149.112.112.112
 * **Besonderheit:** Gemeinnützige Stiftung, blockiert aktiv Bedrohungen (über 100 Mio. Einträge in der Bedrohungsdatenbank), keine Speicherung personenbezogener Daten.
 
-## Anleitung: Namensserver an der FritzBox ändern (empfohlen)
+## Anleitung: DNS-Server an der FritzBox ändern (empfohlen)
 
 Wenn du den DNS-Server direkt in deinem Router änderst, gilt die Einstellung automatisch für **alle Geräte im Heimnetz** – Handy, Smart-TV, Laptop, Spielekonsole. Bei einer AVM FritzBox gehst du so vor:
 
@@ -103,7 +103,7 @@ Wenn du den DNS-Server direkt in deinem Router änderst, gilt die Einstellung au
 
 > 💡 **Tipp:** Bei anderen Routern (Telekom Speedport, Unitymedia Connect Box, Vodafone Station) findest du die DNS-Einstellungen im Menü unter "Netzwerk", "Internet" oder "LAN". Das Prinzip ist identisch.
 
-## Resolver unter Windows ändern
+## DNS-Server unter Windows ändern
 
 1. `Windowstaste + R` drücken, `ncpa.cpl` eingeben und mit Enter bestätigen.
 2. Rechtsklick auf die aktuell genutzte Netzwerkverbindung → **Eigenschaften**.
@@ -117,7 +117,7 @@ Wenn du den DNS-Server direkt in deinem Router änderst, gilt die Einstellung au
 
 ### Android
 
-Unter Android 13/14 ab Version 9 kannst du systemweit "Private Resolver" festlegen:
+Unter Android 13/14 ab Version 9 kannst du systemweit "Private DNS" festlegen:
 
 1. **Einstellungen → Netzwerk & Internet → Private Namensauflösung**.
 2. **Hostname des Private-DNS-Anbieters** auswählen.
@@ -138,9 +138,9 @@ Unter Android 13/14 ab Version 9 kannst du systemweit "Private Resolver" festleg
 - **Smart-Home-Probleme:** Einige ältere Smart-TVs, Drucker und IoT-Geräte kommen mit Dritt-Resolver nicht zurecht. Sollte ein Gerät aussteigen, wechsle testweise zurück oder trage den Namensauflösung nur am Endgerät ein.
 - **DoH/DoT aktivieren:** Wer ganz sicher gehen will, aktiviert in Windows 11, Firefox oder Chrome "DNS over HTTPS" (DoH) – dann ist die Resolver-Anfrage selbst verschlüsselt.
 
-## Namensauflösung + Tarif optimieren: Die doppelte Ersparnis
+## DNS-Wechsel + Tarif optimieren: Die doppelte Ersparnis
 
-Ein schneller DNS-Server verbessert die Antwortzeiten – er ersetzt aber keine gute Bandbreite. Wenn du trotz Resolver-Wechsel noch lange Ladezeiten, Streaming-Ruckler oder langsame Downloads hast, liegt das meist an einem überlasteten oder zu langsamen Tarif. Ein [DSL-Vergleich](/go/dsl/) zeigt dir in zwei Minuten, ob ein Wechsel auf eine höhere Bandbreite oder einen günstigeren Anbieter bis zu **380 € über 24 Monate** spart – wie ich es in meinem [Ratgeber zum DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) detailliert vorgerechnet habe.
+Schnelle DNS-Server verbessern die Antwortzeiten – ersetzen aber keine gute Bandbreite. Wenn du trotz DNS-Server-Wechsel noch lange Ladezeiten, Streaming-Ruckler oder langsame Downloads hast, liegt das meist an einem überlasteten oder zu langsamen Tarif. Ein [DSL-Vergleich](/go/dsl/) zeigt dir in zwei Minuten, ob ein Wechsel auf eine höhere Bandbreite oder einen günstigeren Anbieter bis zu **380 € über 24 Monate** spart – wie ich es in meinem [Ratgeber zum DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) detailliert vorgerechnet habe.
 
 | Optimierung | Aufwand | Effekt | Kosten |
 |:---|---:|:---|---:|
@@ -150,25 +150,27 @@ Ein schneller DNS-Server verbessert die Antwortzeiten – er ersetzt aber keine 
 
 <!-- premium-length-2026 -->
 
-## Wann Namensauflösung spürbar ist – und wann nicht
+## Wann der DNS-Server-Wechsel spürbar ist – und wann nicht
 
-DNS kürzt die Namensauflösung, nicht dein 16-Mbit-Funkloch. In einem gut ausgesteuerten Netz spürst du schnellere erste Seitenaufrufe und weniger Hänger beim Smart-TV-Start. Speedtests in Mbit/s ändern sich kaum. Das ist kein Widerspruch.
+Der DNS-Server verkürzt nur die Antwortzeit, nicht dein 16-Mbit-Funkloch. In einem gut ausgesteuerten Netz spürst du schnellere erste Seitenaufrufe und weniger Hänger beim Smart-TV-Start. Speedtests in Mbit/s ändern sich kaum. Das ist kein Widerspruch.
 
-FritzBox: Internet → Zugangsdaten → Resolver. Zuerst die DNS-Adressen deines Providers notieren, dann zwei unabhängige Resolver eintragen (einer primär, einer sekundär).
+FritzBox: Internet → Zugangsdaten → DNS-Server. Zuerst die DNS-Adressen deines Providers notieren, dann zwei unabhängige DNS-Server eintragen (einer primär, einer sekundär).
 
-48 Stunden testen, bei Problemen mit VPN oder Banking zurück. Kinder-Filter und Ad-Blocking-DNS sind extra – sie zerlegen manches Online-Banking. Dann split-Resolver oder Ausnahmen.
-
-
-Namensauflösung ist ein 5-Minuten-Hebel mit geringem Risiko. Er ersetzt keinen Tarifwechsel und kein Mesh. Er macht beides angenehmer, wenn die Basis stimmt.
+48 Stunden testen, bei Problemen mit VPN oder Banking zurück. Kinder-Filter und Ad-Blocking-DNS sind extra – sie zerlegen manches Online-Banking. Dann Split-DNS oder Ausnahmen.
 
 
-## Extra: Wie die Namensauflösung deinen Alltag beeinflusst
+Ein DNS-Server-Wechsel ist ein 5-Minuten-Hebel mit geringem Risiko. Er ersetzt keinen Tarifwechsel und kein Mesh. Er macht beides angenehmer, wenn die Basis stimmt.
 
-Viele Nutzer merken den Unterschied erst, wenn sie bewusst darauf achten: Der Aufruf einer Nachrichtenseite, das Laden des Online-Bankings, der Start einer Mediathek – überall steckt eine kurze Anfrage an den Resolver dahinter. Wer einen schnellen, datensparsamen Anbieter nutzt, spart über den Tag verteilt mehrere Sekunden Wartezeit und reduziert nebenbei das Tracking-Risiko.
 
-Ein weiterer Punkt ist die Filterung: Manche Resolver bieten optionale Jugendschutz-Listen, andere blockieren Werbung oder Tracker auf Domain-Ebene. Das ist kein Ersatz für einen Browser-Adblocker, aber eine sinnvolle zweite Schicht – besonders für Geräte, auf denen kein Adblocker läuft (Smart-TV, Spielekonsole).
+## Extra: Wie der DNS-Server deinen Alltag beeinflusst
 
-Praktisch bedeutet das: Notiere dir deine aktuelle Konfiguration (Screenshot der Router-Seite), stelle zwei unabhängige Anbieter als primär und sekundär ein, teste 48 Stunden lang typische Seiten (Banking, Streaming, Homeoffice-VPN) und entscheide dann, ob du dabei bleibst. Die Änderung ist jederzeit in 30 Sekunden rückgängig zu machen.
+Viele Nutzer merken den Unterschied erst, wenn sie bewusst darauf achten. Beim Aufruf einer Nachrichtenseite, beim Laden des Online-Bankings, beim Start einer Mediathek: Überall steckt eine kurze Anfrage an den DNS-Server dahinter. Wer einen schnellen, datensparsamen Anbieter nutzt, spart über den Tag verteilt mehrere Sekunden Wartezeit. Nebenbei reduziert er das Tracking-Risiko.
+
+Dazu kommt die Filterung: Manche DNS-Server bieten optionale Jugendschutz-Listen, andere blockieren Werbung oder Tracker auf Domain-Ebene. Das ist kein Ersatz für einen Browser-Adblocker, aber eine sinnvolle zweite Schicht – besonders für Geräte, auf denen kein Adblocker läuft (Smart-TV, Spielekonsole).
+
+Praktisch bedeutet das: Notiere deine aktuelle Konfiguration (Screenshot der Router-Seite). Stelle zwei unabhängige Anbieter als primär und sekundär ein. Teste 48 Stunden lang typische Seiten (Banking, Streaming, Homeoffice-VPN).
+
+Danach entscheidest du, ob du dabei bleibst. Die Änderung ist jederzeit in 30 Sekunden rückgängig zu machen.
 ## Bonus: Die 10 DNS-Begriffe, die dir in Foren wirklich begegnen
 
 | Begriff | Was er bedeutet | Warum er dich betrifft |
@@ -185,11 +187,11 @@ Praktisch bedeutet das: Notiere dir deine aktuelle Konfiguration (Screenshot der
 | DNS-Leak | Gerät fragt doch den Provider statt des neuen Resolvers | Passiert bei falscher Router-Konfiguration |
 
 Praxis-Tipp: Notiere deine aktuelle Latenz vor und nach dem Wechsel (z. B. `ping 1.1.1.1` und `ping 9.9.9.9`).
-So siehst du schwarz auf weiß, ob der neue Resolver wirklich flotter ist – und nicht nur gefühlt.
+So siehst du schwarz auf weiß, ob der neue DNS-Server wirklich flotter ist – und nicht nur gefühlt.
 
 ## Fazit: 5 Minuten, die sich dauerhaft auszahlen
 
-Der DNS-Server-Wechsel ist einer der einfachsten und effektivsten Internet-Tuning-Maßnahmen, die es gibt. Für **null Euro** bekommst du spürbar schnellere Ladezeiten, mehr Privatsphäre vor deinem Provider und einen eingebauten Malware-Schutz.
+Ein DNS-Server-Wechsel ist eine der einfachsten und effektivsten Internet-Tuning-Maßnahmen überhaupt. Für **null Euro** bekommst du spürbar schnellere Ladezeiten, mehr Privatsphäre vor deinem Provider und einen eingebauten Malware-Schutz.
 
 Meine klare Empfehlung: Setze ihn direkt im Router (z. B. an der FritzBox) ab, damit alle Geräte im Haushalt automatisch davon profitieren. Wenn du im Anschluss noch deinen Tarif prüfst, holst du das Maximum an Geschwindigkeit und Preis heraus.
 
@@ -198,11 +200,11 @@ Meine klare Empfehlung: Setze ihn direkt im Router (z. B. an der FritzBox) ab, d
 
 ## Häufige Fragen
 
-### Welcher Namensserver ist der passende für Deutschland?
-Gemessen an der Antwortzeit liegt Cloudflare (1.1.1.1) mit durchschnittlich 8 Millisekunden vorn, gefolgt von Google Resolver (8.8.8.8) mit 12 ms und Quad9 (9.9.9.9) mit 14 ms. Wer Wert auf maximalen Malware-Schutz legt, wählt Quad9.
+### Welcher DNS-Server ist der passende für Deutschland?
+Gemessen an der Antwortzeit liegt Cloudflare (1.1.1.1) vorn: durchschnittlich 8 Millisekunden. Dahinter folgen Google Public DNS (8.8.8.8) mit 12 ms und Quad9 (9.9.9.9) mit 14 ms. Wer Wert auf maximalen Malware-Schutz legt, wählt Quad9.
 
 ### Ist der Wechsel des DNS-Servers gefährlich?
-Nein, du änderst lediglich eine Netzwerkeinstellung. Bei Problemen kannst du jederzeit zurück zur automatischen Zuweisung ("Namensserver automatisch beziehen") wechseln.
+Nein, du änderst lediglich eine Netzwerkeinstellung. Bei Problemen kannst du jederzeit zurück zur automatischen Zuweisung ("DNS-Server automatisch beziehen") wechseln.
 
 ### Bringt der DNS-Wechsel etwas beim Streaming?
 Für die Wiedergabegeschwindigkeit von Netflix, YouTube oder Spotify bringt er nur wenig, da Streaming-Dienste globale CDN-Netzwerke nutzen. Beim erstmaligen Laden der Seiten und bei der Navigation kann er aber Ladezeiten verkürzen.
@@ -210,7 +212,7 @@ Für die Wiedergabegeschwindigkeit von Netflix, YouTube oder Spotify bringt er n
 ### Was ist der Unterschied zwischen DNS over HTTPS (DoH) und DNS over TLS (DoT)?
 Beide Verfahren verschlüsseln die DNS-Anfrage selbst, sodass auch dein Internetanbieter nicht mehr mitlesen kann, welche Seite du aufrufst. DoH läuft über Port 443 (verschmilzt mit normalem HTTPS-Verkehr), DoT über Port 853. Beide sind sicher, DoH ist im Browser einfacher einzurichten.
 
-### Gilt der Resolver-Server für alle Geräte im Haushalt?
+### Gilt der neue DNS-Server für alle Geräte im Haushalt?
 Wenn du ihn im Router (z. B. FritzBox) einträgst, ja. Bei einer Einstellung direkt am Laptop oder Handy gilt er nur für dieses eine Gerät.
 
 ---
