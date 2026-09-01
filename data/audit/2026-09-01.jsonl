@@ -1,0 +1,2 @@
+{"ts": "2026-09-01T17:56:30Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 31}, "output": {"changes": 118}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-01T17:56:30Z", "module": "fix_spaces", "action": "apply", "input": {"files": 31}, "output": {"fixes": 684}, "status": "ok", "critical": false, "commit": null}

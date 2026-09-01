@@ -1,6 +1,6 @@
 # 💶 UNIT-REPORT (unit_guard.py)
 
-**Stand:** 2026-08-31 18:27 UTC · Modus: DRY-RUN
+**Stand:** 2026-09-01 18:01 UTC · Modus: FIX
 **Hausstil:** X € / X % (mit NBSP, umburchfest)
 
 🎉 Einheiten-Stil einheitlich (Hausstil).

@@ -1,4 +1,4 @@
-# 📋 Meta-Daten-Report – 2026-08-31
+# 📋 Meta-Daten-Report – 2026-09-01
 
 > **Vollautomatisch** erzeugt vom wöchentlichen SEO-Workflow. Keine manuelle Sichtung nötig: Bei verbleibenden Problemen erstellt der Workflow automatisch ein GitHub-Issue.
 
@@ -23,13 +23,13 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | Score | Artikel | Titel | Desc | Keywords | Status |
 |---|---|---|---|---|---|
 | 95 | Preisgarantie Gas: So sicherst du günstige Ta | 49 | 152 | 6 | ✅ |
-| 95 | WLAN verbessern: <br> So bringst du stabilen  | 46 | 149 | 8 | ✅ |
 | 100 | DSL-Wechselbonus sichern: So sparst du beim I | 59 | 140 | 7 | ✅ |
 | 100 | Sicher heizen: So schützt dich eine Gaspreisg | 52 | 151 | 5 | ✅ |
 | 100 | Dein Haus sicher schützen: Das neue Vorsorge- | 56 | 150 | 7 | ✅ |
 | 100 | Gasrechnung senken: Fehler im Spätsommer verm | 50 | 144 | 6 | ✅ |
 | 100 | Internet & DSL wechseln: Praxis-Tipps – Highs | 58 | 145 | 6 | ✅ |
 | 100 | Sparen im Herbst: Spartipps für die goldene J | 54 | 141 | 7 | ✅ |
+| 100 | WLAN verbessern: So bringst du stabilen Speed | 58 | 149 | 8 | ✅ |
 | 100 | Gas-Anbieter wechseln: Praxis-Tipps für günst | 55 | 157 | 8 | ✅ |
 | 100 | Strom sparen im Haushalt: Die besten Tipps fü | 57 | 153 | 7 | ✅ |
 | 100 | Kostenloses Girokonto: So findest du ein Kont | 60 | 150 | 6 | ✅ |
@@ -48,4 +48,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Tagesgeld-Zinsen 2026: Die besten Zinssätze i | 56 | 145 | 8 | ✅ |
 
 ---
-*Erzeugt am 2026-08-31 um 16:49 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-09-01 um 18:01 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
