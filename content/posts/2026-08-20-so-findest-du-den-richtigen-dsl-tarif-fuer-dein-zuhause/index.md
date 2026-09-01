@@ -51,7 +51,7 @@ Die wichtigste Entscheidung beim Tarifabschluss ist die Wahl der passenden Downl
   - **Ideal für:** Regelmäßige Downloads von 100-GB-Spieledateien, professionelle Videoproduktion mit riesigen Uploads oder WG-Gemeinschaften ab 5 Personen.
   - **Kosten:** ca. 45 € bis 65 € / Monat effektiv.
 
-## Die Technologien im Vergleich: DSL, Kabel oder Glasfaser?
+## Die Technologien im Vergleich:<br> DSL, Kabel oder Glasfaser?
 
 | Technologie | Max. Download | Max. Upload | Verfügbarkeit | Stärken & Schwächen |
 |:---|:---|:---|:---|:---|
@@ -66,16 +66,16 @@ Die wichtigste Entscheidung beim Tarifabschluss ist die Wahl der passenden Downl
 
 ## Die 4 goldenen Regeln beim DSL-Tarifabschluss
 
-### Regel 1: Berechne immer den 24-Monats-Effektivpreis
+### Regel 1:<br> Berechne immer den 24-Monats-Effektivpreis
 Lass dich nicht von reißerischen Angeboten wie „9,99 € in den ersten 6 Monaten“ blenden, wenn der Tarif ab Monat 7 plötzlich 49,99 € kostet. Addiere alle Monatsgebühren über 2 Jahre, ziehe Cashback und Neukundenboni ab, addiere Anschlusskosten und teile die Gesamtsumme durch 24. Nur dieser Effektivpreis ist vergleichbar!
 
-### Regel 2: Kündige niemals selbst beim Alt-Anbieter
+### Regel 2:<br> Kündige niemals selbst beim Alt-Anbieter
 Überlasse die Kündigung immer dem neuen Internetanbieter im Bestellprozess. Dadurch greift der gesetzliche Schutz nach § 58 TKG: Der bisherige Provider darf die Leitung erst kappen, wenn der neue Anschluss nachweislich funktioniert. So bist du vor Internetausfällen im Homeoffice geschützt.
 
-### Regel 3: Router kaufen statt dauerhaft mieten
+### Regel 3:<br> Router kaufen statt dauerhaft mieten
 Mietrouter kosten beim Provider meist zwischen 4,99 € und 7,99 € monatlich (120 € bis 190 € über 2 Jahre). Ein Kaufgerät aus dem Handel gehört dir dauerhaft und lässt sich nach 2 Jahren beim nächsten Anbieterwechsel einfach Weiternutzen.
 
-### Regel 4: Wechselboni und Cashback mitnehmen
+### Regel 4:<br> Wechselboni und Cashback mitnehmen
 Vergleichsportale bieten exklusive Boni an, die du beim direkten Abschluss auf der Provider-Webseite nicht erhältst. Wie du das Maximum herausholst, erklären wir im Detail in unserem Ratgeber über den [DSL-Wechselbonus und Gutschriften](../../posts/2026-08-10-dsl-wechselbonus-sichern/).
 
 ## Effektivkosten-Vergleich nach Haushalts-Profil
@@ -138,7 +138,7 @@ Liegt Kabel gut und WLAN schlecht: Funk zuerst. Liegen beide gut und der Effekti
 
 
 
-## Mehr als nur Zahlen: Latenz, Upload und Stabilität
+## Mehr als nur Zahlen:<br> Latenz, Upload und Stabilität
 
 Viele Tarife werben mit hohen Download-Werten, verschweigen aber den Upload. Für Videocalls, Cloud-Backups und das Senden großer Dateien ist die Sendeleistung genauso wichtig. Im Homeoffice fühlt sich ein Anschluss mit 100 Down und 40 Up oft besser an als ein 250-Down-Anschluss mit nur 10 Up.
 
@@ -146,7 +146,7 @@ Auch die Latenz (Ping) spielt eine Rolle: Werte unter 20 Millisekunden sorgen f�
 
 Ein letzter Punkt: Stabilität schlägt Maximalwert. Ein Tarif, der abends konstant 90 liefert, ist mehr wert als einer, der tagsüber 250 verspricht und abends auf 40 einbricht. Frage im Bekanntenkreis nach Erfahrungswerten in deiner Straße – das ist oft ehrlicher als die Karte des Anbieters.
 
-## Fazit: Bedarfsgenau buchen und regelmäßig wechseln
+## Fazit:<br> Bedarfsgenau buchen und regelmäßig wechseln
 
 Ein perfekter Internetvertrag bietet genau die Geschwindigkeit, die dein Haushalt tatsächlich benötigt – ohne überflüssigen Bandbreiten-Ballast. Durch einen regelmäßigen Wechsel alle 2 Jahre nach Ablauf der Mindestvertragslaufzeit profitierst du dauerhaft von Neukundenkonditionen und sparst hunderte Euro.
 

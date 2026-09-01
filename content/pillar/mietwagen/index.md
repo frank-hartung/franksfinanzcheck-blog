@@ -21,7 +21,7 @@ Ein Urlaub soll Erholung und unvergessliche Erlebnisse bringen – doch bei der 
 
 ---
 
-## Spartabelle: Mietwagen-Optionen im Vergleich
+## Spartabelle:<br> Mietwagen-Optionen im Vergleich
 
 | Buchungsbaustein | Vor Ort am Flughafen-Schalter | Vorab im Online-Vergleich | Deine Ersparnis |
 |---|---|---|---|
@@ -75,7 +75,7 @@ Flugpreise und Reisepreise schwanken stark nach Wochentag, Saison und Nachfrage.
 
 <!-- premium-length-2026 -->
 
-## Reise-Silo: Buchung, Schalter, Rückgabe
+## Reise-Silo:<br> Buchung, Schalter, Rückgabe
 
 Der Mietwagen ist der Teil der Reise, an dem aus 29 €/Tag 79 € werden, wenn du unvorbereitet ankommst. Das Silo bündelt die Regeln, die Artikel vertiefen.
 
@@ -99,7 +99,7 @@ Rückgabe: Tank, Fotos, km, Protokoll. Nicht diskutieren, dokumentieren. Chargeb
 
 ### Lohnt Vollkasko am Schalter trotzdem?
 
-Nur wenn die Karte Lücken hat (z. B. Reifen/Glas, bestimmte Länder) oder der Vermieter ohne lokale Police den Wagen nicht herausgibt. Dann den Tagespreis gegen das Restrisiko halten – oft 18 € × 14 Tage = 252 € für ein 800-€-Risiko. Manchmal ja, oft nein.
+Nur wenn die Karte Lücken hat (z. B. reifen/Glas, bestimmte Länder) oder der Vermieter ohne lokale Police den Wagen nicht herausgibt. Dann den Tagespreis gegen das Restrisiko halten – oft 18 € × 14 Tage = 252 € für ein 800-€-Risiko. Manchmal ja, oft nein.
 
 ### Kaution ohne Kreditkarte?
 

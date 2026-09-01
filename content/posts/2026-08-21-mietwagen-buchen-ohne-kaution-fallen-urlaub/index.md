@@ -59,7 +59,7 @@ Ein echter Mietwagen **vollständig ohne jegliche Kaution** ist in den großen U
 
 ### 1. Die Selbstbeteiligungs-Falle
 
-Grundsätzlich ist jeder Mietwagen in Europa haftpflichtversichert. Im Preisvergleich enthalten die meisten Billig-Angebote darüber hinaus eine **Vollkasko mit hoher Selbstbeteiligung** von 900 € bis 1.500 €. Bei einem Kratzer oder Steinschlag zahlst du bis zu dieser Summe selbst.
+Grundsätzlich ist jeder Mietwagen in Europa haftpflichtversichert. Im Preisvergleich enthalten die meisten Billig-Angebote darüber hinaus eine **Vollkasko mit hoher Selbstbeteiligung** von 900 € bis 1.500 €. Bei einem Kratzer oder Steinschlag zahlst du bis zu dieser Summe selbst.
 
 **So umgehst du sie:** Buche konsequent ein Paket mit **"Vollkasko ohne Selbstbeteiligung"** (auch "Zero Excess", "Super Cover" oder "Vollkasko ohne SB"). Das kostet im Schnitt nur 3 € bis 8 € pro Tag mehr. Im Vergleich zur Selbstbeteiligung ist das ein Schnäppchen. Wer über einen [deutschen Vergleichsrechner](/go/mietwagen/) bucht, bekommt diese Option meist inklusive.
 
@@ -99,7 +99,7 @@ Mietwagen direkt am Flughafen sind aufgrund von Konzessionsgebühren oft 15 bis 
 5. **Echte Kreditkarte freihalten:** Das Limit muss mindestens die Kaution plus 200 € Puffer abdecken. Debitkarten nur, wenn der Vermieter sie ausdrücklich akzeptiert.
 6. **Bei Übernahme 15 Minuten Zeit nehmen:** Gemeinsam mit dem Mitarbeiter jeden Kratzer, jede Delle und jeden Steinschlag dokumentieren, fotografieren und im Protokoll festhalten.
 
-## Echte Zahlen: Drei Mietwagen-Szenarien im Vergleich
+## Echte Zahlen:<br> Drei Mietwagen-Szenarien im Vergleich
 
 | Szenario | Grundpreis (7 Tage) | Versicherung | Kaution | Zusatzkosten | Gesamt (7 Tage) |
 |:---|---:|---:|---:|---:|---:|
@@ -121,7 +121,7 @@ Drei Kriterien sind entscheidend:
 
 > 💡 **Tipp:** Wenn du keine Kreditkarte hast oder dein Limit für die Kaution nicht reicht, kann ein [gebührenfreies Girokonto mit Kreditkarte](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) oder ein [gebührenfreies Kreditkarten-Konto](/go/kreditkarte/) eine sinnvolle Lösung sein.
 
-## Nach der Rückgabe: So wehrst du dich gegen ungerechtfertigte Abbuchungen
+## Nach der Rückgabe:<br> So wehrst du dich gegen ungerechtfertigte Abbuchungen
 
 Sollte der Vermieter Wochen nach dem Urlaub plötzlich Beträge für "angebliche Kratzer" oder "Tankdifferenz" abbuchen, gehe so vor:
 
@@ -138,14 +138,14 @@ Sollte der Vermieter Wochen nach dem Urlaub plötzlich Beträge für "angebliche
 
 Vor der Abholung: Licht, Glas, Reifen, Dach, Unterboden fotografieren, Tankstand, Kilometer. Bei Rückgabe dasselbe plus Bestätigung „keine neuen Schäden“. Unberechtigte Abbuchungen: erst Vermieter schriftlich, dann Kartenanbieter Chargeback, Fristen 8–12 Wochen.
 
-Am günstigsten ist die Buchung, deren Rückgabe 12 Minuten dauert, weil du vorbereitet warst – nicht die, die im Banner 9 €/Tag war und am Schalter 41 € wird.
+Am günstigsten ist die Buchung, deren Rückgabe 12 Minuten dauert, weil du vorbereitet warst – nicht die, die im Banner 9 €/Tag war und am Schalter 41 € wird.
 
 
-## Bonus: Nebenkosten, die oft vergessen werden
+## Bonus:<br> Nebenkosten, die oft vergessen werden
 
 Neben Kaution und Vollkasko gibt es Posten, die erst auf der Rechnung auftauchen: Einwegmiete (wenn du an einem anderen Ort zurückgibst), Grenzübertritt (z. B. Kroatien nach Bosnien), Winterreifenpauschale, Navigationsgerät, Kindersitz. Jeder dieser Punkte kostet 5 bis 15 € pro Tag und summiert sich schnell.
 
-Mein Vorgehen: Vor der Buchung die Mietbedingungen als PDF speichern und nach Stichworten wie „one-way“, „cross-border“, „winter“, „young driver“, „additional driver“ suchen. Alles, was extra kostet, markieren und mit der Vergleichsseite abgleichen. Wer zu zweit fährt, braucht oft nur einen Zusatzfahrer – der zweite Fahrer für einen Tag ist günstiger als für die ganze Woche.
+Mein Vorgehen: Vor der Buchung die Mietbedingungen als PDF speichern und nach Stichworten wie „one-way“, „cross-border“, „Winter“, „young driver“, „additional driver“ suchen. Alles, was extra kostet, markieren und mit der Vergleichsseite abgleichen. Wer zu zweit fährt, braucht oft nur einen Zusatzfahrer – der zweite Fahrer für einen Tag ist günstiger als für die ganze Woche.
 
 Ein weiterer Hebel ist die Tankstrategie: „Voll-Voll“ ist fair, „Voll-Leer“ fast immer teurer, weil die Vermieter-Literpreise 30 bis 50 Cent über dem Markt liegen. Tanke 10 Kilometer vor Rückgabe an einer freien Station und hebe den Beleg auf – das Foto des Tankzettels neben dem Kilometerstand beendet jede Diskussion.
 
@@ -161,7 +161,7 @@ Diese Routine kostet zehn Minuten und verhindert jenen Stress, der den ersten Ur
 
 
 
-## Glossar für die Mietwagen-Buchung: Begriffe, die dir am Schalter begegnen
+## Glossar für die Mietwagen-Buchung:<br> Begriffe, die dir am Schalter begegnen
 
 - **CDW** – Collision Damage Waiver, Basis-Absicherung mit hoher Selbstbeteiligung.
 - **SCDW** – Super CDW, reduziert die Eigenbeteiligung gegen Aufpreis.
@@ -200,7 +200,7 @@ Dieses Vokabular hilft dir, die Klauseln im Kleingedruckten zu verstehen. Am Sch
 
 
 
-## Kurzcheck vor Abflug: 90 Sekunden, die 200 € sparen
+## Kurzcheck vor Abflug:<br> 90 Sekunden, die 200 € sparen
 
 - Limit geprüft? 3.000 € temporär freigeschaltet.
 - Voucher ausgedruckt und offline gespeichert.
@@ -212,13 +212,13 @@ Dieses Vokabular hilft dir, die Klauseln im Kleingedruckten zu verstehen. Am Sch
 Wer diese sechs Punkte abhakt, steht nicht im Stau der Nachverhandlungen. Du sitzt bald im klimatisierten Wagen auf dem Weg zur Unterkunft. Später hält die Abrechnung keine Überraschung bereit.
 
 
-## Reise-Impulse: Warum ein Mietwagen mehr als Transport ist
+## Reise-Impulse:<br> Warum ein Mietwagen mehr als Transport ist
 
 Ein Mietwagen öffnet Türen zu Orten, die kein Bus erreicht: eine Küstenstraße in Portugal, ein Weingut in der Toskana, ein Aussichtspunkt über dem Fjord. Gerade wer mit Kindern reist, spart sich mit dem eigenen Wagen Umstiege, Wartezeiten und Gepäckstress.
 
 Wichtiger als das Ziel ist die Vorbereitung. Kennst du Kautionsregelung, Tankoption und Versicherung vorab, erlebst du die Reise entspannt. An die Reise erinnerst du dich noch, wenn die Abrechnung längst vergessen ist.
 
-Einen Mietwagen ohne Kaution zu buchen ist im Ausland selten möglich. Doch du kannst die Kaution durch kluge Tarifwahl auf 100 € bis 300 € drücken. So stellst du das Risiko auf null. Dann steht einem entspannten Urlaub nichts mehr im Weg.
+Einen Mietwagen ohne Kaution zu buchen ist im Ausland selten möglich. Doch du kannst die Kaution durch kluge Tarifwahl auf 100 € bis 300 € drücken. So stellst du das Risiko auf null. Dann steht einem entspannten Urlaub nichts mehr im Weg.
 
 Drei Regeln sind entscheidend: **Vergleiche online. Buche mit Vollkasko ohne Selbstbeteiligung. Lehne Zusatzverkäufe am Schalter konsequent ab.**
 

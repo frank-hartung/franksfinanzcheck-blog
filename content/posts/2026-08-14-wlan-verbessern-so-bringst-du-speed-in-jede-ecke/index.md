@@ -44,7 +44,7 @@ Bevor du bares Geld in neue Hardware investierst, lohnt sich eine gründliche An
 * **Kanal-Überlastung durch Nachbarn:** In Mehrfamilienhäusern funken oft zwanzig Router auf demselben Funkkanal. Ein manueller Wechsel auf einen freien Funkkanal (z. B. Kanal 1, 6 oder 11 im 2,4-GHz-Bereich) verdoppelt oft die effektive Datenrate.
 * **Wasser und Metall im Mauerwerk:** Stahlbetondecken, Fußbodenheizungsrohre und große Wandspiegel dämpfen die Funkwellen um mehr als 70 %.
 
-## Drei Wege zu mehr Reichweite: Repeater vs. Powerline vs. Mesh
+## Drei Wege zu mehr Reichweite:<br> Repeater vs. Powerline vs. Mesh
 
 Um das Signal in verwinkelte Räume oder über mehrere Stockwerke zu transportieren, stehen drei grundlegend unterschiedliche Technologien zur Auswahl:
 
@@ -75,7 +75,7 @@ Wer zusätzlich seine monatlichen [Fixkosten senken](../../posts/2026-08-14-spar
 
 <!-- premium-length-2026 -->
 
-## Rechenbeispiel: Was ein Funkloch wirklich kostet
+## Rechenbeispiel:<br> Was ein Funkloch wirklich kostet
 
 Ein 100-Mbit/s-Anschluss für 34,99 € im Monat nützt wenig, wenn im Homeoffice nur 12 Mbit/s ankommen. Videokonferenzen brechen ab, die Cloud-Sicherung dauert dreimal so lang, der Streaming-Stick wechselt auf 480p. Der effektive Preis pro nutzbarem Megabit steigt von 0,35 € auf fast 3 €.
 
@@ -118,7 +118,7 @@ Mesh-Systeme (WLAN 6/6E) halten eine gemeinsame SSID und reichen Clients an den 
 
 Wer Glasfaser mit 300 Mbit/s oder mehr hat, sollte den zweiten Mesh-Knoten per LAN-Kabel anbinden (Backhaul). Dann bleibt das Funkspektrum den Geräten, und du holst im Homeoffice endlich das, wofür du den Tarif bezahlst.
 
-## Fazit: Mit wenigen Handgriffen zum Highspeed-WLAN
+## Fazit:<br> Mit wenigen Handgriffen zum Highspeed-WLAN
 
 Mit den richtigen Anpassungen musst du dich nicht mit Funklöchern oder endlos puffernden Videos abfinden. Häufig reichen bereits ein optimierter Router-Standort und die getrennte Vergabe der Funkbänder aus, um das **WLAN zu verbessern**. Für größere Immobilien ist die Investition in ein Mesh-Set der zuverlässigste Garant für unterbrechungsfreies Arbeiten und Home Entertainment.
 

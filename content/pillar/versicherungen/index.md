@@ -21,7 +21,7 @@ Beim Thema Versicherungen machen viele Verbraucher einen von zwei kostspieligen 
 
 ---
 
-## Die Versicherungs-Pyramide: Was du wirklich brauchst
+## Die Versicherungs-Pyramide:<br> Was du wirklich brauchst
 
 | Priorität | Versicherungsart | Typische Jahreskosten | Relevanz |
 |---|---|---|---|
@@ -35,7 +35,7 @@ Beim Thema Versicherungen machen viele Verbraucher einen von zwei kostspieligen 
 
 ---
 
-## Privathaftpflicht: Der wichtigste Vertrag deines Lebens
+## Privathaftpflicht:<br> Der wichtigste Vertrag deines Lebens
 
 Nach dem Bürgerlichen Gesetzbuch (§&nbsp;823 BGB) haftest du für Schäden, die du anderen schuldhaft zufügst, mit deinem gesamten gegenwärtigen und zukünftigen Vermögen – in unbegrenzter Höhe. Eine Privathaftpflicht schützt dich vor den finanziellen Folgen und wehrt zudem unberechtigte Schadenersatzansprüche als passiver Rechtsschutz ab.
 
@@ -47,7 +47,7 @@ Warum dieser Schutz unverzichtbar ist, worauf es bei Deckungssummen, Mietsachsch
 
 ---
 
-## Hausrat- und Wohngebäudeversicherung: Rundumschutz für dein Zuhause
+## Hausrat- und Wohngebäudeversicherung:<br> Rundumschutz für dein Zuhause
 
 Für Haus- und Wohnungseigentümer ist die Wohngebäudeversicherung die wichtigste Sachpolice, während Mieter mit einer Hausratversicherung ihr gesamtes bewegliches Mobiliar absichern. Durch die Zunahme extremer Wetterereignisse hat sich die Risikolage in den letzten Jahren drastisch verändert.
 
@@ -62,7 +62,7 @@ Einen umfassenden Überblick über die aktuellen Standards, Elementarschaden-Erw
 
 ---
 
-## Zahnzusatz- und Unfallversicherung: Gezielt ergänzen
+## Zahnzusatz- und Unfallversicherung:<br> Gezielt ergänzen
 
 Gesetzliche Krankenkassen übernehmen bei hochwertigem Zahnersatz (wie Implantaten, Kronen oder Inlays) nur einen Festzuschuss. Eine Zahnzusatzversicherung fängt hohe Eigenanteile auf – lohnt sich aber vor allem, wenn sie rechtzeitig vor akuten Behandlungsbedarfen abgeschlossen wird.
 
@@ -72,7 +72,7 @@ Bei der privaten Unfallversicherung steht die finanzielle Absicherung dauerhafte
 
 ---
 
-## Kfz-Versicherung: Der jährliche Wechsel-Check
+## Kfz-Versicherung:<br> Der jährliche Wechsel-Check
 
 Jedes Jahr im Herbst werben Kfz-Versicherer mit neuen Konditionen. Da sich Typklassen, Regionalklassen und Schadenfreiheitsrabatte laufend ändern, lohnt sich ein kurzer Tarifcheck vor dem 30. November fast immer.
 

@@ -49,7 +49,7 @@ Gegenüber Tarifen ohne Preisbindung bietet ein Festpreistarif folgende Kernvort
 * **Verlässliche Monatsabschläge:** Dein monatlicher Abschlagsbetrag bleibt über die gesamte Laufzeit von 12 bis 24 Monaten stabil und absolut planbar für dein Haushaltsbudget.
 * **Automatischer Kündigungsservice:** Beim regulären Wechsel wickelt der neue Energieversorger alle Formalitäten mit deinem alten Anbieter geräuschlos und pünktlich ab.
 
-## Kostenanalyse: 20.000 kWh Verbrauch bei Marktschwankungen
+## Kostenanalyse:<br> 20.000 kWh Verbrauch bei Marktschwankungen
 
 Die folgende Tabelle zeigt die Kostenentwicklung bei einem angenommenen Preissprung im Winter für ein Einfamilienhaus mit 20.000 kWh Verbrauch:
 
@@ -71,7 +71,7 @@ Damit der Schutz im Ernstfall auch rechtssicher greift, solltest du die Allgemei
 4. **Verzicht auf Kautionszahlungen:** Seriöse Versorger verlangen weder Vorkasse noch Kautionen, sondern buchen die Abschläge monatlich per Lastschrift ab.
 5. **Rechtzeitige Erinnerungsfunktion:** Notiere dir etwa zehn Monate nach Vertragsabschluss einen Termin, um rechtzeitig vor Ablauf der Preisgarantie die Tarife erneut zu prüfen.
 
-## Schritt-für-Schritt: Gasanbieter mit Preisgarantie wechseln
+## Schritt-für-Schritt:<br> Gasanbieter mit Preisgarantie wechseln
 
 1. **Jahresabrechnung bereitlegen:** Notiere deinen Jahresverbrauch in kWh sowie die Zählernummer deines Gaszählers.
 2. **PLZ in den Vergleichsrechner eingeben:** Filtere nach Tarifen mit mindestens 12 Monaten Preisgarantie und hoher Weiterempfehlungsquote von über 85 %. Achte auf verbraucherfreundliche Vertragslaufzeiten von 12 Monaten.
@@ -82,7 +82,7 @@ Wie du durch gezielte Heizungswartung zusätzlich sparst, beschreiben wir in [un
 
 <!-- premium-length-2026 -->
 
-## Marktschwankung in Zahlen: 20.000 kWh durch drei Szenarien
+## Marktschwankung in Zahlen:<br> 20.000 kWh durch drei Szenarien
 
 Annahme Arbeitspreis Start 11,0 Cent, Grundpreis 12 €/Monat, 20.000 kWh.
 
@@ -114,7 +114,7 @@ Wenn zwei dieser Punkte zutreffen, rechne den Tarif wie ohne Garantie und vergle
 
 Preissprünge werden nicht abgeschafft. Du bestimmst nur, ob sie in deiner Küche landen oder in der Bilanz des Versorgers.
 
-## Fazit: Mit Preisgarantie entspannt durch jede Marktphase
+## Fazit:<br> Mit Preisgarantie entspannt durch jede Marktphase
 
 Eine **[Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)** ist die einfachste und wirksamste Versicherung gegen explodierende Energiekosten. Indem du rechtzeitig aus der teuren Grundversorgung in einen Festpreistarif wechselst, behältst du die volle Kontrolle über deine monatlichen Fixkosten und sparst Jahr für Jahr hunderte Euro an Heizkosten.
 

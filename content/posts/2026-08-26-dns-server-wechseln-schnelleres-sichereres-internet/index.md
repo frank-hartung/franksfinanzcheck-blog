@@ -88,7 +88,7 @@ Quad9 (9.9.9.9), Cloudflare mit Malware-Schutz (1.1.1.2) und der Family-Server (
 * **IPs:** 9.9.9.9 und 149.112.112.112
 * **Besonderheit:** Gemeinnützige Stiftung, blockiert aktiv Bedrohungen (über 100 Mio. Einträge in der Bedrohungsdatenbank), keine Speicherung personenbezogener Daten.
 
-## Anleitung: DNS-Server an der FritzBox ändern (empfohlen)
+## Anleitung:<br> DNS-Server an der FritzBox ändern (empfohlen)
 
 Wenn du den DNS-Server direkt in deinem Router änderst, gilt die Einstellung automatisch für **alle Geräte im Heimnetz** – Handy, Smart-TV, Laptop, Spielekonsole. Bei einer AVM FritzBox gehst du so vor:
 
@@ -138,9 +138,9 @@ Unter Android 13/14 ab Version 9 kannst du systemweit "Private DNS" festlegen:
 - **Smart-Home-Probleme:** Einige ältere Smart-TVs, Drucker und IoT-Geräte kommen mit Dritt-Resolver nicht zurecht. Sollte ein Gerät aussteigen, wechsle testweise zurück oder trage den Namensauflösung nur am Endgerät ein.
 - **DoH/DoT aktivieren:** Wer ganz sicher gehen will, aktiviert in Windows 11, Firefox oder Chrome "DNS over HTTPS" (DoH) – dann ist die Resolver-Anfrage selbst verschlüsselt.
 
-## DNS-Wechsel + Tarif optimieren: Die doppelte Ersparnis
+## DNS-Wechsel + Tarif optimieren:<br> Die doppelte Ersparnis
 
-Schnelle DNS-Server verbessern die Antwortzeiten – ersetzen aber keine gute Bandbreite. Wenn du trotz DNS-Server-Wechsel noch lange Ladezeiten, Streaming-Ruckler oder langsame Downloads hast, liegt das meist an einem überlasteten oder zu langsamen Tarif. Ein [DSL-Vergleich](/go/dsl/) zeigt dir in zwei Minuten, ob ein Wechsel auf eine höhere Bandbreite oder einen günstigeren Anbieter bis zu **380 € über 24 Monate** spart – wie ich es in meinem [Ratgeber zum DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) detailliert vorgerechnet habe.
+Schnelle DNS-Server verbessern die Antwortzeiten – ersetzen aber keine gute Bandbreite. Wenn du trotz DNS-Server-Wechsel noch lange Ladezeiten, Streaming-Ruckler oder langsame Downloads hast, liegt das meist an einem überlasteten oder zu langsamen Tarif. Ein [DSL-Vergleich](/go/dsl/) zeigt dir in zwei Minuten, ob ein Wechsel auf eine höhere Bandbreite oder einen günstigeren Anbieter bis zu **380 € über 24 Monate** spart – wie ich es in meinem [Ratgeber zum DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) detailliert vorgerechnet habe.
 
 | Optimierung | Aufwand | Effekt | Kosten |
 |:---|---:|:---|---:|
@@ -162,7 +162,7 @@ FritzBox: Internet → Zugangsdaten → DNS-Server. Zuerst die DNS-Adressen dein
 Ein DNS-Server-Wechsel ist ein 5-Minuten-Hebel mit geringem Risiko. Er ersetzt keinen Tarifwechsel und kein Mesh. Er macht beides angenehmer, wenn die Basis stimmt.
 
 
-## Extra: Wie der DNS-Server deinen Alltag beeinflusst
+## Extra:<br> Wie der DNS-Server deinen Alltag beeinflusst
 
 Viele Nutzer merken den Unterschied erst, wenn sie bewusst darauf achten. Beim Aufruf einer Nachrichtenseite, beim Laden des Online-Bankings, beim Start einer Mediathek: Überall steckt eine kurze Anfrage an den DNS-Server dahinter. Wer einen schnellen, datensparsamen Anbieter nutzt, spart über den Tag verteilt mehrere Sekunden Wartezeit. Nebenbei reduziert er das Tracking-Risiko.
 
@@ -171,7 +171,7 @@ Dazu kommt die Filterung: Manche DNS-Server bieten optionale Jugendschutz-Listen
 Praktisch bedeutet das: Notiere deine aktuelle Konfiguration (Screenshot der Router-Seite). Stelle zwei unabhängige Anbieter als primär und sekundär ein. Teste 48 Stunden lang typische Seiten (Banking, Streaming, Homeoffice-VPN).
 
 Danach entscheidest du, ob du dabei bleibst. Die Änderung ist jederzeit in 30 Sekunden rückgängig zu machen.
-## Bonus: Die 10 DNS-Begriffe, die dir in Foren wirklich begegnen
+## Bonus:<br> Die 10 DNS-Begriffe, die dir in Foren wirklich begegnen
 
 | Begriff | Was er bedeutet | Warum er dich betrifft |
 |---|---|---|
@@ -189,14 +189,14 @@ Danach entscheidest du, ob du dabei bleibst. Die Änderung ist jederzeit in 30 S
 Praxis-Tipp: Notiere deine aktuelle Latenz vor und nach dem Wechsel (z. B. `ping 1.1.1.1` und `ping 9.9.9.9`).
 So siehst du schwarz auf weiß, ob der neue DNS-Server wirklich flotter ist – und nicht nur gefühlt.
 
-## Fazit: 5 Minuten, die sich dauerhaft auszahlen
+## Fazit:<br> 5 Minuten, die sich dauerhaft auszahlen
 
 Ein DNS-Server-Wechsel ist eine der einfachsten und effektivsten Internet-Tuning-Maßnahmen überhaupt. Für **null Euro** bekommst du spürbar schnellere Ladezeiten, mehr Privatsphäre vor deinem Provider und einen eingebauten Malware-Schutz.
 
 Meine klare Empfehlung: Setze ihn direkt im Router (z. B. an der FritzBox) ab, damit alle Geräte im Haushalt automatisch davon profitieren. Wenn du im Anschluss noch deinen Tarif prüfst, holst du das Maximum an Geschwindigkeit und Preis heraus.
 
 
-**Weiterlesen:** [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
+**Weiterlesen:** [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
 
 ## Häufige Fragen
 

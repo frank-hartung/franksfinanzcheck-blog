@@ -26,7 +26,7 @@ pinwand: "Versicherungen clever wechseln & sparen"
 
 Der Brief der Kfz-Versicherung flattert ins Haus, und mit ihm oft eine saftige Beitragserhöhung um 10, 15 oder gar 25 %. Genau in diesem Moment beginnt die wichtigste Phase des Jahres für Autobesitzer: die **Wechselsaison zwischen August und November**.
 
-Spätestens am **30 November um 23:59 Uhr** muss deine Kündigung beim alten Versicherer eingegangen sein, damit der neue Vertrag zum 1 Januar wirksam wird. Wer diesen Stichtag verpasst, zahlt im Zweifel ein weiteres Jahr zu viel. Als jemand, der seine Autoversicherung in zehn Jahren fünfmal gewechselt und den Beitrag halbiert hat, zeige ich dir, wie du mit einem systematischen **Kfz-Versicherungsvergleich** zwischen **300&nbsp;€ und 800&nbsp;€ pro Jahr** sparst – ohne an Deckung oder Service einzubüßen.
+Spätestens am **30. November um 23:59 Uhr** muss deine Kündigung beim alten Versicherer eingegangen sein, damit der neue Vertrag zum 1. Januar wirksam wird. Wer diesen Stichtag verpasst, zahlt im Zweifel ein weiteres Jahr zu viel. Als jemand, der seine Autoversicherung in zehn Jahren fünfmal gewechselt und den Beitrag halbiert hat, zeige ich dir, wie du mit einem systematischen **Kfz-Versicherungsvergleich** zwischen **300&nbsp;€ und 800&nbsp;€ pro Jahr** sparst – ohne an Deckung oder Service einzubüßen.
 
 
 ---
@@ -154,7 +154,7 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 
 ## Stichtag 30.11. – der Kalender, der 800 € wert sein kann
 
-Kfz-Verträge zum Kalenderjahr: Kündigung meist bis 30.11., 30.09. bei manchen. Wer im Oktober vergleicht, hat Ruhe. Wer am 29.11. anfängt, unterschreibt Fehler ( falsche SF-Klasse, vergessene Werkstattbindung).
+Kfz-Verträge zum Kalenderjahr: Kündigung meist bis 30.11., 30.09. Bei manchen. Wer im Oktober vergleicht, hat Ruhe. Wer am 29.11. Anfängt, unterschreibt Fehler ( falsche SF-Klasse, vergessene Werkstattbindung).
 
 SF-Klasse aus der Vorversicherung übernehmen, nicht schätzen. Zweitwagenregelung, Fahrerkreis eng, Kilometer ehrlich plus Puffer 2.000 km. Werkstattbindung spart 10–20 %, bindet dich an das Netz – bei einem 8 Jahre alten Auto oft okay, beim Leasing prüfe die Leasingbedingungen.
 
@@ -166,10 +166,10 @@ Ein 30-Minuten-Vergleich im Oktober schlägt jeden „Treue-Rabatt“, der in Wa
 
 Die SF-Klasse ist der größte Hebel nach Regionalklasse. Falsch übertragen = falscher Preis.
 
-Zweitwagenregelung über den Erstvertrag, Fahrerkreis nicht „alle“, Kilometer mit Puffer. Werkstattbindung nur, wenn das Netz in deinem Umkreis Werkstätten hat, zu denen du auch fährst. 30.11. in den Kalender, Vergleich in KW 42, nicht in KW 48.
+Zweitwagenregelung über den Erstvertrag, Fahrerkreis nicht „alle“, Kilometer mit Puffer. Werkstattbindung nur, wenn das Netz in deinem Umkreis Werkstätten hat, zu denen du auch fährst. 30.11. In den Kalender, Vergleich in KW 42, nicht in KW 48.
 
 
-## Fazit: Ein 30-Minuten-Vergleich, der sich auszahlt
+## Fazit:<br> Ein 30-Minuten-Vergleich, der sich auszahlt
 
 Der **Kfz-Versicherungsvergleich** ist einer der schnellsten und lukrativsten Sparhebel im deutschen Versicherungsdschungel. 30 bis 45 Minuten investiert, bringt im Schnitt eine Ersparnis von mehreren hundert Euro pro Jahr – über die Vertragslaufzeit von mehreren Jahren gerechnet sind das leicht **1.500 € bis 4.000 €**. Nutze die Wochen bis zum 30.11., um deinen bestehenden Tarif zu prüfen und bei Bedarf zu wechseln.
 

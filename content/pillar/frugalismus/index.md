@@ -31,7 +31,7 @@ Frugalismus bedeutet für mich nicht knauseriger Verzicht oder extremes Knausern
 
 ---
 
-## Frugalismus im Alltag: Die größten Sparhebel
+## Frugalismus im Alltag:<br> Die größten Sparhebel
 
 Wer mit dem systematischen Sparen beginnt, braucht vor allem eines: Transparenz über die eigenen Zahlungsströme. Erst wenn du siehst, wohin dein Geld jeden Monat fließt, kannst du gezielt ansetzen.
 
@@ -47,7 +47,7 @@ Wer mit dem systematischen Sparen beginnt, braucht vor allem eines: Transparenz 
 
 ---
 
-## Notgroschen aufbauen: Wie viel Geld reicht wirklich?
+## Notgroschen aufbauen:<br> Wie viel Geld reicht wirklich?
 
 Der Notgroschen ist dein persönlicher Stoßdämpfer gegen unvorhersehbare Lebensereignisse – sei es eine teure Autoreparatur, eine defekte Waschmaschine oder eine unerwartete Nebenkostennachzahlung.
 
@@ -99,7 +99,7 @@ Frugalismus scheitert nicht an fehlenden Tricks, sondern an fehlendem Rhythmus. 
 
 Ohne Haushaltsbuch bleibt Frugalismus Stimmung. Ohne Tagesgeld bleibt der Puffer auf dem Giro und wird zu Urlaub. Ohne Giro-Check zahlst du 8 € dafür, dass du sparsam bist.
 
-## Rechenbeispiel: 2.600 € netto, ehrliche 60–25–15
+## Rechenbeispiel:<br> 2.600 € netto, ehrliche 60–25–15
 
 Grund 1.560 €, Leben 650 €, Aufbau 390 €. Nach 12 Monaten 4.680 € plus Zinsen auf dem Tagesgeld – das ist der 3-Monats-Puffer für 1.560 € Fix, noch nicht der 6-Monats-Puffer. Parallel 180 € Fixkosten weg (Energie, Mobilfunk, Abo) verschiebt 180 € in den Aufbau = 570 €/Monat. Pufferziel 6 × 1.380 € = 8.280 € in 15 Monaten statt 21. Das ist die Mechanik: erst Fixkosten, dann Rate, dann Investieren. ETF vor Notgroschen ist der häufigste Anfängerfehler in diesem Silo.
 

@@ -46,7 +46,7 @@ Bevor du den Anbieter wechselst, lohnt sich ein kritischer Blick auf deinen Basi
 
 ---
 
-## Tarifwechsel bei Strom und Gas: Der schnellste Weg zu mehreren hundert Euro Ersparnis
+## Tarifwechsel bei Strom und Gas:<br> Der schnellste Weg zu mehreren hundert Euro Ersparnis
 
 Ein Wechsel des Energieversorgers ist der schnellste Hebel für mehr Geld auf dem Konto. Der gesamte Prozess läuft heute vollständig digital ab: Dein neuer Anbieter übernimmt die Kündigung beim alten Versorger und kümmert sich um die Abwicklung mit dem Netzbetreiber.
 
@@ -146,7 +146,7 @@ LED-Förderungen kommen und gehen. Der Hebel ist der Preis pro Lumen und die Leb
 
 ## Interne Verlinkung als Nutzerführung
 
-Die Vertiefungen oben sind bewusst nach „Verbrauch → Preis → Saison“ sortiert. Ein PIN zu „Stromfresser“ darf nicht auf die Gas-Preisgarantie landen. Das Board-Routing in der Pinterest-Engine hängt am Pillar-Feld – deshalb bleibt `pillar: strom-sparen` in den Artikeln sakrosankt.
+Die Vertiefungen oben sind bewusst nach „Verbrauch → Preis → Saison“ sortiert. Ein PIN zu „Stromfresser“ darf nicht auf die Gas-Preisgarantie landen. Das Board-Routing in der Pinterest-Engine hängt am Pillar-Feld – deshalb bleibt `pillar: Strom-sparen` in den Artikeln sakrosankt.
 
 <!-- premium-length-2026-c -->
 

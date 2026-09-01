@@ -32,7 +32,7 @@ Ein stabiler und schneller Internetanschluss gehört heute zur absoluten Grundve
 
 ---
 
-## DSL-Tarifvergleich: Wechselbonus sichern und dauerhaft sparen
+## DSL-Tarifvergleich:<br> Wechselbonus sichern und dauerhaft sparen
 
 Viele Verbraucher bleiben über Jahre beim selben Anbieter, obwohl die zweijährige Mindestvertragslaufzeit längst abgelaufen ist. Nach 24 Monaten entfallen jedoch die anfänglichen Rabatte, und der Vertrag wird spürbar teurer.
 
@@ -47,7 +47,7 @@ Wie du den Markt systematisch analysierst und günstige Tarife für deine Region
 
 ---
 
-## WLAN im ganzen Haus verbessern: Speed in jeder Ecke
+## WLAN im ganzen Haus verbessern:<br> Speed in jeder Ecke
 
 Selbst der schnellste Glasfaser- oder VDSL-Anschluss nützt wenig, wenn das Funksignal in der Wohnung durch dicke Wände, Decken oder Störquellen ausgebremst wird.
 
@@ -60,7 +60,7 @@ Praktische Anleitungen zur Beseitigung von Funklöchern und zur Einrichtung eine
 
 ---
 
-## Handytarife vergleichen: Schluss mit teuren 24-Monats-Knebelverträgen
+## Handytarife vergleichen:<br> Schluss mit teuren 24-Monats-Knebelverträgen
 
 Beim Mobilfunk gilt eine einfache Grundregel: Kaufe dein Smartphone idealerweise separat und buche dazu einen flexiblen SIM-Only-Tarif. Tarife mit Allnet-Flat, SMS-Flat und 15 bis 30&nbsp;GB Highspeed-Datenvolumen im 5G-Netz gibt es heute bereits für unter 10&nbsp;€ bis 15&nbsp;€ pro Monat.
 
@@ -88,7 +88,7 @@ Ein Silo lebt von Wiederholung, nicht von einem einmaligen Wechsel. Deshalb geh�
 
 ## Cluster: welche Artikel du in welcher Reihenfolge liest
 
-1. Bedarf und Technik – [richtigen DSL-Tarif finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/)
+1. Bedarf und Technik – [richtigen DSL-Tarif finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/)
 2. Preis und Fallen – [DSL-Vergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
 3. Bonus – [Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/)
 4. Prozess – [Anbieterwechsel Praxis](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
@@ -98,7 +98,7 @@ Ein Silo lebt von Wiederholung, nicht von einem einmaligen Wechsel. Deshalb geh�
 
 Die Reihenfolge verhindert, dass du 1 Gbit kaufst und dann merkst, dass der Router im Schrank steht.
 
-## Rechenbeispiel Haushalt 2026: Festnetz + zwei SIM
+## Rechenbeispiel Haushalt 2026:<br> Festnetz + zwei SIM
 
 Alt: 44,99 € DSL nach Rabattphase + 2 × 29,99 € Handy im 24-Monats-Bündel mit abbezahltem Smartphone = 104,97 €. Neu: 34,50 € effektiv DSL inkl. Bonus / 24 Monate + 2 × 9,99 € SIM-Only 15 GB = 54,48 €. Differenz **50,49 € im Monat, 605 € im Jahr**. Zeitaufwand: ein Nachmittag plus Umschalttag. Das ist der größte Hebel im Silo, größer als jedes Mesh-Marketing.
 
@@ -128,7 +128,7 @@ Dieses Silo ist dann fertig, wenn du einmal im Jahr 40 Minuten investierst – n
 
 <!-- premium-length-2026-b -->
 
-## Technik-Entscheid 2026: VDSL, Kabel, FTTH, Hybrid
+## Technik-Entscheid 2026:<br> VDSL, Kabel, FTTH, Hybrid
 
 Die Verfügbarkeitskarte lügt höflich. „Bis zu 250 Mbit“ heißt: an der Straße, nicht in deiner Dose, nicht in deinem WLAN. Deshalb drei Messungen, bevor du unterschreibst.
 
@@ -144,7 +144,7 @@ Hybrid (DSL+LTE) ist Backup, kein Dauerzustand. Das LTE-Volumen ist gedrosselt, 
 
 Nach der Mindestlaufzeit monatlich kündbar, Umschaltung max. ein Kalendertag, Entstörung mit gesetzlicher Frist. Das steht im Gesetz, nicht in der Kulanzabteilung. Wenn der Wechseltag überschritten wird, dokumentieren (Ping, Traceroute, Ticketnummer) und Minderungsanspruch ansprechen. Die meisten Fälle lösen sich mit einem Ticket am Umschaltmorgen – aber nur, wenn du den Hotspot parat hast und nicht drei Stunden in der Warteschleife ohne Protokoll verbringst.
 
-Rufnummern und E-Mail-Adressen @anbieter.de sind kein Grund zu bleiben. Domain und Mail besser selbst hosten oder bei einem unabhängigen Postfach. Wer 24 Monate bleibt, weil „die E-Mail“, zahlt eine emotionale Miete.
+Rufnummern und E-Mail-Adressen @Anbieter. de sind kein Grund zu bleiben. Domain und Mail besser selbst hosten oder bei einem unabhängigen Postfach. Wer 24 Monate bleibt, weil „die E-Mail“, zahlt eine emotionale Miete.
 
 ## Hardware-Parkour ohne Neu-Kauf-Zwang
 
