@@ -82,10 +82,10 @@ index 5af7991..77badb6 100644
  
 diff --git a/.github/workflows/premium-governance.yml b/.github/workflows/premium-governance.yml
 new file mode 100644
-index 0000000..d88476f
+index 0000000..58a5e20
 --- /dev/null
 +++ b/.github/workflows/premium-governance.yml
-@@ -0,0 +1,132 @@
+@@ -0,0 +1,158 @@
 +# ============================================================
 +#  PREMIUM-GOVERNANCE (Chefredakteur-Scorecard + Decay + CWV + Secrets)
 +#
@@ -172,6 +172,28 @@ index 0000000..d88476f
 +          python3 scripts/secrets_age_guard.py | tee /tmp/secrets.log
 +          exit ${PIPESTATUS[0]}
 +
++      # ---------- 5) PINTEREST-PERFORMANCE-FEEDBACK (Themen-Gewichtung) ----------
++      # Liest die Analytics-Daten (data/pinterest_perf.yaml bzw. --fetch mit
++      # read_ads-Token) und gewichtet den Themenpool der Content-Engine.
++      - name: Pinterest-Performance-Feedback
++        id: pinperf
++        continue-on-error: true
++        env:
++          PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
++        run: |
++          python3 scripts/pinterest_perf_feedback.py | tee /tmp/pinperf.log
++          exit ${PIPESTATUS[0]}
++
++      # ---------- 6) AFFILIATE-KLICK-ATTRIBUTION (/go/-Gateway) ----------
++      # Liest den Umami-affiliate_click-Export (data/umami_clicks.json) und
++      # priorisiert Content nach Umsatz-Hebel.
++      - name: Affiliate-Klick-Attribution
++        id: clicks
++        continue-on-error: true
++        run: |
++          python3 scripts/click_attribution.py | tee /tmp/clicks.log
++          exit ${PIPESTATUS[0]}
++
 +      - name: Erfolgreiche Secrets vermerken (pro Kanal)
 +        if: always()
 +        env:
@@ -189,17 +211,19 @@ index 0000000..d88476f
 +          git config user.name "Governance-Bot"
 +          git config user.email "governance-bot@users.noreply.github.com"
 +          git add EDITORIAL-SCORECARD.md DECAY-REPORT.md CWV-REPORT.md SECRETS-REPORT.md 2>/dev/null || true
++          git add PINTEREST-PERF-REPORT.md CLICK-REPORT.md 2>/dev/null || true
 +          git add data/decay_queue.json data/cwv_manifest.json data/secrets_state.json 2>/dev/null || true
++          git add data/pinterest_weights.yaml data/click_stats.json data/pinterest_perf_history.jsonl 2>/dev/null || true
 +          if git diff --cached --quiet; then
 +            echo "Governance: keine Änderungen."
 +          else
-+            git commit -m "governance: Chefredakteur-Scorecard + Decay + CWV + Secrets (wöchentlich)"
++            git commit -m "governance: Scorecard + Decay + CWV + Secrets + Pinterest-Perf + Klick-Attribution (wöchentlich)"
 +            scripts/git_sync.sh --push-only
 +          fi
 +
 +      # ---------- GEBÜNDELTES ISSUE ----------
 +      - name: Governance-Issue bei Handlungsbedarf
-+        if: failure() || steps.scorecard.outcome == 'failure' || steps.decay.outcome == 'failure' || steps.cwv.outcome == 'failure' || steps.secrets.outcome == 'failure'
++        if: failure() || steps.scorecard.outcome == 'failure' || steps.decay.outcome == 'failure' || steps.cwv.outcome == 'failure' || steps.secrets.outcome == 'failure' || steps.pinperf.outcome == 'failure' || steps.clicks.outcome == 'failure'
 +        uses: actions/github-script@v7
 +        with:
 +          script: |
@@ -209,6 +233,8 @@ index 0000000..d88476f
 +            try { body += '### Decay-Radar\n\n```\n' + fs.readFileSync('/tmp/decay.log', 'utf-8') + '\n```\n'; } catch (e) {}
 +            try { body += '### CWV\n\n```\n' + fs.readFileSync('/tmp/cwv.log', 'utf-8') + '\n```\n'; } catch (e) {}
 +            try { body += '### Secrets\n\n```\n' + fs.readFileSync('/tmp/secrets.log', 'utf-8') + '\n```\n'; } catch (e) {}
++            try { body += '### Pinterest-Performance\n\n```\n' + fs.readFileSync('/tmp/pinperf.log', 'utf-8') + '\n```\n'; } catch (e) {}
++            try { body += '### Klick-Attribution\n\n```\n' + fs.readFileSync('/tmp/clicks.log', 'utf-8') + '\n```\n'; } catch (e) {}
 +            body += '\n---\nAutomatisch vom Premium-Governance-Workflow (Label: governance).';
 +            await github.rest.issues.create({
 +              owner: context.repo.owner,

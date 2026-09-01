@@ -43,6 +43,7 @@ DATA = lambda name: os.path.join(BLOG_DIR, "data", name)
 _DECAY_Q = DATA("decay_queue.json")
 _CWV_M = DATA("cwv_manifest.json")
 _SECRETS_S = DATA("secrets_state.json")
+_CLICK_S = DATA("click_stats.json")
 
 
 def _read_json(path, default=None):
@@ -127,8 +128,17 @@ def collect():
     decay = _read_json(_DECAY_Q, {"count": 0, "queue": []})
     cwv = _read_json(_CWV_M, {})
     secrets = _read_json(_SECRETS_S, {"entries": {}})
+    clicks = _read_json(_CLICK_S, {})
     readability = _avg_readability()
     lektor = _lektor_findings()
+
+    # Affiliate-Klick-Attribution: summiert Klicks über Pillars / Artikel.
+    click_articles = (clicks.get("articles") or {})
+    click_pillars = (clicks.get("pillars") or {})
+    total_clicks = sum(int(v.get("clicks", 0)) for v in click_articles.values())
+    top_article = ""
+    if click_articles:
+        top_article = max(click_articles.items(), key=lambda kv: kv[1].get("clicks", 0))[0]
 
     # Secrets: Anzahl fehlender/"roter" Einträge über Env
     # (SCORECARD nutzt denselben Ansatz minimal: nur rot, wenn gesetzt aber stale)
@@ -151,6 +161,9 @@ def collect():
         "lektor": lektor,
         "secret_red": secret_red,
         "secret_entries": len(secrets.get("entries") or {}),
+        "click_articles": len(click_articles),
+        "total_clicks": total_clicks,
+        "top_article": top_article,
     }
 
 
@@ -181,6 +194,11 @@ def _score(d) -> int:
             s -= 4
     # Secrets tot
     s -= min(15, d["secret_red"] * 5)
+    # Monetarisierungs-Signal: Affiliate-Klicks vorhanden = gesunder Umsatz-Hebel;
+    # ganz ohne Klick-Daten (neues Setup) ist das neutral, nicht strafend.
+    if d.get("click_articles", 0) > 0:
+        if d.get("total_clicks", 0) < 20:
+            s -= 5
     return max(0, min(100, s))
 
 
@@ -215,6 +233,12 @@ def render(d, score):
         f"{'🟢' if (d['lektor'] or 0) <= 25 else '🟡'} |",
         f"| Tote Secrets | {d['secret_red']} | "
         f"{'🟢' if d['secret_red'] == 0 else '🔴'} |",
+        f"| Affiliate-Klicks (Umsatz-Hebel) | {d['total_clicks']} über "
+        f"{d['click_articles']} Artikel | {'🟢' if d['total_clicks'] >= 100 else ('🟡' if d['total_clicks'] > 0 else '🟡')} |",
+        "",
+        "## Affiliate-Klick-Attribution",
+        "",
+        _render_clicks(d),
         "",
         "## Pillar-Verteilung",
         "",
@@ -246,6 +270,19 @@ def render(d, score):
         lines.append(f"- {r}")
     lines += ["", "_Erzeugt von `scripts/editorial_scorecard.py` (Chefredakteur-View)._"]
     return "\n".join(lines) + "\n"
+
+
+def _render_clicks(d):
+    """Zeigt den Umsatz-Hebel (Affiliate-Klicks) kompakt an."""
+    if d.get("click_articles", 0) == 0:
+        return "_Noch keine Klick-Daten – Umami-Export nach `data/umami_clicks.json` legen, " \
+               "dann `scripts/click_attribution.py` ausführen._"
+    top = d.get("top_article") or "-"
+    top = top.rsplit("/", 2)[-2] if top else "-"
+    return (f"- **{d['total_clicks']}** Affiliate-Klicks über **{d['click_articles']}** Artikel.\n"
+            f"- **Umsatz-Maschine (Top):** `{top}`\n"
+            f"- Empfehlung: Top-Arbeits-Check `scripts/click_attribution.py` für die "
+            f"Voll-Liste (Umsatz-Hebel-Priorisierung).")
 
 
 def _render_pillars(counts):

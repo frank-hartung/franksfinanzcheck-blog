@@ -105,10 +105,21 @@
 {{- if $isGo }}{{ $ziel = index $names $slug | default (print "Partner: " $slug) }}{{ end -}}
 {{- $tooltip := "" -}}
 {{- if $isGo }}{{ $tooltip = print "Weiter zu " $ziel " (Partnerlink = Werbung)" }}{{ end -}}
+{{- /* Klick-Attribution: Robust vor nil-.Page.File (Sektionen/Wrapper). */ -}}
+{{- $artikelPfad := "" -}}
+{{- if .Page -}}{{- with .Page.File -}}{{- $artikelPfad = .Path | default "" -}}{{- end -}}{{- end -}}
+{{- $pillar := "" -}}
+{{- if .Page }}{{ $pillar = .Page.Params.pillar | default "" }}{{ end -}}
 
 {{- if $tot -}}
   {{- /* Ziel ist nicht im Build → Ankertext als Klartext (kein 404-Link). */ -}}
   {{- .Text | safeHTML -}}
 {{- else -}}
-<a href="{{ $href | safeURL }}"{{ if $isGo }} rel="sponsored nofollow noopener" target="_blank" data-umami-event="affiliate_click" data-umami-event-slug="{{ $slug }}" title="{{ .Title | default $tooltip }}"{{ end }}{{ if not $isGo }}{{ with .Title }} title="{{ . }}"{{ end }}{{ end }}>{{ .Text | safeHTML }}</a>
+{{- /* ---- AFFILIATE-CLICK-ATTRIBUTION (01.09.2026, Profi) ----
+   Umami-Event `affiliate_click` trägt jetzt ZUSÄTZLICH den Artikel-/Pillar-
+   Kontext der SEITE, auf der geklickt wurde: data-umami-event-slug = /go/-Stelle
+   (Ziel), data-umami-event-article = Quelldatei, data-umami-event-pillar = Pillar.
+   Damit kann `scripts/click_attribution.py` Klicks exakt einem Artikel zuordnen
+   (Content-Priorisierung nach Umsatz-Hebel statt nur Traffic). */ -}}
+<a href="{{ $href | safeURL }}"{{ if $isGo }} rel="sponsored nofollow noopener" target="_blank" data-umami-event="affiliate_click" data-umami-event-slug="{{ $slug }}" data-umami-event-article="{{ $artikelPfad }}" data-umami-event-pillar="{{ $pillar }}" title="{{ .Title | default $tooltip }}"{{ end }}{{ if not $isGo }}{{ with .Title }} title="{{ . }}"{{ end }}{{ end }}>{{ .Text | safeHTML }}</a>
 {{- end -}}

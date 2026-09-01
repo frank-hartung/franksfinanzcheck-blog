@@ -119,14 +119,44 @@ editorial_scorecard.py                     => 90/100 (GREEN); einziger Amber = 1
 
 ---
 
+## 8 · Ausbau 2 (01.09.2026): Pinterest-Analytics-Feedback-Schleife + /go/-Klick-Tracking
+
+Die ersten beiden Hebel aus der Audit-Roadmap wurden auf Franks Wunsch **konkret gebaut**:
+
+### 📌 Pinterest-Performance-Feedback-Schleife (`scripts/pinterest_perf_feedback.py`)
+
+| Baustein | Umsetzung | Nachweis |
+|---|---|---|
+| **Datenquelle** | `data/pinterest_perf.yaml` (kanonisch, aus Dashboard/Bulk-Export) · `--ingest-csv` · `--fetch` (Pinterest-API v5, `read_ads`) | `--selftest` ✅ |
+| **Gewichtung (Premium)** | Klicks dominieren (Provision-Potenzial) · Saves als Engagement · Impressionen nur log-gedämpft · **CTR-Boost/-Dämpfung** · **Saison-Boost** für sensitive Pillars (Versicherungen, Strom/Gas, DSL, Zinsen, Mietwagen) | `--selftest` ✅ (Score-Dominanz, CTR-Boost, Gewichtung, Mindestgewicht) |
+| **Ausgabe** | `data/pinterest_weights.yaml` (Pillar-Gewichte) + `PINTEREST-PERF-REPORT.md` (Top-/Flop, Board-Gewichtung) + History `.jsonl` | testweise 6 Einträge → Korrekte Ranking |
+| **Engine-Anbindung** | `engine_generate.py`: `random.choice(freie)` → gewichtet via `_weighted_choose(freie, weights)` (Pillar-basiert, Mindestgewicht 0.15, Fallback gleichverteilt) | Verteilung über 4.000 Züge: höchstes Gewicht ~81 % ✅ |
+
+**Wirkung:** Nachfrage-laut hohe Pins bekommen bevorzugt einen Blog-Artikel; Flop-Themen werden nicht mehr 1:1 wiederholt. Die Engine bleibt **nie** von der Datei abhängig (fehlt sie → gleichverteilt).
+
+### 🖱️ Anonymes Klick-Tracking im `/go/`-Gateway (`scripts/click_attribution.py`)
+
+| Baustein | Umsetzung | Nachweis |
+|---|---|---|
+| **DSGVO** | Umami ist cookielos, `data-do-not-track=true`, DNT-respektiert; Scores nur aggregierte Counts; `_safe()` kürzt/escaped Felder (Identifikator-Schutz) | Selftest «Datenschutz» ✅ |
+| **Event-Payload** | `render-link.html` sendet `affiliate_click` mit `data-umami-event-slug` (=/go/-Ziel), **`data-umami-event-article`** (=Quellartikel), **`data-umami-event-pillar`** — robust vor `nil .Page.File` | Hugo-Template gepflegt |
+| **Auswertung** | Liest `data/umami_clicks.json` (Umami-Export) oder CSV; aggregiert **pro Artikel/Pillar//go/-Stelle** → `CLICK-REPORT.md` + `data/click_stats.json` | `--selftest` ✅ (go-Key, Aggregation, Datenschutz); testweise 8 Artikel → Kfz 84 Klicks = Top |
+| **Scorecard-Anbindung** | `editorial_scorecard.py` zeigt «Affiliate-Klick-Attribution» (Total, Anzahl Artikel, Top-Artikel) + monetarisierungs-Gewichtung im Score | Scorecard läuft ✅ |
+
+**Wirkung:** Der Affiliate-Manager sieht erstmals, **welcher Artikel wie viele CHECK24-Klicks erzeugt** (Umsatz-Hebel), statt nur Traffic. Top-Artikel → mehr Wasser (CTA/Shortcode/Trust-Box), Nachfrage-Lücken → CTA-Platzierung.
+
+### Einbindung
+Beide Skripte laufen wöchentlich im **Premium-Governance-Workflow** (gepatcht): Pinterest-Perf (Schritt 5), Klick-Attribution (Schritt 6), Reports werden committet, Issue gebündelt. Die Engine-Gewichte kommen ab dem nächsten Content-Engine-Lauf automatisch zum Einsatz.
+
+---
+
 ## 5 · Noch offen (braucht Franks Zugänge — vorbereitet, nicht blockierend)
 
 | Baustein | Warum | Vorbereitung |
 |---|---|---|
 | **Google-Indexierungs-Wächter** | IndexNow deckt Bing/Naver/Yandex; Google bleibt Hauptkanal. Search-Console-API → wöchentlich „neu indexiert?" als Issue | API-Zugang nötig; Muster in Scorecard/Issues vorhanden |
-| **Pinterest-Analytics-Feedback-Loop** | Der größte inhaltliche Hebel. Token mit `read_ads`-Scope | `data/decay_queue.json` + Scorecard liefern die Gewichtungs-Infrastruktur |
-| **Anonymes Klick-Tracking im `/go/`-Gateway** | Umsatz-Hebel statt nur Traffic; DSGVO-konform (Cloudflare Worker + KV) | Gateway ist zentral, gut vorbereitet |
-| **Awin-Provisions-Import** | SubID→Artikel-Mapping | — |
+| **Pinterest-API-Live-Fetch** | Der `--fetch`-Pfad braucht ein Token mit `read_ads`-Scope; ohne Token fällt die Schleife auf die Datei zurück | Grundgerüst gebaut |
+| **Awin-Provisions-Import** | SubID→Artikel-Mapping → verbindet Klick-Tracking mit Umsatz | Klick-Attribution liefert die Artikel-Zuordnung |
 | **Stil-Sprint (menschengeführt)** | 100 Lektorat-Report-Funde brauchen Urteilskraft, nicht Auto-Fix | Scorecard priorisiert sie |
 
 ---

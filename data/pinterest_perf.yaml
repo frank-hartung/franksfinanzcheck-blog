@@ -1,0 +1,28 @@
+# ============================================================
+#  PINTEREST-PERF-FEEDBACK – EINGABEDATEI (kanonisch)
+#
+#  Diese Datei ist die Datenquelle für `scripts/pinterest_perf_feedback.py`.
+#  Sie wird aus dem Pinterest-Ansichts-/Partner-Dashboard befüllt
+#  (Standard: "Pin-Titel", "Board", "Clicks", "Speicherungen", "Impressionen")
+#  oder per `--ingest-csv` (Bulk-Export) automatisch gefüllt.
+#  Optional: `--fetch` lädt live über die Pinterest-API v5 (read_ads-Scope).
+#
+#  Gewichtung (Premium): Klicks dominieren (Provision-Potenzial), Saves als
+#  Engagement, Impressionen nur log-gedämpft; CTR-Boost/-Dämpfung; Saison-Boost
+#  für sensitive Pillars. Ausgabe: data/pinterest_weights.yaml -> Engine.
+#
+#  WICHTIG: title/pillar sollten 1:1 zu data/topics.yaml passen, damit die
+#  Engine die Gewichte zuordnen kann. NUR ECHTE Daten eintragen – die Engine
+#  gewichtet sonst nach fiktiven Zahlen.
+#
+#  Beispiel (kommentiert – bitte durch echte Werte ersetzen):
+#    - title: "Kfz-Versicherung Vergleich: Bis zu 800 Euro sparen"
+#      pillar: "versicherungen"
+#      clicks: 218
+#      saves: 96
+#      impressions: 6400
+#      keywords: "kfz, versicherung, wechsel"
+#      board: "Versicherungen clever wechseln & sparen"
+# ============================================================
+
+entries: []

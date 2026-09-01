@@ -58,6 +58,18 @@ def normalize_title(title: str) -> str:
 
 STATUS_FILE = os.path.join(BLOG_DIR, "ENGINE-STATUS.md")
 
+# Datengeführte Themen-Auswahl (Pinterest-Performance, 01.09.2026):
+# einmalig beim Start laden; Modulebene, damit publish_one_article sie nutzt.
+_topic_weights = {}
+
+def _init_topic_weights():
+    """Setzt die globalen topic weights. Bewusst tolerant (leer = gleichverteilt)."""
+    global _topic_weights
+    _topic_weights = _load_topic_weights()
+    if _topic_weights:
+        print(f"📊 Pinterest-Performance: {len(_topic_weights)} Pillar mit "
+              f"Gewichten geladen – Themen-Auswahl datengetrieben.")
+
 # ---------------------------------------------------------------------------
 # Status-Dashboard
 # ---------------------------------------------------------------------------
@@ -424,6 +436,49 @@ def produktions_entscheidung(bilanz, max_per_day, min_per_day):
             f"{bilanz['neu_noetig']} neue Artikel nötig.")
 
 
+def _load_topic_weights():
+    """Lädt datengetriebene Pinterest-Performance-Gewichte (falls vorhanden).
+
+    Rückgabe: {pillar: weight} oder {}. Wenn keine Datei vorliegt, bleibt die
+    Auswahl gleichverteilt (Fallback auf random.choice) – die Engine ist also
+    NIE von der Feedback-Schleife abhängig, sondern wird nur bevorzugt.
+    """
+    weights = {}
+    pw = os.path.join(BLOG_DIR, "data", "pinterest_weights.yaml")
+    if not os.path.exists(pw):
+        return weights
+    try:
+        import yaml as _yaml
+        data = _yaml.safe_load(open(pw, encoding="utf-8")) or {}
+        for item in data.get("weights") or []:
+            p = (item.get("pillar") or "").strip()
+            w = float(item.get("weight") or 1.0)
+            if p and w > 0:
+                weights[p.lower()] = max(0.15, w)
+    except Exception as exc:  # noqa: BLE001 – Heilung darfs nie bremsen
+        print(f"  ⚠ Pinterest-Gewichte nicht lesbar (Fallback gleichverteilt): {exc}")
+    return weights
+
+
+def _weighted_choose(freie, weights):
+    """Wählt ein Thema gewichtet aus (Fallback: gleichverteilt).
+
+    Gewicht pro Thema: pillar-basiert (aus Pinterest-Perf), mit Mindestgewicht
+    0.15, damit kein Thema dauerhaft auf 0 fällt. Unbekannte Pillars -> 1.0
+    (neutral, neuer Content wird nicht benachteiligt)."""
+    if not weights:
+        return random.choice(freie)
+    wlist = []
+    for t in freie:
+        pillar = (t.get("pillar") or "").strip().lower()
+        w = weights.get(pillar, 1.0)
+        wlist.append(max(0.15, w))
+    try:
+        return random.choices(freie, weights=wlist, k=1)[0]
+    except (ValueError, IndexError):
+        return random.choice(freie)
+
+
 def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
     """Erzeugt EINEN Artikel (Profi -> Relaxed -> Draft-Rettung).
     Liefert (level, draft_saved) oder None bei fatalem Fehler."""
@@ -444,7 +499,10 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
         print("✗ Keine freien Themen – Abbruch.")
         return None
 
-    topic = random.choice(freie)
+    # Datengeführte Themen-Auswahl (Pinterest-Performance-Gewichte, 01.09.2026):
+    # Nachfrage-laut Pins zuerst, Stichtag-Pillars saisonal geboostet. Fallback
+    # auf random.choice, wenn keine Gewichte vorliegen.
+    topic = _weighted_choose(freie, _topic_weights)
     used_topics.add(id(topic))
     keywords = topic.get("keywords")
     pin = None
@@ -527,6 +585,10 @@ def main():
     if min_per_day > max_per_day:
         min_per_day = max_per_day
     pin_topics = os.environ.get("PIN_TOPICS", "0") == "1"
+
+    # Datengeführte Themen-Priorisierung (Pinterest-Performance-Gewichte),
+    # sobald data/pinterest_weights.yaml existiert (01.09.2026 Feedback-Schleife).
+    _init_topic_weights()
 
     # Wochentags-Guard (DAUERVORGABE: nur Mo/Mi/Fr publizieren)
     weekday = datetime.date.today().weekday()
