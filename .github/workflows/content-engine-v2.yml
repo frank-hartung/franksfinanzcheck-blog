@@ -214,7 +214,12 @@ jobs:
           echo "== Oberarzt-Beweis nach der Geburt (Kette in Kanonfreiheit) =="
           python3 scripts/blog_doctor.py --new-only || echo "⚠ Doktor-Befund (nicht kritisch)"
           echo "== Qualitäts-Score (FrankAutoOps, Threshold >= 0.85) =="
-          python3 - <<'PYEOF'
+          # S2-FIX (Agentur-Audit): `|| echo` gehörte auf dieselbe Zeile wie das
+          # Heredoc-BEGINN. Vorher stand es als eigene Zeile nach `PYEOF` –
+          # ungültige Shell-Syntax: Phase 2 lief ab hier "scheinbar grün" weiter,
+          # aber Kommando nach `PYEOF` (Cover-Validierung, Kurzantworten,
+          # Commit der Qualitäts-Fixes) wurden NIE ausgeführt.
+          python3 - <<'PYEOF' || echo "⚠ Qualitäts-Score (nicht kritisch)"
           import glob, subprocess, sys, json, os
           import datetime
           sys.path.insert(0, "scripts")
@@ -247,7 +252,6 @@ jobs:
                   open(p, "w", encoding="utf-8").write(c.replace("draft: false", "draft: true", 1))
                   print(f"  → {r['slug']} auf draft gesetzt (Score {r['score']})")
           PYEOF
-          || echo "⚠ Qualitäts-Score (nicht kritisch)"
           echo "== Cover-Validierung (auto-nachziehen) =="
           python3 scripts/check_covers.py --fix || echo "⚠ Cover-Varianten (nicht blockierend)"
           echo "== Kurzantworten (Featured-Snippet-Box) =="
@@ -296,3 +300,35 @@ jobs:
         if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
         continue-on-error: true
         run: python3 scripts/submit_indexnow.py || echo 
+
+      # ================= PHASE 4: STATUS & TAGESDEFIZIT (26.08.2026) =================
+      # Reaktivierte verwaiste Wachen (Agentur-Audit S5): Der Lauf hält BOT-STATUS.md
+      # aktuell und meldet am Tagesende ein Defizit gegen die Dauervorgabe
+      # (Mo/Mi/Fr, MIN_ARTIKEL_PRO_TAG) als auto-zu-schließendes Issue. Läuft auch
+      # nach Teilfehlern (if: always), damit ein Ausfall sichtbar wird.
+      - name: Phase 4 – Status & Tagesdefizit-Wache
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
+          AUTO_PUBLISH: ${{ vars.AUTO_PUBLISH || 'profi' }}
+        run: |
+          python3 scripts/bot_status.py || echo "⚠ BOT-STATUS (nicht kritisch)"
+          # Defizit-Wache: nur an Publikationstagen (Mo/Mi/Fr) einstellen, damit
+          # Fr->So-Lücke (Wochenende) keinen Fehlalarm erzeugt.
+          DOW=$(date +%u)
+          if [ "$DOW" = "1" ] || [ "$DOW" = "3" ] || [ "$DOW" = "5" ]; then
+            python3 scripts/engine_issue.py --deficit || echo "⚠ Defizit-Wache: kein Tagesdefizit (oder Fehler)"
+          else
+            echo "Kein Publikationstag ($DOW) – Defizit-Wache übersprungen."
+          fi
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add BOT-STATUS.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "BOT-STATUS unverändert."
+          else
+            git commit -m "docs: BOT-STATUS.md aktualisiert (Phase 4)"
+            scripts/git_sync.sh --push-only
+          fi
