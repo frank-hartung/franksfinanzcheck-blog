@@ -138,15 +138,15 @@ Nach Verbrauch des Inklusiv-Volumens wird automatisch (teilweise kostenpflichtig
 
 ### 2. Lange Mindestlaufzeiten mit stillschweigender Verlängerung
 
-Verträge mit 24 Monaten Laufzeit und automatischer Verlängerung um weitere 12 Monate, wenn du nicht 3 Monate vor Ende kündigst, sind seit Dezember 2021 in dieser Form zwar unwirksam, aber einige Anbieter versuchen es immer noch. **Lösung:** Kündige direkt nach Erhalt der SIM-Karte schriftlich zum Laufzeitende.
+Verträge mit 24 Monaten Laufzeit und automatischer Verlängerung um weitere 12 Monate, wenn du nicht 3 Monate vor Ende kündigst, sind seit Dezember 2021 in dieser Form zwar unwirksam, aber einige Anbieter versuchen es immer noch. **Empfehlung:** Kündige direkt nach Erhalt der SIM-Karte schriftlich zum Laufzeitende.
 
 ### 3. "EU-Roaming inklusive", aber mit Einschränkungen
 
-Die Schweiz, Großbritannien und die Türkei sind **nicht** in der EU-Roaming-Verordnung enthalten. Reist du regelmäßig dorthin, können schnell 2–5 € pro Megabyte anfallen. **Lösung:** Für die Schweiz eine separate Option buchen oder lokale Prepaid-Karte nutzen.
+Die Schweiz, Großbritannien und die Türkei sind **nicht** in der EU-Roaming-Verordnung enthalten. Reist du regelmäßig dorthin, können schnell 2–5 € pro Megabyte anfallen. **Ausweg:** Für die Schweiz eine separate Option buchen oder lokale Prepaid-Karte nutzen.
 
 ### 4. Lockpreise, die nach 12 Monaten steigen
 
-Aktionspreise gelten oft nur die ersten 6–12 Monate, danach steigt der Preis um 5–10 €. **Lösung:** Notiere dir das Aktionsende im Kalender und vergleiche dann erneut.
+Aktionspreise gelten oft nur die ersten 6–12 Monate, danach steigt der Preis um 5–10 €. **Trick:** Notiere dir das Aktionsende im Kalender und vergleiche dann erneut.
 
 ### 5. "Hotline kostet extra"
 

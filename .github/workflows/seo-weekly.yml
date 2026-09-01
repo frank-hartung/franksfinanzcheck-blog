@@ -179,6 +179,40 @@ jobs:
           python3 scripts/readability_check.py | tee /tmp/read_audit.txt
           exit ${PIPESTATUS[0]}
 
+      - name: Textverständnis-Audit (R2–R8 Komplettprüfung + R8-Anker-Selbstheilung)
+        # WÖCHENTLICHES VERSTÄNDNIS-AUDIT (Regelwerk: Verständnis-Guards R1–R10):
+        # Läuft als Komplett-Audit über ALLE Artikel – nicht nur über neue.
+        # - textverstaendnis_guard.py prüft R2 (Keyword-Dumps), R3 (Terminologie),
+        #   R4 (Satzanfangs-Echo), R5 (Absatzlänge), R7 (Intro-Formeln),
+        #   R8 (Ankertext-Ziel-Kohärenz + URL-Hygiene)
+        # - fix_r8_anker.py --fix heilt erkannte R8-Ankertext-Mismatches
+        #   deterministisch (Kanon). Neue Ankertext-Formulierungen müssen
+        #   mit dem Kanon in scripts/fix_r8_anker.py abgestimmt sein.
+        # Duplikat-Prüfung (R1) läuft separat (siehe duplikat_guard.py – Bestand).
+        id: verstaendnis
+        continue-on-error: true
+        run: |
+          python3 scripts/textverstaendnis_guard.py --selftest
+          python3 scripts/fix_r8_anker.py --selftest
+          python3 scripts/fix_r8_anker.py --fix || echo "⚠ R8-Anker: Restfunde siehe Report"
+          python3 scripts/textverstaendnis_guard.py
+          cat TEXTVERSTAENDNIS-REPORT.md | head -10
+          exit 0
+
+      - name: Textverständnis-Report und -Fixes committen
+        if: always()
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add TEXTVERSTAENDNIS-REPORT.md data/verstaendnis_history.jsonl 2>/dev/null || true
+          git add content/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Textverständnis: keine Änderungen."
+          else
+            git commit -m "seo: Textverständnis-Audit + Anker-Heilung (R2–R8 Premium)"
+            scripts/git_sync.sh --push-only
+          fi
+
       - name: Affiliate-Link-Check (Deep-Links – VOLLAUTOMATISCH)
         # Wöchentliche Komplettprüfung ALLER Posts + Pillar-Seiten:
         # thematisch passende Deep-Links, korrekte Partner-IDs.

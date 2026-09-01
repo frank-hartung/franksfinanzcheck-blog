@@ -64,7 +64,7 @@ Statt teurer Indoor-Spielplätze oder Freizeitparks bietet der Herbst wunderbare
 | Sparmaßnahme | Zeitaufwand | Typische Ersparnis |
 |:---|:---|:---|
 | [Kfz-Versicherung wechseln](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) (bis 30.11.) | 30 Minuten | **180–350 €** |
-| [Heizung entlüften](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) & Thermostate einstellen | 45 Minuten | **160–240 €** |
+| [Heizung entlüften im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) & Thermostate einstellen | 45 Minuten | **160–240 €** |
 | Strom- & Gastarif optimieren | 20 Minuten | **300–450 €** |
 | [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) & Hausrat anpassen | 25 Minuten | **80–150 €** |
 | Saisonales Einkaufen & Kochen | fortlaufend | **150–250 €** |
@@ -78,7 +78,7 @@ Statt teurer Indoor-Spielplätze oder Freizeitparks bietet der Herbst wunderbare
 
 Der Kalender schiebt dir Halloween, Black Friday und Weihnachten in drei Monate. Wer im September kein Budget für Dezember hat, zahlt im Januar Dispo. Deshalb ist der Herbst der passende Moment für den Jahres-Schnitt – nicht der 1. Januar, wenn die Motivation schon verbraucht ist.
 
-**Fixkosten-Nachmittag.** Strom, Gas, DSL, Mobilfunk, Haftpflicht, Giro. Alles, was älter als 12 Monate ist, in den Vergleich. Ziel: 30–80 € im Monat, die du in den Weihnachtstopf oder den [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) schiebst.
+**Fixkosten-Nachmittag.** Strom, Gas, DSL, Mobilfunk, Haftpflicht, Giro. Alles, was älter als 12 Monate ist, in den Vergleich. Ziel: 30–80 € im Monat, die du in den Weihnachtstopf oder den [Tagesgeld-Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) schiebst.
 
 **Kleidung und Sport.** Second-Hand für Herbstjacken, Skischuhe leihen statt kaufen, wenn du drei Tage in den Alpen bist. Kosten pro Nutzung.
 

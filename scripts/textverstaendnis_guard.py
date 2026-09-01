@@ -68,7 +68,20 @@ R8_STOPWORDS = {"der", "die", "das", "den", "dem", "des", "ein", "eine", "einer"
                 "eines", "einem", "einen", "und", "oder", "aber", "für", "fur",
                 "mit", "von", "vom", "zum", "zur", "auf", "bei", "nach", "aus",
                 "im", "in", "am", "an", "so", "wie", "nicht", "auch", "du", "dein",
-                "deine", "deinen", "deinem", "ihr", "ihre", "ihren", "die", "das"}
+                "deine", "deinen", "deinem", "ihr", "ihre", "ihren", "die", "das",
+                "vor", "nur", "was", "sich", "dich", "dir"}
+
+
+def normalize_umlauts(text: str) -> str:
+    """ä→ae, ö→oe, ü→ue, ß→ss (für Slug↔Ankertext-Abgleich R8)."""
+    return (text.replace("ä", "ae").replace("ö", "oe").replace("ü", "ue")
+                .replace("Ä", "Ae").replace("Ö", "Oe").replace("Ü", "Ue")
+                .replace("ß", "ss"))
+
+
+# Normalisierte Stoppwörter („für“→„fuer“) dürfen im Slug ebenfalls nicht als
+# Treffer gelten – sonst maskiert jeder Anker mit „für“ echte Ziel-Mismatches.
+R8_STOPWORDS_NORM = {normalize_umlauts(w) for w in R8_STOPWORDS}
 
 FLOW_LINE_EXCLUDE = re.compile(r"^\s*(#|[*>\|\-]|\d+\.|!\[)")
 
@@ -216,15 +229,22 @@ def check_article(rel: str, body: str, term: dict) -> list:
         slug = url.rstrip("/").split("/")[-1]
         if not slug or slug.startswith("."):
             continue
-        # Datums-Präfix + Stoppwörter aus dem Slug ziehen
+        # Datums-Präfix + Stoppwörter aus dem Slug ziehen.
+        # Mindestlänge 3 (statt 4): Kurz-Kernbegriffe des Blogs (dsl, gas,
+        # dns, kwh) sind inhaltstragend und sollen Ankertext-Kohärenz prüfen.
         tokens = [t for t in re.split(r"[-_]", slug)
-                  if len(t) >= 4 and t not in R8_STOPWORDS
+                  if len(t) >= 3 and t not in R8_STOPWORDS
+                  and normalize_umlauts(t) not in R8_STOPWORDS_NORM
                   and not re.fullmatch(r"\d{4}|\d{2}", t)]
         if not tokens:
             continue
         # Weiche Trennzeichen (U+00AD, von umbruch_guard) vor dem Abgleich entfernen
         anker_l = anker.lower().replace("\u00ad", "").replace("\u2011", "-")
-        hits = [t for t in tokens if t in anker_l]
+        # Umlaute normalisieren: ä→ae, ö→oe, ü→ue, ß→ss
+        # Damit "spätsommer" auch "spaetsommer" erkennt
+        anker_norm = normalize_umlauts(anker_l)
+        tokens_norm = [normalize_umlauts(t) for t in tokens]
+        hits = [t for t in tokens_norm if t in anker_l or t in anker_norm]
         if not hits:
             finds.append((rel, "R8-ANKER-ZIEL",
                           f"Ankertext „{anker[:45]}“ passt nicht zum Ziel „{slug}“", slug))
@@ -270,6 +290,11 @@ def run_selftest() -> list:
     body8b = "TEXT\n\n[Text](../../posts/2026-08-20-dsl-tarif-zu Hause/)"
     if not any(f[1] == "R8-URL-LEERZEICHEN" for f in check_article("t", body8b, {})):
         fehler.append("R8: URL-Leerzeichen nicht erkannt")
+    # R8 Umlaut: "spätsommer" im Anker muss "spaetsommer" im Slug erkennen
+    body8c = "TEXT\n\n[Heizung im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/)"
+    r8c = [f for f in check_article("t", body8c, {}) if f[1] == "R8-ANKER-ZIEL"]
+    if r8c:
+        fehler.append("R8: Umlaut-Normalisierung fehlgeschlagen – „Spätsommer“ sollte „spaetsommer“ erkennen")
     return fehler
 
 

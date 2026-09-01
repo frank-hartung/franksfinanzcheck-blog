@@ -77,7 +77,7 @@ Der weitaus größte Sparhebel ist der rechtzeitige Gasanbieterwechsel im Späts
 4. **Hydraulischen Abgleich erwägen:** Werden einzelne Räume im Haus trotz voll geöffneter Ventile nicht warm, während andere überhitzen, sorgt ein hydraulischer Abgleich für die optimale Verteilung der Heizwassermenge.
 5. **Tarifkonditionen checken:** Vergleiche deinen aktuellen Arbeitspreis mit den besonders günstigen Angeboten an deinem Wohnort und sichere dir einen Festpreis.
 
-Wie du deinen Gasvertrag optimal absicherst, erklären wir ausführlich im Beitrag zur [Gaspreisgarantie für ein sicheres Zuhause](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) und im Leitfaden zur [Tarifstrategie für das Jahr 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/).
+Wie du deinen Gasvertrag optimal absicherst, erklären wir ausführlich im Beitrag zur [Gaspreisgarantie für ein sicheres Zuhause](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) und im Leitfaden zu [Preisgarantie-Tarifen für 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/).
 
 <!-- premium-length-2026 -->
 
