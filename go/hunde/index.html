@@ -1,5 +1,20 @@
 <!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow,noarchive">
+<script>
+// Awin-SubID-Förderung (Klicks→Umsatz per Artikel, 01.09.2026): Der /go/-Link am
+// Artikel trägt ?subid=<artikelslug>. Dieses Script hängt sie vor dem Weiterleiten
+// als &subid= an die Affiliate-URL an. Führt SYNCHRON im head aus (läuft vor dem
+// Meta-Refresh), damit die Attribution zuverlässig greift. Ohne subid: unverändert.
+(function () {
+  try {
+    var m = new URLSearchParams(location.search).get('subid');
+    if (!m) return;
+    var base = "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hundekrankenversicherung&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=hunde";
+    var finalUrl = base + (base.indexOf('?') >= 0 ? '&' : '?') + 'subid=' + encodeURIComponent(m);
+    location.replace(finalUrl);
+  } catch (e) { /* Fallback auf Meta-Refresh unten */ }
+})();
+</script>
 <meta http-equiv="refresh" content="0; url=https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hundekrankenversicherung&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=hunde">
 <link rel="canonical" href="https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=hundekrankenversicherung&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=hunde">
 <title>Weiter zu Tarifcheck | FranksFinanzcheck</title>
