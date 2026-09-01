@@ -98,7 +98,7 @@ Dank der gesetzlichen Routerfreiheit in Deutschland bist du nicht an Geräte dei
 
 ## Router mieten oder kaufen – die 24-Monats-Rechnung
 
-Miete 6 € × 24 = 144 €, du gibst das Gerät am Ende zurück. Kauf FritzBox 120–180 €, nutzt du über zwei Verträge = 4–6 Jahre, Kosten unter 40 € pro 24 Monate. Wer wechselt, nimmt den eigenen Router mit – das ist der unterschätzte Hebel, weil du WLAN-Einstellungen, Mesh und Gäste-Netz nicht jedes Mal neu aufsetzt.
+Miete 6 € × 24 = 144 €, du gibst das Gerät am Ende zurück. Kauf FritzBox 120–180 €, nutzt du über zwei Verträge = 4–6 Jahre, Kosten unter 40 € pro 24 Monate. Wechselst du, nimmst du den eigenen Router mit – das ist der unterschätzte Hebel, weil du WLAN-Einstellungen, Mesh und Gäste-Netz nicht jedes Mal neu aufsetzt.
 
 Ausnahme: Der neue Anbieter erzwingt seine Box am Glasfaser-Modem. Dann Bridge-Modus + eigene Box dahinter, oder du akzeptierst die Miete für 24 Monate und kaufst danach.
 
@@ -115,11 +115,11 @@ Lege den Wechseltag nicht auf den Montag mit der wichtigsten Videokonferenz. Die
 Router-Zugangsdaten des neuen Anbieters aus der Mail kopiert, nicht erst um 9 Uhr suchen. Nach 4 Stunden Stabilität: altes Gerät in den Karton, 14 Tage stehen lassen. Dann erst zurückschicken, mit Foto des Labels.
 
 
-Wer so plant, erinnert den Wechsel als 20-Minuten-Aktion. Wer nicht plant, erinnert ihn als den Tag ohne Netz.
+So geplant wird der Wechsel zur 20-Minuten-Aktion. Ohne Plan erlebst du ihn als den Tag ohne Netz.
 
 ## Fazit: Mit minimalem Aufwand hunderte Euro sparen
 
-Wer alle 24 Monate seinen DSL- oder Kabelvertrag überprüft und wechselt, surft dauerhaft mit modernen Technologien und spart pro Jahr zwischen 280 € und 380 €. Der Wechselprozess läuft dank Anbieter-Kündigungsservice unterbrechungsfrei im Hintergrund ab.
+Überprüfst du alle 24 Monate deinen DSL- oder Kabelvertrag und wechselst bei Bedarf, surfst du dauerhaft mit modernen Technologien und sparst pro Jahr zwischen 280 € und 380 €. Der Wechselprozess läuft dank Anbieter-Kündigungsservice unterbrechungsfrei im Hintergrund ab.
 
 Erfahre in unserer [Übersicht zu Internet & DSL](../../pillar/internet-dsl/) alle weiteren Spartipps rund um Breitbandanschlüsse.
 

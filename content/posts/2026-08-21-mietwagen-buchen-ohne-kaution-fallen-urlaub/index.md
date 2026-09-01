@@ -55,7 +55,7 @@ Ein echter Mietwagen **vollständig ohne jegliche Kaution** ist in den großen U
 
 ### 1. Die Selbstbeteiligungs-Falle
 
-Grundsätzlich ist jeder Mietwagen in Europa haftpflichtversichert. Die meisten Billig-Angebote im Preisvergleich enthalten darüber hinaus eine **Vollkasko mit hoher Selbstbeteiligung** von 900 € bis 1.500 €. Bei einem Kratzer oder Steinschlag zahlst du bis zu dieser Summe selbst.
+Grundsätzlich ist jeder Mietwagen in Europa haftpflichtversichert. Im Preisvergleich enthalten die meisten Billig-Angebote darüber hinaus eine **Vollkasko mit hoher Selbstbeteiligung** von 900 € bis 1.500 €. Bei einem Kratzer oder Steinschlag zahlst du bis zu dieser Summe selbst.
 
 **So umgehst du sie:** Buche konsequent ein Paket mit **"Vollkasko ohne Selbstbeteiligung"** (auch "Zero Excess", "Super Cover" oder "Vollkasko ohne SB"). Das kostet im Schnitt nur 3 € bis 8 € pro Tag mehr und ist im Vergleich zur Selbstbeteiligung ein Schnäppchen. Wer über einen [deutschen Vergleichsrechner](/go/mietwagen/) bucht, bekommt diese Option meist inklusive.
 
@@ -134,7 +134,7 @@ Sollte der Vermieter Wochen nach dem Urlaub plötzlich Beträge für "angebliche
 
 Vor der Abholung: Licht, Glas, Reifen, Dach, Unterboden fotografieren, Tankstand, Kilometer. Bei Rückgabe dasselbe plus Bestätigung „keine neuen Schäden“. Unberechtigte Abbuchungen: erst Vermieter schriftlich, dann Kartenanbieter Chargeback, Fristen 8–12 Wochen.
 
-Die besonders günstige Buchung ist die, deren Rückgabe 12 Minuten dauert, weil du vorbereitet warst – nicht die, die im Banner 9 €/Tag war und am Schalter 41 € wird.
+Am günstigsten ist die Buchung, deren Rückgabe 12 Minuten dauert, weil du vorbereitet warst – nicht die, die im Banner 9 €/Tag war und am Schalter 41 € wird.
 
 
 ## Bonus: Nebenkosten, die oft vergessen werden
@@ -212,7 +212,7 @@ Wer diese sechs Punkte abhakt, steht nicht im Stau der Nachverhandlungen, sonder
 
 Ein Mietwagen öffnet Türen zu Orten, die kein Bus erreicht: eine Küstenstraße in Portugal, ein Weingut in der Toskana, ein Aussichtspunkt über dem Fjord. Gerade wer mit Kindern reist, spart sich mit dem eigenen Wagen Umstiege, Wartezeiten und Gepäckstress. Wichtiger als das Ziel ist dabei die Vorbereitung: Wer Kautionsregelung, Tankoption und Versicherung vorab kennt, erlebt die Reise entspannt – und die Erinnerungen bleiben, wenn die Abrechnung längst vergessen ist.
 
-Einen Mietwagen ohne Kaution zu buchen ist im Ausland selten möglich, aber du kannst die Kaution durch kluge Tarifwahl auf 100 € bis 300 € drücken und das Risiko auf null stellen. Die drei wichtigsten Regeln lauten: **Vergleiche online, buche mit Vollkasko ohne Selbstbeteiligung und lehne Zusatzverkäufe am Schalter konsequent ab.** Dann steht einem entspannten Urlaub ohne böse Überraschungen nichts mehr im Weg.
+Einen Mietwagen ohne Kaution zu buchen ist im Ausland selten möglich, aber du kannst die Kaution durch kluge Tarifwahl auf 100 € bis 300 € drücken und das Risiko auf null stellen. Drei Regeln sind entscheidend: **Vergleiche online, buche mit Vollkasko ohne Selbstbeteiligung und lehne Zusatzverkäufe am Schalter konsequent ab.** Dann steht einem entspannten Urlaub ohne böse Überraschungen nichts mehr im Weg.
 
 **Weiterlesen:** [[Geld spare](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/)n im Alltag](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/): Einfache Tipps · [Pillar: Mietwagen & Reisen](../../pillar/mietwagen/) · [Reisekranken­versicherung: Was wirklich schützt](/go/reisekrankenversicherung/)
 

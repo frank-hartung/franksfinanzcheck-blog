@@ -78,7 +78,7 @@ Damit der Schutz im Ernstfall auch rechtssicher greift, solltest du die Allgemei
 3. **Auftrag digital absenden:** Der neue Anbieter kündigt deinen alten Vertrag fristgerecht und übernimmt die gesamte formale Abwicklung bei Netzbetreiber und Vorversorger.
 4. **Zählerstand zum Stichtag ablesen:** Lies am Tag der Belieferung den Gaszähler ab und übermittle den Stand online an deinen Netzbetreiber für eine exakte Abrechnung.
 
-Wie du durch gezielte Heizungswartung zusätzlich sparst, beschreiben wir in [unseren Spätsommer-Tipps zur Heizungsoptimierung](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) sowie in den [Konditions-Vergleichen für das Jahr 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/).
+Wie du durch gezielte Heizungswartung zusätzlich sparst, beschreiben wir in [unseren Spätsommer-Tipps zur Heizungsoptimierung](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) sowie in den [Vergleichen günstiger Gastarife 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/).
 
 <!-- premium-length-2026 -->
 
