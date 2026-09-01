@@ -1,0 +1,26 @@
+# Textverständnis-Wache in Blog-Gesundheits-Check (täglich)
+# Anwendung:  git apply patches/textverstaendnis-blog-health-2026-09-01.patch
+# Der Patch fügt nach dem DRAFT-LINK-GATE eine tägliche Verständnis-Wache
+# ein: Selbsttest + R8-Anker-Heiler (deterministisch) + Komplett-Audit.
+--- a/.github/workflows/blog-health-daily.yml
++++ b/.github/workflows/blog-health-daily.yml
+@@ -37,6 +37,19 @@ jobs:
+       - run: python3 scripts/draft_link_healer.py --selftest
+       - run: python3 scripts/draft_link_healer.py --fix
+ 
++      # TEXTVERSTÄNDNIS-WACHE (01.09.2026): hält das Premium-Level der
++      # Textverständnis-Regeln R2–R8 DAUERHAFT – nicht nur am Publikationstag.
++      # 1) Selbsttest (Guard muss lauffähig sein – Sabotage-Schutz)
++      # 2) R8-Anker-Heiler (selbstheilend: Ankertext-Ziel-Kohärenz,
++      #    deterministischer Kanon, kein freies KI-Rewriting)
++      # 3) Komplett-Audit über alle Artikel → schreibt TEXTVERSTAENDNIS-REPORT.md
++      #    (harte + weiche Funde; weiche Funde brechen den Workflow NICHT,
++      #    werden aber im Report sichtbar und vom Heiler bereinigt).
++      - run: python3 scripts/textverstaendnis_guard.py --selftest
++      - run: python3 scripts/fix_r8_anker.py --selftest
++      - run: python3 scripts/fix_r8_anker.py --fix || echo "⚠ R8-Anker-Heiler: Restfunde siehe TEXTVERSTAENDNIS-REPORT.md"
++      - run: python3 scripts/textverstaendnis_guard.py
++
+       - run: python3 scripts/blog_health_gate.py
+       - run: |
+           git config user.name "Agent (Arena.ai)"
