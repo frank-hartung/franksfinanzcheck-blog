@@ -29,6 +29,7 @@ on:
   workflow_run:
     workflows:
       - "Wöchentliche SEO-Optimierung"
+      - "Content-Engine v2"
       - "Affiliate-Health (Wochenwache)"
       - "Backlink-Automation"
       - "Layout-AI"
@@ -44,6 +45,7 @@ on:
       - "Willkommenstext-Refresh"
       - "Blog-Gesundheits-Check (täglich)"
       - "Mastodon-SEO"
+      - "Premium-Governance"
     types:
       - completed
 
@@ -81,3 +83,5 @@ jobs:
               workflow_id: 'deploy.yml', ref: 'main',
             });
             console.log('✅ Deploy-Workflow ausgelöst.');
+
+bro
