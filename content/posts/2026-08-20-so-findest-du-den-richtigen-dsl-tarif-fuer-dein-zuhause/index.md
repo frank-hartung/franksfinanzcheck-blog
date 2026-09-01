@@ -150,7 +150,7 @@ Ein letzter Punkt: Stabilität schlägt Maximalwert. Ein Tarif, der abends konst
 
 Ein perfekter Internetvertrag bietet genau die Geschwindigkeit, die dein Haushalt tatsächlich benötigt – ohne überflüssigen Bandbreiten-Ballast. Durch einen regelmäßigen Wechsel alle 2 Jahre nach Ablauf der Mindestvertragslaufzeit profitierst du dauerhaft von Neukundenkonditionen und sparst hunderte Euro.
 
-**Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · DSL-Wechselbonus sichern · [Internet & DSL wechseln: Praxis-Tipps](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
+**Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [Internet & DSL wechseln: Praxis-Tipps](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
 
 ## Häufige Fragen
 

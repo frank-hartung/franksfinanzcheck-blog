@@ -119,7 +119,7 @@ Der Bonus ist die Kirsche. Der Kuchen ist der Effektivpreis. Wer nur der Kirsche
 
 Den **DSL-Wechselbonus** alle zwei Jahre mitzunehmen, ist eine der einfachsten Methoden, um ohne jeglichen Komfortverlust hunderte Euro an monatlichen Fixkosten einzusparen. Da der neue Anbieter die Kündigung und die Rufnummernmitnahme komplett übernimmt, liegt der tatsächliche Arbeitsaufwand bei unter 10 Minuten. Vergleiche noch heute die verfügbaren Geschwindigkeiten an deiner Adresse und sichere dir deine Wechselprämie.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du Speed in jede Ecke
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke
 
 ## Häufige Fragen
 

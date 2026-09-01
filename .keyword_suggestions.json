@@ -271,5 +271,96 @@
   "Forderungsausfalldeckung",
   "Privathaftpflicht Kosten",
   "Schadensfall melden"
+ ],
+ "Gas-Anbieter wechseln": [
+  "Gasanbieter Vergleich",
+  "Gaspreise vergleichen",
+  "Günstige Gastarife",
+  "Gaswechsel Prämie",
+  "Kündigungsfrist Gasanbieter"
+ ],
+ "Strom sparen im Haushalt": [
+  "Stromfresser finden",
+  "Energiekosten senken",
+  "Stromverbrauch berechnen",
+  "Standby-Modus ausschalten",
+  "Stromspartipps Küche"
+ ],
+ "Kostenloses Girokonto": [
+  "Girokonto Vergleich",
+  "Kontoführungsgebühren",
+  "Bankwechsel",
+  "Girokonto mit Prämie",
+  "Bestes Girokonto"
+ ],
+ "Geld sparen im Alltag": [
+  "Spartipps Haushalt",
+  "Haushaltsbuch führen",
+  "Fixkosten senken",
+  "Strom sparen Tipps",
+  "günstig kochen"
+ ],
+ "Wohngebäudeversicherung Vergleich": [
+  "Gebäudeversicherung Kosten",
+  "Elementarschadenversicherung",
+  "Wohngebäudeversicherung Testsieger",
+  "Versicherungswert 1914",
+  "Gebäudeversicherung Rechner"
+ ],
+ "DSL Vergleich": [
+  "Internetanbieter wechseln",
+  "DSL Tarife ohne Mindestlaufzeit",
+  "WLAN für zuhause günstig",
+  "Glasfaser Verfügbarkeit prüfen",
+  "Internet Flatrate Vergleich"
+ ],
+ "Energiediebe stoppen": [
+  "Stromfresser im Haushalt",
+  "Strom sparen Tipps",
+  "Energiekosten senken",
+  "Standby-Verbrauch",
+  "Stromverbrauch messen"
+ ],
+ "Haushaltsbuch führen": [
+  "Haushaltsbuch Vorlage",
+  "Haushaltsbuch App",
+  "Haushaltsbuch Excel",
+  "Haushaltsbuch Tipps",
+  "Haushaltsbuch Kosten"
+ ],
+ "Mietwagen buchen": [
+  "Mietwagen günstig",
+  "Mietwagen Vergleich",
+  "Mietwagen Versicherung",
+  "Mietwagen Stornierung",
+  "Mietwagen Rabattcode"
+ ],
+ "Frugalismus Tipps": [
+  "Sparpläne",
+  "Minimalismus",
+  "Budget erstellen",
+  "Kosten senken Alltag",
+  "finanzielle Unabhängigkeit"
+ ],
+ "Preisgarantie Gas": [
+  "Gaspreisentwicklung",
+  "Preisgarantie Strom",
+  "Gaspreisvergleich",
+  "Festpreis Gas",
+  "Gasliefervertrag"
+ ],
+ "Kfz-Versicherung Vergleich": [
+  "Kfz-Versicherung berechnen",
+  "Autoversicherung wechseln",
+  "Günstige Autoversicherung",
+  "Teilkasko und Vollkasko",
+  "Schadenfreiheitsklasse"
+ ],
+ "Tagesgeldkonto": [
+  "Zinssatz Tagesgeld",
+  "Tagesgeldvergleich",
+  "Tagesgeldkonto ohne Kontoführungsgebühr",
+  "Tagesgeldkonto Test",
+  "Einlagensicherung Tages"
  ]
 }

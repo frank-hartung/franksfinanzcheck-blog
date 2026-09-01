@@ -79,7 +79,7 @@ Welche Geschwindigkeit passt zu deinen Anforderungen? Die folgende Übersicht hi
 2. **Wunschtarif auswählen & Wechsel beauftragen:** Wähle deinen bevorzugten Tarif und beauftrage den neuen Provider mit der Kündigung deines Alttarifs.
 3. **Keine Ausfallzeit:** Der neue Anbieter übernimmt die Kündigung bei deinem bisherigen Provider und stimmt den Umschalttermin nahtlos ab. Nach § 58 TKG ist eine lückenlose Versorgung gesetzlich garantiert.
 
-Wer noch mehr aus seinem bestehenden Vertrag herausholen will, liest am attraktiven unsere praxisnahen Leitfäden zu [DSL-Gutschriften und Willkommensboni](../../posts/2026-08-10-dsl-wechselbonus-sichern/) sowie Maßnahmen für optimierten WLAN-Empfang und die [Themenseite Internet & DSL](../../pillar/internet-dsl/).
+Wer noch mehr aus seinem bestehenden Vertrag herausholen will, liest am attraktiven unsere praxisnahen Leitfäden zu [DSL-Gutschriften und Willkommensboni](../../posts/2026-08-10-dsl-wechselbonus-sichern/) sowie Maßnahmen für optimierten [WLAN-Empfang](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) und die [Themenseite Internet & DSL](../../pillar/internet-dsl/).
 
 <!-- premium-length-2026 -->
 
@@ -130,7 +130,7 @@ Glasfaser schlägt VDSL, wenn der Hausanschluss liegt und die Dose im Wohnzimmer
 
 Ein fundierter **DSL-Vergleich** deckt versteckte Preistreiber auf und sorgt dafür, dass du für stabiles Highspeed-Internet nicht mehr bezahlst als unbedingt nötig. Wer alle zwei Jahre pünktlich zum Ende der Mindestvertragslaufzeit vergleicht und wechselt, spart dauerhaft zwischen 300 € und 360 € ein.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du Speed in jede Ecke
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/): So sparst du beim Internetvertrag · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du Speed in jede Ecke
 
 ## Häufige Fragen
 

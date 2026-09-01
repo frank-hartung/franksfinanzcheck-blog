@@ -196,7 +196,7 @@ Ein DNS-Server-Wechsel ist eine der einfachsten und effektivsten Internet-Tuning
 Meine klare Empfehlung: Setze ihn direkt im Router (z. B. an der FritzBox) ab, damit alle Geräte im Haushalt automatisch davon profitieren. Wenn du im Anschluss noch deinen Tarif prüfst, holst du das Maximum an Geschwindigkeit und Preis heraus.
 
 
-**Weiterlesen:** [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): Speed in jede Ecke · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
+**Weiterlesen:** [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
 
 ## Häufige Fragen
 

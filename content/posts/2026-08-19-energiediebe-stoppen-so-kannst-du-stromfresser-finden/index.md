@@ -144,7 +144,7 @@ Unter 3 Jahren Amortisation: tauschen, wenn das Geld da ist. Über 8 Jahren: ers
 
 ## Fazit: Erst messen, dann gezielt Energiediebe stoppen
 
-Heimliche **Stromfresser finden** und Energiediebe stoppen, ist die schnellste Methode, um ohne spürbaren Komfortverzicht hunderte Euro einzusparen. Indem du veraltete Dauerverbraucher identifizierst, Standby-Kosten per Knopfdruck stoppst und deinen Stromtarif optimierst, holst du dir jedes Jahr über 400 € an Kaufkraft zurück.
+Heimliche **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und Energiediebe stoppen, ist die schnellste Methode, um ohne spürbaren Komfortverzicht hunderte Euro einzusparen. Indem du veraltete Dauerverbraucher identifizierst, Standby-Kosten per Knopfdruck stoppst und deinen Stromtarif optimierst, holst du dir jedes Jahr über 400 € an Kaufkraft zurück.
 
 **Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · Strom [sparen im Herbst](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/) · Gasanbieter wechseln: Praxis-Tipps
 
