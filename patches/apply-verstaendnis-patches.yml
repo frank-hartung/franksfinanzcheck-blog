@@ -13,7 +13,8 @@ name: Textverständnis-Patches einspielen (einmalig)
 #      keine Workflow-Dateien pushen darf).
 #   2. Workflow unter GitHub → Actions → "Textverständnis-Patches einspielen"
 #      → "Run workflow" starten.
-#   3. Der Workflow wendet beide Patches an und pusht sie nach main.
+#   3. Der Workflow holt die Patch-Dateien aus dem Arena-Branch, wendet beide
+#      Patches an und pusht sie nach main.
 #   4. Danach diese einmalige Workflow-Datei wieder löschen (optional).
 on:
   workflow_dispatch: {}
@@ -30,10 +31,18 @@ jobs:
           token: ${{ secrets.GH_PAT }}
           fetch-depth: 0
 
+      - name: Patch-Dateien aus Arena-Branch holen
+        run: |
+          git fetch origin arena/01a05da7-franksfinanzcheck-blog
+          git show origin/arena/01a05da7-franksfinanzcheck-blog:patches/textverstaendnis-blog-health-2026-09-01.patch > /tmp/bh.patch
+          git show origin/arena/01a05da7-franksfinanzcheck-blog:patches/textverstaendnis-seo-weekly-2026-09-01.patch > /tmp/sw.patch
+          echo "✅ Patch-Dateien geladen:"
+          wc -l /tmp/bh.patch /tmp/sw.patch
+
       - name: Patches anwenden
         run: |
-          git apply patches/textverstaendnis-blog-health-2026-09-01.patch
-          git apply patches/textverstaendnis-seo-weekly-2026-09-01.patch
+          git apply /tmp/bh.patch
+          git apply /tmp/sw.patch
           echo "✅ Beide Patches angewendet:"
           git status --short
 
