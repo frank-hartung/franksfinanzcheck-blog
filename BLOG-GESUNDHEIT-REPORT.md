@@ -1,6 +1,6 @@
 # 🩺 BLOG-GESUNDHEIT-REPORT (blog_health_gate.py)
 
-**Stand:** 2026-08-31 05:48 UTC · Modus: HEAL · ROOT: `/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog`
+**Stand:** 2026-09-01 05:49 UTC · Modus: HEAL · ROOT: `/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog`
 
 Geprüfte Seiten: 37 · davon Drafts (übersprungen): 1 · Geheilt: 0
 
