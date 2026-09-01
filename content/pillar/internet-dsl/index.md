@@ -180,7 +180,7 @@ In den meisten Fällen nicht. Nach zwei bis drei Jahren übersteigen die monatli
 
 Viele Leser landen auf dieser Übersicht, weil etwas nicht funktioniert: der Call bricht ab, der Stream stockt, die Rechnung ist zu hoch. Die Diagnose-Reihenfolge ist absichtlich langweilig.
 
-**Schritt 1 – Kabel.** Laptop per LAN an die Box, Speedtest, Screenshot. Ohne diese Referenz rateest du. Unter 70 % der Vertragsgeschwindigkeit an einem Werktagabend: Ticket beim Provider, 14 Tage messen, nicht sofort Hardware kaufen.
+**Schritt 1 – Kabel.** Laptop per LAN an die Box, Speedtest, Screenshot. Ohne diese Referenz rätst du. Unter 70 % der Vertragsgeschwindigkeit an einem Werktagabend: Ticket beim Provider, 14 Tage messen, nicht sofort Hardware kaufen.
 
 **Schritt 2 – Dose und Hausstrecke.** In Altbauten liegt die Telekom-Dose im Flur, die Box 12 Meter und zwei Wände weiter. Eine 10-€-Dose versetzen lassen (Vermieter, Elektro) schlägt jedes Mesh, das ein schlechtes Signal verdoppelt.
 

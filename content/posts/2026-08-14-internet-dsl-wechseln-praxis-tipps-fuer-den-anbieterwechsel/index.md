@@ -104,7 +104,7 @@ Ausnahme: Der neue Anbieter erzwingt seine Box am Glasfaser-Modem. Dann Bridge-M
 
 ## Nach dem Wechsel: 14-Tage-Protokoll
 
-Täglich einmal Kabel-Speedtest, ping, ob TV-App und VPN laufen. Weicht der Durchschnitt um mehr als 30 % vom Vertrag ab, Störung ticketen – nicht erst nach drei Monaten. Die Entstörung in den ersten 14 Tagen ist psychologisch und vertraglich einfacher als nach einem halben Jahr Dulden.
+Täglich einmal Kabel-Speedtest, ping, ob TV-App und VPN laufen. Weicht der Durchschnitt um mehr als 30 % vom Vertrag ab, Störung als Ticket anlegen – nicht erst nach drei Monaten. Die Entstörung in den ersten 14 Tagen ist psychologisch und vertraglich einfacher als nach einem halben Jahr Dulden.
 
 <!-- premium-length-2026-b -->
 

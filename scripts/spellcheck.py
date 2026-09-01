@@ -37,6 +37,7 @@ import sys
 import json
 import glob
 import subprocess
+from datetime import date
 
 import groq_config
 
@@ -54,17 +55,39 @@ ABKUERZUNGEN = {
     "sog", "bspw", "bzw", "bzw.", "vs", "vs.", "mbit", "kbit", "gbit", "ghz",
     "mhz", "kmh", "kwh", "kw", "mw", "kva", "uhr", "usd", "eur", "gb", "mb",
     "tb", "ssid", "vpn", "dns", "dsl", "lte", "sms", "tan", "pin", "wlan",
-    "www", "http", "https", "com", "de", "net", "org",
+    "www", "http", "https", "com", "de", "net", "org", "mio", "mind",
+    "tk", "vk", "ct",
+    # Wochentage/Monate/Stunde („Mo/Mi/Fr“, „12 Mon.“, „ab Nov.“, „2–4 Std.“)
+    "mo", "di", "mi", "do", "fr", "sa", "so", "mon",
+    "jan", "feb", "mär", "apr", "mai", "jun", "jul", "aug", "sep", "okt",
+    "nov", "dez", "std",
 }
 
 # URL-Erkennung
 URL_RE = re.compile(r'https?://[^\s)"\']+|www\.[^\s)"\']+')
+
+# Relative Pfade (../../posts/…, ../images/…): sind keine Fließtext-Wörter.
+# Relative URLs bleiben sonst bei verschachtelten/defekten Markdown-Links
+# („[[Geld spare](…)]…“) als Text übrig und erzeugen Phantom-Funde.
+REL_URL_RE = re.compile(r'(?:\.\.?/)+[^\s)"\'\x27<>]+')
 
 # Markdown-Link: [Text](url) → nur Text behalten
 LINK_RE = re.compile(r'\[([^\]]*)\]\([^)]*\)')
 
 # Code-Blöcke
 CODE_RE = re.compile(r'```.*?```', re.S)
+
+# Hugo-Shortcodes: {{< zeile label="..." tone="muted" >}} oder {{% ... %}}
+# (Parameter wie "muted"/"true" sind KEIN Fließtext und dürfen nicht als
+# Rechtschreib-Fund gemeldet werden – sonst Rauschen in jedem Artikel.)
+SHORTCODE_RE = re.compile(r'\{\{[%<].*?[%>]\}\}', re.S)
+
+# HTML-Kommentare: <!-- premium-length-2026 --> (Marker, kein Fließtext)
+HTML_COMMENT_RE = re.compile(r'<!--.*?-->', re.S)
+
+# HTML-Tags: <video muted>, <tr>, </tr>, <img …> – nur echte Tags
+# (beginnt mit Buchstabe oder Slash, damit Vergleiche wie "5 < 10" safe bleiben)
+HTML_TAG_RE = re.compile(r'</?[A-Za-z][^>]*>')
 
 # Markdown-Tabellen-Trennzeile (Spalten-Ausrichtung): „| :--- | :---: |“
 TABLE_SEP_RE = re.compile(r'^\s*\|?\s*:?-{2,}:?\s*(?:\|\s*:?-{2,}:?\s*)*\|?\s*$', re.M)
@@ -213,9 +236,14 @@ def extract_words(body, whitelist):
     # HTML-Entity &nbsp; durch gleich viele Leerzeichen ersetzen (6 Zeichen →
     # 6 Leerzeichen): Offsets bleiben exakt, "nbsp" wird kein gefundenes Wort
     text = text.replace("&nbsp;", " " * 6)
-    # Code + URLs + komplette Markdown-Links maskieren (gleiche Länge!)
+    # Code + Shortcodes + HTML-Kommentare/Tags + URLs + komplette Markdown-Links
+    # maskieren (gleiche Länge!): alles, was kein Fließtext ist
     text = CODE_RE.sub(lambda m: " " * (m.end() - m.start()), text)
+    text = SHORTCODE_RE.sub(lambda m: " " * (m.end() - m.start()), text)
+    text = HTML_COMMENT_RE.sub(lambda m: " " * (m.end() - m.start()), text)
+    text = HTML_TAG_RE.sub(lambda m: " " * (m.end() - m.start()), text)
     text = URL_RE.sub(lambda m: " " * (m.end() - m.start()), text)
+    text = REL_URL_RE.sub(lambda m: " " * (m.end() - m.start()), text)
     text = LINK_RE.sub(lambda m: " " * (m.end() - m.start()), text)
 
     words = []
@@ -226,11 +254,21 @@ def extract_words(body, whitelist):
     # als zwei Wörter geprüft und „schlichtungs“ als Fehler gemeldet.
     for m in re.finditer(r"[A-Za-zÄÖÜäöüß0-9]+(?:[\u00ad-][A-Za-zÄÖÜäöüß0-9]+)*", text):
         w = m.group(0)
+        # Weiche Trennstellen (U+00AD, umbruch_guard) für alle Vergleiche
+        # entfernen: "Sonder\u00adtillgungsmöglichkeiten" == "Sondertilgungsmöglichkeiten"
+        wnorm = w.replace("\u00ad", "")
         # Abkürzungen + Whitelist ignorieren
-        if w.lower().rstrip(".") in ABKUERZUNGEN or w.lower() in whitelist:
+        if wnorm.lower().rstrip(".") in ABKUERZUNGEN or wnorm.lower() in whitelist:
             continue
         # Kurze Kleinschreibung = meist Artefakt/Abkürzung (z. B. "aid", "pid")
         if len(w) <= 3 and w.islower():
+            continue
+        # Aufzählungs-Komposita ("Sach- und Personenschäden", "Strom-, DSL-
+        # und …"): Das Grundwort vor "-" (auch "-," oder "- ") ist korrektes
+        # Deutsch, aber nie ein eigenständig zu prüfendes Wort → überspringen.
+        # (Hätte nach dem Bindestrich ein Wort-/Ziffernzeichen gestanden,
+        # wäre es vom Token-Regex bereits als Kompositum mitgezogen worden.)
+        if m.end() < len(text) and text[m.end()] in "-\u00ad":
             continue
         words.append((w, m.start(), m.end()))
     return words
@@ -293,6 +331,37 @@ def suggestions(word):
     return []
 
 
+def edit_distance(a, b):
+    """Levenshtein-Distanz (kleine Wörter, O(n*m)) – für Plausibilitäts-Check."""
+    if a == b:
+        return 0
+    if not a or not b:
+        return len(a) + len(b)
+    prev = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        cur = [i]
+        for j, cb in enumerate(b, 1):
+            cur.append(min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (ca != cb)))
+        prev = cur
+    return prev[-1]
+
+
+def plausible_typo(word, suggestion):
+    """Nur dann auto-fixbar, wenn der Vorschlag WIRKLICH nah am Original liegt.
+
+    Hunspell liefert für korrekte Fachbegriffe/Marken („Powerline“, „Smarthome“,
+    „Alamo“) oft genau EINEN Fantasie-Vorschlag („Perlweine“, „Thomasmehl“,
+    „Alabama“). Ein solcher Ein-Vorschlag-Fund ist KEIN Tippfehler, sondern ein
+    Wörterbuch-Loch → in die Whitelist, niemals automatisch ändern.
+    """
+    if not word or not suggestion:
+        return False
+    if word[0].isupper() or word.isupper():
+        return False  # Marken/Abkürzungen/Fachbegriffe nie „korrigieren“
+    d = edit_distance(word.lower(), suggestion.lower())
+    return d <= 2 and d <= len(word) // 2
+
+
 def analyze_article(a, whitelist):
     """Analysiert einen Artikel. Liefert Liste von Problemen."""
     body = a["body"]
@@ -333,9 +402,10 @@ def analyze_article(a, whitelist):
                 "reason": f"Substantiv klein: „{w}“ → „{cap}“",
             })
             continue
-        # Eindeutiger Tippfehler: genau 1 Vorschlag
+        # Eindeutiger Tippfehler: genau 1 Vorschlag UND plausibel nah
+        # (sonst Wörterbuch-Loch → unknown → Whitelist, nie Auto-Änderung)
         sugg = suggestions(w)
-        if len(sugg) == 1:
+        if len(sugg) == 1 and plausible_typo(w, sugg[0]):
             problems.append({
                 "type": "typo", "word": w, "fix": sugg[0],
                 "start": s, "end": e, "conf": 0.8,
@@ -377,7 +447,11 @@ def analyze_article(a, whitelist):
         return " " * (m.end() - m.start())
 
     body_masked = CODE_RE.sub(_mask_span, body)
+    body_masked = SHORTCODE_RE.sub(_mask_span, body_masked)
+    body_masked = HTML_COMMENT_RE.sub(_mask_span, body_masked)
+    body_masked = HTML_TAG_RE.sub(_mask_span, body_masked)
     body_masked = URL_RE.sub(_mask_span, body_masked)
+    body_masked = REL_URL_RE.sub(_mask_span, body_masked)
     body_masked = LINK_RE.sub(_mask_span, body_masked)
     # &nbsp; (6 Zeichen) → 6 Leerzeichen: gleiche Länge, Offsets bleiben gültig
     body_masked = body_masked.replace("&nbsp;", " " * 6)
@@ -708,9 +782,9 @@ def apply_fix(a, problem):
         abs_start = body_start + problem["start"]
         abs_end = body_start + problem["end"]
 
-    # Sicherheitscheck: nichts im Link/Code verändern
+    # Sicherheitscheck: nichts im Link/Code/Shortcode/Kommentar verändern
     segment = content[max(0, abs_start - 30):abs_end + 30]
-    if "](http" in segment or "[[" in segment:
+    if "](http" in segment or "[[" in segment or "{{" in segment or "<!--" in segment:
         return False
 
     old = content[abs_start:abs_end]
@@ -852,7 +926,7 @@ def main():
     still = [p for e in all_problems for p in e["problems"] if not p.get("applied")]
     lines = [
         "# 📝 Rechtschreib-Report", "",
-        f"> **Automatisch** erzeugt am … – {len(articles)} Artikel geprüft, "
+        f"> **Automatisch** erzeugt am {date.today().isoformat()} – {len(articles)} Artikel geprüft, "
         f"{total} Funde, {fixed_count} korrigiert, {len(still)} offen.", "",
         "## Offene Punkte", "",
     ]
