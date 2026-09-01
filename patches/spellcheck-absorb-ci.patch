@@ -1,0 +1,36 @@
+diff --git a/.github/workflows/content-engine-v2.yml b/.github/workflows/content-engine-v2.yml
+index b02ed22..c4ad9c9 100644
+--- a/.github/workflows/content-engine-v2.yml
++++ b/.github/workflows/content-engine-v2.yml
+@@ -162,6 +162,8 @@ jobs:
+           echo "== Rechtschreibung =="
+           sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
+           python3 scripts/spellcheck.py --fix || echo "⚠ Spellcheck-Fehler (nicht kritisch)"
++          echo "== Rechtschreib-Whitelist absorbieren (korrekte Komposita ≥3 Artikel) =="
++          python3 scripts/absorb_whitelist.py --apply || echo "⚠ Absorb-Whitelist (nicht kritisch)"
+           echo "== Grammatik =="
+           python3 scripts/grammar_check.py --fix --new-only || echo "⚠ Grammatik-Fehler (nicht kritisch)"
+           echo "== Akronym-Orthografie (Casing-Guard: dsl->DSL, Durchkopplung) =="
+diff --git a/.github/workflows/seo-weekly.yml b/.github/workflows/seo-weekly.yml
+index 654952f..03e94a2 100644
+--- a/.github/workflows/seo-weekly.yml
++++ b/.github/workflows/seo-weekly.yml
+@@ -155,6 +155,18 @@ jobs:
+           python3 scripts/spellcheck.py --fix | tee /tmp/spell_log.txt
+           exit ${PIPESTATUS[0]}
+ 
++      - name: Rechtschreib-Whitelist absorbieren (korrekte Komposita ≥ 3 Artikel)
++        # absorb_whitelist.py: Korrekte deutsche Komposita, die Hunspell nicht
++        # kennt (Spontankäufen, Dispokredite, …) und in ≥ 3 Artikeln vorkommen,
++        # werden in data/spellcheck_whitelist.txt aufgenommen → das dauerhafte
++        # „Unbekanntes Wort“-Rauschen sinkt, ohne echte Tippfehler zu maskieren
++        # (ein Tippfehler wiederholt sich praktisch nie in 3 Artikeln).
++        # Non-blocking: Absorb ist Rausch-Senke, kein Gate.
++        continue-on-error: true
++        run: |
++          python3 scripts/absorb_whitelist.py --apply | tee /tmp/absorb_log.txt
++          exit ${PIPESTATUS[0]}
++
+       - name: Grammatikprüfung aller Artikel (LanguageTool de-DE)
+         # Wöchentliche Komplettprüfung: Grammatik, Zeichensetzung,
+         # Kontext-Fehler in allen Posts – eindeutige Korrekturen werden

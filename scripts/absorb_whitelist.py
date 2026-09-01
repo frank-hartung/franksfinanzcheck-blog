@@ -17,9 +17,10 @@ ein korrektes Fachkompositum dagegen fast immer.
 
 import re
 import sys
-import os
+import shutil
 from collections import Counter
 from pathlib import Path
+from datetime import date
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import spellcheck as sc
@@ -27,10 +28,24 @@ import spellcheck as sc
 MIN_ARTICLES = 3      # Wort muss in so vielen Artikeln auftauchen
 MIN_LEN = 4
 
+# Englische Funktionswörter in festen Wendungen („DNS over HTTPS“) oder
+# Shortcode/HTML-Rest-Artefakte – niemals pauschal whitelisten. Echte
+# Fachkomposita („DNS-Server“, „Cashbacks“) sind davon nicht betroffen.
+EXCLUDE = {
+    "over", "under", "true", "false", "muted", "sub", "main",
+    "off", "on", "up", "down", "open", "closed", "set", "get",
+    "new", "not", "null", "none", "auto", "default", "error",
+}
+
 APPLY = "--apply" in sys.argv
 
 
 def main() -> int:
+    if not shutil.which("hunspell"):
+        print("⚠ hunspell nicht verfügbar – Absorption übersprungen "
+              "(kein Fehler, aber auch keine Whitelist-Erweiterung).")
+        return 0
+
     whitelist = sc.load_whitelist()
     articles = sc.load_articles()
     counter = Counter()
@@ -43,6 +58,7 @@ def main() -> int:
     candidates = sorted(
         w for w, n in counter.items()
         if n >= MIN_ARTICLES and len(w) >= MIN_LEN
+        and w.lower() not in EXCLUDE
         and re.search(r"[a-zäöüß]", w, re.I)
     )
     print(f"Absorption: {len(counter)} unterschiedliche unbekannte Wörter "
@@ -54,6 +70,10 @@ def main() -> int:
     if APPLY and candidates:
         path = Path(sc.WHITELIST_FILE)
         existing = set()
+        header = (f"\n# Automatisch absorbiert (absorb_whitelist.py, "
+                  f"{date.today().isoformat()})\n"
+                  "# Korrekte Komposita/Fachbegriffe, die Hunspell nicht kennt,\n"
+                  "# aber in ≥ 3 Artikeln vorkommen (kein echter Tippfehler).\n")
         if path.exists():
             for line in path.read_text(encoding="utf-8").splitlines():
                 ls = line.strip()
@@ -63,9 +83,12 @@ def main() -> int:
         if not neu:
             print("Alles bereits whitelisted.")
             return 0
+        content = path.read_text(encoding="utf-8") if path.exists() else ""
         with path.open("a", encoding="utf-8") as f:
-            f.write("\n# Automatisch absorbiert (absorb_whitelist.py, 01.09.2026)\n"
-                    "# Korrekte Komposita, die Hunspell nicht kennt, aber in ≥ 3 Artikeln vorkommen.\n")
+            # Kommentar-Header nur einmal pro Laufzeug (iso-Datum) anhängen –
+            # verhindert doppelte Header bei wiederholten CI-Läufen am selben Tag.
+            if header not in content:
+                f.write(header)
             for w in neu:
                 f.write(w + "\n")
         print(f"\n✅ {len(neu)} Wörter in {path} aufgenommen.")

@@ -143,7 +143,7 @@ Hausrat alle 3 Jahre anpassen. Gebäude gleitend, trotzdem nach Anbau/PV prüfen
 
 ## Was Vergleichsportale nicht filtern
 
-Annahmequoten in Elementarzonen, Wartezeiten Zahn, Klausel-Wortlaut grobe Fahrlässigkeit, Deliktunfähigkeit Kinder. Deshalb nach dem Preisvergleich das Bedingungswerk der Top-2 lesen – 20 Minuten, die 20.000 € Schadenabzug verhindern können.
+Annahmequoten in Elementarzonen, Wartezeiten Zahn, Klausel-Wortlaut grobe Fahrlässigkeit, Deliktsunfähigkeit Kinder. Deshalb nach dem Preisvergleich das Bedingungswerk der Top-2 lesen – 20 Minuten, die 20.000 € Schadenabzug verhindern können.
 
 <!-- premium-length-2026-c -->
 

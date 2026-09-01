@@ -134,7 +134,7 @@ Smart Meter rollen aus. Wer eines hat, sieht Tageswerte. Nutze sie, bevor du Ger
 
 ## Wärmepumpe, Nachtspeicher, Gas-Hybrid – ohne Ideologie
 
-Dieser Ratgeber ist kein Heizungsverkaufer. Er sagt: Der Tarif muss zur Technik passen. Nachtspeicher braucht Nachttarif. Wärmepumpe braucht oft einen zweiten Zähler oder dynamischen Tarif, sonst zahlst du Haushaltsstrom für die Heizung. Gas-Hybrid: Preisgarantie auf Gas plus Stromtarif mit WP-Komponente, nicht ein Bündel aus Marketing.
+Dieser Ratgeber ist kein Heizungsverkäufer. Er sagt: Der Tarif muss zur Technik passen. Nachtspeicher braucht Nachttarif. Wärmepumpe braucht oft einen zweiten Zähler oder dynamischen Tarif, sonst zahlst du Haushaltsstrom für die Heizung. Gas-Hybrid: Preisgarantie auf Gas plus Stromtarif mit WP-Komponente, nicht ein Bündel aus Marketing.
 
 Wer 2026 noch Nachtspeicher hat und 32 Cent rund um die Uhr zahlt, verschenkt den einzigen Vorteil der Technik. Erst Tarif, dann über Gerätetausch reden.
 

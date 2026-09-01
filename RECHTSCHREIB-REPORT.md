@@ -1,60 +1,27 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am … – 32 Artikel geprüft, 479 Funde, 34 korrigiert, 445 offen.
+> **Automatisch** erzeugt am 2026-09-01 – 31 Artikel geprüft, 18 Funde, 0 korrigiert, 18 offen.
 
 ## Offene Punkte
 
-- `Unbekanntes Wort: „Spontankäufen“ (Vorschläge: –)`
-- `Unbekanntes Wort: „selbstgekochtes“ (Vorschläge: –)`
-- `Unbekanntes Wort: „App-Abos“ (Vorschläge: –)`
-- `Unbekanntes Wort: „zinsstarkes“ (Vorschläge: –)`
-- `Unbekanntes Wort: „unverzinsten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Dispokredite“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Disziplinschwächen“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Spontankäufen“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Ausgaben-Tracker“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Motivationsschub“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Zins-Pockets“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Mesh-Repeater“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Highspeed“ (Vorschläge: –)`
-- `Unbekanntes Wort: „datenschutzfreundlicher“ (Vorschläge: –)`
-- `Unbekanntes Wort: „SIM-Only-Tarife“ (Vorschläge: –)`
-- `Unbekanntes Wort: „SIM-Only-Handytarif“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Cashbacks“ (Vorschläge: –)`
-- `Unbekanntes Wort: „WGs“ (Vorschläge: –)`
-- `Unbekanntes Wort: „VDSL-Anschluss“ (Vorschläge: –)`
-- `Unbekanntes Wort: „ausgebremst“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Billig-Repeater“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Allnet-Flat“ (Vorschläge: –)`
-- `Unbekanntes Wort: „SMS-Flat“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Highspeed-Datenvolumen“ (Vorschläge: –)`
-- `Unbekanntes Wort: „DSL-Anbieterwechsel“ (Vorschläge: –)`
-- `Unbekanntes Wort: „novellierten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „TKG“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Umschaltetag“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Upstreams“ (Vorschläge: –)`
-- `Unbekanntes Wort: „AVM“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Pocket-Unterkonten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Banking-Gebühren“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Smartphone-App“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Pockets“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Lastschriftenempfänger“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Kautionssicherheit“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Revolving“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Tagesgeld-Pockets“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Dispokredits“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Sondertilgungsmöglichkeiten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Sondertilgungsrechten“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Schufa-neutrale“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Schufa-frei“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Vollkaskoschutz“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Nachtanken“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Navi“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Abzocke“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Kautions“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Debitkarten-Falle“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Voucher“ (Vorschläge: –)`
-- … und 395 weitere
+- `Substantiv klein: „anbieter“ → „Anbieter“`
+- `„zuhause“ → „zu Hause“ (Standardform)`
+- `Satzzeichen: nach „z. B.“ klein – „Reifen“ → „reifen“`
+- `Substantiv klein: „strom-sparen“ → „Strom-sparen“`
+- `Substantiv klein: „vormittag“ → „Vormittag“`
+- `Substantiv klein: „nachmittag“ → „Nachmittag“`
+- `Zahl+Einheit: normales Leerzeichen → geschütztes (U+00A0), kein Umbruch zwischen Zahl und %/€`
+- `Zahl+Einheit: normales Leerzeichen → geschütztes (U+00A0), kein Umbruch zwischen Zahl und %/€`
+- `Kurzantwort: Zahl+Einheit → geschütztes Leerzeichen (U+00A0), kein Umbruch`
+- `Substantiv klein: „anmeldearm“ → „Anmeldearm“`
+- `Substantiv klein: „top-down-Budget“ → „Top-down-Budget“`
+- `„zuhause“ → „zu Hause“ (Standardform)`
+- `Substantiv klein: „winter“ → „Winter“`
+- `„zuhause“ → „zu Hause“ (Standardform)`
+- `„zuhause“ → „zu Hause“ (Standardform)`
+- `Satzanfang nach „.“: „b“ → „B“`
+- `Satzanfang nach „.“: „a“ → „A“`
+- `Satzanfang nach „.“: „i“ → „I“`
 
 ---
 *Erzeugt von scripts/spellcheck.py*

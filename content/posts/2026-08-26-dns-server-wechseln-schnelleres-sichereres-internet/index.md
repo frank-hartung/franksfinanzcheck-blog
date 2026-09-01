@@ -207,7 +207,7 @@ Nein, du änderst lediglich eine Netzwerkeinstellung. Bei Problemen kannst du je
 ### Bringt der DNS-Wechsel etwas beim Streaming?
 Für die Wiedergabegeschwindigkeit von Netflix, YouTube oder Spotify bringt er nur wenig, da Streaming-Dienste globale CDN-Netzwerke nutzen. Beim erstmaligen Laden der Seiten und bei der Navigation kann er aber Ladezeiten verkürzen.
 
-### Was ist der Unterschied zwischen Resolver over HTTPS (DoH) und DNS over TLS (DoT)?
+### Was ist der Unterschied zwischen DNS over HTTPS (DoH) und DNS over TLS (DoT)?
 Beide Verfahren verschlüsseln die DNS-Anfrage selbst, sodass auch dein Internetanbieter nicht mehr mitlesen kann, welche Seite du aufrufst. DoH läuft über Port 443 (verschmilzt mit normalem HTTPS-Verkehr), DoT über Port 853. Beide sind sicher, DoH ist im Browser einfacher einzurichten.
 
 ### Gilt der Resolver-Server für alle Geräte im Haushalt?

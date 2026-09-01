@@ -46,7 +46,7 @@ Damit der Bonus ohne Verzögerung gewährt wird, muss der Wechsel zwingend über
 
 ## 24-Monats-Berechnung: So viel sparst du wirklich
 
-Wie stark sich ein Wechselbonus auf deine realen Haushaltsausgaben auswirkt, verdeutlicht die folgende Vergleichsrechnung für einen 100-Mbit/s-VDSL-Anschluss über zwei Jahre:
+Wie stark sich ein Wechselbonus auf deine realen Haushaltsausgaben auswirkt, verdeutlicht die folgende Vergleichsrechnung für einen VDSL-Anschluss mit 100 Mbit/s über zwei Jahre:
 
 | Kostenposition | Alter Vertrag (Bestandskunde) | Neuer Vertrag mit Wechselbonus |
 |:---|:---|:---|

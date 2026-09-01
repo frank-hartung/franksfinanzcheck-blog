@@ -95,14 +95,14 @@ Vergleichsportale bieten exklusive Boni an, die du beim direkten Abschluss auf d
 Der richtige DSL-Tarif ist der, der an deinen drei teuersten Stunden des Tages trägt – nicht der mit der größten Zahl auf dem Plakat. Miss einmal dienstags um 19 Uhr: parallele Streams, Cloud, Gaming, Videocall. Addiere grob:
 
 - 4K-Stream: 25 Megabit/s
-- HD-Videocall: 3–8 Bandbreite (Upload zählt!)
+- HD-Videocall: 3–8 Mbit/s (Upload zählt!)
 - Cloud-Backup: 10 Mbit/s
-- Gaming: 5 Geschwindigkeit, Ping unter 20 ms
+- Gaming: 5 Mbit/s, Ping unter 20 ms
 - Smartphone-Updates im WLAN: 10 Megabit/s Spitze
 
-Ein Paar mit Homeoffice landet realistisch bei 100 Bandbreite Down / 20–40 Mbit/s Up. 50 Geschwindigkeit reichen, bis das zweite Homeoffice dazukommt. 1 Gbit/s ist Komfort und Zukunft, kein Muss – außer du lädst täglich große Videoprojekte.
+Ein Paar mit Homeoffice landet realistisch bei 100 Mbit/s Down / 20–40 Mbit/s Up. 50 Mbit/s reichen, bis das zweite Homeoffice dazukommt. 1 Gbit/s ist Komfort und Zukunft, kein Muss – außer du lädst täglich große Videoprojekte.
 
-**VDSL/Vectoring.** Weit verfügbar, Upload oft 20–40 Megabit/s bei 100/250 Down. Gut, solange die Kupferlänge zur Tiefbaukante nicht zu lang ist. Abend-Drossel durch Nachbarn ist seltener als bei Kabel, aber möglich.
+**VDSL/Vectoring.** Weit verfügbar, Upload oft 20–40 Megabit/s bei 100/250 Mbit/s Down. Gut, solange die Kupferlänge zur Tiefbaukante nicht zu lang ist. Abend-Drossel durch Nachbarn ist seltener als bei Kabel, aber möglich.
 
 **Kabel (DOCSIS).** Hohe Down-Zahlen, Upload historisch schwächer, in neuen Netzen besser. In der Nachbarschaft mit vielen Streamern schwankt die Last. Test in der Straße schlägt die Broschüre.
 
@@ -125,7 +125,7 @@ Wenn du diese vier Regeln einhältst, ist fast jeder seriöse Tarif „der richt
 
 Homeoffice mit VPN, zwei Kameras, Cloud. 10 Mbit/s Upload sind 2018.
 
-2026 willst du 20–40, bei Glasfaser gerne symmetrisch. Ein 250-Down/40-Up schlägt 1000-Down/50-Up im Alltag, wenn WLAN den Down sowieso kürzt. Im Vergleichsfilter Upload sichtbar machen, sonst kaufst du Marketing.
+2026 willst du 20–40, bei Glasfaser gerne symmetrisch. Ein Tarif mit 250 Mbit/s Down und 40 Mbit/s Up schlägt im Alltag einen mit 1000/50, wenn WLAN den Down sowieso kürzt. Im Vergleichsfilter Upload sichtbar machen, sonst kaufst du Marketing.
 
 
 <!-- premium-length-2026-c -->
