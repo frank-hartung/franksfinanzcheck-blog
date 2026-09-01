@@ -406,3 +406,6 @@
 {"ts": "2026-09-01T04:35:12Z", "module": "spam_guard", "action": "sync-pins", "added": 0}
 {"ts": "2026-09-01T04:35:44Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 0}
 {"ts": "2026-09-01T05:49:27Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 0}
+{"ts": "2026-09-01T08:46:57Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub", "rules": ["B5"]}
+{"ts": "2026-09-01T08:46:57Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet", "rules": ["B1"]}
+{"ts": "2026-09-01T08:46:57Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 0}
