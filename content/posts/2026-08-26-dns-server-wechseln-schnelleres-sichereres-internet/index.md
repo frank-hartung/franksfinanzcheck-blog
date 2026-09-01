@@ -24,9 +24,9 @@ pin_description: "*Werbung | Du brauchst keinen teureren Tarif für schnelleres 
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
-Wusstest du, dass dein Internetanbieter jede einzelne Webseite, die du aufrufst, theoretisch mitlesen kann – auch im privaten Inkognito-Modus? Der Grund ist der **DNS-Server** deines Providers (auch Namensauflösung oder Resolver genannt): Er ist so etwas wie das Telefonbuch des Internets und übersetzt Domainnamen wie `franksfinanzcheck.de` in die zugehörige IP-Adresse.
+Wusstest du, dass dein Internetanbieter jede einzelne Webseite, die du aufrufst, theoretisch mitlesen kann – auch im privaten Inkognito-Modus? Der Grund ist der **DNS-Server** deines Providers (auch Namensauflösung oder Resolver genannt). Er ist so etwas wie das Telefonbuch des Internets: Er übersetzt Domainnamen wie `franksfinanzcheck.de` in die zugehörige IP-Adresse.
 
-Die meisten Haushalte nutzen automatisch den DNS-Server ihres Anbieters, ohne zu wissen, dass es schnellere, privatere und sicherere Alternativen gibt. Ein **DNS-Server-Wechsel** ist kostenlos, in fünf Minuten erledigt und kann Ladezeiten spürbar verkürzen. Welche Anbieter 2026 die wichtigsten sind ([Ratgeber Internet &amp; DSL](../../pillar/internet-dsl/)), wie du die Einstellung an FritzBox, Windows, Android und iPhone änderst und warum ein Wechsel auch ein Sicherheitsgewinn ist – das erfährst du jetzt.
+Die meisten Haushalte nutzen automatisch den DNS-Server ihres Anbieters, ohne zu wissen, dass es schnellere, privatere und sicherere Alternativen gibt. Ein **DNS-Server-Wechsel** ist kostenlos, in fünf Minuten erledigt und kann Ladezeiten spürbar verkürzen. Welche Anbieter 2026 die wichtigsten sind, zeigt der [Ratgeber Internet &amp; DSL](../../pillar/internet-dsl/). Wie du die Einstellung an FritzBox, Windows, Android und iPhone änderst und warum der Wechsel ein Sicherheitsgewinn ist – das erfährst du jetzt.
 
 
 ---
@@ -164,11 +164,13 @@ Namensauflösung ist ein 5-Minuten-Hebel mit geringem Risiko. Er ersetzt keinen 
 
 ## Extra: Wie die Namensauflösung deinen Alltag beeinflusst
 
-Viele Nutzer merken den Unterschied erst, wenn sie bewusst darauf achten: Der Aufruf einer Nachrichtenseite, das Laden des Online-Bankings, der Start einer Mediathek – überall steckt eine kurze Anfrage an den Resolver dahinter. Wer einen schnellen, datensparsamen Anbieter nutzt, spart über den Tag verteilt mehrere Sekunden Wartezeit und reduziert nebenbei das Tracking-Risiko.
+Viele Nutzer merken den Unterschied erst, wenn sie bewusst darauf achten. Der Aufruf einer Nachrichtenseite, das Laden des Online-Bankings, der Start einer Mediathek: Überall steckt eine kurze Anfrage an den Resolver dahinter. Wer einen schnellen, datensparsamen Anbieter nutzt, spart über den Tag verteilt mehrere Sekunden Wartezeit. Nebenbei reduziert er das Tracking-Risiko.
 
 Ein weiterer Punkt ist die Filterung: Manche Resolver bieten optionale Jugendschutz-Listen, andere blockieren Werbung oder Tracker auf Domain-Ebene. Das ist kein Ersatz für einen Browser-Adblocker, aber eine sinnvolle zweite Schicht – besonders für Geräte, auf denen kein Adblocker läuft (Smart-TV, Spielekonsole).
 
-Praktisch bedeutet das: Notiere dir deine aktuelle Konfiguration (Screenshot der Router-Seite), stelle zwei unabhängige Anbieter als primär und sekundär ein, teste 48 Stunden lang typische Seiten (Banking, Streaming, Homeoffice-VPN) und entscheide dann, ob du dabei bleibst. Die Änderung ist jederzeit in 30 Sekunden rückgängig zu machen.
+Praktisch bedeutet das: Notiere deine aktuelle Konfiguration (Screenshot der Router-Seite). Stelle zwei unabhängige Anbieter als primär und sekundär ein. Teste 48 Stunden lang typische Seiten (Banking, Streaming, Homeoffice-VPN).
+
+Danach entscheidest du, ob du dabei bleibst. Die Änderung ist jederzeit in 30 Sekunden rückgängig zu machen.
 ## Bonus: Die 10 DNS-Begriffe, die dir in Foren wirklich begegnen
 
 | Begriff | Was er bedeutet | Warum er dich betrifft |
@@ -199,7 +201,7 @@ Meine klare Empfehlung: Setze ihn direkt im Router (z. B. an der FritzBox) ab, d
 ## Häufige Fragen
 
 ### Welcher Namensserver ist der passende für Deutschland?
-Gemessen an der Antwortzeit liegt Cloudflare (1.1.1.1) mit durchschnittlich 8 Millisekunden vorn, gefolgt von Google Resolver (8.8.8.8) mit 12 ms und Quad9 (9.9.9.9) mit 14 ms. Wer Wert auf maximalen Malware-Schutz legt, wählt Quad9.
+Gemessen an der Antwortzeit liegt Cloudflare (1.1.1.1) vorn: durchschnittlich 8 Millisekunden. Dahinter folgen Google Resolver (8.8.8.8) mit 12 ms und Quad9 (9.9.9.9) mit 14 ms. Wer Wert auf maximalen Malware-Schutz legt, wählt Quad9.
 
 ### Ist der Wechsel des DNS-Servers gefährlich?
 Nein, du änderst lediglich eine Netzwerkeinstellung. Bei Problemen kannst du jederzeit zurück zur automatischen Zuweisung ("Namensserver automatisch beziehen") wechseln.

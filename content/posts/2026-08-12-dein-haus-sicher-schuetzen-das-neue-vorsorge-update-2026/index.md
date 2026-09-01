@@ -41,7 +41,7 @@ Um Haus und Wohnung umfassend gegen alle denkbaren Risiken abzusichern, müssen 
 
 ## Elementarschäden: Warum der Schutz 2026 Pflicht ist
 
-Die Klimaerwärmung führt dazu, dass lokale Starkregen-Ereignisse selbst in Gebieten auftreten, die weit abseits von Flüssen oder bekannten Hochwasserzonen liegen. Wenn die Kanalisation die Wassermassen nicht mehr aufnehmen kann und das Wasser über Kellerfenster oder Lichtschächte ins Haus drückt, greift eine gewöhnliche Gebäude- oder Hausratversicherung ohne Elementar-Zusatzbaustein nicht. Schäden im Keller an Heizung, Waschmaschinen und eingelagertem Mobiliar kosten schnell zwischen 15.000 € und 45.000 €.
+Die Klimaerwärmung führt dazu, dass lokale Starkregen-Ereignisse selbst in Gebieten auftreten, die weit abseits von Flüssen oder bekannten Hochwasserzonen liegen. Wenn die Kanalisation die Wassermassen nicht mehr aufnimmt, drückt das Wasser über Kellerfenster oder Lichtschächte ins Haus. Dann greift eine gewöhnliche Gebäude- oder Hausratversicherung ohne Elementar-Zusatzbaustein nicht. Schäden im Keller an Heizung, Waschmaschinen und eingelagertem Mobiliar kosten schnell zwischen 15.000 € und 45.000 €.
 
 | Schadensursache | Standard-Hausrat | Hausrat mit Elementarschutz |
 |:---|:---|:---|
@@ -59,7 +59,7 @@ Die Klimaerwärmung führt dazu, dass lokale Starkregen-Ereignisse selbst in Geb
 Beim Abschluss oder der Überprüfung einer Hausrat- oder Wohngebäudepolice solltest du folgende Bedingungen zwingend vereinbaren:
 
 ### 1. Verzicht auf die Einrede der groben Fahrlässigkeit
-Verlässt du für eine Stunde das Haus, während die Waschmaschine läuft oder ein Fenster gekippt ist, werfen Versicherer bei Alttarifen oft "grobe Fahrlässigkeit" vor und kürzen die Auszahlung um bis zu 50 %. Moderne Top-Tarife verzichten zu 100 % auf diese Einrede und zahlen den Schaden in voller Höhe.
+Verlässt du für eine Stunde das Haus, während die Waschmaschine läuft oder ein Fenster gekippt ist? Dann werfen Versicherer bei Alttarifen oft "grobe Fahrlässigkeit" vor. Die Versicherer kürzen die Auszahlung um bis zu 50 %. Moderne Top-Tarife verzichten zu 100 % auf diese Einrede und zahlen den Schaden in voller Höhe.
 
 ### 2. Unter­versicherungs­verzicht
 Damit der Versicherer im Totalschadenfall nicht prüft, ob dein Hausrat mehr wert war als die vereinbarte Versicherungssumme, wähle eine pauschale Mindestsumme von **650 € pro Quadratmeter Wohnfläche**. Bei einer 90-m²-Wohnung entspricht das einer pauschalen Versicherungssumme von **58.500 €**. In diesem Fall verzichtet die Gesellschaft garantiert auf jegliche Unter­versicherungs­kürzung.
@@ -80,7 +80,7 @@ Entgegen der landläufigen Meinung ist eine lückenlose Absicherung erstaunlich 
 | **Gesamtkosten pro Jahr** | **155,00 €** | **103,00 €** |
 | **Effektive Kosten pro Monat** | **12,92 € / Monat** | **8,58 € / Monat** |
 
-Wer neben dem Hausrat auch die persönliche Absicherung auf Vordermann bringen will, sollte einen Blick in unsere [Erklärung zur Privat­haftpflicht­versicherung](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) werfen oder die Übersicht im [Ratgeber: Versicherungen](../../pillar/versicherungen/) durchstöbern.
+Wer neben dem Hausrat auch die persönliche Absicherung auf Vordermann bringen will, wirft einen Blick in unsere [Erklärung zur Privat­haftpflicht­versicherung](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/). Alternativ hilft die Übersicht im [Ratgeber: Versicherungen](../../pillar/versicherungen/).
 
 <!-- premium-length-2026 -->
 
@@ -119,7 +119,7 @@ Wer das einmal im Jahr macht, braucht kein „Vorsorge-Update“-Gefühl mehr, s
 
 ## Fazit: Dein Haus mit zeitgemäßen Klauseln schützen
 
-Veraltete Verträge bieten bei modernen Unwetterrisiken oft nur unzureichenden Schutz. Indem du alte Policen durch einen zeitgemäßen Vertrag mit Elementarschutz und Verzicht auf grobe Fahrlässigkeit ersetzt, schützt du deine Immobilie vor existenziellen Schäden und sparst durch günstige Online-Konditionen gleichzeitig bares Geld.
+Veraltete Verträge bieten bei modernen Unwetterrisiken oft nur unzureichenden Schutz. Ersetze alte Policen durch einen zeitgemäßen Vertrag mit Elementarschutz und Verzicht auf grobe Fahrlässigkeit. So schützt du deine Immobilie vor existenziellen Schäden. Und du sparst durch günstige Online-Konditionen gleichzeitig bares Geld.
 
 **Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) · [Energiediebe stoppen: So kannst du Stromfresser finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/)
 

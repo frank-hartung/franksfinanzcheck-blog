@@ -50,6 +50,12 @@ def load_article(path):
     body = re.sub(r'```.*?```', ' ', body, flags=re.S)
     body = re.sub(r'!\[[^\]]*\]\([^)]*\)', ' ', body)
     body = re.sub(r'\[([^\]]*)\]\([^)]*\)', r'\1', body)
+    # HUGO-SHORTCODES entfernen (z. B. {{< tarifvergleich … >}}): sie sind
+    # Markup, keine Fließtext-Sätze (Mess-Artefakt, 01.09.2026 – Audit P1
+    # „Lesbarkeits-Gate ehrlich machen“). Ohne diese Zeile werden komplette
+    # Tarifvergleich-Blöcke als EIN „Schachtelsatz“ mit mehreren hundert
+    # Wörtern gezählt und verzerren wps/Flesch/nested systematisch.
+    body = re.sub(r'\{\{<.*?/?>\}\}', ' ', body, flags=re.S)
     # ZUERST Listen-Einträge (Bullets) und Überschriften entfernen –
     # sie sind KEINE Fließtext-Sätze (Mess-Artefakte). WICHTIG: VOR dem
     # Entfernen der Markdown-Sonderzeichen (sonst fehlt das Bullet-Zeichen).
@@ -78,16 +84,42 @@ def load_article(path):
         if stripped.startswith('|'):
             out.append(' ')
             continue
+        if stripped.startswith('>'):
+            # Callout-Boxen/Zitate („> 💡 Schnell-Tipp …“, „> ⚠️ …“) sind
+            # KEINE Fließtext-Sätze – sonst verschmelzen sie beim
+            # Zeilenumbruch-Collapse mit dem Nachbar-Absatz zu Pseudosätzen
+            # (Mess-Artefakt, 01.09.2026 – Audit P1).
+            out.append(' ')
+            continue
+        if stripped.startswith(('💡', '👉', '**Weiterlesen:**', '**Weiterlesen :**')):
+            # Promo-/CTA-/Footer-Boilerplate („💡 Schnell-Tipp …“, „👉 Jetzt
+            # vergleichen …“, „**Weiterlesen:** …“): Affiliate-Aufrufe und
+            # Link-Footer, kein Fließtext. Endet ohne Satzzeichen und würde
+            # sonst mit dem Folgeabsatz (Disclaimer/FAQ) verschmelzen
+            # (Mess-Artefakt, 01.09.2026 – Audit P1).
+            out.append(' ')
+            continue
         if in_list and not stripped:
             in_list = False
         out.append(line)
     body = '\n'.join(out)
     body = re.sub(r'[#*_>`|~-]', ' ', body)
+    # Satzende vor schließender Klammer normalisieren: „…Mehrkosten.) Nächster
+    # Satz.“ – der Punkt endet den Satz, die Klammer gehört zum Disclaimer.
+    # Ohne diese Zeile verschmilzt der Affiliate-Disclaimer mit dem ersten
+    # Satz des Folgeabsatzes zu einem Pseudosatz (Mess-Artefakt, Audit P1).
+    body = re.sub(r'\.\)', '. ', body)
     # Zeilenumbrüche als Satztrenner erhalten (verhindert, dass Absätze
     # mit Zeilenumbruch zu langen "Schachtelsätzen" zusammengeklebt werden)
     body = re.sub(r'\s*\n\s*', '\n', body)
     body = re.sub(r'\n+', '\n', body)
+    # „…:“ am ZEILENENDE ist eine Strukturgrenze (Listen-/Abschnitts-Intro),
+    # kein Satz-interner Doppelpunkt. Als Marker schützen, damit der folgende
+    # Absatz nicht mit dem Intro zu einem Pseudosatz verschmilzt
+    # (Mess-Artefakt, 01.09.2026 – Audit P1).
+    body = re.sub(r':\n', ':\n\x00', body)
     body = re.sub(r'\s+', ' ', body)
+    body = body.replace('\x00', '\n')
     return {'file': os.path.relpath(path, POSTS_DIR), 'body': body}
 
 
