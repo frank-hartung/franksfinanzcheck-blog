@@ -1,0 +1,201 @@
+diff --git a/.github/workflows/alert-on-failure.yml b/.github/workflows/alert-on-failure.yml
+index 35493c9..76ffdd0 100644
+--- a/.github/workflows/alert-on-failure.yml
++++ b/.github/workflows/alert-on-failure.yml
+@@ -47,11 +47,17 @@ on:
+ 
+ permissions:
+   issues: write
++  actions: read     # Jobs/Schritte des beobachteten Laufs auslesen (Ursachen-Analyse)
++  checks: read      # Annotationen lesen ("canceled by @…" → Falsch-Alarm-Filter)
+ 
+ jobs:
+   alarm:
+     runs-on: ubuntu-latest
+-    if: ${{ github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'cancelled' }}
++    timeout-minutes: 10
++    # LEKTORAT/AUDIT 01.09.2026 (Issue #141): 'cancelled' bleibt als Auslöser
++    # erhalten (z. B. Runner-Abbruch), wird aber im Script gefiltert:
++    # Ein von Hand abgebrochener Lauf ist KEIN Fehler und erzeugt kein Issue mehr.
++    if: ${{ github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'timed_out' || github.event.workflow_run.conclusion == 'cancelled' }}
+     steps:
+       - name: Issue bei fehlgeschlagenem Workflow erstellen
+         uses: actions/github-script@v7
+@@ -61,6 +67,44 @@ jobs:
+             const wfName = run.name || 'Unbekannter Workflow';
+             const conclusion = run.conclusion;
+             const runUrl = run.html_url;
++
++            // --- Falsch-Alarm-Filter (Issue #141) --------------------------
++            // Wurde der Lauf von einem MENSCHEN abgebrochen (Actions → Cancel)
++            // oder von der Concurrency-Regel verdrängt, ist das kein Defekt.
++            // Erkennung über die Job-Annotationen ("The run was canceled by @…").
++            if (conclusion === 'cancelled') {
++              let manual = false;
++              try {
++                const { data: jobs } = await github.rest.actions.listJobsForWorkflowRun({
++                  owner: context.repo.owner,
++                  repo: context.repo.repo,
++                  run_id: run.id,
++                  per_page: 100
++                });
++                for (const job of jobs.jobs || []) {
++                  const m = /check-runs\/(\d+)/.exec(job.check_run_url || '');
++                  if (!m) continue;
++                  const { data: ann } = await github.rest.checks.listAnnotations({
++                    owner: context.repo.owner,
++                    repo: context.repo.repo,
++                    check_run_id: Number(m[1]),
++                    per_page: 100
++                  });
++                  if (ann.some(a => /canceled by @|higher priority waiting request|cancel-in-progress/i.test(a.message || ''))) {
++                    manual = true;
++                    break;
++                  }
++                }
++              } catch (e) {
++                console.log('Annotationen nicht lesbar: ' + e.message);
++              }
++              if (manual) {
++                console.log('Lauf wurde manuell/durch Concurrency abgebrochen – kein Fehler, kein Issue.');
++                return;
++              }
++            }
++            // ---------------------------------------------------------------
++
+             const branch = run.head_branch || 'main';
+             const created = new Date(run.created_at).toLocaleString('de-DE', { timeZone: 'Europe/Berlin' });
+             const headSha = run.head_sha ? run.head_sha.slice(0, 8) : '?';
+@@ -77,6 +121,26 @@ jobs:
+               return;
+             }
+ 
++            // Welcher Schritt ist konkret gescheitert? (spart das Log-Wühlen)
++            let failedSteps = [];
++            try {
++              const { data: jobs } = await github.rest.actions.listJobsForWorkflowRun({
++                owner: context.repo.owner,
++                repo: context.repo.repo,
++                run_id: run.id,
++                per_page: 100
++              });
++              for (const job of jobs.jobs || []) {
++                for (const step of job.steps || []) {
++                  if (step.conclusion === 'failure' || step.conclusion === 'timed_out') {
++                    failedSteps.push('`' + job.name + '` → **' + step.name + '** (' + step.conclusion + ')');
++                  }
++                }
++              }
++            } catch (e) {
++              console.log('Schritt-Analyse nicht möglich: ' + e.message);
++            }
++
+             const lines = [
+               '## ' + wfName + ' ist fehlgeschlagen (' + conclusion + ')',
+               '',
+@@ -85,13 +149,19 @@ jobs:
+               '- **Zeit:** ' + created,
+               '- **Run:** [Details ansehen](' + runUrl + ')',
+               '',
++              '### Betroffener Schritt',
++              failedSteps.length ? failedSteps.map(s => '- ' + s).join('\n') : '- (kein einzelner Schritt gemeldet – ganzer Lauf abgebrochen)',
++              '',
+               '### Was du tun solltest',
+-              '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',
++              '1. Öffne den Run-Link oben und schaue in das Log des oben genannten Schritts.',
+               '2. Häufigste Ursachen:',
+               '   - **API-Key abgelaufen** (GROQ/GEMINI) → Secrets in den Repo-Einstellungen aktualisieren',
++              '   - **Zeitlimit erreicht** (`timed_out`) → KI-Dienst hängt; einfach neu starten',
+               '   - **GitHub-Ausfall** → auf https://www.githubstatus.com prüfen',
+               '   - **Transienter Fehler** → Workflow manuell neu starten (Actions → Run workflow)',
+               '',
++              '> Hinweis: Von Hand abgebrochene Läufe erzeugen seit 01.09.2026 **kein** Issue mehr.',
++              '',
+               '---',
+               '*Automatisch erstellt vom Fehler-Alerting-Workflow – du musst nichts manuell prüfen.*'
+             ];
+@@ -128,6 +198,7 @@ jobs:
+   # ------------------------------------------------------------
+   resolve:
+     runs-on: ubuntu-latest
++    timeout-minutes: 10
+     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+     steps:
+       - name: Behobene Fehlermeldung schließen
+diff --git a/.github/workflows/seo-weekly.yml b/.github/workflows/seo-weekly.yml
+index 6d6c9a2..c029075 100644
+--- a/.github/workflows/seo-weekly.yml
++++ b/.github/workflows/seo-weekly.yml
+@@ -31,6 +31,12 @@ concurrency:          # AUDIT-FIX
+ jobs:
+   seo:
+     runs-on: ubuntu-latest
++    # HÄRTUNG 01.09.2026 (Issue #141): Der Lauf am 01.09. hing im KI-Schritt
++    # (Groq/Gemini antworteten nicht) und musste von Hand abgebrochen werden –
++    # daraus entstand eine falsche "fehlgeschlagen (cancelled)"-Meldung.
++    # Ab jetzt bricht der Job selbst nach 75 Minuten ab (statt endlos zu warten),
++    # und jeder KI-/Netzwerk-Schritt hat ein eigenes Zeitlimit (siehe unten).
++    timeout-minutes: 75
+     steps:
+       - name: Repository auschecken
+         uses: actions/checkout@v4
+@@ -46,6 +52,7 @@ jobs:
+         run: python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli 2>/dev/null || true
+ 
+       - name: SEO-Audit ausführen
++        timeout-minutes: 15
+         id: audit
+         continue-on-error: true
+         run: |
+@@ -54,6 +61,7 @@ jobs:
+           exit ${PIPESTATUS[0]}
+ 
+       - name: Keyword-Optimierungs-Audit + KI-LSI-Vorschläge
++        timeout-minutes: 20
+         id: kw
+         continue-on-error: true
+         env:
+@@ -98,6 +106,7 @@ jobs:
+           fi
+ 
+       - name: Meta-Daten-Optimierung (Title/Description/Keywords)
++        timeout-minutes: 20
+         id: meta
+         continue-on-error: true
+         env:
+@@ -105,9 +114,10 @@ jobs:
+           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+         run: |
+           python3 scripts/meta_optimizer.py --fix --ai | tee /tmp/meta_log.txt
+-                    exit ${PIPESTATUS[0]}
++          exit ${PIPESTATUS[0]}
+ 
+       - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte, Keywords)
++        timeout-minutes: 20
+         # Agentur-Selbstheilung: erzwingt Doppelpunkt-Titel, SERP-Längen,
+         # Cover-Alt=Titel, pin_title/pin_description, Keywords ≥3, Cover 2:3.
+         # Läuft NACH meta_optimizer, damit Ellipsis-/Titel-Schäden geheilt werden.
+@@ -144,6 +154,7 @@ jobs:
+           fi
+ 
+       - name: Rechtschreib- & Groß-Klein-Prüfung aller Artikel (Top-Level)
++        timeout-minutes: 20
+         # Gehaertet 12.08.: continue-on-error + or-fallback – ein Whitespace/
+         # Wortlisten-Lochchen darf die Folgestellen niemals abschiessen
+         # (Domino-Horror am 12.08. morgens entdeckt).
+@@ -156,6 +167,7 @@ jobs:
+           exit ${PIPESTATUS[0]}
+ 
+       - name: Grammatikprüfung aller Artikel (LanguageTool de-DE)
++        timeout-minutes: 25
+         # Wöchentliche Komplettprüfung: Grammatik, Zeichensetzung,
+         # Kontext-Fehler in allen Posts – eindeutige Korrekturen werden
+         # automatisch angewendet (Stil-Fälle nur im Report).
+@@ -444,6 +456,7 @@ jobs:
+             console.log('✅ Issue erstellt');
+ 
+       - name: IndexNow-Indexierung (neue Artikel einreichen)
++        timeout-minutes: 10
+         run: python3 scripts/submit_indexnow.py
+ 
+       - name: Bing-Status committen

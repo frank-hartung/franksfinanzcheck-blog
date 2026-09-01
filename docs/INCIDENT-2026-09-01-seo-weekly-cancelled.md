@@ -51,3 +51,20 @@ Branch `main`, Commit `e7238f7d`, 01.09.2026 16:33 Uhr.
 Bei einem hängenden Lauf: abbrechen ist völlig in Ordnung, danach einmal
 Actions → „Wöchentliche SEO-Optimierung" → *Run workflow*. Kommt derselbe Schritt
 zweimal in Folge nicht durch, sind die Secrets `GROQ_API_KEY` / `GEMINI_API_KEY` zu prüfen.
+
+## Übernahme der Workflow-Änderungen (ein Schritt, 1 Minute)
+Der Automat darf `.github/workflows/**` nicht selbst pushen (GitHub-App ohne
+`workflows`-Recht). Die fertigen Dateien liegen deshalb im Repo bereit:
+
+- `patches/seo-weekly-2026-09-01-ready.yml` → nach `.github/workflows/seo-weekly.yml`
+- `patches/alert-on-failure-2026-09-01-ready.yml` → nach `.github/workflows/alert-on-failure.yml`
+- Alternativ als Diff: `patches/issue-141-2026-09-01-workflows.patch`
+
+**Lokal übernehmen:**
+```bash
+git apply patches/issue-141-2026-09-01-workflows.patch
+git commit -am "fix(ci): Zeitlimits + Falsch-Alarm-Filter (Issue #141)"
+git push
+```
+**Oder im Browser:** die beiden `*-ready.yml` öffnen, Inhalt kopieren, in die
+gleichnamige Datei unter `.github/workflows/` einfügen, „Commit changes".

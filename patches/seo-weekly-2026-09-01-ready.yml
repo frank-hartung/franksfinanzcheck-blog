@@ -1,0 +1,490 @@
+# ============================================================
+#  WÖCHENTLICHES SEO-AUTOMATISIERUNG (kostenlos, Profi-Niveau)
+#
+#  Läuft jeden Mittwoch um 07:00 Uhr (DE):
+#    1. SEO-Audit: prüft alle Artikel (Titel, Description, Keywords,
+#       Struktur, Alt-Texte, interne Links, Wortanzahl, Sitemap)
+#    2. IndexNow-Indexierung: reicht neue Artikel automatisch bei Bing &
+#       Co. ein (kostenlos, ohne API-Key – Key-Datei liegt im Repo)
+#    3. Report: Bei kritischen Problemen wird ein GitHub-Issue erstellt
+#
+#  VORAUSSETZUNG (einmalig): Bereits eingerichtet (scripts/indexnow_key.txt
+#    + static/<key>.txt). Kein Bing-Konto/API-Key nötig!
+#
+#  Manuell starten: GitHub → Actions → "Wöchentliche SEO-Optimierung"
+# ============================================================
+name: Wöchentliche SEO-Optimierung
+
+on:
+  schedule:
+    - cron: "0 8 * * 3"    # Mittwoch 10:00 MESZ – entzerrt (Profi-Cleanup 20.08.)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:          # AUDIT-FIX
+  group: seo-weekly
+  cancel-in-progress: false
+
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    # HÄRTUNG 01.09.2026 (Issue #141): Der Lauf am 01.09. hing im KI-Schritt
+    # (Groq/Gemini antworteten nicht) und musste von Hand abgebrochen werden –
+    # daraus entstand eine falsche "fehlgeschlagen (cancelled)"-Meldung.
+    # Ab jetzt bricht der Job selbst nach 75 Minuten ab (statt endlos zu warten),
+    # und jeder KI-/Netzwerk-Schritt hat ein eigenes Zeitlimit (siehe unten).
+    timeout-minutes: 75
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Hugo-Build für Sitemap-Check
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+
+      - name: Python-Abhängigkeiten (SEO, PyYAML, Crypto, Pillow)
+        # BUGFIX 13.08. / 26.08.: pyyaml, cryptography, pillow, fonttools, brotli
+        run: python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli 2>/dev/null || true
+
+      - name: SEO-Audit ausführen
+        timeout-minutes: 15
+        id: audit
+        continue-on-error: true
+        run: |
+          hugo --minify > /dev/null 2>&1
+          python3 scripts/seo_audit.py | tee /tmp/seo_audit_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Keyword-Optimierungs-Audit + KI-LSI-Vorschläge
+        timeout-minutes: 20
+        id: kw
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/keyword_optimizer.py --ai --apply | tee /tmp/kw_audit_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: LSI-Keyword-Änderungen committen
+        if: steps.kw.outcome == 'success'
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Keyword-Änderungen"
+          else
+            git commit -m "seo: LSI-Keywords für neue Artikel ergänzt (KI-Vorschläge)"
+            scripts/git_sync.sh --push-only
+          fi
+
+      - name: Interne Verlinkung automatisch ausbauen
+        # Fügt kontextuelle Links zwischen thematisch passenden Artikeln ein
+        # (max. 3 neue Links pro Lauf, natürliche Anker, keine Duplikate).
+        # → stärkt die interne Linkstruktur (SEO), ohne Spam-Muster.
+        # PREM-AUDIT 26.08.2026: der Linker verlinkt NUR auf Live-Artikel
+        # (Draft-/Zukunfts-Posts sind aus dem Ziel-Pool ausgeschlossen) und
+        # der Draft-Link-Heiler räumt danach sicherheitsshalb tote Ziele
+        # (Kadenz-Heilungen anderer Läufe) aus – IM SELBEN COMMIT.
+        run: |
+          python3 scripts/internal_linker.py --apply --max 5 | tee /tmp/internal_link_log.txt
+          python3 scripts/draft_link_healer.py --fix
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine neuen internen Links (Struktur bereits dicht)."
+          else
+            git commit -m "seo: interne Verlinkung ausgebaut (kontextuelle Links, nur Live-Ziele)"
+            scripts/git_sync.sh --push-only
+          fi
+
+      - name: Meta-Daten-Optimierung (Title/Description/Keywords)
+        timeout-minutes: 20
+        id: meta
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/meta_optimizer.py --fix --ai | tee /tmp/meta_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte, Keywords)
+        timeout-minutes: 20
+        # Agentur-Selbstheilung: erzwingt Doppelpunkt-Titel, SERP-Längen,
+        # Cover-Alt=Titel, pin_title/pin_description, Keywords ≥3, Cover 2:3.
+        # Läuft NACH meta_optimizer, damit Ellipsis-/Titel-Schäden geheilt werden.
+        id: pinseo
+        continue-on-error: true
+        run: |
+          python3 scripts/pinterest_seo_healer.py --fix | tee /tmp/pinseo_log.txt
+          exit ${PIPESTATUS[0]}
+      - name: Pinterest-SEO-Healer-Änderungen committen
+        if: always()
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add content/ static/images/covers/ data/covers_manifest.json \
+                  data/lcp_images.json data/fcp_images.json \
+                  PINTEREST-SEO-HEALER-REPORT.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Keine Pinterest/SEO-Heiler-Änderungen"
+          else
+            git commit -m "seo: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte)"
+            scripts/git_sync.sh --push-only
+          fi
+      - name: Meta-Änderungen committen
+        if: steps.meta.outcome == 'success'
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Meta-Änderungen"
+          else
+            git commit -m "seo: Meta-Daten optimiert (Title/Description/Keywords)"
+            scripts/git_sync.sh --push-only
+          fi
+
+      - name: Rechtschreib- & Groß-Klein-Prüfung aller Artikel (Top-Level)
+        timeout-minutes: 20
+        # Gehaertet 12.08.: continue-on-error + or-fallback – ein Whitespace/
+        # Wortlisten-Lochchen darf die Folgestellen niemals abschiessen
+        # (Domino-Horror am 12.08. morgens entdeckt).
+        continue-on-error: true
+        run: |
+          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
+          python3 scripts/fix_linebreaks.py || true
+          python3 scripts/fix_spaces.py || true
+          python3 scripts/spellcheck.py --fix | tee /tmp/spell_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Grammatikprüfung aller Artikel (LanguageTool de-DE)
+        timeout-minutes: 25
+        # Wöchentliche Komplettprüfung: Grammatik, Zeichensetzung,
+        # Kontext-Fehler in allen Posts – eindeutige Korrekturen werden
+        # automatisch angewendet (Stil-Fälle nur im Report).
+        # BUGFIX 13.08.: fehlendes continue-on-error ließ diesen (rein
+        # informativen) Schritt bei verbleibenden Stil-Funden den GESAMTEN
+        # Workflow abbrechen – alle nachfolgenden Schritte (Cover-Check,
+        # Meta-Gate, A11y, IndexNow, Bestand-Gate) liefen dadurch nie.
+        continue-on-error: true
+        run: |
+          python3 scripts/grammar_check.py --fix | tee /tmp/grammar_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Lesbarkeits-Audit aller Artikel
+        # Wöchentliche Komplettprüfung der Lesbarkeit – meldet Artikel
+        # unter der Top-Level-Schwelle (Score < 75) im Log/Report.
+        # BUGFIX 13.08.: identisches Muster wie oben – rein informativer
+        # Report-Schritt ohne continue-on-error hätte die Kette abbrechen
+        # können.
+        continue-on-error: true
+        run: |
+          python3 scripts/readability_check.py | tee /tmp/read_audit.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Textverständnis-Audit (R2–R8 Komplettprüfung + R8-Anker-Selbstheilung)
+        # WÖCHENTLICHES VERSTÄNDNIS-AUDIT (Regelwerk: Verständnis-Guards R1–R10):
+        # Läuft als Komplett-Audit über ALLE Artikel – nicht nur über neue.
+        # - textverstaendnis_guard.py prüft R2 (Keyword-Dumps), R3 (Terminologie),
+        #   R4 (Satzanfangs-Echo), R5 (Absatzlänge), R7 (Intro-Formeln),
+        #   R8 (Ankertext-Ziel-Kohärenz + URL-Hygiene)
+        # - fix_r8_anker.py --fix heilt erkannte R8-Ankertext-Mismatches
+        #   deterministisch (Kanon). Neue Ankertext-Formulierungen müssen
+        #   mit dem Kanon in scripts/fix_r8_anker.py abgestimmt sein.
+        # Duplikat-Prüfung (R1) läuft separat (siehe duplikat_guard.py – Bestand).
+        id: verstaendnis
+        continue-on-error: true
+        run: |
+          python3 scripts/textverstaendnis_guard.py --selftest
+          python3 scripts/fix_r8_anker.py --selftest
+          python3 scripts/fix_r8_anker.py --fix || echo "⚠ R8-Anker: Restfunde siehe Report"
+          python3 scripts/textverstaendnis_guard.py
+          cat TEXTVERSTAENDNIS-REPORT.md | head -10
+          exit 0
+
+      - name: Textverständnis-Report und -Fixes committen
+        if: always()
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add TEXTVERSTAENDNIS-REPORT.md data/verstaendnis_history.jsonl 2>/dev/null || true
+          git add content/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Textverständnis: keine Änderungen."
+          else
+            git commit -m "seo: Textverständnis-Audit + Anker-Heilung (R2–R8 Premium)"
+            scripts/git_sync.sh --push-only
+          fi
+
+      - name: Affiliate-Link-Check (Deep-Links – VOLLAUTOMATISCH)
+        # Wöchentliche Komplettprüfung ALLER Posts + Pillar-Seiten:
+        # thematisch passende Deep-Links, korrekte Partner-IDs.
+        # --fix ersetzt generische CTA-Links durch passende Deep-Links.
+        # Exit 1 → Workflow-Abbruch (nichts Ungeprüftes geht live).
+        run: |
+          python3 scripts/affiliate_link_check.py --fix | tee /tmp/aff_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Affiliate-Profi-Check (E-E-A-T, Offenlegung, Schema, Dichte – selbstheilend)
+        # FrankAutoOps Profi-Level (12.08.): prüft Offenlegung (A1),
+        # Erfahrungs-Boxen/E-E-A-T (A2), interne Links (A3), Schema (A4),
+        # Affiliate-Dichte (A5), Trust-Box (A6), Autor (A7), CTA (A8).
+        # --fix heilt deterministisch (erfahrung/Pillar-Links/author);
+        # Selbsttest vor Fix-Aktionen (Sabotage-Schutz). Exit 1 → Alarm.
+        run: |
+          python3 scripts/affiliate_profi_check.py --fix | tee /tmp/profi_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Affiliate-Fixes committen
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add content/ 2>/dev/null || true
+          git add AFFILIATE-REPORT.md 2>/dev/null || true
+          git add .affiliate_report.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Keine Affiliate-Änderungen."
+          else
+            git commit -m "seo: Affiliate-Deep-Links korrigiert (vollautomatisch)"
+            scripts/git_sync.sh --push-only
+            echo "✅ Affiliate-Fixes gepusht"
+          fi
+
+      - name: Bestand-Gate (aktuelle Publish-Gate-Regeln auch auf Bestandsartikel anwenden)
+        # Frank-Beschluss 13.08., erweitert 14.08.: Die harte Publish-Gate-
+        # Prüfung (check_length.py + seo_audit.py + affiliate_profi_check.py
+        # + seit 14.08. affiliate_integrity_gate.py – strukturell intakte
+        # UND tatsächlich im gebauten HTML gerenderte CTA-Links), die neue
+        # Artikel bestehen müssen, galt bisher NUR für druckfrische
+        # Kandidaten (publish_gate.py verwirft sie sonst). Bestandsartikel
+        # wurden nie dagegen geprüft. bestand_gate.py schließt die Lücke,
+        # aber NICHT-DESTRUKTIV: heilt über die bestehenden Fixer
+        # (meta_optimizer/affiliate_profi_check --fix, sowie seit 14.08.
+        # affiliate_integrity_gate.py, das defekte CTA-Boxen komplett neu
+        # generiert statt zu flicken) und LÖSCHT NIE einen bereits
+        # veröffentlichten Artikel. Exit 1 nur, wenn nach dem
+        # Heilungsversuch etwas übrig bleibt, das echte Textarbeit braucht.
+        id: bestand
+        continue-on-error: true
+        run: |
+          hugo --minify > /dev/null 2>&1
+          python3 scripts/bestand_gate.py | tee /tmp/bestand_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Bestand-Gate-Fixes + Report committen
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          # BUGFIX (14.08.2026): 'git add' mit mehreren Pfaden bricht OHNE
+          # IRGENDETWAS zu stagen ab, wenn auch nur EIN Pfad fehlt (anders
+          # als bei .gitignore-Treffern) – deshalb pro Pfad ein eigener
+          # add-Aufruf statt eines gemeinsamen (siehe uniqueness-guard.yml).
+          git add content/ 2>/dev/null || true
+          git add BESTAND-REPORT.md 2>/dev/null || true
+          git add AFFILIATE-REPORT.md 2>/dev/null || true
+          git add AFFILIATE-INTEGRITY-REPORT.md 2>/dev/null || true
+          git add .affiliate_report.json 2>/dev/null || true
+          git add META-REPORT.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Bestand-Gate: keine Änderungen."
+          else
+            git commit -m "seo: Bestand-Gate – bestehende Artikel gegen aktuelle Publish-Regeln geheilt"
+            scripts/git_sync.sh --push-only
+          fi
+
+      - name: Issue bei nicht automatisch heilbaren Bestandsartikeln
+        # Greift NUR, wenn nach der Heilung noch etwas übrig ist (Exit 1).
+        # Betroffene Artikel werden NIE gelöscht (siehe bestand_gate.py) –
+        # nur gemeldet, damit ein Mensch echte Textarbeit leisten kann.
+        if: steps.bestand.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let details = 'Bestand-Gate hat Artikel gefunden, die die aktuellen Publish-Gate-Regeln nicht (mehr) erfüllen.';
+            try { details = fs.readFileSync('BESTAND-REPORT.md', 'utf-8'); } catch (e) {}
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '📋 Bestand-Gate: bestehende Artikel brauchen Aufmerksamkeit',
+              body: details + '\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow (Bestand-Gate). Betroffene Artikel wurden NICHT gelöscht.'
+            });
+            console.log('✅ Issue erstellt');
+
+      - name: Cover-Validierung (alle Varianten – VOLLAUTOMATISCH)
+        # Prüft für jeden Post, dass ALLE Cover-Varianten (620/720/avif/webp
+        # + responsive) existieren. --fix zieht fehlende Varianten automatisch
+        # nach (verhindert 404 im <picture>-srcset). Exit 1 → Workflow-Abbruch.
+        run: |
+          python3 scripts/check_covers.py --fix | tee /tmp/cov_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Cover-Fixes committen
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add static/images/covers/
+          if git diff --cached --quiet; then
+            echo "Keine Cover-Änderungen."
+          else
+            git commit -m "seo: Cover-Varianten nachgezogen (vollautomatisch)"
+            scripts/git_sync.sh --push-only
+            echo "✅ Cover-Fixes gepusht"
+          fi
+
+      - name: Meta-Qualitäts-Gate (Re-Audit + Report – VOLLAUTOMATISCH)
+        # Prüft nach der Optimierung ALLE Artikel erneut und erzeugt
+        # META-REPORT.md. Exit 0 = alles grün (kein Handlungsbedarf),
+        # Exit 1 = Probleme verbleiben → automatisches Issue unten.
+        # Damit entfällt die manuelle Sichtung vollständig.
+        id: meta_gate
+        continue-on-error: true
+        run: |
+          python3 scripts/meta_report.py | tee /tmp/meta_gate_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Textbatterie hinterher (Kanon-Ordnung nach KI-/SEO-Edits)
+        # Neuerung 11.08. (Audit-Punkt 2): Alle SEO-Editoren (KI-Keywords,
+        # Meta, interne Links) schreiben Text UND durchliefen bisher keine
+        # Sprach-Wachen -> mittwochs konnte sich falsch gesetzter Text
+        # einschleichen. Jetzt: die komplette Waechter-Sturmkette danach,
+        # selbstheilend, mit eigenem Commit (automatisch mit in Fresh-Sein).
+        run: |
+          python3 scripts/casing_guard.py --fix || echo "⚠ Casing (nicht kritisch)"
+          python3 scripts/dash_guard.py --fix || echo "⚠ Dash (nicht kritisch)"
+          python3 scripts/compound_guard.py --fix || echo "⚠ Compound (nicht kritisch)"
+          python3 scripts/unit_guard.py --fix || echo "⚠ Unit (nicht kritisch)"
+          python3 scripts/emoji_guard.py --fix || echo "⚠ Emoji (nicht kritisch)"
+          python3 scripts/lektor_guard.py --fix || echo "⚠ Lektor (nicht kritisch)"
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "Textbatterie: sauber."
+          else
+            git commit -m "chore: Textbatterie nach SEO-Edits (selbstheilend)"
+            scripts/git_sync.sh --push-only
+          fi
+
+      - name: lastmod für geänderte Artikel setzen (Frische-Signal)
+        # Artikel, die in diesem Lauf optimiert wurden (Meta, Rechtschreibung,
+        # Links), bekommen lastmod=heute → Hugo rendert article:modified_time
+        # + Sitemap-lastmod (Google erkennt das Update).
+        run: |
+          python3 scripts/set_lastmod.py --git-changed
+
+      - name: Meta-Report committen
+        # BUGFIX 13.08.: '.meta_report.json' steht bewusst in .gitignore
+        # (lokaler Cache, siehe .gitignore Zeile 19) – 'git add' auf einen
+        # per .gitignore ausgeschlossenen Pfad OHNE '-f' schlägt fehl und
+        # bricht den Schritt (bash -e) sofort ab. Da dieser Schritt gegen
+        # Ende der 30-teiligen Kette liegt, wurde er faktisch nie erreicht,
+        # solange frühere Schritte (Grammatik/Cover) die Kette vorher schon
+        # abbrachen – jetzt, wo die Kette weiter kommt, greift der Bug direkt.
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add META-REPORT.md
+          if git diff --cached --quiet; then
+            echo "Report unverändert"
+          else
+            git commit -m "seo: Meta-Report aktualisiert (vollautomatisch)"
+            scripts/git_sync.sh --push-only
+          fi
+
+      - name: Issue bei verbleibenden Meta-Problemen (kein manuelles Sichten nötig)
+        # Greift NUR wenn nach der automatischen Optimierung noch Probleme
+        # übrig sind (Exit 1). Erstellt ein GitHub-Issue mit allen Details –
+        # der wöchentliche Lauf ist damit zu 100 % autonom.
+        if: steps.meta_gate.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let details = 'Meta-Qualitäts-Gate hat verbleibende Probleme gefunden.';
+            try {
+              const j = JSON.parse(fs.readFileSync('.meta_report.json', 'utf-8'));
+              details = '### Verbleibende Probleme (' + j.critical.length + ')\n\n';
+              for (const c of j.critical) {
+                details += '- **' + c.title + '**: ' + c.issues.join('; ') + '\n';
+              }
+              details += '\nKennzahlen: Ø Score ' + j.avg_score + '/100 · Ø Titel ' + j.avg_title_len + ' Zeichen · Ø Description ' + j.avg_desc_len + ' Zeichen';
+            } catch (e) {
+              try { details = fs.readFileSync('/tmp/meta_gate_log.txt', 'utf-8'); } catch (e2) {}
+            }
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🔍 Meta-Daten: ' + (JSON.parse(fs.readFileSync('.meta_report.json','utf-8')).critical.length || '?') + ' Artikel brauchen Aufmerksamkeit',
+              body: details + '\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow (Meta-Qualitäts-Gate).\nDetails: siehe META-REPORT.md im Repo.'
+            });
+            console.log('✅ Issue erstellt');
+
+      - name: Barrierefreiheits-Audit (WCAG 2.1)
+        id: a11y
+        continue-on-error: true
+        run: |
+          python3 scripts/a11y_audit.py | tee /tmp/a11y_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Issue bei A11y-Problemen erstellen
+        # Lücke geschlossen: A11y-Fehler wurden bisher nur geloggt, nie
+        # gemeldet. Jetzt automatisches Issue – konsistent zum SEO-Audit.
+        if: steps.a11y.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let details = 'Barrierefreiheits-Audit hat Probleme gefunden.';
+            try {
+              details = fs.readFileSync('/tmp/a11y_log.txt', 'utf-8');
+            } catch (e) {}
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '♿ A11y-Audit: Barrierefreiheits-Probleme gefunden',
+              body: '```\n' + details + '\n```\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow.'
+            });
+            console.log('✅ Issue erstellt');
+
+      - name: IndexNow-Indexierung (neue Artikel einreichen)
+        timeout-minutes: 10
+        run: python3 scripts/submit_indexnow.py
+
+      - name: Bing-Status committen
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen"
+          else
+            git commit -m "seo: Bing-Indexierungs-Status aktualisiert"
+            scripts/git_sync.sh --push-only
+          fi
+
+      - name: Issue bei kritischen SEO-Problemen erstellen
+        if: steps.audit.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let details = 'SEO-Audit hat kritische Probleme gefunden.';
+            try {
+              details = fs.readFileSync('/tmp/seo_audit_log.txt', 'utf-8');
+            } catch (e) {}
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🔍 SEO-Audit: Optimierungsbedarf gefunden',
+              body: '```\n' + details + '\n```\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow.'
+            });
+            console.log('✅ Issue erstellt');
