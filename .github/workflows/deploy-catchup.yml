@@ -82,6 +82,4 @@ jobs:
               owner: context.repo.owner, repo: context.repo.repo,
               workflow_id: 'deploy.yml', ref: 'main',
             });
-            console.log('✅ Deploy-Workflow ausgelöst.');
-
-bro
+            console.log('✅ Deploy-Workflow ausgelöst.')
