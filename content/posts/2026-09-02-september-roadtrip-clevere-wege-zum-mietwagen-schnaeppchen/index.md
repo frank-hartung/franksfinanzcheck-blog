@@ -11,7 +11,7 @@ pillar: "mietwagen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["mietwagen schnäppchen", "mietwagen tagespreis", "günstig auto mieten", "september roadtrip", "September-Roadtrip", "Mietwagen-Schnäppchen", "mietwagen buchen tipps"]
+keywords: ["mietwagen schnäppchen", "mietwagen tagespreis", "günstig auto mieten", "september roadtrip", "September-Roadtrip", "Mietwagen-Schnäppchen", "mietwagen buchen tipps", "Mietwagen buchen"]
 pinwand: Günstig reisen | Reisebudget & Mietwagen
 pin_title: "Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen"
 pin_description: "*Werbung | Goldener September auf Reisen: Wer jetzt den Mietwagen bucht, zahlt oft deutlich weniger als in der Hochsaison – bei frei bleibender Stornierung. Vergleiche Tagespreise, filtere nach Wunschausstattung und sichere dir das Best-Price-Fenster. Jetzt vergleichen!"

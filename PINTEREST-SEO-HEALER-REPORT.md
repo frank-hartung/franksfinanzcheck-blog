@@ -1,11 +1,11 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-02 12:41 UTC · **Modus:** CHECK
+**Stand:** 2026-09-02 13:01 UTC · **Modus:** FIX
 
 - Artikel: **26**
-- Geheilt: **0**
+- Geheilt: **2**
 - Offene Issues: **0**
-- Covers: nicht angefasst
+- Covers: 1 Titel-Stale + fehlende nachgezogen
 
 ## Kriterien 2026 (Agentur-Standard)
 
@@ -46,6 +46,9 @@
 | ✅ | `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | — |
 | ✅ | `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` | — |
 | ✅ | `2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen` | — |
+
+## Selbstheilung (diese Runde)
+
 
 ---
 *Erzeugt von `scripts/pinterest_seo_healer.py` – Teil der FrankAutoOps-Selbstheilung.*

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-09-02T08:42:30+00:00",
+  "generatedAt": "2026-09-02T13:01:10+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -15,7 +15,7 @@
   },
   "pages": {
     "/": {
-      "image": "images/covers/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause.jpg",
+      "image": "images/covers/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen.jpg",
       "type": "home",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -31,7 +31,7 @@
       "decoding": "async"
     },
     "/posts/": {
-      "image": "images/covers/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause.jpg",
+      "image": "images/covers/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen.jpg",
       "type": "section",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -398,6 +398,22 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
+    "/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/": {
+      "image": "images/covers/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
     "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/": {
       "image": "images/covers/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen.jpg",
       "type": "single",
@@ -416,6 +432,22 @@
     },
     "/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/": {
       "image": "images/covers/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/": {
+      "image": "images/covers/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
