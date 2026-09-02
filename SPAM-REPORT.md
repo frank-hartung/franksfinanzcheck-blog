@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-02 04:06 UTC · Modus: FIX
+**Stand:** 2026-09-02 04:35 UTC · Modus: FIX
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
@@ -11,7 +11,7 @@
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
-- ℹ️ [F-OK] Feed sauber: 25 Items, Kadenz-konform, Cover vorhanden, keine Duplikate
+- ℹ️ [F-OK] Feed sauber: 24 Items, Kadenz-konform, Cover vorhanden, keine Duplikate
 
 ## C: Pinterest-Bulk-CSV (C1–C8)
 
@@ -20,7 +20,6 @@
 ## A: Pinterest-API (A1–A4)
 
 - ℹ️ [A1] Rate-OK (0/10 Std., 0/40 Tag)
-- ℹ️ [A2] kein Token – Pre-Create-Checks (A2/A4) laufen library-seitig in der Pinterest-Engine (spam_guard.api_check_pin / api_record_created)
 
 ## Fazit
 
