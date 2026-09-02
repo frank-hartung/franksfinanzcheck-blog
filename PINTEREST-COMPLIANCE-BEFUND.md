@@ -1,65 +1,101 @@
 # 📌 Pinterest-Compliance-Befund (FranksFinanzcheck)
 
-**Stand:** 2026-09-02 · **Anlass:** Spam-Sperre der Domain
-`franksfinanzcheck.de` · **Zweck:** Ursachenanalyse und Nachweis der Behebung
+**Stand:** 2026-09-02 · **Sperrdatum:** 15.08.2026
+**Konto:** de.pinterest.com/franksfinanzcheck · **Zweck:** Ursachenanalyse,
+Selbstauskunft und Nachweis der getroffenen Maßnahmen
+
+> **Hinweis zur Entstehung:** Alle Pins bis zum Sperrdatum wurden **manuell**
+> erstellt. Es war zu keinem Zeitpunkt ein Automatisierungs- oder
+> Scheduling-Tool im Einsatz. Über die Pinterest-API wurde nie ein Pin
+> erzeugt.
 
 ---
 
-## 1. Festgestellte Ursache
+## 1. Rekonstruktion des Ablaufs
 
-Die Pin-Planung verteilte **73 Pins auf nur 29 Ziel-URLs**. Ein Artikel
-erhielt 9 Pins; vier Ziele bekamen zwei Pins **am selben Tag**. Dieses
-Verhältnis erzeugt ein Repeat-Pin-/Link-Spam-Signal.
+| Zeitpunkt | Ereignis |
+|---|---|
+| 10.08.2026 | Start des Blogs, erste 2 Artikel veröffentlicht |
+| 10.–14.08. | ca. **88 Finanz-Pins** manuell erstellt |
+| danach | ca. **87 Pins** für die **M&M'S Halloween Countdown Challenge** |
+| **15.08.2026** | **Sperre des Kontos** |
 
-Das war ein Planungsfehler, kein Täuschungsversuch: Die Absicht war,
-verschiedene inhaltliche Blickwinkel eines Artikels zu zeigen. Uns ist klar,
-dass mehrere Pins auf dieselbe URL unabhängig von der Absicht als Spam
-gewertet werden.
+**Gesamt: 175 Pins in 6 Tagen** auf einem neu angelegten Konto.
 
-## 2. Was NICHT die Ursache war (geprüft und belegt)
+## 2. Selbstauskunft: Was aus unserer Sicht die Sperre ausgelöst hat
+
+Wir haben unser Vorgehen geprüft und sehen zwei Fehler auf unserer Seite:
+
+**a) Zu hohes Pin-Volumen in zu kurzer Zeit (Hauptursache).**
+175 Pins in 6 Tagen entsprechen ~29 Pins/Tag auf einem Konto ohne jede
+Historie. Uns ist heute klar, dass ein derart sprunghafter Anstieg von
+null auf hohes Volumen wie automatisierte Aktivität wirken muss – auch
+wenn jeder einzelne Pin von Hand erstellt wurde.
+
+**b) Zu viele Pins auf zu wenige Zielseiten (Nebenursache).**
+Die 88 Finanz-Pins verteilten sich auf lediglich **13 Zielseiten**
+(7 Artikel + 6 Themenseiten), also durchschnittlich **6,8 Pins pro Ziel**.
+Die Absicht war, verschiedene inhaltliche Blickwinkel desselben Ratgebers
+zu zeigen. Uns ist inzwischen bewusst, dass mehrere Pins auf dieselbe URL
+unabhängig von der Absicht als Repeat-Pinning gewertet werden.
+
+**Zur zeitlichen Abfolge:** Die 87 Challenge-Pins entstanden **nach** den
+Finanz-Pins. Das Konto trug zu diesem Zeitpunkt bereits die erhöhte
+Risikolast aus (b). Der Challenge-Block dürfte damit der auslösende
+Moment gewesen sein – nach unserem Verständnis nicht wegen seines
+Inhalts, sondern wegen der zusätzlichen Volumenspitze.
+
+## 3. Zu den 87 Challenge-Pins
+
+Diese Pins entstanden im Rahmen der **M&M'S Halloween Countdown
+Challenge**, zu der Pinterest uns **offiziell eingeladen** hat. Das
+verwendete Bildmaterial stammt aus dieser Aktion. Sie sind damit weder
+themenfremd im Sinne einer Zweckentfremdung des Kontos noch eine
+Markenrechtsverletzung.
+
+Wir bitten ausdrücklich darum, diese Pins bei der Prüfung als das zu
+werten, was sie sind: Teilnahme an einem von Pinterest selbst
+initiierten Partnerprogramm.
+
+## 4. Was nachweislich NICHT vorlag
 
 | Prüfpunkt | Befund |
 |---|---|
-| Werbekennzeichnung | **25/25** Pin-Texte mit `*Werbung`-Präfix |
+| Automatisierung / Bots | **keine** – 0 Pins über API, kein Scheduling-Tool |
+| Werbekennzeichnung | **25/25** Pin-Texte mit `*Werbung`-Präfix (UWG-konform) |
 | Doppelte Pin-Texte | **0** Near-Duplicates (6-Wort-Shingle, Jaccard ≥ 0,25) |
-| Doppelte Pin-Bilder | **0** exakte Cover-Duplikate bei 26 Bildern |
-| Publikations-Kadenz | nur Fri, Mon, Wed, max. 3 Artikel/Tag |
-| Affiliate-Weiterleitungen | `/go/`-Gateway mit `noindex,nofollow,noarchive`, in `robots.txt` gesperrt |
-| Cloaking | keins – Pins verlinken **Artikelseiten**, nie Affiliate-URLs |
-| API-Nutzung | **0** Pins je über die API erstellt (Registry leer, Rate 0/40 Tag) |
+| Doppelte Pin-Bilder | **0** exakte Duplikate bei 26 Cover-Bildern |
+| Irreführende Weiterleitungen | **keine** – kein Pin zeigt auf eine Redirect-/Affiliate-URL |
+| Cloaking | **keins** – Pins verlinken ausschließlich eigene Artikelseiten |
+| Affiliate-Gateway | `/go/` mit `noindex,nofollow,noarchive`, in `robots.txt` gesperrt |
+| Publikations-Kadenz Blog | nur Fri, Mon, Wed, max. 3 Artikel/Tag |
 
-## 3. Umgesetzte Maßnahmen
+## 5. Bereits umgesetzte Maßnahmen
 
-**Technisches Gate (nicht umgehbar):** Zwei neue Regeln im Plan-Guard, die
-vor **jedem** Pin-Lauf greifen:
+**Technische Begrenzung (nicht umgehbar).** Wir haben ein Gate
+eingebaut, das vor jedem künftigen Pin-Vorgang greift:
 
-- **P6 – max. 3 Pins pro Ziel-URL** (vorher: bis zu 9)
-- **P7 – min. 7 Tage Abstand** zwischen zwei Pins auf dieselbe URL
-  (vorher: bis zu 0 Tage, also gleicher Tag)
+- **max. 3 Pins pro Ziel-URL** (vorher bis zu 9 geplant)
+- **min. 7 Tage Abstand** zwischen zwei Pins auf dieselbe URL
 
-UTM-Parameter zählen dabei nicht als neues Ziel.
+Unsere Pin-Planung wurde entsprechend bereinigt: von 73 auf **48
+Pins**, 25 Pins zurückgestellt. Interne Mengenvorgaben, die nur durch
+Mehrfach-Pins erreichbar waren, wurden abgeschafft – zusätzliche Pins
+entstehen künftig ausschließlich durch neue Artikel.
 
-**Ergebnis der Bereinigung:**
+**Volumen-Selbstverpflichtung.** Nach einer Reaktivierung werden wir das
+Pin-Volumen dauerhaft auf ein moderates Maß begrenzen und schrittweise
+aufbauen, statt erneut in kurzer Zeit viele Pins zu erstellen.
 
-| Kennzahl | vorher | nachher |
-|---|---|---|
-| Pins im Plan | 73 | **48** |
-| Ziel-URLs | 29 | 29 |
-| Max. Pins pro Ziel | 9 | **3** |
-| Kleinster Abstand | 0 Tage | **7 Tage** |
-| Zurückgestellte Pins | – | 25 |
+## 6. Bitte
 
-**Mengenvorgaben korrigiert:** Die interne Zielmenge (≥60 Pins) war nur durch
-Mehrfach-Pins erreichbar und setzte damit einen Fehlanreiz. Sie wurde auf ≥40
-gesenkt. Zusätzliche Pins entstehen künftig durch neue Artikel.
+Wir bitten um erneute Prüfung des Kontos. Falls eine Reaktivierung nicht
+in Betracht kommt, bitten wir um einen konkreten Hinweis, welche Pins
+oder welches Verhalten beanstandet wurden – wir möchten den Fehler
+verstehen und dauerhaft abstellen.
 
-**Absicherung:** 5 eingefrorene Testfälle verhindern, dass die Regel je
-wieder aufgeweicht wird. Das Gate läuft automatisch vor jedem Pin-Lauf.
+---
 
-## 4. Laufender Betrieb
-
-Die automatische Pin-Erstellung ist bis zur Klärung ausgesetzt. Wir bitten um
-Prüfung und stehen für Rückfragen bereit.
-
-_Erzeugt aus dem Repository-Stand; alle Zahlen sind reproduzierbar über
-`scripts/pinterest_plan_guard.py` und `scripts/spam_guard.py`._
+_Die technischen Kennzahlen in Abschnitt 4 sind aus dem Repository
+reproduzierbar (`scripts/spam_guard.py`, `scripts/pinterest_plan_guard.py`).
+Die Pin-Zahlen in Abschnitt 1–3 beruhen auf Angaben des Kontoinhabers._

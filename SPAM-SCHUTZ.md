@@ -100,17 +100,30 @@ python3 scripts/spam_guard.py --selftest     # Exit 2 = nicht lauffähig
 
 ## 6. Regel P6/P7 – Repeat-Pin-Schutz (02.09.2026, nach Pinterest-Sperre)
 
-**Anlass:** Pinterest hat die Domain wegen Spam gesperrt. Der Auslöser lag
-nicht im Blog, sondern in `data/pinterest_plan.yaml`: **73 Pins verteilten
-sich auf nur 29 Ziel-URLs.** Ein einzelner Artikel bekam 9 Pins, und vier
-Ziele erhielten sogar **zwei Pins am selben Tag**. Genau dieses Muster –
-viele Pins, wenige echte Ziele – wertet Pinterest als Link-Spam.
+**Anlass:** Pinterest hat das Konto am **15.08.2026** gesperrt.
 
-Erschwerend: Die Pin-Texte waren alle einzigartig formuliert und trugen
-korrekt `*Werbung`. Das entlastet nicht, es sieht nach bewusster Umgehung
-aus. Die Cross-Channel-Registry (Abschnitt 3) konnte nicht greifen, weil sie
-erst beim POSTEN prüft – der RSS-Auto-Publish umgeht sie vollständig, da
-Pinterest den Feed selbst zieht.
+**Wichtig zur Einordnung – die Sperre kam NICHT aus diesem Repository.**
+Am 15.08. existierte weder der RSS-Auto-Publish (aktiviert 20.08.) noch die
+Pinterest-Strategie (25.08.) noch `data/pinterest_plan.yaml`. Über die API
+wurde nie ein Pin erzeugt (`pin_history.jsonl` leer, kein Artikel trägt
+`pinned: true`). Alle Pins bis zur Sperre entstanden **manuell**.
+
+**Tatsächliche Ursache (Selbstauskunft des Kontoinhabers):** 175 Pins in
+6 Tagen auf einem brandneuen Konto (~29 Pins/Tag). Davon 88 Finanz-Pins auf
+nur 13 Zielseiten (6,8 Pins/Ziel) und 87 Pins für die M&M'S Halloween
+Countdown Challenge, zu der Pinterest offiziell eingeladen hatte. Die
+Challenge-Pins entstanden NACH den Finanz-Pins – das Konto trug also bereits
+die Risikolast aus dem Repeat-Muster, als die Volumenspitze dazukam.
+
+**Warum die Regel trotzdem hier steht:** `pinterest_plan.yaml` hätte das
+Repeat-Muster nach einer Reaktivierung **automatisiert wiederholt** – der
+Plan sah bis zu 9 Pins auf denselben Artikel vor, vier Ziele sogar zweimal
+am selben Tag. P6/P7 verhindern, dass derselbe Fehler ein zweites Mal
+passiert, diesmal maschinell.
+
+Ergänzend: Die Cross-Channel-Registry (Abschnitt 3) hätte hier ohnehin nicht
+gegriffen – sie prüft erst beim POSTEN über die API. Manuelles Pinnen und der
+RSS-Auto-Publish umgehen sie vollständig.
 
 | Regel | Grenze | Prüfung |
 |---|---|---|
@@ -126,7 +139,7 @@ bewertet das Ziel, nicht den Tracking-Parameter.
 Ziel der früheste Pin, danach nur, wer den Abstand wahrt. Ein geparkter Pin
 darf zurück in den Plan, sobald er ein **eigenes Ziel** hat (neuer Artikel).
 
-**Erster Lauf:** 73 → 48 Pins im Plan, 25 geparkt. Verteilung danach: max.
+**Erster Lauf:** 73 → 48 Pins im Plan, 25 geparkt (praeventiv – der Plan war zum Sperrzeitpunkt noch nicht in Benutzung). Verteilung danach: max.
 3 Pins/Ziel, kleinster Abstand 7 Tage. Summe 48 + 25 = 73 (nichts verloren).
 
 **Folgeänderung P4/P2:** Die Mindestmengen (P4 ≥60 Pins, P2 ≥5 Pins/Board)
