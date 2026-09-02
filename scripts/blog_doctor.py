@@ -67,6 +67,7 @@ KETTE = [
     ("content_audit.py",      ["--fix"],                "B-Semantik", "Content-Auditor C1-C6: Duenn, Struktur, Platzhalter (12.08.)"),
     ("length_guard.py",       ["--fix"],                "B-Semantik", "Premium-Zeichenlänge Google+Pinterest (SSOT length_policy.py)"),
     ("fazit_schmiede.py",     ["--fix"],                "B-Semantik", "Fazit- & FAQ-Schmiede mit Selbstheilung"),
+    ("redaktions_standard.py",["--fix"],                "B-Semantik", "Redaktions-Standard RS1-RS8 (Capital/WiWo/ZEIT, 02.09.)"),
     ("compound_guard.py",     ["--fix"],                "B-Semantik", "Komposita SEO-Falle"),
     ("math_guard.py",         ["--fix"],                "B-Semantik", "Zahlenbeweis M1-M2"),
     ("affiliate_shield.py",   ["--fix"],                "C-Money", "Auto-Deep + Gateways"),

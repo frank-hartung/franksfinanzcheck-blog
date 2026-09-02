@@ -35,8 +35,9 @@ KI-Artikel (engine_generate.py)
    ├─► 🔒 brand_guard.py        MARKEN-LOCK (unantastbar, siehe unten)
    ├─► 📏📝 length_guard.py     Längen-Korridore + KI-Selbstheilung
    │
-   ├─► profi_text_check.py      Stil-Gate (Schwelle)
-   ├─► readability_check.py     Lesbarkeits-Gate (> 75)
+  ├─► profi_text_check.py      Stil-Gate (Schwelle)
+  ├─► readability_check.py     Lesbarkeits-Gate (> 75)
+  ├─► 📰 redaktions_standard.py  Capital/WiWo/ZEIT-Standard RS1–RS8 (02.09.2026)
    ├─► check_titles.py          Titel-Gate
    ├─► pinterest_seo_healer.py  Pinterest+Google SEO (Titel/Cover/Pin/KW)*
    ├─► generate_covers.py       Titelbilder (Manifest-selbstheilend*)
@@ -91,6 +92,41 @@ NICHTS wird geparkt, die Guards selbst gelten als fehlerhaft.
 `textverstaendnis_guard` laufen als Komplett-Audit über alle Artikel;
 `absorb_whitelist.py` senkt das Rechtschreib-Rauschen (Wörter, die in ≥ 3
 Artikeln als „unbekannt“ auftauchen, werden in die Whitelist übernommen).
+
+---
+
+## 📰 Redaktions-Standard RS1–RS8 (Capital · WirtschaftsWoche · DIE ZEIT, 02.09.2026)
+
+Dauerhafter Auftrag: **bestehende und zukünftige** Beiträge auf das
+Qualitätsniveau der Online-Redaktionen von Capital, WirtschaftsWoche und
+dem Geld-Teil von DIE ZEIT heben. Recherche-Befunde, Methoden-Übertragung
+und alle Quellen: `REDAKTIONS-STANDARD-CAPITAL-WIWO-ZEIT.md` (Repo-Root).
+Wache: `scripts/redaktions_standard.py`.
+
+| Regel | Vorbild-Methode | Definition & Schwelle | Verhalten |
+|---|---|---|---|
+| RS1 | ZEIT-„Artikelzusammenfassung“ | Pflicht-Modul „**Das Wichtigste in Kürze**“ mit ≥ 3 Bullet-Punkten nach der Einleitung | hart bei neuen Artikeln (`--gate`); KI-Heilung fügt die Box ein |
+| RS2 | Capital-erklärt-Fragenkatalog | ≥ 2 H2-Überschriften in Frageform („Warum…?“, „Was…?“) mit direkter Antwort | hart; KI formuliert vage H2 um (H2-Anzahl bleibt exakt gleich) |
+| RS3 | Capital-Faustregeln | ≥ 1 markierte Faustregel („**Faustregel:** …“) | hart; KI ergänzt |
+| RS4 | ZEIT-Tipplisten / Capital-Dossiers | ≥ 1 nummerierte Schrittfolge (≥ 3 Schritte) ODER ≥ 2 „Schritt“-Überschriften | hart; KI ergänzt |
+| RS5 | WiWo-Verifikation („Informationen verifizieren und gegenprüfen“) | Sätze mit harten Zahlen (€/%/3+-stellig) ohne Einordnung (ca./rund/laut/Stand/Spanne/Rechenbeispiel) | weich (Report); `--ai` formuliert ehrlich um |
+| RS6 | WiWo-Quellen-Regel + Pressekodex | Phantom-Quellen („laut einer Studie“, „Experten sagen“ …) – ein Bot darf keine Belege erfinden | weich (Report); `--ai` ersetzt durch belegfreies Allgemeinwissen |
+| RS7 | ZEIT-/Capital-Byline, E-E-A-T | Frontmatter `author:` UND `erfahrung:` vorhanden | hart; deterministische Selbstheilung (Standard-Erfahrungstext) |
+| RS8 | WiWo-Korrektur-Transparenz („Wir korrigieren transparent Fehler“) | `korrektur:`-Feld → Korrektur-Box im Layout (amber) + Log `data/korrekturen.yaml` | dauerhaft aktiv; `--register-korrektur --file X --grund "…"` |
+
+**Sabotage-Schutz:** `--selftest` mit 22 eingefrorenen Fällen (Exit 2 =
+CI-Abbruch) prüft alle Detektoren UND die Heil-Verifikation (Linkziele
+byte-identisch, H2-Anzahl stabil, Länge ≥ 90 %, Frontmatter unangetastet,
+Idempotenz). **Circuit-Breaker:** > 3 neue Artikel mit harten Funden →
+NICHTS wird geparkt (Detektoren gelten als fehlerhaft).
+
+**Verdrahtung:** Content-Engine v2 Phase 2 (`--fix --ai --new-only` +
+`--gate --new-only` = Heilung bei der Geburt, harte Funde → Entwurf) ·
+Blog-Doktor-Kette (täglich, deterministisch) · SEO-Weekly
+(`--fix --ai --backlog 3` = Bestands-Retrofit) · Generation-Prompts in
+`generate_drafts.py` (Pflicht-Module + Zahlen-/Quellen-Regeln stehen
+direkt im Prompt). Report: `REDAKTIONS-STANDARD-REPORT.md`,
+Historie: `data/redaktions_standard_history.jsonl`.
 
 ---
 
@@ -399,6 +435,32 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **02.09.2026:** REDAKTIONS-STANDARD Capital · WirtschaftsWoche · DIE ZEIT
+  (Frank-Auftrag: „Blogautomatik dauerhaft auf deren Niveau“). Recherche
+  der Online-Methoden der drei Redaktionen
+  (`REDAKTIONS-STANDARD-CAPITAL-WIWO-ZEIT.md`, Quellen verlinkt) und
+  Übertragung in 8 automatisch geprüfte Regeln RS1–RS8 in der neuen
+  Wache `scripts/redaktions_standard.py`:
+  RS1 „Das Wichtigste in Kürze“-Box (ZEIT-Artikelzusammenfassung),
+  RS2 ≥ 2 Frage-H2 (Capital-erklärt), RS3 Faustregel (Capital),
+  RS4 nummerierte Schrittfolge (ZEIT-Tipplisten/Dossiers),
+  RS5 Zahlen-Ehrlichkeit – harte Zahlen nur mit Einordnung
+  (WiWo-Verifikation), RS6 keine Phantom-Quellen „laut einer Studie“
+  (WiWo/Pressekodex), RS7 Byline+erfahrung (E-E-A-T),
+  RS8 Korrektur-Transparenz (Korrektur-Box im Layout + Log
+  `data/korrekturen.yaml`, WiWo-Korrektur-Prinzip). Sabotage-Schutz:
+  22 eingefrorene Selbsttest-Fälle inkl. Heil-Verifikation
+  (Linkziele byte-identisch, H2-Anzahl stabil, Länge ≥ 90 %,
+  Frontmatter unangetastet, Idempotenz); Circuit-Breaker bei > 3
+  harten Funden. Verdrahtung dauerhaft: Content-Engine v2 Phase 2
+  (`--fix --ai --new-only` + `--gate --new-only` → harte Funde =
+  Entwurf statt Publikation), Blog-Doktor-Kette (täglich), SEO-Weekly
+  (`--fix --ai --backlog 3` = Bestands-Retrofit), Generation-Prompts
+  in `generate_drafts.py` (Pflicht-Module + Zahlen-/Quellen-Regeln).
+  Report: `REDAKTIONS-STANDARD-REPORT.md`, Historie:
+  `data/redaktions_standard_history.jsonl`. Erst-Befund Bestand:
+  25/25 Artikeln fehlen Kürze-Box/Faustregel u. a. – der Retrofit hebt
+  die Flotte wöchentlich (Backlog 3) auf Standard.
 - **31.08.2026 (3):** PARK-ZUSTAND digitalisiert – Root-Cause der
   Kadenz-Nebenwirkungen (Folge #129, Premium-Level). Vorher war
   `draft: true` ohne `cadence_wait` MEHRDEUTIG: manueller Entwurf, bewusste

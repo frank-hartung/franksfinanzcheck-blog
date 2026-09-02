@@ -1,6 +1,6 @@
 {
-  "signed_at": "2026-09-02T10:15:10.270360+00:00",
-  "head": "aae5bbd",
+  "signed_at": "2026-09-02T21:05:17.164612+00:00",
+  "head": "4a3b936",
   "files": {
     "assets/css/extended/custom.css": "aff792a93c072ab34296406ce97e5d46b36dd877e3d50b89972ee07ced06964b",
     "data/brand_lock.yaml": "87d624e2b57a6209082c5603d08d2349f70099e77101380c3b1a10394b430c4c",
@@ -23,7 +23,7 @@
     "scripts/affiliate_integrity_gate.py": "666804c6adbd8f4ecae5d5d27a801a4ac28695f914d98dfb52cd13ea7dcf8d22",
     "scripts/affiliate_marketer.py": "f7941fe3f1c4e22451958d49636265d75b3d12b8ecdab837044efd6d44cd85ef",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
-    "scripts/blog_doctor.py": "f237a8859248545ea9e92ee7894aad2cf70d8c8c742323d835fadeb5db0ebd3d",
+    "scripts/blog_doctor.py": "69ac5a0b0d5959eff4dcfa66929395f2c06ec47b4eb428562bea2309165d05b4",
     "scripts/brand_guard.py": "e668be495b16d13ee9c13806d6281b08a862cc075888f3abf418a56b6bc92bed",
     "scripts/check24_links.yaml": "688db17156e445678c31de4bddb95338516afe21a64bf6ad1e926b2329add53a",
     "scripts/check_covers.py": "c888f5b301eba6e891ec719296ced218f643f020d1a2ec86b060c1d77cf2b2da",
@@ -35,6 +35,7 @@
     "scripts/lektor_guard.py": "695a369e7b0aa7f04c8cd5903bd2d5519ccdd34a036542e9a711b96926c0d895",
     "scripts/link_density_guard.py": "296130444e6e875c388b6e657bad26821d9b20971931ea43f672189a7f1044ca",
     "scripts/plagiat_guard.py": "b643cdc926efb5e7dd08e0e81d6a41d72a46b8571aece120dde73e86cbeb721f",
+    "scripts/redaktions_standard.py": "3e4fa9146dbe42cbc9c103bde6797e33b23d3d0c3075e593bf85b8a92bcd9c98",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt": "290e3e94c46b151d4923ce8694d82fc1dc0f0947d62583a781859e712a8afbb2",
     "static/apple-touch-icon.png": "3c2d0bd63fb48baa1e9a47cfb2494d64b5c136be4ed9e621973ad2a54fac4332",

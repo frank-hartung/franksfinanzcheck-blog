@@ -257,6 +257,41 @@ erscheinen erst nach manueller Freigabe. Der wöchentliche Lauf
 
 ---
 
+## 📰 Redaktions-Standard (seit 02.09.2026, Capital · WirtschaftsWoche · DIE ZEIT)
+
+Recherche der Online-Methoden von **Capital**, **WirtschaftsWoche** und dem
+**Geld-Teil der ZEIT** (Quellen + Methoden-Übertragung:
+`REDAKTIONS-STANDARD-CAPITAL-WIWO-ZEIT.md`) und dauerhafte Umsetzung in der
+Wache `scripts/redaktions_standard.py` – gilt für **bestehende und
+zukünftige** Beiträge:
+
+| Regel | Vorbild | Automatik |
+|---|---|---|
+| RS1 | ZEIT-Artikelzusammenfassung | „Das Wichtigste in Kürze“-Box (≥ 3 Bullets) → Pflicht + KI-Heilung |
+| RS2 | Capital-erklärt | ≥ 2 Frage-Überschriften → Pflicht + KI-Umformulierung |
+| RS3 | Capital-Faustregeln | ≥ 1 markierte „Faustregel: …“ → Pflicht + KI-Ergänzung |
+| RS4 | ZEIT-Tipplisten/Dossiers | ≥ 1 nummerierte Schrittfolge (3–6 Schritte) → Pflicht + KI-Ergänzung |
+| RS5 | WiWo-Verifikation | Harte Zahlen nur mit Einordnung (ca./rund/Spanne/Rechenbeispiel) → Report + KI |
+| RS6 | WiWo/Pressekodex | Keine Phantom-Quellen („laut einer Studie“) → Report + KI |
+| RS7 | Byline/E-E-A-T | `author:` + `erfahrung:` im Frontmatter → deterministische Selbstheilung |
+| RS8 | WiWo-Korrekturen | `korrektur:`-Feld → Korrektur-Box im Artikel + `data/korrekturen.yaml` |
+
+**Verdrahtung:** Content-Engine v2 Phase 2 (Heilung + Gate bei der Geburt;
+harte Funde → Entwurf), Blog-Doktor-Kette (täglich), SEO-Weekly
+(Bestands-Retrofit, Backlog 3/Woche), Generation-Prompts (Pflicht-Module
+stehen direkt im KI-Prompt). Report: `REDAKTIONS-STANDARD-REPORT.md`.
+
+**Schnell-Checks:**
+
+```bash
+python3 scripts/redaktions_standard.py --selftest   # 22 Fälle (Sabotage-Schutz)
+python3 scripts/redaktions_standard.py              # Flotten-Audit RS1–RS8
+python3 scripts/redaktions_standard.py --fix --ai --backlog 3   # Bestand heben
+python3 scripts/redaktions_standard.py --register-korrektur --file content/posts/<slug>/index.md --grund "Tippfehler korrigiert"
+```
+
+---
+
 ## 🗞️ Premium-Governance (Chefredakteur-Cockpit, seit 01.09.2026)
 
 Die Blogautomatik prüfte schon viel — jetzt **steuert** sie auch. Der Workflow **„Premium-Governance"** (Mo 07:15 MESZ) bündelt vier Wachen, die zuvor fehlten, auf **eine** Ampel:
