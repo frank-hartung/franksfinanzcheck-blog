@@ -1,16 +1,18 @@
 diff --git a/.github/workflows/pinterest-ai.yml b/.github/workflows/pinterest-ai.yml
-index 58c6cec..b81c903 100644
+index 58c6cec..dab026e 100644
 --- a/.github/workflows/pinterest-ai.yml
 +++ b/.github/workflows/pinterest-ai.yml
-@@ -56,6 +56,15 @@ jobs:
+@@ -56,6 +56,17 @@ jobs:
          run: |
            echo "bereit=true" >> "$GITHUB_OUTPUT"
  
-+      # REPEAT-PIN-GATE (02.09.2026, nach Pinterest-Spam-Sperre):
-+      # P6/P7 pruefen VOR jedem Pin-Lauf, dass kein Ziel mehr als 3 Pins bekommt
-+      # und zwischen zwei Pins auf dieselbe URL >=7 Tage liegen. Verstoesse
-+      # werden geparkt (data/pinterest_plan_parked.yaml), nicht geloescht.
-+      - name: Repeat-Pin-Gate (Plan-Guard P1-P7)
++      # ZIEL-LINK- UND REPEAT-PIN-GATE (02.09.2026, nach der Pinterest-Sperre):
++      # P8 prueft, dass jeder Pin eine konkrete eigene Artikel-URL verlinkt
++      # (nie das Pinterest-Profil, nie die nackte Startseite, immer https) -
++      # das war der Sperrgrund vom 15.08. P6/P7 begrenzen zusaetzlich auf
++      # max. 3 Pins je Ziel und >=7 Tage Abstand. P8-Befunde stoppen den Lauf
++      # hart, weil kein Skript erraten kann, welcher Artikel gemeint war.
++      - name: Ziel-Link- und Repeat-Pin-Gate (Plan-Guard P1-P8)
 +        run: |
 +          python3 scripts/pinterest_plan_guard.py --selftest
 +          python3 scripts/pinterest_plan_guard.py --fix
@@ -18,7 +20,7 @@ index 58c6cec..b81c903 100644
        - name: Pinterest-Engine ausführen (Posten oder Queue)
          if: steps.bereit.outputs.bereit == 'true'
          env:
-@@ -74,6 +83,7 @@ jobs:
+@@ -74,6 +85,7 @@ jobs:
            # pinterest_tokens.enc ist erst da, wenn du den OAuth-Handschlag
            # gemacht hast – ohne Datei trotzdem committen (12.08. gehaertet).
            git add PIN-STATUS.md data/pin_queue.yaml content/posts/ 2>/dev/null || true
@@ -27,18 +29,20 @@ index 58c6cec..b81c903 100644
            [ -f data/pinterest_boards_cache.json ] && git add data/pinterest_boards_cache.json 2>/dev/null || true
            if git diff --cached --quiet; then
 diff --git a/.github/workflows/repin-weekly.yml b/.github/workflows/repin-weekly.yml
-index f1cebaa..77e6f4e 100644
+index f1cebaa..d734d0e 100644
 --- a/.github/workflows/repin-weekly.yml
 +++ b/.github/workflows/repin-weekly.yml
-@@ -49,6 +49,15 @@ jobs:
+@@ -49,6 +49,17 @@ jobs:
        - name: Krypto- und YAML-Bibliotheken für Token-Auto-Refresh & Pins installieren
          run: pip install -q pyyaml cryptography
  
-+      # REPEAT-PIN-GATE (02.09.2026, nach Pinterest-Spam-Sperre):
-+      # P6/P7 pruefen VOR jedem Pin-Lauf, dass kein Ziel mehr als 3 Pins bekommt
-+      # und zwischen zwei Pins auf dieselbe URL >=7 Tage liegen. Verstoesse
-+      # werden geparkt (data/pinterest_plan_parked.yaml), nicht geloescht.
-+      - name: Repeat-Pin-Gate (Plan-Guard P1-P7)
++      # ZIEL-LINK- UND REPEAT-PIN-GATE (02.09.2026, nach der Pinterest-Sperre):
++      # P8 prueft, dass jeder Pin eine konkrete eigene Artikel-URL verlinkt
++      # (nie das Pinterest-Profil, nie die nackte Startseite, immer https) -
++      # das war der Sperrgrund vom 15.08. P6/P7 begrenzen zusaetzlich auf
++      # max. 3 Pins je Ziel und >=7 Tage Abstand. P8-Befunde stoppen den Lauf
++      # hart, weil kein Skript erraten kann, welcher Artikel gemeint war.
++      - name: Ziel-Link- und Repeat-Pin-Gate (Plan-Guard P1-P8)
 +        run: |
 +          python3 scripts/pinterest_plan_guard.py --selftest
 +          python3 scripts/pinterest_plan_guard.py --fix

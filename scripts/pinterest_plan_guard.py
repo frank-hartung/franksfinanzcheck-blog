@@ -338,6 +338,22 @@ with open(REPORT, "w", encoding="utf-8") as out:
         for e in errors:
             out.write(f"- {e}\n")
 
+# --- Exit-Logik -------------------------------------------------------------
+# P8-Befunde sind HART und ueberleben --fix: Ein falsches Ziel (Pinterest-
+# Profil, Fremddomain, nackte Startseite, http://) kann das Skript nicht
+# heilen - welcher Artikel gemeint war, weiss nur ein Mensch. Wuerde --fix
+# hier Exit 0 liefern, liefe der Pin-Lauf trotz genau des Musters weiter,
+# das am 15.08.2026 zur Sperre gefuehrt hat. Deshalb: immer Exit 1.
+harte_fehler = [e for e in errors if e.startswith("P8")]
+
+if harte_fehler:
+    print(f"❌ {len(harte_fehler)} HARTE Ziel-Link-Fehler (P8) – Pin-Lauf gestoppt:")
+    for e in harte_fehler[:20]:
+        print(" ", e)
+    print("   Diese Befunde sind NICHT automatisch heilbar: Bitte im Plan das")
+    print("   richtige Artikel-Ziel eintragen (https://, konkrete Seite).")
+    sys.exit(1)
+
 if errors and not DO_FIX:
     print(f"❌ {len(errors)} Fehler im Pinterest-Plan:")
     for e in errors[:20]:
