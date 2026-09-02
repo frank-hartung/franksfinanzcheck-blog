@@ -1,0 +1,71 @@
+name: Redaktions-Standard Bestand (Capital/WiWo/ZEIT)
+
+# ============================================================
+# EIGENSTÄNDIGER WORKFLOW – Bestands-Retrofit, KEINE Änderung an
+# bestehenden Dateien nötig (gleicher V4-Ansatz wie
+# redaktions-standard-neu.yml, bewusst getrennt vom Wochen-Workflow).
+#
+# ABLAUF (jeden Mittwoch 11:30 MESZ, automatisch):
+#   1. Selbsttest der Wache (Sabotage-Schutz)
+#   2. KI-Hebung der 3 Artikel mit den meisten offenen RS-Modulen
+#      (Kürze-Box, Frage-H2, Faustregel, Schrittfolge, Zahlen-Ehrlichkeit,
+#      Phantom-Quellen) – Backlog 3 pro Woche, dauerhaft
+# Report: REDAKTIONS-STANDARD-REPORT.md
+#
+# EINMALIG ANLEGEN (GitHub → "Add file" → "Create new file"):
+#   Dateiname: .github/workflows/redaktions-standard-bestand.yml
+#   Inhalt: diese Datei vollständig einfügen → Commit direkt auf main.
+# Manueller Start jederzeit: Actions → "Redaktions-Standard Bestand" → Run workflow.
+# ============================================================
+on:
+  schedule:
+    - cron: "30 9 * * 3"   # Mittwoch 11:30 MESZ – entzerrt nach seo-weekly
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: redaktions-standard-bestand
+  cancel-in-progress: false
+
+jobs:
+  retrofit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Voraussetzung prüfen
+        run: |
+          if [ -f scripts/redaktions_standard.py ]; then
+            echo "✅ Wache vorhanden – weiter."
+          else
+            echo "🛑 scripts/redaktions_standard.py fehlt auf main."
+            echo "   → PR #156 ist NICHT gemergt. GitHub → Pull requests → #156"
+            echo "     → „Merge pull request“ klicken, danach diesen Workflow neu starten."
+            exit 1
+          fi
+
+      - name: Abhängigkeiten
+        run: python3 -m pip install -q pyyaml 2>/dev/null || true
+
+      - name: Bestands-Retrofit (Backlog 3 pro Woche)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/redaktions_standard.py --selftest
+          python3 scripts/redaktions_standard.py --fix --ai --backlog 3 || echo "⚠ Retrofit: Rest-Funde im Report (nicht kritisch)"
+
+      - name: Änderungen committen & pushen
+        run: |
+          git config user.name "Redaktions-Bot"
+          git config user.email "redaktions-bot@users.noreply.github.com"
+          git add content/ REDAKTIONS-STANDARD-REPORT.md data/redaktions_standard_history.jsonl data/korrekturen.yaml 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "✅ Keine Änderungen – Bestand bereits auf Redaktions-Standard."
+          else
+            git commit -m "redaktion: Bestand auf Capital/WiWo/ZEIT-Standard gehoben (Retrofit Backlog 3)"
+            scripts/git_sync.sh --push-only
+          fi
