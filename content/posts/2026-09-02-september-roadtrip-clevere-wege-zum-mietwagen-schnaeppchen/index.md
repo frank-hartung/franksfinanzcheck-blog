@@ -136,6 +136,8 @@ Lass dir die mängelfreie Rückgabe schriftlich bestätigen. Ein unterschriebene
 
 
 **Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/)
+**Lesetipp:** [Mietwagen ohne Kautionsfallen: So sparst du im Urlaub](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/)
+
 ## Häufige Fragen
 
 ### Muss ich eine Kaution hinterlegen, wenn ich ohne Selbstbeteiligung buche?

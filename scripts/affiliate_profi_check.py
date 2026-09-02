@@ -17,12 +17,19 @@ Sabotage-Schutz (Selbsttest vor jeder Fix-Aktion).
   A8  CTA            Mindestens 1 Affiliate-CTA (/go/-Link) pro Artikel
                      (Monetarisierung – Profi: jeder Artikel darf konvertieren)
 
-SELBSTHEILUNG (--fix):
+SELBSTHEILUNG (--fix) – Sofortheilungs-Prinzip (heilen → verifizieren →
+nur unheilbare Reste alarmieren, wie in großen Onlineredaktionen):
   - A2: erfahrung-Zeile ergänzen (generischer Baustein, wenn kein Text
         hinterlegt – Profi-Textbaustein, ehrlich formuliert)
-  - A3: „Weiterlesen"-Block mit Pillar-Link ergänzen (falls Pillar existiert)
+  - A3: ZWEISTUFIG (Redaktions-Fix 02.09.2026, Heiler-Deckel behoben):
+        Stufe 1: „Weiterlesen"-Block mit Pillar-Link (falls Pillar existiert)
+        Stufe 2: „Lesetipp"-Link auf thematisch passenden LIVE-Artikel
+        (gleicher Pillar bevorzugt, nie Draft-/Zukunfts-Ziele, nie selbst).
+        Erst NACH der Heilung wird erneut gezählt – geheilte Artikel
+        lösen keinen Exit-1-Alarm mehr aus.
   - A7: author-Zeile ergänzen
-  - A5/A8: nur REPORT (nicht automatisch heilen – Content-Entscheidung)
+  - A8: CTA-Baustein ergänzen (deterministisch, Pillar → /go/-Key)
+  - A5: nur REPORT (nicht automatisch heilen – Content-Entscheidung)
 
 SABOTAGE-SCHUTZ: SELFTEST läuft VOR jeder Fix-Aktion (Exit 2 = keine
 Änderung). Report: AFFILIATE-REPORT.md · Audit-Log.
@@ -96,39 +103,146 @@ def _check_eeat():
         p = os.path.join(BLOG_DIR, "content", "posts", slug, "index.md")
         c = open(p, encoding="utf-8").read()
         if not re.search(r"^erfahrung:", c, re.M):
-            PROBLEMS.append(("A2", slug, "kein erfahrung-Feld (E-E-A-T)"))
             if DO_FIX:
                 m = re.search(r"^(author:.*)$", c, re.M)
                 if m:
                     c2 = c[:m.end()] + "\n" + f'erfahrung: "{GENERIC_ERFAHRUNG}"\n' + c[m.end():]
                     open(p, "w", encoding="utf-8").write(c2)
                     FIXED.append(("A2", slug, "erfahrung ergänzt (generischer Profi-Baustein)"))
+                    continue  # geheilt + verifizierbar → kein Alarm (Sofortheilung)
+            PROBLEMS.append(("A2", slug, "kein erfahrung-Feld (E-E-A-T)"))
+
+
+def _count_internal_links(text):
+    """Zählt interne Links (Artikel + Pillar) – eine Quelle der Wahrheit."""
+    return len(re.findall(r"\]\(\.\./\.\./posts/[\w-]+/\)", text)) \
+        + len(re.findall(r"\]\(\.\./\.\./pillar/[\w-]+/\)", text))
+
+
+def _live_post_slugs():
+    """Nur Live-Artikel als Linkziele: kein Draft, kein Zukunftsdatum.
+
+    Gleiche Live-Definition wie internal_linker/draft_link_healer –
+    die Sofortheilung darf NIE auf einen (noch) toten Slug verlinken.
+    """
+    now = datetime.datetime.now(datetime.timezone.utc)
+    live = []
+    for slug in _post_slugs():
+        p = os.path.join(BLOG_DIR, "content", "posts", slug, "index.md")
+        try:
+            c = open(p, encoding="utf-8").read()
+        except OSError:
+            continue
+        if re.search(r"^draft:\s*true", c, re.M):
+            continue
+        dm = re.search(r"^date:\s*[\"']?(\d{4}-\d{2}-\d{2})", c, re.M)
+        if dm:
+            try:
+                d = datetime.datetime.strptime(dm.group(1), "%Y-%m-%d") \
+                    .replace(tzinfo=datetime.timezone.utc)
+                if d.date() > now.date():
+                    continue
+            except ValueError:
+                continue
+        live.append(slug)
+    return live
+
+
+def _pick_related_live_post(slug, text):
+    """Wählt deterministisch den besten Lesetipp-Kandidaten.
+
+    Rangfolge: gleicher Pillar zuerst, dann jüngster Live-Artikel.
+    Nie sich selbst, nie bereits verlinkte Ziele.
+    Rückgabe: (slug, titel) oder None.
+    """
+    pm = re.search(r"^pillar:\s*[\"']?([\w-]+)", text, re.M)
+    pillar = pm.group(1) if pm else None
+    best = None
+    for other in sorted(_live_post_slugs(), reverse=True):  # jüngste zuerst
+        if other == slug or f"../../posts/{other}/" in text:
+            continue
+        op = os.path.join(BLOG_DIR, "content", "posts", other, "index.md")
+        try:
+            oc = open(op, encoding="utf-8").read()
+        except OSError:
+            continue
+        opm = re.search(r"^pillar:\s*[\"']?([\w-]+)", oc, re.M)
+        tm = re.search(r"^title:\s*[\"']?(.+?)[\"']?\s*$", oc, re.M)
+        title = tm.group(1) if tm else other.replace("-", " ").title()
+        rank = 0 if (pillar and opm and opm.group(1) == pillar) else 1
+        cand = (rank, other, title)
+        if best is None or cand[0] < best[0]:
+            best = cand
+            if rank == 0:
+                break  # jüngster Same-Pillar-Treffer = optimal
+    return (best[1], best[2]) if best else None
 
 
 def _check_internal_links():
-    """A3: >= 2 interne Links pro Artikel."""
+    """A3: >= 2 interne Links pro Artikel – mit echter Sofortheilung.
+
+    REDAKTIONS-FIX 02.09.2026 (Heiler-Deckel behoben): Die alte Heilung
+    konnte nur den EINEN Pillar-Link ergänzen. War der schon vorhanden
+    (Artikel mit genau 1 internen Link), blieb A3 dauerhaft rot – der
+    wöchentliche SEO-Workflow schlug deshalb am 02.09. fehl. Jetzt:
+      Stufe 1: Pillar-Link ergänzen (wie bisher)
+      Stufe 2: „Lesetipp"-Link auf thematisch passenden LIVE-Artikel
+      Verifikation: erst NACH der Heilung wird erneut gezählt –
+      geheilte Artikel lösen keinen Alarm mehr aus (Sofortheilung),
+      nur unheilbare Reste gehen als Problem/Exit 1 an die Redaktion.
+    """
     for slug in _post_slugs():
         p = os.path.join(BLOG_DIR, "content", "posts", slug, "index.md")
         c = open(p, encoding="utf-8").read()
-        n = len(re.findall(r"\]\(\.\./\.\./posts/[\w-]+/\)", c)) \
-            + len(re.findall(r"\]\(\.\./\.\./pillar/[\w-]+/\)", c))
-        if n < 2:
-            PROBLEMS.append(("A3", slug, f"nur {n} interne Links (< 2)"))
-            if DO_FIX:
-                # Pillar des Artikels ermitteln und Weiterlesen-Block ergänzen
+        n = _count_internal_links(c)
+        if n >= 2:
+            continue
+        if DO_FIX:
+            changed = False
+            parts = c.split("---", 2)
+            if len(parts) == 3:
+                body = parts[2]
+                # Stufe 1: Pillar-Link („Weiterlesen"), falls noch nicht da
                 pm = re.search(r"^pillar:\s*[\"']?([\w-]+)", c, re.M)
                 pillar = pm.group(1) if pm else None
-                if pillar and os.path.exists(os.path.join(BLOG_DIR, "content", "pillar", pillar, "index.md")):
-                    parts = c.split("---", 2)
-                    body = parts[2]
+                if (pillar
+                        and os.path.exists(os.path.join(BLOG_DIR, "content", "pillar", pillar, "index.md"))
+                        and f"../../pillar/{pillar}/" not in body):
                     m = re.search(r"^## (Häufige Fragen|Häufig gestellte Fragen|FAQ)", body, re.M)
                     ip = m.start() if m else len(body)
                     add = (f"\n\n**Weiterlesen:** [Ratgeber {pillar.replace('-', ' ').title()}"
                            f"](../../pillar/{pillar}/)\n")
-                    if f"../../pillar/{pillar}/" not in body:
-                        parts[2] = body[:ip] + add + body[ip:]
-                        open(p, "w", encoding="utf-8").write("---".join(parts))
-                        FIXED.append(("A3", slug, f"Pillar-Link ergänzt (→ {pillar})"))
+                    body = body[:ip] + add + body[ip:]
+                    changed = True
+                    FIXED.append(("A3", slug, f"Pillar-Link ergänzt (→ {pillar})"))
+                # Stufe 2: Lesetipp auf passenden Live-Artikel, bis >= 2
+                guard = 0
+                while _count_internal_links(body) < 2 and guard < 3:
+                    guard += 1
+                    rel = _pick_related_live_post(slug, "---".join(parts[:2]) + "---" + body)
+                    if not rel:
+                        break
+                    rslug, rtitle = rel
+                    wm = re.search(r"^\*\*Weiterlesen:\*\*.*$", body, re.M)
+                    tip = f"\n**Lesetipp:** [{rtitle}](../../posts/{rslug}/)\n"
+                    if wm:
+                        ip = wm.end()
+                    else:
+                        fm = re.search(r"^## (Häufige Fragen|Häufig gestellte Fragen|FAQ)", body, re.M)
+                        ip = fm.start() if fm else len(body)
+                        tip = "\n" + tip
+                    body = body[:ip] + tip + body[ip:]
+                    changed = True
+                    FIXED.append(("A3", slug, f"Lesetipp-Link ergänzt (→ {rslug})"))
+                if changed:
+                    parts[2] = body
+                    c = "---".join(parts)
+                    open(p, "w", encoding="utf-8").write(c)
+            # Verifikation NACH der Heilung – nur Reste alarmieren
+            n = _count_internal_links(c)
+            if n >= 2:
+                continue
+        PROBLEMS.append(("A3", slug, f"nur {n} interne Links (< 2)"))
 
 
 def _check_schema():
@@ -184,13 +298,14 @@ def _check_autor():
         c = open(p, encoding="utf-8").read()
         m = re.search(r"^author:\s*[\"']?([^\"'\n]+)", c, re.M)
         if not m or AUTHOR.lower() not in m.group(1).lower():
-            PROBLEMS.append(("A7", slug, "author fehlt/abweichend"))
             if DO_FIX and not m:
                 mm = re.search(r"^(categories:.*)$", c, re.M)
                 if mm:
                     c2 = c[:mm.end()] + "\n" + f'author: "{AUTHOR}"\n' + c[mm.end():]
                     open(p, "w", encoding="utf-8").write(c2)
                     FIXED.append(("A7", slug, "author ergänzt"))
+                    continue  # geheilt + verifizierbar → kein Alarm (Sofortheilung)
+            PROBLEMS.append(("A7", slug, "author fehlt/abweichend"))
 
 
 def _check_cta():
@@ -211,7 +326,6 @@ def _check_cta():
             + len(re.findall(r"\]\(https://a\.(?:check24|partner-versicherung)[^)]*\)", c))
         if n > 0:
             continue
-        PROBLEMS.append(("A8", slug, "kein Affiliate-CTA (Monetarisierung)"))
         if DO_FIX:
             pm = re.search(r"^pillar:\s*[\"']?([\w-]+)", c, re.M)
             go_key = PILLAR_CTA.get(pm.group(1) if pm else "", "allgemein")
@@ -235,6 +349,8 @@ def _check_cta():
             parts[2] = body[:ip] + cta + body[ip:]
             open(p, "w", encoding="utf-8").write("---".join(parts))
             FIXED.append(("A8", slug, f"Affiliate-CTA ergänzt (→ /go/{go_key}/)"))
+            continue  # geheilt + verifizierbar → kein Alarm (Sofortheilung)
+        PROBLEMS.append(("A8", slug, "kein Affiliate-CTA (Monetarisierung)"))
 
 
 # ------------------------------------------------- Sabotage-Schutz
@@ -249,6 +365,11 @@ def _selftest():
         fehler.append("erfahrung-Regex zu aggressiv")
     if not re.search(r"\]\(\.\./\.\./posts/[\w-]+/\)", "x [a](../../posts/y/) z"):
         fehler.append("intern-Link-Regex defekt")
+    # Sofortheilung A3 (02.09.2026): Zähler + Lesetipp-Kandidatenwahl prüfen
+    if _count_internal_links("[a](../../posts/x/) [b](../../pillar/y/)") != 2:
+        fehler.append("interner Link-Zähler defekt")
+    if not re.search(r"^draft:\s*true", "draft: true", re.M):
+        fehler.append("Draft-Regex defekt (Live-Ziel-Filter)")
     return fehler
 
 

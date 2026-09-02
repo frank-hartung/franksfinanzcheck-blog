@@ -1,14 +1,7 @@
 # 🤝 AFFILIATE-REPORT
 
-**Stand:** 2026-09-02 06:43 UTC · Modus: FIX
+**Stand:** 2026-09-02 08:36 UTC · Modus: CHECK
 
-Probleme: 2 · Geheilt: 2
+Probleme: 0 · Geheilt: 0
 
-| Code | Artikel | Problem |
-|---|---|---|
-| A2 | 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen | kein erfahrung-Feld (E-E-A-T) |
-| A3 | 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen | nur 0 interne Links (< 2) |
-
-**Selbstheilung:**
-- [A2] 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen: erfahrung ergänzt (generischer Profi-Baustein)
-- [A3] 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen: Pillar-Link ergänzt (→ mietwagen)
+✅ Alle Affiliate-Profi-Signale erfüllt.
