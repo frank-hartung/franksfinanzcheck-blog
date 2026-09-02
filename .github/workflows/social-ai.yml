@@ -49,6 +49,15 @@ jobs:
           SOCIAL_MAX_PRO_LAUF: ${{ vars.SOCIAL_MAX_PRO_LAUF || '4' }}
           SOCIAL_FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
         run: python3 scripts/social_poster.py
+      # Nachweis für die Secrets-Alters-Wache, dass der Mastodon-Kanal lebt.
+      - name: Mastodon-Secret-Erfolg vermerken
+        if: success()
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+        run: |
+          if [ -n "${MASTODON_ACCESS_TOKEN:-}" ]; then
+            python3 scripts/secrets_age_guard.py --record-success MASTODON_ACCESS_TOKEN || true
+          fi
 
       - name: Flags & Status committen
         run: |
