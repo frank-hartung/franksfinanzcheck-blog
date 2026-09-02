@@ -1,29 +1,29 @@
 {
-  "generated": "2026-09-01",
+  "generated": "2026-09-02",
   "verdict": "AMBER",
   "static": {
-    "total_img_bytes": 12136246,
-    "count_img": 412,
-    "count_covers": 391,
+    "total_img_bytes": 12495834,
+    "count_img": 427,
+    "count_covers": 406,
     "worst_cover_bytes": 138530
   },
   "public": {
-    "html_files": 258,
+    "html_files": 283,
     "js_files": 3,
     "css_files": 0,
     "js_bytes": 85573,
     "css_bytes": 0,
-    "html_bytes": 10645539,
+    "html_bytes": 11725442,
     "inline_styles": 0,
-    "inline_scripts_plain": 622,
+    "inline_scripts_plain": 675,
     "img_nosize": 0
   },
   "findings": [
     {
       "level": "amber",
       "code": "render_block_js",
-      "count": 622,
-      "msg": "622 Skripte ohne async/defer (INP-Risiko)"
+      "count": 675,
+      "msg": "675 Skripte ohne async/defer (INP-Risiko)"
     }
   ]
 }

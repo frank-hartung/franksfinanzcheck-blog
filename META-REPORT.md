@@ -6,10 +6,10 @@
 
 | Kennzahl | Wert |
 |---|---|
-| Artikel geprüft | 24 |
+| Artikel geprüft | 26 |
 | Ø Qualitätsscore | **100/100** |
 | Ø Titel-Länge | 55 Zeichen (optimal 50–60) |
-| Ø Description-Länge | 146 Zeichen (optimal 120–160) |
+| Ø Description-Länge | 147 Zeichen (optimal 120–160) |
 | Artikel mit Problemen | **0** |
 
 ## Status
@@ -44,8 +44,10 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Frugalismus-Tipps: Mehr Freiheit durch klugen | 54 | 141 | 7 | ✅ |
 | 100 | Preisgarantie Gas: So schützt du dich vor Pre | 55 | 150 | 6 | ✅ |
 | 100 | DNS-Server wechseln: Schnelleres und sicherer | 56 | 141 | 8 | ✅ |
+| 100 | Handytarif 2026 vergleichen: Günstige Tarife  | 54 | 160 | 8 | ✅ |
 | 100 | Kfz-Versicherung Vergleich 2026: Bis zu 800 € | 52 | 132 | 8 | ✅ |
 | 100 | Tagesgeld-Zinsen 2026: Die besten Zinssätze i | 56 | 145 | 8 | ✅ |
+| 100 | September-Roadtrip: Clevere Wege zum Mietwage | 58 | 147 | 7 | ✅ |
 
 ---
-*Erzeugt am 2026-09-02 um 08:47 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-09-02 um 12:49 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*

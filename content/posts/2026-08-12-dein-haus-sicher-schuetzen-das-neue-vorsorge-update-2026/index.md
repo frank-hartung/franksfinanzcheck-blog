@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-08-31
+lastmod: 2026-09-02
 title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
 description: "Dein Haus sicher schützen: das Vorsorge-Update 2026 für Hausrat & Elementarschäden. So schützt du deine Immobilie vor Unwettern und sparst bares Geld."
 date: 2026-08-12T08:15:00Z
@@ -39,7 +39,7 @@ Um Haus und Wohnung umfassend gegen alle denkbaren Risiken abzusichern, müssen 
 2. **Hausratversicherung:** Sichert alle beweglichen Gegenstände in deinen vier Wänden (Möbel, Kleidung, Elektrogeräte, Wertsachen) zum Neuwert ab.
 3. **Erweiterter Elementarschadenschutz (ZÜRS):** Deckt Schäden durch Naturgewalten wie Starkregen, Überschwemmung, Rückstau aus der Kanalisation, Schneedruck und Erdrutsch ab – dieser Baustein ist in alten Verträgen fast nie automatisch enthalten!
 
-## Elementarschäden:<br> Warum der Schutz 2026 Pflicht ist
+## Elementarschäden: Warum der Schutz 2026 Pflicht ist
 
 Die Klimaerwärmung führt dazu, dass lokale Starkregen-Ereignisse selbst in Gebieten auftreten, die weit abseits von Flüssen oder bekannten Hochwasserzonen liegen. Wenn die Kanalisation die Wassermassen nicht mehr aufnimmt, drückt das Wasser über Kellerfenster oder Lichtschächte ins Haus. Dann greift eine gewöhnliche Gebäude- oder Hausratversicherung ohne Elementar-Zusatzbaustein nicht. Schäden im Keller an Heizung, Waschmaschinen und eingelagertem Mobiliar kosten schnell zwischen 15.000 € und 45.000 €.
 
@@ -54,7 +54,7 @@ Die Klimaerwärmung führt dazu, dass lokale Starkregen-Ereignisse selbst in Geb
 
 > 💶 **Spar-Tipp zwischendurch:** Schütze dein Hab und Gut vor existenzbedrohenden Naturgewalten zum fairen Jahresbeitrag: [**Vergleichen & sparen**](/go/hausrat/)
 
-## Wichtige Klauseln:<br> Darauf musst du im Vertrag achten
+## Wichtige Klauseln: Darauf musst du im Vertrag achten
 
 Beim Abschluss oder der Überprüfung einer Hausrat- oder Wohngebäudepolice solltest du folgende Bedingungen zwingend vereinbaren:
 
@@ -67,7 +67,7 @@ Damit der Versicherer im Totalschadenfall nicht prüft, ob dein Hausrat mehr wer
 ### 3. Fahrraddiebstahl & Cyber-Schutz
 Wer teure E-Bikes oder Fahrräder besitzt, sollte eine 24-Stunden-Fahrradklausel ohne Nachtzeitbeschränkung einschließen. Auch Phishing-Schäden beim Online-Banking sind in modernen Hausrat-Tarifen bis zu bestimmten Höchstgrenzen (z. B. 5.000 € bis 10.000 €) mitversichert.
 
-## Beispiel:<br> Was ein moderner Rundum-Schutz kostet
+## Beispiel: Was ein moderner Rundum-Schutz kostet
 
 Entgegen der landläufigen Meinung ist eine lückenlose Absicherung erstaunlich bezahlbar. Die folgende Tabelle zeigt die typischen Jahresbeiträge für eine 100-m²-Wohnung:
 
@@ -92,7 +92,7 @@ Wer neben dem Hausrat auch die persönliche Absicherung auf Vordermann bringen w
 
 **3. Haftpflicht.** Für Eigentümer zusätzlich Haus- und Grundbesitzerhaftpflicht, wenn vermietet oder das Gebäude nicht nur selbst bewohnt wird. Streupflicht, Dachziegel, nicht geräumter Weg – das landet nicht in der Privat­haftpflicht allein, wenn ein Objekt dazwischenhängt.
 
-## Elementar 2026:<br> Pflichtgefühl gegen Markt
+## Elementar 2026: Pflichtgefühl gegen Markt
 
 Politisch wird über Pflichtversicherung diskutiert, abgeschlossen ist sie nicht flächendeckend. Praktisch heißt das: Wer in ZÜRS 3–4 unversichert bleibt, trägt ein existenzielles Risiko. Angebote einholen, auch wenn sie teuer sind – und parallel Rückstauklappen, Geländeanpassung, wichtige Technik nicht im Keller. Prävention senkt nicht immer die Prämie, aber den Schaden.
 
@@ -117,7 +117,7 @@ Minute 15–30: Wohnfläche, Wert 1914 oder Wertermittlung, PV- und WP-Liste. Mi
 
 Wer das einmal im Jahr macht, braucht kein „Vorsorge-Update“-Gefühl mehr, sondern eine Checkliste mit Datum. Genau das unterscheidet ein gepflegtes Risiko von Hoffnung.
 
-## Fazit:<br> Dein Haus mit zeitgemäßen Klauseln schützen
+## Fazit: Dein Haus mit zeitgemäßen Klauseln schützen
 
 Veraltete Verträge bieten bei modernen Unwetterrisiken oft nur unzureichenden Schutz. Ersetze alte Policen durch einen zeitgemäßen Vertrag mit Elementarschutz und Verzicht auf grobe Fahrlässigkeit. So schützt du deine Immobilie vor existenziellen Schäden. Und du sparst durch günstige Online-Konditionen gleichzeitig bares Geld.
 

@@ -46,7 +46,7 @@ Bevor du den Anbieter wechselst, lohnt sich ein kritischer Blick auf deinen Basi
 
 ---
 
-## Tarifwechsel bei Strom und Gas:<br> Der schnellste Weg zu mehreren hundert Euro Ersparnis
+## Tarifwechsel bei Strom und Gas: Der schnellste Weg zu mehreren hundert Euro Ersparnis
 
 Ein Wechsel des Energieversorgers ist der schnellste Hebel für mehr Geld auf dem Konto. Der gesamte Prozess läuft heute vollständig digital ab: Dein neuer Anbieter übernimmt die Kündigung beim alten Versorger und kümmert sich um die Abwicklung mit dem Netzbetreiber.
 

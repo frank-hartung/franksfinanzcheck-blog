@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-08-31
+lastmod: 2026-09-02
 title: "Sicher heizen: So schützt dich eine Gaspreisgarantie"
 description: "Sicher heizen mit Gaspreisgarantie: Schütze dein Haushaltsbudget vor Preissprüngen, sichere dir faire Tarife und spare bis zu 650 € bei den Heizkosten."
 date: 2026-08-10T09:29:05Z
@@ -59,7 +59,7 @@ Beim Online-Vergleich triffst du auf zwei unterschiedliche Garantietypen:
 
 > 💡 **Praxis-Empfehlung:** Eine eingeschränkte Preisgarantie ist für Privathaushalte die wirtschaftlich vernünftigste Wahl, da sie das Hauptrisiko schwankender Energiebörsenpreise abfedert, ohne unnötige Risikoprämien zu kosten.
 
-## Konkrete Beispiel-Rechnung:<br> Ersparnis bei 20.000 kWh Verbrauch
+## Konkrete Beispiel-Rechnung: Ersparnis bei 20.000 kWh Verbrauch
 
 Ein typisches Einfamilienhaus verbraucht pro Jahr rund 20.000 kWh Gas für Raumwärme und Warmwasser. Die folgende Tabelle verdeutlicht den massiven Unterschied zwischen der Grundversorgung und einem optimierten Tarif mit 12 Monaten Preisgarantie:
 
@@ -74,7 +74,7 @@ Ein typisches Einfamilienhaus verbraucht pro Jahr rund 20.000 kWh Gas für Raum
 
 > 💶 **Spar-Tipp zwischendurch:** Berechne deine individuelle Ersparnis mit deiner Postleitzahl und deinem Jahresverbrauch: [**Vergleichen & sparen**](/go/gas/)
 
-## Checkliste:<br> Worauf du beim Gasanbieterwechsel achten musst
+## Checkliste: Worauf du beim Gasanbieterwechsel achten musst
 
 1. **Garantiedauer passend zur Laufzeit:** Wähle eine Preisgarantie, die mindestens über die gesamte Mindestvertragslaufzeit läuft (z. B. 12 Monate Garantie bei 12 Monaten Erstlaufzeit).
 2. **Kurze Kündigungsfristen:** Verträge mit einer Frist von 4 bis 6 Wochen zum Laufzeitende garantieren dir maximale Flexibilität für den nächsten Wechsel.
@@ -107,7 +107,7 @@ Garantie schützt den Preis, nicht den Verbrauch. 1 °C weniger Raumtemperatur 
 
 Abschlag prüfen: Liegt er 25 % über dem Vorjahresverbrauch × neuem Preis, nach unten anpassen. Sonst kreditierst du den Anbieter. Liegt er zu niedrig, droht die Nachzahlung im Frühjahr – psychologisch der häufigste Grund, warum Menschen Garantien als „hat nichts gebracht“ abtun. Die Garantie hat den Preis gehalten, der Abschlag war falsch kalibriert.
 
-## Fazit:<br> Mit Preisgarantie sicher und günstig durch den Winter
+## Fazit: Mit Preisgarantie sicher und günstig durch den Winter
 
 Eine **Gaspreisgarantie** schützt dich vor bösen finanziellen Überraschungen bei der nächsten Heizkostenabrechnung und bringt dir echte Planungssicherheit. Da ein Gasanbieterwechsel online in wenigen Minuten erledigt ist und der neue Versorger die Kündigung beim Vorversorger übernimmt, sparst du hunderte Euro im Jahr ohne jeglichen bürokratischen Aufwand.
 

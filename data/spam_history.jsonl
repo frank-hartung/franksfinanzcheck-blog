@@ -519,3 +519,7 @@
 {"ts": "2026-09-02T11:49:03Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet", "rules": ["B1"]}
 {"ts": "2026-09-02T11:49:03Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen", "rules": ["B2"]}
 {"ts": "2026-09-02T11:49:03Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 0}
+{"ts": "2026-09-02T12:08:17Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": false, "hard": 0}
+{"ts": "2026-09-02T12:29:23Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": false, "hard": 0}
+{"ts": "2026-09-02T12:30:31Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": false, "hard": 0}
+{"ts": "2026-09-02T12:31:03Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": false, "hard": 0}

@@ -32,7 +32,7 @@ Ein stabiler und schneller Internetanschluss gehört heute zur absoluten Grundve
 
 ---
 
-## DSL-Tarifvergleich:<br> Wechselbonus sichern und dauerhaft sparen
+## DSL-Tarifvergleich: Wechselbonus sichern und dauerhaft sparen
 
 Viele Verbraucher bleiben über Jahre beim selben Anbieter, obwohl die zweijährige Mindestvertragslaufzeit längst abgelaufen ist. Nach 24 Monaten entfallen jedoch die anfänglichen Rabatte, und der Vertrag wird spürbar teurer.
 
@@ -47,7 +47,7 @@ Wie du den Markt systematisch analysierst und günstige Tarife für deine Region
 
 ---
 
-## WLAN im ganzen Haus verbessern:<br> Speed in jeder Ecke
+## WLAN im ganzen Haus verbessern: Speed in jeder Ecke
 
 Selbst der schnellste Glasfaser- oder VDSL-Anschluss nützt wenig, wenn das Funksignal in der Wohnung durch dicke Wände, Decken oder Störquellen ausgebremst wird.
 
@@ -60,7 +60,7 @@ Praktische Anleitungen zur Beseitigung von Funklöchern und zur Einrichtung eine
 
 ---
 
-## Handytarife vergleichen:<br> Schluss mit teuren 24-Monats-Knebelverträgen
+## Handytarife vergleichen: Schluss mit teuren 24-Monats-Knebelverträgen
 
 Beim Mobilfunk gilt eine einfache Grundregel: Kaufe dein Smartphone idealerweise separat und buche dazu einen flexiblen SIM-Only-Tarif. Tarife mit Allnet-Flat, SMS-Flat und 15 bis 30&nbsp;GB Highspeed-Datenvolumen im 5G-Netz gibt es heute bereits für unter 10&nbsp;€ bis 15&nbsp;€ pro Monat.
 
@@ -98,7 +98,7 @@ Ein Silo lebt von Wiederholung, nicht von einem einmaligen Wechsel. Deshalb geh�
 
 Die Reihenfolge verhindert, dass du 1 Gbit kaufst und dann merkst, dass der Router im Schrank steht.
 
-## Rechenbeispiel Haushalt 2026:<br> Festnetz + zwei SIM
+## Rechenbeispiel Haushalt 2026: Festnetz + zwei SIM
 
 Alt: 44,99 € DSL nach Rabattphase + 2 × 29,99 € Handy im 24-Monats-Bündel mit abbezahltem Smartphone = 104,97 €. Neu: 34,50 € effektiv DSL inkl. Bonus / 24 Monate + 2 × 9,99 € SIM-Only 15 GB = 54,48 €. Differenz **50,49 € im Monat, 605 € im Jahr**. Zeitaufwand: ein Nachmittag plus Umschalttag. Das ist der größte Hebel im Silo, größer als jedes Mesh-Marketing.
 
@@ -128,7 +128,7 @@ Dieses Silo ist dann fertig, wenn du einmal im Jahr 40 Minuten investierst – n
 
 <!-- premium-length-2026-b -->
 
-## Technik-Entscheid 2026:<br> VDSL, Kabel, FTTH, Hybrid
+## Technik-Entscheid 2026: VDSL, Kabel, FTTH, Hybrid
 
 Die Verfügbarkeitskarte lügt höflich. „Bis zu 250 Mbit“ heißt: an der Straße, nicht in deiner Dose, nicht in deinem WLAN. Deshalb drei Messungen, bevor du unterschreibst.
 

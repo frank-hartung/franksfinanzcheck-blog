@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-08-31
+lastmod: 2026-09-02
 title: "WLAN verbessern: So bringst du stabilen Speed in jede Ecke"
 description: "WLAN verbessern leicht gemacht: Router richtig positionieren, Mesh-WLAN einrichten, Störquellen beseitigen & maximale Geschwindigkeit im ganzen Haus."
 date: 2026-08-28T01:05:14Z
@@ -44,7 +44,7 @@ Bevor du bares Geld in neue Hardware investierst, lohnt sich eine gründliche An
 * **Kanal-Überlastung durch Nachbarn:** In Mehrfamilienhäusern funken oft zwanzig Router auf demselben Funkkanal. Ein manueller Wechsel auf einen freien Funkkanal (z. B. Kanal 1, 6 oder 11 im 2,4-GHz-Bereich) verdoppelt oft die effektive Datenrate.
 * **Wasser und Metall im Mauerwerk:** Stahlbetondecken, Fußbodenheizungsrohre und große Wandspiegel dämpfen die Funkwellen um mehr als 70 %.
 
-## Drei Wege zu mehr Reichweite:<br> Repeater vs. Powerline vs. Mesh
+## Drei Wege zu mehr Reichweite: Repeater vs. Powerline vs. Mesh
 
 Um das Signal in verwinkelte Räume oder über mehrere Stockwerke zu transportieren, stehen drei grundlegend unterschiedliche Technologien zur Auswahl:
 
@@ -71,11 +71,11 @@ Der Einstieg in ein hochwertiges 2er-Mesh-Set kostet im Handel zwischen 80 € 
 4. **Antennen präzise ausrichten:** Besitzt dein Router externe Stabantennen, richte eine Antenne senkrecht nach oben und eine zweite im 45-Grad-Winkel aus, um sowohl horizontale als auch vertikale Funkwellen optimal abzustrahlen.
 5. **Regelmäßige Firmware-Updates installieren:** Halte das Betriebssystem deines Routers stets auf dem neuesten Stand. Sicherheits-Patches und Optimierungen der Treiber bringen oft 10 bis 15 % mehr Stabilität.
 
-Wer zusätzlich seine monatlichen [Fixkosten senken](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/) möchte, wechselt zu einem modernen Provider mit Neukundenbonus. Oft spart das über 350 € in 24 Monaten. Vertiefende Praxisratschläge dazu findest du in unserem Leitfaden zum [DSL-Wechselbonus und Prämien](../../posts/2026-08-10-dsl-wechselbonus-sichern/) sowie in der Übersicht [Günstigeres Internet durch Tarifvergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/).
+Wer zusätzlich generell sparen möchte: Unser Leitfaden [Sparen im Herbst – die besten Spartipps](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/) zeigt, wo überall Geld liegen bleibt. Und wer zu einem modernen Provider mit Neukundenbonus wechselt, spart oft über 350 € in 24 Monaten. Oft spart das über 350 € in 24 Monaten. Vertiefende Praxisratschläge dazu findest du in unserem Leitfaden zum [DSL-Wechselbonus und Prämien](../../posts/2026-08-10-dsl-wechselbonus-sichern/) sowie in der Übersicht [Günstigeres Internet durch Tarifvergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/).
 
 <!-- premium-length-2026 -->
 
-## Rechenbeispiel:<br> Was ein Funkloch wirklich kostet
+## Rechenbeispiel: Was ein Funkloch wirklich kostet
 
 Ein 100-Mbit/s-Anschluss für 34,99 € im Monat nützt wenig, wenn im Homeoffice nur 12 Mbit/s ankommen. Videokonferenzen brechen ab, die Cloud-Sicherung dauert dreimal so lang, der Streaming-Stick wechselt auf 480p. Der effektive Preis pro nutzbarem Megabit steigt von 0,35 € auf fast 3 €.
 
@@ -118,7 +118,7 @@ Mesh-Systeme (WLAN 6/6E) halten eine gemeinsame SSID und reichen Clients an den 
 
 Wer Glasfaser mit 300 Mbit/s oder mehr hat, sollte den zweiten Mesh-Knoten per LAN-Kabel anbinden (Backhaul). Dann bleibt das Funkspektrum den Geräten, und du holst im Homeoffice endlich das, wofür du den Tarif bezahlst.
 
-## Fazit:<br> Mit wenigen Handgriffen zum Highspeed-WLAN
+## Fazit: Mit wenigen Handgriffen zum Highspeed-WLAN
 
 Mit den richtigen Anpassungen musst du dich nicht mit Funklöchern oder endlos puffernden Videos abfinden. Häufig reichen bereits ein optimierter Router-Standort und die getrennte Vergabe der Funkbänder aus, um das **WLAN zu verbessern**. Für größere Immobilien ist die Investition in ein Mesh-Set der zuverlässigste Garant für unterbrechungsfreies Arbeiten und Home Entertainment.
 

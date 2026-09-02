@@ -21,7 +21,7 @@ Ein Urlaub soll Erholung und unvergessliche Erlebnisse bringen – doch bei der 
 
 ---
 
-## Spartabelle:<br> Mietwagen-Optionen im Vergleich
+## Spartabelle: Mietwagen-Optionen im Vergleich
 
 | Buchungsbaustein | Vor Ort am Flughafen-Schalter | Vorab im Online-Vergleich | Deine Ersparnis |
 |---|---|---|---|
@@ -75,7 +75,7 @@ Flugpreise und Reisepreise schwanken stark nach Wochentag, Saison und Nachfrage.
 
 <!-- premium-length-2026 -->
 
-## Reise-Silo:<br> Buchung, Schalter, Rückgabe
+## Reise-Silo: Buchung, Schalter, Rückgabe
 
 Der Mietwagen ist der Teil der Reise, an dem aus 29 €/Tag 79 € werden, wenn du unvorbereitet ankommst. Das Silo bündelt die Regeln, die Artikel vertiefen.
 

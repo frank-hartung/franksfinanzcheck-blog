@@ -121,6 +121,64 @@ def strip_shy(text):
     return "".join(chars), table
 
 
+# FALSCH-POSITIV-SCHUTZ (02.09.2026, Wöchentliche SEO-Optimierung #20):
+# LanguageTools Satzanfangs-Regel (Kategorie CASING) hält kompakte Datums-/
+# Ordnungspunkte („Kündigung bis 30.11. bei …“, „30.11. in den Kalender“) für
+# Satzenden und „korrigiert“ das Folgewort groß: „Bei manchen“, „Anfängt“,
+# „Kennen und nutzen“, „Zum 31.12. Des Jahres“ – 6 echte Schäden, eingespielt
+# am 01.09. (e230ada2) via Auto-Apply und heute live repariert.
+# Dauerhafte Regel: CASING-Korrekturen direkt NACH einem Datumspunkt-Muster
+# werden NIE automatisch übernommen (auch nicht gemeldet) – ein verpasster
+# True-Positive ist billiger als ein falsch kapitalisiertes Verb.
+DATE_DOT_TRAP = re.compile(r"(?:\d{1,2}\.){1,3}\s*$")
+
+
+def accept_lt_match(m, chunk_lt, table, whitelist):
+    """Filtert ein einzelnes LanguageTool-Match (alle deterministischen
+    Regeln, offline testbar). Liefert Ergebnis-Dict oder None (= verworfen).
+    `table` ist die Offset-Tabelle aus strip_shy() (oder None)."""
+    cat = m.get("rule", {}).get("category", {}).get("id", "")
+    if cat in SKIP_CATEGORIES:
+        return None
+    if cat not in FIX_CATEGORIES and cat != "UNKNOWN_WORD":
+        return None
+    offset = m.get("offset", 0)
+    length = m.get("length", 0)
+    word = chunk_lt[offset:offset + length]
+    # Whitelist: Wort ignorieren
+    wl_key = word.lower().strip(".,;:!?")
+    if wl_key in whitelist:
+        return None
+    # Nur Vorschläge mit genau 1 Replacement = eindeutig
+    repls = m.get("replacements", [])
+    if len(repls) != 1:
+        return None
+    repl = repls[0].get("value", "")
+    if not repl or repl == word:
+        return None
+    # "Du"→"du" Einheitlichkeits-Vorschläge NICHT fixen (Stil-Entscheidung
+    # des Blogs: "Du" am Satzanfang groß, "du" im Satz klein ist üblich)
+    if word in ("Du", "Dein", "Deine", "Deinem", "Deiner", "Sie", "Ihr", "Ihre") \
+       and repl.lower() == word.lower() and cat != "CASING":
+        return None
+    # Komma-Fixes: nur annehmen, wenn nicht zu invasiv
+    if cat == "PUNCTUATION" and len(repl) > len(word) + 5:
+        return None
+    # Großschreib-Falle NACH Datums-/Ordnungspunkt („30.11. bei“ ≠ Satzende)
+    if cat == "CASING" and word[:1].islower() and repl[:1].isupper() \
+            and DATE_DOT_TRAP.search(chunk_lt[max(0, offset - 14):offset]):
+        return None
+    off, ln = offset, length
+    if table:  # Offsets zurück in den Originaltext rechnen
+        end = min(off + ln, len(chunk_lt))
+        off, ln = table[off], max(table[end] - table[off], ln)
+    return {
+        "offset": off, "length": ln, "word": word, "fix": repl,
+        "message": m.get("message", ""), "category": cat,
+        "conf": 0.9,
+    }
+
+
 API_FAILURES = 0   # hochgezählt bei nicht erreichbarer LanguageTool-API
 
 
@@ -150,41 +208,9 @@ def lt_check(text, whitelist):
             time.sleep(5)
             continue
         for m in resp.get("matches", []):
-            cat = m.get("rule", {}).get("category", {}).get("id", "")
-            if cat in SKIP_CATEGORIES:
-                continue
-            if cat not in FIX_CATEGORIES and cat != "UNKNOWN_WORD":
-                continue
-            offset = m.get("offset", 0)
-            length = m.get("length", 0)
-            word = chunk_lt[offset:offset + length]
-            if table:  # Offsets zurück in den Originaltext rechnen
-                end = min(offset + length, len(chunk_lt))
-                offset, length = table[offset], max(table[end] - table[offset], length)
-            # Whitelist: Wort ignorieren
-            wl_key = word.lower().strip(".,;:!?")
-            if wl_key in whitelist:
-                continue
-            # Nur Vorschläge mit genau 1 Replacement = eindeutig
-            repls = m.get("replacements", [])
-            if len(repls) != 1:
-                continue
-            repl = repls[0].get("value", "")
-            if not repl or repl == word:
-                continue
-            # "Du"→"du" Einheitlichkeits-Vorschläge NICHT fixen (Stil-Entscheidung
-            # des Blogs: "Du" am Satzanfang groß, "du" im Satz klein ist üblich)
-            if word in ("Du", "Dein", "Deine", "Deinem", "Deiner", "Sie", "Ihr", "Ihre") \
-               and repl.lower() == word.lower() and cat != "CASING":
-                continue
-            # Komma-Fixes: nur annehmen, wenn nicht zu invasiv
-            if cat == "PUNCTUATION" and len(repl) > len(word) + 5:
-                continue
-            results.append({
-                "offset": offset, "length": length, "word": word, "fix": repl,
-                "message": m.get("message", ""), "category": cat,
-                "conf": 0.9,
-            })
+            accepted = accept_lt_match(m, chunk_lt, table, whitelist)
+            if accepted:
+                results.append(accepted)
         time.sleep(0.6)  # Rate-Limit der Public-API (~20 chars/s)
     return results
 
@@ -266,7 +292,93 @@ def apply_fix(a, problem):
     return True
 
 
+def run_selftest():
+    """Offline-Selbsttest der Match-Filter (keine API nötig), eingefrorene
+    Schadensfälle vom 01./02.09.2026. Exit 2 bei Versagen."""
+    wl = set(w.lower() for w in DEFAULT_WHITELIST)
+
+    def m(rule_cat, off, ln, repl, msg="LT-Meldung"):
+        return {"rule": {"category": {"id": rule_cat}}, "offset": off,
+                "length": ln, "message": msg,
+                "replacements": ([{"value": repl}] if repl is not None else [])}
+
+    cases = []
+
+    # 1) Datumspunkt-Falle: „…bis 30.09. bei…“ → CASING „Bei“ wird verworfen
+    text = "Kündigung meist bis 30.11., 30.09. bei manchen. Wer im Oktober vergleicht."
+    pos = text.index("bei")
+    res = accept_lt_match(m("CASING", pos, 3, "Bei"), text, None, wl)
+    cases.append(("FALSCH-POSITIV gehärtet: CASING nach Datumspunkt verworfen", res is None))
+
+    # 2) Kompaktdatum „…am 29.11. anfängt…“ → „Anfängt“ wird verworfen
+    text2 = "stichtag. Wer am 29.11. anfängt, unterschreibt Fehler."
+    pos2 = text2.index("anfängt")
+    res2 = accept_lt_match(m("CASING", pos2, len("anfängt"), "Anfängt"), text2, None, wl)
+    cases.append(("Kompaktdatum X.Y. geschützt („anfängt“ bleibt klein)", res2 is None))
+
+    # 3) Ordinalpunkt „…der 30. zum…“ → „Zum“ wird verworfen
+    text3 = "Der reguläre Kündigungstermin ist der 30.11. zum 31.12. des Jahres."
+    pos3 = text3.index("zum")
+    res3 = accept_lt_match(m("CASING", pos3, 3, "Zum"), text3, None, wl)
+    pos3b = text3.index("des Jahres")
+    cases.append(("Ordinal-&Folgedatum geschützt („zum“/„des“)", res3 is None
+                  and accept_lt_match(m("CASING", pos3b, 3, "Des"), text3, None, wl) is None))
+
+    # 4) ECHTER Satzanfang bleibt heilbar: „Fehler gemacht. dann …“ → „Dann“
+    text4 = "Viele machen Fehler. dann ärgern sie sich."
+    pos4 = text4.index("dann")
+    res4 = accept_lt_match(m("CASING", pos4, 4, "Dann"), text4, None, wl)
+    cases.append(("True-Positive bleibt: CASING am echten Satzanfang",
+                  res4 is not None and res4["fix"] == "Dann"))
+
+    # 5) TYPOS eindeutig → angenommen
+    text5 = "Der Ferstärker ist kaputt."
+    res5 = accept_lt_match(m("TYPOS", text5.index("Ferstärker"), 10, "Verstärker"), text5, None, wl)
+    cases.append(("TYPOS-Fix wird angenommen", res5 is not None))
+
+    # 6) STYLE → nie automatisiert
+    res6 = accept_lt_match(m("STYLE", 0, 4, "egal"), "Irgendein Satz.", None, wl)
+    cases.append(("STYLE-Kategorie verworfen", res6 is None))
+
+    # 7) Whitelist geschützt (Marken/Fachbegriffe)
+    text7 = "Bei check24 vergleichen lohnt sich."
+    res7 = accept_lt_match(m("TYPOS", text7.index("check24"), 7, "Check24"), text7, None, wl)
+    cases.append(("Whitelist-Wort verworfen", res7 is None))
+
+    # 8) „Du“→„du“ Stil-Vorschlag (nicht CASING) → verworfen
+    text8 = "Hier kannst Du sparen."
+    res8 = accept_lt_match(m("TYPOS", text8.index("Du"), 2, "du"), text8, None, wl)
+    cases.append(("Du→du Stil-Vorschlag verworfen", res8 is None))
+
+    # 9) Zu invasive PUNCTUATION-Veränderung → verworfen
+    text9 = "Das ist ein Test."
+    res9 = accept_lt_match(m("PUNCTUATION", 0, 3, "Dasssssssss"), text9, None, wl)
+    cases.append(("Invasiver PUNCTUATION-Fix verworfen", res9 is None))
+
+    # 10) PUNCTUATION moderat → angenommen
+    res10 = accept_lt_match(m("PUNCTUATION", 0, 3, "Das,"), text9, None, wl)
+    cases.append(("Moderater PUNCTUATION-Fix angenommen", res10 is not None))
+
+    # 11) SHY-Offsets: Trennstelle vor dem Fund verschiebt nichts
+    lyric = "Verbraucher\u00adstreitbeilegung ist 30.11. fällig"
+    plain, tbl = strip_shy(lyric)
+    cases.append(("strip_shy entfernt U+00AD", "\u00ad" not in plain))
+    ok_off = tbl is not None and tbl[plain.index("streit")] == lyric.index("streit")
+    cases.append(("Offset-Tabelle rechnet korrekt zurück", ok_off))
+
+    fails = [name for name, ok in cases if not ok]
+    for name, ok in cases:
+        print(("\u2705 " if ok else "\u274c ") + name)
+    if fails:
+        print(f"\n\U0001f6d1 GRAMMAR-SELFTEST FEHLGESCHLAGEN: {len(fails)} Fall/Fälle")
+        return 2
+    print(f"\n\u2705 GRAMMAR-SELFTEST bestanden ({len(cases)} Fälle, offline, 0 API).")
+    return 0
+
+
 def main():
+    if "--selftest" in sys.argv:
+        sys.exit(run_selftest())
     fix = "--fix" in sys.argv
     as_json = "--json" in sys.argv
     new_only = "--new-only" in sys.argv
