@@ -25,6 +25,7 @@ cover:
   alt: "September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Buche deinen Mietwagen 3‑4 Wochen vor Reisebeginn und nutze Vergleichsportale, um die günstigsten Angebote zu finden. Im September senken viele Anbieter ihre Preise um 20 %–30 %, weil die Nachfrage niedriger ist. Wähle Abholung und Rückgabe außerhalb von Flughäfen, um zusätzliche Gebühren zu vermeiden."
+social_posted: true
 ---
 
 Stell dir vor, du stehst am Flughafen von Faro. Die Luft ist noch warm, aber die drückende Hitze des Hochsommers ist verflogen. Während andere Reisende in der Hauptsaison horrende Summen für einen Kleinwagen bezahlt haben, öffnest du entspannt deine App.

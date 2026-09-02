@@ -1,8 +1,8 @@
 # 🐘 Mastodon-SEO-Report
 
-> Automatisch: 02.09.2026 07:41 UTC 
+> Automatisch: 02.09.2026 18:49 UTC 
 
-- **Geprüfte Toots:** 21
+- **Geprüfte Toots:** 22
 - **Mit Befund:** 0
 - **Geheilt:** 0
 - **Duplikate (gleicher Artikel, nur gemeldet):** keine
@@ -11,6 +11,7 @@
 
 | Status | Artikel | Befunde | Heilung |
 |---|---|---|---|
+| [117202940579376559](https://mastodon.social/@FranksFinanzcheck/117202940579376559) | `2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen` | ✓ | — |
 | [117188897097849988](https://mastodon.social/@FranksFinanzcheck/117188897097849988) | `2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann` | ✓ | — |
 | [117188896944541163](https://mastodon.social/@FranksFinanzcheck/117188896944541163) | `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | ✓ | — |
 | [117188896807408670](https://mastodon.social/@FranksFinanzcheck/117188896807408670) | `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` | ✓ | — |
