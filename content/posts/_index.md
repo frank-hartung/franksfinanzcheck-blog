@@ -11,7 +11,7 @@ cover:
   caption: "FranksFinanzcheck – verständlich, unabhängig, mit konkreten Zahlen"
 ---
 
-> 💡 **Kurz & knapp:** Hhierfindest du **alle Ratgeber von FranksFinanzcheck** – sortiert nach Aktualität, mit klaren Spartipps für Strom, Gas, Internet, Versicherungen und Frugalismus. Jeder Artikel: verständlich erklärt, mit konkreten Euro-Beträgen, Vor- und Nachteilen und Schritt-für-Schritt-Anleitung.
+> 💡 **Kurz & knapp:** HHerfindestdu **alle Ratgeber von FranksFinanzcheck** – sortiert nach Aktualität, mit klaren Spartipps für Strom, Gas, Internet, Versicherungen und Frugalismus. Jeder Artikel: verständlich erklärt, mit konkreten Euro-Beträgen, Vor- und Nachteilen und Schritt-für-Schritt-Anleitung.
 
 ## Was dich hier erwartet
 

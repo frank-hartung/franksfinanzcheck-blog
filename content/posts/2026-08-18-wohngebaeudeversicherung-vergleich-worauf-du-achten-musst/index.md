@@ -96,7 +96,7 @@ Muss die Familie nach einem Brand oder schweren Wasserschaden monatelang in ein 
 
 ## Was 2026 in der Police stehen muss – ohne Marketingnebel
 
-[Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) ist kein Baustein, den man „irgendwie mitnimmt“. Sie trägt Feuer, Leitungswasser, Sturm/Hagel – und nur mit Klausel den Elementarschaden (Überschwemmung, Rückstau, Erdbeben, Schneedruck).
+[Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) Ist kein Baustein, den man „irgendwie mitnimmt“. Sie trägt Feuer, Leitungswasser, Sturm/Hagel – und nur mit Klausel den Elementarschaden (Überschwemmung, Rückstau, Erdbeben, Schneedruck).
 
 Ohne Elementar bleibst du nach Starkregen auf dem Keller sitzen. Die Prämie für Elementar ist regional, oft 80–300 € extra im Jahr, und in manchen ZÜRS-Zonen schwer zu bekommen. Genau deshalb vergleichst du nicht nur den Preis, sondern die Annahme.
 
