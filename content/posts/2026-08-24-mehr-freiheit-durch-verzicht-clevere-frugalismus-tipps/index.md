@@ -138,7 +138,7 @@ Frugalismus ist kein Verzichtsprogramm, sondern ein Werkzeug für mentale und fi
 Knausrigkeit bedeutet, auf Kosten anderer oder an der eigenen Gesundheit und Lebensfreude zu sparen. Frugalismus bedeutet, bewusst und strategisch zu konsumieren, um Geld für das freizusetzen, was einem wirklich wichtig ist.
 
 ### Wie viel Geld brauche ich als Notgroschen?
-Als Faustregel gelten drei bis sechs monatliche Netto-Fixkosten. Bei 1.500 € monatlichen Fixkosten sollte dein Notgroschen zwischen 4.500 € und 9.000 € auf einem täglich verfügbaren Tagesgeldkonto liegen.
+Als Faustregel gelten drei bis sechs monatliche Netto-Fixkosten. Bei 1.500 € monatlichen Fixkosten sollte dein Notgroschen zwischen 4.500 € und 9.000 € auf einem täglich verfügbaren [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) liegen.
 
 ### Kann jeder Mensch Frugalist werden?
 Ja. Frugalismus beginnt im Kopf bei der Einstellung zum eigenen Konsum. Unabhängig vom Einkommen kann jeder Mensch seine Fixkosten analysieren und unnötige Ausgabenfresser stoppen.

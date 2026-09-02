@@ -135,7 +135,7 @@ Die [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen
 ## Häufige Fragen
 
 ### Was ist der Unterschied zwischen Wohngebäude- und Hausratversicherung?
-Faustregel: Stellst du dein Haus auf den Kopf und schüttelst es, fällt alles heraus, was die Hausratversicherung versichert (Möbel, Kleidung, Elektrogeräte). Alles, was fest mit dem Haus verbunden bleibt (Wände, Dach, Heizung, Parkett), deckt die Wohngebäudeversicherung ab.
+Faustregel: Stellst du dein Haus auf den Kopf und schüttelst es, fällt alles heraus, was die Hausratversicherung versichert (Möbel, Kleidung, Elektrogeräte). Alles, was fest mit dem Haus verbunden bleibt (Wände, Dach, Heizung, Parkett), deckt die [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) ab.
 
 ### Muss ich meine Photovoltaikanlage extra versichern?
 Aufdach-Solaranlagen können meist gegen geringen Aufpreis oder beitragsfrei in die Wohngebäudeversicherung integriert werden. Melde die Anlage immer unverzüglich dem Gebäudeversicherer.
