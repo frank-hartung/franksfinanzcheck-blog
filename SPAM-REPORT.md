@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-02 05:52 UTC · Modus: FIX
+**Stand:** 2026-09-02 06:43 UTC · Modus: FIX
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
@@ -8,6 +8,11 @@
 
 - 🟡 [B5] 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub: Originalitäts-Quote 44 % (< 45 %)
 - 🟡 [B1] 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet: Keyword-Stuffing (ein Signal): Text: 'dns' ×63 (5.6 % Dichte)
+- 🟡 [B2] 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
+- 🔴 [B3] 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
+
+**Geheilt:**
+- ✅ 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen: B3-Disclosure eingefügt
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
@@ -24,7 +29,7 @@
 
 ## Fazit
 
-✅ Spamfrei: keine harten Funde.
+🔴 1 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
 
 ---
 _Wache: Blog B1–B8 · Feed F1–F6 · CSV C1–C8 · API A1–A4 – Dauerauftrag, niemals Content-Verlust._
