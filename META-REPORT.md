@@ -1,4 +1,4 @@
-# 📋 Meta-Daten-Report – 2026-09-01
+# 📋 Meta-Daten-Report – 2026-09-02
 
 > **Vollautomatisch** erzeugt vom wöchentlichen SEO-Workflow. Keine manuelle Sichtung nötig: Bei verbleibenden Problemen erstellt der Workflow automatisch ein GitHub-Issue.
 
@@ -48,4 +48,4 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Tagesgeld-Zinsen 2026: Die besten Zinssätze i | 56 | 145 | 8 | ✅ |
 
 ---
-*Erzeugt am 2026-09-01 um 18:01 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-09-02 um 08:47 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
