@@ -124,7 +124,7 @@ Zweite Rechnung: Altvertrag nach 24 Monaten ohne Rabatt, 39,99 € plus 5 € 
 
 **Familie, Gaming, Smart-TV.** 250 Mbit/s sind komfortabel, 50 Mbit/s werden abends eng, sobald drei Geräte parallel laden. Gaming braucht vor allem Ping unter 20 ms, nicht 1 Gbit.
 
-Glasfaser schlägt VDSL, wenn der Hausanschluss liegt und die Dose im Wohnzimmer ist. Ein 250-Mbit-VDSL mit gutem WLAN schlägt 1-Gbit-Glasfaser hinter drei Stahlbetonwänden. Deshalb gehört der WLAN-Check in denselben Nachmittag wie der DSL-Vergleich – sonst kaufst du Bandbreite, die im Funkloch stirbt.
+Glasfaser schlägt VDSL, wenn der Hausanschluss liegt und die Dose im Wohnzimmer ist. Ein 250-Mbit-VDSL mit gutem WLAN schlägt 1-Gbit-Glasfaser hinter drei Stahlbetonwänden. Deshalb gehört der WLAN-Check in denselben Nachmittag wie der [DSL-Vergleich](../../posts/2026-08-10-dsl-wechselbonus-sichern/) – sonst kaufst du Bandbreite, die im Funkloch stirbt.
 
 ## Fazit:<br> Durch regelmäßigen Vergleich hunderte Euro sparen
 
