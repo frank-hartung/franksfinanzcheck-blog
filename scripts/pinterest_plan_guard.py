@@ -17,7 +17,7 @@ Ausgabe: PINTEREST-PLAN-GUARD-REPORT.md
 """
 import sys, yaml, re
 from pathlib import Path
-from collections import Counter
+from collections import Counter, defaultdict
 
 ROOT = Path(__file__).resolve().parent.parent
 PLAN = ROOT / "data/pinterest_plan.yaml"
@@ -25,9 +25,103 @@ BOARDS_FILE = ROOT / "data/pinterest_boards.yaml"
 REPORT = ROOT / "PINTEREST-PLAN-GUARD-REPORT.md"
 
 DO_FIX = "--fix" in sys.argv
+SELFTEST = "--selftest" in sys.argv
+
+# --- P6/P7: Repeat-Pin-Schutz (02.09.2026, nach Pinterest-Spam-Sperre) -------
+# Anlass: Der Plan verteilte 73 Pins auf nur 29 Ziel-URLs – ein Artikel bekam
+# 9 Pins, vier Ziele sogar ZWEI Pins am selben Tag. Genau dieses Muster
+# (viele Pins, wenige echte Ziele) wertet Pinterest als Link-Spam. Dass die
+# Pin-Texte einzigartig formuliert sind, entlastet nicht – es sieht eher nach
+# bewusster Umgehung aus.
+#
+# Die Grenzen sind bewusst konservativ für eine junge Affiliate-Domain:
+MAX_PINS_PRO_ZIEL = 3      # mehr als 3 Pins pro URL im Planungsfenster = Spam-Risiko
+MIN_TAGE_ABSTAND = 7       # derselbe Link frühestens nach einer Woche erneut
+
+
+def norm_url(u: str) -> str:
+    """Ziel-URL ohne Query/Trailing-Slash – UTM-Varianten sind KEIN neues Ziel.
+
+    Wichtig: Pinterest bewertet das Ziel, nicht den Tracking-Parameter. Zwei
+    Pins auf dieselbe Seite mit verschiedenen utm_campaign-Werten sind für die
+    Spam-Erkennung derselbe Link.
+    """
+    return re.sub(r"\?.*$", "", (u or "").strip()).rstrip("/")
 
 def load_yaml(p):
     return yaml.safe_load(p.read_text(encoding="utf-8")) if p.exists() else {}
+
+
+def _selftest():
+    """Eingefrorene Faelle fuer den Repeat-Pin-Schutz (P6/P7)."""
+    fails = []
+
+    # norm_url: UTM-Varianten sind dasselbe Ziel
+    a = norm_url("https://x.de/posts/abc/?utm_source=pinterest&utm_campaign=pins")
+    b = norm_url("https://x.de/posts/abc?utm_source=rss")
+    if a != b:
+        fails.append(f"norm_url: UTM-Varianten nicht gleich ({a!r} != {b!r})")
+    if norm_url("https://x.de/posts/abc/") == norm_url("https://x.de/posts/xyz/"):
+        fails.append("norm_url: verschiedene Ziele faelschlich gleich")
+
+    def run(cases):
+        """Miniatur-Nachbau der P6/P7-Auswahl; liefert Indizes der Streichungen."""
+        bt = defaultdict(list)
+        for i, p in enumerate(cases):
+            bt[norm_url(p["url"])].append(i)
+        drop = set()
+        for _t, idxs in bt.items():
+            ordered = sorted(idxs, key=lambda i: (cases[i]["tag"], i))
+            kept = []
+            for i in ordered:
+                tg = cases[i]["tag"]
+                if len(kept) >= MAX_PINS_PRO_ZIEL:
+                    drop.add(i); continue
+                if any(abs(tg - t) < MIN_TAGE_ABSTAND for t in kept):
+                    drop.add(i); continue
+                kept.append(tg)
+        return drop
+
+    U = "https://x.de/posts/a/"
+    V = "https://x.de/posts/b/"
+
+    # 1) Zwei Pins am SELBEN Tag auf dasselbe Ziel -> zweiter faellt (P7)
+    d = run([{"url": U, "tag": 1}, {"url": U, "tag": 1}])
+    if d != {1}:
+        fails.append(f"P7 same-day nicht erkannt: {d}")
+
+    # 2) Sauberer Abstand -> nichts faellt
+    d = run([{"url": U, "tag": 1}, {"url": U, "tag": 8}, {"url": U, "tag": 15}])
+    if d:
+        fails.append(f"P7 bestraft gueltigen Abstand: {d}")
+
+    # 3) Vier Pins mit gutem Abstand -> vierter faellt (P6-Deckel)
+    d = run([{"url": U, "tag": 1}, {"url": U, "tag": 8},
+             {"url": U, "tag": 15}, {"url": U, "tag": 22}])
+    if d != {3}:
+        fails.append(f"P6 Deckel greift nicht: {d}")
+
+    # 4) Verschiedene Ziele am selben Tag sind ERLAUBT (kein Repeat)
+    d = run([{"url": U, "tag": 3}, {"url": V, "tag": 3}])
+    if d:
+        fails.append(f"P6/P7 bestraft verschiedene Ziele: {d}")
+
+    # 5) UTM-Variante desselben Ziels zaehlt als Wiederholung
+    d = run([{"url": U, "tag": 1}, {"url": U + "?utm_source=x", "tag": 2}])
+    if d != {1}:
+        fails.append(f"UTM-Variante nicht als Repeat erkannt: {d}")
+
+    if fails:
+        print("❌ PLAN-GUARD-SELFTEST FEHLGESCHLAGEN:")
+        for f in fails:
+            print("   -", f)
+        return 2
+    print("✅ PLAN-GUARD-SELFTEST bestanden (P6/P7 Repeat-Pin-Schutz, 5 Faelle).")
+    return 0
+
+
+if SELFTEST:
+    sys.exit(_selftest())
 
 plan = load_yaml(PLAN)
 pins = plan.get("pins", []) if isinstance(plan, dict) else []
@@ -37,9 +131,15 @@ valid_boards = {b["name"] for b in boards_cfg.get("boards", [])} if boards_cfg e
 errors = []
 fixed = 0
 
-# P4
-if len(pins) < 60:
-    errors.append(f"P4: Nur {len(pins)} Pins (erwartet >=60, aktuell 73)")
+# P4 – Mindestmenge.
+# 02.09.2026: Von 60 auf 40 gesenkt. Die alte Schwelle stammt aus der Zeit vor
+# dem Repeat-Pin-Schutz und liess sich nur erreichen, indem derselbe Artikel
+# mehrfach bepinnt wurde – also genau durch das Muster, das P6/P7 jetzt
+# verbietet. Eine Mengenvorgabe, die man nur per Wiederholung erfuellen kann,
+# ist ein Anreiz zum Spam. Mehr Pins entstehen ab jetzt durch mehr ARTIKEL,
+# nicht durch mehr Pins pro Artikel.
+if len(pins) < 40:
+    errors.append(f"P4: Nur {len(pins)} Pins (erwartet >=40)")
 
 # P1, P5, P3
 by_board = Counter()
@@ -78,24 +178,85 @@ for i, pin in enumerate(pins):
     if valid_boards and board not in valid_boards:
         errors.append(f"P3 Unbekanntes Board '{board}' bei Pin '{title[:30]}'")
 
-# P2 Board-Counts
+# --- P6/P7: Repeat-Pin-Schutz -----------------------------------------------
+# P6: max. MAX_PINS_PRO_ZIEL Pins pro Ziel-URL
+# P7: mindestens MIN_TAGE_ABSTAND Tage zwischen zwei Pins auf dasselbe Ziel
+#
+# Heilung (--fix): überzählige Pins werden aus dem PLAN entfernt, nicht
+# gelöscht – sie wandern nach data/pinterest_plan_parked.yaml und können
+# später mit neuem Ziel (eigener Artikel!) reaktiviert werden. Behalten wird
+# immer der jeweils früheste Pin je Ziel, danach nur, wer den Abstand wahrt.
+by_target = defaultdict(list)
+for i, pin in enumerate(pins):
+    by_target[norm_url(pin.get("url") or pin.get("link") or "")].append(i)
+
+drop_idx = set()
+parked = []
+for target, idxs in sorted(by_target.items()):
+    if not target:
+        continue
+    # nach Tag sortieren (stabil), damit die Auswahl deterministisch ist
+    ordered = sorted(idxs, key=lambda i: (pins[i].get("tag") or 0, i))
+    kept_tags = []
+    for i in ordered:
+        tag = pins[i].get("tag") or 0
+        titel = (pins[i].get("titel") or pins[i].get("title") or "")[:40]
+        short = target.replace("https://franksfinanzcheck.de", "")
+        if len(kept_tags) >= MAX_PINS_PRO_ZIEL:
+            errors.append(
+                f"P6 {len(ordered)} Pins auf dasselbe Ziel (max {MAX_PINS_PRO_ZIEL}): "
+                f"{short[:48]} – Pin '{titel}' (Tag {tag})")
+            drop_idx.add(i)
+            continue
+        too_close = [t for t in kept_tags if abs(tag - t) < MIN_TAGE_ABSTAND]
+        if too_close:
+            errors.append(
+                f"P7 Abstand {abs(tag - too_close[-1])} Tage (min {MIN_TAGE_ABSTAND}): "
+                f"{short[:48]} – Pin '{titel}' (Tag {tag})")
+            drop_idx.add(i)
+            continue
+        kept_tags.append(tag)
+
+if drop_idx:
+    if DO_FIX:
+        parked = [pins[i] for i in sorted(drop_idx)]
+        keep = [p for i, p in enumerate(pins) if i not in drop_idx]
+        plan["pins"] = keep
+        pins = keep
+        fixed += len(parked)
+        park_file = ROOT / "data/pinterest_plan_parked.yaml"
+        prev = load_yaml(park_file) or {}
+        prev_pins = prev.get("pins", []) if isinstance(prev, dict) else []
+        with open(park_file, "w", encoding="utf-8") as pf:
+            yaml.safe_dump({"hinweis":
+                            "Von P6/P7 (Repeat-Pin-Schutz) geparkte Pins. Kein "
+                            "Content-Verlust: Diese Pins brauchen ein EIGENES "
+                            "Ziel (neuer Artikel), dann koennen sie zurueck in "
+                            "den Plan.",
+                            "pins": prev_pins + parked},
+                           pf, allow_unicode=True, sort_keys=False, width=1000)
+
+# P2 Board-Counts (Untergrenze 02.09.2026 von 5 auf 3 gesenkt – gleiche
+# Begruendung wie P4: die alte Schwelle war nur durch Repeat-Pins erreichbar.)
+# by_board wurde VOR der P6/P7-Heilung gezaehlt; nach dem Parken neu zaehlen.
+by_board = Counter((p.get("pinwand") or p.get("board") or "") for p in pins)
 for board_name, cnt in by_board.items():
-    if cnt < 5:
-        errors.append(f"P2 Board '{board_name}' nur {cnt} Pins (<5)")
+    if cnt < 3:
+        errors.append(f"P2 Board '{board_name}' nur {cnt} Pins (<3)")
 
 # Auch fehlende Boards aus Config melden
 for vb in valid_boards:
-    if by_board.get(vb,0) < 5:
-        if vb not in by_board:
-            errors.append(f"P2 Board '{vb}' fehlt komplett")
-        # else already reported
+    if vb not in by_board:
+        errors.append(f"P2 Board '{vb}' fehlt komplett")
 
 # Fix speichern
 if DO_FIX and fixed>0:
     # safe_dump mit width
     with open(PLAN, "w", encoding="utf-8") as f:
         yaml.safe_dump(plan, f, allow_unicode=True, sort_keys=False, width=1000)
-    print(f"Fix: {fixed} Pins geheilt (Werbung ergänzt)")
+    print(f"Fix: {fixed} Pins geheilt "
+          f"(P1 Werbung/P5 Länge: {fixed - len(parked)}, "
+          f"P6/P7 geparkt: {len(parked)})")
 
 # Report
 with open(REPORT, "w", encoding="utf-8") as out:

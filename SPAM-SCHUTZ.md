@@ -95,3 +95,49 @@ python3 scripts/spam_guard.py --reset-pause
 
 # Sabotage-Schutz / CI-Verifikation
 python3 scripts/spam_guard.py --selftest     # Exit 2 = nicht lauffähig
+
+---
+
+## 6. Regel P6/P7 – Repeat-Pin-Schutz (02.09.2026, nach Pinterest-Sperre)
+
+**Anlass:** Pinterest hat die Domain wegen Spam gesperrt. Der Auslöser lag
+nicht im Blog, sondern in `data/pinterest_plan.yaml`: **73 Pins verteilten
+sich auf nur 29 Ziel-URLs.** Ein einzelner Artikel bekam 9 Pins, und vier
+Ziele erhielten sogar **zwei Pins am selben Tag**. Genau dieses Muster –
+viele Pins, wenige echte Ziele – wertet Pinterest als Link-Spam.
+
+Erschwerend: Die Pin-Texte waren alle einzigartig formuliert und trugen
+korrekt `*Werbung`. Das entlastet nicht, es sieht nach bewusster Umgehung
+aus. Die Cross-Channel-Registry (Abschnitt 3) konnte nicht greifen, weil sie
+erst beim POSTEN prüft – der RSS-Auto-Publish umgeht sie vollständig, da
+Pinterest den Feed selbst zieht.
+
+| Regel | Grenze | Prüfung |
+|---|---|---|
+| **P6** | max. **3 Pins pro Ziel-URL** im Planungsfenster | `pinterest_plan_guard.py` |
+| **P7** | min. **7 Tage Abstand** zwischen zwei Pins auf dasselbe Ziel | dito |
+
+**Normalisierung:** UTM-Parameter zählen NICHT als neues Ziel
+(`?utm_campaign=pins` und `?utm_campaign=rss` sind derselbe Link) – Pinterest
+bewertet das Ziel, nicht den Tracking-Parameter.
+
+**Heilung (`--fix`), kein Content-Verlust:** Überzählige Pins werden nach
+`data/pinterest_plan_parked.yaml` verschoben, nie gelöscht. Behalten wird je
+Ziel der früheste Pin, danach nur, wer den Abstand wahrt. Ein geparkter Pin
+darf zurück in den Plan, sobald er ein **eigenes Ziel** hat (neuer Artikel).
+
+**Erster Lauf:** 73 → 48 Pins im Plan, 25 geparkt. Verteilung danach: max.
+3 Pins/Ziel, kleinster Abstand 7 Tage. Summe 48 + 25 = 73 (nichts verloren).
+
+**Folgeänderung P4/P2:** Die Mindestmengen (P4 ≥60 Pins, P2 ≥5 Pins/Board)
+wurden auf ≥40 bzw. ≥3 gesenkt. Die alten Schwellen waren nur erreichbar,
+indem derselbe Artikel mehrfach bepinnt wurde – also genau durch das Muster,
+das P6/P7 verbietet. **Eine Mengenvorgabe, die man nur per Wiederholung
+erfüllen kann, ist ein Anreiz zum Spam.** Mehr Pins entstehen ab jetzt durch
+mehr ARTIKEL, nicht durch mehr Pins pro Artikel.
+
+**Dauereinsatz:** Das Gate läuft VOR jedem Pin-Lauf (`pinterest-ai.yml` und
+`repin-weekly.yml`, siehe
+`patches/pinterest-repeat-pin-gate-2026-09-02-workflows.patch`) – erst
+`--selftest`, dann `--fix`. Selftest: 5 eingefrorene Fälle (Same-Day-Repeat,
+gültiger Abstand, P6-Deckel, verschiedene Ziele erlaubt, UTM-Variante).
