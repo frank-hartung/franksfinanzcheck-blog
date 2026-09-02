@@ -1,0 +1,77 @@
+name: Redaktions-Standard neu (Capital/WiWo/ZEIT)
+
+# ============================================================
+# EIGENSTÄNDIGER WORKFLOW – KEINE Änderung an bestehenden Dateien nötig.
+# Warum dieser Weg (V4): Die früheren Patch-Workflows (V1–V3) mussten
+# bestehende Workflow-Dateien ändern bzw. auf Dateien im Repo aufbauen
+# und wurden deshalb rot. Diese Datei ist völlig unabhängig:
+#   - kein GH_PAT, nur das Standard-Token
+#   - keine Patch-Datei, keine Anker, nichts zu kollidieren
+#   - nur das bewährte git_sync.sh für den Push
+#
+# ABLAUF (automatisch nach JEDEM Lauf der Content-Engine v2):
+#   1. Selbsttest der Wache (Sabotage-Schutz, Exit 2 = Abbruch)
+#   2. KI-Heilung frisch veröffentlichter Artikel (--fix --ai --new-only)
+#   3. Harte Funde RS1–RS7 → Entwurf statt Publikation (--gate --new-only)
+# Report: REDAKTIONS-STANDARD-REPORT.md
+#
+# EINMALIG ANLEGEN (GitHub → "Add file" → "Create new file"):
+#   Dateiname: .github/workflows/redaktions-standard-neu.yml
+#   Inhalt: diese Datei vollständig einfügen → Commit direkt auf main.
+# Danach läuft alles automatisch (trigger: workflow_run auf "Content-Engine v2").
+# Manueller Start jederzeit: Actions → "Redaktions-Standard neu" → Run workflow.
+# ============================================================
+on:
+  workflow_run:
+    workflows: ["Content-Engine v2"]
+    types: [completed]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: redaktions-standard-neu
+  cancel-in-progress: false
+
+jobs:
+  wache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Voraussetzung prüfen
+        run: |
+          if [ -f scripts/redaktions_standard.py ]; then
+            echo "✅ Wache vorhanden – weiter."
+          else
+            echo "🛑 scripts/redaktions_standard.py fehlt auf main."
+            echo "   → PR #156 ist NICHT gemergt. GitHub → Pull requests → #156"
+            echo "     → „Merge pull request“ klicken, danach diesen Workflow neu starten."
+            exit 1
+          fi
+
+      - name: Abhängigkeiten
+        run: python3 -m pip install -q pyyaml 2>/dev/null || true
+
+      - name: Selbsttest + Heilung + Gate (neue Artikel)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/redaktions_standard.py --selftest
+          python3 scripts/redaktions_standard.py --fix --ai --new-only || echo "⚠ Heilung: Rest-Funde im Report (nicht kritisch)"
+          python3 scripts/redaktions_standard.py --gate --new-only || echo "⚠ Gate: harte Funde wurden als Entwurf geparkt (siehe Report)"
+
+      - name: Änderungen committen & pushen
+        run: |
+          git config user.name "Redaktions-Bot"
+          git config user.email "redaktions-bot@users.noreply.github.com"
+          git add content/ REDAKTIONS-STANDARD-REPORT.md data/redaktions_standard_history.jsonl data/korrekturen.yaml 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "✅ Keine Änderungen – alles auf Redaktions-Standard."
+          else
+            git commit -m "redaktion: neue Artikel auf Capital/WiWo/ZEIT-Standard (Wache + Gate)"
+            scripts/git_sync.sh --push-only
+          fi
