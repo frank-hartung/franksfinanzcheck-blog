@@ -60,7 +60,7 @@ jedem Schreibzugriff (Exit 2 = nichts wird geschrieben). Drafts werden garantier
 Die Automatik ist bemerkenswert ausgereift – das wurde geprüft und bestätigt, nicht angerührt:
 
 - **10/10 Artikel** erfüllen alle Affiliate-Profi-Signale A1–A8 (Offenlegung, E-E-A-T-`erfahrung`, ≥2 interne Links, ≥1 CTA, `author: Frank`, Schema).
-- **Affiliate-Integritäts-Wache täglich** (`affiliate-integrity-daily.yml`): heilt kaputte `/go/`-Links selbstständig + Render-Beweis.
+- **Affiliate-Integritäts-Wache täglich** (`affiliate-integrity-daily.yml`): heilt kaputte `/go/`-Links selbstständig + Render-Beweis. **Premium-Stufe 02.09.2026:** attribut-toleranter, schlüsselgenauer Beweis (AI4) + Gateway-Beweis (AI5) + `rel="sponsored"`-Prüfung, eingefrorener Detektor-Selbsttest mit Drift-Wächter gegen `render-link.html`, fail-closed (Exit 2 → `publish_gate.py` veröffentlicht nichts), idempotente Issue-Pflege (auto-schließend), `actions: write` für den Deploy-Trigger. Shortcode-CTAs teilen denselben Attribut-Vertrag (`layouts/_partials/affiliate_anchor_attrs.html`). Siehe `AFFILIATE-INTEGRITY-GATE-REPORT.md`.
 - **Affiliate-Health wöchentlich** (`affiliate-health.yml`): E2E-Redirect-Kette bis zur Endseite.
 - **Blog-Doktor** (`blog_doctor.py`): kanonische Wachen-Kette (Typografie, Stil, Plagiat, Affiliate-Routing …) mit Stop-Strichen bei Sabotage.
 - **Trust-/Experience-/Pillar-Boxen** in jedem Artikel (E-E-A-T), 6 Themenwelten auf der Startseite, Pinterest-CTA.
@@ -72,7 +72,7 @@ Die Automatik ist bemerkenswert ausgereift – das wurde geprüft und bestätigt
 
 ```
 täglich:   blog_health_gate.py      → SEO-Pflichtfelder, Draft-Sicherheit (REPARIERT)
-täglich:   affiliate_integrity_gate → /go/-Links heilen + Render-Beweis
+täglich:   affiliate_integrity_gate → /go/-Links heilen + Render-Beweis AI4/AI5 (Selftest, fail-closed)
 wöchentl.: affiliate_profi_check A1–A8 + affiliate_marketer (CTA-Routing)
 wöchentl.: willkommenstext_guard    → Profi-Text mit Konkretisierungs-Pflicht (ANGEHOBEN)
 wöchentl.: seo-weekly (ganze Kette) + blog_doctor (Wachen-Orchestrierung)

@@ -183,22 +183,68 @@ def affiliate_profi_failures():
     return per_slug, None
 
 
-def affiliate_integrity_failures():
+def affiliate_integrity_failures(candidates=None):
     """Slugs mit strukturell defekten/nicht gerenderten CTA-Boxen (14.08.2026,
     4. hartes Kriterium – siehe scripts/affiliate_integrity_gate.py).
+
     Läuft im --dry-run-Modus, da hier NUR geprüft wird: Heilung für
     Bestandsdaten passiert separat in bestand_gate.py; ein druckfrischer
     Kandidat, der hier durchfällt, wird stattdessen verworfen (Ebene 2:
-    neues Thema statt kaputte Links live zu schalten)."""
-    data = _run_json(["scripts/affiliate_integrity_gate.py", "--dry-run", "--json"])
+    neues Thema statt kaputte Links live zu schalten).
+
+    PREMIUM-HÄRTUNG 02.09.2026 (zwei Fehlerbilder, die beide live
+    sichtbar waren):
+
+    1) FAIL-CLOSED bei Werkzeugfehlern. Das Gate liefert seit Version 2
+       exit_code 2 + `errors`, wenn der RENDER-BEWEIS gar nicht geführt
+       werden kann (kein public/, Hugo-Build kaputt, Detektor veraltet).
+       Bisher galt: kein JSON = „keine Funde" = Kandidat geht ungeprüft
+       live. Genau das verbietet der Dauerauftrag („Veröffentlichung NUR,
+       wenn alle Links funktionieren und tatsächlich im Blog erscheinen").
+       Jetzt: Beweis unmöglich → alle Kandidaten blockiert (fail-closed),
+       mit Klartext-Grund im Log.
+
+    2) KANDIDATEN-BEZUG. `render_problems`/`findings` betreffen den
+       GESAMTEN Bestand; das Publish-Gate entscheidet aber pro Kandidat.
+       Ohne Filter hätte ein Bestandsschaden (oder ein Phantom-Fund wie
+       am 01.09.2026) jeden neuen Artikel mit in den Verwurf gerissen.
+       Bestand heilt bestand_gate.py / die tägliche Wache – nie das
+       Publish-Gate. Ohne candidates-Argument bleibt das alte Verhalten
+       (alles zurückgeben) für bestand_gate.py erhalten.
+
+    Zusätzlich: `--no-build`, damit dieser Prüfpfad nie in einen fremden
+    Build-Zustand eingreift (deploy.yml baut bewusst selbst, direkt vorher).
+
+    WICHTIG –Fail-closed heißt „nicht veröffentlichen", NICHT „vernichten":
+    Ein Werkzeugfehler (3. Tuple-Wert True) ist KEIN Qualitätsmangel des
+    Artikels. main() stoppt deshalb hart, OHNE discard_article()/draft –
+    sonst würde ein kaputter Hugo-Build oder ein veralteter Detektor
+    tadellose Artikel samt Cover löschen (unwiederbringlich: Rankings,
+    Backlinks, Indexierung)."""
+    data = _run_json(["scripts/affiliate_integrity_gate.py", "--dry-run", "--json",
+                      "--no-build"])
     if not data:
-        return {}, "affiliate_integrity_gate.py: keine Auswertung möglich (public/ gebaut?)"
+        reason = ("Affiliate-Integrität NICHT beweisbar: "
+                  "affiliate_integrity_gate.py lieferte kein Ergebnis "
+                  "(fail-closed – kein Kandidat geht ungeprüft live)")
+        return {}, reason, True
+
+    if int(data.get("exit_code", 0)) == 2 or data.get("errors"):
+        detail = "; ".join(data.get("errors") or ["Beweis nicht geführt (exit_code 2)"])
+        reason = (f"Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – "
+                  f"fail-closed, kein Kandidat geht ungeprüft live): {detail}")
+        return {}, reason, True
+
     per_slug = {}
     for slug, info in data.get("findings", {}).items():
-        per_slug[slug] = info.get("problems", [])
+        if info.get("problems"):
+            per_slug[slug] = list(info["problems"])
     for slug, msg in data.get("render_problems", {}).items():
         per_slug.setdefault(slug, []).append(msg)
-    return per_slug, None
+    if candidates is not None:
+        per_slug = {slug: problems for slug, problems in per_slug.items()
+                    if slug in set(candidates)}
+    return per_slug, None, False
 
 
 
@@ -297,7 +343,7 @@ def main():
     len_fail, len_warn = check_length_failures()
     seo_fail, seo_warn = seo_audit_failures()
     aff_fail, aff_warn = affiliate_profi_failures()
-    integ_fail, integ_warn = affiliate_integrity_failures()
+    integ_fail, integ_warn, integ_tool_error = affiliate_integrity_failures(candidates)
     r5_fail = title_integrity_failures(candidates)
     readability_fail, readability_warn = readability_failures(candidates)
     understanding_fail, understanding_warn = textverstaendnis_failures(candidates)
@@ -312,6 +358,29 @@ def main():
         print(f"⚠ {readability_warn}")
     if understanding_warn:
         print(f"⚠ {understanding_warn}")
+
+    # ============ HARTSTOPP BEI WERKZEUGFEHLER (02.09.2026) ============
+    # Der Render-Beweis konnte nicht geführt werden (kein public/, Hugo-Build
+    # kaputt, Detektor veraltet). Auftrag Frank 14.08.: "Veröffentlichung NUR,
+    # wenn alle Links funktionieren und tatsächlich im Blog erscheinen."
+    # Also: nichts veröffentlichen – aber auch NICHTS vernichten. Exit 1 bricht
+    # den Deploy-Schritt sichtbar ab (alert-on-failure meldet es), die Artikel
+    # bleiben unangetastet und gehen beim nächsten Lauf erneut ins Gate.
+    if integ_tool_error:
+        print("\n🛑 AFFILIATE-INTEGRITÄT NICHT BEWEISBAR → Publish-Gate stoppt "
+              "(fail-closed, kein Artikel wird verworfen oder zurückgestuft):")
+        print(f"   {integ_warn}")
+        print("   Diagnose: python3 scripts/affiliate_integrity_gate.py --selftest")
+        print("             hugo --minify  (Render-Beweis braucht public/)")
+        try:
+            sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+            from audit_log import log_event
+            log_event(module="publish_gate", action="tool_error",
+                      input={"candidates": candidates},
+                      output={"reason": integ_warn}, status="fail_closed")
+        except Exception:
+            pass
+        return 1
 
     gated = []
     demoted = []

@@ -11,6 +11,10 @@
 {{- $defaultCta := .Get "cta_url" | default "" -}}
 {{- $inner      := trim .Inner "\n\r\t " -}}
 
+{{- /* Shortcode-Kontext festhalten (range $t verschiebt den Punkt) – der
+       Affiliate-Attribut-Vertrag braucht .Page/.File/.Params des Artikels. */ -}}
+{{- $ffSeite := . -}}
+
 {{- /* Tarif-Bloecke extrahieren: <template data-ff="…">…</template>
        -Marker werden von Hugo nicht entfernt und von Browsern nicht
        gerendert. Sie schachteln nicht (tarif enthaelt zeile-Marker,
@@ -126,7 +130,12 @@
               {{- if $t.cta_muted -}}
                 <span class="ff-tv-btn ff-tv-btn--muted">{{ $t.cta_text | safeHTML }}</span>
               {{- else if $t.cta_url -}}
-                <a class="ff-tv-btn" href="{{ $t.cta_url | safeURL }}" title="Weiter zum Anbieter (Partnerlink = Werbung)">{{ $t.cta_text | safeHTML }}</a>
+                {{- $aff := partial "affiliate_anchor_attrs.html" (dict "url" $t.cta_url "page" $ffSeite) -}}
+                {{- with $aff -}}
+                  <a class="ff-tv-btn" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-umami-event="{{ .event }}" data-umami-event-slug="{{ .key }}" data-umami-event-article="{{ .article }}" data-umami-event-pillar="{{ .pillar }}" title="{{ .title }}">{{ $t.cta_text | safeHTML }}</a>
+                {{- else -}}
+                  <a class="ff-tv-btn" href="{{ $t.cta_url | safeURL }}" title="Weiter zum Anbieter (Partnerlink = Werbung)">{{ $t.cta_text | safeHTML }}</a>
+                {{- end -}}
               {{- end -}}
             </td>
           {{- end }}
@@ -163,7 +172,12 @@
             {{- if $t.cta_muted -}}
               <span class="ff-tv-btn ff-tv-btn--muted">{{ $t.cta_text | safeHTML }}</span>
             {{- else if $t.cta_url -}}
-              <a class="ff-tv-btn" href="{{ $t.cta_url | safeURL }}">{{ $t.cta_text | safeHTML }}</a>
+              {{- $aff := partial "affiliate_anchor_attrs.html" (dict "url" $t.cta_url "page" $ffSeite) -}}
+              {{- with $aff -}}
+                <a class="ff-tv-btn" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-umami-event="{{ .event }}" data-umami-event-slug="{{ .key }}" data-umami-event-article="{{ .article }}" data-umami-event-pillar="{{ .pillar }}" title="{{ .title }}">{{ $t.cta_text | safeHTML }}</a>
+              {{- else -}}
+                <a class="ff-tv-btn" href="{{ $t.cta_url | safeURL }}">{{ $t.cta_text | safeHTML }}</a>
+              {{- end -}}
             {{- else -}}
               <span class="ff-tv-btn ff-tv-btn--muted">{{ $t.cta_text | safeHTML }}</span>
             {{- end -}}

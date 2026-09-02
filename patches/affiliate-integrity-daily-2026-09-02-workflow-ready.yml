@@ -1,0 +1,394 @@
+# ============================================================
+#  FERTIG ZUM EINKOPIEREN (02.09.2026) – ersetzt 1:1
+#    .github/workflows/affiliate-integrity-daily.yml
+#  ------------------------------------------------------------
+#  Warum als Datei und nicht direkt im Repo: Der Agent-Token ist eine
+#  GitHub-App OHNE `workflows`-Permission – GitHub lehnt Pushes auf
+#  .github/workflows/ ab ("refusing to allow a GitHub App to create or
+#  update workflow"). Deshalb Haus-Konvention: fertiger Patch in patches/.
+#
+#  Zwei Wege, beides gleichwertig:
+#    A) Patch anwenden (empfohlen, macht den Diff sichtbar):
+#         git apply patches/affiliate-integrity-premium-2026-09-02-workflows.patch
+#    B) Diese Datei kopieren:
+#         cp patches/affiliate-integrity-daily-2026-09-02-workflow-ready.yml \
+#            .github/workflows/affiliate-integrity-daily.yml
+#    danach:  git add .github/workflows/ && git commit -m "ci(affiliate): \
+#             Integritäts-Wache Premium (actions:write, Selftest, Issue-Pflege)" \
+#             && git push
+#
+#  Was sich ändert (Details: AFFILIATE-INTEGRITY-GATE-REPORT.md §2.5):
+#    • permissions: `actions: write` ergänzt  ← PFLICHT. Ohne sie antwortet
+#      GitHub auf createWorkflowDispatch mit 403 und der Lauf ist an jedem
+#      Tag mit Heilung rot (Runs 33211717423/33468544208/33589511441).
+#    • Stage 1: Detektor-Selbsttest VOR jeder Prüfung (Exit 2 statt
+#      Phantom-Funden)
+#    • Deploy-Trigger nur bei healed+pushed aus .affiliate_integrity_state.json
+#    • Issue-Pflege idempotent: EIN Issue pro Schadenslage, bei Grün
+#      auto-schließend, Duplikate werden aufgeräumt
+#    • Diagnose-Artefakt bei Rot
+#
+#  Hinweis: scripts/affiliate_integrity_gate.py schreibt Report/Zustand
+#  inzwischen KONVERGENT (nur bei inhaltlicher Änderung). Deshalb läuft die
+#  Wache auch OHNE diesen Patch an ruhigen Tagen grün – der Patch beseitigt
+#  die 403 an Heilungs-Tagen und bringt Selbsttest + Issue-Hygiene.
+# ============================================================
+# ============================================================
+#  AFFILIATE-INTEGRITÄTS-WACHE (täglich) – scripts/affiliate_integrity_gate.py
+#  ------------------------------------------------------------
+#  Auftrag (Frank, 14.08.2026, unverändert gültig): "Die Affiliate-Links
+#  wurden beschädigt. Bitte dauerhaft beheben (Automatik und Selbstheilung),
+#  indem die Veröffentlichung nur vorgenommen wird, wenn alle Links
+#  funktionieren und tatsächlich im Blog erscheinen. Ansonsten soll sofort
+#  eine Reparatur erfolgen."
+#
+#  Hintergrund: Am 14.08.2026 hatten 8 Live-Artikel beschädigte
+#  Affiliate-CTA-Boxen (dangling Markdown-Links, verstümmelter Text, ein
+#  Rohlink zum falschen Partner) – unbemerkt bis zur manuellen Meldung.
+#  Die Prüfung dieser Schadensklasse lief bis dahin nur EINMAL PRO WOCHE
+#  (seo-weekly.yml). Das erfüllt NICHT "sofort": ein neuer Schaden hätte
+#  fast eine Woche unbemerkt live bleiben können. Dieser schlanke,
+#  eigenständige Workflow läuft TÄGLICH und prüft/heilt AUSSCHLIESSLICH
+#  die Affiliate-Link-Integrität (AI1–AI5) – bewusst ohne die breiteren
+#  wöchentlichen SEO-/Meta-Heilungsketten anzufassen.
+#
+#  ------------------------------------------------------------
+#  PREMIUM-AUSBAU 02.09.2026 (Vorfall "stille Blindheit", Issues
+#  #76/#78/#95/#99/#137/#146 – die Wache war wochenlang rot, ohne dass
+#  ein einziger Link wirklich kaputt war):
+#
+#    Ursache: Der Render-Beweis AI4 zählte Links mit EINEM starren Regex
+#    auf die exakte Attribut-Reihenfolge der Hook-Ausgabe von 14.08.
+#    Nachdem render-link.html am 01.09. Awin-SubID (?subid=) und Umami-
+#    Kontext-Attribute bekam, fand das Regex in JEDEM Artikel 0 Links –
+#    24/24 "Render-Probleme", täglich ein neues Issue, roter
+#    BESTAND-REPORT, und publish_gate.py hätte Re-Queue-Kandidaten wegen
+#    eines Phantom-Fehlers zurückgestuft.
+#
+#    Dauerhafte Behebung (scripts/affiliate_integrity_gate.py v2):
+#      • attribut-tolerante <a>-Auswertung statt Positions-Regex
+#        (quotes/minify/?subid=/Attribut-Reihenfolge sind egal)
+#      • eingefrorener SELBSTTEST mit realen Hook-Ausgaben (aktuell,
+#        Legacy 14.08., unminifiziert) + Drift-Wächter gegen das Live-
+#        Template → Stage 1 unten. Bricht der Detektor, bricht der Lauf
+#        HIER (Exit 2), statt 24 Phantom-Funde zu produzieren.
+#      • FAIL-CLOSED: kein public/ / kaputter Build / veralteter Detektor
+#        = Werkzeugfehler (Exit 2) → nichts wird "geheilt" oder verworfen,
+#        publish_gate.py veröffentlicht dann gar nichts.
+#      • Schlüssel-genauer Beweis (jeder Markdown-Key muss im HTML stehen)
+#        + AI5-Gateway-Beweis (/go/<key>/ leitet auf die registrierte
+#        Partner-URL weiter, noindex) + rel="sponsored"-Prüfung.
+#      • Massen-Blindheit wird als Detektorfehler entlarvt (0 gerenderte
+#        Links in ALLEN Artikeln gleichzeitig → Exit 2 statt Heilung).
+#
+#    Dazu hier im Workflow:
+#      • Issue-Pflege ist IDEMPOTENT: EIN offenes Wachen-Issue wird
+#        aktualisiert statt täglich dupliziert, und bei Grün automatisch
+#        geschlossen (Schluss mit der Issue-Flut #76/#78/#95/#99/#137/#146).
+#      • Deploy-Trigger funktioniert wieder. REALER Auslöser der täglich
+#        roten Läufe (Runs 32933668966, 33211717423, 33468544208,
+#        33589511441 → Schritt "Deploy anstoßen"): diesem Workflow fehlte
+#        `actions: write`, obwohl er `createWorkflowDispatch` aufruft –
+#        GitHub quittiert das mit 403. deploy-catchup.yml und
+#        willkommenstext-refresh.yml hatten die Permission längst, diese
+#        Wache nicht. Jetzt: `actions: write` (oben) + Dispatch nur bei
+#        echter Heilung.
+#      • Heilungs-Entscheidung aus dem maschinenlesbaren Zustand
+#        (.affiliate_integrity_state.json) statt aus `GEHEILT`: git_sync.sh
+#        setzt sein Erfolgs-Flag auch bei "nichts zu pushen" (sync_ok()),
+#        der Deploy-Trigger konnte also ohne echte Reparatur anspringen.
+#      • Artefakt-Upload bei Rot (Report + Log + Zustand) für Diagnose.
+#
+#  Ablauf: Selbsttest → Hugo-Build → Gate (prüft + heilt + baut bei
+#  Heilung neu und führt den Beweis erneut) → committen/pushen → Deploy
+#  nur bei echter Heilung → Issue idempotent öffnen/aktualisieren/schließen.
+# ============================================================
+name: Affiliate-Integritäts-Wache (täglich)
+
+on:
+  schedule:
+    - cron: "0 4 * * *"    # 06:00 MESZ – vor dem Content-Engine-Hauptslot (08:10 MESZ)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: affiliate-integrity
+  cancel-in-progress: false
+
+env:
+  HUGO_VERSION: "0.164.0"
+  # Markierung für die Issue-Pflege: macht das Wachen-Issue eindeutig
+  # auffindbar (und von den generischen "Workflow fehlgeschlagen"-Issues
+  # aus alert-on-failure.yml unterscheidbar).
+  ISSUE_MARKER: "<!-- affiliate-integrity-daily -->"
+
+jobs:
+  integritaet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten
+        run: |
+          pip install --quiet pyyaml
+          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1 || true
+
+      - name: Hugo installieren
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      # ============ STAGE 1: DETEKTOR-SELBSTTEST (fail-closed) ============
+      # Beweist VOR jeder Prüfung, dass die Wache überhaupt sehen kann:
+      # attribut-tolerante Anker-Erkennung (inkl. ?subid=/Legacy/
+      # unminifiziert), AI1–AI3-Schadensbilder von 14.08., AI5-Gateway-
+      # Beweis, Selbstheilung, Build-Frische, Drift-Wächter gegen
+      # render-link.html. Rot = der Lauf endet hier (Exit 2), es wird
+      # NICHELS geheilt/verworfen und das Issue benennt den Detektor als
+      # Ursache – genau die Transparenz, die 3 Wochen lang fehlte.
+      - name: Detektor-Selbsttest (Wache muss sehen können)
+        run: python3 scripts/affiliate_integrity_gate.py --selftest
+
+      - name: Hugo-Build (Voraussetzung für Render-Beweis AI4/AI5)
+        run: hugo --minify
+
+      # ============ STAGE 2: PRÜFEN + SOFORT HEILEN ============
+      - name: Affiliate-Integritäts-Gate ausführen (prüfen + sofort heilen)
+        id: gate
+        continue-on-error: true
+        run: |
+          set +e
+          python3 scripts/affiliate_integrity_gate.py | tee /tmp/integrity_log.txt
+          code=${PIPESTATUS[0]}
+          echo "exit_code=${code}" >> "$GITHUB_OUTPUT"
+          # Maschinenlesbarer Zustand für die Folgeschritte (wird vom Gate
+          # bei jedem Lauf geschrieben): geheilte Slugs, offene Funde,
+          # Werkzeugfehler, Build-Info.
+          if [ -f .affiliate_integrity_state.json ]; then
+            cp .affiliate_integrity_state.json /tmp/state.json
+          else
+            echo '{}' > /tmp/state.json
+          fi
+          case "$code" in
+            0) echo "✅ Affiliate-Integrität bewiesen (alle Links intakt, registriert, gerendert, Gateway geprüft)." ;;
+            1) echo "🔴 Inhaltsschaden offen – Details im Report/Issue." ;;
+            2) echo "🟠 WERKZEUGFEHLER – Render-Beweis nicht möglich (fail-closed: nichts wird geheilt oder verworfen)." ;;
+            *) echo "⚠ Unerwarteter Exit-Code ${code}" ;;
+          esac
+          exit "$code"
+
+      - name: Heilungs-Status aus Zustand ableiten
+        id: state
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          try:
+              state = json.load(open('/tmp/state.json', encoding='utf-8'))
+          except Exception:
+              state = {}
+          healed = state.get('healed') or []
+          print(f"healed={'true' if healed else 'false'}")
+          print(f"healed_count={len(healed)}")
+          print(f"exit_code={state.get('exit_code', 1)}")
+          print(f"content_problems={len(state.get('content_problems') or [])}")
+          print(f"tool_errors={len(state.get('errors') or [])}")
+          PY
+
+      # ============ STAGE 3: HEILUNG SICHERN ============
+      # BUGFIX (14.08.2026, s. uniqueness-guard.yml/seo-weekly.yml): 'git add'
+      # mit mehreren Pfaden bricht OHNE etwas zu stagen ab, wenn EIN Pfad
+      # fehlt – deshalb pro Pfad ein eigener add-Aufruf.
+      - name: Reparatur + Report committen und pushen
+        id: commit
+        run: |
+          git config user.name "Affiliate-Integrity-Bot"
+          git config user.email "affiliate-integrity-bot@users.noreply.github.com"
+          git add content/ 2>/dev/null || true
+          git add AFFILIATE-INTEGRITY-REPORT.md 2>/dev/null || true
+          git add .affiliate_integrity_state.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Affiliate-Integritäts-Wache: keine Änderungen."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "fix(content): Affiliate-Integritäts-Wache – CTA-Boxen/Linkziele automatisch geheilt (täglich)"
+            scripts/git_sync.sh --push-only
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Deploy NUR wenn tatsächlich geheilt UND gepusht wurde.
+      # Voraussetzung `actions: write` (oben) – ohne sie antwortet GitHub
+      # auf createWorkflowDispatch mit 403 und der Lauf war täglich rot.
+      - name: Deploy anstoßen (nur wenn tatsächlich repariert und gepusht wurde)
+        if: steps.state.outputs.healed == 'true' && steps.commit.outputs.pushed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy.yml',
+              ref: 'main',
+            });
+            console.log(`✅ Deploy ausgelöst – ${process.env.HEALED_COUNT} Artikel geheilt und gepusht.`);
+        env:
+          HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
+
+      # ============ STAGE 4: ISSUE-PFLEGE (idempotent) ============
+      # EIN offenes Issue pro Schadenslage: bei Rot aktualisieren (statt
+      # täglich ein neues zu öffnen), bei Grün automatisch schließen.
+      - name: Issue pflegen (öffnen/aktualisieren bei Rot, schließen bei Grün)
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          GATE_EXIT: ${{ steps.gate.outputs.exit_code }}
+          HEALED: ${{ steps.state.outputs.healed }}
+          HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
+          CONTENT_PROBLEMS: ${{ steps.state.outputs.content_problems }}
+          TOOL_ERRORS: ${{ steps.state.outputs.tool_errors }}
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = process.env.ISSUE_MARKER;
+            const exitCode = String(process.env.GATE_EXIT || '');
+            const green = exitCode === '0';
+            const healedCount = Number(process.env.HEALED_COUNT || 0);
+            const toolErrors = Number(process.env.TOOL_ERRORS || 0);
+
+            let report = '';
+            try { report = fs.readFileSync('AFFILIATE-INTEGRITY-REPORT.md', 'utf-8'); }
+            catch (e) { report = '_Report konnte nicht gelesen werden._'; }
+            let log = '';
+            try { log = fs.readFileSync('/tmp/integrity_log.txt', 'utf-8'); }
+            catch (e) {}
+
+            // Bestehendes offenes Wachen-Issue finden (Marker im Body).
+            // Suche bewusst mit dem blanken Token (ohne HTML-Kommentar-Zeichen):
+            // die Search-API tokenisiert Sonderzeichen, ein exakt gequoteter
+            // Marker findet sonst nichts. Gefiltert wird danach hart am Marker.
+            const found = await github.rest.search.issuesAndPullRequests({
+              q: `repo:${context.repo.owner}/${context.repo.repo} is:issue is:open ` +
+                 `affiliate-integrity-daily in:body`,
+              per_page: 20,
+            }).catch(() => ({ data: { items: [] } }));
+            let existing = (found.data.items || []).filter(i => (i.body || '').includes(marker));
+            if (!existing.length) {
+              // Fallback ohne Search-Index-Verzögerung: offene Issues direkt lesen.
+              const listed = await github.rest.issues.listForRepo({
+                owner: context.repo.owner, repo: context.repo.repo,
+                state: 'open', per_page: 100,
+              }).catch(() => ({ data: [] }));
+              existing = (listed.data || []).filter(i => !i.pull_request && (i.body || '').includes(marker));
+            }
+
+            if (green) {
+              for (const issue of existing) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: `${marker}\n✅ **Affiliate-Integritäts-Wache grün** (${new Date().toISOString()}): ` +
+                        `alle Affiliate-Links sind intakt, registriert und der Render-Beweis im gebauten HTML ` +
+                        `ist geführt (AI4/AI5).${healedCount ? ` In diesem Lauf automatisch geheilt: ${healedCount} Artikel.` : ''}\n\n` +
+                        `Issue wird automatisch geschlossen.`,
+                });
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: issue.number, state: 'closed', state_reason: 'completed',
+                });
+                console.log(`✅ Issue #${issue.number} automatisch geschlossen (Wache grün).`);
+              }
+              if (!existing.length) console.log('✅ Wache grün, kein offenes Issue vorhanden.');
+              return;
+            }
+
+            // Werkzeugfehler = Exit 2 ODER Tool-Errors im Zustand ODER gar kein
+            // Exit-Code (Selbsttest/Build/Python ist vorher gestorben). In allen
+            // drei Fällen ist die Ursache NICHT der Content – das Issue muss das
+            // sagen, sonst sucht jemand tagelang in tadellosen Artikeln.
+            const isToolError = exitCode === '2' || exitCode === '' || toolErrors > 0;
+            const title = isToolError
+              ? '🔗 Affiliate-Integritäts-Wache: Render-Beweis nicht möglich (Werkzeugfehler, fail-closed)'
+              : '🔗 Affiliate-Integritäts-Wache: CTA-Boxen brauchen Aufmerksamkeit';
+            const body = [
+              marker,
+              isToolError
+                ? '> 🟠 **Werkzeugfehler (Exit 2):** Der Render-Beweis konnte nicht geführt werden ' +
+                  '(Hugo-Build, `public/` oder Detektor). **Fail-closed:** Es wurde nichts "geheilt" ' +
+                  'und `publish_gate.py` veröffentlicht in diesem Zustand keine Artikel. ' +
+                  'Bitte `python3 scripts/affiliate_integrity_gate.py --selftest` lokal laufen lassen – ' +
+                  'schlägt der Selbsttest fehl, muss der Detektor an die aktuelle Ausgabe von ' +
+                  '`layouts/_default/_markup/render-link.html` angepasst werden (Drift-Wächter). ' +
+                  (exitCode === '' ? ' Hinweis: Dieser Lauf hat keinen Exit-Code geliefert – ' +
+                   'Detektor-Selbsttest, Hugo-Build oder Python sind bereits vorher abgebrochen ' +
+                   '(Log oben ansehen).' : '')
+                : '> 🔴 **Inhaltsschaden:** Nach der automatischen Selbstheilung bleiben Affiliate-CTAs ' +
+                  'auffällig. Betroffene Artikel wurden NICHT gelöscht.',
+              '',
+              `**Lauf:** ${new Date().toISOString()} · **Exit-Code:** ${exitCode || 'unbekannt'} · ` +
+              `**Automatisch geheilt:** ${healedCount} Artikel · **Offene Funde:** ${process.env.CONTENT_PROBLEMS || 0}`,
+              '',
+              '---',
+              '',
+              report,
+              '',
+              '<details><summary>Gate-Log</summary>',
+              '',
+              '```',
+              log.slice(0, 20000) || '(kein Log)',
+              '```',
+              '</details>',
+              '',
+              '---',
+              '_Automatisch erstellt/aktualisiert von der täglichen Affiliate-Integritäts-Wache ' +
+              '(`.github/workflows/affiliate-integrity-daily.yml`). Pro Schadenslage gibt es genau EIN ' +
+              'Issue – es wird bei Grün automatisch geschlossen._',
+            ].join('\n');
+
+            if (existing.length) {
+              const issue = existing[0];
+              await github.rest.issues.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: issue.number, title, body,
+              });
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `${marker}\n🔁 Wache lief erneut (${new Date().toISOString()}), Befund aktualisiert. ` +
+                      `Exit-Code ${exitCode || '?'}, ${healedCount} Artikel automatisch geheilt.`,
+              });
+              console.log(`🔁 Issue #${issue.number} aktualisiert (kein Duplikat).`);
+              // Weitere Duplikate aus früheren Läufen aufräumen
+              for (const dup of existing.slice(1)) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: dup.number, state: 'closed', state_reason: 'duplicate',
+                });
+                console.log(`🧹 Duplikat #${dup.number} geschlossen.`);
+              }
+            } else {
+              const created = await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo, title, body,
+              });
+              console.log(`✅ Issue #${created.data.number} erstellt.`);
+            }
+
+      - name: Diagnose-Artefakt bei Rot (Report, Log, Zustand)
+        if: always() && steps.gate.outputs.exit_code != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-integrity-run-${{ github.run_id }}
+          path: |
+            AFFILIATE-INTEGRITY-REPORT.md
+            .affiliate_integrity_state.json
+          if-no-files-found: ignore
+          retention-days: 14

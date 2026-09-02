@@ -100,14 +100,25 @@ def run_gate():
     length_failed, length_err = pg.check_length_failures()
     seo_failed, seo_err = pg.seo_audit_failures()
     affiliate_failed, affiliate_err = pg.affiliate_profi_failures()
-    integrity_failed, integrity_err = pg.affiliate_integrity_failures()
+    # Bestand: bewusst OHNE Kandidaten-Filter (alles prüfen) – bestand_gate
+    # ist die nicht-destruktive Bestands-Wache, die jeden Fund meldet
+    # und zu heilen versucht. Werkzeugfehler (exit_code 2) kommen als
+    # errors-Liste zurück und landen im Report + Exit 1.
+    integrity_failed, integrity_err, integrity_tool_error = \
+        pg.affiliate_integrity_failures()
 
+    errors = [e for e in (length_err, seo_err, affiliate_err, integrity_err) if e]
+    if integrity_tool_error:
+        # fail-closed sichtbar machen: kein Bestand darf als "sauber" gelten,
+        # solange der Render-Beweis nicht geführt werden konnte.
+        errors.append("Affiliate-Render-Beweis nicht möglich (Werkzeugfehler) – "
+                      "Bestand gilt als NICHT geprüft")
     return {
         "length": length_failed,
         "seo": seo_failed,
         "affiliate": affiliate_failed,
         "integrity": integrity_failed,
-    }, [e for e in (length_err, seo_err, affiliate_err, integrity_err) if e]
+    }, errors
 
 
 def rebuild_hugo() -> bool:
@@ -187,20 +198,35 @@ def main():
             "errors": errors,
         }
         print(json.dumps(result, ensure_ascii=False, indent=2))
-        return 1 if still_affected else 0
+        # FAIL-CLOSED (02.09.2026): Auswertungsfehler (z. B. Render-Beweis
+        # nicht möglich, exit_code 2 der Integritäts-Wache) dürfen nicht als
+        # „Bestand sauber" durchgehen – sie sind sichtbar rot.
+        return 1 if (still_affected or errors) else 0
 
     lines = [
         "# 📋 BESTAND-REPORT (bestand_gate.py)",
         "",
         f"**Geprüfte Live-Artikel:** {len(all_slugs)} · **Heilung versucht:** "
-        f"{', '.join(healed_dims) or '–'} · **Weiterhin auffällig:** {len(still_affected)}",
+        f"{', '.join(healed_dims) or '–'} · **Weiterhin auffällig:** {len(still_affected)}"
+        + (" · ⚠️ **Auswertungsfehler:** " + str(len(errors)) if errors else ""),
         "",
     ]
     if errors:
         lines.append("⚠️ Auswertungsfehler: " + "; ".join(errors))
         lines.append("")
 
-    if not still_affected:
+    if errors and not still_affected:
+        # FAIL-CLOSED (02.09.2026): Ohne vollständige Prüfung darf der Report
+        # NICHT grün aussehen – sonst liest sich ein Werkzeugfehler als
+        # "Bestand sauber" (genau die Irreführung, die der Exit 1 abschafft).
+        lines.append(
+            "🟠 **Bestand gilt als NICHT geprüft** – mindestens eine Prüfung konnte "
+            "nicht ausgewertet werden (siehe Auswertungsfehler oben). Es wurde "
+            "nichts geheilt und nichts gelöscht. Diagnose: "
+            "`python3 scripts/affiliate_integrity_gate.py --selftest` und "
+            "`hugo --minify` (der Render-Beweis AI4/AI5 braucht `public/`)."
+        )
+    elif not still_affected:
         lines.append(
             "🎉 Alle bestehenden Artikel erfüllen die aktuelle Publish-Gate-Prüfung "
             "(check_length.py + seo_audit.py + affiliate_profi_check.py + "
@@ -230,7 +256,8 @@ def main():
     report_text = "\n".join(lines)
     print(report_text)
     REPORT.write_text(report_text + "\n", encoding="utf-8")
-    return 1 if still_affected else 0
+    # FAIL-CLOSED (02.09.2026): s. o. – Auswertungsfehler = Exit 1.
+    return 1 if (still_affected or errors) else 0
 
 
 if __name__ == "__main__":

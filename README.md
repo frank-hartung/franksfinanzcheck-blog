@@ -51,6 +51,7 @@ bringt (Deploy, Engine, manueller Commit, `publish.py`):
 | **Engine-Publish-Gate** | 5 harte Prüfungen inkl. **Cover-Text-Komplettheit** (unvollständiger Titel → Verwurf bzw. Zurückstufung) |
 | **Engine-Phase 6** | `engine_issue.py --deficit`: Tagesende unter Minimum → sichtbares, auto-schließendes Issue |
 | **Blog-Health (täglich)** | Heilt auch ZWISCHEN den Publishing-Slots: Kadenz, Titel, Covers + Überschriften-Hygiene (`blog_health_gate.py` ruft seit 27.08. `heading_guard.py` anker-stabil auf – kein `<br>` in Überschriften, TOC-/Leerzeichen-Fehlerwurzel) |
+| **Affiliate-Integritäts-Wache (täglich)** | Seit 02.09. Premium-Stufe: Detektor-**Selbsttest** vor jeder Prüfung, **Render-Beweis AI4** attribut-tolerant + schlüsselgenau, **Gateway-Beweis AI5** (`/go/<key>/` leitet auf die registrierte Partner-URL weiter), **fail-closed** bei Werkzeugfehlern (Exit 2 → `publish_gate.py` veröffentlicht nichts), EIN Issue pro Schadenslage (auto-schließend). Details: `AFFILIATE-INTEGRITY-GATE-REPORT.md` |
 | **Doktor-Kette / Engine** | `blog_doctor.py` (Phase A, erste Text-Wache) heilt jeden NEUEN Artikel bei der Geburt (`--new-only` via Content-Engine v2) und bei jeder Visite |
 | **`publish.py` (manuell)** | Gleiche Routine wie die Automation – Verstoß blockiert hart (Notfall: `--force-cadence`) |
 
@@ -71,6 +72,70 @@ Alle Affiliate-Links liegen zentral in **`scripts/check24_links.yaml`**. Ändern
 1. **Neue Artikel (Bot):** Einfach die Links in `scripts/check24_links.yaml` aktualisieren – der Bot weist neuen Artikeln automatisch die passenden Links zu (Pin → Kategorie → Link). Die Zuordnung erfolgt über die Ziel-URL des Pins (z. B. `check24.de/strom/` → Strom-Link) bzw. die Pinwand.
 2. **Bestehende Artikel:** `python3 scripts/affiliate_shield.py --fix` routet alle Affiliate-Links über das `/go/`-Gateway; `python3 scripts/affiliate_link_check.py --fix` prüft Kategorie und PID.
 3. **Generischer Link (GitHub-Variable):** Falls nötig, in GitHub unter Settings → Secrets and variables → Actions die Variable `AFFILIATE_URL` aktualisieren.
+
+**🛡️ Affiliate-Integritäts-Wache auf Premium-Stufe (02.09.2026):**
+
+Die tägliche Wache (`affiliate-integrity-daily.yml`, 06:00 MESZ) beweist,
+dass jeder Affiliate-Link **wirklich im Blog erscheint** – nicht nur, dass
+er im Markdown steht:
+
+| Prüfung | Was bewiesen wird |
+|---|---|
+| **AI1 Struktur** | Jede CTA-Zeile enthält einen vollständigen Markdown-Link (kein Dangling `[**Text**` ohne `](url)`) |
+| **AI2 Registry** | Jedes `/go/<key>/` ist in `check24_links.yaml` registriert; **keine** rohen Partner-URLs im Content (Tracking-/Kennzeichnungsumgehung) |
+| **AI3 Plausibilität** | Verstümmelter Text direkt an der CTA fällt auf (hunspell) |
+| **AI4 Render-Beweis** | Jeder Markdown-Link steht **schlüsselgenau** als `<a href="/go/<key>/…">` im gebauten HTML – inkl. `rel="sponsored"` (Werbekennzeichnung) und Umami-Klick-Attribution |
+| **AI5 Gateway-Beweis** | Jede `/go/<key>/`-Seite existiert, ist `noindex` und leitet exakt auf die registrierte Partner-URL weiter |
+
+Selbstheilung: defekte CTA-Zeilen werden **nie geflickt**, sondern komplett
+neu aus den geprüften Vorlagen (`affiliate_marketer.py`) generiert; fremde/
+nicht registrierte Linkziele werden auf die thematisch korrekte Route
+umgeroutet (`route_for()`); Bestandsartikel werden nie gelöscht.
+
+Drei Sicherheitsnetze gegen „stille Blindheit" (Lehre aus dem Vorfall
+01.09.2026, siehe `AFFILIATE-INTEGRITY-GATE-REPORT.md`):
+
+```bash
+python3 scripts/affiliate_integrity_gate.py --selftest   # Detektor-Beweis (Exit 2 = Wache blind)
+python3 scripts/affiliate_integrity_gate.py              # prüfen + sofort heilen
+python3 scripts/affiliate_integrity_gate.py --dry-run --json
+```
+
+- **Selbsttest mit eingefrorenen Fixtures** aus realer Hook-Ausgabe
+  (aktuell, Legacy 14.08., unminifiziert) + **Drift-Wächter** gegen
+  `render-link.html` – läuft im Workflow VOR jeder Prüfung.
+- **Fail-closed:** kein `public/`, kaputter Hugo-Build oder veralteter
+  Detektor = Werkzeugfehler (Exit 2). Dann wird nichts „geheilt", nichts
+  verworfen und `publish_gate.py` veröffentlicht **gar nichts**.
+- **Massen-Blindheit** (0 gerenderte Links in *allen* Artikeln) wird als
+  Detektorfehler entlarvt, nicht als Inhaltsschaden.
+
+Shortcode-CTAs (`tarifvergleich`, `einspartabelle`) laufen nicht durch die
+Markdown-Pipeline und wurden deshalb vom Render-Hook nicht erfasst – sie
+nutzen jetzt denselben Attribut-Vertrag über
+`layouts/_partials/affiliate_anchor_attrs.html` (Fund vom 02.09.: Buttons
+ohne `rel="sponsored"` und ohne Klick-Attribution).
+
+Report und Zustand werden **konvergent** geschrieben (nur bei inhaltlicher
+Änderung) – ruhige Tage erzeugen kein Git-Diff, keinen Commit, keinen
+Deploy-Trigger und kein Issue.
+
+Report: `AFFILIATE-INTEGRITY-REPORT.md` (täglich) ·
+Zustand: `.affiliate_integrity_state.json` ·
+Hintergrund/Dauerhaftigkeit: `AFFILIATE-INTEGRITY-GATE-REPORT.md`
+
+> ⚠️ **Einmalig einspielen (Workflow):** Die Premium-Fassung von
+> `.github/workflows/affiliate-integrity-daily.yml` liegt als fertiger Patch
+> bei – Agenten dürfen keine Workflow-Dateien pushen (GitHub-App ohne
+> `workflows`-Permission). Ohne Patch fehlt der Wache `actions: write`, der
+> Deploy-Trigger läuft an Heilungs-Tagen in eine 403:
+>
+> ```bash
+> git apply patches/affiliate-integrity-premium-2026-09-02-workflows.patch
+> # alternativ: cp patches/affiliate-integrity-daily-2026-09-02-workflow-ready.yml \
+> #                 .github/workflows/affiliate-integrity-daily.yml
+> ```
+
 
 **📌 Automatisches Pinnen bei Pinterest (RSS-Auto-Publish):**
 
