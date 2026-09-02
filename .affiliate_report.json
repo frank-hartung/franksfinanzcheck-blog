@@ -1,5 +1,5 @@
 {
- "total": 31,
+ "total": 32,
  "errors": 0,
  "fixed": 0,
  "posts": [
@@ -295,6 +295,15 @@
    "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
    "title": "Tagesgeld-Zinsen 2026: Die besten Zinssätze im Ver",
    "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen",
+   "title": "September-Roadtrip: Clevere Wege zum Mietwagen-Sch",
+   "pillar": "mietwagen",
    "fixed": 0,
    "errors": [],
    "infos": [],
