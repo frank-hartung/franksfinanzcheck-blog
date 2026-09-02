@@ -56,10 +56,61 @@ ACCEPTED_IMG_EXT = (".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif")
 DOM_NODES_SOFT = 2500
 DOM_NODES_HARD = 4000
 
+# Inline-JS-Budget über die Stichprobe (80 Seiten): PaperMod bringt pro Seite
+# ~4 bewusste Inline-Snippets (Theme-Toggle, Suche, Menü, Copy-Code) mit. Erst
+# deutlich darüber liegt ein echtes Bündelungs-Problem vor.
+INLINE_JS_SOFT_MAX = 8 * 80
+
 # Verzeichnisse, die NICHT auf Artikel-/LCP-Seiten ausgeliefert werden
 # (Profil-/Board-Assets für Pinterest). Sie sind für die Core-Web-Vitals der
 # Blog-Seiten ohne Relevanz und würden nur Rauschen erzeugen.
 NON_PAGE_DIRS = {"social", "boards"}
+
+# Skript-Typen, die den Renderer NICHT blockieren und daher nicht als
+# "render_block_js" gezählt werden dürfen:
+#   - application/ld+json  → strukturierte Daten (SEO!), wird nie ausgeführt
+#   - importmap / speculationrules → Metadaten, kein Parser-Block
+#   - text/template, text/x-template → inerte Vorlagen
+# Ein <script> ohne src IST per Definition nicht "ohne async/defer" – async und
+# defer wirken ausschließlich auf EXTERNE Skripte. Inline-JS blockiert zwar den
+# Parser, ist aber eine andere Klasse von Befund (inline_js) als ein
+# render-blockierendes externes Skript.
+NONBLOCKING_SCRIPT_TYPES = (
+    "application/ld+json",
+    "importmap",
+    "speculationrules",
+    "text/template",
+    "text/x-template",
+    "application/json",
+)
+
+
+def _classify_scripts(html):
+    """Zerlegt alle <script>-Starttags in echte CWV-Klassen.
+
+    Rückgabe: (blocking_external, inline_js, structured_data)
+      blocking_external – <script src=...> OHNE async/defer/module → echter
+                          Render-Blocker, der einzige Befund mit INP/LCP-Effekt
+      inline_js         – ausführbares Inline-JS (Parser-Block, aber kein
+                          Netzwerk-Roundtrip) → nur Hinweis
+      structured_data   – JSON-LD & Co. → KEIN Befund (SEO-Pflichtinhalt)
+    """
+    blocking_external = inline_js = structured_data = 0
+    for tag in re.findall(r"<script\b[^>]*>", html, re.I):
+        m = re.search(r"""\btype\s*=\s*["']?([^"'\s>]+)""", tag, re.I)
+        stype = (m.group(1).lower() if m else "")
+        if stype in NONBLOCKING_SCRIPT_TYPES:
+            structured_data += 1
+            continue
+        has_src = re.search(r"""\bsrc\s*=\s*["']?[^"'\s>]+""", tag, re.I)
+        if not has_src:
+            inline_js += 1
+            continue
+        # Externes Skript: async, defer oder type="module" (implizit deferred)
+        if re.search(r"\b(async|defer)\b", tag, re.I) or stype == "module":
+            continue
+        blocking_external += 1
+    return blocking_external, inline_js, structured_data
 
 
 def _human(n):
@@ -129,7 +180,9 @@ def _scan_public(public_dir):
     total_html = sum(os.path.getsize(f) for f in html_files)
     # Render-Blocking: Inline-<style> Blöcke & viele <script> ohne async/defer
     inline_styles = 0
-    inline_scripts_plain = 0
+    blocking_js = 0
+    inline_js = 0
+    structured_data = 0
     img_nosize = 0
     for f in html_files[:80]:  # Stichprobe (Home + Top-Seiten), Budgierbar
         try:
@@ -137,18 +190,32 @@ def _scan_public(public_dir):
         except OSError:
             continue
         inline_styles += len(re.findall(r"<style(?![^>]*>)[^>]*>", t))
-        inline_scripts_plain += len(re.findall(
-            r"<script(?![\s>]*src=)[^>]*>", t))
+        b, i, s = _classify_scripts(t)
+        blocking_js += b
+        inline_js += i
+        structured_data += s
         img_nosize += len(re.findall(
             r"<img (?![^>]*(?:width=|height=|style=))", t))
+    # Rückwärtskompatibler Alias für ältere Manifest-Leser
+    inline_scripts_plain = blocking_js
     if inline_styles:
         findings.append({"level": "amber", "code": "render_block_css",
                          "count": inline_styles,
                          "msg": f"{inline_styles} Inline-<style>-Blöcke (Render-Blocking-Risiko)"})
-    if inline_scripts_plain:
+    if blocking_js:
         findings.append({"level": "amber", "code": "render_block_js",
-                         "count": inline_scripts_plain,
-                         "msg": f"{inline_scripts_plain} Skripte ohne async/defer (INP-Risiko)"})
+                         "count": blocking_js,
+                         "msg": f"{blocking_js} externe Skripte ohne async/defer "
+                                "(Render-Blocking, LCP/INP-Risiko)"})
+    # Inline-JS ist nur ab einer relevanten Menge ein Befund – einzelne
+    # Theme-Snippets (Theme-Toggle, Suche) sind bewusst inline, um genau einen
+    # Render-blockierenden Roundtrip zu SPAREN.
+    if inline_js > INLINE_JS_SOFT_MAX:
+        findings.append({"level": "amber", "code": "inline_js",
+                         "count": inline_js,
+                         "msg": f"{inline_js} Inline-JS-Blöcke über "
+                                f"{len(html_files[:80])} Seiten "
+                                f"(> {INLINE_JS_SOFT_MAX} Ø-Budget) – bündeln"})
     if img_nosize:
         findings.append({"level": "amber", "code": "cls_img",
                          "count": img_nosize,
@@ -158,6 +225,9 @@ def _scan_public(public_dir):
                "css_files": len(css), "js_bytes": js_bytes,
                "css_bytes": css_bytes, "html_bytes": total_html,
                "inline_styles": inline_styles,
+               "blocking_js": blocking_js,
+               "inline_js": inline_js,
+               "structured_data_scripts": structured_data,
                "inline_scripts_plain": inline_scripts_plain,
                "img_nosize": img_nosize}
     return metrics, findings
@@ -214,8 +284,12 @@ def _render_report(verdict, s_met, s_find, p_met, p_find):
             "",
             f"- HTML-Dateien: **{p_met['html_files']}** · JS-Dateien {p_met['js_files']} "
             f"({_human(p_met['js_bytes'])}) · CSS {p_met['css_files']} ({_human(p_met['css_bytes'])})",
-            f"- Inline-<style>: {p_met['inline_styles']} · Skripte ohne async/defer: "
-            f"{p_met['inline_scripts_plain']} · <img> ohne Größensetzung: {p_met['img_nosize']}",
+            f"- Inline-<style>: {p_met['inline_styles']} · "
+            f"externe Skripte ohne async/defer: {p_met.get('blocking_js', 0)} · "
+            f"Inline-JS-Blöcke: {p_met.get('inline_js', 0)} · "
+            f"JSON-LD/strukturierte Daten (nicht blockierend): "
+            f"{p_met.get('structured_data_scripts', 0)} · "
+            f"<img> ohne Größensetzung: {p_met['img_nosize']}",
             "",
         ]
     lines += [
@@ -245,6 +319,36 @@ def _selftest():
         failures.append("Budget-Reihenfolge inkonsistent")
     if COVER_BYTES_MAX <= 0:
         failures.append("Cover-Budget trivial")
+
+    # --- Skript-Klassifikation (Regressionsschutz gegen JSON-LD-Fehlalarm) ---
+    cases = [
+        # (HTML, erwartet blocking, inline, structured)
+        ('<script type="application/ld+json">{}</script>', 0, 0, 1),
+        ("<script type='application/ld+json'>{}</script>", 0, 0, 1),
+        ('<script type="application/ld+json" >{}</script>', 0, 0, 1),
+        ('<script src="/a.js"></script>', 1, 0, 0),
+        ('<script defer src="/a.js"></script>', 0, 0, 0),
+        ('<script src="/a.js" async></script>', 0, 0, 0),
+        ('<script type="module" src="/a.js"></script>', 0, 0, 0),
+        ('<script>var x=1;</script>', 0, 1, 0),
+        ('<script type="importmap">{}</script>', 0, 0, 1),
+        ('<script type="speculationrules">{}</script>', 0, 0, 1),
+        ('<script defer crossorigin="anonymous" src="/s.js" integrity="x"></script>',
+         0, 0, 0),
+    ]
+    for html, eb, ei, es in cases:
+        gb, gi, gs = _classify_scripts(html)
+        if (gb, gi, gs) != (eb, ei, es):
+            failures.append(
+                f"Skript-Klassifikation falsch für {html!r}: "
+                f"erwartet blocking={eb} inline={ei} strukturiert={es}, "
+                f"erhalten blocking={gb} inline={gi} strukturiert={gs}")
+
+    # Eine reine JSON-LD-Seite darf NIEMALS einen render_block_js-Befund geben
+    ld_page = '<html><head>' + '<script type="application/ld+json">{}</script>' * 6 + '</head></html>'
+    b, _, s = _classify_scripts(ld_page)
+    if b != 0 or s != 6:
+        failures.append("JSON-LD-Seite erzeugt fälschlich Render-Blocking-Befund")
     # _human
     if _human(2048) != "2 KB":
         failures.append(f"_human(2048) != '2 KB' ({_human(2048)})")

@@ -797,3 +797,67 @@ Unbypassbar: A1–A4 laufen im Code von `pinterest_engine.py` /
 
 
 
+## Regel G1–G4: Governance-Messwerte müssen WAHR sein (02.09.2026)
+
+Ein Governance-Report ist nur so viel wert wie die Ehrlichkeit seiner
+Kennzahlen. Ein Dauer-Fehlalarm ist teurer als gar keine Messung: Er
+verbrennt Aufmerksamkeit, und echte rote Befunde gehen im Rauschen unter
+("Alarm-Müdigkeit"). Anlass: Governance-Report #145 meldete vier Befunde,
+von denen drei Messfehler waren und einer ins Leere zeigte.
+
+**G1 – Nur echte Render-Blocker zählen (`cwv_guard.py`).**
+Die alte Regex `<script(?![\s>]*src=)[^>]*>` zählte JEDES Skript ohne
+`src` – also vor allem die 6 JSON-LD-Blöcke pro Seite (Article, FAQPage,
+Breadcrumb …). Das ergab "622 Skripte ohne async/defer" und hielt die
+CWV-Ampel dauerhaft auf AMBER. Fachlich falsch, gleich doppelt:
+`async`/`defer` wirken ausschließlich auf EXTERNE Skripte, und
+`application/ld+json` wird nie ausgeführt – es ist SEO-Pflichtinhalt.
+Wer diesem Befund gefolgt wäre, hätte die strukturierten Daten entfernt
+und die Rich-Snippets zerstört. Verbindlich: `_classify_scripts()`
+trennt `blocking_external` (echter Befund), `inline_js` (Hinweis ab
+Budget) und `structured_data` (nie ein Befund). Realer Stand: **0**
+render-blockierende Skripte.
+
+**G2 – Keine Kennzahl darf dauerhaft `n/a` sein.**
+Die Scorecard las Flesch-Werte aus `VERSTAENDNIS-REPORT.md` – eine Datei,
+die es im Repo nie gab. Die Lesbarkeit stand auf `n/a` und wurde per
+`(v or 100) >= 70` trotzdem GRÜN gefärbt: eine fehlende Messung als
+Erfolg verbucht. Verbindlich: gemessen wird an der Quelle
+(`readability_check.analyze`, dieselbe Funktion wie Publish-Gate und
+Quality-Score), und Unbekannt ist ⚪, niemals 🟢.
+
+**G3 – Empfehlungen müssen ausführbar sein.**
+"100 Lektorat-Befunde – `lektor_guard.py --fix`" war ein Ratschlag ins
+Leere: Die Summe zählte auch die reinen "(Report)"-Stilradare (Echo,
+Nominalstil, Weichmacher), die `--fix` konstruktionsbedingt NICHT
+beheben kann – alle "(Auto)"-Regeln stehen längst auf 0. Verbindlich:
+auto-behebbare Befunde (Score-relevant) und Stil-Hinweise (Info,
+redaktionelle Hand) werden getrennt ausgewiesen.
+
+**G4 – Optionale Secrets erzeugen kein RED; Erfolg wird belegt.**
+`PINTEREST_TOKEN_KEY` ist der ALTERNATIVE Auth-Pfad zu
+`PINTEREST_ACCESS_TOKEN`, wurde aber als Pflicht-Secret geführt und
+färbte die Ampel dauerhaft RED. Verbindlich: `optional`/`alt_of` in
+`SECRETS`; fehlt ein optionales Secret bei aktiver Alternative, ist das
+kein Befund. Zusätzlich rufen die Workflows, die ein Secret WIRKLICH
+nutzen (`pinterest-ai.yml`, `social-ai.yml`), nach Erfolg
+`--record-success` auf und committen `data/secrets_state.json` – sonst
+bleibt die Wache auf "UNBEKANNT" und ein echter 30-Tage-Token-Ablauf
+fiele nicht auf.
+
+Regressionsschutz: `cwv_guard.py --selftest` (11 eingefrorene
+Skript-Fälle inkl. JSON-LD-Seite) und `secrets_age_guard.py --selftest`
+(optionales Secret erzeugt nie RED, Pflicht-Secret bleibt hart rot).
+
+**Anwendung G4 (Workflow-Teil):** Die beiden `--record-success`-Schritte
+liegen als fertiger Patch bereit, weil der Governance-Bot keine
+`workflows`-Berechtigung hat:
+
+```
+git apply patches/governance-145-2026-09-02-workflows.patch
+git commit -am "ci: Secrets-Erfolg in Pinterest-/Social-Workflow vermerken (#145)"
+```
+
+Bis der Patch eingespielt ist, bleiben `PINTEREST_ACCESS_TOKEN` und
+`MASTODON_ACCESS_TOKEN` in der Wache auf "UNBEKANNT" (AMBER) – die
+Skript-Fixes G1–G4 wirken davon unabhängig bereits.

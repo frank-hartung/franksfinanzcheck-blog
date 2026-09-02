@@ -5,13 +5,14 @@
 
 | Kennzahl | Wert | Ampel |
 |---|---|---|
-| Veröffentlichte Artikel | 26 | 🟢 |
-| Entwürfe (Warteschlange) | 0 | 🟡 |
+| Veröffentlichte Artikel | 25 | 🟢 |
+| Entwürfe (Warteschlange) | 1 | 🟡 |
 | Pillars / Themen-Cluster | 6 | 🟢 |
 | Decay-Kandidaten (STALE+DECAYING) | 0 | 🟢 |
 | Core-Web-Vitals | AMBER | 🟡 |
-| Ø Lesbarkeit (Flesch) | n/a | 🟢 |
-| Lektorat-Befunde | 111 | 🟡 |
+| Ø Lesbarkeit (Flesch) | 52.8 | 🟡 |
+| Lektorat-Befunde (auto-behebbar) | 0 | 🟢 |
+| Stil-Hinweise (Lektorat, nur Info) | 276 | ℹ️ |
 | Tote Secrets | 0 | 🟢 |
 | Affiliate-Klicks (Umsatz-Hebel) | 0 über 0 Artikel | 🟡 |
 | Awin-Provision (Klicks→Umsatz) | 0.00 € (0.00 € bezahlt) über 0 Artikel | 🟡 |
@@ -39,6 +40,7 @@ _Noch keine Awin-Provisions-Daten – `scripts/awin_provisions.py` mit dem Awin-
 ## Handlungsempfehlungen
 
 - Core-Web-Vitals unter Soll – `scripts/cwv_guard.py` für Befunde; Covers als AVIF/WebP, Bilder < 220 KB, `<img>` mit width/height.
-- **111** Lektorat-Befunde – `scripts/lektor_guard.py --fix` (Doppelwörter, Füll-Phrasen, Person-Mix).
+- **276** Stil-Hinweise (Echo, Nominalstil, Weichmacher) – nicht automatisch behebbar. Redaktionell in der Refresh-Queue mitziehen: `scripts/lektor_guard.py` listet die Fundstellen pro Artikel.
+- **1** Artikel in der Entwurf-Warteschlange – manuelle Qualitätsfreigabe prüfen (Kadenz- bzw. Qualitäts-Gate).
 
 _Erzeugt von `scripts/editorial_scorecard.py` (Chefredakteur-View)._
