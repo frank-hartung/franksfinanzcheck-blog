@@ -1,0 +1,66 @@
+name: Redaktions-Standard-Patch einspielen (einmalig, 02.09.2026)
+
+# EINMALIGER Workflow – aktiviert den Redaktions-Standard
+# (Capital/WirtschaftsWoche/ZEIT-Methoden) dauerhaft in der Blogautomatik:
+#   1. Content-Engine v2 Phase 2: redaktions_standard.py --selftest +
+#      --fix --ai --new-only (Heilung bei der Geburt) + --gate --new-only
+#      (harte Funde RS1-RS7 -> Entwurf statt Publikation, Circuit-Breaker).
+#   2. SEO-Weekly: Bestands-Retrofit --fix --ai --backlog 3 (hebt
+#      wöchentlich die 3 Artikel mit den meisten offenen Modulen auf
+#      Standard: Kürze-Box, Frage-H2, Faustregel, Schrittfolge,
+#      Zahlen-Ehrlichkeit, Phantom-Quellen).
+#
+# HINTERGRUND: Der Arena-Bot darf keine Workflow-Dateien pushen (kein
+# `workflows`-Recht) – die Skripte, Prompts, Layouts und das Regelwerk
+# kommen regulär per Pull Request vom Arena-Branch; NUR die beiden
+# Workflow-Verdrahtungen laufen über diesen Patch-Umweg.
+# Details + Recherche-Quellen: REDAKTIONS-STANDARD-CAPITAL-WIWO-ZEIT.md
+#
+# VORAUSSETZUNG: Repository-Secret `GH_PAT` (bereits eingerichtet für
+# die früheren Patch-Workflows – Scopes: repo + workflow).
+#
+# ANWENDUNG:
+#   1. Diese Datei nach .github/workflows/apply-redaktions-standard-2026-09-02.yml
+#      legen (GitHub-Web-Oberfläche → "Add file" → "Create new file").
+#   2. GitHub → Actions → "Redaktions-Standard-Patch einspielen" → "Run workflow".
+#   3. Danach diese einmalige Workflow-Datei wieder löschen (optional).
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+          fetch-depth: 0
+
+      - name: Patch-Datei aus Arena-Branch holen
+        run: |
+          git fetch origin arena/01a063e3-franksfinanzcheck-blog
+          git show origin/arena/01a063e3-franksfinanzcheck-blog:patches/redaktions-standard-2026-09-02-workflows.patch > /tmp/rs.patch
+          echo "✅ Patch-Datei geladen:"
+          wc -l /tmp/rs.patch
+
+      - name: Patch anwenden
+        run: |
+          git apply /tmp/rs.patch
+          echo "✅ Patch angewendet:"
+          git status --short
+
+      - name: Committen & nach main pushen
+        run: |
+          git config user.name "Frank (Patch-Bot)"
+          git config user.email "frank@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen – Patch war offenbar schon aktiv."
+          else
+            git commit -m "feat(redaktion): Redaktions-Standard Capital/WiWo/ZEIT in Engine + SEO-Weekly verdrahtet (Patch 02.09.2026)"
+            git push origin main
+            echo "✅ Patch nach main gepusht."
+          fi
