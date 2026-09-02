@@ -1,16 +1,16 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-02 06:43 UTC  
-**Stufe:** WARTEND  
-**Befund:** Publikationstag, bisher 0 Artikel – Fallback-Slots (14:10 / 17:40 UTC) laufen noch. Kein Alarm. – Bestand: 1 von Gates gehalten (ältester 0 Tage: publish-gate: Affiliate-Link-Integrität nicht bestanden (defekte/nicht gerenderte CTA): nur 0 statt mind. 2 Affiliate-Links im gebauten HTML gefunden)
+**Stand:** 2026-09-02 14:24 UTC  
+**Stufe:** P2  
+**Befund:** Am letzten Publikationstag (2026-09-02) nur 1/2 Artikel – unter Mindestziel. – Bestand: 1 von Gates gehalten (ältester 0 Tage: publish-gate: Textverständnis-Gate nicht bestanden: R8-URL-LEERZEICHEN: URL mit Leerzeichen: „../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/“ (…)
 
 | Kennzahl | Wert |
 |---|---|
 | Heute | 2026-09-02 (Mittwoch) |
 | Publikationstag heute | ja |
-| Artikel letzter Publikationstag (2026-09-02) | 0 |
-| Letzter Artikel überhaupt | 2026-08-31 (2 Tage her) |
-| Live-Artikel gesamt | 24 |
+| Artikel letzter Publikationstag (2026-09-02) | 1 |
+| Letzter Artikel überhaupt | 2026-09-02 (0 Tage her) |
+| Live-Artikel gesamt | 25 |
 | Förderfähig in der Re-Queue | 0 |
 | Von Gates gehalten (braucht Korrektur) | 1 |
 | Mindestziel/Tag | 2 |
