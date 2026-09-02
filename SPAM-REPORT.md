@@ -1,17 +1,17 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-02 12:31 UTC · Modus: CHECK
+**Stand:** 2026-09-02 12:56 UTC · Modus: FIX
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
 ## B: Blog (B1–B8)
 
 - 🟡 [B5] 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub: Originalitäts-Quote 44 % (< 45 %)
-- 🟡 [B1] 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet: Keyword-Stuffing (ein Signal): Text: 'dns' ×44 (4.0 % Dichte)
+- 🟡 [B1] 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet: Keyword-Stuffing (ein Signal): Text: 'dns' ×46 (4.1 % Dichte)
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
-- ℹ️ [F-OK] Feed sauber: 25 Items, Kadenz-konform, Cover vorhanden, keine Duplikate
+- ℹ️ [F-OK] Feed sauber: 26 Items, Kadenz-konform, Cover vorhanden, keine Duplikate
 
 ## C: Pinterest-Bulk-CSV (C1–C8)
 

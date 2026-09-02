@@ -1,6 +1,6 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-09-02 12:01 UTC
+**Letzter Lauf:** 2026-09-02 12:56 UTC
 
 **Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
@@ -17,7 +17,7 @@
 - ✅ 2026-08-26 (Mittwoch): 3
 - ✅ 2026-08-28 (Freitag): 3
 - ✅ 2026-08-31 (Montag): 3
-- ⚠️ 2026-09-02 (Mittwoch): 1 (unter Min)
+- ✅ 2026-09-02 (Mittwoch): 2
 
 ## Aktiver Befund
 
@@ -27,7 +27,7 @@
 
 - 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **0**
 - ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **0**
-- ✍️ manuelle Entwürfe (von der Automatik unberührt): **1**
+- ✍️ manuelle Entwürfe (von der Automatik unberührt): **0**
 - 🔁 wiederhergestellte Re-Queue-Flags: **0**
 - 🧹 Park-Reste an live-Posts (gefunden, weg mit --fix): **0**
 
