@@ -38,6 +38,19 @@ SELFTEST = "--selftest" in sys.argv
 MAX_PINS_PRO_ZIEL = 3      # mehr als 3 Pins pro URL im Planungsfenster = Spam-Risiko
 MIN_TAGE_ABSTAND = 7       # derselbe Link frühestens nach einer Woche erneut
 
+# --- P8: Ziel-Link-Wache (02.09.2026) ---------------------------------------
+# Der eigentliche Sperrgrund vom 15.08.2026: Pins verlinkten das EIGENE
+# Pinterest-Profil statt der Blogartikel. Folge: irreführende Verlinkung
+# (Titel verspricht Ratgeber, Ziel ist ein Profil), eine Pinterest->Pinterest-
+# Schleife ohne Mehrwert, und faktisch alle Pins auf eine einzige URL.
+# P8 macht diesen Fehler technisch unmöglich. Harte Regel, kein Auto-Fix:
+# Ein falsches Ziel kann das Skript nicht erraten - das muss ein Mensch setzen.
+EIGENE_DOMAIN = "franksfinanzcheck.de"
+VERBOTENE_ZIEL_HOSTS = (
+    "pinterest.com", "pinterest.de", "pin.it",      # Selbstreferenz
+    "bit.ly", "tinyurl.com", "t.co", "ow.ly",       # URL-Kürzer
+)
+
 
 def norm_url(u: str) -> str:
     """Ziel-URL ohne Query/Trailing-Slash – UTM-Varianten sind KEIN neues Ziel.
@@ -111,12 +124,46 @@ def _selftest():
     if d != {1}:
         fails.append(f"UTM-Variante nicht als Repeat erkannt: {d}")
 
+    # --- P8: Ziel-Link-Wache (der echte Sperrgrund vom 15.08.2026) ---
+    def p8(raw):
+        """Liefert den Fehlercode oder None, wenn das Ziel in Ordnung ist."""
+        host = re.sub(r"^https?://", "", raw).split("/")[0].lower().lstrip("www.")
+        pfad = re.sub(r"^https?://[^/]+", "", re.sub(r"\?.*$", "", raw)).strip("/")
+        if not raw: return "leer"
+        if any(h in host for h in VERBOTENE_ZIEL_HOSTS): return "verboten"
+        if EIGENE_DOMAIN not in host: return "fremd"
+        if not pfad: return "startseite"
+        if raw.startswith("http://"): return "http"
+        return None
+
+    p8_faelle = [
+        # (Ziel, erwarteter Code) – die ersten drei sind der reale Sperrgrund
+        ("https://de.pinterest.com/franksfinanzcheck/",      "verboten"),
+        ("https://www.pinterest.de/franksfinanzcheck/",      "verboten"),
+        ("https://pin.it/abc123",                            "verboten"),
+        ("http://franksfinanzcheck.de",                      "startseite"),
+        ("https://franksfinanzcheck.de/",                    "startseite"),
+        ("http://franksfinanzcheck.de/posts/abc/",           "http"),
+        ("https://bit.ly/xyz",                               "verboten"),
+        ("https://check24.de/dsl",                           "fremd"),
+        ("",                                                 "leer"),
+        # gueltig:
+        ("https://franksfinanzcheck.de/posts/abc/",          None),
+        ("https://franksfinanzcheck.de/pillar/frugalismus/", None),
+        ("https://franksfinanzcheck.de/posts/abc/?utm_source=pinterest", None),
+    ]
+    for ziel, erwartet in p8_faelle:
+        ist = p8(ziel)
+        if ist != erwartet:
+            fails.append(f"P8 {ziel!r}: erwartet {erwartet}, bekam {ist}")
+
     if fails:
         print("❌ PLAN-GUARD-SELFTEST FEHLGESCHLAGEN:")
         for f in fails:
             print("   -", f)
         return 2
-    print("✅ PLAN-GUARD-SELFTEST bestanden (P6/P7 Repeat-Pin-Schutz, 5 Faelle).")
+    print("✅ PLAN-GUARD-SELFTEST bestanden (P6/P7 Repeat-Pin-Schutz + "
+          "P8 Ziel-Link-Wache, 17 Faelle).")
     return 0
 
 
@@ -186,6 +233,28 @@ for i, pin in enumerate(pins):
 # gelöscht – sie wandern nach data/pinterest_plan_parked.yaml und können
 # später mit neuem Ziel (eigener Artikel!) reaktiviert werden. Behalten wird
 # immer der jeweils früheste Pin je Ziel, danach nur, wer den Abstand wahrt.
+# --- P8: Ziel-Link-Wache ----------------------------------------------------
+for i, pin in enumerate(pins):
+    raw = (pin.get("url") or pin.get("link") or "").strip()
+    titel = (pin.get("titel") or pin.get("title") or "")[:40]
+    host = re.sub(r"^https?://", "", raw).split("/")[0].lower().lstrip("www.")
+    pfad = re.sub(r"^https?://[^/]+", "", re.sub(r"\?.*$", "", raw)).strip("/")
+
+    if not raw:
+        errors.append(f"P8 Pin '{titel}' hat KEIN Ziel")
+    elif any(h in host for h in VERBOTENE_ZIEL_HOSTS):
+        errors.append(
+            f"P8 Pin '{titel}' verlinkt '{host}' – Pins muessen auf einen "
+            f"eigenen Artikel zeigen, nie auf Pinterest/Kuerzer (Sperrgrund 15.08.)")
+    elif EIGENE_DOMAIN not in host:
+        errors.append(f"P8 Pin '{titel}' verlinkt Fremddomain '{host}'")
+    elif not pfad:
+        errors.append(
+            f"P8 Pin '{titel}' zeigt auf die nackte Startseite – "
+            f"Pins brauchen eine konkrete Zielseite")
+    elif raw.startswith("http://"):
+        errors.append(f"P8 Pin '{titel}' nutzt http:// statt https://")
+
 by_target = defaultdict(list)
 for i, pin in enumerate(pins):
     by_target[norm_url(pin.get("url") or pin.get("link") or "")].append(i)

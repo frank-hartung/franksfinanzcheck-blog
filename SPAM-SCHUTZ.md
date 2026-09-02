@@ -108,12 +108,21 @@ Pinterest-Strategie (25.08.) noch `data/pinterest_plan.yaml`. Über die API
 wurde nie ein Pin erzeugt (`pin_history.jsonl` leer, kein Artikel trägt
 `pinned: true`). Alle Pins bis zur Sperre entstanden **manuell**.
 
-**Tatsächliche Ursache (Selbstauskunft des Kontoinhabers):** 175 Pins in
-6 Tagen auf einem brandneuen Konto (~29 Pins/Tag). Davon 88 Finanz-Pins auf
-nur 13 Zielseiten (6,8 Pins/Ziel) und 87 Pins für die M&M'S Halloween
-Countdown Challenge, zu der Pinterest offiziell eingeladen hatte. Die
-Challenge-Pins entstanden NACH den Finanz-Pins – das Konto trug also bereits
-die Risikolast aus dem Repeat-Muster, als die Volumenspitze dazukam.
+**Tatsächliche Ursache (Selbstauskunft des Kontoinhabers):** Die Finanz-Pins
+verlinkten überwiegend **das eigene Pinterest-Profil** statt der Blogartikel.
+Damit lagen drei Verstöße gleichzeitig vor: irreführende Verlinkung (Pin-Titel
+versprach einen Ratgeber, Ziel war ein Profil), eine selbstreferenzielle
+Pinterest→Pinterest-Schleife, und faktisch **alle Pins auf eine einzige URL**
+– Link-Spam im Lehrbuchsinn. Der Blog bekam dadurch nie einen Besucher.
+
+Verstärkend: 175 Pins in 6 Tagen auf einem brandneuen Konto (~29/Tag), davon
+87 für die M&M'S Halloween Countdown Challenge (offizielle Pinterest-Einladung,
+kein Verstoß) – gesetzt NACH den Finanz-Pins, also auf ein bereits belastetes
+Konto.
+
+**Wichtig:** `data/pinterest_plan.yaml` enthielt diesen Fehler NICHT – alle 73
+geplanten Pins zeigten korrekt auf eigene Blog-URLs. Die manuelle Umsetzung ist
+von der eigenen Planung abgewichen. Regel P8 sichert das jetzt technisch ab.
 
 **Warum die Regel trotzdem hier steht:** `pinterest_plan.yaml` hätte das
 Repeat-Muster nach einer Reaktivierung **automatisiert wiederholt** – der
@@ -154,3 +163,27 @@ mehr ARTIKEL, nicht durch mehr Pins pro Artikel.
 `patches/pinterest-repeat-pin-gate-2026-09-02-workflows.patch`) – erst
 `--selftest`, dann `--fix`. Selftest: 5 eingefrorene Fälle (Same-Day-Repeat,
 gültiger Abstand, P6-Deckel, verschiedene Ziele erlaubt, UTM-Variante).
+
+### Regel P8 – Ziel-Link-Wache (der eigentliche Sperrgrund)
+
+| Prüfung | Regel |
+|---|---|
+| **Pinterest/Kürzer als Ziel** | verboten – `pinterest.com/.de`, `pin.it`, `bit.ly`, `tinyurl`, `t.co`, `ow.ly` |
+| **Fremddomain** | verboten – Ziel muss `franksfinanzcheck.de` sein |
+| **Nackte Startseite** | verboten – Pins brauchen eine konkrete Zielseite |
+| **`http://`** | verboten – immer `https://` |
+| **Leeres Ziel** | verboten |
+
+**Kein Auto-Fix.** Ein falsches Ziel kann das Skript nicht erraten – welcher
+Artikel gemeint war, muss ein Mensch entscheiden. P8 meldet hart und bricht
+den Lauf ab, statt zu raten.
+
+**Warum das die wichtigste Regel ist:** P6/P7 begrenzen, wie OFT ein Ziel
+bepinnt wird. P8 stellt sicher, dass es überhaupt ein sinnvolles Ziel gibt.
+Der Sperrfall vom 15.08. hätte durch P6/P7 allein nicht verhindert werden
+können – die Pins zeigten alle auf dasselbe Profil, was P8 sofort meldet.
+
+**Selftest:** 17 eingefrorene Fälle (12 für P8, davon 3 mit exakt dem realen
+Sperrgrund; 5 für P6/P7). Gegenprobe verifiziert: Werden Pins im Plan
+künstlich auf `de.pinterest.com/franksfinanzcheck/` umgebogen, meldet P8
+alle drei sofort.
