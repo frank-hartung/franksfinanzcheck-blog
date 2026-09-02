@@ -59,7 +59,7 @@ Filterst du diese Dinge vorab, vermeidest du böse Überraschungen bei der Endsu
 
 Wer **günstig ein Auto mieten** möchte, darf nicht am falschen Ende sparen. An keiner Stelle trennt sich die Spreu so sehr vom Weizen wie bei der Versicherung. In vielen Basisangeboten ist nur eine Haftpflichtversicherung mit sehr geringen Deckungssummen enthalten. Das kann im Ernstfall den finanziellen Ruin bedeuten.
 
-Achte bei deiner Buchungsstrategie unbedingt auf die Option „Vollkasko ohne Selbstbeteiligung“. So ein Paket klingt im ersten Moment teurer, schützt dich aber vor unerwarteten Kosten bei Kratzern oder Unfällen. Oft versuchen Vermieter vor Ort, dir eine zusätzliche Versicherung aufzuschwatzen. Wenn du bereits online ein Rundum-sorglos-Paket gebucht hast, kannst du diese Angebote selbstbewusst ablehnen.
+Achte bei deiner Buchungsstrategie unbedingt auf die Option „[Vollkasko ohne Selbstbeteiligung](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/)“. So ein Paket klingt im ersten Moment teurer, [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) aber vor unerwarteten Kosten bei Kratzern oder Unfällen. Oft versuchen Vermieter vor Ort, dir eine zusätzliche Versicherung aufzuschwatzen. Wenn du bereits online ein Rundum-sorglos-Paket gebucht hast, kannst du diese Angebote selbstbewusst ablehnen.
 
 Wichtig ist außerdem der Schutz von Glas und Reifen. Diese Bauteile sind in der Standard-Vollkasko oft ausgeschlossen. Gerade auf den Schotterpisten in südeuropäischen Küstenregionen ist ein Steinschlag schnell passiert. So ein umfassender Schutz sorgt dafür, dass dein Urlaub entspannt bleibt und du vor der Fahrzeugrückgabe keine Angst haben musst.
 

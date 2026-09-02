@@ -120,7 +120,7 @@ Viele Menschen geben das Haushaltsbuch nach wenigen Wochen wieder auf, weil sie 
 
 * **50 % des Nettoeinkommens → Fixkosten & Bedürfnisse:** Miete, Energie, Lebensmittel, Versicherungen, ÖPNV-Ticket, notwendige Abos.
 * **30 % → Wünsche & Freizeit:** Restaurantbesuche, Urlaub, Streaming, Shopping, Hobbys.
-* **20 % → Sparen & Vermögensaufbau:** Notgroschen auf dem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/), ETF-Sparplan, Sondertilgung.
+* **20 % → Sparen & Vermögensaufbau:** [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) auf dem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/), ETF-Sparplan, Sondertilgung.
 
 Bei einem Nettoeinkommen von 2.500 € bedeutet das: 1.250 € Fixkosten, 750 € Freizeit, 500 € Sparrate. Wer die Fixkosten durch [einen kostenlosen Girokonto-Wechsel](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/), Versicherungs- und Energievergleiche auf 1.000 € drückt, kann die Sparrate auf 750 € erhöhen. Am Lebensstandard muss sich nichts ändern.
 

@@ -177,7 +177,7 @@ Combo-Tarife (DSL+Handy) nur rechnen, wenn beide Teile einzeln schlechter sind. 
 
 Der Mobilfunkmarkt ist 2026 so günstig wie nie zuvor. Allnet-Flats mit 5G gibt es unter 10 €, und trotzdem zahlen Millionen Kunden noch 25–40 € für veraltete Verträge. Mit einem 15-minütigen Vergleich und Wechsel kannst du ohne Komfortverlust zwischen **200 € und 360 € pro Jahr** sparen. Prüfe Netz, Volumen und Kleingedrucktes systematisch – der Aufwand macht sich dauerhaft bezahlt.
 
-**Weiterlesen:** [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): Speed in jede Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
+**Weiterlesen:** [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
 
 ## Häufige Fragen
 

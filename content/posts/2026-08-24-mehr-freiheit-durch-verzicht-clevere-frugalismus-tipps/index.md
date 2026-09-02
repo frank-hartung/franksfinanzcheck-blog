@@ -147,7 +147,7 @@ Ja. Frugalismus beginnt im Kopf bei der Einstellung zum eigenen Konsum. Unabhän
 Führe für mindestens zwei bis drei Monate ein simples Haushaltsbuch (per App oder Notizbuch) und kategorisiere alle Ausgaben. Danach kündigst du ungenutzte Abos und wechselst teure Strom-, Gas- und DSL-Verträge.
 
 ### Was mache ich mit dem ersparten Geld?
-Zuerst füllst du deinen Notgroschen auf einem verzinsten Tagesgeldkonto auf. Jeder darüber hinausgehende Betrag fließt in breit gestreute, kostengünstige weltweite ETF-Sparpläne.
+Zuerst füllst du deinen Notgroschen auf einem verzinsten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) auf. Jeder darüber hinausgehende Betrag fließt in breit gestreute, kostengünstige weltweite ETF-Sparpläne.
 
 ---
 
