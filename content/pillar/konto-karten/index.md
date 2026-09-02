@@ -21,7 +21,7 @@ Viele Filialbanken und Sparkassen erheben Monat für Monat Kontoführungsgebühr
 
 ---
 
-## Spartabelle: Banking-Gebühren im Vergleich
+## Spartabelle:<br> Banking-Gebühren im Vergleich
 
 | Bank-Leistung | Filialbank / Sparkasse | Modernes Online-Konto | Deine Ersparnis / Jahr |
 |---|---|---|---|
@@ -33,7 +33,7 @@ Viele Filialbanken und Sparkassen erheben Monat für Monat Kontoführungsgebühr
 
 ---
 
-## Das kostenlose Girokonto: So wechselst du stressfrei
+## Das kostenlose Girokonto:<br> So wechselst du stressfrei
 
 Ein Girokonto ist die Schaltzentrale deiner persönlichen Finanzen. Ein Wechsel zu einer gebührenfreien Bank ist heute dank des gesetzlich vorgeschriebenen Kontowechselservice (§&nbsp;20 ZKG) so unkompliziert wie nie zuvor.
 
@@ -49,7 +49,7 @@ Schritt-für-Schritt-Anleitungen, wichtige Kriterien für Gehaltseingänge und d
 
 ---
 
-## Kreditkarte ohne Jahresgebühr: Weltweit flexibel ohne Extrakosten
+## Kreditkarte ohne Jahresgebühr:<br> Weltweit flexibel ohne Extrakosten
 
 Eine separate Kreditkarte gehört in jedes Portemonnaie – vor allem bei Reisen ins Ausland oder für Mietwagen-Reservierungen, bei denen Debitkarten oft nicht als Kautionssicherheit akzeptiert werden.
 
@@ -62,7 +62,7 @@ Eine separate Kreditkarte gehört in jedes Portemonnaie – vor allem bei Reisen
 
 ---
 
-## Tagesgeld: Zinsen sichern und Notgroschen parken
+## Tagesgeld:<br> Zinsen sichern und Notgroschen parken
 
 Geld auf dem Girokonto wird nicht nur durch Gebühren, sondern auch durch die Inflation entwertet. Der eiserne Notgroschen (drei bis sechs Monatsausgaben) gehört auf ein separates, täglich verfügbares Tagesgeldkonto mit attraktiver Verzinsung.
 
@@ -76,7 +76,7 @@ Geld auf dem Girokonto wird nicht nur durch Gebühren, sondern auch durch die In
 
 ---
 
-## Ratenkredit: Nur zum Bestzins vergleichen
+## Ratenkredit:<br> Nur zum Bestzins vergleichen
 
 Steht eine größere Anschaffung, ein Autokauf oder eine Umschuldung eines teuren Dispokredits an, ist ein unabhängiger Kreditvergleich unverzichtbar. Die Zinsunterschiede zwischen der Hausbank und dem günstigsten Online-Anbieter betragen bei einem Kredit von 10.000&nbsp;€ oft über 500&nbsp;€ bis 1.000&nbsp;€ an reinen Zinskosten.
 

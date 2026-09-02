@@ -34,7 +34,7 @@ Nach dem Bürgerlichen Gesetzbuch (§ 823 BGB) bist du verpflichtet, schuldhaft 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Vergleiche jetzt aktuelle Testsieger-Tarife mit mindestens 50 Millionen Euro Deckungssumme ab 3,50 € im Monat: [**Kostenlos vergleichen**](/go/haftpflicht/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Die gesetzliche Haftung: Warum Schäden in die Millionen gehen
+## Die gesetzliche Haftung:<br> Warum Schäden in die Millionen gehen
 
 Viele Menschen glauben, bei kleineren Missgeschicken mit ein paar hundert Euro davonzukommen. Doch die wahre existenzielle Gefahr liegt bei schwerwiegenden Personenschäden:
 
@@ -74,7 +74,7 @@ Wer neben Haftungsrisiken auch sein Gebäude oder seine Wohnung optimal absicher
 
 <!-- premium-length-2026 -->
 
-## Rechenbeispiel: Was ein einziger Schaden 2026 kosten kann
+## Rechenbeispiel:<br> Was ein einziger Schaden 2026 kosten kann
 
 Ein Fahrradfahrer übersieht dich nicht – du übersiehst ihn. Schlüsselbeinbruch, zwei Wochen Klinik, drei Monate Physiotherapie, Verdienstausfall. Ohne Privat­haftpflicht trägst du das aus dem Vermögen: Behandlung leicht fünfstellig, Verdienstausfall je nach Job 4.000–12.000 €, Schmerzensgeld extra. Mit einer soliden Police übernimmt der Versicherer Prüfung, Abwehr unberechtigter Forderungen und die Zahlung, wenn du haftest.
 
@@ -109,7 +109,7 @@ Im Partnertarif zählt die häusliche Gemeinschaft, nicht der Trauschein. Kinder
 
 Eine Privat­haftpflicht ersetzt keine Hausrat-, keine Wohngebäude- und keine Kfz-Versicherung. Sie ist die Basis unter der Pyramide. Wer sie schiebt, weil „noch nie etwas passiert ist“, verwechselt Statistik mit Glück. Ein Schaden reicht.
 
-## Fazit: Unverzichtbarer Basisschutz für jeden Geldbeutel
+## Fazit:<br> Unverzichtbarer Basisschutz für jeden Geldbeutel
 
 Die **Privathaftpflicht** bildet das Fundament jeder soliden Absicherung. Für den Gegenwert einer Tasse Kaffee im Monat schützt sie dein gesamtes Privatvermögen vor ruinösen Schadenersatzansprüchen und bewahrt deine finanzielle Unabhängigkeit.
 

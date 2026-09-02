@@ -77,7 +77,7 @@ Der größte finanzielle Hebel bleibt der Arbeitspreis pro Kilowattstunde. Wer n
 
 <!-- premium-length-2026 -->
 
-## Rechenbeispiel 2026: Was ein 3-Personen-Haushalt wirklich spart
+## Rechenbeispiel 2026:<br> Was ein 3-Personen-Haushalt wirklich spart
 
 Nimm einen Haushalt mit 3.400 kWh Jahresverbrauch und einem Arbeitspreis von 32 Cent/kWh. Die Jahresrechnung liegt bei rund 1.088 € plus Grundpreis. Drei Hebel verändern die Rechnung messbar – ohne dass jemand im Dunkeln sitzt.
 
@@ -111,7 +111,7 @@ Grundversorgungstarife bleiben der teuerste Standard. Wer 2024/2025 in einen 24-
 
 Wenn du den Herbstcheck einmal durchziehst, brauchst du ihn im nächsten Jahr nur noch als 30-Minuten-Update. Genau das ist der Unterschied zwischen „ich sollte mal Strom sparen“ und einer Rechnung, die im Februar nicht mehr überrascht.
 
-## Fazit: Kleine Verhaltensänderungen bringen hunderte Euro
+## Fazit:<br> Kleine Verhaltensänderungen bringen hunderte Euro
 
 Effektives Stromsparen erfordert keinen Verzicht auf Lebensqualität. Mit sparsamer LED-Technik, dem Vermeiden von Standby-Kosten und einem günstigen Stromtarif mit Preisgarantie senkst du deine Nebenkosten dauerhaft und nachhaltig.
 

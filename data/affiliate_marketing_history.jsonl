@@ -63,3 +63,4 @@
 {"date": "2026-08-31", "modus": "FIX", "kritisch": 0, "autofix": 0}
 {"date": "2026-08-31", "modus": "FIX", "kritisch": 0, "autofix": 0}
 {"date": "2026-08-31", "modus": "DRY-RUN", "kritisch": 0, "autofix": 0}
+{"date": "2026-09-02", "modus": "FIX", "kritisch": 1, "autofix": 2}
