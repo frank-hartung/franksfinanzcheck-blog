@@ -35,6 +35,23 @@
     {{- end }}
   </header>
 
+  {{- /* Korrektur-Box (WiWo-Standard: Fehler transparent korrigieren).
+         Frontmatter-Feld `korrektur:` – Registrierung über
+         scripts/redaktions_standard.py --register-korrektur.
+         Log: data/korrekturen.yaml */ -}}
+  {{- if .Params.korrektur }}
+  <div class="ff-korrektur" role="note" style="margin:14px 0 18px; background:#FFF8E6; border:1px solid rgba(180,120,20,.35); border-left:6px solid #B47814; border-radius:10px; padding:12px 16px; font-size:.92em; line-height:1.55; color:#3d2e0e;">
+    <strong style="display:block; margin-bottom:2px;">🔧 Korrekturhinweis</strong>
+    {{ .Params.korrektur }}
+  </div>
+  {{- end }}
+  {{- /* Stand-Zeile (Capital/ZEIT-Stil): sichtbares Aktualisierungsdatum,
+         wenn der Beitrag nach der Erstveröffentlichung überarbeitet wurde. */ -}}
+  {{- if and .Lastmod (gt .Lastmod .Date) }}
+  <div class="ff-stand" style="margin:2px 0 10px; font-size:.85em; color:#555;">
+    Stand: {{ .Lastmod | time.Format "02.01.2006" }} · zuletzt aktualisiert
+  </div>
+  {{- end }}
   {{- /* Kurzantwort-Box (Featured Snippet / AI Overview) – nur auf Posts.
          Das Frontmatter-Feld `kurzantwort` wird von
          scripts/generate_kurzantworten.py automatisch befüllt. */ -}}

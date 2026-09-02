@@ -1,0 +1,52 @@
+diff --git a/.github/workflows/content-engine-v2.yml b/.github/workflows/content-engine-v2.yml
+index 5db888f..e7e2f6c 100644
+--- a/.github/workflows/content-engine-v2.yml
++++ b/.github/workflows/content-engine-v2.yml
+@@ -149,6 +149,10 @@ jobs:
+         run: |
+           echo "== Profi-Polish (KI) =="
+           python3 scripts/profi_polish.py --new || echo "⚠ Polish-Fehler (nicht kritisch)"
++          echo "== Redaktions-Standard (Capital/WiWo/ZEIT, 02.09.2026: Kürze-Box, Frage-H2, Faustregel, Schrittfolge, Zahlen-Ehrlichkeit) =="
++          python3 scripts/redaktions_standard.py --selftest
++          python3 scripts/redaktions_standard.py --fix --ai --new-only || echo "⚠ Redaktions-Heilung (nicht kritisch)"
++          python3 scripts/redaktions_standard.py --gate --new-only || echo "⚠ Redaktions-Gate: harte Funde → Entwurf (siehe REDAKTIONS-STANDARD-REPORT.md)"
+           echo "== Zeilenumbruch-Generator (Profi-Level, selbstheilend) =="
+           python3 scripts/fix_linebreaks.py || echo "⚠ Zeilenumbruch-Generator (nicht kritisch)"
+           echo "== Gedankenstrich-vor-und-Generator (deterministisch, selbstheilend) =="
+diff --git a/.github/workflows/seo-weekly.yml b/.github/workflows/seo-weekly.yml
+index 6d6c9a2..97fe08d 100644
+--- a/.github/workflows/seo-weekly.yml
++++ b/.github/workflows/seo-weekly.yml
+@@ -329,6 +329,32 @@ jobs:
+             echo "✅ Cover-Fixes gepusht"
+           fi
+ 
++      - name: Redaktions-Standard (Capital/WiWo/ZEIT) – Bestands-Retrofit
++        # 02.09.2026: Hebt wöchentlich die Artikel mit den meisten offenen
++        # RS1-RS6-Modulen auf das Niveau der Wirtschaftsredaktionen
++        # (Kürze-Box, Frage-H2, Faustregel, Schrittfolge, Zahlen-Ehrlichkeit,
++        # Phantom-Quellen). Backlog 3 → dauerhafte Verbesserung des Bestands,
++        # Report: REDAKTIONS-STANDARD-REPORT.md. Details + Quellen:
++        # REDAKTIONS-STANDARD-CAPITAL-WIWO-ZEIT.md.
++        id: redaktion
++        continue-on-error: true
++        env:
++          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
++          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
++        run: |
++          python3 scripts/redaktions_standard.py --selftest
++          python3 scripts/redaktions_standard.py --fix --ai --backlog 3 || echo "⚠ Redaktions-Retrofit: Rest-Funde im Report"
++          git config user.name "SEO-Bot"
++          git config user.email "seo-bot@users.noreply.github.com"
++          git add REDAKTIONS-STANDARD-REPORT.md content/ data/redaktions_standard_history.jsonl data/korrekturen.yaml 2>/dev/null || true
++          if git diff --cached --quiet; then
++            echo "Redaktions-Standard: keine Änderungen."
++          else
++            git commit -m "redaktion: Bestand auf Capital/WiWo/ZEIT-Standard gehoben (Kürze-Box, Faustregel, Frage-H2, Schritte)"
++            scripts/git_sync.sh --push-only
++            echo "✅ Redaktions-Retrofit gepusht"
++          fi
++
+       - name: Meta-Qualitäts-Gate (Re-Audit + Report – VOLLAUTOMATISCH)
+         # Prüft nach der Optimierung ALLE Artikel erneut und erzeugt
+         # META-REPORT.md. Exit 0 = alles grün (kein Handlungsbedarf),

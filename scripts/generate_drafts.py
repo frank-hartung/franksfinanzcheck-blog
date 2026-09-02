@@ -98,15 +98,23 @@ else:
 
 SYSTEM_PROMPT = (
     "Du bist ein deutschsprachiger, seriöser Finanz- und Verbraucher-Ratgeber-Autor auf "
-    "PROFI-NIVEAU – vergleichbar mit den besten unabhängigen Finanzblogs im DACH-Raum. "
-    "Du schreibst ehrliche, hilfreiche und sachlich korrekte Artikel. "
-    "Du erfindest keine konkreten Preise oder Anbieterbewertungen – Preise nennst du nur "
-    "als vorsichtige Spannen (\"ca. X–Y €\") oder mit \"in der Regel\". "
-    "Du schreibst in AKTIVER, lebendiger Sprache: kurze Sätze (max. ~20 Wörter), starke "
-    "Verben. " + SYSTEM_ANREDE + " Kein Passiv, keine Füllphrasen, kein Werbesprech. "
+    "PROFI-NIVEAU – vergleichbar mit den Online-Redaktionen von Capital, WirtschaftsWoche "
+    "und dem Geld-Teil von DIE ZEIT. Du schreibst ehrliche, hilfreiche und sachlich "
+    "korrekte Artikel. "
+    "Du erfindest keine konkreten Preise, Statistiken, Studien, Umfragen oder "
+    "Experten-Zitate – werte, die du nicht belegen kannst, formulierst du als "
+    "allgemeines Wissen, als vorsichtige Spannen (\"ca. X–Y €\", \"in der Regel\", "
+    "\"oft\", \"je nach Anbieter\") oder kennzeichnest sie klar als eigenes "
+    "Rechenbeispiel. Du schreibst in AKTIVER, lebendiger Sprache: kurze Sätze "
+    "(max. ~20 Wörter), starke Verben. " + SYSTEM_ANREDE + " Kein Passiv, keine Füllphrasen, kein Werbesprech. "
     "Du verzichtest auf typische KI-Floskeln wie \"In der heutigen schnelllebigen Welt\", "
     "\"Es ist wichtig zu beachten\", \"Zusammenfassend lässt sich sagen\", \"Des Weiteren\", "
     "\"Es gibt viele Möglichkeiten\", \"heutzutage\", \"Tauchen wir ein\". "
+    "Du arbeitest mit den Struktur-Methoden der großen Wirtschaftsredaktionen: "
+    "ein „Das Wichtigste in Kürze“-Block nach der Einleitung (ZEIT-Stil), "
+    "Frage-Überschriften mit direkter Antwort (Capital-erklärt-Stil), "
+    "mindestens eine markierte Faustregel (\"Faustregel: …\"), eine nummerierte "
+    "Schrittfolge und klare Zwischenüberschriften. "
     "Deine Texte sind journalistisch, konkret, praxisnah und vermitteln echten Nutzen. "
     "Jeder Absatz ist 3–4 Sätze lang, behandelt genau EINEN Gedanken und endet an einer "
     "sinnvollen Stelle – keine Textwände, kein Aneinanderreihen von Ein-Satz-Absätzen. "
@@ -437,6 +445,14 @@ def profi_quality_ok(body, keywords=None):
     faq = len(re.findall(r"^###\s.*\?", body, re.M))
     if faq < 4:
         problems.append(f"nur {faq} FAQ-Fragen (Premium: ≥4)")
+    # REDAKTIONS-STANDARD (02.09.2026, Capital/WiWo/ZEIT): Die Pflicht-Module
+    # gehören schon ins Geburts-Gate – so wird der Prompt-Fehler sofort neu
+    # gewürfelt statt erst in Phase 2 geheilt/geparkt (RS1/RS3; RS2/RS4
+    # prüft die Wache redaktions_standard.py in der Engine-Kette).
+    if "das wichtigste in kürze" not in text:
+        problems.append("kein „Das Wichtigste in Kürze“-Modul (RS1)")
+    if "faustregel" not in text:
+        problems.append("keine Faustregel markiert (RS3)")
     floskeln = [f for f in PROFI_FLOSKELN if f in text]
     if floskeln:
         problems.append(f"KI-Floskeln: {', '.join(floskeln[:2])}")
@@ -665,6 +681,17 @@ Ab Zeile 3: Der Artikel in Markdown:
   7) Checkliste-Vorab („Drei Dinge zählen: …“)  8) Frage an den Leser
 - 5 bis 8 Abschnitte mit H2-Überschriften (##) – strukturiere sie ANDERS als die Pin-Vorlage
 - Pflicht-Module (kein Fülltext): ein Rechenbeispiel mit Jahr, eine Tabelle ODER Checkliste, ein Abschnitt „Typische Fehler“
+- REDAKTIONS-STANDARD (Capital/WirtschaftsWoche/ZEIT, Pflicht für alle Module):
+  1) „Das Wichtigste in Kürze“: Direkt NACH der Einleitung (vor der ersten H2) ein Block
+     mit fettem Label + 3–4 Bullet-Punkten mit den Kernaussagen (Zahlen nur als Spannen).
+  2) Mindestens 2 deiner H2-Überschriften sind FRAGEN („Warum lohnt sich X?“, „Was kostet X?“,
+     „Welche Fehler kosten dich Geld?“) – jede Frage wird direkt und konkret beantwortet.
+  3) Mindestens EINE markierte Faustregel als eigener Absatz: „**Faustregel:** …“.
+  4) Mindestens EINE nummerierte Schrittfolge mit 3–6 Schritten („So gehst du vor:“ + 1. 2. 3.).
+  5) Zahlen-Ehrlichkeit (WiWo-Standard): Harte Zahlen nur mit Einordnung – „ca. 20–40 €“,
+     „in der Regel“, „je nach Anbieter“, „rund“. NIE erfundene Studien/Umfragen/Experten
+     (keine Sätze wie „Laut einer Studie…“) – unbelegbare Aussagen als Allgemeinwissen
+     formulieren. Rechenbeispiele klar als solche kennzeichnen.
 - Mindestens EINE Liste oder Tabelle (Mehrwert, Scannability)
 - Am Ende ein FAQ-Bereich: "## Häufige Fragen" mit 5 Fragen als H3 und Antworten
 - 1.500 bis 2.200 Wörter insgesamt (mindestens 1.400 Wörter / 10.000 Zeichen – darunter gilt der Artikel als zu kurz und wird abgelehnt). Zielkorridor Premium: 12.000–18.000 Zeichen Fließtext. Substanz, keine Floskeln.

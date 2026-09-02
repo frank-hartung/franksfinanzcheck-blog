@@ -111,6 +111,10 @@ FEST = {
     "layouts/shortcodes/tarifvergleich.html",
     "layouts/shortcodes/einspartabelle.html",
     "scripts/affiliate_integrity_gate.py",
+    # Redaktions-Standard (02.09.2026, Capital/WiWo/ZEIT-Methoden):
+    # Die Wache entscheidet über Entwurf-Statt-Publikation – deshalb
+    # gehört sie unter Siegel (wie alle Schwellen-Wachen).
+    "scripts/redaktions_standard.py",
 }
 
 
