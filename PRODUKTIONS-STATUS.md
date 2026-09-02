@@ -1,6 +1,6 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-02 17:47 UTC  
+**Stand:** 2026-09-02 20:17 UTC  
 **Stufe:** P2  
 **Befund:** Am letzten Publikationstag (2026-09-02) nur 1/2 Artikel – unter Mindestziel. – Bestand: 1 von Gates gehalten (ältester 0 Tage: publish-gate: Textverständnis-Gate nicht bestanden: R8-URL-LEERZEICHEN: URL mit Leerzeichen: „../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/“ (…)
 
