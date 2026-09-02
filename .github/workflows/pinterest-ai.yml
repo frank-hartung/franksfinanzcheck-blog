@@ -65,6 +65,22 @@ jobs:
           PINTEREST_ROTATE_DAYS: ${{ vars.PINTEREST_ROTATE_DAYS || '60' }}
           BLOG_BASE_URL: "https://franksfinanzcheck.de"
         run: python3 scripts/pinterest_engine.py --auto
+        
+      # Beweist der Secrets-Alters-Wache, dass der Pinterest-Kanal WIRKLICH
+      # lebt. Ohne diesen Schritt meldet die Wache dauerhaft "UNBEKANNT" und
+      # ein echter Token-Ablauf (30 Tage) bliebe im Rauschen unsichtbar.
+      - name: Pinterest-Secret-Erfolg vermerken
+        if: ${{ success() && steps.bereit.outputs.bereit == 'true' }}
+        env:
+          PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+        run: |
+          if [ -n "${PINTEREST_ACCESS_TOKEN:-}" ]; then
+            python3 scripts/secrets_age_guard.py --record-success PINTEREST_ACCESS_TOKEN || true
+          fi
+          if [ -n "${PINTEREST_TOKEN_KEY:-}" ]; then
+            python3 scripts/secrets_age_guard.py --record-success PINTEREST_TOKEN_KEY || true
+          fi
 
       - name: Status + pinned-Flags committen
         if: ${{ !cancelled() && steps.bereit.outputs.bereit == 'true' }}
@@ -74,6 +90,9 @@ jobs:
           # pinterest_tokens.enc ist erst da, wenn du den OAuth-Handschlag
           # gemacht hast – ohne Datei trotzdem committen (12.08. gehaertet).
           git add PIN-STATUS.md data/pin_queue.yaml content/posts/ 2>/dev/null || true
+                    # Erfolgs-Log der Secrets-Wache mitnehmen (sonst geht der Nachweis
+          # mit dem Runner verloren und die Wache bleibt auf "UNBEKANNT").
+          [ -f data/secrets_state.json ] && git add data/secrets_state.json 2>/dev/null || true
           [ -f data/pinterest_tokens.enc ] && git add data/pinterest_tokens.enc 2>/dev/null || true
           [ -f data/pinterest_boards_cache.json ] && git add data/pinterest_boards_cache.json 2>/dev/null || true
           if git diff --cached --quiet; then
