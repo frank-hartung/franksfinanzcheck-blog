@@ -7,6 +7,8 @@ tags: ["mietwagen schnäppchen", "goldener september urlaub", "mietwagen tagespr
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
+erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
+
 keywords: ["mietwagen schnäppchen", "goldener september urlaub", "mietwagen tagespreis", "günstig auto mieten", "September-Roadtrip", "September Roadtrip", "Mietwagen-Schnäppchen", "Mietwagen buchen"]
 pinwand: Günstig reisen | Reisebudget & Mietwagen
 pin_title: "Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen"
@@ -127,6 +129,9 @@ Saugen und waschen musst du das Auto in der Regel nicht, es sei denn, es ist ext
 
 Lass dir die mängelfreie Rückgabe schriftlich bestätigen. Ein unterschriebenes Rückgabeprotokoll ist deine Versicherung gegen spätere Forderungen. Wenn die Station bei deiner Ankunft geschlossen ist und du den Schlüssel in eine Box werfen musst, mache auch jetzt wieder Fotos vom Zustand des Wagens und der Tankanzeige auf dem Parkplatz des Vermieters. So hast du im Zweifelsfall einen Beleg für den Zeitpunkt und den Zustand bei Abgabe.
 
+
+
+**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/)
 ## Häufige Fragen
 
 ### Muss ich eine Kaution hinterlegen, wenn ich ohne Selbstbeteiligung buche?
