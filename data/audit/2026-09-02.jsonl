@@ -1,0 +1,1 @@
+{"ts": "2026-09-02T04:06:55Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-08-26-handytarif-vergleichen-2026-guenstige-tarife"]}, "output": {"gated": ["2026-08-26-handytarif-vergleichen-2026-guenstige-tarife"], "demoted": ["2026-08-26-handytarif-vergleichen-2026-guenstige-tarife"]}, "status": "gated", "critical": false, "commit": null}

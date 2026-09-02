@@ -1,6 +1,6 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-09-01 20:46 UTC
+**Letzter Lauf:** 2026-09-02 04:06 UTC
 
 **Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
@@ -17,6 +17,7 @@
 - ✅ 2026-08-26 (Mittwoch): 3
 - ✅ 2026-08-28 (Freitag): 3
 - ✅ 2026-08-31 (Montag): 3
+- ⚠️ 2026-09-02 (Mittwoch): 1 (unter Min)
 
 ## Aktiver Befund
 
@@ -24,7 +25,7 @@
 
 ## Re-Queue-Integrität (Park-Zustände)
 
-- 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **1**
+- 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **0**
 - ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **0**
 - ✍️ manuelle Entwürfe (von der Automatik unberührt): **0**
 - 🔁 wiederhergestellte Re-Queue-Flags: **0**
@@ -33,6 +34,6 @@
 
 ## Letzte Heilungen
 
-- – (nichts in diesem Lauf)
+- Aus Re-Queue live gesetzt: `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife`
 
 _Wird von `cadence_guard.py` bei jedem Kadenz-Lauf aktualisiert (Deploy-Gate, Content-Engine, Blog-Health)._
