@@ -62,10 +62,20 @@ def check_internal_links():
     pages = glob.glob(os.path.join(BASE, "**", "*.html"), recursive=True)
     checked = 0
     broken = []
+    # QUOTE-TOLERANT (02.09.2026): `hugo --minify` gibt einfache Attributwerte
+    # OHNE Quotes aus (`href=/go/gas/`). Das alte Muster `href="([^"]+)"` sah
+    # dadurch in einem minifizierten Build nur 108 statt 1101 Links – ein
+    # FALSE-GREEN: genau die unquotierten Links (u. a. alle /go/-Affiliate-
+    # Links) wären ungeprüft geblieben. Gleiche Fehlerklasse wie der
+    # Render-Beweis der Affiliate-Integritäts-Wache, deshalb hier dieselbe
+    # Härtung: Attribut-Wert mit oder ohne Quotes erkennen.
+    href_pat = re.compile(r"""href\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))""", re.I)
     for page in pages:
         text = open(page, encoding="utf-8", errors="ignore").read()
-        for m in re.finditer(r'href="([^"]+)"', text):
-            href = html.unescape(m.group(1))
+        for m in href_pat.finditer(text):
+            raw = m.group(1) if m.group(1) is not None else (
+                m.group(2) if m.group(2) is not None else (m.group(3) or ""))
+            href = html.unescape(raw)
             if href.startswith(("http://", "https://", "mailto:", "tel:", "#", "data:", "javascript:")):
                 continue
             checked += 1
@@ -144,7 +154,10 @@ def check_schema_and_meta():
             no_schema.append(os.path.basename(os.path.dirname(page)))
         if 'og:image' not in text:
             no_og.append(os.path.basename(os.path.dirname(page)))
-        if '<meta name="description"' not in text:
+        # QUOTE-TOLERANT (02.09.2026): minifiziert steht dort
+        # `<meta name=description content="…">` – der Literal-Vergleich meldete
+        # dann fälschlich "Meta-Description fehlt auf N Seiten" (FALSE-CRITICAL).
+        if not re.search(r'<meta[^>]+name\s*=\s*["\']?description["\']?', text, re.I):
             no_meta.append(os.path.basename(os.path.dirname(page)))
         if re.search(r"<h1[^>]*>", text) is None:
             no_h1.append(os.path.basename(os.path.dirname(page)))

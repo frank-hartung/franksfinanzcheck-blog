@@ -100,6 +100,17 @@ FEST = {
     # Pillar-Templates (12.08.: Relative-Link-Falle entfernt):
     "layouts/pillar/single.html",
     "layouts/_partials/pillar_box.html",
+    # AFFILIATE-INTEGRITAET (02.09.2026, Premium-Ausbau der taeglichen Wache):
+    # Diese Dateien emittieren bzw. beweisen die Affiliate-Links. Der
+    # Render-Hook (KRITISCH) deckt nur die Markdown-Link-Pipeline ab –
+    # Shortcode-CTAs laufen daran vorbei, und genau dort fehlten
+    # rel="sponsored" + Umami-Attribution (Fund AI4, 02.09.2026).
+    # Deshalb: zentraler Attribut-Vertrag + die beiden CTA-Shortcodes +
+    # die Wache selbst unter Siegel. Aenderung nur mit Neu-Signatur.
+    "layouts/_partials/affiliate_anchor_attrs.html",
+    "layouts/shortcodes/tarifvergleich.html",
+    "layouts/shortcodes/einspartabelle.html",
+    "scripts/affiliate_integrity_gate.py",
 }
 
 

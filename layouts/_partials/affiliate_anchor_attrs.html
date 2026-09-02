@@ -1,0 +1,104 @@
+{{- /* ============================================================
+    AFFILIATE-ANCHOR-ATTRS – zentraler Attribut-Vertrag für /go/-Links
+    ------------------------------------------------------------
+    Aufruf:
+      {{- $aff := partial "affiliate_anchor_attrs.html" (dict "url" $ctaUrl "page" .) -}}
+      {{- with $aff }}<a href="{{ .href | safeURL }}" rel="{{ .rel }}" …>{{- else -}}
+        <a href="{{ $ctaUrl | safeURL }}">{{ end }}
+
+    Rückgabe: DICT mit den Affiliate-Attributen – oder ein LEERES Dict,
+              wenn das Ziel kein Gateway-Link ist (dann gilt 1:1 das
+              bisherige Default-Verhalten, ohne rel/Event).
+              Bewusst als Dict und nicht als fertige Attribut-Kette:
+              eine vorformatierte HTMLAttr-Zeichenkette wird von Go-Html-
+              Template in einem fremden Attribut-Kontext entschärft
+              (`zgotmplz`, Fund 02.09.2026) – der Link wäre tot gewesen.
+
+    Warum es dieses Partial gibt (02.09.2026, Fund der täglichen
+    Affiliate-Integritäts-Wache AI4):
+      Shortcodes (tarifvergleich, einspartabelle) rendern ihr HTML selbst
+      und laufen deshalb NICHT durch die Markdown-Link-Pipeline – der
+      Render-Hook layouts/_default/_markup/render-link.html greift dort
+      nicht. Die Folge waren CTA-Buttons auf /go/<key>/ OHNE
+      rel="sponsored nofollow noopener" (Werbekennzeichnung nach
+      Google-Richtlinie / § 5a UWG fehlt) und OHNE Umami-Ereignis
+      affiliate_click (Klicks in der Umsatz-Messung unsichtbar).
+      Hier steht derselbe Vertrag wie im Render-Hook – an einer Stelle,
+      von allen Shortcode-CTAs genutzt, und die Wache beweist das
+      Ergebnis anschließend im gebauten HTML.
+
+    Vertrag pro Gateway-Link (/go/<key>/):
+      href            = /go/<key>/[?subid=<artikel-slug>]   (Awin-Attribution)
+      rel             = sponsored nofollow noopener
+      target          = _blank
+      data-umami-*    = affiliate_click + slug/article/pillar
+      title           = "Weiter zu <Partner> (Partnerlink = Werbung)"
+   ============================================================ */ -}}
+{{- $out := dict -}}
+{{- $url := .url | default "" -}}
+{{- $names := dict
+  "allgemein"            "Check24 Vergleichsportal"
+  "strom"                "Check24 · Stromtarife"
+  "gas"                  "Check24 · Gastarife"
+  "dsl"                  "Check24 · DSL & Internet"
+  "fluege"               "Check24 · Flüge & Pauschalreisen"
+  "handytarife"          "Check24 · Handytarife"
+  "kredit"               "Check24 · Kreditvergleich"
+  "kreditkarte"          "Check24 · Kreditkarten"
+  "kfz-versicherung"     "Check24 · Kfz-Versicherung"
+  "mietwagen"            "Check24 · Mietwagen"
+  "reisen"               "Check24 · Reisen & Urlaub"
+  "girokonto"            "C24 Bank (Check24) · Girokonto"
+  "tagesgeld"            "C24 Bank (Check24) · Tagesgeld"
+  "haftpflicht"          "Tarifcheck · Haftpflicht"
+  "hausrat"              "Tarifcheck · Hausrat"
+  "unfallversicherung"   "Tarifcheck · Unfallversicherung"
+  "reisekrankenversicherung" "Tarifcheck · Reisekranken"
+  "zahnzusatzversicherung"   "Tarifcheck · Zahnzusatz"
+  "hunde"                "Tarifcheck · Hunde­krankenversicherung"
+-}}
+{{- if strings.HasPrefix $url "/go/" -}}
+  {{- /* Schlüssel robust extrahieren: /go/<key>/, /go/<key> und
+         /go/<key>/?foo=bar – Query-Parameter (subid) gehören nicht zum Key. */ -}}
+  {{- $key := $url | strings.TrimPrefix "/go/" -}}
+  {{- with findRE `^[^/?#]+` $key 1 }}{{ $key = index . 0 }}{{ end -}}
+  {{- $key = strings.TrimSuffix "/" $key -}}
+  {{- /* Artikel-Kontext fuer Awin-SubID + Umami-Attribution. Aufgeloest
+         wird immer ueber `.Page`: das funktioniert fuer eine Seite (dann
+         ist .Page die Seite selbst) UND fuer einen Shortcode-Kontext
+         (ShortcodeWithPage hat KEIN eigenes .File – ein direkter Zugriff
+         bricht den Build ab, Fund 02.09.2026). */ -}}
+  {{- $file := "" -}}
+  {{- $pillar := "" -}}
+  {{- $seite := false -}}
+  {{- with .page }}{{ with .Page }}{{ $seite = . }}{{ end }}{{ end -}}
+  {{- with $seite -}}
+    {{- with .File -}}{{- $file = .Path | default "" -}}{{- end -}}
+    {{- with .Params -}}{{- $pillar = index . "pillar" | default "" -}}{{- end -}}
+  {{- end -}}
+  {{- $slug := "" -}}
+  {{- $base := path.Base $file -}}
+  {{- if eq $base "index.md" -}}
+    {{- $slug = path.Base (path.Dir $file) -}}
+  {{- else if and $base (ne $base ".") -}}
+    {{- $slug = $base | strings.TrimSuffix ".md" -}}
+  {{- end -}}
+  {{- $href := $url -}}
+  {{- if and $slug (not (strings.Contains $url "subid=")) -}}
+    {{- $sep := "?" -}}
+    {{- if strings.Contains $url "?" }}{{ $sep = "&" }}{{ end -}}
+    {{- $href = print $url $sep "subid=" $slug -}}
+  {{- end -}}
+  {{- $ziel := index $names $key | default (print "Partner: " $key) -}}
+  {{- $out = dict
+        "href"    $href
+        "key"     $key
+        "rel"     "sponsored nofollow noopener"
+        "target"  "_blank"
+        "event"   "affiliate_click"
+        "article" $file
+        "pillar"  $pillar
+        "title"   (print "Weiter zu " $ziel " (Partnerlink = Werbung)")
+  -}}
+{{- end -}}
+{{- return $out -}}

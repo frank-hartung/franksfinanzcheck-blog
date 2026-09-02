@@ -62,10 +62,34 @@ für Bestand reicht Schritt 2 + 3.
 ## 5. Verifizieren
 
 ```bash
-# Jede im Blog verwendete /go/Route muss im Register stehen
+# 0) Pflicht zuerst: Sehtest der Wache (Exit 2 = Detektor blind, fail-closed)
+python3 scripts/affiliate_integrity_gate.py --selftest
+
+# 1) Jede im Blog verwendete /go/-Route muss im Register stehen,
+#    jeder Link muss im gebauten HTML erscheinen (AI1-AI5, heilt sofort)
 python3 scripts/affiliate_integrity_gate.py
+
+# 2) E2E-Kette (Redirect-Ziel, Kategorie, PID, Gateway-Drift)
 python3 scripts/affiliate_health.py --no-net
 ```
+
+Die Integritäts-Wache läuft zusätzlich **täglich automatisch**
+(Actions → „Affiliate-Integritäts-Wache (täglich)", 06:00 MESZ) und beweist:
+
+| Prüfung | Beweis |
+|---|---|
+| AI1 | vollständiger Markdown-Link in jeder CTA-Zeile (kein Dangling) |
+| AI2 | nur registrierte `/go/<key>/`, keine rohen Partner-URLs im Content |
+| AI3 | kein verstümmelter Text an der CTA |
+| AI4 | jeder Link steht **schlüsselgenau** im gebauten HTML – mit `rel="sponsored"` und Klick-Attribution |
+| AI5 | jede `/go/<key>/`-Seite leitet `noindex` auf exakt die registrierte Partner-URL weiter |
+
+Exit-Codes: `0` grün · `1` Inhaltsschaden offen · `2` Werkzeugfehler
+(Beweis nicht möglich → es wird **nichts** veröffentlicht).
+Shortcode-CTAs (`tarifvergleich`, `einspartabelle`) laufen über
+`layouts/_partials/affiliate_anchor_attrs.html` – dort gilt derselbe Vertrag.
+Hintergrund: `AFFILIATE-INTEGRITY-GATE-REPORT.md` · Tagesreport:
+`AFFILIATE-INTEGRITY-REPORT.md`.
 
 Test im Browser: `https://franksfinanzcheck.de/go/strom/` sollte auf
 Check24 mit deiner PID weiterleiten und die Seite
