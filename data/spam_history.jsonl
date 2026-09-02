@@ -495,3 +495,7 @@
 {"ts": "2026-09-02T08:22:05Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet", "rules": ["B1"]}
 {"ts": "2026-09-02T08:22:05Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen", "rules": ["B2"]}
 {"ts": "2026-09-02T08:22:05Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 0}
+{"ts": "2026-09-02T08:40:52Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub", "rules": ["B5"]}
+{"ts": "2026-09-02T08:40:52Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet", "rules": ["B1"]}
+{"ts": "2026-09-02T08:40:52Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen", "rules": ["B2"]}
+{"ts": "2026-09-02T08:40:52Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 0}
