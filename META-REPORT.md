@@ -47,7 +47,7 @@ Alle Titel, Descriptions und Keywords sind im optimalen Bereich.
 | 100 | Handytarif 2026 vergleichen: Günstige Tarife  | 54 | 160 | 8 | ✅ |
 | 100 | Kfz-Versicherung Vergleich 2026: Bis zu 800 € | 52 | 132 | 8 | ✅ |
 | 100 | Tagesgeld-Zinsen 2026: Die besten Zinssätze i | 56 | 145 | 8 | ✅ |
-| 100 | September-Roadtrip: Clevere Wege zum Mietwage | 58 | 147 | 7 | ✅ |
+| 100 | September-Roadtrip: Clevere Wege zum Mietwage | 58 | 147 | 8 | ✅ |
 
 ---
-*Erzeugt am 2026-09-02 um 12:49 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
+*Erzeugt am 2026-09-02 um 13:07 Uhr vom SEO-Bot – Änderungen an diesem Report werden automatisch überschrieben.*
