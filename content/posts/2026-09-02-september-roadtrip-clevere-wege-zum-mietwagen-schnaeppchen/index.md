@@ -31,7 +31,7 @@ Stell dir vor, du stehst am Flughafen von Faro. Die Luft ist noch warm, aber die
 
 Du hast dir Wochen vorher ein echtes **Mietwagen-Schnäppchen** gesichert. Damit bezahlt die Ersparnis locker drei Abendessen in einer erstklassigen Fischtaverne.
 
-**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+**Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 In der Praxis erlebst du genau das Gegenteil: Du buchst zu spät oder lässt dich von versteckten Gebühren blenden. Damit dir das nicht passiert, schauen wir uns heute an, wie du die Dynamik des Marktes für dich nutzt. Drei Dinge zählen dabei besonders: das richtige Timing, die Wahl der Tankregelung und das Kleingedruckte bei der Versicherung.
 
@@ -45,7 +45,7 @@ So ein Überangebot drückt fast zwangsläufig die Preise – die Anbieter wolle
 
 Die Buchungszahlen sinken nach der letzten Augustwoche rapide, und Vermieter kämpfen nun um jeden Kunden, der die Nebensaison belebt. Wer hier flexibel bleibt, findet oft Fahrzeuge in höheren Kategorien zum Preis eines Kleinstwagens. Es ist die Zeit, in der das Preis-Leistungs-Verhältnis seinen absoluten Höhepunkt erreicht.
 
-## Deine Buchungsstrategie: So findest du den günstigsten Preis
+## deine Buchungsstrategie: So findest du den günstigsten Preis
 
 Der Weg zum günstigen Leihwagen führt über einen systematischen Vergleich. Verlasse dich niemals auf das erstbeste Angebot direkt beim Vermieter vor Ort. Am Schalter zahlst du deutlich mehr als bei einer Online-Reservierung. Das Internet schafft die Transparenz für eine kluge Entscheidung.
 

@@ -140,7 +140,7 @@ Unter Android 13/14 ab Version 9 kannst du systemweit "Private DNS" festlegen:
 
 ## DNS-Wechsel + Tarif optimieren: Die doppelte Ersparnis
 
-Schnelle Resolver verbessern die Antwortzeiten – ersetzen aber keine gute Bandbreite. Hast du trotz des Wechsels noch lange Ladezeiten, Streaming-Ruckler oder langsame Downloads, liegt das meist an einem überlasteten oder zu langsamen Tarif. Ein [DSL-Vergleich](/go/dsl/) zeigt dir in zwei Minuten, ob ein Wechsel auf eine höhere Bandbreite oder einen günstigeren Anbieter bis zu **380 € über 24 Monate** spart – wie ich es in meinem [Ratgeber zum DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) detailliert vorgerechnet habe.
+Schnelle Resolver verbessern die Antwortzeiten – ersetzen aber keine gute Bandbreite. Hast du trotz des Wechsels noch lange Ladezeiten, Streaming-Ruckler oder langsame Downloads, liegt das meist an einem überlasteten oder zu langsamen Tarif. Ein [DSL-Vergleich](/go/dsl/) zeigt dir in zwei Minuten, ob ein Wechsel auf eine höhere Bandbreite oder einen günstigeren Anbieter bis zu **380 € über 24 Monate** spart – wie ich es in meinem [Ratgeber zum DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) detailliert vorgerechnet habe.
 
 | Optimierung | Aufwand | Effekt | Kosten |
 |:---|---:|:---|---:|
@@ -196,7 +196,7 @@ Diese Maßnahme ist eine der einfachsten und effektivsten Internet-Tuning-Stells
 Meine klare Empfehlung: Setze ihn direkt im Router (z. B. an der FritzBox) ab, damit alle Geräte im Haushalt automatisch davon profitieren. Wenn du im Anschluss noch deinen Tarif prüfst, holst du das Maximum an Geschwindigkeit und Preis heraus.
 
 
-**Weiterlesen:** [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
+**Weiterlesen:** [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
 
 ## Häufige Fragen
 
