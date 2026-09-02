@@ -126,7 +126,7 @@ Unterversicherung von 20 % bedeutet im Schaden 20 % Abzug. Eine 200.000-€-Po
 
 Ein Gebäudevertrag ist langweilig, bis er der einzige Grund ist, warum du nach einem Sturm nicht den Kredit nachfinanzieren musst.
 
-## Fazit:<br> Keine Kompromisse bei der Substanz deines Zuhauses
+## Fazit: Keine Kompromisse bei der Substanz deines Zuhauses
 
 Die Wohngebäudeversicherung ist neben der [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) die wichtigste Absicherung für Immobilienbesitzer. Spare nicht an elementaren Schutzbausteinen wie dem Starkregenschutz oder dem Verzicht auf grobe Fahrlässigkeit, sondern optimiere den Beitrag durch einen transparenten Marktvergleich.
 

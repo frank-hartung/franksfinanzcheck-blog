@@ -41,7 +41,7 @@ Die Gasrechnung setzt sich aus mehreren variablen Bausteinen zusammen: der eigen
 - **Hohe Gesamtersparnis:** Im Vergleich zu den notorisch teuren Grundversorgungstarifen sparst du bei 20.000 kWh Gasverbrauch oft 2,5 bis 3,5 Cent pro Kilowattstunde.
 - **Automatische Wechselbetreuung:** Der neue Versorger kündigt für dich und garantiert einen nahtlosen Versorgungsübergang.
 
-## Garantiearten im Detail:<br> Worauf du im Vertragstext achten musst
+## Garantiearten im Detail: Worauf du im Vertragstext achten musst
 
 Nicht jedes Angebot mit dem Label Preisgarantie bietet denselben Schutzumfang. Die Energiewirtschaft unterscheidet im Wesentlichen drei Garantieformen:
 
@@ -54,7 +54,7 @@ Hier garantiert das Energieunternehmen ausschließlich den Beschaffungsanteil de
 ### 3. Vollpreisgarantie (Brutto-Preisgarantie)
 Eine Vollpreisgarantie deckt ausnahmslos alle Preisbestandteile inklusive aller Steuern und staatlichen Umlagen ab. Der Brutto-Gesamtpreis bleibt über die vereinbarte Frist absolut unveränderlich. Da der Gasanbieter das gesamte finanzielle Risiko trägt, sind solche Tarife im Arbeitspreis meist etwas teurer kalkuliert.
 
-## Tarifvergleich:<br> Grundversorgung versus Festpreistarife
+## Tarifvergleich: Grundversorgung versus Festpreistarife
 
 | Vertragsmodell | Arbeitspreis / kWh | Grundpreis / Monat | Gesamtkosten (20.000 kWh/Jahr) | Ersparnis p.a. |
 |:---|:---|:---|:---|:---|
@@ -71,7 +71,7 @@ Experten für Verbraucherschutz raten dazu, eine Preisgarantie zu wählen, deren
 
 Wichtig zu wissen: Nach Ablauf der ersten Vertragslaufzeit dürfen sich Verträge nach aktueller Rechtslage in Deutschland nur noch auf unbestimmte Zeit verlängern und können jederzeit mit einer Frist von einem Monat gekündigt werden.
 
-## Checkliste:<br> So wechselst du sicher in einen Festpreistarif
+## Checkliste: So wechselst du sicher in einen Festpreistarif
 
 1. **Jahresabrechnung prüfen:** Ermittle deinen tatsächlichen Gasverbrauch in Kilowattstunden aus der letzten Abrechnung deines Versorgers.
 2. **Postleitzahl eingeben:** Gib deine Postleitzahl in den Vergleichsrechner ein, da Netzentgelte je nach Region variieren.
@@ -107,7 +107,7 @@ Wer im Sommer wechselt, sichert den Preis vor der Heizsaison. Wer im November we
 
 Eine Preisgarantie ist Planungssicherheit, kein Religionsthema. Wenn der Markt 2027 dauerhaft unter deinem Garantiepreis liegt und du monatlich kündbar bist, wechselst du. Bis dahin schläfst du, ohne jede Börsenmeldung in die Gasrechnung zu übersetzen.
 
-## Fazit:<br> Mit Planungssicherheit entspannt durch das Jahr
+## Fazit: Mit Planungssicherheit entspannt durch das Jahr
 
 Eine **Preisgarantie für Gas** nimmt dir die Sorge vor unkalkulierbaren Preiserhöhungen und spart bares Geld. Wer aus der teuren Grundversorgung zu einem geprüften Anbieter mit 12 Monaten Preisbindung wechselt, entlastet die Haushaltskasse um bis zu 650 € im Jahr.
 

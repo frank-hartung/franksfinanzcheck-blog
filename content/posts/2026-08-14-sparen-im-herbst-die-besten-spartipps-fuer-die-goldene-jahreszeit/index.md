@@ -119,7 +119,7 @@ Setz 75 Minuten – so teilst du sie ein:
 
 Wenn nur eine der drei Schichten sitzt, nimm die Verträge. Sie zahlen den Rest.
 
-## Fazit:<br> Nutze den Herbst für deinen persönlichen Kassensturz
+## Fazit: Nutze den Herbst für deinen persönlichen Kassensturz
 
 Der Herbst ist kein Grund für trübe Stimmung, sondern die perfekte Gelegenheit, deine Finanzen auf Vordermann zu bringen. Indem du bestehende Verträge hinterfragst, den Kfz-Stichtag nutzt und dein Zuhause energieeffizient machst, gehst du mit einem deutlichen Plus auf dem Girokonto ins neue Jahr.
 

@@ -45,16 +45,16 @@ Telekommunikations­unternehmen belohnen Neukunden mit großzügigen Einstiegsko
 
 ## Die 4 Phasen des reibungslosen Anbieterwechsels
 
-### Phase 1:<br> Verfügbarkeitscheck & Bedarfsanalyse
+### Phase 1: Verfügbarkeitscheck & Bedarfsanalyse
 Ermittle vorab, welche Anschlussart an deiner Wohnadresse verfügbar ist (DSL/VDSL, Kabel-Internet oder FTTH-Glasfaser). Für einen normalen Haushalt mit Streaming in 4K und Homeoffice reicht eine Bandbreite von 50 bis 100 Mbit/s völlig aus. Haushalte mit mehreren Personen oder intensiven Cloud-Uploads profitieren von 250 Mbit/s. Gigabit-Leitungen lohnen sich meist nur bei extrem datenintensiven Hobbys. Achte darauf, dass der Anbieter echte Dual-Stack-Anschlüsse mit nativer IPv4- und IPv6-Adresse bereitstellt, falls du von unterwegs auf Heimnetzwerk-Server zugreifen möchtest. Was die verfügbaren Technologien und Tarife konkret kosten, siehst du in unserem [DSL-Vergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) – dort findest du auch die 4-Punkte-Formel für den echten Monatspreis.
 
-### Phase 2:<br> Tarifvergleich & Effektivpreis berechnen
+### Phase 2: Tarifvergleich & Effektivpreis berechnen
 Achte beim Vergleich nicht nur auf die werbewirksame Einstiegsgebühr der ersten Monate, sondern berechne den durchschnittlichen Effektivpreis über 24 Monate inklusive aller Boni, Bereitstellungskosten und Versandgebühren. Nur dieser Durchschnittspreis spiegelt die tatsächliche Belastung für dein Monatsbudget wider. Addiere sämtliche Fixkosten der 24 Monate, subtrahiere Aktionsguthaben und teile das Ergebnis durch vierundzwanzig.
 
-### Phase 3:<br> Neuen Anbieter beauftragen (Nicht selbst kündigen!)
+### Phase 3: Neuen Anbieter beauftragen (Nicht selbst kündigen!)
 Das ist die wichtigste Grundregel beim DSL-Wechsel: Kündige deinen bestehenden Vertrag **nicht** auf eigene Faust! Gib dem neuen Provider im Bestellprozess den Auftrag zur Rufnummernmitnahme (Portierung) und Kündigung. Dadurch ist gesetzlich garantiert, dass die Leitungslücke bei der Umschaltung höchstens einen Kalendertag betragen darf. Sollte es dennoch zu Verzögerungen kommen, muss der bisherige Anbieter die Leitung nahtlos Weiterbetreiben und darf dafür maximal die bisherigen Entgelte berechnen.
 
-### Phase 4:<br> Hardware einrichten & Altgeräte retournieren
+### Phase 4: Hardware einrichten & Altgeräte retournieren
 Nach Erhalt der Auftragsbestätigung und des Schalttermins schließt du deinen neuen Router am Umstellungstag an. Falls du einen Mietrouter des alten Anbieters hattest, sende diesen innerhalb von 14 Tagen mit dem bereitgestellten Retourenschein zurück, um Strafgebühren zu vermeiden. Bewahre den Einlieferungsbeleg des Paketdienstleisters mindestens zwei Jahre sorgfältig auf.
 
 
@@ -62,7 +62,7 @@ Nach Erhalt der Auftragsbestätigung und des Schalttermins schließt du deinen n
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/dsl/)
 
 
-## Tarifvergleich:<br> Altvertrag vs. Neukunden-Wechseltarif
+## Tarifvergleich: Altvertrag vs. Neukunden-Wechseltarif
 
 | Kostenfaktor | Bestehender Altvertrag (50 Mbit/s) | Neuer Wechseltarif (100 Mbit/s) | Ersparnis über 24 Monate |
 |:---|:---|:---|:---|
@@ -75,7 +75,7 @@ Nach Erhalt der Auftragsbestätigung und des Schalttermins schließt du deinen n
 
 > 💡 **Praxis-Tipp:** Nutze vor dem Abschluss unseren detaillierten Leitfaden zum [DSL-Wechselbonus und Willkommensprämien](../../posts/2026-08-10-dsl-wechselbonus-sichern/), um dir die maximalen Gutschriften zu sichern.
 
-## Router mieten oder kaufen:<br> Was rechnet sich mehr?
+## Router mieten oder kaufen: Was rechnet sich mehr?
 
 Viele Anbieter bieten bei Vertragsabschluss WLAN-Router zur Miete für 4,99 € bis 7,99 € pro Monat an. Auf 24 Monate gerechnet summiert sich die Miete auf 120 € bis 190 €.
 
@@ -102,7 +102,7 @@ Miete 6 € × 24 = 144 €, du gibst das Gerät am Ende zurück. Kauf FritzBo
 
 Ausnahme: Der neue Anbieter erzwingt seine Box am Glasfaser-Modem. Dann Bridge-Modus + eigene Box dahinter, oder du akzeptierst die Miete für 24 Monate und kaufst danach.
 
-## Nach dem Wechsel:<br> 14-Tage-Protokoll
+## Nach dem Wechsel: 14-Tage-Protokoll
 
 Täglich einmal Kabel-Speedtest, ping, ob TV-App und VPN laufen. Weicht der Durchschnitt um mehr als 30 % vom Vertrag ab, Störung als Ticket anlegen – nicht erst nach drei Monaten. Die Entstörung in den ersten 14 Tagen ist psychologisch und vertraglich einfacher als nach einem halben Jahr Dulden.
 
@@ -117,7 +117,7 @@ Router-Zugangsdaten des neuen Anbieters aus der Mail kopiert, nicht erst um 9 Uh
 
 So geplant wird der Wechsel zur 20-Minuten-Aktion. Ohne Plan erlebst du ihn als den Tag ohne Netz.
 
-## Fazit:<br> Mit minimalem Aufwand hunderte Euro sparen
+## Fazit: Mit minimalem Aufwand hunderte Euro sparen
 
 Überprüfst du alle 24 Monate deinen DSL- oder Kabelvertrag und wechselst bei Bedarf, surfst du dauerhaft mit modernen Technologien und sparst pro Jahr zwischen 280 € und 380 €. Der Wechselprozess läuft dank Anbieter-Kündigungsservice unterbrechungsfrei im Hintergrund ab.
 

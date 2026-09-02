@@ -44,7 +44,7 @@ Ein DSL-Wechselbonus ist ein finanzieller Anreiz, den Internetanbieter bereitste
 
 Damit der Bonus ohne Verzögerung gewährt wird, muss der Wechsel zwingend über den Wechselservice des neuen Anbieters beauftragt werden. Wer seinen Altvertrag voreilig selbst kündigt, riskiert, dass der neue Vertrag lediglich als technischer Neuanschluss ohne Wechselbonus eingestuft wird.
 
-## 24-Monats-Berechnung:<br> So viel sparst du wirklich
+## 24-Monats-Berechnung: So viel sparst du wirklich
 
 Wie stark sich ein Wechselbonus auf deine realen Haushaltsausgaben auswirkt, verdeutlicht die folgende Vergleichsrechnung für einen VDSL-Anschluss mit 100 Mbit/s über zwei Jahre:
 
@@ -115,7 +115,7 @@ Wechselt du innerhalb derselben Gruppe (Marke A zu Marke A-Discount), entfällt 
 
 Der Bonus ist die Kirsche. Der Kuchen ist der Effektivpreis. Wer nur der Kirsche hinterherläuft, unterschreibt 24 Monate zu 44,99 € nach der Rabattphase – und hat teuer „gewonnen“.
 
-## Fazit:<br> DSL-Wechselbonus clever einstreichen
+## Fazit: DSL-Wechselbonus clever einstreichen
 
 Den **DSL-Wechselbonus** alle zwei Jahre mitzunehmen, ist eine der einfachsten Methoden, um ohne jeglichen Komfortverlust hunderte Euro an monatlichen Fixkosten einzusparen. Da der neue Anbieter die Kündigung und die Rufnummernmitnahme komplett übernimmt, liegt der tatsächliche Arbeitsaufwand bei unter 10 Minuten. Vergleiche noch heute die verfügbaren Geschwindigkeiten an deiner Adresse und sichere dir deine Wechselprämie.
 

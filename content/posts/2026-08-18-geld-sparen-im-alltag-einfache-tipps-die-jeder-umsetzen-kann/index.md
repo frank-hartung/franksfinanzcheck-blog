@@ -66,7 +66,7 @@ Ob DSL, Mobilfunk, Strom, Gas oder Versicherungen: Anbieter belohnen Wechsellust
 ### 10. Cashback- und Bonusprogramme clever mitnehmen
 Nutze bei ohnehin geplanten Online-Käufen Cashback-Portale. Du erhältst 2 bis 8 % deines Rechnungsbetrags als echte Barauszahlung auf dein Konto zurück.
 
-## Beispiel:<br> Monatliche Alltagsersparnis im Detail
+## Beispiel: Monatliche Alltagsersparnis im Detail
 
 | Sparbereich | Vorher (ungesteuert) | Nachher (optimiert) | Monatliche Ersparnis |
 |:---|:---|:---|:---|
@@ -123,7 +123,7 @@ Wenn du diese Aufteilung konsequent einhältst, baust du völlig ohne Verzichtge
 
 Wenn du nur eine Sache aus diesem Ratgeber mitnimmst: Automatisiere die Sparrate am 1. und mach den Rest langweilig. Langweilige Finanzen sind die, die am Jahresende funktionieren.
 
-## Fazit:<br> Gewohnheiten schlagen Disziplin
+## Fazit: Gewohnheiten schlagen Disziplin
 
 Alltagssparen funktioniert nicht durch eiserne Willenskraft, sondern durch kluge Systeme. Wenn Einzahlungen auf das Tagesgeldkonto automatisiert sind und Ausgabenbudgets klar begrenzt werden, wächst dein Vermögen Monat für Monat wie von selbst.
 
