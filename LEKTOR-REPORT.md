@@ -1,6 +1,6 @@
 # ✒️ LEKTOR-REPORT (lektor_guard.py)
 
-**Stand:** 2026-09-02 08:47 UTC · Modus: FIX
+**Stand:** 2026-09-02 12:43 UTC · Modus: REPORT
 
 | Regel | Anzahl |
 |---|---|
@@ -10,7 +10,7 @@
 | L4 Ausrufezeichen/Grenze | 0 |
 | L5 Echo (Report) | 166/0 |
 | L7 Nominalstil-Radar (Report) | 11 |
-| L8 Weichmacher-Dichte (Report) | 68 |
+| L8 Weichmacher-Dichte (Report) | 67 |
 | L9 Satzanfangs-Echo (Report) | 3 |
 | L10 Zahlenschreibweise (Auto) | 0 |
 | L11 Werbe-Intensivel (Auto) | 0 |

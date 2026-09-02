@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-TEXTVERSTÄNDNIS-GUARD (R2–R8) für FranksFinanzcheck.
+TEXTVERSTÄNDNIS-GUARD (R2–R9) für FranksFinanzcheck.
 
 Die Verständnis-Regeln aus dem Textverständnis-Audit (01.09.2026), die
 KEIN bestehendes Gate misst:
@@ -15,6 +15,8 @@ KEIN bestehendes Gate misst:
   R5  Absatz-Guard         Fließtext-Absatz > 4 Sätze -> Fund, > 6 Sätze -> hart
   R7  Intro-Formel-Guard   „In diesem Ratgeber/Artikel/Beitrag …“ -> 0 Toleranz
   R8  Ankertext-Ziel-Kohärenz  Ankertext passt nicht zu Slug des Ziels;
+      + R8-NESTED-LINK  Doppelt verschachtelte Markdown-Links
+  R9  Klebewort-Guard      Inserter-Artefakte „HHerfindestdu“/„Ddeine…"
                            Leerzeichen in URL = harter Fehler
 
 MODI:
@@ -258,7 +260,64 @@ def check_article(rel: str, body: str, term: dict) -> list:
         if not hits:
             finds.append((rel, "R8-ANKER-ZIEL",
                           f"Ankertext „{anker[:45]}“ passt nicht zum Ziel „{slug}“", slug))
+    finds += check_nested_links(rel, body)
+    finds += check_klebewoerter(rel, body)
     return finds
+
+
+# R8-NESTED-LINK (02.09.2026, Wöchentliche SEO-Optimierung #20):
+# Live-Schadensbeweis: „Weiterlesen“-Zeilen enthielten DOPPELT geschachtelte
+# Markdown-Links, z. B. „[[Wohngebäudeversicherun](…/dein-haus…/)g Vergleich](…/wohngeb…/)".
+# Entstehung (Git-Forensik): 26.08. Entlinkung (draft_link_healer) → 31.08.
+# Re-Verlinkung durch zwei Linker-Pässe, der zweite klinkte sich MITTEN ins
+# Wort des ersten Ankers („…versicherun|g Vergleich“). Im gerenderten HTML
+# stand roher Markdown-Müll – für Leser sichtbar, für check_internal_links
+# unsichtbar (dort existiert kein href). Regel: immer harter Fehler, nie
+# auto-heilbar (Semantik unklar) – die Redaktion entscheidet.
+R8_NESTED_RX = re.compile(r"\[\[[^\]\n]*?\]\([^)]*\)[^\]\n]*?\]\([^)]*\)")
+
+
+def check_nested_links(rel: str, body: str) -> list:
+    """Erkennt verschachtelte/doppelt gesetzte Markdown-Links (Form
+    „[[Text](url)Restwort](url2)“) – harter Fehler, Redaktion repariert."""
+    out = []
+    for m in R8_NESTED_RX.finditer(body):
+        frag = re.sub(r"\s+", " ", m.group(0))
+        out.append((rel, "R8-NESTED-LINK",
+                    f"Verschachtelter Markdown-Link: „{frag[:90]}“ "
+                    f"– rendert als sichtbarer Text-Müll, manuell reparieren", frag))
+    return out
+
+
+# R9-KLEBEWORT (02.09.2026, Wöchentliche SEO-Optimierung #20):
+# Fingerabdruck historischer Inserter-Kaskaden: Wort beginnt mit demselben
+# Buchstaben zweimal in gemischter Groß-/Kleinschreibung („HHerfindestdu"
+# ← „Hier findest du", „Ddeine6" ← „Deine 6", gefunden in posts/_index.md).
+# In deutscher Prosa kommt das praktisch nie vor (Ausnahme: Ortsnamen wie
+# „Aachen") — darum harter Fehler, kaum False-Positive-Risiko.
+R9_KLEBE_RX = re.compile(r"\b([A-ZÄÖÜa-zäöü])([A-ZÄÖÜa-zäöü])([a-zäöü][\wÄÖÜäöüß]*)")
+R9_ALLOW = {"Aachen", "Aachener", "Ggf", "ggf"}  # Abk. „gegebenenfalls“ ist legitim
+
+
+def check_klebewoerter(rel: str, body: str) -> list:
+    """Erkennt vorne geklebte Wortduplikate („HHerfindestdu", „Ddeine…")
+    aus defekten Inserter-Skripten – harter Fehler, sofort reparieren."""
+    out = []
+    clean = re.sub(r"```.*?```", " ", body, flags=re.S)
+    clean = re.sub(r"\{\{[^}]*\}\}", " ", clean)
+    clean = re.sub(r"\]\([^)\n]*\)", "]()", clean)
+    for m in R9_KLEBE_RX.finditer(clean):
+        if m.group(1).casefold() != m.group(2).casefold():
+            continue
+        w = m.group(0)
+        if w[2].casefold() == w[0].casefold():
+            continue  # Buchstaben-Lauf („www“, „AAA“) ist kein Inserter-Artefakt
+        if w in R9_ALLOW:
+            continue
+        out.append((rel, "R9-KLEBEWORT",
+                    f"Klebe-Artefakt „{w}“ (Wort fängt doppelt an: {w[0]}{w[1]}…) "
+                    f"– Überrest eines defekten Text-Inserters, manuell reparieren", w))
+    return out
 
 
 def run_selftest() -> list:
@@ -305,6 +364,30 @@ def run_selftest() -> list:
     r8c = [f for f in check_article("t", body8c, {}) if f[1] == "R8-ANKER-ZIEL"]
     if r8c:
         fehler.append("R8: Umlaut-Normalisierung fehlgeschlagen – „Spätsommer“ sollte „spaetsommer“ erkennen")
+    # R8-NESTED-LINK: verschachtelte Doppel-Links müssen hart gefunden werden
+    body8d = ("TEXT\n\n**Weiterlesen:** [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) · "
+              "[[Wohngebäudeversicherun](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/)g Vergleich]"
+              "(../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/) · ok")
+    r8d = [f for f in check_article("t", body8d, {}) if f[1] == "R8-NESTED-LINK"]
+    if len(r8d) != 1:
+        fehler.append(f"R8-NESTED-LINK: eingefrorener Schadensfall nicht erkannt (Funde: {len(r8d)})")
+    body8e = ("TEXT\n\n**Weiterlesen:** [A-Artikel](../../posts/a/) · [B-Artikel](../../posts/b/) "
+              "· [Ratgeber](../../pillar/x/)")
+    if check_nested_links("t", body8e):
+        fehler.append("R8-NESTED-LINK: Falsch-Positiv auf sauberer Weiterlesen-Zeile")
+    # Toleranz: eckige Klammern OHNE Link-Syntax dürfen nicht feuern
+    body8f = "TEXT\n\nDer Tipp [1] lohnt sich. Mehr unter [2]."
+    if check_nested_links("t", body8f):
+        fehler.append("R8-NESTED-LINK: Falsch-Positiv auf Fußnoten-Klammern")
+    # R9-KLEBEWORT: Historisches Inserter-Artefakt („HHerfindestdu“ 02.09.2026)
+    if not check_klebewoerter("t", "TEXT\n\n> Kurz: HHerfindestdu alles.\n\n### Ddeine6 Themen"):
+        fehler.append("R9: Klebe-Artefakt nicht erkannt")
+    # Negativfälle dürfen NICHT anschlagen
+    for _ok in ("WLAN und DSGVO sind legitim.", "MagentaZuhause-Tarife bei der Telekom.",
+                "Aachen liegt im Westen.", "Die FritzBox ist ein Router."):
+        if check_klebewoerter("t", "TEXT\n\n" + _ok):
+            fehler.append(f"R9: False-Positive bei „{_ok}“")
+
     return fehler
 
 
@@ -316,7 +399,7 @@ def main() -> int:
         if fehler:
             print("SELFTEST FEHLGESCHLAGEN – nichts geschrieben.")
             return 2
-        print("✅ Verständnis-Selbsttest: 8 Fälle grün.")
+        print("✅ Verständnis-Selbsttest: 9 Fälle grün.")
         return 0
 
     term = load_terminologie()
@@ -337,6 +420,21 @@ def main() -> int:
         body = split_body(p.read_text(encoding="utf-8"))
         all_finds += check_article(rel, body, term)
 
+    # Hub-/Listen-Seiten (02.09.2026): In posts/_index.md wurde mit
+    # „HHerfindestdu“/„Ddeine6 Themenwelten“ das Reste-Artefakt eines
+    # historischen Inserter-Skripts gefunden – seitdem laufen für diese
+    # Seiten die Seiten-Level-Regeln (Nested-Links, Klebewörter) mit.
+    if not NEW_ONLY:
+        hub_paths = [POSTS / "_index.md"]
+        hub_paths += sorted((ROOT / "content" / "pillar").glob("*/index.md"))
+        for p in hub_paths:
+            if not p.exists():
+                continue
+            rel = str(p.relative_to(ROOT))
+            body = split_body(p.read_text(encoding="utf-8"))
+            all_finds += check_nested_links(rel, body)
+            all_finds += check_klebewoerter(rel, body)
+
     # dedup
     uniq, seen = [], set()
     for f in all_finds:
@@ -348,7 +446,8 @@ def main() -> int:
 
     # R8-ANKER-ZIEL ist bewusst NUR weich (semantische Kohärenz ist nicht
     # deterministisch prüfbar – Funde sind Review-Kandidaten, keine Blocker).
-    hard_rules = ("R2-KEYWORD-DUMP", "R3-TERMINOLOGIE", "R5-ABSATZ-HART", "R7-INTRO-FORMEL", "R8-URL-LEERZEICHEN")
+    hard_rules = ("R2-KEYWORD-DUMP", "R3-TERMINOLOGIE", "R5-ABSATZ-HART", "R7-INTRO-FORMEL",
+                  "R8-URL-LEERZEICHEN", "R8-NESTED-LINK", "R9-KLEBEWORT")
     hard = [f for f in uniq if f[1] in hard_rules]
     soft = [f for f in uniq if f[1] not in hard_rules]
 

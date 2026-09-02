@@ -1,10 +1,10 @@
 # 📉 Content-Decay-Radar (Chefredakteur-View)
-**Stand:** 2026-09-01 · **Auftrag:** Frische-Steuerung für YMYL-/Affiliate-Content
+**Stand:** 2026-09-02 · **Auftrag:** Frische-Steuerung für YMYL-/Affiliate-Content
 
 - 🔴 **STALE** (sofort aktualisieren): **0**
 - 🟠 **DECAYING** (in den nächsten Wochen): **0**
 - 🟡 **WATCH** (im Auge behalten): **0**
-- 🟢 **FRESH** (ok): **24**
+- 🟢 **FRESH** (ok): **26**
 
 ---
 
@@ -33,4 +33,4 @@ _Keine_
    E-A-T-Quellen).
 4. **Datenpflege:** `data/decay_queue.json` wird von Engine/Autoren als Prioritätsliste gelesen.
 
-_Automatisch erzeugt von `scripts/decay_radar.py` am 2026-09-01._
+_Automatisch erzeugt von `scripts/decay_radar.py` am 2026-09-02._

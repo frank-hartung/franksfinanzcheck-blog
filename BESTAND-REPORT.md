@@ -1,5 +1,5 @@
 # 📋 BESTAND-REPORT (bestand_gate.py)
 
-**Geprüfte Live-Artikel:** 25 · **Heilung versucht:** – · **Weiterhin auffällig:** 0
+**Geprüfte Live-Artikel:** 26 · **Heilung versucht:** – · **Weiterhin auffällig:** 0
 
 🎉 Alle bestehenden Artikel erfüllen die aktuelle Publish-Gate-Prüfung (check_length.py + seo_audit.py + affiliate_profi_check.py + affiliate_integrity_gate.py) – keine Reparatur nötig, oder erfolgreich automatisch geheilt.

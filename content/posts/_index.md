@@ -9,9 +9,10 @@ cover:
   image: "images/covers/_index.jpg"
   alt: "Alle Ratgeber von FranksFinanzcheck – Strom, Gas, Internet, Versicherungen und Frugalismus mit konkreten Spartipps"
   caption: "FranksFinanzcheck – verständlich, unabhängig, mit konkreten Zahlen"
+lastmod: 2026-09-02
 ---
 
-> 💡 **Kurz & knapp:** HHerfindestdu **alle Ratgeber von FranksFinanzcheck** – sortiert nach Aktualität, mit klaren Spartipps für Strom, Gas, Internet, Versicherungen und Frugalismus. Jeder Artikel: verständlich erklärt, mit konkreten Euro-Beträgen, Vor- und Nachteilen und Schritt-für-Schritt-Anleitung.
+> 💡 **Kurz & knapp:** Hier findest du **alle Ratgeber von FranksFinanzcheck** – sortiert nach Aktualität, mit klaren Spartipps für Strom, Gas, Internet, Versicherungen und Frugalismus. Jeder Artikel: verständlich erklärt, mit konkreten Euro-Beträgen, Vor- und Nachteilen und Schritt-für-Schritt-Anleitung.
 
 ## Was dich hier erwartet
 
@@ -19,7 +20,7 @@ Du willst **monatlich bares Geld sparen**, ohne stundenlang Tarife zu wälzen? G
 
 Montags, mittwochs und freitags erscheinen **2–3 neue Ratgeber**. So bleibst du am Ball, ohne den Überblick zu verlieren.
 
-### Ddeine6 Themenwelten
+### Deine 6 Themenwelten
 
 Finde direkt den Bereich, der dich am meisten interessiert – alle Artikel sind dort gebündelt und untereinander verlinkt:
 

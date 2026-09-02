@@ -1,8 +1,10 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-09-02 08:47 UTC · Modus: FIX
+**Stand:** 2026-09-02 12:34 UTC · Modus: FIX
 
-🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
+## ✅ Automatisch korrigiert (1 Dateien)
+
+- `content/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md`: Regel-Fixes 1, KI-Umformulierungen 0
 
 ## 🎓 Stil-Hinweise (Ebene 2, nur Info bzw. mit --ai aktiv)
 

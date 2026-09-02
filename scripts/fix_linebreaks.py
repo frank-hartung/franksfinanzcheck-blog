@@ -43,8 +43,6 @@ RE_FAQ_START = re.compile(
     re.I)
 RE_BROKEN_END = re.compile(r"[ \u00a0]{2,}$")       # Zeile endet mit Hard-Break-Spuren
 RE_DASH = re.compile(r"\u2013")                      # Gedankenstrich
-RE_HEADING_COLON = re.compile(r"^(#{2,3})\s+([^:\n]+?):([ \t]+)(\S.*)$")
-RE_LOWER_START = re.compile(r"^[a-zäöüß]")
 
 
 # ---------------------------------------------------------------------------
@@ -232,36 +230,24 @@ def self_heal(body: str) -> tuple[str, int]:
 
 
 def _apply_heading_breaks(body: str) -> tuple[str, int]:
-    """Design-Vorgabe (vom User explizit gewünscht): Teilüberschriften (H2/H3)
-    mit Doppelpunkt bekommen nach dem Doppelpunkt ein <br> – der Untertitel
-    beginnt auf einer neuen Zeile. Deterministisch (keine KI nötig).
-    Ausgenommen: FAQ-Fragen (Schema!), klein beginnende Untertitel.
-    WICHTIG (Anker-Konsistenz): Nach <br> MUSS ein Leerzeichen folgen (<br> ),
-    damit Hugo-Slugs wie 'Fazit: Ein ...' als #fazit-ein-... statt #fazitein-...
-    gerendert werden. Bestandsüberschriften ohne Leerzeichen werden geheilt."""
-    lines = body.split("\n")
-    out: list[str] = []
-    changed = 0
-    in_faq = False
-    for line in lines:
-        if re.match(r"^#{1,6}\s+", line):
-            if RE_FAQ_START.match(line):
-                in_faq = True
-            elif re.match(r"^#{1,2}\s+", line):
-                in_faq = False
-        if re.match(r"^#{2,3}\s+", line) and not in_faq:
-            # 1. Existierende :<br> ohne Leerzeichen heilen: :<br>(\S) -> :<br> \1
-            if re.search(r":<br>[^\s]", line):
-                line = re.sub(r":<br>([^\s])", r":<br> \1", line)
-                changed += 1
-            # 2. Neue :<br> setzen (falls noch kein <br> vorhanden)
-            elif ":<br>" not in line and ":<br " not in line:
-                m = RE_HEADING_COLON.match(line)
-                if m and not RE_LOWER_START.match(m.group(4)):
-                    line = m.group(1) + " " + m.group(2) + ":<br> " + m.group(4)
-                    changed += 1
-        out.append(line)
-    return "\n".join(out), changed
+    """DAUERHAFT DEAKTIVIERT (02.09.2026, Wöchentliche SEO-Optimierung #20).
+
+    Die alte Design-Vorgabe „H2/H3 mit Doppelpunkt bekommen :<br>“ ist seit
+    27.08.2026 außer Kraft – Haus-Regel: KEIN <br> in Überschriften, weil es
+    TOC-Texte zerstört („Fazit:\\ Ein …“) und die Anker-Logik gefährdet
+    (heading_guard.py heilt seither anker-stabil, blog_health_gate ruft es
+    täglich). Beide Bots stritten täglich: heading_guard entfernte nachts,
+    fix_linebreaks setzte per Engine/SEO-Weekly wieder `<br>` – Beweis am
+    02.09.: 05:51 Uhr 118 Überschriften geheilt, 06:43 Uhr von Engine
+    Phase 2 (dieser Aufruf) komplett zurückgesetzt, 121 Geister-Funde live.
+    AB JETZT ändert diese Funktion Überschriften NIE wieder; Altlasten werden
+    nur gezählt (die anker-stabile Heilung bleibt Hoheit von heading_guard)."""
+    relikt = sum(1 for line in body.split("\n")
+                 if re.match(r"^#{1,6}\s+", line) and "<br" in line.lower())
+    if relikt:
+        print(f"    ℹ {relikt} Überschrift(en) tragen Altlast-<br> – Heilung "
+              f"(anker-stabil) gehört heading_guard.py, nicht mehr dieser Funktion.")
+    return body, 0
 
 
 def fix_body(body: str) -> tuple[str, int]:
