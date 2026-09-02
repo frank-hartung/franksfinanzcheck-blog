@@ -1,6 +1,6 @@
 # 📣 Social-Media-Status
 
-> Automatisch aktualisiert: 31.08.2026 18:45 UTC
+> Automatisch aktualisiert: 02.09.2026 07:23 UTC
 
 - **Mastodon:** 🟢 aktiv (https://mastodon.social)
 - **LinkedIn:** ⚪ nicht eingerichtet (Achtung: Token läuft ~60 Tage)
