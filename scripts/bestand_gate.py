@@ -40,6 +40,12 @@
 #       Fehler-Alerting aus). Längen-Probleme sind grundsätzlich nicht
 #       automatisch heilbar (brauchen echte Textarbeit).
 #
+#  EXIT-CODES (Premium 02.09.2026, Issue #149):
+#    0  grün – alle Bestandsartikel konform
+#    1  Inhaltsschaden – nach Heilungsversuch bleibt etwas offen
+#    2  Auswertungsfehler / Detektor-Drift – fail-closed, nichts geheilt
+#
+#
 #  Aufruf:
 #    python3 scripts/bestand_gate.py             # prüfen + heilen
 #    python3 scripts/bestand_gate.py --dry-run   # nur prüfen, nicht heilen
@@ -55,12 +61,14 @@ import re
 import shutil
 import subprocess
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
 POSTS_DIR = ROOT / "content" / "posts"
 REPORT = ROOT / "BESTAND-REPORT.md"
+STATE = ROOT / ".bestand_gate_state.json"
 
 DRY_RUN = "--dry-run" in sys.argv
 AS_JSON = "--json" in sys.argv
@@ -102,8 +110,8 @@ def run_gate():
     affiliate_failed, affiliate_err = pg.affiliate_profi_failures()
     # Bestand: bewusst OHNE Kandidaten-Filter (alles prüfen) – bestand_gate
     # ist die nicht-destruktive Bestands-Wache, die jeden Fund meldet
-    # und zu heilen versucht. Werkzeugfehler (exit_code 2) kommen als
-    # errors-Liste zurück und landen im Report + Exit 1.
+    #    und zu heilen versucht. Werkzeugfehler (exit_code 2) kommen als
+    #    errors-Liste zurück und landen im Report + Exit 2 (fail-closed).
     integrity_failed, integrity_err, integrity_tool_error = \
         pg.affiliate_integrity_failures()
 
@@ -154,6 +162,42 @@ def heal(dimension: str) -> None:
     # echte Textarbeit, wird nur gemeldet.
 
 
+# ------------------------------------------------------------------ #
+#  Maschinenlesbarer Zustand (Premium 02.09.2026, Issue #149)
+# ------------------------------------------------------------------ #
+VOLATILE_STATE_KEYS = ("generated_at",)
+
+
+def _state_fingerprint(payload: dict) -> str:
+    """Fingerprint ohne fluechtige Felder – verhindert Commit-/Deploy-Churn
+    an ruhigen Tagen (gleiches Prinzip wie affiliate_integrity_gate.py)."""
+    return json.dumps({k: v for k, v in payload.items()
+                       if k not in VOLATILE_STATE_KEYS},
+                      ensure_ascii=False, sort_keys=True, default=list)
+
+
+def write_state(payload: dict) -> None:
+    """Schreibt .bestand_gate_state.json nur bei inhaltlicher Aenderung.
+
+    Die Datei macht fuer die Workflow-Issue-Pflege eindeutig unterscheidbar:
+      * 0  = gruen (Bestand konform / erfolgreich geheilt)
+      * 1  = Inhaltsschaden offen
+      * 2  = Auswertungsfehler / Detektor-Drift (fail-closed)
+    """
+    try:
+        previous = json.loads(STATE.read_text(encoding="utf-8")) if STATE.is_file() else {}
+        if _state_fingerprint(previous) == _state_fingerprint(payload):
+            return  # konvergent: kein Diff, kein Commit, kein Deploy-Trigger
+        STATE.write_text(json.dumps(payload, ensure_ascii=False, indent=1) + "\n",
+                         encoding="utf-8")
+    except (OSError, json.JSONDecodeError) as exc:
+        try:
+            STATE.write_text(json.dumps(payload, ensure_ascii=False, indent=1) + "\n",
+                             encoding="utf-8")
+        except OSError as exc2:
+            print(f"⚠️ Zustand konnte nicht geschrieben werden: {exc2} ({exc})")
+
+
 def main():
     all_slugs = set(live_slugs())
     findings, errors = run_gate()
@@ -190,18 +234,33 @@ def main():
     }
 
 
+    # FAIL-CLOSED (02.09.2026): Auswertungsfehler (z. B. Render-Beweis
+    # nicht möglich, exit_code 2 der Integritäts-Wache) dürfen nicht als
+    # „Bestand sauber" durchgehen – sie sind sichtbar rot. Konventionen:
+    #   0 = grün
+    #   1 = Inhaltsschaden (Bestand auffällig, braucht Text-/Content-Arbeit)
+    #   2 = Auswertungsfehler (Werkzeugfehler, fail-closed – nichts geheilt)
+    exit_code = 2 if errors else (0 if not still_affected else 1)
+    state = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "exit_code": exit_code,
+        "checked": len(all_slugs),
+        "healing_attempted": healed_dims,
+        "still_affected": sorted(still_affected.keys()),
+        "errors": errors,
+    }
+
     if AS_JSON:
         result = {
+            "generated_at": state["generated_at"],
+            "exit_code": exit_code,
             "checked": len(all_slugs),
             "healing_attempted": healed_dims,
             "still_failing": still_affected,
             "errors": errors,
         }
         print(json.dumps(result, ensure_ascii=False, indent=2))
-        # FAIL-CLOSED (02.09.2026): Auswertungsfehler (z. B. Render-Beweis
-        # nicht möglich, exit_code 2 der Integritäts-Wache) dürfen nicht als
-        # „Bestand sauber" durchgehen – sie sind sichtbar rot.
-        return 1 if (still_affected or errors) else 0
+        return exit_code
 
     lines = [
         "# 📋 BESTAND-REPORT (bestand_gate.py)",
@@ -218,7 +277,7 @@ def main():
     if errors and not still_affected:
         # FAIL-CLOSED (02.09.2026): Ohne vollständige Prüfung darf der Report
         # NICHT grün aussehen – sonst liest sich ein Werkzeugfehler als
-        # "Bestand sauber" (genau die Irreführung, die der Exit 1 abschafft).
+        # "Bestand sauber" (genau die Irreführung, die Exit 2 abschafft).
         lines.append(
             "🟠 **Bestand gilt als NICHT geprüft** – mindestens eine Prüfung konnte "
             "nicht ausgewertet werden (siehe Auswertungsfehler oben). Es wurde "
@@ -256,8 +315,11 @@ def main():
     report_text = "\n".join(lines)
     print(report_text)
     REPORT.write_text(report_text + "\n", encoding="utf-8")
-    # FAIL-CLOSED (02.09.2026): s. o. – Auswertungsfehler = Exit 1.
-    return 1 if (still_affected or errors) else 0
+    # Maschinenlesbarer Zustand fuer die Workflow-Issue-Pflege (Premium,
+    # Issue #149): unterscheidet gruen / Inhaltsschaden / Auswertungsfehler.
+    write_state(state)
+    # FAIL-CLOSED (02.09.2026): s. o. – Auswertungsfehler = Exit 2.
+    return exit_code
 
 
 if __name__ == "__main__":
