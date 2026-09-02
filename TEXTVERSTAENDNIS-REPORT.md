@@ -1,5 +1,5 @@
 # 🧠 TEXTVERSTÄNDNIS-REPORT (textverstaendnis_guard.py)
-**Stand:** 2026-09-02 08:21 UTC · Artikel: 26
+**Stand:** 2026-09-02 08:47 UTC · Artikel: 26
 
 **Harte Regeln (R2/R3/R5-hart/R7/R8-URL):** 2 Funde
 **Weiche Regeln (R4/R5/R8-Anker):** 9 Funde
