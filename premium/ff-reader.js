@@ -1,32 +1,32 @@
 /* ============================================================
    FranksFinanzcheck – Premium Lesehilfen (Vorlesen + Kurzfassung)
-   03.09.2026 — Profi-Agentur & Chefredakteur-Standard · Highend v5
-   · Vorlesen v5: Vollständige Vorlesefunktion auf Verlagsspitze
+   03.09.2026 — Profi-Agentur & Chefredakteur-Standard · Highend v6
+   · Vorlesen v6: Vollständige Vorlesefunktion auf Verlagsspitze
      (übertrifft Capital / WirtschaftsWoche / Die Zeit) — High-End Garantie
-     für männliche Stimme DE & EN ohne Umschalter, mit absoluter
-     Zero-Latency-Ton-Garantie auch bei lazy Voice-Katalogen
+     für explizit männliche Stimme DE & EN ohne Umschalter, mit
+     sofortigem Tonpfad auch bei lazy Voice-Katalogen
    · Kurzfassung v4: Vollständige Verlagshaus-Kurzfassung
      (Kurzantwort, Kernaussagen, Zahlen auf einen Blick,
      Inhaltsverzeichnis, Tabellen-Highlights, Byline, Fokus-Falle)
    ------------------------------------------------------------
-   - Privacy-first & First-party: Web Speech API & Web Audio lokal.
-   - Ton-Garantie & Zero-Latency Audio-Unlocking:
-       · Web-Audio-Hardware-Akklimatisierung (sanfter Studio-Chime
-         beim Klick entsperrt das Audio-Subsystem des Browsers)
-       · Synchrones Speech-Unfreezing im Klick-Event-Kontext
+   - Privacy-first & First-party: ausschließlich lokale Web Speech API.
+   - Tonpfad & Queue-Stabilität:
+       · synchrones Speech-Unfreezing im Klick-Event-Kontext
          (verhindert das Erlöschen des User-Activation-Tokens)
        · Anti-Stall Engine-Watchdog & Chrome-Queue-Reset
        · V8 Garbage-Collection-Shield für lückenlosen Klang
-   - NUR männliche Sprache – vollautomatisch Deutsch (DE) und
-     Englisch (EN), ohne manuellen Umschalter und ohne Stimmen-Menü.
-     Die Engine wählt automatisch die beste männliche Studio-/
+   - Männliche Sprache – vollautomatisch Deutsch (DE) und Englisch
+     (EN), ohne manuellen Umschalter und ohne Stimmen-Menü. Die Engine
+     wählt deterministisch die beste verfügbare männliche Studio-/
      Neural-Stimme je Sprache (inkl. Nachbarsprachen-Fallback).
      Englische Sätze in deutschen Artikeln liest die männliche
      EN-Stimme – und umgekehrt (zweisprachiger Hörfunk-Moderator).
      Garantie-Kern: Explizit männliche Stimmen sprechen in natürli-
      cher männlicher Tonlage; geschlechtsneutral/unbenannte Stimmen
      (z. B. „Google Deutsch“) werden automatisch in die männliche
-     Klangzone abgesenkt – die Vorlesung bleibt immer männlich.
+     Klangzone abgesenkt. Wenn ein Gerät keine männliche Stimme anbietet,
+     startet der Reader hörbar in der gewünschten Sprache und kennzeichnet
+     den technischen Fallback ehrlich.
    - Vollautomatische Studio-Regie statt Reglern:
        · Automatische Tempoanpassung  – Rolle (Überschrift, Fließtext,
          Tabelle …) × Stimmen-Güte × Informationsdichte des Satzes:
@@ -99,6 +99,9 @@
       unsupported: 'Vorlesen wird von deinem Browser nicht unterstützt.',
       noText: 'Kein vorlesbarer Text gefunden.',
       started: 'Vorlesen gestartet.',
+      voiceActive: 'Männliche Stimme aktiv.',
+      voiceFallback: 'Vorlesen gestartet; dein Browser stellt die verfügbare Stimme bereit.',
+      speechError: 'Dieser Abschnitt konnte nicht abgespielt werden; es geht weiter.',
       voiceLoading: 'Männliche Stimme wird geladen …',
       paused: 'Vorlesen pausiert.',
       resumed: 'Vorlesen fortgesetzt.',
@@ -159,6 +162,9 @@
       unsupported: 'Speech synthesis is not supported by your browser.',
       noText: 'No readable text found.',
       started: 'Audio playback started.',
+      voiceActive: 'Male voice active.',
+      voiceFallback: 'Playback started; your browser provides the available voice.',
+      speechError: 'This section could not be played; continuing.',
       voiceLoading: 'Loading a male voice …',
       paused: 'Audio playback paused.',
       resumed: 'Audio playback resumed.',
@@ -215,42 +221,54 @@
      Umlaute/ß und typische Stoppwörter. Roh-Sprache "de" wird nur bei
      klarer EN-Mehrheit überschrieben – umgekehrt genauso. */
   function detectArticleLanguage() {
-    var raw = (cfg.lang || toolbar.getAttribute('data-page-lang') || doc.documentElement.lang || 'de').toLowerCase();
-    var isEnRaw = raw.indexOf('en') === 0;
-    var isDeRaw = raw.indexOf('de') === 0;
-    var sampleSrc = (cfg.title || '') + ' ' + (cfg.description || '') + ' ';
+    var raw = String(cfg.lang || toolbar.getAttribute('data-page-lang') || doc.documentElement.lang || 'de').toLowerCase();
+    var base = raw.indexOf('en') === 0 ? 'en' : 'de';
+    var sample = String(cfg.title || '') + ' ' + String(cfg.description || '') + ' ';
+
+    // Never use the whole body as the primary sample. Footer labels, the
+    // toolbar and related articles are usually German and used to flip a
+    // genuinely English article back to German. Read only the article.
     try {
-      if (doc.body && doc.body.innerText) sampleSrc += doc.body.innerText.slice(0, 1800);
-      else if (doc.querySelector && doc.querySelector('.post-content')) {
-        var pc = doc.querySelector('.post-content');
-        sampleSrc += (pc.innerText || pc.textContent || '').slice(0, 1800);
-      }
+      var content = doc.querySelector && (doc.querySelector('.post-content') || doc.querySelector('.md-content'));
+      if (content) sample += String(content.innerText || content.textContent || '').slice(0, 5000);
+      else if (doc.body && doc.body.innerText) sample += doc.body.innerText.slice(0, 2200);
     } catch (e) {}
-    var enMatches = (sampleSrc.match(/\b(the|and|is|for|with|that|save|money|guide|table|insurance|your|you|our|costs|should|will|can|have|this|from|about|more|free|compare|cheap|best|check|tip|important|article|summary|read|listen)\b/gi) || []).length;
-    var deMatches = (sampleSrc.match(/\b(und|der|die|das|ist|für|mit|sparen|euro|ratgeber|tabelle|versicherung|kosten|solltest|sollte|wichtig|tipp|achtung|vergleich|günstig|kostenlos|bonus|wechseln|prüfen|beachten|vertrag|beitrag|jahr|prozent)\b/gi) || []).length;
-    var hasUmlaut = /[äöüß]/i.test(sampleSrc);
-    var germanEndingHits = 0;
-    try {
-      var wordsDE = sampleSrc.toLowerCase().split(/[^a-zäöüß]+/);
-      for (var wi = 0; wi < wordsDE.length; wi++) {
-        var w = wordsDE[wi];
-        if (w.length >= 6 && /(ung|keit|heit|schaft|lich|ig|isch)$/.test(w)) germanEndingHits++;
-      }
-    } catch (e) {}
-    if (isDeRaw) {
-      // Starker EN-Nachweis erforderlich, um DE-Rohwert zu überschreiben
-      if (enMatches >= 5 && enMatches > deMatches * 1.8 && !hasUmlaut) return 'en';
-      if (enMatches >= 8 && enMatches > deMatches * 1.3) return 'en';
-      return 'de';
+
+    var tokens = sample.toLowerCase().match(/[a-zäöüß]+/g) || [];
+    var deWords = {
+      der: 2, die: 2, das: 2, und: 2, ist: 2, sind: 2, für: 2, mit: 2,
+      von: 1, ein: 1, eine: 1, einen: 1, einem: 1, den: 1, dem: 1,
+      auf: 1, zu: 1, im: 1, am: 1, bei: 1, auch: 1, sich: 1, nicht: 1,
+      sparen: 2, spart: 2, euro: 2, versicherung: 2, kosten: 2,
+      vertrag: 2, vergleich: 2, wechseln: 2, günstig: 2, kostenlos: 2,
+      ratgeber: 2, tabelle: 2, jahr: 1, monat: 1, sollte: 1, solltest: 1,
+      müssen: 1, kann: 1, wichtig: 1, tipp: 1, beachten: 1, prüfen: 1
+    };
+    var enWords = {
+      the: 2, and: 2, is: 2, are: 2, for: 2, with: 2, that: 2, this: 2,
+      from: 1, your: 2, you: 2, our: 1, save: 2, saving: 2, money: 2,
+      insurance: 2, costs: 2, cost: 2, compare: 2, comparison: 2, guide: 2,
+      table: 2, tariff: 1, tariffs: 1, should: 1, will: 1, can: 1,
+      have: 1, more: 1, free: 1, cheap: 1, best: 1, important: 1,
+      article: 1, summary: 1, read: 1, listen: 1, avoid: 1, switch: 1
+    };
+    var de = 0;
+    var en = 0;
+    var deHits = 0;
+    var enHits = 0;
+    tokens.forEach(function (word) {
+      if (deWords[word]) { de += deWords[word]; deHits += 1; }
+      if (enWords[word]) { en += enWords[word]; enHits += 1; }
+      if (/[äöüß]/.test(word)) de += 2;
+      if (word.length >= 6 && /(ung|keit|heit|schaft|lich|ig|isch)$/.test(word)) de += 1;
+    });
+
+    // A page language is a useful default, not an absolute lock. Require a
+    // clear margin so isolated English product terms do not change a DE read.
+    if (base === 'de') {
+      return enHits >= 4 && en >= de + 3 && en >= Math.ceil(de * 1.25) ? 'en' : 'de';
     }
-    if (isEnRaw) {
-      if ((deMatches >= 4 && deMatches > enMatches) || (hasUmlaut && germanEndingHits >= 2)) return 'de';
-      return 'en';
-    }
-    // Unklare Roh-Sprache (z. B. leer) → reine Heuristik mit Umlaut-Bonus
-    if (hasUmlaut) deMatches += 2;
-    deMatches += Math.min(3, germanEndingHits);
-    return enMatches > deMatches ? 'en' : 'de';
+    return deHits >= 4 && de >= en + 3 && de >= Math.ceil(en * 1.15) ? 'de' : 'en';
   }
 
   var currentLang = detectArticleLanguage();
@@ -261,6 +279,8 @@
   if (listenBtn) listenBtn.setAttribute('aria-label', texts.listenAria);
   if (summaryLabel) summaryLabel.textContent = texts.summaryBtn;
   if (summaryBtn) summaryBtn.setAttribute('aria-label', texts.summaryAria);
+  if (toolbar) toolbar.setAttribute('aria-label', currentLang === 'en'
+    ? 'Reading aids: listen and summary' : 'Lesehilfen: Vorlesen und Kurzfassung');
 
   /* ---------- Allgemeine Hilfsfunktionen ---------- */
 
@@ -544,8 +564,7 @@
      1) VORLESEN – Highend-Sprachausgabe (Redaktions-Studio-Engine v5)
      ------------------------------------------------------------
      Über Verlagshaus-Niveau durch:
-       - Zero-Latency Sound-Garantie & Hardware-Akklimatisierung
-         (Studio-Chime entsperrt das Web Audio Subsystem des Browsers)
+       - Synchroner Start im Klickpfad ohne künstlichen Web-Audio-Chime
        - Synchrones Speech-Unfreezing im Klick-Event-Kontext
          (kein Erlöschen des User-Activation-Tokens durch Timer)
        - Satzgenaue Prosodie-Engine mit Atem- und Denkpausen
@@ -553,7 +572,7 @@
          Prozente, IBAN, Abkürzungen, Finanz-Akronyme, Domains)
        - Rollen-basierte Stimmführung (Überschrift, Fließtext,
          Zitat, Warnung, Tabellenzeile) wie im Hörfunk-Studio
-       - Neuronale Stimmen-Rangliste (automatisch, nur männlich, DE/EN)
+       - Neuronale Stimmen-Rangliste (automatisch, männlich bevorzugt, DE/EN)
        - Automatische Qualitätsanpassung (Stimme, Tempo, Chunking,
          Pausen, Fallback) – ohne Regler, ohne Tempo-Anzeige
        - Abschnitts-Navigation, Merken der Hörposition
@@ -570,7 +589,6 @@
   function storeSet(k, v) { try { win.localStorage.setItem(k, v); } catch (e) {} }
   function storeDel(k) { try { win.localStorage.removeItem(k); } catch (e) {} }
 
-  var maleVoice = null;
   var reading = false;
   var playing = false;
   var blocks = [];        // { el, text, lang, type, role, chunks[] }
@@ -584,67 +602,27 @@
   var nextBtn = doc.getElementById('ff-listen-next');
   var remainEl = doc.getElementById('ff-reader-remaining');
 
-  /* ---------- Zero-Latency Audio-Hardware-Unlocking (Web Audio) ----------
-     Entsperrt das Audio-Subsystem des Browsers beim ersten Klick und erzeugt
-     einen dezenten, sonoren Studio-Intro-Klang (Verlagshaus-Signatur). */
-  var audioCtx = null;
+  /* ---------- Speech-Engine-Unlocking ---------------------------------
+     Web Speech is not a Web-Audio stream. Creating an AudioContext and
+     playing a synthetic chime here caused an extra autoplay surface and,
+     on some mobile browsers, stole the very activation/queue state that
+     the reader needed. Keep this path deliberately small: resume the
+     speech engine synchronously in the click handler and let the selected
+     SpeechSynthesisVoice be the only audio output. */
   var activeUtterances = [];
-
-  function playStudioChime() {
-    try {
-      var AudioCtx = win.AudioContext || win.webkitAudioContext;
-      if (!AudioCtx) return;
-      // High-End v5: AudioContext erst beim User-Gesture erzeugen, mit
-      // optimaler Latenz; Suspended-State robust entriegeln
-      if (!audioCtx) {
-        try { audioCtx = new AudioCtx({ latencyHint: 'interactive' }); }
-        catch (e) { audioCtx = new AudioCtx(); }
-      }
-      if (audioCtx.state === 'suspended') {
-        var p = audioCtx.resume();
-        if (p && typeof p.catch === 'function') p.catch(function () {});
-      }
-      // Auch wenn AudioContext noch nicht bereit, nicht blockieren
-      var now = audioCtx.currentTime || 0;
-      var osc1 = audioCtx.createOscillator();
-      var osc2 = audioCtx.createOscillator();
-      var gain = audioCtx.createGain();
-
-      osc1.type = 'sine';
-      try { osc1.frequency.setValueAtTime(523.25, now); } catch (e) {}
-      try { osc1.frequency.exponentialRampToValueAtTime(659.25, now + 0.08); } catch (e) {}
-      osc2.type = 'sine';
-      try { osc2.frequency.setValueAtTime(783.99, now); } catch (e) {}
-      try { osc2.frequency.exponentialRampToValueAtTime(1046.50, now + 0.08); } catch (e) {}
-
-      gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.linearRampToValueAtTime(0.035, now + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
-
-      osc1.connect(gain);
-      osc2.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      osc1.start(now);
-      osc2.start(now);
-      osc1.stop(now + 0.13);
-      osc2.stop(now + 0.13);
-    } catch (e) {}
-  }
+  var audioUnlocked = false;
 
   function unlockAudioEngine() {
-    // High-End v5: Zero-Latency-Garantie – Chime synchron + Speech-Unfreeze
-    // synchron im selben User-Gesture, damit das Browser-Token nicht verfällt
-    try { playStudioChime(); } catch (e) {}
-    if (speechSupported && synth) {
-      try {
-        // Chrome-Queue entriegeln: cancel+resume im selben Tick
-        if (synth.paused) synth.resume();
-        // Leerer resume nach cancel wird in startReading synchron erledigt
-      } catch (e2) {}
+    if (audioUnlocked) return;
+    audioUnlocked = true;
+    if (!speechSupported || !synth) return;
+    try {
+      if (synth.paused) synth.resume();
+    } catch (e) {
+      // A browser may expose speechSynthesis before it is ready. The
+      // guarded resume is retried immediately before every utterance.
     }
   }
-
   /* ---------- Automatische Qualitätsanpassung (Auto-Quality) ----------
      Statt manueller Regler stellt sich die Engine selbst ein:
        - tier        : 'studio' | 'premium' | 'standard' | 'basic'
@@ -824,61 +802,97 @@
      Nur-Männlich-Garantie ohne Umschalter (DE & EN). */
   var KW_RE_CACHE = {};
   function voiceHas(hay, kw) {
-    hay = String(hay || '').toLowerCase().replace(/[_-]+/g, ' ');
-    kw = String(kw || '').toLowerCase().replace(/[_-]+/g, ' ');
-    if (!/^[a-z0-9äöü]/.test(kw)) return hay.indexOf(kw) !== -1;
-    var re = KW_RE_CACHE[kw];
+    var normalizedHay = String(hay || '').toLowerCase().replace(/[_-]+/g, ' ');
+    var normalizedKw = String(kw || '').toLowerCase().replace(/[_-]+/g, ' ').trim();
+    if (!normalizedKw) return false;
+    // Tags and other non-word identifiers are deliberately matched as
+    // literals; names are matched on word boundaries so “anna” cannot hit
+    // “Johanna” or “aria” cannot hit “Bulgarian”.
+    if (!/^[a-z0-9äöü]/.test(normalizedKw)) return normalizedHay.indexOf(normalizedKw) !== -1;
+    var re = KW_RE_CACHE[normalizedKw];
     if (!re) {
       try {
-        re = new RegExp('\\b' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b');
-      } catch (e) { re = { test: function (h) { return h.indexOf(kw) !== -1; } }; }
-      KW_RE_CACHE[kw] = re;
+        re = new RegExp('\\b' + normalizedKw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b');
+      } catch (e) {
+        re = { test: function (value) { return value.indexOf(normalizedKw) !== -1; } };
+      }
+      KW_RE_CACHE[normalizedKw] = re;
     }
-    return re.test(hay);
+    return re.test(normalizedHay);
   }
 
-  function voiceHay(v) { return ((v.name || '') + ' ' + (v.voiceURI || '')).toLowerCase(); }
+  function voiceHay(v) {
+    return ((v && v.name) || '') + ' ' + ((v && v.voiceURI) || '');
+  }
+
+  function voiceLanguage(v) {
+    return String((v && v.lang) || '').toLowerCase().replace(/_/g, '-');
+  }
+
+  function languagePrefix(lang) {
+    return String(lang || '').toLowerCase().replace(/_/g, '-').split('-')[0];
+  }
+
+  function reportedGender(v) {
+    var gender = String((v && v.gender) || '').toLowerCase();
+    if (gender === 'female' || gender === 'feminine' || gender === 'woman') return 'female';
+    if (gender === 'male' || gender === 'masculine' || gender === 'man') return 'male';
+    return '';
+  }
 
   function scoreVoice(v, targetLang) {
     var score = 0;
-    var name = (v.name || '').toLowerCase();
-    var uri = (v.voiceURI || '').toLowerCase();
-    var langStr = (v.lang || '').toLowerCase().replace('_', '-');
-    var isEN = targetLang.indexOf('en') === 0;
-    var hay = name + ' ' + uri;
+    var langStr = voiceLanguage(v);
+    var target = String(targetLang || currentLang || 'de').toLowerCase().replace(/_/g, '-');
+    var prefix = languagePrefix(target);
+    var hay = voiceHay(v);
+    var gender = reportedGender(v);
 
-    if (isEN) {
-      if (langStr === 'en-us' || langStr === 'en-gb') score += 60;
-      else if (langStr.indexOf('en') === 0) score += 35;
-      else score -= 400;
-    } else {
-      if (langStr === 'de-de') score += 60;
-      else if (langStr.indexOf('de') === 0) score += 35;
-      else score -= 400;
+    // Language fit is a hard preference. resolveMaleVoice additionally
+    // filters candidates, so a cross-language voice can never win merely
+    // because it has a higher name score.
+    if (langStr === target || (target.indexOf('-') === -1 && langStr === prefix)) score += 70;
+    else if (languagePrefix(langStr) === prefix) score += 40;
+    else score -= 400;
+
+    if (gender === 'male') score += 190;
+    else if (gender === 'female') score -= 320;
+
+    var mk = MALE_KEYWORDS[prefix === 'en' ? 'en' : 'de'] || [];
+    for (var i = 0; i < mk.length; i++) {
+      if (voiceHas(hay, mk[i])) { score += 145; break; }
+    }
+    for (var j = 0; j < FEMALE_KEYWORDS.length; j++) {
+      if (voiceHas(hay, FEMALE_KEYWORDS[j])) { score -= 260; break; }
+    }
+    for (var studio = 0; studio < STUDIO_VOICES.length; studio++) {
+      if (voiceHas(hay, STUDIO_VOICES[studio])) { score += 90; break; }
+    }
+    for (var premium = 0; premium < PREMIUM_KEYWORDS.length; premium++) {
+      if (voiceHas(hay, PREMIUM_KEYWORDS[premium])) { score += 45; break; }
+    }
+    for (var low = 0; low < LOWQ_KEYWORDS.length; low++) {
+      if (voiceHas(hay, LOWQ_KEYWORDS[low])) { score -= 260; break; }
     }
 
-    var mk = MALE_KEYWORDS[isEN ? 'en' : 'de'] || [];
-    for (var i = 0; i < mk.length; i++) { if (voiceHas(hay, mk[i])) { score += 130; break; } }
-    for (var j = 0; j < FEMALE_KEYWORDS.length; j++) { if (voiceHas(hay, FEMALE_KEYWORDS[j])) { score -= 200; break; } }
-    for (var s = 0; s < STUDIO_VOICES.length; s++) { if (hay.indexOf(STUDIO_VOICES[s]) !== -1) { score += 90; break; } }
-    for (var k = 0; k < PREMIUM_KEYWORDS.length; k++) { if (hay.indexOf(PREMIUM_KEYWORDS[k]) !== -1) { score += 45; break; } }
-    for (var l = 0; l < LOWQ_KEYWORDS.length; l++) { if (hay.indexOf(LOWQ_KEYWORDS[l]) !== -1) { score -= 260; break; } }
-
-    if (v.localService) score += 8;      // stabil & offline
-    if (v.default) score += 4;
+    if (v && v.localService) score += 8; // local voices are more reliable offline
+    if (v && v.default) score += 4;
     return score;
   }
 
   function rankVoicesFromList(list, lang) {
     if (!list || !list.length) return [];
-    var targetLang = String(lang || currentLang || 'de').toLowerCase();
-    var langPrefix = targetLang.split(/[-_]/)[0];
-    var pattern = new RegExp('^' + langPrefix + '([-_]|$)', 'i');
-    var candidates = [];
-    for (var i = 0; i < list.length; i++) {
-      if (pattern.test(list[i].lang || '')) candidates.push(list[i]);
+    var targetLang = String(lang || currentLang || 'de').toLowerCase().replace(/_/g, '-');
+    var prefix = languagePrefix(targetLang);
+    var candidates = list.filter(function (v) { return languagePrefix(voiceLanguage(v)) === prefix; });
+    if (!candidates.length) return [];
+
+    // Prefer the requested regional catalog, but do not discard a generic
+    // en/de voice when the platform only exposes the other region.
+    if (targetLang.indexOf('-') !== -1) {
+      var exact = candidates.filter(function (v) { return voiceLanguage(v) === targetLang; });
+      if (exact.length) candidates = exact;
     }
-    if (!candidates.length) candidates = list.slice();
     return candidates
       .map(function (v) { return { voice: v, score: scoreVoice(v, targetLang) }; })
       .sort(function (a, b) { return b.score - a.score; });
@@ -892,52 +906,49 @@
   }
 
   function dedupeVoices(list) {
-    // Manche Browser listen dieselbe Stimme mehrfach (gleicher Name &
-    // Sprache, aber verschiedene voiceURI) – das führt sonst zu doppelten
-    // Kandidaten und Zufalls-Auswahl. Schlüssel: Name + Sprache + Typ.
     var seen = {};
     var out = [];
-    for (var i = 0; i < list.length; i++) {
+    for (var i = 0; i < (list || []).length; i++) {
       var v = list[i];
-      var key = (v.name || '') + '|' + (v.lang || '') + '|' + (v.localService ? 1 : 0);
-      if (!seen[key]) { seen[key] = 1; out.push(v); }
+      if (!v) continue;
+      // Browsers sometimes expose the same installed voice once per URI.
+      // Keep the first stable entry rather than letting order change on each
+      // voiceschanged event.
+      var key = voiceLanguage(v) + '|' + String(v.name || '').toLowerCase() + '|' + (v.localService ? 1 : 0);
+      if (!seen[key]) { seen[key] = true; out.push(v); }
     }
     return out;
   }
 
-  /* Nur-Männlich-Gate: weiblich benannte Stimmen werden ausgeschlossen.
-     Nicht erkennbar weibliche Stimmen (z. B. „Google Deutsch“) gelten
-     als geschlechtsneutral und damit männlich-tauglich – ihre Tonlage
-     senkt die Regie automatisch in die männliche Klangzone ab. */
-  function isMaleCandidate(v) {
-    if (!v) return false;
+  function isFemaleCandidate(v) {
+    if (!v) return true;
+    if (reportedGender(v) === 'female') return true;
     var hay = voiceHay(v);
-    // A voice whose name/URI identifies it as female must never enter the
-    // candidate pool.  Treating an unknown voice as male was the source of
-    // the old "female default" bug: Chrome often exposes Google Deutsch (or
-    // a platform default) before its actual male voices have loaded.
     for (var i = 0; i < FEMALE_KEYWORDS.length; i++) {
-      if (voiceHas(hay, FEMALE_KEYWORDS[i])) return false;
+      if (voiceHas(hay, FEMALE_KEYWORDS[i])) return true;
     }
-    return true;
+    return false;
+  }
+
+  /* The browser API rarely exposes gender metadata. Unknown voices are
+     therefore usable as a last-resort *neutral* candidate, but they are
+     never preferred over an explicitly male voice and are pitch-managed.
+     This is honest and avoids the old, silent “first voice wins” bug. */
+  function isMaleCandidate(v) {
+    return !!v && !isFemaleCandidate(v);
   }
 
   function isExplicitMaleCandidate(v) {
     return !!(v && isMaleCandidate(v) && explicitMale(v));
   }
 
-  /* Explizit-männlich-Nachweis: Stimme trägt einen eindeutig männlichen
-     Namen/Code (Stefan, Conrad, Andrew, „#male“, Neural2-B …). Nur dann
-     spricht die Regie in natürlicher männlicher Tonlage; unbenannte
-     Stimmen werden zur Garantie in die männliche Klangzone abgesenkt. */
   function explicitMale(v) {
+    if (!v || isFemaleCandidate(v)) return false;
+    if (reportedGender(v) === 'male') return true;
     var hay = voiceHay(v);
-    var union = (MALE_KEYWORDS.de || []).concat(MALE_KEYWORDS.en || []);
-    for (var j = 0; j < union.length; j++) {
-      if (voiceHas(hay, union[j])) return true;
-    }
-    for (var k = 0; k < KNOWN_MALE_VOICES.length; k++) {
-      if (voiceHas(hay, KNOWN_MALE_VOICES[k])) return true;
+    var union = (MALE_KEYWORDS.de || []).concat(MALE_KEYWORDS.en || [], KNOWN_MALE_VOICES);
+    for (var i = 0; i < union.length; i++) {
+      if (voiceHas(hay, union[i])) return true;
     }
     return false;
   }
@@ -948,76 +959,88 @@
     en: ['de-DE', 'de', 'fr-FR', 'es-ES', 'it-IT', 'nl-NL', 'sv-SE', 'da-DK', 'no-NO', 'pl-PL', 'pt-PT']
   };
 
-  var VOICE_EPOCH = 0;   // wird bei jeder voiceschanged-Aktualisierung erhöht
-  var VOICE_CACHE = {};  // lang ('de'|'en') -> { voice, mode, explicit, epoch }
+  var VOICE_EPOCH = 0;
+  var VOICE_CACHE = {};
+
+  function firstVoice(ranked, predicate) {
+    for (var i = 0; i < ranked.length; i++) {
+      if (predicate(ranked[i].voice)) return ranked[i].voice;
+    }
+    return null;
+  }
 
   function resolveMaleVoice(lang) {
-    var l = String(lang || 'de').toLowerCase();
-    l = l.indexOf('en') === 0 ? 'en' : 'de';
+    var l = languagePrefix(lang) === 'en' ? 'en' : 'de';
     var hit = VOICE_CACHE[l];
-    if (hit && hit.epoch === VOICE_EPOCH && hit.voice) return hit;
+    if (hit && hit.epoch === VOICE_EPOCH) return hit;
 
     var list = [];
     if (speechSupported) {
-      try { list = synth.getVoices() || []; } catch (e) { list = []; }
+      try { list = dedupeVoices(synth.getVoices() || []); } catch (e) { list = []; }
     }
-    list = dedupeVoices(list);
-    var ranked = rankVoicesFromList(list, l);
+    var local = rankVoicesFromList(list, l);
     var res = { voice: null, mode: 'none', explicit: false, epoch: VOICE_EPOCH };
 
-    // 1) Explicitly male voice in the article language.  Do not silently
-    // prefer an unlabelled platform voice over a real male voice.
-    for (var i = 0; i < ranked.length; i++) {
-      if (isExplicitMaleCandidate(ranked[i].voice)) {
-        res.voice = ranked[i].voice;
-        res.mode = 'male';
-        res.explicit = true;
-        break;
-      }
+    // 1. The selected article language always wins. Explicit gender/name
+    //    beats a neutral platform label (for example “Google Deutsch”).
+    res.voice = firstVoice(local, isExplicitMaleCandidate);
+    if (res.voice) {
+      res.mode = 'male';
+      res.explicit = true;
+    } else {
+      res.voice = firstVoice(local, isMaleCandidate);
+      if (res.voice) res.mode = 'male';
     }
-    // 2) A neutral voice in the article language is the best honest local
-    // fallback, but only after all explicitly male voices were considered.
-    if (!res.voice) {
-      for (var ni = 0; ni < ranked.length; ni++) {
-        if (isMaleCandidate(ranked[ni].voice)) {
-          res.voice = ranked[ni].voice;
-          // Keep the public mode compatible with the existing engine: the
-          // voice is a local male-zone fallback, not a cross-language one.
-          res.mode = 'male';
-          res.explicit = false;
-          break;
-        }
-      }
-    }
-    // 2) männliche Stimme einer Nachbarsprache (niemals weiblich)
+
+    // 2. If the local catalog has no usable voice, choose a clearly male
+    //    voice in the deterministic DE/EN fallback order. Never a random
+    //    female voice from another language.
     if (!res.voice) {
       var order = LANG_FALLBACK[l] || [];
       for (var oi = 0; oi < order.length && !res.voice; oi++) {
         var alt = rankVoicesFromList(list, order[oi]);
-        for (var j = 0; j < alt.length; j++) {
-          if (isMaleCandidate(alt[j].voice)) {
-            res.voice = alt[j].voice;
-            res.mode = 'cross';
-            res.explicit = explicitMale(alt[j].voice);
-            break;
-          }
+        var altMale = firstVoice(alt, isExplicitMaleCandidate);
+        if (altMale) {
+          res.voice = altMale;
+          res.mode = 'cross';
+          res.explicit = true;
         }
       }
     }
-    // 3) Notnagel: einzige Stimme der Sprache (Tonlagen-Korrektur senkt ab)
-    if (!res.voice && ranked.length) {
-      res.voice = ranked[0].voice;
+
+    // 3. A neutral cross-language voice is preferable to silence. It is
+    //    pitch-managed, clearly marked non-explicit, and only reached when
+    //    no explicit male voice exists anywhere in the preferred catalog.
+    if (!res.voice) {
+      var orderNeutral = LANG_FALLBACK[l] || [];
+      for (var ni = 0; ni < orderNeutral.length && !res.voice; ni++) {
+        var neutral = rankVoicesFromList(list, orderNeutral[ni]);
+        var neutralVoice = firstVoice(neutral, isMaleCandidate);
+        if (neutralVoice) {
+          res.voice = neutralVoice;
+          res.mode = 'cross';
+          res.explicit = false;
+        }
+      }
+    }
+
+    // 4. Last resort: use a local female/unknown system voice only when
+    //    there is no male/non-female alternative. This keeps the reader
+    //    audible on restricted devices and avoids pretending it is male.
+    if (!res.voice && local.length) {
+      res.voice = local[0].voice;
       res.mode = 'fallback';
-      res.explicit = explicitMale(ranked[0].voice);
+      res.explicit = explicitMale(res.voice);
     }
 
     VOICE_CACHE[l] = res;
     return res;
   }
 
+  // Compatibility wrapper for diagnostics and first-party integrations.
   function pickMaleVoice(lang) {
-    var r = resolveMaleVoice(lang);
-    return r ? r.voice : null;
+    var result = resolveMaleVoice(lang);
+    return result ? result.voice : null;
   }
 
   /* ---------- Automatische Qualitätsanpassung: Kalibrierung ---------- */
@@ -1475,7 +1498,7 @@
       introRaw += ' ' + tTexts.tableHeaders.replace('{headers}', headers.join(', ')) + '.';
     }
     var introEl = tableEl.closest('.ff-table-scroll') || tableEl;
-    tableBlocks.push({ el: introEl, text: speechNormalize(introRaw, lang), lang: lang, type: 'table-intro' });
+    tableBlocks.push({ el: introEl, text: introRaw, lang: lang, type: 'table-intro' });
 
     rows.forEach(function (tr, rIdx) {
       if (tr.closest('[data-ff-skip-read]')) return;
@@ -1497,12 +1520,12 @@
       var rowRaw = (rowLabel ? rowLabel + '. ' : '') +
         tTexts.tableRow.replace('{row}', (rIdx + 1)).replace('{total}', rowCount).replace('{content}', statements.join('. '));
 
-      tableBlocks.push({ el: tr, text: speechNormalize(rowRaw, lang), lang: lang, type: 'table-row' });
+      tableBlocks.push({ el: tr, text: rowRaw, lang: lang, type: 'table-row' });
     });
 
     tableBlocks.push({
       el: introEl,
-      text: speechNormalize(tTexts.tableOutro.replace('{title}', title), lang),
+      text: tTexts.tableOutro.replace('{title}', title),
       lang: lang,
       type: 'table-outro'
     });
@@ -1522,7 +1545,7 @@
     var introRaw = texts.introLine
       .replace('{title}', stripMd(cfg.title || doc.title || ''))
       .replace('{time}', cfg.readingTime || '');
-    out.push({ el: toolbar, text: speechNormalize(introRaw, lang), lang: lang, type: 'intro' });
+    out.push({ el: toolbar, text: introRaw, lang: lang, type: 'intro' });
 
     var nodes = qsa('h2, h3, h4, p, li, blockquote, table, .ff-table-scroll, .ff-tarif-card, .ff-einspar-box, .ff-kurzantwort, .ff-korrektur, .callout', content);
 
@@ -1548,13 +1571,14 @@
         var boxText = readableText(el);
         if (boxText.length <= 5) return;
         var isWarn = /\b(achtung|warnung|vorsicht|wichtig|caution|warning)\b/i.test(boxText.slice(0, 60)) || el.classList.contains('ff-korrektur');
-        var cue = el.classList.contains('ff-kurzantwort') ? texts.cueShortAnswer
-          : el.classList.contains('ff-einspar-box') ? texts.cueSaving
-          : el.classList.contains('ff-tarif-card') ? texts.cueTariff
-          : isWarn ? texts.cueWarning : texts.cueNote;
+        var boxTexts = I18N[elLang] || texts;
+        var cue = el.classList.contains('ff-kurzantwort') ? boxTexts.cueShortAnswer
+          : el.classList.contains('ff-einspar-box') ? boxTexts.cueSaving
+          : el.classList.contains('ff-tarif-card') ? boxTexts.cueTariff
+          : isWarn ? boxTexts.cueWarning : boxTexts.cueNote;
         out.push({
           el: el,
-          text: speechNormalize(cue + ' ' + boxText, elLang),
+          text: cue + ' ' + boxText,
           lang: elLang,
           type: isWarn ? 'warning' : (el.classList.contains('ff-tarif-card') || el.classList.contains('ff-einspar-box') ? 'overview-card' : 'callout')
         });
@@ -1578,25 +1602,59 @@
         var parentList = el.parentElement;
         if (parentList && parentList.tagName === 'OL') {
           var idx = Array.prototype.indexOf.call(parentList.children, el) + 1;
-          speakText = texts.listItemNum.replace('{n}', idx) + ' ' + text;
+          var listTexts = I18N[elLang] || texts;
+          speakText = listTexts.listItemNum.replace('{n}', idx) + ' ' + text;
         }
       }
       if (/^H[234]$/.test(el.tagName)) speakText = text.replace(/[?!.]*$/, '') + '.';
 
-      out.push({ el: el, text: speechNormalize(speakText, elLang), lang: elLang, type: type });
+      out.push({ el: el, text: speakText, lang: elLang, type: type });
     });
 
-    out.push({ el: toolbar, text: speechNormalize(texts.outroLine, lang), lang: lang, type: 'outro' });
+    out.push({ el: toolbar, text: texts.outroLine, lang: lang, type: 'outro' });
 
     return out.filter(function (b) { return b.text && b.text.length > 1; });
   }
 
-  /* ---------- Zeitachse aus Blöcken + Chunks ---------- */
+  /* ---------- Zeitachse aus Blöcken + Chunks --------------------------
+     Language routing must happen before pronunciation normalization. The
+     previous implementation normalized every block in its DOM language,
+     then tried to detect English afterwards; this made an English sentence
+     inherit German currency/date rules and the wrong voice. */
+  function normalizeTimelineChunks(rawChunks) {
+    var out = [];
+    (rawChunks || []).forEach(function (c) {
+      var normalized = speechNormalize(c.text, c.lang);
+      if (!normalized) return;
+      if (normalized.length <= HARD_CHUNK) {
+        out.push({ text: normalized, lang: c.lang, emo: c.emo });
+        return;
+      }
+
+      // Expanding abbreviations (for example “Berufsunfähigkeits-…”) can
+      // make a chunk longer than the pre-normalization limit. Split once
+      // more at word boundaries so no browser receives a long utterance.
+      var words = normalized.split(/\s+/);
+      var buf = '';
+      words.forEach(function (word) {
+        var candidate = (buf ? buf + ' ' : '') + word;
+        if (buf && candidate.length > HARD_CHUNK - 10) {
+          out.push({ text: buf.trim(), lang: c.lang, emo: c.emo });
+          buf = word;
+        } else {
+          buf = candidate;
+        }
+      });
+      if (buf.trim()) out.push({ text: buf.trim(), lang: c.lang, emo: c.emo });
+    });
+    return out;
+  }
+
   function buildTimeline() {
     timeline = [];
     totalChars = 0;
     blocks.forEach(function (b, bi) {
-      var chunks = splitForSpeech(b.text, b.lang);
+      var chunks = normalizeTimelineChunks(splitForSpeech(b.text, b.lang));
       var profile = prosodyFor(b.type);
       chunks.forEach(function (c, ci) {
         var unit = {
@@ -1663,13 +1721,44 @@
 
   function clearPauseTimer() { if (pauseTimer) { clearTimeout(pauseTimer); pauseTimer = null; } }
 
-  var lastEffRate = 1;      // zuletzt gesprochenes Tempo (für Pausen-Kopplung)
-  var liveUtterance = null;  // GC-Schutz: Referenz hält die aktuelle Äußerung am Leben
+  var lastEffRate = 1;
+  var liveUtterance = null;
+  var playbackRun = 0;       // invalidates callbacks from canceled utterances
+  var retryCounts = {};
+  var voicePollId = null;
+  var lastSpeechStartedAt = 0;
 
-  // Android pauset/resumed die Synthese unzuverlässig – dort wird beim
-  // Pausieren abgebrochen und beim Fortsetzen die laufende Einheit neu
-  // gesprochen (bruchsicher, Industrie-Standard bei Web Speech).
+  // Android pauset/resumed die Synthese unzuverlässig. Dort wird beim
+  // Pausieren abgebrochen und beim Fortsetzen die aktuelle Einheit neu
+  // gesprochen. Auf Desktop/Safari bleibt die native Pause erhalten.
   var IS_ANDROID = !!(win.navigator && /android/i.test(win.navigator.userAgent || ''));
+
+  function stopVoicePolling() {
+    if (voicePollId) { clearInterval(voicePollId); voicePollId = null; }
+  }
+
+  function retryCurrentUnit(index, run, unit) {
+    if (!reading || !playing || run !== playbackRun) return;
+    var attempts = retryCounts[index] || 0;
+    if (attempts < 2) {
+      retryCounts[index] = attempts + 1;
+      if (attempts === 1 && degradeLevel < 2) {
+        degradeLevel += 1;
+        calibrateQuality();
+      }
+      setTimeout(function () {
+        if (reading && playing && run === playbackRun) speakUnit(index, true);
+      }, 140 * (attempts + 1));
+      return;
+    }
+
+    // A broken platform voice must not stop the whole article. Skip only
+    // the failed unit after two retries and make the failure accessible.
+    retryCounts[index] = 0;
+    if (statusEl) statusEl.textContent = texts.speechError;
+    spokenChars += unit && unit.text ? unit.text.length : 0;
+    speakUnit(index + 1, false);
+  }
 
   function speakUnit(index, isInitial) {
     if (!reading || !speechSupported) return;
@@ -1681,130 +1770,159 @@
       speakUnit(index + 1, isInitial);
       return;
     }
+    var run = playbackRun;
     highlight(unit);
     estimateRemaining();
     storeSet(STORE_POS, String(index));
 
     var start = function () {
-      if (!reading || !playing) return;
+      if (!reading || !playing || run !== playbackRun) return;
 
+      // Recalculate after an adaptive retry. This keeps a temporarily
+      // unstable browser on shorter, slower utterances without rebuilding
+      // the timeline and losing the reader's position.
+      unit.effRate = effectiveRateFor(unit, unit.profile || prosodyFor('p'));
+      unit.after = pauseAfterChunk(unit, !!unit.finalChunk, unit.profile || prosodyFor('p'), unit.effRate);
       var voiceRes = resolveMaleVoice(unit.lang);
       var u = new win.SpeechSynthesisUtterance(unit.text);
 
-      // WICHTIG (Zero-Sound-Bugfix): Locale exakt an die Stimme koppeln,
-      // um AVFoundation/Android-Stummschaltung bei Dialekt-/Sprach-Mismatch zu verhindern!
+      // Always bind locale and voice together. Leaving either value to the
+      // platform default was the source of the “silent/wrong voice” report.
       if (voiceRes && voiceRes.voice) {
         u.voice = voiceRes.voice;
         u.lang = voiceRes.voice.lang || (unit.lang === 'en' ? 'en-US' : 'de-DE');
+        if (voiceRes.explicit) setStatus(texts.voiceActive);
+        else setStatus(texts.voiceFallback);
       } else {
+        // No browser can synthesize a voice that it does not expose. Still
+        // start synchronously with the requested locale; the low pitch is a
+        // safe audible fallback and a later voiceschanged event upgrades all
+        // subsequent units to the selected male voice.
         u.lang = unit.lang === 'en' ? 'en-US' : 'de-DE';
       }
 
       var p = unit.profile || prosodyFor('p');
-      // Automatische Tempoanpassung: Rolle × Stimmenklasse × Inhalt
       u.rate = Math.min(1.25, Math.max(0.5, unit.effRate || 1));
-      // Automatische Tonlagen-Korrektur: Rolle + Satzmelodie + Stimmenklasse
       u.pitch = autoPitch(unit, p.pitch, voiceRes);
       u.volume = Math.max(0.1, Math.min(1.0, p.volume != null ? p.volume : 1.0));
 
-      // Satzfortschritts-genaue Anzeige (Boundary-Ereignisse der Engine)
+      var started = false;
+      var settled = false;
+      var watchdogTimer = null;
+      function clearStartWatchdog() {
+        if (watchdogTimer) { clearTimeout(watchdogTimer); watchdogTimer = null; }
+      }
+
       u.onboundary = function (e) {
-        if (!reading || !playing || !progressBar || !totalChars) return;
+        if (!reading || !playing || run !== playbackRun || !progressBar || !totalChars) return;
         if (e && typeof e.charIndex === 'number' && e.charIndex >= 0) {
           var pct = Math.min(100, ((spokenChars + e.charIndex) / totalChars) * 100);
           progressBar.style.width = pct.toFixed(1) + '%';
         }
       };
 
-      // GC-Schutz: Chrome bricht sonst gelegentlich mitten im Satz ab,
-      // wenn die Äußerungs-Referenz vorzeitig garbage-collected wird.
+      // Keep a strong reference. Chromium has historically garbage-collected
+      // unreferenced utterances before onend, which made long articles stop.
       liveUtterance = u;
       activeUtterances.push(u);
       win.__ff_active_utterance = u;
 
-      var cleaned = false;
       function cleanupUtterance() {
-        if (cleaned) return;
-        cleaned = true;
+        clearStartWatchdog();
+        var pos = activeUtterances.indexOf(u);
+        if (pos !== -1) activeUtterances.splice(pos, 1);
         if (liveUtterance === u) liveUtterance = null;
-        var idx = activeUtterances.indexOf(u);
-        if (idx !== -1) activeUtterances.splice(idx, 1);
+        if (win.__ff_active_utterance === u) win.__ff_active_utterance = null;
       }
+
+      u.onstart = function () {
+        started = true;
+        lastSpeechStartedAt = Date.now();
+        clearStartWatchdog();
+      };
 
       u.onend = function () {
         cleanupUtterance();
-        if (!reading || !playing) return;
+        if (settled) return;
+        settled = true;
+        if (!reading || !playing || run !== playbackRun) return;
+        if (!started) {
+          retryCurrentUnit(index, run, unit);
+          return;
+        }
+        retryCounts[index] = 0;
         errorStreak = 0;
         lastEffRate = unit.effRate || 1;
         spokenChars += unit.text.length;
         clearPauseTimer();
-        pauseTimer = setTimeout(function () { speakUnit(cursor + 1, false); }, unit.after);
+        pauseTimer = setTimeout(function () {
+          if (reading && playing && run === playbackRun) speakUnit(index + 1, false);
+        }, unit.after);
       };
 
       u.onerror = function (e) {
         cleanupUtterance();
-        if (!reading) return;
-        if (e && (e.error === 'interrupted' || e.error === 'canceled')) return;
-        // Adaptive Herabstufung: nach wiederholten Fehlern kürzere Chunks
-        // und ruhigeres Tempo, damit die Wiedergabe stabil weiterläuft.
+        if (settled) return;
+        settled = true;
+        if (!reading || run !== playbackRun) return;
+        if (e && (e.error === 'interrupted' || e.error === 'canceled')) {
+          // A user pause/stop changes playing or playbackRun first. If the
+          // engine is still supposed to be playing, an unexpected cancel is
+          // a recoverable queue interruption, not a reason to go silent.
+          if (playing) retryCurrentUnit(index, run, unit);
+          return;
+        }
         errorStreak += 1;
-        if (errorStreak >= 2 && degradeLevel < 2) {
-          degradeLevel += 1;
-          errorStreak = 0;
-          var blockIdx = unit.blockIndex;
-          calibrateQuality();
-          maleVoice = pickMaleVoice(unit.lang);
-          buildTimeline();
-          // Am nächsten Block weitermachen (Zeitachse wurde neu zerlegt)
-          var nextIdx = timeline.length;
-          spokenChars = 0;
-          for (var i = 0; i < timeline.length; i++) {
-            if (timeline[i].blockIndex > blockIdx) { nextIdx = i; break; }
-            spokenChars += timeline[i].text.length;
-          }
-          cursor = nextIdx - 1;
+        retryCurrentUnit(index, run, unit);
+      };
+
+      // Detect engines that accept speak() but never emit onstart. The old
+      // watchdog only resumed a paused queue and therefore missed exactly
+      // this silent failure mode.
+      watchdogTimer = setTimeout(function () {
+        if (reading && playing && run === playbackRun && !started) {
+          try { synth.cancel(); } catch (e) {}
+          retryCurrentUnit(index, run, unit);
         } else {
-          spokenChars += unit.text.length;
+          clearStartWatchdog();
         }
-        if (playing) speakUnit(cursor + 1, false);
-      };
-
-      // Watchdog gegen stummes Feststecken der Speech-Engine in Chromium
-      var watchdogTimer = setTimeout(function () {
-        if (reading && playing && synth && synth.paused) {
-          try { synth.resume(); } catch (e) {}
-        }
-      }, 500);
-
-      u.onstart = function () {
-        clearTimeout(watchdogTimer);
-      };
+      }, 1200);
 
       try {
         if (synth.paused) synth.resume();
         synth.speak(u);
       } catch (err) {
-        speakUnit(cursor + 1, false);
+        cleanupUtterance();
+        retryCurrentUnit(index, run, unit);
       }
     };
 
-    // Bei initialem Benutzerklick SOFORT synchron ausführen (User Gesture bleibt gültig!),
-    // Zwischenblöcke erhalten ihre programmierte Regie-Pause.
+    // Initial speech is deliberately synchronous in the click call stack.
+    // Subsequent units receive their editorial breathing pause.
     if (isInitial) {
       start();
     } else {
       var lead = Math.round(((unit.before || 0) * (quality.pauseScale || 1)) / Math.max(0.6, lastEffRate || quality.rate || 1));
-      if (lead > 0) { pauseTimer = setTimeout(start, lead); } else { start(); }
+      if (lead > 0) {
+        pauseTimer = setTimeout(function () {
+          if (reading && playing && run === playbackRun) start();
+        }, lead);
+      } else {
+        start();
+      }
     }
   }
 
   function jumpTo(index) {
-    if (!reading) return;
+    if (!reading || !timeline.length) return;
     unlockAudioEngine();
     index = Math.max(0, Math.min(timeline.length - 1, index));
     spokenChars = 0;
     for (var i = 0; i < index; i++) spokenChars += timeline[i].text.length;
     clearPauseTimer();
+    stopVoicePolling();
+    playbackRun += 1;
+    retryCounts = {};
     try {
       synth.cancel();
       synth.resume();
@@ -1856,39 +1974,35 @@
   //    echten männlichen Studio-Stimme gesprochen (nahtloses Upgrade).
   //  - Zeigt „wird geladen“ nur kurz, blockiert aber niemals den Ton.
   function speakWhenVoiceReady(index) {
-    var available = false;
-    try { available = !!(synth && synth.getVoices && synth.getVoices().length); } catch (e) {}
-    if (available) {
-      maleVoice = pickMaleVoice(timeline[index] && timeline[index].lang || currentLang);
+    var desired = timeline[index] && timeline[index].lang || currentLang;
+    var resolved = resolveMaleVoice(desired);
+    if (resolved && resolved.voice) {
       speakUnit(index, true);
       return;
     }
-    // Katalog noch leer → SOFORT synchron sprechen (verhindert Token-Verfall!)
-    // Das garantiert Ton – auch bei langsamen Katalog-Ladern (iOS, Chrome).
+
+    // A lazy catalog must never delay the first speak() call. Waiting for
+    // voices here was the original user-visible silence bug. Start now with
+    // the requested locale; once voiceschanged/getVoices supplies a male
+    // voice, only the next unit is upgraded (the current utterance cannot be
+    // changed safely while speaking).
     setStatus(texts.voiceLoading);
-    maleVoice = pickMaleVoice(timeline[index] && timeline[index].lang || currentLang);
     speakUnit(index, true);
-    // Parallel im Hintergrund: sobald echter Katalog da, Cache invalidieren
-    // damit alle FOLGE-Chunks die echte männliche Stimme nutzen
-    var retries = 0;
-    var pollId = setInterval(function () {
-      if (!reading || !playing) { clearInterval(pollId); return; }
-      var hasVoices = false;
-      try { hasVoices = !!(synth && synth.getVoices && synth.getVoices().length); } catch (e) {}
-      if (hasVoices) {
-        clearInterval(pollId);
-        // Echten männlichen Katalog jetzt verwenden (Upgrade für Rest)
-        VOICE_EPOCH += 1;
-        VOICE_CACHE = {};
-        calibrateQuality();
-        // Für den nächsten Chunk wird resolveMaleVoice automatisch die
-        // bessere Stimme wählen – kein Neustart nötig
-        setStatus(texts.started);
-      } else if (retries++ > 30) {
-        clearInterval(pollId);
-        setStatus(texts.started);
+    stopVoicePolling();
+    var attempts = 0;
+    voicePollId = setInterval(function () {
+      if (!reading || !playing) { stopVoicePolling(); return; }
+      var voices = [];
+      try { voices = synth && synth.getVoices ? (synth.getVoices() || []) : []; } catch (e) {}
+      if (voices.length) {
+        stopVoicePolling();
+        refreshVoices();
+        if (resolveMaleVoice(desired).voice) setStatus(texts.voiceActive);
+      } else if (++attempts >= 40) {
+        stopVoicePolling();
+        setStatus(texts.voiceFallback);
       }
-    }, 100);
+    }, 150);
   }
 
   function startReading(fromIndex) {
@@ -1896,12 +2010,27 @@
     unlockAudioEngine();
     currentLang = detectArticleLanguage();
     texts = I18N[currentLang] || I18N.de;
+    toolbar.setAttribute('aria-label', currentLang === 'en'
+      ? 'Reading aids: listen and summary' : 'Lesehilfen: Vorlesen und Kurzfassung');
+    if (listenLabel) listenLabel.textContent = texts.listen;
+    if (listenBtn) listenBtn.setAttribute('aria-label', texts.listenAria);
+    if (summaryLabel) summaryLabel.textContent = texts.summaryBtn;
+    if (summaryBtn) summaryBtn.setAttribute('aria-label', texts.summaryAria);
     errorStreak = 0;
+    degradeLevel = 0;
+    retryCounts = {};
+    playbackRun += 1;
+    stopVoicePolling();
+    try {
+      if (synth.paused) synth.resume();
+      synth.cancel();
+      synth.resume();
+    } catch (e) {}
+
+    // Calibrate after the catalog has been refreshed and before building the
+    // timeline, so chunk length/rate match the voice actually in use.
     calibrateQuality();
     lastEffRate = quality.rate || 1;
-    maleVoice = pickMaleVoice(currentLang);
-    // Beide Sprecher-Pools vorwärmen: englische Sätze in deutschen
-    // Artikeln (und umgekehrt) wechseln dadurch verzögerungsfrei.
     if (speechSupported) { resolveMaleVoice('de'); resolveMaleVoice('en'); }
 
     blocks = collectBlocks();
@@ -1918,17 +2047,10 @@
       for (var i = 0; i < startIdx; i++) spokenChars += timeline[i].text.length;
     }
     cursor = startIdx;
-    try {
-      if (synth.paused) synth.resume();
-      synth.cancel();
-      synth.resume();
-    } catch (e) {}
     setListenState('playing');
     setStatus(startIdx > 0 ? texts.resumedPos : texts.started);
     setupMediaSession();
     startKeepAlive();
-    // Never start with the platform default while voices are still loading.
-    // This is the critical DE/EN male-voice reliability fix.
     speakWhenVoiceReady(startIdx);
   }
 
@@ -1936,14 +2058,13 @@
     if (!reading) return;
     playing = false;
     clearPauseTimer();
+    stopVoicePolling();
+    if (IS_ANDROID) playbackRun += 1; // cancel callbacks from the old utterance
     if (speechSupported) {
-      // Android-Härtung: synth.pause()/resume() friert dort die Engine
-      // ein – deshalb abbrechen und beim Fortsetzen die laufende
-      // Einheit sauber neu sprechen (bruchsicher statt stumm).
       if (IS_ANDROID) { try { synth.cancel(); } catch (e) {} }
       else { try { synth.pause(); } catch (e) {} }
     }
-    if (liveUtterance) liveUtterance = null;
+    liveUtterance = null;
     setListenState('paused');
     setStatus(texts.paused);
   }
@@ -1954,28 +2075,32 @@
     playing = true;
     setListenState('playing');
     setStatus(texts.resumed);
-    if (speechSupported) {
-      if (IS_ANDROID) {
-        speakUnit(cursor, true);   // Einheit neu starten (Pause = Abbruch)
-        return;
-      }
-      try {
-        if (synth.paused) synth.resume();
-      } catch (e) {}
-      // Safari/Chrome-Härtung: hängt die Queue, Einheit sauber neu starten
-      setTimeout(function () {
-        if (reading && playing && synth && !synth.speaking && !synth.pending) {
-          speakUnit(cursor, true);
-        }
-      }, 260);
+    if (!speechSupported) return;
+    if (IS_ANDROID) {
+      speakUnit(cursor, true); // pause is implemented as cancel on Android
+      return;
     }
+    try {
+      if (synth.paused) synth.resume();
+    } catch (e) {}
+    // Safari can report a resumed queue without producing audio. Retry the
+    // current unit only when the native queue is genuinely empty.
+    setTimeout(function () {
+      if (reading && playing && synth && !synth.speaking && !synth.pending) {
+        speakUnit(cursor, true);
+      }
+    }, 320);
   }
 
   function endReading(announce) {
     reading = false;
     playing = false;
+    playbackRun += 1;
     liveUtterance = null;
+    activeUtterances.length = 0;
+    win.__ff_active_utterance = null;
     clearPauseTimer();
+    stopVoicePolling();
     stopKeepAlive();
     if (speechSupported) {
       try {
@@ -1992,23 +2117,19 @@
   function startKeepAlive() {
     stopKeepAlive();
     if (!speechSupported) return;
-    // Chrome bricht die Synthese nach ~15 s ab: regelmäßig auffrischen.
-    // Android verträgt das pause/resume-Ping nicht – dort reine Wache.
+    // Do not pause/resume live speech every few seconds: that creates an
+    // audible click and resets speech on several Safari/Android versions.
+    // Short utterances plus this queue watchdog are more reliable.
     keepAliveId = setInterval(function () {
       if (!reading || !playing) return;
       try {
-        if (IS_ANDROID) {
-          if (!synth.speaking && !synth.pending && !pauseTimer) speakUnit(cursor + 1, false);
-          return;
-        }
-        if (synth.speaking) {
-          synth.pause();
-          synth.resume();
-        } else if (!synth.pending && !pauseTimer) {
-          speakUnit(cursor + 1, false);
+        if (synth.paused) synth.resume();
+        if (!synth.speaking && !synth.pending && !pauseTimer &&
+            Date.now() - lastSpeechStartedAt > 900) {
+          speakUnit(cursor, true);
         }
       } catch (e) {}
-    }, 9000);
+    }, 5000);
   }
 
   function stopKeepAlive() { if (keepAliveId) { clearInterval(keepAliveId); keepAliveId = null; } }
@@ -2056,44 +2177,51 @@
   /* ---------- Stimmen-Initialisierung & Auto-Kalibrierung ----------
      Bewusst ohne Tastatur-Kurzbefehle: Bedienung erfolgt ausschließlich
      über die sichtbaren, barrierefreien Schaltflächen (Tab + Enter/Leertaste). */
+  var voiceSignature = '';
+  function readVoiceCatalog() {
+    if (!speechSupported || !synth || typeof synth.getVoices !== 'function') return [];
+    try { return dedupeVoices(synth.getVoices() || []); } catch (e) { return []; }
+  }
+
   function refreshVoices() {
-    VOICE_EPOCH += 1;       // Stimmenliste neu -> Caches verwerfen
-    VOICE_CACHE = {};
+    var list = readVoiceCatalog();
+    var signature = list.map(function (v) {
+      return voiceLanguage(v) + '|' + String(v.name || '') + '|' + String(v.voiceURI || '') + '|' + reportedGender(v);
+    }).join('||');
+    if (signature !== voiceSignature) {
+      voiceSignature = signature;
+      VOICE_EPOCH += 1;
+      VOICE_CACHE = {};
+    }
     calibrateQuality();
-    maleVoice = pickMaleVoice(currentLang);
   }
 
   if (speechSupported) {
     refreshVoices();
-    if (typeof synth.onvoiceschanged !== 'undefined') {
+    if (typeof synth.addEventListener === 'function') {
+      synth.addEventListener('voiceschanged', refreshVoices);
+    } else if ('onvoiceschanged' in synth) {
       synth.onvoiceschanged = refreshVoices;
     }
-    // High-End v5: aggressives Pre-Warming – pollt alle 120 ms bis 3 s,
-    // damit der männliche Katalog BEREITS VOR dem ersten Klick bereit ist
-    // (entscheidend für DE & EN ohne Umschalter)
+
+    // Pre-warm without repeatedly invalidating the cache. A voice catalog is
+    // often populated asynchronously on Chromium, Safari and Android.
     (function preWarmVoices() {
       var attempts = 0;
       var preWarmId = setInterval(function () {
-        attempts++;
-        var has = false;
-        try { has = !!(synth && synth.getVoices && synth.getVoices().length); } catch (e) {}
-        if (has) {
+        attempts += 1;
+        if (readVoiceCatalog().length) {
           refreshVoices();
           clearInterval(preWarmId);
-        } else if (attempts > 25) {
+        } else if (attempts >= 20) {
           clearInterval(preWarmId);
-        } else {
-          // Auch ohne Stimmen neu kalibrieren (für Fallback-Modus)
-          try { refreshVoices(); } catch (e) {}
         }
-      }, 120);
+      }, 150);
     })();
-    // Nachzügler-Stimmen (Chrome lädt asynchron, iOS sehr spät)
-    setTimeout(refreshVoices, 900);
-    setTimeout(refreshVoices, 2500);
-    setTimeout(refreshVoices, 4000);
   } else if (toolbar.classList) {
     toolbar.classList.add('ff-reader-toolbar--unsupported');
+    listenBtn.setAttribute('aria-disabled', 'true');
+    setStatus(texts.unsupported);
   }
 
   // Bei Tab-Wechsel sauber pausieren, statt zu stottern
@@ -2595,7 +2723,7 @@
   }
 
   function trapFocus(e) {
-    if (!dialogIsOpen() || dialog.classList.contains('ff-summary--fallback')) return;
+    if (!dialogIsOpen()) return;
     var nodes = focusableIn(dialog);
     if (!nodes.length) { e.preventDefault(); return; }
     var first = nodes[0];
@@ -2636,6 +2764,7 @@
     dialog.className = 'ff-summary';
     dialog.id = 'ff-summary-dialog';
     dialog.setAttribute('aria-labelledby', 'ff-summary-title');
+    dialog.setAttribute('aria-modal', 'true');
 
     var card = el('div', 'ff-summary__card');
 
@@ -2791,10 +2920,12 @@
       if (e.target === dialog) closeDialog();
     });
 
-    // Esc via Browser-Dialog → Fokus sauber zurückgeben
+    // Escape can close a native dialog without going through our button.
+    // Always release the scroll lock and return focus in that path too.
     dialog.addEventListener('close', function () {
-      if (lastFocused && lastFocused.focus) lastFocused.focus();
-      else if (summaryBtn) summaryBtn.focus();
+      lockScroll(false);
+      removeFallbackBackdrop();
+      restoreDialogFocus();
     });
 
     body.addEventListener('click', function (e) {
@@ -2811,33 +2942,43 @@
     return dialog;
   }
 
+  function restoreDialogFocus() {
+    var target = lastFocused && lastFocused.focus ? lastFocused : summaryBtn;
+    if (target && target.focus) target.focus({ preventScroll: true });
+    lastFocused = null;
+  }
+
   function openDialog() {
     buildDialog();
+    if (dialogIsOpen()) return;
     lastFocused = doc.activeElement || summaryBtn;
     lockScroll(true);
+    var opened = false;
     if (typeof dialog.showModal === 'function') {
-      dialog.showModal();
-    } else {
+      try { dialog.showModal(); opened = true; } catch (e) {}
+    }
+    if (!opened) {
       dialog.setAttribute('open', '');
       dialog.classList.add('ff-summary--fallback');
       addFallbackBackdrop();
     }
     var closeBtn = dialog.querySelector('.ff-summary__close');
-    if (closeBtn) closeBtn.focus();
+    if (closeBtn) closeBtn.focus({ preventScroll: true });
   }
 
   function closeDialog() {
     if (!dialog) return;
-    if (typeof dialog.close === 'function') {
-      dialog.close();
-    } else {
+    var fallback = dialog.classList.contains('ff-summary--fallback');
+    if (!fallback && typeof dialog.close === 'function' && dialogIsOpen()) {
+      try { dialog.close(); } catch (e) {}
+    }
+    if (fallback || dialog.getAttribute('open') !== null) {
       dialog.removeAttribute('open');
       dialog.classList.remove('ff-summary--fallback');
       removeFallbackBackdrop();
     }
     lockScroll(false);
-    if (lastFocused && lastFocused.focus) lastFocused.focus();
-    else if (summaryBtn) summaryBtn.focus();
+    restoreDialogFocus();
   }
 
   var fallbackBackdrop = null;
