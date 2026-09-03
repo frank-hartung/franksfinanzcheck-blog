@@ -70,6 +70,13 @@
 
   function firstSentences(text, n) { return sentences(text).slice(0, n).join(' '); }
 
+  // Scroll-Helfer, der in jeder Umgebung (auch ohne scrollIntoView) sicher ist.
+  function scrollTo(el, opts) {
+    if (!el || typeof el.scrollIntoView !== 'function') return;
+    try { el.scrollIntoView(opts); }
+    catch (e) { try { el.scrollIntoView(); } catch (e2) { /* ignorieren */ } }
+  }
+
   /* ============================================================
      1) VORLESEN – Web Speech API
   ============================================================ */
@@ -148,10 +155,7 @@
       var total = Math.max(1, blocks.length);
       progressBar.style.width = (((blockIndex + 1) / total) * 100).toFixed(1) + '%';
     }
-    if (!reducedMotion && typeof el.scrollIntoView === 'function') {
-      try { el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
-      catch (e) { el.scrollIntoView(); }
-    }
+    if (!reducedMotion) scrollTo(el, { block: 'center', behavior: 'smooth' });
   }
 
   function clearHighlight() {
@@ -455,10 +459,7 @@
     readBtn.addEventListener('click', function () {
       closeDialog();
       var content = doc.querySelector('.post-content') || doc.querySelector('.md-content');
-      if (content) {
-        try { content.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' }); }
-        catch (e) { content.scrollIntoView(); }
-      }
+      if (content) scrollTo(content, { behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
     });
 
     // Klick auf die Dialog-Rückseite (Backdrop) schließt den Dialog.
@@ -474,10 +475,7 @@
       var id = a.getAttribute('href').slice(1);
       closeDialog();
       var target = doc.getElementById(id);
-      if (target) {
-        try { target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' }); }
-        catch (err) { target.scrollIntoView(); }
-      }
+      if (target) scrollTo(target, { behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
     });
 
     doc.body.appendChild(dialog);
