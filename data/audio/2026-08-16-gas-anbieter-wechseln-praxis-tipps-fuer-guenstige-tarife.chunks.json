@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 119,
- "chars": 9731,
+ "chars": 9707,
  "parts": [
   {
    "index": 0,
@@ -258,7 +258,7 @@
   },
   {
    "index": 3,
-   "text": "Musterhaushalt mit 20000 Kilowattstunden Jahresverbrauch (Einfamilienhaus, circa 120 Quadratmeter, 4 Personen), Stand: August 2026. Grundversorgung (Nein: Stadtwerk). Grundpreis oder Monat: 14,50 Euro, 174 Euro pro Jahr. Arbeitspreis pro Kilowattstunden: 12,80 Cent. Jahreskosten (20000 Kilowattstunden): 2734 Euro. Effektivkosten 1. Jahr: 2734 Euro. Preisgarantie: Nein: keine. Vertragslaufzeit: unbegrenzt. Alternativ-Tarif (Solide). Grundpreis oder Monat: 9,90 Euro, 118,80 Euro pro Jahr. Arbeitspreis pro Kilowattstunden: 9,20 Cent. Jahreskosten (20000 Kilowattstunden): 1959 Euro. Effektivkosten 1. Jahr: 1959 Euro. Ersparnis im 1. Jahr: minus 775 Euro. Ersparnis ab 2. Jahr: minus 775 Euro. Preisgarantie: Ja: 12 Monate. Vertragslaufzeit: 12 Monate. Wechseltarif (Empfehlung). Grundpreis oder Monat: 11,00 Euro, 132 Euro pro Jahr. Arbeitspreis pro Kilowattstunden: 9,50 Cent. Jahreskosten (20000 Kilowattstunden): 2032 Euro. Neukunden-Bonus (Jahr 1): minus 180 Euro. Effektivkosten 1. Jahr: 1852 Euro. Ersparnis im 1. Jahr: minus 882 Euro. Ersparnis ab 2. Jahr: minus 702 Euro. Preisgarantie: Ja: 12 Monate. Vertragslaufzeit: 12 Monate. Hinweis: Der Neukunden-Bonus wird üblicherweise mit der ersten Jahresabrechnung verrechnet und gilt nur im ersten Vertragsjahr. Ab dem zweiten Jahr liegt die Ersparnis beim empfohlenen Wechseltarif bei soliden 702 Euro pro Jahr, ohne jede Einschränkung.",
+   "text": "Musterhaushalt mit 20000 Kilowattstunden Jahresverbrauch (Einfamilienhaus, circa 120 Quadratmeter, 4 Personen), Stand: August 2026. Grundversorgung (Nein: Stadtwerk). Grundpreis pro Monat: 14,50 Euro, 174 Euro pro Jahr. Arbeitspreis pro Kilowattstunde: 12,80 Cent. Jahreskosten (20000 Kilowattstunden): 2734 Euro. Effektivkosten 1. Jahr: 2734 Euro. Preisgarantie: Nein: keine. Vertragslaufzeit: unbegrenzt. Alternativ-Tarif (Solide). Grundpreis pro Monat: 9,90 Euro, 118,80 Euro pro Jahr. Arbeitspreis pro Kilowattstunde: 9,20 Cent. Jahreskosten (20000 Kilowattstunden): 1959 Euro. Effektivkosten 1. Jahr: 1959 Euro. Ersparnis im 1. Jahr: minus 775 Euro. Ersparnis ab 2. Jahr: minus 775 Euro. Preisgarantie: Ja: 12 Monate. Vertragslaufzeit: 12 Monate. Wechseltarif (Empfehlung). Grundpreis pro Monat: 11,00 Euro, 132 Euro pro Jahr. Arbeitspreis pro Kilowattstunde: 9,50 Cent. Jahreskosten (20000 Kilowattstunden): 2032 Euro. Neukunden-Bonus (Jahr 1): minus 180 Euro. Effektivkosten 1. Jahr: 1852 Euro. Ersparnis im 1. Jahr: minus 882 Euro. Ersparnis ab 2. Jahr: minus 702 Euro. Preisgarantie: Ja: 12 Monate. Vertragslaufzeit: 12 Monate. Hinweis: Der Neukunden-Bonus wird üblicherweise mit der ersten Jahresabrechnung verrechnet und gilt nur im ersten Vertragsjahr. Ab dem zweiten Jahr liegt die Ersparnis beim empfohlenen Wechseltarif bei soliden 702 Euro pro Jahr, ohne jede Einschränkung.",
    "units": [
     {
      "i": 38,
@@ -276,13 +276,13 @@
      "i": 40,
      "type": "li",
      "lang": "de",
-     "chars": 53
+     "chars": 52
     },
     {
      "i": 41,
      "type": "li",
      "lang": "de",
-     "chars": 45
+     "chars": 44
     },
     {
      "i": 42,
@@ -318,13 +318,13 @@
      "i": 47,
      "type": "li",
      "lang": "de",
-     "chars": 55
+     "chars": 54
     },
     {
      "i": 48,
      "type": "li",
      "lang": "de",
-     "chars": 44
+     "chars": 43
     },
     {
      "i": 49,
@@ -372,13 +372,13 @@
      "i": 56,
      "type": "li",
      "lang": "de",
-     "chars": 53
+     "chars": 52
     },
     {
      "i": 57,
      "type": "li",
      "lang": "de",
-     "chars": 44
+     "chars": 43
     },
     {
      "i": 58,
@@ -438,7 +438,7 @@
   },
   {
    "index": 4,
-   "text": "Regionale Preisunterschiede sind möglich; prüfe deinen persönlichen Tarif in unter 2 Minuten mit deiner Postleitzahl. Der 3-Schritte-Ablauf beim Gasanbieterwechsel. Schritt 1: Verbrauchsdaten und Zählernummer bereithalten. Schnappe dir deine letzte Gasrechnung. Dort findest du deinen genauen Jahresverbrauch in Kilowattstunden (Kilowattstunden), deine Zählernummer und die elfstellige Zählpunktbezeichnung. Wer erst kürzlich eingezogen ist, nutzt Richtwerte: circa 12000 Kilowattstunden für eine Wohnung, circa 20000 Kilowattstunden für ein Einfamilienhaus. Schritt 2: Postleitzahl und Verbrauch eingeben. Gib im Tarifrechner deine Postleitzahl und den Jahresverbrauch ein. Filtere die Ergebnisse nach 12-monatiger Laufzeit und Preisgarantie. Vergleiche den effektiven Kilowattstunden-Preis transparent und lies die detaillierten Tarifbedingungen. Schritt 3: Online-Antrag absenden. Fülle das Online-Formular in etwa 5 Minuten aus. Der neue Versorger kündigt deinen bisherigen Vertrag automatisch zum nächstmöglichen Termin und informiert den zuständigen Verteilnetzbetreiber. Du musst dich um nichts weiter kümmern und erhältst nach wenigen Tagen die offizielle Vertragsbestätigung per E-Mail. Sonderfall: Preiserhöhung und Sonderkündigungsrecht. Wenn dein bisheriger Gasversorger eine Preiserhöhung ankündigt, hast du ein gesetzliches Sonderkündigungsrecht nach Paragraf 41 EnWG.",
+   "text": "Regionale Preisunterschiede sind möglich; prüfe deinen persönlichen Tarif in unter 2 Minuten mit deiner Postleitzahl. Der 3-Schritte-Ablauf beim Gasanbieterwechsel. Schritt 1: Verbrauchsdaten und Zählernummer bereithalten. Schnappe dir deine letzte Gasrechnung. Dort findest du deinen genauen Jahresverbrauch in Kilowattstunden, deine Zählernummer und die elfstellige Zählpunktbezeichnung. Wer erst kürzlich eingezogen ist, nutzt Richtwerte: circa 12000 Kilowattstunden für eine Wohnung, circa 20000 Kilowattstunden für ein Einfamilienhaus. Schritt 2: Postleitzahl und Verbrauch eingeben. Gib im Tarifrechner deine Postleitzahl und den Jahresverbrauch ein. Filtere die Ergebnisse nach 12-monatiger Laufzeit und Preisgarantie. Vergleiche den effektiven Kilowattstunden-Preis transparent und lies die detaillierten Tarifbedingungen. Schritt 3: Online-Antrag absenden. Fülle das Online-Formular in etwa 5 Minuten aus. Der neue Versorger kündigt deinen bisherigen Vertrag automatisch zum nächstmöglichen Termin und informiert den zuständigen Verteilnetzbetreiber. Du musst dich um nichts weiter kümmern und erhältst nach wenigen Tagen die offizielle Vertragsbestätigung per E-Mail. Sonderfall: Preiserhöhung und Sonderkündigungsrecht. Wenn dein bisheriger Gasversorger eine Preiserhöhung ankündigt, hast du ein gesetzliches Sonderkündigungsrecht nach Paragraf 41 EnWG.",
    "units": [
     {
      "i": 67,
@@ -468,7 +468,7 @@
      "i": 71,
      "type": "p",
      "lang": "de",
-     "chars": 145
+     "chars": 127
     },
     {
      "i": 72,

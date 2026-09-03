@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 106,
- "chars": 10744,
+ "chars": 10742,
  "parts": [
   {
    "index": 0,
@@ -174,7 +174,7 @@
   },
   {
    "index": 2,
-   "text": "Es drohen Feuchtigkeitsschäden, Schimmelbildung und ein permanenter Wärmeverlust. Stoßlüften (drei- bis viermal täglich für 5 bis 8 Minuten bei voll geöffnetem Fenster und abgedrehtem Thermostat) spart bis zu 120 Euro pro Saison. Fehler 4: Veraltete, manuelle Thermostate im Dauereinsatz. Klassische Drehventile reagieren träge und heizen auch dann durch, wenn niemand zu Hause ist oder die Sonne den Raum bereits aufheizt. Smarte oder programmierbare Thermostate (ab circa 15 Euro pro Stück) senken die Raumtemperatur nachts oder bei Abwesenheit automatisch auf 17 Grad Celsius ab und sparen bis zu 140 Euro Heizenergie im Jahr, ohne den Wohnkomfort zu beeinträchtigen. Fehler 5: Im teuren Grundversorgungstarif verharren. Der weitaus größte Sparhebel ist der rechtzeitige Gasanbieterwechsel im Spätsommer. Wer im Grundversorgungstarif bleibt, zahlt oft 12 bis 14 Cent pro Kilowattstunden, während alternative Anbieter mit Preisgarantie Konditionen um 8,5 bis 9,5 Cent pro Kilowattstunden bieten. Bei einem typischen Jahresverbrauch von 20000 Kilowattstunden beträgt der Unterschied mehrere hundert Euro pro Jahr. Spar-Potenziale der Maßnahmen im Überblick. Tabelle: Spar-Potenziale der Maßnahmen im Überblick. Übersicht mit 4 Spalten und 6 Zeilen. Die Spalten lauten: Maßnahme, Typischer Aufwand, Einmalkosten, Ersparnis pro Heizperiode.",
+   "text": "Es drohen Feuchtigkeitsschäden, Schimmelbildung und ein permanenter Wärmeverlust. Stoßlüften (drei- bis viermal täglich für 5 bis 8 Minuten bei voll geöffnetem Fenster und abgedrehtem Thermostat) spart bis zu 120 Euro pro Saison. Fehler 4: Veraltete, manuelle Thermostate im Dauereinsatz. Klassische Drehventile reagieren träge und heizen auch dann durch, wenn niemand zu Hause ist oder die Sonne den Raum bereits aufheizt. Smarte oder programmierbare Thermostate (ab circa 15 Euro pro Stück) senken die Raumtemperatur nachts oder bei Abwesenheit automatisch auf 17 Grad Celsius ab und sparen bis zu 140 Euro Heizenergie im Jahr, ohne den Wohnkomfort zu beeinträchtigen. Fehler 5: Im teuren Grundversorgungstarif verharren. Der weitaus größte Sparhebel ist der rechtzeitige Gasanbieterwechsel im Spätsommer. Wer im Grundversorgungstarif bleibt, zahlt oft 12 bis 14 Cent pro Kilowattstunde, während alternative Anbieter mit Preisgarantie Konditionen um 8,5 bis 9,5 Cent pro Kilowattstunde bieten. Bei einem typischen Jahresverbrauch von 20000 Kilowattstunden beträgt der Unterschied mehrere hundert Euro pro Jahr. Spar-Potenziale der Maßnahmen im Überblick. Tabelle: Spar-Potenziale der Maßnahmen im Überblick. Übersicht mit 4 Spalten und 6 Zeilen. Die Spalten lauten: Maßnahme, Typischer Aufwand, Einmalkosten, Ersparnis pro Heizperiode.",
    "units": [
     {
      "i": 25,
@@ -228,7 +228,7 @@
      "i": 33,
      "type": "p",
      "lang": "de",
-     "chars": 189
+     "chars": 187
     },
     {
      "i": 34,

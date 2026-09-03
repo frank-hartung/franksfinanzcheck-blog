@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 98,
- "chars": 10025,
+ "chars": 10023,
  "parts": [
   {
    "index": 0,
@@ -90,7 +90,7 @@
   },
   {
    "index": 1,
-   "text": "Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Heimliche Energiediebe stoppen: Die Top 7 Stromfresser im Haushalt. Um gezielt Strom zu sparen und Energiediebe zu stoppen, musst du wissen, wo im Haus die meiste Energie verpufft: Punkt 1: Veraltete Kühl- und Gefriergeräte (15+ Jahre alt): Ein alter Kühlschrank ohne Abtauautomatik verbraucht oft 330 bis 400 Kilowattstunden pro Jahr (circa 115 Euro bis 140 Euro), während ein modernes A-Klasse-Gerät mit 110 Kilowattstunden (circa 38 Euro) auskommt. Punkt 2: Ungeregelte Heizungspumpen im Keller: Alte Standardpumpen laufen ununterbrochen auf voller Leistung (bis zu 800 Kilowattstunden oder Jahr, circa 280 Euro). Eine moderne Hocheffizienzpumpe benötigt unter 100 Kilowattstunden (35 Euro). Punkt 3: Standby-Verbraucher im Wohnzimmer: Fernseher, Soundbars, Spielekonsolen und Streaming-Boxen ziehen im Ruhezustand kontinuierlich 10 bis 30 Watt (circa 60 Euro bis 100 Euro pro Jahr). Punkt 4: Elektrische Warmwasser-Boiler und Durchlauferhitzer: Veraltete hydraulische Geräte heizen Wasser unkontrolliert auf, statt elektronisch exakt 38 Grad Celsius zu halten. Punkt 5: Wäschetrockner mit Kondenstechnik: Alte Kondenstrockner benötigen pro Trocknungsgang circa 3,5 bis 4,5 Kilowattstunden. Moderne Wärmepumpentrockner begnügen sich mit 1,3 Kilowattstunden.",
+   "text": "Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Heimliche Energiediebe stoppen: Die Top 7 Stromfresser im Haushalt. Um gezielt Strom zu sparen und Energiediebe zu stoppen, musst du wissen, wo im Haus die meiste Energie verpufft: Punkt 1: Veraltete Kühl- und Gefriergeräte (15+ Jahre alt): Ein alter Kühlschrank ohne Abtauautomatik verbraucht oft 330 bis 400 Kilowattstunden pro Jahr (circa 115 Euro bis 140 Euro), während ein modernes A-Klasse-Gerät mit 110 Kilowattstunden (circa 38 Euro) auskommt. Punkt 2: Ungeregelte Heizungspumpen im Keller: Alte Standardpumpen laufen ununterbrochen auf voller Leistung (bis zu 800 Kilowattstunden pro Jahr, circa 280 Euro). Eine moderne Hocheffizienzpumpe benötigt unter 100 Kilowattstunden (35 Euro). Punkt 3: Standby-Verbraucher im Wohnzimmer: Fernseher, Soundbars, Spielekonsolen und Streaming-Boxen ziehen im Ruhezustand kontinuierlich 10 bis 30 Watt (circa 60 Euro bis 100 Euro pro Jahr). Punkt 4: Elektrische Warmwasser-Boiler und Durchlauferhitzer: Veraltete hydraulische Geräte heizen Wasser unkontrolliert auf, statt elektronisch exakt 38 Grad Celsius zu halten. Punkt 5: Wäschetrockner mit Kondenstechnik: Alte Kondenstrockner benötigen pro Trocknungsgang circa 3,5 bis 4,5 Kilowattstunden. Moderne Wärmepumpentrockner begnügen sich mit 1,3 Kilowattstunden.",
    "units": [
     {
      "i": 12,
@@ -132,7 +132,7 @@
      "i": 18,
      "type": "li",
      "lang": "de",
-     "chars": 164
+     "chars": 163
     },
     {
      "i": 19,
@@ -408,7 +408,7 @@
   },
   {
    "index": 5,
-   "text": "Formel: gemessene Watt mal Stunden mal 365 und 1000 mal Arbeitspreis. 12 Watt Dauerbetrieb ist 105 Kilowattstunden ungefähr 32 bis 38 Euro im Jahr. Fünf solche Geräte sind ein Restaurantbesuch pro Monat, unsichtbar. Geräte über 80 Euro Stromkosten oder Jahr auf die Ersatzliste. A-Klasse-Kühlschrank gegen 15 Jahre alten F-Schrank: oft 120 bis 180 Euro Ersparnis, Amortisation 4 bis 7 Jahre. Nicht jedes Gerät lohnt den Sofortkauf, die Truhe im Keller, die halb leer auf minus 22 Grad Celsius steht, lohnt erst abtauen und wärmer stellen. Die 4 Sofort-Hacks ohne Anschaffung. Punkt 1: Steckerleiste TV oder Audio, nachts aus. Punkt 2: Eco-Programme, volle Maschine, 1400 Touren. Punkt 3: Router-Zeitsteuerung 1 bis 6 Uhr, wenn niemand wach ist (Smarthome-Ausnahme). Punkt 4: Zählerstand jeden 1 – der Herbstanstieg wird sichtbar, bevor die Abrechnung kommt. Energiediebe sind selten dramatisch. Sie sind langweilig und dauerhaft. Genau deshalb gewinnt, wer misst statt rätselt. Ersatzentscheidung mit Amortisation, nicht mit schlechtem Gewissen. Nur weil ein Gerät alt ist, muss es nicht morgen neu sein. Rechnung: (alter Kilowattstunden minus neuer Kilowattstunden) mal Preis mal Jahre bis du sowieso tauschst. Unter 3 Jahren Amortisation: tauschen, wenn das Geld da ist. Über 8 Jahren: erst einstellen, abtauen, Standort ändern.",
+   "text": "Formel: gemessene Watt mal Stunden mal 365 und 1000 mal Arbeitspreis. 12 Watt Dauerbetrieb ist 105 Kilowattstunden ungefähr 32 bis 38 Euro im Jahr. Fünf solche Geräte sind ein Restaurantbesuch pro Monat, unsichtbar. Geräte über 80 Euro Stromkosten pro Jahr auf die Ersatzliste. A-Klasse-Kühlschrank gegen 15 Jahre alten F-Schrank: oft 120 bis 180 Euro Ersparnis, Amortisation 4 bis 7 Jahre. Nicht jedes Gerät lohnt den Sofortkauf, die Truhe im Keller, die halb leer auf minus 22 Grad Celsius steht, lohnt erst abtauen und wärmer stellen. Die 4 Sofort-Hacks ohne Anschaffung. Punkt 1: Steckerleiste TV oder Audio, nachts aus. Punkt 2: Eco-Programme, volle Maschine, 1400 Touren. Punkt 3: Router-Zeitsteuerung 1 bis 6 Uhr, wenn niemand wach ist (Smarthome-Ausnahme). Punkt 4: Zählerstand jeden 1 – der Herbstanstieg wird sichtbar, bevor die Abrechnung kommt. Energiediebe sind selten dramatisch. Sie sind langweilig und dauerhaft. Genau deshalb gewinnt, wer misst statt rätselt. Ersatzentscheidung mit Amortisation, nicht mit schlechtem Gewissen. Nur weil ein Gerät alt ist, muss es nicht morgen neu sein. Rechnung: (alter Kilowattstunden minus neuer Kilowattstunden) mal Preis mal Jahre bis du sowieso tauschst. Unter 3 Jahren Amortisation: tauschen, wenn das Geld da ist. Über 8 Jahren: erst einstellen, abtauen, Standort ändern.",
    "units": [
     {
      "i": 61,
@@ -426,7 +426,7 @@
      "i": 63,
      "type": "p",
      "lang": "de",
-     "chars": 62
+     "chars": 61
     },
     {
      "i": 64,

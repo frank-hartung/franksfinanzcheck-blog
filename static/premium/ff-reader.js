@@ -385,6 +385,31 @@
     s = s.replace(/Mobiles Netz\s*\/\s*Datennutzung/gi, 'Mobiles Netz, dann Datennutzung');
     s = s.replace(/\b(\d{4})\s*\/\s*(\d{2,4})\b/g, '$1' + (lang === 'en' ? ' to ' : ' bis ') + '$2');
     s = s.replace(/(\d)\s*\/\s*(?=\d)/g, '$1' + (lang === 'en' ? ' and ' : ' und '));
+    /* Schrägstrich mit Maßeinheit im Nenner meint immer „pro", nie „oder":
+       „Grundpreis / Monat", „kWh/Jahr", „80 €/Jahr", „2 bis 4 Stunden/Woche".
+       Muss VOR der allgemeinen Wort/Wort-Regel stehen. */
+    s = s.replace(/\s*\/\s*(Monate?|Jahre?|Kilowattstunden?|kWh|Stunden?|Minuten?|Sekunden?|Wochen?|Tagen?|Personen?|Quadratmetern?|m²)\b/gi,
+      function (m, einheit) {
+        /* Nach „pro" steht im Deutschen der Singular: „pro Kilowattstunde",
+           nicht „pro Kilowattstunden". Die Quelle schreibt die Einheit im
+           Plural, weil sie als Spaltenüberschrift steht. */
+        var EINZAHL = {
+          monate: 'Monat', jahr: 'Jahr', jahre: 'Jahr',
+          kilowattstunde: 'Kilowattstunde', kilowattstunden: 'Kilowattstunde', kwh: 'Kilowattstunde',
+          stunde: 'Stunde', stunden: 'Stunde', minute: 'Minute', minuten: 'Minute',
+          sekunde: 'Sekunde', sekunden: 'Sekunde', woche: 'Woche', wochen: 'Woche',
+          tag: 'Tag', tagen: 'Tag', person: 'Person', personen: 'Person',
+          quadratmeter: 'Quadratmeter', 'm²': 'Quadratmeter'
+        };
+        var name = EINZAHL[einheit.toLowerCase()] || einheit;
+        if (lang === 'en') {
+          var EN = { Monat: 'month', Jahr: 'year', Kilowattstunde: 'kilowatt hour',
+                     Stunde: 'hour', Minute: 'minute', Sekunde: 'second',
+                     Woche: 'week', Tag: 'day', Person: 'person', Quadratmeter: 'square meter' };
+          return ' per ' + (EN[name] || name.toLowerCase());
+        }
+        return ' pro ' + name;
+      });
     s = s.replace(/([A-Za-zäöüßÄÖÜ])\s*\/\s*(?=[A-Za-zäöüßÄÖÜ])/g, '$1' + (lang === 'en' ? ' or ' : ' oder '));
 
     /* Zahlenreihen mit drei oder mehr Gliedern sind Eigennamen, keine
@@ -504,6 +529,10 @@
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*%/g, '$1 percent');
       s = s.replace(/\b(\d+)\s*(?:Cent|ct)\b/gi, '$1 Cents');
       s = s.replace(/\b(?:Cent|ct)\/kWh\b/gi, 'Cents per kilowatt hour');
+      /* „kilowatt hours (kWh)" – die Klammer wiederholt nur das bereits
+         ausgeschriebene Wort und würde gesprochen doppelt erscheinen. */
+      s = s.replace(/(kilowatt hours?)\s*\(kWh\)/gi, '$1');
+      s = s.replace(/\b(per)\s+kWh\b/gi, '$1 kilowatt hour');
       s = s.replace(/\b(?:kWh|kwh)\b/g, 'kilowatt hours');
       s = s.replace(/\b(?:Mbit\/s|MBit\/s|Mbit)\b/g, 'megabits per second');
       s = s.replace(/\b(?:Gbit\/s|GBit\/s|Gbit)\b/g, 'gigabits per second');
@@ -547,6 +576,13 @@
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*%/g, '$1 Prozent');
       s = s.replace(/\b(\d+)\s*(?:Cent|ct)\b/gi, '$1 Cent');
       s = s.replace(/\b(?:Cent|ct)\/kWh\b/gi, 'Cent pro Kilowattstunde');
+      /* „Kilowattstunden (kWh)" – die Klammer wiederholt nur das bereits
+         ausgeschriebene Wort: gesprochen entstünde „Kilowattstunden
+         Kilowattstunden". */
+      s = s.replace(/(Kilowattstunden?)\s*\(kWh\)/gi, '$1');
+      /* Nach „pro" und „je" steht im Deutschen der Singular. Die Quelle
+         schreibt „Arbeitspreis pro kWh" als Spaltenüberschrift. */
+      s = s.replace(/\b(pro|je)\s+kWh\b/gi, '$1 Kilowattstunde');
       s = s.replace(/\b(?:kWh|kwh)\b/g, 'Kilowattstunden');
       s = s.replace(/\b(?:Mbit\/s|MBit\/s|Mbit)\b/g, 'Megabit pro Sekunde');
       s = s.replace(/\b(?:Gbit\/s|GBit\/s|Gbit)\b/g, 'Gigabit pro Sekunde');
