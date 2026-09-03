@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 107,
- "chars": 10816,
+ "chars": 10820,
  "parts": [
   {
    "index": 0,
@@ -222,7 +222,7 @@
   },
   {
    "index": 3,
-   "text": "Monatliche Kontoführung. Zeile 1 von 6. Klassische Filialbank: 8,90 Euro monatlich ist 106,80 Euro. Kostenloses Direktbank-Konto (zum Beispiel C24 Bank): 0,00 Euro. Girocard / Debitkarte. Zeile 2 von 6. Klassische Filialbank: 15,00 Euro pro Jahr. Kostenloses Direktbank-Konto (zum Beispiel C24 Bank): 0,00 Euro (inklusive). Echtzeit-Überweisungen. Zeile 3 von 6. Klassische Filialbank: 0,50 Euro pro Überweisung (circa 12 Euro). Kostenloses Direktbank-Konto (zum Beispiel C24 Bank): 0,00 Euro (kostenlos). Geld abheben an Fremdautomaten. Zeile 4 von 6. Klassische Filialbank: 4,50 Euro pro Abhebung. Kostenloses Direktbank-Konto (zum Beispiel C24 Bank): 0,00 Euro (zum Beispiel 4× monatlich gratis). Zinsen auf das Girokonto-Guthaben. Zeile 5 von 6. Klassische Filialbank: 0,00 Prozent. Kostenloses Direktbank-Konto (zum Beispiel C24 Bank): Attraktive Guthabenzinsen. Gesamtkosten pro Jahr. Zeile 6 von 6. Klassische Filialbank: circa 150,00 Euro bis 190,00 Euro. Kostenloses Direktbank-Konto (zum Beispiel C24 Bank): 0,00 Euro (plus Zinsertrag!). Ende der Tabelle Gebührenvergleich: Filialbank versus modernes Online-Girokonto. So unkompliziert gelingt der gesetzliche Kontowechsel. Die Furcht vor zeitraubender Bürokratie hält immer noch Millionen Bundesbürger bei überteuerten Altkonten.",
+   "text": "Monatliche Kontoführung. Zeile 1 von 6. Klassische Filialbank: 8,90 Euro monatlich ist 106,80 Euro. Kostenloses Direktbank-Konto (zum Beispiel C24 Bank): 0,00 Euro. Girocard oder Debitkarte. Zeile 2 von 6. Klassische Filialbank: 15,00 Euro pro Jahr. Kostenloses Direktbank-Konto (zum Beispiel C24 Bank): 0,00 Euro (inklusive). Echtzeit-Überweisungen. Zeile 3 von 6. Klassische Filialbank: 0,50 Euro pro Überweisung (circa 12 Euro). Kostenloses Direktbank-Konto (zum Beispiel C24 Bank): 0,00 Euro (kostenlos). Geld abheben an Fremdautomaten. Zeile 4 von 6. Klassische Filialbank: 4,50 Euro pro Abhebung. Kostenloses Direktbank-Konto (zum Beispiel C24 Bank): 0,00 Euro (zum Beispiel 4 mal monatlich gratis). Zinsen auf das Girokonto-Guthaben. Zeile 5 von 6. Klassische Filialbank: 0,00 Prozent. Kostenloses Direktbank-Konto (zum Beispiel C24 Bank): Attraktive Guthabenzinsen. Gesamtkosten pro Jahr. Zeile 6 von 6. Klassische Filialbank: circa 150,00 Euro bis 190,00 Euro. Kostenloses Direktbank-Konto (zum Beispiel C24 Bank): 0,00 Euro (plus Zinsertrag!). Ende der Tabelle Gebührenvergleich: Filialbank versus modernes Online-Girokonto. So unkompliziert gelingt der gesetzliche Kontowechsel. Die Furcht vor zeitraubender Bürokratie hält immer noch Millionen Bundesbürger bei überteuerten Altkonten.",
    "units": [
     {
      "i": 32,
@@ -240,7 +240,7 @@
      "i": 34,
      "type": "table-row",
      "lang": "de",
-     "chars": 81
+     "chars": 84
     },
     {
      "i": 35,
@@ -270,7 +270,7 @@
      "i": 39,
      "type": "table-row",
      "lang": "de",
-     "chars": 99
+     "chars": 102
     },
     {
      "i": 40,
@@ -588,13 +588,13 @@
   },
   {
    "index": 7,
-   "text": "Weiterlesen: Ratgeber Konto und Karten · Ratgeber Versicherungen · Wichtige Fakten zur Privathaftpflicht. Häufige Fragen. Ist ein kostenloses Girokonto wirklich dauerhaft gebührenfrei? Ja, seriöse Anbieter wie die C24 Bank garantieren in ihren Basis-Modellen eine dauerhaft kostenlose Kontoführung ohne versteckte Klauseln. Was passiert mit meinen Lastschriften beim Bankwechsel? Der digitale Kontowechselservice informiert alle Lastschriftempfänger (zum Beispiel Strom, Telefon, Miete) automatisch über deine neue Kontoverbindung. Wie sicher ist mein Geld bei einer Online-Direktbank? Alle in Deutschland lizenzierten Banken unterliegen der gesetzlichen Einlagensicherung über die Entschädigungseinrichtung deutscher Banken (EdB). Dein Sparguthaben ist bis zu 100000 Euro pro Kunde zu 100 Prozent gesetzlich abgesichert. Kann ich mit dem kostenlosen Girokonto überall bezahlen? Ja, mit der mitgelieferten Debitkarte (Mastercard oder Visa) kannst du weltweit an Millionen Akzeptanzstellen vor Ort Kontaktlos oder online bezahlen sowie Apple Pay und Google Pay nutzen. Wirkt sich ein Kontowechsel negativ auf meinen Schufa-Score aus? Ein einmaliger Wechsel zu einem neuen Girokonto hat in der Regel keinen negativen Einfluss auf deine Bonität. Bei der Eröffnung wird lediglich geprüft, ob negative Schufa-Einträge vorliegen. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen.",
+   "text": "Weiterlesen: Ratgeber Konto und Karten, Ratgeber Versicherungen, Wichtige Fakten zur Privathaftpflicht. Häufige Fragen. Ist ein kostenloses Girokonto wirklich dauerhaft gebührenfrei? Ja, seriöse Anbieter wie die C24 Bank garantieren in ihren Basis-Modellen eine dauerhaft kostenlose Kontoführung ohne versteckte Klauseln. Was passiert mit meinen Lastschriften beim Bankwechsel? Der digitale Kontowechselservice informiert alle Lastschriftempfänger (zum Beispiel Strom, Telefon, Miete) automatisch über deine neue Kontoverbindung. Wie sicher ist mein Geld bei einer Online-Direktbank? Alle in Deutschland lizenzierten Banken unterliegen der gesetzlichen Einlagensicherung über die Entschädigungseinrichtung deutscher Banken (EdB). Dein Sparguthaben ist bis zu 100000 Euro pro Kunde zu 100 Prozent gesetzlich abgesichert. Kann ich mit dem kostenlosen Girokonto überall bezahlen? Ja, mit der mitgelieferten Debitkarte (Mastercard oder Visa) kannst du weltweit an Millionen Akzeptanzstellen vor Ort Kontaktlos oder online bezahlen sowie Apple Pay und Google Pay nutzen. Wirkt sich ein Kontowechsel negativ auf meinen Schufa-Score aus? Ein einmaliger Wechsel zu einem neuen Girokonto hat in der Regel keinen negativen Einfluss auf deine Bonität. Bei der Eröffnung wird lediglich geprüft, ob negative Schufa-Einträge vorliegen. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen.",
    "units": [
     {
      "i": 89,
      "type": "p",
      "lang": "de",
-     "chars": 105
+     "chars": 103
     },
     {
      "i": 90,

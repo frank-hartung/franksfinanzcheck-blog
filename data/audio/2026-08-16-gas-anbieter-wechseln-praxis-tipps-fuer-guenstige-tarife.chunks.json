@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 119,
- "chars": 9678,
+ "chars": 9731,
  "parts": [
   {
    "index": 0,
@@ -258,13 +258,13 @@
   },
   {
    "index": 3,
-   "text": "Musterhaushalt mit 20000 Kilowattstunden Jahresverbrauch (Einfamilienhaus, circa 120 m², 4 Personen), Stand: August 2026. Grundversorgung (Nein: Stadtwerk). Grundpreis monatlich: 14,50 Euro, 174 Euro pro Jahr. Arbeitspreis pro Kilowattstunden: 12,80 Cent. Jahreskosten (20000 Kilowattstunden): 2734 Euro. Effektivkosten 1. Jahr: 2734 Euro. Preisgarantie: Nein: keine. Vertragslaufzeit: unbegrenzt. Alternativ-Tarif (Solide). Grundpreis monatlich: 9,90 Euro, 118,80 Euro pro Jahr. Arbeitspreis pro Kilowattstunden: 9,20 Cent. Jahreskosten (20000 Kilowattstunden): 1959 Euro. Effektivkosten 1. Jahr: 1959 Euro. Ersparnis im 1. Jahr: −775 Euro. Ersparnis ab 2. Jahr: −775 Euro. Preisgarantie: Ja: 12 Monate. Vertragslaufzeit: 12 Monate. Wechseltarif (Empfehlung). Grundpreis monatlich: 11,00 Euro, 132 Euro pro Jahr. Arbeitspreis pro Kilowattstunden: 9,50 Cent. Jahreskosten (20000 Kilowattstunden): 2032 Euro. Neukunden-Bonus (Jahr 1): −180 Euro. Effektivkosten 1. Jahr: 1852 Euro. Ersparnis im 1. Jahr: −882 Euro. Ersparnis ab 2. Jahr: −702 Euro. Preisgarantie: Ja: 12 Monate. Vertragslaufzeit: 12 Monate. Hinweis: Der Neukunden-Bonus wird üblicherweise mit der ersten Jahresabrechnung verrechnet und gilt nur im ersten Vertragsjahr. Ab dem zweiten Jahr liegt die Ersparnis beim empfohlenen Wechseltarif bei soliden 702 Euro pro Jahr, ohne jede Einschränkung.",
+   "text": "Musterhaushalt mit 20000 Kilowattstunden Jahresverbrauch (Einfamilienhaus, circa 120 Quadratmeter, 4 Personen), Stand: August 2026. Grundversorgung (Nein: Stadtwerk). Grundpreis oder Monat: 14,50 Euro, 174 Euro pro Jahr. Arbeitspreis pro Kilowattstunden: 12,80 Cent. Jahreskosten (20000 Kilowattstunden): 2734 Euro. Effektivkosten 1. Jahr: 2734 Euro. Preisgarantie: Nein: keine. Vertragslaufzeit: unbegrenzt. Alternativ-Tarif (Solide). Grundpreis oder Monat: 9,90 Euro, 118,80 Euro pro Jahr. Arbeitspreis pro Kilowattstunden: 9,20 Cent. Jahreskosten (20000 Kilowattstunden): 1959 Euro. Effektivkosten 1. Jahr: 1959 Euro. Ersparnis im 1. Jahr: minus 775 Euro. Ersparnis ab 2. Jahr: minus 775 Euro. Preisgarantie: Ja: 12 Monate. Vertragslaufzeit: 12 Monate. Wechseltarif (Empfehlung). Grundpreis oder Monat: 11,00 Euro, 132 Euro pro Jahr. Arbeitspreis pro Kilowattstunden: 9,50 Cent. Jahreskosten (20000 Kilowattstunden): 2032 Euro. Neukunden-Bonus (Jahr 1): minus 180 Euro. Effektivkosten 1. Jahr: 1852 Euro. Ersparnis im 1. Jahr: minus 882 Euro. Ersparnis ab 2. Jahr: minus 702 Euro. Preisgarantie: Ja: 12 Monate. Vertragslaufzeit: 12 Monate. Hinweis: Der Neukunden-Bonus wird üblicherweise mit der ersten Jahresabrechnung verrechnet und gilt nur im ersten Vertragsjahr. Ab dem zweiten Jahr liegt die Ersparnis beim empfohlenen Wechseltarif bei soliden 702 Euro pro Jahr, ohne jede Einschränkung.",
    "units": [
     {
      "i": 38,
      "type": "p",
      "lang": "de",
-     "chars": 121
+     "chars": 131
     },
     {
      "i": 39,
@@ -276,7 +276,7 @@
      "i": 40,
      "type": "li",
      "lang": "de",
-     "chars": 52
+     "chars": 53
     },
     {
      "i": 41,
@@ -318,7 +318,7 @@
      "i": 47,
      "type": "li",
      "lang": "de",
-     "chars": 54
+     "chars": 55
     },
     {
      "i": 48,
@@ -342,13 +342,13 @@
      "i": 51,
      "type": "li",
      "lang": "de",
-     "chars": 32
+     "chars": 37
     },
     {
      "i": 52,
      "type": "li",
      "lang": "de",
-     "chars": 32
+     "chars": 37
     },
     {
      "i": 53,
@@ -372,7 +372,7 @@
      "i": 56,
      "type": "li",
      "lang": "de",
-     "chars": 52
+     "chars": 53
     },
     {
      "i": 57,
@@ -390,7 +390,7 @@
      "i": 59,
      "type": "li",
      "lang": "de",
-     "chars": 36
+     "chars": 41
     },
     {
      "i": 60,
@@ -402,13 +402,13 @@
      "i": 61,
      "type": "li",
      "lang": "de",
-     "chars": 32
+     "chars": 37
     },
     {
      "i": 62,
      "type": "li",
      "lang": "de",
-     "chars": 32
+     "chars": 37
     },
     {
      "i": 63,
@@ -636,7 +636,7 @@
   },
   {
    "index": 6,
-   "text": "Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst. Dank strenger Verbraucherschutzgesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist. Bei einem typischen Familienhaushalt mit 20000 Kilowattstunden Verbrauch sparst du im ersten Jahr bis 882 Euro. Auch dauerhaft bleiben mehrere hundert Euro auf deinem Konto. Jetzt vergleichen und sparen: führt zu Bis 882 Euro sparen, Angebote vergleichen. Weiterlesen: Pillar Strom und Gas sparen · Gasrechnung senken im Spätsommer · Günstige Tarife mit Preisgarantie. Häufige Fragen. Kann mir während des Wechsels das Gas abgestellt werden? Nein, das ist gesetzlich unmöglich. Der örtliche Grundversorger ist zur lückenlosen Belieferung verpflichtet. Was mache ich bei einem Umzug? Bei einem Umzug meldest du deinen bestehenden Vertrag mit einer Frist von sechs Wochen ab oder nimmst ihn an die neue Lieferadresse mit. Wie wird Gas von Kubikmetern (m³) in Kilowattstunden umgerechnet? Multipliziere die Kubikmeter mit dem Brennwert (meist circa 10 bis 11,5) und der Zustandszahl (z-Zahl, circa 0,95). Grobe Faustformel: 1 m³ Gas entspricht rund 10 Kilowattstunden. Wie lange dauert der gesamte Wechselprozess?",
+   "text": "Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst. Dank strenger Verbraucherschutzgesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist. Bei einem typischen Familienhaushalt mit 20000 Kilowattstunden Verbrauch sparst du im ersten Jahr bis 882 Euro. Auch dauerhaft bleiben mehrere hundert Euro auf deinem Konto. Jetzt vergleichen und sparen: führt zu Bis 882 Euro sparen, Angebote vergleichen. Weiterlesen: Pillar Strom und Gas sparen, Gasrechnung senken im Spätsommer, Günstige Tarife mit Preisgarantie. Häufige Fragen. Kann mir während des Wechsels das Gas abgestellt werden? Nein, das ist gesetzlich unmöglich. Der örtliche Grundversorger ist zur lückenlosen Belieferung verpflichtet. Was mache ich bei einem Umzug? Bei einem Umzug meldest du deinen bestehenden Vertrag mit einer Frist von sechs Wochen ab oder nimmst ihn an die neue Lieferadresse mit. Wie wird Gas von Kubikmetern ( Kubikmeter) in Kilowattstunden umgerechnet? Multipliziere die Kubikmeter mit dem Brennwert (meist circa 10 bis 11,5) und der Zustandszahl (z-Zahl, circa 0,95). Grobe Faustformel: 1 Kubikmeter Gas entspricht rund 10 Kilowattstunden. Wie lange dauert der gesamte Wechselprozess?",
    "units": [
     {
      "i": 98,
@@ -672,7 +672,7 @@
      "i": 103,
      "type": "p",
      "lang": "de",
-     "chars": 112
+     "chars": 110
     },
     {
      "i": 104,
@@ -708,7 +708,7 @@
      "i": 109,
      "type": "h3",
      "lang": "de",
-     "chars": 65
+     "chars": 74
     },
     {
      "i": 110,
@@ -720,7 +720,7 @@
      "i": 111,
      "type": "p",
      "lang": "de",
-     "chars": 63
+     "chars": 71
     },
     {
      "i": 112,

@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 208,
- "chars": 18105,
+ "chars": 18102,
  "parts": [
   {
    "index": 0,
@@ -1176,7 +1176,7 @@
   },
   {
    "index": 12,
-   "text": "Dann steht einem entspannten Urlaub nichts mehr im Weg. Drei Regeln sind entscheidend: Vergleiche online. Buche mit Vollkasko ohne Selbstbeteiligung. Lehne Zusatzverkäufe am Schalter konsequent ab. Weiterlesen: Geld sparen im Alltag · Mehr Freiheit durch Verzicht · Pillar: Mietwagen und Reisen · Reisekrankenversicherung: Was wirklich schützt. Häufige Fragen. Gibt es Mietwagen wirklich ohne Kaution? In Einzelfällen bieten deutsche und einige westeuropäische Vermieter gegen einen geringen Aufpreis eine Kautionsbefreiung an (Zero Excess). In klassischen Urlaubsländern wie Spanien oder Italien ist eine komplette Kautionsbefreiung aber selten. Dort sinkt die Kaution auf 100 Euro bis 300 Euro für Tank und Zusatzkosten. Warum wird meine Debitkarte nicht akzeptiert? Viele Vermieter im Ausland fürchten, dass sie Schadensersatzansprüche nicht per Lastschrift einziehen können. Sie verlangen deshalb eine echte Kreditkarte mit Verfügungsrahmen. Steht auf deiner Karte Debit, handelt es sich um keine vollwertige Kreditkarte. Wie lange wird die Kaution blockiert? In der Regel wird die Blockierung innerhalb von 3 bis 21 Werktagen nach ordnungsgemäßer Rückgabe freigegeben. Bei Buchungen im Ausland kann dies in Einzelfällen bis zu 30 Tage dauern. Lohnt sich die Zusatzversicherung am Schalter?",
+   "text": "Dann steht einem entspannten Urlaub nichts mehr im Weg. Drei Regeln sind entscheidend: Vergleiche online. Buche mit Vollkasko ohne Selbstbeteiligung. Lehne Zusatzverkäufe am Schalter konsequent ab. Weiterlesen: Geld sparen im Alltag, Mehr Freiheit durch Verzicht, Pillar: Mietwagen und Reisen, Reisekrankenversicherung: Was wirklich schützt. Häufige Fragen. Gibt es Mietwagen wirklich ohne Kaution? In Einzelfällen bieten deutsche und einige westeuropäische Vermieter gegen einen geringen Aufpreis eine Kautionsbefreiung an (Zero Excess). In klassischen Urlaubsländern wie Spanien oder Italien ist eine komplette Kautionsbefreiung aber selten. Dort sinkt die Kaution auf 100 Euro bis 300 Euro für Tank und Zusatzkosten. Warum wird meine Debitkarte nicht akzeptiert? Viele Vermieter im Ausland fürchten, dass sie Schadensersatzansprüche nicht per Lastschrift einziehen können. Sie verlangen deshalb eine echte Kreditkarte mit Verfügungsrahmen. Steht auf deiner Karte Debit, handelt es sich um keine vollwertige Kreditkarte. Wie lange wird die Kaution blockiert? In der Regel wird die Blockierung innerhalb von 3 bis 21 Werktagen nach ordnungsgemäßer Rückgabe freigegeben. Bei Buchungen im Ausland kann dies in Einzelfällen bis zu 30 Tage dauern. Lohnt sich die Zusatzversicherung am Schalter?",
    "units": [
     {
      "i": 182,
@@ -1200,7 +1200,7 @@
      "i": 185,
      "type": "p",
      "lang": "de",
-     "chars": 146
+     "chars": 143
     },
     {
      "i": 186,

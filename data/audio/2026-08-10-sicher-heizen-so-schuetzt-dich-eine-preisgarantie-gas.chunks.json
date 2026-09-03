@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 110,
- "chars": 11267,
+ "chars": 11296,
  "parts": [
   {
    "index": 0,
@@ -246,7 +246,7 @@
   },
   {
    "index": 3,
-   "text": "Volle Preisgarantie (Fixpreis): Sehr sinnvoll: Häufig mit teurem Sicherheitsaufschlag. Marktanteil bei Neukundentarifen. Zeile 5 von 5. Eingeschränkte Preisgarantie: Optional: Über 90 Prozent aller Angebote. Volle Preisgarantie (Fixpreis): Pflicht: Äußerst selten verfügbar. Ende der Tabelle Eingeschränkte versus volle Gaspreisgarantie im Vergleich. Konkrete Beispiel-Rechnung: Ersparnis bei 20000 Kilowattstunden Verbrauch. Ein typisches Einfamilienhaus verbraucht pro Jahr rund 20000 Kilowattstunden Gas für Raumwärme und Warmwasser. Die folgende Tabelle verdeutlicht den massiven Unterschied zwischen der Grundversorgung und einem optimierten Tarif mit 12 Monaten Preisgarantie: Tabelle: Konkrete Beispiel-Rechnung: Ersparnis bei 20000 Kilowattstunden Verbrauch. Übersicht mit 3 Spalten und 6 Zeilen. Die Spalten lauten: Kostenfaktor, Grundversorgungstarif, Tarif mit Gaspreisgarantie und Bonus. Arbeitspreis pro Kilowattstunden. Zeile 1 von 6. Grundversorgungstarif: 12,80 Cent / Kilowattstunden. Tarif mit Gaspreisgarantie und Bonus: 8,90 Cent / Kilowattstunden. Grundpreis pro Jahr. Zeile 2 von 6. Grundversorgungstarif: 150,00 Euro. Tarif mit Gaspreisgarantie und Bonus: 120,00 Euro. Zwischensumme ohne Rabatte. Zeile 3 von 6. Grundversorgungstarif: 2710,00 Euro. Tarif mit Gaspreisgarantie und Bonus: 1900,00 Euro.",
+   "text": "Volle Preisgarantie (Fixpreis): Sehr sinnvoll: Häufig mit teurem Sicherheitsaufschlag. Marktanteil bei Neukundentarifen. Zeile 5 von 5. Eingeschränkte Preisgarantie: Optional: Über 90 Prozent aller Angebote. Volle Preisgarantie (Fixpreis): Pflicht: Äußerst selten verfügbar. Ende der Tabelle Eingeschränkte versus volle Gaspreisgarantie im Vergleich. Konkrete Beispiel-Rechnung: Ersparnis bei 20000 Kilowattstunden Verbrauch. Ein typisches Einfamilienhaus verbraucht pro Jahr rund 20000 Kilowattstunden Gas für Raumwärme und Warmwasser. Die folgende Tabelle verdeutlicht den massiven Unterschied zwischen der Grundversorgung und einem optimierten Tarif mit 12 Monaten Preisgarantie: Tabelle: Konkrete Beispiel-Rechnung: Ersparnis bei 20000 Kilowattstunden Verbrauch. Übersicht mit 3 Spalten und 6 Zeilen. Die Spalten lauten: Kostenfaktor, Grundversorgungstarif, Tarif mit Gaspreisgarantie und Bonus. Arbeitspreis pro Kilowattstunden. Zeile 1 von 6. Grundversorgungstarif: 12,80 Cent pro Kilowattstunde. Tarif mit Gaspreisgarantie und Bonus: 8,90 Cent pro Kilowattstunde. Grundpreis pro Jahr. Zeile 2 von 6. Grundversorgungstarif: 150,00 Euro. Tarif mit Gaspreisgarantie und Bonus: 120,00 Euro. Zwischensumme ohne Rabatte. Zeile 3 von 6. Grundversorgungstarif: 2710,00 Euro. Tarif mit Gaspreisgarantie und Bonus: 1900,00 Euro.",
    "units": [
     {
      "i": 36,
@@ -306,7 +306,7 @@
      "i": 45,
      "type": "table-row",
      "lang": "de",
-     "chars": 168
+     "chars": 170
     },
     {
      "i": 46,
@@ -324,13 +324,13 @@
   },
   {
    "index": 4,
-   "text": "Neukundenbonus und Sofortbonus. Zeile 4 von 6. Grundversorgungstarif: 0,00 Euro. Tarif mit Gaspreisgarantie und Bonus: - 160,00 Euro. Gesamtkosten im 1. Jahr. Zeile 5 von 6. Grundversorgungstarif: 2710,00 Euro. Tarif mit Gaspreisgarantie und Bonus: 1740,00 Euro. Reale jährliche Ersparnis. Zeile 6 von 6. Grundversorgungstarif: –. Tarif mit Gaspreisgarantie und Bonus: 970,00 Euro Ersparnis. Ende der Tabelle Konkrete Beispiel-Rechnung: Ersparnis bei 20000 Kilowattstunden Verbrauch. Checkliste: Worauf du beim Gasanbieterwechsel achten musst. Punkt 1: Garantiedauer passend zur Laufzeit: Wähle eine Preisgarantie, die mindestens über die gesamte Mindestvertragslaufzeit läuft (zum Beispiel 12 Monate Garantie bei 12 Monaten Erstlaufzeit). Punkt 2: Kurze Kündigungsfristen: Verträge mit einer Frist von 4 bis 6 Wochen zum Laufzeitende garantieren dir maximale Flexibilität für den nächsten Wechsel. Punkt 3: Keine Vorkasse oder Kaution: Schließe niemals Tarife mit jährlicher Vorauszahlung ab. Seriöse Anbieter rechnen immer in monatlichen Abschlägen ab. Punkt 4: Verbrauch genau angeben: Nimm den genauen Kilowattstunden-Verbrauch aus deiner letzten Jahresabrechnung zur Hand. Schätzt du den Verbrauch zu niedrig ein, drohen am Jahresende Nachzahlungen. Wer neben dem Anbieterwechsel auch technische Einsparmöglichkeiten nutzen möchte,",
+   "text": "Neukundenbonus und Sofortbonus. Zeile 4 von 6. Grundversorgungstarif: 0,00 Euro. Tarif mit Gaspreisgarantie und Bonus:minus 160,00 Euro. Gesamtkosten im 1. Jahr. Zeile 5 von 6. Grundversorgungstarif: 2710,00 Euro. Tarif mit Gaspreisgarantie und Bonus: 1740,00 Euro. Reale jährliche Ersparnis. Zeile 6 von 6. Grundversorgungstarif: –. Tarif mit Gaspreisgarantie und Bonus: 970,00 Euro Ersparnis. Ende der Tabelle Konkrete Beispiel-Rechnung: Ersparnis bei 20000 Kilowattstunden Verbrauch. Checkliste: Worauf du beim Gasanbieterwechsel achten musst. Punkt 1: Garantiedauer passend zur Laufzeit: Wähle eine Preisgarantie, die mindestens über die gesamte Mindestvertragslaufzeit läuft (zum Beispiel 12 Monate Garantie bei 12 Monaten Erstlaufzeit). Punkt 2: Kurze Kündigungsfristen: Verträge mit einer Frist von 4 bis 6 Wochen zum Laufzeitende garantieren dir maximale Flexibilität für den nächsten Wechsel. Punkt 3: Keine Vorkasse oder Kaution: Schließe niemals Tarife mit jährlicher Vorauszahlung ab. Seriöse Anbieter rechnen immer in monatlichen Abschlägen ab. Punkt 4: Verbrauch genau angeben: Nimm den genauen Kilowattstunden-Verbrauch aus deiner letzten Jahresabrechnung zur Hand. Schätzt du den Verbrauch zu niedrig ein, drohen am Jahresende Nachzahlungen. Wer neben dem Anbieterwechsel auch technische Einsparmöglichkeiten nutzen möchte,",
    "units": [
     {
      "i": 48,
      "type": "table-row",
      "lang": "de",
-     "chars": 133
+     "chars": 136
     },
     {
      "i": 49,
@@ -402,7 +402,7 @@
   },
   {
    "index": 5,
-   "text": "findet in unserem Ratgeber zu Heizungs-Wartungsfehlern im Spätsommer sowie im Leitfaden zum Finden von Energiedieben im Haushalt und dem Ratgeber: Strom und Gas sparen weitere wertvolle Tipps. Was eine Gaspreisgarantie 2026 wirklich absichert, und was nicht. Eine Preisgarantie ist kein Allheilmittel. Sie friert den Arbeitspreis und oft den Grundpreis für 12 oder 24 Monate ein. Sie friert nicht die gesetzlich veranlassten Bestandteile ein: Mehrwertsteuer, CO₂-Preis, Netzentgelte, wenn der Vertrag das ausdrücklich ausnimmt. Genau deshalb musst du zwischen voller und eingeschränkter Garantie unterscheiden. Eingeschränkt: Der Energieanteil steht fest, staatliche Umlagen dürfen durchgereicht werden. 2022/23 hat das Haushalte kalt erwischt. Voll: Auch Steuern und Umlagen bleiben intern, der Versorger trägt das Risiko, teurer im Stickerpreis, ruhiger in der Abrechnung. Bei 18000 Kilowattstunden Gasverbrauch und 11 Cent Arbeitspreis sind 1980 Euro Energiekosten. Steigt der Markt um 3 Cent, zahlst du ohne Garantie 540 Euro extra. Mit 12-Monats-Vollgarantie bleibt die 1980-Euro-Linie stehen. Die Prämie dafür sitzt im etwas höheren Startpreis, oft 0,4 bis 0,8 Cent. 18000 mal 0,6 Cent ist 108 Euro Versicherungsprämie. Gegen 540 Euro Risiko ist das rechnerisch klar. Drei Situationen, in denen du trotz Garantie wechseln solltest.",
+   "text": "findet in unserem Ratgeber zu Heizungs-Wartungsfehlern im Spätsommer sowie im Leitfaden zum Finden von Energiedieben im Haushalt und dem Ratgeber: Strom und Gas sparen weitere wertvolle Tipps. Was eine Gaspreisgarantie 2026 wirklich absichert, und was nicht. Eine Preisgarantie ist kein Allheilmittel. Sie friert den Arbeitspreis und oft den Grundpreis für 12 oder 24 Monate ein. Sie friert nicht die gesetzlich veranlassten Bestandteile ein: Mehrwertsteuer, CO2-Preis, Netzentgelte, wenn der Vertrag das ausdrücklich ausnimmt. Genau deshalb musst du zwischen voller und eingeschränkter Garantie unterscheiden. Eingeschränkt: Der Energieanteil steht fest, staatliche Umlagen dürfen durchgereicht werden. 2022 bis 23 hat das Haushalte kalt erwischt. Voll: Auch Steuern und Umlagen bleiben intern, der Versorger trägt das Risiko, teurer im Stickerpreis, ruhiger in der Abrechnung. Bei 18000 Kilowattstunden Gasverbrauch und 11 Cent Arbeitspreis sind 1980 Euro Energiekosten. Steigt der Markt um 3 Cent, zahlst du ohne Garantie 540 Euro extra. Mit 12-Monats-Vollgarantie bleibt die 1980-Euro-Linie stehen. Die Prämie dafür sitzt im etwas höheren Startpreis, oft 0,4 bis 0,8 Cent. 18000 mal 0,6 Cent ist 108 Euro Versicherungsprämie. Gegen 540 Euro Risiko ist das rechnerisch klar. Drei Situationen, in denen du trotz Garantie wechseln solltest.",
    "units": [
     {
      "i": 60,
@@ -444,7 +444,7 @@
      "i": 66,
      "type": "p",
      "lang": "de",
-     "chars": 133
+     "chars": 137
     },
     {
      "i": 67,
@@ -486,7 +486,7 @@
   },
   {
    "index": 6,
-   "text": "Punkt 1: Preiserhöhung trotz Garantie. Sonderkündigungsrecht nutzen, schriftlich, Frist im Brief stehen lassen. Screenshot + Einschreiben oder gesicherten E-Mail-Eingang. Punkt 2: Umzug. Viele Garantien gelten nur an der alten Zählernummer. Neuvergleich am neuen Ort, nicht den alten Tarif mitnehmen, wenn der Versorger dort 4 Cent teurer ist. Punkt 3: Bonus-Falle nach 12 Monaten. Der zweite Winter ohne Bonus kann teurer sein als ein neuer Garantie-Tarif mit Bonus. Acht Wochen vor Ablauf neu rechnen. Heiz-Check vor der Saison, der zur Garantie passt. Garantie schützt den Preis, nicht den Verbrauch. 1 °C weniger Raumtemperatur spart rund 6 Prozent Heizenergie. Thermostate entlüften, Heizkörper nicht zustellen, Nachtabsenkung 16 bis 17 °C, Stoßlüften statt kipp. Wer 18000 Kilowattstunden auf 16200 Kilowattstunden drückt, spart bei 11 Cent 198 Euro, on top zur Garantie. Abschlag prüfen: Liegt er 25 Prozent über dem Vorjahresverbrauch × neuem Preis, nach unten anpassen. Sonst kreditierst du den Anbieter. Liegt er zu niedrig, droht die Nachzahlung im Frühjahr, psychologisch der häufigste Grund, warum Menschen Garantien als hat nichts gebracht abtun. Die Garantie hat den Preis gehalten, der Abschlag war falsch kalibriert. Fazit: Mit Preisgarantie sicher und günstig durch den Winter.",
+   "text": "Punkt 1: Preiserhöhung trotz Garantie. Sonderkündigungsrecht nutzen, schriftlich, Frist im Brief stehen lassen. Screenshot + Einschreiben oder gesicherten E-Mail-Eingang. Punkt 2: Umzug. Viele Garantien gelten nur an der alten Zählernummer. Neuvergleich am neuen Ort, nicht den alten Tarif mitnehmen, wenn der Versorger dort 4 Cent teurer ist. Punkt 3: Bonus-Falle nach 12 Monaten. Der zweite Winter ohne Bonus kann teurer sein als ein neuer Garantie-Tarif mit Bonus. Acht Wochen vor Ablauf neu rechnen. Heiz-Check vor der Saison, der zur Garantie passt. Garantie schützt den Preis, nicht den Verbrauch. 1 Grad Celsius weniger Raumtemperatur spart rund 6 Prozent Heizenergie. Thermostate entlüften, Heizkörper nicht zustellen, Nachtabsenkung 16 bis 17 Grad Celsius, Stoßlüften statt kipp. Wer 18000 Kilowattstunden auf 16200 Kilowattstunden drückt, spart bei 11 Cent 198 Euro, on top zur Garantie. Abschlag prüfen: Liegt er 25 Prozent über dem Vorjahresverbrauch mal neuem Preis, nach unten anpassen. Sonst kreditierst du den Anbieter. Liegt er zu niedrig, droht die Nachzahlung im Frühjahr, psychologisch der häufigste Grund, warum Menschen Garantien als hat nichts gebracht abtun. Die Garantie hat den Preis gehalten, der Abschlag war falsch kalibriert. Fazit: Mit Preisgarantie sicher und günstig durch den Winter.",
    "units": [
     {
      "i": 73,
@@ -534,13 +534,13 @@
      "i": 80,
      "type": "p",
      "lang": "de",
-     "chars": 110
+     "chars": 120
     },
     {
      "i": 81,
      "type": "p",
      "lang": "de",
-     "chars": 102
+     "chars": 112
     },
     {
      "i": 82,
@@ -552,7 +552,7 @@
      "i": 83,
      "type": "p",
      "lang": "de",
-     "chars": 135
+     "chars": 137
     },
     {
      "i": 84,
@@ -576,7 +576,7 @@
   },
   {
    "index": 7,
-   "text": "Eine Gaspreisgarantie schützt dich vor bösen finanziellen Überraschungen bei der nächsten Heizkostenabrechnung und bringt dir echte Planungssicherheit. Da ein Gasanbieterwechsel online in wenigen Minuten erledigt ist und der neue Versorger die Kündigung beim Vorversorger übernimmt, sparst du hunderte Euro im Jahr ohne jeglichen bürokratischen Aufwand. Weiterlesen: Ratgeber Strom und Gas sparen · Preisgarantie Gas: So sicherst du günstige Tarife für 2026 · Gasrechnung senken: Fehler im Spätsommer vermeiden. Häufige Fragen. Was bedeutet eine Gaspreisgarantie? Eine Gaspreisgarantie ist eine vertragliche Vereinbarung, bei der Energieversorger zusichert, den Arbeitspreis (pro Kilowattstunden) und den Grundpreis für einen bestimmten Zeitraum nicht zu erhöhen. Was passiert bei einer Gaspreiserhöhung trotz Preisgarantie? Erhöht ein Anbieter außerhalb der Garantiebedingungen die Preise (oder steigen Steuern bei einer eingeschränkten Garantie), hast du nach Paragraf 41 Absatz 5 EnWG ein gesetzliches Sonderkündigungsrecht und kannst den Vertrag fristlos beenden. Wie lange sollte eine Preisgarantie laufen? Für die meisten Haushalte ist eine Laufzeit von 12 Monaten ideal. So bist du für die gesamte Heizperiode abgesichert und kannst nach einem Jahr erneut die Konditionen vergleichen. Kann die Gasversorgung beim Anbieterwechsel unterbrochen werden?",
+   "text": "Eine Gaspreisgarantie schützt dich vor bösen finanziellen Überraschungen bei der nächsten Heizkostenabrechnung und bringt dir echte Planungssicherheit. Da ein Gasanbieterwechsel online in wenigen Minuten erledigt ist und der neue Versorger die Kündigung beim Vorversorger übernimmt, sparst du hunderte Euro im Jahr ohne jeglichen bürokratischen Aufwand. Weiterlesen: Ratgeber Strom und Gas sparen, Preisgarantie Gas: So sicherst du günstige Tarife für 2026, Gasrechnung senken: Fehler im Spätsommer vermeiden. Häufige Fragen. Was bedeutet eine Gaspreisgarantie? Eine Gaspreisgarantie ist eine vertragliche Vereinbarung, bei der Energieversorger zusichert, den Arbeitspreis (pro Kilowattstunden) und den Grundpreis für einen bestimmten Zeitraum nicht zu erhöhen. Was passiert bei einer Gaspreiserhöhung trotz Preisgarantie? Erhöht ein Anbieter außerhalb der Garantiebedingungen die Preise (oder steigen Steuern bei einer eingeschränkten Garantie), hast du nach Paragraf 41 Absatz 5 EnWG ein gesetzliches Sonderkündigungsrecht und kannst den Vertrag fristlos beenden. Wie lange sollte eine Preisgarantie laufen? Für die meisten Haushalte ist eine Laufzeit von 12 Monaten ideal. So bist du für die gesamte Heizperiode abgesichert und kannst nach einem Jahr erneut die Konditionen vergleichen. Kann die Gasversorgung beim Anbieterwechsel unterbrochen werden?",
    "units": [
     {
      "i": 87,
@@ -600,7 +600,7 @@
      "i": 90,
      "type": "p",
      "lang": "de",
-     "chars": 157
+     "chars": 155
     },
     {
      "i": 91,

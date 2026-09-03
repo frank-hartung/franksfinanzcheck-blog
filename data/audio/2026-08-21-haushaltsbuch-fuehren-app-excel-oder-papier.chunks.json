@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 145,
- "chars": 13341,
+ "chars": 13361,
  "parts": [
   {
    "index": 0,
@@ -402,7 +402,7 @@
   },
   {
    "index": 4,
-   "text": "Klingt altmodisch, funktioniert aber nach wie vor, besonders dann, wenn du nur ein Girokonto hast und Ausgaben meist bar begleichst. Ein einfaches Heft mit zwei Spalten pro Tag (Einnahme, Ausgabe) und einem Wochenabschluss reicht völlig. Vorteile: keine Technik, keine Datenweitergabe, und der körperliche Akt des Schreibens macht Ausgaben bewusster. Nachteile: keine automatischen Auswertungen, höherer Zeitaufwand und für Kartenzahler umständlicher. Der direkte Vergleich: Welche Methode passt zu dir? Tabelle: Der direkte Vergleich: Welche Methode passt zu dir. Übersicht mit 4 Spalten und 9 Zeilen. Die Spalten lauten: Kriterium, App, Excel / Sheets, Stift und Papier. Einrichtungsaufwand. Zeile 1 von 9. App: gering (10 Minuten). Excel / Sheets: hoch (2 bis 4 Stunden). Stift und Papier: minimal. Zeit pro Woche. Zeile 2 von 9. App: circa 5 bis 10 Minuten. Excel / Sheets: circa 15 bis 25 Minuten. Stift und Papier: circa 20 bis 30 Minuten. Datenhoheit. Zeile 3 von 9. App: bei Drittanbieter. Excel / Sheets: bei dir selbst. Stift und Papier: vollständig bei dir. Automatische Auswertung. Zeile 4 von 9. App. Excel / Sheets: (Pivot). Stift und Papier. Mehrere Konten. Zeile 5 von 9. App. Excel / Sheets. Stift und Papier: umständlich. Push-Erinnerung. Zeile 6 von 9. App. Excel / Sheets. Stift und Papier.",
+   "text": "Klingt altmodisch, funktioniert aber nach wie vor, besonders dann, wenn du nur ein Girokonto hast und Ausgaben meist bar begleichst. Ein einfaches Heft mit zwei Spalten pro Tag (Einnahme, Ausgabe) und einem Wochenabschluss reicht völlig. Vorteile: keine Technik, keine Datenweitergabe, und der körperliche Akt des Schreibens macht Ausgaben bewusster. Nachteile: keine automatischen Auswertungen, höherer Zeitaufwand und für Kartenzahler umständlicher. Der direkte Vergleich: Welche Methode passt zu dir? Tabelle: Der direkte Vergleich: Welche Methode passt zu dir. Übersicht mit 4 Spalten und 9 Zeilen. Die Spalten lauten: Kriterium, App, Excel oder Sheets, Stift und Papier. Einrichtungsaufwand. Zeile 1 von 9. App: gering (10 Minuten). Excel oder Sheets: hoch (2 bis 4 Stunden). Stift und Papier: minimal. Zeit pro Woche. Zeile 2 von 9. App: circa 5 bis 10 Minuten. Excel oder Sheets: circa 15 bis 25 Minuten. Stift und Papier: circa 20 bis 30 Minuten. Datenhoheit. Zeile 3 von 9. App: bei Drittanbieter. Excel oder Sheets: bei dir selbst. Stift und Papier: vollständig bei dir. Automatische Auswertung. Zeile 4 von 9. App. Excel oder Sheets: (Pivot). Stift und Papier. Mehrere Konten. Zeile 5 von 9. App. Excel oder Sheets. Stift und Papier: umständlich. Push-Erinnerung. Zeile 6 von 9. App. Excel oder Sheets. Stift und Papier.",
    "units": [
     {
      "i": 61,
@@ -444,67 +444,67 @@
      "i": 67,
      "type": "table-intro",
      "lang": "de",
-     "chars": 69
+     "chars": 72
     },
     {
      "i": 68,
      "type": "table-row",
      "lang": "de",
-     "chars": 128
+     "chars": 131
     },
     {
      "i": 69,
      "type": "table-row",
      "lang": "de",
-     "chars": 143
+     "chars": 146
     },
     {
      "i": 70,
      "type": "table-row",
      "lang": "de",
-     "chars": 122
+     "chars": 125
     },
     {
      "i": 71,
      "type": "table-row",
      "lang": "de",
-     "chars": 87
+     "chars": 90
     },
     {
      "i": 72,
      "type": "table-row",
      "lang": "de",
-     "chars": 82
+     "chars": 85
     },
     {
      "i": 73,
      "type": "table-row",
      "lang": "de",
-     "chars": 70
+     "chars": 73
     }
    ]
   },
   {
    "index": 5,
-   "text": "Für Kartenzahler. Zeile 7 von 9. App. Excel / Sheets. Stift und Papier: Wichtiger Hinweis. Für Barzahler. Zeile 8 von 9. App: Wichtiger Hinweis. Excel / Sheets. Stift und Papier. Kosten. Zeile 9 von 9. App: 0 bis 8 Euro monatlich. Excel / Sheets: 0 Euro. Stift und Papier: 0 Euro. Ende der Tabelle Der direkte Vergleich: Welche Methode passt zu dir. Das 50 bis 30-20-Prinzip: Drei Töpfe statt 30 Kategorien. Viele Menschen geben das Haushaltsbuch nach wenigen Wochen wieder auf, weil sie versuchen, jede einzelne Ausgabe bis auf den Cent zu verfolgen. Nachhaltiger ist ein top-down-Budget nach der 50 bis 30–20-Regel: 50 Prozent des Nettoeinkommens führt zu Fixkosten und Bedürfnisse: Miete, Energie, Lebensmittel, Versicherungen, ÖPNV-Ticket, notwendige Abos. 30 Prozent führt zu Wünsche und Freizeit: Restaurantbesuche, Urlaub, Streaming, Shopping, Hobbys. 20 Prozent führt zu Sparen und Vermögensaufbau: Notgroschen auf dem Tagesgeldkonto, E T F-Sparplan, Sondertilgung. Bei einem Nettoeinkommen von 2500 Euro bedeutet das: 1250 Euro Fixkosten, 750 Euro Freizeit, 500 Euro Sparrate. Wer die Fixkosten durch einen kostenlosen Girokonto-Wechsel, Versicherungs- und Energievergleiche auf 1000 Euro drückt, kann die Sparrate auf 750 Euro erhöhen. Am Lebensstandard muss sich nichts ändern. Schritt-für-Schritt-Anleitung für deinen ersten Monat.",
+   "text": "Für Kartenzahler. Zeile 7 von 9. App. Excel oder Sheets. Stift und Papier: Wichtiger Hinweis. Für Barzahler. Zeile 8 von 9. App: Wichtiger Hinweis. Excel oder Sheets. Stift und Papier. Kosten. Zeile 9 von 9. App: 0 bis 8 Euro monatlich. Excel oder Sheets: 0 Euro. Stift und Papier: 0 Euro. Ende der Tabelle Der direkte Vergleich: Welche Methode passt zu dir. Das 50-30-20-Prinzip: Drei Töpfe statt 30 Kategorien. Viele Menschen geben das Haushaltsbuch nach wenigen Wochen wieder auf, weil sie versuchen, jede einzelne Ausgabe bis auf den Cent zu verfolgen. Nachhaltiger ist ein top-down-Budget nach der 50 bis 30–20-Regel: 50 Prozent des Nettoeinkommens führt zu Fixkosten und Bedürfnisse: Miete, Energie, Lebensmittel, Versicherungen, ÖPNV-Ticket, notwendige Abos. 30 Prozent führt zu Wünsche und Freizeit: Restaurantbesuche, Urlaub, Streaming, Shopping, Hobbys. 20 Prozent führt zu Sparen und Vermögensaufbau: Notgroschen auf dem Tagesgeldkonto, E T F-Sparplan, Sondertilgung. Bei einem Nettoeinkommen von 2500 Euro bedeutet das: 1250 Euro Fixkosten, 750 Euro Freizeit, 500 Euro Sparrate. Wer die Fixkosten durch einen kostenlosen Girokonto-Wechsel, Versicherungs- und Energievergleiche auf 1000 Euro drückt, kann die Sparrate auf 750 Euro erhöhen. Am Lebensstandard muss sich nichts ändern. Schritt-für-Schritt-Anleitung für deinen ersten Monat.",
    "units": [
     {
      "i": 74,
      "type": "table-row",
      "lang": "de",
-     "chars": 90
+     "chars": 93
     },
     {
      "i": 75,
      "type": "table-row",
      "lang": "de",
-     "chars": 87
+     "chars": 90
     },
     {
      "i": 76,
      "type": "table-row",
      "lang": "de",
-     "chars": 101
+     "chars": 104
     },
     {
      "i": 77,
@@ -516,7 +516,7 @@
      "i": 78,
      "type": "h2",
      "lang": "de",
-     "chars": 57
+     "chars": 53
     },
     {
      "i": 79,
@@ -750,7 +750,7 @@
   },
   {
    "index": 8,
-   "text": "Fazit: Das passende Haushaltsbuch ist das, das du auch wirklich nutzt. Ob App, Excel oder Papier, der entscheidende Erfolgsfaktor ist nicht das Werkzeug, sondern die Gewohnheit. Meine klare Empfehlung nach acht Jahren eigener Buchführung: Starte mit der integrierten Ausgabenanalyse deiner Banking-App. Sie kostet dich nichts, nimmt dir den größten Teil der Arbeit ab und liefert dir in der ersten Woche bereits belastbare Erkenntnisse. Wenn du später mehr Tiefe und Kontrolle willst, kannst du jederzeit auf eine Excel-Tabelle umsteigen. Wichtig ist nur eines: Fange heute damit an. Ein Monat ohne Haushaltsbuch ist ein Monat, in dir womöglich hunderte Euro durch die Finger rinnen. Weiterlesen: Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht · Geld sparen im Alltag: Einfache Tipps, die jeder umsetzen kann · Pillar: Konto und Karten. Häufige Fragen. Was ist die passende kostenlose Haushaltsbuch-App? Für die meisten Nutzer ist die in das Girokonto integrierte Ausgabenanalyse die passende kostenlose Lösung, etwa bei C24, DKB oder ING (Details und Vergleich im Ratgeber zum kostenlosen Girokonto). Wer eine separate App bevorzugt, findet mit Out of Milk, Budget Planner oder Moneypilot solide Gratis-Angebote. Wie lange sollte man ein Haushaltsbuch führen? Mindestens drei Monate, um ein realistisches Bild der eigenen Ausgaben zu erhalten.",
+   "text": "Fazit: Das passende Haushaltsbuch ist das, das du auch wirklich nutzt. Ob App, Excel oder Papier, der entscheidende Erfolgsfaktor ist nicht das Werkzeug, sondern die Gewohnheit. Meine klare Empfehlung nach acht Jahren eigener Buchführung: Starte mit der integrierten Ausgabenanalyse deiner Banking-App. Sie kostet dich nichts, nimmt dir den größten Teil der Arbeit ab und liefert dir in der ersten Woche bereits belastbare Erkenntnisse. Wenn du später mehr Tiefe und Kontrolle willst, kannst du jederzeit auf eine Excel-Tabelle umsteigen. Wichtig ist nur eines: Fange heute damit an. Ein Monat ohne Haushaltsbuch ist ein Monat, in dir womöglich hunderte Euro durch die Finger rinnen. Weiterlesen: Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht, Geld sparen im Alltag: Einfache Tipps, die jeder umsetzen kann, Pillar: Konto und Karten. Häufige Fragen. Was ist die passende kostenlose Haushaltsbuch-App? Für die meisten Nutzer ist die in das Girokonto integrierte Ausgabenanalyse die passende kostenlose Lösung, etwa bei C24, DKB oder ING (Details und Vergleich im Ratgeber zum kostenlosen Girokonto). Wer eine separate App bevorzugt, findet mit Out of Milk, Budget Planner oder Moneypilot solide Gratis-Angebote. Wie lange sollte man ein Haushaltsbuch führen? Mindestens drei Monate, um ein realistisches Bild der eigenen Ausgaben zu erhalten.",
    "units": [
     {
      "i": 115,
@@ -798,7 +798,7 @@
      "i": 122,
      "type": "p",
      "lang": "de",
-     "chars": 160
+     "chars": 158
     },
     {
      "i": 123,
@@ -840,7 +840,7 @@
   },
   {
    "index": 9,
-   "text": "Wer dauerhaft sparen möchte, führt es am attraktiven lebenslang weiter, nach der Eingewöhnung wird es zur 5-Minuten-Routine pro Woche. Ist die 50 bis 30-20-Regel realistisch? Ja, aber die 50-Prozent-Vorgabe für Fixkosten hängt stark von Miete und Wohnort ab. In teuren Städten darf der Fixkosten-Anteil auch 55 bis 60 Prozent betragen. Wichtig ist, dass die Sparrate dauerhaft bei mindestens 10 bis 20 Prozent liegt. Wie sicher sind Haushaltsbuch-Apps? Seriöse Anbieter nutzen die PSD2-Bankschnittstelle und haben nur Lesezugriff auf deine Umsätze, sie können keine Überweisungen auslösen. Achte auf eine Bafin-Zulassung, SSL-Verschlüsselung und eine transparente Datenschutzerklärung. Kann ich auch als Paar ein gemeinsames Haushaltsbuch führen? Absolut. Viele Apps unterstützen gemeinsame Konten, und in Excel lassen sich gemeinsame und private Ausgaben über getrennte Spalten sauber abbilden. Wichtig ist nur, dass beide Partner sich an dieselben Kategorien und Budgets halten. Jetzt vergleichen und sparen: führt zu Kostenloses Girokonto mit Haushaltsbuch vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "text": "Wer dauerhaft sparen möchte, führt es am attraktiven lebenslang weiter, nach der Eingewöhnung wird es zur 5-Minuten-Routine pro Woche. Ist die 50-30-20-Regel realistisch? Ja, aber die 50-Prozent-Vorgabe für Fixkosten hängt stark von Miete und Wohnort ab. In teuren Städten darf der Fixkosten-Anteil auch 55 bis 60 Prozent betragen. Wichtig ist, dass die Sparrate dauerhaft bei mindestens 10 bis 20 Prozent liegt. Wie sicher sind Haushaltsbuch-Apps? Seriöse Anbieter nutzen die PSD2-Bankschnittstelle und haben nur Lesezugriff auf deine Umsätze, sie können keine Überweisungen auslösen. Achte auf eine Bafin-Zulassung, SSL-Verschlüsselung und eine transparente Datenschutzerklärung. Kann ich auch als Paar ein gemeinsames Haushaltsbuch führen? Absolut. Viele Apps unterstützen gemeinsame Konten, und in Excel lassen sich gemeinsame und private Ausgaben über getrennte Spalten sauber abbilden. Wichtig ist nur, dass beide Partner sich an dieselben Kategorien und Budgets halten. Jetzt vergleichen und sparen: führt zu Kostenloses Girokonto mit Haushaltsbuch vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
    "units": [
     {
      "i": 129,
@@ -852,7 +852,7 @@
      "i": 130,
      "type": "h3",
      "lang": "de",
-     "chars": 39
+     "chars": 35
     },
     {
      "i": 131,

@@ -341,6 +341,59 @@
       return u.replace(/\./g, ' Punkt ') + (lang === 'en' ? ' at ' : ' at ') + d.replace(/\./g, ' Punkt ');
     });
 
+    /* --- Fachzeichen: im Sichttext korrekt, gesprochen bedeutungslos ---
+       Diese Zeichen sind in der Seite richtig gesetzt und bleiben dort
+       unverändert. Viele Sprachengines überlesen sie aber oder
+       buchstabieren sie – und dann bricht der Satz zusammen:
+       „2,7 Cent × 20000 kWh" ohne das „mal" ergibt keinen Sinn mehr,
+       „CO₂" wird zu „CO", „90 m²" zu „90 m". Also konsequent
+       ausschreiben, bevor gesprochen wird. */
+    s = s.replace(/km²/g, lang === 'en' ? ' square kilometers' : ' Quadratkilometer');
+    s = s.replace(/(\d)\s*[-–]?\s*m²\b/g, '$1' + (lang === 'en' ? ' square meters' : ' Quadratmeter'));
+    s = s.replace(/m²/g, lang === 'en' ? ' square meters' : ' Quadratmeter');
+    s = s.replace(/(\d)\s*[-–]?\s*m³\b/g, '$1' + (lang === 'en' ? ' cubic meters' : ' Kubikmeter'));
+    s = s.replace(/m³/g, lang === 'en' ? ' cubic meters' : ' Kubikmeter');
+    s = s.replace(/°\s*C\b/g, lang === 'en' ? ' degrees Celsius' : ' Grad Celsius');
+    s = s.replace(/°/g, lang === 'en' ? ' degrees' : ' Grad');
+    s = s.replace(/[₀₁₂₃₄₅₆₇₈₉]/g, function (m) {
+      return String('₀₁₂₃₄₅₆₇₈₉'.indexOf(m));
+    });
+    s = s.replace(/[²³¹]/g, function (m) {
+      return lang === 'en' ? ' to the power of ' + String('¹²³'.indexOf(m) + 1)
+                           : ' hoch ' + String('¹²³'.indexOf(m) + 1);
+    });
+    s = s.replace(/×/g, lang === 'en' ? ' times ' : ' mal ');
+    s = s.replace(/−/g, lang === 'en' ? ' minus ' : ' minus ');
+    s = s.replace(/·/g, ', ');
+    s = s.replace(/Ø\s*/g, lang === 'en' ? 'average ' : 'Durchschnitt ');
+    s = s.replace(/\bà\s+(?=\d)/g, lang === 'en' ? 'at ' : 'je ');
+    s = s.replace(/\u2011/g, '-');            // trennfester Bindestrich -> normal
+
+    /* Führendes Minus ist ein Vorzeichen, kein Gedankenstrich.
+       „Bonus: - 180,00 Euro (Gutschrift)" muss als „minus 180,00 Euro"
+       gesprochen werden – sonst klingt eine Gutschrift wie eine
+       zusätzliche Forderung. */
+    s = s.replace(/(^|[\s:(])\s*-\s*(?=\d)/g, '$1' + (lang === 'en' ? 'minus ' : 'minus '));
+
+    /* --- Schrägstrich: „pro", „bis", „und" oder „oder" je nach Kontext --- */
+    s = s.replace(/\/s\b/g, lang === 'en' ? ' per second' : ' pro Sekunde');
+    s = s.replace(/\s*\/\s*Kilowattstunden?\b/gi, lang === 'en' ? ' per kilowatt hour' : ' pro Kilowattstunde');
+    s = s.replace(/\s*\/\s*(kWh|Kilowattstunde)\b/gi, lang === 'en' ? ' per kilowatt hour' : ' pro Kilowattstunde');
+    s = s.replace(/\bVoll\s*\/\s*(Voll|Leer)\b/gi, '$1 zu $1');
+    s = s.replace(/Download\s*\/\s*Upload/gi, lang === 'en' ? 'download and upload' : 'Download und Upload');
+    s = s.replace(/TCP\s*\/\s*(IPv\d)/gi, 'TCP $1');
+    s = s.replace(/Mobiles Netz\s*\/\s*Datennutzung/gi, 'Mobiles Netz, dann Datennutzung');
+    s = s.replace(/\b(\d{4})\s*\/\s*(\d{2,4})\b/g, '$1' + (lang === 'en' ? ' to ' : ' bis ') + '$2');
+    s = s.replace(/(\d)\s*\/\s*(?=\d)/g, '$1' + (lang === 'en' ? ' and ' : ' und '));
+    s = s.replace(/([A-Za-zäöüßÄÖÜ])\s*\/\s*(?=[A-Za-zäöüßÄÖÜ])/g, '$1' + (lang === 'en' ? ' or ' : ' oder '));
+
+    /* Zahlenreihen mit drei oder mehr Gliedern sind Eigennamen, keine
+       Zahlenbereiche: Aus der „50-30-20-Regel" machte die Bereichsregel
+       „50 bis 30-20-Regel". Geschützt bis zum Ende der Normalisierung. */
+    s = s.replace(/\b\d{1,3}(?:-\d{1,3}){2,}\b/g, function (m) {
+      return m.replace(/-/g, '\u0003');
+    });
+
     /* --- Deutsche Zahlformatierung sprechbar machen --- */
     if (lang !== 'en') {
       // Tausenderpunkte entfernen: 1.250,50 -> 1250,50
@@ -569,6 +622,7 @@
     s = s.replace(/[*_`~#|]+/g, ' ');
     s = s.replace(/\(\s*\)/g, ' ');
     s = s.replace(/\b(Tipp|Hinweis|Achtung|Wichtiger Hinweis|Tip|Note|Warning):\s*\1:/gi, '$1:');
+    s = s.replace(/\u0003/g, '-');   // geschützte Zahlenreihen (50-30-20)
     s = s.replace(/\s+([,.;:!?…])/g, '$1');
     s = s.replace(/([,.;:!?…]){2,}/g, '$1');
     s = s.replace(/\s+/g, ' ').trim();

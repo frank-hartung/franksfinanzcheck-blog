@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 98,
- "chars": 9919,
+ "chars": 10025,
  "parts": [
   {
    "index": 0,
@@ -90,7 +90,7 @@
   },
   {
    "index": 1,
-   "text": "Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Heimliche Energiediebe stoppen: Die Top 7 Stromfresser im Haushalt. Um gezielt Strom zu sparen und Energiediebe zu stoppen, musst du wissen, wo im Haus die meiste Energie verpufft: Punkt 1: Veraltete Kühl- und Gefriergeräte (15+ Jahre alt): Ein alter Kühlschrank ohne Abtauautomatik verbraucht oft 330 bis 400 Kilowattstunden pro Jahr (circa 115 Euro bis 140 Euro), während ein modernes A-Klasse-Gerät mit 110 Kilowattstunden (circa 38 Euro) auskommt. Punkt 2: Ungeregelte Heizungspumpen im Keller: Alte Standardpumpen laufen ununterbrochen auf voller Leistung (bis zu 800 Kilowattstunden pro Jahr, circa 280 Euro). Eine moderne Hocheffizienzpumpe benötigt unter 100 Kilowattstunden (35 Euro). Punkt 3: Standby-Verbraucher im Wohnzimmer: Fernseher, Soundbars, Spielekonsolen und Streaming-Boxen ziehen im Ruhezustand kontinuierlich 10 bis 30 Watt (circa 60 Euro bis 100 Euro pro Jahr). Punkt 4: Elektrische Warmwasser-Boiler und Durchlauferhitzer: Veraltete hydraulische Geräte heizen Wasser unkontrolliert auf, statt elektronisch exakt 38 °C zu halten. Punkt 5: Wäschetrockner mit Kondenstechnik: Alte Kondenstrockner benötigen pro Trocknungsgang circa 3,5 bis 4,5 Kilowattstunden. Moderne Wärmepumpentrockner begnügen sich mit 1,3 Kilowattstunden.",
+   "text": "Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Heimliche Energiediebe stoppen: Die Top 7 Stromfresser im Haushalt. Um gezielt Strom zu sparen und Energiediebe zu stoppen, musst du wissen, wo im Haus die meiste Energie verpufft: Punkt 1: Veraltete Kühl- und Gefriergeräte (15+ Jahre alt): Ein alter Kühlschrank ohne Abtauautomatik verbraucht oft 330 bis 400 Kilowattstunden pro Jahr (circa 115 Euro bis 140 Euro), während ein modernes A-Klasse-Gerät mit 110 Kilowattstunden (circa 38 Euro) auskommt. Punkt 2: Ungeregelte Heizungspumpen im Keller: Alte Standardpumpen laufen ununterbrochen auf voller Leistung (bis zu 800 Kilowattstunden oder Jahr, circa 280 Euro). Eine moderne Hocheffizienzpumpe benötigt unter 100 Kilowattstunden (35 Euro). Punkt 3: Standby-Verbraucher im Wohnzimmer: Fernseher, Soundbars, Spielekonsolen und Streaming-Boxen ziehen im Ruhezustand kontinuierlich 10 bis 30 Watt (circa 60 Euro bis 100 Euro pro Jahr). Punkt 4: Elektrische Warmwasser-Boiler und Durchlauferhitzer: Veraltete hydraulische Geräte heizen Wasser unkontrolliert auf, statt elektronisch exakt 38 Grad Celsius zu halten. Punkt 5: Wäschetrockner mit Kondenstechnik: Alte Kondenstrockner benötigen pro Trocknungsgang circa 3,5 bis 4,5 Kilowattstunden. Moderne Wärmepumpentrockner begnügen sich mit 1,3 Kilowattstunden.",
    "units": [
     {
      "i": 12,
@@ -132,7 +132,7 @@
      "i": 18,
      "type": "li",
      "lang": "de",
-     "chars": 163
+     "chars": 164
     },
     {
      "i": 19,
@@ -150,7 +150,7 @@
      "i": 21,
      "type": "li",
      "lang": "de",
-     "chars": 167
+     "chars": 177
     },
     {
      "i": 22,
@@ -234,7 +234,7 @@
   },
   {
    "index": 3,
-   "text": "deutet das auf eine veraltete Trafo-Technik hin, die kontinuierlich Strom in ungenutzte Abwärme verwandelt. Tausche solche Netzteile zeitnah gegen moderne Schaltnetzteile aus. Einsparpotenziale im direkten Vergleich. Kühl-Gefrier-Kombination: vorher 350 Kilowattstunden, 122,50 Euro pro Jahr; nachher Neugerät, 110 Kilowattstunden ist 38,50 Euro; Ersparnis 84,00 Euro. Hocheffizienz-Heizungspumpe: vorher 600 Kilowattstunden, 210,00 Euro pro Jahr; nachher Hocheffizienz, 80 Kilowattstunden ist 28,00 Euro; Ersparnis 182,00 Euro. Schaltbare Steckerleisten (Standby): vorher 220 Kilowattstunden, 77,00 Euro pro Jahr; nachher Ausgeschaltet, 0 Kilowattstunden; Ersparnis 77,00 Euro. Komplette LED-Umrüstung (15 Lampen): vorher 280 Kilowattstunden, 98,00 Euro pro Jahr; nachher LED, 40 Kilowattstunden ist 14,00 Euro; Ersparnis 84,00 Euro. Summe der Maßnahmen: vorher 1450 Kilowattstunden, 507,50 Euro pro Jahr; nachher 230 Kilowattstunden, 80,50 Euro pro Jahr; Ersparnis 427,00 Euro pro Jahr. Hinweis: Berechnungsbasis: 35 Cent pro Kilowattstunde Strom. Die 4 wirksamsten Sofort-Hacks gegen hohe Stromrechnungen. Punkt 1: Master-Slave- und Fußschalter-Steckdosenleisten: Schließe TV, Receiver und Soundsystem an eine Leiste an, die sich per Tastendruck komplett stromlos schalten lässt. Punkt 2: Kühlschrank-Temperatur auf 7 °C einstellen: 7 °C im oberen Fach reichen für Frische vollkommen aus.",
+   "text": "deutet das auf eine veraltete Trafo-Technik hin, die kontinuierlich Strom in ungenutzte Abwärme verwandelt. Tausche solche Netzteile zeitnah gegen moderne Schaltnetzteile aus. Einsparpotenziale im direkten Vergleich. Kühl-Gefrier-Kombination: vorher 350 Kilowattstunden, 122,50 Euro pro Jahr; nachher Neugerät, 110 Kilowattstunden ist 38,50 Euro; Ersparnis 84,00 Euro. Hocheffizienz-Heizungspumpe: vorher 600 Kilowattstunden, 210,00 Euro pro Jahr; nachher Hocheffizienz, 80 Kilowattstunden ist 28,00 Euro; Ersparnis 182,00 Euro. Schaltbare Steckerleisten (Standby): vorher 220 Kilowattstunden, 77,00 Euro pro Jahr; nachher Ausgeschaltet, 0 Kilowattstunden; Ersparnis 77,00 Euro. Komplette LED-Umrüstung (15 Lampen): vorher 280 Kilowattstunden, 98,00 Euro pro Jahr; nachher LED, 40 Kilowattstunden ist 14,00 Euro; Ersparnis 84,00 Euro. Summe der Maßnahmen: vorher 1450 Kilowattstunden, 507,50 Euro pro Jahr; nachher 230 Kilowattstunden, 80,50 Euro pro Jahr; Ersparnis 427,00 Euro pro Jahr. Hinweis: Berechnungsbasis: 35 Cent pro Kilowattstunde Strom. Die 4 wirksamsten Sofort-Hacks gegen hohe Stromrechnungen. Punkt 1: Master-Slave- und Fußschalter-Steckdosenleisten: Schließe TV, Receiver und Soundsystem an eine Leiste an, die sich per Tastendruck komplett stromlos schalten lässt.",
    "units": [
     {
      "i": 34,
@@ -301,19 +301,19 @@
      "type": "li",
      "lang": "de",
      "chars": 173
-    },
-    {
-     "i": 45,
-     "type": "li",
-     "lang": "de",
-     "chars": 108
     }
    ]
   },
   {
    "index": 4,
-   "text": "Jedes Grad kühler erhöht den Strombedarf um circa 6 Prozent. Regelmäßiges Abtauen des Gefrierfachs verhindert dicke Eisschichten. Punkt 3: Eco-Programme bei Waschmaschine und Spülmaschine nutzen: Die Eco-Programme dauern zwar länger, heizen das Wasser aber schonender und verbrauchen bis zu 40 Prozent weniger Strom. Punkt 4: Stromanbieter regelmäßig wechseln: Wer zusätzlich seinen Arbeitspreis von 42 Cent (Grundversorgung) auf 28 Cent (Wettbewerbstarif mit Preisgarantie) senkt, spart bei 3500 Kilowattstunden Jahresverbrauch weitere 490 Euro pro Jahr ein. Ein kurzer Wechselprozess im Online-Tarifvergleich lohnt sich in jedem Fall. Praktische Anleitungen zur jahreszeitlichen Fixkostenoptimierung findest du in unserem Überblick zum Stromsparen im Herbst sowie in unserem umfassenden Pillar-Artikel zu Strom und Gas. Messen in einer Woche, das Protokoll, das Schätzungen ersetzt. Tag 1: Kühlschrank 24 Stunden. Tag 2: Gefriertruhe. Tag 3: Desktop-PC inklusive Monitor und Dock im Alltag. Tag 4: TV-Ecke Standby über Nacht. Tag 5: Waschmaschine ein Eco-Gang versus 60 °C. Tag 6: Trockner ein Vollgang. Tag 7: Alles, was immer an ist (Pumpe, NAS, alter Decoder). Formel: gemessene Watt × Stunden × 365 / 1000 × Arbeitspreis. 12 Watt Dauerbetrieb ist 105 Kilowattstunden ungefähr 32 bis 38 Euro im Jahr. Fünf solche Geräte sind ein Restaurantbesuch pro Monat, unsichtbar.",
+   "text": "Punkt 2: Kühlschrank-Temperatur auf 7 Grad Celsius einstellen: 7 Grad Celsius im oberen Fach reichen für Frische vollkommen aus. Jedes Grad kühler erhöht den Strombedarf um circa 6 Prozent. Regelmäßiges Abtauen des Gefrierfachs verhindert dicke Eisschichten. Punkt 3: Eco-Programme bei Waschmaschine und Spülmaschine nutzen: Die Eco-Programme dauern zwar länger, heizen das Wasser aber schonender und verbrauchen bis zu 40 Prozent weniger Strom. Punkt 4: Stromanbieter regelmäßig wechseln: Wer zusätzlich seinen Arbeitspreis von 42 Cent (Grundversorgung) auf 28 Cent (Wettbewerbstarif mit Preisgarantie) senkt, spart bei 3500 Kilowattstunden Jahresverbrauch weitere 490 Euro pro Jahr ein. Ein kurzer Wechselprozess im Online-Tarifvergleich lohnt sich in jedem Fall. Praktische Anleitungen zur jahreszeitlichen Fixkostenoptimierung findest du in unserem Überblick zum Stromsparen im Herbst sowie in unserem umfassenden Pillar-Artikel zu Strom und Gas. Messen in einer Woche, das Protokoll, das Schätzungen ersetzt. Tag 1: Kühlschrank 24 Stunden. Tag 2: Gefriertruhe. Tag 3: Desktop-PC inklusive Monitor und Dock im Alltag. Tag 4: TV-Ecke Standby über Nacht. Tag 5: Waschmaschine ein Eco-Gang versus 60 Grad Celsius. Tag 6: Trockner ein Vollgang. Tag 7: Alles, was immer an ist (Pumpe, NAS, alter Decoder).",
    "units": [
+    {
+     "i": 45,
+     "type": "li",
+     "lang": "de",
+     "chars": 128
+    },
     {
      "i": 46,
      "type": "li",
@@ -390,7 +390,7 @@
      "i": 58,
      "type": "li",
      "lang": "de",
-     "chars": 47
+     "chars": 57
     },
     {
      "i": 59,
@@ -403,30 +403,30 @@
      "type": "li",
      "lang": "de",
      "chars": 59
-    },
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "text": "Formel: gemessene Watt mal Stunden mal 365 und 1000 mal Arbeitspreis. 12 Watt Dauerbetrieb ist 105 Kilowattstunden ungefähr 32 bis 38 Euro im Jahr. Fünf solche Geräte sind ein Restaurantbesuch pro Monat, unsichtbar. Geräte über 80 Euro Stromkosten oder Jahr auf die Ersatzliste. A-Klasse-Kühlschrank gegen 15 Jahre alten F-Schrank: oft 120 bis 180 Euro Ersparnis, Amortisation 4 bis 7 Jahre. Nicht jedes Gerät lohnt den Sofortkauf, die Truhe im Keller, die halb leer auf minus 22 Grad Celsius steht, lohnt erst abtauen und wärmer stellen. Die 4 Sofort-Hacks ohne Anschaffung. Punkt 1: Steckerleiste TV oder Audio, nachts aus. Punkt 2: Eco-Programme, volle Maschine, 1400 Touren. Punkt 3: Router-Zeitsteuerung 1 bis 6 Uhr, wenn niemand wach ist (Smarthome-Ausnahme). Punkt 4: Zählerstand jeden 1 – der Herbstanstieg wird sichtbar, bevor die Abrechnung kommt. Energiediebe sind selten dramatisch. Sie sind langweilig und dauerhaft. Genau deshalb gewinnt, wer misst statt rätselt. Ersatzentscheidung mit Amortisation, nicht mit schlechtem Gewissen. Nur weil ein Gerät alt ist, muss es nicht morgen neu sein. Rechnung: (alter Kilowattstunden minus neuer Kilowattstunden) mal Preis mal Jahre bis du sowieso tauschst. Unter 3 Jahren Amortisation: tauschen, wenn das Geld da ist. Über 8 Jahren: erst einstellen, abtauen, Standort ändern.",
+   "units": [
     {
      "i": 61,
      "type": "p",
      "lang": "de",
-     "chars": 139
+     "chars": 147
     },
     {
      "i": 62,
      "type": "p",
      "lang": "de",
      "chars": 67
-    }
-   ]
-  },
-  {
-   "index": 5,
-   "text": "Geräte über 80 Euro Stromkosten pro Jahr auf die Ersatzliste. A-Klasse-Kühlschrank gegen 15 Jahre alten F-Schrank: oft 120 bis 180 Euro Ersparnis, Amortisation 4 bis 7 Jahre. Nicht jedes Gerät lohnt den Sofortkauf, die Truhe im Keller, die halb leer auf −22 °C steht, lohnt erst abtauen und wärmer stellen. Die 4 Sofort-Hacks ohne Anschaffung. Punkt 1: Steckerleiste TV/Audio, nachts aus. Punkt 2: Eco-Programme, volle Maschine, 1400 Touren. Punkt 3: Router-Zeitsteuerung 1 bis 6 Uhr, wenn niemand wach ist (Smarthome-Ausnahme). Punkt 4: Zählerstand jeden 1 – der Herbstanstieg wird sichtbar, bevor die Abrechnung kommt. Energiediebe sind selten dramatisch. Sie sind langweilig und dauerhaft. Genau deshalb gewinnt, wer misst statt rätselt. Ersatzentscheidung mit Amortisation, nicht mit schlechtem Gewissen. Nur weil ein Gerät alt ist, muss es nicht morgen neu sein. Rechnung: (alter Kilowattstunden − neuer Kilowattstunden) × Preis × Jahre bis du sowieso tauschst. Unter 3 Jahren Amortisation: tauschen, wenn das Geld da ist. Über 8 Jahren: erst einstellen, abtauen, Standort ändern. Die Truhe im Keller auf −18 °C statt −24 °C ist ein 0-Euro-Hebel, der oft 10 bis 20 Prozent ihres Verbrauchs holt. Fazit: Erst messen, dann gezielt Energiediebe stoppen. Heimliche Stromfresser finden und Energiediebe stoppen, ist die schnellste Methode, um ohne spürbaren Komfortverzicht hunderte Euro einzusparen.",
-   "units": [
+    },
     {
      "i": 63,
      "type": "p",
      "lang": "de",
-     "chars": 61
+     "chars": 62
     },
     {
      "i": 64,
@@ -438,7 +438,7 @@
      "i": 65,
      "type": "p",
      "lang": "de",
-     "chars": 131
+     "chars": 146
     },
     {
      "i": 66,
@@ -450,7 +450,7 @@
      "i": 67,
      "type": "li",
      "lang": "de",
-     "chars": 44
+     "chars": 49
     },
     {
      "i": 68,
@@ -486,19 +486,25 @@
      "i": 73,
      "type": "p",
      "lang": "de",
-     "chars": 157
+     "chars": 165
     },
     {
      "i": 74,
      "type": "p",
      "lang": "de",
      "chars": 118
-    },
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "text": "Die Truhe im Keller auf minus 18 Grad Celsius statt minus 24 Grad Celsius ist ein 0-Euro-Hebel, der oft 10 bis 20 Prozent ihres Verbrauchs holt. Fazit: Erst messen, dann gezielt Energiediebe stoppen. Heimliche Stromfresser finden und Energiediebe stoppen, ist die schnellste Methode, um ohne spürbaren Komfortverzicht hunderte Euro einzusparen. Indem du veraltete Dauerverbraucher identifizierst, Standby-Kosten per Knopfdruck stoppst und deinen Stromtarif optimierst, holst du dir jedes Jahr über 400 Euro an Kaufkraft zurück. Weiterlesen: Ratgeber Strom und Gas sparen, Strom sparen im Herbst, Gasanbieter wechseln: Praxis-Tipps. Häufige Fragen. Wie viel Strom verbraucht ein typischer 3-Personen-Haushalt? In Deutschland verbraucht ein 3-Personen-Haushalt im Mehrfamilienhaus durchschnittlich circa 2800 bis 3500 Kilowattstunden Strom pro Jahr. Erfolgt die Warmwasserbereitung elektrisch über Boiler, liegt der Verbrauch oft bei 4200 bis 5000 Kilowattstunden. Welche Geräte verbrauchen im Standby am meisten Strom? Zu den größten Standby-Sündern gehören ältere Spielekonsolen (im Schnellstart-Modus bis zu 15 Watt), OLED-Fernseher mit Netzwerkbereitschaft, Kaffeevollautomaten mit Warmhaltefunktion und Mesh-Repeater älterer Bauart. Lohnt sich der Austausch eines funktionierenden Altgeräts?",
+   "units": [
     {
      "i": 75,
      "type": "p",
      "lang": "de",
-     "chars": 114
+     "chars": 144
     },
     {
      "i": 76,
@@ -511,13 +517,7 @@
      "type": "p",
      "lang": "de",
      "chars": 144
-    }
-   ]
-  },
-  {
-   "index": 6,
-   "text": "Indem du veraltete Dauerverbraucher identifizierst, Standby-Kosten per Knopfdruck stoppst und deinen Stromtarif optimierst, holst du dir jedes Jahr über 400 Euro an Kaufkraft zurück. Weiterlesen: Ratgeber Strom und Gas sparen · Strom sparen im Herbst · Gasanbieter wechseln: Praxis-Tipps. Häufige Fragen. Wie viel Strom verbraucht ein typischer 3-Personen-Haushalt? In Deutschland verbraucht ein 3-Personen-Haushalt im Mehrfamilienhaus durchschnittlich circa 2800 bis 3500 Kilowattstunden Strom pro Jahr. Erfolgt die Warmwasserbereitung elektrisch über Boiler, liegt der Verbrauch oft bei 4200 bis 5000 Kilowattstunden. Welche Geräte verbrauchen im Standby am meisten Strom? Zu den größten Standby-Sündern gehören ältere Spielekonsolen (im Schnellstart-Modus bis zu 15 Watt), OLED-Fernseher mit Netzwerkbereitschaft, Kaffeevollautomaten mit Warmhaltefunktion und Mesh-Repeater älterer Bauart. Lohnt sich der Austausch eines funktionierenden Altgeräts? Bei Kühl- und Gefrierschränken, die älter als 12 bis 15 Jahre sind, rechnet sich die Neuanschaffung oft schon nach 3 bis 5 Jahren allein über die eingesparten Stromkosten. Woher bekomme ich ein kostenloses Strommessgerät? Viele örtliche Stadtwerke, Energieagenturen und Verbraucherzentralen verleihen hochwertige Strommessgeräte kostenlos an Bürger. Wie wechsle ich den Stromanbieter?",
-   "units": [
+    },
     {
      "i": 78,
      "type": "p",
@@ -528,7 +528,7 @@
      "i": 79,
      "type": "p",
      "lang": "de",
-     "chars": 105
+     "chars": 103
     },
     {
      "i": 80,
@@ -577,7 +577,13 @@
      "type": "h3",
      "lang": "de",
      "chars": 58
-    },
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Bei Kühl- und Gefrierschränken, die älter als 12 bis 15 Jahre sind, rechnet sich die Neuanschaffung oft schon nach 3 bis 5 Jahren allein über die eingesparten Stromkosten. Woher bekomme ich ein kostenloses Strommessgerät? Viele örtliche Stadtwerke, Energieagenturen und Verbraucherzentralen verleihen hochwertige Strommessgeräte kostenlos an Bürger. Wie wechsle ich den Stromanbieter? Der Wechsel dauert online weniger als 5 Minuten. Du benötigst lediglich deine Postleitzahl, deinen Jahresverbrauch und deine Zählernummer. Die Kündigung beim alten Anbieter übernimmt der neue Versorger automatisch. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
     {
      "i": 88,
      "type": "p",
@@ -601,13 +607,7 @@
      "type": "h3",
      "lang": "de",
      "chars": 34
-    }
-   ]
-  },
-  {
-   "index": 7,
-   "text": "Der Wechsel dauert online weniger als 5 Minuten. Du benötigst lediglich deine Postleitzahl, deinen Jahresverbrauch und deine Zählernummer. Die Kündigung beim alten Anbieter übernimmt der neue Versorger automatisch. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
-   "units": [
+    },
     {
      "i": 92,
      "type": "p",

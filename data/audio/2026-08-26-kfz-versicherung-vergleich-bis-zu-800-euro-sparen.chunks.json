@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 147,
- "chars": 13351,
+ "chars": 13357,
  "parts": [
   {
    "index": 0,
@@ -192,7 +192,7 @@
   },
   {
    "index": 2,
-   "text": "Tabelle: Mein eigener Spar-Erfolg: von 1040 Euro auf 412 Euro. Übersicht mit 3 Spalten und 7 Zeilen. Die Spalten lauten: Merkmal, Alte Versicherung (2016), Optimierter Vertrag (2026). Jahresbeitrag. Zeile 1 von 7. Alte Versicherung (2016): 1040 Euro. Optimierter Vertrag (2026): 412 Euro. Selbstbeteiligung TK / VK. Zeile 2 von 7. Alte Versicherung (2016): 0 Euro / 0 Euro. Optimierter Vertrag (2026): 150 Euro / 300 Euro. Werkstattbindung. Zeile 3 von 7. Alte Versicherung (2016): nein. Optimierter Vertrag (2026): ja. Jahreskilometer. Zeile 4 von 7. Alte Versicherung (2016): 15000 Kilometer (tatsächlich 11800). Optimierter Vertrag (2026): 12000 Kilometer. Fahrerkreis. Zeile 5 von 7. Alte Versicherung (2016): beliebig. Optimierter Vertrag (2026): Partner + ich (ü30). Tarifgruppe. Zeile 6 von 7. Alte Versicherung (2016): Klassisch. Optimierter Vertrag (2026): Direktversicherer mit Telematik-Option. SF-Klasse. Zeile 7 von 7. Alte Versicherung (2016): SF 12. Optimierter Vertrag (2026): SF 22. Ende der Tabelle Mein eigener Spar-Erfolg: von 1040 Euro auf 412 Euro. Ein Teil der Ersparnis ergab sich durch die gestiegene Schadenfreiheitsklasse (SF), der weitaus größere Teil aber durch die konsequente Optimierung der Tarifmerkmale und den regelmäßigen Wechsel. Die 7 größten Sparhebel im Kraftfahrzeug-Versicherungsvergleich. 1. Die richtige Selbstbeteiligung wählen.",
+   "text": "Tabelle: Mein eigener Spar-Erfolg: von 1040 Euro auf 412 Euro. Übersicht mit 3 Spalten und 7 Zeilen. Die Spalten lauten: Merkmal, Alte Versicherung (2016), Optimierter Vertrag (2026). Jahresbeitrag. Zeile 1 von 7. Alte Versicherung (2016): 1040 Euro. Optimierter Vertrag (2026): 412 Euro. Selbstbeteiligung TK oder VK. Zeile 2 von 7. Alte Versicherung (2016): 0 Euro / 0 Euro. Optimierter Vertrag (2026): 150 Euro / 300 Euro. Werkstattbindung. Zeile 3 von 7. Alte Versicherung (2016): nein. Optimierter Vertrag (2026): ja. Jahreskilometer. Zeile 4 von 7. Alte Versicherung (2016): 15000 Kilometer (tatsächlich 11800). Optimierter Vertrag (2026): 12000 Kilometer. Fahrerkreis. Zeile 5 von 7. Alte Versicherung (2016): beliebig. Optimierter Vertrag (2026): Partner + ich (ü30). Tarifgruppe. Zeile 6 von 7. Alte Versicherung (2016): Klassisch. Optimierter Vertrag (2026): Direktversicherer mit Telematik-Option. SF-Klasse. Zeile 7 von 7. Alte Versicherung (2016): SF 12. Optimierter Vertrag (2026): SF 22. Ende der Tabelle Mein eigener Spar-Erfolg: von 1040 Euro auf 412 Euro. Ein Teil der Ersparnis ergab sich durch die gestiegene Schadenfreiheitsklasse (SF), der weitaus größere Teil aber durch die konsequente Optimierung der Tarifmerkmale und den regelmäßigen Wechsel. Die 7 größten Sparhebel im Kraftfahrzeug-Versicherungsvergleich. 1. Die richtige Selbstbeteiligung wählen.",
    "units": [
     {
      "i": 28,
@@ -216,7 +216,7 @@
      "i": 31,
      "type": "table-row",
      "lang": "de",
-     "chars": 133
+     "chars": 136
     },
     {
      "i": 32,
@@ -570,7 +570,7 @@
   },
   {
    "index": 6,
-   "text": "Mindestdeckung 100 Millionen Euro pauschal, mindestens 15 Millionen Euro pro Person. Mallorca-Police (Deckung bei Mietwagen im europäischen Ausland in gewohnter Höhe). Zusammenstoß mit Tieren aller Art (nicht nur Haarwild). Erweiterte Wildschadenklausel. Grobe Fahrlässigkeit (außer bei Vorsatz, Drogen/Alkohol). Schlüsselverlust (mindestens 500 Euro, besser 1000 Euro). Neupreisentschädigung bei Neuwagen für mindestens 12, besser 24 Monate. Häufige Irrtümer. Direktversicherer sind immer schlecht im Schadensfall. Tatsächlich schneiden Direktversicherer in Tests (Stiftung Warentest, Finanztip) regelmäßig mindestens so gut ab wie klassische Anbieter. Alte Verträge sind immer die besonders günstigen. Das Gegenteil ist der Fall: Alttarife aus den 2000er Jahren liegen im Schnitt 25 bis 40 Prozent über aktuellen Vergleichstarifen. Bei einem Wechsel verliere ich meine SF-Klasse. Nein, die SF-Klasse ist an den Fahrer gebunden und wird 1:1 übertragen. Eine Kündigung per E-Mail reicht. Rechtlich ist die Textform ausreichend, aber der Versicherer muss den Eingang bestätigen. Sicherer ist das Online-Kundenportal oder ein Einschreiben. Wie viel Sparpotenzial wirklich drinsteckt. Tabelle: Wie viel Sparpotenzial wirklich drinsteckt. Übersicht mit 2 Spalten und 4 Zeilen. Die Spalten lauten: Ausgangslage, Typische Ersparnis.",
+   "text": "Mindestdeckung 100 Millionen Euro pauschal, mindestens 15 Millionen Euro pro Person. Mallorca-Police (Deckung bei Mietwagen im europäischen Ausland in gewohnter Höhe). Zusammenstoß mit Tieren aller Art (nicht nur Haarwild). Erweiterte Wildschadenklausel. Grobe Fahrlässigkeit (außer bei Vorsatz, Drogen oder Alkohol). Schlüsselverlust (mindestens 500 Euro, besser 1000 Euro). Neupreisentschädigung bei Neuwagen für mindestens 12, besser 24 Monate. Häufige Irrtümer. Direktversicherer sind immer schlecht im Schadensfall. Tatsächlich schneiden Direktversicherer in Tests (Stiftung Warentest, Finanztip) regelmäßig mindestens so gut ab wie klassische Anbieter. Alte Verträge sind immer die besonders günstigen. Das Gegenteil ist der Fall: Alttarife aus den 2000er Jahren liegen im Schnitt 25 bis 40 Prozent über aktuellen Vergleichstarifen. Bei einem Wechsel verliere ich meine SF-Klasse. Nein, die SF-Klasse ist an den Fahrer gebunden und wird 1:1 übertragen. Eine Kündigung per E-Mail reicht. Rechtlich ist die Textform ausreichend, aber der Versicherer muss den Eingang bestätigen. Sicherer ist das Online-Kundenportal oder ein Einschreiben. Wie viel Sparpotenzial wirklich drinsteckt. Tabelle: Wie viel Sparpotenzial wirklich drinsteckt. Übersicht mit 2 Spalten und 4 Zeilen. Die Spalten lauten: Ausgangslage, Typische Ersparnis.",
    "units": [
     {
      "i": 87,
@@ -600,7 +600,7 @@
      "i": 91,
      "type": "li",
      "lang": "de",
-     "chars": 57
+     "chars": 62
     },
     {
      "i": 92,
@@ -768,7 +768,7 @@
   },
   {
    "index": 8,
-   "text": "Die SF-Klasse ist der größte Hebel nach Regionalklasse. Falsch übertragen ist falscher Preis. Zweitwagenregelung über den Erstvertrag, Fahrerkreis nicht alle, Kilometer mit Puffer. Werkstattbindung nur, wenn das Netz in deinem Umkreis Werkstätten hat, zu denen du auch fährst. 30.11. In den Kalender, Vergleich in KW 42, nicht in KW 48. Fazit: Ein 30-Minuten-Vergleich, der sich auszahlt. Der Kraftfahrzeug-Versicherungsvergleich ist einer der schnellsten und lukrativsten Sparhebel im deutschen Versicherungsdschungel. 30 bis 45 Minuten investiert, bringt im Schnitt eine Ersparnis von mehreren hundert Euro pro Jahr, über die Vertragslaufzeit von mehreren Jahren gerechnet sind das leicht 1500 Euro bis 4000 Euro. Nutze die Wochen bis zum 30.11, um deinen bestehenden Tarif zu prüfen und bei Bedarf zu wechseln. Weiterlesen: Privathaftpflicht: Warum sie so wichtig ist und was sie kostet · Wohngebäudeversicherung Vergleich: Worauf du achten musst · Pillar: Versicherungen. Häufige Fragen. Wann kann ich meine Kraftfahrzeug-Versicherung kündigen? Der reguläre Kündigungstermin ist der 30.11. Zum 31.12. Des Jahres. Bei einer Beitragserhöhung, einem Fahrzeugwechsel oder einem Schadensfall gibt es zusätzlich ein Sonderkündigungsrecht. Was ist der Unterschied zwischen Teilkasko und Vollkasko? Die Teilkasko deckt äußere Einwirkungen wie Diebstahl, Glasbruch, Wild, Sturm und Brand ab.",
+   "text": "Die SF-Klasse ist der größte Hebel nach Regionalklasse. Falsch übertragen ist falscher Preis. Zweitwagenregelung über den Erstvertrag, Fahrerkreis nicht alle, Kilometer mit Puffer. Werkstattbindung nur, wenn das Netz in deinem Umkreis Werkstätten hat, zu denen du auch fährst. 30.11. In den Kalender, Vergleich in KW 42, nicht in KW 48. Fazit: Ein 30-Minuten-Vergleich, der sich auszahlt. Der Kraftfahrzeug-Versicherungsvergleich ist einer der schnellsten und lukrativsten Sparhebel im deutschen Versicherungsdschungel. 30 bis 45 Minuten investiert, bringt im Schnitt eine Ersparnis von mehreren hundert Euro pro Jahr, über die Vertragslaufzeit von mehreren Jahren gerechnet sind das leicht 1500 Euro bis 4000 Euro. Nutze die Wochen bis zum 30.11, um deinen bestehenden Tarif zu prüfen und bei Bedarf zu wechseln. Weiterlesen: Privathaftpflicht: Warum sie so wichtig ist und was sie kostet, Wohngebäudeversicherung Vergleich: Worauf du achten musst, Pillar: Versicherungen. Häufige Fragen. Wann kann ich meine Kraftfahrzeug-Versicherung kündigen? Der reguläre Kündigungstermin ist der 30.11. Zum 31.12. Des Jahres. Bei einer Beitragserhöhung, einem Fahrzeugwechsel oder einem Schadensfall gibt es zusätzlich ein Sonderkündigungsrecht. Was ist der Unterschied zwischen Teilkasko und Vollkasko? Die Teilkasko deckt äußere Einwirkungen wie Diebstahl, Glasbruch, Wild, Sturm und Brand ab.",
    "units": [
     {
      "i": 118,
@@ -822,7 +822,7 @@
      "i": 126,
      "type": "p",
      "lang": "de",
-     "chars": 161
+     "chars": 159
     },
     {
      "i": 127,

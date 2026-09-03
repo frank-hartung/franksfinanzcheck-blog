@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 120,
- "chars": 11517,
+ "chars": 11776,
  "parts": [
   {
    "index": 0,
@@ -180,7 +180,7 @@
   },
   {
    "index": 2,
-   "text": "Stelle dir rechtzeitig vor dem 20. Monat eine Erinnerung für den nächsten Wechsel ein. Punkt 2: Teure Router-Miete: Mietgeräte kosten zwischen 4,95 Euro und 7,95 Euro monatlich (118 Euro bis 190 Euro in 2 Jahren). Ein eigener Kauf-Router amortisiert sich meist schnell und bleibt dein Eigentum. Punkt 3: Einmalige Anschluss- und Versandkosten: Für die Freischaltung der Leitung verlangen manche Anbieter bis zu 69,95 Euro, die bei guten Vergleichsangeboten erstattet werden. Punkt 4: Unnötige Zusatzoptionen: Sicherheits-Pakete, Festnetz-Flatrates in Mobilfunknetze oder TV-Streaming-Optionen sind oft in den ersten drei Monaten gratis, verwandeln sich danach. aber in kostenpflichtige Abos, wenn sie nicht fristgerecht gekündigt werden. Tarifvergleich: 50 versus 100 versus 250 Megabit pro Sekunde. Welche Geschwindigkeit passt zu deinen Anforderungen? Die folgende Übersicht hilft bei der richtigen Wahl: Tabelle: Tarifvergleich: 50 versus 100 versus 250 Megabit pro Sekunde. Übersicht mit 4 Spalten und 4 Zeilen. Die Spalten lauten: Bandbreite, Download / Upload, Typische Effektivkosten, Ideal für. 50 Megabit pro Sekunde (VDSL). Zeile 1 von 4. Download / Upload: 50 / 10 Megabit pro Sekunde. Typische Effektivkosten: circa 19,95 Euro bis 24,95 Euro monatlich. Ideal für: 1- bis 2-Personen-Haushalte, Full-HD-Streaming, normales Homeoffice.",
+   "text": "Stelle dir rechtzeitig vor dem 20. Monat eine Erinnerung für den nächsten Wechsel ein. Punkt 2: Teure Router-Miete: Mietgeräte kosten zwischen 4,95 Euro und 7,95 Euro monatlich (118 Euro bis 190 Euro in 2 Jahren). Ein eigener Kauf-Router amortisiert sich meist schnell und bleibt dein Eigentum. Punkt 3: Einmalige Anschluss- und Versandkosten: Für die Freischaltung der Leitung verlangen manche Anbieter bis zu 69,95 Euro, die bei guten Vergleichsangeboten erstattet werden. Punkt 4: Unnötige Zusatzoptionen: Sicherheits-Pakete, Festnetz-Flatrates in Mobilfunknetze oder TV-Streaming-Optionen sind oft in den ersten drei Monaten gratis, verwandeln sich danach. aber in kostenpflichtige Abos, wenn sie nicht fristgerecht gekündigt werden. Tarifvergleich: 50 versus 100 versus 250 Megabit pro Sekunde pro Sekunde. Welche Geschwindigkeit passt zu deinen Anforderungen? Die folgende Übersicht hilft bei der richtigen Wahl: Tabelle: Tarifvergleich: 50 versus 100 versus 250 Megabit pro Sekunde pro Sekunde. Übersicht mit 4 Spalten und 4 Zeilen. Die Spalten lauten: Bandbreite, Download und Upload, Typische Effektivkosten, Ideal für. 50 Megabit pro Sekunde pro Sekunde (VDSL). Zeile 1 von 4. Download und Upload: 50 und 10 Megabit pro Sekunde pro Sekunde. Typische Effektivkosten: circa 19,95 Euro bis 24,95 Euro monatlich. Ideal für: 1- bis 2-Personen-Haushalte, Full-HD-Streaming, normales Homeoffice.",
    "units": [
     {
      "i": 26,
@@ -228,7 +228,7 @@
      "i": 33,
      "type": "h2",
      "lang": "de",
-     "chars": 61
+     "chars": 73
     },
     {
      "i": 34,
@@ -246,19 +246,19 @@
      "i": 36,
      "type": "table-intro",
      "lang": "de",
-     "chars": 108
+     "chars": 120
     },
     {
      "i": 37,
      "type": "table-intro",
      "lang": "de",
-     "chars": 86
+     "chars": 88
     },
     {
      "i": 38,
      "type": "table-row",
      "lang": "de",
-     "chars": 161
+     "chars": 189
     },
     {
      "i": 39,
@@ -270,13 +270,13 @@
   },
   {
    "index": 3,
-   "text": "100 Megabit pro Sekunde (VDSL/Kabel). Zeile 2 von 4. Download / Upload: 100 / 40 Megabit pro Sekunde. Typische Effektivkosten: circa 24,95 Euro bis 29,95 Euro monatlich. Ideal für: Familien, paralleles 4K-Streaming, regelmäßige Homeoffice-Calls. 250 Megabit pro Sekunde (Supervectoring). Zeile 3 von 4. Download / Upload: 250 / 40 Megabit pro Sekunde. Typische Effektivkosten: circa 29,95 Euro bis 36,95 Euro monatlich. Ideal für: Vielsurfer, datenintensive Downloads, Online-Gamer, mehrere Teenager. Glasfaser (ab 500 Megabit pro Sekunde). Zeile 4 von 4. Download / Upload: 500 / 100 Megabit pro Sekunde. Typische Effektivkosten: circa 39,95 Euro bis 49,95 Euro monatlich. Ideal für: Zukunftssicher, extrem niedrige Latenz, maximale Stabilität. Ende der Tabelle Tarifvergleich: 50 versus 100 versus 250 Megabit pro Sekunde. DSL, Kabel oder Glasfaser: Die Übertragungswege im Vergleich. DSL / VDSL: Läuft über das klassische Kupfer-Telefonnetz, ist bundesweit in über 95 Prozent aller Haushalte verfügbar und bietet stabile Ping-Zeiten und verlässliche Bandbreiten. Kabel-Internet (DOCSIS): Nutzt das Breitbandkabelnetz des Fernsehers. Bietet hohe Download-Raten bis zu 1000 Megabit pro Sekunde zum günstigen Preis, teilt sich die Kapazität jedoch mit den Nachbarn (Shared Medium). Echte Glasfaser (FTTH): Bringt Lichtwellenleiter bis direkt in den Wohnraum.",
+   "text": "100 Megabit pro Sekunde pro Sekunde (VDSL oder Kabel). Zeile 2 von 4. Download und Upload: 100 und 40 Megabit pro Sekunde pro Sekunde. Typische Effektivkosten: circa 24,95 Euro bis 29,95 Euro monatlich. Ideal für: Familien, paralleles 4K-Streaming, regelmäßige Homeoffice-Calls. 250 Megabit pro Sekunde pro Sekunde (Supervectoring). Zeile 3 von 4. Download und Upload: 250 und 40 Megabit pro Sekunde pro Sekunde. Typische Effektivkosten: circa 29,95 Euro bis 36,95 Euro monatlich. Ideal für: Vielsurfer, datenintensive Downloads, Online-Gamer, mehrere Teenager. Glasfaser (ab 500 Megabit pro Sekunde pro Sekunde). Zeile 4 von 4. Download und Upload: 500 und 100 Megabit pro Sekunde pro Sekunde. Typische Effektivkosten: circa 39,95 Euro bis 49,95 Euro monatlich. Ideal für: Zukunftssicher, extrem niedrige Latenz, maximale Stabilität. Ende der Tabelle Tarifvergleich: 50 versus 100 versus 250 Megabit pro Sekunde pro Sekunde. DSL, Kabel oder Glasfaser: Die Übertragungswege im Vergleich. DSL oder VDSL: Läuft über das klassische Kupfer-Telefonnetz, ist bundesweit in über 95 Prozent aller Haushalte verfügbar und bietet stabile Ping-Zeiten und verlässliche Bandbreiten. Kabel-Internet (DOCSIS): Nutzt das Breitbandkabelnetz des Fernsehers. Bietet hohe Download-Raten bis zu 1000 Megabit pro Sekunde pro Sekunde zum günstigen Preis, teilt sich die Kapazität jedoch mit den Nachbarn (Shared Medium).",
    "units": [
     {
      "i": 40,
      "type": "table-row",
      "lang": "de",
-     "chars": 169
+     "chars": 202
     },
     {
      "i": 41,
@@ -288,7 +288,7 @@
      "i": 42,
      "type": "table-row",
      "lang": "de",
-     "chars": 173
+     "chars": 201
     },
     {
      "i": 43,
@@ -300,7 +300,7 @@
      "i": 44,
      "type": "table-row",
      "lang": "de",
-     "chars": 172
+     "chars": 200
     },
     {
      "i": 45,
@@ -312,7 +312,7 @@
      "i": 46,
      "type": "table-outro",
      "lang": "de",
-     "chars": 78
+     "chars": 90
     },
     {
      "i": 47,
@@ -324,7 +324,7 @@
      "i": 48,
      "type": "li",
      "lang": "de",
-     "chars": 178
+     "chars": 181
     },
     {
      "i": 49,
@@ -336,20 +336,20 @@
      "i": 50,
      "type": "li",
      "lang": "de",
-     "chars": 145
-    },
-    {
-     "i": 51,
-     "type": "li",
-     "lang": "de",
-     "chars": 76
+     "chars": 157
     }
    ]
   },
   {
    "index": 4,
-   "text": "Es bietet maximale Geschwindigkeiten, hohe Ausfallsicherheit und hohe Upload-Kapazitäten. In drei Schritten zum neuen Internetanschluss. Punkt 1: Verfügbarkeits-Check machen: Trage deine genaue Adresse in den Tarifrechner ein, um zu sehen, welche Bandbreiten und Technologien bei dir verfügbar sind. Punkt 2: Wunschtarif auswählen und Wechsel beauftragen: Wähle deinen bevorzugten Tarif und beauftrage den neuen Provider mit der Kündigung deines Alttarifs. Punkt 3: Keine Ausfallzeit: Der neue Anbieter übernimmt die Kündigung bei deinem bisherigen Provider und stimmt den Umschalttermin nahtlos ab. Nach Paragraf 58 TKG ist eine lückenlose Versorgung gesetzlich garantiert. Wer noch mehr aus seinem bestehenden Vertrag herausholen will, liest am attraktiven unsere praxisnahen Leitfäden zu DSL-Gutschriften und Willkommensboni sowie Maßnahmen für optimierten WLAN-Empfang und die Themenseite Internet und DSL. Der 24-Monats-Taschenrechner, den Vergleichsportale nicht zeigen. Ein Tarif mit 29,99 Euro in den ersten 12 Monaten, 44,99 Euro danach, 70 Euro Router-Miete über 24 Monate, 69,99 Euro Bereitstellung und 100 Euro Bonus nach 6 Monaten sieht im Banner günstig aus. Die ehrliche Rechnung: 12 mal 29,99 Euro ist 359,88 Euro. 12 mal 44,99 Euro ist 539,88 Euro. Router-Miete 24 mal 5 Euro ist 120 Euro (oder 70 Euro Einmalpreis, je nach Anbieter). Bereitstellung 69,99 Euro.",
+   "text": "Echte Glasfaser (FTTH): Bringt Lichtwellenleiter bis direkt in den Wohnraum. Es bietet maximale Geschwindigkeiten, hohe Ausfallsicherheit und hohe Upload-Kapazitäten. In drei Schritten zum neuen Internetanschluss. Punkt 1: Verfügbarkeits-Check machen: Trage deine genaue Adresse in den Tarifrechner ein, um zu sehen, welche Bandbreiten und Technologien bei dir verfügbar sind. Punkt 2: Wunschtarif auswählen und Wechsel beauftragen: Wähle deinen bevorzugten Tarif und beauftrage den neuen Provider mit der Kündigung deines Alttarifs. Punkt 3: Keine Ausfallzeit: Der neue Anbieter übernimmt die Kündigung bei deinem bisherigen Provider und stimmt den Umschalttermin nahtlos ab. Nach Paragraf 58 TKG ist eine lückenlose Versorgung gesetzlich garantiert. Wer noch mehr aus seinem bestehenden Vertrag herausholen will, liest am attraktiven unsere praxisnahen Leitfäden zu DSL-Gutschriften und Willkommensboni sowie Maßnahmen für optimierten WLAN-Empfang und die Themenseite Internet und DSL. Der 24-Monats-Taschenrechner, den Vergleichsportale nicht zeigen. Ein Tarif mit 29,99 Euro in den ersten 12 Monaten, 44,99 Euro danach, 70 Euro Router-Miete über 24 Monate, 69,99 Euro Bereitstellung und 100 Euro Bonus nach 6 Monaten sieht im Banner günstig aus. Die ehrliche Rechnung: 12 mal 29,99 Euro ist 359,88 Euro. 12 mal 44,99 Euro ist 539,88 Euro.",
    "units": [
+    {
+     "i": 51,
+     "type": "li",
+     "lang": "de",
+     "chars": 76
+    },
     {
      "i": 52,
      "type": "li",
@@ -427,7 +427,13 @@
      "type": "li",
      "lang": "de",
      "chars": 34
-    },
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "text": "Router-Miete 24 mal 5 Euro ist 120 Euro (oder 70 Euro Einmalpreis, je nach Anbieter). Bereitstellung 69,99 Euro. abzüglich Bonus 100 Euro. Summe 989,75 Euro / 24 ergibt 41,24 Euro effektiv. Der Bannerpreis 29,99 Euro ist damit 37 Prozent zu optimistisch. Genau diese Lücke musst du bei jedem DSL-Vergleich schließen, sonst vergleichst du Äpfel mit Leuchtreklame. Zweite Rechnung: Altvertrag nach 24 Monaten ohne Rabatt, 39,99 Euro plus 5 Euro Router ist 44,99 Euro. Wechseltarif effektiv 34,50 Euro inklusive Bonus. Differenz 10,49 Euro mal 24 ergibt 251,76 Euro, oft plus ein Router, den du behalten darfst. Vier Fallen, die im Kleingedruckten sitzen. Hardware-Zwang. Manche Glasfaser-Tarife verlangen die Provider-Box. Dann ist der eigene Fritz-Router nur hinter der Box nutzbar (Bridge-Modus). Das kostet ein Gerät mehr im Strom und ein weiteres Netzteil in der Steckdose. Drossel nach Volumen. Selten bei Festnetz, aber bei manchen Hybrid-Tarifen (LTE-Backup) nach 200 bis 400 GB. Homeoffice mit VPN und Cloud-Backup reißt das in einem Monat. Bonus nur mit Lastschrift und E-Mail-Werbung. Verweigert du die Werbung, entfällt der Bonus. Das steht selten in der Preistabelle, sondern in den Teilnahmebedingungen. Kündigungsautomatik. Seit dem TKG gilt nach der Mindestlaufzeit monatliche Kündbarkeit.",
+   "units": [
     {
      "i": 65,
      "type": "li",
@@ -439,13 +445,7 @@
      "type": "li",
      "lang": "de",
      "chars": 26
-    }
-   ]
-  },
-  {
-   "index": 5,
-   "text": "abzüglich Bonus 100 Euro. Summe 989,75 Euro / 24 ergibt 41,24 Euro effektiv. Der Bannerpreis 29,99 Euro ist damit 37 Prozent zu optimistisch. Genau diese Lücke musst du bei jedem DSL-Vergleich schließen, sonst vergleichst du Äpfel mit Leuchtreklame. Zweite Rechnung: Altvertrag nach 24 Monaten ohne Rabatt, 39,99 Euro plus 5 Euro Router ist 44,99 Euro. Wechseltarif effektiv 34,50 Euro inklusive Bonus. Differenz 10,49 Euro × 24 ergibt 251,76 Euro, oft plus ein Router, den du behalten darfst. Vier Fallen, die im Kleingedruckten sitzen. Hardware-Zwang. Manche Glasfaser-Tarife verlangen die Provider-Box. Dann ist der eigene Fritz-Router nur hinter der Box nutzbar (Bridge-Modus). Das kostet ein Gerät mehr im Strom und ein weiteres Netzteil in der Steckdose. Drossel nach Volumen. Selten bei Festnetz, aber bei manchen Hybrid-Tarifen (LTE-Backup) nach 200 bis 400 GB. Homeoffice mit VPN und Cloud-Backup reißt das in einem Monat. Bonus nur mit Lastschrift und E-Mail-Werbung. Verweigert du die Werbung, entfällt der Bonus. Das steht selten in der Preistabelle, sondern in den Teilnahmebedingungen. Kündigungsautomatik. Seit dem TKG gilt nach der Mindestlaufzeit monatliche Kündbarkeit. Trotzdem schicken Anbieter Verlängerungsangebote mit neuer 24-Monats-Bindung. Wer unterschreibt, verschenkt die gesetzliche Flexibilität. So vergleichst du in 20 Minuten sauber.",
-   "units": [
+    },
     {
      "i": 67,
      "type": "li",
@@ -474,7 +474,7 @@
      "i": 71,
      "type": "p",
      "lang": "de",
-     "chars": 90
+     "chars": 92
     },
     {
      "i": 72,
@@ -529,7 +529,13 @@
      "type": "p",
      "lang": "de",
      "chars": 87
-    },
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "text": "Trotzdem schicken Anbieter Verlängerungsangebote mit neuer 24-Monats-Bindung. Wer unterschreibt, verschenkt die gesetzliche Flexibilität. So vergleichst du in 20 Minuten sauber. Punkt 1: Verfügbarkeit mit Adresse und optionaler Ortung prüfen, sonst siehst du Tarife, die in deiner Straße nicht existieren. Punkt 2: Filter: Mindest-Download, den du brauchst (siehe Profil unten), Upload mindestens 20 Prozent davon bei Homeoffice. Punkt 3: Alle Positionen in eine Tabelle: Monatspreis Phase 1, Phase 2, Bereitstellung, Router kaufen oder mieten, Bonus, Laufzeit, Kündigungsfrist. Punkt 4: Effektivpreis über 24 Monate berechnen (Formel oben). Punkt 5: Bewertungen nur zu Entstörung und Wechselprozess lesen, nicht zu super schnell, das ist die Leitung, nicht der Service. Punkt 6: Angebot online abschließen, Bestätigung und Kundennummer speichern, Altvertrag nur kündigen, wenn der neue Anbieter die Kündigung nicht übernimmt. Welches Profil braucht welche Geschwindigkeit? Single mit Streaming und Homeoffice. 50 bis 100 Megabit pro Sekunde pro Sekunde Download, 10 bis 20 Megabit pro Sekunde pro Sekunde Upload. Videocall plus ein 4K-Stream parallel bleiben flüssig. Paar, zwei Homeoffices. 100 bis 250 Megabit pro Sekunde pro Sekunde, Upload 20 bis 40 Megabit pro Sekunde pro Sekunde. VPN verdoppelt den Overhead, hier zählt Upload mehr als die Werbezahl im Download.",
+   "units": [
     {
      "i": 81,
      "type": "p",
@@ -541,13 +547,7 @@
      "type": "h2",
      "lang": "de",
      "chars": 39
-    }
-   ]
-  },
-  {
-   "index": 6,
-   "text": "Punkt 1: Verfügbarkeit mit Adresse und optionaler Ortung prüfen, sonst siehst du Tarife, die in deiner Straße nicht existieren. Punkt 2: Filter: Mindest-Download, den du brauchst (siehe Profil unten), Upload mindestens 20 Prozent davon bei Homeoffice. Punkt 3: Alle Positionen in eine Tabelle: Monatspreis Phase 1, Phase 2, Bereitstellung, Router kaufen/mieten, Bonus, Laufzeit, Kündigungsfrist. Punkt 4: Effektivpreis über 24 Monate berechnen (Formel oben). Punkt 5: Bewertungen nur zu Entstörung und Wechselprozess lesen, nicht zu super schnell, das ist die Leitung, nicht der Service. Punkt 6: Angebot online abschließen, Bestätigung und Kundennummer speichern, Altvertrag nur kündigen, wenn der neue Anbieter die Kündigung nicht übernimmt. Welches Profil braucht welche Geschwindigkeit? Single mit Streaming und Homeoffice. 50 bis 100 Megabit pro Sekunde Download, 10 bis 20 Megabit pro Sekunde Upload. Videocall plus ein 4K-Stream parallel bleiben flüssig. Paar, zwei Homeoffices. 100 bis 250 Megabit pro Sekunde, Upload 20 bis 40 Megabit pro Sekunde. VPN verdoppelt den Overhead, hier zählt Upload mehr als die Werbezahl im Download. Familie, Gaming, Smart-TV. 250 Megabit pro Sekunde sind komfortabel, 50 Megabit pro Sekunde werden abends eng, sobald drei Geräte parallel laden. Gaming braucht vor allem Ping unter 20 ms, nicht 1 Gigabit pro Sekunde.",
-   "units": [
+    },
     {
      "i": 83,
      "type": "li",
@@ -564,7 +564,7 @@
      "i": 85,
      "type": "li",
      "lang": "de",
-     "chars": 143
+     "chars": 148
     },
     {
      "i": 86,
@@ -594,38 +594,38 @@
      "i": 90,
      "type": "p",
      "lang": "de",
-     "chars": 170
+     "chars": 194
     },
     {
      "i": 91,
      "type": "p",
      "lang": "de",
-     "chars": 94
+     "chars": 118
     },
     {
      "i": 92,
      "type": "p",
      "lang": "de",
      "chars": 82
-    },
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Familie, Gaming, Smart-TV. 250 Megabit pro Sekunde pro Sekunde sind komfortabel, 50 Megabit pro Sekunde pro Sekunde werden abends eng, sobald drei Geräte parallel laden. Gaming braucht vor allem Ping unter 20 ms, nicht 1 Gigabit pro Sekunde. Glasfaser schlägt VDSL, wenn der Hausanschluss liegt und die Dose im Wohnzimmer ist. Ein 250-Megabit pro Sekunde-VDSL mit gutem WLAN schlägt 1-Gigabit pro Sekunde-Glasfaser hinter drei Stahlbetonwänden. Deshalb gehört der WLAN-Check in denselben Nachmittag wie der DSL-Vergleich, sonst kaufst du Bandbreite, die im Funkloch stirbt. Fazit: Durch regelmäßigen Vergleich hunderte Euro sparen. Ein fundierter DSL-Vergleich deckt versteckte Preistreiber auf und sorgt dafür, dass du für stabiles Highspeed-Internet nicht mehr bezahlst als unbedingt nötig. Wer alle zwei Jahre pünktlich zum Ende der Mindestvertragslaufzeit vergleicht und wechselt, spart dauerhaft zwischen 300 Euro und 360 Euro ein. Weiterlesen: Ratgeber Internet und DSL, DSL-Wechselbonus sichern: So sparst du beim Internetvertrag, WLAN verbessern: So bringst du Speed in jede Ecke. Häufige Fragen. Wie oft sollte ich einen DSL-Vergleich durchführen? Idealerweise alle zwei Jahre, rund drei bis vier Monate vor dem Ende deiner 24-monatigen Mindestvertragslaufzeit. Kann ich meinen DSL-Vertrag auch monatlich kündigen?",
+   "units": [
     {
      "i": 93,
      "type": "p",
      "lang": "de",
-     "chars": 145
+     "chars": 169
     },
     {
      "i": 94,
      "type": "p",
      "lang": "de",
      "chars": 71
-    }
-   ]
-  },
-  {
-   "index": 7,
-   "text": "Glasfaser schlägt VDSL, wenn der Hausanschluss liegt und die Dose im Wohnzimmer ist. Ein 250-Megabit pro Sekunde-VDSL mit gutem WLAN schlägt 1-Gigabit pro Sekunde-Glasfaser hinter drei Stahlbetonwänden. Deshalb gehört der WLAN-Check in denselben Nachmittag wie der DSL-Vergleich, sonst kaufst du Bandbreite, die im Funkloch stirbt. Fazit: Durch regelmäßigen Vergleich hunderte Euro sparen. Ein fundierter DSL-Vergleich deckt versteckte Preistreiber auf und sorgt dafür, dass du für stabiles Highspeed-Internet nicht mehr bezahlst als unbedingt nötig. Wer alle zwei Jahre pünktlich zum Ende der Mindestvertragslaufzeit vergleicht und wechselt, spart dauerhaft zwischen 300 Euro und 360 Euro ein. Weiterlesen: Ratgeber Internet und DSL · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag · WLAN verbessern: So bringst du Speed in jede Ecke. Häufige Fragen. Wie oft sollte ich einen DSL-Vergleich durchführen? Idealerweise alle zwei Jahre, rund drei bis vier Monate vor dem Ende deiner 24-monatigen Mindestvertragslaufzeit. Kann ich meinen DSL-Vertrag auch monatlich kündigen? Nach Ablauf der anfänglichen 24 Monate Mindestlaufzeit gilt in Deutschland nach Paragraf 56 TKG eine gesetzliche Kündigungsfrist von maximal einem Monat. Welche Bandbreite brauche ich für Homeoffice?",
-   "units": [
+    },
     {
      "i": 95,
      "type": "p",
@@ -666,7 +666,7 @@
      "i": 101,
      "type": "p",
      "lang": "de",
-     "chars": 153
+     "chars": 151
     },
     {
      "i": 102,
@@ -691,7 +691,13 @@
      "type": "h3",
      "lang": "de",
      "chars": 52
-    },
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "text": "Nach Ablauf der anfänglichen 24 Monate Mindestlaufzeit gilt in Deutschland nach Paragraf 56 TKG eine gesetzliche Kündigungsfrist von maximal einem Monat. Welche Bandbreite brauche ich für Homeoffice? Für flüssige Video-Konferenzen, VPN-Verbindungen und paralleles Surfen reicht ein 50- oder 100-Megabit pro Sekunde pro Sekunde-Anschluss für Einzelpersonen und Paare vollkommen aus. Was passiert mit meiner Festnetznummer beim Wechsel? Deine Festnetznummer kannst du kostenlos zum neuen Provider mitnehmen (Rufnummernportierung). Der neue Anbieter wickelt dies im Rahmen des Wechselservices automatisch ab. Brauche ich für Glasfaser einen neuen Router? Nicht zwingend. Viele neuere Fritz! Box-Modelle lassen sich über ein separates Glasfasermodem (ONT) problemlos an einem FTTH-Anschluss Weiternutzen. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
     {
      "i": 106,
      "type": "p",
@@ -703,18 +709,12 @@
      "type": "h3",
      "lang": "de",
      "chars": 45
-    }
-   ]
-  },
-  {
-   "index": 8,
-   "text": "Für flüssige Video-Konferenzen, VPN-Verbindungen und paralleles Surfen reicht ein 50- oder 100-Megabit pro Sekunde-Anschluss für Einzelpersonen und Paare vollkommen aus. Was passiert mit meiner Festnetznummer beim Wechsel? Deine Festnetznummer kannst du kostenlos zum neuen Provider mitnehmen (Rufnummernportierung). Der neue Anbieter wickelt dies im Rahmen des Wechselservices automatisch ab. Brauche ich für Glasfaser einen neuen Router? Nicht zwingend. Viele neuere Fritz! Box-Modelle lassen sich über ein separates Glasfasermodem (ONT) problemlos an einem FTTH-Anschluss Weiternutzen. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
-   "units": [
+    },
     {
      "i": 108,
      "type": "p",
      "lang": "de",
-     "chars": 169
+     "chars": 181
     },
     {
      "i": 109,

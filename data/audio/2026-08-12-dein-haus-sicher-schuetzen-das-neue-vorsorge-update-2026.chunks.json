@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 113,
- "chars": 11036,
+ "chars": 11066,
  "parts": [
   {
    "index": 0,
@@ -246,7 +246,7 @@
   },
   {
    "index": 3,
-   "text": "Verlässt du für eine Stunde das Haus, während die Waschmaschine läuft oder ein Fenster gekippt ist? Dann werfen Versicherer bei Alttarifen oft grobe Fahrlässigkeit vor. Die Versicherer kürzen die Auszahlung um bis zu 50 Prozent. Moderne Top-Tarife verzichten zu 100 Prozent auf diese Einrede und zahlen den Schaden in voller Höhe. 2. Unterversicherungsverzicht. Damit der Versicherer im Totalschadenfall nicht prüft, ob dein Hausrat mehr wert war als die vereinbarte Versicherungssumme, wähle eine pauschale Mindestsumme von 650 Euro pro Quadratmeter Wohnfläche. Bei einer 90-m²-Wohnung entspricht das einer pauschalen Versicherungssumme von 58500 Euro. In diesem Fall verzichtet die Gesellschaft garantiert auf jegliche Unterversicherungskürzung. 3. Fahrraddiebstahl und Cyber-Schutz. Wer teure E-Bikes oder Fahrräder besitzt, sollte eine 24-Stunden-Fahrradklausel ohne Nachtzeitbeschränkung einschließen. Auch Phishing-Schäden beim Online-Banking sind in modernen Hausrat-Tarifen bis zu bestimmten Höchstgrenzen (zum Beispiel 5000 Euro bis 10000 Euro) mitversichert. Beispiel: Was ein moderner Rundum-Schutz kostet. Entgegen der landläufigen Meinung ist eine lückenlose Absicherung erstaunlich bezahlbar. Die folgende Tabelle zeigt die typischen Jahresbeiträge für eine 100-m²-Wohnung: Tabelle: Beispiel: Was ein moderner Rundum-Schutz kostet. Übersicht mit 3 Spalten und 6 Zeilen.",
+   "text": "Verlässt du für eine Stunde das Haus, während die Waschmaschine läuft oder ein Fenster gekippt ist? Dann werfen Versicherer bei Alttarifen oft grobe Fahrlässigkeit vor. Die Versicherer kürzen die Auszahlung um bis zu 50 Prozent. Moderne Top-Tarife verzichten zu 100 Prozent auf diese Einrede und zahlen den Schaden in voller Höhe. 2. Unterversicherungsverzicht. Damit der Versicherer im Totalschadenfall nicht prüft, ob dein Hausrat mehr wert war als die vereinbarte Versicherungssumme, wähle eine pauschale Mindestsumme von 650 Euro pro Quadratmeter Wohnfläche. Bei einer 90- Quadratmeter-Wohnung entspricht das einer pauschalen Versicherungssumme von 58500 Euro. In diesem Fall verzichtet die Gesellschaft garantiert auf jegliche Unterversicherungskürzung. 3. Fahrraddiebstahl und Cyber-Schutz. Wer teure E-Bikes oder Fahrräder besitzt, sollte eine 24-Stunden-Fahrradklausel ohne Nachtzeitbeschränkung einschließen. Auch Phishing-Schäden beim Online-Banking sind in modernen Hausrat-Tarifen bis zu bestimmten Höchstgrenzen (zum Beispiel 5000 Euro bis 10000 Euro) mitversichert. Beispiel: Was ein moderner Rundum-Schutz kostet. Entgegen der landläufigen Meinung ist eine lückenlose Absicherung erstaunlich bezahlbar. Die folgende Tabelle zeigt die typischen Jahresbeiträge für eine 100- Quadratmeter-Wohnung:",
    "units": [
     {
      "i": 36,
@@ -282,7 +282,7 @@
      "i": 41,
      "type": "p",
      "lang": "de",
-     "chars": 90
+     "chars": 101
     },
     {
      "i": 42,
@@ -324,20 +324,20 @@
      "i": 48,
      "type": "p",
      "lang": "de",
-     "chars": 80
-    },
-    {
-     "i": 49,
-     "type": "table-intro",
-     "lang": "de",
-     "chars": 95
+     "chars": 91
     }
    ]
   },
   {
    "index": 4,
-   "text": "Die Spalten lauten: Versicherungsbaustein, Alttarif (oft lückenhaft), Moderner Premium-Tarif 2026. Hausrat (50000 Euro Summe). Zeile 1 von 6. Alttarif (oft lückenhaft): 120,00 Euro pro Jahr. Moderner Premium-Tarif 2026: 75,00 Euro pro Jahr. Elementarschutz-Erweiterung. Zeile 2 von 6. Alttarif (oft lückenhaft): Nicht vorhanden (0 Euro). Moderner Premium-Tarif 2026: 28,00 Euro pro Jahr. Verzicht auf grobe Fahrlässigkeit. Zeile 3 von 6. Alttarif (oft lückenhaft): Nicht enthalten. Moderner Premium-Tarif 2026: Inklusive (0 Euro Aufpreis). Fahrrad-Diebstahlschutz (bis 2500 Euro). Zeile 4 von 6. Alttarif (oft lückenhaft): 35,00 Euro pro Jahr. Moderner Premium-Tarif 2026: Inklusive. Gesamtkosten pro Jahr. Zeile 5 von 6. Alttarif (oft lückenhaft): 155,00 Euro. Moderner Premium-Tarif 2026: 103,00 Euro. Effektive Kosten pro Monat. Zeile 6 von 6. Alttarif (oft lückenhaft): 12,92 Euro monatlich. Moderner Premium-Tarif 2026: 8,58 Euro monatlich. Ende der Tabelle Beispiel: Was ein moderner Rundum-Schutz kostet. Wer neben dem Hausrat auch die persönliche Absicherung auf Vordermann bringen will, wirft einen Blick in unsere Erklärung zur Privathaftpflichtversicherung. Alternativ hilft die Übersicht im Ratgeber: Versicherungen. Drei Säulen, die 2026 zusammengehören. 1. Gebäude. Feuer, Leitungswasser, Sturm/Hagel, Elementar. Ohne Elementar ist die Starkregen-Lücke offen.",
+   "text": "Tabelle: Beispiel: Was ein moderner Rundum-Schutz kostet. Übersicht mit 3 Spalten und 6 Zeilen. Die Spalten lauten: Versicherungsbaustein, Alttarif (oft lückenhaft), Moderner Premium-Tarif 2026. Hausrat (50000 Euro Summe). Zeile 1 von 6. Alttarif (oft lückenhaft): 120,00 Euro pro Jahr. Moderner Premium-Tarif 2026: 75,00 Euro pro Jahr. Elementarschutz-Erweiterung. Zeile 2 von 6. Alttarif (oft lückenhaft): Nicht vorhanden (0 Euro). Moderner Premium-Tarif 2026: 28,00 Euro pro Jahr. Verzicht auf grobe Fahrlässigkeit. Zeile 3 von 6. Alttarif (oft lückenhaft): Nicht enthalten. Moderner Premium-Tarif 2026: Inklusive (0 Euro Aufpreis). Fahrrad-Diebstahlschutz (bis 2500 Euro). Zeile 4 von 6. Alttarif (oft lückenhaft): 35,00 Euro pro Jahr. Moderner Premium-Tarif 2026: Inklusive. Gesamtkosten pro Jahr. Zeile 5 von 6. Alttarif (oft lückenhaft): 155,00 Euro. Moderner Premium-Tarif 2026: 103,00 Euro. Effektive Kosten pro Monat. Zeile 6 von 6. Alttarif (oft lückenhaft): 12,92 Euro monatlich. Moderner Premium-Tarif 2026: 8,58 Euro monatlich. Ende der Tabelle Beispiel: Was ein moderner Rundum-Schutz kostet. Wer neben dem Hausrat auch die persönliche Absicherung auf Vordermann bringen will, wirft einen Blick in unsere Erklärung zur Privathaftpflichtversicherung. Alternativ hilft die Übersicht im Ratgeber: Versicherungen. Drei Säulen, die 2026 zusammengehören.",
    "units": [
+    {
+     "i": 49,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 95
+    },
     {
      "i": 50,
      "type": "table-intro",
@@ -409,19 +409,19 @@
      "type": "h2",
      "lang": "de",
      "chars": 38
-    },
-    {
-     "i": 62,
-     "type": "p",
-     "lang": "de",
-     "chars": 105
     }
    ]
   },
   {
    "index": 5,
-   "text": "Gleitender Neuwert, grobe Fahrlässigkeit, Ableitungsrohre, Photovoltaik. 2. Hausrat. Bewegliche Dinge, Fahrräder (Klausel), Wertsachen-Grenze, grobe Fahrlässigkeit, Überspannung. Unterversicherung vermeiden: Summe ist was Neuanschaffung wirklich kostet, nicht was die Einrichtung vor 15 Jahren gekostet hat. 3. Haftpflicht. Für Eigentümer zusätzlich Haus- und Grundbesitzerhaftpflicht, wenn vermietet oder das Gebäude nicht nur selbst bewohnt wird. Streupflicht, Dachziegel, nicht geräumter Weg, das landet nicht in der Privathaftpflicht allein, wenn ein Objekt dazwischenhängt. Elementar 2026: Pflichtgefühl gegen Markt. Politisch wird über Pflichtversicherung diskutiert, abgeschlossen ist sie nicht flächendeckend. Praktisch heißt das: Wer in ZÜRS 3 bis 4 unversichert bleibt, trägt ein existenzielles Risiko. Angebote einholen, auch wenn sie teuer sind, und parallel Rückstauklappen, Geländeanpassung, wichtige Technik nicht im Keller. Prävention senkt nicht immer die Prämie, aber den Schaden. Klauseln, die nach dem Schaden zu spät kommen. Neuwert statt Zeitwert bei Hausrat. Aufräum- und Abbruchkosten ausreichend hoch. Hotelkosten nach Unbewohnbarkeit, mindestens 150 bis 200 Tage. Datenrettung und Schlossänderung nach Einbruch. Ableitungsrohre auf dem Grundstück. Ein Vorsorge-Update ist kein neuer Vertrag um des Wechsels willen.",
+   "text": "1. Gebäude. Feuer, Leitungswasser, Sturm oder Hagel, Elementar. Ohne Elementar ist die Starkregen-Lücke offen. Gleitender Neuwert, grobe Fahrlässigkeit, Ableitungsrohre, Photovoltaik. 2. Hausrat. Bewegliche Dinge, Fahrräder (Klausel), Wertsachen-Grenze, grobe Fahrlässigkeit, Überspannung. Unterversicherung vermeiden: Summe ist was Neuanschaffung wirklich kostet, nicht was die Einrichtung vor 15 Jahren gekostet hat. 3. Haftpflicht. Für Eigentümer zusätzlich Haus- und Grundbesitzerhaftpflicht, wenn vermietet oder das Gebäude nicht nur selbst bewohnt wird. Streupflicht, Dachziegel, nicht geräumter Weg, das landet nicht in der Privathaftpflicht allein, wenn ein Objekt dazwischenhängt. Elementar 2026: Pflichtgefühl gegen Markt. Politisch wird über Pflichtversicherung diskutiert, abgeschlossen ist sie nicht flächendeckend. Praktisch heißt das: Wer in ZÜRS 3 bis 4 unversichert bleibt, trägt ein existenzielles Risiko. Angebote einholen, auch wenn sie teuer sind, und parallel Rückstauklappen, Geländeanpassung, wichtige Technik nicht im Keller. Prävention senkt nicht immer die Prämie, aber den Schaden. Klauseln, die nach dem Schaden zu spät kommen. Neuwert statt Zeitwert bei Hausrat. Aufräum- und Abbruchkosten ausreichend hoch. Hotelkosten nach Unbewohnbarkeit, mindestens 150 bis 200 Tage. Datenrettung und Schlossänderung nach Einbruch. Ableitungsrohre auf dem Grundstück.",
    "units": [
+    {
+     "i": 62,
+     "type": "p",
+     "lang": "de",
+     "chars": 110
+    },
     {
      "i": 63,
      "type": "p",
@@ -517,19 +517,19 @@
      "type": "li",
      "lang": "de",
      "chars": 35
-    },
-    {
-     "i": 79,
-     "type": "p",
-     "lang": "de",
-     "chars": 66
     }
    ]
   },
   {
    "index": 6,
-   "text": "Es ist ein Nachmittag mit den drei PDFs, einem Marker und der Frage: Würde ich das morgen nach einem Sturm noch für fair halten? Wenn nein, vergleichen und nahtlos ersetzen. Der 60-Minuten-Vorsorge-Abend für Eigentümer. Minute 0 bis 15: Drei PDFs öffnen (Gebäude, Hausrat, Haftpflicht). Deckung, SB, Elementar ja/nein, Datum der letzten Anpassung. Minute 15 bis 30: Wohnfläche, Wert 1914 oder Wertermittlung, PV- und WP-Liste. Minute 30 bis 45: Fotos von Dach, Kellerabgang, Rückstauklappe, nicht für Instagram, für den Schadenfall. Minute 45 bis 60: Vergleichsfilter setzen oder Termin mit Makler, der Klauseln erklärt, nicht nur den Preis. Wer das einmal im Jahr macht, braucht kein Vorsorge-Update-Gefühl mehr, sondern eine Checkliste mit Datum. Genau das unterscheidet ein gepflegtes Risiko von Hoffnung. Fazit: Dein Haus mit zeitgemäßen Klauseln schützen. Veraltete Verträge bieten bei modernen Unwetterrisiken oft nur unzureichenden Schutz. Ersetze alte Policen durch einen zeitgemäßen Vertrag mit Elementarschutz und Verzicht auf grobe Fahrlässigkeit. So schützt du deine Immobilie vor existenziellen Schäden. Und du sparst durch günstige Online-Konditionen gleichzeitig bares Geld. Weiterlesen: Ratgeber Versicherungen · Privathaftpflicht: Warum sie so wichtig ist und was sie kostet · Energiediebe stoppen: So kannst du Stromfresser finden. Häufige Fragen.",
+   "text": "Ein Vorsorge-Update ist kein neuer Vertrag um des Wechsels willen. Es ist ein Nachmittag mit den drei PDFs, einem Marker und der Frage: Würde ich das morgen nach einem Sturm noch für fair halten? Wenn nein, vergleichen und nahtlos ersetzen. Der 60-Minuten-Vorsorge-Abend für Eigentümer. Minute 0 bis 15: Drei PDFs öffnen (Gebäude, Hausrat, Haftpflicht). Deckung, SB, Elementar ja oder nein, Datum der letzten Anpassung. Minute 15 bis 30: Wohnfläche, Wert 1914 oder Wertermittlung, PV- und WP-Liste. Minute 30 bis 45: Fotos von Dach, Kellerabgang, Rückstauklappe, nicht für Instagram, für den Schadenfall. Minute 45 bis 60: Vergleichsfilter setzen oder Termin mit Makler, der Klauseln erklärt, nicht nur den Preis. Wer das einmal im Jahr macht, braucht kein Vorsorge-Update-Gefühl mehr, sondern eine Checkliste mit Datum. Genau das unterscheidet ein gepflegtes Risiko von Hoffnung. Fazit: Dein Haus mit zeitgemäßen Klauseln schützen. Veraltete Verträge bieten bei modernen Unwetterrisiken oft nur unzureichenden Schutz. Ersetze alte Policen durch einen zeitgemäßen Vertrag mit Elementarschutz und Verzicht auf grobe Fahrlässigkeit. So schützt du deine Immobilie vor existenziellen Schäden. Und du sparst durch günstige Online-Konditionen gleichzeitig bares Geld.",
    "units": [
+    {
+     "i": 79,
+     "type": "p",
+     "lang": "de",
+     "chars": 66
+    },
     {
      "i": 80,
      "type": "p",
@@ -552,7 +552,7 @@
      "i": 83,
      "type": "p",
      "lang": "de",
-     "chars": 127
+     "chars": 132
     },
     {
      "i": 84,
@@ -607,25 +607,25 @@
      "type": "p",
      "lang": "de",
      "chars": 130
-    },
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Weiterlesen: Ratgeber Versicherungen, Privathaftpflicht: Warum sie so wichtig ist und was sie kostet, Energiediebe stoppen: So kannst du Stromfresser finden. Häufige Fragen. Was ist der Unterschied zwischen Gebäude- und Hausratversicherung? Als Faustformel gilt: Stellst du dein Haus gedanklich auf den Kopf und schüttelst es, gehört alles, was herausfällt (Möbel, Kleidung, Fernseher), zur Hausratversicherung. Alles, was fest mit dem Gebäude verbunden ist (Dach, Wände, Einbauküche, Parkett), fällt unter die Wohngebäudeversicherung. Warum reicht eine Standard-Hausratversicherung bei Starkregen nicht aus? Standard-Tarife leisten nur bei Leitungswasserschäden (zum Beispiel geplatztes Rohr im Haus). Dringt Regenwasser von außen über Kellerfenster oder Lichtschächte ein, handelt es sich um einen Elementarschaden, der separat mitversichert werden muss. Was bedeutet Unterversicherungsverzicht? Wenn du mindestens 650 Euro Versicherungssumme pro Quadratmeter vereinbarst, verzichtet die Versicherung im Schadensfall darauf, den Gesamtwert deiner Möbel zu schätzen, und zahlt den Schaden bis zur Versicherungssumme ungekürzt aus. Zahlt die Versicherung, wenn ich ein gekipptes Fenster bei Regen offen lasse? Nur dann, wenn dein Tarif den Verzicht auf die Einrede der groben Fahrlässigkeit enthält. Bei Alttarifen ohne diese Klausel kann die Versicherung die Leistung massiv kürzen.",
+   "units": [
     {
      "i": 93,
      "type": "p",
      "lang": "de",
-     "chars": 159
+     "chars": 157
     },
     {
      "i": 94,
      "type": "h2",
      "lang": "de",
      "chars": 15
-    }
-   ]
-  },
-  {
-   "index": 7,
-   "text": "Was ist der Unterschied zwischen Gebäude- und Hausratversicherung? Als Faustformel gilt: Stellst du dein Haus gedanklich auf den Kopf und schüttelst es, gehört alles, was herausfällt (Möbel, Kleidung, Fernseher), zur Hausratversicherung. Alles, was fest mit dem Gebäude verbunden ist (Dach, Wände, Einbauküche, Parkett), fällt unter die Wohngebäudeversicherung. Warum reicht eine Standard-Hausratversicherung bei Starkregen nicht aus? Standard-Tarife leisten nur bei Leitungswasserschäden (zum Beispiel geplatztes Rohr im Haus). Dringt Regenwasser von außen über Kellerfenster oder Lichtschächte ein, handelt es sich um einen Elementarschaden, der separat mitversichert werden muss. Was bedeutet Unterversicherungsverzicht? Wenn du mindestens 650 Euro Versicherungssumme pro Quadratmeter vereinbarst, verzichtet die Versicherung im Schadensfall darauf, den Gesamtwert deiner Möbel zu schätzen, und zahlt den Schaden bis zur Versicherungssumme ungekürzt aus. Zahlt die Versicherung, wenn ich ein gekipptes Fenster bei Regen offen lasse? Nur dann, wenn dein Tarif den Verzicht auf die Einrede der groben Fahrlässigkeit enthält. Bei Alttarifen ohne diese Klausel kann die Versicherung die Leistung massiv kürzen. Wie oft sollte ich meine Hausversicherung überprüfen?",
-   "units": [
+    },
     {
      "i": 95,
      "type": "h3",
@@ -697,19 +697,19 @@
      "type": "p",
      "lang": "de",
      "chars": 83
-    },
-    {
-     "i": 107,
-     "type": "h3",
-     "lang": "de",
-     "chars": 53
     }
    ]
   },
   {
    "index": 8,
-   "text": "Ein Check alle zwei bis drei Jahre ist ratsam, um neu angeschaffte Wertgegenstände nachzumelden und von günstigeren Tarifgenerationen mit besseren Klauseln zu profitieren. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "text": "Wie oft sollte ich meine Hausversicherung überprüfen? Ein Check alle zwei bis drei Jahre ist ratsam, um neu angeschaffte Wertgegenstände nachzumelden und von günstigeren Tarifgenerationen mit besseren Klauseln zu profitieren. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
    "units": [
+    {
+     "i": 107,
+     "type": "h3",
+     "lang": "de",
+     "chars": 53
+    },
     {
      "i": 108,
      "type": "p",

@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 105,
- "chars": 10093,
+ "chars": 10101,
  "parts": [
   {
    "index": 0,
@@ -408,7 +408,7 @@
   },
   {
    "index": 5,
-   "text": "Ein Glas, das zwei Jahre im Keller steht, ist kein Spartipp, sondern vergessenes Kapital. Black Friday ohne Nachzahlung. Liste vor dem Event: nur Dinge, die schon auf der 30-Tage-Wunschliste stehen. Preis 30 Tage vorher notieren, viele −40 Prozent sind der Preis von Mitte Oktober. Cashback nur auf der Liste, nicht als Freibrief. Bezahlmittel ohne Dispo. Weihnachten: Budget pro Person vorher, Umschläge oder ein Unterkonto. Selbst gemachte Dinge zählen mit Materialkosten, nicht mit 0 Euro, sonst unterschätzt du den Dezember. Wenn der Herbst so läuft, startest du ins neue Jahr mit Puffer statt mit Rechnungen, die du im Goldenen Oktober hättest vermeiden können. Weihnachtskonto im September. Ein Unterkonto oder Umschlag Dezember ab 1.9: 4 mal 50 bis 150 Euro je nach Haushalt. Geschenke, Bahn, Essen. Was im Umschlag ist, darf raus. Was nicht drin ist, wird nicht per Dispo geholt. Das ist langweiliger als Black Friday und verhindert den Januar, in dem jeder Spartipp zu spät kommt. Parallel: Energie- und DSL-Vergleich im selben Monat, Ertrag auf dasselbe Konto. Der Herbst wird so zum Einzahl-Monat, nicht zum Ausgabe-Monat. Der September-Abend, der den Dezember trägt. Setz 75 Minuten, so teilst du sie ein: 25 Minuten Verträge (Energie, DSL, Mobilfunk, alles, was älter als 12 Monate ist, kommt in den Vergleich). 25 Minuten Dezember-Budget auf ein Unterkonto.",
+   "text": "Ein Glas, das zwei Jahre im Keller steht, ist kein Spartipp, sondern vergessenes Kapital. Black Friday ohne Nachzahlung. Liste vor dem Event: nur Dinge, die schon auf der 30-Tage-Wunschliste stehen. Preis 30 Tage vorher notieren, viele minus 40 Prozent sind der Preis von Mitte Oktober. Cashback nur auf der Liste, nicht als Freibrief. Bezahlmittel ohne Dispo. Weihnachten: Budget pro Person vorher, Umschläge oder ein Unterkonto. Selbst gemachte Dinge zählen mit Materialkosten, nicht mit 0 Euro, sonst unterschätzt du den Dezember. Wenn der Herbst so läuft, startest du ins neue Jahr mit Puffer statt mit Rechnungen, die du im Goldenen Oktober hättest vermeiden können. Weihnachtskonto im September. Ein Unterkonto oder Umschlag Dezember ab 1.9: 4 mal 50 bis 150 Euro je nach Haushalt. Geschenke, Bahn, Essen. Was im Umschlag ist, darf raus. Was nicht drin ist, wird nicht per Dispo geholt. Das ist langweiliger als Black Friday und verhindert den Januar, in dem jeder Spartipp zu spät kommt. Parallel: Energie- und DSL-Vergleich im selben Monat, Ertrag auf dasselbe Konto. Der Herbst wird so zum Einzahl-Monat, nicht zum Ausgabe-Monat. Der September-Abend, der den Dezember trägt. Setz 75 Minuten, so teilst du sie ein: 25 Minuten Verträge (Energie, DSL, Mobilfunk, alles, was älter als 12 Monate ist, kommt in den Vergleich). 25 Minuten Dezember-Budget auf ein Unterkonto.",
    "units": [
     {
      "i": 61,
@@ -432,7 +432,7 @@
      "i": 64,
      "type": "p",
      "lang": "de",
-     "chars": 131
+     "chars": 136
     },
     {
      "i": 65,
@@ -522,13 +522,13 @@
   },
   {
    "index": 6,
-   "text": "25 Minuten Kleidung/Heizen: Was du wirklich brauchst versus was der Herbstschlussverkauf suggeriert. Wenn nur eine der drei Schichten sitzt, nimm die Verträge. Sie zahlen den Rest. Fazit: Nutze den Herbst für deinen persönlichen Kassensturz. Der Herbst ist kein Grund für trübe Stimmung, sondern die perfekte Gelegenheit, deine Finanzen auf Vordermann zu bringen. Indem du bestehende Verträge hinterfragst, den Kraftfahrzeug-Stichtag nutzt und dein Zuhause energieeffizient machst, gehst du mit einem deutlichen Plus auf dem Girokonto ins neue Jahr. Weiterlesen: Ratgeber Frugalismus · DSL-Wechselbonus sichern · Versicherungen optimieren. Häufige Fragen. Warum ist der 30. November bei Versicherungen so wichtig? Die meisten Kraftfahrzeug-Versicherungen laufen vom 1. Januar bis 31. Dezember. Mit der gesetzlichen Kündigungsfrist von einem Monat muss die schriftliche Kündigung spätestens am 30. November beim Versicherer eingegangen sein. Habe ich ein Sonderkündigungsrecht bei Beitragserhöhungen? Ja. Erhöht deine Versicherung die Beiträge (auch versteckt durch eine Neueinstufung der Typklasse), hast du ab Erhalt der Mitteilung vier Wochen Zeit für eine Sonderkündigung. Wie viel kann ich durch saisonales Kochen sparen? Saisonales und regionales Gemüse kostet in der Haupterntezeit oft 40 bis 60 Prozent weniger als Treibhausware oder Flugimporte im Winter.",
+   "text": "25 Minuten Kleidung oder Heizen: Was du wirklich brauchst versus was der Herbstschlussverkauf suggeriert. Wenn nur eine der drei Schichten sitzt, nimm die Verträge. Sie zahlen den Rest. Fazit: Nutze den Herbst für deinen persönlichen Kassensturz. Der Herbst ist kein Grund für trübe Stimmung, sondern die perfekte Gelegenheit, deine Finanzen auf Vordermann zu bringen. Indem du bestehende Verträge hinterfragst, den Kraftfahrzeug-Stichtag nutzt und dein Zuhause energieeffizient machst, gehst du mit einem deutlichen Plus auf dem Girokonto ins neue Jahr. Weiterlesen: Ratgeber Frugalismus, DSL-Wechselbonus sichern, Versicherungen optimieren. Häufige Fragen. Warum ist der 30. November bei Versicherungen so wichtig? Die meisten Kraftfahrzeug-Versicherungen laufen vom 1. Januar bis 31. Dezember. Mit der gesetzlichen Kündigungsfrist von einem Monat muss die schriftliche Kündigung spätestens am 30. November beim Versicherer eingegangen sein. Habe ich ein Sonderkündigungsrecht bei Beitragserhöhungen? Ja. Erhöht deine Versicherung die Beiträge (auch versteckt durch eine Neueinstufung der Typklasse), hast du ab Erhalt der Mitteilung vier Wochen Zeit für eine Sonderkündigung. Wie viel kann ich durch saisonales Kochen sparen? Saisonales und regionales Gemüse kostet in der Haupterntezeit oft 40 bis 60 Prozent weniger als Treibhausware oder Flugimporte im Winter.",
    "units": [
     {
      "i": 79,
      "type": "li",
      "lang": "de",
-     "chars": 100
+     "chars": 105
     },
     {
      "i": 80,
@@ -558,7 +558,7 @@
      "i": 84,
      "type": "p",
      "lang": "de",
-     "chars": 89
+     "chars": 87
     },
     {
      "i": 85,

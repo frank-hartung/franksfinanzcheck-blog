@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 152,
- "chars": 13200,
+ "chars": 13207,
  "parts": [
   {
    "index": 0,
@@ -264,7 +264,7 @@
   },
   {
    "index": 3,
-   "text": "Einlagensicherung. Zeile 5 von 6. Girokonto: 100000 Euro. Tagesgeld: 100000 Euro. Festgeld: 100000 Euro. Ideal für. Zeile 6 von 6. Girokonto: Zahlungsverkehr. Tagesgeld: Notgroschen, Reserve. Festgeld: mittelfristige Ziele (1 bis 5 J.). Ende der Tabelle Tagesgeld versus Festgeld versus Girokonto. Faustregel für die Aufteilung deiner Sparguthaben: Girokonto: 1 bis 2 Monatsausgaben als Puffer. Tagesgeld: 3 bis 6 Monatsausgaben als Notgroschen. Festgeld: Geld, das du in 1 bis 5 Jahren sicher brauchst (zum Beispiel Urlaub, Autokauf, Anzahlung). E T F-Sparplan / Aktien-E T F: Vermögensaufbau mit 10+ Jahren Anlagehorizont. So funktioniert die EU-Einlagensicherung. Jede Bank im Europäischen Wirtschaftsraum muss Kundeneinlagen bis 100000 Euro pro Person und Institut absichern. Im Insolvenzfall zahlt der nationale Einlagensicherungsfonds innerhalb von sieben Werktagen aus. Wichtig für Tagesgeld-Sparer: Gemeinsame Konten: Bei einem Gemeinschaftskonto gilt die Sicherung für jeden Kontoinhaber einzeln, also bis zu 200000 Euro. Mehrere Konten bei derselben Bank: Sie werden bei der Einlagensicherung zusammengezählt. Ausländische Banken: Banken aus anderen EU-Ländern (zum Beispiel Schweden, Italien, Portugal) unterliegen dem jeweiligen nationalen Sicherungsfonds, die 100000 Euro gelten EU-weit.",
+   "text": "Einlagensicherung. Zeile 5 von 6. Girokonto: 100000 Euro. Tagesgeld: 100000 Euro. Festgeld: 100000 Euro. Ideal für. Zeile 6 von 6. Girokonto: Zahlungsverkehr. Tagesgeld: Notgroschen, Reserve. Festgeld: mittelfristige Ziele (1 bis 5 J.). Ende der Tabelle Tagesgeld versus Festgeld versus Girokonto. Faustregel für die Aufteilung deiner Sparguthaben: Girokonto: 1 bis 2 Monatsausgaben als Puffer. Tagesgeld: 3 bis 6 Monatsausgaben als Notgroschen. Festgeld: Geld, das du in 1 bis 5 Jahren sicher brauchst (zum Beispiel Urlaub, Autokauf, Anzahlung). E T F-Sparplan oder Aktien-E T F: Vermögensaufbau mit 10+ Jahren Anlagehorizont. So funktioniert die EU-Einlagensicherung. Jede Bank im Europäischen Wirtschaftsraum muss Kundeneinlagen bis 100000 Euro pro Person und Institut absichern. Im Insolvenzfall zahlt der nationale Einlagensicherungsfonds innerhalb von sieben Werktagen aus. Wichtig für Tagesgeld-Sparer: Gemeinsame Konten: Bei einem Gemeinschaftskonto gilt die Sicherung für jeden Kontoinhaber einzeln, also bis zu 200000 Euro. Mehrere Konten bei derselben Bank: Sie werden bei der Einlagensicherung zusammengezählt. Ausländische Banken: Banken aus anderen EU-Ländern (zum Beispiel Schweden, Italien, Portugal) unterliegen dem jeweiligen nationalen Sicherungsfonds, die 100000 Euro gelten EU-weit.",
    "units": [
     {
      "i": 39,
@@ -312,7 +312,7 @@
      "i": 46,
      "type": "li",
      "lang": "de",
-     "chars": 77
+     "chars": 80
     },
     {
      "i": 47,
@@ -354,7 +354,7 @@
   },
   {
    "index": 4,
-   "text": "Frist: Beträge, die aus Immobilienverkäufen, Versicherungsleistungen oder Abfindungen stammen, können bis zu 500000 Euro für sechs Monate zusätzlich abgesichert sein (Paragraf 8 EinSiG). Die 5 wichtigsten Auswahlkriterien. 1. Der Zinssatz und die Zinsgarantie. Der angepriesene Zinssatz nützt dir wenig, wenn er nach drei Monaten wieder auf 0,5 Prozent fällt. Achte deshalb auf eine explizite Zinsgarantie von mindestens 6 bis 12 Monaten. Besonders transparent sind Banken, die bereits in der Angebotsbeschreibung zwischen Aktionszins und Anschlusszins unterscheiden. 2. Die Herkunft und Einlagensicherung. Banken innerhalb der EU sind grundsätzlich sicher. Wer ganz auf deutsche Einlagensicherung setzen möchte, wählt einen Anbieter mit Sitz in Deutschland. Bei Banken mit EU-Auslands-Filiale greift die Herkunftsland-Sicherung, das ist gleichwertig, aber die Kommunikation läuft gegebenenfalls auf Englisch. 3. Keine versteckten Gebühren. Seriöse Tagesgeldkonten kennen: Keine Kontoführungsgebühr. Keine Mindesteinlage oder nur eine sehr geringe (ab 1 Euro). Keine maximale Einlage unter 100000 Euro. Keine Strafgebühren bei Verfügungen. 4. Einfache Eröffnung und Bedienung. Video- oder App-Ident (Videoident / eID) dauert 5 bis 10 Minuten. Das Referenzkonto (Girokonto) kann frei gewählt werden. Eine moderne App oder Web-Oberfläche macht den Kontostand jederzeit abrufbar.",
+   "text": "Frist: Beträge, die aus Immobilienverkäufen, Versicherungsleistungen oder Abfindungen stammen, können bis zu 500000 Euro für sechs Monate zusätzlich abgesichert sein (Paragraf 8 EinSiG). Die 5 wichtigsten Auswahlkriterien. 1. Der Zinssatz und die Zinsgarantie. Der angepriesene Zinssatz nützt dir wenig, wenn er nach drei Monaten wieder auf 0,5 Prozent fällt. Achte deshalb auf eine explizite Zinsgarantie von mindestens 6 bis 12 Monaten. Besonders transparent sind Banken, die bereits in der Angebotsbeschreibung zwischen Aktionszins und Anschlusszins unterscheiden. 2. Die Herkunft und Einlagensicherung. Banken innerhalb der EU sind grundsätzlich sicher. Wer ganz auf deutsche Einlagensicherung setzen möchte, wählt einen Anbieter mit Sitz in Deutschland. Bei Banken mit EU-Auslands-Filiale greift die Herkunftsland-Sicherung, das ist gleichwertig, aber die Kommunikation läuft gegebenenfalls auf Englisch. 3. Keine versteckten Gebühren. Seriöse Tagesgeldkonten kennen: Keine Kontoführungsgebühr. Keine Mindesteinlage oder nur eine sehr geringe (ab 1 Euro). Keine maximale Einlage unter 100000 Euro. Keine Strafgebühren bei Verfügungen. 4. Einfache Eröffnung und Bedienung. Video- oder App-Ident (Videoident oder eID) dauert 5 bis 10 Minuten. Das Referenzkonto (Girokonto) kann frei gewählt werden. Eine moderne App oder Web-Oberfläche macht den Kontostand jederzeit abrufbar.",
    "units": [
     {
      "i": 53,
@@ -462,7 +462,7 @@
      "i": 70,
      "type": "li",
      "lang": "de",
-     "chars": 65
+     "chars": 68
     },
     {
      "i": 71,
@@ -480,7 +480,7 @@
   },
   {
    "index": 5,
-   "text": "5. Service und Erreichbarkeit. Telefon- oder Chat-Support mit angemessenen Wartezeiten. Klare Kommunikation bei Zinsänderungen. Keine aggressiven Verkaufs-Tricks für weitere Produkte. Aktuelle Zinslandschaft im August 2026. Die Spanne der Tagesgeldzinsen ist breit. Hier die ungefähren Niveaus: Tabelle: Aktuelle Zinslandschaft im August 2026. Übersicht mit 2 Spalten und 6 Zeilen. Die Spalten lauten: Anbietertyp, Zinsspanne pro Jahr. Großbanken / Filialbanken (Bestandskunden). Zeile 1 von 6. Zinsspanne pro Jahr: 0,1 bis 1,0 Prozent. Deutsche Direktbanken. Zeile 2 von 6. Zinsspanne pro Jahr: 1,5 bis 2,3 Prozent. EU-Auslandsbanken über deutsche Plattformen. Zeile 3 von 6. Zinsspanne pro Jahr: 2,5 bis 3,2 Prozent. Neukunden-Aktionsangebote (3 bis 6 Monate). Zeile 4 von 6. Zinsspanne pro Jahr: 2,8 bis 3,5 Prozent. Festgeld 12 Monate. Zeile 5 von 6. Zinsspanne pro Jahr: 2,2 bis 3,5 Prozent. Festgeld 24 bis 36 Monate. Zeile 6 von 6. Zinsspanne pro Jahr: 2,5 bis 3,8 Prozent. Ende der Tabelle Aktuelle Zinslandschaft im August 2026. Stand: August 2026, eigene Recherche und öffentliche Vergleichsportale. Zinssätze ändern sich laufend, vor einer Eröffnung immer den tagesaktuellen Satz prüfen. Rechenbeispiel: Was bringt das Tagesgeld konkret? Nehmen wir an, du hast einen Notgroschen von 15000 Euro aufgebaut:",
+   "text": "5. Service und Erreichbarkeit. Telefon- oder Chat-Support mit angemessenen Wartezeiten. Klare Kommunikation bei Zinsänderungen. Keine aggressiven Verkaufs-Tricks für weitere Produkte. Aktuelle Zinslandschaft im August 2026. Die Spanne der Tagesgeldzinsen ist breit. Hier die ungefähren Niveaus: Tabelle: Aktuelle Zinslandschaft im August 2026. Übersicht mit 2 Spalten und 6 Zeilen. Die Spalten lauten: Anbietertyp, Zinsspanne pro Jahr. Großbanken oder Filialbanken (Bestandskunden). Zeile 1 von 6. Zinsspanne pro Jahr: 0,1 bis 1,0 Prozent. Deutsche Direktbanken. Zeile 2 von 6. Zinsspanne pro Jahr: 1,5 bis 2,3 Prozent. EU-Auslandsbanken über deutsche Plattformen. Zeile 3 von 6. Zinsspanne pro Jahr: 2,5 bis 3,2 Prozent. Neukunden-Aktionsangebote (3 bis 6 Monate). Zeile 4 von 6. Zinsspanne pro Jahr: 2,8 bis 3,5 Prozent. Festgeld 12 Monate. Zeile 5 von 6. Zinsspanne pro Jahr: 2,2 bis 3,5 Prozent. Festgeld 24 bis 36 Monate. Zeile 6 von 6. Zinsspanne pro Jahr: 2,5 bis 3,8 Prozent. Ende der Tabelle Aktuelle Zinslandschaft im August 2026. Stand: August 2026, eigene Recherche und öffentliche Vergleichsportale. Zinssätze ändern sich laufend, vor einer Eröffnung immer den tagesaktuellen Satz prüfen. Rechenbeispiel: Was bringt das Tagesgeld konkret? Nehmen wir an, du hast einen Notgroschen von 15000 Euro aufgebaut:",
    "units": [
     {
      "i": 73,
@@ -528,7 +528,7 @@
      "i": 80,
      "type": "table-row",
      "lang": "de",
-     "chars": 100
+     "chars": 103
     },
     {
      "i": 81,
@@ -780,7 +780,7 @@
   },
   {
    "index": 8,
-   "text": "Steuern nicht vergessen: Zinsen sind steuerpflichtig, aber der Sparerfreibetrag beträgt 1000 Euro pro Person und Jahr (Stand 2026). Trage der Bank einen Freistellungsauftrag ein. Fazit: Tagesgeld ist der unterschätzte Basis-Baustein. Tagesgeld ist nicht aufregend, aber es erfüllt eine Aufgabe, die keine andere Anlageform so gut kann: sichere, täglich verfügbare Liquidität zu einem vernünftigen Zinssatz. Mit den aktuellen Zinsen von 1,8 bis 3,2 Prozent ist es 2026 wieder ein Kinderspiel, den Notgroschen rentabel zu parken. Ein regelmäßiger Vergleich alle 6 bis 12 Monate kostet dich 20 Minuten, bringt aber schnell 300 Euro bis 500 Euro im Jahr. Weiterlesen: Kostenloses Girokonto finden · Frugalismus-Tipps für mehr Freiheit · Pillar: Konto und Karten. Häufige Fragen. Wie hoch sind die Tagesgeldzinsen aktuell? Im August 2026 liegen die Zinssätze für Tagesgeld in Deutschland je nach Anbieter zwischen etwa 1,8 und 3,2 Prozent pro Jahr. Neukunden-Aktionsangebote können kurzfristig auch darüber liegen. Ist mein Geld auf einem Tagesgeldkonto wirklich sicher? Ja, innerhalb der EU sind Einlagen bis 100000 Euro pro Person und Bank durch die gesetzliche Einlagensicherung abgesichert. Bei Gemeinschaftskonten gilt die Summe für jeden Kontoinhaber einzeln (bis zu 200000 Euro). Muss ich Tagesgeld-Zinsen versteuern?",
+   "text": "Steuern nicht vergessen: Zinsen sind steuerpflichtig, aber der Sparerfreibetrag beträgt 1000 Euro pro Person und Jahr (Stand 2026). Trage der Bank einen Freistellungsauftrag ein. Fazit: Tagesgeld ist der unterschätzte Basis-Baustein. Tagesgeld ist nicht aufregend, aber es erfüllt eine Aufgabe, die keine andere Anlageform so gut kann: sichere, täglich verfügbare Liquidität zu einem vernünftigen Zinssatz. Mit den aktuellen Zinsen von 1,8 bis 3,2 Prozent ist es 2026 wieder ein Kinderspiel, den Notgroschen rentabel zu parken. Ein regelmäßiger Vergleich alle 6 bis 12 Monate kostet dich 20 Minuten, bringt aber schnell 300 Euro bis 500 Euro im Jahr. Weiterlesen: Kostenloses Girokonto finden, Frugalismus-Tipps für mehr Freiheit, Pillar: Konto und Karten. Häufige Fragen. Wie hoch sind die Tagesgeldzinsen aktuell? Im August 2026 liegen die Zinssätze für Tagesgeld in Deutschland je nach Anbieter zwischen etwa 1,8 und 3,2 Prozent pro Jahr. Neukunden-Aktionsangebote können kurzfristig auch darüber liegen. Ist mein Geld auf einem Tagesgeldkonto wirklich sicher? Ja, innerhalb der EU sind Einlagen bis 100000 Euro pro Person und Bank durch die gesetzliche Einlagensicherung abgesichert. Bei Gemeinschaftskonten gilt die Summe für jeden Kontoinhaber einzeln (bis zu 200000 Euro). Muss ich Tagesgeld-Zinsen versteuern?",
    "units": [
     {
      "i": 120,
@@ -822,7 +822,7 @@
      "i": 126,
      "type": "p",
      "lang": "de",
-     "chars": 107
+     "chars": 105
     },
     {
      "i": 127,

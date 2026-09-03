@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 118,
- "chars": 11670,
+ "chars": 11676,
  "parts": [
   {
    "index": 0,
@@ -264,7 +264,7 @@
   },
   {
    "index": 3,
-   "text": "Tabelle: Was kostet eine erstklassige Privathaftpflichtversicherung. Übersicht mit 4 Spalten und 4 Zeilen. Die Spalten lauten: Tarifvariante, Monatsbeitrag, Typischer Jahresbeitrag, Deckungssumme und Besonderheiten. Single-Tarif (Standard). Zeile 1 von 4. Monatsbeitrag: circa 3,20 Euro monatlich. Typischer Jahresbeitrag: circa 38,00 Euro pro Jahr. Deckungssumme und Besonderheiten: 20 bis 30 Millionen Euro pauschal. Single-Tarif (Testsieger). Zeile 2 von 4. Monatsbeitrag: circa 3,90 Euro monatlich. Typischer Jahresbeitrag: circa 46,00 Euro pro Jahr. Deckungssumme und Besonderheiten: 50 Millionen Euro (inklusive Schlüssel und Ausfall). Paare / Lebensgemeinschaft. Zeile 3 von 4. Monatsbeitrag: circa 4,80 Euro monatlich. Typischer Jahresbeitrag: circa 58,00 Euro pro Jahr. Deckungssumme und Besonderheiten: 50 Millionen Euro (zwei Erwachsene). Familientarif (mit Kindern). Zeile 4 von 4. Monatsbeitrag: circa 5,60 Euro monatlich. Typischer Jahresbeitrag: circa 67,00 Euro pro Jahr. Deckungssumme und Besonderheiten: 50 Millionen Euro (inklusive deliktsunfähige Kinder). Ende der Tabelle Was kostet eine erstklassige Privathaftpflichtversicherung. Wer ist in welchem Tarif wie mitversichert? Singles: Zahlen den geringsten Jahresbeitrag und sichern ausschließlich die eigene Person ab. Paare im gemeinsamen Haushalt: Ziehen Partner zusammen, ist keine doppelte Versicherung nötig.",
+   "text": "Tabelle: Was kostet eine erstklassige Privathaftpflichtversicherung. Übersicht mit 4 Spalten und 4 Zeilen. Die Spalten lauten: Tarifvariante, Monatsbeitrag, Typischer Jahresbeitrag, Deckungssumme und Besonderheiten. Single-Tarif (Standard). Zeile 1 von 4. Monatsbeitrag: circa 3,20 Euro monatlich. Typischer Jahresbeitrag: circa 38,00 Euro pro Jahr. Deckungssumme und Besonderheiten: 20 bis 30 Millionen Euro pauschal. Single-Tarif (Testsieger). Zeile 2 von 4. Monatsbeitrag: circa 3,90 Euro monatlich. Typischer Jahresbeitrag: circa 46,00 Euro pro Jahr. Deckungssumme und Besonderheiten: 50 Millionen Euro (inklusive Schlüssel und Ausfall). Paare oder Lebensgemeinschaft. Zeile 3 von 4. Monatsbeitrag: circa 4,80 Euro monatlich. Typischer Jahresbeitrag: circa 58,00 Euro pro Jahr. Deckungssumme und Besonderheiten: 50 Millionen Euro (zwei Erwachsene). Familientarif (mit Kindern). Zeile 4 von 4. Monatsbeitrag: circa 5,60 Euro monatlich. Typischer Jahresbeitrag: circa 67,00 Euro pro Jahr. Deckungssumme und Besonderheiten: 50 Millionen Euro (inklusive deliktsunfähige Kinder). Ende der Tabelle Was kostet eine erstklassige Privathaftpflichtversicherung. Wer ist in welchem Tarif wie mitversichert? Singles: Zahlen den geringsten Jahresbeitrag und sichern ausschließlich die eigene Person ab. Paare im gemeinsamen Haushalt: Ziehen Partner zusammen, ist keine doppelte Versicherung nötig.",
    "units": [
     {
      "i": 39,
@@ -306,7 +306,7 @@
      "i": 45,
      "type": "table-row",
      "lang": "de",
-     "chars": 136
+     "chars": 139
     },
     {
      "i": 46,
@@ -540,7 +540,7 @@
   },
   {
    "index": 6,
-   "text": "Punkt 1: Bestand prüfen: Deckung, Selbstbeteiligung, Ausschlüsse, wer mitversichert ist (Partner, Kinder, Eltern in häuslicher Gemeinschaft). Punkt 2: Bedarf festlegen: Single, Paar, Familie, Hund (Hunde-Haftpflicht ist ein eigener Vertrag), Wohneigentum ja/nein. Punkt 3: Vergleich mit Filter: mindestens 50 Millionen Euro, Forderungsausfall, grobe Fahrlässigkeit, Mietsachschäden, Schlüssel. Punkt 4: Selbstbeteiligung 0 Euro oder 150 Euro, 150 Euro senkt die Prämie, lohnt aber nur, wenn du Kleinstschäden selbst tragen willst. Punkt 5: Wartezeiten und Bestandsübernahme: Beim Wechsel sollte der neue Vertrag nahtlos beginnen. Lücke von einem Tag ist unversicherter Tag. Punkt 6: Altvertrag erst kündigen, wenn die neue Police schriftlich bestätigt ist. Wer wirklich mitversichert ist, und wer nicht. Im Partnertarif zählt die häusliche Gemeinschaft, nicht der Trauschein. Kinder sind meist bis zum Ende der ersten Ausbildung versichert, nicht unbegrenzt bis 30 im Hotel Mama ohne Status. Volljährige mit eigenem Hausstand brauchen einen eigenen Vertrag. Berufliche Tätigkeit, selbst die kleine nebenberufliche Beratung, fällt oft raus; dafür gibt es die Berufshaftpflicht. Eine Privathaftpflicht ersetzt keine Hausrat-, keine Wohngebäude- und keine Kraftfahrzeug-Versicherung. Sie ist die Basis unter der Pyramide.",
+   "text": "Punkt 1: Bestand prüfen: Deckung, Selbstbeteiligung, Ausschlüsse, wer mitversichert ist (Partner, Kinder, Eltern in häuslicher Gemeinschaft). Punkt 2: Bedarf festlegen: Single, Paar, Familie, Hund (Hunde-Haftpflicht ist ein eigener Vertrag), Wohneigentum ja oder nein. Punkt 3: Vergleich mit Filter: mindestens 50 Millionen Euro, Forderungsausfall, grobe Fahrlässigkeit, Mietsachschäden, Schlüssel. Punkt 4: Selbstbeteiligung 0 Euro oder 150 Euro, 150 Euro senkt die Prämie, lohnt aber nur, wenn du Kleinstschäden selbst tragen willst. Punkt 5: Wartezeiten und Bestandsübernahme: Beim Wechsel sollte der neue Vertrag nahtlos beginnen. Lücke von einem Tag ist unversicherter Tag. Punkt 6: Altvertrag erst kündigen, wenn die neue Police schriftlich bestätigt ist. Wer wirklich mitversichert ist, und wer nicht. Im Partnertarif zählt die häusliche Gemeinschaft, nicht der Trauschein. Kinder sind meist bis zum Ende der ersten Ausbildung versichert, nicht unbegrenzt bis 30 im Hotel Mama ohne Status. Volljährige mit eigenem Hausstand brauchen einen eigenen Vertrag. Berufliche Tätigkeit, selbst die kleine nebenberufliche Beratung, fällt oft raus; dafür gibt es die Berufshaftpflicht. Eine Privathaftpflicht ersetzt keine Hausrat-, keine Wohngebäude- und keine Kraftfahrzeug-Versicherung. Sie ist die Basis unter der Pyramide.",
    "units": [
     {
      "i": 82,
@@ -552,7 +552,7 @@
      "i": 83,
      "type": "li",
      "lang": "de",
-     "chars": 121
+     "chars": 126
     },
     {
      "i": 84,
@@ -618,7 +618,7 @@
   },
   {
    "index": 7,
-   "text": "Wer sie schiebt, weil noch nie etwas passiert ist, verwechselt Statistik mit Glück. Ein Schaden reicht. Fazit: Unverzichtbarer Basisschutz für jeden Geldbeutel. Die Privathaftpflicht bildet das Fundament jeder soliden Absicherung. Für den Gegenwert einer Tasse Kaffee im Monat schützt sie dein gesamtes Privatvermögen vor ruinösen Schadenersatzansprüchen und bewahrt deine finanzielle Unabhängigkeit. Weiterlesen: Ratgeber Versicherungen · Haus sicher schützen: Vorsorge-Update · Kostenloses Girokonto finden. Häufige Fragen. Ist die Privathaftpflicht in Deutschland gesetzlich verpflichtend? Nein, im Gegensatz zur Kraftfahrzeug-Haftpflichtversicherung ist die Privathaftpflicht freiwillig. Aufgrund der unbegrenzten gesetzlichen Haftung nach Paragraf 823 Bürgerliches Gesetzbuch stufen Verbraucherzentralen sie jedoch als absolut unverzichtbar ein. Zahlt die Haftpflicht auch bei Schäden an gemieteten Wohnungen? Ja, Mietsachschäden (zum Beispiel Brandflecken im Parkett, ein gesprungener Waschtisch im Badezimmer oder zerkratzte Türen) sind in modernen Tarifen abgedeckt. Reine Abnutzung durch normalen Gebrauch fällt nicht darunter. Was passiert bei Schäden durch Haustiere? Kleintiere wie Katzen, Vögel, Hamster oder Meerschweinchen sind über die Privathaftpflicht automatisch mitversichert. Für Hunde und Pferde ist hingegen eine separate Tierhalterhaftpflichtversicherung erforderlich.",
+   "text": "Wer sie schiebt, weil noch nie etwas passiert ist, verwechselt Statistik mit Glück. Ein Schaden reicht. Fazit: Unverzichtbarer Basisschutz für jeden Geldbeutel. Die Privathaftpflicht bildet das Fundament jeder soliden Absicherung. Für den Gegenwert einer Tasse Kaffee im Monat schützt sie dein gesamtes Privatvermögen vor ruinösen Schadenersatzansprüchen und bewahrt deine finanzielle Unabhängigkeit. Weiterlesen: Ratgeber Versicherungen, Haus sicher schützen: Vorsorge-Update, Kostenloses Girokonto finden. Häufige Fragen. Ist die Privathaftpflicht in Deutschland gesetzlich verpflichtend? Nein, im Gegensatz zur Kraftfahrzeug-Haftpflichtversicherung ist die Privathaftpflicht freiwillig. Aufgrund der unbegrenzten gesetzlichen Haftung nach Paragraf 823 Bürgerliches Gesetzbuch stufen Verbraucherzentralen sie jedoch als absolut unverzichtbar ein. Zahlt die Haftpflicht auch bei Schäden an gemieteten Wohnungen? Ja, Mietsachschäden (zum Beispiel Brandflecken im Parkett, ein gesprungener Waschtisch im Badezimmer oder zerkratzte Türen) sind in modernen Tarifen abgedeckt. Reine Abnutzung durch normalen Gebrauch fällt nicht darunter. Was passiert bei Schäden durch Haustiere? Kleintiere wie Katzen, Vögel, Hamster oder Meerschweinchen sind über die Privathaftpflicht automatisch mitversichert. Für Hunde und Pferde ist hingegen eine separate Tierhalterhaftpflichtversicherung erforderlich.",
    "units": [
     {
      "i": 94,
@@ -648,7 +648,7 @@
      "i": 98,
      "type": "p",
      "lang": "de",
-     "chars": 108
+     "chars": 106
     },
     {
      "i": 99,

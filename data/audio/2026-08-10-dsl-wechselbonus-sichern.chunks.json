@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 109,
- "chars": 10633,
+ "chars": 10652,
  "parts": [
   {
    "index": 0,
@@ -168,13 +168,13 @@
   },
   {
    "index": 2,
-   "text": "Wie stark sich ein Wechselbonus auf deine realen Haushaltsausgaben auswirkt, verdeutlicht die folgende Vergleichsrechnung für einen VDSL-Anschluss mit 100 Megabit pro Sekunde über zwei Jahre: Tabelle: 24-Monats-Berechnung: So viel sparst du wirklich. Übersicht mit 3 Spalten und 6 Zeilen. Die Spalten lauten: Kostenposition, Alter Vertrag (Bestandskunde), Neuer Vertrag mit Wechselbonus. Grundgebühr Monat 1 bis 12. Zeile 1 von 6. Alter Vertrag (Bestandskunde): 12 mal 44,95 Euro ist 539,40 Euro. Neuer Vertrag mit Wechselbonus: 12 mal 19,95 Euro ist 239,40 Euro. Grundgebühr Monat 13 bis 24. Zeile 2 von 6. Alter Vertrag (Bestandskunde): 12 mal 44,95 Euro ist 539,40 Euro. Neuer Vertrag mit Wechselbonus: 12 mal 44,95 Euro ist 539,40 Euro. Bereitstellungsgebühr. Zeile 3 von 6. Alter Vertrag (Bestandskunde): 0,00 Euro. Neuer Vertrag mit Wechselbonus: 0,00 Euro (Aktionsvorteil). DSL-Wechselbonus und Cashback. Zeile 4 von 6. Alter Vertrag (Bestandskunde): 0,00 Euro. Neuer Vertrag mit Wechselbonus: - 180,00 Euro (Gutschrift). Gesamtausgaben über 24 Monate. Zeile 5 von 6. Alter Vertrag (Bestandskunde): 1078,80 Euro. Neuer Vertrag mit Wechselbonus: 598,80 Euro. Effektiver Monatspreis. Zeile 6 von 6. Alter Vertrag (Bestandskunde): 44,95 Euro monatlich. Neuer Vertrag mit Wechselbonus: 24,95 Euro monatlich. Ende der Tabelle 24-Monats-Berechnung: So viel sparst du wirklich.",
+   "text": "Wie stark sich ein Wechselbonus auf deine realen Haushaltsausgaben auswirkt, verdeutlicht die folgende Vergleichsrechnung für einen VDSL-Anschluss mit 100 Megabit pro Sekunde pro Sekunde über zwei Jahre: Tabelle: 24-Monats-Berechnung: So viel sparst du wirklich. Übersicht mit 3 Spalten und 6 Zeilen. Die Spalten lauten: Kostenposition, Alter Vertrag (Bestandskunde), Neuer Vertrag mit Wechselbonus. Grundgebühr Monat 1 bis 12. Zeile 1 von 6. Alter Vertrag (Bestandskunde): 12 mal 44,95 Euro ist 539,40 Euro. Neuer Vertrag mit Wechselbonus: 12 mal 19,95 Euro ist 239,40 Euro. Grundgebühr Monat 13 bis 24. Zeile 2 von 6. Alter Vertrag (Bestandskunde): 12 mal 44,95 Euro ist 539,40 Euro. Neuer Vertrag mit Wechselbonus: 12 mal 44,95 Euro ist 539,40 Euro. Bereitstellungsgebühr. Zeile 3 von 6. Alter Vertrag (Bestandskunde): 0,00 Euro. Neuer Vertrag mit Wechselbonus: 0,00 Euro (Aktionsvorteil). DSL-Wechselbonus und Cashback. Zeile 4 von 6. Alter Vertrag (Bestandskunde): 0,00 Euro. Neuer Vertrag mit Wechselbonus:minus 180,00 Euro (Gutschrift). Gesamtausgaben über 24 Monate. Zeile 5 von 6. Alter Vertrag (Bestandskunde): 1078,80 Euro. Neuer Vertrag mit Wechselbonus: 598,80 Euro. Effektiver Monatspreis. Zeile 6 von 6. Alter Vertrag (Bestandskunde): 44,95 Euro monatlich. Neuer Vertrag mit Wechselbonus: 24,95 Euro monatlich. Ende der Tabelle 24-Monats-Berechnung: So viel sparst du wirklich.",
    "units": [
     {
      "i": 24,
      "type": "p",
      "lang": "de",
-     "chars": 191
+     "chars": 203
     },
     {
      "i": 25,
@@ -222,7 +222,7 @@
      "i": 32,
      "type": "table-row",
      "lang": "de",
-     "chars": 147
+     "chars": 150
     },
     {
      "i": 33,
@@ -420,7 +420,7 @@
   },
   {
    "index": 5,
-   "text": "Rechne drei Zahlen: Bonus brutto. Wahrscheinlichkeit, dass du die Bedingungen 12 Monate erfüllst (ehrlich: 70 bis 90 Prozent). Rückforderung bei vorzeitigem Exit. Erwartungswert ist Bonus × Wahrscheinlichkeit − erwartete Rückforderung. Nur dieser Wert darf in den 24-Monats-Effektivpreis. Provider-Unterschiede, die den Bonus relativieren. Manche zahlen per Überweisung aufs Giro, manche als Gutschrift auf die Rechnung, manche als Amazon-Gutschein. Gutschrift auf die Rechnung ist steuerlich und organisatorisch am einfachsten, Gutschein ist unflexibel. Überweisung kann 8 bis 12 Wochen dauern, Kalender erinnern, sonst vergisst du die Reklamation. Wechselt du innerhalb derselben Gruppe (Marke A zu Marke A-Discount), entfällt der Neukundenbonus oft. 12 Monate Pause oder ein anderer Konzern ist die übliche Hürde. In vier Schritten, ohne den Bonus zu verspielen. Punkt 1: Altvertrag-Status: monatlich kündbar? Sonst Starttermin des neuen Vertrags auf das Ende legen. Punkt 2: Bonusbedingungen als PDF speichern. Punkt 3: Auftrag mit der I BAN, die 12 Monate bleibt, Kontowechsel in Monat 4 kann den Bonus killen. Punkt 4: Nach 7 Monaten: Ist der Bonus da? Wenn nicht, Ticket mit Vertragsnummer. Verjährung und Kulanz sind leichter, solange der Vertrag läuft. Der Bonus ist die Kirsche. Der Kuchen ist der Effektivpreis.",
+   "text": "Rechne drei Zahlen: Bonus brutto. Wahrscheinlichkeit, dass du die Bedingungen 12 Monate erfüllst (ehrlich: 70 bis 90 Prozent). Rückforderung bei vorzeitigem Exit. Erwartungswert ist Bonus mal Wahrscheinlichkeit minus erwartete Rückforderung. Nur dieser Wert darf in den 24-Monats-Effektivpreis. Provider-Unterschiede, die den Bonus relativieren. Manche zahlen per Überweisung aufs Giro, manche als Gutschrift auf die Rechnung, manche als Amazon-Gutschein. Gutschrift auf die Rechnung ist steuerlich und organisatorisch am einfachsten, Gutschein ist unflexibel. Überweisung kann 8 bis 12 Wochen dauern, Kalender erinnern, sonst vergisst du die Reklamation. Wechselt du innerhalb derselben Gruppe (Marke A zu Marke A-Discount), entfällt der Neukundenbonus oft. 12 Monate Pause oder ein anderer Konzern ist die übliche Hürde. In vier Schritten, ohne den Bonus zu verspielen. Punkt 1: Altvertrag-Status: monatlich kündbar? Sonst Starttermin des neuen Vertrags auf das Ende legen. Punkt 2: Bonusbedingungen als PDF speichern. Punkt 3: Auftrag mit der I BAN, die 12 Monate bleibt, Kontowechsel in Monat 4 kann den Bonus killen. Punkt 4: Nach 7 Monaten: Ist der Bonus da? Wenn nicht, Ticket mit Vertragsnummer. Verjährung und Kulanz sind leichter, solange der Vertrag läuft. Der Bonus ist die Kirsche. Der Kuchen ist der Effektivpreis.",
    "units": [
     {
      "i": 63,
@@ -450,7 +450,7 @@
      "i": 67,
      "type": "p",
      "lang": "de",
-     "chars": 125
+     "chars": 131
     },
     {
      "i": 68,
@@ -540,7 +540,7 @@
   },
   {
    "index": 6,
-   "text": "Wer nur der Kirsche hinterherläuft, unterschreibt 24 Monate zu 44,99 Euro nach der Rabattphase, und hat teuer gewonnen. Fazit: DSL-Wechselbonus clever einstreichen. Den DSL-Wechselbonus alle zwei Jahre mitzunehmen, ist eine der einfachsten Methoden, um ohne jeglichen Komfortverlust hunderte Euro an monatlichen Fixkosten einzusparen. Da der neue Anbieter die Kündigung und die Rufnummernmitnahme komplett übernimmt, liegt der tatsächliche Arbeitsaufwand bei unter 10 Minuten. Vergleiche noch heute die verfügbaren Geschwindigkeiten an deiner Adresse und sichere dir deine Wechselprämie. Weiterlesen: Ratgeber Internet und DSL · DSL Vergleich: So findest du günstigeres Internet · WLAN verbessern: So bringst du Speed in jede Ecke. Häufige Fragen. Was ist ein DSL-Wechselbonus? Ein DSL-Wechselbonus ist eine finanzielle Prämie für Neukunden, die von einem anderen Festnetzanbieter wechseln. Er wird in Form von Rechnungsgutschriften, Einmalzahlungen oder Cashback ausgezahlt und senkt die Gesamtkosten im ersten Vertragsjahr deutlich. Wie wird der DSL-Wechselbonus ausgezahlt? Die Prämie wird entweder ab dem ersten Abrechnungsmonat als Guthaben mit den Monatsbeiträgen verrechnet oder nach Freischaltung des Anschlusses direkt auf dein Bankkonto überwiesen. Kann es beim Anbieterwechsel zu einem Internetausfall kommen?",
+   "text": "Wer nur der Kirsche hinterherläuft, unterschreibt 24 Monate zu 44,99 Euro nach der Rabattphase, und hat teuer gewonnen. Fazit: DSL-Wechselbonus clever einstreichen. Den DSL-Wechselbonus alle zwei Jahre mitzunehmen, ist eine der einfachsten Methoden, um ohne jeglichen Komfortverlust hunderte Euro an monatlichen Fixkosten einzusparen. Da der neue Anbieter die Kündigung und die Rufnummernmitnahme komplett übernimmt, liegt der tatsächliche Arbeitsaufwand bei unter 10 Minuten. Vergleiche noch heute die verfügbaren Geschwindigkeiten an deiner Adresse und sichere dir deine Wechselprämie. Weiterlesen: Ratgeber Internet und DSL, DSL Vergleich: So findest du günstigeres Internet, WLAN verbessern: So bringst du Speed in jede Ecke. Häufige Fragen. Was ist ein DSL-Wechselbonus? Ein DSL-Wechselbonus ist eine finanzielle Prämie für Neukunden, die von einem anderen Festnetzanbieter wechseln. Er wird in Form von Rechnungsgutschriften, Einmalzahlungen oder Cashback ausgezahlt und senkt die Gesamtkosten im ersten Vertragsjahr deutlich. Wie wird der DSL-Wechselbonus ausgezahlt? Die Prämie wird entweder ab dem ersten Abrechnungsmonat als Guthaben mit den Monatsbeiträgen verrechnet oder nach Freischaltung des Anschlusses direkt auf dein Bankkonto überwiesen. Kann es beim Anbieterwechsel zu einem Internetausfall kommen?",
    "units": [
     {
      "i": 82,
@@ -576,7 +576,7 @@
      "i": 87,
      "type": "p",
      "lang": "de",
-     "chars": 143
+     "chars": 141
     },
     {
      "i": 88,

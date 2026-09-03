@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 106,
- "chars": 10685,
+ "chars": 10744,
  "parts": [
   {
    "index": 0,
@@ -174,7 +174,7 @@
   },
   {
    "index": 2,
-   "text": "Es drohen Feuchtigkeitsschäden, Schimmelbildung und ein permanenter Wärmeverlust. Stoßlüften (drei- bis viermal täglich für 5 bis 8 Minuten bei voll geöffnetem Fenster und abgedrehtem Thermostat) spart bis zu 120 Euro pro Saison. Fehler 4: Veraltete, manuelle Thermostate im Dauereinsatz. Klassische Drehventile reagieren träge und heizen auch dann durch, wenn niemand zu Hause ist oder die Sonne den Raum bereits aufheizt. Smarte oder programmierbare Thermostate (ab circa 15 Euro pro Stück) senken die Raumtemperatur nachts oder bei Abwesenheit automatisch auf 17 °C ab und sparen bis zu 140 Euro Heizenergie im Jahr, ohne den Wohnkomfort zu beeinträchtigen. Fehler 5: Im teuren Grundversorgungstarif verharren. Der weitaus größte Sparhebel ist der rechtzeitige Gasanbieterwechsel im Spätsommer. Wer im Grundversorgungstarif bleibt, zahlt oft 12 bis 14 Cent pro Kilowattstunden, während alternative Anbieter mit Preisgarantie Konditionen um 8,5 bis 9,5 Cent pro Kilowattstunden bieten. Bei einem typischen Jahresverbrauch von 20000 Kilowattstunden beträgt der Unterschied mehrere hundert Euro pro Jahr. Spar-Potenziale der Maßnahmen im Überblick. Tabelle: Spar-Potenziale der Maßnahmen im Überblick. Übersicht mit 4 Spalten und 6 Zeilen. Die Spalten lauten: Maßnahme, Typischer Aufwand, Einmalkosten, Ersparnis pro Heizperiode.",
+   "text": "Es drohen Feuchtigkeitsschäden, Schimmelbildung und ein permanenter Wärmeverlust. Stoßlüften (drei- bis viermal täglich für 5 bis 8 Minuten bei voll geöffnetem Fenster und abgedrehtem Thermostat) spart bis zu 120 Euro pro Saison. Fehler 4: Veraltete, manuelle Thermostate im Dauereinsatz. Klassische Drehventile reagieren träge und heizen auch dann durch, wenn niemand zu Hause ist oder die Sonne den Raum bereits aufheizt. Smarte oder programmierbare Thermostate (ab circa 15 Euro pro Stück) senken die Raumtemperatur nachts oder bei Abwesenheit automatisch auf 17 Grad Celsius ab und sparen bis zu 140 Euro Heizenergie im Jahr, ohne den Wohnkomfort zu beeinträchtigen. Fehler 5: Im teuren Grundversorgungstarif verharren. Der weitaus größte Sparhebel ist der rechtzeitige Gasanbieterwechsel im Spätsommer. Wer im Grundversorgungstarif bleibt, zahlt oft 12 bis 14 Cent pro Kilowattstunden, während alternative Anbieter mit Preisgarantie Konditionen um 8,5 bis 9,5 Cent pro Kilowattstunden bieten. Bei einem typischen Jahresverbrauch von 20000 Kilowattstunden beträgt der Unterschied mehrere hundert Euro pro Jahr. Spar-Potenziale der Maßnahmen im Überblick. Tabelle: Spar-Potenziale der Maßnahmen im Überblick. Übersicht mit 4 Spalten und 6 Zeilen. Die Spalten lauten: Maßnahme, Typischer Aufwand, Einmalkosten, Ersparnis pro Heizperiode.",
    "units": [
     {
      "i": 25,
@@ -204,7 +204,7 @@
      "i": 29,
      "type": "p",
      "lang": "de",
-     "chars": 195
+     "chars": 205
     },
     {
      "i": 30,
@@ -420,7 +420,7 @@
   },
   {
    "index": 5,
-   "text": "Fehler 1: Nur den Abschlag senken, nicht den Preis. Ein niedriger Abschlag bei teurem Arbeitspreis erzeugt die Nachzahlung, die im März weh tut. Fehler 2: Heizkörper nicht entlüften. Luft im System ist Pumpe arbeitet, Fläche bleibt kalt, du drehst höher. 15 Minuten pro Etage. Fehler 3: Kessel auf Werkseinstellung 70 °C Vorlauf. Bei gedämmtem Haus und 55 °C Vorlauf sinkt der Verbrauch spürbar. Wer unsicher ist, lässt den Installateur die Heizkurve einstellen, einmal, nicht jedes Jahr. Fehler 4: Keller und Dachluke den ganzen Sommer offen, im Oktober zu spät zu. Dämmung an der Luke, Bürstendichtung an der Tür zum unbeheizten Flur. Fehler 5: Zählerstand nicht dokumentieren. Ohne Foto am 1. September weißt du im Februar nicht, ob die Nachzahlung Verbrauch oder Preis ist. Mini-Wartungsplan für ein Wochenende. Samstag Vormittag: Druck im Kessel prüfen (meist 1,5 bis 2,0 bar im kalten Zustand), Wasser nachfüllen nach Anleitung, Entlüften vom obersten Heizkörper abwärts. Samstag Nachmittag: Thermostate auf Funktion (Klick, Stift bewegen), Vorhänge nicht über Heizkörper, Möbel 10 cm Abstand. Sonntag: Tarifvergleich, Abschlag-Simulation mit 20000 Kilowattstunden × neuem Preis / 12. Montag: Zählerfoto ins Cloud-Album Energie 2026. Das Wochenende kostet 0 bis 80 Euro (Entlüfterschlüssel, Dichtung).",
+   "text": "Fehler 1: Nur den Abschlag senken, nicht den Preis. Ein niedriger Abschlag bei teurem Arbeitspreis erzeugt die Nachzahlung, die im März weh tut. Fehler 2: Heizkörper nicht entlüften. Luft im System ist Pumpe arbeitet, Fläche bleibt kalt, du drehst höher. 15 Minuten pro Etage. Fehler 3: Kessel auf Werkseinstellung 70 Grad Celsius Vorlauf. Bei gedämmtem Haus und 55 Grad Celsius Vorlauf sinkt der Verbrauch spürbar. Wer unsicher ist, lässt den Installateur die Heizkurve einstellen, einmal, nicht jedes Jahr. Fehler 4: Keller und Dachluke den ganzen Sommer offen, im Oktober zu spät zu. Dämmung an der Luke, Bürstendichtung an der Tür zum unbeheizten Flur. Fehler 5: Zählerstand nicht dokumentieren. Ohne Foto am 1. September weißt du im Februar nicht, ob die Nachzahlung Verbrauch oder Preis ist. Mini-Wartungsplan für ein Wochenende. Samstag Vormittag: Druck im Kessel prüfen (meist 1,5 bis 2,0 bar im kalten Zustand), Wasser nachfüllen nach Anleitung, Entlüften vom obersten Heizkörper abwärts. Samstag Nachmittag: Thermostate auf Funktion (Klick, Stift bewegen), Vorhänge nicht über Heizkörper, Möbel 10 cm Abstand. Sonntag: Tarifvergleich, Abschlag-Simulation mit 20000 Kilowattstunden mal neuem Preis / 12. Montag: Zählerfoto ins Cloud-Album Energie 2026. Das Wochenende kostet 0 bis 80 Euro (Entlüfterschlüssel, Dichtung).",
    "units": [
     {
      "i": 63,
@@ -444,7 +444,7 @@
      "i": 66,
      "type": "p",
      "lang": "de",
-     "chars": 118
+     "chars": 138
     },
     {
      "i": 67,
@@ -492,7 +492,7 @@
      "i": 74,
      "type": "p",
      "lang": "de",
-     "chars": 139
+     "chars": 141
     },
     {
      "i": 75,
@@ -504,7 +504,7 @@
   },
   {
    "index": 6,
-   "text": "Es verhindert den 400-Euro-Schock, der entsteht, wenn der Kessel im ersten Frost nachläuft, weil niemand ihn seit zwei Jahren gesehen hat. Abschlag neu kalibrieren, bevor der erste Frost kommt. Formel: erwarteter Jahresverbrauch × neuer Arbeitspreis + Grundpreis × 12, durch 12. Erwarteter Verbrauch ist Mittel der letzten zwei Jahre, plus 5 Prozent Puffer wenn der letzte Winter mild war. Diese Zahl ist der Abschlag, nicht das, was der Anbieter vorschlägt, um Nachzahlungen zu vermeiden, indem er dich über das Jahr kreditiert. Zu hoher Abschlag ist ein zinsloses Darlehen an den Versorger. Zu niedriger ist die März-Überraschung. Spätsommer ist der Moment, weil du den Sommerverbrauch (Warmwasser, Kochen) vom Winter trennen kannst, wenn du Zählerstände hast. Fazit: Durch vorausschauende Vorbereitung hunderte Euro sparen. Die Gasrechnung senken funktioniert am effektivsten, wenn du vor dem Start der Kälteperiode handelst. Die Kombination aus entlüfteten Heizkörpern, smarten Thermostaten und einem optimierten Gastarif mit Preisgarantie entlastet deine Haushaltskasse um bis zu 720 Euro im Jahr. Nutze die warmen Spätsommertage, um deine Heizung fit zu machen. Weiterlesen: Ratgeber Strom und Gas sparen · Sicher heizen: So schützt dich eine Gaspreisgarantie · Preisgarantie Gas: So sicherst du günstige Tarife für 2026. Häufige Fragen. Wann sollte ich die Heizkörper vor dem Winter entlüften?",
+   "text": "Es verhindert den 400-Euro-Schock, der entsteht, wenn der Kessel im ersten Frost nachläuft, weil niemand ihn seit zwei Jahren gesehen hat. Abschlag neu kalibrieren, bevor der erste Frost kommt. Formel: erwarteter Jahresverbrauch mal neuer Arbeitspreis + Grundpreis mal 12, durch 12. Erwarteter Verbrauch ist Mittel der letzten zwei Jahre, plus 5 Prozent Puffer wenn der letzte Winter mild war. Diese Zahl ist der Abschlag, nicht das, was der Anbieter vorschlägt, um Nachzahlungen zu vermeiden, indem er dich über das Jahr kreditiert. Zu hoher Abschlag ist ein zinsloses Darlehen an den Versorger. Zu niedriger ist die März-Überraschung. Spätsommer ist der Moment, weil du den Sommerverbrauch (Warmwasser, Kochen) vom Winter trennen kannst, wenn du Zählerstände hast. Fazit: Durch vorausschauende Vorbereitung hunderte Euro sparen. Die Gasrechnung senken funktioniert am effektivsten, wenn du vor dem Start der Kälteperiode handelst. Die Kombination aus entlüfteten Heizkörpern, smarten Thermostaten und einem optimierten Gastarif mit Preisgarantie entlastet deine Haushaltskasse um bis zu 720 Euro im Jahr. Nutze die warmen Spätsommertage, um deine Heizung fit zu machen. Weiterlesen: Ratgeber Strom und Gas sparen, Sicher heizen: So schützt dich eine Gaspreisgarantie, Preisgarantie Gas: So sicherst du günstige Tarife für 2026. Häufige Fragen.",
    "units": [
     {
      "i": 76,
@@ -522,7 +522,7 @@
      "i": 78,
      "type": "p",
      "lang": "de",
-     "chars": 84
+     "chars": 88
     },
     {
      "i": 79,
@@ -576,31 +576,31 @@
      "i": 87,
      "type": "p",
      "lang": "de",
-     "chars": 159
+     "chars": 157
     },
     {
      "i": 88,
      "type": "h2",
      "lang": "de",
      "chars": 15
-    },
-    {
-     "i": 89,
-     "type": "h3",
-     "lang": "de",
-     "chars": 56
     }
    ]
   },
   {
    "index": 7,
-   "text": "Der ideale Zeitpunkt ist der Spätsommer oder frühe Herbst (September/Oktober), bevor die Heizung in den dauerhaften Regelbetrieb geht. Wie viel Gas spart 1 Grad weniger Raumtemperatur? Jedes Grad weniger Raumtemperatur senkt deinen Gasverbrauch um rund 6 Prozent. Senkst du die Temperatur von 22 °C auf angenehme 20 °C, sparst du bei 20000 Kilowattstunden Verbrauch rund 240 Euro im Jahr. Was bringt ein hydraulischer Abgleich? Beim hydraulischen Abgleich stellt der Fachbetrieb sicher, dass jeder Heizkörper im Haus genau die benötigte Wassermenge erhält. Das spart 10 bis 15 Prozent Energie und wird staatlich über die Bundesförderung für effiziente Gebäude (BEG) bezuschusst. Kann ich meinen Gasanbieter auch während der Heizperiode wechseln? Ja, ein Wechsel ist zu jedem Zeitpunkt möglich, sofern deine Mindestvertragslaufzeit abgelaufen ist oder der Anbieter die Preise erhöht. Warum gluckert meine Heizung? Gluckern entsteht durch Luft im Rohrsystem. Durch simples Entlüften mit einem Entlüftungsschlüssel entweicht die Luft, und das Wasser kann wieder ungehindert zirkulieren. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "text": "Wann sollte ich die Heizkörper vor dem Winter entlüften? Der ideale Zeitpunkt ist der Spätsommer oder frühe Herbst (September oder Oktober), bevor die Heizung in den dauerhaften Regelbetrieb geht. Wie viel Gas spart 1 Grad weniger Raumtemperatur? Jedes Grad weniger Raumtemperatur senkt deinen Gasverbrauch um rund 6 Prozent. Senkst du die Temperatur von 22 Grad Celsius auf angenehme 20 Grad Celsius, sparst du bei 20000 Kilowattstunden Verbrauch rund 240 Euro im Jahr. Was bringt ein hydraulischer Abgleich? Beim hydraulischen Abgleich stellt der Fachbetrieb sicher, dass jeder Heizkörper im Haus genau die benötigte Wassermenge erhält. Das spart 10 bis 15 Prozent Energie und wird staatlich über die Bundesförderung für effiziente Gebäude (BEG) bezuschusst. Kann ich meinen Gasanbieter auch während der Heizperiode wechseln? Ja, ein Wechsel ist zu jedem Zeitpunkt möglich, sofern deine Mindestvertragslaufzeit abgelaufen ist oder der Anbieter die Preise erhöht. Warum gluckert meine Heizung? Gluckern entsteht durch Luft im Rohrsystem. Durch simples Entlüften mit einem Entlüftungsschlüssel entweicht die Luft, und das Wasser kann wieder ungehindert zirkulieren. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.",
    "units": [
+    {
+     "i": 89,
+     "type": "h3",
+     "lang": "de",
+     "chars": 56
+    },
     {
      "i": 90,
      "type": "p",
      "lang": "de",
-     "chars": 134
+     "chars": 139
     },
     {
      "i": 91,
@@ -618,7 +618,7 @@
      "i": 93,
      "type": "p",
      "lang": "de",
-     "chars": 124
+     "chars": 144
     },
     {
      "i": 94,
@@ -685,7 +685,13 @@
      "type": "p",
      "lang": "de",
      "chars": 96
-    },
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "text": "Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
     {
      "i": 105,
      "type": "outro",
