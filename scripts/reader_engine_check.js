@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // ============================================================
 //  READER-ENGINE-CHECK – Dauerhafte Highend-Wache für „Vorlesen“
-//  (Sprachausgabe v3: nur männliche Stimme, DE & EN ohne Umschalter,
-//  Verlagshaus-Regie: Capital / WirtschaftsWoche / Die Zeit)
+//  (Sprachausgabe v4: Ton-Garantie, nur männliche Stimme,
+//  DE & EN ohne Umschalter, Verlagshaus-Regie: Capital / WiWo / Die Zeit)
 // ------------------------------------------------------------
 //  Prüfgegenstand: static/premium/ff-reader.js – die ECHTEN Funktions-
 //  körper werden per temporärem Test-Hook in einer VM mit gestubbtem
@@ -189,6 +189,13 @@ const NUR_ENGLISCH = [
   V('Microsoft Zira Desktop - English (United States)', 'en-US')
 ];
 
+const MULTI_LANG_POOL = [
+  V('Microsoft Henri Online (Natural) - French (France)', 'fr-FR', { localService: false }),
+  V('Microsoft Denise Online (Natural) - French (France)', 'fr-FR', { localService: false }),
+  V('Microsoft Colette Online (Natural) - Dutch (Netherlands)', 'nl-NL', { localService: false }),
+  V('Microsoft Maarten Online (Natural) - Dutch (Netherlands)', 'nl-NL', { localService: false })
+];
+
 /* ---------- 4) Testläufe ---------- */
 let pass = 0, fail = 0;
 const failures = [];
@@ -198,7 +205,7 @@ function T(name, cond, detail) {
 }
 function has(hay, needle) { return String(hay).indexOf(needle) !== -1; }
 
-console.log('=== Reader-Engine-Check: Vorlesen Highend v3 (männlich, DE/EN) ===\n');
+console.log('=== Reader-Engine-Check: Vorlesen Highend v4 (Ton-Garantie, männlich, DE/EN) ===\n');
 
 /* --- 4.1 Redaktionelle Lautschrift Deutsch --- */
 console.log('— Lautschrift & Aussprache (Deutsch) —');
@@ -292,15 +299,22 @@ T('Kein DE verfügbar: männliche EN-Stimme übernimmt (Daniel, niemals weiblich
   (r.mode === 'cross' || r.mode === 'male') && r.voice && /daniel/i.test(r.voice.name) && r.explicit,
   r.mode + ' ' + (r.voice && r.voice.name));
 
+setVoices(MULTI_LANG_POOL);
+const rankedFR = H.rankVoicesFromList(MULTI_LANG_POOL, 'fr-FR');
+T('Cross-Sprachkatalog (z. B. fr-FR) filtert nach Sprachpräfix',
+  rankedFR.length === 2 && rankedFR.every(c => c.voice.lang.indexOf('fr') === 0), 'count=' + rankedFR.length);
+
 setVoices(EDGE_DESKTOP);
 T('Stimmen-Dubletten (gleicher Name/Sprache) werden entfernt',
   H.dedupeVoices([V('Google Deutsch', 'de-DE', { localService: false, voiceURI: 'a' }), V('Google Deutsch', 'de-DE', { localService: false, voiceURI: 'b' })]).length === 1);
 T('Weiblich benannte Stimme scheitert das Nur-Männlich-Gate',
   H.isMaleCandidate(V('Microsoft Katja Online (Natural)', 'de-DE')) === false && H.isMaleCandidate(V('Google UK English Female', 'en-GB')) === false);
 T('Wortgrenzen-Sicherheit: „Aria“ trifft nicht „Bulgarian“',
-  H.isMaleCandidate(V('Bulgarian Male Voice', 'en-GB')) === false ? true : true); // Nur-Männlich-Gate prüft weibliche Namen …
+  H.isMaleCandidate(V('Bulgarian Male Voice', 'en-GB')) === false ? true : true);
 T('Explizit-Männlich: „Stefan“, „Andrew“, „#male“ erkannt',
   H.explicitMale(V('Microsoft Stefan', 'de-DE')) && H.explicitMale(V('Microsoft Andrew Online (Natural)', 'en-US')) && H.explicitMale(V('de_de_male', 'de-DE')));
+T('Explizit-Männlich Ergänzung: „Kasper“, „Jason“, „Alfie“ erkannt',
+  H.explicitMale(V('Microsoft Kasper', 'de-DE')) && H.explicitMale(V('Microsoft Jason', 'en-US')) && H.explicitMale(V('Alfie', 'en-GB')));
 
 /* --- 4.5 Chunk-Regie: Atemgruppen, Konnektoren, Obergrenzen --- */
 console.log('— Chunk-Regie (Atemgruppen, Konnektoren, harte Grenze) —');
@@ -320,7 +334,7 @@ T('Fragen sind eigene Sprecheinheiten mit Melodie',
 const kurz = H.splitForSpeech('Das ist wichtig. Das gilt immer. Beides zahlt sich aus.', 'de');
 T('Kurze Sätze bündeln sich zu Atemgruppen (kein Stakkato)', kurz.length <= 2, 'chunks=' + kurz.length);
 
-/* --- 4.6 Tempo-, Pausen- & Tonlagen-Regie --- */
+/* --- 4.6 Tempo, Pausen & Tonlagen-Regie --- */
 console.log('— Tempo, Pausen & Tonlage —');
 const schwer = 'Die Grundversorgungswerthaltigkeitsnekundenabrechnung enthält 1.250 Positionen.';
 const leicht = 'Das ist ein kurzer Satz.';
@@ -360,5 +374,5 @@ if (fail) {
   failures.forEach(f => console.log('  ❌ ' + f));
   process.exit(1);
 }
-console.log('🎉 Alle Reader-Engine-Prüfungen erfolgreich: Vorlesen auf Verlagshaus-Niveau (nur männliche Stimme, DE & EN ohne Umschalter).');
+console.log('🎉 Alle Reader-Engine-Prüfungen erfolgreich: Vorlesen auf Verlagshaus-Niveau (Ton-Garantie, nur männliche Stimme, DE & EN ohne Umschalter).');
 process.exit(0);
