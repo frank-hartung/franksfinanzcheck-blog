@@ -1,0 +1,58 @@
+{{- /* ============================================================
+    PREMIUM READER-TOOLBAR (Vorlesen + Kurzfassung) — 03.09.2026
+    ------------------------------------------------------------
+    Jeder Blogbeitrag (Section "posts") und jede Ratgeber-Seite
+    (Section "pillar") bekommt zwei Lesehilfen auf Agentur-Niveau:
+
+      1. "Vorlesen"    – liest den Artikel mit der eingebauten
+                         Browser-Sprachausgabe (Web Speech API) vor.
+                         First-party & datenschutzfreundlich: kein
+                         externer Dienst, keine Datenübertragung,
+                         funktioniert offline. Absatzweises Vorlesen
+                         mit Live-Markierung, Pause/Weiter/Stopp und
+                         Lese-Fortschritt.
+
+      2. "Kurzfassung" – öffnet eine redaktionell strukturierte
+                         Zusammenfassung (Kurzantwort, Kernaussagen,
+                         wichtigste Euro-/Prozent-Zahlen) in einem
+                         barrierefreien <dialog> inkl. Kopier-Funktion.
+
+    Styling: assets/css/extended/ff-reader.css
+    Logik:   static/premium/ff-reader.js (first-party, kein Tracking)
+
+    Hinweis für die Redaktion: Einzelne Elemente lassen sich per
+    HTML-Attribut data-ff-skip-read vom Vorlesen/Sondieren ausnehmen.
+============================================================ */ -}}
+{{- if and (or (eq .Section "posts") (eq .Section "pillar")) (eq .Kind "page") (not .Draft) -}}
+{{- $title := .Title | plainify -}}
+{{- $kurzantwort := .Params.kurzantwort | default "" -}}
+{{- $description := .Description | default "" -}}
+{{- $readingTime := .ReadingTime -}}
+{{- $wordCount := .WordCount -}}
+<div class="ff-reader-toolbar" id="ff-reader-toolbar" role="group" aria-label="Lesehilfen: Vorlesen und Kurzfassung">
+  <span class="ff-reader-toolbar__label" aria-hidden="true">Lesen &amp; Verstehen</span>
+
+  <button type="button" class="ff-reader-btn ff-reader-btn--listen" id="ff-listen-btn" aria-pressed="false" aria-label="Artikel vorlesen">
+    <span class="ff-reader-btn__icon ff-reader-btn__icon--listen" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path d="M19 11a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V20H8a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2h-3v-2.08A7 7 0 0 0 19 11Z"/></svg>
+    </span>
+    <span class="ff-reader-btn__label" id="ff-listen-label">Vorlesen</span>
+  </button>
+
+  <button type="button" class="ff-reader-btn ff-reader-btn--stop" id="ff-listen-stop" aria-label="Vorlesen beenden" title="Vorlesen beenden">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+  </button>
+
+  <button type="button" class="ff-reader-btn ff-reader-btn--summary" id="ff-summary-btn" aria-haspopup="dialog" aria-label="Kurzfassung des Artikels anzeigen">
+    <span class="ff-reader-btn__icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h10"/></svg>
+    </span>
+    <span class="ff-reader-btn__label">Kurzfassung</span>
+  </button>
+
+  <span class="ff-reader-toolbar__status" id="ff-reader-status" role="status" aria-live="polite"></span>
+  <span class="ff-reader-progress" aria-hidden="true"><span class="ff-reader-progress__bar" id="ff-reader-progress-bar"></span></span>
+</div>
+<script type="application/json" id="ff-reader-config">{{ dict "title" $title "kurzantwort" $kurzantwort "description" $description "readingTime" $readingTime "wordCount" $wordCount | jsonify | safeJS }}</script>
+<script defer src="{{ partial "asset_url.html" "premium/ff-reader.js" }}"></script>
+{{- end -}}
