@@ -1,6 +1,6 @@
 # ⏰ FRISTEN-REPORT – Recht & Compliance
 
-**Stand:** 2026-09-02 · **Generator:** `scripts/fristen_check.py` (läuft täglich 07:55 MESZ via `.github/workflows/fristen-check.yml`)
+**Stand:** 2026-09-03 · **Generator:** `scripts/fristen_check.py` (läuft täglich 07:55 MESZ via `.github/workflows/fristen-check.yml`)
 
 > Kostenloses Erinnerungssystem für Rechtspflichten: Fristen aus `data/recht-fristen.yaml`, Eskalation über GitHub-Issues (`frist` → `frist-eskalation`). Erledigen = Workflow „Fristen-Check (Recht)“ starten mit `erledigt=<Frist-ID>`.
 
@@ -8,12 +8,12 @@
 
 | Status | Frist | Fällig am | Tage | Kategorie |
 |---|---|---|---|---|
-| 🟢 OK | BFSG/Barrierefreiheit: Scope-Bewertung dokumentieren (Empfehlung) (`bfsg-barrierefreiheit-bewertung`) | 2026-10-31 | in 59 | Barrierefreiheit |
-| 🟢 OK | DPF-Zertifizierung GitHub & Cloudflare prüfen (Datentransfer USA) (`dpf-zertifizierung-pruefen`) | 2026-11-29 | in 88 | DSGVO / Drittlandtransfer |
-| 🟢 OK | Partnerbedingungen CHECK24 / Tarifcheck / Awin prüfen (Werbekennzeichnung) (`affiliate-partnerbedingungen`) | 2026-11-29 | in 88 | Affiliate / UWG |
-| 🟢 OK | Rechtslage-Screening: DSGVO-Reform, KI-VO, neue Pflichten (News-Check) (`rechtslage-screening`) | 2026-11-29 | in 88 | Rechtsbeobachtung |
-| 🟢 OK | KI-VO: maschinenlesbare KI-Kennzeichnung für Bestandssysteme (Frist 02.12.2026) (`ki-vo-kennzeichnung-bestand`) | 2026-12-02 | in 91 | KI-Verordnung |
-| 🟢 OK | Rechtstexte-Abgleich mit kostenlosem Generator (eRecht24 Basis / Dr. Schwenke) (`rechtstexte-halbjahrescheck`) | 2027-02-28 | in 179 | Rechtstexte |
+| 🟢 OK | BFSG/Barrierefreiheit: Scope-Bewertung dokumentieren (Empfehlung) (`bfsg-barrierefreiheit-bewertung`) | 2026-10-31 | in 58 | Barrierefreiheit |
+| 🟢 OK | DPF-Zertifizierung GitHub & Cloudflare prüfen (Datentransfer USA) (`dpf-zertifizierung-pruefen`) | 2026-11-29 | in 87 | DSGVO / Drittlandtransfer |
+| 🟢 OK | Partnerbedingungen CHECK24 / Tarifcheck / Awin prüfen (Werbekennzeichnung) (`affiliate-partnerbedingungen`) | 2026-11-29 | in 87 | Affiliate / UWG |
+| 🟢 OK | Rechtslage-Screening: DSGVO-Reform, KI-VO, neue Pflichten (News-Check) (`rechtslage-screening`) | 2026-11-29 | in 87 | Rechtsbeobachtung |
+| 🟢 OK | KI-VO: maschinenlesbare KI-Kennzeichnung für Bestandssysteme (Frist 02.12.2026) (`ki-vo-kennzeichnung-bestand`) | 2026-12-02 | in 90 | KI-Verordnung |
+| 🟢 OK | Rechtstexte-Abgleich mit kostenlosem Generator (eRecht24 Basis / Dr. Schwenke) (`rechtstexte-halbjahrescheck`) | 2027-02-28 | in 178 | Rechtstexte |
 
 ## Sofort-Prüfungen (heute, automatisch)
 
@@ -23,8 +23,8 @@ Keine veralteten Rechtsbegriffe (TMG, TTDSG, OS-Plattform, Privacy Shield, Safe 
 
 ### Stand-Datum der Rechtstexte
 
-- 🟢 Impressum: Stand 2026-08-28 (5 Tage alt)
-- 🟢 Datenschutzerklärung: Stand 2026-08-28 (5 Tage alt)
+- 🟢 Impressum: Stand 2026-08-28 (6 Tage alt)
+- 🟢 Datenschutzerklärung: Stand 2026-08-28 (6 Tage alt)
 
 ## So bedienst du das System
 
@@ -34,4 +34,4 @@ Keine veralteten Rechtsbegriffe (TMG, TTDSG, OS-Plattform, Privacy Shield, Safe 
 4. **Fristen pflegen:** Neue Pflichten in `data/recht-fristen.yaml` eintragen (Intervall oder einmaliges Datum) – fertig.
 
 ---
-*Automatisch generiert am 2026-09-02 vom Fristen-Check (Recht). Letzte Erledigungen: –.*
+*Automatisch generiert am 2026-09-03 vom Fristen-Check (Recht). Letzte Erledigungen: –.*
