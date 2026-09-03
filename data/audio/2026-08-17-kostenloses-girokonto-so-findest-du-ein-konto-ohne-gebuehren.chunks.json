@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 111,
- "chars": 10916,
+ "chars": 10913,
  "parts": [
   {
    "index": 0,
@@ -150,7 +150,7 @@
   },
   {
    "index": 2,
-   "text": "Bedingungslose Gebührenfreiheit: Das passende Modell verlangt dauerhaft 0 Euro Grundgebühr, ohne an einen monatlichen Gehaltseingang gekoppelt zu sein (beispielsweise beim Smart-Konto der C24 Bank). Andere Anbieter setzen einen regelmäßigen monatlichen Geldeingang von mindestens 700 Euro voraus. Kostenlose Debitkarte inklusive: Eine physische oder virtuelle Karte (Mastercard oder Visa) für weltweit gebührenfreies Bezahlen und Einkaufen im Internet gehört ohne Aufpreis dazu. Kostenfreier Bargeldbezug: Du solltest an tausenden Geldautomaten in Deutschland und dem Euroraum ohne Zusatzgebühren an Bargeld gelangen. Günstiger Dispositionskredit: Faire Dispozinsen liegen unter 10 bis 12 Prozent. Filialbanken verlangen bei Kontoüberziehungen häufig 14 bis über 18 Prozent Zinsen. Verzinsung auf dem Hauptkonto oder Pocket: Einige innovative Neobanken bieten direkte Zinsen auf das laufende Girokonto-Guthaben oder kostenlose Tagesgeld-Unterkonten mit Zinsen von 2,5 bis 3,5 Prozent. Gebührenvergleich: Filialbank versus. modernes Online-Girokonto. Die nachfolgende Übersicht verdeutlicht den Unterschied der jährlichen Belastungen im Detail: Tabelle: Gebührenvergleich: Filialbank versus. modernes Online-Girokonto. Übersicht mit 3 Spalten und 6 Zeilen. Die Spalten lauten: Kostenposition, Klassische Filialbank, Kostenloses Direktbank-Konto (zum Beispiel C24 Bank).",
+   "text": "Bedingungslose Gebührenfreiheit: Das passende Modell verlangt dauerhaft 0 Euro Grundgebühr, ohne an einen monatlichen Gehaltseingang gekoppelt zu sein (beispielsweise beim Smart-Konto der C24 Bank). Andere Anbieter setzen einen regelmäßigen monatlichen Geldeingang von mindestens 700 Euro voraus. Kostenlose Debitkarte inklusive: Eine physische oder virtuelle Karte (Mastercard oder Visa) für weltweit gebührenfreies Bezahlen und Einkaufen im Internet gehört ohne Aufpreis dazu. Kostenfreier Bargeldbezug: Du solltest an tausenden Geldautomaten in Deutschland und dem Euroraum ohne Zusatzgebühren an Bargeld gelangen. Günstiger Dispositionskredit: Faire Dispozinsen liegen unter 10 bis 12 Prozent. Filialbanken verlangen bei Kontoüberziehungen häufig 14 bis über 18 Prozent Zinsen. Verzinsung auf dem Hauptkonto oder Pocket: Einige innovative Neobanken bieten direkte Zinsen auf das laufende Girokonto-Guthaben oder kostenlose Tagesgeld-Unterkonten mit Zinsen von 2,5 bis 3,5 Prozent. Gebührenvergleich: Filialbank versus modernes Online-Girokonto. Die nachfolgende Übersicht verdeutlicht den Unterschied der jährlichen Belastungen im Detail: Tabelle: Gebührenvergleich: Filialbank versus modernes Online-Girokonto. Übersicht mit 3 Spalten und 6 Zeilen. Die Spalten lauten: Kostenposition, Klassische Filialbank, Kostenloses Direktbank-Konto (zum Beispiel C24 Bank).",
    "units": [
     {
      "i": 21,
@@ -198,7 +198,7 @@
      "i": 28,
      "type": "h2",
      "lang": "de",
-     "chars": 64
+     "chars": 63
     },
     {
      "i": 29,
@@ -210,7 +210,7 @@
      "i": 30,
      "type": "table-intro",
      "lang": "de",
-     "chars": 111
+     "chars": 110
     },
     {
      "i": 31,
@@ -222,7 +222,7 @@
   },
   {
    "index": 3,
-   "text": "Monatliche Kontoführung. Zeile 1 von 6. Klassische Filialbank: 8,90 Euro monatlich = 106,80 Euro. Kostenloses Direktbank-Konto (zum Beispiel. C24 Bank): 0,00 Euro. Girocard / Debitkarte. Zeile 2 von 6. Klassische Filialbank: 15,00 Euro pro Jahr. Kostenloses Direktbank-Konto (zum Beispiel. C24 Bank): 0,00 Euro (inklusive). Echtzeit-Überweisungen. Zeile 3 von 6. Klassische Filialbank: 0,50 Euro pro Überweisung (circa 12 Euro). Kostenloses Direktbank-Konto (zum Beispiel. C24 Bank): 0,00 Euro (kostenlos). Geld abheben an Fremdautomaten. Zeile 4 von 6. Klassische Filialbank: 4,50 Euro pro Abhebung. Kostenloses Direktbank-Konto (zum Beispiel. C24 Bank): 0,00 Euro (zum Beispiel 4× monatlich gratis). Zinsen auf das Girokonto-Guthaben. Zeile 5 von 6. Klassische Filialbank: 0,00 Prozent. Kostenloses Direktbank-Konto (zum Beispiel. C24 Bank): Attraktive Guthabenzinsen. Gesamtkosten pro Jahr. Zeile 6 von 6. Klassische Filialbank: circa 150,00 Euro bis 190,00 Euro. Kostenloses Direktbank-Konto (zum Beispiel. C24 Bank): 0,00 Euro (plus Zinsertrag!). Ende der Tabelle Gebührenvergleich: Filialbank versus. modernes Online-Girokonto. So unkompliziert gelingt der gesetzliche Kontowechsel. Die Furcht vor zeitraubender Bürokratie hält immer noch Millionen Bundesbürger bei überteuerten Altkonten.",
+   "text": "Monatliche Kontoführung. Zeile 1 von 6. Klassische Filialbank: 8,90 Euro monatlich = 106,80 Euro. Kostenloses Direktbank-Konto (zum Beispiel. C24 Bank): 0,00 Euro. Girocard / Debitkarte. Zeile 2 von 6. Klassische Filialbank: 15,00 Euro pro Jahr. Kostenloses Direktbank-Konto (zum Beispiel. C24 Bank): 0,00 Euro (inklusive). Echtzeit-Überweisungen. Zeile 3 von 6. Klassische Filialbank: 0,50 Euro pro Überweisung (circa 12 Euro). Kostenloses Direktbank-Konto (zum Beispiel. C24 Bank): 0,00 Euro (kostenlos). Geld abheben an Fremdautomaten. Zeile 4 von 6. Klassische Filialbank: 4,50 Euro pro Abhebung. Kostenloses Direktbank-Konto (zum Beispiel. C24 Bank): 0,00 Euro (zum Beispiel 4× monatlich gratis). Zinsen auf das Girokonto-Guthaben. Zeile 5 von 6. Klassische Filialbank: 0,00 Prozent. Kostenloses Direktbank-Konto (zum Beispiel. C24 Bank): Attraktive Guthabenzinsen. Gesamtkosten pro Jahr. Zeile 6 von 6. Klassische Filialbank: circa 150,00 Euro bis 190,00 Euro. Kostenloses Direktbank-Konto (zum Beispiel. C24 Bank): 0,00 Euro (plus Zinsertrag!). Ende der Tabelle Gebührenvergleich: Filialbank versus modernes Online-Girokonto. So unkompliziert gelingt der gesetzliche Kontowechsel. Die Furcht vor zeitraubender Bürokratie hält immer noch Millionen Bundesbürger bei überteuerten Altkonten.",
    "units": [
     {
      "i": 32,
@@ -300,7 +300,7 @@
      "i": 44,
      "type": "table-outro",
      "lang": "de",
-     "chars": 81
+     "chars": 80
     },
     {
      "i": 45,

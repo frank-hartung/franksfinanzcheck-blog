@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 121,
- "chars": 12331,
+ "chars": 12325,
  "parts": [
   {
    "index": 0,
@@ -90,7 +90,7 @@
   },
   {
    "index": 1,
-   "text": "Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Die häufigsten WLAN-Bremsen im Haushalt. Bevor du bares Geld in neue Hardware investierst, lohnt sich eine gründliche Analyse der typischen Störfaktoren in der Wohnung: Schlechter Router-Standort: Steht der Router im geschlossenen Metallschrank, hinter dem Smart-TV oder auf dem Fußboden in der Zimmerecke, wird das Funksignal direkt am Entstehungsort absorbiert. Ein freier Standplatz steigert den Empfang um bis zu 40 Prozent. Störquellen aus dem 2,4-GHz-Band: Mikrowellen, schnurlose DECT-Telefone, Babyfone und Funkmäuse funken auf denselben Frequenzen und erzeugen messbare Paketverluste. Halte mindestens zwei Meter Abstand zu solchen Geräten ein. Kanal-Überlastung durch Nachbarn: In Mehrfamilienhäusern funken oft zwanzig Router auf demselben Funkkanal. Ein manueller Wechsel auf einen freien Funkkanal (zum Beispiel Kanal 1, 6 oder 11 im 2,4-GHz-Bereich) verdoppelt oft die effektive Datenrate. Wasser und Metall im Mauerwerk: Stahlbetondecken, Fußbodenheizungsrohre und große Wandspiegel dämpfen die Funkwellen um mehr als 70 Prozent. Drei Wege zu mehr Reichweite: Repeater versus. Powerline versus. Mesh. Um das Signal in verwinkelte Räume oder über mehrere Stockwerke zu transportieren, stehen drei grundlegend unterschiedliche Technologien zur Auswahl:",
+   "text": "Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Die häufigsten WLAN-Bremsen im Haushalt. Bevor du bares Geld in neue Hardware investierst, lohnt sich eine gründliche Analyse der typischen Störfaktoren in der Wohnung: Schlechter Router-Standort: Steht der Router im geschlossenen Metallschrank, hinter dem Smart-TV oder auf dem Fußboden in der Zimmerecke, wird das Funksignal direkt am Entstehungsort absorbiert. Ein freier Standplatz steigert den Empfang um bis zu 40 Prozent. Störquellen aus dem 2,4-GHz-Band: Mikrowellen, schnurlose DECT-Telefone, Babyfone und Funkmäuse funken auf denselben Frequenzen und erzeugen messbare Paketverluste. Halte mindestens zwei Meter Abstand zu solchen Geräten ein. Kanal-Überlastung durch Nachbarn: In Mehrfamilienhäusern funken oft zwanzig Router auf demselben Funkkanal. Ein manueller Wechsel auf einen freien Funkkanal (zum Beispiel Kanal 1, 6 oder 11 im 2,4-GHz-Bereich) verdoppelt oft die effektive Datenrate. Wasser und Metall im Mauerwerk: Stahlbetondecken, Fußbodenheizungsrohre und große Wandspiegel dämpfen die Funkwellen um mehr als 70 Prozent. Drei Wege zu mehr Reichweite: Repeater versus Powerline versus Mesh. Um das Signal in verwinkelte Räume oder über mehrere Stockwerke zu transportieren, stehen drei grundlegend unterschiedliche Technologien zur Auswahl:",
    "units": [
     {
      "i": 12,
@@ -156,7 +156,7 @@
      "i": 22,
      "type": "h2",
      "lang": "de",
-     "chars": 70
+     "chars": 68
     },
     {
      "i": 23,
@@ -168,13 +168,13 @@
   },
   {
    "index": 2,
-   "text": "Tabelle: Drei Wege zu mehr Reichweite: Repeater versus. Powerline versus. Mesh. Übersicht mit 5 Spalten und 3 Zeilen. Die Spalten lauten: Technologie, Anschaffungskosten, Latenz (Ping), Reale Datenrate, Empfehlung für. Einfacher WLAN-Repeater. Zeile 1 von 3. Anschaffungskosten: 20 bis 35 Euroo. Latenz (Ping): Mittel (erhöht). Reale Datenrate: 30 bis 50 Prozent des Originals. Empfehlung für: Kleine 2- bis 3-Zimmer-Wohnungen. Powerline (DLAN über Stromnetz). Zeile 2 von 3. Anschaffungskosten: 60 bis 120 Euroo. Latenz (Ping): Schwankend. Reale Datenrate: 50 bis 150 Megabit pro Sekunde. Empfehlung für: Dicke Altbauwände / über Stockwerke. Mesh-WLAN-System (zum Beispiel AVM / TP-Link). Zeile 3 von 3. Anschaffungskosten: 80 bis 180 Euroo. Latenz (Ping): Sehr niedrig (top). Reale Datenrate: bis zu 95 Prozent des Originals. Empfehlung für: Große Wohnungen und Einfamilienhäuser. Ende der Tabelle Drei Wege zu mehr Reichweite: Repeater versus. Powerline versus. Mesh. Ein einfacher Repeater halbiert technisch bedingt die Bandbreite, da er Datenpakete gleichzeitig empfangen und weiterleiten muss. Ein modernes Mesh-System hingegen spannt ein intelligentes Funknetz auf. Mehrere Zugangspunkte kommunizieren über ein eigenes Rückkanal-Band (Dedicated Backhaul) miteinander. So kannst du dich im ganzen Haus mit voller Datenrate bewegen.",
+   "text": "Tabelle: Drei Wege zu mehr Reichweite: Repeater versus Powerline versus Mesh. Übersicht mit 5 Spalten und 3 Zeilen. Die Spalten lauten: Technologie, Anschaffungskosten, Latenz (Ping), Reale Datenrate, Empfehlung für. Einfacher WLAN-Repeater. Zeile 1 von 3. Anschaffungskosten: 20 bis 35 Euroo. Latenz (Ping): Mittel (erhöht). Reale Datenrate: 30 bis 50 Prozent des Originals. Empfehlung für: Kleine 2- bis 3-Zimmer-Wohnungen. Powerline (DLAN über Stromnetz). Zeile 2 von 3. Anschaffungskosten: 60 bis 120 Euroo. Latenz (Ping): Schwankend. Reale Datenrate: 50 bis 150 Megabit pro Sekunde. Empfehlung für: Dicke Altbauwände / über Stockwerke. Mesh-WLAN-System (zum Beispiel AVM / TP-Link). Zeile 3 von 3. Anschaffungskosten: 80 bis 180 Euroo. Latenz (Ping): Sehr niedrig (top). Reale Datenrate: bis zu 95 Prozent des Originals. Empfehlung für: Große Wohnungen und Einfamilienhäuser. Ende der Tabelle Drei Wege zu mehr Reichweite: Repeater versus Powerline versus Mesh. Ein einfacher Repeater halbiert technisch bedingt die Bandbreite, da er Datenpakete gleichzeitig empfangen und weiterleiten muss. Ein modernes Mesh-System hingegen spannt ein intelligentes Funknetz auf. Mehrere Zugangspunkte kommunizieren über ein eigenes Rückkanal-Band (Dedicated Backhaul) miteinander. So kannst du dich im ganzen Haus mit voller Datenrate bewegen.",
    "units": [
     {
      "i": 24,
      "type": "table-intro",
      "lang": "de",
-     "chars": 117
+     "chars": 115
     },
     {
      "i": 25,
@@ -222,7 +222,7 @@
      "i": 32,
      "type": "table-outro",
      "lang": "de",
-     "chars": 87
+     "chars": 85
     },
     {
      "i": 33,

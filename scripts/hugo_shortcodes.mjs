@@ -55,7 +55,10 @@ function speakable(v) {
     .replace(/❌/g, 'Nein:')
     .replace(/✕/g, 'Nein:')
     .replace(/✓/g, 'Ja:')
-    .replace(/🏆/g, 'Empfehlung')
+    /* Der Pokal steht fast immer vor dem Wort „Empfehlung" („🏆 Empfehlung").
+       Würde er selbst zu „Empfehlung", entstünde eine Dublette. Das
+       Siegerkennzeichen spricht ohnehin die win-Markierung aus. */
+    .replace(/🏆/g, '')
     .replace(/⚡/g, '')
     .replace(/💰/g, '')
     .replace(/💡/g, 'Tipp')
@@ -236,11 +239,26 @@ function renderNode(node) {
  * Hugo-Shortcodes eines Artikelbodys in Markdown übersetzen,
  * das der Markdown-Renderer der Prüfumgebung versteht.
  */
+/**
+ * Steht unmittelbar über einer Vergleichstabelle eine Überschrift mit
+ * gleichem Wortlaut, wird der Tabellen-Titel nicht nochmal angesagt.
+ * Das ist im Redaktionsalltag der Normalfall („## Beispielrechnung"
+ * plus title="💰 Beispielrechnung") und beim Hören eine Wiederholung.
+ */
+function dropRepeatedHeading(md) {
+  return md.replace(/(^|\n)#{2,3}\s+([^\n]+)\n\s*\n#{2,3}\s+([^\n]+)\n/g, (all, lead, first, second) => {
+    const norm = (t) => t.toLowerCase().replace(/[^a-z0-9äöüß]+/gi, ' ').trim();
+    return norm(first) === norm(second) ? `${lead}## ${first.trim()}\n` : all;
+  });
+}
+
 export function renderShortcodes(markdown) {
   if (!/\{\{</.test(markdown)) return markdown;
-  return renderNode(buildTree(tokenize(markdown)))
-    .replace(/[ \t]+\n/g, '\n')
-    .replace(/\n{3,}/g, '\n\n');
+  return dropRepeatedHeading(
+    renderNode(buildTree(tokenize(markdown)))
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+  );
 }
 
 export default renderShortcodes;

@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 121,
- "chars": 11534,
+ "chars": 11528,
  "parts": [
   {
    "index": 0,
@@ -180,7 +180,7 @@
   },
   {
    "index": 2,
-   "text": "Stelle dir rechtzeitig vor dem 20. Monat eine Erinnerung für den nächsten Wechsel ein. Punkt 2: Teure Router-Miete: Mietgeräte kosten zwischen 4,95 Euro und 7,95 Euro monatlich (118 Euro bis 190 Euro in 2 Jahren). Ein eigener Kauf-Router amortisiert sich meist schnell und bleibt dein Eigentum. Punkt 3: Einmalige Anschluss- und Versandkosten: Für die Freischaltung der Leitung verlangen manche Anbieter bis zu 69,95 Euro, die bei guten Vergleichsangeboten erstattet werden. Punkt 4: Unnötige Zusatzoptionen: Sicherheits-Pakete, Festnetz-Flatrates in Mobilfunknetze oder TV-Streaming-Optionen sind oft in den ersten drei Monaten gratis, verwandeln sich danach. aber in kostenpflichtige Abos, wenn sie nicht fristgerecht gekündigt werden. Tarifvergleich: 50 versus. 100 versus. 250 Megabit pro Sekunde. Welche Geschwindigkeit passt zu deinen Anforderungen? Die folgende Übersicht hilft bei der richtigen Wahl: Tabelle: Tarifvergleich: 50 versus. 100 versus. 250 Megabit pro Sekunde. Übersicht mit 4 Spalten und 4 Zeilen. Die Spalten lauten: Bandbreite, Download / Upload, Typische Effektivkosten, Ideal für. 50 Megabit pro Sekunde (VDSL). Zeile 1 von 4. Download / Upload: 50 / 10 Megabit pro Sekunde. Typische Effektivkosten: circa 19,95 Euro bis 24,95 Euro monatlich. Ideal für: 1- bis 2-Personen-Haushalte, Full-HD-Streaming, normales Homeoffice.",
+   "text": "Stelle dir rechtzeitig vor dem 20. Monat eine Erinnerung für den nächsten Wechsel ein. Punkt 2: Teure Router-Miete: Mietgeräte kosten zwischen 4,95 Euro und 7,95 Euro monatlich (118 Euro bis 190 Euro in 2 Jahren). Ein eigener Kauf-Router amortisiert sich meist schnell und bleibt dein Eigentum. Punkt 3: Einmalige Anschluss- und Versandkosten: Für die Freischaltung der Leitung verlangen manche Anbieter bis zu 69,95 Euro, die bei guten Vergleichsangeboten erstattet werden. Punkt 4: Unnötige Zusatzoptionen: Sicherheits-Pakete, Festnetz-Flatrates in Mobilfunknetze oder TV-Streaming-Optionen sind oft in den ersten drei Monaten gratis, verwandeln sich danach. aber in kostenpflichtige Abos, wenn sie nicht fristgerecht gekündigt werden. Tarifvergleich: 50 versus 100 versus 250 Megabit pro Sekunde. Welche Geschwindigkeit passt zu deinen Anforderungen? Die folgende Übersicht hilft bei der richtigen Wahl: Tabelle: Tarifvergleich: 50 versus 100 versus 250 Megabit pro Sekunde. Übersicht mit 4 Spalten und 4 Zeilen. Die Spalten lauten: Bandbreite, Download / Upload, Typische Effektivkosten, Ideal für. 50 Megabit pro Sekunde (VDSL). Zeile 1 von 4. Download / Upload: 50 / 10 Megabit pro Sekunde. Typische Effektivkosten: circa 19,95 Euro bis 24,95 Euro monatlich. Ideal für: 1- bis 2-Personen-Haushalte, Full-HD-Streaming, normales Homeoffice.",
    "units": [
     {
      "i": 26,
@@ -228,7 +228,7 @@
      "i": 33,
      "type": "h2",
      "lang": "de",
-     "chars": 63
+     "chars": 61
     },
     {
      "i": 34,
@@ -246,7 +246,7 @@
      "i": 36,
      "type": "table-intro",
      "lang": "de",
-     "chars": 110
+     "chars": 108
     },
     {
      "i": 37,
@@ -270,7 +270,7 @@
   },
   {
    "index": 3,
-   "text": "100 Megabit pro Sekunde (VDSL/Kabel). Zeile 2 von 4. Download / Upload: 100 / 40 Megabit pro Sekunde. Typische Effektivkosten: circa 24,95 Euro bis 29,95 Euro monatlich. Ideal für: Familien, paralleles 4K-Streaming, regelmäßige Homeoffice-Calls. 250 Megabit pro Sekunde (Supervectoring). Zeile 3 von 4. Download / Upload: 250 / 40 Megabit pro Sekunde. Typische Effektivkosten: circa 29,95 Euro bis 36,95 Euro monatlich. Ideal für: Vielsurfer, datenintensive Downloads, Online-Gamer, mehrere Teenager. Glasfaser (ab 500 Megabit pro Sekunde). Zeile 4 von 4. Download / Upload: 500 / 100 Megabit pro Sekunde. Typische Effektivkosten: circa 39,95 Euro bis 49,95 Euro monatlich. Ideal für: Zukunftssicher, extrem niedrige Latenz, maximale Stabilität. Ende der Tabelle Tarifvergleich: 50 versus. 100 versus. 250 Megabit pro Sekunde. DSL, Kabel oder Glasfaser: Die Übertragungswege im Vergleich. DSL / VDSL: Läuft über das klassische Kupfer-Telefonnetz, ist bundesweit in über 95 Prozent aller Haushalte verfügbar und bietet stabile Ping-Zeiten und verlässliche Bandbreiten. Kabel-Internet (DOCSIS): Nutzt das Breitbandkabelnetz des Fernsehers. Bietet hohe Download-Raten bis zu 1000 Megabit pro Sekunde zum günstigen Preis, teilt sich die Kapazität jedoch mit den Nachbarn (Shared Medium). Echte Glasfaser (FTTH): Bringt Lichtwellenleiter bis direkt in den Wohnraum.",
+   "text": "100 Megabit pro Sekunde (VDSL/Kabel). Zeile 2 von 4. Download / Upload: 100 / 40 Megabit pro Sekunde. Typische Effektivkosten: circa 24,95 Euro bis 29,95 Euro monatlich. Ideal für: Familien, paralleles 4K-Streaming, regelmäßige Homeoffice-Calls. 250 Megabit pro Sekunde (Supervectoring). Zeile 3 von 4. Download / Upload: 250 / 40 Megabit pro Sekunde. Typische Effektivkosten: circa 29,95 Euro bis 36,95 Euro monatlich. Ideal für: Vielsurfer, datenintensive Downloads, Online-Gamer, mehrere Teenager. Glasfaser (ab 500 Megabit pro Sekunde). Zeile 4 von 4. Download / Upload: 500 / 100 Megabit pro Sekunde. Typische Effektivkosten: circa 39,95 Euro bis 49,95 Euro monatlich. Ideal für: Zukunftssicher, extrem niedrige Latenz, maximale Stabilität. Ende der Tabelle Tarifvergleich: 50 versus 100 versus 250 Megabit pro Sekunde. DSL, Kabel oder Glasfaser: Die Übertragungswege im Vergleich. DSL / VDSL: Läuft über das klassische Kupfer-Telefonnetz, ist bundesweit in über 95 Prozent aller Haushalte verfügbar und bietet stabile Ping-Zeiten und verlässliche Bandbreiten. Kabel-Internet (DOCSIS): Nutzt das Breitbandkabelnetz des Fernsehers. Bietet hohe Download-Raten bis zu 1000 Megabit pro Sekunde zum günstigen Preis, teilt sich die Kapazität jedoch mit den Nachbarn (Shared Medium). Echte Glasfaser (FTTH): Bringt Lichtwellenleiter bis direkt in den Wohnraum.",
    "units": [
     {
      "i": 40,
@@ -312,7 +312,7 @@
      "i": 46,
      "type": "table-outro",
      "lang": "de",
-     "chars": 80
+     "chars": 78
     },
     {
      "i": 47,

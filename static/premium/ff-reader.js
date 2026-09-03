@@ -460,7 +460,11 @@
       s = s.replace(/\bapprox\.(?![\wäöüßÄÖÜ])/gi, 'approximately');
       s = s.replace(/\bincl\.(?![\wäöüßÄÖÜ])/gi, 'including');
       s = s.replace(/\bexcl\.(?![\wäöüßÄÖÜ])/gi, 'excluding');
-      s = s.replace(/\bvs\.?\b/gi, 'versus');
+      /* „vs." – der Punkt MUSS mit verschwinden. Die frühere Fassung
+         /\bvs\.?\b/ ließ ihn stehen („versus."), weil nach einem Punkt
+         keine Wortgrenze mehr folgt und die Regex auf „vs" zurückfiel. */
+      s = s.replace(/\bvs\.(?![\wäöüßÄÖÜ])/gi, 'versus');
+      s = s.replace(/\bvs\b/gi, 'versus');
       s = s.replace(/\bmin\.(?![\wäöüßÄÖÜ])/gi, 'minimum');
       s = s.replace(/\bmax\.(?![\wäöüßÄÖÜ])/gi, 'maximum');
       // Zweite Redaktions-Stufe (v3): etc., No.
@@ -509,7 +513,11 @@
       s = s.replace(/\bAbs\.(?![\wäöüßÄÖÜ])/g, 'Absatz');
       s = s.replace(/\bArt\.(?![\wäöüßÄÖÜ])/g, 'Artikel');
       s = s.replace(/\bNr\.(?![\wäöüßÄÖÜ])/g, 'Nummer');
-      s = s.replace(/\bvs\.?\b/gi, 'versus');
+      /* „vs." – der Punkt MUSS mit verschwinden. Die frühere Fassung
+         /\bvs\.?\b/ ließ ihn stehen („versus."), weil nach einem Punkt
+         keine Wortgrenze mehr folgt und die Regex auf „vs" zurückfiel. */
+      s = s.replace(/\bvs\.(?![\wäöüßÄÖÜ])/gi, 'versus');
+      s = s.replace(/\bvs\b/gi, 'versus');
       // Abkürzungen Deutsch – zweite Redaktions-Stufe (v3)
       s = s.replace(/\bv\.\s?a\.(?![\wäöüßÄÖÜ])/gi, 'vor allem');
       s = s.replace(/\bz\.\s?T\.(?![\wäöüßÄÖÜ])/gi, 'zum Teil');

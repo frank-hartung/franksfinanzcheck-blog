@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-03T18:45:44.525Z",
+ "generated": "2026-09-03T18:48:06.564Z",
  "maxChars": 1400,
  "totalParts": 270,
  "articles": [
@@ -12,7 +12,7 @@
   {
    "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
    "parts": 9,
-   "chars": 11299,
+   "chars": 11296,
    "longest": 1396
   },
   {
@@ -24,7 +24,7 @@
   {
    "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
    "parts": 9,
-   "chars": 10784,
+   "chars": 10783,
    "longest": 1397
   },
   {
@@ -36,25 +36,25 @@
   {
    "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel",
    "parts": 9,
-   "chars": 11584,
+   "chars": 11581,
    "longest": 1400
   },
   {
    "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
    "parts": 8,
-   "chars": 10193,
+   "chars": 10192,
    "longest": 1386
   },
   {
    "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
    "parts": 10,
-   "chars": 12331,
+   "chars": 12325,
    "longest": 1378
   },
   {
    "slug": "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife",
    "parts": 8,
-   "chars": 9772,
+   "chars": 9705,
    "longest": 1384
   },
   {
@@ -66,7 +66,7 @@
   {
    "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
    "parts": 9,
-   "chars": 10916,
+   "chars": 10913,
    "longest": 1397
   },
   {
@@ -90,14 +90,14 @@
   {
    "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
    "parts": 9,
-   "chars": 11534,
+   "chars": 11528,
    "longest": 1380
   },
   {
    "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
    "parts": 8,
-   "chars": 10019,
-   "longest": 1365
+   "chars": 9978,
+   "longest": 1385
   },
   {
    "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
@@ -150,8 +150,8 @@
   {
    "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
    "parts": 10,
-   "chars": 13208,
-   "longest": 1396
+   "chars": 13202,
+   "longest": 1392
   },
   {
    "slug": "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen",

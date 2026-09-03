@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 114,
- "chars": 11299,
+ "chars": 11296,
  "parts": [
   {
    "index": 0,
@@ -168,7 +168,7 @@
   },
   {
    "index": 2,
-   "text": "20 bis 25 Prozent): Staatlich regulierte Gebühren für die Instandhaltung der Leitungsnetze und die Bereitstellung des Zählers. Punkt 3: Steuern, gesetzliche Umlagen und CO2-Preis (circa. 25 bis 30 Prozent): Abgaben wie Erdgassteuer, Konzessionsabgaben, Mehrwertsteuer und der CO2-Aufschlag nach dem Brennstoffemissionshandelsgesetz. Eingeschränkte versus. volle Gaspreisgarantie im Vergleich. Beim Online-Vergleich triffst du auf zwei unterschiedliche Garantietypen: Tabelle: Eingeschränkte versus. volle Gaspreisgarantie im Vergleich. Übersicht mit 3 Spalten und 5 Zeilen. Die Spalten lauten: Leistungskriterium, Eingeschränkte Preisgarantie, Volle Preisgarantie (Fixpreis). Schutz bei Börsen-Preisanstiegen. Zeile 1 von 5. Eingeschränkte Preisgarantie: 100 Prozent geschützt. Volle Preisgarantie (Fixpreis): 100 Prozent geschützt. Schutz bei Netzentgelt-Erhöhungen. Zeile 2 von 5. Eingeschränkte Preisgarantie: In der Regel mitversichert. Volle Preisgarantie (Fixpreis): Vollständig geschützt. Schutz bei Steuer- und CO2-Erhöhungen. Zeile 3 von 5. Eingeschränkte Preisgarantie: Gesetzliche Änderungen werden weitergegeben. Volle Preisgarantie (Fixpreis): Vollständig geschützt. Tarifpreis im Marktvergleich. Zeile 4 von 5. Eingeschränkte Preisgarantie: Optional: Sehr günstig und marktgerecht. Volle Preisgarantie (Fixpreis): Sehr sinnvoll: Häufig mit teurem Sicherheitsaufschlag.",
+   "text": "20 bis 25 Prozent): Staatlich regulierte Gebühren für die Instandhaltung der Leitungsnetze und die Bereitstellung des Zählers. Punkt 3: Steuern, gesetzliche Umlagen und CO2-Preis (circa. 25 bis 30 Prozent): Abgaben wie Erdgassteuer, Konzessionsabgaben, Mehrwertsteuer und der CO2-Aufschlag nach dem Brennstoffemissionshandelsgesetz. Eingeschränkte versus volle Gaspreisgarantie im Vergleich. Beim Online-Vergleich triffst du auf zwei unterschiedliche Garantietypen: Tabelle: Eingeschränkte versus volle Gaspreisgarantie im Vergleich. Übersicht mit 3 Spalten und 5 Zeilen. Die Spalten lauten: Leistungskriterium, Eingeschränkte Preisgarantie, Volle Preisgarantie (Fixpreis). Schutz bei Börsen-Preisanstiegen. Zeile 1 von 5. Eingeschränkte Preisgarantie: 100 Prozent geschützt. Volle Preisgarantie (Fixpreis): 100 Prozent geschützt. Schutz bei Netzentgelt-Erhöhungen. Zeile 2 von 5. Eingeschränkte Preisgarantie: In der Regel mitversichert. Volle Preisgarantie (Fixpreis): Vollständig geschützt. Schutz bei Steuer- und CO2-Erhöhungen. Zeile 3 von 5. Eingeschränkte Preisgarantie: Gesetzliche Änderungen werden weitergegeben. Volle Preisgarantie (Fixpreis): Vollständig geschützt. Tarifpreis im Marktvergleich. Zeile 4 von 5. Eingeschränkte Preisgarantie: Optional: Sehr günstig und marktgerecht. Volle Preisgarantie (Fixpreis): Sehr sinnvoll: Häufig mit teurem Sicherheitsaufschlag.",
    "units": [
     {
      "i": 24,
@@ -192,7 +192,7 @@
      "i": 27,
      "type": "h2",
      "lang": "de",
-     "chars": 59
+     "chars": 58
     },
     {
      "i": 28,
@@ -204,7 +204,7 @@
      "i": 29,
      "type": "table-intro",
      "lang": "de",
-     "chars": 106
+     "chars": 105
     },
     {
      "i": 30,
@@ -264,7 +264,7 @@
   },
   {
    "index": 3,
-   "text": "Marktanteil bei Neukundentarifen. Zeile 5 von 5. Eingeschränkte Preisgarantie: Optional: Über 90 Prozent aller Angebote. Volle Preisgarantie (Fixpreis): Pflicht: Äußerst selten verfügbar. Ende der Tabelle Eingeschränkte versus. volle Gaspreisgarantie im Vergleich. Konkrete Beispiel-Rechnung: Ersparnis bei 20000 Kilowattstunden Verbrauch. Ein typisches Einfamilienhaus verbraucht pro Jahr rund 20000 Kilowattstunden Gas für Raumwärme und Warmwasser. Die folgende Tabelle verdeutlicht den massiven Unterschied zwischen der Grundversorgung und einem optimierten Tarif mit 12 Monaten Preisgarantie: Tabelle: Konkrete Beispiel-Rechnung: Ersparnis bei 20000 Kilowattstunden Verbrauch. Übersicht mit 3 Spalten und 6 Zeilen. Die Spalten lauten: Kostenfaktor, Grundversorgungstarif, Tarif mit Gaspreisgarantie und Bonus. Arbeitspreis pro Kilowattstunden. Zeile 1 von 6. Grundversorgungstarif: 12,80 Cent / Kilowattstunden. Tarif mit Gaspreisgarantie und Bonus: 8,90 Cent / Kilowattstunden. Grundpreis pro Jahr. Zeile 2 von 6. Grundversorgungstarif: 150,00 Euro. Tarif mit Gaspreisgarantie und Bonus: 120,00 Euro. Zwischensumme ohne Rabatte. Zeile 3 von 6. Grundversorgungstarif: 2710,00 Euro. Tarif mit Gaspreisgarantie und Bonus: 1900,00 Euro. Neukundenbonus und Sofortbonus. Zeile 4 von 6. Grundversorgungstarif: 0,00 Euro. Tarif mit Gaspreisgarantie und Bonus: - 160,00 Euro.",
+   "text": "Marktanteil bei Neukundentarifen. Zeile 5 von 5. Eingeschränkte Preisgarantie: Optional: Über 90 Prozent aller Angebote. Volle Preisgarantie (Fixpreis): Pflicht: Äußerst selten verfügbar. Ende der Tabelle Eingeschränkte versus volle Gaspreisgarantie im Vergleich. Konkrete Beispiel-Rechnung: Ersparnis bei 20000 Kilowattstunden Verbrauch. Ein typisches Einfamilienhaus verbraucht pro Jahr rund 20000 Kilowattstunden Gas für Raumwärme und Warmwasser. Die folgende Tabelle verdeutlicht den massiven Unterschied zwischen der Grundversorgung und einem optimierten Tarif mit 12 Monaten Preisgarantie: Tabelle: Konkrete Beispiel-Rechnung: Ersparnis bei 20000 Kilowattstunden Verbrauch. Übersicht mit 3 Spalten und 6 Zeilen. Die Spalten lauten: Kostenfaktor, Grundversorgungstarif, Tarif mit Gaspreisgarantie und Bonus. Arbeitspreis pro Kilowattstunden. Zeile 1 von 6. Grundversorgungstarif: 12,80 Cent / Kilowattstunden. Tarif mit Gaspreisgarantie und Bonus: 8,90 Cent / Kilowattstunden. Grundpreis pro Jahr. Zeile 2 von 6. Grundversorgungstarif: 150,00 Euro. Tarif mit Gaspreisgarantie und Bonus: 120,00 Euro. Zwischensumme ohne Rabatte. Zeile 3 von 6. Grundversorgungstarif: 2710,00 Euro. Tarif mit Gaspreisgarantie und Bonus: 1900,00 Euro. Neukundenbonus und Sofortbonus. Zeile 4 von 6. Grundversorgungstarif: 0,00 Euro. Tarif mit Gaspreisgarantie und Bonus: - 160,00 Euro.",
    "units": [
     {
      "i": 39,
@@ -282,7 +282,7 @@
      "i": 41,
      "type": "table-outro",
      "lang": "de",
-     "chars": 76
+     "chars": 75
     },
     {
      "i": 42,
