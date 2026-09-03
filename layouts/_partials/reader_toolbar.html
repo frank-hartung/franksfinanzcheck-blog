@@ -12,10 +12,14 @@
                          Erweitert auf Tabellen & Übersichten für
                          maximale Barrierefreiheit (WCAG 2.2 AAA / BITV)
                          mit zeilenweiser Live-Synchronisation.
-                         Highend-Level: automatische Qualitätsanpassung
-                         (beste Studio-/Neural-Stimme, Tempo, Chunking,
-                         Fallback) – ohne Tempo-Regler, ohne Stimmenwahl,
-                         ohne Tastatur-Hinweis.
+                         Highend-Level v3 (Capital/WirtschaftsWoche/Die
+                         Zeit als Maßstab): automatische Qualitäts-
+                         anpassung (beste Studio-/Neural-Stimme, Tempo,
+                         Chunking, Fallback), Konnektoren-Atemgruppen,
+                         Final-Längung, satzgenauer Fortschritt,
+                         schwebender Mini-Player beim Scrollen –
+                         ohne Tempo-Regler, ohne Stimmenwahl, ohne
+                         Tastatur-Hinweis.
 
       2. "Kurzfassung" – öffnet eine redaktionell strukturierte
                          Zusammenfassung (Kurzantwort, Kernaussagen,
@@ -24,6 +28,10 @@
 
     Styling: assets/css/extended/ff-reader.css
     Logik:   static/premium/ff-reader.js (first-party, kein Tracking)
+
+    Der .ff-reader-Slot hält das Seitenlayout stabil, während die
+    Toolbar während des Vorlesens als schwebender Mini-Player
+    available bleibt (Verlagshaus-Audioregie).
 
     Dauerhafte Sicherstellung: Für alle bestehenden und zukünftigen
     Blogbeiträge und Ratgeberseiten automatisch aktiv.
@@ -35,6 +43,7 @@
 {{- $readingTime := .ReadingTime -}}
 {{- $wordCount := .WordCount -}}
 {{- $pageLang := .Language.Lang | default site.LanguageCode | default "de" -}}
+<div class="ff-reader-slot">
 <div class="ff-reader-toolbar" id="ff-reader-toolbar" role="region" aria-label="Lesehilfen: Vorlesen und Kurzfassung" data-page-lang="{{ $pageLang }}">
   <span class="ff-reader-toolbar__label" aria-hidden="true">Lesen &amp; Verstehen</span>
 
@@ -67,6 +76,7 @@
   <span class="ff-reader-toolbar__remaining" id="ff-reader-remaining" aria-hidden="true"></span>
   <span class="ff-reader-toolbar__status" id="ff-reader-status" role="status" aria-live="polite"></span>
   <span class="ff-reader-progress" aria-hidden="true"><span class="ff-reader-progress__bar" id="ff-reader-progress-bar"></span></span>
+</div>
 </div>
 <script type="application/json" id="ff-reader-config">{{ dict "title" $title "kurzantwort" $kurzantwort "description" $description "readingTime" $readingTime "wordCount" $wordCount "lang" $pageLang "siteName" site.Title | jsonify | safeJS }}</script>
 <script defer src="{{ partial "asset_url.html" "premium/ff-reader.js" }}"></script>
