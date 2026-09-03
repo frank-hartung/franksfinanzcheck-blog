@@ -1,0 +1,1130 @@
+{
+ "slug": "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen",
+ "title": "September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen",
+ "lang": "de",
+ "quality": {
+  "tier": "premium",
+  "rate": 0.93,
+  "maxChunk": 140
+ },
+ "units": 173,
+ "chars": 16035,
+ "parts": [
+  {
+   "index": 0,
+   "text": "September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen. Ein Beitrag von FranksFinanzcheck. Hördauer etwa 11 Minuten. Kurzantwort: Buche deinen Mietwagen 3‑4 Wochen vor Reisebeginn und nutze Vergleichsportale, um die günstigsten Angebote zu finden. Im September senken viele Anbieter ihre Preise um 20 Prozent–30 Prozent, weil die Nachfrage niedriger ist. Wähle Abholung und Rückgabe außerhalb von Flughäfen, um zusätzliche Gebühren zu vermeiden. Stell dir vor, du stehst am Flughafen von Faro. Die Luft ist noch warm, aber die drückende Hitze des Hochsommers ist verflogen. Während andere Reisende in der Hauptsaison horrende Summen für einen Kleinwagen bezahlt haben, öffnest du entspannt deine App. Du hast dir Wochen vorher ein echtes Mietwagen-Schnäppchen gesichert. Damit bezahlt die Ersparnis locker drei Abendessen in einer erstklassigen Fischtaverne. Transparenz: dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. In der Praxis erlebst du genau das Gegenteil: Du buchst zu spät oder lässt dich von versteckten Gebühren blenden. Damit dir das nicht passiert, schauen wir uns heute an, wie du die Dynamik des Marktes für dich nutzt. Drei Dinge zählen dabei besonders: das richtige Timing, die Wahl der Tankregelung und das Kleingedruckte bei der Versicherung.",
+   "units": [
+    {
+     "i": 0,
+     "type": "intro",
+     "lang": "de",
+     "chars": 120
+    },
+    {
+     "i": 1,
+     "type": "callout",
+     "lang": "de",
+     "chars": 130
+    },
+    {
+     "i": 2,
+     "type": "callout",
+     "lang": "de",
+     "chars": 106
+    },
+    {
+     "i": 3,
+     "type": "callout",
+     "lang": "de",
+     "chars": 90
+    },
+    {
+     "i": 4,
+     "type": "p",
+     "lang": "de",
+     "chars": 127
+    },
+    {
+     "i": 5,
+     "type": "p",
+     "lang": "de",
+     "chars": 126
+    },
+    {
+     "i": 6,
+     "type": "p",
+     "lang": "de",
+     "chars": 69
+    },
+    {
+     "i": 7,
+     "type": "p",
+     "lang": "de",
+     "chars": 87
+    },
+    {
+     "i": 8,
+     "type": "p",
+     "lang": "de",
+     "chars": 62
+    },
+    {
+     "i": 9,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 10,
+     "type": "p",
+     "lang": "de",
+     "chars": 113
+    },
+    {
+     "i": 11,
+     "type": "p",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 12,
+     "type": "p",
+     "lang": "de",
+     "chars": 126
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "text": "Warum der Spätsommer die smarteste Zeit für Mietwagen-Schnäppchen ist. Der September gilt in der Tourismusbranche als der Geheimtipp schlechthin. Viele Familien sind aufgrund des Schulstarts wieder zu Hause. Große Anbieter halten ihre Flotten jedoch noch auf die hohen Kapazitäten des Sommers ausgelegt. Für dich heißt das: Das Angebot übersteigt die Nachfrage deutlich. So ein Überangebot drückt fast zwangsläufig die Preise, die Anbieter wollen ihre Autos nicht auf dem Parkplatz stehen lassen. Planst du jetzt deinen Roadtrip, triffst du die perfekte Phase. Ein goldener September-Urlaub bietet dir nicht nur leere Straßen und angenehme Temperaturen, sondern eben auch enorme finanzielle Vorteile bei der Mobilität vor Ort. Die Buchungszahlen sinken nach der letzten Augustwoche rapide, und Vermieter kämpfen nun um jeden Kunden, der die Nebensaison belebt. Wer hier flexibel bleibt, findet oft Fahrzeuge in höheren Kategorien zum Preis eines Kleinstwagens. Es ist die Zeit, in der das Preis-Leistungs-Verhältnis seinen absoluten Höhepunkt erreicht. deine Buchungsstrategie: So findest du den günstigsten Preis. Der Weg zum günstigen Leihwagen führt über einen systematischen Vergleich. Verlasse dich niemals auf das erstbeste Angebot direkt beim Vermieter vor Ort.",
+   "units": [
+    {
+     "i": 13,
+     "type": "h2",
+     "lang": "de",
+     "chars": 70
+    },
+    {
+     "i": 14,
+     "type": "p",
+     "lang": "de",
+     "chars": 136
+    },
+    {
+     "i": 15,
+     "type": "p",
+     "lang": "de",
+     "chars": 95
+    },
+    {
+     "i": 16,
+     "type": "p",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 17,
+     "type": "p",
+     "lang": "de",
+     "chars": 125
+    },
+    {
+     "i": 18,
+     "type": "p",
+     "lang": "de",
+     "chars": 63
+    },
+    {
+     "i": 19,
+     "type": "p",
+     "lang": "de",
+     "chars": 165
+    },
+    {
+     "i": 20,
+     "type": "p",
+     "lang": "de",
+     "chars": 133
+    },
+    {
+     "i": 21,
+     "type": "p",
+     "lang": "de",
+     "chars": 99
+    },
+    {
+     "i": 22,
+     "type": "p",
+     "lang": "de",
+     "chars": 91
+    },
+    {
+     "i": 23,
+     "type": "h2",
+     "lang": "de",
+     "chars": 61
+    },
+    {
+     "i": 24,
+     "type": "p",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 25,
+     "type": "p",
+     "lang": "de",
+     "chars": 78
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "text": "Am Schalter zahlst du deutlich mehr als bei einer Online-Reservierung. Das Internet schafft die Transparenz für eine kluge Entscheidung. Ein wichtiger Faktor ist der aktuelle Mietwagen-Tagespreis. Dieser schwankt oft täglich, ähnlich wie bei Flugtickets oder Hotelzimmern. Ich habe die Erfahrung gemacht, dass Buchungen unter der Woche, meist am Dienstag oder Mittwoch, oft günstigere Konditionen auswerfen als am Wochenende. Dahinter stecken Algorithmen, die auf das Suchverhalten der Masse reagieren. Nutze für deine Suche Vergleichsportale, die eine Vielzahl von Anbietern bündeln. Dort setzt du Filter, die deine Bedürfnisse abbilden. Möchtest du ein Automatikgetriebe? Brauchst du einen Kindersitz? Filterst du diese Dinge vorab, vermeidest du böse Überraschungen bei der Endsumme. Vorsicht: Ein vermeintlich günstiges Angebot kann durch teure Extras schnell zur Kostenfalle werden. Die Bedeutung der Versicherungsoptionen. Wer günstig ein Auto mieten möchte, darf nicht am falschen Ende sparen. An keiner Stelle trennt sich die Spreu so sehr vom Weizen wie bei der Versicherung. In vielen Basisangeboten ist nur eine Haftpflichtversicherung mit sehr geringen Deckungssummen enthalten. Das kann im Ernstfall den finanziellen Ruin bedeuten. Achte bei deiner Buchungsstrategie unbedingt auf die Option Vollkasko ohne Selbstbeteiligung.",
+   "units": [
+    {
+     "i": 26,
+     "type": "p",
+     "lang": "de",
+     "chars": 136
+    },
+    {
+     "i": 27,
+     "type": "p",
+     "lang": "de",
+     "chars": 135
+    },
+    {
+     "i": 28,
+     "type": "p",
+     "lang": "de",
+     "chars": 152
+    },
+    {
+     "i": 29,
+     "type": "p",
+     "lang": "de",
+     "chars": 76
+    },
+    {
+     "i": 30,
+     "type": "p",
+     "lang": "de",
+     "chars": 135
+    },
+    {
+     "i": 31,
+     "type": "p",
+     "lang": "de",
+     "chars": 34
+    },
+    {
+     "i": 32,
+     "type": "p",
+     "lang": "de",
+     "chars": 29
+    },
+    {
+     "i": 33,
+     "type": "p",
+     "lang": "de",
+     "chars": 82
+    },
+    {
+     "i": 34,
+     "type": "p",
+     "lang": "de",
+     "chars": 100
+    },
+    {
+     "i": 35,
+     "type": "h2",
+     "lang": "de",
+     "chars": 40
+    },
+    {
+     "i": 36,
+     "type": "p",
+     "lang": "de",
+     "chars": 71
+    },
+    {
+     "i": 37,
+     "type": "p",
+     "lang": "de",
+     "chars": 83
+    },
+    {
+     "i": 38,
+     "type": "p",
+     "lang": "de",
+     "chars": 105
+    },
+    {
+     "i": 39,
+     "type": "p",
+     "lang": "de",
+     "chars": 53
+    },
+    {
+     "i": 40,
+     "type": "p",
+     "lang": "de",
+     "chars": 93
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "text": "So ein Paket klingt im ersten Moment teurer, schützt dich aber vor unerwarteten Kosten bei Kratzern oder Unfällen. Oft versuchen Vermieter vor Ort, dir eine zusätzliche Versicherung aufzuschwatzen. Wenn du bereits online ein Rundum-sorglos-Paket gebucht hast, kannst du diese Angebote selbstbewusst ablehnen. Wichtig ist außerdem der Schutz von Glas und Reifen. Diese Bauteile sind in der Standard-Vollkasko oft ausgeschlossen. Gerade auf den Schotterpisten in südeuropäischen Küstenregionen ist ein Steinschlag schnell passiert. So ein umfassender Schutz sorgt dafür, dass dein Urlaub entspannt bleibt und du vor der Fahrzeugrückgabe keine Angst haben musst. Rechenbeispiel 2026: So viel sparst du im September. Um die Ersparnis zu verdeutlichen, schauen wir uns ein typisches Szenario für eine Reise nach Portugal im Jahr 2026 an. Wir vergleichen die Kosten für eine Woche Mietwagen in der Kompaktklasse (zum Beispiel VW Golf oder ähnlich). Tabelle: Rechenbeispiel 2026: So viel sparst du im September. Übersicht mit 4 Spalten und 3 Zeilen. Die Spalten lauten: Zeitraum, Mietpreis (circa), Versicherung (ohne SB), Gesamtpreis. August (Hauptsaison). Zeile 1 von 3. Mietpreis (circa): 450,00 Euro. Versicherung (ohne SB): 150,00 Euro. Gesamtpreis: 600,00 Euro. September (Nebensaison). Zeile 2 von 3. Mietpreis (circa): 210,00 Euro. Versicherung (ohne SB): 120,00 Euro. Gesamtpreis: 330,00 Euro.",
+   "units": [
+    {
+     "i": 41,
+     "type": "p",
+     "lang": "de",
+     "chars": 114
+    },
+    {
+     "i": 42,
+     "type": "p",
+     "lang": "de",
+     "chars": 82
+    },
+    {
+     "i": 43,
+     "type": "p",
+     "lang": "de",
+     "chars": 110
+    },
+    {
+     "i": 44,
+     "type": "p",
+     "lang": "de",
+     "chars": 118
+    },
+    {
+     "i": 45,
+     "type": "p",
+     "lang": "de",
+     "chars": 101
+    },
+    {
+     "i": 46,
+     "type": "p",
+     "lang": "de",
+     "chars": 129
+    },
+    {
+     "i": 47,
+     "type": "h2",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 48,
+     "type": "p",
+     "lang": "de",
+     "chars": 119
+    },
+    {
+     "i": 49,
+     "type": "p",
+     "lang": "de",
+     "chars": 109
+    },
+    {
+     "i": 50,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 99
+    },
+    {
+     "i": 51,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 85
+    },
+    {
+     "i": 52,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 131
+    },
+    {
+     "i": 53,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 134
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "text": "Ersparnis. Zeile 3 von 3. Mietpreis (circa): 240,00 Euro. Versicherung (ohne SB): 30,00 Euro. Gesamtpreis: 270,00 Euro. Ende der Tabelle Rechenbeispiel 2026: So viel sparst du im September. Dieses Beispiel zeigt eindrucksvoll, dass du durch die Wahl des richtigen Zeitfensters fast die Hälfte der Kosten sparen kannst. Die Differenz von 270 Euro kannst du nutzen, um deine Reise durch exklusive Erlebnisse aufzuwerten oder die Urlaubsdauer einfach um ein paar Tage zu verlängern. Die Tankregelung: Fair geht vor. Ein häufiger Fehler bei der Suche nach einem Mietwagen-Schnäppchen ist das Ignorieren der Tankregelung. Es gibt hier im Wesentlichen zwei Modelle: Full-to-Full (Voll/Voll) und Full-to-Empty (Voll/Leer). In meiner Praxis hat sich gezeigt, dass nur die Voll/Voll-Variante wirklich fair ist. Bei Full-to-Empty zahlst du bei der Abholung oft eine überhöhte Tankfüllung und eine zusätzliche Servicegebühr. Den restlichen Kraftstoff im Tank bei der Rückgabe schenkst du dem Vermieter. Das ist fast immer ein Verlustgeschäft für dich. Bei der Voll/Voll-Regelung übernimmst du den Wagen vollgetankt und gibst ihn auch so wieder ab. Du zahlst also nur das, was du tatsächlich verfahren hast. Achte darauf, die Tankquittung deiner letzten Befüllung kurz vor der Rückgabe aufzubewahren. Manchmal behaupten Vermieter im Nachhinein, der Tank sei nicht ganz voll gewesen.",
+   "units": [
+    {
+     "i": 54,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 119
+    },
+    {
+     "i": 55,
+     "type": "table-outro",
+     "lang": "de",
+     "chars": 69
+    },
+    {
+     "i": 56,
+     "type": "p",
+     "lang": "de",
+     "chars": 128
+    },
+    {
+     "i": 57,
+     "type": "p",
+     "lang": "de",
+     "chars": 160
+    },
+    {
+     "i": 58,
+     "type": "h2",
+     "lang": "de",
+     "chars": 32
+    },
+    {
+     "i": 59,
+     "type": "p",
+     "lang": "de",
+     "chars": 103
+    },
+    {
+     "i": 60,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 61,
+     "type": "p",
+     "lang": "de",
+     "chars": 85
+    },
+    {
+     "i": 62,
+     "type": "p",
+     "lang": "de",
+     "chars": 111
+    },
+    {
+     "i": 63,
+     "type": "p",
+     "lang": "de",
+     "chars": 126
+    },
+    {
+     "i": 64,
+     "type": "p",
+     "lang": "de",
+     "chars": 95
+    },
+    {
+     "i": 65,
+     "type": "p",
+     "lang": "de",
+     "chars": 58
+    },
+    {
+     "i": 66,
+     "type": "p",
+     "lang": "de",
+     "chars": 92
+    },
+    {
+     "i": 67,
+     "type": "p",
+     "lang": "de",
+     "chars": 81
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "text": "Mit dem Beleg in der Hand hast du einen klaren Nachweis und vermeidest ungerechtfertigte Nachbelastungen auf deiner Kreditkarte. Typische Fehler bei der Mietwagenbuchung vermeiden. Es gibt einige Stolperfallen, die selbst erfahrene Reisende immer wieder übersehen. Klassischer Fehler Nummer eins ist die Verwendung einer Debitkarte statt einer echten Kreditkarte. Viele Autovermietungen verlangen für die Kaution eine Kreditkarte mit Hochprägung. Viele Vermieter lehnen eine Debitkarte rundheraus ab, dann musst du vor Ort eine teure Zusatzversicherung abschließen, um den Wagen überhaupt zu bekommen. Auch die Annahme, dass der Zweitfahrer immer inklusive ist, erweist sich oft als Irrtum. In den meisten Fällen kostet jeder zusätzliche Fahrer eine tägliche Gebühr. Wenn du dich beim Fahren abwechseln möchtest, solltest du gezielt nach Angeboten suchen, bei denen der Zweitfahrer bereits im Preis enthalten ist. Das spart dir oft 10 bis 15 Euro pro Tag. Unterschätze auch nicht die Bedeutung der Abholzeit. Wenn du angibst, das Auto um 10 Uhr abzuholen, aber erst um 14 Uhr am Schalter erscheinst, kann die Reservierung verfallen sein. Bei Flugverspätungen solltest du den Vermieter unbedingt informieren. Gib bei der Buchung die Flugnummer an, so plant der Vermieter deine Ankunft besser und hält das Auto bereit. Checkliste für eine stressfreie Fahrzeugübernahme.",
+   "units": [
+    {
+     "i": 68,
+     "type": "p",
+     "lang": "de",
+     "chars": 128
+    },
+    {
+     "i": 69,
+     "type": "h2",
+     "lang": "de",
+     "chars": 51
+    },
+    {
+     "i": 70,
+     "type": "p",
+     "lang": "de",
+     "chars": 83
+    },
+    {
+     "i": 71,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 72,
+     "type": "p",
+     "lang": "de",
+     "chars": 82
+    },
+    {
+     "i": 73,
+     "type": "p",
+     "lang": "de",
+     "chars": 154
+    },
+    {
+     "i": 74,
+     "type": "p",
+     "lang": "de",
+     "chars": 88
+    },
+    {
+     "i": 75,
+     "type": "p",
+     "lang": "de",
+     "chars": 75
+    },
+    {
+     "i": 76,
+     "type": "p",
+     "lang": "de",
+     "chars": 146
+    },
+    {
+     "i": 77,
+     "type": "p",
+     "lang": "de",
+     "chars": 41
+    },
+    {
+     "i": 78,
+     "type": "p",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 79,
+     "type": "p",
+     "lang": "de",
+     "chars": 128
+    },
+    {
+     "i": 80,
+     "type": "p",
+     "lang": "de",
+     "chars": 69
+    },
+    {
+     "i": 81,
+     "type": "p",
+     "lang": "de",
+     "chars": 108
+    },
+    {
+     "i": 82,
+     "type": "h2",
+     "lang": "de",
+     "chars": 50
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "text": "Bevor du mit deinem Wagen in den Sonnenuntergang fährst, solltest du einige Minuten in die Kontrolle investieren. Nutze diese Checkliste, um später keine Probleme zu bekommen: Schäden dokumentieren: Gehe einmal um das Auto herum und fotografiere alle Kratzer, Beulen oder Schrammen. Achte auch auf die Felgen und die Windschutzscheibe. Innenraum prüfen: Sind die Sitze sauber? Funktionieren die Sicherheitsgurte? Gibt es Brandlöcher? Technik-Check: Schalte das Licht ein, prüfe die Blinker und betätige die Scheibenwaschanlage. Ein kurzer Blick auf den Kilometerstand und die Tankanzeige ist ebenfalls wichtig. Unterlagen abgleichen: Stehen alle dokumentierten Vorschäden auch im Mietvertrag (Rental Agreement)? Wenn nicht, lass sie sofort nachtragen. Notfallnummer: Wo findest du die Telefonnummer für den Pannendienst? Meist klebt diese an der Windschutzscheibe oder befindet sich in den Fahrzeugpapieren. Nimm dir die Zeit für diesen Rundgang. Es signalisiert dem Mitarbeiter des Vermieters, dass du ein aufmerksamer Kunde bist. Damit sinkt die Wahrscheinlichkeit, dass man versucht, dir bei der Rückgabe alte Schäden anzuhängen. Die Wahl des richtigen Fahrzeugtyps. Für ein echtes Mietwagen-Schnäppchen solltest du genau überlegen, welches Auto du wirklich brauchst.",
+   "units": [
+    {
+     "i": 83,
+     "type": "p",
+     "lang": "de",
+     "chars": 113
+    },
+    {
+     "i": 84,
+     "type": "p",
+     "lang": "de",
+     "chars": 61
+    },
+    {
+     "i": 85,
+     "type": "li",
+     "lang": "de",
+     "chars": 106
+    },
+    {
+     "i": 86,
+     "type": "li",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 87,
+     "type": "li",
+     "lang": "de",
+     "chars": 40
+    },
+    {
+     "i": 88,
+     "type": "li",
+     "lang": "de",
+     "chars": 35
+    },
+    {
+     "i": 89,
+     "type": "li",
+     "lang": "de",
+     "chars": 20
+    },
+    {
+     "i": 90,
+     "type": "li",
+     "lang": "de",
+     "chars": 93
+    },
+    {
+     "i": 91,
+     "type": "li",
+     "lang": "de",
+     "chars": 82
+    },
+    {
+     "i": 92,
+     "type": "li",
+     "lang": "de",
+     "chars": 100
+    },
+    {
+     "i": 93,
+     "type": "li",
+     "lang": "de",
+     "chars": 39
+    },
+    {
+     "i": 94,
+     "type": "li",
+     "lang": "de",
+     "chars": 68
+    },
+    {
+     "i": 95,
+     "type": "li",
+     "lang": "de",
+     "chars": 86
+    },
+    {
+     "i": 96,
+     "type": "p",
+     "lang": "de",
+     "chars": 123
+    },
+    {
+     "i": 97,
+     "type": "p",
+     "lang": "de",
+     "chars": 100
+    },
+    {
+     "i": 98,
+     "type": "h2",
+     "lang": "de",
+     "chars": 36
+    },
+    {
+     "i": 99,
+     "type": "p",
+     "lang": "de",
+     "chars": 100
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Ein SUV sieht im Urlaub schick aus, ist aber in den engen Gassen italienischer oder griechischer Bergdörfer oft eher ein Hindernis. Zudem verbrauchen größere Fahrzeuge mehr Kraftstoff, was die Reisekasse zusätzlich belastet. Für zwei Personen reicht ein Kleinwagen oder ein Modell der Kompaktklasse meist völlig aus. Wenn du jedoch mit viel Gepäck oder der ganzen Familie reist, ist ein Kombi oder ein Van die bessere Wahl. Achte bei der Buchung auf die Angaben zum Kofferraumvolumen. Nichts ist ärgerlicher, als wenn die Koffer bei der Ankunft nicht in das Auto passen und du vor Ort teuer upgraden musst. Bedenke auch die klimatischen Bedingungen. Im September ist eine gut funktionierende Klimaanlage in Südeuropa noch immer Pflicht. Achte darauf, dass dieses Merkmal in der Fahrzeugbeschreibung explizit aufgeführt ist. Bei sehr günstigen Angeboten in manchen Regionen vermieten die Stationen gelegentlich ältere Modelle ohne Klimaanlage. Flexibilität bei den Abholorten nutzen. Oft übersehen wird dabei der Vergleich verschiedener Abholstationen. Am bequemsten sind die Stationen direkt im Flughafenterminal, am teuersten allerdings auch. Manchmal lohnt eine Station in der Innenstadt oder in Flughafennähe. Diese erreichst du oft mit einem kostenlosen Shuttle-Bus.",
+   "units": [
+    {
+     "i": 100,
+     "type": "p",
+     "lang": "de",
+     "chars": 131
+    },
+    {
+     "i": 101,
+     "type": "p",
+     "lang": "de",
+     "chars": 92
+    },
+    {
+     "i": 102,
+     "type": "p",
+     "lang": "de",
+     "chars": 91
+    },
+    {
+     "i": 103,
+     "type": "p",
+     "lang": "de",
+     "chars": 106
+    },
+    {
+     "i": 104,
+     "type": "p",
+     "lang": "de",
+     "chars": 60
+    },
+    {
+     "i": 105,
+     "type": "p",
+     "lang": "de",
+     "chars": 121
+    },
+    {
+     "i": 106,
+     "type": "p",
+     "lang": "de",
+     "chars": 129
+    },
+    {
+     "i": 107,
+     "type": "p",
+     "lang": "de",
+     "chars": 86
+    },
+    {
+     "i": 108,
+     "type": "p",
+     "lang": "de",
+     "chars": 118
+    },
+    {
+     "i": 109,
+     "type": "h2",
+     "lang": "de",
+     "chars": 39
+    },
+    {
+     "i": 110,
+     "type": "p",
+     "lang": "de",
+     "chars": 68
+    },
+    {
+     "i": 111,
+     "type": "p",
+     "lang": "de",
+     "chars": 91
+    },
+    {
+     "i": 112,
+     "type": "p",
+     "lang": "de",
+     "chars": 126
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "text": "Diese sogenannten Off-Airport-Stationen haben geringere Standplatzgebühren und geben diesen Preisvorteil oft an die Kunden weiter. Ist die Ersparnis bei einer Woche Mietdauer signifikant, nehme ich die 10 Minuten Fahrt mit dem Shuttle gerne in Kauf. Prüfe einfach beide Optionen in deinem Vergleichsportal, um gut informiert zu entscheiden. Ebenso kann die Rückgabe an einem anderen Ort sinnvoll sein, wenn du eine Streckentour planst. Beachte jedoch, dass hierfür meist eine Einweggebühr (One-Way-Fee) anfällt. Diese Gebühr variiert stark zwischen den Anbietern. Manchmal ist sie überraschend niedrig, in anderen Fällen verdoppelt sie den Gesamtpreis. Wirf hier einen genauen Blick in die Mietbedingungen, das ist unerlässlich. Grenzübertritte und Kilometerbegrenzung. Planst du, während deiner Reise die Landesgrenzen zu überschreiten? In Europa ist das oft problemlos möglich, du musst es dem Vermieter aber fast immer vorher melden. Einige Vermieter verlangen hierfür eine zusätzliche Gebühr für die Versicherungserweiterung oder die Bereitstellung der grünen Versicherungskarte. Vergleiche ebenfalls die Kilometerleistung der Tarife. Viele Angebote beinhalten unbegrenzte Kilometer. Ideal ist das, wenn du viel unterwegs bist. Es gibt jedoch auch Tarife mit einer Begrenzung, zum Beispiel 100 Kilometer pro Tag.",
+   "units": [
+    {
+     "i": 113,
+     "type": "p",
+     "lang": "de",
+     "chars": 130
+    },
+    {
+     "i": 114,
+     "type": "p",
+     "lang": "de",
+     "chars": 118
+    },
+    {
+     "i": 115,
+     "type": "p",
+     "lang": "de",
+     "chars": 90
+    },
+    {
+     "i": 116,
+     "type": "p",
+     "lang": "de",
+     "chars": 94
+    },
+    {
+     "i": 117,
+     "type": "p",
+     "lang": "de",
+     "chars": 127
+    },
+    {
+     "i": 118,
+     "type": "p",
+     "lang": "de",
+     "chars": 88
+    },
+    {
+     "i": 119,
+     "type": "p",
+     "lang": "de",
+     "chars": 75
+    },
+    {
+     "i": 120,
+     "type": "h2",
+     "lang": "de",
+     "chars": 40
+    },
+    {
+     "i": 121,
+     "type": "p",
+     "lang": "de",
+     "chars": 67
+    },
+    {
+     "i": 122,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 123,
+     "type": "p",
+     "lang": "de",
+     "chars": 146
+    },
+    {
+     "i": 124,
+     "type": "p",
+     "lang": "de",
+     "chars": 103
+    },
+    {
+     "i": 125,
+     "type": "p",
+     "lang": "de",
+     "chars": 128
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "text": "Wenn du weißt, dass du nur vom Flughafen zum Hotel und zurück fährst, kann ein solcher Tarif ein echtes Schnäppchen sein. Überschreitest du jedoch die Grenze, zahlst du für jeden Zusatzkilometer oft kräftig drauf. Rechne deine geplante Route grob bei Google Maps nach, bevor du dich für einen Tarif entscheidest. Plane einen Puffer von 20 Prozent ein, im Urlaub verfährt man sich gerne mal oder macht spontane Abstecher zu Sehenswürdigkeiten. Die Freiheit eines Mietwagens ist schließlich der größte Luxus auf Reisen. Die Rückgabe: So vermeidest du Stress am Ende. Der letzte Eindruck zählt, auch bei der Autovermietung. Plane für die Rückgabe genügend Zeit ein, besonders wenn du einen Flug erwischen musst. Hektik führt dazu, dass du vielleicht vergisst, persönliche Gegenstände aus dem Auto zu nehmen oder das Übergabeprotokoll nicht genau prüfst. Saugen und waschen musst du das Auto in der Regel nicht. Die Ausnahme: es ist extrem verschmutzt, zum Beispiel durch massiven Sand im Innenraum. Eine normale Nutzung ist im Preis enthalten. Dennoch ist es eine gute Geste, groben Müll zu entfernen. Lass dir die mängelfreie Rückgabe schriftlich bestätigen. Ein unterschriebenes Rückgabeprotokoll ist deine Versicherung gegen spätere Forderungen. Wenn die Station bei deiner Ankunft geschlossen ist und du den Schlüssel in eine Box werfen musst: Mache auch jetzt wieder Fotos.",
+   "units": [
+    {
+     "i": 126,
+     "type": "p",
+     "lang": "de",
+     "chars": 121
+    },
+    {
+     "i": 127,
+     "type": "p",
+     "lang": "de",
+     "chars": 91
+    },
+    {
+     "i": 128,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 129,
+     "type": "p",
+     "lang": "de",
+     "chars": 129
+    },
+    {
+     "i": 130,
+     "type": "p",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 131,
+     "type": "h2",
+     "lang": "de",
+     "chars": 46
+    },
+    {
+     "i": 132,
+     "type": "p",
+     "lang": "de",
+     "chars": 55
+    },
+    {
+     "i": 133,
+     "type": "p",
+     "lang": "de",
+     "chars": 87
+    },
+    {
+     "i": 134,
+     "type": "p",
+     "lang": "de",
+     "chars": 141
+    },
+    {
+     "i": 135,
+     "type": "p",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 136,
+     "type": "p",
+     "lang": "de",
+     "chars": 132
+    },
+    {
+     "i": 137,
+     "type": "p",
+     "lang": "de",
+     "chars": 57
+    },
+    {
+     "i": 138,
+     "type": "p",
+     "lang": "de",
+     "chars": 57
+    },
+    {
+     "i": 139,
+     "type": "p",
+     "lang": "de",
+     "chars": 88
+    },
+    {
+     "i": 140,
+     "type": "p",
+     "lang": "de",
+     "chars": 129
+    }
+   ]
+  },
+  {
+   "index": 10,
+   "text": "Fotografiere den Zustand des Wagens und die Tankanzeige auf dem Parkplatz des Vermieters. So hast du im Zweifelsfall einen Beleg für den Zeitpunkt und den Zustand bei Abgabe. Weiterlesen: Ratgeber Mietwagen Lesetipp: Mietwagen ohne Kautionsfallen: So sparst du im Urlaub. Häufige Fragen. Muss ich eine Kaution hinterlegen, wenn ich ohne Selbstbeteiligung buche. Ja, in der Regel wird trotzdem eine Kaution auf deiner Kreditkarte blockiert. Der Vermieter sichert sich gegen Schäden ab, die die Versicherung nicht deckt, etwa grobe Fahrlässigkeit oder Verstöße gegen die Mietbedingungen. Die Höhe der Kaution variiert je nach Fahrzeugklasse und Anbieter. Was passiert, wenn ich den Wagen früher zurückbringe. Eine vorzeitige Rückgabe ist fast immer möglich. Rechne jedoch nicht damit, dass dir der Vermieter den Differenzbetrag für die unverbrachten Tage erstattet. Die meisten Tarife basieren auf der gebuchten Gesamtdauer. Es ist jedoch ratsam, die Station kurz vorab zu informieren, damit jemand für die Annahme bereitsteht. Reicht mein nationaler Führerschein im Ausland aus. Innerhalb der Europäischen Union reicht dein deutscher Führerschein im Kartenformat völlig aus. Auf Reisen außerhalb der EU, zum Beispiel in die USA oder nach Asien, ist dagegen oft ein internationaler Führerschein erforderlich.",
+   "units": [
+    {
+     "i": 141,
+     "type": "p",
+     "lang": "de",
+     "chars": 89
+    },
+    {
+     "i": 142,
+     "type": "p",
+     "lang": "de",
+     "chars": 84
+    },
+    {
+     "i": 143,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 144,
+     "type": "h2",
+     "lang": "de",
+     "chars": 15
+    },
+    {
+     "i": 145,
+     "type": "h3",
+     "lang": "de",
+     "chars": 73
+    },
+    {
+     "i": 146,
+     "type": "p",
+     "lang": "de",
+     "chars": 77
+    },
+    {
+     "i": 147,
+     "type": "p",
+     "lang": "de",
+     "chars": 145
+    },
+    {
+     "i": 148,
+     "type": "p",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 149,
+     "type": "h3",
+     "lang": "de",
+     "chars": 53
+    },
+    {
+     "i": 150,
+     "type": "p",
+     "lang": "de",
+     "chars": 48
+    },
+    {
+     "i": 151,
+     "type": "p",
+     "lang": "de",
+     "chars": 107
+    },
+    {
+     "i": 152,
+     "type": "p",
+     "lang": "de",
+     "chars": 58
+    },
+    {
+     "i": 153,
+     "type": "p",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 154,
+     "type": "h3",
+     "lang": "de",
+     "chars": 51
+    },
+    {
+     "i": 155,
+     "type": "p",
+     "lang": "de",
+     "chars": 95
+    },
+    {
+     "i": 156,
+     "type": "p",
+     "lang": "de",
+     "chars": 132
+    }
+   ]
+  },
+  {
+   "index": 11,
+   "text": "Diesen solltest du rechtzeitig bei deiner örtlichen Führerscheinstelle beantragen, da die Ausstellung einige Tage dauern kann. Kann ich einen Mietwagen ohne Kreditkarte buchen. Es gibt mittlerweile einige Anbieter, die eine Buchung ohne Kreditkarte (zum Beispiel via Lastschrift oder PayPal) ermöglichen. Dies ist jedoch oft an bestimmte Bedingungen geknüpft, wie etwa den Abschluss eines Premium-Versicherungspakets direkt beim Vermieter. Die Auswahl an verfügbaren Fahrzeugen und Anbietern ist in diesem Fall deutlich eingeschränkter. Sind Kindersitze im Mietpreis enthalten. Nein, Kindersitze oder Sitzerhöhungen buchst du fast immer als Extra dazu und zahlst dafür eine tägliche Gebühr. Bei längeren Reisen kann es sich sogar lohnen, einen eigenen Sitz mitzubringen oder vor Ort in einem Supermarkt günstig zu kaufen. Manche Fluggesellschaften transportieren Kindersitze zudem kostenlos als Sperrgepäck. Wer diese Tipps beherzigt und strategisch plant, erlebt den Spätsommer-Mietwagen als eine der klügsten Investitionen in die Urlaubsqualität. Gute Vorbereitung macht die Fahrt durch malerische Landschaften zum reinen Vergnügen, und das Budget bleibt entspannt. Genieße die Freiheit auf vier Rädern und mach deinen nächsten Trip zu einem unvergesslichen Erlebnis. Jetzt vergleichen und sparen: führt zu Mietwagen-Angebote jetzt prüfen. Dieser Artikel enthält Affiliate-Links (Werbung).",
+   "units": [
+    {
+     "i": 157,
+     "type": "p",
+     "lang": "de",
+     "chars": 126
+    },
+    {
+     "i": 158,
+     "type": "h3",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 159,
+     "type": "p",
+     "lang": "de",
+     "chars": 127
+    },
+    {
+     "i": 160,
+     "type": "p",
+     "lang": "de",
+     "chars": 134
+    },
+    {
+     "i": 161,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 162,
+     "type": "h3",
+     "lang": "de",
+     "chars": 40
+    },
+    {
+     "i": 163,
+     "type": "p",
+     "lang": "de",
+     "chars": 112
+    },
+    {
+     "i": 164,
+     "type": "p",
+     "lang": "de",
+     "chars": 130
+    },
+    {
+     "i": 165,
+     "type": "p",
+     "lang": "de",
+     "chars": 85
+    },
+    {
+     "i": 166,
+     "type": "p",
+     "lang": "de",
+     "chars": 140
+    },
+    {
+     "i": 167,
+     "type": "p",
+     "lang": "de",
+     "chars": 118
+    },
+    {
+     "i": 168,
+     "type": "p",
+     "lang": "de",
+     "chars": 101
+    },
+    {
+     "i": 169,
+     "type": "p",
+     "lang": "de",
+     "chars": 71
+    },
+    {
+     "i": 170,
+     "type": "p",
+     "lang": "de",
+     "chars": 49
+    }
+   ]
+  },
+  {
+   "index": 12,
+   "text": "Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
+    {
+     "i": 171,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 172,
+     "type": "outro",
+     "lang": "de",
+     "chars": 66
+    }
+   ]
+  }
+ ]
+}

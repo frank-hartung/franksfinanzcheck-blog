@@ -1,0 +1,824 @@
+{
+ "slug": "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst",
+ "title": "Strom sparen im Haushalt: Die besten Tipps für den Herbst",
+ "lang": "de",
+ "quality": {
+  "tier": "premium",
+  "rate": 0.93,
+  "maxChunk": 140
+ },
+ "units": 125,
+ "chars": 12205,
+ "parts": [
+  {
+   "index": 0,
+   "text": "Strom sparen im Haushalt: Die besten Tipps für den Herbst. Ein Beitrag von FranksFinanzcheck. Hördauer etwa 8 Minuten. Kurzantwort: Im Herbst steigt der Stromverbrauch durch frühere Dunkelheit und mehr Zeit in den eigenen vier Wänden um 20 bis 30 Prozent. Durch den Umstieg auf LED-Leuchtmittel, schaltbare Steckdosenleisten, Eco-Programme bei Großgeräten und einen Tarifwechsel sparst du in einem 3-Personen-Haushalt jährlich bis zu 460 Euro. Mit den kürzer werdenden Tagen im Herbst verändert sich auch unser Alltag spürbar: Das Deckenlicht brennt schon am Nachmittag, der Fernseher läuft öfter, der Wasserkocher für heißen Tee ist im Dauereinsatz und der Wäschetrockner ersetzt die Wäscheleine im Garten. Für viele Haushalte bedeutet das einen deutlichen Anstieg des Stromverbrauchs um 20 bis 30 Prozent gegenüber den sonnigen Sommermonaten. Wer jetzt gezielt gegensteuert, kann beim Strom sparen im Haushalt bis zu 460 Euro pro Jahr herausholen, ohne dabei auf Komfort und Gemütlichkeit verzichten zu müssen. Gemeinsam decken wir die größten Stromfresser auf und zeigen praxiserprobte Gegenmaßnahmen für die goldene Jahreszeit. Tipp: Schnell-Tipp von FranksFinanzcheck: Senke deinen Kilowattstunden-Preis sofort durch einen kostenlosen Tarifvergleich: Stromtarife vergleichen (Dieser Artikel enthält Affiliate-Links (Werbung).",
+   "units": [
+    {
+     "i": 0,
+     "type": "intro",
+     "lang": "de",
+     "chars": 118
+    },
+    {
+     "i": 1,
+     "type": "callout",
+     "lang": "de",
+     "chars": 136
+    },
+    {
+     "i": 2,
+     "type": "callout",
+     "lang": "de",
+     "chars": 187
+    },
+    {
+     "i": 3,
+     "type": "p",
+     "lang": "de",
+     "chars": 126
+    },
+    {
+     "i": 4,
+     "type": "p",
+     "lang": "de",
+     "chars": 136
+    },
+    {
+     "i": 5,
+     "type": "p",
+     "lang": "de",
+     "chars": 136
+    },
+    {
+     "i": 6,
+     "type": "p",
+     "lang": "de",
+     "chars": 167
+    },
+    {
+     "i": 7,
+     "type": "p",
+     "lang": "de",
+     "chars": 118
+    },
+    {
+     "i": 8,
+     "type": "p",
+     "lang": "de",
+     "chars": 198
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "text": "Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Die 8 effektivsten Stromspartipps für den Herbst. 1. Beleuchtung konsequent auf moderne LEDs umrüsten. Alte Halogenstrahler oder klassische Glühbirnen wandeln bis zu 95 Prozent der eingesetzten Energie in Wärme statt in Licht um. Eine moderne LED verbraucht bis zu 85 Prozent weniger Energie bei gleicher Helligkeit und hält über 15000 Betriebsstunden. Der Austausch von 10 Halogenlampen (je 40 Watt) gegen 5-Watt-LEDs spart bei 4 Stunden täglicher Leuchtdauer rund 85 Euro Stromkosten pro Jahr. Achte beim Neukauf auf warmweißes Licht mit 2700 Kelvin für eine behagliche Atmosphäre im Wohnbereich. 2. Standby-Verluste mit schaltbaren Steckdosenleisten eliminieren. Fernseher, Soundbars, Spielekonsolen, WLAN-Repeater und Kaffeemaschinen ziehen auch im Standby-Modus kontinuierlich Strom. In einem Durchschnittshaushalt verursacht dieser heimliche Leerlaufverbrauch Kosten von 90 Euro bis 130 Euro im Jahr. Eine schaltbare Steckerleiste oder smarte Zwischenstecker mit Zeitschaltuhr trennen Geräte mit einem einzigen Klick komplett vom Stromnetz, wenn du schläfst oder außer Haus bist. 3. Kühlschrank und Gefriertruhe abtauen und optimal einstellen. Eine Eisschicht von nur 5 Millimetern an den Innenwänden des Gefrierfachs erhöht den Energieverbrauch des Geräts um rund 30 Prozent.",
+   "units": [
+    {
+     "i": 9,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 10,
+     "type": "h2",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 11,
+     "type": "h3",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 12,
+     "type": "p",
+     "lang": "de",
+     "chars": 126
+    },
+    {
+     "i": 13,
+     "type": "p",
+     "lang": "de",
+     "chars": 122
+    },
+    {
+     "i": 14,
+     "type": "p",
+     "lang": "de",
+     "chars": 142
+    },
+    {
+     "i": 15,
+     "type": "p",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 16,
+     "type": "h3",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 17,
+     "type": "p",
+     "lang": "de",
+     "chars": 122
+    },
+    {
+     "i": 18,
+     "type": "p",
+     "lang": "de",
+     "chars": 117
+    },
+    {
+     "i": 19,
+     "type": "p",
+     "lang": "de",
+     "chars": 178
+    },
+    {
+     "i": 20,
+     "type": "h3",
+     "lang": "de",
+     "chars": 63
+    },
+    {
+     "i": 21,
+     "type": "p",
+     "lang": "de",
+     "chars": 132
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "text": "Taue das Gerät vor dem Herbst ab. Stelle die Kühlschranktemperatur auf 7 °C und das Gefrierfach auf -18 °C ein, kältere Temperaturen bringen keinen Frischevorteil, kosten aber unnötig Energie. Halte die Gerätetüren stets nur kurz geöffnet und lasse warme Speisen vor dem Einräumen vollständig auf Zimmertemperatur abkühlen. 4. Eco-Programme bei Waschmaschine und Geschirrspüler nutzen. Eco-Programme dauern zwar länger, verbrauchen aber deutlich weniger Energie, da das Wasser langsamer und auf niedrigere Temperaturen erhitzt wird. Das Waschen bei 30 °C statt 60 °C spart bis zu 60 Prozent Strom pro Waschgang. Nutze stets die volle Beladungskapazität der Trommel aus und verzichte auf unnötige Vorwäsche. Moderne Waschmittel reinigen normale Alltagskleidung bereits ab 20 bis 30 °C Porentief rein. 5. Kochen mit Deckel und Restwärme nutzen. Verwende beim Kochen immer den passenden Topfdeckel. Dadurch geht kaum Wärme verloren, und das Wasser kocht dreimal so schnell. Schalte Herdplatten und den Backofen 5 bis 10 Minuten vor Ende der Garzeit ab, um die Restwärme kostenlos zu nutzen. Nutze für Heißwasser immer den Wasserkocher statt die Herdplatte. 6. Wäschetrockner clever dosieren. Ein Wäschetrockner gehört zu den energieintensivsten Großgeräten im Haus (circa 2 bis 4 Kilowattstunden pro Trocknung).",
+   "units": [
+    {
+     "i": 22,
+     "type": "p",
+     "lang": "de",
+     "chars": 33
+    },
+    {
+     "i": 23,
+     "type": "p",
+     "lang": "de",
+     "chars": 158
+    },
+    {
+     "i": 24,
+     "type": "p",
+     "lang": "de",
+     "chars": 130
+    },
+    {
+     "i": 25,
+     "type": "h3",
+     "lang": "de",
+     "chars": 61
+    },
+    {
+     "i": 26,
+     "type": "p",
+     "lang": "de",
+     "chars": 146
+    },
+    {
+     "i": 27,
+     "type": "p",
+     "lang": "de",
+     "chars": 78
+    },
+    {
+     "i": 28,
+     "type": "p",
+     "lang": "de",
+     "chars": 94
+    },
+    {
+     "i": 29,
+     "type": "p",
+     "lang": "de",
+     "chars": 92
+    },
+    {
+     "i": 30,
+     "type": "h3",
+     "lang": "de",
+     "chars": 42
+    },
+    {
+     "i": 31,
+     "type": "p",
+     "lang": "de",
+     "chars": 127
+    },
+    {
+     "i": 32,
+     "type": "p",
+     "lang": "de",
+     "chars": 116
+    },
+    {
+     "i": 33,
+     "type": "p",
+     "lang": "de",
+     "chars": 65
+    },
+    {
+     "i": 34,
+     "type": "h3",
+     "lang": "de",
+     "chars": 34
+    },
+    {
+     "i": 35,
+     "type": "p",
+     "lang": "de",
+     "chars": 119
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "text": "Nutze wann immer möglich einen Wäscheständer in gut gelüfteten Räumen oder schleudere die Wäsche in der Waschmaschine zuvor mit 1400 statt 1000 Umdrehungen, um die Restfeuchte und Trocknungszeit um 40 Prozent zu senken. 7. Stromfresser mit einem Energiemessgerät enttarnen. Für rund 12 Euro gibt es im Handel handliche Zwischenstecker-Strommessgeräte. Miss den tatsächlichen Verbrauch alter Gefriertruhen, Pumpen oder Desktop-PCs. Oft rechnet sich die Neuanschaffung eines modernen A-Klasse-Geräts schon nach 2 bis 3 Jahren allein durch die Stromersparnis. 8. Stromtarif aktiv vergleichen und wechseln. Der größte finanzielle Hebel bleibt der Arbeitspreis pro Kilowattstunde. Wer noch in der teuren Grundversorgung feststeckt (oft über 38 Cent pro Kilowattstunde), wechselt zu Anbietern mit Konditionen um 26 bis 29 Cent pro Kilowattstunde. Bei 3500 Kilowattstunden Jahresverbrauch sparst du so jährlich über 300 Euro. Sparpotenziale im Haushalts-Vergleich. Tabelle: Sparpotenziale im Haushalts-Vergleich. Übersicht mit 4 Spalten und 6 Zeilen. Die Spalten lauten: Sparmaßnahme, Typischer Aufwand, Investition, Jährliche Ersparnis. LED-Umrüstung (10 Leuchtmittel). Zeile 1 von 6. Typischer Aufwand: 20 Minuten. Investition: circa 25,00 Euro. Jährliche Ersparnis: 75 bis 95 Euroo. Standby-Abschaltung per Steckerleiste. Zeile 2 von 6. Typischer Aufwand: 10 Minuten. Investition: circa 15,00 Euro.",
+   "units": [
+    {
+     "i": 36,
+     "type": "p",
+     "lang": "de",
+     "chars": 156
+    },
+    {
+     "i": 37,
+     "type": "p",
+     "lang": "de",
+     "chars": 62
+    },
+    {
+     "i": 38,
+     "type": "h3",
+     "lang": "de",
+     "chars": 53
+    },
+    {
+     "i": 39,
+     "type": "p",
+     "lang": "de",
+     "chars": 77
+    },
+    {
+     "i": 40,
+     "type": "p",
+     "lang": "de",
+     "chars": 78
+    },
+    {
+     "i": 41,
+     "type": "p",
+     "lang": "de",
+     "chars": 125
+    },
+    {
+     "i": 42,
+     "type": "h3",
+     "lang": "de",
+     "chars": 45
+    },
+    {
+     "i": 43,
+     "type": "p",
+     "lang": "de",
+     "chars": 72
+    },
+    {
+     "i": 44,
+     "type": "p",
+     "lang": "de",
+     "chars": 164
+    },
+    {
+     "i": 45,
+     "type": "p",
+     "lang": "de",
+     "chars": 77
+    },
+    {
+     "i": 46,
+     "type": "h2",
+     "lang": "de",
+     "chars": 38
+    },
+    {
+     "i": 47,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 85
+    },
+    {
+     "i": 48,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 86
+    },
+    {
+     "i": 49,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 147
+    },
+    {
+     "i": 50,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 115
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "text": "Jährliche Ersparnis: 90 bis 130 Euroo. Gefrierfach abtauen und Eco-Modus. Zeile 3 von 6. Typischer Aufwand: 30 Minuten. Investition: 0,00 Euro. Jährliche Ersparnis: 40 bis 60 Euroo. Kochen mit Deckel und Restwärme. Zeile 4 von 6. Typischer Aufwand: Gewohnheit. Investition: 0,00 Euro. Jährliche Ersparnis: 30 bis 50 Euroo. Stromanbieter wechseln (3500 Kilowattstunden). Zeile 5 von 6. Typischer Aufwand: 10 Minuten. Investition: 0,00 Euro. Jährliche Ersparnis: 250 bis 380 Euroo. Gesamtes Einsparpotenzial. Zeile 6 von 6. Typischer Aufwand: circa 1 Stunde. Investition: circa 40,00 Euro. Jährliche Ersparnis: bis zu 460 Euro pro Jahr. Ende der Tabelle Sparpotenziale im Haushalts-Vergleich. <!-- premium-length-2026 -->. Rechenbeispiel 2026: Was ein 3-Personen-Haushalt wirklich spart. Nimm einen Haushalt mit 3400 Kilowattstunden Jahresverbrauch und einem Arbeitspreis von 32 Cent pro Kilowattstunde. Die Jahresrechnung liegt bei rund 1088 Euro plus Grundpreis. Drei Hebel verändern die Rechnung messbar, ohne dass jemand im Dunkeln sitzt. Hebel 1 – Beleuchtung und Standby. Zehn Halogenlampen à 40 Watt, vier Stunden am Tag, 180 Herbst-/Wintertage: 288 Kilowattstunden. Dieselben Stunden mit 5-Watt-LEDs: 36 Kilowattstunden. Differenz 252 Kilowattstunden × 0,32 Euro = 80,64 Euro.",
+   "units": [
+    {
+     "i": 51,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 38
+    },
+    {
+     "i": 52,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 142
+    },
+    {
+     "i": 53,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 140
+    },
+    {
+     "i": 54,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 156
+    },
+    {
+     "i": 55,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 107
+    },
+    {
+     "i": 56,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 46
+    },
+    {
+     "i": 57,
+     "type": "table-outro",
+     "lang": "de",
+     "chars": 55
+    },
+    {
+     "i": 58,
+     "type": "p",
+     "lang": "de",
+     "chars": 29
+    },
+    {
+     "i": 59,
+     "type": "h2",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 60,
+     "type": "p",
+     "lang": "de",
+     "chars": 115
+    },
+    {
+     "i": 61,
+     "type": "p",
+     "lang": "de",
+     "chars": 138
+    },
+    {
+     "i": 62,
+     "type": "p",
+     "lang": "de",
+     "chars": 130
+    },
+    {
+     "i": 63,
+     "type": "p",
+     "lang": "de",
+     "chars": 110
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "text": "Standby von Fernseher, Konsole, Soundbar und Kaffeemaschine (zusammen 25 Watt dauerhaft) kostet 219 Kilowattstunden beziehungsweise 70 Euro. Eine schaltbare Leiste holt den Großteil davon zurück. Hebel 2 – Waschen und Trocknen. 180 Waschgänge à 60 °C verbrauchen grob 1,0 Kilowattstunden, Eco bei 30 °C rund 0,4 Kilowattstunden. Ersparnis 108 Kilowattstunden ungefähr 35 Euro. Wer den Trockner von 90 auf 40 Durchgänge drückt (Wäscheständer + 1400-Touren-Schleudern), spart weitere 150 Kilowattstunden ungefähr 48 Euro. Hebel 3 – Tarif. 3400 Kilowattstunden × 6 Cent Differenz zum teuren Grundversorger = 204 Euro, oft plus Neukundenbonus. Summe der drei Hebel: rund 430 Euro im Jahr. Die Investition (LEDs, Steckerleiste, Messgerät) liegt unter 50 Euro und ist nach wenigen Wochen drin. Typische Herbstfehler, die Stromkosten treiben. Punkt 1: Heizlüfter als schnelle Wärme. 2000 Watt × 3 Stunden × 60 Tage × 0,32 Euro = 115 Euro für ein Gerät, das Räume ungleichmäßig aufheizt und die Luft austrocknet. Besser: Thermostat korrekt einstellen und Türen schließen. Punkt 2: Backofen vorheizen aus Gewohnheit. Viele Gerichte brauchen das nicht. 10 Minuten Vorheizen, dreimal die Woche, 40 Wochen: leicht 40 bis 50 Kilowattstunden extra. Punkt 3: Kühlschrank neben Herd oder Heizung. Jedes Grad unnötige Kälte im Gerät treibt den Verbrauch um etwa 4 bis 6 Prozent.",
+   "units": [
+    {
+     "i": 64,
+     "type": "p",
+     "lang": "de",
+     "chars": 140
+    },
+    {
+     "i": 65,
+     "type": "p",
+     "lang": "de",
+     "chars": 54
+    },
+    {
+     "i": 66,
+     "type": "p",
+     "lang": "de",
+     "chars": 180
+    },
+    {
+     "i": 67,
+     "type": "p",
+     "lang": "de",
+     "chars": 142
+    },
+    {
+     "i": 68,
+     "type": "p",
+     "lang": "de",
+     "chars": 119
+    },
+    {
+     "i": 69,
+     "type": "p",
+     "lang": "de",
+     "chars": 44
+    },
+    {
+     "i": 70,
+     "type": "p",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 71,
+     "type": "h2",
+     "lang": "de",
+     "chars": 47
+    },
+    {
+     "i": 72,
+     "type": "li",
+     "lang": "de",
+     "chars": 39
+    },
+    {
+     "i": 73,
+     "type": "li",
+     "lang": "de",
+     "chars": 128
+    },
+    {
+     "i": 74,
+     "type": "li",
+     "lang": "de",
+     "chars": 58
+    },
+    {
+     "i": 75,
+     "type": "li",
+     "lang": "de",
+     "chars": 78
+    },
+    {
+     "i": 76,
+     "type": "li",
+     "lang": "de",
+     "chars": 91
+    },
+    {
+     "i": 77,
+     "type": "li",
+     "lang": "de",
+     "chars": 126
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "text": "7 °C im Kühlteil und −18 °C im Gefrierfach reichen. Punkt 4: Router, Repeater und Mesh im Dauer-5-GHz-Boost. Nachts auf 2,4 GHz oder Zeitsteuerung umstellen, wenn niemand streamt, klein, aber dauerhaft. Punkt 5: Zählerstand ignorieren. Ohne Monatsablesung siehst du den Herbstanstieg erst in der Jahresabrechnung. Foto am 1. jeden Monats, drei Zahlen in einer Notiz, fertig. 14-Tage-Herbstcheck: so setzt du die Tipps um. Tag 1 bis 2. Alle Leuchtmittel listen, Halogen/Glühbirne markieren, LED-Pack bestellen (warmweiß 2700 K für Wohnräume, 4000 K für Arbeitszimmer). Tag 3. Steckerleisten an TV-Ecke, Schreibtisch und Kaffeemaschine. Eine Leiste = ein Klick beim Verlassen. Tag 4. Kühlschrank abtauen, Dichtung prüfen (Blatt Papier muss klemmen), Temperaturen einstellen. Tag 5 bis 7. Energiemessgerät hinter Kühlschrank, alten PC, Aquarium-Pumpe, Gefriertruhe im Keller. Alles über 80 Euro pro Jahr Stromkosten ist ein Kandidat für Ersatz. Tag 8. Wasch- und Spülprogramme auf Eco, Schleudern auf Maximum, Trockner nur noch für Handtücher und Bettwäsche. Tag 9 bis 10. Zählerstand notieren, letzten Abschlag mit dem Verbrauch gegenchecken. Liegt der Abschlag 20 Prozent über dem Ist, Anbieter schriftlich anpassen, sonst finanzierst du den Versorger. Tag 11 bis 14. Stromtarif vergleichen, Preisgarantie und Bonusbedingungen lesen, Wechsel anstoßen.",
+   "units": [
+    {
+     "i": 78,
+     "type": "li",
+     "lang": "de",
+     "chars": 51
+    },
+    {
+     "i": 79,
+     "type": "li",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 80,
+     "type": "li",
+     "lang": "de",
+     "chars": 93
+    },
+    {
+     "i": 81,
+     "type": "li",
+     "lang": "de",
+     "chars": 121
+    },
+    {
+     "i": 82,
+     "type": "li",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 83,
+     "type": "h2",
+     "lang": "de",
+     "chars": 46
+    },
+    {
+     "i": 84,
+     "type": "p",
+     "lang": "de",
+     "chars": 12
+    },
+    {
+     "i": 85,
+     "type": "p",
+     "lang": "de",
+     "chars": 132
+    },
+    {
+     "i": 86,
+     "type": "p",
+     "lang": "de",
+     "chars": 113
+    },
+    {
+     "i": 87,
+     "type": "p",
+     "lang": "de",
+     "chars": 103
+    },
+    {
+     "i": 88,
+     "type": "p",
+     "lang": "de",
+     "chars": 86
+    },
+    {
+     "i": 89,
+     "type": "p",
+     "lang": "de",
+     "chars": 75
+    },
+    {
+     "i": 90,
+     "type": "p",
+     "lang": "de",
+     "chars": 120
+    },
+    {
+     "i": 91,
+     "type": "p",
+     "lang": "de",
+     "chars": 70
+    },
+    {
+     "i": 92,
+     "type": "p",
+     "lang": "de",
+     "chars": 125
+    },
+    {
+     "i": 93,
+     "type": "p",
+     "lang": "de",
+     "chars": 83
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Der Altvertrag läuft bis zum Stichtag weiter, eine Versorgungslücke gibt es nicht. Was sich 2026 am Strommarkt konkret ändert. Grundversorgungstarife bleiben der teuerste Standard. Wer 2024/2025 in einen 24-Monats-Vertrag mit Bonus gegangen ist, sollte 8 Wochen vor Ablauf neu vergleichen: Der Bonus entfällt, der Arbeitspreis springt oft um 4 bis 8 Cent. Dynamische Tarife mit Börsenpreis lohnen nur mit steuerbarer Wärmepumpe oder Wallbox, für einen normalen 3-Personen-Haushalt ohne E-Auto ist ein klassischer Tarif mit 12-Monats-Preisgarantie die ruhigere Wahl. Ein Balkonkraftwerk mit 800 Watt bleibt 2026 Anmeldearm; realistische Jahreserzeugung an einem Süd-Balkon liegt bei 550 bis 750 Kilowattstunden, nicht bei den Werbe-1000. Wenn du den Herbstcheck einmal durchziehst, brauchst du ihn im nächsten Jahr nur noch als 30-Minuten-Update. Genau das ist der Unterschied zwischen ich sollte mal Strom sparen und einer Rechnung, die im Februar nicht mehr überrascht. Fazit: Kleine Verhaltensänderungen bringen hunderte Euro. Effektives Stromsparen erfordert keinen Verzicht auf Lebensqualität. Mit sparsamer LED-Technik, dem Vermeiden von Standby-Kosten und einem günstigen Stromtarif mit Preisgarantie senkst du deine Nebenkosten dauerhaft und nachhaltig. Weiterlesen: Pillar Strom und Gas sparen · Gasanbieter wechseln: Praxis-Tipps · Gasrechnung senken im Spätsommer. Häufige Fragen.",
+   "units": [
+    {
+     "i": 94,
+     "type": "p",
+     "lang": "de",
+     "chars": 82
+    },
+    {
+     "i": 95,
+     "type": "h2",
+     "lang": "de",
+     "chars": 43
+    },
+    {
+     "i": 96,
+     "type": "p",
+     "lang": "de",
+     "chars": 53
+    },
+    {
+     "i": 97,
+     "type": "p",
+     "lang": "de",
+     "chars": 174
+    },
+    {
+     "i": 98,
+     "type": "p",
+     "lang": "de",
+     "chars": 85
+    },
+    {
+     "i": 99,
+     "type": "p",
+     "lang": "de",
+     "chars": 123
+    },
+    {
+     "i": 100,
+     "type": "p",
+     "lang": "de",
+     "chars": 170
+    },
+    {
+     "i": 101,
+     "type": "p",
+     "lang": "de",
+     "chars": 108
+    },
+    {
+     "i": 102,
+     "type": "p",
+     "lang": "de",
+     "chars": 124
+    },
+    {
+     "i": 103,
+     "type": "h2",
+     "lang": "de",
+     "chars": 57
+    },
+    {
+     "i": 104,
+     "type": "p",
+     "lang": "de",
+     "chars": 68
+    },
+    {
+     "i": 105,
+     "type": "p",
+     "lang": "de",
+     "chars": 162
+    },
+    {
+     "i": 106,
+     "type": "p",
+     "lang": "de",
+     "chars": 113
+    },
+    {
+     "i": 107,
+     "type": "h2",
+     "lang": "de",
+     "chars": 15
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "text": "Wie viel Strom verbraucht ein 3-Personen-Haushalt im Jahr. Ein typischer 3-Personen-Haushalt in einer Wohnung verbraucht etwa 3000 bis 3500 Kilowattstunden Strom pro Jahr (ohne elektrische Warmwasserbereitung). Was verbraucht im Haushalt am meisten Strom. Die größten Verbraucher sind ältere Kühl- und Gefriergeräte (circa 15 bis 20 Prozent), Waschmaschine und Trockner (circa 14 Prozent), Beleuchtung (circa. 10 Prozent) sowie Unterhaltungselektronik und PCs im Dauerbetrieb. Lohnt sich ein Balkonkraftwerk zur Stromkostensenkung. Ja, ein 800-Watt-Balkonkraftwerk erzeugt je nach Ausrichtung jährlich etwa 600 bis 800 Kilowattstunden Solarstrom und spart so bis zu 200 Euro Stromkosten pro Jahr. Die Amortisationszeit liegt oft bei nur 3 bis 4 Jahren. Warum dauern Eco-Programme bei Geschirrspülern so lange. Weil das Wasser auf niedrigere Temperaturen (zum Beispiel 45 bis 50 °C statt 65 °C) erwärmt wird. Das Erhitzen von Wasser verbraucht 80 Prozent der gesamten Energie, die verlängerte Einwirkzeit kompensiert die geringere Hitze. Wie oft sollte man den Stromtarif wechseln. Es empfiehlt sich, alle 12 Monate zum Ablauf der Vertragslaufzeit einen kurzen Preisvergleich durchzuführen, um von aktuellen Marktpreisen und Boni zu profitieren. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung).",
+   "units": [
+    {
+     "i": 108,
+     "type": "h3",
+     "lang": "de",
+     "chars": 58
+    },
+    {
+     "i": 109,
+     "type": "p",
+     "lang": "de",
+     "chars": 151
+    },
+    {
+     "i": 110,
+     "type": "h3",
+     "lang": "de",
+     "chars": 44
+    },
+    {
+     "i": 111,
+     "type": "p",
+     "lang": "de",
+     "chars": 153
+    },
+    {
+     "i": 112,
+     "type": "p",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 113,
+     "type": "h3",
+     "lang": "de",
+     "chars": 54
+    },
+    {
+     "i": 114,
+     "type": "p",
+     "lang": "de",
+     "chars": 164
+    },
+    {
+     "i": 115,
+     "type": "p",
+     "lang": "de",
+     "chars": 55
+    },
+    {
+     "i": 116,
+     "type": "h3",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 117,
+     "type": "p",
+     "lang": "de",
+     "chars": 97
+    },
+    {
+     "i": 118,
+     "type": "p",
+     "lang": "de",
+     "chars": 128
+    },
+    {
+     "i": 119,
+     "type": "h3",
+     "lang": "de",
+     "chars": 43
+    },
+    {
+     "i": 120,
+     "type": "p",
+     "lang": "de",
+     "chars": 163
+    },
+    {
+     "i": 121,
+     "type": "p",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 122,
+     "type": "p",
+     "lang": "de",
+     "chars": 49
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "text": "Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
+    {
+     "i": 123,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 124,
+     "type": "outro",
+     "lang": "de",
+     "chars": 66
+    }
+   ]
+  }
+ ]
+}

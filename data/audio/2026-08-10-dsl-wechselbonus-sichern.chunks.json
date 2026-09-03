@@ -1,0 +1,728 @@
+{
+ "slug": "2026-08-10-dsl-wechselbonus-sichern",
+ "title": "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag",
+ "lang": "de",
+ "quality": {
+  "tier": "premium",
+  "rate": 0.93,
+  "maxChunk": 140
+ },
+ "units": 111,
+ "chars": 10654,
+ "parts": [
+  {
+   "index": 0,
+   "text": "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag. Ein Beitrag von FranksFinanzcheck. Hördauer etwa 7 Minuten. Kurzantwort: Ein DSL-Wechselbonus ist eine Neukundenprämie zwischen 50 Euro und 240 Euro, die Provider bei einem Anbieterwechsel als Einmalgutschrift oder Cashback auszahlen. Zusammen mit reduzierten Grundgebühren im ersten Vertragsjahr sinken die monatlichen Effektivkosten für schnelles Internet um bis zu 40 Prozent. Warum zahlen Millionen Haushalte in Deutschland Monat für Monat 45 Euro oder mehr für ihren Festnetzanschluss? Weil Treue im Telekommunikationsmarkt leider nicht belohnt wird. Während Neukunden mit großzügigen Rabatten und Sonderkonditionen umworben werden, zahlen langjährige Bestandskunden kontinuierlich den vollen Standardpreis. Mit einem DSL-Wechselbonus drehst du dieses System zu deinen Gunsten: Du sicherst dir attraktive Einmalprämien von 50 Euro bis 240 Euro und reduzierst deine Grundgebühr im ersten Vertragsjahr um bis zu 40 Prozent. Schritt für Schritt zeige ich dir jetzt, wie der Wechselbonus funktioniert, welche Fristen du beachten musst und wie dein Internetanschluss ohne Unterbrechung weiterläuft. Tipp: Schnell-Tipp von FranksFinanzcheck: Überprüfe jetzt unverbindlich die DSL- und Glasfaser-Verfügbarkeit an deiner Adresse und sichere dir aktuelle Neukunden-Prämien:",
+   "units": [
+    {
+     "i": 0,
+     "type": "intro",
+     "lang": "de",
+     "chars": 120
+    },
+    {
+     "i": 1,
+     "type": "callout",
+     "lang": "de",
+     "chars": 174
+    },
+    {
+     "i": 2,
+     "type": "callout",
+     "lang": "de",
+     "chars": 144
+    },
+    {
+     "i": 3,
+     "type": "p",
+     "lang": "de",
+     "chars": 110
+    },
+    {
+     "i": 4,
+     "type": "p",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 5,
+     "type": "p",
+     "lang": "de",
+     "chars": 156
+    },
+    {
+     "i": 6,
+     "type": "p",
+     "lang": "de",
+     "chars": 69
+    },
+    {
+     "i": 7,
+     "type": "p",
+     "lang": "de",
+     "chars": 143
+    },
+    {
+     "i": 8,
+     "type": "p",
+     "lang": "de",
+     "chars": 171
+    },
+    {
+     "i": 9,
+     "type": "p",
+     "lang": "de",
+     "chars": 41
+    },
+    {
+     "i": 10,
+     "type": "p",
+     "lang": "de",
+     "chars": 128
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "text": "Jetzt Angebote vergleichen (Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Wie funktioniert ein DSL-Wechselbonus in der Praxis. Ein DSL-Wechselbonus ist ein finanzieller Anreiz, den Internetanbieter bereitstellen, wenn du von einem Mitbewerber zu ihnen wechselst. Der Bonus wird auf unterschiedliche Weise realisiert: Punkt 1: Einmalige Rechnungsgutschrift: Der Gutschriftbetrag (zum Beispiel. 120 Euro bis 200 Euro) wird direkt mit den ersten monatlichen Grundgebühren verrechnet. In den ersten Monaten zahlst du dadurch effektiv 0 Euro für deinen Anschluss. Punkt 2: Direktes Cashback: Nach Freischaltung und Einreichung der ersten Monatsrechnung überweist das Vergleichsportal oder der Provider die vereinbarte Prämie direkt auf dein Bankkonto. Punkt 3: Hardware-Zuschuss: Du erhältst moderne Premium-Router (wie die AVM Fritz! Box) entweder dauerhaft kostenlos oder mit einem Preisnachlass von bis zu 150 Euro. Damit der Bonus ohne Verzögerung gewährt wird, muss der Wechsel zwingend über den Wechselservice des neuen Anbieters beauftragt werden. Wer seinen Altvertrag voreilig selbst kündigt, riskiert, dass der neue Vertrag lediglich als technischer Neuanschluss ohne Wechselbonus eingestuft wird. 24-Monats-Berechnung: So viel sparst du wirklich.",
+   "units": [
+    {
+     "i": 11,
+     "type": "p",
+     "lang": "de",
+     "chars": 77
+    },
+    {
+     "i": 12,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 13,
+     "type": "h2",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 14,
+     "type": "p",
+     "lang": "de",
+     "chars": 135
+    },
+    {
+     "i": 15,
+     "type": "p",
+     "lang": "de",
+     "chars": 53
+    },
+    {
+     "i": 16,
+     "type": "li",
+     "lang": "de",
+     "chars": 75
+    },
+    {
+     "i": 17,
+     "type": "li",
+     "lang": "de",
+     "chars": 87
+    },
+    {
+     "i": 18,
+     "type": "li",
+     "lang": "de",
+     "chars": 77
+    },
+    {
+     "i": 19,
+     "type": "li",
+     "lang": "de",
+     "chars": 187
+    },
+    {
+     "i": 20,
+     "type": "li",
+     "lang": "de",
+     "chars": 82
+    },
+    {
+     "i": 21,
+     "type": "li",
+     "lang": "de",
+     "chars": 83
+    },
+    {
+     "i": 22,
+     "type": "p",
+     "lang": "de",
+     "chars": 135
+    },
+    {
+     "i": 23,
+     "type": "p",
+     "lang": "de",
+     "chars": 152
+    },
+    {
+     "i": 24,
+     "type": "h2",
+     "lang": "de",
+     "chars": 49
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "text": "Wie stark sich ein Wechselbonus auf deine realen Haushaltsausgaben auswirkt, verdeutlicht die folgende Vergleichsrechnung für einen VDSL-Anschluss mit 100 Megabit pro Sekunde über zwei Jahre: Tabelle: 24-Monats-Berechnung: So viel sparst du wirklich. Übersicht mit 3 Spalten und 6 Zeilen. Die Spalten lauten: Kostenposition, Alter Vertrag (Bestandskunde), Neuer Vertrag mit Wechselbonus. Grundgebühr Monat 1 bis 12. Zeile 1 von 6. Alter Vertrag (Bestandskunde): 12 mal 44,95 Euro = 539,40 Euro. Neuer Vertrag mit Wechselbonus: 12 mal 19,95 Euro = 239,40 Euro. Grundgebühr Monat 13 bis 24. Zeile 2 von 6. Alter Vertrag (Bestandskunde): 12 mal 44,95 Euro = 539,40 Euro. Neuer Vertrag mit Wechselbonus: 12 mal 44,95 Euro = 539,40 Euro. Bereitstellungsgebühr. Zeile 3 von 6. Alter Vertrag (Bestandskunde): 0,00 Euro. Neuer Vertrag mit Wechselbonus: 0,00 Euro (Aktionsvorteil). DSL-Wechselbonus und Cashback. Zeile 4 von 6. Alter Vertrag (Bestandskunde): 0,00 Euro. Neuer Vertrag mit Wechselbonus: - 180,00 Euro (Gutschrift). Gesamtausgaben über 24 Monate. Zeile 5 von 6. Alter Vertrag (Bestandskunde): 1078,80 Euro. Neuer Vertrag mit Wechselbonus: 598,80 Euro. Effektiver Monatspreis. Zeile 6 von 6. Alter Vertrag (Bestandskunde): 44,95 Euro monatlich. Neuer Vertrag mit Wechselbonus: 24,95 Euro monatlich. Ende der Tabelle 24-Monats-Berechnung: So viel sparst du wirklich.",
+   "units": [
+    {
+     "i": 25,
+     "type": "p",
+     "lang": "de",
+     "chars": 191
+    },
+    {
+     "i": 26,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 27,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 28,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 106
+    },
+    {
+     "i": 29,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 30,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 107
+    },
+    {
+     "i": 31,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 32,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 139
+    },
+    {
+     "i": 33,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 147
+    },
+    {
+     "i": 34,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 135
+    },
+    {
+     "i": 35,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 145
+    },
+    {
+     "i": 36,
+     "type": "table-outro",
+     "lang": "de",
+     "chars": 66
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "text": "Die wichtigsten Provider und ihre Wechselvorteile. Auf dem deutschen Breitbandmarkt stehen verschiedene Netzanbieter im direkten Wettbewerb: Deutsche Telekom: Punktet mit exzellenter Leitungsstabilität und gewährt bei MagentaZuhause-Tarifen häufig Startguthaben von über 100 Euro sowie Router-Gutschriften. Vodafone: Lockt Neukunden mit extrem günstigen Einstiegspreisen in den ersten neun bis zwölf Monaten und hohen Einmalprämien bei Kabel- und DSL-Anschlüssen. 1 und 1: Bietet flexible Tarifstrukturen, hardwareseitige Extras und garantierte Freimonate bei 24 Monaten Laufzeit. O2 Telefónica: Überzeugt durch faire Kombi-Rabatte für bestehende Mobilfunkkunden und transparente Preismodelle. Regionale Netzbetreiber (M-net, EWE, Wilhelm. tel, NetCologne): Betreiben in ihren Regionen eigene Hochgeschwindigkeitsnetze und bieten oft erstklassigen Kundenservice mit regionalen Treueboni. In 4 einfachen Schritten zur Wechselprämie. Befolge diese vier Schritte, um deinen Wechselbonus sicher zu erhalten: Punkt 1: Vertragslaufzeit ermitteln: Prüfe in deiner letzten Telefonrechnung das genaue Ende der Mindestvertragslaufzeit. Nach Ablauf der ersten zwei Jahre kannst du mit einer Frist von maximal einem Monat kündigen. Punkt 2: Verfügbarkeit prüfen: Gib deine Adresse in den Tarifvergleich ein, um festzustellen, welche Geschwindigkeiten an deiner Anschlussdose ankommen.",
+   "units": [
+    {
+     "i": 37,
+     "type": "h2",
+     "lang": "de",
+     "chars": 50
+    },
+    {
+     "i": 38,
+     "type": "p",
+     "lang": "de",
+     "chars": 89
+    },
+    {
+     "i": 39,
+     "type": "li",
+     "lang": "de",
+     "chars": 165
+    },
+    {
+     "i": 40,
+     "type": "li",
+     "lang": "de",
+     "chars": 156
+    },
+    {
+     "i": 41,
+     "type": "li",
+     "lang": "de",
+     "chars": 116
+    },
+    {
+     "i": 42,
+     "type": "li",
+     "lang": "de",
+     "chars": 112
+    },
+    {
+     "i": 43,
+     "type": "li",
+     "lang": "de",
+     "chars": 45
+    },
+    {
+     "i": 44,
+     "type": "li",
+     "lang": "de",
+     "chars": 147
+    },
+    {
+     "i": 45,
+     "type": "h2",
+     "lang": "de",
+     "chars": 43
+    },
+    {
+     "i": 46,
+     "type": "p",
+     "lang": "de",
+     "chars": 71
+    },
+    {
+     "i": 47,
+     "type": "li",
+     "lang": "de",
+     "chars": 121
+    },
+    {
+     "i": 48,
+     "type": "li",
+     "lang": "de",
+     "chars": 93
+    },
+    {
+     "i": 49,
+     "type": "li",
+     "lang": "de",
+     "chars": 152
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "text": "Punkt 3: Anbieterwechsel online beauftragen: Wähle deinen Wunschtarif und gib an, dass du wechseln möchtest. Trage deine bisherige Kundennummer und Rufnummern ein. Der neue Provider kündigt deinen Alttarif automatisch. Punkt 4: Gutschrift prüfen: Kontrolliere auf deiner ersten oder zweiten Monatsabrechnung, ob der vereinbarte Bonus vollständig abgezogen wurde. Wenn du dein Heimnetzwerk optimal einrichten willst, wirf einen Blick in unsere Anleitung zur WLAN-Optimierung für mehr Reichweite sowie in die Übersicht im Ratgeber Internet und DSL. Häufige Fallstricke beim Bonus-Wechsel vermeiden. Unüberlegte Eigenkündigung: Kündige deinen bisherigen Festnetzvertrag keinesfalls selbst. Überlässt du die Kündigung dem neuen Anbieter, ist ein lückenloser Übergang gesetzlich nach Paragraf 58 TKG geschützt. Fristen für Rechnungs-Upload: Bei Cashback-Aktionen musst du die erste Monatsrechnung meist binnen 4 bis 8 Wochen im Portal hochladen. Notiere dir diesen Termin im Kalender. Dauerhafte Router-Miete: Ein Mietrouter für 5 Euro bis 8 Euro monatlich kostet in zwei Jahren bis zu 192 Euro. Ein eigener Kauf-Router rechnet sich fast immer. <!-- premium-length-2026 -->. Bonus-Mathematik ohne Selbstbetrug. Ein 150- Euro-Bonus nach 6 Monaten bei 24 Monaten Laufzeit ist 6,25 Euro monatlich.",
+   "units": [
+    {
+     "i": 50,
+     "type": "li",
+     "lang": "de",
+     "chars": 108
+    },
+    {
+     "i": 51,
+     "type": "li",
+     "lang": "de",
+     "chars": 109
+    },
+    {
+     "i": 52,
+     "type": "li",
+     "lang": "de",
+     "chars": 143
+    },
+    {
+     "i": 53,
+     "type": "p",
+     "lang": "de",
+     "chars": 183
+    },
+    {
+     "i": 54,
+     "type": "h2",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 55,
+     "type": "li",
+     "lang": "de",
+     "chars": 89
+    },
+    {
+     "i": 56,
+     "type": "li",
+     "lang": "de",
+     "chars": 118
+    },
+    {
+     "i": 57,
+     "type": "li",
+     "lang": "de",
+     "chars": 134
+    },
+    {
+     "i": 58,
+     "type": "li",
+     "lang": "de",
+     "chars": 38
+    },
+    {
+     "i": 59,
+     "type": "li",
+     "lang": "de",
+     "chars": 110
+    },
+    {
+     "i": 60,
+     "type": "li",
+     "lang": "de",
+     "chars": 48
+    },
+    {
+     "i": 61,
+     "type": "p",
+     "lang": "de",
+     "chars": 29
+    },
+    {
+     "i": 62,
+     "type": "h2",
+     "lang": "de",
+     "chars": 35
+    },
+    {
+     "i": 63,
+     "type": "p",
+     "lang": "de",
+     "chars": 83
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "text": "Ein 80- Euro-Sofortbonus ohne Bedingungen ist oft ehrlicher, weil er nicht an Werbeeinwilligung, Lastschrift und kein Zahlungsverzug hängt. Rechne drei Zahlen: Bonus brutto. Wahrscheinlichkeit, dass du die Bedingungen 12 Monate erfüllst (ehrlich: 70 bis 90 Prozent). Rückforderung bei vorzeitigem Exit. Erwartungswert = Bonus × Wahrscheinlichkeit − erwartete Rückforderung. Nur dieser Wert darf in den 24-Monats-Effektivpreis. Provider-Unterschiede, die den Bonus relativieren. Manche zahlen per Überweisung aufs Giro, manche als Gutschrift auf die Rechnung, manche als Amazon-Gutschein. Gutschrift auf die Rechnung ist steuerlich und organisatorisch am einfachsten, Gutschein ist unflexibel. Überweisung kann 8 bis 12 Wochen dauern, Kalender erinnern, sonst vergisst du die Reklamation. Wechselt du innerhalb derselben Gruppe (Marke A zu Marke A-Discount), entfällt der Neukundenbonus oft. 12 Monate Pause oder ein anderer Konzern ist die übliche Hürde. In vier Schritten, ohne den Bonus zu verspielen. Punkt 1: Altvertrag-Status: monatlich kündbar? Sonst Starttermin des neuen Vertrags auf das Ende legen. Punkt 2: Bonusbedingungen als PDF speichern. Punkt 3: Auftrag mit der I BAN, die 12 Monate bleibt, Kontowechsel in Monat 4 kann den Bonus killen. Punkt 4: Nach 7 Monaten: Ist der Bonus da? Wenn nicht, Ticket mit Vertragsnummer. Verjährung und Kulanz sind leichter, solange der Vertrag läuft.",
+   "units": [
+    {
+     "i": 64,
+     "type": "p",
+     "lang": "de",
+     "chars": 139
+    },
+    {
+     "i": 65,
+     "type": "p",
+     "lang": "de",
+     "chars": 19
+    },
+    {
+     "i": 66,
+     "type": "li",
+     "lang": "de",
+     "chars": 13
+    },
+    {
+     "i": 67,
+     "type": "li",
+     "lang": "de",
+     "chars": 92
+    },
+    {
+     "i": 68,
+     "type": "li",
+     "lang": "de",
+     "chars": 35
+    },
+    {
+     "i": 69,
+     "type": "p",
+     "lang": "de",
+     "chars": 123
+    },
+    {
+     "i": 70,
+     "type": "h2",
+     "lang": "de",
+     "chars": 50
+    },
+    {
+     "i": 71,
+     "type": "p",
+     "lang": "de",
+     "chars": 109
+    },
+    {
+     "i": 72,
+     "type": "p",
+     "lang": "de",
+     "chars": 104
+    },
+    {
+     "i": 73,
+     "type": "p",
+     "lang": "de",
+     "chars": 94
+    },
+    {
+     "i": 74,
+     "type": "p",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 75,
+     "type": "p",
+     "lang": "de",
+     "chars": 63
+    },
+    {
+     "i": 76,
+     "type": "h2",
+     "lang": "de",
+     "chars": 48
+    },
+    {
+     "i": 77,
+     "type": "li",
+     "lang": "de",
+     "chars": 46
+    },
+    {
+     "i": 78,
+     "type": "li",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 79,
+     "type": "li",
+     "lang": "de",
+     "chars": 44
+    },
+    {
+     "i": 80,
+     "type": "li",
+     "lang": "de",
+     "chars": 100
+    },
+    {
+     "i": 81,
+     "type": "li",
+     "lang": "de",
+     "chars": 42
+    },
+    {
+     "i": 82,
+     "type": "li",
+     "lang": "de",
+     "chars": 102
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "text": "Der Bonus ist die Kirsche. Der Kuchen ist der Effektivpreis. Wer nur der Kirsche hinterherläuft, unterschreibt 24 Monate zu 44,99 Euro nach der Rabattphase, und hat teuer gewonnen. Fazit: DSL-Wechselbonus clever einstreichen. Den DSL-Wechselbonus alle zwei Jahre mitzunehmen, ist eine der einfachsten Methoden, um ohne jeglichen Komfortverlust hunderte Euro an monatlichen Fixkosten einzusparen. Da der neue Anbieter die Kündigung und die Rufnummernmitnahme komplett übernimmt, liegt der tatsächliche Arbeitsaufwand bei unter 10 Minuten. Vergleiche noch heute die verfügbaren Geschwindigkeiten an deiner Adresse und sichere dir deine Wechselprämie. Weiterlesen: Ratgeber Internet und DSL · DSL Vergleich: So findest du günstigeres Internet · WLAN verbessern: So bringst du Speed in jede Ecke. Häufige Fragen. Was ist ein DSL-Wechselbonus. Ein DSL-Wechselbonus ist eine finanzielle Prämie für Neukunden, die von einem anderen Festnetzanbieter wechseln. Er wird in Form von Rechnungsgutschriften, Einmalzahlungen oder Cashback ausgezahlt und senkt die Gesamtkosten im ersten Vertragsjahr deutlich. Wie wird der DSL-Wechselbonus ausgezahlt. Die Prämie wird entweder ab dem ersten Abrechnungsmonat als Guthaben mit den Monatsbeiträgen verrechnet oder nach Freischaltung des Anschlusses direkt auf dein Bankkonto überwiesen. Kann es beim Anbieterwechsel zu einem Internetausfall kommen.",
+   "units": [
+    {
+     "i": 83,
+     "type": "p",
+     "lang": "de",
+     "chars": 60
+    },
+    {
+     "i": 84,
+     "type": "p",
+     "lang": "de",
+     "chars": 119
+    },
+    {
+     "i": 85,
+     "type": "h2",
+     "lang": "de",
+     "chars": 44
+    },
+    {
+     "i": 86,
+     "type": "p",
+     "lang": "de",
+     "chars": 169
+    },
+    {
+     "i": 87,
+     "type": "p",
+     "lang": "de",
+     "chars": 141
+    },
+    {
+     "i": 88,
+     "type": "p",
+     "lang": "de",
+     "chars": 110
+    },
+    {
+     "i": 89,
+     "type": "p",
+     "lang": "de",
+     "chars": 143
+    },
+    {
+     "i": 90,
+     "type": "h2",
+     "lang": "de",
+     "chars": 15
+    },
+    {
+     "i": 91,
+     "type": "h3",
+     "lang": "de",
+     "chars": 29
+    },
+    {
+     "i": 92,
+     "type": "p",
+     "lang": "de",
+     "chars": 112
+    },
+    {
+     "i": 93,
+     "type": "p",
+     "lang": "de",
+     "chars": 143
+    },
+    {
+     "i": 94,
+     "type": "h3",
+     "lang": "de",
+     "chars": 41
+    },
+    {
+     "i": 95,
+     "type": "p",
+     "lang": "de",
+     "chars": 181
+    },
+    {
+     "i": 96,
+     "type": "h3",
+     "lang": "de",
+     "chars": 61
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Nein, das deutsche Telekommunikationsgesetz (Paragraf 58 TKG) garantiert, dass der alte Anbieter die Leitung so lange weiter versorgen muss, bis der neue Anbieter den Anschluss erfolgreich aufgeschaltet hat. Die maximale Ausfallzeit am Tag der Umschaltung darf wenige Stunden nicht überschreiten. Gilt der Wechselbonus auch für Kabel-Internet und Glasfaser. Ja, viele Anbieter zahlen den Wechselbonus unabhängig von der Übertragungstechnik, egal ob du zu klassischem VDSL, Kabel-Internet (Koaxial) oder einem echten Glasfaseranschluss (FTTH) wechselst. Muss ich meinen alten Vertrag selbst kündigen. Nein. Bei einem regulären Wechsel übernimmt der neue Provider die Kündigung bei deinem Altanbieter und regelt auch die Mitnahme deiner bisherigen Festnetznummern. Kann ich den Bonus mit weiteren Aktionen kombinieren. In den meisten Fällen ja: Startguthaben, Hardware-Nachlässe und der Wechselbonus lassen sich bei Online-Bestellungen über Vergleichsportale miteinander kombinieren. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
+    {
+     "i": 97,
+     "type": "p",
+     "lang": "de",
+     "chars": 140
+    },
+    {
+     "i": 98,
+     "type": "p",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 99,
+     "type": "p",
+     "lang": "de",
+     "chars": 88
+    },
+    {
+     "i": 100,
+     "type": "h3",
+     "lang": "de",
+     "chars": 60
+    },
+    {
+     "i": 101,
+     "type": "p",
+     "lang": "de",
+     "chars": 194
+    },
+    {
+     "i": 102,
+     "type": "h3",
+     "lang": "de",
+     "chars": 46
+    },
+    {
+     "i": 103,
+     "type": "p",
+     "lang": "de",
+     "chars": 5
+    },
+    {
+     "i": 104,
+     "type": "p",
+     "lang": "de",
+     "chars": 156
+    },
+    {
+     "i": 105,
+     "type": "h3",
+     "lang": "de",
+     "chars": 53
+    },
+    {
+     "i": 106,
+     "type": "p",
+     "lang": "de",
+     "chars": 164
+    },
+    {
+     "i": 107,
+     "type": "p",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 108,
+     "type": "p",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 109,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 110,
+     "type": "outro",
+     "lang": "de",
+     "chars": 66
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1190 @@
+{
+ "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet",
+ "title": "DNS-Server wechseln: Schnelleres und sichereres Internet",
+ "lang": "de",
+ "quality": {
+  "tier": "premium",
+  "rate": 0.93,
+  "maxChunk": 140
+ },
+ "units": 184,
+ "chars": 15437,
+ "parts": [
+  {
+   "index": 0,
+   "text": "DNS-Server wechseln: Schnelleres und sichereres Internet. Ein Beitrag von FranksFinanzcheck. Hördauer etwa 10 Minuten. Kurzantwort: Beim DNS-Server-Wechsel trägst du in FritzBox, Router oder Endgerät zwei IP-Adressen eines schnellen öffentlichen DNS-Anbieters ein, etwa 1.1.1.1 (Cloudflare), 8.8.8.8 (Google) oder 9.9.9.9 (Quad9). Das beschleunigt das Aufrufen von Webseiten um 10 bis 30 Millisekunden, blockiert aktiv Malware- und Phishing-Domains und verhindert, dass dein Internetanbieter dein Surfverhalten mitliest. Die Einrichtung dauert pro Gerät 5 Minuten und ist kostenlos. Wusstest du, dass dein Internetanbieter jede einzelne Webseite, die du aufrufst, theoretisch mitlesen kann, auch im privaten Inkognito-Modus? Der Grund ist der DNS-Server deines Providers (auch Namensauflösung oder Resolver genannt). Er ist so etwas wie das Telefonbuch des Internets: Er übersetzt Domainnamen wie franksfinanzcheck.de in die zugehörige IP-Adresse. Die meisten Haushalte nutzen automatisch den DNS-Server ihres Anbieters, ohne zu wissen, dass es schnellere, privatere und sicherere Alternativen gibt. Der Wechsel ist kostenlos, in fünf Minuten erledigt und kann Ladezeiten spürbar verkürzen. Welche Anbieter 2026 die wichtigsten sind, zeigt der Ratgeber Internet und amp; DSL.",
+   "units": [
+    {
+     "i": 0,
+     "type": "intro",
+     "lang": "de",
+     "chars": 118
+    },
+    {
+     "i": 1,
+     "type": "callout",
+     "lang": "de",
+     "chars": 59
+    },
+    {
+     "i": 2,
+     "type": "callout",
+     "lang": "de",
+     "chars": 112
+    },
+    {
+     "i": 3,
+     "type": "callout",
+     "lang": "de",
+     "chars": 38
+    },
+    {
+     "i": 4,
+     "type": "callout",
+     "lang": "de",
+     "chars": 189
+    },
+    {
+     "i": 5,
+     "type": "callout",
+     "lang": "de",
+     "chars": 61
+    },
+    {
+     "i": 6,
+     "type": "p",
+     "lang": "de",
+     "chars": 141
+    },
+    {
+     "i": 7,
+     "type": "p",
+     "lang": "de",
+     "chars": 91
+    },
+    {
+     "i": 8,
+     "type": "p",
+     "lang": "de",
+     "chars": 130
+    },
+    {
+     "i": 9,
+     "type": "p",
+     "lang": "de",
+     "chars": 151
+    },
+    {
+     "i": 10,
+     "type": "p",
+     "lang": "de",
+     "chars": 90
+    },
+    {
+     "i": 11,
+     "type": "p",
+     "lang": "de",
+     "chars": 84
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "text": "Wie du die Einstellung an FritzBox, Windows, Android und iPhone änderst und warum der Wechsel ein Sicherheitsgewinn ist, das erfährst du jetzt. Tipp: Schnell-Tipp von FranksFinanzcheck: Wenn du nach dem DNS-Tuning auch noch die Bandbreite und den Tarif optimieren möchtest: DSL-Tarife vergleichen (Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Was macht ein DNS-Server überhaupt. Immer wenn du im Browser eine Adresse wie www.google.de eingibst, läuft im Hintergrund ein technischer Vorgang ab: Punkt 1: Dein Browser fragt den DNS-Server (standardmäßig den deines Internetanbieters): Welche IP-Adresse gehört zu www.google.de? Punkt 2: Er schlägt die Adresse nach und antwortet mit 142250185195. Punkt 3: Dein Browser baut eine verschlüsselte Verbindung zu dieser IP auf. Dieser Vorgang, die sogenannte DNS-Auflösung, dauert bei den meisten Standard-Servern zwischen 20 und 120 Millisekunden. Bei 50 bis 100 Webseitenaufrufen pro Tag summiert sich das. Bei modernen, weltweit verteilten Anbietern wie Cloudflare liegt die Antwortzeit oft bei 10 bis 20 Millisekunden. Drei Vorteile des DNS-Server-Wechsels. 1. Schnellere Ladezeiten. Unabhängige Messwerkzeuge wie DNSPerf vergleichen täglich tausende Server weltweit. Im August 2026 lag die durchschnittliche Antwortzeit in Deutschland bei:",
+   "units": [
+    {
+     "i": 12,
+     "type": "p",
+     "lang": "de",
+     "chars": 143
+    },
+    {
+     "i": 13,
+     "type": "p",
+     "lang": "de",
+     "chars": 129
+    },
+    {
+     "i": 14,
+     "type": "p",
+     "lang": "de",
+     "chars": 73
+    },
+    {
+     "i": 15,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 16,
+     "type": "h2",
+     "lang": "de",
+     "chars": 35
+    },
+    {
+     "i": 17,
+     "type": "p",
+     "lang": "de",
+     "chars": 114
+    },
+    {
+     "i": 18,
+     "type": "li",
+     "lang": "de",
+     "chars": 131
+    },
+    {
+     "i": 19,
+     "type": "li",
+     "lang": "de",
+     "chars": 68
+    },
+    {
+     "i": 20,
+     "type": "li",
+     "lang": "de",
+     "chars": 75
+    },
+    {
+     "i": 21,
+     "type": "p",
+     "lang": "de",
+     "chars": 120
+    },
+    {
+     "i": 22,
+     "type": "p",
+     "lang": "de",
+     "chars": 59
+    },
+    {
+     "i": 23,
+     "type": "p",
+     "lang": "de",
+     "chars": 113
+    },
+    {
+     "i": 24,
+     "type": "h2",
+     "lang": "de",
+     "chars": 38
+    },
+    {
+     "i": 25,
+     "type": "h3",
+     "lang": "de",
+     "chars": 25
+    },
+    {
+     "i": 26,
+     "type": "p",
+     "lang": "de",
+     "chars": 83
+    },
+    {
+     "i": 27,
+     "type": "p",
+     "lang": "de",
+     "chars": 72
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "text": "Tabelle: 1. Schnellere Ladezeiten. Übersicht mit 4 Spalten und 5 Zeilen. Die Spalten lauten: Anbieter, Primärer DNS, Sekundärer DNS, Ø Antwortzeit DE. Cloudflare. Zeile 1 von 5. Primärer DNS: 1.1.1.1. Sekundärer DNS: 1.0.0.1. Ø Antwortzeit DE: 8 ms. Google. Zeile 2 von 5. Primärer DNS: 8.8.8.8. Sekundärer DNS: 8.8.4.4. Ø Antwortzeit DE: 12 ms. Quad9. Zeile 3 von 5. Primärer DNS: 9.9.9.9. Sekundärer DNS: 149112112112. Ø Antwortzeit DE: 14 ms. Deutsche Telekom (Standard). Zeile 4 von 5. Primärer DNS: automatisch. Sekundärer DNS: automatisch. Ø Antwortzeit DE: 24 ms. Vodafone/1 und 1 (Standard). Zeile 5 von 5. Primärer DNS: automatisch. Sekundärer DNS: automatisch. Ø Antwortzeit DE: 22 bis 35 ms. Ende der Tabelle 1. Schnellere Ladezeiten. (Quellen: DNSPerf.com, eigene Messungen per dig/nslookup, August 2026). 2. Mehr Datenschutz. Jede Domain, die du besuchst, sieht der DNS-Server deines Anbieters, auch wenn die Webseite selbst per HTTPS verschlüsselt ist. Zwar ist in Deutschland die kommerzielle Weitergabe von Surf-Daten ohne Einwilligung nicht erlaubt, aber Auswertungen zu Netzmanagement und Strafverfolgung sind möglich. Öffentliche DNS-Anbieter wie Cloudflare und Quad9 verpflichten sich, keine personenbezogenen Nutzerdaten länger als 24 bis 48 Stunden zu speichern und keine Werbeprofile zu erstellen. 3. Eingebauter Phishing- und Malware-Schutz.",
+   "units": [
+    {
+     "i": 28,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 72
+    },
+    {
+     "i": 29,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 77
+    },
+    {
+     "i": 30,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 31,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 95
+    },
+    {
+     "i": 32,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 99
+    },
+    {
+     "i": 33,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 124
+    },
+    {
+     "i": 34,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 131
+    },
+    {
+     "i": 35,
+     "type": "table-outro",
+     "lang": "de",
+     "chars": 42
+    },
+    {
+     "i": 36,
+     "type": "p",
+     "lang": "de",
+     "chars": 71
+    },
+    {
+     "i": 37,
+     "type": "h3",
+     "lang": "de",
+     "chars": 20
+    },
+    {
+     "i": 38,
+     "type": "p",
+     "lang": "de",
+     "chars": 127
+    },
+    {
+     "i": 39,
+     "type": "p",
+     "lang": "de",
+     "chars": 169
+    },
+    {
+     "i": 40,
+     "type": "p",
+     "lang": "de",
+     "chars": 183
+    },
+    {
+     "i": 41,
+     "type": "h3",
+     "lang": "de",
+     "chars": 44
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "text": "Quad9 (9.9.9.9), Cloudflare mit Malware-Schutz (1.1.1.2) und der Family-Server (1.1.1.3) gleichen jede Anfrage mit einer Bedrohungsdatenbank ab. Bekannte Phishing- und Malware-Seiten werden direkt blockiert, bevor dein Gerät überhaupt eine Verbindung aufbaut. Gerade im Haushalt mit Kindern oder weniger technikaffinen Familienmitgliedern ist das ein massiver Sicherheitsgewinn. Die 3 attraktiven kostenlosen DNS-Server im Überblick. Cloudflare (1.1.1.1), der Schnellste. IPs: 1.1.1.1 und 1.0.0.1 (IPv6: 2606:4700:4700:1111 und:1001). Besonderheit: Sehr niedrige Latenz, strenges Datenschutz-Versprechen, keine Verkaufslogiken. Versionen: 1.1.1.2 / 1.0.0.2 – mit Malware-Schutz. 1.1.1.3 / 1.0.0.3 – mit Malware- und Jugendschutz-Filter. Google Public DNS (8.8.8.8), der Zuverlässigste. IPs: 8.8.8.8 und 8.8.4.4 (IPv6: 2001:4860:4860:8888 und:8844). Besonderheit: Hohe Verfügbarkeit, weltweit verteilt. Google erhebt aber Nutzungsdaten, auch wenn keine Werbeprofile daraus gebaut werden. Quad9 (9.9.9.9), der Sicherste. IPs: 9.9.9.9 und 149112112112. Besonderheit: Gemeinnützige Stiftung, blockiert aktiv Bedrohungen (über 100 Millionen. Einträge in der Bedrohungsdatenbank), keine Speicherung personenbezogener Daten. Anleitung: DNS-Server an der FritzBox ändern (empfohlen).",
+   "units": [
+    {
+     "i": 42,
+     "type": "p",
+     "lang": "de",
+     "chars": 144
+    },
+    {
+     "i": 43,
+     "type": "p",
+     "lang": "de",
+     "chars": 114
+    },
+    {
+     "i": 44,
+     "type": "p",
+     "lang": "de",
+     "chars": 118
+    },
+    {
+     "i": 45,
+     "type": "h2",
+     "lang": "de",
+     "chars": 54
+    },
+    {
+     "i": 46,
+     "type": "h3",
+     "lang": "de",
+     "chars": 37
+    },
+    {
+     "i": 47,
+     "type": "li",
+     "lang": "de",
+     "chars": 62
+    },
+    {
+     "i": 48,
+     "type": "li",
+     "lang": "de",
+     "chars": 92
+    },
+    {
+     "i": 49,
+     "type": "li",
+     "lang": "de",
+     "chars": 10
+    },
+    {
+     "i": 50,
+     "type": "li",
+     "lang": "de",
+     "chars": 39
+    },
+    {
+     "i": 51,
+     "type": "li",
+     "lang": "de",
+     "chars": 57
+    },
+    {
+     "i": 52,
+     "type": "h3",
+     "lang": "de",
+     "chars": 48
+    },
+    {
+     "i": 53,
+     "type": "li",
+     "lang": "de",
+     "chars": 62
+    },
+    {
+     "i": 54,
+     "type": "li",
+     "lang": "de",
+     "chars": 137
+    },
+    {
+     "i": 55,
+     "type": "h3",
+     "lang": "de",
+     "chars": 31
+    },
+    {
+     "i": 56,
+     "type": "li",
+     "lang": "de",
+     "chars": 30
+    },
+    {
+     "i": 57,
+     "type": "li",
+     "lang": "de",
+     "chars": 86
+    },
+    {
+     "i": 58,
+     "type": "li",
+     "lang": "de",
+     "chars": 80
+    },
+    {
+     "i": 59,
+     "type": "h2",
+     "lang": "de",
+     "chars": 57
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "text": "Änderst du den DNS-Server direkt im Router, gilt die Einstellung automatisch für alle Geräte im Heimnetz, Handy, Smart-TV, Laptop, Spielekonsole. Bei einer AVM FritzBox gehst du so vor: Punkt 1: Browser öffnen, zu die Webseite fritz Punkt box navigieren und anmelden. Punkt 2: Im linken Menü zu Internet führt zu Zugangsdaten führt zu Namensserver wechseln. Punkt 3: Wähle Andere Resolver-Server verwenden. Punkt 4: Trage ein: Bevorzugter Namensserver: 1.1.1.1. Verzögerter DNS-Server: 1.0.0.1. Punkt 1: Auf Übernehmen klicken. Die FritzBox startet kurz die Internetverbindung neu. Punkt 2: Test auf die Webseite 1 Punkt 1 Punkt 1 Punkt 1 oder mit nslookup franksfinanzcheck.de in der Windows-Kommandozeile. DNS-Server unter Windows ändern. Punkt 1: Windowstaste + R drücken, ncpa.cpl eingeben und mit Enter bestätigen. Punkt 2: Rechtsklick auf die aktuell genutzte Netzwerkverbindung führt zu Eigenschaften. Punkt 3: Internetprotokoll, Version 4 (TCP/IPv4) doppelklicken. Punkt 4: Folgende Namensserveradressen verwenden auswählen und eintragen: Bevorzugter DNS-Server: 1.1.1.1. Alternativer Namensserver: 1.0.0.1. Punkt 1: Mit OK bestätigen. Für die volle IPv6-Unterstützung dasselbe für Internetprotokoll, Version 6 (TCP/IPv6) mit 2606:4700:4700:1111 und:1001 wiederholen. DNS unter Android und iPhone ändern. Android. Unter Android 13/14 ab Version 9 kannst du systemweit Private DNS festlegen:",
+   "units": [
+    {
+     "i": 60,
+     "type": "p",
+     "lang": "de",
+     "chars": 145
+    },
+    {
+     "i": 61,
+     "type": "p",
+     "lang": "de",
+     "chars": 39
+    },
+    {
+     "i": 62,
+     "type": "li",
+     "lang": "de",
+     "chars": 81
+    },
+    {
+     "i": 63,
+     "type": "li",
+     "lang": "de",
+     "chars": 89
+    },
+    {
+     "i": 64,
+     "type": "li",
+     "lang": "de",
+     "chars": 48
+    },
+    {
+     "i": 65,
+     "type": "li",
+     "lang": "de",
+     "chars": 19
+    },
+    {
+     "i": 66,
+     "type": "li",
+     "lang": "de",
+     "chars": 34
+    },
+    {
+     "i": 67,
+     "type": "li",
+     "lang": "de",
+     "chars": 32
+    },
+    {
+     "i": 68,
+     "type": "li",
+     "lang": "de",
+     "chars": 86
+    },
+    {
+     "i": 69,
+     "type": "li",
+     "lang": "de",
+     "chars": 125
+    },
+    {
+     "i": 70,
+     "type": "h2",
+     "lang": "de",
+     "chars": 32
+    },
+    {
+     "i": 71,
+     "type": "li",
+     "lang": "de",
+     "chars": 78
+    },
+    {
+     "i": 72,
+     "type": "li",
+     "lang": "de",
+     "chars": 88
+    },
+    {
+     "i": 73,
+     "type": "li",
+     "lang": "de",
+     "chars": 63
+    },
+    {
+     "i": 74,
+     "type": "li",
+     "lang": "de",
+     "chars": 73
+    },
+    {
+     "i": 75,
+     "type": "li",
+     "lang": "de",
+     "chars": 32
+    },
+    {
+     "i": 76,
+     "type": "li",
+     "lang": "de",
+     "chars": 35
+    },
+    {
+     "i": 77,
+     "type": "li",
+     "lang": "de",
+     "chars": 27
+    },
+    {
+     "i": 78,
+     "type": "li",
+     "lang": "de",
+     "chars": 131
+    },
+    {
+     "i": 79,
+     "type": "h2",
+     "lang": "de",
+     "chars": 36
+    },
+    {
+     "i": 80,
+     "type": "h3",
+     "lang": "de",
+     "chars": 8
+    },
+    {
+     "i": 81,
+     "type": "p",
+     "lang": "de",
+     "chars": 76
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "text": "Punkt 1: Einstellungen führt zu Netzwerk und Internet führt zu Private Namensauflösung. Punkt 2: Hostname des Private-DNS-Anbieters auswählen. Punkt 3: Eintragen: one.one.one.one (Cloudflare) oder dns.google (Google). Punkt 4: Speichern. iPhone / iPad. Punkt 1: Einstellungen führt zu WLAN führt zu neben dem verbundenen WLAN auf das i-Symbol tippen. Punkt 2: Nach unten zu Resolver scrollen führt zu Namensauflösung konfigurieren. Punkt 3: Auf Manuell umstellen, gegebenenfalls vorhandene Server entfernen und 1.1.1.1 sowie 1.0.0.1 ergänzen. Punkt 4: Sichern. Gefahren und Fallstricke. Keine echte Anonymität: Der Wechsel verhindert das Mitlesen durch den Provider, macht dich aber nicht vollständig anonym. Dafür brauchst du zusätzlich ein VPN oder Tor. Jugendschutz-Versionen: Cloudflare 1.1.1.3 und Quad9 blockieren auch legitime Seiten, die in ihrer Filterdatenbank landen. Familien profitieren, Single-User sind mit 1.1.1.1 besser beraten. Smart-Home-Probleme: Einige ältere Smart-TVs, Drucker und IoT-Geräte kommen mit Dritt-Resolver nicht zurecht. Sollte ein Gerät aussteigen, wechsle testweise zurück oder trage den Namensauflösung nur am Endgerät ein. DoH/DoT aktivieren: Wer ganz sicher gehen will, aktiviert in Windows 11, Firefox oder Chrome DNS over HTTPS (DoH), dann ist die Resolver-Anfrage selbst verschlüsselt. DNS-Wechsel + Tarif optimieren: Die doppelte Ersparnis.",
+   "units": [
+    {
+     "i": 82,
+     "type": "li",
+     "lang": "de",
+     "chars": 87
+    },
+    {
+     "i": 83,
+     "type": "li",
+     "lang": "de",
+     "chars": 54
+    },
+    {
+     "i": 84,
+     "type": "li",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 85,
+     "type": "li",
+     "lang": "de",
+     "chars": 19
+    },
+    {
+     "i": 86,
+     "type": "h3",
+     "lang": "de",
+     "chars": 14
+    },
+    {
+     "i": 87,
+     "type": "li",
+     "lang": "de",
+     "chars": 97
+    },
+    {
+     "i": 88,
+     "type": "li",
+     "lang": "de",
+     "chars": 80
+    },
+    {
+     "i": 89,
+     "type": "li",
+     "lang": "de",
+     "chars": 110
+    },
+    {
+     "i": 90,
+     "type": "li",
+     "lang": "de",
+     "chars": 17
+    },
+    {
+     "i": 91,
+     "type": "h2",
+     "lang": "de",
+     "chars": 25
+    },
+    {
+     "i": 92,
+     "type": "li",
+     "lang": "de",
+     "chars": 121
+    },
+    {
+     "i": 93,
+     "type": "li",
+     "lang": "de",
+     "chars": 46
+    },
+    {
+     "i": 94,
+     "type": "li",
+     "lang": "de",
+     "chars": 122
+    },
+    {
+     "i": 95,
+     "type": "li",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 96,
+     "type": "li",
+     "lang": "de",
+     "chars": 109
+    },
+    {
+     "i": 97,
+     "type": "li",
+     "lang": "de",
+     "chars": 105
+    },
+    {
+     "i": 98,
+     "type": "li",
+     "lang": "de",
+     "chars": 166
+    },
+    {
+     "i": 99,
+     "type": "h2",
+     "lang": "de",
+     "chars": 55
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "text": "Schnelle Resolver verbessern die Antwortzeiten, ersetzen aber keine gute Bandbreite. Hast du trotz des Wechsels noch lange Ladezeiten, Streaming-Ruckler oder langsame Downloads, liegt das meist an einem überlasteten oder zu langsamen Tarif. Ein DSL-Vergleich zeigt dir in zwei Minuten, ob ein Wechsel auf eine höhere Bandbreite oder einen günstigeren Anbieter bis zu 380 Euro über 24 Monate spart, wie ich es in meinem Ratgeber zum DSL-Tarif detailliert vorgerechnet habe. Tabelle: DNS-Wechsel + Tarif optimieren: Die doppelte Ersparnis. Übersicht mit 4 Spalten und 3 Zeilen. Die Spalten lauten: Optimierung, Aufwand, Effekt, Kosten. Namensserver wechseln. Zeile 1 von 3. Aufwand: 5 Minuten. Effekt: 10 bis 30 ms schnellere Antworten, mehr Sicherheit. Kosten: 0 Euro. WLAN optimieren (Mesh/Kanal). Zeile 2 von 3. Aufwand: 30 Minuten. Effekt: bessere Abdeckung, weniger Latenz im Funknetz. Kosten: 0 bis 120 Euroo. DSL-Tarif wechseln. Zeile 3 von 3. Aufwand: 15 Minuten. Effekt: höhere Bandbreite, bis 380 Euro Ersparnis. Kosten: 0 Euro. Ende der Tabelle DNS-Wechsel + Tarif optimieren: Die doppelte Ersparnis. <!-- premium-length-2026 -->. Wann der DNS-Server-Wechsel spürbar ist, und wann nicht. Der DNS-Server verkürzt nur die Antwortzeit, nicht dein 16-Megabit pro Sekunde-Funkloch. In einem gut ausgesteuerten Netz spürst du schnellere erste Seitenaufrufe und weniger Hänger beim Smart-TV-Start.",
+   "units": [
+    {
+     "i": 100,
+     "type": "p",
+     "lang": "de",
+     "chars": 84
+    },
+    {
+     "i": 101,
+     "type": "p",
+     "lang": "de",
+     "chars": 155
+    },
+    {
+     "i": 102,
+     "type": "p",
+     "lang": "de",
+     "chars": 44
+    },
+    {
+     "i": 103,
+     "type": "p",
+     "lang": "de",
+     "chars": 111
+    },
+    {
+     "i": 104,
+     "type": "p",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 105,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 106,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 57
+    },
+    {
+     "i": 107,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 133
+    },
+    {
+     "i": 108,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 145
+    },
+    {
+     "i": 109,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 122
+    },
+    {
+     "i": 110,
+     "type": "table-outro",
+     "lang": "de",
+     "chars": 72
+    },
+    {
+     "i": 111,
+     "type": "p",
+     "lang": "de",
+     "chars": 29
+    },
+    {
+     "i": 112,
+     "type": "h2",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 113,
+     "type": "p",
+     "lang": "de",
+     "chars": 88
+    },
+    {
+     "i": 114,
+     "type": "p",
+     "lang": "de",
+     "chars": 113
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Speedtests in Megabit pro Sekunde ändern sich kaum. Das ist kein Widerspruch. FritzBox: Internet führt zu Zugangsdaten führt zu DNS-Server. Zuerst die bisherigen Adressen deines Providers notieren, dann die zwei neuen Server eintragen (einer primär, einer sekundär). 48 Stunden testen, bei Problemen mit VPN oder Banking zurück. Kinder-Filter und Ad-Blocking-Dienste sind extra, sie zerlegen manches Online-Banking. Dann Split-DNS oder Ausnahmen. Der Wechsel ist ein 5-Minuten-Hebel mit geringem Risiko. Er ersetzt keinen Tarifwechsel und kein Mesh. Er macht beides angenehmer, wenn die Basis stimmt. Extra: Wie der DNS-Server deinen Alltag beeinflusst. Viele Nutzer merken den Unterschied erst, wenn sie bewusst darauf achten. Beim Aufruf einer Nachrichtenseite, beim Laden des Online-Bankings, beim Start einer Mediathek: Überall steckt eine kurze Anfrage an den DNS-Server dahinter. Wer einen schnellen, datensparsamen Anbieter nutzt, spart über den Tag verteilt mehrere Sekunden Wartezeit. Nebenbei reduziert er das Tracking-Risiko. Dazu kommt die Filterung: Manche Dienste bieten optionale Jugendschutz-Listen, andere blockieren Werbung oder Tracker auf Domain-Ebene. Das ist kein Ersatz für einen Browser-Adblocker, aber eine sinnvolle zweite Schicht, besonders für Geräte, auf denen kein Adblocker läuft (Smart-TV, Spielekonsole).",
+   "units": [
+    {
+     "i": 115,
+     "type": "p",
+     "lang": "de",
+     "chars": 77
+    },
+    {
+     "i": 116,
+     "type": "p",
+     "lang": "de",
+     "chars": 61
+    },
+    {
+     "i": 117,
+     "type": "p",
+     "lang": "de",
+     "chars": 126
+    },
+    {
+     "i": 118,
+     "type": "p",
+     "lang": "de",
+     "chars": 61
+    },
+    {
+     "i": 119,
+     "type": "p",
+     "lang": "de",
+     "chars": 117
+    },
+    {
+     "i": 120,
+     "type": "p",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 121,
+     "type": "p",
+     "lang": "de",
+     "chars": 50
+    },
+    {
+     "i": 122,
+     "type": "h2",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 123,
+     "type": "p",
+     "lang": "de",
+     "chars": 73
+    },
+    {
+     "i": 124,
+     "type": "p",
+     "lang": "de",
+     "chars": 157
+    },
+    {
+     "i": 125,
+     "type": "p",
+     "lang": "de",
+     "chars": 107
+    },
+    {
+     "i": 126,
+     "type": "p",
+     "lang": "de",
+     "chars": 42
+    },
+    {
+     "i": 127,
+     "type": "p",
+     "lang": "de",
+     "chars": 135
+    },
+    {
+     "i": 128,
+     "type": "p",
+     "lang": "de",
+     "chars": 164
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "text": "Praktisch bedeutet das: Notiere deine aktuelle Konfiguration (Screenshot der Router-Seite). Stelle zwei unabhängige Anbieter als primär und sekundär ein. Teste 48 Stunden lang typische Seiten (Banking, Streaming, Homeoffice-VPN). Danach entscheidest du, ob du dabei bleibst. Die Änderung ist jederzeit in 30 Sekunden rückgängig zu machen. Bonus: Die 10 DNS-Begriffe, die dir in Foren wirklich begegnen. Tabelle: Bonus: Die 10 DNS-Begriffe, die dir in Foren wirklich begegnen. Übersicht mit 3 Spalten und 10 Zeilen. Die Spalten lauten: Begriff, Was er bedeutet, Warum er dich betrifft. DNS. Zeile 1 von 10. Was er bedeutet: Domain Name System, übersetzt Namen in IP-Adressen. Warum er dich betrifft: Das System, das du mit dem Wechsel anpasst. DNS-Resolver. Zeile 2 von 10. Was er bedeutet: Der Server, der die Übersetzung für dich durchführt. Warum er dich betrifft: Steht bei dir aktuell auf automatisch. Namensauflösung. Zeile 3 von 10. Was er bedeutet: Fachbegriff für die Übersetzung von Name zu Adresse. Warum er dich betrifft: Synonym für DNS, gleiche Sache. DNSSEC. Zeile 4 von 10. Was er bedeutet: Digitale Signatur für Antworten. Warum er dich betrifft: Schützt vor Umleitung auf Fake-Seiten. DNS over HTTPS (DoH). Zeile 5 von 10. Was er bedeutet: Verschlüsselte Abfrage über Port 443. Warum er dich betrifft: Versteckt deine Anfragen auch vor dem Provider.",
+   "units": [
+    {
+     "i": 129,
+     "type": "p",
+     "lang": "de",
+     "chars": 91
+    },
+    {
+     "i": 130,
+     "type": "p",
+     "lang": "de",
+     "chars": 137
+    },
+    {
+     "i": 131,
+     "type": "p",
+     "lang": "de",
+     "chars": 108
+    },
+    {
+     "i": 132,
+     "type": "h2",
+     "lang": "de",
+     "chars": 63
+    },
+    {
+     "i": 133,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 111
+    },
+    {
+     "i": 134,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 69
+    },
+    {
+     "i": 135,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 89
+    },
+    {
+     "i": 136,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 67
+    },
+    {
+     "i": 137,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 99
+    },
+    {
+     "i": 138,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 62
+    },
+    {
+     "i": 139,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 140,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 55
+    },
+    {
+     "i": 141,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 136
+    },
+    {
+     "i": 142,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 92
+    },
+    {
+     "i": 143,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 71
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "text": "DNS over TLS (DoT). Zeile 6 von 10. Was er bedeutet: Verschlüsselte Abfrage über Port 853. Warum er dich betrifft: Alternative zu DoH, etwas technischer. TTL-Wert. Zeile 7 von 10. Was er bedeutet: Gibt an, wie lange eine Antwort zwischengespeichert wird. Warum er dich betrifft: Kurze TTL = schnelle Umschaltung nach dem Wechsel. Cache-Flush. Zeile 8 von 10. Was er bedeutet: Leert den lokalen Zwischenspeicher. Warum er dich betrifft: Nötig, wenn nach dem Wechsel alte Adressen hängen. Split-DNS. Zeile 9 von 10. Was er bedeutet: Verschiedene Resolver für verschiedene Netzwerke. Warum er dich betrifft: Sinnvoll, wenn Firmen-VPN und Heimnetz kollidieren. DNS-Leak. Zeile 10 von 10. Was er bedeutet: Gerät fragt doch den Provider statt des neuen Resolvers. Warum er dich betrifft: Passiert bei falscher Router-Konfiguration. Ende der Tabelle Bonus: Die 10 DNS-Begriffe, die dir in Foren wirklich begegnen. Praxis-Tipp: Notiere deine aktuelle Latenz vor und nach dem Wechsel (zum Beispiel ping 1.1.1.1 und ping 9.9.9.9). So siehst du schwarz auf weiß, ob der neue Server wirklich flotter ist, und nicht nur gefühlt. Fazit: 5 Minuten, die sich dauerhaft auszahlen. Diese Maßnahme ist eine der einfachsten und effektivsten Internet-Tuning-Stellschrauben überhaupt. Für null Euro bekommst du spürbar schnellere Ladezeiten, mehr Privatsphäre vor deinem Provider und einen eingebauten Malware-Schutz.",
+   "units": [
+    {
+     "i": 144,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 90
+    },
+    {
+     "i": 145,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 62
+    },
+    {
+     "i": 146,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 100
+    },
+    {
+     "i": 147,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 148,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 81
+    },
+    {
+     "i": 149,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 150,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 93
+    },
+    {
+     "i": 151,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 75
+    },
+    {
+     "i": 152,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 100
+    },
+    {
+     "i": 153,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 67
+    },
+    {
+     "i": 154,
+     "type": "table-outro",
+     "lang": "de",
+     "chars": 80
+    },
+    {
+     "i": 155,
+     "type": "p",
+     "lang": "de",
+     "chars": 113
+    },
+    {
+     "i": 156,
+     "type": "p",
+     "lang": "de",
+     "chars": 94
+    },
+    {
+     "i": 157,
+     "type": "h2",
+     "lang": "de",
+     "chars": 47
+    },
+    {
+     "i": 158,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 159,
+     "type": "p",
+     "lang": "de",
+     "chars": 132
+    }
+   ]
+  },
+  {
+   "index": 10,
+   "text": "Meine klare Empfehlung: Setze ihn direkt im Router (zum Beispiel an der FritzBox) ab, damit alle Geräte im Haushalt automatisch davon profitieren. Wenn du im Anschluss noch deinen Tarif prüfst, holst du das Maximum an Geschwindigkeit und Preis heraus. Weiterlesen: WLAN verbessern: Speed in jede Ecke · DSL-Tarif für dein Zuhause finden · Pillar: Internet, DSL und Mobilfunk. Häufige Fragen. Welcher DNS-Server ist der passende für Deutschland. Gemessen an der Antwortzeit liegt Cloudflare (1.1.1.1) vorn: durchschnittlich 8 Millisekunden. Dahinter folgen Google Public DNS (8.8.8.8) mit 12 ms und Quad9 (9.9.9.9) mit 14 ms. Wer Wert auf maximalen Malware-Schutz legt, wählt Quad9. Ist der Wechsel des DNS-Servers gefährlich. Nein, du änderst lediglich eine Netzwerkeinstellung. Bei Problemen kannst du jederzeit zurück zur automatischen Zuweisung (DNS-Server automatisch beziehen) wechseln. Bringt der DNS-Wechsel etwas beim Streaming. Für die Wiedergabegeschwindigkeit von Netflix, YouTube oder Spotify bringt er nur wenig, da Streaming-Dienste globale CDN-Netzwerke nutzen. Beim erstmaligen Laden der Seiten und bei der Navigation kann er aber Ladezeiten verkürzen. Was ist der Unterschied zwischen DNS over HTTPS (DoH) und DNS over TLS (DoT). Beide Verfahren verschlüsseln die Abfrage selbst, sodass auch dein Internetanbieter nicht mehr mitlesen kann, welche Seite du aufrufst.",
+   "units": [
+    {
+     "i": 160,
+     "type": "p",
+     "lang": "de",
+     "chars": 146
+    },
+    {
+     "i": 161,
+     "type": "p",
+     "lang": "de",
+     "chars": 104
+    },
+    {
+     "i": 162,
+     "type": "p",
+     "lang": "de",
+     "chars": 123
+    },
+    {
+     "i": 163,
+     "type": "h2",
+     "lang": "de",
+     "chars": 15
+    },
+    {
+     "i": 164,
+     "type": "h3",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 165,
+     "type": "p",
+     "lang": "de",
+     "chars": 94
+    },
+    {
+     "i": 166,
+     "type": "p",
+     "lang": "de",
+     "chars": 84
+    },
+    {
+     "i": 167,
+     "type": "p",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 168,
+     "type": "h3",
+     "lang": "de",
+     "chars": 43
+    },
+    {
+     "i": 169,
+     "type": "p",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 170,
+     "type": "p",
+     "lang": "de",
+     "chars": 112
+    },
+    {
+     "i": 171,
+     "type": "h3",
+     "lang": "de",
+     "chars": 44
+    },
+    {
+     "i": 172,
+     "type": "p",
+     "lang": "de",
+     "chars": 139
+    },
+    {
+     "i": 173,
+     "type": "p",
+     "lang": "de",
+     "chars": 91
+    },
+    {
+     "i": 174,
+     "type": "h3",
+     "lang": "de",
+     "chars": 77
+    },
+    {
+     "i": 175,
+     "type": "p",
+     "lang": "de",
+     "chars": 135
+    }
+   ]
+  },
+  {
+   "index": 11,
+   "text": "DoH läuft über Port 443 (verschmilzt mit normalem HTTPS-Verkehr), DoT über Port 853. Beide sind sicher, DoH ist im Browser einfacher einzurichten. Gilt der neue DNS-Server für alle Geräte im Haushalt. Wenn du ihn im Router (zum Beispiel FritzBox) einträgst, ja. Bei einer Einstellung direkt am Laptop oder Handy gilt er nur für dieses eine Gerät. Jetzt vergleichen und sparen: führt zu DSL-Tarife mit Top-Bandbreite vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
+    {
+     "i": 176,
+     "type": "p",
+     "lang": "de",
+     "chars": 84
+    },
+    {
+     "i": 177,
+     "type": "p",
+     "lang": "de",
+     "chars": 61
+    },
+    {
+     "i": 178,
+     "type": "h3",
+     "lang": "de",
+     "chars": 53
+    },
+    {
+     "i": 179,
+     "type": "p",
+     "lang": "de",
+     "chars": 145
+    },
+    {
+     "i": 180,
+     "type": "p",
+     "lang": "de",
+     "chars": 81
+    },
+    {
+     "i": 181,
+     "type": "p",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 182,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 183,
+     "type": "outro",
+     "lang": "de",
+     "chars": 66
+    }
+   ]
+  }
+ ]
+}

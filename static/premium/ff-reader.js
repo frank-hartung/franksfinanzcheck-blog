@@ -104,6 +104,10 @@
       voiceFallback: 'Vorlesen gestartet; dein Gerät stellt keine männliche Stimme bereit.',
       speechError: 'Dieser Abschnitt konnte nicht abgespielt werden; es geht weiter.',
       voiceLoading: 'Männliche Stimme wird geladen …',
+      audioReady: 'Studiostimme aktiv (Frank).',
+      audioLoading: 'Audiofassung wird geladen …',
+      audioPlaying: 'Audiofassung läuft.',
+      audioError: 'Audiofassung nicht verfügbar – Geräte­stimme übernimmt.',
       paused: 'Vorlesen pausiert.',
       resumed: 'Vorlesen fortgesetzt.',
       finished: 'Vorlesen beendet.',
@@ -169,6 +173,10 @@
       voiceFallback: 'Playback started; your device does not provide a male voice.',
       speechError: 'This section could not be played; continuing.',
       voiceLoading: 'Loading a male voice …',
+      audioReady: 'Studio voice active (Frank).',
+      audioLoading: 'Loading audio version …',
+      audioPlaying: 'Audio version playing.',
+      audioError: 'Audio version unavailable – device voice takes over.',
       paused: 'Audio playback paused.',
       resumed: 'Audio playback resumed.',
       finished: 'Audio playback completed.',
@@ -2185,9 +2193,260 @@
 
   function stopKeepAlive() { if (keepAliveId) { clearInterval(keepAliveId); keepAliveId = null; } }
 
+  /* ============================================================
+     1b) FIRST-PARTY-AUDIOFASSUNG — die Garantie-Stufe
+     ------------------------------------------------------------
+     Die Web Speech API kann eine männliche Stimme NICHT garantieren:
+     Es gibt kein Geschlechts-Merkmal im Standard, Chrome/Android mit
+     Google-TTS liefert für Deutsch genau eine Stimme, iOS Safari
+     blendet installierte Premium-Stimmen aus, Firefox für Android
+     implementiert die Synthese nur eingeschränkt.
+
+     Liegt deshalb eine serverseitig gerenderte Fassung unter
+     /audio/<slug>.mp3, hat sie VORRANG: HTML5-<audio> läuft auf
+     iPhone, iPad, Mac, Android und PC in Chrome, Firefox, Safari,
+     Edge und Samsung Internet gleich — ohne Stimmenbibliothek des
+     Betriebssystems, offline-cachebar, immer dieselbe männliche
+     Stimme. Fehlt die Datei, greift automatisch die Web-Speech-Stufe.
+
+     Der Sprechtext der MP3 stammt aus derselben Pipeline wie der
+     Browser-Reader (Export-Hook am Dateiende), Audio und Vorlesen
+     können also nicht auseinanderlaufen. Die Zeitkarte
+     (data/audio/<slug>.timemap.json) liefert die Abschnittssprünge.
+  ============================================================ */
+  var audioEl = null;
+  var audioMap = null;
+  var audioActive = false;
+  var audioTimeline = [];
+  var audioRafId = null;
+
+  function audioSupported() {
+    return !!(cfg && cfg.audio && win.HTMLAudioElement);
+  }
+
+  function formatClock(sec) {
+    if (!isFinite(sec) || sec < 0) sec = 0;
+    var m = Math.floor(sec / 60);
+    var s = Math.round(sec % 60);
+    if (s === 60) { m += 1; s = 0; }
+    return m + ':' + String(s).padStart(2, '0');
+  }
+
+  function audioUnitAt(time) {
+    var starts = (audioMap && audioMap.unitStart) || [];
+    var found = 0;
+    for (var i = 0; i < starts.length; i++) {
+      if (starts[i] == null) continue;
+      if (starts[i] <= time + 0.05) found = i; else break;
+    }
+    return found;
+  }
+
+  function audioSync() {
+    if (!audioEl || !audioActive) return;
+    var t = audioEl.currentTime || 0;
+    var dur = audioEl.duration || (audioMap && audioMap.durationSeconds) || 0;
+    if (progressBar && dur) {
+      progressBar.style.width = Math.min(100, (t / dur) * 100).toFixed(2) + '%';
+    }
+    if (remainEl) {
+      var left = dur - t;
+      remainEl.textContent = left > 1 ? 'noch ' + formatClock(left) : '';
+    }
+    if (audioTimeline.length) {
+      var idx = audioUnitAt(t);
+      var unit = audioTimeline[idx];
+      if (unit && unit.block && unit.block.el && unit.block.el !== toolbar) {
+        blocks.forEach(function (b) {
+          if (b.el && b.el !== unit.block.el) b.el.classList.remove('ff-reader-active');
+        });
+        unit.block.el.classList.add('ff-reader-active');
+        if (!reducedMotion && !audioScrolledRecently(unit.block.el)) {
+          scrollTo(unit.block.el, { block: 'center', behavior: 'smooth' });
+        }
+      }
+    }
+    audioRafId = win.requestAnimationFrame ? win.requestAnimationFrame(audioSync) : null;
+  }
+
+  /* Nicht bei jedem Frame neu scrollen: ein Abschnitt bleibt so lange
+     stehen, bis der nächste drankommt. */
+  var lastScrolledEl = null;
+  function audioScrolledRecently(el) {
+    if (el === lastScrolledEl) return true;
+    lastScrolledEl = el;
+    return false;
+  }
+
+  function audioLoadMap(cb) {
+    if (!cfg.audioMap) { cb(null); return; }
+    if (audioMap) { cb(audioMap); return; }
+    try {
+      var xhr = new win.XMLHttpRequest();
+      xhr.open('GET', cfg.audioMap, true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) return;
+        if (xhr.status >= 200 && xhr.status < 300) {
+          try { audioMap = JSON.parse(xhr.responseText); } catch (e) { audioMap = null; }
+        }
+        cb(audioMap);
+      };
+      xhr.onerror = function () { cb(null); };
+      xhr.send();
+    } catch (e) { cb(null); }
+  }
+
+  function audioBuildTimeline() {
+    currentLang = detectArticleLanguage();
+    texts = I18N[currentLang] || I18N.de;
+    blocks = collectBlocks();
+    buildTimeline();
+    audioTimeline = timeline.slice();
+    return audioTimeline.length > 0;
+  }
+
+  function audioStart() {
+    if (!audioEl) {
+      audioEl = doc.createElement('audio');
+      audioEl.preload = 'auto';
+      audioEl.setAttribute('playsinline', '');
+      audioEl.setAttribute('data-ff-reader-audio', '');
+      doc.body.appendChild(audioEl);
+
+      /* Wichtig: Media-Events können verzögert eintreffen (asynchrone
+         play()-Zusagen, gepufferte Quellen). Nach einem Stopp dürfen sie
+         die Toolbar nicht zurück auf „läuft" kippen – deshalb prüft jeder
+         Handler zuerst, ob die Audiostufe überhaupt noch aktiv ist. */
+      audioEl.addEventListener('play', function () {
+        if (!audioActive) return;
+        playing = true;
+        setListenState('playing');
+        setStatus(texts.audioPlaying || texts.started);
+        if (!audioRafId && win.requestAnimationFrame) audioRafId = win.requestAnimationFrame(audioSync);
+      });
+      audioEl.addEventListener('pause', function () {
+        if (!audioActive) return;
+        playing = false;
+        setListenState('paused');
+        setStatus(texts.paused);
+        if (audioRafId && win.cancelAnimationFrame) { win.cancelAnimationFrame(audioRafId); audioRafId = null; }
+      });
+      audioEl.addEventListener('ended', function () {
+        if (!audioActive) return;
+        audioStop(true);
+      });
+      audioEl.addEventListener('error', function () {
+        /* Defekte oder noch nicht gerenderte Datei: ehrlich melden und
+           automatisch auf die Web-Speech-Stufe zurückfallen. */
+        audioActive = false;
+        setStatus(texts.audioError || texts.speechError);
+        startReading(0);
+      });
+      audioEl.addEventListener('timeupdate', function () {
+        if (!audioActive) return;
+        try { storeSet(STORE_AUDIO_POS, String(Math.floor(audioEl.currentTime))); } catch (e) {}
+      });
+    }
+
+    audioActive = true;
+    if (!audioBuildTimeline()) { setStatus(texts.noText); audioActive = false; return; }
+
+    audioEl.src = cfg.audio;
+    var saved = parseInt(storeGet(STORE_AUDIO_POS) || '0', 10);
+    reading = true;
+    playing = true;
+    setListenState('playing');
+    setStatus(texts.audioLoading || texts.voiceLoading);
+
+    audioLoadMap(function (map) {
+      audioMap = map;
+      var startAt = saved > 5 && (!map || saved < map.durationSeconds - 5) ? saved : 0;
+      var begin = function () {
+        try { audioEl.currentTime = startAt; } catch (e) {}
+        setStatus(startAt > 0 ? texts.resumedPos : (texts.audioReady || texts.voiceActive));
+        var p = audioEl.play();
+        if (p && typeof p.catch === 'function') {
+          p.catch(function () { setStatus(texts.audioError || texts.speechError); });
+        }
+      };
+      if (audioEl.readyState >= 1) begin();
+      else audioEl.addEventListener('loadedmetadata', begin, { once: true });
+    });
+
+    if (win.navigator && win.navigator.mediaSession) {
+      try {
+        win.navigator.mediaSession.metadata = new win.MediaMetadata({
+          title: stripMd(cfg.title || doc.title || ''),
+          artist: texts.mediaArtist,
+          album: cfg.siteName || 'FranksFinanzcheck'
+        });
+      } catch (e) {}
+    }
+  }
+
+  function audioPause() {
+    if (!audioEl) return;
+    playing = false;
+    try { audioEl.pause(); } catch (e) {}
+    setListenState('paused');
+    setStatus(texts.paused);
+  }
+
+  function audioResume() {
+    if (!audioEl) return;
+    playing = true;
+    setListenState('playing');
+    var p = audioEl.play();
+    if (p && typeof p.catch === 'function') p.catch(function () { setStatus(texts.audioError || texts.speechError); });
+  }
+
+  function audioStop(announce) {
+    audioActive = false;
+    reading = false;
+    playing = false;
+    if (audioRafId && win.cancelAnimationFrame) { win.cancelAnimationFrame(audioRafId); audioRafId = null; }
+    if (audioEl) {
+      try { audioEl.pause(); audioEl.removeAttribute('src'); audioEl.load(); } catch (e) {}
+    }
+    storeDel(STORE_AUDIO_POS);
+    lastScrolledEl = null;
+    clearHighlight();
+    setListenState('idle');
+    if (announce) setStatus(texts.finished);
+  }
+
+  function audioJump(delta) {
+    if (!audioEl || !audioMap || !audioMap.unitStart) return;
+    var current = audioUnitAt(audioEl.currentTime || 0);
+    var target = Math.max(0, Math.min(audioTimeline.length - 1, current + delta));
+    /* Auf die nächste Abschnittsgrenze springen, nicht nur eine Einheit. */
+    if (delta > 0) {
+      var curBlock = audioTimeline[current] ? audioTimeline[current].blockIndex : 0;
+      for (var i = current + 1; i < audioTimeline.length; i++) {
+        if (audioTimeline[i].blockIndex !== curBlock) { target = i; break; }
+      }
+    } else {
+      var curBlockBack = audioTimeline[current] ? audioTimeline[current].blockIndex : 0;
+      for (var j = current - 1; j >= 0; j--) {
+        if (audioTimeline[j].blockIndex !== curBlockBack) { target = j; break; }
+      }
+    }
+    var at = audioMap.unitStart[target];
+    if (at == null) return;
+    try { audioEl.currentTime = Math.max(0, at - 0.2); } catch (e) {}
+  }
+
+  var STORE_AUDIO_POS = 'ff-reader:audio:' + (win.location ? win.location.pathname : '');
+
   /* ---------- Bedienelemente ---------- */
   listenBtn.addEventListener('click', function () {
     unlockAudioEngine();
+    if (audioSupported()) {
+      if (!audioActive) audioStart();
+      else if (playing) audioPause();
+      else audioResume();
+      return;
+    }
     if (!reading) {
       var saved = parseInt(storeGet(STORE_POS) || '0', 10);
       startReading(saved > 0 ? saved : 0);
@@ -2198,9 +2457,9 @@
     }
   });
 
-  if (stopBtn) stopBtn.addEventListener('click', function () { endReading(true); });
-  if (prevBtn) prevBtn.addEventListener('click', function () { jumpBlock(-1); });
-  if (nextBtn) nextBtn.addEventListener('click', function () { jumpBlock(1); });
+  if (stopBtn) stopBtn.addEventListener('click', function () { if (audioActive) audioStop(true); else endReading(true); });
+  if (prevBtn) prevBtn.addEventListener('click', function () { if (audioActive) audioJump(-1); else jumpBlock(-1); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { if (audioActive) audioJump(1); else jumpBlock(1); });
 
   // Klick-to-Listen: an beliebiger Stelle einsteigen (auch im Ruhezustand)
   var contentContainer = doc.querySelector('.post-content') || doc.querySelector('.md-content');
@@ -3107,4 +3366,56 @@
     }
     if (e.key === 'Tab') trapFocus(e);
   });
+
+  /* ============================================================
+     EXPORT-HOOK (read-only) — eine einzige Text-Pipeline
+     ------------------------------------------------------------
+     Die First-Party-Audiofassungen (static/audio/*.mp3) müssen exakt
+     denselben Sprechtext verwenden wie der Browser-Reader: dieselbe
+     Block-Sammlung, dasselbe DE/EN-Routing, dieselbe Aussprache-
+     Normalisierung, dieselbe Atemgruppen-Bildung. Würde die Logik für
+     das Rendern ein zweites Mal implementiert, liefen Audio und
+     Vorlesen unweigerlich auseinander.
+
+     Deshalb: kein Nachbau, sondern derselbe Code. `scripts/prepare_audio_chunks.mjs`
+     lädt diese Datei unverändert in jsdom und ruft den Hook auf.
+     Der Hook spricht nichts, setzt keinen Wiedergabezustand und ändert
+     nichts am DOM.
+  ============================================================ */
+  function buildSpeechTimelineForExport() {
+    currentLang = detectArticleLanguage();
+    texts = I18N[currentLang] || I18N.de;
+    calibrateQuality();
+    blocks = collectBlocks();
+    buildTimeline();
+    return {
+      lang: currentLang,
+      quality: { tier: quality.tier, rate: quality.rate, maxChunk: quality.maxChunk },
+      blocks: blocks.map(function (b) {
+        return { type: b.type, lang: b.lang, text: b.text };
+      }),
+      timeline: timeline.map(function (u) {
+        return {
+          blockIndex: u.blockIndex,
+          type: u.type,
+          lang: u.lang,
+          text: u.text,
+          rate: u.effRate,
+          pauseAfter: u.after
+        };
+      })
+    };
+  }
+
+  win.__ffReaderExport = {
+    version: 7,
+    buildTimeline: buildSpeechTimelineForExport,
+    speechNormalize: speechNormalize,
+    detectLanguage: detectArticleLanguage,
+    resolveVoice: function (lang) {
+      var r = resolveMaleVoice(lang);
+      if (!r || !r.voice) return null;
+      return { name: r.voice.name, lang: r.voice.lang, mode: r.mode, explicit: !!r.explicit };
+    }
+  };
 })();

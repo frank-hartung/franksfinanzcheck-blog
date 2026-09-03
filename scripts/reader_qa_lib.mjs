@@ -218,8 +218,8 @@ export function buildToolbarHtml(cfg) {
   return frag.toolbarBlock;
 }
 
-export function buildPage({ title, description, kurzantwort, readingTime, wordCount, lang = 'de', author = 'Frank Hartung', date = '03.09.2026', updated = '', category = 'Ratgeber', siteName = 'FranksFinanzcheck', bodyHtml, showKurzantwortBox = true }) {
-  const cfg = { title, kurzantwort: kurzantwort || '', description: description || '', readingTime, wordCount, lang, siteName, author, date, updated, category };
+export function buildPage({ title, description, kurzantwort, readingTime, wordCount, lang = 'de', author = 'Frank Hartung', date = '03.09.2026', updated = '', category = 'Ratgeber', siteName = 'FranksFinanzcheck', bodyHtml, showKurzantwortBox = true, audio = '', audioMap = '' }) {
+  const cfg = { title, kurzantwort: kurzantwort || '', description: description || '', readingTime, wordCount, lang, siteName, author, date, updated, category, audio, audioMap };
 
   /* Die Kurzantwort-Box wird WORTGETREU aus layouts/single.html geholt und
      nur um die Hugo-Aktionen aufgelöst. Ändert sich das Template, übernimmt
@@ -457,7 +457,7 @@ export function installSpeechMock(win, { catalog = [], engine = 'chrome', msPerC
 /* 4) jsdom-Boot mit allen benötigten Browser-APIs                     */
 /* ------------------------------------------------------------------ */
 
-export async function createPage({ html, catalog = VOICE_CATALOGS.macChrome, engine = 'chrome', speech = true, darkMode = false, reducedMotion = false, userAgent, fastTimers = true, msPerChar = 0.01 }) {
+export async function createPage({ html, catalog = VOICE_CATALOGS.macChrome, engine = 'chrome', speech = true, darkMode = false, reducedMotion = false, userAgent, fastTimers = true, msPerChar = 0.01, audioDuration = 900 }) {
   const errors = [];
   const virtualConsole = new VirtualConsole();
   virtualConsole.on('jsdomError', (e) => errors.push(String(e && e.message ? e.message : e)));
@@ -506,7 +506,65 @@ export async function createPage({ html, catalog = VOICE_CATALOGS.macChrome, eng
   const origCreate = doc.createElement.bind(doc);
   doc.createElement = function (tag, opts) {
     const el = origCreate(tag, opts);
-    if (String(tag).toLowerCase() === 'dialog') {
+    const lower = String(tag).toLowerCase();
+
+    /* <audio>: jsdom implementiert HTMLMediaElement nicht (play() wirft
+       „Not implemented"). Hier eine spec-nahe Umsetzung mit laufender
+       currentTime, damit Pause/Weiter/Sprung/Fortschritt pruefbar sind. */
+    if (lower === 'audio') {
+      let cur = 0;
+      const dur = audioDuration;
+      let isPaused = true;
+      let ticker = null;
+      /* readyState/paused/currentTime/duration sind in jsdom Getter-only –
+         direktes Zuweisen wirft. Deshalb über defineProperty. */
+      Object.defineProperty(el, 'readyState', { get: () => (el.getAttribute('src') ? 2 : 0), configurable: true });
+      Object.defineProperty(el, 'currentTime', {
+        get: () => cur,
+        set: (v) => { cur = Math.max(0, Number(v) || 0); },
+        configurable: true
+      });
+      Object.defineProperty(el, 'duration', { get: () => dur, configurable: true });
+      Object.defineProperty(el, 'paused', { get: () => isPaused, configurable: true });
+      const stopTicker = () => { if (ticker) { clearInterval(ticker); ticker = null; } };
+      el.play = () => {
+        if (!el.getAttribute('src')) {
+          setTimeout(() => el.dispatchEvent(new win.Event('error')), 0);
+          return Promise.resolve();
+        }
+        isPaused = false;
+        setTimeout(() => el.dispatchEvent(new win.Event('play')), 0);
+        stopTicker();
+        ticker = setInterval(() => {
+          cur += 0.25;
+          el.dispatchEvent(new win.Event('timeupdate'));
+          if (cur >= dur) {
+            stopTicker();
+            isPaused = true;
+            el.dispatchEvent(new win.Event('ended'));
+          }
+        }, 5);
+        return Promise.resolve();
+      };
+      el.pause = () => {
+        if (isPaused) return;
+        isPaused = true;
+        stopTicker();
+        el.dispatchEvent(new win.Event('pause'));
+      };
+      el.load = () => { stopTicker(); cur = 0; };
+      // loadedmetadata feuern, sobald eine Quelle gesetzt wird
+      const origSetAttr = el.setAttribute.bind(el);
+      el.setAttribute = function (k, v) {
+        origSetAttr(k, v);
+        if (String(k).toLowerCase() === 'src') {
+          setTimeout(() => el.dispatchEvent(new win.Event('loadedmetadata')), 0);
+        }
+      };
+      win.__audioEl = el;
+    }
+
+    if (lower === 'dialog') {
       el.open = false;
       el.showModal = function () {
         if (el.open) throw new win.DOMException('already open', 'InvalidStateError');

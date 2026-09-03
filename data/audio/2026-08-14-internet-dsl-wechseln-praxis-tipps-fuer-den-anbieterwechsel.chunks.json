@@ -1,0 +1,782 @@
+{
+ "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel",
+ "title": "Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet",
+ "lang": "de",
+ "quality": {
+  "tier": "premium",
+  "rate": 0.93,
+  "maxChunk": 140
+ },
+ "units": 119,
+ "chars": 11584,
+ "parts": [
+  {
+   "index": 0,
+   "text": "Internet und DSL wechseln: Praxis-Tipps, Highspeed Internet. Ein Beitrag von FranksFinanzcheck. Hördauer etwa 7 Minuten. Kurzantwort: Ein Anbieterwechsel bei Internet und DSL dauert online nur etwa 10 Minuten. Durch Neukundenboni, reduzierte Grundgebühren in den ersten Monaten und Cashback sparst du durchschnittlich 280 Euro bis 380 Euro im Jahr. Kündige niemals selbst, sondern überlasse den Wechselprozess dem neuen Anbieter, um Ausfallzeiten zu verhindern. Zahlst du für deinen heimischen Internetanschluss jeden Monat mehr als 45 Euro, obwohl Neukunden für dieselbe Geschwindigkeit nur einen Bruchteil davon bezahlen? Viele Haushalte in Deutschland verharren aus Bequemlichkeit oder Angst vor tagelangem Internetausfall jahrelang im selben Altvertrag. Dabei ist der Wechsel heute dank modernisierter gesetzlicher Regelungen im Telekommunikationsgesetz so sicher, schnell und komfortabel wie nie zuvor. Durch das Internet und DSL wechseln sicherst du dir nicht nur schnellere Bandbreiten von bis zu 250 Megabit pro Sekunde oder Glasfaser-Speed, sondern sparst im Schnitt 280 Euro bis 380 Euro über die Mindestvertragslaufzeit. Praxisnah erkläre ich dir, wie der Wechsel ohne Unterbrechung gelingt und welche Stolpersteine du vermeiden musst. Tipp: Schnell-Tipp von FranksFinanzcheck: Finde in unter 3 Minuten den schnellsten und besonders günstigen Tarif an deiner Adresse:",
+   "units": [
+    {
+     "i": 0,
+     "type": "intro",
+     "lang": "de",
+     "chars": 120
+    },
+    {
+     "i": 1,
+     "type": "callout",
+     "lang": "de",
+     "chars": 88
+    },
+    {
+     "i": 2,
+     "type": "callout",
+     "lang": "de",
+     "chars": 138
+    },
+    {
+     "i": 3,
+     "type": "callout",
+     "lang": "de",
+     "chars": 112
+    },
+    {
+     "i": 4,
+     "type": "p",
+     "lang": "de",
+     "chars": 161
+    },
+    {
+     "i": 5,
+     "type": "p",
+     "lang": "de",
+     "chars": 133
+    },
+    {
+     "i": 6,
+     "type": "p",
+     "lang": "de",
+     "chars": 149
+    },
+    {
+     "i": 7,
+     "type": "p",
+     "lang": "de",
+     "chars": 141
+    },
+    {
+     "i": 8,
+     "type": "p",
+     "lang": "de",
+     "chars": 81
+    },
+    {
+     "i": 9,
+     "type": "p",
+     "lang": "de",
+     "chars": 114
+    },
+    {
+     "i": 10,
+     "type": "p",
+     "lang": "de",
+     "chars": 131
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "text": "DSL Tarife vergleichen (Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Warum sich der regelmäßige DSL-Wechsel lohnt. Telekommunikationsunternehmen belohnen Neukunden mit großzügigen Einstiegskonditionen und drastischen Rabatten: Reduzierte Grundgebühr: In den ersten 6 bis 12 Monaten zahlst du oft nur 9,99 Euro bis 19,99 Euro statt der regulären 44,99 Euro. Wechselboni und Cashback: Vergleichsportale und Anbieter gewähren oft Einmalgutschriften von 100 Euro bis 220 Euro direkt auf das Bankkonto. Aktuelle Hardware: Neue Routergenerationen mit Wi-Fi 6 oder Wi-Fi 7 sorgen für stabilere Verbindungen und höhere Reichweiten. Monatliche Kündbarkeit nach 24 Monaten: Nach Ablauf der Erstlaufzeit kannst du deinen Vertrag mit einer Frist von nur einem Monat flexibel beenden. Kostenlose Bereitstellung: Oft werden Anschlussgebühren in Höhe von 69,99 Euro für Neukunden vollständig erlassen. Die 4 Phasen des reibungslosen Anbieterwechsels. Phase 1: Verfügbarkeitscheck und Bedarfsanalyse. Ermittle vorab, welche Anschlussart an deiner Wohnadresse verfügbar ist (DSL/VDSL, Kabel-Internet oder FTTH-Glasfaser). Für einen normalen Haushalt mit Streaming in 4K und Homeoffice reicht eine Bandbreite von 50 bis 100 Megabit pro Sekunde völlig aus.",
+   "units": [
+    {
+     "i": 11,
+     "type": "p",
+     "lang": "de",
+     "chars": 73
+    },
+    {
+     "i": 12,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 13,
+     "type": "h2",
+     "lang": "de",
+     "chars": 45
+    },
+    {
+     "i": 14,
+     "type": "p",
+     "lang": "de",
+     "chars": 111
+    },
+    {
+     "i": 15,
+     "type": "li",
+     "lang": "de",
+     "chars": 129
+    },
+    {
+     "i": 16,
+     "type": "li",
+     "lang": "de",
+     "chars": 140
+    },
+    {
+     "i": 17,
+     "type": "li",
+     "lang": "de",
+     "chars": 125
+    },
+    {
+     "i": 18,
+     "type": "li",
+     "lang": "de",
+     "chars": 147
+    },
+    {
+     "i": 19,
+     "type": "li",
+     "lang": "de",
+     "chars": 114
+    },
+    {
+     "i": 20,
+     "type": "h2",
+     "lang": "de",
+     "chars": 48
+    },
+    {
+     "i": 21,
+     "type": "h3",
+     "lang": "de",
+     "chars": 48
+    },
+    {
+     "i": 22,
+     "type": "p",
+     "lang": "de",
+     "chars": 119
+    },
+    {
+     "i": 23,
+     "type": "p",
+     "lang": "de",
+     "chars": 132
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "text": "Haushalte mit mehreren Personen oder intensiven Cloud-Uploads profitieren von 250 Megabit pro Sekunde. Gigabit-Leitungen lohnen sich meist nur bei extrem datenintensiven Hobbys. Achte darauf, dass der Anbieter echte Dual-Stack-Anschlüsse mit nativer IPv4- und IPv6-Adresse bereitstellt, falls du von unterwegs auf Heimnetzwerk-Server zugreifen möchtest. Was die verfügbaren Technologien und Tarife konkret kosten, siehst du in unserem DSL-Vergleich, dort findest du auch die 4-Punkte-Formel für den echten Monatspreis. Phase 2: Tarifvergleich und Effektivpreis berechnen. Achte beim Vergleich nicht nur auf die werbewirksame Einstiegsgebühr der ersten Monate, sondern berechne den durchschnittlichen Effektivpreis über 24 Monate inklusive aller Boni, Bereitstellungskosten und Versandgebühren. Nur dieser Durchschnittspreis spiegelt die tatsächliche Belastung für dein Monatsbudget wider. Addiere sämtliche Fixkosten der 24 Monate, subtrahiere Aktionsguthaben und teile das Ergebnis durch vierundzwanzig. Phase 3: Neuen Anbieter beauftragen (Nicht selbst kündigen!). Das ist die wichtigste Grundregel beim DSL-Wechsel: Kündige deinen bestehenden Vertrag nicht auf eigene Faust! Gib dem neuen Provider im Bestellprozess den Auftrag zur Rufnummernmitnahme (Portierung) und Kündigung.",
+   "units": [
+    {
+     "i": 24,
+     "type": "p",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 25,
+     "type": "p",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 26,
+     "type": "p",
+     "lang": "de",
+     "chars": 175
+    },
+    {
+     "i": 27,
+     "type": "p",
+     "lang": "de",
+     "chars": 164
+    },
+    {
+     "i": 28,
+     "type": "h3",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 29,
+     "type": "p",
+     "lang": "de",
+     "chars": 87
+    },
+    {
+     "i": 30,
+     "type": "p",
+     "lang": "de",
+     "chars": 133
+    },
+    {
+     "i": 31,
+     "type": "p",
+     "lang": "de",
+     "chars": 94
+    },
+    {
+     "i": 32,
+     "type": "p",
+     "lang": "de",
+     "chars": 115
+    },
+    {
+     "i": 33,
+     "type": "h3",
+     "lang": "de",
+     "chars": 61
+    },
+    {
+     "i": 34,
+     "type": "p",
+     "lang": "de",
+     "chars": 110
+    },
+    {
+     "i": 35,
+     "type": "p",
+     "lang": "de",
+     "chars": 103
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "text": "Dadurch ist gesetzlich garantiert, dass die Leitungslücke bei der Umschaltung höchstens einen Kalendertag betragen darf. Sollte es dennoch zu Verzögerungen kommen, muss der bisherige Anbieter die Leitung nahtlos Weiterbetreiben und darf dafür maximal die bisherigen Entgelte berechnen. Phase 4: Hardware einrichten und Altgeräte retournieren. Nach Erhalt der Auftragsbestätigung und des Schalttermins schließt du deinen neuen Router am Umstellungstag an. Falls du einen Mietrouter des alten Anbieters hattest, sende diesen innerhalb von 14 Tagen mit dem bereitgestellten Retourenschein zurück, um Strafgebühren zu vermeiden. Bewahre den Einlieferungsbeleg des Paketdienstleisters mindestens zwei Jahre sorgfältig auf. Tarifvergleich: Altvertrag versus. Neukunden-Wechseltarif. Tabelle: Tarifvergleich: Altvertrag versus. Neukunden-Wechseltarif. Übersicht mit 4 Spalten und 6 Zeilen. Die Spalten lauten: Kostenfaktor, Bestehender Altvertrag (50 Megabit pro Sekunde), Neuer Wechseltarif (100 Megabit pro Sekunde), Ersparnis über 24 Monate. Grundgebühr Monate 1 bis 6. Zeile 1 von 6. Bestehender Altvertrag (50 Megabit pro Sekunde): 44,95 Euro monatlich (269,70 Euro). Neuer Wechseltarif (100 Megabit pro Sekunde): 9,99 Euro monatlich (59,94 Euro). Ersparnis über 24 Monate: 209,76 Euro.",
+   "units": [
+    {
+     "i": 36,
+     "type": "p",
+     "lang": "de",
+     "chars": 120
+    },
+    {
+     "i": 37,
+     "type": "p",
+     "lang": "de",
+     "chars": 164
+    },
+    {
+     "i": 38,
+     "type": "h3",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 39,
+     "type": "p",
+     "lang": "de",
+     "chars": 111
+    },
+    {
+     "i": 40,
+     "type": "p",
+     "lang": "de",
+     "chars": 169
+    },
+    {
+     "i": 41,
+     "type": "p",
+     "lang": "de",
+     "chars": 92
+    },
+    {
+     "i": 42,
+     "type": "h2",
+     "lang": "de",
+     "chars": 58
+    },
+    {
+     "i": 43,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 105
+    },
+    {
+     "i": 44,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 154
+    },
+    {
+     "i": 45,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 127
+    },
+    {
+     "i": 46,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 118
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "text": "Grundgebühr Monate 7 bis 24. Zeile 2 von 6. Bestehender Altvertrag (50 Megabit pro Sekunde): 44,95 Euro monatlich (809,10 Euro). Neuer Wechseltarif (100 Megabit pro Sekunde): 39,99 Euro monatlich (719,82 Euro). Ersparnis über 24 Monate: 89,28 Euro. Neukundenbonus / Cashback. Zeile 3 von 6. Bestehender Altvertrag (50 Megabit pro Sekunde): 0,00 Euro. Neuer Wechseltarif (100 Megabit pro Sekunde): -120,00 Euro (Gutschrift). Ersparnis über 24 Monate: 120,00 Euro. Bereitstellungsentgelt. Zeile 4 von 6. Bestehender Altvertrag (50 Megabit pro Sekunde): 0,00 Euro. Neuer Wechseltarif (100 Megabit pro Sekunde): 39,99 Euro. Ersparnis über 24 Monate: -39,99 Euro. Gesamtkosten 24 Monate. Zeile 5 von 6. Bestehender Altvertrag (50 Megabit pro Sekunde): 1078,80 Euro. Neuer Wechseltarif (100 Megabit pro Sekunde): 699,75 Euro. Ersparnis über 24 Monate: 379,05 Euro. Effektiver Monatspreis. Zeile 6 von 6. Bestehender Altvertrag (50 Megabit pro Sekunde): 44,95 Euro monatlich. Neuer Wechseltarif (100 Megabit pro Sekunde): 29,16 Euro monatlich. Ersparnis über 24 Monate: 35 Prozent günstiger. Ende der Tabelle Tarifvergleich: Altvertrag versus. Neukunden-Wechseltarif. Router mieten oder kaufen: Was rechnet sich mehr. Viele Anbieter bieten bei Vertragsabschluss WLAN-Router zur Miete für 4,99 Euro bis 7,99 Euro pro Monat an. Auf 24 Monate gerechnet summiert sich die Miete auf 120 Euro bis 190 Euro.",
+   "units": [
+    {
+     "i": 47,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 128
+    },
+    {
+     "i": 48,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 119
+    },
+    {
+     "i": 49,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 101
+    },
+    {
+     "i": 50,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 111
+    },
+    {
+     "i": 51,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 156
+    },
+    {
+     "i": 52,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 38
+    },
+    {
+     "i": 53,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 160
+    },
+    {
+     "i": 54,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 38
+    },
+    {
+     "i": 55,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 109
+    },
+    {
+     "i": 56,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 115
+    },
+    {
+     "i": 57,
+     "type": "table-outro",
+     "lang": "de",
+     "chars": 75
+    },
+    {
+     "i": 58,
+     "type": "h2",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 59,
+     "type": "p",
+     "lang": "de",
+     "chars": 107
+    },
+    {
+     "i": 60,
+     "type": "p",
+     "lang": "de",
+     "chars": 74
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "text": "Ein eigener Markenrouter (zum Beispiel. AVM FRITZ! Box 7530 AX oder 7590 AX) kostet einmalig zwischen 140 Euro und 220 Euro und kann über viele Jahre hinweg und über mehrere Anbieterwechsel genutzt werden. Dank der gesetzlichen Routerfreiheit in Deutschland bist du nicht an Geräte deines Internetanbieters gebunden und sparst langfristig viel Geld. Wer den Router nach vier oder fünf Jahren im Gebrauchtmarkt weiterverkauft, erzielt oft noch 40 bis 50 Prozent des ursprünglichen Anschaffungspreises. Damit das neue Gerät in jeder Ecke der Wohnung wirklich volle Geschwindigkeit liefert, haben wir die wichtigsten Tricks in WLAN verbessern: Mehr Speed in jeder Ecke zusammengestellt. <!-- premium-length-2026 -->. Die 4 Phasen ohne Panik und ohne Leerlauf. Phase 1 – Inventur (30 Minuten). Altvertrag: Beginn, Mindestlaufzeit, ob du schon monatlich kündbar bist, Router-Eigentum, aktuelle Messwerte (Kabeltest). Ohne Kabeltest weißt du nicht, ob ein Wechsel die Speed-Probleme löst oder nur den Preis. Phase 2 – Auswahl (20 Minuten). Verfügbarkeit an der Adresse, Effektivpreis über 24 Monate, Upload für Homeoffice, Hardware-Freiheit. Zwei Favoriten notieren, falls der Erste eine Ablehnung schickt. Phase 3 – Auftrag. Online, Widerruf bekannt, Liefertermin in der Bestätigung. Der neue Anbieter übernimmt die Kündigung in den meisten Fällen.",
+   "units": [
+    {
+     "i": 61,
+     "type": "p",
+     "lang": "de",
+     "chars": 39
+    },
+    {
+     "i": 62,
+     "type": "p",
+     "lang": "de",
+     "chars": 10
+    },
+    {
+     "i": 63,
+     "type": "p",
+     "lang": "de",
+     "chars": 154
+    },
+    {
+     "i": 64,
+     "type": "p",
+     "lang": "de",
+     "chars": 143
+    },
+    {
+     "i": 65,
+     "type": "p",
+     "lang": "de",
+     "chars": 150
+    },
+    {
+     "i": 66,
+     "type": "p",
+     "lang": "de",
+     "chars": 182
+    },
+    {
+     "i": 67,
+     "type": "p",
+     "lang": "de",
+     "chars": 29
+    },
+    {
+     "i": 68,
+     "type": "h2",
+     "lang": "de",
+     "chars": 42
+    },
+    {
+     "i": 69,
+     "type": "p",
+     "lang": "de",
+     "chars": 32
+    },
+    {
+     "i": 70,
+     "type": "p",
+     "lang": "de",
+     "chars": 121
+    },
+    {
+     "i": 71,
+     "type": "p",
+     "lang": "de",
+     "chars": 89
+    },
+    {
+     "i": 72,
+     "type": "p",
+     "lang": "de",
+     "chars": 133
+    },
+    {
+     "i": 73,
+     "type": "p",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 74,
+     "type": "p",
+     "lang": "de",
+     "chars": 77
+    },
+    {
+     "i": 75,
+     "type": "p",
+     "lang": "de",
+     "chars": 64
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "text": "Du kündigst nur selbst, wenn das ausdrücklich gewünscht wird, sonst entstehen Doppelkündigungen und Chaos. Phase 4 – Umschalttag. Laut TKG maximal ein Tag Unterbrechung. Handy-Hotspot als Backup, wichtige Uploads vorher. Router des neuen Anbieters erst anschließen, wenn die Leitungsfreischaltung bestätigt ist. Alte Box 14 Tage aufbewahren, bis der Zugang stabil ist. Router mieten oder kaufen, die 24-Monats-Rechnung. Miete 6 Euro × 24 = 144 Euro, du gibst das Gerät am Ende zurück. Kauf FritzBox 120 bis 180 Euroo, nutzt du über zwei Verträge = 4 bis 6 Jahre, Kosten unter 40 Euro pro 24 Monate. Wechselst du, nimmst du den eigenen Router mit, das ist der unterschätzte Hebel, weil du WLAN-Einstellungen, Mesh und Gäste-Netz nicht jedes Mal neu aufsetzt. Ausnahme: Der neue Anbieter erzwingt seine Box am Glasfaser-Modem. Dann Bridge-Modus + eigene Box dahinter, oder du akzeptierst die Miete für 24 Monate und kaufst danach. Nach dem Wechsel: 14-Tage-Protokoll. Täglich einmal Kabel-Speedtest, ping, ob TV-App und VPN laufen. Weicht der Durchschnitt um mehr als 30 Prozent vom Vertrag ab, Störung als Ticket anlegen, nicht erst nach drei Monaten. Die Entstörung in den ersten 14 Tagen ist psychologisch und vertraglich einfacher als nach einem halben Jahr Dulden. <!-- premium-length-2026-b -->. Der Umschalttag ohne Homeoffice-Kollaps.",
+   "units": [
+    {
+     "i": 76,
+     "type": "p",
+     "lang": "de",
+     "chars": 106
+    },
+    {
+     "i": 77,
+     "type": "p",
+     "lang": "de",
+     "chars": 113
+    },
+    {
+     "i": 78,
+     "type": "p",
+     "lang": "de",
+     "chars": 90
+    },
+    {
+     "i": 79,
+     "type": "p",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 80,
+     "type": "h2",
+     "lang": "de",
+     "chars": 50
+    },
+    {
+     "i": 81,
+     "type": "p",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 82,
+     "type": "p",
+     "lang": "de",
+     "chars": 113
+    },
+    {
+     "i": 83,
+     "type": "p",
+     "lang": "de",
+     "chars": 158
+    },
+    {
+     "i": 84,
+     "type": "p",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 85,
+     "type": "p",
+     "lang": "de",
+     "chars": 103
+    },
+    {
+     "i": 86,
+     "type": "h2",
+     "lang": "de",
+     "chars": 36
+    },
+    {
+     "i": 87,
+     "type": "p",
+     "lang": "de",
+     "chars": 63
+    },
+    {
+     "i": 88,
+     "type": "p",
+     "lang": "de",
+     "chars": 120
+    },
+    {
+     "i": 89,
+     "type": "p",
+     "lang": "de",
+     "chars": 116
+    },
+    {
+     "i": 90,
+     "type": "p",
+     "lang": "de",
+     "chars": 31
+    },
+    {
+     "i": 91,
+     "type": "h2",
+     "lang": "de",
+     "chars": 40
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Lege den Wechseltag nicht auf den Montag mit der wichtigsten Videokonferenz. Dienstag oder Mittwoch, Hotspot getestet, wichtige Uploads am Vortag. Router-Zugangsdaten des neuen Anbieters aus der Mail kopiert, nicht erst um 9 Uhr suchen. Nach 4 Stunden Stabilität: altes Gerät in den Karton, 14 Tage stehen lassen. Dann erst zurückschicken, mit Foto des Labels. So geplant wird der Wechsel zur 20-Minuten-Aktion. Ohne Plan erlebst du ihn als den Tag ohne Netz. Fazit: Mit minimalem Aufwand hunderte Euro sparen. Überprüfst du alle 24 Monate deinen DSL- oder Kabelvertrag und wechselst bei Bedarf, surfst du dauerhaft mit modernen Technologien und sparst pro Jahr zwischen 280 Euro und 380 Euro. Der Wechselprozess läuft dank Anbieter-Kündigungsservice unterbrechungsfrei im Hintergrund ab. Erfahre in unserer Übersicht zu Internet und DSL alle weiteren Spartipps rund um Breitbandanschlüsse. Häufige Fragen. Wie lange dauert die Umstellung beim Internetwechsel. Von der Online-Bestellung bis zum Schaltungstag vergehen in der Regel 2 bis 4 Wochen. Am eigentlichen Umstellungstag dauert die technische Leitungsübergabe meist nur wenige Minuten. Was passiert, wenn beim Wechsel etwas schiefgeht. Nach Paragraf 58 TKG ist der bisherige Anbieter verpflichtet, dich solange weiterzuversorgen, bis der neue Anbieter die Leitung erfolgreich geschaltet hat. Du bleibst somit zu keinem Zeitpunkt ohne Internet.",
+   "units": [
+    {
+     "i": 92,
+     "type": "p",
+     "lang": "de",
+     "chars": 76
+    },
+    {
+     "i": 93,
+     "type": "p",
+     "lang": "de",
+     "chars": 69
+    },
+    {
+     "i": 94,
+     "type": "p",
+     "lang": "de",
+     "chars": 89
+    },
+    {
+     "i": 95,
+     "type": "p",
+     "lang": "de",
+     "chars": 123
+    },
+    {
+     "i": 96,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 97,
+     "type": "h2",
+     "lang": "de",
+     "chars": 50
+    },
+    {
+     "i": 98,
+     "type": "p",
+     "lang": "de",
+     "chars": 182
+    },
+    {
+     "i": 99,
+     "type": "p",
+     "lang": "de",
+     "chars": 94
+    },
+    {
+     "i": 100,
+     "type": "p",
+     "lang": "de",
+     "chars": 101
+    },
+    {
+     "i": 101,
+     "type": "h2",
+     "lang": "de",
+     "chars": 15
+    },
+    {
+     "i": 102,
+     "type": "h3",
+     "lang": "de",
+     "chars": 53
+    },
+    {
+     "i": 103,
+     "type": "p",
+     "lang": "de",
+     "chars": 85
+    },
+    {
+     "i": 104,
+     "type": "p",
+     "lang": "de",
+     "chars": 95
+    },
+    {
+     "i": 105,
+     "type": "h3",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 106,
+     "type": "p",
+     "lang": "de",
+     "chars": 155
+    },
+    {
+     "i": 107,
+     "type": "p",
+     "lang": "de",
+     "chars": 51
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "text": "Kann ich meine Festnetz-Telefonnummer behalten. Ja. Wenn du im selben Vorwahlbereich wohnst, kannst du deine bisherigen Rufnummern kostenlos zum neuen Anbieter mitnehmen. Wann muss ich den alten Mietrouter zurückschicken. In der Regel innerhalb von 14 Tagen nach Vertragsende. Nutze immer den Rücksendebeleg des Paketzustellers als Nachweis. Was ist der Unterschied zwischen DSL, Kabel und Glasfaser. DSL nutzt Kupfertelefonleitungen (bis 250 Megabit pro Sekunde), Kabel nutzt Koaxial-Fernsehkabel (bis 1000 Megabit pro Sekunde) und FTTH-Glasfaser bringt Lichtwellenleiter direkt in die Wohnung (bis 1000+ Megabit pro Sekunde mit sehr hoher Stabilität). Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
+    {
+     "i": 108,
+     "type": "h3",
+     "lang": "de",
+     "chars": 47
+    },
+    {
+     "i": 109,
+     "type": "p",
+     "lang": "de",
+     "chars": 122
+    },
+    {
+     "i": 110,
+     "type": "h3",
+     "lang": "de",
+     "chars": 50
+    },
+    {
+     "i": 111,
+     "type": "p",
+     "lang": "de",
+     "chars": 119
+    },
+    {
+     "i": 112,
+     "type": "h3",
+     "lang": "de",
+     "chars": 58
+    },
+    {
+     "i": 113,
+     "type": "p",
+     "lang": "de",
+     "chars": 63
+    },
+    {
+     "i": 114,
+     "type": "p",
+     "lang": "de",
+     "chars": 188
+    },
+    {
+     "i": 115,
+     "type": "p",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 116,
+     "type": "p",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 117,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 118,
+     "type": "outro",
+     "lang": "de",
+     "chars": 66
+    }
+   ]
+  }
+ ]
+}

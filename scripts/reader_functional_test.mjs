@@ -572,6 +572,114 @@ t.group('12) CSS-Lesbarkeit (Kontrast, Zeilenlänge, Dunkelmodus)');
 }
 
 /* ================================================================== */
+/* 13) First-Party-Audiofassung (Garantie-Stufe)                      */
+/* ================================================================== */
+t.group('13) First-Party-Audiofassung (MP3 hat Vorrang vor Web Speech)');
+{
+  /* Liegt eine serverseitig gerenderte Fassung vor, muss sie VOR der
+     Web Speech API genutzt werden: HTML5-<audio> läuft auf jedem Gerät
+     und in jedem Browser, die Web Speech API nicht. */
+  const map = {
+    slug: 'test-artikel',
+    durationSeconds: 900,
+    unitStart: null
+  };
+
+  const mkAudioPage = async (withAudio = true) => {
+    const p = await createPage({
+      html: buildPage({
+        title: art.title, description: art.description, kurzantwort: art.kurzantwort,
+        readingTime: art.readingTime, wordCount: art.wordCount, author: art.author,
+        bodyHtml: art.bodyHtml,
+        audio: withAudio ? '/audio/test-artikel.mp3' : '',
+        audioMap: withAudio ? '/audio/test-artikel.timemap.json' : ''
+      }),
+      catalog: VOICE_CATALOGS.androidChrome   // bewusst: Gerät OHNE männliche Stimme
+    });
+    if (withAudio) {
+      // Zeitkarte nachliefern (der Reader holt sie per XHR)
+      map.unitStart = p.win.__ffReaderExport.buildTimeline().timeline.map((u, i) => i * 6);
+      const origOpen = p.win.XMLHttpRequest.prototype.open;
+      const origSend = p.win.XMLHttpRequest.prototype.send;
+      p.win.XMLHttpRequest.prototype.open = function (m, u) { this.__url = u; return origOpen.apply(this, arguments); };
+      p.win.XMLHttpRequest.prototype.send = function () {
+        const self = this;
+        setTimeout(() => {
+          Object.defineProperty(self, 'readyState', { value: 4, configurable: true });
+          Object.defineProperty(self, 'status', { value: 200, configurable: true });
+          Object.defineProperty(self, 'responseText', { value: JSON.stringify(map), configurable: true });
+          if (self.onreadystatechange) self.onreadystatechange();
+        }, 0);
+      };
+    }
+    return p;
+  };
+
+  const ap = await mkAudioPage(true);
+  t.eq(ap.errors, [], 'Audio-Stufe: keine Laufzeitfehler beim Laden');
+
+  click(ap.win, ap.doc.getElementById('ff-listen-btn'));
+  await until(() => ap.doc.getElementById('ff-reader-toolbar').classList.contains('ff-reader-toolbar--playing'), 3000);
+
+  t.ok(ap.doc.getElementById('ff-reader-toolbar').classList.contains('ff-reader-toolbar--playing'),
+    'Klick startet die Wiedergabe');
+  t.eq(ap.log, [], 'Web Speech wird NICHT bemüht, wenn eine Audiofassung vorliegt (kein speechSynthesis.speak)');
+  const audioEl = ap.win.__audioEl;
+  t.ok(!!audioEl, 'HTML5-<audio>-Element wird erzeugt');
+  t.ok(audioEl.getAttribute('src') === '/audio/test-artikel.mp3', 'Korrekte MP3-Quelle gesetzt');
+  t.ok(audioEl.getAttribute('playsinline') !== null, 'playsinline gesetzt (iPhone spielt inline statt Vollbild)');
+  /* play() ist laut Spec asynchron: erst wenn die Wiedergabe tatsächlich
+     läuft, ist paused === false. Deshalb auf echten Fortschritt warten,
+     statt in einem Wettlauf-Zeitfenster zu prüfen. */
+  t.ok(await until(() => audioEl.currentTime > 0, 3000), 'Audio beginnt zu laufen (currentTime steigt)');
+  t.ok(audioEl.paused === false, 'Audio läuft (paused === false)');
+  t.ok(/Studiostimme|Audiofassung/.test(ap.doc.getElementById('ff-reader-status').textContent),
+    'Status meldet die Studiofassung, nicht die Gerätstimme',
+    ap.doc.getElementById('ff-reader-status').textContent);
+
+  // Fortschritt + Live-Markierung
+  await until(() => audioEl.currentTime > 12, 4000);
+  t.ok(ap.doc.getElementById('ff-reader-progress-bar').style.width !== '0%'
+    && ap.doc.getElementById('ff-reader-progress-bar').style.width !== '',
+    'Fortschrittsbalken folgt der Audiozeit');
+  t.ok(!!ap.doc.querySelector('.ff-reader-active'), 'Live-Markierung folgt dem gesprochenen Abschnitt');
+  t.ok(/noch\s+\d+:\d+/.test(ap.doc.getElementById('ff-reader-remaining').textContent),
+    'Restzeit wird angezeigt', ap.doc.getElementById('ff-reader-remaining').textContent);
+
+  // Pause / Weiter
+  click(ap.win, ap.doc.getElementById('ff-listen-btn'));
+  await new Promise((r) => setTimeout(r, 60));
+  t.ok(audioEl.paused === true, 'Pause hält das Audio an');
+  const atPause = audioEl.currentTime;
+  await new Promise((r) => setTimeout(r, 120));
+  t.ok(Math.abs(audioEl.currentTime - atPause) < 0.01, 'Zeit läuft in der Pause nicht weiter');
+  click(ap.win, ap.doc.getElementById('ff-listen-btn'));
+  await until(() => audioEl.paused === false, 2000);
+  t.ok(audioEl.paused === false, 'Weiterlesen nimmt das Audio wieder auf');
+
+  // Abschnittssprung
+  const beforeJump = audioEl.currentTime;
+  click(ap.win, ap.doc.getElementById('ff-listen-next'));
+  await until(() => audioEl.currentTime > beforeJump + 1, 2000);
+  t.ok(audioEl.currentTime > beforeJump + 1, 'Abschnittssprung „weiter“ springt im Audio');
+
+  // Beenden
+  click(ap.win, ap.doc.getElementById('ff-listen-stop'));
+  await new Promise((r) => setTimeout(r, 80));
+  t.ok(audioEl.paused === true, '„Beenden“ stoppt das Audio');
+  t.ok(!ap.doc.querySelector('.ff-reader-active'), 'Markierung wird beim Beenden entfernt');
+  t.ok(ap.doc.getElementById('ff-listen-label').textContent === 'Vorlesen', 'Toolbar geht in den Ruhezustand');
+
+  /* Rückfall: ohne Audiofassung muss dieselbe Seite die Web-Speech-Stufe
+     nutzen – die Garantie-Stufe darf die Grundfunktion nie abschalten. */
+  const noAudio = await mkAudioPage(false);
+  click(noAudio.win, noAudio.doc.getElementById('ff-listen-btn'));
+  await until(() => noAudio.log.length > 0, 3000);
+  t.ok(noAudio.log.length > 0, 'Ohne Audiofassung greift automatisch die Web-Speech-Stufe');
+  t.ok(!noAudio.win.__audioEl, 'Ohne Audiofassung wird kein <audio>-Element erzeugt');
+}
+
+/* ================================================================== */
 const fail = t.report();
 if (fail > 0) {
   console.log(`\n💥 ${fail} Prüfung(en) fehlgeschlagen.`);

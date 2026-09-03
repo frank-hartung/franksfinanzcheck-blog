@@ -1,0 +1,1358 @@
+{
+ "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+ "title": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
+ "lang": "de",
+ "quality": {
+  "tier": "premium",
+  "rate": 0.93,
+  "maxChunk": 140
+ },
+ "units": 210,
+ "chars": 18130,
+ "parts": [
+  {
+   "index": 0,
+   "text": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub. Ein Beitrag von FranksFinanzcheck. Hördauer etwa 13 Minuten. Kurzantwort: Einen Mietwagen komplett ohne Kaution gibt es in der Praxis nur in Ausnahmefällen, aber du kannst die Kaution deutlich senken und das Risiko auf null reduzieren: Buche ein Angebot mit 'Vollkasko ohne Selbstbeteiligung' über einen deutschen Vergleichsanbieter, hinterlege eine echte Kreditkarte (keine Debitkarte) und lehne jede Zusatzversicherung am Schalter konsequent ab. So vermeidest du die typische 900- Euro-bis-1500- Euro-Blockierung und sparst gegenüber der Buchung vor Ort bis zu 40 Prozent. Die Vorfreude auf den Urlaub ist groß. Doch am Mietwagenschalter folgt oft das böse Erwachen: Die Mitarbeiterin verlangt eine Kaution zwischen 900 Euro und 2500 Euro, die auf der Kreditkarte blockiert wird. Wer keine echte Kreditkarte hat oder das Limit nicht freihält, steht ohne Auto da. Und selbst wenn alles klappt, lauern weitere Kostenfallen: Selbstbeteiligung, Zusatzfahrer-Gebühr, Tankregelung und Reifenschutz. Diese Kostenfallen verdoppeln schnell den anfänglichen Schnäppchenpreis. Wie du einen Mietwagen ohne Kaution buchst (oder die Kaution klein hältst), zeigt dir diese Anleitung. Außerdem verrät sie, welche Versicherung wirklich schützt und wie du am Urlaubsort bis zu 40 und nbsp; Prozent sparst.",
+   "units": [
+    {
+     "i": 0,
+     "type": "intro",
+     "lang": "de",
+     "chars": 115
+    },
+    {
+     "i": 1,
+     "type": "callout",
+     "lang": "de",
+     "chars": 95
+    },
+    {
+     "i": 2,
+     "type": "callout",
+     "lang": "de",
+     "chars": 78
+    },
+    {
+     "i": 3,
+     "type": "callout",
+     "lang": "de",
+     "chars": 97
+    },
+    {
+     "i": 4,
+     "type": "callout",
+     "lang": "de",
+     "chars": 113
+    },
+    {
+     "i": 5,
+     "type": "callout",
+     "lang": "de",
+     "chars": 126
+    },
+    {
+     "i": 6,
+     "type": "p",
+     "lang": "de",
+     "chars": 38
+    },
+    {
+     "i": 7,
+     "type": "p",
+     "lang": "de",
+     "chars": 167
+    },
+    {
+     "i": 8,
+     "type": "p",
+     "lang": "de",
+     "chars": 82
+    },
+    {
+     "i": 9,
+     "type": "p",
+     "lang": "de",
+     "chars": 129
+    },
+    {
+     "i": 10,
+     "type": "p",
+     "lang": "de",
+     "chars": 72
+    },
+    {
+     "i": 11,
+     "type": "p",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 12,
+     "type": "p",
+     "lang": "de",
+     "chars": 118
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "text": "Tipp: Schnell-Tipp von FranksFinanzcheck: Sichere dir vor der Buchung einen Preisvergleich inklusive Vollkasko ohne Selbstbeteiligung: Jetzt Mietwagen vergleichen (Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Was ist die Mietwagen-Kaution überhaupt. Die Kaution ist eine Sicherheit, die der Vermieter während der Mietzeit auf deiner Kreditkarte blockiert. Sie dient dazu, drei Risiken abzudecken: Die vertragliche Selbstbeteiligung im Schadensfall (oft 900 Euro bis 1500 Euro). Tankdifferenzen bei Rückgabe mit leerem Tank. Kleine Mängel oder Verstöße (Bußgelder, verlorene Schlüssel). Wichtig: Das Geld wird in der Regel nicht abgebucht, sondern nur blockiert (autorisierter Betrag). Nach ordnungsgemäßer Rückgabe wird die Blockierung innerhalb von 3 bis 21 Werktagen wieder freigegeben. Trotzdem ist Vorsicht geboten: Eine hohe Blockierung schränkt dein Kreditkartenlimit für den ganzen Urlaub ein. Im schlimmsten Fall gefährdet sie die Bezahlung im Hotel oder Restaurant. Mietwagen ohne Kaution, was wirklich dahintersteckt. Ein echter Mietwagen vollständig ohne jegliche Kaution ist in den großen Urlaubsländern (Spanien, Italien, Portugal, Griechenland, USA) eine Seltenheit. Fast jeder seriöse Vermieter verlangt auch bei Vollkasko ohne Selbstbeteiligung eine reduzierte Kaution.",
+   "units": [
+    {
+     "i": 13,
+     "type": "p",
+     "lang": "de",
+     "chars": 134
+    },
+    {
+     "i": 14,
+     "type": "p",
+     "lang": "de",
+     "chars": 78
+    },
+    {
+     "i": 15,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 16,
+     "type": "h2",
+     "lang": "de",
+     "chars": 40
+    },
+    {
+     "i": 17,
+     "type": "p",
+     "lang": "de",
+     "chars": 105
+    },
+    {
+     "i": 18,
+     "type": "p",
+     "lang": "de",
+     "chars": 40
+    },
+    {
+     "i": 19,
+     "type": "li",
+     "lang": "de",
+     "chars": 80
+    },
+    {
+     "i": 20,
+     "type": "li",
+     "lang": "de",
+     "chars": 45
+    },
+    {
+     "i": 21,
+     "type": "li",
+     "lang": "de",
+     "chars": 61
+    },
+    {
+     "i": 22,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 23,
+     "type": "p",
+     "lang": "de",
+     "chars": 103
+    },
+    {
+     "i": 24,
+     "type": "p",
+     "lang": "de",
+     "chars": 111
+    },
+    {
+     "i": 25,
+     "type": "p",
+     "lang": "de",
+     "chars": 73
+    },
+    {
+     "i": 26,
+     "type": "h2",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 27,
+     "type": "p",
+     "lang": "de",
+     "chars": 152
+    },
+    {
+     "i": 28,
+     "type": "p",
+     "lang": "de",
+     "chars": 104
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "text": "Meist sind es 100 Euro bis 300 Euro für Tank und Zusatzkosten. Was es aber gibt: Kaution reduziert auf 0 Euro durch Super-Cover oder Zero Excess: Einige Anbieter (zum Beispiel. Enterprise, Alamo, Sixt Plus) erlauben gegen einen moderaten Aufpreis von 5 Euro bis 12 Euro pro Tag eine Kautionsbefreiung. Geringere Kaution durch Vollkasko ohne Selbstbeteiligung: Weil die Selbstbeteiligung bereits abgesichert ist, sinkt der blockierte Betrag auf 100 Euro bis 250 Euro. Kaution per Debitkarte: Immer mehr Vermieter in Deutschland und den Benelux-Ländern akzeptieren statt einer Kreditkarte eine normale Girocard, im Ausland (insbesondere Spanien, USA) ist das. aber nach wie vor die absolute Ausnahme. Die 5 teuersten Mietwagen-Fallen und wie du sie umgehst. 1. Die Selbstbeteiligungs-Falle. Grundsätzlich ist jeder Mietwagen in Europa haftpflichtversichert. Im Preisvergleich enthalten die meisten Billig-Angebote darüber hinaus eine Vollkasko mit hoher Selbstbeteiligung von 900 Euro bis 1500 Euro. Bei einem Kratzer oder Steinschlag zahlst du bis zu dieser Summe selbst. So umgehst du sie: Buche konsequent ein Paket mit Vollkasko ohne Selbstbeteiligung (auch Zero Excess, Super Cover oder Vollkasko ohne SB). Das kostet im Schnitt nur 3 Euro bis 8 Euro pro Tag mehr. Im Vergleich zur Selbstbeteiligung ist das ein Schnäppchen.",
+   "units": [
+    {
+     "i": 29,
+     "type": "p",
+     "lang": "de",
+     "chars": 80
+    },
+    {
+     "i": 30,
+     "type": "li",
+     "lang": "de",
+     "chars": 95
+    },
+    {
+     "i": 31,
+     "type": "li",
+     "lang": "de",
+     "chars": 124
+    },
+    {
+     "i": 32,
+     "type": "li",
+     "lang": "de",
+     "chars": 164
+    },
+    {
+     "i": 33,
+     "type": "li",
+     "lang": "de",
+     "chars": 23
+    },
+    {
+     "i": 34,
+     "type": "li",
+     "lang": "de",
+     "chars": 118
+    },
+    {
+     "i": 35,
+     "type": "li",
+     "lang": "de",
+     "chars": 47
+    },
+    {
+     "i": 36,
+     "type": "li",
+     "lang": "de",
+     "chars": 40
+    },
+    {
+     "i": 37,
+     "type": "h2",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 38,
+     "type": "h3",
+     "lang": "de",
+     "chars": 32
+    },
+    {
+     "i": 39,
+     "type": "p",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 40,
+     "type": "p",
+     "lang": "de",
+     "chars": 141
+    },
+    {
+     "i": 41,
+     "type": "p",
+     "lang": "de",
+     "chars": 72
+    },
+    {
+     "i": 42,
+     "type": "p",
+     "lang": "de",
+     "chars": 138
+    },
+    {
+     "i": 43,
+     "type": "p",
+     "lang": "de",
+     "chars": 117
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "text": "Wer über einen deutschen Vergleichsrechner bucht, bekommt diese Option meist inklusive. 2. Die Zweitfahrer-Gebühr. Viele Vermieter kassieren 8 Euro bis 15 Euro pro Tag für einen zusätzlichen Fahrer. Das kann die Mietkosten bei einem zweiwöchigen Urlaub um bis zu 210 Euro erhöhen. So umgehst du sie: Achte bereits bei der Buchung auf die Angabe Zusatzfahrer inklusive. Bei Anbietern wie Enterprise, Alamo, National und einigen Sixt-Tarifen ist der Ehepartner oder Lebensgefährte oft kostenlos mitversichert. In Spanien bieten zudem Record Go und Centauro günstige Pauschalpakete. 3. Die Tankregelung. Es gibt zwei Varianten: Voll-Voll: Du übernimmst den Wagen vollgetankt und gibst ihn vollgetankt zurück. Das ist die fairste Regelung. Voll-Leer: Du bezahlst die erste Tankfüllung im Voraus zu einem oft überhöhten Preis und gibst das Auto leer zurück. Vor allem bei kurzen Mietzeiten ist das ein schlechtes Geschäft. So umgehst du sie: Wähle grundsätzlich Voll-Voll und tanke das Auto in den letzten 10 Kilometern vor der Rückgabe an einer freien Tankstelle (nicht direkt am Flughafen). Belege unbedingt aufbewahren! 4. Die Platin-Schutz-Versicherung am Schalter. Selbst wenn du online schon eine Vollkasko ohne Selbstbeteiligung gebucht hast: Am Schalter versucht das Personal, dir eine Zusatzversicherung zu verkaufen.",
+   "units": [
+    {
+     "i": 44,
+     "type": "p",
+     "lang": "de",
+     "chars": 87
+    },
+    {
+     "i": 45,
+     "type": "h3",
+     "lang": "de",
+     "chars": 26
+    },
+    {
+     "i": 46,
+     "type": "p",
+     "lang": "de",
+     "chars": 83
+    },
+    {
+     "i": 47,
+     "type": "p",
+     "lang": "de",
+     "chars": 81
+    },
+    {
+     "i": 48,
+     "type": "p",
+     "lang": "de",
+     "chars": 87
+    },
+    {
+     "i": 49,
+     "type": "p",
+     "lang": "de",
+     "chars": 138
+    },
+    {
+     "i": 50,
+     "type": "p",
+     "lang": "de",
+     "chars": 71
+    },
+    {
+     "i": 51,
+     "type": "h3",
+     "lang": "de",
+     "chars": 20
+    },
+    {
+     "i": 52,
+     "type": "p",
+     "lang": "de",
+     "chars": 23
+    },
+    {
+     "i": 53,
+     "type": "li",
+     "lang": "de",
+     "chars": 110
+    },
+    {
+     "i": 54,
+     "type": "li",
+     "lang": "de",
+     "chars": 116
+    },
+    {
+     "i": 55,
+     "type": "li",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 56,
+     "type": "p",
+     "lang": "de",
+     "chars": 169
+    },
+    {
+     "i": 57,
+     "type": "p",
+     "lang": "de",
+     "chars": 29
+    },
+    {
+     "i": 58,
+     "type": "h3",
+     "lang": "de",
+     "chars": 46
+    },
+    {
+     "i": 59,
+     "type": "p",
+     "lang": "de",
+     "chars": 156
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "text": "Reifenschutz, Scheibenschutz, Unterbodenschutz oder Diebstahlschutz kosten dort 15 Euro bis 25 Euro pro Tag. In vielen Fällen sind diese Risiken bereits in deiner bestehenden Deckung enthalten. So umgehst du sie: Sage freundlich aber bestimmt: Nein danke, ich habe meinen Versicherungsschutz bereits online gebucht. Lasse dich nicht unter Druck setzen. 5. Die Flughafen-Zuschlag-Falle. Mietwagen direkt am Flughafen sind aufgrund von Konzessionsgebühren oft 15 bis 25 Prozent teurer als im Stadtzentrum. So umgehst du sie: Vergleiche im Preisvergleich beide Standorte. Oft lohnt sich ein 10-minütiges Taxi zur Stadtfiliale, bei einer Woche Mietdauer kann die Ersparnis 80 Euro bis 150 Euro betragen. Die 6-Schritt-Checkliste für die sichere Buchung. Punkt 1: Früh vergleichen: Buche mindestens 4 bis 6 Wochen vor Abreise. Last-Minute-Preise am Flughafen sind 30 bis 50 Prozent teurer. Punkt 2: Vollkasko ohne Selbstbeteiligung auswählen: Bereits im Buchungsprozess, nicht erst am Schalter. Punkt 3: Tankregelung Voll-Voll bestätigen: In den Buchungsdetails prüfen. Punkt 4: Kaution notieren: Steht in den Mietbedingungen. Ziel: unter 300 Euro. Punkt 5: Echte Kreditkarte freihalten: Das Limit muss mindestens die Kaution plus 200 Euro Puffer abdecken. Debitkarten nur, wenn der Vermieter sie ausdrücklich akzeptiert.",
+   "units": [
+    {
+     "i": 60,
+     "type": "p",
+     "lang": "de",
+     "chars": 108
+    },
+    {
+     "i": 61,
+     "type": "p",
+     "lang": "de",
+     "chars": 84
+    },
+    {
+     "i": 62,
+     "type": "p",
+     "lang": "de",
+     "chars": 121
+    },
+    {
+     "i": 63,
+     "type": "p",
+     "lang": "de",
+     "chars": 36
+    },
+    {
+     "i": 64,
+     "type": "h3",
+     "lang": "de",
+     "chars": 32
+    },
+    {
+     "i": 65,
+     "type": "p",
+     "lang": "de",
+     "chars": 117
+    },
+    {
+     "i": 66,
+     "type": "p",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 67,
+     "type": "p",
+     "lang": "de",
+     "chars": 130
+    },
+    {
+     "i": 68,
+     "type": "h2",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 69,
+     "type": "li",
+     "lang": "de",
+     "chars": 134
+    },
+    {
+     "i": 70,
+     "type": "li",
+     "lang": "de",
+     "chars": 104
+    },
+    {
+     "i": 71,
+     "type": "li",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 72,
+     "type": "li",
+     "lang": "de",
+     "chars": 78
+    },
+    {
+     "i": 73,
+     "type": "li",
+     "lang": "de",
+     "chars": 107
+    },
+    {
+     "i": 74,
+     "type": "li",
+     "lang": "de",
+     "chars": 64
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "text": "Punkt 6: Bei Übernahme 15 Minuten Zeit nehmen: Gemeinsam mit dem Mitarbeiter jeden Kratzer, jede Delle und jeden Steinschlag dokumentieren, fotografieren und im Protokoll festhalten. Echte Zahlen: Drei Mietwagen-Szenarien im Vergleich. Tabelle: Echte Zahlen: Drei Mietwagen-Szenarien im Vergleich. Übersicht mit 6 Spalten und 3 Zeilen. Die Spalten lauten: Szenario, Grundpreis (7 Tage), Versicherung, Kaution, Zusatzkosten, Gesamt (7 Tage). Billig-Angebot direkt am Flughafen. Zeile 1 von 3. Grundpreis (7 Tage): 98 Euro. Versicherung: VK mit 1200 Euro SB. Kaution: 1200 Euro. Zusatzkosten: Zweitfahrer 105 Euro, Tank voraus 95 Euro. Gesamt (7 Tage): 298 Euro. Online-Vergleich, Vollkasko ohne SB. Zeile 2 von 3. Grundpreis (7 Tage): 154 Euro. Versicherung: VK ohne SB inklusive. Kaution: 200 Euro. Zusatzkosten: Zweitfahrer inklusive, Voll-Voll. Gesamt (7 Tage): 154 Euro. Stadtfiliale + Vollkasko ohne SB. Zeile 3 von 3. Grundpreis (7 Tage): 138 Euro. Versicherung: VK ohne SB inklusive. Kaution: 200 Euro. Zusatzkosten: 15 Euro Taxi zur Filiale. Gesamt (7 Tage): 153 Euro. Ende der Tabelle Echte Zahlen: Drei Mietwagen-Szenarien im Vergleich. Der Unterschied zwischen Billig-Angebot und smarter Online-Buchung: 145 Euro bei einer Woche. Dieses Geld investierst du im Urlaub besser in ein gutes Abendessen oder einen Ausflug. Welche Kreditkarte eignet sich für Mietwagen.",
+   "units": [
+    {
+     "i": 75,
+     "type": "li",
+     "lang": "de",
+     "chars": 182
+    },
+    {
+     "i": 76,
+     "type": "h2",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 77,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 99
+    },
+    {
+     "i": 78,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 104
+    },
+    {
+     "i": 79,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 135
+    },
+    {
+     "i": 80,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 83
+    },
+    {
+     "i": 81,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 137
+    },
+    {
+     "i": 82,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 83,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 134
+    },
+    {
+     "i": 84,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 85,
+     "type": "table-outro",
+     "lang": "de",
+     "chars": 69
+    },
+    {
+     "i": 86,
+     "type": "p",
+     "lang": "de",
+     "chars": 93
+    },
+    {
+     "i": 87,
+     "type": "p",
+     "lang": "de",
+     "chars": 87
+    },
+    {
+     "i": 88,
+     "type": "h2",
+     "lang": "de",
+     "chars": 45
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "text": "Drei Kriterien sind entscheidend: Echte Charge- oder Credit-Kreditkarte (keine Debit-/Prepaid-Karte): Vermieter erkennen das am Aufdruck Credit oder Charge. Reine Girokarten mit Kreditkarten-Logo (Debit Mastercard, Visa Debit) werden im Ausland oft abgelehnt. Ausreichendes Limit: Mindestens Kautionssumme plus 200 Euro Puffer. Mietwagen-Versicherungsleistung: Viele Premium-Kreditkarten (zum Beispiel. bestimmte Gold- oder Platin-Modelle) enthalten eine zusätzliche Mietwagen-Vollkasko. Achtung: Diese greift nur, wenn du die komplette Miete auch mit der betreffenden Karte bezahlst. Nach der Rückgabe: So wehrst du dich gegen ungerechtfertigte Abbuchungen. Sollte der Vermieter Wochen nach dem Urlaub plötzlich Beträge für angebliche Kratzer oder Tankdifferenz abbuchen, gehe so vor: Punkt 1: Fotos und Protokoll sichern: Du hast bei der Über- und Rücknahme dokumentiert, dass der Wagen in Ordnung war. Punkt 2: Schriftlich widersprechen: Fordere per E-Mail einen detaillierten Nachweis (Fotos, Gutachten, Tankbeleg) an. Punkt 3: Kreditkarten-Chargeback: Bei ungerechtfertigten Abbuchungen kannst du innerhalb von 120 Tagen über deine Kreditkartenfirma eine Rückbuchung beantragen. Punkt 4: Schlichtungsstelle anrufen: Bei ausländischen Anbietern hilft die europäische Schlichtungsstelle für Mietwagenstreitigkeiten (European Car Rental Conciliation Service). <!-- premium-length-2026 -->.",
+   "units": [
+    {
+     "i": 89,
+     "type": "p",
+     "lang": "de",
+     "chars": 33
+    },
+    {
+     "i": 90,
+     "type": "li",
+     "lang": "de",
+     "chars": 122
+    },
+    {
+     "i": 91,
+     "type": "li",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 92,
+     "type": "li",
+     "lang": "de",
+     "chars": 67
+    },
+    {
+     "i": 93,
+     "type": "li",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 94,
+     "type": "li",
+     "lang": "de",
+     "chars": 84
+    },
+    {
+     "i": 95,
+     "type": "li",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 96,
+     "type": "h2",
+     "lang": "de",
+     "chars": 73
+    },
+    {
+     "i": 97,
+     "type": "p",
+     "lang": "de",
+     "chars": 126
+    },
+    {
+     "i": 98,
+     "type": "li",
+     "lang": "de",
+     "chars": 118
+    },
+    {
+     "i": 99,
+     "type": "li",
+     "lang": "de",
+     "chars": 117
+    },
+    {
+     "i": 100,
+     "type": "li",
+     "lang": "de",
+     "chars": 160
+    },
+    {
+     "i": 101,
+     "type": "li",
+     "lang": "de",
+     "chars": 177
+    },
+    {
+     "i": 102,
+     "type": "p",
+     "lang": "de",
+     "chars": 29
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Kaution, Franchise, Kreditkarte: das Trio, das den Schalter entscheidet. Ohne Kaution heißt fast immer: Die Karte wird trotzdem autorisiert, nur niedriger, oder eine Vollkasko mit 0 Euro SB gegen Aufpreis. Ohne Kreditkarte bleibst du an vielen Schaltern draußen, Debit wird abgelehnt. Eine vernünftige Karte mit Mietwagen-Leistung (0 Euro Selbstbeteiligung bei Unfall) kostet 0 bis 69 Euro im Jahr. Die Karte schlägt damit die Schalter-Versicherung für 18 Euro pro Tag. Vor der Abholung: Licht, Glas, Reifen, Dach, Unterboden fotografieren, Tankstand, Kilometer. Bei Rückgabe dasselbe plus Bestätigung keine neuen Schäden. Unberechtigte Abbuchungen: erst Vermieter schriftlich, dann Kartenanbieter Chargeback, Fristen 8 bis 12 Wochen. Am günstigsten ist die Buchung, deren Rückgabe 12 Minuten dauert, weil du vorbereitet warst, nicht die, die im Banner 9 Euro pro Tag war und am Schalter 41 Euro wird. Bonus: Nebenkosten, die oft vergessen werden. Neben Kaution und Vollkasko gibt es Posten, die erst auf der Rechnung auftauchen: Einwegmiete (wenn du an einem anderen Ort zurückgibst), Grenzübertritt (z. B. Kroatien nach Bosnien), Winterreifenpauschale, Navigationsgerät, Kindersitz. Jeder dieser Punkte kostet 5 bis 15 Euro pro Tag und summiert sich schnell.",
+   "units": [
+    {
+     "i": 103,
+     "type": "h2",
+     "lang": "de",
+     "chars": 72
+    },
+    {
+     "i": 104,
+     "type": "p",
+     "lang": "de",
+     "chars": 132
+    },
+    {
+     "i": 105,
+     "type": "p",
+     "lang": "de",
+     "chars": 78
+    },
+    {
+     "i": 106,
+     "type": "p",
+     "lang": "de",
+     "chars": 113
+    },
+    {
+     "i": 107,
+     "type": "p",
+     "lang": "de",
+     "chars": 70
+    },
+    {
+     "i": 108,
+     "type": "p",
+     "lang": "de",
+     "chars": 92
+    },
+    {
+     "i": 109,
+     "type": "p",
+     "lang": "de",
+     "chars": 59
+    },
+    {
+     "i": 110,
+     "type": "p",
+     "lang": "de",
+     "chars": 111
+    },
+    {
+     "i": 111,
+     "type": "p",
+     "lang": "de",
+     "chars": 166
+    },
+    {
+     "i": 112,
+     "type": "h2",
+     "lang": "de",
+     "chars": 45
+    },
+    {
+     "i": 113,
+     "type": "p",
+     "lang": "de",
+     "chars": 156
+    },
+    {
+     "i": 114,
+     "type": "p",
+     "lang": "de",
+     "chars": 79
+    },
+    {
+     "i": 115,
+     "type": "p",
+     "lang": "de",
+     "chars": 75
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "text": "Mein Vorgehen: Vor der Buchung die Mietbedingungen als PDF speichern und nach Stichworten wie one-way, cross-border, Winter, young driver, additional driver suchen. Alles, was extra kostet, markieren und mit der Vergleichsseite abgleichen. Wer zu zweit fährt, braucht oft nur einen Zusatzfahrer, der zweite Fahrer für einen Tag ist günstiger als für die ganze Woche. Ein weiterer Hebel ist die Tankstrategie: Voll-Voll ist fair, Voll-Leer fast immer teurer, weil die Vermieter-Literpreise 30 bis 50 Cent über dem Markt liegen. Tanke 10 Kilometer vor Rückgabe an einer freien Station und hebe den Beleg auf, das Foto des Tankzettels neben dem Kilometerstand beendet jede Diskussion. Mein persönlicher Mallorca-Moment und was ich daraus gelernt habe. Vor drei Jahren stand ich in Palma am Schalter, müde vom Flug, Kind auf dem Arm, Schlange hinter mir. Die Mitarbeiterin lächelte und sagte: Ihr Limit reicht nicht. Ich hatte 1100 Euro Blockierung einkalkuliert, sie wollte 1400. Mein Girokonto hatte Deckung, die Kreditkarte nicht, weil das Hotel bereits 600 Euro reserviert hatte. Ergebnis: 45 Minuten Telefonat mit der Kartenhotline, Upgrade des Verfügungsrahmens, 25 Euro Express-Gebühr. Seitdem ist mein Ritual unverrückbar: Eine Woche vorher prüfe ich das Kartenlimit online und erhöhe es temporär auf 3000 Euro.",
+   "units": [
+    {
+     "i": 116,
+     "type": "p",
+     "lang": "de",
+     "chars": 164
+    },
+    {
+     "i": 117,
+     "type": "p",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 118,
+     "type": "p",
+     "lang": "de",
+     "chars": 126
+    },
+    {
+     "i": 119,
+     "type": "p",
+     "lang": "de",
+     "chars": 159
+    },
+    {
+     "i": 120,
+     "type": "p",
+     "lang": "de",
+     "chars": 154
+    },
+    {
+     "i": 121,
+     "type": "h2",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 122,
+     "type": "p",
+     "lang": "de",
+     "chars": 101
+    },
+    {
+     "i": 123,
+     "type": "p",
+     "lang": "de",
+     "chars": 125
+    },
+    {
+     "i": 124,
+     "type": "p",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 125,
+     "type": "p",
+     "lang": "de",
+     "chars": 108
+    },
+    {
+     "i": 126,
+     "type": "p",
+     "lang": "de",
+     "chars": 126
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "text": "Ich reserviere ein zweites Zahlungsmittel als Backup und speichere die Mietbedingungen offline. Außerdem liegt eine kleine Checkliste im Handschuhfach: Führerschein, Ausweis, Voucher, Kreditkarte, Tankbeleg, Protokoll, Notfallnummer. Diese Routine kostet zehn Minuten und verhindert jenen Stress, der den ersten Urlaubstag ruiniert. Sie funktioniert in Lissabon genauso wie in Heraklion oder Los Angeles. Das System ist überall gleich: Der Anbieter will Sicherheit, du willst Planbarkeit. Wer beides respektiert, fährt entspannt los. Glossar für die Mietwagen-Buchung: Begriffe, die dir am Schalter begegnen. CDW, Collision Damage Waiver, Basis-Absicherung mit hoher Selbstbeteiligung. SCDW, Super CDW, reduziert die Eigenbeteiligung gegen Aufpreis. LDW, Loss Damage Waiver, deckt Diebstahl und Verlust ab. TP, Theft Protection, Diebstahlschutz, oft separat ausgewiesen. PAI, Personal Accident Insurance, Insassenunfallschutz. PEC, Personal Effects Coverage, Gepäckschutz. FPO, Fuel Purchase Option, Tankvorauszahlung, meist ungünstig. Oneway-Fee, Aufschlag für Rückgabe an anderem Ort. Cross-Border-Fee, Gebühr für Grenzübertritt, etwa nach Slowenien oder Marokko. Young-Driver-Surcharge, Zuschlag für Fahrer unter 25. Senior-Fee, selten, aber bei manchen Anbietern über 75. Out-of-Hours, Aufpreis für Abholung außerhalb Öffnungszeiten. No-Show, Gebühr bei Nichterscheinen ohne Stornierung.",
+   "units": [
+    {
+     "i": 127,
+     "type": "p",
+     "lang": "de",
+     "chars": 95
+    },
+    {
+     "i": 128,
+     "type": "p",
+     "lang": "de",
+     "chars": 137
+    },
+    {
+     "i": 129,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 130,
+     "type": "p",
+     "lang": "de",
+     "chars": 71
+    },
+    {
+     "i": 131,
+     "type": "p",
+     "lang": "de",
+     "chars": 128
+    },
+    {
+     "i": 132,
+     "type": "h2",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 133,
+     "type": "li",
+     "lang": "de",
+     "chars": 76
+    },
+    {
+     "i": 134,
+     "type": "li",
+     "lang": "de",
+     "chars": 63
+    },
+    {
+     "i": 135,
+     "type": "li",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 136,
+     "type": "li",
+     "lang": "de",
+     "chars": 63
+    },
+    {
+     "i": 137,
+     "type": "li",
+     "lang": "de",
+     "chars": 55
+    },
+    {
+     "i": 138,
+     "type": "li",
+     "lang": "de",
+     "chars": 45
+    },
+    {
+     "i": 139,
+     "type": "li",
+     "lang": "de",
+     "chars": 62
+    },
+    {
+     "i": 140,
+     "type": "li",
+     "lang": "de",
+     "chars": 50
+    },
+    {
+     "i": 141,
+     "type": "li",
+     "lang": "de",
+     "chars": 78
+    },
+    {
+     "i": 142,
+     "type": "li",
+     "lang": "de",
+     "chars": 53
+    },
+    {
+     "i": 143,
+     "type": "li",
+     "lang": "de",
+     "chars": 55
+    },
+    {
+     "i": 144,
+     "type": "li",
+     "lang": "de",
+     "chars": 61
+    },
+    {
+     "i": 145,
+     "type": "li",
+     "lang": "de",
+     "chars": 53
+    }
+   ]
+  },
+  {
+   "index": 10,
+   "text": "Voucher, Buchungsbestätigung, die du am Schalter vorzeigst. Upgrade, Höherwertiges Fahrzeug, wenn gebuchte Klasse nicht verfügbar. Downgrade, Selten, aber möglich: kleinere Klasse, Erstattung verhandeln. Shuttle, Transfer vom Terminal zur Vermietstation, oft bei Billiganbietern. Depot, Abstellfläche außerhalb Flughafengelände, längerer Fußweg. Windschutzscheibe, Häufig ausgeschlossen, extra absichern. Unterboden, Ebenfalls oft ausgeschlossen, besonders bei Schotterpisten. Dach, Dachschäden sind Standard-Ausschluss, Fotos machen. Reifen, Bordsteinschäden zählen nicht als Unfall, sondern als Fahrlässigkeit. Schlüsselverlust, Kostet 200 bis 400 Euro, im Hotel Safe aufbewahren. Mautbox, In Portugal, Frankreich, Italien separat, sonst Bußgeld. Vignette, Österreich, Schweiz, Slowenien, online vorab kaufen. AdBlue, Bei Diesel-Fahrzeugen nachfüllen, sonst Werkstattkosten. Kilometerbegrenzung, 100 bis 200 Kilometer pro Tag, darüber 0,20 bis 0,50 Euro. Zusatzkilometer, Paket vorab günstiger als nachträglich. Kautionssplit, Manche Anbieter teilen Blockierung in zwei Teile. Pre-Authorization, Vorautorisierung, die dein Limit reduziert, ohne Abbuchung. Chargeback, Rückbuchung über Kartenanbieter bei unberechtigter Abbuchung. Conciliation, Schlichtung über europäische Mietwagen-Schlichtungsstelle. Dieses Vokabular hilft dir, die Klauseln im Kleingedruckten zu verstehen.",
+   "units": [
+    {
+     "i": 146,
+     "type": "li",
+     "lang": "de",
+     "chars": 59
+    },
+    {
+     "i": 147,
+     "type": "li",
+     "lang": "de",
+     "chars": 70
+    },
+    {
+     "i": 148,
+     "type": "li",
+     "lang": "de",
+     "chars": 72
+    },
+    {
+     "i": 149,
+     "type": "li",
+     "lang": "de",
+     "chars": 75
+    },
+    {
+     "i": 150,
+     "type": "li",
+     "lang": "de",
+     "chars": 65
+    },
+    {
+     "i": 151,
+     "type": "li",
+     "lang": "de",
+     "chars": 58
+    },
+    {
+     "i": 152,
+     "type": "li",
+     "lang": "de",
+     "chars": 71
+    },
+    {
+     "i": 153,
+     "type": "li",
+     "lang": "de",
+     "chars": 57
+    },
+    {
+     "i": 154,
+     "type": "li",
+     "lang": "de",
+     "chars": 77
+    },
+    {
+     "i": 155,
+     "type": "li",
+     "lang": "de",
+     "chars": 69
+    },
+    {
+     "i": 156,
+     "type": "li",
+     "lang": "de",
+     "chars": 65
+    },
+    {
+     "i": 157,
+     "type": "li",
+     "lang": "de",
+     "chars": 62
+    },
+    {
+     "i": 158,
+     "type": "li",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 159,
+     "type": "li",
+     "lang": "de",
+     "chars": 79
+    },
+    {
+     "i": 160,
+     "type": "li",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 161,
+     "type": "li",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 162,
+     "type": "li",
+     "lang": "de",
+     "chars": 78
+    },
+    {
+     "i": 163,
+     "type": "li",
+     "lang": "de",
+     "chars": 73
+    },
+    {
+     "i": 164,
+     "type": "li",
+     "lang": "de",
+     "chars": 72
+    },
+    {
+     "i": 165,
+     "type": "p",
+     "lang": "de",
+     "chars": 73
+    }
+   ]
+  },
+  {
+   "index": 11,
+   "text": "Am Schalter trittst du damit selbstbewusst auf und unterschreibst kein Extra-Paket, das nur die Marge erhöht. Kurzcheck vor Abflug: 90 Sekunden, die 200 Euro sparen. Limit geprüft? 3000 Euro temporär freigeschaltet. Voucher ausgedruckt und offline gespeichert. Führerschein, Personalausweis, Kreditkarte im Handgepäck. Mietbedingungen als PDF auf dem Handy. Fotos von Dach, Felgen, Frontscheibe, Tankstand, Kilometerstand. Rückgabezeit notiert, Tankstelle in Nähe markiert. Wer diese sechs Punkte abhakt, steht nicht im Stau der Nachverhandlungen. Du sitzt bald im klimatisierten Wagen auf dem Weg zur Unterkunft. Später hält die Abrechnung keine Überraschung bereit. Reise-Impulse: Warum ein Mietwagen mehr als Transport ist. Ein Mietwagen öffnet Türen zu Orten, die kein Bus erreicht: eine Küstenstraße in Portugal, ein Weingut in der Toskana, ein Aussichtspunkt über dem Fjord. Gerade wer mit Kindern reist, spart sich mit dem eigenen Wagen Umstiege, Wartezeiten und Gepäckstress. Wichtiger als das Ziel ist die Vorbereitung. Kennst du Kautionsregelung, Tankoption und Versicherung vorab, erlebst du die Reise entspannt. An die Reise erinnerst du dich noch, wenn die Abrechnung längst vergessen ist. Einen Mietwagen ohne Kaution zu buchen ist im Ausland selten möglich. Doch du kannst die Kaution durch kluge Tarifwahl auf 100 Euro bis 300 Euro drücken. So stellst du das Risiko auf null.",
+   "units": [
+    {
+     "i": 166,
+     "type": "p",
+     "lang": "de",
+     "chars": 109
+    },
+    {
+     "i": 167,
+     "type": "h2",
+     "lang": "de",
+     "chars": 55
+    },
+    {
+     "i": 168,
+     "type": "li",
+     "lang": "de",
+     "chars": 14
+    },
+    {
+     "i": 169,
+     "type": "li",
+     "lang": "de",
+     "chars": 34
+    },
+    {
+     "i": 170,
+     "type": "li",
+     "lang": "de",
+     "chars": 44
+    },
+    {
+     "i": 171,
+     "type": "li",
+     "lang": "de",
+     "chars": 57
+    },
+    {
+     "i": 172,
+     "type": "li",
+     "lang": "de",
+     "chars": 38
+    },
+    {
+     "i": 173,
+     "type": "li",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 174,
+     "type": "li",
+     "lang": "de",
+     "chars": 50
+    },
+    {
+     "i": 175,
+     "type": "p",
+     "lang": "de",
+     "chars": 139
+    },
+    {
+     "i": 176,
+     "type": "p",
+     "lang": "de",
+     "chars": 53
+    },
+    {
+     "i": 177,
+     "type": "h2",
+     "lang": "de",
+     "chars": 58
+    },
+    {
+     "i": 178,
+     "type": "p",
+     "lang": "de",
+     "chars": 153
+    },
+    {
+     "i": 179,
+     "type": "p",
+     "lang": "de",
+     "chars": 102
+    },
+    {
+     "i": 180,
+     "type": "p",
+     "lang": "de",
+     "chars": 139
+    },
+    {
+     "i": 181,
+     "type": "p",
+     "lang": "de",
+     "chars": 78
+    },
+    {
+     "i": 182,
+     "type": "p",
+     "lang": "de",
+     "chars": 69
+    },
+    {
+     "i": 183,
+     "type": "p",
+     "lang": "de",
+     "chars": 118
+    }
+   ]
+  },
+  {
+   "index": 12,
+   "text": "Dann steht einem entspannten Urlaub nichts mehr im Weg. Drei Regeln sind entscheidend: Vergleiche online. Buche mit Vollkasko ohne Selbstbeteiligung. Lehne Zusatzverkäufe am Schalter konsequent ab. Weiterlesen: Geld sparen im Alltag · Mehr Freiheit durch Verzicht · Pillar: Mietwagen und Reisen · Reisekrankenversicherung: Was wirklich schützt. Häufige Fragen. Gibt es Mietwagen wirklich ohne Kaution. In Einzelfällen bieten deutsche und einige westeuropäische Vermieter gegen einen geringen Aufpreis eine Kautionsbefreiung an (Zero Excess). In klassischen Urlaubsländern wie Spanien oder Italien ist eine komplette Kautionsbefreiung aber selten. Dort sinkt die Kaution auf 100 Euro bis 300 Euro für Tank und Zusatzkosten. Warum wird meine Debitkarte nicht akzeptiert. Viele Vermieter im Ausland fürchten, dass sie Schadensersatzansprüche nicht per Lastschrift einziehen können. Sie verlangen deshalb eine echte Kreditkarte mit Verfügungsrahmen. Steht auf deiner Karte Debit, handelt es sich um keine vollwertige Kreditkarte. Wie lange wird die Kaution blockiert. In der Regel wird die Blockierung innerhalb von 3 bis 21 Werktagen nach ordnungsgemäßer Rückgabe freigegeben. Bei Buchungen im Ausland kann dies in Einzelfällen bis zu 30 Tage dauern. Lohnt sich die Zusatzversicherung am Schalter.",
+   "units": [
+    {
+     "i": 184,
+     "type": "p",
+     "lang": "de",
+     "chars": 55
+    },
+    {
+     "i": 185,
+     "type": "p",
+     "lang": "de",
+     "chars": 93
+    },
+    {
+     "i": 186,
+     "type": "p",
+     "lang": "de",
+     "chars": 47
+    },
+    {
+     "i": 187,
+     "type": "p",
+     "lang": "de",
+     "chars": 146
+    },
+    {
+     "i": 188,
+     "type": "h2",
+     "lang": "de",
+     "chars": 15
+    },
+    {
+     "i": 189,
+     "type": "h3",
+     "lang": "de",
+     "chars": 40
+    },
+    {
+     "i": 190,
+     "type": "p",
+     "lang": "de",
+     "chars": 139
+    },
+    {
+     "i": 191,
+     "type": "p",
+     "lang": "de",
+     "chars": 104
+    },
+    {
+     "i": 192,
+     "type": "p",
+     "lang": "de",
+     "chars": 75
+    },
+    {
+     "i": 193,
+     "type": "h3",
+     "lang": "de",
+     "chars": 45
+    },
+    {
+     "i": 194,
+     "type": "p",
+     "lang": "de",
+     "chars": 109
+    },
+    {
+     "i": 195,
+     "type": "p",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 196,
+     "type": "p",
+     "lang": "de",
+     "chars": 79
+    },
+    {
+     "i": 197,
+     "type": "h3",
+     "lang": "de",
+     "chars": 37
+    },
+    {
+     "i": 198,
+     "type": "p",
+     "lang": "de",
+     "chars": 109
+    },
+    {
+     "i": 199,
+     "type": "p",
+     "lang": "de",
+     "chars": 73
+    },
+    {
+     "i": 200,
+     "type": "h3",
+     "lang": "de",
+     "chars": 46
+    }
+   ]
+  },
+  {
+   "index": 13,
+   "text": "Nein, in den meisten Fällen nicht. Die Super-Cover- oder Platin-Versicherung am Schalter kostet 15 Euro bis 25 Euro pro Tag. Diese Versicherung ist deutlich teurer als die online gebuchte Vollkasko. Oft überschneiden sich die Leistungen sogar. Was tun, wenn der Vermieter nach dem Urlaub abbucht. Sichere Belegfotos und Rücknahmeprotokoll, widersprich schriftlich mit Fristsetzung und beantrage notfalls ein Chargeback über deine Kreditkartenfirma. Bei grenzüberschreitenden Fällen hilft die europäische Schlichtungsstelle. Jetzt vergleichen und sparen: führt zu Mietwagen mit Vollkasko ohne Selbstbeteiligung vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
+    {
+     "i": 201,
+     "type": "p",
+     "lang": "de",
+     "chars": 124
+    },
+    {
+     "i": 202,
+     "type": "p",
+     "lang": "de",
+     "chars": 118
+    },
+    {
+     "i": 203,
+     "type": "h3",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 204,
+     "type": "p",
+     "lang": "de",
+     "chars": 151
+    },
+    {
+     "i": 205,
+     "type": "p",
+     "lang": "de",
+     "chars": 74
+    },
+    {
+     "i": 206,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 207,
+     "type": "p",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 208,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 209,
+     "type": "outro",
+     "lang": "de",
+     "chars": 66
+    }
+   ]
+  }
+ ]
+}

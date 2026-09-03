@@ -1,0 +1,800 @@
+{
+ "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+ "title": "WLAN verbessern: So bringst du stabilen Speed in jede Ecke",
+ "lang": "de",
+ "quality": {
+  "tier": "premium",
+  "rate": 0.93,
+  "maxChunk": 140
+ },
+ "units": 121,
+ "chars": 12331,
+ "parts": [
+  {
+   "index": 0,
+   "text": "WLAN verbessern: So bringst du stabilen Speed in jede Ecke. Ein Beitrag von FranksFinanzcheck. Hördauer etwa 8 Minuten. Kurzantwort: Um dein WLAN spürbar zu verbessern, platziere den Router zentral und frei auf mindestens 1 Meter Höhe, trenne 2,4-GHz- und 5-GHz-Frequenzbänder und nutze bei größeren Wohnungen ein modernes Mesh-System. Dadurch steigt die nutzbare Datenrate in abgelegenen Räumen oft von unter 20 Megabit pro Sekunde auf über 180 Megabit pro Sekunde. Du zahlst jeden Monat rund 45 Euro für einen schnellen Internetanschluss mit 100 oder 250 Megabit pro Sekunde. Doch im Arbeitszimmer ruckelt der Video-Call. Im Schlafzimmer bricht der 4K-Stream ständig ab? Das liegt in über 90 Prozent der Fälle nicht an der Leitung deines Providers. Meist fehlt es an Funkabdeckung in den eigenen vier Wänden. Dicke Wände, Fußbodenheizungen und elektromagnetische Störquellen bremsen das Signal massiv aus. Praxiserprobte Schritte zeigen dir, wie du dein WLAN verbessern kannst, von kostenlosen Sofort-Maßnahmen bis hin zu professionellen Mesh-Lösungen für maximale Netzstabilität im ganzen Haus. Tipp: Schnell-Tipp von FranksFinanzcheck: Prüfe jetzt, ob an deiner Adresse schnellere Tarife mit modernen Wi-Fi-6-Routern günstiger verfügbar sind: Kostenlos vergleichen (Dieser Artikel enthält Affiliate-Links (Werbung).",
+   "units": [
+    {
+     "i": 0,
+     "type": "intro",
+     "lang": "de",
+     "chars": 119
+    },
+    {
+     "i": 1,
+     "type": "callout",
+     "lang": "de",
+     "chars": 115
+    },
+    {
+     "i": 2,
+     "type": "callout",
+     "lang": "de",
+     "chars": 99
+    },
+    {
+     "i": 3,
+     "type": "callout",
+     "lang": "de",
+     "chars": 130
+    },
+    {
+     "i": 4,
+     "type": "p",
+     "lang": "de",
+     "chars": 156
+    },
+    {
+     "i": 5,
+     "type": "p",
+     "lang": "de",
+     "chars": 48
+    },
+    {
+     "i": 6,
+     "type": "p",
+     "lang": "de",
+     "chars": 137
+    },
+    {
+     "i": 7,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 8,
+     "type": "p",
+     "lang": "de",
+     "chars": 189
+    },
+    {
+     "i": 9,
+     "type": "p",
+     "lang": "de",
+     "chars": 54
+    },
+    {
+     "i": 10,
+     "type": "p",
+     "lang": "de",
+     "chars": 93
+    },
+    {
+     "i": 11,
+     "type": "p",
+     "lang": "de",
+     "chars": 72
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "text": "Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Die häufigsten WLAN-Bremsen im Haushalt. Bevor du bares Geld in neue Hardware investierst, lohnt sich eine gründliche Analyse der typischen Störfaktoren in der Wohnung: Schlechter Router-Standort: Steht der Router im geschlossenen Metallschrank, hinter dem Smart-TV oder auf dem Fußboden in der Zimmerecke, wird das Funksignal direkt am Entstehungsort absorbiert. Ein freier Standplatz steigert den Empfang um bis zu 40 Prozent. Störquellen aus dem 2,4-GHz-Band: Mikrowellen, schnurlose DECT-Telefone, Babyfone und Funkmäuse funken auf denselben Frequenzen und erzeugen messbare Paketverluste. Halte mindestens zwei Meter Abstand zu solchen Geräten ein. Kanal-Überlastung durch Nachbarn: In Mehrfamilienhäusern funken oft zwanzig Router auf demselben Funkkanal. Ein manueller Wechsel auf einen freien Funkkanal (zum Beispiel Kanal 1, 6 oder 11 im 2,4-GHz-Bereich) verdoppelt oft die effektive Datenrate. Wasser und Metall im Mauerwerk: Stahlbetondecken, Fußbodenheizungsrohre und große Wandspiegel dämpfen die Funkwellen um mehr als 70 Prozent. Drei Wege zu mehr Reichweite: Repeater versus. Powerline versus. Mesh. Um das Signal in verwinkelte Räume oder über mehrere Stockwerke zu transportieren, stehen drei grundlegend unterschiedliche Technologien zur Auswahl:",
+   "units": [
+    {
+     "i": 12,
+     "type": "p",
+     "lang": "de",
+     "chars": 98
+    },
+    {
+     "i": 13,
+     "type": "h2",
+     "lang": "de",
+     "chars": 40
+    },
+    {
+     "i": 14,
+     "type": "p",
+     "lang": "de",
+     "chars": 127
+    },
+    {
+     "i": 15,
+     "type": "li",
+     "lang": "de",
+     "chars": 194
+    },
+    {
+     "i": 16,
+     "type": "li",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 17,
+     "type": "li",
+     "lang": "de",
+     "chars": 164
+    },
+    {
+     "i": 18,
+     "type": "li",
+     "lang": "de",
+     "chars": 59
+    },
+    {
+     "i": 19,
+     "type": "li",
+     "lang": "de",
+     "chars": 107
+    },
+    {
+     "i": 20,
+     "type": "li",
+     "lang": "de",
+     "chars": 141
+    },
+    {
+     "i": 21,
+     "type": "li",
+     "lang": "de",
+     "chars": 140
+    },
+    {
+     "i": 22,
+     "type": "h2",
+     "lang": "de",
+     "chars": 70
+    },
+    {
+     "i": 23,
+     "type": "p",
+     "lang": "de",
+     "chars": 149
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "text": "Tabelle: Drei Wege zu mehr Reichweite: Repeater versus. Powerline versus. Mesh. Übersicht mit 5 Spalten und 3 Zeilen. Die Spalten lauten: Technologie, Anschaffungskosten, Latenz (Ping), Reale Datenrate, Empfehlung für. Einfacher WLAN-Repeater. Zeile 1 von 3. Anschaffungskosten: 20 bis 35 Euroo. Latenz (Ping): Mittel (erhöht). Reale Datenrate: 30 bis 50 Prozent des Originals. Empfehlung für: Kleine 2- bis 3-Zimmer-Wohnungen. Powerline (DLAN über Stromnetz). Zeile 2 von 3. Anschaffungskosten: 60 bis 120 Euroo. Latenz (Ping): Schwankend. Reale Datenrate: 50 bis 150 Megabit pro Sekunde. Empfehlung für: Dicke Altbauwände / über Stockwerke. Mesh-WLAN-System (zum Beispiel AVM / TP-Link). Zeile 3 von 3. Anschaffungskosten: 80 bis 180 Euroo. Latenz (Ping): Sehr niedrig (top). Reale Datenrate: bis zu 95 Prozent des Originals. Empfehlung für: Große Wohnungen und Einfamilienhäuser. Ende der Tabelle Drei Wege zu mehr Reichweite: Repeater versus. Powerline versus. Mesh. Ein einfacher Repeater halbiert technisch bedingt die Bandbreite, da er Datenpakete gleichzeitig empfangen und weiterleiten muss. Ein modernes Mesh-System hingegen spannt ein intelligentes Funknetz auf. Mehrere Zugangspunkte kommunizieren über ein eigenes Rückkanal-Band (Dedicated Backhaul) miteinander. So kannst du dich im ganzen Haus mit voller Datenrate bewegen.",
+   "units": [
+    {
+     "i": 24,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 117
+    },
+    {
+     "i": 25,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 100
+    },
+    {
+     "i": 26,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 158
+    },
+    {
+     "i": 27,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 28,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 161
+    },
+    {
+     "i": 29,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 30,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 134
+    },
+    {
+     "i": 31,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 104
+    },
+    {
+     "i": 32,
+     "type": "table-outro",
+     "lang": "de",
+     "chars": 87
+    },
+    {
+     "i": 33,
+     "type": "p",
+     "lang": "de",
+     "chars": 129
+    },
+    {
+     "i": 34,
+     "type": "p",
+     "lang": "de",
+     "chars": 72
+    },
+    {
+     "i": 35,
+     "type": "p",
+     "lang": "de",
+     "chars": 101
+    },
+    {
+     "i": 36,
+     "type": "p",
+     "lang": "de",
+     "chars": 62
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "text": "Der Einstieg in ein hochwertiges 2er-Mesh-Set kostet im Handel zwischen 80 Euro und 150 Euro. Es amortisiert sich durch dauerhaften Arbeits- und Streamingkomfort sofort. 5 Sofort-Tipps zur Optimierung deines Heimnetzwerks. Punkt 1: Router erhöht und zentral aufstellen: Platziere den Router in mindestens 1 Meter Höhe auf einem Regal oder Sideboard in einem zentralen Flur, um Hindernisse am Boden zu vermeiden. Punkt 2: 2,4-GHz- und 5-GHz-Netz trennen: Gib beiden Frequenzbändern in den Router-Einstellungen unterschiedliche Namen (SSIDs). Verbinde bandbreitenintensive Endgeräte wie Laptops und Smart-TVs mit dem schnellen 5-GHz-Band, während Smart-Home-Komponenten das weitreichende 2,4-GHz-Band nutzen. Punkt 3: Funkkanal automatisch optimieren: Moderne Router bieten eine automatische Kanalwahl, die regelmäßig prüft, welcher Frequenzbereich in der Nachbarschaft am geringsten ausgelastet ist. Punkt 4: Antennen präzise ausrichten: Besitzt dein Router externe Stabantennen, richte eine Antenne senkrecht nach oben und eine zweite im 45-Grad-Winkel aus, um sowohl horizontale als auch vertikale Funkwellen optimal abzustrahlen. Punkt 5: Regelmäßige Firmware-Updates installieren: Halte das Betriebssystem deines Routers stets auf dem neuesten Stand. Sicherheits-Patches und Optimierungen der Treiber bringen oft 10 bis 15 Prozent mehr Stabilität.",
+   "units": [
+    {
+     "i": 37,
+     "type": "p",
+     "lang": "de",
+     "chars": 93
+    },
+    {
+     "i": 38,
+     "type": "p",
+     "lang": "de",
+     "chars": 75
+    },
+    {
+     "i": 39,
+     "type": "h2",
+     "lang": "de",
+     "chars": 52
+    },
+    {
+     "i": 40,
+     "type": "li",
+     "lang": "de",
+     "chars": 188
+    },
+    {
+     "i": 41,
+     "type": "li",
+     "lang": "de",
+     "chars": 128
+    },
+    {
+     "i": 42,
+     "type": "li",
+     "lang": "de",
+     "chars": 165
+    },
+    {
+     "i": 43,
+     "type": "li",
+     "lang": "de",
+     "chars": 191
+    },
+    {
+     "i": 44,
+     "type": "li",
+     "lang": "de",
+     "chars": 79
+    },
+    {
+     "i": 45,
+     "type": "li",
+     "lang": "de",
+     "chars": 78
+    },
+    {
+     "i": 46,
+     "type": "li",
+     "lang": "de",
+     "chars": 73
+    },
+    {
+     "i": 47,
+     "type": "li",
+     "lang": "de",
+     "chars": 121
+    },
+    {
+     "i": 48,
+     "type": "li",
+     "lang": "de",
+     "chars": 96
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "text": "Wer zusätzlich generell sparen möchte: Unser Leitfaden Sparen im Herbst, die besten Spartipps zeigt, wo überall Geld liegen bleibt. Und wer zu einem modernen Provider mit Neukundenbonus wechselt, spart oft über 350 Euro in 24 Monaten. Oft spart das über 350 Euro in 24 Monaten. Vertiefende Praxisratschläge dazu findest du in unserem Leitfaden zum DSL-Wechselbonus und Prämien sowie in der Übersicht Günstigeres Internet durch Tarifvergleich. <!-- premium-length-2026 -->. Rechenbeispiel: Was ein Funkloch wirklich kostet. Ein 100-Megabit pro Sekunde-Anschluss für 34,99 Euro im Monat nützt wenig, wenn im Homeoffice nur 12 Megabit pro Sekunde ankommen. Videokonferenzen brechen ab, die Cloud-Sicherung dauert dreimal so lang, der Streaming-Stick wechselt auf 480p. Der effektive Preis pro nutzbarem Megabit steigt von 0,35 Euro auf fast 3 Euro. Drei realistische Wege, Stand 2026: Tabelle: Rechenbeispiel: Was ein Funkloch wirklich kostet. Übersicht mit 4 Spalten und 4 Zeilen. Die Spalten lauten: Lösung, Einmal-Kosten, Laufende Kosten, Wann sie greift. Router umstellen + Kanalwechsel. Zeile 1 von 4. Einmal-Kosten: 0 Euro. Laufende Kosten: 0 Euro. Wann sie greift: 1 bis 2 Zimmer, Sichtkontakt. Set-Repeater (kein Mesh). Zeile 2 von 4. Einmal-Kosten: 40 bis 80 Euroo. Laufende Kosten: 0 Euro. Wann sie greift: Eine Etage, eine tote Ecke.",
+   "units": [
+    {
+     "i": 49,
+     "type": "p",
+     "lang": "de",
+     "chars": 131
+    },
+    {
+     "i": 50,
+     "type": "p",
+     "lang": "de",
+     "chars": 145
+    },
+    {
+     "i": 51,
+     "type": "p",
+     "lang": "de",
+     "chars": 164
+    },
+    {
+     "i": 52,
+     "type": "p",
+     "lang": "de",
+     "chars": 29
+    },
+    {
+     "i": 53,
+     "type": "h2",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 54,
+     "type": "p",
+     "lang": "de",
+     "chars": 130
+    },
+    {
+     "i": 55,
+     "type": "p",
+     "lang": "de",
+     "chars": 111
+    },
+    {
+     "i": 56,
+     "type": "p",
+     "lang": "de",
+     "chars": 79
+    },
+    {
+     "i": 57,
+     "type": "p",
+     "lang": "de",
+     "chars": 35
+    },
+    {
+     "i": 58,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 59,
+     "type": "table-intro",
+     "lang": "de",
+     "chars": 76
+    },
+    {
+     "i": 60,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 142
+    },
+    {
+     "i": 61,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 142
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "text": "2er-Mesh (WLAN 6). Zeile 3 von 4. Einmal-Kosten: 150 bis 250 Euroo. Laufende Kosten: 0 Euro. Wann sie greift: Haus, mehrere Wände, Homeoffice. Powerline mit WLAN. Zeile 4 von 4. Einmal-Kosten: 70 bis 130 Euroo. Laufende Kosten: 0 Euro. Wann sie greift: Altbau mit dicken Wänden, Stromkreis zusammen. Ende der Tabelle Rechenbeispiel: Was ein Funkloch wirklich kostet. Ein Mesh-Set für 180 Euro, über 36 Monate gerechnet, kostet 5 Euro im Monat, weniger als eine einzige unnötige Router-Miete. Wer den Provider-Router für 5 bis 8 Euroo monatlich mietet und parallel Funklöcher hat, zahlt doppelt: einmal für Hardware, einmal für nicht gelieferte Leistung. Typische WLAN-Fehler, die Speed fressen. Router im Technikschrank. Holz, Metallgitter und ein Stapel Kartons dämpfen 5 GHz brutal. Frei, erhöht, möglichst zentral, das allein holt oft 30 bis 50 Prozent Reichweite zurück. 2,4 GHz und 5 GHz unter demselben Namen, ohne Band-Steering. Alte Geräte kleben am langsamen Band und ziehen das ganze Netz nach unten. Getrennte SSIDs (Zuhause und Zuhause-5G) geben dir die Kontrolle. Kanal 1, 6 oder 11 in einem Mehrfamilienhaus, in dem sechs Nachbarn dasselbe tun. Eine kostenlose Analyse-App zeigt die Belegung. Auf 5 GHz sind 36/40/44 oft leer, während 2,4 GHz überfüllt ist. Repeater, der das Signal halbiert. Ein klassischer Repeater nutzt dasselbe Radio zum Empfangen und Senden.",
+   "units": [
+    {
+     "i": 62,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 142
+    },
+    {
+     "i": 63,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 92
+    },
+    {
+     "i": 64,
+     "type": "table-row",
+     "lang": "de",
+     "chars": 63
+    },
+    {
+     "i": 65,
+     "type": "table-outro",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 66,
+     "type": "p",
+     "lang": "de",
+     "chars": 124
+    },
+    {
+     "i": 67,
+     "type": "p",
+     "lang": "de",
+     "chars": 161
+    },
+    {
+     "i": 68,
+     "type": "h2",
+     "lang": "de",
+     "chars": 40
+    },
+    {
+     "i": 69,
+     "type": "p",
+     "lang": "de",
+     "chars": 89
+    },
+    {
+     "i": 70,
+     "type": "p",
+     "lang": "de",
+     "chars": 89
+    },
+    {
+     "i": 71,
+     "type": "p",
+     "lang": "de",
+     "chars": 135
+    },
+    {
+     "i": 72,
+     "type": "p",
+     "lang": "de",
+     "chars": 65
+    },
+    {
+     "i": 73,
+     "type": "p",
+     "lang": "de",
+     "chars": 129
+    },
+    {
+     "i": 74,
+     "type": "p",
+     "lang": "de",
+     "chars": 64
+    },
+    {
+     "i": 75,
+     "type": "p",
+     "lang": "de",
+     "chars": 106
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "text": "Mesh mit Rückkanal oder eine LAN-Anbindung des zweiten Knotens vermeidet den Halbierungs-Effekt. Firmware von 2023. Sicherheitslücken und kaputte Mesh-Roaming-Profile. Einmal im Quartal im Router-Menü nach Updates sehen. Schritt-für-Schritt: vom Funkloch zum nutzbaren Homeoffice. Punkt 1: Messen, nicht schätzen. Speedtest per Kabel am Router, dann per WLAN am Schreibtisch, im Schlafzimmer, auf der Terrasse. Notiere Download, Upload, Ping. Alles unter 30 Prozent der Vertragswerte ist ein Funk- oder Leitungsproblem, beides musst du trennen. Punkt 2: Kabel-Referenz. Liegt der LAN-Test klar unter dem Vertrag, ist es der Anschluss (Provider anrufen, Entstörungsnummer, 14-Tage-Protokoll). Liegt LAN gut und WLAN schlecht, arbeitest du am Funk. Punkt 3: Position. Router auf Augenhöhe, weg von Mikrowelle, DECT-Basis und Bluetooth-Lautsprechern. Antennen senkrecht. Punkt 4: Kanal und Band. 5 GHz für Arbeitsgeräte, 2,4 GHz für Smarthome. DFS-Kanäle meiden, wenn die FritzBox ständig neu startet (Radar-Erkennung). Punkt 5: Mesh oder Powerline entscheiden. Mehr als zwei Wände aus Stein oder eine Etage dazwischen führt zu Mesh. Altbau mit Stahlträgern führt zu Powerline testen (im selben Stromkreis). Punkt 6: Gäste-WLAN an, IoT getrennt. Kameras und Staubsaugerroboter gehören nicht ins Arbeitsnetz.",
+   "units": [
+    {
+     "i": 76,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 77,
+     "type": "p",
+     "lang": "de",
+     "chars": 123
+    },
+    {
+     "i": 78,
+     "type": "h2",
+     "lang": "de",
+     "chars": 59
+    },
+    {
+     "i": 79,
+     "type": "li",
+     "lang": "de",
+     "chars": 129
+    },
+    {
+     "i": 80,
+     "type": "li",
+     "lang": "de",
+     "chars": 133
+    },
+    {
+     "i": 81,
+     "type": "li",
+     "lang": "de",
+     "chars": 24
+    },
+    {
+     "i": 82,
+     "type": "li",
+     "lang": "de",
+     "chars": 121
+    },
+    {
+     "i": 83,
+     "type": "li",
+     "lang": "de",
+     "chars": 54
+    },
+    {
+     "i": 84,
+     "type": "li",
+     "lang": "de",
+     "chars": 120
+    },
+    {
+     "i": 85,
+     "type": "li",
+     "lang": "de",
+     "chars": 72
+    },
+    {
+     "i": 86,
+     "type": "li",
+     "lang": "de",
+     "chars": 75
+    },
+    {
+     "i": 87,
+     "type": "li",
+     "lang": "de",
+     "chars": 113
+    },
+    {
+     "i": 88,
+     "type": "li",
+     "lang": "de",
+     "chars": 73
+    },
+    {
+     "i": 89,
+     "type": "li",
+     "lang": "de",
+     "chars": 99
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Punkt 7: Nach 7 Tagen erneut messen. Dieselbe Uhrzeit, dieselben drei Orte. Nur Zahlen beweisen, dass die Maßnahme wirkt. Was Mesh, Repeater und Powerline 2026 konkret unterscheiden. Mesh-Systeme (WLAN 6/6E) halten eine gemeinsame SSID und reichen Clients an den stärkeren Knoten weiter, ohne dass Zoom abbricht. Repeater tun das oft nicht, das Handy bleibt am schwachen Knoten hängen. Powerline hängt an der Hausverkabelung: Unterputz-LED-Netzteile und FI-Schalter können den Durchsatz auf 20 bis 40 Megabit pro Sekunde drücken, selbst wenn die Packung 1200 Megabit pro Sekunde verspricht. Deshalb immer mit Rückgaberecht kaufen und 48 Stunden im Zielfunkloch testen. Wer Glasfaser mit 300 Megabit pro Sekunde oder mehr hat, sollte den zweiten Mesh-Knoten per LAN-Kabel anbinden (Backhaul). Dann bleibt das Funkspektrum den Geräten, und du holst im Homeoffice endlich das, wofür du den Tarif bezahlst. Fazit: Mit wenigen Handgriffen zum Highspeed-WLAN. Mit den richtigen Anpassungen musst du dich nicht mit Funklöchern oder endlos puffernden Videos abfinden. Häufig reichen bereits ein optimierter Router-Standort und die getrennte Vergabe der Funkbänder aus, um das WLAN zu verbessern. Für größere Immobilien ist die Investition in ein Mesh-Set der zuverlässigste Garant für unterbrechungsfreies Arbeiten und Home Entertainment.",
+   "units": [
+    {
+     "i": 90,
+     "type": "li",
+     "lang": "de",
+     "chars": 121
+    },
+    {
+     "i": 91,
+     "type": "h2",
+     "lang": "de",
+     "chars": 60
+    },
+    {
+     "i": 92,
+     "type": "p",
+     "lang": "de",
+     "chars": 129
+    },
+    {
+     "i": 93,
+     "type": "p",
+     "lang": "de",
+     "chars": 72
+    },
+    {
+     "i": 94,
+     "type": "p",
+     "lang": "de",
+     "chars": 204
+    },
+    {
+     "i": 95,
+     "type": "p",
+     "lang": "de",
+     "chars": 77
+    },
+    {
+     "i": 96,
+     "type": "p",
+     "lang": "de",
+     "chars": 122
+    },
+    {
+     "i": 97,
+     "type": "p",
+     "lang": "de",
+     "chars": 110
+    },
+    {
+     "i": 98,
+     "type": "h2",
+     "lang": "de",
+     "chars": 50
+    },
+    {
+     "i": 99,
+     "type": "p",
+     "lang": "de",
+     "chars": 105
+    },
+    {
+     "i": 100,
+     "type": "p",
+     "lang": "de",
+     "chars": 127
+    },
+    {
+     "i": 101,
+     "type": "p",
+     "lang": "de",
+     "chars": 142
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "text": "Weiterlesen: Pillar Internet und DSL · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag · DSL Vergleich: So findest du günstigeres Internet. Häufige Fragen. Was ist der Unterschied zwischen 2,4 GHz und 5 GHz. Das 2,4-GHz-Band hat eine hohe Reichweite und durchdringt dicke Wände besser, bietet jedoch geringere Maximalgeschwindigkeiten. Das 5-GHz-Band bietet extrem hohe Datenraten bei minimalen Störungen, verliert aber schneller an Reichweite bei Hindernissen. Wo sollte der WLAN-Repeater idealerweise platziert werden. Platziere den Repeater genau auf halber Strecke zwischen deinem Router und dem Zimmer mit schlechtem Empfang. Er benötigt eine ausreichend starke Signalstärke vom Basis-Router, um effektiv verstärken zu können. Was bringt der moderne Standard Wi-Fi 6 oder Wi-Fi 7. Neuere Wi-Fi-Generationen nutzen MU-MIMO und OFDMA, wodurch dutzende Smartphones, Smart-TVs und Tablets gleichzeitig ohne Geschwindigkeitsverlust und mit minimaler Verzögerung bedient werden können. Warum sinkt die WLAN-Geschwindigkeit abends oft spürbar ab. In Mehrfamilienhäusern schalten abends viele Nachbarn ihre Router und Streaming-Geräte ein. Die gegenseitigen Funkinterferenzen belasten die gemeinsamen Funkkanäle spürbar. Kann ein alter Router schnelle Internetanschlüsse ausbremsen.",
+   "units": [
+    {
+     "i": 102,
+     "type": "p",
+     "lang": "de",
+     "chars": 151
+    },
+    {
+     "i": 103,
+     "type": "h2",
+     "lang": "de",
+     "chars": 15
+    },
+    {
+     "i": 104,
+     "type": "h3",
+     "lang": "de",
+     "chars": 51
+    },
+    {
+     "i": 105,
+     "type": "p",
+     "lang": "de",
+     "chars": 127
+    },
+    {
+     "i": 106,
+     "type": "p",
+     "lang": "de",
+     "chars": 125
+    },
+    {
+     "i": 107,
+     "type": "h3",
+     "lang": "de",
+     "chars": 58
+    },
+    {
+     "i": 108,
+     "type": "p",
+     "lang": "de",
+     "chars": 109
+    },
+    {
+     "i": 109,
+     "type": "p",
+     "lang": "de",
+     "chars": 100
+    },
+    {
+     "i": 110,
+     "type": "h3",
+     "lang": "de",
+     "chars": 53
+    },
+    {
+     "i": 111,
+     "type": "p",
+     "lang": "de",
+     "chars": 198
+    },
+    {
+     "i": 112,
+     "type": "h3",
+     "lang": "de",
+     "chars": 59
+    },
+    {
+     "i": 113,
+     "type": "p",
+     "lang": "de",
+     "chars": 91
+    },
+    {
+     "i": 114,
+     "type": "p",
+     "lang": "de",
+     "chars": 80
+    },
+    {
+     "i": 115,
+     "type": "h3",
+     "lang": "de",
+     "chars": 61
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "text": "Ja. Ältere Router ohne Gigabit-LAN-Ports schöpfen 100 bis 250 Megabit pro Sekunde nicht voll aus. Diese Router sind ein gravierender Flaschenhals. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
+    {
+     "i": 116,
+     "type": "p",
+     "lang": "de",
+     "chars": 146
+    },
+    {
+     "i": 117,
+     "type": "p",
+     "lang": "de",
+     "chars": 66
+    },
+    {
+     "i": 118,
+     "type": "p",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 119,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 120,
+     "type": "outro",
+     "lang": "de",
+     "chars": 66
+    }
+   ]
+  }
+ ]
+}
