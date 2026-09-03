@@ -121,11 +121,44 @@
     transition: width .25s ease;
 }
 
-/* ---------- Live-Markierung des vorgelesenen Absatzes ---------- */
+/* ---------- Live-Markierung für Absätze, Überschriften & Listen ---------- */
 .ff-reader-active {
     background: color-mix(in srgb, var(--ff-yellow, #FFB300) 15%, transparent);
     box-shadow: inset 3px 0 0 var(--ff-yellow, #FFB300);
     border-radius: 6px;
+    transition: background-color .2s ease, box-shadow .2s ease;
+}
+
+/* ---------- Barrierefreie Live-Markierung für Tabellen & Übersichten ---------- */
+tr.ff-reader-active {
+    background-color: color-mix(in srgb, var(--ff-yellow, #FFB300) 24%, var(--entry, #fff)) !important;
+    box-shadow: inset 4px 0 0 var(--ff-emerald, #0E5A43);
+    border-radius: 4px;
+    transition: background-color .2s ease, box-shadow .2s ease;
+}
+
+tr.ff-reader-active td,
+tr.ff-reader-active th {
+    background-color: transparent !important;
+    color: var(--primary, #2e2e33) !important;
+}
+
+table.ff-reader-active,
+.ff-table-scroll.ff-reader-active {
+    outline: 2px solid var(--ff-yellow, #FFB300);
+    outline-offset: 3px;
+    border-radius: 8px;
+    transition: outline .2s ease;
+}
+
+.ff-tarif-card.ff-reader-active,
+.ff-einspar-box.ff-reader-active,
+.ff-kurzantwort.ff-reader-active,
+.ff-korrektur.ff-reader-active,
+.callout.ff-reader-active {
+    background-color: color-mix(in srgb, var(--ff-yellow, #FFB300) 18%, var(--entry, #fff)) !important;
+    box-shadow: inset 4px 0 0 var(--ff-emerald, #0E5A43), 0 6px 20px rgba(14, 90, 67, .12) !important;
+    border-radius: 8px;
     transition: background-color .2s ease, box-shadow .2s ease;
 }
 
