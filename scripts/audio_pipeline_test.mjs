@@ -386,6 +386,70 @@ t.group('5) Aussprache-Normalisierung (Direkttest der Engine)');
 }
 
 /* ================================================================== */
+/* 6) Dauer-Plausibilität der gerenderten Teile                       */
+/* ================================================================== */
+t.group('6) Sprechdauer je Teil (Plausibilität)');
+{
+  /* Warum diese Prüfung nötig ist:
+     Die Sprechtexte werden von Hand in die Render-Aufrufe übertragen.
+     Ein vertippter oder abgeschnittener Text wäre still in die Fassung
+     gewandert – die Zeitkarte würde trotzdem „korrekt" aussehen, weil
+     sie die Dauer aus dem Rahmenstrom misst und die Positionen nur
+     anteilig nach Zeichenzahl verteilt. Ein Vergleich von gemessener
+     Dauer gegen die erwartete Sprechzeit macht so etwas sichtbar.
+
+     Die Konstanten stammen aus einem Kleinste-Quadrate-Fit über die
+     acht Teile des ersten fertigen Artikels (3 Parameter, 8 Messpunkte).
+     Eine Ziffer kostet dort 7,4-mal so viel Sprechzeit wie ein Buchstabe
+     („20000" wird zu „zwanzigtausend"), plus rund 5,8 s Fixkosten je
+     Äußerung. Die Toleranz ist bewusst weit: Die größte beobachtete
+     Abweichung liegt bei 7,6 %, ±25 % fängt also echte Fehler
+     (falscher oder verstümmelter Text), nicht natürliches Sprechrhythmus-
+     Rauschen. */
+  const FIX = 5.82, PRO_BUCHSTABE = 0.056006, PRO_ZIFFER = 0.4494, TOL = 0.25;
+
+  const partsRoot = path.join(ROOT, 'static', 'audio', 'parts');
+  const slugs = fs.existsSync(partsRoot)
+    ? fs.readdirSync(partsRoot).filter((s) => fs.statSync(path.join(partsRoot, s)).isDirectory())
+    : [];
+
+  let geprueft = 0;
+  for (const slug of slugs) {
+    const dir = path.join(partsRoot, slug);
+    const mp3s = fs.readdirSync(dir).filter((f) => f.endsWith('.mp3'));
+    if (!mp3s.length) continue;
+    const chunksPath = path.join(ROOT, 'data', 'audio', `${slug}.chunks.json`);
+    if (!fs.existsSync(chunksPath)) {
+      t.ok(false, `${slug}: Chunks-Datei fehlt`);
+      continue;
+    }
+    const chunks = JSON.parse(fs.readFileSync(chunksPath, 'utf8'));
+
+    for (const f of mp3s) {
+      const idx = parseInt(f.replace(/\.mp3$/, ''), 10) - 1;
+      const teil = chunks.parts[idx];
+      if (!teil) { t.ok(false, `${slug}/${f}: kein zugehöriger Chunk`); continue; }
+
+      const buf = fs.readFileSync(path.join(dir, f));
+      const w = walk(trimId3v1(buf.subarray(skipId3v2(buf))), 0);
+
+      t.eq(w.resyncs, 0, `${slug}/${f}: Rahmenstrom lückenlos (${w.frames} Rahmen)`);
+      t.ok(w.seconds > 1, `${slug}/${f}: enthält hörbare Sprache (${w.seconds.toFixed(1)} s)`);
+
+      const ziffern = (teil.text.match(/\d/g) || []).length;
+      const erwartet = FIX + (teil.text.length - ziffern) * PRO_BUCHSTABE + ziffern * PRO_ZIFFER;
+      const abw = Math.abs(w.seconds - erwartet) / erwartet;
+      geprueft++;
+      t.ok(abw <= TOL,
+        `${slug}/${f}: Dauer ${w.seconds.toFixed(1)} s passt zum Text (${erwartet.toFixed(1)} s erwartet)`,
+        `Abweichung ${(abw * 100).toFixed(1)} % > ${TOL * 100} % – Text möglicherweise falsch übertragen`);
+    }
+  }
+  if (!geprueft) console.log('  ℹ️  Noch keine Teile gerendert – Gruppe übersprungen.');
+  else console.log(`  ℹ️  ${geprueft} gerenderte Teile gegen die erwartete Sprechzeit geprüft.`);
+}
+
+/* ================================================================== */
 console.log(`\n=== Audio-Pipeline — Ergebnis: ${pass} grün, ${fails.length} rot ===`);
 if (fails.length) {
   console.log('\nFehlgeschlagene Prüfungen:');
