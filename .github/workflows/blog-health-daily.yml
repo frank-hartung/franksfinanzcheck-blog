@@ -26,6 +26,17 @@ jobs:
       # Selbsttest (Gate muss lauffähig sein) + Selbstheilung (Zurückstufung
       # + Re-Queue) + Titel-Gate (R1–R5) + Cover-Gate (Varianten, Stale,
       # Brand, C4 Text-Komplettheit). Heilungen landen im Commit unten.
+
+      # URL-HYGIENE (PREMIUM-FIX 03.09.2026): R8-URL-LEERZEICHEN ist die
+      # Fehlerklasse, die am 02.09.2026 einen fertigen Artikel am Publish-
+      # Gate gestoppt hat (Tag: 1 statt 2–3 LIVE). Die Wache heilt solche
+      # URLs deterministisch und entblockt ausschließlich dadurch gehaltene
+      # Posts (Re-Queue) – VOR der Kadenz-Heilung, damit eine Promotion am
+      # Publikationstag auf sauberem Content aufbaut.
+      - run: python3 scripts/fix_url_hygiene.py --selftest
+      - run: python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
+      - run: python3 scripts/fix_url_hygiene.py --heal-holds
+
       - run: python3 scripts/cadence_guard.py --selftest
       - run: python3 scripts/cadence_guard.py --fix
       - run: python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate – Funde im Log (R5 heilt nicht automatisch)"
