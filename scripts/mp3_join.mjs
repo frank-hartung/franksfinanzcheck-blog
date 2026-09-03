@@ -20,6 +20,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { formatDuration } from './mp3_info.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
@@ -47,6 +48,49 @@ function skipId3v2(buf, offset = 0) {
   const size = ((buf[offset + 6] & 0x7f) << 21) | ((buf[offset + 7] & 0x7f) << 14)
     | ((buf[offset + 8] & 0x7f) << 7) | (buf[offset + 9] & 0x7f);
   return offset + 10 + size;
+}
+
+/**
+ * Länge des Xing/Info-Kopfs am Dateianfang – oder 0.
+ *
+ * Jede von der Sprachausgabe gelieferte Teil-Datei beginnt mit einem
+ * Xing- bzw. Info-Rahmen, der Rahmenzahl und Bytezahl DIESER Datei
+ * nennt. Bleibt er beim Zusammenfügen stehen, behauptet der Verbund
+ * weiterhin die Maße des ersten Teils: Abspieler zeigen dann 1:22 min
+ * statt 11:00 min und springen an falsche Stellen. Der Rahmen wird
+ * deshalb entfernt – der verbleibende Strom ist durchgehend CBR,
+ * woraus Browser die Dauer selbst korrekt ableiten.
+ */
+function xingHeaderLength(buf, from, to) {
+  if (from + 4 > to) return 0;
+  const b0 = buf[from]; const b1 = buf[from + 1]; const b2 = buf[from + 2];
+  if (b0 !== 0xff || (b1 & 0xe0) !== 0xe0) return 0;
+
+  const versionBits = (b1 >> 3) & 0x03;
+  const layerBits = (b1 >> 1) & 0x03;
+  if (versionBits === 1 || layerBits === 0) return 0;
+
+  const bitrateIdx = (b2 >> 4) & 0x0f;
+  const rateIdx = (b2 >> 2) & 0x03;
+  const padding = (b2 >> 1) & 0x01;
+  if (bitrateIdx === 0 || bitrateIdx === 15 || rateIdx === 3) return 0;
+
+  const isV1 = versionBits === 3;
+  const br = (isV1 ? BITRATES.v1 : BITRATES.v2)[bitrateIdx];
+  const sr = (isV1 ? SAMPLERATES.v1 : (versionBits === 2 ? SAMPLERATES.v2 : SAMPLERATES.v25))[rateIdx];
+  if (!br || !sr) return 0;
+
+  const frameLen = Math.floor(((isV1 ? 144 : 72) * br * 1000) / sr) + padding;
+  if (frameLen <= 0 || from + frameLen > to) return 0;
+
+  /* Die Kennung steht nicht an fester Stelle: je nach Version, Layer und
+     Kanälen verschiebt der Seiteninformation-Block sie. Deshalb den
+     Rahmen absuchen. */
+  for (let i = from + 4; i < from + frameLen - 4; i++) {
+    const tag = buf.toString('latin1', i, i + 4);
+    if (tag === 'Xing' || tag === 'Info') return frameLen;
+  }
+  return 0;
 }
 
 /** Entfernt einen ID3v1-Tag (128 Byte, „TAG") am Dateiende. */
@@ -140,10 +184,17 @@ const pieces = [];
 const partDurations = [];
 let totalBytes = 0;
 
+let xingRemoved = 0;
+
 for (const file of inputs) {
   const buf = fs.readFileSync(file);
-  const start = skipId3v2(buf, 0);
+  let start = skipId3v2(buf, 0);
   const end = trimId3v1(buf, buf.length);
+
+  // Xing/Info-Kopf des Teils entfernen (siehe xingHeaderLength)
+  const xing = xingHeaderLength(buf, start, end);
+  if (xing) { start += xing; xingRemoved++; }
+
   const info = analyse(buf, start, end);
   if (!info.frames) {
     console.error(`❌ ${file}: keine gültigen MPEG-Audio-Frames gefunden`);
@@ -195,7 +246,7 @@ const timemap = {
   lang: chunks.lang,
   file: `/audio/${slug}.mp3`,
   durationSeconds: Number(cursor.toFixed(2)),
-  durationLabel: fmt(cursor),
+  durationLabel: formatDuration(cursor),
   parts: chunks.parts.map((p, i) => ({
     index: p.index,
     seconds: Number(partDurations[i].toFixed(2)),
@@ -214,10 +265,7 @@ fs.writeFileSync(path.join(ROOT, 'static', 'audio', `${slug}.timemap.json`), JSO
 
 const sizeMb = (fs.statSync(outPath).size / (1024 * 1024)).toFixed(2);
 console.log(`✅ ${slug}: ${inputs.length} Teile → ${outPath}`);
-console.log(`   Dauer ${timemap.durationLabel} · ${sizeMb} MB · ${sectionTimes.length} Zeitstempel`);
+console.log(`   Dauer ${timemap.durationLabel} · ${sizeMb} MB · ${sectionTimes.length} Zeitstempel · ${xingRemoved} Xing-Köpfe entfernt`);
 
-function fmt(sec) {
-  const m = Math.floor(sec / 60);
-  const s = Math.round(sec % 60);
-  return `${m}:${String(s).padStart(2, '0')} min`;
-}
+/* formatDuration() liegt in mp3_info.mjs, damit der Test sie direkt
+   aufrufen kann – auch für Längen, die im Selbsttest nicht vorkommen. */

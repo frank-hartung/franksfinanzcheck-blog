@@ -30,3 +30,6 @@ __pycache__/
 # Test-Venvs (lokal, 26.08.2026)
 .venv-test/
 .venv/
+
+# Audio-Zwischenteile: nur die verbundene Fassung wird veroeffentlicht
+static/audio/parts/
