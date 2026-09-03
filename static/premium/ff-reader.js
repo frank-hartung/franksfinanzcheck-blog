@@ -1665,7 +1665,16 @@
           speakText = listTexts.listItemNum.replace('{n}', idx) + ' ' + text;
         }
       }
-      if (/^H[234]$/.test(el.tagName)) speakText = text.replace(/[?!.]*$/, '') + '.';
+      /* Überschriften enden im Satzbaum meist ohne Punkt – gesprochen
+         brauchen sie einen, sonst klingt die Anmoderation abgehackt.
+         Eine Frage bleibt aber eine Frage: Wird das Fragezeichen zum
+         Punkt, spricht die Stimme sie als Feststellung („Kann mir das
+         Gas abgestellt werden." statt „…werden?"). Genau so stehen die
+         FAQ-Überschriften in den Artikeln. */
+      if (/^H[234]$/.test(el.tagName)) {
+        var heading = text.replace(/[\s?!.…]+$/, '');
+        speakText = heading + (/\?\s*$/.test(text) ? '?' : '.');
+      }
 
       out.push({ el: el, text: speakText, lang: elLang, type: type });
     });

@@ -7,8 +7,8 @@
   "rate": 0.93,
   "maxChunk": 140
  },
- "units": 107,
- "chars": 10192,
+ "units": 105,
+ "chars": 10100,
  "parts": [
   {
    "index": 0,
@@ -318,7 +318,7 @@
   },
   {
    "index": 4,
-   "text": "Strom- und Gastarif optimieren. Zeile 3 von 6. Zeitaufwand: 20 Minuten. Typische Ersparnis: 300 bis 450 Euroo. Privathaftpflicht und Hausrat anpassen. Zeile 4 von 6. Zeitaufwand: 25 Minuten. Typische Ersparnis: 80 bis 150 Euroo. Saisonales Einkaufen und Kochen. Zeile 5 von 6. Zeitaufwand: fortlaufend. Typische Ersparnis: 150 bis 250 Euroo. Gesamtes Einsparpotenzial. Zeile 6 von 6. Zeitaufwand: circa 2 Stunden. Typische Ersparnis: bis zu 1440 Euro. Ende der Tabelle Spartipps im Jahresüberblick. <!-- premium-length-2026 -->. Herbst als Kassensturz, nicht als Konsum-Saison. Der Kalender schiebt dir Halloween, Black Friday und Weihnachten in drei Monate. Wer im September kein Budget für Dezember hat, zahlt im Januar Dispo. Deshalb ist der Herbst der passende Moment für den Jahres-Schnitt, nicht der 1. Januar, wenn die Motivation schon verbraucht ist. Fixkosten-Nachmittag. Strom, Gas, DSL, Mobilfunk, Haftpflicht, Giro. Alles, was älter als 12 Monate ist, in den Vergleich. Ziel: 30 bis 80 Euroo im Monat, die du in den Weihnachtstopf oder den Tagesgeld-Notgroschen schiebst. Kleidung und Sport. Second-Hand für Herbstjacken, Skischuhe leihen statt kaufen, wenn du drei Tage in den Alpen bist. Kosten pro Nutzung. Heizen vorbereiten. Entlüften, Dichtungen, Tarif. Das ist der größte saisonale Hebel, größer als jedes 20-Prozent-Coupon-Event.",
+   "text": "Strom- und Gastarif optimieren. Zeile 3 von 6. Zeitaufwand: 20 Minuten. Typische Ersparnis: 300 bis 450 Euroo. Privathaftpflicht und Hausrat anpassen. Zeile 4 von 6. Zeitaufwand: 25 Minuten. Typische Ersparnis: 80 bis 150 Euroo. Saisonales Einkaufen und Kochen. Zeile 5 von 6. Zeitaufwand: fortlaufend. Typische Ersparnis: 150 bis 250 Euroo. Gesamtes Einsparpotenzial. Zeile 6 von 6. Zeitaufwand: circa 2 Stunden. Typische Ersparnis: bis zu 1440 Euro. Ende der Tabelle Spartipps im Jahresüberblick. Herbst als Kassensturz, nicht als Konsum-Saison. Der Kalender schiebt dir Halloween, Black Friday und Weihnachten in drei Monate. Wer im September kein Budget für Dezember hat, zahlt im Januar Dispo. Deshalb ist der Herbst der passende Moment für den Jahres-Schnitt, nicht der 1. Januar, wenn die Motivation schon verbraucht ist. Fixkosten-Nachmittag. Strom, Gas, DSL, Mobilfunk, Haftpflicht, Giro. Alles, was älter als 12 Monate ist, in den Vergleich. Ziel: 30 bis 80 Euroo im Monat, die du in den Weihnachtstopf oder den Tagesgeld-Notgroschen schiebst. Kleidung und Sport. Second-Hand für Herbstjacken, Skischuhe leihen statt kaufen, wenn du drei Tage in den Alpen bist. Kosten pro Nutzung. Heizen vorbereiten. Entlüften, Dichtungen, Tarif. Das ist der größte saisonale Hebel, größer als jedes 20-Prozent-Coupon-Event. Lebensmittel. Saisonales Gemüse, Einkochen, was du wirklich isst.",
    "units": [
     {
      "i": 47,
@@ -352,135 +352,135 @@
     },
     {
      "i": 52,
-     "type": "p",
-     "lang": "de",
-     "chars": 29
-    },
-    {
-     "i": 53,
      "type": "h2",
      "lang": "de",
      "chars": 48
     },
     {
-     "i": 54,
+     "i": 53,
      "type": "p",
      "lang": "de",
      "chars": 80
     },
     {
-     "i": 55,
+     "i": 54,
      "type": "p",
      "lang": "de",
      "chars": 69
     },
     {
-     "i": 56,
+     "i": 55,
      "type": "p",
      "lang": "de",
      "chars": 129
     },
     {
-     "i": 57,
+     "i": 56,
      "type": "p",
      "lang": "de",
      "chars": 122
     },
     {
-     "i": 58,
+     "i": 57,
      "type": "p",
      "lang": "de",
      "chars": 101
     },
     {
-     "i": 59,
+     "i": 58,
      "type": "p",
      "lang": "de",
      "chars": 137
+    },
+    {
+     "i": 59,
+     "type": "p",
+     "lang": "de",
+     "chars": 127
     },
     {
      "i": 60,
      "type": "p",
      "lang": "de",
-     "chars": 127
+     "chars": 65
     }
    ]
   },
   {
    "index": 5,
-   "text": "Lebensmittel. Saisonales Gemüse, Einkochen, was du wirklich isst. Ein Glas, das zwei Jahre im Keller steht, ist kein Spartipp, sondern vergessenes Kapital. Black Friday ohne Nachzahlung. Liste vor dem Event: nur Dinge, die schon auf der 30-Tage-Wunschliste stehen. Preis 30 Tage vorher notieren, viele −40 Prozent sind der Preis von Mitte Oktober. Cashback nur auf der Liste, nicht als Freibrief. Bezahlmittel ohne Dispo. Weihnachten: Budget pro Person vorher, Umschläge oder ein Unterkonto. Selbst gemachte Dinge zählen mit Materialkosten, nicht mit 0 Euro, sonst unterschätzt du den Dezember. Wenn der Herbst so läuft, startest du ins neue Jahr mit Puffer statt mit Rechnungen, die du im Goldenen Oktober hättest vermeiden können. <!-- premium-length-2026-b -->. Weihnachtskonto im September. Ein Unterkonto oder Umschlag Dezember ab 1.9: 4 mal 50 bis 150 Euroo je nach Haushalt. Geschenke, Bahn, Essen. Was im Umschlag ist, darf raus. Was nicht drin ist, wird nicht per Dispo geholt. Das ist langweiliger als Black Friday und verhindert den Januar, in dem jeder Spartipp zu spät kommt. Parallel: Energie- und DSL-Vergleich im selben Monat, Ertrag auf dasselbe Konto. Der Herbst wird so zum Einzahl-Monat, nicht zum Ausgabe-Monat. <!-- premium-length-2026-c -->. Der September-Abend, der den Dezember trägt. Setz 75 Minuten, so teilst du sie ein:",
+   "text": "Ein Glas, das zwei Jahre im Keller steht, ist kein Spartipp, sondern vergessenes Kapital. Black Friday ohne Nachzahlung. Liste vor dem Event: nur Dinge, die schon auf der 30-Tage-Wunschliste stehen. Preis 30 Tage vorher notieren, viele −40 Prozent sind der Preis von Mitte Oktober. Cashback nur auf der Liste, nicht als Freibrief. Bezahlmittel ohne Dispo. Weihnachten: Budget pro Person vorher, Umschläge oder ein Unterkonto. Selbst gemachte Dinge zählen mit Materialkosten, nicht mit 0 Euro, sonst unterschätzt du den Dezember. Wenn der Herbst so läuft, startest du ins neue Jahr mit Puffer statt mit Rechnungen, die du im Goldenen Oktober hättest vermeiden können. Weihnachtskonto im September. Ein Unterkonto oder Umschlag Dezember ab 1.9: 4 mal 50 bis 150 Euroo je nach Haushalt. Geschenke, Bahn, Essen. Was im Umschlag ist, darf raus. Was nicht drin ist, wird nicht per Dispo geholt. Das ist langweiliger als Black Friday und verhindert den Januar, in dem jeder Spartipp zu spät kommt. Parallel: Energie- und DSL-Vergleich im selben Monat, Ertrag auf dasselbe Konto. Der Herbst wird so zum Einzahl-Monat, nicht zum Ausgabe-Monat. Der September-Abend, der den Dezember trägt. Setz 75 Minuten, so teilst du sie ein: 25 Minuten Verträge (Energie, DSL, Mobilfunk, alles, was älter als 12 Monate ist, kommt in den Vergleich). 25 Minuten Dezember-Budget auf ein Unterkonto.",
    "units": [
     {
      "i": 61,
      "type": "p",
      "lang": "de",
-     "chars": 65
-    },
-    {
-     "i": 62,
-     "type": "p",
-     "lang": "de",
      "chars": 89
     },
     {
-     "i": 63,
+     "i": 62,
      "type": "h2",
      "lang": "de",
      "chars": 30
     },
     {
-     "i": 64,
+     "i": 63,
      "type": "p",
      "lang": "de",
      "chars": 77
     },
     {
-     "i": 65,
+     "i": 64,
      "type": "p",
      "lang": "de",
      "chars": 131
     },
     {
-     "i": 66,
+     "i": 65,
      "type": "p",
      "lang": "de",
      "chars": 24
     },
     {
-     "i": 67,
+     "i": 66,
      "type": "p",
      "lang": "de",
      "chars": 69
     },
     {
-     "i": 68,
+     "i": 67,
      "type": "p",
      "lang": "de",
      "chars": 102
     },
     {
-     "i": 69,
+     "i": 68,
      "type": "p",
      "lang": "de",
      "chars": 137
     },
     {
-     "i": 70,
-     "type": "p",
-     "lang": "de",
-     "chars": 31
-    },
-    {
-     "i": 71,
+     "i": 69,
      "type": "h2",
      "lang": "de",
      "chars": 29
     },
     {
-     "i": 72,
+     "i": 70,
      "type": "p",
      "lang": "de",
      "chars": 110
+    },
+    {
+     "i": 71,
+     "type": "p",
+     "lang": "de",
+     "chars": 80
+    },
+    {
+     "i": 72,
+     "type": "p",
+     "lang": "de",
+     "chars": 101
     },
     {
      "i": 73,
@@ -492,208 +492,196 @@
      "i": 74,
      "type": "p",
      "lang": "de",
-     "chars": 101
-    },
-    {
-     "i": 75,
-     "type": "p",
-     "lang": "de",
-     "chars": 80
-    },
-    {
-     "i": 76,
-     "type": "p",
-     "lang": "de",
      "chars": 62
     },
     {
-     "i": 77,
-     "type": "p",
-     "lang": "de",
-     "chars": 31
-    },
-    {
-     "i": 78,
+     "i": 75,
      "type": "h2",
      "lang": "de",
      "chars": 44
     },
     {
-     "i": 79,
+     "i": 76,
      "type": "p",
      "lang": "de",
      "chars": 38
-    }
-   ]
-  },
-  {
-   "index": 6,
-   "text": "25 Minuten Verträge (Energie, DSL, Mobilfunk, alles, was älter als 12 Monate ist, kommt in den Vergleich). 25 Minuten Dezember-Budget auf ein Unterkonto. 25 Minuten Kleidung/Heizen: Was du wirklich brauchst versus was der Herbstschlussverkauf suggeriert. Wenn nur eine der drei Schichten sitzt, nimm die Verträge. Sie zahlen den Rest. Fazit: Nutze den Herbst für deinen persönlichen Kassensturz. Der Herbst ist kein Grund für trübe Stimmung, sondern die perfekte Gelegenheit, deine Finanzen auf Vordermann zu bringen. Indem du bestehende Verträge hinterfragst, den Kraftfahrzeug-Stichtag nutzt und dein Zuhause energieeffizient machst, gehst du mit einem deutlichen Plus auf dem Girokonto ins neue Jahr. Weiterlesen: Ratgeber Frugalismus · DSL-Wechselbonus sichern · Versicherungen optimieren. Häufige Fragen. Warum ist der 30. November bei Versicherungen so wichtig. Die meisten Kraftfahrzeug-Versicherungen laufen vom 1. Januar bis 31. Dezember. Mit der gesetzlichen Kündigungsfrist von einem Monat muss die schriftliche Kündigung spätestens am 30. November beim Versicherer eingegangen sein. Habe ich ein Sonderkündigungsrecht bei Beitragserhöhungen. Ja. Erhöht deine Versicherung die Beiträge (auch versteckt durch eine Neueinstufung der Typklasse), hast du ab Erhalt der Mitteilung vier Wochen Zeit für eine Sonderkündigung. Wie viel kann ich durch saisonales Kochen sparen.",
-   "units": [
+    },
     {
-     "i": 80,
+     "i": 77,
      "type": "li",
      "lang": "de",
      "chars": 106
     },
     {
-     "i": 81,
+     "i": 78,
      "type": "li",
      "lang": "de",
      "chars": 46
-    },
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "text": "25 Minuten Kleidung/Heizen: Was du wirklich brauchst versus was der Herbstschlussverkauf suggeriert. Wenn nur eine der drei Schichten sitzt, nimm die Verträge. Sie zahlen den Rest. Fazit: Nutze den Herbst für deinen persönlichen Kassensturz. Der Herbst ist kein Grund für trübe Stimmung, sondern die perfekte Gelegenheit, deine Finanzen auf Vordermann zu bringen. Indem du bestehende Verträge hinterfragst, den Kraftfahrzeug-Stichtag nutzt und dein Zuhause energieeffizient machst, gehst du mit einem deutlichen Plus auf dem Girokonto ins neue Jahr. Weiterlesen: Ratgeber Frugalismus · DSL-Wechselbonus sichern · Versicherungen optimieren. Häufige Fragen. Warum ist der 30. November bei Versicherungen so wichtig? Die meisten Kraftfahrzeug-Versicherungen laufen vom 1. Januar bis 31. Dezember. Mit der gesetzlichen Kündigungsfrist von einem Monat muss die schriftliche Kündigung spätestens am 30. November beim Versicherer eingegangen sein. Habe ich ein Sonderkündigungsrecht bei Beitragserhöhungen? Ja. Erhöht deine Versicherung die Beiträge (auch versteckt durch eine Neueinstufung der Typklasse), hast du ab Erhalt der Mitteilung vier Wochen Zeit für eine Sonderkündigung. Wie viel kann ich durch saisonales Kochen sparen? Saisonales und regionales Gemüse kostet in der Haupterntezeit oft 40 bis 60 Prozent weniger als Treibhausware oder Flugimporte im Winter.",
+   "units": [
     {
-     "i": 82,
+     "i": 79,
      "type": "li",
      "lang": "de",
      "chars": 100
     },
     {
-     "i": 83,
+     "i": 80,
      "type": "p",
      "lang": "de",
      "chars": 79
     },
     {
-     "i": 84,
+     "i": 81,
      "type": "h2",
      "lang": "de",
      "chars": 60
     },
     {
-     "i": 85,
+     "i": 82,
      "type": "p",
      "lang": "de",
      "chars": 121
     },
     {
-     "i": 86,
+     "i": 83,
      "type": "p",
      "lang": "de",
      "chars": 185
     },
     {
-     "i": 87,
+     "i": 84,
      "type": "p",
      "lang": "de",
      "chars": 89
     },
     {
-     "i": 88,
+     "i": 85,
      "type": "h2",
      "lang": "de",
      "chars": 15
     },
     {
-     "i": 89,
+     "i": 86,
      "type": "h3",
      "lang": "de",
-     "chars": 57
+     "chars": 17
     },
     {
-     "i": 90,
+     "i": 87,
+     "type": "h3",
+     "lang": "de",
+     "chars": 39
+    },
+    {
+     "i": 88,
      "type": "p",
      "lang": "de",
      "chars": 79
     },
     {
-     "i": 91,
+     "i": 89,
      "type": "p",
      "lang": "de",
      "chars": 102
     },
     {
-     "i": 92,
+     "i": 90,
      "type": "p",
      "lang": "de",
      "chars": 43
     },
     {
-     "i": 93,
+     "i": 91,
      "type": "h3",
      "lang": "de",
      "chars": 58
     },
     {
-     "i": 94,
+     "i": 92,
      "type": "p",
      "lang": "de",
      "chars": 3
     },
     {
-     "i": 95,
+     "i": 93,
      "type": "p",
      "lang": "de",
      "chars": 171
     },
     {
-     "i": 96,
+     "i": 94,
      "type": "h3",
      "lang": "de",
      "chars": 49
+    },
+    {
+     "i": 95,
+     "type": "p",
+     "lang": "de",
+     "chars": 137
     }
    ]
   },
   {
    "index": 7,
-   "text": "Saisonales und regionales Gemüse kostet in der Haupterntezeit oft 40 bis 60 Prozent weniger als Treibhausware oder Flugimporte im Winter. Lohnen sich Mehrsparten-Rabatte bei Versicherungen. Oft bieten Einzelvergleiche über Spezialversicherer ein besseres Preis-Leistungs-Verhältnis als pauschale Kombi-Tarife eines einzelnen Großversicherers. Vergleiche stets die Einzeltarife. Wie bereite ich mein Haus optimal auf den Winter vor. Entlüfte alle Heizkörper, prüfe die Dichtungen an Fenstern und Außentüren, säubere die Dachrinnen von Laub und drehe Außenwasserhähne frostfrei ab. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "text": "Lohnen sich Mehrsparten-Rabatte bei Versicherungen? Oft bieten Einzelvergleiche über Spezialversicherer ein besseres Preis-Leistungs-Verhältnis als pauschale Kombi-Tarife eines einzelnen Großversicherers. Vergleiche stets die Einzeltarife. Wie bereite ich mein Haus optimal auf den Winter vor? Entlüfte alle Heizkörper, prüfe die Dichtungen an Fenstern und Außentüren, säubere die Dachrinnen von Laub und drehe Außenwasserhähne frostfrei ab. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
    "units": [
     {
-     "i": 97,
-     "type": "p",
-     "lang": "de",
-     "chars": 137
-    },
-    {
-     "i": 98,
+     "i": 96,
      "type": "h3",
      "lang": "de",
      "chars": 51
     },
     {
-     "i": 99,
+     "i": 97,
      "type": "p",
      "lang": "de",
      "chars": 152
     },
     {
-     "i": 100,
+     "i": 98,
      "type": "p",
      "lang": "de",
      "chars": 34
     },
     {
-     "i": 101,
+     "i": 99,
      "type": "h3",
      "lang": "de",
      "chars": 53
     },
     {
-     "i": 102,
+     "i": 100,
      "type": "p",
      "lang": "de",
      "chars": 147
     },
     {
-     "i": 103,
+     "i": 101,
      "type": "p",
      "lang": "de",
      "chars": 66
     },
     {
-     "i": 104,
+     "i": 102,
      "type": "p",
      "lang": "de",
      "chars": 49
     },
     {
-     "i": 105,
+     "i": 103,
      "type": "p",
      "lang": "de",
      "chars": 96
     },
     {
-     "i": 106,
+     "i": 104,
      "type": "outro",
      "lang": "de",
      "chars": 66

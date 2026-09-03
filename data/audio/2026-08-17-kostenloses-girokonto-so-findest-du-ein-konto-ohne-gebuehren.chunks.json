@@ -7,8 +7,8 @@
   "rate": 0.93,
   "maxChunk": 140
  },
- "units": 111,
- "chars": 10913,
+ "units": 108,
+ "chars": 10822,
  "parts": [
   {
    "index": 0,
@@ -78,7 +78,7 @@
   },
   {
    "index": 1,
-   "text": "Kostenlos vergleichen (Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Warum verlangen Banken überhaupt noch Kontoführungsgebühren. Viele traditionelle Kreditinstitute begründen ihre Gebührenmodelle mit den laufenden Kosten ihres stationären Filialnetzes und Personalkosten vor Ort. Doch in der alltäglichen Realität wickeln mehr als 85 Prozent der Bankkunden ihre täglichen Geldgeschäfte eigenständig über Online-Banking oder Banking-Apps ab. Wer auf den Bankschalter verzichtet, zahlt bei klassischen Filialinstituten Monat für Monat für Strukturen mit, die er im Alltag überhaupt nicht in Anspruch nimmt. Direktbanken und moderne FinTech-Institute wie die C24 Bank, DKB oder ING setzen dagegen auf schlanke, automatisierte Prozesse. Diese strukturellen Kostenvorteile fließen als handfeste Kundenvorteile zurück: 0 Euro Kontoführungsgebühr, gebührenfreie Debitkarten und faire Dispo-Zinssätze. Woran du ein wirklich gebührenfreies Girokonto erkennst. Achte beim Anbietervergleich auf die feinen Unterschiede im Kleingedruckten. Ein hervorragendes Girokonto zeichnet sich durch folgende Merkmale aus:",
+   "text": "Kostenlos vergleichen (Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Warum verlangen Banken überhaupt noch Kontoführungsgebühren? Viele traditionelle Kreditinstitute begründen ihre Gebührenmodelle mit den laufenden Kosten ihres stationären Filialnetzes und Personalkosten vor Ort. Doch in der alltäglichen Realität wickeln mehr als 85 Prozent der Bankkunden ihre täglichen Geldgeschäfte eigenständig über Online-Banking oder Banking-Apps ab. Wer auf den Bankschalter verzichtet, zahlt bei klassischen Filialinstituten Monat für Monat für Strukturen mit, die er im Alltag überhaupt nicht in Anspruch nimmt. Direktbanken und moderne FinTech-Institute wie die C24 Bank, DKB oder ING setzen dagegen auf schlanke, automatisierte Prozesse. Diese strukturellen Kostenvorteile fließen als handfeste Kundenvorteile zurück: 0 Euro Kontoführungsgebühr, gebührenfreie Debitkarten und faire Dispo-Zinssätze. Woran du ein wirklich gebührenfreies Girokonto erkennst. Achte beim Anbietervergleich auf die feinen Unterschiede im Kleingedruckten. Ein hervorragendes Girokonto zeichnet sich durch folgende Merkmale aus:",
    "units": [
     {
      "i": 10,
@@ -318,7 +318,7 @@
   },
   {
    "index": 4,
-   "text": "Dabei ist der Kontowechsel in Deutschland durch das Zahlungskontengesetz (Paragraf 20 ZKG) rechtlich geregelt und läuft dank digitaler Schnittstellen fast vollautomatisch: Punkt 1: Neues Girokonto online eröffnen: Die Identitätsprüfung erfolgt in circa 5 Minuten bequem von zu Hause via Video-Ident oder mit der eID-Funktion deines Personalausweises. Punkt 2: Digitalen Wechselservice autorisieren: Die neue Bank analysiert nach deiner Freigabe sicher die Lastschriften und Daueraufträge deines bisherigen Kontos. Punkt 3: Zahlungspartner automatisch benachrichtigen: Alle Lastschrifteinzieher wie Stromanbieter, Arbeitgeber, Streaming-Dienste und Vermieter erhalten automatisch eine schriftliche Benachrichtigung über deine neue I BAN. Punkt 4: Altes Konto stressfrei kündigen: Zum von dir gewählten Stichtag wird das alte Konto automatisch geschlossen und verbleibendes Guthaben übertragen. Wer parallel dazu auch seine sonstigen Policen und Ausgaben überprüfen möchte, profitiert von unserer Analyse der Privathaftpflicht-Kosten sowie den praktischen Ratschlägen in der Pillar-Kategorieseite für Konten und Karten. <!-- premium-length-2026 -->. Was kostenlos 2026 noch bedeuten darf. Ein Girokonto ohne Kontoführungsgebühr ist Standard bei Direktbanken, mit Bedingungen. Die ehrliche Checkliste: Echter Geldeingang (Gehalt, Rente, oft 700 bis 1000 Euroo monatlich), sonst 4 bis 10 Euroo Gebühr.",
+   "text": "Dabei ist der Kontowechsel in Deutschland durch das Zahlungskontengesetz (Paragraf 20 ZKG) rechtlich geregelt und läuft dank digitaler Schnittstellen fast vollautomatisch: Punkt 1: Neues Girokonto online eröffnen: Die Identitätsprüfung erfolgt in circa 5 Minuten bequem von zu Hause via Video-Ident oder mit der eID-Funktion deines Personalausweises. Punkt 2: Digitalen Wechselservice autorisieren: Die neue Bank analysiert nach deiner Freigabe sicher die Lastschriften und Daueraufträge deines bisherigen Kontos. Punkt 3: Zahlungspartner automatisch benachrichtigen: Alle Lastschrifteinzieher wie Stromanbieter, Arbeitgeber, Streaming-Dienste und Vermieter erhalten automatisch eine schriftliche Benachrichtigung über deine neue I BAN. Punkt 4: Altes Konto stressfrei kündigen: Zum von dir gewählten Stichtag wird das alte Konto automatisch geschlossen und verbleibendes Guthaben übertragen. Wer parallel dazu auch seine sonstigen Policen und Ausgaben überprüfen möchte, profitiert von unserer Analyse der Privathaftpflicht-Kosten sowie den praktischen Ratschlägen in der Pillar-Kategorieseite für Konten und Karten. Was kostenlos 2026 noch bedeuten darf. Ein Girokonto ohne Kontoführungsgebühr ist Standard bei Direktbanken, mit Bedingungen. Die ehrliche Checkliste: Echter Geldeingang (Gehalt, Rente, oft 700 bis 1000 Euroo monatlich), sonst 4 bis 10 Euroo Gebühr.",
    "units": [
     {
      "i": 47,
@@ -370,24 +370,18 @@
     },
     {
      "i": 55,
-     "type": "p",
-     "lang": "de",
-     "chars": 29
-    },
-    {
-     "i": 56,
      "type": "h2",
      "lang": "de",
      "chars": 38
     },
     {
-     "i": 57,
+     "i": 56,
      "type": "p",
      "lang": "de",
      "chars": 111
     },
     {
-     "i": 58,
+     "i": 57,
      "type": "li",
      "lang": "de",
      "chars": 98
@@ -399,97 +393,97 @@
    "text": "Filialauszahlung: kostenlos im Verbund oder 4 bis 6 Euroo fremd. Kreditkarte: Jahresgebühr 0 Euro oder 29 Euro Gold. Echtzeitüberweisung: inklusive oder 0,20 bis 0,50 Euroo. Dispo-Zins: 8 bis 13 Prozent, der teuerste Posten, wenn du ihn nutzt. Ein Konto mit 0 Euro Führung und 12 Prozent Dispo auf 1000 Euro dauerhaft kostet 120 Euro im Jahr. Dann ist das kostenlose Konto teurer als 5,90 Euro Führung ohne Dispo. Schließe den Dispo, wenn du ihn nicht brauchst, oder halte 500 Euro Puffer auf dem Giro, damit er nie greift. Wechselgesetz: 12 Arbeitstage, nicht 12 Nerven. Seit dem Zahlungskontengesetz übernimmt die neue Bank Daueraufträge, Lastschriften und Guthaben-Transfer, wenn du das Formular vollständig ausfüllst. Du lieferst: alte I BAN, Liste der Lastschriften, Wunschtermin. Informiere Arbeitgeber und Versicherung trotzdem selbst, die Bank kann nicht zaubern, wenn der Absender die alte I BAN hart verdrahtet hat. Zwei Wochen parallel beide Konten offen halten. Erst wenn drei Gehaltseingänge und alle Lastschriften auf der neuen I BAN laufen, das alte Konto auf null und kündigen. Restguthaben überweisen, nicht steht schon. Filiale gegen App, wann die Filiale noch ihren Preis wert ist. Bargeldintensiv, Betreutes Wohnen, komplexer Nachlass, häufige Auslandsbar-Abhebung ohne Kreditkarte: Filiale kann 5 bis 10 Euroo im Monat rechtfertigen.",
    "units": [
     {
-     "i": 59,
+     "i": 58,
      "type": "li",
      "lang": "de",
      "chars": 64
     },
     {
-     "i": 60,
+     "i": 59,
      "type": "li",
      "lang": "de",
      "chars": 51
     },
     {
-     "i": 61,
+     "i": 60,
      "type": "li",
      "lang": "de",
      "chars": 56
     },
     {
-     "i": 62,
+     "i": 61,
      "type": "li",
      "lang": "de",
      "chars": 69
     },
     {
-     "i": 63,
+     "i": 62,
      "type": "p",
      "lang": "de",
      "chars": 98
     },
     {
-     "i": 64,
+     "i": 63,
      "type": "p",
      "lang": "de",
      "chars": 70
     },
     {
-     "i": 65,
+     "i": 64,
      "type": "p",
      "lang": "de",
      "chars": 109
     },
     {
-     "i": 66,
+     "i": 65,
      "type": "h2",
      "lang": "de",
      "chars": 47
     },
     {
-     "i": 67,
+     "i": 66,
      "type": "p",
      "lang": "de",
      "chars": 149
     },
     {
-     "i": 68,
+     "i": 67,
      "type": "p",
      "lang": "de",
      "chars": 63
     },
     {
-     "i": 69,
+     "i": 68,
      "type": "p",
      "lang": "de",
      "chars": 139
     },
     {
-     "i": 70,
+     "i": 69,
      "type": "p",
      "lang": "de",
      "chars": 47
     },
     {
-     "i": 71,
+     "i": 70,
      "type": "p",
      "lang": "de",
      "chars": 119
     },
     {
-     "i": 72,
+     "i": 71,
      "type": "p",
      "lang": "de",
      "chars": 43
     },
     {
-     "i": 73,
+     "i": 72,
      "type": "h2",
      "lang": "de",
      "chars": 62
     },
     {
-     "i": 74,
+     "i": 73,
      "type": "p",
      "lang": "de",
      "chars": 153
@@ -498,232 +492,220 @@
   },
   {
    "index": 6,
-   "text": "Für Gehalt, Miete, Sparrate und 95 Prozent Online-Alltag nicht. Die Kombination funktioniert: kostenloses Online-Giro als Hauptkonto, kleines Filialkonto mit Miniguthaben nur für den Fall, wenn du ihn wirklich nutzt, sonst kündigen. <!-- premium-length-2026-b -->. Drei Konten, eine Logik. Giro = Zahlungsverkehr. Tagesgeld = Puffer. Optional Fixkosten-Giro, wenn du visuell trennen willst. Mehr als drei Zahlungskonten ohne Grund sind Gebühren- und Phishing-Fläche. Nach dem Wechsel 90 Tage beobachten: Gehalt, Miete, Versicherungen. Erst dann das alte Konto zu null. Wer zu früh kündigt, zahlt Mahnungen, nicht Gebühren, das ist teurer. <!-- premium-length-2026-c -->. Geldeingang, Karte, Dispo, die drei Stellschrauben. Prüfe die Bedingung für 0 Euro Führung (oft Mindestgeldeingang). Prüfe die Karte (Jahresgebühr, Ausland). Setze den Dispo auf 0, wenn der Puffer steht. Wer nur die 0- Euro-Werbung liest, übersieht 120 Euro Dispozinsen. Das kostenlose Konto ist erst kostenlos, wenn diese drei Schrauben passen. Fazit: Kostenlose Kontoführung ist der neue Standard. Im Jahr 2026 gibt es keinen sachlichen Grund mehr, Monat für Monat für ein Standard-Girokonto tief in die Tasche zu greifen. Ein kostenloses Girokonto spart dir mühelos über 150 Euro pro Jahr und bietet mit smarten Finanz-Apps,",
+   "text": "Für Gehalt, Miete, Sparrate und 95 Prozent Online-Alltag nicht. Die Kombination funktioniert: kostenloses Online-Giro als Hauptkonto, kleines Filialkonto mit Miniguthaben nur für den Fall, wenn du ihn wirklich nutzt, sonst kündigen. Drei Konten, eine Logik. Giro = Zahlungsverkehr. Tagesgeld = Puffer. Optional Fixkosten-Giro, wenn du visuell trennen willst. Mehr als drei Zahlungskonten ohne Grund sind Gebühren- und Phishing-Fläche. Nach dem Wechsel 90 Tage beobachten: Gehalt, Miete, Versicherungen. Erst dann das alte Konto zu null. Wer zu früh kündigt, zahlt Mahnungen, nicht Gebühren, das ist teurer. Geldeingang, Karte, Dispo, die drei Stellschrauben. Prüfe die Bedingung für 0 Euro Führung (oft Mindestgeldeingang). Prüfe die Karte (Jahresgebühr, Ausland). Setze den Dispo auf 0, wenn der Puffer steht. Wer nur die 0- Euro-Werbung liest, übersieht 120 Euro Dispozinsen. Das kostenlose Konto ist erst kostenlos, wenn diese drei Schrauben passen. Fazit: Kostenlose Kontoführung ist der neue Standard. Im Jahr 2026 gibt es keinen sachlichen Grund mehr, Monat für Monat für ein Standard-Girokonto tief in die Tasche zu greifen. Ein kostenloses Girokonto spart dir mühelos über 150 Euro pro Jahr und bietet mit smarten Finanz-Apps, automatisierten Spar-Pockets und Zinsen auf das Guthaben deutlich mehr Freiheit und Transparenz als veraltete Bankmodelle.",
    "units": [
     {
-     "i": 75,
+     "i": 74,
      "type": "p",
      "lang": "de",
      "chars": 63
     },
     {
-     "i": 76,
+     "i": 75,
      "type": "p",
      "lang": "de",
      "chars": 168
     },
     {
-     "i": 77,
-     "type": "p",
-     "lang": "de",
-     "chars": 31
-    },
-    {
-     "i": 78,
+     "i": 76,
      "type": "h2",
      "lang": "de",
      "chars": 24
     },
     {
-     "i": 79,
+     "i": 77,
      "type": "p",
      "lang": "de",
      "chars": 43
     },
     {
-     "i": 80,
+     "i": 78,
      "type": "p",
      "lang": "de",
      "chars": 132
     },
     {
-     "i": 81,
+     "i": 79,
      "type": "p",
      "lang": "de",
      "chars": 101
     },
     {
-     "i": 82,
+     "i": 80,
      "type": "p",
      "lang": "de",
      "chars": 69
     },
     {
-     "i": 83,
-     "type": "p",
-     "lang": "de",
-     "chars": 31
-    },
-    {
-     "i": 84,
+     "i": 81,
      "type": "h2",
      "lang": "de",
      "chars": 51
     },
     {
-     "i": 85,
+     "i": 82,
      "type": "p",
      "lang": "de",
      "chars": 105
     },
     {
-     "i": 86,
+     "i": 83,
      "type": "p",
      "lang": "de",
      "chars": 112
     },
     {
-     "i": 87,
+     "i": 84,
      "type": "p",
      "lang": "de",
      "chars": 74
     },
     {
-     "i": 88,
+     "i": 85,
      "type": "h2",
      "lang": "de",
      "chars": 53
     },
     {
-     "i": 89,
+     "i": 86,
      "type": "p",
      "lang": "de",
      "chars": 124
     },
     {
-     "i": 90,
+     "i": 87,
      "type": "p",
      "lang": "de",
      "chars": 102
+    },
+    {
+     "i": 88,
+     "type": "p",
+     "lang": "de",
+     "chars": 122
     }
    ]
   },
   {
    "index": 7,
-   "text": "automatisierten Spar-Pockets und Zinsen auf das Guthaben deutlich mehr Freiheit und Transparenz als veraltete Bankmodelle. Weiterlesen: Ratgeber Konto und Karten · Ratgeber Versicherungen · Wichtige Fakten zur Privathaftpflicht. Häufige Fragen. Ist ein kostenloses Girokonto wirklich dauerhaft gebührenfrei. Ja, seriöse Anbieter wie die C24 Bank garantieren in ihren Basis-Modellen eine dauerhaft kostenlose Kontoführung ohne versteckte Klauseln. Was passiert mit meinen Lastschriften beim Bankwechsel. Der digitale Kontowechselservice informiert alle Lastschriftempfänger (zum Beispiel. Strom, Telefon, Miete) automatisch über deine neue Kontoverbindung. Wie sicher ist mein Geld bei einer Online-Direktbank. Alle in Deutschland lizenzierten Banken unterliegen der gesetzlichen Einlagensicherung über die Entschädigungseinrichtung deutscher Banken (EdB). Dein Sparguthaben ist bis zu 100000 Euro pro Kunde zu 100 Prozent gesetzlich abgesichert. Kann ich mit dem kostenlosen Girokonto überall bezahlen. Ja, mit der mitgelieferten Debitkarte (Mastercard oder Visa) kannst du weltweit an Millionen Akzeptanzstellen vor Ort Kontaktlos oder online bezahlen sowie Apple Pay und Google Pay nutzen. Wirkt sich ein Kontowechsel negativ auf meinen Schufa-Score aus. Ein einmaliger Wechsel zu einem neuen Girokonto hat in der Regel keinen negativen Einfluss auf deine Bonität.",
+   "text": "Weiterlesen: Ratgeber Konto und Karten · Ratgeber Versicherungen · Wichtige Fakten zur Privathaftpflicht. Häufige Fragen. Ist ein kostenloses Girokonto wirklich dauerhaft gebührenfrei? Ja, seriöse Anbieter wie die C24 Bank garantieren in ihren Basis-Modellen eine dauerhaft kostenlose Kontoführung ohne versteckte Klauseln. Was passiert mit meinen Lastschriften beim Bankwechsel? Der digitale Kontowechselservice informiert alle Lastschriftempfänger (zum Beispiel. Strom, Telefon, Miete) automatisch über deine neue Kontoverbindung. Wie sicher ist mein Geld bei einer Online-Direktbank? Alle in Deutschland lizenzierten Banken unterliegen der gesetzlichen Einlagensicherung über die Entschädigungseinrichtung deutscher Banken (EdB). Dein Sparguthaben ist bis zu 100000 Euro pro Kunde zu 100 Prozent gesetzlich abgesichert. Kann ich mit dem kostenlosen Girokonto überall bezahlen? Ja, mit der mitgelieferten Debitkarte (Mastercard oder Visa) kannst du weltweit an Millionen Akzeptanzstellen vor Ort Kontaktlos oder online bezahlen sowie Apple Pay und Google Pay nutzen. Wirkt sich ein Kontowechsel negativ auf meinen Schufa-Score aus? Ein einmaliger Wechsel zu einem neuen Girokonto hat in der Regel keinen negativen Einfluss auf deine Bonität. Bei der Eröffnung wird lediglich geprüft, ob negative Schufa-Einträge vorliegen. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen.",
    "units": [
     {
-     "i": 91,
-     "type": "p",
-     "lang": "de",
-     "chars": 122
-    },
-    {
-     "i": 92,
+     "i": 89,
      "type": "p",
      "lang": "de",
      "chars": 105
     },
     {
-     "i": 93,
+     "i": 90,
      "type": "h2",
      "lang": "de",
      "chars": 15
     },
     {
-     "i": 94,
+     "i": 91,
      "type": "h3",
      "lang": "de",
      "chars": 62
     },
     {
-     "i": 95,
+     "i": 92,
      "type": "p",
      "lang": "de",
      "chars": 138
     },
     {
-     "i": 96,
+     "i": 93,
      "type": "h3",
      "lang": "de",
      "chars": 55
     },
     {
-     "i": 97,
+     "i": 94,
      "type": "p",
      "lang": "de",
      "chars": 84
     },
     {
-     "i": 98,
+     "i": 95,
      "type": "p",
      "lang": "de",
      "chars": 67
     },
     {
-     "i": 99,
+     "i": 96,
      "type": "h3",
      "lang": "de",
      "chars": 53
     },
     {
-     "i": 100,
+     "i": 97,
      "type": "p",
      "lang": "de",
      "chars": 145
     },
     {
-     "i": 101,
+     "i": 98,
      "type": "p",
      "lang": "de",
      "chars": 89
     },
     {
-     "i": 102,
+     "i": 99,
      "type": "h3",
      "lang": "de",
      "chars": 56
     },
     {
-     "i": 103,
+     "i": 100,
      "type": "p",
      "lang": "de",
      "chars": 188
     },
     {
-     "i": 104,
+     "i": 101,
      "type": "h3",
      "lang": "de",
      "chars": 64
     },
     {
-     "i": 105,
+     "i": 102,
      "type": "p",
      "lang": "de",
      "chars": 109
-    }
-   ]
-  },
-  {
-   "index": 8,
-   "text": "Bei der Eröffnung wird lediglich geprüft, ob negative Schufa-Einträge vorliegen. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
-   "units": [
+    },
     {
-     "i": 106,
+     "i": 103,
      "type": "p",
      "lang": "de",
      "chars": 80
     },
     {
-     "i": 107,
+     "i": 104,
      "type": "p",
      "lang": "de",
      "chars": 66
-    },
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "text": "Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
     {
-     "i": 108,
+     "i": 105,
      "type": "p",
      "lang": "de",
      "chars": 49
     },
     {
-     "i": 109,
+     "i": 106,
      "type": "p",
      "lang": "de",
      "chars": 96
     },
     {
-     "i": 110,
+     "i": 107,
      "type": "outro",
      "lang": "de",
      "chars": 66

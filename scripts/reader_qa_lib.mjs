@@ -85,7 +85,15 @@ function splitRow(line) {
 }
 
 export function markdownToHtml(md) {
-  const lines = String(md).replace(/\r\n/g, '\n').split('\n');
+  /* Redaktionsmarker wie <!-- premium-length-2026 --> stehen im Markdown.
+     Hugo gibt sie als echte HTML-Kommentare aus, die im Browser keine
+     Textknoten sind und deshalb nie mitgelesen würden. Dieser Renderer
+     erzeugt daraus sonst Fließtext – und der Marker würde vorgelesen.
+     Deshalb hier wie im Browser: Kommentare sind unsichtbar. */
+  const lines = String(md)
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/\r\n/g, '\n')
+    .split('\n');
   const out = [];
   let i = 0;
   let para = [];

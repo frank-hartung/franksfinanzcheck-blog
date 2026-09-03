@@ -7,8 +7,8 @@
   "rate": 0.93,
   "maxChunk": 140
  },
- "units": 112,
- "chars": 10783,
+ "units": 111,
+ "chars": 10754,
  "parts": [
   {
    "index": 0,
@@ -264,7 +264,7 @@
   },
   {
    "index": 3,
-   "text": "Die Spalten lauten: Vertragsmodell, Arbeitspreis / Kilowattstunden, Grundpreis monatlich, Gesamtkosten (20000 Kilowattstunden pro Jahr), Ersparnis pro Jahr. Lokale Grundversorgung (variabel). Zeile 1 von 4. Arbeitspreis / Kilowattstunden: 12,60 Cent. Grundpreis monatlich: 13,80 Euro. Gesamtkosten (20000 Kilowattstunden pro Jahr): 2685,60 Euro. Ersparnis pro Jahr: 0,00 Euro (Referenz). Ökogas Festpreis (12 Monate). Zeile 2 von 4. Arbeitspreis / Kilowattstunden: 9,40 Cent. Grundpreis monatlich: 10,50 Euro. Gesamtkosten (20000 Kilowattstunden pro Jahr): 2006,00 Euro. Ersparnis pro Jahr: 679,60 Euro. Konventioneller Gastarif (24 Monate). Zeile 3 von 4. Arbeitspreis / Kilowattstunden: 9,80 Cent. Grundpreis monatlich: 9,90 Euro. Gesamtkosten (20000 Kilowattstunden pro Jahr): 2078,80 Euro. Ersparnis pro Jahr: 606,80 Euro. Flexibler Monatstarif (ohne Bindung). Zeile 4 von 4. Arbeitspreis / Kilowattstunden: 10,90 Cent. Grundpreis monatlich: 11,00 Euro. Gesamtkosten (20000 Kilowattstunden pro Jahr): 2312,00 Euro. Ersparnis pro Jahr: 373,60 Euro. Ende der Tabelle Tarifvergleich: Grundversorgung versus Festpreistarife. Worauf muss man bei der Vertragslaufzeit achten. Experten für Verbraucherschutz raten dazu, eine Preisgarantie zu wählen, deren Dauer exakt der Mindestvertragslaufzeit entspricht.",
+   "text": "Die Spalten lauten: Vertragsmodell, Arbeitspreis / Kilowattstunden, Grundpreis monatlich, Gesamtkosten (20000 Kilowattstunden pro Jahr), Ersparnis pro Jahr. Lokale Grundversorgung (variabel). Zeile 1 von 4. Arbeitspreis / Kilowattstunden: 12,60 Cent. Grundpreis monatlich: 13,80 Euro. Gesamtkosten (20000 Kilowattstunden pro Jahr): 2685,60 Euro. Ersparnis pro Jahr: 0,00 Euro (Referenz). Ökogas Festpreis (12 Monate). Zeile 2 von 4. Arbeitspreis / Kilowattstunden: 9,40 Cent. Grundpreis monatlich: 10,50 Euro. Gesamtkosten (20000 Kilowattstunden pro Jahr): 2006,00 Euro. Ersparnis pro Jahr: 679,60 Euro. Konventioneller Gastarif (24 Monate). Zeile 3 von 4. Arbeitspreis / Kilowattstunden: 9,80 Cent. Grundpreis monatlich: 9,90 Euro. Gesamtkosten (20000 Kilowattstunden pro Jahr): 2078,80 Euro. Ersparnis pro Jahr: 606,80 Euro. Flexibler Monatstarif (ohne Bindung). Zeile 4 von 4. Arbeitspreis / Kilowattstunden: 10,90 Cent. Grundpreis monatlich: 11,00 Euro. Gesamtkosten (20000 Kilowattstunden pro Jahr): 2312,00 Euro. Ersparnis pro Jahr: 373,60 Euro. Ende der Tabelle Tarifvergleich: Grundversorgung versus Festpreistarife. Worauf muss man bei der Vertragslaufzeit achten? Experten für Verbraucherschutz raten dazu, eine Preisgarantie zu wählen, deren Dauer exakt der Mindestvertragslaufzeit entspricht.",
    "units": [
     {
      "i": 39,
@@ -432,7 +432,7 @@
   },
   {
    "index": 5,
-   "text": "Weitere praxisnahe Ratschläge zur Vorbereitung deiner Heizungsanlage findest du in unserem Ratgeber zu Versäumnissen beim Heizen im Spätsommer. <!-- premium-length-2026 -->. Vertragstext lesen: die fünf Sätze, die über hunderte Euro entscheiden. Suche im PDF nach: Preisgarantie, Preisanpassung, steuerliche Änderungen, CO₂, Netzentgelte, Bonus, Sonderkündigung. Markiere jeden Satz, der dem Anbieter das Recht gibt, trotz Garantie zu erhöhen. Wenn mehr als ein Satz das tut, ist es eine eingeschränkte Garantie, egal wie das Marketing sie nennt. Laufzeit versus Garantiedauer. 24 Monate Vertrag, 12 Monate Garantie bedeutet: Im zweiten Jahr darf der Preis steigen, du bist aber gebunden. Das ist die teuerste Konstruktion. Ideal: Garantie mindestens Restlaufzeit, danach monatlich kündbar. Bonus-Rückforderung. Viele Boni werden nur gutgeschrieben, wenn du 12 Monate bleibst. Wer in Monat 10 wegen Umzug rausgeht, zahlt den Bonus anteilig zurück. Das muss in den Effektivpreis. Grundversorgung gegen Festpreis, die 20000-Kilowattstunden-Rechnung. Grundversorgung 13,5 Cent, Festpreis mit voller Garantie 10,8 Cent, Grundpreis ähnlich. Differenz 2,7 Cent × 20000 Kilowattstunden = 540 Euro im Jahr. Selbst wenn der Festpreis 0,5 Cent Versicherungsaufschlag enthält, bleiben über 400 Euro.",
+   "text": "Weitere praxisnahe Ratschläge zur Vorbereitung deiner Heizungsanlage findest du in unserem Ratgeber zu Versäumnissen beim Heizen im Spätsommer. Vertragstext lesen: die fünf Sätze, die über hunderte Euro entscheiden. Suche im PDF nach: Preisgarantie, Preisanpassung, steuerliche Änderungen, CO₂, Netzentgelte, Bonus, Sonderkündigung. Markiere jeden Satz, der dem Anbieter das Recht gibt, trotz Garantie zu erhöhen. Wenn mehr als ein Satz das tut, ist es eine eingeschränkte Garantie, egal wie das Marketing sie nennt. Laufzeit versus Garantiedauer. 24 Monate Vertrag, 12 Monate Garantie bedeutet: Im zweiten Jahr darf der Preis steigen, du bist aber gebunden. Das ist die teuerste Konstruktion. Ideal: Garantie mindestens Restlaufzeit, danach monatlich kündbar. Bonus-Rückforderung. Viele Boni werden nur gutgeschrieben, wenn du 12 Monate bleibst. Wer in Monat 10 wegen Umzug rausgeht, zahlt den Bonus anteilig zurück. Das muss in den Effektivpreis. Grundversorgung gegen Festpreis, die 20000-Kilowattstunden-Rechnung. Grundversorgung 13,5 Cent, Festpreis mit voller Garantie 10,8 Cent, Grundpreis ähnlich. Differenz 2,7 Cent × 20000 Kilowattstunden = 540 Euro im Jahr. Selbst wenn der Festpreis 0,5 Cent Versicherungsaufschlag enthält, bleiben über 400 Euro. Der Wechsel dauert online 10 Minuten, die Belieferung startet zum nächsten möglichen Termin, der Grundversorger wird automatisch abgelöst.",
    "units": [
     {
      "i": 65,
@@ -442,294 +442,282 @@
     },
     {
      "i": 66,
-     "type": "p",
-     "lang": "de",
-     "chars": 29
-    },
-    {
-     "i": 67,
      "type": "h2",
      "lang": "de",
      "chars": 71
     },
     {
-     "i": 68,
+     "i": 67,
      "type": "p",
      "lang": "de",
      "chars": 116
+    },
+    {
+     "i": 68,
+     "type": "p",
+     "lang": "de",
+     "chars": 80
     },
     {
      "i": 69,
      "type": "p",
      "lang": "de",
-     "chars": 80
+     "chars": 102
     },
     {
      "i": 70,
      "type": "p",
      "lang": "de",
-     "chars": 102
+     "chars": 141
     },
     {
      "i": 71,
      "type": "p",
      "lang": "de",
-     "chars": 141
+     "chars": 101
     },
     {
      "i": 72,
      "type": "p",
      "lang": "de",
-     "chars": 101
+     "chars": 85
     },
     {
      "i": 73,
      "type": "p",
      "lang": "de",
-     "chars": 85
-    },
-    {
-     "i": 74,
-     "type": "p",
-     "lang": "de",
      "chars": 101
     },
     {
-     "i": 75,
+     "i": 74,
      "type": "h2",
      "lang": "de",
      "chars": 68
     },
     {
-     "i": 76,
+     "i": 75,
      "type": "p",
      "lang": "de",
      "chars": 150
     },
     {
-     "i": 77,
+     "i": 76,
      "type": "p",
      "lang": "de",
      "chars": 89
+    },
+    {
+     "i": 77,
+     "type": "p",
+     "lang": "de",
+     "chars": 138
     }
    ]
   },
   {
    "index": 6,
-   "text": "Der Wechsel dauert online 10 Minuten, die Belieferung startet zum nächsten möglichen Termin, der Grundversorger wird automatisch abgelöst. Wer im Sommer wechselt, sichert den Preis vor der Heizsaison. Wer im November wechselt, zahlt oft schon den ersten kalten Monat zum alten Preis. Deshalb gehört der Vergleich in den August/September, nicht in den ersten Frost. Checkliste vor dem Klick auf Jetzt wechseln. Zählernummer und Jahresverbrauch (letzte Abrechnung) griffbereit. Malus-freie Schufa-Klausel? Manche Anbieter lehnen ohne Begründung ab, zweiten Tarif in Reserve halten. SEPA-Mandat nur an den Versorger, nie an dubiose Wechselservices mit Vollmacht über alles. Bestätigungsmail speichern, Kundenportal-Login anlegen, Abschlag nach 6 Wochen gegen Zählerstand prüfen. Kalendereintrag 8 Wochen vor Ablauf: erneut vergleichen. Eine Preisgarantie ist Planungssicherheit, kein Religionsthema. Wenn der Markt 2027 dauerhaft unter deinem Garantiepreis liegt und du monatlich kündbar bist, wechselst du. Bis dahin schläfst du, ohne jede Börsenmeldung in die Gasrechnung zu übersetzen. Fazit: Mit Planungssicherheit entspannt durch das Jahr. Eine Preisgarantie für Gas nimmt dir die Sorge vor unkalkulierbaren Preiserhöhungen und spart bares Geld.",
+   "text": "Wer im Sommer wechselt, sichert den Preis vor der Heizsaison. Wer im November wechselt, zahlt oft schon den ersten kalten Monat zum alten Preis. Deshalb gehört der Vergleich in den August/September, nicht in den ersten Frost. Checkliste vor dem Klick auf Jetzt wechseln. Zählernummer und Jahresverbrauch (letzte Abrechnung) griffbereit. Malus-freie Schufa-Klausel? Manche Anbieter lehnen ohne Begründung ab, zweiten Tarif in Reserve halten. SEPA-Mandat nur an den Versorger, nie an dubiose Wechselservices mit Vollmacht über alles. Bestätigungsmail speichern, Kundenportal-Login anlegen, Abschlag nach 6 Wochen gegen Zählerstand prüfen. Kalendereintrag 8 Wochen vor Ablauf: erneut vergleichen. Eine Preisgarantie ist Planungssicherheit, kein Religionsthema. Wenn der Markt 2027 dauerhaft unter deinem Garantiepreis liegt und du monatlich kündbar bist, wechselst du. Bis dahin schläfst du, ohne jede Börsenmeldung in die Gasrechnung zu übersetzen. Fazit: Mit Planungssicherheit entspannt durch das Jahr. Eine Preisgarantie für Gas nimmt dir die Sorge vor unkalkulierbaren Preiserhöhungen und spart bares Geld. Wer aus der teuren Grundversorgung zu einem geprüften Anbieter mit 12 Monaten Preisbindung wechselt, entlastet die Haushaltskasse um bis zu 650 Euro im Jahr. Weiterlesen: Ratgeber Strom und Gas sparen · Gasrechnung senken im Spätsommer · Praxis-Tipps zum Gasanbieterwechsel. Häufige Fragen.",
    "units": [
     {
      "i": 78,
      "type": "p",
      "lang": "de",
-     "chars": 138
+     "chars": 61
     },
     {
      "i": 79,
      "type": "p",
      "lang": "de",
-     "chars": 61
+     "chars": 82
     },
     {
      "i": 80,
      "type": "p",
      "lang": "de",
-     "chars": 82
-    },
-    {
-     "i": 81,
-     "type": "p",
-     "lang": "de",
      "chars": 80
     },
     {
-     "i": 82,
+     "i": 81,
      "type": "h2",
      "lang": "de",
      "chars": 44
     },
     {
-     "i": 83,
+     "i": 82,
      "type": "li",
      "lang": "de",
      "chars": 65
     },
     {
-     "i": 84,
+     "i": 83,
      "type": "li",
      "lang": "de",
      "chars": 27
     },
     {
-     "i": 85,
+     "i": 84,
      "type": "li",
      "lang": "de",
      "chars": 75
     },
     {
-     "i": 86,
+     "i": 85,
      "type": "li",
      "lang": "de",
      "chars": 90
     },
     {
-     "i": 87,
+     "i": 86,
      "type": "li",
      "lang": "de",
      "chars": 104
     },
     {
-     "i": 88,
+     "i": 87,
      "type": "li",
      "lang": "de",
      "chars": 56
     },
     {
-     "i": 89,
+     "i": 88,
      "type": "p",
      "lang": "de",
      "chars": 63
     },
     {
-     "i": 90,
+     "i": 89,
      "type": "p",
      "lang": "de",
      "chars": 107
     },
     {
-     "i": 91,
+     "i": 90,
      "type": "p",
      "lang": "de",
      "chars": 80
     },
     {
-     "i": 92,
+     "i": 91,
      "type": "h2",
      "lang": "de",
      "chars": 55
     },
     {
-     "i": 93,
+     "i": 92,
      "type": "p",
      "lang": "de",
      "chars": 105
-    }
-   ]
-  },
-  {
-   "index": 7,
-   "text": "Wer aus der teuren Grundversorgung zu einem geprüften Anbieter mit 12 Monaten Preisbindung wechselt, entlastet die Haushaltskasse um bis zu 650 Euro im Jahr. Weiterlesen: Ratgeber Strom und Gas sparen · Gasrechnung senken im Spätsommer · Praxis-Tipps zum Gasanbieterwechsel. Häufige Fragen. Was passiert bei einer Preiserhöhung trotz Preisgarantie. Sollte ein Anbieter aufgrund steigender Steuern die Preise anpassen, steht dir immer ein 14-tägiges gesetzliches Sonderkündigungsrecht zu. Gilt die Preisgarantie auch für den monatlichen Grundpreis. Bei einer vollumfänglichen oder eingeschränkten Preisgarantie umfasst der Schutz in der Regel sowohl den Arbeitspreis pro Kilowattstunden als auch den monatlichen Grundpreis. Wie lange vor Vertragsende sollte ich wechseln. Du kannst bereits drei bis sechs Monate vor Ablauf deines bestehenden Vertrags einen neuen Tarif abschließen und den Lieferbeginn vordatieren lassen. Kann die Gaszufuhr beim Wechsel unterbrochen werden. Nein. Die unterbrechungsfreie Belieferung ist durch das Energiewirtschaftsgesetz rechtlich zu 100 Prozent abgesichert. Was ist der Unterschied zwischen Kilowattstunden und Kubikmetern. Der Gaszähler misst das Volumen in Kubikmetern (m³). Auf der Rechnung wird dieser Wert über den Brennwert und die Zustandszahl in Kilowattstunden (Kilowattstunden) umgerechnet.",
-   "units": [
+    },
     {
-     "i": 94,
+     "i": 93,
      "type": "p",
      "lang": "de",
      "chars": 157
     },
     {
-     "i": 95,
+     "i": 94,
      "type": "p",
      "lang": "de",
      "chars": 116
     },
     {
-     "i": 96,
+     "i": 95,
      "type": "h2",
      "lang": "de",
      "chars": 15
-    },
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Was passiert bei einer Preiserhöhung trotz Preisgarantie? Sollte ein Anbieter aufgrund steigender Steuern die Preise anpassen, steht dir immer ein 14-tägiges gesetzliches Sonderkündigungsrecht zu. Gilt die Preisgarantie auch für den monatlichen Grundpreis? Bei einer vollumfänglichen oder eingeschränkten Preisgarantie umfasst der Schutz in der Regel sowohl den Arbeitspreis pro Kilowattstunden als auch den monatlichen Grundpreis. Wie lange vor Vertragsende sollte ich wechseln? Du kannst bereits drei bis sechs Monate vor Ablauf deines bestehenden Vertrags einen neuen Tarif abschließen und den Lieferbeginn vordatieren lassen. Kann die Gaszufuhr beim Wechsel unterbrochen werden? Nein. Die unterbrechungsfreie Belieferung ist durch das Energiewirtschaftsgesetz rechtlich zu 100 Prozent abgesichert. Was ist der Unterschied zwischen Kilowattstunden und Kubikmetern? Der Gaszähler misst das Volumen in Kubikmetern (m³). Auf der Rechnung wird dieser Wert über den Brennwert und die Zustandszahl in Kilowattstunden (Kilowattstunden) umgerechnet. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
     {
-     "i": 97,
+     "i": 96,
      "type": "h3",
      "lang": "de",
      "chars": 57
     },
     {
-     "i": 98,
+     "i": 97,
      "type": "p",
      "lang": "de",
      "chars": 138
     },
     {
-     "i": 99,
+     "i": 98,
      "type": "h3",
      "lang": "de",
      "chars": 59
     },
     {
-     "i": 100,
+     "i": 99,
      "type": "p",
      "lang": "de",
      "chars": 174
     },
     {
-     "i": 101,
+     "i": 100,
      "type": "h3",
      "lang": "de",
      "chars": 47
     },
     {
-     "i": 102,
+     "i": 101,
      "type": "p",
      "lang": "de",
      "chars": 149
     },
     {
-     "i": 103,
+     "i": 102,
      "type": "h3",
      "lang": "de",
      "chars": 52
     },
     {
-     "i": 104,
+     "i": 103,
      "type": "p",
      "lang": "de",
      "chars": 118
     },
     {
-     "i": 105,
+     "i": 104,
      "type": "h3",
      "lang": "de",
      "chars": 65
     },
     {
-     "i": 106,
+     "i": 105,
      "type": "p",
      "lang": "de",
      "chars": 52
     },
     {
-     "i": 107,
+     "i": 106,
      "type": "p",
      "lang": "de",
      "chars": 123
-    }
-   ]
-  },
-  {
-   "index": 8,
-   "text": "Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
-   "units": [
+    },
     {
-     "i": 108,
+     "i": 107,
      "type": "p",
      "lang": "de",
      "chars": 66
     },
     {
-     "i": 109,
+     "i": 108,
      "type": "p",
      "lang": "de",
      "chars": 49
     },
     {
-     "i": 110,
+     "i": 109,
      "type": "p",
      "lang": "de",
      "chars": 96
     },
     {
-     "i": 111,
+     "i": 110,
      "type": "outro",
      "lang": "de",
      "chars": 66

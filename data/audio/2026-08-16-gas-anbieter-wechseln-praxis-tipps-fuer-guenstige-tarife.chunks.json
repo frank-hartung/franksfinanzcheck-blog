@@ -7,8 +7,8 @@
   "rate": 0.93,
   "maxChunk": 140
  },
- "units": 120,
- "chars": 9705,
+ "units": 119,
+ "chars": 9676,
  "parts": [
   {
    "index": 0,
@@ -534,7 +534,7 @@
   },
   {
    "index": 5,
-   "text": "Die Kündigungsfrist beträgt in der Regel zwei Wochen ab Erhalt des Informationsschreibens. In diesem Fall kündigst du ausnahmsweise selbst, schriftlich oder per E-Mail. So versäumst du die kurze Frist nicht. Vermerke im Wechselantrag beim neuen Anbieter, dass du bereits wegen einer Preiserhöhung gekündigt hast. Dadurch wechselst du zum Datum der Preisanpassung nahtlos in den neuen Spartarif. <!-- premium-length-2026 -->. Sonderkündigung und Preiserhöhung, der Brief, der zählt. Steht in einem Schreiben wir passen den Arbeitspreis an, läuft die Sonderkündigungsfrist. Datum des Zugangs notieren, Frist im Brief prüfen (oft 2 Wochen). Kündigung schriftlich mit Kundennummer, Zählernummer, Bezug auf das Erhöhungsschreiben. Parallel neuen Tarif abschließen, Lieferbeginn = Ende des alten. Wer die Frist verpasst, bleibt im erhöhten Tarif bis zur nächsten ordentlichen Kündigung. Kalender-Foto des Briefes am Kühlschrank ist unspektakulär und wirksam. 3-Schritte-Ablauf ohne Lücke. Verbrauch und Zähler von der Jahresrechnung. Vergleich mit Preisgarantie-Filter. Auftrag, Bestätigung, Abschlag nach 6 Wochen gegen Zählerstand. Der Grundversorger oder Alt-Anbieter wird automatisch abgelöst. Du heizt durch, die Rechnung wechselt den Absender. Fazit: Keine Angst vor dem Wechsel, es lohnt sich immer.",
+   "text": "Die Kündigungsfrist beträgt in der Regel zwei Wochen ab Erhalt des Informationsschreibens. In diesem Fall kündigst du ausnahmsweise selbst, schriftlich oder per E-Mail. So versäumst du die kurze Frist nicht. Vermerke im Wechselantrag beim neuen Anbieter, dass du bereits wegen einer Preiserhöhung gekündigt hast. Dadurch wechselst du zum Datum der Preisanpassung nahtlos in den neuen Spartarif. Sonderkündigung und Preiserhöhung, der Brief, der zählt. Steht in einem Schreiben wir passen den Arbeitspreis an, läuft die Sonderkündigungsfrist. Datum des Zugangs notieren, Frist im Brief prüfen (oft 2 Wochen). Kündigung schriftlich mit Kundennummer, Zählernummer, Bezug auf das Erhöhungsschreiben. Parallel neuen Tarif abschließen, Lieferbeginn = Ende des alten. Wer die Frist verpasst, bleibt im erhöhten Tarif bis zur nächsten ordentlichen Kündigung. Kalender-Foto des Briefes am Kühlschrank ist unspektakulär und wirksam. 3-Schritte-Ablauf ohne Lücke. Verbrauch und Zähler von der Jahresrechnung. Vergleich mit Preisgarantie-Filter. Auftrag, Bestätigung, Abschlag nach 6 Wochen gegen Zählerstand. Der Grundversorger oder Alt-Anbieter wird automatisch abgelöst. Du heizt durch, die Rechnung wechselt den Absender. Fazit: Keine Angst vor dem Wechsel, es lohnt sich immer. Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst.",
    "units": [
     {
      "i": 82,
@@ -562,216 +562,210 @@
     },
     {
      "i": 86,
-     "type": "p",
-     "lang": "de",
-     "chars": 29
-    },
-    {
-     "i": 87,
      "type": "h2",
      "lang": "de",
      "chars": 56
+    },
+    {
+     "i": 87,
+     "type": "p",
+     "lang": "de",
+     "chars": 89
     },
     {
      "i": 88,
      "type": "p",
      "lang": "de",
-     "chars": 89
+     "chars": 65
     },
     {
      "i": 89,
      "type": "p",
      "lang": "de",
-     "chars": 65
+     "chars": 87
     },
     {
      "i": 90,
      "type": "p",
      "lang": "de",
-     "chars": 87
+     "chars": 64
     },
     {
      "i": 91,
      "type": "p",
      "lang": "de",
-     "chars": 64
+     "chars": 89
     },
     {
      "i": 92,
      "type": "p",
      "lang": "de",
-     "chars": 89
-    },
-    {
-     "i": 93,
-     "type": "p",
-     "lang": "de",
      "chars": 71
     },
     {
-     "i": 94,
+     "i": 93,
      "type": "h2",
      "lang": "de",
      "chars": 29
     },
     {
-     "i": 95,
+     "i": 94,
      "type": "p",
      "lang": "de",
      "chars": 80
     },
     {
-     "i": 96,
+     "i": 95,
      "type": "p",
      "lang": "de",
      "chars": 127
     },
     {
-     "i": 97,
+     "i": 96,
      "type": "p",
      "lang": "de",
      "chars": 51
     },
     {
-     "i": 98,
+     "i": 97,
      "type": "h2",
      "lang": "de",
      "chars": 56
+    },
+    {
+     "i": 98,
+     "type": "p",
+     "lang": "de",
+     "chars": 128
     }
    ]
   },
   {
    "index": 6,
-   "text": "Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst. Dank strenger Verbraucherschutzgesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist. Bei einem typischen Familienhaushalt mit 20000 Kilowattstunden Verbrauch sparst du im ersten Jahr bis 882 Euro. Auch dauerhaft bleiben mehrere hundert Euro auf deinem Konto. Jetzt vergleichen und sparen: führt zu Bis 882 Euro sparen, Angebote vergleichen. Weiterlesen: Pillar Strom und Gas sparen · Gasrechnung senken im Spätsommer · Günstige Tarife mit Preisgarantie. Häufige Fragen. Kann mir während des Wechsels das Gas abgestellt werden. Nein, das ist gesetzlich unmöglich. Der örtliche Grundversorger ist zur lückenlosen Belieferung verpflichtet. Was mache ich bei einem Umzug. Bei einem Umzug meldest du deinen bestehenden Vertrag mit einer Frist von sechs Wochen ab oder nimmst ihn an die neue Lieferadresse mit. Wie wird Gas von Kubikmetern (m³) in Kilowattstunden umgerechnet. Multipliziere die Kubikmeter mit dem Brennwert (meist circa 10 bis 11,5) und der Zustandszahl (z-Zahl, circa 0,95). Grobe Faustformel: 1 m³ Gas entspricht rund 10 Kilowattstunden. Wie lange dauert der gesamte Wechselprozess.",
+   "text": "Dank strenger Verbraucherschutzgesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist. Bei einem typischen Familienhaushalt mit 20000 Kilowattstunden Verbrauch sparst du im ersten Jahr bis 882 Euro. Auch dauerhaft bleiben mehrere hundert Euro auf deinem Konto. Jetzt vergleichen und sparen: führt zu Bis 882 Euro sparen, Angebote vergleichen. Weiterlesen: Pillar Strom und Gas sparen · Gasrechnung senken im Spätsommer · Günstige Tarife mit Preisgarantie. Häufige Fragen. Kann mir während des Wechsels das Gas abgestellt werden? Nein, das ist gesetzlich unmöglich. Der örtliche Grundversorger ist zur lückenlosen Belieferung verpflichtet. Was mache ich bei einem Umzug? Bei einem Umzug meldest du deinen bestehenden Vertrag mit einer Frist von sechs Wochen ab oder nimmst ihn an die neue Lieferadresse mit. Wie wird Gas von Kubikmetern (m³) in Kilowattstunden umgerechnet? Multipliziere die Kubikmeter mit dem Brennwert (meist circa 10 bis 11,5) und der Zustandszahl (z-Zahl, circa 0,95). Grobe Faustformel: 1 m³ Gas entspricht rund 10 Kilowattstunden. Wie lange dauert der gesamte Wechselprozess? Vom Absenden des Antrags bis zur ersten Belieferung vergehen im Schnitt 3 bis 6 Wochen, abhängig von deinen bisherigen Kündigungsfristen. Was passiert mit zu viel gezahlten Abschlägen?",
    "units": [
     {
      "i": 99,
      "type": "p",
      "lang": "de",
-     "chars": 128
+     "chars": 148
     },
     {
      "i": 100,
      "type": "p",
      "lang": "de",
-     "chars": 148
+     "chars": 111
     },
     {
      "i": 101,
      "type": "p",
      "lang": "de",
-     "chars": 111
+     "chars": 61
     },
     {
      "i": 102,
      "type": "p",
      "lang": "de",
-     "chars": 61
+     "chars": 81
     },
     {
      "i": 103,
      "type": "p",
      "lang": "de",
-     "chars": 81
-    },
-    {
-     "i": 104,
-     "type": "p",
-     "lang": "de",
      "chars": 112
     },
     {
-     "i": 105,
+     "i": 104,
      "type": "h2",
      "lang": "de",
      "chars": 15
     },
     {
-     "i": 106,
+     "i": 105,
      "type": "h3",
      "lang": "de",
      "chars": 56
     },
     {
-     "i": 107,
+     "i": 106,
      "type": "p",
      "lang": "de",
      "chars": 109
     },
     {
-     "i": 108,
+     "i": 107,
      "type": "h3",
      "lang": "de",
      "chars": 30
     },
     {
-     "i": 109,
+     "i": 108,
      "type": "p",
      "lang": "de",
      "chars": 136
     },
     {
-     "i": 110,
+     "i": 109,
      "type": "h3",
      "lang": "de",
      "chars": 65
     },
     {
-     "i": 111,
+     "i": 110,
      "type": "p",
      "lang": "de",
      "chars": 115
     },
     {
-     "i": 112,
+     "i": 111,
      "type": "p",
      "lang": "de",
      "chars": 63
     },
     {
-     "i": 113,
+     "i": 112,
      "type": "h3",
      "lang": "de",
      "chars": 44
-    }
-   ]
-  },
-  {
-   "index": 7,
-   "text": "Vom Absenden des Antrags bis zur ersten Belieferung vergehen im Schnitt 3 bis 6 Wochen, abhängig von deinen bisherigen Kündigungsfristen. Was passiert mit zu viel gezahlten Abschlägen. Überzahlte Beträge erstattet dir der alte Versorger mit der Schlussrechnung auf dein Bankkonto. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
-   "units": [
+    },
     {
-     "i": 114,
+     "i": 113,
      "type": "p",
      "lang": "de",
      "chars": 137
     },
     {
-     "i": 115,
+     "i": 114,
      "type": "h3",
      "lang": "de",
      "chars": 46
-    },
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Überzahlte Beträge erstattet dir der alte Versorger mit der Schlussrechnung auf dein Bankkonto. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
     {
-     "i": 116,
+     "i": 115,
      "type": "p",
      "lang": "de",
      "chars": 95
     },
     {
-     "i": 117,
+     "i": 116,
      "type": "p",
      "lang": "de",
      "chars": 49
     },
     {
-     "i": 118,
+     "i": 117,
      "type": "p",
      "lang": "de",
      "chars": 96
     },
     {
-     "i": 119,
+     "i": 118,
      "type": "outro",
      "lang": "de",
      "chars": 66

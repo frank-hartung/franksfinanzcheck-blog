@@ -1,109 +1,109 @@
 {
- "generated": "2026-09-03T18:48:06.564Z",
+ "generated": "2026-09-03T18:50:22.612Z",
  "maxChars": 1400,
- "totalParts": 270,
+ "totalParts": 268,
  "articles": [
   {
    "slug": "2026-08-10-dsl-wechselbonus-sichern",
    "parts": 8,
-   "chars": 10654,
+   "chars": 10625,
    "longest": 1399
   },
   {
    "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
    "parts": 9,
-   "chars": 11296,
-   "longest": 1396
+   "chars": 11267,
+   "longest": 1400
   },
   {
    "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
    "parts": 9,
-   "chars": 11094,
-   "longest": 1385
+   "chars": 11034,
+   "longest": 1384
   },
   {
    "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-   "parts": 9,
-   "chars": 10783,
-   "longest": 1397
+   "parts": 8,
+   "chars": 10754,
+   "longest": 1399
   },
   {
    "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-   "parts": 9,
-   "chars": 10749,
-   "longest": 1400
+   "parts": 8,
+   "chars": 10689,
+   "longest": 1399
   },
   {
    "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel",
    "parts": 9,
-   "chars": 11581,
-   "longest": 1400
+   "chars": 11521,
+   "longest": 1392
   },
   {
    "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
    "parts": 8,
-   "chars": 10192,
+   "chars": 10100,
    "longest": 1386
   },
   {
    "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
    "parts": 10,
-   "chars": 12325,
+   "chars": 12296,
    "longest": 1378
   },
   {
    "slug": "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife",
    "parts": 8,
-   "chars": 9705,
-   "longest": 1384
+   "chars": 9676,
+   "longest": 1399
   },
   {
    "slug": "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst",
    "parts": 10,
-   "chars": 12205,
-   "longest": 1394
+   "chars": 12176,
+   "longest": 1399
   },
   {
    "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
    "parts": 9,
-   "chars": 10913,
-   "longest": 1397
+   "chars": 10822,
+   "longest": 1391
   },
   {
    "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet",
    "parts": 9,
-   "chars": 11705,
+   "chars": 11676,
    "longest": 1393
   },
   {
    "slug": "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann",
    "parts": 9,
-   "chars": 11114,
+   "chars": 11085,
    "longest": 1395
   },
   {
    "slug": "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst",
    "parts": 8,
-   "chars": 10274,
+   "chars": 10245,
    "longest": 1395
   },
   {
    "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
    "parts": 9,
-   "chars": 11528,
-   "longest": 1380
+   "chars": 11499,
+   "longest": 1398
   },
   {
    "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
    "parts": 8,
-   "chars": 9978,
+   "chars": 9918,
    "longest": 1385
   },
   {
    "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
    "parts": 10,
-   "chars": 12237,
-   "longest": 1396
+   "chars": 12146,
+   "longest": 1394
   },
   {
    "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
@@ -114,38 +114,38 @@
   {
    "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
    "parts": 14,
-   "chars": 18130,
+   "chars": 18101,
    "longest": 1391
   },
   {
    "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
    "parts": 9,
-   "chars": 11142,
-   "longest": 1388
+   "chars": 11113,
+   "longest": 1383
   },
   {
    "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
    "parts": 8,
-   "chars": 10410,
-   "longest": 1387
+   "chars": 10381,
+   "longest": 1373
   },
   {
    "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet",
    "parts": 12,
-   "chars": 15437,
-   "longest": 1399
+   "chars": 15408,
+   "longest": 1398
   },
   {
    "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
    "parts": 11,
-   "chars": 13326,
-   "longest": 1384
+   "chars": 13297,
+   "longest": 1374
   },
   {
    "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
    "parts": 10,
-   "chars": 13415,
-   "longest": 1388
+   "chars": 13355,
+   "longest": 1396
   },
   {
    "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",

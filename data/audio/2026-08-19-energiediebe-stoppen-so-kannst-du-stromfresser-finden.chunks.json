@@ -7,8 +7,8 @@
   "rate": 0.93,
   "maxChunk": 140
  },
- "units": 100,
- "chars": 9978,
+ "units": 98,
+ "chars": 9918,
  "parts": [
   {
    "index": 0,
@@ -312,7 +312,7 @@
   },
   {
    "index": 4,
-   "text": "Jedes Grad kühler erhöht den Strombedarf um circa 6 Prozent. Regelmäßiges Abtauen des Gefrierfachs verhindert dicke Eisschichten. Punkt 3: Eco-Programme bei Waschmaschine und Spülmaschine nutzen: Die Eco-Programme dauern zwar länger, heizen das Wasser aber schonender und verbrauchen bis zu 40 Prozent weniger Strom. Punkt 4: Stromanbieter regelmäßig wechseln: Wer zusätzlich seinen Arbeitspreis von 42 Cent (Grundversorgung) auf 28 Cent (Wettbewerbstarif mit Preisgarantie) senkt, spart bei 3500 Kilowattstunden Jahresverbrauch weitere 490 Euro pro Jahr ein. Ein kurzer Wechselprozess im Online-Tarifvergleich lohnt sich in jedem Fall. Praktische Anleitungen zur jahreszeitlichen Fixkostenoptimierung findest du in unserem Überblick zum Stromsparen im Herbst sowie in unserem umfassenden Pillar-Artikel zu Strom und Gas. <!-- premium-length-2026 -->. Messen in einer Woche, das Protokoll, das Schätzungen ersetzt. Tag 1: Kühlschrank 24 Stunden. Tag 2: Gefriertruhe. Tag 3: Desktop-PC inklusive Monitor und Dock im Alltag. Tag 4: TV-Ecke Standby über Nacht. Tag 5: Waschmaschine ein Eco-Gang versus 60 °C. Tag 6: Trockner ein Vollgang. Tag 7: Alles, was immer an ist (Pumpe, NAS, alter Decoder). Formel: gemessene Watt × Stunden × 365 / 1000 × Arbeitspreis. 12 Watt Dauerbetrieb = 105 Kilowattstunden ungefähr 32 bis 38 Euroo im Jahr.",
+   "text": "Jedes Grad kühler erhöht den Strombedarf um circa 6 Prozent. Regelmäßiges Abtauen des Gefrierfachs verhindert dicke Eisschichten. Punkt 3: Eco-Programme bei Waschmaschine und Spülmaschine nutzen: Die Eco-Programme dauern zwar länger, heizen das Wasser aber schonender und verbrauchen bis zu 40 Prozent weniger Strom. Punkt 4: Stromanbieter regelmäßig wechseln: Wer zusätzlich seinen Arbeitspreis von 42 Cent (Grundversorgung) auf 28 Cent (Wettbewerbstarif mit Preisgarantie) senkt, spart bei 3500 Kilowattstunden Jahresverbrauch weitere 490 Euro pro Jahr ein. Ein kurzer Wechselprozess im Online-Tarifvergleich lohnt sich in jedem Fall. Praktische Anleitungen zur jahreszeitlichen Fixkostenoptimierung findest du in unserem Überblick zum Stromsparen im Herbst sowie in unserem umfassenden Pillar-Artikel zu Strom und Gas. Messen in einer Woche, das Protokoll, das Schätzungen ersetzt. Tag 1: Kühlschrank 24 Stunden. Tag 2: Gefriertruhe. Tag 3: Desktop-PC inklusive Monitor und Dock im Alltag. Tag 4: TV-Ecke Standby über Nacht. Tag 5: Waschmaschine ein Eco-Gang versus 60 °C. Tag 6: Trockner ein Vollgang. Tag 7: Alles, was immer an ist (Pumpe, NAS, alter Decoder). Formel: gemessene Watt × Stunden × 365 / 1000 × Arbeitspreis. 12 Watt Dauerbetrieb = 105 Kilowattstunden ungefähr 32 bis 38 Euroo im Jahr. Fünf solche Geräte sind ein Restaurantbesuch pro Monat, unsichtbar.",
    "units": [
     {
      "i": 46,
@@ -358,162 +358,150 @@
     },
     {
      "i": 53,
-     "type": "p",
-     "lang": "de",
-     "chars": 29
-    },
-    {
-     "i": 54,
      "type": "h2",
      "lang": "de",
      "chars": 62
     },
     {
-     "i": 55,
+     "i": 54,
      "type": "li",
      "lang": "de",
      "chars": 30
     },
     {
-     "i": 56,
+     "i": 55,
      "type": "li",
      "lang": "de",
      "chars": 20
     },
     {
-     "i": 57,
+     "i": 56,
      "type": "li",
      "lang": "de",
      "chars": 55
     },
     {
-     "i": 58,
+     "i": 57,
      "type": "li",
      "lang": "de",
      "chars": 34
     },
     {
-     "i": 59,
+     "i": 58,
      "type": "li",
      "lang": "de",
      "chars": 47
     },
     {
-     "i": 60,
+     "i": 59,
      "type": "li",
      "lang": "de",
      "chars": 29
     },
     {
-     "i": 61,
+     "i": 60,
      "type": "li",
      "lang": "de",
      "chars": 59
     },
     {
-     "i": 62,
+     "i": 61,
      "type": "p",
      "lang": "de",
      "chars": 138
+    },
+    {
+     "i": 62,
+     "type": "p",
+     "lang": "de",
+     "chars": 67
     }
    ]
   },
   {
    "index": 5,
-   "text": "Fünf solche Geräte sind ein Restaurantbesuch pro Monat, unsichtbar. Geräte über 80 Euro Stromkosten pro Jahr auf die Ersatzliste. A-Klasse-Kühlschrank gegen 15 Jahre alten F-Schrank: oft 120 bis 180 Euroo Ersparnis, Amortisation 4 bis 7 Jahre. Nicht jedes Gerät lohnt den Sofortkauf, die Truhe im Keller, die halb leer auf −22 °C steht, lohnt erst abtauen und wärmer stellen. Die 4 Sofort-Hacks ohne Anschaffung. Punkt 1: Steckerleiste TV/Audio, nachts aus. Punkt 2: Eco-Programme, volle Maschine, 1400 Touren. Punkt 3: Router-Zeitsteuerung 1 bis 6 Uhr, wenn niemand wach ist (Smarthome-Ausnahme). Punkt 4: Zählerstand jeden 1 – der Herbstanstieg wird sichtbar, bevor die Abrechnung kommt. Energiediebe sind selten dramatisch. Sie sind langweilig und dauerhaft. Genau deshalb gewinnt, wer misst statt rätselt. <!-- premium-length-2026-b -->. Ersatzentscheidung mit Amortisation, nicht mit schlechtem Gewissen. Nur weil ein Gerät alt ist, muss es nicht morgen neu sein. Rechnung: (alter Kilowattstunden − neuer Kilowattstunden) × Preis × Jahre bis du sowieso tauschst. Unter 3 Jahren Amortisation: tauschen, wenn das Geld da ist. Über 8 Jahren: erst einstellen, abtauen, Standort ändern. Die Truhe im Keller auf −18 °C statt −24 °C ist ein 0- Euro-Hebel, der oft 10 bis 20 Prozent ihres Verbrauchs holt. Fazit: Erst messen, dann gezielt Energiediebe stoppen.",
+   "text": "Geräte über 80 Euro Stromkosten pro Jahr auf die Ersatzliste. A-Klasse-Kühlschrank gegen 15 Jahre alten F-Schrank: oft 120 bis 180 Euroo Ersparnis, Amortisation 4 bis 7 Jahre. Nicht jedes Gerät lohnt den Sofortkauf, die Truhe im Keller, die halb leer auf −22 °C steht, lohnt erst abtauen und wärmer stellen. Die 4 Sofort-Hacks ohne Anschaffung. Punkt 1: Steckerleiste TV/Audio, nachts aus. Punkt 2: Eco-Programme, volle Maschine, 1400 Touren. Punkt 3: Router-Zeitsteuerung 1 bis 6 Uhr, wenn niemand wach ist (Smarthome-Ausnahme). Punkt 4: Zählerstand jeden 1 – der Herbstanstieg wird sichtbar, bevor die Abrechnung kommt. Energiediebe sind selten dramatisch. Sie sind langweilig und dauerhaft. Genau deshalb gewinnt, wer misst statt rätselt. Ersatzentscheidung mit Amortisation, nicht mit schlechtem Gewissen. Nur weil ein Gerät alt ist, muss es nicht morgen neu sein. Rechnung: (alter Kilowattstunden − neuer Kilowattstunden) × Preis × Jahre bis du sowieso tauschst. Unter 3 Jahren Amortisation: tauschen, wenn das Geld da ist. Über 8 Jahren: erst einstellen, abtauen, Standort ändern. Die Truhe im Keller auf −18 °C statt −24 °C ist ein 0- Euro-Hebel, der oft 10 bis 20 Prozent ihres Verbrauchs holt. Fazit: Erst messen, dann gezielt Energiediebe stoppen.",
    "units": [
     {
      "i": 63,
      "type": "p",
      "lang": "de",
-     "chars": 67
+     "chars": 61
     },
     {
      "i": 64,
      "type": "p",
      "lang": "de",
-     "chars": 61
+     "chars": 113
     },
     {
      "i": 65,
      "type": "p",
      "lang": "de",
-     "chars": 113
-    },
-    {
-     "i": 66,
-     "type": "p",
-     "lang": "de",
      "chars": 131
     },
     {
-     "i": 67,
+     "i": 66,
      "type": "h2",
      "lang": "de",
      "chars": 36
     },
     {
-     "i": 68,
+     "i": 67,
      "type": "li",
      "lang": "de",
      "chars": 44
     },
     {
-     "i": 69,
+     "i": 68,
      "type": "li",
      "lang": "de",
      "chars": 52
     },
     {
-     "i": 70,
+     "i": 69,
      "type": "li",
      "lang": "de",
      "chars": 86
     },
     {
-     "i": 71,
+     "i": 70,
      "type": "li",
      "lang": "de",
      "chars": 91
     },
     {
-     "i": 72,
+     "i": 71,
      "type": "p",
      "lang": "de",
      "chars": 119
     },
     {
-     "i": 73,
-     "type": "p",
-     "lang": "de",
-     "chars": 31
-    },
-    {
-     "i": 74,
+     "i": 72,
      "type": "h2",
      "lang": "de",
      "chars": 67
     },
     {
-     "i": 75,
+     "i": 73,
      "type": "p",
      "lang": "de",
      "chars": 157
     },
     {
-     "i": 76,
+     "i": 74,
      "type": "p",
      "lang": "de",
      "chars": 118
     },
     {
-     "i": 77,
+     "i": 75,
      "type": "p",
      "lang": "de",
      "chars": 115
     },
     {
-     "i": 78,
+     "i": 76,
      "type": "h2",
      "lang": "de",
      "chars": 54
@@ -522,82 +510,82 @@
   },
   {
    "index": 6,
-   "text": "Heimliche Stromfresser finden und Energiediebe stoppen, ist die schnellste Methode, um ohne spürbaren Komfortverzicht hunderte Euro einzusparen. Indem du veraltete Dauerverbraucher identifizierst, Standby-Kosten per Knopfdruck stoppst und deinen Stromtarif optimierst, holst du dir jedes Jahr über 400 Euro an Kaufkraft zurück. Weiterlesen: Ratgeber Strom und Gas sparen · Strom sparen im Herbst · Gasanbieter wechseln: Praxis-Tipps. Häufige Fragen. Wie viel Strom verbraucht ein typischer 3-Personen-Haushalt. In Deutschland verbraucht ein 3-Personen-Haushalt im Mehrfamilienhaus durchschnittlich circa 2800 bis 3500 Kilowattstunden Strom pro Jahr. Erfolgt die Warmwasserbereitung elektrisch über Boiler, liegt der Verbrauch oft bei 4200 bis 5000 Kilowattstunden. Welche Geräte verbrauchen im Standby am meisten Strom. Zu den größten Standby-Sündern gehören ältere Spielekonsolen (im Schnellstart-Modus bis zu 15 Watt), OLED-Fernseher mit Netzwerkbereitschaft, Kaffeevollautomaten mit Warmhaltefunktion und Mesh-Repeater älterer Bauart. Lohnt sich der Austausch eines funktionierenden Altgeräts. Bei Kühl- und Gefrierschränken, die älter als 12 bis 15 Jahre sind, rechnet sich die Neuanschaffung oft schon nach 3 bis 5 Jahren allein über die eingesparten Stromkosten. Woher bekomme ich ein kostenloses Strommessgerät.",
+   "text": "Heimliche Stromfresser finden und Energiediebe stoppen, ist die schnellste Methode, um ohne spürbaren Komfortverzicht hunderte Euro einzusparen. Indem du veraltete Dauerverbraucher identifizierst, Standby-Kosten per Knopfdruck stoppst und deinen Stromtarif optimierst, holst du dir jedes Jahr über 400 Euro an Kaufkraft zurück. Weiterlesen: Ratgeber Strom und Gas sparen · Strom sparen im Herbst · Gasanbieter wechseln: Praxis-Tipps. Häufige Fragen. Wie viel Strom verbraucht ein typischer 3-Personen-Haushalt? In Deutschland verbraucht ein 3-Personen-Haushalt im Mehrfamilienhaus durchschnittlich circa 2800 bis 3500 Kilowattstunden Strom pro Jahr. Erfolgt die Warmwasserbereitung elektrisch über Boiler, liegt der Verbrauch oft bei 4200 bis 5000 Kilowattstunden. Welche Geräte verbrauchen im Standby am meisten Strom? Zu den größten Standby-Sündern gehören ältere Spielekonsolen (im Schnellstart-Modus bis zu 15 Watt), OLED-Fernseher mit Netzwerkbereitschaft, Kaffeevollautomaten mit Warmhaltefunktion und Mesh-Repeater älterer Bauart. Lohnt sich der Austausch eines funktionierenden Altgeräts? Bei Kühl- und Gefrierschränken, die älter als 12 bis 15 Jahre sind, rechnet sich die Neuanschaffung oft schon nach 3 bis 5 Jahren allein über die eingesparten Stromkosten. Woher bekomme ich ein kostenloses Strommessgerät?",
    "units": [
     {
-     "i": 79,
+     "i": 77,
      "type": "p",
      "lang": "de",
      "chars": 144
     },
     {
-     "i": 80,
+     "i": 78,
      "type": "p",
      "lang": "de",
      "chars": 182
     },
     {
-     "i": 81,
+     "i": 79,
      "type": "p",
      "lang": "de",
      "chars": 105
     },
     {
-     "i": 82,
+     "i": 80,
      "type": "h2",
      "lang": "de",
      "chars": 15
     },
     {
-     "i": 83,
+     "i": 81,
      "type": "h3",
      "lang": "de",
      "chars": 60
     },
     {
-     "i": 84,
+     "i": 82,
      "type": "p",
      "lang": "de",
      "chars": 138
     },
     {
-     "i": 85,
+     "i": 83,
      "type": "p",
      "lang": "de",
      "chars": 114
     },
     {
-     "i": 86,
+     "i": 84,
      "type": "h3",
      "lang": "de",
      "chars": 54
     },
     {
-     "i": 87,
+     "i": 85,
      "type": "p",
      "lang": "de",
      "chars": 100
     },
     {
-     "i": 88,
+     "i": 86,
      "type": "p",
      "lang": "de",
      "chars": 116
     },
     {
-     "i": 89,
+     "i": 87,
      "type": "h3",
      "lang": "de",
      "chars": 58
     },
     {
-     "i": 90,
+     "i": 88,
      "type": "p",
      "lang": "de",
      "chars": 171
     },
     {
-     "i": 91,
+     "i": 89,
      "type": "h3",
      "lang": "de",
      "chars": 49
@@ -606,52 +594,52 @@
   },
   {
    "index": 7,
-   "text": "Viele örtliche Stadtwerke, Energieagenturen und Verbraucherzentralen verleihen hochwertige Strommessgeräte kostenlos an Bürger. Wie wechsle ich den Stromanbieter. Der Wechsel dauert online weniger als 5 Minuten. Du benötigst lediglich deine Postleitzahl, deinen Jahresverbrauch und deine Zählernummer. Die Kündigung beim alten Anbieter übernimmt der neue Versorger automatisch. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "text": "Viele örtliche Stadtwerke, Energieagenturen und Verbraucherzentralen verleihen hochwertige Strommessgeräte kostenlos an Bürger. Wie wechsle ich den Stromanbieter? Der Wechsel dauert online weniger als 5 Minuten. Du benötigst lediglich deine Postleitzahl, deinen Jahresverbrauch und deine Zählernummer. Die Kündigung beim alten Anbieter übernimmt der neue Versorger automatisch. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
    "units": [
     {
-     "i": 92,
+     "i": 90,
      "type": "p",
      "lang": "de",
      "chars": 127
     },
     {
-     "i": 93,
+     "i": 91,
      "type": "h3",
      "lang": "de",
      "chars": 34
     },
     {
-     "i": 94,
+     "i": 92,
      "type": "p",
      "lang": "de",
      "chars": 138
     },
     {
-     "i": 95,
+     "i": 93,
      "type": "p",
      "lang": "de",
      "chars": 75
     },
     {
-     "i": 96,
+     "i": 94,
      "type": "p",
      "lang": "de",
      "chars": 66
     },
     {
-     "i": 97,
+     "i": 95,
      "type": "p",
      "lang": "de",
      "chars": 49
     },
     {
-     "i": 98,
+     "i": 96,
      "type": "p",
      "lang": "de",
      "chars": 96
     },
     {
-     "i": 99,
+     "i": 97,
      "type": "outro",
      "lang": "de",
      "chars": 66
