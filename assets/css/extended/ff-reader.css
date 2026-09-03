@@ -542,3 +542,49 @@ table.ff-reader-active,
 .post-content .ff-reader-active {
     scroll-margin-block: 22vh;
 }
+
+/* ---------- Kompatibilitäts- und Kontrast-Fallbacks ----------
+   color-mix is progressive enhancement; older Safari/WebViews must still
+   receive a fully visible, usable reader rather than an unstyled strip. */
+.ff-reader-toolbar {
+    background: rgba(14, 90, 67, .06);
+    border-color: rgba(14, 90, 67, .22);
+}
+.ff-reader-progress {
+    background: rgba(14, 90, 67, .12);
+}
+@supports (background: color-mix(in srgb, white 50%, black)) {
+    .ff-reader-toolbar {
+        background: color-mix(in srgb, var(--ff-emerald, #0E5A43) 6%, var(--entry, #fff));
+        border-color: color-mix(in srgb, var(--ff-emerald, #0E5A43) 22%, var(--border, #dce6e1));
+    }
+    .ff-reader-progress {
+        background: color-mix(in srgb, var(--ff-emerald, #0E5A43) 12%, var(--entry, #fff));
+    }
+}
+
+.ff-reader-btn[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: .65;
+}
+
+@media (forced-colors: active) {
+    .ff-reader-toolbar,
+    .ff-reader-btn,
+    .ff-summary__card {
+        border: 1px solid CanvasText;
+        forced-color-adjust: auto;
+    }
+    .ff-reader-btn--listen,
+    .ff-reader-btn--summary,
+    .ff-summary__btn--primary {
+        background: ButtonFace;
+        color: ButtonText;
+    }
+    .ff-reader-active,
+    tr.ff-reader-active {
+        outline: 2px solid Highlight;
+        background: Highlight;
+        color: HighlightText;
+    }
+}
