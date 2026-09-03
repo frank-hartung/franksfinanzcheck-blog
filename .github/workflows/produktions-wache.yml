@@ -320,9 +320,13 @@ jobs:
           **Runbook**
           1. Actions → **Content-Engine v2** → letzter Lauf → Schritt *Phase 1 – Artikel generieren*
           2. Steht dort „Kein Publikationstag“? → korrekt, kein Fehler.
-          3. Steht dort „Tageslimit erreicht“? → `count_articles_today()` zählt Entwürfe mit heutigem Datum mit.
-          4. Steht dort „Themenpool erschöpft“? → Themenpool nachfüllen.
-          5. Sonst: Secrets GROQ/GEMINI prüfen (Settings → Secrets and variables → Actions).
+          3. Steht dort „Tageslimit erreicht (LIVE …)“? → seit 03.09.2026 zählt die
+             Engine NUR live (draft: false) – gleichtägige Gate-Entwürfe blockieren
+             keine Slots mehr; dann sind 2–3 LIVE wirklich da.
+          4. Steht dort „unter LIVE-Mindestziel“? → Gate-Zurückstufung geprüft?
+             URL-Hygiene (fix_url_hygiene.py) läuft in deploy/blog-health/Engine.
+          5. Steht dort „Themenpool erschöpft“? → Themenpool nachfüllen.
+          6. Sonst: Secrets GROQ/GEMINI prüfen (Settings → Secrets and variables → Actions).
 
           Lauf: $RUN_URL
 
