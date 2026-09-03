@@ -95,7 +95,18 @@ def check_js_engine():
         if token not in content:
             return False, f"Aussprache-Veredelung unvollständig (Token '{token}' fehlt)"
 
-    return True, "ff-reader.js (Highend-Prosodie, männliche Studio-Stimme, Auto-Qualität, DE/EN, Tabellen-Barrierefreiheit) vollständig"
+    # Kurzfassung v4 (Verlagshaus-Highend: Capital/WiWo/ZEIT)
+    summary_tokens = [
+        "extractKeyBullets", "extractKeyFigures", "extractToc", "extractTables",
+        "buildSummaryData", "buildPlainText", "summarySentences", "maskSentenceDots",
+        "signalScore", "trapFocus", "lockScroll", "summaryToc", "summaryAuthor",
+        "summaryStand", "summaryRowCount", "summaryJump", "summaryJumpTable",
+    ]
+    for token in summary_tokens:
+        if token not in content:
+            return False, f"Kurzfassung v4 unvollständig (Token '{token}' fehlt)"
+
+    return True, "ff-reader.js (Highend-Prosodie, männliche Studio-Stimme, Auto-Qualität, DE/EN, Tabellen-Barrierefreiheit + Kurzfassung v4) vollständig"
 
 def check_css():
     path = ROOT / "assets" / "css" / "extended" / "ff-reader.css"
@@ -106,10 +117,14 @@ def check_css():
     for cls in required_classes:
         if cls not in content:
             return False, f"CSS-Klasse '{cls}' fehlt in ff-reader.css"
+    # Kurzfassung v4 (Verlagshaus-Highend)
+    for cls in [".ff-summary__hero", ".ff-summary__bullets", ".ff-summary__bullet", ".ff-summary__jump", ".ff-summary__figures", ".ff-summary__figure", ".ff-summary__figure-value", ".ff-summary__figure-label", ".ff-summary__toc", ".ff-summary__toc-lead", ".ff-summary__table", ".ff-summary__table-row", ".ff-summary__empty"]:
+        if cls not in content:
+            return False, f"CSS-Klasse '{cls}' fehlt in ff-reader.css (Kurzfassung v4)"
     for cls in [".ff-reader-select", ".ff-reader-field", ".ff-reader-toolbar__hint"]:
         if cls in content:
             return False, f"Veraltete CSS-Klasse '{cls}' (Regler/Tastatur-Hinweis) muss entfernt sein"
-    return True, "ff-reader.css (Styling & A11y-Highlighting) vollständig"
+    return True, "ff-reader.css (Styling & A11y-Highlighting + Kurzfassung v4) vollständig"
 
 def check_layouts():
     layouts = [

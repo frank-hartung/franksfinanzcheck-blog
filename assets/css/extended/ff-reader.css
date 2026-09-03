@@ -313,6 +313,125 @@ table.ff-reader-active,
 }
 .ff-summary__section a:hover { text-decoration-color: currentColor; }
 
+/* ---------- Kurzfassung v4: Hero, Bullets, Zahlen-Karten, TOC, Tabellen ---------- */
+.ff-summary__hero {
+    background: color-mix(in srgb, var(--ff-yellow, #FFB300) 13%, var(--entry, #fff));
+    border: 1px solid color-mix(in srgb, var(--ff-yellow, #FFB300) 32%, var(--border, #dce6e1));
+    border-left: 5px solid var(--ff-yellow, #FFB300);
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+.ff-summary__hero h3 { color: var(--ff-emerald, #0E5A43); }
+.ff-summary__hero-text {
+    margin: 0;
+    font-size: .96em;
+    line-height: 1.6;
+    color: var(--primary, #2e2e33);
+    font-weight: 500;
+}
+
+.ff-summary__bullets {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    counter-reset: ff-sum-bullet;
+}
+.ff-summary__bullet {
+    position: relative;
+    margin: 0 0 10px;
+    padding-left: 30px;
+    font-size: .92em;
+    line-height: 1.55;
+    color: var(--primary, #2e2e33);
+    counter-increment: ff-sum-bullet;
+}
+.ff-summary__bullet:last-child { margin-bottom: 0; }
+.ff-summary__bullet::before {
+    content: counter(ff-sum-bullet);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background: var(--ff-emerald, #0E5A43);
+    color: #fff;
+    font: 700 11.5px/21px 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    text-align: center;
+}
+
+.ff-summary__jump {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: .78em;
+    font-weight: 700;
+    letter-spacing: .01em;
+    color: var(--ff-emerald, #0E5A43);
+    text-decoration: none;
+    white-space: nowrap;
+}
+.ff-summary__jump:hover { text-decoration: underline; }
+
+.ff-summary__figures {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+}
+.ff-summary__figure {
+    background: color-mix(in srgb, var(--ff-emerald, #0E5A43) 6%, var(--entry, #fff));
+    border: 1px solid color-mix(in srgb, var(--ff-emerald, #0E5A43) 18%, var(--border, #dce6e1));
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.ff-summary__figure-value {
+    font: 800 1.26em/1.15 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--ff-emerald, #0E5A43);
+    letter-spacing: -.01em;
+}
+.ff-summary__figure-label {
+    font-size: .82em;
+    line-height: 1.4;
+    color: var(--secondary, #6b6b6b);
+}
+
+.ff-summary__toc { margin: 4px 0 0; padding-left: 20px; }
+.ff-summary__toc-item { margin: 6px 0; }
+.ff-summary__toc-lead { color: var(--secondary, #6b6b6b); font-size: .88em; }
+
+.ff-summary__table {
+    margin: 8px 0;
+    padding: 10px 12px;
+    border: 1px solid var(--border, #dce6e1);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--ff-emerald, #0E5A43) 4%, var(--entry, #fff));
+}
+.ff-summary__table:last-child { margin-bottom: 0; }
+.ff-summary__table-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+.ff-summary__table-title { font-weight: 700; font-size: .9em; }
+.ff-summary__table-meta { font-size: .78em; color: var(--secondary, #6b6b6b); }
+.ff-summary__table-row {
+    font-size: .85em;
+    line-height: 1.5;
+    color: var(--primary, #2e2e33);
+    padding: 3px 0;
+    border-top: 1px dashed color-mix(in srgb, var(--border, #dce6e1) 70%, transparent);
+}
+.ff-summary__table-row--head {
+    font-weight: 700;
+    color: var(--ff-emerald, #0E5A43);
+    border-top: none;
+}
+.ff-summary__empty { font-size: .92em; color: var(--secondary, #6b6b6b); }
+
 .ff-summary__footer {
     display: flex;
     flex-wrap: wrap;
