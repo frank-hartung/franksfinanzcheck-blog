@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 120,
- "chars": 12296,
+ "chars": 12289,
  "parts": [
   {
    "index": 0,
@@ -168,7 +168,7 @@
   },
   {
    "index": 2,
-   "text": "Tabelle: Drei Wege zu mehr Reichweite: Repeater versus Powerline versus Mesh. Übersicht mit 5 Spalten und 3 Zeilen. Die Spalten lauten: Technologie, Anschaffungskosten, Latenz (Ping), Reale Datenrate, Empfehlung für. Einfacher WLAN-Repeater. Zeile 1 von 3. Anschaffungskosten: 20 bis 35 Euroo. Latenz (Ping): Mittel (erhöht). Reale Datenrate: 30 bis 50 Prozent des Originals. Empfehlung für: Kleine 2- bis 3-Zimmer-Wohnungen. Powerline (DLAN über Stromnetz). Zeile 2 von 3. Anschaffungskosten: 60 bis 120 Euroo. Latenz (Ping): Schwankend. Reale Datenrate: 50 bis 150 Megabit pro Sekunde. Empfehlung für: Dicke Altbauwände / über Stockwerke. Mesh-WLAN-System (zum Beispiel AVM / TP-Link). Zeile 3 von 3. Anschaffungskosten: 80 bis 180 Euroo. Latenz (Ping): Sehr niedrig (top). Reale Datenrate: bis zu 95 Prozent des Originals. Empfehlung für: Große Wohnungen und Einfamilienhäuser. Ende der Tabelle Drei Wege zu mehr Reichweite: Repeater versus Powerline versus Mesh. Ein einfacher Repeater halbiert technisch bedingt die Bandbreite, da er Datenpakete gleichzeitig empfangen und weiterleiten muss. Ein modernes Mesh-System hingegen spannt ein intelligentes Funknetz auf. Mehrere Zugangspunkte kommunizieren über ein eigenes Rückkanal-Band (Dedicated Backhaul) miteinander. So kannst du dich im ganzen Haus mit voller Datenrate bewegen.",
+   "text": "Tabelle: Drei Wege zu mehr Reichweite: Repeater versus Powerline versus Mesh. Übersicht mit 5 Spalten und 3 Zeilen. Die Spalten lauten: Technologie, Anschaffungskosten, Latenz (Ping), Reale Datenrate, Empfehlung für. Einfacher WLAN-Repeater. Zeile 1 von 3. Anschaffungskosten: 20 bis 35 Euro. Latenz (Ping): Mittel (erhöht). Reale Datenrate: 30 bis 50 Prozent des Originals. Empfehlung für: Kleine 2- bis 3-Zimmer-Wohnungen. Powerline (DLAN über Stromnetz). Zeile 2 von 3. Anschaffungskosten: 60 bis 120 Euro. Latenz (Ping): Schwankend. Reale Datenrate: 50 bis 150 Megabit pro Sekunde. Empfehlung für: Dicke Altbauwände / über Stockwerke. Mesh-WLAN-System (zum Beispiel AVM / TP-Link). Zeile 3 von 3. Anschaffungskosten: 80 bis 180 Euro. Latenz (Ping): Sehr niedrig (top). Reale Datenrate: bis zu 95 Prozent des Originals. Empfehlung für: Große Wohnungen und Einfamilienhäuser. Ende der Tabelle Drei Wege zu mehr Reichweite: Repeater versus Powerline versus Mesh. Ein einfacher Repeater halbiert technisch bedingt die Bandbreite, da er Datenpakete gleichzeitig empfangen und weiterleiten muss. Ein modernes Mesh-System hingegen spannt ein intelligentes Funknetz auf. Mehrere Zugangspunkte kommunizieren über ein eigenes Rückkanal-Band (Dedicated Backhaul) miteinander. So kannst du dich im ganzen Haus mit voller Datenrate bewegen.",
    "units": [
     {
      "i": 24,
@@ -186,7 +186,7 @@
      "i": 26,
      "type": "table-row",
      "lang": "de",
-     "chars": 158
+     "chars": 157
     },
     {
      "i": 27,
@@ -198,7 +198,7 @@
      "i": 28,
      "type": "table-row",
      "lang": "de",
-     "chars": 161
+     "chars": 160
     },
     {
      "i": 29,
@@ -210,7 +210,7 @@
      "i": 30,
      "type": "table-row",
      "lang": "de",
-     "chars": 134
+     "chars": 133
     },
     {
      "i": 31,
@@ -330,7 +330,7 @@
   },
   {
    "index": 4,
-   "text": "Wer zusätzlich generell sparen möchte: Unser Leitfaden Sparen im Herbst, die besten Spartipps zeigt, wo überall Geld liegen bleibt. Und wer zu einem modernen Provider mit Neukundenbonus wechselt, spart oft über 350 Euro in 24 Monaten. Oft spart das über 350 Euro in 24 Monaten. Vertiefende Praxisratschläge dazu findest du in unserem Leitfaden zum DSL-Wechselbonus und Prämien sowie in der Übersicht Günstigeres Internet durch Tarifvergleich. Rechenbeispiel: Was ein Funkloch wirklich kostet. Ein 100-Megabit pro Sekunde-Anschluss für 34,99 Euro im Monat nützt wenig, wenn im Homeoffice nur 12 Megabit pro Sekunde ankommen. Videokonferenzen brechen ab, die Cloud-Sicherung dauert dreimal so lang, der Streaming-Stick wechselt auf 480p. Der effektive Preis pro nutzbarem Megabit steigt von 0,35 Euro auf fast 3 Euro. Drei realistische Wege, Stand 2026: Tabelle: Rechenbeispiel: Was ein Funkloch wirklich kostet. Übersicht mit 4 Spalten und 4 Zeilen. Die Spalten lauten: Lösung, Einmal-Kosten, Laufende Kosten, Wann sie greift. Router umstellen + Kanalwechsel. Zeile 1 von 4. Einmal-Kosten: 0 Euro. Laufende Kosten: 0 Euro. Wann sie greift: 1 bis 2 Zimmer, Sichtkontakt. Set-Repeater (kein Mesh). Zeile 2 von 4. Einmal-Kosten: 40 bis 80 Euroo. Laufende Kosten: 0 Euro. Wann sie greift: Eine Etage, eine tote Ecke.",
+   "text": "Wer zusätzlich generell sparen möchte: Unser Leitfaden Sparen im Herbst, die besten Spartipps zeigt, wo überall Geld liegen bleibt. Und wer zu einem modernen Provider mit Neukundenbonus wechselt, spart oft über 350 Euro in 24 Monaten. Oft spart das über 350 Euro in 24 Monaten. Vertiefende Praxisratschläge dazu findest du in unserem Leitfaden zum DSL-Wechselbonus und Prämien sowie in der Übersicht Günstigeres Internet durch Tarifvergleich. Rechenbeispiel: Was ein Funkloch wirklich kostet. Ein 100-Megabit pro Sekunde-Anschluss für 34,99 Euro im Monat nützt wenig, wenn im Homeoffice nur 12 Megabit pro Sekunde ankommen. Videokonferenzen brechen ab, die Cloud-Sicherung dauert dreimal so lang, der Streaming-Stick wechselt auf 480p. Der effektive Preis pro nutzbarem Megabit steigt von 0,35 Euro auf fast 3 Euro. Drei realistische Wege, Stand 2026: Tabelle: Rechenbeispiel: Was ein Funkloch wirklich kostet. Übersicht mit 4 Spalten und 4 Zeilen. Die Spalten lauten: Lösung, Einmal-Kosten, Laufende Kosten, Wann sie greift. Router umstellen + Kanalwechsel. Zeile 1 von 4. Einmal-Kosten: 0 Euro. Laufende Kosten: 0 Euro. Wann sie greift: 1 bis 2 Zimmer, Sichtkontakt. Set-Repeater (kein Mesh). Zeile 2 von 4. Einmal-Kosten: 40 bis 80 Euro. Laufende Kosten: 0 Euro. Wann sie greift: Eine Etage, eine tote Ecke.",
    "units": [
     {
      "i": 49,
@@ -402,25 +402,25 @@
      "i": 60,
      "type": "table-row",
      "lang": "de",
-     "chars": 142
+     "chars": 141
     }
    ]
   },
   {
    "index": 5,
-   "text": "2er-Mesh (WLAN 6). Zeile 3 von 4. Einmal-Kosten: 150 bis 250 Euroo. Laufende Kosten: 0 Euro. Wann sie greift: Haus, mehrere Wände, Homeoffice. Powerline mit WLAN. Zeile 4 von 4. Einmal-Kosten: 70 bis 130 Euroo. Laufende Kosten: 0 Euro. Wann sie greift: Altbau mit dicken Wänden, Stromkreis zusammen. Ende der Tabelle Rechenbeispiel: Was ein Funkloch wirklich kostet. Ein Mesh-Set für 180 Euro, über 36 Monate gerechnet, kostet 5 Euro im Monat, weniger als eine einzige unnötige Router-Miete. Wer den Provider-Router für 5 bis 8 Euroo monatlich mietet und parallel Funklöcher hat, zahlt doppelt: einmal für Hardware, einmal für nicht gelieferte Leistung. Typische WLAN-Fehler, die Speed fressen. Router im Technikschrank. Holz, Metallgitter und ein Stapel Kartons dämpfen 5 GHz brutal. Frei, erhöht, möglichst zentral, das allein holt oft 30 bis 50 Prozent Reichweite zurück. 2,4 GHz und 5 GHz unter demselben Namen, ohne Band-Steering. Alte Geräte kleben am langsamen Band und ziehen das ganze Netz nach unten. Getrennte SSIDs (Zuhause und Zuhause-5G) geben dir die Kontrolle. Kanal 1, 6 oder 11 in einem Mehrfamilienhaus, in dem sechs Nachbarn dasselbe tun. Eine kostenlose Analyse-App zeigt die Belegung. Auf 5 GHz sind 36/40/44 oft leer, während 2,4 GHz überfüllt ist. Repeater, der das Signal halbiert. Ein klassischer Repeater nutzt dasselbe Radio zum Empfangen und Senden.",
+   "text": "2er-Mesh (WLAN 6). Zeile 3 von 4. Einmal-Kosten: 150 bis 250 Euro. Laufende Kosten: 0 Euro. Wann sie greift: Haus, mehrere Wände, Homeoffice. Powerline mit WLAN. Zeile 4 von 4. Einmal-Kosten: 70 bis 130 Euro. Laufende Kosten: 0 Euro. Wann sie greift: Altbau mit dicken Wänden, Stromkreis zusammen. Ende der Tabelle Rechenbeispiel: Was ein Funkloch wirklich kostet. Ein Mesh-Set für 180 Euro, über 36 Monate gerechnet, kostet 5 Euro im Monat, weniger als eine einzige unnötige Router-Miete. Wer den Provider-Router für 5 bis 8 Euro monatlich mietet und parallel Funklöcher hat, zahlt doppelt: einmal für Hardware, einmal für nicht gelieferte Leistung. Typische WLAN-Fehler, die Speed fressen. Router im Technikschrank. Holz, Metallgitter und ein Stapel Kartons dämpfen 5 GHz brutal. Frei, erhöht, möglichst zentral, das allein holt oft 30 bis 50 Prozent Reichweite zurück. 2,4 GHz und 5 GHz unter demselben Namen, ohne Band-Steering. Alte Geräte kleben am langsamen Band und ziehen das ganze Netz nach unten. Getrennte SSIDs (Zuhause und Zuhause-5G) geben dir die Kontrolle. Kanal 1, 6 oder 11 in einem Mehrfamilienhaus, in dem sechs Nachbarn dasselbe tun. Eine kostenlose Analyse-App zeigt die Belegung. Auf 5 GHz sind 36/40/44 oft leer, während 2,4 GHz überfüllt ist. Repeater, der das Signal halbiert. Ein klassischer Repeater nutzt dasselbe Radio zum Empfangen und Senden.",
    "units": [
     {
      "i": 61,
      "type": "table-row",
      "lang": "de",
-     "chars": 142
+     "chars": 141
     },
     {
      "i": 62,
      "type": "table-row",
      "lang": "de",
-     "chars": 92
+     "chars": 91
     },
     {
      "i": 63,
@@ -444,7 +444,7 @@
      "i": 66,
      "type": "p",
      "lang": "de",
-     "chars": 161
+     "chars": 160
     },
     {
      "i": 67,

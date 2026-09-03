@@ -438,11 +438,13 @@
 
     if (lang === 'en') {
       // Währungen & Zahlenbereiche Englisch
-      s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*(?:€|EUR|Euro)/gi, '$1 to $2 Euros');
+      s = s.replace(/(\d)\s*[-–—]\s*€\s*[-–—]\s*/g, '$1-euro-');
+      s = s.replace(/(\d)\s*[-–—]\s*(?:EUR|Euro)\s*[-–—]\s*/gi, '$1-euro-');
+      s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*(?:€|Euro\b|EUR\b)/gi, '$1 to $2 Euros');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*\$/g, '$1 to $2 Dollars');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*%/g, '$1 to $2 percent');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)/g, '$1 to $2');
-      s = s.replace(/(\d+(?:[.,]\d+)?)\s*(?:€|EUR|Euro)/gi, '$1 Euros');
+      s = s.replace(/(\d+(?:[.,]\d+)?)\s*(?:€|Euro\b|EUR\b)/gi, '$1 Euros');
       s = s.replace(/&/g, ' and ');
       s = s.replace(/\$\s*(\d+(?:[.,]\d+)?)/g, '$1 Dollars');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*\$/g, '$1 Dollars');
@@ -477,11 +479,17 @@
       s = s.replace(/\$/g, ' Dollars');
     } else {
       // Währungen & Zahlenbereiche Deutsch (Chefredakteur-Standard)
-      s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*(?:€|EUR|Euro)/gi, '$1 bis $2 Euro');
+      /* „150-€-Bonus": Steht das Währungszeichen zwischen Bindestrichen,
+         muss es Teil des Wortes bleiben. Das spätere Auffangnetz
+         (€ → „ Euro") machte daraus „150- Euro-Bonus" – gesprochen
+         ein Stolpern mitten im Begriff. */
+      s = s.replace(/(\d)\s*[-–—]\s*€\s*[-–—]\s*/g, '$1-Euro-');
+      s = s.replace(/(\d)\s*[-–—]\s*(?:EUR|Euro)\s*[-–—]\s*/gi, '$1-Euro-');
+      s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*(?:€|Euro\b|EUR\b)/gi, '$1 bis $2 Euro');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*(?:Cent|ct)/gi, '$1 bis $2 Cent');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*%/g, '$1 bis $2 Prozent');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)/g, '$1 bis $2');
-      s = s.replace(/(\d+(?:[.,]\d+)?)\s*(?:€|EUR|Euro)/gi, '$1 Euro');
+      s = s.replace(/(\d+(?:[.,]\d+)?)\s*(?:€|Euro\b|EUR\b)/gi, '$1 Euro');
       s = s.replace(/(?:€|EUR)\s*(\d+(?:[.,]\d+)?)/gi, '$1 Euro');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*%/g, '$1 Prozent');
       s = s.replace(/\b(\d+)\s*(?:Cent|ct)\b/gi, '$1 Cent');
@@ -533,6 +541,11 @@
       s = s.replace(/(?:\bJh\.|\bJhd\.|\bJhdt\.)(?![\wäöüßÄÖÜ])/g, 'Jahrhundert');
       s = s.replace(/\bAnm\.(?![\wäöüßÄÖÜ])/g, 'Anmerkung');
       s = s.replace(/\bggf\b(?!\.)(?![\wäöüßÄÖÜ])/gi, 'gegebenenfalls');
+      /* Gleichzeichen: zwischen Zahlen „ergibt", sonst „ist". Ohne Regel
+         liest die Stimme „gleich" oder übergeht das Zeichen ganz – in den
+         Rechenbeispielen der Artikel ging so der Zusammenhang verloren. */
+      s = s.replace(/(\d(?:[.,]\d+)?)\s*=\s*(?=\d)/g, '$1 ergibt ');
+      s = s.replace(/([\wäöüßÄÖÜ)\].,])\s*=\s*([\wäöüßÄÖÜ(])/g, '$1 ist $2');
       // Finales Währungs-Auffangnetz: jedes verbleibende Zeichen sprechbar
       s = s.replace(/€/g, ' Euro');
       s = s.replace(/\bEUR\b/g, 'Euro');
@@ -564,11 +577,45 @@
     return s;
   }
 
+  var SUMMARY_ABBREVS = [
+    'z. B.', 'z.B.', 'd. h.', 'd.h.', 'u. a.', 'u.a.', 'v. a.', 'v.a.',
+    'z. T.', 'u. s. w.', 'o. Ä.', 'bzw.', 'ca.', 'inkl.', 'exkl.', 'ggf.',
+    'ggfs.', 'evtl.', 'mind.', 'max.', 'etc.', 'usw.', 'usf.', 'bspw.',
+    'e. g.', 'e.g.', 'i. e.', 'i.e.', 'approx.', 'vs.', 'Dr.', 'Prof.',
+    'Nr.', 'Abs.', 'Art.', 'Tab.', 'Abb.', 'Anm.', 'Pkt.', 'Min.', 'Std.',
+    'Mio.', 'Mrd.', 'Tsd.', 'MwSt.', 'zzgl.', 'sog.'
+  ];
+
+  function escapeRe(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // Maskiert Satzende-Punkte, die zu Abkürzungen oder Tausender-
+  // trennern gehören, damit sie nicht fälschlich als Satzende zählen.
+  function maskSentenceDots(text) {
+    var t = String(text || '');
+    // Tausenderpunkte: 1.250 -> 1␂250 (Chefredakteur-Standard)
+    t = t.replace(/(\d)\.(\d{3})/g, '$1\u0002$2');
+    for (var i = 0; i < SUMMARY_ABBREVS.length; i++) {
+      var ab = SUMMARY_ABBREVS[i];
+      var re = new RegExp(escapeRe(ab).replace(/ /g, '\\s*'), 'g');
+      t = t.replace(re, function (m) { return m.replace(/\./g, '\u0002'); });
+    }
+    return t;
+  }
+
+  /* Satzgrenzen erkennen – abkürzungs- und zahlenfest.
+     Ohne die Maskierung trennt der Split an JEDEM Punkt, also auch
+     mitten in „z. B.". Fallen „z." und „B." dann in verschiedene
+     Sprechhäppchen, sieht die Abkürzungsauflösung sie nie zusammen und
+     der Text wird als „… (zum Beispiel." bzw. „z. B." gesprochen.
+     Die Kurzfassung hatte diesen Schutz schon immer; der Sprachpfad
+     nicht. */
   function sentences(text) {
-    return String(text || '')
+    return maskSentenceDots(String(text || ''))
       .replace(/([.!?…]+)(["'»)\]]*)(\s+|$)/g, '$1$2\u0001')
       .split('\u0001')
-      .map(function (s) { return s.trim(); })
+      .map(function (s) { return s.replace(/\u0002/g, '.').trim(); })
       .filter(function (s) { return s.length > 1; });
   }
 
@@ -2634,33 +2681,6 @@
   var scrollLockState = null;
 
   /* ---------- Abkürzungs- & zahlenfeste Satzsegmentierung ---------- */
-  var SUMMARY_ABBREVS = [
-    'z. B.', 'z.B.', 'd. h.', 'd.h.', 'u. a.', 'u.a.', 'v. a.', 'v.a.',
-    'z. T.', 'u. s. w.', 'o. Ä.', 'bzw.', 'ca.', 'inkl.', 'exkl.', 'ggf.',
-    'ggfs.', 'evtl.', 'mind.', 'max.', 'etc.', 'usw.', 'usf.', 'bspw.',
-    'e. g.', 'e.g.', 'i. e.', 'i.e.', 'approx.', 'vs.', 'Dr.', 'Prof.',
-    'Nr.', 'Abs.', 'Art.', 'Tab.', 'Abb.', 'Anm.', 'Pkt.', 'Min.', 'Std.',
-    'Mio.', 'Mrd.', 'Tsd.', 'MwSt.', 'zzgl.', 'sog.'
-  ];
-
-  function escapeRe(s) {
-    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
-
-  // Maskiert Satzende-Punkte, die zu Abkürzungen oder Tausender-
-  // trennern gehören, damit sie nicht fälschlich als Satzende zählen.
-  function maskSentenceDots(text) {
-    var t = String(text || '');
-    // Tausenderpunkte: 1.250 -> 1␂250 (Chefredakteur-Standard)
-    t = t.replace(/(\d)\.(\d{3})/g, '$1\u0002$2');
-    for (var i = 0; i < SUMMARY_ABBREVS.length; i++) {
-      var ab = SUMMARY_ABBREVS[i];
-      var re = new RegExp(escapeRe(ab).replace(/ /g, '\\s*'), 'g');
-      t = t.replace(re, function (m) { return m.replace(/\./g, '\u0002'); });
-    }
-    return t;
-  }
-
   function summarySentences(text) {
     var masked = maskSentenceDots(String(text || '').replace(/\u00a0/g, ' '));
     return masked

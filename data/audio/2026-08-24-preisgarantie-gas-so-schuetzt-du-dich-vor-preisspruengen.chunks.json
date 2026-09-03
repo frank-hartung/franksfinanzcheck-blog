@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 97,
- "chars": 10381,
+ "chars": 10395,
  "parts": [
   {
    "index": 0,
@@ -228,7 +228,7 @@
   },
   {
    "index": 3,
-   "text": "Ende der Tabelle Kostenanalyse: 20000 Kilowattstunden Verbrauch bei Marktschwankungen. Worauf du im Kleingedruckten der Preisgarantie achten musst. Damit der Schutz im Ernstfall auch rechtssicher greift, solltest du die Allgemeinen Geschäftsbedingungen (AGB) des Anbieters auf folgende Punkte überprüfen: Punkt 1: Keine verdeckten Preisanpassungsklauseln: Seriöse Anbieter garantieren den festen Arbeitspreis für die volle Mindestvertragslaufzeit (z. B. 12 oder 24 Monate) ohne Klauseln über nachträgliche Mengenanpassungen oder Sonderumlagen. Punkt 2: Umgang mit staatlichen Abgaben: Fast alle modernen Tarife enthalten eine sogenannte eingeschränkte Preisgarantie (auch Nettopreisgarantie genannt). Sie deckt Energie- und Netzkosten ab, gibt gesetzliche Steueränderungen aber weiter, das ist der faire Branchenstandard. Punkt 3: Kündigungsfrist nach Ablauf der Garantie: Achte darauf, dass sich der Vertrag nach Ablauf der Garantiezeit maximal um einen Monat verlängert (gesetzlicher Standard nach Paragraf 309 Nummer. 9 Bürgerliches Gesetzbuch). So kannst du nach einem Jahr sofort wieder in den besonders günstigen Tarif wechseln. Punkt 4: Verzicht auf Kautionszahlungen: Seriöse Versorger verlangen weder Vorkasse noch Kautionen, sondern buchen die Abschläge monatlich per Lastschrift ab.",
+   "text": "Ende der Tabelle Kostenanalyse: 20000 Kilowattstunden Verbrauch bei Marktschwankungen. Worauf du im Kleingedruckten der Preisgarantie achten musst. Damit der Schutz im Ernstfall auch rechtssicher greift, solltest du die Allgemeinen Geschäftsbedingungen (AGB) des Anbieters auf folgende Punkte überprüfen: Punkt 1: Keine verdeckten Preisanpassungsklauseln: Seriöse Anbieter garantieren den festen Arbeitspreis für die volle Mindestvertragslaufzeit (zum Beispiel 12 oder 24 Monate) ohne Klauseln über nachträgliche Mengenanpassungen oder Sonderumlagen. Punkt 2: Umgang mit staatlichen Abgaben: Fast alle modernen Tarife enthalten eine sogenannte eingeschränkte Preisgarantie (auch Nettopreisgarantie genannt). Sie deckt Energie- und Netzkosten ab, gibt gesetzliche Steueränderungen aber weiter, das ist der faire Branchenstandard. Punkt 3: Kündigungsfrist nach Ablauf der Garantie: Achte darauf, dass sich der Vertrag nach Ablauf der Garantiezeit maximal um einen Monat verlängert (gesetzlicher Standard nach Paragraf 309 Nummer 9 Bürgerliches Gesetzbuch). So kannst du nach einem Jahr sofort wieder in den besonders günstigen Tarif wechseln. Punkt 4: Verzicht auf Kautionszahlungen: Seriöse Versorger verlangen weder Vorkasse noch Kautionen, sondern buchen die Abschläge monatlich per Lastschrift ab.",
    "units": [
     {
      "i": 33,
@@ -252,13 +252,13 @@
      "i": 36,
      "type": "li",
      "lang": "de",
-     "chars": 145
+     "chars": 50
     },
     {
      "i": 37,
      "type": "li",
      "lang": "de",
-     "chars": 92
+     "chars": 194
     },
     {
      "i": 38,
@@ -276,13 +276,13 @@
      "i": 40,
      "type": "li",
      "lang": "de",
-     "chars": 198
+     "chars": 225
     },
     {
      "i": 41,
      "type": "li",
      "lang": "de",
-     "chars": 113
+     "chars": 85
     },
     {
      "i": 42,
@@ -294,7 +294,7 @@
   },
   {
    "index": 4,
-   "text": "Punkt 5: Rechtzeitige Erinnerungsfunktion: Notiere dir etwa zehn Monate nach Vertragsabschluss einen Termin, um rechtzeitig vor Ablauf der Preisgarantie die Tarife erneut zu prüfen. Schritt-für-Schritt: Gasanbieter mit Preisgarantie wechseln. Punkt 1: Jahresabrechnung bereitlegen: Notiere deinen Jahresverbrauch in Kilowattstunden sowie die Zählernummer deines Gaszählers. Punkt 2: PLZ in den Vergleichsrechner eingeben: Filtere nach Tarifen mit mindestens 12 Monaten Preisgarantie und hoher Weiterempfehlungsquote von über 85 Prozent. Achte auf verbraucherfreundliche Vertragslaufzeiten von 12 Monaten. Punkt 3: Auftrag digital absenden: Der neue Anbieter kündigt deinen alten Vertrag fristgerecht und übernimmt die gesamte formale Abwicklung bei Netzbetreiber und Vorversorger. Punkt 4: Zählerstand zum Stichtag ablesen: Lies am Tag der Belieferung den Gaszähler ab und übermittle den Stand online an deinen Netzbetreiber für eine exakte Abrechnung. Wie du durch gezielte Heizungswartung zusätzlich sparst, beschreiben wir in unseren Spätsommer-Tipps zur Heizungsoptimierung sowie in den Vergleichen günstiger Gastarife 2026. Marktschwankung in Zahlen: 20000 Kilowattstunden durch drei Szenarien. Annahme Arbeitspreis Start 11,0 Cent, Grundpreis 12 Euro monatlich, 20000 Kilowattstunden. Szenario A, ruhiger Markt. Preis bleibt. Jahr: 2200 Euro + 144 Euro = 2344 Euro.",
+   "text": "Punkt 5: Rechtzeitige Erinnerungsfunktion: Notiere dir etwa zehn Monate nach Vertragsabschluss einen Termin, um rechtzeitig vor Ablauf der Preisgarantie die Tarife erneut zu prüfen. Schritt-für-Schritt: Gasanbieter mit Preisgarantie wechseln. Punkt 1: Jahresabrechnung bereitlegen: Notiere deinen Jahresverbrauch in Kilowattstunden sowie die Zählernummer deines Gaszählers. Punkt 2: PLZ in den Vergleichsrechner eingeben: Filtere nach Tarifen mit mindestens 12 Monaten Preisgarantie und hoher Weiterempfehlungsquote von über 85 Prozent. Achte auf verbraucherfreundliche Vertragslaufzeiten von 12 Monaten. Punkt 3: Auftrag digital absenden: Der neue Anbieter kündigt deinen alten Vertrag fristgerecht und übernimmt die gesamte formale Abwicklung bei Netzbetreiber und Vorversorger. Punkt 4: Zählerstand zum Stichtag ablesen: Lies am Tag der Belieferung den Gaszähler ab und übermittle den Stand online an deinen Netzbetreiber für eine exakte Abrechnung. Wie du durch gezielte Heizungswartung zusätzlich sparst, beschreiben wir in unseren Spätsommer-Tipps zur Heizungsoptimierung sowie in den Vergleichen günstiger Gastarife 2026. Marktschwankung in Zahlen: 20000 Kilowattstunden durch drei Szenarien. Annahme Arbeitspreis Start 11,0 Cent, Grundpreis 12 Euro monatlich, 20000 Kilowattstunden. Szenario A, ruhiger Markt. Preis bleibt. Jahr: 2200 Euro + 144 Euro ist 2344 Euro.",
    "units": [
     {
      "i": 43,
@@ -360,13 +360,13 @@
      "i": 53,
      "type": "p",
      "lang": "de",
-     "chars": 80
+     "chars": 82
     }
    ]
   },
   {
    "index": 5,
-   "text": "Szenario B, +3 Cent im Winter, 4 Monate. 20000 Kilowattstunden sind nicht gleichmäßig: 45 Prozent fallen in Nov–Feb. 9000 Kilowattstunden × 3 Cent = 270 Euro extra, Rest unverändert. Jahr: 2614 Euro. Szenario C, Schock +8 Cent für 6 Monate. 12000 Kilowattstunden × 8 Cent = 960 Euro extra. Jahr: 3304 Euro. Eine 12-Monats-Vollgarantie zum Startpreis 11,4 Cent (0,4 Cent Aufschlag) kostet 2280 Euro + 144 Euro = 2424 Euro, 80 Euro teurer als A, 190 Euro billiger als B, 880 Euro billiger als C. Du kaufst keine Rendite, du kaufst eine Obergrenze. Flexible Tarife ohne Garantie gewinnen nur in Szenario A und wenn du monatlich kündbar aktiv nachziehst. Die meisten Haushalte tun das nicht. Deshalb ist Garantie für Familien mit klarem Winterverbrauch die rationalere Default-Wahl. Kleingedrucktes, das Preissprünge trotz Garantie durchlässt. Anpassung bei Änderung der gesetzlichen Abgaben ohne Obergrenze. Garantie nur auf den Energieeinkauf, nicht auf Netzentgelte. Boni, die als Gutschrift in Monat 13 kommen, und verfallen, wenn du vorher gehst. Paketpreise mit Strom+Gas, bei denen die Gas-Garantie kürzer ist als die Strom-Bindung. Wenn zwei dieser Punkte zutreffen, rechne den Tarif wie ohne Garantie und vergleiche ihn nur noch über den Effektivpreis. Ablauf in vier Schritten, ohne Versorgungslücke. Punkt 1: Verbrauch und Zähler von der letzten Rechnung übernehmen.",
+   "text": "Szenario B, +3 Cent im Winter, 4 Monate. 20000 Kilowattstunden sind nicht gleichmäßig: 45 Prozent fallen in Nov–Feb. 9000 Kilowattstunden × 3 Cent ist 270 Euro extra, Rest unverändert. Jahr: 2614 Euro. Szenario C, Schock +8 Cent für 6 Monate. 12000 Kilowattstunden × 8 Cent ist 960 Euro extra. Jahr: 3304 Euro. Eine 12-Monats-Vollgarantie zum Startpreis 11,4 Cent (0,4 Cent Aufschlag) kostet 2280 Euro + 144 Euro ist 2424 Euro, 80 Euro teurer als A, 190 Euro billiger als B, 880 Euro billiger als C. Du kaufst keine Rendite, du kaufst eine Obergrenze. Flexible Tarife ohne Garantie gewinnen nur in Szenario A und wenn du monatlich kündbar aktiv nachziehst. Die meisten Haushalte tun das nicht. Deshalb ist Garantie für Familien mit klarem Winterverbrauch die rationalere Default-Wahl. Kleingedrucktes, das Preissprünge trotz Garantie durchlässt. Anpassung bei Änderung der gesetzlichen Abgaben ohne Obergrenze. Garantie nur auf den Energieeinkauf, nicht auf Netzentgelte. Boni, die als Gutschrift in Monat 13 kommen, und verfallen, wenn du vorher gehst. Paketpreise mit Strom+Gas, bei denen die Gas-Garantie kürzer ist als die Strom-Bindung. Wenn zwei dieser Punkte zutreffen, rechne den Tarif wie ohne Garantie und vergleiche ihn nur noch über den Effektivpreis. Ablauf in vier Schritten, ohne Versorgungslücke. Punkt 1: Verbrauch und Zähler von der letzten Rechnung übernehmen.",
    "units": [
     {
      "i": 54,
@@ -378,19 +378,19 @@
      "i": 55,
      "type": "p",
      "lang": "de",
-     "chars": 82
+     "chars": 84
     },
     {
      "i": 56,
      "type": "p",
      "lang": "de",
-     "chars": 106
+     "chars": 108
     },
     {
      "i": 57,
      "type": "p",
      "lang": "de",
-     "chars": 186
+     "chars": 188
     },
     {
      "i": 58,

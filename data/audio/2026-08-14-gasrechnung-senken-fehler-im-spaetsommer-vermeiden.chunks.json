@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 106,
- "chars": 10689,
+ "chars": 10685,
  "parts": [
   {
    "index": 0,
@@ -174,7 +174,7 @@
   },
   {
    "index": 2,
-   "text": "Es drohen Feuchtigkeitsschäden, Schimmelbildung und ein permanenter Wärmeverlust. Stoßlüften (drei- bis viermal täglich für 5 bis 8 Minuten bei voll geöffnetem Fenster und abgedrehtem Thermostat) spart bis zu 120 Euro pro Saison. Fehler 4: Veraltete, manuelle Thermostate im Dauereinsatz. Klassische Drehventile reagieren träge und heizen auch dann durch, wenn niemand zu Hause ist oder die Sonne den Raum bereits aufheizt. Smarte oder programmierbare Thermostate (ab circa. 15 Euro pro Stück) senken die Raumtemperatur nachts oder bei Abwesenheit automatisch auf 17 °C ab und sparen bis zu 140 Euro Heizenergie im Jahr, ohne den Wohnkomfort zu beeinträchtigen. Fehler 5: Im teuren Grundversorgungstarif verharren. Der weitaus größte Sparhebel ist der rechtzeitige Gasanbieterwechsel im Spätsommer. Wer im Grundversorgungstarif bleibt, zahlt oft 12 bis 14 Cent pro Kilowattstunden, während alternative Anbieter mit Preisgarantie Konditionen um 8,5 bis 9,5 Cent pro Kilowattstunden bieten. Bei einem typischen Jahresverbrauch von 20000 Kilowattstunden beträgt der Unterschied mehrere hundert Euro pro Jahr. Spar-Potenziale der Maßnahmen im Überblick. Tabelle: Spar-Potenziale der Maßnahmen im Überblick. Übersicht mit 4 Spalten und 6 Zeilen. Die Spalten lauten: Maßnahme, Typischer Aufwand, Einmalkosten, Ersparnis pro Heizperiode.",
+   "text": "Es drohen Feuchtigkeitsschäden, Schimmelbildung und ein permanenter Wärmeverlust. Stoßlüften (drei- bis viermal täglich für 5 bis 8 Minuten bei voll geöffnetem Fenster und abgedrehtem Thermostat) spart bis zu 120 Euro pro Saison. Fehler 4: Veraltete, manuelle Thermostate im Dauereinsatz. Klassische Drehventile reagieren träge und heizen auch dann durch, wenn niemand zu Hause ist oder die Sonne den Raum bereits aufheizt. Smarte oder programmierbare Thermostate (ab circa 15 Euro pro Stück) senken die Raumtemperatur nachts oder bei Abwesenheit automatisch auf 17 °C ab und sparen bis zu 140 Euro Heizenergie im Jahr, ohne den Wohnkomfort zu beeinträchtigen. Fehler 5: Im teuren Grundversorgungstarif verharren. Der weitaus größte Sparhebel ist der rechtzeitige Gasanbieterwechsel im Spätsommer. Wer im Grundversorgungstarif bleibt, zahlt oft 12 bis 14 Cent pro Kilowattstunden, während alternative Anbieter mit Preisgarantie Konditionen um 8,5 bis 9,5 Cent pro Kilowattstunden bieten. Bei einem typischen Jahresverbrauch von 20000 Kilowattstunden beträgt der Unterschied mehrere hundert Euro pro Jahr. Spar-Potenziale der Maßnahmen im Überblick. Tabelle: Spar-Potenziale der Maßnahmen im Überblick. Übersicht mit 4 Spalten und 6 Zeilen. Die Spalten lauten: Maßnahme, Typischer Aufwand, Einmalkosten, Ersparnis pro Heizperiode.",
    "units": [
     {
      "i": 25,
@@ -204,13 +204,13 @@
      "i": 29,
      "type": "p",
      "lang": "de",
-     "chars": 50
+     "chars": 195
     },
     {
      "i": 30,
      "type": "p",
      "lang": "de",
-     "chars": 186
+     "chars": 40
     },
     {
      "i": 31,
@@ -258,13 +258,13 @@
   },
   {
    "index": 3,
-   "text": "Heizkörper entlüften und Druck prüfen. Zeile 1 von 6. Typischer Aufwand: 15 Minuten. Einmalkosten: 2,00 Euro. Ersparnis pro Heizperiode: 60 bis 90 Euroo. Programmierbare Thermostate nutzen. Zeile 2 von 6. Typischer Aufwand: 30 Minuten. Einmalkosten: 60,00 Euro (4 Stück). Ersparnis pro Heizperiode: 110 bis 160 Euroo. Richtiges Stoßlüften statt Kippfenster. Zeile 3 von 6. Typischer Aufwand: Täglich 5 Minuten. Einmalkosten: 0,00 Euro. Ersparnis pro Heizperiode: 90 bis 140 Euroo. Dichtungsbänder an Türen und Fenstern. Zeile 4 von 6. Typischer Aufwand: 45 Minuten. Einmalkosten: 15,00 Euro. Ersparnis pro Heizperiode: 50 bis 80 Euroo. Gasanbieter wechseln (20000 Kilowattstunden). Zeile 5 von 6. Typischer Aufwand: 10 Minuten. Einmalkosten: 0,00 Euro. Ersparnis pro Heizperiode: 350 bis 550 Euroo. Gesamtes Einsparpotenzial. Zeile 6 von 6. Typischer Aufwand: circa 2 Stunden. Einmalkosten: circa 77,00 Euro. Ersparnis pro Heizperiode: bis zu 720,00 Euro. Ende der Tabelle Spar-Potenziale der Maßnahmen im Überblick. Schritt-für-Schritt: Dein Spätsommer-Heizungs-Check. Punkt 1: Testlauf starten: Schalte die Heizung an einem kühlen Spätsommerabend probehalber ein und drehe alle Thermostate auf Stufe 5. Werden alle Heizkörper schnell und gleichmäßig warm?",
+   "text": "Heizkörper entlüften und Druck prüfen. Zeile 1 von 6. Typischer Aufwand: 15 Minuten. Einmalkosten: 2,00 Euro. Ersparnis pro Heizperiode: 60 bis 90 Euro. Programmierbare Thermostate nutzen. Zeile 2 von 6. Typischer Aufwand: 30 Minuten. Einmalkosten: 60,00 Euro (4 Stück). Ersparnis pro Heizperiode: 110 bis 160 Euro. Richtiges Stoßlüften statt Kippfenster. Zeile 3 von 6. Typischer Aufwand: Täglich 5 Minuten. Einmalkosten: 0,00 Euro. Ersparnis pro Heizperiode: 90 bis 140 Euro. Dichtungsbänder an Türen und Fenstern. Zeile 4 von 6. Typischer Aufwand: 45 Minuten. Einmalkosten: 15,00 Euro. Ersparnis pro Heizperiode: 50 bis 80 Euro. Gasanbieter wechseln (20000 Kilowattstunden). Zeile 5 von 6. Typischer Aufwand: 10 Minuten. Einmalkosten: 0,00 Euro. Ersparnis pro Heizperiode: 350 bis 550 Euro. Gesamtes Einsparpotenzial. Zeile 6 von 6. Typischer Aufwand: circa 2 Stunden. Einmalkosten: circa 77,00 Euro. Ersparnis pro Heizperiode: bis zu 720,00 Euro. Ende der Tabelle Spar-Potenziale der Maßnahmen im Überblick. Schritt-für-Schritt: Dein Spätsommer-Heizungs-Check. Punkt 1: Testlauf starten: Schalte die Heizung an einem kühlen Spätsommerabend probehalber ein und drehe alle Thermostate auf Stufe 5. Werden alle Heizkörper schnell und gleichmäßig warm?",
    "units": [
     {
      "i": 38,
      "type": "table-row",
      "lang": "de",
-     "chars": 153
+     "chars": 152
     },
     {
      "i": 39,
@@ -276,7 +276,7 @@
      "i": 40,
      "type": "table-row",
      "lang": "de",
-     "chars": 45
+     "chars": 44
     },
     {
      "i": 41,
@@ -288,7 +288,7 @@
      "i": 42,
      "type": "table-row",
      "lang": "de",
-     "chars": 44
+     "chars": 43
     },
     {
      "i": 43,
@@ -300,13 +300,13 @@
      "i": 44,
      "type": "table-row",
      "lang": "de",
-     "chars": 43
+     "chars": 42
     },
     {
      "i": 45,
      "type": "table-row",
      "lang": "de",
-     "chars": 162
+     "chars": 161
     },
     {
      "i": 46,
@@ -420,7 +420,7 @@
   },
   {
    "index": 5,
-   "text": "Fehler 1: Nur den Abschlag senken, nicht den Preis. Ein niedriger Abschlag bei teurem Arbeitspreis erzeugt die Nachzahlung, die im März weh tut. Fehler 2: Heizkörper nicht entlüften. Luft im System = Pumpe arbeitet, Fläche bleibt kalt, du drehst höher. 15 Minuten pro Etage. Fehler 3: Kessel auf Werkseinstellung 70 °C Vorlauf. Bei gedämmtem Haus und 55 °C Vorlauf sinkt der Verbrauch spürbar. Wer unsicher ist, lässt den Installateur die Heizkurve einstellen, einmal, nicht jedes Jahr. Fehler 4: Keller und Dachluke den ganzen Sommer offen, im Oktober zu spät zu. Dämmung an der Luke, Bürstendichtung an der Tür zum unbeheizten Flur. Fehler 5: Zählerstand nicht dokumentieren. Ohne Foto am 1. September weißt du im Februar nicht, ob die Nachzahlung Verbrauch oder Preis ist. Mini-Wartungsplan für ein Wochenende. Samstag Vormittag: Druck im Kessel prüfen (meist 1,5 bis 2,0 bar im kalten Zustand), Wasser nachfüllen nach Anleitung, Entlüften vom obersten Heizkörper abwärts. Samstag Nachmittag: Thermostate auf Funktion (Klick, Stift bewegen), Vorhänge nicht über Heizkörper, Möbel 10 cm Abstand. Sonntag: Tarifvergleich, Abschlag-Simulation mit 20000 Kilowattstunden × neuem Preis / 12. Montag: Zählerfoto ins Cloud-Album Energie 2026. Das Wochenende kostet 0 bis 80 Euroo (Entlüfterschlüssel, Dichtung).",
+   "text": "Fehler 1: Nur den Abschlag senken, nicht den Preis. Ein niedriger Abschlag bei teurem Arbeitspreis erzeugt die Nachzahlung, die im März weh tut. Fehler 2: Heizkörper nicht entlüften. Luft im System ist Pumpe arbeitet, Fläche bleibt kalt, du drehst höher. 15 Minuten pro Etage. Fehler 3: Kessel auf Werkseinstellung 70 °C Vorlauf. Bei gedämmtem Haus und 55 °C Vorlauf sinkt der Verbrauch spürbar. Wer unsicher ist, lässt den Installateur die Heizkurve einstellen, einmal, nicht jedes Jahr. Fehler 4: Keller und Dachluke den ganzen Sommer offen, im Oktober zu spät zu. Dämmung an der Luke, Bürstendichtung an der Tür zum unbeheizten Flur. Fehler 5: Zählerstand nicht dokumentieren. Ohne Foto am 1. September weißt du im Februar nicht, ob die Nachzahlung Verbrauch oder Preis ist. Mini-Wartungsplan für ein Wochenende. Samstag Vormittag: Druck im Kessel prüfen (meist 1,5 bis 2,0 bar im kalten Zustand), Wasser nachfüllen nach Anleitung, Entlüften vom obersten Heizkörper abwärts. Samstag Nachmittag: Thermostate auf Funktion (Klick, Stift bewegen), Vorhänge nicht über Heizkörper, Möbel 10 cm Abstand. Sonntag: Tarifvergleich, Abschlag-Simulation mit 20000 Kilowattstunden × neuem Preis / 12. Montag: Zählerfoto ins Cloud-Album Energie 2026. Das Wochenende kostet 0 bis 80 Euro (Entlüfterschlüssel, Dichtung).",
    "units": [
     {
      "i": 63,
@@ -438,7 +438,7 @@
      "i": 65,
      "type": "p",
      "lang": "de",
-     "chars": 129
+     "chars": 131
     },
     {
      "i": 66,
@@ -498,19 +498,19 @@
      "i": 75,
      "type": "p",
      "lang": "de",
-     "chars": 68
+     "chars": 67
     }
    ]
   },
   {
    "index": 6,
-   "text": "Es verhindert den 400- Euro-Schock, der entsteht, wenn der Kessel im ersten Frost nachläuft, weil niemand ihn seit zwei Jahren gesehen hat. Abschlag neu kalibrieren, bevor der erste Frost kommt. Formel: erwarteter Jahresverbrauch × neuer Arbeitspreis + Grundpreis × 12, durch 12. Erwarteter Verbrauch = Mittel der letzten zwei Jahre, plus 5 Prozent Puffer wenn der letzte Winter mild war. Diese Zahl ist der Abschlag, nicht das, was der Anbieter vorschlägt, um Nachzahlungen zu vermeiden, indem er dich über das Jahr kreditiert. Zu hoher Abschlag ist ein zinsloses Darlehen an den Versorger. Zu niedriger ist die März-Überraschung. Spätsommer ist der Moment, weil du den Sommerverbrauch (Warmwasser, Kochen) vom Winter trennen kannst, wenn du Zählerstände hast. Fazit: Durch vorausschauende Vorbereitung hunderte Euro sparen. Die Gasrechnung senken funktioniert am effektivsten, wenn du vor dem Start der Kälteperiode handelst. Die Kombination aus entlüfteten Heizkörpern, smarten Thermostaten und einem optimierten Gastarif mit Preisgarantie entlastet deine Haushaltskasse um bis zu 720 Euro im Jahr. Nutze die warmen Spätsommertage, um deine Heizung fit zu machen. Weiterlesen: Ratgeber Strom und Gas sparen · Sicher heizen: So schützt dich eine Gaspreisgarantie · Preisgarantie Gas: So sicherst du günstige Tarife für 2026. Häufige Fragen. Wann sollte ich die Heizkörper vor dem Winter entlüften?",
+   "text": "Es verhindert den 400-Euro-Schock, der entsteht, wenn der Kessel im ersten Frost nachläuft, weil niemand ihn seit zwei Jahren gesehen hat. Abschlag neu kalibrieren, bevor der erste Frost kommt. Formel: erwarteter Jahresverbrauch × neuer Arbeitspreis + Grundpreis × 12, durch 12. Erwarteter Verbrauch ist Mittel der letzten zwei Jahre, plus 5 Prozent Puffer wenn der letzte Winter mild war. Diese Zahl ist der Abschlag, nicht das, was der Anbieter vorschlägt, um Nachzahlungen zu vermeiden, indem er dich über das Jahr kreditiert. Zu hoher Abschlag ist ein zinsloses Darlehen an den Versorger. Zu niedriger ist die März-Überraschung. Spätsommer ist der Moment, weil du den Sommerverbrauch (Warmwasser, Kochen) vom Winter trennen kannst, wenn du Zählerstände hast. Fazit: Durch vorausschauende Vorbereitung hunderte Euro sparen. Die Gasrechnung senken funktioniert am effektivsten, wenn du vor dem Start der Kälteperiode handelst. Die Kombination aus entlüfteten Heizkörpern, smarten Thermostaten und einem optimierten Gastarif mit Preisgarantie entlastet deine Haushaltskasse um bis zu 720 Euro im Jahr. Nutze die warmen Spätsommertage, um deine Heizung fit zu machen. Weiterlesen: Ratgeber Strom und Gas sparen · Sicher heizen: So schützt dich eine Gaspreisgarantie · Preisgarantie Gas: So sicherst du günstige Tarife für 2026. Häufige Fragen. Wann sollte ich die Heizkörper vor dem Winter entlüften?",
    "units": [
     {
      "i": 76,
      "type": "p",
      "lang": "de",
-     "chars": 139
+     "chars": 138
     },
     {
      "i": 77,
@@ -528,7 +528,7 @@
      "i": 79,
      "type": "p",
      "lang": "de",
-     "chars": 108
+     "chars": 110
     },
     {
      "i": 80,

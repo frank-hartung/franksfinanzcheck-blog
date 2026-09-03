@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 111,
- "chars": 10754,
+ "chars": 10756,
  "parts": [
   {
    "index": 0,
@@ -432,7 +432,7 @@
   },
   {
    "index": 5,
-   "text": "Weitere praxisnahe Ratschläge zur Vorbereitung deiner Heizungsanlage findest du in unserem Ratgeber zu Versäumnissen beim Heizen im Spätsommer. Vertragstext lesen: die fünf Sätze, die über hunderte Euro entscheiden. Suche im PDF nach: Preisgarantie, Preisanpassung, steuerliche Änderungen, CO₂, Netzentgelte, Bonus, Sonderkündigung. Markiere jeden Satz, der dem Anbieter das Recht gibt, trotz Garantie zu erhöhen. Wenn mehr als ein Satz das tut, ist es eine eingeschränkte Garantie, egal wie das Marketing sie nennt. Laufzeit versus Garantiedauer. 24 Monate Vertrag, 12 Monate Garantie bedeutet: Im zweiten Jahr darf der Preis steigen, du bist aber gebunden. Das ist die teuerste Konstruktion. Ideal: Garantie mindestens Restlaufzeit, danach monatlich kündbar. Bonus-Rückforderung. Viele Boni werden nur gutgeschrieben, wenn du 12 Monate bleibst. Wer in Monat 10 wegen Umzug rausgeht, zahlt den Bonus anteilig zurück. Das muss in den Effektivpreis. Grundversorgung gegen Festpreis, die 20000-Kilowattstunden-Rechnung. Grundversorgung 13,5 Cent, Festpreis mit voller Garantie 10,8 Cent, Grundpreis ähnlich. Differenz 2,7 Cent × 20000 Kilowattstunden = 540 Euro im Jahr. Selbst wenn der Festpreis 0,5 Cent Versicherungsaufschlag enthält, bleiben über 400 Euro. Der Wechsel dauert online 10 Minuten, die Belieferung startet zum nächsten möglichen Termin, der Grundversorger wird automatisch abgelöst.",
+   "text": "Weitere praxisnahe Ratschläge zur Vorbereitung deiner Heizungsanlage findest du in unserem Ratgeber zu Versäumnissen beim Heizen im Spätsommer. Vertragstext lesen: die fünf Sätze, die über hunderte Euro entscheiden. Suche im PDF nach: Preisgarantie, Preisanpassung, steuerliche Änderungen, CO₂, Netzentgelte, Bonus, Sonderkündigung. Markiere jeden Satz, der dem Anbieter das Recht gibt, trotz Garantie zu erhöhen. Wenn mehr als ein Satz das tut, ist es eine eingeschränkte Garantie, egal wie das Marketing sie nennt. Laufzeit versus Garantiedauer. 24 Monate Vertrag, 12 Monate Garantie bedeutet: Im zweiten Jahr darf der Preis steigen, du bist aber gebunden. Das ist die teuerste Konstruktion. Ideal: Garantie mindestens Restlaufzeit, danach monatlich kündbar. Bonus-Rückforderung. Viele Boni werden nur gutgeschrieben, wenn du 12 Monate bleibst. Wer in Monat 10 wegen Umzug rausgeht, zahlt den Bonus anteilig zurück. Das muss in den Effektivpreis. Grundversorgung gegen Festpreis, die 20000-Kilowattstunden-Rechnung. Grundversorgung 13,5 Cent, Festpreis mit voller Garantie 10,8 Cent, Grundpreis ähnlich. Differenz 2,7 Cent × 20000 Kilowattstunden ist 540 Euro im Jahr. Selbst wenn der Festpreis 0,5 Cent Versicherungsaufschlag enthält, bleiben über 400 Euro. Der Wechsel dauert online 10 Minuten, die Belieferung startet zum nächsten möglichen Termin, der Grundversorger wird automatisch abgelöst.",
    "units": [
     {
      "i": 65,
@@ -498,7 +498,7 @@
      "i": 75,
      "type": "p",
      "lang": "de",
-     "chars": 150
+     "chars": 152
     },
     {
      "i": 76,

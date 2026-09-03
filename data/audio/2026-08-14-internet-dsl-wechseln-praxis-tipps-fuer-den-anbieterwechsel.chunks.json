@@ -7,8 +7,8 @@
   "rate": 0.93,
   "maxChunk": 140
  },
- "units": 117,
- "chars": 11521,
+ "units": 116,
+ "chars": 11527,
  "parts": [
   {
    "index": 0,
@@ -408,88 +408,82 @@
   },
   {
    "index": 5,
-   "text": "Ein eigener Markenrouter (zum Beispiel. AVM FRITZ! Box 7530 AX oder 7590 AX) kostet einmalig zwischen 140 Euro und 220 Euro und kann über viele Jahre hinweg und über mehrere Anbieterwechsel genutzt werden. Dank der gesetzlichen Routerfreiheit in Deutschland bist du nicht an Geräte deines Internetanbieters gebunden und sparst langfristig viel Geld. Wer den Router nach vier oder fünf Jahren im Gebrauchtmarkt weiterverkauft, erzielt oft noch 40 bis 50 Prozent des ursprünglichen Anschaffungspreises. Damit das neue Gerät in jeder Ecke der Wohnung wirklich volle Geschwindigkeit liefert, haben wir die wichtigsten Tricks in WLAN verbessern: Mehr Speed in jeder Ecke zusammengestellt. Die 4 Phasen ohne Panik und ohne Leerlauf. Phase 1 – Inventur (30 Minuten). Altvertrag: Beginn, Mindestlaufzeit, ob du schon monatlich kündbar bist, Router-Eigentum, aktuelle Messwerte (Kabeltest). Ohne Kabeltest weißt du nicht, ob ein Wechsel die Speed-Probleme löst oder nur den Preis. Phase 2 – Auswahl (20 Minuten). Verfügbarkeit an der Adresse, Effektivpreis über 24 Monate, Upload für Homeoffice, Hardware-Freiheit. Zwei Favoriten notieren, falls der Erste eine Ablehnung schickt. Phase 3 – Auftrag. Online, Widerruf bekannt, Liefertermin in der Bestätigung. Der neue Anbieter übernimmt die Kündigung in den meisten Fällen.",
+   "text": "Ein eigener Markenrouter (zum Beispiel AVM FRITZ! Box 7530 AX oder 7590 AX) kostet einmalig zwischen 140 Euro und 220 Euro und kann über viele Jahre hinweg und über mehrere Anbieterwechsel genutzt werden. Dank der gesetzlichen Routerfreiheit in Deutschland bist du nicht an Geräte deines Internetanbieters gebunden und sparst langfristig viel Geld. Wer den Router nach vier oder fünf Jahren im Gebrauchtmarkt weiterverkauft, erzielt oft noch 40 bis 50 Prozent des ursprünglichen Anschaffungspreises. Damit das neue Gerät in jeder Ecke der Wohnung wirklich volle Geschwindigkeit liefert, haben wir die wichtigsten Tricks in WLAN verbessern: Mehr Speed in jeder Ecke zusammengestellt. Die 4 Phasen ohne Panik und ohne Leerlauf. Phase 1 – Inventur (30 Minuten). Altvertrag: Beginn, Mindestlaufzeit, ob du schon monatlich kündbar bist, Router-Eigentum, aktuelle Messwerte (Kabeltest). Ohne Kabeltest weißt du nicht, ob ein Wechsel die Speed-Probleme löst oder nur den Preis. Phase 2 – Auswahl (20 Minuten). Verfügbarkeit an der Adresse, Effektivpreis über 24 Monate, Upload für Homeoffice, Hardware-Freiheit. Zwei Favoriten notieren, falls der Erste eine Ablehnung schickt. Phase 3 – Auftrag. Online, Widerruf bekannt, Liefertermin in der Bestätigung. Der neue Anbieter übernimmt die Kündigung in den meisten Fällen.",
    "units": [
     {
      "i": 61,
      "type": "p",
      "lang": "de",
-     "chars": 39
+     "chars": 49
     },
     {
      "i": 62,
      "type": "p",
      "lang": "de",
-     "chars": 10
+     "chars": 154
     },
     {
      "i": 63,
      "type": "p",
      "lang": "de",
-     "chars": 154
+     "chars": 143
     },
     {
      "i": 64,
      "type": "p",
      "lang": "de",
-     "chars": 143
+     "chars": 150
     },
     {
      "i": 65,
      "type": "p",
      "lang": "de",
-     "chars": 150
-    },
-    {
-     "i": 66,
-     "type": "p",
-     "lang": "de",
      "chars": 182
     },
     {
-     "i": 67,
+     "i": 66,
      "type": "h2",
      "lang": "de",
      "chars": 42
     },
     {
-     "i": 68,
+     "i": 67,
      "type": "p",
      "lang": "de",
      "chars": 32
     },
     {
-     "i": 69,
+     "i": 68,
      "type": "p",
      "lang": "de",
      "chars": 121
     },
     {
-     "i": 70,
+     "i": 69,
      "type": "p",
      "lang": "de",
      "chars": 89
     },
     {
-     "i": 71,
+     "i": 70,
      "type": "p",
      "lang": "de",
      "chars": 133
     },
     {
-     "i": 72,
+     "i": 71,
      "type": "p",
      "lang": "de",
      "chars": 64
     },
     {
-     "i": 73,
+     "i": 72,
      "type": "p",
      "lang": "de",
      "chars": 77
     },
     {
-     "i": 74,
+     "i": 73,
      "type": "p",
      "lang": "de",
      "chars": 64
@@ -498,100 +492,100 @@
   },
   {
    "index": 6,
-   "text": "Du kündigst nur selbst, wenn das ausdrücklich gewünscht wird, sonst entstehen Doppelkündigungen und Chaos. Phase 4 – Umschalttag. Laut TKG maximal ein Tag Unterbrechung. Handy-Hotspot als Backup, wichtige Uploads vorher. Router des neuen Anbieters erst anschließen, wenn die Leitungsfreischaltung bestätigt ist. Alte Box 14 Tage aufbewahren, bis der Zugang stabil ist. Router mieten oder kaufen, die 24-Monats-Rechnung. Miete 6 Euro × 24 = 144 Euro, du gibst das Gerät am Ende zurück. Kauf FritzBox 120 bis 180 Euroo, nutzt du über zwei Verträge = 4 bis 6 Jahre, Kosten unter 40 Euro pro 24 Monate. Wechselst du, nimmst du den eigenen Router mit, das ist der unterschätzte Hebel, weil du WLAN-Einstellungen, Mesh und Gäste-Netz nicht jedes Mal neu aufsetzt. Ausnahme: Der neue Anbieter erzwingt seine Box am Glasfaser-Modem. Dann Bridge-Modus + eigene Box dahinter, oder du akzeptierst die Miete für 24 Monate und kaufst danach. Nach dem Wechsel: 14-Tage-Protokoll. Täglich einmal Kabel-Speedtest, ping, ob TV-App und VPN laufen. Weicht der Durchschnitt um mehr als 30 Prozent vom Vertrag ab, Störung als Ticket anlegen, nicht erst nach drei Monaten. Die Entstörung in den ersten 14 Tagen ist psychologisch und vertraglich einfacher als nach einem halben Jahr Dulden. Der Umschalttag ohne Homeoffice-Kollaps. Lege den Wechseltag nicht auf den Montag mit der wichtigsten Videokonferenz.",
+   "text": "Du kündigst nur selbst, wenn das ausdrücklich gewünscht wird, sonst entstehen Doppelkündigungen und Chaos. Phase 4 – Umschalttag. Laut TKG maximal ein Tag Unterbrechung. Handy-Hotspot als Backup, wichtige Uploads vorher. Router des neuen Anbieters erst anschließen, wenn die Leitungsfreischaltung bestätigt ist. Alte Box 14 Tage aufbewahren, bis der Zugang stabil ist. Router mieten oder kaufen, die 24-Monats-Rechnung. Miete 6 Euro × 24 ergibt 144 Euro, du gibst das Gerät am Ende zurück. Kauf FritzBox 120 bis 180 Euro, nutzt du über zwei Verträge ist 4 bis 6 Jahre, Kosten unter 40 Euro pro 24 Monate. Wechselst du, nimmst du den eigenen Router mit, das ist der unterschätzte Hebel, weil du WLAN-Einstellungen, Mesh und Gäste-Netz nicht jedes Mal neu aufsetzt. Ausnahme: Der neue Anbieter erzwingt seine Box am Glasfaser-Modem. Dann Bridge-Modus + eigene Box dahinter, oder du akzeptierst die Miete für 24 Monate und kaufst danach. Nach dem Wechsel: 14-Tage-Protokoll. Täglich einmal Kabel-Speedtest, ping, ob TV-App und VPN laufen. Weicht der Durchschnitt um mehr als 30 Prozent vom Vertrag ab, Störung als Ticket anlegen, nicht erst nach drei Monaten. Die Entstörung in den ersten 14 Tagen ist psychologisch und vertraglich einfacher als nach einem halben Jahr Dulden. Der Umschalttag ohne Homeoffice-Kollaps. Lege den Wechseltag nicht auf den Montag mit der wichtigsten Videokonferenz.",
    "units": [
     {
-     "i": 75,
+     "i": 74,
      "type": "p",
      "lang": "de",
      "chars": 106
     },
     {
-     "i": 76,
+     "i": 75,
      "type": "p",
      "lang": "de",
      "chars": 113
     },
     {
-     "i": 77,
+     "i": 76,
      "type": "p",
      "lang": "de",
      "chars": 90
     },
     {
-     "i": 78,
+     "i": 77,
      "type": "p",
      "lang": "de",
      "chars": 56
     },
     {
-     "i": 79,
+     "i": 78,
      "type": "h2",
      "lang": "de",
      "chars": 50
     },
     {
+     "i": 79,
+     "type": "p",
+     "lang": "de",
+     "chars": 69
+    },
+    {
      "i": 80,
      "type": "p",
      "lang": "de",
-     "chars": 64
+     "chars": 114
     },
     {
      "i": 81,
      "type": "p",
      "lang": "de",
-     "chars": 113
+     "chars": 158
     },
     {
      "i": 82,
      "type": "p",
      "lang": "de",
-     "chars": 158
+     "chars": 66
     },
     {
      "i": 83,
      "type": "p",
      "lang": "de",
-     "chars": 66
-    },
-    {
-     "i": 84,
-     "type": "p",
-     "lang": "de",
      "chars": 103
     },
     {
-     "i": 85,
+     "i": 84,
      "type": "h2",
      "lang": "de",
      "chars": 36
     },
     {
-     "i": 86,
+     "i": 85,
      "type": "p",
      "lang": "de",
      "chars": 63
     },
     {
-     "i": 87,
+     "i": 86,
      "type": "p",
      "lang": "de",
      "chars": 120
     },
     {
-     "i": 88,
+     "i": 87,
      "type": "p",
      "lang": "de",
      "chars": 116
     },
     {
-     "i": 89,
+     "i": 88,
      "type": "h2",
      "lang": "de",
      "chars": 40
     },
     {
-     "i": 90,
+     "i": 89,
      "type": "p",
      "lang": "de",
      "chars": 76
@@ -603,97 +597,97 @@
    "text": "Dienstag oder Mittwoch, Hotspot getestet, wichtige Uploads am Vortag. Router-Zugangsdaten des neuen Anbieters aus der Mail kopiert, nicht erst um 9 Uhr suchen. Nach 4 Stunden Stabilität: altes Gerät in den Karton, 14 Tage stehen lassen. Dann erst zurückschicken, mit Foto des Labels. So geplant wird der Wechsel zur 20-Minuten-Aktion. Ohne Plan erlebst du ihn als den Tag ohne Netz. Fazit: Mit minimalem Aufwand hunderte Euro sparen. Überprüfst du alle 24 Monate deinen DSL- oder Kabelvertrag und wechselst bei Bedarf, surfst du dauerhaft mit modernen Technologien und sparst pro Jahr zwischen 280 Euro und 380 Euro. Der Wechselprozess läuft dank Anbieter-Kündigungsservice unterbrechungsfrei im Hintergrund ab. Erfahre in unserer Übersicht zu Internet und DSL alle weiteren Spartipps rund um Breitbandanschlüsse. Häufige Fragen. Wie lange dauert die Umstellung beim Internetwechsel? Von der Online-Bestellung bis zum Schaltungstag vergehen in der Regel 2 bis 4 Wochen. Am eigentlichen Umstellungstag dauert die technische Leitungsübergabe meist nur wenige Minuten. Was passiert, wenn beim Wechsel etwas schiefgeht? Nach Paragraf 58 TKG ist der bisherige Anbieter verpflichtet, dich solange weiterzuversorgen, bis der neue Anbieter die Leitung erfolgreich geschaltet hat. Du bleibst somit zu keinem Zeitpunkt ohne Internet. Kann ich meine Festnetz-Telefonnummer behalten?",
    "units": [
     {
-     "i": 91,
+     "i": 90,
      "type": "p",
      "lang": "de",
      "chars": 69
     },
     {
-     "i": 92,
+     "i": 91,
      "type": "p",
      "lang": "de",
      "chars": 89
     },
     {
-     "i": 93,
+     "i": 92,
      "type": "p",
      "lang": "de",
      "chars": 123
     },
     {
-     "i": 94,
+     "i": 93,
      "type": "p",
      "lang": "de",
      "chars": 98
     },
     {
-     "i": 95,
+     "i": 94,
      "type": "h2",
      "lang": "de",
      "chars": 50
     },
     {
-     "i": 96,
+     "i": 95,
      "type": "p",
      "lang": "de",
      "chars": 182
     },
     {
-     "i": 97,
+     "i": 96,
      "type": "p",
      "lang": "de",
      "chars": 94
     },
     {
-     "i": 98,
+     "i": 97,
      "type": "p",
      "lang": "de",
      "chars": 101
     },
     {
-     "i": 99,
+     "i": 98,
      "type": "h2",
      "lang": "de",
      "chars": 15
     },
     {
-     "i": 100,
+     "i": 99,
      "type": "h3",
      "lang": "de",
      "chars": 53
     },
     {
-     "i": 101,
+     "i": 100,
      "type": "p",
      "lang": "de",
      "chars": 85
     },
     {
-     "i": 102,
+     "i": 101,
      "type": "p",
      "lang": "de",
      "chars": 95
     },
     {
-     "i": 103,
+     "i": 102,
      "type": "h3",
      "lang": "de",
      "chars": 49
     },
     {
-     "i": 104,
+     "i": 103,
      "type": "p",
      "lang": "de",
      "chars": 155
     },
     {
-     "i": 105,
+     "i": 104,
      "type": "p",
      "lang": "de",
      "chars": 51
     },
     {
-     "i": 106,
+     "i": 105,
      "type": "h3",
      "lang": "de",
      "chars": 47
@@ -705,61 +699,61 @@
    "text": "Ja. Wenn du im selben Vorwahlbereich wohnst, kannst du deine bisherigen Rufnummern kostenlos zum neuen Anbieter mitnehmen. Wann muss ich den alten Mietrouter zurückschicken? In der Regel innerhalb von 14 Tagen nach Vertragsende. Nutze immer den Rücksendebeleg des Paketzustellers als Nachweis. Was ist der Unterschied zwischen DSL, Kabel und Glasfaser? DSL nutzt Kupfertelefonleitungen (bis 250 Megabit pro Sekunde), Kabel nutzt Koaxial-Fernsehkabel (bis 1000 Megabit pro Sekunde) und FTTH-Glasfaser bringt Lichtwellenleiter direkt in die Wohnung (bis 1000+ Megabit pro Sekunde mit sehr hoher Stabilität). Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
    "units": [
     {
-     "i": 107,
+     "i": 106,
      "type": "p",
      "lang": "de",
      "chars": 122
     },
     {
-     "i": 108,
+     "i": 107,
      "type": "h3",
      "lang": "de",
      "chars": 50
     },
     {
-     "i": 109,
+     "i": 108,
      "type": "p",
      "lang": "de",
      "chars": 119
     },
     {
-     "i": 110,
+     "i": 109,
      "type": "h3",
      "lang": "de",
      "chars": 58
     },
     {
-     "i": 111,
+     "i": 110,
      "type": "p",
      "lang": "de",
      "chars": 63
     },
     {
-     "i": 112,
+     "i": 111,
      "type": "p",
      "lang": "de",
      "chars": 188
     },
     {
-     "i": 113,
+     "i": 112,
      "type": "p",
      "lang": "de",
      "chars": 66
     },
     {
-     "i": 114,
+     "i": 113,
      "type": "p",
      "lang": "de",
      "chars": 49
     },
     {
-     "i": 115,
+     "i": 114,
      "type": "p",
      "lang": "de",
      "chars": 96
     },
     {
-     "i": 116,
+     "i": 115,
      "type": "outro",
      "lang": "de",
      "chars": 66

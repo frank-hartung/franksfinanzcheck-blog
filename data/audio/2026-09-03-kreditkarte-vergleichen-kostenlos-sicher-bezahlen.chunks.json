@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 140,
- "chars": 13668,
+ "chars": 13660,
  "parts": [
   {
    "index": 0,
@@ -180,7 +180,7 @@
   },
   {
    "index": 2,
-   "text": "Der Unterschied ist einfacher, als er klingt: Bei einer echten Kreditkarte bekommst du einen Kreditrahmen und zahlst den Betrag erst später zurück. Bei einer Debitkarte wird jeder Einkauf sofort von deinem Girokonto abgebucht. Für die meisten Zwecke reicht eine Debitkarte mit Kreditkarten-Funktion vollkommen aus. Sie funktioniert weltweit an allen Kartenautomaten, in Online-Shops und beim Bezahlen per Smartphone. Eine echte Kreditkarte mit Rahmen lohnt sich vor allem für Mietwagen-Buchungen, Hotel-Reservierungen oder Geschäftsreisen, bei denen eine Karte als Sicherheit hinterlegt werden muss. Ein wichtiger Hinweis für alle, die viel reisen: Prüfe vor dem Abschluss, ob die Karte auch außerhalb des Euroraums ohne Aufpreis funktioniert. Manche kostenlosen Debitkarten erheben im Ausland eine Gebühr pro Zahlung, die sich bei einer zweiwöchigen Reise schnell auf zwanzig oder dreißig Euro summiert. Die Kostenfalle Fremdwährung: So vermeidest du sie. Die teuerste versteckte Gebühr ist das Fremdwährungsentgelt. Viele Banken berechnen beim Zahlen in Dollar, Pfund oder Schweizer Franken einen Aufschlag von knapp zwei Prozent auf den Wechselkurs. Bei einem Urlaubsbudget von 2000 Euroo sind das rund 40 Euroo, nur für das Privileg, in der Landeswährung zu zahlen. Dazu kommt die sogenannte Dynamic Currency Conversion, kurz DCC.",
+   "text": "Der Unterschied ist einfacher, als er klingt: Bei einer echten Kreditkarte bekommst du einen Kreditrahmen und zahlst den Betrag erst später zurück. Bei einer Debitkarte wird jeder Einkauf sofort von deinem Girokonto abgebucht. Für die meisten Zwecke reicht eine Debitkarte mit Kreditkarten-Funktion vollkommen aus. Sie funktioniert weltweit an allen Kartenautomaten, in Online-Shops und beim Bezahlen per Smartphone. Eine echte Kreditkarte mit Rahmen lohnt sich vor allem für Mietwagen-Buchungen, Hotel-Reservierungen oder Geschäftsreisen, bei denen eine Karte als Sicherheit hinterlegt werden muss. Ein wichtiger Hinweis für alle, die viel reisen: Prüfe vor dem Abschluss, ob die Karte auch außerhalb des Euroraums ohne Aufpreis funktioniert. Manche kostenlosen Debitkarten erheben im Ausland eine Gebühr pro Zahlung, die sich bei einer zweiwöchigen Reise schnell auf zwanzig oder dreißig Euro summiert. Die Kostenfalle Fremdwährung: So vermeidest du sie. Die teuerste versteckte Gebühr ist das Fremdwährungsentgelt. Viele Banken berechnen beim Zahlen in Dollar, Pfund oder Schweizer Franken einen Aufschlag von knapp zwei Prozent auf den Wechselkurs. Bei einem Urlaubsbudget von 2000 Euro sind das rund 40 Euro, nur für das Privileg, in der Landeswährung zu zahlen. Dazu kommt die sogenannte Dynamic Currency Conversion, kurz DCC.",
    "units": [
     {
      "i": 26,
@@ -246,7 +246,7 @@
      "i": 36,
      "type": "p",
      "lang": "de",
-     "chars": 116
+     "chars": 114
     },
     {
      "i": 37,
@@ -342,7 +342,7 @@
   },
   {
    "index": 4,
-   "text": "SMS- oder Push-Benachrichtigung: Bei jeder Zahlung über einem selbst gewählten Betrag bekommst du eine Meldung aufs Handy. Ein Sicherheitsmerkmal, das viele unterschätzen: die Haftung bei Missbrauch. Bei Karten mit Online-Banking-Zugang haftest du in der Regel nur bis 50 Euroo, wenn du den Verlust unverzüglich meldest. Bei manchen Karten ist diese Selbstbeteiligung sogar ausgeschlossen. Ein Blick in die Bedingungen lohnt sich, bevor du die Karte im Ausland einsetzt. Reiseversicherungen im Kreditkarten-Paket: Segen oder Müll? Viele Premium-Karten locken mit Reiseversicherungen, Lounge-Zugang und Concierge-Service. Diese Extras klingen verführerisch, sind aber nicht immer das Papier wert, auf dem sie stehen. Die entscheidende Frage lautet: Nutzt du die Leistungen wirklich? Ein Auslandsreise-Krankenversicherungs-Baustein in der Karte kann sinnvoll sein, wenn du ohnehin keine eigene Police hast. Doch Vorsicht: Viele Karten-Versicherungen greifen nur, wenn du die Reise komplett mit der Karte bezahlt hast, und verlangen im Schadenfall umfangreiche Nachweise. Die Absicherung über eine separate, günstige Police ist oft klarer und günstiger. Mein Rat: Vergleiche die Karte nach ihren Kernkosten und nutze Versicherungspakete als Bonus, nicht als Kaufargument.",
+   "text": "SMS- oder Push-Benachrichtigung: Bei jeder Zahlung über einem selbst gewählten Betrag bekommst du eine Meldung aufs Handy. Ein Sicherheitsmerkmal, das viele unterschätzen: die Haftung bei Missbrauch. Bei Karten mit Online-Banking-Zugang haftest du in der Regel nur bis 50 Euro, wenn du den Verlust unverzüglich meldest. Bei manchen Karten ist diese Selbstbeteiligung sogar ausgeschlossen. Ein Blick in die Bedingungen lohnt sich, bevor du die Karte im Ausland einsetzt. Reiseversicherungen im Kreditkarten-Paket: Segen oder Müll? Viele Premium-Karten locken mit Reiseversicherungen, Lounge-Zugang und Concierge-Service. Diese Extras klingen verführerisch, sind aber nicht immer das Papier wert, auf dem sie stehen. Die entscheidende Frage lautet: Nutzt du die Leistungen wirklich? Ein Auslandsreise-Krankenversicherungs-Baustein in der Karte kann sinnvoll sein, wenn du ohnehin keine eigene Police hast. Doch Vorsicht: Viele Karten-Versicherungen greifen nur, wenn du die Reise komplett mit der Karte bezahlt hast, und verlangen im Schadenfall umfangreiche Nachweise. Die Absicherung über eine separate, günstige Police ist oft klarer und günstiger. Mein Rat: Vergleiche die Karte nach ihren Kernkosten und nutze Versicherungspakete als Bonus, nicht als Kaufargument.",
    "units": [
     {
      "i": 51,
@@ -360,7 +360,7 @@
      "i": 53,
      "type": "p",
      "lang": "de",
-     "chars": 120
+     "chars": 119
     },
     {
      "i": 54,
@@ -504,7 +504,7 @@
   },
   {
    "index": 6,
-   "text": "Die Voraussetzungen halten sich in Grenzen: Du musst volljährig sein, einen festen Wohnsitz in Deutschland haben und über ein regelmäßiges Einkommen verfügen. Viele Banken setzen außerdem eine positive Bonitätsauskunft voraus, denn die Karte ist ein Zahlungsmittel auf Kredit. Beim Vergleich der Anbieter gibt es drei typische Modelle: Tabelle: Kreditkarte beantragen: Voraussetzungen und Ablauf. Übersicht mit 3 Spalten und 3 Zeilen. Die Spalten lauten: Modell, Für wen, Typische Kosten. Kostenlose Kreditkarte der Hausbank. Zeile 1 von 3. Für wen: Alle, die eine Karte für Alltag und Reisen wollen. Typische Kosten: 0 Euroo Jahresgebühr. Kreditkarte einer Direktbank. Zeile 2 von 3. Für wen: Vielreisende und Online-Käufer. Typische Kosten: 0 Euroo, oft gebührenfreie Abhebung. Premium-Karte mit Versicherungen. Zeile 3 von 3. Für wen: Vielflieger mit hohem Umsatz. Typische Kosten: 50 bis 150 Euroo Jahresgebühr. Ende der Tabelle Kreditkarte beantragen: Voraussetzungen und Ablauf. Der Antrag selbst läuft meist in vier Schritten: Online-Formular ausfüllen, Identität per VideoIdent oder PostIdent bestätigen, Bonitätsprüfung abwarten und die Karte in der App freischalten. Bei vielen Direktbanken kannst du die Karte unmittelbar nach der Freischaltung virtuell nutzen, bevor die physische Karte per Post kommt.",
+   "text": "Die Voraussetzungen halten sich in Grenzen: Du musst volljährig sein, einen festen Wohnsitz in Deutschland haben und über ein regelmäßiges Einkommen verfügen. Viele Banken setzen außerdem eine positive Bonitätsauskunft voraus, denn die Karte ist ein Zahlungsmittel auf Kredit. Beim Vergleich der Anbieter gibt es drei typische Modelle: Tabelle: Kreditkarte beantragen: Voraussetzungen und Ablauf. Übersicht mit 3 Spalten und 3 Zeilen. Die Spalten lauten: Modell, Für wen, Typische Kosten. Kostenlose Kreditkarte der Hausbank. Zeile 1 von 3. Für wen: Alle, die eine Karte für Alltag und Reisen wollen. Typische Kosten: 0 Euro Jahresgebühr. Kreditkarte einer Direktbank. Zeile 2 von 3. Für wen: Vielreisende und Online-Käufer. Typische Kosten: 0 Euro, oft gebührenfreie Abhebung. Premium-Karte mit Versicherungen. Zeile 3 von 3. Für wen: Vielflieger mit hohem Umsatz. Typische Kosten: 50 bis 150 Euro Jahresgebühr. Ende der Tabelle Kreditkarte beantragen: Voraussetzungen und Ablauf. Der Antrag selbst läuft meist in vier Schritten: Online-Formular ausfüllen, Identität per VideoIdent oder PostIdent bestätigen, Bonitätsprüfung abwarten und die Karte in der App freischalten. Bei vielen Direktbanken kannst du die Karte unmittelbar nach der Freischaltung virtuell nutzen, bevor die physische Karte per Post kommt.",
    "units": [
     {
      "i": 76,
@@ -546,19 +546,19 @@
      "i": 82,
      "type": "table-row",
      "lang": "de",
-     "chars": 38
+     "chars": 37
     },
     {
      "i": 83,
      "type": "table-row",
      "lang": "de",
-     "chars": 139
+     "chars": 138
     },
     {
      "i": 84,
      "type": "table-row",
      "lang": "de",
-     "chars": 135
+     "chars": 134
     },
     {
      "i": 85,
@@ -774,7 +774,7 @@
   },
   {
    "index": 9,
-   "text": "Für Reisen außerhalb Europas ist eine Karte ohne Fremdwährungsgebühr sehr empfehlenswert. Innerhalb Europas reicht meist eine Debitkarte mit Kreditkarten-Funktion. Was passiert bei Kartenverlust im Ausland? Karte sofort über die App sperren und die Notrufnummer der Bank anrufen. Danach hilft die kostenlose Sperrhotline 116 116, um alle hinterlegten Karten zu sperren. Eine Zweitkarte oder Bargeldreserve gehört auf längere Reisen immer ins Gepäck. Sind Kreditkarten-Versicherungen ihr Geld wert? Für Vielflieger können einzelne Bausteine praktisch sein. Für Gelegenheitsurlauber ist eine separate, günstige Auslandsreise-Absicherung über den Tarifvergleich meist die klarere und preiswertere Lösung. Was ist ein Kartenlimit und wie hoch sollte es sein? Das Limit legt fest, wie viel du mit der Karte ausgeben kannst, ohne vorher Geld auf das Konto zu legen. Üblich sind Beträge zwischen 500 und 5000 Euroo. Sinnvoll ist ein Limit, das deinen Monatsumsatz plus eine kleine Reserve abdeckt, bei einer Reise mit Mietwagen können das schnell 3000 Euroo sein. Du kannst das Limit bei den meisten Banken jederzeit in der App anpassen. Was passiert, wenn ich die Kreditkartenrechnung nicht vollständig begleiche? Der offene Betrag wird in den nächsten Abrechnungszeitraum übernommen und mit Sollzinsen belegt, die je nach Anbieter zwischen 12 und 20 Prozent im Jahr liegen.",
+   "text": "Für Reisen außerhalb Europas ist eine Karte ohne Fremdwährungsgebühr sehr empfehlenswert. Innerhalb Europas reicht meist eine Debitkarte mit Kreditkarten-Funktion. Was passiert bei Kartenverlust im Ausland? Karte sofort über die App sperren und die Notrufnummer der Bank anrufen. Danach hilft die kostenlose Sperrhotline 116 116, um alle hinterlegten Karten zu sperren. Eine Zweitkarte oder Bargeldreserve gehört auf längere Reisen immer ins Gepäck. Sind Kreditkarten-Versicherungen ihr Geld wert? Für Vielflieger können einzelne Bausteine praktisch sein. Für Gelegenheitsurlauber ist eine separate, günstige Auslandsreise-Absicherung über den Tarifvergleich meist die klarere und preiswertere Lösung. Was ist ein Kartenlimit und wie hoch sollte es sein? Das Limit legt fest, wie viel du mit der Karte ausgeben kannst, ohne vorher Geld auf das Konto zu legen. Üblich sind Beträge zwischen 500 und 5000 Euro. Sinnvoll ist ein Limit, das deinen Monatsumsatz plus eine kleine Reserve abdeckt, bei einer Reise mit Mietwagen können das schnell 3000 Euro sein. Du kannst das Limit bei den meisten Banken jederzeit in der App anpassen. Was passiert, wenn ich die Kreditkartenrechnung nicht vollständig begleiche? Der offene Betrag wird in den nächsten Abrechnungszeitraum übernommen und mit Sollzinsen belegt, die je nach Anbieter zwischen 12 und 20 Prozent im Jahr liegen.",
    "units": [
     {
      "i": 118,
@@ -846,13 +846,13 @@
      "i": 129,
      "type": "p",
      "lang": "de",
-     "chars": 48
+     "chars": 47
     },
     {
      "i": 130,
      "type": "p",
      "lang": "de",
-     "chars": 147
+     "chars": 146
     },
     {
      "i": 131,

@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 147,
- "chars": 13355,
+ "chars": 13351,
  "parts": [
   {
    "index": 0,
@@ -90,7 +90,7 @@
   },
   {
    "index": 1,
-   "text": "ohne an Deckung oder Service einzubüßen. Tipp: Schnell-Tipp von FranksFinanzcheck: Starte jetzt den kostenlosen Vergleich und finde den besonders günstigen Tarif für dein Fahrzeug: Kraftfahrzeug-Versicherung vergleichen (Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Die drei Bausteine der Kraftfahrzeug-Versicherung. Bevor du vergleichst, solltest du verstehen, was du überhaupt vergleichst. Eine Kraftfahrzeug-Versicherung besteht aus drei Teilen: Kraftfahrzeug-Haftpflicht: In Deutschland gesetzlich vorgeschrieben. Sie deckt Schäden ab, die du anderen zufügst (Personen-, Sach- und Vermögensschäden). Deckungssumme: mindestens 100 Millionen. Euro pauschal, bei Personenschäden bis 15 Millionen Euro pro geschädigter Person. Teilkasko (TK): Freiwillig. Deckt Schäden am eigenen Fahrzeug durch Diebstahl, Glasbruch, Sturm, Hagel, Blitz, Brand, Wildunfall und Marderbiss. Vollkasko (VK): Erweitert die Teilkasko um selbst verschuldete Unfallschäden am eigenen Fahrzeug und Vandalismus. Empfehlenswert für Fahrzeuge bis etwa 8 bis 10 Jahre Alter. Faustregel: Bis circa 5 Jahre Alter führt zu Vollkasko. 5 bis 10 Jahre führt zu Teilkasko. Älter als 10 Jahre führt zu oft reicht die Haftpflicht, sofern der Wagen noch mehr als 3000 Euro wert ist.",
+   "text": "ohne an Deckung oder Service einzubüßen. Tipp: Schnell-Tipp von FranksFinanzcheck: Starte jetzt den kostenlosen Vergleich und finde den besonders günstigen Tarif für dein Fahrzeug: Kraftfahrzeug-Versicherung vergleichen (Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten.). Die drei Bausteine der Kraftfahrzeug-Versicherung. Bevor du vergleichst, solltest du verstehen, was du überhaupt vergleichst. Eine Kraftfahrzeug-Versicherung besteht aus drei Teilen: Kraftfahrzeug-Haftpflicht: In Deutschland gesetzlich vorgeschrieben. Sie deckt Schäden ab, die du anderen zufügst (Personen-, Sach- und Vermögensschäden). Deckungssumme: mindestens 100 Millionen Euro pauschal, bei Personenschäden bis 15 Millionen Euro pro geschädigter Person. Teilkasko (TK): Freiwillig. Deckt Schäden am eigenen Fahrzeug durch Diebstahl, Glasbruch, Sturm, Hagel, Blitz, Brand, Wildunfall und Marderbiss. Vollkasko (VK): Erweitert die Teilkasko um selbst verschuldete Unfallschäden am eigenen Fahrzeug und Vandalismus. Empfehlenswert für Fahrzeuge bis etwa 8 bis 10 Jahre Alter. Faustregel: Bis circa 5 Jahre Alter führt zu Vollkasko. 5 bis 10 Jahre führt zu Teilkasko. Älter als 10 Jahre führt zu oft reicht die Haftpflicht, sofern der Wagen noch mehr als 3000 Euro wert ist. Mein eigener Spar-Erfolg: von 1040 Euro auf 412 Euro.",
    "units": [
     {
      "i": 12,
@@ -138,13 +138,13 @@
      "i": 19,
      "type": "li",
      "lang": "de",
-     "chars": 126
+     "chars": 85
     },
     {
      "i": 20,
      "type": "li",
      "lang": "de",
-     "chars": 81
+     "chars": 121
     },
     {
      "i": 21,
@@ -181,19 +181,19 @@
      "type": "p",
      "lang": "de",
      "chars": 106
-    }
-   ]
-  },
-  {
-   "index": 2,
-   "text": "Mein eigener Spar-Erfolg: von 1040 Euro auf 412 Euro. Tabelle: Mein eigener Spar-Erfolg: von 1040 Euro auf 412 Euro. Übersicht mit 3 Spalten und 7 Zeilen. Die Spalten lauten: Merkmal, Alte Versicherung (2016), Optimierter Vertrag (2026). Jahresbeitrag. Zeile 1 von 7. Alte Versicherung (2016): 1040 Euro. Optimierter Vertrag (2026): 412 Euro. Selbstbeteiligung TK / VK. Zeile 2 von 7. Alte Versicherung (2016): 0 Euro / 0 Euro. Optimierter Vertrag (2026): 150 Euro / 300 Euro. Werkstattbindung. Zeile 3 von 7. Alte Versicherung (2016): nein. Optimierter Vertrag (2026): ja. Jahreskilometer. Zeile 4 von 7. Alte Versicherung (2016): 15000 Kilometer (tatsächlich 11800). Optimierter Vertrag (2026): 12000 Kilometer. Fahrerkreis. Zeile 5 von 7. Alte Versicherung (2016): beliebig. Optimierter Vertrag (2026): Partner + ich (ü30). Tarifgruppe. Zeile 6 von 7. Alte Versicherung (2016): Klassisch. Optimierter Vertrag (2026): Direktversicherer mit Telematik-Option. SF-Klasse. Zeile 7 von 7. Alte Versicherung (2016): SF 12. Optimierter Vertrag (2026): SF 22. Ende der Tabelle Mein eigener Spar-Erfolg: von 1040 Euro auf 412 Euro. Ein Teil der Ersparnis ergab sich durch die gestiegene Schadenfreiheitsklasse (SF), der weitaus größere Teil aber durch die konsequente Optimierung der Tarifmerkmale und den regelmäßigen Wechsel. Die 7 größten Sparhebel im Kraftfahrzeug-Versicherungsvergleich.",
-   "units": [
+    },
     {
      "i": 27,
      "type": "h2",
      "lang": "de",
      "chars": 53
-    },
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "text": "Tabelle: Mein eigener Spar-Erfolg: von 1040 Euro auf 412 Euro. Übersicht mit 3 Spalten und 7 Zeilen. Die Spalten lauten: Merkmal, Alte Versicherung (2016), Optimierter Vertrag (2026). Jahresbeitrag. Zeile 1 von 7. Alte Versicherung (2016): 1040 Euro. Optimierter Vertrag (2026): 412 Euro. Selbstbeteiligung TK / VK. Zeile 2 von 7. Alte Versicherung (2016): 0 Euro / 0 Euro. Optimierter Vertrag (2026): 150 Euro / 300 Euro. Werkstattbindung. Zeile 3 von 7. Alte Versicherung (2016): nein. Optimierter Vertrag (2026): ja. Jahreskilometer. Zeile 4 von 7. Alte Versicherung (2016): 15000 Kilometer (tatsächlich 11800). Optimierter Vertrag (2026): 12000 Kilometer. Fahrerkreis. Zeile 5 von 7. Alte Versicherung (2016): beliebig. Optimierter Vertrag (2026): Partner + ich (ü30). Tarifgruppe. Zeile 6 von 7. Alte Versicherung (2016): Klassisch. Optimierter Vertrag (2026): Direktversicherer mit Telematik-Option. SF-Klasse. Zeile 7 von 7. Alte Versicherung (2016): SF 12. Optimierter Vertrag (2026): SF 22. Ende der Tabelle Mein eigener Spar-Erfolg: von 1040 Euro auf 412 Euro. Ein Teil der Ersparnis ergab sich durch die gestiegene Schadenfreiheitsklasse (SF), der weitaus größere Teil aber durch die konsequente Optimierung der Tarifmerkmale und den regelmäßigen Wechsel. Die 7 größten Sparhebel im Kraftfahrzeug-Versicherungsvergleich. 1. Die richtige Selbstbeteiligung wählen.",
+   "units": [
     {
      "i": 28,
      "type": "table-intro",
@@ -265,19 +265,19 @@
      "type": "h2",
      "lang": "de",
      "chars": 64
-    }
-   ]
-  },
-  {
-   "index": 3,
-   "text": "1. Die richtige Selbstbeteiligung wählen. Viele Autobesitzer fürchten die Selbstbeteiligung (SB) und wählen 0 Euro in TK und VK, und zahlen dafür im Schnitt 25 bis 40 Prozent mehr Beitrag. In der Praxis rechnet sich eine moderate SB fast immer: Teilkasko: 150 Euro SB führt zu circa 15 bis 20 Prozent günstiger. Vollkasko: 300 Euro SB führt zu circa 10 bis 15 Prozent günstiger. Wer im Schadensfall 300 Euro selbst tragen kann, spart über die Jahre deutlich mehr, als er jemals einzahlt. 2. Werkstattbindung aktivieren. Mit einer Werkstattbindung akzeptierst du, dass Kaskoschäden in einer Partnerwerkstatt des Versicherers repariert werden. Das spart 10 bis 20 Prozent Beitrag. Die Werkstätten sind zertifiziert, verwenden Original-Ersatzteile und geben ebenfalls Garantie. Achtung: Bei Leasing-Fahrzeugen oder Neuwagen mit Herstellergarantie kann eine Werkstattbindung die Herstellergarantie gefährden, in diesem Fall darauf achten, dass der Versicherer die Garantie aufrechterhält. 3. Jahreskilometer realistisch ansetzen. Die Prämie hängt stark von der angegebenen Jahresfahrleistung ab. Wer 15000 Kilometer angibt, aber nur 11000 fährt, zahlt durchschnittlich 120 Euro zu viel pro Jahr. Tipp: Den Tachostand einmal pro Jahr notieren und bei Vertragsabschluss den Durchschnitt der letzten zwei bis drei Jahre angeben.",
-   "units": [
+    },
     {
      "i": 40,
      "type": "h3",
      "lang": "de",
      "chars": 41
-    },
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "text": "Viele Autobesitzer fürchten die Selbstbeteiligung (SB) und wählen 0 Euro in TK und VK, und zahlen dafür im Schnitt 25 bis 40 Prozent mehr Beitrag. In der Praxis rechnet sich eine moderate SB fast immer: Teilkasko: 150 Euro SB führt zu circa 15 bis 20 Prozent günstiger. Vollkasko: 300 Euro SB führt zu circa 10 bis 15 Prozent günstiger. Wer im Schadensfall 300 Euro selbst tragen kann, spart über die Jahre deutlich mehr, als er jemals einzahlt. 2. Werkstattbindung aktivieren. Mit einer Werkstattbindung akzeptierst du, dass Kaskoschäden in einer Partnerwerkstatt des Versicherers repariert werden. Das spart 10 bis 20 Prozent Beitrag. Die Werkstätten sind zertifiziert, verwenden Original-Ersatzteile und geben ebenfalls Garantie. Achtung: Bei Leasing-Fahrzeugen oder Neuwagen mit Herstellergarantie kann eine Werkstattbindung die Herstellergarantie gefährden, in diesem Fall darauf achten, dass der Versicherer die Garantie aufrechterhält. 3. Jahreskilometer realistisch ansetzen. Die Prämie hängt stark von der angegebenen Jahresfahrleistung ab. Wer 15000 Kilometer angibt, aber nur 11000 fährt, zahlt durchschnittlich 120 Euro zu viel pro Jahr. Tipp: Den Tachostand einmal pro Jahr notieren und bei Vertragsabschluss den Durchschnitt der letzten zwei bis drei Jahre angeben. Eine nachträgliche Korrektur nach unten ist meist möglich, zu viel gezahlte Beiträge werden erstattet.",
+   "units": [
     {
      "i": 41,
      "type": "p",
@@ -361,19 +361,19 @@
      "type": "li",
      "lang": "de",
      "chars": 129
-    }
-   ]
-  },
-  {
-   "index": 4,
-   "text": "Eine nachträgliche Korrektur nach unten ist meist möglich, zu viel gezahlte Beiträge werden erstattet. 4. Fahrerkreis einschränken. Tarife, bei denen jede Person das Fahrzeug fahren darf, sind bis zu 35 Prozent teurer. Schränke den Fahrerkreis ein auf: Dich und deinen Partner. gegebenenfalls die Kinder, die aber mindestens 23 oder 25 Jahre alt sein sollten. Fahrer unter 23 Jahren verteuern die Prämie massiv, weil das Unfallrisiko statistisch deutlich höher liegt. 5. Rabattschutz und Fahrerschutz prüfen. Der Rabattschutz verhindert, du nach einem selbst verschuldeten Unfall in der SF-Klasse zurückgestuft wirst. Er kostet circa. 10 bis 15 Prozent Aufpreis, lohnt sich aber für Fahrer mit hoher SF-Klasse (ab SF 20), weil ein einziger Unfall dort mehrere hundert Euro Folgekosten nach sich ziehen kann. 6. Die Schadenfreiheitsklasse (SF-Klasse) richtig einordnen. Die SF-Klasse ist der mit Abstand wichtigste einzelne Prämienfaktor: Tabelle: 6. Die Schadenfreiheitsklasse (SF-Klasse) richtig einordnen. Übersicht mit 3 Spalten und 5 Zeilen. Die Spalten lauten: SF-Klasse, Schadenfreie Jahre, Ungefährer Beitrags-Satz. SF 0. Zeile 1 von 5. Schadenfreie Jahre: 0 (Fahranfänger). Ungefährer Beitrags-Satz: 230 bis 260 Prozent. SF 5. Zeile 2 von 5. Schadenfreie Jahre: 5. Ungefährer Beitrags-Satz: circa 60 Prozent.",
-   "units": [
+    },
     {
      "i": 55,
      "type": "li",
      "lang": "de",
      "chars": 102
-    },
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "text": "4. Fahrerkreis einschränken. Tarife, bei denen jede Person das Fahrzeug fahren darf, sind bis zu 35 Prozent teurer. Schränke den Fahrerkreis ein auf: Dich und deinen Partner. gegebenenfalls die Kinder, die aber mindestens 23 oder 25 Jahre alt sein sollten. Fahrer unter 23 Jahren verteuern die Prämie massiv, weil das Unfallrisiko statistisch deutlich höher liegt. 5. Rabattschutz und Fahrerschutz prüfen. Der Rabattschutz verhindert, du nach einem selbst verschuldeten Unfall in der SF-Klasse zurückgestuft wirst. Er kostet circa 10 bis 15 Prozent Aufpreis, lohnt sich aber für Fahrer mit hoher SF-Klasse (ab SF 20), weil ein einziger Unfall dort mehrere hundert Euro Folgekosten nach sich ziehen kann. 6. Die Schadenfreiheitsklasse (SF-Klasse) richtig einordnen. Die SF-Klasse ist der mit Abstand wichtigste einzelne Prämienfaktor: Tabelle: 6. Die Schadenfreiheitsklasse (SF-Klasse) richtig einordnen. Übersicht mit 3 Spalten und 5 Zeilen. Die Spalten lauten: SF-Klasse, Schadenfreie Jahre, Ungefährer Beitrags-Satz. SF 0. Zeile 1 von 5. Schadenfreie Jahre: 0 (Fahranfänger). Ungefährer Beitrags-Satz: 230 bis 260 Prozent. SF 5. Zeile 2 von 5. Schadenfreie Jahre: 5. Ungefährer Beitrags-Satz: circa 60 Prozent. SF 10. Zeile 3 von 5. Schadenfreie Jahre: 10. Ungefährer Beitrags-Satz: circa 40 Prozent. SF 20. Zeile 4 von 5. Schadenfreie Jahre: 20. Ungefährer Beitrags-Satz: circa 28 Prozent.",
+   "units": [
     {
      "i": 56,
      "type": "h3",
@@ -414,13 +414,13 @@
      "i": 62,
      "type": "p",
      "lang": "de",
-     "chars": 125
+     "chars": 108
     },
     {
      "i": 63,
      "type": "p",
      "lang": "de",
-     "chars": 172
+     "chars": 188
     },
     {
      "i": 64,
@@ -457,13 +457,7 @@
      "type": "table-row",
      "lang": "de",
      "chars": 87
-    }
-   ]
-  },
-  {
-   "index": 5,
-   "text": "SF 10. Zeile 3 von 5. Schadenfreie Jahre: 10. Ungefährer Beitrags-Satz: circa 40 Prozent. SF 20. Zeile 4 von 5. Schadenfreie Jahre: 20. Ungefährer Beitrags-Satz: circa 28 Prozent. SF 35. Zeile 5 von 5. Schadenfreie Jahre: 35. Ungefährer Beitrags-Satz: circa 20 Prozent. Ende der Tabelle 6. Die Schadenfreiheitsklasse (SF-Klasse) richtig einordnen. Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen, es gibt keinen Reset. 7. Den Stichtag 30.11. Kennen und nutzen. Kündigungsfrist: Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der 31.12. ist. Sonderkündigungsrecht bei Beitragserhöhung: Wenn dein Versicherer den Preis ohne Schadensfall erhöht, hast du vier Wochen nach Eingang der Mitteilung Zeit zu kündigen, unabhängig vom 30.11. Bei Fahrzeugwechsel: Der Vertrag kann innerhalb von zwei Wochen nach Zulassung des neuen Fahrzeugs gekündigt werden. Vergleichsprozess in sechs Schritten. Punkt 1: Letzte Jahresrechnung und Fahrzeugschein bereitlegen. Punkt 2: Aktuelle SF-Klasse, Jahreskilometer, gewünschte SB ermitteln. Punkt 3: Vergleichsrechner starten: Jetzt Kraftfahrzeug-Versicherung vergleichen. Punkt 4: Mindestens 5 bis 10 der besonders günstigen Angebote öffnen und das Kleingedruckte prüfen (Deckungssumme, Mallorca-Police, Fahrerschutz, Wildunfall mit allen Tieren, grobe Fahrlässigkeit). Punkt 5: Neuen Vertrag bis 30.11. Abschließen.",
-   "units": [
+    },
     {
      "i": 70,
      "type": "table-row",
@@ -475,7 +469,13 @@
      "type": "table-row",
      "lang": "de",
      "chars": 89
-    },
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "text": "SF 35. Zeile 5 von 5. Schadenfreie Jahre: 35. Ungefährer Beitrags-Satz: circa 20 Prozent. Ende der Tabelle 6. Die Schadenfreiheitsklasse (SF-Klasse) richtig einordnen. Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen, es gibt keinen Reset. 7. Den Stichtag 30.11. Kennen und nutzen. Kündigungsfrist: Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der 31.12. ist. Sonderkündigungsrecht bei Beitragserhöhung: Wenn dein Versicherer den Preis ohne Schadensfall erhöht, hast du vier Wochen nach Eingang der Mitteilung Zeit zu kündigen, unabhängig vom 30.11. Bei Fahrzeugwechsel: Der Vertrag kann innerhalb von zwei Wochen nach Zulassung des neuen Fahrzeugs gekündigt werden. Vergleichsprozess in sechs Schritten. Punkt 1: Letzte Jahresrechnung und Fahrzeugschein bereitlegen. Punkt 2: Aktuelle SF-Klasse, Jahreskilometer, gewünschte SB ermitteln. Punkt 3: Vergleichsrechner starten: Jetzt Kraftfahrzeug-Versicherung vergleichen. Punkt 4: Mindestens 5 bis 10 der besonders günstigen Angebote öffnen und das Kleingedruckte prüfen (Deckungssumme, Mallorca-Police, Fahrerschutz, Wildunfall mit allen Tieren, grobe Fahrlässigkeit). Punkt 5: Neuen Vertrag bis 30.11. Abschließen. Punkt 6: Alten Vertrag schriftlich kündigen (am attraktiven per Einschreiben oder über das Kundenportal) und die Kündigungsbestätigung abwarten. Was eine gute Police unbedingt enthalten sollte.",
+   "units": [
     {
      "i": 72,
      "type": "table-row",
@@ -553,13 +553,7 @@
      "type": "li",
      "lang": "de",
      "chars": 46
-    }
-   ]
-  },
-  {
-   "index": 6,
-   "text": "Punkt 6: Alten Vertrag schriftlich kündigen (am attraktiven per Einschreiben oder über das Kundenportal) und die Kündigungsbestätigung abwarten. Was eine gute Police unbedingt enthalten sollte. Mindestdeckung 100 Millionen Euro pauschal, mindestens 15 Millionen Euro pro Person. Mallorca-Police (Deckung bei Mietwagen im europäischen Ausland in gewohnter Höhe). Zusammenstoß mit Tieren aller Art (nicht nur Haarwild). Erweiterte Wildschadenklausel. Grobe Fahrlässigkeit (außer bei Vorsatz, Drogen/Alkohol). Schlüsselverlust (mindestens 500 Euro, besser 1000 Euro). Neupreisentschädigung bei Neuwagen für mindestens 12, besser 24 Monate. Häufige Irrtümer. Direktversicherer sind immer schlecht im Schadensfall. Tatsächlich schneiden Direktversicherer in Tests (Stiftung Warentest, Finanztip) regelmäßig mindestens so gut ab wie klassische Anbieter. Alte Verträge sind immer die besonders günstigen. Das Gegenteil ist der Fall: Alttarife aus den 2000er Jahren liegen im Schnitt 25 bis 40 Prozent über aktuellen Vergleichstarifen. Bei einem Wechsel verliere ich meine SF-Klasse. Nein, die SF-Klasse ist an den Fahrer gebunden und wird 1:1 übertragen. Eine Kündigung per E-Mail reicht. Rechtlich ist die Textform ausreichend, aber der Versicherer muss den Eingang bestätigen. Sicherer ist das Online-Kundenportal oder ein Einschreiben. Wie viel Sparpotenzial wirklich drinsteckt.",
-   "units": [
+    },
     {
      "i": 85,
      "type": "li",
@@ -571,7 +565,13 @@
      "type": "h2",
      "lang": "de",
      "chars": 48
-    },
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "text": "Mindestdeckung 100 Millionen Euro pauschal, mindestens 15 Millionen Euro pro Person. Mallorca-Police (Deckung bei Mietwagen im europäischen Ausland in gewohnter Höhe). Zusammenstoß mit Tieren aller Art (nicht nur Haarwild). Erweiterte Wildschadenklausel. Grobe Fahrlässigkeit (außer bei Vorsatz, Drogen/Alkohol). Schlüsselverlust (mindestens 500 Euro, besser 1000 Euro). Neupreisentschädigung bei Neuwagen für mindestens 12, besser 24 Monate. Häufige Irrtümer. Direktversicherer sind immer schlecht im Schadensfall. Tatsächlich schneiden Direktversicherer in Tests (Stiftung Warentest, Finanztip) regelmäßig mindestens so gut ab wie klassische Anbieter. Alte Verträge sind immer die besonders günstigen. Das Gegenteil ist der Fall: Alttarife aus den 2000er Jahren liegen im Schnitt 25 bis 40 Prozent über aktuellen Vergleichstarifen. Bei einem Wechsel verliere ich meine SF-Klasse. Nein, die SF-Klasse ist an den Fahrer gebunden und wird 1:1 übertragen. Eine Kündigung per E-Mail reicht. Rechtlich ist die Textform ausreichend, aber der Versicherer muss den Eingang bestätigen. Sicherer ist das Online-Kundenportal oder ein Einschreiben. Wie viel Sparpotenzial wirklich drinsteckt. Tabelle: Wie viel Sparpotenzial wirklich drinsteckt. Übersicht mit 2 Spalten und 4 Zeilen. Die Spalten lauten: Ausgangslage, Typische Ersparnis.",
+   "units": [
     {
      "i": 87,
      "type": "li",
@@ -667,13 +667,7 @@
      "type": "h2",
      "lang": "de",
      "chars": 43
-    }
-   ]
-  },
-  {
-   "index": 7,
-   "text": "Tabelle: Wie viel Sparpotenzial wirklich drinsteckt. Übersicht mit 2 Spalten und 4 Zeilen. Die Spalten lauten: Ausgangslage, Typische Ersparnis. Fahranfänger, Tarif seit 3 Jahren. Zeile 1 von 4. Typische Ersparnis: 150 bis 300 Euroo. Mittelklasse-Fahrzeug, SF 10, 10 Jahre nicht verglichen. Zeile 2 von 4. Typische Ersparnis: 400 bis 600 Euroo. Familie, zwei Fahrzeuge, alte Tarife. Zeile 3 von 4. Typische Ersparnis: 600 bis 1100 Euroo. Premium-Fahrzeug, SF 30, Werkstattneuling. Zeile 4 von 4. Typische Ersparnis: 200 bis 400 Euroo. Ende der Tabelle Wie viel Sparpotenzial wirklich drinsteckt. Quellen: eigene Vertragsvergleiche 2016 bis 2026, Stiftung Warentest Finanztest (Ausgaben 2024 bis 2026), Check 24-Wechselstudie. Stichtag 30.11, der Kalender, der 800 Euro wert sein kann. Kraftfahrzeug-Verträge zum Kalenderjahr: Kündigung meist bis 30.11 – bei manchen Verträgen sogar schon zum 30.09. Wer im Oktober vergleicht, hat Ruhe. Und wer erst am 29.11. Anfängt, unterschreibt Fehler (falsche SF-Klasse, vergessene Werkstattbindung). SF-Klasse aus der Vorversicherung übernehmen, nicht schätzen. Zweitwagenregelung, Fahrerkreis eng, Kilometer ehrlich plus Puffer 2000 Kilometer. Werkstattbindung spart 10 bis 20 Prozent, bindet dich an das Netz, bei einem 8 Jahre alten Auto oft okay, beim Leasing prüfe die Leasingbedingungen.",
-   "units": [
+    },
     {
      "i": 103,
      "type": "table-intro",
@@ -685,30 +679,36 @@
      "type": "table-intro",
      "lang": "de",
      "chars": 53
-    },
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Fahranfänger, Tarif seit 3 Jahren. Zeile 1 von 4. Typische Ersparnis: 150 bis 300 Euro. Mittelklasse-Fahrzeug, SF 10, 10 Jahre nicht verglichen. Zeile 2 von 4. Typische Ersparnis: 400 bis 600 Euro. Familie, zwei Fahrzeuge, alte Tarife. Zeile 3 von 4. Typische Ersparnis: 600 bis 1100 Euro. Premium-Fahrzeug, SF 30, Werkstattneuling. Zeile 4 von 4. Typische Ersparnis: 200 bis 400 Euro. Ende der Tabelle Wie viel Sparpotenzial wirklich drinsteckt. Quellen: eigene Vertragsvergleiche 2016 bis 2026, Stiftung Warentest Finanztest (Ausgaben 2024 bis 2026), Check 24-Wechselstudie. Stichtag 30.11, der Kalender, der 800 Euro wert sein kann. Kraftfahrzeug-Verträge zum Kalenderjahr: Kündigung meist bis 30.11 – bei manchen Verträgen sogar schon zum 30.09. Wer im Oktober vergleicht, hat Ruhe. Und wer erst am 29.11. Anfängt, unterschreibt Fehler (falsche SF-Klasse, vergessene Werkstattbindung). SF-Klasse aus der Vorversicherung übernehmen, nicht schätzen. Zweitwagenregelung, Fahrerkreis eng, Kilometer ehrlich plus Puffer 2000 Kilometer. Werkstattbindung spart 10 bis 20 Prozent, bindet dich an das Netz, bei einem 8 Jahre alten Auto oft okay, beim Leasing prüfe die Leasingbedingungen. Ein 30-Minuten-Vergleich im Oktober schlägt jeden Treue-Rabatt, der in Wahrheit ein Nicht-Wechsel-Aufschlag ist. SF-Klasse und Zweitwagen, wo 800 Euro herkommen.",
+   "units": [
     {
      "i": 105,
      "type": "table-row",
      "lang": "de",
-     "chars": 88
+     "chars": 87
     },
     {
      "i": 106,
      "type": "table-row",
      "lang": "de",
-     "chars": 110
+     "chars": 109
     },
     {
      "i": 107,
      "type": "table-row",
      "lang": "de",
-     "chars": 92
+     "chars": 91
     },
     {
      "i": 108,
      "type": "table-row",
      "lang": "de",
-     "chars": 96
+     "chars": 95
     },
     {
      "i": 109,
@@ -751,13 +751,7 @@
      "type": "p",
      "lang": "de",
      "chars": 148
-    }
-   ]
-  },
-  {
-   "index": 8,
-   "text": "Ein 30-Minuten-Vergleich im Oktober schlägt jeden Treue-Rabatt, der in Wahrheit ein Nicht-Wechsel-Aufschlag ist. SF-Klasse und Zweitwagen, wo 800 Euro herkommen. Die SF-Klasse ist der größte Hebel nach Regionalklasse. Falsch übertragen = falscher Preis. Zweitwagenregelung über den Erstvertrag, Fahrerkreis nicht alle, Kilometer mit Puffer. Werkstattbindung nur, wenn das Netz in deinem Umkreis Werkstätten hat, zu denen du auch fährst. 30.11. In den Kalender, Vergleich in KW 42, nicht in KW 48. Fazit: Ein 30-Minuten-Vergleich, der sich auszahlt. Der Kraftfahrzeug-Versicherungsvergleich ist einer der schnellsten und lukrativsten Sparhebel im deutschen Versicherungsdschungel. 30 bis 45 Minuten investiert, bringt im Schnitt eine Ersparnis von mehreren hundert Euro pro Jahr, über die Vertragslaufzeit von mehreren Jahren gerechnet sind das leicht 1500 Euro bis 4000 Euro. Nutze die Wochen bis zum 30.11, um deinen bestehenden Tarif zu prüfen und bei Bedarf zu wechseln. Weiterlesen: Privathaftpflicht: Warum sie so wichtig ist und was sie kostet · Wohngebäudeversicherung Vergleich: Worauf du achten musst · Pillar: Versicherungen. Häufige Fragen. Wann kann ich meine Kraftfahrzeug-Versicherung kündigen? Der reguläre Kündigungstermin ist der 30.11. Zum 31.12. Des Jahres. Bei einer Beitragserhöhung, einem Fahrzeugwechsel oder einem Schadensfall gibt es zusätzlich ein Sonderkündigungsrecht.",
-   "units": [
+    },
     {
      "i": 116,
      "type": "p",
@@ -769,12 +763,18 @@
      "type": "h2",
      "lang": "de",
      "chars": 48
-    },
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "text": "Die SF-Klasse ist der größte Hebel nach Regionalklasse. Falsch übertragen ist falscher Preis. Zweitwagenregelung über den Erstvertrag, Fahrerkreis nicht alle, Kilometer mit Puffer. Werkstattbindung nur, wenn das Netz in deinem Umkreis Werkstätten hat, zu denen du auch fährst. 30.11. In den Kalender, Vergleich in KW 42, nicht in KW 48. Fazit: Ein 30-Minuten-Vergleich, der sich auszahlt. Der Kraftfahrzeug-Versicherungsvergleich ist einer der schnellsten und lukrativsten Sparhebel im deutschen Versicherungsdschungel. 30 bis 45 Minuten investiert, bringt im Schnitt eine Ersparnis von mehreren hundert Euro pro Jahr, über die Vertragslaufzeit von mehreren Jahren gerechnet sind das leicht 1500 Euro bis 4000 Euro. Nutze die Wochen bis zum 30.11, um deinen bestehenden Tarif zu prüfen und bei Bedarf zu wechseln. Weiterlesen: Privathaftpflicht: Warum sie so wichtig ist und was sie kostet · Wohngebäudeversicherung Vergleich: Worauf du achten musst · Pillar: Versicherungen. Häufige Fragen. Wann kann ich meine Kraftfahrzeug-Versicherung kündigen? Der reguläre Kündigungstermin ist der 30.11. Zum 31.12. Des Jahres. Bei einer Beitragserhöhung, einem Fahrzeugwechsel oder einem Schadensfall gibt es zusätzlich ein Sonderkündigungsrecht. Was ist der Unterschied zwischen Teilkasko und Vollkasko? Die Teilkasko deckt äußere Einwirkungen wie Diebstahl, Glasbruch, Wild, Sturm und Brand ab.",
+   "units": [
     {
      "i": 118,
      "type": "p",
      "lang": "de",
-     "chars": 91
+     "chars": 93
     },
     {
      "i": 119,
@@ -847,13 +847,7 @@
      "type": "p",
      "lang": "de",
      "chars": 119
-    }
-   ]
-  },
-  {
-   "index": 9,
-   "text": "Was ist der Unterschied zwischen Teilkasko und Vollkasko? Die Teilkasko deckt äußere Einwirkungen wie Diebstahl, Glasbruch, Wild, Sturm und Brand ab. Die Vollkasko übernimmt zusätzlich selbst verschuldete Unfallschäden am eigenen Fahrzeug und Vandalismus. Lohnt sich die Werkstattbindung? Für die meisten Fahrer ja: Sie spart 10 bis 20 Prozent Beitrag bei gleichwertiger Reparaturqualität. Achtung bei Leasing-Fahrzeugen oder gültiger Herstellergarantie, hier vorher die Vertragsbedingungen prüfen. Wie wirkt sich ein Schaden auf die SF-Klasse aus? Ein gemeldeter Schaden führt in der Regel zur Rückstufung um mehrere SF-Klassen, was den Folgebeitrag um 15 bis 40 Prozent erhöhen kann. Kleinschäden bis circa 1000 Euro sind daher oft günstiger selbst zu bezahlen. Kann ich mehrere Fahrzeuge in einem Vertrag versichern? Ja, viele Versicherer bieten einen Zweitwagen-Rabatt oder einen Multi-Car-Rabatt von bis zu 20 Prozent. Ein Vergleich kann sich hier besonders lohnen. Jetzt vergleichen und sparen: führt zu Kraftfahrzeug-Versicherung 2026 vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
-   "units": [
+    },
     {
      "i": 131,
      "type": "h3",
@@ -865,7 +859,13 @@
      "type": "p",
      "lang": "de",
      "chars": 91
-    },
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "text": "Die Vollkasko übernimmt zusätzlich selbst verschuldete Unfallschäden am eigenen Fahrzeug und Vandalismus. Lohnt sich die Werkstattbindung? Für die meisten Fahrer ja: Sie spart 10 bis 20 Prozent Beitrag bei gleichwertiger Reparaturqualität. Achtung bei Leasing-Fahrzeugen oder gültiger Herstellergarantie, hier vorher die Vertragsbedingungen prüfen. Wie wirkt sich ein Schaden auf die SF-Klasse aus? Ein gemeldeter Schaden führt in der Regel zur Rückstufung um mehrere SF-Klassen, was den Folgebeitrag um 15 bis 40 Prozent erhöhen kann. Kleinschäden bis circa 1000 Euro sind daher oft günstiger selbst zu bezahlen. Kann ich mehrere Fahrzeuge in einem Vertrag versichern? Ja, viele Versicherer bieten einen Zweitwagen-Rabatt oder einen Multi-Car-Rabatt von bis zu 20 Prozent. Ein Vergleich kann sich hier besonders lohnen. Jetzt vergleichen und sparen: führt zu Kraftfahrzeug-Versicherung 2026 vergleichen. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
     {
      "i": 133,
      "type": "p",
