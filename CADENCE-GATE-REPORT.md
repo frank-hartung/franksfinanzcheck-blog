@@ -1,6 +1,6 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-09-02 23:00 UTC
+**Letzter Lauf:** 2026-09-03 05:33 UTC
 
 **Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
@@ -23,6 +23,10 @@
 
 - ✅ Keine Kadenz-Verstöße im Bestand.
 
+### Mindestziel-Defizit (Engine-Slots füllen auf)
+
+- ⚠️ 2026-09-02 (Mittwoch): nur 1 von 2–3 (Fallback-Slots heilen nach)
+
 ## Re-Queue-Integrität (Park-Zustände)
 
 - 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **0**
@@ -33,7 +37,7 @@
 
 ### Gehaltene Posts (bitte prüfen/freigeben)
 
-- `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` – publish-gate: Textverständnis-Gate nicht bestanden: R8-URL-LEERZEICHEN: URL mit Leerzeichen: „../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/“ (… · seit 0 Tagen
+- `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` – publish-gate: Textverständnis-Gate nicht bestanden: R8-URL-LEERZEICHEN: URL mit Leerzeichen: „../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/“ (… · seit 1 Tagen
 
 
 ## Letzte Heilungen
