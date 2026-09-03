@@ -329,7 +329,8 @@ table.ff-reader-active,
 
 /* ============================================================
    HIGHEND-SPRACHAUSGABE – Bedienelemente (Studio-Konsole)
-   Tempo-Regler, Stimmenwahl, Abschnitts-Navigation, Restlaufzeit
+   Abschnitts-Navigation & Restlaufzeit – Tempo und Stimme werden
+   automatisch geregelt (keine Regler, keine Tempo-Anzeige)
 ============================================================ */
 
 .ff-reader-btn--nav {
@@ -341,45 +342,6 @@ table.ff-reader-active,
 }
 .ff-reader-btn--nav svg { width: 15px; height: 15px; }
 .ff-reader-toolbar--active .ff-reader-btn--nav { display: inline-flex; }
-
-/* ---------- Tempo & Stimme ---------- */
-.ff-reader-field {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font: 600 12.5px/1.2 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: var(--secondary, #6b6b6b);
-}
-.ff-reader-field__label {
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    font-size: .82em;
-}
-.ff-reader-select {
-    appearance: none;
-    -webkit-appearance: none;
-    padding: 7px 26px 7px 10px;
-    border: 1px solid color-mix(in srgb, var(--ff-emerald, #0E5A43) 26%, var(--border, #dce6e1));
-    border-radius: 999px;
-    background-color: var(--entry, #fff);
-    color: var(--primary, #2e2e33);
-    font: 600 13px/1.2 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    cursor: pointer;
-    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
-    background-position: right 12px center, right 7px center;
-    background-size: 5px 5px, 5px 5px;
-    background-repeat: no-repeat;
-    max-width: 210px;
-    text-overflow: ellipsis;
-}
-.ff-reader-select:hover { border-color: var(--ff-emerald, #0E5A43); }
-.ff-reader-select:focus-visible {
-    outline: 3px solid color-mix(in srgb, var(--ff-yellow, #FFB300) 70%, #fff);
-    outline-offset: 2px;
-}
-.ff-reader-select[hidden] { display: none; }
-.ff-reader-select--voice { max-width: min(240px, 60vw); }
-.ff-reader-field--voice:has(.ff-reader-select[hidden]) { display: none; }
 
 /* ---------- Restlaufzeit ---------- */
 .ff-reader-toolbar__remaining {
@@ -395,29 +357,11 @@ table.ff-reader-active,
 .ff-reader-toolbar--active .ff-reader-toolbar__remaining { display: inline-block; }
 .ff-reader-toolbar__remaining:empty { display: none; }
 
-/* ---------- Tastatur-Hinweis (nur Desktop, dezent) ---------- */
-.ff-reader-toolbar__hint {
-    flex-basis: 100%;
-    font-size: .72em;
-    line-height: 1.5;
-    color: var(--secondary, #6b6b6b);
-    opacity: .78;
-}
-@media (max-width: 900px) { .ff-reader-toolbar__hint { display: none; } }
-
 /* ---------- Nicht unterstützte Browser ---------- */
-.ff-reader-toolbar--unsupported .ff-reader-btn--listen,
-.ff-reader-toolbar--unsupported .ff-reader-field { display: none; }
+.ff-reader-toolbar--unsupported .ff-reader-btn--listen { display: none; }
 
 /* ---------- Aktive Sprech-Einheit: ruhige Lesespur ---------- */
 .ff-reader-toolbar--playing ~ .post-content .ff-reader-active,
 .post-content .ff-reader-active {
     scroll-margin-block: 22vh;
-}
-
-/* ---------- Mobil ---------- */
-@media (max-width: 600px) {
-    .ff-reader-field__label { display: none; }
-    .ff-reader-select { padding: 7px 24px 7px 9px; font-size: 12.5px; }
-    .ff-reader-select--voice { max-width: 44vw; }
 }

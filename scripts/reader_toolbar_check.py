@@ -16,11 +16,24 @@ def check_toolbar_partial():
     if not path.is_file():
         return False, "layouts/_partials/reader_toolbar.html fehlt"
     content = path.read_text(encoding="utf-8")
-    required_ids = ["ff-reader-toolbar", "ff-listen-btn", "ff-listen-stop", "ff-listen-prev", "ff-listen-next", "ff-summary-btn", "ff-reader-status", "ff-reader-progress-bar", "ff-reader-config", "ff-reader-speed", "ff-reader-voice", "ff-reader-remaining"]
+    required_ids = ["ff-reader-toolbar", "ff-listen-btn", "ff-listen-stop", "ff-listen-prev", "ff-listen-next", "ff-summary-btn", "ff-reader-status", "ff-reader-progress-bar", "ff-reader-config", "ff-reader-remaining"]
     for rid in required_ids:
         if rid not in content:
             return False, f"ID '{rid}' fehlt in reader_toolbar.html"
-    return True, "reader_toolbar.html vollständig"
+
+    # Highend-Vorgabe: keine manuellen Regler, keine Tempo-Anzeige, kein Tastatur-Hinweis
+    forbidden = {
+        "ff-reader-speed": "Tempo-Regler darf nicht vorhanden sein (automatische Qualitätsanpassung)",
+        "ff-reader-voice": "Stimmenwahl darf nicht vorhanden sein (männliche Highend-Stimme wird automatisch gewählt)",
+        "ff-reader-toolbar__hint": "Tastatur-Hinweis (Alt + L …) darf nicht angezeigt werden",
+        "Alt + L": "Tastatur-Hinweis (Alt + L …) darf nicht angezeigt werden",
+        "Alt + ←": "Tastatur-Hinweis (Alt + ←/→) darf nicht angezeigt werden",
+        "Alt + ↑": "Tastatur-Hinweis (Alt + ↑/↓ Tempo) darf nicht angezeigt werden",
+    }
+    for token, msg in forbidden.items():
+        if token in content:
+            return False, f"{msg} – Token '{token}' in reader_toolbar.html gefunden"
+    return True, "reader_toolbar.html vollständig (ohne Tempo-Regler, Stimmenwahl und Tastatur-Hinweis)"
 
 def check_js_engine():
     path = ROOT / "static" / "premium" / "ff-reader.js"
@@ -51,29 +64,51 @@ def check_js_engine():
     # Highend-Sprachausgabe: Prosodie, Chunking, Steuerung
     highend_tokens = [
         "PROSODY", "splitForSpeech", "buildTimeline", "pauseAfterChunk",
-        "setupMediaSession", "rankVoices", "buildVoiceMenu", "jumpBlock",
+        "setupMediaSession", "rankVoices", "jumpBlock",
         "estimateRemaining", "startKeepAlive", "STUDIO_VOICES",
     ]
     for token in highend_tokens:
         if token not in content:
             return False, f"Highend-Sprachausgabe unvollständig (Token '{token}' fehlt)"
 
+    # Automatische Qualitätsanpassung (statt manueller Regler)
+    for token in ["QUALITY_PROFILES", "calibrateQuality", "qualityTierForScore", "degradeLevel", "quality.maxChunk", "quality.rate"]:
+        if token not in content:
+            return False, f"Automatische Qualitätsanpassung unvollständig (Token '{token}' fehlt)"
+
+    # Verboten: manuelle Regler, Tempo-Anzeige, Tastenkürzel
+    forbidden_js = {
+        "ff-reader-speed": "Tempo-Regler",
+        "ff-reader-voice": "Stimmenwahl",
+        "speedSet": "Tempo-Anzeige (Status 'Tempo: x-fach')",
+        "e.altKey": "Alt-Tastenkürzel",
+        "e.key === 'Escape') { e.preventDefault(); endReading": "Esc-Tastenkürzel zum Beenden des Vorlesens",
+        "ff-reader:rate": "gespeichertes Nutzer-Tempo",
+        "ff-reader:voice": "gespeicherte Nutzer-Stimme",
+    }
+    for token, what in forbidden_js.items():
+        if token in content:
+            return False, f"{what} darf nicht mehr in ff-reader.js vorkommen (Token '{token}')"
+
     # Redaktionelle Aussprache-Veredelung
     for token in ["Paragraf ", "Sozialgesetzbuch", "September", "die Webseite ", "E T F"]:
         if token not in content:
             return False, f"Aussprache-Veredelung unvollständig (Token '{token}' fehlt)"
 
-    return True, "ff-reader.js (Highend-Prosodie, Studio-Stimmen, DE/EN, Tabellen-Barrierefreiheit) vollständig"
+    return True, "ff-reader.js (Highend-Prosodie, männliche Studio-Stimme, Auto-Qualität, DE/EN, Tabellen-Barrierefreiheit) vollständig"
 
 def check_css():
     path = ROOT / "assets" / "css" / "extended" / "ff-reader.css"
     if not path.is_file():
         return False, "assets/css/extended/ff-reader.css fehlt"
     content = path.read_text(encoding="utf-8")
-    required_classes = [".ff-reader-toolbar", ".ff-reader-btn--listen", ".ff-reader-btn--summary", ".ff-reader-active", "tr.ff-reader-active", ".ff-reader-select", ".ff-reader-btn--nav", ".ff-reader-toolbar__remaining"]
+    required_classes = [".ff-reader-toolbar", ".ff-reader-btn--listen", ".ff-reader-btn--summary", ".ff-reader-active", "tr.ff-reader-active", ".ff-reader-btn--nav", ".ff-reader-toolbar__remaining"]
     for cls in required_classes:
         if cls not in content:
             return False, f"CSS-Klasse '{cls}' fehlt in ff-reader.css"
+    for cls in [".ff-reader-select", ".ff-reader-field", ".ff-reader-toolbar__hint"]:
+        if cls in content:
+            return False, f"Veraltete CSS-Klasse '{cls}' (Regler/Tastatur-Hinweis) muss entfernt sein"
     return True, "ff-reader.css (Styling & A11y-Highlighting) vollständig"
 
 def check_layouts():
