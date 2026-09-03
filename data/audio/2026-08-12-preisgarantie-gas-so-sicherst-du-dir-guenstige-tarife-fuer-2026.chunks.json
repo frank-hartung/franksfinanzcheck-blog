@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 111,
- "chars": 10756,
+ "chars": 10742,
  "parts": [
   {
    "index": 0,
@@ -612,7 +612,7 @@
   },
   {
    "index": 7,
-   "text": "Wer aus der teuren Grundversorgung zu einem geprüften Anbieter mit 12 Monaten Preisbindung wechselt, entlastet die Haushaltskasse um bis zu 650 Euro im Jahr. Weiterlesen: Ratgeber Strom und Gas sparen, Gasrechnung senken im Spätsommer, Praxis-Tipps zum Gasanbieterwechsel. Häufige Fragen. Was passiert bei einer Preiserhöhung trotz Preisgarantie? Sollte ein Anbieter aufgrund steigender Steuern die Preise anpassen, steht dir immer ein 14-tägiges gesetzliches Sonderkündigungsrecht zu. Gilt die Preisgarantie auch für den monatlichen Grundpreis? Bei einer vollumfänglichen oder eingeschränkten Preisgarantie umfasst der Schutz in der Regel sowohl den Arbeitspreis pro Kilowattstunde als auch den monatlichen Grundpreis. Wie lange vor Vertragsende sollte ich wechseln? Du kannst bereits drei bis sechs Monate vor Ablauf deines bestehenden Vertrags einen neuen Tarif abschließen und den Lieferbeginn vordatieren lassen. Kann die Gaszufuhr beim Wechsel unterbrochen werden? Nein. Die unterbrechungsfreie Belieferung ist durch das Energiewirtschaftsgesetz rechtlich zu 100 Prozent abgesichert. Was ist der Unterschied zwischen Kilowattstunden und Kubikmetern? Der Gaszähler misst das Volumen in Kubikmetern ( Kubikmeter). Auf der Rechnung wird dieser Wert über den Brennwert und die Zustandszahl in Kilowattstunden umgerechnet. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen.",
+   "text": "Wer aus der teuren Grundversorgung zu einem geprüften Anbieter mit 12 Monaten Preisbindung wechselt, entlastet die Haushaltskasse um bis zu 650 Euro im Jahr. Weiterlesen: Ratgeber Strom und Gas sparen, Gasrechnung senken im Spätsommer, Praxis-Tipps zum Gasanbieterwechsel. Häufige Fragen. Was passiert bei einer Preiserhöhung trotz Preisgarantie? Sollte ein Anbieter aufgrund steigender Steuern die Preise anpassen, steht dir immer ein 14-tägiges gesetzliches Sonderkündigungsrecht zu. Gilt die Preisgarantie auch für den monatlichen Grundpreis? Bei einer vollumfänglichen oder eingeschränkten Preisgarantie umfasst der Schutz in der Regel sowohl den Arbeitspreis pro Kilowattstunde als auch den monatlichen Grundpreis. Wie lange vor Vertragsende sollte ich wechseln? Du kannst bereits drei bis sechs Monate vor Ablauf deines bestehenden Vertrags einen neuen Tarif abschließen und den Lieferbeginn vordatieren lassen. Kann die Gaszufuhr beim Wechsel unterbrochen werden? Nein. Die unterbrechungsfreie Belieferung ist durch das Energiewirtschaftsgesetz rechtlich zu 100 Prozent abgesichert. Was ist der Unterschied zwischen Kilowattstunden und Kubikmetern? Der Gaszähler misst das Volumen in Kubikmetern. Auf der Rechnung wird dieser Wert über den Brennwert und die Zustandszahl in Kilowattstunden umgerechnet. Jetzt vergleichen und sparen: führt zu Jetzt Angebote vergleichen.",
    "units": [
     {
      "i": 93,
@@ -690,7 +690,7 @@
      "i": 105,
      "type": "p",
      "lang": "de",
-     "chars": 61
+     "chars": 47
     },
     {
      "i": 106,

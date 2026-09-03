@@ -348,6 +348,12 @@
        „2,7 Cent × 20000 kWh" ohne das „mal" ergibt keinen Sinn mehr,
        „CO₂" wird zu „CO", „90 m²" zu „90 m". Also konsequent
        ausschreiben, bevor gesprochen wird. */
+    /* Steht die Einheit bereits ausgeschrieben vor der Klammer, würde sie
+       gesprochen doppelt erscheinen: „in Kubikmetern (m³)" -> „in
+       Kubikmetern Kubikmeter". Die Klammer ist dann nur eine
+       Schreibvariante desselben Wortes und fällt weg. */
+    s = s.replace(/(Kubikmetern?|cubic meters?)\s*\(m³\)/gi, '$1');
+    s = s.replace(/(Quadratmetern?|square meters?)\s*\(m²\)/gi, '$1');
     s = s.replace(/km²/g, lang === 'en' ? ' square kilometers' : ' Quadratkilometer');
     s = s.replace(/(\d)\s*[-–]?\s*m²\b/g, '$1' + (lang === 'en' ? ' square meters' : ' Quadratmeter'));
     s = s.replace(/m²/g, lang === 'en' ? ' square meters' : ' Quadratmeter');
@@ -656,6 +662,8 @@
     // Dekorative Icons & Markdown-Sonderzeichen bereinigen
     s = s.replace(/[⏱️📅✍️📚💶💰🛡️⚡🚗🌱🌐💳📈📋✓🔧★⭐]/g, '');
     s = s.replace(/[*_`~#|]+/g, ' ');
+    s = s.replace(/\(\s+/g, '(');
+    s = s.replace(/\s+\)/g, ')');
     s = s.replace(/\(\s*\)/g, ' ');
     s = s.replace(/\b(Tipp|Hinweis|Achtung|Wichtiger Hinweis|Tip|Note|Warning):\s*\1:/gi, '$1:');
     s = s.replace(/\u0003/g, '-');   // geschützte Zahlenreihen (50-30-20)

@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 119,
- "chars": 9707,
+ "chars": 9693,
  "parts": [
   {
    "index": 0,
@@ -636,7 +636,7 @@
   },
   {
    "index": 6,
-   "text": "Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst. Dank strenger Verbraucherschutzgesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist. Bei einem typischen Familienhaushalt mit 20000 Kilowattstunden Verbrauch sparst du im ersten Jahr bis 882 Euro. Auch dauerhaft bleiben mehrere hundert Euro auf deinem Konto. Jetzt vergleichen und sparen: führt zu Bis 882 Euro sparen, Angebote vergleichen. Weiterlesen: Pillar Strom und Gas sparen, Gasrechnung senken im Spätsommer, Günstige Tarife mit Preisgarantie. Häufige Fragen. Kann mir während des Wechsels das Gas abgestellt werden? Nein, das ist gesetzlich unmöglich. Der örtliche Grundversorger ist zur lückenlosen Belieferung verpflichtet. Was mache ich bei einem Umzug? Bei einem Umzug meldest du deinen bestehenden Vertrag mit einer Frist von sechs Wochen ab oder nimmst ihn an die neue Lieferadresse mit. Wie wird Gas von Kubikmetern ( Kubikmeter) in Kilowattstunden umgerechnet? Multipliziere die Kubikmeter mit dem Brennwert (meist circa 10 bis 11,5) und der Zustandszahl (z-Zahl, circa 0,95). Grobe Faustformel: 1 Kubikmeter Gas entspricht rund 10 Kilowattstunden. Wie lange dauert der gesamte Wechselprozess?",
+   "text": "Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst. Dank strenger Verbraucherschutzgesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist. Bei einem typischen Familienhaushalt mit 20000 Kilowattstunden Verbrauch sparst du im ersten Jahr bis 882 Euro. Auch dauerhaft bleiben mehrere hundert Euro auf deinem Konto. Jetzt vergleichen und sparen: führt zu Bis 882 Euro sparen, Angebote vergleichen. Weiterlesen: Pillar Strom und Gas sparen, Gasrechnung senken im Spätsommer, Günstige Tarife mit Preisgarantie. Häufige Fragen. Kann mir während des Wechsels das Gas abgestellt werden? Nein, das ist gesetzlich unmöglich. Der örtliche Grundversorger ist zur lückenlosen Belieferung verpflichtet. Was mache ich bei einem Umzug? Bei einem Umzug meldest du deinen bestehenden Vertrag mit einer Frist von sechs Wochen ab oder nimmst ihn an die neue Lieferadresse mit. Wie wird Gas von Kubikmetern in Kilowattstunden umgerechnet? Multipliziere die Kubikmeter mit dem Brennwert (meist circa 10 bis 11,5) und der Zustandszahl (z-Zahl, circa 0,95). Grobe Faustformel: 1 Kubikmeter Gas entspricht rund 10 Kilowattstunden. Wie lange dauert der gesamte Wechselprozess?",
    "units": [
     {
      "i": 98,
@@ -708,7 +708,7 @@
      "i": 109,
      "type": "h3",
      "lang": "de",
-     "chars": 74
+     "chars": 60
     },
     {
      "i": 110,
