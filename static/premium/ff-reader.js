@@ -1,15 +1,20 @@
 /* ============================================================
    FranksFinanzcheck – Premium Lesehilfen (Vorlesen + Kurzfassung)
-   03.09.2026 — Profi-Agentur & Chefredakteur-Standard · Highend v6
-   · Vorlesen v6: Vollständige Vorlesefunktion auf Verlagsspitze
+   03.09.2026 — Profi-Agentur & Chefredakteur-Standard · Highend v7
+   · Vorlesen v7: Vollständige Vorlesefunktion auf Verlagsspitze
      (übertrifft Capital / WirtschaftsWoche / Die Zeit) — High-End Garantie
      für explizit männliche Stimme DE & EN ohne Umschalter, mit
-     sofortigem Tonpfad auch bei lazy Voice-Katalogen
-   · Kurzfassung v4: Vollständige Verlagshaus-Kurzfassung
+     sofortigem Tonpfad auch bei lazy Voice-Katalogen.
+     ZEIT-Standard: vorab vertonte Tonspur (männliche DE-/EN-Stimme,
+     serverseitig erzeugt wie bei zeit.de) im nativen HTML5-Player –
+     klingt identisch auf iPhone, Mac, Tablet, Android, PC und in jedem
+     Browser. Ohne Tonspur bleibt die lokale Web-Speech-Engine aktiv.
+   · Kurzfassung v5: Vollständige Verlagshaus-Kurzfassung
      (Kurzantwort, Kernaussagen, Zahlen auf einen Blick,
      Inhaltsverzeichnis, Tabellen-Highlights, Byline, Fokus-Falle)
    ------------------------------------------------------------
-   - Privacy-first & First-party: ausschließlich lokale Web Speech API.
+   - Privacy-first & First-party: lokale Web Speech API und/oder eine
+     ersteigene Tonspur (static/audio) — kein Tracking, kein Fremd-CDN.
    - Tonpfad & Queue-Stabilität:
        · synchrones Speech-Unfreezing im Klick-Event-Kontext
          (verhindert das Erlöschen des User-Activation-Tokens)
@@ -69,6 +74,18 @@
 
   var cfg = {};
   try { cfg = JSON.parse(cfgEl.textContent || '{}') || {}; } catch (e) { cfg = {}; }
+
+  // v7 – ZEIT-Standard: vorab vertonte Tonspur. Der Generator
+  // (scripts/generate_reader_audio.py) schreibt die Tonspur-Konfiguration
+  // in einen eigenen, austauschbaren Config-Block. Ohne diesen Block bleibt
+  // der lokale Web-Speech-Pfad aktiv (kostenloser Fallback).
+  var audioCfgEl = doc.getElementById('ff-reader-audio-config');
+  if (audioCfgEl) {
+    try {
+      var audioCfg = JSON.parse(audioCfgEl.textContent || '{}') || {};
+      if (audioCfg && audioCfg.audio) cfg.audio = audioCfg.audio;
+    } catch (e) {}
+  }
 
   var toolbar = doc.getElementById('ff-reader-toolbar');
   var listenBtn = doc.getElementById('ff-listen-btn');
@@ -1701,16 +1718,20 @@
     remainEl.textContent = texts.remaining.replace('{min}', mm);
   }
 
-  function highlight(unit) {
-    var el = unit && unit.block ? unit.block.el : null;
+  function highlightBlock(block) {
+    var el = block && block.el ? block.el : null;
     blocks.forEach(function (b) { if (b.el && b.el !== el) b.el.classList.remove('ff-reader-active'); });
     if (!el || el === toolbar) return;
     el.classList.add('ff-reader-active');
+    if (!reducedMotion) scrollTo(el, { block: 'center', behavior: 'smooth' });
+    else scrollTo(el, { block: 'center' });
+  }
+
+  function highlight(unit) {
+    highlightBlock(unit && unit.block ? unit.block : null);
     if (progressBar && totalChars) {
       progressBar.style.width = Math.min(100, (spokenChars / totalChars) * 100).toFixed(1) + '%';
     }
-    if (!reducedMotion) scrollTo(el, { block: 'center', behavior: 'smooth' });
-    else scrollTo(el, { block: 'center' });
   }
 
   function clearHighlight() {
@@ -1727,10 +1748,10 @@
   var retryCounts = {};
   var voicePollId = null;
   var lastSpeechStartedAt = 0;
+  var unitInFlight = false;  // true while a unit is spoken/pending (Keep-Alive-Wache)
 
-  // Android pauset/resumed die Synthese unzuverlässig. Dort wird beim
-  // Pausieren abgebrochen und beim Fortsetzen die aktuelle Einheit neu
-  // gesprochen. Auf Desktop/Safari bleibt die native Pause erhalten.
+  // v7: Kein Android-Sonderweg mehr nötig – Pause/Resume ist jetzt auf
+  // allen Plattformen Cancel + Neu-Sprechen (siehe pauseReading).
   var IS_ANDROID = !!(win.navigator && /android/i.test(win.navigator.userAgent || ''));
 
   function stopVoicePolling() {
@@ -1790,7 +1811,11 @@
       // platform default was the source of the “silent/wrong voice” report.
       if (voiceRes && voiceRes.voice) {
         u.voice = voiceRes.voice;
+        // Safari/WebKit bindet eine Stimme nur zuverlässig, wenn Locale und
+        // Stimme zusammenpassen. voiceURI wird zusätzlich gesetzt, weil
+        // einige ältere WebViews ausschließlich darüber die Stimme auflösen.
         u.lang = voiceRes.voice.lang || (unit.lang === 'en' ? 'en-US' : 'de-DE');
+        try { if (voiceRes.voice.voiceURI) u.voiceURI = voiceRes.voice.voiceURI; } catch (e) {}
         if (voiceRes.explicit) setStatus(texts.voiceActive);
         else setStatus(texts.voiceFallback);
       } else {
@@ -1829,6 +1854,7 @@
 
       function cleanupUtterance() {
         clearStartWatchdog();
+        unitInFlight = false;
         var pos = activeUtterances.indexOf(u);
         if (pos !== -1) activeUtterances.splice(pos, 1);
         if (liveUtterance === u) liveUtterance = null;
@@ -1878,20 +1904,34 @@
 
       // Detect engines that accept speak() but never emit onstart. The old
       // watchdog only resumed a paused queue and therefore missed exactly
-      // this silent failure mode.
-      watchdogTimer = setTimeout(function () {
-        if (reading && playing && run === playbackRun && !started) {
-          try { synth.cancel(); } catch (e) {}
-          retryCurrentUnit(index, run, unit);
-        } else {
+      // this silent failure mode. v7: Das Watchdog feuert NUR, wenn die
+      // Engine nachweislich stillsteht (weder speaking noch pending) –
+      // eine langsam anlaufende Stimme wird nicht mehr abgewürgt. Die erste
+      // Einheit erhält mehr Anlaufzeit (Voice-Streaming, Remote-Stimmen).
+      var watchGrace = isInitial ? 2200 : 1400;
+      function watchStart() {
+        if (!reading || !playing || run !== playbackRun || started) {
           clearStartWatchdog();
+          return;
         }
-      }, 1200);
+        var busy = false;
+        try { busy = !!(synth.speaking || synth.pending); } catch (e) {}
+        if (busy) {
+          // Engine arbeitet – verlängern statt abbrechen.
+          watchdogTimer = setTimeout(watchStart, 1100);
+          return;
+        }
+        try { synth.cancel(); } catch (e) {}
+        retryCurrentUnit(index, run, unit);
+      }
+      watchdogTimer = setTimeout(watchStart, watchGrace);
 
       try {
         if (synth.paused) synth.resume();
+        unitInFlight = true;
         synth.speak(u);
       } catch (err) {
+        unitInFlight = false;
         cleanupUtterance();
         retryCurrentUnit(index, run, unit);
       }
@@ -1914,7 +1954,9 @@
   }
 
   function jumpTo(index) {
-    if (!reading || !timeline.length) return;
+    if (!reading) return;
+    if (audioMode) { audioJumpToBlock(index); return; }
+    if (!timeline.length) return;
     unlockAudioEngine();
     index = Math.max(0, Math.min(timeline.length - 1, index));
     spokenChars = 0;
@@ -1933,7 +1975,9 @@
   }
 
   function jumpBlock(delta) {
-    if (!reading || !timeline.length) return;
+    if (!reading) return;
+    if (audioMode) { audioJumpBlock(delta); return; }
+    if (!timeline.length) return;
     var curBlock = timeline[cursor] ? timeline[cursor].blockIndex : 0;
     var target = Math.max(0, curBlock + delta);
     for (var i = 0; i < timeline.length; i++) {
@@ -1956,10 +2000,178 @@
       ms.setActionHandler('stop', function () { endReading(true); });
       ms.setActionHandler('previoustrack', function () { jumpBlock(-1); });
       ms.setActionHandler('nexttrack', function () { jumpBlock(1); });
-      ms.setActionHandler('seekbackward', function () { jumpTo(cursor - 1); });
-      ms.setActionHandler('seekforward', function () { jumpTo(cursor + 1); });
+      ms.setActionHandler('seekbackward', function () { jumpTo(audioMode ? audioBlock - 1 : cursor - 1); });
+      ms.setActionHandler('seekforward', function () { jumpTo(audioMode ? audioBlock + 1 : cursor + 1); });
     } catch (e) {}
   }
+
+  /* ============================================================
+     ZEIT-STANDARD (v7): Vorab vertonte Artikel im HTML5-Player
+     ------------------------------------------------------------
+     Der Garantie-Kern für „auf ALLEN Geräten & Browsern funktioniert“:
+     eine vorab erzeugte MP3-/WAV-Tonspur (männliche DE- & EN-Stimme,
+     serverseitig vertont wie bei zeit.de) wird über das native
+     <audio>-Element abgespielt. HTML5-Audio läuft identisch auf
+     iPhone, iPad, Mac, Android, Windows/Linux und in Chrome, Safari,
+     Firefox, Edge – unabhängig von den Stimmen des Betriebssystems.
+
+     Vertrag mit dem Generator (scripts/generate_reader_audio.py):
+       cfg.audio = {
+         src:    "<url>",
+         chunks: [ { b: blockIndex, t0: ms, t1: ms, lang: 'de'|'en' }, … ]
+       }
+     `b` ist der 0-basierte Block-Index in der Lesereihenfolge
+     (0 = Anmoderation, 1..N = Artikelblöcke in DOM-Reihenfolge,
+     letzter = Abmoderation) – exakt die Ordnung von collectBlocks().
+     Fehlt die Tonspur (noch nicht generiert), bleibt der lokale
+     Web-Speech-Pfad als sofortiger, kostenloser Fallback aktiv.
+  ============================================================ */
+  var audio = null;
+  var audioMode = false;
+  var audioSrc = '';
+  var audioChunks = [];
+  var audioCur = -1;
+  var audioBlock = 0;
+
+  function initAudio() {
+    var a = cfg.audio;
+    if (!a) return;
+    var url = String(typeof a === 'string' ? a : (a.src || a.de || a.en || ''));
+    if (!url) return;
+    var elt = null;
+    try { elt = doc.createElement('audio'); } catch (e) { return; }
+    if (!elt || typeof elt.addEventListener !== 'function') return;
+    elt.setAttribute('preload', 'metadata');
+    elt.setAttribute('playsinline', '');
+    elt.style.display = 'none';
+    elt.setAttribute('aria-hidden', 'true');
+    try { elt.src = url; } catch (e) { return; }
+    audio = elt;
+    audioSrc = url;
+    audioChunks = (a && a.chunks && a.chunks.length) ? a.chunks : [];
+    try { doc.body.appendChild(elt); } catch (e) {}
+
+    elt.addEventListener('timeupdate', audioOnTime);
+    elt.addEventListener('ended', function () { endReading(true); });
+    elt.addEventListener('error', function () {
+      // Tonspur fehlt/nicht ladbar → sauber auf den lokalen
+      // Web-Speech-Pfad zurückfallen, nie stumm bleiben.
+      if (!reading) return;
+      audioMode = false;
+      try { audio.pause(); } catch (e) {}
+      endReading(false);
+      if (speechSupported) startReading(audioBlock);
+      else setStatus(texts.unsupported);
+    });
+    audioMode = true;
+  }
+
+  function audioChunkIndexForBlock(bi) {
+    for (var i = 0; i < audioChunks.length; i++) {
+      if (audioChunks[i].b === bi) return i;
+    }
+    return -1;
+  }
+
+  function audioSeekBlock(bi) {
+    if (!audio) return;
+    var ci = audioChunkIndexForBlock(bi);
+    var t = 0;
+    if (ci >= 0) t = Math.max(0, audioChunks[ci].t0 || 0);
+    else if (audio.duration && blocks.length) t = (bi / Math.max(1, blocks.length)) * (audio.duration * 1000);
+    try { audio.currentTime = t / 1000; } catch (e) {}
+  }
+
+  function audioOnTime() {
+    if (!audio || !reading) return;
+    var t = (audio.currentTime || 0) * 1000;
+    var duration = audio.duration || 0;
+    if (audioChunks.length) {
+      var idx = 0;
+      for (var i = 0; i < audioChunks.length; i++) {
+        if (t >= audioChunks[i].t0 && t < audioChunks[i].t1) { idx = i; break; }
+        if (t >= audioChunks[i].t0) idx = i;
+      }
+      if (idx !== audioCur) {
+        audioCur = idx;
+        var bi = audioChunks[idx] ? audioChunks[idx].b : 0;
+        if (blocks[bi]) { audioBlock = bi; highlightBlock(blocks[bi]); storeSet(STORE_POS, String(bi)); }
+      }
+    }
+    if (progressBar && duration) {
+      progressBar.style.width = Math.min(100, (t / (duration * 1000)) * 100).toFixed(1) + '%';
+    }
+    if (remainEl && duration) {
+      var rest = Math.max(0, duration - (audio.currentTime || 0)) / 60;
+      remainEl.textContent = rest >= 0.1 ? texts.remaining.replace('{min}', Math.max(1, Math.round(rest))) : '';
+    }
+  }
+
+  function audioStart(fromBlock) {
+    if (!audio) return;
+    audioBlock = typeof fromBlock === 'number' && fromBlock >= 0 ? Math.min(Math.max(0, fromBlock), Math.max(0, blocks.length - 1)) : 0;
+    audioCur = -1;
+    if (audio.error) {
+      // Quelle nicht abspielbar (z. B. Tonspur noch nicht generiert).
+      // Sauber auf die lokale Browser-Stimme zurückfallen, nie stumm.
+      audioMode = false;
+      try { audio.pause(); } catch (e) {}
+      endReading(false);
+      if (speechSupported) startReading(audioBlock);
+      else setStatus(texts.unsupported);
+      return;
+    }
+    audioSeekBlock(audioBlock);
+    var p = null;
+    try { p = audio.play(); } catch (e) { p = null; }
+    if (p && p.then) {
+      p.catch(function () {
+        // Autoplay-Verweigerung ist im Klickkontext selten; einmalig erneut.
+        try { audio.play(); } catch (e) {}
+      });
+    }
+  }
+
+  function audioPause() { if (audio) { try { audio.pause(); } catch (e) {} } }
+  function audioResume() {
+    if (!audio) return;
+    var p = null;
+    try { p = audio.play(); } catch (e) { p = null; }
+    if (p && p.then) p.catch(function () { try { audio.play(); } catch (e) {} });
+  }
+  function audioStop() {
+    if (!audio) return;
+    try { audio.pause(); } catch (e) {}
+    try { audio.currentTime = 0; } catch (e) {}
+  }
+
+  function audioJumpToBlock(bi) {
+    if (!audio || !blocks.length) return;
+    audioBlock = Math.max(0, Math.min(blocks.length - 1, bi));
+    audioCur = -1;
+    audioSeekBlock(audioBlock);
+    if (audio.paused) {
+      try { audio.play(); } catch (e) {}
+    }
+  }
+
+  function audioJumpBlock(delta) {
+    var cur = blocks[audioBlock] ? audioBlock : 0;
+    var target = cur + delta;
+    if (target < 0) target = 0;
+    if (target >= blocks.length) { endReading(true); return; }
+    audioJumpToBlock(target);
+  }
+
+  function blockIndexForEl(target) {
+    for (var i = 0; i < blocks.length; i++) {
+      var be = blocks[i].el;
+      if (be === target || (be && be.contains && be.contains(target))) return i;
+    }
+    return -1;
+  }
+
+  initAudio();
 
   // Voice-Kataloge sind in Chromium, Safari und Android LAZY:
   // getVoices() ist beim ersten Klick oft noch leer und füllt sich erst
@@ -2006,6 +2218,27 @@
   }
 
   function startReading(fromIndex) {
+    if (audioMode) {
+      // ZEIT-Standard: vorab vertonte Tonspur im HTML5-Player. Die Blöcke
+      // werden dennoch gesammelt, damit Live-Markierung, Fortschritt,
+      // Abschnitts-Navigation und schwebender Player identisch bleiben.
+      currentLang = detectArticleLanguage();
+      texts = I18N[currentLang] || I18N.de;
+      blocks = collectBlocks();
+      if (!blocks.length) { setStatus(texts.noText); return; }
+      reading = true;
+      playing = true;
+      spokenChars = 0;
+      cursor = 0;
+      setListenState('playing');
+      setStatus(texts.started);
+      setupMediaSession();
+      var savedBlock = 0;
+      if (typeof fromIndex === 'number' && fromIndex > 0 && fromIndex < blocks.length) savedBlock = fromIndex;
+      else { var sv = parseInt(storeGet(STORE_POS) || '0', 10); if (sv > 0 && sv < blocks.length) savedBlock = sv; }
+      audioStart(savedBlock);
+      return;
+    }
     if (!speechSupported) { setStatus(texts.unsupported); return; }
     unlockAudioEngine();
     currentLang = detectArticleLanguage();
@@ -2056,47 +2289,69 @@
 
   function pauseReading() {
     if (!reading) return;
+    if (audioMode) {
+      playing = false;
+      audioPause();
+      setListenState('paused');
+      setStatus(texts.paused);
+      return;
+    }
     playing = false;
     clearPauseTimer();
     stopVoicePolling();
-    if (IS_ANDROID) playbackRun += 1; // cancel callbacks from the old utterance
+    // v7 – Verlagsstandard: Pause ist IMMER ein kontrollierter Abbruch mit
+    // Positions-Merken. `speechSynthesis.pause()/resume()` ist über die
+    // Browser hinweg (Safari Desktop/iOS, Firefox, Android) nachweislich
+    // unzuverlässig: Safari „resumed“ eine pausierte Queue ohne hörbaren
+    // Ton, Android bricht selbstständig ab. Cancel + Neu-Sprechen der
+    // aktuellen Einheit verhält sich dagegen auf ALLEN Plattformen gleich.
+    playbackRun += 1; // in-flight Callbacks des alten Utterance invalidieren
     if (speechSupported) {
-      if (IS_ANDROID) { try { synth.cancel(); } catch (e) {} }
-      else { try { synth.pause(); } catch (e) {} }
+      try { synth.cancel(); } catch (e) {}
     }
     liveUtterance = null;
+    activeUtterances.length = 0;
+    unitInFlight = false;
     setListenState('paused');
     setStatus(texts.paused);
   }
 
   function resumeReading() {
     if (!reading) return;
+    if (audioMode) {
+      playing = true;
+      audioResume();
+      setListenState('playing');
+      setStatus(texts.resumed);
+      return;
+    }
     unlockAudioEngine();
     playing = true;
     setListenState('playing');
     setStatus(texts.resumed);
     if (!speechSupported) return;
-    if (IS_ANDROID) {
-      speakUnit(cursor, true); // pause is implemented as cancel on Android
-      return;
-    }
-    try {
-      if (synth.paused) synth.resume();
-    } catch (e) {}
-    // Safari can report a resumed queue without producing audio. Retry the
-    // current unit only when the native queue is genuinely empty.
-    setTimeout(function () {
-      if (reading && playing && synth && !synth.speaking && !synth.pending) {
-        speakUnit(cursor, true);
-      }
-    }, 320);
+    // Universal: die aktuelle Einheit wird erneut gesprochen. Kein
+    // `synth.resume()`, keine Sonderfälle pro Browser – dadurch gibt es
+    // keinen stillen „resumed“-Zustand mehr.
+    speakUnit(cursor, true);
   }
 
   function endReading(announce) {
+    if (audioMode) {
+      reading = false;
+      playing = false;
+      audioStop();
+      clearHighlight();
+      setListenState('idle');
+      storeDel(STORE_POS);
+      if (announce) setStatus(texts.finished);
+      return;
+    }
     reading = false;
     playing = false;
     playbackRun += 1;
     liveUtterance = null;
+    unitInFlight = false;
     activeUtterances.length = 0;
     win.__ff_active_utterance = null;
     clearPauseTimer();
@@ -2124,7 +2379,9 @@
       if (!reading || !playing) return;
       try {
         if (synth.paused) synth.resume();
-        if (!synth.speaking && !synth.pending && !pauseTimer &&
+        // unitInFlight verhindert Doppel-Speak: solange eine Einheit in der
+        // Queue liegt oder ihre Nachlauf-Pause läuft, greift die Wache nicht.
+        if (!synth.speaking && !synth.pending && !pauseTimer && !unitInFlight &&
             Date.now() - lastSpeechStartedAt > 900) {
           speakUnit(cursor, true);
         }
@@ -2159,6 +2416,11 @@
       if (!target) return;
       unlockAudioEngine();
       if (!reading) { startReading(0); }
+      if (audioMode) {
+        var biA = blockIndexForEl(target);
+        if (biA >= 0) audioJumpToBlock(biA);
+        return;
+      }
       for (var i = 0; i < timeline.length; i++) {
         if (timeline[i].block.el === target || (timeline[i].block.el && timeline[i].block.el.contains(target))) { jumpTo(i); return; }
       }
@@ -2168,6 +2430,11 @@
       var target = e.target.closest('tr, p, h2, h3, h4, li, blockquote, .ff-tarif-card, .ff-einspar-box, .ff-kurzantwort, .callout');
       if (!target || e.target.closest('a, button, input, select, textarea')) return;
       unlockAudioEngine();
+      if (audioMode) {
+        var biB = blockIndexForEl(target);
+        if (biB >= 0) audioJumpToBlock(biB);
+        return;
+      }
       for (var i = 0; i < timeline.length; i++) {
         if (timeline[i].block.el === target || (timeline[i].block.el && timeline[i].block.el.contains(target))) { jumpTo(i); return; }
       }
@@ -2218,7 +2485,10 @@
         }
       }, 150);
     })();
-  } else if (toolbar.classList) {
+  } else if (toolbar.classList && !audioMode) {
+    // Nur als „nicht unterstützt“ markieren, wenn es weder Web Speech noch
+    // eine vorab vertonte Tonspur gibt. Mit Tonspur funktioniert Vorlesen
+    // in jedem Browser (HTML5-Audio).
     toolbar.classList.add('ff-reader-toolbar--unsupported');
     listenBtn.setAttribute('aria-disabled', 'true');
     setStatus(texts.unsupported);
