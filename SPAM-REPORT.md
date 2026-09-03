@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-03 05:59 UTC · Modus: FIX
+**Stand:** 2026-09-03 10:46 UTC · Modus: FIX
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
@@ -8,10 +8,12 @@
 
 - 🟡 [B5] 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub: Originalitäts-Quote 44 % (< 45 %)
 - 🟡 [B1] 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet: Keyword-Stuffing (ein Signal): Text: 'dns' ×46 (4.1 % Dichte)
+- 🟡 [B5] 2026-09-03-hausratversicherung-kosten-leistungen-vergleich: Originalitäts-Quote 42 % (< 45 %)
+- 🟡 [B5] 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen: Originalitäts-Quote 43 % (< 45 %)
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
-- ℹ️ [F-OK] Feed sauber: 25 Items, Kadenz-konform, Cover vorhanden, keine Duplikate
+- ℹ️ [F-OK] Feed sauber: 26 Items, Kadenz-konform, Cover vorhanden, keine Duplikate
 
 ## C: Pinterest-Bulk-CSV (C1–C8)
 
