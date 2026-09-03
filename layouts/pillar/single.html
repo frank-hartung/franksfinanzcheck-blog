@@ -27,6 +27,9 @@
     </div>
   </header>
 
+  {{- /* Premium Lesehilfen: Vorlesen + Kurzfassung (03.09.2026) */ -}}
+  {{- partial "reader_toolbar.html" . }}
+
   {{- if .Content }}
   <div class="post-content md-content">
     {{- $articleContent := .Content | partial "nbsp_sicherung.html" -}}
