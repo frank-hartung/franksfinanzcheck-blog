@@ -56,14 +56,16 @@
          Das Frontmatter-Feld `kurzantwort` wird von
          scripts/generate_kurzantworten.py automatisch befüllt. */ -}}
   {{- if and (eq .Section "posts") (.Params.kurzantwort) }}
-  <div class="ff-kurzantwort" style="margin:18px 0 22px; background:linear-gradient(160deg,#EAF4EF,#F7FBF9); border:1px solid rgba(14,90,67,.22); border-left:6px solid #0E5A43; border-radius:12px; padding:14px 18px;">
-    <div style="display:flex; gap:10px; align-items:flex-start;">
-      <span style="font-size:1.3em; line-height:1.2;" aria-hidden="true">💡</span>
-      <div>
-        <strong style="font-family:'Inter',sans-serif; color:#0E5A43; font-size:.85em; display:block; margin-bottom:4px;">Kurz &amp; knapp – die Antwort</strong>
-        <span style="font-size:.95em; line-height:1.55; color:#222;">{{ .Params.kurzantwort | partial "nbsp_sicherung.html" }}</span>
-      </div>
+  <div class="ff-kurzantwort">
+    <div class="ff-kurzantwort__head">
+      <svg class="ff-kurzantwort__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M9 18h6"></path>
+        <path d="M10 22h4"></path>
+        <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"></path>
+      </svg>
+      <span class="ff-kurzantwort__eyebrow">Kurz &amp; knapp – die Antwort</span>
     </div>
+    <p class="ff-kurzantwort__text">{{ .Params.kurzantwort | partial "nbsp_sicherung.html" }}</p>
   </div>
   {{- end }}
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}

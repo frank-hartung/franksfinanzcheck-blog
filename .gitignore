@@ -3,6 +3,10 @@ public/
 resources/_gen/
 .hugo_build.lock
 
+# Vorab vertonte Artikel (ZEIT-Standard, generate_reader_audio.py)
+# → große Tonspuren nie ins Repo; sie entstehen im Deploy & liegen auf gh-pages
+static/audio/
+
 # Operating System Files
 .DS_Store
 Thumbs.db
