@@ -1,7 +1,8 @@
 /* ============================================================
    FranksFinanzcheck – Premium Lesehilfen (Vorlesen + Kurzfassung)
-   03.09.2026 — Profi-Agentur & Chefredakteur-Standard · Highend v2
-   (Studio-Regie-Niveau, über Verlagshaus-Vorlesefunktionen hinaus)
+   03.09.2026 — Profi-Agentur & Chefredakteur-Standard · Highend v3
+   (vollständige Verlagshaus-Vorlesefunktion: Capital / Wirtschafts-
+   Woche / Die Zeit als Maßstab – Studio-Regie über deren Niveau)
    ------------------------------------------------------------
    - Privacy-first & First-party: Web Speech API lokal im Browser.
    - NUR männliche Sprache – vollautomatisch Deutsch (DE) und
@@ -10,6 +11,10 @@
      Neural-Stimme je Sprache (inkl. Nachbarsprachen-Fallback).
      Englische Sätze in deutschen Artikeln liest die männliche
      EN-Stimme – und umgekehrt (zweisprachiger Hörfunk-Moderator).
+     Garantie-Kern: Explizit männliche Stimmen sprechen in natürli-
+     cher männlicher Tonlage; geschlechtsneutral/unbenannte Stimmen
+     (z. B. „Google Deutsch“) werden automatisch in die männliche
+     Klangzone abgesenkt – die Vorlesung bleibt immer männlich.
    - Vollautomatische Studio-Regie statt Reglern:
        · Automatische Tempoanpassung  – Rolle (Überschrift, Fließtext,
          Tabelle …) × Stimmen-Güte × Informationsdichte des Satzes:
@@ -27,11 +32,18 @@
          betonen), Mikro-Modulation gegen Monotonie bei einfachen
          Stimmen, Absenkung in die männliche Zone, falls als letzter
          Notnagel eine nicht-männliche Stimme dienen müsste.
+       · Verlagshaus-Regie v3 – Konnektoren-Atemgruppen (Schnitte an
+         Diskursmarkern wie „weil“, „allerdings“, „however“ für
+         natürliche Intonationsbögen), Final-Längung am Blockende
+         (wie ein Sprecher am Absatzschluss), satzfortschritts-
+         genauer Fortschritt (Boundary-Ereignisse) und ein schwe-
+         bender Mini-Player, der beim Scrollen verfügbar bleibt.
    - Maximale Barrierefreiheit (WCAG 2.2 AAA / BITV) für Fließtext,
      Überschriften, Listen sowie Tabellen & Übersichten mit
      zeilengenauer Live-Synchronisation und Vorlese-Kontext.
    - Robuste Browser-Kompatibilität, Stimmen-Warte-Schutz (nie mit
-     einer zufälligen/weiblichen Standardstimme starten) und
+     einer zufälligen/weiblichen Standardstimme starten), Utterance-
+     GC-Schutz gegen Chrome-Abbrüche, Android-Pause-Härtung und
      automatische Keep-Alive-Wache.
 ============================================================ */
 (function () {
@@ -132,9 +144,6 @@
       finished: 'Audio playback completed.',
       resumedPos: 'Resumed from your last listening position.',
       remaining: 'approx. {min} min left',
-      voiceStudio: 'Studio',
-      voicePremium: 'Premium',
-      voiceStandard: 'Standard',
       mediaArtist: 'FranksFinanzcheck – Article Audio',
       introLine: '{title}. An article by FranksFinanzcheck. Listening time about {time} minutes.',
       outroLine: 'End of article. Thank you for listening to FranksFinanzcheck.',
@@ -251,11 +260,30 @@
         var mi = parseInt(mo, 10) - 1;
         return MONTHS[mi] ? (parseInt(d, 10) + '. ' + MONTHS[mi] + ' ' + y) : m;
       });
+      // ISO-Datum 2026-09-03 -> 3. September 2026 (Chefredakteur-Standard)
+      s = s.replace(/\b(\d{4})-(\d{2})-(\d{2})\b/g, function (m, y, mo, d) {
+        var mi = parseInt(mo, 10) - 1;
+        return MONTHS[mi] ? (parseInt(d, 10) + '. ' + MONTHS[mi] + ' ' + y) : m;
+      });
       // Uhrzeit 14:30 -> 14 Uhr 30
       s = s.replace(/\b(\d{1,2}):(\d{2})\s*Uhr\b/g, function (m, h, mi) { return h + ' Uhr ' + (mi === '00' ? '' : mi); });
+      // Uhrzeit ohne Uhr-Suffix: 14:30 -> 14 Uhr 30 (nur bei plausibler Zeit)
+      s = s.replace(/\b(\d{1,2}):(\d{2})\b(?!\s*(?:Uhr|€|%|Euro))/g, function (m, h, mi) {
+        if (parseInt(h, 10) <= 24 && parseInt(mi, 10) < 60) return h + ' Uhr ' + (mi === '00' ? '' : mi);
+        return m;
+      });
+      // Jahrzehnte sprechbar: die 90er -> die Neunziger
+      var DECADES = { 20: 'Zwanziger', 30: 'Dreißiger', 40: 'Vierziger', 50: 'Fünfziger', 60: 'Sechziger', 70: 'Siebziger', 80: 'Achtziger', 90: 'Neunziger' };
+      s = s.replace(/\b(20|30|40|50|60|70|80|90)er\b/g, function (m, d) { return DECADES[d] || m; });
       // Paragraphen & Rechtsbezüge
       s = s.replace(/§§\s*/g, 'die Paragrafen ');
       s = s.replace(/§\s*/g, 'Paragraf ');
+      // SGB mit römischer Ziffer: § 12 SGB V -> Sozialgesetzbuch Fünf
+      var ROMAN_DE = { I: 'Eins', II: 'Zwei', III: 'Drei', IV: 'Vier', V: 'Fünf', VI: 'Sechs', VII: 'Sieben', VIII: 'Acht', IX: 'Neun', X: 'Zehn', XI: 'Elf', XII: 'Zwölf' };
+      s = s.replace(/\bSGB\s+([IVX]+)\b/g, function (m, r) {
+        var w = ROMAN_DE[r.toUpperCase()];
+        return w ? 'Sozialgesetzbuch ' + w : m;
+      });
       s = s.replace(/\bSGB\b/g, 'Sozialgesetzbuch');
       s = s.replace(/\bBGB\b/g, 'Bürgerliches Gesetzbuch');
       s = s.replace(/\bEStG\b/g, 'Einkommensteuergesetz');
@@ -278,11 +306,15 @@
       s = s.replace(/\bEZB\b/g, 'Europäische Zentralbank');
       s = s.replace(/\bp\.\s?m\.(?![\wäöüßÄÖÜ])/gi, 'pro Monat');
       // Kaufmännisches & und redaktionelle Zahlgrößen-Abkürzungen
+      // (Look-ahead statt \b nach dem Punkt: „Mio. “ endet auf Nichtwort)
       s = s.replace(/&/g, ' und ');
-      s = s.replace(/\b(?:Tsd\.|tsd\.)\b/g, 'Tausend');
-      s = s.replace(/\b(?:Mio\.|mio\.)\b/g, 'Millionen');
-      s = s.replace(/\b(?:Mrd\.|mrd\.)\b/g, 'Milliarden');
-      s = s.replace(/\b(?:Std|std)\./g, 'Stunden');
+      s = s.replace(/\b(?:Tsd|tsd)\.(?![\wäöüßÄÖÜ])/g, 'Tausend');
+      s = s.replace(/\b[TM]sd\b(?![\wäöüßÄÖÜ])/g, 'Tausend');
+      s = s.replace(/\b(?:Mio|mio)\.(?![\wäöüßÄÖÜ])/g, 'Millionen');
+      s = s.replace(/\bMio\b(?![\wäöüßÄÖÜ])/g, 'Millionen');
+      s = s.replace(/\b(?:Mrd|mrd)\.(?![\wäöüßÄÖÜ])/g, 'Milliarden');
+      s = s.replace(/\bMrd\b(?![\wäöüßÄÖÜ])/g, 'Milliarden');
+      s = s.replace(/\b(?:Std|std)\.(?![\wäöüßÄÖÜ])/g, 'Stunden');
       // Ordnungszahlen im Fließtext
       s = s.replace(/\bNr\.\s*(\d+)/g, 'Nummer $1');
       // Bruch- und Rechenzeichen
@@ -295,6 +327,13 @@
       s = s.replace(/\bca\b(?!\.)/g, 'circa');
     } else {
       s = s.replace(/\b(\d{1,2})\/(\d{1,2})\/(\d{4})\b/g, '$2 $1 $3');
+      // ISO-Datum 2026-09-03 -> September 3, 2026 (Chefredakteur-Standard;
+      // bewusst VOR den Zahlenbereich-Regeln, sonst frisst „2026-09“ der Bereich)
+      s = s.replace(/\b(\d{4})-(\d{2})-(\d{2})\b/g, function (m, y, mo, d) {
+        var MEN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        var mi = parseInt(mo, 10) - 1;
+        return MEN[mi] ? (MEN[mi] + ' ' + parseInt(d, 10) + ', ' + y) : m;
+      });
       s = s.replace(/§§?\s*/g, 'section ');
       s = s.replace(/\bETF(s)?\b/g, function (m, pl) { return 'E T F' + (pl ? 's' : ''); });
       s = s.replace(/\bAPI\b/g, 'A P I');
@@ -331,6 +370,14 @@
       s = s.replace(/\bvs\.?\b/gi, 'versus');
       s = s.replace(/\bmin\.(?![\wäöüßÄÖÜ])/gi, 'minimum');
       s = s.replace(/\bmax\.(?![\wäöüßÄÖÜ])/gi, 'maximum');
+      // Zweite Redaktions-Stufe (v3): etc., No.
+      s = s.replace(/\betc\.(?![\wäöüßÄÖÜ])/gi, 'et cetera');
+      s = s.replace(/\bNo\.\s*(\d+)/g, 'number $1');
+      // Finales Währungs-Auffangnetz Englisch
+      s = s.replace(/€/g, ' Euros');
+      s = s.replace(/\bEUR\b/g, 'Euros');
+      s = s.replace(/%/g, ' percent');
+      s = s.replace(/\$/g, ' Dollars');
     } else {
       // Währungen & Zahlenbereiche Deutsch (Chefredakteur-Standard)
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*(?:€|EUR|Euro)/gi, '$1 bis $2 Euro');
@@ -370,6 +417,25 @@
       s = s.replace(/\bArt\.(?![\wäöüßÄÖÜ])/g, 'Artikel');
       s = s.replace(/\bNr\.(?![\wäöüßÄÖÜ])/g, 'Nummer');
       s = s.replace(/\bvs\.?\b/gi, 'versus');
+      // Abkürzungen Deutsch – zweite Redaktions-Stufe (v3)
+      s = s.replace(/\bv\.\s?a\.(?![\wäöüßÄÖÜ])/gi, 'vor allem');
+      s = s.replace(/\bz\.\s?T\.(?![\wäöüßÄÖÜ])/gi, 'zum Teil');
+      s = s.replace(/\bu\.\s?s\.\s?w\.(?![\wäöüßÄÖÜ])/gi, 'und so weiter');
+      s = s.replace(/\bo\.\s?Ä\.(?![\wäöüßÄÖÜ])/g, 'oder Ähnliches');
+      s = s.replace(/\betc\.(?![\wäöüßÄÖÜ])/gi, 'et cetera');
+      s = s.replace(/\bzzgl\.(?![\wäöüßÄÖÜ])/gi, 'zuzüglich');
+      s = s.replace(/\bMwSt\.?(?![\wäöüßÄÖÜ])/g, 'Mehrwertsteuer');
+      s = s.replace(/\bMin\.(?![\wäöüßÄÖÜ])/g, 'Minuten');
+      s = s.replace(/\bPkt\.(?![\wäöüßÄÖÜ])/g, 'Punkt');
+      s = s.replace(/\bTab\.(?![\wäöüßÄÖÜ])/g, 'Tabelle');
+      s = s.replace(/\bAbb\.(?![\wäöüßÄÖÜ])/g, 'Abbildung');
+      s = s.replace(/(?:\bJh\.|\bJhd\.|\bJhdt\.)(?![\wäöüßÄÖÜ])/g, 'Jahrhundert');
+      s = s.replace(/\bAnm\.(?![\wäöüßÄÖÜ])/g, 'Anmerkung');
+      s = s.replace(/\bggf\b(?!\.)(?![\wäöüßÄÖÜ])/gi, 'gegebenenfalls');
+      // Finales Währungs-Auffangnetz: jedes verbleibende Zeichen sprechbar
+      s = s.replace(/€/g, ' Euro');
+      s = s.replace(/\bEUR\b/g, 'Euro');
+      s = s.replace(/%/g, ' Prozent');
     }
 
     // Barrierefreie Aussprache von Indikatoren / Emojis
@@ -511,6 +577,41 @@
     if (win.navigator && win.navigator.mediaSession) {
       try { win.navigator.mediaSession.playbackState = state === 'playing' ? 'playing' : (state === 'paused' ? 'paused' : 'none'); } catch (e) {}
     }
+    syncFloating();
+  }
+
+  /* ---------- Schwebender Mini-Player (Verlagshaus-Audioregie) ----------
+     Scrollt die Leser:in während des Vorlesens nach unten, verwandelt
+     sich die Toolbar in eine schwebende Steuerleiste am unteren
+     Viewport-Rand – die Bedienung bleibt immer greifbar, wie bei den
+     Audioplayern von Verlagshäusern. Ohne Vorlesen: keinerlei Effekt.
+     Der Platzhalter-Slot hält das Seitenlayout stabil (kein Springen). */
+  var toolbarSlot = toolbar.parentElement;
+  var toolbarInView = true;
+  var floatingActive = false;
+
+  function syncFloating() {
+    var want = !!(reading && toolbarSlot && !toolbarInView);
+    if (want === floatingActive) return;
+    floatingActive = want;
+    try {
+      if (want) {
+        toolbarSlot.style.height = toolbar.offsetHeight + 'px';
+        toolbar.classList.add('ff-reader-toolbar--floating');
+      } else {
+        toolbar.classList.remove('ff-reader-toolbar--floating');
+        toolbarSlot.style.height = '';
+      }
+    } catch (e) {}
+  }
+
+  if (toolbarSlot && win.IntersectionObserver) {
+    try {
+      new win.IntersectionObserver(function (entries) {
+        toolbarInView = !!(entries && entries[0] && entries[0].isIntersecting);
+        syncFloating();
+      }, { threshold: 0.12 }).observe(toolbarSlot);
+    } catch (e) {}
   }
 
   /* ---------- Stimmen-Rangliste: Studio-Qualität zuerst ----------
@@ -527,24 +628,26 @@
   ------------------------------------------------------------------ */
   var MALE_KEYWORDS = {
     de: ['conrad', 'stefan', 'florian', 'bernd', 'christoph', 'ralf', 'klaus', 'markus', 'jonas', 'martin',
-         'yannick', 'hans', 'viktor', 'thorsten', 'killian', 'jan', 'johannes', 'matthias', 'philipp',
+         'yannick', 'hans', 'viktor', 'thorsten', 'killian', 'kilian', 'jan', 'johannes', 'matthias', 'philipp',
          'sebastian', 'wolfgang', 'dieter', 'achim', 'uwe', 'joerg', 'jörg', 'heinz', 'gerd', 'holger',
+         'andreas', 'marcus', 'hannes', 'tobias', 'gustav', 'karl', 'lutz', 'rene',
          'de-de-x-deg', 'de-de-x-deb', 'de-de-x-dea', 'de_de_male', 'male', 'männlich', 'mann', '#male',
          'neural2-b', 'neural2-d', 'wavenet-b', 'wavenet-d', 'standard-b', 'standard-d', 'polyglot'],
     en: ['david', 'george', 'guy', 'mark', 'ryan', 'daniel', 'oliver', 'arthur', 'thomas', 'james', 'alex',
          'fred', 'aaron', 'brian', 'eric', 'richard', 'tom', 'john', 'paul', 'michael', 'peter', 'frank',
          'christopher', 'roger', 'steffan', 'benjamin', 'anthony', 'matthew', 'joseph', 'charles', 'william',
          'robert', 'steven', 'kenneth', 'kevin', 'jason', 'edward', 'joshua', 'andrew', 'brandon', 'justin',
-         'raymond', 'gregory', 'samuel', 'patrick', 'jack', 'harry', 'leonard', 'derek', 'en_us_male',
-         'en_gb_male', 'male', 'man', '#male', 'neural2-a', 'neural2-d', 'neural2-j', 'wavenet-a',
-         'wavenet-b', 'wavenet-d', 'wavenet-j', 'standard-b', 'standard-d']
+         'raymond', 'gregory', 'samuel', 'patrick', 'jack', 'harry', 'leonard', 'derek', 'liam', 'davis',
+         'en_us_male', 'en_gb_male', 'male', 'man', '#male', 'neural2-d', 'neural2-f', 'neural2-h',
+         'neural2-i', 'neural2-j', 'wavenet-b', 'wavenet-d', 'wavenet-f', 'standard-b', 'standard-d']
   };
 
   // Ergänzende namentlich männliche Stimmen für die geschlechts-übergreifende Prüfung
   var KNOWN_MALE_VOICES = [
-    'conrad', 'killian', 'florian', 'christopher', 'roger', 'steffan', 'stefan', 'ralf', 'guy', 'george',
+    'conrad', 'killian', 'kilian', 'florian', 'christopher', 'roger', 'steffan', 'stefan', 'ralf', 'guy', 'george',
     'david', 'mark', 'ryan', 'daniel', 'oliver', 'arthur', 'thomas', 'james', 'eric', 'fred', 'aaron',
-    'brian', 'richard', 'bernd', 'markus', 'jonas', 'martin', 'johannes', 'philipp', 'sebastian', 'matthias'
+    'brian', 'richard', 'bernd', 'markus', 'jonas', 'martin', 'johannes', 'philipp', 'sebastian', 'matthias',
+    'andreas', 'marcus', 'hannes', 'andrew', 'davis', 'liam', 'christoph'
   ];
 
   var FEMALE_KEYWORDS = [
@@ -555,16 +658,23 @@
     'maria', 'margaret', 'daniela', 'erika', 'briana', 'brianne', 'andrea', 'alexandra', 'alexa', 'nicola',
     'christina', 'natalie', 'sophie', 'sarah', 'julia', 'laura', 'hanna', 'johanna', 'lena', 'lisa',
     'maren', 'miriam', 'sabrina', 'nadine', 'anke', 'birgit', 'gabriele', 'ursula', 'monika', 'renate',
-    'angela', 'sandra', 'claudia', 'susanne', 'martina', 'tanja', 'melanie', 'svenja', 'karin', 'kristin'
+    'angela', 'sandra', 'claudia', 'susanne', 'martina', 'tanja', 'melanie', 'svenja', 'karin', 'kristin',
+    'elsa', 'elena', 'helga', 'tracy', 'michelle', 'stephanie', 'libby', 'maisie', 'sonia', 'natasha',
+    'clara', 'annika', 'charlotte', 'lorraine', 'serena', 'nora', 'marissa', 'kimberly', 'salli',
+    'ava', 'aria', 'luna', 'thea', 'sonja', 'liv', 'mia', 'kate', 'poppy', 'shelley', 'sandy',
+    'neural2-a', 'neural2-c', 'neural2-e', 'wavenet-a', 'wavenet-c', 'wavenet-e'
   ];
 
   // Namentlich bekannte Studio-/Neuronal-Stimmen (höchste Natürlichkeit)
   var STUDIO_VOICES = [
     'google deutsch', 'microsoft conrad online', 'microsoft killian online', 'microsoft florian online',
-    'microsoft ralf', 'anpassbare stimme', 'eloquence', 'siri stimme', 'google uk english male',
+    'microsoft ralf', 'anpassbare stimme', 'eloquence', 'siri stimme',
     'google us english', 'microsoft guy online', 'microsoft christopher online', 'microsoft roger online',
     'microsoft eric online', 'microsoft steffan online', 'microsoft stefan online', 'microsoft david online',
-    'microsoft mark online', 'microsoft ryan online', 'google us english male', 'google uk english male'
+    'microsoft mark online', 'microsoft ryan online', 'google us english male', 'google uk english male',
+    'microsoft christoph online', 'microsoft andreas online', 'microsoft marcus online',
+    'microsoft klaus', 'microsoft andrew online', 'microsoft brian online', 'microsoft davis online',
+    'microsoft thomas online', 'microsoft george online', 'microsoft stefan', 'microsoft conrad'
   ];
 
   var PREMIUM_KEYWORDS = ['natural', 'neural', 'wavenet', 'studio', 'journey', 'polyglot', 'online',
@@ -572,6 +682,28 @@
   var LOWQ_KEYWORDS = ['espeak', 'compact', 'pico', 'flite', 'festival', 'novelty', 'whisper', 'bells',
                        'bad news', 'good news', 'bubbles', 'jester', 'organ', 'trinoids', 'zarvox',
                        'albert', 'wobble', 'superstar'];
+
+  /* Wortgrenzen-sicherer Stimmen-Matcher (Highend-Gate v3):
+     Eigennamen werden nur als ganze Wörter erkannt – „aria“ trifft
+     damit nie „Bulgarian“, „anna“ nie „Joanna“-freie Kontexte,
+     „eva“ nie „Available“. Codes und Phrasen („#female“,
+     „siri female“, „de-de-x-deg“) bleiben Teilstring-Treffer. */
+  var KW_RE_CACHE = {};
+  function voiceHas(hay, kw) {
+    hay = String(hay || '').toLowerCase();
+    kw = String(kw || '').toLowerCase();
+    if (!/^[a-z0-9äöü]/.test(kw)) return hay.indexOf(kw) !== -1;
+    var re = KW_RE_CACHE[kw];
+    if (!re) {
+      try {
+        re = new RegExp('\\b' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b');
+      } catch (e) { re = { test: function (h) { return h.indexOf(kw) !== -1; } }; }
+      KW_RE_CACHE[kw] = re;
+    }
+    return re.test(hay);
+  }
+
+  function voiceHay(v) { return ((v.name || '') + ' ' + (v.voiceURI || '')).toLowerCase(); }
 
   function scoreVoice(v, targetLang) {
     var score = 0;
@@ -592,8 +724,8 @@
     }
 
     var mk = MALE_KEYWORDS[isEN ? 'en' : 'de'];
-    for (var i = 0; i < mk.length; i++) { if (hay.indexOf(mk[i]) !== -1) { score += 130; break; } }
-    for (var j = 0; j < FEMALE_KEYWORDS.length; j++) { if (hay.indexOf(FEMALE_KEYWORDS[j]) !== -1) { score -= 200; break; } }
+    for (var i = 0; i < mk.length; i++) { if (voiceHas(hay, mk[i])) { score += 130; break; } }
+    for (var j = 0; j < FEMALE_KEYWORDS.length; j++) { if (voiceHas(hay, FEMALE_KEYWORDS[j])) { score -= 200; break; } }
     for (var s = 0; s < STUDIO_VOICES.length; s++) { if (hay.indexOf(STUDIO_VOICES[s]) !== -1) { score += 90; break; } }
     for (var k = 0; k < PREMIUM_KEYWORDS.length; k++) { if (hay.indexOf(PREMIUM_KEYWORDS[k]) !== -1) { score += 45; break; } }
     for (var l = 0; l < LOWQ_KEYWORDS.length; l++) { if (hay.indexOf(LOWQ_KEYWORDS[l]) !== -1) { score -= 260; break; } }
@@ -640,20 +772,30 @@
 
   /* Nur-Männlich-Gate: weiblich benannte Stimmen werden ausgeschlossen.
      Nicht erkennbar weibliche Stimmen (z. B. „Google Deutsch“) gelten
-     als geschlechtsneutral und damit männlich-tauglich. */
+     als geschlechtsneutral und damit männlich-tauglich – ihre Tonlage
+     senkt die Regie automatisch in die männliche Klangzone ab. */
   function isMaleCandidate(v) {
-    var hay = ((v.name || '') + ' ' + (v.voiceURI || '')).toLowerCase();
+    var hay = voiceHay(v);
     for (var i = 0; i < FEMALE_KEYWORDS.length; i++) {
-      if (hay.indexOf(FEMALE_KEYWORDS[i]) !== -1) return false;
-    }
-    var union = (MALE_KEYWORDS.de || []).concat(MALE_KEYWORDS.en || []);
-    for (var j = 0; j < union.length; j++) {
-      if (hay.indexOf(union[j]) !== -1) return true;
-    }
-    for (var k = 0; k < KNOWN_MALE_VOICES.length; k++) {
-      if (hay.indexOf(KNOWN_MALE_VOICES[k]) !== -1) return true;
+      if (voiceHas(hay, FEMALE_KEYWORDS[i])) return false;
     }
     return true;
+  }
+
+  /* Explizit-männlich-Nachweis: Stimme trägt einen eindeutig männlichen
+     Namen/Code (Stefan, Conrad, Andrew, „#male“, Neural2-B …). Nur dann
+     spricht die Regie in natürlicher männlicher Tonlage; unbenannte
+     Stimmen werden zur Garantie in die männliche Klangzone abgesenkt. */
+  function explicitMale(v) {
+    var hay = voiceHay(v);
+    var union = (MALE_KEYWORDS.de || []).concat(MALE_KEYWORDS.en || []);
+    for (var j = 0; j < union.length; j++) {
+      if (voiceHas(hay, union[j])) return true;
+    }
+    for (var k = 0; k < KNOWN_MALE_VOICES.length; k++) {
+      if (voiceHas(hay, KNOWN_MALE_VOICES[k])) return true;
+    }
+    return false;
   }
 
   /* Reihenfolge für die männliche Nachbarsprachen-Suche */
@@ -663,7 +805,7 @@
   };
 
   var VOICE_EPOCH = 0;   // wird bei jeder voiceschanged-Aktualisierung erhöht
-  var VOICE_CACHE = {};  // lang ('de'|'en') -> { voice, mode, epoch }
+  var VOICE_CACHE = {};  // lang ('de'|'en') -> { voice, mode, explicit, epoch }
 
   function resolveMaleVoice(lang) {
     var l = String(lang || 'de').toLowerCase();
@@ -677,11 +819,16 @@
     }
     list = dedupeVoices(list);
     var ranked = rankVoicesFromList(list, l);
-    var res = { voice: null, mode: 'none', epoch: VOICE_EPOCH };
+    var res = { voice: null, mode: 'none', explicit: false, epoch: VOICE_EPOCH };
 
     // 1) männliche Stimme der Artikelsprache
     for (var i = 0; i < ranked.length; i++) {
-      if (isMaleCandidate(ranked[i].voice)) { res.voice = ranked[i].voice; res.mode = 'male'; break; }
+      if (isMaleCandidate(ranked[i].voice)) {
+        res.voice = ranked[i].voice;
+        res.mode = 'male';
+        res.explicit = explicitMale(ranked[i].voice);
+        break;
+      }
     }
     // 2) männliche Stimme einer Nachbarsprache (niemals weiblich)
     if (!res.voice) {
@@ -689,12 +836,21 @@
       for (var oi = 0; oi < order.length && !res.voice; oi++) {
         var alt = rankVoicesFromList(list, order[oi]);
         for (var j = 0; j < alt.length; j++) {
-          if (isMaleCandidate(alt[j].voice)) { res.voice = alt[j].voice; res.mode = 'cross'; break; }
+          if (isMaleCandidate(alt[j].voice)) {
+            res.voice = alt[j].voice;
+            res.mode = 'cross';
+            res.explicit = explicitMale(alt[j].voice);
+            break;
+          }
         }
       }
     }
     // 3) Notnagel: einzige Stimme der Sprache (Tonlagen-Korrektur senkt ab)
-    if (!res.voice && ranked.length) { res.voice = ranked[0].voice; res.mode = 'fallback'; }
+    if (!res.voice && ranked.length) {
+      res.voice = ranked[0].voice;
+      res.mode = 'fallback';
+      res.explicit = explicitMale(ranked[0].voice);
+    }
 
     VOICE_CACHE[l] = res;
     return res;
@@ -714,8 +870,17 @@
   }
 
   function calibrateQuality() {
-    var ranked = rankVoices(currentLang);
-    var tier = ranked.length ? qualityTierForScore(ranked[0].score) : 'basic';
+    // Maßgeblich ist die tatsächlich besetzte (männliche) Stimme –
+    // nicht die abstrakt beste Stimme der Liste.
+    var cast = resolveMaleVoice(currentLang);
+    var tier = 'basic';
+    if (cast && cast.voice) {
+      tier = qualityTierForScore(scoreVoice(cast.voice, currentLang));
+      // Ohne eindeutig männlichen Stimmbesitz (z. B. „Google Deutsch“):
+      // ruhigere Regie (mehr Pausen, kürzere Bögen) für klare
+      // Verständlichkeit in der abgesenkten Klangzone.
+      if (!cast.explicit && tier !== 'standard' && tier !== 'basic') tier = 'standard';
+    }
     var profile = QUALITY_PROFILES[tier] || QUALITY_PROFILES.standard;
     var next = {
       tier: tier,
@@ -766,7 +931,7 @@
     p:             { rate: 1.00, pitch: 0.96, volume: 1.00, before: 130, after: 190 },
     lead:          { rate: 0.96, pitch: 0.95, volume: 1.00, before: 180, after: 260 },
     li:            { rate: 1.00, pitch: 0.97, volume: 0.99, before: 110, after: 150 },
-    blockquote:    { rate: 0.94, pitch: 1.02, volume: 0.96, before: 340, after: 320 },
+    blockquote:    { rate: 0.95, pitch: 0.95, volume: 0.96, before: 340, after: 320 },
     callout:       { rate: 0.95, pitch: 0.93, volume: 1.00, before: 380, after: 320 },
     warning:       { rate: 0.90, pitch: 0.86, volume: 1.00, before: 460, after: 380 },
     'overview-card': { rate: 0.97, pitch: 0.95, volume: 1.00, before: 300, after: 260 },
@@ -796,6 +961,17 @@
          der Chrome-15-Sekunden-Abbruchgrenze. */
   var MAX_CHUNK = 200;
   var HARD_CHUNK = 240;   // harte Obergrenze: ~14 s Sprechzeit, nie abgebrochen
+
+  /* Diskursmarker (Verlagshaus-Regie v3): An diesen Konnektiven atmet
+     und intoniert ein professioneller Sprecher um – ein Schnitt dort
+     erzeugt natürliche Intonationsbögen statt Roboter-Fluss.
+     Geschnitten wird NUR bei langen Sätzen; Mindeststücke (40 Zeichen)
+     verhindern Stakkato. */
+  var CONNECTIVES = {
+    de: 'aber|allenfalls|allerdings|andererseits|außerdem|beispielsweise|bevor|daher|dadurch|dagegen|deshalb|deswegen|dennoch|entweder|falls|folglich|hingegen|immerhin|indem|insbesondere|jedoch|mittlerweile|nachdem|obwohl|somit|sondern|sodass|stattdessen|trotzdem|vielmehr|vor allem|während|weil|weiterhin|zudem|zuletzt|zunächst|schließlich|zumal|zum Beispiel|darüber hinaus|im Gegenteil|unter anderem',
+    en: 'however|therefore|thus|hence|moreover|furthermore|nevertheless|nonetheless|besides|additionally|in addition|for example|for instance|in particular|especially|after all|as a result|meanwhile|instead|because|although|though|whereas|while|since|unless|until|before|after|yet|so that|given that|of course|above all'
+  };
+  var CONNECTIVE_MIN = 40;   // Mindestlänge eines Schnittstücks (keine Stakkato-Schnipsel)
 
   // Kompakte Stoppwort-Karten für das automatische Satz-Routing DE/EN
   var EN_SNIFF = {
@@ -910,21 +1086,63 @@
     });
     flush();
 
-    // Lange Gruppen an Gliederungsgrenzen (Komma/Semikolon/Doppelpunkt) teilen
+    /* Lange Gruppen teilen – Verlagshaus-Regie in zwei Stufen:
+       1. an Diskursmarkern (Konnektiven: „weil“, „however“ …) mit
+          Mindeststück-Länge, damit natürliche Intonationsbögen entstehen,
+       2. anschließend an Gliederungszeichen (Komma/Semikolon/Doppelpunkt),
+       3. Packen zu Atemgruppen bis zur weichen Obergrenze. */
     var out = [];
+    var connRe = new RegExp('(?:^|\\s)(' + CONNECTIVES[blockLang === 'en' ? 'en' : 'de'] + ')(?=\\s)', 'gi');
+
+    function cutAtConnectives(text) {
+      var cuts = [];
+      var m;
+      connRe.lastIndex = 0;
+      while ((m = connRe.exec(text)) !== null) {
+        cuts.push(m.index + (m[0].length - m[1].length));
+      }
+      if (!cuts.length) return [text];
+      var pieces = [];
+      var start = 0;
+      for (var c = 0; c < cuts.length; c++) {
+        if (cuts[c] - start >= CONNECTIVE_MIN && (text.length - cuts[c]) >= CONNECTIVE_MIN) {
+          pieces.push(text.slice(start, cuts[c]));
+          start = cuts[c];
+        }
+      }
+      pieces.push(text.slice(start));
+      return pieces;
+    }
+
+    function commaPieces(text) {
+      return text.replace(/([,;:–—])\s+/g, '$1\u0001').split('\u0001');
+    }
+
     groups.forEach(function (g) {
       if (g.text.length <= hard) { out.push(g); return; }
-      var pieces = g.text.replace(/([,;:–—])\s+/g, '$1\u0001').split('\u0001');
-      var buf = '';
-      pieces.forEach(function (p) {
-        if (!p || !p.trim()) return;
-        if ((buf + ' ' + p).trim().length > soft && buf) {
-          out.push({ text: buf.trim(), lang: g.lang, emo: g.emo });
-          buf = '';
+      /* Konnektiv-Stücke bleiben bewusst eigene Atemgruppen (Atem +
+         Intonations-Reset am Diskursmarker) – sie werden NICHT wieder
+         zusammengepackt. Nur übergroße Stücke fallen in Stufe 2
+         (Komma-Schnitt + Packen) und dann Stufe 3 (Wortgrenze). */
+      cutAtConnectives(g.text).forEach(function (cp) {
+        var piece = cp.trim();
+        if (!piece) return;
+        if (piece.length <= soft) {
+          out.push({ text: piece, lang: g.lang, emo: g.emo });
+          return;
         }
-        buf = (buf ? buf + ' ' : '') + p.trim();
+        var pieces = commaPieces(piece);
+        var buf = '';
+        pieces.forEach(function (p) {
+          if (!p || !p.trim()) return;
+          if ((buf + ' ' + p).trim().length > soft && buf) {
+            out.push({ text: buf.trim(), lang: g.lang, emo: g.emo });
+            buf = '';
+          }
+          buf = (buf ? buf + ' ' : '') + p.trim();
+        });
+        if (buf.trim()) out.push({ text: buf.trim(), lang: g.lang, emo: g.emo });
       });
-      if (buf.trim()) out.push({ text: buf.trim(), lang: g.lang, emo: g.emo });
     });
 
     // Notfall-Reserve: harte Wortgrenzen (nur falls ein Einzelwort-Block übrig bleibt)
@@ -992,6 +1210,9 @@
     var cf = contentRateFactor(unit.text);
     if (unit.emo === 'question') cf -= 0.02;
     if (unit.emo === 'exclamation') cf -= 0.01;
+    // Final-Längung (Verlagshaus-Regie): der letzte Bogen eines Blocks
+    // wird minimal ruhiger gesprochen – wie ein Sprecher am Absatzschluss.
+    if (unit.finalChunk) cf -= 0.015;
     return Math.min(1.18, Math.max(0.5, base * (quality.rate || 1) * cf));
   }
 
@@ -1031,17 +1252,24 @@
   }
 
   /* Automatische Tonlagen-Korrektur: männliche Zone halten, Fragen
-     anheben, Ausrufe betonen, Monotonie bei einfachen Stimmen brechen,
-     weibliche Notnagel-Stimme absenken. */
-  function autoPitch(unit, basePitch, voiceMode) {
+     anheben, Ausrufe betonen, Monotonie bei einfachen Stimmen brechen.
+     Garantie-Kern (v3): Nur bei EINDEUTIG männlicher Stimme spricht
+     die Regie in natürlicher Tonlage; geschlechtsneutrale Stimmen
+     werden verlässlich in die männliche Klangzone (≤ 0.88) abgesenkt,
+     der absolute Notnagel (fallback) auf ≤ 0.86. */
+  function autoPitch(unit, basePitch, voiceRes) {
     var q = quality || {};
     var v = (basePitch == null ? 1 : basePitch) + (q.pitchShift || 0);
     if (unit.emo === 'question') v += 0.05;
     else if (unit.emo === 'exclamation') v += 0.02;
+    if (unit.finalChunk) v -= 0.012;   // Final-Längung: Absatzschluss klingt ruhiger
     var dyn = q.dynamic || 0;
     if (dyn > 0) v += dyn * (unit.modSign || 1);
-    if (voiceMode === 'fallback') v = Math.min(v, 0.86);
-    else if (!voiceMode || voiceMode === 'none') v -= 0.02;
+    var mode = voiceRes ? voiceRes.mode : 'none';
+    var explicit = voiceRes ? !!voiceRes.explicit : false;
+    if (mode === 'fallback') v = Math.min(v - 0.02, 0.86);
+    else if (mode !== 'none' && !explicit) v = Math.min(v - 0.07, 0.88);
+    else if (mode === 'none') v = Math.min(v - 0.05, 0.88);
     return Math.min(1.4, Math.max(0.6, v));
   }
 
@@ -1223,6 +1451,7 @@
           profile: profile,
           effRate: 1,
           modSign: 1,
+          finalChunk: ci === chunks.length - 1,
           before: ci === 0 ? profile.before : 0,
           after: 0
         };
@@ -1277,6 +1506,12 @@
 
   var voiceWaitTries = 0;  // Warte-Versuche auf die asynchron ladende Stimmenliste
   var lastEffRate = 1;     // zuletzt gesprochenes Tempo (für Pausen-Kopplung)
+  var liveUtterance = null; // GC-Schutz: Referenz hält die aktuelle Äußerung am Leben
+
+  // Android pauset/resumed die Synthese unzuverlässig – dort wird beim
+  // Pausieren abgebrochen und beim Fortsetzen die laufende Einheit neu
+  // gesprochen (bruchsicher, Industrie-Standard bei Web Speech).
+  var IS_ANDROID = !!(win.navigator && /android/i.test(win.navigator.userAgent || ''));
 
   function speakUnit(index) {
     if (!reading || !speechSupported) return;
@@ -1309,10 +1544,24 @@
       // Automatische Tempoanpassung: Rolle × Stimmenklasse × Inhalt
       u.rate = Math.min(1.25, Math.max(0.5, unit.effRate || 1));
       // Automatische Tonlagen-Korrektur: Rolle + Satzmelodie + Stimmenklasse
-      u.pitch = autoPitch(unit, p.pitch, voiceRes.mode);
+      u.pitch = autoPitch(unit, p.pitch, voiceRes);
       u.volume = p.volume;
 
+      // Satzfortschrittts-genaue Anzeige (Boundary-Ereignisse der Engine)
+      u.onboundary = function (e) {
+        if (!reading || !playing || !progressBar || !totalChars) return;
+        if (e && typeof e.charIndex === 'number' && e.charIndex >= 0) {
+          var pct = Math.min(100, ((spokenChars + e.charIndex) / totalChars) * 100);
+          progressBar.style.width = pct.toFixed(1) + '%';
+        }
+      };
+
+      // GC-Schutz: Chrome bricht sonst gelegentlich mitten im Satz ab,
+      // wenn die Äußerungs-Referenz vorzeitig garbage-collected wird.
+      liveUtterance = u;
+
       u.onend = function () {
+        if (liveUtterance === u) liveUtterance = null;
         if (!reading || !playing) return;
         errorStreak = 0;
         lastEffRate = unit.effRate || 1;
@@ -1321,6 +1570,7 @@
         pauseTimer = setTimeout(function () { speakUnit(cursor + 1); }, unit.after);
       };
       u.onerror = function (e) {
+        if (liveUtterance === u) liveUtterance = null;
         if (!reading) return;
         if (e && (e.error === 'interrupted' || e.error === 'canceled')) return;
         // Adaptive Herabstufung: nach wiederholten Fehlern kürzere Chunks
@@ -1434,7 +1684,14 @@
     if (!reading) return;
     playing = false;
     clearPauseTimer();
-    if (speechSupported) { try { synth.pause(); } catch (e) {} }
+    if (speechSupported) {
+      // Android-Härtung: synth.pause()/resume() friert dort die Engine
+      // ein – deshalb abbrechen und beim Fortsetzen die laufende
+      // Einheit sauber neu sprechen (bruchsicher statt stumm).
+      if (IS_ANDROID) { try { synth.cancel(); } catch (e) {} }
+      else { try { synth.pause(); } catch (e) {} }
+    }
+    if (liveUtterance) liveUtterance = null;
     setListenState('paused');
     setStatus(texts.paused);
   }
@@ -1445,6 +1702,10 @@
     setListenState('playing');
     setStatus(texts.resumed);
     if (speechSupported) {
+      if (IS_ANDROID) {
+        speakUnit(cursor);   // Einheit neu starten (Pause = Abbruch)
+        return;
+      }
       try { synth.resume(); } catch (e) {}
       // Safari/Chrome-Härtung: hängt die Queue, Einheit neu starten
       setTimeout(function () {
@@ -1457,6 +1718,7 @@
     reading = false;
     playing = false;
     voiceWaitTries = 0;
+    liveUtterance = null;
     clearPauseTimer();
     stopKeepAlive();
     if (speechSupported) { try { synth.cancel(); } catch (e) {} }
@@ -1469,10 +1731,15 @@
   function startKeepAlive() {
     stopKeepAlive();
     if (!speechSupported) return;
-    // Chrome bricht die Synthese nach ~15 s ab: regelmäßig auffrischen
+    // Chrome bricht die Synthese nach ~15 s ab: regelmäßig auffrischen.
+    // Android verträgt das pause/resume-Ping nicht – dort reine Wache.
     keepAliveId = setInterval(function () {
       if (!reading || !playing) return;
       try {
+        if (IS_ANDROID) {
+          if (!synth.speaking && !synth.pending && !pauseTimer) speakUnit(cursor + 1);
+          return;
+        }
         if (synth.speaking) { synth.pause(); synth.resume(); }
         else if (!synth.pending && !pauseTimer) { speakUnit(cursor + 1); }
       } catch (e) {}
