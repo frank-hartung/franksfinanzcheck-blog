@@ -25,6 +25,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { renderShortcodes } from './hugo_shortcodes.mjs';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 
@@ -631,7 +632,9 @@ export function loadArticle(slug) {
     author: get('author') || 'Frank Hartung',
     readingTime: Math.max(1, Math.round(words / 200)),
     wordCount: words,
-    bodyHtml: markdownToHtml(body)
+    /* Shortcodes vor dem Markdown-Durchlauf rendern: Ohne Hugo würden
+       ihre Parameter („title=", „cta_url=“) wörtlich vorgelesen. */
+    bodyHtml: markdownToHtml(renderShortcodes(body))
   };
 }
 

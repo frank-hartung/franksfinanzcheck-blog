@@ -7,8 +7,8 @@
   "rate": 0.93,
   "maxChunk": 140
  },
- "units": 95,
- "chars": 8842,
+ "units": 121,
+ "chars": 9772,
  "parts": [
   {
    "index": 0,
@@ -258,364 +258,526 @@
   },
   {
    "index": 3,
-   "text": "title= Beispielrechnung: Grundversorgung versus. Wechseltarif subtitle=Musterhaushalt mit 20000 Kilowattstunden Jahresverbrauch (Einfamilienhaus, circa. 120 m², 4 Personen) · Stand: August 2026 footnote=Der Neukunden-Bonus wird üblicherweise mit der ersten Jahresabrechnung verrechnet und gilt nur im ersten Vertragsjahr. Ab dem zweiten Jahr liegt die Ersparnis beim empfohlenen Wechseltarif bei soliden 702 Euro pro Jahr, ohne jede Einschränkung. Regionale Preisunterschiede sind möglich; prüfe deinen persönlichen Tarif in unter 2 Minuten mit deiner Postleitzahl. cta url=/go/gas/ >}}. Der 3-Schritte-Ablauf beim Gasanbieterwechsel. Schritt 1: Verbrauchsdaten und Zählernummer bereithalten. Schnappe dir deine letzte Gasrechnung. Dort findest du deinen genauen Jahresverbrauch in Kilowattstunden (Kilowattstunden), deine Zählernummer und die elfstellige Zählpunktbezeichnung. Wer erst kürzlich eingezogen ist, nutzt Richtwerte: circa 12000 Kilowattstunden für eine Wohnung, circa 20000 Kilowattstunden für ein Einfamilienhaus. Schritt 2: Postleitzahl und Verbrauch eingeben. Gib im Tarifrechner deine Postleitzahl und den Jahresverbrauch ein. Filtere die Ergebnisse nach 12-monatiger Laufzeit und Preisgarantie. Vergleiche den effektiven Kilowattstunden-Preis transparent und lies die detaillierten Tarifbedingungen. Schritt 3: Online-Antrag absenden.",
+   "text": "Beispielrechnung: Grundversorgung versus. Wechseltarif. Musterhaushalt mit 20000 Kilowattstunden Jahresverbrauch (Einfamilienhaus, circa 120 m², 4 Personen), Stand: August 2026. Grundversorgung (Nein: Stadtwerk). Grundpreis monatlich: 14,50 Euro, 174 Euro pro Jahr. Arbeitspreis pro Kilowattstunden: 12,80 Cent. Jahreskosten (20000 Kilowattstunden): 2734 Euro. Effektivkosten 1. Jahr: 2734 Euro. Preisgarantie: Nein: keine. Vertragslaufzeit: unbegrenzt. Alternativ-Tarif (Solide). Grundpreis monatlich: 9,90 Euro, 118,80 Euro pro Jahr. Arbeitspreis pro Kilowattstunden: 9,20 Cent. Jahreskosten (20000 Kilowattstunden): 1959 Euro. Effektivkosten 1. Jahr: 1959 Euro. Ersparnis im 1. Jahr: −775 Euro. Ersparnis ab 2. Jahr: −775 Euro. Preisgarantie: Ja: 12 Monate. Vertragslaufzeit: 12 Monate. Wechseltarif (Empfehlung Empfehlung). Grundpreis monatlich: 11,00 Euro, 132 Euro pro Jahr. Arbeitspreis pro Kilowattstunden: 9,50 Cent. Jahreskosten (20000 Kilowattstunden): 2032 Euro. Neukunden-Bonus (Jahr 1): −180 Euro. Effektivkosten 1. Jahr: 1852 Euro. Ersparnis im 1. Jahr: −882 Euro. Ersparnis ab 2. Jahr: −702 Euro. Preisgarantie: Ja: 12 Monate. Vertragslaufzeit: 12 Monate. Hinweis: Der Neukunden-Bonus wird üblicherweise mit der ersten Jahresabrechnung verrechnet und gilt nur im ersten Vertragsjahr.",
    "units": [
     {
      "i": 38,
-     "type": "p",
+     "type": "h3",
      "lang": "de",
-     "chars": 152
+     "chars": 55
     },
     {
      "i": 39,
      "type": "p",
      "lang": "de",
-     "chars": 168
+     "chars": 121
     },
     {
      "i": 40,
      "type": "p",
      "lang": "de",
-     "chars": 125
+     "chars": 34
     },
     {
      "i": 41,
-     "type": "p",
+     "type": "li",
      "lang": "de",
-     "chars": 117
+     "chars": 52
     },
     {
      "i": 42,
-     "type": "p",
+     "type": "li",
      "lang": "de",
-     "chars": 21
+     "chars": 45
     },
     {
      "i": 43,
-     "type": "h2",
+     "type": "li",
      "lang": "de",
-     "chars": 46
+     "chars": 48
     },
     {
      "i": 44,
-     "type": "h3",
+     "type": "li",
      "lang": "de",
-     "chars": 57
+     "chars": 34
     },
     {
      "i": 45,
-     "type": "p",
+     "type": "li",
      "lang": "de",
-     "chars": 38
+     "chars": 27
     },
     {
      "i": 46,
-     "type": "p",
+     "type": "li",
      "lang": "de",
-     "chars": 145
+     "chars": 29
     },
     {
      "i": 47,
      "type": "p",
      "lang": "de",
-     "chars": 150
+     "chars": 26
     },
     {
      "i": 48,
-     "type": "h3",
+     "type": "li",
      "lang": "de",
-     "chars": 47
+     "chars": 54
     },
     {
      "i": 49,
-     "type": "p",
+     "type": "li",
      "lang": "de",
-     "chars": 136
+     "chars": 44
     },
     {
      "i": 50,
-     "type": "p",
-     "lang": "de",
-     "chars": 104
-    },
-    {
-     "i": 51,
-     "type": "h3",
-     "lang": "de",
-     "chars": 34
-    }
-   ]
-  },
-  {
-   "index": 4,
-   "text": "Fülle das Online-Formular in etwa 5 Minuten aus. Der neue Versorger kündigt deinen bisherigen Vertrag automatisch zum nächstmöglichen Termin und informiert den zuständigen Verteilnetzbetreiber. Du musst dich um nichts weiter kümmern und erhältst nach wenigen Tagen die offizielle Vertragsbestätigung per E-Mail. Sonderfall: Preiserhöhung und Sonderkündigungsrecht. Wenn dein bisheriger Gasversorger eine Preiserhöhung ankündigt, hast du ein gesetzliches Sonderkündigungsrecht nach Paragraf 41 EnWG. Die Kündigungsfrist beträgt in der Regel zwei Wochen ab Erhalt des Informationsschreibens. In diesem Fall kündigst du ausnahmsweise selbst, schriftlich oder per E-Mail. So versäumst du die kurze Frist nicht. Vermerke im Wechselantrag beim neuen Anbieter, dass du bereits wegen einer Preiserhöhung gekündigt hast. Dadurch wechselst du zum Datum der Preisanpassung nahtlos in den neuen Spartarif. <!-- premium-length-2026 -->. Sonderkündigung und Preiserhöhung, der Brief, der zählt. Steht in einem Schreiben wir passen den Arbeitspreis an, läuft die Sonderkündigungsfrist. Datum des Zugangs notieren, Frist im Brief prüfen (oft 2 Wochen). Kündigung schriftlich mit Kundennummer, Zählernummer, Bezug auf das Erhöhungsschreiben. Parallel neuen Tarif abschließen, Lieferbeginn = Ende des alten. Wer die Frist verpasst, bleibt im erhöhten Tarif bis zur nächsten ordentlichen Kündigung.",
-   "units": [
-    {
-     "i": 52,
-     "type": "p",
+     "type": "li",
      "lang": "de",
      "chars": 48
     },
     {
-     "i": 53,
-     "type": "p",
+     "i": 51,
+     "type": "li",
      "lang": "de",
-     "chars": 144
+     "chars": 34
+    },
+    {
+     "i": 52,
+     "type": "li",
+     "lang": "de",
+     "chars": 32
+    },
+    {
+     "i": 53,
+     "type": "li",
+     "lang": "de",
+     "chars": 32
     },
     {
      "i": 54,
-     "type": "p",
+     "type": "li",
      "lang": "de",
-     "chars": 117
+     "chars": 29
     },
     {
      "i": 55,
-     "type": "h2",
+     "type": "li",
      "lang": "de",
-     "chars": 52
+     "chars": 28
     },
     {
      "i": 56,
      "type": "p",
      "lang": "de",
-     "chars": 133
+     "chars": 37
     },
     {
      "i": 57,
-     "type": "p",
+     "type": "li",
      "lang": "de",
-     "chars": 90
+     "chars": 52
     },
     {
      "i": 58,
-     "type": "p",
+     "type": "li",
      "lang": "de",
-     "chars": 116
+     "chars": 44
     },
     {
      "i": 59,
-     "type": "p",
+     "type": "li",
      "lang": "de",
-     "chars": 104
+     "chars": 48
     },
     {
      "i": 60,
-     "type": "p",
+     "type": "li",
      "lang": "de",
-     "chars": 81
+     "chars": 36
     },
     {
      "i": 61,
-     "type": "p",
+     "type": "li",
+     "lang": "de",
+     "chars": 34
+    },
+    {
+     "i": 62,
+     "type": "li",
+     "lang": "de",
+     "chars": 32
+    },
+    {
+     "i": 63,
+     "type": "li",
+     "lang": "de",
+     "chars": 32
+    },
+    {
+     "i": 64,
+     "type": "li",
      "lang": "de",
      "chars": 29
     },
     {
-     "i": 62,
-     "type": "h2",
-     "lang": "de",
-     "chars": 56
-    },
-    {
-     "i": 63,
-     "type": "p",
-     "lang": "de",
-     "chars": 89
-    },
-    {
-     "i": 64,
-     "type": "p",
-     "lang": "de",
-     "chars": 65
-    },
-    {
      "i": 65,
-     "type": "p",
+     "type": "li",
      "lang": "de",
-     "chars": 87
+     "chars": 28
     },
     {
      "i": 66,
      "type": "p",
      "lang": "de",
-     "chars": 64
-    },
-    {
-     "i": 67,
-     "type": "p",
-     "lang": "de",
-     "chars": 89
+     "chars": 127
     }
    ]
   },
   {
-   "index": 5,
-   "text": "Kalender-Foto des Briefes am Kühlschrank ist unspektakulär und wirksam. 3-Schritte-Ablauf ohne Lücke. Verbrauch und Zähler von der Jahresrechnung. Vergleich mit Preisgarantie-Filter. Auftrag, Bestätigung, Abschlag nach 6 Wochen gegen Zählerstand. Der Grundversorger oder Alt-Anbieter wird automatisch abgelöst. Du heizt durch, die Rechnung wechselt den Absender. Fazit: Keine Angst vor dem Wechsel, es lohnt sich immer. Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst. Dank strenger Verbraucherschutzgesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist. Bei einem typischen Familienhaushalt mit 20000 Kilowattstunden Verbrauch sparst du im ersten Jahr bis 882 Euro. Auch dauerhaft bleiben mehrere hundert Euro auf deinem Konto. Jetzt vergleichen und sparen: führt zu Bis 882 Euro sparen, Angebote vergleichen. Weiterlesen: Pillar Strom und Gas sparen · Gasrechnung senken im Spätsommer · Günstige Tarife mit Preisgarantie. Häufige Fragen. Kann mir während des Wechsels das Gas abgestellt werden. Nein, das ist gesetzlich unmöglich. Der örtliche Grundversorger ist zur lückenlosen Belieferung verpflichtet. Was mache ich bei einem Umzug.",
+   "index": 4,
+   "text": "Ab dem zweiten Jahr liegt die Ersparnis beim empfohlenen Wechseltarif bei soliden 702 Euro pro Jahr, ohne jede Einschränkung. Regionale Preisunterschiede sind möglich; prüfe deinen persönlichen Tarif in unter 2 Minuten mit deiner Postleitzahl. Der 3-Schritte-Ablauf beim Gasanbieterwechsel. Schritt 1: Verbrauchsdaten und Zählernummer bereithalten. Schnappe dir deine letzte Gasrechnung. Dort findest du deinen genauen Jahresverbrauch in Kilowattstunden (Kilowattstunden), deine Zählernummer und die elfstellige Zählpunktbezeichnung. Wer erst kürzlich eingezogen ist, nutzt Richtwerte: circa 12000 Kilowattstunden für eine Wohnung, circa 20000 Kilowattstunden für ein Einfamilienhaus. Schritt 2: Postleitzahl und Verbrauch eingeben. Gib im Tarifrechner deine Postleitzahl und den Jahresverbrauch ein. Filtere die Ergebnisse nach 12-monatiger Laufzeit und Preisgarantie. Vergleiche den effektiven Kilowattstunden-Preis transparent und lies die detaillierten Tarifbedingungen. Schritt 3: Online-Antrag absenden. Fülle das Online-Formular in etwa 5 Minuten aus. Der neue Versorger kündigt deinen bisherigen Vertrag automatisch zum nächstmöglichen Termin und informiert den zuständigen Verteilnetzbetreiber. Du musst dich um nichts weiter kümmern und erhältst nach wenigen Tagen die offizielle Vertragsbestätigung per E-Mail. Sonderfall: Preiserhöhung und Sonderkündigungsrecht.",
    "units": [
+    {
+     "i": 67,
+     "type": "p",
+     "lang": "de",
+     "chars": 125
+    },
     {
      "i": 68,
      "type": "p",
      "lang": "de",
-     "chars": 71
+     "chars": 117
     },
     {
      "i": 69,
      "type": "h2",
      "lang": "de",
-     "chars": 29
+     "chars": 46
     },
     {
      "i": 70,
-     "type": "p",
+     "type": "h3",
      "lang": "de",
-     "chars": 80
+     "chars": 57
     },
     {
      "i": 71,
      "type": "p",
      "lang": "de",
-     "chars": 127
+     "chars": 38
     },
     {
      "i": 72,
      "type": "p",
      "lang": "de",
-     "chars": 51
+     "chars": 145
     },
     {
      "i": 73,
-     "type": "h2",
+     "type": "p",
      "lang": "de",
-     "chars": 56
+     "chars": 150
     },
     {
      "i": 74,
-     "type": "p",
+     "type": "h3",
      "lang": "de",
-     "chars": 128
+     "chars": 47
     },
     {
      "i": 75,
      "type": "p",
      "lang": "de",
-     "chars": 148
+     "chars": 136
     },
     {
      "i": 76,
      "type": "p",
      "lang": "de",
-     "chars": 111
+     "chars": 104
     },
     {
      "i": 77,
-     "type": "p",
+     "type": "h3",
      "lang": "de",
-     "chars": 61
+     "chars": 34
     },
     {
      "i": 78,
      "type": "p",
      "lang": "de",
-     "chars": 81
+     "chars": 48
     },
     {
      "i": 79,
      "type": "p",
      "lang": "de",
-     "chars": 112
+     "chars": 144
     },
     {
      "i": 80,
-     "type": "h2",
+     "type": "p",
      "lang": "de",
-     "chars": 15
+     "chars": 117
     },
     {
      "i": 81,
-     "type": "h3",
+     "type": "h2",
      "lang": "de",
-     "chars": 56
-    },
-    {
-     "i": 82,
-     "type": "p",
-     "lang": "de",
-     "chars": 109
-    },
-    {
-     "i": 83,
-     "type": "h3",
-     "lang": "de",
-     "chars": 30
+     "chars": 52
     }
    ]
   },
   {
-   "index": 6,
-   "text": "Bei einem Umzug meldest du deinen bestehenden Vertrag mit einer Frist von sechs Wochen ab oder nimmst ihn an die neue Lieferadresse mit. Wie wird Gas von Kubikmetern (m³) in Kilowattstunden umgerechnet. Multipliziere die Kubikmeter mit dem Brennwert (meist circa 10 bis 11,5) und der Zustandszahl (z-Zahl, circa 0,95). Grobe Faustformel: 1 m³ Gas entspricht rund 10 Kilowattstunden. Wie lange dauert der gesamte Wechselprozess. Vom Absenden des Antrags bis zur ersten Belieferung vergehen im Schnitt 3 bis 6 Wochen, abhängig von deinen bisherigen Kündigungsfristen. Was passiert mit zu viel gezahlten Abschlägen. Überzahlte Beträge erstattet dir der alte Versorger mit der Schlussrechnung auf dein Bankkonto. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "index": 5,
+   "text": "Wenn dein bisheriger Gasversorger eine Preiserhöhung ankündigt, hast du ein gesetzliches Sonderkündigungsrecht nach Paragraf 41 EnWG. Die Kündigungsfrist beträgt in der Regel zwei Wochen ab Erhalt des Informationsschreibens. In diesem Fall kündigst du ausnahmsweise selbst, schriftlich oder per E-Mail. So versäumst du die kurze Frist nicht. Vermerke im Wechselantrag beim neuen Anbieter, dass du bereits wegen einer Preiserhöhung gekündigt hast. Dadurch wechselst du zum Datum der Preisanpassung nahtlos in den neuen Spartarif. <!-- premium-length-2026 -->. Sonderkündigung und Preiserhöhung, der Brief, der zählt. Steht in einem Schreiben wir passen den Arbeitspreis an, läuft die Sonderkündigungsfrist. Datum des Zugangs notieren, Frist im Brief prüfen (oft 2 Wochen). Kündigung schriftlich mit Kundennummer, Zählernummer, Bezug auf das Erhöhungsschreiben. Parallel neuen Tarif abschließen, Lieferbeginn = Ende des alten. Wer die Frist verpasst, bleibt im erhöhten Tarif bis zur nächsten ordentlichen Kündigung. Kalender-Foto des Briefes am Kühlschrank ist unspektakulär und wirksam. 3-Schritte-Ablauf ohne Lücke. Verbrauch und Zähler von der Jahresrechnung. Vergleich mit Preisgarantie-Filter. Auftrag, Bestätigung, Abschlag nach 6 Wochen gegen Zählerstand. Der Grundversorger oder Alt-Anbieter wird automatisch abgelöst. Du heizt durch, die Rechnung wechselt den Absender.",
    "units": [
+    {
+     "i": 82,
+     "type": "p",
+     "lang": "de",
+     "chars": 133
+    },
+    {
+     "i": 83,
+     "type": "p",
+     "lang": "de",
+     "chars": 90
+    },
     {
      "i": 84,
      "type": "p",
      "lang": "de",
-     "chars": 136
+     "chars": 116
     },
     {
      "i": 85,
-     "type": "h3",
+     "type": "p",
      "lang": "de",
-     "chars": 65
+     "chars": 104
     },
     {
      "i": 86,
      "type": "p",
      "lang": "de",
-     "chars": 115
+     "chars": 81
     },
     {
      "i": 87,
      "type": "p",
      "lang": "de",
-     "chars": 63
+     "chars": 29
     },
     {
      "i": 88,
-     "type": "h3",
+     "type": "h2",
      "lang": "de",
-     "chars": 44
+     "chars": 56
     },
     {
      "i": 89,
      "type": "p",
      "lang": "de",
-     "chars": 137
+     "chars": 89
     },
     {
      "i": 90,
-     "type": "h3",
+     "type": "p",
      "lang": "de",
-     "chars": 46
+     "chars": 65
     },
     {
      "i": 91,
      "type": "p",
      "lang": "de",
-     "chars": 95
+     "chars": 87
     },
     {
      "i": 92,
      "type": "p",
      "lang": "de",
-     "chars": 49
+     "chars": 64
     },
     {
      "i": 93,
      "type": "p",
      "lang": "de",
-     "chars": 96
+     "chars": 89
     },
     {
      "i": 94,
+     "type": "p",
+     "lang": "de",
+     "chars": 71
+    },
+    {
+     "i": 95,
+     "type": "h2",
+     "lang": "de",
+     "chars": 29
+    },
+    {
+     "i": 96,
+     "type": "p",
+     "lang": "de",
+     "chars": 80
+    },
+    {
+     "i": 97,
+     "type": "p",
+     "lang": "de",
+     "chars": 127
+    },
+    {
+     "i": 98,
+     "type": "p",
+     "lang": "de",
+     "chars": 51
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "text": "Fazit: Keine Angst vor dem Wechsel, es lohnt sich immer. Das Wechseln des Gasanbieters ist eine der profitabelsten Finanzentscheidungen, die du in weniger als 15 Minuten treffen kannst. Dank strenger Verbraucherschutzgesetze besteht keinerlei Risiko für Ausfälle, während die jährliche Entlastung für deine Haushaltskasse spürbar ist. Bei einem typischen Familienhaushalt mit 20000 Kilowattstunden Verbrauch sparst du im ersten Jahr bis 882 Euro. Auch dauerhaft bleiben mehrere hundert Euro auf deinem Konto. Jetzt vergleichen und sparen: führt zu Bis 882 Euro sparen, Angebote vergleichen. Weiterlesen: Pillar Strom und Gas sparen · Gasrechnung senken im Spätsommer · Günstige Tarife mit Preisgarantie. Häufige Fragen. Kann mir während des Wechsels das Gas abgestellt werden. Nein, das ist gesetzlich unmöglich. Der örtliche Grundversorger ist zur lückenlosen Belieferung verpflichtet. Was mache ich bei einem Umzug. Bei einem Umzug meldest du deinen bestehenden Vertrag mit einer Frist von sechs Wochen ab oder nimmst ihn an die neue Lieferadresse mit. Wie wird Gas von Kubikmetern (m³) in Kilowattstunden umgerechnet. Multipliziere die Kubikmeter mit dem Brennwert (meist circa 10 bis 11,5) und der Zustandszahl (z-Zahl, circa 0,95). Grobe Faustformel: 1 m³ Gas entspricht rund 10 Kilowattstunden. Wie lange dauert der gesamte Wechselprozess.",
+   "units": [
+    {
+     "i": 99,
+     "type": "h2",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 100,
+     "type": "p",
+     "lang": "de",
+     "chars": 128
+    },
+    {
+     "i": 101,
+     "type": "p",
+     "lang": "de",
+     "chars": 148
+    },
+    {
+     "i": 102,
+     "type": "p",
+     "lang": "de",
+     "chars": 111
+    },
+    {
+     "i": 103,
+     "type": "p",
+     "lang": "de",
+     "chars": 61
+    },
+    {
+     "i": 104,
+     "type": "p",
+     "lang": "de",
+     "chars": 81
+    },
+    {
+     "i": 105,
+     "type": "p",
+     "lang": "de",
+     "chars": 112
+    },
+    {
+     "i": 106,
+     "type": "h2",
+     "lang": "de",
+     "chars": 15
+    },
+    {
+     "i": 107,
+     "type": "h3",
+     "lang": "de",
+     "chars": 56
+    },
+    {
+     "i": 108,
+     "type": "p",
+     "lang": "de",
+     "chars": 109
+    },
+    {
+     "i": 109,
+     "type": "h3",
+     "lang": "de",
+     "chars": 30
+    },
+    {
+     "i": 110,
+     "type": "p",
+     "lang": "de",
+     "chars": 136
+    },
+    {
+     "i": 111,
+     "type": "h3",
+     "lang": "de",
+     "chars": 65
+    },
+    {
+     "i": 112,
+     "type": "p",
+     "lang": "de",
+     "chars": 115
+    },
+    {
+     "i": 113,
+     "type": "p",
+     "lang": "de",
+     "chars": 63
+    },
+    {
+     "i": 114,
+     "type": "h3",
+     "lang": "de",
+     "chars": 44
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "text": "Vom Absenden des Antrags bis zur ersten Belieferung vergehen im Schnitt 3 bis 6 Wochen, abhängig von deinen bisherigen Kündigungsfristen. Was passiert mit zu viel gezahlten Abschlägen. Überzahlte Beträge erstattet dir der alte Versorger mit der Schlussrechnung auf dein Bankkonto. Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision, für dich entstehen keine Mehrkosten. Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.",
+   "units": [
+    {
+     "i": 115,
+     "type": "p",
+     "lang": "de",
+     "chars": 137
+    },
+    {
+     "i": 116,
+     "type": "h3",
+     "lang": "de",
+     "chars": 46
+    },
+    {
+     "i": 117,
+     "type": "p",
+     "lang": "de",
+     "chars": 95
+    },
+    {
+     "i": 118,
+     "type": "p",
+     "lang": "de",
+     "chars": 49
+    },
+    {
+     "i": 119,
+     "type": "p",
+     "lang": "de",
+     "chars": 96
+    },
+    {
+     "i": 120,
      "type": "outro",
      "lang": "de",
      "chars": 66
