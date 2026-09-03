@@ -1,0 +1,440 @@
+From 3eb38912b13329877c9a25ed919848915086a23c Mon Sep 17 00:00:00 2001
+From: frank-hartung <313369010+frank-hartung@users.noreply.github.com>
+Date: Thu, 3 Sep 2026 09:38:43 +0000
+Subject: [PATCH 3/5] feat(endkontrolle): Reserve-Pool + Kadenz-Endkontrolle
+ (4. Sicherheitsnetz)
+
+scripts/reserve_pool.py: Redaktions-Reserve-Pool - fertige Premium-Evergreen-
+Artikel (draft:true, reserve:true, ohne cadence_*-Felder). --publish-to-min
+veroeffentlicht an Mo/Mi/Fr nur bis zum LIVE-Mindestziel; --status/-selftest.
+Selbsttest gruen.
+
+.github/workflows/kadenz-endkontrolle.yml: laeuft Mo/Mi/Fr 21:05 UTC (nach
+letztem Engine-Slot 17:40 und Produktions-Wache 20:00) als letztes
+Sicherheitsnetz: heilt (URL-Hygiene + holds + Kadenz), zaehlt LIVE,
+veroeffentlicht bei Unterschreitung aus dem Reserve-Pool, stoesst Deploy
+explizit an (GITHUB_TOKEN-Commits triggern keine Workflows) und oeffnet/
+schliesst das Defizit-Issue via engine_issue --deficit automatisch.
+
+Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+---
+ .github/workflows/kadenz-endkontrolle.yml | 187 +++++++++++++++++++
+ scripts/reserve_pool.py                   | 212 ++++++++++++++++++++++
+ 2 files changed, 399 insertions(+)
+ create mode 100644 .github/workflows/kadenz-endkontrolle.yml
+ create mode 100644 scripts/reserve_pool.py
+
+diff --git a/.github/workflows/kadenz-endkontrolle.yml b/.github/workflows/kadenz-endkontrolle.yml
+new file mode 100644
+index 0000000..82a2785
+--- /dev/null
++++ b/.github/workflows/kadenz-endkontrolle.yml
+@@ -0,0 +1,187 @@
++# ============================================================
++#  KADENZ-ENDKONTROLLE (Premium-Fix 03.09.2026)
++#  ------------------------------------------------------------
++#  AUFTRAG: „Stelle sicher, dass am Montag/Mittwoch/Freitag 2 bis 3
++#  Blogartikel ZWINGEND veröffentlicht werden.“
++#
++#  KERNBEFUND (Mi 02.09.2026): Nur 1 statt 2–3 LIVE-Artikel. Ursache war
++#  eine Kette aus drei Fehlern:
++#    1) Ein fertiger Artikel scheiterte am Publish-Gate an einer bloßen
++#       Leerzeichen-URL (R8-URL-LEERZEICHEN) und wurde „gehalten“.
++#    2) Die Engine zählte diesen gleichtägigen Entwurf als belegten
++#       Tages-Slot → die Fallback-Slots (14:10/17:40 UTC) sahen den Tag
++#       als „voll“ und füllten das LIVE-Mindestziel nicht mehr auf.
++#    3) Kein Heiler hat die Fehlerklasse R8-URL-LEERZEICHEN behandelt,
++#       und es gab kein KI-unabhängiges Sicherheitsnetz.
++#
++#  DIESER WORKFLOW IST DAS LETZTE SICHERHEITSNETZ (4. Baustein):
++#  Er läuft an Mo/Mi/Fr um 21:05 UTC (23:05 MESZ) – NACH dem letzten
++#  Engine-Slot (17:40 UTC) und NACH der Produktions-Wache (20:00 UTC).
++#  Ablauf:
++#    1. Heilen (URL-Hygiene + deterministisch heilbare holds → Re-Queue
++#       + Kadenz-Fix: Re-Queue-Posts werden an Publikationstagen sofort
++#       wieder live geschaltet)
++#    2. LIVE-Zahl für heute zählen (nur draft: false, Frontmatter-Datum)
++#    3. Fehlt das Mindestziel → Reserve-Pool veröffentlichen
++#       (scripts/reserve_pool.py): fertige Premium-Evergreen-Artikel,
++#       die ohne KI-Verfügbarkeit live gehen können
++#    4. Qualitäts-Folgekette (Titel/Cover/URLs) + Commit + Push +
++#       expliziter Deploy-Anstoß (GITHUB_TOKEN-Commits triggern keine
++#       Workflows, deploy-catchup.yml fängt es zusätzlich ab)
++#    5. engine_issue --deficit am Ende: öffnet/schließt das Tagesdefizit-
++#       Issue automatisch – der Tag kann nie mehr still unter dem
++#       Mindestziel enden.
++# ============================================================
++name: Kadenz-Endkontrolle (Mo/Mi/Fr – 2–3 LIVE erzwingen)
++
++on:
++  schedule:
++    - cron: "5 21 * * 1,3,5"    # 23:05 MESZ – nach dem letzten Engine-Slot
++  workflow_dispatch: {}
++
++permissions:
++  contents: write
++  issues: write
++  actions: write
++
++concurrency:
++  group: kadenz-endkontrolle
++  cancel-in-progress: false
++
++env:
++  MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
++  STATUS: KADENZ-ENDKONTROLLE-STATUS.md
++
++jobs:
++  endkontrolle:
++    runs-on: ubuntu-latest
++    timeout-minutes: 20
++    steps:
++      - name: Repository auschecken (main)
++        uses: actions/checkout@v4
++        with:
++          ref: main
++
++      - name: Frischesten Stand holen (parallele Bots möglich)
++        run: |
++          for i in 1 2 3; do
++            git pull --ff-only origin main && break || sleep 5
++          done
++
++      - name: Python + Abhängigkeiten
++        uses: actions/setup-python@v7
++        with:
++          python-version: "3.12"
++      - name: pip installieren
++        run: pip install --quiet "pyyaml==6.0.2" pillow pillow-avif-plugin fonttools brotli
++
++      # ---------- Baustein 1: Heilung (deterministisch, kein KI) ----------
++      - name: URL-Hygiene-Selbsttest
++        run: python3 scripts/fix_url_hygiene.py --selftest
++
++      - name: URL-Hygiene – Leerzeichen-URLs heilen
++        run: python3 scripts/fix_url_hygiene.py --fix || echo "⚠ Restfunde siehe Log"
++
++      - name: URL-Hygiene – deterministisch heilbare holds entblocken
++        run: python3 scripts/fix_url_hygiene.py --heal-holds
++
++      - name: Kadenz-Selbsttest + Kadenz-Fix (Re-Queue-Promotion am Publikationstag)
++        run: |
++          python3 scripts/cadence_guard.py --selftest
++          python3 scripts/cadence_guard.py --fix
++
++      - name: Heilungen committen & pushen
++        id: heal
++        run: |
++          git config user.name "Kadenz-Backstop"
++          git config user.email "kadenz-backstop@users.noreply.github.com"
++          git add content/ CADENCE-GATE-REPORT.md DRAFT-LINK-REPORT.md 2>/dev/null || true
++          if git diff --cached --quiet; then
++            echo "changed=0" >> "$GITHUB_OUTPUT"
++            echo "Keine Heilungen nötig."
++          else
++            git commit -m "fix: URL-Hygiene + Kadenz-Heilung (Kadenz-Endkontrolle)"
++            scripts/git_sync.sh --push-only
++            echo "changed=1" >> "$GITHUB_OUTPUT"
++            echo "Heilungen gepusht."
++          fi
++
++      # ---------- Baustein 2: LIVE-Zahl für heute prüfen ----------
++      - name: Heutige LIVE-Zahl ermitteln
++        id: live
++        run: |
++          python3 - <<'PYEOF'
++          import datetime, os, sys
++          sys.path.insert(0, "scripts")
++          import cadence_guard as cg
++          min_d, max_d = cg.effective_limits()
++          posts = cg.load_posts()
++          today = datetime.date.today()
++          live = len(cg.published_on(posts, today))
++          drafts = sum(1 for p in posts if p["date"] == today and p["draft"])
++          print(f"live={live} drafts={drafts} min={min_d} max={max_d}")
++          with open(os.environ["STATUS"], "w", encoding="utf-8") as f:
++              f.write("# Kadenz-Endkontrolle – Status\n\n")
++              f.write(f"**Stand:** {datetime.datetime.now(datetime.timezone.utc):%Y-%m-%d %H:%M} UTC  \n")
++              f.write(f"**Publikationstag:** {cg.DAYS_DE[today.weekday()]} ({today.isoformat()})  \n")
++              f.write(f"**LIVE heute:** {live} (Ziel {min_d}–{max_d}, {drafts} Entwurf(e))  \n")
++          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
++              f.write(f"live={live}\nmin={min_d}\nmax={max_d}\n")
++          PYEOF
++
++      # ---------- Baustein 3: Reserve-Pool als KI-unabhängiges Netz ----------
++      - name: Reserve-Pool veröffentlichen (nur wenn LIVE unter Mindestziel)
++        id: reserve
++        if: ${{ fromJSON(steps.live.outputs.live) < fromJSON(steps.live.outputs.min) }}
++        run: |
++          python3 scripts/reserve_pool.py --publish-to-min
++          # Nach der Veröffentlichung dieselbe Qualitäts-Folgekette wie die
++          # Engine (Titel-Gate, Covers, URL-Hygiene) – dann committen.
++          python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate – Funde im Log"
++          python3 scripts/generate_covers.py || echo "⚠ Cover-Generator – Funde im Log"
++          python3 scripts/check_covers.py --fix || echo "⚠ Cover-Gate – Funde im Log"
++          python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Funde im Log"
++          git config user.name "Kadenz-Backstop"
++          git config user.email "kadenz-backstop@users.noreply.github.com"
++          git add content/ static/images/covers/ CADENCE-GATE-REPORT.md DRAFT-LINK-REPORT.md 2>/dev/null || true
++          if git diff --cached --quiet; then
++            echo "published=0" >> "$GITHUB_OUTPUT"
++            echo "⚠ Reserve-Pool konnte nicht füllen (Pool leer?) – Defizit wird gemeldet."
++          else
++            git commit -m "content: Reserve-Pool füllt LIVE-Mindestziel (Kadenz-Endkontrolle)"
++            scripts/git_sync.sh --push-only
++            echo "published=1" >> "$GITHUB_OUTPUT"
++            echo "Reserve-Veröffentlichung gepusht."
++          fi
++
++      - name: Deploy explizit anstoßen (GITHUB_TOKEN-Commits triggern keine Workflows)
++        if: ${{ steps.heal.outputs.changed == '1' || steps.reserve.outputs.published == '1' }}
++        uses: actions/github-script@v7
++        with:
++          script: |
++            await github.rest.actions.createWorkflowDispatch({
++              owner: context.repo.owner,
++              repo: context.repo.repo,
++              workflow_id: 'deploy.yml',
++              ref: 'main',
++            });
++            console.log('✅ Deploy ausgelöst (geheilte/veröffentlichte Inhalte werden live gebaut).');
++
++      # ---------- Baustein 4: Defizit sichtbar machen bzw. schließen ----------
++      - name: Tagesdefizit-Issue öffnen/schließen (engine_issue --deficit)
++        env:
++          GH_TOKEN: ${{ github.token }}
++        run: |
++          python3 scripts/engine_issue.py --deficit || echo "⚠ Defizit-Wache (nicht kritisch)"
++
++      - name: Status committen (kann nie einfrieren)
++        run: |
++          git config user.name "Kadenz-Backstop"
++          git config user.email "kadenz-backstop@users.noreply.github.com"
++          git add KADENZ-ENDKONTROLLE-STATUS.md
++          if git diff --cached --quiet; then
++            echo "Status unverändert."
++          else
++            git commit -m "docs: KADENZ-ENDKONTROLLE-STATUS aktualisiert"
++            scripts/git_sync.sh --push-only
++          fi
+diff --git a/scripts/reserve_pool.py b/scripts/reserve_pool.py
+new file mode 100644
+index 0000000..70e1c2f
+--- /dev/null
++++ b/scripts/reserve_pool.py
+@@ -0,0 +1,212 @@
++#!/usr/bin/env python3
++"""
++reserve_pool.py – Redaktions-Reserve-Pool („Zwingend 2–3 LIVE an Mo/Mi/Fr“)
++
++WARUM (Premium-Fix 03.09.2026, Auftrag „Mi 02.09.: nur 1 Artikel live“):
++  Die Content-Engine produziert 2–3 Artikel pro Publikationstag aus
++  KI-Generierung + Re-Queue-Recycling. Beide Quellen können an einem Tag
++  versagen (Provider-Ausfall, wiederholte Gate-Stopps). Damit die
++  Dauervorgabe „Mo/Mi/Fr 2–3 Artikel live“ NICHT mehr von der KI-Verfügbarkeit
++  abhängt, hält die Redaktion einen kleinen POOL fertiger Premium-Evergreen-
++  Artikel als Entwürfe vor (Frontmatter: `reserve: true`).
++
++  Nur die Kadenz-Endkontrolle (kadenz-endkontrolle.yml, 21:05 UTC an
++  Mo/Mi/Fr, NACH dem letzten Engine-Slot) bzw. die Engine selbst dürfen
++  Reserve-Artikel VERÖFFENTLICHEN – und nur, wenn der Tag sonst unter dem
++  LIVE-Mindestziel bliebe. Veröffentlichte Reserve-Artikel sind normale
++  live-Posts (draft: false, Datum = heute) und durchlaufen danach exakt
++  dieselben Deploy-Gates wie jeder andere Artikel.
++
++  Die Engine füllt den Pool nach erfolgreichen Produktionstagen selbsttätig
++  wieder auf (Reserve-Top-up) – der Pool trocknet also nie aus.
++
++SICHERHEIT:
++  * reserve:true-Entwürfe haben KEINE cadence_*-Felder → park_state liest
++    sie als „manual“ (Frank-Schutz): keine andere Automatik fasst sie an.
++  * Veröffentlicht wird NUR bis zum LIVE-Mindestziel und NUR an Mo/Mi/Fr
++    (Guard identisch zu cadence_guard.PUBLICATION_DAYS).
++  * Kein Reserve-Artikel wird je gelöscht oder überschrieben.
++
++MODI:
++  python3 scripts/reserve_pool.py --status          # Pool + heutige LIVE-Zahl
++  python3 scripts/reserve_pool.py --publish-to-min  # Lücke bis Min füllen
++  python3 scripts/reserve_pool.py --selftest        # Sabotage-Schutz
++"""
++
++import datetime
++import os
++import re
++import sys
++import tempfile
++from pathlib import Path
++
++ROOT = Path(__file__).resolve().parent.parent
++POSTS = ROOT / "content" / "posts"
++
++sys.path.insert(0, str(ROOT / "scripts"))
++import cadence_guard  # noqa: E402 – PUBLICATION_DAYS/load_posts (SSOT)
++
++
++def now_utc_iso() -> str:
++    return (datetime.datetime.now(datetime.timezone.utc)
++            - datetime.timedelta(minutes=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
++
++
++def _frontmatter(text: str) -> str:
++    parts = text.split("---", 2)
++    return parts[1] if len(parts) == 3 and parts[0] == "" else ""
++
++
++def is_reserve(text: str) -> bool:
++    m = re.search(r"(?m)^reserve:\s*(true|yes|1)\s*$", _frontmatter(text))
++    return bool(m)
++
++
++def is_draft(text: str) -> bool:
++    return bool(re.search(r"(?m)^draft:\s*true\s*$", _frontmatter(text)))
++
++
++def reserve_drafts(posts_dir: Path = POSTS) -> list:
++    """Alle Reserve-Entwürfe (draft: true + reserve: true), älteste zuerst."""
++    out = []
++    if not posts_dir.is_dir():
++        return out
++    for index in sorted(posts_dir.glob("*/index.md")):
++        text = index.read_text(encoding="utf-8")
++        if is_draft(text) and is_reserve(text):
++            out.append(index)
++    return out
++
++
++def live_count_today(posts_dir: Path = POSTS) -> int:
++    today = datetime.date.today()
++    posts = cadence_guard.load_posts(posts_dir)
++    return len(cadence_guard.published_on(posts, today))
++
++
++def publish_one(index: Path, when=None) -> str:
++    """Veröffentlicht EINEN Reserve-Artikel: draft:false, Datum = heute,
++    reserve-Marke wird durch reserve_published ersetzt (Audit-Trail)."""
++    text = index.read_text(encoding="utf-8")
++    iso = when or now_utc_iso()
++    text = re.sub(r"(?m)^date:\s*.*$", f"date: {iso}", text, count=1)
++    text = re.sub(r"(?m)^draft:\s*true\s*$", "draft: false", text, count=1)
++    text = re.sub(r"(?m)^reserve:\s*(true|yes|1)\s*$\n?",
++                  f"reserve_published: {iso[:10]}\n", text, count=1)
++    index.write_text(text, encoding="utf-8")
++    return iso
++
++
++def publish_to_min(min_per_day: int | None = None,
++                   posts_dir: Path = POSTS) -> list:
++    """Füllt die heutige LIVE-Lücke bis zum Mindestziel aus dem Reserve-Pool.
++
++    Nur an Publikationstagen (Mo/Mi/Fr). Rückgabe: Liste veröffentlichter
++    Slugs. Ist der Pool leer, bleibt die Lücke – die Endkontrolle meldet
++    das Defizit dann als Issue (engine_issue --deficit)."""
++    today = datetime.date.today()
++    if today.weekday() not in cadence_guard.PUBLICATION_DAYS:
++        print(f"Kein Publikationstag ({cadence_guard.DAYS_DE[today.weekday()]}) "
++              f"– Reserve-Pool bleibt unangetastet.")
++        return []
++    if min_per_day is None:
++        min_per_day = cadence_guard.effective_limits()[0]
++    published = []
++    for index in reserve_drafts(posts_dir):
++        if live_count_today(posts_dir) >= min_per_day:
++            break
++        iso = publish_one(index)
++        published.append(index.parent.name)
++        print(f"  🆘 RESERVE live geschaltet: {index.parent.name} "
++              f"(datiert {iso[:10]})")
++    if published:
++        print(f"Reserve-Pool: {len(published)} Artikel veröffentlicht – "
++              f"jetzt {live_count_today(posts_dir)} live heute "
++              f"(Ziel ≥ {min_per_day}).")
++    else:
++        live = live_count_today(posts_dir)
++        pool = len(reserve_drafts(posts_dir))
++        print(f"Reserve-Pool: keine Veröffentlichung nötig/möglich – "
++              f"{live} live heute, Ziel ≥ {min_per_day}, Pool: {pool}.")
++    return published
++
++
++def run_selftest() -> list:
++    fehler = []
++    with tempfile.TemporaryDirectory() as tmp:
++        fx = Path(tmp) / "content" / "posts"
++        fx.mkdir(parents=True)
++        # Reserve-Entwurf
++        d1 = fx / "2026-09-01-reserve-a"
++        d1.mkdir()
++        (d1 / "index.md").write_text(
++            "---\ntitle: \"Reserve A\"\n"
++            "date: 2026-09-01T06:00:00Z\ndraft: true\n"
++            "reserve: true\n---\n\nBody.\n", encoding="utf-8")
++        # normaler manueller Entwurf (ohne reserve) – darf NIE angefasst werden
++        d2 = fx / "2026-09-01-manuell"
++        d2.mkdir()
++        (d2 / "index.md").write_text(
++            "---\ntitle: \"Manuell\"\n"
++            "date: 2026-09-01T06:00:00Z\ndraft: true\n"
++            "---\n\nBody.\n", encoding="utf-8")
++        pool = reserve_drafts(fx)
++        if len(pool) != 1 or pool[0].parent.name != "2026-09-01-reserve-a":
++            fehler.append(f"reserve_drafts filtert falsch: {[p.parent.name for p in pool]}")
++
++        # publish_one: draft false, Datum heute, reserve-Marke ersetzt
++        # (direkter Funktionsaufruf – unabhängig vom Wochentag testbar)
++        published = pool[0]
++        publish_one(published, when="2026-09-04T06:00:00Z")
++        text = published.read_text(encoding="utf-8")
++        if "draft: false" not in text or "reserve: true" in text:
++            fehler.append("publish_one ließ draft/reserve-Marke falsch zurück")
++        if "reserve_published: 2026-09-04" not in text:
++            fehler.append("reserve_published-Audit-Zeile fehlt")
++        if "date: 2026-09-04T06:00:00Z" not in text:
++            fehler.append("Re-Dating auf heute fehlt")
++
++        # manueller Entwurf bleibt unangetastet (Pool-Liste leer danach)
++        if len(reserve_drafts(fx)) != 0:
++            fehler.append("manueller Entwurf wurde in den Pool gezählt")
++    return fehler
++
++
++def main() -> int:
++    args = sys.argv[1:]
++    if "--selftest" in args:
++        errs = run_selftest()
++        if errs:
++            print("🛑 RESERVE-POOL-SELFTEST FEHLGESCHLAGEN:")
++            for e in errs:
++                print(f"   - {e}")
++            return 2
++        print("✅ Reserve-Pool-Selbsttest grün (Filter, Publish, "
++              "Draft-Schutz, Audit-Zeile).")
++        return 0
++
++    if "--status" in args or not args:
++        pool = reserve_drafts()
++        live = live_count_today()
++        min_d, max_d = cadence_guard.effective_limits()
++        today = datetime.date.today()
++        pub = today.weekday() in cadence_guard.PUBLICATION_DAYS
++        print(f"Reserve-Pool: {len(pool)} Artikel (Ziel-Obergrenze siehe "
++              f"Engine-Env RESERVE_TARGET)")
++        for p in pool:
++            print(f"  - {p.parent.name}")
++        print(f"Heute ({cadence_guard.DAYS_DE[today.weekday()]}, "
++              f"{today.isoformat()}): {live} live · Ziel {min_d}–{max_d} · "
++              f"{'Publikationstag' if pub else 'kein Publikationstag'}.")
++        return 0
++
++    if "--publish-to-min" in args:
++        publish_to_min()
++        return 0
++
++    print(__doc__)
++    return 1
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+-- 
+2.39.5
+

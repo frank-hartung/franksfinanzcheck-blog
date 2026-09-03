@@ -1,0 +1,74 @@
+name: Blog-Gesundheits-Check (täglich)
+
+on:
+  schedule:
+    - cron: "45 5 * * *"   # 07:45 MESZ – entzerrt (Profi-Cleanup 20.08.)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: blog-health
+  cancel-in-progress: false
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v7
+      - run: pip install -q pyyaml pillow pillow-avif-plugin
+
+      # KADENZ-SICHERUNG (26.08.2026): die tägliche Wache stellt sicher,
+      # dass die Dauervorgabe (Mo/Mi/Fr, 2–3 Artikel/Tag – CADENCE-REPORT.md
+      # Regel 2) auch ZWISCHEN den Publishing-Slots eingehalten wird:
+      # Selbsttest (Gate muss lauffähig sein) + Selbstheilung (Zurückstufung
+      # + Re-Queue) + Titel-Gate (R1–R5) + Cover-Gate (Varianten, Stale,
+      # Brand, C4 Text-Komplettheit). Heilungen landen im Commit unten.
+
+      # URL-HYGIENE (PREMIUM-FIX 03.09.2026): R8-URL-LEERZEICHEN ist die
+      # Fehlerklasse, die am 02.09.2026 einen fertigen Artikel am Publish-
+      # Gate gestoppt hat (Tag: 1 statt 2–3 LIVE). Die Wache heilt solche
+      # URLs deterministisch und entblockt ausschließlich dadurch gehaltene
+      # Posts (Re-Queue) – VOR der Kadenz-Heilung, damit eine Promotion am
+      # Publikationstag auf sauberem Content aufbaut.
+      - run: python3 scripts/fix_url_hygiene.py --selftest
+      - run: python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
+      - run: python3 scripts/fix_url_hygiene.py --heal-holds
+
+      - run: python3 scripts/cadence_guard.py --selftest
+      - run: python3 scripts/cadence_guard.py --fix
+      - run: python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate – Funde im Log (R5 heilt nicht automatisch)"
+      - run: python3 scripts/check_covers.py --fix || echo "⚠ Cover-Gate – Funde im Log"
+
+      # DRAFT-LINK-GATE (PREM-AUDIT 26.08.2026): heilt auch ZWISCHEN den
+      # Publishing-Slots tote Post-Links (Kadenz-Heilung → URL weg aus dem
+      # Build → kontextuelle Links defekt; Issue #85). Ankertext bleibt 1:1.
+      - run: python3 scripts/draft_link_healer.py --selftest
+      - run: python3 scripts/draft_link_healer.py --fix
+
+      # TEXTVERSTÄNDNIS-WACHE (01.09.2026): hält das Premium-Level der
+      # Textverständnis-Regeln R2–R8 DAUERHAFT – nicht nur am Publikationstag.
+      # 1) Selbsttest (Guard muss lauffähig sein – Sabotage-Schutz)
+      # 2) R8-Anker-Heiler (selbstheilend: Ankertext-Ziel-Kohärenz,
+      #    deterministischer Kanon, kein freies KI-Rewriting)
+      # 3) Komplett-Audit über alle Artikel → schreibt TEXTVERSTAENDNIS-REPORT.md
+      #    (harte + weiche Funde; weiche Funde brechen den Workflow NICHT,
+      #    werden aber im Report sichtbar und vom Heiler bereinigt).
+      - run: python3 scripts/textverstaendnis_guard.py --selftest
+      - run: python3 scripts/fix_r8_anker.py --selftest
+      - run: python3 scripts/fix_r8_anker.py --fix || echo "⚠ R8-Anker-Heiler - Restfunde siehe TEXTVERSTAENDNIS-REPORT.md"
+      - run: python3 scripts/textverstaendnis_guard.py
+
+      - run: python3 scripts/blog_health_gate.py
+      - run: |
+          git config user.name "Agent (Arena.ai)"
+          git config user.email "agent@franksfinanzcheck.de"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen – nichts zu pushen."
+          else
+            git commit -m "fix(auto): dauerhafte Blog-Gesundheit – Fehler geheilt"
+            scripts/git_sync.sh --push-only
+          fi

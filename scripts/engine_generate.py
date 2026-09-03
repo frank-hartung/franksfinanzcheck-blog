@@ -46,6 +46,15 @@ from check_titles import COMPOUND_FIXES, TIME_TAIL as RE_ANHAENGSEL  # noqa: E40
 from post_utils import safe_title_cut  # noqa: E402 – Wortgrenzen-Kürzung (nie Wortbruch)
 import cadence_guard  # noqa: E402 – Single Source of Truth für die Kadenz
 
+# PREMIUM-FIX 03.09.2026 (Mi 02.09.: nur 1 statt 2–3 LIVE): Jeder frisch
+# gespeicherte Artikel wird SOFORT deterministisch auf Leerzeichen-URLs
+# geprüft (R8-URL-LEERZEICHEN). Damit kann kein neu generierter Beitrag je
+# einen solchen Fehler in den Commit tragen und am Publish-Gate scheitern.
+try:
+    import fix_url_hygiene  # noqa: E402
+except Exception:  # pragma: no cover – Engine darf nie am Heiler scheitern
+    fix_url_hygiene = None
+
 
 def normalize_title(title: str) -> str:
     """Deterministische Titel-Normalisierung (FrankAutoOps-Gate R2):
@@ -322,22 +331,6 @@ def make_draft(topic, used_titles):
 PUBLICATION_DAYS = cadence_guard.PUBLICATION_DAYS
 
 
-def count_articles_today():
-    """Zaehlt alle HEUTE VERÖFFENTLICHTE Artikel (live UND Entwurf) –
-    Entwuerfe zaehlen mit, sonst wuerde die Schleife bei schwacher KI
-    beliebig viele Drafts ablegen.
-
-    Gezählt wird über das Frontmatter-`date:`-Feld (Single Source of
-    Truth, s. cadence_guard) – nicht über den Ordner-Datumspräfix, der
-    bei Re-Queue/Re-Dating (heilende Wachen) bewusst alt bleibt."""
-    today = datetime.date.today().isoformat()
-    n = 0
-    for p in cadence_guard.load_posts():
-        if p["date"].isoformat() == today:
-            n += 1
-    return n
-
-
 # ---------------------------------------------------------------------------
 #  RECYCLING ZÄHLT NICHT ALS NEUPRODUKTION  (Fix 29.08.2026)
 #  ---------------------------------------------------------------------------
@@ -393,47 +386,65 @@ def ist_recycelt(post, promoted_slugs):
 
 
 def tages_bilanz(posts, promoted_slugs, max_per_day, min_per_day):
-    """Trennt ECHTE Neuproduktion von recycelten Re-Queue-Posts.
+    """Trennt ECHTE LIVE-Neuproduktion von recycelten Re-Queue-Posts
+    und von bloßen Entwürfen.
+
+    PREMIUM-FIX 03.09.2026 (Kernbefund Mi 02.09.2026): Gezählt wird NUR,
+    was WIRKLICH live ist (draft: false, Datum heute). Ein am Publish-Gate
+    zurückgestufter Artikel (draft: true, Datum heute) belegt seitdem
+    KEINEN Slot mehr – vorher sahen die Fallback-Slots (14:10/17:40 UTC)
+    einen solchen Tag als „voll (2/2)“ und füllten das LIVE-Mindestziel
+    nicht mehr auf. Entwürfe werden separat ausgewiesen, erfüllen aber
+    niemals das Tagesziel.
 
     Bewusst rein (keine Seiteneffekte) -> regressionstestbar.
     """
     today = datetime.date.today().isoformat()
     heute = [p for p in posts if p["date"].isoformat() == today]
-    recycelt = [p for p in heute if ist_recycelt(p, promoted_slugs)]
-    neu = [p for p in heute if not ist_recycelt(p, promoted_slugs)]
+    heute_live = [p for p in heute if not p["draft"]]
+    drafts = [p for p in heute if p["draft"]]
+    recycelt = [p for p in heute_live if ist_recycelt(p, promoted_slugs)]
+    neu = [p for p in heute_live if not ist_recycelt(p, promoted_slugs)]
     return {
-        "total": len(heute),
+        "total": len(heute_live),          # NUR live (draft: false)
         "neu": len(neu),
         "recycelt": len(recycelt),
+        "drafts": len(drafts),
         "recycle_kapazitaet": max(0, max_per_day - MIN_NEUE_PRO_TAG),
-        "ziel_neu": min_per_day,
-        "slots_frei": max(0, max_per_day - len(heute)),
-        "neu_noetig": max(0, min_per_day - len(neu)),
+        "ziel_neu": MIN_NEUE_PRO_TAG,
+        "slots_frei": max(0, max_per_day - len(heute_live)),
+        "neu_noetig": max(0, MIN_NEUE_PRO_TAG - len(neu)),
+        "live_noetig": max(0, min_per_day - len(heute_live)),
     }
 
 
 def produktions_entscheidung(bilanz, max_per_day, min_per_day):
     """Entscheidet, ob (noch) ein neuer Artikel erzeugt werden muss.
 
-    Liefert (entscheidung, meldung); entscheidung ist
+    Alle Zähler sind LIVE-Zähler (draft: false) – Entwürfe erfüllen das
+    Tagesziel nie. Liefert (entscheidung, meldung); entscheidung ist
     'WEITER' | 'STOP' | 'DEADLOCK'.
     """
     if bilanz["neu"] == 0 and bilanz["total"] >= max_per_day:
         return ("DEADLOCK",
-                f"RECYCLE-DEADLOCK: {bilanz['total']}/{max_per_day} Posts heute sind "
-                f"ausschließlich Re-Queue-Recycling – 0 neue Artikel. "
-                f"Warteschlange (cadence_wait) prüfen bzw. MIN_NEUE_PRO_TAG erhöhen.")
+                f"RECYCLE-DEADLOCK: {bilanz['total']}/{max_per_day} LIVE-Posts "
+                f"heute sind ausschließlich Re-Queue-Recycling – 0 neue "
+                f"Artikel. Warteschlange (cadence_wait) prüfen bzw. "
+                f"MIN_NEUE_PRO_TAG erhöhen.")
     if bilanz["total"] >= max_per_day:
         return ("STOP",
-                f"Tageslimit erreicht ({bilanz['total']}/{max_per_day} · "
+                f"Tageslimit erreicht (LIVE {bilanz['total']}/{max_per_day} · "
                 f"{bilanz['neu']} neu, {bilanz['recycelt']} recycelt).")
     if bilanz["neu"] >= min_per_day:
         return ("STOP",
-                f"Neuproduktion erfüllt ({bilanz['neu']}/{min_per_day} neu, "
-                f"{bilanz['recycelt']} recycelt, {bilanz['total']}/{max_per_day} gesamt).")
+                f"Neuproduktion LIVE erfüllt ({bilanz['neu']}/{min_per_day} neu, "
+                f"{bilanz['recycelt']} recycelt, {bilanz['total']}/{max_per_day} "
+                f"live gesamt).")
     return ("WEITER",
-            f"{bilanz['slots_frei']} Slot(s) frei, "
-            f"{bilanz['neu_noetig']} neue Artikel nötig.")
+            f"{bilanz['slots_frei']} LIVE-Slot(s) frei, "
+            f"{bilanz['live_noetig']} weitere LIVE-Artikel nötig "
+            f"({bilanz['neu_noetig']} davon neu). Entwürfe "
+            f"({bilanz['drafts']}) zählen NICHT als veröffentlicht.")
 
 
 def _load_topic_weights():
@@ -479,8 +490,99 @@ def _weighted_choose(freie, weights):
         return random.choice(freie)
 
 
-def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
+def _hygiene_neuer_artikel(filename):
+    """PREMIUM-FIX 03.09.2026: Frisch gespeicherte Artikel sofort auf
+    Leerzeichen-URLs heilen (R8-URL-LEERZEICHEN). Ein solcher Fehler hat am
+    02.09.2026 einen fertigen Artikel am Publish-Gate stoppen lassen und
+    den Tag auf 1 Artikel gedrückt – hier wird die Fehlerklasse an der
+    Quelle eliminiert, VOR dem Commit."""
+    if fix_url_hygiene is None:
+        return
+    try:
+        text = open(filename, encoding="utf-8").read()
+        new_text, n, _ = fix_url_hygiene.heal_text(
+            text, fix_url_hygiene.collect_slugs())
+        if n:
+            with open(filename, "w", encoding="utf-8") as fh:
+                fh.write(new_text)
+            print(f"  🧹 URL-Hygiene: {n} Leerzeichen-URL(s) sofort geheilt")
+    except Exception as exc:  # noqa: BLE001 – niemals die Engine stoppen
+        print(f"  ⚠ URL-Hygiene übersprungen: {exc}")
+
+
+def _reserve_topup(topics, quelle, used_titles, used_topics,
+                   reserve_target=None):
+    """RESERVE-POOL-Top-up (Premium-Fix 03.09.2026, „zwingend 2–3 LIVE“):
+    Nach einem GESUNDEN Produktionstag wird der Redaktions-Reserve-Pool
+    (fertige Premium-Entwürfe, `reserve: true`) wieder aufgefüllt, falls er
+    unter dem Ziel liegt. Der Pool ist das KI-unabhängige Sicherheitsnetz
+    der Kadenz-Endkontrolle – er darf nie austrocknen.
+
+    Best-effort: Nur wenn eine Profi-Generierung gelingt, wird EIN weiterer
+    Artikel als Reserve gespeichert (draft, engine_level: reserve). Er geht
+    NICHT live, belegt keinen Slot und wird von keiner anderen Automatik
+    angefasst (keine cadence_*-Felder). Rückgabe: 1 bei Erfolg, sonst 0."""
+    if reserve_target is None:
+        try:
+            reserve_target = int(os.environ.get("RESERVE_TARGET") or "2")
+        except ValueError:
+            reserve_target = 2
+    try:
+        import reserve_pool as rp
+    except Exception as exc:  # noqa: BLE001
+        print(f"  ⚠ Reserve-Pool nicht verfügbar: {exc}")
+        return 0
+    try:
+        if len(rp.reserve_drafts()) >= reserve_target:
+            return 0
+        freie = [t for t in topics
+                 if not g.topic_already_covered(t["title"], used_titles)
+                 and id(t) not in used_topics]
+        if not freie:
+            return 0
+        topic = freie[0]
+        keywords = topic.get("keywords")
+        pin = None
+        result, info = try_generate(topic, keywords, pin, used_titles,
+                                    relaxed=False, max_attempts=3)
+        if not result:
+            print(f"  ⚠ Reserve-Top-up: keine Profi-Generierung ({info})")
+            return 0
+        title, desc, body = result
+        filename, slug = save_article(
+            title, desc, body, draft=True,
+            inspiration=topic.get("title"), pillar=topic.get("pillar"),
+            keywords=keywords,
+            pinwand=topic.get("pinwand"),
+            pin_title=topic.get("pin_titel"),
+            pin_description=topic.get("pin_beschreibung"),
+            level="reserve",
+        )
+        # reserve: true direkt hinter draft setzen (kein cadence_*-Feld!)
+        with open(filename, encoding="utf-8") as fh:
+            lines = fh.readlines()
+        for i, line in enumerate(lines):
+            if line.startswith("draft:"):
+                lines.insert(i + 1, "reserve: true\n")
+                break
+        with open(filename, "w", encoding="utf-8") as fh:
+            fh.writelines(lines)
+        _hygiene_neuer_artikel(filename)
+        used_titles.add(title.lower())
+        print(f"  🛟 Reserve-Pool aufgefüllt: {slug} (draft, {info})")
+        return 1
+    except Exception as exc:  # noqa: BLE001 – Top-up darf nie die Engine brechen
+        print(f"  ⚠ Reserve-Top-up fehlgeschlagen (nicht kritisch): {exc}")
+        return 0
+
+
+def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics,
+                        allow_draft=True):
     """Erzeugt EINEN Artikel (Profi -> Relaxed -> Draft-Rettung).
+
+    allow_draft=False (03.09.2026): keine zweite Rescue-Entwurf-Kopie pro
+    Tag – wenn bereits ein Entwurf existiert, versucht die Engine weiter
+    LIVE-Qualität zu erzeugen, statt den Tag mit Entwürfen zuzuparken.
     Liefert (level, draft_saved) oder None bei fatalem Fehler."""
     freie = [t for t in topics
              if not g.topic_already_covered(t["title"], used_titles)
@@ -525,6 +627,15 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
     # EBENE 3 – Draft-Rettung
     draft_saved = False
     if not result:
+        if not allow_draft:
+            print("→ Ebene 3 (Draft-Rettung) bewusst übersprungen: Es existiert "
+                  "bereits ein Entwurf für heute bzw. der Tag hat schon "
+                  "Live-Inhalt – kein zweiter Rescue-Entwurf. Die Engine "
+                  "versucht weiter LIVE-Qualität (Folge-Slot/Endkontrolle "
+                  "greifen bei anhaltendem Ausfall).")
+            return (None, False,
+                    f"Thema: {topic['title'][:60]} | keine Ebene-3-Rettung "
+                    f"(Doppel-Entwurf verhindert)")
         print("→ Ebene 3 (Draft-Rettung) …")
         title, desc, body = make_draft(topic, used_titles)
         try:
@@ -537,6 +648,7 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
                 pin_description=topic.get("pin_beschreibung"),
                 level="draft",
             )
+            _hygiene_neuer_artikel(filename)
             used_titles.add(title.lower())  # Draft-Thema nicht doppelt ziehen
             draft_saved = True
             print(f"  ✓ Entwurf gesichert: {slug} (draft: true)")
@@ -557,6 +669,7 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
                 pin_description=topic.get("pin_beschreibung"),
                 level=level,
             )
+            _hygiene_neuer_artikel(filename)
             print(f"  ✓ Artikel veröffentlicht ({level}): {slug}")
         except Exception as exc:  # noqa: BLE001
             print(f"  ✗ Speichern fehlgeschlagen: {exc}")
@@ -569,7 +682,111 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics):
     return level, draft_saved, status_line
 
 
+def run_selftest() -> list:
+    """Regressionstest der LIVE-Bilanz (PREMIUM-FIX 03.09.2026).
+
+    Beweist die vier Kernfälle der Dauervorgabe Mo/Mi/Fr 2–3 LIVE:
+      a) 2 neue LIVE + 1 gleichtägiger Gate-Entwurf (der 02.09.-Fall):
+         WEITER → die Fallback-Slots füllen das LIVE-Mindestziel auf.
+      b) Nur Entwürfe, 0 LIVE: WEITER (Refill-Versuch, kein „voll“).
+      c) Ausschließlich Re-Queue-Recycling bis zum Maximum: DEADLOCK.
+      d) 2 neue LIVE ohne Recycling (Ziel erreicht): STOP.
+    Läuft ohne API-Keys und ohne Seiteneffekte auf synthetischen Posts."""
+    fehler = []
+    today = datetime.date.today().isoformat()
+
+    def post(date_iso, name, draft=False, slug=None):
+        # Der Slug trägt bewusst den Ordner-Datumspräfix: Für ist_recycelt
+        # zählt, ob der Präfix zum Frontmatter-Datum passt.
+        slug = slug or f"{date_iso}-{name}"
+        return {
+            "path": f"/tmp/{slug}/index.md", "slug": slug,
+            "date": datetime.date.fromisoformat(date_iso),
+            "date_raw": f"{date_iso}T06:00:00Z",
+            "draft": draft, "wait": False, "state": "live",
+            "grund": None, "demoted": None, "age_days": None,
+        }
+
+    # (a) DER 02.09.-Fall: 1 neuer LIVE + 1 gleichtägiger Gate-Entwurf
+    #     (handytarif, vom publish_gate auf draft zurückgestuft) – die alte
+    #     Bilanz zählte den Entwurf als „voll“ (2/2) und stoppte die Slots.
+    posts = [
+        post(today, "a-live", draft=False),
+        post(today, "b-gate-entwurf", draft=True),
+    ]
+    bilanz = tages_bilanz(posts, set(), 2, 2)
+    if bilanz["total"] != 1 or bilanz["drafts"] != 1:
+        fehler.append(f"(a) LIVE-Bilanz falsch: {bilanz}")
+    entscheidung, _ = produktions_entscheidung(bilanz, 2, 2)
+    if entscheidung != "WEITER":
+        fehler.append(f"(a) 02.09-Fall: erwartet WEITER (Refill), bekam "
+                      f"{entscheidung} – der Kernfehler wäre nicht behoben")
+
+    # (b) nur Entwürfe, 0 LIVE → weiter versuchen (niemals „Tag voll“)
+    posts = [
+        post(today, "draft-1", draft=True),
+        post(today, "draft-2", draft=True),
+    ]
+    bilanz = tages_bilanz(posts, set(), 3, 2)
+    entscheidung, _ = produktions_entscheidung(bilanz, 3, 2)
+    if entscheidung != "WEITER":
+        fehler.append(f"(b) Nur-Entwürfe-Tag: erwartet WEITER, bekam {entscheidung}")
+
+    # (c) reines Recycling bis zum Maximum → DEADLOCK (kein Schein-Erfolg)
+    #     Ordnerpräfix 2026-08-19 ≠ Datum heute → alles recycelt.
+    posts = [
+        post(today, "recycle-1", slug="2026-08-19-alt-recycle-1"),
+        post(today, "recycle-2", slug="2026-08-19-alt-recycle-2"),
+        post(today, "recycle-3", slug="2026-08-19-alt-recycle-3"),
+    ]
+    bilanz = tages_bilanz(posts, set(), 3, 2)
+    if bilanz["total"] != 3 or bilanz["neu"] != 0:
+        fehler.append(f"(c) Recycling-Erkennung falsch: {bilanz}")
+    entscheidung, _ = produktions_entscheidung(bilanz, 3, 2)
+    if entscheidung != "DEADLOCK":
+        fehler.append(f"(c) reines Recycling: erwartet DEADLOCK, bekam {entscheidung}")
+
+    # (d) 2 neue LIVE, kein Recycling, Max 3 → STOP (Tagesziel LIVE erfüllt)
+    posts = [
+        post(today, "neu-1"),
+        post(today, "neu-2"),
+    ]
+    bilanz = tages_bilanz(posts, set(), 3, 2)
+    entscheidung, meldung = produktions_entscheidung(bilanz, 3, 2)
+    if entscheidung != "STOP":
+        fehler.append(f"(d) 2 neue LIVE: erwartet STOP, bekam {entscheidung}")
+    if "live" not in meldung.lower():
+        fehler.append("(d) STOP-Meldung weist LIVE-Ziel nicht aus")
+
+    # (e) 1 Recycling + 1 neuer LIVE bei Max 3/Min 2: LIVE 2/2 erfüllt, aber
+    #     das NEU-Ziel (mindestens 1 neue Produktion pro Tag, hier offen bei
+    #     neu=0) verlangt einen weiteren NEUEN Artikel → WEITER
+    posts = [
+        post(today, "neu-1"),
+        post(today, "recycle-1", slug="2026-08-19-alt-recycle-1"),
+    ]
+    bilanz = tages_bilanz(posts, {"2026-08-19-alt-recycle-1"}, 3, 2)
+    if bilanz["total"] != 2 or bilanz["neu"] != 1:
+        fehler.append(f"(e) Bilanz falsch: {bilanz}")
+    entscheidung, _ = produktions_entscheidung(bilanz, 3, 2)
+    if entscheidung != "WEITER":
+        fehler.append(f"(e) 1 Recycling + 1 neu (LIVE 2/2, aber NEU-Ziel "
+                      f"offen): erwartet WEITER, bekam {entscheidung}")
+    return fehler
+
+
 def main():
+    if "--selftest" in sys.argv:
+        errs = run_selftest()
+        if errs:
+            print("🛑 ENGINE-SELFTEST FEHLGESCHLAGEN – die Tages-Bilanz ist defekt:")
+            for e in errs:
+                print(f"   - {e}")
+            return 2
+        print("✅ ENGINE-SELFTEST bestanden (LIVE-Bilanz: Gate-Entwurf blockiert "
+              "keine Slots mehr, Refill, DEADLOCK- und STOP-Fälle).")
+        return 0
+
     max_per_day = int(os.environ.get("MAX_ARTIKEL_PRO_TAG") or "3")
     min_per_day = int(os.environ.get("MIN_ARTIKEL_PRO_TAG") or "2")
     # DAUERVORGABE-Floor: An Publikationstagen (Mo/Mi/Fr) erscheinen MINDESTENS
@@ -622,16 +839,6 @@ def main():
     except Exception as exc:  # noqa: BLE001 – Heilung darfs nicht bremsen
         print(f"⚠ Cadence-Re-Queue fehlgeschlagen (nicht kritisch): {exc}")
 
-    # Tages-Guard (NEU 29.08.2026: trennt echte Produktion von Recycling)
-    bilanz = tages_bilanz(cadence_guard.load_posts(), promoted_slugs,
-                          max_per_day, min_per_day)
-    entscheidung, meldung = produktions_entscheidung(bilanz, max_per_day, min_per_day)
-    if entscheidung != "WEITER":
-        print(meldung)
-        write_status(meldung,
-                     level=("WARN" if entscheidung == "DEADLOCK" else "OK"))
-        return 0
-
     used_titles = g.existing_titles()
     used_topics = set()
     if pin_topics:
@@ -645,37 +852,69 @@ def main():
         topics = g.load_topics()
         quelle = "Themenpool"
 
-    # 2-3 Artikel pro Publikationstag: bis zum Tageslimit auffüllen –
-    # aber NUR so lange, wie das NEU-Ziel noch nicht erreicht ist
-    # (Recycling erfüllt das Ziel nicht, s. tages_bilanz).
+    # 2-3 Artikel pro Publikationstag – LIVE gezählt (03.09.2026): Fülle auf,
+    # solange das LIVE-Mindestziel oder das NEU-Ziel fehlt; Entwürfe belegen
+    # keine Slots. Versuchs-Deckel pro Slot verhindert Endlos-Drafting bei
+    # KI-Ausfall (die Rescue-Ebene greift nur 1× pro Tag).
+    attempt_cap = max(2 * max_per_day, 4)
     results = []
+    attempts = 0
     while True:
-        out = publish_one_article(topics, quelle, pin_topics, used_titles, used_topics)
-        if out is None:
-            break
-        level, draft_saved, status_line = out
-        results.append(status_line)
         bilanz = tages_bilanz(cadence_guard.load_posts(), promoted_slugs,
                               max_per_day, min_per_day)
-        entscheidung, meldung = produktions_entscheidung(bilanz, max_per_day, min_per_day)
+        entscheidung, meldung = produktions_entscheidung(
+            bilanz, max_per_day, min_per_day)
         if entscheidung != "WEITER":
+            print(meldung)
             break
+        if attempts >= attempt_cap:
+            print(f"✋ {attempt_cap} Generierungs-Versuche in diesem Slot ohne "
+                  f"erfülltes LIVE-Ziel – Stopp (Folge-Slot & Endkontrolle "
+                  f"prüfen, Defizit-Issue wird geöffnet).")
+            break
+        # Draft-Rettung nur einmal pro Tag und nur an einem Tag ohne Live:
+        # verhindert, dass schwache KI den Tag mit Entwürfen „vollparkt“.
+        allow_draft = (bilanz["total"] == 0 and bilanz["drafts"] == 0)
+        out = publish_one_article(topics, quelle, pin_topics, used_titles,
+                                  used_topics, allow_draft=allow_draft)
+        attempts += 1
+        if out is None:
+            break  # fataler Fehler
+        level, draft_saved, status_line = out
+        if level is not None:
+            results.append(status_line)
 
+    # Abschluss-Bilanz (LIVE!)
+    bilanz = tages_bilanz(cadence_guard.load_posts(), promoted_slugs,
+                          max_per_day, min_per_day)
+    # RESERVE-POOL-Top-up (03.09.2026): Nur an Tagen, an denen die LIVE-
+    # Produktion ihr Ziel erreicht hat, wird der Reserve-Pool wieder
+    # aufgefüllt – der Pool ist das KI-unabhängige Sicherheitsnetz für
+    # Ausfall-Tage und darf nie austrocknen.
+    if (bilanz["total"] >= min_per_day and bilanz["neu"] >= MIN_NEUE_PRO_TAG):
+        try:
+            _reserve_topup(topics, quelle, used_titles, used_topics)
+        except Exception as exc:  # noqa: BLE001
+            print(f"  ⚠ Reserve-Top-up übersprungen: {exc}")
+    bilanz = tages_bilanz(cadence_guard.load_posts(), promoted_slugs,
+                          max_per_day, min_per_day)
     total = bilanz["total"]
-    if total == 0:
-        write_status("Kompletter Ausfall – kein Artikel, kein Draft.", level="FAIL")
+    if total == 0 and bilanz["drafts"] == 0:
+        write_status("Kompletter Ausfall – kein Artikel, kein Draft.",
+                     level="FAIL")
         return 1
-    levels = ", ".join(r.split("|")[1].strip() for r in results)
-    live = total - sum(1 for r in results if "Entwurf gesichert" in r)
-    note = (f"{total} Artikel heute ({'live: ' + str(live) if live else 'nur Entwürfe'})"
-            f" · {bilanz['neu']} NEU · {bilanz['recycelt']} recycelt | "
-            f"Ziel: {min_per_day}-{max_per_day} an Mo/Mi/Fr")
-    if bilanz["neu"] == 0:
+    levels = (", ".join(r.split("|")[1].strip() for r in results)
+              if results else "–")
+    note = (f"{total} Artikel live heute ({bilanz['neu']} NEU · "
+            f"{bilanz['recycelt']} recycelt · {bilanz['drafts']} Entwurf) "
+            f"| Ziel: {min_per_day}-{max_per_day} LIVE an Mo/Mi/Fr")
+    if bilanz["neu"] == 0 and total > 0:
         note += " | ⚠ KEINE Neuproduktion – Recycling zählt nicht als Produktion"
     if total < min_per_day:
-        note += " | ⚠ unter Mindestziel"
-    write_status(note, level="OK")
-    print(f"✅ {note}")
+        note += " | ⚠ unter LIVE-Mindestziel"
+    level = "WARN" if total < min_per_day else "OK"
+    write_status(note, level=level)
+    print(f"{'⚠️' if total < min_per_day else '✅'} {note}")
     return 0
 
 

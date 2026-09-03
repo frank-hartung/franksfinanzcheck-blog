@@ -59,6 +59,19 @@ def publish(path):
     if "draft: true" not in content:
         print(f"  – übersprungen (kein Entwurf): {slug_of(path)}")
         return 0
+    # 0) URL-Hygiene (PREMIUM-FIX 03.09.2026): auch die manuelle Freigabe
+    #    darf keinen Artikel mit Leerzeichen-URL (R8-URL-LEERZEICHEN) live
+    #    schalten – das Gate würde ihn sofort wieder halten. Deterministisch,
+    #    nur eindeutig auflösbare URLs werden korrigiert.
+    try:
+        import fix_url_hygiene
+        slugs = fix_url_hygiene.collect_slugs()
+        healed, n, _ = fix_url_hygiene.heal_text(content, slugs)
+        if n:
+            content = healed
+            print(f"  🧹 URL-Hygiene: {n} Leerzeichen-URL(s) vor Freigabe geheilt")
+    except Exception as exc:  # noqa: BLE001 – nie am Heiler scheitern
+        print(f"  ⚠ URL-Hygiene übersprungen: {exc}")
     # 1) Datum auf heute (egal welches Format), 2) Park-Felder räumen,
     #    3) draft: false – alles über die regulären Schreiber.
     heute = datetime.date.today().isoformat()

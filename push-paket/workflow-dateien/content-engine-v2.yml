@@ -1,0 +1,349 @@
+# ============================================================
+#  CONTENT-ENGINE v2 (Autonome Content-Automatisierung, Top-Level)
+#
+#  WARUM NEU (08/2026): Die alte Automatisierung (daily-content.yml)
+#  hatte 2 kritische Fehler:
+#    1) Deploy-Trigger crashte (execSync ohne Import in
+#       actions/github-script@v7) -> Artikel wurden committet, aber
+#       NIE deployed.
+#    2) Bei schwacher KI-Antwort: "3 Versuche ohne Profi-Niveau ->
+#       Artikel wird übersprungen" -> 0 Artikel für den Tag.
+#
+#  LÖSUNG (Content-Engine v2):
+#    - 2-Ebenen-Fallback (Profi -> Draft-Rettung; die frühere Relaxed-
+#      Zwischenstufe wurde am 13.08.2026 ersatzlos entfernt – es soll
+#      grundsätzlich keine automatisch veröffentlichten Artikel unterhalb
+#      des Profi-Gates mehr geben):
+#      NIE ein Tag ohne neuen Artikel (im Zweifel als Entwurf).
+#    - Multi-Modell-Rotation (Gemini <-> Groq) gegen Provider-Schwäche.
+#    - Deploy-Trigger mit korrektem execSync-Import.
+#    - ENGINE-STATUS.md Dashboard + Fehler-Alerting bei Komplettausfall.
+#
+#  Publikations-Frequenz (13.08.2026, Google-Sichtbarkeits-Audit): von
+#  2 Artikeln/Tag (14/Woche) reduziert und seit 13.08. (Nachmittag) NICHT
+#  mehr fest codiert – die feste Mo/Mi/Fr-Schlüsselung (cadence_guard)
+#  unten automatisch an (Ramp nach Domain-Alter + Sicherheitsbremse bei
+#  niedriger Erfolgsquote, siehe dortige Doku + CADENCE-REPORT.md). Die
+#  konkreten Wochentage in den Cron-Zeilen sind daher nur eine Momentaufnahme
+#  und ändern sich wöchentlich automatisch. Grund für die Reduktion generell:
+#  Tägliches Massen-Publizieren rein KI-generierter Artikel ist genau das
+#  Muster, das Googles "Scaled Content Abuse"-Klassifizierer erkennen soll –
+#  besonders riskant bei einer noch jungen Domain. Qualität/Tiefe statt
+#  Menge, siehe README. Tages-Limit weiterhin via MAX_ARTIKEL_PRO_TAG
+#  (Default 1) – das bleibt unabhängig von der Wochen-Kadenz.
+# ============================================================
+name: Content-Engine v2
+
+on:
+  schedule:
+    # Nur an Publikationstagen (Mo=1, Mi=3, Fr=5, Sa=6): 1 Haupt-Slot +
+    # 2 Fallback-Slots im Tagesverlauf, falls ein Lauf an API-Limits o.ä.
+    # scheitert (Selbstheilung).
+    - cron: "10 6 * * 1,3,5"     # 08:10 MESZ – Haupt-Slot
+    - cron: "10 14 * * 1,3,5"    # 16:10 MESZ – Fallback 1
+    - cron: "40 17 * * 1,3,5"    # 19:40 MESZ – Fallback 2
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  actions: write
+  issues: write
+
+concurrency:
+  group: content-bot
+  cancel-in-progress: false
+
+jobs:
+  engine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+        
+      - name: Python-Abhängigkeiten installieren
+        run: |
+          python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli 2>/dev/null || true
+
+      # ================= PHASE 0: PRE-FLIGHT =================
+      - name: Pre-Flight-Check (Syntax, Keys, Themenpool)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/bot_preflight.py
+          echo "PREFLIGHT_OK=true" >> "$GITHUB_ENV"
+
+      # ================= PHASE 0.5: KADENZ-SICHERUNG (26.08.2026) =================
+      # SELBSTHEILUNG VOR JEDEM SLOT: (1) Kadenz-Gate muss lauffähig sein
+      # (Selbsttest, sonst bricht der Lauf ab – ein kaputtes Gate darf
+      # nicht still weiterarbeiten), (2) bestehende Verstöße gegen die
+      # Dauervorgabe (Mo/Mi/Fr, 2–3/Tag, CADENCE-REPORT.md Regel 2) werden
+      # SOFORT geheilt (Zurückstufung + Re-Queue), damit der heutige Slot
+      # auf einer korrekten Tageszahl aufbaut und kein 4./5. Artikel live
+      # gehen kann. Report: CADENCE-GATE-REPORT.md.
+      #
+      # URL-HYGIENE VOR DER KADENZ (PREMIUM-FIX 03.09.2026): Leerzeichen-
+      # URLs (R8-URL-LEERZEICHEN) haben am 02.09.2026 einen fertigen
+      # Re-Queue-Promotion-Kandidaten am Publish-Gate stoppen lassen. Hier
+      # wird die Klasse deterministisch geheilt (--fix) und ausschließlich
+      # dadurch blockierte holds werden entblockt (--heal-holds), BEVOR
+      # cadence_guard promotet – so geht kein Post mit heilbarem
+      # URL-Fehler live bzw. in die Kapazität.
+      - name: Phase 0.5 – Kadenz-Gate sicherstellen (Selbsttest + Selbstheilung)
+        # PREM-AUDIT 26.08.2026: nach jeder Kadenz-Heilung (Zurückstufung
+        # → draft, URL verschwindet aus dem Build) sofort die kontextuellen
+        # Links auf die betroffenen Posts in andern live Artikeln entlinken
+        # (draft_link_healer) – IM SELBEN COMMIT, damit der Push nie defekte
+        # interne Links nach main bringt (Issue #85).
+        run: |
+          python3 scripts/fix_url_hygiene.py --selftest
+          python3 scripts/fix_url_hygiene.py --fix
+          python3 scripts/fix_url_hygiene.py --heal-holds
+          python3 scripts/cadence_guard.py --selftest
+          python3 scripts/cadence_guard.py --fix
+          python3 scripts/draft_link_healer.py --selftest
+          python3 scripts/draft_link_healer.py --fix
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add content/ CADENCE-GATE-REPORT.md DRAFT-LINK-REPORT.md
+          if git diff --cached --quiet; then
+            echo "Kadenz-Gate: Bestand bereits konform."
+          else
+            git commit -m "fix(cadence): Kadenz-Selbstheilung vor Slot (Zurückstufung + Re-Queue)"
+            scripts/git_sync.sh --push-only
+          fi
+
+      # ================= PHASE 1: GENERIEREN (Multi-Fallback) =================
+      - name: Phase 1 – Artikel generieren (Engine v2, 3 Ebenen)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
+          AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
+          MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}
+          MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
+          # Freigabe-Modus (13.08.): Default "profi" = nur Artikel mit
+          # bestandenem Profi-Qualitäts-Gate werden automatisch veröffentlicht.
+          # Es gibt keine abgeschwächte Zwischenstufe mehr (Relaxed am
+          # 13.08.2026 entfernt) – jede Qualitäts-Rettung bleibt Entwurf für Frank.
+          # "0" = immer manuell, "1" = alte Vollautomatik (Settings -> Secrets
+          # and variables -> Actions -> Variables -> AUTO_PUBLISH).
+          AUTO_PUBLISH: ${{ vars.AUTO_PUBLISH || 'profi' }}
+          PIN_TOPICS: "1"
+        run: python3 scripts/engine_generate.py
+
+      - name: Phase-1-Commit – sofort veröffentlichen (auch Entwürfe)
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          # NUR committen, wenn sich wirklich etwas unter content/ geändert hat.
+          # (ENGINE-STATUS.md etc. werden erst in Phase 5 committet – sonst
+          # würde ARTIKEL_ERSTELLT fälschlich true und Phase 2/3 liefen ohne
+          # neuen Artikel – inkl. unnötiger KI-API-Calls.)
+          if git status --short content/ data/ | grep -q .; then
+            git add content/ data/ static/images/covers/
+            git commit -m "content: neuer Artikel automatisch generiert und veröffentlicht"
+            SYNC_OK_VAR=ARTIKEL_ERSTELLT scripts/git_sync.sh --push-only
+            echo "✅ Phase-1-Commit: Artikel (oder Entwurf) veröffentlicht"
+          else
+            echo "Kein neuer Artikel – nichts zu committen."
+            echo "ARTIKEL_ERSTELLT=false" >> "$GITHUB_ENV"
+          fi
+
+      # ================= PHASE 2: QUALITÄTS-KETTE (weich) =================
+      - name: Phase 2 – Qualitäts-Kette (Polish, Gates, Cover)
+        if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          echo "== Profi-Polish (KI) =="
+          python3 scripts/profi_polish.py --new || echo "⚠ Polish-Fehler (nicht kritisch)"
+          echo "== Zeilenumbruch-Generator (Profi-Level, selbstheilend) =="
+          python3 scripts/fix_linebreaks.py || echo "⚠ Zeilenumbruch-Generator (nicht kritisch)"
+          echo "== Gedankenstrich-vor-und-Generator (deterministisch, selbstheilend) =="
+          python3 scripts/fix_dash_und.py --fix || echo "⚠ Gedankenstrich-Check (nicht kritisch)"
+          echo "== Gedankenstrich-am-Zeilenende (deterministisch, selbstheilend) =="
+          python3 scripts/fix_dash_eol.py --fix || echo "⚠ Gedankenstrich-EOL-Check (nicht kritisch)"
+          echo "== Zeichenlängen-Gate (Hoheit: posts | Affiliate-Floor 1000 via LENGTH_MIN_WORDS) =="
+          LENGTH_MIN_WORDS="${{ vars.LENGTH_MIN_WORDS || '1000' }}" python3 scripts/check_length.py --fix || echo "⚠ Längen-Check (nicht kritisch)"
+          echo "== Leerzeichen-Generator (Profi-Level, selbstheilend) =="
+          python3 scripts/fix_spaces.py || echo "⚠ Leerzeichen-Generator (nicht kritisch)"
+          echo "== Rechtschreibung =="
+          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
+          python3 scripts/spellcheck.py --fix || echo "⚠ Spellcheck-Fehler (nicht kritisch)"
+          echo "== Grammatik =="
+          python3 scripts/grammar_check.py --fix --new-only || echo "⚠ Grammatik-Fehler (nicht kritisch)"
+          echo "== Akronym-Orthografie (Casing-Guard: dsl->DSL, Durchkopplung) =="
+          python3 scripts/casing_guard.py --fix --new-only || echo "⚠ Casing-Guard (nicht kritisch)"
+          echo "== Strich-Typografie (Dash-Guard: Duden-Niveau + KI-Schiedsrichter) =="
+          python3 scripts/dash_guard.py --fix --ai --new-only || echo "⚠ Dash-Guard: Hinweise (nicht kritisch)"
+          echo "== Komposita-Waechter (compound_guard.py: Keyword-Falle 'Preisgarantie Gas' etc.) =="
+          python3 scripts/compound_guard.py --fix --ai --new-only || echo "⚠ Compound-Guard (nicht kritisch)"
+          echo "== Einheiten-Guard (Hausstil: X € / X % mit NBSP) =="
+          python3 scripts/unit_guard.py --fix --new-only || echo "⚠ Unit-Guard (nicht kritisch)"
+          echo "== Emoji-Guard (Marken-Touchpoints + Mojibake-Scanner) =="
+          python3 scripts/emoji_guard.py --fix || echo "⚠ Emoji-Guard (nicht kritisch)"
+          echo "== Faktencheck-Schreibtisch (math_guard: Rechenbeispiele selbst verifizieren) =="
+          python3 scripts/math_guard.py --fix --new-only || echo "⚠ Math-Guard (nicht kritisch)"
+          echo "== Lektorat (Verlagsniveau: Doppelwoerter, Fuell-Phrasen, Person-Mix, Echo) =="
+          python3 scripts/lektor_guard.py --fix --ai --new-only || echo "⚠ Lektorat (nicht kritisch)"
+          echo "== Brand-Guard (Marken-Lock: Willkommenstext/Emojis/Disclaimer unantastbar) =="
+          python3 scripts/brand_guard.py --fix || echo "⚠ Brand-Guard (nicht kritisch)"
+          echo "== Laengen-Guard PILLAR-SCOPE (Silo-Seiten >= 2.500 Woerter) =="
+          python3 scripts/length_guard.py --fix --ai --new-only --scope pillar || echo "⚠ Length-Guard Pillar (nicht kritisch)"
+          echo "== Profi-Text-Gate =="
+          python3 scripts/profi_text_check.py --new-only || echo "⚠ Profi-Gate (nicht blockierend)"
+          echo "== Lesbarkeit =="
+          python3 scripts/readability_check.py --new-only || echo "⚠ Lesbarkeit (nicht blockierend)"
+          echo "== Titel-Gate (check_titles, selbstheilend) =="
+          python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate (nicht blockierend)"
+          echo "== Cover generieren =="
+          pip install -q pillow pillow-avif-plugin
+          python3 scripts/generate_covers.py || echo "⚠ Cover-Fehler (nicht kritisch)"
+          echo "== Einzigartigkeit =="
+          python3 scripts/check_uniqueness.py || echo "⚠ Uniqueness (nicht blockierend)"
+          echo "== Same-Day-Zwillinge (Geburts-Wache, auto-heilend) =="
+          python3 scripts/check_uniqueness.py --sameday --fix || echo "⚠ Same-Day-Twin geheilt: Zweitling → Entwurf (nicht kritisch)"
+          echo "== Affiliate-Links (auto-korrigieren) =="
+          python3 scripts/affiliate_link_check.py --fix || echo "⚠ Affiliate-Check (nicht blockierend)"
+          echo "== Affiliate-Shield (/go/-Gateway + sponsored) =="
+          python3 scripts/affiliate_shield.py --fix --new-only || echo "⚠ Affiliate-Shield (nicht kritisch)"
+          python3 scripts/affiliate_marketer.py --fix --new-only || echo "⚠ Affiliate-Marketer (nicht kritisch)"
+          echo "== Affiliate-Health Offline-Kontrakt (PIDs + Gateway-Drift + Selbsttest) =="
+          python3 scripts/affiliate_health.py --no-net || echo "⚠ Affiliate-Kontrakt verletzt – Wochenwache repariert (siehe Report)"
+          echo "== Link-Integritaet (relative Ziele + /go/-Register, Selbsttest) =="
+          python3 scripts/link_guard.py --fix --new-only || echo "⚠ Link-Guard geheilt/gemeldet (nicht kritisch)"
+          echo "== Font-Vertrag (die Datei beweist ihr Gewicht, nicht ihr Name) =="
+          python3 -m pip install -q fonttools brotli 2>/dev/null || true
+          python3 scripts/font_guard.py || echo "⚠ Font-Pakt (nicht kritisch)"
+          echo "== Tabellen-Wache (Struktur + Zell-Splitter, Selbsttest) =="
+          python3 scripts/table_guard.py --fix --new-only || echo "⚠ Tabellen-Funde gemeldet (nicht kritisch)"
+          echo "== Redaktionelle Endabnahme (Profi-Gate G1-G5, Zertifikat) =="
+          python3 scripts/redaktion_final.py || echo "⚠ Endabnahme: Funde im REDAKTION-FINAL-REPORT (nicht blockierend)"
+          echo "== Oberarzt-Beweis nach der Geburt (Kette in Kanonfreiheit) =="
+          python3 scripts/blog_doctor.py --new-only || echo "⚠ Doktor-Befund (nicht kritisch)"
+          echo "== Qualitäts-Score (FrankAutoOps, Threshold >= 0.85) =="
+          # S2-FIX (Agentur-Audit): `|| echo` gehörte auf dieselbe Zeile wie das
+          # Heredoc-BEGINN. Vorher stand es als eigene Zeile nach `PYEOF` –
+          # ungültige Shell-Syntax: Phase 2 lief ab hier "scheinbar grün" weiter,
+          # aber Kommando nach `PYEOF` (Cover-Validierung, Kurzantworten,
+          # Commit der Qualitäts-Fixes) wurden NIE ausgeführt.
+          python3 - <<'PYEOF' || echo "⚠ Qualitäts-Score (nicht kritisch)"
+          import glob, subprocess, sys, json, os
+          import datetime
+          sys.path.insert(0, "scripts")
+          import quality_score as qs
+          # SKOPUS-SCHUTZ (11.08. Spaet): nur HEUTE geborene Artikel bewerten.
+          # Hintergrund: Der Block bewertete alle Posts; die Kombination aus
+          # Schablonen-Blindheit + /go/-Blindheit parkte ploetzlich 42 Artikel.
+          today = datetime.date.today().isoformat()
+          files = []
+          for f in sorted(glob.glob("content/posts/*/index.md")):
+              head = open(f, encoding="utf-8").read()
+              fm = head.split("---", 2)[1] if head.startswith("---") and head.count("---") >= 2 else ""
+              if today in fm and "draft: false" in fm:
+                  files.append(f)
+          results = [qs.score_article(f) for f in files]
+          low = [r for r in results if r["verdict"] == "draft+autofix"]
+          review = [r for r in results if r["verdict"] == "human-review"]
+          print(f"Qualitäts-Score: {len(results)} HEUTIGE Artikel | publish: {len(results)-len(low)-len(review)} | draft: {len(low)} | review: {len(review)}")
+          if review:
+              print(f"⚠ HUMAN REVIEW nötig: {[r['slug'] for r in review]}")
+          # SABOTAGE-STOPFTRIEME: mehr als 3 Ein-Parkungen pro Lauf = Anomalie;
+          # NIEMALS massenhaft parken (beim letzten Mal blog-breit 42 Artikel weg).
+          if len(review) > 3 or len(low) > 3:
+              print("🛑 QUALITY-CIRCUIT-BREAKER aktiv: Score-Anomalie erkannt – NICHTS wird geparkt/verworfen. Bitte Templates/Scorer prüfen (siehe QUALITAETS-REGELWERK).")
+              sys.exit(0)
+          for r in review:
+              p = f"content/posts/{r['slug']}/index.md"
+              c = open(p, encoding="utf-8").read()
+              if "draft: false" in c:
+                  open(p, "w", encoding="utf-8").write(c.replace("draft: false", "draft: true", 1))
+                  print(f"  → {r['slug']} auf draft gesetzt (Score {r['score']})")
+          PYEOF
+          echo "== Cover-Validierung (auto-nachziehen) =="
+          python3 scripts/check_covers.py --fix || echo "⚠ Cover-Varianten (nicht blockierend)"
+          echo "== Kurzantworten (Featured-Snippet-Box) =="
+          python3 scripts/generate_kurzantworten.py || echo "⚠ Kurzantworten (nicht kritisch)"
+          echo "== URL-Hygiene (R8-URL-LEERZEICHEN selbstheilend, PREMIUM-FIX 03.09.2026) =="
+          python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Qualitäts-Fixes."
+          else
+            git commit -m "content: Qualitäts-Fixes (Rechtschreibung, Grammatik, Cover, Polish)"
+            scripts/git_sync.sh --push-only
+            echo "✅ Folge-Commit: Qualitäts-Fixes gepusht"
+          fi
+
+      # ================= PHASE 3: SOFORT-OPTIMIERUNG =================
+      - name: Phase 3 – Meta-Optimierung & interne Links
+        if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/meta_optimizer.py --fix --ai || echo "⚠ Meta-Fehler (nicht kritisch)"
+          echo "== Titel-Gate nach Meta-Optimierung (selbstheilend) =="
+          python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate (nicht blockierend)"
+          echo "== Pinterest/Google-SEO-Healer (Titel, Cover-Text, Pin-SEO, Keywords) =="
+          python3 scripts/pinterest_seo_healer.py --fix || echo "⚠ Pinterest-SEO-Healer (nicht blockierend)"
+          echo "== Cover-Stale-Erkennung: Titel geändert → Cover neu rendern =="
+          python3 scripts/check_covers.py --fix || echo "⚠ Cover-Stale (nicht blockierend)"
+          python3 scripts/internal_linker.py --apply --max 5 || echo "⚠ Linker-Fehler (nicht kritisch)"
+          echo "== Affiliate-Profi-Check (A1-A8, selbstheilend: CTA/E-E-A-T/Links) =="
+          python3 scripts/affiliate_profi_check.py --fix || echo "⚠ Profi-Check (nicht blockierend)"
+          echo "== URL-Hygiene nach Optimierung (R8-URL-LEERZEICHEN, PREMIUM-FIX 03.09.2026) =="
+          python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Keine Optimierungs-Änderungen."
+          else
+            git commit -m "content: neuer Artikel sofort optimiert (Meta, interne Verlinkung)"
+            scripts/git_sync.sh --push-only
+            echo "✅ Optimierungs-Commit gepusht"
+          fi
+
+      - name: Phase 3 – IndexNow-Ping
+        if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
+        continue-on-error: true
+        run: python3 scripts/submit_indexnow.py || echo 
+
+      # ================= PHASE 4: STATUS & TAGESDEFIZIT (26.08.2026) =================
+      # Reaktivierte verwaiste Wachen (Agentur-Audit S5): Der Lauf hält BOT-STATUS.md
+      # aktuell und meldet am Tagesende ein Defizit gegen die Dauervorgabe
+      # (Mo/Mi/Fr, MIN_ARTIKEL_PRO_TAG) als auto-zu-schließendes Issue. Läuft auch
+      # nach Teilfehlern (if: always), damit ein Ausfall sichtbar wird.
+      - name: Phase 4 – Status & Tagesdefizit-Wache
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
+          AUTO_PUBLISH: ${{ vars.AUTO_PUBLISH || 'profi' }}
+        run: |
+          python3 scripts/bot_status.py || echo "⚠ BOT-STATUS (nicht kritisch)"
+          # Defizit-Wache: nur an Publikationstagen (Mo/Mi/Fr) einstellen, damit
+          # Fr->So-Lücke (Wochenende) keinen Fehlalarm erzeugt.
+          DOW=$(date +%u)
+          if [ "$DOW" = "1" ] || [ "$DOW" = "3" ] || [ "$DOW" = "5" ]; then
+            python3 scripts/engine_issue.py --deficit || echo "⚠ Defizit-Wache: kein Tagesdefizit (oder Fehler)"
+          else
+            echo "Kein Publikationstag ($DOW) – Defizit-Wache übersprungen."
+          fi
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add BOT-STATUS.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "BOT-STATUS unverändert."
+          else
+            git commit -m "docs: BOT-STATUS.md aktualisiert (Phase 4)"
+            scripts/git_sync.sh --push-only
+          fi
