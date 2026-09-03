@@ -155,8 +155,12 @@ blockiert). Konkret ungeprüft:
 - **natives `<dialog>`**-Verhalten (jsdom-`showModal` ist hier nachgebaut),
 - **reale WebKit-Autoplay-Politik** auf iOS (geprüft ist nur, dass `speak()` synchron im
   Klick-Handler liegt — die notwendige, nicht die hinreichende Bedingung),
-- **Hugo-Build** der geänderten Templates. Die Templates sind syntaktisch geprüft und der
-  Funktionstest liest ihr Markup wörtlich ein, aber `hugo` lief hier nicht.
+- **Hugo-Build** der geänderten Templates. Geprüft ist die Klammerbilanz und die
+  `define`/`if`/`range`/`with`-zu-`end`-Paarung (`layouts/single.html` 68/68, 16 `end`
+  auf 16 Block-Öffner; `_default/single.html` identisch; `reader_toolbar.html` 26/26,
+  4 auf 4) sowie die CSS-Klammerbilanz (Endtiefe 0, 8 `@media`-Blöcke). Das ist **keine**
+  Go-Template-Parser-Prüfung — `hugo` lief in dieser Umgebung nicht. Der Funktionstest
+  liest das Markup der Templates wörtlich ein und schlägt an, wenn sich die Struktur ändert.
 
 Diese fünf Punkte gehören auf ein echtes Gerät, bevor die Änderung live geht.
 
