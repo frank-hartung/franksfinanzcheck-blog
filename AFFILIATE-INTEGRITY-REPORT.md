@@ -1,10 +1,10 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-09-02 10:09:35 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-09-03 05:32:58 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
 **Geprüfte Live-Artikel:** 25 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 19
 
-**Build:** public/ veraltet → Hugo-Rebuild
+**Build:** public/ aktuell (kein Rebuild nötig)
 
 🎉 Alle CTA-Boxen sind strukturell intakt, jedes Linkziel ist in `scripts/check24_links.yaml` registriert, jeder Link erscheint tatsächlich im gebauten HTML (AI4) und jede `/go/`-Seite leitet auf die registrierte Partner-URL weiter (AI5).
 
@@ -29,14 +29,14 @@
 | 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden | 2 → 5 ✅ | /go/strom/ |
 | 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause | 3 → 3 ✅ | /go/dsl/ |
-| 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier | 3 → 5 ✅ | /go/allgemein/, /go/girokonto/, /go/tagesgeld/ |
+| 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier | 3 → 5 ✅ | /go/girokonto/, /go/tagesgeld/ |
 | 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub | 2 → 5 ✅ | /go/kfz-versicherung/, /go/kreditkarte/, /go/mietwagen/, /go/reisekrankenversicherung/ |
 | 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps | 3 → 3 ✅ | /go/girokonto/, /go/tagesgeld/ |
 | 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen | 3 → 3 ✅ | /go/gas/ |
 | 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet | 2 → 4 ✅ | /go/dsl/ |
-| 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife | 2 → 3 ✅ | /go/dsl/, /go/handytarife/ |
 | 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen | 2 → 3 ✅ | /go/haftpflicht/, /go/kfz-versicherung/ |
 | 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich | 2 → 3 ✅ | /go/tagesgeld/ |
+| 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen | 2 → 2 ✅ | /go/mietwagen/ |
 
 ## Hinweise (nicht blockierend)
 
