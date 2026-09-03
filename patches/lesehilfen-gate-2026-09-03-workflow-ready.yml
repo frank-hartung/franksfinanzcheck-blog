@@ -110,6 +110,14 @@ jobs:
       - name: Kurzfassungs-Engine-Check
         run: node scripts/summary_engine_check.js
 
+      # ---- Audiofassung: Sprechtext, MP3-Rahmenstrom, Zeitkarte ----
+      # Prüft die Kette, aus der die MP3-Vollfassungen entstehen. Läuft
+      # ohne ffmpeg und ohne Netzwerk. Enthält den Direkttest von
+      # speechNormalize() – die einzige Ebene, die eine Regel erkennt,
+      # die stillschweigend nie ausführt.
+      - name: Audio-Pipeline-Test (Sprechtext + MP3 + Zeitkarte)
+        run: node scripts/audio_pipeline_test.mjs
+
       - name: Toolbar-/Barrierefreiheits-Wache
         run: |
           pip install -q pyyaml

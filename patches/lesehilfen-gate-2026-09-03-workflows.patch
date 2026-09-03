@@ -2,7 +2,7 @@ diff --git a/.github/workflows/lesehilfen-gate.yml b/.github/workflows/lesehilfe
 new file mode 100644
 --- /dev/null
 +++ b/.github/workflows/lesehilfen-gate.yml
-@@ -0,0 +1,116 @@
+@@ -0,0 +1,124 @@
 +# ============================================================
 +#  LESEHILFEN-GATE (Vorlesen + Kurzfassung) — dauerhaft aktiv
 +#  ------------------------------------------------------------
@@ -114,6 +114,14 @@ new file mode 100644
 +
 +      - name: Kurzfassungs-Engine-Check
 +        run: node scripts/summary_engine_check.js
++
++      # ---- Audiofassung: Sprechtext, MP3-Rahmenstrom, Zeitkarte ----
++      # Prüft die Kette, aus der die MP3-Vollfassungen entstehen. Läuft
++      # ohne ffmpeg und ohne Netzwerk. Enthält den Direkttest von
++      # speechNormalize() – die einzige Ebene, die eine Regel erkennt,
++      # die stillschweigend nie ausführt.
++      - name: Audio-Pipeline-Test (Sprechtext + MP3 + Zeitkarte)
++        run: node scripts/audio_pipeline_test.mjs
 +
 +      - name: Toolbar-/Barrierefreiheits-Wache
 +        run: |
