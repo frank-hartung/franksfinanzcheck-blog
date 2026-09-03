@@ -1,0 +1,116 @@
+# ============================================================
+#  LESEHILFEN-GATE (Vorlesen + Kurzfassung) — dauerhaft aktiv
+#  ------------------------------------------------------------
+#  Warum dieser Workflow existiert (03.09.2026):
+#
+#  Die Lesehilfen hatten Unit-Tests, die gegen eine handgebaute
+#  FakeNode-DOM liefen. Sie waren grün, während die Funktion im
+#  Browser sichtbar fehlerhaft war:
+#    · die Kurzantwort-Box („grüner Kasten“) wurde nie vorgelesen,
+#      weil sie im Template VOR .post-content steht,
+#    · „Weiterlesen“ sprach nach einer Pause in der Atempause
+#      denselben Satz ein zweites Mal,
+#    · der Fokus kehrte nach dem Kurzfassungs-Dialog nicht
+#      zuverlässig zum Auslöser zurück (Safari fokussiert Buttons
+#      beim Klick nicht → gemerkt wurde <body>),
+#    · die Kurzantwort-Box hatte keinen Dunkelmodus, obwohl
+#      defaultTheme = "auto" ist.
+#
+#  Dieses Gate läuft deshalb gegen eine ECHTE DOM (jsdom) mit der
+#  unveränderten static/premium/ff-reader.js, dem echten Seiten-
+#  Skelett aus layouts/single.html und echtem Inhalt aus
+#  content/posts. Es prüft zusätzlich die Geräte-Matrix
+#  (macOS/Windows/Android/iOS/Linux × Chrome/Edge/Firefox/Safari),
+#  die WCAG-Kontraste der Kurzfassung und die Verankerung in den
+#  Layouts. Bricht etwas, wird der Deploy blockiert.
+#
+#  Auslösung: bei jedem Push/PR, der Lesehilfen oder Content
+#  berührt, plus täglich als Wache gegen stillen Verfall.
+# ============================================================
+name: Lesehilfen-Gate (Vorlesen + Kurzfassung)
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "static/premium/ff-reader.js"
+      - "assets/css/extended/ff-reader.css"
+      - "layouts/_partials/reader_toolbar.html"
+      - "layouts/single.html"
+      - "layouts/_default/single.html"
+      - "layouts/pillar/single.html"
+      - "scripts/reader_functional_test.mjs"
+      - "scripts/reader_qa_lib.mjs"
+      - "scripts/reader_engine_check.js"
+      - "scripts/reader_male_voice_highend_test.js"
+      - "scripts/reader_playback_function_test.js"
+      - "scripts/summary_engine_check.js"
+      - "scripts/reader_toolbar_check.py"
+      - "tools/reader-qa/**"
+      - "content/posts/**"
+      - ".github/workflows/lesehilfen-gate.yml"
+  pull_request:
+    paths:
+      - "static/premium/ff-reader.js"
+      - "assets/css/extended/ff-reader.css"
+      - "layouts/**"
+      - "content/posts/**"
+  schedule:
+    - cron: "20 6 * * *"   # 08:20 MESZ – tägliche Wache gegen stillen Verfall
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lesehilfen-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lesehilfen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Node bereitstellen
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: QA-Abhängigkeiten installieren (jsdom)
+        working-directory: tools/reader-qa
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+      - name: Syntaxprüfung ff-reader.js
+        run: node --check static/premium/ff-reader.js
+
+      # ---- Echter Funktionstest (jsdom, echte Engine-Datei) ----
+      - name: Funktionstest Vorlesen + Kurzfassung (echte DOM)
+        run: node scripts/reader_functional_test.mjs
+
+      # ---- Bestehende Engine-/Stimmen-/Kurzfassungs-Suiten ----
+      - name: Reader-Engine-Check
+        run: node scripts/reader_engine_check.js
+
+      - name: Male-Voice-Highend-Test
+        run: node scripts/reader_male_voice_highend_test.js
+
+      - name: Reader-Playback-Test
+        run: node scripts/reader_playback_function_test.js
+
+      - name: Kurzfassungs-Engine-Check
+        run: node scripts/summary_engine_check.js
+
+      - name: Toolbar-/Barrierefreiheits-Wache
+        run: |
+          pip install -q pyyaml
+          python3 scripts/reader_toolbar_check.py

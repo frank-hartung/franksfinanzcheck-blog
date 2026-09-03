@@ -4,6 +4,12 @@
 **Produktivcode:** `static/premium/ff-reader.js`
 **UI:** `layouts/_partials/reader_toolbar.html` · `assets/css/extended/ff-reader.css`
 
+> **Korrektur 03.09.2026:** Die unten genannte Prüfung (106/106 grün) lief gegen eine
+> handgebaute `FakeNode`-DOM, nicht gegen echtes DOM. Sie war grün, während die Funktion
+> im Browser sichtbar fehlerhaft war. Die tatsächlichen Fehler, ihre Ursachen und die
+> neue Wache stehen in **LESEHILFEN-REPARATUR-2026-09-03.md**. Maßgeblich ist ab jetzt
+> `scripts/reader_functional_test.mjs` (jsdom, echte Engine-Datei, echte Templates).
+
 ## Befund und vollständige Reparatur
 
 Die bisherige Vorlese-Engine bestand zwar aus Unit-Checks, hatte aber Fehler im realen Klickpfad:

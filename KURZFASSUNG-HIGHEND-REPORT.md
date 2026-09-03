@@ -1,5 +1,10 @@
 # KURZFASSUNG-HIGHEND-REPORT — Kurzfassung auf Verlagshaus-Spitze (v4)
 
+> **Korrektur 03.09.2026:** Die grüne Kurzantwort-Box (`layouts/single.html`) wurde
+> **nie vorgelesen** — sie steht vor `.post-content`, die Extraktoren suchten aber nur
+> darin. Zusätzlich fehlte ihr der Dunkelmodus. Beides ist repariert und belegt in
+> **LESEHILFEN-REPARATUR-2026-09-03.md**.
+
 Datum: 03.09.2026 · Kerndateien: `static/premium/ff-reader.js` (v4), `layouts/_partials/reader_toolbar.html`,
 `assets/css/extended/ff-reader.css`, Wachen: `scripts/summary_engine_check.js` (neu, 26 Prüfungen) und
 `scripts/reader_toolbar_check.py` (erweitert).

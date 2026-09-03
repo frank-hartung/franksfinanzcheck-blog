@@ -588,3 +588,234 @@ table.ff-reader-active,
         color: HighlightText;
     }
 }
+
+/* ============================================================
+   KURZFASSUNG – LESEBARKEIT AUF HIGHEND-NIVEAU (03.09.2026)
+   ------------------------------------------------------------
+   Zwei Bausteine, beide mit belegten Kontrastwerten (WCAG 2.2):
+
+   A) .ff-kurzantwort — der „grüne Kasten“ im Artikel.
+      War bis 03.09.2026 komplett inline gestylt: kein Dunkelmodus
+      (defaultTheme = "auto"), Text kleiner als der Fließtext,
+      keine Zeilenlängen-Begrenzung, keine Druck-/High-Contrast-Regeln.
+      Jetzt eine echte Komponente mit eigenem Token-Satz.
+
+   B) .ff-summary__* — der Kurzfassungs-Dialog.
+      Sekundärtexte liefen über --secondary (5,25:1) und waren damit
+      nur knapp AA. Jetzt eigene, geprüfte Token (6,2:1 – 10,0:1),
+      dazu Lesetakt, Zeilenlänge und flüssige Typografie.
+
+   Alle Kontrastwerte sind in scripts/reader_functional_test.mjs
+   Abschnitt 12 festgeschrieben und werden bei jedem Lauf geprüft.
+============================================================ */
+
+:root {
+    /* Kurzantwort-Box (hell) — Label 9,53:1 · Text 15,38:1 */
+    --ff-ka-bg: #F2F8F5;
+    --ff-ka-bg-2: #E7F2EC;
+    --ff-ka-border: rgba(11, 74, 55, .20);
+    --ff-ka-accent: #0B4A37;
+    --ff-ka-label: #0B4A37;
+    --ff-ka-text: #16211D;
+    --ff-ka-shadow: 0 1px 2px rgba(11, 74, 55, .05), 0 8px 24px -14px rgba(11, 74, 55, .28);
+
+    /* Kurzfassungs-Dialog — Sekundärtexte hell 6,20:1 / 6,53:1 */
+    --ff-sum-muted: #5A6360;
+    --ff-sum-muted-2: #55605C;
+    --ff-sum-line: rgba(11, 74, 55, .14);
+}
+
+[data-theme="dark"] {
+    /* Kurzantwort-Box (dunkel) — Label 10,00:1 · Text 14,52:1 */
+    --ff-ka-bg: #10211B;
+    --ff-ka-bg-2: #0C1A15;
+    --ff-ka-border: rgba(134, 216, 187, .26);
+    --ff-ka-accent: #86D8BB;
+    --ff-ka-label: #86D8BB;
+    --ff-ka-text: #E8F1EC;
+    --ff-ka-shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 10px 28px -16px rgba(0, 0, 0, .7);
+
+    /* Dialog dunkel — Sekundärtexte 7,82:1 */
+    --ff-sum-muted: #A8B4AF;
+    --ff-sum-muted-2: #9DA9A4;
+    --ff-sum-line: rgba(134, 216, 187, .18);
+}
+
+/* ---------- A) Der grüne Kasten: Kurz & knapp – die Antwort ---------- */
+.ff-kurzantwort {
+    position: relative;
+    margin: 20px 0 26px;
+    padding: clamp(15px, 2.1vw, 20px) clamp(16px, 2.4vw, 24px);
+    background: linear-gradient(158deg, var(--ff-ka-bg) 0%, var(--ff-ka-bg-2) 100%);
+    border: 1px solid var(--ff-ka-border);
+    border-left: 5px solid var(--ff-ka-accent);
+    border-radius: 14px;
+    box-shadow: var(--ff-ka-shadow);
+    /* Lesetakt: nie breiter als eine komfortable Zeitungszeile */
+    max-inline-size: 74ch;
+    transition: box-shadow .18s ease, border-color .18s ease;
+}
+
+.ff-kurzantwort__inner {
+    display: flex;
+    gap: clamp(10px, 1.6vw, 14px);
+    align-items: flex-start;
+}
+
+.ff-kurzantwort__icon {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 1.9em;
+    block-size: 1.9em;
+    margin-top: .1em;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--ff-ka-accent) 14%, transparent);
+    color: var(--ff-ka-accent);
+    font-size: .95rem;
+    line-height: 1;
+}
+
+.ff-kurzantwort__body { min-inline-size: 0; }
+
+.ff-kurzantwort__label {
+    display: block;
+    margin: 0 0 .35em;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: .74rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ff-ka-label);
+}
+
+.ff-kurzantwort__text {
+    display: block;
+    /* Genau die Größe des Fließtextes – eine Antwort darf nicht kleiner
+       sein als der Artikel, den sie zusammenfasst. */
+    font-size: 1rem;
+    line-height: 1.68;
+    color: var(--ff-ka-text);
+    font-weight: 450;
+    letter-spacing: .002em;
+    /* Deutsche Silbentrennung + ruhigerer Umbruch (Progressive Enhancement) */
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    text-wrap: pretty;
+    max-inline-size: 68ch;
+}
+
+.ff-kurzantwort__text strong { font-weight: 700; }
+
+/* ---------- B) Kurzfassungs-Dialog: Lesetakt & Sekundärtexte ---------- */
+.ff-summary__meta,
+.ff-summary__table-meta,
+.ff-summary__figure-label,
+.ff-summary__toc-lead,
+.ff-summary__empty {
+    color: var(--ff-sum-muted);
+}
+.ff-summary__meta {
+    font-size: .84em;
+    line-height: 1.5;
+    letter-spacing: .005em;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ff-sum-line);
+}
+
+.ff-summary__hero {
+    background: linear-gradient(158deg,
+        color-mix(in srgb, var(--ff-yellow, #FFB300) 16%, var(--entry, #fff)) 0%,
+        color-mix(in srgb, var(--ff-yellow, #FFB300) 7%, var(--entry, #fff)) 100%);
+    border: 1px solid color-mix(in srgb, var(--ff-yellow, #FFB300) 40%, var(--border, #dce6e1));
+    border-left: 5px solid var(--ff-yellow, #FFB300);
+    border-radius: 14px;
+    padding: clamp(14px, 2vw, 18px) clamp(15px, 2.2vw, 20px);
+}
+.ff-summary__hero-text {
+    font-size: 1.02em;
+    line-height: 1.7;
+    font-weight: 460;
+    max-inline-size: 66ch;
+    text-wrap: pretty;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.ff-summary__section h3 {
+    font-size: .8rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.ff-summary__bullet {
+    font-size: .97em;
+    line-height: 1.65;
+    margin-bottom: 12px;
+    max-inline-size: 66ch;
+    text-wrap: pretty;
+}
+.ff-summary__bullet::before {
+    inline-size: 22px;
+    block-size: 22px;
+    font-size: 12px;
+    line-height: 22px;
+}
+
+.ff-summary__toc-item { margin: 8px 0; line-height: 1.55; }
+.ff-summary__toc-lead { font-size: .86em; }
+
+.ff-summary__figure { padding: 13px 15px; }
+.ff-summary__figure-value { font-size: 1.34em; }
+.ff-summary__figure-label { font-size: .84em; line-height: 1.45; }
+
+.ff-summary__table-row { font-size: .87em; line-height: 1.55; }
+.ff-summary__table-row--head { color: var(--ff-emerald, #0E5A43); }
+
+/* Sekundärtexte im Dialog: eigene, geprüfte Abstufung statt --secondary */
+.ff-summary__jump { color: var(--ff-emerald, #0E5A43); font-size: .8em; }
+
+/* Mobile: volle Breite nutzbar machen, Tipptexte nicht schrumpfen */
+@media (max-width: 640px) {
+    .ff-summary__hero-text,
+    .ff-summary__bullet,
+    .ff-kurzantwort__text { max-inline-size: none; }
+    .ff-summary__figures { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+}
+
+/* Bewegung reduzieren: keine Übergänge, keine Silbentrennungs-Unruhe */
+@media (prefers-reduced-motion: reduce) {
+    .ff-kurzantwort { transition: none; }
+}
+
+/* Druck: schwarze Tinte auf Weiß, kein Farbverbrauch, kein Schatten */
+@media print {
+    .ff-kurzantwort {
+        background: #fff !important;
+        border: 1px solid #000;
+        border-left: 4px solid #000;
+        box-shadow: none;
+        color: #000;
+        break-inside: avoid;
+    }
+    .ff-kurzantwort__label,
+    .ff-kurzantwort__text { color: #000; }
+    .ff-kurzantwort__icon { display: none; }
+}
+
+/* Erzwungene Farben (Windows High Contrast / iOS): Systemfarben nutzen */
+@media (forced-colors: active) {
+    .ff-kurzantwort {
+        background: Canvas;
+        border: 1px solid CanvasText;
+        border-left: 4px solid Highlight;
+        forced-color-adjust: none;
+    }
+    .ff-kurzantwort__label,
+    .ff-kurzantwort__text { color: CanvasText; }
+    .ff-summary__meta,
+    .ff-summary__figure-label,
+    .ff-summary__toc-lead { color: CanvasText; }
+}

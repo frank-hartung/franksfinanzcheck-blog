@@ -91,6 +91,7 @@
       resume: 'Weiterlesen',
       stop: 'Beenden',
       listenAria: 'Artikel vorlesen (männliche Stimme)',
+      listenAriaNeutral: 'Artikel vorlesen (Stimme deines Geräts)',
       pauseAria: 'Vorlesen pausieren',
       resumeAria: 'Vorlesen fortsetzen',
       stopAria: 'Vorlesen beenden',
@@ -100,7 +101,7 @@
       noText: 'Kein vorlesbarer Text gefunden.',
       started: 'Vorlesen gestartet.',
       voiceActive: 'Männliche Stimme aktiv.',
-      voiceFallback: 'Vorlesen gestartet; dein Browser stellt die verfügbare Stimme bereit.',
+      voiceFallback: 'Vorlesen gestartet; dein Gerät stellt keine männliche Stimme bereit.',
       speechError: 'Dieser Abschnitt konnte nicht abgespielt werden; es geht weiter.',
       voiceLoading: 'Männliche Stimme wird geladen …',
       paused: 'Vorlesen pausiert.',
@@ -113,6 +114,7 @@
       outroLine: 'Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.',
       listItemNum: 'Punkt {n}:',
       cueShortAnswer: 'Kurzantwort:',
+      cueCorrection: 'Korrekturhinweis:',
       cueSaving: 'Sparpotenzial:',
       cueTariff: 'Tarif im Überblick:',
       cueWarning: 'Achtung:',
@@ -154,6 +156,7 @@
       resume: 'Resume',
       stop: 'Stop',
       listenAria: 'Read article aloud (male voice)',
+      listenAriaNeutral: 'Read article aloud (voice provided by your device)',
       pauseAria: 'Pause speech',
       resumeAria: 'Resume speech',
       stopAria: 'Stop speech',
@@ -163,7 +166,7 @@
       noText: 'No readable text found.',
       started: 'Audio playback started.',
       voiceActive: 'Male voice active.',
-      voiceFallback: 'Playback started; your browser provides the available voice.',
+      voiceFallback: 'Playback started; your device does not provide a male voice.',
       speechError: 'This section could not be played; continuing.',
       voiceLoading: 'Loading a male voice …',
       paused: 'Audio playback paused.',
@@ -176,6 +179,7 @@
       outroLine: 'End of article. Thank you for listening to FranksFinanzcheck.',
       listItemNum: 'Point {n}:',
       cueShortAnswer: 'Short answer:',
+      cueCorrection: 'Correction:',
       cueSaving: 'Savings potential:',
       cueTariff: 'Tariff at a glance:',
       cueWarning: 'Attention:',
@@ -593,7 +597,8 @@
   var playing = false;
   var blocks = [];        // { el, text, lang, type, role, chunks[] }
   var timeline = [];      // flache Liste aller Sprech-Einheiten
-  var cursor = 0;
+  var cursor = 0;     // Einheit, die gerade gesprochen wird/wurde (Highlight, Fortschritt)
+  var nextIndex = 0;  // Einheit, die als NÄCHSTE dran ist (Fortsetzen, Keep-Alive)
   var keepAliveId = null;
   var pauseTimer = null;
   var spokenChars = 0;
@@ -670,7 +675,7 @@
     }
     if (state === 'idle') {
       listenLabel.textContent = texts.listen;
-      listenBtn.setAttribute('aria-label', texts.listenAria);
+      listenBtn.setAttribute('aria-label', hasExplicitMaleVoice() ? texts.listenAria : (texts.listenAriaNeutral || texts.listenAria));
     } else if (state === 'playing') {
       listenLabel.textContent = texts.pause;
       listenBtn.setAttribute('aria-label', texts.pauseAria);
@@ -1533,7 +1538,23 @@
     return tableBlocks;
   }
 
-  /* ---------- Alle vorlesbaren Blöcke im Artikel sammeln ---------- */
+  /* ---------- Alle vorlesbaren Blöcke im Artikel sammeln ----------
+     WICHTIG (Fix 03.09.2026): Die Kurzantwort-Box („grüner Kasten“,
+     layouts/single.html) und die Korrektur-Box stehen im Template VOR
+     .post-content, sind also Geschwister und keine Nachfahren. Die
+     Selektorenliste unten führte .ff-kurzantwort/.ff-korrektur zwar,
+     suchte aber nur innerhalb von .post-content – die Boxen wurden
+     deshalb nie vorgelesen (toter Code). Sie werden jetzt ausdrücklich
+     in Dokumentreihenfolge vorangestellt. */
+  function preContentBoxes() {
+    var scope = doc.body || doc;
+    if (!scope || typeof scope.querySelectorAll !== 'function') return [];
+    return qsa('.ff-korrektur, .ff-kurzantwort', scope).filter(function (el) {
+      if (!el.closest) return true;
+      return !el.closest('.post-content, .md-content, [data-ff-skip-read], .ff-reader-toolbar');
+    });
+  }
+
   function collectBlocks() {
     var content = doc.querySelector('.post-content') || doc.querySelector('.md-content');
     if (!content) return [];
@@ -1546,6 +1567,28 @@
       .replace('{title}', stripMd(cfg.title || doc.title || ''))
       .replace('{time}', cfg.readingTime || '');
     out.push({ el: toolbar, text: introRaw, lang: lang, type: 'intro' });
+
+    // Redaktionelle Vorab-Boxen (Korrektur, Kurzantwort) – sie gehören
+    // inhaltlich zum Artikel und müssen hörbar sein.
+    preContentBoxes().forEach(function (box) {
+      /* Die sichtbare Dachzeile („Kurz & knapp – die Antwort“) wird nicht
+         mitgesprochen: Der redaktionelle Cue davor sagt dasselbe. Sonst
+         entstünde „Kurzantwort: Kurz & knapp – die Antwort …“. */
+      var probe = box.cloneNode ? box.cloneNode(true) : box;
+      qsa('.ff-kurzantwort__label, .ff-kurzantwort__icon', probe).forEach(function (n) {
+        if (n.parentNode) n.parentNode.removeChild(n);
+      });
+      var boxText = readableText(probe);
+      if (boxText.length <= 5) return;
+      var isKorrektur = box.classList && box.classList.contains('ff-korrektur');
+      var cue = isKorrektur ? (texts.cueCorrection || texts.cueNote) : texts.cueShortAnswer;
+      out.push({
+        el: box,
+        text: cue + ' ' + boxText,
+        lang: lang,
+        type: isKorrektur ? 'warning' : 'callout'
+      });
+    });
 
     var nodes = qsa('h2, h3, h4, p, li, blockquote, table, .ff-table-scroll, .ff-tarif-card, .ff-einspar-box, .ff-kurzantwort, .ff-korrektur, .callout', content);
 
@@ -1765,6 +1808,7 @@
     clearPauseTimer();
     if (index >= timeline.length) { endReading(true); return; }
     cursor = index;
+    nextIndex = index;
     var unit = timeline[index];
     if (!unit || !unit.text) {
       speakUnit(index + 1, isInitial);
@@ -1854,6 +1898,11 @@
         errorStreak = 0;
         lastEffRate = unit.effRate || 1;
         spokenChars += unit.text.length;
+        /* Fix 03.09.2026: Die nächste Einheit wird VORGEMERKT, solange die
+           Atempause läuft. Früher zeigte `cursor` weiterhin auf die bereits
+           gesprochene Einheit – ein Fortsetzen (oder die Keep-Alive-Wache)
+           in dieser Lücke sprach denselben Satz ein zweites Mal. */
+        nextIndex = index + 1;
         clearPauseTimer();
         pauseTimer = setTimeout(function () {
           if (reading && playing && run === playbackRun) speakUnit(index + 1, false);
@@ -1917,6 +1966,7 @@
     if (!reading || !timeline.length) return;
     unlockAudioEngine();
     index = Math.max(0, Math.min(timeline.length - 1, index));
+    nextIndex = index;
     spokenChars = 0;
     for (var i = 0; i < index; i++) spokenChars += timeline[i].text.length;
     clearPauseTimer();
@@ -2013,7 +2063,7 @@
     toolbar.setAttribute('aria-label', currentLang === 'en'
       ? 'Reading aids: listen and summary' : 'Lesehilfen: Vorlesen und Kurzfassung');
     if (listenLabel) listenLabel.textContent = texts.listen;
-    if (listenBtn) listenBtn.setAttribute('aria-label', texts.listenAria);
+    if (listenBtn) listenBtn.setAttribute('aria-label', hasExplicitMaleVoice() ? texts.listenAria : (texts.listenAriaNeutral || texts.listenAria));
     if (summaryLabel) summaryLabel.textContent = texts.summaryBtn;
     if (summaryBtn) summaryBtn.setAttribute('aria-label', texts.summaryAria);
     errorStreak = 0;
@@ -2047,6 +2097,7 @@
       for (var i = 0; i < startIdx; i++) spokenChars += timeline[i].text.length;
     }
     cursor = startIdx;
+    nextIndex = startIdx;
     setListenState('playing');
     setStatus(startIdx > 0 ? texts.resumedPos : texts.started);
     setupMediaSession();
@@ -2077,17 +2128,17 @@
     setStatus(texts.resumed);
     if (!speechSupported) return;
     if (IS_ANDROID) {
-      speakUnit(cursor, true); // pause is implemented as cancel on Android
+      speakUnit(Math.min(nextIndex, timeline.length - 1), true); // pause is implemented as cancel on Android
       return;
     }
     try {
       if (synth.paused) synth.resume();
     } catch (e) {}
     // Safari can report a resumed queue without producing audio. Retry the
-    // current unit only when the native queue is genuinely empty.
+    // pending unit only when the native queue is genuinely empty.
     setTimeout(function () {
       if (reading && playing && synth && !synth.speaking && !synth.pending) {
-        speakUnit(cursor, true);
+        speakUnit(Math.min(nextIndex, timeline.length - 1), true);
       }
     }, 320);
   }
@@ -2126,7 +2177,7 @@
         if (synth.paused) synth.resume();
         if (!synth.speaking && !synth.pending && !pauseTimer &&
             Date.now() - lastSpeechStartedAt > 900) {
-          speakUnit(cursor, true);
+          speakUnit(Math.min(nextIndex, timeline.length - 1), true);
         }
       } catch (e) {}
     }, 5000);
@@ -2167,6 +2218,14 @@
       if (!reading) return;
       var target = e.target.closest('tr, p, h2, h3, h4, li, blockquote, .ff-tarif-card, .ff-einspar-box, .ff-kurzantwort, .callout');
       if (!target || e.target.closest('a, button, input, select, textarea')) return;
+      /* Fix 03.09.2026: Text markieren und kopieren darf die Wiedergabe
+         nicht an eine andere Stelle springen lassen. Eine laufende
+         Auswahl wird deshalb respektiert – der Sprung erfolgt nur bei
+         einem echten, kollabierten Klick. */
+      try {
+        var sel = win.getSelection && win.getSelection();
+        if (sel && !sel.isCollapsed && String(sel.toString() || '').length > 0) return;
+      } catch (err) {}
       unlockAudioEngine();
       for (var i = 0; i < timeline.length; i++) {
         if (timeline[i].block.el === target || (timeline[i].block.el && timeline[i].block.el.contains(target))) { jumpTo(i); return; }
@@ -2183,6 +2242,31 @@
     try { return dedupeVoices(synth.getVoices() || []); } catch (e) { return []; }
   }
 
+  /* Ehrliche Stimmen-Kennzeichnung (Fix 03.09.2026).
+     Die Web Speech API kennt kein Geschlechts-Merkmal im Standard. Ob eine
+     männliche Stimme existiert, entscheidet allein das Betriebssystem:
+     macOS/Windows liefern männliche DE-Stimmen, Chrome auf Android mit
+     Google-TTS nur „Google Deutsch“, iOS Safari blendet die Premium-Stimmen
+     aus. Der Button verspricht deshalb nur dann eine männliche Stimme, wenn
+     auf DIESEM Gerät tatsächlich eine gefunden wurde – sonst benennt er
+     neutral die Gerätstimme. Barrierefreiheit heißt hier: nichts versprechen,
+     was das Gerät nicht einlösen kann. */
+  function hasExplicitMaleVoice() {
+    if (!speechSupported) return false;
+    try { return !!resolveMaleVoice(currentLang).explicit; } catch (e) { return false; }
+  }
+
+  function syncVoiceLabel() {
+    if (!listenBtn) return;
+    var male = hasExplicitMaleVoice();
+    var aria = male ? texts.listenAria : (texts.listenAriaNeutral || texts.listenAria);
+    if (!reading && listenBtn.setAttribute) listenBtn.setAttribute('aria-label', aria);
+    if (listenBtn.setAttribute) listenBtn.setAttribute('data-ff-voice', male ? 'male' : 'device');
+    if (!listenBtn.setAttribute) return;
+    if (male) { if (listenBtn.removeAttribute) listenBtn.removeAttribute('title'); }
+    else listenBtn.setAttribute('title', texts.voiceFallback);
+  }
+
   function refreshVoices() {
     var list = readVoiceCatalog();
     var signature = list.map(function (v) {
@@ -2194,6 +2278,7 @@
       VOICE_CACHE = {};
     }
     calibrateQuality();
+    syncVoiceLabel();
   }
 
   if (speechSupported) {
@@ -2942,16 +3027,35 @@
     return dialog;
   }
 
+  /* Fokus-Rückgabe (WCAG 2.4.3).
+     Fix 03.09.2026: `doc.activeElement` ist beim Öffnen fast immer <body> –
+     Safari auf macOS/iOS fokussiert Buttons beim Klick nämlich bewusst NICHT.
+     Der alte Code merkte sich dann <body> und gab den Fokus an ein nicht
+     fokussierbares Element zurück: Tastaturnutzer:innen landeten nach dem
+     Schließen am Dokumentanfang. Jetzt wird geprüft, ob das gemerkte Element
+     tatsächlich fokussierbar und noch im Dokument ist – sonst springt der
+     Fokus zuverlässig auf den Kurzfassung-Button zurück. */
+  function isFocusable(n) {
+    if (!n || typeof n.focus !== 'function') return false;
+    if (n.disabled) return false;
+    if (!doc.body || !doc.body.contains(n)) return false;
+    var tag = String(n.tagName || '').toLowerCase();
+    if (tag === 'body' || tag === 'html') return false;
+    return true;
+  }
+
   function restoreDialogFocus() {
-    var target = lastFocused && lastFocused.focus ? lastFocused : summaryBtn;
-    if (target && target.focus) target.focus({ preventScroll: true });
+    var target = isFocusable(lastFocused) ? lastFocused : (isFocusable(summaryBtn) ? summaryBtn : null);
+    if (target) {
+      try { target.focus({ preventScroll: true }); } catch (e) { try { target.focus(); } catch (e2) {} }
+    }
     lastFocused = null;
   }
 
   function openDialog() {
     buildDialog();
     if (dialogIsOpen()) return;
-    lastFocused = doc.activeElement || summaryBtn;
+    lastFocused = isFocusable(doc.activeElement) ? doc.activeElement : summaryBtn;
     lockScroll(true);
     var opened = false;
     if (typeof dialog.showModal === 'function') {
