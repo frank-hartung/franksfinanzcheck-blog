@@ -160,6 +160,41 @@ jobs:
         if: steps.gate_diff.outputs.changed == 'true'
         run: hugo --minify
 
+      # ================= VORLESE-AUDIO (ZEIT-Standard, 03.09.2026) ============
+      # Vorab vertonte Artikel mit einer MÄNNLICHEN DE-/EN-Stimme über Groq
+      # playai-tts – wie bei zeit.de. Die Tonspur (MP3) wird über das native
+      # HTML5-<audio>-Element abgespielt und klingt damit IDENTISCH auf
+      # iPhone, Mac, Tablet, Android, PC und in jedem Browser – unabhängig
+      # von den Stimmen des Betriebssystems (die Garantie, die die Web-Speech-
+      # API allein nicht geben kann).
+      #
+      # Robustheit: (1) Ohne GROQ_API_KEY oder ohne Tonspur fällt der Reader
+      # automatisch auf die lokale Browser-Stimme zurück – der Deploy bricht
+      # NIEMALS wegen der Tonspur ab. (2) Inkrementell: unveränderte Artikel
+      # werden per Inhalts-Fingerprint aus dem letzten gh-pages-Stand
+      # wiederverwendet, nur neue/geänderte Artikel werden neu vertont.
+      - name: Vorlese-Audio-Selbsttest (Generator muss lauffähig sein)
+        run: python3 scripts/generate_reader_audio.py --selftest || echo "⚠ Vorlese-Audio-Selbsttest – Funde im Log (kein Deploy-Stopp)"
+
+      - name: Vorlese-Audio generieren (männliche DE/EN-Stimme)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          mkdir -p /tmp/ff-audio-cache
+          # Vorherige Tonspuren vom letzten Deploy holen (inkrementell).
+          if git fetch --quiet origin gh-pages:refs/remotes/origin/gh-pages 2>/dev/null; then
+            git restore --source=origin/gh-pages -- audio/articles 2>/dev/null || true
+            if [ -d audio/articles ]; then
+              cp -r audio/articles/. /tmp/ff-audio-cache/ 2>/dev/null || true
+              rm -rf audio
+            fi
+          fi
+          python3 scripts/generate_reader_audio.py \
+            --html-dir public \
+            --out-dir public/audio/articles \
+            --cache-dir /tmp/ff-audio-cache
+          echo "✅ Vorlese-Audio fertig."
+
       - name: Deploy auf gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
