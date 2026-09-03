@@ -5,13 +5,9 @@ date: {{ .Date }}
 lastmod: {{ .Date }}
 draft: true
 author: "Frank Hartung"
-tags: []
 categories: ["Ratgeber"]
-pillar: ""
 keywords: []
 kurzantwort: ""
-cover:
-  image: ""
-  alt: "{{ replace .File.ContentBaseName "-" " " | title }}"
-  caption: "Tipp von FranksFinanzcheck"
+build:
+  list: never
 ---

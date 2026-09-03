@@ -10,8 +10,11 @@ categories: ["Ratgeber"]
 pillar: ""
 keywords: []
 kurzantwort: ""
+pinwand: "Finanzen | Spartipps & Tarifvergleiche"
+pin_title: "{{ replace .File.ContentBaseName "-" " " | title }}"
+pin_description: ""
 cover:
-  image: ""
+  image: "images/covers/{{ .File.ContentBaseName }}.jpg"
   alt: "{{ replace .File.ContentBaseName "-" " " | title }}"
   caption: "Tipp von FranksFinanzcheck"
 ---
