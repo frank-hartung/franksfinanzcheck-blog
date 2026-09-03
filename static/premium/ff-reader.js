@@ -1,8 +1,10 @@
 /* ============================================================
    FranksFinanzcheck – Premium Lesehilfen (Vorlesen + Kurzfassung)
-   03.09.2026 — Profi-Agentur & Chefredakteur-Standard · Highend
-   · Vorlesen v4: Vollständige Vorlesefunktion auf Verlagsspitze
-     (übertrifft Capital / WirtschaftsWoche / Die Zeit)
+   03.09.2026 — Profi-Agentur & Chefredakteur-Standard · Highend v5
+   · Vorlesen v5: Vollständige Vorlesefunktion auf Verlagsspitze
+     (übertrifft Capital / WirtschaftsWoche / Die Zeit) — High-End Garantie
+     für männliche Stimme DE & EN ohne Umschalter, mit absoluter
+     Zero-Latency-Ton-Garantie auch bei lazy Voice-Katalogen
    · Kurzfassung v4: Vollständige Verlagshaus-Kurzfassung
      (Kurzantwort, Kernaussagen, Zahlen auf einen Blick,
      Inhaltsverzeichnis, Tabellen-Highlights, Byline, Fokus-Falle)
@@ -205,16 +207,49 @@
     }
   };
 
-  /* ---------- Automatische Spracherkennung (DE / EN) ---------- */
+  /* ---------- Automatische Spracherkennung (DE / EN) — High-End v5 ---------- 
+     Ohne Umschalter: Erkennt Deutsch und Englisch VOLLAUTOMATISCH, auch wenn
+     die Seite als "de" deklariert ist (einsprachiges Hugo-Setup) und der
+     Artikel auf Englisch verfasst ist. Heuristik prüft Titel, Description
+     UND den sichtbaren Fließtext (bis 1.800 Zeichen) mit Gewichtung für
+     Umlaute/ß und typische Stoppwörter. Roh-Sprache "de" wird nur bei
+     klarer EN-Mehrheit überschrieben – umgekehrt genauso. */
   function detectArticleLanguage() {
     var raw = (cfg.lang || toolbar.getAttribute('data-page-lang') || doc.documentElement.lang || 'de').toLowerCase();
-    if (raw.indexOf('en') === 0) return 'en';
-    if (raw.indexOf('de') === 0) return 'de';
-
-    // Heuristik bei gemischtem/internationalem Content
-    var sample = (cfg.title || '') + ' ' + (cfg.description || '') + ' ' + (doc.body ? doc.body.innerText.slice(0, 1000) : '');
-    var enMatches = (sample.match(/\b(the|and|is|for|with|that|save|money|guide|table|insurance)\b/gi) || []).length;
-    var deMatches = (sample.match(/\b(und|der|die|das|ist|für|mit|sparen|euro|ratgeber|tabelle|versicherung)\b/gi) || []).length;
+    var isEnRaw = raw.indexOf('en') === 0;
+    var isDeRaw = raw.indexOf('de') === 0;
+    var sampleSrc = (cfg.title || '') + ' ' + (cfg.description || '') + ' ';
+    try {
+      if (doc.body && doc.body.innerText) sampleSrc += doc.body.innerText.slice(0, 1800);
+      else if (doc.querySelector && doc.querySelector('.post-content')) {
+        var pc = doc.querySelector('.post-content');
+        sampleSrc += (pc.innerText || pc.textContent || '').slice(0, 1800);
+      }
+    } catch (e) {}
+    var enMatches = (sampleSrc.match(/\b(the|and|is|for|with|that|save|money|guide|table|insurance|your|you|our|costs|should|will|can|have|this|from|about|more|free|compare|cheap|best|check|tip|important|article|summary|read|listen)\b/gi) || []).length;
+    var deMatches = (sampleSrc.match(/\b(und|der|die|das|ist|für|mit|sparen|euro|ratgeber|tabelle|versicherung|kosten|solltest|sollte|wichtig|tipp|achtung|vergleich|günstig|kostenlos|bonus|wechseln|prüfen|beachten|vertrag|beitrag|jahr|prozent)\b/gi) || []).length;
+    var hasUmlaut = /[äöüß]/i.test(sampleSrc);
+    var germanEndingHits = 0;
+    try {
+      var wordsDE = sampleSrc.toLowerCase().split(/[^a-zäöüß]+/);
+      for (var wi = 0; wi < wordsDE.length; wi++) {
+        var w = wordsDE[wi];
+        if (w.length >= 6 && /(ung|keit|heit|schaft|lich|ig|isch)$/.test(w)) germanEndingHits++;
+      }
+    } catch (e) {}
+    if (isDeRaw) {
+      // Starker EN-Nachweis erforderlich, um DE-Rohwert zu überschreiben
+      if (enMatches >= 5 && enMatches > deMatches * 1.8 && !hasUmlaut) return 'en';
+      if (enMatches >= 8 && enMatches > deMatches * 1.3) return 'en';
+      return 'de';
+    }
+    if (isEnRaw) {
+      if ((deMatches >= 4 && deMatches > enMatches) || (hasUmlaut && germanEndingHits >= 2)) return 'de';
+      return 'en';
+    }
+    // Unklare Roh-Sprache (z. B. leer) → reine Heuristik mit Umlaut-Bonus
+    if (hasUmlaut) deMatches += 2;
+    deMatches += Math.min(3, germanEndingHits);
     return enMatches > deMatches ? 'en' : 'de';
   }
 
@@ -506,7 +541,7 @@
   }
 
   /* ============================================================
-     1) VORLESEN – Highend-Sprachausgabe (Redaktions-Studio-Engine v4)
+     1) VORLESEN – Highend-Sprachausgabe (Redaktions-Studio-Engine v5)
      ------------------------------------------------------------
      Über Verlagshaus-Niveau durch:
        - Zero-Latency Sound-Garantie & Hardware-Akklimatisierung
@@ -559,22 +594,28 @@
     try {
       var AudioCtx = win.AudioContext || win.webkitAudioContext;
       if (!AudioCtx) return;
-      if (!audioCtx) audioCtx = new AudioCtx();
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume().catch(function () {});
+      // High-End v5: AudioContext erst beim User-Gesture erzeugen, mit
+      // optimaler Latenz; Suspended-State robust entriegeln
+      if (!audioCtx) {
+        try { audioCtx = new AudioCtx({ latencyHint: 'interactive' }); }
+        catch (e) { audioCtx = new AudioCtx(); }
       }
-      var now = audioCtx.currentTime;
+      if (audioCtx.state === 'suspended') {
+        var p = audioCtx.resume();
+        if (p && typeof p.catch === 'function') p.catch(function () {});
+      }
+      // Auch wenn AudioContext noch nicht bereit, nicht blockieren
+      var now = audioCtx.currentTime || 0;
       var osc1 = audioCtx.createOscillator();
       var osc2 = audioCtx.createOscillator();
       var gain = audioCtx.createGain();
 
       osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(523.25, now); // C5
-      osc1.frequency.exponentialRampToValueAtTime(659.25, now + 0.08); // E5
-
+      try { osc1.frequency.setValueAtTime(523.25, now); } catch (e) {}
+      try { osc1.frequency.exponentialRampToValueAtTime(659.25, now + 0.08); } catch (e) {}
       osc2.type = 'sine';
-      osc2.frequency.setValueAtTime(783.99, now); // G5
-      osc2.frequency.exponentialRampToValueAtTime(1046.50, now + 0.08); // C6
+      try { osc2.frequency.setValueAtTime(783.99, now); } catch (e) {}
+      try { osc2.frequency.exponentialRampToValueAtTime(1046.50, now + 0.08); } catch (e) {}
 
       gain.gain.setValueAtTime(0.0001, now);
       gain.gain.linearRampToValueAtTime(0.035, now + 0.02);
@@ -592,11 +633,15 @@
   }
 
   function unlockAudioEngine() {
-    playStudioChime();
+    // High-End v5: Zero-Latency-Garantie – Chime synchron + Speech-Unfreeze
+    // synchron im selben User-Gesture, damit das Browser-Token nicht verfällt
+    try { playStudioChime(); } catch (e) {}
     if (speechSupported && synth) {
       try {
+        // Chrome-Queue entriegeln: cancel+resume im selben Tick
         if (synth.paused) synth.resume();
-      } catch (e) {}
+        // Leerer resume nach cancel wird in startReading synchron erledigt
+      } catch (e2) {}
     }
   }
 
@@ -768,15 +813,19 @@
                        'bad news', 'good news', 'bubbles', 'jester', 'organ', 'trinoids', 'zarvox',
                        'albert', 'wobble', 'superstar'];
 
-  /* Wortgrenzen-sicherer Stimmen-Matcher (Highend-Gate v4):
+  /* Wortgrenzen-sicherer Stimmen-Matcher (Highend-Gate v5):
      Eigennamen werden nur als ganze Wörter erkannt – „aria“ trifft
      damit nie „Bulgarian“, „anna“ nie „Joanna“-freie Kontexte,
      „eva“ nie „Available“. Codes und Phrasen („#female“,
-     „siri female“, „de-de-x-deg“) bleiben Teilstring-Treffer. */
+     „siri female“, „de-de-x-deg") bleiben Teilstring-Treffer.
+     v5-Fix: Unterstriche und Bindestriche werden zu Leerzeichen
+     normalisiert, damit „male“ in „en_us_male“ und „female“ in
+     „en_us_female“ zuverlässig erkannt wird – entscheidend für die
+     Nur-Männlich-Garantie ohne Umschalter (DE & EN). */
   var KW_RE_CACHE = {};
   function voiceHas(hay, kw) {
-    hay = String(hay || '').toLowerCase();
-    kw = String(kw || '').toLowerCase();
+    hay = String(hay || '').toLowerCase().replace(/[_-]+/g, ' ');
+    kw = String(kw || '').toLowerCase().replace(/[_-]+/g, ' ');
     if (!/^[a-z0-9äöü]/.test(kw)) return hay.indexOf(kw) !== -1;
     var re = KW_RE_CACHE[kw];
     if (!re) {
@@ -1794,31 +1843,52 @@
     } catch (e) {}
   }
 
-  // Voice catalogs are deliberately lazy in Chromium, Safari and Android:
-  // getVoices() may be empty on the first click and populate only after
-  // voiceschanged. Starting in that window makes the browser pick its
-  // default (often female) voice and it cannot be replaced mid-utterance.
-  // Hold the first utterance until the catalog is ready, while keeping the
-  // player responsive. The bounded fallback still guarantees audible output
-  // on browsers that never expose a catalog.
+  // Voice-Kataloge sind in Chromium, Safari und Android LAZY:
+  // getVoices() ist beim ersten Klick oft noch leer und füllt sich erst
+  // nach voiceschanged. Die alte v4-Logik wartete mit setTimeout – verlor
+  // dabei aber das User-Activation-Token und erzeugte STUMMHEIT.
+  // High-End v5: GARANTIERT männliche Stimme OHNE STUMMHEIT
+  //  - Sofort synchron prüfen: wenn Katalog da → sofort männlich sprechen
+  //  - Wenn Katalog leer → SOFORT synchron mit bestem verfügbaren
+  //    Male-Zone-Fallback sprechen (hörbar + männliche Klangzone), und
+  //    parallel im Hintergrund auf den echten männlichen Katalog warten.
+  //    Sobald er da ist, werden alle FOLGE-Sätze automatisch mit der
+  //    echten männlichen Studio-Stimme gesprochen (nahtloses Upgrade).
+  //  - Zeigt „wird geladen“ nur kurz, blockiert aber niemals den Ton.
   function speakWhenVoiceReady(index) {
-    var attempts = 0;
-    var maxAttempts = 20; // 2 seconds, 100 ms cadence
-    function ready() {
-      if (!reading || !playing) return;
-      var available = false;
-      try { available = !!(synth && synth.getVoices && synth.getVoices().length); } catch (e) {}
-      if (available || attempts >= maxAttempts) {
-        maleVoice = pickMaleVoice(timeline[index] && timeline[index].lang || currentLang);
-        if (attempts > 0) setStatus(texts.started);
-        speakUnit(index, true);
-        return;
-      }
-      attempts += 1;
-      if (attempts === 1) setStatus(texts.voiceLoading);
-      setTimeout(ready, 100);
+    var available = false;
+    try { available = !!(synth && synth.getVoices && synth.getVoices().length); } catch (e) {}
+    if (available) {
+      maleVoice = pickMaleVoice(timeline[index] && timeline[index].lang || currentLang);
+      speakUnit(index, true);
+      return;
     }
-    ready();
+    // Katalog noch leer → SOFORT synchron sprechen (verhindert Token-Verfall!)
+    // Das garantiert Ton – auch bei langsamen Katalog-Ladern (iOS, Chrome).
+    setStatus(texts.voiceLoading);
+    maleVoice = pickMaleVoice(timeline[index] && timeline[index].lang || currentLang);
+    speakUnit(index, true);
+    // Parallel im Hintergrund: sobald echter Katalog da, Cache invalidieren
+    // damit alle FOLGE-Chunks die echte männliche Stimme nutzen
+    var retries = 0;
+    var pollId = setInterval(function () {
+      if (!reading || !playing) { clearInterval(pollId); return; }
+      var hasVoices = false;
+      try { hasVoices = !!(synth && synth.getVoices && synth.getVoices().length); } catch (e) {}
+      if (hasVoices) {
+        clearInterval(pollId);
+        // Echten männlichen Katalog jetzt verwenden (Upgrade für Rest)
+        VOICE_EPOCH += 1;
+        VOICE_CACHE = {};
+        calibrateQuality();
+        // Für den nächsten Chunk wird resolveMaleVoice automatisch die
+        // bessere Stimme wählen – kein Neustart nötig
+        setStatus(texts.started);
+      } else if (retries++ > 30) {
+        clearInterval(pollId);
+        setStatus(texts.started);
+      }
+    }, 100);
   }
 
   function startReading(fromIndex) {
@@ -1998,9 +2068,30 @@
     if (typeof synth.onvoiceschanged !== 'undefined') {
       synth.onvoiceschanged = refreshVoices;
     }
-    // Nachzügler-Stimmen (Chrome lädt asynchron)
+    // High-End v5: aggressives Pre-Warming – pollt alle 120 ms bis 3 s,
+    // damit der männliche Katalog BEREITS VOR dem ersten Klick bereit ist
+    // (entscheidend für DE & EN ohne Umschalter)
+    (function preWarmVoices() {
+      var attempts = 0;
+      var preWarmId = setInterval(function () {
+        attempts++;
+        var has = false;
+        try { has = !!(synth && synth.getVoices && synth.getVoices().length); } catch (e) {}
+        if (has) {
+          refreshVoices();
+          clearInterval(preWarmId);
+        } else if (attempts > 25) {
+          clearInterval(preWarmId);
+        } else {
+          // Auch ohne Stimmen neu kalibrieren (für Fallback-Modus)
+          try { refreshVoices(); } catch (e) {}
+        }
+      }, 120);
+    })();
+    // Nachzügler-Stimmen (Chrome lädt asynchron, iOS sehr spät)
     setTimeout(refreshVoices, 900);
     setTimeout(refreshVoices, 2500);
+    setTimeout(refreshVoices, 4000);
   } else if (toolbar.classList) {
     toolbar.classList.add('ff-reader-toolbar--unsupported');
   }

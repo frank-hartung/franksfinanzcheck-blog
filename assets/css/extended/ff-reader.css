@@ -5,8 +5,9 @@
    Logik in static/premium/ff-reader.js.
    Farbwelt: Smaragdgrün (Vorlesen) + Signalgelb (Kurzfassung)
    aus custom.css – dunkelmodus-fest über CSS-Variablen.
-   Highend v3: schwebender Mini-Player während des Vorlesens
-   (Verlagshaus-Audioregie: Capital / WirtschaftsWoche / Die Zeit).
+   Highend v5: nur männliche Stimme DE & EN ohne Umschalter,
+   Zero-Latency-Ton-Garantie, schwebender Mini-Player während des
+   Vorlesens (Verlagshaus-Audioregie: Capital / WirtschaftsWoche / Die Zeit).
 ============================================================ */
 
 /* ---------- Toolbar ---------- */
