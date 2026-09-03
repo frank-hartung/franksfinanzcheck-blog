@@ -1,11 +1,11 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-02 13:01 UTC · **Modus:** FIX
+**Stand:** 2026-09-03 05:37 UTC · **Modus:** FIX
 
 - Artikel: **26**
-- Geheilt: **2**
+- Geheilt: **0**
 - Offene Issues: **0**
-- Covers: 1 Titel-Stale + fehlende nachgezogen
+- Covers: fehlende nachgezogen
 
 ## Kriterien 2026 (Agentur-Standard)
 
@@ -42,13 +42,10 @@
 | ✅ | `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` | — |
 | ✅ | `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` | — |
 | ✅ | `2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet` | — |
-| ✅ | `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` | — |
+| ✅ | `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` *(draft)* | — |
 | ✅ | `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | — |
 | ✅ | `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` | — |
 | ✅ | `2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen` | — |
-
-## Selbstheilung (diese Runde)
-
 
 ---
 *Erzeugt von `scripts/pinterest_seo_healer.py` – Teil der FrankAutoOps-Selbstheilung.*
