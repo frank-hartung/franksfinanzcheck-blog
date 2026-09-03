@@ -339,6 +339,35 @@ def main():
 
     print(f"Publish-Gate: {len(candidates)} Kandidat(en) für heute → {candidates}")
 
+    # ============ URL-HYGIENE ALS LETZTE LINIE (PREMIUM-FIX 03.09.2026) ====
+    # Kernbefund Mi 02.09.2026: Ein fertiger Artikel scheiterte am harten
+    # R8-URL-LEERZEICHEN („…-zu Hause/“ statt „…-zuhause/“) und wurde als
+    # „hold“ zurückgestuft → der Tag blieb mit 1 statt 2–3 LIVE-Artikeln.
+    # Falls ein Schreibpfad die Heiler in den Workflows umgangen hat, heilt
+    # das Gate hier deterministisch NACH (nur eindeutig auflösbare URLs,
+    # kein KI-Rewriting) – ein Kandidat wird also nie wegen einer bloßen
+    # Leerzeichen-URL verworfen/gehalten.
+    try:
+        sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+        import fix_url_hygiene
+        slugs = fix_url_hygiene.collect_slugs()
+        healed_any = False
+        for slug in list(candidates):
+            path = os.path.join(POSTS_DIR, slug, "index.md")
+            if not os.path.exists(path):
+                continue
+            text = open(path, encoding="utf-8").read()
+            new_text, n, _ = fix_url_hygiene.heal_text(text, slugs)
+            if n and not DRY_RUN:
+                open(path, "w", encoding="utf-8").write(new_text)
+                healed_any = True
+                print(f"  🧹 {slug}: {n} Leerzeichen-URL(s) direkt am Gate geheilt")
+        if healed_any:
+            candidates = todays_live_candidates()
+            print(f"Publish-Gate: Kandidaten nach URL-Heilung → {candidates}")
+    except Exception as exc:  # noqa: BLE001 – Gate darf nie am Heiler scheitern
+        print(f"  ⚠ URL-Hygiene am Gate nicht verfügbar: {exc}")
+
     today = datetime.date.today().isoformat()
     len_fail, len_warn = check_length_failures()
     seo_fail, seo_warn = seo_audit_failures()

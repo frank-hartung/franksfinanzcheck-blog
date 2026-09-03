@@ -1,0 +1,94 @@
+From 1086def5f67aceb9cddcc9dd11a2ba44be907eaa Mon Sep 17 00:00:00 2001
+From: frank-hartung <313369010+frank-hartung@users.noreply.github.com>
+Date: Thu, 3 Sep 2026 09:38:39 +0000
+Subject: [PATCH 2/5] fix(content): R8-Leerzeichen-URLs in Link-Zielen geheilt
+
+Alle internen Markdown-Ziele auf den kanonischen Slug ...-zuhause/ korrigiert
+(pillar internet-dsl, Haushaltsbuch, DNS-Server, Handytarif). Zusaetzlich
+stale Ops-Kommentar aus dem Handytarif-Frontmatter entfernt (verwies auf
+nicht existente Doku und trug die Literal-Fehlerklasse 'zu Hause/' in sich).
+Body-Prosa ('bei dir zu Hause') bleibt unangetastet.
+
+Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+---
+ content/pillar/internet-dsl/index.md                        | 2 +-
+ .../index.md                                                | 2 +-
+ .../index.md                                                | 4 ++--
+ .../index.md                                                | 6 ++----
+ 4 files changed, 6 insertions(+), 8 deletions(-)
+
+diff --git a/content/pillar/internet-dsl/index.md b/content/pillar/internet-dsl/index.md
+index eb60845..c14151f 100644
+--- a/content/pillar/internet-dsl/index.md
++++ b/content/pillar/internet-dsl/index.md
+@@ -88,7 +88,7 @@ Ein Silo lebt von Wiederholung, nicht von einem einmaligen Wechsel. Deshalb geh
+ 
+ ## Cluster: welche Artikel du in welcher Reihenfolge liest
+ 
+-1. Bedarf und Technik – [richtigen DSL-Tarif finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/)
++1. Bedarf und Technik – [richtigen DSL-Tarif finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/)
+ 2. Preis und Fallen – [DSL-Vergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
+ 3. Bonus – [Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/)
+ 4. Prozess – [Anbieterwechsel Praxis](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
+diff --git a/content/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/index.md b/content/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/index.md
+index 6c827cf..9354d1c 100644
+--- a/content/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/index.md
++++ b/content/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/index.md
+@@ -47,7 +47,7 @@ Die Lebenshaltungskosten in Deutschland sind seit 2022 auf ein dauerhaft höhere
+ 
+ * **Abo-Schlupflöcher:** Streaming-Dienste, Cloud-Speicher, Fitnessstudio, Zeitungs-Flatrates und Lieferdienste summieren sich oft auf 80 € bis 150 € pro Monat – ohne dass man einzeln bewusst darauf verzichtet.
+ * **Kleinvieh-Mist:** Ein Coffee-to-go für 3,50 €, der Snack am Bahnhof oder die spontane Bestellung machen im Monat schnell 120 € bis 200 € aus.
+-* **Zu teure Verträge:** Handy, Internet, Kfz-Versicherung und Energieverträge laufen oft Jahre lang, ohne jemals verglichen zu werden. Ein regelmäßiger Vergleich [spart bei DSL bis zu 380 € über 24 Monate](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/).
++* **Zu teure Verträge:** Handy, Internet, Kfz-Versicherung und Energieverträge laufen oft Jahre lang, ohne jemals verglichen zu werden. Ein regelmäßiger Vergleich [spart bei DSL bis zu 380 € über 24 Monate](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
+ 
+ Ein Haushaltsbuch wirkt wie ein Vergrößerungsglas: Es deckt genau diese Stellen auf, an denen Monat für Monat Geld versickert. Das Ziel ist dabei nicht Verzicht um jeden Preis, sondern **bewusste Entscheidung statt automatischer Ausgabe**.
+ 
+diff --git a/content/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/index.md b/content/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/index.md
+index b982074..a22312d 100644
+--- a/content/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/index.md
++++ b/content/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/index.md
+@@ -140,7 +140,7 @@ Unter Android 13/14 ab Version 9 kannst du systemweit "Private DNS" festlegen:
+ 
+ ## DNS-Wechsel + Tarif optimieren: Die doppelte Ersparnis
+ 
+-Schnelle Resolver verbessern die Antwortzeiten – ersetzen aber keine gute Bandbreite. Hast du trotz des Wechsels noch lange Ladezeiten, Streaming-Ruckler oder langsame Downloads, liegt das meist an einem überlasteten oder zu langsamen Tarif. Ein [DSL-Vergleich](/go/dsl/) zeigt dir in zwei Minuten, ob ein Wechsel auf eine höhere Bandbreite oder einen günstigeren Anbieter bis zu **380 € über 24 Monate** spart – wie ich es in meinem [Ratgeber zum DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) detailliert vorgerechnet habe.
++Schnelle Resolver verbessern die Antwortzeiten – ersetzen aber keine gute Bandbreite. Hast du trotz des Wechsels noch lange Ladezeiten, Streaming-Ruckler oder langsame Downloads, liegt das meist an einem überlasteten oder zu langsamen Tarif. Ein [DSL-Vergleich](/go/dsl/) zeigt dir in zwei Minuten, ob ein Wechsel auf eine höhere Bandbreite oder einen günstigeren Anbieter bis zu **380 € über 24 Monate** spart – wie ich es in meinem [Ratgeber zum DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) detailliert vorgerechnet habe.
+ 
+ | Optimierung | Aufwand | Effekt | Kosten |
+ |:---|---:|:---|---:|
+@@ -196,7 +196,7 @@ Diese Maßnahme ist eine der einfachsten und effektivsten Internet-Tuning-Stells
+ Meine klare Empfehlung: Setze ihn direkt im Router (z. B. an der FritzBox) ab, damit alle Geräte im Haushalt automatisch davon profitieren. Wenn du im Anschluss noch deinen Tarif prüfst, holst du das Maximum an Geschwindigkeit und Preis heraus.
+ 
+ 
+-**Weiterlesen:** [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
++**Weiterlesen:** [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
+ 
+ ## Häufige Fragen
+ 
+diff --git a/content/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/index.md b/content/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/index.md
+index 4c72760..d232ee4 100644
+--- a/content/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/index.md
++++ b/content/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/index.md
+@@ -3,9 +3,7 @@ lastmod: 2026-09-02
+ title: "Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €"
+ description: "Handytarif vergleichen 2026: Allnet-Flats ab 4,99 €, 5G-Tarife unter 15 € und wann sich LTE noch lohnt. Mit der 8-Punkte-Checkliste bis zu 360 € im Jahr sparen."
+ date: 2026-09-02T04:05:51Z
+-draft: true
+-cadence_demoted: 2026-09-02T13:07:26Z
+-cadence_grund: "publish-gate: Textverständnis-Gate nicht bestanden: R8-URL-LEERZEICHEN: URL mit Leerzeichen: „../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/“ (…"
++draft: false
+ tags: ["Handytarif vergleichen", "Handytarif Vergleich", "Günstiger Handytarif", "Allnet Flat", "5G Tarif", "Handyvertrag wechseln"]
+ categories: ["Ratgeber"]
+ pillar: "internet-dsl"
+@@ -179,7 +177,7 @@ Combo-Tarife (DSL+Handy) nur rechnen, wenn beide Teile einzeln schlechter sind.
+ 
+ Der Mobilfunkmarkt ist 2026 so günstig wie nie zuvor. Allnet-Flats mit 5G gibt es unter 10 €, und trotzdem zahlen Millionen Kunden noch 25–40 € für veraltete Verträge. Mit einem 15-minütigen Vergleich und Wechsel kannst du ohne Komfortverlust zwischen **200 € und 360 € pro Jahr** sparen. Prüfe Netz, Volumen und Kleingedrucktes systematisch – der Aufwand macht sich dauerhaft bezahlt.
+ 
+-**Weiterlesen:** [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
++**Weiterlesen:** [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
+ 
+ ## Häufige Fragen
+ 
+-- 
+2.39.5
+

@@ -1,0 +1,388 @@
+# ============================================================
+#  PRODUKTIONS-WACHE (Content-Engine) – erkennt "läuft, produziert
+#  aber nichts" AM SELBEN TAG statt nach 78 Stunden.
+#  ------------------------------------------------------------
+#  WARUM DIESE WACHE (Befund 29.08.2026, Issue #97):
+#
+#  Der Bot-Watchdog meldete "Kein Artikel in den letzten 78 h".
+#  Untersuchung über die GitHub-API:
+#    • content-engine-v2.yml lief am 28.08. (Freitag = Publikationstag)
+#      um 01:37, 21:56, 21:58 und 21:59 UTC – ALLE "success".
+#    • Lauf 33214900691 dauerte 11 Sekunden; Schritte 8/9/10
+#      (Phasen 2–5) wurden ÜBERSPRUNGEN -> Phase 1 hatte nichts
+#      erzeugt -> ARTIKEL_ERSTELLT=false.
+#    • ENGINE-STATUS.md zeigte weiter "26.08. 08:24 – Tageslimit
+#      erreicht (2/2)", obwohl danach vier Läufe stattfanden.
+#      Grund: write_status() schreibt die Datei, committet wird sie
+#      aber erst in Phase 5 – und die wird genau dann übersprungen,
+#      wenn nichts produziert wurde. DAS DASHBOARD FRIERT ALSO
+#      GENAU DANN EIN, WANN MAN ES BRAUCHT.
+#    • In den 100 Commits zwischen 26.08. 11:12 und 29.08. 09:03:
+#      31x "fix(gate)", 5x "fix(cadence)", 11x "chore" –
+#      und KEIN EINZIGER "content: neuer Artikel".
+#
+#  DREI KONSTRUKTIONSFEHLER, DIE DIESE WACHE SCHLIESST:
+#   1. "Nichts produziert" gilt als Erfolg (Exit 0, grüner Lauf).
+#      -> Hier: 0 Artikel an einem Publikationstag = P1, sofort.
+#   2. Das Dashboard wird in einer Phase geschrieben, die bei
+#      Leerlauf übersprungen wird.
+#      -> Hier: PRODUKTIONS-STATUS.md wird mit `if: always()`
+#         geschrieben UND committet – es kann nicht einfrieren.
+#   3. Der Bot-Watchdog prüft mit einem starren 78-h-Fenster gegen
+#      "2/Tag", obwohl die DAUERVORGABE Mo/Mi/Fr lautet. An jedem
+#      Wochenende ist "kein Artikel" also korrekt – der Alarm ist
+#      konstruktionsbedingt teilweise ein Falschalarm. Seine
+#      Anleitung verweist zudem auf "Automatische Content-Generierung",
+#      einen Workflow, den es nicht mehr gibt (er heißt
+#      "Content-Engine v2") – man kann der Anleitung nicht folgen.
+#      -> Hier: Bewertung PRO PUBLIKATIONSTAG (Mo/Mi/Fr) statt
+#         starres Zeitfenster, plus korrekte Runbook-Links.
+#
+#  TRIGGER (zwei Modi):
+#   A) workflow_run: direkt NACH jedem Content-Engine-Lauf.
+#      Erwischt "gelaufen, aber nichts erzeugt" innerhalb von Minuten.
+#   B) schedule: täglich 20:00 UTC. Erwischt "gar nicht gelaufen".
+#
+#  KALENDER: PUBLICATION_DAYS wird aus scripts/cadence_guard.py
+#  importiert – dieselbe Quelle wie die Engine. Keine zweite Kopie.
+# ============================================================
+name: Produktions-Wache (Content-Engine)
+
+on:
+  workflow_run:
+    workflows: ["Content-Engine v2"]
+    types: [completed]
+  schedule:
+    - cron: "0 20 * * *"    # 22:00 MESZ – nach dem letzten Engine-Slot
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+  actions: read
+
+concurrency:
+  group: produktions-wache
+  cancel-in-progress: false
+
+env:
+  MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
+  STATUS: PRODUKTIONS-STATUS.md
+  LABEL: produktions-wache
+  ENGINE_WORKFLOW: content-engine-v2.yml
+
+jobs:
+  wache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Frischesten Stand holen (Engine-Commit könnte zeitgleich kommen)
+        run: |
+          for i in 1 2 3; do
+            git pull --ff-only origin main && break || sleep 5
+          done
+
+      - name: Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten
+        run: pip install --quiet "pyyaml==6.0.2"
+
+      # -------------------------------------------------------
+      # Kernprüfung: Wie viele Artikel sind am jeweils letzten
+      # Publikationstag erschienen? (Und: lief die Engine heute?)
+      # -------------------------------------------------------
+      - name: Produktion prüfen
+        id: check
+        env:
+          MODE: ${{ github.event_name }}
+          # Abschluss des Engine-Laufs (nur im workflow_run-Modus gefüllt)
+          ENGINE_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python3 - <<'PYEOF'
+          import datetime, os, sys, json
+          sys.path.insert(0, "scripts")
+          import cadence_guard as cg
+
+          today = datetime.date.today()
+          pub_days = cg.PUBLICATION_DAYS
+          names = ["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"]
+          is_pub = today.weekday() in pub_days
+          minimum = int(os.environ.get("MIN_ARTIKEL_PRO_TAG") or "2")
+
+          posts = cg.load_posts()
+          live = [p for p in posts if not p["draft"]]
+
+          # PARK-ZUSTÄNDE (31.08.2026, Premium-Fix nach Issue #129): ein Tag
+          # ohne Artikel ist eine andere Baustelle, wenn fertig geparkte
+          # Artikel in der Re-Queue liegen oder von einem Gate gehalten werden.
+          # Quelle ist die Kadenz-Wache selbst (keine zweite Zähllogik).
+          queue_n = sum(1 for p in posts if p.get("state") == "queue")
+          hold_posts = [p for p in posts if p.get("state") == "hold"]
+          hold_alt = max([(p.get("age_days") or 0) for p in hold_posts],
+                         default=0)
+
+          # letzter Publikationstag <= heute
+          last_pub = today
+          for back in range(0, 8):
+              d = today - datetime.timedelta(days=back)
+              if d.weekday() in pub_days:
+                  last_pub = d
+                  break
+
+          count_last = len(cg.published_on(posts, last_pub))
+          count_today = len(cg.published_on(posts, today)) if is_pub else None
+
+          # Wann erschien der letzte Artikel überhaupt?
+          last_article = max((p["date"] for p in live), default=None)
+          age_days = (today - last_article).days if last_article else None
+
+          # WICHTIG: Die Engine hat DREI Slots pro Publikationstag
+          # (06:10, 14:10, 17:40 UTC – Haupt-Slot + 2 Fallbacks).
+          # Nach dem ersten Slot darf NICHT alarmiert werden: genau dafür
+          # existieren die Fallbacks. Alarm erst, wenn alle Slots vorbei
+          # sind – oder sofort, wenn der Lauf selbst fehlgeschlagen ist.
+          now_utc = datetime.datetime.now(datetime.timezone.utc)
+          after_last_slot = (now_utc.hour * 60 + now_utc.minute) >= (18 * 60 + 30)
+          mode = os.environ.get("MODE", "")
+          conclusion = os.environ.get("ENGINE_CONCLUSION", "")
+
+          # Bewertung
+          level, meldung = "OK", ""
+          if is_pub and count_today == 0:
+              if conclusion == "failure":
+                  level = "P1"
+                  meldung = (f"Heute ({names[today.weekday()]}, {today.isoformat()}) ist ein "
+                             f"Publikationstag – der Engine-Lauf ist FEHLGESCHLAGEN und es "
+                             f"sind 0 Artikel erschienen (Ziel: {minimum}).")
+              elif mode == "workflow_run" and not after_last_slot:
+                  level = "WARTEND"
+                  meldung = (f"Publikationstag, bisher 0 Artikel – Fallback-Slots "
+                             f"(14:10 / 17:40 UTC) laufen noch. Kein Alarm.")
+              else:
+                  level = "P1"
+                  meldung = (f"Heute ({names[today.weekday()]}, {today.isoformat()}) ist ein "
+                             f"Publikationstag – alle Slots vorbei, **0 Artikel** erschienen "
+                             f"(Ziel: {minimum}).")
+          elif count_last == 0:
+              level = "P1"
+              meldung = (f"Am letzten Publikationstag ({names[last_pub.weekday()]}, "
+                         f"{last_pub.isoformat()}) sind **0 Artikel** erschienen (Ziel: {minimum}).")
+          elif count_last < minimum:
+              level = "P2"
+              meldung = (f"Am letzten Publikationstag ({last_pub.isoformat()}) nur "
+                         f"{count_last}/{minimum} Artikel – unter Mindestziel.")
+          else:
+              meldung = f"Letzter Publikationstag ({last_pub.isoformat()}): {count_last} Artikel – Ziel erfüllt."
+
+          if queue_n or hold_posts:
+                teile = []
+                if queue_n:
+                    teile.append(f"{queue_n} förderfähig in der Re-Queue")
+                if hold_posts:
+                    teile.append(f"{len(hold_posts)} von Gates gehalten "
+                                 f"(ältester {hold_alt} Tage: "
+                                 f"{hold_posts[0].get('grund') or 'Grund unbekannt'})")
+                meldung += " – Bestand: " + ", ".join(teile)
+
+          out = {
+            "queued_posts": queue_n,
+            "held_posts": len(hold_posts),
+            "held_max_age_days": hold_alt,
+            "today": today.isoformat(),
+            "today_is_publication_day": is_pub,
+            "last_publication_day": last_pub.isoformat(),
+            "articles_last_publication_day": count_last,
+            "articles_today": count_today,
+            "last_article": last_article.isoformat() if last_article else None,
+            "age_days": age_days,
+            "live_posts": len(live),
+            "publication_days": sorted(pub_days),
+            "level": level,
+            "message": meldung,
+          }
+          print(json.dumps(out, ensure_ascii=False, indent=2))
+
+          # --- Statusdatei (wird IMMER geschrieben) -----------
+          with open(os.environ["STATUS"], "w", encoding="utf-8") as f:
+              f.write("# Produktions-Wache – Content-Engine\n\n")
+              f.write(f"**Stand:** {datetime.datetime.now(datetime.timezone.utc):%Y-%m-%d %H:%M} UTC  \n")
+              f.write(f"**Stufe:** {level}  \n")
+              f.write(f"**Befund:** {meldung}\n\n")
+              f.write("| Kennzahl | Wert |\n|---|---|\n")
+              f.write(f"| Heute | {today.isoformat()} ({names[today.weekday()]}) |\n")
+              f.write(f"| Publikationstag heute | {'ja' if is_pub else 'nein'} |\n")
+              f.write(f"| Artikel letzter Publikationstag ({last_pub.isoformat()}) | {count_last} |\n")
+              f.write(f"| Letzter Artikel überhaupt | {last_article.isoformat() if last_article else '–'}"
+                      f"{(' (' + str(age_days) + ' Tage her)') if age_days is not None else ''} |\n")
+              f.write(f"| Live-Artikel gesamt | {len(live)} |\n")
+              f.write(f"| Förderfähig in der Re-Queue | {queue_n} |\n")
+              f.write(f"| Von Gates gehalten (braucht Korrektur) | {len(hold_posts)} |\n")
+              f.write(f"| Mindestziel/Tag | {minimum} |\n\n")
+              f.write("_Wird bei jedem Lauf aktualisiert (auch bei Leerlauf) – diese Datei kann nicht einfrieren._\n")
+
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as f:
+              f.write(f"LEVEL={level}\n")
+              f.write(f"MELDUNG={meldung}\n")
+          PYEOF
+
+      # -------------------------------------------------------
+      # Lief die Engine heute überhaupt? (nur im Plan-Modus)
+      # -------------------------------------------------------
+      - name: Engine-Lauf von heute prüfen
+        if: github.event_name != 'workflow_run'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -Eeuo pipefail
+          SEIT="$(date -u -d '00:00 today' +%Y-%m-%dT%H:%M:%SZ)"
+          N="$(gh run list --workflow "$ENGINE_WORKFLOW" --created ">$SEIT" \
+               --json databaseId --jq 'length' 2>/tmp/gh.err)" || {
+               echo "::error::gh run list fehlgeschlagen"; cat /tmp/gh.err; exit 1; }
+          echo "Engine-Läufe heute: $N"
+          echo "ENGINE_RUNS_TODAY=$N" >> "$GITHUB_ENV"
+          if [ "${LEVEL:-OK}" != "OK" ] && [ "$N" = "0" ]; then
+            echo "MELDUNG=${MELDUNG:-} — zusätzlich: die Content-Engine hat heute GAR NICHT gelaufen." >> "$GITHUB_ENV"
+          fi
+
+      # -------------------------------------------------------
+      # Alarm + Issue (mit Fingerprint – kein täglicher Doppelpost)
+      # -------------------------------------------------------
+      - name: Telegram-Alarm (P1)
+        if: env.LEVEL == 'P1'
+        env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -Eeuo pipefail
+          if [ -z "${TG_TOKEN:-}" ] || [ -z "${TG_CHAT:-}" ]; then
+            echo "Telegram nicht konfiguriert – übersprungen."; exit 0
+          fi
+          msg=/tmp/tg.txt
+          {
+            echo "ROT - Content-Engine produziert nicht"
+            echo ""
+            echo "$MELDUNG"
+            echo ""
+            echo "Runbook: Actions -> 'Content-Engine v2' -> letzter Lauf -> Schritt 'Phase 1 - Artikel generieren'"
+            echo "Lauf: $RUN_URL"
+          } > "$msg"
+          curl -sS --max-time 15 -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TG_CHAT}" \
+            --data-urlencode "text@${msg}" \
+            --data-urlencode "disable_web_page_preview=true" >/dev/null
+          echo "Telegram-Alarm gesendet"
+
+      - name: Issue öffnen / kommentieren / schließen
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -Eeuo pipefail
+          if ! gh label list --json name --jq '.[].name' 2>/tmp/lab.err | grep -qx "$LABEL"; then
+            gh label create "$LABEL" --color "d93f0b" \
+              --description "Produktions-Wache: Content-Engine liefert nicht" \
+              2>/tmp/lab.err || { echo "::error::Label nicht anlegbar"; cat /tmp/lab.err; exit 1; }
+          fi
+          FID="wache-id: produktions-wache"
+          NUM="$(FID="$FID" gh issue list --label "$LABEL" --state open --json number,body \
+                 --jq '[.[] | select(.body // "" | contains(env.FID)) | .number] | first // ""')" \
+                 || { echo "::error::gh issue list fehlgeschlagen"; exit 1; }
+
+          case "${LEVEL:-OK}" in
+            OK)
+              if [ -n "$NUM" ]; then
+                gh issue close "$NUM" --comment "✅ $(date -u '+%Y-%m-%d %H:%M') UTC – Produktion wieder im Zielkorridor." >/dev/null
+                echo "Issue #$NUM geschlossen."
+              fi
+              exit 0
+              ;;
+            WARTEND)
+              # Fallback-Slots laufen noch: bestehendes Issue offen lassen,
+              # aber kein neues aufmachen und nichts kommentieren.
+              echo "Stufe WARTEND – keine Issue-Aktion."
+              exit 0
+              ;;
+          esac
+
+          BODY="$(cat "$STATUS")
+
+          ---
+          **Runbook**
+          1. Actions → **Content-Engine v2** → letzter Lauf → Schritt *Phase 1 – Artikel generieren*
+          2. Steht dort „Kein Publikationstag“? → korrekt, kein Fehler.
+          3. Steht dort „Tageslimit erreicht (LIVE …)“? → seit 03.09.2026 zählt die
+             Engine NUR live (draft: false) – gleichtägige Gate-Entwürfe blockieren
+             keine Slots mehr; dann sind 2–3 LIVE wirklich da.
+          4. Steht dort „unter LIVE-Mindestziel“? → Gate-Zurückstufung geprüft?
+             URL-Hygiene (fix_url_hygiene.py) läuft in deploy/blog-health/Engine.
+          5. Steht dort „Themenpool erschöpft“? → Themenpool nachfüllen.
+          6. Sonst: Secrets GROQ/GEMINI prüfen (Settings → Secrets and variables → Actions).
+
+          Lauf: $RUN_URL
+
+          <!-- $FID -->"
+
+          if [ -z "$NUM" ]; then
+            gh issue create --title " Produktions-Wache: Content-Engine liefert nicht ($LEVEL)" \
+              --label "$LABEL" --body "$BODY" >/dev/null
+            echo "Issue erstellt."
+          else
+            gh issue comment "$NUM" --body "**$(date -u '+%Y-%m-%d %H:%M') UTC** – weiterhin $LEVEL.
+
+          $BODY" >/dev/null
+            echo "Issue #$NUM kommentiert."
+          fi
+
+      # -------------------------------------------------------
+      # Status IMMER sichern – mit if: always(), damit das Dashboard
+      # nicht einfrieren kann ( Kern-Fehler des alten Setups ).
+      # -------------------------------------------------------
+      - name: Status committen (immer)
+        if: always()
+        run: |
+          set -Eeuo pipefail
+          git config user.name "Produktions-Wache-Bot"
+          git config user.email "produktions-wache-bot@users.noreply.github.com"
+          [ -f "$STATUS" ] || exit 0
+          git add -- "$STATUS"
+          if git diff --cached --quiet; then
+            echo "Status unverändert."
+            exit 0
+          fi
+          git commit -m "chore: PRODUKTIONS-STATUS aktualisiert [skip ci]"
+          if ! git pull --rebase --autostash origin main; then
+            git rebase --abort 2>/dev/null || true
+            echo "::warning::Rebase fehlgeschlagen – Status wird im Artefakt gesichert."
+            exit 0
+          fi
+          git push origin HEAD:main || echo "::warning::Push fehlgeschlagen – Status im Artefakt gesichert."
+
+      - name: Status als Artefakt
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: produktions-status-${{ github.run_number }}
+          path: PRODUKTIONS-STATUS.md
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Step-Summary
+        if: always()
+        run: |
+          {
+            echo "## Produktions-Wache"
+            echo ""
+            echo "**Stufe:** ${LEVEL:-unbekannt}"
+            echo ""
+            [ -f "$STATUS" ] && cat "$STATUS"
+          } >> "$GITHUB_STEP_SUMMARY"
