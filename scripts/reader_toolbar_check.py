@@ -16,7 +16,7 @@ def check_toolbar_partial():
     if not path.is_file():
         return False, "layouts/_partials/reader_toolbar.html fehlt"
     content = path.read_text(encoding="utf-8")
-    required_ids = ["ff-reader-toolbar", "ff-listen-btn", "ff-listen-stop", "ff-summary-btn", "ff-reader-status", "ff-reader-progress-bar", "ff-reader-config"]
+    required_ids = ["ff-reader-toolbar", "ff-listen-btn", "ff-listen-stop", "ff-listen-prev", "ff-listen-next", "ff-summary-btn", "ff-reader-status", "ff-reader-progress-bar", "ff-reader-config", "ff-reader-speed", "ff-reader-voice", "ff-reader-remaining"]
     for rid in required_ids:
         if rid not in content:
             return False, f"ID '{rid}' fehlt in reader_toolbar.html"
@@ -48,14 +48,29 @@ def check_js_engine():
     if "speechNormalize" not in content:
         return False, "Lautschrift- & Einheiten-Normalisierung fehlt in ff-reader.js"
         
-    return True, "ff-reader.js (Männliche Stimme, DE/EN, Tabellen-Barrierefreiheit) vollständig"
+    # Highend-Sprachausgabe: Prosodie, Chunking, Steuerung
+    highend_tokens = [
+        "PROSODY", "splitForSpeech", "buildTimeline", "pauseAfterChunk",
+        "setupMediaSession", "rankVoices", "buildVoiceMenu", "jumpBlock",
+        "estimateRemaining", "startKeepAlive", "STUDIO_VOICES",
+    ]
+    for token in highend_tokens:
+        if token not in content:
+            return False, f"Highend-Sprachausgabe unvollständig (Token '{token}' fehlt)"
+
+    # Redaktionelle Aussprache-Veredelung
+    for token in ["Paragraf ", "Sozialgesetzbuch", "September", "die Webseite ", "E T F"]:
+        if token not in content:
+            return False, f"Aussprache-Veredelung unvollständig (Token '{token}' fehlt)"
+
+    return True, "ff-reader.js (Highend-Prosodie, Studio-Stimmen, DE/EN, Tabellen-Barrierefreiheit) vollständig"
 
 def check_css():
     path = ROOT / "assets" / "css" / "extended" / "ff-reader.css"
     if not path.is_file():
         return False, "assets/css/extended/ff-reader.css fehlt"
     content = path.read_text(encoding="utf-8")
-    required_classes = [".ff-reader-toolbar", ".ff-reader-btn--listen", ".ff-reader-btn--summary", ".ff-reader-active", "tr.ff-reader-active"]
+    required_classes = [".ff-reader-toolbar", ".ff-reader-btn--listen", ".ff-reader-btn--summary", ".ff-reader-active", "tr.ff-reader-active", ".ff-reader-select", ".ff-reader-btn--nav", ".ff-reader-toolbar__remaining"]
     for cls in required_classes:
         if cls not in content:
             return False, f"CSS-Klasse '{cls}' fehlt in ff-reader.css"
