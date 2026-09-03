@@ -81,6 +81,14 @@ jobs:
       # SOFORT geheilt (Zurückstufung + Re-Queue), damit der heutige Slot
       # auf einer korrekten Tageszahl aufbaut und kein 4./5. Artikel live
       # gehen kann. Report: CADENCE-GATE-REPORT.md.
+      #
+      # URL-HYGIENE VOR DER KADENZ (PREMIUM-FIX 03.09.2026): Leerzeichen-
+      # URLs (R8-URL-LEERZEICHEN) haben am 02.09.2026 einen fertigen
+      # Re-Queue-Promotion-Kandidaten am Publish-Gate stoppen lassen. Hier
+      # wird die Klasse deterministisch geheilt (--fix) und ausschließlich
+      # dadurch blockierte holds werden entblockt (--heal-holds), BEVOR
+      # cadence_guard promotet – so geht kein Post mit heilbarem
+      # URL-Fehler live bzw. in die Kapazität.
       - name: Phase 0.5 – Kadenz-Gate sicherstellen (Selbsttest + Selbstheilung)
         # PREM-AUDIT 26.08.2026: nach jeder Kadenz-Heilung (Zurückstufung
         # → draft, URL verschwindet aus dem Build) sofort die kontextuellen
@@ -88,6 +96,9 @@ jobs:
         # (draft_link_healer) – IM SELBEN COMMIT, damit der Push nie defekte
         # interne Links nach main bringt (Issue #85).
         run: |
+          python3 scripts/fix_url_hygiene.py --selftest
+          python3 scripts/fix_url_hygiene.py --fix
+          python3 scripts/fix_url_hygiene.py --heal-holds
           python3 scripts/cadence_guard.py --selftest
           python3 scripts/cadence_guard.py --fix
           python3 scripts/draft_link_healer.py --selftest
@@ -256,6 +267,8 @@ jobs:
           python3 scripts/check_covers.py --fix || echo "⚠ Cover-Varianten (nicht blockierend)"
           echo "== Kurzantworten (Featured-Snippet-Box) =="
           python3 scripts/generate_kurzantworten.py || echo "⚠ Kurzantworten (nicht kritisch)"
+          echo "== URL-Hygiene (R8-URL-LEERZEICHEN selbstheilend, PREMIUM-FIX 03.09.2026) =="
+          python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
           git add -A
@@ -285,6 +298,8 @@ jobs:
           python3 scripts/internal_linker.py --apply --max 5 || echo "⚠ Linker-Fehler (nicht kritisch)"
           echo "== Affiliate-Profi-Check (A1-A8, selbstheilend: CTA/E-E-A-T/Links) =="
           python3 scripts/affiliate_profi_check.py --fix || echo "⚠ Profi-Check (nicht blockierend)"
+          echo "== URL-Hygiene nach Optimierung (R8-URL-LEERZEICHEN, PREMIUM-FIX 03.09.2026) =="
+          python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
           git add -A
