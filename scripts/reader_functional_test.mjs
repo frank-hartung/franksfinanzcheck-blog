@@ -642,7 +642,14 @@ t.group('13) First-Party-Audiofassung (MP3 hat Vorrang vor Web Speech)');
   t.ok(ap.doc.getElementById('ff-reader-progress-bar').style.width !== '0%'
     && ap.doc.getElementById('ff-reader-progress-bar').style.width !== '',
     'Fortschrittsbalken folgt der Audiozeit');
-  t.ok(!!ap.doc.querySelector('.ff-reader-active'), 'Live-Markierung folgt dem gesprochenen Abschnitt');
+  /* Timeline-Einheiten verweisen per blockIndex auf blocks[]. Über ein
+     nicht vorhandenes unit.block aufgelöst, blieb die Markierung in der
+     Audiostufe stumm – der Fortschritt lief, aber im Text stand nichts. */
+  const activeEl = ap.doc.querySelector('.ff-reader-active');
+  t.ok(!!activeEl, 'Live-Markierung folgt dem gesprochenen Abschnitt');
+  t.ok(!!activeEl && activeEl.closest('.post-content, .ff-kurzantwort, .ff-korrektur') !== null,
+    'Markierung sitzt auf einem echten Inhaltsblock',
+    activeEl ? activeEl.tagName + '.' + activeEl.className : 'keine Markierung');
   t.ok(/noch\s+\d+:\d+/.test(ap.doc.getElementById('ff-reader-remaining').textContent),
     'Restzeit wird angezeigt', ap.doc.getElementById('ff-reader-remaining').textContent);
 

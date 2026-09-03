@@ -2273,13 +2273,18 @@
     if (audioTimeline.length) {
       var idx = audioUnitAt(t);
       var unit = audioTimeline[idx];
-      if (unit && unit.block && unit.block.el && unit.block.el !== toolbar) {
+      /* Timeline-Einheiten verweisen per blockIndex auf blocks[] – ein
+         unit.block gibt es nicht. Über den Index auflösen, sonst bleibt
+         die Live-Markierung in der Audiostufe stumm. */
+      var block = unit ? blocks[unit.blockIndex] : null;
+      var el = block ? block.el : null;
+      if (el && el !== toolbar) {
         blocks.forEach(function (b) {
-          if (b.el && b.el !== unit.block.el) b.el.classList.remove('ff-reader-active');
+          if (b.el && b.el !== el) b.el.classList.remove('ff-reader-active');
         });
-        unit.block.el.classList.add('ff-reader-active');
-        if (!reducedMotion && !audioScrolledRecently(unit.block.el)) {
-          scrollTo(unit.block.el, { block: 'center', behavior: 'smooth' });
+        el.classList.add('ff-reader-active');
+        if (!reducedMotion && !audioScrolledRecently(el)) {
+          scrollTo(el, { block: 'center', behavior: 'smooth' });
         }
       }
     }
