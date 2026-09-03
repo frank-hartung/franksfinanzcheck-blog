@@ -450,6 +450,116 @@ t.group('6) Sprechdauer je Teil (Plausibilität)');
 }
 
 /* ================================================================== */
+/* 7) Ende-zu-Ende: echte Fassung im echten Reader                     */
+/* ================================================================== */
+t.group('7) Ende-zu-Ende mit der echten Audiofassung');
+{
+  /* Die Gruppen 1 bis 6 prüfen die Datei und ihre Zeitkarte isoliert,
+     der Funktionstest nutzt eine synthetische Fassung. Damit bleibt eine
+     Lücke: Ob der Reader die echte, gerenderte Datei tatsächlich findet,
+     einbindet und gegen ihre echte Zeitkarte markiert, war unbelegt.
+
+     Hier wird der erste fertige Artikel mit seiner realen MP3 und der
+     realen Zeitkarte durch den echten Reader geladen. Die Zeitkarte wird
+     aus der Datei geliefert, nicht berechnet – sonst würde die Prüfung
+     nur sich selbst bestätigen. */
+  const FERTIG = '2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife';
+  const mp3 = path.join(ROOT, 'static', 'audio', `${FERTIG}.mp3`);
+  const tmPath = path.join(ROOT, 'static', 'audio', `${FERTIG}.timemap.json`);
+
+  if (!fs.existsSync(mp3)) {
+    console.log('  ℹ️  Noch keine fertige Fassung – Gruppe übersprungen.');
+  } else {
+    let qa = null;
+    try {
+      qa = await import('./reader_qa_lib.mjs');
+    } catch (e) {
+      console.log(`  ℹ️  jsdom nicht verfügbar (${e.message.split('\n')[0]}) – Gruppe übersprungen.`);
+    }
+
+    if (qa) {
+    const zeitkarte = JSON.parse(fs.readFileSync(tmPath, 'utf8'));
+    const art = qa.loadArticle(FERTIG);
+
+    /* Die Spieldauer wird hier aus dem Rahmenstrom der Datei gemessen,
+       bewusst NICHT aus der Zeitkarte gelesen. Würde sie aus der Zeitkarte
+       stammen, wäre der spätere Vergleich ein Wert gegen sich selbst und
+       könnte nie rot werden. So wird er zur echten Gegenprüfung:
+       Datei gegen Zeitkarte. */
+    const buf = fs.readFileSync(mp3);
+    const strom = walk(trimId3v1(buf.subarray(skipId3v2(buf))), 0);
+
+    const seite = await qa.createPage({
+      html: qa.buildPage({
+        title: art.title, description: art.description, kurzantwort: art.kurzantwort,
+        readingTime: art.readingTime, wordCount: art.wordCount, author: art.author,
+        bodyHtml: art.bodyHtml,
+        audio: `/audio/${FERTIG}.mp3`,
+        audioMap: `/audio/${FERTIG}.timemap.json`
+      }),
+      /* Bewusst ein Gerät OHNE männliche Stimme: Die Zusage lautet, dass die
+         Audiofassung greift, wenn keine Gerätstimme taugt. */
+      catalog: qa.VOICE_CATALOGS.androidChrome,
+      audioDuration: strom.seconds
+    });
+
+    // Zeitkarte aus der Datei liefern (der Reader holt sie per XHR)
+    const origOpen = seite.win.XMLHttpRequest.prototype.open;
+    seite.win.XMLHttpRequest.prototype.open = function (m, u) { this.__url = u; return origOpen.apply(this, arguments); };
+    seite.win.XMLHttpRequest.prototype.send = function () {
+      const self = this;
+      setTimeout(() => {
+        Object.defineProperty(self, 'readyState', { value: 4, configurable: true });
+        Object.defineProperty(self, 'status', { value: 200, configurable: true });
+        Object.defineProperty(self, 'responseText', { value: JSON.stringify(zeitkarte), configurable: true });
+        if (self.onreadystatechange) self.onreadystatechange();
+      }, 0);
+    };
+
+    /* Hinweis: t.eq vergleicht mit ===, also per Referenz. Zwei verschiedene
+       leere Arrays sind nie identisch – deshalb die Länge vergleichen. */
+    t.eq(seite.errors.length, 0, 'Artikel mit echter Fassung lädt ohne Laufzeitfehler', seite.errors.join(' | '));
+
+    seite.doc.getElementById('ff-listen-btn').click();
+    await qa.until(() => seite.doc.getElementById('ff-reader-toolbar').classList.contains('ff-reader-toolbar--playing'), 3000);
+
+    t.eq(seite.log.length, 0, 'Browser-Stimme bleibt unangetastet, solange die echte Fassung läuft',
+      seite.log.join(' | '));
+
+    const el = seite.win.__audioEl;
+    t.ok(!!el, '<audio>-Element wurde erzeugt');
+    t.eq(el.getAttribute('src'), `/audio/${FERTIG}.mp3`, 'Quelle zeigt auf die echte Datei');
+    t.ok(el.getAttribute('playsinline') !== null, 'playsinline gesetzt (iPhone spielt inline)');
+    /* Gegenprüfung Datei gegen Zeitkarte. Die Zeitkarte rundet auf zwei
+       Nachkommastellen (mp3_join.mjs: toFixed(2)), der Rahmenstrom misst
+       ungerundet – deshalb dieselbe Toleranz wie in Gruppe 4. */
+    t.ok(Math.abs(el.duration - zeitkarte.durationSeconds) < 0.01,
+      'Spieldauer der Datei entspricht der Zeitkarte',
+      `Datei ${el.duration} s, Zeitkarte ${zeitkarte.durationSeconds} s`);
+
+    t.ok(await qa.until(() => el.currentTime > 0, 3000), 'Wiedergabe läuft (currentTime steigt)');
+    t.ok(/Studiostimme|Audiofassung/.test(seite.doc.getElementById('ff-reader-status').textContent),
+      'Status meldet die Studiofassung', seite.doc.getElementById('ff-reader-status').textContent);
+
+    /* Kern der Zusage: Die Zeitkarte aus der Datei muss zu den Blöcken des
+       echten Artikels passen. Passt sie nicht, läuft der Ton, aber die
+       Markierung steht falsch oder gar nicht im Text. */
+    await qa.until(() => el.currentTime > 12, 4000);
+    const aktiv = seite.doc.querySelector('.ff-reader-active');
+    t.ok(!!aktiv, 'Live-Markierung folgt der echten Zeitkarte');
+    t.ok(!!aktiv && aktiv.closest('.post-content, .ff-kurzantwort, .ff-korrektur') !== null,
+      'Markierung steht im sichtbaren Text, nicht im Leeren',
+      aktiv ? (aktiv.className || aktiv.tagName) : 'kein Element');
+
+    const balken = seite.doc.getElementById('ff-reader-progress-bar').style.width;
+    t.ok(balken && balken !== '0%', 'Fortschrittsbalken folgt der echten Spieldauer', String(balken));
+
+    seite.win.close();
+    }
+  }
+}
+
+/* ================================================================== */
 console.log(`\n=== Audio-Pipeline — Ergebnis: ${pass} grün, ${fails.length} rot ===`);
 if (fails.length) {
   console.log('\nFehlgeschlagene Prüfungen:');
