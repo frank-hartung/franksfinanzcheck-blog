@@ -123,11 +123,34 @@ for (const slug of slugs) {
   console.log(`✅ ${slug}: ${data.parts.length} Teile, ${data.chars} Zeichen, längstes Teil ${longest}`);
 }
 
-fs.writeFileSync(
-  path.join(OUT_DIR, '_summary.json'),
-  JSON.stringify({ generated: new Date().toISOString(), maxChars: MAX_CHARS, totalParts, articles: summary }, null, 1),
-  'utf8'
-);
+/* Die Zusammenfassung wird nur dann neu geschrieben, wenn sich ihr Inhalt
+   wirklich geändert hat. Ein bloßer Zeitstempel-Wechsel würde nach jeder
+   Regeneration einen Schein-Diff erzeugen – und damit ausgerechnet die
+   Prüfung verwischen, auf die es ankommt: Ob sich der Sprechtext der
+   bereits gerenderten Teile verändert hat. Der Joiner vergleicht nur die
+   TeilANZAHL, eine stillschweigende Textänderung fiele ihm nicht auf.
+   Bleibt der Inhalt gleich, bleibt auch `generated` unangetastet. */
+const summaryPath = path.join(OUT_DIR, '_summary.json');
+const inhalt = { maxChars: MAX_CHARS, totalParts, articles: summary };
+let vorher = null;
+try {
+  vorher = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
+} catch { /* erste Erzeugung – nichts zum Vergleichen */ }
+
+const unveraendert = vorher
+  && vorher.maxChars === inhalt.maxChars
+  && vorher.totalParts === inhalt.totalParts
+  && JSON.stringify(vorher.articles) === JSON.stringify(inhalt.articles);
+
+if (unveraendert) {
+  console.log(`\n_summary.json unverändert (Inhalt gleich, Zeitstempel ${vorher.generated} beibehalten).`);
+} else {
+  fs.writeFileSync(
+    summaryPath,
+    JSON.stringify({ generated: new Date().toISOString(), ...inhalt }, null, 1),
+    'utf8'
+  );
+}
 
 const failed = summary.filter((s) => s.error);
 console.log(`\n${summary.length - failed.length} Artikel vorbereitet, ${totalParts} Render-Teile gesamt.`);
