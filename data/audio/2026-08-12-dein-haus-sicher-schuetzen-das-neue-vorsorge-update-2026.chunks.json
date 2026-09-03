@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 113,
- "chars": 11066,
+ "chars": 11064,
  "parts": [
   {
    "index": 0,
@@ -246,7 +246,7 @@
   },
   {
    "index": 3,
-   "text": "Verlässt du für eine Stunde das Haus, während die Waschmaschine läuft oder ein Fenster gekippt ist? Dann werfen Versicherer bei Alttarifen oft grobe Fahrlässigkeit vor. Die Versicherer kürzen die Auszahlung um bis zu 50 Prozent. Moderne Top-Tarife verzichten zu 100 Prozent auf diese Einrede und zahlen den Schaden in voller Höhe. 2. Unterversicherungsverzicht. Damit der Versicherer im Totalschadenfall nicht prüft, ob dein Hausrat mehr wert war als die vereinbarte Versicherungssumme, wähle eine pauschale Mindestsumme von 650 Euro pro Quadratmeter Wohnfläche. Bei einer 90- Quadratmeter-Wohnung entspricht das einer pauschalen Versicherungssumme von 58500 Euro. In diesem Fall verzichtet die Gesellschaft garantiert auf jegliche Unterversicherungskürzung. 3. Fahrraddiebstahl und Cyber-Schutz. Wer teure E-Bikes oder Fahrräder besitzt, sollte eine 24-Stunden-Fahrradklausel ohne Nachtzeitbeschränkung einschließen. Auch Phishing-Schäden beim Online-Banking sind in modernen Hausrat-Tarifen bis zu bestimmten Höchstgrenzen (zum Beispiel 5000 Euro bis 10000 Euro) mitversichert. Beispiel: Was ein moderner Rundum-Schutz kostet. Entgegen der landläufigen Meinung ist eine lückenlose Absicherung erstaunlich bezahlbar. Die folgende Tabelle zeigt die typischen Jahresbeiträge für eine 100- Quadratmeter-Wohnung:",
+   "text": "Verlässt du für eine Stunde das Haus, während die Waschmaschine läuft oder ein Fenster gekippt ist? Dann werfen Versicherer bei Alttarifen oft grobe Fahrlässigkeit vor. Die Versicherer kürzen die Auszahlung um bis zu 50 Prozent. Moderne Top-Tarife verzichten zu 100 Prozent auf diese Einrede und zahlen den Schaden in voller Höhe. 2. Unterversicherungsverzicht. Damit der Versicherer im Totalschadenfall nicht prüft, ob dein Hausrat mehr wert war als die vereinbarte Versicherungssumme, wähle eine pauschale Mindestsumme von 650 Euro pro Quadratmeter Wohnfläche. Bei einer 90 Quadratmeter-Wohnung entspricht das einer pauschalen Versicherungssumme von 58500 Euro. In diesem Fall verzichtet die Gesellschaft garantiert auf jegliche Unterversicherungskürzung. 3. Fahrraddiebstahl und Cyber-Schutz. Wer teure E-Bikes oder Fahrräder besitzt, sollte eine 24-Stunden-Fahrradklausel ohne Nachtzeitbeschränkung einschließen. Auch Phishing-Schäden beim Online-Banking sind in modernen Hausrat-Tarifen bis zu bestimmten Höchstgrenzen (zum Beispiel 5000 Euro bis 10000 Euro) mitversichert. Beispiel: Was ein moderner Rundum-Schutz kostet. Entgegen der landläufigen Meinung ist eine lückenlose Absicherung erstaunlich bezahlbar. Die folgende Tabelle zeigt die typischen Jahresbeiträge für eine 100 Quadratmeter-Wohnung:",
    "units": [
     {
      "i": 36,
@@ -282,7 +282,7 @@
      "i": 41,
      "type": "p",
      "lang": "de",
-     "chars": 101
+     "chars": 100
     },
     {
      "i": 42,
@@ -324,7 +324,7 @@
      "i": 48,
      "type": "p",
      "lang": "de",
-     "chars": 91
+     "chars": 90
     }
    ]
   },

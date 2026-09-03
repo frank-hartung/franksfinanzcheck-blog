@@ -86,6 +86,34 @@ t.group('1) Sprechtext (Chunks)');
       if (/Empfehlung Empfehlung/.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält „Empfehlung Empfehlung"`);
       /* Rohzeichen, die keine Stimme sauber spricht. */
       if (/[🏆❌✓✕⚡💰💡⚠ℹ→]/.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält Emoji/Dekozeichen`);
+
+      /* Währungszeichen: In der Alternative (?:€|EUR|Euro) fraß „EUR"
+         die ersten drei Buchstaben von „Euro" und ließ ein „o" stehen. */
+      if (/Euroo/.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält „Euroo"`);
+      if (/\d-\s+Euro/.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält „150- Euro"`);
+      /* Ein nacktes Gleichzeichen spricht keine Stimme mit. */
+      if (/\s=\s/.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält ein Gleichzeichen`);
+      /* Satzsplitter ohne Abkürzungsschutz zerriss „z. B." über zwei
+         Sprechhäppchen, die Auflösung sah die Abkürzung dann nie ganz. */
+      if (/\bz\.\s*B\./.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält unaufgelöstes „z. B."`);
+      if (/zum Beispiel\.\s+[a-zäöüß0-9]/.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält „zum Beispiel." mitten im Satz`);
+      /* Fachzeichen: überlesen oder buchstabiert, Bedeutung geht verloren. */
+      if (/[×−²³₁₂Ø°]/.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält ein unaufgelöstes Fachzeichen`);
+      /* Reihenfolge der Schrägstrich-Regeln: „Mbit/s" wurde erst zu
+         „Mbit oder s" zerlegt, dann zu „Megabit oder s". */
+      if (/(?:Megabit|Gigabit)\s+oder\s+s\b/.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält „Megabit oder s"`);
+      if (/pro Sekunde\s+pro Sekunde/.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält doppeltes „pro Sekunde"`);
+      /* Nach „pro" steht im Deutschen der Singular. */
+      if (/\bpro\s+(?:Kilowattstunden|Monate|Jahre|Stunden|Wochen)\b/.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält „pro" mit Plural`);
+      /* Steht die Einheit schon ausgeschrieben da, darf die Klammer sie
+         nicht wiederholen: „Kilowattstunden Kilowattstunden". */
+      if (/\b(Kilowattstunde|Kubikmeter|Quadratmeter)\w*\s+\1/.test(p.text)) leaks.push(`${f}: Teil ${p.index} wiederholt eine Einheit`);
+      /* Die Vorzeichen-Regel fraß das Trennzeichen mit: „Bonus:minus 180". */
+      if (/:[A-Za-zäöüßÄÖÜ]/.test(p.text)) leaks.push(`${f}: Teil ${p.index} klebt ein Wort an einen Doppelpunkt`);
+      /* IBAN in zwei Wörter zu spalten ergibt „ih bahn". */
+      if (/\bI BAN\b/.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält „I BAN"`);
+      /* Interne Platzhalter dürfen nie im Sprechtext landen. */
+      if (/[\u0001\u0002\u0003]/.test(p.text)) leaks.push(`${f}: Teil ${p.index} enthält ein Maskierungszeichen`);
     }
   }
 
@@ -280,6 +308,80 @@ t.group('4) Gerenderte Audiofassungen');
       t.ok(diff < 1, `${f}: Zeitkarte ${tm.durationSeconds}s ≈ Rahmenstrom ${w.seconds.toFixed(2)}s`, `Abweichung ${diff.toFixed(2)} s`);
       t.ok(tm.parts.length > 0, `${f}: Zeitkarte nennt ${tm.parts.length} Teile`);
     }
+  }
+}
+
+/* ================================================================== */
+/* 5) speechNormalize im Direktzugriff                                */
+/* ================================================================== */
+t.group('5) Aussprache-Normalisierung (Direkttest der Engine)');
+{
+  /* Warum diese Gruppe nötig ist, obwohl Gruppe 1 denselben Text prüft:
+     Gruppe 1 sieht nur, was im Bestand vorkommt. Drei Regeln dieser
+     Datei waren mit \b geschrieben, das vor „à", „Ø" und nach „²"/„³"
+     nie matcht – die Regeln liefen also STILLSCHWEIGEND NIE. Im Bestand
+     fiel das nicht auf, weil die betroffenen Zeichen dort zufällig
+     harmlos standen. Nur der direkte Aufruf mit konstruierten Eingaben
+     beweist, dass eine Regel tatsächlich greift.
+
+     Die Erwartungen sind die echten Ausgaben der Engine, keine
+     Wunschtexte – jede Zeile wurde gegen ff-reader.js verifiziert. */
+  let norm = null;
+  let seite = null;
+  try {
+    const qa = await import('./reader_qa_lib.mjs');
+    const art = qa.loadArticle('2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife');
+    seite = await qa.createPage({
+      html: qa.buildPage({
+        title: art.title, description: art.description, kurzantwort: art.kurzantwort,
+        readingTime: art.readingTime, wordCount: art.wordCount, bodyHtml: art.bodyHtml
+      }),
+      speech: false
+    });
+    norm = seite.win.__ffReaderExport.speechNormalize;
+  } catch (e) {
+    console.log(`  ℹ️  jsdom nicht verfügbar (${e.message.split('\n')[0]}) – Gruppe übersprungen.`);
+  }
+
+  if (norm) {
+    const DE = [
+      ['12 mal 44,95 € = 539,40 €',              '12 mal 44,95 Euro ist 539,40 Euro.',      'Gleichzeichen wird zu „ist"'],
+      ['Ein 150-€-Bonus nach 6 Monaten',          'Ein 150-Euro-Bonus nach 6 Monaten.',      'Bindestrich-Währung bleibt ein Wort'],
+      ['44,95 Euro im Monat',                     '44,95 Euro im Monat.',                    '„Euro" wird nicht zu „Euroo"'],
+      ['Grundpreis / Monat: 14,50 €',             'Grundpreis pro Monat: 14,50 Euro.',       'Schrägstrich vor Maßeinheit wird „pro"'],
+      ['20.000 kWh/Jahr',                         '20000 Kilowattstunden pro Jahr.',         'kWh/Jahr wird „Kilowattstunden pro Jahr"'],
+      ['Arbeitspreis pro kWh',                    'Arbeitspreis pro Kilowattstunde.',        'nach „pro" steht der Singular'],
+      ['Kilowattstunden (kWh) umgerechnet',       'Kilowattstunden umgerechnet.',            'Einheit in Klammer wird nicht wiederholt'],
+      ['Volumen in Kubikmetern (m³)',             'Volumen in Kubikmetern.',                 'm³ in Klammer wird nicht wiederholt'],
+      ['250 Mbit/s Anschluss',                    '250 Megabit pro Sekunde Anschluss.',      'Mbit/s wird nicht zu „Megabit oder s"'],
+      ['1 °C weniger',                            '1 Grad Celsius weniger.',                 '°C wird ausgeschrieben'],
+      ['90-m²-Wohnung',                           '90 Quadratmeter-Wohnung.',                'm² nach Zahl wird aufgelöst'],
+      ['circa 120 m²',                            'circa 120 Quadratmeter.',                 'm² mit Leerzeichen wird aufgelöst'],
+      ['1 m³ Gas',                                '1 Kubikmeter Gas.',                       'm³ wird zu „Kubikmeter"'],
+      ['CO₂-Preis',                               'CO2-Preis.',                              'tiefgestellte Ziffer wird normal'],
+      ['Bonus × Wahrscheinlichkeit − Rückforderung', 'Bonus mal Wahrscheinlichkeit minus Rückforderung.', '× und − werden gesprochen'],
+      ['Ø Antwortzeit DE',                        'Durchschnitt Antwortzeit DE.',            'Ø wird zu „Durchschnitt"'],
+      ['Zehn Halogenlampen à 40 Watt',            'Zehn Halogenlampen je 40 Watt.',          'à vor Zahl wird zu „je"'],
+      ['Bonus: - 180,00 € (Gutschrift)',          'Bonus: minus 180,00 Euro (Gutschrift).',  'führendes Minus bleibt Vorzeichen'],
+      ['die 50-30-20-Regel',                      'die 50-30-20-Regel.',                     'Zahlenreihe bleibt Eigenname'],
+      ['Deine IBAN bleibt',                       'Deine IBAN bleibt.',                      'IBAN wird nicht zu „I BAN"'],
+      ['z. B. 120 Euro',                          'zum Beispiel 120 Euro.',                  '„z. B." wird aufgelöst'],
+      ['Download / Upload: 50 / 10',              'Download und Upload: 50 und 10.',         'Download/Upload wird „und"'],
+      ['Voll/Voll-Regelung',                      'Voll zu Voll-Regelung.',                  'Voll/Voll wird „zu"']
+    ];
+    for (const [rein, raus, warum] of DE) t.eq(norm(rein, 'de'), raus, `DE: ${warum}`);
+
+    const EN = [
+      ['150 Mbit/s',        '150 megabits per second.', 'EN: Mbit/s wird „per second"'],
+      ['Grundpreis / Monat', 'Grundpreis per month.',    'EN: Schrägstrich vor Einheit wird „per"']
+    ];
+    for (const [rein, raus, warum] of EN) t.eq(norm(rein, 'en'), raus, warum);
+
+    /* Satzgrenzen: Der Sprachpfad nutzt sentences(), die Kurzfassung hatte
+       den Abkürzungsschutz schon immer. Ohne ihn riss „z. B." auseinander. */
+    const tl = seite.win.__ffReaderExport.buildTimeline();
+    const zerrissen = tl.timeline.filter((u) => /\bz\.\s*B\./.test(u.text) || /zum Beispiel\.\s+[a-zäöüß0-9]/.test(u.text));
+    t.eq(zerrissen.length, 0, 'Keine Sprecheinheit reißt „z. B." auseinander');
   }
 }
 

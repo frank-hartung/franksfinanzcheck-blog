@@ -355,9 +355,9 @@
     s = s.replace(/(Kubikmetern?|cubic meters?)\s*\(m³\)/gi, '$1');
     s = s.replace(/(Quadratmetern?|square meters?)\s*\(m²\)/gi, '$1');
     s = s.replace(/km²/g, lang === 'en' ? ' square kilometers' : ' Quadratkilometer');
-    s = s.replace(/(\d)\s*[-–]?\s*m²\b/g, '$1' + (lang === 'en' ? ' square meters' : ' Quadratmeter'));
+    s = s.replace(/(\d)\s*[-–]?\s*m²/g, '$1' + (lang === 'en' ? ' square meters' : ' Quadratmeter'));
     s = s.replace(/m²/g, lang === 'en' ? ' square meters' : ' Quadratmeter');
-    s = s.replace(/(\d)\s*[-–]?\s*m³\b/g, '$1' + (lang === 'en' ? ' cubic meters' : ' Kubikmeter'));
+    s = s.replace(/(\d)\s*[-–]?\s*m³/g, '$1' + (lang === 'en' ? ' cubic meters' : ' Kubikmeter'));
     s = s.replace(/m³/g, lang === 'en' ? ' cubic meters' : ' Kubikmeter');
     s = s.replace(/°\s*C\b/g, lang === 'en' ? ' degrees Celsius' : ' Grad Celsius');
     s = s.replace(/°/g, lang === 'en' ? ' degrees' : ' Grad');
@@ -372,7 +372,8 @@
     s = s.replace(/−/g, lang === 'en' ? ' minus ' : ' minus ');
     s = s.replace(/·/g, ', ');
     s = s.replace(/Ø\s*/g, lang === 'en' ? 'average ' : 'Durchschnitt ');
-    s = s.replace(/\bà\s+(?=\d)/g, lang === 'en' ? 'at ' : 'je ');
+    /* à ist kein \w-Zeichen, \b davor matcht nie – deshalb ohne \b. */
+    s = s.replace(/à\s+(?=\d)/g, lang === 'en' ? 'at ' : 'je ');
     s = s.replace(/\u2011/g, '-');            // trennfester Bindestrich -> normal
 
     /* Führendes Minus ist ein Vorzeichen, kein Gedankenstrich.
