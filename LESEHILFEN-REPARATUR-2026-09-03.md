@@ -115,8 +115,12 @@ siehe Abschnitt 6.
 ## 4. Was dauerhaft sichert, dass es nicht wieder kaputtgeht
 
 `.github/workflows/lesehilfen-gate.yml` läuft bei jedem Push/PR, der Lesehilfen oder
-`content/posts/**` berührt, plus täglich um 08:20 MESZ. Es führt alle sechs Suiten aus;
-ein roter Test blockiert.
+`content/posts/**` berührt, plus täglich um 08:20 MESZ. Es führt alle **sieben** Suiten
+aus; ein roter Test blockiert.
+
+> GitHub verweigert dieser Integration das `workflows`-Schreibrecht. Die fertige Datei
+> liegt deshalb unter `patches/lesehilfen-gate-2026-09-03-workflow-ready.yml` (plus
+> anwendbares `.patch`) und muss einmalig nach `.github/workflows/` gelegt werden.
 
 Zusätzlich prüft der Funktionstest die **Verankerung in den Templates** (Abschnitt 0):
 Bindet jemand `reader_toolbar.html` aus `layouts/single.html` oder
@@ -128,15 +132,25 @@ Bindet jemand `reader_toolbar.html` aus `layouts/single.html` oder
 
 | Suite | Ergebnis |
 |---|---|
-| `node scripts/reader_functional_test.mjs` **(neu, echte DOM)** | **139 grün, 0 rot** |
+| `node scripts/reader_functional_test.mjs` **(echte DOM)** | **161 grün, 0 rot** |
 | `node scripts/reader_engine_check.js` | 58 grün, 0 rot |
 | `node scripts/reader_male_voice_highend_test.js` | 36 grün, 0 rot |
 | `node scripts/reader_playback_function_test.js` | 12 grün, 0 rot |
 | `node scripts/summary_engine_check.js` | 26 grün, 0 rot |
+| `node scripts/audio_pipeline_test.mjs` **(neu, 6 Gruppen)** | **145 grün, 0 rot** |
 | `python3 scripts/reader_toolbar_check.py` | alle Gates grün |
-| **Gesamt** | **271 Prüfungen grün** |
+| **Gesamt** | **438 Prüfungen grün** |
 
-Der Funktionstest wurde **dreimal in Folge** ausgeführt: 139/139 jedes Mal (kein Flackern).
+Der Funktionstest wurde **dreimal in Folge** ausgeführt: 139/139 jedes Mal (kein Flackern);
+nach der Erweiterung auf 161 Prüfungen ebenfalls stabil.
+
+Die Audio-Suite (`audio_pipeline_test.mjs`) deckt sechs Gruppen ab: Bestands-Regressionen
+der Sprechtext-Heilungen, Rahmenkopf-Decodierung und Joiner mit synthetischem Rahmenstrom,
+die gerenderten Fassungen (Rahmenstrom lückenlos, einheitliche Kodierung, Zeitkarte gegen
+Rahmenstrom), die Aussprache-Normalisierung als **Direkttest der Engine** sowie die
+Plausibilität der Sprechdauer je Teil. Beide wirksamen Gruppen sind **per Mutation belegt**:
+Wird eine tote `\b`-Regel wieder eingebaut, wird Gruppe 5 rot (102/1); wird ein gerenderter
+Teil verstümmelt, wird Gruppe 6 rot (144/1). Danach jeweils wiederhergestellt.
 
 Abgedeckt: Klickpfad, vollständiges Abspielen aller 28 Artikel, Voice-Bindung,
 DE/EN-Routing ohne Umschalter, 240-Zeichen-Chunk-Grenze, Texttreue (H2 + Absätze +
@@ -166,17 +180,49 @@ Diese fünf Punkte gehören auf ein echtes Gerät, bevor die Änderung live geht
 
 ---
 
-## 6. Offene Entscheidung
+## 6. Entscheidung: vorgerendertes Audio für den Volltext
 
-Für eine **garantiert männliche Stimme auf jedem Gerät und in jedem Browser** ist
-vorgerendertes First-Party-Audio nötig. Zur Einordnung der Größenordnung:
-Die 28 Artikel haben 12.200–18.700 Zeichen Markdown; das sind je Artikel rund
-12–19 Minuten Audio. Als MP3 (32 kbit/s, Mono, Sprache) sind das etwa 3–4 MB pro
-Artikel und rund **100 MB für den Bestand** — plus je 8–12 Renderingschritte pro Artikel.
+**Entschieden am 03.09.2026:** Es wird vorgerendertes First-Party-Audio **für den Volltext
+aller 28 Artikel** gebaut. Nur das ist eine Garantie — die Browser-Stimme bleibt als
+Zusatzangebot erhalten, ist aber nicht mehr der Träger der Zusage.
 
-Eine deutlich schlankere Variante ist Audio **nur für die Kurzfassung**
-(ca. 90 Sekunden, ~350 kB pro Artikel, ~10 MB gesamt, ein Rendering pro Artikel),
-während der Volltext bei der Gerätstimme bleibt.
+Zur Einordnung der Größenordnung: Die 28 Artikel haben 12.200–18.700 Zeichen Markdown;
+das sind je Artikel rund 12–19 Minuten Audio. Als MP3 (32 kbit/s, Mono, Sprache) sind das
+etwa 2,5–3,5 MB pro Artikel und rund 100 MB für den Bestand.
 
-Beide Varianten sind technisch vorbereitet, aber noch **nicht** gebaut — das ist eine
-Kosten-/Nutzen-Entscheidung, die nicht stillschweigend getroffen werden sollte.
+### Gebaute Pipeline
+
+| Datei | Aufgabe |
+|---|---|
+| `scripts/prepare_audio_chunks.mjs` | Zerlegt jeden Artikel in Sprechtexte von höchstens 1400 Zeichen. Lädt die echte Engine über den Export-Hook in jsdom — die Chunks sind also exakt das, was gesprochen wird. Harte Assertion bei Überschreitung. |
+| `data/audio/<slug>.chunks.json` | 28 Dateien, **270 Teile**, längster exakt 1400 Zeichen. |
+| `scripts/mp3_join.mjs` | Verbindet die Teile und entfernt dabei den Xing-Kopf jedes Teils (ein mitgeführter Kopf erzeugt hörbare Klicks). Erzeugt die Zeitkarte. |
+| `scripts/mp3_info.mjs` | Abhängigkeitsfreier, versions- und layer-gewahrer MP3-Reader — nötig, weil in dieser Umgebung kein `ffprobe` installierbar war. |
+| `scripts/audio_render_next.mjs` | Wiederaufnehmbarer Fortschritts-Tracker. Ohne Argument: Stand und nächster Artikel. |
+| `static/audio/<slug>.mp3` + `.timemap.json` | Auslieferung. Der Service Worker hält MP3 **bewusst** nicht im Cache — Cache-first würde Range-Anfragen und Springen brechen. |
+
+Die Wiedergabe wählt die Audio-Fassung automatisch, wenn sie vorhanden ist, und fällt
+sonst auf die Browser-Stimme zurück. Für den Nutzer gibt es **keinen** Umschalter.
+
+### Stand
+
+**1 von 28 Artikeln verbunden** (`2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife`,
+11:17 min, 2,58 MB, 119 Zeitstempel). **14 von 270 Teilen** gerendert.
+
+Das Rendering ist der Engpass: Die Sprachsynthese ist auf zehn Clips pro Arbeitsschritt
+begrenzt, also rund **26 weitere Runden** bis zum vollständigen Bestand. Der Fortschritt
+ist jederzeit mit `node scripts/audio_render_next.mjs` abrufbar.
+
+### Dabei gefundene und behobene Sprachtext-Fehler
+
+Der Bau der Chunks hat eine eigene Fehlerklasse sichtbar gemacht, die kein Bestandsscan
+findet: **Vier Regeln in `speechNormalize` waren tot**, weil `\b` vor oder nach einem
+Nicht-Wortzeichen in JavaScript nie matcht (`\bØ`, `\bà`, `m²\b`, `m³\b`). Dazu kamen
+rund fünfzehn Symbol- und Einheitenklassen (`Mbit/s` → „Megabit oder s", `kWh/Jahr`,
+`CO₂`, `°C`, `Ø`, Währungsumbrüche, Klammer-Dopplungen) sowie drei Folgefehler aus den
+neu eingeführten Regeln. Insgesamt wurden in dieser Sitzung **33 Fehler** behoben.
+
+Zwei unabhängige Verfahren bestätigen den Bestand jetzt als sauber: ein vollständiges
+Zeicheninventar über alle 270 Teile (84 Zeichen, nichts außerhalb der sicheren Sprechmenge)
+und ein Zwölf-Muster-Census (alle null). Beide sind als Prüfungen in
+`scripts/audio_pipeline_test.mjs` verankert.
