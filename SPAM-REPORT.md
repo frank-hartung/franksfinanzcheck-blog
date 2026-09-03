@@ -20,6 +20,7 @@
 ## A: Pinterest-API (A1–A4)
 
 - ℹ️ [A1] Rate-OK (0/10 Std., 0/40 Tag)
+- ℹ️ [A2] kein Token – Pre-Create-Checks (A2/A4) laufen library-seitig in der Pinterest-Engine (spam_guard.api_check_pin / api_record_created)
 
 ## Fazit
 
