@@ -97,6 +97,7 @@
       unsupported: 'Vorlesen wird von deinem Browser nicht unterstützt.',
       noText: 'Kein vorlesbarer Text gefunden.',
       started: 'Vorlesen gestartet.',
+      voiceLoading: 'Männliche Stimme wird geladen …',
       paused: 'Vorlesen pausiert.',
       resumed: 'Vorlesen fortgesetzt.',
       finished: 'Vorlesen beendet.',
@@ -156,6 +157,7 @@
       unsupported: 'Speech synthesis is not supported by your browser.',
       noText: 'No readable text found.',
       started: 'Audio playback started.',
+      voiceLoading: 'Loading a male voice …',
       paused: 'Audio playback paused.',
       resumed: 'Audio playback resumed.',
       finished: 'Audio playback completed.',
@@ -718,9 +720,9 @@
          'robert', 'steven', 'kenneth', 'kevin', 'jason', 'edward', 'joshua', 'andrew', 'brandon', 'justin',
          'raymond', 'gregory', 'samuel', 'patrick', 'jack', 'harry', 'leonard', 'derek', 'liam', 'davis',
          'alfie', 'noah', 'logan',
-         'en_us_male', 'en_gb_male', 'male', 'man', '#male', 'neural2-d', 'neural2-f', 'neural2-h',
-         'neural2-i', 'neural2-j', 'wavenet-b', 'wavenet-d', 'wavenet-f', 'standard-b', 'standard-d',
-         'journey-d', 'journey-f']
+         'en_us_male', 'en_gb_male', 'male', 'man', '#male', 'neural2-d', 'neural2-h',
+         'neural2-i', 'neural2-j', 'wavenet-b', 'wavenet-d', 'standard-b', 'standard-d',
+         'journey-d']
   };
 
   // Ergänzende namentlich männliche Stimmen für die geschlechts-übergreifende Prüfung
@@ -859,11 +861,20 @@
      als geschlechtsneutral und damit männlich-tauglich – ihre Tonlage
      senkt die Regie automatisch in die männliche Klangzone ab. */
   function isMaleCandidate(v) {
+    if (!v) return false;
     var hay = voiceHay(v);
+    // A voice whose name/URI identifies it as female must never enter the
+    // candidate pool.  Treating an unknown voice as male was the source of
+    // the old "female default" bug: Chrome often exposes Google Deutsch (or
+    // a platform default) before its actual male voices have loaded.
     for (var i = 0; i < FEMALE_KEYWORDS.length; i++) {
       if (voiceHas(hay, FEMALE_KEYWORDS[i])) return false;
     }
     return true;
+  }
+
+  function isExplicitMaleCandidate(v) {
+    return !!(v && isMaleCandidate(v) && explicitMale(v));
   }
 
   /* Explizit-männlich-Nachweis: Stimme trägt einen eindeutig männlichen
@@ -905,13 +916,28 @@
     var ranked = rankVoicesFromList(list, l);
     var res = { voice: null, mode: 'none', explicit: false, epoch: VOICE_EPOCH };
 
-    // 1) männliche Stimme der Artikelsprache
+    // 1) Explicitly male voice in the article language.  Do not silently
+    // prefer an unlabelled platform voice over a real male voice.
     for (var i = 0; i < ranked.length; i++) {
-      if (isMaleCandidate(ranked[i].voice)) {
+      if (isExplicitMaleCandidate(ranked[i].voice)) {
         res.voice = ranked[i].voice;
         res.mode = 'male';
-        res.explicit = explicitMale(ranked[i].voice);
+        res.explicit = true;
         break;
+      }
+    }
+    // 2) A neutral voice in the article language is the best honest local
+    // fallback, but only after all explicitly male voices were considered.
+    if (!res.voice) {
+      for (var ni = 0; ni < ranked.length; ni++) {
+        if (isMaleCandidate(ranked[ni].voice)) {
+          res.voice = ranked[ni].voice;
+          // Keep the public mode compatible with the existing engine: the
+          // voice is a local male-zone fallback, not a cross-language one.
+          res.mode = 'male';
+          res.explicit = false;
+          break;
+        }
       }
     }
     // 2) männliche Stimme einer Nachbarsprache (niemals weiblich)
@@ -1768,6 +1794,33 @@
     } catch (e) {}
   }
 
+  // Voice catalogs are deliberately lazy in Chromium, Safari and Android:
+  // getVoices() may be empty on the first click and populate only after
+  // voiceschanged. Starting in that window makes the browser pick its
+  // default (often female) voice and it cannot be replaced mid-utterance.
+  // Hold the first utterance until the catalog is ready, while keeping the
+  // player responsive. The bounded fallback still guarantees audible output
+  // on browsers that never expose a catalog.
+  function speakWhenVoiceReady(index) {
+    var attempts = 0;
+    var maxAttempts = 20; // 2 seconds, 100 ms cadence
+    function ready() {
+      if (!reading || !playing) return;
+      var available = false;
+      try { available = !!(synth && synth.getVoices && synth.getVoices().length); } catch (e) {}
+      if (available || attempts >= maxAttempts) {
+        maleVoice = pickMaleVoice(timeline[index] && timeline[index].lang || currentLang);
+        if (attempts > 0) setStatus(texts.started);
+        speakUnit(index, true);
+        return;
+      }
+      attempts += 1;
+      if (attempts === 1) setStatus(texts.voiceLoading);
+      setTimeout(ready, 100);
+    }
+    ready();
+  }
+
   function startReading(fromIndex) {
     if (!speechSupported) { setStatus(texts.unsupported); return; }
     unlockAudioEngine();
@@ -1804,7 +1857,9 @@
     setStatus(startIdx > 0 ? texts.resumedPos : texts.started);
     setupMediaSession();
     startKeepAlive();
-    speakUnit(startIdx, true); // initialer Start synchron für Audio-Entsperrung
+    // Never start with the platform default while voices are still loading.
+    // This is the critical DE/EN male-voice reliability fix.
+    speakWhenVoiceReady(startIdx);
   }
 
   function pauseReading() {
