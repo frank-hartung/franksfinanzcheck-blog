@@ -137,20 +137,36 @@ Bindet jemand `reader_toolbar.html` aus `layouts/single.html` oder
 | `node scripts/reader_male_voice_highend_test.js` | 36 grün, 0 rot |
 | `node scripts/reader_playback_function_test.js` | 12 grün, 0 rot |
 | `node scripts/summary_engine_check.js` | 26 grün, 0 rot |
-| `node scripts/audio_pipeline_test.mjs` **(neu, 6 Gruppen)** | **145 grün, 0 rot** |
+| `node scripts/audio_pipeline_test.mjs` **(neu, 7 Gruppen)** | **156 grün, 0 rot** |
 | `python3 scripts/reader_toolbar_check.py` | alle Gates grün |
-| **Gesamt** | **438 Prüfungen grün** |
+| **Gesamt** | **449 Prüfungen grün** |
 
 Der Funktionstest wurde **dreimal in Folge** ausgeführt: 139/139 jedes Mal (kein Flackern);
 nach der Erweiterung auf 161 Prüfungen ebenfalls stabil.
 
-Die Audio-Suite (`audio_pipeline_test.mjs`) deckt sechs Gruppen ab: Bestands-Regressionen
+Die Audio-Suite (`audio_pipeline_test.mjs`) deckt **sieben Gruppen** ab: Bestands-Regressionen
 der Sprechtext-Heilungen, Rahmenkopf-Decodierung und Joiner mit synthetischem Rahmenstrom,
 die gerenderten Fassungen (Rahmenstrom lückenlos, einheitliche Kodierung, Zeitkarte gegen
-Rahmenstrom), die Aussprache-Normalisierung als **Direkttest der Engine** sowie die
-Plausibilität der Sprechdauer je Teil. Beide wirksamen Gruppen sind **per Mutation belegt**:
-Wird eine tote `\b`-Regel wieder eingebaut, wird Gruppe 5 rot (102/1); wird ein gerenderter
-Teil verstümmelt, wird Gruppe 6 rot (144/1). Danach jeweils wiederhergestellt.
+Rahmenstrom), die Aussprache-Normalisierung als **Direkttest der Engine**, die Plausibilität
+der Sprechdauer je Teil sowie die **Ende-zu-Ende-Prüfung gegen die echte Audiofassung**
+(Gruppe 7: echte MP3 plus echte Zeitkarte durch den echten Reader, auf einem Gerätekatalog
+ohne männliche Stimme — genau dort muss die Audiofassung greifen).
+
+Alle wirksamen Gruppen sind **per Mutation belegt**, nicht nur behauptet:
+
+| Gruppe | Mutation | Ergebnis |
+|---|---|---|
+| 5 Aussprache | tote `\b`-Regel wieder eingebaut | rot (102/1) |
+| 6 Sprechdauer | gerenderten Teil auf die Hälfte gekürzt | rot (144/1) |
+| 7 Ende-zu-Ende | `durationSeconds` der Zeitkarte verfälscht | rot (154/2) |
+
+Jede Mutation wurde danach wiederhergestellt und rückgeprüft (156/0).
+
+Beim Belegen sind **zwei Fehler in den Prüfungen selbst** aufgefallen und behoben:
+ein Dauer-Vergleich, der einen Wert mit sich selbst verglich und deshalb nie rot werden
+konnte, sowie `t.eq` mit `===` auf Arrays — zwei verschiedene leere Arrays sind nie
+identisch, zwei Prüfungen konnten deshalb nie grün werden. Beides steht als Kommentar
+im Code, damit es nicht erneut eingebaut wird.
 
 Abgedeckt: Klickpfad, vollständiges Abspielen aller 28 Artikel, Voice-Bindung,
 DE/EN-Routing ohne Umschalter, 240-Zeichen-Chunk-Grenze, Texttreue (H2 + Absätze +
