@@ -1,18 +1,18 @@
 {
- "generated": "2026-09-03T20:08:40.328Z",
+ "generated": "2026-09-03T20:16:05.608Z",
  "maxChars": 1400,
  "totalParts": 270,
  "articles": [
   {
    "slug": "2026-08-10-dsl-wechselbonus-sichern",
    "parts": 8,
-   "chars": 10652,
+   "chars": 10640,
    "longest": 1397
   },
   {
    "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
    "parts": 9,
-   "chars": 11276,
+   "chars": 11277,
    "longest": 1353
   },
   {
@@ -36,8 +36,8 @@
   {
    "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel",
    "parts": 9,
-   "chars": 11785,
-   "longest": 1390
+   "chars": 11547,
+   "longest": 1393
   },
   {
    "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
@@ -48,7 +48,7 @@
   {
    "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
    "parts": 10,
-   "chars": 12413,
+   "chars": 12293,
    "longest": 1383
   },
   {
@@ -66,7 +66,7 @@
   {
    "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
    "parts": 9,
-   "chars": 10820,
+   "chars": 10816,
    "longest": 1388
   },
   {
@@ -90,8 +90,8 @@
   {
    "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
    "parts": 9,
-   "chars": 11776,
-   "longest": 1398
+   "chars": 11512,
+   "longest": 1378
   },
   {
    "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
@@ -102,8 +102,8 @@
   {
    "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
    "parts": 10,
-   "chars": 12500,
-   "longest": 1383
+   "chars": 12200,
+   "longest": 1397
   },
   {
    "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
@@ -132,13 +132,13 @@
   {
    "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet",
    "parts": 12,
-   "chars": 15511,
+   "chars": 15487,
    "longest": 1398
   },
   {
    "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
    "parts": 11,
-   "chars": 13326,
+   "chars": 13302,
    "longest": 1371
   },
   {

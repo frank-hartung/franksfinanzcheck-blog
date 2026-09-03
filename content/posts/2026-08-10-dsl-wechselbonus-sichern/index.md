@@ -69,7 +69,7 @@ Auf dem deutschen Breitbandmarkt stehen verschiedene Netzanbieter im direkten We
 * **Vodafone:** Lockt Neukunden mit extrem günstigen Einstiegspreisen in den ersten neun bis zwölf Monaten und hohen Einmalprämien bei Kabel- und DSL-Anschlüssen.
 * **1&1:** Bietet flexible Tarifstrukturen, hardwareseitige Extras und garantierte Freimonate bei 24 Monaten Laufzeit.
 * **O2 Telefónica:** Überzeugt durch faire Kombi-Rabatte für bestehende Mobilfunkkunden und transparente Preismodelle.
-* **Regionale Netzbetreiber (M-net, EWE, Wilhelm. tel, NetCologne):** Betreiben in ihren Regionen eigene Hochgeschwindigkeitsnetze und bieten oft erstklassigen Kundenservice mit regionalen Treueboni.
+* **Regionale Netzbetreiber (M-net, EWE, Wilhelm.tel, NetCologne):** Betreiben in ihren Regionen eigene Hochgeschwindigkeitsnetze und bieten oft erstklassigen Kundenservice mit regionalen Treueboni.
 
 ## In 4 einfachen Schritten zur Wechselprämie
 

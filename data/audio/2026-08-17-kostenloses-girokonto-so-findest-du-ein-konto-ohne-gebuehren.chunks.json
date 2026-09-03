@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 107,
- "chars": 10820,
+ "chars": 10816,
  "parts": [
   {
    "index": 0,
@@ -318,7 +318,7 @@
   },
   {
    "index": 4,
-   "text": "Dabei ist der Kontowechsel in Deutschland durch das Zahlungskontengesetz (Paragraf 20 ZKG) rechtlich geregelt und läuft dank digitaler Schnittstellen fast vollautomatisch: Punkt 1: Neues Girokonto online eröffnen: Die Identitätsprüfung erfolgt in circa 5 Minuten bequem von zu Hause via Video-Ident oder mit der eID-Funktion deines Personalausweises. Punkt 2: Digitalen Wechselservice autorisieren: Die neue Bank analysiert nach deiner Freigabe sicher die Lastschriften und Daueraufträge deines bisherigen Kontos. Punkt 3: Zahlungspartner automatisch benachrichtigen: Alle Lastschrifteinzieher wie Stromanbieter, Arbeitgeber, Streaming-Dienste und Vermieter erhalten automatisch eine schriftliche Benachrichtigung über deine neue I BAN. Punkt 4: Altes Konto stressfrei kündigen: Zum von dir gewählten Stichtag wird das alte Konto automatisch geschlossen und verbleibendes Guthaben übertragen. Wer parallel dazu auch seine sonstigen Policen und Ausgaben überprüfen möchte, profitiert von unserer Analyse der Privathaftpflicht-Kosten sowie den praktischen Ratschlägen in der Pillar-Kategorieseite für Konten und Karten. Was kostenlos 2026 noch bedeuten darf. Ein Girokonto ohne Kontoführungsgebühr ist Standard bei Direktbanken, mit Bedingungen. Die ehrliche Checkliste: Echter Geldeingang (Gehalt, Rente, oft 700 bis 1000 Euro pro Monat), sonst 4 bis 10 Euro Gebühr.",
+   "text": "Dabei ist der Kontowechsel in Deutschland durch das Zahlungskontengesetz (Paragraf 20 ZKG) rechtlich geregelt und läuft dank digitaler Schnittstellen fast vollautomatisch: Punkt 1: Neues Girokonto online eröffnen: Die Identitätsprüfung erfolgt in circa 5 Minuten bequem von zu Hause via Video-Ident oder mit der eID-Funktion deines Personalausweises. Punkt 2: Digitalen Wechselservice autorisieren: Die neue Bank analysiert nach deiner Freigabe sicher die Lastschriften und Daueraufträge deines bisherigen Kontos. Punkt 3: Zahlungspartner automatisch benachrichtigen: Alle Lastschrifteinzieher wie Stromanbieter, Arbeitgeber, Streaming-Dienste und Vermieter erhalten automatisch eine schriftliche Benachrichtigung über deine neue IBAN. Punkt 4: Altes Konto stressfrei kündigen: Zum von dir gewählten Stichtag wird das alte Konto automatisch geschlossen und verbleibendes Guthaben übertragen. Wer parallel dazu auch seine sonstigen Policen und Ausgaben überprüfen möchte, profitiert von unserer Analyse der Privathaftpflicht-Kosten sowie den praktischen Ratschlägen in der Pillar-Kategorieseite für Konten und Karten. Was kostenlos 2026 noch bedeuten darf. Ein Girokonto ohne Kontoführungsgebühr ist Standard bei Direktbanken, mit Bedingungen. Die ehrliche Checkliste: Echter Geldeingang (Gehalt, Rente, oft 700 bis 1000 Euro pro Monat), sonst 4 bis 10 Euro Gebühr.",
    "units": [
     {
      "i": 47,
@@ -348,7 +348,7 @@
      "i": 51,
      "type": "li",
      "lang": "de",
-     "chars": 110
+     "chars": 109
     },
     {
      "i": 52,
@@ -390,7 +390,7 @@
   },
   {
    "index": 5,
-   "text": "Filialauszahlung: kostenlos im Verbund oder 4 bis 6 Euro fremd. Kreditkarte: Jahresgebühr 0 Euro oder 29 Euro Gold. Echtzeitüberweisung: inklusive oder 0,20 bis 0,50 Euro. Dispo-Zins: 8 bis 13 Prozent, der teuerste Posten, wenn du ihn nutzt. Ein Konto mit 0 Euro Führung und 12 Prozent Dispo auf 1000 Euro dauerhaft kostet 120 Euro im Jahr. Dann ist das kostenlose Konto teurer als 5,90 Euro Führung ohne Dispo. Schließe den Dispo, wenn du ihn nicht brauchst, oder halte 500 Euro Puffer auf dem Giro, damit er nie greift. Wechselgesetz: 12 Arbeitstage, nicht 12 Nerven. Seit dem Zahlungskontengesetz übernimmt die neue Bank Daueraufträge, Lastschriften und Guthaben-Transfer, wenn du das Formular vollständig ausfüllst. Du lieferst: alte I BAN, Liste der Lastschriften, Wunschtermin. Informiere Arbeitgeber und Versicherung trotzdem selbst, die Bank kann nicht zaubern, wenn der Absender die alte I BAN hart verdrahtet hat. Zwei Wochen parallel beide Konten offen halten. Erst wenn drei Gehaltseingänge und alle Lastschriften auf der neuen I BAN laufen, das alte Konto auf null und kündigen. Restguthaben überweisen, nicht steht schon. Filiale gegen App, wann die Filiale noch ihren Preis wert ist. Bargeldintensiv, Betreutes Wohnen, komplexer Nachlass, häufige Auslandsbar-Abhebung ohne Kreditkarte: Filiale kann 5 bis 10 Euro im Monat rechtfertigen.",
+   "text": "Filialauszahlung: kostenlos im Verbund oder 4 bis 6 Euro fremd. Kreditkarte: Jahresgebühr 0 Euro oder 29 Euro Gold. Echtzeitüberweisung: inklusive oder 0,20 bis 0,50 Euro. Dispo-Zins: 8 bis 13 Prozent, der teuerste Posten, wenn du ihn nutzt. Ein Konto mit 0 Euro Führung und 12 Prozent Dispo auf 1000 Euro dauerhaft kostet 120 Euro im Jahr. Dann ist das kostenlose Konto teurer als 5,90 Euro Führung ohne Dispo. Schließe den Dispo, wenn du ihn nicht brauchst, oder halte 500 Euro Puffer auf dem Giro, damit er nie greift. Wechselgesetz: 12 Arbeitstage, nicht 12 Nerven. Seit dem Zahlungskontengesetz übernimmt die neue Bank Daueraufträge, Lastschriften und Guthaben-Transfer, wenn du das Formular vollständig ausfüllst. Du lieferst: alte IBAN, Liste der Lastschriften, Wunschtermin. Informiere Arbeitgeber und Versicherung trotzdem selbst, die Bank kann nicht zaubern, wenn der Absender die alte IBAN hart verdrahtet hat. Zwei Wochen parallel beide Konten offen halten. Erst wenn drei Gehaltseingänge und alle Lastschriften auf der neuen IBAN laufen, das alte Konto auf null und kündigen. Restguthaben überweisen, nicht steht schon. Filiale gegen App, wann die Filiale noch ihren Preis wert ist. Bargeldintensiv, Betreutes Wohnen, komplexer Nachlass, häufige Auslandsbar-Abhebung ohne Kreditkarte: Filiale kann 5 bis 10 Euro im Monat rechtfertigen.",
    "units": [
     {
      "i": 58,
@@ -450,13 +450,13 @@
      "i": 67,
      "type": "p",
      "lang": "de",
-     "chars": 63
+     "chars": 62
     },
     {
      "i": 68,
      "type": "p",
      "lang": "de",
-     "chars": 139
+     "chars": 138
     },
     {
      "i": 69,
@@ -468,7 +468,7 @@
      "i": 70,
      "type": "p",
      "lang": "de",
-     "chars": 119
+     "chars": 118
     },
     {
      "i": 71,

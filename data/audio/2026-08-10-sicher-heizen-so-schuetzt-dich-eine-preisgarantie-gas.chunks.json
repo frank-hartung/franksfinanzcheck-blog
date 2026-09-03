@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 110,
- "chars": 11276,
+ "chars": 11277,
  "parts": [
   {
    "index": 0,
@@ -324,13 +324,13 @@
   },
   {
    "index": 4,
-   "text": "Neukundenbonus und Sofortbonus. Zeile 4 von 6. Grundversorgungstarif: 0,00 Euro. Tarif mit Gaspreisgarantie und Bonus:minus 160,00 Euro. Gesamtkosten im 1. Jahr. Zeile 5 von 6. Grundversorgungstarif: 2710,00 Euro. Tarif mit Gaspreisgarantie und Bonus: 1740,00 Euro. Reale jährliche Ersparnis. Zeile 6 von 6. Grundversorgungstarif: –. Tarif mit Gaspreisgarantie und Bonus: 970,00 Euro Ersparnis. Ende der Tabelle Konkrete Beispiel-Rechnung: Ersparnis bei 20000 Kilowattstunden Verbrauch. Checkliste: Worauf du beim Gasanbieterwechsel achten musst. Punkt 1: Garantiedauer passend zur Laufzeit: Wähle eine Preisgarantie, die mindestens über die gesamte Mindestvertragslaufzeit läuft (zum Beispiel 12 Monate Garantie bei 12 Monaten Erstlaufzeit). Punkt 2: Kurze Kündigungsfristen: Verträge mit einer Frist von 4 bis 6 Wochen zum Laufzeitende garantieren dir maximale Flexibilität für den nächsten Wechsel. Punkt 3: Keine Vorkasse oder Kaution: Schließe niemals Tarife mit jährlicher Vorauszahlung ab. Seriöse Anbieter rechnen immer in monatlichen Abschlägen ab. Punkt 4: Verbrauch genau angeben: Nimm den genauen Kilowattstunden-Verbrauch aus deiner letzten Jahresabrechnung zur Hand. Schätzt du den Verbrauch zu niedrig ein, drohen am Jahresende Nachzahlungen. Wer neben dem Anbieterwechsel auch technische Einsparmöglichkeiten nutzen möchte,",
+   "text": "Neukundenbonus und Sofortbonus. Zeile 4 von 6. Grundversorgungstarif: 0,00 Euro. Tarif mit Gaspreisgarantie und Bonus: minus 160,00 Euro. Gesamtkosten im 1. Jahr. Zeile 5 von 6. Grundversorgungstarif: 2710,00 Euro. Tarif mit Gaspreisgarantie und Bonus: 1740,00 Euro. Reale jährliche Ersparnis. Zeile 6 von 6. Grundversorgungstarif: –. Tarif mit Gaspreisgarantie und Bonus: 970,00 Euro Ersparnis. Ende der Tabelle Konkrete Beispiel-Rechnung: Ersparnis bei 20000 Kilowattstunden Verbrauch. Checkliste: Worauf du beim Gasanbieterwechsel achten musst. Punkt 1: Garantiedauer passend zur Laufzeit: Wähle eine Preisgarantie, die mindestens über die gesamte Mindestvertragslaufzeit läuft (zum Beispiel 12 Monate Garantie bei 12 Monaten Erstlaufzeit). Punkt 2: Kurze Kündigungsfristen: Verträge mit einer Frist von 4 bis 6 Wochen zum Laufzeitende garantieren dir maximale Flexibilität für den nächsten Wechsel. Punkt 3: Keine Vorkasse oder Kaution: Schließe niemals Tarife mit jährlicher Vorauszahlung ab. Seriöse Anbieter rechnen immer in monatlichen Abschlägen ab. Punkt 4: Verbrauch genau angeben: Nimm den genauen Kilowattstunden-Verbrauch aus deiner letzten Jahresabrechnung zur Hand. Schätzt du den Verbrauch zu niedrig ein, drohen am Jahresende Nachzahlungen. Wer neben dem Anbieterwechsel auch technische Einsparmöglichkeiten nutzen möchte,",
    "units": [
     {
      "i": 48,
      "type": "table-row",
      "lang": "de",
-     "chars": 136
+     "chars": 137
     },
     {
      "i": 49,

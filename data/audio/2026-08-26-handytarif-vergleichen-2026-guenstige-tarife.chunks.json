@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 155,
- "chars": 13326,
+ "chars": 13302,
  "parts": [
   {
    "index": 0,
@@ -312,7 +312,7 @@
   },
   {
    "index": 3,
-   "text": "Wie LTE, aber mit Zugang zum 5G-Netz. 2026 surfen bereits über 60 Prozent der deutschen Haushalte mit 5G-fähigen Smartphones. Vorteile: Höhere Spitzengeschwindigkeiten, weniger überlastet in Städten. Nachteile: Nur sinnvoll mit 5G-fähigem Gerät und an Orten mit 5G-Abdeckung. Preis: 5G ist heute bereits ab circa 8 bis 12 Euro im Monat verfügbar. Die 8-Punkte-Checkliste für den Tarifvergleich. Bevor du einen Vertrag abschließt, prüfe systematisch diese acht Kriterien: Punkt 1: Netz: Passt die Netzqualität an Wohnung, Arbeitsplatz und auf den täglichen Wegen? Punkt 2: Datenvolumen: Wie viel GB verbrauchst du wirklich? In den Einstellungen deines Smartphones unter Mobiles Netz, dann Datennutzung siehst du den exakten Verbrauch der letzten Monate. Punkt 3: Geschwindigkeit: Reichen 25 Megabit pro Sekunde pro Sekunde (LTE) oder brauchst du 50 bis 300 Megabit pro Sekunde pro Sekunde (5G)? Punkt 4: Telefonie und SMS: Telefonie-Flat in alle deutschen Netze ist Standard. SMS-Flat immer seltener genutzt, aber meist inklusive. Punkt 5: EU-Roaming: Seit 2017 innerhalb der EU ohne Aufpreis, achte aber auf die Faire-Use-Regelungen und die Schweiz (oft nicht inklusive). Punkt 6: Laufzeit: Maximale 24 Monate, danach automatisch monatlich kündbar. Vorsicht bei Flat mit Mindestlaufzeit 24 Monate und automatischer Verlängerung um 12 Monate.",
+   "text": "Wie LTE, aber mit Zugang zum 5G-Netz. 2026 surfen bereits über 60 Prozent der deutschen Haushalte mit 5G-fähigen Smartphones. Vorteile: Höhere Spitzengeschwindigkeiten, weniger überlastet in Städten. Nachteile: Nur sinnvoll mit 5G-fähigem Gerät und an Orten mit 5G-Abdeckung. Preis: 5G ist heute bereits ab circa 8 bis 12 Euro im Monat verfügbar. Die 8-Punkte-Checkliste für den Tarifvergleich. Bevor du einen Vertrag abschließt, prüfe systematisch diese acht Kriterien: Punkt 1: Netz: Passt die Netzqualität an Wohnung, Arbeitsplatz und auf den täglichen Wegen? Punkt 2: Datenvolumen: Wie viel GB verbrauchst du wirklich? In den Einstellungen deines Smartphones unter Mobiles Netz, dann Datennutzung siehst du den exakten Verbrauch der letzten Monate. Punkt 3: Geschwindigkeit: Reichen 25 Megabit pro Sekunde (LTE) oder brauchst du 50 bis 300 Megabit pro Sekunde (5G)? Punkt 4: Telefonie und SMS: Telefonie-Flat in alle deutschen Netze ist Standard. SMS-Flat immer seltener genutzt, aber meist inklusive. Punkt 5: EU-Roaming: Seit 2017 innerhalb der EU ohne Aufpreis, achte aber auf die Faire-Use-Regelungen und die Schweiz (oft nicht inklusive). Punkt 6: Laufzeit: Maximale 24 Monate, danach automatisch monatlich kündbar. Vorsicht bei Flat mit Mindestlaufzeit 24 Monate und automatischer Verlängerung um 12 Monate.",
    "units": [
     {
      "i": 47,
@@ -372,7 +372,7 @@
      "i": 56,
      "type": "li",
      "lang": "de",
-     "chars": 140
+     "chars": 116
     },
     {
      "i": 57,

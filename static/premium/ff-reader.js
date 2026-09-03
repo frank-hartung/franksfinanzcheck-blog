@@ -379,10 +379,10 @@
        „Bonus: - 180,00 Euro (Gutschrift)" muss als „minus 180,00 Euro"
        gesprochen werden – sonst klingt eine Gutschrift wie eine
        zusätzliche Forderung. */
-    s = s.replace(/(^|[\s:(])\s*-\s*(?=\d)/g, '$1' + (lang === 'en' ? 'minus ' : 'minus '));
+    s = s.replace(/(^|[\s:(])\s*-\s*(?=\d)/g, '$1' + (lang === 'en' ? ' minus ' : ' minus '));
 
     /* --- Schrägstrich: „pro", „bis", „und" oder „oder" je nach Kontext --- */
-    s = s.replace(/\/s\b/g, lang === 'en' ? ' per second' : ' pro Sekunde');
+
     s = s.replace(/\s*\/\s*Kilowattstunden?\b/gi, lang === 'en' ? ' per kilowatt hour' : ' pro Kilowattstunde');
     s = s.replace(/\s*\/\s*(kWh|Kilowattstunde)\b/gi, lang === 'en' ? ' per kilowatt hour' : ' pro Kilowattstunde');
     s = s.replace(/\bVoll\s*\/\s*(Voll|Leer)\b/gi, '$1 zu $1');
@@ -416,6 +416,11 @@
         }
         return ' pro ' + name;
       });
+    /* Bandbreiten: „250 Mbit/s", „1000 MBit/s", „1 Gbit/s". Muss VOR der
+       allgemeinen Wort/Wort-Regel stehen – sonst wird aus „Mbit/s" erst
+       „Mbit oder s" und die Einheit passt nicht mehr. */
+    s = s.replace(/\b(?:Mbit|Megabit)\s*\/\s*s\b/gi, lang === 'en' ? 'megabits per second' : 'Megabit pro Sekunde');
+    s = s.replace(/\b(?:Gbit|Gigabit)\s*\/\s*s\b/gi, lang === 'en' ? 'gigabits per second' : 'Gigabit pro Sekunde');
     s = s.replace(/([A-Za-zäöüßÄÖÜ])\s*\/\s*(?=[A-Za-zäöüßÄÖÜ])/g, '$1' + (lang === 'en' ? ' or ' : ' oder '));
 
     /* Zahlenreihen mit drei oder mehr Gliedern sind Eigennamen, keine
@@ -473,7 +478,7 @@
       s = s.replace(/\bKfz\b/gi, 'Kraftfahrzeug');
       s = s.replace(/\bPKV\b/g, 'private Krankenversicherung');
       s = s.replace(/\bGKV\b/g, 'gesetzliche Krankenversicherung');
-      s = s.replace(/\bIBAN\b/g, 'I BAN');
+
       s = s.replace(/\bBIC\b/g, 'B I C');
       s = s.replace(/\bAPI\b/g, 'A P I');
       s = s.replace(/\bKfW\b/g, 'K f W');
@@ -540,8 +545,11 @@
       s = s.replace(/(kilowatt hours?)\s*\(kWh\)/gi, '$1');
       s = s.replace(/\b(per)\s+kWh\b/gi, '$1 kilowatt hour');
       s = s.replace(/\b(?:kWh|kwh)\b/g, 'kilowatt hours');
-      s = s.replace(/\b(?:Mbit\/s|MBit\/s|Mbit)\b/g, 'megabits per second');
-      s = s.replace(/\b(?:Gbit\/s|GBit\/s|Gbit)\b/g, 'gigabits per second');
+      s = s.replace(/\b(?:Mbit|MBit|Megabit)\s*\/\s*s\b/gi, 'megabits per second');
+      s = s.replace(/\b(?:Gbit|GBit|Gigabit)\s*\/\s*s\b/gi, 'gigabits per second');
+      s = s.replace(/\b(?:Mbit|MBit)\b/g, 'megabit');
+      s = s.replace(/\b(?:Gbit|GBit)\b/g, 'gigabit');
+      s = s.replace(/\s*\/\s*s\b/g, ' per second');
       s = s.replace(/\b(?:m²|sqm)\b/gi, 'square meters');
       s = s.replace(/\s*(?:\bp\.\s?a\.|\/\s?year)/gi, ' per year');
       s = s.replace(/\s*\/\s?(month|year|week|day|person|hour)\b/gi, ' per $1');
@@ -590,8 +598,11 @@
          schreibt „Arbeitspreis pro kWh" als Spaltenüberschrift. */
       s = s.replace(/\b(pro|je)\s+kWh\b/gi, '$1 Kilowattstunde');
       s = s.replace(/\b(?:kWh|kwh)\b/g, 'Kilowattstunden');
-      s = s.replace(/\b(?:Mbit\/s|MBit\/s|Mbit)\b/g, 'Megabit pro Sekunde');
-      s = s.replace(/\b(?:Gbit\/s|GBit\/s|Gbit)\b/g, 'Gigabit pro Sekunde');
+      s = s.replace(/\b(?:Mbit|MBit|Megabit)\s*\/\s*s\b/gi, 'Megabit pro Sekunde');
+      s = s.replace(/\b(?:Gbit|GBit|Gigabit)\s*\/\s*s\b/gi, 'Gigabit pro Sekunde');
+      s = s.replace(/\b(?:Mbit|MBit)\b/g, 'Megabit');
+      s = s.replace(/\b(?:Gbit|GBit)\b/g, 'Gigabit');
+      s = s.replace(/\s*\/\s*s\b/g, ' pro Sekunde');
       s = s.replace(/\b(?:m²|qm)\b/gi, 'Quadratmeter');
       s = s.replace(/(\d)\s*h\b/g, '$1 Stunden');
       s = s.replace(/(\d)\s*(?:km|Km)\b/g, '$1 Kilometer');

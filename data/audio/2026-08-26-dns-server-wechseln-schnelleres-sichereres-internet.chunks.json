@@ -8,7 +8,7 @@
   "maxChunk": 140
  },
  "units": 182,
- "chars": 15511,
+ "chars": 15487,
  "parts": [
   {
    "index": 0,
@@ -720,13 +720,13 @@
   },
   {
    "index": 7,
-   "text": "Der DNS-Server verkürzt nur die Antwortzeit, nicht dein 16-Megabit pro Sekunde-Funkloch. In einem gut ausgesteuerten Netz spürst du schnellere erste Seitenaufrufe und weniger Hänger beim Smart-TV-Start. Speedtests in Megabit pro Sekunde pro Sekunde ändern sich kaum. Das ist kein Widerspruch. FritzBox: Internet führt zu Zugangsdaten führt zu DNS-Server. Zuerst die bisherigen Adressen deines Providers notieren, dann die zwei neuen Server eintragen (einer primär, einer sekundär). 48 Stunden testen, bei Problemen mit VPN oder Banking zurück. Kinder-Filter und Ad-Blocking-Dienste sind extra, sie zerlegen manches Online-Banking. Dann Split-DNS oder Ausnahmen. Der Wechsel ist ein 5-Minuten-Hebel mit geringem Risiko. Er ersetzt keinen Tarifwechsel und kein Mesh. Er macht beides angenehmer, wenn die Basis stimmt. Extra: Wie der DNS-Server deinen Alltag beeinflusst. Viele Nutzer merken den Unterschied erst, wenn sie bewusst darauf achten. Beim Aufruf einer Nachrichtenseite, beim Laden des Online-Bankings, beim Start einer Mediathek: Überall steckt eine kurze Anfrage an den DNS-Server dahinter. Wer einen schnellen, datensparsamen Anbieter nutzt, spart über den Tag verteilt mehrere Sekunden Wartezeit. Nebenbei reduziert er das Tracking-Risiko. Dazu kommt die Filterung: Manche Dienste bieten optionale Jugendschutz-Listen, andere blockieren Werbung oder Tracker auf Domain-Ebene.",
+   "text": "Der DNS-Server verkürzt nur die Antwortzeit, nicht dein 16-Megabit-Funkloch. In einem gut ausgesteuerten Netz spürst du schnellere erste Seitenaufrufe und weniger Hänger beim Smart-TV-Start. Speedtests in Megabit pro Sekunde ändern sich kaum. Das ist kein Widerspruch. FritzBox: Internet führt zu Zugangsdaten führt zu DNS-Server. Zuerst die bisherigen Adressen deines Providers notieren, dann die zwei neuen Server eintragen (einer primär, einer sekundär). 48 Stunden testen, bei Problemen mit VPN oder Banking zurück. Kinder-Filter und Ad-Blocking-Dienste sind extra, sie zerlegen manches Online-Banking. Dann Split-DNS oder Ausnahmen. Der Wechsel ist ein 5-Minuten-Hebel mit geringem Risiko. Er ersetzt keinen Tarifwechsel und kein Mesh. Er macht beides angenehmer, wenn die Basis stimmt. Extra: Wie der DNS-Server deinen Alltag beeinflusst. Viele Nutzer merken den Unterschied erst, wenn sie bewusst darauf achten. Beim Aufruf einer Nachrichtenseite, beim Laden des Online-Bankings, beim Start einer Mediathek: Überall steckt eine kurze Anfrage an den DNS-Server dahinter. Wer einen schnellen, datensparsamen Anbieter nutzt, spart über den Tag verteilt mehrere Sekunden Wartezeit. Nebenbei reduziert er das Tracking-Risiko. Dazu kommt die Filterung: Manche Dienste bieten optionale Jugendschutz-Listen, andere blockieren Werbung oder Tracker auf Domain-Ebene.",
    "units": [
     {
      "i": 111,
      "type": "p",
      "lang": "de",
-     "chars": 88
+     "chars": 76
     },
     {
      "i": 112,
@@ -738,7 +738,7 @@
      "i": 113,
      "type": "p",
      "lang": "de",
-     "chars": 89
+     "chars": 77
     },
     {
      "i": 114,
