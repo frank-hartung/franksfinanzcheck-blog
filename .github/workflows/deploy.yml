@@ -65,6 +65,25 @@ jobs:
       - name: Py-Abhängigkeiten für Gate-Chain
         run: python3 -m pip install -q pyyaml pillow pillow-avif-plugin 2>/dev/null || python3 -m pip install -q --break-system-packages pyyaml pillow pillow-avif-plugin
 
+      # ===== URL-HYGIENE-GATE (PREMIUM-FIX 03.09.2026) =====================
+      # Kernbefund Mi 02.09.2026: Ein fertiger Artikel wurde wegen einer
+      # Markdown-URL mit Leerzeichen (R8-URL-LEERZEICHEN, „…-zu Hause/“
+      # statt „…-zuhause/“) am Publish-Gate gestoppt und der Tag blieb mit
+      # 1 statt 2–3 Artikeln. Dieses deterministische Gate heilt die Klasse
+      # VOR dem Publish-Gate: (1) Leerzeichen-URLs werden gegen die echten
+      # Post-Slugs aufgelöst, (2) ausschließlich dadurch blockierte
+      # „hold“-Posts werden nachweislich in die Re-Queue gelegt – die
+      # Promotion entscheidet weiter allein cadence_guard. Danach kann
+      # R8-URL-LEERZEICHEN keinen Kandidaten mehr dauerhaft blockieren.
+      - name: URL-Hygiene-Selbsttest (Heiler muss lauffähig sein)
+        run: python3 scripts/fix_url_hygiene.py --selftest
+
+      - name: URL-Hygiene-Gate (Leerzeichen-URLs selbstheilend)
+        run: python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
+
+      - name: URL-Hygiene – deterministisch heilbare holds entblocken
+        run: python3 scripts/fix_url_hygiene.py --heal-holds
+
       - name: Kadenz-Selbsttest (Gate muss lauffähig sein, sonst kein Build)
         run: python3 scripts/cadence_guard.py --selftest
 
