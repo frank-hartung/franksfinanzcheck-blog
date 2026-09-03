@@ -3,9 +3,13 @@
    03.09.2026 — Profi-Agentur & Chefredakteur-Standard
    ------------------------------------------------------------
    - Privacy-first & First-party: Web Speech API lokal im Browser.
-   - Männliche Stimme mit sonorer, redaktioneller Timbre-Optimierung.
+   - Männliche Stimme auf Highend-Level (sonore, redaktionelle
+     Timbre-Optimierung) – automatisch gewählt, kein Stimmen-Menü.
    - Vollautomatische Mehrsprachigkeit: Deutsch (DE) und Englisch (EN)
      ohne manuellen Umschalter.
+   - Automatische Qualitätsanpassung: Stimmen-Güte, Tempo, Chunk-Länge,
+     Pausen und Fallback werden je Browser/Gerät selbst geregelt –
+     keine Tempo-Anzeige, kein Tempo-Regler, keine Tastenkürzel.
    - Maximale Barrierefreiheit (WCAG 2.2 AAA / BITV) für Fließtext,
      Überschriften, Listen sowie Tabellen & Übersichten mit
      zeilengenauer Live-Synchronisation und Vorlese-Kontext.
@@ -57,11 +61,6 @@
       finished: 'Vorlesen beendet.',
       resumedPos: 'Vorlesen an der zuletzt gehörten Stelle fortgesetzt.',
       remaining: 'noch ca. {min} Min.',
-      speedSet: 'Tempo: {rate}-fach.',
-      voiceSet: 'Stimme: {voice}.',
-      voiceStudio: 'Studio',
-      voicePremium: 'Premium',
-      voiceStandard: 'Standard',
       mediaArtist: 'FranksFinanzcheck – Artikel zum Hören',
       introLine: '{title}. Ein Beitrag von FranksFinanzcheck. Hördauer etwa {time} Minuten.',
       outroLine: 'Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.',
@@ -73,8 +72,6 @@
       cueNote: 'Hinweis:',
       tableHeaders: 'Die Spalten lauten: {headers}',
       tableOutro: 'Ende der Tabelle {title}.',
-      speedLabel: 'Tempo',
-      voiceLabel: 'Stimme',
       prevAria: 'Vorheriger Abschnitt',
       nextAria: 'Nächster Abschnitt',
       tableTitleDefault: 'Übersichtstabelle',
@@ -116,8 +113,6 @@
       finished: 'Audio playback completed.',
       resumedPos: 'Resumed from your last listening position.',
       remaining: 'approx. {min} min left',
-      speedSet: 'Speed: {rate}x.',
-      voiceSet: 'Voice: {voice}.',
       voiceStudio: 'Studio',
       voicePremium: 'Premium',
       voiceStandard: 'Standard',
@@ -132,8 +127,6 @@
       cueNote: 'Note:',
       tableHeaders: 'The columns are: {headers}',
       tableOutro: 'End of table {title}.',
-      speedLabel: 'Speed',
-      voiceLabel: 'Voice',
       prevAria: 'Previous section',
       nextAria: 'Next section',
       tableTitleDefault: 'Overview Table',
@@ -403,8 +396,10 @@
          Prozente, IBAN, Abkürzungen, Finanz-Akronyme, Domains)
        - Rollen-basierte Stimmführung (Überschrift, Fließtext,
          Zitat, Warnung, Tabellenzeile) wie im Hörfunk-Studio
-       - Neuronale Stimmen-Rangliste + persistente Nutzerwahl
-       - Tempo-Regler, Satz-Navigation, Merken der Hörposition
+       - Neuronale Stimmen-Rangliste (automatisch, männlich, DE/EN)
+       - Automatische Qualitätsanpassung (Stimme, Tempo, Chunking,
+         Pausen, Fallback) – ohne Regler, ohne Tempo-Anzeige
+       - Abschnitts-Navigation, Merken der Hörposition
        - Media-Session (Sperrbildschirm/Kopfhörer-Tasten)
        - Chrome-/Safari-Härtung gegen Abbrüche nach 15 Sekunden
   ============================================================ */
@@ -412,8 +407,6 @@
   var synth = win.speechSynthesis || null;
   var speechSupported = !!(synth && typeof win.SpeechSynthesisUtterance === 'function');
 
-  var STORE_VOICE = 'ff-reader:voice';
-  var STORE_RATE = 'ff-reader:rate';
   var STORE_POS = 'ff-reader:pos:' + (win.location ? win.location.pathname : '');
 
   function storeGet(k) { try { return win.localStorage.getItem(k); } catch (e) { return null; } }
@@ -421,7 +414,6 @@
   function storeDel(k) { try { win.localStorage.removeItem(k); } catch (e) {} }
 
   var maleVoice = null;
-  var voiceCatalog = [];
   var reading = false;
   var playing = false;
   var blocks = [];        // { el, text, lang, type, role, chunks[] }
@@ -431,14 +423,33 @@
   var pauseTimer = null;
   var spokenChars = 0;
   var totalChars = 0;
-  var userRate = parseFloat(storeGet(STORE_RATE) || '1') || 1;
-  if (userRate < 0.6 || userRate > 2) userRate = 1;
-
-  var speedSelect = doc.getElementById('ff-reader-speed');
-  var voiceSelect = doc.getElementById('ff-reader-voice');
   var prevBtn = doc.getElementById('ff-listen-prev');
   var nextBtn = doc.getElementById('ff-listen-next');
   var remainEl = doc.getElementById('ff-reader-remaining');
+
+  /* ---------- Automatische Qualitätsanpassung (Auto-Quality) ----------
+     Statt manueller Regler stellt sich die Engine selbst ein:
+       - tier        : 'studio' | 'premium' | 'standard' | 'basic'
+                       (aus der Güte der besten verfügbaren Stimme)
+       - rate        : Grundtempo (Studio-Stimmen vertragen ein
+                       natürlicheres Tempo, einfache Stimmen brauchen
+                       mehr Ruhe für gute Verständlichkeit)
+       - maxChunk    : maximale Satz-Chunk-Länge (Chrome bricht lange
+                       Utterances ab; Neural-Stimmen vertragen längere
+                       Bögen -> flüssigere Prosodie)
+       - pauseScale  : Skalierung der Atem-/Denkpausen
+       - pitchShift  : leichte Anhebung, falls nur einfache Stimmen
+                       vorhanden sind (klingen sonst zu dumpf)
+  ---------------------------------------------------------------------- */
+  var QUALITY_PROFILES = {
+    studio:   { rate: 1.00, maxChunk: 220, pauseScale: 1.00, pitchShift: 0.00 },
+    premium:  { rate: 0.98, maxChunk: 200, pauseScale: 1.00, pitchShift: 0.00 },
+    standard: { rate: 0.94, maxChunk: 170, pauseScale: 1.10, pitchShift: 0.02 },
+    basic:    { rate: 0.90, maxChunk: 150, pauseScale: 1.20, pitchShift: 0.04 }
+  };
+  var quality = { tier: 'standard', rate: 0.94, maxChunk: 170, pauseScale: 1.1, pitchShift: 0.02 };
+  var errorStreak = 0;  // Fehler in Folge (Synthese-Abbrüche)
+  var degradeLevel = 0; // dauerhafte adaptive Herabstufung (0–2)
 
   var SPEAKER_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path d="M19 11a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V20H8a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2h-3v-2.08A7 7 0 0 0 19 11Z"/></svg>';
   var EQ_HTML = '<span class="ff-eq" aria-hidden="true"><i></i><i></i><i></i></span>';
@@ -553,33 +564,51 @@
   function pickMaleVoice(lang) {
     var ranked = rankVoices(lang);
     if (!ranked.length) return null;
-    var saved = storeGet(STORE_VOICE);
-    if (saved) {
-      for (var i = 0; i < ranked.length; i++) {
-        if ((ranked[i].voice.voiceURI || ranked[i].voice.name) === saved) return ranked[i].voice;
-      }
-    }
     return ranked[0].voice;
   }
 
-  function buildVoiceMenu() {
-    if (!voiceSelect) return;
+  /* ---------- Automatische Qualitätsanpassung: Kalibrierung ---------- */
+  function qualityTierForScore(score) {
+    if (score >= 200) return 'studio';
+    if (score >= 140) return 'premium';
+    if (score >= 60) return 'standard';
+    return 'basic';
+  }
+
+  function calibrateQuality() {
     var ranked = rankVoices(currentLang);
-    if (!ranked.length) { voiceSelect.hidden = true; return; }
-    voiceCatalog = ranked.slice(0, 12);
-    var saved = storeGet(STORE_VOICE);
-    voiceSelect.innerHTML = '';
-    voiceCatalog.forEach(function (entry, idx) {
-      var v = entry.voice;
-      var opt = doc.createElement('option');
-      opt.value = v.voiceURI || v.name;
-      var quality = entry.score >= 200 ? texts.voiceStudio : (entry.score >= 140 ? texts.voicePremium : texts.voiceStandard);
-      opt.textContent = (idx === 0 ? '★ ' : '') + (v.name || v.voiceURI) + ' · ' + quality;
-      if (saved && opt.value === saved) opt.selected = true;
-      voiceSelect.appendChild(opt);
-    });
-    if (!saved && voiceCatalog.length) voiceSelect.selectedIndex = 0;
-    voiceSelect.hidden = voiceCatalog.length < 2;
+    var tier = ranked.length ? qualityTierForScore(ranked[0].score) : 'basic';
+    var profile = QUALITY_PROFILES[tier] || QUALITY_PROFILES.standard;
+    var next = {
+      tier: tier,
+      rate: profile.rate,
+      maxChunk: profile.maxChunk,
+      pauseScale: profile.pauseScale,
+      pitchShift: profile.pitchShift
+    };
+
+    // Geräte-/Netz-Kontext: Datensparmodus, schwache CPU oder Mobilgerät
+    // -> etwas kürzere Chunks & ruhigeres Tempo (weniger Abbrüche, klarer)
+    var nav = win.navigator || {};
+    var conn = nav.connection || nav.mozConnection || nav.webkitConnection;
+    var lowPower = !!(conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '')));
+    var weakCpu = typeof nav.hardwareConcurrency === 'number' && nav.hardwareConcurrency > 0 && nav.hardwareConcurrency <= 2;
+    var isMobile = !!(win.matchMedia && win.matchMedia('(pointer: coarse)').matches);
+    if (lowPower || weakCpu) { next.maxChunk = Math.min(next.maxChunk, 150); next.rate = Math.min(next.rate, 0.94); }
+    else if (isMobile) { next.maxChunk = Math.min(next.maxChunk, 180); }
+
+    // Adaptive Herabstufung nach wiederholten Synthese-Fehlern
+    if (degradeLevel > 0) {
+      next.maxChunk = Math.max(110, next.maxChunk - 40 * degradeLevel);
+      next.rate = Math.max(0.88, next.rate - 0.04 * degradeLevel);
+      next.pauseScale = Math.min(1.4, next.pauseScale + 0.1 * degradeLevel);
+    }
+
+    // Nutzer-Präferenz „Bewegung reduzieren“: minimal ruhigere Sprechweise
+    if (reducedMotion) next.rate = Math.min(next.rate, 0.97);
+
+    quality = next;
+    return quality;
   }
 
   /* ---------- Prosodie-Profile je Textrolle (Hörfunk-Regie) ---------- */
@@ -603,20 +632,23 @@
 
   function prosodyFor(type) { return PROSODY[type] || PROSODY.p; }
 
-  /* ---------- Satz-Zerlegung mit Chrome-sicherer Chunk-Länge ---------- */
+  /* ---------- Satz-Zerlegung mit Chrome-sicherer Chunk-Länge ----------
+     Die maximale Länge stammt aus der automatischen Qualitätsanpassung
+     (Studio-Stimmen: längere Bögen, einfache Stimmen: kürzere Chunks). */
   var MAX_CHUNK = 180;
 
   function splitForSpeech(text) {
+    var maxChunk = (quality && quality.maxChunk) || MAX_CHUNK;
     var parts = sentences(text);
     if (!parts.length) parts = [text];
     var out = [];
     parts.forEach(function (sentence) {
-      if (sentence.length <= MAX_CHUNK) { out.push(sentence); return; }
+      if (sentence.length <= maxChunk) { out.push(sentence); return; }
       // Zu lange Sätze an Kommata/Semikola/Gedankenstrichen atmen lassen
       var segs = sentence.replace(/([,;:–—])\s+/g, '$1\u0001').split('\u0001');
       var buf = '';
       segs.forEach(function (seg) {
-        if ((buf + ' ' + seg).trim().length > MAX_CHUNK && buf) { out.push(buf.trim()); buf = seg; }
+        if ((buf + ' ' + seg).trim().length > maxChunk && buf) { out.push(buf.trim()); buf = seg; }
         else { buf = (buf ? buf + ' ' : '') + seg; }
       });
       if (buf.trim()) out.push(buf.trim());
@@ -835,7 +867,7 @@
     var rest = 0;
     for (var i = cursor; i < timeline.length; i++) rest += timeline[i].text.length;
     // ~950 Zeichen/Minute bei Rate 1.0 (deutsche Nachrichtensprache)
-    var minutes = rest / (950 * Math.max(0.5, userRate));
+    var minutes = rest / (950 * Math.max(0.5, quality.rate || 1));
     if (minutes < 0.1) { remainEl.textContent = ''; return; }
     var mm = Math.max(1, Math.round(minutes));
     remainEl.textContent = texts.remaining.replace('{min}', mm);
@@ -878,27 +910,49 @@
       u.lang = unit.lang === 'en' ? 'en-US' : 'de-DE';
       if (voice) u.voice = voice;
       var p = unit.profile;
-      u.rate = Math.min(2, Math.max(0.5, p.rate * userRate));
-      u.pitch = p.pitch;
+      // Automatische Qualitätsanpassung: Tempo & Tonlage je Stimmen-Güte
+      u.rate = Math.min(2, Math.max(0.5, p.rate * quality.rate));
+      u.pitch = Math.min(2, Math.max(0.5, p.pitch + (quality.pitchShift || 0)));
       u.volume = p.volume;
 
       u.onend = function () {
         if (!reading || !playing) return;
+        errorStreak = 0;
         spokenChars += unit.text.length;
-        var wait = Math.round(unit.after / Math.max(0.6, userRate));
+        var wait = Math.round((unit.after * (quality.pauseScale || 1)) / Math.max(0.6, quality.rate));
         clearPauseTimer();
         pauseTimer = setTimeout(function () { speakUnit(cursor + 1); }, wait);
       };
       u.onerror = function (e) {
         if (!reading) return;
         if (e && (e.error === 'interrupted' || e.error === 'canceled')) return;
-        spokenChars += unit.text.length;
+        // Adaptive Herabstufung: nach wiederholten Fehlern kürzere Chunks
+        // und ruhigeres Tempo, damit die Wiedergabe stabil weiterläuft.
+        errorStreak += 1;
+        if (errorStreak >= 2 && degradeLevel < 2) {
+          degradeLevel += 1;
+          errorStreak = 0;
+          var blockIdx = unit.blockIndex;
+          calibrateQuality();
+          maleVoice = pickMaleVoice(unit.lang);
+          buildTimeline();
+          // Am nächsten Block weitermachen (Zeitachse wurde neu zerlegt)
+          var nextIdx = timeline.length;
+          spokenChars = 0;
+          for (var i = 0; i < timeline.length; i++) {
+            if (timeline[i].blockIndex > blockIdx) { nextIdx = i; break; }
+            spokenChars += timeline[i].text.length;
+          }
+          cursor = nextIdx - 1;
+        } else {
+          spokenChars += unit.text.length;
+        }
         if (playing) speakUnit(cursor + 1);
       };
       try { synth.speak(u); } catch (err) { speakUnit(cursor + 1); }
     };
 
-    var lead = Math.round((unit.before || 0) / Math.max(0.6, userRate));
+    var lead = Math.round(((unit.before || 0) * (quality.pauseScale || 1)) / Math.max(0.6, quality.rate));
     if (lead > 0) { pauseTimer = setTimeout(start, lead); } else { start(); }
   }
 
@@ -947,6 +1001,8 @@
     if (!speechSupported) { setStatus(texts.unsupported); return; }
     currentLang = detectArticleLanguage();
     texts = I18N[currentLang] || I18N.de;
+    errorStreak = 0;
+    calibrateQuality();
     maleVoice = pickMaleVoice(currentLang);
 
     blocks = collectBlocks();
@@ -1034,28 +1090,6 @@
   if (prevBtn) prevBtn.addEventListener('click', function () { jumpBlock(-1); });
   if (nextBtn) nextBtn.addEventListener('click', function () { jumpBlock(1); });
 
-  if (speedSelect) {
-    speedSelect.value = String(userRate);
-    if (speedSelect.value !== String(userRate)) speedSelect.value = '1';
-    speedSelect.addEventListener('change', function () {
-      var v = parseFloat(speedSelect.value) || 1;
-      userRate = Math.min(2, Math.max(0.6, v));
-      storeSet(STORE_RATE, String(userRate));
-      setStatus(texts.speedSet.replace('{rate}', String(userRate)));
-      estimateRemaining();
-      if (reading && playing) jumpTo(cursor);
-    });
-  }
-
-  if (voiceSelect) {
-    voiceSelect.addEventListener('change', function () {
-      storeSet(STORE_VOICE, voiceSelect.value);
-      maleVoice = pickMaleVoice(currentLang);
-      setStatus(texts.voiceSet.replace('{voice}', voiceSelect.options[voiceSelect.selectedIndex].textContent.replace(/^★\s*/, '')));
-      if (reading && playing) jumpTo(cursor);
-    });
-  }
-
   // Klick-to-Listen: an beliebiger Stelle einsteigen (auch im Ruhezustand)
   var contentContainer = doc.querySelector('.post-content') || doc.querySelector('.md-content');
   if (contentContainer) {
@@ -1077,46 +1111,22 @@
     });
   }
 
-  /* ---------- Tastatur-Kurzbefehle (Redaktions-Workflow) ---------- */
-  doc.addEventListener('keydown', function (e) {
-    var t = e.target;
-    if (t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable)) return;
-    if (e.metaKey || e.ctrlKey) return;
-
-    if (e.altKey && (e.key === 'l' || e.key === 'L')) {
-      e.preventDefault();
-      if (!reading) startReading(0); else if (playing) pauseReading(); else resumeReading();
-      return;
-    }
-    if (!reading) return;
-    if (e.key === 'Escape') { e.preventDefault(); endReading(true); return; }
-    if (e.altKey && e.key === 'ArrowRight') { e.preventDefault(); jumpBlock(1); }
-    else if (e.altKey && e.key === 'ArrowLeft') { e.preventDefault(); jumpBlock(-1); }
-    else if (e.altKey && e.key === 'ArrowUp') {
-      e.preventDefault();
-      userRate = Math.min(2, Math.round((userRate + 0.1) * 10) / 10);
-      storeSet(STORE_RATE, String(userRate));
-      if (speedSelect) speedSelect.value = String(userRate);
-      setStatus(texts.speedSet.replace('{rate}', String(userRate)));
-      jumpTo(cursor);
-    } else if (e.altKey && e.key === 'ArrowDown') {
-      e.preventDefault();
-      userRate = Math.max(0.6, Math.round((userRate - 0.1) * 10) / 10);
-      storeSet(STORE_RATE, String(userRate));
-      if (speedSelect) speedSelect.value = String(userRate);
-      setStatus(texts.speedSet.replace('{rate}', String(userRate)));
-      jumpTo(cursor);
-    }
-  });
+  /* ---------- Stimmen-Initialisierung & Auto-Kalibrierung ----------
+     Bewusst ohne Tastatur-Kurzbefehle: Bedienung erfolgt ausschließlich
+     über die sichtbaren, barrierefreien Schaltflächen (Tab + Enter/Leertaste). */
+  function refreshVoices() {
+    calibrateQuality();
+    maleVoice = pickMaleVoice(currentLang);
+  }
 
   if (speechSupported) {
-    maleVoice = pickMaleVoice(currentLang);
-    buildVoiceMenu();
+    refreshVoices();
     if (typeof synth.onvoiceschanged !== 'undefined') {
-      synth.onvoiceschanged = function () { maleVoice = pickMaleVoice(currentLang); buildVoiceMenu(); };
+      synth.onvoiceschanged = refreshVoices;
     }
     // Nachzügler-Stimmen (Chrome lädt asynchron)
-    setTimeout(function () { maleVoice = pickMaleVoice(currentLang); buildVoiceMenu(); }, 900);
+    setTimeout(refreshVoices, 900);
+    setTimeout(refreshVoices, 2500);
   } else if (toolbar.classList) {
     toolbar.classList.add('ff-reader-toolbar--unsupported');
   }
