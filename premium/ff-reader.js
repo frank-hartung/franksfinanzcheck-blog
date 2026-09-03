@@ -1,8 +1,11 @@
 /* ============================================================
    FranksFinanzcheck – Premium Lesehilfen (Vorlesen + Kurzfassung)
-   03.09.2026 — Profi-Agentur & Chefredakteur-Standard · Highend v3
-   (vollständige Verlagshaus-Vorlesefunktion: Capital / Wirtschafts-
-   Woche / Die Zeit als Maßstab – Studio-Regie über deren Niveau)
+   03.09.2026 — Profi-Agentur & Chefredakteur-Standard · Highend
+   · Vorlesen v3: vollständige Verlagshaus-Vorlesefunktion
+     (Capital / WirtschaftsWoche / Die Zeit als Maßstab)
+   · Kurzfassung v4: vollständige Verlagshaus-Kurzfassung
+     (Kurzantwort, Kernaussagen, Zahlen auf einen Blick,
+     Inhaltsverzeichnis, Tabellen-Highlights, Byline, Fokus-Falle)
    ------------------------------------------------------------
    - Privacy-first & First-party: Web Speech API lokal im Browser.
    - NUR männliche Sprache – vollautomatisch Deutsch (DE) und
@@ -120,6 +123,13 @@
       summaryCopyFail: 'Kopieren fehlgeschlagen',
       summaryReadFull: 'Ganzen Artikel lesen →',
       summaryClose: 'Kurzfassung schließen',
+      summaryToc: '🧭 In diesem Artikel',
+      summaryJump: 'Zum Abschnitt',
+      summaryJumpTable: 'Zur Tabelle',
+      summaryAuthor: 'Autor: {name}',
+      summaryStand: 'Stand: {date}',
+      summaryEmpty: 'Für diesen Artikel liegt derzeit keine Kurzfassung vor.',
+      summaryRowCount: '{count} Zeilen',
       readingTime: '⏱️ ca. {time} Min. Lesezeit',
       wordCount: '{count} Wörter',
       sectionCount: '{count} Abschnitte',
@@ -172,6 +182,13 @@
       summaryCopyFail: 'Copy failed',
       summaryReadFull: 'Read full article →',
       summaryClose: 'Close summary',
+      summaryToc: '🧭 In this article',
+      summaryJump: 'Go to section',
+      summaryJumpTable: 'Go to table',
+      summaryAuthor: 'Author: {name}',
+      summaryStand: 'As of {date}',
+      summaryEmpty: 'No summary is currently available for this article.',
+      summaryRowCount: '{count} rows',
       readingTime: '⏱️ approx. {time} min read',
       wordCount: '{count} words',
       sectionCount: '{count} sections',
@@ -1814,102 +1831,453 @@
   win.addEventListener('beforeunload', function () { if (reading) { try { synth.cancel(); } catch (e) {} } });
 
   /* ============================================================
-     2) KURZFASSUNG – Redaktionell strukturierter Dialog
+     2) KURZFASSUNG – Verlagshaus-Highend v4 (Capital / WiWo / ZEIT)
+     ------------------------------------------------------------
+     Die vollständige Kurzfassung wie in großen Verlagshäusern –
+     redaktionell strukturiert, automatisch erzeugt, ohne Tracking:
+
+       · Kurzantwort        – „Das Wichtigste in 30 Sekunden“
+                              (Frontmatter `kurzantwort`, sonst die
+                              inhaltlich stärkste Einstiegspassage)
+       · Kernaussagen       – 3–5 prägnante Bullets, redaktionell
+                              gerankt (Zahlen, Spar-/Warn-Signale,
+                              Faustregeln, Tipps), dublettenfrei und
+                              in Lesereihenfolge
+       · Zahlen             – „Auf einen Blick“: Big-Number-Karten
+                              (Wert + redaktionelles Label) aus dem
+                              Fließtext extrahiert
+       · In diesem Artikel  – interaktives Inhaltsverzeichnis mit
+                              Sprungmarken + Abschnitts-Teaser
+       · Tabellen           – kompakte Übersichts-Highlights mit
+                              Sprungmarke zur Originaltabelle
+       · Byline/Meta        – Lesezeit, Wortzahl, Abschnitte, Autor,
+                              Stand (Verlagshaus-Byline)
+       · Kopieren           – sauber formatierte Klartext-Kurzfassung
+       · Barrierefreiheit   – Fokus-Falle, Esc, Scroll-Sperre,
+                              aria-verdrahtet (WCAG 2.2 / BITV)
+
+     Alle Extraktoren sind abkürzungs- und zahlenfest (z. B., d. h.,
+     ca., 1.250 €, 20–30 %) und sprachbewusst (DE & EN).
   ============================================================ */
 
   var dialog = null;
   var summaryCopyText = '';
+  var lastFocused = null;
+  var scrollLockState = null;
 
-  function extractNumbers(content) {
+  /* ---------- Abkürzungs- & zahlenfeste Satzsegmentierung ---------- */
+  var SUMMARY_ABBREVS = [
+    'z. B.', 'z.B.', 'd. h.', 'd.h.', 'u. a.', 'u.a.', 'v. a.', 'v.a.',
+    'z. T.', 'u. s. w.', 'o. Ä.', 'bzw.', 'ca.', 'inkl.', 'exkl.', 'ggf.',
+    'ggfs.', 'evtl.', 'mind.', 'max.', 'etc.', 'usw.', 'usf.', 'bspw.',
+    'e. g.', 'e.g.', 'i. e.', 'i.e.', 'approx.', 'vs.', 'Dr.', 'Prof.',
+    'Nr.', 'Abs.', 'Art.', 'Tab.', 'Abb.', 'Anm.', 'Pkt.', 'Min.', 'Std.',
+    'Mio.', 'Mrd.', 'Tsd.', 'MwSt.', 'zzgl.', 'sog.'
+  ];
+
+  function escapeRe(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // Maskiert Satzende-Punkte, die zu Abkürzungen oder Tausender-
+  // trennern gehören, damit sie nicht fälschlich als Satzende zählen.
+  function maskSentenceDots(text) {
+    var t = String(text || '');
+    // Tausenderpunkte: 1.250 -> 1␂250 (Chefredakteur-Standard)
+    t = t.replace(/(\d)\.(\d{3})/g, '$1\u0002$2');
+    for (var i = 0; i < SUMMARY_ABBREVS.length; i++) {
+      var ab = SUMMARY_ABBREVS[i];
+      var re = new RegExp(escapeRe(ab).replace(/ /g, '\\s*'), 'g');
+      t = t.replace(re, function (m) { return m.replace(/\./g, '\u0002'); });
+    }
+    return t;
+  }
+
+  function summarySentences(text) {
+    var masked = maskSentenceDots(String(text || '').replace(/\u00a0/g, ' '));
+    return masked
+      .replace(/([.!?…]+)(["'»)\]]*)(\s+|$)/g, '$1$2\u0001')
+      .split('\u0001')
+      .map(function (s) { return s.replace(/\u0002/g, '.').replace(/\s+/g, ' ').trim(); })
+      .filter(function (s) { return s.length > 1; });
+  }
+
+  function firstSummarySentence(text, maxLen) {
+    var s = summarySentences(text)[0] || '';
+    var cap = maxLen || 120;
+    if (s.length > cap) s = s.slice(0, cap).replace(/\s+\S*$/, '') + '…';
+    return s;
+  }
+
+  /* ---------- Redaktionelle Signal-Erkennung (DE/EN) ---------- */
+  var SIGNAL_DE = [
+    'solltest', 'sollte', 'lohnt', 'lohnen', 'sparen', 'sparst', 'spart',
+    'ersparnis', 'vermeiden', 'achtung', 'wichtig', 'faustregel', 'tipp',
+    'fehler', 'falle', 'nie', 'immer', 'gilt', 'musst', 'müssen',
+    'checkliste', 'merke', 'vorsicht', 'profitier', 'senken', 'senkt',
+    'reduzier', 'kostet', 'kosten', 'günstig', 'gratis', 'kostenlos',
+    'bonus', 'vergleich', 'wechseln', 'prüfen', 'beachten', 'rechnen',
+    'fallstrick', 'schützen', 'schutz', 'absichern', 'sparplan'
+  ];
+  var SIGNAL_EN = [
+    'should', 'save', 'saving', 'savings', 'avoid', 'attention',
+    'important', 'rule of thumb', 'tip', 'mistake', 'never', 'always',
+    'cost', 'costs', 'worth', 'must', 'check', 'compare', 'switch',
+    'free', 'beware', 'note', 'protect', 'insurance', 'renew'
+  ];
+
+  function signalScore(text, lang) {
+    var s = String(text || '');
+    var t = s.toLowerCase();
+    var score = 0;
+    if (/\d/.test(s)) score += 2;
+    if (/[€%]|\b(?:euro|prozent|kwh|cent|ct|mbit|gbit)\b/i.test(s)) score += 2;
+    var words = (lang === 'en') ? SIGNAL_EN : SIGNAL_DE;
+    var hits = 0;
+    for (var i = 0; i < words.length; i++) {
+      if (t.indexOf(words[i]) !== -1) { hits++; if (hits >= 3) break; }
+    }
+    score += hits;
+    if (/^(?:achtung|wichtig|wichtiger hinweis|faustregel|tipp|merke|vorsicht|attention|important|note|tip|warning)\b/i.test(s.trim())) score += 2;
+    var len = s.length;
+    if (len < 24) score -= 3;
+    else if (len > 230) score -= 2;
+    else if (len >= 40 && len <= 180) score += 1;
+    return score;
+  }
+
+  function normalizeKey(s) {
+    return String(s || '').toLowerCase().replace(/[^\wäöüß€%]+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function overlapRatio(a, b) {
+    var wa = normalizeKey(a).split(' ').filter(function (w) { return w.length > 0; });
+    var wb = normalizeKey(b).split(' ').filter(function (w) { return w.length > 0; });
+    if (!wa.length || !wb.length) return 0;
+    var set = {};
+    wa.forEach(function (w) { set[w] = 1; });
+    var shared = 0;
+    wb.forEach(function (w) { if (set[w]) shared++; });
+    return shared / Math.min(wa.length, wb.length);
+  }
+
+  /* ---------- Dokumenttreue Element-Wanderung ---------- */
+  function walkNodes(node, cb) {
+    if (!node) return;
+    cb(node);
+    var kids = node.children || [];
+    for (var i = 0; i < kids.length; i++) walkNodes(kids[i], cb);
+  }
+
+  /* ---------- Zahlen-Extraktion (Auf einen Blick) ---------- */
+  var FIG_UNIT = '(?:€|%|Euro|EUR|Prozent|kWh|Cent|ct|Mbit\\/s|Gbit\\/s|MBit\\/s|GBit\\/s|Min\\.?|Std\\.?|Monate|Monaten|Monat|Jahre|Jahren|Jahr|Tage|Tagen|Wochen)';
+  var FIG_PREFIX = '(?:bis zu|rund|etwa|ca\\.?|knapp|über|unter|ab|fast|mehr als|weniger als|maximal|mindestens|bis|circa|approx\\.?|up to|about|around|almost|at least|from)';
+  var FIG_RE = new RegExp('(' + FIG_PREFIX + '\\s+)?(\\d[\\d.,]*(?:\\s*(?:–|—|-|bis|to|\\u2013|\\u2014)\\s*\\d[\\d.,]*)?)\\s*(' + FIG_UNIT + ')(\\s*(?:im|pro|je|per)\\s*(?:Monat|Jahr|Tag|Woche|Stunde|Quadratmeter|qm|Kilowattstunde))?', 'gi');
+
+  function fallbackFigureLabel(unit, lang) {
+    var u = String(unit || '').toLowerCase();
+    if (/€|euro|eur/.test(u)) return lang === 'en' ? 'Cost' : 'Kosten';
+    if (/%|prozent/.test(u)) return lang === 'en' ? 'Change' : 'Veränderung';
+    if (/kwh/.test(u)) return lang === 'en' ? 'Consumption' : 'Verbrauch';
+    if (/cent|ct/.test(u)) return lang === 'en' ? 'Unit price' : 'Preis je Einheit';
+    if (/mbit|gbit/.test(u)) return lang === 'en' ? 'Speed' : 'Tempo';
+    if (/monat|jahr|tage|wochen/.test(u)) return lang === 'en' ? 'Term' : 'Laufzeit';
+    return lang === 'en' ? 'At a glance' : 'Auf einen Blick';
+  }
+
+  function figureFromMatch(s0, m, lang) {
+    var unit = m[3] || '';
+    var value = ((m[1] || '') + m[2] + ' ' + unit + (m[4] ? ' ' + m[4] : '')).replace(/\s+/g, ' ').trim();
+    value = value.replace(/[–—]/g, '–');
+    if (value.length > 32) value = value.slice(0, 30).replace(/\s+\S*$/, '') + '…';
+    var before = s0.slice(0, m.index);
+    var after = s0.slice(m.index + m[0].length);
+    var label = '';
+    if (before && before.replace(/[^\wÄÖÜäöüß€%0-9]+/g, '').length >= 4) {
+      label = before;
+    } else if (after) {
+      label = after;
+    }
+    label = label.replace(/\s+/g, ' ').trim();
+    label = label.replace(/^[^\wÄÖÜäöüß€%0-9]+/, '');
+    label = label.replace(/^(?:und|oder|sowie|davon|dabei|also|damit|dass|weil|wenn|aber|doch|the|and|or|so|which|that|this|is|at|von|bei)\s+/i, '');
+    // Kurzes Vor-Label („Älter als“) sinnvoll mit dem Rest vervollständigen
+    if (label.length < 12 && after) {
+      var afterClean = after.replace(/\s+/g, ' ').trim().replace(/^[^\wÄÖÜäöüß€%0-9]+/, '');
+      afterClean = afterClean.replace(/^(?:und|oder|sowie|davon|dabei|also|damit|dass|weil|wenn|aber|doch|the|and|or|so|which|that|this|is|at|von|bei)\s+/i, '');
+      if (afterClean) {
+        if (afterClean.length <= 40) label = (label + ' ' + afterClean).replace(/\s+/g, ' ').trim();
+        else label = afterClean;
+      }
+    }
+    // Hängende Verben/Präpositionen entfernen: „…kostet oft nur“ → sauberes Label
+    label = label.replace(/(?:kostet|kosten|liegt|liegen|zahlt|zahlst|zahlen|beträgt|betragen|spart|sparst|sparen|bleibt|bleiben|steigt|steigen|sinkt|sinken|lohnt|lohnen|gilt|gelten|von|auf|um|über|unter|bei|mit|für|zu|ab|nach|vor|pro)(?:\s+[a-zäöüß]+){0,2}\s*$/i, '');
+    label = label.replace(/[,;:–—\s]+$/, '');
+    if (!label) label = fallbackFigureLabel(unit, lang);
+    if (label.length > 76) label = label.slice(0, 73).replace(/\s+\S*$/, '') + '…';
+    return { value: value, label: label };
+  }
+
+  function extractFigure(s, lang) {
+    var s0 = String(s || '');
+    if (!/[€%]|\b(?:euro|prozent|kwh|cent|ct)\b|\b(?:monat|jahr|tage|wochen)\b/i.test(s0)) return null;
+    FIG_RE.lastIndex = 0;
+    var m = FIG_RE.exec(s0);
+    return m ? figureFromMatch(s0, m, lang) : null;
+  }
+
+  function extractFigures(s, lang, max) {
+    var s0 = String(s || '');
+    var out = [];
+    if (!/[€%]|\b(?:euro|prozent|kwh|cent|ct)\b|\b(?:monat|jahr|tage|wochen)\b/i.test(s0)) return out;
+    FIG_RE.lastIndex = 0;
+    var m;
+    while ((m = FIG_RE.exec(s0)) && out.length < (max || 2)) {
+      out.push(figureFromMatch(s0, m, lang));
+    }
+    return out;
+  }
+
+  function extractKeyFigures(content, lang) {
     var out = [];
     var seen = {};
-    qsa('p, li, td', content).forEach(function (el) {
-      if (el.closest && el.closest('[data-ff-skip-read]')) return;
-      var text = readableText(el);
-      if (!/[€%]|\b(?:kwh|mbit\/s|gbit\/s|ersparnis|kosten|rabatt)\b/i.test(text)) return;
-      sentences(text).forEach(function (s) {
-        if (out.length >= 5) return;
-        if (!/[€%]|\b(?:kwh|mbit\/s|ersparnis|kosten)\b/i.test(s)) return;
-        if (s.length < 15 || s.length > 240) return;
-        var key = s.toLowerCase();
-        if (seen[key]) return;
-        seen[key] = true;
-        out.push(s);
+    walkNodes(content, function (node) {
+      if (!node || !node.tagName) return;
+      if (node.closest && node.closest('[data-ff-skip-read]')) return;
+      if (node.tagName !== 'P' && node.tagName !== 'LI') return;
+      var text = readableText(node);
+      if (!text) return;
+      summarySentences(text).forEach(function (s) {
+        if (out.length >= 6) return;
+        // Regel-Pfeile („Bis 5 Jahre → Vollkasko“) sind Kernaussagen, keine Zahlen
+        if (/→|->|➜/.test(s)) return;
+        extractFigures(s, lang, 2).forEach(function (f) {
+          if (out.length >= 6) return;
+          var key = normalizeKey(f.value + ' ' + f.label);
+          if (seen[key]) return;
+          seen[key] = true;
+          out.push(f);
+        });
       });
     });
     return out;
   }
 
-  function extractTableHighlights(content) {
-    var highlights = [];
-    qsa('table, .ff-table-scroll table', content).forEach(function (tbl) {
-      if (tbl.closest('[data-ff-skip-read]')) return;
-      var ths = qsa('thead th', tbl).map(function (th) { return readableText(th); });
-      var firstRows = qsa('tbody tr', tbl).slice(0, 3);
-      if (ths.length && firstRows.length) {
-        var rowSummaries = [];
-        firstRows.forEach(function (tr) {
-          var cells = qsa('td, th', tr).map(function (c) { return readableText(c); });
-          if (cells.length) rowSummaries.push(cells.join(' | '));
-        });
-        highlights.push({ headers: ths.join(' | '), rows: rowSummaries });
-      }
+  /* ---------- Kernaussagen (3–5 redaktionelle Bullets) ---------- */
+  function extractKeyBullets(content, lang) {
+    var cands = [];
+    var seen = {};
+    var currentAnchor = '';
+    var order = 0;
+    walkNodes(content, function (node) {
+      if (!node || !node.tagName) return;
+      if (node.closest && node.closest('[data-ff-skip-read]')) return;
+      var tag = node.tagName;
+      if (tag === 'H2' && node.id) { currentAnchor = node.id; return; }
+      if (tag !== 'P' && tag !== 'LI' && tag !== 'BLOCKQUOTE' && tag !== 'H3') return;
+      var text = readableText(node);
+      if (!text || text.length < 20) return;
+      summarySentences(text).slice(0, 3).forEach(function (s) {
+        if (s.length < 24 || s.length > 260) return;
+        var key = normalizeKey(s);
+        if (seen[key]) return;
+        seen[key] = true;
+        cands.push({ text: s, anchor: currentAnchor, score: signalScore(s, lang), order: order++ });
+      });
     });
-    return highlights;
+
+    cands.sort(function (a, b) { return b.score - a.score; });
+
+    var perSection = {};
+    var picked = [];
+    cands.forEach(function (c) {
+      if (picked.length >= 5) return;
+      var k = c.anchor || '_';
+      if ((perSection[k] || 0) >= 2) return;
+      var dup = false;
+      for (var i = 0; i < picked.length; i++) {
+        if (overlapRatio(picked[i].text, c.text) > 0.6) { dup = true; break; }
+      }
+      if (dup) return;
+      perSection[k] = (perSection[k] || 0) + 1;
+      picked.push(c);
+    });
+
+    // Mindestbesatz: falls zu streng gefiltert wurde, auffüllen
+    if (picked.length < 3) {
+      cands.forEach(function (c) {
+        if (picked.length >= 3) return;
+        if (picked.indexOf(c) !== -1) return;
+        picked.push(c);
+      });
+    }
+
+    picked.sort(function (a, b) { return a.order - b.order; });
+    return picked.map(function (c) { return { text: c.text, anchor: c.anchor }; });
   }
 
-  function buildSections(content) {
-    var sections = [];
-    qsa('h2[id]', content).forEach(function (h) {
-      var title = readableText(h);
-      if (!title) return;
-      var lead = '';
-      var next = h.nextElementSibling;
-      while (next && next.tagName !== 'H2') {
-        if (next.tagName === 'P' || next.tagName === 'H3') {
-          var t = readableText(next);
-          if (t) { lead = firstSentences(t, 1); break; }
+  /* ---------- Inhaltsverzeichnis (In diesem Artikel) ---------- */
+  function extractToc(content) {
+    var toc = [];
+    var cur = null;
+    walkNodes(content, function (node) {
+      if (!node || !node.tagName) return;
+      if (node.closest && node.closest('[data-ff-skip-read]')) return;
+      var tag = node.tagName;
+      if (tag === 'H2' && node.id) {
+        var title = readableText(node);
+        if (title) { cur = { id: node.id, title: title, lead: '' }; toc.push(cur); }
+        return;
+      }
+      if (cur && !cur.lead && (tag === 'P' || tag === 'H3')) {
+        var t = readableText(node);
+        if (t) cur.lead = firstSummarySentence(t, 110);
+      }
+    });
+    return toc;
+  }
+
+  /* ---------- Tabellen-Highlights ---------- */
+  function cellTexts(row) {
+    var cells = [];
+    var kids = row.children || [];
+    for (var i = 0; i < kids.length; i++) {
+      if (kids[i].tagName === 'TH' || kids[i].tagName === 'TD') cells.push(readableText(kids[i]));
+    }
+    return cells;
+  }
+
+  function scanTable(tbl) {
+    var headers = [];
+    var rows = [];
+    var rowCount = 0;
+    var caption = '';
+    var kids = tbl.children || [];
+    for (var i = 0; i < kids.length; i++) {
+      var part = kids[i];
+      var tag = part.tagName;
+      if (tag === 'CAPTION') { caption = readableText(part); continue; }
+      if (tag === 'THEAD') {
+        var htrs = part.children || [];
+        for (var j = 0; j < htrs.length; j++) {
+          if (htrs[j].tagName === 'TR') { headers = cellTexts(htrs[j]); break; }
         }
-        next = next.nextElementSibling;
+        continue;
       }
-      sections.push({ id: h.id, title: title, lead: lead });
-    });
-    return sections;
+      if (tag === 'TBODY') {
+        var trs = part.children || [];
+        rowCount = trs.length;
+        for (var k = 0; k < trs.length && rows.length < 3; k++) {
+          if (trs[k].tagName === 'TR') rows.push(cellTexts(trs[k]));
+        }
+        continue;
+      }
+      if (tag === 'TR') { rowCount++; if (rows.length < 3) rows.push(cellTexts(part)); }
+    }
+    if (!headers.length && rows.length) headers = rows.shift();
+    return { caption: caption, headers: headers, rows: rows, rowCount: rowCount };
   }
 
+  function extractTables(content, lang) {
+    var out = [];
+    var sectionTitle = '';
+    var sectionAnchor = '';
+    walkNodes(content, function (node) {
+      if (!node || !node.tagName) return;
+      if (node.closest && node.closest('[data-ff-skip-read]')) return;
+      var tag = node.tagName;
+      if (tag === 'H2' || tag === 'H3') {
+        var ht = readableText(node);
+        if (ht) sectionTitle = ht;
+        if (tag === 'H2' && node.id) sectionAnchor = node.id;
+        return;
+      }
+      if (tag !== 'TABLE') return;
+      var t = scanTable(node);
+      var title = t.caption || sectionTitle || texts.tableTitleDefault;
+      out.push({
+        title: title,
+        headers: t.headers,
+        rows: t.rows,
+        rowCount: t.rowCount,
+        anchor: sectionAnchor
+      });
+    });
+    return out;
+  }
+
+  /* ---------- Kurzantwort (30 Sekunden) ---------- */
+  function pickShortAnswer(content, lang) {
+    var short = stripMd(cfg.kurzantwort || cfg.description || '');
+    if (short) return short;
+    var best = '';
+    var bestScore = -1;
+    walkNodes(content, function (node) {
+      if (!node || node.tagName !== 'P') return;
+      var t = readableText(node);
+      if (!t || t.length < 40) return;
+      var score = signalScore(t, lang);
+      // Szenen-Einstiege („Stell dir vor …“) sind keine Antworten
+      if (/stell dir|vor ein|ein beispiel|story|szenario|imagine|picture this/i.test(t)) score -= 4;
+      if (score > bestScore) { bestScore = score; best = t; }
+    });
+    if (best) return summarySentences(best).slice(0, 3).join(' ');
+    return '';
+  }
+
+  /* ---------- Datensammlung ---------- */
   function buildSummaryData() {
     var content = doc.querySelector('.post-content') || doc.querySelector('.md-content');
-    var sections = content ? buildSections(content) : [];
-    var numbers = content ? extractNumbers(content) : [];
-    var tables = content ? extractTableHighlights(content) : [];
-    var short = stripMd(cfg.kurzantwort || cfg.description || '');
-    if (!short && content) {
-      var firstP = qsa('p', content)[0];
-      if (firstP) short = firstSentences(readableText(firstP), 2);
+    var lang = currentLang;
+    var data = { short: '', bullets: [], figures: [], toc: [], tables: [] };
+    if (content) {
+      data.short = pickShortAnswer(content, lang);
+      data.bullets = extractKeyBullets(content, lang);
+      data.figures = extractKeyFigures(content, lang);
+      data.toc = extractToc(content);
+      data.tables = extractTables(content, lang);
     }
-    return { short: short, sections: sections, numbers: numbers, tables: tables };
+    data.author = stripMd(cfg.author || '');
+    data.date = stripMd(cfg.date || '');
+    data.updated = stripMd(cfg.updated || '');
+    data.category = stripMd(cfg.category || '');
+    return data;
   }
 
+  /* ---------- Klartext-Kurzfassung (Kopieren) ---------- */
   function buildPlainText(data) {
     var lines = [];
     lines.push((texts.summaryEyebrow.toUpperCase()) + ': ' + (stripMd(cfg.title) || doc.title));
+    lines.push(texts.source + win.location.href);
+    var meta = [];
+    if (cfg.readingTime) meta.push(texts.readingTime.replace('{time}', cfg.readingTime));
+    if (cfg.wordCount) meta.push(texts.wordCount.replace('{count}', cfg.wordCount));
+    if (data.toc.length) meta.push(texts.sectionCount.replace('{count}', data.toc.length));
+    if (data.author) meta.push(texts.summaryAuthor.replace('{name}', data.author));
+    if (data.updated) meta.push(texts.summaryStand.replace('{date}', data.updated));
+    else if (data.date) meta.push(texts.summaryStand.replace('{date}', data.date));
+    if (meta.length) lines.push(meta.join(' · '));
     lines.push('');
     if (data.short) { lines.push(texts.summaryQuick30 + ':'); lines.push(data.short); lines.push(''); }
-    if (data.sections.length) {
+    if (data.bullets.length) {
       lines.push(texts.summaryKeypoints + ':');
-      data.sections.forEach(function (s) { lines.push('- ' + s.title + (s.lead ? ' — ' + s.lead : '')); });
+      data.bullets.forEach(function (b, i) { lines.push((i + 1) + '. ' + b.text); });
       lines.push('');
     }
-    if (data.numbers.length) {
+    if (data.figures.length) {
       lines.push(texts.summaryNumbers + ':');
-      data.numbers.forEach(function (n) { lines.push('- ' + n); });
+      data.figures.forEach(function (f) { lines.push('- ' + f.value + (f.label ? ' — ' + f.label : '')); });
       lines.push('');
     }
-    lines.push(texts.readingTime.replace('{time}', (cfg.readingTime || '?')) + ' · ' + texts.wordCount.replace('{count}', (cfg.wordCount || '?')));
-    lines.push(texts.source + win.location.href);
+    if (data.toc.length) {
+      lines.push(texts.summaryToc + ':');
+      data.toc.forEach(function (s) { lines.push('- ' + s.title + (s.lead ? ' — ' + s.lead : '')); });
+      lines.push('');
+    }
     return lines.join('\n');
   }
 
+  /* ---------- DOM-Helfer ---------- */
   function el(tag, cls, text) {
     var e = doc.createElement(tag);
     if (cls) e.className = cls;
@@ -1939,6 +2307,48 @@
     }
   }
 
+  /* ---------- Fokus-Falle & Scroll-Sperre (WCAG 2.2) ---------- */
+  function dialogIsOpen() {
+    if (!dialog) return false;
+    if (dialog.open === true) return true;
+    return dialog.getAttribute && dialog.getAttribute('open') !== null;
+  }
+
+  function focusableIn(root) {
+    return qsa('a[href], button, [tabindex]:not([tabindex="-1"])', root).filter(function (n) {
+      return !(n.disabled || (n.getAttribute && n.getAttribute('aria-hidden') === 'true'));
+    });
+  }
+
+  function trapFocus(e) {
+    if (!dialogIsOpen() || dialog.classList.contains('ff-summary--fallback')) return;
+    var nodes = focusableIn(dialog);
+    if (!nodes.length) { e.preventDefault(); return; }
+    var first = nodes[0];
+    var last = nodes[nodes.length - 1];
+    var active = doc.activeElement;
+    if (e.shiftKey && (active === first || active === dialog)) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+  }
+
+  function lockScroll(lock) {
+    var root = doc.scrollingElement || doc.documentElement;
+    if (!root || !root.style) return;
+    if (lock) {
+      scrollLockState = {
+        html: root.style.overflow || '',
+        body: (doc.body && doc.body.style && doc.body.style.overflow) || ''
+      };
+      root.style.overflow = 'hidden';
+      if (doc.body && doc.body.style) doc.body.style.overflow = 'hidden';
+    } else if (scrollLockState) {
+      root.style.overflow = scrollLockState.html;
+      if (doc.body && doc.body.style) doc.body.style.overflow = scrollLockState.body;
+      scrollLockState = null;
+    }
+  }
+
+  /* ---------- Dialog-Aufbau ---------- */
   function buildDialog() {
     if (dialog) return dialog;
 
@@ -1969,42 +2379,106 @@
     header.appendChild(closeBtn);
 
     var body = el('div', 'ff-summary__body');
+
+    // Byline / Meta-Zeile (Verlagshaus-Standard)
     var metaParts = [];
     if (cfg.readingTime) metaParts.push(texts.readingTime.replace('{time}', cfg.readingTime));
     if (cfg.wordCount) metaParts.push(texts.wordCount.replace('{count}', cfg.wordCount));
-    if (data.sections.length) metaParts.push(texts.sectionCount.replace('{count}', data.sections.length));
+    if (data.toc.length) metaParts.push(texts.sectionCount.replace('{count}', data.toc.length));
+    if (data.author) metaParts.push(texts.summaryAuthor.replace('{name}', data.author));
+    if (data.updated) metaParts.push(texts.summaryStand.replace('{date}', data.updated));
+    else if (data.date) metaParts.push(texts.summaryStand.replace('{date}', data.date));
     if (metaParts.length) body.appendChild(el('div', 'ff-summary__meta', metaParts.join(' · ')));
 
+    var hasContent = !!(data.short || data.bullets.length || data.figures.length || data.toc.length || data.tables.length);
+
+    // 1) Kurzantwort – „Das Wichtigste in 30 Sekunden“
     if (data.short) {
-      var s1 = el('section', 'ff-summary__section');
-      s1.appendChild(el('h3', null, texts.summaryQuick30));
-      s1.appendChild(el('p', null, data.short));
-      body.appendChild(s1);
+      var hero = el('section', 'ff-summary__section ff-summary__hero');
+      hero.appendChild(el('h3', null, texts.summaryQuick30));
+      hero.appendChild(el('p', 'ff-summary__hero-text', data.short));
+      body.appendChild(hero);
     }
 
-    if (data.sections.length) {
+    // 2) Kernaussagen – nummerierte Bullets mit Sprungmarke
+    if (data.bullets.length) {
       var s2 = el('section', 'ff-summary__section');
       s2.appendChild(el('h3', null, texts.summaryKeypoints));
-      var ol = el('ol');
-      data.sections.forEach(function (s) {
-        var li = el('li');
-        var a = el('a', null, s.title);
-        a.href = '#' + s.id;
-        li.appendChild(a);
-        if (s.lead) li.appendChild(doc.createTextNode(' — ' + s.lead));
+      var ol = el('ol', 'ff-summary__bullets');
+      data.bullets.forEach(function (b) {
+        var li = el('li', 'ff-summary__bullet');
+        li.appendChild(doc.createTextNode(b.text));
+        if (b.anchor) {
+          li.appendChild(doc.createTextNode(' '));
+          var a = el('a', 'ff-summary__jump', texts.summaryJump + ' ↗');
+          a.href = '#' + b.anchor;
+          a.setAttribute('aria-label', texts.summaryJump + ': ' + b.text);
+          li.appendChild(a);
+        }
         ol.appendChild(li);
       });
       s2.appendChild(ol);
       body.appendChild(s2);
     }
 
-    if (data.numbers.length) {
+    // 3) Auf einen Blick – Big-Number-Karten
+    if (data.figures.length) {
       var s3 = el('section', 'ff-summary__section');
       s3.appendChild(el('h3', null, texts.summaryNumbers));
-      var ul = el('ul');
-      data.numbers.forEach(function (n) { ul.appendChild(el('li', null, n)); });
-      s3.appendChild(ul);
+      var grid = el('div', 'ff-summary__figures');
+      data.figures.forEach(function (f) {
+        var card2 = el('div', 'ff-summary__figure');
+        card2.appendChild(el('div', 'ff-summary__figure-value', f.value));
+        card2.appendChild(el('div', 'ff-summary__figure-label', f.label));
+        grid.appendChild(card2);
+      });
+      s3.appendChild(grid);
       body.appendChild(s3);
+    }
+
+    // 4) In diesem Artikel – Inhaltsverzeichnis
+    if (data.toc.length) {
+      var s4 = el('section', 'ff-summary__section');
+      s4.appendChild(el('h3', null, texts.summaryToc));
+      var ol2 = el('ol', 'ff-summary__toc');
+      data.toc.forEach(function (s) {
+        var li = el('li', 'ff-summary__toc-item');
+        var a = el('a', null, s.title);
+        a.href = '#' + s.id;
+        li.appendChild(a);
+        if (s.lead) li.appendChild(el('span', 'ff-summary__toc-lead', ' — ' + s.lead));
+        ol2.appendChild(li);
+      });
+      s4.appendChild(ol2);
+      body.appendChild(s4);
+    }
+
+    // 5) Tabellen & Übersichten im Fokus
+    if (data.tables.length) {
+      var s5 = el('section', 'ff-summary__section');
+      s5.appendChild(el('h3', null, texts.summaryTables));
+      data.tables.forEach(function (t) {
+        var box = el('div', 'ff-summary__table');
+        var head = el('div', 'ff-summary__table-head');
+        head.appendChild(el('span', 'ff-summary__table-title', t.title));
+        if (t.rowCount) head.appendChild(el('span', 'ff-summary__table-meta', texts.summaryRowCount.replace('{count}', t.rowCount)));
+        box.appendChild(head);
+        if (t.headers.length) box.appendChild(el('div', 'ff-summary__table-row ff-summary__table-row--head', t.headers.join(' · ')));
+        t.rows.forEach(function (r) {
+          box.appendChild(el('div', 'ff-summary__table-row', r.join(' · ')));
+        });
+        if (t.anchor) {
+          var jump = el('a', 'ff-summary__jump', texts.summaryJumpTable + ' ↗');
+          jump.href = '#' + t.anchor;
+          box.appendChild(jump);
+        }
+        s5.appendChild(box);
+      });
+      body.appendChild(s5);
+    }
+
+    if (!hasContent) {
+      body.appendChild(el('p', 'ff-summary__empty', texts.summaryEmpty));
     }
 
     var footer = el('footer', 'ff-summary__footer');
@@ -2043,6 +2517,12 @@
       if (e.target === dialog) closeDialog();
     });
 
+    // Esc via Browser-Dialog → Fokus sauber zurückgeben
+    dialog.addEventListener('close', function () {
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+      else if (summaryBtn) summaryBtn.focus();
+    });
+
     body.addEventListener('click', function (e) {
       var a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
       if (!a) return;
@@ -2059,6 +2539,8 @@
 
   function openDialog() {
     buildDialog();
+    lastFocused = doc.activeElement || summaryBtn;
+    lockScroll(true);
     if (typeof dialog.showModal === 'function') {
       dialog.showModal();
     } else {
@@ -2079,7 +2561,9 @@
       dialog.classList.remove('ff-summary--fallback');
       removeFallbackBackdrop();
     }
-    if (summaryBtn) summaryBtn.focus();
+    lockScroll(false);
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+    else if (summaryBtn) summaryBtn.focus();
   }
 
   var fallbackBackdrop = null;
@@ -2097,8 +2581,11 @@
   summaryBtn.addEventListener('click', openDialog);
 
   doc.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && dialog && dialog.classList.contains('ff-summary--fallback')) {
+    if (!dialogIsOpen()) return;
+    if (e.key === 'Escape' && dialog.classList.contains('ff-summary--fallback')) {
       closeDialog();
+      return;
     }
+    if (e.key === 'Tab') trapFocus(e);
   });
 })();
