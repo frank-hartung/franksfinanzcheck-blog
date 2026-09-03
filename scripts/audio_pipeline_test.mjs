@@ -307,6 +307,36 @@ t.group('4) Gerenderte Audiofassungen');
       const diff = Math.abs(tm.durationSeconds - w.seconds);
       t.ok(diff < 1, `${f}: Zeitkarte ${tm.durationSeconds}s ≈ Rahmenstrom ${w.seconds.toFixed(2)}s`, `Abweichung ${diff.toFixed(2)} s`);
       t.ok(tm.parts.length > 0, `${f}: Zeitkarte nennt ${tm.parts.length} Teile`);
+
+      /* Struktur der unitStart-Folge. Der Reader springt ausschließlich
+         über unitStart (ff-reader.js:2410, 2598, 2613) – sectionTimes liest
+         er gar nicht. Ein unstimmiger Eintrag würde deshalb nicht beim
+         Abspielen auffallen, sondern erst, wenn jemand in einen späten
+         Abschnitt springt. Die Ende-zu-Ende-Gruppe prüft nur eine einzige
+         Zeitmarke, deshalb wird die Folge hier vollständig durchgegangen. */
+      const us = tm.unitStart || [];
+      t.ok(us.length > 0, `${f}: Zeitkarte trägt ${us.length} Sprungmarken`);
+      t.eq(us[0], 0, `${f}: erste Sprungmarke beginnt bei 0`, String(us[0]));
+      let steigend = true, ersterBruch = '';
+      for (let i = 1; i < us.length; i++) {
+        if (!(us[i] > us[i - 1])) { steigend = false; ersterBruch = `${i - 1}→${i}: ${us[i - 1]}→${us[i]}`; break; }
+      }
+      t.ok(steigend, `${f}: Sprungmarken streng steigend`, ersterBruch);
+      t.ok(us[us.length - 1] < tm.durationSeconds,
+        `${f}: letzte Sprungmarke liegt innerhalb der Spieldauer`,
+        `${us[us.length - 1]} s bei ${tm.durationSeconds} s`);
+
+      /* sectionTimes wird vom Player nicht gelesen, ist aber Teil des
+         Dateivertrags. Weicht sie von unitStart ab, stimmt etwas im
+         Joiner nicht – auch wenn der Player es nicht merken würde. */
+      if (tm.sectionTimes) {
+        t.eq(tm.sectionTimes.length, us.length,
+          `${f}: sectionTimes und unitStart gleich lang`,
+          `${tm.sectionTimes.length} gegen ${us.length}`);
+        const abweich = tm.sectionTimes.filter((s, i) => Math.abs(s.at - us[i]) > 0.01);
+        t.eq(abweich.length, 0, `${f}: sectionTimes deckungsgleich mit unitStart`,
+          abweich.length ? `${abweich.length} Abweichungen, erste bei ${abweich[0].at}` : '');
+      }
     }
   }
 }
