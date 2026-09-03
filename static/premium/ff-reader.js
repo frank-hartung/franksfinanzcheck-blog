@@ -1,19 +1,38 @@
 /* ============================================================
    FranksFinanzcheck – Premium Lesehilfen (Vorlesen + Kurzfassung)
-   03.09.2026 — Profi-Agentur & Chefredakteur-Standard
+   03.09.2026 — Profi-Agentur & Chefredakteur-Standard · Highend v2
+   (Studio-Regie-Niveau, über Verlagshaus-Vorlesefunktionen hinaus)
    ------------------------------------------------------------
    - Privacy-first & First-party: Web Speech API lokal im Browser.
-   - Männliche Stimme auf Highend-Level (sonore, redaktionelle
-     Timbre-Optimierung) – automatisch gewählt, kein Stimmen-Menü.
-   - Vollautomatische Mehrsprachigkeit: Deutsch (DE) und Englisch (EN)
-     ohne manuellen Umschalter.
-   - Automatische Qualitätsanpassung: Stimmen-Güte, Tempo, Chunk-Länge,
-     Pausen und Fallback werden je Browser/Gerät selbst geregelt –
-     keine Tempo-Anzeige, kein Tempo-Regler, keine Tastenkürzel.
+   - NUR männliche Sprache – vollautomatisch Deutsch (DE) und
+     Englisch (EN), ohne manuellen Umschalter und ohne Stimmen-Menü.
+     Die Engine wählt automatisch die beste männliche Studio-/
+     Neural-Stimme je Sprache (inkl. Nachbarsprachen-Fallback).
+     Englische Sätze in deutschen Artikeln liest die männliche
+     EN-Stimme – und umgekehrt (zweisprachiger Hörfunk-Moderator).
+   - Vollautomatische Studio-Regie statt Reglern:
+       · Automatische Tempoanpassung  – Rolle (Überschrift, Fließtext,
+         Tabelle …) × Stimmen-Güte × Informationsdichte des Satzes:
+         Zahlen, lange Komposita und Schachtelsätze werden automatisch
+         ruhiger gelesen, kurze Sätze flüssiger.
+       · Automatische maximale Chunk-Länge – kurze Sätze werden zu
+         natürlichen Atemgruppen gebündelt, lange Sätze an Neben-
+         satz-Grenzen geteilt; die Obergrenze folgt der Stimmen-Güte
+         und bleibt hart unter der Chrome-15-Sekunden-Abbruchgrenze.
+       · Automatische Pausen-Skalierung – Atem-, Denk- und Gliederungs-
+         pausen je Satzzeichen, gehörter Satzlänge (Hör-Digest), Rolle,
+         Satzmelodie und Sprechtempo – niemals starr, niemals gehetzt.
+       · Automatische Tonlagen-Korrektur – männliche Grund-Tonlage je
+         Rolle & Stimmenklasse, Satzmelodie (Fragen steigen, Ausrufe
+         betonen), Mikro-Modulation gegen Monotonie bei einfachen
+         Stimmen, Absenkung in die männliche Zone, falls als letzter
+         Notnagel eine nicht-männliche Stimme dienen müsste.
    - Maximale Barrierefreiheit (WCAG 2.2 AAA / BITV) für Fließtext,
      Überschriften, Listen sowie Tabellen & Übersichten mit
      zeilengenauer Live-Synchronisation und Vorlese-Kontext.
-   - Robuste Browser-Kompatibilität & automatische Keep-Alive-Wache.
+   - Robuste Browser-Kompatibilität, Stimmen-Warte-Schutz (nie mit
+     einer zufälligen/weiblichen Standardstimme starten) und
+     automatische Keep-Alive-Wache.
 ============================================================ */
 (function () {
   'use strict';
@@ -258,6 +277,12 @@
       s = s.replace(/\bVerivox\b/gi, 'Verivox');
       s = s.replace(/\bEZB\b/g, 'Europäische Zentralbank');
       s = s.replace(/\bp\.\s?m\.(?![\wäöüßÄÖÜ])/gi, 'pro Monat');
+      // Kaufmännisches & und redaktionelle Zahlgrößen-Abkürzungen
+      s = s.replace(/&/g, ' und ');
+      s = s.replace(/\b(?:Tsd\.|tsd\.)\b/g, 'Tausend');
+      s = s.replace(/\b(?:Mio\.|mio\.)\b/g, 'Millionen');
+      s = s.replace(/\b(?:Mrd\.|mrd\.)\b/g, 'Milliarden');
+      s = s.replace(/\b(?:Std|std)\./g, 'Stunden');
       // Ordnungszahlen im Fließtext
       s = s.replace(/\bNr\.\s*(\d+)/g, 'Nummer $1');
       // Bruch- und Rechenzeichen
@@ -286,6 +311,7 @@
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*%/g, '$1 to $2 percent');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)/g, '$1 to $2');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*(?:€|EUR|Euro)/gi, '$1 Euros');
+      s = s.replace(/&/g, ' and ');
       s = s.replace(/\$\s*(\d+(?:[.,]\d+)?)/g, '$1 Dollars');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*\$/g, '$1 Dollars');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*%/g, '$1 percent');
@@ -442,14 +468,16 @@
                        vorhanden sind (klingen sonst zu dumpf)
   ---------------------------------------------------------------------- */
   var QUALITY_PROFILES = {
-    studio:   { rate: 1.00, maxChunk: 220, pauseScale: 1.00, pitchShift: 0.00 },
-    premium:  { rate: 0.98, maxChunk: 200, pauseScale: 1.00, pitchShift: 0.00 },
-    standard: { rate: 0.94, maxChunk: 170, pauseScale: 1.10, pitchShift: 0.02 },
-    basic:    { rate: 0.90, maxChunk: 150, pauseScale: 1.20, pitchShift: 0.04 }
+    studio:   { rate: 1.00, maxChunk: 210, pauseScale: 1.00, pitchShift: 0.00, dynamic: 0.000 },
+    premium:  { rate: 0.98, maxChunk: 195, pauseScale: 1.00, pitchShift: 0.00, dynamic: 0.004 },
+    standard: { rate: 0.94, maxChunk: 170, pauseScale: 1.10, pitchShift: 0.02, dynamic: 0.012 },
+    basic:    { rate: 0.90, maxChunk: 150, pauseScale: 1.22, pitchShift: 0.05, dynamic: 0.022 }
   };
-  var quality = { tier: 'standard', rate: 0.94, maxChunk: 170, pauseScale: 1.1, pitchShift: 0.02 };
+  var quality = { tier: 'standard', rate: 0.94, maxChunk: 170, pauseScale: 1.1, pitchShift: 0.02, dynamic: 0.012 };
   var errorStreak = 0;  // Fehler in Folge (Synthese-Abbrüche)
   var degradeLevel = 0; // dauerhafte adaptive Herabstufung (0–2)
+  // dynamic = automatische Mikro-Modulation der Tonlage gegen Monotonie
+  //            (nur bei einfachen Stimmen; Studio-Stimmen behalten 0)
 
   var SPEAKER_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path d="M19 11a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V20H8a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2h-3v-2.08A7 7 0 0 0 19 11Z"/></svg>';
   var EQ_HTML = '<span class="ff-eq" aria-hidden="true"><i></i><i></i><i></i></span>';
@@ -485,23 +513,49 @@
     }
   }
 
-  /* ---------- Stimmen-Rangliste: Studio-Qualität zuerst ---------- */
+  /* ---------- Stimmen-Rangliste: Studio-Qualität zuerst ----------
+     NUR-MÄNNLICH-Prinzip (Highend-Regie): Weiblich benannte Stimmen
+     werden grundsätzlich aussortiert. Gesucht wird automatisch:
+       1. männliche Studio-/Neural-Stimme der Artikelsprache (DE/EN),
+       2. sonst eine männliche Stimme einer Nachbarsprache („cross“,
+          z. B. macOS ohne deutsche Männerstimme) – niemals weiblich,
+       3. absoluter Notnagel: einzige verfügbare Stimme der Sprache
+          („fallback“, extrem selten) – die Tonlagen-Korrektur senkt
+          sie dann in die männliche Zone ab.
+     Die Auswahl wird je Sprache gecacht – kein wiederholtes Sortieren
+     pro Satz, dadurch absolut flüssiger Sprechbetrieb.
+  ------------------------------------------------------------------ */
   var MALE_KEYWORDS = {
     de: ['conrad', 'stefan', 'florian', 'bernd', 'christoph', 'ralf', 'klaus', 'markus', 'jonas', 'martin',
-         'yannick', 'hans', 'viktor', 'thorsten', 'killian', 'de-de-x-deg', 'de-de-x-deb', 'de-de-x-dea',
-         'de_de_male', 'male', 'männlich', 'mann', '#male', 'neural2-b', 'neural2-d', 'wavenet-b', 'wavenet-d',
-         'standard-b', 'standard-d', 'polyglot'],
+         'yannick', 'hans', 'viktor', 'thorsten', 'killian', 'jan', 'johannes', 'matthias', 'philipp',
+         'sebastian', 'wolfgang', 'dieter', 'achim', 'uwe', 'joerg', 'jörg', 'heinz', 'gerd', 'holger',
+         'de-de-x-deg', 'de-de-x-deb', 'de-de-x-dea', 'de_de_male', 'male', 'männlich', 'mann', '#male',
+         'neural2-b', 'neural2-d', 'wavenet-b', 'wavenet-d', 'standard-b', 'standard-d', 'polyglot'],
     en: ['david', 'george', 'guy', 'mark', 'ryan', 'daniel', 'oliver', 'arthur', 'thomas', 'james', 'alex',
          'fred', 'aaron', 'brian', 'eric', 'richard', 'tom', 'john', 'paul', 'michael', 'peter', 'frank',
-         'en_us_male', 'en_gb_male', 'male', 'man', '#male', 'neural2-a', 'neural2-d', 'neural2-j',
-         'wavenet-a', 'wavenet-b', 'wavenet-d', 'wavenet-j', 'standard-b', 'standard-d']
+         'christopher', 'roger', 'steffan', 'benjamin', 'anthony', 'matthew', 'joseph', 'charles', 'william',
+         'robert', 'steven', 'kenneth', 'kevin', 'jason', 'edward', 'joshua', 'andrew', 'brandon', 'justin',
+         'raymond', 'gregory', 'samuel', 'patrick', 'jack', 'harry', 'leonard', 'derek', 'en_us_male',
+         'en_gb_male', 'male', 'man', '#male', 'neural2-a', 'neural2-d', 'neural2-j', 'wavenet-a',
+         'wavenet-b', 'wavenet-d', 'wavenet-j', 'standard-b', 'standard-d']
   };
+
+  // Ergänzende namentlich männliche Stimmen für die geschlechts-übergreifende Prüfung
+  var KNOWN_MALE_VOICES = [
+    'conrad', 'killian', 'florian', 'christopher', 'roger', 'steffan', 'stefan', 'ralf', 'guy', 'george',
+    'david', 'mark', 'ryan', 'daniel', 'oliver', 'arthur', 'thomas', 'james', 'eric', 'fred', 'aaron',
+    'brian', 'richard', 'bernd', 'markus', 'jonas', 'martin', 'johannes', 'philipp', 'sebastian', 'matthias'
+  ];
 
   var FEMALE_KEYWORDS = [
     'anna', 'katja', 'hedda', 'vicki', 'petra', 'marlene', 'ingrid', 'zira', 'hazel', 'samantha', 'victoria',
     'karen', 'susan', 'jenny', 'helena', 'eva', 'gisela', 'luisa', 'maja', 'elke', 'steffi', 'catherine',
     'linda', 'heather', 'amy', 'emma', 'olivia', 'joanna', 'kendra', 'cortana', 'female', 'weiblich', 'frau',
-    'woman', 'girl', '#female', 'siri female', 'seraphina', 'amala', 'kathy', 'nicole', 'moira', 'tessa'
+    'woman', 'girl', '#female', 'siri female', 'seraphina', 'amala', 'kathy', 'nicole', 'moira', 'tessa',
+    'maria', 'margaret', 'daniela', 'erika', 'briana', 'brianne', 'andrea', 'alexandra', 'alexa', 'nicola',
+    'christina', 'natalie', 'sophie', 'sarah', 'julia', 'laura', 'hanna', 'johanna', 'lena', 'lisa',
+    'maren', 'miriam', 'sabrina', 'nadine', 'anke', 'birgit', 'gabriele', 'ursula', 'monika', 'renate',
+    'angela', 'sandra', 'claudia', 'susanne', 'martina', 'tanja', 'melanie', 'svenja', 'karin', 'kristin'
   ];
 
   // Namentlich bekannte Studio-/Neuronal-Stimmen (höchste Natürlichkeit)
@@ -509,7 +563,8 @@
     'google deutsch', 'microsoft conrad online', 'microsoft killian online', 'microsoft florian online',
     'microsoft ralf', 'anpassbare stimme', 'eloquence', 'siri stimme', 'google uk english male',
     'google us english', 'microsoft guy online', 'microsoft christopher online', 'microsoft roger online',
-    'microsoft eric online', 'microsoft steffan online'
+    'microsoft eric online', 'microsoft steffan online', 'microsoft stefan online', 'microsoft david online',
+    'microsoft mark online', 'microsoft ryan online', 'google us english male', 'google uk english male'
   ];
 
   var PREMIUM_KEYWORDS = ['natural', 'neural', 'wavenet', 'studio', 'journey', 'polyglot', 'online',
@@ -548,23 +603,106 @@
     return score;
   }
 
-  function rankVoices(lang) {
-    if (!speechSupported) return [];
-    var list = synth.getVoices() || [];
-    if (!list.length) return [];
-    var targetLang = (lang || currentLang || 'de').toLowerCase();
+  function rankVoicesFromList(list, lang) {
+    if (!list || !list.length) return [];
+    var targetLang = String(lang || currentLang || 'de').toLowerCase();
     var pattern = targetLang.indexOf('en') === 0 ? /^en([-_]|$)/i : /^de([-_]|$)/i;
-    var candidates = list.filter(function (v) { return pattern.test(v.lang || ''); });
+    var candidates = [];
+    for (var i = 0; i < list.length; i++) {
+      if (pattern.test(list[i].lang || '')) candidates.push(list[i]);
+    }
     if (!candidates.length) candidates = list.slice();
     return candidates
       .map(function (v) { return { voice: v, score: scoreVoice(v, targetLang) }; })
       .sort(function (a, b) { return b.score - a.score; });
   }
 
+  function rankVoices(lang) {
+    if (!speechSupported) return [];
+    var list = [];
+    try { list = synth.getVoices() || []; } catch (e) { list = []; }
+    return rankVoicesFromList(dedupeVoices(list), lang);
+  }
+
+  function dedupeVoices(list) {
+    // Manche Browser listen dieselbe Stimme mehrfach (gleicher Name &
+    // Sprache, aber verschiedene voiceURI) – das führt sonst zu doppelten
+    // Kandidaten und Zufalls-Auswahl. Schlüssel: Name + Sprache + Typ.
+    var seen = {};
+    var out = [];
+    for (var i = 0; i < list.length; i++) {
+      var v = list[i];
+      var key = (v.name || '') + '|' + (v.lang || '') + '|' + (v.localService ? 1 : 0);
+      if (!seen[key]) { seen[key] = 1; out.push(v); }
+    }
+    return out;
+  }
+
+  /* Nur-Männlich-Gate: weiblich benannte Stimmen werden ausgeschlossen.
+     Nicht erkennbar weibliche Stimmen (z. B. „Google Deutsch“) gelten
+     als geschlechtsneutral und damit männlich-tauglich. */
+  function isMaleCandidate(v) {
+    var hay = ((v.name || '') + ' ' + (v.voiceURI || '')).toLowerCase();
+    for (var i = 0; i < FEMALE_KEYWORDS.length; i++) {
+      if (hay.indexOf(FEMALE_KEYWORDS[i]) !== -1) return false;
+    }
+    var union = (MALE_KEYWORDS.de || []).concat(MALE_KEYWORDS.en || []);
+    for (var j = 0; j < union.length; j++) {
+      if (hay.indexOf(union[j]) !== -1) return true;
+    }
+    for (var k = 0; k < KNOWN_MALE_VOICES.length; k++) {
+      if (hay.indexOf(KNOWN_MALE_VOICES[k]) !== -1) return true;
+    }
+    return true;
+  }
+
+  /* Reihenfolge für die männliche Nachbarsprachen-Suche */
+  var LANG_FALLBACK = {
+    de: ['en-GB', 'en-US', 'en', 'nl-NL', 'fr-FR', 'fr', 'es-ES', 'it-IT', 'pt-PT', 'pl-PL', 'sv-SE', 'da-DK', 'no-NO'],
+    en: ['de-DE', 'de', 'fr-FR', 'es-ES', 'it-IT', 'nl-NL', 'sv-SE', 'da-DK', 'no-NO', 'pl-PL', 'pt-PT']
+  };
+
+  var VOICE_EPOCH = 0;   // wird bei jeder voiceschanged-Aktualisierung erhöht
+  var VOICE_CACHE = {};  // lang ('de'|'en') -> { voice, mode, epoch }
+
+  function resolveMaleVoice(lang) {
+    var l = String(lang || 'de').toLowerCase();
+    l = l.indexOf('en') === 0 ? 'en' : 'de';
+    var hit = VOICE_CACHE[l];
+    if (hit && hit.epoch === VOICE_EPOCH && hit.voice) return hit;
+
+    var list = [];
+    if (speechSupported) {
+      try { list = synth.getVoices() || []; } catch (e) { list = []; }
+    }
+    list = dedupeVoices(list);
+    var ranked = rankVoicesFromList(list, l);
+    var res = { voice: null, mode: 'none', epoch: VOICE_EPOCH };
+
+    // 1) männliche Stimme der Artikelsprache
+    for (var i = 0; i < ranked.length; i++) {
+      if (isMaleCandidate(ranked[i].voice)) { res.voice = ranked[i].voice; res.mode = 'male'; break; }
+    }
+    // 2) männliche Stimme einer Nachbarsprache (niemals weiblich)
+    if (!res.voice) {
+      var order = LANG_FALLBACK[l] || [];
+      for (var oi = 0; oi < order.length && !res.voice; oi++) {
+        var alt = rankVoicesFromList(list, order[oi]);
+        for (var j = 0; j < alt.length; j++) {
+          if (isMaleCandidate(alt[j].voice)) { res.voice = alt[j].voice; res.mode = 'cross'; break; }
+        }
+      }
+    }
+    // 3) Notnagel: einzige Stimme der Sprache (Tonlagen-Korrektur senkt ab)
+    if (!res.voice && ranked.length) { res.voice = ranked[0].voice; res.mode = 'fallback'; }
+
+    VOICE_CACHE[l] = res;
+    return res;
+  }
+
   function pickMaleVoice(lang) {
-    var ranked = rankVoices(lang);
-    if (!ranked.length) return null;
-    return ranked[0].voice;
+    var r = resolveMaleVoice(lang);
+    return r ? r.voice : null;
   }
 
   /* ---------- Automatische Qualitätsanpassung: Kalibrierung ---------- */
@@ -584,7 +722,8 @@
       rate: profile.rate,
       maxChunk: profile.maxChunk,
       pauseScale: profile.pauseScale,
-      pitchShift: profile.pitchShift
+      pitchShift: profile.pitchShift,
+      dynamic: profile.dynamic || 0
     };
 
     // Geräte-/Netz-Kontext: Datensparmodus, schwache CPU oder Mobilgerät
@@ -594,14 +733,22 @@
     var lowPower = !!(conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '')));
     var weakCpu = typeof nav.hardwareConcurrency === 'number' && nav.hardwareConcurrency > 0 && nav.hardwareConcurrency <= 2;
     var isMobile = !!(win.matchMedia && win.matchMedia('(pointer: coarse)').matches);
-    if (lowPower || weakCpu) { next.maxChunk = Math.min(next.maxChunk, 150); next.rate = Math.min(next.rate, 0.94); }
-    else if (isMobile) { next.maxChunk = Math.min(next.maxChunk, 180); }
+    if (lowPower || weakCpu) {
+      next.maxChunk = Math.min(next.maxChunk, 140);
+      next.rate = Math.min(next.rate, 0.93);
+      next.dynamic = Math.min(0.03, (next.dynamic || 0) + 0.01);
+    }
+    else if (isMobile) {
+      next.maxChunk = Math.min(next.maxChunk, 170);
+      next.dynamic = Math.min(0.025, (next.dynamic || 0) + 0.005);
+    }
 
     // Adaptive Herabstufung nach wiederholten Synthese-Fehlern
     if (degradeLevel > 0) {
       next.maxChunk = Math.max(110, next.maxChunk - 40 * degradeLevel);
-      next.rate = Math.max(0.88, next.rate - 0.04 * degradeLevel);
-      next.pauseScale = Math.min(1.4, next.pauseScale + 0.1 * degradeLevel);
+      next.rate = Math.max(0.86, next.rate - 0.04 * degradeLevel);
+      next.pauseScale = Math.min(1.5, next.pauseScale + 0.12 * degradeLevel);
+      next.dynamic = Math.min(0.03, (next.dynamic || 0) + 0.008 * degradeLevel);
     }
 
     // Nutzer-Präferenz „Bewegung reduzieren“: minimal ruhigere Sprechweise
@@ -632,52 +779,270 @@
 
   function prosodyFor(type) { return PROSODY[type] || PROSODY.p; }
 
-  /* ---------- Satz-Zerlegung mit Chrome-sicherer Chunk-Länge ----------
-     Die maximale Länge stammt aus der automatischen Qualitätsanpassung
-     (Studio-Stimmen: längere Bögen, einfache Stimmen: kürzere Chunks). */
-  var MAX_CHUNK = 180;
+  /* ---------- Automatische Sprach-Regie & Chunk-Längen ----------
+     Jeder Satz wird automatisch gemessen und der Sprache zugeordnet
+     (DE/EN, ohne Umschalter, wie ein zweisprachiger Hörfunk-Moderator):
+     Reine englische Sätze in einem deutschen Artikel liest die
+     männliche EN-Stimme, deutsche Sätze in englischen Artikeln die
+     männliche DE-Stimme.
 
-  function splitForSpeech(text) {
-    var maxChunk = (quality && quality.maxChunk) || MAX_CHUNK;
-    var parts = sentences(text);
-    if (!parts.length) parts = [text];
-    var out = [];
-    parts.forEach(function (sentence) {
-      if (sentence.length <= maxChunk) { out.push(sentence); return; }
-      // Zu lange Sätze an Kommata/Semikola/Gedankenstrichen atmen lassen
-      var segs = sentence.replace(/([,;:–—])\s+/g, '$1\u0001').split('\u0001');
-      var buf = '';
-      segs.forEach(function (seg) {
-        if ((buf + ' ' + seg).trim().length > maxChunk && buf) { out.push(buf.trim()); buf = seg; }
-        else { buf = (buf ? buf + ' ' : '') + seg; }
-      });
-      if (buf.trim()) out.push(buf.trim());
-    });
-    // Notfall: harte Wortgrenzen
-    var safe = [];
-    out.forEach(function (c) {
-      if (c.length <= 260) { safe.push(c); return; }
-      var words = c.split(' ');
-      var b = '';
-      words.forEach(function (w) {
-        if ((b + ' ' + w).length > 220 && b) { safe.push(b.trim()); b = w; }
-        else { b = (b ? b + ' ' : '') + w; }
-      });
-      if (b.trim()) safe.push(b.trim());
-    });
-    return safe.filter(function (c) { return c && /[a-zA-ZÄÖÜäöüß0-9]/.test(c); });
+     Automatische maximale Chunk-Länge je Inhalt & Stimmenklasse:
+       - kurze Sätze werden zu natürlichen Atemgruppen gebündelt
+         (kein Roboter-Einzelsatz-Stakkato mehr),
+       - lange Schachtelsätze werden an Nebensatz-/Komma-Grenzen
+         geteilt und erhalten eine ruhigere Sprechweise,
+       - die Obergrenze (quality.maxChunk) wächst/schrumpft mit der
+         Stimmen-Güte und bleibt hart gedeckelt (HARD_CHUNK) unter
+         der Chrome-15-Sekunden-Abbruchgrenze. */
+  var MAX_CHUNK = 200;
+  var HARD_CHUNK = 240;   // harte Obergrenze: ~14 s Sprechzeit, nie abgebrochen
+
+  // Kompakte Stoppwort-Karten für das automatische Satz-Routing DE/EN
+  var EN_SNIFF = {
+    the: 1, and: 1, of: 1, to: 1, you: 1, your: 1, for: 1, is: 1, are: 1, was: 1, were: 1, be: 1,
+    with: 1, that: 1, this: 1, these: 1, those: 1, it: 1, on: 1, at: 1, by: 1, from: 1, as: 1,
+    not: 1, or: 1, but: 1, if: 1, then: 1, have: 1, has: 1, had: 1, will: 1, would: 1, can: 1,
+    could: 1, should: 1, may: 1, our: 1, their: 1, them: 1, they: 1, we: 1, what: 1, when: 1,
+    where: 1, why: 1, how: 1, who: 1, which: 1, more: 1, most: 1, only: 1, very: 1, just: 1,
+    also: 1, here: 1, there: 1, all: 1, any: 1, some: 1, no: 1, yes: 1, do: 1, does: 1, did: 1,
+    about: 1, into: 1, over: 1, under: 1, between: 1, through: 1, after: 1, before: 1, during: 1,
+    because: 1, while: 1, against: 1, up: 1, down: 1, out: 1, off: 1, again: 1, once: 1, an: 1,
+    me: 1, us: 1, him: 1, his: 1, her: 1, my: 1, every: 1, own: 1, other: 1, each: 1, both: 1,
+    few: 1, first: 1, new: 1, good: 1, much: 1, than: 1, per: 1, want: 1, need: 1, know: 1
+  };
+  var DE_SNIFF = {
+    der: 1, die: 1, das: 1, und: 1, ist: 1, sind: 1, war: 1, waren: 1, wird: 1, werden: 1,
+    wurde: 1, ein: 1, eine: 1, einer: 1, einem: 1, einen: 1, nicht: 1, mit: 1, von: 1, für: 1,
+    auf: 1, zu: 1, im: 1, am: 1, den: 1, dem: 1, des: 1, bei: 1, auch: 1, sich: 1, kann: 1,
+    können: 1, muss: 1, müssen: 1, darf: 1, sollen: 1, haben: 1, hat: 1, hatte: 1, aber: 1,
+    oder: 1, wenn: 1, weil: 1, dass: 1, wie: 1, als: 1, nach: 1, vor: 1, bis: 1, seit: 1,
+    aus: 1, nur: 1, noch: 1, schon: 1, dann: 1, doch: 1, also: 1, hier: 1, jetzt: 1, über: 1,
+    unter: 1, zwischen: 1, ohne: 1, gegen: 1, durch: 1, um: 1, sie: 1, wir: 1, ihr: 1, euch: 1,
+    uns: 1, er: 1, es: 1, mich: 1, dich: 1, ihm: 1, ihn: 1, diese: 1, dieser: 1, dieses: 1,
+    diesem: 1, diesen: 1, welche: 1, mein: 1, meine: 1, dein: 1, deine: 1, ihre: 1, kein: 1,
+    keine: 1, alle: 1, allen: 1, alles: 1, viele: 1, zwei: 1, drei: 1, viel: 1, monat: 1,
+    versicherung: 1, kosten: 1, vertrag: 1, beitrag: 1, jahr: 1, euro: 1, prozent: 1
+  };
+
+  // Typisch deutsche Wortendungen als morphologisches DE-Signal
+  // (fängt Sätze ohne Funktionswörter: „Wer breit investiert, profitiert …“)
+  var GERMAN_ENDINGS = ['ung', 'keit', 'heit', 'nis', 'schaft', 'tum', 'lich', 'ig', 'bar', 'sam', 'ieren', 'iert'];
+
+  /* Automatische Satzsprach-Erkennung: nur bei eindeutiger Mehrheit
+     wechseln (mehrere Satzglieder), damit einzelne Lehnwörter
+     („Online-Banking“, „Budget“) nie einen unnötigen Sprecherwechsel
+     auslösen. Deutsche Sätze werden zusätzlich über Umlaute/ß und
+     typische Wortendungen erkannt (Zweisignal-Prinzip). */
+  function sniffSentenceLang(sentence, baseLang) {
+    var words = String(sentence || '')
+      .toLowerCase()
+      .replace(/[^a-zäöüß0-9'-]+/g, ' ')
+      .split(' ');
+    var en = 0;
+    var de = 0;
+    var germ = 0;
+    for (var i = 0; i < words.length; i++) {
+      var w = words[i];
+      if (!w || w.length < 2) continue;
+      if (EN_SNIFF[w]) en++;
+      if (DE_SNIFF[w]) de++;
+      if (/[äöüß]/.test(w)) germ += 2;
+      if (w.length >= 5) {
+        for (var e = 0; e < GERMAN_ENDINGS.length; e++) {
+          if (w.indexOf(GERMAN_ENDINGS[e], w.length - GERMAN_ENDINGS[e].length) !== -1) { germ += 1; break; }
+        }
+      }
+    }
+    if (baseLang === 'de') return (en >= 3 && en > de * 2 + 1) ? 'en' : 'de';
+    if (baseLang === 'en') return ((de >= 3 && de > en) || (de >= 1 && germ >= 2 && de > en)) ? 'de' : 'en';
+    return baseLang;
   }
 
-  /* ---------- Mikro-Pausen nach Satzschluss (natürliche Atmung) ---------- */
-  function pauseAfterChunk(chunk, isLast, profile) {
-    if (isLast) return profile.after;
-    var tail = chunk.slice(-1);
-    if (tail === '?' ) return 300;
-    if (tail === '!') return 280;
-    if (tail === '.' || tail === '…') return 240;
-    if (tail === ':' ) return 260;
-    if (tail === ',' || tail === ';') return 130;
-    return 170;
+  function proseSentences(text) {
+    var parts = sentences(text);
+    if (!parts.length) parts = [text];
+    return parts.map(function (s) {
+      var emo = 'statement';
+      var tail = s.slice(-1);
+      if (tail === '?') emo = 'question';
+      else if (tail === '!') emo = 'exclamation';
+      return { s: s, emo: emo };
+    });
+  }
+
+  function wordCountOf(t) {
+    var w = String(t || '').trim().split(/\s+/);
+    return w.length === 1 && w[0] === '' ? 0 : w.length;
+  }
+
+  function splitForSpeech(text, lang) {
+    var soft = Math.max(60, (quality && quality.maxChunk) || MAX_CHUNK);
+    var hard = Math.max(120, Math.min(HARD_CHUNK, soft + 60));
+    var blockLang = lang === 'en' ? 'en' : 'de';
+    var list = proseSentences(text);
+    var groups = [];
+    var cur = null;
+
+    function flush() {
+      if (cur && cur.text && cur.text.trim()) { groups.push(cur); cur = null; }
+    }
+
+    // Bündelung: kurze Sätze derselben Sprache -> eine natürliche Atemgruppe
+    list.forEach(function (sn) {
+      if (!sn.s) return;
+      var sl = sniffSentenceLang(sn.s, blockLang);
+      if (sn.emo !== 'statement') {
+        // Fragen & Ausrufe sind immer eigenständige Sprecheinheiten:
+        // Sie erhalten eigene Satzmelodie (Tonlage) und Pausenraum.
+        flush();
+        cur = { text: sn.s, lang: sl, emo: sn.emo };
+        flush();
+        return;
+      }
+      if (!cur) {
+        cur = { text: sn.s, lang: sl, emo: sn.emo };
+      } else if ((cur.text.length + 1 + sn.s.length) <= soft && sl === cur.lang) {
+        cur.text += ' ' + sn.s;
+      } else {
+        flush();
+        cur = { text: sn.s, lang: sl, emo: sn.emo };
+      }
+    });
+    flush();
+
+    // Lange Gruppen an Gliederungsgrenzen (Komma/Semikolon/Doppelpunkt) teilen
+    var out = [];
+    groups.forEach(function (g) {
+      if (g.text.length <= hard) { out.push(g); return; }
+      var pieces = g.text.replace(/([,;:–—])\s+/g, '$1\u0001').split('\u0001');
+      var buf = '';
+      pieces.forEach(function (p) {
+        if (!p || !p.trim()) return;
+        if ((buf + ' ' + p).trim().length > soft && buf) {
+          out.push({ text: buf.trim(), lang: g.lang, emo: g.emo });
+          buf = '';
+        }
+        buf = (buf ? buf + ' ' : '') + p.trim();
+      });
+      if (buf.trim()) out.push({ text: buf.trim(), lang: g.lang, emo: g.emo });
+    });
+
+    // Notfall-Reserve: harte Wortgrenzen (nur falls ein Einzelwort-Block übrig bleibt)
+    var safe = [];
+    out.forEach(function (c) {
+      if (c.text.length <= hard) { safe.push(c); return; }
+      var words = c.text.split(' ');
+      var b = '';
+      words.forEach(function (w) {
+        if ((b + ' ' + w).length > hard - 10 && b) {
+          safe.push({ text: b.trim(), lang: c.lang, emo: c.emo });
+          b = w;
+        } else {
+          b = (b ? b + ' ' : '') + w;
+        }
+      });
+      if (b.trim()) safe.push({ text: b.trim(), lang: c.lang, emo: c.emo });
+    });
+
+    return safe.filter(function (c) {
+      return c && c.text && /[a-zA-ZÄÖÜäöüß0-9]/.test(c.text);
+    });
+  }
+
+  /* ---------- Automatische Tempo-, Pausen- & Tonlagen-Regie ----------
+     Tempo:  Rolle (Überschrift, Fließtext, Tabelle …) × Stimmenklasse
+             × Informationsdichte des Satzes. Zahlen, lange Komposita
+             und Schachtelsätze werden automatisch ruhiger gelesen,
+             kurze Alltagssätze leicht flüssiger.
+     Pausen: Skalierung nach Satzzeichen, Satzlänge („Hör-Digest-Zeit“),
+             Satzmelodie und Abschnittsrolle – multipliziert mit der
+             automatischen Pausen-Skala der Stimmenklasse.
+     Tonlage: männliche Grund-Tonlage je Rolle & Stimmenklasse plus
+             Satzmelodie (Fragen steigen, Ausrufe betonen) und feiner
+             Mikro-Modulation gegen Roboter-Monotonie bei einfachen
+             Stimmen. Falls wider Erwarten keine männliche Stimme
+             existiert, wird die Tonlage abgesenkt (Tonlagen-Korrektur). */
+  function contentRateFactor(text) {
+    var wc = wordCountOf(text);
+    if (!wc) return 1;
+    var words = String(text || '').split(/\s+/);
+    var hardWords = 0;
+    var digits = 0;
+    var totalLen = 0;
+    for (var i = 0; i < words.length; i++) {
+      var w = words[i];
+      if (!w) continue;
+      totalLen += w.length;
+      if (w.length >= 9) hardWords++;
+      if (/\d/.test(w)) digits++;
+    }
+    var avg = totalLen / words.length;
+    var f = 1.0;
+    if (hardWords / words.length > 0.3) f -= 0.05;
+    else if (hardWords / words.length > 0.14) f -= 0.025;
+    if (avg > 8) f -= 0.03;
+    else if (avg < 5.2) f += 0.02;
+    if (digits >= 2) f -= 0.02;
+    if (words.length <= 6 && digits === 0) f += 0.02;
+    return Math.min(1.05, Math.max(0.9, f));
+  }
+
+  function effectiveRateFor(unit, profile) {
+    var base = profile && profile.rate != null ? profile.rate : 1;
+    var cf = contentRateFactor(unit.text);
+    if (unit.emo === 'question') cf -= 0.02;
+    if (unit.emo === 'exclamation') cf -= 0.01;
+    return Math.min(1.18, Math.max(0.5, base * (quality.rate || 1) * cf));
+  }
+
+  /* Mikro-Pausen nach Satzschluss (natürliche Atmung), automatisch
+     skaliert nach Satzlänge, Satzzeichen, Rolle und Sprechtempo. */
+  function pauseAfterChunk(unit, isLast, profile, effRate) {
+    if (!unit || !unit.text) return profile ? (profile.after || 200) : 200;
+    var tail = unit.text.slice(-1);
+    var base;
+    if (isLast) {
+      base = profile ? (profile.after || 200) : 200;
+    } else if (tail === '?') { base = 340; }
+    else if (tail === '!') { base = 300; }
+    else if (tail === '.' || tail === '…') { base = 250; }
+    else if (tail === ':') { base = 300; }
+    else if (tail === ',') { base = 140; }
+    else if (tail === ';') { base = 160; }
+    else { base = 180; }
+
+    // Hör-Digest-Skala: je länger die gehörte Einheit, desto länger
+    // die Verarbeitungspause (+1,5 % je Wort ab dem 7. Wort, Deckel +32 %)
+    var wc = unit.words || wordCountOf(unit.text);
+    base *= 1 + Math.min(0.32, Math.max(0, wc - 6) * 0.015);
+
+    // Satzmelodie: Fragen und Ausrufe erhalten einen Moment mehr Raum
+    if (unit.emo === 'question') base += 80;
+    else if (unit.emo === 'exclamation') base += 50;
+
+    // Automatische Pausen-Skala der Stimmenklasse (basic > standard)
+    base *= quality.pauseScale || 1;
+
+    // Natürliche Tempo-Kopplung: schneller gesprochen -> Pause relativ
+    // kürzer, aber nie unter ~60 % der Basis-Pause
+    var speed = Math.min(1.15, Math.max(0.62, 1.32 - 0.34 * (effRate || 1)));
+    base *= speed;
+    return Math.round(base);
+  }
+
+  /* Automatische Tonlagen-Korrektur: männliche Zone halten, Fragen
+     anheben, Ausrufe betonen, Monotonie bei einfachen Stimmen brechen,
+     weibliche Notnagel-Stimme absenken. */
+  function autoPitch(unit, basePitch, voiceMode) {
+    var q = quality || {};
+    var v = (basePitch == null ? 1 : basePitch) + (q.pitchShift || 0);
+    if (unit.emo === 'question') v += 0.05;
+    else if (unit.emo === 'exclamation') v += 0.02;
+    var dyn = q.dynamic || 0;
+    if (dyn > 0) v += dyn * (unit.modSign || 1);
+    if (voiceMode === 'fallback') v = Math.min(v, 0.86);
+    else if (!voiceMode || voiceMode === 'none') v -= 0.02;
+    return Math.min(1.4, Math.max(0.6, v));
   }
 
   /* ---------- Tabellen-Daten-Extraktion (Maximum Barrierefreiheit) ---------- */
@@ -844,20 +1209,28 @@
     timeline = [];
     totalChars = 0;
     blocks.forEach(function (b, bi) {
-      var chunks = splitForSpeech(b.text);
+      var chunks = splitForSpeech(b.text, b.lang);
       var profile = prosodyFor(b.type);
       chunks.forEach(function (c, ci) {
-        totalChars += c.length;
-        timeline.push({
+        var unit = {
           block: b,
           blockIndex: bi,
-          text: c,
-          lang: b.lang,
+          text: c.text,
+          lang: c.lang,
+          emo: c.emo,
+          words: c.words || wordCountOf(c.text),
           type: b.type,
           profile: profile,
+          effRate: 1,
+          modSign: 1,
           before: ci === 0 ? profile.before : 0,
-          after: pauseAfterChunk(c, ci === chunks.length - 1, profile)
-        });
+          after: 0
+        };
+        unit.effRate = effectiveRateFor(unit, profile);
+        unit.after = pauseAfterChunk(unit, ci === chunks.length - 1, profile, unit.effRate);
+        unit.modSign = timeline.length % 2 === 0 ? 1 : -1;
+        totalChars += unit.text.length;
+        timeline.push(unit);
       });
     });
   }
@@ -865,9 +1238,18 @@
   function estimateRemaining() {
     if (!remainEl) return;
     var rest = 0;
-    for (var i = cursor; i < timeline.length; i++) rest += timeline[i].text.length;
-    // ~950 Zeichen/Minute bei Rate 1.0 (deutsche Nachrichtensprache)
-    var minutes = rest / (950 * Math.max(0.5, quality.rate || 1));
+    var units = 0;
+    var rateSum = 0;
+    for (var i = cursor; i < timeline.length; i++) {
+      rest += timeline[i].text.length;
+      rateSum += timeline[i].effRate || 1;
+      units++;
+    }
+    if (!units) { remainEl.textContent = ''; return; }
+    var eff = rateSum / units;
+    // ~1000 Zeichen/Minute bei Rate 1.0 (deutsche Nachrichtensprache)
+    // zzgl. Regie-/Atempausen (~0,5 s je Einheit)
+    var minutes = rest / (1000 * Math.max(0.4, eff)) + units * 0.008;
     if (minutes < 0.1) { remainEl.textContent = ''; return; }
     var mm = Math.max(1, Math.round(minutes));
     remainEl.textContent = texts.remaining.replace('{min}', mm);
@@ -893,6 +1275,9 @@
 
   function clearPauseTimer() { if (pauseTimer) { clearTimeout(pauseTimer); pauseTimer = null; } }
 
+  var voiceWaitTries = 0;  // Warte-Versuche auf die asynchron ladende Stimmenliste
+  var lastEffRate = 1;     // zuletzt gesprochenes Tempo (für Pausen-Kopplung)
+
   function speakUnit(index) {
     if (!reading || !speechSupported) return;
     clearPauseTimer();
@@ -905,23 +1290,35 @@
 
     var start = function () {
       if (!reading || !playing) return;
-      var voice = pickMaleVoice(unit.lang);
+      // Stimmenliste noch nicht geladen? Kurz warten – niemals mit einer
+      // zufälligen (ggf. weiblichen) Standardstimme starten.
+      var listLen = 0;
+      try { listLen = (synth.getVoices && synth.getVoices().length) || 0; } catch (e) { listLen = 0; }
+      if (!listLen && voiceWaitTries < 10) {
+        voiceWaitTries += 1;
+        pauseTimer = setTimeout(start, 300);
+        return;
+      }
+      voiceWaitTries = 0;
+
+      var voiceRes = resolveMaleVoice(unit.lang);
       var u = new win.SpeechSynthesisUtterance(unit.text);
       u.lang = unit.lang === 'en' ? 'en-US' : 'de-DE';
-      if (voice) u.voice = voice;
-      var p = unit.profile;
-      // Automatische Qualitätsanpassung: Tempo & Tonlage je Stimmen-Güte
-      u.rate = Math.min(2, Math.max(0.5, p.rate * quality.rate));
-      u.pitch = Math.min(2, Math.max(0.5, p.pitch + (quality.pitchShift || 0)));
+      if (voiceRes.voice) u.voice = voiceRes.voice;
+      var p = unit.profile || prosodyFor('p');
+      // Automatische Tempoanpassung: Rolle × Stimmenklasse × Inhalt
+      u.rate = Math.min(1.25, Math.max(0.5, unit.effRate || 1));
+      // Automatische Tonlagen-Korrektur: Rolle + Satzmelodie + Stimmenklasse
+      u.pitch = autoPitch(unit, p.pitch, voiceRes.mode);
       u.volume = p.volume;
 
       u.onend = function () {
         if (!reading || !playing) return;
         errorStreak = 0;
+        lastEffRate = unit.effRate || 1;
         spokenChars += unit.text.length;
-        var wait = Math.round((unit.after * (quality.pauseScale || 1)) / Math.max(0.6, quality.rate));
         clearPauseTimer();
-        pauseTimer = setTimeout(function () { speakUnit(cursor + 1); }, wait);
+        pauseTimer = setTimeout(function () { speakUnit(cursor + 1); }, unit.after);
       };
       u.onerror = function (e) {
         if (!reading) return;
@@ -952,7 +1349,8 @@
       try { synth.speak(u); } catch (err) { speakUnit(cursor + 1); }
     };
 
-    var lead = Math.round(((unit.before || 0) * (quality.pauseScale || 1)) / Math.max(0.6, quality.rate));
+    // Regie-Pause vor dem Block: an das zuletzt gesprochene Tempo gekoppelt
+    var lead = Math.round(((unit.before || 0) * (quality.pauseScale || 1)) / Math.max(0.6, lastEffRate || quality.rate || 1));
     if (lead > 0) { pauseTimer = setTimeout(start, lead); } else { start(); }
   }
 
@@ -1003,7 +1401,12 @@
     texts = I18N[currentLang] || I18N.de;
     errorStreak = 0;
     calibrateQuality();
+    lastEffRate = quality.rate || 1;
+    voiceWaitTries = 0;
     maleVoice = pickMaleVoice(currentLang);
+    // Beide Sprecher-Pools vorwärmen: englische Sätze in deutschen
+    // Artikeln (und umgekehrt) wechseln dadurch verzögerungsfrei.
+    if (speechSupported) { resolveMaleVoice('de'); resolveMaleVoice('en'); }
 
     blocks = collectBlocks();
     if (!blocks.length) { setStatus(texts.noText); return; }
@@ -1053,6 +1456,7 @@
   function endReading(announce) {
     reading = false;
     playing = false;
+    voiceWaitTries = 0;
     clearPauseTimer();
     stopKeepAlive();
     if (speechSupported) { try { synth.cancel(); } catch (e) {} }
@@ -1115,8 +1519,11 @@
      Bewusst ohne Tastatur-Kurzbefehle: Bedienung erfolgt ausschließlich
      über die sichtbaren, barrierefreien Schaltflächen (Tab + Enter/Leertaste). */
   function refreshVoices() {
+    VOICE_EPOCH += 1;       // Stimmenliste neu -> Caches verwerfen
+    VOICE_CACHE = {};
     calibrateQuality();
     maleVoice = pickMaleVoice(currentLang);
+    voiceWaitTries = 0;
   }
 
   if (speechSupported) {
