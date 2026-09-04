@@ -108,6 +108,7 @@
       resume: 'Weiterlesen',
       stop: 'Beenden',
       listenAria: 'Artikel vorlesen (männliche Stimme)',
+      listenAriaNeutral: 'Artikel vorlesen (Stimme deines Geräts)',
       pauseAria: 'Vorlesen pausieren',
       resumeAria: 'Vorlesen fortsetzen',
       stopAria: 'Vorlesen beenden',
@@ -130,6 +131,7 @@
       outroLine: 'Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.',
       listItemNum: 'Punkt {n}:',
       cueShortAnswer: 'Kurzantwort:',
+      cueCorrection: 'Korrekturhinweis:',
       cueSaving: 'Sparpotenzial:',
       cueTariff: 'Tarif im Überblick:',
       cueWarning: 'Achtung:',
@@ -171,6 +173,7 @@
       resume: 'Resume',
       stop: 'Stop',
       listenAria: 'Read article aloud (male voice)',
+      listenAriaNeutral: 'Read article aloud (voice provided by your device)',
       pauseAria: 'Pause speech',
       resumeAria: 'Resume speech',
       stopAria: 'Stop speech',
@@ -193,6 +196,7 @@
       outroLine: 'End of article. Thank you for listening to FranksFinanzcheck.',
       listItemNum: 'Point {n}:',
       cueShortAnswer: 'Short answer:',
+      cueCorrection: 'Correction:',
       cueSaving: 'Savings potential:',
       cueTariff: 'Tariff at a glance:',
       cueWarning: 'Attention:',
@@ -346,6 +350,96 @@
       return u.replace(/\./g, ' Punkt ') + (lang === 'en' ? ' at ' : ' at ') + d.replace(/\./g, ' Punkt ');
     });
 
+    /* --- Fachzeichen: im Sichttext korrekt, gesprochen bedeutungslos ---
+       Diese Zeichen sind in der Seite richtig gesetzt und bleiben dort
+       unverändert. Viele Sprachengines überlesen sie aber oder
+       buchstabieren sie – und dann bricht der Satz zusammen:
+       „2,7 Cent × 20000 kWh" ohne das „mal" ergibt keinen Sinn mehr,
+       „CO₂" wird zu „CO", „90 m²" zu „90 m". Also konsequent
+       ausschreiben, bevor gesprochen wird. */
+    /* Steht die Einheit bereits ausgeschrieben vor der Klammer, würde sie
+       gesprochen doppelt erscheinen: „in Kubikmetern (m³)" -> „in
+       Kubikmetern Kubikmeter". Die Klammer ist dann nur eine
+       Schreibvariante desselben Wortes und fällt weg. */
+    s = s.replace(/(Kubikmetern?|cubic meters?)\s*\(m³\)/gi, '$1');
+    s = s.replace(/(Quadratmetern?|square meters?)\s*\(m²\)/gi, '$1');
+    s = s.replace(/km²/g, lang === 'en' ? ' square kilometers' : ' Quadratkilometer');
+    s = s.replace(/(\d)\s*[-–]?\s*m²/g, '$1' + (lang === 'en' ? ' square meters' : ' Quadratmeter'));
+    s = s.replace(/m²/g, lang === 'en' ? ' square meters' : ' Quadratmeter');
+    s = s.replace(/(\d)\s*[-–]?\s*m³/g, '$1' + (lang === 'en' ? ' cubic meters' : ' Kubikmeter'));
+    s = s.replace(/m³/g, lang === 'en' ? ' cubic meters' : ' Kubikmeter');
+    s = s.replace(/°\s*C\b/g, lang === 'en' ? ' degrees Celsius' : ' Grad Celsius');
+    s = s.replace(/°/g, lang === 'en' ? ' degrees' : ' Grad');
+    s = s.replace(/[₀₁₂₃₄₅₆₇₈₉]/g, function (m) {
+      return String('₀₁₂₃₄₅₆₇₈₉'.indexOf(m));
+    });
+    s = s.replace(/[²³¹]/g, function (m) {
+      return lang === 'en' ? ' to the power of ' + String('¹²³'.indexOf(m) + 1)
+                           : ' hoch ' + String('¹²³'.indexOf(m) + 1);
+    });
+    s = s.replace(/×/g, lang === 'en' ? ' times ' : ' mal ');
+    s = s.replace(/−/g, lang === 'en' ? ' minus ' : ' minus ');
+    s = s.replace(/·/g, ', ');
+    s = s.replace(/Ø\s*/g, lang === 'en' ? 'average ' : 'Durchschnitt ');
+    /* à ist kein \w-Zeichen, \b davor matcht nie – deshalb ohne \b. */
+    s = s.replace(/à\s+(?=\d)/g, lang === 'en' ? 'at ' : 'je ');
+    s = s.replace(/\u2011/g, '-');            // trennfester Bindestrich -> normal
+
+    /* Führendes Minus ist ein Vorzeichen, kein Gedankenstrich.
+       „Bonus: - 180,00 Euro (Gutschrift)" muss als „minus 180,00 Euro"
+       gesprochen werden – sonst klingt eine Gutschrift wie eine
+       zusätzliche Forderung. */
+    s = s.replace(/(^|[\s:(])\s*-\s*(?=\d)/g, '$1' + (lang === 'en' ? ' minus ' : ' minus '));
+
+    /* --- Schrägstrich: „pro", „bis", „und" oder „oder" je nach Kontext --- */
+
+    s = s.replace(/\s*\/\s*Kilowattstunden?\b/gi, lang === 'en' ? ' per kilowatt hour' : ' pro Kilowattstunde');
+    s = s.replace(/\s*\/\s*(kWh|Kilowattstunde)\b/gi, lang === 'en' ? ' per kilowatt hour' : ' pro Kilowattstunde');
+    s = s.replace(/\bVoll\s*\/\s*(Voll|Leer)\b/gi, '$1 zu $1');
+    s = s.replace(/Download\s*\/\s*Upload/gi, lang === 'en' ? 'download and upload' : 'Download und Upload');
+    s = s.replace(/TCP\s*\/\s*(IPv\d)/gi, 'TCP $1');
+    s = s.replace(/Mobiles Netz\s*\/\s*Datennutzung/gi, 'Mobiles Netz, dann Datennutzung');
+    s = s.replace(/\b(\d{4})\s*\/\s*(\d{2,4})\b/g, '$1' + (lang === 'en' ? ' to ' : ' bis ') + '$2');
+    s = s.replace(/(\d)\s*\/\s*(?=\d)/g, '$1' + (lang === 'en' ? ' and ' : ' und '));
+    /* Schrägstrich mit Maßeinheit im Nenner meint immer „pro", nie „oder":
+       „Grundpreis / Monat", „kWh/Jahr", „80 €/Jahr", „2 bis 4 Stunden/Woche".
+       Muss VOR der allgemeinen Wort/Wort-Regel stehen. */
+    s = s.replace(/\s*\/\s*(Monate?|Jahre?|Kilowattstunden?|kWh|Stunden?|Minuten?|Sekunden?|Wochen?|Tagen?|Personen?|Quadratmetern?|m²)\b/gi,
+      function (m, einheit) {
+        /* Nach „pro" steht im Deutschen der Singular: „pro Kilowattstunde",
+           nicht „pro Kilowattstunden". Die Quelle schreibt die Einheit im
+           Plural, weil sie als Spaltenüberschrift steht. */
+        var EINZAHL = {
+          monate: 'Monat', jahr: 'Jahr', jahre: 'Jahr',
+          kilowattstunde: 'Kilowattstunde', kilowattstunden: 'Kilowattstunde', kwh: 'Kilowattstunde',
+          stunde: 'Stunde', stunden: 'Stunde', minute: 'Minute', minuten: 'Minute',
+          sekunde: 'Sekunde', sekunden: 'Sekunde', woche: 'Woche', wochen: 'Woche',
+          tag: 'Tag', tagen: 'Tag', person: 'Person', personen: 'Person',
+          quadratmeter: 'Quadratmeter', 'm²': 'Quadratmeter'
+        };
+        var name = EINZAHL[einheit.toLowerCase()] || einheit;
+        if (lang === 'en') {
+          var EN = { Monat: 'month', Jahr: 'year', Kilowattstunde: 'kilowatt hour',
+                     Stunde: 'hour', Minute: 'minute', Sekunde: 'second',
+                     Woche: 'week', Tag: 'day', Person: 'person', Quadratmeter: 'square meter' };
+          return ' per ' + (EN[name] || name.toLowerCase());
+        }
+        return ' pro ' + name;
+      });
+    /* Bandbreiten: „250 Mbit/s", „1000 MBit/s", „1 Gbit/s". Muss VOR der
+       allgemeinen Wort/Wort-Regel stehen – sonst wird aus „Mbit/s" erst
+       „Mbit oder s" und die Einheit passt nicht mehr. */
+    s = s.replace(/\b(?:Mbit|Megabit)\s*\/\s*s\b/gi, lang === 'en' ? 'megabits per second' : 'Megabit pro Sekunde');
+    s = s.replace(/\b(?:Gbit|Gigabit)\s*\/\s*s\b/gi, lang === 'en' ? 'gigabits per second' : 'Gigabit pro Sekunde');
+    s = s.replace(/([A-Za-zäöüßÄÖÜ])\s*\/\s*(?=[A-Za-zäöüßÄÖÜ])/g, '$1' + (lang === 'en' ? ' or ' : ' oder '));
+
+    /* Zahlenreihen mit drei oder mehr Gliedern sind Eigennamen, keine
+       Zahlenbereiche: Aus der „50-30-20-Regel" machte die Bereichsregel
+       „50 bis 30-20-Regel". Geschützt bis zum Ende der Normalisierung. */
+    s = s.replace(/\b\d{1,3}(?:-\d{1,3}){2,}\b/g, function (m) {
+      return m.replace(/-/g, '\u0003');
+    });
+
     /* --- Deutsche Zahlformatierung sprechbar machen --- */
     if (lang !== 'en') {
       // Tausenderpunkte entfernen: 1.250,50 -> 1250,50
@@ -394,7 +488,7 @@
       s = s.replace(/\bKfz\b/gi, 'Kraftfahrzeug');
       s = s.replace(/\bPKV\b/g, 'private Krankenversicherung');
       s = s.replace(/\bGKV\b/g, 'gesetzliche Krankenversicherung');
-      s = s.replace(/\bIBAN\b/g, 'I BAN');
+
       s = s.replace(/\bBIC\b/g, 'B I C');
       s = s.replace(/\bAPI\b/g, 'A P I');
       s = s.replace(/\bKfW\b/g, 'K f W');
@@ -443,20 +537,29 @@
 
     if (lang === 'en') {
       // Währungen & Zahlenbereiche Englisch
-      s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*(?:€|EUR|Euro)/gi, '$1 to $2 Euros');
+      s = s.replace(/(\d)\s*[-–—]\s*€\s*[-–—]\s*/g, '$1-euro-');
+      s = s.replace(/(\d)\s*[-–—]\s*(?:EUR|Euro)\s*[-–—]\s*/gi, '$1-euro-');
+      s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*(?:€|Euro\b|EUR\b)/gi, '$1 to $2 Euros');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*\$/g, '$1 to $2 Dollars');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*%/g, '$1 to $2 percent');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)/g, '$1 to $2');
-      s = s.replace(/(\d+(?:[.,]\d+)?)\s*(?:€|EUR|Euro)/gi, '$1 Euros');
+      s = s.replace(/(\d+(?:[.,]\d+)?)\s*(?:€|Euro\b|EUR\b)/gi, '$1 Euros');
       s = s.replace(/&/g, ' and ');
       s = s.replace(/\$\s*(\d+(?:[.,]\d+)?)/g, '$1 Dollars');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*\$/g, '$1 Dollars');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*%/g, '$1 percent');
       s = s.replace(/\b(\d+)\s*(?:Cent|ct)\b/gi, '$1 Cents');
       s = s.replace(/\b(?:Cent|ct)\/kWh\b/gi, 'Cents per kilowatt hour');
+      /* „kilowatt hours (kWh)" – die Klammer wiederholt nur das bereits
+         ausgeschriebene Wort und würde gesprochen doppelt erscheinen. */
+      s = s.replace(/(kilowatt hours?)\s*\(kWh\)/gi, '$1');
+      s = s.replace(/\b(per)\s+kWh\b/gi, '$1 kilowatt hour');
       s = s.replace(/\b(?:kWh|kwh)\b/g, 'kilowatt hours');
-      s = s.replace(/\b(?:Mbit\/s|MBit\/s|Mbit)\b/g, 'megabits per second');
-      s = s.replace(/\b(?:Gbit\/s|GBit\/s|Gbit)\b/g, 'gigabits per second');
+      s = s.replace(/\b(?:Mbit|MBit|Megabit)\s*\/\s*s\b/gi, 'megabits per second');
+      s = s.replace(/\b(?:Gbit|GBit|Gigabit)\s*\/\s*s\b/gi, 'gigabits per second');
+      s = s.replace(/\b(?:Mbit|MBit)\b/g, 'megabit');
+      s = s.replace(/\b(?:Gbit|GBit)\b/g, 'gigabit');
+      s = s.replace(/\s*\/\s*s\b/g, ' per second');
       s = s.replace(/\b(?:m²|sqm)\b/gi, 'square meters');
       s = s.replace(/\s*(?:\bp\.\s?a\.|\/\s?year)/gi, ' per year');
       s = s.replace(/\s*\/\s?(month|year|week|day|person|hour)\b/gi, ' per $1');
@@ -465,7 +568,11 @@
       s = s.replace(/\bapprox\.(?![\wäöüßÄÖÜ])/gi, 'approximately');
       s = s.replace(/\bincl\.(?![\wäöüßÄÖÜ])/gi, 'including');
       s = s.replace(/\bexcl\.(?![\wäöüßÄÖÜ])/gi, 'excluding');
-      s = s.replace(/\bvs\.?\b/gi, 'versus');
+      /* „vs." – der Punkt MUSS mit verschwinden. Die frühere Fassung
+         /\bvs\.?\b/ ließ ihn stehen („versus."), weil nach einem Punkt
+         keine Wortgrenze mehr folgt und die Regex auf „vs" zurückfiel. */
+      s = s.replace(/\bvs\.(?![\wäöüßÄÖÜ])/gi, 'versus');
+      s = s.replace(/\bvs\b/gi, 'versus');
       s = s.replace(/\bmin\.(?![\wäöüßÄÖÜ])/gi, 'minimum');
       s = s.replace(/\bmax\.(?![\wäöüßÄÖÜ])/gi, 'maximum');
       // Zweite Redaktions-Stufe (v3): etc., No.
@@ -478,18 +585,34 @@
       s = s.replace(/\$/g, ' Dollars');
     } else {
       // Währungen & Zahlenbereiche Deutsch (Chefredakteur-Standard)
-      s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*(?:€|EUR|Euro)/gi, '$1 bis $2 Euro');
+      /* „150-€-Bonus": Steht das Währungszeichen zwischen Bindestrichen,
+         muss es Teil des Wortes bleiben. Das spätere Auffangnetz
+         (€ → „ Euro") machte daraus „150- Euro-Bonus" – gesprochen
+         ein Stolpern mitten im Begriff. */
+      s = s.replace(/(\d)\s*[-–—]\s*€\s*[-–—]\s*/g, '$1-Euro-');
+      s = s.replace(/(\d)\s*[-–—]\s*(?:EUR|Euro)\s*[-–—]\s*/gi, '$1-Euro-');
+      s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*(?:€|Euro\b|EUR\b)/gi, '$1 bis $2 Euro');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*(?:Cent|ct)/gi, '$1 bis $2 Cent');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)\s*%/g, '$1 bis $2 Prozent');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*[-–—]\s*(\d+(?:[.,]\d+)?)/g, '$1 bis $2');
-      s = s.replace(/(\d+(?:[.,]\d+)?)\s*(?:€|EUR|Euro)/gi, '$1 Euro');
+      s = s.replace(/(\d+(?:[.,]\d+)?)\s*(?:€|Euro\b|EUR\b)/gi, '$1 Euro');
       s = s.replace(/(?:€|EUR)\s*(\d+(?:[.,]\d+)?)/gi, '$1 Euro');
       s = s.replace(/(\d+(?:[.,]\d+)?)\s*%/g, '$1 Prozent');
       s = s.replace(/\b(\d+)\s*(?:Cent|ct)\b/gi, '$1 Cent');
       s = s.replace(/\b(?:Cent|ct)\/kWh\b/gi, 'Cent pro Kilowattstunde');
+      /* „Kilowattstunden (kWh)" – die Klammer wiederholt nur das bereits
+         ausgeschriebene Wort: gesprochen entstünde „Kilowattstunden
+         Kilowattstunden". */
+      s = s.replace(/(Kilowattstunden?)\s*\(kWh\)/gi, '$1');
+      /* Nach „pro" und „je" steht im Deutschen der Singular. Die Quelle
+         schreibt „Arbeitspreis pro kWh" als Spaltenüberschrift. */
+      s = s.replace(/\b(pro|je)\s+kWh\b/gi, '$1 Kilowattstunde');
       s = s.replace(/\b(?:kWh|kwh)\b/g, 'Kilowattstunden');
-      s = s.replace(/\b(?:Mbit\/s|MBit\/s|Mbit)\b/g, 'Megabit pro Sekunde');
-      s = s.replace(/\b(?:Gbit\/s|GBit\/s|Gbit)\b/g, 'Gigabit pro Sekunde');
+      s = s.replace(/\b(?:Mbit|MBit|Megabit)\s*\/\s*s\b/gi, 'Megabit pro Sekunde');
+      s = s.replace(/\b(?:Gbit|GBit|Gigabit)\s*\/\s*s\b/gi, 'Gigabit pro Sekunde');
+      s = s.replace(/\b(?:Mbit|MBit)\b/g, 'Megabit');
+      s = s.replace(/\b(?:Gbit|GBit)\b/g, 'Gigabit');
+      s = s.replace(/\s*\/\s*s\b/g, ' pro Sekunde');
       s = s.replace(/\b(?:m²|qm)\b/gi, 'Quadratmeter');
       s = s.replace(/(\d)\s*h\b/g, '$1 Stunden');
       s = s.replace(/(\d)\s*(?:km|Km)\b/g, '$1 Kilometer');
@@ -514,7 +637,11 @@
       s = s.replace(/\bAbs\.(?![\wäöüßÄÖÜ])/g, 'Absatz');
       s = s.replace(/\bArt\.(?![\wäöüßÄÖÜ])/g, 'Artikel');
       s = s.replace(/\bNr\.(?![\wäöüßÄÖÜ])/g, 'Nummer');
-      s = s.replace(/\bvs\.?\b/gi, 'versus');
+      /* „vs." – der Punkt MUSS mit verschwinden. Die frühere Fassung
+         /\bvs\.?\b/ ließ ihn stehen („versus."), weil nach einem Punkt
+         keine Wortgrenze mehr folgt und die Regex auf „vs" zurückfiel. */
+      s = s.replace(/\bvs\.(?![\wäöüßÄÖÜ])/gi, 'versus');
+      s = s.replace(/\bvs\b/gi, 'versus');
       // Abkürzungen Deutsch – zweite Redaktions-Stufe (v3)
       s = s.replace(/\bv\.\s?a\.(?![\wäöüßÄÖÜ])/gi, 'vor allem');
       s = s.replace(/\bz\.\s?T\.(?![\wäöüßÄÖÜ])/gi, 'zum Teil');
@@ -530,6 +657,11 @@
       s = s.replace(/(?:\bJh\.|\bJhd\.|\bJhdt\.)(?![\wäöüßÄÖÜ])/g, 'Jahrhundert');
       s = s.replace(/\bAnm\.(?![\wäöüßÄÖÜ])/g, 'Anmerkung');
       s = s.replace(/\bggf\b(?!\.)(?![\wäöüßÄÖÜ])/gi, 'gegebenenfalls');
+      /* Gleichzeichen: zwischen Zahlen „ergibt", sonst „ist". Ohne Regel
+         liest die Stimme „gleich" oder übergeht das Zeichen ganz – in den
+         Rechenbeispielen der Artikel ging so der Zusammenhang verloren. */
+      s = s.replace(/(\d(?:[.,]\d+)?)\s*=\s*(?=\d)/g, '$1 ergibt ');
+      s = s.replace(/([\wäöüßÄÖÜ)\].,])\s*=\s*([\wäöüßÄÖÜ(])/g, '$1 ist $2');
       // Finales Währungs-Auffangnetz: jedes verbleibende Zeichen sprechbar
       s = s.replace(/€/g, ' Euro');
       s = s.replace(/\bEUR\b/g, 'Euro');
@@ -551,8 +683,11 @@
     // Dekorative Icons & Markdown-Sonderzeichen bereinigen
     s = s.replace(/[⏱️📅✍️📚💶💰🛡️⚡🚗🌱🌐💳📈📋✓🔧★⭐]/g, '');
     s = s.replace(/[*_`~#|]+/g, ' ');
+    s = s.replace(/\(\s+/g, '(');
+    s = s.replace(/\s+\)/g, ')');
     s = s.replace(/\(\s*\)/g, ' ');
     s = s.replace(/\b(Tipp|Hinweis|Achtung|Wichtiger Hinweis|Tip|Note|Warning):\s*\1:/gi, '$1:');
+    s = s.replace(/\u0003/g, '-');   // geschützte Zahlenreihen (50-30-20)
     s = s.replace(/\s+([,.;:!?…])/g, '$1');
     s = s.replace(/([,.;:!?…]){2,}/g, '$1');
     s = s.replace(/\s+/g, ' ').trim();
@@ -561,11 +696,45 @@
     return s;
   }
 
+  var SUMMARY_ABBREVS = [
+    'z. B.', 'z.B.', 'd. h.', 'd.h.', 'u. a.', 'u.a.', 'v. a.', 'v.a.',
+    'z. T.', 'u. s. w.', 'o. Ä.', 'bzw.', 'ca.', 'inkl.', 'exkl.', 'ggf.',
+    'ggfs.', 'evtl.', 'mind.', 'max.', 'etc.', 'usw.', 'usf.', 'bspw.',
+    'e. g.', 'e.g.', 'i. e.', 'i.e.', 'approx.', 'vs.', 'Dr.', 'Prof.',
+    'Nr.', 'Abs.', 'Art.', 'Tab.', 'Abb.', 'Anm.', 'Pkt.', 'Min.', 'Std.',
+    'Mio.', 'Mrd.', 'Tsd.', 'MwSt.', 'zzgl.', 'sog.'
+  ];
+
+  function escapeRe(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // Maskiert Satzende-Punkte, die zu Abkürzungen oder Tausender-
+  // trennern gehören, damit sie nicht fälschlich als Satzende zählen.
+  function maskSentenceDots(text) {
+    var t = String(text || '');
+    // Tausenderpunkte: 1.250 -> 1␂250 (Chefredakteur-Standard)
+    t = t.replace(/(\d)\.(\d{3})/g, '$1\u0002$2');
+    for (var i = 0; i < SUMMARY_ABBREVS.length; i++) {
+      var ab = SUMMARY_ABBREVS[i];
+      var re = new RegExp(escapeRe(ab).replace(/ /g, '\\s*'), 'g');
+      t = t.replace(re, function (m) { return m.replace(/\./g, '\u0002'); });
+    }
+    return t;
+  }
+
+  /* Satzgrenzen erkennen – abkürzungs- und zahlenfest.
+     Ohne die Maskierung trennt der Split an JEDEM Punkt, also auch
+     mitten in „z. B.". Fallen „z." und „B." dann in verschiedene
+     Sprechhäppchen, sieht die Abkürzungsauflösung sie nie zusammen und
+     der Text wird als „… (zum Beispiel." bzw. „z. B." gesprochen.
+     Die Kurzfassung hatte diesen Schutz schon immer; der Sprachpfad
+     nicht. */
   function sentences(text) {
-    return String(text || '')
+    return maskSentenceDots(String(text || ''))
       .replace(/([.!?…]+)(["'»)\]]*)(\s+|$)/g, '$1$2\u0001')
       .split('\u0001')
-      .map(function (s) { return s.trim(); })
+      .map(function (s) { return s.replace(/\u0002/g, '.').trim(); })
       .filter(function (s) { return s.length > 1; });
   }
 
@@ -611,6 +780,7 @@
   var blocks = [];        // { el, text, lang, type, role, chunks[] }
   var timeline = [];      // flache Liste aller Sprech-Einheiten
   var cursor = 0;
+  var nextIndex = 0;  // Einheit, die als NÄCHSTE dran ist (Fortsetzen, Keep-Alive)
   var keepAliveId = null;
   var pauseTimer = null;
   var spokenChars = 0;
@@ -687,7 +857,7 @@
     }
     if (state === 'idle') {
       listenLabel.textContent = texts.listen;
-      listenBtn.setAttribute('aria-label', texts.listenAria);
+      listenBtn.setAttribute('aria-label', hasExplicitMaleVoice() ? texts.listenAria : (texts.listenAriaNeutral || texts.listenAria));
     } else if (state === 'playing') {
       listenLabel.textContent = texts.pause;
       listenBtn.setAttribute('aria-label', texts.pauseAria);
@@ -1551,6 +1721,14 @@
   }
 
   /* ---------- Alle vorlesbaren Blöcke im Artikel sammeln ---------- */
+  function preContentBoxes() {
+    var scope = doc.body || doc;
+    if (!scope || typeof scope.querySelectorAll !== 'function') return [];
+    return qsa('.ff-korrektur, .ff-kurzantwort', scope).filter(function (el) {
+      if (!el.closest) return true;
+      return !el.closest('.post-content, .md-content, [data-ff-skip-read], .ff-reader-toolbar');
+    });
+  }
   function collectBlocks() {
     var content = doc.querySelector('.post-content') || doc.querySelector('.md-content');
     if (!content) return [];
@@ -1563,6 +1741,28 @@
       .replace('{title}', stripMd(cfg.title || doc.title || ''))
       .replace('{time}', cfg.readingTime || '');
     out.push({ el: toolbar, text: introRaw, lang: lang, type: 'intro' });
+
+    // Redaktionelle Vorab-Boxen (Korrektur, Kurzantwort) – sie gehören
+    // inhaltlich zum Artikel und müssen hörbar sein.
+    preContentBoxes().forEach(function (box) {
+      /* Die sichtbare Dachzeile („Kurz & knapp – die Antwort“) wird nicht
+         mitgesprochen: Der redaktionelle Cue davor sagt dasselbe. Sonst
+         entstünde „Kurzantwort: Kurz & knapp – die Antwort …“. */
+      var probe = box.cloneNode ? box.cloneNode(true) : box;
+      qsa('.ff-kurzantwort__head, .ff-kurzantwort__label, .ff-kurzantwort__icon', probe).forEach(function (n) {
+        if (n.parentNode) n.parentNode.removeChild(n);
+      });
+      var boxText = readableText(probe);
+      if (boxText.length <= 5) return;
+      var isKorrektur = box.classList && box.classList.contains('ff-korrektur');
+      var cue = isKorrektur ? (texts.cueCorrection || texts.cueNote) : texts.cueShortAnswer;
+      out.push({
+        el: box,
+        text: cue + ' ' + boxText,
+        lang: lang,
+        type: isKorrektur ? 'warning' : 'callout'
+      });
+    });
 
     var nodes = qsa('h2, h3, h4, p, li, blockquote, table, .ff-table-scroll, .ff-tarif-card, .ff-einspar-box, .ff-kurzantwort, .ff-korrektur, .callout', content);
 
@@ -1623,7 +1823,16 @@
           speakText = listTexts.listItemNum.replace('{n}', idx) + ' ' + text;
         }
       }
-      if (/^H[234]$/.test(el.tagName)) speakText = text.replace(/[?!.]*$/, '') + '.';
+      /* Überschriften enden im Satzbaum meist ohne Punkt – gesprochen
+         brauchen sie einen, sonst klingt die Anmoderation abgehackt.
+         Eine Frage bleibt aber eine Frage: Wird das Fragezeichen zum
+         Punkt, spricht die Stimme sie als Feststellung („Kann mir das
+         Gas abgestellt werden." statt „…werden?"). Genau so stehen die
+         FAQ-Überschriften in den Artikeln. */
+      if (/^H[234]$/.test(el.tagName)) {
+        var heading = text.replace(/[\s?!.…]+$/, '');
+        speakText = heading + (/\?\s*$/.test(text) ? '?' : '.');
+      }
 
       out.push({ el: el, text: speakText, lang: elLang, type: type });
     });
@@ -1786,6 +1995,7 @@
     clearPauseTimer();
     if (index >= timeline.length) { endReading(true); return; }
     cursor = index;
+    nextIndex = index;
     var unit = timeline[index];
     if (!unit || !unit.text) {
       speakUnit(index + 1, isInitial);
@@ -1880,6 +2090,11 @@
         errorStreak = 0;
         lastEffRate = unit.effRate || 1;
         spokenChars += unit.text.length;
+        /* Fix (aus #169, 04.09.2026): Die nächste Einheit wird VORGEMERKT,
+           solange die Atempause läuft. Früher zeigte `cursor` weiter auf die
+           bereits gesprochene Einheit – ein Fortsetzen (oder die Keep-Alive-
+           Wache) in dieser Lücke sprach denselben Satz ein zweites Mal. */
+        nextIndex = index + 1;
         clearPauseTimer();
         pauseTimer = setTimeout(function () {
           if (reading && playing && run === playbackRun) speakUnit(index + 1, false);
@@ -2246,7 +2461,7 @@
     toolbar.setAttribute('aria-label', currentLang === 'en'
       ? 'Reading aids: listen and summary' : 'Lesehilfen: Vorlesen und Kurzfassung');
     if (listenLabel) listenLabel.textContent = texts.listen;
-    if (listenBtn) listenBtn.setAttribute('aria-label', texts.listenAria);
+    if (listenBtn) listenBtn.setAttribute('aria-label', hasExplicitMaleVoice() ? texts.listenAria : (texts.listenAriaNeutral || texts.listenAria));
     if (summaryLabel) summaryLabel.textContent = texts.summaryBtn;
     if (summaryBtn) summaryBtn.setAttribute('aria-label', texts.summaryAria);
     errorStreak = 0;
@@ -2280,6 +2495,7 @@
       for (var i = 0; i < startIdx; i++) spokenChars += timeline[i].text.length;
     }
     cursor = startIdx;
+    nextIndex = startIdx;
     setListenState('playing');
     setStatus(startIdx > 0 ? texts.resumedPos : texts.started);
     setupMediaSession();
@@ -2330,10 +2546,14 @@
     setListenState('playing');
     setStatus(texts.resumed);
     if (!speechSupported) return;
-    // Universal: die aktuelle Einheit wird erneut gesprochen. Kein
-    // `synth.resume()`, keine Sonderfälle pro Browser – dadurch gibt es
-    // keinen stillen „resumed“-Zustand mehr.
-    speakUnit(cursor, true);
+    // Universal (v7): Pause ist ein kontrollierter Abbruch, Fortsetzen
+    // spricht direkt neu – kein `synth.resume()`, keine Sonderfälle pro
+    // Browser. Gesprochen wird die Einheit, die als NÄCHSTE dran ist
+    // (nextIndex): Pausiert man mitten in einem Satz, ist das der aktuelle
+    // Satz; pausiert man in der Atempause NACH einem fertigen Satz, ist es
+    // bereits der nächste – der fertige Satz wird nicht doppelt gesprochen
+    // (Fix aus #169, 04.09.2026).
+    speakUnit(Math.min(nextIndex, timeline.length - 1), true);
   }
 
   function endReading(announce) {
@@ -2383,7 +2603,8 @@
         // Queue liegt oder ihre Nachlauf-Pause läuft, greift die Wache nicht.
         if (!synth.speaking && !synth.pending && !pauseTimer && !unitInFlight &&
             Date.now() - lastSpeechStartedAt > 900) {
-          speakUnit(cursor, true);
+          // #169-Fix: niemals den bereits fertigen Satz erneut anstoßen
+          speakUnit(Math.min(nextIndex, timeline.length - 1), true);
         }
       } catch (e) {}
     }, 5000);
@@ -2429,6 +2650,14 @@
       if (!reading) return;
       var target = e.target.closest('tr, p, h2, h3, h4, li, blockquote, .ff-tarif-card, .ff-einspar-box, .ff-kurzantwort, .callout');
       if (!target || e.target.closest('a, button, input, select, textarea')) return;
+      /* Fix (aus #169, 04.09.2026): Text markieren und kopieren darf die
+         Wiedergabe nicht an eine andere Stelle springen lassen. Eine laufende
+         Auswahl wird respektiert – gesprungen wird nur bei einem echten,
+         kollabierten Klick. */
+      try {
+        var sel = win.getSelection && win.getSelection();
+        if (sel && !sel.isCollapsed && String(sel.toString() || '').length > 0) return;
+      } catch (err) {}
       unlockAudioEngine();
       if (audioMode) {
         var biB = blockIndexForEl(target);
@@ -2450,6 +2679,28 @@
     try { return dedupeVoices(synth.getVoices() || []); } catch (e) { return []; }
   }
 
+
+  /* Ehrliche Stimmen-Kennzeichnung (Fix aus #169, 04.09.2026).
+     Die Web Speech API kennt kein Geschlechts-Merkmal im Standard. Ob eine
+     männliche Stimme existiert, entscheidet allein das Betriebssystem. Der
+     Button verspricht deshalb nur dann eine männliche Stimme, wenn auf DIESEM
+     Gerät tatsächlich eine gefunden wurde – sonst benennt er neutral die
+     Gerätstimme. Barrierefreiheit heißt hier: nichts versprechen, was das
+     Gerät nicht einlösen kann. */
+  function hasExplicitMaleVoice() {
+    if (!speechSupported) return false;
+    try { return !!resolveMaleVoice(currentLang).explicit; } catch (e) { return false; }
+  }
+
+  function syncVoiceLabel() {
+    if (!listenBtn) return;
+    var male = hasExplicitMaleVoice();
+    var aria = male ? texts.listenAria : (texts.listenAriaNeutral || texts.listenAria);
+    if (!reading && listenBtn.setAttribute) listenBtn.setAttribute('aria-label', aria);
+    if (listenBtn.setAttribute) listenBtn.setAttribute('data-ff-voice', male ? 'male' : 'device');
+    if (male) { if (listenBtn.removeAttribute) listenBtn.removeAttribute('title'); }
+    else if (listenBtn.setAttribute) listenBtn.setAttribute('title', texts.voiceFallback);
+  }
   function refreshVoices() {
     var list = readVoiceCatalog();
     var signature = list.map(function (v) {
@@ -2461,6 +2712,7 @@
       VOICE_CACHE = {};
     }
     calibrateQuality();
+    syncVoiceLabel();
   }
 
   if (speechSupported) {
@@ -2536,34 +2788,6 @@
   var summaryCopyText = '';
   var lastFocused = null;
   var scrollLockState = null;
-
-  /* ---------- Abkürzungs- & zahlenfeste Satzsegmentierung ---------- */
-  var SUMMARY_ABBREVS = [
-    'z. B.', 'z.B.', 'd. h.', 'd.h.', 'u. a.', 'u.a.', 'v. a.', 'v.a.',
-    'z. T.', 'u. s. w.', 'o. Ä.', 'bzw.', 'ca.', 'inkl.', 'exkl.', 'ggf.',
-    'ggfs.', 'evtl.', 'mind.', 'max.', 'etc.', 'usw.', 'usf.', 'bspw.',
-    'e. g.', 'e.g.', 'i. e.', 'i.e.', 'approx.', 'vs.', 'Dr.', 'Prof.',
-    'Nr.', 'Abs.', 'Art.', 'Tab.', 'Abb.', 'Anm.', 'Pkt.', 'Min.', 'Std.',
-    'Mio.', 'Mrd.', 'Tsd.', 'MwSt.', 'zzgl.', 'sog.'
-  ];
-
-  function escapeRe(s) {
-    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
-
-  // Maskiert Satzende-Punkte, die zu Abkürzungen oder Tausender-
-  // trennern gehören, damit sie nicht fälschlich als Satzende zählen.
-  function maskSentenceDots(text) {
-    var t = String(text || '');
-    // Tausenderpunkte: 1.250 -> 1␂250 (Chefredakteur-Standard)
-    t = t.replace(/(\d)\.(\d{3})/g, '$1\u0002$2');
-    for (var i = 0; i < SUMMARY_ABBREVS.length; i++) {
-      var ab = SUMMARY_ABBREVS[i];
-      var re = new RegExp(escapeRe(ab).replace(/ /g, '\\s*'), 'g');
-      t = t.replace(re, function (m) { return m.replace(/\./g, '\u0002'); });
-    }
-    return t;
-  }
 
   function summarySentences(text) {
     var masked = maskSentenceDots(String(text || '').replace(/\u00a0/g, ' '));
@@ -3212,16 +3436,27 @@
     return dialog;
   }
 
+  function isFocusable(n) {
+    if (!n || typeof n.focus !== 'function') return false;
+    if (n.disabled) return false;
+    if (!doc.body || !doc.body.contains(n)) return false;
+    var tag = String(n.tagName || '').toLowerCase();
+    if (tag === 'body' || tag === 'html') return false;
+    return true;
+  }
+
   function restoreDialogFocus() {
-    var target = lastFocused && lastFocused.focus ? lastFocused : summaryBtn;
-    if (target && target.focus) target.focus({ preventScroll: true });
+    var target = isFocusable(lastFocused) ? lastFocused : (isFocusable(summaryBtn) ? summaryBtn : null);
+    if (target) {
+      try { target.focus({ preventScroll: true }); } catch (e) { try { target.focus(); } catch (e2) {} }
+    }
     lastFocused = null;
   }
 
   function openDialog() {
     buildDialog();
     if (dialogIsOpen()) return;
-    lastFocused = doc.activeElement || summaryBtn;
+    lastFocused = isFocusable(doc.activeElement) ? doc.activeElement : summaryBtn;
     lockScroll(true);
     var opened = false;
     if (typeof dialog.showModal === 'function') {

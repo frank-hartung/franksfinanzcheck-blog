@@ -1,0 +1,130 @@
+# ============================================================
+#  LESEHILFEN-GATE (Vorlesen + Kurzfassung) — dauerhaft aktiv
+#  ------------------------------------------------------------
+#  Warum dieser Workflow existiert (04.09.2026):
+#
+#  PR #169 („Vorlesen + Kurzfassung repariert, echte DOM-Wache“)
+#  wurde auf den aktuellen main gemergt/übernommen. Sein Kern ist
+#  die ECHTE DOM-Prüfung: Die alten Suiten liefen gegen eine
+#  handgebaute FakeNode-DOM und waren grün, während die Funktion
+#  im Browser sichtbar fehlerhaft war (Kurzantwort-Box wurde nie
+#  vorgelesen, „Weiterlesen“ doppelte Sätze, Fokus-Rückkehr,
+#  Auswahl-Schutz, Aussprache-Regeln …).
+#
+#  Dieses Gate läuft gegen eine ECHTE DOM (jsdom) mit der
+#  unveränderten static/premium/ff-reader.js, dem echten Seiten-
+#  Skelett aus layouts/single.html und echtem Inhalt aus
+#  content/posts. Zusätzlich laufen alle bestehenden Reader-/
+#  Stimmen-/Kurzfassungs-Suiten und der Selftest des
+#  ZEIT-Audiogenerators. Bricht etwas, wird der Deploy blockiert.
+#
+#  Auslösung: bei jedem Push/PR, der Lesehilfen oder Content
+#  berührt, plus täglich als Wache gegen stillen Verfall.
+#
+#  Hinweis: Diese Datei kann der Agent-Token nicht nach
+#  .github/workflows/ pushen (GitHub verweigert App-Pushes auf
+#  Workflow-Dateien ohne workflows-Permission). Sie liegt deshalb
+#  repo-konform unter patches/ und wird einmalig abgelegt:
+#      cp patches/lesehilfen-gate-2026-09-04-workflow-ready.yml \
+#         .github/workflows/lesehilfen-gate.yml
+# ============================================================
+name: Lesehilfen-Gate (Vorlesen + Kurzfassung)
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "static/premium/ff-reader.js"
+      - "assets/css/extended/ff-reader.css"
+      - "layouts/_partials/reader_toolbar.html"
+      - "layouts/single.html"
+      - "layouts/_default/single.html"
+      - "layouts/pillar/single.html"
+      - "scripts/reader_functional_test.mjs"
+      - "scripts/reader_qa_lib.mjs"
+      - "scripts/reader_engine_check.js"
+      - "scripts/reader_male_voice_highend_test.js"
+      - "scripts/reader_playback_function_test.js"
+      - "scripts/reader_v7_function_test.js"
+      - "scripts/summary_engine_check.js"
+      - "scripts/generate_reader_audio.py"
+      - "scripts/reader_toolbar_check.py"
+      - "tools/reader-qa/**"
+      - "content/posts/**"
+      - ".github/workflows/lesehilfen-gate.yml"
+  pull_request:
+    paths:
+      - "static/premium/ff-reader.js"
+      - "assets/css/extended/ff-reader.css"
+      - "layouts/**"
+      - "content/posts/**"
+  schedule:
+    - cron: "20 6 * * *"   # 08:20 MESZ – tägliche Wache gegen stillen Verfall
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lesehilfen-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lesehilfen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Node bereitstellen
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: QA-Abhängigkeiten installieren (jsdom)
+        working-directory: tools/reader-qa
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+      - name: Syntaxprüfung ff-reader.js
+        run: node --check static/premium/ff-reader.js
+
+      # ---- Echter Funktionstest (jsdom, echte Engine-Datei) ----
+      - name: Funktionstest Vorlesen + Kurzfassung (echte DOM)
+        run: node scripts/reader_functional_test.mjs
+
+      # ---- Bestehende Engine-/Stimmen-/Kurzfassungs-Suiten ----
+      - name: Reader-Engine-Check
+        run: node scripts/reader_engine_check.js
+
+      - name: Male-Voice-Highend-Test
+        run: node scripts/reader_male_voice_highend_test.js
+
+      - name: Reader-Playback-Test
+        run: node scripts/reader_playback_function_test.js
+
+      - name: Vorlesen-v7-Funktionstest (ZEIT-Audioplayer)
+        run: node scripts/reader_v7_function_test.js
+
+      - name: Kurzfassungs-Engine-Check
+        run: node scripts/summary_engine_check.js
+
+      # ---- ZEIT-Audiofassung: Selftest des Deploy-Generators ----
+      # Prüft, dass die Block-Extraktion des Generators exakt der
+      # collectBlocks()-Reihenfolge des Readers folgt (inkl. der
+      # Kurzantwort-Box vor .post-content) – sonst liefen die
+      # chunk-Blockindizes der Tonspur am Reader vorbei.
+      - name: Audio-Generator-Selftest (Block-Parität)
+        run: python3 scripts/generate_reader_audio.py --selftest
+
+      - name: Toolbar-/Barrierefreiheits-Wache
+        run: |
+          pip install -q pyyaml
+          python3 scripts/reader_toolbar_check.py

@@ -712,3 +712,35 @@ table.ff-reader-active,
         color: HighlightText;
     }
 }
+
+/* ---------- Kurzantwort-Box: Dunkelmodus (PaperMod :root[data-theme="dark"]) ----------
+   Die Box wird über CSS-Variablen des Themes gefärbt. Im Dunkelmodus muss sie
+   eine eigene, dunkle Fassung bekommen – sonst bliebe der „grüne Kasten“ hell
+   und der (dann helle) Text verlöre den Kontrast. (Fix aus #169, 04.09.2026) */
+:root[data-theme="dark"] .ff-kurzantwort {
+    background:
+        radial-gradient(130% 170% at 0% 0%, rgba(255, 255, 255, .05) 0%, rgba(255, 255, 255, 0) 46%),
+        linear-gradient(160deg, #153129 0%, #10211B 58%, #0C1B16 100%);
+    border: 1px solid rgba(134, 216, 187, .24);
+    border-left: 4px solid #2F9D77;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 10px 26px rgba(0, 0, 0, .28);
+    color: #E8F1EC;
+}
+:root[data-theme="dark"] .ff-kurzantwort__icon,
+:root[data-theme="dark"] .ff-kurzantwort__eyebrow {
+    color: #86D8BB;
+}
+:root[data-theme="dark"] .ff-kurzantwort__text {
+    color: #E8F1EC;
+}
+
+/* ---------- Lesehilfen drucken: nur der Artikeltext ist relevant ---------- */
+@media print {
+    .ff-reader-slot,
+    .ff-reader-toolbar,
+    .ff-summary,
+    .ff-summary-backdrop,
+    .ff-reader-active {
+        display: none !important;
+    }
+}
