@@ -1,274 +1,201 @@
 {
   "internet-dsl": {
-    "status": "generate",
+    "status": "reuse",
     "blocks": 97,
-    "chunks": 97,
-    "duration_ms": 919474,
-    "fingerprint": "d0ce3c16ff329dd2a5c5",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
+    "duration_ms": 919474
   },
   "konto-karten": {
-    "status": "generate",
+    "status": "reuse",
     "blocks": 85,
-    "chunks": 85,
-    "duration_ms": 746318,
-    "fingerprint": "b58fdc8560e4c36f5cdb",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
+    "duration_ms": 746318
   },
   "versicherungen": {
-    "status": "generate",
+    "status": "reuse",
     "blocks": 79,
-    "chunks": 79,
-    "duration_ms": 690153,
-    "fingerprint": "2e29409510c958bc0921",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
+    "duration_ms": 690153
   },
   "frugalismus": {
-    "status": "generate",
+    "status": "reuse",
     "blocks": 86,
-    "chunks": 86,
-    "duration_ms": 748014,
-    "fingerprint": "443f84d14b6069f371fa",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
+    "duration_ms": 748014
   },
   "strom-sparen": {
-    "status": "generate",
+    "status": "reuse",
     "blocks": 88,
-    "chunks": 88,
-    "duration_ms": 777876,
-    "fingerprint": "d7444f1234e1e4c6c974",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
+    "duration_ms": 777876
   },
   "mietwagen": {
-    "status": "generate",
+    "status": "reuse",
     "blocks": 80,
-    "chunks": 80,
-    "duration_ms": 720326,
-    "fingerprint": "d924973c7c195ca91c16",
+    "duration_ms": 720326
+  },
+  "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
+    "status": "reuse",
+    "blocks": 65,
+    "duration_ms": 630604
+  },
+  "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
+    "status": "reuse",
+    "blocks": 79,
+    "duration_ms": 758289
+  },
+  "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
+    "status": "reuse",
+    "blocks": 131,
+    "duration_ms": 1103454
+  },
+  "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife": {
+    "status": "reuse",
+    "blocks": 72,
+    "duration_ms": 684268
+  },
+  "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
+    "status": "reuse",
+    "blocks": 91,
+    "duration_ms": 743597
+  },
+  "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann": {
+    "status": "reuse",
+    "blocks": 70,
+    "duration_ms": 652364
+  },
+  "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
+    "status": "reuse",
+    "blocks": 78,
+    "duration_ms": 902678
+  },
+  "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst": {
+    "status": "reuse",
+    "blocks": 57,
+    "duration_ms": 762348
+  },
+  "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
+    "status": "reuse",
+    "blocks": 94,
+    "duration_ms": 785253
+  },
+  "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
+    "status": "reuse",
+    "blocks": 62,
+    "duration_ms": 624778
+  },
+  "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
+    "status": "reuse",
+    "blocks": 67,
+    "duration_ms": 625339
+  },
+  "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
+    "status": "reuse",
+    "blocks": 82,
+    "duration_ms": 737828
+  },
+  "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
+    "status": "reuse",
+    "blocks": 57,
+    "duration_ms": 610722
+  },
+  "2026-08-10-dsl-wechselbonus-sichern": {
+    "status": "reuse",
+    "blocks": 67,
+    "duration_ms": 609596
+  },
+  "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
+    "status": "reuse",
+    "blocks": 73,
+    "duration_ms": 729017
+  },
+  "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
+    "status": "reuse",
+    "blocks": 97,
+    "duration_ms": 745779
+  },
+  "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
+    "status": "reuse",
+    "blocks": 67,
+    "duration_ms": 593900
+  },
+  "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
+    "status": "reuse",
+    "blocks": 55,
+    "duration_ms": 585474
+  },
+  "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
+    "status": "reuse",
+    "blocks": 62,
+    "duration_ms": 662143
+  },
+  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
+    "status": "generate",
+    "blocks": 63,
+    "chunks": 63,
+    "duration_ms": 600338,
+    "fingerprint": "e2d2d15134d9c6b8cc67",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
     "failures": 0
   },
-  "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
+  "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
+    "status": "generate",
+    "blocks": 105,
+    "chunks": 105,
+    "duration_ms": 917260,
+    "fingerprint": "3838a1658289bbbbc89f",
+    "engines": {
+      "de": "piper:de_DE-thorsten-high"
+    },
+    "failures": 0
+  },
+  "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
+    "status": "generate",
+    "blocks": 74,
+    "chunks": 74,
+    "duration_ms": 732138,
+    "fingerprint": "0bbdfd03a1f43e24cdb6",
+    "engines": {
+      "de": "piper:de_DE-thorsten-high"
+    },
+    "failures": 0
+  },
+  "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
     "status": "generate",
     "blocks": 65,
     "chunks": 65,
-    "duration_ms": 630604,
-    "fingerprint": "f4305d8bb7c93ff12362",
+    "duration_ms": 706202,
+    "fingerprint": "23c2238cad367c3a7639",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
     "failures": 0
   },
-  "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
+  "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
     "status": "generate",
-    "blocks": 79,
-    "chunks": 79,
-    "duration_ms": 758289,
-    "fingerprint": "6383d340f75aa22b1535",
+    "blocks": 60,
+    "chunks": 60,
+    "duration_ms": 577978,
+    "fingerprint": "f432b860d3de2c6d4855",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
     "failures": 0
   },
-  "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
+  "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
     "status": "generate",
-    "blocks": 131,
-    "chunks": 131,
-    "duration_ms": 1103454,
-    "fingerprint": "6f8f9c357d06b827cee2",
+    "blocks": 59,
+    "chunks": 59,
+    "duration_ms": 661524,
+    "fingerprint": "fc3004218a61e7b2baab",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
     "failures": 0
   },
-  "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife": {
-    "status": "generate",
-    "blocks": 72,
-    "chunks": 72,
-    "duration_ms": 684268,
-    "fingerprint": "e99faed4b1d8554d227f",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
-    "status": "generate",
-    "blocks": 91,
-    "chunks": 91,
-    "duration_ms": 743597,
-    "fingerprint": "1cd90ab9b4c0543db128",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann": {
-    "status": "generate",
-    "blocks": 70,
-    "chunks": 70,
-    "duration_ms": 652364,
-    "fingerprint": "3a8a65bf4d03128406a6",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
-    "status": "generate",
-    "blocks": 78,
-    "chunks": 78,
-    "duration_ms": 902678,
-    "fingerprint": "e96f0068658d17f69b96",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst": {
-    "status": "generate",
-    "blocks": 57,
-    "chunks": 57,
-    "duration_ms": 762348,
-    "fingerprint": "4f94b21fcdac4a8dc450",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
-    "status": "generate",
-    "blocks": 94,
-    "chunks": 94,
-    "duration_ms": 785253,
-    "fingerprint": "f8f4e21abb8e9eeaac5b",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
+  "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
     "status": "generate",
     "blocks": 62,
     "chunks": 62,
-    "duration_ms": 624778,
-    "fingerprint": "85998d447f221ff34a9b",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-    "status": "generate",
-    "blocks": 67,
-    "chunks": 67,
-    "duration_ms": 625339,
-    "fingerprint": "ebd010d6dd55a5919cdd",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
-    "status": "generate",
-    "blocks": 82,
-    "chunks": 82,
-    "duration_ms": 737828,
-    "fingerprint": "cb1b06351d08a809432d",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
-    "status": "generate",
-    "blocks": 57,
-    "chunks": 57,
-    "duration_ms": 610722,
-    "fingerprint": "7ec93722fe9616b86089",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-10-dsl-wechselbonus-sichern": {
-    "status": "generate",
-    "blocks": 67,
-    "chunks": 67,
-    "duration_ms": 609596,
-    "fingerprint": "2cc651db187a3227145f",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
-    "status": "generate",
-    "blocks": 73,
-    "chunks": 73,
-    "duration_ms": 729017,
-    "fingerprint": "3f1b8b811369b8a246e9",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
-    "status": "generate",
-    "blocks": 97,
-    "chunks": 97,
-    "duration_ms": 745779,
-    "fingerprint": "fccd3385edb1e3ca77df",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
-    "status": "generate",
-    "blocks": 67,
-    "chunks": 67,
-    "duration_ms": 593900,
-    "fingerprint": "4ad34d41931a0bcf8843",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
-    "status": "generate",
-    "blocks": 55,
-    "chunks": 55,
-    "duration_ms": 585474,
-    "fingerprint": "89462c254257757ff4fa",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
-    "status": "generate",
-    "blocks": 62,
-    "chunks": 62,
-    "duration_ms": 662143,
-    "fingerprint": "c4ae1f50f465b2212d1f",
+    "duration_ms": 616260,
+    "fingerprint": "db0457e7d5a9ac1bedbc",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
