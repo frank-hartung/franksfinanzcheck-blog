@@ -690,6 +690,10 @@ def synthesize_track(units: list, engine, dry_run: bool = False,
         # Neural-Engines liefern oft 200–500 ms „tote Luft" pro Satz –
         # der Rhythmus wirkt dadurch schleppend und unsicher.
         res_pcm = ttb.trim_silence(res_pcm, rate)
+        # DC-Offset entfernen, BEVOR die Segmente überblendet werden: Ein
+        # konstanter Versatz um die Nulllinie lässt zwei Segmente an der
+        # Schnittstelle nicht bei 0 beginnen → hörbarer Knackser.
+        res_pcm = ttb.dc_offset_remove(res_pcm)
         res_pcm = _micro_fade(res_pcm, rate, fade_ms=3)
         dur = pcm_duration_ms(res_pcm, rate)
 
@@ -763,6 +767,10 @@ def polish_track(pcm: bytes, rate: int, target_lufs: float = DEFAULT_LUFS,
     """
     pcm = ttb.highpass_pcm(pcm, rate, fc=70.0)
     wav = ttb.build_wav(pcm, rate)
+    # Broadband-Denoise (ffmpeg afftdn) gegen Zisch-/Grundrauschen der Engine
+    # oder der MP3-Kodierung – konservativ, damit die Stimme lebendig bleibt.
+    # Ohne ffmpeg ist es ein No-Op (Hochpass, DC-Offset, Lautheit greifen trotzdem).
+    wav = ttb.broadband_denoise_wav(wav)
     return ttb.loudness_normalize_wav(wav, target_lufs, peak_db)
 
 

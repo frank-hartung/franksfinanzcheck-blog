@@ -78,8 +78,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Normalisierung oder Prosodie erzwingt damit eine Neuvertonung, statt
 # alte Tracks mit neuem Rezept zu mischen.
 NORM_VERSION = "ff-norm-v2"
-PROSODY_VERSION = "ff-prosody-v3"
-BACKENDS_VERSION = "ff-backends-v2"
+PROSODY_VERSION = "ff-prosody-v4"       # v4: Satzmelodie (Frage/Ausruf) in build_units
+BACKENDS_VERSION = "ff-backends-v3"     # v3: DC-Offset + Broadband-Denoise (afftdn)
 
 TARGET_RATE = 24000          # gemeinsame Abtastrate der Tonspur (Hz)
 TICKS_PER_SECOND = 10_000_000  # edge-tts liefert Offsets in 100-ns-Ticks
@@ -900,13 +900,20 @@ def density_factor(text: str) -> float:
 
 
 class Unit:
-    """Eine Sprech-Einheit: ein Satz mit Sprache, Rolle und Prosodie."""
+    """Eine Sprech-Einheit: ein Satz mit Sprache, Rolle und Prosodie.
+
+    ``emo`` ist die Satzmelodie (statement/question/exclamation) – die deutsche
+    Entsprechung von ``emo`` im Browser-Fallback. Fragen werden minimal angehoben
+    und erhalten mehr Pausenraum, Ausrufe leicht betont: genau das unterscheidet
+    einen lebendigen Sprecher von einem monoton vorlesenden Roboter.
+    """
 
     __slots__ = ("block", "text", "lang", "role", "rate", "pitch", "volume",
-                 "before_ms", "after_ms", "final")
+                 "before_ms", "after_ms", "final", "emo")
 
     def __init__(self, block: int, text: str, lang: str, role: str, rate: float,
-                 pitch: float, volume: float, before_ms: int, after_ms: int, final: bool):
+                 pitch: float, volume: float, before_ms: int, after_ms: int,
+                 final: bool, emo: str = "statement"):
         self.block = block
         self.text = text
         self.lang = lang
@@ -917,12 +924,38 @@ class Unit:
         self.before_ms = before_ms
         self.after_ms = after_ms
         self.final = final
+        self.emo = emo
 
     def as_dict(self) -> dict:
         return {"b": self.block, "text": self.text, "lang": self.lang, "role": self.role,
                 "rate": round(self.rate, 4), "pitch": round(self.pitch, 4),
                 "volume": round(self.volume, 4), "before": self.before_ms,
-                "after": self.after_ms, "final": self.final}
+                "after": self.after_ms, "final": self.final, "emo": self.emo}
+
+
+def sentence_emotion(text: str) -> str:
+    """Satzmelodie aus dem Satzschlusszeichen (statement/question/exclamation).
+
+    Parität zur JS-Regie: Ein Satz, der auf „?“ endet, ist eine Frage und wird
+    minimal angehoben und mit etwas mehr Pausenraum gelesen; „!“ bekommt eine
+    leichte Betonung. Das ist die häufigste fehlende Natürlichkeits-Stufe – ein
+    Artikel voller Feststellungen klingt sonst wie ein Kontoauszug.
+    """
+    tail = (text or "").rstrip().rpartition(" ")[-1][-1:]  # letztes Zeichen robust
+    if tail in ("?", "？"):
+        return "question"
+    if tail in ("!", "！"):
+        return "exclamation"
+    return "statement"
+
+
+# Grundwerte der Satzmelodie (Parität zu autoPitch/effectiveRateFor im JS):
+# Frage +0.05 Tonlage, Ausruf +0.02; Fragen/Ausrufe minimal ruhiger gelesen.
+EMO_PITCH = {"question": 0.05, "exclamation": 0.02, "statement": 0.0}
+EMO_RATE = {"question": 0.985, "exclamation": 0.99, "statement": 1.0}
+# Zusätzlicher Pausenraum nach einer Frage/beim Ausruf (Parität zu
+# pauseAfterChunk im JS: question +80 ms, exclamation +50 ms).
+EMO_AFTER_MS = {"question": 80, "exclamation": 50, "statement": 0}
 
 
 def build_units(blocks: list[tuple[str, str, str]], base_lang: str,
@@ -953,19 +986,24 @@ def build_units(blocks: list[tuple[str, str, str]], base_lang: str,
             # „Genau." darf nicht als englisch gelten.
             if len(re.findall(r"\S+", sentence)) < 3:
                 s_lang = block_lang
+            emo = sentence_emotion(sentence)
             rate = prof["rate"] * LANGUAGE_RATE.get(s_lang, 1.0)
+            pitch = prof["pitch"]
             if prosody:
-                rate *= density_factor(sentence)
+                rate *= density_factor(sentence) * EMO_RATE.get(emo, 1.0)
+                pitch += EMO_PITCH.get(emo, 0.0)
             is_final = s_index == len(sentences) - 1
             if is_final and prosody:
                 rate *= FINAL_LENGTHEN
             before = int(prof["before"]) if (s_index == 0 and prosody) else 0
             after = int(prof["after"]) if (is_final and prosody) else 60
+            if prosody:
+                after += EMO_AFTER_MS.get(emo, 0)
             units.append(Unit(
                 block=b_index, text=sentence, lang=s_lang, role=btype,
-                rate=max(0.6, min(1.25, rate)), pitch=prof["pitch"],
+                rate=max(0.6, min(1.25, rate)), pitch=max(0.6, min(1.4, pitch)),
                 volume=max(0.5, min(1.2, prof["volume"])),
-                before_ms=before, after_ms=after, final=is_final))
+                before_ms=before, after_ms=after, final=is_final, emo=emo))
     return units
 
 
@@ -1110,6 +1148,66 @@ def peak_normalize(pcm: bytes, target_db: float = -1.5) -> bytes:
     if gain > 8.0:
         gain = 8.0            # Rauschen nicht unnatürlich hochziehen
     return pcm_from_samples([int(s * gain) for s in samples])
+
+
+def dc_offset_remove(pcm: bytes) -> bytes:
+    """Entfernt einen Gleichanteil (DC-Offset) aus dem 16-bit-PCM.
+
+    Warum das wichtig ist: Neural-Engines und alle Konvertierungsschritte
+    hinterlassen oft einen kleinen, konstanten Versatz der Wellenform um die
+    Nulllinie. Der macht die Segmente unnötig „voll“ und kann an Schnittstellen
+    hörbare Knackser erzeugen, weil zwei Segmente beim Überblenden nicht beide
+    bei 0 beginnen. Das Subtrahieren des Mittelwerts ist verlustfrei und
+    dämpft beides. Im Normalfall (Offset ≈ 0) ist es ein No-Op.
+    """
+    samples = pcm_to_samples(pcm)
+    if not samples:
+        return pcm
+    mean = sum(samples) / len(samples)
+    if abs(mean) < 8.0:          # Rauschen würde sonst „aufgedreht“
+        return pcm
+    return pcm_from_samples([int(round(s - mean)) for s in samples])
+
+
+def broadband_denoise_wav(wav_bytes: bytes, exe: str | None = None) -> bytes:
+    """Spektrale Rauschminderung (Broadband-Denoise) über ffmpeg ``afftdn``.
+
+    Das ist der größte kostenlose Hebel gegen das häufigste „Qualitäts-\n
+    Rauschen\" der Vorlese-Tonspur: Zisch- und Grundrauschen, das die Engine
+    oder die MP3-Kodierung hinterlässt. Ein Hochpass allein entfernt nur das
+    tiefe Brummen; ein vielbandiger Noise-Reducer senkt das Rauschband über
+    die gesamte Sprachbreite, ohne die Stimme zu „konservieren\" (kraftlos zu
+    machen).
+
+    Konservative Einstellung, damit die Sprache lebendig bleibt:
+      nr=9   Stärke der Reduktion (0–25); 9 ist spürbar, aber unkritisch
+      nf=-32 angenommener Noise-Floor in dBFS (dunkler Raum/Studio)
+      tn=1   Noise-Tracking folgt einem sich langsam ändernden Grundrauschen
+
+    Robuster Fallback: Fehlt ffmpeg oder versteht die installierte Version die
+    Optionen nicht (alte Builds), wird der Puffer unverändert zurückgegeben –
+    das Mastering (Hochpass, DC-Offset, Lautheit) bleibt trotzdem aktiv.
+    """
+    exe = exe or find_ffmpeg()
+    if not exe:
+        return wav_bytes
+
+    def _run(filters: str) -> bytes | None:
+        proc = subprocess.run(
+            [exe, "-hide_banner", "-loglevel", "error", "-f", "wav", "-i", "pipe:0",
+             "-af", filters, "-ac", "1", "-f", "wav", "pipe:1"],
+            input=wav_bytes, capture_output=True, timeout=1200)
+        return proc.stdout if (proc.returncode == 0 and proc.stdout) else None
+
+    # 1) vollständige Optionen; 2) nur der Kernfilter; 3) unverändert.
+    for filters in ("afftdn=nr=9:nf=-32:tn=1", "afftdn=nr=9", "afftdn"):
+        try:
+            out = _run(filters)
+        except (OSError, subprocess.SubprocessError):
+            out = None
+        if out:
+            return out
+    return wav_bytes
 
 
 def find_ffmpeg() -> str | None:
@@ -1760,6 +1858,22 @@ def selftest() -> int:
     check("DE/EN-Wechsel innerhalb eines Blocks ohne Umschalter",
           [u.lang for u in mixed] == ["de", "en"], str([u.lang for u in mixed]))
 
+    print("— Selftest: Satzmelodie (Frage/Ausruf) —")
+    check("? → question", sentence_emotion("Ist das wirklich billiger?") == "question")
+    check("! → exclamation", sentence_emotion("Das ist ein Schnäppchen!") == "exclamation")
+    check(". → statement", sentence_emotion("Das ist ein Schnäppchen.") == "statement")
+    check("fullwidth ? → question", sentence_emotion("Klar?") == "question")
+    pick = build_units([("de", "p",
+                         "Das ist ein Angebot. Ist das wirklich billiger? Das ist ein Schnäppchen!")], "de")
+    check("Emotion je Satz erkannt (Aussage/Frage/Ausruf)",
+          [u.emo for u in pick] == ["statement", "question", "exclamation"],
+          str([u.emo for u in pick]))
+    check("Frage wird minimal höher gesprochen (pitch)",
+          pick[1].pitch > pick[0].pitch, f"{pick[0].pitch} vs {pick[1].pitch}")
+    check("Frage/Ausruf bekommen mehr Pausenraum (after)",
+          pick[1].after_ms > pick[0].after_ms and pick[2].after_ms > pick[0].after_ms,
+          f"{[u.after_ms for u in pick]}")
+
     print("— Selftest: Audio-Bausteine —")
     tone = pcm_from_samples([int(12000 * math.sin(2 * math.pi * 220 * i / TARGET_RATE))
                              for i in range(TARGET_RATE // 2)])
@@ -1795,6 +1909,18 @@ def selftest() -> int:
           max(abs(s) for s in pcm_to_samples(peak_normalize(pcm_from_samples([32767] * 100)))) <= 32767)
     check("Ticks → ms (edge-tts)", _ticks_to_ms(10_000_000) == 1000, str(_ticks_to_ms(10_000_000)))
     check("Sekunden → ms (defensiv)", _ticks_to_ms(1.5) == 1500, str(_ticks_to_ms(1.5)))
+    offset_sig = pcm_from_samples([int(6000 * math.sin(2 * math.pi * 220 * i / TARGET_RATE)) + 900
+                                   for i in range(TARGET_RATE // 4)])
+    offset_clean = dc_offset_remove(offset_sig)
+    offset_mean = sum(pcm_to_samples(offset_clean)) / len(pcm_to_samples(offset_clean))
+    check("DC-Offset wird entfernt (Mittel ≈ 0)",
+          abs(offset_mean) < 2.0, f"mean={offset_mean:.2f}")
+    tiny = pcm_from_samples([5] * 100)
+    check("Kleiner DC-Offset (< 8) bleibt No-Op (kein Rauschen aufdrehen)",
+          dc_offset_remove(tiny) == tiny)
+    wav_b = build_wav(tone, TARGET_RATE)
+    check("Denoise ohne ffmpeg lässt den Puffer unverändert (Fallback)",
+          broadband_denoise_wav(wav_b) == wav_b)
 
     print("— Selftest: Backend-Auswahl (nur männlich, DE/EN) —")
     for profile in VOICE_PRESETS:
