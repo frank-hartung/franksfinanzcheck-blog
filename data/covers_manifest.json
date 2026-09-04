@@ -236,5 +236,23 @@
    "badge": "GÜNSTIG REISEN",
    "savings": "bis zu 270 € sparen"
   }
+ },
+ "2026-09-03-hausratversicherung-kosten-leistungen-vergleich": {
+  "title": "Hausratversicherung: Was sie kostet und wen sie schützt",
+  "ts": "2026-09-04T04:35:13+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
+ },
+ "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
+  "title": "Kreditkarte vergleichen: Kostenlos und sicher zahlen",
+  "ts": "2026-09-04T04:35:16+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
  }
 }
