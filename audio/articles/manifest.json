@@ -3,8 +3,8 @@
     "status": "generate",
     "blocks": 97,
     "chunks": 97,
-    "duration_ms": 889718,
-    "fingerprint": "30a408525e83c41c58f1",
+    "duration_ms": 919474,
+    "fingerprint": "d0ce3c16ff329dd2a5c5",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -14,8 +14,8 @@
     "status": "generate",
     "blocks": 85,
     "chunks": 85,
-    "duration_ms": 720596,
-    "fingerprint": "4c3647b0d6c2b75925f7",
+    "duration_ms": 746318,
+    "fingerprint": "b58fdc8560e4c36f5cdb",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -25,8 +25,8 @@
     "status": "generate",
     "blocks": 79,
     "chunks": 79,
-    "duration_ms": 671146,
-    "fingerprint": "5d230aa348844d9f1ec0",
+    "duration_ms": 690153,
+    "fingerprint": "2e29409510c958bc0921",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -36,8 +36,8 @@
     "status": "generate",
     "blocks": 86,
     "chunks": 86,
-    "duration_ms": 723097,
-    "fingerprint": "0510a691e182086f7ddc",
+    "duration_ms": 748014,
+    "fingerprint": "443f84d14b6069f371fa",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -47,8 +47,8 @@
     "status": "generate",
     "blocks": 88,
     "chunks": 88,
-    "duration_ms": 751475,
-    "fingerprint": "324c0c2bea20ef80f650",
+    "duration_ms": 777876,
+    "fingerprint": "d7444f1234e1e4c6c974",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -58,8 +58,8 @@
     "status": "generate",
     "blocks": 80,
     "chunks": 80,
-    "duration_ms": 697242,
-    "fingerprint": "356dee5dc8ee2171837e",
+    "duration_ms": 720326,
+    "fingerprint": "d924973c7c195ca91c16",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -69,8 +69,8 @@
     "status": "generate",
     "blocks": 65,
     "chunks": 65,
-    "duration_ms": 612433,
-    "fingerprint": "c3319071861434e1780d",
+    "duration_ms": 630604,
+    "fingerprint": "f4305d8bb7c93ff12362",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -80,8 +80,8 @@
     "status": "generate",
     "blocks": 79,
     "chunks": 79,
-    "duration_ms": 731007,
-    "fingerprint": "abfdc90ab51fd6f4bcf7",
+    "duration_ms": 758289,
+    "fingerprint": "6383d340f75aa22b1535",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -91,8 +91,8 @@
     "status": "generate",
     "blocks": 131,
     "chunks": 131,
-    "duration_ms": 1070811,
-    "fingerprint": "db5f72f633e208210cb4",
+    "duration_ms": 1103454,
+    "fingerprint": "6f8f9c357d06b827cee2",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -102,8 +102,8 @@
     "status": "generate",
     "blocks": 72,
     "chunks": 72,
-    "duration_ms": 656937,
-    "fingerprint": "bea5ae3436b0f23656aa",
+    "duration_ms": 684268,
+    "fingerprint": "e99faed4b1d8554d227f",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -113,8 +113,8 @@
     "status": "generate",
     "blocks": 91,
     "chunks": 91,
-    "duration_ms": 715640,
-    "fingerprint": "a8d7f42f35f5c66e3102",
+    "duration_ms": 743597,
+    "fingerprint": "1cd90ab9b4c0543db128",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -124,8 +124,8 @@
     "status": "generate",
     "blocks": 70,
     "chunks": 70,
-    "duration_ms": 630659,
-    "fingerprint": "c108f4e8522c00812a2a",
+    "duration_ms": 652364,
+    "fingerprint": "3a8a65bf4d03128406a6",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -135,8 +135,8 @@
     "status": "generate",
     "blocks": 78,
     "chunks": 78,
-    "duration_ms": 873447,
-    "fingerprint": "06be003d759b192612f7",
+    "duration_ms": 902678,
+    "fingerprint": "e96f0068658d17f69b96",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -146,8 +146,8 @@
     "status": "generate",
     "blocks": 57,
     "chunks": 57,
-    "duration_ms": 738280,
-    "fingerprint": "5d6ed3ac7100fc4fbdb3",
+    "duration_ms": 762348,
+    "fingerprint": "4f94b21fcdac4a8dc450",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -157,8 +157,8 @@
     "status": "generate",
     "blocks": 94,
     "chunks": 94,
-    "duration_ms": 758461,
-    "fingerprint": "2b46f9438ab44d5220cd",
+    "duration_ms": 785253,
+    "fingerprint": "f8f4e21abb8e9eeaac5b",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -168,8 +168,8 @@
     "status": "generate",
     "blocks": 62,
     "chunks": 62,
-    "duration_ms": 601016,
-    "fingerprint": "21c00c23cf44d642cea5",
+    "duration_ms": 624778,
+    "fingerprint": "85998d447f221ff34a9b",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -179,8 +179,8 @@
     "status": "generate",
     "blocks": 67,
     "chunks": 67,
-    "duration_ms": 605370,
-    "fingerprint": "2f5f41cea42c0678828c",
+    "duration_ms": 625339,
+    "fingerprint": "ebd010d6dd55a5919cdd",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -190,8 +190,8 @@
     "status": "generate",
     "blocks": 82,
     "chunks": 82,
-    "duration_ms": 713738,
-    "fingerprint": "6660c3853b53684932b5",
+    "duration_ms": 737828,
+    "fingerprint": "cb1b06351d08a809432d",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -201,19 +201,8 @@
     "status": "generate",
     "blocks": 57,
     "chunks": 57,
-    "duration_ms": 587786,
-    "fingerprint": "17fb1d0989b5a03ecf41",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
-    "status": "generate",
-    "blocks": 64,
-    "chunks": 64,
-    "duration_ms": 699632,
-    "fingerprint": "285ecd10e1658e0e8369",
+    "duration_ms": 610722,
+    "fingerprint": "7ec93722fe9616b86089",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -223,8 +212,8 @@
     "status": "generate",
     "blocks": 67,
     "chunks": 67,
-    "duration_ms": 589199,
-    "fingerprint": "46328ae1aa62db01934d",
+    "duration_ms": 609596,
+    "fingerprint": "2cc651db187a3227145f",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -234,8 +223,8 @@
     "status": "generate",
     "blocks": 73,
     "chunks": 73,
-    "duration_ms": 707257,
-    "fingerprint": "1431c9535eeb05f81a46",
+    "duration_ms": 729017,
+    "fingerprint": "3f1b8b811369b8a246e9",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -245,8 +234,8 @@
     "status": "generate",
     "blocks": 97,
     "chunks": 97,
-    "duration_ms": 721783,
-    "fingerprint": "0dd5933c9b733d38926d",
+    "duration_ms": 745779,
+    "fingerprint": "fccd3385edb1e3ca77df",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -256,8 +245,8 @@
     "status": "generate",
     "blocks": 67,
     "chunks": 67,
-    "duration_ms": 573680,
-    "fingerprint": "29e6827168dc7c971867",
+    "duration_ms": 593900,
+    "fingerprint": "4ad34d41931a0bcf8843",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
@@ -267,8 +256,19 @@
     "status": "generate",
     "blocks": 55,
     "chunks": 55,
-    "duration_ms": 570762,
-    "fingerprint": "b40b3cc19d9c962cf8d5",
+    "duration_ms": 585474,
+    "fingerprint": "89462c254257757ff4fa",
+    "engines": {
+      "de": "piper:de_DE-thorsten-high"
+    },
+    "failures": 0
+  },
+  "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
+    "status": "generate",
+    "blocks": 62,
+    "chunks": 62,
+    "duration_ms": 662143,
+    "fingerprint": "c4ae1f50f465b2212d1f",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },

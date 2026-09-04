@@ -789,6 +789,94 @@
   var nextBtn = doc.getElementById('ff-listen-next');
   var remainEl = doc.getElementById('ff-reader-remaining');
 
+  /* ---------- Tempo-synchroner Fortschritt -----------------------------
+     Die gelbe Leiste darf nicht nur bei Boundary-Events springen: Safari
+     und manche Android-/Chromium-Stimmen liefern diese Events gar nicht
+     oder sehr unregelmäßig. Deshalb läuft ein konservativer Zeit-Ticker
+     pro Sprecheinheit mit, dessen Dauer aus derselben Tempoautomatik
+     (effRate: Rolle × Stimme × Informationsdichte) berechnet wird.
+     Boundary-Events bleiben als präzise Korrektur aktiv. Ergebnis: Die
+     Fortschrittsanzeige bewegt sich passend zum automatisch gewählten
+     Sprechtempo und bleibt auch ohne Boundary-Events verständlich. */
+  var progressTickerId = null;
+  var progressTickerIsRaf = false;
+  var progressTickerRun = 0;
+  var displayedChars = 0;
+  var CHARS_PER_MIN_AT_RATE_1 = 1000;
+
+  function cancelProgressTicker() {
+    if (!progressTickerId) return;
+    try {
+      if (progressTickerIsRaf && win.cancelAnimationFrame) win.cancelAnimationFrame(progressTickerId);
+      else clearTimeout(progressTickerId);
+    } catch (e) {}
+    progressTickerId = null;
+    progressTickerIsRaf = false;
+  }
+
+  function scheduleProgressTick(fn) {
+    if (win.requestAnimationFrame && !reducedMotion) {
+      progressTickerIsRaf = true;
+      progressTickerId = win.requestAnimationFrame(fn);
+    } else {
+      progressTickerIsRaf = false;
+      progressTickerId = setTimeout(fn, reducedMotion ? 250 : 120);
+    }
+  }
+
+  function setProgressChars(chars, allowBackward) {
+    if (!progressBar || !totalChars) return;
+    var next = Math.max(0, Math.min(totalChars, chars || 0));
+    if (!allowBackward && next < displayedChars) next = displayedChars;
+    displayedChars = next;
+    progressBar.style.width = Math.min(100, (displayedChars / totalChars) * 100).toFixed(1) + '%';
+  }
+
+  function estimatedSpeechMs(unit) {
+    if (!unit || !unit.text) return 700;
+    var rate = Math.max(0.45, unit.effRate || quality.rate || 1);
+    var chars = Math.max(1, unit.text.length);
+    var ms = (chars / (CHARS_PER_MIN_AT_RATE_1 * rate)) * 60000;
+    // Kleine Anlaufreserve gegen zu frühes Vorlaufen; Zahlen und sehr
+    // dichte Texte sind bereits über effRate langsamer, erhalten aber noch
+    // einen minimalen Sicherheitspuffer für Web-Speech-Stimmen.
+    if (/\d/.test(unit.text)) ms *= 1.04;
+    if ((unit.words || wordCountOf(unit.text)) > 24) ms *= 1.03;
+    return Math.max(450, Math.min(18000, ms));
+  }
+
+  function startProgressTicker(unit, run) {
+    cancelProgressTicker();
+    if (!progressBar || !totalChars || !unit || !unit.text) return;
+    var localRun = ++progressTickerRun;
+    var base = spokenChars;
+    var len = unit.text.length;
+    var startedAt = Date.now();
+    var duration = estimatedSpeechMs(unit);
+
+    function tick() {
+      if (!reading || !playing || run !== playbackRun || localRun !== progressTickerRun) {
+        cancelProgressTicker();
+        return;
+      }
+      var frac = Math.max(0, (Date.now() - startedAt) / duration);
+      // Während die Stimme noch spricht, endet die Schätzung knapp vor dem
+      // Chunk-Ende. onend setzt anschließend exakt auf den nächsten Start.
+      var capped = Math.min(0.985, frac);
+      setProgressChars(base + len * capped, false);
+      if (capped < 0.985) scheduleProgressTick(tick);
+      else progressTickerId = null;
+    }
+
+    setProgressChars(base, true);
+    scheduleProgressTick(tick);
+  }
+
+  function finishProgressUnit(unit) {
+    cancelProgressTicker();
+    if (unit && unit.text) setProgressChars(spokenChars + unit.text.length, false);
+  }
+
   /* ---------- Speech-Engine-Unlocking ---------------------------------
      Web Speech is not a Web-Audio stream. Creating an AudioContext and
      playing a synthetic chime here caused an extra autoplay surface and,
@@ -825,12 +913,12 @@
                        vorhanden sind (klingen sonst zu dumpf)
   ---------------------------------------------------------------------- */
   var QUALITY_PROFILES = {
-    studio:   { rate: 1.00, maxChunk: 210, pauseScale: 1.00, pitchShift: 0.00, dynamic: 0.000 },
-    premium:  { rate: 0.98, maxChunk: 195, pauseScale: 1.00, pitchShift: 0.00, dynamic: 0.004 },
-    standard: { rate: 0.94, maxChunk: 170, pauseScale: 1.10, pitchShift: 0.02, dynamic: 0.012 },
-    basic:    { rate: 0.90, maxChunk: 150, pauseScale: 1.22, pitchShift: 0.05, dynamic: 0.022 }
+    studio:   { rate: 0.90, maxChunk: 210, pauseScale: 1.08, pitchShift: 0.00, dynamic: 0.000 },
+    premium:  { rate: 0.88, maxChunk: 195, pauseScale: 1.12, pitchShift: 0.00, dynamic: 0.004 },
+    standard: { rate: 0.86, maxChunk: 170, pauseScale: 1.18, pitchShift: 0.02, dynamic: 0.012 },
+    basic:    { rate: 0.82, maxChunk: 150, pauseScale: 1.28, pitchShift: 0.05, dynamic: 0.022 }
   };
-  var quality = { tier: 'standard', rate: 0.94, maxChunk: 170, pauseScale: 1.1, pitchShift: 0.02, dynamic: 0.012 };
+  var quality = { tier: 'standard', rate: 0.86, maxChunk: 170, pauseScale: 1.18, pitchShift: 0.02, dynamic: 0.012 };
   var errorStreak = 0;  // Fehler in Folge (Synthese-Abbrüche)
   var degradeLevel = 0; // dauerhafte adaptive Herabstufung (0–2)
   // dynamic = automatische Mikro-Modulation der Tonlage gegen Monotonie
@@ -941,11 +1029,11 @@
     'david', 'mark', 'ryan', 'daniel', 'oliver', 'arthur', 'thomas', 'james', 'eric', 'fred', 'aaron',
     'brian', 'richard', 'bernd', 'markus', 'jonas', 'martin', 'johannes', 'philipp', 'sebastian', 'matthias',
     'andreas', 'marcus', 'hannes', 'andrew', 'davis', 'liam', 'christoph', 'kasper', 'alfie', 'jason',
-    'thorsten', 'karlsson', 'lessac', 'troy', 'austin', 'brad', 'bryce', 'northern'
+    'thorsten', 'karlsson', 'alan', 'troy', 'austin', 'brad', 'bryce', 'northern'
   ];
 
   var FEMALE_KEYWORDS = [
-    'anna', 'katja', 'hedda', 'vicki', 'petra', 'marlene', 'ingrid', 'zira', 'hazel', 'samantha', 'victoria',
+    'alba', 'anna', 'katja', 'hedda', 'vicki', 'petra', 'marlene', 'ingrid', 'zira', 'hazel', 'samantha', 'victoria',
     'karen', 'susan', 'jenny', 'helena', 'eva', 'gisela', 'luisa', 'maja', 'elke', 'steffi', 'catherine',
     'linda', 'heather', 'amy', 'emma', 'olivia', 'joanna', 'kendra', 'cortana', 'female', 'weiblich', 'frau',
     'woman', 'girl', '#female', 'siri female', 'seraphina', 'amala', 'kathy', 'nicole', 'moira', 'tessa',
@@ -1364,7 +1452,7 @@
     // Adaptive Herabstufung nach wiederholten Synthese-Fehlern
     if (degradeLevel > 0) {
       next.maxChunk = Math.max(110, next.maxChunk - 40 * degradeLevel);
-      next.rate = Math.max(0.86, next.rate - 0.04 * degradeLevel);
+      next.rate = Math.max(0.78, next.rate - 0.04 * degradeLevel);
       next.pauseScale = Math.min(1.5, next.pauseScale + 0.12 * degradeLevel);
       next.dynamic = Math.min(0.03, (next.dynamic || 0) + 0.008 * degradeLevel);
     }
@@ -1706,8 +1794,10 @@
     if (avg > 8) f -= 0.03;
     else if (avg < 5.2) f += 0.02;
     if (digits >= 2) f -= 0.02;
+    if (words.length > 22) f -= 0.03;
+    if (words.length > 32) f -= 0.03;
     if (words.length <= 6 && digits === 0) f += 0.02;
-    return Math.min(1.05, Math.max(0.9, f));
+    return Math.min(1.05, Math.max(0.88, f));
   }
 
   function effectiveRateFor(unit, profile) {
@@ -2074,13 +2164,13 @@
 
   function highlight(unit) {
     highlightBlock(unit && unit.block ? unit.block : null);
-    if (progressBar && totalChars) {
-      progressBar.style.width = Math.min(100, (spokenChars / totalChars) * 100).toFixed(1) + '%';
-    }
+    setProgressChars(spokenChars, true);
   }
 
   function clearHighlight() {
     blocks.forEach(function (b) { if (b.el) b.el.classList.remove('ff-reader-active'); });
+    cancelProgressTicker();
+    displayedChars = 0;
     if (progressBar) progressBar.style.width = '0%';
     if (remainEl) remainEl.textContent = '';
   }
@@ -2123,6 +2213,7 @@
     retryCounts[index] = 0;
     if (statusEl) statusEl.textContent = texts.speechError;
     spokenChars += unit && unit.text ? unit.text.length : 0;
+    setProgressChars(spokenChars, false);
     speakUnit(index + 1, false);
   }
 
@@ -2187,8 +2278,7 @@
       u.onboundary = function (e) {
         if (!reading || !playing || run !== playbackRun || !progressBar || !totalChars) return;
         if (e && typeof e.charIndex === 'number' && e.charIndex >= 0) {
-          var pct = Math.min(100, ((spokenChars + e.charIndex) / totalChars) * 100);
-          progressBar.style.width = pct.toFixed(1) + '%';
+          setProgressChars(spokenChars + e.charIndex, false);
         }
       };
 
@@ -2211,6 +2301,7 @@
         started = true;
         lastSpeechStartedAt = Date.now();
         clearStartWatchdog();
+        startProgressTicker(unit, run);
       };
 
       u.onend = function () {
@@ -2225,7 +2316,9 @@
         retryCounts[index] = 0;
         errorStreak = 0;
         lastEffRate = unit.effRate || 1;
+        finishProgressUnit(unit);
         spokenChars += unit.text.length;
+        setProgressChars(spokenChars, false);
         /* Fix (aus #169, 04.09.2026): Die nächste Einheit wird VORGEMERKT,
            solange die Atempause läuft. Früher zeigte `cursor` weiter auf die
            bereits gesprochene Einheit – ein Fortsetzen (oder die Keep-Alive-
@@ -2312,7 +2405,9 @@
     index = Math.max(0, Math.min(timeline.length - 1, index));
     spokenChars = 0;
     for (var i = 0; i < index; i++) spokenChars += timeline[i].text.length;
+    setProgressChars(spokenChars, true);
     clearPauseTimer();
+    cancelProgressTicker();
     stopVoicePolling();
     playbackRun += 1;
     retryCounts = {};
@@ -2580,6 +2675,9 @@
       reading = true;
       playing = true;
       spokenChars = 0;
+      displayedChars = 0;
+      cancelProgressTicker();
+      if (progressBar) progressBar.style.width = '0%';
       cursor = 0;
       setListenState('playing');
       setStatus(texts.started);
@@ -2625,11 +2723,15 @@
     reading = true;
     playing = true;
     spokenChars = 0;
+    displayedChars = 0;
+    cancelProgressTicker();
+    if (progressBar) progressBar.style.width = '0%';
     var startIdx = 0;
     if (typeof fromIndex === 'number' && fromIndex > 0 && fromIndex < timeline.length) {
       startIdx = fromIndex;
       for (var i = 0; i < startIdx; i++) spokenChars += timeline[i].text.length;
     }
+    setProgressChars(spokenChars, true);
     cursor = startIdx;
     nextIndex = startIdx;
     setListenState('playing');
@@ -2650,6 +2752,7 @@
     }
     playing = false;
     clearPauseTimer();
+    cancelProgressTicker();
     stopVoicePolling();
     // v7 – Verlagsstandard: Pause ist IMMER ein kontrollierter Abbruch mit
     // Positions-Merken. `speechSynthesis.pause()/resume()` ist über die
@@ -2711,6 +2814,7 @@
     activeUtterances.length = 0;
     win.__ff_active_utterance = null;
     clearPauseTimer();
+    cancelProgressTicker();
     stopVoicePolling();
     stopKeepAlive();
     if (speechSupported) {
