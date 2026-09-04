@@ -1,7 +1,7 @@
-# VORLESEN-NATUERLICHKEIT-REPORT — die männliche Stimme klingt wie ein Mensch (v9)
+# VORLESEN-NATUERLICHKEIT-REPORT — die männliche Stimme klingt wie ein Mensch (v10)
 
 **Datum:** 04.09.2026
-**Ziel:** Vorlese-Funktion **kostenlos** deutlich natürlicher machen — **männliche Stimme**, **Deutsch und Englisch**, **ohne Sprach-Umschalter**.
+**Ziel:** Vorlese-Funktion **kostenlos** dauerhaft auf High-End bringen — **männliche Stimme**, **Deutsch und Englisch**, **ohne Sprach-Umschalter**, **nicht gehetzt**, **ohne Knackser/Rauschen**. Automatische Tempo-Anpassung, Fehlerbeseitigung und Rauschunterdrückung laufen immer mit – ohne Extra-Regler.
 **Produktivcode:** `static/premium/ff-reader.js` (Browser-Pfad) · `scripts/reader_tts_backends.py` + `scripts/generate_reader_audio.py` (Tonspur) · `.github/workflows/deploy.yml` (Automatik)
 **Vorgänger:** `VORLESEN-HIGHEND-REPORT.md` (v6, Reparatur des Klickpfads) — dieser Report beschreibt die **Klang**-Stufe.
 
@@ -169,9 +169,9 @@ vertont **denselben** Text mit jeder verfügbaren Stimme und legt `tmp/ab/index.
 | Prüfung | Ergebnis |
 |---|---|
 | `node --check static/premium/ff-reader.js` | Syntax OK |
-| `python3 scripts/reader_prosody_parity_check.py` (neu: JS ≡ Tonspur) | **94/94 grün** |
-| `python3 scripts/generate_reader_audio.py --selftest` | **80/80 grün** (inkl. CLI-Integration, Vorab-Test, Schutzschalter) |
-| `python3 scripts/reader_tts_backends.py --selftest` | **68/68 grün** (inkl. Satzmelodie, DC-Offset, Denoise) |
+| `python3 scripts/reader_prosody_parity_check.py` (neu: JS ≡ Tonspur) | **102/102 grün** |
+| `python3 scripts/generate_reader_audio.py --selftest` | **83/83 grün** (inkl. CLI-Integration, Vorab-Test, Schutzschalter, v3-Rezept) |
+| `python3 scripts/reader_tts_backends.py --selftest` | **79/79 grün** (inkl. Auto-Tempo, Heal, Edge-first, Piper-EN männlich) |
 | `node scripts/reader_engine_check.js` | **58/58 grün** |
 | `node scripts/reader_male_voice_highend_test.js` | **58/58 grün** (Abschnitt 8: Multilingual/Neural/Stufen, Female-Veto) |
 | `node scripts/reader_playback_function_test.js` | **12/12 grün** |
@@ -314,8 +314,21 @@ Block; sie stehen **nach** `hugo --minify` und **vor** `Deploy auf gh-pages`:
 ```
 
 Wer es per Patch einspielen will: Die Änderung liegt auf dem Arbeitszweig
-`arena/01a06c52-franksfinanzcheck-blog` als eigener Commit
-(`git cherry-pick`/`git push` mit eigenem Token genügt).
+dieser Session als eigener Commit (`git cherry-pick`/`git push` mit eigenem Token genügt).
+
+---
+
+## 10. v10 — High-End immer an (Tempo, Fehler, Rauschen)
+
+Drei automatische Stufen, **ohne UI, ohne Umschalter, dauerhaft kostenlos**:
+
+| Hebel | Wo | Was |
+|---|---|---|
+| **Tempo** | `LANGUAGE_RATE` DE 0.88 / EN 0.90, `FINAL_LENGTHEN` 0.95, Browser-Qualität Studio 0.90 … Basic 0.82, `tempo_factor_for` (~12,2 / 13,4 Zeichen/s, ffmpeg `atempo`, Klammer 0.82–1.0) | Nie gehetzt. Auto-Tempo läuft **vor** der Dauermessung, Timeline bleibt synchron. |
+| **Fehlerbeseitigung** | `heal_segment`: Trim → DC → Declick → Auto-Tempo → 10-ms-Fade; stille/zu kurze Segmente werden einmal wiederholt, sonst als Fehler gewertet | Keine Knackser an Schnittstellen. Stille wird **hart** an Sprache gesetzt (kein Equal-Power-Join Stille+Sprache). |
+| **Rauschunterdrückung** | Piper `noise_scale=0.333` / `noise_w_scale=0.75`; Mastering: Hochpass 80 Hz, Declick, Soft-Limit, `afftdn nr=12 nf=-28`, MP3 64 kbit/s | Zisch- und Grundrauschen runter, Stimme bleibt lebendig. Ohne ffmpeg No-Op. |
+
+Rezept-Bump: `ff-prosody-v5` / `ff-backends-v5` / `ff-audio-v3` → Fingerprints erzwingen Neuvertonung. Backend-Kette: **edge → piper → groq**. Piper-EN nur männlich (`ryan`/`alan`; `alba`/`lessac`/`kristoff` raus).
 
 ### Kontrollfragen nach dem Einspielen
 

@@ -825,12 +825,12 @@
                        vorhanden sind (klingen sonst zu dumpf)
   ---------------------------------------------------------------------- */
   var QUALITY_PROFILES = {
-    studio:   { rate: 1.00, maxChunk: 210, pauseScale: 1.00, pitchShift: 0.00, dynamic: 0.000 },
-    premium:  { rate: 0.98, maxChunk: 195, pauseScale: 1.00, pitchShift: 0.00, dynamic: 0.004 },
-    standard: { rate: 0.94, maxChunk: 170, pauseScale: 1.10, pitchShift: 0.02, dynamic: 0.012 },
-    basic:    { rate: 0.90, maxChunk: 150, pauseScale: 1.22, pitchShift: 0.05, dynamic: 0.022 }
+    studio:   { rate: 0.90, maxChunk: 210, pauseScale: 1.08, pitchShift: 0.00, dynamic: 0.000 },
+    premium:  { rate: 0.88, maxChunk: 195, pauseScale: 1.12, pitchShift: 0.00, dynamic: 0.004 },
+    standard: { rate: 0.86, maxChunk: 170, pauseScale: 1.18, pitchShift: 0.02, dynamic: 0.012 },
+    basic:    { rate: 0.82, maxChunk: 150, pauseScale: 1.28, pitchShift: 0.05, dynamic: 0.022 }
   };
-  var quality = { tier: 'standard', rate: 0.94, maxChunk: 170, pauseScale: 1.1, pitchShift: 0.02, dynamic: 0.012 };
+  var quality = { tier: 'standard', rate: 0.86, maxChunk: 170, pauseScale: 1.18, pitchShift: 0.02, dynamic: 0.012 };
   var errorStreak = 0;  // Fehler in Folge (Synthese-Abbrüche)
   var degradeLevel = 0; // dauerhafte adaptive Herabstufung (0–2)
   // dynamic = automatische Mikro-Modulation der Tonlage gegen Monotonie
@@ -941,11 +941,11 @@
     'david', 'mark', 'ryan', 'daniel', 'oliver', 'arthur', 'thomas', 'james', 'eric', 'fred', 'aaron',
     'brian', 'richard', 'bernd', 'markus', 'jonas', 'martin', 'johannes', 'philipp', 'sebastian', 'matthias',
     'andreas', 'marcus', 'hannes', 'andrew', 'davis', 'liam', 'christoph', 'kasper', 'alfie', 'jason',
-    'thorsten', 'karlsson', 'lessac', 'troy', 'austin', 'brad', 'bryce', 'northern'
+    'thorsten', 'karlsson', 'alan', 'troy', 'austin', 'brad', 'bryce', 'northern'
   ];
 
   var FEMALE_KEYWORDS = [
-    'anna', 'katja', 'hedda', 'vicki', 'petra', 'marlene', 'ingrid', 'zira', 'hazel', 'samantha', 'victoria',
+    'alba', 'anna', 'katja', 'hedda', 'vicki', 'petra', 'marlene', 'ingrid', 'zira', 'hazel', 'samantha', 'victoria',
     'karen', 'susan', 'jenny', 'helena', 'eva', 'gisela', 'luisa', 'maja', 'elke', 'steffi', 'catherine',
     'linda', 'heather', 'amy', 'emma', 'olivia', 'joanna', 'kendra', 'cortana', 'female', 'weiblich', 'frau',
     'woman', 'girl', '#female', 'siri female', 'seraphina', 'amala', 'kathy', 'nicole', 'moira', 'tessa',
@@ -1364,7 +1364,7 @@
     // Adaptive Herabstufung nach wiederholten Synthese-Fehlern
     if (degradeLevel > 0) {
       next.maxChunk = Math.max(110, next.maxChunk - 40 * degradeLevel);
-      next.rate = Math.max(0.86, next.rate - 0.04 * degradeLevel);
+      next.rate = Math.max(0.78, next.rate - 0.04 * degradeLevel);
       next.pauseScale = Math.min(1.5, next.pauseScale + 0.12 * degradeLevel);
       next.dynamic = Math.min(0.03, (next.dynamic || 0) + 0.008 * degradeLevel);
     }
@@ -1706,8 +1706,10 @@
     if (avg > 8) f -= 0.03;
     else if (avg < 5.2) f += 0.02;
     if (digits >= 2) f -= 0.02;
+    if (words.length > 22) f -= 0.03;
+    if (words.length > 32) f -= 0.03;
     if (words.length <= 6 && digits === 0) f += 0.02;
-    return Math.min(1.05, Math.max(0.9, f));
+    return Math.min(1.05, Math.max(0.88, f));
   }
 
   function effectiveRateFor(unit, profile) {

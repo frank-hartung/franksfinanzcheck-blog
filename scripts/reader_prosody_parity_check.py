@@ -268,6 +268,17 @@ def main() -> int:
           "if (audioCfg && audioCfg.audio) cfg.audio = audioCfg.audio;" in js_src)
 
     print("— 5) Kostenfreiheit & Rezept-Nachvollziehbarkeit —")
+    check("High-End-Kette beginnt mit Edge-Neural", ttb.BACKEND_ORDER[0] == "edge",
+          str(ttb.BACKEND_ORDER))
+    check("Deutsch wird nicht gehetzt (LANGUAGE_RATE ≤ 0.90)",
+          ttb.LANGUAGE_RATE.get("de", 1) <= 0.90, str(ttb.LANGUAGE_RATE))
+    piper_en = " ".join(
+        v for profile in ttb.VOICE_PRESETS.values()
+        for v in (profile.get("piper") or {}).get("en") or []
+    ).lower()
+    check("Piper-EN ohne Frauenstimme (alba/lessac)",
+          "alba" not in piper_en and "lessac" not in piper_en, piper_en)
+    check("Generator heilt Segmente automatisch", "heal_segment" in gen_src)
     check("Generator-Fingerprint trägt die Rezept-Version", "GEN_VERSION" in gen_src)
     check("Rezept-Versionen sind im Backends-Modul hinterlegt",
           bool(ttb.NORM_VERSION and ttb.PROSODY_VERSION and ttb.BACKENDS_VERSION))
