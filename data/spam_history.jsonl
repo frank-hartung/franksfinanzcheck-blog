@@ -406,3 +406,11 @@
 {"ts": "2026-09-04T14:36:37Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich", "rules": ["B2"]}
 {"ts": "2026-09-04T14:36:37Z", "module": "spam_guard", "action": "feed-fix", "rules": ["F5"]}
 {"ts": "2026-09-04T14:36:37Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 1}
+{"ts": "2026-09-04T14:37:14Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub", "rules": ["B5"]}
+{"ts": "2026-09-04T14:37:14Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet", "rules": ["B1"]}
+{"ts": "2026-09-04T14:37:14Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-03-hausratversicherung-kosten-leistungen-vergleich", "rules": ["B5"]}
+{"ts": "2026-09-04T14:37:14Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen", "rules": ["B5"]}
+{"ts": "2026-09-04T14:37:14Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt", "rules": ["B1", "B2"]}
+{"ts": "2026-09-04T14:37:14Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich", "rules": ["B2"]}
+{"ts": "2026-09-04T14:37:14Z", "module": "spam_guard", "action": "feed-fix", "rules": ["F5"]}
+{"ts": "2026-09-04T14:37:14Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 1}
