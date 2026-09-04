@@ -940,7 +940,8 @@
     'conrad', 'killian', 'kilian', 'florian', 'christopher', 'roger', 'steffan', 'stefan', 'ralf', 'guy', 'george',
     'david', 'mark', 'ryan', 'daniel', 'oliver', 'arthur', 'thomas', 'james', 'eric', 'fred', 'aaron',
     'brian', 'richard', 'bernd', 'markus', 'jonas', 'martin', 'johannes', 'philipp', 'sebastian', 'matthias',
-    'andreas', 'marcus', 'hannes', 'andrew', 'davis', 'liam', 'christoph', 'kasper', 'alfie', 'jason'
+    'andreas', 'marcus', 'hannes', 'andrew', 'davis', 'liam', 'christoph', 'kasper', 'alfie', 'jason',
+    'thorsten', 'karlsson', 'lessac', 'troy', 'austin', 'brad', 'bryce', 'northern'
   ];
 
   var FEMALE_KEYWORDS = [
@@ -961,6 +962,8 @@
   // Namentlich bekannte Studio-/Neuronal-Stimmen (höchste Natürlichkeit)
   var STUDIO_VOICES = [
     'google deutsch', 'microsoft conrad online', 'microsoft killian online', 'microsoft florian online',
+    'florianmultilingual', 'andrewmultilingual', 'brianmultilingual', 'conradneural', 'ryanneural',
+    'guymultilingual', 'christopherneural', 'berndneural', 'ralfneural',
     'microsoft ralf', 'anpassbare stimme', 'eloquence', 'siri stimme',
     'google us english', 'microsoft guy online', 'microsoft christopher online', 'microsoft roger online',
     'microsoft eric online', 'microsoft steffan online', 'microsoft stefan online', 'microsoft david online',
@@ -974,6 +977,33 @@
 
   var PREMIUM_KEYWORDS = ['natural', 'neural', 'wavenet', 'studio', 'journey', 'polyglot', 'online',
                           'enhanced', 'premium', 'siri', 'high quality', 'highquality', 'google'];
+
+  /* v8 – Natürlichkeits-Tiers für den Browser-Fallback (04.09.2026):
+     Nicht jede „Premium"-Kennung ist gleich wertvoll. Die Multilingual-v2-
+     Stimmen (Florian/Andrew/Brian) sind die jüngste Neural-Generation und
+     klingen hörbar menschlicher als ältere Desktop-/SAPI-Stimmen; „Natural"
+     (Edge/Google) folgt dahinter. Gezählt wird die BESTE Stufe, nicht die
+     Summe – sonst gewinnt eine Stimme nur, weil viele Kennungen im Namen
+     stehen. Reihenfolge entscheidet, wenn ein Gerät nur einfache Stimmen
+     mitbringt. */
+  var PREMIUM_TIERS = [
+    { score: 85, kw: ['multilingual', 'polyglot'] },
+    { score: 70, kw: ['natural'] },
+    { score: 60, kw: ['neural', 'neural2', 'wavenet', 'journey'] },
+    { score: 50, kw: ['studio', 'enhanced', 'premium', 'high quality', 'highquality'] },
+    { score: 40, kw: ['online'] },
+    { score: 30, kw: ['siri', 'google'] }
+  ];
+
+  function premiumTierBonus(hay) {
+    for (var t = 0; t < PREMIUM_TIERS.length; t++) {
+      var tier = PREMIUM_TIERS[t];
+      for (var k = 0; k < tier.kw.length; k++) {
+        if (voiceHas(hay, tier.kw[k]) || hasNeuralToken(hay, tier.kw[k])) return tier.score;
+      }
+    }
+    return 0;
+  }
   var LOWQ_KEYWORDS = ['espeak', 'compact', 'pico', 'flite', 'festival', 'novelty', 'whisper', 'bells',
                        'bad news', 'good news', 'bubbles', 'jester', 'organ', 'trinoids', 'zarvox',
                        'albert', 'wobble', 'superstar'];
@@ -1006,6 +1036,52 @@
       KW_RE_CACHE[normalizedKw] = re;
     }
     return re.test(normalizedHay);
+  }
+
+  /* v8 – Matcher für zusammengezogene Neural-Stimmnamen (04.09.2026).
+     Edge/Chrome melden Azure-Stimmen als EIN Token, z. B. „ConradNeural",
+     „FlorianMultilingual", „EmmaMultilingualNeural". Wortgrenzen-Treffer
+     (voiceHas) greifen dort nicht: \bconrad\b findet „ConradNeural" nicht.
+     Ohne diesen Matcher würden (a) männliche Neural-Stimmen nicht als
+     männlich erkannt und (b) weibliche Multilingual-Stimmen nicht
+     aussortiert – beides bricht die Nur-Männlich-Garantie.
+
+     Absichtlich ENG gefasst: Ein Präfix-Treffer zählt nur, wenn das Token
+     auf eine Neural-Kennung endet (neural/multilingual/natural/online/
+     wavenet) und mindestens 10 Zeichen lang ist. Damit trifft „ava" nie
+     „Available" und „nora" nie „Norbert" – die klassischen Zufallstreffer
+     eines naiven Präfix-Matchings. */
+  var NEURAL_TOKEN_SUFFIX = /(neural2?|multilingual|natural|online|wavenet|journey)$/;
+
+  function neuralTokens(hay) {
+    var tokens = String(hay || '').toLowerCase().replace(/[_-]+/g, ' ').split(/[^a-zäöüß0-9]+/);
+    var out = [];
+    for (var i = 0; i < tokens.length; i++) {
+      var tok = tokens[i];
+      if (tok && tok.length >= 10 && NEURAL_TOKEN_SUFFIX.test(tok)) out.push(tok);
+    }
+    return out;
+  }
+
+  function hasNeuralNamePrefix(hay, names) {
+    var tokens = neuralTokens(hay);
+    for (var i = 0; i < tokens.length; i++) {
+      for (var j = 0; j < names.length; j++) {
+        var n = String(names[j] || '').toLowerCase().replace(/[_-]+/g, '');
+        if (n.length >= 3 && tokens[i].indexOf(n) === 0) return true;
+      }
+    }
+    return false;
+  }
+
+  function hasNeuralToken(hay, kw) {
+    var tokens = neuralTokens(hay);
+    var needle = String(kw || '').toLowerCase().replace(/[_-]+/g, '');
+    if (!needle) return false;
+    for (var i = 0; i < tokens.length; i++) {
+      if (tokens[i].indexOf(needle) !== -1) return true;
+    }
+    return false;
   }
 
   function voiceHay(v) {
@@ -1046,18 +1122,24 @@
     else if (gender === 'female') score -= 320;
 
     var mk = MALE_KEYWORDS[prefix === 'en' ? 'en' : 'de'] || [];
+    var maleHit = false;
     for (var i = 0; i < mk.length; i++) {
-      if (voiceHas(hay, mk[i])) { score += 145; break; }
+      if (voiceHas(hay, mk[i])) { score += 145; maleHit = true; break; }
     }
+    var femaleHit = false;
     for (var j = 0; j < FEMALE_KEYWORDS.length; j++) {
-      if (voiceHas(hay, FEMALE_KEYWORDS[j])) { score -= 260; break; }
+      if (voiceHas(hay, FEMALE_KEYWORDS[j])) { score -= 260; femaleHit = true; break; }
     }
+    // Zusammengezogene Neural-Namen: „ConradNeural" (männlich) bzw.
+    // „EmmaMultilingualNeural" (weiblich) – das Veto hat Vorrang.
+    if (!femaleHit && hasNeuralNamePrefix(hay, FEMALE_KEYWORDS)) { score -= 260; femaleHit = true; }
+    if (!maleHit && !femaleHit && hasNeuralNamePrefix(hay, KNOWN_MALE_VOICES)) score += 145;
     for (var studio = 0; studio < STUDIO_VOICES.length; studio++) {
-      if (voiceHas(hay, STUDIO_VOICES[studio])) { score += 90; break; }
+      if (voiceHas(hay, STUDIO_VOICES[studio]) || hasNeuralNamePrefix(hay, [STUDIO_VOICES[studio]])) {
+        score += 90; break;
+      }
     }
-    for (var premium = 0; premium < PREMIUM_KEYWORDS.length; premium++) {
-      if (voiceHas(hay, PREMIUM_KEYWORDS[premium])) { score += 45; break; }
-    }
+    score += premiumTierBonus(hay);
     for (var low = 0; low < LOWQ_KEYWORDS.length; low++) {
       if (voiceHas(hay, LOWQ_KEYWORDS[low])) { score -= 260; break; }
     }
@@ -1114,7 +1196,9 @@
     for (var i = 0; i < FEMALE_KEYWORDS.length; i++) {
       if (voiceHas(hay, FEMALE_KEYWORDS[i])) return true;
     }
-    return false;
+    // „EmmaMultilingualNeural", „AvaMultilingual", „KatjaNeural": weibliche
+    // Neural-Stimmen tragen den Namen als Präfix eines zusammengezogenen Tokens.
+    return hasNeuralNamePrefix(hay, FEMALE_KEYWORDS);
   }
 
   /* The browser API rarely exposes gender metadata. Unknown voices are
@@ -1137,7 +1221,7 @@
     for (var i = 0; i < union.length; i++) {
       if (voiceHas(hay, union[i])) return true;
     }
-    return false;
+    return hasNeuralNamePrefix(hay, KNOWN_MALE_VOICES);
   }
 
   /* Reihenfolge für die männliche Nachbarsprachen-Suche */
@@ -1343,30 +1427,51 @@
   var CONNECTIVE_MIN = 40;   // Mindestlänge eines Schnittstücks (keine Stakkato-Schnipsel)
 
   // Kompakte Stoppwort-Karten für das automatische Satz-Routing DE/EN
+  /* v8 – Sprach-Lexika sind mit scripts/reader_tts_backends.py synchron.
+     Ein Satz, der in der Tonspur englisch gesprochen wird, muss auch im
+     Browser-Fallback englisch erkannt werden (Paritäts-Gate:
+     scripts/reader_prosody_parity_check.py). Mehrdeutige Token (in, so,
+     per, was, die) fehlen bewusst – sie sind die häufigste Ursache für
+     einen falschen Sprachenwechsel mitten im Satz. */
   var EN_SNIFF = {
-    the: 1, and: 1, of: 1, to: 1, you: 1, your: 1, for: 1, is: 1, are: 1, was: 1, were: 1, be: 1,
-    with: 1, that: 1, this: 1, these: 1, those: 1, it: 1, on: 1, at: 1, by: 1, from: 1, as: 1,
-    not: 1, or: 1, but: 1, if: 1, then: 1, have: 1, has: 1, had: 1, will: 1, would: 1, can: 1,
-    could: 1, should: 1, may: 1, our: 1, their: 1, them: 1, they: 1, we: 1, what: 1, when: 1,
-    where: 1, why: 1, how: 1, who: 1, which: 1, more: 1, most: 1, only: 1, very: 1, just: 1,
-    also: 1, here: 1, there: 1, all: 1, any: 1, some: 1, no: 1, yes: 1, do: 1, does: 1, did: 1,
-    about: 1, into: 1, over: 1, under: 1, between: 1, through: 1, after: 1, before: 1, during: 1,
-    because: 1, while: 1, against: 1, up: 1, down: 1, out: 1, off: 1, again: 1, once: 1, an: 1,
-    me: 1, us: 1, him: 1, his: 1, her: 1, my: 1, every: 1, own: 1, other: 1, each: 1, both: 1,
-    few: 1, first: 1, new: 1, good: 1, much: 1, than: 1, per: 1, want: 1, need: 1, know: 1
+    about: 1, after: 1, again: 1, against: 1, all: 1, also: 1, although: 1, and: 1, are: 1, article: 1,
+    as: 1, at: 1, avoid: 1, be: 1, because: 1, before: 1, between: 1, both: 1, but: 1, by: 1, can: 1,
+    cheaper: 1, cheapest: 1, compare: 1, compared: 1, comparison: 1, contract: 1, contracts: 1, cost: 1,
+    costing: 1, costs: 1, could: 1, did: 1, do: 1, does: 1, down: 1, during: 1, each: 1, example: 1,
+    expensive: 1, fee: 1, fees: 1, few: 1, first: 1, for: 1, from: 1, good: 1, had: 1, has: 1, have: 1,
+    he: 1, her: 1, here: 1, higher: 1, his: 1, how: 1, however: 1, if: 1, important: 1, include: 1,
+    includes: 1, including: 1, into: 1, is: 1, it: 1, just: 1, know: 1, listen: 1, lower: 1, may: 1,
+    might: 1, money: 1, more: 1, most: 1, much: 1, must: 1, need: 1, new: 1, no: 1, not: 1, of: 1, off: 1,
+    on: 1, once: 1, only: 1, or: 1, our: 1, out: 1, over: 1, plan: 1, plans: 1, price: 1, prices: 1,
+    provider: 1, providers: 1, read: 1, reading: 1, save: 1, saved: 1, saves: 1, saving: 1, savings: 1,
+    second: 1, she: 1, should: 1, show: 1, shown: 1, shows: 1, 'so-called': 1, summary: 1, switch: 1,
+    switched: 1, tariff: 1, tariffs: 1, than: 1, that: 1, the: 1, their: 1, them: 1, then: 1, there: 1,
+    therefore: 1, they: 1, this: 1, through: 1, to: 1, under: 1, up: 1, very: 1, want: 1, we: 1, what: 1,
+    when: 1, where: 1, which: 1, while: 1, who: 1, why: 1, will: 1, with: 1, within: 1, without: 1,
+    would: 1, yes: 1, you: 1, your: 1
   };
+  /* Deutsches Pendant – ebenfalls 1:1 mit dem Generator synchron. */
   var DE_SNIFF = {
-    der: 1, die: 1, das: 1, und: 1, ist: 1, sind: 1, war: 1, waren: 1, wird: 1, werden: 1,
-    wurde: 1, ein: 1, eine: 1, einer: 1, einem: 1, einen: 1, nicht: 1, mit: 1, von: 1, für: 1,
-    auf: 1, zu: 1, im: 1, am: 1, den: 1, dem: 1, des: 1, bei: 1, auch: 1, sich: 1, kann: 1,
-    können: 1, muss: 1, müssen: 1, darf: 1, sollen: 1, haben: 1, hat: 1, hatte: 1, aber: 1,
-    oder: 1, wenn: 1, weil: 1, dass: 1, wie: 1, als: 1, nach: 1, vor: 1, bis: 1, seit: 1,
-    aus: 1, nur: 1, noch: 1, schon: 1, dann: 1, doch: 1, also: 1, hier: 1, jetzt: 1, über: 1,
-    unter: 1, zwischen: 1, ohne: 1, gegen: 1, durch: 1, um: 1, sie: 1, wir: 1, ihr: 1, euch: 1,
-    uns: 1, er: 1, es: 1, mich: 1, dich: 1, ihm: 1, ihn: 1, diese: 1, dieser: 1, dieses: 1,
-    diesem: 1, diesen: 1, welche: 1, mein: 1, meine: 1, dein: 1, deine: 1, ihre: 1, kein: 1,
-    keine: 1, alle: 1, allen: 1, alles: 1, viele: 1, zwei: 1, drei: 1, viel: 1, monat: 1,
-    versicherung: 1, kosten: 1, vertrag: 1, beitrag: 1, jahr: 1, euro: 1, prozent: 1
+    ab: 1, aber: 1, acht: 1, allen: 1, aller: 1, allerdings: 1, alles: 1, als: 1, am: 1, anbieter: 1,
+    auch: 1, auf: 1, aus: 1, auto: 1, 'außerdem': 1, bank: 1, bedeutet: 1, bei: 1, beim: 1, bis: 1,
+    bitte: 1, bleiben: 1, bleibt: 1, damit: 1, danach: 1, danke: 1, dann: 1, darauf: 1, darf: 1,
+    darunter: 1, 'darüber': 1, das: 1, dass: 1, davon: 1, davor: 1, dazu: 1, dein: 1, deine: 1, dem: 1,
+    den: 1, der: 1, des: 1, deshalb: 1, dich: 1, die: 1, diese: 1, diesem: 1, diesen: 1, dieser: 1,
+    dieses: 1, dir: 1, doch: 1, dort: 1, drei: 1, du: 1, durch: 1, ein: 1, eine: 1, einem: 1, einen: 1,
+    einer: 1, eines: 1, er: 1, es: 1, etwas: 1, euch: 1, euro: 1, findest: 1, 'fünf': 1, 'für': 1, gas: 1,
+    gegen: 1, geld: 1, gelten: 1, gilt: 1, 'günstige': 1, 'günstiger': 1, haben: 1, hat: 1, hatte: 1,
+    haushalt: 1, heizung: 1, heute: 1, hier: 1, ihm: 1, ihn: 1, ihr: 1, ihre: 1, im: 1, immer: 1, ist: 1,
+    jahr: 1, jahre: 1, jedoch: 1, jetzt: 1, kann: 1, kannst: 1, karte: 1, kein: 1, keine: 1, konto: 1,
+    kosten: 1, kredit: 1, 'können': 1, lauten: 1, lautet: 1, leistung: 1, lohnt: 1, man: 1, manchmal: 1,
+    mehr: 1, mein: 1, meine: 1, mich: 1, mit: 1, monat: 1, monate: 1, morgen: 1, muss: 1, musst: 1,
+    'müssen': 1, nach: 1, neun: 1, nicht: 1, nichts: 1, nie: 1, noch: 1, nur: 1, oder: 1, oft: 1, ohne: 1,
+    preis: 1, prozent: 1, rechnung: 1, schon: 1, sechs: 1, sehr: 1, seit: 1, seitdem: 1, sich: 1, sie: 1,
+    sieben: 1, sind: 1, sobald: 1, sofern: 1, sollen: 1, solltest: 1, soweit: 1, spare: 1, sparen: 1,
+    spart: 1, strom: 1, tarif: 1, tarife: 1, teuer: 1, teure: 1, trotzdem: 1, um: 1, und: 1, uns: 1,
+    unter: 1, unters: 1, vergleich: 1, vergleichst: 1, versicherung: 1, vertrag: 1, viele: 1,
+    vielleicht: 1, vier: 1, von: 1, vor: 1, war: 1, waren: 1, wechsel: 1, weil: 1, welche: 1, weniger: 1,
+    wenn: 1, werden: 1, wie: 1, wir: 1, wird: 1, wollen: 1, wurde: 1, wurden: 1, 'während': 1, zehn: 1,
+    zinsen: 1, zu: 1, zudem: 1, zum: 1, zur: 1, zwei: 1, zwischen: 1, 'über': 1, 'übers': 1
   };
 
   // Typisch deutsche Wortendungen als morphologisches DE-Signal
@@ -1379,10 +1484,9 @@
      auslösen. Deutsche Sätze werden zusätzlich über Umlaute/ß und
      typische Wortendungen erkannt (Zweisignal-Prinzip). */
   function sniffSentenceLang(sentence, baseLang) {
-    var words = String(sentence || '')
-      .toLowerCase()
-      .replace(/[^a-zäöüß0-9'-]+/g, ' ')
-      .split(' ');
+    // Tokenizer wie im Generator: nur Buchstaben-Tokens (Ziffern zählen
+    // nicht mit, sonst kippt die Verhältnisregel bei „12 Euro").
+    var words = (String(sentence || '').toLowerCase().match(/[a-zäöüß']+/g) || []);
     var en = 0;
     var de = 0;
     var germ = 0;
@@ -1398,8 +1502,23 @@
         }
       }
     }
-    if (baseLang === 'de') return (en >= 3 && en > de * 2 + 1) ? 'en' : 'de';
-    if (baseLang === 'en') return ((de >= 3 && de > en) || (de >= 1 && germ >= 2 && de > en)) ? 'de' : 'en';
+    /* v8 – Entscheidungsregel identisch zu reader_tts_backends.sniff_lang:
+       konservativ umschalten, damit ein deutscher Satz nicht wegen eines
+       englischen Fachbegriffs kippt – und ein echter englischer Satz nicht
+       deutsch gesprochen wird (Paritäts-Gate prüft beide Seiten). */
+    var total = words.length || 1;
+    if (baseLang === 'en') {
+      if (de >= 2 && de > en) return 'de';
+      if (de >= 1 && germ >= 2 && de > en) return 'de';
+      if (en === 0 && (germ >= 2 || de / total >= 0.12)) return 'de';
+      return 'en';
+    }
+    if (baseLang === 'de') {
+      if (en >= 2 && de === 0) return 'en';
+      if (en >= 3 && en > de * 2) return 'en';
+      if (en >= 1 && de === 0 && germ === 0 && en / total >= 0.18) return 'en';
+      return 'de';
+    }
     return baseLang;
   }
 
