@@ -56,14 +56,14 @@
          Das Frontmatter-Feld `kurzantwort` wird von
          scripts/generate_kurzantworten.py automatisch befüllt. */ -}}
   {{- if and (eq .Section "posts") (.Params.kurzantwort) }}
-  <div class="ff-kurzantwort">
+  <div class="ff-kurzantwort" role="note" aria-labelledby="ff-kurzantwort-label-{{ .File.UniqueID }}">
     <div class="ff-kurzantwort__head">
       <svg class="ff-kurzantwort__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
         <path d="M9 18h6"></path>
         <path d="M10 22h4"></path>
         <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"></path>
       </svg>
-      <span class="ff-kurzantwort__eyebrow">Kurz &amp; knapp – die Antwort</span>
+      <span class="ff-kurzantwort__eyebrow" id="ff-kurzantwort-label-{{ .File.UniqueID }}">Kurz &amp; knapp – die Antwort</span>
     </div>
     <p class="ff-kurzantwort__text">{{ .Params.kurzantwort | partial "nbsp_sicherung.html" }}</p>
   </div>

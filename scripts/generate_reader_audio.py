@@ -227,6 +227,29 @@ def element_text(node: Node) -> str:
     return re.sub(r"\s+", " ", " ".join(parts)).strip()
 
 
+def element_text_without(node: Node, skip_classes: set[str]) -> str:
+    """Text wie element_text(), aber ohne Nachfahren mit einer der skip_classes.
+       Der Reader entfernt vor dem Vorlesen der Kurzantwort-Box die Dachzeile
+       (.ff-kurzantwort__head/.ff-kurzantwort__label/.ff-kurzantwort__icon) –
+       diese Funktion bildet genau das für die Audiofassung ab."""
+    parts: list[str] = []
+
+    def walk(n: Node) -> None:
+        if n.tag in {"script", "style", "noscript"}:
+            return
+        if n.attrs.get("aria-hidden") == "true":
+            return
+        if any(x in n.classes for x in skip_classes):
+            return
+        if n.text:
+            parts.append(n.text)
+        for c in n.children:
+            walk(c)
+
+    walk(node)
+    return re.sub(r"\s+", " ", " ".join(parts)).strip()
+
+
 def find_post_content(root: Node) -> Node | None:
     def walk(n: Node):
         if "post-content" in n.classes or "md-content" in n.classes:
@@ -332,6 +355,36 @@ def collect_blocks(root: Node, title: str, article_lang: str,
         out.append((article_lang, "outro", OUTRO_DE if article_lang != "en" else OUTRO_EN))
         return out
 
+    # Vorab-Boxen (Korrektur, Kurzantwort) – sie stehen im Template AUSSERHALB
+    # von .post-content (Geschwister, nicht Nachfahren). Der Reader liest sie
+    # seit 04.09.2026 ausdrücklich (Fix #169: „der grüne Kasten wurde nie
+    # vorgelesen"). Für die Tonspur MUSS dieselbe Blockreihenfolge gelten,
+    # sonst verschieben sich die Blockindizes (chunks[].b) gegenüber
+    # collectBlocks() im Browser und Live-Markierung/Sprünge liefen falsch.
+    pre_boxes: list[Node] = []
+
+    def gather_pre(n: Node) -> None:
+        if any(x in n.classes for x in ("ff-kurzantwort", "ff-korrektur")) and \
+                not n.closest("post-content", "md-content", "ff-reader-toolbar"):
+            pre_boxes.append(n)
+        for c in n.children:
+            gather_pre(c)
+
+    gather_pre(root)
+    for box in pre_boxes:
+        # Die sichtbare Dachzeile („Kurz & knapp – die Antwort") wird nicht
+        # mitgesprochen: Der redaktionelle Cue davor sagt dasselbe. Der Reader
+        # entfernt dazu .ff-kurzantwort__head/.ff-kurzantwort__label/__icon.
+        txt = element_text_without(box, {"ff-kurzantwort__head", "ff-kurzantwort__label", "ff-kurzantwort__icon"})
+        if len(txt) <= 5:
+            continue
+        is_korrektur = "ff-korrektur" in box.classes
+        if is_korrektur:
+            cue = "Correction:" if article_lang == "en" else "Korrekturhinweis:"
+        else:
+            cue = "Short answer:" if article_lang == "en" else "Kurzantwort:"
+        out.append((article_lang, "warning" if is_korrektur else "callout", f"{cue} {txt}"))
+
     # Flache qsa-Äquivalenz in Dokument-Reihenfolge (wie der Reader).
     nodes: list[Node] = []
 
@@ -403,7 +456,11 @@ def collect_blocks(root: Node, title: str, article_lang: str,
                 idx = next((i for i, s in enumerate(parent.children) if s is el), 0) + 1
                 txt = (f"Punkt {idx}: " if el_lang != "en" else f"Point {idx}: ") + txt
         if el.tag in {"h2", "h3", "h4"}:
-            txt = re.sub(r"[?!.]*$", "", txt) + "."
+            # FAQ-Fragen bleiben Fragen (Parität mit dem Reader seit 04.09.2026,
+            # Fix #169): „Kann mir das Gas abgestellt werden?" darf nicht als
+            # Feststellung („…werden.") gesprochen werden.
+            heading = re.sub(r"[\s?!.…]+$", "", txt)
+            txt = heading + ("?" if re.search(r"\?\s*$", txt) else ".")
         out.append((el_lang, el.tag, txt))
 
     out.append((article_lang, "outro", OUTRO_DE if article_lang != "en" else OUTRO_EN))
@@ -733,9 +790,15 @@ def discover_articles(html_dir: str) -> list[tuple[str, str, str, str]]:
 # Selbsttest (ohne Netzwerk)
 # --------------------------------------------------------------------------
 SELFTEST_HTML = """<!doctype html><html lang="de"><head><title>Hausratversicherung: Was sie kostet</title></head>
-<body><div class="post-content md-content">
+<body>
+<div class="ff-kurzantwort" role="note" aria-labelledby="ka-label">
+<div class="ff-kurzantwort__head"><svg class="ff-kurzantwort__icon" aria-hidden="true"></svg><span class="ff-kurzantwort__eyebrow" id="ka-label">Kurz &amp; knapp – die Antwort</span></div>
+<p class="ff-kurzantwort__text">Das Wichtigste: Vergleiche die Anbieter und prüfe die Elementarschutz-Klausel.</p>
+</div>
+<div class="post-content md-content">
 <h2 id="kosten">Was der Schutz kostet</h2>
 <p>Eine gute Hausratversicherung kostet etwa 7 bis 12 Euro im Monat.</p>
+<h2 id="frage">Wird die Police teurer, wenn du kündigst?</h2>
 <p>Wer wechselt, spart bis zu 40 Prozent im Jahr.</p>
 <ol><li>Achtung: Eine fehlende Elementarschutz-Klausel kann teuer werden.</li></ol>
 <table><thead><tr><th>Anbieter</th><th>Preis</th></tr></thead>
@@ -766,6 +829,13 @@ def selftest() -> int:
           str([b[1] for b in blocks]))
     check("H2 → eigener Block mit Punkt", any(b[1] == "h2" and b[2].endswith(".") for b in blocks),
           str([(b[1], b[2]) for b in blocks if b[1] == "h2"]))
+    check("FAQ-H2 bleibt eine Frage", any(b[1] == "h2" and b[2].endswith("?") for b in blocks),
+          str([b[2] for b in blocks if b[1] == "h2"]))
+    check("Kurzantwort-Box (vor .post-content) wird vorgelesen",
+          any(b[1] == "callout" and b[2].startswith("Kurzantwort: Das Wichtigste") for b in blocks),
+          str([(b[1], b[2][:60]) for b in blocks[:4]]))
+    check("Box-Dachzeile wird nicht doppelt gesprochen", all("Kurz & knapp" not in b[2] for b in blocks),
+          str([b[2] for b in blocks if "Kurz & knapp" in b[2]]))
     check("Listenpunkt (ol) nummeriert", any(b[1] == "li" and "Punkt 1" in b[2] for b in blocks),
           str([(b[1], b[2]) for b in blocks if b[1] == "li"]))
     check("Tabellenzeile enthält Spaltennamen", any(b[1] == "table-row" and "Preis:" in b[2] for b in blocks),
