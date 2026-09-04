@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-04 12:07 UTC · Modus: FIX
+**Stand:** 2026-09-04 14:36 UTC · Modus: FIX
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
@@ -10,10 +10,13 @@
 - 🟡 [B1] 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet: Keyword-Stuffing (ein Signal): Text: 'dns' ×46 (4.1 % Dichte)
 - 🟡 [B5] 2026-09-03-hausratversicherung-kosten-leistungen-vergleich: Originalitäts-Quote 42 % (< 45 %)
 - 🟡 [B5] 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen: Originalitäts-Quote 43 % (< 45 %)
+- 🟡 [B1] 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Keyword-Stuffing (ein Signal): Text: 'dns' ×39 (3.6 % Dichte)
+- 🟡 [B2] 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
+- 🟡 [B2] 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich: Superlativ ohne Einschränkung (\bhöchst(?:e|er|es)\b)
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
-- ℹ️ [F-OK] Feed sauber: 26 Items, Kadenz-konform, Cover vorhanden, keine Duplikate
+- 🔴 [F5] Doppelte Description in Items [1, 13]
 
 ## C: Pinterest-Bulk-CSV (C1–C8)
 
@@ -26,7 +29,7 @@
 
 ## Fazit
 
-✅ Spamfrei: keine harten Funde.
+🔴 1 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
 
 ---
 _Wache: Blog B1–B8 · Feed F1–F6 · CSV C1–C8 · API A1–A4 – Dauerauftrag, niemals Content-Verlust._
