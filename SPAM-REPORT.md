@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-04 15:50 UTC · Modus: FIX
+**Stand:** 2026-09-04 17:57 UTC · Modus: FIX
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
@@ -13,10 +13,11 @@
 - 🟡 [B1] 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Keyword-Stuffing (ein Signal): Text: 'dns' ×39 (3.6 % Dichte)
 - 🟡 [B2] 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich: Superlativ ohne Einschränkung (\bhöchst(?:e|er|es)\b)
+- 🟡 [B2] 2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
-- 🔴 [F5] Doppelte Description in Items [1, 13]
+- ℹ️ [F-OK] Feed sauber: 26 Items, Kadenz-konform, Cover vorhanden, keine Duplikate
 
 ## C: Pinterest-Bulk-CSV (C1–C8)
 
@@ -29,7 +30,7 @@
 
 ## Fazit
 
-🔴 1 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
+✅ Spamfrei: keine harten Funde.
 
 ---
 _Wache: Blog B1–B8 · Feed F1–F6 · CSV C1–C8 · API A1–A4 – Dauerauftrag, niemals Content-Verlust._
