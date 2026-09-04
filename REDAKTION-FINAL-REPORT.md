@@ -1,13 +1,17 @@
 # 🎓 REDAKTIONS-FINAL-REPORT (Endabnahme)
 
-**Stand:** 2026-09-04 14:34 UTC
-**Artikel:** 3
+**Stand:** 2026-09-04 17:55 UTC
+**Artikel:** 4
 
-## 🟢 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt
+## 🔴 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt
+
+- G1 Entwurf-Status (nicht live)
+
+## 🟢 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
 
   verlagsreif ✅ (G1–G5 bestanden)
 
-## 🟢 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
+## 🟢 2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise
 
   verlagsreif ✅ (G1–G5 bestanden)
 

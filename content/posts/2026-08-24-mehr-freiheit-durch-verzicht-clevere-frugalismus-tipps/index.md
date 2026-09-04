@@ -30,6 +30,7 @@ pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 
 
 
+
 Bedeutet Sparen für dich grauen Alltag, schlechte Laune und das Gefühl, sich nichts mehr gönnen zu dürfen? Dann verwechselst du Knausrigkeit mit Frugalismus.
 
 Frugalisten verzichten nicht auf Dinge, die ihnen echte Freude bereiten – sie eliminieren lediglich rücksichtslos jene Ausgaben, die keinen echten Lebenswert stiften: überteuerte Impulskäufe, ungenutzte Abos und teure Statussymbole. Mit den richtigen **Frugalismus-Tipps** entsteht jeden Monat ein Überschuss von **350 € bis 600 €**, der auf einem gut verzinsten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) oder in breit gestreuten Sparplänen für dich arbeitet. So programmierst du deine Finanzen auf Freiheit – ohne Verzicht, der wehtut.
@@ -72,7 +73,7 @@ Prüfe deine Kontoauszüge der letzten drei Monate: Welche Streaming-Dienste, Fi
 Tägliches Auswärtsessen in der Mittagspause oder spontane Snacks kosten schnell 10 € bis 15 € am Tag (ca. 250 € im Monat). Wer mit Einkaufszettel einkauft und Mahlzeiten für zwei bis drei Tage vorkocht, senkt seine Verpflegungskosten auf unter 6 € am Tag und spart **über 150 € im Monat**.
 
 ### 4. Den Notgroschen zuerst aufbauen
-Bevor du an der Börse investierst, baue drei bis sechs Monatsausgaben als eiserne Reserve auf einem sicheren [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) auf. So musst du bei unvorhergesehenen Notfällen niemals teure Dispokredite in Anspruch nehmen.
+Bevor du an der Börse investierst, baue drei bis sechs Monatsausgaben als eiserne Reserve auf einem sicheren Tagesgeldkonto auf. So musst du bei unvorhergesehenen Notfällen niemals teure Dispokredite in Anspruch nehmen.
 
 ### 5. Das Prinzip „Pay Yourself First“
 Überweise deine Sparrate nicht am Monatsende (wenn meist nichts mehr übrig ist), sondern richte einen Dauerauftrag ein, der direkt am Tag nach dem Gehaltseingang 15 bis 25 % deines Gehalts auf dein Sparkonto transferiert.

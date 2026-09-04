@@ -1,12 +1,12 @@
 # 🔎 CONTENT-AUDIT-REPORT (content_audit.py)
 
-**Stand:** 2026-09-04 14:34 UTC
+**Stand:** 2026-09-04 17:55 UTC
 
 ## 🎯 Wichtigster Befund (fuer redaktionellen Ausbau)
 
 🔢 Abstrakte Texte ohne Zahlen – jeder Geld-Text braucht einen Zahlen-Anker im Fliesstext.
 
-**Artikel:** 3 · **mit Funden:** 3 · **Funde gesamt:** 4 · **C3 auto-geheilt:** 0
+**Artikel:** 4 · **mit Funden:** 3 · **Funde gesamt:** 4 · **C3 auto-geheilt:** 0
 
 | Kategorie | Funde |
 |---|---|
@@ -20,10 +20,10 @@
   - C1 dünn: 283 woerter < 1400
   - C4 keine konkrete Zahl mit Euro/Prozent im Fliesstext
 
-**`2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt`** (1682w)
+**`2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt`** (1678w)
   - C4 keine konkrete Zahl mit Euro/Prozent im Fliesstext
 
-**`2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich`** (1515w)
+**`2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise`** (1460w)
   - C2 kein Fazit (h2/h3)
 
 

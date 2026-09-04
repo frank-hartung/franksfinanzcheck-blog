@@ -310,23 +310,23 @@
    "ok": true
   },
   {
-   "slug": "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt",
-   "title": "Digitaler Turbo: Warum der DNS-Hack dein Netz besc",
-   "pillar": "internet-dsl",
-   "fixed": 1,
-   "errors": [],
-   "infos": [],
-   "ok": true
-  },
-  {
    "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
-   "title": "Finanzielle Freiheit erreichen: Denke dich reich!",
+   "title": "Finanzielle Freiheit erreichen: Denke dich reich! ",
    "pillar": "frugalismus",
    "fixed": 0,
    "errors": [],
    "infos": [
     "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
+   "ok": true
+  },
+  {
+   "slug": "2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise",
+   "title": "Flugtickets günstig buchen: Strategien für deine R",
+   "pillar": "mietwagen",
+   "fixed": 1,
+   "errors": [],
+   "infos": [],
    "ok": true
   }
  ]
