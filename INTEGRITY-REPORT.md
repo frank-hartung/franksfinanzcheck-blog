@@ -1,10 +1,12 @@
 # 🔐 INTEGRITY-REPORT
 
-**Stand:** 2026-09-02 21:06 UTC · HEAD: `4a3b936`
+**Stand:** 2026-09-04 06:48 UTC · HEAD: `8ecbfef`
 **Verlade-Ebene:** 40 Dateien gelockt
 **Gesperrte kritische Knoten:** 7
 
-🎉 Integritaet: Der Kern entspricht exakt dem letzten signierten Zustand.
 
+## 🟠 Festrelevante Abweichungen
+
+- `layouts/pillar/single.html`
 ---
 _Selbsttest vor jedem Start. Kritisch unterschreitet und Frank heißt Schritt._

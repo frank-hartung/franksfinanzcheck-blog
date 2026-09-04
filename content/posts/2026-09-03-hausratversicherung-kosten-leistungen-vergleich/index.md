@@ -24,6 +24,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 ---
 
+
 Stell dir vor, du kommst nach einem langen Wochenende nach Hause und die Wohnungstür steht offen. Im Flur liegt dein Laptop, daneben die leere Hülle. Im Schlafzimmer fehlt der Schmuck aus der Nachttischschublade, im Wohnzimmer der Fernseher. Die Polizei schätzt den Schaden auf 18.000 Euro – deine Ersparnisse decken das nicht.
 
 Genau für diesen Moment gibt es die Hausratversicherung. Sie ersetzt den gesamten Hausrat nach einem Einbruch zum Neuwert. Trotzdem zögern viele, weil sie den Tarif für teuer halten oder die Leistungen nicht durchschauen. Dabei kostet ein solider Schutz für eine normale Wohnung oft weniger als eine Pizza-Lieferung pro Monat.
@@ -137,7 +138,7 @@ Mit dieser Liste findest du einen Schutz, der im Ernstfall trägt – ohne dass 
 
 ## Häufige Fragen zur Hausratversicherung
 
-**Was ist der Unterschied zwischen Hausrat- und Wohngebäudeversicherung?** Die Hausratversicherung versichert deine beweglichen Sachen, also Möbel, Elektronik und Kleidung. Die [Wohngebäudeversicherung](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/) sichert dagegen das Gebäude selbst, also Wände, Dach und feste Einbauten. Eigentümer brauchen beide, Mieter nur die Hausratversicherung.
+**Was ist der Unterschied zwischen Hausrat- und Wohngebäudeversicherung?** Die Hausratversicherung versichert deine beweglichen Sachen, also Möbel, Elektronik und Kleidung. Die Wohngebäudeversicherung sichert dagegen das Gebäude selbst, also Wände, Dach und feste Einbauten. Eigentümer brauchen beide, Mieter nur die Hausratversicherung.
 
 **Muss ich jede einzelne Sache angeben?** Nein. Du vereinbarst eine pauschale Versicherungssumme anhand der Wohnfläche. Einzelne Gegenstände musst du nur bei sehr hohen Werten wie teurem Schmuck gesondert eintragen.
 

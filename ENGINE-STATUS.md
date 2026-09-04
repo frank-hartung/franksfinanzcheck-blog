@@ -1,8 +1,8 @@
 # 🤖 ENGINE-STATUS (Content-Engine v2)
 
-**Letzter Lauf:** 2026-09-02 06:35 UTC
-**Status:** OK
+**Letzter Lauf:** 2026-09-04 06:42 UTC
+**Status:** WARN
 
-2 Artikel heute (live: 2) · 1 NEU · 1 recycelt | Ziel: 2-2 an Mo/Mi/Fr
+0 Artikel live heute (0 NEU · 0 recycelt · 1 Entwurf) | Ziel: 2-2 LIVE an Mo/Mi/Fr | ⚠ unter LIVE-Mindestziel
 
 _Wird bei jedem Lauf der Content-Engine v2 aktualisiert._
