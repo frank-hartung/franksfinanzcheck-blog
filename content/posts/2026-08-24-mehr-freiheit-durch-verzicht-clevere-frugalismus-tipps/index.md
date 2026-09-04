@@ -73,7 +73,7 @@ Prüfe deine Kontoauszüge der letzten drei Monate: Welche Streaming-Dienste, Fi
 Tägliches Auswärtsessen in der Mittagspause oder spontane Snacks kosten schnell 10 € bis 15 € am Tag (ca. 250 € im Monat). Wer mit Einkaufszettel einkauft und Mahlzeiten für zwei bis drei Tage vorkocht, senkt seine Verpflegungskosten auf unter 6 € am Tag und spart **über 150 € im Monat**.
 
 ### 4. Den Notgroschen zuerst aufbauen
-Bevor du an der Börse investierst, baue drei bis sechs Monatsausgaben als eiserne Reserve auf einem sicheren Tagesgeldkonto auf. So musst du bei unvorhergesehenen Notfällen niemals teure Dispokredite in Anspruch nehmen.
+Bevor du an der Börse investierst, baue drei bis sechs Monatsausgaben als eiserne Reserve auf einem sicheren [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) auf. So musst du bei unvorhergesehenen Notfällen niemals teure Dispokredite in Anspruch nehmen.
 
 ### 5. Das Prinzip „Pay Yourself First“
 Überweise deine Sparrate nicht am Monatsende (wenn meist nichts mehr übrig ist), sondern richte einen Dauerauftrag ein, der direkt am Tag nach dem Gehaltseingang 15 bis 25 % deines Gehalts auf dein Sparkonto transferiert.

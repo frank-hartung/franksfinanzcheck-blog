@@ -1,9 +1,9 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-04 14:35 UTC · **Modus:** FIX
+**Stand:** 2026-09-04 17:55 UTC · **Modus:** FIX
 
-- Artikel: **31**
-- Geheilt: **3**
+- Artikel: **32**
+- Geheilt: **1**
 - Offene Issues: **0**
 - Covers: 1 Titel-Stale + fehlende nachgezogen
 
@@ -49,7 +49,8 @@
 | ✅ | `2026-09-03-hausratversicherung-kosten-leistungen-vergleich` *(draft)* | — |
 | ✅ | `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` *(draft)* | — |
 | ✅ | `2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt` *(draft)* | — |
-| ✅ | `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` | — |
+| ✅ | `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` *(draft)* | — |
+| ✅ | `2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise` *(draft)* | — |
 | ✅ | `2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh` *(draft)* | — |
 
 ## Selbstheilung (diese Runde)
