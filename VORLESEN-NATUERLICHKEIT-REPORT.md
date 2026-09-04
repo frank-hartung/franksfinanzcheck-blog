@@ -1,4 +1,4 @@
-# VORLESEN-NATUERLICHKEIT-REPORT — die männliche Stimme klingt wie ein Mensch (v8)
+# VORLESEN-NATUERLICHKEIT-REPORT — die männliche Stimme klingt wie ein Mensch (v9)
 
 **Datum:** 04.09.2026
 **Ziel:** Vorlese-Funktion **kostenlos** deutlich natürlicher machen — **männliche Stimme**, **Deutsch und Englisch**, **ohne Sprach-Umschalter**.
@@ -58,7 +58,7 @@ Wer keinerlei Textübertragung will, fährt `--backend piper` und hat trotzdem e
 
 ---
 
-## 3. Die sieben Natürlichkeits-Hebel
+## 3. Die zehn Natürlichkeits-Hebel
 
 1. **Ein Sprecher pro Artikel, nie pro Satz.** Die Backend-Wahl wird je Sprache **einmal** getroffen und für den ganzen Beitrag beibehalten (`Engine.by_lang`). Stimmenwechsel innerhalb eines Artikels klingt sofort nach Maschine.
 
@@ -71,7 +71,7 @@ Wer keinerlei Textübertragung will, fährt `--backend piper` und hat trotzdem e
    Zahlen → Wörter (`1299` → „eintausendzweihundertneunundneunzig"), Währungen (`1.299,50 €` → „eintausendzweihundertneunundneunzig Euro und fünfzig Cent"), Prozent, Kommazahlen, Tagesdaten (`12.08.2026` → „zwölfter August zweitausendsechsundzwanzig"), Jahreszahlen in deutscher Sprechweise, Abkürzungen (`z. B.`, `u. a.`, `bzw.`), Akronyme (`ETF` → „E T F"), URLs als Kurzform („Link zu check24 Punkt de"), römische Ziffern in Paragrafen (`§ 35 SGB II` → „SGB zwei"), Telefonnummern, Maßeinheiten.
    **Reihenfolge:** erst Sprach-Routing, **dann** Normalisierung — englische Sätze bekommen englische Zahlenregeln.
 
-5. **Rollen-Prosodie statt Einheitsbrei.** Jede Block-Rolle hat Tempo, Tonlage, Lautstärke und Pausen (`PROSODY`, Rezept `ff-prosody-v3`) — **identisch** in Tonspur und Browser:
+5. **Rollen-Prosodie statt Einheitsbrei.** Jede Block-Rolle hat Tempo, Tonlage, Lautstärke und Pausen (`PROSODY`, Rezept `ff-prosody-v4`) — **identisch** in Tonspur und Browser:
 
    | Rolle | Tempo | Tonlage | Lautstärke | Pause davor/danach |
    |---|---|---|---|---|
@@ -92,6 +92,12 @@ Wer keinerlei Textübertragung will, fährt `--backend piper` und hat trotzdem e
 
 7. **Mastering auf Podcast-Norm (EBU R128).** Hochpass 70 Hz (nimmt das Rumpeln), Ziellautheit **−16 LUFS**, True-Peak-Grenze **−1,5 dB**, Mono 24 kHz, MP3 mit 48 kbit/s (Sprache braucht nicht mehr). Ohne `ffmpeg` greift zumindest die Peak-Normalisierung — besser als unbearbeitet.
 
+8. **Satzmelodie: Fragen steigen, Ausrufe betonen.** Ein Artikel, der nur aus Feststellungen besteht, klingt wie ein Kontoauszug — deshalb wird jeder Satz auf seine **Emotion** geprüft (`sentence_emotion`, Rezept `ff-prosody-v4`): Endet er auf `?`, wird er minimal **höher** gesprochen (+0,05 Tonlage) und erhält **mehr Pausenraum** (+80 ms, `EMO_AFTER_MS`); `!` bekommt +0,02 Tonlage und +50 ms. Gelesen wird er minimal ruhiger. **Parität:** Dieselbe Logik läuft im Browser-Pfad (`proseSentences` → `autoPitch`, `pauseAfterChunk`, `effectiveRateFor` — exakt +0,05/+0,02 Tonlage und +80/+50 ms), damit Tonspur und Web-Speech nicht auseinanderlaufen. Fragen/Ausrufe bleiben eigene Sprecheinheiten, Feststellungen werden im Browser zu Atemgruppen gebündelt.
+
+9. **DC-Offset entfernen (Knackschutz an Schnittstellen).** Neural-Engines und Konvertierungsschritte hinterlassen oft einen kleinen konstanten Versatz der Wellenform um die Nulllinie (`dc_offset_remove`, Rezept `ff-backends-v3`). Zwei beim Überblenden antreffende Segmente beginnen dann nicht bei 0 und erzeugen an der Schnittstelle hörbare **Knackser**. Das Subtrahieren des Mittelwerts ist verlustfrei und bleibt ein No-Op, solange der Offset unter 8 LSB liegt (kein „Aufdrehen" von Rauschen).
+
+10. **Broadband-Denoise gegen Grund- und Zischrauschen.** Ein Hochpass allein entfernt nur das tiefe Brummen. `broadband_denoise_wav` (ffmpeg `afftdn=nr=9:nf=-32:tn=1`, Rezept `ff-backends-v3`) senkt das Rauschband über die gesamte Sprachbreite — konservativ (nr=9), damit die Stimme lebendig bleibt. Drei Fallback-Stufen (`afftdn=nr=9:nf=-32:tn=1` → `afftdn=nr=9` → `afftdn` → unverändert), damit auch ältere ffmpeg-Builds ein Ergebnis liefern; ohne ffmpeg bleibt der Puffer unverändert und das Mastering (Hochpass, DC-Offset, Lautheit) greift trotzdem.
+
 ### Zusätzliche Absicherung: Nur-Männlich-Garantie (v8)
 
 Die Stimmenwahl im Browser-Pfad ist verschärft worden, weil eine naive Namenserkennung **weibliche** Stimmen als männlich durchwinken konnte:
@@ -110,7 +116,7 @@ Die Stimmenwahl im Browser-Pfad ist verschärft worden, weil eine naive Namenser
 | **Vorab-Test** (`Engine.preflight()`) | Ein Testwörtchen je Sprache, **bevor** Artikel abgearbeitet werden. Ist der Dienst down, wird die Neuvertonung im Lauf übersprungen — statt 25 Artikel × 19 Sätze × Wiederholungen (Minuten ohne Ergebnis) |
 | **Schutzschalter** (`MAX_CONSECUTIVE_FAILURES = 6`) | Fällt der Dienst mitten im Artikel aus, wird abgebrochen; Wiederholung/Wartezeit nur beim ersten Fehler |
 | **Keine lückenhaften Tonspuren** | Fehlt auch nur ein Satz, wird **keine** Datei geschrieben — der Reader bleibt beim Browser-Fallback. Lieber komplett gesprochen als ein Satz, der fehlt (`--keep-partial` zum Erzwingen) |
-| **Inkrementell + Fingerprint** | Unveränderte Artikel werden aus dem letzten `gh-pages`-Stand wiederverwendet. Der Fingerprint enthält Text **und** Rezept (Stimme, Prosodie, Lautheit, `ff-norm-v2`/`ff-prosody-v3`/`ff-backends-v2`) — wer die Stimme wechselt, bekommt neu vertont, statt alte und neue Tracks zu mischen |
+| **Inkrementell + Fingerprint** | Unveränderte Artikel werden aus dem letzten `gh-pages`-Stand wiederverwendet. Der Fingerprint enthält Text **und** Rezept (Stimme, Prosodie, Lautheit, `ff-norm-v2`/`ff-prosody-v4`/`ff-backends-v3`) — wer die Stimme wechselt, bekommt neu vertont, statt alte und neue Tracks zu mischen |
 | **`--limit-new 25`** | Begrenzt die Neuvertonung je Lauf (Gratis-Kontingente, CI-Zeit). Wiederverwendung aus dem Cache bleibt unbegrenzt. Im manuellen Deploy per `audio_backfill` aufhebbar |
 | **`|| echo …`** | Jeder Audio-Schritt ist nicht-blockierend; der Deploy läuft weiter |
 | **Browser-Fallback** | Ohne Tonspur greift automatisch die Web-Speech-Regie (v6/v7) — dieselbe Prosodie, dieselbe männliche Stimmenwahl, dasselbe DE/EN-Routing |
@@ -165,7 +171,7 @@ vertont **denselben** Text mit jeder verfügbaren Stimme und legt `tmp/ab/index.
 | `node --check static/premium/ff-reader.js` | Syntax OK |
 | `python3 scripts/reader_prosody_parity_check.py` (neu: JS ≡ Tonspur) | **94/94 grün** |
 | `python3 scripts/generate_reader_audio.py --selftest` | **80/80 grün** (inkl. CLI-Integration, Vorab-Test, Schutzschalter) |
-| `python3 scripts/reader_tts_backends.py --selftest` | **58/58 grün** |
+| `python3 scripts/reader_tts_backends.py --selftest` | **68/68 grün** (inkl. Satzmelodie, DC-Offset, Denoise) |
 | `node scripts/reader_engine_check.js` | **58/58 grün** |
 | `node scripts/reader_male_voice_highend_test.js` | **58/58 grün** (Abschnitt 8: Multilingual/Neural/Stufen, Female-Veto) |
 | `node scripts/reader_playback_function_test.js` | **12/12 grün** |
@@ -189,6 +195,8 @@ vertont **denselben** Text mit jeder verfügbaren Stimme und legt `tmp/ab/index.
 ---
 
 ## 8. Nächste Schritte (optional, alle kostenlos)
+
+Mit v9 sind drei weitere Kostenlos-Hebel eingebaut (Satzmelodie, DC-Offset-Entfernung, Broadband-Denoise). Da „natürlicher" eine Hör-Entscheidung ist, lohnt ein A/B-Vergleich **mit und ohne** diese Effekte, bevor sie dauerhaft bleiben.
 
 1. **Hörprobe A/B fahren** (`scripts/reader_voice_ab.py --open`) und `natural` gegen `narrator` entscheiden — bei Finanz-Ratgebern gewinnt erfahrungsgemäß `narrator` (Conrad) für lange Texte, `natural` (Florian) für Texte mit vielen englischen Begriffen.
 2. **Actions-Cache für Piper-Stimmen** ergänzen, falls `piper` als feste Stufe genutzt wird (spart ~1–2 min je Deploy).

@@ -122,6 +122,28 @@ def parse_js_prosody(js: str) -> dict[str, dict[str, float]]:
     return out
 
 
+def compare_emo(js_emo: dict) -> None:
+    """Satzmelodie (Tonlage/Tempo/Pausenraum je Emotion) zwischen beiden Regien."""
+    if not js_emo or not js_emo.get("pitch"):
+        skip("Satzmelodie-Vergleich", "Emotion-Konstanten fehlen im Probe")
+        return
+    check("JS-Tonlage je Emotion ≡ Python",
+          js_emo["pitch"] == ttb.EMO_PITCH,
+          f"{js_emo['pitch']} vs {ttb.EMO_PITCH}")
+    check("JS-Tempo je Emotion ≡ Python",
+          js_emo["rate"] == ttb.EMO_RATE,
+          f"{js_emo['rate']} vs {ttb.EMO_RATE}")
+    check("JS-Pausenraum je Emotion ≡ Python",
+          js_emo["afterMs"] == ttb.EMO_AFTER_MS,
+          f"{js_emo['afterMs']} vs {ttb.EMO_AFTER_MS}")
+    check("Fragen werden ruhiger gelesen als Feststellungen",
+          js_emo["rate"].get("question", 1.0) < 1.0 and js_emo["rate"].get("statement", 1.0) == 1.0,
+          str(js_emo["rate"]))
+    check("Ausrufe erhalten mehr Pausenraum als Feststellungen",
+          js_emo["afterMs"].get("exclamation", 0) > 0,
+          str(js_emo["afterMs"]))
+
+
 def compare_prosody(js_prosody: dict) -> None:
     missing = sorted(set(ttb.PROSODY) - set(js_prosody))
     extra = sorted(set(js_prosody) - set(ttb.PROSODY))
@@ -146,6 +168,7 @@ def main() -> int:
     print("— 1) Rollen-Prosodie: Tonspur ≡ Browser-Fallback —")
     if probe and probe.get("prosody"):
         compare_prosody(probe["prosody"])
+        compare_emo(probe.get("emo"))
     else:
         parsed = parse_js_prosody(js_src)
         if parsed:
