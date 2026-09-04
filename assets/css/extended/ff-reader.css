@@ -171,6 +171,11 @@
     background: linear-gradient(90deg, var(--ff-yellow, #FFB300), var(--ff-emerald, #0E5A43));
     transition: width .25s ease;
 }
+.ff-reader-toolbar--playing .ff-reader-progress__bar {
+    /* Der JS-Ticker koppelt die gelbe Spur live an die automatische
+       Sprechtempo-Regie; linear verhindert ein optisches Nachlaufen. */
+    transition: width .12s linear;
+}
 
 /* ---------- Live-Markierung für Absätze, Überschriften & Listen ---------- */
 .ff-reader-active {

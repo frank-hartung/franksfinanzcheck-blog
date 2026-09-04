@@ -235,6 +235,21 @@ function test(name, cond, detail = '') {
     `resume=${s.synth.resumeCalls} calls=${s.synth.speakCalls.length}`);
   test('Resume-Zustand wieder aktiv', s.ids['ff-listen-label'].textContent === 'Pausieren');
 
+  console.log('\n— 1b) Tempo-synchrone gelbe Fortschrittsanzeige —');
+  const progress = createScenario([STEFAN, KATJA, GUY]);
+  progress.synth.autoStart = false; // keine Boundary-Events und kein automatisches Ende
+  progress.listen.dispatch('click');
+  const firstUtterance = progress.synth.speakCalls[0];
+  if (firstUtterance && firstUtterance.onstart) firstUtterance.onstart();
+  await wait(450);
+  const progressWidth = parseFloat(progress.ids['ff-reader-progress-bar'].style.width || '0');
+  test('Fortschrittsleiste läuft auch ohne Boundary-Events sichtbar mit',
+    progressWidth > 0,
+    `width=${progress.ids['ff-reader-progress-bar'].style.width || '0%'}`);
+  test('Fortschritt nutzt das automatisch gesetzte Sprechtempo',
+    firstUtterance && firstUtterance.rate > 0 && firstUtterance.rate !== 1,
+    `rate=${firstUtterance && firstUtterance.rate}`);
+
   console.log('\n— 2) Gehärteter Start-Watchdog —');
   // 2a: Engine „schluckt“ speak() stumm (meldet weder onstart noch busy).
   const silent = createScenario([STEFAN, KATJA, GUY]);

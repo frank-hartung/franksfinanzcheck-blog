@@ -789,6 +789,94 @@
   var nextBtn = doc.getElementById('ff-listen-next');
   var remainEl = doc.getElementById('ff-reader-remaining');
 
+  /* ---------- Tempo-synchroner Fortschritt -----------------------------
+     Die gelbe Leiste darf nicht nur bei Boundary-Events springen: Safari
+     und manche Android-/Chromium-Stimmen liefern diese Events gar nicht
+     oder sehr unregelmäßig. Deshalb läuft ein konservativer Zeit-Ticker
+     pro Sprecheinheit mit, dessen Dauer aus derselben Tempoautomatik
+     (effRate: Rolle × Stimme × Informationsdichte) berechnet wird.
+     Boundary-Events bleiben als präzise Korrektur aktiv. Ergebnis: Die
+     Fortschrittsanzeige bewegt sich passend zum automatisch gewählten
+     Sprechtempo und bleibt auch ohne Boundary-Events verständlich. */
+  var progressTickerId = null;
+  var progressTickerIsRaf = false;
+  var progressTickerRun = 0;
+  var displayedChars = 0;
+  var CHARS_PER_MIN_AT_RATE_1 = 1000;
+
+  function cancelProgressTicker() {
+    if (!progressTickerId) return;
+    try {
+      if (progressTickerIsRaf && win.cancelAnimationFrame) win.cancelAnimationFrame(progressTickerId);
+      else clearTimeout(progressTickerId);
+    } catch (e) {}
+    progressTickerId = null;
+    progressTickerIsRaf = false;
+  }
+
+  function scheduleProgressTick(fn) {
+    if (win.requestAnimationFrame && !reducedMotion) {
+      progressTickerIsRaf = true;
+      progressTickerId = win.requestAnimationFrame(fn);
+    } else {
+      progressTickerIsRaf = false;
+      progressTickerId = setTimeout(fn, reducedMotion ? 250 : 120);
+    }
+  }
+
+  function setProgressChars(chars, allowBackward) {
+    if (!progressBar || !totalChars) return;
+    var next = Math.max(0, Math.min(totalChars, chars || 0));
+    if (!allowBackward && next < displayedChars) next = displayedChars;
+    displayedChars = next;
+    progressBar.style.width = Math.min(100, (displayedChars / totalChars) * 100).toFixed(1) + '%';
+  }
+
+  function estimatedSpeechMs(unit) {
+    if (!unit || !unit.text) return 700;
+    var rate = Math.max(0.45, unit.effRate || quality.rate || 1);
+    var chars = Math.max(1, unit.text.length);
+    var ms = (chars / (CHARS_PER_MIN_AT_RATE_1 * rate)) * 60000;
+    // Kleine Anlaufreserve gegen zu frühes Vorlaufen; Zahlen und sehr
+    // dichte Texte sind bereits über effRate langsamer, erhalten aber noch
+    // einen minimalen Sicherheitspuffer für Web-Speech-Stimmen.
+    if (/\d/.test(unit.text)) ms *= 1.04;
+    if ((unit.words || wordCountOf(unit.text)) > 24) ms *= 1.03;
+    return Math.max(450, Math.min(18000, ms));
+  }
+
+  function startProgressTicker(unit, run) {
+    cancelProgressTicker();
+    if (!progressBar || !totalChars || !unit || !unit.text) return;
+    var localRun = ++progressTickerRun;
+    var base = spokenChars;
+    var len = unit.text.length;
+    var startedAt = Date.now();
+    var duration = estimatedSpeechMs(unit);
+
+    function tick() {
+      if (!reading || !playing || run !== playbackRun || localRun !== progressTickerRun) {
+        cancelProgressTicker();
+        return;
+      }
+      var frac = Math.max(0, (Date.now() - startedAt) / duration);
+      // Während die Stimme noch spricht, endet die Schätzung knapp vor dem
+      // Chunk-Ende. onend setzt anschließend exakt auf den nächsten Start.
+      var capped = Math.min(0.985, frac);
+      setProgressChars(base + len * capped, false);
+      if (capped < 0.985) scheduleProgressTick(tick);
+      else progressTickerId = null;
+    }
+
+    setProgressChars(base, true);
+    scheduleProgressTick(tick);
+  }
+
+  function finishProgressUnit(unit) {
+    cancelProgressTicker();
+    if (unit && unit.text) setProgressChars(spokenChars + unit.text.length, false);
+  }
+
   /* ---------- Speech-Engine-Unlocking ---------------------------------
      Web Speech is not a Web-Audio stream. Creating an AudioContext and
      playing a synthetic chime here caused an extra autoplay surface and,
@@ -2076,13 +2164,13 @@
 
   function highlight(unit) {
     highlightBlock(unit && unit.block ? unit.block : null);
-    if (progressBar && totalChars) {
-      progressBar.style.width = Math.min(100, (spokenChars / totalChars) * 100).toFixed(1) + '%';
-    }
+    setProgressChars(spokenChars, true);
   }
 
   function clearHighlight() {
     blocks.forEach(function (b) { if (b.el) b.el.classList.remove('ff-reader-active'); });
+    cancelProgressTicker();
+    displayedChars = 0;
     if (progressBar) progressBar.style.width = '0%';
     if (remainEl) remainEl.textContent = '';
   }
@@ -2125,6 +2213,7 @@
     retryCounts[index] = 0;
     if (statusEl) statusEl.textContent = texts.speechError;
     spokenChars += unit && unit.text ? unit.text.length : 0;
+    setProgressChars(spokenChars, false);
     speakUnit(index + 1, false);
   }
 
@@ -2189,8 +2278,7 @@
       u.onboundary = function (e) {
         if (!reading || !playing || run !== playbackRun || !progressBar || !totalChars) return;
         if (e && typeof e.charIndex === 'number' && e.charIndex >= 0) {
-          var pct = Math.min(100, ((spokenChars + e.charIndex) / totalChars) * 100);
-          progressBar.style.width = pct.toFixed(1) + '%';
+          setProgressChars(spokenChars + e.charIndex, false);
         }
       };
 
@@ -2213,6 +2301,7 @@
         started = true;
         lastSpeechStartedAt = Date.now();
         clearStartWatchdog();
+        startProgressTicker(unit, run);
       };
 
       u.onend = function () {
@@ -2227,7 +2316,9 @@
         retryCounts[index] = 0;
         errorStreak = 0;
         lastEffRate = unit.effRate || 1;
+        finishProgressUnit(unit);
         spokenChars += unit.text.length;
+        setProgressChars(spokenChars, false);
         /* Fix (aus #169, 04.09.2026): Die nächste Einheit wird VORGEMERKT,
            solange die Atempause läuft. Früher zeigte `cursor` weiter auf die
            bereits gesprochene Einheit – ein Fortsetzen (oder die Keep-Alive-
@@ -2314,7 +2405,9 @@
     index = Math.max(0, Math.min(timeline.length - 1, index));
     spokenChars = 0;
     for (var i = 0; i < index; i++) spokenChars += timeline[i].text.length;
+    setProgressChars(spokenChars, true);
     clearPauseTimer();
+    cancelProgressTicker();
     stopVoicePolling();
     playbackRun += 1;
     retryCounts = {};
@@ -2582,6 +2675,9 @@
       reading = true;
       playing = true;
       spokenChars = 0;
+      displayedChars = 0;
+      cancelProgressTicker();
+      if (progressBar) progressBar.style.width = '0%';
       cursor = 0;
       setListenState('playing');
       setStatus(texts.started);
@@ -2627,11 +2723,15 @@
     reading = true;
     playing = true;
     spokenChars = 0;
+    displayedChars = 0;
+    cancelProgressTicker();
+    if (progressBar) progressBar.style.width = '0%';
     var startIdx = 0;
     if (typeof fromIndex === 'number' && fromIndex > 0 && fromIndex < timeline.length) {
       startIdx = fromIndex;
       for (var i = 0; i < startIdx; i++) spokenChars += timeline[i].text.length;
     }
+    setProgressChars(spokenChars, true);
     cursor = startIdx;
     nextIndex = startIdx;
     setListenState('playing');
@@ -2652,6 +2752,7 @@
     }
     playing = false;
     clearPauseTimer();
+    cancelProgressTicker();
     stopVoicePolling();
     // v7 – Verlagsstandard: Pause ist IMMER ein kontrollierter Abbruch mit
     // Positions-Merken. `speechSynthesis.pause()/resume()` ist über die
@@ -2713,6 +2814,7 @@
     activeUtterances.length = 0;
     win.__ff_active_utterance = null;
     clearPauseTimer();
+    cancelProgressTicker();
     stopVoicePolling();
     stopKeepAlive();
     if (speechSupported) {
