@@ -52,7 +52,7 @@ Bei dieser am weitesten verbreiteten Variante garantiert der Versorger den reine
 Hier garantiert das Energieunternehmen ausschließlich den Beschaffungsanteil des Gases. Erhöht der örtliche Verteilnetzbetreiber die Netzentgelte, wird der Arbeitspreis entsprechend angepasst. Diese Tarife sind oft geringfügig günstiger, bergen jedoch ein Restrisiko bei steigenden Netzkosten in deiner Region.
 
 ### 3. Vollpreisgarantie (Brutto-Preisgarantie)
-Eine Vollpreisgarantie deckt ausnahmslos alle Preisbestandteile inklusive aller Steuern und staatlichen Umlagen ab. Der Brutto-Gesamtpreis bleibt über die vereinbarte Frist absolut unveränderlich. Da der Gasanbieter das gesamte finanzielle Risiko trägt, sind solche Tarife im Arbeitspreis meist etwas teurer kalkuliert.
+Eine Vollpreisgarantie deckt ausnahmslos alle Preisbestandteile inklusive aller Steuern und staatlichen Umlagen ab. Der Brutto-Gesamtpreis bleibt über die vereinbarte Frist absolut unveränderlich. Da der Gasanbieter das gesamte [finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Risiko trägt, sind solche Tarife im Arbeitspreis meist etwas teurer kalkuliert.
 
 ## Tarifvergleich: Grundversorgung versus Festpreistarife
 

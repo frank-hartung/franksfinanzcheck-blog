@@ -1,6 +1,6 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am 2026-09-04 – 33 Artikel geprüft, 209 Funde, 5 korrigiert, 204 offen.
+> **Automatisch** erzeugt am 2026-09-04 – 35 Artikel geprüft, 233 Funde, 12 korrigiert, 221 offen.
 
 ## Offene Punkte
 
@@ -54,7 +54,7 @@
 - `Unbekanntes Wort: „Gasanbieterwechsel“ (Vorschläge: –)`
 - `Unbekanntes Wort: „Vierkantschlüssel“ (Vorschläge: –)`
 - `Unbekanntes Wort: „unbeheizten“ (Vorschläge: –)`
-- … und 154 weitere
+- … und 171 weitere
 
 ---
 *Erzeugt von scripts/spellcheck.py*

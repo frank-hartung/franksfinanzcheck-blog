@@ -124,7 +124,7 @@ Den **DSL-Wechselbonus** alle zwei Jahre mitzunehmen, ist eine der einfachsten M
 ## Häufige Fragen
 
 ### Was ist ein DSL-Wechselbonus?
-Ein DSL-Wechselbonus ist eine finanzielle Prämie für Neukunden, die von einem anderen Festnetzanbieter wechseln. Er wird in Form von Rechnungsgutschriften, Einmalzahlungen oder Cashback ausgezahlt und senkt die Gesamtkosten im ersten Vertragsjahr deutlich.
+Ein DSL-Wechselbonus ist eine [finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Prämie für Neukunden, die von einem anderen Festnetzanbieter wechseln. Er wird in Form von Rechnungsgutschriften, Einmalzahlungen oder Cashback ausgezahlt und senkt die Gesamtkosten im ersten Vertragsjahr deutlich.
 
 ### Wie wird der DSL-Wechselbonus ausgezahlt?
 Die Prämie wird entweder ab dem ersten Abrechnungsmonat als Guthaben mit den Monatsbeiträgen verrechnet oder nach Freischaltung des Anschlusses direkt auf dein Bankkonto überwiesen.

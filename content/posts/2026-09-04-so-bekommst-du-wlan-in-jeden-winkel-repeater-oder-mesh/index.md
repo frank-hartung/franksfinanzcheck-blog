@@ -22,6 +22,7 @@ cover:
   image: "images/covers/2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh.jpg"
   alt: "So bekommst du WLAN in jeden Winkel: Repeater oder Mesh?"
   caption: "Tipp von FranksFinanzcheck"
+kurzantwort: "WLAN-Repeater sind ab ca. 20 Euro die preiswerteste Lösung für einzelne Räume, reduzieren die Datenrate jedoch meist um 50 Prozent. Um dauerhaft Geld zu sparen, kannst du alte Router oft kostenlos als Mesh-Knoten weiternutzen und durch eine automatisierte WLAN-Zeitschaltung die jährlichen Stromkosten um bis zu 15 Euro pro Gerät senken."
 ---
 
 
@@ -53,7 +54,7 @@ Sich gezielt mit dem Thema **So bekommst du WLAN in jeden Winkel: Repeater oder 
 
 
 **Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/)
-**Lesetipp:** [Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/)
+**Lesetipp:** [Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/)
 
 ## Häufige Fragen
 

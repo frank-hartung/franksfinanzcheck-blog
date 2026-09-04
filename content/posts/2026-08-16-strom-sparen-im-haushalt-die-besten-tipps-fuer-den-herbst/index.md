@@ -55,7 +55,7 @@ Ein Wäschetrockner gehört zu den energieintensivsten Großgeräten im Haus (ca
 Für rund 12 € gibt es im Handel handliche Zwischenstecker-Strommessgeräte. Miss den tatsächlichen Verbrauch alter Gefriertruhen, Pumpen oder Desktop-PCs. Oft rechnet sich die Neuanschaffung eines modernen A-Klasse-Geräts schon nach 2 bis 3 Jahren allein durch die Stromersparnis.
 
 ### 8. Stromtarif aktiv vergleichen und wechseln
-Der größte finanzielle Hebel bleibt der Arbeitspreis pro Kilowattstunde. Wer noch in der teuren Grundversorgung feststeckt (oft über 38 Cent/kWh), wechselt zu Anbietern mit Konditionen um 26 bis 29 Cent/kWh. Bei 3.500 kWh Jahresverbrauch sparst du so jährlich über **300 €**.
+Der größte [finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Hebel bleibt der Arbeitspreis pro Kilowattstunde. Wer noch in der teuren Grundversorgung feststeckt (oft über 38 Cent/kWh), wechselt zu Anbietern mit Konditionen um 26 bis 29 Cent/kWh. Bei 3.500 kWh Jahresverbrauch sparst du so jährlich über **300 €**.
 
 
 
@@ -102,8 +102,7 @@ Nimm einen Haushalt mit 3.400 kWh Jahresverbrauch und einem Arbeitspreis von 32
 **Tag 4.** Kühlschrank abtauen, Dichtung prüfen (Blatt Papier muss klemmen), Temperaturen einstellen.  
 **Tag 5–7.** Energiemessgerät hinter Kühlschrank, alten PC, Aquarium-Pumpe, Gefriertruhe im Keller. Alles über 80 €/Jahr Stromkosten ist ein Kandidat für Ersatz.  
 **Tag 8.** Wasch- und Spülprogramme auf Eco, Schleudern auf Maximum, Trockner nur noch für Handtücher und Bettwäsche.  
-**Tag 9–10.** Zählerstand notieren, letzten Abschlag mit dem Verbrauch gegenchecken. Liegt der Abschlag 20 % über dem Ist, Anbieter schriftlich anpassen – sonst finanzierst du den Versorger.  
-**Tag 11–14.** Stromtarif vergleichen, Preisgarantie und Bonusbedingungen lesen, Wechsel anstoßen. Der Altvertrag läuft bis zum Stichtag weiter, eine Versorgungslücke gibt es nicht.
+**Tag 9–10.** Zählerstand notieren, letzten Abschlag mit dem Verbrauch gegenchecken. Liegt der Abschlag 20 % über dem Ist, Anbieter schriftlich anpassen – sonst finanzierst du den Versorger. **Tag 11–14.** Stromtarif vergleichen, Preisgarantie und Bonusbedingungen lesen, Wechsel anstoßen. Der Altvertrag läuft bis zum Stichtag weiter, eine Versorgungslücke gibt es nicht.
 
 ## Was sich 2026 am Strommarkt konkret ändert
 

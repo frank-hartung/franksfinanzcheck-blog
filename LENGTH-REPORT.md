@@ -1,8 +1,8 @@
 # 📏📝 LENGTH-REPORT (length_guard.py)
 
-**Stand:** 2026-09-04 06:48 UTC · Modus: FIX
+**Stand:** 2026-09-04 14:34 UTC · Modus: FIX
 
-**Geprüft:** 0 Seiten | 🔴 0 · 🟡 0 · 🟢 0 · 🟠 0
+**Geprüft:** 2 Seiten | 🔴 0 · 🟡 0 · 🟢 2 · 🟠 0
 
 **Korridor (Premium Google+Pinterest):** Posts 12.000–18.000 Zeichen (Floor 10.000, heil < 10.000) · Pillar 15.000–32.000 Zeichen (Floor 12.000, heil < 12.000)
 
