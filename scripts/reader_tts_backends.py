@@ -19,15 +19,6 @@ Stand 04.09.2026. Dieses Modul ist die Antwort auf zwei Befunde:
 
 Kostenlose Backend-Kette (Reihenfolge `auto`, alle ohne Abo):
 
-  piper  Lokale ONNX-Neuralstimmen (OHF-Voice/piper1-gpl, GPL-3.0 als
-         *Build-Werkzeug*, keine Auslieferung an die Besucher; die
-         Thorsten-Stimme ist frei nutzbar). `de_DE-thorsten-high` /
-         `de_DE-karlsson-low` für DE, `en_US-ryan-high` für EN. Läuft
-         komplett offline auf der CI-CPU, unbegrenzt, deterministisch,
-         lizenzsauber – Standardpriorität. Die Stimme (thorsten/karlsson/
-         ryan) ist in jedem Lauf identisch → exakt reproduzierbare,
-         männliche Tonspur ohne Netz und ohne Key.
-
   edge   Microsoft-Edge-Neuralstimmen über das offene `edge-tts`-Paket.
          Kein API-Key, kein Konto, keine Zeichenkosten. Männliche
          DE-Stimme `de-DE-FlorianMultilingualNeural` (Multilingual v2 –
@@ -36,8 +27,13 @@ Kostenlose Backend-Kette (Reihenfolge `auto`, alle ohne Abo):
          Alternativprofil „narrator": `de-DE-ConradNeural` (der klassische
          männliche Erzähler) + `en-GB-RyanNeural`.
          Liefert echte Wortgrenzen → satzgenaue Timeline statt Schätzung.
-         Hinweis: inoffizieller Endpoint (kein Vertrag, kann sich ändern) –
-         deshalb steht er hinter Piper (Netz-Fallback).
+         High-End-Priorität: das ist die menschlichste kostenlose
+         männliche DE-/EN-Stimme.
+
+  piper  Lokale ONNX-Neuralstimmen (OHF-Voice/piper1-gpl). `de_DE-thorsten-high`
+         / `de_DE-karlsson-low` für DE, `en_US-ryan-high` / `en_GB-alan-medium`
+         für EN. Läuft komplett offline auf der CI-CPU, unbegrenzt,
+         deterministisch, lizenzsauber – Fallback, falls Edge fehlt.
 
   groq   Nur als EN-Notnagel (`canopylabs/orpheus-v1-english`, Stimme
          `daniel`), benötigt GROQ_API_KEY, Free-Tier ≈ 100 Calls/Tag.
@@ -47,15 +43,10 @@ Ohne alle drei Backends erzeugt der Generator keine Tonspur; der Reader
 bleibt dann beim lokalen Web-Speech-Pfad (funktioniert weiterhin, ist
 aber geräteabhängig).
 
-Timbres-Hinweis (Redaktionsentscheidung): Piper hat getrennte Stimmen
-für DE (thorsten/karlsson) und EN (ryan). Ein Artikel, in dem deutsche
-und englische SÄTZE gemischt sind, wechselt dann zwischen zwei Sprechern
-(thorsten ↔ ryan). Edge-Multilingual-v2 (Florian/Andrew) spricht dagegen
-beide Sprachen in EINER Stimme ohne Timbresprung. Für reine DE-Artikel
-(oder nur vereinzelte englische Fachbegriffe im deutschen Satz) ist
-Piper die deterministische, offline-sichere Standardpriorität; für
-laufend zweisprachige Beiträge ggf. `--profile natural --backend edge`
-bzw. manuell `edge` wählen.
+Timbres-Hinweis: Edge-Multilingual-v2 (Florian/Andrew) spricht DE und EN
+in EINER Stimme ohne Timbresprung – das ist die High-End-Voreinstellung.
+Piper hat getrennte Stimmen (thorsten ↔ ryan/alan) und übernimmt offline,
+falls der Edge-Dienst fehlt.
 
 Nutzung aus dem Generator:
 
@@ -91,8 +82,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Normalisierung oder Prosodie erzwingt damit eine Neuvertonung, statt
 # alte Tracks mit neuem Rezept zu mischen.
 NORM_VERSION = "ff-norm-v2"
-PROSODY_VERSION = "ff-prosody-v4"       # v4: Satzmelodie (Frage/Ausruf) in build_units
-BACKENDS_VERSION = "ff-backends-v4"     # v4: Piper (offline) als Standard-Priorität + resilienter Preflight
+PROSODY_VERSION = "ff-prosody-v5"       # v5: ruhigeres Grundtempo (kein Hetzen)
+BACKENDS_VERSION = "ff-backends-v5"     # v5: Edge-Neural zuerst, Knack-/Rauschschutz, nur männliche Piper-EN
 
 TARGET_RATE = 24000          # gemeinsame Abtastrate der Tonspur (Hz)
 TICKS_PER_SECOND = 10_000_000  # edge-tts liefert Offsets in 100-ns-Ticks
@@ -117,7 +108,8 @@ VOICE_PRESETS: dict[str, dict[str, dict[str, list[str]]]] = {
         },
         "piper": {
             "de": ["de_DE-thorsten-high", "de_DE-thorsten-medium", "de_DE-karlsson-low"],
-            "en": ["en_US-ryan-high", "en_GB-alba-medium", "en_US-lessac-medium"],
+            # Nur nachweislich männliche EN-Stimmen (alba = britische Frau).
+            "en": ["en_US-ryan-high", "en_GB-alan-medium"],
         },
         "groq": {
             "de": [],                                   # Orpheus kann kein Deutsch
@@ -133,7 +125,7 @@ VOICE_PRESETS: dict[str, dict[str, dict[str, list[str]]]] = {
         },
         "piper": {
             "de": ["de_DE-thorsten-high", "de_DE-thorsten-medium"],
-            "en": ["en_GB-alba-medium", "en_US-ryan-high"],
+            "en": ["en_GB-alan-medium", "en_US-ryan-high"],
         },
         "groq": {
             "de": [],
@@ -142,19 +134,18 @@ VOICE_PRESETS: dict[str, dict[str, dict[str, list[str]]]] = {
     },
 }
 
-# Kostenlose Backend-Priorität (`auto`): Der OFFLINE-Backend kommt zuerst.
-# Piper läuft komplett lokal auf der CI-CPU (deterministisch, unbegrenzt,
-# keine Zeichenkosten, kein Azure-/Edge-Endpoint, der sich ändern kann) –
-# deshalb ist er die Standardpriorität für eine zuverlässig männliche,
-# knack- und rauschfreie Tonspur. Edge folgt als Netz-Neural-Fallback,
-# falls Piper nicht installiert/keine Stimme lädt; Groq nur als EN-Notnagel.
-BACKEND_ORDER = ("piper", "edge", "groq")
+# Kostenlose Backend-Priorität (`auto`): High-End-Klang zuerst, Bestandsschutz
+# danach. Edge-Multilingual-v2 (Florian/Andrew) ist die menschlichste
+# kostenlose männliche DE-/EN-Stimme – ein Sprecher, kein Timbresprung.
+# Piper (Thorsten/Ryan, offline) übernimmt, wenn der Edge-Dienst fehlt;
+# Groq nur als EN-Notnagel. So bleibt die Tonspur dauerhaft kostenlos.
+BACKEND_ORDER = ("edge", "piper", "groq")
 
 # Männliche Kantaten-Prüfung für den Live-Katalog (edge-tts meldet Gender).
 MALE_NAMES = {
     "florian", "conrad", "bernd", "ralf", "andrew", "brian", "ryan", "guy",
     "christopher", "eric", "thorsten", "karlsson", "daniel", "troy", "austin",
-    "brad", "stefan", "killian", "kilian", "jonas", "alba", "lessac", "alan",
+    "brad", "stefan", "killian", "kilian", "jonas", "alan", "kristoff",
     "mark", "david", "james", "oliver", "arthur", "thomas", "roger", "steffan",
     "george", "jason", "davis", "alfie", "liam", "noah", "harry", "patrick",
 }
@@ -166,6 +157,7 @@ FEMALE_NAMES = {
     "kendra", "cortana", "hazel", "karen", "salli", "jo", "eva", "anna",
     "clara", "lisa", "lena", "marlene", "petra", "ingrid", "ellen", "moira",
     "tessa", "nicole", "kathy", "catherine", "victoria", "helena", "linda",
+    "alba",  # Piper en_GB-alba = britische Frauenstimme
 }
 
 
@@ -891,13 +883,14 @@ PROSODY: dict[str, dict[str, float]] = {
     "outro":         {"rate": 0.92, "pitch": 0.92, "volume": 1.00, "before": 520, "after": 0},
 }
 
-# Grundtempo je Sprache: Neuralstimmen klingen bei −4 % ruhiger und
-# „menschlicher" als in der Voreinstellung, ohne behäbig zu wirken.
-LANGUAGE_RATE = {"de": 0.96, "en": 0.98}
+# Grundtempo je Sprache (v10): Neuralstimmen klingen bei 1.0 gehetzt.
+# 0.88 DE / 0.90 EN ≈ Nachrichtensprecher (~150 Wörter/min), nicht hetzend,
+# nicht schleppend. Das ist der größte kostenlose Hebel gegen „zu schnell".
+LANGUAGE_RATE = {"de": 0.88, "en": 0.90}
 # Männliche Grundtonlage: leichte Absenkung für „Erzähler"-Charakter.
 LANGUAGE_PITCH_HZ = {"de": -2.0, "en": -1.0}
 # Finale Dehnung am Blockende (Sprecher werden am Absatzschluss langsamer).
-FINAL_LENGTHEN = 0.97
+FINAL_LENGTHEN = 0.95
 # Dichte-Bremse: Zahlen-/Komposita-lastige Sätze werden ruhiger gelesen.
 DENSITY_SLOWDOWN = 0.035
 
@@ -915,6 +908,11 @@ def density_factor(text: str) -> float:
     long_words = sum(1 for w in words if len(w) >= 14)
     commas = (text or "").count(",")
     load = (digits / len(words)) * 1.6 + (long_words / len(words)) * 1.2 + min(commas, 6) / 30.0
+    n = len(words)
+    if n > 22:
+        load += 0.45
+    if n > 32:
+        load += 0.45
     return max(0.90, 1.0 - min(load, 2.0) * DENSITY_SLOWDOWN)
 
 
@@ -1015,7 +1013,7 @@ def build_units(blocks: list[tuple[str, str, str]], base_lang: str,
             if is_final and prosody:
                 rate *= FINAL_LENGTHEN
             before = int(prof["before"]) if (s_index == 0 and prosody) else 0
-            after = int(prof["after"]) if (is_final and prosody) else 60
+            after = int(prof["after"]) if (is_final and prosody) else 90
             if prosody:
                 after += EMO_AFTER_MS.get(emo, 0)
             units.append(Unit(
@@ -1188,6 +1186,127 @@ def dc_offset_remove(pcm: bytes) -> bytes:
     return pcm_from_samples([int(round(s - mean)) for s in samples])
 
 
+def micro_fade_pcm(pcm: bytes, rate: int, fade_ms: int = 10) -> bytes:
+    """Ein-/Ausblendung am Segmentrand – Rest-Klickschutz.
+
+    10 ms (nicht 3 ms): Unter ~8 ms bleibt ein Amplitudensprung als Knackser
+    hörbar, darüber verschwindet der Schnitt, ohne dass die Stimme atmet.
+    """
+    n = max(1, int(rate * fade_ms / 1000))
+    samples = pcm_to_samples(pcm)
+    if len(samples) < 2 * n:
+        return pcm
+    for i in range(n):
+        w = (i + 1) / (n + 1)
+        samples[i] = int(samples[i] * w)
+        samples[-1 - i] = int(samples[-1 - i] * w)
+    return pcm_from_samples(samples)
+
+
+def declick_pcm(pcm: bytes, jump: int = 7000) -> bytes:
+    """Glättet Einzel-Sample-Sprünge (digitale Knackser) per Interpolation.
+
+    Neural-Engines und MP3-Decoder hinterlassen gelegentlich einen einzelnen
+    Ausreißer. Der Sprung von z. B. +12000 auf −8000 in einem Sample ist
+    das hörbare „Knack". Interpolation über den Nachbarn entfernt ihn,
+    ohne die Stimme zu färben.
+    """
+    samples = pcm_to_samples(pcm)
+    if len(samples) < 3:
+        return pcm
+    out = samples[:]
+    changed = False
+    for i in range(1, len(out) - 1):
+        if abs(out[i] - out[i - 1]) > jump and abs(out[i] - out[i + 1]) > jump:
+            out[i] = (out[i - 1] + out[i + 1]) // 2
+            changed = True
+    return pcm_from_samples(out) if changed else pcm
+
+
+def soft_limit_pcm(pcm: bytes, floor_db: float = -2.0) -> bytes:
+    """Sanfter Peak-Limiter: fängt Clipping-Spitzen ab, die nach Denoise
+    oder Lautheitsanhebung als Knackser hörbar wären."""
+    threshold = 32767 * (10 ** (floor_db / 20))
+    samples = pcm_to_samples(pcm)
+    out = []
+    for val in samples:
+        a = abs(val)
+        if a > threshold:
+            limited = threshold + (a - threshold) * 0.45
+            val = int((1 if val >= 0 else -1) * min(limited, 32767))
+        out.append(val)
+    return pcm_from_samples(out)
+
+
+# Ziel-Sprechgeschwindigkeit in Zeichen/s (ohne Leerzeichen).
+# Deutscher Nachrichtensprecher ≈ 12 Zeichen/s; Neural-Engines liegen oft
+# bei 16–20 und klingen deshalb gehetzt. Die automatische Tempo-Regie
+# bremst nur, wenn die Engine nachweislich zu schnell gesprochen hat.
+TARGET_CHARS_PER_SEC = {"de": 12.2, "en": 13.4}
+
+
+def tempo_factor_for(text: str, pcm: bytes, rate: int, lang: str) -> float:
+    """1.0 = Tempo belassen, < 1.0 = langsamer (niemals schneller)."""
+    chars = len(re.sub(r"\s+", "", text or ""))
+    dur = (len(pcm) / 2) / max(1, rate)
+    if chars < 12 or dur < 0.18:
+        return 1.0
+    measured = chars / dur
+    key = "en" if str(lang).lower().startswith("en") else "de"
+    target = TARGET_CHARS_PER_SEC.get(key, 12.2)
+    if measured <= target * 1.06:
+        return 1.0
+    return max(0.82, min(1.0, target / measured))
+
+
+def auto_tempo_pcm(pcm: bytes, rate: int, text: str, lang: str,
+                   exe: str | None = None) -> bytes:
+    """Bremst zu schnelle Segmente tonhöhenerhaltend (ffmpeg atempo).
+
+    Ohne ffmpeg ein No-Op – die LANGUAGE_RATE-Bremse greift trotzdem.
+    """
+    factor = tempo_factor_for(text, pcm, rate, lang)
+    if factor >= 0.995:
+        return pcm
+    exe = exe or find_ffmpeg()
+    if not exe:
+        return pcm
+    wav = build_wav(pcm, rate)
+    try:
+        proc = subprocess.run(
+            [exe, "-hide_banner", "-loglevel", "error", "-f", "wav", "-i", "pipe:0",
+             "-af", f"atempo={factor:.4f}", "-ac", "1", "-ar", str(rate),
+             "-f", "s16le", "pipe:1"],
+            input=wav, capture_output=True, timeout=180)
+        if proc.returncode == 0 and proc.stdout:
+            return proc.stdout
+    except (OSError, subprocess.SubprocessError):
+        pass
+    return pcm
+
+
+def segment_is_broken(pcm: bytes, rate: int) -> bool:
+    """Stille, abgebrochene oder leere Segmente – die Engine hat versagt."""
+    if not pcm or len(pcm) < int(rate * 0.06) * 2:
+        return True
+    return rms_db(pcm) < -48.0
+
+
+def heal_segment(pcm: bytes, rate: int, text: str = "", lang: str = "de") -> bytes:
+    """Automatische Fehlerbeseitigung eines Satz-Segments.
+
+    Reihenfolge ist Absicht: erst tote Luft und DC-Versatz weg (sonst
+    rechnet der Declicker auf Stille), dann Knackser, dann Tempo, zuletzt
+    10-ms-Fade auf 0 – der harte Schnitt zur Pause knackt dann nicht.
+    """
+    pcm = trim_silence(pcm, rate)
+    pcm = dc_offset_remove(pcm)
+    pcm = declick_pcm(pcm)
+    pcm = auto_tempo_pcm(pcm, rate, text, lang)
+    pcm = micro_fade_pcm(pcm, rate, fade_ms=10)
+    return pcm
+
+
 def broadband_denoise_wav(wav_bytes: bytes, exe: str | None = None) -> bytes:
     """Spektrale Rauschminderung (Broadband-Denoise) über ffmpeg ``afftdn``.
 
@@ -1198,10 +1317,11 @@ def broadband_denoise_wav(wav_bytes: bytes, exe: str | None = None) -> bytes:
     die gesamte Sprachbreite, ohne die Stimme zu „konservieren\" (kraftlos zu
     machen).
 
-    Konservative Einstellung, damit die Sprache lebendig bleibt:
-      nr=9   Stärke der Reduktion (0–25); 9 ist spürbar, aber unkritisch
-      nf=-32 angenommener Noise-Floor in dBFS (dunkler Raum/Studio)
-      tn=1   Noise-Tracking folgt einem sich langsam ändernden Grundrauschen
+    v10-Kette (High-End, kostenlos):
+      highpass 80 Hz   Brummen/Subsonik
+      lowpass 10 kHz   Zisch-/Kodier-Rauschen oberhalb der Sprache
+      afftdn nr=12     spürbare Rauschminderung, Stimme bleibt lebendig
+      nf=-28 / tn=1    Noise-Floor + Tracking
 
     Robuster Fallback: Fehlt ffmpeg oder versteht die installierte Version die
     Optionen nicht (alte Builds), wird der Puffer unverändert zurückgegeben –
@@ -1218,8 +1338,14 @@ def broadband_denoise_wav(wav_bytes: bytes, exe: str | None = None) -> bytes:
             input=wav_bytes, capture_output=True, timeout=1200)
         return proc.stdout if (proc.returncode == 0 and proc.stdout) else None
 
-    # 1) vollständige Optionen; 2) nur der Kernfilter; 3) unverändert.
-    for filters in ("afftdn=nr=9:nf=-32:tn=1", "afftdn=nr=9", "afftdn"):
+    # 1) Sprachband + Denoise; 2) nur Denoise; 3) Kernfilter; 4) unverändert.
+    for filters in (
+        "highpass=f=80:poles=2,lowpass=f=10000:poles=2,afftdn=nr=12:nf=-28:tn=1",
+        "afftdn=nr=12:nf=-28:tn=1",
+        "afftdn=nr=12",
+        "afftdn=nr=9",
+        "afftdn",
+    ):
         try:
             out = _run(filters)
         except (OSError, subprocess.SubprocessError):
@@ -1579,10 +1705,12 @@ class PiperBackend(BaseBackend):
         # Piper: length_scale > 1 = langsamer; noise_w_scale hebt die
         # Variation der Satzmelodie (gegen Monotonie, ohne Rauschen).
         rate = max(0.7, min(1.4, unit.rate * self.rate_scale))
+        # v10: weniger Generator-Rauschen (0.333 statt 0.667), genug
+        # Melodie-Variation über noise_w, Tempo über length_scale.
         cfg = SynthesisConfig(
             length_scale=round(1.0 / rate, 4),
-            noise_scale=0.667,
-            noise_w_scale=0.9,
+            noise_scale=0.333,
+            noise_w_scale=0.75,
             volume=max(0.4, min(1.4, unit.volume * self.volume_scale)),
         )
         pcm_parts: list[bytes] = []
@@ -1660,7 +1788,7 @@ BACKEND_CLASSES = {"edge": EdgeBackend, "piper": PiperBackend, "groq": GroqBacke
 class Engine:
     """Wählt je Sprache das beste verfügbare kostenlose Backend.
 
-    `backend="auto"` probiert piper (offline, Standardpriorität) → edge →
+    `backend="auto"` probiert edge (High-End Neural) → piper (offline) →
     groq. Pro Sprache wird eine Entscheidung getroffen und für den ganzen
     Artikel beibehalten: ein Hörbeitrag mit wechselnden Sprechern klingt
     sofort nach Maschine. Fällt das primäre Backend im Vorab-Test aus
@@ -1764,10 +1892,9 @@ class Engine:
                          PROSODY["p"]["rate"], PROSODY["p"]["pitch"],
                          PROSODY["p"]["volume"], 0, 0, True)
             # Fallthrough-Kette: erst das aktuell gewählte Backend prüfen,
-            # bei Ausfall das nächste verfügbare derselben Sprache (piper →
-            # edge → groq). So bleibt die Tonspur erhalten, auch wenn z. B.
-            # der Piper-Stimmen-Download scheitert – etwa weil der
-            # Offline-Backend zwar importierbar, aber ohne Modell ist.
+            # bei Ausfall das nächste verfügbare derselben Sprache (edge →
+            # piper → groq). So bleibt die Tonspur erhalten, auch wenn z. B.
+            # der Edge-Dienst ausfällt – Piper übernimmt offline.
             insts: list[BaseBackend] = []
             chosen = by_lang.get(lang)
             if chosen is not None:
@@ -1979,6 +2106,37 @@ def selftest() -> int:
     wav_b = build_wav(tone, TARGET_RATE)
     check("Denoise ohne ffmpeg lässt den Puffer unverändert (Fallback)",
           broadband_denoise_wav(wav_b) == wav_b)
+    clicky = pcm_from_samples([4000, 4000, 28000, 4000, 4000])
+    cleaned = declick_pcm(clicky, jump=7000)
+    check("Declick entfernt Einzel-Sample-Sprung",
+          abs(pcm_to_samples(cleaned)[2]) < 12000, str(pcm_to_samples(cleaned)))
+    faded = micro_fade_pcm(tone, TARGET_RATE, fade_ms=10)
+    check("Mikro-Fade legt Segmentränder auf ~0 (Knackschutz)",
+          abs(pcm_to_samples(faded)[0]) < 800 and abs(pcm_to_samples(faded)[-1]) < 800)
+    check("Grundtempo DE ist ruhiger als 0.93 (kein Hetzen)",
+          LANGUAGE_RATE["de"] <= 0.90, str(LANGUAGE_RATE))
+    check("Grundtempo EN ist ruhiger als 0.95",
+          LANGUAGE_RATE["en"] <= 0.92, str(LANGUAGE_RATE))
+    check("High-End-Kette beginnt mit Edge-Neural (nicht Piper)",
+          BACKEND_ORDER[0] == "edge", str(BACKEND_ORDER))
+    fast = pcm_from_samples([8000] * int(TARGET_RATE * 0.4))
+    check("Zu schneller Satz bekommt Tempo-Faktor < 1 (automatische Bremse)",
+          tempo_factor_for("A" * 80, fast, TARGET_RATE, "de") <= 0.90,
+          str(tempo_factor_for("A" * 80, fast, TARGET_RATE, "de")))
+    slow = pcm_from_samples([8000] * int(TARGET_RATE * 3.0))
+    check("Ruhiger Satz bleibt ungebremst (Faktor 1.0)",
+          tempo_factor_for("A" * 20, slow, TARGET_RATE, "de") == 1.0)
+    check("Kaputtes Segment: leerer Puffer", segment_is_broken(b"", TARGET_RATE))
+    check("Gesundes Segment: kein False-Positive",
+          segment_is_broken(tone, TARGET_RATE) is False)
+    healed = heal_segment(tone, TARGET_RATE, text="Hallo Welt.", lang="de")
+    hs = pcm_to_samples(healed)
+    check("heal_segment legt Ränder auf ~0 (10-ms-Fade)",
+          bool(hs) and abs(hs[0]) < 800 and abs(hs[-1]) < 800)
+    piper_en = " ".join(VOICE_PRESETS["natural"]["piper"]["en"]
+                        + VOICE_PRESETS["narrator"]["piper"]["en"]).lower()
+    check("Piper-EN enthält keine Frauenstimme (alba/lessac)",
+          "alba" not in piper_en and "lessac" not in piper_en, piper_en)
 
     print("— Selftest: Backend-Auswahl (nur männlich, DE/EN) —")
     for profile in VOICE_PRESETS:

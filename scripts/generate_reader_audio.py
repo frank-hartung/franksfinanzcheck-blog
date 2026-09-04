@@ -23,17 +23,11 @@ v8 (04.09.2026) – Warum dieses Update nötig war
                             Stimme, kein Timbresprung), EN
                             `en-US-AndrewMultilingualNeural`.
                             Profil „narrator": `de-DE-ConradNeural` +
-                            `en-GB-RyanNeural`.
-    piper   (Standard)       Lokale ONNX-Stimmen (`de_DE-thorsten-high`,
+                            `en-GB-RyanNeural`. High-End-Priorität.
+    piper  (Offline-Fallback) Lokale ONNX-Stimmen (`de_DE-thorsten-high`,
                             `de_DE-karlsson-low` für DE, `en_US-ryan-high`
-                            für EN): offline, unbegrenzt, lizenzsauber,
-                            deterministisch. Läuft komplett auf der
-                            CI-CPU, ohne Netz, ohne Key – zuverlässig
-                            männliche Tonspur.
-    edge                   Microsoft-Edge-Neuralstimmen über das offene
-                            Paket `edge-tts`: kein Key, kein Konto, keine
-                            Zeichenkosten. Netz-Fallback, falls Piper nicht
-                            verfügbar/keine Stimme lädt.
+                            / `en_GB-alan-medium` für EN): offline,
+                            unbegrenzt, lizenzsauber, deterministisch.
     groq                   Nur EN-Notnagel (Orpheus), braucht Key.
 
   Ohne verfügbares Backend wird keine Tonspur geschrieben; der Reader
@@ -55,8 +49,11 @@ Natürlichkeits-Regie (alles kostenlos, alles hier im Repo)
      Biquad-Implementierung), Peak-Limiter und EBU-R128-Lautheit
      −16 LUFS / −1,5 dBTP über ffmpeg.
 
-Rauschen/Knacken werden durch Crossfade, Hochpass, Limiter und stabile
-ffmpeg-Kodierung (Mono, 24 kHz, einstellbare Bitrate) beseitigt.
+Rauschen/Knacken/Hetzen werden automatisch beseitigt (kein Extra-Regler):
+Heal-Kette je Segment (Trim, DC, Declick, Auto-Tempo, 10-ms-Fade),
+Mastering (Hochpass 80 Hz, Declick, Denoise, Soft-Limit, −16 LUFS),
+MP3 64 kbit/s Mono 24 kHz. Stille wird hart an Sprache gesetzt
+(kein Equal-Power-Join Stille+Sprache).
 
 Der Reader (static/premium/ff-reader.js) bevorzugt die Tonspur, wenn sie
 existiert, und fällt sonst automatisch auf die lokale Browser-Stimme
@@ -68,7 +65,7 @@ Aufruf (lokal oder im Deploy-Workflow NACH `hugo --minify`):
       --out-dir public/audio/articles --cache-dir /tmp/ff-audio-cache \
       --backend auto --profile natural [--only <slug>] [--dry-run] [--force]
 
-  · --backend     auto (piper → edge → groq) | edge | piper | groq
+  · --backend     auto (edge → piper → groq) | edge | piper | groq
   · --profile     natural (Multilingual v2) | narrator (Conrad/Ryan)
   · --voice-de/-en  explizite Stimmen-Override (Redaktionsentscheidung)
   · --out-dir     Zielverzeichnis (Deploy: public/audio/articles; lokal:
@@ -123,11 +120,11 @@ import reader_tts_backends as ttb  # noqa: E402  (kostenlose Stimmen-Kette, Auss
 # damit Generator, A/B-Hörtest und Selbsttests dieselbe Quelle benutzen.
 DEFAULT_BACKEND = os.environ.get("FF_AUDIO_BACKEND", "auto")       # auto|edge|piper|groq
 DEFAULT_PROFILE = os.environ.get("FF_AUDIO_PROFILE", "natural")    # natural|narrator
-DEFAULT_BITRATE = int(os.environ.get("FF_AUDIO_BITRATE", "48"))    # kbit/s, Mono 24 kHz
+DEFAULT_BITRATE = int(os.environ.get("FF_AUDIO_BITRATE", "64"))    # kbit/s, Mono 24 kHz
 DEFAULT_LUFS = float(os.environ.get("FF_AUDIO_LUFS", "-16"))       # EBU R128 Ziellautheit
 DEFAULT_PEAK_DB = -1.5                                             # True-Peak-Grenze
 MAX_PAUSE_MS = 900          # Obergrenze einer Sprechpause (sonst wirkt es zerrissen)
-ESTIMATE_CHARS_PER_SEC = 13.5   # Dry-Run-Schätzung ohne Engine
+ESTIMATE_CHARS_PER_SEC = 12.0   # Dry-Run-Schätzung ohne Engine (ruhiges Nachrichtentempo)
 # Deploy-Schutz: Fällt der Sprachdienst aus (Netz, Sperre, Kontingent), würde
 # sonst jeder Satz jedes Artikels einzeln scheitern – mit Wiederholung und
 # Wartezeit. Nach so vielen Fehlern in Folge wird der Artikel abgebrochen.
@@ -507,7 +504,7 @@ def tts_segment_groq(text: str, voice: str, timeout: int = 120, attempts: int = 
 
     Groq hat playai-tts am 31.12.2025 abgeschaltet; der Ersatz
     `canopylabs/orpheus-v1-english` kennt kein Deutsch. Der reguläre Pfad
-    läuft deshalb über reader_tts_backends.Engine (piper → edge → groq).
+    läuft deshalb über reader_tts_backends.Engine (edge → piper → groq).
     """
     unit = ttb.Unit(block=0, text=text, lang="en", role="p", rate=1.0, pitch=1.0,
                     volume=1.0, before_ms=0, after_ms=0, final=True)
@@ -680,7 +677,6 @@ def synthesize_track(units: list, engine, dry_run: bool = False,
                              f"{len(units) - i - 1} Einheiten wurden übersprungen."})
                 break
             continue
-        consecutive = 0
 
         if res.rate != rate and not pcm_parts and not chunks:
             # Erstes Segment bestimmt die Spurrate (z. B. Piper 22,05 kHz ohne
@@ -696,12 +692,43 @@ def synthesize_track(units: list, engine, dry_run: bool = False,
         # Stille an den Rändern kappen, dann rollengerecht neu einsetzen:
         # Neural-Engines liefern oft 200–500 ms „tote Luft" pro Satz –
         # der Rhythmus wirkt dadurch schleppend und unsicher.
-        res_pcm = ttb.trim_silence(res_pcm, rate)
-        # DC-Offset entfernen, BEVOR die Segmente überblendet werden: Ein
-        # konstanter Versatz um die Nulllinie lässt zwei Segmente an der
-        # Schnittstelle nicht bei 0 beginnen → hörbarer Knackser.
-        res_pcm = ttb.dc_offset_remove(res_pcm)
-        res_pcm = _micro_fade(res_pcm, rate, fade_ms=3)
+        # Automatische Fehlerbeseitigung + Tempo + Knackschutz, BEVOR
+        # die Dauer gemessen wird – sonst läuft die Timeline der
+        # gedehnten Tonspur davon. Stille wird hinterher hart an die
+        # Sprache gesetzt (kein Equal-Power-Join Stille+Sprache).
+        res_pcm = ttb.heal_segment(res_pcm, rate, text=u.text, lang=u.lang)
+        if ttb.segment_is_broken(res_pcm, rate):
+            recovered = False
+            if consecutive == 0:
+                try:
+                    time.sleep(0.35)
+                    res2 = engine.synthesize(u)
+                    if res2.rate != rate:
+                        try:
+                            pcm2 = ttb.ffmpeg_decode(ttb.build_wav(res2.pcm, res2.rate), rate)
+                        except RuntimeError:
+                            pcm2 = ttb.resample_pcm_linear(res2.pcm, res2.rate, rate)
+                    else:
+                        pcm2 = res2.pcm
+                    pcm2 = ttb.heal_segment(pcm2, rate, text=u.text, lang=u.lang)
+                    if not ttb.segment_is_broken(pcm2, rate):
+                        res, res_pcm, recovered = res2, pcm2, True
+                except Exception:  # noqa: BLE001
+                    recovered = False
+            if not recovered:
+                consecutive += 1
+                failures.append({"b": u.block, "lang": u.lang, "role": u.role,
+                                 "text": u.text[:80],
+                                 "error": "stilles oder abgebrochenes Segment"})
+                if consecutive >= MAX_CONSECUTIVE_FAILURES:
+                    failures.append({
+                        "b": u.block, "lang": u.lang, "role": "abbruch", "text": "",
+                        "error": f"Abbruch: {consecutive} Einheiten in Folge fehlgeschlagen "
+                                 f"(Sprachdienst nicht erreichbar?) – die restlichen "
+                                 f"{len(units) - i - 1} Einheiten wurden übersprungen."})
+                    break
+                continue
+        consecutive = 0
         dur = pcm_duration_ms(res_pcm, rate)
 
         if pause > 0:
@@ -728,17 +755,9 @@ def synthesize_track(units: list, engine, dry_run: bool = False,
             "duration_ms": t}
 
 
-def _micro_fade(pcm: bytes, rate: int, fade_ms: int = 3) -> bytes:
-    """3 ms Ein-/Ausblendung am Segmentrand (Rest-Klickschutz)."""
-    n = max(1, int(rate * fade_ms / 1000))
-    samples = ttb.pcm_to_samples(pcm)
-    if len(samples) < 2 * n:
-        return pcm
-    for i in range(n):
-        w = (i + 1) / (n + 1)
-        samples[i] = int(samples[i] * w)
-        samples[-1 - i] = int(samples[-1 - i] * w)
-    return ttb.pcm_from_samples(samples)
+def _micro_fade(pcm: bytes, rate: int, fade_ms: int = 10) -> bytes:
+    """10 ms Ein-/Ausblendung am Segmentrand (Knackschutz)."""
+    return ttb.micro_fade_pcm(pcm, rate, fade_ms=fade_ms)
 
 
 def block_chunks(chunks: list[dict]) -> list[dict]:
@@ -772,11 +791,12 @@ def polish_track(pcm: bytes, rate: int, target_lufs: float = DEFAULT_LUFS,
     Player, und unterwegs regelt niemand nach. Ohne ffmpeg greift die
     Peak-Normalisierung (immer noch besser als unbearbeitet).
     """
-    pcm = ttb.highpass_pcm(pcm, rate, fc=70.0)
+    pcm = ttb.highpass_pcm(pcm, rate, fc=80.0)
+    pcm = ttb.declick_pcm(pcm)
+    pcm = ttb.soft_limit_pcm(pcm)
     wav = ttb.build_wav(pcm, rate)
-    # Broadband-Denoise (ffmpeg afftdn) gegen Zisch-/Grundrauschen der Engine
-    # oder der MP3-Kodierung – konservativ, damit die Stimme lebendig bleibt.
-    # Ohne ffmpeg ist es ein No-Op (Hochpass, DC-Offset, Lautheit greifen trotzdem).
+    # Automatische Rauschunterdrückung (ffmpeg afftdn) – immer an, kein Regler.
+    # Ohne ffmpeg ein No-Op (Hochpass, Declick, Soft-Limit, Lautheit greifen trotzdem).
     wav = ttb.broadband_denoise_wav(wav)
     return ttb.loudness_normalize_wav(wav, target_lufs, peak_db)
 
@@ -784,7 +804,7 @@ def polish_track(pcm: bytes, rate: int, target_lufs: float = DEFAULT_LUFS,
 # --------------------------------------------------------------------------
 # Fingerprint + ffmpeg + Injektion
 # --------------------------------------------------------------------------
-GEN_VERSION = "ff-audio-v2"
+GEN_VERSION = "ff-audio-v3"
 
 # Das „Rezept" (Backend, Stimmen, Prosodie, Lautheit, Rezept-Versionen) ist
 # Teil des Fingerprints: Wer die Stimme oder die Regie ändert, bekommt die
@@ -825,9 +845,8 @@ def find_ffmpeg() -> str | None:
 def encode_mp3(wav_bytes: bytes, mp3_path: str, bitrate: int | None = None) -> None:
     """WAV → Mono-MP3 (24 kHz, einstellbare Bitrate) – Podcast-Qualität.
 
-    48 kbit/s Mono ist für Sprache transparent genug und hält die
-    gh-pages-Größe klein (≈ 360 kB je Minute). Wer mehr Reserve für
-    Zischlaute will, nimmt --bitrate 64.
+    64 kbit/s Mono hält Zischlaute und Denoise-Reserve, ohne die
+    gh-pages-Größe zu sprengen (≈ 480 kB je Minute).
     """
     exe = find_ffmpeg()
     if not exe:
@@ -1218,6 +1237,10 @@ def selftest() -> int:
     p_rate = next(u.rate for u in units_p if u.role == "p" and u.lang == "de")
     check("Überschrift wird ruhiger gelesen als Fließtext", h2_rate < p_rate,
           f"h2={h2_rate:.3f} p={p_rate:.3f}")
+    check("Fließtext nicht hetzend (rate ≤ 0.92)", p_rate <= 0.92, f"p={p_rate:.3f}")
+    check("Rezept-Version v3 (High-End-Kette)", GEN_VERSION.startswith("ff-audio-v3"), GEN_VERSION)
+    check("MP3-Bitrate ≥ 64 kbit/s (weniger Kodier-Rauschen)", DEFAULT_BITRATE >= 64,
+          str(DEFAULT_BITRATE))
     warn = next(u for u in units_p if u.role == "warning")
     check("Warnbox bekommt Vor- und Nachpause",
           warn.before_ms >= 400 and warn.after_ms >= 300, f"{warn.before_ms}/{warn.after_ms}")
@@ -1502,7 +1525,7 @@ def main(argv: list[str] | None = None, engine_factory=None) -> int:
     make_engine = engine_factory or ttb.Engine
     ap = argparse.ArgumentParser(
         description="Vorab vertonte Artikel (ZEIT-Standard). Kostenlose Backend-Kette: "
-                    "Piper (lokal, offline, Standard) → edge-tts (männliche Neuralstimmen DE/EN) → "
+                    "edge-tts (männliche Neuralstimmen DE/EN, High-End) → Piper (lokal, offline) → "
                     "Groq Orpheus (nur EN). Ohne Backend bleibt der Browser-Fallback aktiv.")
     ap.add_argument("--html-dir", default=os.path.join(ROOT, "public"))
     ap.add_argument("--out-dir", default=os.path.join(ROOT, "static", "audio", "articles"))
@@ -1525,7 +1548,7 @@ def main(argv: list[str] | None = None, engine_factory=None) -> int:
     # Stimmen-Regie (alles kostenlos, alles ohne Umschalter für die Leser:innen)
     ap.add_argument("--backend", default=DEFAULT_BACKEND,
                     choices=["auto", "edge", "piper", "groq"],
-                    help="auto = piper → edge → groq (Standardpriorität: offline & deterministisch)")
+                    help="auto = edge → piper → groq (Standardpriorität: menschlichste Neuralstimme)")
     ap.add_argument("--profile", default=DEFAULT_PROFILE, choices=sorted(ttb.VOICE_PRESETS),
                     help="natural = Multilingual-v2-Stimmen (ein Sprecher auch für englische "
                          "Fachbegriffe), narrator = Conrad/Ryan (klassischer Erzähler)")
