@@ -34,3 +34,10 @@ __pycache__/
 # Test-Venvs (lokal, 26.08.2026)
 .venv-test/
 .venv/
+
+# Vorlese-TTS (v8, 04.09.2026): lokale Arbeitsdaten & Hörproben
+# · .cache/ff-tts/   Piper-Stimmen (ONNX, je ~60–110 MB) + Arbeitsdaten
+# · tmp/ab/          A/B-Hörproben aus scripts/reader_voice_ab.py
+# Niemals committen – Tonspuren entstehen im Deploy und liegen auf gh-pages.
+.cache/
+tmp/

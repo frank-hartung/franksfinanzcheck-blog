@@ -292,6 +292,33 @@ python3 scripts/redaktions_standard.py --register-korrektur --file content/posts
 
 ---
 
+## 🔊 Vorlese-Funktion (Hörbeitrag auf ZEIT-Niveau, seit 03./04.09.2026)
+
+Jeder Artikel bekommt einen **Vorlesen-Button** mit **männlicher Stimme**, **Deutsch und Englisch automatisch** (ohne Sprach-Umschalter) und seit v8 zusätzlich eine **vorab vertonte Tonspur** in Neural-Qualität. Kostenlos, ohne Abo, ohne Pflicht-API-Key.
+
+| Stufe | Technik | Stimme |
+|---|---|---|
+| **Tonspur** (Vorzug) | `scripts/generate_reader_audio.py` im Deploy → MP3, 24 kHz Mono, −16 LUFS (EBU R128) | edge-tts: `de-DE-FlorianMultilingualNeural` / `en-US-AndrewMultilingualNeural`; sonst Piper: `de_DE-thorsten-high` / `en_US-ryan-high` |
+| **Browser-Fallback** | `static/premium/ff-reader.js` (Web Speech API) | deterministisch männlich gefiltert (Female-Veto + Neural-Matcher), gleiche Regie |
+
+Beide Pfade teilen **dieselbe Regie**: satzgenaues DE/EN-Routing, vollständige Aussprache-Normalisierung (Zahlen, Währungen, Daten, Abkürzungen, URLs, Paragrafen), Rollen-Prosodie (Überschriften tiefer und langsamer, Warnboxen deutlicher, Tabellenzeilen zügiger), Pausen mit Stille-Trimming und Mikro-Fades, Loudness-Mastering. Die **Multilingual-v2**-Stimme spricht englische Fachbegriffe im deutschen Satz mit **derselben** Stimme – kein Timbresprung, der zweite Sprecher verrät.
+
+**Robustheit:** Backend-Kette `edge → piper → groq` (Groq nur Englisch-Notnagel, nie Pflicht), Vorab-Test + Schutzschalter (ein ausgefallener Sprachdienst kostet Sekunden statt Minuten), **keine lückenhaften Tonspuren**, inkrementell per Inhalts-Fingerprint (inkl. Rezept-Versionen), `--limit-new 25` je Deploy, **kein Deploy-Stopp** wegen Audio.
+
+**Schnell-Checks:**
+
+```bash
+python3 scripts/reader_prosody_parity_check.py       # 94 Gates: Tonspur ≡ Browser-Pfad
+python3 scripts/generate_reader_audio.py --selftest  # 80 Gates inkl. CLI-Integration
+python3 scripts/reader_tts_backends.py --selftest    # 58 Gates: Stimmen, Aussprache, Prosodie
+node scripts/reader_male_voice_highend_test.js       # 58 Gates: Nur-Männlich, Multilingual
+python3 scripts/reader_voice_ab.py --open            # A/B-Hörtest: welche Stimme gewinnt?
+```
+
+Reports: `VORLESEN-NATUERLICHKEIT-REPORT.md` (v8, Klang) · `VORLESEN-HIGHEND-REPORT.md` (v6, Klickpfad) · `KURZFASSUNG-HIGHEND-REPORT.md`.
+
+---
+
 ## 🗞️ Premium-Governance (Chefredakteur-Cockpit, seit 01.09.2026)
 
 Die Blogautomatik prüfte schon viel — jetzt **steuert** sie auch. Der Workflow **„Premium-Governance"** (Mo 07:15 MESZ) bündelt vier Wachen, die zuvor fehlten, auf **eine** Ampel:

@@ -30,6 +30,12 @@ const hook = `
   pauseAfterChunk: pauseAfterChunk,
   autoPitch: autoPitch,
   scoreVoice: scoreVoice,
+  premiumTierBonus: premiumTierBonus,
+  hasNeuralNamePrefix: hasNeuralNamePrefix,
+  hasNeuralToken: hasNeuralToken,
+  neuralTokens: neuralTokens,
+  isFemaleCandidate: isFemaleCandidate,
+  PREMIUM_TIERS: PREMIUM_TIERS,
   rankVoicesFromList: rankVoicesFromList,
   dedupeVoices: dedupeVoices,
   isMaleCandidate: isMaleCandidate,
@@ -282,6 +288,84 @@ console.log('\n— 7) Lautschrift & Chunking (Verlagshaus-Standard) —');
   let chunks = H.splitForSpeech('Wer seinen Stromtarif wechselt, spart im Schnitt 420 Euro pro Jahr, weil viele Haushalte noch in teuren Grundversorgungstarifen bleiben, allerdings müssen Verbraucher die Kündigungsfristen beachten, deshalb lohnt sich ein Vergleich.', 'de');
   T('Chunking: Harte Grenze 240 eingehalten', chunks.every(c=>c.text.length<=240), 'max='+Math.max(...chunks.map(c=>c.text.length)));
   T('Chunking: Konnektoren erzeugen Atemgruppen', chunks.length>=3, 'chunks='+chunks.length);
+}
+
+// 8. v8 – Natürlichkeits-Ranking & Multilingual-Neural-Stimmen (04.09.2026)
+console.log('\n— 8) v8: Multilingual-Stimmen, Neural-Präfixe & Tier-Ranking —');
+{
+  const {H, setVoices} = createContext('de','');
+  const EDGE2026 = [
+    V('Microsoft FlorianMultilingual Online (Natural) - German (Germany)','de-DE',{localService:false}),
+    V('Microsoft Conrad Online (Natural) - German (Germany)','de-DE',{localService:false}),
+    V('Microsoft Stefan Online (Natural) - German (Germany)','de-DE',{localService:false}),
+    V('Microsoft Katja Online (Natural) - German (Germany)','de-DE',{localService:false}),
+    V('Microsoft EmmaMultilingual Online (Natural) - German (Germany)','de-DE',{localService:false}),
+    V('Microsoft SeraphinaMultilingual Online (Natural) - German (Germany)','de-DE',{localService:false}),
+    V('Microsoft AndrewMultilingual Online (Natural) - English (United States)','en-US',{localService:false}),
+    V('Microsoft AvaMultilingual Online (Natural) - English (United States)','en-US',{localService:false}),
+    V('de-DE-ConradNeural','de-DE',{localService:false}),
+    V('de-DE-KatjaNeural','de-DE',{localService:false})
+  ];
+  setVoices(EDGE2026);
+  const rDe = H.resolveMaleVoice('de');
+  T('Multilingual-Vorrang: FlorianMultilingual gewinnt (menschlichste DE-Stimme)',
+    !!(rDe.voice && /florianmultilingual/i.test(rDe.voice.name)), rDe.voice && rDe.voice.name);
+  T('Explizit männlich gekennzeichnet', rDe.explicit === true);
+  T('Weibliche Stimmen aussortiert (Katja/Emma/Seraphina)',
+    !!(rDe.voice && !/katja|emma|seraphina/i.test(rDe.voice.name)), rDe.voice && rDe.voice.name);
+  const rEn = H.resolveMaleVoice('en');
+  T('EN ohne Umschalter: AndrewMultilingual statt AvaMultilingual',
+    !!(rEn.voice && /andrewmultilingual/i.test(rEn.voice.name)), rEn.voice && rEn.voice.name);
+
+  T('Präfix: de-DE-ConradNeural gilt als explizit männlich',
+    H.explicitMale(V('de-DE-ConradNeural','de-DE')) === true);
+  T('Präfix-Veto: de-DE-KatjaNeural gilt als weiblich',
+    H.isFemaleCandidate(V('de-DE-KatjaNeural','de-DE')) === true);
+  T('Präfix-Veto: EmmaMultilingualNeural gilt als weiblich',
+    H.isFemaleCandidate(V('Microsoft EmmaMultilingualNeural','de-DE')) === true);
+  T('Präfix-Veto: en-US-AvaMultilingualNeural gilt als weiblich',
+    H.isFemaleCandidate(V('en-US-AvaMultilingualNeural','en-US')) === true);
+  T('Männlich: en-US-AndrewMultilingualNeural',
+    H.explicitMale(V('en-US-AndrewMultilingualNeural','en-US')) === true);
+
+  // Sicherheitsgrenzen des Präfix-Matchers (keine Zufallstreffer)
+  T('Kein Zufallstreffer: „ava" trifft nicht „Available"',
+    H.hasNeuralNamePrefix('Available Voice', ['ava']) === false);
+  T('Kein Zufallstreffer: „nora" trifft nicht „Norbert"',
+    H.hasNeuralNamePrefix('Microsoft Norbert Online', ['nora']) === false);
+  T('Kein Zufallstreffer: „aria" trifft nicht „Bulgarian"',
+    H.hasNeuralNamePrefix('Bulgarian Male Voice', ['aria']) === false);
+  T('Neural-Token-Erkennung: FlorianMultilingualNeural',
+    H.hasNeuralToken('de-DE-FlorianMultilingualNeural', 'multilingual') === true);
+  T('Neural-Token-Erkennung: ConradNeural',
+    H.hasNeuralToken('de-DE-ConradNeural', 'neural') === true);
+
+  // Tier-Ordnung (beste Stufe zählt einmal, keine Summe)
+  const tMulti = H.premiumTierBonus('Microsoft FlorianMultilingual Online');
+  const tNat = H.premiumTierBonus('Microsoft Conrad Online (Natural)');
+  const tNeural = H.premiumTierBonus('Google Neural Voice');
+  const tOnline = H.premiumTierBonus('Microsoft Stefan Online');
+  T('Tier: multilingual > natural', tMulti > tNat, tMulti + '/' + tNat);
+  T('Tier: natural > neural', tNat > tNeural, tNat + '/' + tNeural);
+  T('Tier: neural > online', tNeural > tOnline, tNeural + '/' + tOnline);
+  T('Tier: zusammengezogener Name bekommt die Multilingual-Stufe',
+    H.premiumTierBonus('de-DE-FlorianMultilingualNeural') === tMulti,
+    String(H.premiumTierBonus('de-DE-FlorianMultilingualNeural')));
+  T('Tier zählt einmal (kein Summen-Bonus)',
+    H.premiumTierBonus('multilingual natural neural online studio premium') === tMulti);
+  T('Desktop-Stimme ohne Neural-Kennung: kein Tier-Bonus',
+    H.premiumTierBonus('Anna Desktop Voice') === 0);
+
+  // Ältere Geräte dürfen nicht schlechter gestellt werden
+  setVoices([V('Microsoft Stefan Desktop','de-DE',{localService:true}),
+             V('Microsoft Hedda Desktop','de-DE',{localService:true})]);
+  const rOld = H.resolveMaleVoice('de');
+  T('Fallback auf Desktop-Katalog wählt weiterhin den Mann (Stefan)',
+    !!(rOld.voice && /stefan/i.test(rOld.voice.name)), rOld.voice && rOld.voice.name);
+  setVoices([V('Google Deutsch','de-DE',{localService:false,default:true})]);
+  const rNeutral = H.resolveMaleVoice('de');
+  T('Neutraler Katalog (Google Deutsch) bleibt hörbar, nicht stumm',
+    !!rNeutral.voice && rNeutral.mode !== 'none', rNeutral.mode);
 }
 
 console.log(`\n=== Ergebnis: ${pass} grün, ${fail} rot ===`);
