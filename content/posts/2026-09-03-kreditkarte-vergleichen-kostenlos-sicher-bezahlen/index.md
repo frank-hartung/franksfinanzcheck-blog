@@ -1,10 +1,10 @@
 ---
 title: "Kreditkarte vergleichen: Kostenlos und sicher zahlen"
 description: "Kreditkarte 2026 vergleichen: kostenlose Karten, Fremdwährungsgebühren, Sicherheits-Features und die richtige Abrechnung – mit Checkliste für deinen Alltag."
-date: 2026-09-03T07:45:00Z
+date: 2026-09-04T21:17:05Z
 lastmod: 2026-09-03
-draft: true
-reserve: true
+draft: false
+reserve_published: 2026-09-04
 tags: ["Kreditkarte vergleichen", "Kostenlose Kreditkarte", "Kreditkarte Ausland", "Kreditkarte ohne Gebühren"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"

@@ -1,10 +1,10 @@
 ---
 title: "Hausratversicherung: Was sie kostet und wen sie schützt"
 description: "Hausratversicherung im Check: Kosten, versicherte Gefahren, Unterversicherung und sinnvolle Zusatzbausteine – so findest du den passenden Schutz."
-date: 2026-09-03T07:30:00Z
+date: 2026-09-04T21:17:05Z
 lastmod: 2026-09-03
-draft: true
-reserve: true
+draft: false
+reserve_published: 2026-09-04
 tags: ["Hausratversicherung", "Hausrat Vergleich", "Versicherungen sparen", "Wohnung absichern"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
