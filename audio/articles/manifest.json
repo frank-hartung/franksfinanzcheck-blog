@@ -64,6 +64,17 @@
     "blocks": 78,
     "duration_ms": 902678
   },
+  "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
+    "status": "generate",
+    "blocks": 72,
+    "chunks": 72,
+    "duration_ms": 781887,
+    "fingerprint": "5c7a994ba3b7278489f2",
+    "engines": {
+      "de": "piper:de_DE-thorsten-high"
+    },
+    "failures": 0
+  },
   "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst": {
     "status": "reuse",
     "blocks": 57,
@@ -124,81 +135,50 @@
     "blocks": 62,
     "duration_ms": 662143
   },
-  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-    "status": "generate",
-    "blocks": 63,
-    "chunks": 63,
-    "duration_ms": 600338,
-    "fingerprint": "e2d2d15134d9c6b8cc67",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
-    "status": "generate",
-    "blocks": 105,
-    "chunks": 105,
-    "duration_ms": 917260,
-    "fingerprint": "3838a1658289bbbbc89f",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
-  "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
+  "2026-09-03-hausratversicherung-kosten-leistungen-vergleich": {
     "status": "generate",
     "blocks": 74,
     "chunks": 74,
-    "duration_ms": 732138,
-    "fingerprint": "0bbdfd03a1f43e24cdb6",
+    "duration_ms": 769167,
+    "fingerprint": "d8e8140c0d466fe24cd8",
     "engines": {
       "de": "piper:de_DE-thorsten-high"
     },
     "failures": 0
+  },
+  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
+    "status": "reuse",
+    "blocks": 63,
+    "duration_ms": 600338
+  },
+  "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
+    "status": "reuse",
+    "blocks": 105,
+    "duration_ms": 917260
+  },
+  "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
+    "status": "reuse",
+    "blocks": 74,
+    "duration_ms": 732138
   },
   "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
-    "status": "generate",
+    "status": "reuse",
     "blocks": 65,
-    "chunks": 65,
-    "duration_ms": 706202,
-    "fingerprint": "23c2238cad367c3a7639",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
+    "duration_ms": 706202
   },
   "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
-    "status": "generate",
+    "status": "reuse",
     "blocks": 60,
-    "chunks": 60,
-    "duration_ms": 577978,
-    "fingerprint": "f432b860d3de2c6d4855",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
+    "duration_ms": 577978
   },
   "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
-    "status": "generate",
+    "status": "reuse",
     "blocks": 59,
-    "chunks": 59,
-    "duration_ms": 661524,
-    "fingerprint": "fc3004218a61e7b2baab",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
+    "duration_ms": 661524
   },
   "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
-    "status": "generate",
+    "status": "reuse",
     "blocks": 62,
-    "chunks": 62,
-    "duration_ms": 616260,
-    "fingerprint": "db0457e7d5a9ac1bedbc",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
+    "duration_ms": 616260
   }
 }
