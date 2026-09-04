@@ -111,7 +111,7 @@ Eine Privat­haftpflicht ersetzt keine Hausrat-, keine Wohngebäude- und keine K
 
 ## Fazit: Unverzichtbarer Basisschutz für jeden Geldbeutel
 
-Die **Privathaftpflicht** bildet das Fundament jeder soliden Absicherung. Für den Gegenwert einer Tasse Kaffee im Monat schützt sie dein gesamtes Privatvermögen vor ruinösen Schadenersatzansprüchen und bewahrt deine finanzielle Unabhängigkeit.
+Die **Privathaftpflicht** bildet das Fundament jeder soliden Absicherung. Für den Gegenwert einer Tasse Kaffee im Monat schützt sie dein gesamtes Privatvermögen vor ruinösen Schadenersatzansprüchen und bewahrt deine [finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Unabhängigkeit.
 
 **Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · [Haus sicher schützen: Vorsorge-Update](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) · [Kostenloses Girokonto finden](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/)
 

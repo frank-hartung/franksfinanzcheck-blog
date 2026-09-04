@@ -95,7 +95,7 @@ Ein Tarif mit 29,99 € in den ersten 12 Monaten, 44,99 € danach, 70 € Ro
 - Bereitstellung 69,99 €
 - abzüglich Bonus 100 €
 
-**Summe 989,75 € / 24 = 41,24 € effektiv.** Der Bannerpreis 29,99 € ist damit 37 % zu optimistisch. Genau diese Lücke musst du bei jedem DSL-Vergleich schließen, sonst vergleichst du Äpfel mit Leuchtreklame.
+**Summe 989,75 € / 24 = 41,24 € effektiv.** Der Bannerpreis 29,99 € ist damit 37 % zu optimistisch. Genau diese Lücke musst du bei jedem [DSL-Vergleich](../../posts/2026-08-10-dsl-wechselbonus-sichern/) schließen, sonst vergleichst du Äpfel mit Leuchtreklame.
 
 Zweite Rechnung: Altvertrag nach 24 Monaten ohne Rabatt, 39,99 € plus 5 € Router = 44,99 €. Wechseltarif effektiv 34,50 € inklusive Bonus. Differenz 10,49 € × 24 = **251,76 €**, oft plus ein Router, den du behalten darfst.
 

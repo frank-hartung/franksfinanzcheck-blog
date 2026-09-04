@@ -7,7 +7,7 @@ tags: ["dns hack", "dns privatsphäre", "schnelleres wlan", "internet tipps und 
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["dns hack", "dns privatsphäre", "schnelleres wlan", "internet tipps und tricks", "Digitaler Turbo", "Digitaler", "DNS-Hack", "beschleunigt"]
+keywords: ["dns hack", "dns privatsphäre", "schnelleres wlan", "internet tipps und tricks", "Digitaler Turbo", "DNS-Hack", "beschleunigt"]
 pinwand: Internet & DSL | WLAN-Tipps & Tarife
 pin_title: "Der DNS-Hack: So holst du mehr aus deiner Internetleitung"
 pin_description: "*Werbung | Kleiner Eingriff, spürbarer Effekt: Ein alternativer DNS-Server verkürzt Ladezeiten, filtert oft sogar Schadsoftware und schützt deine Privatsphäre besser als der Standard deines Anbieters. Wir zeigen alle Schritte – auch für Laien. Jetzt Anleitung speichern!"

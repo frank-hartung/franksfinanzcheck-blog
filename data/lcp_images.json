@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-09-04T14:34:01+00:00",
+  "generatedAt": "2026-09-04T14:35:52+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -448,22 +448,6 @@
     },
     "/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/": {
       "image": "images/covers/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/": {
-      "image": "images/covers/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
