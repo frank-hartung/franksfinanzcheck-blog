@@ -24,9 +24,16 @@ v8 (04.09.2026) – Warum dieses Update nötig war
                             `en-US-AndrewMultilingualNeural`.
                             Profil „narrator": `de-DE-ConradNeural` +
                             `en-GB-RyanNeural`.
-    piper                  Lokale ONNX-Stimmen (`de_DE-thorsten-high`,
-                            `en_US-ryan-high`): offline, unbegrenzt,
-                            lizenzsauber, deterministisch.
+    piper   (Standard)       Lokale ONNX-Stimmen (`de_DE-thorsten-high`,
+                            `de_DE-karlsson-low` für DE, `en_US-ryan-high`
+                            für EN): offline, unbegrenzt, lizenzsauber,
+                            deterministisch. Läuft komplett auf der
+                            CI-CPU, ohne Netz, ohne Key – zuverlässig
+                            männliche Tonspur.
+    edge                   Microsoft-Edge-Neuralstimmen über das offene
+                            Paket `edge-tts`: kein Key, kein Konto, keine
+                            Zeichenkosten. Netz-Fallback, falls Piper nicht
+                            verfügbar/keine Stimme lädt.
     groq                   Nur EN-Notnagel (Orpheus), braucht Key.
 
   Ohne verfügbares Backend wird keine Tonspur geschrieben; der Reader
@@ -61,7 +68,7 @@ Aufruf (lokal oder im Deploy-Workflow NACH `hugo --minify`):
       --out-dir public/audio/articles --cache-dir /tmp/ff-audio-cache \
       --backend auto --profile natural [--only <slug>] [--dry-run] [--force]
 
-  · --backend     auto (edge → piper → groq) | edge | piper | groq
+  · --backend     auto (piper → edge → groq) | edge | piper | groq
   · --profile     natural (Multilingual v2) | narrator (Conrad/Ryan)
   · --voice-de/-en  explizite Stimmen-Override (Redaktionsentscheidung)
   · --out-dir     Zielverzeichnis (Deploy: public/audio/articles; lokal:
@@ -500,7 +507,7 @@ def tts_segment_groq(text: str, voice: str, timeout: int = 120, attempts: int = 
 
     Groq hat playai-tts am 31.12.2025 abgeschaltet; der Ersatz
     `canopylabs/orpheus-v1-english` kennt kein Deutsch. Der reguläre Pfad
-    läuft deshalb über reader_tts_backends.Engine (edge → piper → groq).
+    läuft deshalb über reader_tts_backends.Engine (piper → edge → groq).
     """
     unit = ttb.Unit(block=0, text=text, lang="en", role="p", rate=1.0, pitch=1.0,
                     volume=1.0, before_ms=0, after_ms=0, final=True)
@@ -1495,7 +1502,7 @@ def main(argv: list[str] | None = None, engine_factory=None) -> int:
     make_engine = engine_factory or ttb.Engine
     ap = argparse.ArgumentParser(
         description="Vorab vertonte Artikel (ZEIT-Standard). Kostenlose Backend-Kette: "
-                    "edge-tts (männliche Neuralstimmen DE/EN) → Piper (lokal, offline) → "
+                    "Piper (lokal, offline, Standard) → edge-tts (männliche Neuralstimmen DE/EN) → "
                     "Groq Orpheus (nur EN). Ohne Backend bleibt der Browser-Fallback aktiv.")
     ap.add_argument("--html-dir", default=os.path.join(ROOT, "public"))
     ap.add_argument("--out-dir", default=os.path.join(ROOT, "static", "audio", "articles"))
@@ -1518,7 +1525,7 @@ def main(argv: list[str] | None = None, engine_factory=None) -> int:
     # Stimmen-Regie (alles kostenlos, alles ohne Umschalter für die Leser:innen)
     ap.add_argument("--backend", default=DEFAULT_BACKEND,
                     choices=["auto", "edge", "piper", "groq"],
-                    help="auto = edge → piper → groq (Voreinstellung)")
+                    help="auto = piper → edge → groq (Standardpriorität: offline & deterministisch)")
     ap.add_argument("--profile", default=DEFAULT_PROFILE, choices=sorted(ttb.VOICE_PRESETS),
                     help="natural = Multilingual-v2-Stimmen (ein Sprecher auch für englische "
                          "Fachbegriffe), narrator = Conrad/Ryan (klassischer Erzähler)")

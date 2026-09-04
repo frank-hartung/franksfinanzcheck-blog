@@ -19,6 +19,15 @@ Stand 04.09.2026. Dieses Modul ist die Antwort auf zwei Befunde:
 
 Kostenlose Backend-Kette (Reihenfolge `auto`, alle ohne Abo):
 
+  piper  Lokale ONNX-Neuralstimmen (OHF-Voice/piper1-gpl, GPL-3.0 als
+         *Build-Werkzeug*, keine Auslieferung an die Besucher; die
+         Thorsten-Stimme ist frei nutzbar). `de_DE-thorsten-high` /
+         `de_DE-karlsson-low` für DE, `en_US-ryan-high` für EN. Läuft
+         komplett offline auf der CI-CPU, unbegrenzt, deterministisch,
+         lizenzsauber – Standardpriorität. Die Stimme (thorsten/karlsson/
+         ryan) ist in jedem Lauf identisch → exakt reproduzierbare,
+         männliche Tonspur ohne Netz und ohne Key.
+
   edge   Microsoft-Edge-Neuralstimmen über das offene `edge-tts`-Paket.
          Kein API-Key, kein Konto, keine Zeichenkosten. Männliche
          DE-Stimme `de-DE-FlorianMultilingualNeural` (Multilingual v2 –
@@ -28,13 +37,7 @@ Kostenlose Backend-Kette (Reihenfolge `auto`, alle ohne Abo):
          männliche Erzähler) + `en-GB-RyanNeural`.
          Liefert echte Wortgrenzen → satzgenaue Timeline statt Schätzung.
          Hinweis: inoffizieller Endpoint (kein Vertrag, kann sich ändern) –
-         deshalb steht Piper als Fallback bereit.
-
-  piper  Lokale ONNX-Neuralstimmen (OHF-Voice/piper1-gpl, GPL-3.0 als
-         *Build-Werkzeug*, keine Auslieferung an die Besucher; die
-         Thorsten-Stimme ist frei nutzbar). `de_DE-thorsten-high` +
-         `en_US-ryan-high`. Läuft komplett offline auf der CI-CPU,
-         unbegrenzt, deterministisch, lizenzsauber.
+         deshalb steht er hinter Piper (Netz-Fallback).
 
   groq   Nur als EN-Notnagel (`canopylabs/orpheus-v1-english`, Stimme
          `daniel`), benötigt GROQ_API_KEY, Free-Tier ≈ 100 Calls/Tag.
@@ -43,6 +46,16 @@ Kostenlose Backend-Kette (Reihenfolge `auto`, alle ohne Abo):
 Ohne alle drei Backends erzeugt der Generator keine Tonspur; der Reader
 bleibt dann beim lokalen Web-Speech-Pfad (funktioniert weiterhin, ist
 aber geräteabhängig).
+
+Timbres-Hinweis (Redaktionsentscheidung): Piper hat getrennte Stimmen
+für DE (thorsten/karlsson) und EN (ryan). Ein Artikel, in dem deutsche
+und englische SÄTZE gemischt sind, wechselt dann zwischen zwei Sprechern
+(thorsten ↔ ryan). Edge-Multilingual-v2 (Florian/Andrew) spricht dagegen
+beide Sprachen in EINER Stimme ohne Timbresprung. Für reine DE-Artikel
+(oder nur vereinzelte englische Fachbegriffe im deutschen Satz) ist
+Piper die deterministische, offline-sichere Standardpriorität; für
+laufend zweisprachige Beiträge ggf. `--profile natural --backend edge`
+bzw. manuell `edge` wählen.
 
 Nutzung aus dem Generator:
 
@@ -79,7 +92,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # alte Tracks mit neuem Rezept zu mischen.
 NORM_VERSION = "ff-norm-v2"
 PROSODY_VERSION = "ff-prosody-v4"       # v4: Satzmelodie (Frage/Ausruf) in build_units
-BACKENDS_VERSION = "ff-backends-v3"     # v3: DC-Offset + Broadband-Denoise (afftdn)
+BACKENDS_VERSION = "ff-backends-v4"     # v4: Piper (offline) als Standard-Priorität + resilienter Preflight
 
 TARGET_RATE = 24000          # gemeinsame Abtastrate der Tonspur (Hz)
 TICKS_PER_SECOND = 10_000_000  # edge-tts liefert Offsets in 100-ns-Ticks
@@ -129,7 +142,13 @@ VOICE_PRESETS: dict[str, dict[str, dict[str, list[str]]]] = {
     },
 }
 
-BACKEND_ORDER = ("edge", "piper", "groq")
+# Kostenlose Backend-Priorität (`auto`): Der OFFLINE-Backend kommt zuerst.
+# Piper läuft komplett lokal auf der CI-CPU (deterministisch, unbegrenzt,
+# keine Zeichenkosten, kein Azure-/Edge-Endpoint, der sich ändern kann) –
+# deshalb ist er die Standardpriorität für eine zuverlässig männliche,
+# knack- und rauschfreie Tonspur. Edge folgt als Netz-Neural-Fallback,
+# falls Piper nicht installiert/keine Stimme lädt; Groq nur als EN-Notnagel.
+BACKEND_ORDER = ("piper", "edge", "groq")
 
 # Männliche Kantaten-Prüfung für den Live-Katalog (edge-tts meldet Gender).
 MALE_NAMES = {
@@ -1641,9 +1660,12 @@ BACKEND_CLASSES = {"edge": EdgeBackend, "piper": PiperBackend, "groq": GroqBacke
 class Engine:
     """Wählt je Sprache das beste verfügbare kostenlose Backend.
 
-    `backend="auto"` probiert edge → piper → groq. Pro Sprache wird eine
-    Entscheidung getroffen und für den ganzen Artikel beibehalten: ein
-    Hörbeitrag mit wechselnden Sprechern klingt sofort nach Maschine.
+    `backend="auto"` probiert piper (offline, Standardpriorität) → edge →
+    groq. Pro Sprache wird eine Entscheidung getroffen und für den ganzen
+    Artikel beibehalten: ein Hörbeitrag mit wechselnden Sprechern klingt
+    sofort nach Maschine. Fällt das primäre Backend im Vorab-Test aus
+    (z. B. Piper-Stimme lässt sich nicht laden), wandert die Wahl
+    automatisch zum nächsten verfügbaren Backend derselben Sprache.
     """
 
     def __init__(self, backend: str = "auto", profile: str = "natural",
@@ -1733,18 +1755,54 @@ class Engine:
         """
         probe_text = {"de": "Test.", "en": "Test."}
         result: dict[str, tuple[bool, str]] = {}
+        requested = getattr(self, "requested", "auto")
+        order = list(BACKEND_ORDER) if requested == "auto" else [requested]
+        backends = getattr(self, "backends", {})
+        by_lang = getattr(self, "by_lang", {})
         for lang in self.usable_langs():
             probe = Unit(0, probe_text.get(lang, "Test."), lang, "p",
                          PROSODY["p"]["rate"], PROSODY["p"]["pitch"],
                          PROSODY["p"]["volume"], 0, 0, True)
-            try:
-                res = self.synthesize(probe)
-                if res.pcm:
-                    result[lang] = (True, f"{res.backend}:{res.voice}")
-                else:
-                    result[lang] = (False, "Backend lieferte keine Audiodaten")
-            except Exception as e:  # noqa: BLE001 – genau dafür ist der Test da
-                result[lang] = (False, str(e)[:180])
+            # Fallthrough-Kette: erst das aktuell gewählte Backend prüfen,
+            # bei Ausfall das nächste verfügbare derselben Sprache (piper →
+            # edge → groq). So bleibt die Tonspur erhalten, auch wenn z. B.
+            # der Piper-Stimmen-Download scheitert – etwa weil der
+            # Offline-Backend zwar importierbar, aber ohne Modell ist.
+            insts: list[BaseBackend] = []
+            chosen = by_lang.get(lang)
+            if chosen is not None:
+                insts.append(chosen)
+            for name in order:
+                inst = backends.get(name)
+                if inst and inst is not chosen and inst.supports(lang):
+                    insts.append(inst)
+            # Subklassen/Fakes (z. B. generate_reader_audio._FakeEngine), die
+            # weder backends noch by_lang setzen, bleiben im alten Pfad:
+            # direkt über self.synthesize(probe) testen.
+            if not insts:
+                try:
+                    res = self.synthesize(probe)
+                    if res.pcm:
+                        result[lang] = (True, f"{res.backend}:{res.voice}")
+                    else:
+                        result[lang] = (False, "Backend lieferte keine Audiodaten")
+                except Exception as e:  # noqa: BLE001 – genau dafür ist der Test da
+                    result[lang] = (False, str(e)[:180])
+                continue
+            last_err = "kein Backend verfügbar"
+            for inst in insts:
+                try:
+                    inst.voice_for(lang)
+                    res = inst.synthesize(probe)
+                    if res.pcm:
+                        by_lang[lang] = inst
+                        result[lang] = (True, f"{res.backend}:{res.voice}")
+                        break
+                    last_err = "Backend lieferte keine Audiodaten"
+                except Exception as e:  # noqa: BLE001 – genau dafür ist der Test da
+                    last_err = str(e)[:180]
+            else:
+                result[lang] = (False, last_err)
         return result
 
 

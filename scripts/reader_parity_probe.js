@@ -35,6 +35,9 @@ if (closeIdx < 0) {
 const hook = `
 ;(typeof globalThis !== 'undefined') && (globalThis.__FF_HOOKS = {
   PROSODY: PROSODY,
+  EMO_PITCH: EMO_PITCH,
+  EMO_RATE: EMO_RATE,
+  EMO_AFTER_MS: EMO_AFTER_MS,
   EN_SNIFF: EN_SNIFF,
   DE_SNIFF: DE_SNIFF,
   GERMAN_ENDINGS: GERMAN_ENDINGS,
@@ -170,6 +173,11 @@ const pickEn = H.resolveMaleVoice('en');
 
 const out = {
   prosody: H.PROSODY,
+  emo: {
+    pitch: H.EMO_PITCH,
+    rate: H.EMO_RATE,
+    afterMs: H.EMO_AFTER_MS
+  },
   lex: {
     en: Object.keys(H.EN_SNIFF),
     de: Object.keys(H.DE_SNIFF),

@@ -1397,6 +1397,23 @@
 
   function prosodyFor(type) { return PROSODY[type] || PROSODY.p; }
 
+  /* ---------- Satzmelodie (v9, 04.09.2026) ----------
+     Ein Artikel, der nur aus Feststellungen besteht, klingt wie ein
+     Kontoauszug. Deshalb wird jeder Satz auf seine **Emotion** geprüft:
+     Fragen steigen in der Tonlage (+0.05) und erhalten mehr Pausenraum
+     (+80 ms), Ausrufe werden leicht betont (+0.02 / +50 ms) und beide
+     minimal ruhiger gelesen. Werte sind 1:1 mit
+     scripts/reader_tts_backends.py (EMO_PITCH/EMO_RATE/EMO_AFTER_MS)
+     synchron – das Paritäts-Gate erzwingt diese Gleichheit. */
+  var EMO_PITCH = { question: 0.05, exclamation: 0.02, statement: 0.0 };
+  var EMO_RATE = { question: 0.985, exclamation: 0.99, statement: 1.0 };
+  var EMO_AFTER_MS = { question: 80, exclamation: 50, statement: 0 };
+
+  function emoPitch(emo) { return EMO_PITCH[emo] || 0.0; }
+  function emoRate(emo) { var r = EMO_RATE[emo]; return r == null ? 1.0 : r; }
+  function emoAfterMs(emo) { return EMO_AFTER_MS[emo] || 0; }
+
+
   /* ---------- Automatische Sprach-Regie & Chunk-Längen ----------
      Jeder Satz wird automatisch gemessen und der Sprache zugeordnet
      (DE/EN, ohne Umschalter, wie ein zweisprachiger Hörfunk-Moderator):
@@ -1696,8 +1713,9 @@
   function effectiveRateFor(unit, profile) {
     var base = profile && profile.rate != null ? profile.rate : 1;
     var cf = contentRateFactor(unit.text);
-    if (unit.emo === 'question') cf -= 0.02;
-    if (unit.emo === 'exclamation') cf -= 0.01;
+    // Satzmelodie: Fragen minimal ruhiger (0.985), Ausrufe leicht ruhiger
+    // (0.99) – 1:1 zu Emo_RATE in scripts/reader_tts_backends.py.
+    cf *= emoRate(unit.emo);
     // Final-Längung (Verlagshaus-Regie): der letzte Bogen eines Blocks
     // wird minimal ruhiger gesprochen – wie ein Sprecher am Absatzschluss.
     if (unit.finalChunk) cf -= 0.015;
@@ -1726,8 +1744,7 @@
     base *= 1 + Math.min(0.32, Math.max(0, wc - 6) * 0.015);
 
     // Satzmelodie: Fragen und Ausrufe erhalten einen Moment mehr Raum
-    if (unit.emo === 'question') base += 80;
-    else if (unit.emo === 'exclamation') base += 50;
+    base += emoAfterMs(unit.emo);
 
     // Automatische Pausen-Skala der Stimmenklasse (basic > standard)
     base *= quality.pauseScale || 1;
@@ -1748,8 +1765,8 @@
   function autoPitch(unit, basePitch, voiceRes) {
     var q = quality || {};
     var v = (basePitch == null ? 1 : basePitch) + (q.pitchShift || 0);
-    if (unit && unit.emo === 'question') v += 0.05;
-    else if (unit && unit.emo === 'exclamation') v += 0.02;
+    // Satzmelodie: Fragen steigen (+0.05), Ausrufe werden betont (+0.02).
+    if (unit && unit.emo) v += emoPitch(unit.emo);
     if (unit && unit.finalChunk) v -= 0.012;   // Final-Längung: Absatzschluss klingt ruhiger
     var dyn = q.dynamic || 0;
     if (dyn > 0 && unit) v += dyn * (unit.modSign || 1);
