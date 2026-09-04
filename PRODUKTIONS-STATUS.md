@@ -1,8 +1,8 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-04 17:55 UTC  
-**Stufe:** WARTEND  
-**Befund:** Publikationstag, bisher 0 Artikel – Fallback-Slots (14:10 / 17:40 UTC) laufen noch. Kein Alarm.
+**Stand:** 2026-09-04 20:16 UTC  
+**Stufe:** P1  
+**Befund:** Heute (Freitag, 2026-09-04) ist ein Publikationstag – alle Slots vorbei, **0 Artikel** erschienen (Ziel: 2).
 
 | Kennzahl | Wert |
 |---|---|
