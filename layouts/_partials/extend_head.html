@@ -90,6 +90,18 @@
   {{- end -}}
 {{- end -}}
 {{- if not $faqSection }}{{ $faqSection = $raw }}{{ end -}}
+{{- /* FETT-FRAGEN-NORMIERUNG (Fix 05.09.2026, Produktions-Wache #174):
+       Der Generator liefert FAQ-Abschnitte in ZWEI Formaten –
+         a) "### Frage?" (Überschrift) und
+         b) "**Frage?** Antwort …" (Fett-Absatz, z. B. Reserve-Pool-Artikel).
+       Der Chunk-Parser unten versteht nur (a). Format (b) ergab LEERE
+       FAQ-Daten → kein FAQPage-Schema im HTML → Publish-Gate (A4) stufte
+       LIVE-Artikel zurück (Befund 04.09.2026: 2 Live-Artikel weg, Tag mit
+       0/2 Artikeln – Issue #174). Lösung: Fett-Fragen werden VOR dem
+       Parsing auf das Überschriften-Format normiert. Nur Zeilen, die mit
+       einem fetten Fragetext beginnen (enthält "?"), werden umgebaut –
+       normaler Fett-Markdown im Antworttext bleibt unberührt. */ -}}
+{{- $faqSection = replaceRE "(?m)^[ \\t]*\\*\\*([^*\\n]*\\?[^*\\n]*)\\*\\*[ \\t]*" "### $1\n" $faqSection -}}
 {{- $chunks := split $faqSection "### " -}}
 {{- range $i, $chunk := $chunks -}}
   {{- if gt $i 0 -}}

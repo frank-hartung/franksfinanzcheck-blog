@@ -3,6 +3,8 @@ title: "So bekommst du WLAN in jeden Winkel: Repeater oder Mesh?"
 description: "wlan repeater oder mesh: Praxis-Tipps zum Sparen – klar erklärt und sofort umsetzbar. So sparst du jeden Monat bares Geld."
 date: 2026-09-04T06:32:02Z
 draft: true
+cadence_demoted: 2026-09-05T14:14:52Z
+cadence_grund: "Draft-Rettung Ebene 3 (04.09.): nur 326-Woerter-Stub – braucht vollstaendige Ausarbeitung vor Veroeffentlichung"
 tags: ["wlan repeater oder mesh", "wlan verbessern", "powerline vs mesh", "internet im ganzen haus"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
