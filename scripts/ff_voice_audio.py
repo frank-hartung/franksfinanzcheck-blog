@@ -976,7 +976,7 @@ def main(argv=None) -> int:
     ap.add_argument("--cache-dir", default="")
     ap.add_argument("--backend", default="auto")
     ap.add_argument("--profile", default="natural", choices=sorted(ttb.VOICE_PROFILES.keys()))
-    ap.add_argument("--order", default="newest", choices=["newest", "oldest"])
+    ap.add_argument("--order", default="newest", choices=["newest", "oldest", "path"])
     ap.add_argument("--limit-new", type=int, default=0)
     ap.add_argument("--only", default="")
     ap.add_argument("--force", action="store_true")
@@ -1012,6 +1012,12 @@ def main(argv=None) -> int:
         return 0
     if args.order == "newest":
         articles.sort(key=lambda a: a[1], reverse=True)
+    elif args.order == "oldest":
+        articles.sort(key=lambda a: a[1])
+    else:
+        # "path": stabile Alphabetik – bei einem Archiv-Backfill reproduzierbar,
+        # weil sie nicht vom Zeitpunkt des Laufs abhängt.
+        articles.sort(key=lambda a: a[0])
 
     if args.only:
         articles = [a for a in articles if args.only in a[0]]
