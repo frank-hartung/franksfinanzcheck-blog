@@ -829,7 +829,7 @@
     var next = Math.max(0, Math.min(totalChars, chars || 0));
     if (!allowBackward && next < displayedChars) next = displayedChars;
     displayedChars = next;
-    progressBar.style.width = Math.min(100, (displayedChars / totalChars) * 100).toFixed(1) + '%';
+    progressBar.style.transform = 'scaleX(' + Math.min(1, displayedChars / totalChars).toFixed(4) + ')';
   }
 
   function estimatedSpeechMs(unit) {
@@ -2171,7 +2171,7 @@
     blocks.forEach(function (b) { if (b.el) b.el.classList.remove('ff-reader-active'); });
     cancelProgressTicker();
     displayedChars = 0;
-    if (progressBar) progressBar.style.width = '0%';
+    if (progressBar) progressBar.style.transform = 'scaleX(0)';
     if (remainEl) remainEl.textContent = '';
   }
 
@@ -2498,6 +2498,9 @@
     try { doc.body.appendChild(elt); } catch (e) {}
 
     elt.addEventListener('timeupdate', audioOnTime);
+    elt.addEventListener('play', function() { cancelAudioProgressTicker(); audioProgressLoop(); });
+    elt.addEventListener('pause', cancelAudioProgressTicker);
+    elt.addEventListener('ended', cancelAudioProgressTicker);
     elt.addEventListener('ended', function () { endReading(true); });
     elt.addEventListener('error', function () {
       // Tonspur fehlt/nicht ladbar → sauber auf den lokalen
@@ -2528,6 +2531,15 @@
     try { audio.currentTime = t / 1000; } catch (e) {}
   }
 
+  var audioProgressTickerId = null;
+  function cancelAudioProgressTicker() {
+    if (audioProgressTickerId) {
+      if (win.cancelAnimationFrame && !reducedMotion) win.cancelAnimationFrame(audioProgressTickerId);
+      else clearTimeout(audioProgressTickerId);
+      audioProgressTickerId = null;
+    }
+  }
+
   function audioOnTime() {
     if (!audio || !reading) return;
     var t = (audio.currentTime || 0) * 1000;
@@ -2544,12 +2556,25 @@
         if (blocks[bi]) { audioBlock = bi; highlightBlock(blocks[bi]); storeSet(STORE_POS, String(bi)); }
       }
     }
-    if (progressBar && duration) {
-      progressBar.style.width = Math.min(100, (t / (duration * 1000)) * 100).toFixed(1) + '%';
+    if (progressBar && duration && !isNaN(duration) && duration > 0) {
+      progressBar.style.transform = 'scaleX(' + Math.min(1, t / (duration * 1000)).toFixed(4) + ')';
     }
     if (remainEl && duration) {
       var rest = Math.max(0, duration - (audio.currentTime || 0)) / 60;
       remainEl.textContent = rest >= 0.1 ? texts.remaining.replace('{min}', Math.max(1, Math.round(rest))) : '';
+    }
+  }
+
+  function audioProgressLoop() {
+    audioOnTime();
+    if (!reading || !audio || audio.paused || audio.ended) {
+      audioProgressTickerId = null;
+      return;
+    }
+    if (win.requestAnimationFrame && !reducedMotion) {
+      audioProgressTickerId = win.requestAnimationFrame(audioProgressLoop);
+    } else {
+      audioProgressTickerId = setTimeout(audioProgressLoop, 100);
     }
   }
 
@@ -2677,7 +2702,7 @@
       spokenChars = 0;
       displayedChars = 0;
       cancelProgressTicker();
-      if (progressBar) progressBar.style.width = '0%';
+      if (progressBar) progressBar.style.transform = 'scaleX(0)';
       cursor = 0;
       setListenState('playing');
       setStatus(texts.started);
@@ -2725,7 +2750,7 @@
     spokenChars = 0;
     displayedChars = 0;
     cancelProgressTicker();
-    if (progressBar) progressBar.style.width = '0%';
+    if (progressBar) progressBar.style.transform = 'scaleX(0)';
     var startIdx = 0;
     if (typeof fromIndex === 'number' && fromIndex > 0 && fromIndex < timeline.length) {
       startIdx = fromIndex;
