@@ -79,7 +79,7 @@ GROQ_MODEL = "canopylabs/orpheus-v1-english"
 ENGINE_ORDER = ["edge", "piper", "groq"]
 
 # Backend-Fingerprint: ändert er sich, werden Tonspuren neu erzeugt.
-RECIPE_VERSION = "ff-voice-2026.09.05-a"
+RECIPE_VERSION = "ff-voice-2026.09.05-b"
 
 # ---------------------------------------------------------------------------
 # Prosodie-Regie — spiegelbildlich zu PROSODY in static/premium/ff-voice.js
@@ -110,7 +110,9 @@ PROSODY = {
     "table-intro":      {"rate": 0.92, "pitch": -3,  "volume": 1.00, "before": 520, "after": 320},
     "table-header":     {"rate": 0.95, "pitch": -2,  "volume": 1.00, "before": 160, "after": 300},
     "table-row":        {"rate": 0.93, "pitch": -2,  "volume": 0.99, "before": 120, "after": 340},
+    "table-group":      {"rate": 0.93, "pitch": -3,  "volume": 1.00, "before": 360, "after": 300},
     "table-sum":        {"rate": 0.92, "pitch": -2,  "volume": 1.01, "before": 260, "after": 400},
+    "table-cta":        {"rate": 0.97, "pitch": 0,   "volume": 1.00, "before": 300, "after": 460},
     "table-outro":      {"rate": 0.96, "pitch": -1,  "volume": 0.98, "before": 300, "after": 520},
 }
 
@@ -237,6 +239,10 @@ def normalize_speech(text: str, lang: str = "de") -> str:
         out = pattern.sub(repl, out)
     out = re.sub(r"[\u0000-\u0008\u000b\u000c\u000e-\u001f]", " ", out)
     out = out.replace("–", "-").replace("—", "-")
+    # Schmuckzeichen, Pfeile und Emoji sind keine Wörter — wortgleich
+    # zur Browser-Engine in static/premium/ff-voice.js.
+    out = re.sub(r"[\u00ad\u200b-\u200f\u2060\u2190-\u21ff\u2300-\u27bf"
+                 r"\u2b00-\u2bff\ufe00-\ufe0f\U0001f000-\U0010ffff]", " ", out)
 
     # E-Mail-Adressen
     def mail_repl(m):

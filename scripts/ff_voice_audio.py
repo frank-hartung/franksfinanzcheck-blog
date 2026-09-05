@@ -105,10 +105,14 @@ CUES = {
         "cueWarning": "Achtung:", "cueNote": "Hinweis:",
         "columnLabel": "Spalte", "rowLabel": "Zeile",
         "tableHeaders": "Die Spalten lauten: {headers}.",
+        "tableHeaderRow": "Kopfzeile {n}: {headers}.",
         "tableIntro": "Tabelle: {title}. Übersicht mit {cols} Spalten und {rows} Zeilen.",
         "tableIntroOne": "Tabelle: {title}. Übersicht mit {cols} Spalten und einer Zeile.",
         "tableRow": "Zeile {row} von {total}. {content}.",
+        "tableRowLabel": "Zeile {row} von {total}: {label}. {content}.",
+        "tableGroup": "Gruppe: {name}.",
         "tableSum": "Zusammengerechnet: {content}.",
+        "tableCta": "Empfehlung: {cta}. Hinweis: Dies ist ein Partnerlink.",
         "tableOutro": "Ende der Tabelle {title}.",
         "tableDefault": "Übersichtstabelle",
     },
@@ -123,10 +127,14 @@ CUES = {
         "cueWarning": "Attention:", "cueNote": "Note:",
         "columnLabel": "Column", "rowLabel": "Row",
         "tableHeaders": "The columns are: {headers}.",
+        "tableHeaderRow": "Header row {n}: {headers}.",
         "tableIntro": "Table: {title}. Overview with {cols} columns and {rows} rows.",
         "tableIntroOne": "Table: {title}. Overview with {cols} columns and one row.",
         "tableRow": "Row {row} of {total}. {content}.",
+        "tableRowLabel": "Row {row} of {total}: {label}. {content}.",
+        "tableGroup": "Group: {name}.",
         "tableSum": "In total: {content}.",
+        "tableCta": "Recommendation: {cta}. Note: this is an affiliate link.",
         "tableOutro": "End of table {title}.",
         "tableDefault": "Overview Table",
     },
@@ -465,8 +473,71 @@ def is_skipped(node: Node) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# Tabellenmodell (Portierung aus dem Reader)
+# Tabellenmodell (Premium, Generation 2) — wortgleich zum Reader
 # ---------------------------------------------------------------------------
+
+GENERIC_TABLE_LABELS = ("tabelle", "table")
+SUM_WORDS = ("zwischensumme", "summe", "gesamt", "insgesamt", "total",
+             "grand total", "in total", "sum")
+
+_DECOR_RE = re.compile(
+    "[\u00ad\u200b-\u200f\u2060\u2190-\u21ff\u2300-\u27bf\u2b00-\u2bff"
+    "\ufe00-\ufe0f\U0001f000-\U0010ffff]")
+
+
+def strip_decor(text: str) -> str:
+    """Schmuckzeichen, Pfeile und Emoji entfernen (💰 ❌ ✅ 🏆 →)."""
+    return re.sub(r"\s+", " ", _DECOR_RE.sub(" ", str(text or ""))).strip()
+
+
+def span_of(node: Node, attr: str, aria_attr: str) -> int:
+    raw = node.attr(attr)
+    if raw is None:
+        raw = node.attr(aria_attr)
+    m = re.match(r"\s*(\d+)", str(raw or ""))
+    v = int(m.group(1)) if m else 1
+    return min(v, 24) if v > 1 else 1
+
+
+_BLOCKISH = ("p", "div", "li", "h1", "h2", "h3", "h4", "h5", "h6",
+             "blockquote", "tr", "td", "th", "section", "figcaption")
+
+
+def _text_without_tags(node: Node, tags) -> str:
+    """text_of() ohne die angegebenen Teilbäume (z. B. <small>)."""
+    if node is None:
+        return ""
+    if node.tag is None:
+        return node.text or ""
+    if node.tag in SKIP_TAGS or node.tag in tags:
+        return ""
+    if node.attr("data-ff-skip-read") is not None:
+        return ""
+    if node.attr("aria-hidden") == "true":
+        return ""
+    if node.tag == "br":
+        return " "
+    parts = [_text_without_tags(c, tags) for c in node.children]
+    if node.tag in _BLOCKISH:
+        parts.append(" ")
+    return "".join(parts)
+
+
+def cell_speech_text(cell: Node) -> str:
+    """Zellentext: Grundtext, dann Ziertext aus <small> mit Komma."""
+    small_parts = []
+    for node in iter_nodes(cell):
+        if node.tag == "small":
+            t = re.sub(r"\s+", " ", text_of(node).replace("\u00a0", " ")).strip()
+            if t:
+                small_parts.append(t)
+    base = re.sub(r"\s+", " ", _text_without_tags(cell, ("small",))
+                  .replace("\u00a0", " ")).strip()
+    out = base
+    for t in small_parts:
+        out = (out + ", " if out else "") + t
+    return strip_decor(out)
+
 
 def is_table_like(node: Node) -> bool:
     if node is None:
@@ -489,8 +560,12 @@ def inner_table(node: Node) -> Node:
     return tables[0] if tables else node
 
 
-def _row_cells(tr: Node):
-    return query_all(tr, 'th, td, [role="columnheader"], [role="rowheader"], [role="cell"], [role="gridcell"]')
+def _row_cells(tr: Node, table: Node = None):
+    cells = query_all(tr, 'th, td, [role="columnheader"], [role="rowheader"], [role="cell"], [role="gridcell"]')
+    # Zellen einer verschachtelten Innentabelle gehören zur Innentabelle.
+    if table is not None and table.tag == "table":
+        cells = [c for c in cells if closest(c, "table") is table]
+    return cells
 
 
 def _is_header_cell(cell: Node) -> bool:
@@ -507,6 +582,10 @@ def table_rows(table: Node):
     def push(tr, kind):
         if tr is None or id(tr) in seen:
             return
+        # Zeilen einer verschachtelten Innentabelle gehören nicht hierher.
+        owner = closest(tr, "table")
+        if owner is not None and owner is not table:
+            return
         seen.append(id(tr))
         rows.append((tr, kind))
 
@@ -519,54 +598,235 @@ def table_rows(table: Node):
     for tr in query_all(table, "tr"):
         if id(tr) not in seen:
             push(tr, "head" if not rows else "body")
+    # ARIA-Tabellen ohne <tr>: Zeilen laufen über role="row".
+    if not rows:
+        for r in query_all(table, '[role="row"]'):
+            push(r, "body")
     return rows
 
 
+_WRAP_SELECTOR = (".ff-tarifvergleich, .ff-einspar, .ff-tv-tablewrap, .ff-es-tablewrap, "
+                  ".ff-table-scroll, .wp-block-table, .table-wrapper, .table-responsive")
+
+
+def _prev_siblings(node: Node):
+    if node is None or node.parent is None:
+        return []
+    sibs = [s for s in node.parent.children if s.tag]
+    try:
+        i = sibs.index(node)
+    except ValueError:
+        return []
+    return list(reversed(sibs[:i]))
+
+
 def table_title(table: Node, C) -> str:
+    """Titel der Übersicht — caption, aria-label, Premium-Titel oder die
+    unmittelbar davorstehende Überschrift (Markdown-Tabellen)."""
     cap = find_first(table, "caption")
-    if cap and readable_text(cap):
-        return readable_text(cap)
-    aria = table.attr("aria-label")
-    if aria:
-        return aria
-    # Die Premium-Übersichten setzen ihren Titel AUSSERHALB des
-    # Tablewrappers – deshalb nach oben steigen, bis einer ihn trägt.
+    if cap and strip_decor(readable_text(cap)):
+        return strip_decor(readable_text(cap))
+
+    # Wrapper-Kette nach oben sammeln (Tablewrapper bis zur Sektion).
+    wrappers = []
     node = table
     for _ in range(4):
-        if node is None:
+        wrap = closest(node, _WRAP_SELECTOR)
+        if wrap is None or any(wrap is w for w in wrappers):
             break
-        wrap = closest(node, ".ff-tarifvergleich, .ff-einspar, .ff-tv-tablewrap, .ff-es-tablewrap, .ff-table-scroll")
-        if wrap is None:
-            break
-        for sel in (".ff-tv-title", ".ff-es-title", "h3", "h4"):
-            h = find_first(wrap, sel)
-            if h is not None and id(h) != id(table) and readable_text(h):
-                return readable_text(h)
+        wrappers.append(wrap)
         node = wrap.parent
-    return C["tableDefault"]
+
+    # aria-label der Tabelle oder ihrer Wrapper — außer Allgemeinplätzen
+    # wie „Tabelle“ (vom Table-Render-Hook automatisch gesetzt).
+    for src in [table] + wrappers:
+        aria = src.attr("aria-label")
+        if aria:
+            clean = strip_decor(aria)
+            if clean and clean.lower() not in GENERIC_TABLE_LABELS:
+                return clean
+
+    # Premium-Übersichten setzen ihren Titel AUSSERHALB des
+    # Tablewrappers — in jedem Wrapper der Kette suchen.
+    for wrap in wrappers:
+        h = find_first(wrap, ".ff-tv-title, .ff-es-title, caption, h3, h4")
+        if (h is not None and h is not table and closest(h, "table") is not table
+                and strip_decor(readable_text(h))):
+            return strip_decor(readable_text(h))
+
+    # Unmittelbar davorstehende Überschrift (z. B. Markdown-Tabelle
+    # unter einer Zwischenüberschrift).
+    outer = wrappers[-1] if wrappers else table
+    guard = 0
+    for prev in _prev_siblings(outer):
+        if guard >= 4:
+            break
+        guard += 1
+        if (prev.tag in ("h2", "h3", "h4", "h5", "h6")
+                or any(prev.has_class(c) for c in ("ff-tv-title", "ff-es-title"))):
+            t = strip_decor(readable_text(prev))
+            if t:
+                return t
+    return ""
+
+
+def expand_grid(table: Node, rows):
+    """Spannt die Zeilen zu einem logischen Gitter auf: colspan- und
+    rowspan-Zellen belegen genau ihre Spalten. `lead` markiert die
+    Sprech-Spalte (colspan-Fortsetzungen schweigen, rowspan-Werte
+    werden in jeder überspannten Zeile wiederholt)."""
+    occupied = {}
+    grid = []
+    for r, (tr, kind) in enumerate(rows):
+        cells = _row_cells(tr, table)
+        entries = []
+        col = 0
+        for cell in cells:
+            while (r, col) in occupied:
+                entries.append(occupied[(r, col)])
+                col += 1
+            cs = span_of(cell, "colspan", "aria-colspan")
+            rs = span_of(cell, "rowspan", "aria-rowspan")
+            text = cell_speech_text(cell)
+            head = _is_header_cell(cell)
+            for d in range(cs):
+                entries.append({"el": cell, "text": text, "head": head, "lead": d == 0})
+                for dr in range(1, rs):
+                    occupied[(r + dr, col + d)] = {
+                        "el": cell, "text": text, "head": head, "lead": True}
+            col += cs
+        while (r, col) in occupied:
+            entries.append(occupied[(r, col)])
+            col += 1
+        grid.append({"el": tr, "kind": kind, "cells": entries})
+    return grid
+
+
+def _starts_with_sum_word(text: str) -> bool:
+    low = str(text or "").lower()
+    return any(low.startswith(w) for w in SUM_WORDS)
 
 
 def build_table_model(table: Node, C):
-    headers, body, foot = [], [], []
-    header_found = False
-    for tr, kind in table_rows(table):
-        cells = _row_cells(tr)
-        texts = [readable_text(c) for c in cells]
-        all_head = bool(texts) and all(_is_header_cell(c) for c in cells)
-        if kind == "head" or (not header_found and all_head):
-            if not header_found:
-                headers = texts
-                header_found = True
+    grid = expand_grid(table, table_rows(table))
+    header_rows, body_rows, foot_rows = [], [], []
+    header_done = False
+
+    for row in grid:
+        non_empty = [e for e in row["cells"] if e["text"]]
+        all_head = bool(non_empty) and all(e["head"] for e in non_empty)
+        if row["kind"] == "head" or (not header_done and all_head):
+            header_rows.append(row)
+            header_done = True
+            continue
+        if row["kind"] == "foot":
+            foot_rows.append(row)
+            continue
+        body_rows.append(row)
+
+    col_count = max([len(r["cells"]) for r in grid] + [0])
+
+    # Spaltennamen = die UNTERSTE Kopfzeile (sie trägt die Werte).
+    headers = []
+    if header_rows:
+        last_head = header_rows[-1]
+        for c in range(col_count):
+            e = last_head["cells"][c] if c < len(last_head["cells"]) else None
+            headers.append(e["text"] if e and e["text"] else "")
+
+    # Darüberliegende Kopfzeilen (Gruppierungen) werden angesagt.
+    header_extras = []
+    for row in header_rows[:-1]:
+        texts = []
+        for entry in row["cells"]:
+            if not entry["text"] or entry["lead"] is False:
+                continue
+            if texts and texts[-1] == entry["text"]:
+                continue
+            texts.append(entry["text"])
+        if texts:
+            header_extras.append(", ".join(texts))
+
+    def classify(row, is_foot):
+        rec = {"el": row["el"], "kind": "data", "label": "", "parts": [],
+               "cta": "", "group": "", "display": []}
+        non_empty = [{"e": e, "c": c} for c, e in enumerate(row["cells"]) if e["text"]]
+        for entry in row["cells"]:
+            rec["display"].append(entry["text"] if entry["lead"] is not False else "")
+        if not non_empty:
+            rec["kind"] = "empty"
+            return rec
+
+        # 1 · Werbelink-Zeile (CTA): Button/Partnerlink in der Zelle.
+        cta_parts, cta_cells, plain_cells = [], 0, []
+        for item in non_empty:
+            links = query_all(item["e"]["el"], "a.ff-tv-btn, a.ff-es-btn, a.ff-cta, button")
+            texts = []
+            for a in links:
+                t = strip_decor(readable_text(a))
+                if t:
+                    texts.append(t)
+            if texts:
+                cta_cells += 1
+                for t in texts:
+                    if t not in cta_parts:
+                        cta_parts.append(t)
             else:
-                body.append(texts)
-            continue
-        if kind == "foot":
-            foot.append(texts)
-            continue
-        body.append(texts)
-    col_count = max([len(headers)] + [len(r) for r in body] + [len(r) for r in foot] + [0])
-    return {"title": table_title(table, C), "headers": headers,
-            "rows": body, "foot": foot, "colCount": col_count}
+                plain_cells.append(item["e"]["text"])
+        only_decor_left = all(len(t) < 24 and not re.search(r"\d", t) for t in plain_cells)
+        if cta_cells > 0 and only_decor_left:
+            rec["kind"] = "cta"
+            rec["cta"] = ", ".join(cta_parts)
+            return rec
+
+        # 2 · Summenzeile: tfoot, Summen-Klasse oder Summenwort.
+        first = non_empty[0]
+        is_sum = (is_foot or row["el"].has_class("ff-es-sum")
+                  or row["el"].has_class("ff-tv-sum")
+                  or _starts_with_sum_word(first["e"]["text"]))
+        if is_sum:
+            rec["kind"] = "sum"
+            skip_first = _starts_with_sum_word(first["e"]["text"])
+            for i, item in enumerate(non_empty):
+                if i == 0 and skip_first:
+                    continue   # „Summe/Gesamt“ sagt der Cue selbst
+                if item["e"]["lead"] is False:
+                    continue
+                spoken = _cell_speech(headers[item["c"]] if item["c"] < len(headers) else "",
+                                      item["e"]["text"], item["c"], C)
+                if spoken:
+                    rec["parts"].append(spoken)
+            return rec
+
+        # 3 · Gruppenzeile: alle Zellen sind Köpfe (z. B. th mit colspan).
+        if all(item["e"]["head"] for item in non_empty):
+            names = []
+            for item in non_empty:
+                if item["e"]["lead"] is not False and item["e"]["text"] not in names:
+                    names.append(item["e"]["text"])
+            rec["kind"] = "group"
+            rec["group"] = ", ".join(names)
+            return rec
+
+        # 4 · Datenzeile — ein Zeilentitel (th/rowheader) wird ihr Name.
+        start_at = 0
+        if first["e"]["head"]:
+            rec["label"] = first["e"]["text"]
+            start_at = 1
+        for item in non_empty[start_at:]:
+            if item["e"]["lead"] is False:
+                continue
+            spoken = _cell_speech(headers[item["c"]] if item["c"] < len(headers) else "",
+                                  item["e"]["text"], item["c"], C)
+            if spoken:
+                rec["parts"].append(spoken)
+        return rec
+
+    rows = [classify(r, False) for r in body_rows] + [classify(r, True) for r in foot_rows]
+
+    return {"title": table_title(table, C) or C["tableDefault"],
+            "headers": headers, "headerExtras": header_extras,
+            "rows": rows, "colCount": col_count}
 
 
 def _cell_speech(name, value, index, C):
@@ -578,41 +838,62 @@ def _cell_speech(name, value, index, C):
 
 
 def extract_table_blocks(table: Node, block_lang: str, C):
+    """Eine Tabelle wird vollständig gesprochen — Zeile für Zeile."""
     model = build_table_model(table, C)
     out = []
     title = model["title"] or C["tableDefault"]
-    row_count = len(model["rows"])
+
+    data_rows = [r for r in model["rows"] if r["kind"] == "data" and r["parts"]]
+    has_content = (bool(data_rows) or any(model["headers"]) or bool(model["headerExtras"])
+                   or any(r["kind"] in ("sum", "cta", "group") for r in model["rows"]))
+    if not has_content:
+        return out   # leere Hülle: nichts sprechen
+
+    row_count = len(data_rows)
     tmpl = C["tableIntroOne"] if row_count == 1 else C["tableIntro"]
     out.append({"lang": block_lang, "type": "table-intro",
                 "text": tmpl.replace("{title}", title)
                             .replace("{cols}", str(model["colCount"]))
                             .replace("{rows}", str(row_count))})
-    if model["headers"]:
+
+    spoken_headers = [h for h in model["headers"] if h]
+    if spoken_headers:
         out.append({"lang": block_lang, "type": "table-header",
-                    "text": C["tableHeaders"].replace("{headers}", ", ".join(model["headers"]))})
-    for i, row in enumerate(model["rows"]):
-        parts = []
-        for c in range(max(len(row), model["colCount"])):
-            spoken = _cell_speech(model["headers"][c] if c < len(model["headers"]) else "",
-                                  row[c] if c < len(row) else "", c, C)
-            if spoken:
-                parts.append(spoken)
-        if not parts:
+                    "text": C["tableHeaders"].replace("{headers}", ", ".join(spoken_headers))})
+    for i, extra in enumerate(model["headerExtras"]):
+        out.append({"lang": block_lang, "type": "table-header",
+                    "text": C["tableHeaderRow"].replace("{n}", str(i + 1))
+                                               .replace("{headers}", extra)})
+
+    data_idx = 0
+    for row in model["rows"]:
+        if row["kind"] == "empty":
             continue
-        out.append({"lang": block_lang, "type": "table-row",
-                    "text": C["tableRow"].replace("{row}", str(i + 1))
-                                         .replace("{total}", str(row_count))
-                                         .replace("{content}", ", ".join(parts))})
-    for row in model["foot"]:
-        parts = []
-        for c in range(len(row)):
-            spoken = _cell_speech(model["headers"][c] if c < len(model["headers"]) else "", row[c], c, C)
-            if spoken:
-                parts.append(spoken)
-        if not parts:
+        if row["kind"] == "data":
+            if not row["parts"]:
+                continue
+            data_idx += 1
+            tmpl_row = C["tableRowLabel"] if row["label"] else C["tableRow"]
+            out.append({"lang": block_lang, "type": "table-row",
+                        "text": tmpl_row.replace("{row}", str(data_idx))
+                                        .replace("{total}", str(row_count))
+                                        .replace("{label}", row["label"])
+                                        .replace("{content}", ", ".join(row["parts"]))})
             continue
-        out.append({"lang": block_lang, "type": "table-sum",
-                    "text": C["tableSum"].replace("{content}", ", ".join(parts))})
+        if row["kind"] == "group":
+            out.append({"lang": block_lang, "type": "table-group",
+                        "text": C["tableGroup"].replace("{name}", row["group"])})
+            continue
+        if row["kind"] == "sum":
+            if not row["parts"]:
+                continue
+            out.append({"lang": block_lang, "type": "table-sum",
+                        "text": C["tableSum"].replace("{content}", ", ".join(row["parts"]))})
+            continue
+        if row["kind"] == "cta" and row["cta"]:
+            out.append({"lang": block_lang, "type": "table-cta",
+                        "text": C["tableCta"].replace("{cta}", row["cta"])})
+
     out.append({"lang": block_lang, "type": "table-outro",
                 "text": C["tableOutro"].replace("{title}", title)})
     return out
@@ -691,6 +972,10 @@ def extract_blocks(root: Node, cfg: dict):
         el_lang = _lang_of(el, lang)
 
         if is_table_like(el):
+            # Innentabellen sprechen als Zelleninhalt der Außentabelle
+            # mit — nie ein zweites Mal als eigene Tabelle.
+            if el.parent is not None and closest(el.parent, "table") is not None:
+                continue
             tbl = inner_table(el)
             if id(tbl) in done:
                 continue
@@ -1150,6 +1435,55 @@ FIXTURE = """<!doctype html><html lang="de"><body>
 </body></html>"""
 
 
+FIXTURE_TABLES = """<!doctype html><html lang="de"><body>
+<article class="post-content">
+<h2 id="kosten">Kosten im Überblick</h2>
+<div class="ff-table-scroll" role="region" aria-label="Tabelle">
+<table class="ff-tbl">
+<thead><tr><th scope="col">Posten</th><th scope="col">Betrag</th></tr></thead>
+<tbody><tr><td>Grundpreis</td><td>120 €</td></tr></tbody>
+</table>
+</div>
+<div role="table" aria-label="Beispielhaushalt">
+<div role="rowgroup">
+<div role="row"><span role="columnheader">Posten</span><span role="columnheader">Kosten</span></div>
+</div>
+<div role="rowgroup">
+<div role="row"><span role="rowheader">Miete</span><span role="gridcell">900 €</span></div>
+<div role="row"><span role="rowheader">Strom</span><span role="gridcell">120 €</span></div>
+</div>
+</div>
+<table>
+<thead><tr><th colspan="2">Energie</th><th>Wasser</th></tr>
+<tr><th>Strom</th><th>Gas</th><th>Trinkwasser</th></tr></thead>
+<tbody>
+<tr><td rowspan="2">32 ct/kWh</td><td>12 ct/kWh</td><td>2 €</td></tr>
+<tr><td>14 ct/kWh</td><td>3 €</td></tr>
+</tbody>
+</table>
+<div class="ff-einspar">
+<h3 class="ff-es-title">💰 Einsparpotenziale</h3>
+<div class="ff-es-tablewrap"><table>
+<thead><tr><th>Maßnahme</th><th>❌ Vorher<br><small>Alter Verbraucher</small></th><th>🏆 Ersparnis</th></tr></thead>
+<tbody>
+<tr><td>Pumpe tauschen</td><td><strong>890 €</strong></td><td><strong>770 €</strong></td></tr>
+<tr class="ff-es-sum"><td><strong>Gesamt</strong></td><td><strong>1.500 €</strong></td><td><strong>900 €</strong></td></tr>
+<tr><td></td><td><small>teuer</small></td><td><a class="ff-es-btn" href="/go/strom/">Stromanbieter vergleichen →</a></td></tr>
+</tbody>
+</table></div>
+</div>
+<h2 id="nest">Verschachtelt</h2>
+<table>
+<thead><tr><th>Plan</th><th>Details</th></tr></thead>
+<tbody><tr><td>Tarif A</td><td><table><tbody><tr><td>innen eins</td><td>innen zwei</td></tr></tbody></table></td></tr>
+</tbody>
+</table>
+<table><tbody><tr><td></td><td></td></tr></tbody></table>
+</article>
+<script type="application/json" id="ff-voice-config">{"title":"Tabellen","readingTime":5,"lang":"de","description":""}</script>
+</body></html>"""
+
+
 def selftest() -> int:
     results = []
 
@@ -1185,6 +1519,49 @@ def selftest() -> int:
     check("Aussprache: Bereich", "12 bis 24 Monate" in texts)
     check("Aussprache: Datum", "2. Januar 2006" in texts)
     check("Aussprache: kWh", "20.000 Kilowattstunden" in texts)
+
+    # ---------- Tabellen & Übersichten (Premium, Generation 2) ----------
+    tblocks, _tlang = extract_blocks(parse_html(FIXTURE_TABLES), cfg)
+    ttext = " ".join(b["text"] for b in tblocks)
+    ttypes = [b["type"] for b in tblocks]
+
+    check("Markdown-Tabelle: Titel aus Überschrift davor",
+          "Tabelle: Kosten im Überblick." in ttext)
+    check("Markdown-Tabelle: Zeile vollständig gesprochen",
+          "Zeile 1 von 1. Posten: Grundpreis, Betrag: 120 €." in ttext)
+    check("ARIA-Tabelle: Titel aus aria-label",
+          "Tabelle: Beispielhaushalt." in ttext)
+    check("ARIA-Tabelle: alle Zeilen gesprochen",
+          ttypes.count("table-row") >= 4 and "Miete" in ttext and "Strom" in ttext)
+    check("ARIA-Tabelle: Zeilentitel (rowheader) wird Zeilenname",
+          any(b["type"] == "table-row" and ": Miete." in b["text"] for b in tblocks))
+    check("Colspan: Gruppierung wird angesagt",
+          "Kopfzeile 1: Energie, Wasser." in ttext)
+    check("Colspan: unterste Kopfzeile trägt die Spaltennamen",
+          "Die Spalten lauten: Strom, Gas, Trinkwasser." in ttext)
+    check("Rowspan: Wert wird in beiden Zeilen gesprochen",
+          ttext.count("Strom: 32 ct/kWh") == 2)
+    check("Colspan-Zelle spricht genau einmal",
+          ttext.count("Trinkwasser: 2 €") == 1)
+    table_texts = " ".join(b["text"] for b in tblocks if b["type"].startswith("table"))
+    check("Emoji und Pfeile werden aus Tabellen ferngehalten",
+          ("💰" not in table_texts and "🏆" not in table_texts and "→" not in table_texts
+           and "Tabelle: Einsparpotenziale." in ttext))
+    check("small-Ziertext wird mit Komma angebunden",
+          "Vorher, Alter Verbraucher" in ttext)
+    check("Summenzeile im tbody wird Zusammengerechnet",
+          "Zusammengerechnet: Vorher, Alter Verbraucher: 1.500 €, Ersparnis: 900 €." in ttext)
+    check("CTA-Zeile wird Empfehlung statt Datenzeile",
+          ttypes.count("table-cta") == 1 and "Partnerlink" in ttext)
+    check("CTA-Zeile spricht nicht den Tabellenwert",
+          "Ersparnis: Stromanbieter vergleichen" not in ttext)
+    check("Tabellen-Blöcke: Rollen vollständig",
+          all(t in ttypes for t in ("table-intro", "table-header", "table-row",
+                                    "table-sum", "table-cta", "table-outro")))
+    check("Innentabelle spricht als Zelleninhalt — genau einmal",
+          ttext.count("innen eins") == 1 and "Details: innen eins innen zwei." in ttext)
+    check("Leere Tabelle bleibt stumm (kein Fallback-Titel)",
+          "Übersichtstabelle" not in ttext)
 
     # Reihenfolge-Stabilität
     blocks2, _ = extract_blocks(parse_html(FIXTURE), cfg)

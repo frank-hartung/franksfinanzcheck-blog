@@ -123,13 +123,127 @@ t.group('3) Tabellen, Summen und Premium-Übersichten');
   t.ok('Spalten werden benannt', /Die Spalten lauten: Tarif, Preis, Laufzeit/.test(all));
   t.eq('Zwei Datenzeilen', types.filter((x) => x === 'table-row').length, 2);
   t.eq('Eine Summenzeile', types.filter((x) => x === 'table-sum').length, 1);
-  t.ok('Summenzeile spricht „Zusammengerechnet“', /Zusammengerechnet: Tarif: Summe/.test(all));
+  t.ok('Summenzeile spricht „Zusammengerechnet“', /Zusammengerechnet: Preis: 2\.180/.test(all));
+  t.ok('Summenwort fällt nicht doppelt', !/Zusammengerechnet: Tarif: Summe/.test(all));
   t.ok('Tabellen-Ende wird angesagt', /Ende der Tabelle Tarife im Vergleich/.test(all));
   t.ok('Zeilen sind durchnummeriert', /Zeile 1 von 2/.test(all) && /Zeile 2 von 2/.test(all));
   t.ok('Kopfzeilen-Werte gepaart', /Tarif: Basis, Preis: 1\.200/.test(all));
   t.ok('Kartenstapel bleibt stumm (kein Doppelt)',
     !/Kartenstapel/.test(all), 'Mobil-Variante wurde mitgesprochen');
-  t.ok('colspan-Zeile ohne Geisterspalte', !/: ,/.test(all));
+  t.ok('colspan-Zelle spricht genau einmal',
+    (all.match(/Laufzeit: 24 Monate/g) || []).length === 1);
+  t.ok('colspan-Zeile ohne Geisterspalte', !/: ,/.test(all) && !/Spalte 4/.test(all));
+}
+
+/* ============================================================
+   3b · Tabellen-Härtfälle: ARIA, Spannen, CTA, Titel, small
+   ============================================================ */
+t.group('3b) Tabellen vollständig: Zeilen, Spalten, ARIA, Werbelinks');
+{
+  const { win } = loadPage(skeleton({
+    title: 'Tabellen-Härtfälle',
+    bodyHtml: [
+      '<h2 id="kosten">Kosten im Überblick</h2>',
+      // Markdown-Tabelle wie aus render-table.html (Wrapper mit region-Rolle)
+      '<div class="ff-table-scroll" role="region" aria-label="Tabelle">',
+      '<table class="ff-tbl">',
+      '<thead><tr><th scope="col">Posten</th><th scope="col">Betrag</th></tr></thead>',
+      '<tbody><tr><td>Grundpreis</td><td>120 €</td></tr></tbody>',
+      '</table></div>',
+      // ARIA-Tabelle ohne <tr>
+      '<div role="table" aria-label="Beispielhaushalt">',
+      '<div role="rowgroup"><div role="row"><span role="columnheader">Posten</span><span role="columnheader">Kosten</span></div></div>',
+      '<div role="rowgroup">',
+      '<div role="row"><span role="rowheader">Miete</span><span role="gridcell">900 €</span></div>',
+      '<div role="row"><span role="rowheader">Strom</span><span role="gridcell">120 €</span></div>',
+      '</div></div>',
+      // colspan/rowspan + mehrzeiliger Kopf
+      '<table><thead>',
+      '<tr><th colspan="2">Energie</th><th>Wasser</th></tr>',
+      '<tr><th>Strom</th><th>Gas</th><th>Trinkwasser</th></tr>',
+      '</thead><tbody>',
+      '<tr><td rowspan="2">32 ct/kWh</td><td>12 ct/kWh</td><td>2 €</td></tr>',
+      '<tr><td>14 ct/kWh</td><td>3 €</td></tr>',
+      '</tbody></table>',
+      // Premium-Einspartabelle: Emoji, small, Summe im tbody, Werbelink-Zeile
+      '<div class="ff-einspar">',
+      '<div class="ff-es-head"><h3 class="ff-es-title">💰 Einsparpotenziale</h3></div>',
+      '<div class="ff-es-tablewrap"><table>',
+      '<thead><tr><th>Maßnahme</th><th>❌ Vorher<br><small>Alter Verbraucher</small></th><th>🏆 Ersparnis</th></tr></thead>',
+      '<tbody>',
+      '<tr><td>Pumpe tauschen</td><td><strong>890 €</strong></td><td><strong>770 €</strong></td></tr>',
+      '<tr class="ff-es-sum"><td><strong>Gesamt</strong></td><td><strong>1.500 €</strong></td><td><strong>900 €</strong></td></tr>',
+      '<tr><td></td><td><small>teuer</small></td><td><a class="ff-es-btn" href="/go/strom/">Stromanbieter vergleichen →</a></td></tr>',
+      '</tbody></table></div>',
+      '</div>',
+    ].join('\n'),
+  }));
+  const blocks = win.__ffVoice.collectBlocks();
+  const types = blocks.map((b) => b.type);
+  const all = blocks.map((b) => b.text).join(' ');
+
+  t.ok('Markdown-Tabelle bekommt Titel der Überschrift davor',
+    /Tabelle: Kosten im Überblick/.test(all));
+  t.ok('Markdown-Tabelle: Zeile vollständig mit allen Spalten',
+    /Zeile 1 von 1\. Posten: Grundpreis, Betrag: 120 €/.test(all));
+  t.ok('ARIA-Tabelle wird erkannt', /Tabelle: Beispielhaushalt/.test(all));
+  t.eq('ARIA-Tabelle: beide Zeilen gesprochen',
+    types.filter((x) => x === 'table-row').length >= 4 && /Kosten: 900 €/.test(all)
+      && /Kosten: 120 €/.test(all), true);
+  t.ok('ARIA-Tabelle: Zeilentitel (rowheader) wird Zeilenname',
+    blocks.some((b) => b.type === 'table-row' && /: Miete\./.test(b.text)));
+  t.ok('colspan-Gruppierung wird angesagt', /Kopfzeile 1: Energie, Wasser/.test(all));
+  t.ok('unterste Kopfzeile trägt die Spaltennamen',
+    /Die Spalten lauten: Strom, Gas, Trinkwasser/.test(all));
+  t.eq('rowspan-Wert spricht in beiden Zeilen',
+    (all.match(/Strom: 32 ct\/kWh/g) || []).length, 2);
+  t.ok('leere Tabellenzelle erzeugt keine Lücke', !/: ,/.test(all));
+  t.ok('Emoji und Pfeile dringen nicht in Tabellen-Blöcke',
+    !/💰|🏆|❌|→/.test(blocks.filter((b) => /^table-/.test(b.type)).map((b) => b.text).join(' ')));
+  t.ok('small-Ziertext mit Komma angebunden', /Vorher, Alter Verbraucher/.test(all));
+  t.ok('Summenzeile im tbody wird Zusammengerechnet',
+    /Zusammengerechnet: Vorher, Alter Verbraucher: 1\.500 €, Ersparnis: 900 €/.test(all));
+  t.eq('Werbelink-Zeile wird Empfehlung statt Datenzeile',
+    types.filter((x) => x === 'table-cta').length, 1);
+  t.ok('Werbelink wird als Partnerlink offengelegt',
+    /Empfehlung: Stromanbieter vergleichen\. Hinweis: Dies ist ein Partnerlink/.test(all));
+  t.ok('keine Datenzeile spricht den Werbelink als Wert',
+    !/Ersparnis: Stromanbieter vergleichen/.test(all));
+  t.ok('Anmoderation zählt nur echte Datenzeilen',
+    /Übersicht mit 3 Spalten und 2 Zeilen/.test(all));
+}
+
+/* ============================================================
+   3c · Innentabellen & leere Tabellen
+   ============================================================ */
+t.group('3c) Innentabellen einmal, leere Tabellen stumm');
+{
+  const { win } = loadPage(skeleton({
+    title: 'Sonderfälle',
+    bodyHtml: [
+      '<h2 id="aussen">Außentabelle</h2>',
+      '<table>',
+      '<thead><tr><th>Plan</th><th>Details</th></tr></thead>',
+      '<tbody><tr><td>Tarif A</td><td><table><tbody><tr><td>innen eins</td><td>innen zwei</td></tr></tbody></table></td></tr></tbody>',
+      '</table>',
+      '<table><tbody><tr><td></td><td></td></tr></tbody></table>',
+    ].join('\n'),
+  }));
+  const blocks = win.__ffVoice.collectBlocks();
+  const types = blocks.map((b) => b.type);
+  const all = blocks.map((b) => b.text).join(' ');
+
+  t.eq('Nur die Außentabelle wird angesagt (Innentabelle als Zelleninhalt)',
+    types.filter((x) => x === 'table-intro').length, 1);
+  t.eq('Innentabelle spricht genau einmal',
+    (all.match(/innen eins/g) || []).length, 1);
+  t.ok('Innentabelle mit hörbarem Abstand der Blöcke',
+    /Details: innen eins innen zwei/.test(all));
+  t.ok('Außentabelle zählt zwei Spalten (keine Geisterspalten)',
+    /Übersicht mit 2 Spalten und einer Zeile/.test(all));
+  t.ok('Außentabelle bekommt Titel der Überschrift davor',
+    /Tabelle: Außentabelle/.test(all));
+  t.ok('Leere Tabelle bleibt stumm', !/Übersichtstabelle/.test(all));
 }
 
 /* ============================================================
@@ -424,6 +538,15 @@ t.group('11) Kurzfassung: Aufbau, Barrierefreiheit, Kopieren');
   t.ok('Kernaussagen gefüllt', dlg.querySelectorAll('.ff-voice-list--plain li').length >= 2);
   t.ok('Zahlen-Karten gefüllt', dlg.querySelectorAll('.ff-voice-figure').length >= 1);
   t.ok('Tabellen im Fokus', dlg.querySelectorAll('.ff-voice-tablecard').length >= 1);
+  // Mini-Vorschau: Kopfzeile + Datenzeilen, für Screenreader verborgen
+  const preview = dlg.querySelector('.ff-voice-tablecard__preview');
+  t.ok('Tabellen-Vorschau gerendert', !!preview);
+  if (preview) {
+    t.ok('Vorschau trägt Kopfzeile', preview.querySelectorAll('thead th').length >= 2);
+    t.ok('Vorschau trägt Datenzeilen', preview.querySelectorAll('tbody tr').length >= 1);
+    t.ok('Vorschau ist für Vorlesemodell verborgen (kein Doppelt)',
+      preview.getAttribute('aria-hidden') === 'true');
+  }
   t.ok('Inhaltsverzeichnis gefüllt', dlg.querySelectorAll('.ff-voice-toc a').length >= 3);
 
   // Kopieren
@@ -433,6 +556,7 @@ t.group('11) Kurzfassung: Aufbau, Barrierefreiheit, Kopieren');
   t.ok('Klartext-Kurzfassung kopiert', typeof copied === 'string' && copied.length > 40);
   t.ok('Kopie enthält den Titel', /Heizkosten senken/.test(copied || ''));
   t.ok('Kopie enthält Kernaussagen', /Kernaussagen/.test(copied || ''));
+  t.ok('Kopie enthält die Tabelle', /Tarif/.test(copied || '') && /Komfort/.test(copied || ''));
   t.ok('Kopie ist reiner Text (kein HTML)', !/</.test(copied || ''));
 
   // Fokus-Falle & Schließen

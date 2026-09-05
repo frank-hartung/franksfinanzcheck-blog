@@ -19,8 +19,17 @@
    KURZFASSUNG
      Verlagshaus-Kurzfassung im barrierefreien <dialog>:
      Kurzantwort, Byline, Kernaussagen, Zahlen auf einen Blick,
-     Tabellen im Fokus, Inhaltsverzeichnis, Kopier-Funktion,
-     Fokus-Falle, Scroll-Sperre.
+     Tabellen im Fokus (mit Mini-Vorschau), Inhaltsverzeichnis,
+     Kopier-Funktion, Fokus-Falle, Scroll-Sperre.
+
+   TABELLEN & ÜBERSICHTEN (vollständig, mit Zeilen und Spalten)
+     HTML- und ARIA-Tabellen (role="table"/"grid"/"treegrid",
+     Zeilen über role="row") werden als logisches Gitter gelesen:
+     colspan/rowspan korrekt aufgespannt, mehrzeilige Köpfe,
+     Zeilentitel (th scope="row"), Gruppen-, Summen- und
+     Werbelink-Zeilen als eigene Rollen, Titel-Kaskade aus
+     caption/aria-label/Premium-Headline/Überschrift davor.
+     Details: VORLESEN-TABELLEN-HIGHEND-REPORT.md
 
    FIRST-PARTY & PRIVACY: keine Fremd-CDNs, kein Tracking, keine
    Netzwerkaufrufe zur Laufzeit — die Tonspur liegt auf dem
@@ -51,7 +60,7 @@
      1 · KONFIGURATION
      ============================================================ */
 
-  var VOICE_VERSION = '2026.09.05-a';
+  var VOICE_VERSION = '2026.09.05-b';
 
   var cfgEl = doc.getElementById('ff-voice-config');
   if (!cfgEl) return;
@@ -120,10 +129,14 @@
       cueTariff: 'Tarif im Überblick:', cueWarning: 'Achtung:', cueNote: 'Hinweis:',
       columnLabel: 'Spalte', rowLabel: 'Zeile',
       tableHeaders: 'Die Spalten lauten: {headers}.',
+      tableHeaderRow: 'Kopfzeile {n}: {headers}.',
       tableIntro: 'Tabelle: {title}. Übersicht mit {cols} Spalten und {rows} Zeilen.',
       tableIntroOne: 'Tabelle: {title}. Übersicht mit {cols} Spalten und einer Zeile.',
       tableRow: 'Zeile {row} von {total}. {content}.',
+      tableRowLabel: 'Zeile {row} von {total}: {label}. {content}.',
+      tableGroup: 'Gruppe: {name}.',
       tableSum: 'Zusammengerechnet: {content}.',
+      tableCta: 'Empfehlung: {cta}. Hinweis: Dies ist ein Partnerlink.',
       tableOutro: 'Ende der Tabelle {title}.',
       tableDefault: 'Übersichtstabelle',
       prevAria: 'Vorheriger Abschnitt', nextAria: 'Nächster Abschnitt',
@@ -145,6 +158,7 @@
       summaryEmpty: 'Für diesen Artikel liegt derzeit keine Kurzfassung vor.',
       summaryRowCount: '{count} Zeilen',
       summaryRowCountOne: '1 Zeile',
+      summaryMoreRows: '+ {count} weitere Zeilen',
       summaryReadingTime: 'ca. {time} Min. Lesezeit',
       summaryWords: '{count} Wörter',
       summaryJump: 'Zum Abschnitt'
@@ -176,10 +190,14 @@
       cueTariff: 'Tariff at a glance:', cueWarning: 'Attention:', cueNote: 'Note:',
       columnLabel: 'Column', rowLabel: 'Row',
       tableHeaders: 'The columns are: {headers}.',
+      tableHeaderRow: 'Header row {n}: {headers}.',
       tableIntro: 'Table: {title}. Overview with {cols} columns and {rows} rows.',
       tableIntroOne: 'Table: {title}. Overview with {cols} columns and one row.',
       tableRow: 'Row {row} of {total}. {content}.',
+      tableRowLabel: 'Row {row} of {total}: {label}. {content}.',
+      tableGroup: 'Group: {name}.',
       tableSum: 'In total: {content}.',
+      tableCta: 'Recommendation: {cta}. Note: this is an affiliate link.',
       tableOutro: 'End of table {title}.',
       tableDefault: 'Overview Table',
       prevAria: 'Previous section', nextAria: 'Next section',
@@ -200,6 +218,7 @@
       summaryEmpty: 'No summary is currently available for this article.',
       summaryRowCount: '{count} rows',
       summaryRowCountOne: '1 row',
+      summaryMoreRows: '+ {count} more rows',
       summaryReadingTime: 'approx. {time} min read',
       summaryWords: '{count} words',
       summaryJump: 'Go to section'
@@ -552,6 +571,10 @@
       .replace(/&auml;/g, 'ä').replace(/&euro;/g, '€').replace(/&[a-zA-Z]+;/g, ' ');
     out = out.replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, ' ');
     out = out.replace(/[\u2013\u2014]/g, '–');
+    // Schmuckzeichen, Pfeile und Emoji sind keine Wörter — sie werden
+    // still entfernt (💰 ❌ ✅ 🏆 → …), statt als „money bag“ o. Ä.
+    // vorgelesen zu werden. Wortgleich in scripts/ff_voice_backends.py.
+    out = out.replace(/[\u00ad\u200b-\u200f\u2060\u2190-\u21ff\u2300-\u27bf\u2b00-\u2bff\ufe00-\ufe0f]|[\ud83c-\udbff][\udc00-\udfff]/g, ' ');
 
     out = normalizeUrls(out, hold, L);
     out = normalizeDates(out, hold, L);
@@ -650,15 +673,77 @@
     return text.length >= Math.max(12, parentText.length - 2) || siblings <= 2;
   }
 
-  /* ---------- Tabellenmodell -------------------------------- */
+  /* ---------- Tabellenmodell (Premium, Generation 2) --------
+     Vollständige Erkennung mit Zeilen und Spalten:
+     · HTML-Tabellen UND ARIA-Tabellen (role="table"/"grid"/
+       "treegrid" auf div-Basis, Zeilen über role="row")
+     · colspan/rowspan werden zu einem logischen Gitter
+       aufgespannt: jede Zelle erscheint in genau der Spalte,
+       zu der sie gehört — nie verschoben, nie verloren,
+      nie doppelt.
+     · mehrzeilige Kopfzeilen: die unterste trägt die
+       Spaltennamen, darüberliegende werden angesagt
+     · Zeilentitel (th scope="row", role="rowheader") werden
+       zum Namen ihrer Zeile
+     · Gruppenzeilen, Summenzeilen (auch mitten im tbody) und
+       Werbelink-Zeilen (CTA) bekommen eine eigene Rolle
+     · Ziertext aus <small> wird mit Komma angebunden;
+       Schmuck-Emoji und Pfeile werden entfernt
+     Wortgleich gespiegelt in scripts/ff_voice_audio.py —
+     die Parität prüft scripts/ff_voice_parity_check.py.
+     --------------------------------------------------------- */
 
-  function cellSpan(cell) {
+  var GENERIC_TABLE_LABELS = ['tabelle', 'table'];
+  var SUM_WORDS = ['zwischensumme', 'summe', 'gesamt', 'insgesamt', 'total', 'grand total', 'in total', 'sum'];
+
+  /** Schmuckzeichen, Pfeile und Emoji entfernen (💰 ❌ ✅ 🏆 →). */
+  function stripDecor(text) {
+    return String(text == null ? '' : text)
+      .replace(/[\u00ad\u200b-\u200f\u2060\u2190-\u21ff\u2300-\u27bf\u2b00-\u2bff\ufe00-\ufe0f]|[\ud83c-\udbff][\udc00-\udfff]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  /** colspan/rowspan bzw. aria-colspan/aria-rowspan einer Zelle. */
+  function spanOf(cell, attr, ariaAttr) {
     var span = 1;
     if (cell && cell.getAttribute) {
-      var v = parseInt(cell.getAttribute('colspan'), 10);
-      if (isFinite(v) && v > 1) span = v;
+      var raw = cell.getAttribute(attr);
+      if (raw == null && ariaAttr) raw = cell.getAttribute(ariaAttr);
+      var v = parseInt(raw, 10);
+      if (isFinite(v) && v > 1) span = Math.min(v, 24);
     }
     return span;
+  }
+
+  /**
+   * Sprechtext einer Zelle: Grundtext, dann Ziertext aus <small>
+   * mit Komma angebunden („Vorher, Alter Verbraucher“).
+   */
+  function cellSpeechText(cell) {
+    if (!cell) return '';
+    var clone = cell.cloneNode ? cell.cloneNode(true) : cell;
+    qsa('script, style, noscript, svg, [data-ff-skip-read], [aria-hidden="true"]', clone)
+      .forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); });
+    var smallParts = [];
+    qsa('small', clone).forEach(function (s) {
+      var t = String(s.textContent || '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
+      if (t) smallParts.push(t);
+      if (s.parentNode) s.parentNode.removeChild(s);
+    });
+    qsa('br', clone).forEach(function (n) {
+      if (n.parentNode) n.parentNode.replaceChild(doc.createTextNode(' '), n);
+    });
+    // Blockelemente in der Zelle (z. B. Innentabelle, Absätze) bekommen
+    // einen hörbaren Abstand — wortgleich zur Generator-Seite.
+    qsa('p, div, li, h1, h2, h3, h4, h5, h6, blockquote, tr, td, th, section, figcaption', clone)
+      .forEach(function (n) {
+        if (n.parentNode) n.parentNode.insertBefore(doc.createTextNode(' '), n.nextSibling);
+      });
+    var base = String(clone.textContent || '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
+    var out = base;
+    for (var i = 0; i < smallParts.length; i++) out = (out ? out + ', ' : '') + smallParts[i];
+    return stripDecor(out);
   }
 
   function isHeaderCell(cell) {
@@ -670,9 +755,14 @@
     return role === 'columnheader' || role === 'rowheader';
   }
 
-  function rowCells(tr) {
+  function rowCells(tr, tableEl) {
     if (!tr) return [];
-    return qsa('th, td, [role="columnheader"], [role="rowheader"], [role="cell"], [role="gridcell"]', tr);
+    var cells = qsa('th, td, [role="columnheader"], [role="rowheader"], [role="cell"], [role="gridcell"]', tr);
+    // Zellen einer verschachtelten Innentabelle gehören zur Innentabelle.
+    if (tableEl && tagOf(tableEl) === 'TABLE') {
+      return cells.filter(function (c) { return closestOf(c, 'table') === tableEl; });
+    }
+    return cells;
   }
 
   function tableRows(tableEl) {
@@ -680,6 +770,9 @@
     var seen = [];
     function push(tr, kind) {
       if (!tr || seen.indexOf(tr) !== -1) return;
+      // Zeilen einer verschachtelten Innentabelle gehören nicht hierher.
+      var owner = closestOf(tr, 'table');
+      if (owner && owner !== tableEl) return;
       seen.push(tr);
       rows.push({ tr: tr, kind: kind });
     }
@@ -689,85 +782,275 @@
     qsa('tr', tableEl).forEach(function (tr) {
       if (seen.indexOf(tr) === -1) push(tr, rows.length === 0 ? 'head' : 'body');
     });
+    // ARIA-Tabellen ohne <tr>: Zeilen laufen über role="row".
+    if (!rows.length) {
+      qsa('[role="row"]', tableEl).forEach(function (r) { push(r, 'body'); });
+    }
     return rows;
   }
 
+  /** Titel der Übersicht — caption, aria-label, Premium-Titel oder
+      die unmittelbar davorstehende Überschrift (Markdown-Tabellen). */
   function tableTitle(tableEl) {
     var cap = qsa('caption', tableEl)[0];
-    if (cap && readableText(cap)) return readableText(cap);
-    var aria = tableEl.getAttribute && tableEl.getAttribute('aria-label');
-    if (aria) return aria;
-    // Nächstgelegene Überschrift davor (Tarifvergleich/Einspartabelle)
-    /* Die Premium-Übersichten setzen ihren Titel (.ff-tv-title /
-       .ff-es-title) AUSSERHALB des Tablewrappers. Deshalb wird nach oben
-       gestiegen, bis ein Vorfahre einen Titel trägt. */
+    if (cap && stripDecor(readableText(cap))) return stripDecor(readableText(cap));
+
+    // Wrapper-Kette nach oben sammeln (Tablewrapper bis zur Sektion).
+    var wrappers = [];
     var node = tableEl;
     for (var up = 0; up < 4 && node; up++) {
-      var wrap = closestOf(node, '.ff-tarifvergleich, .ff-einspar, .ff-tv-tablewrap, .ff-es-tablewrap, .ff-table-scroll');
-      if (!wrap) break;
-      var h = qsa('.ff-tv-title, .ff-es-title, caption, h3, h4', wrap)[0];
-      if (h && h !== tableEl && readableText(h)) return readableText(h);
+      var wrap = closestOf(node, '.ff-tarifvergleich, .ff-einspar, .ff-tv-tablewrap, .ff-es-tablewrap, .ff-table-scroll, .wp-block-table, .table-wrapper, .table-responsive');
+      if (!wrap || wrappers.indexOf(wrap) !== -1) break;
+      wrappers.push(wrap);
       node = wrap.parentElement;
     }
-    var prev = tableEl.previousElementSibling;
+
+    // aria-label der Tabelle oder ihrer Wrapper — außer Allgemeinplätzen
+    // wie „Tabelle“ (vom Table-Render-Hook automatisch gesetzt).
+    var ariaSrcs = [tableEl].concat(wrappers);
+    for (var a = 0; a < ariaSrcs.length; a++) {
+      var aria = ariaSrcs[a].getAttribute && ariaSrcs[a].getAttribute('aria-label');
+      if (aria) {
+        var cleanAria = stripDecor(aria);
+        if (cleanAria && GENERIC_TABLE_LABELS.indexOf(cleanAria.toLowerCase()) === -1) return cleanAria;
+      }
+    }
+
+    // Premium-Übersichten setzen ihren Titel (.ff-tv-title /
+    // .ff-es-title) AUSSERHALB des Tablewrappers — in jedem
+    // Wrapper der Kette suchen.
+    for (var w = 0; w < wrappers.length; w++) {
+      var h = qsa('.ff-tv-title, .ff-es-title, caption, h3, h4', wrappers[w])[0];
+      if (h && h !== tableEl && closestOf(h, 'table') !== tableEl && stripDecor(readableText(h))) {
+        return stripDecor(readableText(h));
+      }
+    }
+
+    // Unmittelbar davorstehende Überschrift (z. B. Markdown-Tabelle
+    // unter einer Zwischenüberschrift).
+    var outerEl = wrappers.length ? wrappers[wrappers.length - 1] : tableEl;
+    var prev = outerEl.previousElementSibling;
     var guard = 0;
     while (prev && guard++ < 4) {
-      if (/^H[23456]$/.test(tagOf(prev)) && readableText(prev)) return readableText(prev);
+      if (/^H[23456]$/.test(tagOf(prev)) || anyClass(prev, ['ff-tv-title', 'ff-es-title'])) {
+        var tHead = stripDecor(readableText(prev));
+        if (tHead) return tHead;
+      }
       prev = prev.previousElementSibling;
     }
     return '';
   }
 
-  function buildTableModel(tableEl) {
-    var rows = tableRows(tableEl);
-    var headers = [];
-    var body = [];
-    var foot = [];
-    var headerFound = false;
-
-    rows.forEach(function (r) {
-      var cells = rowCells(r.tr);
-      var texts = cells.map(function (c) { return readableText(c); });
-      var allHead = texts.length > 0 && cells.every(isHeaderCell);
-      if (r.kind === 'head' || (!headerFound && allHead)) {
-        if (!headerFound) { headers = texts; headerFound = true; }
-        else body.push({ cells: texts, kind: 'body' });
-        return;
+  /**
+   * Spannt die Zeilen zu einem logischen Gitter auf: colspan- und
+   * rowspan-Zellen belegen genau ihre Spalten. Jeder Eintrag trägt
+   * `lead` = diese Spalte spricht den Wert (colspan-Fortsetzungen
+   * schweigen, rowspan-Werte werden in jeder überspannten Zeile
+   * wiederholt — wie ein Screenreader).
+   */
+  function expandGrid(tableEl, rows) {
+    var occupied = {};
+    var grid = [];
+    for (var r = 0; r < rows.length; r++) {
+      var cells = rowCells(rows[r].tr, tableEl);
+      var entries = [];
+      var col = 0;
+      for (var ci = 0; ci < cells.length; ci++) {
+        while (occupied[r + ',' + col]) { entries.push(occupied[r + ',' + col]); col++; }
+        var cell = cells[ci];
+        var cs = spanOf(cell, 'colspan', 'aria-colspan');
+        var rs = spanOf(cell, 'rowspan', 'aria-rowspan');
+        var text = cellSpeechText(cell);
+        var head = isHeaderCell(cell);
+        for (var d = 0; d < cs; d++) {
+          entries.push({ el: cell, text: text, head: head, lead: d === 0 });
+          for (var dr = 1; dr < rs; dr++) {
+            occupied[(r + dr) + ',' + (col + d)] = { el: cell, text: text, head: head, lead: true };
+          }
+        }
+        col += cs;
       }
-      if (r.kind === 'foot') { foot.push({ cells: texts, kind: 'foot' }); return; }
-      body.push({ cells: texts, kind: 'body' });
-    });
-
-    var colCount = Math.max(
-      headers.length,
-      body.reduce(function (m, r) { return Math.max(m, r.cells.length); }, 0),
-      foot.reduce(function (m, r) { return Math.max(m, r.cells.length); }, 0)
-    );
-
-    return {
-      title: tableTitle(tableEl) || T.tableDefault,
-      headers: headers,
-      rows: body,
-      foot: foot,
-      colCount: colCount
-    };
+      while (occupied[r + ',' + col]) { entries.push(occupied[r + ',' + col]); col++; }
+      grid.push({ el: rows[r].tr, kind: rows[r].kind, cells: entries });
+    }
+    return grid;
   }
 
-  function cellSpeech(name, value, index, L) {
+  /** Eine Zelle als Paar „Spaltenname: Wert“. */
+  function cellSpeech(name, value, index) {
     var label = name && String(name).length ? String(name) : (T.columnLabel + ' ' + (index + 1));
     var val = value == null || String(value) === '' ? '' : String(value);
     if (!val) return '';
     return label + ': ' + val;
   }
 
-  /** Eine Tabelle wird als Zusammenschau gesprochen — zeilenweise. */
+  function startsWithSumWord(text) {
+    var low = String(text || '').toLowerCase();
+    for (var i = 0; i < SUM_WORDS.length; i++) {
+      if (low.indexOf(SUM_WORDS[i]) === 0) return true;
+    }
+    return false;
+  }
+
+  /**
+   * Das vollständige Modell einer Tabelle/Übersicht:
+   * Titel, Spaltennamen (auch mehrzeilige Köpfe), Zeilen mit ihrer
+   * Rolle (data | group | sum | cta | empty) und vorgerüsteten
+   * Sprech-Teilen. Wortgleich in scripts/ff_voice_audio.py.
+   */
+  function buildTableModel(tableEl) {
+    var grid = expandGrid(tableEl, tableRows(tableEl));
+    var headerRows = [];
+    var bodyRows = [];
+    var footRows = [];
+    var headerDone = false;
+
+    grid.forEach(function (row) {
+      var nonEmpty = row.cells.filter(function (e) { return e.text; });
+      var allHead = nonEmpty.length > 0 && nonEmpty.every(function (e) { return e.head; });
+      if (row.kind === 'head' || (!headerDone && allHead)) {
+        headerRows.push(row);
+        headerDone = true;
+        return;
+      }
+      if (row.kind === 'foot') { footRows.push(row); return; }
+      bodyRows.push(row);
+    });
+
+    var colCount = 0;
+    grid.forEach(function (row) { colCount = Math.max(colCount, row.cells.length); });
+
+    // Spaltennamen = die UNTERSTE Kopfzeile (sie trägt die Werte).
+    var headers = [];
+    if (headerRows.length) {
+      var lastHead = headerRows[headerRows.length - 1];
+      for (var c = 0; c < colCount; c++) {
+        var e = lastHead.cells[c];
+        headers.push(e && e.text ? e.text : '');
+      }
+    }
+
+    // Darüberliegende Kopfzeilen (Gruppierungen) werden angesagt.
+    var headerExtras = [];
+    for (var h = 0; h < headerRows.length - 1; h++) {
+      var texts = [];
+      headerRows[h].cells.forEach(function (entry) {
+        if (!entry.text || entry.lead === false) return;
+        if (texts.length && texts[texts.length - 1] === entry.text) return;
+        texts.push(entry.text);
+      });
+      if (texts.length) headerExtras.push(texts.join(', '));
+    }
+
+    function classify(row, isFoot) {
+      var rec = { el: row.el, kind: 'data', label: '', parts: [], cta: '', group: '' };
+      var nonEmpty = [];
+      row.cells.forEach(function (entry, c) { if (entry.text) nonEmpty.push({ e: entry, c: c }); });
+
+      // Anzeige-Zellen für die Kurzfassung (je Spalte, ohne Span-Duplikate)
+      var display = [];
+      for (var c0 = 0; c0 < row.cells.length; c0++) {
+        var de = row.cells[c0];
+        display.push(de && de.lead !== false ? de.text : '');
+      }
+      rec.display = display;
+
+      if (!nonEmpty.length) { rec.kind = 'empty'; return rec; }
+
+      // 1 · Werbelink-Zeile (CTA): Button/Partnerlink in der Zelle.
+      var ctaParts = [];
+      var ctaCells = 0;
+      var plainCells = [];
+      nonEmpty.forEach(function (item) {
+        var links = qsa('a.ff-tv-btn, a.ff-es-btn, a.ff-cta, button', item.e.el);
+        var texts = [];
+        links.forEach(function (a) {
+          var t = stripDecor(readableText(a));
+          if (t) texts.push(t);
+        });
+        if (texts.length) {
+          ctaCells++;
+          texts.forEach(function (t) { if (ctaParts.indexOf(t) === -1) ctaParts.push(t); });
+        } else {
+          plainCells.push(item.e.text);
+        }
+      });
+      var onlyDecorLeft = plainCells.every(function (t) { return t.length < 24 && !/\d/.test(t); });
+      if (ctaCells > 0 && onlyDecorLeft) {
+        rec.kind = 'cta';
+        rec.cta = ctaParts.join(', ');
+        return rec;
+      }
+
+      // 2 · Summenzeile: tfoot, Summen-Klasse oder Summenwort.
+      var first = nonEmpty[0];
+      var isSum = isFoot || hasClass(row.el, 'ff-es-sum') || hasClass(row.el, 'ff-tv-sum')
+        || startsWithSumWord(first.e.text);
+      if (isSum) {
+        rec.kind = 'sum';
+        var skipFirst = startsWithSumWord(first.e.text);
+        nonEmpty.forEach(function (item, i) {
+          if (i === 0 && skipFirst) return;   // „Summe/Gesamt“ sagt der Cue selbst
+          if (item.e.lead === false) return;
+          var spoken = cellSpeech(headers[item.c], item.e.text, item.c);
+          if (spoken) rec.parts.push(spoken);
+        });
+        return rec;
+      }
+
+      // 3 · Gruppenzeile: alle Zellen sind Köpfe (z. B. th mit colspan).
+      if (nonEmpty.every(function (item) { return item.e.head; })) {
+        var names = [];
+        nonEmpty.forEach(function (item) {
+          if (item.e.lead !== false && names.indexOf(item.e.text) === -1) names.push(item.e.text);
+        });
+        rec.kind = 'group';
+        rec.group = names.join(', ');
+        return rec;
+      }
+
+      // 4 · Datenzeile — ein Zeilentitel (th/rowheader) wird ihr Name.
+      var startAt = 0;
+      if (first.e.head) {
+        rec.label = first.e.text;
+        startAt = 1;
+      }
+      for (var i2 = startAt; i2 < nonEmpty.length; i2++) {
+        var it = nonEmpty[i2];
+        if (it.e.lead === false) continue;
+        var spoken2 = cellSpeech(headers[it.c], it.e.text, it.c);
+        if (spoken2) rec.parts.push(spoken2);
+      }
+      return rec;
+    }
+
+    var rows = [];
+    bodyRows.forEach(function (row) { rows.push(classify(row, false)); });
+    footRows.forEach(function (row) { rows.push(classify(row, true)); });
+
+    return {
+      title: tableTitle(tableEl) || T.tableDefault,
+      headers: headers,
+      headerExtras: headerExtras,
+      rows: rows,
+      colCount: colCount
+    };
+  }
+
+  /** Eine Tabelle wird vollständig gesprochen — Zeile für Zeile. */
   function extractTableBlocks(tableEl, blockLang) {
     var L = blockLang;
     var model = buildTableModel(tableEl);
     var out = [];
     var title = model.title || T.tableDefault;
 
-    var rowCount = model.rows.length;
+    var dataRows = model.rows.filter(function (r) { return r.kind === 'data' && r.parts.length; });
+    var hasContent = dataRows.length > 0 || model.headers.some(function (h) { return h; })
+      || model.headerExtras.length > 0
+      || model.rows.some(function (r) { return r.kind === 'sum' || r.kind === 'cta' || r.kind === 'group'; });
+    if (!hasContent) return out;   // leere Hülle: nichts sprechen
+
+    var rowCount = dataRows.length;
     out.push({
       el: tableEl,
       lang: L,
@@ -778,46 +1061,56 @@
         .replace('{rows}', rowCount)
     });
 
-    if (model.headers.length) {
+    var spokenHeaders = model.headers.filter(function (h) { return h; });
+    if (spokenHeaders.length) {
       out.push({
         el: tableEl,
         lang: L,
         type: 'table-header',
-        text: T.tableHeaders.replace('{headers}', model.headers.join(', '))
+        text: T.tableHeaders.replace('{headers}', spokenHeaders.join(', '))
       });
     }
-
-    model.rows.forEach(function (row, i) {
-      var parts = [];
-      for (var c = 0; c < Math.max(row.cells.length, model.colCount); c++) {
-        var spoken = cellSpeech(model.headers[c], row.cells[c], c, L);
-        if (spoken) parts.push(spoken);
-      }
-      if (!parts.length) return;
+    model.headerExtras.forEach(function (extra, i) {
       out.push({
-        el: row.tr,
+        el: tableEl,
         lang: L,
-        type: 'table-row',
-        text: T.tableRow
-          .replace('{row}', i + 1)
-          .replace('{total}', rowCount)
-          .replace('{content}', parts.join(', '))
+        type: 'table-header',
+        text: T.tableHeaderRow.replace('{n}', i + 1).replace('{headers}', extra)
       });
     });
 
-    model.foot.forEach(function (row) {
-      var parts = [];
-      for (var c = 0; c < row.cells.length; c++) {
-        var spoken = cellSpeech(model.headers[c], row.cells[c], c, L);
-        if (spoken) parts.push(spoken);
+    var dataIdx = 0;
+    model.rows.forEach(function (row) {
+      if (row.kind === 'empty') return;
+      if (row.kind === 'data') {
+        if (!row.parts.length) return;
+        dataIdx += 1;
+        var tmpl = row.label ? T.tableRowLabel : T.tableRow;
+        out.push({
+          el: row.el,
+          lang: L,
+          type: 'table-row',
+          text: tmpl
+            .replace('{row}', dataIdx)
+            .replace('{total}', rowCount)
+            .replace('{label}', row.label)
+            .replace('{content}', row.parts.join(', '))
+        });
+        return;
       }
-      if (!parts.length) return;
-      out.push({
-        el: row.tr,
-        lang: L,
-        type: 'table-sum',
-        text: T.tableSum.replace('{content}', parts.join(', '))
-      });
+      if (row.kind === 'group') {
+        out.push({ el: row.el, lang: L, type: 'table-group', text: T.tableGroup.replace('{name}', row.group) });
+        return;
+      }
+      if (row.kind === 'sum') {
+        if (!row.parts.length) return;
+        out.push({ el: row.el, lang: L, type: 'table-sum', text: T.tableSum.replace('{content}', row.parts.join(', ')) });
+        return;
+      }
+      if (row.kind === 'cta') {
+        if (!row.cta) return;
+        out.push({ el: row.el, lang: L, type: 'table-cta', text: T.tableCta.replace('{cta}', row.cta) });
+      }
     });
 
     out.push({
@@ -896,6 +1189,9 @@
       var elLang = sniffLangOf(el, lang);
 
       if (isTableLike(el)) {
+        // Innentabellen sprechen als Zelleninhalt der Außentabelle mit —
+        // nie ein zweites Mal als eigene Tabelle.
+        if (el.parentElement && closestOf(el.parentElement, 'table')) return;
         var tbl = innerTable(el);
         if (!tbl || done.indexOf(tbl) !== -1) return;
         done.push(tbl);
@@ -1035,7 +1331,9 @@
     'table-intro':  { rate: 0.92, pitch: 0.97, volume: 1.00, before: 520, after: 320 },
     'table-header': { rate: 0.95, pitch: 0.98, volume: 1.00, before: 160, after: 300 },
     'table-row':    { rate: 0.93, pitch: 0.98, volume: 0.99, before: 120, after: 340 },
+    'table-group':  { rate: 0.93, pitch: 0.97, volume: 1.00, before: 360, after: 300 },
     'table-sum':    { rate: 0.92, pitch: 0.98, volume: 1.01, before: 260, after: 400 },
+    'table-cta':    { rate: 0.97, pitch: 1.00, volume: 1.00, before: 300, after: 460 },
     'table-outro':  { rate: 0.96, pitch: 0.99, volume: 0.98, before: 300, after: 520 }
   };
 
@@ -2245,16 +2543,22 @@
     if (!content) return [];
     var seen = [];
     var out = [];
-    qsa('table, [role="table"], [role="grid"]', content).forEach(function (t) {
-      if (isReaderSkipped(t)) return;
-      var inner = innerTable(t);
-      if (!inner || seen.indexOf(inner) !== -1) return;
-      seen.push(inner);
-      var model = buildTableModel(inner);
-      if (!model.rows.length && !model.headers.length) return;
-      out.push(model);
-    });
+    qsa('table, [role="table"], [role="grid"], [role="treegrid"], .ff-table-scroll, .ff-tv-tablewrap, .ff-es-tablewrap', content)
+      .forEach(function (t) {
+        if (isReaderSkipped(t)) return;
+        var inner = innerTable(t);
+        if (!inner || seen.indexOf(inner) !== -1) return;
+        seen.push(inner);
+        var model = buildTableModel(inner);
+        var hasData = model.rows.some(function (r) { return r.kind === 'data' && r.parts.length; });
+        if (!hasData && !model.headers.some(function (h) { return h; })) return;
+        out.push(model);
+      });
     return out;
+  }
+
+  function dataRowsOf(model) {
+    return model.rows.filter(function (r) { return r.kind === 'data' && r.parts.length; });
   }
 
   /** Kernaussagen: die ersten tragenden Sätze der Abschnitte. */
@@ -2355,6 +2659,19 @@
       kp.forEach(function (k, i) { lines.push((i + 1) + '. ' + k); });
       lines.push('');
     }
+    var tables = collectTables();
+    if (tables.length) {
+      lines.push(T.summaryTables);
+      tables.slice(0, 6).forEach(function (model) {
+        lines.push('· ' + (model.title || T.tableDefault));
+        var heads = model.headers.filter(function (h) { return h; });
+        if (heads.length) lines.push('  ' + heads.join(' · '));
+        dataRowsOf(model).slice(0, 5).forEach(function (r) {
+          lines.push('  – ' + (r.label ? r.label + ': ' : '') + r.parts.join('; '));
+        });
+      });
+      lines.push('');
+    }
     var toc = buildToc();
     if (toc.length) {
       lines.push(T.summaryToc);
@@ -2430,7 +2747,7 @@
       body.appendChild(secFig);
     }
 
-    // 5 · Tabellen & Übersichten
+    // 5 · Tabellen & Übersichten im Fokus (mit Mini-Vorschau)
     var tables = collectTables();
     if (tables.length) {
       var secTab = el('section', 'ff-voice-sec');
@@ -2439,11 +2756,39 @@
       tables.slice(0, 6).forEach(function (model) {
         var card = el('div', 'ff-voice-tablecard');
         card.appendChild(el('h4', 'ff-voice-tablecard__h', model.title || T.tableDefault));
-        var rows = model.rows.length;
-        var meta = T.summaryRowCount.replace('{count}', rows);
-        if (rows === 1) meta = T.summaryRowCountOne;
+        var rows = dataRowsOf(model);
+        var meta = rows.length === 1 ? T.summaryRowCountOne : T.summaryRowCount.replace('{count}', rows.length);
         card.appendChild(el('p', 'ff-voice-tablecard__meta',
           model.colCount + ' \u00d7 ' + meta));
+
+        // Mini-Vorschau: Kopfzeile + die ersten drei Datenzeilen
+        var preview = el('table', 'ff-voice-tablecard__preview');
+        preview.setAttribute('aria-hidden', 'true');
+        var visibleHeaders = model.headers.filter(function (h) { return h; });
+        if (visibleHeaders.length) {
+          var thead = el('thead');
+          var trh = el('tr');
+          visibleHeaders.slice(0, 4).forEach(function (h) { trh.appendChild(el('th', null, h)); });
+          thead.appendChild(trh);
+          preview.appendChild(thead);
+        }
+        var tbody = el('tbody');
+        rows.slice(0, 3).forEach(function (r) {
+          var tr = el('tr');
+          var shown = [];
+          for (var dc = 0; dc < r.display.length && shown.length < 4; dc++) {
+            if (r.display[dc]) shown.push(r.display[dc]);
+          }
+          if (!shown.length && r.label) shown.push(r.label);
+          shown.forEach(function (v) { tr.appendChild(el('td', null, v)); });
+          if (tr.children.length) tbody.appendChild(tr);
+        });
+        if (tbody.children.length) preview.appendChild(tbody);
+        if (preview.children.length) card.appendChild(preview);
+        if (rows.length > 3) {
+          card.appendChild(el('p', 'ff-voice-tablecard__more',
+            T.summaryMoreRows.replace('{count}', rows.length - 3)));
+        }
         wrap.appendChild(card);
       });
       secTab.appendChild(wrap);
