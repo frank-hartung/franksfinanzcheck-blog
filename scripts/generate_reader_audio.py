@@ -137,8 +137,27 @@ GROQ_TTS_MODEL = ttb.GroqBackend.MODEL
 GROQ_VOICE_DE = os.environ.get("FF_AUDIO_VOICE_DE", "")   # Orpheus kann kein Deutsch
 GROQ_VOICE_EN = os.environ.get("FF_AUDIO_VOICE_EN", "")
 
-INTRO_DE = "{title}. Ein Beitrag von FranksFinanzcheck. Hördauer etwa {time} Minuten."
-INTRO_EN = "{title}. An article by FranksFinanzcheck. Listening time about {time} minutes."
+INTRO_DE = "{title}. Ein Beitrag von FranksFinanzcheck. Hördauer etwa {duration}."
+INTRO_EN = "{title}. An article by FranksFinanzcheck. Listening time about {duration}."
+
+
+def duration_phrase(lang: str, minutes: str | int) -> str:
+    """Zahlwort-Kongruenz für die Hördauer (Parität zu durationPhrase()).
+
+    „Hördauer etwa 1 Minuten" ist derselbe Roboter-Verräter wie
+    „1 Zeilen" in einer Tabelle – bei einminütigen Artikeln fiel das
+    in jedem Intro auf.
+    """
+    de = lang != "en"
+    try:
+        n = int(str(minutes).strip())
+    except (TypeError, ValueError):
+        n = 0
+    if n <= 0:
+        return "einige Minuten" if de else "a few minutes"
+    if n == 1:
+        return "eine Minute" if de else "one minute"
+    return f"{n} Minuten" if de else f"{n} minutes"
 OUTRO_DE = "Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck."
 OUTRO_EN = "End of article. Thank you for listening to FranksFinanzcheck."
 
@@ -189,7 +208,23 @@ NESTED_SKIP = {"ff-kurzantwort", "ff-korrektur", "callout",
 
 
 class Node:
-    __slots__ = ("tag", "attrs", "classes", "parent", "children", "text", "id")
+    """Kleinster DOM-Knoten – Elemente UND Textknoten.
+
+    v11 (05.09.2026): Text ist ein eigenes Kind (`tag == "#text"`), kein
+    Feld am Element. Der frühere Aufbau sammelte den gesamten direkten
+    Text eines Elements in `node.text` und hängte die Kind-Elemente
+    danach an. Damit ging die Reihenfolge im Dokument verloren:
+
+        <li><strong>Tarifwechsel als größter Hebel:</strong> Ein Wechsel …</li>
+
+    wurde zu „Ein Wechsel … pro Jahr. Tarifwechsel als größter Hebel:" –
+    jede fettgedruckte Einleitung, jeder Link und jede Hervorhebung
+    landete am Satzende. Das war der Hauptgrund für den Befund
+    „fett gedruckter Text wird übersprungen": Er wurde nicht
+    übersprungen, sondern an die falsche Stelle gesprochen.
+    """
+
+    __slots__ = ("tag", "attrs", "classes", "parent", "children", "_text", "id")
 
     def __init__(self, tag: str):
         self.tag = tag
@@ -197,8 +232,23 @@ class Node:
         self.classes: set[str] = set()
         self.parent: Node | None = None
         self.children: list[Node] = []
-        self.text: str = ""
+        self._text: str = ""
         self.id: str = ""
+
+    @property
+    def is_text(self) -> bool:
+        return self.tag == "#text"
+
+    @property
+    def text(self) -> str:
+        """Direkter Text dieses Knotens (nur bei Textknoten gefüllt)."""
+        return self._text
+
+    def own_text(self) -> str:
+        """Verketteter Text der DIREKTEN Textkinder (Reihenfolge egal)."""
+        if self.is_text:
+            return self._text
+        return "".join(c._text for c in self.children if c.is_text)
 
     def _match_sel(self, sel: str) -> bool:
         if sel.startswith("[") and sel.endswith("]"):
@@ -250,8 +300,22 @@ class DocParser(HTMLParser):
                 break
 
     def handle_data(self, data):
-        if self.stack:
-            self.stack[-1].text += data
+        """Text als eigenes Kind anhängen – exakt an seiner Stelle im Dokument.
+
+        Aufeinanderfolgende Textstücke werden zusammengefasst, damit
+        `children` klein bleibt; die Reihenfolge gegenüber Elementen
+        bleibt dabei erhalten.
+        """
+        if not self.stack or not data:
+            return
+        parent = self.stack[-1]
+        if parent.children and parent.children[-1].is_text:
+            parent.children[-1]._text += data
+            return
+        node = Node("#text")
+        node._text = data
+        node.parent = parent
+        parent.children.append(node)
 
 
 BLOCK_TAGS = {"p", "div", "li", "tr", "td", "th", "h1", "h2", "h3", "h4",
@@ -259,54 +323,71 @@ BLOCK_TAGS = {"p", "div", "li", "tr", "td", "th", "h1", "h2", "h3", "h4",
 
 
 def element_text(node: Node) -> str:
-    """Port von readableText(): dekorative/verborgene Teile werden entfernt.
+    """Text eines Knotens in DOKUMENTREIHENFOLGE (Port von readableText()).
 
-    Zeilenumbrüche (<br>) und Blockgrenzen sind Wortgrenzen – ohne diesen
-    Schritt verschmilzt „1200 Euro<br><small>pro Jahr</small>“ zu
-    „1200 Europro Jahr“. Inline-Auszeichnungen (strong/em/span/small)
-    dürfen dagegen NICHT getrennt werden („<strong>fett</strong>er“).
+    Reihenfolge ist hier keine Formalie: Sie entscheidet, ob
+    „<strong>Tarifwechsel als größter Hebel:</strong> Ein Wechsel …" als
+    „Tarifwechsel als größter Hebel: Ein Wechsel …" gesprochen wird oder
+    als „Ein Wechsel … Tarifwechsel als größter Hebel:".
+
+    Regeln (identisch zur Browser-Seite):
+      · Deko/Verborgenes fällt weg (script, style, noscript, template,
+        aria-hidden, hidden, .anchor, .ff-heading-copy, .ff-reader-toolbar).
+      · <br> und Blockgrenzen sind Wortgrenzen – sonst verschmilzt
+        „1200 Euro<br><small>pro Jahr</small>" zu „1200 Europro Jahr".
+      · Inline-Auszeichnungen (strong/em/a/span/small) trennen NICHT –
+        sonst wird aus „Ein <strong>fett</strong>er Teil" ein „fett er".
+      · Textstücke werden konkateniert (nicht mit Leerzeichen joined):
+        Der Quelltext bringt seine Leerzeichen selbst mit.
     """
-    parts = []
+    parts: list[str] = []
 
-    def walk(n: Node):
-        if n.tag in {"script", "style", "noscript"}:
+    def walk(n: Node) -> None:
+        if n.is_text:
+            parts.append(n.text)
             return
-        if n.attrs.get("aria-hidden") == "true":
+        if n.tag in {"script", "style", "noscript", "template"}:
             return
-        if "ff-heading-copy" in n.classes or "anchor" in n.classes or "ff-reader-toolbar" in n.classes:
+        if n.attrs.get("aria-hidden") == "true" or "hidden" in n.attrs:
+            return
+        if n.classes & {"ff-heading-copy", "anchor", "ff-reader-toolbar"}:
             return
         if n.tag == "br":
             parts.append(" ")
             return
-        if n.text:
-            parts.append(n.text)
         for c in n.children:
             walk(c)
-            if c.tag in BLOCK_TAGS or c.tag == "br":
+            if c.tag in BLOCK_TAGS:
                 parts.append(" ")
 
     walk(node)
-    return re.sub(r"\s+", " ", " ".join(parts)).strip()
+    return re.sub(r"\s+", " ", "".join(parts)).strip()
 
 
 def element_text_without(node: Node, skip_classes: set[str]) -> str:
-    """Text wie element_text(), aber ohne Nachfahren mit einer der skip_classes."""
+    """Wie element_text(), aber ohne Nachfahren mit einer der skip_classes."""
     parts: list[str] = []
 
     def walk(n: Node) -> None:
-        if n.tag in {"script", "style", "noscript"}:
-            return
-        if n.attrs.get("aria-hidden") == "true":
-            return
-        if any(x in n.classes for x in skip_classes):
-            return
-        if n.text:
+        if n.is_text:
             parts.append(n.text)
+            return
+        if n.tag in {"script", "style", "noscript", "template"}:
+            return
+        if n.attrs.get("aria-hidden") == "true" or "hidden" in n.attrs:
+            return
+        if n.classes & skip_classes:
+            return
+        if n.tag == "br":
+            parts.append(" ")
+            return
         for c in n.children:
             walk(c)
+            if c.tag in BLOCK_TAGS:
+                parts.append(" ")
 
     walk(node)
-    return re.sub(r"\s+", " ", " ".join(parts)).strip()
+    return re.sub(r"\s+", " ", "".join(parts)).strip()
 
 
 def find_post_content(root: Node) -> Node | None:
@@ -325,16 +406,239 @@ def find_post_content(root: Node) -> Node | None:
     return walk(root)
 
 
-def parse_tables(node: Node, lang: str, out: list) -> None:
-    """Port von extractTableSpeechBlocks() – Intro + Zeilen + Outro."""
-    title = node.attrs.get("aria-label") or ""
+# --------------------------------------------------------------------------
+# Tabellenmodell (v11) – EINE Quelle für Tonspur und Browser-Reader
+# --------------------------------------------------------------------------
+# Befund 05.09.2026: Die alte parse_tables() kannte nur <thead>/<tbody>/<tr>
+# als direkte Kinder. Damit fehlten
+#   · Tabellen ohne <thead>      → Kopfzeile wurde als Datenzeile gesprochen
+#   · <tfoot>                    → Summenzeile verschwand komplett
+#   · colspan                    → falsche Spaltenzahl + falsche Spaltennamen
+#   · role="table"/"row"/"cell"  → die ganze Übersicht blieb stumm
+#   · Zeilen mit Link + Kurztext → stillschweigend verworfen („0 Zeilen")
+# Das Modell unten löst Spalten über colspan auf, erkennt Kopf- und
+# Summenzeilen strukturell und verwirft nur noch echte Aktionszeilen
+# (Zeilen, die AUSSERHALB von Links/Buttons keinen Text tragen).
+
+CELL_TAGS = {"td", "th"}
+ARIA_CELL_ROLES = {"cell", "gridcell", "rowheader", "columnheader"}
+ROW_ROLES = {"row"}
+TABLE_ROLES = {"table", "grid", "treegrid"}
+TABLE_WRAP_CLASSES = {"ff-table-scroll", "ff-tv-tablewrap", "ff-es-tablewrap",
+                      "wp-block-table", "table-wrapper", "table-responsive"}
+SUM_CLASSES = {"ff-es-sum", "ff-tv-sum"}
+SUM_LABEL_RE = re.compile(
+    r"^(summe|gesamt(?:summe|ersparnis)?|insgesamt|zusammen|total|sum|overall|"
+    r"\u03a3|\u2211)\b", re.I)
+
+
+def _prev_element(node: Node) -> Node | None:
+    if node.parent is None:
+        return None
+    sibs = node.parent.children
+    try:
+        i = sibs.index(node)
+    except ValueError:
+        return None
+    for j in range(i - 1, -1, -1):
+        if not sibs[j].is_text:
+            return sibs[j]
+    return None
+
+
+def _is_row(n: Node) -> bool:
+    return n.tag == "tr" or n.attrs.get("role") in ROW_ROLES
+
+
+def _is_cell(n: Node) -> bool:
+    return n.tag in CELL_TAGS or n.attrs.get("role") in ARIA_CELL_ROLES
+
+
+def _row_cells_expanded(tr: Node) -> list[tuple[int, Node, int]]:
+    """Zellen einer Zeile mit aufgelöstem colspan.
+
+    Rückgabe: [(spaltenindex, zelle, colspan), …] – der Spaltenindex ist
+    die Position im Raster, nicht der Zähler der Zelle. Ohne diese
+    Auflösung heißt die dritte Spalte nach einer Titelzeile mit
+    `colspan="2"` fälschlich „Spalte 2".
+    """
+    out: list[tuple[int, Node, int]] = []
+    col = 0
+    for c in tr.children:
+        if c.is_text or not _is_cell(c):
+            continue
+        try:
+            span = max(1, int((c.attrs.get("colspan") or "1").strip() or 1))
+        except (TypeError, ValueError):
+            span = 1
+        out.append((col, c, span))
+        col += span
+    return out
+
+
+def _row_grid_width(tr: Node) -> int:
+    cells = _row_cells_expanded(tr)
+    if not cells:
+        return 0
+    col, _, span = cells[-1]
+    return col + span
+
+
+def _iter_table_rows(table: Node):
+    """Zeilen in Dokumentreihenfolge: (gruppe, zeile).
+
+    gruppe ∈ {"head", "body", "foot"}. Erfasst <thead>/<tbody>/<tfoot>,
+    direkte <tr>-Kinder sowie ARIA-Strukturen ([role=rowgroup] >
+    [role=row] und [role=row] direkt im [role=table]).
+    """
+    def role_of(n: Node) -> str:
+        return (n.attrs.get("role") or "").lower()
+
+    def walk(n: Node, group: str, depth: int) -> None:
+        for c in n.children:
+            if c.is_text:
+                continue
+            tag = c.tag
+            role = role_of(c)
+            if tag == "thead" or role == "rowgroup" and _group_has_columnheader(c):
+                walk(c, "head", depth + 1)
+            elif tag in {"tbody", "tfoot"} or role == "rowgroup":
+                walk(c, "foot" if tag == "tfoot" else group, depth + 1)
+            elif tag == "tr" or role == "row":
+                yield_rows.append((group, c))
+            elif depth < 3 and tag in {"div", "section"} and role not in TABLE_ROLES:
+                # ARIA-Wrapper ohne rowgroup: Zeilen können direkt liegen.
+                walk(c, group, depth + 1)
+
+    yield_rows: list[tuple[str, Node]] = []
+    walk(table, "body", 0)
+    return yield_rows
+
+
+def _group_has_columnheader(group: Node) -> bool:
+    for c in group.children:
+        if not c.is_text and c.attrs.get("role") == "columnheader":
+            return True
+        if not c.is_text and _is_row(c):
+            for cell in c.children:
+                if not cell.is_text and cell.attrs.get("role") == "columnheader":
+                    return True
+    return False
+
+
+def _link_text(node: Node) -> str:
+    """Text, der in Links/Buttons steckt (für die Aktionszeilen-Erkennung)."""
+    out: list[str] = []
+
+    def walk(n: Node) -> None:
+        if n.is_text:
+            return
+        if n.tag in {"a", "button"}:
+            out.append(element_text(n))
+            return
+        for c in n.children:
+            walk(c)
+
+    walk(node)
+    return " ".join(x for x in out if x).strip()
+
+
+def table_model(table: Node) -> dict:
+    """Struktur einer Tabelle – Kopf, Spalten, Zeilen, Summenzeilen.
+
+    Das Modell ist bewusst engine-unabhängig: Generator (Tonspur) und
+    ff-reader.js bauen dasselbe Modell, damit Live-Markierung,
+    Zeilenzählung und Tonspur nie auseinanderlaufen.
+    """
+    rows = _iter_table_rows(table)
+
+    head_rows = [tr for g, tr in rows if g == "head"]
+    body_rows = [(g, tr) for g, tr in rows if g != "head"]
+
+    # Kein <thead>: Die erste Zeile ist genau dann die Kopfzeile, wenn sie
+    # ausschließlich aus <th>/[role=columnheader] besteht und weitere
+    # Zeilen folgen. Sonst würde „Anbieter | Preis | Bonus" als
+    # „Zeile 1 von 3. Preis: Preis. Bonus: Bonus." gesprochen.
+    header_row_is_first_body = False
+    if not head_rows and len(body_rows) > 1:
+        first = body_rows[0][1]
+        cells = _row_cells_expanded(first)
+        if cells and all(c.tag == "th" or c.attrs.get("role") == "columnheader"
+                         for _, c, _ in cells):
+            head_rows = [first]
+            body_rows = body_rows[1:]
+            header_row_is_first_body = True
+
+    # Spaltennamen: letzte Kopfzeile gewinnt (die genauere), Lücken werden
+    # aus den darüberliegenden Kopfzeilen gefüllt (colspan-Gruppentitel).
+    grids: list[dict[int, str]] = []
+    for tr in head_rows:
+        grid: dict[int, str] = {}
+        for col, cell, span in _row_cells_expanded(tr):
+            txt = element_text(cell)
+            for k in range(span):
+                if txt and (col + k) not in grid:
+                    grid[col + k] = txt
+        grids.append(grid)
+    headers: dict[int, str] = {}
+    for grid in grids:
+        for col, txt in grid.items():
+            if txt:
+                headers[col] = txt
+
+    col_count = 0
+    for tr in head_rows:
+        col_count = max(col_count, _row_grid_width(tr))
+    for _, tr in body_rows:
+        col_count = max(col_count, _row_grid_width(tr))
+
+    parsed_rows: list[dict] = []
+    for group, tr in body_rows:
+        cells = _row_cells_expanded(tr)
+        if not cells:
+            continue
+        text_by_col = {col: element_text(cell) for col, cell, _ in cells}
+        row_text = element_text(tr)
+        if not row_text:
+            continue
+        # Echte Aktionszeile: AUSSERHALB von Links/Buttons steht nichts.
+        # Der alte Test (len(rest) < 12) warf auch Datenzeilen weg, deren
+        # erste Zelle ein Link war – z. B. „Check24 | 29 ct" → „0 Zeilen".
+        rest = row_text
+        for piece in _link_text(tr).split():
+            rest = rest.replace(piece, "", 1)
+        is_action = bool(_link_text(tr)) and not re.sub(r"[\W_]+", "", rest)
+        if is_action:
+            continue
+        label = text_by_col.get(0, "")
+        is_sum = bool(SUM_CLASSES & tr.classes) or group == "foot" or \
+            bool(label and SUM_LABEL_RE.match(label.strip()))
+        parsed_rows.append({
+            "cols": text_by_col,
+            "label": label,
+            "is_sum": is_sum,
+            "grid_cols": cells[-1][0] + cells[-1][2],
+        })
+
+    return {
+        "headers": headers,
+        "col_count": max(col_count, len(headers), 1),
+        "rows": parsed_rows,
+        "has_header_row": bool(head_rows) or header_row_is_first_body,
+    }
+
+
+def _table_title(table: Node, lang: str) -> str:
+    """Titel einer Tabelle – gleiche Kaskade wie im Browser-Reader."""
+    de = lang != "en"
+    title = table.attrs.get("aria-label") or ""
     if not title:
-        caption = next((c for c in node.children if c.tag == "caption"), None)
+        caption = next((c for c in table.children
+                        if not c.is_text and c.tag == "caption"), None)
         if caption:
             title = element_text(caption)
     if not title:
-        # Premium-Übersichten tragen ihren Namen in der eigenen Kopfzeile.
-        n: Node | None = node
+        n: Node | None = table
         while n is not None and not ({"ff-tarifvergleich", "ff-einspar"} & n.classes):
             n = n.parent
         if n is not None:
@@ -342,108 +646,120 @@ def parse_tables(node: Node, lang: str, out: list) -> None:
                 if x.classes & OVERVIEW_TITLES:
                     return element_text(x)
                 for c in x.children:
+                    if c.is_text:
+                        continue
                     r = find_head(c)
                     if r:
                         return r
                 return ""
             title = find_head(n)
     if not title:
-        title = "Übersichtstabelle" if lang != "en" else "Overview Table"
+        # Vorangehende Überschrift: Ohne sie hieß jede Markdown-Tabelle im
+        # Ohr „Übersichtstabelle", obwohl direkt darüber „Die
+        # Spar-Potenziale im Energie-Bereich" steht.
+        start = table
+        parent = start.parent
+        while parent is not None and (parent.classes & TABLE_WRAP_CLASSES):
+            start = parent
+            parent = start.parent
+        sib = _prev_element(start)
+        while sib is not None:
+            if re.fullmatch(r"h[1-6]", sib.tag):
+                title = element_text(sib)
+                break
+            sib = _prev_element(sib)
+    if not title:
+        title = "Übersichtstabelle" if de else "Overview Table"
+    return title
 
-    def row_cells(tr: Node) -> list[str]:
-        return [element_text(c) for c in tr.children if c.tag in {"td", "th"}]
 
-    def is_cta_row(tr: Node, cells: list[str]) -> bool:
-        """Reine Aktions-/Deko-Zeile (nur Button) – trägt nichts zum Hören bei."""
-        link_text = ""
+def inner_table(node: Node) -> Node | None:
+    """Wie innerTable() im Browser: die eigentliche Tabelle im Wrapper."""
+    if node.tag == "table":
+        return node
+    if (node.attrs.get("role") or "").lower() in TABLE_ROLES:
+        return node
 
-        def walk(n: Node) -> None:
-            nonlocal link_text
-            if n.tag in {"a", "button"}:
-                link_text += " " + element_text(n)
-                return
-            for c in n.children:
-                walk(c)
-
-        walk(tr)
-        row_text = " ".join(x for x in cells if x).strip()
-        rest = row_text.replace(link_text.strip(), "").strip()
-        return bool(link_text.strip()) and len(rest) < 12
-
-    headers: list[str] = []
-    body_rows: list[tuple[list[str], bool]] = []
-    direct_trs: list[tuple[list[str], bool]] = []
-    for part in node.children:
-        if part.tag == "thead":
-            for tr in part.children:
-                if tr.tag == "tr":
-                    headers = row_cells(tr)
-                    break
-        elif part.tag == "tbody":
-            for tr in part.children:
-                if tr.tag == "tr":
-                    cells = row_cells(tr)
-                    if is_cta_row(tr, cells):
-                        continue
-                    body_rows.append((cells, bool({"ff-es-sum", "ff-tv-sum"} & tr.classes)))
-        elif part.tag == "tr":
-            cells = row_cells(part)
-            if is_cta_row(part, cells):
+    def walk(n: Node) -> Node | None:
+        for c in n.children:
+            if c.is_text:
                 continue
-            direct_trs.append((cells, bool({"ff-es-sum", "ff-tv-sum"} & part.classes)))
+            if c.tag == "table" or (c.attrs.get("role") or "").lower() in TABLE_ROLES:
+                return c
+            found = walk(c)
+            if found is not None:
+                return found
+        return None
 
-    if not headers and direct_trs:
-        headers = direct_trs[0][0]
-    rows = body_rows if body_rows else (direct_trs[1:] if len(direct_trs) > 1 else [])
+    return walk(node)
 
-    col_count = max(len(headers), 1)
+
+def parse_tables(node: Node, lang: str, out: list) -> None:
+    """Tabelle → Intro + Zeilen + Outro (Intro/Zeilen/Outro als eigene Blöcke)."""
+    de = lang != "en"
+    model = table_model(node)
+    title = _table_title(node, lang)
+    headers = model["headers"]
+    col_count = model["col_count"]
+    rows = model["rows"]
     row_count = len(rows)
 
-    de = lang != "en"
+    def plural(n: int, one: str, many: str) -> str:
+        return one if n == 1 else many
+
     if de:
-        intro = (f"Tabelle: {title}. Übersicht mit {col_count} Spalten und einer Zeile."
-                 if row_count == 1 else
-                 f"Tabelle: {title}. Übersicht mit {col_count} Spalten und {row_count} Zeilen.")
+        cols_txt = f"{col_count} " + ("Spalte" if col_count == 1 else "Spalten")
+        rows_txt = "einer Zeile" if row_count == 1 else f"{row_count} Zeilen"
+        intro = f"Tabelle: {title}. Übersicht mit {cols_txt} und {rows_txt}."
+        header_names = [headers.get(i) or f"Spalte {i + 1}" for i in range(col_count)]
         if headers:
-            intro += f" Die Spalten lauten: {', '.join(headers)}."
+            intro += " Die Spalten lauten: " + ", ".join(header_names) + "."
     else:
-        intro = (f"Table: {title}. Overview with {col_count} columns and one row."
-                 if row_count == 1 else
-                 f"Table: {title}. Overview with {col_count} columns and {row_count} rows.")
+        cols_txt = f"{col_count} " + plural(col_count, "column", "columns")
+        rows_txt = "one row" if row_count == 1 else f"{row_count} rows"
+        intro = f"Table: {title}. Overview with {cols_txt} and {rows_txt}."
+        header_names = [headers.get(i) or f"Column {i + 1}" for i in range(col_count)]
         if headers:
-            intro += f" The columns are: {', '.join(headers)}."
+            intro += " The columns are: " + ", ".join(header_names) + "."
     out.append((lang, "table-intro", intro))
 
-    for idx, (row, is_sum) in enumerate(rows, 1):
-        row_label = row[0] if row else ""
-        stmts = []
-        for ci, cell in enumerate(row):
-            if not cell:
+    for idx, row in enumerate(rows, 1):
+        cols = row["cols"]
+        label = row["label"]
+        stmts: list[str] = []
+        for col in sorted(cols):
+            val = cols[col]
+            if not val:
                 continue
-            if ci == 0 and row_label:
-                continue
-            if ci < len(headers):
-                hname = headers[ci]
-            else:
-                hname = f"Spalte {ci + 1}" if de else f"Column {ci + 1}"
-            stmts.append(f"{hname}: {cell}")
-        if not stmts and row_label:
-            stmts.append(row_label)
+            if col == 0 and label:
+                continue  # Zeilentitel wird vorangestellt
+            hname = headers.get(col) or (f"Spalte {col + 1}" if de else f"Column {col + 1}")
+            stmts.append(f"{hname}: {val}")
+        if not stmts and label:
+            stmts.append(label)
         if not stmts:
             continue
         content = ". ".join(stmts)
-        prefix = f"{row_label}. " if row_label else ""
-        if is_sum:
+        # Bei einer Summenzeile sagt die Anmoderation bereits „Summe" –
+        # das Etikett der ersten Spalte würde sonst doppelt erklingen.
+        label_spoken = "" if (row["is_sum"] and label and SUM_LABEL_RE.match(label.strip())) else label
+        prefix = f"{label_spoken}. " if label_spoken else ""
+        if row["is_sum"]:
             lead = "Zusammengerechnet: " if de else "In total: "
-            row_raw = f"{lead}{prefix}{content}."
+            # Bei genau einem Wert ist der Spaltenname Ballast:
+            # „Zusammengerechnet: 450 Euro." statt
+            # „Zusammengerechnet: Ersparnis: 450 Euro."
+            sum_content = (re.sub(r"^[^:]{1,40}:\s*", "", stmts[0])
+                           if len(stmts) == 1 else content)
+            row_raw = f"{lead}{prefix}{sum_content}."
         elif row_count == 1:
-            # „Zeile 1 von 1“ ist überflüssiges Geräusch.
+            # „Zeile 1 von 1" ist überflüssiges Geräusch.
             row_raw = f"{prefix}{content}."
         elif de:
             row_raw = f"{prefix}Zeile {idx} von {row_count}. {content}."
         else:
             row_raw = f"{prefix}Row {idx} of {row_count}. {content}."
-        out.append((lang, "table-sum" if is_sum else "table-row", row_raw))
+        out.append((lang, "table-sum" if row["is_sum"] else "table-row", row_raw))
 
     out.append((lang, "table-outro",
                 f"Ende der Tabelle {title}." if de else f"End of table {title}."))
@@ -454,7 +770,9 @@ def collect_blocks(root: Node, title: str, article_lang: str,
     """Liefert [(lang, type, text), …] exakt wie collectBlocks() im Reader."""
     content = find_post_content(root)
     out: list[tuple[str, str, str]] = []
-    intro = (INTRO_DE if article_lang != "en" else INTRO_EN).replace("{title}", title).replace("{time}", reading_time or "")
+    intro = (INTRO_DE if article_lang != "en" else INTRO_EN) \
+        .replace("{title}", title) \
+        .replace("{duration}", duration_phrase(article_lang, reading_time or ""))
     out.append((article_lang, "intro", intro))
     if content is None:
         out.append((article_lang, "outro", OUTRO_DE if article_lang != "en" else OUTRO_EN))
@@ -488,9 +806,16 @@ def collect_blocks(root: Node, title: str, article_lang: str,
     # Flache qsa-Äquivalenz in Dokument-Reihenfolge (wie der Reader).
     nodes: list[Node] = []
 
+    def is_table_like(n: Node) -> bool:
+        """Parität zu isTableLike() im Browser-Reader."""
+        return (n.tag == "table"
+                or (n.attrs.get("role") or "").lower() in TABLE_ROLES
+                or bool(n.classes & TABLE_WRAP_CLASSES))
+
     def gather(n: Node):
         if n.tag in READ_SELECTOR or any(x in READ_BOXES for x in n.classes) \
-                or any(x in OVERVIEW_NOTES for x in n.classes):
+                or any(x in OVERVIEW_NOTES for x in n.classes) \
+                or is_table_like(n) or n.tag in {"strong", "b"}:
             nodes.append(n)
         for c in n.children:
             gather(c)
@@ -512,8 +837,8 @@ def collect_blocks(root: Node, title: str, article_lang: str,
         el_lang = "en" if (el.attrs.get("lang", article_lang) or "").lower().startswith("en") else "de"
 
         # 2) Tabellen: Intro + Zeilen + Outro als eigene Blöcke (dedupliziert).
-        if el.tag == "table" or "ff-table-scroll" in el.classes:
-            tbl = el if el.tag == "table" else next((x for x in el.children if x.tag == "table"), None)
+        if is_table_like(el):
+            tbl = inner_table(el)
             if tbl is None or id(tbl) in processed_tables:
                 continue
             processed_tables.add(id(tbl))
@@ -521,7 +846,8 @@ def collect_blocks(root: Node, title: str, article_lang: str,
             continue
 
         # 3) Inneres von Tabellen nicht doppelt lesen.
-        if el.closest("table", "ff-table-scroll"):
+        if el.closest("table", *(f"[role={r}]" for r in sorted(TABLE_ROLES)),
+                      *(f".{c}" for c in sorted(TABLE_WRAP_CLASSES))):
             continue
 
         # 4) Boxen (Kurzantwort, Sparpotenzial, Tarif, Korrektur, Callout).
@@ -544,6 +870,20 @@ def collect_blocks(root: Node, title: str, article_lang: str,
                 out.append((el_lang, btype, f"{cue} {txt}"))
             continue
 
+        # 4b) Freistehende Fettschrift als eigener Lead-Block – exakt die
+        #     Regel aus dem Browser (<strong> außerhalb von Absatz, Liste,
+        #     Zelle, Überschrift, Link oder Box).
+        if el.tag in {"strong", "b"}:
+            if el.closest("p", "li", "blockquote", "td", "th", "caption",
+                          "h1", "h2", "h3", "h4", "h5", "h6", "a", "button",
+                          *NESTED_SKIP):
+                continue
+            emph = element_text(el)
+            if len(emph) <= 1:
+                continue
+            out.append((el_lang, "lead", re.sub(r"[\s?!.…]+$", "", emph) + "."))
+            continue
+
         # 5) Verschachteltes in Boxen/Zitaten nicht erneut lesen.
         if el.closest(*NESTED_SKIP):
             continue
@@ -558,7 +898,16 @@ def collect_blocks(root: Node, title: str, article_lang: str,
         if el.tag == "li":
             parent = el.parent
             if parent is not None and parent.tag == "ol":
-                idx = next((i for i, s in enumerate(parent.children) if s is el), 0) + 1
+                # Nur ELEMENT-Kinder VOR diesem Punkt zählen (Parität zu
+                # element.children im Browser): Seit Textknoten eigene
+                # Kinder sind, würde ein Zeilenumbruch im Quelltext die
+                # Nummerierung verschieben.
+                idx = 1
+                for sib in parent.children:
+                    if sib is el:
+                        break
+                    if not sib.is_text:
+                        idx += 1
                 txt = (f"Punkt {idx}: " if el_lang != "en" else f"Point {idx}: ") + txt
         if el.tag in {"h2", "h3", "h4", "h5", "h6"}:
             # FAQ-Fragen bleiben Fragen (Parität mit dem Reader).
@@ -1273,6 +1622,119 @@ def selftest() -> int:
           str([(b[1], b[2]) for b in blocks if b[1] == "li"]))
     check("Tabellenzeile enthält Spaltennamen", any(b[1] == "table-row" and "Preis:" in b[2] for b in blocks),
           str([b[2] for b in blocks if b[1] == "table-row"]))
+
+    # ------------------------------------------------------------------
+    # v11 (05.09.2026): Reihenfolge, Tabellenstruktur, Zahlwort-Kongruenz.
+    # Diese Prüfungen sichern genau die Fehler ab, die im Betrieb gemeldet
+    # wurden – sie liefen vorher unbemerkt durch, weil der Selftest nur
+    # das Vorhandensein von Blöcken prüfte, nicht ihren Wortlaut.
+    # ------------------------------------------------------------------
+    print("— Selftest: Textreihenfolge & Tabellenstruktur (v11) —")
+
+    def blocks_of(fragment: str, title: str = "Test", reading_time: str = "1"):
+        p2 = DocParser()
+        p2.feed('<div class="post-content md-content">' + fragment + "</div>")
+        return collect_blocks(p2.root, title, "de", reading_time)
+
+    def texts_of(fragment: str, **kw):
+        return [x for (_l, _t, x) in blocks_of(fragment, **kw)]
+
+    def types_of(fragment: str, **kw):
+        return [t for (_l, t, _x) in blocks_of(fragment, **kw)]
+
+    li_blocks = texts_of(
+        "<ul><li><strong>Tarifwechsel als größter Hebel:</strong> Ein Wechsel "
+        "dauert online weniger als zehn Minuten.</li></ul>")
+    check("Fetteinleitung steht am Satzanfang (nicht am Satzende)",
+          any(x.startswith("Tarifwechsel als größter Hebel: Ein Wechsel") for x in li_blocks),
+          str(li_blocks))
+    check("Kein Block endet mit nachgestellter Fetteinleitung",
+          not any(x.rstrip(".").endswith("Tarifwechsel als größter Hebel:") for x in li_blocks),
+          str(li_blocks))
+
+    link_blocks = texts_of('<p>Details stehen im <a href="/r/">großen Ratgeber</a> unten.</p>')
+    check("Link bleibt an seiner Stelle im Satz",
+          any("im großen Ratgeber unten" in x for x in link_blocks), str(link_blocks))
+
+    inline_blocks = texts_of("<p>Ein <strong>fett</strong>er Teil im Satz.</p>")
+    check("Inline-Fettdruck trennt keine Wörter (nicht „fett er“)",
+          any("ein fetter teil im satz" in x.lower() for x in inline_blocks), str(inline_blocks))
+
+    no_thead = [x for x in texts_of(
+        "<table><tr><th>Anbieter</th><th>Preis</th></tr>"
+        "<tr><td>EON</td><td>32 ct</td></tr>"
+        "<tr><td>Vattenfall</td><td>30 ct</td></tr></table>")
+        if x.startswith(("Tabelle:", "EON", "Vattenfall", "Anbieter"))]
+    check("Tabelle ohne <thead>: Kopfzeile wird nicht als Datenzeile gesprochen",
+          not any("Preis: Preis" in x or x.startswith("Anbieter. Zeile") for x in no_thead),
+          str(no_thead))
+    check("Tabelle ohne <thead>: beide Datenzeilen bleiben erhalten",
+          sum(1 for x in no_thead if x.startswith(("EON", "Vattenfall"))) == 2, str(no_thead))
+
+    foot_blocks = blocks_of(
+        "<table><thead><tr><th>Posten</th><th>Betrag</th></tr></thead>"
+        "<tbody><tr><td>Strom</td><td>120 €</td></tr></tbody>"
+        "<tfoot><tr><td>Summe</td><td>360 €</td></tr></tfoot></table>")
+    check("<tfoot> wird gelesen (Summenzeile war vorher stumm)",
+          any(t == "table-sum" and "360" in x for (_l, t, x) in foot_blocks),
+          str([(t, x) for (_l, t, x) in foot_blocks]))
+
+    colspan_blocks = texts_of(
+        '<table><thead><tr><th colspan="2">Vergleich 2026</th><th>Test</th></tr>'
+        "<tr><th>Tarif</th><th>Preis</th><th>Note</th></tr></thead>"
+        "<tbody><tr><td>Öko</td><td>31 ct</td><td>1,5</td></tr></tbody></table>")
+    check("colspan: Spaltenzahl stimmt (3 statt 5)",
+          any("mit 3 Spalten" in x for x in colspan_blocks), str(colspan_blocks[:1]))
+    check("colspan: Spaltennamen kommen aus der genauen Kopfzeile",
+          any("Preis: 31 ct. Note: 1,5" in x for x in colspan_blocks), str(colspan_blocks))
+
+    aria_blocks = texts_of(
+        '<div role="table" aria-label="Kostenübersicht">'
+        '<div role="row"><div role="columnheader">Posten</div><div role="columnheader">Betrag</div></div>'
+        '<div role="row"><div role="cell">Strom</div><div role="cell">120 €</div></div></div>')
+    check('role="table" ohne rowgroup wird als Tabelle erkannt',
+          any(x.startswith("Tabelle: Kostenübersicht") for x in aria_blocks), str(aria_blocks))
+    check("ARIA-Zeilen werden gesprochen",
+          any("Strom. " in x and "Betrag: 120" in x for x in aria_blocks), str(aria_blocks))
+
+    link_rows = texts_of(
+        '<table><thead><tr><th>Tarif</th><th>Preis</th></tr></thead><tbody>'
+        '<tr><td><a href="/go/">Check24</a></td><td>29 ct</td></tr>'
+        '<tr><td><a href="/go/">Verivox</a></td><td>31 ct</td></tr></tbody></table>')
+    check("Zeilen mit Link in der ersten Zelle bleiben erhalten (vorher „0 Zeilen“)",
+          any("Check24" in x for x in link_rows) and any("Verivox" in x for x in link_rows),
+          str(link_rows))
+
+    action_rows = texts_of(
+        '<table><thead><tr><th>Tarif</th><th>Preis</th></tr></thead><tbody>'
+        "<tr><td>Grundversorger</td><td>38 ct</td></tr>"
+        '<tr><td colspan="2"><a href="/go/">Jetzt vergleichen</a></td></tr></tbody></table>')
+    check("Reine Aktionszeile bleibt stumm",
+          not any("Jetzt vergleichen" in x for x in action_rows), str(action_rows))
+
+    title_blocks = texts_of(
+        '<h2 id="x">Die Spar-Potenziale im Energie-Bereich</h2>'
+        '<div class="ff-table-scroll"><table><thead><tr><th>M</th><th>E</th></tr></thead>'
+        "<tbody><tr><td>LED</td><td>90 €</td></tr></tbody></table></div>")
+    check("Tabellen-Titel fällt auf die vorangehende Überschrift zurück",
+          any("Tabelle: Die Spar-Potenziale im Energie-Bereich" in x for x in title_blocks),
+          str([x for x in title_blocks if x.startswith("Tabelle:")]))
+
+    check("Hördauer: eine Minute statt „1 Minuten“",
+          "Hördauer etwa eine Minute." in blocks_of("<p>Text.</p>", reading_time="1")[0][2],
+          blocks_of("<p>Text.</p>", reading_time="1")[0][2])
+    check("Hördauer: Plural ab zwei Minuten",
+          "Hördauer etwa 9 Minuten." in blocks_of("<p>Text.</p>", reading_time="9")[0][2],
+          blocks_of("<p>Text.</p>", reading_time="9")[0][2])
+    check("Tabellen-Intro: 1 Spalte (Singular)",
+          any("mit 1 Spalte und" in x for x in texts_of(
+              "<table><thead><tr><th>T</th></tr></thead><tbody><tr><td>Ö</td></tr></tbody></table>")))
+    check("Nummerierte Liste zählt Element-Kinder (keine Textknoten)",
+          any(x.startswith("Punkt 1:") and "Eins:" in x for x in texts_of(
+              "<ol>\n<li><strong>Eins:</strong> a.</li>\n<li><strong>Zwei:</strong> b.</li>\n</ol>")),
+          str([x for x in texts_of(
+              "<ol>\n<li><strong>Eins:</strong> a.</li>\n<li><strong>Zwei:</strong> b.</li>\n</ol>")
+              if x.startswith("Punkt")]))
 
     print("— Selftest: Sprache & Normalisierung —")
     check("DE bleibt DE", sniff_lang("Die Versicherung kostet 12 Euro im Monat.", "de") == "de")

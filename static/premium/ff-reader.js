@@ -127,7 +127,10 @@
       resumedPos: 'Vorlesen an der zuletzt gehörten Stelle fortgesetzt.',
       remaining: 'noch ca. {min} Min.',
       mediaArtist: 'FranksFinanzcheck – Artikel zum Hören',
-      introLine: '{title}. Ein Beitrag von FranksFinanzcheck. Hördauer etwa {time} Minuten.',
+      introLine: '{title}. Ein Beitrag von FranksFinanzcheck. Hördauer etwa {duration}.',
+      durationMinutes: '{n} Minuten',
+      durationMinuteOne: 'eine Minute',
+      durationUnknown: 'einige Minuten',
       outroLine: 'Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.',
       listItemNum: 'Punkt {n}:',
       cueShortAnswer: 'Kurzantwort:',
@@ -194,7 +197,10 @@
       resumedPos: 'Resumed from your last listening position.',
       remaining: 'approx. {min} min left',
       mediaArtist: 'FranksFinanzcheck – Article Audio',
-      introLine: '{title}. An article by FranksFinanzcheck. Listening time about {time} minutes.',
+      introLine: '{title}. An article by FranksFinanzcheck. Listening time about {duration}.',
+      durationMinutes: '{n} minutes',
+      durationMinuteOne: 'one minute',
+      durationUnknown: 'a few minutes',
       outroLine: 'End of article. Thank you for listening to FranksFinanzcheck.',
       listItemNum: 'Point {n}:',
       cueShortAnswer: 'Short answer:',
@@ -245,6 +251,15 @@
      UND den sichtbaren Fließtext (bis 1.800 Zeichen) mit Gewichtung für
      Umlaute/ß und typische Stoppwörter. Roh-Sprache "de" wird nur bei
      klarer EN-Mehrheit überschrieben – umgekehrt genauso. */
+  /* Zahlwort-Kongruenz für die Hördauer: „Hördauer etwa 1 Minuten" ist
+     derselbe Roboter-Verräter wie „1 Zeilen" in einer Tabelle. */
+  function durationPhrase(lang, minutes) {
+    var t = I18N[lang] || I18N.de;
+    var n = parseInt(minutes, 10);
+    if (!isFinite(n) || n <= 0) return t.durationUnknown;
+    return n === 1 ? t.durationMinuteOne : t.durationMinutes.replace('{n}', n);
+  }
+
   function detectArticleLanguage() {
     var raw = String(cfg.lang || toolbar.getAttribute('data-page-lang') || doc.documentElement.lang || 'de').toLowerCase();
     var base = raw.indexOf('en') === 0 ? 'en' : 'de';
@@ -356,7 +371,9 @@
   function readableText(el) {
     if (!el) return '';
     var clone = el.cloneNode(true);
-    qsa('script, style, noscript, .ff-heading-copy, .anchor, [aria-hidden="true"], .ff-reader-toolbar', clone)
+    /* `[hidden]` gehört dazu: Verborgenes ist Deko, keine Sprache – und die
+       Tonspur (scripts/generate_reader_audio.py) filtert es ebenfalls. */
+    qsa('script, style, noscript, .ff-heading-copy, .anchor, [aria-hidden="true"], [hidden], .ff-reader-toolbar', clone)
       .forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); });
     /* Zeilenumbrüche und Blockgrenzen sind Wortgrenzen. Ohne diesen
        Schritt verschmilzt „1200 Euro<br><small>pro Jahr</small>“ zu
@@ -386,6 +403,18 @@
     s = s.replace(/\u00a0/g, ' ');
     s = s.replace(/\u00ad/g, '');            // weiches Trennzeichen
     s = s.replace(/[\u200b-\u200d\ufeff]/g, '');
+
+    /* --- Entity-Reste: Markup ist keine Sprache -----------------------
+       Steht im Text noch „300&nbsp;€" (zweite Escape-Stufe, Copy-Paste
+       aus einem CMS, Shortcode-Ausgabe), darf daraus niemals „300 und
+       nbsp Euro" werden. Zuerst die bedeutungstragenden Entities, dann
+       der Rest als Wortgrenze. */
+    s = s.replace(/&(?:nbsp|#160|#x0*a0);/gi, ' ');
+    s = s.replace(/&(?:amp|#38);/gi, ' und ');
+    s = s.replace(/&(?:shy|#173);/gi, '');
+    s = s.replace(/&(?:euro|#8364);/gi, ' Euro ');
+    s = s.replace(/&[a-zA-Z][a-zA-Z0-9]{1,10};/g, ' ');
+    s = s.replace(/&#\d{1,7};/g, ' ');
 
     /* --- Typografische Vorstufe: Anführungen, Striche, Auslassungen --- */
     s = s.replace(/[«»„“”‟"]/g, '');
@@ -841,20 +870,37 @@
   var nextBtn = doc.getElementById('ff-listen-next');
   var remainEl = doc.getElementById('ff-reader-remaining');
 
-  /* ---------- Tempo-synchroner Fortschritt -----------------------------
-     Die gelbe Leiste darf nicht nur bei Boundary-Events springen: Safari
-     und manche Android-/Chromium-Stimmen liefern diese Events gar nicht
-     oder sehr unregelmäßig. Deshalb läuft ein konservativer Zeit-Ticker
-     pro Sprecheinheit mit, dessen Dauer aus derselben Tempoautomatik
-     (effRate: Rolle × Stimme × Informationsdichte) berechnet wird.
-     Boundary-Events bleiben als präzise Korrektur aktiv. Ergebnis: Die
-     Fortschrittsanzeige bewegt sich passend zum automatisch gewählten
-     Sprechtempo und bleibt auch ohne Boundary-Events verständlich. */
+  /* ============================================================
+     FORTSCHRITTS-ENGINE (v11) — ein Zeiger, drei Quellen, eine Regel
+     ------------------------------------------------------------
+     Befund 05.09.2026:
+       · Der Zeit-Ticker startete erst mit `onstart`. Stimmen, die dieses
+         Ereignis spät oder gar nicht liefern (ältere Android-WebViews,
+         Safari mit Remote-Stimmen), ließen die Leiste stehen.
+       · Die geschätzte Dauer nutzte `unit.effRate`, gesprochen wurde aber
+         der auf 0,5–1,25 begrenzte Wert → die Leiste lief der Stimme
+         systematisch davon oder hinterher.
+       · Die Leiste erreichte nie 100 % (Obergrenze 98,5 %) und sprang am
+         Artikelende sofort auf 0 — „fertig" war nie sichtbar.
+       · Nach dem Fortsetzen aus der Atempause sprang sie zurück.
+     Regeln jetzt:
+       1. Der Ticker läuft, sobald die Einheit in die Sprach-Queue geht;
+          `onstart` verankert die Schätzung neu (echter Sprechbeginn).
+       2. boundary-Ereignisse korrigieren präzise, `onend` setzt exakt.
+       3. Der Zeiger ist MONOTON. Zurückgesetzt wird er ausschließlich
+          durch Benutzeraktionen (Neustart, Abschnittssprung, Beenden) —
+          nie durch ein verspätetes Callback einer alten Wiedergabe.
+       4. Am Artikelende wird 100 % gezeigt, kurz gehalten und erst dann
+          in den Ruhezustand zurückgesetzt.
+  ============================================================ */
   var progressTickerId = null;
   var progressTickerIsRaf = false;
   var progressTickerRun = 0;
   var displayedChars = 0;
+  var progressHoldTimer = null;
   var CHARS_PER_MIN_AT_RATE_1 = 1000;
+  var PROGRESS_HOLD_MS = 1200;   // „fertig" muss sichtbar sein, nicht aufblitzen
+  var PROGRESS_UNIT_CAP = 0.995; // onend setzt exakt auf 1 — nie vorher
 
   function cancelProgressTicker() {
     if (!progressTickerId) return;
@@ -864,6 +910,10 @@
     } catch (e) {}
     progressTickerId = null;
     progressTickerIsRaf = false;
+  }
+
+  function cancelProgressHold() {
+    if (progressHoldTimer) { clearTimeout(progressHoldTimer); progressHoldTimer = null; }
   }
 
   function scheduleProgressTick(fn) {
@@ -884,6 +934,10 @@
     progressBar.style.transform = r <= 0 ? 'scaleX(0)' : (r >= 1 ? 'scaleX(1)' : 'scaleX(' + r.toFixed(4) + ')');
   }
 
+  /**
+   * Zeiger setzen. `allowBackward` ist NUR für Benutzeraktionen gedacht
+   * (Neustart, Abschnittssprung, Fortsetzen aus einer Atempause).
+   */
   function setProgressChars(chars, allowBackward) {
     if (!progressBar || !totalChars) return;
     var next = Math.max(0, Math.min(totalChars, chars || 0));
@@ -892,49 +946,93 @@
     paintProgressRatio(displayedChars / totalChars);
   }
 
+  /** Neustart des Zeigers (Neustart, Sprung, Beenden) – hebt die Monotonie auf. */
+  function resetProgressChars(chars) {
+    cancelProgressTicker();
+    cancelProgressHold();
+    displayedChars = Math.max(0, Math.min(totalChars, chars || 0));
+    paintProgressRatio(totalChars ? displayedChars / totalChars : 0);
+  }
+
+  /**
+   * Geschätzte Sprechdauer einer Einheit in Millisekunden.
+   * Maßgeblich ist das Tempo, das die Utterance WIRKLICH bekommt
+   * (`u.rate` ist auf 0,5–1,25 begrenzt) — sonst läuft die Leiste der
+   * Stimme systematisch davon.
+   */
   function estimatedSpeechMs(unit) {
     if (!unit || !unit.text) return 700;
-    var rate = Math.max(0.45, unit.effRate || quality.rate || 1);
+    var wanted = unit.effRate || quality.rate || 1;
+    var rate = Math.max(0.5, Math.min(1.25, wanted));
     var chars = Math.max(1, unit.text.length);
     var ms = (chars / (CHARS_PER_MIN_AT_RATE_1 * rate)) * 60000;
-    // Kleine Anlaufreserve gegen zu frühes Vorlaufen; Zahlen und sehr
-    // dichte Texte sind bereits über effRate langsamer, erhalten aber noch
-    // einen minimalen Sicherheitspuffer für Web-Speech-Stimmen.
+    // Zahlen und sehr dichte Texte brauchen real etwas länger.
     if (/\d/.test(unit.text)) ms *= 1.04;
     if ((unit.words || wordCountOf(unit.text)) > 24) ms *= 1.03;
     return Math.max(450, Math.min(18000, ms));
   }
 
+  /**
+   * Ticker für eine Einheit. `reanchor` wird von `onstart` aufgerufen und
+   * setzt den Startzeitpunkt auf den echten Sprechbeginn — dadurch holt
+   * eine langsam anlaufende Stimme die Leiste wieder ein, statt dass die
+   * Leiste vorläuft.
+   */
   function startProgressTicker(unit, run) {
     cancelProgressTicker();
+    cancelProgressHold();
     if (!progressBar || !totalChars || !unit || !unit.text) return;
     var localRun = ++progressTickerRun;
     var base = typeof unit.startChars === 'number' ? unit.startChars : spokenChars;
     var len = unit.text.length;
-    var startedAt = Date.now();
     var duration = estimatedSpeechMs(unit);
+    var startedAt = Date.now();
+    var anchored = false;
 
     function tick() {
       if (!reading || !playing || run !== playbackRun || localRun !== progressTickerRun) {
         cancelProgressTicker();
         return;
       }
-      var frac = Math.max(0, (Date.now() - startedAt) / duration);
-      // Während die Stimme noch spricht, endet die Schätzung knapp vor dem
-      // Chunk-Ende. onend setzt anschließend exakt auf den nächsten Start.
-      var capped = Math.min(0.985, frac);
+      var frac = duration > 0 ? Math.max(0, (Date.now() - startedAt) / duration) : 1;
+      var capped = Math.min(PROGRESS_UNIT_CAP, frac);
       setProgressChars(base + len * capped, false);
-      if (capped < 0.985) scheduleProgressTick(tick);
+      if (capped < PROGRESS_UNIT_CAP) scheduleProgressTick(tick);
       else progressTickerId = null;
     }
 
-    setProgressChars(base, true);
+    unit._progressReanchor = function () {
+      if (anchored) return;
+      anchored = true;
+      startedAt = Date.now();
+    };
+
+    setProgressChars(base, false);
     scheduleProgressTick(tick);
   }
 
   function finishProgressUnit(unit) {
     cancelProgressTicker();
-    if (unit && unit.text) setProgressChars(typeof unit.endChars === 'number' ? unit.endChars : spokenChars + unit.text.length, false);
+    if (unit && unit.text) {
+      setProgressChars(typeof unit.endChars === 'number' ? unit.endChars : spokenChars + unit.text.length, false);
+    }
+  }
+
+  /** Artikelende: 100 % zeigen, kurz halten, dann Ruhezustand. */
+  function completeProgress() {
+    cancelProgressTicker();
+    cancelProgressHold();
+    if (progressBar && totalChars) {
+      displayedChars = totalChars;
+      paintProgressRatio(1);
+    } else if (progressBar) {
+      paintProgressRatio(1);
+    }
+    progressHoldTimer = setTimeout(function () {
+      progressHoldTimer = null;
+      displayedChars = 0;
+      paintProgressRatio(0);
+    }, PROGRESS_HOLD_MS);
   }
 
   /* ---------- Speech-Engine-Unlocking ---------------------------------
@@ -2047,113 +2145,288 @@
     return Math.min(1.4, Math.max(0.6, v));
   }
 
+  /* ============================================================
+     TABELLEN-MODELL (v11) — eine Struktur für Kopf, Spalten, Zeilen
+     ------------------------------------------------------------
+     Befund 05.09.2026 (gemessen an echten Artikel-Tabellen):
+       · Ohne <thead> wurde die Kopfzeile ALS DATENZEILE gesprochen
+         („Anbieter. Zeile 1 von 3. Preis: Preis. Bonus: Bonus.").
+       · <tfoot> wurde übersehen – Summenzeilen fehlten komplett.
+       · colspan wurde ignoriert – Spaltenzahl und Spaltennamen
+         verschoben sich („Öko. Test: 31 Cent. Tarif: 1,5.").
+       · Zeilen, deren erste Zelle ein Link war, fielen einem
+         Längen-Heuristik-Filter zum Opfer („0 Zeilen").
+       · role="table"/"row"/"cell" ohne rowgroup lieferte keine Zeilen.
+     Das Modell unten löst Spalten über colspan auf, erkennt Kopf- und
+     Summenzeilen strukturell und verwirft nur noch echte Aktionszeilen
+     (Zeilen, die AUSSERHALB von Links/Buttons keinen Text tragen).
+     Dieselbe Logik steht in scripts/generate_reader_audio.py, damit
+     Tonspur und Browser-Reader niemals auseinanderlaufen.
+  ============================================================ */
+  var TABLE_WRAP_CLASSES = ['ff-table-scroll', 'ff-tv-tablewrap', 'ff-es-tablewrap',
+    'wp-block-table', 'table-wrapper', 'table-responsive'];
+  var SUM_CLASSES = ['ff-es-sum', 'ff-tv-sum'];
+  var SUM_LABEL_RE = /^(summe|gesamt(?:summe|ersparnis)?|insgesamt|zusammen|total|sum|overall|\u03a3|\u2211)\b/i;
+  var ARIA_CELL_ROLES = { cell: 1, gridcell: 1, rowheader: 1, columnheader: 1 };
+
+  function cellSpan(cell) {
+    var raw = cell && cell.getAttribute ? cell.getAttribute('colspan') : null;
+    var n = parseInt(raw, 10);
+    return (isFinite(n) && n > 0) ? n : 1;
+  }
+
+  function isCellNode(el) {
+    if (!el) return false;
+    var tag = normTag(el);
+    if (tag === 'TD' || tag === 'TH') return true;
+    var role = String((el.getAttribute && el.getAttribute('role')) || '').toLowerCase();
+    return !!ARIA_CELL_ROLES[role];
+  }
+
+  function isRowNode(el) {
+    if (!el) return false;
+    if (normTag(el) === 'TR') return true;
+    return String((el.getAttribute && el.getAttribute('role')) || '').toLowerCase() === 'row';
+  }
+
+  function isHeaderCell(el) {
+    if (normTag(el) === 'TH') return true;
+    return String((el.getAttribute && el.getAttribute('role')) || '').toLowerCase() === 'columnheader';
+  }
+
+  /** Zellen einer Zeile MIT aufgelöstem colspan: { col, cell, span }. */
+  function rowCellsExpanded(tr) {
+    var out = [];
+    var col = 0;
+    var kids = (tr && tr.children) || [];
+    for (var i = 0; i < kids.length; i++) {
+      var c = kids[i];
+      if (!isCellNode(c)) continue;
+      var span = cellSpan(c);
+      out.push({ col: col, cell: c, span: span });
+      col += span;
+    }
+    return out;
+  }
+
+  function rowGridWidth(tr) {
+    var cells = rowCellsExpanded(tr);
+    if (!cells.length) return 0;
+    var last = cells[cells.length - 1];
+    return last.col + last.span;
+  }
+
+  function groupHasColumnHeader(groupEl) {
+    var kids = (groupEl && groupEl.children) || [];
+    for (var i = 0; i < kids.length; i++) {
+      var c = kids[i];
+      if (String((c.getAttribute && c.getAttribute('role')) || '').toLowerCase() === 'columnheader') return true;
+      if (isRowNode(c)) {
+        var cells = (c.children) || [];
+        for (var j = 0; j < cells.length; j++) if (isHeaderCell(cells[j])) return true;
+      }
+    }
+    return false;
+  }
+
+  /** Alle Zeilen in Dokumentreihenfolge: { group: 'head'|'body'|'foot', row }. */
+  function tableRows(tableEl) {
+    var out = [];
+    (function walk(node, group, depth) {
+      var kids = (node && node.children) || [];
+      for (var i = 0; i < kids.length; i++) {
+        var c = kids[i];
+        var tag = normTag(c);
+        var role = String((c.getAttribute && c.getAttribute('role')) || '').toLowerCase();
+        if (tag === 'THEAD' || (role === 'rowgroup' && groupHasColumnHeader(c))) {
+          walk(c, 'head', depth + 1);
+        } else if (tag === 'TBODY' || tag === 'TFOOT' || role === 'rowgroup') {
+          walk(c, tag === 'TFOOT' ? 'foot' : group, depth + 1);
+        } else if (tag === 'TR' || role === 'row') {
+          out.push({ group: group, row: c });
+        } else if (depth < 3 && (tag === 'DIV' || tag === 'SECTION') &&
+                   role !== 'table' && role !== 'grid' && role !== 'treegrid') {
+          walk(c, group, depth + 1);
+        }
+      }
+    })(tableEl, 'body', 0);
+    return out;
+  }
+
+  /** Text, der in Links/Buttons steckt (Aktionszeilen-Erkennung). */
+  function linkOnlyText(rowEl) {
+    var parts = [];
+    qsa('a, button', rowEl).forEach(function (a) {
+      var t = readableText(a);
+      if (t) parts.push(t);
+    });
+    return parts.join(' ').trim();
+  }
+
+  /** Struktur einer Tabelle: { headers, colCount, rows, hasHeaderRow }. */
+  function buildTableModel(tableEl) {
+    var all = tableRows(tableEl);
+    var headRows = [];
+    var bodyRows = [];
+    all.forEach(function (r) { (r.group === 'head' ? headRows : bodyRows).push(r); });
+
+    /* Ohne <thead>: Die erste Zeile ist genau dann die Kopfzeile, wenn sie
+       ausschließlich aus <th>/[role=columnheader] besteht und weitere
+       Zeilen folgen. Sonst wird die Kopfzeile als Datenzeile gesprochen. */
+    if (!headRows.length && bodyRows.length > 1) {
+      var firstCells = rowCellsExpanded(bodyRows[0].row);
+      var allHead = firstCells.length > 0;
+      firstCells.forEach(function (c) { if (!isHeaderCell(c.cell)) allHead = false; });
+      if (allHead) {
+        headRows.push(bodyRows.shift());
+      }
+    }
+
+    /* Spaltennamen: die letzte Kopfzeile gewinnt (die genauere); Lücken
+       werden aus den darüberliegenden Kopfzeilen gefüllt (Gruppentitel
+       mit colspan). */
+    /* Reihenfolge ist entscheidend: Bei gestapelten Kopfzeilen
+       (<th colspan="2">Vergleich 2026</th> über <th>Tarif</th><th>Preis</th>)
+       ist die UNTERE Zeile die genaue Spaltenbezeichnung. Sie überschreibt
+       den Gruppentitel; dieser füllt nur die Lücken, die die untere Zeile
+       nicht benennt. */
+    var headers = {};
+    headRows.forEach(function (hr) {
+      rowCellsExpanded(hr.row).forEach(function (c) {
+        var txt = readableText(c.cell);
+        if (!txt) return;
+        for (var k = 0; k < c.span; k++) headers[c.col + k] = txt;
+      });
+    });
+
+    var colCount = 0;
+    headRows.forEach(function (hr) { colCount = Math.max(colCount, rowGridWidth(hr.row)); });
+    bodyRows.forEach(function (br) { colCount = Math.max(colCount, rowGridWidth(br.row)); });
+
+    var rows = [];
+    bodyRows.forEach(function (br) {
+      var tr = br.row;
+      var cells = rowCellsExpanded(tr);
+      if (!cells.length) return;
+      var rowText = readableText(tr);
+      if (!rowText) return;
+
+      /* Echte Aktionszeile: AUSSERHALB von Links/Buttons steht nichts.
+         Der frühere Test („Rest kürzer als 12 Zeichen") warf auch
+         Datenzeilen weg, deren erste Zelle ein Link war. */
+      var links = linkOnlyText(tr);
+      var rest = rowText;
+      if (links) {
+        links.split(/\s+/).forEach(function (piece) {
+          if (piece) rest = rest.replace(piece, '');
+        });
+      }
+      if (links && !/[^\s\W_]/.test(rest)) return;
+
+      var byCol = {};
+      cells.forEach(function (c) { byCol[c.col] = readableText(c.cell); });
+      var label = byCol[0] || '';
+      var isSum = false;
+      if (tr.classList) {
+        SUM_CLASSES.forEach(function (cls) { if (tr.classList.contains(cls)) isSum = true; });
+      }
+      if (br.group === 'foot') isSum = true;
+      if (!isSum && label && SUM_LABEL_RE.test(String(label).trim())) isSum = true;
+
+      rows.push({ cols: byCol, label: label, isSum: isSum, el: tr });
+    });
+
+    var headerCount = 0;
+    Object.keys(headers).forEach(function () { headerCount++; });
+
+    return {
+      headers: headers,
+      colCount: Math.max(colCount, headerCount, 1),
+      rows: rows,
+      hasHeaderRow: headRows.length > 0
+    };
+  }
+
   /* ---------- Tabellen-Daten-Extraktion (Maximum Barrierefreiheit) ---------- */
   function extractTableSpeechBlocks(tableEl, lang) {
     if (!tableEl) return [];
     var tTexts = I18N[lang] || I18N.de;
+    var de = lang !== 'en';
 
-    var title = tableEl.getAttribute('aria-label') || '';
-    if (!title) {
-      var caption = tableEl.querySelector('caption');
-      if (!caption && tableEl.closest) {
-        var fig = tableEl.closest('figure');
-        if (fig) caption = fig.querySelector('figcaption');
-      }
-      if (caption) title = readableText(caption);
-    }
-    /* Premium-Übersichten tragen ihren Namen in der eigenen Kopfzeile
-       (.ff-tv-title / .ff-es-title). Ohne diesen Schritt hieß jede
-       Tarif- und Einspartabelle im Ohr nur „Übersichtstabelle“. */
-    if (!title) {
-      var wrap = tableEl.closest ? tableEl.closest('.ff-tarifvergleich, .ff-einspar') : null;
-      if (wrap) {
-        var head = wrap.querySelector('.ff-tv-title, .ff-es-title');
-        if (head) title = readableText(head);
-      }
-    }
-    if (!title) {
-      var prev = (tableEl.closest('.ff-table-scroll') || tableEl).previousElementSibling;
-      while (prev && !/^H[1-6]$/.test(prev.tagName)) prev = prev.previousElementSibling;
-      if (prev && /^H[1-6]$/.test(prev.tagName)) title = readableText(prev);
-    }
-    if (!title) title = tTexts.tableTitleDefault;
+    var model = buildTableModel(tableEl);
+    var title = _tableTitle(tableEl, tTexts);
 
-    var headers = [];
-    var ths = qsa('thead th, [role=\"columnheader\"]', tableEl);
-    if (!ths.length) ths = qsa('tr:first-child th, tr:first-child td, [role=\"row\"]:first-child [role=\"cell\"], [role=\"row\"]:first-child [role=\"columnheader\"]', tableEl);
-    ths.forEach(function (th) {
-      var hText = readableText(th);
-      if (hText) headers.push(hText);
-    });
-
-    var rows = qsa('tbody tr, [role=\"rowgroup\"] [role=\"row\"]', tableEl);
-    if (!rows.length) {
-      var allTrs = qsa('tr, [role=\"row\"]', tableEl);
-      rows = allTrs.length > 1 ? allTrs.slice(1) : allTrs;
-    }
-
-    /* Reine Aktions-/Deko-Zeilen (nur ein Button, „teuer/effizienter“)
-       tragen keine Information zum Hören bei und zerstören die
-       Zeilenzählung („Zeile 3 von 3: Stromanbieter vergleichen“). */
-    rows = rows.filter(function (tr) {
-      if (!tr || (tr.closest && tr.closest('[data-ff-skip-read]'))) return false;
-      var rowText = readableText(tr);
-      if (!rowText) return false;
-      var linkText = '';
-      qsa('a, button', tr).forEach(function (a) { linkText += ' ' + readableText(a); });
-      var rest = rowText.replace(linkText.trim(), '').replace(/\s+/g, ' ').trim();
-      // Bleibt nach Abzug der Buttons nichts Nennenswertes übrig -> stumm.
-      return !(linkText.trim() && rest.length < 12);
-    });
+    var colCount = model.colCount;
+    var rowCount = model.rows.length;
+    var headers = model.headers;
 
     var tableBlocks = [];
-    var colCount = Math.max(headers.length, 1);
-    var rowCount = rows.length;
+    var introEl = tableEl.closest && tableEl.closest('.ff-table-scroll') ? tableEl.closest('.ff-table-scroll') : tableEl;
 
-    /* Zahlwort-Kongruenz: „1 Zeilen“ / „1 columns“ ist der klassische
-       Roboter-Verräter. Singular und Plural werden getrennt geführt. */
-    var introRaw = (rowCount === 1 && tTexts.tableIntroSingular ? tTexts.tableIntroSingular : tTexts.tableIntro)
-      .replace('{title}', title)
-      .replace('{cols}', colCount)
-      .replace('{rows}', rowCount);
-    if (headers.length) {
-      introRaw += ' ' + tTexts.tableHeaders.replace('{headers}', headers.join(', ')) + '.';
+    /* Zahlwort-Kongruenz: „1 Spalten" / „1 Zeilen" / „1 minutes" ist der
+       klassische Roboter-Verräter. Singular und Plural werden getrennt
+       geführt – für Spalten, Zeilen und die Hördauer. */
+    var colsText = colCount + ' ' + (de
+      ? (colCount === 1 ? 'Spalte' : 'Spalten')
+      : (colCount === 1 ? 'column' : 'columns'));
+    var rowsText = de
+      ? (rowCount === 1 ? 'einer Zeile' : rowCount + ' Zeilen')
+      : (rowCount === 1 ? 'one row' : rowCount + ' rows');
+
+    var introRaw = (de
+      ? 'Tabelle: ' + title + '. \u00dcbersicht mit ' + colsText + ' und ' + rowsText + '.'
+      : 'Table: ' + title + '. Overview with ' + colsText + ' and ' + rowsText + '.');
+
+    var headerCount = 0;
+    Object.keys(headers).forEach(function () { headerCount++; });
+    if (headerCount) {
+      var names = [];
+      for (var i = 0; i < colCount; i++) {
+        names.push(headers[i] || ((de ? 'Spalte ' : 'Column ') + (i + 1)));
+      }
+      introRaw += ' ' + tTexts.tableHeaders.replace('{headers}', names.join(', ')) + '.';
     }
-    var introEl = tableEl.closest('.ff-table-scroll') || tableEl;
     tableBlocks.push({ el: introEl, text: introRaw, lang: lang, type: 'table-intro' });
 
-    rows.forEach(function (tr, rIdx) {
-      var cells = qsa('td, th, [role=\"cell\"], [role=\"rowheader\"], [role=\"columnheader\"]', tr);
-      if (!cells.length) return;
-
-      var rowLabel = readableText(cells[0]);
+    model.rows.forEach(function (row, rIdx) {
       var statements = [];
-      cells.forEach(function (cell, cIdx) {
-        var cellVal = readableText(cell);
-        if (!cellVal) return;
-        if (cIdx === 0 && rowLabel) return; // Zeilentitel wird vorangestellt
-        var headerName = headers[cIdx] || (tTexts.column + ' ' + (cIdx + 1));
-        statements.push(headerName + ': ' + cellVal);
+      Object.keys(row.cols).sort(function (a, b) { return a - b; }).forEach(function (col) {
+        var val = row.cols[col];
+        if (!val) return;
+        var c = parseInt(col, 10);
+        if (c === 0 && row.label) return; // Zeilentitel wird vorangestellt
+        var headerName = headers[c] || (tTexts.column + ' ' + (c + 1));
+        statements.push(headerName + ': ' + val);
       });
-      if (!statements.length && rowLabel) statements.push(rowLabel);
+      if (!statements.length && row.label) statements.push(row.label);
       if (!statements.length) return;
 
       /* Summenzeilen sind die Pointe einer Einsparübersicht. Sie werden
-         angekündigt und ruhiger/betonter gelesen statt als „Zeile 4 von 4“
-         unterzugehen. */
-      var isSum = !!(tr.classList && (tr.classList.contains('ff-es-sum') || tr.classList.contains('ff-tv-sum')));
+         angekündigt und ruhiger/betonter gelesen statt als „Zeile 4 von 4"
+         unterzugehen. Steht in der ersten Spalte selbst „Summe", sagt die
+         Anmoderation das bereits – das Etikett erklingt nicht doppelt. */
+      var labelSpoken = (row.isSum && row.label && SUM_LABEL_RE.test(String(row.label).trim())) ? '' : row.label;
+      var prefix = labelSpoken ? labelSpoken + '. ' : '';
       var rowRaw;
-      if (isSum) {
-        rowRaw = tTexts.tableSum.replace('{content}', (rowLabel ? rowLabel + '. ' : '') + statements.join('. ')) + '.';
+      if (row.isSum) {
+        /* Bei genau einem Wert ist der Spaltenname Ballast:
+           „Zusammengerechnet: 450 Euro." statt
+           „Zusammengerechnet: Ersparnis: 450 Euro." */
+        var sumContent = statements.length === 1
+          ? String(statements[0]).replace(/^[^:]{1,40}:\s*/, '')
+          : statements.join('. ');
+        rowRaw = tTexts.tableSum.replace('{content}', prefix + sumContent) + '.';
       } else if (rowCount === 1) {
-        // Bei genau einer Zeile ist „Zeile 1 von 1“ überflüssiges Geräusch.
-        rowRaw = (rowLabel ? rowLabel + '. ' : '') + statements.join('. ') + '.';
+        // Bei genau einer Zeile ist „Zeile 1 von 1" überflüssiges Geräusch.
+        rowRaw = prefix + statements.join('. ') + '.';
       } else {
-        rowRaw = (rowLabel ? rowLabel + '. ' : '') +
-          tTexts.tableRow.replace('{row}', (rIdx + 1)).replace('{total}', rowCount).replace('{content}', statements.join('. '));
+        rowRaw = prefix + tTexts.tableRow
+          .replace('{row}', (rIdx + 1))
+          .replace('{total}', rowCount)
+          .replace('{content}', statements.join('. '));
       }
 
-      tableBlocks.push({ el: tr, text: rowRaw, lang: lang, type: isSum ? 'table-sum' : 'table-row' });
+      tableBlocks.push({ el: row.el || introEl, text: rowRaw, lang: lang, type: row.isSum ? 'table-sum' : 'table-row' });
     });
 
     tableBlocks.push({
@@ -2164,6 +2437,38 @@
     });
 
     return tableBlocks;
+  }
+
+  /** Titel-Kaskade: aria-label → caption → Überschriften-Titel → Überschrift. */
+  function _tableTitle(tableEl, tTexts) {
+    var title = tableEl.getAttribute && tableEl.getAttribute('aria-label') ? tableEl.getAttribute('aria-label') : '';
+    if (!title) {
+      var caption = tableEl.querySelector ? tableEl.querySelector('caption') : null;
+      if (!caption && tableEl.closest) {
+        var fig = tableEl.closest('figure');
+        if (fig) caption = fig.querySelector('figcaption');
+      }
+      if (caption) title = readableText(caption);
+    }
+    /* Premium-Übersichten tragen ihren Namen in der eigenen Kopfzeile
+       (.ff-tv-title / .ff-es-title). */
+    if (!title) {
+      var wrap = tableEl.closest ? tableEl.closest('.ff-tarifvergleich, .ff-einspar') : null;
+      if (wrap) {
+        var head = wrap.querySelector('.ff-tv-title, .ff-es-title');
+        if (head) title = readableText(head);
+      }
+    }
+    /* Vorangehende Überschrift: Ohne sie hieß jede Markdown-Tabelle im Ohr
+       „Übersichtstabelle", obwohl direkt darüber die echte Überschrift steht. */
+    if (!title) {
+      var startEl = (tableEl.closest && tableEl.closest('.' + TABLE_WRAP_CLASSES.join(', .'))) || tableEl;
+      var prev = startEl.previousElementSibling;
+      while (prev && !/^H[1-6]$/.test(normTag(prev))) prev = prev.previousElementSibling;
+      if (prev && /^H[1-6]$/.test(normTag(prev))) title = readableText(prev);
+    }
+    if (!title) title = tTexts.tableTitleDefault;
+    return title;
   }
 
   /* ---------- Alle vorlesbaren Blöcke im Artikel sammeln ---------- */
@@ -2185,7 +2490,7 @@
     // Studio-Anmoderation: Titel & Lesedauer
     var introRaw = texts.introLine
       .replace('{title}', stripMd(cfg.title || doc.title || ''))
-      .replace('{time}', cfg.readingTime || '');
+      .replace('{duration}', durationPhrase(lang, cfg.readingTime));
     out.push({ el: toolbar, text: introRaw, lang: lang, type: 'intro' });
 
     // Redaktionelle Vorab-Boxen (Korrektur, Kurzantwort) – sie gehören
@@ -2393,21 +2698,19 @@
     });
   }
 
+  /* Restzeit aus DERSELBEN Schätzung wie die Fortschrittsleiste. Zwei
+     getrennte Rechenwege (hier Zeichen/Minute, dort effRate) waren der
+     Grund, warum Leiste und „noch ca. X Min." auseinanderliefen. */
   function estimateRemaining() {
     if (!remainEl) return;
-    var rest = 0;
+    var ms = 0;
     var units = 0;
-    var rateSum = 0;
     for (var i = cursor; i < timeline.length; i++) {
-      rest += timeline[i].text.length;
-      rateSum += timeline[i].effRate || 1;
+      ms += estimatedSpeechMs(timeline[i]) + (timeline[i].after || 0) + (timeline[i].before || 0);
       units++;
     }
     if (!units) { remainEl.textContent = ''; return; }
-    var eff = rateSum / units;
-    // ~1000 Zeichen/Minute bei Rate 1.0 (deutsche Nachrichtensprache)
-    // zzgl. Regie-/Atempausen (~0,5 s je Einheit)
-    var minutes = rest / (1000 * Math.max(0.4, eff)) + units * 0.008;
+    var minutes = ms / 60000;
     if (minutes < 0.1) { remainEl.textContent = ''; return; }
     var mm = Math.max(1, Math.round(minutes));
     remainEl.textContent = texts.remaining.replace('{min}', mm);
@@ -2422,16 +2725,17 @@
     else scrollTo(el, { block: 'center' });
   }
 
+  /* Die Markierung folgt dem Text; den Fortschritt besitzt ausschließlich
+     die Fortschritts-Engine. Früher setzte highlight() die Leiste bei
+     jedem Satz auf spokenChars zurück – beim Fortsetzen aus einer
+     Atempause sprang sie dadurch sichtbar nach hinten. */
   function highlight(unit) {
     highlightBlock(unit && unit.block ? unit.block : null);
-    setProgressChars(spokenChars, true);
   }
 
   function clearHighlight() {
     blocks.forEach(function (b) { if (b.el) b.el.classList.remove('ff-reader-active'); });
     cancelProgressTicker();
-    displayedChars = 0;
-    paintProgressRatio(0);
     if (remainEl) remainEl.textContent = '';
   }
 
@@ -2481,7 +2785,7 @@
   function speakUnit(index, isInitial) {
     if (!reading || !speechSupported) return;
     clearPauseTimer();
-    if (index >= timeline.length) { endReading(true); return; }
+    if (index >= timeline.length) { endReading(true, true); return; }
     cursor = index;
     nextIndex = index;
     var unit = timeline[index];
@@ -2565,7 +2869,12 @@
         started = true;
         lastSpeechStartedAt = Date.now();
         clearStartWatchdog();
-        startProgressTicker(unit, run);
+        /* Echter Sprechbeginn: Die Schätzung wird neu verankert, statt den
+           Ticker erst jetzt zu starten. Lief der Ticker schon (er beginnt
+           mit dem Einreihen in die Queue), holt die Stimme die Leiste
+           dadurch ein, anstatt dass die Leiste vorläuft. */
+        if (typeof unit._progressReanchor === 'function') unit._progressReanchor();
+        else startProgressTicker(unit, run);
       };
 
       u.onend = function () {
@@ -2637,6 +2946,10 @@
       try {
         if (synth.paused) synth.resume();
         unitInFlight = true;
+        /* Die Leiste läuft ab dem Einreihen in die Queue. Stimmen, die
+           `onstart` spät oder nie liefern, frieren den Fortschritt damit
+           nicht mehr ein. */
+        startProgressTicker(unit, run);
         synth.speak(u);
       } catch (err) {
         unitInFlight = false;
@@ -2669,7 +2982,8 @@
     index = Math.max(0, Math.min(timeline.length - 1, index));
     spokenChars = timeline[index] && typeof timeline[index].startChars === 'number' ? timeline[index].startChars : 0;
     if (!spokenChars) { for (var i = 0; i < index; i++) spokenChars += timeline[i].text.length; }
-    setProgressChars(spokenChars, true);
+    // Abschnittssprung: bewusste Benutzeraktion, kein Monotonie-Verstoß.
+    resetProgressChars(spokenChars);
     clearPauseTimer();
     cancelProgressTicker();
     stopVoicePolling();
@@ -2693,7 +3007,7 @@
     for (var i = 0; i < timeline.length; i++) {
       if (timeline[i].blockIndex === target) { jumpTo(i); return; }
     }
-    if (delta > 0) endReading(true);
+    if (delta > 0) endReading(true, true);
   }
 
   function setupMediaSession() {
@@ -2765,7 +3079,7 @@
     elt.addEventListener('play', function() { cancelAudioProgressTicker(); audioProgressLoop(); });
     elt.addEventListener('pause', cancelAudioProgressTicker);
     elt.addEventListener('ended', cancelAudioProgressTicker);
-    elt.addEventListener('ended', function () { endReading(true); });
+    elt.addEventListener('ended', function () { endReading(true, true); });
     elt.addEventListener('error', function () {
       // Tonspur fehlt/nicht ladbar → sauber auf den lokalen
       // Web-Speech-Pfad zurückfallen, nie stumm bleiben.
@@ -2804,30 +3118,49 @@
     }
   }
 
+  /** Fortschritt aus der Audiozeit – ein Rechenweg für Anzeige und Restzeit. */
+  function audioTotalMs() {
+    if (!audio) return 0;
+    var duration = audio.duration || 0;
+    if (duration && !isNaN(duration) && isFinite(duration) && duration > 0) return duration * 1000;
+    if (audioChunks.length && audioChunks[audioChunks.length - 1].t1) return audioChunks[audioChunks.length - 1].t1;
+    return 0;
+  }
+
+  function paintAudioProgress() {
+    if (!audio || !progressBar) return;
+    var total = audioTotalMs();
+    if (total > 0) paintProgressRatio((audio.currentTime || 0) * 1000 / total);
+  }
+
   function audioOnTime() {
     if (!audio || !reading) return;
     var t = (audio.currentTime || 0) * 1000;
-    var duration = audio.duration || 0;
-    var audioTotalMs = duration && !isNaN(duration) && duration > 0 ? duration * 1000 : 0;
-    if (!audioTotalMs && audioChunks.length && audioChunks[audioChunks.length - 1].t1) audioTotalMs = audioChunks[audioChunks.length - 1].t1;
+    var total = audioTotalMs();
     if (audioChunks.length) {
-      var idx = 0;
+      /* Hysterese-freie Blockzuordnung, aber mit sauberem Bereichstest:
+         Ohne `break` lief der Index bei Lücken zwischen zwei Blöcken auf
+         den letzten Block voraus – die Live-Markierung sprang dann einen
+         Absatz weiter, als die Stimme war. */
+      var idx = -1;
       for (var i = 0; i < audioChunks.length; i++) {
         if (t >= audioChunks[i].t0 && t < audioChunks[i].t1) { idx = i; break; }
         if (t >= audioChunks[i].t0) idx = i;
       }
+      if (idx < 0) idx = 0;
       if (idx !== audioCur) {
         audioCur = idx;
         var bi = audioChunks[idx] ? audioChunks[idx].b : 0;
         if (blocks[bi]) { audioBlock = bi; highlightBlock(blocks[bi]); storeSet(STORE_POS, String(bi)); }
       }
     }
-    if (progressBar && audioTotalMs > 0) {
-      paintProgressRatio(t / audioTotalMs);
-    }
-    if (remainEl && audioTotalMs > 0) {
-      var rest = Math.max(0, (audioTotalMs / 1000) - (audio.currentTime || 0)) / 60;
-      remainEl.textContent = rest >= 0.1 ? texts.remaining.replace('{min}', Math.max(1, Math.round(rest))) : '';
+    if (total > 0) {
+      paintProgressRatio(t / total);
+      displayedChars = 0;  // Tonspur-Modus: Der Zeiger ist zeitbasiert.
+      if (remainEl) {
+        var rest = Math.max(0, (total - t) / 1000) / 60;
+        remainEl.textContent = rest >= 0.1 ? texts.remaining.replace('{min}', Math.max(1, Math.round(rest))) : '';
+      }
     }
   }
 
@@ -2859,6 +3192,10 @@
       return;
     }
     audioSeekBlock(audioBlock);
+    /* Wiedereinstieg an einer gemerkten Stelle: Die Leiste zeigt sofort
+       die richtige Position, statt bis zum ersten timeupdate bei 0 zu
+       stehen („Fortschritt springt nach dem Start los"). */
+    paintAudioProgress();
     var p = null;
     try { p = audio.play(); } catch (e) { p = null; }
     if (p && p.then) {
@@ -2896,7 +3233,7 @@
     var cur = blocks[audioBlock] ? audioBlock : 0;
     var target = cur + delta;
     if (target < 0) target = 0;
-    if (target >= blocks.length) { endReading(true); return; }
+    if (target >= blocks.length) { endReading(true, true); return; }
     audioJumpToBlock(target);
   }
 
@@ -2966,9 +3303,7 @@
       reading = true;
       playing = true;
       spokenChars = 0;
-      displayedChars = 0;
-      cancelProgressTicker();
-      paintProgressRatio(0);
+      resetProgressChars(0);
       cursor = 0;
       setListenState('playing');
       setStatus(texts.started);
@@ -3015,16 +3350,15 @@
     reading = true;
     playing = true;
     spokenChars = 0;
-    displayedChars = 0;
-    cancelProgressTicker();
-    paintProgressRatio(0);
+    resetProgressChars(0);
     var startIdx = 0;
     if (typeof fromIndex === 'number' && fromIndex > 0 && fromIndex < timeline.length) {
       startIdx = fromIndex;
       spokenChars = timeline[startIdx] && typeof timeline[startIdx].startChars === 'number' ? timeline[startIdx].startChars : 0;
       if (!spokenChars) { for (var i = 0; i < startIdx; i++) spokenChars += timeline[i].text.length; }
     }
-    setProgressChars(spokenChars, true);
+    // Wiedereinstieg ist eine Benutzeraktion: Der Zeiger darf hier springen.
+    resetProgressChars(spokenChars);
     cursor = startIdx;
     nextIndex = startIdx;
     setListenState('playing');
@@ -3088,12 +3422,19 @@
     speakUnit(Math.min(nextIndex, timeline.length - 1), true);
   }
 
-  function endReading(announce) {
+  /**
+   * @param {boolean} announce  Statusmeldung „Vorlesen beendet." zeigen
+   * @param {boolean} completed Artikel wurde bis zum Ende gehört. Dann wird
+   *                            100 % gezeigt und kurz gehalten; ein
+   *                            manueller Stopp setzt sofort zurück.
+   */
+  function endReading(announce, completed) {
     if (audioMode) {
       reading = false;
       playing = false;
       audioStop();
       clearHighlight();
+      if (completed) completeProgress(); else resetProgressChars(0);
       setListenState('idle');
       storeDel(STORE_POS);
       if (announce) setStatus(texts.finished);
@@ -3117,6 +3458,7 @@
       } catch (e) {}
     }
     clearHighlight();
+    if (completed) completeProgress(); else resetProgressChars(0);
     setListenState('idle');
     storeDel(STORE_POS);
     if (announce) setStatus(texts.finished);

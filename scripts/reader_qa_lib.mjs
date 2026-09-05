@@ -53,11 +53,22 @@ export const READER_CSS = path.join(ROOT, 'assets', 'css', 'extended', 'ff-reade
 /*    content/posts tatsächlich vorkommen.)                            */
 /* ------------------------------------------------------------------ */
 
+/* Goldmark reicht gültige HTML-Zeichenreferenzen (&nbsp;, &#160;, &#x20AC;)
+   UNVERÄNDERT durch – im Browser steht dort ein echtes geschütztes
+   Leerzeichen. Ein blindes `&` → `&amp;` machte daraus in der Fixture
+   „&amp;nbsp;", also gesprochen „300 und nbsp Euro": ein Messfehler der
+   Testumgebung, der die echte Aussprache überdeckte. */
 function esc(s) {
+  const refs = [];
   return String(s)
+    .replace(/&(?:[a-zA-Z][a-zA-Z0-9]{1,10}|#\d{1,7}|#[xX][0-9a-fA-F]{1,6});/g, (m) => {
+      refs.push(m);
+      return `\u0000${refs.length - 1}\u0000`;
+    })
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+    .replace(/>/g, '&gt;')
+    .replace(/\u0000(\d+)\u0000/g, (_m, i) => refs[Number(i)]);
 }
 
 /** Hugo/Goldmark-kompatible Slug-Bildung für Überschriften-IDs. */
