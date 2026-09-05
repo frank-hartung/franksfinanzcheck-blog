@@ -467,7 +467,7 @@ Dies ist der dritte Satz des Testartikels für die Prüfung der Bedienung.`);
   t.ok(!isActive(), '„Beenden“ deaktiviert die Toolbar');
   t.ok(d.getElementById('ff-listen-label').textContent === 'Vorlesen', '„Beenden“ setzt das Label zurück');
   t.ok(!d.querySelector('.ff-reader-active'), 'Live-Markierung wird beim Beenden entfernt');
-  t.ok(d.getElementById('ff-reader-progress-bar').style.width === '0%', 'Fortschrittsbalken wird zurückgesetzt');
+  t.ok(d.getElementById('ff-reader-progress-bar').style.transform === 'scaleX(0)' || d.getElementById('ff-reader-progress-bar').style.width === '0%', 'Fortschrittsbalken wird zurückgesetzt');
 }
 
 /* ================================================================== */
@@ -653,8 +653,8 @@ t.group('13) ZEIT-Standard-Audiofassung (HTML5-Tonspur hat Vorrang)');
 
   // Fortschritt + Live-Markierung folgen der Audiozeit (Blöcke in Lesereihenfolge)
   await until(() => audioEl.currentTime > 6.4, 6000);
-  t.ok(ap.doc.getElementById('ff-reader-progress-bar').style.width !== '0%'
-    && ap.doc.getElementById('ff-reader-progress-bar').style.width !== '',
+  const pb = ap.doc.getElementById('ff-reader-progress-bar');
+  t.ok(pb.style.transform && pb.style.transform !== 'scaleX(0)',
     'Fortschrittsbalken folgt der Audiozeit');
   const activeEl = ap.doc.querySelector('.ff-reader-active');
   t.ok(!!activeEl, 'Live-Markierung folgt dem gesprochenen Abschnitt');
