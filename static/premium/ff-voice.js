@@ -60,7 +60,7 @@
      1 · KONFIGURATION
      ============================================================ */
 
-  var VOICE_VERSION = '2026.09.05-b';
+  var VOICE_VERSION = '2026.09.05-c';
 
   var cfgEl = doc.getElementById('ff-voice-config');
   if (!cfgEl) return;
@@ -301,6 +301,239 @@
     will: 1, can: 1, have: 1, more: 1, free: 1, cheap: 1, best: 1, important: 1,
     article: 1, summary: 1, read: 1, listen: 1, avoid: 1, switch: 1
   };
+
+  /* ============================================================
+     4a · WORTLAUF-REGIE — Sprachwechsel MITTEN im Satz
+     ------------------------------------------------------------
+     Bisher entschied der Satz über die Sprache: Ein deutscher
+     Satz mit englischen Fachbegriffen („Ein Robo Advisor nutzt
+     Compound Interest …“) wurde GANZ von der deutschen Stimme
+     gelesen — „Compound Interest“ klang deutsch. Diese Regie
+     zerlegt jede Sprecheinheit in SPRACHLÄUFE: Der englische Lauf
+     kommt von der englischen Männerstimme, der deutsche Rest von
+     der deutschen — satzteil-genau, ohne Umschalter.
+
+     Präzision vor Fläche, damit niemals ein deutsches Wort in der
+     falschen Sprache landet:
+       · SCHEINFREUNDE (die, was, hat, will, fast …) zählen nie
+         als Evidenz — sie sind in beiden Sprachen echte Wörter.
+       · ETABLIERTE ANGLIZISMEN (App, Team, Meeting, Download …)
+         bleiben bei der deutschen Stimme; sie spricht sie korrekt.
+       · Ein Sprachwechsel braucht tragfähige Evidenz: ein Wort
+         mit Score ≥ 2 oder mindestens zwei belegte Wörter. Ein
+         einsames Suffix-Wörtchen kippt die Sprache nie.
+       · Neutrale Wörter zwischen zwei Ankern derselben Sprache
+         gehören in den Lauf („funds of funds“); danach kommende,
+         unbelegte Wörter bleiben in der Artikelsprache — „Cashflow
+         kommt“ wird vollständig deutsch gesprochen, obwohl
+         „kommt“ ohne Beleg ist … sofern „kommt“ im deutschen
+         Belegwortschatz steht (DE_EVIDENCE). Genau dafür existiert
+         er: Er härtet die Satzmitte gegen Fehlwechsel.
+     Wortgleich gespiegelt in scripts/ff_voice_audio.py
+     (language_runs); die Parität prüft scripts/ff_voice_parity_check.py.
+     ============================================================ */
+
+  /* Englische Belegwörter. 2 = trägt einen Wechsel allein,
+     3 = Finanz-Fachbegriff (trägt seinen Farbton besonders sicher). */
+  var EN_WORDS = {
+    the: 2, this: 2, that: 2, these: 2, those: 2, your: 2, you: 2, yours: 2,
+    of: 2, to: 2, from: 2, with: 2, without: 2, about: 2, over: 2, under: 2,
+    when: 2, while: 2, then: 2, than: 2, there: 2, where: 2, why: 2, how: 2,
+    what: 2, who: 2, whom: 2, which: 2, because: 2, however: 2, again: 2,
+    against: 2, before: 2, after: 2,
+    is: 2, are: 2, were: 2, been: 2, being: 2, have: 2, has: 2, had: 2,
+    would: 2, could: 2, should: 2, can: 2, may: 2, might: 2, must: 2,
+    more: 2, most: 2, free: 2, save: 2, saving: 2, savings: 2, money: 2,
+    costs: 2, cost: 2, cheap: 2, compare: 2, comparison: 2, guide: 2,
+    important: 2, article: 2, summary: 2, avoid: 2, switch: 2, insurance: 2,
+    yearly: 2, monthly: 2, every: 2, percent: 2, hundred: 2, thousand: 2,
+    table: 2, best: 2, better: 2, good: 2,
+    our: 1, read: 1, listen: 1, tariff: 1, tariffs: 1, cash: 1, per: 1,
+    new: 1, old: 1, side: 1, picking: 1, traded: 1, score: 1, tax: 1,
+    invest: 1, dividend: 1, value: 1, hold: 1, and: 2, or: 1, but: 2, not: 1, if: 1,
+    /* Finanz- und Verbraucherbegriffe, die im deutschen Satz englisch klingen */
+    broker: 3, brokers: 3, neobroker: 3, neobrokers: 3,
+    cashflow: 3, cashflows: 3, trading: 3, trader: 3, traders: 3,
+    budgeting: 3, compounding: 3, robo: 3,
+    advisor: 3, advisors: 3, adviser: 3, advisers: 3,
+    compound: 2, interest: 2, stock: 2, stocks: 2, hustle: 2, hustles: 2,
+    investing: 2, investor: 2, investors: 2, income: 2, wealth: 2,
+    emergency: 2, fund: 2, funds: 2, retirement: 2, financial: 2,
+    independence: 2, credit: 2, debt: 2, loan: 2, loans: 2, mortgage: 2,
+    taxes: 2, yield: 2, yields: 2, dividends: 2, exchange: 2, buy: 2, sell: 2
+  };
+
+  /* Scheinfreunde: in beiden Sprachen echte Wörter — nie Evidenz. */
+  var DE_EN_HOMOGRAPHS = {
+    die: 1, was: 1, hat: 1, will: 1, rat: 1, gut: 1, so: 1, man: 1, fast: 1,
+    all: 1, tag: 1, see: 1, arm: 1, tot: 1, hut: 1, gift: 1, boot: 1,
+    band: 1, brand: 1, kind: 1, land: 1, links: 1, fall: 1, ball: 1, war: 1
+  };
+
+  /* Deutscher Belegwortschatz (Härtung der Satzmitte): häufige Wörter
+     ohne Umlaut, ohne Endungs-Merkmal und ohne Platz in DE_HINTS. */
+  var DE_EVIDENCE = {
+    aber: 1, alle: 1, allerdings: 1, also: 1, ans: 1, andere: 1,
+    bekannt: 1, besonders: 1, bestimmt: 1, braucht: 1, dabei: 1, dadurch: 1,
+    dafür: 1, dagegen: 1, deshalb: 1, dein: 1, deine: 1,
+    dem: 1, den: 1, denn: 1, der: 1, des: 1, dessen: 1, dich: 1, dies: 1,
+    dieser: 1, dieses: 1, du: 1, durch: 1, eben: 1, einfach: 1, er: 1,
+    es: 1, euch: 1, euer: 1, etwas: 1, genau: 1, gerade: 1, gegen: 1,
+    gibt: 1, gilt: 1, hast: 1, haben: 1, heute: 1, hier: 1, ihm: 1, ihn: 1,
+    ihnen: 1, ihr: 1, ihre: 1, immer: 1, ins: 1, ja: 1, je: 1, jede: 1,
+    jeden: 1, jetzt: 1, kommt: 1, kann: 1, kein: 1, keine: 1, könnte: 1,
+    machen: 1, macht: 1, mal: 1, mehr: 1, mein: 1, meine: 1, mich: 1,
+    mir: 1, nach: 1, natürlich: 1, nie: 1, noch: 1, nun: 1, nur: 1,
+    nutzt: 1, nutzen: 1, ob: 1, oder: 1, oft: 1, richtig: 1, schon: 1,
+    sein: 1, seine: 1, sich: 1, sind: 1, soll: 1, sollen: 1, sondern: 1,
+    sonst: 1, sowie: 1, über: 1, um: 1, und: 1, uns: 1, unser: 1, unter: 1,
+    vom: 1, von: 1, vor: 1, warum: 1, weg: 1, weil: 1, weiter: 1, wenn: 1,
+    wer: 1, werde: 1, werden: 1, wirklich: 1, wie: 1, wieder: 1, wir: 1,
+    wird: 1, wo: 1, wollen: 1, wäre: 1, zum: 1, zur: 1, zurück: 1,
+    zwischen: 1, kostet: 1, bringt: 1, zahlt: 1, steht: 1, gilt: 1,
+    sorgt: 1, senkt: 1, liegt: 1, bleibt: 1, sorgen: 1, senken: 1,
+    inzwischen: 1, schließlich: 1, außerdem: 1, ebenfalls: 1, dennoch: 1,
+    trotzdem: 1, insgesamt: 1, derzeit: 1, aktuell: 1, vielleicht: 1,
+    eigentlich: 1, sicher: 1, deutlich: 1, sofort: 1, häufig: 1, selten: 1
+  };
+
+  /** Sprachklasse eines Wortes — null heißt: kein Beleg, folgt dem Lauf. */
+  function wordClassOf(word, base) {
+    var lw = String(word || '').toLowerCase().replace(/['’]s$/, '');
+    if (!lw) return null;
+    if (DE_EN_HOMOGRAPHS[lw]) return null;
+    var deScore = 0, enScore = 0;
+    if (/[äöüß]/.test(lw)) deScore = 2;
+    if (DE_HINTS[lw]) deScore = Math.max(deScore, DE_HINTS[lw]);
+    if (DE_EVIDENCE[lw]) deScore = Math.max(deScore, DE_EVIDENCE[lw]);
+    if (EN_WORDS[lw]) enScore = Math.max(enScore, EN_WORDS[lw]);
+    if (!deScore && !enScore && lw.length >= 6) {
+      // Endungs-Evidenz nur als Zweitbeleg (Score 1): „ness/able/ible“
+      // hat keine deutschen Homographe; „ing“ erst ab 7 Zeichen und
+      // nie, wenn ein deutsches Endungs-Wort vorliegt.
+      if (base === 'de') {
+        if (/(ung|keit|heit|schaft|lich|isch)$/.test(lw)) deScore = 1;
+        else if (/(ness|able|ible)$/.test(lw)) enScore = 1;
+        else if (lw.length >= 7 && /ing$/.test(lw)) enScore = 1;
+      } else {
+        if (/(ness|able|ible)$/.test(lw)) enScore = 1;
+        else if (lw.length >= 7 && /ing$/.test(lw)) enScore = 1;
+        else if (/(ung|keit|heit|schaft|lich|isch)$/.test(lw)) deScore = 1;
+      }
+    }
+    if (deScore && enScore) return null;
+    if (deScore) return { lang: 'de', score: deScore };
+    if (enScore) return { lang: 'en', score: enScore };
+    return null;
+  }
+
+  /**
+   * Zerlegt Text in maximale SPRACHLÄUFE. Die Segmente konkatenieren
+   * EXAKT zum Eingabetext (Vertrag an die Paritäts-Prüfung).
+   */
+  function languageRuns(text, baseLang) {
+    var base = baseLang === 'en' ? 'en' : 'de';
+    var src = String(text || '');
+    if (!src) return [];
+
+    var RE_WORD = /[A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß'’]*/g;
+    var anchors = [];
+    var m;
+    while ((m = RE_WORD.exec(src)) !== null) {
+      var cls = wordClassOf(m[0], base);
+      if (cls) anchors.push({ lang: cls.lang, score: cls.score, start: m.index, end: m.index + m[0].length });
+      if (m.index === RE_WORD.lastIndex) RE_WORD.lastIndex += 1; // Endlos-Schleife verhindern
+    }
+    if (!anchors.length) return [{ text: src, lang: base }];
+
+    /* Ankern gleicher Sprache zu Gruppen bündeln. Ein Gruppenwechsel
+       liegt nur vor, wenn die Sprache wirklich wechselt. */
+    var groups = [];
+    anchors.forEach(function (a) {
+      var last = groups[groups.length - 1];
+      if (last && last.lang === a.lang) { last.items.push(a); last.end = a.end; }
+      else groups.push({ lang: a.lang, items: [a], start: a.start, end: a.end });
+    });
+
+    /* Gruppen mit dünnem Beleg fallen in die Artikelsprache zurück. */
+    function groupEvidence(g) {
+      var sum = 0, max = 0;
+      g.items.forEach(function (a) { sum += a.score; if (a.score > max) max = a.score; });
+      return { sum: sum, max: max, count: g.items.length };
+    }
+    function groupStands(g) {
+      if (g.lang === base) return true;
+      var ev = groupEvidence(g);
+      // Ein Fachbegriff (Score 3) trägt allein; sonst brauchen wir
+      // mindestens zwei belegte Wörter — „the“ allein wechselt nicht.
+      return ev.max >= 3 || (ev.count >= 2 && ev.sum >= 2);
+    }
+
+    var segs = [];
+    var pos = 0;
+    groups.forEach(function (g, gi) {
+      var stands = groupStands(g);
+      var gLang = stands ? g.lang : base;
+
+      /* Kopf bis zum Gruppenbeginn gehört in die Artikelsprache. */
+      var head = src.slice(pos, g.start);
+      if (head) segs.push({ text: head, lang: base });
+
+      /* Die Gruppe selbst: Anfang, Innenlücken (beleglose Wörter und
+         weiche Trenner), Ende — „funds of funds“ bleibt ein Lauf. */
+      segs.push({ text: src.slice(g.start, g.end), lang: gLang });
+
+      pos = g.end;
+      var next = groups[gi + 1];
+
+      /* Nachlauf: Satzzeichen im Rücken der Gruppe hängen still an sie
+         (bessere Pause am Stimmwechsel). Bei tragfähigen Gruppen mit
+         mindestens zwei Ankern dürfen zusätzlich bis zu drei beleglose
+         Folgewörter in den Lauf („Buy and Hold“); alles andere — vor
+         allem belegte Wörter — bleibt in der Artikelsprache. */
+      if (!next) {
+        var tail = src.slice(pos);
+        if (tail) {
+          var tailSoft = tail.match(/^[\s,.:;!?…„“"'’()\[\]\-–—]+/);
+          var softLen = tailSoft ? tailSoft[0].length : 0;
+          if (softLen && stands) segs.push({ text: tail.slice(0, softLen), lang: gLang });
+          if (softLen < tail.length) segs.push({ text: tail.slice(softLen), lang: base });
+        }
+        pos = src.length;
+        return;
+      }
+
+      var gapEnd = next.start;
+      var gap = src.slice(pos, gapEnd);
+
+      /* Nachlauf: nur stiller Nachlauf (Komma, Punkt, Leerzeichen,
+         Anführung) hängt an die stehende Gruppe — er gibt den Atem-
+         punkt am Stimmwechsel. Beleglose Folgewörter bleiben bewusst
+         in der Artikelsprache: „Cashflow kommt“ muss deutsch bleiben,
+         auch wenn „kommt“ ohne Beleg ist. */
+      if (gap && stands) {
+        var tailSoft = gap.match(/^[\s,.:;!?…„“"'’()\[\]\-–—]+/);
+        var softLen = tailSoft ? tailSoft[0].length : 0;
+        if (softLen) {
+          segs.push({ text: gap.slice(0, softLen), lang: gLang });
+          gap = gap.slice(softLen);
+        }
+      }
+      if (gap) segs.push({ text: gap, lang: base });
+      pos = gapEnd;
+    });
+    if (pos < src.length) segs.push({ text: src.slice(pos), lang: base });
+
+    /* Benachbarte Segmente gleicher Sprache vereinen. */
+    var merged = [];
+    segs.forEach(function (s) {
+      if (!s.text) return;
+      if (merged.length && merged[merged.length - 1].lang === s.lang) merged[merged.length - 1].text += s.text;
+      else merged.push(s);
+    });
+    return merged;
+  }
+
 
   function articleSample(maxChars) {
     var sample = String(cfg.title || '') + ' ' + String(cfg.description || '') + ' ';
@@ -662,15 +895,21 @@
     // Fettdruck wird an SEINER Stelle gesprochen, wenn er nicht nur
     // ein einzelnes Wort im Satz ist, sondern ein eigener Block
     // (z. B. ein ganzer Absatz in Fettschrift oder ein Merksatz).
+    // Maßgeblich ist allein der TEXTANTEIL am Elternelement: Ein
+    // Lead-in wie „<strong>Tarifwechsel als größter Hebel:</strong>
+    // Ein Wechsel …“ ist KEIN eigener Merksatz — der Listenpunkt
+    // spricht es bereits; ein zweiter Block ließe die Einleitung
+    // doppelt erklingen. (Die frühere Knotenzahl-Regel „siblings
+    // <= 2“ scheiterte an Textknoten: <li><strong>…</strong> Rest
+    // </li> hat genau zwei Kindknoten und galt so fälschlich als
+    // eigenständig — genau der Doppel-Leser auf /pillar/strom-sparen/.)
     if (!el) return false;
     var text = readableText(el);
     if (text.length < 12) return false;
     var parent = el.parentNode;
     if (!parent) return false;
-    var siblings = parent.childNodes.length;
     var parentText = readableText(parent);
-    // Steht der Fettdruck praktisch allein im Elternelement?
-    return text.length >= Math.max(12, parentText.length - 2) || siblings <= 2;
+    return text.length >= Math.max(12, parentText.length - 2);
   }
 
   /* ---------- Tabellenmodell (Premium, Generation 2) --------
@@ -1206,6 +1445,24 @@
         if (!isStandaloneEmphasis(el)) return;
         var emph = readableText(el);
         if (emph.length < 8) return;
+        /* Doppel-Lese-Schleuse: Steht dieser Text bereits in einem
+           Vorfahren-Block (Lead-in des Listenpunkts, CTA-Link im
+           Absatz), wird er dort schon gesprochen — niemals ein
+           zweites Mal. Blöcke liegen in Dokumentordnung, der
+           Vorfahren-Block liegt also davor. */
+        var emphBare = emph.replace(/[\s?!.…:]+$/, '');
+        if (emphBare) {
+          for (var ancestor = el.parentNode; ancestor; ancestor = ancestor.parentNode) {
+            for (var di = out.length - 1; di >= 0; di--) {
+              var prevB = out[di];
+              if (!prevB || !prevB.el) break;
+              if (prevB.el === ancestor) {
+                if (prevB.text && prevB.text.indexOf(emphBare) !== -1) return;
+                break;
+              }
+            }
+          }
+        }
         out.push({ el: el, lang: elLang, type: 'emphasis', text: emph.replace(/[\s?!.…]+$/, '') + '.' });
         return;
       }
@@ -2071,46 +2328,19 @@
     cursor = index;
     nextIndex = index + 1;
 
-    var res = resolveMaleVoice(unit.lang) || {};
-    var voice = res.voice || null;
-
-    var u = null;
-    try { u = new win.SpeechSynthesisUtterance(unit.text); } catch (e) { u = null; }
-    if (!u) { advance(index); return; }
-
-    u.lang = (unit.lang === 'en') ? 'en-US' : 'de-DE';
-    if (voice) { try { u.voice = voice; } catch (e) {} }
-    u.rate = Math.max(0.6, Math.min(1.4, unit.effRate * (res.tier ? res.tier.rate : 1)));
-    u.pitch = Math.max(0.5, Math.min(1.5, unit.effPitch + (res.tier && res.tier.pitchZone ? res.tier.pitchZone : 0)));
-    u.volume = Math.max(0.4, Math.min(1, unit.effVolume));
+    /* Wortlauf-Regie: Die Sprecheinheit wird in Sprachläufe zerlegt.
+       Jeder Lauf bekommt die passende männliche Stimme (de/en); die
+       Einheit bleibt eine EINHEIT — Fortschritt, Pause, Wiederholung
+       und Watchdog laufen weiter über den ganzen Block. */
+    var runs = languageRuns(unit.text, unit.lang);
+    if (!runs.length) runs = [{ text: unit.text, lang: unit.lang }];
 
     unitInFlight = true;
-    liveUtterance = u;
-    utteranceRefs.push(u);                       // GC-Schutz (Chrome-Abbrüche)
-    if (utteranceRefs.length > 24) utteranceRefs.splice(0, utteranceRefs.length - 24);
+    var runPos = 0;          // Zeichenoffset des aktuellen Laufs in unit.text
+    var runIdx = 0;
+    var lastStarted = -1;    // Index des zuletzt gestarteten Laufs
 
-    var started = false;
-
-    u.onstart = function () {
-      if (myRun !== runId) return;
-      started = true;
-      clearStartWatchdog();
-      errorStreak = 0;
-      highlightBlock(unit.block);
-      rememberBlock(unit.blockIndex);
-      setStatus(res.male ? T.voiceActive : (T.voiceFallback || T.started));
-    };
-
-    u.onboundary = function (ev) {
-      if (myRun !== runId) return;
-      if (ev && typeof ev.charIndex === 'number') {
-        spokenChars = unit.startChars + ev.charIndex;
-        setProgressChars(spokenChars, false);
-        updateRemainingFromChars();
-      }
-    };
-
-    u.onend = function () {
+    function finishUnit() {
       if (myRun !== runId) return;
       clearStartWatchdog();
       unitInFlight = false;
@@ -2118,15 +2348,13 @@
       spokenChars = unit.endChars;
       setProgressChars(spokenChars, false);
       advance(index);
-    };
+    }
 
-    u.onerror = function (ev) {
+    function retryUnit() {
       if (myRun !== runId) return;
       clearStartWatchdog();
       unitInFlight = false;
       liveUtterance = null;
-      var reason = ev && ev.error ? String(ev.error) : 'unknown';
-      if (reason === 'interrupted' || reason === 'canceled') return;   // gewollter Abbruch
       errorStreak += 1;
       var tries = retryCounts[index] || 0;
       if (tries < 2 && errorStreak < 4) {
@@ -2142,31 +2370,99 @@
         setProgressChars(spokenChars, false);
         advance(index);
       }
-    };
-
-    // Anti-Stall-Wache: startet eine Äußerung nicht innerhalb von 4 s,
-    // wird sie verworfen und die nächste gesprochen (nie Stille).
-    clearStartWatchdog();
-    startWatchdog = setTimeout(function () {
-      if (myRun !== runId) return;
-      if (started) return;
-      try { synth.cancel(); } catch (e) {}
-      unitInFlight = false;
-      liveUtterance = null;
-      var tries = retryCounts[index] || 0;
-      if (tries < 2) {
-        retryCounts[index] = tries + 1;
-        speakUnit(index, false);
-      } else {
-        advance(index);
-      }
-    }, 4000);
-
-    try { synth.speak(u); } catch (e) {
-      clearStartWatchdog();
-      unitInFlight = false;
-      advance(index);
     }
+
+    /* Anti-Stall-Wache: startet ein Lauf nicht innerhalb von 4 s,
+       wird die Einheit verworfen und neu versucht (nie Stille). */
+    function armWatchdog(guardIdx) {
+      clearStartWatchdog();
+      startWatchdog = setTimeout(function () {
+        if (myRun !== runId) return;
+        if (lastStarted >= guardIdx) return;
+        try { synth.cancel(); } catch (e) {}
+        unitInFlight = false;
+        liveUtterance = null;
+        var tries = retryCounts[index] || 0;
+        if (tries < 2) {
+          retryCounts[index] = tries + 1;
+          speakUnit(index, false);
+        } else {
+          advance(index);
+        }
+      }, 4000);
+    }
+
+    function speakNextRun() {
+      if (myRun !== runId) return;
+      if (!reading || !playing) return;
+      if (runIdx >= runs.length) { finishUnit(); return; }
+      var r = runs[runIdx];
+      var myIdx = runIdx;
+      var offset = runPos;
+      runPos += r.text.length;
+      runIdx += 1;
+
+      var res = resolveMaleVoice(r.lang) || {};
+      var voice = res.voice || null;
+
+      var u = null;
+      try { u = new win.SpeechSynthesisUtterance(r.text); } catch (e) { u = null; }
+      if (!u) { finishUnit(); return; }
+
+      u.lang = (r.lang === 'en') ? 'en-US' : 'de-DE';
+      if (voice) { try { u.voice = voice; } catch (e) {} }
+      u.rate = Math.max(0.6, Math.min(1.4, unit.effRate * (res.tier ? res.tier.rate : 1)));
+      u.pitch = Math.max(0.5, Math.min(1.5, unit.effPitch + (res.tier && res.tier.pitchZone ? res.tier.pitchZone : 0)));
+      u.volume = Math.max(0.4, Math.min(1, unit.effVolume));
+
+      liveUtterance = u;
+      utteranceRefs.push(u);                     // GC-Schutz (Chrome-Abbrüche)
+      if (utteranceRefs.length > 24) utteranceRefs.splice(0, utteranceRefs.length - 24);
+
+      u.onstart = function () {
+        if (myRun !== runId) return;
+        lastStarted = myIdx;
+        clearStartWatchdog();
+        errorStreak = 0;
+        highlightBlock(unit.block);
+        rememberBlock(unit.blockIndex);
+        setStatus(res.male ? T.voiceActive : (T.voiceFallback || T.started));
+      };
+
+      u.onboundary = function (ev) {
+        if (myRun !== runId) return;
+        if (ev && typeof ev.charIndex === 'number') {
+          spokenChars = unit.startChars + offset + ev.charIndex;
+          setProgressChars(spokenChars, false);
+          updateRemainingFromChars();
+        }
+      };
+
+      u.onend = function () {
+        if (myRun !== runId) return;
+        clearStartWatchdog();
+        spokenChars = unit.startChars + offset + r.text.length;
+        setProgressChars(spokenChars, false);
+        if (myIdx >= runs.length - 1) { finishUnit(); return; }
+        speakNextRun();
+      };
+
+      u.onerror = function (ev) {
+        if (myRun !== runId) return;
+        var reason = ev && ev.error ? String(ev.error) : 'unknown';
+        if (reason === 'interrupted' || reason === 'canceled') return;   // gewollter Abbruch
+        retryUnit();
+      };
+
+      armWatchdog(myIdx);
+      try { synth.speak(u); } catch (e) {
+        clearStartWatchdog();
+        if (myIdx >= runs.length - 1) { finishUnit(); return; }
+        retryUnit();
+      }
+    }
+
+    speakNextRun();
   }
 
   /** Nächste Einheit — mit der rollengerechten Pause davor. */
@@ -2952,6 +3248,7 @@
     speechNormalize: speechNormalize,
     sentences: sentences,
     splitForSpeech: splitForSpeech,
+    languageRuns: languageRuns,
     collectBlocks: collectBlocks,
     buildTimeline: function () {
       if (!blocks.length) blocks = collectBlocks();

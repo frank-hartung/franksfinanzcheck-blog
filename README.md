@@ -320,9 +320,9 @@ Die Tonspur läuft im nativen HTML5-Player und klingt dadurch **identisch** auf 
 ### Wächter (alle grün)
 
 ```bash
-node scripts/ff_voice_functional_test.mjs   # 174 Gates: echte DOM, alle echten Artikel
-node scripts/ff_voice_voice_test.js         #  71 Gates: männlich, DE & EN, 7 Geräte-Kataloge
-python3 scripts/ff_voice_parity_check.py    # 269 Gates: Tonspur ≡ Browser-Engine
+node scripts/ff_voice_functional_test.mjs   # 184 Gates: echte DOM, alle echten Artikel, Doppel-Lese-Schleuse
+node scripts/ff_voice_voice_test.js         #  96 Gates: männlich, DE & EN, Wortlauf-Regie, 7 Geräte-Kataloge
+python3 scripts/ff_voice_parity_check.py    # 328 Gates: Tonspur ≡ Browser-Engine, Wortlauf-Parität
 python3 scripts/ff_voice_toolbar_check.py   #  89 Gates: Layout, Styling, Workflow, Rückbau
 python3 scripts/ff_voice_backends.py --selftest  # 44 Gates: Aussprache, Prosodie, Audio
 python3 scripts/ff_voice_audio.py --selftest     # 48 Gates: Block-Parität, Tabellen, Injektion

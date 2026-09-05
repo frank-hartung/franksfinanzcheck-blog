@@ -90,6 +90,64 @@ t.group('2) Lesereihenfolge: Anmoderation → Vorab-Box → DOM → Abmoderation
 }
 
 /* ============================================================
+   2b · Doppel-Lese-Schleuse: Pillar-Übersicht (Befund 05.09.2026)
+   ------------------------------------------------------------
+   Auf /pillar/strom-sparen/#das-wichtigste-auf-einen-blick
+   erklang hinter „… 800 € pro Jahr“ erneut „Tarifwechsel als
+   größter Hebel.“ — der Fettdruck-Lead-in wurde als zweiter
+   Block gesprochen, weil die Knotenzahl-Regel in
+   isStandaloneEmphasis() auf Textknoten hereinfiel. Diese
+   Gruppe pinnt die Reparatur: Lead-in genau EINMAL, echte
+   Merksätze weiterhin an ihrer Stelle.
+   ============================================================ */
+t.group('2b) Doppel-Lese-Schleuse: Fettdruck-Lead-ins einmal, Merksätze an ihrer Stelle');
+{
+  const pillar = mdToHtml(`### Das Wichtigste auf einen Blick
+
+* **Tarifwechsel als größter Hebel:** Ein Wechsel des Strom- oder Gasanbieters dauert online weniger als zehn Minuten und spart im Schnitt 300&nbsp;€ bis 800&nbsp;€ pro Jahr.
+* **Heimliche Stromfresser eliminieren:** Standby-Geräte, veraltete Kühltechnik und Dauerverbraucher verursachen bis zu 20&nbsp;% deiner jährlichen Stromrechnung.
+* **Preisgarantien sichern:** Für Planungssicherheit sorgen Tarife mit einer Preisgarantie von mindestens zwölf Monaten.
+* **Unterbrechungsfreie Versorgung:** Ein Versorgungsengpass beim Anbieterwechsel ist gesetzlich ausgeschlossen.
+
+**Februar.** Jahresabrechnung lesen. Verbrauch, Preis, Abschlag.
+
+👉 **Jetzt aktuellen Stromtarif prüfen und sparen:** [**→ Jetzt Stromtarife vergleichen**](/go/strom/)
+
+**Merksatz: Prüfe die Laufzeit genau.**
+`);
+  const { win } = loadPage(skeleton({ title: 'Strom & Gas sparen', bodyHtml: pillar }), {});
+  const api = win.__ffVoice;
+  const blocks = api.collectBlocks();
+  const full = blocks.map((b) => b.text).join('\n');
+
+  t.eq('„Tarifwechsel als größter Hebel“ genau einmal',
+    blocks.filter((b) => b.text.includes('Tarifwechsel als größter Hebel')).length, 1);
+  t.eq('„Heimliche Stromfresser eliminieren“ genau einmal',
+    blocks.filter((b) => b.text.includes('Heimliche Stromfresser eliminieren')).length, 1);
+  t.eq('„Preisgarantien sichern“ genau einmal',
+    blocks.filter((b) => b.text.includes('Preisgarantien sichern')).length, 1);
+  t.eq('„Unterbrechungsfreie Versorgung“ genau einmal',
+    blocks.filter((b) => b.text.includes('Unterbrechungsfreie Versorgung')).length, 1);
+  t.eq('Absatz-Kurzdatum „Februar“ genau einmal',
+    blocks.filter((b) => b.text.includes('Februar')).length, 1);
+  t.eq('CTA-Linktext genau einmal (Absatz liest ihn, kein Zweiblock)',
+    blocks.filter((b) => b.text.includes('Jetzt Stromtarife vergleichen')).length, 1,
+    blocks.filter((b) => b.text.includes('Jetzt Stromtarife vergleichen')).map((b) => b.type + ':' + b.text).join(' | '));
+  t.ok('Kein Lead-in erklingt als eigener Merksatz-Zweiblock',
+    blocks.every((b) => b.type !== 'emphasis'
+      || !/Tarifwechsel|Stromfresser eliminieren|Preisgarantien|Unterbrechungsfreie|Februar/.test(b.text)),
+    blocks.filter((b) => b.type === 'emphasis').map((b) => b.text).join(' | '));
+  t.eq('Echter Merksatz bleibt eigener Block',
+    blocks.filter((b) => b.type === 'emphasis' && b.text.includes('Prüfe die Laufzeit genau')).length, 1);
+  t.eq('Merksatz-Absatz wird nicht ZUSÄTZLICH gelesen',
+    blocks.filter((b) => b.type !== 'emphasis' && b.text.includes('Prüfe die Laufzeit genau')).length, 0);
+  t.ok('Keine doppelten Blocktexte',
+    new Set(blocks.map((b) => b.text)).size === blocks.length);
+  t.ok('Der vollständige Listensatz bleibt erhalten',
+    /Tarifwechsel als größter Hebel: Ein Wechsel des Strom- oder Gasanbieters/.test(full));
+}
+
+/* ============================================================
    3 · Tabellen & Übersichten
    ============================================================ */
 t.group('3) Tabellen, Summen und Premium-Übersichten');

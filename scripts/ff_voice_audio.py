@@ -208,6 +208,220 @@ def sniff_sentence_lang(sentence: str, base_lang: str) -> str:
     return "de" if (de >= 4 and de >= en + 2) else "en"
 
 
+# ---------------------------------------------------------------------------
+# Wortlauf-Regie — Sprachwechsel MITTEN im Satz (Spiegel von ff-voice.js)
+# ---------------------------------------------------------------------------
+# Bisher entschied der Satz über die Sprache: Ein deutscher Satz mit
+# englischen Fachbegriffen („Ein Robo Advisor nutzt Compound Interest
+# …“) wurde GANZ von der deutschen Stimme vertont. Diese Regie zerlegt
+# jede Atemgruppe in SPRACHLÄUFE; der Tonspur-Generator vertont jeden
+# Lauf mit der passenden männlichen Stimme. Wortgleich gespiegelt in
+# static/premium/ff-voice.js (languageRuns); die Parität prüft
+# scripts/ff_voice_parity_check.py.
+
+# Englische Belegwörter. 2 = trägt einen Wechsel mit Partner,
+# 3 = Finanz-Fachbegriff (trägt allein).
+EN_WORDS = {
+    "the": 2, "this": 2, "that": 2, "these": 2, "those": 2, "your": 2, "you": 2, "yours": 2,
+    "of": 2, "to": 2, "from": 2, "with": 2, "without": 2, "about": 2, "over": 2, "under": 2,
+    "when": 2, "while": 2, "then": 2, "than": 2, "there": 2, "where": 2, "why": 2, "how": 2,
+    "what": 2, "who": 2, "whom": 2, "which": 2, "because": 2, "however": 2, "again": 2,
+    "against": 2, "before": 2, "after": 2,
+    "is": 2, "are": 2, "were": 2, "been": 2, "being": 2, "have": 2, "has": 2, "had": 2,
+    "would": 2, "could": 2, "should": 2, "can": 2, "may": 2, "might": 2, "must": 2,
+    "more": 2, "most": 2, "free": 2, "save": 2, "saving": 2, "savings": 2, "money": 2,
+    "costs": 2, "cost": 2, "cheap": 2, "compare": 2, "comparison": 2, "guide": 2,
+    "important": 2, "article": 2, "summary": 2, "avoid": 2, "switch": 2, "insurance": 2,
+    "yearly": 2, "monthly": 2, "every": 2, "percent": 2, "hundred": 2, "thousand": 2,
+    "table": 2, "best": 2, "better": 2, "good": 2,
+    "our": 1, "read": 1, "listen": 1, "tariff": 1, "tariffs": 1, "cash": 1, "per": 1,
+    "new": 1, "old": 1, "side": 1, "picking": 1, "traded": 1, "score": 1, "tax": 1,
+    "invest": 1, "dividend": 1, "value": 1, "hold": 1, "and": 2, "or": 1, "but": 2, "not": 1, "if": 1,
+    # Finanz- und Verbraucherbegriffe, die im deutschen Satz englisch klingen
+    "broker": 3, "brokers": 3, "neobroker": 3, "neobrokers": 3,
+    "cashflow": 3, "cashflows": 3, "trading": 3, "trader": 3, "traders": 3,
+    "budgeting": 3, "compounding": 3, "robo": 3,
+    "advisor": 3, "advisors": 3, "adviser": 3, "advisers": 3,
+    "compound": 2, "interest": 2, "stock": 2, "stocks": 2, "hustle": 2, "hustles": 2,
+    "investing": 2, "investor": 2, "investors": 2, "income": 2, "wealth": 2,
+    "emergency": 2, "fund": 2, "funds": 2, "retirement": 2, "financial": 2,
+    "independence": 2, "credit": 2, "debt": 2, "loan": 2, "loans": 2, "mortgage": 2,
+    "taxes": 2, "yield": 2, "yields": 2, "dividends": 2, "exchange": 2, "buy": 2, "sell": 2,
+}
+
+# Scheinfreunde: in beiden Sprachen echte Wörter — nie Evidenz.
+DE_EN_HOMOGRAPHS = {
+    "die": 1, "was": 1, "hat": 1, "will": 1, "rat": 1, "gut": 1, "so": 1, "man": 1,
+    "fast": 1, "all": 1, "tag": 1, "see": 1, "arm": 1, "tot": 1, "hut": 1, "gift": 1,
+    "boot": 1, "band": 1, "brand": 1, "kind": 1, "land": 1, "links": 1, "fall": 1,
+    "ball": 1, "war": 1,
+}
+
+# Deutscher Belegwortschatz (Härtung der Satzmitte): häufige Wörter
+# ohne Umlaut, ohne Endungs-Merkmal und ohne Platz in DE_HINTS.
+DE_EVIDENCE = {
+    "aber": 1, "alle": 1, "allerdings": 1, "also": 1, "ans": 1, "andere": 1,
+    "bekannt": 1, "besonders": 1, "bestimmt": 1, "braucht": 1, "dabei": 1, "dadurch": 1,
+    "dafür": 1, "dagegen": 1, "deshalb": 1, "dein": 1, "deine": 1,
+    "dem": 1, "den": 1, "denn": 1, "der": 1, "des": 1, "dessen": 1, "dich": 1, "dies": 1,
+    "dieser": 1, "dieses": 1, "du": 1, "durch": 1, "eben": 1, "einfach": 1, "er": 1,
+    "es": 1, "euch": 1, "euer": 1, "etwas": 1, "genau": 1, "gerade": 1, "gegen": 1,
+    "gibt": 1, "gilt": 1, "hast": 1, "haben": 1, "heute": 1, "hier": 1, "ihm": 1, "ihn": 1,
+    "ihnen": 1, "ihr": 1, "ihre": 1, "immer": 1, "ins": 1, "ja": 1, "je": 1, "jede": 1,
+    "jeden": 1, "jetzt": 1, "kommt": 1, "kann": 1, "kein": 1, "keine": 1, "könnte": 1,
+    "machen": 1, "macht": 1, "mal": 1, "mehr": 1, "mein": 1, "meine": 1, "mich": 1,
+    "mir": 1, "nach": 1, "natürlich": 1, "nie": 1, "noch": 1, "nun": 1, "nur": 1,
+    "nutzt": 1, "nutzen": 1, "ob": 1, "oder": 1, "oft": 1, "richtig": 1, "schon": 1,
+    "sein": 1, "seine": 1, "sich": 1, "sind": 1, "soll": 1, "sollen": 1, "sondern": 1,
+    "sonst": 1, "sowie": 1, "über": 1, "um": 1, "und": 1, "uns": 1, "unser": 1, "unter": 1,
+    "vom": 1, "von": 1, "vor": 1, "warum": 1, "weg": 1, "weil": 1, "weiter": 1, "wenn": 1,
+    "wer": 1, "werde": 1, "werden": 1, "wirklich": 1, "wie": 1, "wieder": 1, "wir": 1,
+    "wird": 1, "wo": 1, "wollen": 1, "wäre": 1, "zum": 1, "zur": 1, "zurück": 1,
+    "zwischen": 1, "kostet": 1, "bringt": 1, "zahlt": 1, "steht": 1, "gilt": 1,
+    "sorgt": 1, "senkt": 1, "liegt": 1, "bleibt": 1, "sorgen": 1, "senken": 1,
+    "inzwischen": 1, "schließlich": 1, "außerdem": 1, "ebenfalls": 1, "dennoch": 1,
+    "trotzdem": 1, "insgesamt": 1, "derzeit": 1, "aktuell": 1, "vielleicht": 1,
+    "eigentlich": 1, "sicher": 1, "deutlich": 1, "sofort": 1, "häufig": 1, "selten": 1,
+}
+
+RE_WORD_RUN = re.compile(r"[A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß'’]*")
+RE_TRAIL_SOFT = re.compile(r"^[\s,.:;!?\u2026„“\"'’()\[\]\-\u2013\u2014]+")
+
+
+def word_class_of(word: str, base: str):
+    """Sprachklasse eines Wortes — None heißt: kein Beleg, folgt dem Lauf."""
+    lw = re.sub(r"['’]s$", "", (word or "").lower())
+    if not lw:
+        return None
+    if lw in DE_EN_HOMOGRAPHS:
+        return None
+    de_score = en_score = 0
+    if re.search(r"[äöüß]", lw):
+        de_score = 2
+    if lw in DE_HINTS:
+        de_score = max(de_score, DE_HINTS[lw])
+    if lw in DE_EVIDENCE:
+        de_score = max(de_score, DE_EVIDENCE[lw])
+    if lw in EN_WORDS:
+        en_score = max(en_score, EN_WORDS[lw])
+    if de_score == 0 and en_score == 0 and len(lw) >= 6:
+        # Endungs-Evidenz nur als Zweitbeleg (Score 1); „ing“ erst ab
+        # 7 Zeichen und nie, wenn ein deutsches Endungs-Wort vorliegt.
+        if base == "de":
+            if re.search(r"(ung|keit|heit|schaft|lich|isch)$", lw):
+                de_score = 1
+            elif re.search(r"(ness|able|ible)$", lw):
+                en_score = 1
+            elif len(lw) >= 7 and re.search(r"ing$", lw):
+                en_score = 1
+        else:
+            if re.search(r"(ness|able|ible)$", lw):
+                en_score = 1
+            elif len(lw) >= 7 and re.search(r"ing$", lw):
+                en_score = 1
+            elif re.search(r"(ung|keit|heit|schaft|lich|isch)$", lw):
+                de_score = 1
+    if de_score and en_score:
+        return None
+    if de_score:
+        return {"lang": "de", "score": de_score}
+    if en_score:
+        return {"lang": "en", "score": en_score}
+    return None
+
+
+def language_runs(text: str, base_lang: str) -> list:
+    """Zerlegt Text in maximale SPRACHLÄUFE. Die Segmente konkatenieren
+    exakt zum Eingabetext (Vertrag an die Paritäts-Prüfung)."""
+    base = "en" if base_lang == "en" else "de"
+    src = str(text or "")
+    if not src:
+        return []
+
+    anchors = []
+    for m in RE_WORD_RUN.finditer(src):
+        cls = word_class_of(m.group(0), base)
+        if cls:
+            anchors.append({"lang": cls["lang"], "score": cls["score"],
+                            "start": m.start(), "end": m.end()})
+    if not anchors:
+        return [{"text": src, "lang": base}]
+
+    # Ankern gleicher Sprache zu Gruppen bündeln.
+    groups = []
+    for a in anchors:
+        if groups and groups[-1]["lang"] == a["lang"]:
+            groups[-1]["items"].append(a)
+            groups[-1]["end"] = a["end"]
+        else:
+            groups.append({"lang": a["lang"], "items": [a],
+                           "start": a["start"], "end": a["end"]})
+
+    def group_stands(g):
+        if g["lang"] == base:
+            return True
+        # Ein Fachbegriff (Score 3) trägt allein; sonst brauchen wir
+        # mindestens zwei belegte Wörter — „the“ allein wechselt nicht.
+        scores = [a["score"] for a in g["items"]]
+        return max(scores) >= 3 or (len(scores) >= 2 and sum(scores) >= 2)
+
+    segs = []
+    pos = 0
+    for gi, g in enumerate(groups):
+        stands = group_stands(g)
+        g_lang = g["lang"] if stands else base
+
+        # Kopf bis zum Gruppenbeginn gehört in die Artikelsprache.
+        if g["start"] > pos:
+            segs.append({"text": src[pos:g["start"]], "lang": base})
+
+        # Die Gruppe selbst: Anfang, Innenlücken (beleglose Wörter und
+        # weiche Trenner), Ende — „funds of funds“ bleibt ein Lauf.
+        segs.append({"text": src[g["start"]:g["end"]], "lang": g_lang})
+        pos = g["end"]
+
+        if gi + 1 >= len(groups):
+            tail = src[pos:]
+            if tail:
+                m = RE_TRAIL_SOFT.match(tail)
+                soft_len = m.end() if m else 0
+                if soft_len and stands:
+                    segs.append({"text": tail[:soft_len], "lang": g_lang})
+                if soft_len < len(tail):
+                    segs.append({"text": tail[soft_len:], "lang": base})
+            pos = len(src)
+            continue
+
+        gap_end = groups[gi + 1]["start"]
+        gap = src[pos:gap_end]
+        if gap and stands:
+            m = RE_TRAIL_SOFT.match(gap)
+            soft_len = m.end() if m else 0
+            if soft_len:
+                # Nur stiller Nachlauf (Komma, Punkt, Leerzeichen,
+                # Anführung) hängt an die stehende Gruppe — er gibt den
+                # Atempunkt am Stimmwechsel. Beleglose Folgewörter
+                # bleiben bewusst in der Artikelsprache.
+                segs.append({"text": gap[:soft_len], "lang": g_lang})
+                gap = gap[soft_len:]
+        if gap:
+            segs.append({"text": gap, "lang": base})
+        pos = gap_end
+
+    if pos < len(src):
+        segs.append({"text": src[pos:], "lang": base})
+
+    merged = []
+    for s in segs:
+        if not s["text"]:
+            continue
+        if merged and merged[-1]["lang"] == s["lang"]:
+            merged[-1]["text"] += s["text"]
+        else:
+            merged.append(dict(s))
+    return merged
+
+
 def duration_phrase(minutes, C):
     try:
         n = int(minutes)
@@ -916,6 +1130,14 @@ def _lang_of(node: Node, fallback: str) -> str:
 
 
 def _is_standalone_emphasis(node: Node) -> bool:
+    """Fettdruck ist ein eigener Block, wenn er praktisch das ganze
+    Elternelement ausmacht. Maßgeblich ist allein der TEXTANTEIL: Ein
+    Lead-in wie „<strong>Tarifwechsel als größter Hebel:</strong> Ein
+    Wechsel …“ ist KEIN eigener Merksatz — der Listenpunkt spricht es
+    bereits. (Die frühere Knotenzahl-Regel „siblings <= 2“ scheiterte
+    an Textknoten: <li><strong>…</strong> Rest</li> hat genau zwei
+    Kindknoten und galt so fälschlich als eigenständig — genau der
+    Doppel-Leser auf /pillar/strom-sparen/.)"""
     text = readable_text(node)
     if len(text) < 12:
         return False
@@ -923,8 +1145,7 @@ def _is_standalone_emphasis(node: Node) -> bool:
     if parent is None:
         return False
     parent_text = readable_text(parent)
-    siblings = len(parent.children)
-    return len(text) >= max(12, len(parent_text) - 2) or siblings <= 2
+    return len(text) >= max(12, len(parent_text) - 2)
 
 
 def extract_blocks(root: Node, cfg: dict):
@@ -961,6 +1182,7 @@ def extract_blocks(root: Node, cfg: dict):
 
     # (3) Artikelblöcke in DOM-Reihenfolge
     done = []
+    spoken_blocks = []   # (Element, Text) — Fundament der Doppel-Lese-Schleuse
     for el in query_all(content, CONTENT_SELECTOR):
         if is_skipped(el):
             continue
@@ -992,6 +1214,24 @@ def extract_blocks(root: Node, cfg: dict):
             emph = readable_text(el)
             if len(emph) < 8:
                 continue
+            # Doppel-Lese-Schleuse: Steht dieser Text bereits in einem
+            # Vorfahren-Block (Lead-in des Listenpunkts, CTA-Link im
+            # Absatz), wird er dort schon gesprochen — niemals ein
+            # zweites Mal. Blöcke liegen in Dokumentordnung, der
+            # Vorfahren-Block liegt also davor.
+            emph_bare = re.sub(r"[\s?!.…:]+$", "", emph)
+            duplicate = False
+            if emph_bare:
+                walker = el.parent
+                while walker is not None and not duplicate:
+                    for parent_el, parent_text in reversed(spoken_blocks):
+                        if parent_el is walker:
+                            if emph_bare in parent_text:
+                                duplicate = True
+                            break
+                    walker = walker.parent
+            if duplicate:
+                continue
             out.append({"lang": el_lang, "type": "emphasis",
                         "text": re.sub(r"[\s?!.…]+$", "", emph) + "."})
             continue
@@ -1015,6 +1255,7 @@ def extract_blocks(root: Node, cfg: dict):
             btype = "warning" if is_warn else (
                 "overview-card" if (el.has_class("ff-tarif-card") or el.has_class("ff-einspar-box"))
                 else "callout")
+            spoken_blocks.append((el, cue + " " + box_text))
             out.append({"lang": el_lang, "type": btype, "text": cue + " " + box_text})
             continue
 
@@ -1050,6 +1291,7 @@ def extract_blocks(root: Node, cfg: dict):
             heading = re.sub(r"[\s?!.…]+$", "", text)
             speak_text = heading + ("?" if text.rstrip().endswith("?") else ".")
 
+        spoken_blocks.append((el, speak_text))
         out.append({"lang": el_lang, "type": btype, "text": speak_text})
 
     # (4) Abmoderation
@@ -1108,47 +1350,60 @@ def synth_article(blocks, engine, profile_name, tmp_dir, log):
         for si, seg in enumerate(segments):
             if not seg.strip():
                 continue
-            seg_index += 1
-            melody = ttb.melody_of(seg)
-            density = ttb.density_factor(seg)
-            words = len(re.findall(r"\S+", seg))
-            rate = ttb.effective_rate(profile, density, melody, si == len(segments) - 1)
-            volume = ttb.effective_volume(profile, melody)
-            pitch = int(round(profile.get("pitch", 0)))
+            # Wortlauf-Regie: Eine Atemgruppe kann die Sprache wechseln
+            # („Ein Robo Advisor nutzt Compound Interest …“). Jeder Lauf
+            # wird mit der passenden männlichen Stimme vertont; Tempo,
+            # Tonlage und Rolle bleiben der Atemgruppe treu — der Ton-
+            # spur-Hörer merkt nur den Stimmwechsel, nie eine Zäsur.
+            runs = language_runs(seg, blang)
+            runs = [r for r in runs if r["text"].strip()] or [{"text": seg, "lang": blang}]
+            for ri, run in enumerate(runs):
+                run_text = run["text"]
+                run_lang = run["lang"]
+                seg_index += 1
+                melody = ttb.melody_of(seg)
+                density = ttb.density_factor(seg)
+                words = len(re.findall(r"\S+", seg))
+                rate = ttb.effective_rate(profile, density, melody, si == len(segments) - 1)
+                volume = ttb.effective_volume(profile, melody)
+                pitch = int(round(profile.get("pitch", 0)))
 
-            seg_wav = os.path.join(tmp_dir, "seg_%05d.wav" % seg_index)
-            used_engine, ok, _ = ttb.synthesize(seg, blang, engine, profile_name,
-                                                seg_wav, rate=rate, pitch=pitch, volume=volume)
-            if not ok:
-                if log:
-                    log("Segment %d konnte nicht vertont werden (engine=%s)" % (seg_index, engine))
-                continue
-            try:
-                samples, src_rate = ttb.read_wav_mono(seg_wav)
-            except Exception:
-                continue
-            samples = ttb.remove_dc(ttb.trim_edges(samples))
-            samples = ttb.apply_fade(ttb.declick(samples))
-            if not samples:
-                continue
+                seg_wav = os.path.join(tmp_dir, "seg_%05d.wav" % seg_index)
+                used_engine, ok, _ = ttb.synthesize(run_text, run_lang, engine, profile_name,
+                                                    seg_wav, rate=rate, pitch=pitch, volume=volume)
+                if not ok and run_lang != blang:
+                    # Der Sprachlauf-Fallback: Liefert die Fremdsprache
+                    # kein Audio (z. B. EN-Stimme fehlt), springt der
+                    # Lauf auf die Artikelsprache — nie verstummt ein Wort.
+                    used_engine, ok, _ = ttb.synthesize(run_text, blang, engine, profile_name,
+                                                        seg_wav, rate=rate, pitch=pitch, volume=volume)
+                if not ok:
+                    if log:
+                        log("Segment %d konnte nicht vertont werden (engine=%s)" % (seg_index, engine))
+                    continue
+                try:
+                    samples, src_rate = ttb.read_wav_mono(seg_wav)
+                except Exception:
+                    continue
+                samples = ttb.remove_dc(ttb.trim_edges(samples))
+                samples = ttb.apply_fade(ttb.declick(samples))
+                if not samples:
+                    continue
 
-            dur_ms = int(round(len(samples) * 1000.0 / src_rate))
-            before_ms = profile.get("before", 0) if si == 0 else 0
-            pause_ms = profile.get("before", 0) if si == 0 else 0
+                dur_ms = int(round(len(samples) * 1000.0 / src_rate))
+                is_unit_head = (si == 0 and ri == 0)
+                before_ms = profile.get("before", 0) if is_unit_head else 0
 
-            # Pause VOR dem hörbaren Segment (gehört zur Rolle, nicht zum Wort)
-            if before_ms > 0:
-                cursor_ms += before_ms
-                pieces.append((ttb.silence_ms(before_ms, src_rate), src_rate))
+                # Pause VOR dem hörbaren Segment (gehört zur Rolle, nicht zum Wort)
+                if before_ms > 0:
+                    cursor_ms += before_ms
+                    pieces.append((ttb.silence_ms(before_ms, src_rate), src_rate))
 
-            if t0 is None:
-                t0 = cursor_ms
-            cursor_ms += dur_ms
-            t1 = cursor_ms
-            pieces.append((samples, src_rate))
-
-            if si < len(segments) - 1:
-                cursor_ms += 0
+                if t0 is None:
+                    t0 = cursor_ms
+                cursor_ms += dur_ms
+                t1 = cursor_ms
+                pieces.append((samples, src_rate))
 
         if t0 is None:
             t0 = cursor_ms
@@ -1566,6 +1821,64 @@ def selftest() -> int:
     # Reihenfolge-Stabilität
     blocks2, _ = extract_blocks(parse_html(FIXTURE), cfg)
     check("Extraktion deterministisch", [b["text"] for b in blocks] == [b["text"] for b in blocks2])
+
+    # ---------- Doppel-Lese-Schleuse (Befund /pillar/strom-sparen/) ----
+    pillar_html = """<!doctype html><html lang="de"><body>
+<article class="post-content">
+<h3>Das Wichtigste auf einen Blick</h3>
+<ul>
+<li><strong>Tarifwechsel als größter Hebel:</strong> Ein Wechsel des Strom- oder Gasanbieters dauert online weniger als zehn Minuten und spart im Schnitt 300&nbsp;€ bis 800&nbsp;€ pro Jahr.</li>
+<li><strong>Heimliche Stromfresser eliminieren:</strong> Standby-Geräte verursachen bis zu 20&nbsp;% deiner jährlichen Stromrechnung.</li>
+</ul>
+<p><strong>Februar.</strong> Jahresabrechnung lesen. Verbrauch, Preis, Abschlag.</p>
+<p>👉 <strong>Jetzt aktuellen Stromtarif prüfen und sparen:</strong> <a href="/go/strom/"><strong>→ Jetzt Stromtarife vergleichen</strong></a></p>
+<p><strong>Merksatz: Prüfe die Laufzeit genau.</strong></p>
+</article>
+<script type="application/json" id="ff-voice-config">{"title":"Strom und Gas sparen","lang":"de","readingTime":8,"description":""}</script>
+</body></html>"""
+    p_root = parse_html(pillar_html)
+    p_blocks, _plang = extract_blocks(p_root, read_reader_config(p_root))
+    p_text = [b["text"] for b in p_blocks]
+    check("Lead-in „Tarifwechsel als größter Hebel“ genau einmal",
+          sum(1 for t in p_text if "Tarifwechsel als größter Hebel" in t) == 1)
+    check("Lead-in „Heimliche Stromfresser“ genau einmal",
+          sum(1 for t in p_text if "Heimliche Stromfresser eliminieren" in t) == 1)
+    check("Absatz-Kurzdatum „Februar“ genau einmal",
+          sum(1 for t in p_text if "Februar" in t) == 1)
+    check("Lead-in erscheint nicht als eigener emphasis-Block",
+          all(not (b["type"] == "emphasis" and (
+              "Tarifwechsel" in b["text"] or "Stromfresser eliminieren" in b["text"]
+              or "Februar" in b["text"])) for b in p_blocks))
+    check("Echter Merksatz bleibt eigener Block",
+          any(b["type"] == "emphasis" and "Prüfe die Laufzeit genau" in b["text"] for b in p_blocks))
+    check("CTA-Linktext genau einmal (kein Zweiblock)",
+          sum(1 for t in p_text if "Jetzt Stromtarife vergleichen" in t) == 1)
+    check("Keine doppelten Blocktexte", len(set(p_text)) == len(p_text))
+
+    # ---------- Wortlauf-Regie (Sprachwechsel mitten im Satz) ----------
+    def _langs(t, base="de"):
+        return [r["lang"] for r in language_runs(t, base)]
+
+    check("Wortlauf: Robo Advisor wechselt zu EN",
+          _langs("Ein Robo Advisor nutzt Compound Interest und Cost Averaging.")
+          == ["de", "en", "de", "en", "de", "en"])
+    check("Wortlauf: Cashflow wechselt, Satzgerüst bleibt DE",
+          _langs("Der Cashflow kommt jeden Monat.") == ["de", "en", "de"])
+    check("Wortlauf: Buy and Hold bleibt ein Lauf",
+          " ".join(r["text"] for r in language_runs("Mit Buy and Hold bleibst du flexibel.", "de")
+                   if r["lang"] == "en").split() == ["Buy", "and", "Hold"])
+    check("Wortlauf: Scheinfreunde (was/hat/will) kippen nicht",
+          _langs("Was hat er damit gemeint?") == ["de"])
+    check("Wortlauf: einsames Funktionswort wechselt nicht",
+          _langs("The Big Short erklärt die Krise.") == ["de"])
+    check("Wortlauf: deutscher Einschub im EN-Artikel",
+          "de" in _langs("Compare your insurance costs, und die Versicherung kostet mehr.", "en"))
+    for probe in ("Ein Robo Advisor nutzt Compound Interest und Cost Averaging.",
+                  "Der Cashflow kommt jeden Monat.",
+                  "Compare your insurance costs, und die Versicherung kostet mehr.",
+                  "Was hat er damit gemeint?"):
+        check("Wortlauf konkatiert exakt: %s" % probe[:30],
+              "".join(r["text"] for r in language_runs(probe, "de")) == probe)
 
     # Fingerprint
     fp1 = fingerprint(blocks, "edge", "natural", "de-DE-X", "en-US-Y")
