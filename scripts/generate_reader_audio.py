@@ -311,7 +311,10 @@ def element_text_without(node: Node, skip_classes: set[str]) -> str:
 
 def find_post_content(root: Node) -> Node | None:
     def walk(n: Node):
-        if "post-content" in n.classes or "md-content" in n.classes:
+        classes = n.classes or set()
+        if "post-content" in classes or "md-content" in classes:
+            return n
+        if n.tag == "div" and classes and any("content" in c.lower() for c in classes):
             return n
         for c in n.children:
             r = walk(c)
