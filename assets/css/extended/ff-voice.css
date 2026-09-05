@@ -1,0 +1,447 @@
+/* ============================================================
+   FF VOICE STUDIO — Lesehilfen (Vorlesen + Kurzfassung)
+   Generation 2 · 05.09.2026 · Profi-Agentur-Standard
+   ------------------------------------------------------------
+   Markup: layouts/_partials/ff_voice_toolbar.html
+   Logik:  static/premium/ff-voice.js
+   ------------------------------------------------------------
+   Gestaltungsprinzipien (Verlagsregie):
+   · Ein Slot (.ff-voice-slot) reserviert die Höhe dauerhaft. Der
+     Wechsel in den schwebenden Mini-Player verändert das Layout
+     nicht um einen Pixel (kein CLS, Lighthouse-Kernwert).
+   · Farben ausschließlich aus den Marken-Tokens des Blogs
+     (Smaragdgrün / Anthrazit / Signalgelb). Kein Fremd-CDN,
+     keine Webfonts – Systemschrift wie im restlichen Artikel.
+   · Alle Zustände (Bereit · läuft · pausiert · beendet) sind an
+     Kontrast (WCAG 2.2 AA+), Fokus-Sichtbarkeit und
+     `prefers-reduced-motion` geprüft.
+   ============================================================ */
+
+/* ---------- 1. Tokens ------------------------------------- */
+.ff-voice-slot,
+.ff-voice-dialog {
+  --ffv-emerald: #0E5A43;
+  --ffv-emerald-dark: #0A4634;
+  --ffv-emerald-soft: #EAF4EF;
+  --ffv-anthracite: #2E2E33;
+  --ffv-yellow: #FFB300;
+  --ffv-surface: #ffffff;
+  --ffv-surface-alt: #f6f8f7;
+  --ffv-line: rgba(14, 90, 67, .18);
+  --ffv-text: var(--ffv-anthracite);
+  --ffv-muted: #5b6663;
+  --ffv-radius: 14px;
+  --ffv-shadow: 0 1px 2px rgba(20, 40, 33, .06), 0 8px 24px rgba(20, 40, 33, .08);
+  --ffv-shadow-float: 0 6px 14px rgba(20, 40, 33, .10), 0 18px 44px rgba(20, 40, 33, .16);
+  --ffv-ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+:root[data-theme="dark"] .ff-voice-slot,
+:root[data-theme="dark"] .ff-voice-dialog {
+  --ffv-emerald: #6fd8b4;
+  --ffv-emerald-dark: #a8ecd2;
+  --ffv-emerald-soft: rgba(111, 216, 180, .10);
+  --ffv-anthracite: #eef2f1;
+  --ffv-surface: #16191c;
+  --ffv-surface-alt: #1d2124;
+  --ffv-line: rgba(111, 216, 180, .28);
+  --ffv-text: #eef2f1;
+  --ffv-muted: #a9b5b1;
+  --ffv-shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
+  --ffv-shadow-float: 0 8px 18px rgba(0, 0, 0, .5), 0 20px 48px rgba(0, 0, 0, .45);
+}
+
+/* ---------- 2. Slot & Toolbar ----------------------------- */
+.ff-voice-slot {
+  position: relative;
+  margin: 18px 0 22px;
+  min-height: 62px;          /* reserviert – Mini-Player ohne Layout-Sprung */
+  contain: layout paint;
+}
+
+.ff-voice-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--ffv-line);
+  border-radius: var(--ffv-radius);
+  background: var(--ffv-surface);
+  box-shadow: var(--ffv-shadow);
+}
+
+.ff-voice-bar__label {
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--ffv-emerald);
+  padding-right: 4px;
+}
+
+.ff-voice-bar__nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ff-voice-bar__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-left: auto;
+  min-width: 0;
+}
+
+.ff-voice-bar__remaining {
+  font-size: .8rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ffv-muted);
+  white-space: nowrap;
+}
+
+.ff-voice-bar__status {
+  font-size: .8rem;
+  color: var(--ffv-muted);
+  max-width: 26ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ff-voice-bar__status:empty { display: none; }
+
+/* ---------- 3. Buttons ------------------------------------ */
+.ff-voice-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--ffv-line);
+  border-radius: 999px;
+  background: var(--ffv-surface-alt);
+  color: var(--ffv-text);
+  font: inherit;
+  font-size: .92rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .16s var(--ffv-ease), color .16s var(--ffv-ease),
+              border-color .16s var(--ffv-ease), transform .16s var(--ffv-ease);
+}
+.ff-voice-btn:hover { background: var(--ffv-emerald-soft); border-color: var(--ffv-emerald); }
+.ff-voice-btn:active { transform: translateY(1px); }
+
+.ff-voice-btn:focus-visible {
+  outline: 3px solid var(--ffv-yellow);
+  outline-offset: 2px;
+}
+
+.ff-voice-btn__icon {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+.ff-voice-btn__icon svg { width: 20px; height: 20px; }
+
+.ff-voice-btn--primary {
+  background: linear-gradient(160deg, var(--ffv-emerald) 0%, var(--ffv-emerald-dark) 100%);
+  border-color: transparent;
+  color: #fff;
+}
+:root[data-theme="dark"] .ff-voice-btn--primary { color: #0b1512; }
+.ff-voice-btn--primary:hover { filter: brightness(1.06); background: linear-gradient(160deg, var(--ffv-emerald) 0%, var(--ffv-emerald-dark) 100%); }
+
+.ff-voice-btn--icon { padding: 0; width: 40px; justify-content: center; }
+.ff-voice-btn--icon .ff-voice-btn__icon { width: 18px; height: 18px; flex-basis: 18px; }
+.ff-voice-btn--icon svg { width: 18px; height: 18px; }
+
+/* Play/Pause-Umschaltung: nur ein Symbol ist je Zustand sichtbar. */
+.ff-voice-ico--pause { display: none; }
+.ff-voice-bar[data-state="playing"] .ff-voice-ico--play { display: none; }
+.ff-voice-bar[data-state="playing"] .ff-voice-ico--pause { display: inline-flex; }
+
+/* ---------- 4. Fortschritt -------------------------------- */
+.ff-voice-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  border-radius: 0 0 var(--ffv-radius) var(--ffv-radius);
+  background: var(--ffv-emerald-soft);
+  overflow: hidden;
+}
+.ff-voice-progress__bar {
+  display: block;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--ffv-emerald) 0%, var(--ffv-yellow) 100%);
+  transition: width .25s linear;
+}
+
+/* ---------- 5. Schwebender Mini-Player -------------------- */
+.ff-voice-bar--floating {
+  position: fixed;
+  left: 50%;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 9998;
+  width: min(720px, calc(100vw - 24px));
+  flex-wrap: nowrap;
+  padding: 8px 10px;
+  box-shadow: var(--ffv-shadow-float);
+  animation: ffv-rise .2s var(--ffv-ease);
+}
+.ff-voice-bar--floating .ff-voice-bar__label,
+.ff-voice-bar--floating .ff-voice-btn--summary,
+.ff-voice-bar--floating .ff-voice-bar__status { display: none; }
+.ff-voice-bar--floating .ff-voice-bar__meta { margin-left: auto; }
+.ff-voice-bar--floating .ff-voice-btn__text { font-size: .86rem; }
+
+@keyframes ffv-rise {
+  from { opacity: 0; transform: translate(-50%, 12px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ---------- 6. Live-Markierung im Artikel ----------------- */
+.post-content .ff-voice-active,
+.ff-voice-active {
+  position: relative;
+  border-radius: 8px;
+  background: var(--ffv-emerald-soft);
+  box-shadow: -3px 0 0 0 var(--ffv-emerald);
+  transition: background .2s var(--ffv-ease);
+}
+
+/* ---------- 7. Kurzfassung (Dialog) ----------------------- */
+.ff-voice-dialog {
+  width: min(760px, calc(100vw - 28px));
+  max-height: min(86vh, 900px);
+  padding: 0;
+  border: 1px solid var(--ffv-line);
+  border-radius: 18px;
+  background: var(--ffv-surface);
+  color: var(--ffv-text);
+  box-shadow: var(--ffv-shadow-float);
+  overflow: hidden;
+}
+.ff-voice-dialog::backdrop { background: rgba(12, 26, 21, .58); backdrop-filter: blur(2px); }
+.ff-voice-dialog[open] { display: flex; flex-direction: column; }
+
+.ff-voice-dialog__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--ffv-line);
+  background: var(--ffv-surface-alt);
+}
+.ff-voice-dialog__eyebrow {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ffv-emerald);
+}
+.ff-voice-dialog__title {
+  margin: 2px 0 0;
+  font-size: 1.12rem;
+  line-height: 1.3;
+}
+.ff-voice-dialog__close {
+  margin-left: auto;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ffv-line);
+  border-radius: 50%;
+  background: var(--ffv-surface);
+  color: var(--ffv-text);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.ff-voice-dialog__close:hover { background: var(--ffv-emerald-soft); border-color: var(--ffv-emerald); }
+.ff-voice-dialog__close:focus-visible { outline: 3px solid var(--ffv-yellow); outline-offset: 2px; }
+
+.ff-voice-dialog__body {
+  padding: 16px 18px 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.ff-voice-sec { margin: 0 0 20px; }
+.ff-voice-sec:last-child { margin-bottom: 4px; }
+.ff-voice-sec__h {
+  margin: 0 0 8px;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ffv-emerald);
+}
+
+.ff-voice-quick {
+  margin: 0;
+  padding: 14px 16px;
+  border-left: 4px solid var(--ffv-yellow);
+  border-radius: 10px;
+  background: var(--ffv-emerald-soft);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.ff-voice-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+  font-size: .82rem;
+  color: var(--ffv-muted);
+}
+.ff-voice-byline li { display: inline-flex; align-items: center; gap: 6px; }
+
+.ff-voice-list { margin: 0; padding-left: 20px; }
+.ff-voice-list li { margin: 0 0 8px; line-height: 1.6; }
+.ff-voice-list--plain { list-style: none; padding-left: 0; }
+.ff-voice-list--plain li {
+  padding-left: 16px;
+  position: relative;
+}
+.ff-voice-list--plain li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .58em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ffv-emerald);
+}
+
+/* Zahlen auf einen Blick (Big-Number-Karten) */
+.ff-voice-figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+.ff-voice-figure {
+  padding: 12px 14px;
+  border: 1px solid var(--ffv-line);
+  border-radius: 12px;
+  background: var(--ffv-surface-alt);
+}
+.ff-voice-figure__value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--ffv-emerald-dark);
+  font-variant-numeric: tabular-nums;
+}
+.ff-voice-figure__label {
+  display: block;
+  margin-top: 4px;
+  font-size: .8rem;
+  color: var(--ffv-muted);
+  line-height: 1.4;
+}
+
+/* Tabellen im Fokus */
+.ff-voice-tables { display: grid; gap: 10px; }
+.ff-voice-tablecard {
+  border: 1px solid var(--ffv-line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.ff-voice-tablecard__h {
+  margin: 0;
+  padding: 10px 14px;
+  font-size: .92rem;
+  background: var(--ffv-surface-alt);
+}
+.ff-voice-tablecard__meta {
+  margin: 0;
+  padding: 8px 14px 10px;
+  font-size: .82rem;
+  color: var(--ffv-muted);
+}
+
+/* Inhaltsverzeichnis */
+.ff-voice-toc { list-style: none; margin: 0; padding: 0; }
+.ff-voice-toc li { margin: 0; }
+.ff-voice-toc a {
+  display: block;
+  padding: 7px 2px;
+  border-bottom: 1px solid var(--ffv-line);
+  color: var(--ffv-text);
+  text-decoration: none;
+  font-size: .94rem;
+}
+.ff-voice-toc a:hover, .ff-voice-toc a:focus-visible { color: var(--ffv-emerald); text-decoration: underline; }
+.ff-voice-toc li:last-child a { border-bottom: 0; }
+
+.ff-voice-dialog__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 18px;
+  border-top: 1px solid var(--ffv-line);
+  background: var(--ffv-surface-alt);
+}
+.ff-voice-dialog__foot .ff-voice-btn { font-size: .88rem; }
+.ff-voice-link {
+  margin-left: auto;
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--ffv-emerald);
+  text-decoration: none;
+}
+.ff-voice-link:hover { text-decoration: underline; }
+
+/* Fallback, wenn <dialog> nicht unterstützt wird */
+.ff-voice-dialog--fallback {
+  position: fixed;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+}
+.ff-voice-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  background: rgba(12, 26, 21, .58);
+}
+
+/* ---------- 8. Barrierefreiheit & Kompaktheit ------------- */
+@media (max-width: 560px) {
+  .ff-voice-slot { min-height: 104px; }
+  .ff-voice-bar { gap: 6px 8px; }
+  .ff-voice-bar__meta { margin-left: 0; width: 100%; }
+  .ff-voice-btn__text { font-size: .86rem; }
+  .ff-voice-btn { padding: 0 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ff-voice-bar--floating { animation: none; }
+  .ff-voice-progress__bar { transition: none; }
+  .ff-voice-btn { transition: none; }
+}
+
+@media print {
+  .ff-voice-slot { display: none !important; }
+}

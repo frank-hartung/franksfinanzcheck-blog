@@ -1,11 +1,11 @@
 {
-  "name": "ff-reader-qa",
+  "name": "ff-voice-qa",
   "version": "1.0.0",
   "private": true,
   "description": "Echte DOM-Funktionsprüfung für Vorlesen + Kurzfassung (jsdom statt Fake-DOM).",
   "type": "module",
   "scripts": {
-    "test": "node ../../scripts/reader_functional_test.mjs"
+    "test": "node ../../scripts/ff_voice_functional_test.mjs"
   },
   "devDependencies": {
     "jsdom": "^30.0.1"

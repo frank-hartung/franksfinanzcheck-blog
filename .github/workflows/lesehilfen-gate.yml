@@ -1,29 +1,23 @@
 # ============================================================
 #  LESEHILFEN-GATE (Vorlesen + Kurzfassung) — dauerhaft aktiv
 #  ------------------------------------------------------------
-#  Warum dieser Workflow existiert (04.09.2026):
+#  FF Voice Studio · Generation 2 · 05.09.2026
 #
-#  PR #169 („Vorlesen + Kurzfassung repariert, echte DOM-Wache“)
-#  wurde auf den aktuellen main gemergt/übernommen. Sein Kern ist
-#  die ECHTE DOM-Prüfung: Die alten Suiten liefen gegen eine
-#  handgebaute FakeNode-DOM und waren grün, während die Funktion
-#  im Browser sichtbar fehlerhaft war (Kurzantwort-Box wurde nie
-#  vorgelesen, „Weiterlesen“ doppelte Sätze, Fokus-Rückkehr,
-#  Auswahl-Schutz, Aussprache-Regeln …).
+#  Dieses Gate sichert das neue Vorlese-Modell ab:
+#    · männliche Stimme, Deutsch und Englisch ohne Umschalter
+#    · zwei Tonpfade: Studio-Tonspur (MP3) + Browser-Engine
+#    · Kurzfassung auf Verlagshaus-Niveau
 #
-#  Dieses Gate läuft gegen eine ECHTE DOM (jsdom) mit der
-#  unveränderten static/premium/ff-reader.js, dem echten Seiten-
-#  Skelett aus layouts/single.html und echtem Inhalt aus
-#  content/posts. Zusätzlich laufen alle bestehenden Reader-/
-#  Stimmen-/Kurzfassungs-Suiten und der Selftest des
-#  ZEIT-Audiogenerators. Bricht etwas, wird der Deploy blockiert.
+#  Es läuft gegen eine ECHTE DOM (jsdom) mit der unveränderten
+#  static/premium/ff-voice.js, dem echten Seiten-Skelett und echtem
+#  Inhalt aus content/posts. Ergänzend prüfen vier weitere Suiten die
+#  Stimmen-Regie, die Parität zwischen Tonspur und Browserstimme sowie
+#  die Infrastruktur (Layout · Styling · Workflow · Rückbau).
 #
-#  Auslösung: bei jedem Push/PR, der Lesehilfen oder Content
-#  berührt, plus täglich als Wache gegen stillen Verfall.
+#  Bricht eine Suite, wird der Deploy blockiert.
 #
-#  Aktivierung: Die lauffähige Vorlage liegt zusätzlich unter
-#  patches/lesehilfen-gate-2026-09-04-workflow-ready.yml, damit sie bei
-#  Bedarf leicht verglichen oder erneut eingespielt werden kann.
+#  Auslösung: bei jedem Push/PR, der Lesehilfen oder Content berührt,
+#  plus täglich als Wache gegen stillen Verfall.
 # ============================================================
 name: Lesehilfen-Gate (Vorlesen + Kurzfassung)
 
@@ -31,41 +25,36 @@ on:
   push:
     branches: ["**"]
     paths:
-      - "static/premium/ff-reader.js"
-      - "assets/css/extended/ff-reader.css"
-      - "layouts/_partials/reader_toolbar.html"
+      - "static/premium/ff-voice.js"
+      - "assets/css/extended/ff-voice.css"
+      - "layouts/_partials/ff_voice_toolbar.html"
       - "layouts/single.html"
       - "layouts/_default/single.html"
       - "layouts/pillar/single.html"
-      - "scripts/reader_functional_test.mjs"
-      - "scripts/reader_structure_loudness_test.mjs"
-      - "scripts/reader_table_progress_test.mjs"
-      - "scripts/reader_blocks_dump.py"
-      - "scripts/reader_qa_lib.mjs"
-      - "scripts/reader_tts_backends.py"
-      - "scripts/reader_prosody_parity_check.py"
       - "layouts/shortcodes/**"
-      - "scripts/reader_engine_check.js"
-      - "scripts/reader_male_voice_highend_test.js"
-      - "scripts/reader_playback_function_test.js"
-      - "scripts/reader_v7_function_test.js"
-      - "scripts/summary_engine_check.js"
-      - "scripts/generate_reader_audio.py"
-      - "scripts/reader_toolbar_check.py"
-      - "tools/reader-qa/**"
+      - "scripts/ff_voice_functional_test.mjs"
+      - "scripts/ff_voice_voice_test.js"
+      - "scripts/ff_voice_qa_lib.mjs"
+      - "scripts/ff_voice_probe.mjs"
+      - "scripts/ff_voice_parity_check.py"
+      - "scripts/ff_voice_toolbar_check.py"
+      - "scripts/ff_voice_audio.py"
+      - "scripts/ff_voice_backends.py"
+      - "tools/ff-voice-qa/**"
       - "content/posts/**"
       - "content/pillar/**"
       - ".github/workflows/lesehilfen-gate.yml"
   pull_request:
     paths:
-      - "static/premium/ff-reader.js"
-      - "assets/css/extended/ff-reader.css"
+      - "static/premium/ff-voice.js"
+      - "assets/css/extended/ff-voice.css"
       - "layouts/**"
       - "content/posts/**"
       - "content/pillar/**"
-      - "scripts/generate_reader_audio.py"
-      - "scripts/reader_table_progress_test.mjs"
-      - "scripts/reader_blocks_dump.py"
+      - "scripts/ff_voice_audio.py"
+      - "scripts/ff_voice_backends.py"
+      - "scripts/ff_voice_functional_test.mjs"
+      - "scripts/ff_voice_voice_test.js"
   schedule:
     - cron: "20 6 * * *"   # 08:20 MESZ – tägliche Wache gegen stillen Verfall
   workflow_dispatch: {}
@@ -97,61 +86,37 @@ jobs:
           python-version: "3.12"
 
       - name: QA-Abhängigkeiten installieren (jsdom)
-        working-directory: tools/reader-qa
+        working-directory: tools/ff-voice-qa
         run: |
           if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
-      - name: Syntaxprüfung ff-reader.js
-        run: node --check static/premium/ff-reader.js
+      - name: Syntaxprüfung ff-voice.js
+        run: node --check static/premium/ff-voice.js
 
       # ---- Echter Funktionstest (jsdom, echte Engine-Datei) ----
       - name: Funktionstest Vorlesen + Kurzfassung (echte DOM)
-        run: node scripts/reader_functional_test.mjs
+        run: node scripts/ff_voice_functional_test.mjs
 
-      # ---- v10: Vollständigkeit (Überschriften/Tabellen/Übersichten)
-      #      und automatische Lautstärkenanpassung (DE & EN) ----
-      - name: Struktur- & Lautheits-Test (Vorlesen v10)
-        run: node scripts/reader_structure_loudness_test.mjs
+      # ---- Stimmen-Regie: männlich, DE & EN, ohne Umschalter ----
+      - name: Stimmen-Regie (männlich, DE & EN, ohne Umschalter)
+        run: node scripts/ff_voice_voice_test.js
 
-      # ---- v11: Tabellen (Zeilen/Spalten), Fettdruck an seiner Stelle,
-      #      Fortschrittsanzeige und Parität Tonspur ↔ Browser ----
-      - name: Tabellen-, Fettdruck- & Fortschritts-Test (Vorlesen v11)
-        run: node scripts/reader_table_progress_test.mjs
+      # ---- Serverseite: Aussprache, Prosodie, Audio-Werkzeuge ----
+      - name: TTS-Backends – Selbsttest
+        run: python3 scripts/ff_voice_backends.py --selftest
 
-      # ---- Generator-Selftest (Tonspur-Extraktion, läuft auch im Deploy) ----
-      - name: Generator-Selftest (Vorlese-Tonspur)
-        run: python3 scripts/generate_reader_audio.py --selftest
+      # ---- Generator: Block-Extraktion & Injektion ----
+      - name: Tonspur-Generator – Selbsttest
+        run: python3 scripts/ff_voice_audio.py --selftest
 
-      # ---- Bestehende Engine-/Stimmen-/Kurzfassungs-Suiten ----
-      - name: Reader-Engine-Check
-        run: node scripts/reader_engine_check.js
+      # ---- Parität: Tonspur ≡ Browser-Engine ----
+      - name: Paritäts-Gate Tonspur ↔ Browserstimme
+        run: python3 scripts/ff_voice_parity_check.py
 
-      - name: Male-Voice-Highend-Test
-        run: node scripts/reader_male_voice_highend_test.js
+      # ---- Infrastruktur: Layout, Styling, Workflow, Rückbau ----
+      - name: Toolbar-, Barrierefreiheits- & Rückbau-Wache
+        run: python3 scripts/ff_voice_toolbar_check.py
 
-      - name: Reader-Playback-Test
-        run: node scripts/reader_playback_function_test.js
-
-      - name: Vorlesen-v7-Funktionstest (ZEIT-Audioplayer)
-        run: node scripts/reader_v7_function_test.js
-
-      - name: Kurzfassungs-Engine-Check
-        run: node scripts/summary_engine_check.js
-
-      # ---- ZEIT-Audiofassung: Selftest des Deploy-Generators ----
-      # Prüft, dass die Block-Extraktion des Generators exakt der
-      # collectBlocks()-Reihenfolge des Readers folgt (inkl. der
-      # Kurzantwort-Box vor .post-content) – sonst liefen die
-      # chunk-Blockindizes der Tonspur am Reader vorbei.
-      - name: Audio-Generator-Selftest (Block-Parität)
-        run: python3 scripts/generate_reader_audio.py --selftest
-
-      # Tonspur und Browser-Stimme müssen dieselbe Regie fahren – sonst
-      # klingt derselbe Artikel je nach Gerät unterschiedlich laut.
-      - name: Paritäts-Gate Tonspur ↔ Browser-Stimme
-        run: python3 scripts/reader_prosody_parity_check.py
-
-      - name: Toolbar-/Barrierefreiheits-Wache
-        run: |
-          pip install -q pyyaml
-          python3 scripts/reader_toolbar_check.py
+      # ---- Diagnose (kein Deploy-Stopp): welche Engines wären verfügbar? ----
+      - name: TTS-Engines im CI (Diagnose)
+        run: python3 scripts/ff_voice_audio.py --engines || true
