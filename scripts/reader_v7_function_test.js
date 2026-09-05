@@ -242,10 +242,10 @@ function test(name, cond, detail = '') {
   const firstUtterance = progress.synth.speakCalls[0];
   if (firstUtterance && firstUtterance.onstart) firstUtterance.onstart();
   await wait(450);
-  const progressWidth = parseFloat(progress.ids['ff-reader-progress-bar'].style.width || '0');
+  const progressWidth = progress.ids['ff-reader-progress-bar'].style.transform ? parseFloat(progress.ids['ff-reader-progress-bar'].style.transform.replace(/[^0-9.]/g, '')) : 0;
   test('Fortschrittsleiste läuft auch ohne Boundary-Events sichtbar mit',
     progressWidth > 0,
-    `width=${progress.ids['ff-reader-progress-bar'].style.width || '0%'}`);
+    `transform=${progress.ids['ff-reader-progress-bar'].style.transform || 'scaleX(0)'}`);
   test('Fortschritt nutzt das automatisch gesetzte Sprechtempo',
     firstUtterance && firstUtterance.rate > 0 && firstUtterance.rate !== 1,
     `rate=${firstUtterance && firstUtterance.rate}`);
