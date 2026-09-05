@@ -180,9 +180,62 @@ t.group('3) Kurzantwort-Box („grüner Kasten“) im Vorlesepfad');
 }
 
 /* ================================================================== */
-/* 3b) Fallback: Description rettet die Lesehilfen                     */
+/* 3b) Regression: Tabellen-Erkennung + alleinstehender Fettdruck       */
 /* ================================================================== */
-t.group('3b) Kurzantwort-Fallback aus der Description');
+t.group('3b) TTS-Regressionsschutz: Tabellen, Fettdruck, Fortschritt');
+{
+  const fixtureHtml = `
+<p>Vor der Übersicht steht ein normaler Satz.</p>
+<strong>Wichtige Kostenbremse sofort prüfen</strong>
+<figure>
+  <figcaption>Tarifdetails im Vergleich</figcaption>
+  <table>
+    <thead><tr><th>Tarif</th><th>Preis</th><th>Hinweis</th></tr></thead>
+    <tbody>
+      <tr><td>Basis</td><td>24 €</td><td>monatlich kündbar</td></tr>
+      <tr><td>Premium</td><td>31 €</td><td>inklusive Schutzbrief</td></tr>
+    </tbody>
+  </table>
+</figure>
+<div role="table" aria-label="ARIA-Kostenübersicht">
+  <div role="row"><div role="columnheader">Posten</div><div role="columnheader">Betrag</div></div>
+  <div role="row"><div role="cell">Grundpreis</div><div role="cell">12 € pro Monat</div></div>
+</div>
+<p>Nach der Übersicht folgt der Abschluss.</p>`;
+  const reg = await createPage({
+    html: buildPage({
+      title: 'TTS Regressionstabellen', description: 'Testseite für Vorlesen.', kurzantwort: 'Kurzantwort für die Testseite.',
+      readingTime: '1', wordCount: '90', bodyHtml: fixtureHtml, showKurzantwortBox: false
+    }),
+    catalog: VOICE_CATALOGS.macChrome,
+    msPerChar: 0.08
+  });
+  t.eq(reg.errors, [], 'Keine Laufzeitfehler in der Regressions-Fixture');
+  click(reg.win, reg.doc.getElementById('ff-listen-btn'));
+  await until(() => {
+    const tr = reg.doc.getElementById('ff-reader-progress-bar').style.transform;
+    return !!tr && tr !== 'scaleX(0)';
+  }, 3000);
+  const progressDuring = reg.doc.getElementById('ff-reader-progress-bar').style.transform;
+  t.ok(progressDuring && progressDuring !== 'scaleX(0)', 'Fortschrittsanzeige läuft während der Wiedergabe sichtbar mit');
+  await waitFinished(reg.win, reg.doc, reg.log, 20000);
+  const spoken = norm(spokenText(reg.log));
+  t.ok(spoken.includes('wichtige kostenbremse sofort pruefen') || spoken.includes('wichtige kostenbremse sofort prüfen'),
+    'Alleinstehender fett gedruckter Text wird direkt in den Vorlesepfad aufgenommen');
+  t.ok(/tabelle tarifdetails im vergleich/.test(spoken),
+    'Tabelle innerhalb von <figure> wird erkannt und angekündigt');
+  t.ok(/basis/.test(spoken) && /premium/.test(spoken) && /monatlich kündbar|monatlich kuendbar/.test(spoken),
+    'Tabellenzeilen werden zeilenweise mit Zellinhalten gesprochen');
+  t.ok(/aria kostenübersicht|aria kostenuebersicht/.test(spoken) && /grundpreis/.test(spoken),
+    'ARIA-/Div-Tabellen werden ebenfalls als Tabellen erkannt');
+  t.ok(reg.doc.getElementById('ff-reader-progress-bar').style.transform === 'scaleX(0)',
+    'Fortschrittsanzeige wird nach dem Ende exakt zurückgesetzt');
+}
+
+/* ================================================================== */
+/* 3c) Fallback: Description rettet die Lesehilfen                     */
+/* ================================================================== */
+t.group('3c) Kurzantwort-Fallback aus der Description');
 {
   const desc = 'Fehlt die redaktionelle Kurzantwort einmal, muss die Description als robuster Fallback einspringen, damit grüner Kasten, Kurzfassung und Vorlesepfad nicht leer bleiben.';
   const p = await createPage({
