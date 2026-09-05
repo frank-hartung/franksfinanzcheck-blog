@@ -30,7 +30,9 @@ name: Offsite-Backup
 
 on:
   schedule:
-    - cron: "0 3 * * *"
+    # EINMALIGE Verifikation der Gehaertung am 05.09. um 16:00 UTC
+    # (wird direkt nach dem gruenen Lauf wieder auf "0 3 * * *" zurueckgesetzt)
+    - cron: "0 16 5 9 *"
   workflow_dispatch: {}
 
 permissions:
