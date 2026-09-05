@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -874,5 +874,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "5f4b8ecaf1929c73c7c383d27d48f39d"
+ "fingerprint": "d7149013736a252a183b92c4f8e29c6c"
 }

@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -508,5 +508,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "1e7377dfa5d92c02f7951d5a704a8796"
+ "fingerprint": "49f2625258ed81b0cc790a2af9e5125d"
 }

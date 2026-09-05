@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -748,5 +748,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "3d8b10000691fe0d6bc0d61a40521db0"
+ "fingerprint": "1b70182d1fc62e91434d380fd2c4c008"
 }

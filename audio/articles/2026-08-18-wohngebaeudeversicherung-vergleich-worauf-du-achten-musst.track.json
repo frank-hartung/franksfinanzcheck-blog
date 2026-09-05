@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -520,5 +520,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "8d19be3de231a17c8a9a3101f9762f85"
+ "fingerprint": "6e28d7920c6abfc569e11b6eff5e8f9e"
 }

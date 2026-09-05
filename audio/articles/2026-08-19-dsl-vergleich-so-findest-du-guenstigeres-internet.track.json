@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -628,5 +628,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "6b40a25e2b0797ecda4b548649c5ae14"
+ "fingerprint": "ab714fe591184e67ae6521ff2e374e97"
 }

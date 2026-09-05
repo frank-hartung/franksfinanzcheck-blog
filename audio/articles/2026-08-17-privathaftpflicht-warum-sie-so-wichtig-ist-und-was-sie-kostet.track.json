@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -520,5 +520,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "727700adc3490ef8deefbd50a913150c"
+ "fingerprint": "f3d8bb2748a8451df4e9861fd9d2cdfe"
 }

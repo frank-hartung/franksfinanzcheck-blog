@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -1048,5 +1048,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "19956b402ac11608628413226f1d9813"
+ "fingerprint": "103bb794466eef50ceff137d3de4f481"
 }

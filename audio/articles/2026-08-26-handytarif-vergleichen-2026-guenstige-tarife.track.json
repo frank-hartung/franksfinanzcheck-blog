@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -790,5 +790,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "c34fa2fc87277f1dc5b49ad160a87332"
+ "fingerprint": "05262ff9fd07bf87e25256df9cf067e4"
 }

@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-09-03-hausratversicherung-kosten-leistungen-vergleich.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -598,5 +598,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "ee6a24de85a6b4c5f6e44700dbcc8d1f"
+ "fingerprint": "5602c8dd211b8e7ccd774fb6c169d921"
 }

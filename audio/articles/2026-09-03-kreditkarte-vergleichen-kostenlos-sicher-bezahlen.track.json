@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -556,5 +556,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "8887f17397f203e8f9861a262bf3d6dd"
+ "fingerprint": "75579f17cf0c11ccb48f89860cd25a62"
 }

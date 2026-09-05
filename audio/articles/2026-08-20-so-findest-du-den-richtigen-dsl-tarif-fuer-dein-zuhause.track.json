@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -604,5 +604,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "a39a2349cbfae45dfabecced89b2e1f3"
+ "fingerprint": "78ac9d51a001dcbf272397d26a03dc5f"
 }

@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -850,5 +850,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "648d32d068050458c4e509b242a2c765"
+ "fingerprint": "66fb9debddafbb2004b6018695991b5d"
 }

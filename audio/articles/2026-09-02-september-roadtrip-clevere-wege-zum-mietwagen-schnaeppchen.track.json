@@ -1,6 +1,6 @@
 {
  "src": "/audio/articles/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen.wav",
- "version": "ff-voice-2026.09.05-a",
+ "version": "ff-voice-2026.09.05-b",
  "voice": {
   "de": "de-DE-FlorianMultilingualNeural",
   "en": "en-US-AndrewMultilingualNeural"
@@ -556,5 +556,5 @@
    "lang": "de"
   }
  ],
- "fingerprint": "fc9c038361705414c5a9eaaea90a44f4"
+ "fingerprint": "53a85c7f8c07c50d3542a74c80ddbcd1"
 }
