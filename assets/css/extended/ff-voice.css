@@ -377,6 +377,40 @@
   color: var(--ffv-muted);
 }
 
+/* Mini-Vorschau: Kopfzeile + die ersten Datenzeilen der Übersicht.
+   aria-hidden — der Screenreader bekommt die Tabelle über das
+   Vorlese-Modell (Zeile für Zeile), nie doppelt. */
+.ff-voice-tablecard__preview {
+  width: calc(100% - 28px);
+  margin: 0 14px 4px;
+  border-collapse: collapse;
+  font-size: .82rem;
+  table-layout: fixed;
+}
+.ff-voice-tablecard__preview th,
+.ff-voice-tablecard__preview td {
+  padding: 5px 8px;
+  border-top: 1px solid var(--ffv-line);
+  text-align: left;
+  vertical-align: top;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ff-voice-tablecard__preview th {
+  border-top: none;
+  border-bottom: 1px solid var(--ffv-line);
+  font-weight: 600;
+  color: var(--ffv-muted);
+  background: var(--ffv-surface-alt);
+}
+.ff-voice-tablecard__more {
+  margin: 0;
+  padding: 6px 14px 12px;
+  font-size: .8rem;
+  color: var(--ffv-muted);
+  font-style: italic;
+}
+
 /* Inhaltsverzeichnis */
 .ff-voice-toc { list-style: none; margin: 0; padding: 0; }
 .ff-voice-toc li { margin: 0; }

@@ -314,18 +314,18 @@ Die Tonspur läuft im nativen HTML5-Player und klingt dadurch **identisch** auf 
 - **Satzweises Sprach-Routing** – englische Sätze im deutschen Artikel spricht die männliche EN-Stimme, ohne Umschalter.
 - **Studio-Prosodie** – jede Rolle (Überschrift, Fließtext, Tabellenzeile, Warnhinweis …) hat Tempo, Tonlage und Lautstärke; Informationsdichte bremst automatisch, Fragen steigen, Blockenden klingen aus.
 - **Atemgruppen** – Sätze werden an Konnektoren und Nebensatzgrenzen geteilt; die harte Obergrenze bleibt unter der Chrome-Abbruchgrenze.
-- **Vollständigkeit** – Überschriften aller Ebenen, Listen, Zitate, Fettdruck an seiner Stelle, Premium-Übersichten samt Titel und Fußnote sowie Tabellen mit Kopfzeile, `<tfoot>`-Summen und colspan-Auflösung.
+- **Vollständigkeit** – Überschriften aller Ebenen, Listen, Zitate, Fettdruck an seiner Stelle, Premium-Übersichten samt Titel und Fußnote. Tabellen und Übersichten werden vollständig mit Zeilen und Spalten erkannt und gesprochen: HTML- und ARIA-Tabellen (`role="table"/"grid"`, Zeilen über `role="row"`), colspan/rowspan als logisches Gitter, mehrzeilige Köpfe, Zeilentitel (`th scope="row"`), Gruppen- und Summenzeilen (auch im `<tbody>`), Werbelink-Zeilen als offengelegte Empfehlung, Titel aus `<caption>`, `aria-label`, Premium-Headline oder der Überschrift davor (Details: `VORLESEN-TABELLEN-HIGHEND-REPORT.md`).
 - **Barrierefreiheit** – WCAG 2.2 / BITV: Live-Region, Fokus-Falle, Scroll-Sperre, Fokus-Rückkehr, Escape, Tastatursteuerung, `prefers-reduced-motion`, Media Session (Sperrbildschirm/Headset).
 
 ### Wächter (alle grün)
 
 ```bash
-node scripts/ff_voice_functional_test.mjs   # 145 Gates: echte DOM, alle echten Artikel
+node scripts/ff_voice_functional_test.mjs   # 174 Gates: echte DOM, alle echten Artikel
 node scripts/ff_voice_voice_test.js         #  71 Gates: männlich, DE & EN, 7 Geräte-Kataloge
-python3 scripts/ff_voice_parity_check.py    # 176 Gates: Tonspur ≡ Browser-Engine
+python3 scripts/ff_voice_parity_check.py    # 269 Gates: Tonspur ≡ Browser-Engine
 python3 scripts/ff_voice_toolbar_check.py   #  89 Gates: Layout, Styling, Workflow, Rückbau
 python3 scripts/ff_voice_backends.py --selftest  # 44 Gates: Aussprache, Prosodie, Audio
-python3 scripts/ff_voice_audio.py --selftest     # 31 Gates: Block-Parität, Injektion
+python3 scripts/ff_voice_audio.py --selftest     # 48 Gates: Block-Parität, Tabellen, Injektion
 ```
 
 Die Suiten laufen im Workflow **„Lesehilfen-Gate (Vorlesen + Kurzfassung)“** – bei jedem Push/PR auf Lesehilfen oder Content sowie täglich um 08:20 MESZ.

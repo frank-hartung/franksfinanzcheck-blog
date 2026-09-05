@@ -115,7 +115,11 @@ PAGE_EN = """<!doctype html><html lang="en"><body>
 <script type="application/json" id="ff-voice-config">{"title":"Save money","lang":"en","readingTime":4,"description":""}</script>
 </body></html>"""
 
-PAGES = [PAGE_FIXTURE, PAGE_TABLE, PAGE_EN]
+# Tabellen-Härtfälle der Premium-Generation (Markdown-Wrapper, ARIA-Grid,
+# colspan/rowspan, Summenzeile im tbody, Werbelink-Zeile, small-Ziertext).
+PAGE_TABLES_PREMIUM = gen.FIXTURE_TABLES
+
+PAGES = [PAGE_FIXTURE, PAGE_TABLE, PAGE_EN, PAGE_TABLES_PREMIUM]
 
 
 def run_probe():
@@ -183,7 +187,8 @@ def main() -> int:
     with open(js_path, "r", encoding="utf-8") as fh:
         js_source = fh.read()
     for role in ("intro", "outro", "h2", "h3", "p", "li", "blockquote", "warning",
-                 "table-intro", "table-row", "table-sum", "table-outro",
+                 "table-intro", "table-row", "table-group", "table-sum",
+                 "table-cta", "table-outro",
                  "overview-title", "overview-note", "emphasis"):
         # Reader-Notation: `intro:` (nackt) oder `'overview-title':` (zitiert)
         pattern = re.compile(r"^\s{2,}[\x27\"]?" + re.escape(role) + r"[\x27\"]?\s*:", re.M)

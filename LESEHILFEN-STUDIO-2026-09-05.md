@@ -2,6 +2,8 @@
 
 **Datum:** 05.09.2026 · **Projekt:** FranksFinanzcheck · **Umfang:** Vollständiger Rückbau des alten TTS-Modells, Neubau auf Profi-Agentur-Niveau
 
+> **Nachtrag (05.09.2026):** Das Tabellenmodell wurde am selben Tag auf Generation 2 gehoben (vollständige Zeilen-/Spalten-Erkennung inkl. ARIA-Tabellen, colspan/rowspan, Summen- und Werbelink-Zeilen). Aktuelle Beschreibung und Gate-Zähler: `VORLESEN-TABELLEN-HIGHEND-REPORT.md`.
+
 ---
 
 ## 1 · Auftrag
