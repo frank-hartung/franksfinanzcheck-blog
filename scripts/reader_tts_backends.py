@@ -562,6 +562,11 @@ def speech_normalize(text: str, lang: str = "de") -> str:
         return ""
     lang = "en" if str(lang).lower().startswith("en") else "de"
     s = text.replace("\u00a0", " ").replace("\u00ad", "")
+    # Markdown-Fettdruck (**text**) in einen gesprochenen Hinweis umwandeln,
+    # damit die TTS-Stimme betont vorträgt, statt die Markierung zu
+    # verwerfen. Das verhindert, dass fett gedruckte Textteile komplett
+    # untergehen (Problem: "Der fett gedruckte Text wird nicht direkt vorgelesen").
+    s = re.sub(r"\*\*(.+?)\*\*", r"Wichtiger Punkt: \1", s)
 
     # Markdown-/HTML-Reste & Emojis (kein „Emoji-Stottern").
     s = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", s)
