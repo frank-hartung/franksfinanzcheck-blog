@@ -53,9 +53,11 @@
   </div>
   {{- end }}
   {{- /* Kurzantwort-Box (Featured Snippet / AI Overview) – nur auf Posts.
-         Das Frontmatter-Feld `kurzantwort` wird von
-         scripts/generate_kurzantworten.py automatisch befüllt. */ -}}
-  {{- if and (eq .Section "posts") (.Params.kurzantwort) }}
+         Primär aus `kurzantwort`, robustes Fallback auf `.Description`,
+         damit die Lesehilfen auch bei einer redaktionellen Lücke nicht leer
+         laufen. */ -}}
+  {{- $readerShort := .Params.kurzantwort | default .Description | default "" -}}
+  {{- if and (eq .Section "posts") $readerShort }}
   <div class="ff-kurzantwort" role="note" aria-labelledby="ff-kurzantwort-label-{{ .File.UniqueID }}">
     <div class="ff-kurzantwort__head">
       <svg class="ff-kurzantwort__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
@@ -65,7 +67,7 @@
       </svg>
       <span class="ff-kurzantwort__eyebrow" id="ff-kurzantwort-label-{{ .File.UniqueID }}">Kurz &amp; knapp – die Antwort</span>
     </div>
-    <p class="ff-kurzantwort__text">{{ .Params.kurzantwort | partial "nbsp_sicherung.html" }}</p>
+    <p class="ff-kurzantwort__text">{{ $readerShort | partial "nbsp_sicherung.html" }}</p>
   </div>
   {{- end }}
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}

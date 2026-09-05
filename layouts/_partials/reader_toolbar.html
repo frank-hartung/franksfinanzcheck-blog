@@ -45,8 +45,8 @@
 ============================================================ */ -}}
 {{- if and (or (eq .Section "posts") (eq .Section "pillar") (eq .Type "posts") (eq .Type "pillar") (eq .Section "ratgeber") (eq .Type "ratgeber")) (eq .Kind "page") (ne .Params.hideReaderToolbar true) -}}
 {{- $title := .Title | plainify -}}
-{{- $kurzantwort := .Params.kurzantwort | default "" -}}
 {{- $description := .Description | default "" -}}
+{{- $kurzantwort := .Params.kurzantwort | default $description | default "" -}}
 {{- $readingTime := .ReadingTime -}}
 {{- $wordCount := .WordCount -}}
 {{- $pageLang := .Language.Lang | default site.LanguageCode | default "de" -}}

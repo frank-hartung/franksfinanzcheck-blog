@@ -228,18 +228,22 @@ export function buildToolbarHtml(cfg) {
 }
 
 export function buildPage({ title, description, kurzantwort, readingTime, wordCount, lang = 'de', author = 'Frank Hartung', date = '03.09.2026', updated = '', category = 'Ratgeber', siteName = 'FranksFinanzcheck', bodyHtml, showKurzantwortBox = true, audioCfg = null }) {
-  const cfg = { title, kurzantwort: kurzantwort || '', description: description || '', readingTime, wordCount, lang, siteName, author, date, updated, category };
+  const summaryText = kurzantwort || description || '';
+  const cfg = { title, kurzantwort: summaryText, description: description || '', readingTime, wordCount, lang, siteName, author, date, updated, category };
 
   /* Die Kurzantwort-Box wird WORTGETREU aus layouts/single.html geholt und
      nur um die Hugo-Aktionen aufgelöst. Ändert sich das Template, übernimmt
-     der Test die Änderung automatisch – keine nachgebaute Kopie. */
+     der Test die Änderung automatisch – keine nachgebaute Kopie.
+     Fallback-Parität: fehlt `kurzantwort`, rendert das Layout die
+     Description, damit die Lesehilfen nicht leer laufen. */
   let kurzantwortBox = '';
-  if (showKurzantwortBox && kurzantwort) {
+  if (showKurzantwortBox && summaryText) {
     const raw = extractLayoutFragments().kurzantwortBlock || '';
     if (!raw) throw new Error('layouts/single.html: .ff-kurzantwort-Block nicht gefunden');
     kurzantwortBox = raw
       .replace(/\{\{-?\s*\/\*[\s\S]*?\*\/\s*-?\}\}/g, '')
-      .replace(/\{\{\s*\.Params\.kurzantwort[^}]*\}\}/g, esc(kurzantwort))
+      .replace(/\{\{\s*\$readerShort\s*\|\s*partial\s*"nbsp_sicherung\.html"\s*\}\}/g, esc(summaryText))
+      .replace(/\{\{\s*\.Params\.kurzantwort[^}]*\}\}/g, esc(summaryText))
       .replace(/\{\{\s*\.File\.UniqueID\s*\}\}/g, 'qa1')
       .replace(/\{\{[^}]*\}\}/g, '');
   }
