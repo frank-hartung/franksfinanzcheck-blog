@@ -29,6 +29,31 @@ on:
         type: choice
         default: natural
         options: [natural, narrator]
+      audio_limit_new:
+        description: 'Maximal neu zu vertonende Artikel je Lauf (ignoriert, wenn audio_backfill=true)'
+        type: string
+        default: '25'
+      audio_order:
+        description: 'Reihenfolge für Archiv-Backfill und limitierte Queue'
+        type: choice
+        default: newest
+        options: [newest, oldest, path]
+      audio_voice_de:
+        description: 'Optionale explizite DE-Stimme (überschreibt das Profil)'
+        type: string
+        default: ''
+      audio_voice_en:
+        description: 'Optionale explizite EN-Stimme (überschreibt das Profil)'
+        type: string
+        default: ''
+      audio_rate:
+        description: 'Globales Sprechtempo, z. B. 0.96 für ruhiger'
+        type: string
+        default: '1.0'
+      audio_pitch:
+        description: 'Globale Tonlagen-Verschiebung in Hz, z. B. -1.5'
+        type: string
+        default: '0'
 
 permissions:
   contents: write
@@ -216,9 +241,22 @@ jobs:
             || python3 -m pip install -q --break-system-packages piper-tts \
             || echo "⚠ piper-tts nicht installierbar → edge/Browser-Fallback"
           ffmpeg -version | head -1 || echo "⚠ ffmpeg fehlt → nur WAV ohne Mastering"
-          python3 scripts/generate_reader_audio.py --engines \
-            --backend "${{ github.event.inputs.audio_backend || 'auto' }}" \
-            --profile "${{ github.event.inputs.audio_profile || 'natural' }}" || true
+          AUDIO_BACKEND="${{ github.event.inputs.audio_backend || 'auto' }}"
+          AUDIO_PROFILE="${{ github.event.inputs.audio_profile || 'natural' }}"
+          AUDIO_RATE="${{ github.event.inputs.audio_rate || '1.0' }}"
+          AUDIO_PITCH="${{ github.event.inputs.audio_pitch || '0' }}"
+          AUDIO_VOICE_DE="${{ github.event.inputs.audio_voice_de || '' }}"
+          AUDIO_VOICE_EN="${{ github.event.inputs.audio_voice_en || '' }}"
+          AUDIO_ARGS=(
+            --backend "$AUDIO_BACKEND"
+            --profile "$AUDIO_PROFILE"
+            --rate "$AUDIO_RATE"
+            --pitch "$AUDIO_PITCH"
+          )
+          if [ -n "$AUDIO_VOICE_DE" ]; then AUDIO_ARGS+=(--voice-de "$AUDIO_VOICE_DE"); fi
+          if [ -n "$AUDIO_VOICE_EN" ]; then AUDIO_ARGS+=(--voice-en "$AUDIO_VOICE_EN"); fi
+          echo "🔎 TTS-Probe: backend=$AUDIO_BACKEND profile=$AUDIO_PROFILE rate=$AUDIO_RATE pitch=$AUDIO_PITCH de=${AUDIO_VOICE_DE:-auto} en=${AUDIO_VOICE_EN:-auto}"
+          python3 scripts/generate_reader_audio.py --engines "${AUDIO_ARGS[@]}" || true
 
       - name: Vorlese-Audio generieren (männliche DE/EN-Stimme, kostenlos)
         env:
@@ -235,17 +273,37 @@ jobs:
               rm -rf audio
             fi
           fi
+          AUDIO_BACKEND="${{ github.event.inputs.audio_backend || 'auto' }}"
+          AUDIO_PROFILE="${{ github.event.inputs.audio_profile || 'natural' }}"
+          AUDIO_ORDER="${{ github.event.inputs.audio_order || 'newest' }}"
+          AUDIO_RATE="${{ github.event.inputs.audio_rate || '1.0' }}"
+          AUDIO_PITCH="${{ github.event.inputs.audio_pitch || '0' }}"
+          AUDIO_LIMIT_NEW="${{ github.event.inputs.audio_limit_new || '25' }}"
+          AUDIO_VOICE_DE="${{ github.event.inputs.audio_voice_de || '' }}"
+          AUDIO_VOICE_EN="${{ github.event.inputs.audio_voice_en || '' }}"
+          AUDIO_ARGS=(
+            --html-dir public
+            --out-dir public/audio/articles
+            --cache-dir /tmp/ff-audio-cache
+            --backend "$AUDIO_BACKEND"
+            --profile "$AUDIO_PROFILE"
+            --order "$AUDIO_ORDER"
+            --rate "$AUDIO_RATE"
+            --pitch "$AUDIO_PITCH"
+          )
+          if [ -n "$AUDIO_VOICE_DE" ]; then AUDIO_ARGS+=(--voice-de "$AUDIO_VOICE_DE"); fi
+          if [ -n "$AUDIO_VOICE_EN" ]; then AUDIO_ARGS+=(--voice-en "$AUDIO_VOICE_EN"); fi
+          case "$AUDIO_LIMIT_NEW" in
+            ''|*[!0-9]*) AUDIO_LIMIT_NEW=25 ;;
+          esac
           if [ "${{ github.event.inputs.audio_backfill }}" = "true" ]; then
             LIMIT_NEW=0
           else
-            LIMIT_NEW=25
+            LIMIT_NEW="$AUDIO_LIMIT_NEW"
           fi
+          echo "🔧 Audio-Backfill: backend=$AUDIO_BACKEND profile=$AUDIO_PROFILE order=$AUDIO_ORDER limit_new=$LIMIT_NEW rate=$AUDIO_RATE pitch=$AUDIO_PITCH de=${AUDIO_VOICE_DE:-auto} en=${AUDIO_VOICE_EN:-auto}"
           python3 scripts/generate_reader_audio.py \
-            --html-dir public \
-            --out-dir public/audio/articles \
-            --cache-dir /tmp/ff-audio-cache \
-            --backend "${{ github.event.inputs.audio_backend || 'auto' }}" \
-            --profile "${{ github.event.inputs.audio_profile || 'natural' }}" \
+            "${AUDIO_ARGS[@]}" \
             --limit-new "$LIMIT_NEW" \
             || echo "⚠ Vorlese-Audio unvollständig – Deploy läuft weiter (Browser-Fallback aktiv)"
           echo "✅ Vorlese-Audio-Schritt abgeschlossen."
