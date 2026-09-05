@@ -1,6 +1,10 @@
 # VORLESEN-HIGHEND-REPORT — Sprachausgabe auf High-End-Verlagshaus-Niveau (v6)
 
-> **Aktueller Stand (04.09.2026):** Dieser Report beschreibt die **Reparatur des Klickpfads** (v6/v7).
+> **Aktueller Stand (05.09.2026):** Tabellenstruktur (Zeilen/Spalten), Fettdruck an
+> seiner Stelle, korrekter Fortschritt und die Block-Parität zwischen Tonspur und
+> Browser stehen in **`VORLESEN-TABELLEN-FETTDRUCK-FORTSCHRITT-REPORT.md` (v11)**.
+>
+> **Stand (04.09.2026):** Dieser Report beschreibt die **Reparatur des Klickpfads** (v6/v7).
 > Die **Klang**-Stufe — kostenlose Neuralstimmen-Kette (edge-tts → Piper), männliche Multilingual-v2-Stimme,
 > satzgenaues DE/EN-Routing, Aussprache-Normalisierung, Rollen-Prosodie, EBU-R128-Mastering und das
 > Paritäts-Gate zwischen Tonspur und Browser-Pfad — steht in **`VORLESEN-NATUERLICHKEIT-REPORT.md` (v8)**.

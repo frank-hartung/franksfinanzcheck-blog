@@ -562,6 +562,15 @@ def speech_normalize(text: str, lang: str = "de") -> str:
         return ""
     lang = "en" if str(lang).lower().startswith("en") else "de"
     s = text.replace("\u00a0", " ").replace("\u00ad", "")
+    # Entity-Reste sind Markup, keine Sprache: „300&nbsp;€" darf nie als
+    # „300 und nbsp Euro" erklingen (zweite Escape-Stufe, Copy-Paste aus
+    # einem CMS, Shortcode-Ausgabe).
+    s = re.sub(r"&(?:nbsp|#160|#x0*[aA]0);", " ", s, flags=re.I)
+    s = re.sub(r"&(?:amp|#38);", " und ", s, flags=re.I)
+    s = re.sub(r"&(?:shy|#173);", "", s, flags=re.I)
+    s = re.sub(r"&(?:euro|#8364);", " Euro ", s, flags=re.I)
+    s = re.sub(r"&[a-zA-Z][a-zA-Z0-9]{1,10};", " ", s)
+    s = re.sub(r"&#\d{1,7};", " ", s)
     # Markdown-Fettdruck (**text**) in einen gesprochenen Hinweis umwandeln,
     # damit die TTS-Stimme betont vorträgt, statt die Markierung zu
     # verwerfen. Das verhindert, dass fett gedruckte Textteile komplett

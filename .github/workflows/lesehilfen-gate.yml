@@ -39,6 +39,8 @@ on:
       - "layouts/pillar/single.html"
       - "scripts/reader_functional_test.mjs"
       - "scripts/reader_structure_loudness_test.mjs"
+      - "scripts/reader_table_progress_test.mjs"
+      - "scripts/reader_blocks_dump.py"
       - "scripts/reader_qa_lib.mjs"
       - "scripts/reader_tts_backends.py"
       - "scripts/reader_prosody_parity_check.py"
@@ -52,6 +54,7 @@ on:
       - "scripts/reader_toolbar_check.py"
       - "tools/reader-qa/**"
       - "content/posts/**"
+      - "content/pillar/**"
       - ".github/workflows/lesehilfen-gate.yml"
   pull_request:
     paths:
@@ -59,6 +62,10 @@ on:
       - "assets/css/extended/ff-reader.css"
       - "layouts/**"
       - "content/posts/**"
+      - "content/pillar/**"
+      - "scripts/generate_reader_audio.py"
+      - "scripts/reader_table_progress_test.mjs"
+      - "scripts/reader_blocks_dump.py"
   schedule:
     - cron: "20 6 * * *"   # 08:20 MESZ – tägliche Wache gegen stillen Verfall
   workflow_dispatch: {}
@@ -105,6 +112,15 @@ jobs:
       #      und automatische Lautstärkenanpassung (DE & EN) ----
       - name: Struktur- & Lautheits-Test (Vorlesen v10)
         run: node scripts/reader_structure_loudness_test.mjs
+
+      # ---- v11: Tabellen (Zeilen/Spalten), Fettdruck an seiner Stelle,
+      #      Fortschrittsanzeige und Parität Tonspur ↔ Browser ----
+      - name: Tabellen-, Fettdruck- & Fortschritts-Test (Vorlesen v11)
+        run: node scripts/reader_table_progress_test.mjs
+
+      # ---- Generator-Selftest (Tonspur-Extraktion, läuft auch im Deploy) ----
+      - name: Generator-Selftest (Vorlese-Tonspur)
+        run: python3 scripts/generate_reader_audio.py --selftest
 
       # ---- Bestehende Engine-/Stimmen-/Kurzfassungs-Suiten ----
       - name: Reader-Engine-Check

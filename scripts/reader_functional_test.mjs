@@ -211,6 +211,22 @@ t.group('3b) TTS-Regressionsschutz: Tabellen, Fettdruck, Fortschritt');
     msPerChar: 0.08
   });
   t.eq(reg.errors, [], 'Keine Laufzeitfehler in der Regressions-Fixture');
+  /* Fortschritts-Beobachter: Höchster erreichter Stand und Zählung der
+     Rückwärtssprünge – beides Invarianten der Fortschritts-Engine. */
+  const regBar = reg.doc.getElementById('ff-reader-progress-bar');
+  let maxProgressRatio = 0;
+  let progressBackwardJumps = 0;
+  let lastRatio = 0;
+  const progressWatch = setInterval(() => {
+    const m = /scaleX\(([\d.]+)\)/.exec(regBar.style.transform || '');
+    const r = m ? parseFloat(m[1]) : 0;
+    if (r > maxProgressRatio) maxProgressRatio = r;
+    /* Monotonie ist eine Wiedergabe-Invariante. Der bewusste Rücksprung
+       in den Ruhezustand NACH dem erreichten Ende zählt nicht mit. */
+    const playing = reg.doc.getElementById('ff-listen-label').textContent.trim() !== 'Vorlesen';
+    if (playing && r < lastRatio - 0.0005) progressBackwardJumps++;
+    lastRatio = r;
+  }, 2);
   click(reg.win, reg.doc.getElementById('ff-listen-btn'));
   await until(() => {
     const tr = reg.doc.getElementById('ff-reader-progress-bar').style.transform;
@@ -219,6 +235,8 @@ t.group('3b) TTS-Regressionsschutz: Tabellen, Fettdruck, Fortschritt');
   const progressDuring = reg.doc.getElementById('ff-reader-progress-bar').style.transform;
   t.ok(progressDuring && progressDuring !== 'scaleX(0)', 'Fortschrittsanzeige läuft während der Wiedergabe sichtbar mit');
   await waitFinished(reg.win, reg.doc, reg.log, 20000);
+  await new Promise((r) => setTimeout(r, 40));
+  clearInterval(progressWatch);
   const spoken = norm(spokenText(reg.log));
   t.ok(spoken.includes('wichtige kostenbremse sofort pruefen') || spoken.includes('wichtige kostenbremse sofort prüfen'),
     'Alleinstehender fett gedruckter Text wird direkt in den Vorlesepfad aufgenommen');
@@ -228,8 +246,18 @@ t.group('3b) TTS-Regressionsschutz: Tabellen, Fettdruck, Fortschritt');
     'Tabellenzeilen werden zeilenweise mit Zellinhalten gesprochen');
   t.ok(/aria kostenübersicht|aria kostenuebersicht/.test(spoken) && /grundpreis/.test(spoken),
     'ARIA-/Div-Tabellen werden ebenfalls als Tabellen erkannt');
+  /* v11: Am Artikelende wird 100 % GEZEIGT (der Hörer muss das Ende sehen),
+     kurz gehalten und erst danach in den Ruhezustand zurückgesetzt.
+     Die Test-UMgebung deckelt Timeout-Verzögerungen, deshalb wird der
+     Ausschlag beobachtet statt einen einzelnen Zeitpunkt zu erwischen. */
+  t.ok(maxProgressRatio >= 0.999,
+    'Fortschrittsanzeige erreicht am Artikelende exakt 100 %',
+    `Höchstwert: ${maxProgressRatio.toFixed(4)}`);
   t.ok(reg.doc.getElementById('ff-reader-progress-bar').style.transform === 'scaleX(0)',
-    'Fortschrittsanzeige wird nach dem Ende exakt zurückgesetzt');
+    'Fortschrittsanzeige wird nach dem Ende in den Ruhezustand zurückgesetzt');
+  t.ok(progressBackwardJumps === 0,
+    'Fortschrittsanzeige läuft während der Wiedergabe streng monoton',
+    `${progressBackwardJumps} Rückwärtssprünge`);
 }
 
 /* ================================================================== */
