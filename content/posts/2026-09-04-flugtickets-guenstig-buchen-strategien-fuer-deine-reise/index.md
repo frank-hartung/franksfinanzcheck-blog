@@ -3,6 +3,9 @@ title: "Flugtickets günstig buchen: Strategien für deine Reise"
 description: Du willst flugtickets günstig finden? Ich zeige dir aus eigener Erfahrung, wie du mit Flugvergleich und Preisalarmen bei deiner nächsten Reise sparst.
 date: 2026-09-04T17:45:58Z
 draft: true
+cadence_wait: true
+cadence_demoted: 2026-09-05T14:14:52Z
+cadence_grund: "quality-score-Demotion 04.09. (Wache #174): Score-Fehler (globale Duplikatstrafe, FAQ-Regex) am 05.09. behoben – Re-Queue für den naechsten Publikationstag"
 tags: ["flugtickets günstig", "flugvergleich", "billigflüge finden", "preisalarm flug"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"

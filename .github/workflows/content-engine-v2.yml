@@ -256,12 +256,33 @@ jobs:
           if len(review) > 3 or len(low) > 3:
               print("🛑 QUALITY-CIRCUIT-BREAKER aktiv: Score-Anomalie erkannt – NICHTS wird geparkt/verworfen. Bitte Templates/Scorer prüfen (siehe QUALITAETS-REGELWERK).")
               sys.exit(0)
+          # FIX 05.09.2026 (Wache #174): Die Review-Demotion setzt NICHT mehr
+          # still draft:false→true. Ohne dokumentierten Grund galt der Post
+          # als "manual"-Entwurf: unsichtbar für Kadenz-Wache, Re-Queue und
+          # Heiler (Freitag 04.09.: 3 Profi-Artikel still demoted → Tag mit
+          # 0 LIVE, Wache meldete "0 von Gates gehalten"). Jetzt: park_state.
+          # hold() mit dokumentiertem Grund + schwächsten Score-Komponenten.
+          try:
+              import park_state as _ps
+          except Exception:
+              _ps = None
           for r in review:
               p = f"content/posts/{r['slug']}/index.md"
               c = open(p, encoding="utf-8").read()
               if "draft: false" in c:
-                  open(p, "w", encoding="utf-8").write(c.replace("draft: false", "draft: true", 1))
-                  print(f"  → {r['slug']} auf draft gesetzt (Score {r['score']})")
+                  schwach = ", ".join(
+                      f"{k} {v:.2f}" for k, v
+                      in sorted(r["parts"].items(), key=lambda kv: kv[1])[:3])
+                  grund = (f"quality-score: Score {r['score']} < 0.80 "
+                           f"(schwach: {schwach}) – Human-Review; "
+                           f"Score-Defekte am 05.09. behoben (Wache #174)")
+                  if _ps is not None:
+                      _ps.hold(p, grund)
+                  else:
+                      open(p, "w", encoding="utf-8").write(
+                          c.replace("draft: false", "draft: true", 1))
+                  print(f"  → {r['slug']} auf draft+hold gesetzt "
+                        f"(Score {r['score']}; {schwach})")
           PYEOF
           echo "== Cover-Validierung (auto-nachziehen) =="
           python3 scripts/check_covers.py --fix || echo "⚠ Cover-Varianten (nicht blockierend)"

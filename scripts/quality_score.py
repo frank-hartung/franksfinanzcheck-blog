@@ -86,7 +86,11 @@ def score_article(path: str) -> dict:
     # 3) Struktur (Wortzahl, H2, FAQ)
     words = len(re.findall(r"\w+", a["body"]))
     h2 = len(re.findall(r"^##\s", a["body"], re.M))
-    has_faq = bool(re.search(r"^#{1,2}\s*(Häufige Fragen|Häufig gestellte Fragen|FAQ)\s*$",
+    # Fix 05.09.2026 (Wache #174): FAQ-Heading darf einen Zusatz tragen
+    # ("Häufige Fragen zur Hausratversicherung") – vorher verlangte der
+    # Regex per \s*$ das EXAKTE Heading und echte FAQ-Abschnitte wurden
+    # nicht erkannt (structure -0.2 → fälschlich unter den Schwellen).
+    has_faq = bool(re.search(r"^#{1,2}\s*(Häufige Fragen|Häufig gestellte Fragen|FAQ)\b",
                              a["body"], re.M | re.I))
     struct = 1.0
     if words < 1200:
@@ -139,8 +143,18 @@ def score_article(path: str) -> dict:
             arts[p] = cu.clean_body(_strip_boilerplate(open(p, encoding="utf-8").read()))
         from itertools import combinations
         grams = {k: cu.ngrams(v, cu.PHRASE_LEN) for k, v in arts.items()}
+        # Fix 05.09.2026 (Wache #174): Der Score gilt DEM EINZELNen Artikel –
+        # also zählen nur Paare, die DIESEN Artikel enthalten. Vorher wurde
+        # die blog-GLOBALE Anzahl überlappender Paare auf jeden Artikel
+        # angewendet: Sobald irgendwo zwei Artikel Textbausteine teilten,
+        # sank der uniqueness-Wert für ALLE Artikel gleichzeitig (Befund
+        # 04.09.2026: 6 überlappende Paare → 0.4 für jeden Artikel → frische
+        # Profi-Artikel rutschten unter die Review-Schwelle und wurden
+        # massenhaft zurückgestuft).
         overlap = 0
         for x, y in combinations(arts, 2):
+            if path not in (x, y):
+                continue
             if len(grams[x] & grams[y]) >= 5:
                 overlap += 1
         parts["uniqueness"] = max(0.0, 1.0 - overlap * 0.1)
