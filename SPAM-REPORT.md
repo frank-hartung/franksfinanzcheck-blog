@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-05 14:26 UTC · Modus: FIX
+**Stand:** 2026-09-05 16:29 UTC · Modus: FIX
 
 **API-Status:** Pause: 🟢 keine Pause · Rate (24h): 0/40 (davon letzte Std.: 0/10)
 
@@ -14,6 +14,8 @@
 - 🟡 [B2] 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich: Superlativ ohne Einschränkung (\bhöchst(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
+- 🟡 [B2] 2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh: Superlativ ohne Einschränkung (\bgünstigst(?:e|er|es)\b)
+- 🟡 [B5] 2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh: Originalitäts-Quote 45 % (< 45 %)
 
 ## F: RSS-Feed /index.xml (F1–F6)
 

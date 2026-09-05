@@ -1,6 +1,6 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-09-05 14:26 UTC
+**Letzter Lauf:** 2026-09-05 16:29 UTC
 
 **Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
@@ -26,15 +26,11 @@
 
 ## Re-Queue-Integrität (Park-Zustände)
 
-- 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **3**
-- ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **1**
+- 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **4**
+- ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **0**
 - ✍️ manuelle Entwürfe (von der Automatik unberührt): **0**
 - 🔁 wiederhergestellte Re-Queue-Flags: **0**
 - 🧹 Park-Reste an live-Posts (gefunden, weg mit --fix): **0**
-
-### Gehaltene Posts (bitte prüfen/freigeben)
-
-- `2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh` – Draft-Rettung Ebene 3 (04.09.): nur 326-Woerter-Stub – braucht vollstaendige Ausarbeitung vor Veroeffentlichung · seit 0 Tagen
 
 
 ## Letzte Heilungen
