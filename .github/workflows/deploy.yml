@@ -46,14 +46,6 @@ on:
         description: 'Optionale explizite EN-Stimme (überschreibt das Profil)'
         type: string
         default: ''
-      audio_rate:
-        description: 'Globales Sprechtempo, z. B. 0.96 für ruhiger'
-        type: string
-        default: '1.0'
-      audio_pitch:
-        description: 'Globale Tonlagen-Verschiebung in Hz, z. B. -1.5'
-        type: string
-        default: '0'
 
 permissions:
   contents: write
