@@ -101,6 +101,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from datetime import datetime
 from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -1053,8 +1054,40 @@ def render_article(html_path: str, out_dir: str, cache_dir: str | None,
             "failures": len(track["failures"])}
 
 
-def discover_articles(html_dir: str) -> list[tuple[str, str, str, str]]:
-    """Findet Artikel (Seiten mit ff-reader-config). Liefert (Pfad, Titel, Sprache, Lesedauer)."""
+def _parse_reader_date(value: str, fallback_path: str = "") -> tuple[int, str]:
+    """Datumswert aus ff-reader-config -> Sortierschlüssel.
+
+    Unterstützt Reader-/Hugo-Formate wie 04.09.2026, 2026-09-04 oder
+    ISO-Zeitstempel. Fällt robust auf die Dateimtime zurück, damit die
+    Backfill-Reihenfolge deterministisch bleibt.
+    """
+    raw = str(value or "").strip()
+    for fmt in ("%d.%m.%Y", "%Y-%m-%d", "%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%M:%S%z"):
+        try:
+            dt = datetime.strptime(raw, fmt)
+            return int(dt.timestamp()), raw
+        except ValueError:
+            continue
+    if raw.endswith("Z"):
+        try:
+            dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+            return int(dt.timestamp()), raw
+        except ValueError:
+            pass
+    try:
+        return int(os.path.getmtime(fallback_path)), raw
+    except OSError:
+        return 0, raw
+
+
+def discover_articles(html_dir: str) -> list[tuple[str, str, str, str, int, str]]:
+    """Findet Artikel (Seiten mit ff-reader-config).
+
+    Liefert (Pfad, Titel, Sprache, Lesedauer, sort_ts, raw_date). Die
+    zusätzliche Sortier-Info steuert den Audio-Backfill deterministisch:
+    standardmäßig zuerst die neuesten Artikel, damit frische Inhalte nicht
+    hinter altem Bestand in der Warteschlange hängen bleiben.
+    """
     found = []
     for root, _dirs, files in os.walk(html_dir):
         if "index.html" not in files:
@@ -1067,6 +1100,7 @@ def discover_articles(html_dir: str) -> list[tuple[str, str, str, str]]:
         title = os.path.basename(root)
         lang = "de"
         reading_time = ""
+        raw_date = ""
         # Bevorzugt die echte Reader-Konfiguration (cfg.title/cfg.readingTime) –
         # exakt der Text, den auch der Web-Speech-Pfad als Anmoderation liest.
         m = re.search(r'<script[^>]*id="ff-reader-config"[^>]*>(.*?)</script>', content, re.S)
@@ -1076,6 +1110,7 @@ def discover_articles(html_dir: str) -> list[tuple[str, str, str, str]]:
                 title = cfg.get("title") or title
                 lang = cfg.get("lang") or "de"
                 reading_time = str(cfg.get("readingTime") or "")
+                raw_date = str(cfg.get("updated") or cfg.get("date") or "")
             except json.JSONDecodeError:
                 pass
         if not m or not title or title == os.path.basename(root):
@@ -1084,8 +1119,24 @@ def discover_articles(html_dir: str) -> list[tuple[str, str, str, str]]:
                 t = html_mod.unescape(re.sub(r"\s+", " ", mt.group(1)).strip())
                 if t:
                     title = t
-        found.append((path, title, lang, reading_time))
+        sort_ts, raw_date = _parse_reader_date(raw_date, path)
+        found.append((path, title, lang, reading_time, sort_ts, raw_date))
     return found
+
+
+def sort_articles(articles: list[tuple[str, str, str, str, int, str]], order: str = "newest") -> list[tuple[str, str, str, str, int, str]]:
+    """Sortiert die Audio-Queue deterministisch.
+
+    newest = frische Inhalte zuerst (Backfill-Standard)
+    oldest = Altbestand zuerst
+    path   = stabile Repository-Reihenfolge
+    """
+    order = str(order or "newest").lower()
+    if order == "oldest":
+        return sorted(articles, key=lambda a: (a[4], a[0]))
+    if order == "path":
+        return sorted(articles, key=lambda a: a[0])
+    return sorted(articles, key=lambda a: (-a[4], a[0]))
 
 
 # --------------------------------------------------------------------------
@@ -1478,6 +1529,30 @@ def selftest() -> int:
         check("Zweiter CLI-Lauf nutzt den Cache (keine Neuvertonung)",
               rc2 == 0 and not real_calls, f"{len(real_calls)} Synthesen")
 
+        # Backfill-Reihenfolge: newest/oldest/path müssen deterministisch
+        # steuerbar sein, damit neue Artikel im Archiv-Backfill nicht hinten
+        # anstehen und man Altbestand bei Bedarf gezielt vorziehen kann.
+        order_root = os.path.join(td, "order")
+        newer_dir = os.path.join(order_root, "posts", "neuer")
+        older_dir = os.path.join(order_root, "posts", "alter")
+        os.makedirs(newer_dir, exist_ok=True)
+        os.makedirs(older_dir, exist_ok=True)
+        with open(os.path.join(newer_dir, "index.html"), "w", encoding="utf-8") as f:
+            f.write('<html><body><script type="application/json" id="ff-reader-config">'
+                    '{"title":"Neu","lang":"de","date":"04.09.2026","readingTime":"1"}'
+                    '</script><div class="post-content md-content"><p>Neu.</p></div></body></html>')
+        with open(os.path.join(older_dir, "index.html"), "w", encoding="utf-8") as f:
+            f.write('<html><body><script type="application/json" id="ff-reader-config">'
+                    '{"title":"Alt","lang":"de","date":"01.09.2026","readingTime":"1"}'
+                    '</script><div class="post-content md-content"><p>Alt.</p></div></body></html>')
+        discovered = discover_articles(order_root)
+        newest = [os.path.basename(os.path.dirname(a[0])) for a in sort_articles(discovered, "newest")]
+        oldest = [os.path.basename(os.path.dirname(a[0])) for a in sort_articles(discovered, "oldest")]
+        bypath = [os.path.basename(os.path.dirname(a[0])) for a in sort_articles(discovered, "path")]
+        check("Backfill-Queue: newest priorisiert frische Artikel", newest == ["neuer", "alter"], str(newest))
+        check("Backfill-Queue: oldest priorisiert Altbestand", oldest == ["alter", "neuer"], str(oldest))
+        check("Backfill-Queue: path bleibt stabil alphabetisch", bypath == ["alter", "neuer"], str(bypath))
+
         # CLI-Ebene: Der Vorab-Test muss einen ausgefallenen Dienst erkennen,
         # BEVOR Artikel abgearbeitet werden – sonst wartet der Deploy minutenlang.
         broken = _KaputteEngine()
@@ -1539,6 +1614,8 @@ def main(argv: list[str] | None = None, engine_factory=None) -> int:
                          "Schützt CI-Laufzeit und Gratis-Kontingente; der Rest folgt beim "
                          "nächsten Deploy, Wiederverwendung aus dem Cache bleibt unbegrenzt.")
     ap.add_argument("--force", action="store_true", help="existierende Dateien überschreiben")
+    ap.add_argument("--order", choices=["newest", "oldest", "path"], default="newest",
+                    help="Reihenfolge für Backfill/Neuvertonung: newest = frische Artikel zuerst (Standard)")
     ap.add_argument("--dry-run", action="store_true", help="nur Planung ohne Synthese")
     ap.add_argument("--no-inject", action="store_true",
                     help="keine <script id=ff-reader-audio-config> in die HTML schreiben")
@@ -1643,6 +1720,7 @@ def main(argv: list[str] | None = None, engine_factory=None) -> int:
     articles = discover_articles(args.html_dir)
     if args.only:
         articles = [a for a in articles if args.only in a[0]]
+    articles = sort_articles(articles, args.order)
     if args.limit:
         articles = articles[: args.limit]
 
@@ -1650,13 +1728,15 @@ def main(argv: list[str] | None = None, engine_factory=None) -> int:
         print("Keine Artikel mit ff-reader-config gefunden.")
         return 0
 
+    queue_preview = ", ".join(os.path.basename(os.path.dirname(a[0])) for a in articles[:5])
     print(f"{len(articles)} Artikel gefunden. Neuvertonung je Lauf: "
           f"{'unbegrenzt' if args.limit_new <= 0 else args.limit_new} "
-          f"(Cache-Wiederverwendung unbegrenzt).")
+          f"(Cache-Wiederverwendung unbegrenzt). Reihenfolge: {args.order}. "
+          f"Queue-Start: {queue_preview}")
 
     results = []
     new_count = 0
-    for path, title, lang, reading_time in articles:
+    for path, title, lang, reading_time, _sort_ts, _raw_date in articles:
         try:
             will_render = not args.dry_run and engine is not None
             blocked_by_limit = (will_render and args.limit_new > 0 and new_count >= args.limit_new

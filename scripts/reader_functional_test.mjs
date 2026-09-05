@@ -180,6 +180,35 @@ t.group('3) Kurzantwort-Box („grüner Kasten“) im Vorlesepfad');
 }
 
 /* ================================================================== */
+/* 3b) Fallback: Description rettet die Lesehilfen                     */
+/* ================================================================== */
+t.group('3b) Kurzantwort-Fallback aus der Description');
+{
+  const desc = 'Fehlt die redaktionelle Kurzantwort einmal, muss die Description als robuster Fallback einspringen, damit grüner Kasten, Kurzfassung und Vorlesepfad nicht leer bleiben.';
+  const p = await createPage({
+    html: buildPage({
+      title: 'Fallback-Test',
+      description: desc,
+      kurzantwort: '',
+      readingTime: 1,
+      wordCount: 80,
+      bodyHtml: markdownToHtml('## Abschnitt\n\nEin Testabsatz für den robusten Fallback der Lesehilfen.')
+    }),
+    catalog: VOICE_CATALOGS.macChrome
+  });
+  const box = p.doc.querySelector('.ff-kurzantwort__text');
+  t.ok(!!box && norm(box.textContent) === norm(desc),
+    'Ohne Frontmatter rendert die grüne Box die Description als Fallback',
+    box ? box.textContent : 'keine Box');
+  click(p.win, p.doc.getElementById('ff-summary-btn'));
+  await until(() => !!p.doc.getElementById('ff-summary-dialog'), 1500);
+  const hero = p.doc.querySelector('#ff-summary-dialog .ff-summary__hero-text');
+  t.ok(!!hero && norm(hero.textContent) === norm(desc),
+    'Kurzfassung übernimmt denselben Description-Fallback',
+    hero ? hero.textContent : 'kein Hero');
+}
+
+/* ================================================================== */
 /* 4) DE/EN-Routing ohne Umschalter                                    */
 /* ================================================================== */
 t.group('4) DE/EN automatisch, ohne Umschalter');
