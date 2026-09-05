@@ -1,4 +1,9 @@
 {
+  "frugalismus": {
+    "status": "reuse",
+    "blocks": 86,
+    "duration_ms": 748014
+  },
   "internet-dsl": {
     "status": "reuse",
     "blocks": 97,
@@ -9,145 +14,45 @@
     "blocks": 85,
     "duration_ms": 746318
   },
-  "versicherungen": {
+  "mietwagen": {
     "status": "reuse",
-    "blocks": 79,
-    "duration_ms": 690153
-  },
-  "frugalismus": {
-    "status": "reuse",
-    "blocks": 86,
-    "duration_ms": 748014
+    "blocks": 80,
+    "duration_ms": 720326
   },
   "strom-sparen": {
     "status": "reuse",
     "blocks": 88,
     "duration_ms": 777876
   },
-  "mietwagen": {
-    "status": "reuse",
-    "blocks": 80,
-    "duration_ms": 720326
-  },
-  "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-    "status": "reuse",
-    "blocks": 65,
-    "duration_ms": 630604
-  },
-  "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
+  "versicherungen": {
     "status": "reuse",
     "blocks": 79,
-    "duration_ms": 758289
-  },
-  "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
-    "status": "reuse",
-    "blocks": 131,
-    "duration_ms": 1103454
-  },
-  "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife": {
-    "status": "reuse",
-    "blocks": 72,
-    "duration_ms": 684268
-  },
-  "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
-    "status": "reuse",
-    "blocks": 91,
-    "duration_ms": 743597
-  },
-  "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann": {
-    "status": "reuse",
-    "blocks": 70,
-    "duration_ms": 652364
-  },
-  "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
-    "status": "reuse",
-    "blocks": 78,
-    "duration_ms": 902678
-  },
-  "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst": {
-    "status": "reuse",
-    "blocks": 57,
-    "duration_ms": 762348
-  },
-  "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
-    "status": "reuse",
-    "blocks": 94,
-    "duration_ms": 785253
-  },
-  "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
-    "status": "reuse",
-    "blocks": 62,
-    "duration_ms": 624778
-  },
-  "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-    "status": "reuse",
-    "blocks": 67,
-    "duration_ms": 625339
-  },
-  "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
-    "status": "reuse",
-    "blocks": 82,
-    "duration_ms": 737828
-  },
-  "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
-    "status": "reuse",
-    "blocks": 57,
-    "duration_ms": 610722
+    "duration_ms": 690153
   },
   "2026-08-10-dsl-wechselbonus-sichern": {
     "status": "reuse",
     "blocks": 67,
     "duration_ms": 609596
   },
-  "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
-    "status": "reuse",
-    "blocks": 73,
-    "duration_ms": 729017
-  },
-  "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
-    "status": "reuse",
-    "blocks": 97,
-    "duration_ms": 745779
-  },
-  "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
-    "status": "reuse",
-    "blocks": 67,
-    "duration_ms": 593900
-  },
   "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
     "status": "reuse",
     "blocks": 55,
     "duration_ms": 585474
   },
-  "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
+  "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
     "status": "reuse",
-    "blocks": 62,
-    "duration_ms": 662143
+    "blocks": 60,
+    "duration_ms": 577978
   },
   "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
     "status": "reuse",
     "blocks": 63,
     "duration_ms": 600338
   },
-  "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
+  "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
     "status": "reuse",
-    "blocks": 105,
-    "duration_ms": 917260
-  },
-  "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
-    "status": "reuse",
-    "blocks": 74,
-    "duration_ms": 732138
-  },
-  "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
-    "status": "reuse",
-    "blocks": 65,
-    "duration_ms": 706202
-  },
-  "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
-    "status": "reuse",
-    "blocks": 60,
-    "duration_ms": 577978
+    "blocks": 57,
+    "duration_ms": 610722
   },
   "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
     "status": "reuse",
@@ -158,5 +63,100 @@
     "status": "reuse",
     "blocks": 62,
     "duration_ms": 616260
+  },
+  "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
+    "status": "reuse",
+    "blocks": 65,
+    "duration_ms": 706202
+  },
+  "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife": {
+    "status": "reuse",
+    "blocks": 72,
+    "duration_ms": 684268
+  },
+  "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst": {
+    "status": "reuse",
+    "blocks": 57,
+    "duration_ms": 762348
+  },
+  "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
+    "status": "reuse",
+    "blocks": 62,
+    "duration_ms": 624778
+  },
+  "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
+    "status": "reuse",
+    "blocks": 62,
+    "duration_ms": 662143
+  },
+  "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann": {
+    "status": "reuse",
+    "blocks": 70,
+    "duration_ms": 652364
+  },
+  "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
+    "status": "reuse",
+    "blocks": 67,
+    "duration_ms": 593900
+  },
+  "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
+    "status": "reuse",
+    "blocks": 73,
+    "duration_ms": 729017
+  },
+  "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
+    "status": "reuse",
+    "blocks": 74,
+    "duration_ms": 732138
+  },
+  "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
+    "status": "reuse",
+    "blocks": 79,
+    "duration_ms": 758289
+  },
+  "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
+    "status": "reuse",
+    "blocks": 82,
+    "duration_ms": 737828
+  },
+  "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
+    "status": "reuse",
+    "blocks": 131,
+    "duration_ms": 1103454
+  },
+  "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
+    "status": "reuse",
+    "blocks": 65,
+    "duration_ms": 630604
+  },
+  "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
+    "status": "reuse",
+    "blocks": 67,
+    "duration_ms": 625339
+  },
+  "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
+    "status": "reuse",
+    "blocks": 105,
+    "duration_ms": 917260
+  },
+  "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
+    "status": "reuse",
+    "blocks": 94,
+    "duration_ms": 785253
+  },
+  "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
+    "status": "reuse",
+    "blocks": 91,
+    "duration_ms": 743597
+  },
+  "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
+    "status": "reuse",
+    "blocks": 97,
+    "duration_ms": 745779
+  },
+  "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
+    "status": "reuse",
+    "blocks": 78,
+    "duration_ms": 902678
   }
 }
