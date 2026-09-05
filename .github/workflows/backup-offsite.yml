@@ -11,6 +11,20 @@
 #
 #  Kosten: 0 € – GitHub Free erlaubt Releases ohne Limit.
 #  Trigger: täglich 03:00 UTC + manuell (workflow_dispatch).
+#
+#  GEHÄRTET am 05.09.2026 (nach Run 33940712798 / Issue #179):
+#  Der Asset-Upload scheiterte still bzw. transient und ließ ein
+#  unvollständiges bzw. gar kein Backup zurück. Jetzt gilt:
+#    1. Artefakte werden VOR dem Upload verifiziert
+#       (git bundle verify + unzip -t + Mindestgrößen).
+#    2. Uploads laufen einzeln mit Retry (transiente Hickser
+#       fallen nicht mehr direkt auf den Nachtlauf durch).
+#    3. NACH dem Upload wird das Release hart verifiziert: beide
+#       Assets müssen mit exakter Größe vorhanden sein, sonst
+#       wird das Teil-Release gelöscht und der Job schlägt LAUT
+#       fehl (Fehler-Alerting) statt ein Schein-Backup zu melden.
+#    4. Die Retention läuft mit `if: always()` – sie fällt nicht
+#       mehr mit einem fehlgeschlagenen Backup aus.
 # ============================================================
 name: Offsite-Backup
 
@@ -31,29 +45,81 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Git-Bundle + Arbeitskopie erstellen
+      - name: Git-Bundle + Arbeitskopie erstellen und verifizieren
         run: |
+          set -euo pipefail
           # Komplette Git-History als Bundle (eigenständiges Backup-Format)
           git bundle create backup.bundle --all
-          ls -lh backup.bundle
+          # Integrität des Bundles prüfen: kaputte Bundles werden gar nicht
+          # erst hochgeladen
+          git bundle verify backup.bundle
           # Arbeitskopie (nur getrackte Dateien, ohne .git)
           git archive --format=zip -o worktree.zip HEAD
-          ls -lh worktree.zip
+          # ZIP-Integrität prüfen (CRC + Vollständigkeit)
+          unzip -t worktree.zip > /dev/null
+          # Plausibilitäts-Checks: verdächtig kleine Artefakte = Fehler
+          BSIZE=$(stat -c%s backup.bundle)
+          ZSIZE=$(stat -c%s worktree.zip)
+          echo "backup.bundle = ${BSIZE} Bytes · worktree.zip = ${ZSIZE} Bytes"
+          if [ "$BSIZE" -lt 100000 ] || [ "$ZSIZE" -lt 50000 ]; then
+            echo "::error::Artefakt verdächtig klein (bundle=${BSIZE}, zip=${ZSIZE}) – Abbruch statt Schein-Backup."
+            exit 1
+          fi
 
-      - name: Backup-Release erstellen
+      - name: Backup-Release erstellen und Upload verifizieren
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set -euo pipefail
           TAG="backup-$(date +%Y%m%d-%H%M)"
           SHA="${{ github.sha }}"
           FILES=$(git ls-files | wc -l)
-          NOTES="Automatisches Offsite-Backup von franksfinanzcheck-blog | Commit: $SHA | Getrackte Dateien: $FILES | backup.bundle = Git-History, worktree.zip = Arbeitskopie"
-          gh release create "$TAG" backup.bundle worktree.zip \
+          NOTES="Automatisches Offsite-Backup von franksfinanzcheck-blog | Commit: $SHA | Getrackte Dateien: $FILES | backup.bundle = Git-History, worktree.zip = Arbeitskopie | Upload verifiziert (Namen + Groessen)"
+
+          # 1) Erwartete Asset-Größen merken (für die spätere Verifikation)
+          EXPECT_BUNDLE=$(stat -c%s backup.bundle)
+          EXPECT_ZIP=$(stat -c%s worktree.zip)
+
+          # 2) Release anlegen (noch ohne Assets)
+          gh release create "$TAG" \
             --title "Backup $TAG" \
             --notes "$NOTES"
-          echo "✅ Release $TAG erstellt"
+
+          # 3) Assets einzeln mit Retry hochladen (transiente Upload-Hickser
+          #    des GitHub-Release-Service auffangen)
+          upload_with_retry() {
+            local f="$1" n
+            for n in 1 2 3; do
+              if gh release upload "$TAG" "$f" --clobber; then
+                return 0
+              fi
+              echo "::warning::Upload von $f fehlgeschlagen (Versuch $n/3) – neuer Versuch in 15 s"
+              sleep 15
+            done
+            return 1
+          }
+
+          upload_failed=0
+          upload_with_retry backup.bundle || upload_failed=1
+          upload_with_retry worktree.zip || upload_failed=1
+
+          # 4) HARTE VERIFIKATION: Das Release ist nur dann ein Backup, wenn
+          #    beide Assets vollständig angekommen sind. Sonst: Teil-Release
+          #    aufräumen und laut fehlschlagen (Fehler-Alerting greift).
+          REMOTE=$(gh release view "$TAG" --json assets \
+            --jq '[.assets[] | .name + ":" + (.size | tostring)] | sort | join(",")' \
+            2>/dev/null || echo "")
+          WANT=$(printf 'backup.bundle:%s,worktree.zip:%s' "$EXPECT_BUNDLE" "$EXPECT_ZIP")
+          if [ "$upload_failed" -ne 0 ] || [ "$REMOTE" != "$WANT" ]; then
+            echo "::error::Release $TAG ist unvollständig (erwartet: $WANT · erhalten: ${REMOTE:-kein Zugriff})."
+            echo "Räume Teil-Release auf, damit das nächste Backup sauber startet."
+            gh release delete "$TAG" --yes --cleanup-tag || true
+            exit 1
+          fi
+          echo "✅ Release $TAG erstellt und verifiziert: $REMOTE"
 
       - name: Alte Backups aufräumen (nur die letzten 14 behalten)
+        if: ${{ always() }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
