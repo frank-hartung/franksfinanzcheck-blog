@@ -3,7 +3,7 @@ public/
 resources/_gen/
 .hugo_build.lock
 
-# Vorab vertonte Artikel (ZEIT-Standard, generate_reader_audio.py)
+# Vorab vertonte Artikel (FF Voice Studio, scripts/ff_voice_audio.py)
 # → große Tonspuren nie ins Repo; sie entstehen im Deploy & liegen auf gh-pages
 static/audio/
 
@@ -35,9 +35,9 @@ __pycache__/
 .venv-test/
 .venv/
 
-# Vorlese-TTS (v8, 04.09.2026): lokale Arbeitsdaten & Hörproben
-# · .cache/ff-tts/   Piper-Stimmen (ONNX, je ~60–110 MB) + Arbeitsdaten
-# · tmp/ab/          A/B-Hörproben aus scripts/reader_voice_ab.py
+# Vorlese-TTS (FF Voice Studio, 05.09.2026): lokale Arbeitsdaten
+# · .cache/ff-voice/   Piper-Stimmen (ONNX, je ~60–110 MB) + Segment-Arbeitsdaten
+# · tmp/               Hörproben und Zwischenstände
 # Niemals committen – Tonspuren entstehen im Deploy und liegen auf gh-pages.
 .cache/
 tmp/

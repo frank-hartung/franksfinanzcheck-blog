@@ -292,30 +292,45 @@ python3 scripts/redaktions_standard.py --register-korrektur --file content/posts
 
 ---
 
-## 🔊 Vorlese-Funktion (Hörbeitrag auf ZEIT-Niveau, seit 03./04.09.2026)
+## 🔊 Lesehilfen: Vorlesen + Kurzfassung (FF Voice Studio, neu gebaut 05.09.2026)
 
-Jeder Artikel bekommt einen **Vorlesen-Button** mit **männlicher Stimme**, **Deutsch und Englisch automatisch** (ohne Sprach-Umschalter) und seit v8 zusätzlich eine **vorab vertonte Tonspur** in Neural-Qualität. Kostenlos, ohne Abo, ohne Pflicht-API-Key.
+Das alte Vorlese-Modell wurde **vollständig entfernt** und durch **FF Voice Studio** ersetzt – einen Neubau auf Profi-Agentur-Niveau. Jeder Artikel und jede Ratgeberseite bekommt zwei Lesehilfen:
+
+1. **Vorlesen** – männliche Stimme, **Deutsch und Englisch vollautomatisch**, ohne Sprach-Umschalter, ohne Stimmen-Menü, ohne Regler.
+2. **Kurzfassung** – Verlagshaus-Kurzfassung (Kapital/WirtschaftsWoche/Zeit als Maßstab) in einem barrierefreien Dialog.
+
+### Zwei Tonpfade, eine Regie
 
 | Stufe | Technik | Stimme |
 |---|---|---|
-| **Tonspur** (Vorzug) | `scripts/generate_reader_audio.py` im Deploy → MP3, 24 kHz Mono, −16 LUFS (EBU R128) | edge-tts: `de-DE-FlorianMultilingualNeural` / `en-US-AndrewMultilingualNeural`; sonst Piper: `de_DE-thorsten-high` / `en_US-ryan-high` |
-| **Browser-Fallback** | `static/premium/ff-reader.js` (Web Speech API) | deterministisch männlich gefiltert (Female-Veto + Neural-Matcher), gleiche Regie |
+| **Studio-Tonspur** (Vorzug) | `scripts/ff_voice_audio.py` im Deploy → MP3, 24 kHz Mono, −16 LUFS (EBU R128) | edge-tts: `de-DE-FlorianMultilingualNeural` / `en-US-AndrewMultilingualNeural`; Profil „narrator“: `de-DE-ConradNeural` / `en-GB-RyanNeural`; sonst Piper: `de_DE-thorsten-high` / `en_US-ryan-high` |
+| **Browser-Engine** (Fallback) | `static/premium/ff-voice.js` (Web Speech API) | deterministisch männlich gefiltert (Female-Veto, Neural-Matcher, Google-Codes B/D/F), gleiche Regie |
 
-Beide Pfade teilen **dieselbe Regie**: satzgenaues DE/EN-Routing, vollständige Aussprache-Normalisierung (Zahlen, Währungen, Daten, Abkürzungen, URLs, Paragrafen), Rollen-Prosodie (Überschriften tiefer und langsamer, Warnboxen deutlicher, Tabellenzeilen zügiger), Pausen mit Stille-Trimming und Mikro-Fades, Loudness-Mastering. Die **Multilingual-v2**-Stimme spricht englische Fachbegriffe im deutschen Satz mit **derselben** Stimme – kein Timbresprung, der zweite Sprecher verrät.
+Die Tonspur läuft im nativen HTML5-Player und klingt dadurch **identisch** auf iPhone, Mac, Tablet, Android, PC und in jedem Browser. Fehlt sie, übernimmt sofort die Browser-Engine – **nie stumm**.
 
-**Robustheit:** Backend-Kette `edge → piper → groq` (Groq nur Englisch-Notnagel, nie Pflicht), Vorab-Test + Schutzschalter (ein ausgefallener Sprachdienst kostet Sekunden statt Minuten), **keine lückenhaften Tonspuren**, inkrementell per Inhalts-Fingerprint (inkl. Rezept-Versionen), `--limit-new 25` je Deploy, **kein Deploy-Stopp** wegen Audio.
+### Was „High-End“ hier bedeutet
 
-**Schnell-Checks:**
+- **Aussprache-Regie** – Zahlen, Währungen, Daten, Zeiten, Prozente, Paragrafen, Abkürzungen, Einheiten und URLs werden vor dem Sprechen in gesprochene Sprache übersetzt (DE und EN getrennt).
+- **Satzweises Sprach-Routing** – englische Sätze im deutschen Artikel spricht die männliche EN-Stimme, ohne Umschalter.
+- **Studio-Prosodie** – jede Rolle (Überschrift, Fließtext, Tabellenzeile, Warnhinweis …) hat Tempo, Tonlage und Lautstärke; Informationsdichte bremst automatisch, Fragen steigen, Blockenden klingen aus.
+- **Atemgruppen** – Sätze werden an Konnektoren und Nebensatzgrenzen geteilt; die harte Obergrenze bleibt unter der Chrome-Abbruchgrenze.
+- **Vollständigkeit** – Überschriften aller Ebenen, Listen, Zitate, Fettdruck an seiner Stelle, Premium-Übersichten samt Titel und Fußnote sowie Tabellen mit Kopfzeile, `<tfoot>`-Summen und colspan-Auflösung.
+- **Barrierefreiheit** – WCAG 2.2 / BITV: Live-Region, Fokus-Falle, Scroll-Sperre, Fokus-Rückkehr, Escape, Tastatursteuerung, `prefers-reduced-motion`, Media Session (Sperrbildschirm/Headset).
+
+### Wächter (alle grün)
 
 ```bash
-python3 scripts/reader_prosody_parity_check.py       # 94 Gates: Tonspur ≡ Browser-Pfad
-python3 scripts/generate_reader_audio.py --selftest  # 80 Gates inkl. CLI-Integration
-python3 scripts/reader_tts_backends.py --selftest    # 58 Gates: Stimmen, Aussprache, Prosodie
-node scripts/reader_male_voice_highend_test.js       # 58 Gates: Nur-Männlich, Multilingual
-python3 scripts/reader_voice_ab.py --open            # A/B-Hörtest: welche Stimme gewinnt?
+node scripts/ff_voice_functional_test.mjs   # 145 Gates: echte DOM, alle echten Artikel
+node scripts/ff_voice_voice_test.js         #  71 Gates: männlich, DE & EN, 7 Geräte-Kataloge
+python3 scripts/ff_voice_parity_check.py    # 176 Gates: Tonspur ≡ Browser-Engine
+python3 scripts/ff_voice_toolbar_check.py   #  89 Gates: Layout, Styling, Workflow, Rückbau
+python3 scripts/ff_voice_backends.py --selftest  # 44 Gates: Aussprache, Prosodie, Audio
+python3 scripts/ff_voice_audio.py --selftest     # 31 Gates: Block-Parität, Injektion
 ```
 
-Reports: `VORLESEN-NATUERLICHKEIT-REPORT.md` (v8, Klang) · `VORLESEN-HIGHEND-REPORT.md` (v6, Klickpfad) · `KURZFASSUNG-HIGHEND-REPORT.md`.
+Die Suiten laufen im Workflow **„Lesehilfen-Gate (Vorlesen + Kurzfassung)“** – bei jedem Push/PR auf Lesehilfen oder Content sowie täglich um 08:20 MESZ.
+
+Report: `LESEHILFEN-STUDIO-2026-09-05.md`.
 
 ---
 

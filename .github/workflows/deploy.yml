@@ -200,35 +200,34 @@ jobs:
         if: steps.gate_diff.outputs.changed == 'true'
         run: hugo --minify
 
-      # ================= VORLESE-AUDIO (ZEIT-Standard, v8 04.09.2026) ========
+      # ================= VORLESE-AUDIO (FF Voice Studio, 05.09.2026) ========
       # Vorab vertonte Artikel mit einer MÄNNLICHEN DE-/EN-Stimme – wie bei
       # zeit.de. Die Tonspur (MP3) läuft über das native HTML5-<audio>-Element
       # und klingt damit IDENTISCH auf iPhone, Mac, Tablet, Android, PC und in
       # jedem Browser, unabhängig von den Stimmen des Betriebssystems.
       #
-      # KOSTENLOS & OHNE KEY (v8): Groq hat playai-tts am 31.12.2025
-      # abgeschaltet, der Ersatz (Orpheus) kann kein Deutsch. Neu ist deshalb
-      # eine Backend-Kette ohne Abo und ohne Pflicht-Secret:
-      #   edge  → Microsoft-Edge-Neuralstimmen via Open-Source-Paket edge-tts
-      #           (de-DE-FlorianMultilingualNeural / en-US-AndrewMultilingual-
-      #           Neural, männlich; Multilingual v2 spricht englische
-      #           Fachbegriffe im deutschen Satz ohne Timbresprung)
-      #   piper → lokale ONNX-Stimmen (de_DE-thorsten-high / en_US-ryan-high),
-      #           offline, unbegrenzt, lizenzsauber
-      #   groq  → nur EN-Notnagel, falls GROQ_API_KEY gesetzt ist
+      # KOSTENLOS & OHNE KEY: Eine Backend-Kette ohne Abo und ohne
+      # Pflicht-Secret:
+      #   edge  -> Microsoft-Edge-Neuralstimmen über das offene Paket edge-tts
+      #            (de-DE-FlorianMultilingualNeural / en-US-AndrewMultilingual-
+      #            Neural, männlich; Multilingual v2 spricht englische
+      #            Fachbegriffe im deutschen Satz ohne Timbresprung)
+      #   piper -> lokale ONNX-Stimmen (de_DE-thorsten-high / en_US-ryan-high),
+      #            offline, unbegrenzt, lizenzsauber
+      #   groq  -> nur EN-Notnagel, falls GROQ_API_KEY gesetzt ist
       #
       # Robustheit: (1) Ohne verfügbares Backend wird keine Tonspur
-      # geschrieben; der Reader fällt automatisch auf die lokale Browser-
-      # stimme zurück – der Deploy bricht NIEMALS wegen der Tonspur ab.
+      # geschrieben; der Reader bleibt automatisch auf der lokalen
+      # Browserstimme - der Deploy bricht NIEMALS wegen der Tonspur ab.
       # (2) Inkrementell: unveränderte Artikel werden per Inhalts-Fingerprint
-      # (inkl. Stimmen-/Rezept-Version) aus dem letzten gh-pages-Stand
-      # wiederverwendet. (3) --limit-new begrenzt die Neuvertonung je Lauf,
-      # damit ein Backfill den Deploy nicht zum Stundenjob macht.
+      # (inkl. Backend, Stimme und Rezept-Version) aus dem letzten
+      # gh-pages-Stand wiederverwendet. (3) --limit-new begrenzt die
+      # Neuvertonung je Lauf.
       - name: Vorlese-Audio-Selbsttests (Generator + Stimmen-Kette + Parität)
         run: |
-          python3 scripts/generate_reader_audio.py --selftest || echo "⚠ Generator-Selftest – Funde im Log (kein Deploy-Stopp)"
-          python3 scripts/reader_tts_backends.py --selftest || echo "⚠ Backends-Selftest – Funde im Log (kein Deploy-Stopp)"
-          python3 scripts/reader_prosody_parity_check.py || echo "⚠ Paritäts-Gate – Funde im Log (kein Deploy-Stopp)"
+          python3 scripts/ff_voice_audio.py --selftest || echo "⚠ Generator-Selftest – Funde im Log (kein Deploy-Stopp)"
+          python3 scripts/ff_voice_backends.py --selftest || echo "⚠ Backends-Selftest – Funde im Log (kein Deploy-Stopp)"
+          python3 scripts/ff_voice_parity_check.py || echo "⚠ Paritäts-Gate – Funde im Log (kein Deploy-Stopp)"
 
       - name: TTS-Backend installieren (edge-tts, optional piper-tts)
         run: |
@@ -241,58 +240,26 @@ jobs:
             || python3 -m pip install -q --break-system-packages piper-tts \
             || echo "⚠ piper-tts nicht installierbar → edge/Browser-Fallback"
           ffmpeg -version | head -1 || echo "⚠ ffmpeg fehlt → nur WAV ohne Mastering"
-          AUDIO_BACKEND="${{ github.event.inputs.audio_backend || 'auto' }}"
-          AUDIO_PROFILE="${{ github.event.inputs.audio_profile || 'natural' }}"
-          AUDIO_RATE="${{ github.event.inputs.audio_rate || '1.0' }}"
-          AUDIO_PITCH="${{ github.event.inputs.audio_pitch || '0' }}"
-          AUDIO_VOICE_DE="${{ github.event.inputs.audio_voice_de || '' }}"
-          AUDIO_VOICE_EN="${{ github.event.inputs.audio_voice_en || '' }}"
-          AUDIO_ARGS=(
-            --backend "$AUDIO_BACKEND"
-            --profile "$AUDIO_PROFILE"
-            --rate "$AUDIO_RATE"
-            --pitch "$AUDIO_PITCH"
-          )
-          if [ -n "$AUDIO_VOICE_DE" ]; then AUDIO_ARGS+=(--voice-de "$AUDIO_VOICE_DE"); fi
-          if [ -n "$AUDIO_VOICE_EN" ]; then AUDIO_ARGS+=(--voice-en "$AUDIO_VOICE_EN"); fi
-          echo "🔎 TTS-Probe: backend=$AUDIO_BACKEND profile=$AUDIO_PROFILE rate=$AUDIO_RATE pitch=$AUDIO_PITCH de=${AUDIO_VOICE_DE:-auto} en=${AUDIO_VOICE_EN:-auto}"
-          python3 scripts/generate_reader_audio.py --engines "${AUDIO_ARGS[@]}" || true
+          python3 scripts/ff_voice_audio.py --engines || true
 
-      - name: Vorlese-Audio generieren (männliche DE/EN-Stimme, kostenlos)
+      - name: Vorlese-Tonspuren erzeugen (männliche DE/EN-Stimme, kostenlos)
         env:
           # Optional: nur als EN-Notnagel nötig, nie Pflicht.
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          FF_PIPER_VOICES: /tmp/ff-piper-voices
         run: |
-          mkdir -p /tmp/ff-audio-cache /tmp/ff-piper-voices
+          mkdir -p /tmp/ff-voice-cache
           # Vorherige Tonspuren vom letzten Deploy holen (inkrementell).
           if git fetch --quiet origin gh-pages:refs/remotes/origin/gh-pages 2>/dev/null; then
             git restore --source=origin/gh-pages -- audio/articles 2>/dev/null || true
             if [ -d audio/articles ]; then
-              cp -r audio/articles/. /tmp/ff-audio-cache/ 2>/dev/null || true
+              cp -r audio/articles/. /tmp/ff-voice-cache/ 2>/dev/null || true
               rm -rf audio
             fi
           fi
           AUDIO_BACKEND="${{ github.event.inputs.audio_backend || 'auto' }}"
           AUDIO_PROFILE="${{ github.event.inputs.audio_profile || 'natural' }}"
           AUDIO_ORDER="${{ github.event.inputs.audio_order || 'newest' }}"
-          AUDIO_RATE="${{ github.event.inputs.audio_rate || '1.0' }}"
-          AUDIO_PITCH="${{ github.event.inputs.audio_pitch || '0' }}"
           AUDIO_LIMIT_NEW="${{ github.event.inputs.audio_limit_new || '25' }}"
-          AUDIO_VOICE_DE="${{ github.event.inputs.audio_voice_de || '' }}"
-          AUDIO_VOICE_EN="${{ github.event.inputs.audio_voice_en || '' }}"
-          AUDIO_ARGS=(
-            --html-dir public
-            --out-dir public/audio/articles
-            --cache-dir /tmp/ff-audio-cache
-            --backend "$AUDIO_BACKEND"
-            --profile "$AUDIO_PROFILE"
-            --order "$AUDIO_ORDER"
-            --rate "$AUDIO_RATE"
-            --pitch "$AUDIO_PITCH"
-          )
-          if [ -n "$AUDIO_VOICE_DE" ]; then AUDIO_ARGS+=(--voice-de "$AUDIO_VOICE_DE"); fi
-          if [ -n "$AUDIO_VOICE_EN" ]; then AUDIO_ARGS+=(--voice-en "$AUDIO_VOICE_EN"); fi
           case "$AUDIO_LIMIT_NEW" in
             ''|*[!0-9]*) AUDIO_LIMIT_NEW=25 ;;
           esac
@@ -301,11 +268,16 @@ jobs:
           else
             LIMIT_NEW="$AUDIO_LIMIT_NEW"
           fi
-          echo "🔧 Audio-Backfill: backend=$AUDIO_BACKEND profile=$AUDIO_PROFILE order=$AUDIO_ORDER limit_new=$LIMIT_NEW rate=$AUDIO_RATE pitch=$AUDIO_PITCH de=${AUDIO_VOICE_DE:-auto} en=${AUDIO_VOICE_EN:-auto}"
-          python3 scripts/generate_reader_audio.py \
-            "${AUDIO_ARGS[@]}" \
+          echo "🔧 Tonspuren: backend=$AUDIO_BACKEND profile=$AUDIO_PROFILE order=$AUDIO_ORDER limit_new=$LIMIT_NEW"
+          python3 scripts/ff_voice_audio.py \
+            --html-dir public \
+            --out-dir public/audio/articles \
+            --cache-dir /tmp/ff-voice-cache \
+            --backend "$AUDIO_BACKEND" \
+            --profile "$AUDIO_PROFILE" \
+            --order "$AUDIO_ORDER" \
             --limit-new "$LIMIT_NEW" \
-            || echo "⚠ Vorlese-Audio unvollständig – Deploy läuft weiter (Browser-Fallback aktiv)"
+            || echo "⚠ Vorlese-Tonspuren unvollständig – Deploy läuft weiter (Browser-Fallback aktiv)"
           echo "✅ Vorlese-Audio-Schritt abgeschlossen."
 
       - name: Deploy auf gh-pages
