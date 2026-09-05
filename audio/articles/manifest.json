@@ -64,17 +64,6 @@
     "blocks": 78,
     "duration_ms": 902678
   },
-  "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
-    "status": "generate",
-    "blocks": 72,
-    "chunks": 72,
-    "duration_ms": 781887,
-    "fingerprint": "5c7a994ba3b7278489f2",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
-  },
   "2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst": {
     "status": "reuse",
     "blocks": 57,
@@ -134,17 +123,6 @@
     "status": "reuse",
     "blocks": 62,
     "duration_ms": 662143
-  },
-  "2026-09-03-hausratversicherung-kosten-leistungen-vergleich": {
-    "status": "generate",
-    "blocks": 74,
-    "chunks": 74,
-    "duration_ms": 769167,
-    "fingerprint": "d8e8140c0d466fe24cd8",
-    "engines": {
-      "de": "piper:de_DE-thorsten-high"
-    },
-    "failures": 0
   },
   "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
     "status": "reuse",
