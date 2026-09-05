@@ -311,6 +311,39 @@
 
   function qsa(sel, ctx) { return Array.prototype.slice.call((ctx || doc).querySelectorAll(sel)); }
 
+  function normTag(el) { return String((el && el.tagName) || '').toUpperCase(); }
+
+  function isReaderSkipped(el) {
+    return !!(el && el.closest && el.closest('script, style, noscript, [aria-hidden="true"], [data-ff-skip-read], .ff-reader-toolbar, .ff-toc, #TableOfContents, .ff-share, .ff-related'));
+  }
+
+  function isTableLike(el) {
+    if (!el) return false;
+    var tag = normTag(el);
+    if (tag === 'TABLE') return true;
+    var role = String((el.getAttribute && el.getAttribute('role')) || '').toLowerCase();
+    if (role === 'table' || role === 'grid' || role === 'treegrid') return true;
+    if (el.classList && (el.classList.contains('ff-table-scroll') || el.classList.contains('ff-tv-tablewrap') ||
+        el.classList.contains('ff-es-tablewrap') || el.classList.contains('wp-block-table') ||
+        el.classList.contains('table-wrapper') || el.classList.contains('table-responsive'))) return true;
+    return false;
+  }
+
+  function innerTable(el) {
+    if (!el) return null;
+    if (normTag(el) === 'TABLE') return el;
+    var role = String((el.getAttribute && el.getAttribute('role')) || '').toLowerCase();
+    if (role === 'table' || role === 'grid' || role === 'treegrid') return el;
+    return el.querySelector ? el.querySelector('table, [role="table"], [role="grid"], [role="treegrid"]') : null;
+  }
+
+  function isStandaloneEmphasis(el) {
+    if (!el || !/^(STRONG|B)$/.test(normTag(el))) return false;
+    if (el.closest && el.closest('p, li, blockquote, td, th, caption, h1, h2, h3, h4, h5, h6, a, button, .ff-kurzantwort, .ff-korrektur, .callout, .ff-tarif-card, .ff-einspar-box')) return false;
+    return readableText(el).length > 1;
+  }
+
+
   function stripMd(s) {
     return String(s == null ? '' : s)
       .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
@@ -843,12 +876,20 @@
     }
   }
 
+  function paintProgressRatio(ratio) {
+    if (!progressBar) return;
+    var r = Number(ratio);
+    if (!isFinite(r)) r = 0;
+    r = Math.max(0, Math.min(1, r));
+    progressBar.style.transform = r <= 0 ? 'scaleX(0)' : (r >= 1 ? 'scaleX(1)' : 'scaleX(' + r.toFixed(4) + ')');
+  }
+
   function setProgressChars(chars, allowBackward) {
     if (!progressBar || !totalChars) return;
     var next = Math.max(0, Math.min(totalChars, chars || 0));
     if (!allowBackward && next < displayedChars) next = displayedChars;
     displayedChars = next;
-    progressBar.style.transform = 'scaleX(' + Math.min(1, displayedChars / totalChars).toFixed(4) + ')';
+    paintProgressRatio(displayedChars / totalChars);
   }
 
   function estimatedSpeechMs(unit) {
@@ -868,7 +909,7 @@
     cancelProgressTicker();
     if (!progressBar || !totalChars || !unit || !unit.text) return;
     var localRun = ++progressTickerRun;
-    var base = spokenChars;
+    var base = typeof unit.startChars === 'number' ? unit.startChars : spokenChars;
     var len = unit.text.length;
     var startedAt = Date.now();
     var duration = estimatedSpeechMs(unit);
@@ -893,7 +934,7 @@
 
   function finishProgressUnit(unit) {
     cancelProgressTicker();
-    if (unit && unit.text) setProgressChars(spokenChars + unit.text.length, false);
+    if (unit && unit.text) setProgressChars(typeof unit.endChars === 'number' ? unit.endChars : spokenChars + unit.text.length, false);
   }
 
   /* ---------- Speech-Engine-Unlocking ---------------------------------
@@ -2014,6 +2055,10 @@
     var title = tableEl.getAttribute('aria-label') || '';
     if (!title) {
       var caption = tableEl.querySelector('caption');
+      if (!caption && tableEl.closest) {
+        var fig = tableEl.closest('figure');
+        if (fig) caption = fig.querySelector('figcaption');
+      }
       if (caption) title = readableText(caption);
     }
     /* Premium-Übersichten tragen ihren Namen in der eigenen Kopfzeile
@@ -2034,16 +2079,16 @@
     if (!title) title = tTexts.tableTitleDefault;
 
     var headers = [];
-    var ths = qsa('thead th', tableEl);
-    if (!ths.length) ths = qsa('tr:first-child th, tr:first-child td', tableEl);
+    var ths = qsa('thead th, [role=\"columnheader\"]', tableEl);
+    if (!ths.length) ths = qsa('tr:first-child th, tr:first-child td, [role=\"row\"]:first-child [role=\"cell\"], [role=\"row\"]:first-child [role=\"columnheader\"]', tableEl);
     ths.forEach(function (th) {
       var hText = readableText(th);
       if (hText) headers.push(hText);
     });
 
-    var rows = qsa('tbody tr', tableEl);
+    var rows = qsa('tbody tr, [role=\"rowgroup\"] [role=\"row\"]', tableEl);
     if (!rows.length) {
-      var allTrs = qsa('tr', tableEl);
+      var allTrs = qsa('tr, [role=\"row\"]', tableEl);
       rows = allTrs.length > 1 ? allTrs.slice(1) : allTrs;
     }
 
@@ -2078,7 +2123,7 @@
     tableBlocks.push({ el: introEl, text: introRaw, lang: lang, type: 'table-intro' });
 
     rows.forEach(function (tr, rIdx) {
-      var cells = qsa('td, th', tr);
+      var cells = qsa('td, th, [role=\"cell\"], [role=\"rowheader\"], [role=\"columnheader\"]', tr);
       if (!cells.length) return;
 
       var rowLabel = readableText(cells[0]);
@@ -2174,13 +2219,17 @@
          Übersicht folgt, noch den Hinweis darunter. */
     var nodes = qsa([
       'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'blockquote',
-      'table', '.ff-table-scroll',
+      'table', '[role="table"]', '[role="grid"]', '[role="treegrid"]',
+      '.ff-table-scroll', '.ff-tv-tablewrap', '.ff-es-tablewrap', '.wp-block-table', '.table-wrapper', '.table-responsive',
+      'figure table', 'figure [role="table"]',
+      'strong', 'b',
       '.ff-tarif-card', '.ff-einspar-box', '.ff-kurzantwort', '.ff-korrektur', '.callout',
       '.ff-tv-footnote', '.ff-es-footnote'
     ].join(', '), content);
 
     nodes.forEach(function (el) {
-      if (el.closest && el.closest('figure, script, style, noscript, [aria-hidden="true"], [data-ff-skip-read], .ff-reader-toolbar, .ff-toc, #TableOfContents, .ff-share, .ff-related')) return;
+      if (isReaderSkipped(el)) return;
+      if (el.closest && el.closest('figure') && !isTableLike(el)) return;
 
       /* Die Premium-Übersichten liefern DENSELBEN Inhalt zweimal:
          als <table> (Desktop) und als Karten-Stapel (Mobil, per CSS
@@ -2190,15 +2239,22 @@
 
       var elLang = (el.getAttribute('lang') || lang).toLowerCase().indexOf('en') === 0 ? 'en' : 'de';
 
-      if (el.tagName === 'TABLE' || (el.classList && el.classList.contains('ff-table-scroll'))) {
-        var tbl = el.tagName === 'TABLE' ? el : el.querySelector('table');
+      if (isTableLike(el)) {
+        var tbl = innerTable(el);
         if (!tbl || processedTables.indexOf(tbl) !== -1) return;
         processedTables.push(tbl);
         extractTableSpeechBlocks(tbl, elLang).forEach(function (tb) { out.push(tb); });
         return;
       }
 
-      if (el.closest && el.closest('table, .ff-table-scroll')) return;
+      if (el.closest && el.closest('table, .ff-table-scroll, .ff-tv-tablewrap, .ff-es-tablewrap, .wp-block-table, .table-wrapper, .table-responsive')) return;
+
+      if (/^(STRONG|B)$/.test(el.tagName || '')) {
+        if (!isStandaloneEmphasis(el)) return;
+        var emphText = readableText(el);
+        out.push({ el: el, text: emphText.replace(/[\s?!.…]+$/, '') + '.', lang: elLang, type: 'lead' });
+        return;
+      }
 
       var boxed = el.classList && (el.classList.contains('ff-tarif-card') || el.classList.contains('ff-einspar-box') ||
         el.classList.contains('ff-kurzantwort') || el.classList.contains('ff-korrektur') || el.classList.contains('callout'));
@@ -2323,6 +2379,8 @@
           modSign: 1,
           firstChunk: ci === 0,
           finalChunk: ci === chunks.length - 1,
+          startChars: totalChars,
+          endChars: totalChars + c.text.length,
           before: ci === 0 ? profile.before : 0,
           after: 0
         };
@@ -2373,7 +2431,7 @@
     blocks.forEach(function (b) { if (b.el) b.el.classList.remove('ff-reader-active'); });
     cancelProgressTicker();
     displayedChars = 0;
-    if (progressBar) progressBar.style.transform = 'scaleX(0)';
+    paintProgressRatio(0);
     if (remainEl) remainEl.textContent = '';
   }
 
@@ -2414,7 +2472,8 @@
     // the failed unit after two retries and make the failure accessible.
     retryCounts[index] = 0;
     if (statusEl) statusEl.textContent = texts.speechError;
-    spokenChars += unit && unit.text ? unit.text.length : 0;
+    if (unit && typeof unit.endChars === 'number') spokenChars = unit.endChars;
+    else spokenChars += unit && unit.text ? unit.text.length : 0;
     setProgressChars(spokenChars, false);
     speakUnit(index + 1, false);
   }
@@ -2483,7 +2542,7 @@
       u.onboundary = function (e) {
         if (!reading || !playing || run !== playbackRun || !progressBar || !totalChars) return;
         if (e && typeof e.charIndex === 'number' && e.charIndex >= 0) {
-          setProgressChars(spokenChars + e.charIndex, false);
+          setProgressChars((typeof unit.startChars === 'number' ? unit.startChars : spokenChars) + e.charIndex, false);
         }
       };
 
@@ -2522,7 +2581,7 @@
         errorStreak = 0;
         lastEffRate = unit.effRate || 1;
         finishProgressUnit(unit);
-        spokenChars += unit.text.length;
+        spokenChars = typeof unit.endChars === 'number' ? unit.endChars : spokenChars + unit.text.length;
         setProgressChars(spokenChars, false);
         /* Fix (aus #169, 04.09.2026): Die nächste Einheit wird VORGEMERKT,
            solange die Atempause läuft. Früher zeigte `cursor` weiter auf die
@@ -2608,8 +2667,8 @@
     if (!timeline.length) return;
     unlockAudioEngine();
     index = Math.max(0, Math.min(timeline.length - 1, index));
-    spokenChars = 0;
-    for (var i = 0; i < index; i++) spokenChars += timeline[i].text.length;
+    spokenChars = timeline[index] && typeof timeline[index].startChars === 'number' ? timeline[index].startChars : 0;
+    if (!spokenChars) { for (var i = 0; i < index; i++) spokenChars += timeline[i].text.length; }
     setProgressChars(spokenChars, true);
     clearPauseTimer();
     cancelProgressTicker();
@@ -2749,6 +2808,8 @@
     if (!audio || !reading) return;
     var t = (audio.currentTime || 0) * 1000;
     var duration = audio.duration || 0;
+    var audioTotalMs = duration && !isNaN(duration) && duration > 0 ? duration * 1000 : 0;
+    if (!audioTotalMs && audioChunks.length && audioChunks[audioChunks.length - 1].t1) audioTotalMs = audioChunks[audioChunks.length - 1].t1;
     if (audioChunks.length) {
       var idx = 0;
       for (var i = 0; i < audioChunks.length; i++) {
@@ -2761,11 +2822,11 @@
         if (blocks[bi]) { audioBlock = bi; highlightBlock(blocks[bi]); storeSet(STORE_POS, String(bi)); }
       }
     }
-    if (progressBar && duration && !isNaN(duration) && duration > 0) {
-      progressBar.style.transform = 'scaleX(' + Math.min(1, t / (duration * 1000)).toFixed(4) + ')';
+    if (progressBar && audioTotalMs > 0) {
+      paintProgressRatio(t / audioTotalMs);
     }
-    if (remainEl && duration) {
-      var rest = Math.max(0, duration - (audio.currentTime || 0)) / 60;
+    if (remainEl && audioTotalMs > 0) {
+      var rest = Math.max(0, (audioTotalMs / 1000) - (audio.currentTime || 0)) / 60;
       remainEl.textContent = rest >= 0.1 ? texts.remaining.replace('{min}', Math.max(1, Math.round(rest))) : '';
     }
   }
@@ -2907,7 +2968,7 @@
       spokenChars = 0;
       displayedChars = 0;
       cancelProgressTicker();
-      if (progressBar) progressBar.style.transform = 'scaleX(0)';
+      paintProgressRatio(0);
       cursor = 0;
       setListenState('playing');
       setStatus(texts.started);
@@ -2956,11 +3017,12 @@
     spokenChars = 0;
     displayedChars = 0;
     cancelProgressTicker();
-    if (progressBar) progressBar.style.transform = 'scaleX(0)';
+    paintProgressRatio(0);
     var startIdx = 0;
     if (typeof fromIndex === 'number' && fromIndex > 0 && fromIndex < timeline.length) {
       startIdx = fromIndex;
-      for (var i = 0; i < startIdx; i++) spokenChars += timeline[i].text.length;
+      spokenChars = timeline[startIdx] && typeof timeline[startIdx].startChars === 'number' ? timeline[startIdx].startChars : 0;
+      if (!spokenChars) { for (var i = 0; i < startIdx; i++) spokenChars += timeline[i].text.length; }
     }
     setProgressChars(spokenChars, true);
     cursor = startIdx;
@@ -3104,7 +3166,7 @@
   var contentContainer = doc.querySelector('.post-content') || doc.querySelector('.md-content');
   if (contentContainer) {
     contentContainer.addEventListener('dblclick', function (e) {
-      var target = e.target.closest('tr, p, h2, h3, h4, li, blockquote, .ff-tarif-card, .ff-einspar-box, .ff-kurzantwort, .callout');
+      var target = e.target.closest('tr, table, [role=\"row\"], p, h2, h3, h4, h5, h6, strong, b, li, blockquote, .ff-tarif-card, .ff-einspar-box, .ff-kurzantwort, .callout');
       if (!target) return;
       unlockAudioEngine();
       if (!reading) { startReading(0); }
@@ -3119,7 +3181,7 @@
     });
     contentContainer.addEventListener('click', function (e) {
       if (!reading) return;
-      var target = e.target.closest('tr, p, h2, h3, h4, li, blockquote, .ff-tarif-card, .ff-einspar-box, .ff-kurzantwort, .callout');
+      var target = e.target.closest('tr, table, [role=\"row\"], p, h2, h3, h4, h5, h6, strong, b, li, blockquote, .ff-tarif-card, .ff-einspar-box, .ff-kurzantwort, .callout');
       if (!target || e.target.closest('a, button, input, select, textarea')) return;
       /* Fix (aus #169, 04.09.2026): Text markieren und kopieren darf die
          Wiedergabe nicht an eine andere Stelle springen lassen. Eine laufende
