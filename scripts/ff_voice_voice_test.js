@@ -13,7 +13,7 @@
  * Aufruf: node scripts/ff_voice_voice_test.js
  */
 
-import { createRunner, loadPage, skeleton, mdToHtml, makeVoices } from './ff_voice_qa_lib.mjs';
+import { createRunner, loadPage, skeleton, mdToHtml, makeVoices, sleep } from './ff_voice_qa_lib.mjs';
 
 const t = createRunner('Stimmen-Regie: männlich, DE & EN, ohne Umschalter');
 
@@ -197,6 +197,105 @@ t.group('8) Sprach-Routing im Sprechplan (zweisprachiger Hörfunk-Moderator)');
     deVoice + ' / ' + enVoice);
   t.ok('Beide sind männlich',
     api.resolveMaleVoice('de').male && api.resolveMaleVoice('en').male);
+}
+
+/* ============================================================
+   8b · Wortlauf-Regie — Sprachwechsel MITTEN im Satz
+   ------------------------------------------------------------
+   Ein überwiegend deutscher Text mit wenig Englisch darf die
+   englischen Fachbegriffe NICHT der deutschen Stimme überlassen
+   (Befund 05.09.2026: „Robo Advisor“ klang deutsch). Die
+   Wortlauf-Regie zerteilt jede Sprecheinheit in Sprachläufe;
+   jeder Lauf erhält seine männliche Stimme — ohne Umschalter.
+   ============================================================ */
+t.group('8b) Wortlauf-Regie: Sprachwechsel mitten im Satz (DE-Basis)');
+{
+  const { api } = openWith(CATALOGS['Windows/Edge (Online Neural)']);
+
+  const runs = api.languageRuns('Ein Robo Advisor nutzt Compound Interest und Cost Averaging.', 'de');
+  t.eq('Sprachläufe des Mustersatzes', runs.map((r) => r.lang).join(','), 'de,en,de,en,de,en');
+  t.eq('Lauf 1 ist deutsch', runs[0].text, 'Ein ');
+  t.eq('Lauf 2 ist der Fachbegriff', runs[1].text, 'Robo Advisor ');
+  t.eq('Lauf 4 ist der zweite Fachbegriff', runs[3].text, 'Compound Interest ');
+  t.eq('Segmente konkatenieren exakt',
+    runs.map((r) => r.text).join(''), 'Ein Robo Advisor nutzt Compound Interest und Cost Averaging.');
+
+  t.eq('Cashflow wechselt, Satzgerüst bleibt deutsch',
+    api.languageRuns('Der Cashflow kommt jeden Monat.', 'de').map((r) => r.lang).join(','), 'de,en,de');
+  t.eq('Buy and Hold bleibt ein Lauf',
+    api.languageRuns('Mit Buy and Hold bleibst du flexibel.', 'de')
+      .filter((r) => r.lang === 'en').map((r) => r.text.trim()).join('|'), 'Buy and Hold');
+  t.eq('Rein deutscher Satz bleibt ein Lauf',
+    api.languageRuns('Der Tarifwechsel spart im Schnitt 300 Euro pro Jahr.', 'de').length, 1);
+  t.eq('Scheinfreunde kippen nicht (was/hat/will)',
+    api.languageRuns('Was hat er damit gemeint?', 'de').length, 1);
+  t.eq('Kein Sprachwechsel für einsame Funktionswörter',
+    api.languageRuns('The Big Short erklärt die Krise.', 'de').length, 1);
+  t.eq('Das Komma bleibt beim Stimmwechsel in der Artikelsprache hörbar ruhig',
+    api.languageRuns('Wer seinen Emergency Fund aufbaut, schläft besser.', 'de')
+      .filter((r) => r.lang === 'en').map((r) => r.text).join(''), 'Emergency Fund ');
+
+  for (const probe of [
+    'Ein Robo Advisor nutzt Compound Interest und Cost Averaging.',
+    'Der Cashflow kommt jeden Monat.',
+    'Switching your tariff can save money, und die Versicherung kostet mehr.',
+    'Was hat er damit gemeint?',
+  ]) {
+    const segs = api.languageRuns(probe, 'de');
+    t.ok('Konkatenations-Vertrag: ' + probe.slice(0, 30),
+      segs.map((s) => s.text).join('') === probe && segs.length > 0);
+  }
+}
+
+t.group('8c) Wortlauf-Regie: Deutsche Einschübe im EN-Artikel + Wiedergabe');
+{
+  // Wiedergabe: Die Äußerungs-Folge muss die Stimmwechsel tragen.
+  const { win } = loadPage(skeleton({
+    title: 'Robo Advisor',
+    bodyHtml: '<h2>Robo Advisor</h2>'
+      + '<p>Ein Robo Advisor nutzt Compound Interest und Cost Averaging. Der Wechsel spart bis zu 650 Euro im Jahr.</p>',
+  }), { voices: CATALOGS['Windows/Edge (Online Neural)'] });
+  const spoken = [];
+  const origSpeak = win.speechSynthesis.speak.bind(win.speechSynthesis);
+  win.speechSynthesis.speak = (u) => {
+    spoken.push({ lang: u.lang, text: u.text, voice: u.voice ? u.voice.name : null });
+    return origSpeak(u);
+  };
+  const api = win.__ffVoice;
+  api.start();
+  await sleep(2500);
+
+  const enParts = spoken.filter((s) => s.lang === 'en-US').map((s) => s.text.trim());
+  t.ok('Englische Läufe werden von der EN-Stimme gesprochen', enParts.length > 0,
+    JSON.stringify(enParts));
+  t.ok('„Robo Advisor“ klingt englisch',
+    enParts.some((x) => x.includes('Robo Advisor')), JSON.stringify(enParts));
+  t.ok('„Compound Interest“ klingt englisch',
+    enParts.some((x) => x.includes('Compound Interest')), JSON.stringify(enParts));
+  t.ok('„Cost Averaging“ klingt englisch',
+    enParts.some((x) => x.includes('Cost Averaging')), JSON.stringify(enParts));
+  t.ok('Deutsche Satzgerüste bleiben deutsch',
+    spoken.some((s) => s.lang === 'de-DE' && s.text.trim() === 'nutzt'),
+    JSON.stringify(spoken.map((s) => s.text)));
+  t.ok('Deutsche Restsätze vollständig',
+    spoken.some((s) => s.lang === 'de-DE' && s.text.includes('Der Wechsel spart')));
+  t.ok('Alle EN-Äußerungen tragen die männliche EN-Stimme',
+    spoken.filter((s) => s.lang === 'en-US').every((s) => s.voice === 'Microsoft Andrew Online (Natural) - English (United States)'));
+  t.ok('Lesen läuft ohne Stall zu Ende', api.reading === false || api.playing === true);
+
+  // Deutsche Einschübe im englischen Artikel
+  const { win: win2 } = loadPage(skeleton({
+    title: 'Compare tariffs',
+    lang: 'en',
+    bodyHtml: '<h2>Switching providers</h2>'
+      + '<p>Compare your insurance costs, und die Versicherung kostet mehr.</p>',
+  }), { voices: CATALOGS['Windows/Edge (Online Neural)'] });
+  const api2 = win2.__ffVoice;
+  t.eq('EN-Basis erkannt', api2.lang, 'en');
+  const segs = api2.languageRuns('Compare your insurance costs, und die Versicherung kostet mehr.', 'en');
+  t.ok('Deutscher Einschub wird als de-Lauf markiert',
+    segs.some((s) => s.lang === 'de' && s.text.includes('und die Versicherung')),
+    JSON.stringify(segs));
 }
 
 t.group('9) Keine Regler, kein Umschalter – die Oberfläche bleibt aufgeräumt');

@@ -4,6 +4,8 @@
 
 > **Nachtrag (05.09.2026):** Das Tabellenmodell wurde am selben Tag auf Generation 2 gehoben (vollständige Zeilen-/Spalten-Erkennung inkl. ARIA-Tabellen, colspan/rowspan, Summen- und Werbelink-Zeilen). Aktuelle Beschreibung und Gate-Zähler: `VORLESEN-TABELLEN-HIGHEND-REPORT.md`.
 
+> **Nachtrag 2 (05.09.2026, Wortlauf-Reparatur):** Zwei Live-Befunde behoben, Version `2026.09.05-c`, +110 Gates (gesamt 805): **(1) Doppel-Lesen** — ein `**Lead-in:**` am Blockanfang (z. B. „Tarifwechsel als größter Hebel:“ auf `/pillar/strom-sparen/`) erklang nach seinem Block ein zweites Mal; Ursache war die Knotenzahl-Regel in `isStandaloneEmphasis()` (Textknoten zählten als Geschwister). Repariert über Textanteil-Regel plus Vorfahren-Schleuse. **(2) Sprachwechsel mitten im Satz** — das Routing entschied nur je Satz, englische Fachbegriffe im deutschen Satz klangen deutsch. Neu ist die Wortlauf-Regie (`languageRuns` ↔ `language_runs`): Jede Sprecheinheit wird in Sprachläufe zerlegt; Tonspur UND Browserstimme sprechen jeden Lauf mit der passenden männlichen Stimme — satzteil-genau, ohne Umschalter, mit Scheinfreund-Schutz („was/hat/will“ kippen nie). Details, Hörbeispiele und Gate-Tabelle: `VORLESEN-WORTLAUF-REPARATUR-2026-09-05.md`.
+
 ---
 
 ## 1 · Auftrag
@@ -56,7 +58,7 @@ Umsetzung: Rückbau betrifft auch die **Kurzfassung** (beide Lesehilfen teilen s
 
 | Datei | Zeilen | Aufgabe |
 |---|---:|---|
-| `static/premium/ff-voice.js` | ~2.600 | Reader-Engine: Dokumentmodell, Aussprache, Prosodie, Stimmen-Regie, zwei Tonpfade, Fortschritt, Kurzfassung |
+| `static/premium/ff-voice.js` | ~3.100 | Reader-Engine: Dokumentmodell, Aussprache, Prosodie, Stimmen-Regie, zwei Tonpfade, Fortschritt, Kurzfassung |
 | `assets/css/extended/ff-voice.css` | ~430 | Styling: Slot ohne Layout-Sprung, Mini-Player, Fortschritt, Dialog, Darkmode, Reduced-Motion, Print |
 | `layouts/_partials/ff_voice_toolbar.html` | ~120 | Toolbar + Konfigurationsblock |
 | `scripts/ff_voice_backends.py` | ~700 | Stimmen-Kette, Aussprache-Regie, Prosodie, WAV-Werkzeuge, Mastering |
@@ -119,14 +121,14 @@ Multilingual-v2 spricht englische Fachbegriffe im deutschen Satz mit **derselben
 
 | Suite | Gates | Prüft |
 |---|---:|---|
-| `ff_voice_functional_test.mjs` | 145 | Echte DOM: Toolbar, Lesereihenfolge, Tabellen, Aussprache DE/EN, Zweisprachigkeit, Atemgruppen, Wiedergabe/Pause/Sprung, Tonspur+Fallback, Kurzfassung, **alle 32 echten Artikel** |
-| `ff_voice_voice_test.js` | 71 | 7 Geräte-Kataloge (macOS, Windows/Edge, Android, Google Cloud, Linux/eSpeak, nur Frauenstimmen, nur neutrale Stimmen) |
-| `ff_voice_parity_check.py` | 176 | Tonspur ≡ Browser-Engine: 30 Aussprache-Beispiele, 3 Seiten-Fixtures Block für Block, Rollenprofile |
+| `ff_voice_functional_test.mjs` | 185 | Echte DOM: Toolbar, Lesereihenfolge, Tabellen, Aussprache DE/EN, Zweisprachigkeit, Atemgruppen, Wiedergabe/Pause/Sprung, Tonspur+Fallback, Kurzfassung, Doppel-Lese-Schleuse, **alle echten Artikel** |
+| `ff_voice_voice_test.js` | 96 | 7 Geräte-Kataloge (macOS, Windows/Edge, Android, Google Cloud, Linux/eSpeak, nur Frauenstimmen, nur neutrale Stimmen), Wortlauf-Regie mit Wiedergabe |
+| `ff_voice_parity_check.py` | 332 | Tonspur ≡ Browser-Engine: 30 Aussprache-Beispiele, 14 Wortlauf-Beispiele, 5 Seiten-Fixtures Block für Block, absolutes Pillar-Fixture, Rollenprofile |
 | `ff_voice_toolbar_check.py` | 89 | Partial-IDs, Einbindung in 3 Layouts, CSS-Klassen, Engine (First-Party, kein Tracking), Rückbau, Workflow |
 | `ff_voice_backends.py --selftest` | 44 | Aussprache, Satzzerlegung, Prosodie, Stimmen, WAV-Werkzeuge |
-| `ff_voice_audio.py --selftest` | 31 | Block-Extraktion, Determinismus, Fingerprint, HTML-Injektion, Artikelsuche |
+| `ff_voice_audio.py --selftest` | 65 | Block-Extraktion, Doppel-Lese-Schleuse, Wortlauf-Regie, Determinismus, Fingerprint, HTML-Injektion, Artikelsuche |
 
-**Stand:** alle Suiten grün (556 Gates).
+**Stand:** alle Suiten grün (805 Gates). Zähler-Verlauf: 556 (Neubau) → 695 (Tabellen-Generation 2) → **805 (Wortlauf-Reparatur)**.
 
 **CI:** Der Workflow **„Lesehilfen-Gate (Vorlesen + Kurzfassung)“** führt alle Suiten bei jedem Push/PR auf Lesehilfen oder Content sowie täglich um 08:20 MESZ aus. Der Deploy erzeugt die Tonspuren inkrementell und **bricht nie wegen Audio ab**.
 
