@@ -1,6 +1,6 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-09-04 21:19 UTC
+**Letzter Lauf:** 2026-09-05 04:06 UTC
 
 **Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
@@ -18,7 +18,6 @@
 - ✅ 2026-08-28 (Freitag): 3
 - ✅ 2026-08-31 (Montag): 3
 - ✅ 2026-09-02 (Mittwoch): 2
-- ✅ 2026-09-04 (Freitag): 2
 
 ## Aktiver Befund
 
@@ -27,10 +26,15 @@
 ## Re-Queue-Integrität (Park-Zustände)
 
 - 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **0**
-- ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **0**
+- ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **2**
 - ✍️ manuelle Entwürfe (von der Automatik unberührt): **4**
 - 🔁 wiederhergestellte Re-Queue-Flags: **0**
 - 🧹 Park-Reste an live-Posts (gefunden, weg mit --fix): **0**
+
+### Gehaltene Posts (bitte prüfen/freigeben)
+
+- `2026-09-03-hausratversicherung-kosten-leistungen-vergleich` – publish-gate: Profi-Affiliate-Check nicht bestanden: A4: FAQPage-Schema fehlt · seit 1 Tagen
+- `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` – publish-gate: Profi-Affiliate-Check nicht bestanden: A4: FAQPage-Schema fehlt · seit 1 Tagen
 
 
 ## Letzte Heilungen
