@@ -38,7 +38,11 @@ on:
       - "layouts/_default/single.html"
       - "layouts/pillar/single.html"
       - "scripts/reader_functional_test.mjs"
+      - "scripts/reader_structure_loudness_test.mjs"
       - "scripts/reader_qa_lib.mjs"
+      - "scripts/reader_tts_backends.py"
+      - "scripts/reader_prosody_parity_check.py"
+      - "layouts/shortcodes/**"
       - "scripts/reader_engine_check.js"
       - "scripts/reader_male_voice_highend_test.js"
       - "scripts/reader_playback_function_test.js"
@@ -97,6 +101,11 @@ jobs:
       - name: Funktionstest Vorlesen + Kurzfassung (echte DOM)
         run: node scripts/reader_functional_test.mjs
 
+      # ---- v10: Vollständigkeit (Überschriften/Tabellen/Übersichten)
+      #      und automatische Lautstärkenanpassung (DE & EN) ----
+      - name: Struktur- & Lautheits-Test (Vorlesen v10)
+        run: node scripts/reader_structure_loudness_test.mjs
+
       # ---- Bestehende Engine-/Stimmen-/Kurzfassungs-Suiten ----
       - name: Reader-Engine-Check
         run: node scripts/reader_engine_check.js
@@ -120,6 +129,11 @@ jobs:
       # chunk-Blockindizes der Tonspur am Reader vorbei.
       - name: Audio-Generator-Selftest (Block-Parität)
         run: python3 scripts/generate_reader_audio.py --selftest
+
+      # Tonspur und Browser-Stimme müssen dieselbe Regie fahren – sonst
+      # klingt derselbe Artikel je nach Gerät unterschiedlich laut.
+      - name: Paritäts-Gate Tonspur ↔ Browser-Stimme
+        run: python3 scripts/reader_prosody_parity_check.py
 
       - name: Toolbar-/Barrierefreiheits-Wache
         run: |

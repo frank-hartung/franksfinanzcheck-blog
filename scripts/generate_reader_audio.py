@@ -170,9 +170,16 @@ def normalize_text(text: str, lang: str = "de") -> str:
 # --------------------------------------------------------------------------
 # Block-Extraktion – 1:1-Port von collectBlocks() aus ff-reader.js
 # --------------------------------------------------------------------------
-READ_SELECTOR = {"h2", "h3", "h4", "p", "li", "blockquote", "table"}
+READ_SELECTOR = {"h2", "h3", "h4", "h5", "h6", "p", "li", "blockquote", "table"}
 READ_BOXES = {"ff-table-scroll", "ff-tarif-card", "ff-einspar-box",
               "ff-kurzantwort", "ff-korrektur", "callout"}
+# Kopf-/Fußzeilen der Premium-Übersichten: Sie stehen AUSSERHALB der
+# Tabelle und wurden vor v10 nie vorgelesen (Parität zu collectBlocks()).
+OVERVIEW_TITLES = {"ff-tv-title", "ff-es-title"}
+OVERVIEW_NOTES = {"ff-tv-sub", "ff-es-sub", "ff-tv-footnote", "ff-es-footnote"}
+# Mobile Kartenansicht: identischer Inhalt wie die Tabelle -> stumm,
+# sonst wird jede Zahl doppelt gesprochen.
+DUPLICATE_CARDS = {"ff-tv-cards", "ff-es-cards"}
 # Container, die samt Inhalt übersprungen werden (JS: closest(...)).
 SKIP_ANCESTORS = {"figure", "script", "style", "noscript", "ff-reader-toolbar",
                   "ff-toc", "ff-share", "ff-related"}
@@ -247,8 +254,18 @@ class DocParser(HTMLParser):
             self.stack[-1].text += data
 
 
+BLOCK_TAGS = {"p", "div", "li", "tr", "td", "th", "h1", "h2", "h3", "h4",
+              "h5", "h6", "blockquote", "section", "article"}
+
+
 def element_text(node: Node) -> str:
-    """Port von readableText(): dekorative/verborgene Teile werden entfernt."""
+    """Port von readableText(): dekorative/verborgene Teile werden entfernt.
+
+    Zeilenumbrüche (<br>) und Blockgrenzen sind Wortgrenzen – ohne diesen
+    Schritt verschmilzt „1200 Euro<br><small>pro Jahr</small>“ zu
+    „1200 Europro Jahr“. Inline-Auszeichnungen (strong/em/span/small)
+    dürfen dagegen NICHT getrennt werden („<strong>fett</strong>er“).
+    """
     parts = []
 
     def walk(n: Node):
@@ -258,10 +275,15 @@ def element_text(node: Node) -> str:
             return
         if "ff-heading-copy" in n.classes or "anchor" in n.classes or "ff-reader-toolbar" in n.classes:
             return
+        if n.tag == "br":
+            parts.append(" ")
+            return
         if n.text:
             parts.append(n.text)
         for c in n.children:
             walk(c)
+            if c.tag in BLOCK_TAGS or c.tag == "br":
+                parts.append(" ")
 
     walk(node)
     return re.sub(r"\s+", " ", " ".join(parts)).strip()
@@ -308,77 +330,120 @@ def parse_tables(node: Node, lang: str, out: list) -> None:
         if caption:
             title = element_text(caption)
     if not title:
+        # Premium-Übersichten tragen ihren Namen in der eigenen Kopfzeile.
+        n: Node | None = node
+        while n is not None and not ({"ff-tarifvergleich", "ff-einspar"} & n.classes):
+            n = n.parent
+        if n is not None:
+            def find_head(x: Node) -> str:
+                if x.classes & OVERVIEW_TITLES:
+                    return element_text(x)
+                for c in x.children:
+                    r = find_head(c)
+                    if r:
+                        return r
+                return ""
+            title = find_head(n)
+    if not title:
         title = "Übersichtstabelle" if lang != "en" else "Overview Table"
 
+    def row_cells(tr: Node) -> list[str]:
+        return [element_text(c) for c in tr.children if c.tag in {"td", "th"}]
+
+    def is_cta_row(tr: Node, cells: list[str]) -> bool:
+        """Reine Aktions-/Deko-Zeile (nur Button) – trägt nichts zum Hören bei."""
+        link_text = ""
+
+        def walk(n: Node) -> None:
+            nonlocal link_text
+            if n.tag in {"a", "button"}:
+                link_text += " " + element_text(n)
+                return
+            for c in n.children:
+                walk(c)
+
+        walk(tr)
+        row_text = " ".join(x for x in cells if x).strip()
+        rest = row_text.replace(link_text.strip(), "").strip()
+        return bool(link_text.strip()) and len(rest) < 12
+
     headers: list[str] = []
-    body_rows: list[list[str]] = []
-    direct_trs: list[list[str]] = []
+    body_rows: list[tuple[list[str], bool]] = []
+    direct_trs: list[tuple[list[str], bool]] = []
     for part in node.children:
         if part.tag == "thead":
             for tr in part.children:
                 if tr.tag == "tr":
-                    headers = [element_text(c) for c in tr.children if c.tag in {"td", "th"}]
+                    headers = row_cells(tr)
                     break
         elif part.tag == "tbody":
             for tr in part.children:
                 if tr.tag == "tr":
-                    body_rows.append([element_text(c) for c in tr.children if c.tag in {"td", "th"}])
+                    cells = row_cells(tr)
+                    if is_cta_row(tr, cells):
+                        continue
+                    body_rows.append((cells, bool({"ff-es-sum", "ff-tv-sum"} & tr.classes)))
         elif part.tag == "tr":
-            direct_trs.append([element_text(c) for c in part.children if c.tag in {"td", "th"}])
+            cells = row_cells(part)
+            if is_cta_row(part, cells):
+                continue
+            direct_trs.append((cells, bool({"ff-es-sum", "ff-tv-sum"} & part.classes)))
 
     if not headers and direct_trs:
-        headers = direct_trs[0]
+        headers = direct_trs[0][0]
     rows = body_rows if body_rows else (direct_trs[1:] if len(direct_trs) > 1 else [])
 
     col_count = max(len(headers), 1)
     row_count = len(rows)
 
-    if lang != "en":
-        intro = f"Tabelle: {title}. Übersicht mit {col_count} Spalten und {row_count} Zeilen."
+    de = lang != "en"
+    if de:
+        intro = (f"Tabelle: {title}. Übersicht mit {col_count} Spalten und einer Zeile."
+                 if row_count == 1 else
+                 f"Tabelle: {title}. Übersicht mit {col_count} Spalten und {row_count} Zeilen.")
         if headers:
             intro += f" Die Spalten lauten: {', '.join(headers)}."
-        out.append((lang, "table-intro", intro))
-        for idx, row in enumerate(rows, 1):
-            row_label = row[0] if row else ""
-            stmts = []
-            for ci, cell in enumerate(row):
-                if not cell:
-                    continue
-                if ci == 0 and row_label:
-                    continue
-                hname = headers[ci] if ci < len(headers) else f"Spalte {ci + 1}"
-                stmts.append(f"{hname}: {cell}")
-            if not stmts and row_label:
-                stmts.append(row_label)
-            if not stmts:
-                continue
-            content = ". ".join(stmts)
-            row_raw = (f"{row_label}. " if row_label else "") + f"Zeile {idx} von {row_count}. {content}."
-            out.append((lang, "table-row", row_raw))
-        out.append((lang, "table-outro", f"Ende der Tabelle {title}."))
     else:
-        intro = f"Table: {title}. Overview with {col_count} columns and {row_count} rows."
+        intro = (f"Table: {title}. Overview with {col_count} columns and one row."
+                 if row_count == 1 else
+                 f"Table: {title}. Overview with {col_count} columns and {row_count} rows.")
         if headers:
             intro += f" The columns are: {', '.join(headers)}."
-        out.append((lang, "table-intro", intro))
-        for idx, row in enumerate(rows, 1):
-            row_label = row[0] if row else ""
-            stmts = []
-            for ci, cell in enumerate(row):
-                if not cell:
-                    continue
-                if ci == 0 and row_label:
-                    continue
-                hname = headers[ci] if ci < len(headers) else f"Column {ci + 1}"
-                stmts.append(f"{hname}: {cell}")
-            if not stmts and row_label:
-                stmts.append(row_label)
-            if not stmts:
+    out.append((lang, "table-intro", intro))
+
+    for idx, (row, is_sum) in enumerate(rows, 1):
+        row_label = row[0] if row else ""
+        stmts = []
+        for ci, cell in enumerate(row):
+            if not cell:
                 continue
-            content = ". ".join(stmts)
-            row_raw = (f"{row_label}. " if row_label else "") + f"Row {idx} of {row_count}. {content}."
-            out.append((lang, "table-row", row_raw))
-        out.append((lang, "table-outro", f"End of table {title}."))
+            if ci == 0 and row_label:
+                continue
+            if ci < len(headers):
+                hname = headers[ci]
+            else:
+                hname = f"Spalte {ci + 1}" if de else f"Column {ci + 1}"
+            stmts.append(f"{hname}: {cell}")
+        if not stmts and row_label:
+            stmts.append(row_label)
+        if not stmts:
+            continue
+        content = ". ".join(stmts)
+        prefix = f"{row_label}. " if row_label else ""
+        if is_sum:
+            lead = "Zusammengerechnet: " if de else "In total: "
+            row_raw = f"{lead}{prefix}{content}."
+        elif row_count == 1:
+            # „Zeile 1 von 1“ ist überflüssiges Geräusch.
+            row_raw = f"{prefix}{content}."
+        elif de:
+            row_raw = f"{prefix}Zeile {idx} von {row_count}. {content}."
+        else:
+            row_raw = f"{prefix}Row {idx} of {row_count}. {content}."
+        out.append((lang, "table-sum" if is_sum else "table-row", row_raw))
+
+    out.append((lang, "table-outro",
+                f"Ende der Tabelle {title}." if de else f"End of table {title}."))
 
 
 def collect_blocks(root: Node, title: str, article_lang: str,
@@ -421,7 +486,8 @@ def collect_blocks(root: Node, title: str, article_lang: str,
     nodes: list[Node] = []
 
     def gather(n: Node):
-        if n.tag in READ_SELECTOR or any(x in READ_BOXES for x in n.classes):
+        if n.tag in READ_SELECTOR or any(x in READ_BOXES for x in n.classes) \
+                or any(x in OVERVIEW_NOTES for x in n.classes):
             nodes.append(n)
         for c in n.children:
             gather(c)
@@ -434,6 +500,10 @@ def collect_blocks(root: Node, title: str, article_lang: str,
         if el.closest(*SKIP_ANCESTORS):
             continue
         if el.closest('[aria-hidden="true"]', '[data-ff-skip-read]') or el.id == "TableOfContents":
+            continue
+
+        # Mobile Kartenansicht der Übersichten: identisch zur Tabelle.
+        if el.closest(*(f".{c}" for c in DUPLICATE_CARDS)):
             continue
 
         el_lang = "en" if (el.attrs.get("lang", article_lang) or "").lower().startswith("en") else "de"
@@ -487,11 +557,18 @@ def collect_blocks(root: Node, title: str, article_lang: str,
             if parent is not None and parent.tag == "ol":
                 idx = next((i for i, s in enumerate(parent.children) if s is el), 0) + 1
                 txt = (f"Punkt {idx}: " if el_lang != "en" else f"Point {idx}: ") + txt
-        if el.tag in {"h2", "h3", "h4"}:
+        if el.tag in {"h2", "h3", "h4", "h5", "h6"}:
             # FAQ-Fragen bleiben Fragen (Parität mit dem Reader).
             heading = re.sub(r"[\s?!.…]+$", "", txt)
             txt = heading + ("?" if re.search(r"\?\s*$", txt) else ".")
-        out.append((el_lang, el.tag, txt))
+
+        # Rollen der Premium-Übersichten (Parität zu collectBlocks()).
+        btype = el.tag
+        if any(c in OVERVIEW_TITLES for c in el.classes):
+            btype = "overview-title"
+        elif any(c in OVERVIEW_NOTES for c in el.classes):
+            btype = "overview-note"
+        out.append((el_lang, btype, txt))
 
     out.append((article_lang, "outro", OUTRO_DE if article_lang != "en" else OUTRO_EN))
     return [(l, t, x) for (l, t, x) in out if len(x) > 1]

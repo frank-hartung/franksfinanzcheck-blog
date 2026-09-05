@@ -142,7 +142,9 @@
       nextAria: 'Nächster Abschnitt',
       tableTitleDefault: 'Übersichtstabelle',
       tableIntro: 'Tabelle: {title}. Übersicht mit {cols} Spalten und {rows} Zeilen.',
+      tableIntroSingular: 'Tabelle: {title}. Übersicht mit {cols} Spalten und einer Zeile.',
       tableRow: 'Zeile {row} von {total}. {content}.',
+      tableSum: 'Zusammengerechnet: {content}',
       column: 'Spalte',
       row: 'Zeile',
       summaryEyebrow: 'Kurzfassung',
@@ -207,7 +209,9 @@
       nextAria: 'Next section',
       tableTitleDefault: 'Overview Table',
       tableIntro: 'Table: {title}. Overview with {cols} columns and {rows} rows.',
+      tableIntroSingular: 'Table: {title}. Overview with {cols} columns and one row.',
       tableRow: 'Row {row} of {total}. {content}.',
+      tableSum: 'In total: {content}',
       column: 'Column',
       row: 'Row',
       summaryEyebrow: 'Summary',
@@ -321,6 +325,21 @@
     var clone = el.cloneNode(true);
     qsa('script, style, noscript, .ff-heading-copy, .anchor, [aria-hidden="true"], .ff-reader-toolbar', clone)
       .forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); });
+    /* Zeilenumbrüche und Blockgrenzen sind Wortgrenzen. Ohne diesen
+       Schritt verschmilzt „1200 Euro<br><small>pro Jahr</small>“ zu
+       „1200 Europro Jahr“ – in Tabellenköpfen und Übersichtskarten
+       (Vorher/Nachher/Ersparnis) war das hörbar falsch. */
+    var ownerDoc = clone.ownerDocument || doc;
+    qsa('br', clone).forEach(function (n) {
+      if (n.parentNode) n.parentNode.replaceChild(ownerDoc.createTextNode(' '), n);
+    });
+    /* Nur ECHTE Blockelemente trennen. Inline-Auszeichnungen
+       (strong/em/span/small) dürfen NIE getrennt werden, sonst wird aus
+       „Ein <strong>fett</strong>er Teil“ ein gesprochenes „fett er“. */
+    qsa('p, div, li, tr, td, th, h1, h2, h3, h4, h5, h6, blockquote, section, article', clone)
+      .forEach(function (n) {
+        if (n.parentNode && n.nextSibling) n.parentNode.insertBefore(ownerDoc.createTextNode(' '), n.nextSibling);
+      });
     return (clone.textContent || '')
       .replace(/\u00a0/g, ' ')
       .replace(/\s+/g, ' ')
@@ -1469,6 +1488,8 @@
     h2:            { rate: 0.90, pitch: 0.88, volume: 1.00, before: 620, after: 340 },
     h3:            { rate: 0.92, pitch: 0.90, volume: 1.00, before: 460, after: 260 },
     h4:            { rate: 0.94, pitch: 0.92, volume: 0.99, before: 360, after: 220 },
+    h5:            { rate: 0.95, pitch: 0.93, volume: 0.99, before: 300, after: 200 },
+    h6:            { rate: 0.96, pitch: 0.94, volume: 0.98, before: 260, after: 180 },
     p:             { rate: 1.00, pitch: 0.96, volume: 1.00, before: 130, after: 190 },
     lead:          { rate: 0.96, pitch: 0.95, volume: 1.00, before: 180, after: 260 },
     li:            { rate: 1.00, pitch: 0.97, volume: 0.99, before: 110, after: 150 },
@@ -1478,12 +1499,129 @@
     'overview-card': { rate: 0.97, pitch: 0.95, volume: 1.00, before: 300, after: 260 },
     'table-intro': { rate: 0.93, pitch: 0.90, volume: 1.00, before: 520, after: 320 },
     'table-row':   { rate: 1.02, pitch: 0.97, volume: 0.98, before: 90,  after: 210 },
+    'table-sum':   { rate: 0.94, pitch: 0.91, volume: 1.00, before: 260, after: 300 },
     'table-outro': { rate: 0.94, pitch: 0.92, volume: 1.00, before: 260, after: 360 },
+    'overview-title': { rate: 0.92, pitch: 0.90, volume: 1.00, before: 520, after: 300 },
+    'overview-note':  { rate: 0.95, pitch: 0.94, volume: 0.98, before: 280, after: 300 },
     intro:         { rate: 0.92, pitch: 0.92, volume: 1.00, before: 0,   after: 520 },
     outro:         { rate: 0.92, pitch: 0.92, volume: 1.00, before: 520, after: 0 }
   };
 
   function prosodyFor(type) { return PROSODY[type] || PROSODY.p; }
+
+  /* ============================================================
+     AUTOMATISCHE LAUTSTÄRKENANPASSUNG (Auto-Gain, v10 · 05.09.2026)
+     ------------------------------------------------------------
+     Warum: Die Rollen-Prosodie allein erzeugt Lautheitssprünge. Eine
+     Tabellenzeile (volume 0.98) direkt nach einer Überschrift (1.00)
+     wirkt subjektiv deutlich leiser, weil sie zusätzlich schneller und
+     höher gesprochen wird. Umgekehrt „springt“ eine Warnbox heraus.
+     Das ist exakt der Punkt, an dem Laien-TTS von einer Verlags-Regie
+     unterscheidbar wird.
+
+     Diese Stufe arbeitet wie die Lautheitsregelung eines Sendestudios
+     (EBU R128 / ITU-R BS.1770 in Prinzip, nicht in Messgenauigkeit —
+     die Web Speech API liefert kein Ausgangssignal zum Messen):
+
+       1. Ziel-Lautheit je Rolle (target) statt starrer Amplitude.
+       2. Kompensation der wahrgenommenen Lautheit: schneller/höher
+          gesprochene Einheiten werden minimal angehoben, langsam/tief
+          gesprochene minimal abgesenkt (Fletcher-Munson-Näherung).
+       3. Kurze Einheiten (Tabellenzellen, Aufzählungen) erhalten einen
+          kleinen Zuschlag – sie sind sonst „weggehuscht“.
+       4. Sprach-Ausgleich DE/EN: EN-Stimmen derselben Familie sind im
+          Katalog im Mittel leiser gemastert als DE-Stimmen.
+       5. Stimmenklasse: einfache (nicht-neurale) Stimmen klingen dumpfer
+          und brauchen mehr Pegel als eine Studio-Neuralstimme.
+       6. Sanfte Begrenzung (Soft-Limiter) statt harter Kappung, damit
+          nichts verzerrt und nichts unhörbar wird.
+       7. Nachbarschafts-Glättung: der Pegelsprung zwischen zwei direkt
+          aufeinanderfolgenden Einheiten bleibt unter LOUDNESS_MAX_STEP.
+
+     Ergebnis: eine durchgehend gleich laute Wiedergabe über
+     Überschriften, Fließtext, Tabellen und Übersichten hinweg — ohne
+     Regler, in beiden Sprachen, auf jedem Gerät.
+  ============================================================ */
+  var LOUDNESS_TARGET = {
+    h2: 1.00, h3: 1.00, h4: 0.99, h5: 0.99, h6: 0.98,
+    p: 0.98, lead: 0.99, li: 0.98,
+    blockquote: 0.95, callout: 0.99, warning: 1.00,
+    'overview-card': 0.99, 'overview-title': 1.00, 'overview-note': 0.96,
+    'table-intro': 1.00, 'table-row': 0.99, 'table-sum': 1.00, 'table-outro': 0.99,
+    intro: 1.00, outro: 1.00
+  };
+  // Grenzen der Automatik: nie unhörbar, nie übersteuert.
+  var LOUDNESS_FLOOR = 0.72;
+  var LOUDNESS_CEIL = 1.00;
+  var LOUDNESS_MAX_STEP = 0.06;   // max. Pegelsprung zwischen zwei Einheiten
+  var lastLoudness = null;        // zuletzt ausgegebener Pegel (Glättung)
+
+  function loudnessTargetFor(type) {
+    var t = LOUDNESS_TARGET[type];
+    return t == null ? LOUDNESS_TARGET.p : t;
+  }
+
+  /* Soft-Limiter: komprimiert nur oberhalb der Kniepunkt-Schwelle,
+     damit laute Rollen sich nicht gegenseitig „plattdrücken“. */
+  function softLimit(v) {
+    var knee = 0.94;
+    if (v <= knee) return v;
+    var over = v - knee;
+    return knee + over / (1 + over * 3.2);
+  }
+
+  /**
+   * Automatische Lautstärkenanpassung für eine Sprech-Einheit.
+   * Deterministisch (gleiche Eingabe → gleicher Pegel), damit die
+   * Tonspur-Parität und die Tests reproduzierbar bleiben.
+   */
+  function autoVolume(unit, profile, voiceRes, effRate, effPitch) {
+    var p = profile || prosodyFor('p');
+    var type = (unit && unit.type) || 'p';
+    var base = p.volume != null ? p.volume : 1.0;
+    var target = loudnessTargetFor(type);
+
+    // 1) Rollen-Ziel und Profil-Amplitude mitteln (Ziel dominiert leicht).
+    var v = base * 0.4 + target * 0.6;
+
+    // 2) Wahrnehmungs-Ausgleich für Tempo und Tonlage. Schnell und hoch
+    //    gesprochene Passagen wirken leiser -> minimal anheben.
+    var rate = effRate || (p.rate || 1);
+    var pitch = effPitch == null ? (p.pitch || 1) : effPitch;
+    v += Math.max(-0.05, Math.min(0.05, (rate - 0.95) * 0.10));
+    v += Math.max(-0.04, Math.min(0.04, (pitch - 0.95) * 0.08));
+
+    // 3) Kurze Einheiten hörbar halten (Tabellenzellen, Listenpunkte).
+    var wc = (unit && unit.words) || wordCountOf(unit && unit.text);
+    if (wc && wc <= 4) v += 0.03;
+    else if (wc && wc <= 8) v += 0.015;
+
+    // 4) Sprach-Ausgleich: EN-Stimmen sind im Mittel leiser gemastert.
+    if (unit && unit.lang === 'en') v += 0.02;
+
+    // 5) Stimmenklasse: einfache Stimmen brauchen mehr Pegel.
+    var tier = (quality && quality.tier) || 'standard';
+    if (tier === 'basic') v += 0.05;
+    else if (tier === 'standard') v += 0.025;
+    // Nicht eindeutig männliche Stimmen laufen abgesenkt in der
+    // männlichen Klangzone – das kostet Lautheit, die hier zurückkommt.
+    if (voiceRes && voiceRes.mode && voiceRes.mode !== 'none' && !voiceRes.explicit) v += 0.02;
+
+    // 6) Soft-Limiter + harte Grenzen.
+    v = softLimit(v);
+    v = Math.max(LOUDNESS_FLOOR, Math.min(LOUDNESS_CEIL, v));
+
+    // 7) Nachbarschafts-Glättung gegen hörbare Pegelsprünge. Nach einer
+    //    Gliederungspause (neuer Block) darf der Pegel frei neu ansetzen.
+    if (lastLoudness != null && !(unit && unit.firstChunk)) {
+      var diff = v - lastLoudness;
+      if (diff > LOUDNESS_MAX_STEP) v = lastLoudness + LOUDNESS_MAX_STEP;
+      else if (diff < -LOUDNESS_MAX_STEP) v = lastLoudness - LOUDNESS_MAX_STEP;
+    }
+    v = Math.max(LOUDNESS_FLOOR, Math.min(LOUDNESS_CEIL, v));
+    lastLoudness = v;
+    return Math.round(v * 1000) / 1000;
+  }
 
   /* ---------- Satzmelodie (v9, 04.09.2026) ----------
      Ein Artikel, der nur aus Feststellungen besteht, klingt wie ein
@@ -1878,6 +2016,16 @@
       var caption = tableEl.querySelector('caption');
       if (caption) title = readableText(caption);
     }
+    /* Premium-Übersichten tragen ihren Namen in der eigenen Kopfzeile
+       (.ff-tv-title / .ff-es-title). Ohne diesen Schritt hieß jede
+       Tarif- und Einspartabelle im Ohr nur „Übersichtstabelle“. */
+    if (!title) {
+      var wrap = tableEl.closest ? tableEl.closest('.ff-tarifvergleich, .ff-einspar') : null;
+      if (wrap) {
+        var head = wrap.querySelector('.ff-tv-title, .ff-es-title');
+        if (head) title = readableText(head);
+      }
+    }
     if (!title) {
       var prev = (tableEl.closest('.ff-table-scroll') || tableEl).previousElementSibling;
       while (prev && !/^H[1-6]$/.test(prev.tagName)) prev = prev.previousElementSibling;
@@ -1899,11 +2047,27 @@
       rows = allTrs.length > 1 ? allTrs.slice(1) : allTrs;
     }
 
+    /* Reine Aktions-/Deko-Zeilen (nur ein Button, „teuer/effizienter“)
+       tragen keine Information zum Hören bei und zerstören die
+       Zeilenzählung („Zeile 3 von 3: Stromanbieter vergleichen“). */
+    rows = rows.filter(function (tr) {
+      if (!tr || (tr.closest && tr.closest('[data-ff-skip-read]'))) return false;
+      var rowText = readableText(tr);
+      if (!rowText) return false;
+      var linkText = '';
+      qsa('a, button', tr).forEach(function (a) { linkText += ' ' + readableText(a); });
+      var rest = rowText.replace(linkText.trim(), '').replace(/\s+/g, ' ').trim();
+      // Bleibt nach Abzug der Buttons nichts Nennenswertes übrig -> stumm.
+      return !(linkText.trim() && rest.length < 12);
+    });
+
     var tableBlocks = [];
     var colCount = Math.max(headers.length, 1);
     var rowCount = rows.length;
 
-    var introRaw = tTexts.tableIntro
+    /* Zahlwort-Kongruenz: „1 Zeilen“ / „1 columns“ ist der klassische
+       Roboter-Verräter. Singular und Plural werden getrennt geführt. */
+    var introRaw = (rowCount === 1 && tTexts.tableIntroSingular ? tTexts.tableIntroSingular : tTexts.tableIntro)
       .replace('{title}', title)
       .replace('{cols}', colCount)
       .replace('{rows}', rowCount);
@@ -1914,7 +2078,6 @@
     tableBlocks.push({ el: introEl, text: introRaw, lang: lang, type: 'table-intro' });
 
     rows.forEach(function (tr, rIdx) {
-      if (tr.closest('[data-ff-skip-read]')) return;
       var cells = qsa('td, th', tr);
       if (!cells.length) return;
 
@@ -1930,10 +2093,22 @@
       if (!statements.length && rowLabel) statements.push(rowLabel);
       if (!statements.length) return;
 
-      var rowRaw = (rowLabel ? rowLabel + '. ' : '') +
-        tTexts.tableRow.replace('{row}', (rIdx + 1)).replace('{total}', rowCount).replace('{content}', statements.join('. '));
+      /* Summenzeilen sind die Pointe einer Einsparübersicht. Sie werden
+         angekündigt und ruhiger/betonter gelesen statt als „Zeile 4 von 4“
+         unterzugehen. */
+      var isSum = !!(tr.classList && (tr.classList.contains('ff-es-sum') || tr.classList.contains('ff-tv-sum')));
+      var rowRaw;
+      if (isSum) {
+        rowRaw = tTexts.tableSum.replace('{content}', (rowLabel ? rowLabel + '. ' : '') + statements.join('. ')) + '.';
+      } else if (rowCount === 1) {
+        // Bei genau einer Zeile ist „Zeile 1 von 1“ überflüssiges Geräusch.
+        rowRaw = (rowLabel ? rowLabel + '. ' : '') + statements.join('. ') + '.';
+      } else {
+        rowRaw = (rowLabel ? rowLabel + '. ' : '') +
+          tTexts.tableRow.replace('{row}', (rIdx + 1)).replace('{total}', rowCount).replace('{content}', statements.join('. '));
+      }
 
-      tableBlocks.push({ el: tr, text: rowRaw, lang: lang, type: 'table-row' });
+      tableBlocks.push({ el: tr, text: rowRaw, lang: lang, type: isSum ? 'table-sum' : 'table-row' });
     });
 
     tableBlocks.push({
@@ -1990,10 +2165,28 @@
       });
     });
 
-    var nodes = qsa('h2, h3, h4, p, li, blockquote, table, .ff-table-scroll, .ff-tarif-card, .ff-einspar-box, .ff-kurzantwort, .ff-korrektur, .callout', content);
+    /* Vollständigkeit auf Agentur-Niveau (v10):
+       - h5/h6 gehören zur Gliederung und wurden bisher übersprungen.
+       - Die Premium-Übersichten (Tarifvergleich, Einspartabelle) rendern
+         ihre Kopfzeile, Unterzeile und Fußnote AUSSERHALB der Tabelle
+         (.ff-tv-title/.ff-tv-sub/.ff-tv-footnote bzw. .ff-es-*). Sie
+         wurden dadurch nie vorgelesen: Die Hörerin erfuhr weder, welche
+         Übersicht folgt, noch den Hinweis darunter. */
+    var nodes = qsa([
+      'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'blockquote',
+      'table', '.ff-table-scroll',
+      '.ff-tarif-card', '.ff-einspar-box', '.ff-kurzantwort', '.ff-korrektur', '.callout',
+      '.ff-tv-footnote', '.ff-es-footnote'
+    ].join(', '), content);
 
     nodes.forEach(function (el) {
       if (el.closest && el.closest('figure, script, style, noscript, [aria-hidden="true"], [data-ff-skip-read], .ff-reader-toolbar, .ff-toc, #TableOfContents, .ff-share, .ff-related')) return;
+
+      /* Die Premium-Übersichten liefern DENSELBEN Inhalt zweimal:
+         als <table> (Desktop) und als Karten-Stapel (Mobil, per CSS
+         umgeschaltet). Beides vorzulesen doppelt jede Zahl. Die Tabelle
+         ist die vollständigere Quelle – der Kartenstapel wird stumm. */
+      if (el.closest && el.closest('.ff-tv-cards, .ff-es-cards')) return;
 
       var elLang = (el.getAttribute('lang') || lang).toLowerCase().indexOf('en') === 0 ? 'en' : 'de';
 
@@ -2039,6 +2232,14 @@
       if (tag === 'blockquote') type = 'blockquote';
       if (tag === 'p' && el.classList && el.classList.contains('ff-lead')) type = 'lead';
 
+      /* Anmoderation und Nachsatz einer Premium-Übersicht: Die Kopfzeile
+         kündigt die Übersicht an (ruhiger, tiefer), die Fußnote steht
+         danach als redaktioneller Hinweis. */
+      var cls = el.classList;
+      if (cls && (cls.contains('ff-tv-title') || cls.contains('ff-es-title'))) type = 'overview-title';
+      else if (cls && (cls.contains('ff-tv-sub') || cls.contains('ff-es-sub'))) type = 'overview-note';
+      else if (cls && (cls.contains('ff-tv-footnote') || cls.contains('ff-es-footnote'))) type = 'overview-note';
+
       // Listenpunkte hörbar als Aufzählung markieren
       var speakText = text;
       if (tag === 'li') {
@@ -2055,7 +2256,7 @@
          Punkt, spricht die Stimme sie als Feststellung („Kann mir das
          Gas abgestellt werden." statt „…werden?"). Genau so stehen die
          FAQ-Überschriften in den Artikeln. */
-      if (/^H[234]$/.test(el.tagName)) {
+      if (/^H[23456]$/.test(el.tagName)) {
         var heading = text.replace(/[\s?!.…]+$/, '');
         speakText = heading + (/\?\s*$/.test(text) ? '?' : '.');
       }
@@ -2120,6 +2321,7 @@
           profile: profile,
           effRate: 1,
           modSign: 1,
+          firstChunk: ci === 0,
           finalChunk: ci === chunks.length - 1,
           before: ci === 0 ? profile.before : 0,
           after: 0
@@ -2266,7 +2468,10 @@
       var p = unit.profile || prosodyFor('p');
       u.rate = Math.min(1.25, Math.max(0.5, unit.effRate || 1));
       u.pitch = autoPitch(unit, p.pitch, voiceRes);
-      u.volume = Math.max(0.1, Math.min(1.0, p.volume != null ? p.volume : 1.0));
+      // Automatische Lautstärkenanpassung (Auto-Gain) statt starrer
+      // Rollen-Amplitude: gleicht Tempo, Tonlage, Einheitslänge, Sprache
+      // (DE/EN) und Stimmenklasse aus und glättet Pegelsprünge.
+      u.volume = Math.max(0.1, Math.min(1.0, autoVolume(unit, p, voiceRes, u.rate, u.pitch)));
 
       var started = false;
       var settled = false;
@@ -2726,6 +2931,7 @@
     errorStreak = 0;
     degradeLevel = 0;
     retryCounts = {};
+    lastLoudness = null;   // Auto-Gain: Glättung startet pro Wiedergabe neu
     playbackRun += 1;
     stopVoicePolling();
     try {
