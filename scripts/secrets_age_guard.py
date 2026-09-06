@@ -41,12 +41,19 @@ PIN_FILE = os.path.join(BLOG_DIR, "data", "pinterest_tokens.enc")
 TODAY = datetime.date.today()
 
 # Wichtige Secrets und ihre "frische Erwartung" (in Tagen bis zur Erinnerung)
+#
+# `optional`: Das Secret ist ein ALTERNATIVER Weg, kein Pflicht-Kanal. Fehlt es,
+# ist das nur dann ein Befund, wenn auch die Alternative fehlt (`alt_of`).
+# Vorher meldete `PINTEREST_TOKEN_KEY` dauerhaft RED, obwohl der Pinterest-Kanal
+# über `PINTEREST_ACCESS_TOKEN` sauber läuft – ein Dauer-Fehlalarm, der die
+# Gesamt-Ampel rot färbte und damit echte rote Befunde unsichtbar machte.
 SECRETS = {
     "GROQ_API_KEY":     {"days": 60,  "label": "Groq KI-Key"},
     "GEMINI_API_KEY":   {"days": 60,  "label": "Gemini KI-Key"},
     "PINTEREST_ACCESS_TOKEN": {"days": 15, "label": "Pinterest Access-Token"},
     "MASTODON_ACCESS_TOKEN":  {"days": 45, "label": "Mastodon Access-Token"},
-    "PINTEREST_TOKEN_KEY":    {"days": 60, "label": "Pinterest Verschlüsselungs-Key"},
+    "PINTEREST_TOKEN_KEY":    {"days": 60, "label": "Pinterest Verschlüsselungs-Key",
+                               "optional": True, "alt_of": "PINTEREST_ACCESS_TOKEN"},
 }
 
 
@@ -94,6 +101,20 @@ def audit():
             # Pinterest kann alternativ über die verschlüsselte Token-Datei laufen
             present = os.path.exists(PIN_FILE)
         if not present:
+            alt = meta.get("alt_of")
+            alt_ok = bool(alt and (os.environ.get(alt, "").strip()
+                                   or (alt == "PINTEREST_ACCESS_TOKEN"
+                                       and os.path.exists(PIN_FILE))))
+            if meta.get("optional") and alt_ok:
+                # Alternativer Auth-Pfad ist aktiv → kein Befund.
+                summary.append((var, f"NICHT GENUTZT (via {alt})"))
+                continue
+            if meta.get("optional"):
+                findings.append({"level": "amber", "code": "missing_optional", "var": var,
+                                 "msg": f"{label} (`{var}`) fehlt – optionaler Pfad; "
+                                        f"aktiv ist keiner: auch `{alt}` fehlt"})
+                summary.append((var, "FEHLT (optional)"))
+                continue
             findings.append({"level": "red", "code": "missing", "var": var,
                              "msg": f"{label} (`{var}`) fehlt im Env"})
             summary.append((var, "FEHLT"))
@@ -187,6 +208,33 @@ def _selftest():
     # Alter-Hysterese: age==days -> nicht stale (strict >), age>days*0.5 -> amber
     if not (40 > 30 * 0.5):
         failures.append("Hysterese-Konstante")
+
+    # --- Optionale Secrets dürfen keinen Dauer-RED erzeugen ---
+    _env_backup = dict(os.environ)
+    try:
+        for var in SECRETS:
+            os.environ.pop(var, None)
+        # Fall A: Access-Token gesetzt → TOKEN_KEY ist ein reiner Alternativpfad
+        os.environ["PINTEREST_ACCESS_TOKEN"] = "dummy"
+        f_a, s_a = audit()
+        if any(x["var"] == "PINTEREST_TOKEN_KEY" for x in f_a):
+            failures.append("PINTEREST_TOKEN_KEY meldet Befund, obwohl "
+                            "PINTEREST_ACCESS_TOKEN aktiv ist (Dauer-Fehlalarm)")
+        if any(x["level"] == "red" and x["var"] == "PINTEREST_TOKEN_KEY" for x in f_a):
+            failures.append("Optionales Secret erzeugt RED")
+        # Fall B: kein Pinterest-Pfad → höchstens AMBER, nie RED
+        os.environ.pop("PINTEREST_ACCESS_TOKEN", None)
+        f_b, _ = audit()
+        tk = [x for x in f_b if x["var"] == "PINTEREST_TOKEN_KEY"]
+        if tk and tk[0]["level"] == "red":
+            failures.append("Optionales Secret ohne Alternative meldet RED "
+                            "statt AMBER")
+        # Pflicht-Secrets bleiben hart rot
+        if not any(x["var"] == "GROQ_API_KEY" and x["level"] == "red" for x in f_b):
+            failures.append("Pflicht-Secret GROQ_API_KEY meldet kein RED mehr")
+    finally:
+        os.environ.clear()
+        os.environ.update(_env_backup)
     if failures:
         print("❌ SECRETS-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:

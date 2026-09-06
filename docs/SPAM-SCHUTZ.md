@@ -95,3 +95,95 @@ python3 scripts/spam_guard.py --reset-pause
 
 # Sabotage-Schutz / CI-Verifikation
 python3 scripts/spam_guard.py --selftest     # Exit 2 = nicht lauffähig
+
+---
+
+## 6. Regel P6/P7 – Repeat-Pin-Schutz (02.09.2026, nach Pinterest-Sperre)
+
+**Anlass:** Pinterest hat das Konto am **15.08.2026** gesperrt.
+
+**Wichtig zur Einordnung – die Sperre kam NICHT aus diesem Repository.**
+Am 15.08. existierte weder der RSS-Auto-Publish (aktiviert 20.08.) noch die
+Pinterest-Strategie (25.08.) noch `data/pinterest_plan.yaml`. Über die API
+wurde nie ein Pin erzeugt (`pin_history.jsonl` leer, kein Artikel trägt
+`pinned: true`). Alle Pins bis zur Sperre entstanden **manuell**.
+
+**Tatsächliche Ursache (Selbstauskunft des Kontoinhabers):** Die Finanz-Pins
+verlinkten überwiegend **das eigene Pinterest-Profil** statt der Blogartikel.
+Damit lagen drei Verstöße gleichzeitig vor: irreführende Verlinkung (Pin-Titel
+versprach einen Ratgeber, Ziel war ein Profil), eine selbstreferenzielle
+Pinterest→Pinterest-Schleife, und faktisch **alle Pins auf eine einzige URL**
+– Link-Spam im Lehrbuchsinn. Der Blog bekam dadurch nie einen Besucher.
+
+Verstärkend: 175 Pins in 6 Tagen auf einem brandneuen Konto (~29/Tag), davon
+87 für die M&M'S Halloween Countdown Challenge (offizielle Pinterest-Einladung,
+kein Verstoß) – gesetzt NACH den Finanz-Pins, also auf ein bereits belastetes
+Konto.
+
+**Wichtig:** `data/pinterest_plan.yaml` enthielt diesen Fehler NICHT – alle 73
+geplanten Pins zeigten korrekt auf eigene Blog-URLs. Die manuelle Umsetzung ist
+von der eigenen Planung abgewichen. Regel P8 sichert das jetzt technisch ab.
+
+**Warum die Regel trotzdem hier steht:** `pinterest_plan.yaml` hätte das
+Repeat-Muster nach einer Reaktivierung **automatisiert wiederholt** – der
+Plan sah bis zu 9 Pins auf denselben Artikel vor, vier Ziele sogar zweimal
+am selben Tag. P6/P7 verhindern, dass derselbe Fehler ein zweites Mal
+passiert, diesmal maschinell.
+
+Ergänzend: Die Cross-Channel-Registry (Abschnitt 3) hätte hier ohnehin nicht
+gegriffen – sie prüft erst beim POSTEN über die API. Manuelles Pinnen und der
+RSS-Auto-Publish umgehen sie vollständig.
+
+| Regel | Grenze | Prüfung |
+|---|---|---|
+| **P6** | max. **3 Pins pro Ziel-URL** im Planungsfenster | `pinterest_plan_guard.py` |
+| **P7** | min. **7 Tage Abstand** zwischen zwei Pins auf dasselbe Ziel | dito |
+
+**Normalisierung:** UTM-Parameter zählen NICHT als neues Ziel
+(`?utm_campaign=pins` und `?utm_campaign=rss` sind derselbe Link) – Pinterest
+bewertet das Ziel, nicht den Tracking-Parameter.
+
+**Heilung (`--fix`), kein Content-Verlust:** Überzählige Pins werden nach
+`data/pinterest_plan_parked.yaml` verschoben, nie gelöscht. Behalten wird je
+Ziel der früheste Pin, danach nur, wer den Abstand wahrt. Ein geparkter Pin
+darf zurück in den Plan, sobald er ein **eigenes Ziel** hat (neuer Artikel).
+
+**Erster Lauf:** 73 → 48 Pins im Plan, 25 geparkt (praeventiv – der Plan war zum Sperrzeitpunkt noch nicht in Benutzung). Verteilung danach: max.
+3 Pins/Ziel, kleinster Abstand 7 Tage. Summe 48 + 25 = 73 (nichts verloren).
+
+**Folgeänderung P4/P2:** Die Mindestmengen (P4 ≥60 Pins, P2 ≥5 Pins/Board)
+wurden auf ≥40 bzw. ≥3 gesenkt. Die alten Schwellen waren nur erreichbar,
+indem derselbe Artikel mehrfach bepinnt wurde – also genau durch das Muster,
+das P6/P7 verbietet. **Eine Mengenvorgabe, die man nur per Wiederholung
+erfüllen kann, ist ein Anreiz zum Spam.** Mehr Pins entstehen ab jetzt durch
+mehr ARTIKEL, nicht durch mehr Pins pro Artikel.
+
+**Dauereinsatz:** Das Gate läuft VOR jedem Pin-Lauf (`pinterest-ai.yml` und
+`repin-weekly.yml`, siehe
+`patches/pinterest-repeat-pin-gate-2026-09-02-workflows.patch`) – erst
+`--selftest`, dann `--fix`. Selftest: 5 eingefrorene Fälle (Same-Day-Repeat,
+gültiger Abstand, P6-Deckel, verschiedene Ziele erlaubt, UTM-Variante).
+
+### Regel P8 – Ziel-Link-Wache (der eigentliche Sperrgrund)
+
+| Prüfung | Regel |
+|---|---|
+| **Pinterest/Kürzer als Ziel** | verboten – `pinterest.com/.de`, `pin.it`, `bit.ly`, `tinyurl`, `t.co`, `ow.ly` |
+| **Fremddomain** | verboten – Ziel muss `franksfinanzcheck.de` sein |
+| **Nackte Startseite** | verboten – Pins brauchen eine konkrete Zielseite |
+| **`http://`** | verboten – immer `https://` |
+| **Leeres Ziel** | verboten |
+
+**Kein Auto-Fix.** Ein falsches Ziel kann das Skript nicht erraten – welcher
+Artikel gemeint war, muss ein Mensch entscheiden. P8 meldet hart und bricht
+den Lauf ab, statt zu raten.
+
+**Warum das die wichtigste Regel ist:** P6/P7 begrenzen, wie OFT ein Ziel
+bepinnt wird. P8 stellt sicher, dass es überhaupt ein sinnvolles Ziel gibt.
+Der Sperrfall vom 15.08. hätte durch P6/P7 allein nicht verhindert werden
+können – die Pins zeigten alle auf dasselbe Profil, was P8 sofort meldet.
+
+**Selftest:** 17 eingefrorene Fälle (12 für P8, davon 3 mit exakt dem realen
+Sperrgrund; 5 für P6/P7). Gegenprobe verifiziert: Werden Pins im Plan
+künstlich auf `de.pinterest.com/franksfinanzcheck/` umgebogen, meldet P8
+alle drei sofort.

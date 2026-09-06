@@ -87,21 +87,32 @@ def _pillar_counts():
 
 
 def _avg_readability():
-    """Nimmt, falls vorhanden, den letzten Lesbarkeits-Report als Basis."""
+    """Misst die Lesbarkeit direkt am Bestand (Ø Flesch, Amstad-deutsch).
+
+    Vorher wurde `VERSTAENDNIS-REPORT.md` nach "Flesch" durchsucht – diese
+    Datei existiert im Repo nicht (der Report heißt TEXTVERSTAENDNIS-*.md und
+    enthält keine Flesch-Werte). Ergebnis war dauerhaft `n/a`, obwohl die
+    Kennzahl in der Scorecard bewertet wird. Jetzt wird sie aus der einen
+    Wahrheitsquelle berechnet, die auch Publish-Gate und Quality-Score nutzen:
+    `readability_check.analyze`.
+    """
+    try:
+        from readability_check import load_article, analyze
+    except ImportError:
+        return None
     scores = []
-    # VERSTAENDNIS-REPORT / LENGTH-REPORT liefern teils Scores; hier lesen wir
-    # die Datei, falls vorhanden, nach "Flesch". Sonst None.
-    for rep in ("VERSTAENDNIS-REPORT.md", "LENGTH-REPORT.md"):
-        fp = os.path.join(BLOG_DIR, rep)
-        if os.path.exists(fp):
-            try:
-                t = open(fp, encoding="utf-8").read()
-                for m in re.findall(r"Flesch[^\d]*(\d{2,3})", t, re.I):
-                    v = int(m)
-                    if 0 <= v <= 100:
-                        scores.append(v)
-            except OSError:
-                pass
+    for p in post_utils.list_post_paths():
+        if os.path.basename(p) == "_index.md":
+            continue
+        try:
+            a = load_article(p)
+            if not a:
+                continue
+            v = analyze(a).get("flesch")
+        except Exception:
+            continue
+        if v is not None and 0 <= v <= 100:
+            scores.append(v)
     if not scores:
         return None
     return round(statistics.mean(scores), 1)
@@ -115,11 +126,23 @@ def _lektor_findings():
         t = open(fp, encoding="utf-8").read()
     except OSError:
         return None
-    # Zähle "Lx" Regel-Zeilen (Report-Tabelle) grob
-    n = 0
-    for m in re.findall(r"\| L\d+ [^|]+ \|\s*(\d+)\s*\|", t):
-        n += int(m)
-    return n
+    # Nur AUTO-behebbare Regeln zählen als "Befund".
+    #
+    # Vorher wurde jede `| Lx ... | n |`-Zeile summiert – also auch die reinen
+    # "(Report)"-Stilradare (L5 Echo, L7 Nominalstil, L8 Weichmacher, L9, L12).
+    # Diese sind bewusst NICHT automatisch behebbar (sie bewerten Stil, nicht
+    # Fehler). Ergebnis: eine dauerhaft gelbe Kennzahl mit der Empfehlung
+    # `lektor_guard.py --fix`, die daran nichts ändern KANN – ein Ratschlag ins
+    # Leere. Jetzt zählen wir das, was der Fix wirklich beheben kann, und
+    # führen die Stil-Hinweise getrennt als Info.
+    auto = advisory = 0
+    for label, val in re.findall(r"\| (L\d+ [^|]+?) \|\s*([\d/]+)\s*\|", t):
+        n = int(val.split("/")[0])
+        if "(Auto" in label:
+            auto += n
+        else:
+            advisory += n
+    return {"auto": auto, "advisory": advisory}
 
 
 def collect():
@@ -165,7 +188,10 @@ def collect():
         "cwv_verdict": cwv.get("verdict", "UNKNOWN"),
         "cwv_findings": len(cwv.get("findings", [])),
         "readability": readability,
-        "lektor": lektor,
+        # `lektor` = auto-behebbare Befunde (steuert Score & Empfehlung),
+        # `lektor_advisory` = reine Stil-Hinweise (Info, nicht abstrafend).
+        "lektor": (lektor or {}).get("auto") if lektor is not None else None,
+        "lektor_advisory": (lektor or {}).get("advisory") if lektor is not None else None,
         "secret_red": secret_red,
         "secret_entries": len(secrets.get("entries") or {}),
         "click_articles": len(click_articles),
@@ -176,6 +202,21 @@ def collect():
         "awin_articles": len(awin.get("articles", {})),
         "awin_unmatched": int(_awin_un or 0),
     }
+
+
+def _readability_lamp(v):
+    """Ampel für den Ø-Flesch-Wert (deutsche Amstad-Skala).
+
+    Unbekannt ist NICHT grün – eine fehlende Messung ist ein Befund, kein
+    Erfolg (vorher färbte `(v or 100) >= 70` sowohl `None` als auch 0 grün).
+    """
+    if v is None:
+        return "⚪"
+    if v >= 60:
+        return "🟢"
+    if v >= 50:
+        return "🟡"
+    return "🔴"
 
 
 def _score(d) -> int:
@@ -248,10 +289,13 @@ def render(d, score):
         f"{'🟢' if d['decay_count'] == 0 else ('🟡' if d['decay_count'] <= 5 else '🔴')} |",
         f"| Core-Web-Vitals | {d['cwv_verdict']} | "
         f"{'🟢' if d['cwv_verdict'] == 'GREEN' else ('🟡' if d['cwv_verdict'] == 'AMBER' else '🔴')} |",
-        f"| Ø Lesbarkeit (Flesch) | {d['readability'] or 'n/a'} | "
-        f"{'🟢' if (d['readability'] or 100) >= 70 else '🟡'} |",
-        f"| Lektorat-Befunde | {d['lektor'] or 'n/a'} | "
-        f"{'🟢' if (d['lektor'] or 0) <= 25 else '🟡'} |",
+        f"| Ø Lesbarkeit (Flesch) | {'n/a' if d['readability'] is None else d['readability']} | "
+        f"{_readability_lamp(d['readability'])} |",
+        f"| Lektorat-Befunde (auto-behebbar) | "
+        f"{'n/a' if d['lektor'] is None else d['lektor']} | "
+        f"{'⚪' if d['lektor'] is None else ('🟢' if d['lektor'] == 0 else '🟡')} |",
+        f"| Stil-Hinweise (Lektorat, nur Info) | "
+        f"{'n/a' if d.get('lektor_advisory') is None else d['lektor_advisory']} | ℹ️ |",
         f"| Tote Secrets | {d['secret_red']} | "
         f"{'🟢' if d['secret_red'] == 0 else '🔴'} |",
         f"| Affiliate-Klicks (Umsatz-Hebel) | {d['total_clicks']} über "
@@ -285,9 +329,16 @@ def render(d, score):
     if d["secret_red"] > 0:
         recs.append("Tote/schwache Secrets – `scripts/secrets_age_guard.py` prüfen "
                     "(Pinterest 30-Tage-Token, Mastodon, KI-Keys).")
-    if d["lektor"] is not None and d["lektor"] > 25:
-        recs.append(f"**{d['lektor']}** Lektorat-Befunde – `scripts/lektor_guard.py --fix` "
-                    "(Doppelwörter, Füll-Phrasen, Person-Mix).")
+    if d["lektor"]:
+        recs.append(f"**{d['lektor']}** auto-behebbare Lektorat-Befunde – "
+                    "`scripts/lektor_guard.py --fix` (Doppelwörter, Füll-Phrasen, "
+                    "Zahlenschreibweise).")
+    # Stil-Hinweise sind KEIN --fix-Fall; sie brauchen redaktionelle Hand.
+    if (d.get("lektor_advisory") or 0) > 120:
+        recs.append(f"**{d['lektor_advisory']}** Stil-Hinweise (Echo, Nominalstil, "
+                    "Weichmacher) – nicht automatisch behebbar. Redaktionell in der "
+                    "Refresh-Queue mitziehen: `scripts/lektor_guard.py` listet die "
+                    "Fundstellen pro Artikel.")
     if d["drafts"] > 0:
         recs.append(f"**{d['drafts']}** Artikel in der Entwurf-Warteschlange – manuelle "
                     "Qualitätsfreigabe prüfen (Kadenz- bzw. Qualitäts-Gate).")
