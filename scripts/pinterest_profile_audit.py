@@ -260,14 +260,15 @@ def main() -> int:
         lines.append("**Board-Namen + Beschreibungen** (Board → Bearbeiten):")
         for b in boards_cfg:
             lines.append("")
-        lines.append(f"### {b['name']}")
-        lines.append("```")
-        lines.append(b.get("description", ""))
-        lines.append("```")
-        cover = BOARD_COVERS.get(b["name"])
-        if cover:
-            lines.append("")
-            lines.append(f"**Board-Cover:** `static/{cover}` (als Cover-Bild in der Board-Bearbeitung hochladen)")
+            lines.append(f"### {b['name']}")
+            lines.append("```")
+            lines.append(b.get("description", ""))
+            lines.append("```")
+            cover = BOARD_COVERS.get(b["name"])
+            if cover:
+                lines.append("")
+                lines.append(f"**Board-Cover:** `static/{cover}` "
+                             "(als Cover-Bild in der Board-Bearbeitung hochladen)")
         if extra:
             lines.append("")
             lines.append("**Boards auflösen/umbenennen** (nicht im Soll-Zustand): "

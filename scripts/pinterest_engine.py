@@ -496,6 +496,12 @@ def main():
               "nichts gepostet.")
         return 1
 
+    # CANARY (27.08.2026): Max. Pins in DIESEM Lauf – nach der Domain-Sperre
+    # darf kein Lauf auf einmal einen Schwung Pins absetzen (Muster, das die
+    # Spam-Markierung mit ausgelöst hat). Rest bleibt für nächste Läufe queue.
+    run_cap = sg.api_run_capacity()
+    print(f"Canary-Limit: max. {run_cap} Pin(s) in diesem Lauf "
+          f"(Rest bleibt für Folge-Läufe).")
     ok, fail = 0, 0
     batch = unpinned[:PINS_PRO_TAG]
     for i, p in enumerate(batch):

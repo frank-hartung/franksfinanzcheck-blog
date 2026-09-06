@@ -73,6 +73,12 @@ import cadence_guard as cad                                # noqa: E402
 
 REPORT = os.path.join(BLOG_DIR, "SPAM-REPORT.md")
 STATE_FILE = os.path.join(BLOG_DIR, "data", "spam_state.json")
+# Domain-Block-Notbremse (27.08.2026): Pinterest hat franksfinanzcheck.de
+# wegen Spam gesperrt → Datei vorhanden = JEGLICHES Auto-Posting blockiert,
+# bis die Domain nach erfolgreicher Prüfung wieder freigegeben ist.
+# Schalten: python3 scripts/spam_guard.py --domain-block "Grund"
+# Aufheben: python3 scripts/spam_guard.py --domain-unblock
+DOMAIN_BLOCK_FILE = os.path.join(BLOG_DIR, "data", "pinterest_domain_block.json")
 HISTORY_FILE = os.path.join(BLOG_DIR, "data", "pin_history.jsonl")
 AUDIT_FILE = os.path.join(BLOG_DIR, "data", "spam_history.jsonl")
 FEED_LOCAL = os.path.join(BLOG_DIR, "public", "index.xml")
@@ -101,6 +107,12 @@ CSV_SCHEDULE_DAYS_AHEAD = 30   # C1: Pinterest-Scheduling-Horizont
 ROTATION_DAYS = 30             # C7/A2: gleicher Link < 30 Tage = Repeat-Pin
 MAX_PER_HOUR = int(os.environ.get("PINTEREST_MAX_PINS_PER_HOUR", "10"))  # A1
 MAX_PER_DAY = int(os.environ.get("PINTEREST_MAX_PINS_PER_DAY", "40"))    # A1
+# Canary-Schutz (27.08.2026, nach Domain-Sperre): Nach der Entsperrung
+# KEIN Massen-Posten auf einmal (das war ein Auslöser der Spam-Markierung).
+# Pro Lauf/Workflow werden höchstens so viele Pins neu erstellt – der Rest
+# bleibt sicher für den nächsten Lauf in der Queue. Nach 2–3 Wochen sauberen
+# Betriebs kann der Wert per Env angehoben werden (z. B. 5).
+MAX_PINS_PER_RUN = int(os.environ.get("PINTEREST_MAX_PINS_PER_RUN", "3"))  # A1b
 PAUSE_ESCALATION_H = (1, 24, 168)   # A3: 1. Fehler 1h, 2. 24h, 3.+ 7 Tage
 
 # HART = konkrete Garantie-/Versprechen (UWG-kritisch, Pinterest "Misleading
@@ -790,6 +802,13 @@ def check_csv(path, check_network=True):
             errs.append("C3: Garantie-Claim im Pin-Text (Misleading)")
 
         # C4 Description-Regeln (Disclosure VOR der Kürzung → ≤ 500 gesamt)
+        # Werbe-Kennzeichnung (UWG + Pinterest-Richtlinie 27.08.2026): Jeder
+        # Pin-Link führt auf einen Blog-Artikel mit Affiliate-Links (/go/ →
+        # CHECK24) → jeder Artikel-Pin IST Werbung und MUSS "*Werbung |"
+        # tragen. Fehlt der Prefix, wird er ergänzt (rechtssicher). Redak-
+        # tionelle Pins auf /pillar/ ohne Affiliate-Links werden vom Generator
+        # gar nicht erzeugt; kämen sie doch vor, bleibt der Prefix erlaubt
+        # (konservative Offenlegung ist nie ein Spam-Signal – fehlende schon).
         if link and "Werbung" not in desc:
             desc = "*Werbung | " + desc
             heals.append("*Werbung-Disclosure ergänzt")
@@ -995,9 +1014,56 @@ def _in_pause(state):
     return False, until
 
 
+# ---------------------------------------------------------------- A0: Domain-Block
+def domain_blocked():
+    """(True, reason) wenn Pinterest die Domain gesperrt hat (Datei vorhanden).
+    Env-Override: PINTEREST_DOMAIN_BLOCKED=1 blockiert, =0 hebt die Datei auf
+    (z. B. für Tests). Die Aufhebung nach echter Entsperrung MUSS manuell per
+    --domain-unblock erfolgen – nie automatisch."""
+    env = os.environ.get("PINTEREST_DOMAIN_BLOCKED", "").strip()
+    if env == "1":
+        return True, "PINTEREST_DOMAIN_BLOCKED=1 (env)"
+    if env == "0":
+        return False, ""
+    try:
+        with open(DOMAIN_BLOCK_FILE, encoding="utf-8") as f:
+            d = json.load(f)
+        return True, (d.get("reason") or "Domain bei Pinterest gesperrt")
+    except Exception:
+        return False, ""
+
+
+def domain_block_set(reason, since=None):
+    data = {"since": since or now_iso(),
+            "reason": reason or "Domain bei Pinterest als Spam markiert",
+            "policy": ("Keine Pins (API/CSV/RSS) auf franksfinanzcheck.de, "
+                       "bis Pinterest die Domain wieder freigegeben hat. "
+                       "Aufhebung nur manuell nach Bestätigung: --domain-unblock.")}
+    with open(DOMAIN_BLOCK_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=1)
+    audit({"module": "spam_guard", "action": "domain-block-set",
+           "reason": data["reason"]})
+    return data
+
+
+def domain_block_clear():
+    try:
+        os.remove(DOMAIN_BLOCK_FILE)
+    except FileNotFoundError:
+        pass
+    audit({"module": "spam_guard", "action": "domain-block-cleared",
+           "by": "manual"})
+
+
 def api_preflight():
-    """A1: Rate-Limit (10/h, 40/Tag) + Eskalations-Pause prüfen. → (ok, msg).
-    Rein lokal (State-Datei) – keine API-Kommunikation, deterministisch."""
+    """A0/A1: Domain-Block + Rate-Limit (10/h, 40/Tag) + Eskalations-Pause.
+    → (ok, msg). Rein lokal (State-Dateien) – deterministisch."""
+    blocked, reason = domain_blocked()
+    if blocked:
+        return False, (f"DOMAIN GESPERRT (A0): {reason} – KEINE Pins "
+                       f"auf {BASE_URL}, bis Pinterest die Domain wieder "
+                       f"freigegeben hat (--domain-unblock). Siehe "
+                       f"PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md.")
     state = load_state()
     in_pause, until = _in_pause(state)
     if in_pause:
@@ -1021,6 +1087,30 @@ def api_preflight():
                        f"Std., {in_day}/{MAX_PER_DAY} pro Tag (A1)")
     return True, (f"Rate-OK ({in_hour}/{MAX_PER_HOUR} Std., "
                   f"{in_day}/{MAX_PER_DAY} Tag)")
+
+
+def api_run_capacity():
+    """A1b: Max. neue Pins, die DIESER Lauf erstellen darf.
+    = min(Canary-Limit pro Lauf, Restkontingent Stunde, Restkontingent Tag).
+    Damit kein Workflow-Lauf nach einer Entsperrung auf einmal 10+ Pins
+    absetzt (Massen-Post-Verhalten war Mit-Auslöser der Spam-Markierung)."""
+    state = load_state()
+    now = now_utc()
+    hour_ago = now - datetime.timedelta(hours=1)
+    day_ago = now - datetime.timedelta(days=1)
+    in_hour = in_day = 0
+    for ts in state.get("created", []):
+        t = _parse_ts(ts)
+        if t is None:
+            continue
+        if t >= hour_ago:
+            in_hour += 1
+        if t >= day_ago:
+            in_day += 1
+    cap = min(MAX_PINS_PER_RUN,
+              max(0, MAX_PER_HOUR - in_hour),
+              max(0, MAX_PER_DAY - in_day))
+    return cap
 
 
 def api_check_pin(pin):
@@ -1199,6 +1289,11 @@ def run_selftest():
 
     STATE_FILE, HISTORY_FILE, AUDIT_FILE, FEED_LOCAL = (
         st_file, hist_file, aud_file, feed_file)
+    # Selftest isoliert auch die Domain-Notbremse: Die A1/A3-Fälle testen
+    # Rate-Limit/Eskalation, nicht den Domain-Status (dieser hat einen
+    # eigenen expliziten A0-Testfall unten).
+    _saved_env = os.environ.get("PINTEREST_DOMAIN_BLOCKED")
+    os.environ["PINTEREST_DOMAIN_BLOCKED"] = "0"
     try:
         now = now_utc()
         fmt = "%Y-%m-%dT%H:%M:%SZ"
@@ -1307,8 +1402,30 @@ def run_selftest():
         ffindings, _feed = check_feed()
         check("F meldet fehlendes Cover (F4)",
               any(r == "F4" for r, _s, _m in ffindings))
+        # ---- A0: Domain-Notbremse (env-override + api_preflight)
+        os.environ["PINTEREST_DOMAIN_BLOCKED"] = "1"
+        ok0, msg0 = api_preflight()
+        check("A0 Domain-Block blockiert preflight",
+              (not ok0) and "DOMAIN" in msg0.upper())
+        os.environ["PINTEREST_DOMAIN_BLOCKED"] = "0"
+        ok0b, _msg0b = api_preflight()
+        check("A0 ohne Block ist preflight frei", ok0b)
+        # ---- A1b: Canary-Kapazität (max. Pins pro Lauf)
+        save_state({})
+        cap = api_run_capacity()
+        check(f"A1b Canary-Kapazität ≤ {MAX_PINS_PER_RUN} bei leerem State",
+              cap == MAX_PINS_PER_RUN)
+        save_state({"created": [
+            (now - datetime.timedelta(minutes=3)).strftime(fmt)
+            for _ in range(MAX_PER_HOUR - 1)]})
+        cap2 = api_run_capacity()
+        check("A1b Kapazität schrumpft mit Stundenkontingent", cap2 == 1)
     finally:
         STATE_FILE, HISTORY_FILE, AUDIT_FILE, FEED_LOCAL = saved
+        if _saved_env is None:
+            os.environ.pop("PINTEREST_DOMAIN_BLOCKED", None)
+        else:
+            os.environ["PINTEREST_DOMAIN_BLOCKED"] = _saved_env
         import shutil
         shutil.rmtree(tmp, ignore_errors=True)
 
@@ -1329,6 +1446,11 @@ def write_report(sections):
     now = now_utc()
     now_str = now.strftime("%Y-%m-%d %H:%M UTC")
     state = load_state()
+    blocked, block_reason = domain_blocked()
+    if blocked:
+        domain_line = f"🔴 GESPERRT – {block_reason} (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)"
+    else:
+        domain_line = "🟢 freigegeben (keine Notbremse)"
     in_pause, until = _in_pause(state)
     if in_pause:
         mins = max(1, int((until - now).total_seconds() // 60) + 1)
@@ -1347,6 +1469,8 @@ def write_report(sections):
         "# 🛡️ SPAM-REPORT (spam_guard.py)",
         "",
         f"**Stand:** {now_str} · Modus: " + ("FIX" if DO_FIX else "CHECK"),
+        "",
+        f"**Domain-Status (Pinterest):** {domain_line}",
         "",
         f"**API-Status:** Pause: {pause_line} · Rate (24h): {len(created)}/{MAX_PER_DAY} "
         f"(davon letzte Std.: {hour_ct}/{MAX_PER_HOUR})",
@@ -1388,6 +1512,28 @@ def main():
         audit({"module": "spam_guard", "action": "pause-reset", "by": "manual"})
         print("✅ API-Pause manuell zurückgesetzt.")
         return 0
+    if "--domain-block" in sys.argv:
+        i = sys.argv.index("--domain-block")
+        reason = sys.argv[i + 1] if i + 1 < len(sys.argv) and not sys.argv[i + 1].startswith("--") else ""
+        data = domain_block_set(reason)
+        print(f"🔴 Domain-Notbremse AKTIV seit {data['since']}: {data['reason']}")
+        print("   Alle Auto-Pinning-Kanäle (Engine/CSV/RSS) blockieren jetzt.")
+        print("   Aufheben NUR nach Bestätigung der Entsperrung durch Pinterest:")
+        print("   python3 scripts/spam_guard.py --domain-unblock")
+        return 0
+    if "--domain-unblock" in sys.argv:
+        domain_block_clear()
+        print("✅ Domain-Notbremse AUFGEHOBEN – Pin-Kanäle wieder frei.")
+        print("   Nur nach Bestätigung ausführen, dass Pinterest die Domain")
+        print("   wieder freigegeben hat (Test-Pin ohne Link + Appeal-Bestätigung).")
+        return 0
+    if "--domain-status" in sys.argv:
+        blocked, reason = domain_blocked()
+        if blocked:
+            print(f"🔴 Domain GESPERRT: {reason}")
+        else:
+            print("🟢 Domain nicht blockiert (keine Notbremsen-Datei).")
+        return 1 if blocked else 0
     if "--gen-csv" in sys.argv:
         max_n = None
         if "--max" in sys.argv:

@@ -128,7 +128,7 @@ def pin_title_valid(t: str) -> bool:
     return bool(t) and len(t) <= PIN_TITLE_MAX
 
 
-def clean_pin_description(beschreibung: str) -> str:
+def clean_pin_description(beschreibung: str, affiliate: bool = False) -> str:
     """Premium-Beschreibung aus dem Plan → pin_description-fertig.
 
     Agentur-Fix 31.08.2026: ALLE Pins tragen `*Werbung |`, da alle Artikel
@@ -254,12 +254,17 @@ def load_posts() -> list:
             if not m:
                 return []
             return [t.strip().strip('"') for t in m.group(1).split(",") if t.strip()]
+        # Affiliate-Status: Artikel enthält /go/-Partnerlinks → jeder Pin
+        # auf diesen Artikel ist rechtlich Werbung (*Werbung-Pflicht).
+        _body = content.split("---", 2)[2] if len(content.split("---", 2)) == 3 else ""
+        affiliate = bool(re.search(r"\]\(/go/", _body))
         posts.append({
             "slug": slug_of(path), "path": path, "content": content,
             "title": fm("title"), "description": fm("description"),
             "tags": fm_list("tags"), "keywords": fm_list("keywords"),
             "pin_title": fm("pin_title"), "pin_description": fm("pin_description"),
             "pinwand": fm("pinwand"), "pillar": fm("pillar"),
+            "affiliate": affiliate,
             "draft": re.search(r"^draft:\s*true", content, re.M) is not None,
         })
     return posts
@@ -367,7 +372,8 @@ def main() -> int:
         sc, rs, idx = max(candidates)
         pin = pins[idx]
         new_title = str(pin.get("titel", "")).strip()[:PIN_TITLE_MAX]
-        new_desc = clean_pin_description(str(pin.get("beschreibung", "")))
+        new_desc = clean_pin_description(str(pin.get("beschreibung", "")),
+                                         affiliate=bool(post.get("affiliate")))
         new_pinwand = str(pin.get("pinwand", "")).strip()
 
         # Plausibilität: Premium-Text muss auch gültig sein
