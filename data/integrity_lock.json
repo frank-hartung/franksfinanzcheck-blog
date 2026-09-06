@@ -1,10 +1,10 @@
 {
-  "signed_at": "2026-09-06T06:06:09.822460+00:00",
-  "head": "14ece4a",
+  "signed_at": "2026-09-06T14:41:33.983281+00:00",
+  "head": "ff4b76b",
   "files": {
     "assets/css/extended/custom.css": "aff792a93c072ab34296406ce97e5d46b36dd877e3d50b89972ee07ced06964b",
-    "data/brand_lock.yaml": "0255fdc804e083ef57b4618732d4251e7f438e59483b52b368d41cdbc32629fc",
-    "hugo.toml": "67b8a0406967762e7251f02f9d3a3a32f5ccd6bac2fb654ad43eba5191990e21",
+    "data/brand_lock.yaml": "3d7386ffdca3a48da91a6532982a3982cefecc5bebf47f69cd45b72e3bfbe100",
+    "hugo.toml": "470686cacf1f1956ddc74b4d55ef44439a5ec32a34c57073b860fa276b60e43d",
     "layouts/_default/_markup/render-link.html": "8776bb0e218456f141d4681a8227c374fc7511b7eadb890434fed4423066d677",
     "layouts/_partials/affiliate_anchor_attrs.html": "7c40d768453393e2b915e819cc0c8922732f9bf43c3c04cab9f7eddf19601cf5",
     "layouts/_partials/cover.html": "22403b44772be99cf6fce541c33461c64e2cc3b4e05c5f52859019475019de9c",
@@ -14,7 +14,7 @@
     "layouts/_partials/header.html": "03828d37e9f0a4423fd3708dae10c2cf50d115988ba6762942d040fb506261ea",
     "layouts/_partials/home_clusters.html": "3caf87074673644ab0d595bb416c7913194ab1ddc9ce4a6dd537020237b2abbb",
     "layouts/_partials/pillar_box.html": "c9f3e598255ca292094ef5fc93bfd565adb05f3c5c1f8957dfb4d6c1d4ac5a34",
-    "layouts/index.sw.js": "1ccb12aef58dca13bc26f7eb1c3e2eefe8ca039dd15de41b3e951fd416383ac6",
+    "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
     "layouts/pillar/list.html": "cc555871339811a460c59fece118c4d0d0baeee4f5e3cb17571a525a261dea1a",
     "layouts/pillar/single.html": "5486e0fb39db6387252b4b95a6dd6d70e893abf474c24f5c8745d769fb0b4608",
     "layouts/robots.txt": "d83e4dba7b2bdc0c565c67aac75e96ff150399d62a659fd482eb05d5b24e4077",
