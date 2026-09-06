@@ -292,11 +292,11 @@ python3 scripts/redaktions_standard.py --register-korrektur --file content/posts
 
 ---
 
-## 🔊 Lesehilfen: Vorlesen + Kurzfassung (FF Voice Studio, neu gebaut 05.09.2026)
+## 🔊 Lesehilfen: Vorlesen + Kurzfassung (FF Voice Studio, Generation 3 · 06.09.2026)
 
-Das alte Vorlese-Modell wurde **vollständig entfernt** und durch **FF Voice Studio** ersetzt – einen Neubau auf Profi-Agentur-Niveau. Jeder Artikel und jede Ratgeberseite bekommt zwei Lesehilfen:
+Das frühere Vorlese-Modell wurde **vollständig entfernt** und durch eine **robustere Hybrid-TTS** ersetzt. Jeder Artikel und jede Ratgeberseite bekommt zwei Lesehilfen:
 
-1. **Vorlesen** – männliche Stimme, **Deutsch und Englisch vollautomatisch**, ohne Sprach-Umschalter, ohne Stimmen-Menü, ohne Regler.
+1. **Vorlesen** – männlich priorisierte, robuste Studio-/Browser-Hybridstimme, **Deutsch und Englisch vollautomatisch**, ohne Sprach-Umschalter, ohne Stimmen-Menü, ohne Regler.
 2. **Kurzfassung** – Verlagshaus-Kurzfassung (Kapital/WirtschaftsWoche/Zeit als Maßstab) in einem barrierefreien Dialog.
 
 ### Zwei Tonpfade, eine Regie
@@ -316,6 +316,7 @@ Die Tonspur läuft im nativen HTML5-Player und klingt dadurch **identisch** auf 
 - **Atemgruppen** – Sätze werden an Konnektoren und Nebensatzgrenzen geteilt; die harte Obergrenze bleibt unter der Chrome-Abbruchgrenze.
 - **Vollständigkeit** – Überschriften aller Ebenen, Listen, Zitate, Fettdruck an seiner Stelle, Premium-Übersichten samt Titel und Fußnote. Tabellen und Übersichten werden vollständig mit Zeilen und Spalten erkannt und gesprochen: HTML- und ARIA-Tabellen (`role="table"/"grid"`, Zeilen über `role="row"`), colspan/rowspan als logisches Gitter, mehrzeilige Köpfe, Zeilentitel (`th scope="row"`), Gruppen- und Summenzeilen (auch im `<tbody>`), Werbelink-Zeilen als offengelegte Empfehlung, Titel aus `<caption>`, `aria-label`, Premium-Headline oder der Überschrift davor (Details: `VORLESEN-TABELLEN-HIGHEND-REPORT.md`).
 - **Barrierefreiheit** – WCAG 2.2 / BITV: Live-Region, Fokus-Falle, Scroll-Sperre, Fokus-Rückkehr, Escape, Tastatursteuerung, `prefers-reduced-motion`, Media Session (Sperrbildschirm/Headset).
+- **Robuster Fortschritt** – gelber, sichtbarer Progress-Meter mit Prozentwert, Modus-Badge, Abschnittslabel und zugänglichem `role="progressbar"`; er bleibt auch bei schwachen `onboundary`-Events durch Zeit-/Block-Interpolation plausibel in Bewegung.
 
 ### Wächter (alle grün)
 

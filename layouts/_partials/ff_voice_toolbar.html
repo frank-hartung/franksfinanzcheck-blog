@@ -1,23 +1,23 @@
 {{- /* ============================================================
     FF VOICE STUDIO — Lesehilfen (Vorlesen + Kurzfassung)
-    Generation 2 · 05.09.2026 · Profi-Agentur-Standard
+    Generation 3 · 06.09.2026 · Profi-Agentur-Standard
     ------------------------------------------------------------
     Jeder Blogbeitrag (Section/Type "posts") und jede Ratgeber-Seite
     ("pillar", "ratgeber") erhält zwei Lesehilfen auf Verlagsniveau:
 
-      1. "Vorlesen"   – Zwei garantierte Tonpfade, keine Regler,
-                        keine Stimmenwahl, kein Sprachumschalter:
+      1. "Vorlesen"   – Robuste Hybrid-TTS mit zwei Tonpfaden,
+                        ohne Stimmen-Menü und ohne Umschalter:
                         (a) STUDIO-TONSPUR: vorab vertonte MP3
-                            (männliche DE-/EN-Stimme, serverseitig
-                            erzeugt durch scripts/ff_voice_audio.py)
-                            im nativen HTML5-Player – identischer
-                            Klang auf iPhone, Mac, Tablet, Android,
-                            PC und in jedem Browser.
+                            (DE/EN, serverseitig erzeugt durch
+                            scripts/ff_voice_audio.py) im nativen
+                            HTML5-Player – identischer Klang auf
+                            iPhone, Mac, Tablet, Android und PC.
                         (b) BROWSER-ENGINE: lokale Web-Speech-Engine
-                            mit derselben Regie als sofortiger
-                            Fallback, wenn keine Tonspur vorliegt.
-                        Männliche Stimme, Deutsch und Englisch
-                        volautomatisch (satzniveau-genaues Routing).
+                            als sofortiger Fallback mit derselben
+                            Aussprache-, Tabellen- und Fortschritts-
+                            Regie.
+                        Tabellen, Zeilen, Spalten und Übersichten
+                        werden vollständig im Lesemodell erfasst.
 
       2. "Kurzfassung" – Verlagshaus-Kurzfassung in einem
                         barrierefreien <dialog>: Kurzantwort,
@@ -93,7 +93,14 @@
       <span class="ff-voice-bar__status" id="ff-voice-status" role="status" aria-live="polite"></span>
     </div>
 
-    <span class="ff-voice-progress" aria-hidden="true"><span class="ff-voice-progress__bar" id="ff-voice-progress"></span></span>
+    <div class="ff-voice-meter" id="ff-voice-meter" role="progressbar" aria-label="Vorlesefortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 %">
+      <div class="ff-voice-meter__meta">
+        <span class="ff-voice-meter__mode" id="ff-voice-progress-mode">Bereit</span>
+        <span class="ff-voice-meter__label" id="ff-voice-progress-label">Noch nicht gestartet</span>
+        <span class="ff-voice-meter__value" id="ff-voice-progress-value">0 %</span>
+      </div>
+      <span class="ff-voice-progress-shell" aria-hidden="true"><span class="ff-voice-progress" id="ff-voice-progress"></span></span>
+    </div>
   </div>
 </div>
 <script type="application/json" id="ff-voice-config">{{ dict "title" $title "kurzantwort" $kurzantwort "description" $description "readingTime" $readingTime "wordCount" $wordCount "lang" $pageLang "siteName" site.Title "author" $author "date" $dateStr "updated" $updatedStr "category" $categoryStr "slug" $slug "permalink" .RelPermalink | jsonify | safeJS }}</script>

@@ -221,7 +221,14 @@ function pageHtml({ speech = 'double', speechMode = 'working', speechVoices = 'm
 </div>
 <button type="button" id="ff-voice-summary" aria-haspopup="dialog"><span id="ff-voice-summary-label">Kurzfassung</span></button>
 <div class="ff-voice-bar__meta"><span id="ff-voice-remaining"></span><span id="ff-voice-status" role="status" aria-live="polite"></span></div>
-<span class="ff-voice-progress"><span id="ff-voice-progress" style="display:block;height:6px;width:0%;background:#0a7"></span></span>
+<div class="ff-voice-meter" id="ff-voice-meter" role="progressbar" aria-label="Vorlesefortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 %">
+  <div class="ff-voice-meter__meta">
+    <span class="ff-voice-meter__mode" id="ff-voice-progress-mode">Bereit</span>
+    <span class="ff-voice-meter__label" id="ff-voice-progress-label">Noch nicht gestartet</span>
+    <span class="ff-voice-meter__value" id="ff-voice-progress-value">0 %</span>
+  </div>
+  <span class="ff-voice-progress-shell" aria-hidden="true"><span class="ff-voice-progress" id="ff-voice-progress" style="display:block;height:6px;width:0%;background:#facc15"></span></span>
+</div>
 </div></div>
 <div class="post-content">${bodyHtml}</div>
 </article></main>
@@ -547,7 +554,7 @@ async function main() {
     await page.click('#ff-voice-play');
     await page.waitForFunction(() => !window.__ffVoice.reading, null, { timeout: 3000 }).catch(() => {});
     const s = await snap();
-    ok('Ehrlicher Stupp nach max. 2 Versuchen', s.reading === false && s.spoken <= 2, 'versuche=' + s.spoken);
+    ok('Ehrlicher Stopp nach max. 2 Versuchen', s.reading === false && s.spoken <= 2, 'versuche=' + s.spoken);
     ok('Status nennt Geräte-Grenze', /nicht verfügbar/.test(s.status), s.status);
     ok('Fortschritt bleibt 0 %', s.progress === 0);
     ok('everStarted bleibt false', s.everStarted === false);

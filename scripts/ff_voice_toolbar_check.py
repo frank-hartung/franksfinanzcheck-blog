@@ -45,13 +45,14 @@ REQUIRED_IDS = [
     "ff-voice-slot", "ff-voice-bar", "ff-voice-play", "ff-voice-play-label",
     "ff-voice-prev", "ff-voice-next", "ff-voice-stop", "ff-voice-summary",
     "ff-voice-summary-label", "ff-voice-status", "ff-voice-remaining",
-    "ff-voice-progress", "ff-voice-config",
+    "ff-voice-meter", "ff-voice-progress-mode", "ff-voice-progress-label",
+    "ff-voice-progress-value", "ff-voice-progress", "ff-voice-config",
 ]
 
 REQUIRED_CSS_CLASSES = [
-    "ff-voice-slot", "ff-voice-bar", "ff-voice-btn", "ff-voice-progress",
-    "ff-voice-bar--floating", "ff-voice-active", "ff-voice-dialog",
-    "ff-voice-figures", "ff-voice-toc",
+    "ff-voice-slot", "ff-voice-bar", "ff-voice-btn", "ff-voice-meter",
+    "ff-voice-progress", "ff-voice-progress-shell", "ff-voice-bar--floating",
+    "ff-voice-active", "ff-voice-dialog", "ff-voice-figures", "ff-voice-toc",
 ]
 
 REMOVED_MARKERS = [
@@ -135,6 +136,8 @@ def main() -> int:
     check("CSS: Slot reserviert Höhe (kein CLS)", "min-height" in css)
     check("CSS: Mini-Player fixiert", "position: fixed" in css)
     check("CSS: Darkmode berücksichtigt", 'data-theme="dark"' in css)
+    check("CSS: gelber Progress-Meter vorhanden",
+          "ff-voice-meter" in css and "ffv-yellow" in css and "ff-voice-progress-shell" in css)
     check("CSS: prefers-reduced-motion berücksichtigt", "prefers-reduced-motion" in css)
     check("CSS: Fokus sichtbar", ":focus-visible" in css)
     check("CSS: Druckausgabe ohne Toolbar", "@media print" in css)
