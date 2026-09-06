@@ -27,6 +27,12 @@ const VERSION = '{{ getenv "HUGO_JSDELIVR_SHA" | default "dev" }}';
 const CACHE = 'ff-assets-' + VERSION;
 
 /* Statische Assets, die cache-first bedient werden */
+/* Bewusst OHNE .mp3: Die Audiofassungen sind mehrere Megabyte groß und
+   werden über HTTP-Range-Anfragen abgespielt (Spulen, Wiedereinstieg).
+   Antworten aus dem Cache-API bedienen Range-Requests nicht zuverlässig –
+   ein cache-first auf .mp3 würde das Spulen auf iPhone und Android
+   kaputtmachen. Audio bleibt deshalb im nativen Netzwerkpfad des
+   Browsers, der Range korrekt unterstützt. Nicht „nachbessern". */
 const ASSET_RE = /\.(woff2?|avif|webp|jpe?g|png|gif|svg|css|js|ico|txt|xml|json)$/;
 
 /* Kritische Fonts direkt bei der Installation precachen: Sie wurden vom

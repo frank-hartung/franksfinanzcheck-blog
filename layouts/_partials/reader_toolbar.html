@@ -1,0 +1,122 @@
+{{- /* ============================================================
+    PREMIUM READER-TOOLBAR (Vorlesen + Kurzfassung) — 03.09.2026
+    ------------------------------------------------------------
+    Jeder Blogbeitrag (Section/Type "posts") und jede Ratgeber-Seite
+    (Section/Type "pillar", "ratgeber") bekommt zwei erstklassige
+    Lesehilfen auf Profi-Agentur- und Chefredakteur-Niveau:
+
+      1. "Vorlesen"    – liest den Artikel mit einer sonoren, warmen
+                         männlichen Stimme (Web Speech API) vor.
+                         Beherrscht sowohl Deutsch (DE) als auch
+                         Englisch (EN) vollautomatisch (ohne Umschalter).
+                         Erweitert auf Tabellen & Übersichten für
+                         maximale Barrierefreiheit (WCAG 2.2 AAA / BITV)
+                         mit zeilenweiser Live-Synchronisation.
+                         Highend-Level v5 (Capital/WirtschaftsWoche/Die
+                         Zeit als Maßstab): nur männliche Stimme,
+                         DE & EN vollautomatisch ohne Umschalter,
+                         Zero-Latency-Ton-Garantie (keine Stummheit),
+                         automatische Qualitätsanpassung (beste
+                         Studio-/Neural-Stimme, Tempo, Chunking),
+                         Konnektoren-Atemgruppen, Final-Längung,
+                         satzgenauer Fortschritt, schwebender
+                         Mini-Player beim Scrollen – ohne Regler,
+                         ohne Stimmenwahl, ohne Tastatur-Hinweis.
+
+      2. "Kurzfassung" – öffnet die vollständige Verlagshaus-Kurzfassung
+                         (Capital/WirtschaftsWoche/Die Zeit als Maßstab)
+                         in einem barrierefreien <dialog>:
+                         Kurzantwort („Das Wichtigste in 30 Sekunden“),
+                         3–5 redaktionell gerankte Kernaussagen, Zahlen
+                         auf einen Blick (Big-Number-Karten), interaktives
+                         Inhaltsverzeichnis, Tabellen-Highlights, Byline
+                         (Lesezeit · Wörter · Autor · Stand) sowie
+                         Kopier-Funktion, Fokus-Falle und Scroll-Sperre
+                         (WCAG 2.2 / BITV).
+
+    Styling: assets/css/extended/ff-reader.css
+    Logik:   static/premium/ff-reader.js (first-party, kein Tracking)
+
+    Der .ff-reader-Slot hält das Seitenlayout stabil, während die
+    Toolbar während des Vorlesens als schwebender Mini-Player
+    available bleibt (Verlagshaus-Audioregie).
+
+    Dauerhafte Sicherstellung: Für alle bestehenden und zukünftigen
+    Blogbeiträge und Ratgeberseiten automatisch aktiv.
+============================================================ */ -}}
+{{- if and (or (eq .Section "posts") (eq .Section "pillar") (eq .Type "posts") (eq .Type "pillar") (eq .Section "ratgeber") (eq .Type "ratgeber")) (eq .Kind "page") (ne .Params.hideReaderToolbar true) -}}
+{{- $title := .Title | plainify -}}
+{{- $kurzantwort := .Params.kurzantwort | default "" -}}
+{{- $description := .Description | default "" -}}
+{{- $readingTime := .ReadingTime -}}
+{{- $wordCount := .WordCount -}}
+{{- $pageLang := .Language.Lang | default site.LanguageCode | default "de" -}}
+{{- $author := .Params.author | default site.Params.author | default "" -}}
+{{- $dateStr := .Date | time.Format "02.01.2006" -}}
+{{- $updatedStr := "" -}}
+{{- if and .Lastmod (gt .Lastmod .Date) }}{{ $updatedStr = .Lastmod | time.Format "02.01.2006" }}{{ end -}}
+{{- $categoryStr := "" -}}
+{{- with .Params.categories -}}
+  {{- if reflect.IsSlice . -}}
+    {{- $categoryStr = index . 0 -}}
+  {{- else -}}
+    {{- $categoryStr = . -}}
+  {{- end -}}
+{{- end -}}
+<div class="ff-reader-slot">
+<div class="ff-reader-toolbar" id="ff-reader-toolbar" role="region" aria-label="Lesehilfen: Vorlesen und Kurzfassung" data-page-lang="{{ $pageLang }}">
+  <span class="ff-reader-toolbar__label" aria-hidden="true">Lesen &amp; Verstehen</span>
+
+  <button type="button" class="ff-reader-btn ff-reader-btn--listen" id="ff-listen-btn" aria-pressed="false" aria-label="Artikel vorlesen">
+    <span class="ff-reader-btn__icon ff-reader-btn__icon--listen" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path d="M19 11a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V20H8a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2h-3v-2.08A7 7 0 0 0 19 11Z"/></svg>
+    </span>
+    <span class="ff-reader-btn__label" id="ff-listen-label">Vorlesen</span>
+  </button>
+
+  <button type="button" class="ff-reader-btn ff-reader-btn--nav" id="ff-listen-prev" aria-label="Vorheriger Abschnitt">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 5 8 12l10 7V5Z"/><rect x="5" y="5" width="2.2" height="14" rx="1"/></svg>
+  </button>
+
+  <button type="button" class="ff-reader-btn ff-reader-btn--nav" id="ff-listen-next" aria-label="Nächster Abschnitt">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5l10 7L6 19V5Z"/><rect x="16.8" y="5" width="2.2" height="14" rx="1"/></svg>
+  </button>
+
+  <button type="button" class="ff-reader-btn ff-reader-btn--stop" id="ff-listen-stop" aria-label="Vorlesen beenden">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+  </button>
+
+  <button type="button" class="ff-reader-btn ff-reader-btn--summary" id="ff-summary-btn" aria-haspopup="dialog" aria-label="Kurzfassung des Artikels anzeigen">
+    <span class="ff-reader-btn__icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h10"/></svg>
+    </span>
+    <span class="ff-reader-btn__label" id="ff-summary-label">Kurzfassung</span>
+  </button>
+
+  <span class="ff-reader-toolbar__remaining" id="ff-reader-remaining" aria-hidden="true"></span>
+  <span class="ff-reader-toolbar__status" id="ff-reader-status" role="status" aria-live="polite"></span>
+  <span class="ff-reader-progress" aria-hidden="true"><span class="ff-reader-progress__bar" id="ff-reader-progress-bar"></span></span>
+</div>
+</div>
+{{- /* ---------- First-Party-Audiofassung (Garantie-Stufe) ----------
+       Liegt unter static/audio/<slug>.mp3 eine serverseitig gerenderte
+       Fassung, wird sie VOR der Web Speech API genutzt. HTML5-<audio>
+       läuft auf iPhone/iPad/Mac/Android/PC in Chrome, Firefox, Safari,
+       Edge und Samsung Internet gleich – unabhängig davon, welche
+       Stimmen das Betriebssystem anbietet. Die Zeitkarte liefert die
+       Abschnittssprünge. Fehlt die Datei, greift automatisch die
+       Web-Speech-Stufe (siehe static/premium/ff-reader.js). */ -}}
+{{- $audioUrl := "" -}}
+{{- $audioMapUrl := "" -}}
+{{- with .File }}
+  {{- $mp3 := printf "static/audio/%s.mp3" .ContentBaseName -}}
+  {{- if os.FileExists $mp3 }}
+    {{- $audioUrl = partial "asset_url.html" (printf "audio/%s.mp3" .ContentBaseName) -}}
+    {{- if os.FileExists (printf "static/audio/%s.timemap.json" .ContentBaseName) }}
+      {{- $audioMapUrl = partial "asset_url.html" (printf "audio/%s.timemap.json" .ContentBaseName) -}}
+    {{- end }}
+  {{- end }}
+{{- end -}}
+<script type="application/json" id="ff-reader-config">{{ dict "title" $title "kurzantwort" $kurzantwort "description" $description "readingTime" $readingTime "wordCount" $wordCount "lang" $pageLang "siteName" site.Title "author" $author "date" $dateStr "updated" $updatedStr "category" $categoryStr "audio" $audioUrl "audioMap" $audioMapUrl | jsonify | safeJS }}</script>
+<script defer src="{{ partial "asset_url.html" "premium/ff-reader.js" }}"></script>
+{{- end -}}
