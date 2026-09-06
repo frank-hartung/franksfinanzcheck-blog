@@ -44,6 +44,7 @@ Selbsttest ohne Netzwerk und ohne Schlüssel:
 from __future__ import annotations
 
 import asyncio
+import math
 import os
 import re
 import shutil
@@ -82,7 +83,10 @@ ENGINE_ORDER = ["edge", "piper", "groq"]
 # 06.09.2026: Bump nach dem Pausen-Spur-Befund — alle bestehenden (defekten)
 # Caches werden invalidiert und beim nächsten Lauf neu vertont bzw. vom
 # Reader-Klienten bis dahin sicher abgewiesen (Plausibilitäts-Gate).
-RECIPE_VERSION = "ff-voice-2026.09.06"
+# 07.09.2026: Bump nach der KERNREPARATUR (edge-tts liefert MP3, die Kette
+# las RIFF/WAVE → jedes Segment scheiterte, 34 Spuren waren Digitalstille).
+# Damit wird JEDE Spur aus der Stille-Ära zwingend neu vertont.
+RECIPE_VERSION = "ff-voice-2026.09.07"
 
 # ---------------------------------------------------------------------------
 # Prosodie-Regie — spiegelbildlich zu PROSODY in static/premium/ff-voice.js
@@ -461,6 +465,217 @@ def read_wav_mono(path: str):
     return list(data), rate
 
 
+def _write_bytes(path: str, data: bytes) -> str:
+    """Kleine Testhilfe: Bytes schreiben und den Pfad zurueckgeben."""
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    with open(path, "wb") as fh:
+        fh.write(data)
+    return path
+
+
+def is_riff_wav(path: str) -> bool:
+    """Erkennt echte RIFF/WAVE-Dateien am Kopf (nicht an der Endung)."""
+    try:
+        with open(path, "rb") as fh:
+            head = fh.read(12)
+    except Exception:
+        return False
+    return len(head) >= 12 and head[0:4] == b"RIFF" and head[8:12] == b"WAVE"
+
+
+def audio_kind(path: str) -> str:
+    """'wav' | 'mp3' | 'ogg' | 'unknown' — nach Dateikopf, nie nach Endung.
+
+    KERNBEFUND 06.09.2026: `edge-tts` liefert IMMER MP3
+    (audio-24khz-48kbitrate-mono-mp3). Die Kette schrieb diesen Strom in
+    eine Datei mit der Endung `.wav` und las sie danach mit dem
+    `wave`-Modul — das scheiterte bei JEDEM Segment („file does not start
+    with RIFF id“). Ergebnis: Tonspuren aus reinen Pausen (Digitalstille),
+    34 Artikel live ohne einen Ton. Seitdem entscheidet der Dateikopf.
+    """
+    try:
+        with open(path, "rb") as fh:
+            head = fh.read(16)
+    except Exception:
+        return "unknown"
+    if len(head) >= 12 and head[0:4] == b"RIFF" and head[8:12] == b"WAVE":
+        return "wav"
+    if head[0:3] == b"ID3":
+        return "mp3"
+    if len(head) >= 2 and head[0] == 0xFF and (head[1] & 0xE0) == 0xE0:
+        return "mp3"
+    if head[0:4] == b"OggS":
+        return "ogg"
+    return "unknown"
+
+
+# --- Dekoder-Kette (ffmpeg → miniaudio → soundfile) -------------------------
+
+def _decode_ffmpeg(path: str, target_rate: int):
+    if not has_ffmpeg():
+        return None
+    cmd = ["ffmpeg", "-v", "error", "-i", path, "-f", "s16le",
+           "-acodec", "pcm_s16le", "-ac", "1", "-ar", str(target_rate), "-"]
+    try:
+        proc = subprocess.run(cmd, capture_output=True, timeout=900)
+    except Exception:
+        return None
+    if proc.returncode != 0 or not proc.stdout:
+        return None
+    raw = proc.stdout
+    n = len(raw) // 2
+    if n <= 0:
+        return None
+    return list(struct.unpack("<%dh" % n, raw[: n * 2])), target_rate
+
+
+def _decode_miniaudio(path: str, target_rate: int):
+    try:
+        import miniaudio  # type: ignore
+    except Exception:
+        return None
+    try:
+        decoded = miniaudio.decode_file(
+            path, output_format=miniaudio.SampleFormat.SIGNED16,
+            nchannels=1, sample_rate=target_rate)
+    except Exception:
+        return None
+    samples = list(decoded.samples)
+    if not samples:
+        return None
+    return samples, target_rate
+
+
+def _decode_soundfile(path: str, target_rate: int):
+    try:
+        import soundfile as sf  # type: ignore
+    except Exception:
+        return None
+    try:
+        data, rate = sf.read(path, dtype="int16", always_2d=True)
+    except Exception:
+        return None
+    try:
+        mono = [int(sum(frame) / len(frame)) for frame in data]
+    except Exception:
+        return None
+    if not mono:
+        return None
+    return mono, int(rate)
+
+
+DECODERS = (
+    ("ffmpeg", _decode_ffmpeg),
+    ("miniaudio", _decode_miniaudio),
+    ("soundfile", _decode_soundfile),
+)
+
+
+def decoder_name() -> str:
+    """Name des ersten verfügbaren Fremdformat-Dekoders ('' = keiner)."""
+    if has_ffmpeg():
+        return "ffmpeg"
+    try:
+        import miniaudio  # noqa: F401
+        return "miniaudio"
+    except Exception:
+        pass
+    try:
+        import soundfile  # noqa: F401
+        return "soundfile"
+    except Exception:
+        pass
+    return ""
+
+
+def decoder_available() -> bool:
+    return bool(decoder_name())
+
+
+def decode_audio_mono(path: str, target_rate: int = SAMPLE_RATE):
+    """Liest JEDES gelieferte Audioformat als (samples, rate).
+
+    WAV geht ohne Fremdwerkzeug (Standardbibliothek), MP3/OGG über die
+    Dekoder-Kette. Wirft, wenn nichts dekodieren kann — der Aufrufer
+    zählt das Segment dann als fehlgeschlagen und die Spur wird
+    verworfen, statt Stille zu veröffentlichen.
+    """
+    kind = audio_kind(path)
+    if kind == "wav":
+        return read_wav_mono(path)
+    for name, fn in DECODERS:
+        got = fn(path, target_rate)
+        if got and got[0]:
+            return got
+    raise ValueError(
+        "Audio-Format '%s' nicht dekodierbar (kein ffmpeg/miniaudio/soundfile): %s"
+        % (kind, os.path.basename(path)))
+
+
+# --- Hörbarkeit messen ------------------------------------------------------
+
+SILENCE_FLOOR = 300        # |Amplitude| unter diesem Wert gilt als Stille
+AUDIBLE_MIN_RATIO = 0.12   # mind. 12 % hörbare Rahmen = echte Sprache
+AUDIBLE_MIN_RMS = 60       # digitale Stille hat RMS 0
+
+
+def audio_stats(samples, sample_rate: int = SAMPLE_RATE) -> dict:
+    """Messwerte einer Tonspur: Spitze, RMS und hörbarer Zeitanteil.
+
+    Die Digitalstille-Spuren auf gh-pages hatten peak = 0 und rms = 0 —
+    messbar, bevor sie jemand veröffentlicht. Der hörbare Anteil zählt
+    20-ms-Rahmen über dem Stille-Boden; er entlarvt auch Spuren, die nur
+    aus einem kurzen Knacken plus Stille bestehen.
+
+    Zehn-Minuten-Artikel haben ~14 Mio. Abtastwerte. Gemessen wird
+    deshalb mit Schrittweite (jeder n-te Wert je Rahmen) — für die
+    Stille-Erkennung exakt genug und um Größenordnungen schneller.
+    """
+    n = len(samples)
+    if not n:
+        return {"peak": 0, "rms": 0.0, "audible_ratio": 0.0, "duration_ms": 0}
+    frame = max(1, int(sample_rate * 0.02))          # 20-ms-Rahmen
+    step = max(1, frame // 24)                        # ~24 Messpunkte je Rahmen
+    peak = 0
+    energy = 0.0
+    counted = 0
+    audible_frames = 0
+    total_frames = 0
+    for start in range(0, n, frame):
+        stop = min(start + frame, n)
+        total_frames += 1
+        local_peak = 0
+        for i in range(start, stop, step):
+            v = samples[i]
+            av = v if v >= 0 else -v
+            if av > local_peak:
+                local_peak = av
+            energy += float(v) * float(v)
+            counted += 1
+        if local_peak > peak:
+            peak = local_peak
+        if local_peak >= SILENCE_FLOOR:
+            audible_frames += 1
+    rms = (energy / counted) ** 0.5 if counted else 0.0
+    return {
+        "peak": int(peak),
+        "rms": round(rms, 2),
+        "audible_ratio": round(audible_frames / float(total_frames or 1), 4),
+        "duration_ms": int(round(n * 1000.0 / sample_rate)),
+    }
+
+
+def has_audible_speech(samples, sample_rate: int = SAMPLE_RATE,
+                       min_ratio: float = AUDIBLE_MIN_RATIO) -> tuple:
+    """(ok, grund) — trägt die Spur echten Ton? Stille wird NIE gedruckt."""
+    st = audio_stats(samples, sample_rate)
+    if st["peak"] <= 0 or st["rms"] < AUDIBLE_MIN_RMS:
+        return False, "Digitalstille (peak=%d, rms=%.1f)" % (st["peak"], st["rms"])
+    if st["audible_ratio"] < min_ratio:
+        return False, "nur %.1f %% hörbarer Anteil" % (st["audible_ratio"] * 100.0)
+    return True, ""
+
+
 def write_wav_mono(path: str, samples, sample_rate: int = SAMPLE_RATE) -> None:
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     packed = struct.pack("<%dh" % len(samples), *[max(-32768, min(32767, int(v))) for v in samples])
@@ -623,6 +838,23 @@ def master_to_mp3(wav_path: str, mp3_path: str, sample_rate: int = SAMPLE_RATE) 
 # ---------------------------------------------------------------------------
 
 def edge_available() -> bool:
+    """Edge-Neuralstimmen nutzbar?
+
+    Seit dem 06.09.2026 gehoert der MP3-Dekoder zur Verfuegbarkeit: Ohne
+    ffmpeg/miniaudio/soundfile kann der MP3-Strom von edge-tts nicht in
+    Ton verwandelt werden — genau daran sind 34 Tonspuren stumm
+    geworden. Fehlt der Dekoder, gilt die Engine als NICHT verfuegbar,
+    die Kette geht auf Piper und der Reader bleibt notfalls ehrlich auf
+    der Geraetestimme.
+    """
+    try:
+        import edge_tts  # noqa: F401
+    except Exception:
+        return False
+    return decoder_available()
+
+
+def edge_module_present() -> bool:
     try:
         import edge_tts  # noqa: F401
         return True
@@ -665,9 +897,32 @@ def _volume_to_edge(volume: float) -> str:
     return "%+d%%" % pct
 
 
+def _cleanup(path: str) -> None:
+    try:
+        if path and os.path.exists(path):
+            os.remove(path)
+    except Exception:
+        pass
+
+
 def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume: float,
                out_wav: str):
-    """Gibt (ok, word_boundaries) zurück. Wortgrenzen in 100-ns-Ticks."""
+    """Ein Segment mit einer Edge-Neuralstimme sprechen.
+
+    KERNREPARATUR 06.09.2026: `edge-tts` liefert einen **MP3-Strom**
+    (audio-24khz-48kbitrate-mono-mp3). Bisher wurde dieser Strom
+    unveraendert in `out_wav` geschrieben und danach mit dem
+    `wave`-Modul gelesen — das scheiterte bei JEDEM Segment
+    („file does not start with RIFF id“). Die Folge: 34 live stehende
+    Tonspuren aus reiner Digitalstille (peak = 0), „kein Ton, die
+    Fortschrittsanzeige rennt durch“.
+
+    Jetzt wird der Strom als MP3 abgelegt, ueber die Dekoder-Kette
+    (ffmpeg / miniaudio / soundfile) geoeffnet, auf Hoerbarkeit geprueft
+    und als echte 24-kHz-Mono-WAV geschrieben. Kein Ton = kein Segment.
+
+    Rueckgabe: (ok, word_boundaries) — Wortgrenzen in 100-ns-Ticks.
+    """
     import edge_tts
     os.makedirs(os.path.dirname(out_wav) or ".", exist_ok=True)
     comm = edge_tts.Communicate(
@@ -677,13 +932,10 @@ def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume
         pitch=_pitch_to_edge(pitch),
     )
     boundaries = []
-    try:
-        loop = asyncio.new_event_loop()
-    except Exception:
-        loop = None
+    src_path = out_wav + ".edge.src"
 
     async def run():
-        with open(out_wav, "wb") as fh:
+        with open(src_path, "wb") as fh:
             async for chunk in comm.stream():
                 if chunk["type"] == "audio":
                     fh.write(chunk["data"])
@@ -695,6 +947,10 @@ def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume
                     })
 
     try:
+        try:
+            loop = asyncio.new_event_loop()
+        except Exception:
+            loop = None
         if loop is None:
             asyncio.run(run())
         else:
@@ -703,12 +959,29 @@ def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume
             finally:
                 loop.close()
     except Exception:
+        _cleanup(src_path)
         return False, []
-    ok = os.path.exists(out_wav) and os.path.getsize(out_wav) > 0
-    return ok, boundaries
+
+    if not os.path.exists(src_path) or os.path.getsize(src_path) == 0:
+        _cleanup(src_path)
+        return False, []
+
+    try:
+        samples, src_rate = decode_audio_mono(src_path, SAMPLE_RATE)
+    except Exception:
+        _cleanup(src_path)
+        return False, []
+    _cleanup(src_path)
+
+    audible, _why = has_audible_speech(samples, src_rate)
+    if not audible:
+        return False, []
+    write_wav_mono(out_wav, samples, src_rate)
+    return True, boundaries
 
 
 def synth_piper(text: str, voice: str, out_wav: str):
+    """Lokale ONNX-Stimme. Liefert nur True, wenn die Datei echten Ton traegt."""
     if not piper_available():
         return False
     os.makedirs(os.path.dirname(out_wav) or ".", exist_ok=True)
@@ -716,9 +989,11 @@ def synth_piper(text: str, voice: str, out_wav: str):
     try:
         proc = subprocess.run(cmd, input=text.encode("utf-8"),
                               capture_output=True, timeout=600)
-        return proc.returncode == 0 and os.path.exists(out_wav) and os.path.getsize(out_wav) > 0
     except Exception:
         return False
+    if proc.returncode != 0 or not os.path.exists(out_wav) or os.path.getsize(out_wav) == 0:
+        return False
+    return True
 
 
 def synth_groq(text: str, out_wav: str):
@@ -746,18 +1021,106 @@ def synth_groq(text: str, out_wav: str):
         return False
 
 
+# ---------------------------------------------------------------------------
+# Segment-Synthese mit Wiederholungen, Engine-Kette und Hoerbarkeits-Pruefung
+# ---------------------------------------------------------------------------
+
+SYNTH_ATTEMPTS = 3          # Versuche je Engine (Netz-Aussetzer sind normal)
+SYNTH_BACKOFF = (0.8, 2.0)  # Wartezeit vor Versuch 2 und 3 in Sekunden
+
+
+def _retry_sleep(seconds: float) -> None:
+    """Wartezeit zwischen zwei Versuchen (im Selbsttest abschaltbar)."""
+    try:
+        factor = float(os.environ.get("FF_VOICE_RETRY_SLEEP", "1"))
+    except Exception:
+        factor = 1.0
+    if factor <= 0:
+        return
+    try:
+        import time
+        time.sleep(seconds * factor)
+    except Exception:
+        pass
+
+
+def verify_segment(out_wav: str) -> tuple:
+    """(ok, grund) — traegt die geschriebene Segmentdatei echten Ton?
+
+    Ein Backend kann „erfolgreich“ eine leere, unlesbare oder stumme
+    Datei liefern (Befund 06.09.2026). Erst diese Pruefung entscheidet,
+    ob ein Segment als gesprochen gilt.
+    """
+    if not out_wav or not os.path.exists(out_wav) or os.path.getsize(out_wav) == 0:
+        return False, "keine Datei"
+    try:
+        samples, rate = decode_audio_mono(out_wav, SAMPLE_RATE)
+    except Exception as exc:
+        return False, "nicht dekodierbar (%s)" % (str(exc).split("(")[0].strip() or "unbekannt")
+    if not samples:
+        return False, "leeres Audio"
+    ok, why = has_audible_speech(samples, rate)
+    if not ok:
+        return False, why
+    if audio_kind(out_wav) != "wav":
+        # Fremdformat in eine echte WAV ueberfuehren, damit die
+        # Weiterverarbeitung ohne Dekoder auskommt.
+        write_wav_mono(out_wav, samples, rate)
+    return True, ""
+
+
 def synthesize(text: str, lang: str, engine: str, profile_name: str, out_wav: str,
-               rate: float = 1.0, pitch: int = 0, volume: float = 1.0):
-    """Ein Segment sprechen. Gibt (engine, ok, word_boundaries) zurück."""
+               rate: float = 1.0, pitch: int = 0, volume: float = 1.0,
+               attempts: int = SYNTH_ATTEMPTS, allow_engine_fallback: bool = True):
+    """Ein Segment sprechen. Gibt (engine, ok, word_boundaries) zurueck.
+
+    ROBUSTHEIT (07.09.2026):
+      1. Jede Engine wird bis zu `attempts` Mal versucht — ein einzelner
+         Netz-Aussetzer beim Edge-Dienst darf nicht die Tonspur eines
+         ganzen Artikels kosten (Verlagsregel seit dem 06.09.: ein
+         fehlendes Segment verwirft die komplette Spur).
+      2. Danach uebernimmt die naechste verfuegbare Engine der Kette
+         (edge -> piper -> groq), sofern erlaubt.
+      3. JEDES Ergebnis wird gemessen: dekodierbar, nicht stumm. Nur
+         hoerbare Segmente gelten als Erfolg.
+    """
     L = "en" if lang == "en" else "de"
-    voice = VOICE_PROFILES.get(profile_name, VOICE_PROFILES["natural"]).get(L)
-    if engine == "edge" and edge_available():
-        ok, boundaries = synth_edge(text, L, voice, rate, pitch, volume, out_wav)
-        if ok:
-            return "edge", True, boundaries
-    if engine == "piper" and piper_available():
-        if synth_piper(text, PIPER_VOICES[L], out_wav):
-            return "piper", True, []
+    profile = VOICE_PROFILES.get(profile_name, VOICE_PROFILES["natural"])
+    voice = profile.get(L)
+
+    chain = [engine]
+    if allow_engine_fallback:
+        for name in ENGINE_ORDER:
+            if name not in chain:
+                chain.append(name)
+
+    for eng in chain:
+        if eng == "edge" and not edge_available():
+            continue
+        if eng == "piper" and not piper_available():
+            continue
+        if eng == "groq" and (not groq_available() or L != "en"):
+            continue
+        for attempt in range(max(1, attempts)):
+            if attempt:
+                _retry_sleep(SYNTH_BACKOFF[min(attempt - 1, len(SYNTH_BACKOFF) - 1)])
+            ok = False
+            boundaries = []
+            try:
+                if eng == "edge":
+                    ok, boundaries = synth_edge(text, L, voice, rate, pitch, volume, out_wav)
+                elif eng == "piper":
+                    ok = synth_piper(text, PIPER_VOICES[L], out_wav)
+                elif eng == "groq":
+                    ok = synth_groq(text, out_wav)
+            except Exception:
+                ok = False
+            if not ok:
+                continue
+            good, _why = verify_segment(out_wav)
+            if good:
+                return eng, True, boundaries
+        # Engine erschoepft — naechste Kettenstufe
     return engine, False, []
 
 
@@ -843,6 +1206,117 @@ def _selftest() -> int:
     check("Audio: Lautheit angehoben", max(abs(v) for v in norm) > 300)
     joined = concat_with_pauses([([1, 2, 3], 100), ([4, 5], 0)], 24000)
     check("Audio: Pausen eingesetzt", len(joined) > 5)
+
+    # ------------------------------------------------------------------
+    # KERNBEFUND 06.09.2026 — MP3 in einer .wav-Datei, Digitalstille live
+    # ------------------------------------------------------------------
+    import tempfile
+
+    tmp = tempfile.mkdtemp(prefix="ff-voice-selftest-")
+
+    mp3_like = os.path.join(tmp, "seg.wav")          # edge-tts schreibt MP3!
+    with open(mp3_like, "wb") as fh:
+        fh.write(b"ID3\x03\x00\x00\x00\x00\x00\x00" + b"\xff\xfb\x90\x00" + b"\x00" * 2048)
+    check("Format: MP3 trotz .wav-Endung erkannt", audio_kind(mp3_like) == "mp3")
+    check("Format: MP3 ohne ID3-Kopf erkannt (Frame-Sync)", audio_kind(
+        _write_bytes(os.path.join(tmp, "raw.bin"), b"\xff\xfb\x90\x00" + b"\x00" * 64)) == "mp3")
+
+    speech_like = []
+    for i in range(SAMPLE_RATE * 2):
+        t = i / float(SAMPLE_RATE)
+        env = 0.5 + 0.5 * math.sin(2 * math.pi * 4 * t)
+        speech_like.append(int(9000 * env * math.sin(2 * math.pi * 170 * t)))
+    wav_real = os.path.join(tmp, "real.wav")
+    write_wav_mono(wav_real, speech_like)
+    check("Format: echte WAV erkannt", audio_kind(wav_real) == "wav")
+    check("Dekoder: WAV ohne Fremdwerkzeug lesbar", len(decode_audio_mono(wav_real)[0]) > 0)
+
+    silence = [0] * (SAMPLE_RATE * 3)
+    wav_silent = os.path.join(tmp, "silent.wav")
+    write_wav_mono(wav_silent, silence)
+
+    st_silence = audio_stats(silence)
+    st_speech = audio_stats(speech_like)
+    check("Messung: Digitalstille hat peak 0", st_silence["peak"] == 0)
+    check("Messung: Digitalstille hat rms 0", st_silence["rms"] == 0)
+    check("Messung: Sprache hat Pegel", st_speech["peak"] > 1000 and st_speech["rms"] > 100)
+    check("Messung: hörbarer Anteil bei Sprache hoch", st_speech["audible_ratio"] > 0.5)
+    check("Messung: hörbarer Anteil bei Stille null", st_silence["audible_ratio"] == 0)
+    check("Messung: Laufzeit stimmt", abs(st_silence["duration_ms"] - 3000) <= 2)
+
+    check("Wache: Stille wird abgewiesen", has_audible_speech(silence)[0] is False)
+    check("Wache: Sprache wird angenommen", has_audible_speech(speech_like)[0] is True)
+    check("Wache: Grund wird benannt", "Digitalstille" in has_audible_speech(silence)[1])
+
+    ok_seg, why_seg = verify_segment(wav_silent)
+    check("Segment: stumme Datei fällt durch", ok_seg is False and bool(why_seg))
+    check("Segment: sprechende Datei besteht", verify_segment(wav_real)[0] is True)
+    check("Segment: leere Datei fällt durch",
+          verify_segment(_write_bytes(os.path.join(tmp, "empty.wav"), b""))[0] is False)
+    if not decoder_available():
+        check("Segment: MP3 ohne Dekoder fällt ehrlich durch", verify_segment(mp3_like)[0] is False)
+    else:
+        check("Segment: MP3-Attrappe ohne Ton fällt durch", verify_segment(mp3_like)[0] is False)
+
+    # Engine-Verfügbarkeit hängt am Dekoder (sonst wieder Stille-Spuren)
+    check("Engine: edge ohne Dekoder nicht verfügbar",
+          (not edge_module_present()) or decoder_available() or (edge_available() is False))
+
+    # ------------------------------------------------------------------
+    # Wiederholungen + Engine-Kette (offline, monkeygepatcht)
+    # ------------------------------------------------------------------
+    globals_ = globals()
+    orig = {k: globals_[k] for k in ("synth_edge", "synth_piper", "edge_available",
+                                     "piper_available", "groq_available")}
+    os.environ["FF_VOICE_RETRY_SLEEP"] = "0"
+    try:
+        calls = {"edge": 0, "piper": 0}
+
+        def flaky_edge(text, lang, voice, rate, pitch, volume, out_wav):
+            calls["edge"] += 1
+            if calls["edge"] < 3:
+                return False, []                     # zwei Netz-Aussetzer
+            write_wav_mono(out_wav, speech_like)
+            return True, [{"offset": 0, "duration": 10, "text": "x"}]
+
+        globals_["synth_edge"] = flaky_edge
+        globals_["edge_available"] = lambda: True
+        globals_["piper_available"] = lambda: False
+        globals_["groq_available"] = lambda: False
+        eng, ok, _b = synthesize("Test", "de", "edge", "natural", os.path.join(tmp, "s1.wav"))
+        check("Kette: Wiederholung rettet das Segment", ok is True and eng == "edge")
+        check("Kette: genau drei Versuche", calls["edge"] == 3)
+
+        calls["edge"] = 0
+
+        def dead_edge(text, lang, voice, rate, pitch, volume, out_wav):
+            calls["edge"] += 1
+            return False, []
+
+        def good_piper(text, voice, out_wav):
+            calls["piper"] += 1
+            write_wav_mono(out_wav, speech_like)
+            return True
+
+        globals_["synth_edge"] = dead_edge
+        globals_["synth_piper"] = good_piper
+        globals_["piper_available"] = lambda: True
+        eng, ok, _b = synthesize("Test", "de", "edge", "natural", os.path.join(tmp, "s2.wav"))
+        check("Kette: Piper übernimmt nach Edge-Ausfall", ok is True and eng == "piper")
+        check("Kette: Edge vorher ausgereizt", calls["edge"] == SYNTH_ATTEMPTS)
+
+        def silent_piper(text, voice, out_wav):
+            write_wav_mono(out_wav, silence)         # „Erfolg“ ohne Ton
+            return True
+
+        globals_["synth_piper"] = silent_piper
+        eng, ok, _b = synthesize("Test", "de", "edge", "natural", os.path.join(tmp, "s3.wav"))
+        check("Kette: stummer „Erfolg“ zählt als Fehlschlag", ok is False)
+    finally:
+        for k, v in orig.items():
+            globals_[k] = v
+        os.environ.pop("FF_VOICE_RETRY_SLEEP", None)
+        shutil.rmtree(tmp, ignore_errors=True)
 
     failed = [n for n, ok in results if not ok]
     for name, ok in results:

@@ -192,6 +192,7 @@ def main() -> int:
     gate = read(GATE)
     check("Gate vorhanden", bool(gate), GATE)
     for suite in ("ff_voice_functional_test.mjs", "ff_voice_voice_test.js",
+                  "ff_voice_repair_test.mjs", "ff_voice_tts_hardening_test.mjs",
                   "ff_voice_parity_check.py", "ff_voice_toolbar_check.py",
                   "ff_voice_audio.py", "ff_voice_backends.py"):
         check("Gate führt %s aus" % suite, suite in gate)
@@ -203,6 +204,12 @@ def main() -> int:
     check("Deploy: erzeugt die Tonspur neu", "ff_voice_audio.py" in deploy)
     check("Deploy: blockiert nie wegen der Tonspur",
           "|| true" in deploy or "|| echo" in deploy)
+    # Befund 07.09.2026: Ohne Dekoder wird aus dem MP3-Strom von edge-tts
+    # eine stumme Datei. Beides muss im Deploy stehen bleiben.
+    check("Deploy: sorgt für einen Audio-Dekoder (ffmpeg/miniaudio)",
+          "ffmpeg" in deploy and "miniaudio" in deploy)
+    check("Deploy: misst die Tonspuren vor der Veröffentlichung nach",
+          "--verify" in deploy and "--heal" in deploy)
 
     qa = read(QA_PKG)
     if qa:
