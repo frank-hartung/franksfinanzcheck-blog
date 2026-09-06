@@ -10,33 +10,20 @@
 #       Artikel wird übersprungen" -> 0 Artikel für den Tag.
 #
 #  LÖSUNG (Content-Engine v2):
-#    - 2-Ebenen-Fallback (Profi -> Draft-Rettung; die frühere Relaxed-
-#      Zwischenstufe wurde am 13.08.2026 ersatzlos entfernt – es soll
-#      grundsätzlich keine automatisch veröffentlichten Artikel unterhalb
-#      des Profi-Gates mehr geben):
+#    - Fallback: Profi -> Relaxed (nur harte Kriterien) -> Draft-Rettung.
 #      NIE ein Tag ohne neuen Artikel (im Zweifel als Entwurf).
 #    - Multi-Modell-Rotation (Gemini <-> Groq) gegen Provider-Schwäche.
-#    - Deploy-Trigger mit korrektem execSync-Import.
-#    - ENGINE-STATUS.md Dashboard + Fehler-Alerting bei Komplettausfall.
+#    - ENGINE-STATUS.md + BOT-STATUS.md + Defizit-Issue (Phase 4).
 #
-#  Publikations-Frequenz (13.08.2026, Google-Sichtbarkeits-Audit): von
-#  2 Artikeln/Tag (14/Woche) reduziert und seit 13.08. (Nachmittag) NICHT
-#  mehr fest codiert – die feste Mo/Mi/Fr-Schlüsselung (cadence_guard)
-#  unten automatisch an (Ramp nach Domain-Alter + Sicherheitsbremse bei
-#  niedriger Erfolgsquote, siehe dortige Doku + CADENCE-REPORT.md). Die
-#  konkreten Wochentage in den Cron-Zeilen sind daher nur eine Momentaufnahme
-#  und ändern sich wöchentlich automatisch. Grund für die Reduktion generell:
-#  Tägliches Massen-Publizieren rein KI-generierter Artikel ist genau das
-#  Muster, das Googles "Scaled Content Abuse"-Klassifizierer erkennen soll –
-#  besonders riskant bei einer noch jungen Domain. Qualität/Tiefe statt
-#  Menge, siehe README. Tages-Limit weiterhin via MAX_ARTIKEL_PRO_TAG
-#  (Default 1) – das bleibt unabhängig von der Wochen-Kadenz.
+#  Publikations-Frequenz (DAUERVORGABE): nur Mo/Mi/Fr, 2–3 LIVE-Artikel
+#  (cadence_guard + MIN/MAX_ARTIKEL_PRO_TAG, Floor 2). Kein tägliches
+#  Massen-Publizieren (Scaled-Content-Abuse-Risiko).
 # ============================================================
 name: Content-Engine v2
 
 on:
   schedule:
-    # Nur an Publikationstagen (Mo=1, Mi=3, Fr=5, Sa=6): 1 Haupt-Slot +
+    # Nur an Publikationstagen (Mo=1, Mi=3, Fr=5): 1 Haupt-Slot +
     # 2 Fallback-Slots im Tagesverlauf, falls ein Lauf an API-Limits o.ä.
     # scheitert (Selbstheilung).
     - cron: "10 6 * * 1,3,5"     # 08:10 MESZ – Haupt-Slot
@@ -141,7 +128,7 @@ jobs:
           # würde ARTIKEL_ERSTELLT fälschlich true und Phase 2/3 liefen ohne
           # neuen Artikel – inkl. unnötiger KI-API-Calls.)
           if git status --short content/ data/ | grep -q .; then
-            git add content/ data/ static/images/covers/
+            git add content/ data/ static/images/covers/ ENGINE-STATUS.md BOT-STATUS.md 2>/dev/null || true
             git commit -m "content: neuer Artikel automatisch generiert und veröffentlicht"
             SYNC_OK_VAR=ARTIKEL_ERSTELLT scripts/git_sync.sh --push-only
             echo "✅ Phase-1-Commit: Artikel (oder Entwurf) veröffentlicht"
@@ -166,8 +153,8 @@ jobs:
           python3 scripts/fix_dash_und.py --fix || echo "⚠ Gedankenstrich-Check (nicht kritisch)"
           echo "== Gedankenstrich-am-Zeilenende (deterministisch, selbstheilend) =="
           python3 scripts/fix_dash_eol.py --fix || echo "⚠ Gedankenstrich-EOL-Check (nicht kritisch)"
-          echo "== Zeichenlängen-Gate (Hoheit: posts | Affiliate-Floor 1000 via LENGTH_MIN_WORDS) =="
-          LENGTH_MIN_WORDS="${{ vars.LENGTH_MIN_WORDS || '1000' }}" python3 scripts/check_length.py --fix || echo "⚠ Längen-Check (nicht kritisch)"
+          echo "== Zeichenlängen-Gate (SSOT length_policy.py, Floor 10.000 Zeichen) =="
+          python3 scripts/check_length.py --fix || echo "⚠ Längen-Check (nicht kritisch)"
           echo "== Leerzeichen-Generator (Profi-Level, selbstheilend) =="
           python3 scripts/fix_spaces.py || echo "⚠ Leerzeichen-Generator (nicht kritisch)"
           echo "== Rechtschreibung =="
@@ -361,7 +348,7 @@ jobs:
           fi
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
-          git add BOT-STATUS.md 2>/dev/null || true
+          git add BOT-STATUS.md ENGINE-STATUS.md 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "BOT-STATUS unverändert."
           else

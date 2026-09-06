@@ -42,6 +42,14 @@ on:
       - "Issues aufräumen (Triage)"          # PREM-AUDIT: Vollabdeckung
       - "Erledigte Fehlermeldungen dauerhaft löschen"
       - "Dependabot Auto-Merge"
+      - "Produktions-Wache (Content-Engine)"
+      - "Premium-Governance"
+      - "Lesehilfen-Gate (Vorlesen + Kurzfassung)"
+      - "Kadenz-Endkontrolle (Mo/Mi/Fr – 2–3 LIVE erzwingen)"
+      - "Fristen-Check (Recht)"
+      - "Redaktions-Standard Bestand (Capital/WiWo/ZEIT)"
+      - "Redaktions-Standard neu (Capital/WiWo/ZEIT)"
+      - "Mastodon-Manueller-Post"
     types:
       - completed
 
