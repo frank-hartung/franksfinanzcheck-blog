@@ -1,22 +1,32 @@
 # ============================================================
 #  OFFSITE-BACKUP (kostenlos, GitHub-Releases)
 #  ------------------------------------------------------------
-#  Täglicher vollständiger Snapshot des Repos als Release:
-#    - backup.bundle  = komplette Git-History (git bundle --all)
+#  Täglicher vollständiger Snapshot der QUELLE des Blogs als Release:
+#    - backup.bundle  = komplette Git-History des main-Branches
+#                       (git bundle main – eigenständiges Format,
+#                        per `git clone backup.bundle` wiederherstellbar)
 #    - worktree.zip   = Arbeitskopie (alle getrackten Dateien)
-#  Das Backup liegt auf GitHub-Infrastruktur (offsite zur Sandbox)
-#  und bleibt als Release dauerhaft erhalten – Rollback jederzeit
-#  per Download möglich. Alte Backups werden auf die letzten 14
-#  automatisch reduziert (Speicher-Hygiene).
+#
+#  WARUM NUR `main` UND NICHT `--all`?  (Issue #179, 06.09.2026)
+#    `--all` hat zusätzlich den Build-Branch `gh-pages` gebündelt.
+#    Dessen History war durch unkomprimierte Vorlese-WAVs (~3,5 GB)
+#    aufgebläht. GitHub begrenzt EIN Release-Asset hart auf 2 GiB
+#    (docs.github.com: "Each file included in a release must be
+#    under 2 GiB"). Das 3,58-GB-Bundle konnte deshalb NIE hochgeladen
+#    werden → der Backup-Lauf fiel dauerhaft rot aus.
+#    `gh-pages` ist aber zu 100 % regenerierbar (hugo --minify +
+#    Vorlese-Audio aus deploy.yml) und hat keinerlei Backup-Wert –
+#    es ist ein Build-Artefakt, keine Quelle. Deshalb wird hier nur
+#    die Quelle gesichert. Zusätzlich deployt deploy.yml den
+#    Build-Branch ab sofort mit force_orphan (ein einziger Commit),
+#    damit sich dort nie wieder Multi-GB-History ansammeln kann.
 #
 #  Kosten: 0 € – GitHub Free erlaubt Releases ohne Limit.
 #  Trigger: täglich 03:00 UTC + manuell (workflow_dispatch).
 #
-#  GEHÄRTET am 05.09.2026 (nach Run 33940712798 / Issue #179):
-#  Der Asset-Upload scheiterte still bzw. transient und ließ ein
-#  unvollständiges bzw. gar kein Backup zurück. Jetzt gilt:
+#  GEHÄRTET (05.09.2026 + 06.09.2026):
 #    1. Artefakte werden VOR dem Upload verifiziert
-#       (git bundle verify + unzip -t + Mindestgrößen).
+#       (git bundle verify + unzip -t + Mindest-/Höchstgrößen).
 #    2. Uploads laufen einzeln mit Retry (transiente Hickser
 #       fallen nicht mehr direkt auf den Nachtlauf durch).
 #    3. NACH dem Upload wird das Release hart verifiziert: beide
@@ -25,14 +35,16 @@
 #       fehl (Fehler-Alerting) statt ein Schein-Backup zu melden.
 #    4. Die Retention läuft mit `if: always()` – sie fällt nicht
 #       mehr mit einem fehlgeschlagenen Backup aus.
+#    5. Das Bundle darf die 2-GiB-Grenze nie wieder erreichen:
+#       eine Plausibilitäts-Obergrenze schlägt VOR dem Upload an
+#       (klare Meldung statt stillem Upload-Abbruch).
 # ============================================================
 name: Offsite-Backup
 
 on:
   schedule:
-    # EINMALIGE Verifikation der Gehaertung am 05.09. um 16:00 UTC
-    # (wird direkt nach dem gruenen Lauf wieder auf "0 3 * * *" zurueckgesetzt)
-    - cron: "0 16 5 9 *"
+    # Täglich 03:00 UTC (nach Issue #179 wieder auf den Regelbetrieb gesetzt)
+    - cron: "0 3 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -41,31 +53,58 @@ permissions:
 jobs:
   backup:
     runs-on: ubuntu-latest
+    env:
+      # Quelle des Backups. Immer 'main': gh-pages ist ein regenerierbares
+      # Build-Artefakt (deploy.yml) und wird bewusst NICHT gesichert
+      # (Root-Cause von Issue #179, siehe Header-Kommentar).
+      SRC_BRANCH: main
     steps:
       - name: Repository auschecken (komplette History)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Git-Bundle + Arbeitskopie erstellen und verifizieren
+      - name: Git-Bundle (main) + Arbeitskopie erstellen und verifizieren
         run: |
           set -euo pipefail
-          # Komplette Git-History als Bundle (eigenständiges Backup-Format)
-          git bundle create backup.bundle --all
-          # Integrität des Bundles prüfen: kaputte Bundles werden gar nicht
-          # erst hochgeladen
+
+          # Lokalen Source-Ref sicherstellen. Beim schedule läuft der Job
+          # zwar auf main, bei manueller Ausführung (workflow_dispatch auf
+          # einem Feature-Branch) existiert 'main' aber nicht als lokaler
+          # Branch – ohne diesen Fetch würde der Bundle-Schritt abbrechen.
+          git fetch --quiet origin "$SRC_BRANCH":refs/heads/"$SRC_BRANCH" 2>/dev/null || true
+
+          # Nur die QUELLE sichern (main). `--all` würde den
+          # regenerierbaren Build-Branch gh-pages mitziehen und das
+          # Bundle über die 2-GiB-Release-Grenze treiben (Issue #179).
+          git bundle create backup.bundle "$SRC_BRANCH"
+
+          # Integrität des Bundles prüfen: kaputte Bundles werden gar
+          # nicht erst hochgeladen.
           git bundle verify backup.bundle
+
           # Arbeitskopie (nur getrackte Dateien, ohne .git)
-          git archive --format=zip -o worktree.zip HEAD
-          # ZIP-Integrität prüfen (CRC + Vollständigkeit)
+          git archive --format=zip -o worktree.zip "$SRC_BRANCH"
           unzip -t worktree.zip > /dev/null
-          # Plausibilitäts-Checks: verdächtig kleine Artefakte = Fehler
+
+          # Plausibilitäts-Checks: verdächtig kleine ODER zu große
+          # Artefakte = Fehler. Obergrenze bewusst deutlich unter der
+          # GitHub-Hartgrenze von 2 GiB je Asset.
           BSIZE=$(stat -c%s backup.bundle)
           ZSIZE=$(stat -c%s worktree.zip)
+          LIMIT=$((2 * 1024 * 1024 * 1024))   # 2 GiB (GitHub-Hartgrenze)
+          WARN=$((1 * 1024 * 1024 * 1024))    # 1 GiB (Frühwarnung)
           echo "backup.bundle = ${BSIZE} Bytes · worktree.zip = ${ZSIZE} Bytes"
           if [ "$BSIZE" -lt 100000 ] || [ "$ZSIZE" -lt 50000 ]; then
             echo "::error::Artefakt verdächtig klein (bundle=${BSIZE}, zip=${ZSIZE}) – Abbruch statt Schein-Backup."
             exit 1
+          fi
+          if [ "$BSIZE" -gt "$LIMIT" ]; then
+            echo "::error::Bundle ${BSIZE} Bytes überschreitet die GitHub-Release-Grenze (2 GiB). Die History von main enthält zu große Binärdateien – bitte aufräumen (z. B. git filter-repo), nicht das Backup umgehen."
+            exit 1
+          fi
+          if [ "$BSIZE" -gt "$WARN" ]; then
+            echo "::warning::Bundle ${BSIZE} Bytes ist ungewöhnlich groß (> 1 GiB) – Ursache der Aufblähung prüfen, bevor die 2-GiB-Grenze erreicht wird."
           fi
 
       - name: Backup-Release erstellen und Upload verifizieren
@@ -74,9 +113,9 @@ jobs:
         run: |
           set -euo pipefail
           TAG="backup-$(date +%Y%m%d-%H%M)"
-          SHA="${{ github.sha }}"
-          FILES=$(git ls-files | wc -l)
-          NOTES="Automatisches Offsite-Backup von franksfinanzcheck-blog | Commit: $SHA | Getrackte Dateien: $FILES | backup.bundle = Git-History, worktree.zip = Arbeitskopie | Upload verifiziert (Namen + Groessen)"
+          SHA=$(git rev-parse --short "$SRC_BRANCH")
+          FILES=$(git ls-tree -r --name-only "$SRC_BRANCH" | wc -l)
+          NOTES="Automatisches Offsite-Backup von franksfinanzcheck-blog | Quelle: main (Commit: $SHA) | Getrackte Dateien: $FILES | backup.bundle = Git-History von main, worktree.zip = Arbeitskopie | Upload verifiziert (Namen + Groessen) | gh-pages ist regenerierbar und wird bewusst nicht gesichert"
 
           # 1) Erwartete Asset-Größen merken (für die spätere Verifikation)
           EXPECT_BUNDLE=$(stat -c%s backup.bundle)
