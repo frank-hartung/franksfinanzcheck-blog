@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-06 14:52 UTC · Modus: FIX
+**Stand:** 2026-09-06 15:34 UTC · Modus: FIX
 
 **Domain-Status (Pinterest):** 🔴 GESPERRT – Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026. (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)
 
@@ -25,18 +25,7 @@
 
 ## C: CSV pins_upload.csv (C1–C8)
 
-- 🔴 [C1] Zeile 2: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 3: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 4: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 5: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 6: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 7: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 8: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 9: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 10: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 11: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 12: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 13: C1: Scheduling in der Vergangenheit
+- keine Funde
 
 **Geheilt:**
 - ✅ CSV neu geschrieben: 6 Zeilen behalten
@@ -48,7 +37,7 @@
 
 ## Fazit
 
-🔴 13 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
+🔴 1 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
 
 ---
 _Wache: Blog B1–B8 · Feed F1–F6 · CSV C1–C8 · API A1–A4 – Dauerauftrag, niemals Content-Verlust._
