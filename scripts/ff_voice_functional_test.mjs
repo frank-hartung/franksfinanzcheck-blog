@@ -35,6 +35,9 @@ t.group('1) Toolbar, Rollen und Beschriftung');
   t.ok('Toolbar ist eine Region',
     doc.getElementById('ff-voice-bar').getAttribute('role') === 'region');
   t.ok('Fortschritt vorhanden', !!doc.getElementById('ff-voice-progress'));
+  t.ok('Progress-Meter vorhanden', !!doc.getElementById('ff-voice-meter'));
+  t.eq('Initiales Meter-Label DE', doc.getElementById('ff-voice-progress-label').textContent, 'Noch nicht gestartet');
+  t.eq('Initialer Meter-Wert DE', doc.getElementById('ff-voice-progress-value').textContent, '0 %');
   t.eq('Startbeschriftung DE', doc.getElementById('ff-voice-play-label').textContent, 'Vorlesen');
   t.eq('Kurzfassung DE', doc.getElementById('ff-voice-summary-label').textContent, 'Kurzfassung');
   t.ok('Ohne Tonspur läuft die Browser-Engine', api.mode === 'speech', 'mode=' + api.mode);
@@ -472,12 +475,15 @@ t.group('9) Wiedergabe: Start, Pause, Fortsetzen, Abschnittssprung');
   t.ok('data-state=playing', doc.getElementById('ff-voice-bar').getAttribute('data-state') === 'playing');
   await sleep(120);
   t.ok('Erste Einheit gesprochen', api.units.length > 0);
+  t.ok('Meter-Mode zeigt aktiven Pfad', /Gerät|Studio/.test(doc.getElementById('ff-voice-progress-mode').textContent));
+  t.ok('Meter-Wert steigt an', /\d+ %/.test(doc.getElementById('ff-voice-progress-value').textContent));
 
   const before = doc.getElementById('ff-voice-progress').style.width;
   doc.getElementById('ff-voice-play').click();     // Pause
   t.ok('Pause gesetzt', api.playing === false);
   t.eq('Knopf zeigt Weiterlesen', doc.getElementById('ff-voice-play-label').textContent, 'Weiterlesen');
   t.ok('Status „pausiert“', /pausiert/.test(doc.getElementById('ff-voice-status').textContent));
+  t.eq('Meter-Mode zeigt Pause', doc.getElementById('ff-voice-progress-mode').textContent, 'Pause');
   t.ok('Fortschritt bleibt stehen', doc.getElementById('ff-voice-progress').style.width === before);
 
   doc.getElementById('ff-voice-play').click();     // Fortsetzen
@@ -494,6 +500,8 @@ t.group('9) Wiedergabe: Start, Pause, Fortsetzen, Abschnittssprung');
   doc.getElementById('ff-voice-stop').click();
   t.ok('Beenden setzt zurück', api.reading === false);
   t.eq('Knopf zeigt wieder Vorlesen', doc.getElementById('ff-voice-play-label').textContent, 'Vorlesen');
+  t.eq('Meter-Wert nach Stop wieder 0 %', doc.getElementById('ff-voice-progress-value').textContent, '0 %');
+  t.eq('Meter-Mode nach Stop wieder bereit', doc.getElementById('ff-voice-progress-mode').textContent, 'Bereit');
   t.ok('data-state=idle', doc.getElementById('ff-voice-bar').getAttribute('data-state') === 'idle');
 }
 

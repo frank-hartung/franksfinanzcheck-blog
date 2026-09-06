@@ -1,6 +1,6 @@
 /* ============================================================
-   FranksFinanzcheck — FF Voice Studio (Lesehilfen, Generation 2)
-   05.09.2026 — Profi-Agentur-Standard
+   FranksFinanzcheck — FF Voice Studio (Lesehilfen, Generation 3)
+   06.09.2026 — Profi-Agentur-Standard
    ------------------------------------------------------------
    VORLESEN
      Zwei garantierte Tonpfade, eine Regie, kein Umschalter:
@@ -60,7 +60,7 @@
      1 · KONFIGURATION
      ============================================================ */
 
-  var VOICE_VERSION = '2026.09.07';
+  var VOICE_VERSION = '2026.09.08';
 
   var cfgEl = doc.getElementById('ff-voice-config');
   if (!cfgEl) return;
@@ -90,6 +90,10 @@
   var summaryLabel = doc.getElementById('ff-voice-summary-label');
   var statusEl = doc.getElementById('ff-voice-status');
   var remainEl = doc.getElementById('ff-voice-remaining');
+  var progressMeterEl = doc.getElementById('ff-voice-meter');
+  var progressModeEl = doc.getElementById('ff-voice-progress-mode');
+  var progressLabelEl = doc.getElementById('ff-voice-progress-label');
+  var progressValueEl = doc.getElementById('ff-voice-progress-value');
   var progressEl = doc.getElementById('ff-voice-progress');
 
   if (!bar || !playBtn || !summaryBtn) return;
@@ -126,6 +130,13 @@
       paused: 'Vorlesen pausiert.', resumed: 'Vorlesen fortgesetzt.',
       finished: 'Vorlesen beendet.', resumedPos: 'Vorlesen an der zuletzt gehörten Stelle fortgesetzt.',
       remaining: 'noch ca. {min} Min.',
+      progressIdle: 'Noch nicht gestartet',
+      progressModeReady: 'Bereit', progressModeSpeech: 'Gerät', progressModeTrack: 'Studio', progressModePaused: 'Pause', progressModeDone: 'Fertig',
+      progressHeading: 'Überschrift', progressParagraph: 'Abschnitt', progressList: 'Liste', progressQuote: 'Zitat',
+      progressCallout: 'Merksatz', progressWarning: 'Hinweis', progressOverview: 'Übersicht',
+      progressTableIntro: 'Tabelle im Überblick', progressTableHeader: 'Tabelle · Spalten', progressTableGroup: 'Tabelle · Gruppe',
+      progressTableRow: 'Tabelle · Zeile {row} von {total}', progressTableSum: 'Tabelle · Summe', progressTableCta: 'Tabelle · Empfehlung', progressTableOutro: 'Tabellenende',
+      progressIntro: 'Intro', progressOutro: 'Abschluss',
       mediaTitle: '{title} – FranksFinanzcheck',
       mediaArtist: 'FranksFinanzcheck – Artikel zum Hören',
       introLine: '{title}. Ein Beitrag von FranksFinanzcheck. Hördauer etwa {duration}.',
@@ -194,6 +205,13 @@
       paused: 'Audio playback paused.', resumed: 'Audio playback resumed.',
       finished: 'Audio playback completed.', resumedPos: 'Resumed from your last listening position.',
       remaining: 'approx. {min} min left',
+      progressIdle: 'Not started yet',
+      progressModeReady: 'Ready', progressModeSpeech: 'Device', progressModeTrack: 'Studio', progressModePaused: 'Paused', progressModeDone: 'Done',
+      progressHeading: 'Heading', progressParagraph: 'Section', progressList: 'List', progressQuote: 'Quote',
+      progressCallout: 'Callout', progressWarning: 'Note', progressOverview: 'Overview',
+      progressTableIntro: 'Table overview', progressTableHeader: 'Table · Columns', progressTableGroup: 'Table · Group',
+      progressTableRow: 'Table · Row {row} of {total}', progressTableSum: 'Table · Total', progressTableCta: 'Table · Recommendation', progressTableOutro: 'End of table',
+      progressIntro: 'Intro', progressOutro: 'Outro',
       mediaTitle: '{title} – FranksFinanzcheck',
       mediaArtist: 'FranksFinanzcheck – Article Audio',
       introLine: '{title}. An article by FranksFinanzcheck. Listening time about {duration}.',
@@ -606,6 +624,44 @@
     var n = parseInt(minutes, 10);
     if (!isFinite(n) || n <= 0) return T.durationUnknown;
     return n === 1 ? T.durationMinuteOne : T.durationMinutes.replace('{n}', n);
+  }
+
+  function trimUiText(text, max) {
+    var clean = String(text || '').replace(/\s+/g, ' ').trim();
+    if (!clean) return '';
+    if (!max || clean.length <= max) return clean;
+    return clean.slice(0, Math.max(1, max - 1)).replace(/[\s,.;:!?-]+$/g, '') + '…';
+  }
+
+  function progressModeText() {
+    if (!reading) return progressRatio >= 0.999 ? T.progressModeDone : T.progressModeReady;
+    if (!playing) return T.progressModePaused;
+    return mode === 'track' ? T.progressModeTrack : T.progressModeSpeech;
+  }
+
+  function progressLabelFromBlock(block) {
+    if (!block) return T.progressIdle;
+    if (block.type === 'intro') return T.progressIntro;
+    if (block.type === 'outro') return T.progressOutro;
+    if (/^h[2-6]$/i.test(block.type || '')) return trimUiText(readableText(block.el) || block.text || T.progressHeading, 72);
+    if (block.type === 'table-intro') return T.progressTableIntro;
+    if (block.type === 'table-header') return T.progressTableHeader;
+    if (block.type === 'table-group') return T.progressTableGroup;
+    if (block.type === 'table-sum') return T.progressTableSum;
+    if (block.type === 'table-cta') return T.progressTableCta;
+    if (block.type === 'table-outro') return T.progressTableOutro;
+    if (block.type === 'table-row') {
+      var rowInfo = String(block.text || '').match(/\b(?:Zeile|Row)\s+(\d+)\s+(?:von|of)\s+(\d+)/i);
+      if (rowInfo) return T.progressTableRow.replace('{row}', rowInfo[1]).replace('{total}', rowInfo[2]);
+      return T.progressTableHeader;
+    }
+    if (block.type === 'blockquote') return T.progressQuote;
+    if (block.type === 'li') return T.progressList;
+    if (block.type === 'warning') return T.progressWarning;
+    if (block.type === 'callout' || block.type === 'emphasis') return T.progressCallout;
+    if (String(block.type || '').indexOf('overview') === 0) return T.progressOverview;
+    if (block.type === 'p' || block.type === 'lead') return trimUiText(block.text || T.progressParagraph, 72);
+    return trimUiText(block.text || T.progressParagraph, 72);
   }
 
   /* ============================================================
@@ -2060,6 +2116,10 @@
   var displayedChars = 0;    // angezeigte Zeichen (monoton steigend)
   var progressRatio = 0;
   var progressTimer = null;
+  var progressBlock = null;
+  var activeUnit = null;
+  var activeUnitStartedAt = 0;
+  var activeUnitElapsedMs = 0;
 
   /* ============================================================
      PHYSIK-DECKEL (Befund 06.09./07.09.2026)
@@ -2116,16 +2176,61 @@
     return clockBaseChars + 60 + (clockActiveMs() / 1000) * SPEECH_FLOOR_CPS;
   }
 
+  function clearActiveUnit() {
+    activeUnit = null;
+    activeUnitStartedAt = 0;
+    activeUnitElapsedMs = 0;
+  }
+
+  function freezeActiveUnit() {
+    if (activeUnit && activeUnitStartedAt) {
+      activeUnitElapsedMs += Math.max(0, nowMs() - activeUnitStartedAt);
+      activeUnitStartedAt = 0;
+    }
+  }
+
+  function startActiveUnit(unit) {
+    activeUnit = unit || null;
+    activeUnitElapsedMs = 0;
+    activeUnitStartedAt = activeUnit ? nowMs() : 0;
+    if (activeUnit && activeUnit.block) progressBlock = activeUnit.block;
+    syncProgressMeta();
+  }
+
+  function activeUnitMs() {
+    if (!activeUnit) return 0;
+    return activeUnitElapsedMs + (activeUnitStartedAt ? Math.max(0, nowMs() - activeUnitStartedAt) : 0);
+  }
+
+  function progressCharsFromActiveUnit() {
+    if (!activeUnit) return spokenChars;
+    var span = Math.max(1, activeUnit.endChars - activeUnit.startChars);
+    var estimate = Math.max(260, estimatedMs(activeUnit));
+    var ratio = Math.max(0, Math.min(1, activeUnitMs() / estimate));
+    return Math.max(spokenChars, activeUnit.startChars + span * ratio);
+  }
+
+  function syncProgressMeta() {
+    var label = progressLabelFromBlock(progressBlock);
+    var percent = Math.round(progressRatio * 100) + ' %';
+    if (progressModeEl) progressModeEl.textContent = progressModeText();
+    if (progressLabelEl) progressLabelEl.textContent = label;
+    if (progressValueEl) progressValueEl.textContent = percent;
+    var meter = progressMeterEl || bar;
+    if (meter) {
+      meter.setAttribute('aria-valuenow', String(Math.round(progressRatio * 100)));
+      meter.setAttribute('aria-valuemin', '0');
+      meter.setAttribute('aria-valuemax', '100');
+      meter.setAttribute('aria-valuetext', label + ' · ' + percent + ' · ' + progressModeText());
+    }
+  }
+
   function paintProgress(ratio) {
     var r = Math.max(0, Math.min(1, ratio || 0));
     if (r < progressRatio && r < 0.999) r = progressRatio;      // monoton – nie zurück
     progressRatio = r;
     if (progressEl) progressEl.style.width = (r * 100).toFixed(2) + '%';
-    if (bar) {
-      bar.setAttribute('aria-valuenow', String(Math.round(r * 100)));
-      bar.setAttribute('aria-valuemin', '0');
-      bar.setAttribute('aria-valuemax', '100');
-    }
+    syncProgressMeta();
   }
 
   function setProgressChars(chars, allowBackward) {
@@ -2144,6 +2249,7 @@
     displayedChars = Math.max(0, chars || 0);
     if (progressEl) progressEl.style.width = '0%';
     if (totalChars && displayedChars) paintProgress(displayedChars / totalChars);
+    else syncProgressMeta();
   }
 
   function completeProgress() { paintProgress(1); displayedChars = totalChars; }
@@ -2169,8 +2275,9 @@
     var tick = function () {
       if (!reading || !playing) { progressTimer = null; return; }
       if (mode === 'speech') {
-        // Sanftes Nachführen zwischen den Wortgrenzen-Ereignissen
-        setProgressChars(spokenChars, false);
+        // Sanftes Nachführen zwischen Wortgrenzen – auch dann, wenn eine
+        // Engine keine brauchbaren onboundary-Ereignisse liefert.
+        setProgressChars(activeUnit ? progressCharsFromActiveUnit() : spokenChars, false);
         updateRemainingFromChars();
       } else if (mode === 'track' && track) {
         // iOS Safari feuert timeupdate nur spärlich — der Balken folgt
@@ -2204,6 +2311,8 @@
   /* ---------- Live-Markierung --------------------------------- */
   function highlightBlock(block) {
     var el = block && block.el ? block.el : null;
+    progressBlock = block || progressBlock;
+    syncProgressMeta();
     blocks.forEach(function (b) { if (b.el && b.el !== el) b.el.classList.remove('ff-voice-active'); });
     if (!el || el === bar) return;
     el.classList.add('ff-voice-active');
@@ -2215,6 +2324,8 @@
   }
 
   function clearHighlight() {
+    progressBlock = null;
+    syncProgressMeta();
     blocks.forEach(function (b) { if (b.el) b.el.classList.remove('ff-voice-active'); });
   }
 
@@ -2496,6 +2607,8 @@
     if (!track) return;
     trackBlock = typeof fromBlock === 'number' && fromBlock > 0 ? Math.min(fromBlock, blocks.length - 1) : 0;
     trackCur = -1;
+    progressBlock = blocks[trackBlock] || blocks[0] || null;
+    clearActiveUnit();
     if (track.error) { fallbackToSpeech(T.trackBroken); return; }
     trackSeek(trackBlock);
     var total = trackTotalMs();
@@ -2574,6 +2687,8 @@
     stopKeepAlive();
     unitInFlight = false;
     liveUtterance = null;
+    clearActiveUnit();
+    progressBlock = blocks[resumeAt] || progressBlock;
     if (synth) { try { synth.cancel(); } catch (e) {} }
     if (track) { try { track.pause(); } catch (e) {} }
     mode = 'speech';
@@ -2737,6 +2852,7 @@
       unitInFlight = false;
       liveUtterance = null;
       spokenChars = unit.endChars;
+      clearActiveUnit();
       setProgressChars(spokenChars, false);
       if (measureUnit()) return;
       advance(index);
@@ -2747,6 +2863,7 @@
       clearStartWatchdog();
       unitInFlight = false;
       liveUtterance = null;
+      clearActiveUnit();
       errorStreak += 1;
       var tries = retryCounts[index] || 0;
       if (!everStarted && tries >= 1) { honestDeadStop(); return; }
@@ -2796,6 +2913,7 @@
         try { synth.cancel(); } catch (e) {}
         unitInFlight = false;
         liveUtterance = null;
+        clearActiveUnit();
         var tries = retryCounts[index] || 0;
         if (!everStarted && (nowMs() - runStartedAt) >= 6000) { honestDeadStop(); return; }
         if (tries < 2) {
@@ -2839,6 +2957,7 @@
         everStarted = true;            // Engine lebt — Ehrlichkeits-Wache entspannt
         clearStartWatchdog();
         errorStreak = 0;
+        if (myIdx === 0) startActiveUnit(unit);
         highlightBlock(unit.block);
         rememberBlock(unit.blockIndex);
         setStatus(res.male ? T.voiceActive : (T.voiceFallback || T.started));
@@ -2921,6 +3040,8 @@
       }
     }
     spokenChars = units[startIdx] ? units[startIdx].startChars : 0;
+    progressBlock = units[startIdx] ? units[startIdx].block : (blocks[0] || null);
+    clearActiveUnit();
     resetProgress(spokenChars);
     clockReset(spokenChars);
     clockGo();
@@ -2946,6 +3067,7 @@
     stopProgressTicker();
     stopKeepAlive();
     clockHalt();
+    freezeActiveUnit();
     runId += 1;                       // Rückrufe laufender Äußerungen entwerten
     unitInFlight = false;
     liveUtterance = null;
@@ -2958,6 +3080,8 @@
     if (!reading) return;
     playing = true;
     runId += 1;
+    var idx = resumeUnit >= 0 ? resumeUnit : nextIndex;
+    progressBlock = units[idx] ? units[idx].block : progressBlock;
     setBarState('playing');
     setStatus(T.resumed);
     clockGo();
@@ -2969,7 +3093,6 @@
        Lieber ein Satz doppelt als ein Satz verloren (Befund 07.09.2026:
        die alte Regie sprang auf die FOLGE-Einheit und verschluckte den
        Rest des laufenden Satzes). */
-    var idx = resumeUnit >= 0 ? resumeUnit : nextIndex;
     speakUnit(Math.min(Math.max(0, idx), Math.max(0, units.length - 1)), true);
   }
 
@@ -3014,6 +3137,7 @@
       playBtn.setAttribute('aria-label', hasExplicitMaleVoice() ? T.playAria : (T.playAriaNeutral || T.playAria));
       playBtn.setAttribute('aria-pressed', 'false');
     }
+    syncProgressMeta();
   }
 
   function applyLabels() {
@@ -3028,6 +3152,8 @@
     }
     if (playBtn) playBtn.setAttribute('aria-label', hasExplicitMaleVoice() ? T.playAria : (T.playAriaNeutral || T.playAria));
     if (summaryBtn) summaryBtn.setAttribute('aria-label', T.summaryAria);
+    if (progressMeterEl) progressMeterEl.setAttribute('aria-label', lang === 'en' ? 'Reading progress' : 'Vorlesefortschritt');
+    syncProgressMeta();
   }
 
   function prepareBlocks() {
@@ -3096,6 +3222,7 @@
     stopProgressTicker();
     stopKeepAlive();
     clockHalt();
+    clearActiveUnit();
     resumeUnit = -1;
     unitInFlight = false;
     liveUtterance = null;
@@ -3103,8 +3230,15 @@
     if (synth) { try { synth.cancel(); } catch (e) {} }
     if (mode === 'track' && track) trackStop();
     clearHighlight();
-    if (completed) { completeProgress(); storeDel(STORE_POS); }
-    else { resetProgress(0); }
+    if (completed) {
+      progressBlock = blocks[blocks.length - 1] || progressBlock;
+      completeProgress();
+      storeDel(STORE_POS);
+    }
+    else {
+      progressBlock = null;
+      resetProgress(0);
+    }
     if (remainEl) remainEl.textContent = '';
     setBarState('idle');
     setFloating(false);
@@ -3126,8 +3260,10 @@
     }
     runId += 1;
     clearPauseTimer();
+    clearActiveUnit();
     if (synth) { try { synth.cancel(); } catch (e) {} }
     playing = true;
+    progressBlock = blocks[target] || progressBlock;
     setBarState('playing');
     spokenChars = units[idx] ? units[idx].startChars : 0;
     resetProgress(spokenChars);
@@ -3748,6 +3884,13 @@
       muteStop: muteStop,
       speechFloorCps: SPEECH_FLOOR_CPS,
       measured: { ms: Math.round(measuredMs), chars: measuredChars, units: measuredUnits },
+      progress: {
+        ratio: Number(progressRatio.toFixed(4)),
+        displayedChars: Math.round(displayedChars),
+        spokenChars: Math.round(spokenChars),
+        modeLabel: progressModeText(),
+        blockLabel: progressLabelFromBlock(progressBlock)
+      },
       chromeKeepAlive: CHROME_LIKE,
       blocks: blocks.length,
       voices: voices
