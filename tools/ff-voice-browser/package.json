@@ -1,0 +1,14 @@
+{
+  "name": "ff-voice-browser-qa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Echt-Browser-Funktionsprüfung (Chromium via Playwright) für Vorlesen + Kurzfassung.",
+  "type": "module",
+  "scripts": {
+    "test": "node ../../scripts/ff_voice_browser_test.mjs"
+  },
+  "devDependencies": {
+    "@sparticuz/chromium": "^149.0.0",
+    "playwright-core": "^1.63.0"
+  }
+}

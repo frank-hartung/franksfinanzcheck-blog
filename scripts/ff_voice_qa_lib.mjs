@@ -428,7 +428,7 @@ export function installSpeech(win, { voices = DEFAULT_VOICES, support = true } =
    6 · Seite + Engine laden
    ============================================================ */
 
-export function loadPage(html, { voices = DEFAULT_VOICES, support = true, runScripts = true } = {}) {
+export function loadPage(html, { voices = DEFAULT_VOICES, support = true, runScripts = true, setup } = {}) {
   const virtualConsole = new VirtualConsole();
   virtualConsole.on('jsdomError', () => {});
   virtualConsole.on('error', () => {});
@@ -444,6 +444,10 @@ export function loadPage(html, { voices = DEFAULT_VOICES, support = true, runScr
   const doc = win.document;
 
   installSpeech(win, { voices, support });
+  // Reparatur-Tests (ff_voice_repair_test.mjs): eigene, reichhaltigere
+  // Engine-Attrappe — muss VOR dem Engine-Load laufen, weil die Engine
+  // win.speechSynthesis beim Laden einfriert.
+  if (typeof setup === 'function') setup(win);
 
   if (runScripts) {
     const code = fs.readFileSync(ENGINE_PATH, 'utf8');

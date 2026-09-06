@@ -60,7 +60,7 @@
      1 · KONFIGURATION
      ============================================================ */
 
-  var VOICE_VERSION = '2026.09.05-c';
+  var VOICE_VERSION = '2026.09.06';
 
   var cfgEl = doc.getElementById('ff-voice-config');
   if (!cfgEl) return;
@@ -112,6 +112,10 @@
       noText: 'Kein vorlesbarer Text gefunden.',
       started: 'Vorlesen gestartet.',
       startedTrack: 'Studio-Tonspur läuft.',
+      trackDefective: 'Die Tonspur dieses Artikels ist unbrauchbar – die Stimme deines Geräts übernimmt.',
+      trackBroken: 'Tonspur konnte nicht geladen werden – die Stimme deines Geräts übernimmt.',
+      trackEndedEarly: 'Die Tonspur endet zu früh – es geht mit der Gerätestimme weiter.',
+      synthesisDead: 'Sprachausgabe ist auf diesem Gerät nicht verfügbar. Der Artikel bleibt vollständig lesbar.',
       voiceActive: 'Männliche Stimme aktiv.',
       voiceFallback: 'Vorlesen gestartet; dein Browser stellt die verfügbare Stimme bereit.',
       voiceLoading: 'Männliche Stimme wird geladen …',
@@ -173,6 +177,10 @@
       noText: 'No readable text found.',
       started: 'Audio playback started.',
       startedTrack: 'Studio audio track playing.',
+      trackDefective: 'This article’s audio track is unusable – your device’s voice takes over.',
+      trackBroken: 'Audio track could not be loaded – your device’s voice takes over.',
+      trackEndedEarly: 'The audio track ends too early – continuing with your device’s voice.',
+      synthesisDead: 'Speech output is unavailable on this device. The article remains fully readable.',
       voiceActive: 'Male voice active.',
       voiceFallback: 'Playback started; your browser provides the available voice.',
       voiceLoading: 'Loading a male voice …',
@@ -1848,7 +1856,24 @@
   function refreshVoices() {
     var list = [];
     try { if (synth && synth.getVoices) list = synth.getVoices() || []; } catch (e) { list = []; }
+    var changed = list.length !== voiceCache.length;
+    if (!changed && list.length) {
+      try { changed = String(list[0] && list[0].voiceURI) !== String(voiceCache[0] && voiceCache[0].voiceURI); }
+      catch (e) { changed = true; }
+    }
     voiceCache = list.slice();
+    /* Befund 06.09.2026: Der Katalog trifft in Chromium/Safari/Android
+       LAZY ein — oft erst nach dem ersten Klick. Die bisherige Regie
+       caching das „keine Stimme“-Ergebnis für immer: die männliche
+       Stimme band nie, das aria-label versprach die Geräte-Stimme.
+       Bei einer ÄNDERUNG des Katalogs wird die Auswahl neu getroffen;
+       die nächste Sprecheinheit läuft dann auf der echten Stimme. */
+    if (changed) {
+      voiceResolved = { de: null, en: null };
+      maleVoiceFound = { de: false, en: false };
+      try { applyLabels(); } catch (e) {}
+      try { if (typeof setBarState === 'function' && !reading) setBarState('idle'); } catch (e) {}
+    }
     return voiceCache;
   }
   refreshVoices();
@@ -2083,6 +2108,15 @@
         // Sanftes Nachführen zwischen den Wortgrenzen-Ereignissen
         setProgressChars(spokenChars, false);
         updateRemainingFromChars();
+      } else if (mode === 'track' && track) {
+        // iOS Safari feuert timeupdate nur spärlich — der Balken folgt
+        // der Uhr, nicht dem Event-Takt, und bleibt dadurch lebendig.
+        var d = track.duration;
+        if (d && isFinite(d) && d > 0 && !track.paused) {
+          paintProgress((track.currentTime || 0) / d);
+          updateRemainingFromTime((d - (track.currentTime || 0)) * 1000);
+          trackSyncPosition();
+        }
       }
       if (win.requestAnimationFrame && !reducedMotion) {
         progressTimer = win.requestAnimationFrame(tick);
@@ -2143,6 +2177,43 @@
   var trackChunks = [];
   var trackCur = -1;
   var trackBlock = 0;
+  var trackLoadTimer = null;   // Lade-Wache: endloses Stumm ohne Fehlermeldung verhindern
+
+  /**
+   * Plausibilitäts-Wache für die Studio-Tonspur (Befund 06.09.2026).
+   * Der Generator übersprang fehlgeschlagene TTS-Segmente still — auf
+   * gh-pages standen dadurch Tonspuren aus NUR Pausen (jeder Chunk
+   * t0 == t1, 33 s für einen Zehn-Minuten-Artikel). Der Reader spielte
+   * sie stumm durch: kein Ton, Fortschritt rannte. Eine Tonspur wird
+   * deshalb VOR dem Start geprüft:
+   *   · Mehrheit der Chunks mit echter Sprechdauer (t1 > t0)
+   *   · Gesamtlaufzeit im plausiblen Fenster um die erwartete
+   *     Sprechzeit des ARTIKELS (± Abweichung deckt auch einen
+   *     leichten Block-Paritätsdrift ab — nicht aber eine Spur
+   *     für einen anderen Artikel oder aus puren Pausen).
+   */
+  function trackPlausible() {
+    if (!track) return false;
+    var a = cfg.audio || {};
+    var chunks = trackChunks || [];
+    if (!chunks.length) return false;
+    var spoken = 0;
+    for (var i = 0; i < chunks.length; i++) {
+      if ((chunks[i].t1 || 0) > (chunks[i].t0 || 0)) spoken += 1;
+    }
+    if (spoken < Math.ceil(chunks.length * 0.6)) return false;
+
+    var totalChars_ = blocks.reduce(function (n, b) { return n + (b.text || '').length; }, 0);
+    var expectedMs = (totalChars_ / BASE_CPS) * 1000 * 1.18;   // + Block-Pausen
+    var durationMs = Number(a.duration) || 0;
+    if (!durationMs && track && isFinite(track.duration) && track.duration > 0) {
+      durationMs = track.duration * 1000;
+    }
+    if (!durationMs) return false;
+    if (durationMs < expectedMs * 0.25) return false;   // Stumm-/Pausen-Spur
+    if (durationMs > expectedMs * 4.0) return false;    // falsche Spur / falsches Tempo
+    return true;
+  }
 
   function initTrack() {
     var a = cfg.audio;
@@ -2164,9 +2235,24 @@
     elt.addEventListener('timeupdate', trackOnTime);
     elt.addEventListener('play', function () { if (reading) startProgressTicker(); });
     elt.addEventListener('pause', stopProgressTicker);
-    elt.addEventListener('ended', function () { stopProgressTicker(); endReading(true, true); });
-    elt.addEventListener('error', function () { if (reading) fallbackToSpeech(); });
+    elt.addEventListener('ended', trackOnEnded);
+    elt.addEventListener('error', function () { if (reading) fallbackToSpeech(T.trackBroken); });
     return true;
+  }
+
+  function clearTrackLoadGuard() {
+    if (trackLoadTimer) { clearTimeout(trackLoadTimer); trackLoadTimer = null; }
+  }
+
+  /** Lade-Wache: startet die Spur nicht binnen 8 s hörbar (Netz
+      hängt, Metadaten kommen nie), übernimmt die Browser-Engine. */
+  function armTrackLoadGuard() {
+    clearTrackLoadGuard();
+    trackLoadTimer = setTimeout(function () {
+      if (!reading || mode !== 'track' || !track) return;
+      if (track.readyState >= 2 && !track.paused) return;   // lädt/läuft
+      fallbackToSpeech(T.trackBroken);
+    }, 8000);
   }
 
   function trackTotalMs() {
@@ -2178,6 +2264,17 @@
   }
 
   function trackOnTime() {
+    if (!track || !reading) return;
+    trackSyncPosition();
+  }
+
+  /**
+   * Positionssynchronisation der Tonspur: Live-Markierung, gemerkte
+   * Position, Fortschritt und Restzeit aus EINER Uhr. timeupdate feuert
+   * je Browser sehr unterschiedlich (iOS Safari spärlich, Headless kaum)
+   * — deshalb läuft dieselbe Synchronisation zusätzlich im rAF-Ticker.
+   */
+  function trackSyncPosition() {
     if (!track || !reading) return;
     var t = (track.currentTime || 0) * 1000;
     var total = trackTotalMs();
@@ -2199,6 +2296,32 @@
     }
   }
 
+  /**
+   * Endet die Spur deutlich vor der erwarteten Hörzeit (zu kurz
+   * geschnittene oder unvollständig vertonte Datei, Pausen-Spur),
+   * wäre „Vorlesen beendet“ eine Frottelei: Der Fortschritt spränge
+   * auf 100 %, obwohl fast nichts gesprochen wurde — genau der
+   * gemeldete Fehler (kein Ton, Anzeige rennt). Die Browser-Engine
+   * übernimmt deshalb ab dem zuletzt gehörten Block.
+   */
+  function trackOnEnded() {
+    stopProgressTicker();
+    clearTrackLoadGuard();
+    if (!reading || mode !== 'track') { if (reading) endReading(true, true); return; }
+    var expectedMs = (blocks.reduce(function (n, b) { return n + (b.text || '').length; }, 0) / BASE_CPS) * 1000 * 1.18;
+    var realMs = 0;
+    try {
+      if (track && isFinite(track.duration) && track.duration > 0) realMs = track.duration * 1000;
+    } catch (e) { realMs = 0; }
+    var mapMs = trackChunks.length ? (trackChunks[trackChunks.length - 1].t1 || 0) : 0;
+    var endedEarly =
+      (realMs && realMs < expectedMs * 0.35) ||                       // Datei zu kurz für den Artikel
+      (realMs && mapMs && realMs < mapMs * 0.6) ||                    // Datei kürzer als ihre eigene Karte
+      ((trackBlock || 0) < blocks.length - 2 && (!realMs || realMs < expectedMs * 0.35));
+    if (endedEarly) { fallbackToSpeech(T.trackEndedEarly); return; }
+    endReading(true, true);
+  }
+
   function trackSeek(bi) {
     if (!track) return;
     var target = Math.max(0, Math.min(blocks.length - 1, bi));
@@ -2214,7 +2337,7 @@
     if (!track) return;
     trackBlock = typeof fromBlock === 'number' && fromBlock > 0 ? Math.min(fromBlock, blocks.length - 1) : 0;
     trackCur = -1;
-    if (track.error) { fallbackToSpeech(); return; }
+    if (track.error) { fallbackToSpeech(T.trackBroken); return; }
     trackSeek(trackBlock);
     var total = trackTotalMs();
     if (total > 0 && trackChunks.length) {
@@ -2224,6 +2347,7 @@
       }
       paintProgress(t / total);
     }
+    armTrackLoadGuard();
     playElement(track);
   }
 
@@ -2239,9 +2363,10 @@
     }
   }
 
-  function trackPause() { if (track) { try { track.pause(); } catch (e) {} } }
-  function trackResume() { playElement(track); }
+  function trackPause() { clearTrackLoadGuard(); if (track) { try { track.pause(); } catch (e) {} } }
+  function trackResume() { armTrackLoadGuard(); playElement(track); }
   function trackStop() {
+    clearTrackLoadGuard();
     if (!track) return;
     try { track.pause(); } catch (e) {}
     try { track.currentTime = 0; } catch (e) {}
@@ -2259,14 +2384,41 @@
     rememberBlock(target);
   }
 
-  /** Tonspur nicht abspielbar → nahtlos auf die Browser-Engine. */
-  function fallbackToSpeech() {
-    if (!track) { setStatus(T.unsupported); return; }
-    var resumeAt = blocks[trackBlock] ? trackBlock : 0;
-    try { track.pause(); } catch (e) {}
+  /**
+   * Tonspur nicht abspielbar → nahtlos auf die Browser-Engine.
+   *
+   * Befund 06.09.2026: Diese Funktion rief startReading() auf, das bei
+   * laufender Wiedergabe SOFORT zurückkehrte (reading === true). Der
+   * Fallback war damit ein No-Op: Bei einer 404-/Codec-Spur hing die
+   * Leiste endlos auf „Studio-Tonspur läuft.“ — kein Ton, kein
+   * Fortschritt. Jetzt wird der alte Lauf vollständig entwertet und
+   * die Sprach-Engine DIREKT ab dem zuletzt gehörten Block gestartet.
+   */
+  function fallbackToSpeech(reason) {
+    var resumeAt = 0;
+    if (mode === 'track') resumeAt = blocks[trackBlock] ? trackBlock : 0;
+    else if (units.length) {
+      var cu = units[Math.min(cursor, units.length - 1)];
+      resumeAt = cu ? cu.blockIndex : 0;
+    }
+    runId += 1;                     // alte Rückrufe entwerten
+    clearPauseTimer();
+    clearStartWatchdog();
+    clearTrackLoadGuard();
+    stopProgressTicker();
+    stopKeepAlive();
+    unitInFlight = false;
+    liveUtterance = null;
+    if (synth) { try { synth.cancel(); } catch (e) {} }
+    if (track) { try { track.pause(); } catch (e) {} }
     mode = 'speech';
-    if (!speechSupported) { endReading(false, false); setStatus(T.unsupported); return; }
-    startReading(resumeAt, true);
+    if (!speechSupported || !blocks.length) {
+      endReading(false, false);
+      setStatus(speechSupported ? T.noText : T.unsupported);
+      return;
+    }
+    startSpeech(resumeAt);
+    if (reason) setStatus(reason);  // Grund der Übernahme bleibt sichtbar
   }
 
   /* ============================================================
@@ -2290,6 +2442,20 @@
   var pauseTimer = null;
   var errorStreak = 0;
   var retryCounts = {};
+  var everStarted = false;    // mind. ein onstart je Lauf (Ehrlichkeits-Wache)
+
+  /**
+   * Ehrlichkeits-Wache (Befund 06.09.2026): Startet die Synthese in
+   * einem Browser GAR nicht (keine Engine, keine Stimmen, Headless),
+   * fegte der Reader vorher still durch alle Einheiten — Fortschritt
+   * rannte, kein Ton, „Vorlesen beendet“. Ein Lauf, der NIEMALS ein
+   * onstart gesehen hat, wird jetzt ehrlich beendet und benannt,
+   * statt so zu tun, als wäre vorgelesen worden.
+   */
+  function honestDeadStop() {
+    endReading(false, false);
+    setStatus(T.synthesisDead);
+  }
 
   function clearStartWatchdog() {
     if (startWatchdog) { clearTimeout(startWatchdog); startWatchdog = null; }
@@ -2357,6 +2523,7 @@
       liveUtterance = null;
       errorStreak += 1;
       var tries = retryCounts[index] || 0;
+      if (!everStarted && tries >= 1) { honestDeadStop(); return; }
       if (tries < 2 && errorStreak < 4) {
         retryCounts[index] = tries + 1;
         setStatus(T.sectionError);
@@ -2373,7 +2540,9 @@
     }
 
     /* Anti-Stall-Wache: startet ein Lauf nicht innerhalb von 4 s,
-       wird die Einheit verworfen und neu versucht (nie Stille). */
+       wird die Einheit verworfen und neu versucht (nie Stille).
+       Ohne JEGLICHEN Start zuvor gilt die Engine als tot — ehrliches
+       Ende statt stillem Durchfegen des Artikels. */
     function armWatchdog(guardIdx) {
       clearStartWatchdog();
       startWatchdog = setTimeout(function () {
@@ -2383,6 +2552,7 @@
         unitInFlight = false;
         liveUtterance = null;
         var tries = retryCounts[index] || 0;
+        if (!everStarted) { honestDeadStop(); return; }
         if (tries < 2) {
           retryCounts[index] = tries + 1;
           speakUnit(index, false);
@@ -2422,6 +2592,7 @@
       u.onstart = function () {
         if (myRun !== runId) return;
         lastStarted = myIdx;
+        everStarted = true;            // Engine lebt — Ehrlichkeits-Wache entspannt
         clearStartWatchdog();
         errorStreak = 0;
         highlightBlock(unit.block);
@@ -2475,11 +2646,14 @@
     pauseTimer = setTimeout(function () { speakUnit(next, false); }, wait);
   }
 
-  function startSpeech(fromIndex) {
+  function startSpeech(fromIndex, reason) {
     unlockEngine();
     errorStreak = 0;
     retryCounts = {};
+    everStarted = false;          // neuer Lauf: Ehrlichkeits-Wache scharf
     runId += 1;
+    clearPauseTimer();
+    clearStartWatchdog();
     stopKeepAlive();
 
     quality = calibrateQuality();
@@ -2504,6 +2678,7 @@
     playing = true;
     setBarState('playing');
     setStatus(startIdx > 0 ? T.resumedPos : T.started);
+    if (reason) setStatus(reason);   // Grund einer Übernahme bleibt sichtbar
     setupMediaSession();
     startProgressTicker();
     startKeepAlive();
@@ -2588,10 +2763,19 @@
   }
 
   function startReading(fromIndex, forceSpeech) {
+    var trackRejected = null;
     if (reading) return;
     if (!prepareBlocks()) { setStatus(T.noText); return; }
 
     var useTrack = (mode === 'track' && track && !forceSpeech);
+    if (useTrack && !trackPlausible()) {
+      // Defekte Spur (Pausen-Spur, falsche Spur, kaputte Metadaten):
+      // nie stumm durchlaufen lassen — die Browser-Engine übernimmt.
+      useTrack = false;
+      mode = 'speech';
+      track = null;
+      trackRejected = T.trackDefective;
+    }
     if (!speechSupported && !useTrack) { setStatus(T.unsupported); return; }
 
     reading = true;
@@ -2606,7 +2790,7 @@
       startProgressTicker();
       return;
     }
-    startSpeech(typeof fromIndex === 'number' ? fromIndex : 0);
+    startSpeech(typeof fromIndex === 'number' ? fromIndex : 0, trackRejected);
   }
 
   function pauseReading() {
@@ -2629,6 +2813,7 @@
     runId += 1;
     clearPauseTimer();
     clearStartWatchdog();
+    clearTrackLoadGuard();
     stopProgressTicker();
     stopKeepAlive();
     unitInFlight = false;
@@ -3245,6 +3430,12 @@
     get reading() { return reading; },
     get playing() { return playing; },
     get trackReady() { return trackReady; },
+    get everStarted() { return everStarted; },
+    get trackBlock() { return trackBlock; },
+    trackPlausible: function () {
+      if (!blocks.length) blocks = collectBlocks();
+      return trackPlausible();
+    },
     speechNormalize: speechNormalize,
     sentences: sentences,
     splitForSpeech: splitForSpeech,

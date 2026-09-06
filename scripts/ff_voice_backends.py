@@ -79,7 +79,10 @@ GROQ_MODEL = "canopylabs/orpheus-v1-english"
 ENGINE_ORDER = ["edge", "piper", "groq"]
 
 # Backend-Fingerprint: ändert er sich, werden Tonspuren neu erzeugt.
-RECIPE_VERSION = "ff-voice-2026.09.05-c"
+# 06.09.2026: Bump nach dem Pausen-Spur-Befund — alle bestehenden (defekten)
+# Caches werden invalidiert und beim nächsten Lauf neu vertont bzw. vom
+# Reader-Klienten bis dahin sicher abgewiesen (Plausibilitäts-Gate).
+RECIPE_VERSION = "ff-voice-2026.09.06"
 
 # ---------------------------------------------------------------------------
 # Prosodie-Regie — spiegelbildlich zu PROSODY in static/premium/ff-voice.js
