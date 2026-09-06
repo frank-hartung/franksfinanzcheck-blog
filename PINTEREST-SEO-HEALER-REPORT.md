@@ -1,6 +1,6 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-05 04:33 UTC · **Modus:** FIX
+**Stand:** 2026-09-06 08:44 UTC · **Modus:** FIX
 
 - Artikel: **32**
 - Geheilt: **0**
@@ -46,8 +46,8 @@
 | ✅ | `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | — |
 | ✅ | `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` | — |
 | ✅ | `2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen` | — |
-| ✅ | `2026-09-03-hausratversicherung-kosten-leistungen-vergleich` *(draft)* | — |
-| ✅ | `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` *(draft)* | — |
+| ✅ | `2026-09-03-hausratversicherung-kosten-leistungen-vergleich` | — |
+| ✅ | `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` | — |
 | ✅ | `2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt` *(draft)* | — |
 | ✅ | `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` *(draft)* | — |
 | ✅ | `2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise` *(draft)* | — |
