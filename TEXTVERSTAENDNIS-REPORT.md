@@ -1,8 +1,8 @@
 # 🧠 TEXTVERSTÄNDNIS-REPORT (textverstaendnis_guard.py)
-**Stand:** 2026-09-05 05:50 UTC · Artikel: 32
+**Stand:** 2026-09-06 09:40 UTC · Artikel: 32
 
 **Harte Regeln (R2/R3/R5-hart/R7/R8-URL):** 4 Funde
-**Weiche Regeln (R4/R5/R8-Anker):** 34 Funde
+**Weiche Regeln (R4/R5/R8-Anker):** 35 Funde
 
 - `content/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/index.md` **R8-ANKER-ZIEL**: Ankertext „Notgroschen“ passt nicht zum Ziel „2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich“
 - `content/posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/index.md` **R4-SATZANFANG**: „die“ startet 11/59 Sätze (11.1/1k Wörter)
@@ -40,6 +40,7 @@
 - `content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md` **R9-KLEBEWORT**: Klebe-Artefakt „Ddiebesten“ (Wort fängt doppelt an: Dd…) – Überrest eines defekten Text-Inserters, manuell reparieren
 - `content/posts/2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise/index.md` **R4-SATZANFANG**: „die“ startet 9/105 Sätze (8.0/1k Wörter)
 - `content/posts/2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise/index.md` **R5-ABSATZ**: Absatz mit 5 Sätzen (Limit 4): Ein Sitznachbar im Flugzeug zahlt oft das Dreifache für die identische Flugstrecke. Ich sa…
+- `content/posts/2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh/index.md` **R4-SATZANFANG**: „der“ startet 5/69 Sätze (4.9/1k Wörter)
 - `content/posts/_index.md` **R9-KLEBEWORT**: Klebe-Artefakt „Hhierfindest“ (Wort fängt doppelt an: Hh…) – Überrest eines defekten Text-Inserters, manuell reparieren
 - `content/posts/_index.md` **R9-KLEBEWORT**: Klebe-Artefakt „Ddeine6“ (Wort fängt doppelt an: Dd…) – Überrest eines defekten Text-Inserters, manuell reparieren
 
