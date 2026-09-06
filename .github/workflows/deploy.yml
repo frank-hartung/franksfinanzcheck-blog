@@ -221,8 +221,22 @@ jobs:
           python3 scripts/ff_voice_backends.py --selftest || echo "⚠ Backends-Selftest – Funde im Log (kein Deploy-Stopp)"
           python3 scripts/ff_voice_parity_check.py || echo "⚠ Paritäts-Gate – Funde im Log (kein Deploy-Stopp)"
 
-      - name: TTS-Backend installieren (edge-tts, optional piper-tts)
+      - name: TTS-Backend installieren (Dekoder, edge-tts, optional piper-tts)
         run: |
+          # ---- DEKODER ZUERST ---------------------------------------
+          # Befund 07.09.2026: edge-tts liefert einen MP3-Strom. Ohne
+          # Dekoder wurde daraus eine unlesbare .wav – jedes Segment fiel
+          # aus, veröffentlicht wurde reine Digitalstille. ffmpeg (bzw.
+          # miniaudio als Reserve) ist daher KEIN Komfort, sondern die
+          # Voraussetzung für hörbaren Ton.
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq \
+              && sudo apt-get install -y -qq ffmpeg \
+              || echo "⚠ ffmpeg nicht installierbar → miniaudio muss greifen"
+          fi
+          python3 -m pip install -q miniaudio 2>/dev/null \
+            || python3 -m pip install -q --break-system-packages miniaudio \
+            || echo "⚠ miniaudio nicht installierbar (ffmpeg bleibt Hauptweg)"
           # edge-tts: kostenlos, kein Key, männliche Neuralstimmen DE/EN.
           python3 -m pip install -q edge-tts 2>/dev/null \
             || python3 -m pip install -q --break-system-packages edge-tts \
@@ -232,6 +246,7 @@ jobs:
             || python3 -m pip install -q --break-system-packages piper-tts \
             || echo "⚠ piper-tts nicht installierbar → edge/Browser-Fallback"
           ffmpeg -version | head -1 || echo "⚠ ffmpeg fehlt → nur WAV ohne Mastering"
+          # Zeigt Engines, Rezept-Version UND den gefundenen Dekoder an.
           python3 scripts/ff_voice_audio.py --engines || true
 
       - name: Vorlese-Tonspuren erzeugen (männliche DE/EN-Stimme, kostenlos)
@@ -271,6 +286,24 @@ jobs:
             --limit-new "$LIMIT_NEW" \
             || echo "⚠ Vorlese-Tonspuren unvollständig – Deploy läuft weiter (Browser-Fallback aktiv)"
           echo "✅ Vorlese-Audio-Schritt abgeschlossen."
+
+      # Endkontrolle VOR der Veröffentlichung: Jede Tonspur wird gemessen
+      # (Pegel, hörbarer Anteil, Laufzeit) und ihre Chunk-Karte gegen den
+      # Artikeltext geprüft. Wer durchfällt, verliert Datei und
+      # Konfigurationsblock (--heal) – dann liest die Gerätestimme vor.
+      # Lieber ehrliche Browserstimme als eine stumme Studiospur.
+      - name: Tonspuren nachmessen und stumme Spuren entfernen
+        run: |
+          python3 scripts/ff_voice_audio.py --verify --heal \
+            --html-dir public \
+            --out-dir public/audio/articles \
+            || echo "⚠ Nachmessung mit Funden – Deploy läuft weiter"
+          # Zweiter Durchgang rein zur Protokollierung: Danach darf nichts
+          # Beanstandetes mehr im Veröffentlichungsstand liegen.
+          python3 scripts/ff_voice_audio.py --verify \
+            --html-dir public \
+            --out-dir public/audio/articles \
+            || echo "⚠ Es bleiben beanstandete Spuren – bitte im Log nachsehen"
 
       - name: Deploy auf gh-pages
         uses: peaceiris/actions-gh-pages@v4

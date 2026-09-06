@@ -1524,6 +1524,62 @@ def inject_track_config(html_path: str, payload: dict) -> bool:
         return False
 
 
+def strip_track_config(html_path: str) -> bool:
+    """Entfernt einen injizierten Tonspur-Block wieder aus der Seite.
+
+    Gegenstueck zu inject_track_config: Wird eine Spur nachtraeglich als
+    unbrauchbar erkannt (Stille-Wache, --verify --heal), darf die Seite
+    nicht weiter auf sie zeigen — der Reader soll sofort und ohne Umweg
+    die Geraetestimme nehmen.
+    """
+    try:
+        with open(html_path, "r", encoding="utf-8") as fh:
+            markup = fh.read()
+    except Exception:
+        return False
+    pattern = re.compile(r'<script type="application/json" id="%s">.*?</script>\s*' % CONFIG_BLOCK_ID,
+                         re.S)
+    if not pattern.search(markup):
+        return False
+    markup = pattern.sub("", markup, count=1)
+    try:
+        with open(html_path, "w", encoding="utf-8") as fh:
+            fh.write(markup)
+        return True
+    except Exception:
+        return False
+
+
+def audio_health(audio_path: str, expected_ms: int = 0) -> tuple:
+    """(ok, grund, messwerte) — traegt eine Tonspur-DATEI wirklich Ton?
+
+    Der Befund vom 06.09.2026 stand als Datei auf gh-pages: 34 WAVs mit
+    peak = 0 (Digitalstille). Metadaten allein reichen also nicht — es
+    zaehlt der gemessene Pegel. Ohne Dekoder fuer Fremdformate (MP3 ohne
+    ffmpeg) wird ehrlich „ungeprueft“ gemeldet, statt Sicherheit
+    vorzutaeuschen.
+    """
+    if not audio_path or not os.path.exists(audio_path):
+        return False, "Datei fehlt", {}
+    if os.path.getsize(audio_path) < 1024:
+        return False, "Datei ist leer", {}
+    kind = ttb.audio_kind(audio_path)
+    if kind != "wav" and not ttb.decoder_available():
+        return True, "ungeprüft (kein Dekoder für %s)" % kind, {}
+    try:
+        samples, rate = ttb.decode_audio_mono(audio_path)
+    except Exception as exc:
+        return False, "nicht dekodierbar (%s)" % str(exc)[:60], {}
+    stats = ttb.audio_stats(samples, rate)
+    ok, why = ttb.has_audible_speech(samples, rate, min_ratio=0.25)
+    if not ok:
+        return False, why, stats
+    if expected_ms and stats["duration_ms"] < expected_ms * 0.30:
+        return False, ("Datei nur %.1f s (erwartet ≥ %.0f s)"
+                       % (stats["duration_ms"] / 1000.0, expected_ms * 0.30 / 1000.0)), stats
+    return True, "", stats
+
+
 # ---------------------------------------------------------------------------
 # Artikel-Verwaltung
 # ---------------------------------------------------------------------------
@@ -1565,6 +1621,74 @@ def pick_engine(requested: str):
     return None
 
 
+def verify_tracks(html_dir: str, out_dir: str, heal: bool = False) -> int:
+    """Endkontrolle des Veröffentlichungsstands: Traegt JEDE Tonspur Ton?
+
+    Dieses Gate laeuft im Deploy NACH der Erzeugung und im Lesehilfen-Gate
+    gegen ein Testverzeichnis. Es misst jede Datei (Pegel, hoerbarer
+    Anteil, Laufzeit) und prueft die Chunk-Karte gegen den Artikeltext.
+
+    Mit --heal werden defekte Spuren geloescht und ihr Konfigurationsblock
+    aus der Seite entfernt: Der Reader nimmt dann sofort die
+    Geraetestimme, statt Stille abzuspielen. Rueckgabe: Anzahl der
+    beanstandeten Spuren (0 = sauber).
+    """
+    articles = find_articles(html_dir)
+    bad = 0
+    checked = 0
+    healed = 0
+    for slug, path, markup in articles:
+        m = re.search(r'<script type="application/json" id="%s">(.*?)</script>' % CONFIG_BLOCK_ID,
+                      markup, re.S)
+        if not m:
+            continue
+        checked += 1
+        try:
+            payload = json.loads(m.group(1))
+        except Exception:
+            payload = {}
+        src = str(payload.get("src") or "")
+        audio_path = os.path.join(out_dir, src.rsplit("/", 1)[-1]) if src else ""
+        root = parse_html(markup)
+        cfg = read_reader_config(root)
+        blocks, _lang = extract_blocks(root, cfg) if cfg else ([], "de")
+
+        reasons = []
+        ok_meta, why_meta = track_plausible(blocks, payload.get("chunks") or [],
+                                            payload.get("duration") or 0)
+        if not ok_meta:
+            reasons.append("Karte: " + why_meta)
+        ok_file, why_file, stats = audio_health(audio_path, payload.get("duration") or 0)
+        if not ok_file:
+            reasons.append("Datei: " + why_file)
+
+        if reasons:
+            bad += 1
+            print("  ✗ %-58s %s" % (slug, " · ".join(reasons)))
+            if heal:
+                try:
+                    if audio_path and os.path.exists(audio_path):
+                        os.remove(audio_path)
+                    json_path = os.path.join(out_dir, slug + ".track.json")
+                    if os.path.exists(json_path):
+                        os.remove(json_path)
+                except Exception:
+                    pass
+                if strip_track_config(path):
+                    healed += 1
+        else:
+            print("  ✓ %-58s %5.1f s · peak %5d · %3.0f %% Ton"
+                  % (slug, (payload.get("duration") or 0) / 1000.0,
+                     stats.get("peak", 0), stats.get("audible_ratio", 0) * 100.0))
+
+    print("FF-VOICE-VERIFY – geprüft: %d, beanstandet: %d%s"
+          % (checked, bad, (", geheilt: %d" % healed) if heal else ""))
+    if bad and not heal:
+        print("  → Reparatur: python3 scripts/ff_voice_audio.py --verify --heal "
+              "--html-dir %s --out-dir %s" % (html_dir, out_dir))
+    return bad
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Studio-Tonspuren für die Vorlese-Funktion")
     ap.add_argument("--html-dir", default="public")
@@ -1578,11 +1702,21 @@ def main(argv=None) -> int:
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--verify", action="store_true",
+                    help="Endkontrolle: misst jede veröffentlichte Tonspur auf echten Ton")
+    ap.add_argument("--heal", action="store_true",
+                    help="mit --verify: defekte Tonspuren entfernen (Reader nimmt die Gerätestimme)")
     ap.add_argument("--engines", nargs="*", default=None)
     args = ap.parse_args(argv)
 
     if args.selftest:
         return selftest()
+
+    if args.verify:
+        bad = verify_tracks(args.html_dir, args.out_dir, heal=args.heal)
+        if args.heal:
+            return 0
+        return 1 if bad else 0
 
     if args.engines is not None:
         print("Verfügbare Engines: %s" % (", ".join(ttb.available_engines()) or "keine"))
@@ -1590,6 +1724,10 @@ def main(argv=None) -> int:
         for name, prof in ttb.VOICE_PROFILES.items():
             print("  Profil %-9s DE %-34s EN %s" % (name, prof["de"], prof["en"]))
         print("ffmpeg:             %s" % ("ja" if ttb.has_ffmpeg() else "nein (WAV-Fallback)"))
+        print("Audio-Dekoder:      %s" % (ttb.decoder_name() or "KEINER — edge-tts (MP3) unbrauchbar!"))
+        if ttb.edge_module_present() and not ttb.decoder_available():
+            print("  ⚠ edge-tts ist installiert, aber ohne Dekoder unbrauchbar:")
+            print("    apt-get install -y ffmpeg   ODER   pip install miniaudio")
         print("Gewähltes Backend:  %s" % (pick_engine(args.backend) or "keines"))
         return 0 if pick_engine(args.backend) else 2
 
@@ -1660,24 +1798,43 @@ def main(argv=None) -> int:
                     cached_audio = (os.path.join(args.cache_dir, audio_name)
                                     if args.cache_dir else os.path.join(args.out_dir, audio_name))
                     target_audio = os.path.join(args.out_dir, audio_name)
-                    if os.path.exists(cached_audio) and not os.path.exists(target_audio):
-                        shutil.copy2(cached_audio, target_audio)
-                    if os.path.exists(target_audio) and not os.path.exists(track_json):
-                        shutil.copy2(src_json, track_json)
-                    if os.path.exists(target_audio):
-                        inject_track_config(path, {
-                            "src": previous.get("src", ""),
-                            "version": ttb.RECIPE_VERSION,
-                            "voice": {"de": voices["de"], "en": voices["en"]},
-                            "engine": previous.get("engine", engine),
-                            "profile": profile,
-                            "duration": previous.get("duration", 0),
-                            "chunks": previous.get("chunks", []),
-                        })
-                        reused += 1
-                        continue
+                    # STILLE-WACHE AM CACHE (07.09.2026): Nicht nur die
+                    # Metadaten, sondern die DATEI wird gemessen. Genau so
+                    # verschwinden die 34 stummen Spuren aus dem Bestand:
+                    # Sie werden nicht wiederverwendet, sondern neu vertont.
+                    probe = cached_audio if os.path.exists(cached_audio) else target_audio
+                    heal_ok, heal_why, _stats = audio_health(probe, previous.get("duration") or 0)
+                    if not heal_ok:
+                        print("  ⚠ Cache-Spur %s verworfen (Datei: %s) — wird neu vertont"
+                              % (slug, heal_why))
+                        try:
+                            if os.path.exists(target_audio):
+                                os.remove(target_audio)
+                            if os.path.exists(track_json):
+                                os.remove(track_json)
+                        except Exception:
+                            pass
+                        strip_track_config(path)
+                    else:
+                        if os.path.exists(cached_audio) and not os.path.exists(target_audio):
+                            shutil.copy2(cached_audio, target_audio)
+                        if os.path.exists(target_audio) and not os.path.exists(track_json):
+                            shutil.copy2(src_json, track_json)
+                        if os.path.exists(target_audio):
+                            inject_track_config(path, {
+                                "src": previous.get("src", ""),
+                                "version": ttb.RECIPE_VERSION,
+                                "voice": {"de": voices["de"], "en": voices["en"]},
+                                "engine": previous.get("engine", engine),
+                                "profile": profile,
+                                "duration": previous.get("duration", 0),
+                                "chunks": previous.get("chunks", []),
+                            })
+                            reused += 1
+                            continue
                 elif previous.get("fingerprint") == fp and not ok_cache:
                     print("  ⚠ Cache-Spur %s verworfen (%s) — wird neu vertont" % (slug, why))
+                    strip_track_config(path)
 
         if args.limit_new and produced >= args.limit_new:
             print("Limit erreicht (--limit-new %d) – Rest beim nächsten Lauf." % args.limit_new)
@@ -1695,12 +1852,14 @@ def main(argv=None) -> int:
         if not samples:
             failed += 1
             shutil.rmtree(tmp_dir, ignore_errors=True)
+            strip_track_config(path)
             continue
         if stats["failed"] > 0:
             failed += 1
             print("  ✗ %s VERWORFEN: %d von %d Segmenten ohne Audio — keine Lückenspur veröffentlicht"
                   % (slug, stats["failed"], stats["segments"]))
             shutil.rmtree(tmp_dir, ignore_errors=True)
+            strip_track_config(path)
             continue
         duration_ms = int(round(len(samples) * 1000.0 / ttb.SAMPLE_RATE))
         ok_track, why = track_plausible(blocks, chunks, duration_ms)
@@ -1708,6 +1867,19 @@ def main(argv=None) -> int:
             failed += 1
             print("  ✗ %s VERWORFEN: Plausibilitäts-Gate (%s) — Reader bleibt auf Gerätestimme" % (slug, why))
             shutil.rmtree(tmp_dir, ignore_errors=True)
+            strip_track_config(path)
+            continue
+
+        # STILLE-WACHE (07.09.2026): gemessen, nicht geglaubt. Eine Spur
+        # ohne Pegel wird nie geschrieben — der Reader nimmt dann ehrlich
+        # die Gerätestimme statt 28 Sekunden Digitalstille abzuspielen.
+        audible, why_audio = ttb.has_audible_speech(samples, ttb.SAMPLE_RATE, min_ratio=0.25)
+        if not audible:
+            failed += 1
+            print("  ✗ %s VERWORFEN: Stille-Wache (%s) — keine tonlose Spur veröffentlicht"
+                  % (slug, why_audio))
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+            strip_track_config(path)
             continue
 
         wav_path = os.path.join(args.out_dir, slug + ".wav")
@@ -1715,11 +1887,37 @@ def main(argv=None) -> int:
         ttb.write_wav_mono(wav_path, samples)
         audio_name = slug + ".wav"
         if ttb.master_to_mp3(wav_path, mp3_path) and os.path.getsize(mp3_path) > 0:
-            audio_name = slug + ".mp3"
-            try:
-                os.remove(wav_path)
-            except Exception:
-                pass
+            # Auch das Mastering wird nachgemessen: Eine ffmpeg-Filterkette
+            # kann eine stumme oder abgeschnittene Datei erzeugen. Dann
+            # bleibt die geprüfte WAV stehen.
+            mp3_ok, mp3_why, _mp3_stats = audio_health(mp3_path, duration_ms)
+            if mp3_ok:
+                audio_name = slug + ".mp3"
+                try:
+                    os.remove(wav_path)
+                except Exception:
+                    pass
+            else:
+                print("  ⚠ %s: MP3-Mastering verworfen (%s) — WAV bleibt" % (slug, mp3_why))
+                try:
+                    os.remove(mp3_path)
+                except Exception:
+                    pass
+
+        final_audio = os.path.join(args.out_dir, audio_name)
+        final_ok, final_why, final_stats = audio_health(final_audio, duration_ms)
+        if not final_ok:
+            failed += 1
+            print("  ✗ %s VERWORFEN: Endkontrolle der Datei (%s)" % (slug, final_why))
+            for leftover in (wav_path, mp3_path):
+                try:
+                    if os.path.exists(leftover):
+                        os.remove(leftover)
+                except Exception:
+                    pass
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+            strip_track_config(path)
+            continue
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
         payload = {
@@ -1735,7 +1933,9 @@ def main(argv=None) -> int:
             json.dump(dict(payload, fingerprint=fp), fh, ensure_ascii=False, indent=1)
         inject_track_config(path, payload)
         produced += 1
-        print("Tonspur: %-58s %6.1f s  %d Blöcke" % (slug, duration_ms / 1000.0, len(blocks)))
+        print("Tonspur: %-58s %6.1f s  %d Blöcke  peak %d · %.0f %% Ton"
+              % (slug, duration_ms / 1000.0, len(blocks),
+                 final_stats.get("peak", 0), final_stats.get("audible_ratio", 0) * 100.0))
 
     print("FF-VOICE-AUDIO – neu: %d, wiederverwendet: %d, fehlgeschlagen: %d"
           % (produced, reused, failed))
@@ -2058,6 +2258,109 @@ def selftest() -> int:
 
     # Engine-Auswahl
     check("Engine-Auswahl respektiert None", pick_engine("nicht-da") is None or True)
+
+    # ------------------------------------------------------------------
+    # KERNBEFUND 06.09.2026 · Der komplette Weg bis zur Datei
+    #   „edge-tts liefert MP3, die Kette las RIFF/WAVE“ → Digitalstille
+    # ------------------------------------------------------------------
+    import math as _math
+    import tempfile as _tf2
+
+    def _speech_samples(seconds=2.0):
+        n = int(ttb.SAMPLE_RATE * seconds)
+        out = []
+        for i in range(n):
+            t = i / float(ttb.SAMPLE_RATE)
+            env = 0.5 + 0.5 * _math.sin(2 * _math.pi * 4 * t)
+            out.append(int(10000 * env * _math.sin(2 * _math.pi * 170 * t)))
+        return out
+
+    with _tf2.TemporaryDirectory() as td:
+        silent_wav = os.path.join(td, "silent.wav")
+        ttb.write_wav_mono(silent_wav, [0] * (ttb.SAMPLE_RATE * 3))
+        loud_wav = os.path.join(td, "loud.wav")
+        ttb.write_wav_mono(loud_wav, _speech_samples(3.0))
+
+        ok_sil, why_sil, _st = audio_health(silent_wav, 3000)
+        check("Datei-Wache: deployte Stille-Spur fällt durch", ok_sil is False)
+        check("Datei-Wache: Grund benannt", "Digitalstille" in why_sil or "hörbar" in why_sil)
+        check("Datei-Wache: echte Sprache besteht", audio_health(loud_wav, 3000)[0] is True)
+        check("Datei-Wache: fehlende Datei fällt durch",
+              audio_health(os.path.join(td, "gibtsnicht.wav"))[0] is False)
+        check("Datei-Wache: zu kurze Datei fällt durch",
+              audio_health(loud_wav, 60000)[0] is False)
+
+        # Injektion / Entfernung des Konfigurationsblocks
+        page = os.path.join(td, "index.html")
+        with open(page, "w", encoding="utf-8") as fh:
+            fh.write(FIXTURE)
+        inject_track_config(page, {"src": "/audio/articles/x.wav", "duration": 1000, "chunks": []})
+        with open(page, encoding="utf-8") as fh:
+            markup_injected = fh.read()
+        check("Injektion: Block steht in der Seite", CONFIG_BLOCK_ID in markup_injected)
+        check("Rückbau: Block entfernt", strip_track_config(page) is True)
+        with open(page, encoding="utf-8") as fh:
+            check("Rückbau: Seite ohne Tonspur-Block", CONFIG_BLOCK_ID not in fh.read())
+        check("Rückbau: zweiter Aufruf ist wirkungslos", strip_track_config(page) is False)
+
+    # Endkontrolle gegen den DEPLOYTEN Defekt: Seite + Stille-WAV + Karte
+    with _tf2.TemporaryDirectory() as td:
+        html_dir = os.path.join(td, "public")
+        out_dir = os.path.join(html_dir, "audio", "articles")
+        page_dir = os.path.join(html_dir, "posts", "stille-spur")
+        os.makedirs(page_dir, exist_ok=True)
+        os.makedirs(out_dir, exist_ok=True)
+        page = os.path.join(page_dir, "index.html")
+        with open(page, "w", encoding="utf-8") as fh:
+            fh.write(FIXTURE)
+        ttb.write_wav_mono(os.path.join(out_dir, "stille-spur.wav"),
+                           [0] * int(ttb.SAMPLE_RATE * 27.94))
+        root_x = parse_html(FIXTURE)
+        blocks_x, _lx = extract_blocks(root_x, read_reader_config(root_x))
+        deployed_payload = {
+            "src": "/audio/articles/stille-spur.wav",
+            "version": ttb.RECIPE_VERSION, "engine": "edge", "profile": "natural",
+            "duration": 27940,
+            "chunks": [{"b": i, "t0": i * 420, "t1": i * 420, "lang": "de"}
+                       for i in range(len(blocks_x))],
+        }
+        inject_track_config(page, deployed_payload)
+        with open(os.path.join(out_dir, "stille-spur.track.json"), "w", encoding="utf-8") as fh:
+            json.dump(deployed_payload, fh)
+
+        bad = verify_tracks(html_dir, out_dir, heal=False)
+        check("Endkontrolle erkennt die deployte Stille-Spur", bad == 1)
+        bad_healed = verify_tracks(html_dir, out_dir, heal=True)
+        check("Heilung meldet denselben Fund", bad_healed == 1)
+        with open(page, encoding="utf-8") as fh:
+            check("Heilung: Seite zeigt nicht mehr auf die Spur", CONFIG_BLOCK_ID not in fh.read())
+        check("Heilung: stumme Datei gelöscht",
+              not os.path.exists(os.path.join(out_dir, "stille-spur.wav")))
+        check("Endkontrolle danach sauber", verify_tracks(html_dir, out_dir) == 0)
+
+    # Eine gesunde Spur besteht die Endkontrolle vollständig
+    with _tf2.TemporaryDirectory() as td:
+        html_dir = os.path.join(td, "public")
+        out_dir = os.path.join(html_dir, "audio", "articles")
+        page_dir = os.path.join(html_dir, "posts", "gute-spur")
+        os.makedirs(page_dir, exist_ok=True)
+        os.makedirs(out_dir, exist_ok=True)
+        page = os.path.join(page_dir, "index.html")
+        with open(page, "w", encoding="utf-8") as fh:
+            fh.write(FIXTURE)
+        root_g = parse_html(FIXTURE)
+        blocks_g, _lg = extract_blocks(root_g, read_reader_config(root_g))
+        secs = expected_speech_ms(blocks_g) / 1000.0
+        ttb.write_wav_mono(os.path.join(out_dir, "gute-spur.wav"), _speech_samples(secs))
+        t = 0
+        chunks_g = []
+        for bi, b in enumerate(blocks_g):
+            d = max(200, int(len(b["text"]) / ttb.BASE_CPS * 1000))
+            chunks_g.append({"b": bi, "t0": t, "t1": t + d, "lang": b.get("lang") or "de"})
+            t += d
+        inject_track_config(page, {"src": "/audio/articles/gute-spur.wav",
+                                   "duration": int(secs * 1000), "chunks": chunks_g})
+        check("Endkontrolle lässt gesunde Spur durch", verify_tracks(html_dir, out_dir) == 0)
 
     failed = [n for n, ok in results if not ok]
     for name, ok in results:

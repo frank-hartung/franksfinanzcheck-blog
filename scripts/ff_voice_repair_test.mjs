@@ -277,8 +277,13 @@ t.group('C3b · Stumme Engine (keine Events): Anti-Stall-Wache stoppt ehrlich');
 
   doc.getElementById('ff-voice-play').click();
   t.ok('Läuft zunächst (wartet auf onstart)', api.reading === true);
-  await sleep(4300);   // 4-s-Wache
-  t.ok('Wache beendet ehrlich nach 4 s', api.reading === false);
+  await sleep(2000);
+  t.ok('Weicher Neustart statt Fehlmeldung (1,5 s)', api.reading === true);
+  // Zwei weiche Neustarts (1,5 s + 2,5 s) und danach die harte Wache
+  // (4,5 s): erst dann gilt die Engine als tot. So verliert ein bloß
+  // langsamer Start (Chrome mit Netzstimmen) nicht mehr die Wiedergabe.
+  await sleep(7600);
+  t.ok('Wache beendet ehrlich nach der zweiten Stufe', api.reading === false);
   t.ok('Status nennt die Grenze des Geräts', /nicht verfügbar/.test(doc.getElementById('ff-voice-status').textContent));
   t.ok('Fortschritt bleibt 0 %', (parseFloat(doc.getElementById('ff-voice-progress').style.width) || 0) === 0);
 }

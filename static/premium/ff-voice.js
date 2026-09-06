@@ -60,7 +60,7 @@
      1 · KONFIGURATION
      ============================================================ */
 
-  var VOICE_VERSION = '2026.09.06';
+  var VOICE_VERSION = '2026.09.07';
 
   var cfgEl = doc.getElementById('ff-voice-config');
   if (!cfgEl) return;
@@ -115,7 +115,10 @@
       trackDefective: 'Die Tonspur dieses Artikels ist unbrauchbar – die Stimme deines Geräts übernimmt.',
       trackBroken: 'Tonspur konnte nicht geladen werden – die Stimme deines Geräts übernimmt.',
       trackEndedEarly: 'Die Tonspur endet zu früh – es geht mit der Gerätestimme weiter.',
+      trackSilent: 'Die Tonspur bleibt stumm – die Stimme deines Geräts übernimmt.',
+      trackStalled: 'Die Tonspur hängt – die Stimme deines Geräts übernimmt.',
       synthesisDead: 'Sprachausgabe ist auf diesem Gerät nicht verfügbar. Der Artikel bleibt vollständig lesbar.',
+      synthesisMute: 'Dein Browser meldet Sprachausgabe, gibt aber keinen Ton aus. Das Vorlesen wurde gestoppt – der Artikel bleibt vollständig lesbar.',
       voiceActive: 'Männliche Stimme aktiv.',
       voiceFallback: 'Vorlesen gestartet; dein Browser stellt die verfügbare Stimme bereit.',
       voiceLoading: 'Männliche Stimme wird geladen …',
@@ -180,7 +183,10 @@
       trackDefective: 'This article’s audio track is unusable – your device’s voice takes over.',
       trackBroken: 'Audio track could not be loaded – your device’s voice takes over.',
       trackEndedEarly: 'The audio track ends too early – continuing with your device’s voice.',
+      trackSilent: 'The audio track stays silent – your device’s voice takes over.',
+      trackStalled: 'The audio track stalled – your device’s voice takes over.',
       synthesisDead: 'Speech output is unavailable on this device. The article remains fully readable.',
+      synthesisMute: 'Your browser reports speech but produces no sound. Reading was stopped – the article remains fully readable.',
       voiceActive: 'Male voice active.',
       voiceFallback: 'Playback started; your browser provides the available voice.',
       voiceLoading: 'Loading a male voice …',
@@ -2055,6 +2061,61 @@
   var progressRatio = 0;
   var progressTimer = null;
 
+  /* ============================================================
+     PHYSIK-DECKEL (Befund 06.09./07.09.2026)
+     ------------------------------------------------------------
+     Der gemeldete Fehler hatte zwei Gesichter: „kein Ton“ UND „die
+     Fortschrittsanzeige rennt“. Beide entstehen aus derselben Lüge —
+     eine Engine (oder eine stumme Tonspur) meldet Sprechfortschritt,
+     ohne zu sprechen. Dagegen hilft nur eine Größe, die nicht gelogen
+     werden kann: die WANDUHR.
+
+     Niemand spricht schneller als SPEECH_FLOOR_CPS Zeichen pro
+     Sekunde (Standard 60 — viermal schneller als die Regie mit 15,2
+     Zeichen/s und weit jenseits jeder verständlichen Sprache).
+       1. Der Balken darf nie über diesen Wert hinauslaufen.
+       2. Wer schneller „fertig“ ist, hat nicht gesprochen: Der Lauf
+          wird ehrlich gestoppt (kein falsches „Vorlesen beendet“).
+
+     `speechFloorCps: 0` in der Seiten-Konfiguration schaltet den
+     Deckel ab — ausschließlich für QA-Suiten mit Zeitraffer-Attrappen.
+     Die ausgelieferten Seiten setzen den Wert nie.
+     ============================================================ */
+
+  var SPEECH_FLOOR_CPS = (function () {
+    var v = Number(cfg.speechFloorCps);
+    if (cfg.speechFloorCps === 0 || v === 0) return 0;
+    return (isFinite(v) && v > 0) ? v : 60;
+  })();
+
+  var clockRunning = false;
+  var clockStartedAt = 0;
+  var clockAccumMs = 0;
+  var clockBaseChars = 0;     // Zeichenstand beim Start des Laufs
+
+  function nowMs() {
+    try {
+      if (win.performance && typeof win.performance.now === 'function') return win.performance.now();
+    } catch (e) {}
+    return Date.now();
+  }
+  function clockReset(baseChars) {
+    clockRunning = false; clockStartedAt = 0; clockAccumMs = 0;
+    clockBaseChars = Math.max(0, baseChars || 0);
+  }
+  function clockGo() { if (!clockRunning) { clockRunning = true; clockStartedAt = nowMs(); } }
+  function clockHalt() {
+    if (clockRunning) { clockAccumMs += Math.max(0, nowMs() - clockStartedAt); clockRunning = false; }
+  }
+  function clockActiveMs() {
+    return clockAccumMs + (clockRunning ? Math.max(0, nowMs() - clockStartedAt) : 0);
+  }
+  /** Zeichen, die bis jetzt PHYSIKALISCH gesprochen sein können. */
+  function clockCharCeiling() {
+    if (!SPEECH_FLOOR_CPS) return Infinity;
+    return clockBaseChars + 60 + (clockActiveMs() / 1000) * SPEECH_FLOOR_CPS;
+  }
+
   function paintProgress(ratio) {
     var r = Math.max(0, Math.min(1, ratio || 0));
     if (r < progressRatio && r < 0.999) r = progressRatio;      // monoton – nie zurück
@@ -2072,8 +2133,11 @@
     var next = Math.max(0, Math.min(totalChars, chars));
     if (!allowBackward && next < displayedChars) next = displayedChars;
     displayedChars = next;
-    paintProgress(totalChars ? next / totalChars : 0);
+    // Physik-Deckel: Der Balken kann der Wanduhr nicht davonlaufen.
+    var shown = (mode === 'speech') ? Math.min(next, clockCharCeiling()) : next;
+    paintProgress(totalChars ? shown / totalChars : 0);
   }
+
 
   function resetProgress(chars) {
     progressRatio = 0;
@@ -2117,6 +2181,7 @@
           updateRemainingFromTime((d - (track.currentTime || 0)) * 1000);
           trackSyncPosition();
         }
+        trackWatch();       // Hänger- und Stille-Wache (07.09.2026)
       }
       if (win.requestAnimationFrame && !reducedMotion) {
         progressTimer = win.requestAnimationFrame(tick);
@@ -2178,6 +2243,100 @@
   var trackCur = -1;
   var trackBlock = 0;
   var trackLoadTimer = null;   // Lade-Wache: endloses Stumm ohne Fehlermeldung verhindern
+  var trackLastTime = -1;      // Hänger-Wache: läuft die Uhr der Datei wirklich?
+  var trackLastMoveAt = 0;
+  var trackAudioCtx = null;    // Stille-Sonde (Web Audio)
+  var trackProbe = null;
+  var trackProbeState = { tried: false, playedMs: 0, heard: false, lastAt: 0 };
+
+  /* ============================================================
+     STILLE-SONDE DER TONSPUR (Befund 07.09.2026)
+     ------------------------------------------------------------
+     Auf gh-pages standen 34 Tonspuren mit peak = 0 — digitale Stille,
+     technisch einwandfrei abspielbar. Metadaten-Prüfungen können so
+     etwas nicht sehen: Die Datei „läuft“, nur hört man nichts.
+     Deshalb misst der Reader das SIGNAL: Das <audio>-Element wird über
+     einen Analyser geführt (und unverändert an die Lautsprecher
+     weitergereicht). Bleibt der Pegel über 2,5 Sekunden Wiedergabe
+     exakt bei null, ist die Spur stumm — die Gerätestimme übernimmt.
+
+     Sicherheitsregeln: Die Sonde wird NUR angeklemmt, wenn der
+     Audio-Kontext wirklich läuft (sonst bliebe die native Wiedergabe
+     stumm), sie ist über `audioProbe: false` in der Seiten-
+     Konfiguration abschaltbar und jeder Fehler lässt die native
+     Wiedergabe unangetastet.
+     ============================================================ */
+
+  function armSilenceProbe() {
+    if (trackProbeState.tried || !track) return;
+    trackProbeState.tried = true;
+    if (cfg.audioProbe === false) return;
+    var AC = win.AudioContext || win.webkitAudioContext;
+    if (!AC) return;
+    try { trackAudioCtx = trackAudioCtx || new AC(); } catch (e) { trackAudioCtx = null; return; }
+
+    var attach = function () {
+      if (trackProbe || !track || !trackAudioCtx) return;
+      if (trackAudioCtx.state !== 'running') return;   // sonst würde die Spur verstummen
+      try {
+        var src = trackAudioCtx.createMediaElementSource(track);
+        var analyser = trackAudioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        src.connect(analyser);
+        analyser.connect(trackAudioCtx.destination);   // Ton bleibt hörbar
+        trackProbe = { analyser: analyser, data: new win.Uint8Array(analyser.fftSize) };
+      } catch (e) {
+        trackProbe = null;
+      }
+    };
+
+    try {
+      var p = trackAudioCtx.resume ? trackAudioCtx.resume() : null;
+      if (p && p.then) p.then(attach, function () {}); else attach();
+    } catch (e) {}
+    setTimeout(attach, 400);      // zweiter Anlauf, falls der Kontext spät startet
+  }
+
+  /** Ein Messpunkt der Stille-Sonde; true = die Spur ist nachweislich stumm. */
+  function probeSilence() {
+    if (!trackProbe || !track || track.paused) return false;
+    var now = nowMs();
+    var since = trackProbeState.lastAt ? Math.min(400, now - trackProbeState.lastAt) : 0;
+    trackProbeState.lastAt = now;
+    var peak = 0;
+    try {
+      trackProbe.analyser.getByteTimeDomainData(trackProbe.data);
+      for (var i = 0; i < trackProbe.data.length; i += 8) {
+        var d = Math.abs(trackProbe.data[i] - 128);
+        if (d > peak) peak = d;
+      }
+    } catch (e) { return false; }
+    if (peak >= 2) { trackProbeState.heard = true; trackProbeState.playedMs = 0; return false; }
+    trackProbeState.playedMs += since;
+    return !trackProbeState.heard && trackProbeState.playedMs >= 2500;
+  }
+
+  /**
+   * Hänger- und Stille-Wache im Takt des Fortschritts-Tickers.
+   * Läuft die Uhr der Datei nicht (Netz weg, Codec hängt) oder bleibt
+   * das Signal stumm, übernimmt die Gerätestimme — nie wieder eine
+   * Leiste, die „läuft“, während nichts passiert.
+   */
+  function trackWatch() {
+    if (!track || !reading || mode !== 'track' || !playing) return;
+    var now = nowMs();
+    var t = track.currentTime || 0;
+    if (track.paused || track.ended) { trackLastTime = t; trackLastMoveAt = now; return; }
+    if (trackLastMoveAt === 0) { trackLastMoveAt = now; trackLastTime = t; }
+    if (Math.abs(t - trackLastTime) > 0.01) {
+      trackLastTime = t;
+      trackLastMoveAt = now;
+    } else if (now - trackLastMoveAt > 6000) {
+      fallbackToSpeech(T.trackStalled || T.trackBroken);
+      return;
+    }
+    if (probeSilence()) fallbackToSpeech(T.trackSilent || T.trackDefective);
+  }
 
   /**
    * Plausibilitäts-Wache für die Studio-Tonspur (Befund 06.09.2026).
@@ -2347,7 +2506,13 @@
       }
       paintProgress(t / total);
     }
+    trackLastTime = -1;
+    trackLastMoveAt = 0;
+    trackProbeState.playedMs = 0;
+    trackProbeState.heard = false;
+    trackProbeState.lastAt = 0;
     armTrackLoadGuard();
+    armSilenceProbe();          // im Klick-Kontext: Audio-Kontext darf starten
     playElement(track);
   }
 
@@ -2364,7 +2529,7 @@
   }
 
   function trackPause() { clearTrackLoadGuard(); if (track) { try { track.pause(); } catch (e) {} } }
-  function trackResume() { armTrackLoadGuard(); playElement(track); }
+  function trackResume() { trackLastMoveAt = 0; armTrackLoadGuard(); playElement(track); }
   function trackStop() {
     clearTrackLoadGuard();
     if (!track) return;
@@ -2418,7 +2583,7 @@
       return;
     }
     startSpeech(resumeAt);
-    if (reason) setStatus(reason);  // Grund der Übernahme bleibt sichtbar
+    if (reason) setStatus(reason, 6000);  // Grund der Übernahme bleibt sichtbar
   }
 
   /* ============================================================
@@ -2443,6 +2608,18 @@
   var errorStreak = 0;
   var retryCounts = {};
   var everStarted = false;    // mind. ein onstart je Lauf (Ehrlichkeits-Wache)
+  var runStartedAt = 0;       // Beginn des aktuellen Sprech-Laufs (Wanduhr)
+  var measuredMs = 0;         // real vergangene Zeit fertiger Einheiten
+  var measuredChars = 0;      // Zeichen ebendieser Einheiten
+  var measuredUnits = 0;
+  var muteStop = false;       // Lauf wegen tonloser Engine gestoppt
+  var resumeUnit = -1;        // Einheit, mit der „Weiterlesen“ fortsetzt
+  var softStarts = 0;         // weiche Neustarts (cancel→speak-Rennen)
+
+  var UA = String((win.navigator && win.navigator.userAgent) || '');
+  // Nur Chrome/Edge brauchen den pause()/resume()-Impuls gegen den
+  // 15-Sekunden-Einfrierer; Firefox und Safari stottern davon.
+  var CHROME_LIKE = /Chrome|Chromium|CriOS|Edg/i.test(UA) && !/Firefox|FxiOS/i.test(UA);
 
   /**
    * Ehrlichkeits-Wache (Befund 06.09.2026): Startet die Synthese in
@@ -2452,9 +2629,27 @@
    * onstart gesehen hat, wird jetzt ehrlich beendet und benannt,
    * statt so zu tun, als wäre vorgelesen worden.
    */
-  function honestDeadStop() {
+  function honestDeadStop(msg) {
     endReading(false, false);
-    setStatus(T.synthesisDead);
+    setStatus(msg || T.synthesisDead);
+  }
+
+  /**
+   * Stumm-Sweep-Wache (Befund 07.09.2026, zweites Gesicht des Fehlers).
+   * Manche Engines melden brav onstart und onend — ohne einen Ton
+   * auszugeben (Linux ohne speech-dispatcher, verwaltete Browser,
+   * einige Android-WebViews). Vorher rannte der Fortschritt in
+   * Sekunden durch den ganzen Artikel und meldete „beendet“.
+   *
+   * Gemessen wird gegen die Wanduhr: Niemand spricht schneller als
+   * SPEECH_FLOOR_CPS Zeichen pro Sekunde. Wer das doch „schafft“,
+   * spricht nicht — der Lauf endet ehrlich und benannt.
+   */
+  function muteSweepDetected() {
+    if (!SPEECH_FLOOR_CPS) return false;
+    if (measuredUnits < 2 || measuredChars < 400) return false;
+    var seconds = Math.max(0.001, measuredMs / 1000);
+    return (measuredChars / seconds) > SPEECH_FLOOR_CPS;
   }
 
   function clearStartWatchdog() {
@@ -2468,11 +2663,21 @@
   }
   function startKeepAlive() {
     stopKeepAlive();
-    // Chrome friert die Queue bei längeren Pausen ein; ein sanfter
-    // resume()-Impuls hält die Engine wach, ohne hörbar zu sein.
+    /* Chrome/Edge frieren die Sprach-Queue nach ~15 Sekunden ein — die
+       Äußerung bricht mitten im Satz ab und die Engine bleibt hängen.
+       Der etablierte Gegengriff ist ein kurzer pause()/resume()-Impuls
+       im laufenden Sprechen; er ist nicht hörbar, hält die Queue aber
+       wach. Andere Browser bekommen nur den sanften Aufwecker, falls
+       die Engine ungewollt pausiert stehen bleibt. */
     keepAliveTimer = setInterval(function () {
       if (!reading || !playing || !synth) { stopKeepAlive(); return; }
-      try { if (synth.paused && !unitInFlight) synth.resume(); } catch (e) {}
+      try {
+        if (synth.paused && !unitInFlight) { synth.resume(); return; }
+        if (CHROME_LIKE && unitInFlight && synth.speaking && !synth.paused) {
+          synth.pause();
+          synth.resume();
+        }
+      } catch (e) {}
     }, 9000);
   }
 
@@ -2493,6 +2698,7 @@
     var unit = units[index];
     cursor = index;
     nextIndex = index + 1;
+    resumeUnit = index;         // Pause mitten in der Einheit → hier weiter
 
     /* Wortlauf-Regie: Die Sprecheinheit wird in Sprachläufe zerlegt.
        Jeder Lauf bekommt die passende männliche Stimme (de/en); die
@@ -2501,10 +2707,29 @@
     var runs = languageRuns(unit.text, unit.lang);
     if (!runs.length) runs = [{ text: unit.text, lang: unit.lang }];
 
+    var offsets = [];
+    (function () {
+      var p = 0;
+      for (var i = 0; i < runs.length; i++) { offsets.push(p); p += runs[i].text.length; }
+    })();
+
     unitInFlight = true;
-    var runPos = 0;          // Zeichenoffset des aktuellen Laufs in unit.text
     var runIdx = 0;
     var lastStarted = -1;    // Index des zuletzt gestarteten Laufs
+    var softTries = 0;       // weiche Neustarts DIESER Einheit
+    var unitClock = nowMs(); // Wanduhr der Einheit (Stumm-Sweep-Wache)
+
+    function measureUnit() {
+      measuredMs += Math.max(0, nowMs() - unitClock);
+      measuredChars += String(unit.text || '').length;
+      measuredUnits += 1;
+      if (muteSweepDetected()) {
+        muteStop = true;
+        honestDeadStop(T.synthesisMute || T.synthesisDead);
+        return true;
+      }
+      return false;
+    }
 
     function finishUnit() {
       if (myRun !== runId) return;
@@ -2513,6 +2738,7 @@
       liveUtterance = null;
       spokenChars = unit.endChars;
       setProgressChars(spokenChars, false);
+      if (measureUnit()) return;
       advance(index);
     }
 
@@ -2535,31 +2761,50 @@
         setStatus(T.sectionError);
         spokenChars = unit.endChars;
         setProgressChars(spokenChars, false);
+        if (measureUnit()) return;
         advance(index);
       }
     }
 
-    /* Anti-Stall-Wache: startet ein Lauf nicht innerhalb von 4 s,
-       wird die Einheit verworfen und neu versucht (nie Stille).
-       Ohne JEGLICHEN Start zuvor gilt die Engine als tot — ehrliches
-       Ende statt stillem Durchfegen des Artikels. */
+    /* Anti-Stall-Wache in zwei Stufen (Befund 07.09.2026):
+         Stufe 1 (weich)  Chrome verschluckt speak() unmittelbar nach
+                          cancel() — die Äußerung startet dann NIE.
+                          Derselbe Lauf wird nach kurzer Ruhe erneut
+                          angestoßen, ohne Fehlermeldung, ohne Sprung.
+         Stufe 2 (hart)   Bleibt es still, wird die Einheit verworfen
+                          und neu versucht; ohne JEDEN Start seit
+                          mindestens 6 Sekunden gilt die Engine als tot
+                          (ehrliches Ende statt stillem Durchfegen). */
     function armWatchdog(guardIdx) {
       clearStartWatchdog();
+      var wait = softTries === 0 ? 1500 : (softTries === 1 ? 2500 : 4500);
       startWatchdog = setTimeout(function () {
         if (myRun !== runId) return;
         if (lastStarted >= guardIdx) return;
+        if (softTries < 2) {
+          softTries += 1;
+          softStarts += 1;
+          try { synth.cancel(); } catch (e) {}
+          runIdx = guardIdx;                 // denselben Lauf erneut sprechen
+          clearPauseTimer();
+          pauseTimer = setTimeout(function () {
+            if (myRun !== runId || !reading || !playing) return;
+            speakNextRun();
+          }, 120);
+          return;
+        }
         try { synth.cancel(); } catch (e) {}
         unitInFlight = false;
         liveUtterance = null;
         var tries = retryCounts[index] || 0;
-        if (!everStarted) { honestDeadStop(); return; }
+        if (!everStarted && (nowMs() - runStartedAt) >= 6000) { honestDeadStop(); return; }
         if (tries < 2) {
           retryCounts[index] = tries + 1;
           speakUnit(index, false);
         } else {
           advance(index);
         }
-      }, 4000);
+      }, wait);
     }
 
     function speakNextRun() {
@@ -2568,8 +2813,7 @@
       if (runIdx >= runs.length) { finishUnit(); return; }
       var r = runs[runIdx];
       var myIdx = runIdx;
-      var offset = runPos;
-      runPos += r.text.length;
+      var offset = offsets[myIdx] || 0;
       runIdx += 1;
 
       var res = resolveMaleVoice(r.lang) || {};
@@ -2641,6 +2885,7 @@
     if (!reading || !playing) return;
     var next = index + 1;
     if (next >= units.length) { endReading(true, true); return; }
+    resumeUnit = next;
     var wait = units[next].before || 0;
     clearPauseTimer();
     pauseTimer = setTimeout(function () { speakUnit(next, false); }, wait);
@@ -2651,6 +2896,11 @@
     errorStreak = 0;
     retryCounts = {};
     everStarted = false;          // neuer Lauf: Ehrlichkeits-Wache scharf
+    muteStop = false;
+    measuredMs = 0;
+    measuredChars = 0;
+    measuredUnits = 0;
+    softStarts = 0;
     runId += 1;
     clearPauseTimer();
     clearStartWatchdog();
@@ -2672,13 +2922,17 @@
     }
     spokenChars = units[startIdx] ? units[startIdx].startChars : 0;
     resetProgress(spokenChars);
+    clockReset(spokenChars);
+    clockGo();
+    runStartedAt = nowMs();
     cursor = startIdx;
     nextIndex = startIdx;
+    resumeUnit = startIdx;
     reading = true;
     playing = true;
     setBarState('playing');
     setStatus(startIdx > 0 ? T.resumedPos : T.started);
-    if (reason) setStatus(reason);   // Grund einer Übernahme bleibt sichtbar
+    if (reason) setStatus(reason, 6000);   // Grund einer Übernahme bleibt sichtbar
     setupMediaSession();
     startProgressTicker();
     startKeepAlive();
@@ -2691,6 +2945,7 @@
     clearStartWatchdog();
     stopProgressTicker();
     stopKeepAlive();
+    clockHalt();
     runId += 1;                       // Rückrufe laufender Äußerungen entwerten
     unitInFlight = false;
     liveUtterance = null;
@@ -2705,23 +2960,43 @@
     runId += 1;
     setBarState('playing');
     setStatus(T.resumed);
+    clockGo();
     startProgressTicker();
     startKeepAlive();
     if (!speechSupported) return;
-    // Pause ist ein kontrollierter Abbruch. Fortgesetzt wird mit der
-    // Einheit, die als NÄCHSTE dran ist — mitten im Satz ist das der
-    // aktuelle, in der Atempause danach der folgende. Ein fertiger
-    // Satz wird dadurch nie doppelt gesprochen.
-    speakUnit(Math.min(nextIndex, Math.max(0, units.length - 1)), true);
+    /* Pause ist ein kontrollierter Abbruch. Fortgesetzt wird mit der
+       Einheit, die beim Pausieren lief — sie wird als Ganzes wiederholt.
+       Lieber ein Satz doppelt als ein Satz verloren (Befund 07.09.2026:
+       die alte Regie sprang auf die FOLGE-Einheit und verschluckte den
+       Rest des laufenden Satzes). */
+    var idx = resumeUnit >= 0 ? resumeUnit : nextIndex;
+    speakUnit(Math.min(Math.max(0, idx), Math.max(0, units.length - 1)), true);
   }
 
   /* ============================================================
      12 · REGIE — Start, Pause, Sprung, Ende
      ============================================================ */
 
-  function setStatus(msg) {
-    if (statusEl) statusEl.textContent = msg || '';
+  /**
+   * Statuszeile.
+   *
+   * `hold` (ms oder true) macht die Meldung kurzzeitig unverdrängbar:
+   * Wenn die Tonspur hängt oder stumm bleibt und die Gerätestimme
+   * übernimmt, muss der Grund lesbar bleiben — sonst überschreibt ihn
+   * die nächste Routinemeldung („Männliche Stimme aktiv.“) nach
+   * Sekundenbruchteilen und niemand erfährt, was passiert ist.
+   * Jede Bedienhandlung (Start, Pause, Stopp, Sprung) hebt die Sperre
+   * sofort wieder auf — sie läuft der Bedienung nie hinterher.
+   */
+  var statusHoldUntil = 0;
+  function setStatus(msg, hold) {
+    if (!statusEl) return;
+    var t = nowMs();
+    if (!hold && statusHoldUntil > t) return;
+    statusEl.textContent = msg || '';
+    statusHoldUntil = hold ? (t + (typeof hold === 'number' ? hold : 6000)) : 0;
   }
+  function releaseStatusHold() { statusHoldUntil = 0; }
 
   function setBarState(state) {
     if (!bar) return;
@@ -2765,6 +3040,7 @@
   function startReading(fromIndex, forceSpeech) {
     var trackRejected = null;
     if (reading) return;
+    releaseStatusHold();          // Bedienung geht der Erklärung vor
     if (!prepareBlocks()) { setStatus(T.noText); return; }
 
     var useTrack = (mode === 'track' && track && !forceSpeech);
@@ -2795,6 +3071,7 @@
 
   function pauseReading() {
     if (!reading) return;
+    releaseStatusHold();
     playing = false;
     if (mode === 'track' && track) { trackPause(); setBarState('paused'); setStatus(T.paused); return; }
     pauseSpeech();
@@ -2802,12 +3079,14 @@
 
   function resumeReading() {
     if (!reading) return;
+    releaseStatusHold();
     playing = true;
     if (mode === 'track' && track) { trackResume(); setBarState('playing'); setStatus(T.resumed); return; }
     resumeSpeech();
   }
 
   function endReading(announce, completed) {
+    releaseStatusHold();
     reading = false;
     playing = false;
     runId += 1;
@@ -2816,6 +3095,8 @@
     clearTrackLoadGuard();
     stopProgressTicker();
     stopKeepAlive();
+    clockHalt();
+    resumeUnit = -1;
     unitInFlight = false;
     liveUtterance = null;
     utteranceRefs.length = 0;
@@ -2832,6 +3113,7 @@
 
   function jumpBlock(delta) {
     if (!reading) return;
+    releaseStatusHold();
     if (mode === 'track' && track) { trackJump(delta); return; }
     if (!units.length) return;
     var cur = units[Math.min(cursor, units.length - 1)];
@@ -2849,6 +3131,9 @@
     setBarState('playing');
     spokenChars = units[idx] ? units[idx].startChars : 0;
     resetProgress(spokenChars);
+    clockReset(spokenChars);            // Sprung: Physik-Deckel neu ansetzen
+    clockGo();
+    measuredMs = 0; measuredChars = 0; measuredUnits = 0;
     speakUnit(idx, true);
     if (blocks[target]) highlightBlock(blocks[target]);
   }
@@ -3410,11 +3695,76 @@
      14 · INITIALISIERUNG
      ============================================================ */
 
-  var trackReady = initTrack();
+  /* Support-Schalter in der Adresszeile (kein Tracking, kein Speichern):
+       ?ffvoice=nostudio   Studio-Tonspur überspringen, Gerätestimme testen
+       ?ffvoice=debug      Diagnose in der Konsole ausgeben
+     Damit lässt sich eine Tonstörung am echten Gerät in Sekunden
+     einkreisen, ohne Code zu ändern. */
+  var urlFlag = '';
+  try {
+    var qs = String(win.location && win.location.search || '');
+    var m = qs.match(/[?&]ffvoice=([a-z-]+)/i);
+    urlFlag = m ? String(m[1]).toLowerCase() : '';
+  } catch (e) { urlFlag = ''; }
+
+  var trackReady = (urlFlag === 'nostudio') ? false : initTrack();
   mode = trackReady ? 'track' : 'speech';
   if (!trackReady && !speechSupported) {
     if (playBtn) playBtn.disabled = true;
     setStatus(T.unsupported);
+  }
+
+  function diagnostics() {
+    var voices = [];
+    try {
+      voices = (voiceCache || []).slice(0, 40).map(function (v) {
+        return { name: v && v.name, lang: v && v.lang, local: !!(v && v.localService) };
+      });
+    } catch (e) {}
+    return {
+      version: VOICE_VERSION,
+      mode: mode,
+      reading: reading,
+      playing: playing,
+      trackReady: trackReady,
+      trackSrc: (cfg.audio && (cfg.audio.src || cfg.audio)) || '',
+      trackPlausible: (function () { try { if (!blocks.length) blocks = collectBlocks(); return trackPlausible(); } catch (e) { return null; } })(),
+      trackProbe: { attached: !!trackProbe, heard: trackProbeState.heard, silentMs: trackProbeState.playedMs },
+      speechSupported: speechSupported,
+      voiceCount: (voiceCache || []).length,
+      maleVoice: (function () {
+        /* Ohne vorherigen Lauf ist noch nichts aufgelöst — für die
+           Ferndiagnose am fremden Gerät wird hier bewusst nachgesehen. */
+        var m = { de: maleVoiceFound.de, en: maleVoiceFound.en };
+        try {
+          if (speechSupported && (voiceCache || []).length) {
+            m = { de: !!resolveMaleVoice('de').male, en: !!resolveMaleVoice('en').male };
+          }
+        } catch (e) {}
+        return m;
+      })(),
+      everStarted: everStarted,
+      softStarts: softStarts,
+      muteStop: muteStop,
+      speechFloorCps: SPEECH_FLOOR_CPS,
+      measured: { ms: Math.round(measuredMs), chars: measuredChars, units: measuredUnits },
+      chromeKeepAlive: CHROME_LIKE,
+      blocks: blocks.length,
+      voices: voices
+    };
+  }
+
+  /* Diagnose-Modus ohne Konsolenrauschen: Der Befund landet als
+     Attribut an der Leiste (in den Entwicklerwerkzeugen sichtbar und
+     kopierbar) und unter window.__ffVoice.diagnostics(). Die
+     ausgelieferte Seite schreibt nie von sich aus in die Konsole. */
+  function publishDiagnostics() {
+    if (!bar) return;
+    try { bar.setAttribute('data-ff-voice-diagnostics', JSON.stringify(diagnostics())); } catch (e) {}
+  }
+  if (urlFlag === 'debug') {
+    publishDiagnostics();
+    win.setInterval(publishDiagnostics, 4000);
   }
 
   applyLabels();
@@ -3423,6 +3773,7 @@
   // Test- und Diagnose-Schnittstelle (kein Tracking, keine Netzaufrufe)
   win.__ffVoice = {
     version: VOICE_VERSION,
+    diagnostics: diagnostics,
     get mode() { return mode; },
     get blocks() { return blocks.slice(); },
     get units() { return units.slice(); },
@@ -3431,6 +3782,9 @@
     get playing() { return playing; },
     get trackReady() { return trackReady; },
     get everStarted() { return everStarted; },
+    get muteStop() { return muteStop; },
+    get softStarts() { return softStarts; },
+    get speechFloorCps() { return SPEECH_FLOOR_CPS; },
     get trackBlock() { return trackBlock; },
     trackPlausible: function () {
       if (!blocks.length) blocks = collectBlocks();
