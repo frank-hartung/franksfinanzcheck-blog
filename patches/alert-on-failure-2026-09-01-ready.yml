@@ -1,0 +1,219 @@
+# ============================================================
+#  ZENTRALES FEHLER-ALERTING (Profi-Monitoring)
+#
+#  Beobachtet ALLE automatischen Workflows. Schlägt einer fehl
+#  (z. B. abgelaufener API-Key, Deploy-Fehler, SEO-Gate), wird
+#  automatisch ein GitHub-Issue erstellt – du erfährst es ohne
+#  manuelles Prüfen der Actions-Seite.
+#
+#  So funktioniert's: workflow_run-Trigger feuert NACH Abschluss
+#  jedes gelisteten Workflows. Bei conclusion=failure/cancelled
+#  → Issue mit Workflow-Name, Run-Link und Log-Auszug.
+#
+#  Kein manuelles Zutun nötig – das System meldet sich selbst.
+# ============================================================
+name: Fehler-Alerting
+
+on:
+  workflow_run:
+    workflows:
+      - "Deploy auf GitHub Pages"
+      - "Qualitäts-Gate (Build + interne Links)"   # PREM-AUDIT: war blind – rote Runs + Issues #85 nur zufällig auffällig
+      - "Deploy-Catchup"                            # PREM-AUDIT: ohne ihn treibt ein Bot-Commit den Live-Stand nie nach
+      - "Wöchentliche SEO-Optimierung"
+      - "Backlink-Automation"
+      - "Wöchentliches Nach-Pinnen"
+      - "Quartalsweises Artikel-Update"
+      - "Bot-Watchdog"
+      - "Social-Media-AI"
+      - "Content-Engine v2"          # Herzstück (ersetzt daily-content, entfernt 2026-08-10)
+      - "Pinterest-AI"           # Pins würden still ausfallen
+      - "Pinterest-Watchdog"     # PREM-AUDIT: Spam-/SEO-Wache lief still aus
+      - "Layout-AI"              # Layout-Regressionen still
+      - "FrankAutoOps-Report"
+      - "Affiliate-Health (Wochenwache)"
+      - "Affiliate-Integritäts-Wache (täglich)"    # CTA-Link-Selbstheilung (14.08.)
+      - "Willkommenstext-Refresh"     # SEO-Unique-Content-Automatik Startseite (14.08.)
+      - "Blog-Gesundheits-Check (täglich)"   # tägliche Selbstheilung – hatte kein eigenes Alerting
+      - "Uptime-Monitor"         # PREM-AUDIT: Site-Ausfall nur per Zufall bemerkt
+      - "Mastodon-Profil-Sync"   # PREM-AUDIT: Social-Kanal still
+      - "Mastodon-SEO"           # PREM-AUDIT: Social-Kanal still
+      - "Offsite-Backup"         # PREM-AUDIT: Backup-Versagen wäre still fatal
+      - "Issues aufräumen (Triage)"          # PREM-AUDIT: Vollabdeckung
+      - "Erledigte Fehlermeldungen dauerhaft löschen"
+      - "Dependabot Auto-Merge"
+    types:
+      - completed
+
+permissions:
+  issues: write
+  actions: read     # Jobs/Schritte des beobachteten Laufs auslesen (Ursachen-Analyse)
+  checks: read      # Annotationen lesen ("canceled by @…" → Falsch-Alarm-Filter)
+
+jobs:
+  alarm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # LEKTORAT/AUDIT 01.09.2026 (Issue #141): 'cancelled' bleibt als Auslöser
+    # erhalten (z. B. Runner-Abbruch), wird aber im Script gefiltert:
+    # Ein von Hand abgebrochener Lauf ist KEIN Fehler und erzeugt kein Issue mehr.
+    if: ${{ github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'timed_out' || github.event.workflow_run.conclusion == 'cancelled' }}
+    steps:
+      - name: Issue bei fehlgeschlagenem Workflow erstellen
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const run = context.payload.workflow_run;
+            const wfName = run.name || 'Unbekannter Workflow';
+            const conclusion = run.conclusion;
+            const runUrl = run.html_url;
+
+            // --- Falsch-Alarm-Filter (Issue #141) --------------------------
+            // Wurde der Lauf von einem MENSCHEN abgebrochen (Actions → Cancel)
+            // oder von der Concurrency-Regel verdrängt, ist das kein Defekt.
+            // Erkennung über die Job-Annotationen ("The run was canceled by @…").
+            if (conclusion === 'cancelled') {
+              let manual = false;
+              try {
+                const { data: jobs } = await github.rest.actions.listJobsForWorkflowRun({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  run_id: run.id,
+                  per_page: 100
+                });
+                for (const job of jobs.jobs || []) {
+                  const m = /check-runs\/(\d+)/.exec(job.check_run_url || '');
+                  if (!m) continue;
+                  const { data: ann } = await github.rest.checks.listAnnotations({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    check_run_id: Number(m[1]),
+                    per_page: 100
+                  });
+                  if (ann.some(a => /canceled by @|higher priority waiting request|cancel-in-progress/i.test(a.message || ''))) {
+                    manual = true;
+                    break;
+                  }
+                }
+              } catch (e) {
+                console.log('Annotationen nicht lesbar: ' + e.message);
+              }
+              if (manual) {
+                console.log('Lauf wurde manuell/durch Concurrency abgebrochen – kein Fehler, kein Issue.');
+                return;
+              }
+            }
+            // ---------------------------------------------------------------
+
+            const branch = run.head_branch || 'main';
+            const created = new Date(run.created_at).toLocaleString('de-DE', { timeZone: 'Europe/Berlin' });
+            const headSha = run.head_sha ? run.head_sha.slice(0, 8) : '?';
+
+            const { data: existing } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100
+            });
+            const open = existing.filter(i => i.title && i.title.indexOf('Workflow fehlgeschlagen: ' + wfName) !== -1 && !i.pull_request);
+            if (open.length > 0) {
+              console.log('Offenes Issue existiert bereits (#' + open[0].number + ') – kein Duplikat.');
+              return;
+            }
+
+            // Welcher Schritt ist konkret gescheitert? (spart das Log-Wühlen)
+            let failedSteps = [];
+            try {
+              const { data: jobs } = await github.rest.actions.listJobsForWorkflowRun({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: run.id,
+                per_page: 100
+              });
+              for (const job of jobs.jobs || []) {
+                for (const step of job.steps || []) {
+                  if (step.conclusion === 'failure' || step.conclusion === 'timed_out') {
+                    failedSteps.push('`' + job.name + '` → **' + step.name + '** (' + step.conclusion + ')');
+                  }
+                }
+              }
+            } catch (e) {
+              console.log('Schritt-Analyse nicht möglich: ' + e.message);
+            }
+
+            const lines = [
+              '## ' + wfName + ' ist fehlgeschlagen (' + conclusion + ')',
+              '',
+              '- **Workflow:** ' + wfName,
+              '- **Branch:** ' + branch + ' · **Commit:** `' + headSha + '`',
+              '- **Zeit:** ' + created,
+              '- **Run:** [Details ansehen](' + runUrl + ')',
+              '',
+              '### Betroffener Schritt',
+              failedSteps.length ? failedSteps.map(s => '- ' + s).join('\n') : '- (kein einzelner Schritt gemeldet – ganzer Lauf abgebrochen)',
+              '',
+              '### Was du tun solltest',
+              '1. Öffne den Run-Link oben und schaue in das Log des oben genannten Schritts.',
+              '2. Häufigste Ursachen:',
+              '   - **API-Key abgelaufen** (GROQ/GEMINI) → Secrets in den Repo-Einstellungen aktualisieren',
+              '   - **Zeitlimit erreicht** (`timed_out`) → KI-Dienst hängt; einfach neu starten',
+              '   - **GitHub-Ausfall** → auf https://www.githubstatus.com prüfen',
+              '   - **Transienter Fehler** → Workflow manuell neu starten (Actions → Run workflow)',
+              '',
+              '> Hinweis: Von Hand abgebrochene Läufe erzeugen seit 01.09.2026 **kein** Issue mehr.',
+              '',
+              '---',
+              '*Automatisch erstellt vom Fehler-Alerting-Workflow – du musst nichts manuell prüfen.*'
+            ];
+            const body = lines.join('\n');
+
+            // Label "auto-report" sicherstellen (zentrales Fehlermeldungs-Label).
+            // Darüber werden erledigte Meldungen später automatisch aufgeräumt.
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'auto-report',
+                color: 'd73a4a',
+                description: 'Automatisch erkannte Fehlermeldung'
+              });
+            } catch (e) { /* Label existiert bereits – ok */ }
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '⚠️ Workflow fehlgeschlagen: ' + wfName + ' (' + conclusion + ')',
+              body: body,
+              labels: ['auto-report']
+            });
+            console.log('✅ Issue erstellt für ' + wfName);
+
+  # ------------------------------------------------------------
+  #  AUTO-CLOSE: Behobene Fehlermeldungen automatisch schließen
+  #
+  #  Läuft der beobachtete Workflow wieder GRÜN, wird das zugehörige
+  #  offene Issue (Label auto-report) geschlossen. Die dauerhafte
+  #  Löschung übernimmt der Workflow "Erledigte Fehlermeldungen
+  #  dauerhaft löschen" nach Ablauf der Schonfrist.
+  # ------------------------------------------------------------
+  resolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Behobene Fehlermeldung schließen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          WF_NAME="${{ github.event.workflow_run.name }}"
+          RUN_URL="${{ github.event.workflow_run.html_url }}"
+
+          for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --label auto-report --json number,title \
+            | jq -r --arg w "$WF_NAME" \
+            '.[] | select(.title | startswith("⚠️ Workflow fehlgeschlagen: " + $w)) | .number'); do
+            gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
+              --comment "✅ Behoben: \`${WF_NAME}\` läuft wieder fehlerfrei ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
+            echo "→ Issue #$n geschlossen."
+          done
+          echo "Auto-Close-Prüfung abgeschlossen."
