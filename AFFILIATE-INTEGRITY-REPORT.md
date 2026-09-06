@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-09-04 04:06:08 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-09-06 08:16:02 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 26 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 19
+**Geprüfte Live-Artikel:** 28 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 19
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -38,6 +38,8 @@
 | 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen | 2 → 3 ✅ | /go/haftpflicht/, /go/kfz-versicherung/ |
 | 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich | 2 → 3 ✅ | /go/tagesgeld/ |
 | 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen | 2 → 2 ✅ | /go/mietwagen/ |
+| 2026-09-03-hausratversicherung-kosten-leistungen-vergleich | 1 → 1 ✅ | /go/hausrat/ |
+| 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen | 1 → 2 ✅ | /go/kreditkarte/, /go/reisekrankenversicherung/ |
 
 ## Hinweise (nicht blockierend)
 
