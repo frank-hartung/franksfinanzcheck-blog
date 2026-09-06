@@ -256,7 +256,11 @@ jobs:
         run: |
           mkdir -p /tmp/ff-voice-cache
           # Vorherige Tonspuren vom letzten Deploy holen (inkrementell).
-          if git fetch --quiet origin gh-pages:refs/remotes/origin/gh-pages 2>/dev/null; then
+          # `+` erzwingt das Update: seit dem force_orphan-Fix (Issue #179)
+          # ist gh-pages ein einzelner Orphan-Commit und damit KEIN
+          # Fast-Forward mehr – ohne `+` würde dieser Fetch stets scheitern
+          # und der Audio-Cache jeden Lauf neu vertonen.
+          if git fetch --quiet origin +gh-pages:refs/remotes/origin/gh-pages 2>/dev/null; then
             git restore --source=origin/gh-pages -- audio/articles 2>/dev/null || true
             if [ -d audio/articles ]; then
               cp -r audio/articles/. /tmp/ff-voice-cache/ 2>/dev/null || true
@@ -311,4 +315,14 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
+          # PREMIUM-FIX 06.09.2026 (Issue #179): gh-pages ist ein
+          # REGENERIERBARES Build-Artefakt. Ohne force_orphan sammelte
+          # sich dort eine 169-Commits-History mit unkomprimierten
+          # Vorlese-WAVs (~3,5 GB) an – dadurch sprengte das tägliche
+          # Offsite-Backup (`git bundle --all`) die 2-GiB-Release-Grenze
+          # und fiel dauerhaft aus. force_orphan hält den Branch bei
+          # GENAU EINEM Commit (aktueller Build): keine History-Explosion,
+          # der inkrementelle Audio-Cache (Vorlese-Schritt oben) liest
+          # weiterhin korrekt aus dem letzten gh-pages-Stand.
+          force_orphan: true
           cname: franksfinanzcheck.de
