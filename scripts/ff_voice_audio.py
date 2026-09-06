@@ -1331,13 +1331,63 @@ def fingerprint(blocks, engine, profile, voice_de, voice_en):
 # Synthese
 # ---------------------------------------------------------------------------
 
+def expected_speech_ms(blocks) -> float:
+    """Erwartete Hörzeit in ms — derselbe Zeichen-pro-Sekunde-Maßstab
+    wie BASE_CPS im Reader (Parität erzwungen durch ff_voice_parity_check).
+    Der Faktor 1,18 deckt die Atem-Pausen zwischen Blöcken und Einheiten."""
+    total_chars = sum(len(b.get("text") or "") for b in blocks)
+    return (total_chars / ttb.BASE_CPS) * 1000.0 * 1.18
+
+
+def track_plausible(blocks, chunks, duration_ms) -> tuple:
+    """Plausibilitäts-Gate für Tonspuren (Befund 06.09.2026).
+
+    Auf gh-pages standen Spuren aus NUR Pausen: Das TTS-Backend lieferte
+    für JEDES Segment kein Audio, synth_article übersprang die Fehler
+    still, und geschrieben wurde eine ~33-Sekunden-Datei für Zehn-
+    Minuten-Artikel (jeder Chunk t0 == t1). Der Reader spielte sie stumm
+    durch — „kein Ton, Fortschrittsanzeige rennt“. Eine Spur gilt seit
+    diesem Befund nur noch als gültig, wenn
+
+      · JEDES Segment vertont wurde (keine stillen Lücken, Verlagsregel:
+        lieber Gerätestimme als Tonspur mit fehlenden Sätzen),
+      · jeder Chunk echte Sprechdauer hat (t1 > t0),
+      · die Gesamtlaufzeit im plausiblen Fenster um die erwartete
+        Sprechzeit des Artikels liegt (0,3× bis 4,0×).
+
+    Rückgabe: (True, "") bzw. (False, grund).
+    """
+    if not chunks:
+        return False, "keine Chunks"
+    degenerate = [c for c in chunks if (c.get("t1") or 0) <= (c.get("t0") or 0)]
+    if degenerate:
+        return False, "%d von %d Chunks ohne Sprechdauer (t0==t1)" % (len(degenerate), len(chunks))
+    duration_ms = int(duration_ms or 0)
+    if duration_ms <= 0:
+        return False, "keine Laufzeit"
+    expected = expected_speech_ms(blocks)
+    if duration_ms < expected * 0.30:
+        return False, "Laufzeit %.1f s viel zu kurz (erwartet ≥ %.0f s)" % (duration_ms / 1000.0, expected * 0.30 / 1000.0)
+    if duration_ms > expected * 4.0:
+        return False, "Laufzeit %.1f s unplausibel lang (erwartet ≤ %.0f s)" % (duration_ms / 1000.0, expected * 4.0 / 1000.0)
+    return True, ""
+
+
 def synth_article(blocks, engine, profile_name, tmp_dir, log):
-    """Erzeugt (samples, chunks). chunks: [{b, t0, t1, lang}] in Millisekunden."""
+    """Erzeugt (samples, chunks, stats). chunks: [{b, t0, t1, lang}] in ms.
+
+    stats = {"segments": n, "ok": n, "failed": n} — seit dem Befund vom
+    06.09.2026 zählt jedes fehlgeschlagene Segment (Backend-Fehler ODER
+    leeres Audio) als FAILED; der Aufrufer verwirft die Spur komplett.
+    Kein stills Überspringen mehr: Eine Tonspur mit Lügen ist schlechter
+    als keine Tonspur (der Reader fällt auf die Gerätestimme zurück).
+    """
     os.makedirs(tmp_dir, exist_ok=True)
     pieces = []
     chunks = []
     cursor_ms = 0
     seg_index = 0
+    stats = {"segments": 0, "ok": 0, "failed": 0}
 
     for bi, block in enumerate(blocks):
         profile = ttb.prosody_for(block["type"])
@@ -1369,6 +1419,7 @@ def synth_article(blocks, engine, profile_name, tmp_dir, log):
                 pitch = int(round(profile.get("pitch", 0)))
 
                 seg_wav = os.path.join(tmp_dir, "seg_%05d.wav" % seg_index)
+                stats["segments"] += 1
                 used_engine, ok, _ = ttb.synthesize(run_text, run_lang, engine, profile_name,
                                                     seg_wav, rate=rate, pitch=pitch, volume=volume)
                 if not ok and run_lang != blang:
@@ -1378,17 +1429,22 @@ def synth_article(blocks, engine, profile_name, tmp_dir, log):
                     used_engine, ok, _ = ttb.synthesize(run_text, blang, engine, profile_name,
                                                         seg_wav, rate=rate, pitch=pitch, volume=volume)
                 if not ok:
+                    stats["failed"] += 1
                     if log:
-                        log("Segment %d konnte nicht vertont werden (engine=%s)" % (seg_index, engine))
+                        log("Segment %d konnte nicht vertont werden (engine=%s) — Spur wird verworfen"
+                            % (seg_index, engine))
                     continue
                 try:
                     samples, src_rate = ttb.read_wav_mono(seg_wav)
                 except Exception:
+                    stats["failed"] += 1
                     continue
                 samples = ttb.remove_dc(ttb.trim_edges(samples))
                 samples = ttb.apply_fade(ttb.declick(samples))
                 if not samples:
+                    stats["failed"] += 1
                     continue
+                stats["ok"] += 1
 
                 dur_ms = int(round(len(samples) * 1000.0 / src_rate))
                 is_unit_head = (si == 0 and ri == 0)
@@ -1418,7 +1474,7 @@ def synth_article(blocks, engine, profile_name, tmp_dir, log):
             pieces.append((ttb.silence_ms(after_ms, ttb.SAMPLE_RATE), ttb.SAMPLE_RATE))
 
     if not pieces:
-        return [], []
+        return [], [], stats
 
     # Alles auf eine Abtastrate bringen und zusammenfügen
     target_rate = ttb.SAMPLE_RATE
@@ -1432,12 +1488,12 @@ def synth_article(blocks, engine, profile_name, tmp_dir, log):
             merged.extend(samples[int(i * factor)] if int(i * factor) < len(samples) else 0
                           for i in range(n))
     if not merged:
-        return [], []
+        return [], [], stats
 
     merged = ttb.highpass(merged, 80.0, target_rate)
     merged = ttb.soft_limit(merged)
     merged = ttb.normalize_lufs_peak(merged)
-    return merged, chunks
+    return merged, chunks, stats
 
 
 # ---------------------------------------------------------------------------
@@ -1591,7 +1647,14 @@ def main(argv=None) -> int:
                         previous = json.load(fh)
                 except Exception:
                     previous = {}
-                if previous.get("fingerprint") == fp:
+                # Cache-Wache (Befund 06.09.2026): Auf gh-pages lagen
+                # Pausen-Spuren (alle Chunks t0==t1, 33 s für 10-Minuten-
+                # Artikel). Deren Fingerprint stimmte — sie wurden für
+                # immer wiederverwendet und in jede neue Seite injiziert.
+                # Seitdem durchläuft JEDE wiederverwendete Spur dasselbe
+                # Plausibilitäts-Gate wie eine frisch erzeugte.
+                ok_cache, why = track_plausible(blocks, previous.get("chunks") or [], previous.get("duration") or 0)
+                if previous.get("fingerprint") == fp and ok_cache:
                     src_audio = previous.get("src", "")
                     audio_name = src_audio.rsplit("/", 1)[-1] if src_audio else slug + ".mp3"
                     cached_audio = (os.path.join(args.cache_dir, audio_name)
@@ -1613,6 +1676,8 @@ def main(argv=None) -> int:
                         })
                         reused += 1
                         continue
+                elif previous.get("fingerprint") == fp and not ok_cache:
+                    print("  ⚠ Cache-Spur %s verworfen (%s) — wird neu vertont" % (slug, why))
 
         if args.limit_new and produced >= args.limit_new:
             print("Limit erreicht (--limit-new %d) – Rest beim nächsten Lauf." % args.limit_new)
@@ -1625,10 +1690,23 @@ def main(argv=None) -> int:
             continue
 
         tmp_dir = os.path.join(args.out_dir, ".tmp-" + slug)
-        samples, chunks = synth_article(blocks, engine, profile, tmp_dir,
-                                        log=lambda m: print("  · %s" % m))
+        samples, chunks, stats = synth_article(blocks, engine, profile, tmp_dir,
+                                               log=lambda m: print("  · %s" % m))
         if not samples:
             failed += 1
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+            continue
+        if stats["failed"] > 0:
+            failed += 1
+            print("  ✗ %s VERWORFEN: %d von %d Segmenten ohne Audio — keine Lückenspur veröffentlicht"
+                  % (slug, stats["failed"], stats["segments"]))
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+            continue
+        duration_ms = int(round(len(samples) * 1000.0 / ttb.SAMPLE_RATE))
+        ok_track, why = track_plausible(blocks, chunks, duration_ms)
+        if not ok_track:
+            failed += 1
+            print("  ✗ %s VERWORFEN: Plausibilitäts-Gate (%s) — Reader bleibt auf Gerätestimme" % (slug, why))
             shutil.rmtree(tmp_dir, ignore_errors=True)
             continue
 
@@ -1644,7 +1722,6 @@ def main(argv=None) -> int:
                 pass
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
-        duration_ms = int(round(len(samples) * 1000.0 / ttb.SAMPLE_RATE))
         payload = {
             "src": "/audio/articles/" + audio_name,
             "version": ttb.RECIPE_VERSION,
@@ -1917,6 +1994,67 @@ def selftest() -> int:
         check("Artikel gefunden", len(found) == 1 and found[0][0] == "mein-artikel")
         check("Audio-Ordner ausgenommen",
               all(not a[1].startswith(os.path.join(td, "audio")) for a in found))
+
+    # ---------- Plausibilitäts-Gate & Stille-Wache (Befund 06.09.2026) ----
+    # Auf gh-pages standen Pausen-Spuren (85 Chunks, alle t0==t1, 33 s für
+    # einen Zehn-Minuten-Artikel) — der Reader spielte sie stumm durch.
+    # Diese Tests pinnen die Wache fest, die das verhindert.
+    deployed_defect = {"chunks": [{"b": i, "t0": i * 420, "t1": i * 420, "lang": "de"}
+                                  for i in range(85)], "duration": 32980}
+    ok_defect, why_defect = track_plausible(blocks, deployed_defect["chunks"], deployed_defect["duration"])
+    check("Gate verwirft deployte Pausen-Spur", not ok_defect)
+    check("Gate nennt den Grund (t0==t1)", "t0==t1" in why_defect)
+
+    honest_ms = int(expected_speech_ms(blocks))
+    honest_chunks = []
+    t = 0
+    for bi, b in enumerate(blocks):
+        d = max(200, int(len(b["text"]) / ttb.BASE_CPS * 1000))
+        honest_chunks.append({"b": bi, "t0": t, "t1": t + d, "lang": b.get("lang") or "de"})
+        t += d + 300
+    ok_honest, _ = track_plausible(blocks, honest_chunks, t)
+    check("Gate akzeptiert ehrliche Spur", ok_honest)
+
+    ok_short, why_short = track_plausible(blocks, honest_chunks, int(honest_ms * 0.05))
+    check("Gate verwirft Stumm-Spur (5 % Hörzeit)", not ok_short and "zu kurz" in why_short)
+    ok_long, _ = track_plausible(blocks, honest_chunks, honest_ms * 20)
+    check("Gate verwirft falsche Spur (20× zu lang)", not ok_long)
+    ok_empty, _ = track_plausible(blocks, [], 0)
+    check("Gate verwirft leere Spur", not ok_empty)
+    gap_chunks = [dict(c) for c in honest_chunks]
+    gap_chunks[2]["t1"] = gap_chunks[2]["t0"]
+    ok_gap, _ = track_plausible(blocks, gap_chunks, t)
+    check("Gate verwirft Einzel-Lücke (t0==t1)", not ok_gap)
+
+    # synth_article: fehlgeschlagene Segmente zählen — nie still überspringen
+    import tempfile as _tf
+    orig_synthesize = ttb.synthesize
+    try:
+        def _failing_synth(text, lang, engine, profile_name, out_wav, rate=1.0, pitch=0, volume=1.0):
+            return engine, False, []
+        ttb.synthesize = _failing_synth
+        with _tf.TemporaryDirectory() as td:
+            _s, _c, st = synth_article(blocks, "edge", "natural", td, log=None)
+            check("Backend-Ausfall zählt als Fehler", st["failed"] == st["segments"] and st["failed"] > 0)
+            check("Backend-Ausfall: kein Segment ok", st["ok"] == 0)
+
+        def _working_synth(text, lang, engine, profile_name, out_wav, rate=1.0, pitch=0, volume=1.0):
+            import math as _math
+            n = int((len(text) / ttb.BASE_CPS) * ttb.SAMPLE_RATE)
+            tone = [int(12000 * _math.sin(2 * _math.pi * 180 * i / ttb.SAMPLE_RATE))
+                    for i in range(max(1, n))]
+            ttb.write_wav_mono(out_wav, tone)
+            return engine, True, []
+        ttb.synthesize = _working_synth
+        with _tf.TemporaryDirectory() as td:
+            s2, c2, st2 = synth_article(blocks, "edge", "natural", td, log=None)
+            check("Funktionierende Spur: keine Fehler", st2["failed"] == 0 and st2["ok"] > 0)
+            check("Funktionierende Spur: jeder Chunk spricht", all(ch["t1"] > ch["t0"] for ch in c2))
+            dur2 = int(round(len(s2) * 1000.0 / ttb.SAMPLE_RATE))
+            ok2, _ = track_plausible(blocks, c2, dur2)
+            check("Funktionierende Spur besteht das Gate", ok2)
+    finally:
+        ttb.synthesize = orig_synthesize
 
     # Engine-Auswahl
     check("Engine-Auswahl respektiert None", pick_engine("nicht-da") is None or True)

@@ -34,7 +34,10 @@ on:
       - "layouts/shortcodes/**"
       - "scripts/ff_voice_functional_test.mjs"
       - "scripts/ff_voice_voice_test.js"
+      - "scripts/ff_voice_repair_test.mjs"
+      - "scripts/ff_voice_browser_test.mjs"
       - "scripts/ff_voice_qa_lib.mjs"
+      - "tools/ff-voice-browser/**"
       - "scripts/ff_voice_probe.mjs"
       - "scripts/ff_voice_parity_check.py"
       - "scripts/ff_voice_toolbar_check.py"
@@ -55,6 +58,8 @@ on:
       - "scripts/ff_voice_backends.py"
       - "scripts/ff_voice_functional_test.mjs"
       - "scripts/ff_voice_voice_test.js"
+      - "scripts/ff_voice_repair_test.mjs"
+      - "scripts/ff_voice_browser_test.mjs"
   schedule:
     - cron: "20 6 * * *"   # 08:20 MESZ – tägliche Wache gegen stillen Verfall
   workflow_dispatch: {}
@@ -90,12 +95,28 @@ jobs:
         run: |
           if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
+      - name: Browser-QA installieren (playwright-core, Chromium)
+        working-directory: tools/ff-voice-browser
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          npx playwright-core install --with-deps chromium
+
       - name: Syntaxprüfung ff-voice.js
         run: node --check static/premium/ff-voice.js
 
       # ---- Echter Funktionstest (jsdom, echte Engine-Datei) ----
       - name: Funktionstest Vorlesen + Kurzfassung (echte DOM)
         run: node scripts/ff_voice_functional_test.mjs
+
+      # ---- Reparatur-Pinne (Befund 06.09.2026: Tonspur-Wache,
+      #      Fallback, ehrlicher Stopp, lazy Stimmbindung) ----
+      - name: Reparatur-Pinne Vorlesen (Tonspur-/Fallback-/Stimm-Wachen)
+        run: node scripts/ff_voice_repair_test.mjs
+
+      # ---- Echt-Browser-Test (Chromium): der Befund vom 06.09.2026 war
+      #      in jsdom unsichtbar — echte Timer, echtes <audio>, echte WAV ----
+      - name: Echt-Browser-Funktionstest (Chromium, echtes Audio)
+        run: node scripts/ff_voice_browser_test.mjs
 
       # ---- Stimmen-Regie: männlich, DE & EN, ohne Umschalter ----
       - name: Stimmen-Regie (männlich, DE & EN, ohne Umschalter)
