@@ -13,8 +13,10 @@
  * Parität nur behauptet, nicht geprüft.
  *
  * Anfrage:  { "samples": [{"text": "...", "lang": "de"}],
+ *             "runs":    [{"text": "...", "lang": "de"}],
  *             "pages":   [{"html": "...", "cfg": {...}}] }
- * Antwort:  { "normalized": ["..."], "pages": [[{lang,type,text}]] }
+ * Antwort:  { "normalized": ["..."], "runs": [[[{text,lang}]]],
+ *             "pages": [[{lang,type,text}]] }
  */
 
 import { loadPage, ensureToolbar } from './ff_voice_qa_lib.mjs';
@@ -29,8 +31,8 @@ function readStdin() {
 }
 
 const raw = await readStdin();
-let req = { samples: [], pages: [] };
-try { req = JSON.parse(raw || '{}'); } catch (e) { req = { samples: [], pages: [] }; }
+let req = { samples: [], runs: [], pages: [] };
+try { req = JSON.parse(raw || '{}'); } catch (e) { req = { samples: [], runs: [], pages: [] }; }
 
 /** Führt die echte Engine auf einer beliebigen Seiten-HTML aus. */
 function runOnPage(html) {
@@ -38,7 +40,7 @@ function runOnPage(html) {
   return win.__ffVoice;
 }
 
-const out = { normalized: [], pages: [], error: null };
+const out = { normalized: [], runs: [], pages: [], error: null };
 
 try {
   // Ein Fenster genügt für die reinen Text-Regeln.
@@ -53,6 +55,12 @@ try {
   );
   for (const s of req.samples || []) {
     out.normalized.push(probe.speechNormalize(s.text, s.lang));
+  }
+  for (const s of req.runs || []) {
+    // Jeder Lauf-Satz wird in einem eigenen Fenster gerechnet — die
+    // Wortlauf-Regie ist zustandslos, das Fenster ist nur der Rahmen.
+    out.runs.push(probe.languageRuns(s.text, s.lang)
+      .map((r) => ({ text: r.text, lang: r.lang })));
   }
   for (const page of req.pages || []) {
     const api = runOnPage(ensureToolbar(page.html, (page.cfg && page.cfg.lang) || 'de'));

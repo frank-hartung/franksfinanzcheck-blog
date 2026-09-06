@@ -77,6 +77,32 @@ SAMPLES = [
 ]
 
 # ---------------------------------------------------------------------------
+# 1b · Wortlauf-Beispiele (Sprachwechsel mitten im Satz)
+# ---------------------------------------------------------------------------
+
+RUN_SAMPLES = [
+    # Finanz-Englisch im deutschen Satz — jeder Lauf eigene Stimme
+    ("Ein Robo Advisor nutzt Compound Interest und Cost Averaging.", "de"),
+    ("Der Cashflow kommt jeden Monat.", "de"),
+    ("Mit Buy and Hold bleibst du entspannt.", "de"),
+    ("Das nennt man Side Hustles.", "de"),
+    ("Wer seinen Emergency Fund aufbaut, schläft besser.", "de"),
+    ("Trading kostet Gebühren.", "de"),
+    # Scheinfreunde und Fehlwechsel-Vermeidung
+    ("Was hat er damit gemeint?", "de"),
+    ("Die Waschmaschine läuft im Fast Mode.", "de"),
+    ("Der Tarifwechsel spart im Schnitt 300 Euro bis 800 Euro pro Jahr.", "de"),
+    ("Tarifwechsel als größter Hebel: Ein Wechsel dauert weniger als zehn Minuten.", "de"),
+    # Deutsche Einschübe in englischen Artikeln
+    ("Switching your tariff can save money, und die Versicherung kostet mehr.", "en"),
+    ("Compare your insurance costs every year before you switch.", "en"),
+    # Reinsprachige Sätze bleiben unangetastet
+    ("Der Wechsel lohnt sich für jeden Haushalt.", "de"),
+    ("This sentence is clearly English and must be spoken by the English male voice.", "en"),
+]
+
+
+# ---------------------------------------------------------------------------
 # 2 · Seiten-Fixtures für die Block-Parität
 # ---------------------------------------------------------------------------
 
@@ -119,12 +145,32 @@ PAGE_EN = """<!doctype html><html lang="en"><body>
 # colspan/rowspan, Summenzeile im tbody, Werbelink-Zeile, small-Ziertext).
 PAGE_TABLES_PREMIUM = gen.FIXTURE_TABLES
 
-PAGES = [PAGE_FIXTURE, PAGE_TABLE, PAGE_EN, PAGE_TABLES_PREMIUM]
+# Reproduktion des Doppel-Lesers auf /pillar/strom-sparen/ (Befund vom
+# 05.09.2026): Fettdruck-Lead-ins in Listenpunkten und Absätzen durften
+# nie als eigener Merksatz-Zweiblock erklingen. Dieses Fixture ist die
+# ABSOLUTE Prüfung — sie schlägt an, wenn BEIDE Implementierungen
+# identisch falsch lesen, die Parität allein also nicht reicht.
+PAGE_PILLAR = """<!doctype html><html lang="de"><body>
+<article class="post-content">
+<h3 id="das-wichtigste">Das Wichtigste auf einen Blick</h3>
+<ul>
+<li><strong>Tarifwechsel als größter Hebel:</strong> Ein Wechsel des Strom- oder Gasanbieters dauert online weniger als zehn Minuten und spart im Schnitt 300&nbsp;€ bis 800&nbsp;€ pro Jahr.</li>
+<li><strong>Heimliche Stromfresser eliminieren:</strong> Standby-Geräte, veraltete Kühltechnik und Dauerverbraucher verursachen bis zu 20&nbsp;% deiner jährlichen Stromrechnung.</li>
+</ul>
+<p><strong>Februar.</strong> Jahresabrechnung lesen. Verbrauch, Preis, Abschlag.</p>
+<p>👉 <strong>Jetzt aktuellen Stromtarif prüfen und sparen:</strong> <a href="/go/strom/"><strong>→ Jetzt Stromtarife vergleichen</strong></a></p>
+<p><strong>Merksatz: Prüfe die Laufzeit genau.</strong></p>
+</article>
+<script type="application/json" id="ff-voice-config">{"title":"Strom und Gas sparen","lang":"de","readingTime":8,"description":""}</script>
+</body></html>"""
+
+PAGES = [PAGE_FIXTURE, PAGE_TABLE, PAGE_EN, PAGE_TABLES_PREMIUM, PAGE_PILLAR]
 
 
 def run_probe():
     payload = json.dumps({
         "samples": [{"text": t, "lang": l} for t, l in SAMPLES],
+        "runs": [{"text": t, "lang": l} for t, l in RUN_SAMPLES],
         "pages": [{"html": h} for h in PAGES],
     }, ensure_ascii=False)
     proc = subprocess.run(["node", PROBE], input=payload.encode("utf-8"),
@@ -159,6 +205,24 @@ def main() -> int:
         check("Aussprache gleich: %r (%s)" % (text[:34], lang),
               py_norm == js_norm[i],
               "Python %r vs. JS %r" % (py_norm, js_norm[i]))
+
+    # ---------- 1b · Wortlauf-Regie (Sprachwechsel im Satz) ----------
+    js_runs = answer.get("runs", [])
+    check("Wortlauf-Fühler liefert Ergebnisse", len(js_runs) == len(RUN_SAMPLES),
+          "%d von %d" % (len(js_runs), len(RUN_SAMPLES)))
+    for i, (text, lang) in enumerate(RUN_SAMPLES):
+        if i >= len(js_runs):
+            break
+        py_segs = gen.language_runs(text, lang)
+        py_view = [{"text": s["text"], "lang": s["lang"]} for s in py_segs]
+        # Vertrag 1: identische Segmentierung
+        check("Wortläufe gleich: %r (%s)" % (text[:38], lang),
+              py_view == js_runs[i],
+              "Python %s vs. JS %s" % (py_view, js_runs[i]))
+        # Vertrag 2: Segmente konkatenieren exakt zum Eingabetext
+        check("Wortläufe konkatenieren exakt: %r" % text[:38],
+              "".join(s["text"] for s in py_view) == text,
+              "Konkatenation verletzt")
 
     # ---------- 2 · Blöcke ----------
     js_pages = answer.get("pages", [])
@@ -201,6 +265,48 @@ def main() -> int:
     check("Referenztempo identisch",
           ("BASE_CPS = %s" % ttb.BASE_CPS) in js_source.replace("var BASE_CPS = ", "BASE_CPS = "),
           "Python %s" % ttb.BASE_CPS)
+
+    # ---------- 4 · Doppel-Lese-Schleuse (absolut, nicht nur Parität) --
+    # Der Befund vom 05.09.2026 auf /pillar/strom-sparen/: Hinter
+    # „… 800 € pro Jahr“ erklang erneut „Tarifwechsel als größter
+    # Hebel.“ — der Fettdruck-Lead-in wurde als zweiter Block gesprochen.
+    pillar_js = js_pages[4] if len(js_pages) > 4 else []
+    pillar_root = gen.parse_html(PAGE_PILLAR)
+    pillar_cfg = gen.read_reader_config(pillar_root)
+    pillar_py, _plang = gen.extract_blocks(pillar_root, pillar_cfg)
+
+    LEADS = [
+        "Tarifwechsel als größter Hebel",
+        "Heimliche Stromfresser eliminieren",
+    ]
+    for lead in LEADS:
+        py_hits = sum(1 for b in pillar_py if lead in b["text"])
+        js_hits = sum(1 for b in pillar_js if lead in b["text"])
+        check("Lead-in genau einmal: %r" % lead, py_hits == 1 and js_hits == 1,
+              "Python %d×, JS %d×" % (py_hits, js_hits))
+        check("Lead-in ohne Merksatz-Zweiblock: %r" % lead,
+              all(b["type"] != "emphasis" or lead not in b["text"] for b in pillar_py)
+              and all(b["type"] != "emphasis" or lead not in b["text"] for b in pillar_js),
+              "Lead-in als eigener Fettdruck-Block")
+
+    check("Kurzdatum im Absatz genau einmal: Februar",
+          sum(1 for b in pillar_py if "Februar" in b["text"]) == 1
+          and sum(1 for b in pillar_js if "Februar" in b["text"]) == 1,
+          "Absatz-Lead-in doppelt")
+    check("CTA-Linktext genau einmal (kein Zweiblock)",
+          sum(1 for b in pillar_py if "Jetzt Stromtarife vergleichen" in b["text"]) == 1
+          and sum(1 for b in pillar_js if "Jetzt Stromtarife vergleichen" in b["text"]) == 1,
+          "CTA doppelt gelesen")
+    check("Echter Merksatz bleibt eigener Block",
+          any(b["type"] == "emphasis" and "Prüfe die Laufzeit genau" in b["text"] for b in pillar_py)
+          and any(b["type"] == "emphasis" and "Prüfe die Laufzeit genau" in b["text"] for b in pillar_js),
+          "Eigenständiger Merksatz wurde verschluckt")
+    check("Pillar: keine Doppeltexte (Python-Join eindeutig)",
+          len({b["text"] for b in pillar_py}) == len(pillar_py),
+          "Doppelte Blocktexte")
+    check("Pillar: Wortlauf im Listenpunkt vertont Robo-frei deutsch",
+          all(gen.language_runs(b["text"], b["lang"]) for b in pillar_py),
+          "Leere Wortlauf-Segmentierung")
 
     failed = [(n, d) for n, ok, d in results if not ok]
     for name, detail in failed[:25]:

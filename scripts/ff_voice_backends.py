@@ -79,7 +79,7 @@ GROQ_MODEL = "canopylabs/orpheus-v1-english"
 ENGINE_ORDER = ["edge", "piper", "groq"]
 
 # Backend-Fingerprint: ändert er sich, werden Tonspuren neu erzeugt.
-RECIPE_VERSION = "ff-voice-2026.09.05-b"
+RECIPE_VERSION = "ff-voice-2026.09.05-c"
 
 # ---------------------------------------------------------------------------
 # Prosodie-Regie — spiegelbildlich zu PROSODY in static/premium/ff-voice.js
