@@ -2,11 +2,8 @@
 lastmod: 2026-09-05
 title: "So bekommst du WLAN in jeden Winkel: Repeater oder Mesh?"
 description: "Repeater oder Mesh? So bekommst du WLAN in jeden Winkel: Entscheidungshilfe mit Preisen, Stromkosten und dem Null-Euro-Trick mit deinem alten Router."
-date: 2026-09-04T06:32:02Z
-draft: true
-cadence_wait: true
-cadence_demoted: 2026-09-05T15:30:00Z
-cadence_grund: "Vollstaendige Ausarbeitung 05.09. (Wache #174): 326-Woerter-Stub zu Profi-Artikel ausgebaut – Re-Queue fuer den naechsten Publikationstag"
+date: 2026-09-07T04:52:22Z
+draft: false
 tags: ["WLAN-Repeater oder Mesh", "WLAN verbessern", "Powerline vs. Mesh", "Internet im ganzen Haus"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"

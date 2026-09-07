@@ -1,6 +1,6 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-09-06 19:32 UTC
+**Letzter Lauf:** 2026-09-07 04:53 UTC
 
 **Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
@@ -19,6 +19,7 @@
 - ✅ 2026-08-31 (Montag): 3
 - ✅ 2026-09-02 (Mittwoch): 2
 - ✅ 2026-09-04 (Freitag): 2
+- ✅ 2026-09-07 (Montag): 3
 
 ## Aktiver Befund
 
@@ -26,7 +27,7 @@
 
 ## Re-Queue-Integrität (Park-Zustände)
 
-- 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **4**
+- 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **1**
 - ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **0**
 - ✍️ manuelle Entwürfe (von der Automatik unberührt): **0**
 - 🔁 wiederhergestellte Re-Queue-Flags: **0**
@@ -35,6 +36,8 @@
 
 ## Letzte Heilungen
 
-- – (nichts in diesem Lauf)
+- Aus Re-Queue live gesetzt: `2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh`
+- Aus Re-Queue live gesetzt: `2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt`
+- Aus Re-Queue live gesetzt: `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich`
 
 _Wird von `cadence_guard.py` bei jedem Kadenz-Lauf aktualisiert (Deploy-Gate, Content-Engine, Blog-Health)._
