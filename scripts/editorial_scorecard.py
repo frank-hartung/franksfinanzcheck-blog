@@ -50,6 +50,18 @@ _HISTORY = DATA("scorecard_history.jsonl")
 _SECRETS_REPORT = os.path.join(BLOG_DIR, "SECRETS-REPORT.md")
 _CWV_REPORT = os.path.join(BLOG_DIR, "CWV-REPORT.md")
 
+# Lesbarkeits-Zielgrößen – EINE Wahrheit mit readability_check / Regelwerk R6.
+# Die Scorecard zeigte früher „Ziel ≥ 70“: ein Mess-Artefakt aus der G2-Ära
+# (Lesbarkeit wurde aus einer nie existierenden Datei gelesen und per
+# `(v or 100) >= 70` grün gefärbt). Das Qualitäts-Regelwerk definiert als Ziel
+# Flesch-Amstad Ø ≥ 62 und als Bestands-Floor 55. Seit 07.09.2026 importiert
+# die Scorecard dieselben Konstanten wie das Gate – kein abweichendes Ziel mehr.
+try:
+    from readability_check import AVG_TARGET as R_TARGET
+    from readability_check import FLOOR_MIN as R_FLOOR
+except Exception:  # pragma: no cover – Fallback hält die Scorecard lauffähig
+    R_TARGET, R_FLOOR = 62.0, 55.0
+
 # Wie alt eine Messung sein darf, bevor sie als Blindflug gilt (Wochenrhythmus + Puffer).
 STALE_AFTER_DAYS = 9
 
@@ -220,8 +232,9 @@ def _avg_readability():
     try:
         from readability_check import load_article, analyze
     except ImportError:
-        return None
+        return {"avg": None, "floor": []}
     scores = []
+    floor = []
     for p in post_utils.list_post_paths():
         if os.path.basename(p) == "_index.md":
             continue
@@ -234,9 +247,11 @@ def _avg_readability():
             continue
         if v is not None and 0 <= v <= 100:
             scores.append(v)
+            if v < R_FLOOR:
+                floor.append(os.path.relpath(p, os.path.join(BLOG_DIR, "content", "posts")))
     if not scores:
-        return None
-    return round(statistics.mean(scores), 1)
+        return {"avg": None, "floor": []}
+    return {"avg": round(statistics.mean(scores), 1), "floor": floor}
 
 
 def _lektor_findings():
@@ -280,7 +295,6 @@ def collect():
     awin = _read_json(_AWIN_P, {})
     readability = _avg_readability()
     lektor = _lektor_findings()
-
     # Affiliate-Klick-Attribution: summiert Klicks über Pillars / Artikel.
     click_articles = (clicks.get("articles") or {})
     click_pillars = (clicks.get("pillars") or {})
@@ -308,7 +322,8 @@ def collect():
         "cwv_verdict": cwv["verdict"], "cwv_state": cwv["state"], "cwv_display": cwv["display"],
         "cwv_age": cwv["age"], "cwv_findings": cwv["findings"], "cwv_red": cwv["red"],
         "cwv_measured": cwv["measured"],
-        "readability": readability,
+        "readability": readability["avg"],
+        "readability_floor": readability["floor"],
         # `lektor` = auto-behebbare Befunde (steuert Score & Empfehlung),
         # `lektor_advisory` = reine Stil-Hinweise (Info, nicht abstrafend).
         "lektor": (lektor or {}).get("auto") if lektor is not None else None,
@@ -333,14 +348,24 @@ def collect():
 def _readability_lamp(v):
     """Ampel für den Ø-Flesch-Wert (deutsche Amstad-Skala).
 
-    Unbekannt ist NICHT grün – eine fehlende Messung ist ein Befund, kein
-    Erfolg (vorher färbte `(v or 100) >= 70` sowohl `None` als auch 0 grün).
+    Schwellen = Regelwerk R6: 🟢 ab Ziel Ø ≥ 62, 🟡 ab Bestands-Floor 55,
+    🔴 darunter. Unbekannt ist NICHT grün – eine fehlende Messung ist ein
+    Befund, kein Erfolg (vorher färbte `(v or 100) >= 70` sowohl `None` als
+    auch 0 grün; Ziel „70“ war Artefakt, nicht Regelwerk).
     """
     if v is None:
         return "⚪"
-    if v >= 60:
+    if v >= R_TARGET:
         return "🟢"
-    if v >= 50:
+    if v >= R_FLOOR:
+        return "🟡"
+    return "🔴"
+
+
+def _readability_floor_lamp(n):
+    if not n:
+        return "🟢"
+    if n <= 3:
         return "🟡"
     return "🔴"
 
@@ -437,9 +462,9 @@ def _score(d) -> int:
         s -= 3
     # Lesbarkeit (wenn bekannt)
     if d["readability"] is not None:
-        if d["readability"] < 60:
+        if d["readability"] < R_FLOOR:
             s -= 10
-        elif d["readability"] < 70:
+        elif d["readability"] < R_TARGET:
             s -= 4
     # Secrets: nur rote Befunde (Kanal tot/fehlt) ziehen ab, gelbe altern mit 1 pkt.
     s -= min(15, d["secret_red"] * 5) + min(2, d.get("secret_amber", 0))
@@ -499,8 +524,12 @@ def render(d, score):
         f"{'🟢' if d['decay_count'] == 0 else ('🟡' if d['decay_count'] <= 5 else '🔴')} |",
         f"| Core-Web-Vitals | {d.get('cwv_display', d['cwv_verdict'])} | "
         f"{_cwv_lamp(d)} |",
-        f"| Ø Lesbarkeit (Flesch) | {'n/a' if d['readability'] is None else d['readability']} | "
+        f"| Ø Lesbarkeit (Flesch, Ziel ≥ {R_TARGET:.0f}) | "
+        f"{'n/a' if d['readability'] is None else d['readability']} | "
         f"{_readability_lamp(d['readability'])} |",
+        f"| Artikel unter Flesch-Floor ({R_FLOOR:.0f}) | "
+        f"{'n/a' if d['readability'] is None else len(d.get('readability_floor', []))} | "
+        f"{'⚪' if d['readability'] is None else _readability_floor_lamp(len(d.get('readability_floor', [])))} |",
         f"| Lektorat-Befunde (auto-behebbar) | "
         f"{'n/a' if d['lektor'] is None else d['lektor']} | "
         f"{'⚪' if d['lektor'] is None else ('🟢' if d['lektor'] == 0 else '🟡')} |",
@@ -570,11 +599,18 @@ def render(d, score):
                     "Weichmacher) – nicht automatisch behebbar. Redaktionell in der "
                     "Refresh-Queue mitziehen: `scripts/lektor_guard.py` listet die "
                     "Fundstellen pro Artikel.")
-    if d["readability"] is not None and d["readability"] < 70:
-        recs.append(f"Ø Lesbarkeit {d['readability']} (Ziel ≥ 70, Amstad-deutsch) – "
-                    "lange Sätze splittern, Nominalstil auflösen; Hebel pro Artikel zeigt "
-                    "`python3 scripts/readability_check.py` bzw. `lektor_guard.py`. "
-                    "Lesbarkeit ist bei Pinterest-/Suchtraffic der Verweil-Dauer-Hebel.")
+    if d["readability"] is not None and d["readability"] < R_TARGET:
+        names = d.get("readability_floor", [])
+        floor_txt = ""
+        if names:
+            slugs = [re.sub(r"^\d{4}-\d{2}-\d{2}-", "", n.split("/")[0]) for n in names[:4]]
+            floor_txt = " Unter dem Floor: " + ", ".join(slugs) + "."
+        recs.append(f"Ø Lesbarkeit {d['readability']} (Ziel ≥ {R_TARGET:.0f}, Regelwerk R6 – "
+                    "vorher fälschlich „≥ 70“ in der Scorecard, nie im Regelwerk; "
+                    "Zielgrößen sind seit 07.09.2026 vereinheitlicht). Lange Sätze splittern, "
+                    "Nominalstil auflösen; Hebel je Artikel zeigt "
+                    "`python3 scripts/readability_check.py --json`. Lesbarkeit ist bei "
+                    "Pinterest-/Suchtraffic der Verweil-Dauer-Hebel." + floor_txt)
     if d["drafts"] > 0:
         recs.append(f"**{d['drafts']}** Artikel in der Entwurf-Warteschlange – Freigabe "
                     "prüfen (`python3 scripts/publish_gate.py` bzw. Kadenz-Gate). "

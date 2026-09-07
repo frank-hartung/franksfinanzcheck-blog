@@ -18,6 +18,10 @@ NUTZUNG:
   python3 scripts/readability_check.py            # Audit aller Artikel
   python3 scripts/readability_check.py --json     # maschinenlesbar
   python3 scripts/readability_check.py --file X.md
+  python3 scripts/readability_check.py --new-only # Publish-Gate (neue Artikel)
+  python3 scripts/readability_check.py --gate-bestand [--report LESBARKEIT-REPORT.md]
+                                                 # Wochen-Wache (Ø ≥ 62, Floor ≥ 55)
+  python3 scripts/readability_check.py --selftest # Sabotage-Schutz für CI
 """
 import os
 import re
@@ -33,11 +37,33 @@ SENT_MAX = 16               # war 20
 LONG_WORD_MAX = 15          # war 18
 NESTED_MAX = 10             # war 12
 ABSATZ_MAX_SENT = 4         # war 6
+
+# Zielgrößen (vereinheitlicht 07.09.2026 mit Qualitäts-Regelwerk R6):
+# Die Chefredakteur-Scorecard zeigte vorher „Ziel ≥ 70“ – ein Mess-Artefakt aus
+# der Zeit, als Lesbarkeit aus einer nie existierenden Datei gelesen und mit
+# `(v or 100) >= 70` grün gefärbt wurde (Härtung G2). Das Regelwerk definiert
+# als Zielhorizont Flesch-Amstad Ø ≥ 62. Scorecard und Gate nutzen jetzt
+# dieselben Schwellen – eine Kennzahl, eine Wahrheit.
+AVG_TARGET = 62.0        # Regelwerk: Flesch-Amstad Ø ≥ 62 (6-Monats-Zielhorizont)
+FLOOR_MIN = 55.0         # Bestand: kein Artikel dauerhaft unter 55 (Warn-/Issue-Schwelle)
+NEW_FLESCH_MIN = 60.0    # R6: neue Artikel Flesch ≥ 60 – hart im Publish-Gate
 # Keyword-Dump-Grenze (R2): einzelne Zeile/Block > 500 Zeichen mit > 12 Kommas
 DUMP_MAX_LEN = 500
 DUMP_MAX_COMMAS = 12
 
 PASSIV_RE = re.compile(r'\b(wird|werden|wurde|wurden|kann .{1,20} werden|muss .{1,20} werden|sollte .{1,20} werden)\b', re.I)
+
+# Paarige Hugo-Block-Shortcodes mit Inhalt: {{< tarif … >}} … {{< /tarif >}}
+_PAIRED_SHORTCODE_RE = re.compile(
+    r'\{\{\s*<\s*[A-Za-z][^{}]*?\s>\}\}.*?\{\{\s*<\s*/\s*[A-Za-z][^{}]*?\s>\}\}',
+    re.S)
+
+
+def _strip_shortcodes(body):
+    """Entfernt HUGO-Shortcodes inklusive Block-Inhalt (siehe load_article)."""
+    body = _PAIRED_SHORTCODE_RE.sub(' ', body)
+    body = re.sub(r'\{\{<.*?/?>\}\}', ' ', body)
+    return body
 
 
 def load_article(path):
@@ -55,7 +81,17 @@ def load_article(path):
     # „Lesbarkeits-Gate ehrlich machen“). Ohne diese Zeile werden komplette
     # Tarifvergleich-Blöcke als EIN „Schachtelsatz“ mit mehreren hundert
     # Wörtern gezählt und verzerren wps/Flesch/nested systematisch.
-    body = re.sub(r'\{\{<.*?/?>\}\}', ' ', body, flags=re.S)
+    # Erweiterung (07.09.2026 – Audit „Ø Lesbarkeit 53.3“): Auch PAARIGE
+    # Block-Shortcodes ({{< tarif … >}} … {{< /tarif >}} mit Inhalt) entfernen.
+    # Vorher matchte die Regex nur das öffnende Tag bis zum ersten „>}}“; der
+    # Inhalt (Zahlenreihen, „<br><small>…“-Fragmente) blieb als Pseudo-Satz mit
+    # dutzenden Wörtern im Mess-Text und verzerrte wps/Flesch/nested massiv.
+    body = _strip_shortcodes(body)
+    # HTML-Kommentare entfernen (z. B. <!-- premium-length-2026 -->): Markup,
+    # kein Fließtext. Vorher zählten „premium length 2026“ als Phantom-Wörter
+    # und klebten nach dem Heading-Removal Absätze zu Pseudosätzen zusammen
+    # (Mess-Artefakt, 07.09.2026 – Audit „Ø Lesbarkeit 53.3“).
+    body = re.sub(r'<!--.*?-->', ' ', body, flags=re.S)
     # ZUERST Listen-Einträge (Bullets) und Überschriften entfernen –
     # sie sind KEINE Fließtext-Sätze (Mess-Artefakte). WICHTIG: VOR dem
     # Entfernen der Markdown-Sonderzeichen (sonst fehlt das Bullet-Zeichen).
@@ -252,7 +288,32 @@ def analyze(a):
     }
 
 
+def _selftest():
+    """Sabotage-Schutz (CI): Schwellen = Regelwerk R6, Paar-Shortcodes weg."""
+    fails = []
+    if not (AVG_TARGET >= 62.0 and FLOOR_MIN <= 60.0 and NEW_FLESCH_MIN >= 60.0):
+        fails.append(f"Schwellen falsch: {AVG_TARGET}/{FLOOR_MIN}/{NEW_FLESCH_MIN}")
+    body = ("{{< tarif preis=\"x\" >}}Nur Figuren: 1.000 Wörter 2.000 Wörter"
+            "{{< /tarif >}} Danach ein echter Satz mit Inhalt.")
+    out = _strip_shortcodes(body)
+    if "1.000 Wörter" in out or "2.000 Wörter" in out:
+        fails.append("Paar-Shortcode-Body wurde nicht entfernt")
+    if "Danach ein echter Satz" not in out:
+        fails.append("Fließtext nach Shortcode ging verloren")
+    single = "Text {{< tarifvergleich anbieter=\"a\" >}} danach."
+    if "tarifvergleich" in _strip_shortcodes(single):
+        fails.append("Einzel-Shortcode wurde nicht entfernt")
+    if fails:
+        for f in fails:
+            print("❌ " + f)
+        return 1
+    print("✅ readability_check --selftest OK (R6-Schwellen + Shortcode-Stripping)")
+    return 0
+
+
 def main():
+    if '--selftest' in sys.argv:
+        sys.exit(_selftest())
     import datetime
     today = datetime.date.today().isoformat()
     as_json = '--json' in sys.argv
@@ -289,29 +350,93 @@ def main():
 
     results.sort(key=lambda r: r['score'])
     avg = sum(r['score'] for r in results) / len(results) if results else 0
+    avg_flesch = sum(r['flesch'] for r in results) / len(results) if results else 0
 
     if as_json:
-        print(json.dumps({'avg': round(avg, 1), 'articles': results},
-                         ensure_ascii=False, indent=2))
+        print(json.dumps({
+            'avg': round(avg, 1), 'avg_flesch': round(avg_flesch, 1),
+            'target': AVG_TARGET, 'floor': FLOOR_MIN,
+            'articles': results}, ensure_ascii=False, indent=2))
         return
 
-    print(f"Lesbarkeits-Audit: {len(results)} Artikel | Ø Score {avg:.0f}/100")
+    print(f"Lesbarkeits-Audit: {len(results)} Artikel | Ø Score {avg:.0f}/100 "
+          f"(Top-Level ≥ 75) | Ø Flesch {avg_flesch:.1f} (Ziel ≥ {AVG_TARGET:.0f}, "
+          f"Regelwerk R6)")
     print(f"{'Score':>5} {'Flesch':>7} {'Satz':>5} {'Wort':>5} {'Lang%':>6} {'Schacht%':>8} {'Dump':>5}  Artikel")
-    print('-' * 86)
+    print('-' * 96)
     for r in results:
-        mark = '✅' if r['score'] >= 75 else ('⚠️' if r['score'] >= 60 else '❌')
-        print(f"{mark} {r['score']:4d} {r['flesch']:6.0f} {r['wps']:5.1f} {r['word_len']:5.1f} "
-              f"{r['long_pct']:5.1f} {r['nested_pct']:7.1f} {r['dumps']:5d}  {r['file'][:40]}")
-    print('-' * 86)
-    below = [r for r in results if r['score'] < 75]
-    print(f"\nUnter Top-Level (Score < 75): {len(below)} Artikel")
-    if below and new_only:
-        print("❌ Lesbarkeits-Gate nicht bestanden – neue Artikel unter Schwelle!")
-        sys.exit(1)
-    elif below:
-        print("⚠️ Bestandsartikel unter Schwelle (nur Hinweis – kein Abbruch)")
+        mark = '✅' if r['flesch'] >= AVG_TARGET else ('⚠️' if r['flesch'] >= FLOOR_MIN else '❌')
+        print(f"{mark} {r['score']:4d} {r['flesch']:6.1f} {r['wps']:5.1f} {r['word_len']:5.1f} "
+              f"{r['long_pct']:5.1f} {r['nested_pct']:7.1f} {r['dumps']:5d}  {r['file'][:48]}")
+    print('-' * 96)
+    below_floor = [r for r in results if r['flesch'] < FLOOR_MIN]
+    below_target = [r for r in results if r['flesch'] < AVG_TARGET]
+    print(f"Ø Flesch {avg_flesch:.1f} (Ziel ≥ {AVG_TARGET:.0f}) | "
+          f"unter Floor {FLOOR_MIN:.0f}: {len(below_floor)} Artikel | "
+          f"unter Ziel {AVG_TARGET:.0f}: {len(below_target)} Artikel")
+
+    # Gate-Modi:
+    #  --new-only     Publish-Gate: neue Artikel müssen Top-Level-Score UND
+    #                 Regelwerk R6 (Flesch ≥ 60) erfüllen – sonst Entwurf.
+    #  --gate-bestand Wochen-Wache: Ø Flesch ≥ 62 UND kein Artikel < 55,
+    #                 sonst Exit 1 (meldet den Bestand als Handlungsfeld).
+    if new_only:
+        viol = [r for r in results if r['score'] < 75 or r['flesch'] < NEW_FLESCH_MIN]
+        if viol:
+            for r in sorted(viol, key=lambda x: x['flesch']):
+                print(f"❌ Neue Artikel unter Schwelle (Score ≥ 75, Flesch ≥ {NEW_FLESCH_MIN:.0f}): "
+                      f"{r['file']} – Score {r['score']}, Flesch {r['flesch']:.1f}")
+            print("❌ Lesbarkeits-Gate nicht bestanden – neue Artikel parken als Entwurf!")
+            sys.exit(1)
+        print("✅ Lesbarkeits-Gate OK – neue Artikel auf Top-Level (Score ≥ 75, Flesch ≥ 60)")
+        return
+    if '--gate-bestand' in sys.argv:
+        issues = []
+        if avg_flesch < AVG_TARGET:
+            issues.append(f"Ø Flesch {avg_flesch:.1f} < Ziel {AVG_TARGET:.0f}")
+        for r in below_floor:
+            issues.append(f"Floor: {r['file']} Flesch {r['flesch']:.1f} < {FLOOR_MIN:.0f}")
+        # Governance-/Alerting-Report (Ampel + Befundtabelle), damit die Wache
+        # für governance_gate auswertbar ist (Exit-Code allein ist kein Befund).
+        if '--report' in sys.argv:
+            rep = (sys.argv[sys.argv.index('--report') + 1]
+                   if sys.argv.index('--report') + 1 < len(sys.argv) else '')
+            if rep:
+                ampel = ('RED' if below_floor
+                         else ('AMBER' if avg_flesch < AVG_TARGET else 'GREEN'))
+                rows = []
+                if avg_flesch < AVG_TARGET:
+                    rows.append(f"| AMBER | read_avg | Ø Flesch {avg_flesch:.1f} "
+                                f"< Ziel {AVG_TARGET:.0f} (Regelwerk R6) |")
+                for r in below_floor:
+                    rows.append(f"| RED | read_floor | {r['file']} – Flesch "
+                                f"{r['flesch']:.1f} < Floor {FLOOR_MIN:.0f} |")
+                content = (
+                    "# Lesbarkeits-Wache – Bestands-Gate (Flesch-Amstad, deutsch)\n\n"
+                    "Gesamt-Ampel: **" + ampel + "**\n\n"
+                    f"- Geprüfte Artikel: **{len(results)}**\n"
+                    f"- Ø Flesch: **{avg_flesch:.1f}** (Ziel ≥ {AVG_TARGET:.0f})\n"
+                    f"- Unter Floor {FLOOR_MIN:.0f}: **{len(below_floor)}**\n\n"
+                    "## Befunde\n\n"
+                    "| Level | Code | Befund |\n"
+                    "|---|---|---|\n" + "\n".join(rows) + "\n")
+                try:
+                    with open(os.path.join(BLOG_DIR, rep), 'w', encoding='utf-8') as fh:
+                        fh.write(content)
+                except OSError as exc:
+                    print(f"⚠️ Report {rep} nicht schreibbar: {exc}")
+        if issues:
+            for i in issues:
+                print("❌ " + i)
+            print("❌ Bestands-Gate nicht bestanden – Lesbarkeit ist Handlungsfeld.")
+            sys.exit(1)
+        print("✅ Bestands-Gate OK – Ø Flesch im Ziel, kein Artikel unter Floor")
+        return
+    if below_floor or avg_flesch < AVG_TARGET:
+        print("⚠️ Lesbarkeit unter Ziel/Floor – rote Artikel zuerst redaktionell heben "
+              "(Hebel je Artikel: `python3 scripts/readability_check.py --json`)")
     else:
-        print("✅ Lesbarkeit auf Top-Level")
+        print("✅ Lesbarkeit auf Ziel (Ø Flesch ≥ 62, kein Artikel unter 55)")
 
 
 if __name__ == '__main__':
