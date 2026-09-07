@@ -280,6 +280,7 @@ export function toolbarHtml(lang) {
         <span class="ff-voice-meter__live-label" id="ff-voice-live-label">Gerade vorgelesen</span>
         <span class="ff-voice-meter__live-text" id="ff-voice-now" title=""></span>
         <span class="ff-voice-meter__pos" id="ff-voice-pos" aria-hidden="true"></span>
+        <span class="ff-voice-meter__words" id="ff-voice-word-count" aria-hidden="true"></span>
       </div>
       <span class="ff-voice-progress-shell" aria-hidden="true"><span class="ff-voice-progress" id="ff-voice-progress"></span></span>
     </div>
@@ -423,7 +424,19 @@ export function installSpeech(win, { voices = DEFAULT_VOICES, support = true } =
       setTimeout(() => {
         if (state.cancelled > 0 && log.cancelGuard === state.cancelled) return;
         state.speaking = false;
-        if (typeof u.onboundary === 'function') u.onboundary({ charIndex: u.text.length });
+        // Wortgrenzen wie ein echter Browser (Chromium-Konvention): je Wort
+        // EIN boundary-Ereignis mit charIndex auf den Wortanfang. Die Engine
+        // speist darüber ihre wortgenaue Leseanzeige — die Attrappe muss
+        // dasselbe Format liefern wie das Original, sonst prüft der
+        // Funktionstest an der Realität vorbei.
+        if (typeof u.onboundary === 'function') {
+          const re = /\S+/g;
+          let m;
+          while ((m = re.exec(String(u.text || ''))) !== null) {
+            u.onboundary({ charIndex: m.index });
+            if (re.lastIndex === m.index) re.lastIndex++;
+          }
+        }
         if (typeof u.onend === 'function') u.onend();
       }, 0);
     },

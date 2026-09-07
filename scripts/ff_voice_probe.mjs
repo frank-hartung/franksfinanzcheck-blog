@@ -13,10 +13,13 @@
  * Parität nur behauptet, nicht geprüft.
  *
  * Anfrage:  { "samples": [{"text": "...", "lang": "de"}],
- *             "runs":    [{"text": "...", "lang": "de"}],
+ *             "aligns":  [{"norm": "...", "raw": "..."}],
  *             "pages":   [{"html": "...", "cfg": {...}}] }
- * Antwort:  { "normalized": ["..."], "runs": [[[{text,lang}]]],
+ * Antwort:  { "normalized": ["..."], "aligns": [[i, ...]],
  *             "pages": [[{lang,type,text}]] }
+ * `aligns` ist die Wortuhr-Brücke: je Paar (Sprechtext, Rohtext) die
+ * Indexkarte, welches rohe Wort der Sprecher je normalisiertem Wort
+ * klingt — die Grundlage der wortgenauen Leseanzeige.
  */
 
 import { loadPage, ensureToolbar } from './ff_voice_qa_lib.mjs';
@@ -40,7 +43,7 @@ function runOnPage(html) {
   return win.__ffVoice;
 }
 
-const out = { normalized: [], runs: [], pages: [], error: null };
+const out = { normalized: [], aligns: [], pages: [], error: null };
 
 try {
   // Ein Fenster genügt für die reinen Text-Regeln.
@@ -56,11 +59,12 @@ try {
   for (const s of req.samples || []) {
     out.normalized.push(probe.speechNormalize(s.text, s.lang));
   }
-  for (const s of req.runs || []) {
-    // Jeder Lauf-Satz wird in einem eigenen Fenster gerechnet — die
-    // Wortlauf-Regie ist zustandslos, das Fenster ist nur der Rahmen.
-    out.runs.push(probe.languageRuns(s.text, s.lang)
-      .map((r) => ({ text: r.text, lang: r.lang })));
+  for (const s of req.aligns || []) {
+    // Der Aligner ist zustandslos — ein Fenster genügt für alle Paare.
+    out.aligns.push(probe.alignNormToRaw(
+      probe.normTokens(s.norm || ''),
+      probe.normTokens(s.raw || '')
+    ));
   }
   for (const page of req.pages || []) {
     const api = runOnPage(ensureToolbar(page.html, (page.cfg && page.cfg.lang) || 'de'));

@@ -1,31 +1,40 @@
 /* ============================================================
-   FranksFinanzcheck — FF Voice Studio (Lesehilfen, Generation 3)
-   06.09.2026 — Profi-Agentur-Standard
+   FranksFinanzcheck — FF Voice Studio (Lesehilfen, Generation 4)
+   10.09.2026 — Profi-Agentur-Standard
    ------------------------------------------------------------
    VORLESEN — Zwei garantierte Tonpfade, eine Regie, kein Umschalter:
-       (a) STUDIO-TONSPUR — vorab vertonte MP3 (männliche DE-/EN-
-           Stimme, serverseitig erzeugt durch
-           scripts/ff_voice_audio.py) im nativen HTML5-Player.
-           Identischer Klang auf iPhone, iPad, Mac, Android,
-           Windows/Linux und in Chrome, Safari, Firefox, Edge.
+       (a) STUDIO-TONSPUR — vorab vertonte MP3, gesprochen von einem
+           männlichen, DEUTSCHEN NACHRICHTENSPRECHER (serverseitig
+           erzeugt durch scripts/ff_voice_audio.py, Profil „news“) im
+           nativen HTML5-Player. Identischer Klang auf iPhone, iPad,
+           Mac, Android, Windows/Linux und in Chrome, Safari, Firefox,
+           Edge.
        (b) BROWSER-ENGINE — lokale Web Speech API mit derselben
-           Regie, wenn keine Tonspur vorliegt oder sie nicht
-           ladbar ist. Nie stumm, nie eine Warteschleife.
-     Männliche Stimme. Deutsch und Englisch VOLLAUTOMATISCH —
-     satzniveau-genau geroutet, ohne Sprachumschalter und ohne
-     Stimmen-Menü.
+           Regie, wenn keine Tonspur vorliegt oder sie nicht ladbar
+           ist. Nie stumm, nie eine Warteschleife.
 
-   FORTSCHRITTSANZEIGE (Profi-Regie, 07.09.2026)
-     „Was wird gerade vorgelesen?“ Der Meter zeigt nicht nur
-     Prozent und Balken, sondern in einer eigenen Zeile den
-     AKTUELL GESPROCHENEN SATZ (Browser-Engine satzgenau aus den
-     Sprecheinheiten, Studio-Tonspur über die Chunk-/Blockuhr der
-     MP3) plus die Abschnittszählung „Abschnitt n von m“. Die
-     Zeile bleibt während Pause stehen und wird beim Beenden
-     geleert — die Fläche ist dauerhaft reserviert (kein CLS),
-     der Inhalt für Screenreader über aria-valuetext erreichbar.
-     Wortgleich in Layout (ff_voice_toolbar.html) und CSS
-     (ff-voice.css), geprüft durch die Lesehilfen-Gates.
+   NUR-DEUTSCH-VERTRAG (Auftrag 07.09.2026)
+     Die Vorlese-Funktion spricht ausschließlich Deutsch — es gibt
+     keine englische Stimme, keinen Sprachumschalter und keinen
+     Sprachwechsel mitten im Satz. Englische Fachbegriffe spricht
+     der Nachrichtensprecher so, wie es im deutschen Hörfunk üblich
+     ist. Das Paritäts-Gate (scripts/ff_voice_parity_check.py) hält
+     Reader und Generator auf diesem Vertrag.
+
+   LESEANZEIGE — wortgenau (WCAG 2.2 AA, barrierefrei auf
+   Verlagshaus-Niveau)
+     „Was wird gerade vorgelesen?“ — drei Ebenen, ein Rechenweg:
+       · WORT für Wort: das gesprochene Wort leuchtet im Artikeltext
+         (Studio-Tonspur: Wortuhr der Tonspur-Konfiguration auf ms —
+         Browser-Engine: onboundary-Grenzen der Engine; ohne beides:
+         redliche Zeit-Schätzung, nie ein Blindflug).
+       · SATZ für Satz: die Leiste zeigt den aktuell gesprochenen
+         Satz und hebt das aktuelle Wort darin hervor.
+       · ABSCHNITT für Abschnitt: „Abschnitt n von m“, Wortzähler
+         „Wort i von n“, Prozent, Restzeit — alles auch als
+         aria-valuetext der Fortschritts-Meter-Rolle.
+     Automatik ohne Umschalter; bei prefers-reduced-motion ohne
+     Sanft-Scroll; in Forced-Colors/Trajektion mit Systemfarben.
 
    KURZFASSUNG
      Verlagshaus-Kurzfassung im barrierefreien <dialog>:
@@ -47,19 +56,24 @@
    eigenen Ursprung, die Browserstimme bleibt auf dem Gerät.
 
    BARRIEREFREIHEIT: WCAG 2.2 / BITV — Rollen, aria-live-Status,
-   Fokus-Sichtbarkeit, Fokus-Falle, Tastatursteuerung,
-   prefers-reduced-motion, sichtbare Live-Markierung.
+   Fokus-Sichtbarkeit, Fokus-Falle, Tastatursteuerung (Esc,
+   Leertaste in der Leiste, ←/→ Abschnitt, Shift+←/→ Satz),
+   prefers-reduced-motion, sichtbare Live-Markierung,
+   Hoher-Kontrast-Modus.
 
    VERTRAG MIT DEM GENERATOR (scripts/ff_voice_audio.py):
      <script type="application/json" id="ff-voice-track-config">
-     { "src": "...", "version": "...", "voice": {...},
+     { "src": "...", "version": "...", "voice": {...}, "lang": "de",
        "duration": ms,
-       "chunks": [ { "b": blockIndex, "t0": ms, "t1": ms, "lang": "de" } ] }
+       "chunks": [ { "b": blockIndex, "t0": ms, "t1": ms, "lang": "de",
+                     "w": [ [rohwortIndex, ms], ... ]? } ] }
      `b` ist der 0-basierte Blockindex in Lesereihenfolge
      (0 = Anmoderation, letzter = Abmoderation) — exakt die
-     Reihenfolge von collectBlocks(). Die Parität zwischen
-     Generator und Reader wird durch scripts/ff_voice_parity_check.py
-     erzwungen.
+     Reihenfolge von collectBlocks(). Das Feld `w` ist die Wortuhr:
+     je rohem Wort des Blocktextes (Whitespace-Tokonisierung von
+     block.text) der Absolute ms-Zeitpunkt des Sprechbeginns.
+     Die Parität zwischen Generator und Reader wird durch
+     scripts/ff_voice_parity_check.py erzwungen.
 ============================================================ */
 (function () {
   'use strict';
@@ -71,7 +85,7 @@
      1 · KONFIGURATION
      ============================================================ */
 
-  var VOICE_VERSION = '2026.09.09';
+  var VOICE_VERSION = '2026.09.10';
 
   var cfgEl = doc.getElementById('ff-voice-config');
   if (!cfgEl) return;
@@ -109,6 +123,7 @@
   var nowLabelEl = doc.getElementById('ff-voice-live-label');
   var nowEl = doc.getElementById('ff-voice-now');
   var posEl = doc.getElementById('ff-voice-pos');
+  var wordCountEl = doc.getElementById('ff-voice-word-count');
 
   if (!bar || !playBtn || !summaryBtn) return;
 
@@ -116,13 +131,21 @@
   var STORE_POS = 'ff-voice-pos:' + String(cfg.slug || cfg.permalink || doc.location.pathname);
 
   /* ============================================================
-     2 · ZWEISPRACHIGKEIT (DE / EN) — ohne Umschalter
+     2 · OBERFLÄCHEN-TEXT — NUR DEUTSCH (Nur-Deutsch-Vertrag)
+     ------------------------------------------------------------
+     Die Vorlese-Funktion spricht ausschließlich Deutsch. Die früheren
+     I18N.en-Texte und die Sprachschalter-Mechanik sind ersatzlos
+     entfallen (Befund 07.09.2026): Ein englischer Text im Artikel
+     wird NICHT mehr auf Englisch vorgelesen — ihn spricht der
+     deutsche Nachrichtensprecher. Das Paritäts-Gate verbietet beide
+     Richtungen: weder im Reader noch im Generator darf eine zweite
+     Sprache eingebaut werden.
      ============================================================ */
 
   var I18N = {
     de: {
       play: 'Vorlesen', pause: 'Pausieren', resume: 'Weiterlesen', stop: 'Beenden',
-      playAria: 'Artikel vorlesen (männliche Stimme)',
+      playAria: 'Artikel vorlesen (männliche Nachrichtensprecher-Stimme)',
       playAriaNeutral: 'Artikel vorlesen (Stimme deines Geräts)',
       pauseAria: 'Vorlesen pausieren', resumeAria: 'Vorlesen fortsetzen', stopAria: 'Vorlesen beenden',
       summaryBtn: 'Kurzfassung', summaryAria: 'Kurzfassung des Artikels anzeigen',
@@ -137,9 +160,9 @@
       trackStalled: 'Die Tonspur hängt – die Stimme deines Geräts übernimmt.',
       synthesisDead: 'Sprachausgabe ist auf diesem Gerät nicht verfügbar. Der Artikel bleibt vollständig lesbar.',
       synthesisMute: 'Dein Browser meldet Sprachausgabe, gibt aber keinen Ton aus. Das Vorlesen wurde gestoppt – der Artikel bleibt vollständig lesbar.',
-      voiceActive: 'Männliche Stimme aktiv.',
+      voiceActive: 'Deutscher Nachrichtensprecher aktiv.',
       voiceFallback: 'Vorlesen gestartet; dein Browser stellt die verfügbare Stimme bereit.',
-      voiceLoading: 'Männliche Stimme wird geladen …',
+      voiceLoading: 'Nachrichtensprecher-Stimme wird geladen …',
       sectionError: 'Dieser Abschnitt konnte nicht abgespielt werden; es geht weiter.',
       paused: 'Vorlesen pausiert.', resumed: 'Vorlesen fortgesetzt.',
       finished: 'Vorlesen beendet.', resumedPos: 'Vorlesen an der zuletzt gehörten Stelle fortgesetzt.',
@@ -147,6 +170,7 @@
       progressIdle: 'Noch nicht gestartet',
       progressNowLabel: 'Gerade vorgelesen',
       progressPos: 'Abschnitt {n} von {total}',
+      progressWords: 'Wort {i} von {total}',
       progressModeReady: 'Bereit', progressModeSpeech: 'Gerät', progressModeTrack: 'Studio', progressModePaused: 'Pause', progressModeDone: 'Fertig',
       progressHeading: 'Überschrift', progressParagraph: 'Absatz', progressList: 'Liste', progressQuote: 'Zitat',
       progressCallout: 'Merksatz', progressWarning: 'Hinweis', progressOverview: 'Übersicht',
@@ -154,7 +178,7 @@
       progressTableRow: 'Tabelle · Zeile {row} von {total}', progressTableSum: 'Tabelle · Summe', progressTableCta: 'Tabelle · Empfehlung', progressTableOutro: 'Tabellenende',
       progressIntro: 'Intro', progressOutro: 'Abschluss',
       mediaTitle: '{title} – FranksFinanzcheck',
-      mediaArtist: 'FranksFinanzcheck – Artikel zum Hören',
+      mediaArtist: 'FranksFinanzcheck – Nachrichtensprecher (Deutsch)',
       introLine: '{title}. Ein Beitrag von FranksFinanzcheck. Hördauer etwa {duration}.',
       durationMinutes: '{n} Minuten', durationMinuteOne: 'eine Minute', durationUnknown: 'einige Minuten',
       outroLine: 'Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.',
@@ -174,6 +198,7 @@
       tableOutro: 'Ende der Tabelle {title}.',
       tableDefault: 'Übersichtstabelle',
       prevAria: 'Vorheriger Abschnitt', nextAria: 'Nächster Abschnitt',
+      prevSentenceAria: 'Vorheriger Satz', nextSentenceAria: 'Nächster Satz',
       // Kurzfassung
       summaryEyebrow: 'Kurzfassung',
       summaryQuick: 'Das Wichtigste in 30 Sekunden',
@@ -196,82 +221,6 @@
       summaryReadingTime: 'ca. {time} Min. Lesezeit',
       summaryWords: '{count} Wörter',
       summaryJump: 'Zum Abschnitt'
-    },
-    en: {
-      play: 'Listen', pause: 'Pause', resume: 'Resume', stop: 'Stop',
-      playAria: 'Read article aloud (male voice)',
-      playAriaNeutral: 'Read article aloud (voice provided by your device)',
-      pauseAria: 'Pause speech', resumeAria: 'Resume speech', stopAria: 'Stop speech',
-      summaryBtn: 'Summary', summaryAria: 'Show article summary',
-      unsupported: 'Speech synthesis is not supported by this browser.',
-      noText: 'No readable text found.',
-      started: 'Audio playback started.',
-      startedTrack: 'Studio audio track playing.',
-      trackDefective: 'This article’s audio track is unusable – your device’s voice takes over.',
-      trackBroken: 'Audio track could not be loaded – your device’s voice takes over.',
-      trackEndedEarly: 'The audio track ends too early – continuing with your device’s voice.',
-      trackSilent: 'The audio track stays silent – your device’s voice takes over.',
-      trackStalled: 'The audio track stalled – your device’s voice takes over.',
-      synthesisDead: 'Speech output is unavailable on this device. The article remains fully readable.',
-      synthesisMute: 'Your browser reports speech but produces no sound. Reading was stopped – the article remains fully readable.',
-      voiceActive: 'Male voice active.',
-      voiceFallback: 'Playback started; your browser provides the available voice.',
-      voiceLoading: 'Loading a male voice …',
-      sectionError: 'This section could not be played; continuing.',
-      paused: 'Audio playback paused.', resumed: 'Audio playback resumed.',
-      finished: 'Audio playback completed.', resumedPos: 'Resumed from your last listening position.',
-      remaining: 'approx. {min} min left',
-      progressIdle: 'Not started yet',
-      progressNowLabel: 'Now reading',
-      progressPos: 'Section {n} of {total}',
-      progressModeReady: 'Ready', progressModeSpeech: 'Device', progressModeTrack: 'Studio', progressModePaused: 'Paused', progressModeDone: 'Done',
-      progressHeading: 'Heading', progressParagraph: 'Paragraph', progressList: 'List', progressQuote: 'Quote',
-      progressCallout: 'Callout', progressWarning: 'Note', progressOverview: 'Overview',
-      progressTableIntro: 'Table overview', progressTableHeader: 'Table · Columns', progressTableGroup: 'Table · Group',
-      progressTableRow: 'Table · Row {row} of {total}', progressTableSum: 'Table · Total', progressTableCta: 'Table · Recommendation', progressTableOutro: 'End of table',
-      progressIntro: 'Intro', progressOutro: 'Outro',
-      mediaTitle: '{title} – FranksFinanzcheck',
-      mediaArtist: 'FranksFinanzcheck – Article Audio',
-      introLine: '{title}. An article by FranksFinanzcheck. Listening time about {duration}.',
-      durationMinutes: '{n} minutes', durationMinuteOne: 'one minute', durationUnknown: 'a few minutes',
-      outroLine: 'End of article. Thank you for listening to FranksFinanzcheck.',
-      listItemNum: 'Point {n}:',
-      cueShortAnswer: 'Short answer:', cueCorrection: 'Correction:', cueSaving: 'Savings potential:',
-      cueTariff: 'Tariff at a glance:', cueWarning: 'Attention:', cueNote: 'Note:',
-      columnLabel: 'Column', rowLabel: 'Row',
-      tableHeaders: 'The columns are: {headers}.',
-      tableHeaderRow: 'Header row {n}: {headers}.',
-      tableIntro: 'Table: {title}. Overview with {cols} columns and {rows} rows.',
-      tableIntroOne: 'Table: {title}. Overview with {cols} columns and one row.',
-      tableRow: 'Row {row} of {total}. {content}.',
-      tableRowLabel: 'Row {row} of {total}: {label}. {content}.',
-      tableGroup: 'Group: {name}.',
-      tableSum: 'In total: {content}.',
-      tableCta: 'Recommendation: {cta}. Note: this is an affiliate link.',
-      tableOutro: 'End of table {title}.',
-      tableDefault: 'Overview Table',
-      prevAria: 'Previous section', nextAria: 'Next section',
-      summaryEyebrow: 'Summary',
-      summaryQuick: 'Key Takeaways in 30 Seconds',
-      summaryKeypoints: 'Key Highlights',
-      summaryFigures: 'Key Figures & Data',
-      summaryTables: 'Tables & Overviews in Focus',
-      summaryToc: 'In this article',
-      summaryCopy: 'Copy summary',
-      summaryCopied: 'Copied',
-      summaryCopyFail: 'Copy failed',
-      summaryReadFull: 'Read full article',
-      summaryClose: 'Close summary',
-      summaryAuthor: 'Author: {name}',
-      summaryStand: 'As of {date}',
-      summaryUpdated: 'Updated: {date}',
-      summaryEmpty: 'No summary is currently available for this article.',
-      summaryRowCount: '{count} rows',
-      summaryRowCountOne: '1 row',
-      summaryMoreRows: '+ {count} more rows',
-      summaryReadingTime: 'approx. {time} min read',
-      summaryWords: '{count} words',
-      summaryJump: 'Go to section'
     }
   };
 
@@ -327,316 +276,104 @@
   }
 
   /* ============================================================
-     4 · SPRACHERKENNUNG (DE / EN) — vollautomatisch
+     4 · NUR-DEUTSCH-VERTRAG (Befund 07.09.2026)
      ------------------------------------------------------------
-     Die Seite ist einsprachig als „de“ deklariert. Ein englischer
-     Artikel muss deshalb aus seinem eigenen Inhalt erkannt werden.
-     Stichprobe: Titel + Description + sichtbarer Artikelfluss
-     (nie der ganze Body – Footer, Navigation und verwandte
-     Artikel sind deutsch und würden einen EN-Artikel zurückkippen).
+     Die Vorlese-Funktion nutzt ausschließlich Deutsch. Die frühere
+     Spracherkennung (Artikel-, Satz- und Wortlauf-Routing zwischen
+     DE und EN) ist ersatzlos entfallen — ihre Tabellen und
+     Heuristiken sind bewusst NICHT mehr vorhanden, damit niemand
+     sie „nur kurz“ wieder anstöpselt. Ein englischer Begriff im
+     Text wird vom deutschen Nachrichtensprecher gesprochen, wie es
+     im Hörfunk üblich ist.
+
+     Beide Funktionen bleiben als Signaturen erhalten (Generator-
+     Spiegel + Tests): Sie liefern für JEDE Eingabe „de“.
      ============================================================ */
 
-  var DE_HINTS = {
-    der: 2, die: 2, das: 2, und: 2, ist: 2, sind: 2, für: 2, mit: 2, nicht: 2,
-    von: 1, ein: 1, eine: 1, einen: 1, einem: 1, den: 1, dem: 1, auf: 1, zu: 1,
-    im: 1, am: 1, bei: 1, auch: 1, sich: 1, sparen: 2, spart: 2, euro: 2,
-    versicherung: 2, kosten: 2, vertrag: 2, vergleich: 2, wechseln: 2,
-    günstig: 2, kostenlos: 2, ratgeber: 2, tabelle: 2, jahr: 1, monat: 1,
-    sollte: 1, solltest: 1, müssen: 1, kann: 1, wichtig: 1, tipp: 1, prüfen: 1
-  };
-  var EN_HINTS = {
-    the: 2, and: 2, is: 2, are: 2, for: 2, with: 2, that: 2, this: 2, your: 2, you: 2,
-    from: 1, our: 1, save: 2, saving: 2, money: 2, insurance: 2, costs: 2, cost: 2,
-    compare: 2, comparison: 2, guide: 2, table: 2, tariff: 1, tariffs: 1, should: 1,
-    will: 1, can: 1, have: 1, more: 1, free: 1, cheap: 1, best: 1, important: 1,
-    article: 1, summary: 1, read: 1, listen: 1, avoid: 1, switch: 1
-  };
+  function detectArticleLanguage() { return 'de'; }
+  function sniffSentenceLang() { return 'de'; }
+
+  var lang = 'de';
+  var T = I18N.de;
 
   /* ============================================================
-     4a · WORTLAUF-REGIE — Sprachwechsel MITTEN im Satz
+     4a · WORTUHR-ALIGNER — die Brücke zwischen Sprechtext und
+     Artikeltext (Grundlage der wortgenauen Leseanzeige)
      ------------------------------------------------------------
-     Bisher entschied der Satz über die Sprache: Ein deutscher
-     Satz mit englischen Fachbegriffen („Ein Robo Advisor nutzt
-     Compound Interest …“) wurde GANZ von der deutschen Stimme
-     gelesen — „Compound Interest“ klang deutsch. Diese Regie
-     zerlegt jede Sprecheinheit in SPRACHLÄUFE: Der englische Lauf
-     kommt von der englischen Männerstimme, der deutsche Rest von
-     der deutschen — satzteil-genau, ohne Umschalter.
+     Vorgelesen wird der NORMALISIERTE Text („bis zu 650 Euro“),
+     markiert werden muss das rohe Wort im Artikel („€“). Der
+     Aligner schiebt die normalisierten Wörter (N) über die rohen
+     Wörter (R) und merkt je N-Wort, welches R-Wort er spricht.
 
-     Präzision vor Fläche, damit niemals ein deutsches Wort in der
-     falschen Sprache landet:
-       · SCHEINFREUNDE (die, was, hat, will, fast …) zählen nie
-         als Evidenz — sie sind in beiden Sprachen echte Wörter.
-       · ETABLIERTE ANGLIZISMEN (App, Team, Meeting, Download …)
-         bleiben bei der deutschen Stimme; sie spricht sie korrekt.
-       · Ein Sprachwechsel braucht tragfähige Evidenz: ein Wort
-         mit Score ≥ 2 oder mindestens zwei belegte Wörter. Ein
-         einsames Suffix-Wörtchen kippt die Sprache nie.
-       · Neutrale Wörter zwischen zwei Ankern derselben Sprache
-         gehören in den Lauf („funds of funds“); danach kommende,
-         unbelegte Wörter bleiben in der Artikelsprache — „Cashflow
-         kommt“ wird vollständig deutsch gesprochen, obwohl
-         „kommt“ ohne Beleg ist … sofern „kommt“ im deutschen
-         Belegwortschatz steht (DE_EVIDENCE). Genau dafür existiert
-         er: Er härtet die Satzmitte gegen Fehlwechsel.
-     Wortgleich gespiegelt in scripts/ff_voice_audio.py
-     (language_runs); die Parität prüft scripts/ff_voice_parity_check.py.
+     Regeln (wortgleich zu align_norm_to_raw() in
+     scripts/ff_voice_audio.py — das Paritäts-Gate vergleicht beide
+     Implementierungen Wort für Wort):
+       1. Kern-Gleichheit (Kleinschreibung, Nicht-Buchstaben weg).
+       2. Symbol-Erweiterung: „–“ ↔ „bis“, „€“ ↔ „Euro“ …
+       3. Einheiten-Erweiterung: „kWh“ ↔ „Kilowattstunden“.
+       4. Zahlen-Kern: reine Ziffernkerne treffen per Containment —
+          so bleibt „02.01.2006“ hell, während der Sprecher
+          „2. Januar 2006“ sagt.
+       5. Kein Treffer: das N-Wort erbt das zuletzt verbrauchte
+          rohe Wort; ab sechs Treffern in Folge wird weit
+          vorgespult neu verankert (Resync-Fenster).
      ============================================================ */
 
-  /* Englische Belegwörter. 2 = trägt einen Wechsel allein,
-     3 = Finanz-Fachbegriff (trägt seinen Farbton besonders sicher). */
-  var EN_WORDS = {
-    the: 2, this: 2, that: 2, these: 2, those: 2, your: 2, you: 2, yours: 2,
-    of: 2, to: 2, from: 2, with: 2, without: 2, about: 2, over: 2, under: 2,
-    when: 2, while: 2, then: 2, than: 2, there: 2, where: 2, why: 2, how: 2,
-    what: 2, who: 2, whom: 2, which: 2, because: 2, however: 2, again: 2,
-    against: 2, before: 2, after: 2,
-    is: 2, are: 2, were: 2, been: 2, being: 2, have: 2, has: 2, had: 2,
-    would: 2, could: 2, should: 2, can: 2, may: 2, might: 2, must: 2,
-    more: 2, most: 2, free: 2, save: 2, saving: 2, savings: 2, money: 2,
-    costs: 2, cost: 2, cheap: 2, compare: 2, comparison: 2, guide: 2,
-    important: 2, article: 2, summary: 2, avoid: 2, switch: 2, insurance: 2,
-    yearly: 2, monthly: 2, every: 2, percent: 2, hundred: 2, thousand: 2,
-    table: 2, best: 2, better: 2, good: 2,
-    our: 1, read: 1, listen: 1, tariff: 1, tariffs: 1, cash: 1, per: 1,
-    new: 1, old: 1, side: 1, picking: 1, traded: 1, score: 1, tax: 1,
-    invest: 1, dividend: 1, value: 1, hold: 1, and: 2, or: 1, but: 2, not: 1, if: 1,
-    /* Finanz- und Verbraucherbegriffe, die im deutschen Satz englisch klingen */
-    broker: 3, brokers: 3, neobroker: 3, neobrokers: 3,
-    cashflow: 3, cashflows: 3, trading: 3, trader: 3, traders: 3,
-    budgeting: 3, compounding: 3, robo: 3,
-    advisor: 3, advisors: 3, adviser: 3, advisers: 3,
-    compound: 2, interest: 2, stock: 2, stocks: 2, hustle: 2, hustles: 2,
-    investing: 2, investor: 2, investors: 2, income: 2, wealth: 2,
-    emergency: 2, fund: 2, funds: 2, retirement: 2, financial: 2,
-    independence: 2, credit: 2, debt: 2, loan: 2, loans: 2, mortgage: 2,
-    taxes: 2, yield: 2, yields: 2, dividends: 2, exchange: 2, buy: 2, sell: 2
-  };
-
-  /* Scheinfreunde: in beiden Sprachen echte Wörter — nie Evidenz. */
-  var DE_EN_HOMOGRAPHS = {
-    die: 1, was: 1, hat: 1, will: 1, rat: 1, gut: 1, so: 1, man: 1, fast: 1,
-    all: 1, tag: 1, see: 1, arm: 1, tot: 1, hut: 1, gift: 1, boot: 1,
-    band: 1, brand: 1, kind: 1, land: 1, links: 1, fall: 1, ball: 1, war: 1
-  };
-
-  /* Deutscher Belegwortschatz (Härtung der Satzmitte): häufige Wörter
-     ohne Umlaut, ohne Endungs-Merkmal und ohne Platz in DE_HINTS. */
-  var DE_EVIDENCE = {
-    aber: 1, alle: 1, allerdings: 1, also: 1, ans: 1, andere: 1,
-    bekannt: 1, besonders: 1, bestimmt: 1, braucht: 1, dabei: 1, dadurch: 1,
-    dafür: 1, dagegen: 1, deshalb: 1, dein: 1, deine: 1,
-    dem: 1, den: 1, denn: 1, der: 1, des: 1, dessen: 1, dich: 1, dies: 1,
-    dieser: 1, dieses: 1, du: 1, durch: 1, eben: 1, einfach: 1, er: 1,
-    es: 1, euch: 1, euer: 1, etwas: 1, genau: 1, gerade: 1, gegen: 1,
-    gibt: 1, gilt: 1, hast: 1, haben: 1, heute: 1, hier: 1, ihm: 1, ihn: 1,
-    ihnen: 1, ihr: 1, ihre: 1, immer: 1, ins: 1, ja: 1, je: 1, jede: 1,
-    jeden: 1, jetzt: 1, kommt: 1, kann: 1, kein: 1, keine: 1, könnte: 1,
-    machen: 1, macht: 1, mal: 1, mehr: 1, mein: 1, meine: 1, mich: 1,
-    mir: 1, nach: 1, natürlich: 1, nie: 1, noch: 1, nun: 1, nur: 1,
-    nutzt: 1, nutzen: 1, ob: 1, oder: 1, oft: 1, richtig: 1, schon: 1,
-    sein: 1, seine: 1, sich: 1, sind: 1, soll: 1, sollen: 1, sondern: 1,
-    sonst: 1, sowie: 1, über: 1, um: 1, und: 1, uns: 1, unser: 1, unter: 1,
-    vom: 1, von: 1, vor: 1, warum: 1, weg: 1, weil: 1, weiter: 1, wenn: 1,
-    wer: 1, werde: 1, werden: 1, wirklich: 1, wie: 1, wieder: 1, wir: 1,
-    wird: 1, wo: 1, wollen: 1, wäre: 1, zum: 1, zur: 1, zurück: 1,
-    zwischen: 1, kostet: 1, bringt: 1, zahlt: 1, steht: 1, gilt: 1,
-    sorgt: 1, senkt: 1, liegt: 1, bleibt: 1, sorgen: 1, senken: 1,
-    inzwischen: 1, schließlich: 1, außerdem: 1, ebenfalls: 1, dennoch: 1,
-    trotzdem: 1, insgesamt: 1, derzeit: 1, aktuell: 1, vielleicht: 1,
-    eigentlich: 1, sicher: 1, deutlich: 1, sofort: 1, häufig: 1, selten: 1
-  };
-
-  /** Sprachklasse eines Wortes — null heißt: kein Beleg, folgt dem Lauf. */
-  function wordClassOf(word, base) {
-    var lw = String(word || '').toLowerCase().replace(/['’]s$/, '');
-    if (!lw) return null;
-    if (DE_EN_HOMOGRAPHS[lw]) return null;
-    var deScore = 0, enScore = 0;
-    if (/[äöüß]/.test(lw)) deScore = 2;
-    if (DE_HINTS[lw]) deScore = Math.max(deScore, DE_HINTS[lw]);
-    if (DE_EVIDENCE[lw]) deScore = Math.max(deScore, DE_EVIDENCE[lw]);
-    if (EN_WORDS[lw]) enScore = Math.max(enScore, EN_WORDS[lw]);
-    if (!deScore && !enScore && lw.length >= 6) {
-      // Endungs-Evidenz nur als Zweitbeleg (Score 1): „ness/able/ible“
-      // hat keine deutschen Homographe; „ing“ erst ab 7 Zeichen und
-      // nie, wenn ein deutsches Endungs-Wort vorliegt.
-      if (base === 'de') {
-        if (/(ung|keit|heit|schaft|lich|isch)$/.test(lw)) deScore = 1;
-        else if (/(ness|able|ible)$/.test(lw)) enScore = 1;
-        else if (lw.length >= 7 && /ing$/.test(lw)) enScore = 1;
-      } else {
-        if (/(ness|able|ible)$/.test(lw)) enScore = 1;
-        else if (lw.length >= 7 && /ing$/.test(lw)) enScore = 1;
-        else if (/(ung|keit|heit|schaft|lich|isch)$/.test(lw)) deScore = 1;
-      }
-    }
-    if (deScore && enScore) return null;
-    if (deScore) return { lang: 'de', score: deScore };
-    if (enScore) return { lang: 'en', score: enScore };
-    return null;
+  function normTokens(text) {
+    return String(text == null ? '' : text).split(/\s+/).filter(function (t) { return t.length > 0; });
   }
 
-  /**
-   * Zerlegt Text in maximale SPRACHLÄUFE. Die Segmente konkatenieren
-   * EXAKT zum Eingabetext (Vertrag an die Paritäts-Prüfung).
-   */
-  function languageRuns(text, baseLang) {
-    var base = baseLang === 'en' ? 'en' : 'de';
-    var src = String(text || '');
-    if (!src) return [];
+  function tokenCore(tok) {
+    return String(tok || '').toLowerCase().replace(/[^0-9a-zäöüß']/g, '');
+  }
 
-    var RE_WORD = /[A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß'’]*/g;
-    var anchors = [];
-    var m;
-    while ((m = RE_WORD.exec(src)) !== null) {
-      var cls = wordClassOf(m[0], base);
-      if (cls) anchors.push({ lang: cls.lang, score: cls.score, start: m.index, end: m.index + m[0].length });
-      if (m.index === RE_WORD.lastIndex) RE_WORD.lastIndex += 1; // Endlos-Schleife verhindern
-    }
-    if (!anchors.length) return [{ text: src, lang: base }];
+  var SYMBOL_SPOKEN = {
+    '€': 'euro', '%': 'prozent', '&': 'und', '§': 'paragraph',
+    '+': 'plus', '=': 'gleich', '–': 'bis', '—': 'bis', '-': 'bis',
+    '·': 'punkt', '…': ''
+  };
 
-    /* Ankern gleicher Sprache zu Gruppen bündeln. Ein Gruppenwechsel
-       liegt nur vor, wenn die Sprache wirklich wechselt. */
-    var groups = [];
-    anchors.forEach(function (a) {
-      var last = groups[groups.length - 1];
-      if (last && last.lang === a.lang) { last.items.push(a); last.end = a.end; }
-      else groups.push({ lang: a.lang, items: [a], start: a.start, end: a.end });
-    });
+  var UNIT_SPOKEN = {
+    kwh: { kilowattstunden: 1, kilowattstunde: 1, kilowatt: 1, kilowattpeak: 1 },
+    kmh: { kilometer: 1, kilometerprosstunde: 1, stunde: 1 },
+    ct: { cent: 1 },
+    kw: { kilowatt: 1, kilowattpeak: 1 },
+    kwp: { kilowatt: 1, kilowattpeak: 1 },
+    m: { meter: 1, quadratmeter: 1, kubikmeter: 1 },
+    m2: { quadratmeter: 1 },
+    m3: { kubikmeter: 1 },
+    eur: { euro: 1 },
+    a: { jahr: 1, jahrpro: 1 }
+  };
 
-    /* Gruppen mit dünnem Beleg fallen in die Artikelsprache zurück. */
-    function groupEvidence(g) {
-      var sum = 0, max = 0;
-      g.items.forEach(function (a) { sum += a.score; if (a.score > max) max = a.score; });
-      return { sum: sum, max: max, count: g.items.length };
-    }
-    function groupStands(g) {
-      if (g.lang === base) return true;
-      var ev = groupEvidence(g);
-      // Ein Fachbegriff (Score 3) trägt allein; sonst brauchen wir
-      // mindestens zwei belegte Wörter — „the“ allein wechselt nicht.
-      return ev.max >= 3 || (ev.count >= 2 && ev.sum >= 2);
-    }
-
-    var segs = [];
-    var pos = 0;
-    groups.forEach(function (g, gi) {
-      var stands = groupStands(g);
-      var gLang = stands ? g.lang : base;
-
-      /* Kopf bis zum Gruppenbeginn gehört in die Artikelsprache. */
-      var head = src.slice(pos, g.start);
-      if (head) segs.push({ text: head, lang: base });
-
-      /* Die Gruppe selbst: Anfang, Innenlücken (beleglose Wörter und
-         weiche Trenner), Ende — „funds of funds“ bleibt ein Lauf. */
-      segs.push({ text: src.slice(g.start, g.end), lang: gLang });
-
-      pos = g.end;
-      var next = groups[gi + 1];
-
-      /* Nachlauf: Satzzeichen im Rücken der Gruppe hängen still an sie
-         (bessere Pause am Stimmwechsel). Bei tragfähigen Gruppen mit
-         mindestens zwei Ankern dürfen zusätzlich bis zu drei beleglose
-         Folgewörter in den Lauf („Buy and Hold“); alles andere — vor
-         allem belegte Wörter — bleibt in der Artikelsprache. */
-      if (!next) {
-        var tail = src.slice(pos);
-        if (tail) {
-          var tailSoft = tail.match(/^[\s,.:;!?…„“"'’()\[\]\-–—]+/);
-          var softLen = tailSoft ? tailSoft[0].length : 0;
-          if (softLen && stands) segs.push({ text: tail.slice(0, softLen), lang: gLang });
-          if (softLen < tail.length) segs.push({ text: tail.slice(softLen), lang: base });
-        }
-        pos = src.length;
-        return;
-      }
-
-      var gapEnd = next.start;
-      var gap = src.slice(pos, gapEnd);
-
-      /* Nachlauf: nur stiller Nachlauf (Komma, Punkt, Leerzeichen,
-         Anführung) hängt an die stehende Gruppe — er gibt den Atem-
-         punkt am Stimmwechsel. Beleglose Folgewörter bleiben bewusst
-         in der Artikelsprache: „Cashflow kommt“ muss deutsch bleiben,
-         auch wenn „kommt“ ohne Beleg ist. */
-      if (gap && stands) {
-        var tailSoft = gap.match(/^[\s,.:;!?…„“"'’()\[\]\-–—]+/);
-        var softLen = tailSoft ? tailSoft[0].length : 0;
-        if (softLen) {
-          segs.push({ text: gap.slice(0, softLen), lang: gLang });
-          gap = gap.slice(softLen);
+  function alignNormToRaw(N, R) {
+    N = N || []; R = R || [];
+    var out = [];
+    var j = 0, prev = -1, miss = 0;
+    for (var k = 0; k < N.length; k++) {
+      var nc = tokenCore(N[k]);
+      if (!R.length) { out.push(-1); continue; }
+      var matched = -1;
+      var window = miss < 6 ? 4 : 64;
+      var upto = Math.min(j + window, R.length);
+      for (var o = j; o < upto; o++) {
+        var rc = tokenCore(R[o]);
+        if (rc && nc && rc === nc) { matched = o; break; }
+        if (nc) {
+          if (!rc) {
+            var sym = String(R[o]).trim().replace(/^[.:;,!?]+/g, '').replace(/[.:;,!?]+$/g, '');
+            if (Object.prototype.hasOwnProperty.call(SYMBOL_SPOKEN, sym) && SYMBOL_SPOKEN[sym] === nc) { matched = o; break; }
+          }
+          if (Object.prototype.hasOwnProperty.call(UNIT_SPOKEN, rc) && UNIT_SPOKEN[rc][nc]) { matched = o; break; }
+          if (/^[0-9]+$/.test(rc) && /^[0-9]+$/.test(nc) && (nc.indexOf(rc) !== -1 || rc.indexOf(nc) !== -1)) { matched = o; break; }
         }
       }
-      if (gap) segs.push({ text: gap, lang: base });
-      pos = gapEnd;
-    });
-    if (pos < src.length) segs.push({ text: src.slice(pos), lang: base });
-
-    /* Benachbarte Segmente gleicher Sprache vereinen. */
-    var merged = [];
-    segs.forEach(function (s) {
-      if (!s.text) return;
-      if (merged.length && merged[merged.length - 1].lang === s.lang) merged[merged.length - 1].text += s.text;
-      else merged.push(s);
-    });
-    return merged;
-  }
-
-
-  function articleSample(maxChars) {
-    var sample = String(cfg.title || '') + ' ' + String(cfg.description || '') + ' ';
-    try {
-      var content = doc.querySelector('.post-content') || doc.querySelector('.md-content');
-      if (content) sample += String(content.textContent || '').slice(0, maxChars);
-      else if (doc.body) sample += String(doc.body.textContent || '').slice(0, 2000);
-    } catch (e) {}
-    return sample;
-  }
-
-  function detectArticleLanguage() {
-    var raw = String(cfg.lang || (bar && bar.getAttribute('data-page-lang')) || doc.documentElement.lang || 'de').toLowerCase();
-    var base = raw.indexOf('en') === 0 ? 'en' : 'de';
-    var sample = articleSample(5000).toLowerCase();
-    var tokens = sample.match(/[a-zäöüß]+/g) || [];
-    var de = 0, en = 0, deHits = 0, enHits = 0;
-    for (var i = 0; i < tokens.length; i++) {
-      var w = tokens[i];
-      if (DE_HINTS[w]) { de += DE_HINTS[w]; deHits += 1; }
-      if (EN_HINTS[w]) { en += EN_HINTS[w]; enHits += 1; }
-      if (/[äöüß]/.test(w)) de += 2;
-      if (w.length >= 6 && /(ung|keit|heit|schaft|lich|isch)$/.test(w)) de += 1;
+      if (matched >= 0) { out.push(matched); prev = matched; j = matched + 1; miss = 0; }
+      else { out.push(prev); miss += 1; }
     }
-    // Die deklarierte Seitensprache ist eine Voreinstellung, kein Riegel:
-    // erst eine klare EN-Mehrheit kippt einen deutsch deklarierten Artikel.
-    if (base === 'de') {
-      return (enHits >= 4 && en >= de + 3 && en >= Math.ceil(de * 1.25)) ? 'en' : 'de';
-    }
-    return (deHits >= 4 && de >= en + 3 && de >= Math.ceil(en * 1.15)) ? 'de' : 'en';
+    return out;
   }
 
-  /** Satzweises Sprach-Routing (zweisprachiger Hörfunk-Moderator). */
-  function sniffSentenceLang(sentence, baseLang) {
-    var text = String(sentence || '');
-    if (text.length < 12) return baseLang;
-    var words = text.toLowerCase().match(/[a-zäöüß']+/g) || [];
-    if (words.length < 3) return baseLang;
-    var de = 0, en = 0;
-    for (var i = 0; i < words.length; i++) {
-      var w = words[i];
-      if (DE_HINTS[w]) de += DE_HINTS[w];
-      if (EN_HINTS[w]) en += EN_HINTS[w];
-      if (/[äöüß]/.test(w)) de += 2;
-      if (w.length >= 6 && /(ung|keit|heit|schaft|lich|isch)$/.test(w)) de += 1;
-      if (w.length >= 4 && /(ing|tion|ment|ness|able|ible)$/.test(w)) en += 1;
-    }
-    if (baseLang === 'de') return (en >= 4 && en >= de + 2) ? 'en' : 'de';
-    return (de >= 4 && de >= en + 2) ? 'de' : 'en';
-  }
-
-  var lang = detectArticleLanguage();
-  var T = I18N[lang] || I18N.de;
 
   function durationPhrase(minutes) {
     var n = parseInt(minutes, 10);
@@ -706,8 +443,7 @@
   var HOLD_OPEN = '\u0000';
   var HOLD_CLOSE = '\u0001';
 
-  var ABBREV = {
-    de: [
+  var ABBREV_DE = [
       [/bzw\./gi, 'beziehungsweise'],
       [/zzgl\./gi, 'zuzüglich'],
       [/inkl\./gi, 'inklusive'],
@@ -748,34 +484,10 @@
       [/€/g, 'Euro'],
       [/(\d)\s?%/g, '$1 Prozent'],
       [/%/g, 'Prozent']
-    ],
-    en: [
-      [/\be\.\s?g\./gi, 'for example'],
-      [/\bi\.\s?e\./gi, 'that is'],
-      [/\betc\./gi, 'and so on'],
-      [/\bapprox\./gi, 'approximately'],
-      [/\bvs\./gi, 'versus'],
-      [/\bNo\.\s?(\d+)/g, 'number $1'],
-      [/\bMr\./g, 'Mister'],
-      [/\bMrs\./g, 'Misses'],
-      [/kWh\/a/g, 'kilowatt hours per year'],
-      [/kWh/gi, 'kilowatt hours'],
-      [/kWp/gi, 'kilowatt peak'],
-      [/sq\s?m/gi, 'square meters'],
-      [/cu\s?m/gi, 'cubic meters'],
-      [/£\s?(\d[\d.,]*)/g, '$1 pounds'],
-      [/\$(\d[\d.,]*)/g, '$1 dollars'],
-      [/(\d[\d.,]*)\s?\$/g, '$1 dollars'],
-      [/(\d)\s?%/g, '$1 percent'],
-      [/%/g, 'percent'],
-      [/§\s?(\d+)/g, 'section $1']
-    ]
-  };
+  ];
 
   var MONTHS_DE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
     'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
-  var MONTHS_EN = ['January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'];
 
   function unhold(text, store) {
     return String(text).replace(new RegExp(HOLD_OPEN + '(\\d+)' + HOLD_CLOSE, 'g'), function (m, i) {
@@ -784,34 +496,33 @@
     });
   }
 
-  function normalizeUrls(text, hold, L) {
+  function normalizeUrls(text, hold) {
     var out = String(text);
     // E-Mail-Adressen
     out = out.replace(/[\w.+-]+@[\w-]+\.[\w.-]+/g, function (m) {
-      return hold(m.replace(/@/g, L === 'de' ? ' at ' : ' at ').replace(/\./g, L === 'de' ? ' Punkt ' : ' dot '));
+      return hold(m.replace(/@/g, ' at ').replace(/\./g, ' Punkt '));
     });
     // Vollständige URLs
     out = out.replace(/\bhttps?:\/\/[^\s<>"')]+/gi, function (m) {
       var spoken = m.replace(/^https?:\/\//i, '').replace(/\/$/, '');
-      spoken = spoken.replace(/\./g, L === 'de' ? ' Punkt ' : ' dot ').replace(/\//g, ' ');
+      spoken = spoken.replace(/\./g, ' Punkt ').replace(/\//g, ' ');
       return hold(spoken);
     });
     // Nackte Domains (z. B. franksfinanzcheck.de)
     out = out.replace(/\b([\w-]+\.(?:de|com|org|net|io|eu|info|blog))\b/gi, function (m, dom) {
-      return hold(m.replace(/\./g, L === 'de' ? ' Punkt ' : ' dot '));
+      return hold(m.replace(/\./g, ' Punkt '));
     });
     return out;
   }
 
-  function normalizeDates(text, hold, L) {
+  function normalizeDates(text, hold) {
     var out = String(text);
-    var months = L === 'en' ? MONTHS_EN : MONTHS_DE;
-    // TT.MM.JJJJ (DE) bzw. MM/DD/YYYY (EN)
+    var months = MONTHS_DE;
+    // TT.MM.JJJJ — ausschließlich deutsches Datumsformat
+    // (Nur-Deutsch-Vertrag; ein MM/DD-Format wird nicht mehr geraten)
     out = out.replace(/\b(\d{1,2})[.\/](\d{1,2})[.\/](\d{4})\b/g, function (m, a, b, c) {
-      var first = parseInt(a, 10);
-      var second = parseInt(b, 10);
-      var day, month;
-      if (L === 'en') { month = first; day = second; } else { day = first; month = second; }
+      var day = parseInt(a, 10);
+      var month = parseInt(b, 10);
       if (month >= 1 && month <= 12) {
         return hold(day + '. ' + months[month - 1] + ' ' + c);
       }
@@ -826,24 +537,20 @@
     return out;
   }
 
-  function normalizeTimes(text, hold, L) {
+  function normalizeTimes(text, hold) {
     var out = String(text);
     out = out.replace(/\b(\d{1,2}):(\d{2})\s?(Uhr)?\b/g, function (m, h, min) {
       var hh = parseInt(h, 10);
       var mm = parseInt(min, 10);
-      if (L === 'de') {
-        if (mm === 0) return hold(hh + ' Uhr');
-        return hold(hh + ' Uhr ' + mm);
-      }
-      if (mm === 0) return hold(hh + " o'clock");
-      return hold(hh + ' ' + (mm < 10 ? 'oh ' + mm : mm));
+      if (mm === 0) return hold(hh + ' Uhr');
+      return hold(hh + ' Uhr ' + mm);
     });
     return out;
   }
 
-  function normalizeRanges(text, hold, L) {
+  function normalizeRanges(text, hold) {
     var out = String(text);
-    var word = L === 'de' ? ' bis ' : ' to ';
+    var word = ' bis ';
     // 12 – 24 / 12 - 24 / 12 bis 24 (nur mit Trennzeichen, nie bei „Covid-19“)
     out = out.replace(/(\d)\s?(?:–|—|\-)\s?(\d)/g, function (m, a, b) {
       return a + word + b;
@@ -851,20 +558,20 @@
     return out;
   }
 
-  function normalizeNumbers(text, hold, L) {
+  function normalizeNumbers(text, hold) {
     var out = String(text);
     /* Ein Zeilenumbruch im Tausenderblock („20 000 kWh“) würde als Pause
-       gelesen. Er wird zum sprachrichtigen Trennzeichen normalisiert:
-       DE „20.000“, EN „20,000“. */
-    var sep = (L === 'de') ? '.' : ',';
+       gelesen. Er wird zum deutschen Tausenderpunkt normalisiert:
+       „20 000“ → „20.000“. */
+    var sep = '.';
     out = out.replace(/(\d)\s(\d{3})\b/g, '$1' + sep + '$2');
     // Bereiche mit „bis“ bleiben unangetastet, Prozentzeichen schon ersetzt.
     return out;
   }
 
-  function normalizeSymbols(text, hold, L) {
+  function normalizeSymbols(text, hold) {
     var out = String(text);
-    out = out.replace(/&/g, L === 'de' ? ' und ' : ' and ');
+    out = out.replace(/&/g, ' und ');
     out = out.replace(/\sx\s(?=\d)/g, ' mal ');
     out = out.replace(/\+/g, ' plus ');
     out = out.replace(/=/g, ' gleich ');
@@ -875,11 +582,11 @@
 
   /**
    * Überführt Schreibsprache in Sprechsprache.
+   * NUR-DEUTSCH-VERTRAG: ein optionales zweite Argument (alt: 'en')
+   * wird ignoriert — geregelt wird immer nach deutschem Regelwerk.
    * @param {string} text
-   * @param {string} lng 'de' | 'en'
    */
-  function speechNormalize(text, lng) {
-    var L = (lng === 'en') ? 'en' : 'de';
+  function speechNormalize(text) {
     var out = String(text == null ? '' : text);
     if (!out) return '';
 
@@ -900,17 +607,17 @@
     // vorgelesen zu werden. Wortgleich in scripts/ff_voice_backends.py.
     out = out.replace(/[\u00ad\u200b-\u200f\u2060\u2190-\u21ff\u2300-\u27bf\u2b00-\u2bff\ufe00-\ufe0f]|[\ud83c-\udbff][\udc00-\udfff]/g, ' ');
 
-    out = normalizeUrls(out, hold, L);
-    out = normalizeDates(out, hold, L);
-    out = normalizeTimes(out, hold, L);
+    out = normalizeUrls(out, hold);
+    out = normalizeDates(out, hold);
+    out = normalizeTimes(out, hold);
 
-    // Abkürzungen, Einheiten, Währungen, Paragraphen
-    var rules = ABBREV[L] || ABBREV.de;
+    // Abkürzungen, Einheiten, Währungen, Paragraphen — deutsches Regelwerk
+    var rules = ABBREV_DE;
     for (var i = 0; i < rules.length; i++) out = out.replace(rules[i][0], rules[i][1]);
 
-    out = normalizeRanges(out, hold, L);
-    out = normalizeNumbers(out, hold, L);
-    out = normalizeSymbols(out, hold, L);
+    out = normalizeRanges(out, hold);
+    out = normalizeNumbers(out, hold);
+    out = normalizeSymbols(out, hold);
 
     // Mehrfach-Leerzeichen & doppelte Satzzeichen
     out = out.replace(/\s+/g, ' ').trim();
@@ -1631,17 +1338,8 @@
     return out.filter(function (b) { return b && b.text && b.text.length > 1; });
   }
 
-  /** Sprach-Routing je Block: Attribut lang hat Vorrang, dann Inhalt. */
-  function sniffLangOf(el, fallback) {
-    if (el && el.getAttribute) {
-      var attr = String(el.getAttribute('lang') || '').toLowerCase();
-      if (attr.indexOf('en') === 0) return 'en';
-      if (attr.indexOf('de') === 0) return 'de';
-    }
-    var sample = readableText(el).slice(0, 400);
-    if (sample.length >= 40) return sniffSentenceLang(sample, fallback);
-    return fallback;
-  }
+  /** NUR-DEUTSCH-VERTRAG: Blöcke wechseln die Sprache nicht (Generator-Spiegel: _lang_of). */
+  function sniffLangOf() { return 'de'; }
 
   /* ============================================================
      7 · STUDIO-REGIE — Tempo, Tonlage, Lautstärke, Pausen
@@ -1761,32 +1459,29 @@
     return out;
   }
 
-  /** Zerlegt einen Block in Sprecheinheiten (Atemgruppen). */
-  function splitForSpeech(text, blockLang) {
-    var L = blockLang || lang;
+  /** Zerlegt einen Block in Sprecheinheiten (Atemgruppen).
+      NUR-DEUTSCH-VERTRAG: kein Satz-Routing mehr — jede Einheit trägt
+      „de“. (Ein optionales zweite Argument bleibt Signatur-Kompatibilität.) */
+  function splitForSpeech(text) {
     var out = [];
     sentences(text).forEach(function (sentence) {
       if (!sentence) return;
-      // Satzweises Sprach-Routing VOR der Aussprache-Normalisierung:
-      // Sonst erbt ein englischer Satz im deutschen Artikel die
-      // falschen Zahlen- und Datumsregeln.
-      var sLang = sniffSentenceLang(sentence, L);
       if (sentence.length <= HARD_CHUNK) {
-        out.push({ text: sentence, lang: sLang });
+        out.push({ text: sentence, lang: 'de' });
         return;
       }
       cutAtConnectives(sentence).forEach(function (piece) {
-        if (piece.length <= HARD_CHUNK) { out.push({ text: piece, lang: sniffSentenceLang(piece, sLang) }); return; }
+        if (piece.length <= HARD_CHUNK) { out.push({ text: piece, lang: 'de' }); return; }
         commaPieces(piece).forEach(function (sub) {
-          if (sub.length <= HARD_CHUNK) { out.push({ text: sub, lang: sniffSentenceLang(sub, sLang) }); return; }
+          if (sub.length <= HARD_CHUNK) { out.push({ text: sub, lang: 'de' }); return; }
           var words = sub.split(/\s+/);
           var buf = '';
           words.forEach(function (w) {
             var cand = buf ? buf + ' ' + w : w;
-            if (buf && cand.length > HARD_CHUNK - 12) { out.push({ text: buf.trim(), lang: sLang }); buf = w; }
+            if (buf && cand.length > HARD_CHUNK - 12) { out.push({ text: buf.trim(), lang: 'de' }); buf = w; }
             else buf = cand;
           });
-          if (buf.trim()) out.push({ text: buf.trim(), lang: sLang });
+          if (buf.trim()) out.push({ text: buf.trim(), lang: 'de' });
         });
       });
     });
@@ -1857,30 +1552,40 @@
   function buildTimeline(blocks, qualityRate) {
     var units = [];
     var totalChars = 0;
+    var totalTokens = 0;
     var index = 0;
     blocks.forEach(function (b, bi) {
       var profile = prosodyFor(b.type);
-      var raw = splitForSpeech(speechNormalize(b.text, b.lang), b.lang);
+      var uInBlock = 0;
+      var raw = splitForSpeech(speechNormalize(b.text));
       raw.forEach(function (c, ci) {
         if (!c.text) return;
         var density = densityFactor(c.text);
+        // Leseanzeige-Zählwerk: je Einheit die Wort-Anzahl und der
+        // Bestand an gespr. WÖRTERN bis hierhin (ntokStart) — die
+        // Brücke von onboundary/Wortuhr zum rohen Wort im DOM.
+        var unitToks = (c.text.match(/\S+/g) || []).length;
         var unit = {
           block: b,
           blockIndex: bi,
           index: index++,
           text: c.text,
-          lang: c.lang || b.lang,
+          lang: 'de',
           type: b.type,
           profile: profile,
           melody: melodyOf(c.text),
           density: density,
-          words: (c.text.match(/\S+/g) || []).length,
+          words: unitToks,
+          ntokStart: totalTokens,
+          ntokEnd: totalTokens + unitToks,
           qualityRate: qualityRate || 1,
           firstChunk: ci === 0,
           finalChunk: ci === raw.length - 1,
           startChars: totalChars,
-          endChars: totalChars + c.text.length
+          endChars: totalChars + c.text.length,
+          uInBlock: uInBlock++
         };
+        totalTokens += unitToks;
         unit.effRate = effectiveRate(unit);
         unit.effPitch = effectivePitch(unit);
         unit.effVolume = effectiveVolume(unit);
@@ -1890,7 +1595,7 @@
         units.push(unit);
       });
     });
-    return { units: units, totalChars: totalChars };
+    return { units: units, totalChars: totalChars, totalTokens: totalTokens };
   }
 
   function estimatedMs(unit) {
@@ -1899,23 +1604,29 @@
   }
 
   /* ============================================================
-     8 · STIMMEN-REGIE — männlich, DE & EN, ohne Umschalter
+     8 · STIMMEN-REGIE — männlicher NACHRICHTENSPRECHER, nur Deutsch
      ------------------------------------------------------------
      Es gibt kein Menü und keinen Umschalter. Die Regie trifft eine
-     deterministische Entscheidung:
+     deterministische Entscheidung — und zwar ausschließlich für
+     DEUTSCHE Stimmen (Nur-Deutsch-Vertrag):
 
-       1. Sprache        — je Sprecheinheit 'de' oder 'en'
+       1. Sprache        — immer Deutsch (de-DE → de-AT → de-CH → de)
        2. Geschlecht     — männlich, mit Veto gegen weibliche Stimmen
-       3. Güte           — Studio/Neural vor Standard vor Roboter
-       4. Nachbarschaft  — de-DE → de-AT → de-CH → de
-                           en-US → en-GB → en-AU → en-IE → en-IN → en
+       3. Nachrichtenton — Benannte News-/Studio-Stimmen zuerst:
+                           Conrad (Microsoft-Newsroom-Stimme) vor
+                           Killian vor Florian vor Thorsten …; Online/
+                           Natural-Qualität schlägt Standard, Standard
+                           schlägt Roboter
+       4. Nachbarschaft  — de-DE → de-AT → de-CH → de-li → de-lu → de
+       5. Tonlage        — ohne männliche Stimme: ehrlicher Notnagel,
+                           in die männliche Klangzone abgestimmt
 
      Nie stumm: Ist der Stimmen-Katalog beim Klick noch leer
-     (Chromium, Safari und Android füllen ihn LAZY), wird SOFORT mit
-     der angeforderten Sprache gesprochen und beim Eintreffen des
-     Katalogs auf die echte männliche Stimme angehoben. Ein Warten
-     auf Stimmen würde das User-Activation-Token verbrennen und
-     genau die Stummheit erzeugen, die dieses Modell ausschließt.
+     (Chromium, Safari und Android füllen ihn LAZY), wird SOFORT auf
+     de-DE gesprochen und beim Eintreffen des Katalogs auf die echte
+     Nachrichtensprecher-Stimme angehoben. Ein Warten auf Stimmen
+     würde das User-Activation-Token verbrennen und genau die
+     Stummheit erzeugen, die dieses Modell ausschließt.
      ============================================================ */
 
   var synth = (win.speechSynthesis || null);
@@ -1926,6 +1637,16 @@
     'nathan adam rishi arjun prabhat aarav rehan thorsten karlsson gereon jan lukas niklas sebastian david elias finn ' +
     'noah ben jannik markus martin tobias felix paul leon tim mattis oskar anton milan emil josef gregor alfred kurt ' +
     'werner rudolph owen jack charlie henry leo max hugo antonio diego javier carlos miguel pedro raj sanjay').split(' ');
+  /* Nachrichtensprecher-Vorrang (nur für die deutsche Regie wirksam):
+     Diese Namen stehen für den nüchtern-professionellen Vortragsstil. */
+  var NEWS_PRIORITY = {
+    conrad: 90,        // Microsoft-Newsroom-Stimme (de-DE)
+    killian: 60,       // sachlicher Nachrichtenton (de-DE)
+    florian: 45,       // Multilingual v2 — klar, ruhig
+    thorsten: 40,      // Piper-Standard der Studiospur (de_DE)
+    klaus: 22, stefan: 22, yannick: 18, benjamin: 18, jonas: 16,
+    david: 12, eric: 12, marcus: 12, olliver: 12
+  };
   var FEMALE_NAMES = ('anna katja hedda marlene vicki elke amala clara julia lena laura sophie sofia zoe emma mia hannah ' +
     'sarah emily ashley samantha karen moira tessa fiona serena allison ava susan joan linda nancy nina victoria ' +
     'katherine katie eva marie luise lea nele maila sarah elena nora frieda ida alma mathilde johanna charlotte').split(' ');
@@ -1933,8 +1654,8 @@
   var QUALITY_TOKENS = ['neural', 'neural2', 'wavenet', 'studio', 'premium', 'enhanced', 'natural', 'siri', 'online', 'high'];
 
   var voiceCache = [];
-  var voiceResolved = { de: null, en: null };
-  var maleVoiceFound = { de: false, en: false };
+  var voiceResolved = { de: null };
+  var maleVoiceFound = { de: false };
 
   function refreshVoices() {
     var list = [];
@@ -1952,8 +1673,8 @@
        Bei einer ÄNDERUNG des Katalogs wird die Auswahl neu getroffen;
        die nächste Sprecheinheit läuft dann auf der echten Stimme. */
     if (changed) {
-      voiceResolved = { de: null, en: null };
-      maleVoiceFound = { de: false, en: false };
+      voiceResolved = { de: null };
+      maleVoiceFound = { de: false };
       try { applyLabels(); } catch (e) {}
       try { if (typeof setBarState === 'function' && !reading) setBarState('idle'); } catch (e) {}
     }
@@ -1974,9 +1695,14 @@
     return i > 0 ? s.slice(0, i) : s;
   }
 
+  /** Deutsch-Pflicht: fremdsprachige Stimmen sind ausgeschlossen. */
+  function isGermanVoice(v) {
+    var l = voiceLang(v);
+    return l.indexOf('de') === 0;
+  }
+
   var LOCALE_CHAIN = {
-    de: ['de-de', 'de-at', 'de-ch', 'de-li', 'de-lu', 'de-be', 'de'],
-    en: ['en-us', 'en-gb', 'en-au', 'en-ie', 'en-ca', 'en-nz', 'en-in', 'en-za', 'en-ng', 'en']
+    de: ['de-de', 'de-at', 'de-ch', 'de-li', 'de-lu', 'de-be', 'de']
   };
 
   function localeScore(v, target) {
@@ -2035,13 +1761,28 @@
     return score;
   }
 
+  function newsScore(v) {
+    var tokens = nameTokens(v);
+    var best = 0;
+    for (var i = 0; i < tokens.length; i++) {
+      var p = NEWS_PRIORITY[tokens[i]];
+      if (p > best) best = p;
+    }
+    var hay = voiceHay(v);
+    if (best && (hay.indexOf('natural') !== -1 || hay.indexOf('online') !== -1)) best += 15;
+    return best;
+  }
+
   function scoreVoice(v, target) {
-    var locale = localeScore(v, target);
+    if (!isGermanVoice(v)) return -9999;        // Nur-Deutsch-Vertrag
+    var locale = localeScore(v, 'de');
     if (locale < -50) return -9999;
-    return locale + genderScore(v) + qualityScore(v);
+    return locale + genderScore(v) + qualityScore(v) + newsScore(v);
   }
 
   function rankVoices(target) {
+    // NUR-DEUTSCH-VERTRAG: welches Ziel auch immer fragt — gerankt
+    // wird ausschließlich der deutsche Stimmen-Katalog.
     var list = voiceCache.length ? voiceCache : refreshVoices();
     var scored = [];
     list.forEach(function (v, i) {
@@ -2073,10 +1814,12 @@
   }
 
   /**
-   * Ermittelt die beste männliche Stimme für eine Sprache.
+   * Ermittelt die beste männliche, DEUTSCHE Nachrichtensprecher-Stimme.
    * Gibt immer ein Objekt zurück — nie null (außer bei leerem Katalog).
+   * Das Argument ist Signatur-Kompatibilität; bewertet wird immer de.
    */
   function resolveMaleVoice(target) {
+    target = 'de';   // Nur-Deutsch-Vertrag
     if (voiceResolved[target]) return voiceResolved[target];
     var ranked = rankVoices(target);
     if (!ranked.length) return { voice: null, tier: TIERS.standard, male: false, score: -1 };
@@ -2105,15 +1848,14 @@
     return result;
   }
 
-  function hasExplicitMaleVoice() { return maleVoiceFound.de || maleVoiceFound.en; }
+  function hasExplicitMaleVoice() { return !!maleVoiceFound.de; }
 
   function calibrateQuality() {
     var de = resolveMaleVoice('de');
-    var en = resolveMaleVoice('en');
-    // Die Regie folgt der schwächeren der beiden Stimmen: Ein
-    // Sprachwechsel darf nicht plötzlich schneller klingen.
-    var rate = Math.min(de.tier ? de.tier.rate : 1, en.tier ? en.tier.rate : 1);
-    return { rate: rate, de: de, en: en };
+    // Nur-Deutsch-Vertrag: die Regie folgt ausschließlich der
+    // deutschen Stimme (Roboterstufen sprechen langsamer).
+    var rate = de.tier ? de.tier.rate : 1;
+    return { rate: rate, de: de, en: de };
   }
 
   var quality = { rate: 1, de: null, en: null };
@@ -2247,6 +1989,11 @@
       meter.setAttribute('aria-valuemax', '100');
       var valParts = [label, percent, progressModeText()];
       if (nowReadingPos) valParts.push(nowReadingPos);
+      if (wordSync.rawIndex >= 0 && wordSync.blockIndex >= 0) {
+        valParts.push(T.progressWords
+          .replace('{i}', String(globalWordNumber(wordSync.blockIndex, wordSync.rawIndex)))
+          .replace('{total}', String(articleWordTotal())));
+      }
       if (nowReadingText) valParts.push(T.progressNowLabel + ': ' + trimUiText(nowReadingText, 160));
       meter.setAttribute('aria-valuetext', valParts.join(' · '));
     }
@@ -2281,17 +2028,14 @@
 
   function completeProgress() { paintProgress(1); displayedChars = totalChars; }
 
-  /* ---------- „Gerade vorgelesen“ (Profi-Fortschritt) -----------
-     Der Leser soll wissen, WAS in diesem Moment gesprochen wird:
-       · Browser-Engine: exakt die laufende Sprecheinheit (Satz).
-       · Studio-Tonspur: die zum aktuellen MP3-Zeitpunkt passende
-         Sprecheinheit des Blocks, über die Chunk-Uhr der Tonspur
-         geschätzt (t0/t1 je Block) — blockgenau durch den Vertrag
-         mit dem Generator, satzgenau durch die Zeitproportion.
-     Dazu der Abschnittszähler „Abschnitt n von m“. Die Zeile ist
-     im Layout dauerhaft reserviert (kein CLS) und bleibt beim
-     Pausieren stehen, damit man die Stelle im Text wiederfindet.
-     -------------------------------------------------------------- */
+  /* ---------- „Gerade vorgelesen“ (Barrierefreiheit) -----------
+     Was spricht gerade? Satz in der Leiste (mit hellem Wort),
+     Abschnitts-Zähler daneben. aria-live="polite" hält
+     Screenreader auf dem Laufenden, ohne zu schreien. Quelle ist
+     der Wort-Takt (Abschnitt 9a), nicht das Raten. */
+
+  var nowReadingText = '';
+  var trackWordClock = false;   // Wortuhr in der Tonspur-Konfiguration vorhanden
 
   function blockIndexOf(block) {
     if (!block) return -1;
@@ -2304,17 +2048,16 @@
     return T.progressPos.replace('{n}', bi + 1).replace('{total}', blocks.length);
   }
 
-  /* Sprecheinheiten eines Blocks (für die Tonspur-Schätzung).
-     Ergebnis wird je Block gecacht — derselbe Rechenweg wie beim
-     Sprechplan (splitForSpeech + speechNormalize), nie teuer im
-     Ticker. */
+  /* Sprecheinheiten eines Blocks (für die Tonspur-Schätzung, wenn die
+     Tonspur keine Wortuhr mitbringt). Ergebnis je Block gecacht —
+     derselbe Rechenweg wie im Wort-Takt-Plan, nie teuer im Ticker. */
   var trackSentenceCache = {};
   function sentencesOfBlock(bi) {
     if (trackSentenceCache[bi]) return trackSentenceCache[bi];
     var out = [];
     var b = blocks[bi];
     if (b) {
-      var pieces = splitForSpeech(speechNormalize(b.text, b.lang), b.lang);
+      var pieces = splitForSpeech(speechNormalize(b.text));
       for (var i = 0; i < pieces.length; i++) {
         if (pieces[i] && pieces[i].text) out.push(pieces[i].text);
       }
@@ -2356,45 +2099,54 @@
     return list[list.length - 1];
   }
 
-  /** Liefert { bi, text } für die „Gerade vorgelesen“-Zeile. */
   function currentNowInfo() {
     if (mode === 'track' && track) {
-      var bi = blocks[trackBlock] ? trackBlock : (progressBlock ? blockIndexOf(progressBlock) : 0);
-      if (!blocks[bi]) return { bi: -1, text: '' };
+      var bix = trackBlock >= 0 ? trackBlock : 0;
+      if (trackWordClock && wordSync.sentenceIndex >= 0) {
+        var plan = blockPlan(bix);
+        var u = plan && plan.units[wordSync.sentenceIndex];
+        if (u) return { bi: bix, text: u.text, token: wordSync.tokenIndex };
+      }
       var t = 0;
       try { if (track && track.currentTime) t = track.currentTime * 1000; } catch (e) { t = 0; }
-      var rg = trackBlockTimeRange(bi);
+      var rg = trackBlockTimeRange(bix);
       var ratio = 0;
       if (rg.t1 > rg.t0) ratio = Math.max(0, Math.min(1, (t - rg.t0) / (rg.t1 - rg.t0)));
-      var text = trackSentenceAt(bi, ratio);
-      if (!text) text = trimUiText(blocks[bi].text || '', 320);
-      return { bi: bi, text: text };
+      var est = trackSentenceAt(bix, ratio);
+      if (!est && blocks[bix]) est = trimUiText(blocks[bix].text || '', 320);
+      return { bi: bix, text: est, token: -1 };
     }
-    if (activeUnit) return { bi: activeUnit.blockIndex, text: activeUnit.text };
+    if (activeUnit) return { bi: activeUnit.blockIndex, text: activeUnit.text, token: wordSync.tokenIndex };
+    if (units && units.length && reading) {
+      var u = units[Math.max(0, Math.min(cursor, units.length - 1))];
+      if (u) return { bi: u.blockIndex, text: u.text, token: wordSync.tokenIndex };
+    }
     if (progressBlock) {
       var pbi = blockIndexOf(progressBlock);
-      return { bi: pbi, text: trimUiText(progressBlock.text || '', 320) };
+      return { bi: pbi, text: trimUiText(progressBlock.text || '', 320), token: -1 };
     }
-    return { bi: -1, text: '' };
+    return null;
   }
 
-  /** Schreibt die Zeile nur, wenn sich Text oder Zähler ändern. */
   function updateNowLine() {
-    var text = '';
-    var pos = '';
-    if (reading) {
-      var info = currentNowInfo();
-      if (info && info.text) text = trimUiText(info.text, 320);
-      if (info && info.bi >= 0) pos = progressPosText(info.bi);
+    if (!nowEl) return;
+    if (!reading) {
+      // Kein laufender Vorlese-Vorgang: Zeile leer (Pausieren erhält sie,
+      // denn `reading` bleibt dabei true).
+      nowSpans = [];
+      if (nowEl.textContent !== '') nowEl.textContent = '';
+      if (nowReadingText !== '') { nowReadingText = ''; if (posEl) posEl.textContent = ''; }
+      if (posEl) posEl.textContent = '';
+      nowReadingPos = '';
+      syncProgressMeta();
+      return;
     }
-    if (nowEl && text !== nowReadingText) {
-      nowReadingText = text;
-      nowEl.textContent = text;
-      try { nowEl.setAttribute('title', text); } catch (e) {}
-    }
-    if (posEl && pos !== nowReadingPos) {
+    var info = currentNowInfo();
+    renderNowLine(info && info.text ? info.text : '', info && info.token >= 0 ? info.token : -1);
+    var pos = (info && info.bi >= 0) ? progressPosText(info.bi) : '';
+    if (pos !== nowReadingPos) {
       nowReadingPos = pos;
-      posEl.textContent = pos;
+      if (posEl) posEl.textContent = pos;
     }
     syncProgressMeta();
   }
@@ -2424,6 +2176,9 @@
         // Engine keine brauchbaren onboundary-Ereignisse liefert.
         setProgressChars(activeUnit ? progressCharsFromActiveUnit() : spokenChars, false);
         updateRemainingFromChars();
+        // Kein onboundary auf diesem Gerät? Die Wortanzeige läuft dann
+        // redlich aus der Zeitschätzung mit — nie blind.
+        estimateSpeechWord();
       } else if (mode === 'track' && track) {
         // iOS Safari feuert timeupdate nur spärlich — der Balken folgt
         // der Uhr, nicht dem Event-Takt, und bleibt dadurch lebendig.
@@ -2472,7 +2227,369 @@
     progressBlock = null;
     syncProgressMeta();
     blocks.forEach(function (b) { if (b.el) b.el.classList.remove('ff-voice-active'); });
+    clearWordSync(true);      // Wort-Spans zurückbauen: DOM im Ruhezustand unverändert
     updateNowLine();          // Zeile leeren (Lesen beendet)
+  }
+
+  /* ============================================================
+     9a · WORT-TAKT — die wortgenaue Leseanzeige
+     ------------------------------------------------------------
+     Drei Quellen, eine Darstellung. Das aktuelle gesprochene Wort
+     leuchtet im Artikeltext (Klasse ff-voice-w--now), die Leiste
+     zeigt den aktuellen Satz mit hervorgehobenem Wort
+     („Gerade vorgelesen“), dazu der Wortzähler „Wort i von n“:
+
+       1. „track“    — Wortuhr der Studio-Tonspur (chunk.w: je rohem
+                       Wort sein Sprechbeginn in ms). Binärsuche in
+                       der Zeit — millisekundengenau, serverseitig
+                       bestimmt, geräteunabhängig.
+       2. „speech“   — onboundary-Grenzen der Browser-Engine, gemappt
+                       über den Wortuhr-Aligner (Abschnitt 4a) auf die
+                       rohen Wörter des Blocks.
+       3. Schätzung  — kein onboundary auf dem Gerät (z. B. Firefox)?
+                       Dann läuft die Wortanzeige redlich aus der
+                       Zeit-Schätzung mit. data-ff-wordsync nennt die
+                       Quelle; nichts tut je so, käme es von der Engine,
+                       wenn sie keine Grenzen liefert.
+
+     Grundregel: es wird NUR das Wort hell, das wirklich gesprochen
+     wird. Klappt die Zuordnung nicht (Tabellenzeilen-Präfixe,
+     ausgefranste DOM-Texte, fehlende Daten), bleibt der Satz hell —
+     nie wird ein Wort blind markiert.
+
+     Das Anlegen der Wort-Spans geschieht lazy beim ersten Wort eines
+     Blocks und wird beim Beenden wieder zurückgebaut (unwrap); der
+     Artikel-DOM bleibt im Ruhezustand unangetastet.
+     ============================================================ */
+
+  var WORD_CLASS = 'ff-voice-w';
+  var WORD_NOW = 'ff-voice-w--now';
+  var LIVE_WORD = 'ff-voice-live-w';
+  var LIVE_WORD_NOW = 'ff-voice-live-w--now';
+
+  var wordSync = {
+    blockIndex: -1,
+    rawIndex: -1,
+    tokenIndex: -1,
+    sentenceIndex: -1,
+    source: 'none',      // 'track' | 'speech' | 'none'
+    spans: null,
+    lastNudgeAt: 0
+  };
+  var blockPlans = {};
+  var articleWordCache = 0;
+  var nowSpans = [];
+
+  function resetWordPlans() {
+    blockPlans = {};
+    articleWordCache = 0;
+  }
+
+  function blockPlan(bi) {
+    if (blockPlans[bi]) return blockPlans[bi];
+    var b = blocks[bi];
+    if (!b || !b.text) return null;
+    var raw = normTokens(b.text);
+    var chunks = splitForSpeech(speechNormalize(b.text));
+    var N = [];
+    var units = [];
+    var nAt = 0;
+    for (var i = 0; i < chunks.length; i++) {
+      var toks = normTokens(chunks[i].text);
+      units.push({ text: chunks[i].text, toks: toks, firstN: nAt, lastN: nAt + toks.length });
+      for (var t = 0; t < toks.length; t++) N.push(toks[t]);
+      nAt += toks.length;
+    }
+    var map = alignNormToRaw(N, raw);
+    var prevR = -1;
+    for (var u = 0; u < units.length; u++) {
+      var f = units[u].firstN < map.length ? map[units[u].firstN] : -1;
+      if (f == null) f = -1;
+      if (f < 0) f = prevR;
+      units[u].firstR = f;
+      prevR = f;
+    }
+    blockPlans[bi] = { raw: raw, align: map, units: units, rawCount: raw.length };
+    return blockPlans[bi];
+  }
+
+  function articleWordTotal() {
+    if (!articleWordCache) {
+      var n = 0;
+      for (var bi = 0; bi < blocks.length; bi++) {
+        var plan = blockPlan(bi);
+        if (plan) n += plan.rawCount;
+      }
+      articleWordCache = n;
+    }
+    return articleWordCache;
+  }
+
+  function globalWordNumber(bi, rawIdx) {
+    var n = 0;
+    for (var k = 0; k < bi && k < blocks.length; k++) {
+      var p = blockPlan(k);
+      if (p) n += p.rawCount;
+    }
+    return n + Math.max(0, rawIdx) + 1;
+  }
+
+  function collectWordNodes(el) {
+    var out = [];
+    if (!doc.createTreeWalker) return out;
+    var walker = doc.createTreeWalker(el, 4 /* SHOW_TEXT */, null);
+    var node;
+    while ((node = walker.nextNode())) {
+      var parent = node.parentNode;
+      if (parent && /^(SCRIPT|STYLE|NOSCRIPT)$/.test(parent.nodeName || '')) continue;
+      if (parent && parent.classList && parent.classList.contains(WORD_CLASS)) continue;
+      if (!/\S/.test(node.data || '')) continue;
+      out.push(node);
+    }
+    return out;
+  }
+
+  /** Wort-Spans für einen Block anlegen. Gibt die Span-Zahl zurück,
+      0 wenn der Block nicht wort-synchronisierbar ist (redlich:
+      dann bleibt die Satzebene die Anzeige der Wahl). */
+  function wrapBlockWords(bi) {
+    var block = blocks[bi];
+    var el = block && block.el;
+    if (!el || el === bar || el.nodeType !== 1) return 0;
+    if (el._ffv && el._ffv.bi === bi) { wordSync.spans = el._ffv.spans; return el._ffv.spans.length; }
+    unwrapEl(el);
+    var plan = blockPlan(bi);
+    if (!plan || !plan.rawCount) return 0;
+    var nodes = collectWordNodes(el);
+    var domWords = [];
+    nodes.forEach(function (node) {
+      var m = String(node.data).match(/\S+/g);
+      if (m) domWords = domWords.concat(m);
+    });
+    var same = domWords.length === plan.raw.length;
+    if (same) {
+      for (var i = 0; i < domWords.length; i++) {
+        if (domWords[i] === plan.raw[i]) continue;
+        // Der Generator hängt Überschriften einen Punkt an — darf fehlen
+        if (i === domWords.length - 1 && domWords[i] + '.' === plan.raw[i]) continue;
+        same = false; break;
+      }
+    }
+    if (!same) return 0;
+    var spans = [];
+    nodes.forEach(function (node) {
+      var s = String(node.data);
+      var re = /\S+/g, m, last = 0;
+      var frag = doc.createDocumentFragment();
+      while ((m = re.exec(s)) !== null) {
+        if (m.index > last) frag.appendChild(doc.createTextNode(s.slice(last, m.index)));
+        var sp = doc.createElement('span');
+        sp.className = WORD_CLASS;
+        sp.setAttribute('data-ffv-w', String(spans.length));
+        sp.textContent = m[0];
+        frag.appendChild(sp);
+        spans.push(sp);
+        last = m.index + m[0].length;
+        if (re.lastIndex === m.index) re.lastIndex++;
+      }
+      if (last < s.length) frag.appendChild(doc.createTextNode(s.slice(last)));
+      if (node.parentNode) node.parentNode.replaceChild(frag, node);
+    });
+    if (!spans.length) return 0;
+    el._ffv = { bi: bi, spans: spans };
+    wordSync.spans = spans;
+    return spans.length;
+  }
+
+  function unwrapEl(el) {
+    if (!el || !el._ffv) return;
+    var spans = el._ffv.spans || [];
+    for (var i = 0; i < spans.length; i++) {
+      var sp = spans[i];
+      if (!sp || !sp.parentNode) continue;
+      sp.removeAttribute('class');
+      sp.removeAttribute('data-ffv-w');
+      while (sp.firstChild) sp.parentNode.insertBefore(sp.firstChild, sp);
+      sp.parentNode.removeChild(sp);
+    }
+    el._ffv = null;
+    try { el.normalize(); } catch (e) {}
+  }
+
+  function updateWordReadout() {
+    var st = wordSync;
+    var txt = '';
+    if (st.rawIndex >= 0 && st.blockIndex >= 0) {
+      txt = T.progressWords
+        .replace('{i}', String(globalWordNumber(st.blockIndex, st.rawIndex)))
+        .replace('{total}', String(articleWordTotal()));
+    }
+    if (wordCountEl && wordCountEl.textContent !== txt) wordCountEl.textContent = txt;
+    if (bar) bar.setAttribute('data-ff-wordsync', st.rawIndex >= 0 ? (st.source === 'track' ? 'track' : 'speech') : 'none');
+  }
+
+  function nudgeWordIntoView(span) {
+    if (!span || reducedMotion || typeof span.scrollIntoView !== 'function') return;
+    var t = nowMs();
+    if (t - wordSync.lastNudgeAt < 200) return;   // nicht jedes Wort scheucht die Seite
+    wordSync.lastNudgeAt = t;
+    try {
+      var r = span.getBoundingClientRect();
+      var vh = win.innerHeight || doc.documentElement.clientHeight || 0;
+      if (r.top < 64 || r.bottom > vh - 96) span.scrollIntoView({ block: 'center', behavior: 'auto' });
+    } catch (e) {}
+  }
+
+  /** Das eine Wort hell machen, das gerade gesprochen wird. */
+  function markWord(bi, rawIdx, source) {
+    var st = wordSync;
+    if (bi < 0 || rawIdx == null || rawIdx < 0) return;
+    if (st.blockIndex !== bi || !st.spans) {
+      if (st.blockIndex >= 0 && st.blockIndex !== bi && blocks[st.blockIndex] && blocks[st.blockIndex].el) {
+        unwrapEl(blocks[st.blockIndex].el);
+      }
+      var n = wrapBlockWords(bi);
+      if (!n) {
+        // Kein Wort-Sync für diesen Block (Barren-Intro, Tabelle,
+        // ausgefranster Text): alte Markierung löschan, nie stehen lassen.
+        var pb = st.blockIndex >= 0 && blocks[st.blockIndex] ? blocks[st.blockIndex].el : null;
+        var oldSpan = pb && pb._ffv && pb._ffv.spans ? pb._ffv.spans[st.rawIndex] : null;
+        if (oldSpan && oldSpan.classList) oldSpan.classList.remove(WORD_NOW);
+        st.source = 'none'; st.rawIndex = -1; st.blockIndex = -1; st.spans = null;
+        updateWordReadout();
+        return;
+      }
+      st.blockIndex = bi;
+      st.rawIndex = -1;
+    }
+    if (rawIdx >= st.spans.length) rawIdx = st.spans.length - 1;
+    st.source = source || st.source;
+    if (st.rawIndex === rawIdx) return;
+    var prev = st.spans[st.rawIndex];
+    if (prev && prev.classList) prev.classList.remove(WORD_NOW);
+    var now = st.spans[rawIdx];
+    if (now && now.classList) now.classList.add(WORD_NOW);
+    st.rawIndex = rawIdx;
+    updateWordReadout();
+    nudgeWordIntoView(now);
+  }
+
+  function clearWordSync(unwrapAll) {
+    var st = wordSync;
+    if (unwrapAll) {
+      for (var bi = 0; bi < blocks.length; bi++) {
+        var el = blocks[bi] && blocks[bi].el;
+        if (el && el._ffv) unwrapEl(el);
+      }
+    } else if (st.blockIndex >= 0 && blocks[st.blockIndex] && blocks[st.blockIndex].el) {
+      unwrapEl(blocks[st.blockIndex].el);
+    }
+    st.blockIndex = -1; st.rawIndex = -1; st.tokenIndex = -1; st.sentenceIndex = -1; st.spans = null;
+    updateWordReadout();
+  }
+
+  /** onboundary der Browser-Engine → Wort im Plan → DOM. */
+  function noteBoundaryWord(unit, charIndex) {
+    if (!unit) return;
+    var head = String(unit.text).slice(0, Math.max(0, charIndex | 0));
+    var k = (head.match(/\S+/g) || []).length;   // Wörter, die vor dieser Grenze lagen
+    var plan = blockPlan(unit.blockIndex);
+    if (!plan) return;
+    var u = plan.units[unit.uInBlock];
+    if (!u) return;
+    if (k >= u.toks.length) k = Math.max(0, u.toks.length - 1);
+    wordSync.sentenceIndex = unit.uInBlock;
+    wordSync.tokenIndex = k;
+    var ri = u.firstN + k < plan.align.length ? plan.align[u.firstN + k] : -1;
+    if (ri == null) ri = -1;
+    if (ri < 0 && k > 0) { ri = plan.align[u.firstN + k - 1]; if (ri == null) ri = -1; }
+    if (ri >= 0) markWord(unit.blockIndex, ri, 'speech');
+    updateNowLine();
+  }
+
+  /** Satzanfang ist sicher, das Innere Schätzung — nur wenn die Engine
+      keine Grenzen liefert (Firefox-Scherz). */
+  function estimateSpeechWord() {
+    var unit = activeUnit;
+    if (!unit || unit.sawBoundary) return;
+    var plan = blockPlan(unit.blockIndex);
+    if (!plan || !plan.units[unit.uInBlock]) return;
+    var u = plan.units[unit.uInBlock];
+    var dur = Math.max(1, estimatedMs(unit));
+    var el = Math.max(0, activeUnitMs());
+    var k = Math.floor((el / dur) * Math.max(1, u.toks.length));
+    if (k >= u.toks.length) k = Math.max(0, u.toks.length - 1);
+    wordSync.sentenceIndex = unit.uInBlock;
+    wordSync.tokenIndex = k;
+    var ri = u.firstN + k < plan.align.length ? plan.align[u.firstN + k] : -1;
+    if (ri == null) ri = -1;
+    if (ri >= 0) markWord(unit.blockIndex, ri, 'speech');
+  }
+
+  /** Wortuhr-Treffer der Tonspur: rohes Wort → Satz + Position darin. */
+  function applyTrackWord(bi, rawIdx) {
+    var plan = blockPlan(bi);
+    if (!plan || !plan.units.length) { markWord(bi, rawIdx, 'track'); return; }
+    var su = 0;
+    for (var i = 0; i < plan.units.length; i++) {
+      var fr = plan.units[i].firstR;
+      if (fr >= 0 && fr <= rawIdx) su = i;
+    }
+    var u = plan.units[su];
+    var tk = 0;
+    for (var t = 0; t < u.toks.length; t++) {
+      var ri = plan.align[u.firstN + t];
+      if (ri === rawIdx) { tk = t; break; }
+      if (ri != null && ri < rawIdx) tk = t;
+    }
+    wordSync.sentenceIndex = su;
+    wordSync.tokenIndex = tk;
+    markWord(bi, rawIdx, 'track');
+  }
+
+  /** Satz-Anfang ist sicher: das erste Wort leuchtet, sobald die Stimme
+      einsetzt — ohne auf die erste Engine-Grenze zu warten. */
+  function markWordFromUnitStart(unit) {
+    if (!unit) return;
+    var plan = blockPlan(unit.blockIndex);
+    if (!plan || !plan.units[unit.uInBlock]) return;
+    wordSync.sentenceIndex = unit.uInBlock;
+    wordSync.tokenIndex = 0;
+    var fr = plan.units[unit.uInBlock].firstR;
+    if (fr >= 0) markWord(unit.blockIndex, fr, 'speech');
+  }
+
+  /** Leisten-Satz: nur bei Satzwechsel neu bauen, Wort hell per Klasse. */
+  function renderNowLine(text, activeTok) {
+    if (!nowEl) return;
+    var txt = text ? trimUiText(text) : '';
+    if (txt !== nowReadingText) {
+      nowReadingText = txt;
+      if (!txt || txt === T.progressIdle) {
+        nowSpans = [];
+        nowEl.textContent = '';
+        nowEl.removeAttribute('title');
+        return;
+      }
+      nowEl.setAttribute('title', text);
+      var frag = doc.createDocumentFragment();
+      nowSpans = [];
+      txt.split(/\s+/).forEach(function (word, i) {
+        if (!word) return;
+        var sp = doc.createElement('span');
+        sp.className = LIVE_WORD;
+        sp.setAttribute('data-ffv-i', String(i));
+        sp.textContent = word;
+        frag.appendChild(sp);
+        frag.appendChild(doc.createTextNode(' '));
+        nowSpans.push(sp);
+      });
+      nowEl.textContent = '';
+      nowEl.appendChild(frag);
+    }
+    for (var i = 0; i < nowSpans.length; i++) {
+      if (nowSpans[i].classList) nowSpans[i].classList.toggle(LIVE_WORD_NOW, i === (activeTok | 0));
+    }
   }
 
   /* ---------- Positionsgedächtnis ----------------------------- */
@@ -2497,6 +2614,7 @@
 
   var track = null;
   var trackChunks = [];
+  var trackChunkWords = [];   // je Chunk die Wortuhr [[rohes Wort, ms], …] (chunk.w)
   var trackCur = -1;
   var trackBlock = 0;
   var trackLoadTimer = null;   // Lade-Wache: endloses Stumm ohne Fehlermeldung verhindern
@@ -2628,6 +2746,23 @@
     if (!durationMs) return false;
     if (durationMs < expectedMs * 0.25) return false;   // Stumm-/Pausen-Spur
     if (durationMs > expectedMs * 4.0) return false;    // falsche Spur / falsches Tempo
+
+    /* Wortuhr-Grenze: eine Karte, die auf Wörter zeigt, die der Artikel
+       nicht hat, wird nicht vertraut — die Gerätestimme übernimmt.
+       (Das Gegenstück zur Gate im Generator: track_plausible().) */
+    if (trackWordClock) {
+      var badMaps = 0;
+      for (var wi = 0; wi < trackChunks.length && !badMaps; wi++) {
+        var wl = trackChunkWords[wi];
+        if (!wl) continue;
+        var plan = blockPlan(trackChunks[wi].b || 0);
+        if (!plan) { badMaps = 1; break; }
+        for (var e = 0; e < wl.length; e++) {
+          if (!(wl[e][0] >= 0 && wl[e][0] < plan.rawCount)) { badMaps = 1; break; }
+        }
+      }
+      if (badMaps) return false;
+    }
     return true;
   }
 
@@ -2646,6 +2781,16 @@
     try { elt.src = url; } catch (e) { return false; }
     track = elt;
     trackChunks = (a && a.chunks && a.chunks.length) ? a.chunks : [];
+    /* Wortuhr: chunk.w = [ [rohes-Wort-Index, Sprechbeginn-ms], … ] —
+       der Generator bestimmt sie aus den Wortgrenzen seiner Synthese
+       (ff_voice_audio.py, fields.w). Fehlt das Feld (alte Spur), bleibt
+       die Satzebene die Anzeige; erfunden wird nichts. */
+    trackChunkWords = [];
+    trackWordClock = false;
+    for (var ci = 0; ci < trackChunks.length; ci++) {
+      var wl0 = trackChunks[ci] && trackChunks[ci].w;
+      if (wl0 && wl0.length > 1) { trackChunkWords[ci] = wl0; trackWordClock = true; }
+    }
     try { doc.body.appendChild(elt); } catch (e) {}
 
     elt.addEventListener('timeupdate', trackOnTime);
@@ -2706,6 +2851,19 @@
         if (blocks[bi]) { trackBlock = bi; highlightBlock(blocks[bi]); rememberBlock(bi); }
       }
     }
+    /* Wortuhr: Wort für Wort im Artikeltext — die präziseste der
+       drei Quellen, weil millisekundengenau und geräteunabhängig. */
+    if (trackWordClock && trackCur >= 0 && trackChunks.length) {
+      var wl = trackChunkWords[trackCur];
+      if (wl && wl.length) {
+        var lo = 0, hi = wl.length - 1, found = -1;
+        while (lo <= hi) {
+          var mid = (lo + hi) >> 1;
+          if ((wl[mid][1] || 0) <= t) { found = mid; lo = mid + 1; } else { hi = mid - 1; }
+        }
+        if (found >= 0) applyTrackWord(trackChunks[trackCur].b || 0, wl[found][0] || 0);
+      }
+    }
     if (total > 0) {
       paintProgress(t / total);
       updateRemainingFromTime(total - t);
@@ -2754,6 +2912,7 @@
     if (!track) return;
     trackBlock = typeof fromBlock === 'number' && fromBlock > 0 ? Math.min(fromBlock, blocks.length - 1) : 0;
     trackCur = -1;
+    wordSync.source = trackWordClock ? 'track' : 'none';
     progressBlock = blocks[trackBlock] || blocks[0] || null;
     clearActiveUnit();
     updateNowLine();   // sofort anzeigen, was ab jetzt zu hören ist
@@ -2841,6 +3000,7 @@
     if (synth) { try { synth.cancel(); } catch (e) {} }
     if (track) { try { track.pause(); } catch (e) {} }
     mode = 'speech';
+    wordSync.source = 'speech';   // ab jetzt liefert (vielleicht) die Engine die Wortgrenzen
     if (!speechSupported || !blocks.length) {
       endReading(false, false);
       setStatus(speechSupported ? T.noText : T.unsupported);
@@ -2954,6 +3114,15 @@
     } catch (e) {}
   }
 
+  /* ----------------------------------------------------------------
+     speakUnit — NUR-DEUTSCH-VERTRAG:
+     Eine Sprecheinheit = GENAU eine Äußerung auf de-DE. Die frühere
+     Wortlauf-Regie (Zerlegung in de/en-Läufe mit Stimmwechsel mitten
+     in der Einheit) ist ersatzlos entfallen; Fortschritt, Pause,
+     Wiederholung und Watchdog bleiben unverändert einheitsbezogen.
+     Die onboundary-Grenzen der Engine speisen die Wort-Takt-Anzeige
+     (Abschnitt 9a) — ohne Grenzen läuft die Zeitschätzung mit.
+     ---------------------------------------------------------------- */
   function speakUnit(index, isInitial) {
     if (!reading || !playing) return;
     if (index >= units.length) { endReading(true, true); return; }
@@ -2964,24 +3133,11 @@
     nextIndex = index + 1;
     resumeUnit = index;         // Pause mitten in der Einheit → hier weiter
 
-    /* Wortlauf-Regie: Die Sprecheinheit wird in Sprachläufe zerlegt.
-       Jeder Lauf bekommt die passende männliche Stimme (de/en); die
-       Einheit bleibt eine EINHEIT — Fortschritt, Pause, Wiederholung
-       und Watchdog laufen weiter über den ganzen Block. */
-    var runs = languageRuns(unit.text, unit.lang);
-    if (!runs.length) runs = [{ text: unit.text, lang: unit.lang }];
-
-    var offsets = [];
-    (function () {
-      var p = 0;
-      for (var i = 0; i < runs.length; i++) { offsets.push(p); p += runs[i].text.length; }
-    })();
-
     unitInFlight = true;
-    var runIdx = 0;
-    var lastStarted = -1;    // Index des zuletzt gestarteten Laufs
-    var softTries = 0;       // weiche Neustarts DIESER Einheit
-    var unitClock = nowMs(); // Wanduhr der Einheit (Stumm-Sweep-Wache)
+    unit.sawBoundary = false;
+    var lastStarted = -1;      // 0 = diese Einheit hat echt gestartet
+    var softTries = 0;         // weiche Neustarts DIESER Einheit
+    var unitClock = nowMs();   // Wanduhr der Einheit (Stumm-Sweep-Wache)
 
     function measureUnit() {
       measuredMs += Math.max(0, nowMs() - unitClock);
@@ -3019,6 +3175,7 @@
       if (tries < 2 && errorStreak < 4) {
         retryCounts[index] = tries + 1;
         setStatus(T.sectionError);
+        clearPauseTimer();
         pauseTimer = setTimeout(function () {
           if (myRun !== runId) return;
           speakUnit(index, false);
@@ -3041,21 +3198,20 @@
                           und neu versucht; ohne JEDEN Start seit
                           mindestens 6 Sekunden gilt die Engine als tot
                           (ehrliches Ende statt stillem Durchfegen). */
-    function armWatchdog(guardIdx) {
+    function armWatchdog() {
       clearStartWatchdog();
       var wait = softTries === 0 ? 1500 : (softTries === 1 ? 2500 : 4500);
       startWatchdog = setTimeout(function () {
         if (myRun !== runId) return;
-        if (lastStarted >= guardIdx) return;
+        if (lastStarted >= 0) return;               // echtes onstart — Wache erledigt
         if (softTries < 2) {
           softTries += 1;
           softStarts += 1;
           try { synth.cancel(); } catch (e) {}
-          runIdx = guardIdx;                 // denselben Lauf erneut sprechen
           clearPauseTimer();
           pauseTimer = setTimeout(function () {
             if (myRun !== runId || !reading || !playing) return;
-            speakNextRun();
+            speakOnce();
           }, 120);
           return;
         }
@@ -3074,23 +3230,18 @@
       }, wait);
     }
 
-    function speakNextRun() {
+    function speakOnce() {
       if (myRun !== runId) return;
       if (!reading || !playing) return;
-      if (runIdx >= runs.length) { finishUnit(); return; }
-      var r = runs[runIdx];
-      var myIdx = runIdx;
-      var offset = offsets[myIdx] || 0;
-      runIdx += 1;
 
-      var res = resolveMaleVoice(r.lang) || {};
+      var res = resolveMaleVoice() || {};
       var voice = res.voice || null;
 
       var u = null;
-      try { u = new win.SpeechSynthesisUtterance(r.text); } catch (e) { u = null; }
+      try { u = new win.SpeechSynthesisUtterance(unit.text); } catch (e) { u = null; }
       if (!u) { finishUnit(); return; }
 
-      u.lang = (r.lang === 'en') ? 'en-US' : 'de-DE';
+      u.lang = 'de-DE';                              // Nur-Deutsch-Vertrag
       if (voice) { try { u.voice = voice; } catch (e) {} }
       u.rate = Math.max(0.6, Math.min(1.4, unit.effRate * (res.tier ? res.tier.rate : 1)));
       u.pitch = Math.max(0.5, Math.min(1.5, unit.effPitch + (res.tier && res.tier.pitchZone ? res.tier.pitchZone : 0)));
@@ -3102,32 +3253,36 @@
 
       u.onstart = function () {
         if (myRun !== runId) return;
-        lastStarted = myIdx;
+        lastStarted = 0;
         everStarted = true;            // Engine lebt — Ehrlichkeits-Wache entspannt
         clearStartWatchdog();
         errorStreak = 0;
-        if (myIdx === 0) startActiveUnit(unit);
+        startActiveUnit(unit);
+        markWordFromUnitStart(unit);   // erstes Wort leuchtet, kaum dass die Stimme einsetzt
         highlightBlock(unit.block);
         rememberBlock(unit.blockIndex);
         setStatus(res.male ? T.voiceActive : (T.voiceFallback || T.started));
       };
 
+      /* Grenzen der Engine → wortgenaue Hervorhebung (Wort-Takt) */
       u.onboundary = function (ev) {
         if (myRun !== runId) return;
-        if (ev && typeof ev.charIndex === 'number') {
-          spokenChars = unit.startChars + offset + ev.charIndex;
-          setProgressChars(spokenChars, false);
-          updateRemainingFromChars();
-        }
+        if (!ev || typeof ev.charIndex !== 'number') return;
+        unit.sawBoundary = true;
+        var local = Math.max(0, Math.min(String(unit.text).length, ev.charIndex));
+        spokenChars = unit.startChars + local;
+        setProgressChars(spokenChars, false);
+        updateRemainingFromChars();
+        noteBoundaryWord(unit, local);
       };
 
       u.onend = function () {
         if (myRun !== runId) return;
         clearStartWatchdog();
-        spokenChars = unit.startChars + offset + r.text.length;
+        spokenChars = unit.endChars;
         setProgressChars(spokenChars, false);
-        if (myIdx >= runs.length - 1) { finishUnit(); return; }
-        speakNextRun();
+        updateRemainingFromChars();
+        finishUnit();
       };
 
       u.onerror = function (ev) {
@@ -3137,15 +3292,14 @@
         retryUnit();
       };
 
-      armWatchdog(myIdx);
+      armWatchdog();
       try { synth.speak(u); } catch (e) {
         clearStartWatchdog();
-        if (myIdx >= runs.length - 1) { finishUnit(); return; }
         retryUnit();
       }
     }
 
-    speakNextRun();
+    speakOnce();
   }
 
   /** Nächste Einheit — mit der rollengerechten Pause davor. */
@@ -3178,6 +3332,9 @@
     var plan = buildTimeline(blocks, quality.rate);
     units = plan.units;
     totalChars = plan.totalChars;
+    // Wort-Takt: ab jetzt kommen die Grenzen (vielleicht) von der Engine.
+    wordSync.source = 'speech';
+    for (var ui = 0; ui < units.length; ui++) units[ui].sawBoundary = false;
 
     if (!units.length) { setStatus(T.noText); return; }
 
@@ -3296,12 +3453,12 @@
     if (nextBtn) nextBtn.setAttribute('aria-label', T.nextAria);
     if (stopBtn) stopBtn.setAttribute('aria-label', T.stopAria);
     if (bar) {
-      bar.setAttribute('aria-label', lang === 'en'
-        ? 'Reading aids: listen and summary' : 'Lesehilfen: Vorlesen und Kurzfassung');
+      // Nur-Deutsch-Vertrag: Die Oberfläche ist deutsch, die Hilfe ebenso.
+      bar.setAttribute('aria-label', 'Lesehilfen: Vorlesen und Kurzfassung');
     }
     if (playBtn) playBtn.setAttribute('aria-label', hasExplicitMaleVoice() ? T.playAria : (T.playAriaNeutral || T.playAria));
     if (summaryBtn) summaryBtn.setAttribute('aria-label', T.summaryAria);
-    if (progressMeterEl) progressMeterEl.setAttribute('aria-label', lang === 'en' ? 'Reading progress' : 'Vorlesefortschritt');
+    if (progressMeterEl) progressMeterEl.setAttribute('aria-label', 'Vorlesefortschritt');
     if (nowLabelEl) nowLabelEl.textContent = T.progressNowLabel;
     syncProgressMeta();
   }
@@ -3311,6 +3468,7 @@
     T = I18N[lang] || I18N.de;
     blocks = collectBlocks();
     trackSentenceCache = {};   // Tonspur-Schätzung je Lauf frisch aufbauen
+    resetWordPlans();          // Wort-Takt-Pläne an den neuen Text binden
     return blocks.length > 0;
   }
 
@@ -3425,6 +3583,78 @@
     if (blocks[target]) highlightBlock(blocks[target]);
   }
 
+  /* ---------- Satz-Sprung (Shift + ←/→) ------------------------
+     Browser-Engine: die nächste Sprecheinheit ist exakt der nächste
+     Satz, es wird direkt dort neu angestoßen. Studio-Tonspur: ohne
+     Wortuhr wäre ein Ziel-Ms nicht bestimmbar — dann wird redlich
+     auf Abschnittssprung zurückgefallen, nie geraten. */
+  function jumpSentence(delta) {
+    if (!reading || !delta) return;
+    if (mode === 'speech' && units && units.length) {
+      var base = cursor;
+      if (!playing && resumeUnit >= 0) base = resumeUnit;
+      var target = base + (delta > 0 ? 1 : 0);
+      if (delta < 0) {
+        // Rückwärts: der gerade hörte/gemeldete Satz wird erneut gesprochen
+        target = base;
+      }
+      if (target < 0) target = 0;
+      if (target >= units.length) { endReading(true, true); return; }
+      runId += 1;
+      clearPauseTimer();
+      try { synth.cancel(); } catch (e) {}
+      clearStartWatchdog();
+      playing = true;
+      setBarState('playing');
+      clockGo();
+      var jumpUnit = units[target];
+      spokenChars = jumpUnit.startChars;
+      setProgressChars(spokenChars, false);
+      clockReset(spokenChars);
+      measuredMs = 0; measuredChars = 0; measuredUnits = 0;
+      speakUnit(target, true);
+      if (blocks[jumpUnit.blockIndex]) highlightBlock(blocks[jumpUnit.blockIndex]);
+      return;
+    }
+    if (mode === 'track' && track) {
+      if (!trackWordClock) { jumpBlock(delta); return; }
+      var bi = wordSync.blockIndex >= 0 ? wordSync.blockIndex : trackBlock;
+      var plan = blockPlan(bi);
+      if (!plan || !plan.units.length) { jumpBlock(delta); return; }
+      var su = wordSync.sentenceIndex >= 0 ? wordSync.sentenceIndex : 0;
+      var nu = su + delta;
+      if (nu < 0) {
+        var pprev = blockPlan(bi - 1);
+        if (pprev && pprev.units.length) seekTrackToWord(bi - 1, pprev.units[pprev.units.length - 1].firstR);
+        return;
+      }
+      if (nu >= plan.units.length) { seekTrackToWord(bi + 1, 0); return; }
+      seekTrackToWord(bi, plan.units[nu].firstR);
+    }
+  }
+
+  /** Sprung auf den Sprechbeginn eines rohen Wortes (Wortuhr). */
+  function seekTrackToWord(bi, rawIdx) {
+    if (!track) return;
+    if (!(rawIdx >= 0)) rawIdx = 0;
+    if (bi < 0) { try { track.currentTime = 0; } catch (e) {} return; }
+    if (bi >= blocks.length) { try { track.pause(); } catch (e) {} endReading(true, true); return; }
+    var wl = null;
+    for (var ci = 0; ci < trackChunks.length; ci++) {
+      if (trackChunks[ci].b === bi) { wl = trackChunkWords[ci]; break; }
+    }
+    if (!wl || !wl.length) { trackSeek(bi); return; }
+    var ms = null;
+    for (var e = 0; e < wl.length; e++) {
+      if ((wl[e][0] || 0) >= rawIdx) { ms = wl[e][1]; break; }
+    }
+    if (ms == null) ms = wl[0][1] || 0;
+    var wasPlaying = playing;
+    try { track.currentTime = Math.max(0, ms) / 1000; } catch (e) { trackSeek(bi); return; }
+    trackSyncPosition();
+    if (wasPlaying) { try { playElement(track); } catch (e) {} }
+  }
+
   function toggleReading() {
     if (!reading) {
       // User-Activation-Token: alle Audio-Aufrufe bleiben synchron im Klick.
@@ -3515,8 +3745,8 @@
         if (bar && t && bar.contains && bar.contains(t)) { e.preventDefault(); toggleReading(); }
         return;
       }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); jumpBlock(-1); }
-      if (e.key === 'ArrowRight') { e.preventDefault(); jumpBlock(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); if (e.shiftKey) jumpSentence(-1); else jumpBlock(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); if (e.shiftKey) jumpSentence(1); else jumpBlock(1); }
     });
   }
 
@@ -4022,10 +4252,10 @@
       maleVoice: (function () {
         /* Ohne vorherigen Lauf ist noch nichts aufgelöst — für die
            Ferndiagnose am fremden Gerät wird hier bewusst nachgesehen. */
-        var m = { de: maleVoiceFound.de, en: maleVoiceFound.en };
+        var m = { de: !!maleVoiceFound.de };
         try {
           if (speechSupported && (voiceCache || []).length) {
-            m = { de: !!resolveMaleVoice('de').male, en: !!resolveMaleVoice('en').male };
+            m = { de: !!resolveMaleVoice('de').male };
           }
         } catch (e) {}
         return m;
@@ -4035,6 +4265,15 @@
       muteStop: muteStop,
       speechFloorCps: SPEECH_FLOOR_CPS,
       measured: { ms: Math.round(measuredMs), chars: measuredChars, units: measuredUnits },
+      wordSync: {
+        source: wordSync.source,
+        block: wordSync.blockIndex,
+        raw: wordSync.rawIndex,
+        token: wordSync.tokenIndex,
+        sentence: wordSync.sentenceIndex,
+        total: articleWordCache || 0,
+        trackClock: !!trackWordClock
+      },
       progress: {
         ratio: Number(progressRatio.toFixed(4)),
         displayedChars: Math.round(displayedChars),
@@ -4065,6 +4304,7 @@
 
   applyLabels();
   setBarState('idle');
+  try { bar.setAttribute('data-ff-wordsync', 'none'); } catch (e) {}
 
   // Test- und Diagnose-Schnittstelle (kein Tracking, keine Netzaufrufe)
   win.__ffVoice = {
@@ -4089,7 +4329,12 @@
     speechNormalize: speechNormalize,
     sentences: sentences,
     splitForSpeech: splitForSpeech,
-    languageRuns: languageRuns,
+    normTokens: normTokens,
+    alignNormToRaw: alignNormToRaw,
+    blockPlan: blockPlan,
+    jumpSentence: function (delta) { jumpSentence(delta); },
+    get wordSyncSource() { return wordSync.source; },
+    get currentWord() { return { block: wordSync.blockIndex, raw: wordSync.rawIndex, token: wordSync.tokenIndex, sentence: wordSync.sentenceIndex }; },
     collectBlocks: collectBlocks,
     buildTimeline: function () {
       if (!blocks.length) blocks = collectBlocks();

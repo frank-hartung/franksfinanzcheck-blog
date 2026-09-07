@@ -314,8 +314,8 @@ t.group('C4 · Lazy Stimmen-Katalog: männliche Stimme bindet nachträglich');
   t.ok('Weibliche Stimmen werden nie gewählt',
     speech.log.every((l) => !l.voice || !/Anna|Katja|Samantha/.test(l.voice)));
   api.stop();
-  t.ok('Nach Stopp: Idle-aria-label verspricht die männliche Stimme',
-    /männliche Stimme/.test(doc.getElementById('ff-voice-play').getAttribute('aria-label')),
+  t.ok('Nach Stopp: Idle-aria-label verspricht den männlichen Nachrichtensprecher',
+    /männliche(n)? (Nachrichtensprecher|Stimme)/.test(doc.getElementById('ff-voice-play').getAttribute('aria-label')),
     'aria=' + doc.getElementById('ff-voice-play').getAttribute('aria-label'));
 }
 
@@ -330,7 +330,9 @@ t.group('C4b · Sofortiger Katalog: männliche Stimme ab der ersten Einheit');
   await sleep(60);
   t.ok('Männliche Stimme ab Einheit 1', speech.log.length >= 1 && /Conrad/.test(speech.log[0].voice || ''),
     'log0=' + JSON.stringify(speech.log[0] || {}));
-  t.ok('Meldung „Männliche Stimme aktiv.“', /Männliche Stimme/.test(doc.getElementById('ff-voice-status').textContent));
+  t.ok('Meldung „Deutscher Nachrichtensprecher aktiv.“',
+    /Nachrichtensprecher/.test(doc.getElementById('ff-voice-status').textContent),
+    doc.getElementById('ff-voice-status').textContent);
   win.__ffVoice.stop();
 }
 

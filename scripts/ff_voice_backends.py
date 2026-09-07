@@ -6,31 +6,54 @@ sprechen denselben Text mit derselben Regie — die Parität wird durch
 `scripts/ff_voice_parity_check.py` erzwungen. Wäre sie nicht erzwungen,
 klänge derselbe Artikel je nach Gerät unterschiedlich.
 
-STIMMEN (männlich, Deutsch + Englisch, ohne Umschalter)
+NUR-DEUTSCH-VERTRAG (Befund 07.09.2026, Auftrag: „Deutsch als einzige
+Sprache“)
+    Die Vorlese-Funktion spricht AUSSCHLIESSLICH Deutsch. Es gibt keine
+    englische Stimme, kein englisches Profil, keinen Sprachwechsel im
+    Satz und keinen EN-Fallback mehr. Englische Fachbegriffe im
+    deutschen Text („Cashflow“, „Robo Advisor“) spricht die deutsche
+    Nachrichtensprecher-Stimme so aus, wie es im deutschen Hörfunk
+    üblich ist — das ist gewollt und kein Fehler. Ein Backend, das nur
+    Englisch kann (z. B. der ehemalige Groq-Notnagel), ist aus der
+    Kette ENTFERNT; er kehrte nie zurück, solange die Gate-Prüfung
+    „Stimmen: kein EN-Profil mehr“ grün ist.
+
+STIMMEN (männlicher Nachrichtensprecher, nur Deutsch, ohne Umschalter)
     edge   (Voreinstellung)  Microsoft-Edge-Neuralstimmen über das offene
                              Paket `edge-tts`: kein Key, kein Konto, keine
                              Zeichenkosten.
-                             Profil „natural“ : de-DE-FlorianMultilingualNeural
-                                                en-US-AndrewMultilingualNeural
-                             Profil „narrator“: de-DE-ConradNeural
-                                                en-GB-RyanNeural
-                             Multilingual-v2-Stimmen sprechen englische
-                             Fachbegriffe im deutschen Satz in derselben
-                             Stimme — kein Timbresprung.
-    piper  (Offline-Fallback) Lokale ONNX-Stimmen (de_DE-thorsten-high,
-                             en_US-ryan-high): offline, unbegrenzt,
-                             lizenzsauber, deterministisch.
-    groq   (Notnagel)        Nur Englisch (canopylabs/orpheus-v1-english),
-                             braucht GROQ_API_KEY.
+                             Profil „news“     : de-DE-ConradNeural
+                                               (Vortragsstil „serious“ —
+                                               Nachrichtensprecher; wird
+                                               nur gesetzt, wenn das
+                                               installierte edge-tts
+                                               Styles unterstützt)
+                             Profil „natural“: de-DE-FlorianMultilingualNeural
+                             Profil „narrator“: de-DE-KillianNeural
+                             „news“ ist die Voreinstellung.
+    piper  (Offline-Fallback) Lokale ONNX-Stimme de_DE-thorsten-high:
+                             offline, unbegrenzt, lizenzsauber,
+                             deterministisch — ebenfalls ausschließlich
+                             Deutsch.
 
 Ohne verfügbares Backend wird KEINE Tonspur geschrieben; der Reader
 bleibt dann beim lokalen Web-Speech-Pfad — niemals stumm.
 
+WORTGRENZEN (Grundlage der wortgenauen Leseanzeige)
+    `synth_edge` liefert zu jedem Segment die WordBoundary-Ereignisse
+    von edge-tts (100-ns-Ticks ab Segmentbeginn). Der Generator
+    (ff_voice_audio.synth_article) rechnet sie in absolute
+    Millisekunden um und schreibt sie als Wortuhr `w` in die
+    Tonspur-Konfiguration — der Reader markiert damit jedes gesprochene
+    Wort auf die Millisekunde genau.
+
 AUSSPRACHE-REGIE
     Zahlen, Währungen, Daten, Zeiten, Prozente, Paragraphen, Abkürzungen,
     Einheiten und URLs werden vor der Synthese in gesprochene Sprache
-    übersetzt — getrennt für DE und EN, in derselben Reihenfolge wie im
-    Reader (siehe `RULES_DE` / `RULES_EN`).
+    übersetzt — in derselben Reihenfolge wie im Reader (siehe
+    `RULES_DE`). Die Funktion nimmt nach wie vor einen `lang`-Parameter
+    an; er wird ignoriert (Nur-Deutsch-Vertrag) und dient nur der
+    Signaturen-Stabilität gegenüber dem Reader.
 
 PROSODIE-REGIE
     Jede Rolle (Überschrift, Fließtext, Tabellenzeile, Warnhinweis …)
@@ -58,26 +81,48 @@ import wave
 # ---------------------------------------------------------------------------
 
 VOICE_PROFILES = {
+    # Nachrichtensprecher-Preset: Conrad ist die deutsche
+    # Newsroom-Stimme von Microsoft (Kategorie „News & Announcement“).
+    # Der Style „serious“ wird gereicht, wenn das installierte edge-tts
+    # Styles unterstützt (ältere Pakete ignorieren ihn sauber).
+    "news": {
+        "de": "de-DE-ConradNeural",
+        "style": "serious",
+        "label": "Nachrichtensprecher (Conrad · Style serious)",
+    },
     "natural": {
         "de": "de-DE-FlorianMultilingualNeural",
-        "en": "en-US-AndrewMultilingualNeural",
-        "label": "Multilingual v2 (Florian / Andrew)",
+        "style": None,
+        "label": "Sachlicher Erzählton (Florian)",
     },
     "narrator": {
-        "de": "de-DE-ConradNeural",
-        "en": "en-GB-RyanNeural",
-        "label": "Sprecher (Conrad / Ryan)",
+        "de": "de-DE-KillianNeural",
+        "style": None,
+        "label": "Nachrichtenlesung (Killian)",
     },
 }
+
+# Voreinstellung der Kette — „news“ ist der Auftrag: professioneller
+# Nachrichtensprecher, ausschließlich Deutsch.
+DEFAULT_PROFILE = "news"
+
+
+def profile_voice(profile_name: str) -> str:
+    """Deutsche Stimme eines Profils — unbekannte Profile fallen auf „news“."""
+    profile = VOICE_PROFILES.get(profile_name) or VOICE_PROFILES[DEFAULT_PROFILE]
+    return profile["de"]
+
+
+def profile_style(profile_name: str):
+    """Gewünschter Vortragsstil des Profils (kann None sein)."""
+    profile = VOICE_PROFILES.get(profile_name) or VOICE_PROFILES[DEFAULT_PROFILE]
+    return profile.get("style")
 
 PIPER_VOICES = {
     "de": "de_DE-thorsten-high",
-    "en": "en_US-ryan-high",
 }
 
-GROQ_MODEL = "canopylabs/orpheus-v1-english"
-
-ENGINE_ORDER = ["edge", "piper", "groq"]
+ENGINE_ORDER = ["edge", "piper"]
 
 # Backend-Fingerprint: ändert er sich, werden Tonspuren neu erzeugt.
 # 06.09.2026: Bump nach dem Pausen-Spur-Befund — alle bestehenden (defekten)
@@ -86,7 +131,11 @@ ENGINE_ORDER = ["edge", "piper", "groq"]
 # 07.09.2026: Bump nach der KERNREPARATUR (edge-tts liefert MP3, die Kette
 # las RIFF/WAVE → jedes Segment scheiterte, 34 Spuren waren Digitalstille).
 # Damit wird JEDE Spur aus der Stille-Ära zwingend neu vertont.
-RECIPE_VERSION = "ff-voice-2026.09.07"
+# 10.09.2026: Bump nach dem Nur-Deutsch-Umbau: Profil „news“
+# (männlicher Nachrichtensprecher Conrad, Style serious), kein EN-Zweig
+# mehr, zusätzlich Wortuhr (WordBoundary-Timings) pro Chunk in der
+# Tonspur-Konfiguration. Alle Spuren der DE+EN-Ära werden neu vertont.
+RECIPE_VERSION = "ff-voice-2026.09.10"
 
 # ---------------------------------------------------------------------------
 # Prosodie-Regie — spiegelbildlich zu PROSODY in static/premium/ff-voice.js
@@ -145,8 +194,6 @@ def prosody_for(block_type: str) -> dict:
 
 MONTHS_DE = ["Januar", "Februar", "März", "April", "Mai", "Juni",
              "Juli", "August", "September", "Oktober", "November", "Dezember"]
-MONTHS_EN = ["January", "February", "March", "April", "May", "June",
-             "July", "August", "September", "October", "November", "December"]
 
 # (Muster, Ersetzung) — dieselbe Reihenfolge wie ABBREV im Reader.
 RULES_DE = [
@@ -192,28 +239,6 @@ RULES_DE = [
     (re.compile(r"%"), "Prozent"),
 ]
 
-RULES_EN = [
-    (re.compile(r"\be\.\s?g\.", re.I), "for example"),
-    (re.compile(r"\bi\.\s?e\.", re.I), "that is"),
-    (re.compile(r"\betc\.", re.I), "and so on"),
-    (re.compile(r"\bapprox\.", re.I), "approximately"),
-    (re.compile(r"\bvs\.", re.I), "versus"),
-    (re.compile(r"\bNo\.\s?(\d+)"), r"number \1"),
-    (re.compile(r"\bMr\."), "Mister"),
-    (re.compile(r"\bMrs\."), "Misses"),
-    (re.compile(r"kWh/a"), "kilowatt hours per year"),
-    (re.compile(r"kWh", re.I), "kilowatt hours"),
-    (re.compile(r"kWp", re.I), "kilowatt peak"),
-    (re.compile(r"sq\s?m", re.I), "square meters"),
-    (re.compile(r"cu\s?m", re.I), "cubic meters"),
-    (re.compile(r"£\s?(\d[\d.,]*)"), r"\1 pounds"),
-    (re.compile(r"\$(\d[\d.,]*)"), r"\1 dollars"),
-    (re.compile(r"(\d[\d.,]*)\s?\$"), r"\1 dollars"),
-    (re.compile(r"(\d)\s?%"), r"\1 percent"),
-    (re.compile(r"%"), "percent"),
-    (re.compile(r"§\s?(\d+)"), r"section \1"),
-]
-
 _ENTITIES = [
     (re.compile(r"&nbsp;"), " "), (re.compile(r"&amp;"), "&"),
     (re.compile(r"&szlig;"), "ß"), (re.compile(r"&uuml;"), "ü"),
@@ -235,8 +260,14 @@ def _unhold(text: str, store: list) -> str:
 
 
 def normalize_speech(text: str, lang: str = "de") -> str:
-    """Schreibsprache → Sprechsprache. Deckungsgleich mit speechNormalize()."""
-    L = "en" if lang == "en" else "de"
+    """Schreibsprache → Sprechsprache. Deckungsgleich mit speechNormalize().
+
+    NUR-DEUTSCH-VERTRAG: Der Parameter `lang` wird ignoriert; geregelt
+    wird ausschließlich nach deutschen Lautregeln. Die Signatur bleibt
+    stabil, damit Reader, Generator und Paritäts-Gate dieselbe Funktion
+    adressieren können.
+    """
+    del lang  # Nur-Deutsch-Vertrag — siehe Docstring.
     out = text or ""
     if not out:
         return ""
@@ -253,58 +284,54 @@ def normalize_speech(text: str, lang: str = "de") -> str:
 
     # E-Mail-Adressen
     def mail_repl(m):
-        return _hold(store, m.group(0).replace("@", " at ").replace(".", " Punkt " if L == "de" else " dot "))
+        return _hold(store, m.group(0).replace("@", " at ").replace(".", " Punkt "))
     out = re.sub(r"[\w.+-]+@[\w-]+\.[\w.-]+", mail_repl, out)
 
     # Vollständige URLs
     def url_repl(m):
         spoken = re.sub(r"^https?://", "", m.group(0), flags=re.I).rstrip("/")
-        spoken = spoken.replace(".", " Punkt " if L == "de" else " dot ").replace("/", " ")
+        spoken = spoken.replace(".", " Punkt ").replace("/", " ")
         return _hold(store, spoken)
     out = re.sub(r"\bhttps?://[^\s<>\"')]+", url_repl, out, flags=re.I)
 
     # Nackte Domains
     def dom_repl(m):
-        return _hold(store, m.group(0).replace(".", " Punkt " if L == "de" else " dot "))
+        return _hold(store, m.group(0).replace(".", " Punkt "))
     out = re.sub(r"\b([\w-]+\.(?:de|com|org|net|io|eu|info|blog))\b", dom_repl, out, flags=re.I)
-
-    months = MONTHS_EN if L == "en" else MONTHS_DE
 
     def date_repl(m):
         a, b, c = int(m.group(1)), int(m.group(2)), m.group(3)
-        month, day = (a, b) if L == "en" else (b, a)
+        month, day = b, a
         if 1 <= month <= 12:
-            return _hold(store, "%d. %s %s" % (day, months[month - 1], c))
+            return _hold(store, "%d. %s %s" % (day, MONTHS_DE[month - 1], c))
         return m.group(0)
     out = re.sub(r"\b(\d{1,2})[./](\d{1,2})[./](\d{4})\b", date_repl, out)
 
     def short_date_repl(m):
         month = int(m.group(2))
         if 1 <= month <= 12:
-            return _hold(store, "%d. %s" % (int(m.group(1)), months[month - 1]))
+            return _hold(store, "%d. %s" % (int(m.group(1)), MONTHS_DE[month - 1]))
         return m.group(0)
     out = re.sub(r"\b(\d{1,2})\.(\d{1,2})\.(?!\d)", short_date_repl, out)
 
     def time_repl(m):
         hh, mm = int(m.group(1)), int(m.group(2))
-        if L == "de":
-            return _hold(store, "%d Uhr" % hh if mm == 0 else "%d Uhr %d" % (hh, mm))
-        return _hold(store, "%d o'clock" % hh if mm == 0 else "%d %s" % (hh, ("oh %d" % mm) if mm < 10 else mm))
+        return _hold(store, "%d Uhr" % hh if mm == 0 else "%d Uhr %d" % (hh, mm))
     out = re.sub(r"\b(\d{1,2}):(\d{2})\s?(Uhr)?\b", time_repl, out)
 
-    for pattern, repl in (RULES_DE if L == "de" else RULES_EN):
+    for pattern, repl in RULES_DE:
         out = pattern.sub(repl, out)
 
     # Zahlenbereiche: 12 – 24 / 12-24
-    word = " bis " if L == "de" else " to "
+    word = " bis "
     out = re.sub(r"(\d)\s?(?:–|—|-)\s?(\d)", lambda m: m.group(1) + word + m.group(2), out)
 
     # Tausender-Trennzeichen: sprachrichtig ergänzen statt Leerzeichen schlucken
-    sep = "." if L == "de" else ","
+    sep = "."
     out = re.sub(r"(\d)\s(\d{3})\b", r"\1" + sep + r"\2", out)
 
     # Symbole
-    out = out.replace("&", " und " if L == "de" else " and ")
+    out = out.replace("&", " und ")
     out = re.sub(r"\sx\s(?=\d)", " mal ", out)
     out = out.replace("+", " plus ").replace("=", " gleich ")
     out = out.replace("“", '"').replace("”", '"').replace("„", '"')
@@ -692,8 +719,17 @@ def silence_ms(ms: int, sample_rate: int = SAMPLE_RATE):
 
 def trim_edges(samples, threshold: int = 220, window: int = 240):
     """Entfernt führende und trailing Stille (Atem statt Maschinenrhythmus)."""
+    return trim_edges_info(samples, threshold, window)[0]
+
+
+def trim_edges_info(samples, threshold: int = 220, window: int = 240):
+    """Wie trim_edges, meldet aber zusätzlich die vorn entfernte Länge
+    in SAMPLES. (Der Aufrufer rechnet sie bei bekannter Samplingrate in ms
+    um — die Wortuhr der Studio-Tonspur zieht diesen Kopf-Versatz von den
+    WordBoundary-Ticks ab, damit kein Wort zu früh markiert wird.)
+    """
     if not samples:
-        return samples
+        return samples, 0
     start = 0
     end = len(samples)
     while start < end and abs(samples[start]) < threshold:
@@ -702,7 +738,7 @@ def trim_edges(samples, threshold: int = 220, window: int = 240):
         end -= 1
     start = max(0, start - window)
     end = min(len(samples), end + window)
-    return samples[start:end]
+    return samples[start:end], start
 
 
 def apply_fade(samples, fade_ms: int = 10, sample_rate: int = SAMPLE_RATE):
@@ -866,18 +902,15 @@ def piper_available() -> bool:
     return shutil.which("piper") is not None
 
 
-def groq_available() -> bool:
-    return bool(os.environ.get("GROQ_API_KEY"))
-
-
 def available_engines() -> list:
+    # NUR-DEUTSCH-VERTRAG: Der ehemalige englische Groq-Notnagel ist aus
+    # der Kette entfernt — ein rein englisches Modell darf in einer
+    # deutschpflichtigen Tonspurkette nicht mehr auftauchen.
     found = []
     if edge_available():
         found.append("edge")
     if piper_available():
         found.append("piper")
-    if groq_available():
-        found.append("groq")
     return found
 
 
@@ -921,63 +954,89 @@ def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume
     (ffmpeg / miniaudio / soundfile) geoeffnet, auf Hoerbarkeit geprueft
     und als echte 24-kHz-Mono-WAV geschrieben. Kein Ton = kein Segment.
 
-    Rueckgabe: (ok, word_boundaries) — Wortgrenzen in 100-ns-Ticks.
+    Nachrichtensprecher-Profil (Befund 07.09.2026): Unterstuetzt das
+    installierte edge-tts den optionalen `style`-Parameter (Vortragsstil
+    wie „serious“), wird er gereicht. Aeltere Pakete oder unbekannte
+    Styles fuehren zu einem sauberen Retry OHNE Style — der Ton darf nie
+    an einem Komfort-Merkmal scheitern.
+
+    Rueckgabe: (ok, word_boundaries) — Wortgrenzen in 100-ns-Ticks;
+    Grundlage der wortgenauen Leseanzeige (Wortuhr in der
+    Tonspur-Konfiguration).
+
+    `lang` wird ignoriert (Nur-Deutsch-Vertrag); die Signatur bleibt
+    gegenueber Reader, Generator und Tests stabil.
     """
     import edge_tts
+    del lang  # Nur-Deutsch-Vertrag — die Stimme entscheidet Deutsch.
     os.makedirs(os.path.dirname(out_wav) or ".", exist_ok=True)
-    comm = edge_tts.Communicate(
-        text, voice,
-        rate=_rate_to_edge(rate),
-        volume=_volume_to_edge(volume),
-        pitch=_pitch_to_edge(pitch),
-    )
-    boundaries = []
+
+    def _make(style=None):
+        kwargs = dict(rate=_rate_to_edge(rate), volume=_volume_to_edge(volume),
+                      pitch=_pitch_to_edge(pitch))
+        if style:
+            try:
+                return edge_tts.Communicate(text, voice, style=style, **kwargs)
+            except TypeError:
+                pass  # Dieses edge-tts kennt keine Styles — neutral sprechen.
+        return edge_tts.Communicate(text, voice, **kwargs)
+
     src_path = out_wav + ".edge.src"
 
-    async def run():
-        with open(src_path, "wb") as fh:
-            async for chunk in comm.stream():
-                if chunk["type"] == "audio":
-                    fh.write(chunk["data"])
-                elif chunk["type"] == "WordBoundary":
-                    boundaries.append({
-                        "offset": chunk.get("offset", 0),
-                        "duration": chunk.get("duration", 0),
-                        "text": chunk.get("text", ""),
-                    })
+    # Erster Versuch mit dem Profil-Style, bei Bedarf einer ohne —
+    # ein Newsroom-Stil ist Komfort, Ton ist Pflicht.
+    style_tries = [style, None] if style else [None]
 
-    try:
+    for attempt_style in style_tries:
+        comm = _make(attempt_style)
+        boundaries = []
+
+        async def run(comm=comm, boundaries=boundaries):
+            with open(src_path, "wb") as fh:
+                async for chunk in comm.stream():
+                    if chunk["type"] == "audio":
+                        fh.write(chunk["data"])
+                    elif chunk["type"] == "WordBoundary":
+                        boundaries.append({
+                            "offset": chunk.get("offset", 0),
+                            "duration": chunk.get("duration", 0),
+                            "text": chunk.get("text", ""),
+                        })
+
         try:
-            loop = asyncio.new_event_loop()
-        except Exception:
-            loop = None
-        if loop is None:
-            asyncio.run(run())
-        else:
             try:
-                loop.run_until_complete(run())
-            finally:
-                loop.close()
-    except Exception:
-        _cleanup(src_path)
-        return False, []
+                loop = asyncio.new_event_loop()
+            except Exception:
+                loop = None
+            if loop is None:
+                asyncio.run(run())
+            else:
+                try:
+                    loop.run_until_complete(run())
+                finally:
+                    loop.close()
+        except Exception:
+            _cleanup(src_path)
+            continue
 
-    if not os.path.exists(src_path) or os.path.getsize(src_path) == 0:
-        _cleanup(src_path)
-        return False, []
+        if not os.path.exists(src_path) or os.path.getsize(src_path) == 0:
+            _cleanup(src_path)
+            continue
 
-    try:
-        samples, src_rate = decode_audio_mono(src_path, SAMPLE_RATE)
-    except Exception:
+        try:
+            samples, src_rate = decode_audio_mono(src_path, SAMPLE_RATE)
+        except Exception:
+            _cleanup(src_path)
+            continue
         _cleanup(src_path)
-        return False, []
-    _cleanup(src_path)
 
-    audible, _why = has_audible_speech(samples, src_rate)
-    if not audible:
-        return False, []
-    write_wav_mono(out_wav, samples, src_rate)
-    return True, boundaries
+        audible, _why = has_audible_speech(samples, src_rate)
+        if not audible:
+            continue
+        write_wav_mono(out_wav, samples, src_rate)
+        return True, boundaries
+
+    return False, []
 
 
 def synth_piper(text: str, voice: str, out_wav: str):
@@ -996,34 +1055,13 @@ def synth_piper(text: str, voice: str, out_wav: str):
     return True
 
 
-def synth_groq(text: str, out_wav: str):
-    """Nur Englisch — Notnagel, wenn edge und piper fehlen."""
-    import urllib.request
-    key = os.environ.get("GROQ_API_KEY")
-    if not key:
-        return False
-    try:
-        req = urllib.request.Request(
-            "https://api.groq.com/openai/v1/audio/speech",
-            data=__import__("json").dumps({
-                "model": GROQ_MODEL, "input": text[:4000], "voice": "autumn",
-                "response_format": "wav",
-            }).encode("utf-8"),
-            headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"},
-        )
-        with urllib.request.urlopen(req, timeout=180) as resp:
-            data = resp.read()
-        os.makedirs(os.path.dirname(out_wav) or ".", exist_ok=True)
-        with open(out_wav, "wb") as fh:
-            fh.write(data)
-        return os.path.getsize(out_wav) > 0
-    except Exception:
-        return False
-
-
 # ---------------------------------------------------------------------------
 # Segment-Synthese mit Wiederholungen, Engine-Kette und Hoerbarkeits-Pruefung
 # ---------------------------------------------------------------------------
+# Der fruehere dritte Zweig „groq“ (canopylabs/orpheus-v1-english) war eine
+# AUSSCHLIESSLICH englische Stimme und steht damit im Widerspruch zum
+# Nur-Deutsch-Vertrag. Er ist ersatzlos entfernt; die Kette lautet
+# edge -> piper -> ehrliche Browser-/Gerätestimme im Reader.
 
 SYNTH_ATTEMPTS = 3          # Versuche je Engine (Netz-Aussetzer sind normal)
 SYNTH_BACKOFF = (0.8, 2.0)  # Wartezeit vor Versuch 2 und 3 in Sekunden
@@ -1074,19 +1112,24 @@ def synthesize(text: str, lang: str, engine: str, profile_name: str, out_wav: st
                attempts: int = SYNTH_ATTEMPTS, allow_engine_fallback: bool = True):
     """Ein Segment sprechen. Gibt (engine, ok, word_boundaries) zurueck.
 
+    NUR-DEUTSCH-VERTRAG: `lang` wird ignoriert — gesprochen wird
+    ausschliesslich mit der deutschen Nachrichtensprecher-Stimme des
+    Profils. Die Signatur bleibt gegenueber Generator und Tests stabil.
+
     ROBUSTHEIT (07.09.2026):
       1. Jede Engine wird bis zu `attempts` Mal versucht — ein einzelner
          Netz-Aussetzer beim Edge-Dienst darf nicht die Tonspur eines
          ganzen Artikels kosten (Verlagsregel seit dem 06.09.: ein
          fehlendes Segment verwirft die komplette Spur).
       2. Danach uebernimmt die naechste verfuegbare Engine der Kette
-         (edge -> piper -> groq), sofern erlaubt.
+         (edge -> piper), sofern erlaubt.
       3. JEDES Ergebnis wird gemessen: dekodierbar, nicht stumm. Nur
          hoerbare Segmente gelten als Erfolg.
     """
-    L = "en" if lang == "en" else "de"
-    profile = VOICE_PROFILES.get(profile_name, VOICE_PROFILES["natural"])
-    voice = profile.get(L)
+    del lang  # Nur-Deutsch-Vertrag — immer die deutsche Stimme.
+    profile = VOICE_PROFILES.get(profile_name) or VOICE_PROFILES[DEFAULT_PROFILE]
+    voice = profile["de"]
+    style = profile.get("style")
 
     chain = [engine]
     if allow_engine_fallback:
@@ -1099,8 +1142,8 @@ def synthesize(text: str, lang: str, engine: str, profile_name: str, out_wav: st
             continue
         if eng == "piper" and not piper_available():
             continue
-        if eng == "groq" and (not groq_available() or L != "en"):
-            continue
+        if eng not in ("edge", "piper"):
+            continue   # keine dritte, fremdsprachige Stufe mehr
         for attempt in range(max(1, attempts)):
             if attempt:
                 _retry_sleep(SYNTH_BACKOFF[min(attempt - 1, len(SYNTH_BACKOFF) - 1)])
@@ -1108,11 +1151,10 @@ def synthesize(text: str, lang: str, engine: str, profile_name: str, out_wav: st
             boundaries = []
             try:
                 if eng == "edge":
-                    ok, boundaries = synth_edge(text, L, voice, rate, pitch, volume, out_wav)
+                    ok, boundaries = synth_edge(text, "de", voice, rate, pitch, volume,
+                                                 out_wav, style=style)
                 elif eng == "piper":
-                    ok = synth_piper(text, PIPER_VOICES[L], out_wav)
-                elif eng == "groq":
-                    ok = synth_groq(text, out_wav)
+                    ok = synth_piper(text, PIPER_VOICES["de"], out_wav)
             except Exception:
                 ok = False
             if not ok:
@@ -1149,12 +1191,15 @@ def _selftest() -> int:
     check("DE: Mio.", normalize_speech("1,5 Mio. €", "de") == "1,5 Millionen Euro")
     check("DE: Zahlen mit Punkt bleiben", normalize_speech("1.234,56 Euro", "de") == "1.234,56 Euro")
 
-    # Aussprache EN
-    check("EN: $ → dollars", normalize_speech("Save $1,200", "en") == "Save 1,200 dollars")
-    check("EN: % → percent", normalize_speech("about 20%", "en") == "about 20 percent")
-    check("EN: e.g.", normalize_speech("e.g. gas", "en") == "for example gas")
-    check("EN: Datum (MM/TT)", normalize_speech("on 02/01/2006", "en") == "on 1. February 2006")
-    check("EN: % ohne Leerzeichen", normalize_speech("about 20%", "en") == "about 20 percent")
+    # NUR-DEUTSCH-VERTRAG (Befund 07.09.2026): Auch englisch deklarierte
+    # Eingaben werden ausschließlich nach deutschen Regeln geregelt —
+    # eine englische Aussprachekette existiert nicht mehr.
+    check("Nur-Deutsch: 'en'-Angabe ⇒ deutsche Regeln",
+          normalize_speech("about 20%", "en") == "about 20 Prozent")
+    check("Nur-Deutsch: Dollar-Regel ist ersatzlos entfallen",
+          normalize_speech("Save $1,200", "en") == "Save $1,200")
+    check("Nur-Deutsch: Datum bleibt deutsch (TT.MM.JJJJ)",
+          normalize_speech("on 02/01/2006", "en") == "on 2. Januar 2006")
     check("DE: % ohne Leerzeichen", normalize_speech("rund 30%", "de") == "rund 30 Prozent")
 
     # Satzzerlegung
@@ -1182,12 +1227,22 @@ def _selftest() -> int:
     check("Melodie: Ausruf erkannt", melody_of("Achtung!") == "exclaim")
     check("Rate: Grenzen eingehalten", 0.75 <= effective_rate(PROSODY["p"], 1.0, "statement", False) <= 1.22)
 
-    # Stimmen
-    check("Stimmen: DE männlich gesetzt", "Neural" in VOICE_PROFILES["natural"]["de"])
-    check("Stimmen: EN männlich gesetzt", "Neural" in VOICE_PROFILES["natural"]["en"])
-    check("Stimmen: beide Profile DE+EN",
-          all(set(v.keys()) >= {"de", "en"} for v in VOICE_PROFILES.values()))
-    check("Piper: DE+EN gesetzt", set(PIPER_VOICES.keys()) == {"de", "en"})
+    # Stimmen — NUR-DEUTSCH-VERTRAG (Profi-Agentur, 07.09.2026)
+    check("Stimmen: news = deutscher Nachrichtensprecher",
+          VOICE_PROFILES[DEFAULT_PROFILE]["de"] == "de-DE-ConradNeural")
+    check("Stimmen: news führt News-Stil serious",
+          VOICE_PROFILES[DEFAULT_PROFILE].get("style") == "serious")
+    check("Stimmen: Voreinstellung der Kette ist news", DEFAULT_PROFILE == "news")
+    check("Stimmen: alle Profile männlich-deutsche Neuralstimme",
+          all("de-DE-" in v["de"] and v["de"].endswith("Neural") for v in VOICE_PROFILES.values()))
+    check("Stimmen: kein EN-Profil mehr",
+          all("en" not in v for v in VOICE_PROFILES.values()))
+    check("Stimmen: kein en-Schlüssel in PIPER_VOICES", "en" not in PIPER_VOICES)
+    check("Piper: nur DE gesetzt", set(PIPER_VOICES.keys()) == {"de"})
+    check("Kette: groq ist entfernt", "groq" not in ENGINE_ORDER and len(ENGINE_ORDER) == 2)
+    check("Kette: Engine-Reihenfolge edge → piper", ENGINE_ORDER == ["edge", "piper"])
+    check("profile_voice: unbekannte Profile fallen auf news",
+          profile_voice("unbekannt") == VOICE_PROFILES["news"]["de"])
 
     # Audio-Werkzeuge
     tone = [int(9000 * (1 if (i // 40) % 2 == 0 else -1)) for i in range(2400)]
@@ -1267,12 +1322,12 @@ def _selftest() -> int:
     # ------------------------------------------------------------------
     globals_ = globals()
     orig = {k: globals_[k] for k in ("synth_edge", "synth_piper", "edge_available",
-                                     "piper_available", "groq_available")}
+                                     "piper_available")}
     os.environ["FF_VOICE_RETRY_SLEEP"] = "0"
     try:
         calls = {"edge": 0, "piper": 0}
 
-        def flaky_edge(text, lang, voice, rate, pitch, volume, out_wav):
+        def flaky_edge(text, lang, voice, rate, pitch, volume, out_wav, style=None):
             calls["edge"] += 1
             if calls["edge"] < 3:
                 return False, []                     # zwei Netz-Aussetzer
@@ -1282,14 +1337,13 @@ def _selftest() -> int:
         globals_["synth_edge"] = flaky_edge
         globals_["edge_available"] = lambda: True
         globals_["piper_available"] = lambda: False
-        globals_["groq_available"] = lambda: False
         eng, ok, _b = synthesize("Test", "de", "edge", "natural", os.path.join(tmp, "s1.wav"))
         check("Kette: Wiederholung rettet das Segment", ok is True and eng == "edge")
         check("Kette: genau drei Versuche", calls["edge"] == 3)
 
         calls["edge"] = 0
 
-        def dead_edge(text, lang, voice, rate, pitch, volume, out_wav):
+        def dead_edge(text, lang, voice, rate, pitch, volume, out_wav, style=None):
             calls["edge"] += 1
             return False, []
 
@@ -1331,8 +1385,10 @@ def main(argv=None) -> int:
     if "--selftest" in argv:
         return _selftest()
     print("Verfügbare Engines: %s" % (", ".join(available_engines()) or "keine"))
-    for profile, voices in VOICE_PROFILES.items():
-        print("  Profil %-9s DE %-34s EN %s" % (profile, voices["de"], voices["en"]))
+    for name, prof in VOICE_PROFILES.items():
+        marker = "  ← Voreinstellung (Nur-Deutsch)" if name == DEFAULT_PROFILE else ""
+        print("  Profil %-9s DE %-36s Stil %-9s%s"
+              % (name, prof["de"], prof.get("style") or "neutral", marker))
     print("Selbsttest: python3 scripts/ff_voice_backends.py --selftest")
     return 0
 

@@ -298,43 +298,43 @@ python3 scripts/redaktions_standard.py --register-korrektur --file content/posts
 
 ---
 
-## 🔊 Lesehilfen: Vorlesen + Kurzfassung (FF Voice Studio, Generation 3 · 06.09.2026)
+## 🔊 Lesehilfen: Vorlesen + Kurzfassung (FF Voice Studio, Generation 4 · 10.09.2026)
 
-Das frühere Vorlese-Modell wurde **vollständig entfernt** und durch eine **robustere Hybrid-TTS** ersetzt. Jeder Artikel und jede Ratgeberseite bekommt zwei Lesehilfen:
+Das frühere Vorlese-Modell wurde **vollständig entfernt** und durch eine **robustere Hybrid-TTS** ersetzt (Generation 4: Nur-Deutsch-Sprechervertrag + wortgenaue Leseanzeige; Details im `VORLESEN-NURDEUTSCH-WORTTAKT-2026-09-10.md`). Jeder Artikel und jede Ratgeberseite bekommt zwei Lesehilfen:
 
-1. **Vorlesen** – männlich priorisierte, robuste Studio-/Browser-Hybridstimme, **Deutsch und Englisch vollautomatisch**, ohne Sprach-Umschalter, ohne Stimmen-Menü, ohne Regler.
+1. **Vorlesen** – ein **männlicher, deutscher Nachrichtensprecher**, robust als Studio-/Browser-Hybrid; **Nur-Deutsch-Vertrag** (Befund 07.09.2026): die Vorlese-Funktion kennt keine zweite Sprache, keinen Sprach-Umschalter, kein Stimmen-Menü, keine Regler. Englische Fachbegriffe liest der Nachrichtensprecher, wie es im deutschen Hörfunk üblich ist.
 2. **Kurzfassung** – Verlagshaus-Kurzfassung (Kapital/WirtschaftsWoche/Zeit als Maßstab) in einem barrierefreien Dialog.
 
 ### Zwei Tonpfade, eine Regie
 
 | Stufe | Technik | Stimme |
 |---|---|---|
-| **Studio-Tonspur** (Vorzug) | `scripts/ff_voice_audio.py` im Deploy → MP3, 24 kHz Mono, −16 LUFS (EBU R128) | edge-tts: `de-DE-FlorianMultilingualNeural` / `en-US-AndrewMultilingualNeural`; Profil „narrator“: `de-DE-ConradNeural` / `en-GB-RyanNeural`; sonst Piper: `de_DE-thorsten-high` / `en_US-ryan-high` |
-| **Browser-Engine** (Fallback) | `static/premium/ff-voice.js` (Web Speech API) | deterministisch männlich gefiltert (Female-Veto, Neural-Matcher, Google-Codes B/D/F), gleiche Regie |
+| **Studio-Tonspur** (Vorzug) | `scripts/ff_voice_audio.py` im Deploy → MP3, 24 kHz Mono, −16 LUFS (EBU R128) | Profil „news“ (Standard): edge-tts `de-DE-ConradNeural` mit Style `serious`; „natural“: `de-DE-FlorianMultilingualNeural`; „narrator“: `de-DE-Thorsten`-Zone; sonst Piper: `de_DE-thorsten-high`. Englische Backends (Groq-Notnagel) sind mit dem Nur-Deutsch-Vertrag entfallen |
+| **Browser-Engine** (Fallback) | `static/premium/ff-voice.js` (Web Speech API) | deterministisch männlich + deutsch gefiltert (Female-Veto, Deutsch-Pflicht, News-Vorrang Conrad > Killian > Florian > Thorsten, Google-Codes B/D/F), gleiche Regie |
 
 Die Tonspur läuft im nativen HTML5-Player und klingt dadurch **identisch** auf iPhone, Mac, Tablet, Android, PC und in jedem Browser. Fehlt sie, übernimmt sofort die Browser-Engine – **nie stumm**.
 
 ### Was „High-End“ hier bedeutet
 
-- **Aussprache-Regie** – Zahlen, Währungen, Daten, Zeiten, Prozente, Paragrafen, Abkürzungen, Einheiten und URLs werden vor dem Sprechen in gesprochene Sprache übersetzt (DE und EN getrennt).
-- **Satzweises Sprach-Routing** – englische Sätze im deutschen Artikel spricht die männliche EN-Stimme, ohne Umschalter.
+- **Aussprache-Regie** – Zahlen, Währungen, Daten, Zeiten, Prozente, Paragrafen, Abkürzungen, Einheiten und URLs werden vor dem Sprechen in gesprochene Sprache übersetzt — nach deutschem Regelwerk, für jeden Text.
+- **Nur-Deutsch-Vertrag** – kein Satz- oder Wort-Routing in eine zweite Sprache mehr; das Paritäts-Gate verbietet EN-Stimmenketten und EN-Tabellen in beiden Implementierungen hart.
 - **Studio-Prosodie** – jede Rolle (Überschrift, Fließtext, Tabellenzeile, Warnhinweis …) hat Tempo, Tonlage und Lautstärke; Informationsdichte bremst automatisch, Fragen steigen, Blockenden klingen aus.
 - **Atemgruppen** – Sätze werden an Konnektoren und Nebensatzgrenzen geteilt; die harte Obergrenze bleibt unter der Chrome-Abbruchgrenze.
 - **Vollständigkeit** – Überschriften aller Ebenen, Listen, Zitate, Fettdruck an seiner Stelle, Premium-Übersichten samt Titel und Fußnote. Tabellen und Übersichten werden vollständig mit Zeilen und Spalten erkannt und gesprochen: HTML- und ARIA-Tabellen (`role="table"/"grid"`, Zeilen über `role="row"`), colspan/rowspan als logisches Gitter, mehrzeilige Köpfe, Zeilentitel (`th scope="row"`), Gruppen- und Summenzeilen (auch im `<tbody>`), Werbelink-Zeilen als offengelegte Empfehlung, Titel aus `<caption>`, `aria-label`, Premium-Headline oder der Überschrift davor (Details: `VORLESEN-TABELLEN-HIGHEND-REPORT.md`).
 - **Barrierefreiheit** – WCAG 2.2 / BITV: Live-Region, Fokus-Falle, Scroll-Sperre, Fokus-Rückkehr, Escape, Tastatursteuerung, `prefers-reduced-motion`, Media Session (Sperrbildschirm/Headset).
-- **Profi-Fortschrittsanzeige** – gelber, sichtbarer Progress-Meter mit Prozentwert, Modus-Badge und zugänglichem `role="progressbar"`; er bleibt auch bei schwachen `onboundary`-Events durch Zeit-/Block-Interpolation plausibel in Bewegung. Die Zeile **„Gerade vorgelesen“** nennt zusätzlich den aktuell gesprochenen Satz samt Abschnittszähler („Abschnitt 3 von 12“) — satzgenau bei der Browser-Engine, über die Tonspur-Uhr block-/satzgenau bei der Studio-MP3. Die Fläche ist dauerhaft reserviert (kein CLS), bleibt beim Pausieren stehen und wird beim Beenden geleert.
+- **Profi-Fortschrittsanzeige** – gelber, sichtbarer Progress-Meter mit Prozentwert, Modus-Badge und zugänglichem `role="progressbar"`; er bleibt auch bei schwachen `onboundary`-Events durch Zeit-/Block-Interpolation plausibel in Bewegung. Die Zeile **„Gerade vorgelesen“** nennt den aktuell gesprochenen Satz samt Abschnittszähler und Wortzähler („Wort 214 von 1.286“). Der **Wort-Takt** hebt zusätzlich das gesprochene Wort im Artikeltext hell: millisekundengenau über die **Wortuhr** der Tonspur (`chunk.w`, vom Generator aus den Sprachsynthese-Grenzen gerechnet), bei der Browser-Engine über `onboundary`-Grenzen, und nur wo beides fehlt redlich gezeitt — die Quelle steht an der Leiste (`data-ff-wordsync="track|speech|none"`), geblendet wird nie ein Wort, das nicht klingt. Die Fläche ist dauerhaft reserviert (kein CLS), bleibt beim Pausieren stehen und wird beim Beenden vollständig zurückgebaut (Artikel-DOM unverändert). Tastatur: `Esc`, `←/→` Abschnitt, `Shift+←/→` Satz.
 
 ### Wächter (alle grün)
 
 ```bash
-node scripts/ff_voice_functional_test.mjs   # 207 Gates: echte DOM, alle echten Artikel, Doppel-Lese-Schleuse, „Gerade vorgelesen“
-node scripts/ff_voice_voice_test.js         #  96 Gates: männlich, DE & EN, Wortlauf-Regie, 7 Geräte-Kataloge
+node scripts/ff_voice_functional_test.mjs   # 218 Gates: echte DOM, alle echten Artikel, Doppel-Lese-Schleuse, Wort-Takt (Gruppe 9b)
+node scripts/ff_voice_voice_test.js         #  69 Gates: männlicher Nachrichtensprecher, Nur-Deutsch, Wortuhr-Sprechpfad, 8 Geräte-Kataloge
 node scripts/ff_voice_repair_test.mjs       #  56 Gates: Reparatur-Pinne (Befund 06.09.2026)
 node scripts/ff_voice_tts_hardening_test.mjs#  57 Gates: Ehrlichkeits-/Stumm-/Hänger-Wachen (Befund 07.09.2026)
-python3 scripts/ff_voice_parity_check.py    # 332 Gates: Tonspur ≡ Browser-Engine, Wortlauf-Parität
-python3 scripts/ff_voice_toolbar_check.py   # 108 Gates: Layout, Styling, Workflow, Rückbau
-python3 scripts/ff_voice_backends.py --selftest  # 67 Gates: Aussprache, Prosodie, Audio
-python3 scripts/ff_voice_audio.py --selftest     # 92 Gates: Block-Parität, Tabellen, Injektion
+python3 scripts/ff_voice_parity_check.py    # 337 Gates: Tonspur ≡ Browser-Engine, Wortuhr-Aligner-Parität, Nur-Deutsch-Verbote
+python3 scripts/ff_voice_toolbar_check.py   # 118 Gates: Layout, Styling, Wortzähler-IDs, Workflow, Rückbau
+python3 scripts/ff_voice_backends.py --selftest  #  71 Gates: Aussprache, Prosodie, Audio, Profile
+python3 scripts/ff_voice_audio.py --selftest     # 105 Gates: Block-Parität, Tabellen, Injektion, Wortuhr
 ```
 
 Die Suiten laufen im Workflow **„Lesehilfen-Gate (Vorlesen + Kurzfassung)“** – bei jedem Push/PR auf Lesehilfen oder Content sowie täglich um 08:20 MESZ.
