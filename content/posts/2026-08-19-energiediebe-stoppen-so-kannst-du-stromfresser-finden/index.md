@@ -28,7 +28,8 @@ pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 
 
 
-Steigt deine Stromrechnung, obwohl du sparsam lebst? In fast jedem Haushalt verstecken sich heimliche **Energiediebe**. Sie ziehen rund um die Uhr Strom – auch wenn niemand zu Hause ist. Alte Geräte und dauerlaufende Elektronik treiben den Verbrauch um hunderte Kilowattstunden nach oben. Ich zeige dir, wie du **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen kannst. So sparst du bis zu **420 €** im Jahr.
+
+Steigt deine Stromrechnung, obwohl du sparsam lebst? In fast jedem Haushalt verstecken sich heimliche **Energiediebe**. Sie ziehen rund um die Uhr Strom – auch wenn niemand zu Hause ist. Alte Geräte und dauerlaufende Elektronik treiben den Verbrauch um hunderte Kilowattstunden nach oben. Ich zeige dir, wie du **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen kannst. So sparst du bis zu **420 €** im Jahr.
 
 ---
 
@@ -122,9 +123,9 @@ Mehr Tipps findest du in unserem [Überblick zum Stromsparen im Herbst](../../po
 - Tag 6: Trockner ein Vollgang
 - Tag 7: Alles, was „immer an“ ist (Pumpe, NAS, alter Decoder)
 
-Die Formel: Watt × Stunden × 365. Das Ergebnis geteilt durch 1.000, mal dein Strompreis. Ein Gerät mit 12 Watt Dauerbetrieb verbraucht 105 kWh im Jahr. Das sind 32 bis 38 €. Fünf solcher Geräte kosten dich unsichtbar einen Restaurantbesuch pro Monat.
+Die Formel: Watt × Stunden × 365. Das Ergebnis geteilt durch 1.000, mal dein Strompreis. Ein Gerät mit 12 Watt Dauerbetrieb verbraucht 105 kWh im Jahr. Das sind 32 bis 38 €. Fünf solcher Geräte kosten dich unsichtbar einen Restaurantbesuch pro Monat.
 
-Geräte mit über 80 € Stromkosten im Jahr gehören auf die Ersatzliste. Ein A-Klasse-Kühlschrank spart gegen einen 15 Jahre alten F-Schrank oft 120 bis 180 €. Der Kauf lohnt nach 4 bis 7 Jahren. Doch nicht jedes Gerät muss sofort neu sein. Eine halb leere Truhe bei −22 °C stellt man erst wärmer und taut sie ab.
+Geräte mit über 80 € Stromkosten im Jahr gehören auf die Ersatzliste. Ein A-Klasse-Kühlschrank spart gegen einen 15 Jahre alten F-Schrank oft 120 bis 180 €. Der Kauf lohnt nach 4 bis 7 Jahren. Doch nicht jedes Gerät muss sofort neu sein. Eine halb leere Truhe bei −22 °C stellt man erst wärmer und taut sie ab.
 
 ## Die 4 Sofort-Hacks ohne Anschaffung
 
@@ -141,12 +142,12 @@ Energiediebe sind selten dramatisch. Sie sind langweilig und dauerhaft. Genau de
 
 Alt heißt nicht sofort neu. Rechne so: (alter Verbrauch − neuer Verbrauch) × Strompreis × Jahre. Dann weißt du, ob sich der Tausch lohnt.
 
-Lohnt sich der Tausch in unter 3 Jahren? Dann kauf, wenn das Geld da ist. Dauert er über 8 Jahre? Dann ändere erst Einstellung und Standort. −18 °C statt −24 °C an der Truhe kostet nichts. Oft spart das 10 bis 20 % Verbrauch.
+Lohnt sich der Tausch in unter 3 Jahren? Dann kauf, wenn das Geld da ist. Dauert er über 8 Jahre? Dann ändere erst Einstellung und Standort. −18 °C statt −24 °C an der Truhe kostet nichts. Oft spart das 10 bis 20 % Verbrauch.
 
 
 ## Fazit: Erst messen, dann gezielt Energiediebe stoppen
 
-Heimliche **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen? Das ist der schnellste Weg zu viel Ersparnis. Du ersetzt alte Dauerläufer. Du stoppst Standby-Kosten per Knopfdruck. Und du prüfst deinen Tarif. So holst du jedes Jahr über 400 € zurück.
+Heimliche **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen? Das ist der schnellste Weg zu viel Ersparnis. Du ersetzt alte Dauerläufer. Du stoppst Standby-Kosten per Knopfdruck. Und du prüfst deinen Tarif. So holst du jedes Jahr über 400 € zurück.
 
 **Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · Strom [sparen im Herbst](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/) · Gasanbieter wechseln: Praxis-Tipps
 

@@ -76,11 +76,11 @@ Wer auch Haus oder Wohnung absichern will, findet Tipps im Beitrag zum [Gebäude
 
 ## Rechenbeispiel: Was ein einziger Schaden 2026 kosten kann
 
-Du übersiehst einen Fahrradfahrer. Er stürzt und bricht sich das Schlüsselbein. Zwei Wochen Klinik, drei Monate Therapie, Lohnausfall. Ohne Haftpflicht zahlst du alles selbst. Die Behandlung kostet schnell fünfstellig. Der Lohnausfall liegt je nach Job bei 4.000–12.000 €. Schmerzensgeld kommt extra. Mit einer guten Police prüft dein Versicherer die Forderung, wehrt sie ab oder zahlt.
+Du übersiehst einen Fahrradfahrer. Er stürzt und bricht sich das Schlüsselbein. Zwei Wochen Klinik, drei Monate Therapie, Lohnausfall. Ohne Haftpflicht zahlst du alles selbst. Die Behandlung kostet schnell fünfstellig. Der Lohnausfall liegt je nach Job bei 4.000–12.000 €. Schmerzensgeld kommt extra. Mit einer guten Police prüft dein Versicherer die Forderung, wehrt sie ab oder zahlt.
 
-Nun zu Mietwohnungen: Eine Badewanne läuft über. Die Wohnung darunter ist drei Wochen unbewohnbar. Trocknung, Parkett, Hotel: 8.000–20.000 € sind keine Ausnahme. Manche Billigpolicen zahlen das nicht.
+Nun zu Mietwohnungen: Eine Badewanne läuft über. Die Wohnung darunter ist drei Wochen unbewohnbar. Trocknung, Parkett, Hotel: 8.000–20.000 € sind keine Ausnahme. Manche Billigpolicen zahlen das nicht.
 
-**Kosten der Absicherung:** Ein Single-Tarif mit 50 Millionen € Deckung, Forderungsausfall und Schlüsselverlust kostet 2026 oft 40–70 € im Jahr. Familien zahlen 70–110 €. Das ist weniger als ein Essen im Monat – und schützt dich vor dem wirtschaftlichen Aus.
+**Kosten der Absicherung:** Ein Single-Tarif mit 50 Millionen € Deckung, Forderungsausfall und Schlüsselverlust kostet 2026 oft 40–70 € im Jahr. Familien zahlen 70–110 €. Das ist weniger als ein Essen im Monat – und [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor dem wirtschaftlichen Aus.
 
 ## Deckungssumme, Forderungsausfall, grobe Fahrlässigkeit – was 2026 Pflicht ist
 
@@ -90,7 +90,7 @@ Nun zu Mietwohnungen: Eine Badewanne läuft über. Die Wohnung darunter ist drei
 
 **Grobe Fahrlässigkeit.** Du stößt das Rotweinglas auf den Teppich der Freunde. Manche Tarife kürzen, gute zahlen voll. Genau diese Klausel trennt 45-€- von 65-€-Policen.
 
-**Schlüsselverlust.** Du verlierst fremde Schlüssel – privat, beruflich oder für die Wohnung. Eine neue Schließanlage kostet schnell 2.000–5.000 €.
+**Schlüsselverlust.** Du verlierst fremde Schlüssel – privat, beruflich oder für die Wohnung. Eine neue Schließanlage kostet schnell 2.000–5.000 €.
 
 **Deliktsunfähige Kinder.** Kinder unter 7 Jahren haften oft nicht. Im Straßenverkehr gilt das bis 10 Jahre. Die Police der Eltern sollte trotzdem zahlen. Sonst bleibt die Familie auf den Kosten sitzen.
 

@@ -43,7 +43,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Was verbirgt sich hinter dem DNS-Hack?
 
-Das Domain Name System (DNS) ist das Telefonbuch des Internets. Tippst du eine Adresse wie google.de ein, kann dein Computer damit nichts anfangen. Er braucht die passende IP-Adresse. Das ist eine lange Zahlenfolge. Sie führt ihn zum richtigen Server. Diese Abfrage übernimmt ein DNS-Server. Man nennt ihn auch Resolver.
+Das Domain Name System (DNS) ist das Telefonbuch des Internets. Tippst du eine Adresse wie google. de ein, kann dein Computer damit nichts anfangen. Er braucht die passende IP-Adresse. Das ist eine lange Zahlenfolge. Sie führt ihn zum richtigen Server. Diese Abfrage übernimmt ein DNS-Server. Man nennt ihn auch Resolver.
 
 Dein Router nutzt meist den Server deines Internetanbieters. Diese Server sind oft überlastet oder veraltet. Der **DNS-Hack** ist nur der manuelle Wechsel dieser Stelle. Du wählst selbst einen schnelleren Anbieter. Dein Rechner bekommt die „Telefonnummer“ einer Seite dann schneller. Der Aufbau der Verbindung startet sofort.
 

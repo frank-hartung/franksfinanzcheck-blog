@@ -24,9 +24,9 @@ pin_description: "*Werbung | Funklöcher im Schlafzimmer, Ruckeln im Homeoffice?
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
-Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss. 100 oder 250 Mbit/s sind drin. Doch im Arbeitszimmer ruckelt der Video-Call. Im Schlafzimmer bricht der 4K-Stream ständig ab?
+Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss. 100 oder 250 Mbit/s sind drin. Doch im Arbeitszimmer ruckelt der Video-Call. Im Schlafzimmer bricht der 4K-Stream ständig ab?
 
-In über 90 % der Fälle liegt das nicht an der Leitung. Es fehlt an Funkabdeckung in den eigenen vier Wänden. Dicke Wände bremsen das Signal. Auch Fußbodenheizung und elektrische Störquellen tun das.
+In über 90 % der Fälle liegt das nicht an der Leitung. Es fehlt an Funkabdeckung in den eigenen vier Wänden. Dicke Wände bremsen das Signal. Auch Fußbodenheizung und elektrische Störquellen tun das.
 
 Die folgenden Schritte zeigen dir, wie du dein **WLAN verbessern** kannst. Die Skala reicht von kostenlosen Sofort-Maßnahmen bis zur Profi-Lösung. So bekommst du im ganzen Haus stabiles Netz.
 
@@ -71,13 +71,13 @@ Der Einstieg in ein hochwertiges 2er-Mesh-Set kostet im Handel zwischen 80 € 
 4. **Antennen präzise ausrichten:** Besitzt dein Router externe Stabantennen, richte eine Antenne senkrecht nach oben und eine zweite im 45-Grad-Winkel aus, um sowohl horizontale als auch vertikale Funkwellen optimal abzustrahlen.
 5. **Regelmäßige Firmware-Updates installieren:** Halte das Betriebssystem deines Routers stets auf dem neuesten Stand. Sicherheits-Patches und Optimierungen der Treiber bringen oft 10 bis 15 % mehr Stabilität.
 
-Willst du generell sparen? Unser Leitfaden [Sparen im Herbst – die besten Spartipps](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/) zeigt, wo Geld liegen bleibt. Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten. Mehr dazu steht im Leitfaden zum [DSL-Wechselbonus und Prämien](../../posts/2026-08-10-dsl-wechselbonus-sichern/). Auch die Übersicht [Günstigeres Internet durch Tarifvergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) hilft weiter.
+Willst du generell sparen? Unser Leitfaden [Sparen im Herbst – die besten Spartipps](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/) zeigt, wo Geld liegen bleibt. Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten. Mehr dazu steht im Leitfaden zum [DSL-Wechselbonus und Prämien](../../posts/2026-08-10-dsl-wechselbonus-sichern/). Auch die Übersicht [Günstigeres Internet durch Tarifvergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) hilft weiter.
 
 <!-- premium-length-2026 -->
 
 ## Rechenbeispiel: Was ein Funkloch wirklich kostet
 
-Ein 100-Mbit/s-Anschluss kostet 34,99 € im Monat. Kommen im Homeoffice nur 12 Mbit/s an, nützt das wenig. Video-Calls brechen ab. Die Cloud-Sicherung dauert dreimal so lang. Der Stream fällt auf 480p. Der Preis pro nutzbarem Megabit steigt von 0,35 € auf fast 3 €.
+Ein 100-Mbit/s-Anschluss kostet 34,99 € im Monat. Kommen im Homeoffice nur 12 Mbit/s an, nützt das wenig. Video-Calls brechen ab. Die Cloud-Sicherung dauert dreimal so lang. Der Stream fällt auf 480p. Der Preis pro nutzbarem Megabit steigt von 0,35 € auf fast 3 €.
 
 Drei realistische Wege, Stand 2026:
 
@@ -88,11 +88,11 @@ Drei realistische Wege, Stand 2026:
 | 2er-Mesh (WLAN 6) | 150–250 € | 0 € | Haus, mehrere Wände, Homeoffice |
 | Powerline mit WLAN | 70–130 € | 0 € | Altbau mit dicken Wänden, Stromkreis zusammen |
 
-Ein Mesh-Set für 180 € kostet über 36 Monate gerechnet 5 € im Monat. Das ist weniger als eine unnötige Router-Miete. Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahlst du doppelt. Einmal für die Hardware. Und einmal für Leistung, die nie ankommt.
+Ein Mesh-Set für 180 € kostet über 36 Monate gerechnet 5 € im Monat. Das ist weniger als eine unnötige Router-Miete. Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahlst du doppelt. Einmal für die Hardware. Und einmal für Leistung, die nie ankommt.
 
 ## Typische WLAN-Fehler, die Speed fressen
 
-**Router im Technikschrank.** Holz, Metall und Kartons dämpfen 5 GHz stark. Stelle den Router frei und erhöht auf. Am besten zentral in der Wohnung. Das holt oft 30 bis 50 % Reichweite zurück.
+**Router im Technikschrank.** Holz, Metall und Kartons dämpfen 5 GHz stark. Stelle den Router frei und erhöht auf. Am besten zentral in der Wohnung. Das holt oft 30 bis 50 % Reichweite zurück.
 
 **2,4 GHz und 5 GHz unter demselben Namen.** Alte Geräte bleiben am langsamen Band. So ziehen sie das ganze Netz nach unten. Vergib getrennte Namen, zum Beispiel „Zuhause“ und „Zuhause-5G“. Dann hast du die Kontrolle.
 

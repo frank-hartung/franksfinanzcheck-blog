@@ -30,9 +30,10 @@ pinwand: "Versicherungen clever wechseln & sparen"
 
 
 
+
 Dein Haus ist meist deine größte Investition. Ein schweres Unwetter, ein Brand oder ein Rohrbruch kann es schnell zerstören. Ohne guten Schutz droht dann der [finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Ruin.
 
-Wer eine **[Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) vergleichen** will, sieht viele Klauseln, Optionen und große Preisunterschiede. Für dasselbe Haus zahlen Anbieter oft zwischen **380 € und über 850 €** im Jahr. Welche Bausteine zählen und wie du dein Haus gut absicherst, zeigen wir jetzt Schritt für Schritt.
+Wer eine **[Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) vergleichen** will, sieht viele Klauseln, Optionen und große Preisunterschiede. Für dasselbe Haus zahlen Anbieter oft zwischen **380 € und über 850 €** im Jahr. Welche Bausteine zählen und wie du dein Haus gut absicherst, zeigen wir jetzt Schritt für Schritt.
 
 ---
 
@@ -60,19 +61,19 @@ Der optionale Zusatz **Elementarschutz** deckt dann diese Schäden ab:
 Achte beim Tarifvergleich genau darauf, dass der Vertrag diese Punkte klar regelt:
 
 ### 1. Verzicht auf die Einrede der groben Fahrlässigkeit
-Vergisst du eine Kerze? Oder lässt du bei Gewitter ein Fenster offen? Ohne die Klausel darf der Versicherer deine Leistung kürzen. Moderne Tarife zahlen auch dann 100 %.
+Vergisst du eine Kerze? Oder lässt du bei Gewitter ein Fenster offen? Ohne die Klausel darf der Versicherer deine Leistung kürzen. Moderne Tarife zahlen auch dann 100 %.
 
 ### 2. Gleitende Neuwertversicherung (Wert 1914)
 Die Summe muss mit den Baukosten steigen. Nur so kann ein zerstörtes Haus neu gebaut werden, ohne dass du etwas dazuzahlst.
 
 ### 3. Einschluss von Ableitungsrohren außerhalb des Grundstücks
-Bricht ein Rohr außerhalb deines Grundstücks, wird es teuer. Oft kostet die Reparatur über 15.000 €. Die Police sollte diese Rohre bis zum Hauptkanal abdecken, am besten mit 20.000 € oder mehr.
+Bricht ein Rohr außerhalb deines Grundstücks, wird es teuer. Oft kostet die Reparatur über 15.000 €. Die Police sollte diese Rohre bis zum Hauptkanal abdecken, am besten mit 20.000 € oder mehr.
 
 ### 4. Aufräum-, Abbruch- und Dekontaminationskosten
 Nach einem Brand bleibt oft giftiger Schutt. Das Entsorgen kostet viel. Die Versicherung sollte diese Kosten bis zur vollen Summe tragen.
 
 ### 5. Hotelkosten bei Unbewohnbarkeit
-Kannst du nach einem Schaden nicht im Haus wohnen, brauchst du ein Hotel. Die Versicherung sollte das zahlen. Ein guter Tarif übernimmt etwa 150 € pro Tag, oft bis zu 24 Monate.
+Kannst du nach einem Schaden nicht im Haus wohnen, brauchst du ein Hotel. Die Versicherung sollte das zahlen. Ein guter Tarif übernimmt etwa 150 € pro Tag, oft bis zu 24 Monate.
 
 
 
@@ -94,23 +95,23 @@ Kannst du nach einem Schaden nicht im Haus wohnen, brauchst du ein Hotel. Die Ve
 
 ## Was 2026 in der Police stehen muss – ohne Marketingnebel
 
-So eine [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) nimmt man nicht nebenbei mit. Sie zahlt bei Feuer, Leitungswasser, Sturm und Hagel. Elementarschäden deckt nur eine Zusatz-Klausel.
+So eine Wohngebäudeversicherung nimmt man nicht nebenbei mit. Sie zahlt bei Feuer, Leitungswasser, Sturm und Hagel. Elementarschäden deckt nur eine Zusatz-Klausel.
 
-Ohne Elementar bleibst du nach Starkregen auf dem Keller sitzen. Der Zusatz kostet oft 80–300 € extra im Jahr. In manchen ZÜRS-Zonen bekommst du ihn schwer. Vergleiche darum nicht nur den Preis. Prüfe auch, ob dich der Versicherer überhaupt nimmt.
+Ohne Elementar bleibst du nach Starkregen auf dem Keller sitzen. Der Zusatz kostet oft 80–300 € extra im Jahr. In manchen ZÜRS-Zonen bekommst du ihn schwer. Vergleiche darum nicht nur den Preis. Prüfe auch, ob dich der Versicherer überhaupt nimmt.
 
 **Gleitender Neuwert.** Die Summe muss mitbauen, sonst bist du in zehn Jahren unterversichert. Prüfe: Nutzt der Vertrag den Wert 1914 oder einen aktuellen Bogen? Lass dir die Wertermittlung schriftlich geben.
 
 **Grobe Fahrlässigkeit.** Rohrbruch, weil der Absperrhahn im Urlaub nicht geprüft wurde – Top-Tarife leisten, andere kürzen.
 
-**Ableitungsrohre außerhalb des Gebäudes.** Klassische Lücke. Fehlt der Baustein, zahlst du die Erd-Aufgrabung oft selbst. Ein Satz im Vertrag entscheidet über 8.000 €.
+**Ableitungsrohre außerhalb des Gebäudes.** Klassische Lücke. Fehlt der Baustein, zahlst du die Erd-Aufgrabung oft selbst. Ein Satz im Vertrag entscheidet über 8.000 €.
 
 **Photovoltaik und Wärmepumpe.** Als Gebäudebestandteil mitversichert oder extra? 2026 gehört das in jedes Vergleichsformular.
 
 ## Kostenbeispiel Einfamilienhaus 140 m², Baujahr 1998, ZÜRS 1–2
 
-Feuer, Leitungswasser und Sturm kosten oft 280–450 €. Mit Elementarschutz sind es 380–700 €. Eine Selbstbeteiligung von 500–1.000 € senkt die Prämie. Doch bei Leitungswasser ist der Kleinschaden am häufigsten. Rechne mit ein bis zwei Schäden in 15 Jahren. Sparst du 150 €, musst du kleine Reparaturen selbst zahlen.
+Feuer, Leitungswasser und Sturm kosten oft 280–450 €. Mit Elementarschutz sind es 380–700 €. Eine Selbstbeteiligung von 500–1.000 € senkt die Prämie. Doch bei Leitungswasser ist der Kleinschaden am häufigsten. Rechne mit ein bis zwei Schäden in 15 Jahren. Sparst du 150 €, musst du kleine Reparaturen selbst zahlen.
 
-Bist du unterversichert, kürzt der Versicherer im Schaden mit. Beispiel: Ein Haus ist 250.000 € wert, versichert sind 200.000 €. Bei einem Schaden von 50.000 € zahlt die Police nur 40.000 €. So wird Sparen am falschen Ende teuer.
+Bist du unterversichert, kürzt der Versicherer im Schaden mit. Beispiel: Ein Haus ist 250.000 € wert, versichert sind 200.000 €. Bei einem Schaden von 50.000 € zahlt die Police nur 40.000 €. So wird Sparen am falschen Ende teuer.
 
 ## Vergleich in sechs Schritten
 

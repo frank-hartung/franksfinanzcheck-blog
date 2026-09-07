@@ -1,6 +1,6 @@
 {
- "total": 34,
- "errors": 0,
+ "total": 36,
+ "errors": 1,
  "fixed": 1,
  "posts": [
   {
@@ -310,20 +310,40 @@
    "ok": true
   },
   {
-   "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
-   "title": "Finanzielle Freiheit erreichen: Denke dich reich! ",
-   "pillar": "frugalismus",
+   "slug": "2026-09-03-hausratversicherung-kosten-leistungen-vergleich",
+   "title": "Hausratversicherung: Was sie kostet und wen sie sc",
+   "pillar": "versicherungen",
    "fixed": 0,
    "errors": [],
    "infos": [
-    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+    "Generischer Link (erlaubt): Pillar versicherungen: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
    "ok": true
   },
   {
-   "slug": "2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise",
-   "title": "Flugtickets günstig buchen: Strategien für deine R",
-   "pillar": "mietwagen",
+   "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+   "title": "Kreditkarte vergleichen: Kostenlos und sicher zahl",
+   "pillar": "konto-karten",
+   "fixed": 0,
+   "errors": [
+    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)"
+   ],
+   "infos": [],
+   "ok": false
+  },
+  {
+   "slug": "2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh",
+   "title": "So bekommst du WLAN in jeden Winkel: Repeater oder",
+   "pillar": "internet-dsl",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen",
+   "title": "Stromfresser finden: Energiediebe im Haushalt stop",
+   "pillar": "strom-sparen",
    "fixed": 1,
    "errors": [],
    "infos": [],

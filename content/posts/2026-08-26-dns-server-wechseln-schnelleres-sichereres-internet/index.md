@@ -24,7 +24,7 @@ pin_description: "*Werbung | Du brauchst keinen teureren Tarif für schnelleres 
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
-Wusstest du, dass dein Anbieter mitlesen kann? Er sieht jede Seite, die du aufrufst – auch im Inkognito-Modus. Der Grund ist der **DNS-Server** deines Providers. Er ist das Telefonbuch des Internets. Er übersetzt Namen wie www.google.de in Zahlen.
+Wusstest du, dass dein Anbieter mitlesen kann? Er sieht jede Seite, die du aufrufst – auch im Inkognito-Modus. Der Grund ist der **DNS-Server** deines Providers. Er ist das Telefonbuch des Internets. Er übersetzt Namen wie www. google. de in Zahlen.
 
 Die meisten nutzen automatisch den DNS-Server ihres Anbieters. Es gibt aber schnellere und sicherere Optionen. Der Wechsel ist kostenlos. Er dauert fünf Minuten. Und er verkürzt oft die Ladezeit. Welche Anbieter 2026 zählen, zeigt der [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
@@ -36,7 +36,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Was macht ein DNS-Server überhaupt?
 
-Tippst du eine Adresse wie www.google.de ein, läuft im Hintergrund ein Vorgang ab:
+Tippst du eine Adresse wie www. google. de ein, läuft im Hintergrund ein Vorgang ab:
 
 1. Dein Browser fragt den **DNS-Server** (standardmäßig den deines Internetanbieters): "Welche IP-Adresse gehört zu `www.google.de`?"
 2. Er schlägt die Adresse nach und antwortet mit `142.250.185.195`.
@@ -206,7 +206,7 @@ Cloudflare (1.1.1.1) ist am schnellsten. Er liegt bei rund 8 Millisekunden. Goog
 Nein. Du änderst nur eine Einstellung. Bei Problemen stellst du alles zurück.
 
 ### Bringt der DNS-Wechsel etwas beim Streaming?
-Wenig. Netflix und Co. nutzen eigene Netze. Doch das Laden der App kann schneller werden. Auch die Navigation gewinnt.
+Wenig. Netflix und Co. Nutzen eigene Netze. Doch das Laden der App kann schneller werden. Auch die Navigation gewinnt.
 
 ### Was ist der Unterschied zwischen DNS over HTTPS (DoH) und DNS over TLS (DoT)?
 Beide verschlüsseln deine DNS-Anfrage. DoH läuft über Port 443. DoT nutzt Port 853. Dein Anbieter kann nicht mehr mitlesen.

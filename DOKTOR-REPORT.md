@@ -1,11 +1,11 @@
 # 🩺 DOKTOR-REPORT (Oberarzt, Gesamtprognose)
 
-**Stand:** 2026-09-04 17:55 UTC · Modus: GEBURT
+**Stand:** 2026-09-07 18:56 UTC · Modus: GEBURT
 **Wachen behandelt:** 22 · **0-Exit:** 20 · Funde: 2 · Sabotage-Fehler: 0
 
 | Wache (Phase) | Zweck | Exit |
 |---|---|---|
-| `integrity_guard.py` (0-LOCK) | Kern-Integritaet (Signatruehe nach Drift) | 1 |
+| `integrity_guard.py` (0-LOCK) | Kern-Integritaet (Signatruehe nach Drift) | 0 |
 | `heading_guard.py` (A-Text) | Überschriften-Hygiene H1-H3: kein <br>, Anker-stabil (27.08. hinzu) | 0 |
 | `casing_guard.py` (A-Text) | Akronyme/Marken (DSL, Check24) | 0 |
 | `dash_guard.py` (A-Text) | Dash-Typografie R1-R9 | 0 |
@@ -23,14 +23,14 @@
 | `math_guard.py` (B-Semantik) | Zahlenbeweis M1-M2 | 0 |
 | `affiliate_shield.py` (C-Money) | Auto-Deep + Gateways | 0 |
 | `affiliate_marketer.py` (C-Money) | CTA-Routing + Retarget | 0 |
-| `table_guard.py` (B-Semantik) | Tabellen T1-T4 | 0 |
+| `table_guard.py` (B-Semantik) | Tabellen T1-T4 | 1 |
 | `link_guard.py` (C-Money) | Interne Links V1-V2 | 0 |
 | `link_density_guard.py` (D-Ordnung) | Interne Link-Dichte & Duplikate (12.08. Pro-Link-Leck) | 0 |
 | `workspace_guard.py` (D-Ordnung) | Junk/Waisen/Rotation/Billig | 0 |
 
 ## 🟡 Funde (nicht-fatal, dokumentiert)
-- `integrity_guard.py`: Kern-Integritaet (Signatruehe nach Drift)
 - `fazit_schmiede.py`: Fazit- & FAQ-Schmiede mit Selbstheilung
+- `table_guard.py`: Tabellen T1-T4
 
 ---
 _Oberarzt bleibt bis zuletzt: Er loescht nur ueber die offiziellen Guards; Exit 2 einer Wache -> alles haelt._

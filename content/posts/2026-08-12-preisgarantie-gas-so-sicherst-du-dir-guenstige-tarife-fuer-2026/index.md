@@ -22,39 +22,42 @@ keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise a
 pin_title: "Gaspreise steigen? Jetzt Tarif mit Preisgarantie sichern"
 pin_description: "*Werbung | Vor der Heizsaison ziehen viele Anbieter die Preise an – mit einer Preisgarantie von 12 bis 24 Monaten bist du dagegen gefeit: Jetzt Gastarife mit fester Preisbindung vergleichen und teure Preissprünge einfach aussitzen. 5 Minuten Aufwand, ein Jahr Ruhe. Jetzt sichern!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
----
-
-Wer Heizkosten im Griff behalten will, denkt früh an die Preise. Der CO2-Preis steigt. Die Börsenpreise schwanken. Auch die Netzentgelte werden teurer. Viele Verbraucher sind unsicher. Eine **Preisgarantie für Gas** schützt dein Budget. Hier erfährst du, wie die Garantien funktionieren. Und welcher Tarif für 2026 zu dir passt. Sparen kannst du bis zu **650 €**.
+---Wer Heizkosten im Griff behalten will, denkt früh an die Preise. Der CO2-Preis steigt 2025 auf 55 Euro pro Tonne und wird 2026 voraussichtlich in einem Korridor zwischen 55 und 65 Euro liegen. Die Börsenpreise schwanken durch geopolitische Unsicherheiten massiv. Auch die Netzentgelte werden teurer, da die Kosten für die Transformation der Gasnetze auf weniger Verbraucher verteilt werden. Viele Verbraucher sind unsicher. Eine **Preisgarantie für Gas** schützt dein Budget vor diesen unkalkulierbaren Sprüngen. Hier erfährst du, wie die Garantien funktionieren, welche Fallstricke im Kleingedruckten lauern und welcher Tarif für 2026 zu dir passt. Sparen kannst du durch einen strategischen Wechsel bis zu **650 €**.
 
 ---
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Vergleiche jetzt aktuelle Gastarife mit voller Preissicherheit für die kommenden Monate: [**Kostenlos vergleichen**](/go/gas/)  
-_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+*(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)*
 
 ## Warum eine Gaspreisgarantie für 2026 so entscheidend ist
 
-Die Gasrechnung hat mehrere Teile. Da sind der Energiepreis, die Netzentgelte, Steuern und die CO2-Abgabe. Stadtwerke in der Grundversorgung dürfen den Preis mit sechs Wochen Vorlauf ändern. Ein Festpreisvertrag friert die Kosten ein. Und zwar für die ganze Laufzeit.
+Die Gasrechnung besteht aus drei großen Blöcken: Beschaffung und Vertrieb (ca. 50 %), staatliche Steuern und Abgaben (ca. 25 %) sowie Netzentgelte (ca. 25 %). Während Stadtwerke in der Grundversorgung die Preise mit einer Frist von nur sechs Wochen anpassen dürfen, friert ein Festpreisvertrag die Kosten ein. Und zwar für die gesamte vereinbarte Laufzeit.
+
+Wer jetzt **Gastarife mit Preisgarantie** abschließt, entzieht sich der Dynamik der Wintermonate. Historisch gesehen steigen die Preise an den Spotmärkten, sobald die ersten Frostperioden einsetzen und die Speicherstände sinken. Mit einem Festpreis kaufst du dir Planungssicherheit. Besonders mit Blick auf die **Heizkosten 2026** ist das wichtig: Die Bundesregierung hat den Pfad für die CO2-Abgabe klar definiert. Da Gas ein fossiler Brennstoff ist, wird jede Kilowattstunde durch diesen Klima-Aufschlag Jahr für Jahr teurer. Eine gute Preisgarantie kann diesen Anstieg zwar nicht immer komplett verhindern (je nach Vertragsart), federt aber die Marktschwankungen der Energiebeschaffung ab.
 
 ### Die wichtigsten Vorteile auf einen Blick:
-- **Budget-Klarheit:** Deine monatlichen Abschlagszahlungen bleiben während der gesamten Erstlaufzeit auf den Cent genau stabil.
-- **Inflationsschutz:** Steigende Beschaffungskosten am Markt berühren deinen bestehenden Vertrag in keiner Weise.
-- **Hohe Gesamtersparnis:** Im Vergleich zu den notorisch teuren Grundversorgungstarifen sparst du bei 20.000 kWh Gasverbrauch oft 2,5 bis 3,5 Cent pro Kilowattstunde.
-- **Automatische Wechselbetreuung:** Der neue Versorger kündigt für dich und garantiert einen nahtlosen Versorgungsübergang.
+- **Budget-Klarheit:** Deine monatlichen Abschlagszahlungen bleiben während der gesamten Erstlaufzeit auf den Cent genau stabil. Das verhindert böse Überraschungen bei der Jahresabrechnung.
+- **Inflationsschutz:** Steigende Beschaffungskosten am Markt berühren deinen bestehenden Vertrag in keiner Weise. Du profitierst von den Einkaufskonditionen zum Zeitpunkt des Abschlusses.
+- **Hohe Gesamtersparnis:** Im Vergleich zu den notorisch teuren Grundversorgungstarifen sparst du bei 20.000 kWh Gasverbrauch oft 2,5 bis 3,5 Cent pro Kilowattstunde.
+- **Schutz vor dem „Preisschock“:** Wenn die Gaspreise an der Börse (TTF-Hub) explodieren, bleibst du gelassen, während Nachbarn in variablen Tarifen Post mit Erhöhungsankündigungen erhalten.
+- **Automatische Wechselbetreuung:** Der neue Versorger kündigt für dich und garantiert einen nahtlosen Versorgungsübergang ohne technisches Risiko.
 
 ## Garantiearten im Detail: Worauf du im Vertragstext achten musst
 
-Nicht jede Preisgarantie schützt gleich gut. Die Branche kennt drei Formen:
+Nicht jede Preisgarantie schützt gleich gut. Die Branche unterscheidet drei wesentliche Formen, die darüber entscheiden, wie effektiv du deine **Gaspreise absichern** kannst.
 
 ### 1. Eingeschränkte Preisgarantie (Marktstandard)
-Bei dieser Variante garantiert der Anbieter den Energiepreis. Auch die Netznutzung ist fest. Ändern sich staatliche Steuern? Dann gibt er die Differenz weiter. Für die meisten ist diese Option fair. Das Preis-Leistungs-Verhältnis stimmt.
+Bei dieser Variante garantiert der Anbieter den Energiepreis (Beschaffung) und meist auch die Netznutzungsentgelte. Ändern sich jedoch staatliche Steuern, Umlagen oder die CO2-Abgabe? Dann gibt der Anbieter diese Differenz eins zu eins an dich weiter. Da Steuern und Abgaben gesetzlich fixiert sind, ist das Risiko hier kalkulierbar. Für die meisten Verbraucher ist diese Option der ideale Kompromiss aus Sicherheit und fairem Preis.
 
 ### 2. Reine Energiepreisgarantie
-Hier sichert der Anbieter nur den Beschaffungsteil. Steigen die Netzentgelte, passt sich der Preis an. Diese Tarife sind etwas günstiger. Sie bergen ein Risiko bei steigenden Netzkosten.
+Hier sichert der Anbieter ausschließlich den Beschaffungsteil ab. Steigen die Netzentgelte – was für 2025 und 2026 durch den Wegfall von Bundeszuschüssen und regionale Anpassungen sehr wahrscheinlich ist – passt sich dein Endpreis nach oben an. Diese Tarife wirken im Vergleich oft günstiger, bergen aber ein signifikantes Risiko, da Netzentgelte lokal stark schwanken können.
 
 ### 3. Vollpreisgarantie (Brutto-Preisgarantie)
-Die Vollpreisgarantie deckt alle Teile ab. Auch Steuern und Umlagen. Der Preis bleibt über die Frist gleich. Das [finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Risiko trägt der Anbieter. Dafür ist der Preis etwas höher.
+Die Vollpreisgarantie deckt alle Preiskomponenten ab. Auch wenn der Staat die Mehrwertsteuer anhebt oder die CO2-Abgabe steigt, bleibt dein Brutto-Preis pro Kilowattstunde identisch. Das [finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Risiko trägt komplett der Anbieter. Da sich die Versorger dieses Risiko über einen höheren Arbeitspreis bezahlen lassen, ist diese Garantieform oft die teuerste. Sie lohnt sich nur, wenn kurzfristige, massive Steuererhöhungen erwartet werden.
 
 ## Tarifvergleich: Grundversorgung versus Festpreistarife
+
+Die folgende Tabelle zeigt die Kostenstruktur für einen typischen Vier-Personen-Haushalt in einem Einfamilienhaus.
 
 | Vertragsmodell | Arbeitspreis / kWh | Grundpreis / Monat | Gesamtkosten (20.000 kWh/Jahr) | Ersparnis p.a. |
 |:---|:---|:---|:---|:---|
@@ -63,75 +66,99 @@ Die Vollpreisgarantie deckt alle Teile ab. Auch Steuern und Umlagen. Der Preis b
 | Konventioneller Gastarif (24 Monate) | 9,80 Cent | 9,90 € | **2.078,80 €** | **606,80 €** |
 | Flexibler Monatstarif (ohne Bindung) | 10,90 Cent | 11,00 € | **2.312,00 €** | **373,60 €** |
 
+*Hinweis: Die Preise sind Beispielwerte und variieren je nach Postleitzahl und aktuellem Marktniveau. Stand 2024/2025.*
+
 > 💶 **Spar-Tipp:** Prüfe deinen Verbrauch und sichere dir günstige Konditionen vor Beginn der nächsten Heizperiode über unseren [Gasvergleich](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): [**Vergleichen & sparen**](/go/gas/)
 
 ## Worauf muss man bei der Vertragslaufzeit achten?
 
-Verbraucherschützer raten: Die Garantie soll so lange laufen wie der Vertrag. Bei 12 Monaten Laufzeit zählen 12 Monate Garantie. Eine Bindung über 24 Monate gibt viel Sicherheit. Doch du kannst dann nicht wechseln. Auch nicht, wenn ein anderer Tarif günstiger wird.
+Verbraucherschützer raten: Die Garantie soll so lange laufen wie der Vertrag. Ein **Gasanbieter Festpreis** nützt dir wenig, wenn er nach sechs Monaten ausläuft, du aber 24 Monate an den Vertrag gebunden bist. In einem solchen Fall könnte der Anbieter im zweiten Jahr die Preise massiv erhöhen, ohne dass du ein Sonderkündigungsrecht hast (außer bei der Erhöhung selbst).
 
-So läuft es nach der ersten Laufzeit: Dein Vertrag wird unbefristet. Kündigen kannst du jederzeit. Die Frist beträgt einen Monat.
+**Die ideale Kombination:**
+- 12 Monate Erstlaufzeit
+- 12 Monate Preisgarantie
+- Monatliche Kündigungsfrist nach Ablauf der ersten 12 Monate
+
+Bindungen über 24 Monate geben zwar maximale Sicherheit für die **Heizkosten 2026**, verhindern aber, dass du von sinkenden Preisen profitierst, falls der Markt sich unerwartet entspannt. Achte darauf, dass nach der Mindestlaufzeit keine automatische Verlängerung um ein ganzes Jahr erfolgt – seit der Gesetzesänderung 2022 sind Verträge nach der Erstlaufzeit monatlich kündbar.
+
+## Die Rolle der CO2-Abgabe bei der Preisgarantie Gas 2026
+
+Viele Verbraucher übersehen beim Vergleich die CO2-Abgabe nach dem Brennstoffemissionshandelsgesetz (BEHG). Diese ist technisch gesehen keine Steuer, sondern ein Preis für Emissionszertifikate. In vielen "eingeschränkten Preisgarantien" ist die CO2-Abgabe explizit von der Garantie ausgenommen.
+
+**Was das für dich bedeutet:** Wenn der CO2-Preis von 45 € (2024) auf 55 € (2025) steigt, entspricht das einer Netto-Erhöhung von etwa 0,2 Cent pro Kilowattstunde. Bei 20.000 kWh sind das 40 € Mehrkosten pro Jahr. Ein guter Tarif fängt dies entweder durch einen niedrigen Basis-Arbeitspreis auf oder bietet eine echte Vollgarantie, die auch diese Steigerung schluckt. Frage im Zweifel gezielt nach: "Ist die Erhöhung der CO2-Abgabe in der Preisgarantie enthalten?"
+
+## Vertragstext lesen: Die Sätze, die über hunderte Euro entscheiden
+
+Bevor du digital unterschreibst, solltest du das Produktinformationsblatt und die AGB scannen. Suche gezielt nach diesen Begriffen:
+
+1. **„Preisanpassungsklausel“:** Steht hier, dass der Anbieter Preise „nach billigem Ermessen“ anpassen darf, schaue genau hin, welche Faktoren (Netzentgelte, Umlagen) davon ausgenommen sind.
+2. **„Bonus-Regelungen“:** Viele Tarife locken mit einem Sofortbonus oder Neukundenbonus. **Achtung:** Diese Boni werden oft erst nach 12 Monaten Belieferung verrechnet. Kündigst du vorher oder wird der Vertrag wegen Zahlungsverzug beendet, verfällt der Bonus und der Tarif wird rückwirkend extrem teuer.
+3. **„Zustandszahl und Brennwert“:** Das Gasvolumen am Zähler ($m^3$) ist nicht gleich der Energie (kWh). Die Thermische Energie berechnet sich aus $m^3 \times \Text{Zustandszahl} \times \Text{Brennwert}$. Ein seriöser Anbieter erklärt diese Umrechnung transparent in der Musterrechnung.
 
 ## Checkliste: So wechselst du sicher in einen Festpreistarif
 
-1. **Jahresabrechnung prüfen:** Ermittle deinen tatsächlichen Gasverbrauch in Kilowattstunden aus der letzten Abrechnung deines Versorgers.
-2. **Postleitzahl eingeben:** Gib deine Postleitzahl in den Vergleichsrechner ein, da Netzentgelte je nach Region variieren.
-3. **Filter setzen:** Wähle als Filterkriterien mindestens 12 Monate Preisgarantie und eine Vertragslaufzeit von maximal 12 Monaten.
-4. **Kundenbewertungen studieren:** Achte auf eine Weiterempfehlungsquote von mindestens 80 bis 85 % beim ausgewählten Anbieter.
-5. **Abschluss online durchführen:** Gib deine Zählernummer und den Namen des aktuellen Versorgers an. Der neue Anbieter erledigt die Kündigung vollautomatisch.
+1. **Jahresabrechnung prüfen:** Ermittle deinen tatsächlichen Gasverbrauch in Kilowattstunden (kWh) aus der letzten Abrechnung. Schätzungen führen oft zu zu hohen Abschlägen.
+2. **Postleitzahl & Personenzahl:** Gib deine PLZ korrekt ein, da die Netzentgelte regional massiv variieren (in Norddeutschland oft teurer als im Süden).
+3. **Filter im Vergleichsrechner:**
+    - Mindestens 12 Monate Preisgarantie.
+    - Laufzeit maximal 12 Monate (für Flexibilität) oder 24 Monate (für maximale Sicherheit).
+    - Nur Tarife mit hoher Kundenempfehlung (mind. 80 %).
+    - Boni in die Gesamtkosten einrechnen, aber den „Preis ohne Bonus“ im Auge behalten für das zweite Jahr.
+4. **Zählernummer finden:** Diese steht auf deinem Gaszähler im Keller oder auf der letzten Abrechnung. Sie ist für den reibungslosen Wechsel essenziell.
+5. **Kündigung delegieren:** Kündige nicht selbst! Überlass das dem neuen Anbieter. Nur bei einer sehr kurzen Restlaufzeit (weniger als 3 Wochen) solltest du zur Sicherheit selbst kündigen und den neuen Anbieter informieren.
+6. **Zählerstand melden:** Am Tag des Wechsels liest du den Zähler ab und schickst den Wert sowohl an den alten als auch an den neuen Versorger. Das verhindert Schätzfehler bei der Schlussabrechnung.
 
-Mehr Tipps für deine Heizung? Unser Ratgeber zu [Versäumnissen beim Heizen im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) zeigt sie dir.
+## Grundversorgung gegen Festpreis – Die Beispielrechnung für Familien
 
-<!-- premium-length-2026 -->
+Warum ist der Wechsel gerade jetzt so attraktiv? Schauen wir uns ein Reihenhaus mit 140 m² Wohnfläche an.
+- **Verbrauch:** 18.000 kWh
+- **Grundversorger Preis:** 13,2 Cent/kWh + 150 € Grundpreis = 2.526 € p. a.
+- **Festpreis-Tarif 2026:** 9,6 Cent/kWh + 120 € Grundpreis = 1.848 € p. a.
+- **Ersparnis:** **678 €**
 
-## Vertragstext lesen: die fünf Sätze, die über hunderte Euro entscheiden
+Diese Summe entspricht fast drei kompletten Monatsabschlägen. Wer dieses Geld dem lokalen Versorger schenkt, handelt wirtschaftlich fahrlässig. Besonders, da die Qualität des Gases identisch ist – es kommt immer aus derselben Leitung, egal wer die Rechnung schreibt.
 
-Suche im PDF nach diesen Wörtern: „Preisgarantie“, „Preisanpassung“, „steuerliche Änderungen“, „CO₂“, „Netzentgelte“, „Bonus“, „Sonderkündigung“. Markiere jeden Satz, der dem Anbieter eine Erhöhung erlaubt. Erlaubt mehr als ein Satz das, ist die Garantie eingeschränkt. Egal, wie das Marketing sie nennt.
+## Experten-Wissen: Was passiert bei einer Insolvenz des Anbieters?
 
-**Laufzeit vs. Garantiedauer.** 24 Monate Laufzeit, aber nur 12 Monate Garantie? Dann darf der Preis im zweiten Jahr steigen. Du bist trotzdem gebunden. Das ist die teuerste Falle. Gut ist: Garantie bis zum Ende der Laufzeit. Danach monatlich kündbar.
+Ein häufiges Argument gegen günstige Anbieter mit Preisgarantie ist die Angst vor einer Insolvenz (wie man es bei TelDaFax oder Stromio sah). Hier gibt es jedoch Entwarnung: In Deutschland ist die **Ersatzversorgung** gesetzlich geregelt. Sollte ein Anbieter pleitegehen, übernimmt sofort der lokale Grundversorger die Belieferung. Du stehst keine Sekunde ohne Heizung oder warmes Wasser da. Dein Risiko beschränkt sich lediglich auf eventuell im Voraus gezahlte Beträge. **Regel:** Zahle niemals Vorkasse-Tarife! Wähle immer monatliche Abschlagszahlungen.
 
-**Bonus-Rückforderung.** Viele Boni gibt es nur bei 12 Monaten Treue. Gehst du früher, zahlst du einen Teil zurück. Rechne das in den echten Preis ein.
+## Wie du die Heizkosten 2026 zusätzlich senken kannst
 
-## Grundversorgung gegen Festpreis – die 20.000-kWh-Rechnung
-
-Die Grundversorgung kostet 13,5 Cent. Der Festpreis mit voller Garantie liegt bei 10,8 Cent. Der Grundpreis ist ähnlich. Die Differenz: 2,7 Cent mal 20.000 kWh. Das ergibt **540 €** im Jahr. Selbst mit 0,5 Cent Aufschlag bleiben über 400 €. Der Wechsel dauert online zehn Minuten. Dein neuer Lieferant übernimmt den Rest.
-
-Wechselst du im Sommer, sicherst du den Preis vor der Heizsaison. Wer bis November wartet, zahlt den ersten kalten Monat oft noch teuer. Vergleiche darum im August oder September. Nicht beim ersten Frost.
-
-## Checkliste vor dem Klick auf „Jetzt wechseln“
-
-- Zählernummer und Jahresverbrauch (letzte Abrechnung) griffbereit
-- Malus-freie Schufa-Klausel? Manche Anbieter lehnen ohne Begründung ab – zweiten Tarif in Reserve halten
-- SEPA-Mandat nur an den Versorger, nie an dubiose „Wechselservices“ mit Vollmacht über alles
-- Bestätigungsmail speichern, Kundenportal-Login anlegen, Abschlag nach 6 Wochen gegen Zählerstand prüfen
-- Kalendereintrag 8 Wochen vor Ablauf: erneut vergleichen
-
-Eine Preisgarantie gibt Planungssicherheit. Liegt der Marktpreis 2027 unter deinem Tarif? Dann wechselst du einfach. Vorausgesetzt, du bist monatlich kündbar. Bis dahin musst du keine Börsenmeldung lesen. Deine Gasrechnung bleibt verständlich.
+Neben dem reinen Tarifwechsel gibt es Hebel, die deine **[Preisgarantie Gas](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)** noch effektiver machen:
+- **Hydraulischer Abgleich:** Sorgt dafür, dass alle Heizkörper gleichmäßig warm werden. Spart bis zu 15 % Energie.
+- **Smarte Thermostate:** Senken die Temperatur automatisch ab, wenn du nicht zu Hause bist oder schläfst.
+- **Dämmung der Heizungsrohre:** Im Keller geht oft viel Wärme verloren, bevor sie im Wohnzimmer ankommt. Eine Baumarkt-Lösung für wenige Euro pro Meter amortisiert sich oft in einem einzigen Winter.
 
 ## Fazit: Mit Planungssicherheit entspannt durch das Jahr
 
-Eine **Preisgarantie für Gas** nimmt dir die Sorge vor hohen Preisen. Wer aus der Grundversorgung wechselt, spart bis zu **650 €** im Jahr. Vorausgesetzt, der Tarif hat 12 Monate Preisbindung.
+Eine **Preisgarantie für Gas** ist aktuell das wichtigste Werkzeug für deine private Finanzplanung. Sie nimmt dir die Sorge vor explodierenden Energiekosten und macht deine monatlichen Fixkosten kalkulierbar. Wer aus der teuren Grundversorgung in einen optimierten Tarif wechselt, kann die jährliche Ersparnis direkt in die Tilgung von Krediten oder den Vermögensaufbau stecken.
+
+Warte nicht, bis die Preise im Winter anziehen. Sichere dir jetzt die Konditionen für 2025 und 2026. Ein Vergleich dauert weniger als fünf Minuten, der Wechsel spart dir hunderte Euro.
 
 **Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Gasrechnung senken im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) · Praxis-Tipps zum Gasanbieterwechsel
 
-## Häufige Fragen
+## Häufige Fragen (FAQ)
 
 ### Was passiert bei einer Preiserhöhung trotz Preisgarantie?
-Steigen die Steuern, darf der Anbieter anpassen. Dann hast du ein Sonderkündigungsrecht. Die Frist: 14 Tage.
+Falls dein Anbieter die Preise anhebt (z. B. wegen steigender Steuern bei einer eingeschränkten Garantie), steht dir ein **Sonderkündigungsrecht** zu. Du hast dann meist 14 Tage Zeit, den Vertrag fristlos zu kündigen und zu einem günstigeren Anbieter zu wechseln. Die Erhöhung muss dir schriftlich mitgeteilt werden.
 
 ### Gilt die Preisgarantie auch für den monatlichen Grundpreis?
-Ja, meist schon. Die Garantie umfasst den Arbeitspreis. Und den monatlichen Grundpreis. Prüfe das im Vertrag.
+In der Regel ja. Die meisten Garantien umfassen sowohl den Arbeitspreis (pro kWh) als auch den monatlichen Grundpreis. Es gibt jedoch Ausnahmen bei Billig-Tarifen. Ein kurzer Blick in das Preisblatt unter „Garantieumfang“ klärt dies.
 
 ### Wie lange vor Vertragsende sollte ich wechseln?
-Du kannst früh wechseln. Schon drei bis sechs Monate vor Ablauf. Schließe den neuen Tarif ab. Und lass den Lieferbeginn vordatieren.
+Du kannst bereits bis zu sechs Monate vor Ablauf deines aktuellen Vertrages einen neuen Tarif mit Preisgarantie abschließen. Man nennt das „Vordatierung“. So sicherst du dir die heutigen niedrigen Preise für die Zukunft.
 
 ### Kann die Gaszufuhr beim Wechsel unterbrochen werden?
-Nein. Die unterbrechungsfreie Belieferung ist durch das Energiewirtschafts­gesetz rechtlich zu 100 % abgesichert.
+Nein, das ist technisch unmöglich. Die Leitungen gehören dem örtlichen Netzbetreiber, nicht dem Lieferanten. Das Energiewirtschaftsgesetz (EnWG) garantiert eine lückenlose Versorgung. Der Wechsel ist ein rein administrativer Vorgang.
 
 ### Was ist der Unterschied zwischen Kilowattstunden und Kubikmetern?
-Der Zähler misst das Volumen in m³. Die Rechnung nutzt kWh. Der Brennwert rechnet um. Dazu kommt die Zustandszahl.
+Dein Gaszähler misst das Volumen in Kubikmetern ($m^3$). Da die Energiehaltigkeit von Gas je nach Herkunft und Temperatur schwankt, wird dieser Wert mit dem Brennwert und der Zustandszahl multipliziert, um die verbrauchten Kilowattstunden (kWh) zu errechnen. Nur die kWh sind preislich vergleichbar.
+
+### Warum verlangen Anbieter bei Tarifen mit Preisgarantie oft eine Bonitätsprüfung?
+Da der Anbieter beim Einkauf des Gases für dich in Vorleistung geht und das Preisrisiko über ein Jahr oder länger trägt, möchte er sicherstellen, dass die monatlichen Abschläge zuverlässig gezahlt werden. Bei negativem Schufa-Eintrag kann es helfen, Tarife ohne hohen Neukundenbonus zu wählen, da hier die Ablehnungsquote oft geringer ist.
 
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/gas/)
 
-*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Wir empfehlen nur Anbieter und Tools, die wir selbst für sinnvoll halten.*

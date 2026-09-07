@@ -40,31 +40,31 @@ Trenne deine Finanzen in drei klare Töpfe:
 - **Konto 3 (Tagesgeldkonto):** Automatischer Dauerauftrag am Tag des Gehaltseingangs für Notgroschen und Sparziele (Pay yourself first!).
 
 ### 2. Die 30-Tage-Regel bei Spontankäufen
-Du siehst etwas Schönes? Es ist kein Muss und kostet über 50 €? Dann warte 30 Tage. Schreibe den Wunsch auf eine Liste. Willst du ihn nach einem Monat immer noch, kaufe ihn bewusst. In über 80 % der Fälle verfliegt der Kaufimpuls von allein.
+Du siehst etwas Schönes? Es ist kein Muss und kostet über 50 €? Dann warte 30 Tage. Schreibe den Wunsch auf eine Liste. Willst du ihn nach einem Monat immer noch, kaufe ihn bewusst. In über 80 % der Fälle verfliegt der Kaufimpuls von allein.
 
 ### 3. Einkaufen mit Einkaufszettel und Essensplan (Meal Prep)
-Wer hungrig und ohne Plan einkauft, kauft rund 25 % mehr. Plane deine Mahlzeiten für 5 bis 7 Tage. Schreibe eine Liste. Halte dich daran. Koche größere Portionen vor. Dann sparst du dir teures Kantinen- oder Lieferessen.
+Wer hungrig und ohne Plan einkauft, kauft rund 25 % mehr. Plane deine Mahlzeiten für 5 bis 7 Tage. Schreibe eine Liste. Halte dich daran. Koche größere Portionen vor. Dann sparst du dir teures Kantinen- oder Lieferessen.
 
 ### 4. Ungenutzte Abos und Mitgliedschaften kündigen
 Lies deine Kontoauszüge der letzten 12 Monate. Brauchst du drei Streaming-Dienste? Zwei Musik-Abos? Fitnessstudio und fünf Apps? Kündige alles, was du nicht wöchentlich nutzt. Ein Abo lässt sich später leicht wieder aktivieren.
 
 ### 5. Bankgebühren und Kontoführungsentgelte streichen
-Zahlst du 5 bis 9 € im Monat für dein Konto? Auch Überweisungen und Kreditkarten kosten oft extra. Viele Direktbanken sind kostenlos. Dazu gibt es eine Visa- oder Mastercard. Bargeld bekommst du weltweit ohne Gebühr.
+Zahlst du 5 bis 9 € im Monat für dein Konto? Auch Überweisungen und Kreditkarten kosten oft extra. Viele Direktbanken sind kostenlos. Dazu gibt es eine Visa- oder Mastercard. Bargeld bekommst du weltweit ohne Gebühr.
 
 ### 6. Leitungswasser statt Marken-Mineralwasser trinken
-Leitungswasser ist in Deutschland streng kontrolliert. Es ist oft reiner als Flaschenware. Steigst du um, sparst du als 4-Personen-Haushalt rund **350 €** im Jahr. Und du schleppst keine Kisten mehr.
+Leitungswasser ist in Deutschland streng kontrolliert. Es ist oft reiner als Flaschenware. Steigst du um, sparst du als 4-Personen-Haushalt rund **350 €** im Jahr. Und du schleppst keine Kisten mehr.
 
 ### 7. Second-Hand vor Neukauf bevorzugen
-Kleidung, Möbel, Spielzeug, Elektronik: Auf Kleinanzeigen, Vinted oder Rebuy gibt es neuwertige Ware. Oft zahlst du 30 bis 70 % weniger als im Laden.
+Kleidung, Möbel, Spielzeug, Elektronik: Auf Kleinanzeigen, Vinted oder Rebuy gibt es neuwertige Ware. Oft zahlst du 30 bis 70 % weniger als im Laden.
 
 ### 8. Bibliotheken und Tauschbörsen nutzen
-Bücher, Hörbücher und Spiele gibt es in der Bibliothek. Auch Werkzeuge kannst du dort oft leihen. Der Jahresbeitrag liegt bei 15 bis 25 €. Dafür ist die Ausleihe unbegrenzt.
+Bücher, Hörbücher und Spiele gibt es in der Bibliothek. Auch Werkzeuge kannst du dort oft leihen. Der Jahresbeitrag liegt bei 15 bis 25 €. Dafür ist die Ausleihe unbegrenzt.
 
 ### 9. Verträge jährlich überprüfen und neu verhandeln
-DSL, Mobilfunk, Strom, Gas, Versicherungen: Anbieter belohnen Wechsellust. Nimm dir einen Nachmittag im Jahr. Die Optimierung bringt oft über **800 €** Netto-Ersparnis.
+DSL, Mobilfunk, Strom, Gas, Versicherungen: Anbieter belohnen Wechsellust. Nimm dir einen Nachmittag im Jahr. Die Optimierung bringt oft über **800 €** Netto-Ersparnis.
 
 ### 10. Cashback- und Bonusprogramme clever mitnehmen
-Kaufst du online sowieso ein? Dann nutze Cashback-Portale. Du bekommst 2 bis 8 % vom Kaufpreis zurück. Das Geld landet echt auf deinem Konto.
+Kaufst du online sowieso ein? Dann nutze Cashback-Portale. Du bekommst 2 bis 8 % vom Kaufpreis zurück. Das Geld landet echt auf deinem Konto.
 
 ## Beispiel: Monatliche Alltagsersparnis im Detail
 
@@ -110,11 +110,11 @@ Wer diese Aufteilung einhält, baut jeden Monat Vermögen auf. Ganz ohne Verzich
 
 ## Psychologie, die Budgets sprengt
 
-**Mental Accounting.** 80 € „vom Bonus“ fühlen sich leichter an als 80 € vom Gehalt. Behandle jeden Euro gleich. Sonst frisst der Bonus deinen Plan.
+**Mental Accounting.** 80 € „vom Bonus“ fühlen sich leichter an als 80 € vom Gehalt. Behandle jeden Euro gleich. Sonst frisst der Bonus deinen Plan.
 
 **Abo-Trägheit.** 9,99 € tun nicht weh. Zwölf Abos tun weh. Einmal im Quartal die Lastschriften vorlesen – laut. Was du nicht erklären kannst, fliegt.
 
-**Soziale Ansteckung.** Dein Freundeskreis lebt die Brunch-Routine. Du musst nicht aussteigen. Du kannst rotieren. Mal kochst du selbst. Mal geht ihr raus. Mal spazieren. Das kostet 15 € statt 55 €.
+**Soziale Ansteckung.** Dein Freundeskreis lebt die Brunch-Routine. Du musst nicht aussteigen. Du kannst rotieren. Mal kochst du selbst. Mal geht ihr raus. Mal spazieren. Das kostet 15 € statt 55 €.
 
 **Belohnung mit Konsum.** Nach einem harten Monat darfst du dir etwas gönnen. Nimm das Geld aus dem 30-Prozent-Topf. Nicht aus dem Notgroschen. Wer die Gönnung einplant, bleibt frei. Wer sie gegen den Plan erzwingt, dreht die alte Schleife.
 
@@ -140,8 +140,8 @@ Nein, ganz im Gegenteil. Du streichst unnötige Ausgaben. Du kürzt überteuerte
 ### Was ist das Prinzip „Pay yourself first“?
 Überweise deine Sparrate direkt am Zahltag. Nutze einen Dauerauftrag auf ein Sparkonto. Warte nicht bis zum Monatsende. Sonst ist das Geld oft weg.
 
-### Wie spare ich am schnellsten die ersten 1.000 €?
-Verkaufe, was du nicht brauchst. Kündige sofort 3 Abos. Koche einen Monat lang selbst. Das bringt dich schnell auf 1.000 €.
+### Wie spare ich am schnellsten die ersten 1.000 €?
+Verkaufe, was du nicht brauchst. Kündige sofort 3 Abos. Koche einen Monat lang selbst. Das bringt dich schnell auf 1.000 €.
 
 ---
 

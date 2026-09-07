@@ -58,7 +58,7 @@ Beim Buchen zählt das Timing. Ein magisches Datum gibt es nicht. Doch meine Buc
 
 Buche Kurzstrecken 6 bis 8 Wochen vorher. Für New York oder Bangkok nimm 3 bis 5 Monate. Zu früh kostet einen Aufschlag. Zu spät bleiben nur teure Restplätze.
 
-Auch der Wochentag zählt. Freitagabend und Montagmorgen sind teuer. Viele Pendler fliegen dann. Ich fliege gern dienstags oder mittwochs. Die Maschinen sind leerer. Der Preis sinkt oft um 20 bis 40 € je Strecke.
+Auch der Wochentag zählt. Freitagabend und Montagmorgen sind teuer. Viele Pendler fliegen dann. Ich fliege gern dienstags oder mittwochs. Die Maschinen sind leerer. Der Preis sinkt oft um 20 bis 40 € je Strecke.
 
 **Faustregel:** Buche Inlandsflüge rund sechs Wochen und Langstreckenflüge etwa vier Monate im Voraus. So triffst du den besten Punkt beim Preis-Leistungs-Verhältnis.
 
@@ -81,7 +81,7 @@ Die Preise bei Flügen gehen weit auseinander. Ich habe meine Buchungen von 2023
 | 8 Wochen vor Abflug | Billigflieger (ohne Koffer) | 85 € |
 | 4 Monate vor Abflug | Direktflug (Linie) | 130 € |
 
-Der Last-Minute-Preis war fast dreimal so hoch. Ich buchte 8 Wochen vorher für 165 €. Handgepäck war schon drin. Beim Billigflieger hätte der Koffer extra gekostet. Vergleiche immer den Endpreis. Inklusive aller Extras.
+Der Last-Minute-Preis war fast dreimal so hoch. Ich buchte 8 Wochen vorher für 165 €. Handgepäck war schon drin. Beim Billigflieger hätte der Koffer extra gekostet. Vergleiche immer den Endpreis. Inklusive aller Extras.
 
 
 
@@ -120,7 +120,7 @@ So gehst du vor:
 
 Deutschland hat viele Flughäfen. Die Preisunterschiede sind oft groß. Gebühren und Billig-Anbieter machen das. Ein Wechsel des Airports spart viel. Mehr dazu beim [Geld sparen im Alltag](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/).
 
-Frankfurt–London war an meinem Wunschtag teuer. Ich prüfte Hahn und Köln/Bonn. Die Anreise war länger. Ich sparte 80 € pro Person. Bei einer Familie werden daraus hunderte Euro.
+Frankfurt–London war an meinem Wunschtag teuer. Ich prüfte Hahn und Köln/Bonn. Die Anreise war länger. Ich sparte 80 € pro Person. Bei einer Familie werden daraus hunderte Euro.
 
 Rechne die Anreise immer mit ein. Parken und Bahn fressen die Ersparnis. Nimm Busse oder Rail-and-Fly. Dann lohnt sich der Umweg wirklich.
 

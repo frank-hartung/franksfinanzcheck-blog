@@ -74,7 +74,7 @@ Ein Beispiel zeigt, wie viel du sparen kannst. Wir rechnen eine Woche Mietwagen 
 | September (Nebensaison) | 210,00 € | 120,00 € | 330,00 € |
 | **Ersparnis** | **240,00 €** | **30,00 €** | **270,00 €** |
 
-Das Beispiel zeigt: Das richtige Zeitfenster spart fast die Hälfte. Die 270 € Differenz kannst du gut nutzen. Gönn dir vor Ort etwas Schönes. Oder verlängere deine Reise um ein paar Tage.
+Das Beispiel zeigt: Das richtige Zeitfenster spart fast die Hälfte. Die 270 € Differenz kannst du gut nutzen. Gönn dir vor Ort etwas Schönes. Oder verlängere deine Reise um ein paar Tage.
 
 ## Die Tankregelung: Fair geht vor
 
@@ -90,7 +90,7 @@ Hebe die Tankquittung der letzten Füllung auf. Manche Vermieter behaupten spät
 
 Es gibt Stolperfallen, die viele übersehen. Fehler Nummer eins: die Debitkarte. Viele Vermieter wollen eine echte Kreditkarte mit Prägung. Ohne Kreditkarte musst du oft eine teure Zusatzversicherung vor Ort kaufen. Nur so bekommst du den Wagen überhaupt.
 
-Auch das ist ein Irrtum: Der Zweitfahrer ist selten inklusive. Meist kostet jeder zusätzliche Fahrer eine Tagesgebühr. Wollt ihr euch beim Fahren abwechseln? Dann sucht Angebote mit freiem Zweitfahrer. Das spart oft 10 bis 15 € pro Tag.
+Auch das ist ein Irrtum: Der Zweitfahrer ist selten inklusive. Meist kostet jeder zusätzliche Fahrer eine Tagesgebühr. Wollt ihr euch beim Fahren abwechseln? Dann sucht Angebote mit freiem Zweitfahrer. Das spart oft 10 bis 15 € pro Tag.
 
 Denk an die Abholzeit. Du sagst 10:00 Uhr an und kommst erst um 14:00 Uhr? Dann kann die Reservierung verfallen. Bei Flugverspätungen: Melde dich sofort beim Vermieter. Gib bei der Buchung deine Flugnummer an. So plant er deine Ankunft besser und hält das Auto bereit.
 
@@ -139,7 +139,7 @@ Fährst du nur vom Flughafen zum Hotel und zurück? Dann kann so ein Tarif ein e
 
 Überschreitest du jedoch die Grenze, zahlst du für jeden Zusatzkilometer oft kräftig drauf.
 
-Rechne deine Route vorher grob bei Google Maps nach. Nimm 20 % Puffer dazu. Im Urlaub verfährt man sich gern. Oder du machst einen spontanen Abstecher. Die Freiheit des Mietwagens ist der größte Luxus auf Reisen.
+Rechne deine Route vorher grob bei Google Maps nach. Nimm 20 % Puffer dazu. Im Urlaub verfährt man sich gern. Oder du machst einen spontanen Abstecher. Die Freiheit des Mietwagens ist der größte Luxus auf Reisen.
 
 ## Die Rückgabe: So vermeidest du Stress am Ende
 

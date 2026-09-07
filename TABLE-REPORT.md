@@ -1,9 +1,11 @@
 # 📊 TABLE-REPORT (table_guard.py)
 
-**Stand:** 2026-09-04 17:55 UTC · Modus: FIX
-**Dateien:** 4 · **Funde:** 0 · **Auto-Heilungen:** 0
+**Stand:** 2026-09-07 18:56 UTC · Modus: FIX
+**Dateien:** 2 · **Funde:** 1 · **Auto-Heilungen:** 0
 
-🎉 Alle Tabellen struktur-konsistent und zellen-sauber.
+## Fundstellen
+
+- `content/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/index.md` Z.86: **T1 Spalten-Anzahl wackelt [4, 4, 5, 5, 5, 5]**
 
 ---
 _T1 Struktur · T2 Link-Splitter (auto) · T3 Rest-Muell · T4 Bereiche. Sabotage -> Exit 2._

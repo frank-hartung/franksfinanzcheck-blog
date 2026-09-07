@@ -26,7 +26,7 @@ pinwand: "Versicherungen clever wechseln & sparen"
 
 Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung dabei. 10, 15 oder gar 25 Prozent. Genau jetzt beginnt die wichtigste Phase. Die Rede ist von der **Wechselsaison zwischen August und November**.
 
-**30. November, 23:59 Uhr:** Bis dahin muss deine Kündigung beim alten Versicherer sein. Nur so wird der neue Vertrag zum 1. Januar wirksam. Wer den Stichtag verpasst, zahlt ein Jahr zu viel. Ich habe meine Autoversicherung in zehn Jahren fünfmal gewechselt. Der Beitrag hat sich halbiert. Wie das geht, zeige ich dir hier. Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr. Und zwar ohne Verlust an Deckung.
+**30. November, 23:59 Uhr:** Bis dahin muss deine Kündigung beim alten Versicherer sein. Nur so wird der neue Vertrag zum 1. Januar wirksam. Wer den Stichtag verpasst, zahlt ein Jahr zu viel. Ich habe meine Autoversicherung in zehn Jahren fünfmal gewechselt. Der Beitrag hat sich halbiert. Wie das geht, zeige ich dir hier. Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr. Und zwar ohne Verlust an Deckung.
 
 
 ---
@@ -42,7 +42,7 @@ Bevor du vergleichst, solltest du verstehen, was du überhaupt vergleichst. Eine
 - **Teilkasko (TK):** Freiwillig. Deckt Schäden am eigenen Fahrzeug durch Diebstahl, Glasbruch, Sturm, Hagel, Blitz, Brand, Wildunfall und Marderbiss.
 - **Vollkasko (VK):** Erweitert die Teilkasko um selbst verschuldete Unfallschäden am eigenen Fahrzeug und Vandalismus. Empfehlenswert für Fahrzeuge bis etwa 8 bis 10 Jahre Alter.
 
-**Faustregel:** Auto bis 5 Jahre? Dann Vollkasko. 5 bis 10 Jahre? Teilkasko reicht. Älter als 10 Jahre? Dann genügt oft die Haftpflicht. Das gilt, wenn der Wagen noch mehr als 3.000 € wert ist.
+**Faustregel:** Auto bis 5 Jahre? Dann Vollkasko. 5 bis 10 Jahre? Teilkasko reicht. Älter als 10 Jahre? Dann genügt oft die Haftpflicht. Das gilt, wenn der Wagen noch mehr als 3.000 € wert ist.
 
 ## Mein eigener Spar-Erfolg: von 1.040 € auf 412 €
 
@@ -62,20 +62,20 @@ Die Ersparnis hat zwei Quellen. Ein Teil kommt von der höheren Schadenfreiheits
 
 ### 1. Die richtige Selbstbeteiligung wählen
 
-Viele fürchten die Selbstbeteiligung (SB). Sie wählen 0 € in TK und VK. Dafür zahlen sie 25 bis 40 % mehr Beitrag. Dabei rechnet sich eine moderate SB fast immer:
+Viele fürchten die Selbstbeteiligung (SB). Sie wählen 0 € in TK und VK. Dafür zahlen sie 25 bis 40 % mehr Beitrag. Dabei rechnet sich eine moderate SB fast immer:
 
 * **Teilkasko:** 150 € SB → ca. 15 bis 20 % günstiger
 * **Vollkasko:** 300 € SB → ca. 10 bis 15 % günstiger
 
-Kannst du im Schadensfall 300 € selbst tragen? Dann sparst du über die Jahre mehr. Deutlich mehr, als du je einzahlst.
+Kannst du im Schadensfall 300 € selbst tragen? Dann sparst du über die Jahre mehr. Deutlich mehr, als du je einzahlst.
 
 ### 2. Werkstattbindung aktivieren
 
-Bei der Werkstattbindung repariert eine Partnerwerkstatt deinen Kaskoschaden. Dafür sparst du **10 bis 20 % Beitrag**. Die Werkstätten sind zertifiziert. Sie nehmen Original-Ersatzteile und geben Garantie. Achtung bei Leasing und Neuwagen: Die Werkstattbindung kann die Herstellergarantie gefährden. Prüfe darum, ob der Versicherer die Garantie sichert.
+Bei der Werkstattbindung repariert eine Partnerwerkstatt deinen Kaskoschaden. Dafür sparst du **10 bis 20 % Beitrag**. Die Werkstätten sind zertifiziert. Sie nehmen Original-Ersatzteile und geben Garantie. Achtung bei Leasing und Neuwagen: Die Werkstattbindung kann die Herstellergarantie gefährden. Prüfe darum, ob der Versicherer die Garantie sichert.
 
 ### 3. Jahreskilometer realistisch ansetzen
 
-Die Prämie hängt stark an der Jahresfahrleistung. Du gibst 15.000 km an, fährst aber nur 11.000? Dann zahlst du im Schnitt 120 € zu viel.
+Die Prämie hängt stark an der Jahresfahrleistung. Du gibst 15.000 km an, fährst aber nur 11.000? Dann zahlst du im Schnitt 120 € zu viel.
 
 * Tipp: Den Tachostand einmal pro Jahr notieren und bei Vertragsabschluss den **Durchschnitt der letzten zwei bis drei Jahre** angeben.
 * Eine nachträgliche Korrektur nach unten ist meist möglich, zu viel gezahlte Beiträge werden erstattet.
@@ -91,7 +91,7 @@ Fahrer unter 23 Jahren verteuern die Prämie stark. Ihr Unfallrisiko ist statist
 
 ### 5. Rabattschutz und Fahrerschutz prüfen
 
-Der **Rabattschutz** hält deine SF-Klasse nach einem Unfall. Er kostet 10 bis 15 % Aufpreis. Für Fahrer mit hoher SF-Klasse (ab SF 20) lohnt er sich. Ein einziger Unfall kann dort hunderte Euro kosten.
+Der **Rabattschutz** hält deine SF-Klasse nach einem Unfall. Er kostet 10 bis 15 % Aufpreis. Für Fahrer mit hoher SF-Klasse (ab SF 20) lohnt er sich. Ein einziger Unfall kann dort hunderte Euro kosten.
 
 ### 6. Die Schadenfreiheitsklasse (SF-Klasse) richtig einordnen
 
@@ -154,9 +154,9 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 
 ## Stichtag 30.11. – der Kalender, der 800 € wert sein kann
 
-Kfz-Verträge laufen zum Kalenderjahr. Die Kündigung muss meist bis 30.11. raus. Bei manchen Verträgen gilt schon der 30.09. Wer im Oktober vergleicht, hat Ruhe. Wer am 29.11. startet, macht Fehler. Dann fehlt die SF-Klasse oder die Werkstattbindung.
+Kfz-Verträge laufen zum Kalenderjahr. Die Kündigung muss meist bis 30.11. raus. Bei manchen Verträgen gilt schon der 30.09. Wer im Oktober vergleicht, hat Ruhe. Wer am 29.11. Startet, macht Fehler. Dann fehlt die SF-Klasse oder die Werkstattbindung.
 
-Übernimm die SF-Klasse aus der Vorversicherung. Schätze sie nicht. Prüfe die Zweitwagenregelung. Halte den Fahrerkreis eng. Gib die Kilometer ehrlich an, plus 2.000 km Puffer. Die Werkstattbindung spart 10 bis 20 %. Sie bindet dich an ein Netz. Bei einem 8 Jahre alten Auto ist das oft okay. Beim Leasing prüfe die Bedingungen.
+Übernimm die SF-Klasse aus der Vorversicherung. Schätze sie nicht. Prüfe die Zweitwagenregelung. Halte den Fahrerkreis eng. Gib die Kilometer ehrlich an, plus 2.000 km Puffer. Die Werkstattbindung spart 10 bis 20 %. Sie bindet dich an ein Netz. Bei einem 8 Jahre alten Auto ist das oft okay. Beim Leasing prüfe die Bedingungen.
 
 Ein 30-Minuten-Vergleich im Oktober schlägt jeden „Treue-Rabatt“. Der ist in Wahrheit ein Aufschlag fürs Nicht-Wechseln.
 
@@ -166,12 +166,12 @@ Ein 30-Minuten-Vergleich im Oktober schlägt jeden „Treue-Rabatt“. Der ist i
 
 Die SF-Klasse ist der größte Hebel. Nach der Regionalklasse. Falsch übertragen heißt falscher Preis.
 
-Nimm die Zweitwagenregelung über den Erstvertrag. Setze den Fahrerkreis eng. Gib Kilometer mit Puffer an. Nimm die Werkstattbindung nur, wenn das Netz passt. Es sollten Werkstätten in deiner Nähe sein. Notiere dir den 30.11. im Kalender. Vergleiche in KW 42, nicht in KW 48.
+Nimm die Zweitwagenregelung über den Erstvertrag. Setze den Fahrerkreis eng. Gib Kilometer mit Puffer an. Nimm die Werkstattbindung nur, wenn das Netz passt. Es sollten Werkstätten in deiner Nähe sein. Notiere dir den 30.11. Im Kalender. Vergleiche in KW 42, nicht in KW 48.
 
 
 ## Fazit: Ein 30-Minuten-Vergleich, der sich auszahlt
 
-Der **Kfz-Versicherungsvergleich** ist ein starker Sparhebel. 30 bis 45 Minuten Arbeit bringen hunderte Euro. Über mehrere Jahre sind das leicht **1.500 € bis 4.000 €**. Nutze die Wochen bis zum 30.11. Prüfe deinen Tarif. Wechsle, wenn es sich lohnt.
+Der **Kfz-Versicherungsvergleich** ist ein starker Sparhebel. 30 bis 45 Minuten Arbeit bringen hunderte Euro. Über mehrere Jahre sind das leicht **1.500 € bis 4.000 €**. Nutze die Wochen bis zum 30.11. Prüfe deinen Tarif. Wechsle, wenn es sich lohnt.
 
 **Weiterlesen:** [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) · [Wohngebäudeversicherung Vergleich: Worauf du achten musst](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/) · [Pillar: Versicherungen](../../pillar/versicherungen/)
 

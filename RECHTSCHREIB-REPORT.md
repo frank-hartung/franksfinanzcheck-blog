@@ -1,6 +1,6 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am 2026-09-04 – 35 Artikel geprüft, 235 Funde, 17 korrigiert, 218 offen.
+> **Automatisch** erzeugt am 2026-09-07 – 37 Artikel geprüft, 357 Funde, 24 korrigiert, 333 offen.
 
 ## Offene Punkte
 
@@ -27,34 +27,34 @@
 - `Unbekanntes Wort: „unfallträchtigen“ (Vorschläge: –)`
 - `Unbekanntes Wort: „unversicherten“ (Vorschläge: –)`
 - `Unbekanntes Wort: „PDFs“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Einmalprämien“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Verivox“ (Vorschläge: –)`
 - `Unbekanntes Wort: „Premium-Router“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Einmalprämien“ (Vorschläge: –)`
+- `Unbekanntes Wort: „anzukreuzen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „MagentaEINS“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Wechslern“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Vorteilswelt“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Hardware-Bundles“ (Vorschläge: –)`
 - `Unbekanntes Wort: „NetCologne“ (Vorschläge: –)`
-- `Unbekanntes Wort: „A-Discount“ (Vorschläge: –)`
-- `Unbekanntes Wort: „aufgeschaltet“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Koaxial“ (Vorschläge: –)`
+- `Unbekanntes Wort: „wegzuholen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Anbieterwechselauftrag“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Cashback-Bedingungen“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Anbieterwechsels“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Upstream-Geschwindigkeit“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Smart-Home-Geräte“ (Vorschläge: –)`
+- `Unbekanntes Wort: „anbieterunabhängige“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Gmail“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Outlook“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Posteo“ (Vorschläge: –)`
+- `Unbekanntes Wort: „rausgeholt“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Discount-Marke“ (Vorschläge: –)`
+- `Unbekanntes Wort: „bonusberechtigt“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Portierungsauftrags“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Cashback-Betrag“ (Vorschläge: –)`
+- `Unbekanntes Wort: „Cashback-Portal“ (Vorschläge: –)`
+- `Unbekanntes Wort: „BEHG“ (Vorschläge: –)`
+- `Unbekanntes Wort: „durchreichen“ (Vorschläge: –)`
 - `Unbekanntes Wort: „Gasanbieterwechsel“ (Vorschläge: –)`
-- `Unbekanntes Wort: „durchgereicht“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Gasanbieterwechsel“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Gasanbieterwechsel“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Starkregenereignisse“ (Vorschläge: –)`
-- `Unbekanntes Wort: „ineinandergreifen“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Phishing-Schäden“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Premium-Tarif“ (Vorschläge: –)`
-- `Unbekanntes Wort: „PDFs“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Marker“ (Vorschläge: –)`
-- `Unbekanntes Wort: „PDFs“ (Vorschläge: –)`
-- `Unbekanntes Wort: „nachzumelden“ (Vorschläge: –)`
-- `Unbekanntes Wort: „sicherheitsorientierte“ (Vorschläge: –)`
-- `Unbekanntes Wort: „rausgeht“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Schufa-Klausel“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Gasanbieterwechsel“ (Vorschläge: –)`
-- `Unbekanntes Wort: „vollumfänglichen“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Gasanbieterwechsel“ (Vorschläge: –)`
-- `Unbekanntes Wort: „Vierkantschlüssel“ (Vorschläge: –)`
-- `Unbekanntes Wort: „unbeheizten“ (Vorschläge: –)`
-- … und 168 weitere
+- … und 283 weitere
 
 ---
 *Erzeugt von scripts/spellcheck.py*

@@ -99,7 +99,7 @@ Portale zeigen Preise. Die Wahrheit steckt in den Bedingungen. Prüfe vor dem Ab
 - **Kurzfristige Kündigung nach Schaden:** Darfst du nach einem Schaden zum Stichtag wechseln? Die meisten Tarife erlauben das – ein starkes Zeichen für gute Konditionen.
 - **Bewegungsmelder-Rabatt:** Wer eine Alarmanlage oder einen Bewegungsmelder besitzt, bekommt oft fünf Prozent Nachlass. Das lässt sich leicht nachrüsten.
 
-Ergänzend hilft der Blick in meine Ratgeber zur [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) und zur [Wohngebäudeversicherung](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/). Die Haftpflicht schützt dich vor Forderungen anderer. Die Gebäudeversicherung brauchen Eigentümer. Die Hausratversicherung sichert deine Sachen. Zusammen ergeben die drei ein solides Fundament.
+Ergänzend hilft der Blick in meine Ratgeber zur [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) und zur [Wohngebäudeversicherung](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/). Die Haftpflicht [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor Forderungen anderer. Die Gebäudeversicherung brauchen Eigentümer. Die Hausratversicherung sichert deine Sachen. Zusammen ergeben die drei ein solides Fundament.
 
 ## Wann sich eine Hausratversicherung wirklich lohnt
 
@@ -120,7 +120,7 @@ Der Wechsel geht in vier Schritten:
 3. **Sonderkündigungsrecht prüfen.** Wenn dein Versicherer den Beitrag erhöht oder die Leistungen verschlechtert, hast du ein außerordentliches Kündigungsrecht – oft innerhalb eines Monats nach der Mitteilung. Das gilt auch dann, wenn die Erhöhung nur wenige Euro beträgt. Nach einem gemeldeten Schaden darfst du ebenfalls außerordentlich kündigen.
 4. **Den neuen Vertrag sorgfältig ausfüllen.** Alle Zimmer und Kellerräume angeben, Wertgegenstände ehrlich auflisten und den Fragebogen nicht über das Internet aus dem Gedächtnis ausfüllen. Wer die Wohnfläche zu niedrig angibt, spart zwar Beitrag, riskiert aber im Schadenfall die Unterversicherungs-Prüfung.
 
-Viele fürchten eine Lücke beim Wechsel. Doch die neue Police beginnt genau am Tag nach der alten. Du musst nur das Ende richtig abstimmen. Eine Schadenfreiheitsklasse wie beim Auto gibt es hier nicht.
+Viele fürchten eine Lücke beim Wechsel. Doch die neue Police beginnt genau am Tag nach der alten. Du musst nur das Ende richtig abstimmen. Eine [Schadenfreiheitsklasse](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) wie beim Auto gibt es hier nicht.
 
 Nutzt du einen Vergleichsrechner, wisse: Die günstigsten Tarife haben nicht immer die besten Bedingungen. Sortiere nach Leistung, nicht nur nach Preis. Nutze Filter für wichtige Punkte wie grobe Fahrlässigkeit.
 
@@ -137,7 +137,7 @@ Mit dieser Liste findest du Schutz, der im Ernstfall trägt – ohne zu viel Bei
 
 ## Häufige Fragen zur Hausratversicherung
 
-**Was ist der Unterschied zwischen Hausrat- und Wohngebäudeversicherung?** Die Hausratversicherung sichert deine beweglichen Sachen: Möbel, Elektronik, Kleidung. Die Gebäudeversicherung sichert das Haus: Wände, Dach, feste Einbauten. Eigentümer brauchen beide. Mieter nur die Hausratversicherung.
+**Was ist der Unterschied zwischen Hausrat- und [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/)?** Die Hausratversicherung sichert deine beweglichen Sachen: Möbel, Elektronik, Kleidung. Die Gebäudeversicherung sichert das Haus: Wände, Dach, feste Einbauten. Eigentümer brauchen beide. Mieter nur die Hausratversicherung.
 
 **Muss ich jede einzelne Sache angeben?** Nein. Du vereinbarst eine Summe anhand der Wohnfläche. Nur sehr teure Dinge wie Schmuck trägst du gesondert ein.
 

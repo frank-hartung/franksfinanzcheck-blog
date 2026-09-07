@@ -24,7 +24,7 @@ pin_description: "*Werbung | Dein Notfall-Polster auf dem Girokonto verliert jed
 pinwand: "Budget & Haushaltskasse: clever planen"
 ---
 
-Nach Jahren mit Nullzinsen ist das **Tagesgeld** 2026 wieder attraktiv. Das Girokonto bringt 0,0 %, das Sparbuch oft unter 0,5 %. Viele Banken zahlen dagegen **1,8 bis 3,2 %** – bei täglicher Verfügbarkeit und ohne Kursrisiko. Für den **Notgroschen** ist Tagesgeld darum ideal. Wo es die hohen Zinsen gibt, wie die Einlagensicherung funktioniert und welche Fallen lauern, zeige ich dir jetzt.
+Nach Jahren mit Nullzinsen ist das **Tagesgeld** 2026 wieder attraktiv. Das Girokonto bringt 0,0 %, das Sparbuch oft unter 0,5 %. Viele Banken zahlen dagegen **1,8 bis 3,2 %** – bei täglicher Verfügbarkeit und ohne Kursrisiko. Für den **Notgroschen** ist Tagesgeld darum ideal. Wo es die hohen Zinsen gibt, wie die Einlagensicherung funktioniert und welche Fallen lauern, zeige ich dir jetzt.
 
 ---
 
@@ -71,7 +71,7 @@ Die Europäische Zentralbank (EZB) hat die Zinsen zwischen 2022 und 2024 stark a
 
 ## So funktioniert die EU-Einlagensicherung
 
-Jede Bank in der EU sichert Einlagen bis **100.000 € pro Person und Institut** ab. Geht eine Bank pleite, zahlt der Fonds binnen sieben Werktagen. Wichtig für Tagesgeld-Sparer:
+Jede Bank in der EU sichert Einlagen bis **100.000 € pro Person und Institut** ab. Geht eine Bank pleite, zahlt der Fonds binnen sieben Werktagen. Wichtig für Tagesgeld-Sparer:
 
 - **Gemeinsame Konten:** Bei einem Gemeinschaftskonto gilt die Sicherung für **jeden** Kontoinhaber einzeln, also bis zu 200.000 €.
 - **Mehrere Konten bei derselben Bank:** Sie werden bei der Einlagensicherung zusammengezählt.
@@ -130,7 +130,7 @@ Stand: August 2026, eigene Recherche und öffentliche Vergleichsportale. Zinsen 
 
 ## Rechenbeispiel: Was bringt das Tagesgeld konkret?
 
-Angenommen, du hast einen **Notgroschen von 15.000 €**:
+Angenommen, du hast einen **Notgroschen von 15.000 €**:
 
 | Anlageform | Zinssatz | Zinsertrag pro Jahr |
 |:---|---:|---:|
@@ -140,7 +140,7 @@ Angenommen, du hast einen **Notgroschen von 15.000 €**:
 | Top-Tagesgeld | 3,00 % | 450,00 € |
 | Festgeld 12 Monate | 3,30 % | 495,00 € |
 
-Der Unterschied zwischen „totem Geld auf dem Girokonto“ und „aktiv geparktem Tagesgeld“ sind **450 € im Jahr**. Das ist ein Urlaub oder die Prämie mehrerer Versicherungen.
+Der Unterschied zwischen „totem Geld auf dem Girokonto“ und „aktiv geparktem Tagesgeld“ sind **450 € im Jahr**. Das ist ein Urlaub oder die Prämie mehrerer Versicherungen.
 
 ## Schritt-für-Schritt: So eröffnest du ein Tagesgeldkonto
 
@@ -170,20 +170,20 @@ Wichtig: Der Notgroschen gehört **nicht** in Aktien oder Krypto. Im Ernstfall m
 
 ## Fazit: Tagesgeld ist der unterschätzte Basis-Baustein
 
-Tagesgeld ist nicht aufregend. Doch es kann, was sonst nichts kann: **sichere, täglich verfügbare Zinsen**. Mit 1,8 bis 3,2 % parkst du deinen Notgroschen 2026 wieder sinnvoll. Ein Vergleich alle 6 bis 12 Monate kostet 20 Minuten und bringt oft 300 bis 500 € im Jahr.
+Tagesgeld ist nicht aufregend. Doch es kann, was sonst nichts kann: **sichere, täglich verfügbare Zinsen**. Mit 1,8 bis 3,2 % parkst du deinen Notgroschen 2026 wieder sinnvoll. Ein Vergleich alle 6 bis 12 Monate kostet 20 Minuten und bringt oft 300 bis 500 € im Jahr.
 
 **Weiterlesen:** [Kostenloses Girokonto finden](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) · [Frugalismus-Tipps für mehr Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · [Pillar: Konto & Karten](../../pillar/konto-karten/)
 
 ## Häufige Fragen
 
 ### Wie hoch sind die Tagesgeldzinsen aktuell?
-Im August 2026 liegen die Zinsen je nach Anbieter bei etwa 1,8 bis 3,2 % pro Jahr. Neukunden-Angebote können kurz darüber liegen.
+Im August 2026 liegen die Zinsen je nach Anbieter bei etwa 1,8 bis 3,2 % pro Jahr. Neukunden-Angebote können kurz darüber liegen.
 
 ### Ist mein Geld auf einem Tagesgeldkonto wirklich sicher?
-Ja. In der EU sind Einlagen bis 100.000 € pro Person und Bank gesichert. Bei einem Gemeinschaftskonto gilt das für jeden Inhaber, also bis 200.000 €.
+Ja. In der EU sind Einlagen bis 100.000 € pro Person und Bank gesichert. Bei einem Gemeinschaftskonto gilt das für jeden Inhaber, also bis 200.000 €.
 
 ### Muss ich Tagesgeld-Zinsen versteuern?
-Ja, Zinsen sind Kapitalerträge. Doch pro Person gibt es einen Freibetrag von 1.000 € im Jahr. Bei einem Paar sind es 2.000 €.
+Ja, Zinsen sind Kapitalerträge. Doch pro Person gibt es einen Freibetrag von 1.000 € im Jahr. Bei einem Paar sind es 2.000 €.
 
 ### Wie schnell komme ich an mein Geld?
 Du überweist den Betrag auf dein Girokonto. Meist ist er am nächsten Werktag da.
