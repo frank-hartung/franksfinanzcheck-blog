@@ -293,7 +293,7 @@ t.group('H8 · Diagnose-Schnittstelle für den Störungsfall');
   const keys = ['version', 'mode', 'reading', 'trackReady', 'speechSupported', 'voiceCount',
     'maleVoice', 'everStarted', 'muteStop', 'speechFloorCps', 'measured', 'chromeKeepAlive', 'trackProbe'];
   keys.forEach((k) => t.ok('Diagnose kennt „' + k + '“', Object.prototype.hasOwnProperty.call(d, k)));
-  t.eq('Version geführt', d.version, '2026.09.10');
+  t.eq('Version geführt', d.version, '2026.09.11');
   t.eq('Ohne Tonspur: Browser-Pfad', d.mode, 'speech');
   t.ok('Stille-Sonde ohne Web Audio still deaktiviert', d.trackProbe.attached === false);
   t.ok('Männliche Stimme gebunden', d.maleVoice.de === true);

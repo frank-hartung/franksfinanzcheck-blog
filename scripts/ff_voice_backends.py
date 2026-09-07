@@ -135,7 +135,12 @@ ENGINE_ORDER = ["edge", "piper"]
 # (männlicher Nachrichtensprecher Conrad, Style serious), kein EN-Zweig
 # mehr, zusätzlich Wortuhr (WordBoundary-Timings) pro Chunk in der
 # Tonspur-Konfiguration. Alle Spuren der DE+EN-Ära werden neu vertont.
-RECIPE_VERSION = "ff-voice-2026.09.10"
+# 11.09.2026: Bump nach dem Germanisierungs-Glossar (Befund 07.09.2026:
+# englische Fachbegriffe kippten auf englische Aussprache — Code-
+# Switching). Jeder Fremdbegriff geht in deutscher Lautschreibung auf
+# das Manuskript; alle Spuren mit englisch ausgesprochenen Wörtern
+# werden automatisch neu vertont.
+RECIPE_VERSION = "ff-voice-2026.09.11"
 
 # ---------------------------------------------------------------------------
 # Prosodie-Regie — spiegelbildlich zu PROSODY in static/premium/ff-voice.js
@@ -247,6 +252,339 @@ _ENTITIES = [
 ]
 
 
+# ---------------------------------------------------------------------------
+# NUR-DEUTSCH-AUSSPRACHE — Germanisierungs-Glossar (Befund 07.09.2026)
+# ---------------------------------------------------------------------------
+# Der Fehler: Mehrsprachige Neuronalstimmen (Edge de-DE-Conrad/Florian,
+# Google/Browser-Stimmen) erkennen englische Wörter an der Schreibung und
+# kippen mitten im deutschen Satz auf die ENGLISCHE Aussprache (Code-
+# Switching) — „Homepage“ klingt dann wie „Hoampeidsch“, „Service“ wie
+# „Sörwiss“, „Download“ wie „Daunlood“ mit englischen Vokalen.
+#
+# Die High-End-Lösung der Sprecherziehung (so arbeitet auch der
+# Nachrichtenfunk mit Fremdwörtern): Die Stimme bekommt die Begriffe in
+# deutscher LAUTSCHREIBUNG auf das Manuskript. Die Schreibung lenkt jede
+# Stimme — Edge-Conrad, Edge-Florian, Piper Thorsten und die Browser-
+# stimmen — zuverlässig in die deutsche Aussprache, ohne SSML (das Piper
+# nicht kennt) und ohne sprachliche Code-Wechsel.
+#
+# Jeder Eintrag: (Original-Lautfolge, deutsche Sprechschreibung).
+# Groß-/Kleinschreibung egal; Wortgrenzen (\b) verhindern Treffer in
+# deutschen Komposita; Mehrwort-Einträge sind nur über Leerzeichen/
+# Bindestrich verkoppelt. REIHENFREIHEIT ist egal — die Muster werden
+# automatisch längste-zuerst sortiert, damit „home-office“ nicht über
+# „office“ verliert. WORTGLICH gespiegelt im Reader
+# (static/premium/ff-voice.js, GERMANIZE). Das Paritäts-Gate prüft beide.
+_GERMANIZE_PAIRS = [
+    # —— Mehrwort-Marken und Begriffe (zuerst, längste Kette) ——
+    ("apple watch", "äppel wotsch"),
+    ("apple pay", "äppel peh"),
+    ("smart watch", "smart wotsch"),
+    ("smart-watch", "smart wotsch"),
+    ("smartwatch", "smartwotsch"),
+    ("social media", "soschl miedia"),
+    ("live stream", "leif schtrihm"),
+    ("live-stream", "leif schtrihm"),
+    ("livestream", "leifschtrihm"),
+    ("online banking", "onlein bänking"),
+    ("online-banking", "onlein bänking"),
+    ("onlinebanking", "onleinbänking"),
+    ("e banking", "i bänking"),
+    ("e-banking", "i bänking"),
+    ("ebanking", "ibänking"),
+    ("onlineshop", "onleinschopp"),
+    ("online-shop", "onlein schopp"),
+    ("online shop", "onlein schopp"),
+    ("home office", "hom offis"),
+    ("home-office", "hom offis"),
+    ("homeoffice", "homoffis"),
+    ("home page", "hom peitsch"),
+    ("home-page", "hom peitsch"),
+    ("homepage", "hompeitsch"),
+    ("black friday", "bleck freidä"),
+    # —— Marken / Plattformen ——
+    ("instagram", "instakramm"),
+    ("facebook", "feisbuk"),
+    ("whatsapp", "wots äpp"),
+    ("youtube", "jutjub"),
+    ("spotify", "schpotifei"),
+    ("ebay", "i beh"),
+    ("paypal", "pehpal"),
+    ("iphone", "ei fohn"),
+    ("ipad", "ei päd"),
+    ("airpods", "ehr pods"),
+    # —— Technik / Internet ——
+    ("smartphone", "smartfohn"),
+    ("blockchain", "bloktschehn"),
+    ("blockchains", "bloktschehns"),
+    ("dashboard", "däschbord"),
+    ("downloads", "daunlohts"),
+    ("download", "daunloht"),
+    ("uploads", "aplohts"),
+    ("upload", "aploht"),
+    ("updates", "apdehts"),
+    ("update", "apdeht"),
+    ("upgrades", "apgrehds"),
+    ("upgrade", "apgrehd"),
+    ("backups", "bäk aps"),
+    ("backup", "bäk ap"),
+    ("resets", "rie setts"),
+    ("reset", "rie sett"),
+    ("browser", "brauser"),
+    ("routers", "ruhter"),
+    ("router", "ruhter"),
+    ("hotspots", "hotspotts"),
+    ("hotspot", "hotspott"),
+    ("providers", "proweiders"),
+    ("provider", "proweider"),
+    ("roaming", "rohming"),
+    ("websites", "websaits"),
+    ("website", "websait"),
+    ("laptops", "leptopps"),
+    ("laptop", "leptopp"),
+    ("desktops", "desktopps"),
+    ("desktop", "desktopp"),
+    ("tablets", "tebblets"),
+    ("tablet", "tebblet"),
+    ("wallets", "wollets"),
+    ("wallet", "wollet"),
+    ("accounts", "ekaunts"),
+    ("account", "ekaunt"),
+    ("logins", "loggins"),
+    ("login", "loggin"),
+    ("logout", "logaut"),
+    ("cookies", "kuckis"),
+    ("cookie", "kucki"),
+    ("cloud", "klaud"),
+    # —— Sozial / Content ——
+    ("newsletter", "njusletter"),
+    ("followers", "folohrer"),
+    ("follower", "folohrer"),
+    ("hashtags", "heschtecks"),
+    ("hashtag", "heschteck"),
+    ("postings", "pohstings"),
+    ("posting", "pohsting"),
+    ("channels", "tschennels"),
+    ("channel", "tschennel"),
+    ("stories", "schtorris"),
+    ("story", "schtorry"),
+    ("reels", "riels"),
+    ("reel", "riel"),
+    ("streams", "schtrihms"),
+    ("streaming", "schtrihming"),
+    ("streamen", "schtrihmen"),
+    ("streamt", "schtrihmt"),
+    ("stream", "schtrihm"),
+    ("podcasts", "pottkasts"),
+    ("podcast", "pottkast"),
+    ("feeds", "fiehds"),
+    ("feed", "fiehd"),
+    ("rankings", "renkings"),
+    ("ranking", "renking"),
+    ("traffic", "trefik"),
+    ("leads", "lieds"),
+    ("lead", "lied"),
+    ("content", "kontent"),
+    ("chats", "tschetts"),
+    ("chatten", "tschetten"),
+    ("gechattet", "getschettet"),
+    ("chat", "tschett"),
+    ("blogs", "bloggs"),
+    ("blog", "blogg"),
+    ("apps", "äpps"),
+    ("app", "äpp"),
+    ("gecheckt", "getschekt"),
+    ("checken", "tscheken"),
+    ("checkt", "tschekt"),
+    ("checks", "tscheks"),
+    ("check", "tscheck"),
+    # —— Business / Finanzen ——
+    ("fintech", "fintek"),
+    ("startups", "schtart aps"),
+    ("startup", "schtart ap"),
+    ("start-ups", "schtart aps"),
+    ("start-up", "schtart ap"),
+    ("crowdfunding", "krautfanding"),
+    ("funding", "fanding"),
+    ("cashback", "käsch beck"),
+    ("cash", "käsch"),
+    ("trading", "trehding"),
+    ("trader", "trehder"),
+    ("broker", "brohker"),
+    ("banking", "bänking"),
+    ("business", "bissnis"),
+    ("service", "sörwis"),
+    ("support", "sepport"),
+    ("coaching", "kotsching"),
+    ("coaches", "kotschis"),
+    ("coach", "kotsch"),
+    ("feedback", "fiehdbäck"),
+    ("meetings", "mietings"),
+    ("meeting", "mieting"),
+    ("workshops", "wörkschopps"),
+    ("workshop", "wörkschopp"),
+    ("shoppen", "schoppen"),
+    ("shopping", "schopping"),
+    ("shops", "schopps"),
+    ("shopper", "schopper"),
+    ("shop", "schopp"),
+    ("sales", "sehls"),
+    ("sale", "sehl"),
+    ("leasing", "liesing"),
+    ("tracking", "trekking"),
+    ("tracker", "trekker"),
+    ("fake", "fehk"),
+    # —— Einzelbegriffe mit hohem Code-Switching-Risiko ——
+    ("news", "njus"),
+    ("online", "onlein"),
+    ("offline", "offlein"),
+    ("live", "leif"),
+    ("office", "offis"),
+    ("emails", "i mehls"),
+    ("email", "i mehl"),
+    ("e-mails", "i mehls"),
+    ("e-mail", "i mehl"),
+    ("watchlist", "wottsch list"),
+    ("watchlists", "wottsch lists"),
+    ("keyword", "kiwört"),
+    ("keywords", "kiwörter"),
+    ("backlinks", "bek links"),
+    ("backlink", "bek link"),
+    ("features", "fiehtschers"),
+    ("feature", "fiehtscher"),
+    ("repeater", "ri pieters"),
+    ("viral", "wiral"),
+    ("code", "koot"),
+    ("speed", "schpiet"),
+    ("power", "pauer"),
+    ("hotline", "hottlain"),
+    ("prepaid", "prie pehd"),
+    # —— Befund 07.09.2026: Hochfrequenz-Fremdwörter aus den Artikeln ——
+    # (aus dem Content-Bestand ermittelt; nur laut-sichere Eindeutschungen,
+    # geprüft gegen deutsche Homonyme — „cash“ bleibt „käsch“, „Cache“
+    # wird „kesch“; „ping“ und „hosting“ sind nach Duden bereits deutsch
+    # und bleiben unangetastet.)
+    ("smart home", "smart hohm"),
+    ("smart-home", "smart hohm"),
+    ("standby", "ständbei"),
+    ("stand-by", "ständbei"),
+    ("gaming", "gehming"),
+    ("gamer", "gehmer"),
+    ("phishing", "fisching"),
+    ("runway", "ranwei"),
+    ("cookieless", "kuckilos"),
+    ("privacy", "preiwessi"),
+    ("resolver", "ressolwer"),
+    ("cluster", "klaster"),
+    ("discounter", "diskaunter"),
+    ("cache", "kesch"),
+    ("caches", "kesche"),
+    ("banner", "bänner"),
+    ("timing", "teiming"),
+    ("access", "äksess"),
+    ("mesh", "mesch"),
+    ("tools", "tuhls"),
+    ("tool", "tuhl"),
+    ("excel", "exel"),
+    ("user", "juser"),
+    ("mails", "mehls"),
+    ("mail", "mehl"),
+    ("logfiles", "lokfeils"),
+    ("logfile", "lokfeil"),
+    ("logs", "loks"),
+    ("log", "lok"),
+]
+
+
+# Flektions-Suffixe: die beiden Endungen, die im Deutschen an englische
+# Fremdwörter treten — Plural/Genitiv „-s“ („Providers“, „Services“,
+# „Apps“) und die schwache Adjektiv-/Dativ-Endung „-n“ („des Providers
+# …“ nein: „dem Newsletter“ z. B. „Newslettern“, „Homeofficen“ selten).
+# Das Suffix wird im Muster MIT erfasst und an die Lautschreibung
+# ANGEHÄNGT (es ist bereits deutsch und wird von der Stimme korrekt
+# gesprochen) — so muss nicht jede Beugungsform eigens im Glossar stehen.
+_FLECT_SUFFIXES = ("s", "n")
+
+
+def _flected_pairs():
+    """Glossar + automatisch abgeleitete Flektionsformen (nur -s/-n)."""
+    pairs = list(_GERMANIZE_PAIRS)
+    seen = {src.lower() for src, _ in pairs}
+    for src, dst in _GERMANIZE_PAIRS:
+        if " " in src or "-" in src:
+            continue                      # Mehrwort/Merkeintrag: nicht beugen
+        if not src or not src[-1].isalpha():
+            continue
+        for suf in _FLECT_SUFFIXES:
+            fsrc = src + suf
+            if fsrc.lower() in seen:
+                continue                    # explizite Form (z. B. „cookies“)
+            seen.add(fsrc.lower())
+            pairs.append((fsrc, dst + suf))
+    return pairs
+
+
+def _compile_germanize():
+    """Übersetzt das Glossar in (Regex, Ersetzung)-Paare, längste Muster
+    zuerst — so gewinnt „home-office“ gegen „office“ und „newsletter“
+    gegen „news“. Mehrwort-Muster koppeln Wörter über Leerzeichen ODER
+    Bindestrich (Schreibschwankungen im Blog)."""
+    pairs = sorted(_flected_pairs(), key=lambda p: len(p[0]), reverse=True)
+    compiled = []
+    for src, dst in pairs:
+        # Leerzeichen im Muster frisst auch den Bindestrich als Variante;
+        # im Ersatz bleibt es ein Leerzeichen (Sprechpause entfällt durch
+        # das spätere Whitespace-Normalisieren nicht, Pausen werden über
+        # die Chunk-Regie gesetzt — ein Leerzeichen ist hier stimmneutral).
+        pattern_text = re.escape(src).replace(r"\ ", r"[\s\-]+")
+        compiled.append((re.compile(r"(?<!\w)" + pattern_text + r"(?!\w)",
+                                    re.IGNORECASE), dst))
+    return compiled
+
+
+_GERMANIZE_RULES = _compile_germanize()
+
+
+def germanize_speech(text: str) -> str:
+    """Erzwingt die DEUTSCHE Aussprache englisch geschriebener Begriffe.
+
+    Die Funktion kennt KEIN Englisch als Zielsprache: sie schreibt nur die
+    Schreibung so um, dass jede TTS-Stimme (Edge-Neural, Piper, Browser)
+    den Begriff nach deutschem Lautsystem spricht — wie ein
+    Nachrichtensprecher, der Fremdwörter im deutschen Satz eindeutscht.
+    Spiegelbildlich identisch im Reader (GERMANIZE_RULES im JS).
+    """
+    out = str(text or "")
+    if not out:
+        return ""
+    for pattern, repl in _GERMANIZE_RULES:
+        out = pattern.sub(lambda m, r=repl: r, out)
+    return out
+
+
+def germanize_spoken_cores():
+    """Wortuhr-Brücke: Kern der Sprechschreibung → Kern der Originalschreibung.
+
+    Nach der Germanisierung spricht die Stimme z. B. „homoffis“ — die
+    Leseanzeige muss aber das rohe Wort „Homeoffice“ im Artikeltext
+    hervorheben. Der Aligner schlägt deshalb den gesprochenen Kern über
+    diese Tabelle auf den rohen Kern zurück. Nur 1:1-Einträge (genau ein
+    Wort ohne Leerzeichen) tragen zur Markierung bei; Mehrwort-Ersetzungen
+    erben den zuletzt verbrauchten rohen Wort-Cursor (Regel 5)."""
+    table = {}
+    for src, dst in _flected_pairs():
+        if " " in src:
+            continue
+        rc = _CORE_FOREIGN.sub("", src.lower().replace("-", ""))
+        nc = _CORE_FOREIGN.sub("", dst.lower())
+        if rc and nc and " " not in nc:
+            table[nc] = rc
+    return table
+
+
+_CORE_FOREIGN = re.compile(r"[^0-9a-zäöüß']+")
+
+
 def _hold(store: list, value: str) -> str:
     store.append(str(value))
     return "\u0000%d\u0001" % (len(store) - 1)
@@ -318,6 +656,13 @@ def normalize_speech(text: str, lang: str = "de") -> str:
         hh, mm = int(m.group(1)), int(m.group(2))
         return _hold(store, "%d Uhr" % hh if mm == 0 else "%d Uhr %d" % (hh, mm))
     out = re.sub(r"\b(\d{1,2}):(\d{2})\s?(Uhr)?\b", time_repl, out)
+
+    # NUR-DEUTSCH-AUSSPRACHE (Befund 07.09.2026): englisch geschriebene
+    # Fach- und Markenbegriffe werden in deutsche Lautschreibung
+    # überführt, bevor die Stimme sie sieht. URLs/Daten/E-Mails sind an
+    # dieser Stelle bereits in Halte-Platzhaltern geborgen und werden
+    # nicht angetastet. Spiegelbild: germanizeSpeech() im Reader.
+    out = germanize_speech(out)
 
     for pattern, repl in RULES_DE:
         out = pattern.sub(repl, out)
@@ -1201,6 +1546,38 @@ def _selftest() -> int:
     check("Nur-Deutsch: Datum bleibt deutsch (TT.MM.JJJJ)",
           normalize_speech("on 02/01/2006", "en") == "on 2. Januar 2006")
     check("DE: % ohne Leerzeichen", normalize_speech("rund 30%", "de") == "rund 30 Prozent")
+
+    # NUR-DEUTSCH-AUSSPRACHE (Befund 07.09.2026): englisch geschriebene
+    # Begriffe MÜSSEN in deutsche Lautschreibung überführt werden, damit
+    # die Stimme nicht mitten im Satz auf Englisch kippt (Code-Switching).
+    check("Germ: Service → sörwis",
+          normalize_speech("Der Service ist gut.", "de") == "Der sörwis ist gut.")
+    check("Germ: Homeoffice → homoffis",
+          normalize_speech("Im Homeoffice arbeitet es sich gut.", "de")
+          == "Im homoffis arbeitet es sich gut.")
+    check("Germ: Download → daunloht",
+          normalize_speech("Jetzt den Download starten.", "de")
+          == "Jetzt den daunloht starten.")
+    check("Germ: Live-Stream mit Bindestrich",
+          normalize_speech("Der Live-Stream läuft.", "de") == "Der leif schtrihm läuft.")
+    check("Germ: Newsletter (mehrdeutig mit news)",
+          normalize_speech("Der Newsletter kommt.", "de") == "Der njusletter kommt.")
+    check("Germ: E-Mail → i mehl, Adresse selbst unangetastet",
+          normalize_speech("E-Mail an test@beispiel.de", "de")
+          == "i mehl an test at beispiel Punkt de")
+    check("Germ: deutsche Komposita werden NICHT ersetzt",
+          "Dienstleistung" in normalize_speech("Die Dienstleistung zählt.", "de"))
+    check("Germ: Check24 bleibt Markenname",
+          "Check24" in normalize_speech("Vergleich bei Check24.", "de"))
+    check("Germ: Plural App → äpps",
+          normalize_speech("Zwei Apps genügen.", "de") == "Zwei äpps genügen.")
+    check("Germ: Großschreibung egal",
+          normalize_speech("CLOUD und Cloud", "de") == "klaud und klaud")
+    cores = germanize_spoken_cores()
+    check("Germ: Wortuhr-Brücke kennt homoffis→homeoffice",
+          cores.get("homoffis") == "homeoffice")
+    check("Germ: Wortuhr-Brücke kennt sörwis→service",
+          cores.get("sörwis") == "service")
 
     # Satzzerlegung
     check("Satz: Abkürzung trennt nicht",
