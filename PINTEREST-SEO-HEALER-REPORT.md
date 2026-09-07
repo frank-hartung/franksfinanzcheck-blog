@@ -1,6 +1,6 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-06 08:44 UTC · **Modus:** FIX
+**Stand:** 2026-09-07 09:30 UTC · **Modus:** FIX
 
 - Artikel: **32**
 - Geheilt: **0**
@@ -49,9 +49,9 @@
 | ✅ | `2026-09-03-hausratversicherung-kosten-leistungen-vergleich` | — |
 | ✅ | `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` | — |
 | ✅ | `2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt` *(draft)* | — |
-| ✅ | `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` *(draft)* | — |
-| ✅ | `2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise` *(draft)* | — |
-| ✅ | `2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh` *(draft)* | — |
+| ✅ | `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` | — |
+| ✅ | `2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise` | — |
+| ✅ | `2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh` | — |
 
 ---
 *Erzeugt von `scripts/pinterest_seo_healer.py` – Teil der FrankAutoOps-Selbstheilung.*
