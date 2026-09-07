@@ -227,6 +227,11 @@ function pageHtml({ speech = 'double', speechMode = 'working', speechVoices = 'm
     <span class="ff-voice-meter__label" id="ff-voice-progress-label">Noch nicht gestartet</span>
     <span class="ff-voice-meter__value" id="ff-voice-progress-value">0 %</span>
   </div>
+  <div class="ff-voice-meter__live" id="ff-voice-live" aria-hidden="true">
+    <span class="ff-voice-meter__live-label" id="ff-voice-live-label">Gerade vorgelesen</span>
+    <span class="ff-voice-meter__live-text" id="ff-voice-now" title=""></span>
+    <span class="ff-voice-meter__pos" id="ff-voice-pos" aria-hidden="true"></span>
+  </div>
   <span class="ff-voice-progress-shell" aria-hidden="true"><span class="ff-voice-progress" id="ff-voice-progress" style="display:block;height:6px;width:0%;background:#facc15"></span></span>
 </div>
 </div></div>

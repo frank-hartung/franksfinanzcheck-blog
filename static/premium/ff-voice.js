@@ -2,8 +2,7 @@
    FranksFinanzcheck — FF Voice Studio (Lesehilfen, Generation 3)
    06.09.2026 — Profi-Agentur-Standard
    ------------------------------------------------------------
-   VORLESEN
-     Zwei garantierte Tonpfade, eine Regie, kein Umschalter:
+   VORLESEN — Zwei garantierte Tonpfade, eine Regie, kein Umschalter:
        (a) STUDIO-TONSPUR — vorab vertonte MP3 (männliche DE-/EN-
            Stimme, serverseitig erzeugt durch
            scripts/ff_voice_audio.py) im nativen HTML5-Player.
@@ -15,6 +14,18 @@
      Männliche Stimme. Deutsch und Englisch VOLLAUTOMATISCH —
      satzniveau-genau geroutet, ohne Sprachumschalter und ohne
      Stimmen-Menü.
+
+   FORTSCHRITTSANZEIGE (Profi-Regie, 07.09.2026)
+     „Was wird gerade vorgelesen?“ Der Meter zeigt nicht nur
+     Prozent und Balken, sondern in einer eigenen Zeile den
+     AKTUELL GESPROCHENEN SATZ (Browser-Engine satzgenau aus den
+     Sprecheinheiten, Studio-Tonspur über die Chunk-/Blockuhr der
+     MP3) plus die Abschnittszählung „Abschnitt n von m“. Die
+     Zeile bleibt während Pause stehen und wird beim Beenden
+     geleert — die Fläche ist dauerhaft reserviert (kein CLS),
+     der Inhalt für Screenreader über aria-valuetext erreichbar.
+     Wortgleich in Layout (ff_voice_toolbar.html) und CSS
+     (ff-voice.css), geprüft durch die Lesehilfen-Gates.
 
    KURZFASSUNG
      Verlagshaus-Kurzfassung im barrierefreien <dialog>:
@@ -60,7 +71,7 @@
      1 · KONFIGURATION
      ============================================================ */
 
-  var VOICE_VERSION = '2026.09.08';
+  var VOICE_VERSION = '2026.09.09';
 
   var cfgEl = doc.getElementById('ff-voice-config');
   if (!cfgEl) return;
@@ -95,6 +106,9 @@
   var progressLabelEl = doc.getElementById('ff-voice-progress-label');
   var progressValueEl = doc.getElementById('ff-voice-progress-value');
   var progressEl = doc.getElementById('ff-voice-progress');
+  var nowLabelEl = doc.getElementById('ff-voice-live-label');
+  var nowEl = doc.getElementById('ff-voice-now');
+  var posEl = doc.getElementById('ff-voice-pos');
 
   if (!bar || !playBtn || !summaryBtn) return;
 
@@ -131,8 +145,10 @@
       finished: 'Vorlesen beendet.', resumedPos: 'Vorlesen an der zuletzt gehörten Stelle fortgesetzt.',
       remaining: 'noch ca. {min} Min.',
       progressIdle: 'Noch nicht gestartet',
+      progressNowLabel: 'Gerade vorgelesen',
+      progressPos: 'Abschnitt {n} von {total}',
       progressModeReady: 'Bereit', progressModeSpeech: 'Gerät', progressModeTrack: 'Studio', progressModePaused: 'Pause', progressModeDone: 'Fertig',
-      progressHeading: 'Überschrift', progressParagraph: 'Abschnitt', progressList: 'Liste', progressQuote: 'Zitat',
+      progressHeading: 'Überschrift', progressParagraph: 'Absatz', progressList: 'Liste', progressQuote: 'Zitat',
       progressCallout: 'Merksatz', progressWarning: 'Hinweis', progressOverview: 'Übersicht',
       progressTableIntro: 'Tabelle im Überblick', progressTableHeader: 'Tabelle · Spalten', progressTableGroup: 'Tabelle · Gruppe',
       progressTableRow: 'Tabelle · Zeile {row} von {total}', progressTableSum: 'Tabelle · Summe', progressTableCta: 'Tabelle · Empfehlung', progressTableOutro: 'Tabellenende',
@@ -206,8 +222,10 @@
       finished: 'Audio playback completed.', resumedPos: 'Resumed from your last listening position.',
       remaining: 'approx. {min} min left',
       progressIdle: 'Not started yet',
+      progressNowLabel: 'Now reading',
+      progressPos: 'Section {n} of {total}',
       progressModeReady: 'Ready', progressModeSpeech: 'Device', progressModeTrack: 'Studio', progressModePaused: 'Paused', progressModeDone: 'Done',
-      progressHeading: 'Heading', progressParagraph: 'Section', progressList: 'List', progressQuote: 'Quote',
+      progressHeading: 'Heading', progressParagraph: 'Paragraph', progressList: 'List', progressQuote: 'Quote',
       progressCallout: 'Callout', progressWarning: 'Note', progressOverview: 'Overview',
       progressTableIntro: 'Table overview', progressTableHeader: 'Table · Columns', progressTableGroup: 'Table · Group',
       progressTableRow: 'Table · Row {row} of {total}', progressTableSum: 'Table · Total', progressTableCta: 'Table · Recommendation', progressTableOutro: 'End of table',
@@ -660,7 +678,10 @@
     if (block.type === 'warning') return T.progressWarning;
     if (block.type === 'callout' || block.type === 'emphasis') return T.progressCallout;
     if (String(block.type || '').indexOf('overview') === 0) return T.progressOverview;
-    if (block.type === 'p' || block.type === 'lead') return trimUiText(block.text || T.progressParagraph, 72);
+    /* Absätze und sonstige Blöcke zeigen ihre ROLLE als Abschnitts-
+       beschriftung; den Wortlaut des gerade gesprochenen Satzes zeigt
+       die „Gerade vorgelesen“-Zeile darunter (Profi-Fortschritt). */
+    if (block.type === 'p' || block.type === 'lead') return T.progressParagraph;
     return trimUiText(block.text || T.progressParagraph, 72);
   }
 
@@ -2120,6 +2141,8 @@
   var activeUnit = null;
   var activeUnitStartedAt = 0;
   var activeUnitElapsedMs = 0;
+  var nowReadingText = '';     // Wortlaut der „Gerade vorgelesen“-Zeile
+  var nowReadingPos = '';      // Abschnittszähler („Abschnitt 3 von 12“)
 
   /* ============================================================
      PHYSIK-DECKEL (Befund 06.09./07.09.2026)
@@ -2195,6 +2218,7 @@
     activeUnitStartedAt = activeUnit ? nowMs() : 0;
     if (activeUnit && activeUnit.block) progressBlock = activeUnit.block;
     syncProgressMeta();
+    updateNowLine();          // „Gerade vorgelesen“ auf den neuen Satz
   }
 
   function activeUnitMs() {
@@ -2221,7 +2245,10 @@
       meter.setAttribute('aria-valuenow', String(Math.round(progressRatio * 100)));
       meter.setAttribute('aria-valuemin', '0');
       meter.setAttribute('aria-valuemax', '100');
-      meter.setAttribute('aria-valuetext', label + ' · ' + percent + ' · ' + progressModeText());
+      var valParts = [label, percent, progressModeText()];
+      if (nowReadingPos) valParts.push(nowReadingPos);
+      if (nowReadingText) valParts.push(T.progressNowLabel + ': ' + trimUiText(nowReadingText, 160));
+      meter.setAttribute('aria-valuetext', valParts.join(' · '));
     }
   }
 
@@ -2253,6 +2280,124 @@
   }
 
   function completeProgress() { paintProgress(1); displayedChars = totalChars; }
+
+  /* ---------- „Gerade vorgelesen“ (Profi-Fortschritt) -----------
+     Der Leser soll wissen, WAS in diesem Moment gesprochen wird:
+       · Browser-Engine: exakt die laufende Sprecheinheit (Satz).
+       · Studio-Tonspur: die zum aktuellen MP3-Zeitpunkt passende
+         Sprecheinheit des Blocks, über die Chunk-Uhr der Tonspur
+         geschätzt (t0/t1 je Block) — blockgenau durch den Vertrag
+         mit dem Generator, satzgenau durch die Zeitproportion.
+     Dazu der Abschnittszähler „Abschnitt n von m“. Die Zeile ist
+     im Layout dauerhaft reserviert (kein CLS) und bleibt beim
+     Pausieren stehen, damit man die Stelle im Text wiederfindet.
+     -------------------------------------------------------------- */
+
+  function blockIndexOf(block) {
+    if (!block) return -1;
+    for (var i = 0; i < blocks.length; i++) { if (blocks[i] === block) return i; }
+    return -1;
+  }
+
+  function progressPosText(bi) {
+    if (!blocks.length || typeof bi !== 'number' || bi < 0) return '';
+    return T.progressPos.replace('{n}', bi + 1).replace('{total}', blocks.length);
+  }
+
+  /* Sprecheinheiten eines Blocks (für die Tonspur-Schätzung).
+     Ergebnis wird je Block gecacht — derselbe Rechenweg wie beim
+     Sprechplan (splitForSpeech + speechNormalize), nie teuer im
+     Ticker. */
+  var trackSentenceCache = {};
+  function sentencesOfBlock(bi) {
+    if (trackSentenceCache[bi]) return trackSentenceCache[bi];
+    var out = [];
+    var b = blocks[bi];
+    if (b) {
+      var pieces = splitForSpeech(speechNormalize(b.text, b.lang), b.lang);
+      for (var i = 0; i < pieces.length; i++) {
+        if (pieces[i] && pieces[i].text) out.push(pieces[i].text);
+      }
+    }
+    trackSentenceCache[bi] = out;
+    return out;
+  }
+
+  /* t0/t1 des Tonspur-Abschnitts, der zu Block bi gehört. */
+  function trackBlockTimeRange(bi) {
+    var t0 = 0;
+    var t1 = trackTotalMs();
+    if (trackChunks.length) {
+      for (var i = 0; i < trackChunks.length; i++) {
+        if (trackChunks[i] && trackChunks[i].b === bi) {
+          t0 = trackChunks[i].t0 || 0;
+          t1 = trackChunks[i].t1 || t1;
+          break;
+        }
+      }
+    }
+    return { t0: t0, t1: t1 };
+  }
+
+  /** Aktuelle Sprecheinheit (Satz) des laufenden Tonspur-Blocks. */
+  function trackSentenceAt(bi, ratio) {
+    var list = sentencesOfBlock(bi);
+    if (!list.length) return '';
+    var total = 0;
+    for (var i = 0; i < list.length; i++) total += String(list[i]).length;
+    if (total <= 0) return list[0];
+    var r = Math.max(0, Math.min(1, ratio || 0));
+    var target = r * total;
+    var acc = 0;
+    for (var j = 0; j < list.length; j++) {
+      acc += String(list[j]).length;
+      if (target <= acc) return list[j];
+    }
+    return list[list.length - 1];
+  }
+
+  /** Liefert { bi, text } für die „Gerade vorgelesen“-Zeile. */
+  function currentNowInfo() {
+    if (mode === 'track' && track) {
+      var bi = blocks[trackBlock] ? trackBlock : (progressBlock ? blockIndexOf(progressBlock) : 0);
+      if (!blocks[bi]) return { bi: -1, text: '' };
+      var t = 0;
+      try { if (track && track.currentTime) t = track.currentTime * 1000; } catch (e) { t = 0; }
+      var rg = trackBlockTimeRange(bi);
+      var ratio = 0;
+      if (rg.t1 > rg.t0) ratio = Math.max(0, Math.min(1, (t - rg.t0) / (rg.t1 - rg.t0)));
+      var text = trackSentenceAt(bi, ratio);
+      if (!text) text = trimUiText(blocks[bi].text || '', 320);
+      return { bi: bi, text: text };
+    }
+    if (activeUnit) return { bi: activeUnit.blockIndex, text: activeUnit.text };
+    if (progressBlock) {
+      var pbi = blockIndexOf(progressBlock);
+      return { bi: pbi, text: trimUiText(progressBlock.text || '', 320) };
+    }
+    return { bi: -1, text: '' };
+  }
+
+  /** Schreibt die Zeile nur, wenn sich Text oder Zähler ändern. */
+  function updateNowLine() {
+    var text = '';
+    var pos = '';
+    if (reading) {
+      var info = currentNowInfo();
+      if (info && info.text) text = trimUiText(info.text, 320);
+      if (info && info.bi >= 0) pos = progressPosText(info.bi);
+    }
+    if (nowEl && text !== nowReadingText) {
+      nowReadingText = text;
+      nowEl.textContent = text;
+      try { nowEl.setAttribute('title', text); } catch (e) {}
+    }
+    if (posEl && pos !== nowReadingPos) {
+      nowReadingPos = pos;
+      posEl.textContent = pos;
+    }
+    syncProgressMeta();
+  }
 
   /* ---------- Restzeit aus demselben Modell -------------------- */
   function updateRemainingFromChars() {
@@ -2327,6 +2472,7 @@
     progressBlock = null;
     syncProgressMeta();
     blocks.forEach(function (b) { if (b.el) b.el.classList.remove('ff-voice-active'); });
+    updateNowLine();          // Zeile leeren (Lesen beendet)
   }
 
   /* ---------- Positionsgedächtnis ----------------------------- */
@@ -2564,6 +2710,7 @@
       paintProgress(t / total);
       updateRemainingFromTime(total - t);
     }
+    updateNowLine();   // „Gerade vorgelesen“ folgt der Tonspur-Uhr
   }
 
   /**
@@ -2609,6 +2756,7 @@
     trackCur = -1;
     progressBlock = blocks[trackBlock] || blocks[0] || null;
     clearActiveUnit();
+    updateNowLine();   // sofort anzeigen, was ab jetzt zu hören ist
     if (track.error) { fallbackToSpeech(T.trackBroken); return; }
     trackSeek(trackBlock);
     var total = trackTotalMs();
@@ -2660,6 +2808,7 @@
     if (track && track.paused) playElement(track);
     highlightBlock(blocks[target]);
     rememberBlock(target);
+    updateNowLine();
   }
 
   /**
@@ -3153,6 +3302,7 @@
     if (playBtn) playBtn.setAttribute('aria-label', hasExplicitMaleVoice() ? T.playAria : (T.playAriaNeutral || T.playAria));
     if (summaryBtn) summaryBtn.setAttribute('aria-label', T.summaryAria);
     if (progressMeterEl) progressMeterEl.setAttribute('aria-label', lang === 'en' ? 'Reading progress' : 'Vorlesefortschritt');
+    if (nowLabelEl) nowLabelEl.textContent = T.progressNowLabel;
     syncProgressMeta();
   }
 
@@ -3160,6 +3310,7 @@
     lang = detectArticleLanguage();
     T = I18N[lang] || I18N.de;
     blocks = collectBlocks();
+    trackSentenceCache = {};   // Tonspur-Schätzung je Lauf frisch aufbauen
     return blocks.length > 0;
   }
 
@@ -3889,7 +4040,9 @@
         displayedChars: Math.round(displayedChars),
         spokenChars: Math.round(spokenChars),
         modeLabel: progressModeText(),
-        blockLabel: progressLabelFromBlock(progressBlock)
+        blockLabel: progressLabelFromBlock(progressBlock),
+        nowReading: nowReadingText.slice(0, 160),
+        position: nowReadingPos
       },
       chromeKeepAlive: CHROME_LIKE,
       blocks: blocks.length,

@@ -38,6 +38,12 @@ t.group('1) Toolbar, Rollen und Beschriftung');
   t.ok('Progress-Meter vorhanden', !!doc.getElementById('ff-voice-meter'));
   t.eq('Initiales Meter-Label DE', doc.getElementById('ff-voice-progress-label').textContent, 'Noch nicht gestartet');
   t.eq('Initialer Meter-Wert DE', doc.getElementById('ff-voice-progress-value').textContent, '0 %');
+  t.ok('„Gerade vorgelesen“-Zeile vorhanden', !!doc.getElementById('ff-voice-now'));
+  t.ok('„Gerade vorgelesen“-Beschriftung vorhanden', !!doc.getElementById('ff-voice-live-label'));
+  t.ok('Abschnittszähler vorhanden', !!doc.getElementById('ff-voice-pos'));
+  t.eq('„Gerade vorgelesen“-Beschriftung DE', doc.getElementById('ff-voice-live-label').textContent, 'Gerade vorgelesen');
+  t.ok('Now-Zeile im Ruhezustand leer', doc.getElementById('ff-voice-now').textContent === '');
+  t.ok('Abschnittszähler im Ruhezustand leer', doc.getElementById('ff-voice-pos').textContent === '');
   t.eq('Startbeschriftung DE', doc.getElementById('ff-voice-play-label').textContent, 'Vorlesen');
   t.eq('Kurzfassung DE', doc.getElementById('ff-voice-summary-label').textContent, 'Kurzfassung');
   t.ok('Ohne Tonspur läuft die Browser-Engine', api.mode === 'speech', 'mode=' + api.mode);
@@ -473,6 +479,10 @@ t.group('9) Wiedergabe: Start, Pause, Fortsetzen, Abschnittssprung');
   t.ok('Status gemeldet', /gestartet|Stimme/.test(doc.getElementById('ff-voice-status').textContent));
   t.eq('Knopf zeigt Pausieren', doc.getElementById('ff-voice-play-label').textContent, 'Pausieren');
   t.ok('data-state=playing', doc.getElementById('ff-voice-bar').getAttribute('data-state') === 'playing');
+  t.ok('„Gerade vorgelesen“ nennt den laufenden Satz', doc.getElementById('ff-voice-now').textContent.length > 0);
+  t.ok('Abschnittszähler startet bei 1',
+    doc.getElementById('ff-voice-pos').textContent === 'Abschnitt 1 von ' + api.blocks.length,
+    'pos=' + doc.getElementById('ff-voice-pos').textContent);
   await sleep(120);
   t.ok('Erste Einheit gesprochen', api.units.length > 0);
   t.ok('Meter-Mode zeigt aktiven Pfad', /Gerät|Studio/.test(doc.getElementById('ff-voice-progress-mode').textContent));
@@ -485,6 +495,7 @@ t.group('9) Wiedergabe: Start, Pause, Fortsetzen, Abschnittssprung');
   t.ok('Status „pausiert“', /pausiert/.test(doc.getElementById('ff-voice-status').textContent));
   t.eq('Meter-Mode zeigt Pause', doc.getElementById('ff-voice-progress-mode').textContent, 'Pause');
   t.ok('Fortschritt bleibt stehen', doc.getElementById('ff-voice-progress').style.width === before);
+  t.ok('„Gerade vorgelesen“ bleibt in Pause sichtbar', doc.getElementById('ff-voice-now').textContent.length > 0);
 
   doc.getElementById('ff-voice-play').click();     // Fortsetzen
   t.ok('Fortgesetzt', api.playing === true);
@@ -503,6 +514,8 @@ t.group('9) Wiedergabe: Start, Pause, Fortsetzen, Abschnittssprung');
   t.eq('Meter-Wert nach Stop wieder 0 %', doc.getElementById('ff-voice-progress-value').textContent, '0 %');
   t.eq('Meter-Mode nach Stop wieder bereit', doc.getElementById('ff-voice-progress-mode').textContent, 'Bereit');
   t.ok('data-state=idle', doc.getElementById('ff-voice-bar').getAttribute('data-state') === 'idle');
+  t.eq('„Gerade vorgelesen“ nach Stop geleert', doc.getElementById('ff-voice-now').textContent, '');
+  t.eq('Abschnittszähler nach Stop geleert', doc.getElementById('ff-voice-pos').textContent, '');
 }
 
 /* ============================================================
@@ -535,8 +548,16 @@ t.group('10) Studio-Tonspur wird bevorzugt – Fallback greift nie ins Leere');
   doc.getElementById('ff-voice-play').click();
   t.ok('Tonspur startet', api.reading === true);
   t.ok('Status nennt die Tonspur', /Tonspur/.test(doc.getElementById('ff-voice-status').textContent));
+  t.ok('Tonspur: „Gerade vorgelesen“ zeigt den Startabschnitt',
+    /Tonspur-Test/.test(doc.getElementById('ff-voice-now').textContent),
+    'now=' + doc.getElementById('ff-voice-now').textContent);
+  t.ok('Tonspur: Abschnittszähler zählt sichtbar',
+    /^Abschnitt 1 von \d+$/.test(doc.getElementById('ff-voice-pos').textContent),
+    'pos=' + doc.getElementById('ff-voice-pos').textContent);
   doc.getElementById('ff-voice-stop').click();
   t.ok('Stoppen möglich', api.reading === false);
+  t.eq('Tonspur: „Gerade vorgelesen“ nach Stop geleert',
+    doc.getElementById('ff-voice-now').textContent, '');
 
   // Tonspur kaputt → Browser-Engine übernimmt, nie Stille
   const audio = doc.querySelector('audio');
