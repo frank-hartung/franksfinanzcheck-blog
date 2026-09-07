@@ -1,44 +1,36 @@
-# 🗞️ Governance-Härtung — Antwort auf Report #206 (07.09.2026)
+# Governance-Härtung 07.09.2026 — Root-Cause „#206" und die neue Betriebsschicht
 
-**Auftrag:** Blog dauerhaft zuverlässiger und robuster machen auf dem Niveau einer
-Profi-Agentur — und den Inhalt des automatisch erzeugten „Governance-Report:
-Redaktionelle & technische Handlungsfelder" (#206) als *Fehler* beseitigen, nicht
-als Dokumentation wegschreiben.
+**Kontext:** Issue #206 war ein automatisch erzeugter Governance-Report der Wache
+`Premium-Governance` (Montag 07:15 MESZ). Er klang nach „drei redaktionelle +
+drei technische Handlungsfelder", gemessen war aber nichts davon. Das Problem
+war die **Governance selbst**, und zwar strukturell: Sie hat sich mit
+Vorwochenständen, Vermutungen und Roh-Exit-Codes selbst alarmiert — und genau
+daraus Duplikat-Issues gebaut (#145 → #206).
 
-**Ausgangslage:** Der Report war keine Schlagzeile über den Blog. Er war eine
-Schlagzeile über die Steuerung selbst: Der wöchentliche Governance-Lauf meldete
-seit Wochen dieselben „Handlungsfelder", die sich nicht aus Messwerten ergaben,
-und produzierte dabei Duplikate (#145 → #206). Für einen Betrieb mit 30+
-Automatisierungen ist das der teuerste Fehler, den man haben kann: **Alarm-Müdigkeit**.
-Ein roter Befund, der zwischen drei Scheinalarmen liegt, wird übersehen.
-
-Die Analyse unten ist so geschrieben, wie eine Agentur ein Post-Mortem abgibt:
-Ursache → Beleg → Maßnahme → Nachweis, dass die Maßnahme wirkt und der Fehler
-nicht zurückkommen kann.
+Dieses Dokument ist der Handover an den Betreiber. Es erklärt pro Baustein,
+was kaputt war, was jetzt anders ist und womit man es nachprüfen kann.
 
 ---
 
-## 1 · Ursachenanalyse (Belege aus dem Bestand)
+## 1. Befund: sieben Ursachen, ein Symptom
 
-| # | Sichtbar in #206 | Ursache im System | Beleg |
-|---|---|---|---|
-| U1 | „Core-Web-Vitals **AMBER** 🟡" in der Scorecard, im selben Lauf meldet `cwv_guard.py` **GREEN** | Die Scorecard war **vor** den Messschritten eingebaut und las `data/cwv_manifest.json` des Vorlaufs. Die Scorecard ist aber ein Verbraucher dieser Manifeste — sie kann nichts Älteres erfinden als „aktuell". Folge: −7 Punkte Score, eine gelbe Zeile und eine Empfehlung („Covers als AVIF/WebP …"), die ins Leere liefen. | `premium-governance.yml` v1: Schritt-Reihenfolge Scorecard (Index 4) vor Decay/CWV/Secrets (5/6/7) |
-| U2 | `PINTEREST_ACCESS_TOKEN` **UNBEKANNT** → „kein Erfolgs-Log (ausstehend…)" | Der einzige Lieferant des Nachweises (`pinterest-ai.yml`, Schritt „Pinterest-Secret-Erfolg vermerken") läuft seit dem 20.08.2026 **nur noch manuell** (`workflow_dispatch`) — die Automatisierung hat Pinnen an den RSS-Auto-Publish abgegeben. Der Nachweis wurde also nie mehr geschrieben. Die Wache meldet „untracked" = AMBER, der Workflow wertete AMBER als Fehlschlag ⇒ Issue. | `pinterest-ai.yml` Trigger-Zeile, `SECRETS-REPORT.md` (v1) |
-| U3 | `GROQ_API_KEY` / `GEMINI_API_KEY` „OK (6d)" | **Nachweis-Wäsche:** der Governance-Lauf vermerkte Erfolg für Keys, die er in diesem Lauf nie benutzt (er misst nur). Die Wache bestätigte sich selbst — der Status war eine Aussage über den Runner, nicht über den Key. | `premium-governance.yml` v1, Schritt „Erfolgreiche Secrets vermerken" |
-| U4 | Issue #145 und #206 mit identischem Titel, eine Woche apart | Das Issue wurde an **Exit-Codes** aufgehängt (`steps.*.outcome == 'failure'`). `awin_provisions.py`/`click_attribution.py`/`pinterest_perf_feedback.py` melden „keine Daten" aber mit Exit 1 — eine Datenlage ist kein Fehler. Außerdem: immer `issues.create`, kein Dedupe, kein Schließen bei Grün. | Issue-Block v1 (actions/github-script), `return 1 if unmatched else 0` |
-| U5 | „Affiliate-Klicks 0 über 0 Artikel", „Awin 0.00 €" | Die Monetarisierungs-Schleife hatte als einzige Datenquelle einen **manuellen Dashboard-Export**. Ohne Automatik steht dort für immer 0. Die Zeilen waren 🟡 markiert, als wäre das ein Content-Problem. | `data/umami_clicks.json` = `[]`, `data/pinterest_perf.yaml` `entries: []` |
-| U6 | (verdeckt) CWV könnte grün melden, ohne dass gebaut wurde | `hugo --minify > /dev/null 2>&1 \|\| true` verschluckt jeden Build-Fehler. Der Wächter fand dann ein leeres/altes `public/`, keine Abweichung, Ausgabe: **GREEN**. Scheinsicherheit ist schlimmer als ein Alarm. | Build-Schritt v1 |
-| U7 | (verdeckt) State-Dateien aus Parallel-Läufen | `data/secrets_state.json` wurde von vier Workflows mit `open(..., "w")` geschrieben — ohne Sperre, ohne atomaren Austausch. Ein Riss im JSON hätte die Wache mit Traceback sterben lassen (Exit ≠ 0 ⇒ wieder ein Issue). | `secrets_age_guard.py` v1 `_save_state` |
-| U8 | (verdeckt, #205-Klasse) | Reports, die `.gitignore` ignoriert, wurden mit `git add` gestagt → harter Abbruch unter `set -e`. | Behoben am 07.09. in `frankautoops-report.yml`; Regel jetzt festgeschrieben (C8) |
+| # | Ursache (vorher) | Woran es im Report sichtbar wurde |
+|---|---|---|
+| U1 | **Reihenfolge.** Der Lauf berechnete die Scorecard *zuerst*, die Messungen (CWV, Decay, Secrets) *danach*. Die Scorecard las also `data/cwv_manifest.json` der Vorwoche. | „Core-Web-Vitals AMBER" in der Scorecard, während der CWV-Wächter im selben Lauf GREEN meldete; −7 Punkte Score, eine Empfehlung „Layout/JS prüfen", die ins Leere lief |
+| U2 | **Vermutung statt Messung** bei Secrets. Geprüft wurde nur die *Datei* `data/secrets_state.json`; geschrieben wurde sie vom jeweiligen KI-Workflow — `pinterest-ai.yml` aber seit dem 20.08. nur noch manuell. Die Governance hat die „6 Tage alt"-Zahlen also nie aktualisiert, nur geerbt. | `PINTEREST_ACCESS_TOKEN UNBEKANNT` → dauerhaft AMBER → *jeder* Lauf meldete „Handlungsfeld" und *jeder* Lauf wollte ein neues Issue |
+| U3 | **Selbstbestätigter Erfolg.** `--record-success GROQ_API_KEY`/`GEMINI_API_KEY` standen im Governance-Lauf, der diese Keys nie benutzt. | „OK (6d)" bedeutete: „dieser Workflow ist mal gelaufen", nicht „der Token funktioniert" |
+| U4 | **Issue-Policy an Exit-Codes gekoppelt.** Jeder Schritt mit Exit 1 erzeugte ein Issue — und „noch keine Daten" (Awin CSV, Umami-Import, Pinterest-Analytics ohne Scope) war Exit 1. | Duplikate; Issue-Titel mit identischem Inhalt, wachsender Kommentar-Thread pro Woche |
+| U5 | **Dauer-„0 Klicks"** in Scorecard und SEO-Briefing, weil die einzige Quelle ein manueller Dashboard-Export war. | „Affiliate-Klicks 0 / Awin 0,00 €" als scheinbarer Befund; Monetarisierungs-Empfehlungen ohne Datenbasis |
+| U6 | **Lückenlose Grün-Malerei.** `hugo --minify … \|\| true` (Build-Fehler wurden verschluckt) und `check_inbound_links.py \|\| true` — CWV konnte ein „grün" melden, ohne dass eine Seite gebaut war. | (nicht sichtbar — das ist die gefährliche Klasse: Alarm ruht auf einer Messung, die nie stattfand) |
+| U7 | **Datenriss im State.** `data/secrets_state.json` wurde von vier Workflows parallel mit `open(..., "w")` geschrieben, ohne Sperre, ohne Atomicity, und `last_success_date` akzeptierte nur ein Datumsformat. | (gelegentlich) Traceback in einem KI-Workflow → dort wieder ein „Workflow-Panne"-Issue |
 
----
-
-## 2 · Maßnahmen
+## 2. Behebung
 
 ### 2.1 Einordnen: Messen → Sehen → Bewerten → Melden
 
-Der Lauf hat jetzt vier Phasen mit klaren Verträgen dazwischen. Das ist die
-eigentliche Behebung von U1/U4 — nicht das Nachziehen einzelner Zahlen.
+Der Lauf hat jetzt vier Phasen mit klaren Verträgen dazwischen (C1–C9 aus
+`scripts/governance_contract.py`). Das ist die eigentliche Behebung von U1/U4 —
+nicht das Nachziehen einzelner Zahlen.
 
 ```
 0 Preflight  →  1 Messen  →  2 Sehen (Scorecard)  →  3 Bewerten (Gate)  →  4 Melden (1 Issue)
@@ -54,167 +46,156 @@ eigentliche Behebung von U1/U4 — nicht das Nachziehen einzelner Zahlen.
     Entscheidung, die der Lauf treffen würde (ein Test, der die Policy beweist,
     ohne ein Issue zu riskieren).
   * `--reset` — ein Ledger gilt nur für den Lauf, der es gefüllt hat. Altlasten
-    (vergessener Schritt, umbenannt, abgebrochen) können nicht mehr wöchentlich
-    dasselbe Issue auslösen; verworfene Einträge bleiben als Hinweis sichtbar.
-* **Issue-Policy** (Regel C4): `gh issue list --label governance` → vorhandenes
-  Issue **aktualisieren** (Body nur bei verändertem Fingerabdruck, sonst Kommentar),
-  sonst neu anlegen; bei meldungsfreier Lage **schließen**. Der Fingerabdruck
-  (`sha256` über Schritt/Code/Anzahl) macht Melden idempotent.
+    können keinen Daueralarm mehr bauen. Verwaiste Einträge (> 26 h) werden
+    verworfen, nicht bewertet.
+  * Ein toter Schritt ist ein Befund: `--reset` + kein `--emit` während des Laufes
+    ⇒ rot („Schritt hat nicht gemeldet"), statt unsichtbar „grün, aber vorgestern".
 
-### 2.2 Secrets-Wache v2 — von „vorhanden" zu „bewiesen" (U2, U3, U7)
+* **Issue-Policy (U4).** Ein Issue bei `red`/`amber` **mit** Befund; bei veränderten
+  Befunden wird das bestehende Issue aktualisiert (Fingerabdruck über
+  `(schritt, code, zahl)`), sonst nur ein Kommentar. Meldungsarme, aber nicht grüne
+  Lage ⇒ ein Kommentar. **Kein Befund ⇒ Issue zu.** Exit-Grün trotz Befund
+  (Zustimm-Schritte) wird ignoriert, Exit-rot ohne Befund wird zur Info
+  („Datenlage offen").
 
-`scripts/secrets_age_guard.py`:
+* **Scorecard (U1, U5).** `scripts/editorial_scorecard.py` läuft zuletzt, liest die
+  frischen Manifeste und kennzeichnet jede Zahl mit ihrer Herkunft: `(Stand 06.09,
+  1d)` oder `STALE (20.08, 18d)` oder `nicht gemessen` — ⚪ statt 🟡, weil eine
+  fehlende Messung keine schlechte Nachricht ist, sondern eine Lücke.
+  Neue Abschnitt **„Datenlagen (Messabdeckung)"**: zeigt den Pipeline-Zustand
+  (nie gelaufen / ok / Fehler / übersprungen) als ℹ️ statt als Alarm.
+  Score-Logik: ⚪ zählt nicht gegen die Agentur, CWV ohne Messung auch nicht
+  (stattdessen −3 „Blindflug"). Lesbarkeit und Klickstrecke haben jetzt eigene
+  Empfehlungen.
 
-* **Live-Probe `--verify`**: ein Head-call pro Kanal — Pinterest `GET /v5/users/me`,
-  Mastodon `GET /api/v1/accounts/verify_credentials`, Groq `GET /v1/models`,
-  Gemini `GET /v1beta/models`, Umami `GET /v1/websites`. Erfolg wird nur bei
-  HTTP 200 vermerkt. Abgelaufener Token (401/403) ⇒ **rot** (`dead`) — der Alarm,
-  den die Wache von Anfang an liefern sollte – statt einer Alterungsvermutung.
-* **Netzwerkfehler sind keine Gesundheit**: `unreachable` ⇒ AMBER im Report, aber
-  ℹ️ in der Policy. Sonst hätte ich den Dauer-Alarm nur durch einen neuen ersetzt
-  (API-Gate, Wartungsfenster). Eskalation läuft über die Altersregel: bleibt der
-  Nachweis aus, kippt `stale` auf **rot**.
-* **Alarm-Kontinuität**: ein in einem Vorlauf abgelehnter Token bleibt rot, bis ein
-  Live-Check ihn bestätigt. Ein einzelner Lauf ohne Netzwerk „heilt" den Kanal nicht.
-* **Nachweis-Provenienz**: `--record-success <VAR> --proof-by <workflow>`; ein
-  Nachweis aus einem Workflow, der das Secret nicht nutzt (`proof_by`-Whitelist in
-  der Registrierung), wird als `foreign_proof`-Hinweis entlarvt statt als Grün.
-* **Robustheit**: alle State-Schreibungen atomar (`tmp` + `os.replace`, `fsync`) und
-  mit `flock` (bei fehlendem `fcntl` wird weitergearbeitet, nicht abgestürzt);
-  Datumsfelder werden tolerant geparst; eine beschädigte State-Datei wird gesichert,
-  neu begonnen und als Befund gemeldet — nicht als Traceback.
-* **Registry erweitert**: `UMAMI_API_TOKEN` (optional) ist jetzt ein registrierter
-  Kanal, damit „Kanal nicht eingerichtet" und „Kanal tot" verschiedene Meldungen sind.
+* **Secrets-Wache v2 (U2, U3, U7).** `scripts/secrets_age_guard.py`:
+  * `--verify` macht **echte Live-Proben** mit den echten Secrets
+    (Pinterest `/v5/users/me`, Mastodon `verify_credentials`, Groq/Gemini `/models`,
+    optional Umami). Erfolg zählt nur bei HTTP 200, Antwort wird length-limited
+    gelesen. Ein abgelehnter Token ist **rot**, nicht mehr „UNBEKANNT".
+  * **Alarm-Kontinuität:** ein gemeldeter `dead` bleibt rot, bis eine Probe ihn
+    bestätigt — ein Lauf ohne Netz heilt den Alarm nicht (das wäre gefährlicher
+    als kein Alarm).
+  * Nachweise tragen **Herkunft** (`--proof-by pinterest-ai.yml`) und
+    **Qualität** (`proven` / `declared` / `declared_foreign` / `legacy`).
+    `--record-success` ohne `--proof-by` wird abgelehnt (U3).
+  * Transiente API-Störung ⇒ `unreachable` = ℹ️, *kein* Issue; die Altersregel
+    eskaliert erst, wenn der Nachweis wirklich ausbleibt (`stale` ⇒ rot).
+  * Optionale Kanäle ohne Secret ⇒ **info** („Kanal nicht eingerichtet, bewusst"),
+    keine Pflicht-Kanäle ohne Secret ⇒ rot — da ist die Wache strenger als vorher.
+  * State: atomar (`tmp` + `os.replace` + `fsync`), `flock` gegen Parallelzugriff,
+    tolerantes Datums-Parsing (`ISO` und `dd.mm.jjjjj`), beschädigter State wird
+    gesichert und gemeldet statt mit Traceback abzurstürzen.
+  * `--quiet` für fremde Workflows (Pinterest/Mastodon): verifizieren und
+    vermerken, aber weder Exit-Code noch Report schreiben.
 
-`data/secrets_state.json` v2-Felder (rückwärtskompatibel gelesen):
-`last_verified`, `verify` (`ok|dead|unreachable`), `verify_detail`, `proven_by`,
-`quality` (`proven|declared|declared_foreign`).
+* **CWV-Wächter (U6).** `scripts/cwv_guard.py`: `--strict-build` (und
+  `--min-html N`) — fehlt der `public/`-Baum oder ist er dünner als das Minimum,
+  heißt der Befund `build_missing`/`build_thin` und ist **rot**, nicht grün. Das
+  Manifest enthält jetzt `build_measured` (Zeitstempel der Messung), und der Lauf
+  schreibt zusätzlich `data/cwv_history.jsonl` → `--trend` zeigt, ob die Seite über
+  Wochen langsamer wird, statt nur den Moment zu melden. Reine Hinweise
+  (`hinweis`) alarmieren nicht mehr.
 
-### 2.3 Scorecard: eine Wahrheit mit Herkunft (U1, U4, U5)
+* **Umsatz-Strecke (U5).** `scripts/umami_clicks.py` **(neu)** zieht die Klicks
+  selbst aus Umami (`/api/v1/events/sessions` mit `referrer=/go/{slug}/`), pro
+  Artikel, Pillar und Typ aggregiert, und schreibt `data/umami_clicks.json` im
+  gewachsenen Schema. Es akzeptiert Cloud- *und* self-hosted-Payloads (beide
+  Feldordnungen, `results`-Wrapper, alternative Property-Namen), redigiert Token
+  aus jeder Fehlermeldung, und **überschreibt bestehende Daten nicht** mit einem
+  API-Fehler. Website-ID kommt aus `hugo.toml` → kein zweiter Pflegeraum.
+  Kein Secret ⇒ dokumentierter Skip (`reason`), *keine* erfundene „0 Klicks".
+  Awin bleibt bei `data/awin_transactions.csv` (API hat keinen dokumentierten
+  Programm-Zugriff; eine „Anbindung", die nicht prüfbar ist, wäre genau die
+  Fehlerklasse U2/U3).
 
-`scripts/editorial_scorecard.py`:
+### 2.2 Die Dauerhaftigkeit: `scripts/governance_contract.py` (neu)
 
-* CWV-Zeile liest Manifest **und** Alter: `STALE (nd)` bzw. „nicht gemessen" bzw.
-  „nur static/ (Build ausgefallen)" ⇒ ⚪, Abzug 3 statt 7, Empfehlung nennt die
-  Messlücke statt einer erfundenen Performance-Diagnose.
-* Secrets-Zeile wertet den Report des Wächters (Policy), nicht eine eigene
-  Zweitrechnung; ein v1-Report ohne `Nachweis`-Spalte wird als Format-Altlast
-  erkannt (⚪ + Hinweis) — Verbraucher dürfen nicht strenger sein als Erzeuger.
-* Lampen ehrlich: Entwürfe `0 → 🟢` (war dauerhaft 🟡), Monetarisierung ohne Daten
-  `⚪` (war 🟡), mit Daten nach Schwelle 🟢/🟡.
-* Neu: Abschnitt **„Datenlagen (Messabdeckung)"** — Kennzahl, Quelle, Stand,
-  Bewertung. Die erste Frage eines Chefredakteurs ist nicht „wie gut ist die Zahl",
-  sondern „woher kommt sie und ist sie frisch".
-* Neu: Trend aus `data/scorecard_history.jsonl` („Vorlauf 83 → 90 (+7)"). Ein Score
-  ohne Verlauf ist eine Meinung.
-* Neu: Empfehlungen für die Previously-ignorierten Signale (Lesbarkeit < 70,
-  Umsatz-Pipeline) — Abzug ohne Handlungsempfehlung ist Mobbing an der Automation.
+Einmalige Fixes veralten. Deshalb sind die Lehren als **neun Regeln im Repo**
+abgelegt, die bei jedem Push/PR (Qualitäts-Gate) und als Preflight im
+Governance-Lauf geprüft werden — `docs/GOVERNANCE-KONTRAKT.md` ist das
+zugehörige, automatisch gepflegte Regelwerk:
 
-### 2.4 CWV-Wächter: „nicht gemessen" ≠ „in Ordnung" (U6)
+| Regel | Sichert ab gegen |
+|---|---|
+| C1 Reihenfolge | Scorecard vor den Messungen (U1), Reports die niemals gelesen werden |
+| C2 Bau-Grundlage | `\|\| true` an einem Build/Mess-Schritt; Meldung ans Gate (U6) |
+| C3 Messkette | Jeder `--emit`-Name hat seinen Absender im Workflow (U2) |
+| C4 Issue-Policy | `--decide` vor dem Issue-Schritt, kein `gh issue create` ohne Policy, **Dedupe-Pflicht** (U4) |
+| C5 Nachweis-Provenienz | `--record-success` in der Governance, `--proof-by` Pflicht (U3) |
+| C6 Selbsttests | Wache ohne `--selftest` oder mit fehlgeschlagenem Selbsttest |
+| C7 Datenkonsistenz | Manifest, Report und Scorecard müssen dieselbe Ampel zeigen (U1 als Regressionsfalle) |
+| C8 Commit-Hygiene | `git add` auf ignorierte/unversionierte Pfade (#205) |
+| C9 Secret-Leak-Schutz | kein Secret-Material in Reports/`data/*.json` |
 
-`scripts/cwv_guard.py`: `--strict-build` (CI-Modus), `--min-html`, Befunde
-`build_missing` / `build_thin`, Manifest-Feld `build_measured`, Verlauf
-`data/cwv_history.jsonl` + `--trend`, atomares Manifest. Exit 1 nur noch bei
-tatsächlicher Abweichung (rot/gelb), reine Hinweise (info) lassen den Lauf ruhig.
+Beweisrichtung: `governance_contract.py --selftest` füttert dem Checker
+Kunst-Workflows (vorher/nachher). Er muss den alten Stand *finden* und den neuen
+*in Ruhe lassen* — Regeln, die nur bei ihrem eigenen Fehler schweigen, sind
+Deko. Zusätzlich werden die Selbsttests der Wächter (C6) mit dem realen Python
+des Läufers ausgeführt.
 
-### 2.5 Umsatz-Datenpipeline statt Bauchgefühl (U5)
+### 2.3 Workflows
 
-`scripts/umami_clicks.py` **(neu)**: holt `affiliate_click`-Events aus Umami
-(Cloud `https://api.umami.is/v1` mit `x-umami-api-key`, self-hosted via
-`UMAMI_API_BASE`), verarbeitet die Versionen unterschiedlichen API-Forms mit
-(`eventProperties`-Liste wie flache Felder), aggregiert nach
-(slug, article, pillar) und schreibt `data/umami_clicks.json` im Schema, das
-`click_attribution.py` bereits konsumiert. Dazu `data/umami_clicks.meta.json`
-(Stand, Quelle, Grund).
-
-* **Website-ID aus `hugo.toml`**, nicht aus einem zweiten Secret — eine Wahrheit.
-* Kein Token/keine ID ⇒ dokumentierter Skip (`status: skipped`, Grund), nie eine
-  Schein-Null. Bei API-Störung bleibt der letzte Bestand stehen.
-* Token-Material wird aus jeder Fehlermeldung redigiert (`_redact`).
-
-### 2.6 Dauer der Maßnahmen (damit es nicht zurückkommt)
-
-* `scripts/governance_contract.py` **(neu)** — neun Regeln als ausführbarer
-  Vertrag, geprüft im Qualitäts-Gate (jeder Push/PR) **und** als Preflight im
-  Governance-Lauf:
-
-  | Regel | Vertrag |
-  |---|---|
-  | C1 Reihenfolge | Scorecard (View) nach allen Messschritten — U1 für immer zu |
-  | C2 Bau-Grundlage | kein `\|\| true` am Hugo-Build; Ergebnis geht ans Gate |
-  | C3 Messkette | jede Gate-Kennung wird aus einem Workflow gefüttert |
-  | C4 Issue-Policy | Entscheidung nur über `--decide`; Dedupe-Pflicht; Close-Pfad Pflicht |
-  | C5 Nachweis | `--record-success` nur mit `--proof-by`, nur registrierte Secrets, nie im Governance-Lauf selbst |
-  | C6 Selbsttests | alle zehn Wachen haben `--selftest` und bestehen |
-  | C7 Datenkonsistenz | Manifest ↔ Report ↔ Scorecard zeigen dieselbe Ampel (oder ⚪ mit Begründung) |
-  | C8 Commit-Hygiene | kein `git add` auf ignorierte, unversionierte Dateien (#205) |
-  | C9 Leak-Schutz | kein Token-Material in Reports/`data/*.json` |
-
-  Der Checker prüft in **beide Richtungen**: er meldet Fehler, und er meldet
-  Scheinsicherheit. Die `--selftest`-Fälle füttern ihm Kunst-Workflows (vorher/nachher),
-  damit die Regeln nicht verstubbt werden.
-* `pinterest-watchdog.yml`: tägliche Live-Probe des Pinterest-Tokens (der Kanal mit
-  30-Tage-Verfall wird nicht mehr wöchentlich, sondern täglich bewiesen).
-* `pinterest-ai.yml` / `social-ai.yml`: blindes Vermerken ersetzt durch
-  `--verify-only … --quiet`; der Krypto-Key behält `--record-success` mit `--proof-by`.
-* `.gitignore`: `*.lock`, `data/*.tmp-*` (Laufzeit-Nebenprodukte der Wachen).
+* `premium-governance.yml` v2 — Preflight (10 Selbsttests + Vertrag) → Bauen →
+  Messen → Sehen → Bewerten → Issue (idempotent) → Summary → Commit. Jeder
+  Mess-Schritt endet beim Gate, `::error::`-Annotationen nur bei Befund.
+* `link-check.yml` (Qualitäts-Gate) — führt die Governance-Selbsttests **bei
+  jedem Push/PR** aus, plus Vertrag; der Hugo-Bau bleibt als Messgrundlage nötig.
+* `pinterest-watchdog.yml` — die tägliche Wache prüft den Pinterest-Token jetzt
+  **live** (`--verify --quiet`), nicht nur die Env-Variable; das
+  „Secrets-Report"-Artifact wird mit `if: always()` gesichert, damit ein
+  geblockter Alarm nicht zu einem Pip-Abbruch *und damit zu einem weiteren
+  Issue* führt. Das war die Nebenursache von #206.
+* `pinterest-ai.yml` / `social-ai.yml` — `--verify` vor der Veröffentlichung
+  (toter Token ⇒ Abbruch mit Runbook, Netzstörung ⇒ Warnung), und Erfolg wird nur
+  noch vermerkt, wenn der Post wirklich rausging (`|| true` am „erfolgreich
+  gepostet"-Schritt entfernt), mit `--proof-by`.
+* `.gitignore` — `*.lock` und `data/*.tmp-*`: die Wache erzeugt jetzt
+  Sperr-/Temp-Dateien; `pinterest-watchdog.yml` committed mit `git add -A`, und
+  eine `*.lock` im Repo warf beim Governance-Commit einen Fehler.
 
 ---
 
-## 3 · Verifikation (alles nach dem Stand dieses Commits ausgeführt)
+## 3. Verifikation (dieser Stand)
 
 | Prüfpunkt | Ergebnis |
 |---|---|
-| Selbsttests der 10 Governance-Skripte (`--selftest`) | alle ✅ (`editorial_scorecard`, `cwv_guard`, `secrets_age_guard`, `decay_radar`, `governance_gate`, `governance_contract`, `umami_clicks`, `click_attribution`, `awin_provisions`, `pinterest_perf_feedback`) |
-| Syntax aller `scripts/*.py` (`py_compile`) | ✅ |
-| YAML-Parsing aller 34 Workflows (`yaml.safe_load`) | ✅ |
-| `governance_contract.py` auf dem **vorherigen** Stand (HEAD~ = `2db88bc`) | 🔴 **28 Verletzungen** (C1×6, C2×2, C3×8, C4×4, C5×7, C7×1) |
-| `governance_contract.py` auf dem neuen Stand (inkl. C6 mit Selbsttest-Läufen) | 🟢 0 Verletzungen |
-| Rehearsal über den Bestand: `governance_gate.py --rehearse` | 🟢 Ampel INFO → Aktion `close` (6 Hinweise, 0 Befunde) — der bestehende Report #206 wird beim nächsten Lauf geschlossen, kein neuer öffnet |
-| Simulierter Token-Ausfall (`verify=dead` im State) | 🔴 `dead` → Gate `report`, `--fail-on red` Exit 1, Issue-Body mit Runbook — der Alarm funktioniert, wenn er echt ist |
-| Vorfall „Netzwerk bei der Live-Probe zu" (4 Proben URLError) | 🟢 ℹ️-Ampel INFO, Aktion `none` — kein Alarm aus Infrastruktur-Rauschen |
-| Scorecard nach der Korrektur | **90/100 GREEN** statt 83/100 AMBER, ohne dass ein Artikel angefasst wurde |
+| `--selftest` aller 10 Wachen inkl. neuem Gate, Scorecard, Umami, Vertrag | ✅ |
+| `governance_contract.py` auf **HEAD~** (alter Stand, neue Checker) | 🔴 28 Verletzungen (C1×6, C2×2, C3×8, C4×4, C5×7, C7×1) |
+| `governance_contract.py` auf diesem Stand (inkl. C6-Selbsttests) | 🟢 0 Verletzungen |
+| `governance_gate.py --rehearse` über den Bestand | Ampel INFO → Aktion `close` (0 Befunde, 6 Hinweise, 3 grün) |
+| Simulierter Token-Ausfall (`verify=dead`) | 🔴 `dead` → Issue mit Runbook, `--fail-on red` Exit 1 |
+| Netzwerk zu, Secrets „vermeintlich" da | Ampel INFO, Exit 0, **kein** Issue |
+| Scorecard | **90/100 GREEN** (vorher 83/100 AMBER), Begründung je Zeile |
+| YAML aller 35 Workflows, `py_compile` | ✅ |
 
-Der letzte Punkt ist die Pointe: 7 der 17 Punkte Unterschied waren Messartefakte
-(CWV-Stale 7, Secrets-Format 1, Lampen-Politik), kein Qualitätsverlust des Blogs.
+## 4. Betrieb
 
-## 4 · Betrieb — was du tun solltest (und was nicht)
+* **Einmalig (2 Minuten, optional, aber der eigentliche Umsatz-Hebel):**
+  `UMAMI_API_TOKEN` als Secret setzen (`gh secret set UMAMI_API_TOKEN`, Token in
+  Umami unter *User Settings → API*). Ab dem nächsten Montag stehen echte Klicks
+  in `data/umami_clicks.json`, im `CLICK-REPORT.md` und in der Scorecard.
+  Selbst-hosted: zusätzlich `UMAMI_API_BASE`. Schritt-für-Schritt-Anleitung:
+  `docs/ANLEITUNG-UMAMI-ANALYTICS.md` (Abschnitt „Automatische Klick-Übernahme").
+* **Wöchentlicher Blick (30 Sekunden):** `EDITORIAL-SCORECARD.md` →
+  Zeile „Datenlagen" und Score-Trend. Wenn dort alles 🟢/ℹ️ ist, ist die
+  Automatisierung gesund — unabhängig davon, ob die Redaktion rot steht.
+* **Wenn ein Issue aufgeht:** Der Body listet nur noch Befunde mit Zählwert
+  (z. B. „Token abgelehnt", „State gerissen", „Baum nicht gebaut"). Runbook pro
+  Code steht im Report (`DEAD_TOKEN`, `STATE_STALE`, `STATE_CORRUPT`).
+* **Neue Wache / neuer Kanal?** Drei Dinge, sonst beißt der Vertrag:
+  `--selftest` bauen, im Qualitäts-Gate auflisten, Ergebnis mit
+  `governance_gate.py --emit` melden (sonst C3/C4).
 
-1. **Nichts** zum Reparieren der Governance. Nach dem Merge:
-   `gh workflow run "Premium-Governance"` — ein Lauf, der die Reports im neuen
-   Format erzeugt, #206 schließt und das Ledger füllt.
-2. **Einmalig 2 Minuten für den Umsatz-Hebel:** Umami → *User Settings* → *API* →
-   Key erzeugen → `gh secret set UMAMI_API_TOKEN`. Ab dem nächsten Lauf stehen in
-   Scorecard und `CLICK-REPORT.md` echte Klicks je Artikel/Pillar statt „Datenlage
-   offen". (Anleitung: `docs/ANLEITUNG-UMAMI-ANALYTICS.md`.)
-3. **Awin** bleibt bewusst CSV: Export nach `data/awin_transactions.csv`. Die API
-   wäre möglich, aber ohne dokumentierten Zugriff wäre eine Anbindung ein zweiter
-   stiller Kanal, der nie Daten liefert — und stille Kanäle sind genau die Klasse
-   dieses Berichts.
-4. Echte redaktionelle Baustellen, jetzt ehrlich ausgewiesen (nicht mehr als
-   Technik-Alarm verkleidet): **Ø Lesbarkeit 53.3** (Ziel ≥ 70; Longlist in
-   `python3 scripts/readability_check.py`), **1 Entwurf** in der Warteschleife
-   (`python3 scripts/publish_gate.py`).
+## 5. Was bewusst *nicht* gemacht wurde
 
-## 5 · Grenzen dieser Härtung (fair benannt)
-
-* Die Live-Probe beweist **Zugriff**, nicht **Nutzbringung**: ein Pinterest-Token,
-  der `/users/me` beantwortet, aber keine Pins schreibt, ist weiterhin nur über
-  `PIN-STATUS.md`/Watchdog-Checks sichtbar. Die Wache meldet den Kanal als gesund,
-  wo sie das wirklich belegen kann, und sonst nicht.
-* Die Scorecard misst Lesbarkeit am Bestand (Flesch/Amstad); sie ersetzt kein
-  Lektorat und entscheidet keine Freigaben.
-* `unreachable`-Hinweise sind bewusst nicht alarmierend. Wer eine harte Garantie
-  will, setzt `--strict` (Umami) bzw. behandelt `verify=unreachable` im Report
-  als eigenen Punkt — die Policy ist an einer Stelle definiert
-  (`governance_gate.ACTIONABLE_AMBER` / `INFO_AMBER`), nicht an fünf.
-
----
-
-*Dateien des Sets:* `scripts/governance_gate.py`, `scripts/governance_contract.py`,
-`scripts/umami_clicks.py` (neu); `scripts/secrets_age_guard.py`,
-`scripts/cwv_guard.py`, `scripts/editorial_scorecard.py` (gehärtet);
-`.github/workflows/premium-governance.yml` (v2), `link-check.yml` (Gate),
-`pinterest-watchdog.yml`, `pinterest-ai.yml`, `social-ai.yml` (Nachweise);
-`docs/GOVERNANCE-KONTRAKT.md` (Regelwerk, vom Lauf gepflegt),
-README-Abschnitt „Premium-Governance (v2)".
+* **Keine erfundene Umsatz-Zahl.** Awin bleibt CSV, Pinterest-Analytics braucht
+  den `analytics:read`-Scope. Ein „automatisierter" Import, der still
+  herunterfällt, ist der Rückfall in U2/U5 — die Scorecard zeigt jetzt
+  transparent „Datenlage offen", inklusive was dafür zu tun ist.
+* **Kein Alarm bei Infrastruktur-Wetter.** Netz-API-Störungen sind Hinweise.
+  Rot wird's über die Altersregel, wenn niemand in 7 Tagen mehr messen konnte.
+* **Der Governance-Lauf bleibt grün, wenn er rot meldet.** Das Issue ist der
+  Alarm; der Run trägt die `::error::`-Annotation und den Befund im Job-Summary.
+  Ein roter Run würde vom zentralen Fehler-Alerting ein zweites Issue für
+  dieselbe Lage erzeugen — genau das Doppeln, das wir abschaffen wollen.
