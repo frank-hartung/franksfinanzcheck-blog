@@ -25,6 +25,7 @@ keywords: ["WLAN-Repeater oder Mesh", "WLAN verbessern", "Powerline vs. Mesh", "
 pin_title: "Repeater oder Mesh? So bekommst du WLAN in jeden Winkel"
 pin_description: "*Werbung | Schwaches WLAN im Arbeitszimmer muss nicht sein: Wir vergleichen Repeater, Powerline und Mesh-Systeme – mit Preisen, Vor- und Nachteilen und einer klaren Empfehlung für Mietwohnung, Reihenhaus und Altbau. Jetzt die passende Lösung finden!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
+social_posted: true
 ---
 
 Das Homeoffice ist eingerichtet, der neue Tarif mit 250 Mbit/s gebucht – und trotzdem ruckelt der Video-Call im Arbeitszimmer. Die Leitung ist selten das Problem. Fast immer scheitert es an der letzten Strecke: dem Funknetz zwischen Router und Schreibtisch.

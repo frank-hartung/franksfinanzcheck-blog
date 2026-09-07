@@ -1,8 +1,8 @@
 # 🐘 Mastodon-SEO-Report
 
-> Automatisch: 04.09.2026 19:11 UTC 
+> Automatisch: 07.09.2026 07:25 UTC 
 
-- **Geprüfte Toots:** 22
+- **Geprüfte Toots:** 26
 - **Mit Befund:** 0
 - **Geheilt:** 0
 - **Duplikate (gleicher Artikel, nur gemeldet):** keine
@@ -11,6 +11,10 @@
 
 | Status | Artikel | Befunde | Heilung |
 |---|---|---|---|
+| [117228565216836963](https://mastodon.social/@FranksFinanzcheck/117228565216836963) | `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` | ✓ | — |
+| [117228565100781103](https://mastodon.social/@FranksFinanzcheck/117228565100781103) | `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` | ✓ | — |
+| [117228564968050956](https://mastodon.social/@FranksFinanzcheck/117228564968050956) | `2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise` | ✓ | — |
+| [117228564825366848](https://mastodon.social/@FranksFinanzcheck/117228564825366848) | `2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh` | ✓ | — |
 | [117202940579376559](https://mastodon.social/@FranksFinanzcheck/117202940579376559) | `2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen` | ✓ | — |
 | [117188897097849988](https://mastodon.social/@FranksFinanzcheck/117188897097849988) | `2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann` | ✓ | — |
 | [117188896944541163](https://mastodon.social/@FranksFinanzcheck/117188896944541163) | `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | ✓ | — |

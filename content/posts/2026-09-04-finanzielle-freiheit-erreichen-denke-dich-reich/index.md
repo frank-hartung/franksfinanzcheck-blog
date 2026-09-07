@@ -22,6 +22,7 @@ cover:
   alt: "Finanzielle Freiheit erreichen: Denke dich reich!"
   caption: "Tipp von FranksFinanzcheck"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
+social_posted: true
 ---
 
 5.000 € Nettoverdienst und trotzdem kein Cent am Monatsende übrig? Der Kontostand hängt selten von der Höhe deines Gehaltszettels ab. Deine tief verankerten Denkmuster über Besitz und Konsum entscheiden über deinen Erfolg. Du willst echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) erreichen**?  
