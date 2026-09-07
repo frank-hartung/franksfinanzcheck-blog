@@ -1,7 +1,7 @@
 # 🩺 DOKTOR-REPORT (Oberarzt, Gesamtprognose)
 
-**Stand:** 2026-09-07 18:56 UTC · Modus: GEBURT
-**Wachen behandelt:** 22 · **0-Exit:** 20 · Funde: 2 · Sabotage-Fehler: 0
+**Stand:** 2026-09-07 21:07 UTC · Modus: GEBURT
+**Wachen behandelt:** 22 · **0-Exit:** 19 · Funde: 3 · Sabotage-Fehler: 0
 
 | Wache (Phase) | Zweck | Exit |
 |---|---|---|
@@ -25,12 +25,13 @@
 | `affiliate_marketer.py` (C-Money) | CTA-Routing + Retarget | 0 |
 | `table_guard.py` (B-Semantik) | Tabellen T1-T4 | 1 |
 | `link_guard.py` (C-Money) | Interne Links V1-V2 | 0 |
-| `link_density_guard.py` (D-Ordnung) | Interne Link-Dichte & Duplikate (12.08. Pro-Link-Leck) | 0 |
+| `link_density_guard.py` (D-Ordnung) | Interne Link-Dichte & Duplikate (12.08. Pro-Link-Leck) | 1 |
 | `workspace_guard.py` (D-Ordnung) | Junk/Waisen/Rotation/Billig | 0 |
 
 ## 🟡 Funde (nicht-fatal, dokumentiert)
 - `fazit_schmiede.py`: Fazit- & FAQ-Schmiede mit Selbstheilung
 - `table_guard.py`: Tabellen T1-T4
+- `link_density_guard.py`: Interne Link-Dichte & Duplikate (12.08. Pro-Link-Leck)
 
 ---
 _Oberarzt bleibt bis zuletzt: Er loescht nur ueber die offiziellen Guards; Exit 2 einer Wache -> alles haelt._

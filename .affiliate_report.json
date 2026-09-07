@@ -1,7 +1,7 @@
 {
  "total": 36,
  "errors": 1,
- "fixed": 1,
+ "fixed": 2,
  "posts": [
   {
    "slug": "frugalismus",
@@ -332,17 +332,17 @@
    "ok": false
   },
   {
-   "slug": "2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh",
-   "title": "So bekommst du WLAN in jeden Winkel: Repeater oder",
-   "pillar": "internet-dsl",
-   "fixed": 0,
+   "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+   "title": "Heizkosten senken: Mit diesen Strategien sparst du",
+   "pillar": "strom-sparen",
+   "fixed": 1,
    "errors": [],
    "infos": [],
    "ok": true
   },
   {
-   "slug": "2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen",
-   "title": "Stromfresser finden: Energiediebe im Haushalt stop",
+   "slug": "2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor",
+   "title": "Heizung wartung: So bereitest du dein Heim effizie",
    "pillar": "strom-sparen",
    "fixed": 1,
    "errors": [],

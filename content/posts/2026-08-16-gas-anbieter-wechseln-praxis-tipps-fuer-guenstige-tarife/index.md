@@ -36,7 +36,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Warum viele Menschen zu viel für Gas bezahlen
 
-Die Hauptursache für überhöhte Heizkosten ist schlichte Trägheit und mangelnde Information. Viele Verbraucher befürchten:
+Die Hauptursache für überhöhte [Heizkosten](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/) ist schlichte Trägheit und mangelnde Information. Viele Verbraucher befürchten:
 - **Technische Komplikationen:** Sie glauben fälschlicherweise, dass an Zähler, Rohren oder der Heiztherme gearbeitet werden muss.
 - **Lieferunterbrechungen:** Die Sorge, mitten im Winter in einer kalten Wohnung zu sitzen, ist weit verbreitet – aber rechtlich völlig ausgeschlossen.
 - **Bürokratischer Aufwand:** Man erwartet endlose Formulare und schwierige Verhandlungen mit dem bisherigen Versorger.

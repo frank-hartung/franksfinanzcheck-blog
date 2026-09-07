@@ -24,6 +24,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 ---
 
+
 Stell dir vor: Du kommst nach dem Wochenende nach Hause. Die Tür steht offen. Im Flur liegt dein Laptop, daneben die leere Hülle. Im Schlafzimmer fehlt der Schmuck, im Wohnzimmer der Fernseher. Die Polizei schätzt den Schaden auf 18.000 Euro. Deine Ersparnisse decken das nicht.
 
 Genau dafür gibt es die [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/). Sie ersetzt deinen Hausrat nach einem Einbruch zum Neuwert. Trotzdem zögern viele. Sie halten den Tarif für teuer oder verstehen die Leistungen nicht. Dabei kostet guter Schutz oft weniger als eine Pizza im Monat.

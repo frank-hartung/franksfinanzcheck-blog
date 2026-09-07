@@ -1,7 +1,7 @@
 # 🔗 LINK-REPORT (link_guard.py)
 
-**Stand:** 2026-09-07 18:56 UTC · Modus: FIX
-**Dateien:** 2 · **Geheilte Links:** 0 · **Unheilbare Funde:** 0
+**Stand:** 2026-09-07 21:07 UTC · Modus: FIX
+**Dateien:** 5 · **Geheilte Links:** 0 · **Unheilbare Funde:** 0
 
 🎉 Alle internen Links verifiziert – keine Totstellen.
 

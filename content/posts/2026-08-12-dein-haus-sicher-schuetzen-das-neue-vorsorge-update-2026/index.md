@@ -135,10 +135,8 @@ Die Politik diskutiert über eine Pflicht. Abgeschlossen ist sie nicht. Wer in Z
 
 ## Klauseln, die nach dem Schaden zu spät kommen
 
-- Neuwert statt Zeitwert bei Hausrat  
-- Aufräum‑ und Abbruchkosten ausreichend hoch  
-- Hotelkosten nach Unbewohnbarkeit, mind. 150–200 Tage  
-- Datenrettung und Schlossänderung nach Einbruch  
+- Neuwert statt Zeitwert bei Hausrat - Aufräum‑ und Abbruchkosten ausreichend hoch
+- Hotelkosten nach Unbewohnbarkeit, mind. 150–200 Tage - Datenrettung und Schlossänderung nach Einbruch
 - Ableitungsrohre auf dem Grundstück  
 
 Ein Vorsorge‑Update ist kein neuer Vertrag um des Wechsels willen. Nimm dir einen Nachmittag und lies deine drei PDFs. Frage dich: Würde ich das nach einem Sturm noch fair finden? Wenn nein, vergleiche und ersetze den Vertrag nahtlos.
@@ -156,12 +154,9 @@ Machst du das einmal im Jahr, brauchst du kein gutes Gefühl, sondern eine Liste
 
 ## Checkliste für den Jahres‑Check (Kurz & Knapp)
 
-- [ ] **Versicherungs‑Summe**: Wohnfläche × 650 € = Versicherungssumme prüfen.  
-- [ ] **Elementarschutz**: In den Vertragsbedingungen nach „Zahlungs‑ZUSATZ‑Risiko“ suchen.  
-- [ ] **Selbstbeteiligung**: Ideal 0 €–150 €; höher reduziert Prämie, erhöht aber Eigenanteil.  
-- [ ] **Klausel „grobe Fahrlässigkeit“**: Verzicht muss ausdrücklich stehen.  
-- [ ] **Zusatz‑Sicherungen**: Fahrrad‑Diebstahl, Cyber‑Schutz, Photovoltaik‑Versicherung.  
-- [ ] **Kontakt‑Notfallnummer**: Auf dem Telefon gespeichert, nicht erst im Schadenfall suchen.
+- [ ] **Versicherungs‑Summe**: Wohnfläche × 650 € = Versicherungssumme prüfen. - [ ] **Elementarschutz**: In den Vertragsbedingungen nach „Zahlungs‑ZUSATZ‑Risiko“ suchen.
+- [ ] **Selbstbeteiligung**: Ideal 0 €–150 €; höher reduziert Prämie, erhöht aber Eigenanteil. - [ ] **Klausel „grobe Fahrlässigkeit“**: Verzicht muss ausdrücklich stehen.
+- [ ] **Zusatz‑Sicherungen**: Fahrrad‑Diebstahl, Cyber‑Schutz, Photovoltaik‑Versicherung. - [ ] **Kontakt‑Notfallnummer**: Auf dem Telefon gespeichert, nicht erst im Schadenfall suchen.
 
 ## Häufige Fragen
 
@@ -195,8 +190,7 @@ Alte Verträge schützen bei heutigen Unwettern oft zu wenig. Ersetze sie durch 
 ## Häufige Fragen (Ergänzt)
 
 ### Wie kann ich meine Prämie senken, ohne den Schutz zu reduzieren?
-- **Selbstbeteiligung erhöhen**: 150 € – 300 € senken die Jahresprämie um bis zu 15 %.  
-- **Bündelung**: Kombiniere Hausrat‑, Wohngebäude‑ und Haftpflichtversicherung beim selben Anbieter.  
+- **Selbstbeteiligung erhöhen**: 150 € – 300 € senken die Jahresprämie um bis zu 15 %. - **Bündelung**: Kombiniere Hausrat‑, Wohngebäude‑ und Haftpflichtversicherung beim selben Anbieter.
 - **Risikomanagement**: Installiere Rückstauklappen, Regenwasser‑Sammelsysteme oder ein automatisches Abschalt‑Ventil für die Heizung – manche Versicherer honorieren solche Maßnahmen mit Rabatten von 5 % bis 12 %.
 
 ### Was passiert, wenn ich nach einem Schaden die Police wechsle?
