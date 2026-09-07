@@ -23,12 +23,12 @@ on:
         description: 'TTS-Backend für die Vorlese-Tonspur'
         type: choice
         default: auto
-        options: [auto, edge, piper, groq]
+        options: [auto, edge, piper]
       audio_profile:
-        description: 'Stimmen-Profil (natural = Multilingual v2, narrator = Conrad/Ryan)'
+        description: 'Stimmen-Profil (news = deutscher Nachrichtensprecher, natural = Multilingual v2, narrator = Conrad)'
         type: choice
-        default: natural
-        options: [natural, narrator]
+        default: news
+        options: [news, natural, narrator]
       audio_limit_new:
         description: 'Maximal neu zu vertonende Artikel je Lauf (ignoriert, wenn audio_backfill=true)'
         type: string
@@ -193,20 +193,26 @@ jobs:
         run: hugo --minify
 
       # ================= VORLESE-AUDIO (FF Voice Studio, 05.09.2026) ========
-      # Vorab vertonte Artikel mit einer MÄNNLICHEN DE-/EN-Stimme – wie bei
-      # zeit.de. Die Tonspur (MP3) läuft über das native HTML5-<audio>-Element
-      # und klingt damit IDENTISCH auf iPhone, Mac, Tablet, Android, PC und in
-      # jedem Browser, unabhängig von den Stimmen des Betriebssystems.
+      # Vorab vertonte Artikel mit einem MÄNNLICHEN DEUTSCHEN
+      # NACHRICHTENSPRECHER – wie bei zeit.de. Die Tonspur (MP3) läuft über
+      # das native HTML5-<audio>-Element und klingt damit IDENTISCH auf
+      # iPhone, Mac, Tablet, Android, PC und in jedem Browser, unabhängig
+      # von den Stimmen des Betriebssystems. NUR-DEUTSCH-VERTRAG
+      # (Befund 07.09.2026): Die Vorlese-Funktion spricht ausschließlich
+      # Deutsch; englische Begriffe liest der Nachrichtensprecher.
       #
       # KOSTENLOS & OHNE KEY: Eine Backend-Kette ohne Abo und ohne
       # Pflicht-Secret:
       #   edge  -> Microsoft-Edge-Neuralstimmen über das offene Paket edge-tts
-      #            (de-DE-FlorianMultilingualNeural / en-US-AndrewMultilingual-
-      #            Neural, männlich; Multilingual v2 spricht englische
-      #            Fachbegriffe im deutschen Satz ohne Timbresprung)
-      #   piper -> lokale ONNX-Stimmen (de_DE-thorsten-high / en_US-ryan-high),
+      #            (Profil news: de-DE-ConradNeural — nüchterner
+      #            Nachrichtenoton; Profil natural:
+      #            de-DE-FlorianMultilingualNeural mit Mehrsprachigkeit
+      #            für englische Fachbegriffe im deutschen Satz)
+      #   piper -> lokale ONNX-Stimmen (de_DE-thorsten-high),
       #            offline, unbegrenzt, lizenzsauber
-      #   groq  -> nur EN-Notnagel, falls GROQ_API_KEY gesetzt ist
+      #   (Das englische Groq-Notnagel-Backend ist mit dem Nur-Deutsch-
+      #    Vertrag ersatzlos entfallen — GROQ_API_KEY wird für die Tonspur
+      #    nicht mehr gelesen; die Content-Workflows nutzen es unberührt.)
       #
       # Robustheit: (1) Ohne verfügbares Backend wird keine Tonspur
       # geschrieben; der Reader bleibt automatisch auf der lokalen
@@ -249,10 +255,7 @@ jobs:
           # Zeigt Engines, Rezept-Version UND den gefundenen Dekoder an.
           python3 scripts/ff_voice_audio.py --engines || true
 
-      - name: Vorlese-Tonspuren erzeugen (männliche DE/EN-Stimme, kostenlos)
-        env:
-          # Optional: nur als EN-Notnagel nötig, nie Pflicht.
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      - name: Vorlese-Tonspuren erzeugen (männliche deutsche Nachrichtensprecher-Stimme, kostenlos)
         run: |
           mkdir -p /tmp/ff-voice-cache
           # Vorherige Tonspuren vom letzten Deploy holen (inkrementell).
@@ -268,7 +271,7 @@ jobs:
             fi
           fi
           AUDIO_BACKEND="${{ github.event.inputs.audio_backend || 'auto' }}"
-          AUDIO_PROFILE="${{ github.event.inputs.audio_profile || 'natural' }}"
+          AUDIO_PROFILE="${{ github.event.inputs.audio_profile || 'news' }}"
           AUDIO_ORDER="${{ github.event.inputs.audio_order || 'newest' }}"
           AUDIO_LIMIT_NEW="${{ github.event.inputs.audio_limit_new || '25' }}"
           case "$AUDIO_LIMIT_NEW" in

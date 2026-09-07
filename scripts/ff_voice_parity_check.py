@@ -10,9 +10,14 @@ Warum dieses Gate existiert
     zwischen Überschrift und Fließtext. Genau das verhindert dieses Gate.
 
 Was geprüft wird
+    0. NUR-DEUTSCH — in BEIDEN Quellen verbietet das Gate jede zweite
+       Sprache: keine EN-Stimmenkette, kein Sprachwechsel im Satz,
+       keine EN-Aussprachetabellen (Befund 07.09.2026).
     1. AUSSPRACHE — dieselben Beispieltexte durch die JavaScript- und die
        Python-Normalisierung (Zahlen, Währungen, Daten, Zeiten, Bereiche,
-       Einheiten, Abkürzungen, URLs, Symbole).
+       Einheiten, Abkürzungen, URLs, Symbole). Englische Beispieltexte
+       bleiben enthalten: sie beweisen, dass beide Seiten sie nach
+       DEUTSCHEM Regelwerk lesen, nicht englisch.
     2. BLÖCKE     — dieselbe Seiten-HTML durch collectBlocks() (JS) und
        extract_blocks() (Python). Reihenfolge, Rolle, Sprache und Text
        müssen identisch sein, sonst wandert die Live-Markierung der
@@ -39,7 +44,7 @@ import ff_voice_backends as ttb  # noqa: E402
 PROBE = os.path.join(ROOT, "scripts", "ff_voice_probe.mjs")
 
 # ---------------------------------------------------------------------------
-# 1 · Aussprache-Beispiele (DE & EN)
+# 1 · Aussprache-Beispiele (ein Regelwerk: deutsch)
 # ---------------------------------------------------------------------------
 
 SAMPLES = [
@@ -65,40 +70,43 @@ SAMPLES = [
     ("siehe franksfinanzcheck.de", "de"),
     ("Nr. 3 und S. 12", "de"),
     ("Der Wechsel lohnt sich.", "de"),
-    ("Save $1,200", "en"),
-    ("about 20%", "en"),
-    ("e. g. gas", "en"),
-    ("e.g. gas", "en"),
-    ("tariffs etc.", "en"),
-    ("20,000 kWh", "en"),
-    ("on 02/01/2006", "en"),
-    ("gas & oil", "en"),
-    ("Switching saves money.", "en"),
+    # Englische Texte: werden bewusst DEUTSCH behandelt (Nur-Deutsch-
+    # Vertrag). Sie bleiben als Beispiele erhalten — beide Seiten müssen
+    # sie identisch deutsch normalisieren.
+    ("Save $1,200", "de"),
+    ("about 20%", "de"),
+    ("e. g. gas", "de"),
+    ("e.g. gas", "de"),
+    ("tariffs etc.", "de"),
+    ("20,000 kWh", "de"),
+    ("on 02/01/2006", "de"),
+    ("gas & oil", "de"),
+    ("Switching saves money.", "de"),
 ]
 
 # ---------------------------------------------------------------------------
-# 1b · Wortlauf-Beispiele (Sprachwechsel mitten im Satz)
+# 1b · Wortuhr-Aligner (Grundlage der wortgenauen Leseanzeige)
 # ---------------------------------------------------------------------------
+# Je Paar (Sprechtext, Rohtext) müssen BEIDE Seiten dieselbe Karte
+# liefern: welches rohe Wort des Artikels klingt, wenn der Sprecher das
+# normalisierte Wort liest. Weicht die Karte ab, leuchtet beim Studio-Ton
+# ein anderes Wort als beim Browser-Ton — genau das verhindert dieses Gate.
 
-RUN_SAMPLES = [
-    # Finanz-Englisch im deutschen Satz — jeder Lauf eigene Stimme
-    ("Ein Robo Advisor nutzt Compound Interest und Cost Averaging.", "de"),
-    ("Der Cashflow kommt jeden Monat.", "de"),
-    ("Mit Buy and Hold bleibst du entspannt.", "de"),
-    ("Das nennt man Side Hustles.", "de"),
-    ("Wer seinen Emergency Fund aufbaut, schläft besser.", "de"),
-    ("Trading kostet Gebühren.", "de"),
-    # Scheinfreunde und Fehlwechsel-Vermeidung
-    ("Was hat er damit gemeint?", "de"),
-    ("Die Waschmaschine läuft im Fast Mode.", "de"),
-    ("Der Tarifwechsel spart im Schnitt 300 Euro bis 800 Euro pro Jahr.", "de"),
-    ("Tarifwechsel als größter Hebel: Ein Wechsel dauert weniger als zehn Minuten.", "de"),
-    # Deutsche Einschübe in englischen Artikeln
-    ("Switching your tariff can save money, und die Versicherung kostet mehr.", "en"),
-    ("Compare your insurance costs every year before you switch.", "en"),
-    # Reinsprachige Sätze bleiben unangetastet
-    ("Der Wechsel lohnt sich für jeden Haushalt.", "de"),
-    ("This sentence is clearly English and must be spoken by the English male voice.", "en"),
+ALIGN_PAIRS = [
+    ("bis zu 650 Euro", "bis zu 650 €"),
+    ("12 bis 24 Monate", "12 – 24 Monate"),
+    ("Stand 2. Januar 2006", "Stand 02.01.2006"),
+    ("20.000 Kilowattstunden", "20 000 kWh"),
+    ("12 Cent pro Kilowattstunde", "12 ct/kWh"),
+    ("80 Quadratmeter", "80 m²"),
+    ("1.500 Euro", "1.500 €"),
+    ("about 20 Prozent", "about 20%"),
+    ("Strom und Gas", "Strom & Gas"),
+    ("Paragraph 12 EnWG", "§ 12 EnWG"),
+    ("circa 400 Euro", "ca. 400 Euro"),
+    ("zum Beispiel Strom", "z. B. Strom"),
+    ("Erster Satz ganz normal. Zweiter auch.", "Erster Satz ganz normal. Zweiter auch."),
+    ("Das Router-Modell 4 kostet 120 Euro monatlich", "Das Router-Modell 4 kostet 120 € monatlich"),
 ]
 
 
@@ -170,7 +178,7 @@ PAGES = [PAGE_FIXTURE, PAGE_TABLE, PAGE_EN, PAGE_TABLES_PREMIUM, PAGE_PILLAR]
 def run_probe():
     payload = json.dumps({
         "samples": [{"text": t, "lang": l} for t, l in SAMPLES],
-        "runs": [{"text": t, "lang": l} for t, l in RUN_SAMPLES],
+        "aligns": [{"norm": n, "raw": r} for n, r in ALIGN_PAIRS],
         "pages": [{"html": h} for h in PAGES],
     }, ensure_ascii=False)
     proc = subprocess.run(["node", PROBE], input=payload.encode("utf-8"),
@@ -206,23 +214,19 @@ def main() -> int:
               py_norm == js_norm[i],
               "Python %r vs. JS %r" % (py_norm, js_norm[i]))
 
-    # ---------- 1b · Wortlauf-Regie (Sprachwechsel im Satz) ----------
-    js_runs = answer.get("runs", [])
-    check("Wortlauf-Fühler liefert Ergebnisse", len(js_runs) == len(RUN_SAMPLES),
-          "%d von %d" % (len(js_runs), len(RUN_SAMPLES)))
-    for i, (text, lang) in enumerate(RUN_SAMPLES):
-        if i >= len(js_runs):
-            break
-        py_segs = gen.language_runs(text, lang)
-        py_view = [{"text": s["text"], "lang": s["lang"]} for s in py_segs]
-        # Vertrag 1: identische Segmentierung
-        check("Wortläufe gleich: %r (%s)" % (text[:38], lang),
-              py_view == js_runs[i],
-              "Python %s vs. JS %s" % (py_view, js_runs[i]))
-        # Vertrag 2: Segmente konkatenieren exakt zum Eingabetext
-        check("Wortläufe konkatenieren exakt: %r" % text[:38],
-              "".join(s["text"] for s in py_view) == text,
-              "Konkatenation verletzt")
+    # ---------- 1b · Wortuhr-Aligner (Leseanzeige-Brücke) ----------
+    js_aligns = answer.get("aligns", [])
+    check("Aligner-Fühler liefert Ergebnisse", len(js_aligns) == len(ALIGN_PAIRS),
+          "%d von %d" % (len(js_aligns), len(ALIGN_PAIRS)))
+    for i, (norm_t, raw_t) in enumerate(ALIGN_PAIRS):
+        py_map = gen.align_norm_to_raw(gen.norm_tokens(norm_t), gen.norm_tokens(raw_t))
+        check("Kartenlänge = Wortzahl: %r" % norm_t[:28], len(py_map) == len(gen.norm_tokens(norm_t)))
+        if i >= len(js_aligns):
+            continue
+        js_map = js_aligns[i]
+        check("Wortuhr-Karte gleich: %r → %r" % (norm_t[:28], raw_t[:28]),
+              [int(x) for x in py_map] == [int(x) for x in js_map],
+              "Python %s vs. JS %s" % (list(py_map), list(js_map)))
 
     # ---------- 2 · Blöcke ----------
     js_pages = answer.get("pages", [])
@@ -304,9 +308,23 @@ def main() -> int:
     check("Pillar: keine Doppeltexte (Python-Join eindeutig)",
           len({b["text"] for b in pillar_py}) == len(pillar_py),
           "Doppelte Blocktexte")
-    check("Pillar: Wortlauf im Listenpunkt vertont Robo-frei deutsch",
-          all(gen.language_runs(b["text"], b["lang"]) for b in pillar_py),
-          "Leere Wortlauf-Segmentierung")
+    check("Pillar: jede Blocksprache ist de (Nur-Deutsch-Vertrag)",
+          all(b["lang"] == "de" for b in pillar_py)
+          and all(b["lang"] == "de" for b in pillar_js),
+          "Fremdsprache im Pillar-Block")
+
+    # ---------- 5 · Nur-Deutsch-Vertrag in beiden Quellen ----------
+    # Harte Zeichenketten-Verbote, damit kein späterer Patch die
+    # Sprachmehrgleisigkeit „nur kurz“ zurückholt.
+    check("Reader: keine englische Locale-Kette", "'en-US'" not in js_source)
+    check("Reader: keine Wortlauf-Regie", "languageRuns" not in js_source)
+    check("Reader: keine EN-Aussprachetabelle", "MONTHS_EN" not in js_source)
+    gen_path = os.path.join(ROOT, "scripts", "ff_voice_audio.py")
+    with open(gen_path, "r", encoding="utf-8") as fh:
+        gen_source = fh.read()
+    check("Generator: keine Wortlauf-Segmentierung mehr", "def language_runs" not in gen_source)
+    check("Generator: Spracherkennung liefert nur noch de",
+          'return "de"' in gen_source and 'def detect_language' in gen_source)
 
     failed = [(n, d) for n, ok, d in results if not ok]
     for name, detail in failed[:25]:

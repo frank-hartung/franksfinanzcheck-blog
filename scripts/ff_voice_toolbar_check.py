@@ -49,6 +49,8 @@ REQUIRED_IDS = [
     "ff-voice-progress-value", "ff-voice-progress", "ff-voice-config",
     # Profi-Fortschrittsanzeige (07.09.2026): „Gerade vorgelesen“ + Zähler
     "ff-voice-live", "ff-voice-live-label", "ff-voice-now", "ff-voice-pos",
+    # Wort-Takt (Befund 07.09.2026): „Wort i von n“ in der Leiste
+    "ff-voice-word-count",
 ]
 
 REQUIRED_CSS_CLASSES = [
@@ -58,6 +60,8 @@ REQUIRED_CSS_CLASSES = [
     # Profi-Fortschrittsanzeige (07.09.2026)
     "ff-voice-meter__live", "ff-voice-meter__live-label",
     "ff-voice-meter__live-text", "ff-voice-meter__pos",
+    # Wort-Takt (07.09.2026): gesprochene Wörter im Artikel und in der Leiste
+    "ff-voice-meter__words", "ff-voice-w", "ff-voice-w--now", "ff-voice-live-w",
 ]
 
 REMOVED_MARKERS = [
@@ -163,7 +167,21 @@ def main() -> int:
     check("Engine: keine Stimmenwahl in der UI", "ff-voice-select" not in engine)
     check("Engine: Wiedereinstieg gemerkt", "localStorage" in engine)
     check("Engine: Abschnittsnavigation", "jumpBlock" in engine)
+    check("Engine: Satz-Sprung (Shift + Pfeil)", "jumpSentence" in engine)
     check("Engine: Live-Markierung", "ff-voice-active" in engine)
+    # NUR-DEUTSCH-VERTRAG (Befund 07.09.2026): Die Vorlese-Funktion nutzt
+    # ausschließlich Deutsch — englische Stimmenketten und der
+    # Sprachwechsel mitten im Satz (Wortlauf-Regie) sind verboten.
+    check("Engine: Nur-Deutsch — keine englische Stimm-Kette",
+          "'en-US'" not in engine and not re.search(r"^\s*en:\s*\{", engine, re.M))
+    check("Engine: Nur-Deutsch — keine Sprachwechsel-Regie",
+          "languageRuns" not in engine and "sniffLangOf(el, fallback)" not in engine)
+    # WORT-TAKT: drei Quellen (Wortuhr der Spur, onboundary, Schätzung),
+    # eine Anzeige; die Quelle wird an der Leiste ausgewiesen.
+    check("Engine: Wort-Takt mit Wortuhr-Aligner",
+          "alignNormToRaw" in engine and "ff-voice-w--now" in engine)
+    check("Engine: Wort-Takt weist seine Quelle aus",
+          "data-ff-wordsync" in engine and "applyTrackWord" in engine)
 
     # ---------- 5 · Rückbau ----------
     for rel in REMOVED_FILES:

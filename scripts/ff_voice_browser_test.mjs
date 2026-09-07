@@ -196,6 +196,15 @@ function chunkMap(blockTexts, totalMs) {
   return weights.map((w, i) => {
     const d = Math.max(150, Math.round((w / sum) * totalMs));
     const c = { b: i, t0: t, t1: Math.min(totalMs, t + d), lang: 'de' };
+    /* Wortuhr wie der Generator: je rohes Wort ein Sprechbeginn-ms,
+       gleichmäßig über die Blocklaufzeit verteilt (min. 40 ms Schritt,
+       nie über t1 hinaus) — exakt das Format von ff_voice_audio.py. */
+    const toks = String(blockTexts[i] || '').split(/\s+/).filter(Boolean);
+    if (toks.length > 1) {
+      const span = Math.max(2, c.t1 - c.t0 - 2);
+      const step = Math.min(1000, span / toks.length);
+      c.w = toks.map((_, k) => [k, Math.min(c.t1 - 2, c.t0 + Math.round(k * step))]);
+    }
     t += d;
     return c;
   });
@@ -231,6 +240,7 @@ function pageHtml({ speech = 'double', speechMode = 'working', speechVoices = 'm
     <span class="ff-voice-meter__live-label" id="ff-voice-live-label">Gerade vorgelesen</span>
     <span class="ff-voice-meter__live-text" id="ff-voice-now" title=""></span>
     <span class="ff-voice-meter__pos" id="ff-voice-pos" aria-hidden="true"></span>
+        <span class="ff-voice-meter__words" id="ff-voice-word-count" aria-hidden="true"></span>
   </div>
   <span class="ff-voice-progress-shell" aria-hidden="true"><span class="ff-voice-progress" id="ff-voice-progress" style="display:block;height:6px;width:0%;background:#facc15"></span></span>
 </div>
@@ -370,9 +380,17 @@ async function computeBlocks(title, bodyHtml) {
 
 const BASE_CPS = 15.2;
 
+const SMALL_TITLE = 'Strom sparen im Haushalt';
+const BIG_TITLE = 'Gasanbieter wechseln: Praxis-Tipps';
+/* Die Titel der Tonspur-Szenes MÜSSEN den Fixture-Titeln gleichen:
+   Block 0 (Anmoderation) enthält den Artikeltitel — und die Wortuhr
+   (chunk.w) ist auf die Rohtexte der Seite gemünzt. Ein anderer Titel
+   hier wäre ein anderer Text, die Karte zeigte ins Leere und die
+   Plausibilitäts-Wache würde die Spur zu Recht verwerfen. */
+
 async function main() {
-  const small = await computeBlocks('Strom sparen im Haushalt', SMALL_BODY);
-  const big = await computeBlocks('Gasanbieter wechseln: Praxis-Tipps', BIG_BODY);
+  const small = await computeBlocks(SMALL_TITLE, SMALL_BODY);
+  const big = await computeBlocks(BIG_TITLE, BIG_BODY);
   const smallExpected = (small.totalChars / BASE_CPS) * 1000 * 1.18;
   const bigExpected = (big.totalChars / BASE_CPS) * 1000 * 1.18;
 
@@ -398,8 +416,8 @@ async function main() {
   const deployedTrack = {
     src: '/audio/articles/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife.wav',
     version: 'ff-voice-2026.09.05-b',
-    voice: { de: 'de-DE-FlorianMultilingualNeural', en: 'en-US-AndrewMultilingualNeural' },
-    engine: 'edge', profile: 'natural', duration: 32980,
+    voice: { de: 'de-DE-FlorianMultilingualNeural', style: 'news', lang: 'de' },
+    engine: 'edge', profile: 'news', duration: 32980,
     chunks: Array.from({ length: 85 }, (_, i) => ({ b: i, t0: i * 420, t1: i * 420, lang: 'de' })),
   };
 
@@ -414,10 +432,10 @@ async function main() {
   route('s2', { title: 'Sprechfluss', bodyHtml: SMALL_BODY });
   route('s3', { title: 'Lazy Katalog', bodyHtml: SMALL_BODY, lazyVoices: true });
   route('s4', { title: 'Synthese-Fehler', bodyHtml: SMALL_BODY, speechMode: 'failing' });
-  route('s5', { title: 'Gute Tonspur', bodyHtml: SMALL_BODY, track: goodTrack });
-  route('s6', { title: 'Tonspur 404', bodyHtml: SMALL_BODY, track: { ...goodTrack, src: '/audio/missing.wav' } });
+  route('s5', { title: SMALL_TITLE, bodyHtml: SMALL_BODY, track: goodTrack });
+  route('s6', { title: SMALL_TITLE, bodyHtml: SMALL_BODY, track: { ...goodTrack, src: '/audio/missing.wav' } });
   route('s7', { title: 'Deployte Defekt-Spur', bodyHtml: BIG_BODY, track: deployedTrack, speech: 'double' });
-  route('s8', { title: 'Zu kurze Spur', bodyHtml: BIG_BODY, track: shortTrack });
+  route('s8', { title: BIG_TITLE, bodyHtml: BIG_BODY, track: shortTrack });
 
   const server = http.createServer((req, res) => {
     const url = new URL(req.url, 'http://127.0.0.1');
@@ -548,7 +566,7 @@ async function main() {
     ok('Weibliche Stimme nie gewählt', await page.evaluate(() =>
       window.__speech.log.length === 0 || window.__speech.log.every((l) => !l.voice || !/Anna/.test(l.voice))));
     await page.click('#ff-voice-stop');
-    ok('Idle-aria-label verspricht männliche Stimme', /männliche Stimme/.test(
+    ok('Idle-aria-label verspricht den männlichen Nachrichtensprecher', /männliche(n)? (Nachrichtensprecher|Stimme)/.test(
       await page.evaluate(() => document.getElementById('ff-voice-play').getAttribute('aria-label'))));
   }
 
@@ -594,6 +612,22 @@ async function main() {
     ok('Live-Markierung folgt der Tonspur', await page.evaluate(() => !!document.querySelector('.ff-voice-active')),
       await page.evaluate(() => 'active=' + (document.querySelector('.ff-voice-active') ? 'da' : 'FEHLT')
         + ' cur=' + (document.querySelector('audio') || {}).currentTime));
+
+    // WORT-TAKT aus der Wortuhr: im Textblock muss genau EIN Wort hell
+    // sein, die Quelle heißt „track“, und der Wortzähler läuft mit.
+    await page.evaluate(() => { const a = document.querySelector('audio'); a.currentTime = Math.min(a.duration - 1.5, 8.5); });
+    await sleep(400);
+    const ws = await page.evaluate(() => ({
+      source: document.getElementById('ff-voice-bar').getAttribute('data-ff-wordsync'),
+      lit: document.querySelectorAll('.ff-voice-w--now').length,
+      spans: document.querySelectorAll('.ff-voice-w').length,
+      counter: (document.getElementById('ff-voice-word-count') || {}).textContent || '',
+      sync: window.__ffVoice.diagnostics().wordSync,
+    }));
+    ok('Wortuhr speist die Leseanzeige (Quelle track)', ws.source === 'track', JSON.stringify(ws));
+    ok('Genau ein Wort leuchtet im Text', ws.lit === 1, 'lit=' + ws.lit + ' spans=' + ws.spans);
+    ok('Wortzähler nennt Position', /Wort \d+ von \d+/.test(ws.counter), ws.counter);
+    ok('Wortindex bleibt im Block (Diagnose)', ws.sync.raw >= 0 && ws.sync.block >= 0, JSON.stringify(ws.sync));
 
     // Abschnittssprung: Audio-Position folgt der Chunk-Karte
     await page.click('#ff-voice-next');

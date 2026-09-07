@@ -344,26 +344,37 @@ t.group('4) Aussprache-Regie Deutsch (Zahlen, Währung, Datum, Einheiten)');
 }
 
 /* ============================================================
-   5 · Aussprache-Regie EN
+   5 · AUSSPRACHE-REGIE — NUR DEUTSCH (Befund 07.09.2026)
+   ------------------------------------------------------------
+   Die englischen Ausspracheregeln sind ersatzlos entfallen. Ein
+   englischer Begriff im Text folgt dem deutschen Regelwerk: Prozent
+   deutsch, Schräg-Datum als TT.MM.JJJJ, Dollarzeichen bleibt stehen
+   (ein Nachrichtensprecher sagt ihn nicht anders als geschrieben);
+   die EN-Abkürzungsregeln (e. g., etc.) werden nicht mehr angewandt,
+   weil sie sonst deutschen Text verstümmeln.
    ============================================================ */
-t.group('5) Aussprache-Regie Englisch');
+t.group('5) Sprechregeln: ausschließlich deutsch');
 {
-  const { win } = loadPage(skeleton({ title: 'Test', lang: 'en', bodyHtml: '<p>x</p>' }));
-  const n = (text) => win.__ffVoice.speechNormalize(text, 'en');
+  const { win } = loadPage(skeleton({ title: 'Test', bodyHtml: '<p>x</p>' }));
+  const n = (text) => win.__ffVoice.speechNormalize(text);
 
-  t.eq('Dollar', n('Save $1,200'), 'Save 1,200 dollars');
-  t.eq('Prozent', n('about 20%'), 'about 20 percent');
-  t.eq('e. g.', n('e. g. gas'), 'for example gas');
-  t.eq('etc.', n('tariffs etc.'), 'tariffs and so on');
-  t.eq('Kilowattstunden', n('20,000 kWh'), '20,000 kilowatt hours');
-  t.eq('Datum (MM/TT)', n('on 02/01/2006'), 'on 1. February 2006');
-  t.eq('Und-Zeichen', n('gas and oil'.replace('and', '&')), 'gas and oil');
+  t.eq('Englisches Wort bleibt, Prozent deutsch', n('about 20%'), 'about 20 Prozent');
+  t.eq('Dollarzeichen bleibt stehen', n('Save $1,200'), 'Save $1,200');
+  t.eq('Datum mit Schrägstrich = deutsche Reihenfolge', n('on 02/01/2006'), 'on 2. Januar 2006');
+  t.eq('e. g. wird nicht mehr aufgelöst (EN-Regel entfallen)', n('e. g. gas'), 'e. g. gas');
+  t.eq('etc. wird nicht mehr aufgelöst (EN-Regel entfallen)', n('tariffs etc.'), 'tariffs etc.');
+  t.eq('Und-Zeichen wird deutsches Wort', n('gas & oil'), 'gas und oil');
+  t.ok('Keine Wortlauf-Regie mehr (kein Sprachwechsel mitten im Satz)',
+    typeof win.__ffVoice.languageRuns === 'undefined');
 }
 
 /* ============================================================
-   6 · Zweisprachigkeit ohne Umschalter
+   6 · NUR-DEUTSCH-VERTRAG — kein Umschalter, kein Sprachwechsel
+   ------------------------------------------------------------
+   Ein englischsprachiger Artikel wird NICHT englisch vorgelesen:
+   Die Oberfläche bleibt deutsch, jede Sprecheinheit trägt „de“.
    ============================================================ */
-t.group('6) Deutsch & Englisch vollautomatisch (kein Umschalter)');
+t.group('6) Nur-Deutsch — auch bei englischem Artikeltext');
 {
   const deBody = mdToHtml('## Strom sparen\n\nMit einem Wechsel sparst du jedes Jahr mehrere hundert Euro bei den Kosten.');
   const enBody = mdToHtml('## Save Money on Electricity\n\nSwitching your tariff can save you several hundred pounds every year on your energy costs and comparison shows it.');
@@ -372,50 +383,56 @@ t.group('6) Deutsch & Englisch vollautomatisch (kein Umschalter)');
   const en = loadPage(skeleton({ title: 'Save Money on Electricity', lang: 'en', bodyHtml: enBody }));
 
   t.eq('Deutscher Artikel → de', de.win.__ffVoice.lang, 'de');
-  t.eq('Englischer Artikel → en', en.win.__ffVoice.lang, 'en');
-  t.eq('EN-Beschriftung Vorlesen', en.doc.getElementById('ff-voice-play-label').textContent, 'Listen');
-  t.eq('EN-Beschriftung Kurzfassung', en.doc.getElementById('ff-voice-summary-label').textContent, 'Summary');
-  t.ok('EN-Blöcke sind englisch',
-    en.win.__ffVoice.collectBlocks().every((b) => b.lang === 'en'));
+  t.eq('Englischer Artikel → ebenfalls de', en.win.__ffVoice.lang, 'de');
+  t.eq('Vorlesen-Beschriftung bleibt deutsch',
+    en.doc.getElementById('ff-voice-play-label').textContent, 'Vorlesen');
+  t.eq('Kurzfassung-Beschriftung bleibt deutsch',
+    en.doc.getElementById('ff-voice-summary-label').textContent, 'Kurzfassung');
+  t.ok('Alle Blöcke sind deutsch',
+    en.win.__ffVoice.collectBlocks().every((b) => b.lang === 'de'));
 
-  // Satzweises Routing: englischer Satz im deutschen Artikel
+  // Englischer Satz im deutschen Artikel wechselt die Sprache NICHT mehr
   const mixed = loadPage(skeleton({
     title: 'Tarifwechsel leicht gemacht',
     bodyHtml: '<h2>Was du beachten solltest</h2>'
-      + '<p>Der Wechsel ist einfach. This sentence is clearly written in English and should be read by the English voice.</p>',
+      + '<p>Der Wechsel ist einfach. This sentence is clearly written in English and should be read by the German news voice anyway.</p>',
   }));
   const blocks = mixed.win.__ffVoice.collectBlocks();
   const units = mixed.win.__ffVoice.buildTimeline().units;
   const langs = new Set(units.map((u) => u.lang));
   t.ok('Blöcke vorhanden', blocks.length > 2);
-  t.ok('Beide Sprachen im Sprechplan', langs.has('de'), 'de fehlt');
-  t.ok('Englischer Satz bekommt die EN-Stimme', langs.has('en'), 'en fehlt');
+  t.ok('Regiesprache ist de', langs.has('de'));
+  t.ok('Keine englische Einheit im Sprechplan', !langs.has('en'), 'en im Unit-Language');
 }
 
 /* ============================================================
-   7 · Männliche Stimme (Garantie-Kern)
+   7 · MÄNNLICHER NACHRICHTENSPRECHER (Garantie-Kern, nur Deutsch)
+   ------------------------------------------------------------
+   Deterministische Regie ohne Menü: männliche, deutsche Stimme,
+   Nachrichtenton zuerst (Conrad vor Florian), Neural/Online vor
+   Standard. Englische Stimmen sind ausgeschlossen — auch dann,
+   wenn der Katalog sie hergibt und jemand „en“ als Ziel übergibt.
    ============================================================ */
-t.group('7) Männliche Stimme – deterministisch, DE und EN');
+t.group('7) Nachrichtensprecher – deterministisch, nur Deutsch');
 {
   const { win } = loadPage(skeleton({ title: 'Test', bodyHtml: '<p>x</p>' }));
   const api = win.__ffVoice;
   const de = api.resolveMaleVoice('de');
-  const en = api.resolveMaleVoice('en');
 
   t.ok('DE: eine Stimme gefunden', !!de.voice, 'keine Stimme');
-  t.ok('EN: eine Stimme gefunden', !!en.voice, 'keine Stimme');
   t.ok('DE: männlich erkannt', de.male === true, 'Stimme: ' + (de.voice && de.voice.name));
-  t.ok('EN: männlich erkannt', en.male === true, 'Stimme: ' + (en.voice && en.voice.name));
   t.ok('DE: keine Frauenstimme',
     !/anna|katja|hedda|marlene|vicki|elke|amala|clara|julia/i.test(de.voice.name));
-  t.ok('EN: keine Frauenstimme',
-    !/aria|samantha|karen|moira|tessa|fiona|serena|allison|ava|susan/i.test(en.voice.name));
+  t.ok('Nachrichtenton zuerst: die Newsroom-Stimme Conrad schlägt alle',
+    /conrad/i.test(de.voice.name), de.voice.name);
   t.ok('DE: Neural-/Studio-Qualität bevorzugt',
     /natural|neural|premium|enhanced/i.test(de.voice.name), de.voice.name);
-  t.ok('EN: Neural-/Studio-Qualität bevorzugt',
-    /natural|neural|premium|enhanced/i.test(en.voice.name), en.voice.name);
   t.ok('DE: Locale passt', (de.voice.lang || '').toLowerCase().indexOf('de') === 0);
-  t.ok('EN: Locale passt', (en.voice.lang || '').toLowerCase().indexOf('en') === 0);
+  // Nur-Deutsch-Vertrag: selbst ein „en“-Ziel liefert nie eine englische Stimme
+  const en = api.resolveMaleVoice('en');
+  t.ok('Fremdsprachiges Ziel wird nicht bedient (de-Locale bleibt)',
+    !en.voice || (en.voice.lang || '').toLowerCase().indexOf('de') === 0,
+    en.voice && en.voice.name + ' / ' + en.voice.lang);
 }
 
 t.group('7b) Keine männliche Stimme im Katalog – ehrlicher Notnagel');
@@ -476,7 +493,7 @@ t.group('9) Wiedergabe: Start, Pause, Fortsetzen, Abschnittssprung');
 
   doc.getElementById('ff-voice-play').click();
   t.ok('Lesen gestartet', api.reading === true);
-  t.ok('Status gemeldet', /gestartet|Stimme/.test(doc.getElementById('ff-voice-status').textContent));
+  t.ok('Status gemeldet', /gestartet|Stimme|Nachrichtensprecher/.test(doc.getElementById('ff-voice-status').textContent));
   t.eq('Knopf zeigt Pausieren', doc.getElementById('ff-voice-play-label').textContent, 'Pausieren');
   t.ok('data-state=playing', doc.getElementById('ff-voice-bar').getAttribute('data-state') === 'playing');
   t.ok('„Gerade vorgelesen“ nennt den laufenden Satz', doc.getElementById('ff-voice-now').textContent.length > 0);
@@ -519,10 +536,78 @@ t.group('9) Wiedergabe: Start, Pause, Fortsetzen, Abschnittssprung');
 }
 
 /* ============================================================
+   9b · WORT-TAKT — die wortgenaue Leseanzeige (Befund 07.09.2026)
+   ------------------------------------------------------------
+   Auf dem Sprechpfad liefert die Engine Wortgrenzen (onboundary);
+   die Attrappe in ff_voice_qa_lib.mjs feuert sie je Wort. Daraus
+   folgen: Wort-Spans im Artikel, GENAU ein hell markiertes Wort,
+   der Wortzähler, das helle Wort im Leisten-Satz und die
+   Wortposition im aria-valuetext des Fortschritts. Nach dem
+   Beenden ist der Artikel-DOM wieder unverändert.
+   ============================================================ */
+t.group('9b) Wort-Takt: hell Wort für Wort, sauber zurückgebaut');
+{
+  const { win, doc } = loadPage(skeleton({
+    title: 'Worttakt-Test',
+    readingTime: 1,
+    bodyHtml: mdToHtml('## Start\n\nDer Sprecher betont das erste Wort und danach jedes weitere. Eine zweite Sprecheinheit folgt sogleich. Ein dritter Satz hält den Lesevorgang am Laufen.\n\n## Zwei\n\nEin zweiter Absatz mit genug Text, damit der Sprung in der Mitte landet und nicht am Ende.\n'),
+  }));
+  const api = win.__ffVoice;
+  doc.getElementById('ff-voice-play').click();
+  // Die Attrappe spricht schnell — gepollt wird, bis der Fließtext-Block
+  // seine Wort-Spans trägt (spätestens nach 3 s schlägt die Prüfung fehl).
+  let guard = 0;
+  while (guard++ < 60 && doc.querySelectorAll('.ff-voice-w').length < 8) await sleep(50);
+
+  t.eq('Wortquelle: Grenzen der Engine',
+    doc.getElementById('ff-voice-bar').getAttribute('data-ff-wordsync'), 'speech');
+  const wordEls = doc.querySelectorAll('.ff-voice-w');
+  t.ok('Artikeltext trägt Wort-Spans', wordEls.length > 8, 'Anzahl: ' + wordEls.length);
+  const lit = doc.querySelectorAll('.ff-voice-w--now');
+  t.eq('Genau ein Wort leuchtet', lit.length, 1);
+  const wc = doc.getElementById('ff-voice-word-count');
+  t.ok('Wortzähler zählt', /Wort \d+ von \d+/.test(wc.textContent), wc.textContent);
+  t.ok('Leisten-Satz ist wortweise aufgebaut', doc.querySelectorAll('.ff-voice-live-w').length > 3);
+  t.eq('Leisten-Satz hebt genau ein Wort hervor',
+    doc.querySelectorAll('.ff-voice-live-w--now').length, 1);
+  const vt = doc.getElementById('ff-voice-meter').getAttribute('aria-valuetext') || '';
+  t.ok('Fortschritt nennt die Wortposition (Screenreader)', /Wort \d+ von \d+/.test(vt), vt);
+
+  // Satz-Sprung (Shift + Pfeil in der UI, hier direkt): das helle Wort
+  // muss an den Anfang einer anderen Sprecheinheit springen.
+  // Erst pausieren (sonst läuft die schnelle Attrappe bis zum Ende durch),
+  // dann eine Einheit zurück: der Sprung spricht den Satz neu — die
+  // Markierung wandert, genau EIN Wort bleibt hell, nie zwei.
+  doc.getElementById('ff-voice-play').click();          // Pause
+  const beforeIdx = lit[0] ? lit[0].getAttribute('data-ffv-w') : null;
+  api.jumpSentence(-1);
+  await sleep(40);
+  const litAfter = doc.querySelectorAll('.ff-voice-w--now');
+  t.eq('Nach dem Satzsprung leuchtet genau ein Wort', litAfter.length, 1);
+  const wsAfter = api.diagnostics().wordSync;
+  t.ok('Die Wortmarke bleibt im Texthörper (raw-Index gültig, Quelle speech)',
+    wsAfter.raw >= 0 && wsAfter.source === 'speech', JSON.stringify(wsAfter));
+  if (beforeIdx !== null && litAfter[0]) {
+    t.ok('Der Satzsprung bewegt die Wortmarkierung',
+      litAfter[0].getAttribute('data-ffv-w') !== undefined, 'Index fehlte');
+  }
+
+  doc.getElementById('ff-voice-stop').click();
+  await sleep(40);
+  t.eq('Nach dem Beenden sind die Wort-Spans zurückgebaut', doc.querySelectorAll('.ff-voice-w').length, 0);
+  t.eq('Nach dem Beenden leuchtet nichts mehr', doc.querySelectorAll('.ff-voice-w--now').length, 0);
+  t.eq('Wortzähler nach Beenden leer', wc.textContent, '');
+}
+
+/* ============================================================
    10 · Tonspur (ZEIT-Standard) und Fallback
    ============================================================ */
 t.group('10) Studio-Tonspur wird bevorzugt – Fallback greift nie ins Leere');
 {
+  // BEWUSST ein Alt-Payload (Sprachfeld mit en-Rest, chunks OHNE Wortuhr
+  // `w`): Der Reader muss solches Inventar klaglos lesen — auf der
+  // Satzebene, mit data-ff-wordsync="none". Neue Spuren liefert der
+  // Generator als {de, style, lang} mit Wortuhr.
   const track = {
     src: '/audio/articles/test.mp3',
     version: '2026.09.05-a',
@@ -666,6 +751,7 @@ t.group('12) Alle echten Artikel – kein Absturz, vollständige Ausbeute');
   let totalUnits = 0;
   let female = 0;
   let tooLong = 0;
+  let foreignVoice = 0;
   const failures = [];
 
   for (const article of articles) {
@@ -692,9 +778,12 @@ t.group('12) Alle echten Artikel – kein Absturz, vollständige Ausbeute');
         failures.push(article.slug + ' (Chunk > 220)');
       }
       const de = api.resolveMaleVoice('de');
-      const en = api.resolveMaleVoice('en');
       if (de.voice && /anna|katja|hedda|marlene|vicki|elke/i.test(de.voice.name)) female += 1;
-      if (en.voice && /aria|samantha|karen|moira/i.test(en.voice.name)) female += 1;
+      // Nur-Deutsch-Vertrag: egal welche Ziel-Sprache — nie eine fremde Stimme
+      for (const probe of ['de', 'en']) {
+        const v = api.resolveMaleVoice(probe);
+        if (v.voice && !/^de/i.test(v.voice.lang || '')) foreignVoice += 1;
+      }
       // Kurzfassung muss auf jeder Seite funktionieren
       doc.getElementById('ff-voice-summary').click();
       if (!doc.getElementById('ff-voice-dialog')) { failures.push(article.slug + ' (Dialog fehlt)'); }
@@ -707,6 +796,7 @@ t.group('12) Alle echten Artikel – kein Absturz, vollständige Ausbeute');
   t.eq('Kein Artikel stürzt ab', crashed, 0, failures.slice(0, 4).join(' | '));
   t.eq('Kein Artikel bleibt stumm', empty, 0, failures.slice(0, 4).join(' | '));
   t.eq('Keine Frauenstimme gewählt', female, 0);
+  t.eq('Keine fremdsprachige Stimme gewählt', foreignVoice, 0);
   t.eq('Keine Einheit über der Chrome-Grenze', tooLong, 0, failures.slice(0, 4).join(' | '));
   t.ok('Blöcke insgesamt', totalBlocks > articles.length * 5, 'Blöcke: ' + totalBlocks);
   t.ok('Sprecheinheiten insgesamt', totalUnits > articles.length * 5, 'Einheiten: ' + totalUnits);

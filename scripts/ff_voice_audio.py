@@ -1,8 +1,27 @@
 #!/usr/bin/env python3
 """ff_voice_audio.py — Studio-Tonspuren für die Vorlese-Funktion (FF Voice Studio).
 
-Vertont die Artikel des Blogs mit einer MÄNNLICHEN DE- & EN-Stimme —
-kostenlos, ohne Schlüssel und ohne Umschalter für die Leser:innen.
+Vertont die Artikel des Blogs mit einer MÄNNLICHEN, DEUTSCHEN
+NACHRICHTENSPRECHER-STIMME — kostenlos, ohne Schlüssel und ohne
+Umschalter für die Leser:innen.
+
+NUR-DEUTSCH-VERTRAG (Befund 07.09.2026)
+    Die Tonspur spricht ausschließlich Deutsch. Es gibt keine
+    englische Stimme, keinen Satz-Routing-Zweig und keinen
+    EN-Fallback. Englische Begriffe im Text spricht der deutsche
+    Nachrichtensprecher, wie es im Hörfunk üblich ist. Die Blöcke
+    tragen weiterhin das Feld `lang` — es ist IMMER „de“, und beide
+    Seiten (Generator und Reader) werden durch das Paritäts-Gate auf
+    diesem Vertrag gehalten.
+
+WORTUHR (Grundlage der wortgenauen Leseanzeige)
+    Bei edge-tts-Synthese liefert jedes Segment WordBoundary-Ereignisse.
+    Sie werden in absolute Millisekunden der Gesamtdatei umgerechnet und
+    je Chunk als `w: [[rohwortIndex, ms], …]` in die
+    Tonspur-Konfiguration geschrieben. Der Reader markiert damit das
+    Wort, das in diesem Sekundenbruchteil erklungen ist — barrierefreie
+    Leseanzeige auf Verlagsniveau. Fehlt die Wortuhr (z. B. Piper),
+    arbeitet der Reader mit Satz-Schätzung weiter; gelogen wird nie.
 
 Warum vorab vertonen?
     Die Web-Speech-API klingt auf jedem Gerät anders, weil jedes
@@ -31,10 +50,11 @@ Block-Parität (der kritische Punkt)
 Aufruf (lokal oder im Deploy-Workflow NACH `hugo --minify`):
   python3 scripts/ff_voice_audio.py --html-dir public \\
       --out-dir public/audio/articles --cache-dir /tmp/ff-voice-cache \\
-      --backend auto --profile natural [--only <slug>] [--dry-run] [--force]
+      --backend auto --profile news [--only <slug>] [--dry-run] [--force]
 
-  · --backend   auto (edge → piper → groq) | edge | piper | groq
-  · --profile   natural (Multilingual v2) | narrator (Conrad/Ryan)
+  · --backend   auto (edge → piper) | edge | piper
+  · --profile   news (Standard: Conrad, Style serious) | natural (Florian)
+                | narrator (Killian) — ausschließlich deutsche Stimmen
   · --out-dir   Zielverzeichnis. Pro Artikel entstehen <slug>.mp3
                 (Fallback .wav ohne ffmpeg) + <slug>.track.json.
   · --cache-dir Vorherige Tonspuren (z. B. aus dem letzten gh-pages-Stand).
@@ -68,6 +88,10 @@ sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
 import ff_voice_backends as ttb  # noqa: E402
 
+# Alias der Aussprache-Regie (Selbsttest/Parität sprechen denselben
+# Namen wie der Reader: speechNormalize ↔ normalize_speech).
+normalize_speech = ttb.normalize_speech
+
 # ---------------------------------------------------------------------------
 # Vertrag mit dem Reader
 # ---------------------------------------------------------------------------
@@ -93,6 +117,10 @@ TABLE_WRAPPERS = ("table", '[role="table"]', '[role="grid"]', ".ff-table-scroll"
 SKIP_CLASSES = ["ff-voice-bar", "toc", "ff-toc"]
 
 # Redaktionelle Cues — spiegelbildlich zu I18N in static/premium/ff-voice.js
+# NUR-DEUTSCH-VERTRAG (Befund 07.09.2026): Es gibt ausschließlich die
+# deutsche Cue-Menge. Ein „en“-Zweig wäre ein Rückfall in das alte
+# zweisprachige Modell und wird vom Paritäts-Gate auf beiden Seiten
+# ausgeschlossen (Reader: I18N enthält kein „en“ mehr).
 CUES = {
     "de": {
         "introLine": "{title}. Ein Beitrag von FranksFinanzcheck. Hördauer etwa {duration}.",
@@ -116,310 +144,130 @@ CUES = {
         "tableOutro": "Ende der Tabelle {title}.",
         "tableDefault": "Übersichtstabelle",
     },
-    "en": {
-        "introLine": "{title}. An article by FranksFinanzcheck. Listening time about {duration}.",
-        "durationMinutes": "{n} minutes", "durationMinuteOne": "one minute",
-        "durationUnknown": "a few minutes",
-        "outroLine": "End of article. Thank you for listening to FranksFinanzcheck.",
-        "listItemNum": "Point {n}:",
-        "cueShortAnswer": "Short answer:", "cueCorrection": "Correction:",
-        "cueSaving": "Savings potential:", "cueTariff": "Tariff at a glance:",
-        "cueWarning": "Attention:", "cueNote": "Note:",
-        "columnLabel": "Column", "rowLabel": "Row",
-        "tableHeaders": "The columns are: {headers}.",
-        "tableHeaderRow": "Header row {n}: {headers}.",
-        "tableIntro": "Table: {title}. Overview with {cols} columns and {rows} rows.",
-        "tableIntroOne": "Table: {title}. Overview with {cols} columns and one row.",
-        "tableRow": "Row {row} of {total}. {content}.",
-        "tableRowLabel": "Row {row} of {total}: {label}. {content}.",
-        "tableGroup": "Group: {name}.",
-        "tableSum": "In total: {content}.",
-        "tableCta": "Recommendation: {cta}. Note: this is an affiliate link.",
-        "tableOutro": "End of table {title}.",
-        "tableDefault": "Overview Table",
-    },
 }
-
-DE_HINTS = {
-    "der": 2, "die": 2, "das": 2, "und": 2, "ist": 2, "sind": 2, "für": 2, "mit": 2, "nicht": 2,
-    "von": 1, "ein": 1, "eine": 1, "einen": 1, "einem": 1, "den": 1, "dem": 1, "auf": 1, "zu": 1,
-    "im": 1, "am": 1, "bei": 1, "auch": 1, "sich": 1, "sparen": 2, "spart": 2, "euro": 2,
-    "versicherung": 2, "kosten": 2, "vertrag": 2, "vergleich": 2, "wechseln": 2,
-    "günstig": 2, "kostenlos": 2, "ratgeber": 2, "tabelle": 2, "jahr": 1, "monat": 1,
-    "sollte": 1, "solltest": 1, "müssen": 1, "kann": 1, "wichtig": 1, "tipp": 1, "prüfen": 1,
-}
-EN_HINTS = {
-    "the": 2, "and": 2, "is": 2, "are": 2, "for": 2, "with": 2, "that": 2, "this": 2,
-    "your": 2, "you": 2, "from": 1, "our": 1, "save": 2, "saving": 2, "money": 2,
-    "insurance": 2, "costs": 2, "cost": 2, "compare": 2, "comparison": 2, "guide": 2,
-    "table": 2, "tariff": 1, "tariffs": 1, "should": 1, "will": 1, "can": 1, "have": 1,
-    "more": 1, "free": 1, "cheap": 1, "best": 1, "important": 1, "article": 1,
-    "summary": 1, "read": 1, "listen": 1, "avoid": 1, "switch": 1,
-}
-
-
-def detect_language(sample: str, declared: str = "de") -> str:
-    """Portierung von detectArticleLanguage() aus dem Reader."""
-    base = "en" if str(declared or "de").lower().startswith("en") else "de"
-    tokens = re.findall(r"[a-zäöüß]+", (sample or "").lower())
-    de = en = de_hits = en_hits = 0
-    for w in tokens:
-        if w in DE_HINTS:
-            de += DE_HINTS[w]
-            de_hits += 1
-        if w in EN_HINTS:
-            en += EN_HINTS[w]
-            en_hits += 1
-        if re.search(r"[äöüß]", w):
-            de += 2
-        if len(w) >= 6 and re.search(r"(ung|keit|heit|schaft|lich|isch)$", w):
-            de += 1
-    if base == "de":
-        # ceil(de * 1.25) – dieselbe Schwelle wie im Reader
-        need = (de * 125 + 99) // 100
-        return "en" if (en_hits >= 4 and en >= de + 3 and en >= need) else "de"
-    # ceil(en * 1.15)
-    need = (en * 115 + 99) // 100
-    return "de" if (de_hits >= 4 and de >= en + 3 and de >= need) else "en"
-
-
-def sniff_sentence_lang(sentence: str, base_lang: str) -> str:
-    """Portierung von sniffSentenceLang() aus dem Reader."""
-    text = sentence or ""
-    if len(text) < 12:
-        return base_lang
-    words = re.findall(r"[a-zäöüß']+", text.lower())
-    if len(words) < 3:
-        return base_lang
-    de = en = 0
-    for w in words:
-        if w in DE_HINTS:
-            de += DE_HINTS[w]
-        if w in EN_HINTS:
-            en += EN_HINTS[w]
-        if re.search(r"[äöüß]", w):
-            de += 2
-        if len(w) >= 6 and re.search(r"(ung|keit|heit|schaft|lich|isch)$", w):
-            de += 1
-        if len(w) >= 4 and re.search(r"(ing|tion|ment|ness|able|ible)$", w):
-            en += 1
-    if base_lang == "de":
-        return "en" if (en >= 4 and en >= de + 2) else "de"
-    return "de" if (de >= 4 and de >= en + 2) else "en"
 
 
 # ---------------------------------------------------------------------------
-# Wortlauf-Regie — Sprachwechsel MITTEN im Satz (Spiegel von ff-voice.js)
+# Nur-Deutsch-Vertrag — Sprach-Erkennung ist bewusst abgeschaltet
 # ---------------------------------------------------------------------------
-# Bisher entschied der Satz über die Sprache: Ein deutscher Satz mit
-# englischen Fachbegriffen („Ein Robo Advisor nutzt Compound Interest
-# …“) wurde GANZ von der deutschen Stimme vertont. Diese Regie zerlegt
-# jede Atemgruppe in SPRACHLÄUFE; der Tonspur-Generator vertont jeden
-# Lauf mit der passenden männlichen Stimme. Wortgleich gespiegelt in
-# static/premium/ff-voice.js (languageRuns); die Parität prüft
-# scripts/ff_voice_parity_check.py.
+# Frühere Modelle erkannten Artikel-, Satz- und Wort-Sprachen und kippten
+# auf englische Stimmen. Der Auftrag lautet seit 07.09.2026: Die
+# Vorlese-Funktion spricht ausschließlich Deutsch. Die Funktion bleibt
+#Signatur-stabil (Reader und Paritäts-Gate adressieren denselben Namen) und
+# liefert für JEDE Eingabe „de“.
 
-# Englische Belegwörter. 2 = trägt einen Wechsel mit Partner,
-# 3 = Finanz-Fachbegriff (trägt allein).
-EN_WORDS = {
-    "the": 2, "this": 2, "that": 2, "these": 2, "those": 2, "your": 2, "you": 2, "yours": 2,
-    "of": 2, "to": 2, "from": 2, "with": 2, "without": 2, "about": 2, "over": 2, "under": 2,
-    "when": 2, "while": 2, "then": 2, "than": 2, "there": 2, "where": 2, "why": 2, "how": 2,
-    "what": 2, "who": 2, "whom": 2, "which": 2, "because": 2, "however": 2, "again": 2,
-    "against": 2, "before": 2, "after": 2,
-    "is": 2, "are": 2, "were": 2, "been": 2, "being": 2, "have": 2, "has": 2, "had": 2,
-    "would": 2, "could": 2, "should": 2, "can": 2, "may": 2, "might": 2, "must": 2,
-    "more": 2, "most": 2, "free": 2, "save": 2, "saving": 2, "savings": 2, "money": 2,
-    "costs": 2, "cost": 2, "cheap": 2, "compare": 2, "comparison": 2, "guide": 2,
-    "important": 2, "article": 2, "summary": 2, "avoid": 2, "switch": 2, "insurance": 2,
-    "yearly": 2, "monthly": 2, "every": 2, "percent": 2, "hundred": 2, "thousand": 2,
-    "table": 2, "best": 2, "better": 2, "good": 2,
-    "our": 1, "read": 1, "listen": 1, "tariff": 1, "tariffs": 1, "cash": 1, "per": 1,
-    "new": 1, "old": 1, "side": 1, "picking": 1, "traded": 1, "score": 1, "tax": 1,
-    "invest": 1, "dividend": 1, "value": 1, "hold": 1, "and": 2, "or": 1, "but": 2, "not": 1, "if": 1,
-    # Finanz- und Verbraucherbegriffe, die im deutschen Satz englisch klingen
-    "broker": 3, "brokers": 3, "neobroker": 3, "neobrokers": 3,
-    "cashflow": 3, "cashflows": 3, "trading": 3, "trader": 3, "traders": 3,
-    "budgeting": 3, "compounding": 3, "robo": 3,
-    "advisor": 3, "advisors": 3, "adviser": 3, "advisers": 3,
-    "compound": 2, "interest": 2, "stock": 2, "stocks": 2, "hustle": 2, "hustles": 2,
-    "investing": 2, "investor": 2, "investors": 2, "income": 2, "wealth": 2,
-    "emergency": 2, "fund": 2, "funds": 2, "retirement": 2, "financial": 2,
-    "independence": 2, "credit": 2, "debt": 2, "loan": 2, "loans": 2, "mortgage": 2,
-    "taxes": 2, "yield": 2, "yields": 2, "dividends": 2, "exchange": 2, "buy": 2, "sell": 2,
+def detect_language(sample: str = "", declared: str = "de") -> str:
+    """Nur-Deutsch-Vertrag: immer „de“ — kein Raten, kein Routing."""
+    return "de"
+
+
+def sniff_sentence_lang(sentence: str = "", base_lang: str = "de") -> str:
+    """Nur-Deutsch-Vertrag: Sätze wechseln die Sprache nicht mehr."""
+    return "de"
+
+
+# ---------------------------------------------------------------------------
+# Wortuhr-Algorithmen — Grundlage der wortgenauen Leseanzeige
+# ---------------------------------------------------------------------------
+# Die Tonspur wird silbenrichtig gesprochen, markiert werden muss das
+# gesprochene Wort im ROHEN Artikeltext. Zwischen beiden Texten liegt
+# die Aussprache-Normalisierung („650 €“ → „650 Euro“, „12 – 24“ →
+# „12 bis 24“). Der Aligner schiebt daher die normalisierten Wörter
+# (N) über die rohen Wörter (R) und merkt sich je N-Wort, welches
+# R-Wort dabei erklungen ist. Regeln (wortgleich zu alignNormToRaw()
+# im Reader, spiegelgeprüft durch scripts/ff_voice_parity_check.py):
+#   1. Kern-Gleichheit (Kleinschreibung, Nicht-Buchstaben entfernt).
+#   2. Symbol-Erweiterung: ein kernleeres rohes Zeichen („–“, „€“)
+#      gilt als Treffer, wenn die Ersetzung exakt dem N-Wort passt.
+#   3. Einheiten-Erweiterung („kWh“ → „Kilowattstunden“).
+#   4. Zahlen-Kern: trifft der Ziffernkern des rohen Tokens auf den
+#      des N-Tokens (Containment), gilt der ROHE Token als Sprecher-
+#      wort — so bleibt die ganze Zahl „1.2.2006“ hell, während der
+#      Sprecher „zweiten Januar zweitausendsechs“ sagt.
+#   5. Kein Treffer: das N-Wort erbt das zuletzt verbrauchte rohe
+#      Wort (der Cursor steht still — nichts wandert davon). Bei
+#      ≥ 6 Treffern in Folge wird im Rest von R neu verankert.
+# Ergebnis: Liste len(N), Werte sind Indizes in R oder -1 (leeres R).
+
+_CORE_STRIP = re.compile(r"[^0-9a-zäöüß']+")
+
+
+def token_core(tok: str) -> str:
+    return _CORE_STRIP.sub("", str(tok or "").lower())
+
+
+def norm_tokens(text: str) -> list:
+    return str(text or "").split()
+
+
+_SYMBOL_SPOKEN = {
+    "€": "euro", "%": "prozent", "&": "und", "§": "paragraph",
+    "+": "plus", "=": "gleich", "–": "bis", "—": "bis", "-": "bis",
+    "·": "punkt", "…": "",
 }
 
-# Scheinfreunde: in beiden Sprachen echte Wörter — nie Evidenz.
-DE_EN_HOMOGRAPHS = {
-    "die": 1, "was": 1, "hat": 1, "will": 1, "rat": 1, "gut": 1, "so": 1, "man": 1,
-    "fast": 1, "all": 1, "tag": 1, "see": 1, "arm": 1, "tot": 1, "hut": 1, "gift": 1,
-    "boot": 1, "band": 1, "brand": 1, "kind": 1, "land": 1, "links": 1, "fall": 1,
-    "ball": 1, "war": 1,
+_UNIT_SPOKEN = {
+    "kwh": {"kilowattstunden", "kilowattstunde", "kilowatt", "kilowattpeak"},
+    "kmh": {"kilometer", "kilometerprosstunde", "stunde"},
+    "ct": {"cent"},
+    "kw": {"kilowatt", "kilowattpeak"},
+    "kwp": {"kilowatt", "kilowattpeak"},
+    "m": {"meter", "quadratmeter", "kubikmeter"},
+    "m2": {"quadratmeter"},
+    "m3": {"kubikmeter"},
+    "eur": {"euro"},
+    "a": {"jahr", "jahrpro"},
 }
 
-# Deutscher Belegwortschatz (Härtung der Satzmitte): häufige Wörter
-# ohne Umlaut, ohne Endungs-Merkmal und ohne Platz in DE_HINTS.
-DE_EVIDENCE = {
-    "aber": 1, "alle": 1, "allerdings": 1, "also": 1, "ans": 1, "andere": 1,
-    "bekannt": 1, "besonders": 1, "bestimmt": 1, "braucht": 1, "dabei": 1, "dadurch": 1,
-    "dafür": 1, "dagegen": 1, "deshalb": 1, "dein": 1, "deine": 1,
-    "dem": 1, "den": 1, "denn": 1, "der": 1, "des": 1, "dessen": 1, "dich": 1, "dies": 1,
-    "dieser": 1, "dieses": 1, "du": 1, "durch": 1, "eben": 1, "einfach": 1, "er": 1,
-    "es": 1, "euch": 1, "euer": 1, "etwas": 1, "genau": 1, "gerade": 1, "gegen": 1,
-    "gibt": 1, "gilt": 1, "hast": 1, "haben": 1, "heute": 1, "hier": 1, "ihm": 1, "ihn": 1,
-    "ihnen": 1, "ihr": 1, "ihre": 1, "immer": 1, "ins": 1, "ja": 1, "je": 1, "jede": 1,
-    "jeden": 1, "jetzt": 1, "kommt": 1, "kann": 1, "kein": 1, "keine": 1, "könnte": 1,
-    "machen": 1, "macht": 1, "mal": 1, "mehr": 1, "mein": 1, "meine": 1, "mich": 1,
-    "mir": 1, "nach": 1, "natürlich": 1, "nie": 1, "noch": 1, "nun": 1, "nur": 1,
-    "nutzt": 1, "nutzen": 1, "ob": 1, "oder": 1, "oft": 1, "richtig": 1, "schon": 1,
-    "sein": 1, "seine": 1, "sich": 1, "sind": 1, "soll": 1, "sollen": 1, "sondern": 1,
-    "sonst": 1, "sowie": 1, "über": 1, "um": 1, "und": 1, "uns": 1, "unser": 1, "unter": 1,
-    "vom": 1, "von": 1, "vor": 1, "warum": 1, "weg": 1, "weil": 1, "weiter": 1, "wenn": 1,
-    "wer": 1, "werde": 1, "werden": 1, "wirklich": 1, "wie": 1, "wieder": 1, "wir": 1,
-    "wird": 1, "wo": 1, "wollen": 1, "wäre": 1, "zum": 1, "zur": 1, "zurück": 1,
-    "zwischen": 1, "kostet": 1, "bringt": 1, "zahlt": 1, "steht": 1, "gilt": 1,
-    "sorgt": 1, "senkt": 1, "liegt": 1, "bleibt": 1, "sorgen": 1, "senken": 1,
-    "inzwischen": 1, "schließlich": 1, "außerdem": 1, "ebenfalls": 1, "dennoch": 1,
-    "trotzdem": 1, "insgesamt": 1, "derzeit": 1, "aktuell": 1, "vielleicht": 1,
-    "eigentlich": 1, "sicher": 1, "deutlich": 1, "sofort": 1, "häufig": 1, "selten": 1,
-}
 
-RE_WORD_RUN = re.compile(r"[A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß'’]*")
-RE_TRAIL_SOFT = re.compile(r"^[\s,.:;!?\u2026„“\"'’()\[\]\-\u2013\u2014]+")
+def _raw_is_digits(core: str) -> bool:
+    return bool(core) and core.isdigit()
 
 
-def word_class_of(word: str, base: str):
-    """Sprachklasse eines Wortes — None heißt: kein Beleg, folgt dem Lauf."""
-    lw = re.sub(r"['’]s$", "", (word or "").lower())
-    if not lw:
-        return None
-    if lw in DE_EN_HOMOGRAPHS:
-        return None
-    de_score = en_score = 0
-    if re.search(r"[äöüß]", lw):
-        de_score = 2
-    if lw in DE_HINTS:
-        de_score = max(de_score, DE_HINTS[lw])
-    if lw in DE_EVIDENCE:
-        de_score = max(de_score, DE_EVIDENCE[lw])
-    if lw in EN_WORDS:
-        en_score = max(en_score, EN_WORDS[lw])
-    if de_score == 0 and en_score == 0 and len(lw) >= 6:
-        # Endungs-Evidenz nur als Zweitbeleg (Score 1); „ing“ erst ab
-        # 7 Zeichen und nie, wenn ein deutsches Endungs-Wort vorliegt.
-        if base == "de":
-            if re.search(r"(ung|keit|heit|schaft|lich|isch)$", lw):
-                de_score = 1
-            elif re.search(r"(ness|able|ible)$", lw):
-                en_score = 1
-            elif len(lw) >= 7 and re.search(r"ing$", lw):
-                en_score = 1
-        else:
-            if re.search(r"(ness|able|ible)$", lw):
-                en_score = 1
-            elif len(lw) >= 7 and re.search(r"ing$", lw):
-                en_score = 1
-            elif re.search(r"(ung|keit|heit|schaft|lich|isch)$", lw):
-                de_score = 1
-    if de_score and en_score:
-        return None
-    if de_score:
-        return {"lang": "de", "score": de_score}
-    if en_score:
-        return {"lang": "en", "score": en_score}
-    return None
-
-
-def language_runs(text: str, base_lang: str) -> list:
-    """Zerlegt Text in maximale SPRACHLÄUFE. Die Segmente konkatenieren
-    exakt zum Eingabetext (Vertrag an die Paritäts-Prüfung)."""
-    base = "en" if base_lang == "en" else "de"
-    src = str(text or "")
-    if not src:
-        return []
-
-    anchors = []
-    for m in RE_WORD_RUN.finditer(src):
-        cls = word_class_of(m.group(0), base)
-        if cls:
-            anchors.append({"lang": cls["lang"], "score": cls["score"],
-                            "start": m.start(), "end": m.end()})
-    if not anchors:
-        return [{"text": src, "lang": base}]
-
-    # Ankern gleicher Sprache zu Gruppen bündeln.
-    groups = []
-    for a in anchors:
-        if groups and groups[-1]["lang"] == a["lang"]:
-            groups[-1]["items"].append(a)
-            groups[-1]["end"] = a["end"]
-        else:
-            groups.append({"lang": a["lang"], "items": [a],
-                           "start": a["start"], "end": a["end"]})
-
-    def group_stands(g):
-        if g["lang"] == base:
-            return True
-        # Ein Fachbegriff (Score 3) trägt allein; sonst brauchen wir
-        # mindestens zwei belegte Wörter — „the“ allein wechselt nicht.
-        scores = [a["score"] for a in g["items"]]
-        return max(scores) >= 3 or (len(scores) >= 2 and sum(scores) >= 2)
-
-    segs = []
-    pos = 0
-    for gi, g in enumerate(groups):
-        stands = group_stands(g)
-        g_lang = g["lang"] if stands else base
-
-        # Kopf bis zum Gruppenbeginn gehört in die Artikelsprache.
-        if g["start"] > pos:
-            segs.append({"text": src[pos:g["start"]], "lang": base})
-
-        # Die Gruppe selbst: Anfang, Innenlücken (beleglose Wörter und
-        # weiche Trenner), Ende — „funds of funds“ bleibt ein Lauf.
-        segs.append({"text": src[g["start"]:g["end"]], "lang": g_lang})
-        pos = g["end"]
-
-        if gi + 1 >= len(groups):
-            tail = src[pos:]
-            if tail:
-                m = RE_TRAIL_SOFT.match(tail)
-                soft_len = m.end() if m else 0
-                if soft_len and stands:
-                    segs.append({"text": tail[:soft_len], "lang": g_lang})
-                if soft_len < len(tail):
-                    segs.append({"text": tail[soft_len:], "lang": base})
-            pos = len(src)
+def align_norm_to_raw(norm_tokens_list: list, raw_tokens_list: list) -> list:
+    """Je normalisiertem Wort den Index des gesprochenen rohen Wortes."""
+    N = list(norm_tokens_list or [])
+    R = list(raw_tokens_list or [])
+    out = []
+    j = 0
+    prev = -1
+    miss = 0
+    for n in N:
+        nc = token_core(n)
+        if not R:
+            out.append(-1)
             continue
-
-        gap_end = groups[gi + 1]["start"]
-        gap = src[pos:gap_end]
-        if gap and stands:
-            m = RE_TRAIL_SOFT.match(gap)
-            soft_len = m.end() if m else 0
-            if soft_len:
-                # Nur stiller Nachlauf (Komma, Punkt, Leerzeichen,
-                # Anführung) hängt an die stehende Gruppe — er gibt den
-                # Atempunkt am Stimmwechsel. Beleglose Folgewörter
-                # bleiben bewusst in der Artikelsprache.
-                segs.append({"text": gap[:soft_len], "lang": g_lang})
-                gap = gap[soft_len:]
-        if gap:
-            segs.append({"text": gap, "lang": base})
-        pos = gap_end
-
-    if pos < len(src):
-        segs.append({"text": src[pos:], "lang": base})
-
-    merged = []
-    for s in segs:
-        if not s["text"]:
-            continue
-        if merged and merged[-1]["lang"] == s["lang"]:
-            merged[-1]["text"] += s["text"]
+        matched = -1
+        window = 4 if miss < 6 else 64
+        for o in range(j, min(j + window, len(R))):
+            rc = token_core(R[o])
+            if rc and nc and rc == nc:
+                matched = o
+                break
+            if nc:
+                # (2) Symbol-Erweiterung
+                if not rc:
+                    sym = R[o].strip().strip(".:;,!?")
+                    if sym in _SYMBOL_SPOKEN and _SYMBOL_SPOKEN[sym] == nc:
+                        matched = o
+                        break
+                # (3) Einheiten-Erweiterung
+                if rc in _UNIT_SPOKEN and nc in _UNIT_SPOKEN[rc]:
+                    matched = o
+                    break
+                # (4) Zahlen-Kern (Containment, nur wenn beide rein numerisch)
+                if _raw_is_digits(rc) and nc.isdigit() and (nc in rc or rc in nc):
+                    matched = o
+                    break
+        if matched >= 0:
+            out.append(matched)
+            prev = matched
+            j = matched + 1
+            miss = 0
         else:
-            merged.append(dict(s))
-    return merged
+            out.append(prev if prev >= 0 else -1)
+            miss += 1
+    return out
 
 
 def duration_phrase(minutes, C):
@@ -1117,16 +965,15 @@ def extract_table_blocks(table: Node, block_lang: str, C):
 # Block-Extraktion — dieselbe Reihenfolge wie collectBlocks() im Reader
 # ---------------------------------------------------------------------------
 
-def _lang_of(node: Node, fallback: str) -> str:
-    attr = (node.attr("lang") or "").lower()
-    if attr.startswith("en"):
-        return "en"
-    if attr.startswith("de"):
-        return "de"
-    sample = readable_text(node)[:400]
-    if len(sample) >= 40:
-        return sniff_sentence_lang(sample, fallback)
-    return fallback
+def _lang_of(node: Node, fallback: str = "de") -> str:
+    """Nur-Deutsch-Vertrag: Blöcke wechseln die Sprache nicht mehr.
+
+    Das `lang`-Feld bleibt als Vertragsfeld erhalten (Reader, Generator
+    und Paritäts-Gate adressieren es), sein Wert ist immer „de“ — auch
+    wenn ein Knoten ein `lang="en"`-Attribut trägt. Ein englisches
+    Attribut darf die deutsche Pflichtstimme nicht aushebeln.
+    """
+    return "de"
 
 
 def _is_standalone_emphasis(node: Node) -> bool:
@@ -1149,16 +996,17 @@ def _is_standalone_emphasis(node: Node) -> bool:
 
 
 def extract_blocks(root: Node, cfg: dict):
-    """Gibt (blocks, lang) zurück. blocks: [{lang, type, text}] in Lesereihenfolge."""
+    """Gibt (blocks, lang) zurück. blocks: [{lang, type, text}] in Lesereihenfolge.
+
+    NUR-DEUTSCH-VERTRAG: `lang` ist immer „de“ — für die Blöcke und für
+    die Rückgabe. Die Signatur bleibt stabil.
+    """
     content = find_first(root, ".post-content") or find_first(root, ".md-content")
     if content is None:
         return [], "de"
 
-    declared = cfg.get("lang") or "de"
-    sample = "%s %s %s" % (cfg.get("title", ""), cfg.get("description", ""),
-                           readable_text(content)[:5000])
-    lang = detect_language(sample, declared)
-    C = CUES[lang]
+    lang = "de"
+    C = CUES["de"]
 
     out = []
 
@@ -1316,11 +1164,20 @@ def read_reader_config(root: Node):
         return {}
 
 
-def fingerprint(blocks, engine, profile, voice_de, voice_en):
+def fingerprint(blocks, engine, profile, voice_de, voice_en=None):
+    """Inhalts-Fingerprint einer Tonspur.
+
+    NUR-DEUTSCH-VERTRAG: Der `voice_en`-Parameter ist nur
+    Signatur-Kompatibilität und wird ignoriert; die deutsche Stimme,
+    das Profil, die Rezept-Version (inkl. Wortuhr) und die Blockfolge
+    bestimmen den Fingerabdruck. Er ändert sich — die Spur wird neu
+    erzeugt.
+    """
+    del voice_en  # Nur-Deutsch-Vertrag: keine englische Stimme mehr.
     payload = {
         "recipe": ttb.RECIPE_VERSION,
         "engine": engine, "profile": profile,
-        "de": voice_de, "en": voice_en,
+        "de": voice_de,
         "blocks": [[b["type"], b["lang"], b["text"]] for b in blocks],
     }
     return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True)
@@ -1339,8 +1196,66 @@ def expected_speech_ms(blocks) -> float:
     return (total_chars / ttb.BASE_CPS) * 1000.0 * 1.18
 
 
+def _words_plausible(blocks, chunks) -> tuple:
+    """Wortuhr-Gate: Darf eine `w`-Karte dem Leser gezeigt werden?
+
+    Die Wortuhr verschiebt die Leseanzeige — sie ist damit genau so
+    vertrauenswürdig zu behandeln wie die Tonspur selbst. Regeln:
+
+      · Einträge sind Paare [rohwortIndex, ms] mit 0 ≤ idx < Wortanzahl
+        des Blocks und Zeit im Chunkfenster (Puffer 1,5 s: Pausen und
+        Atemgrenzen gehören dazu).
+      · Pro Chunk monoton nach Zeit; die Indizes steigen mit.
+      · Wenigstens ein Chunk trägt eine Karte, sonst gibt es keine
+        Wortanzeige (das ist erlaubt — sie wird nur nicht vorgetäuscht).
+
+    Rückgabe (True, "") bzw. (False, grund). Ein Wortuhr-Verstoß
+    verwirft die SPUR (der Reader fällt auf die Gerätestimme), nicht
+    bloß die Karte: Eine Karte, die am Text vorbeiläuft, ist für
+    barrierefreie Leser:innen schlimmer als keine.
+    """
+    seen = 0
+    for c in chunks or []:
+        w = c.get("w")
+        if not w:
+            continue
+        seen += 1
+        bi = c.get("b")
+        try:
+            raw_count = len(norm_tokens(blocks[bi]["text"])) if 0 <= bi < len(blocks) else 0
+        except Exception:
+            raw_count = 0
+        lo = (c.get("t0") or 0) - 1500
+        hi = (c.get("t1") or 0) + 1500
+        last_ms = -1
+        last_idx = -1
+        for entry in w:
+            if not isinstance(entry, (list, tuple)) or len(entry) != 2:
+                return False, "Wortuhr-Eintrag kein Paar [idx, ms] in Chunk b=%s" % bi
+            idx, ms = entry
+            try:
+                idx = int(idx); ms = int(ms)
+            except Exception:
+                return False, "Wortuhr-Eintrag nicht numerisch in Chunk b=%s" % bi
+            if raw_count and not (0 <= idx < raw_count):
+                return False, "Wortuhr-Index %d außerhalb des Blocks %s (0..%d)" % (idx, bi, max(0, raw_count - 1))
+            if not (lo <= ms <= hi):
+                return False, "Wortuhr-Zeit %d ms außerhalb Chunks %s (%d..%d)" % (ms, bi, lo, hi)
+            if ms < last_ms or idx < last_idx:
+                return False, "Wortuhr nicht monoton in Chunk b=%s" % bi
+            last_ms, last_idx = ms, idx
+    if chunks and not seen:
+        return True, ""       # keine Karte anywhere — Satzebene, legal
+    if chunks and 0 < seen < len(chunks):
+        # Teilweise Karten sind erlaubt (kurze Blöcke < 2 Wörter); die
+        # Kartenpflicht greift erst, wenn ein Chunk Karten verspricht.
+        return True, ""
+    return True, ""
+
+
 def track_plausible(blocks, chunks, duration_ms) -> tuple:
-    """Plausibilitäts-Gate für Tonspuren (Befund 06.09.2026).
+    """Plausibilitäts-Gate für Tonspuren (Befund 06.09.2026,
+    Wortuhr-Erweiterung 07.09.2026).
 
     Auf gh-pages standen Spuren aus NUR Pausen: Das TTS-Backend lieferte
     für JEDES Segment kein Audio, synth_article übersprang die Fehler
@@ -1352,6 +1267,8 @@ def track_plausible(blocks, chunks, duration_ms) -> tuple:
       · JEDES Segment vertont wurde (keine stillen Lücken, Verlagsregel:
         lieber Gerätestimme als Tonspur mit fehlenden Sätzen),
       · jeder Chunk echte Sprechdauer hat (t1 > t0),
+      · die Wortuhr (falls vorhanden) strukturiert und im Fenster liegt
+        (_words_plausible),
       · die Gesamtlaufzeit im plausiblen Fenster um die erwartete
         Sprechzeit des Artikels liegt (0,3× bis 4,0×).
 
@@ -1362,6 +1279,9 @@ def track_plausible(blocks, chunks, duration_ms) -> tuple:
     degenerate = [c for c in chunks if (c.get("t1") or 0) <= (c.get("t0") or 0)]
     if degenerate:
         return False, "%d von %d Chunks ohne Sprechdauer (t0==t1)" % (len(degenerate), len(chunks))
+    ok_words, why_words = _words_plausible(blocks, chunks)
+    if not ok_words:
+        return False, "Wortuhr: " + why_words
     duration_ms = int(duration_ms or 0)
     if duration_ms <= 0:
         return False, "keine Laufzeit"
@@ -1374,96 +1294,141 @@ def track_plausible(blocks, chunks, duration_ms) -> tuple:
 
 
 def synth_article(blocks, engine, profile_name, tmp_dir, log):
-    """Erzeugt (samples, chunks, stats). chunks: [{b, t0, t1, lang}] in ms.
+    """Erzeugt (samples, chunks, stats).
 
-    stats = {"segments": n, "ok": n, "failed": n} — seit dem Befund vom
-    06.09.2026 zählt jedes fehlgeschlagene Segment (Backend-Fehler ODER
-    leeres Audio) als FAILED; der Aufrufer verwirft die Spur komplett.
-    Kein stills Überspringen mehr: Eine Tonspur mit Lügen ist schlechter
-    als keine Tonspur (der Reader fällt auf die Gerätestimme zurück).
+    chunks: [{b, t0, t1, lang:"de", w?: [[rawWortIndex, ms], …]}] in ms.
+
+    Das optionale Feld `w` ist die WORTUHR: je rohes Wort (Index in den
+   Whitespace-getrennten Rohtoken des Blocktexts) der absolute
+    Millisekunden-Zeitpunkt, an dem es in der fertigen Datei erklingt.
+    Sie entsteht aus den WordBoundary-Ereignissen von edge-tts,
+    umgerechnet auf den geschnittenen Segmentkopf und die
+    Segmentposition in der Gesamtdatei. Ohne Wortuhr (z. B. Piper)
+    markiert der Reader auf Satzebene weiter — er erfindet nie
+    Wortzeiten.
+
+    stats = {"segments": n, "ok": n, "failed": n, "words": n} — seit dem
+    Befund vom 06.09.2026 zählt jedes fehlgeschlagene Segment (Backend-
+    Fehler ODER leeres Audio) als FAILED; der Aufrufer verwirft die Spur
+    komplett. Kein stilles Überspringen mehr: Eine Tonspur mit Lügen ist
+    schlechter als keine Tonspur (der Reader fällt auf die Gerätestimme
+    zurück).
     """
     os.makedirs(tmp_dir, exist_ok=True)
     pieces = []
     chunks = []
     cursor_ms = 0
     seg_index = 0
-    stats = {"segments": 0, "ok": 0, "failed": 0}
+    stats = {"segments": 0, "ok": 0, "failed": 0, "words": 0}
 
     for bi, block in enumerate(blocks):
         profile = ttb.prosody_for(block["type"])
-        blang = block.get("lang") or "de"
+        blang = "de"                                   # Nur-Deutsch-Vertrag
         spoken = ttb.normalize_speech(block["text"], blang)
         segments = ttb.split_for_speech(spoken, blang)
+
+        # Wortuhr-Vorbereitung: Aligner N→R über dem Block. Die
+        # Segmentfolge konkateniert (bis auf Leerraum) exakt zum
+        # normalisierten Sprechtext; die Rohtoken sind der Artikelsatz
+        # selbst. Derselbe Aligner läuft im Reader — das Paritäts-Gate
+        # vergleicht beide Ergebnisse Wort für Wort.
+        raw_tokens = norm_tokens(block["text"])
+        norm_stream = []
+        for seg in segments:
+            norm_stream.extend(norm_tokens(seg))
+        align_map = align_norm_to_raw(norm_stream, raw_tokens)
+        norm_cursor = 0
+        word_clock = []
 
         t0 = None
         t1 = cursor_ms
         for si, seg in enumerate(segments):
             if not seg.strip():
                 continue
-            # Wortlauf-Regie: Eine Atemgruppe kann die Sprache wechseln
-            # („Ein Robo Advisor nutzt Compound Interest …“). Jeder Lauf
-            # wird mit der passenden männlichen Stimme vertont; Tempo,
-            # Tonlage und Rolle bleiben der Atemgruppe treu — der Ton-
-            # spur-Hörer merkt nur den Stimmwechsel, nie eine Zäsur.
-            runs = language_runs(seg, blang)
-            runs = [r for r in runs if r["text"].strip()] or [{"text": seg, "lang": blang}]
-            for ri, run in enumerate(runs):
-                run_text = run["text"]
-                run_lang = run["lang"]
-                seg_index += 1
-                melody = ttb.melody_of(seg)
-                density = ttb.density_factor(seg)
-                words = len(re.findall(r"\S+", seg))
-                rate = ttb.effective_rate(profile, density, melody, si == len(segments) - 1)
-                volume = ttb.effective_volume(profile, melody)
-                pitch = int(round(profile.get("pitch", 0)))
+            seg_index += 1
+            melody = ttb.melody_of(seg)
+            density = ttb.density_factor(seg)
+            words = len(re.findall(r"\S+", seg))
+            rate = ttb.effective_rate(profile, density, melody, si == len(segments) - 1)
+            volume = ttb.effective_volume(profile, melody)
+            pitch = int(round(profile.get("pitch", 0)))
 
-                seg_wav = os.path.join(tmp_dir, "seg_%05d.wav" % seg_index)
-                stats["segments"] += 1
-                used_engine, ok, _ = ttb.synthesize(run_text, run_lang, engine, profile_name,
-                                                    seg_wav, rate=rate, pitch=pitch, volume=volume)
-                if not ok and run_lang != blang:
-                    # Der Sprachlauf-Fallback: Liefert die Fremdsprache
-                    # kein Audio (z. B. EN-Stimme fehlt), springt der
-                    # Lauf auf die Artikelsprache — nie verstummt ein Wort.
-                    used_engine, ok, _ = ttb.synthesize(run_text, blang, engine, profile_name,
-                                                        seg_wav, rate=rate, pitch=pitch, volume=volume)
-                if not ok:
-                    stats["failed"] += 1
-                    if log:
-                        log("Segment %d konnte nicht vertont werden (engine=%s) — Spur wird verworfen"
-                            % (seg_index, engine))
-                    continue
-                try:
-                    samples, src_rate = ttb.read_wav_mono(seg_wav)
-                except Exception:
-                    stats["failed"] += 1
-                    continue
-                samples = ttb.remove_dc(ttb.trim_edges(samples))
-                samples = ttb.apply_fade(ttb.declick(samples))
-                if not samples:
-                    stats["failed"] += 1
-                    continue
-                stats["ok"] += 1
+            seg_wav = os.path.join(tmp_dir, "seg_%05d.wav" % seg_index)
+            stats["segments"] += 1
+            used_engine, ok, boundaries = ttb.synthesize(seg, blang, engine, profile_name,
+                                                         seg_wav, rate=rate, pitch=pitch, volume=volume)
+            if not ok:
+                stats["failed"] += 1
+                norm_cursor += words
+                if log:
+                    log("Segment %d konnte nicht vertont werden (engine=%s) — Spur wird verworfen"
+                        % (seg_index, engine))
+                continue
+            try:
+                samples, src_rate = ttb.read_wav_mono(seg_wav)
+            except Exception:
+                stats["failed"] += 1
+                norm_cursor += words
+                continue
+            samples, head_removed = ttb.trim_edges_info(samples)
+            samples = ttb.apply_fade(ttb.declick(ttb.remove_dc(samples)))
+            if not samples:
+                stats["failed"] += 1
+                norm_cursor += words
+                continue
+            stats["ok"] += 1
 
-                dur_ms = int(round(len(samples) * 1000.0 / src_rate))
-                is_unit_head = (si == 0 and ri == 0)
-                before_ms = profile.get("before", 0) if is_unit_head else 0
+            dur_ms = int(round(len(samples) * 1000.0 / src_rate))
+            is_unit_head = (si == 0)
+            before_ms = profile.get("before", 0) if is_unit_head else 0
 
-                # Pause VOR dem hörbaren Segment (gehört zur Rolle, nicht zum Wort)
-                if before_ms > 0:
-                    cursor_ms += before_ms
-                    pieces.append((ttb.silence_ms(before_ms, src_rate), src_rate))
+            # Pause VOR dem hörbaren Segment (gehört zur Rolle, nicht zum Wort)
+            if before_ms > 0:
+                cursor_ms += before_ms
+                pieces.append((ttb.silence_ms(before_ms, src_rate), src_rate))
 
-                if t0 is None:
-                    t0 = cursor_ms
-                cursor_ms += dur_ms
-                t1 = cursor_ms
-                pieces.append((samples, src_rate))
+            if t0 is None:
+                t0 = cursor_ms
+            seg_start_ms = cursor_ms
+            seg_end_ms = seg_start_ms + dur_ms
+
+            # WORTUHR: WordBoundary-Ticks (100 ns ab Rohstrombeginn) in
+            # absolute ms der Datei. Kopf-Trim abziehen, ins Segment
+            # klemmen, monoton machen. Der Zähler gilt Wort für Wort:
+            # das k-te Boundary-Ereignis ist das k-te Token des
+            # Segmenttexts (edge-tts spricht Wort für Wort, kein Satz).
+            head_ms = head_removed * 1000.0 / max(1, src_rate)
+            if boundaries and raw_tokens:
+                last_ms = -1
+                last_idx = -1
+                for k, bd in enumerate(boundaries):
+                    n = norm_cursor + k
+                    if n >= len(align_map):
+                        break
+                    raw_idx = align_map[n]
+                    if raw_idx is None or raw_idx < 0:
+                        continue
+                    off_ms = (bd.get("offset") or 0) / 10000.0 - head_ms
+                    t_ms = seg_start_ms + max(0.0, off_ms)
+                    if t_ms > seg_end_ms:
+                        break
+                    if t_ms < last_ms or raw_idx < last_idx:
+                        continue
+                    last_ms, last_idx = t_ms, raw_idx
+                    word_clock.append([int(raw_idx), int(round(t_ms))])
+            norm_cursor += words
+
+            cursor_ms += dur_ms
+            t1 = cursor_ms
+            pieces.append((samples, src_rate))
 
         if t0 is None:
             t0 = cursor_ms
-        chunks.append({"b": bi, "t0": int(t0), "t1": int(max(t1, t0)), "lang": blang})
+        chunk = {"b": bi, "t0": int(t0), "t1": int(max(t1, t0)), "lang": blang}
+        if len(word_clock) >= 2:
+            stats["words"] += len(word_clock)
+            chunk["w"] = word_clock
+        chunks.append(chunk)
 
         # Pause NACH dem Block (Atem- statt Maschinenrhythmus)
         after_ms = ttb.pause_after(profile, "statement",
@@ -1694,8 +1659,9 @@ def main(argv=None) -> int:
     ap.add_argument("--html-dir", default="public")
     ap.add_argument("--out-dir", default=os.path.join("public", "audio", "articles"))
     ap.add_argument("--cache-dir", default="")
-    ap.add_argument("--backend", default="auto")
-    ap.add_argument("--profile", default="natural", choices=sorted(ttb.VOICE_PROFILES.keys()))
+    ap.add_argument("--backend", default="auto", choices=["auto", "edge", "piper"])
+    ap.add_argument("--profile", default=ttb.DEFAULT_PROFILE, choices=sorted(ttb.VOICE_PROFILES.keys()),
+                    help="Stimmen-Profil — alle ausschließlich Deutsch (Standard: news)")
     ap.add_argument("--order", default="newest", choices=["newest", "oldest", "path"])
     ap.add_argument("--limit-new", type=int, default=0)
     ap.add_argument("--only", default="")
@@ -1722,7 +1688,11 @@ def main(argv=None) -> int:
         print("Verfügbare Engines: %s" % (", ".join(ttb.available_engines()) or "keine"))
         print("Rezept-Version:     %s" % ttb.RECIPE_VERSION)
         for name, prof in ttb.VOICE_PROFILES.items():
-            print("  Profil %-9s DE %-34s EN %s" % (name, prof["de"], prof["en"]))
+            marker = "  ← Voreinstellung" if name == ttb.DEFAULT_PROFILE else ""
+            print("  Profil %-9s DE %-36s Stil %-9s%s"
+                  % (name, prof["de"], prof.get("style") or "neutral", marker))
+        print("Sprache:              ausschließlich Deutsch (Nur-Deutsch-Vertrag)")
+        print("Wortuhr (Leseanzeige): wird je Artikel mit erzeugt, wenn edge-tts Wortgrenzen liefert")
         print("ffmpeg:             %s" % ("ja" if ttb.has_ffmpeg() else "nein (WAV-Fallback)"))
         print("Audio-Dekoder:      %s" % (ttb.decoder_name() or "KEINER — edge-tts (MP3) unbrauchbar!"))
         if ttb.edge_module_present() and not ttb.decoder_available():
@@ -1772,7 +1742,7 @@ def main(argv=None) -> int:
         if not blocks:
             continue
 
-        fp = fingerprint(blocks, engine, profile, voices["de"], voices["en"])
+        fp = fingerprint(blocks, engine, profile, voices["de"])
         track_json = os.path.join(args.out_dir, slug + ".track.json")
 
         # Inkrementell: unveränderte Artikel 1:1 wiederverwenden
@@ -1824,7 +1794,9 @@ def main(argv=None) -> int:
                             inject_track_config(path, {
                                 "src": previous.get("src", ""),
                                 "version": ttb.RECIPE_VERSION,
-                                "voice": {"de": voices["de"], "en": voices["en"]},
+                                "voice": {"de": voices["de"],
+                                          "style": voices.get("style"),
+                                          "lang": "de"},
                                 "engine": previous.get("engine", engine),
                                 "profile": profile,
                                 "duration": previous.get("duration", 0),
@@ -1923,7 +1895,8 @@ def main(argv=None) -> int:
         payload = {
             "src": "/audio/articles/" + audio_name,
             "version": ttb.RECIPE_VERSION,
-            "voice": {"de": voices["de"], "en": voices["en"]},
+            "voice": {"de": voices["de"], "style": voices.get("style"),
+                      "lang": "de"},
             "engine": engine,
             "profile": profile,
             "duration": duration_ms,
@@ -2132,37 +2105,59 @@ def selftest() -> int:
           sum(1 for t in p_text if "Jetzt Stromtarife vergleichen" in t) == 1)
     check("Keine doppelten Blocktexte", len(set(p_text)) == len(p_text))
 
-    # ---------- Wortlauf-Regie (Sprachwechsel mitten im Satz) ----------
-    def _langs(t, base="de"):
-        return [r["lang"] for r in language_runs(t, base)]
+    # ---------- Nur-Deutsch-Vertrag (Befund 07.09.2026) ----------
+    check("Nur-Deutsch: Sprach-Erkennung liefert immer de",
+          detect_language("This is an English sample about insurance costs.", "en") == "de")
+    check("Nur-Deutsch: Satz-Sniffing liefert immer de",
+          sniff_sentence_lang("This sentence is clearly English.", "en") == "de")
+    check("Nur-Deutsch: kein englisches CUES-Set mehr", "en" not in CUES)
+    check("Nur-Deutsch: Blöcke tragen immer lang=de",
+          all(b["lang"] == "de" for b in p_blocks))
+    check("Nur-Deutsch: englisches Attribut kippt Block nicht",
+          all(b["lang"] == "de" for b in extract_blocks(
+              parse_html(FIXTURE.replace('<html lang="de">', '<html lang="en">')), cfg)[0]))
+    check("Nur-Deutsch: Aussprache folgt deutschem Regelwerk",
+          normalize_speech("about 20%") == "about 20 Prozent")
 
-    check("Wortlauf: Robo Advisor wechselt zu EN",
-          _langs("Ein Robo Advisor nutzt Compound Interest und Cost Averaging.")
-          == ["de", "en", "de", "en", "de", "en"])
-    check("Wortlauf: Cashflow wechselt, Satzgerüst bleibt DE",
-          _langs("Der Cashflow kommt jeden Monat.") == ["de", "en", "de"])
-    check("Wortlauf: Buy and Hold bleibt ein Lauf",
-          " ".join(r["text"] for r in language_runs("Mit Buy and Hold bleibst du flexibel.", "de")
-                   if r["lang"] == "en").split() == ["Buy", "and", "Hold"])
-    check("Wortlauf: Scheinfreunde (was/hat/will) kippen nicht",
-          _langs("Was hat er damit gemeint?") == ["de"])
-    check("Wortlauf: einsames Funktionswort wechselt nicht",
-          _langs("The Big Short erklärt die Krise.") == ["de"])
-    check("Wortlauf: deutscher Einschub im EN-Artikel",
-          "de" in _langs("Compare your insurance costs, und die Versicherung kostet mehr.", "en"))
-    for probe in ("Ein Robo Advisor nutzt Compound Interest und Cost Averaging.",
-                  "Der Cashflow kommt jeden Monat.",
-                  "Compare your insurance costs, und die Versicherung kostet mehr.",
-                  "Was hat er damit gemeint?"):
-        check("Wortlauf konkatiert exakt: %s" % probe[:30],
-              "".join(r["text"] for r in language_runs(probe, "de")) == probe)
+    # ---------- Wortuhr: Aligner N→R ----------
+    def _aligned(norm, raw):
+        return align_norm_to_raw(norm_tokens(norm), norm_tokens(raw))
+
+    check("Wortuhr: 650 € → Euro am Rohwort ‚€“",
+          _aligned("bis zu 650 Euro", "bis zu 650 €") == [0, 1, 2, 3])
+    check("Wortuhr: Bereich 12 – 24 → 12 bis 24",
+          _aligned("12 bis 24", "12 – 24") == [0, 1, 2])
+    check("Wortuhr: Datum bleibt am Rohwort kleben",
+          _aligned("Stand 2. Januar 2006 ende", "Stand 02.01.2006 ende") == [0, 1, 1, 1, 2])
+    check("Wortuhr: kWh-Expansion trifft das Rohwort",
+          _aligned("20 Kilowattstunden Strom", "20 kWh Strom") == [0, 1, 2])
+    check("Wortuhr: Monotonie (nie zurück)",
+          (lambda a: all(a[i] <= a[i + 1] for i in range(len(a) - 1)))(
+              _aligned("Der Cashflow kommt jeden Monat und das ist gut so",
+                       "Der Cashflow kommt jeden Monat und das ist gut so")))
+    check("Wortuhr: leere Rohliste ⇒ -1 ohne Absturz", _aligned("a b", "") == [-1, -1])
+
+    def _wplaus_ok(chunks_w):
+        bb = [{"type": "p", "lang": "de", "text": "Eins zwei drei"}]
+        return track_plausible(bb, chunks_w, 1400)[0]
+
+    check("Wortuhr-Gate: saubere Karte besteht",
+          _wplaus_ok([{"b": 0, "t0": 100, "t1": 8000, "lang": "de", "w": [[0, 120], [1, 900], [2, 2000]]}]))
+    check("Wortuhr-Gate: Index außerhalb fällt durch",
+          not _wplaus_ok([{"b": 0, "t0": 100, "t1": 8000, "w": [[9, 120], [9, 900]]}]))
+    check("Wortuhr-Gate: unmotologische Zeit fällt durch",
+          not _wplaus_ok([{"b": 0, "t0": 100, "t1": 8000, "w": [[1, 5000], [2, 300]]}]))
+    check("Wortuhr-Gate: absteigender Index fällt durch",
+          not _wplaus_ok([{"b": 0, "t0": 100, "t1": 8000, "w": [[2, 300], [1, 5000]]}]))
 
     # Fingerprint
-    fp1 = fingerprint(blocks, "edge", "natural", "de-DE-X", "en-US-Y")
-    fp2 = fingerprint(blocks, "edge", "natural", "de-DE-X", "en-US-Y")
-    fp3 = fingerprint(blocks, "edge", "narrator", "de-DE-X", "en-US-Y")
+    fp1 = fingerprint(blocks, "edge", "news", "de-DE-ConradNeural")
+    fp2 = fingerprint(blocks, "edge", "news", "de-DE-ConradNeural")
+    fp3 = fingerprint(blocks, "edge", "narrator", "de-DE-KillianNeural")
     check("Fingerprint stabil", fp1 == fp2)
     check("Fingerprint reagiert auf Stimme", fp1 != fp3)
+    check("Fingerprint: englische Stimme ist bedeutungslos (Nur-Deutsch)",
+          fp1 == fingerprint(blocks, "edge", "news", "de-DE-ConradNeural", "en-US-Irgendwas"))
 
     # Injektion (idempotent)
     import tempfile
@@ -2253,6 +2248,38 @@ def selftest() -> int:
             dur2 = int(round(len(s2) * 1000.0 / ttb.SAMPLE_RATE))
             ok2, _ = track_plausible(blocks, c2, dur2)
             check("Funktionierende Spur besteht das Gate", ok2)
+            check("Ohne Wortgrenzen bleibt die Wortuhr weg (kein Bluff)",
+                  all("w" not in ch for ch in c2))
+
+        # End-to-End mit Wortgrenzen: jedes Wort eines Segments bekommt
+        # eine Zeit; die Karte muss strukturiert, im Chunkfenster und
+        # indexseitig gültig sein — und das Gate muss sie bestehen.
+        def _boundary_synth(text, lang, engine, profile_name, out_wav,
+                            rate=1.0, pitch=0, volume=1.0):
+            import math as _m
+            n = int((len(text) / ttb.BASE_CPS) * ttb.SAMPLE_RATE)
+            tone = [int(12000 * _m.sin(2 * _m.pi * 180 * i / ttb.SAMPLE_RATE))
+                    for i in range(max(1, n))]
+            ttb.write_wav_mono(out_wav, tone)
+            bnds = []
+            for k, w in enumerate(norm_tokens(text)):
+                bnds.append({"offset": k * 300000, "duration": 250000, "text": w})
+            return engine, True, bnds
+        ttb.synthesize = _boundary_synth
+        with _tf.TemporaryDirectory() as td:
+            s3, c3, st3 = synth_article(blocks, "edge", "news", td, log=None)
+            wch = [ch for ch in c3 if ch.get("w")]
+            check("Wortuhr: wird bei Wortgrenzen erzeugt", len(wch) >= 2)
+            check("Wortuhr: Zeitstempel wachsen im Chunk",
+                  all(all(e[1] <= nxt[1] for e, nxt in zip(ch["w"], ch["w"][1:]))
+                      for ch in wch))
+            check("Wortuhr: Indizes zeigen in den Blocktext",
+                  all(0 <= e[0] < max(1, len(norm_tokens(blocks[ch["b"]]["text"])))
+                      for ch in wch for e in ch["w"]))
+            dur3 = int(round(len(s3) * 1000.0 / ttb.SAMPLE_RATE))
+            ok3, why3 = track_plausible(blocks, c3, dur3)
+            check("Wortspur besteht das Plausibilitäts-Gate", ok3)
+            check("Wortuhr: stats zählen Wörter mit", st3["words"] >= 2)
     finally:
         ttb.synthesize = orig_synthesize
 
