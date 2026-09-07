@@ -343,16 +343,19 @@ def _selftest():
     return 0
 
 def _get_token():
-    """Löst einen gültigen Pinterest-Access-Token (Auth-Datei oder Env)."""
-    if os.environ.get("PINTEREST_ACCESS_TOKEN"):
-        return os.environ["PINTEREST_ACCESS_TOKEN"]
+    """Gültiger Pinterest-Access-Token über den zentralen Broker."""
+    # EINE Token-Wahrheit für alle Pinterest-Skripte (#206, 07.09.2026):
+    # scripts/pinterest_token.py entscheidet über die Quelle (Auto-Refresh-
+    # Speicher → Env-Refresh-Bootstrap → klassisches Secret) und prüft sie
+    # live. Vorher hatte jedes Skript eine eigene Reihenfolge – die Wache
+    # prüfte damit einen anderen Token als der Bot benutzt.
     try:
         sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
-        import pinterest_auth as pa
-        t = pa.get_access_token()  # erneuert ggf. Token (continuous refresh)
-        return t or ""
+        import pinterest_token
+        return pinterest_token.get_token() or ""
     except Exception as exc:  # noqa: BLE001
-        print(f"⚠ Pinterest-Auth-Refresh übersprungen ({exc}) – nutze Env-Token.")
+        print(f"⚠ Token-Broker nicht verfügbar ({exc.__class__.__name__}) – "
+              f"Pinterest-Messung wird übersprungen.")
         return ""
 
 

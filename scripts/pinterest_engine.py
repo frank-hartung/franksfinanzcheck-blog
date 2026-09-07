@@ -51,15 +51,21 @@ BASE_URL = os.environ.get("BLOG_BASE_URL", "https://franksfinanzcheck.de")
 # Affiliate-Links selbst bleiben kanalneutral, siehe check24_links.yaml).
 PIN_UTM = "?utm_source=pinterest&utm_medium=social&utm_campaign=pins"
 API = "https://api.pinterest.com/v5"
-# Token-Priorität: 1) Auto-Refresh aus data/pinterest_tokens.enc (pinterest_auth.py –
-# Token läuft nach 30 Tagen ab, refresh hält ihn automatisch am Leben)
-# 2) Fallback: klassisches Secret PINTEREST_ACCESS_TOKEN
+# EINE Token-Wahrheit (#206, 07.09.2026): Der Broker scripts/pinterest_token.py
+# entscheidet über die Quelle (verschlüsselter Auto-Refresh-Speicher →
+# Env-Refresh-Bootstrap → klassisches Secret), erneuert proaktiv und prüft live.
+#
+# Wichtig für die Betriebsruhe: Ein TOTER Token ergibt hier bewusst einen
+# LEEREN TOKEN – die Engine fällt damit in den Queue-Modus (Exit 0, Pins werden
+# vorbereitet) statt mit HTTP 401 rot zu laufen. Ein abgelaufener Token ist ein
+# Wartungsfall der Token-Wache, kein Grund für rote Tagesläufe und Folge-Issues
+# (vgl. #153/#209 – dieselbe Ursache, drei Alarme).
 try:
-    import pinterest_auth
-    TOKEN = pinterest_auth.get_access_token() or os.environ.get("PINTEREST_ACCESS_TOKEN", "")
-except BaseException as _auth_err:  # noqa: BLE001 – auch SystemExit aus defekter Token-Datei abfangen
-    print(f"⚠ Pinterest-Token-Refresh übersprungen ({_auth_err}) – nutze Env-Token.")
-    TOKEN = os.environ.get("PINTEREST_ACCESS_TOKEN", "")
+    import pinterest_token
+    TOKEN = pinterest_token.get_token() or ""
+except BaseException as _auth_err:  # noqa: BLE001 – auch SystemExit abfangen
+    print(f"⚠ Token-Broker nicht verfügbar ({_auth_err}) – Queue-Modus.")
+    TOKEN = ""
 BOARD_ID = os.environ.get("PINTEREST_BOARD_ID", "")
 ROTATE_DAYS = int(os.environ.get("PINTEREST_ROTATE_DAYS", "60"))
 # T9 ANTI-FLOODING (24.08.2026 aus 08c97ab8 zurueckgeholt, 31.08. erneut verifiziert):
@@ -456,13 +462,20 @@ def main():
 
     if not TOKEN:
         # QUEUE-MODUS: vorbereiten, sauber skippen (kein Fehler!)
+        # Auch der Fall „Token abgelaufen" landet hier – siehe Token-Broker oben.
         # PINTEREST_BOARD_ID ist in Queue-Modus KEINE Pflicht – das Board wird
         # beim Posten per Routing ermittelt (Board-Auto-Creation).
         queue = [{"slug": p["slug"], "title": pin_title_of(p), "text": pin_text(p),
                   "cover": p["cover"], "board": board_name_for(p, board_config)}
                  for p in unpinned[:PINS_PRO_TAG]]
         n = write_queue(queue)
-        lines = [f"**Modus:** Queue (kein PINTEREST_ACCESS_TOKEN)",
+        try:
+            import pinterest_token as _pt
+            _grund = _pt.load_state().get("next_action") or "kein lebender Pinterest-Zugang"
+        except Exception:  # noqa: BLE001
+            _grund = "kein lebender Pinterest-Zugang"
+        lines = [f"**Modus:** Queue (kein lebender Pinterest-Zugang)",
+                 "", f"- Grund/nächster Schritt: {_grund}",
                  "", f"- {n} Pins vorbereitet in `data/pin_queue.yaml`",
                  f"- {len(unpinned)} Artikel warten aufs Posting",
                  f"- Rate-Limit: max. {PINS_PRO_TAG} Pins/Lauf, {PIN_PAUSE_S}s Pause",

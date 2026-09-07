@@ -4,10 +4,17 @@ Damit der Blog **montags automatisch** neue Artikel bei Pinterest nachpinnen kan
 brauchst du einen Pinterest-API-Zugang. Das ist **kostenlos** – die Schritte sind:
 
 > ⚠️ **WICHTIG (Stand 2026): Token-Lebensdauer!** Pinterest-Access-Tokens laufen nach
-> **30 Tagen** ab. Dieses System erneuert sie deshalb **automatisch bei jedem Lauf**
-> (Continuous Refresh, `scripts/pinterest_auth.py`). Die Tokens liegen AES-256-
-> verschlüsselt in `data/pinterest_tokens.enc`; der Schlüssel ist das Secret
-> `PINTEREST_TOKEN_KEY`. Einmalig bei der Ersteinrichtung erzeugen (Schritt 2a).
+> **30 Tagen** ab. Dieses System erneuert sie deshalb **täglich automatisch**
+> (Continuous Refresh). Die Tokens liegen AES-256-verschlüsselt in
+> `data/pinterest_tokens.enc`; der Schlüssel ist das Secret `PINTEREST_TOKEN_KEY`.
+>
+> 🆕 **Seit 07.09.2026 (Governance-Report #206):** Zuständig sind der Token-Broker
+> `scripts/pinterest_token.py` (eine Token-Quelle für alle Skripte, Failover,
+> proaktive Erneuerung) und der tägliche Lauf `.github/workflows/pinterest-token.yml`.
+> Die Autorisierung läuft komplett in GitHub Actions – **du brauchst kein lokales
+> Python mehr**. Kurzweg und Fehlersuche: **`docs/PINTEREST-TOKEN-RUNBOOK.md`**.
+> Die folgenden lokalen Kommandos funktionieren weiterhin, sind aber nur noch
+> der manuelle Notweg.
 
 ---
 

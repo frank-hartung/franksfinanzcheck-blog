@@ -85,6 +85,13 @@ def _load() -> dict | None:
     """
     if not TOKEN_FILE.exists():
         return None
+    try:
+        _key_bytes()
+    except SystemExit:
+        # Kein Schlüssel im Env: das ist eine Konfigurationslage, kein Absturz.
+        # Der Broker (scripts/pinterest_token.py) fällt sauber auf die nächste
+        # Quelle zurück – Härtung aus #206.
+        return None
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
     raw = TOKEN_FILE.read_bytes()
     try:
@@ -93,6 +100,19 @@ def _load() -> dict | None:
         print(f"⚠ data/pinterest_tokens.enc nicht entschlüsselbar "
               f"(falscher PINTEREST_TOKEN_KEY?) – nutze Env-Token: {exc}")
         return None
+
+
+# Öffentliche, stabile Namen für den Token-Broker (scripts/pinterest_token.py).
+# Der Broker kennt die Krypto-Details bewusst nicht – hier liegt die einzige
+# Stelle, die verschlüsselt liest und schreibt.
+def load_store() -> dict | None:
+    """Entschlüsselter Token-Bestand oder None."""
+    return _load()
+
+
+def save_store(data: dict) -> None:
+    """Token-Bestand verschlüsselt schreiben (rotierter Refresh-Token!)."""
+    _save(data)
 
 
 # ---------------------------------------------------------------- OAuth-Calls
@@ -133,20 +153,33 @@ def refresh_tokens(data: dict) -> dict:
 def get_access_token() -> str | None:
     """Gibt einen GÜLTIGEN Access-Token zurück (erneuert ihn bei Bedarf).
 
-    Rückgabe None = keine Token-Datei vorhanden -> Aufrufer nutzt den
-    klassischen Env-Token (PINTEREST_ACCESS_TOKEN) als Fallback.
+    ALTLAST-SCHNITTSTELLE (seit 07.09.2026, #206): Die Entscheidung, WELCHE
+    Quelle gilt, trifft nur noch der Broker `scripts/pinterest_token.py`.
+    Diese Funktion bleibt bestehen, damit älterer Code weiterläuft – sie
+    delegiert aber vollständig.
+
+    Warum das wichtig ist: Vorher hat diese Funktion bei JEDEM Aufruf blind
+    einen Refresh ausgelöst. Der Refresh-Token rotiert dabei; zwei parallele
+    Läufe konnten sich gegenseitig aussperren. Der Broker erneuert nur, wenn
+    es nötig ist – unter Dateisperre.
     """
-    data = _load()
-    if not data:
-        return None
     try:
-        data = refresh_tokens(data)          # proaktiv: Fenster bleibt ewig offen
-        _save(data)                          # neue Tokens persistieren (Commit im Workflow)
-        print("🔑 Pinterest-Token automatisch erneuert (continuous refresh).")
-    except Exception as exc:
-        print(f"⚠ Token-Refresh fehlgeschlagen ({exc}) – versuche bestehenden Token.")
-    token = data.get("access_token")
-    return token or None
+        import pinterest_token          # lazy: verhindert Zirkel-Import
+        return pinterest_token.get_token()
+    except Exception as exc:  # noqa: BLE001 – nie den Aufrufer mitreißen
+        print(f"⚠ Token-Broker nicht verfügbar ({exc.__class__.__name__}) – "
+              f"nutze den Bestand ohne Erneuerung.")
+        data = _load() or {}
+        return data.get("access_token") or os.environ.get("PINTEREST_ACCESS_TOKEN") or None
+
+
+def refresh_now() -> int:
+    """CLI-Pfad: Erneuerung erzwingen (Token-Wache, täglich)."""
+    import pinterest_token
+    health = pinterest_token.resolve(force_refresh=True)
+    pinterest_token.save_state(health)
+    print(pinterest_token.describe(health))
+    return 0 if health.get("state") == "live" else 1
 
 
 # ------------------------------------------------------------------- CLI-Teil
@@ -179,11 +212,16 @@ def exchange_code(code: str) -> None:
         {"grant_type": "authorization_code", "code": code, "redirect_uri": REDIRECT_URI},
         app_id, app_secret,
     )
+    now = datetime.now(timezone.utc).isoformat()
     data = {
         "app_id": app_id,
         "app_secret": app_secret,
         "access_token": resp["access_token"],
         "refresh_token": resp["refresh_token"],
+        # Zeitstempel sind Pflicht: der Broker rechnet daraus die Restlaufzeit
+        # aus und erneuert PROAKTIV, statt auf den ersten 401 zu warten (#206).
+        "refreshed_at": now,
+        "refresh_rotated_at": now,
     }
     _save(data)
     print("✅ Pinterest-Autorisierung abgeschlossen!")
@@ -195,6 +233,8 @@ def print_status() -> None:
     data = _load()
     if not data:
         print("Keine Token-Datei (data/pinterest_tokens.enc) vorhanden.")
+        print("→ Lagebild des gesamten Zugangs (alle Quellen): "
+              "python3 scripts/pinterest_token.py --status")
         return
     print(f"✔ Token-Datei vorhanden, gespeichert: {data.get('saved_at', '?')}")
     print(f"✔ App-ID: {data.get('app_id')}")
@@ -212,5 +252,7 @@ if __name__ == "__main__":
         exchange_code(sys.argv[idx + 1])
     elif "--status" in sys.argv:
         print_status()
+    elif "--refresh" in sys.argv:
+        sys.exit(refresh_now())
     else:
         print(__doc__)

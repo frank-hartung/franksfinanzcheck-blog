@@ -1212,14 +1212,16 @@ def api_postrun():
 
 
 def _resolve_token():
-    token = os.environ.get("PINTEREST_ACCESS_TOKEN", "")
-    if token:
-        return token
+    # EINE Token-Wahrheit für alle Pinterest-Skripte (#206, 07.09.2026):
+    # scripts/pinterest_token.py entscheidet über die Quelle (Auto-Refresh-
+    # Speicher → Env-Refresh-Bootstrap → klassisches Secret) und prüft sie
+    # live. Vorher hatte jedes Skript eine eigene Reihenfolge – die Wache
+    # prüfte damit einen anderen Token als der Bot benutzt.
     try:
-        import pinterest_auth
-        return pinterest_auth.get_access_token() or ""
-    except BaseException:  # noqa: BLE001 – defekte Token-Datei darf nicht
-        return ""         # den Watchdog crashen lassen
+        import pinterest_token
+        return pinterest_token.get_token() or ""
+    except BaseException:  # noqa: BLE001 – ein kaputter Broker darf den
+        return ""         # Watchdog niemals crashen lassen
 
 
 def sync_pins():

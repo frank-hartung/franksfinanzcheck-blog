@@ -15,6 +15,9 @@ Dieser Vertrag hält die Regeln fest, die den Dauer-Alarm aus Governance-Report 
 - **C7 Datenkonsistenz** – Manifest, Report und Scorecard zeigen dieselbe Ampel (oder die Scorecard kennzeichnet STALE/nicht gemessen ausdrücklich).
 - **C8 Commit-Hygiene** – `git add` im Workflow nennt nur versionierbare Pfade – ignorierte, unversionierte Dateien brechen den Lauf hart ab (#205).
 - **C9 Secret-Leak-Schutz** – Reports und `data/*.json` enthalten kein Secret-Material (Pinterest/Groq/Gemini/GitHub/JWT-Muster).
+- **C10 Token-Broker** – Alle Pinterest-Skripte holen ihren Token über den Broker `scripts/pinterest_token.py` – eine Reihenfolge, ein Failover, und die Wache prüft denselben Token, mit dem der Bot arbeitet (#206).
+- **C11 Token-Lebenszyklus** – Es gibt einen täglichen Erneuerungslauf (`pinterest-token.yml`), der den rotierten Refresh-Token sichert, sich selbst testet und sein Issue bei Heilung schließt – ein Handbetriebs-Secret stirbt sonst alle 30 Tage.
+- **C12 Label-Garantie** – Jeder Workflow, der Issues mit Label erzeugt, legt das Label vorher an – sonst scheitert die Meldung mit HTTP 422 und der Melder wird selbst zum Zwischenfall (#209).
 
 ## Befund
 

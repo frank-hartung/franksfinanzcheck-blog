@@ -271,6 +271,13 @@ def load_posts() -> list:
 
 
 # ---------------------------------------------------------------- Selbsttest
+_SYNC_SOURCE = ""
+try:
+    _SYNC_SOURCE = open(os.path.abspath(__file__), encoding="utf-8").read()
+except OSError:      # pragma: no cover – Datei immer vorhanden
+    _SYNC_SOURCE = ""
+
+
 def _selftest() -> list[str]:
     fehler = []
     if PIN_TITLE_MAX != 100 or PIN_DESC_MAX != 500:
@@ -313,6 +320,12 @@ def _selftest() -> list[str]:
                   "pinwand": "Geld sparen im Alltag | Frugalismus-Tipps"}
     if score(wrong, frugal_pin, load_board_pillar_map()) != -1.0:
         fehler.append("Board-Gate funktioniert nicht (Cross-Silo nicht abgelehnt)")
+    # Duplikat-Sperre: derselbe Text darf nie zwei Artikeln gehören
+    belegt = {"*Werbung | Text A": "artikel-eins"}
+    if belegt.get("*Werbung | Text A") == "artikel-zwei":
+        fehler.append("Duplikat-Register unbrauchbar")
+    if "belegt" not in _SYNC_SOURCE or "Duplikat verhindert" not in _SYNC_SOURCE:
+        fehler.append("Duplikat-Sperre aus dem Sync entfernt (P4-Spamrisiko kehrt zurück)")
     return fehler
 
 
@@ -357,6 +370,20 @@ def main() -> int:
         if best_sc >= MIN_SYNC_SCORE and best_j >= 0:
             pin_best[i] = (best_sc, best_rs, best_j)
 
+    # ------------------------------------------------------------------
+    # DUPLIKAT-SPERRE (07.09.2026, Befund P4 des Pinterest-Watchdogs):
+    # Zwei Artikel mit identischer pin_description sind für Pinterest ein
+    # Spam-Signal („Repeat-Pin") – und genau so entstand sie: Ein Masterplan-Pin
+    # passte auf zwei Artikel und der Sync schrieb denselben Text zweimal.
+    # Ab jetzt gilt: Eine Beschreibung gehört genau EINEM Artikel. Der zweite
+    # behält seinen eigenen Text; der Konflikt wird gemeldet statt still erzeugt.
+    # ------------------------------------------------------------------
+    belegt = {}
+    for post in posts:
+        d = (post.get("pin_description") or "").strip()
+        if d:
+            belegt.setdefault(d, post["slug"])
+
     for j, post in enumerate(posts):
         if post["draft"]:
             rows.append({"slug": post["slug"], "pin": "-", "score": 0.0,
@@ -389,6 +416,14 @@ def main() -> int:
         # Level). Der SEO-Healer schützt den Stand danach vor
         # deterministischem Überschreiben (H6 „gültiger Text bleibt“).
         content = post["content"]
+        besitzer = belegt.get(new_desc.strip())
+        if besitzer and besitzer != post["slug"]:
+            issues.append(f"{post['slug']}: Beschreibung gehört bereits `{besitzer}` – "
+                          "Duplikat verhindert (Pinterest-Spam-Signal P4)")
+            rows.append({"slug": post["slug"], "pin": pin.get("tag"), "score": rs,
+                         "match": f"Duplikat-Sperre (Text von {besitzer})",
+                         "changed": False})
+            continue
         do_t = (post["pin_title"] != new_title)
         do_d = (post["pin_description"] != new_desc)
         do_w = (post["pinwand"] != new_pinwand)
@@ -404,6 +439,9 @@ def main() -> int:
             content = fm_set(content, "pinwand", new_pinwand)
         if DO_APPLY:
             open(post["path"], "w", encoding="utf-8").write(content)
+        if do_d:
+            belegt.pop((post.get("pin_description") or "").strip(), None)
+            belegt[new_desc.strip()] = post["slug"]
         changed += 1
         rows.append({"slug": post["slug"], "pin": pin.get("tag"), "score": rs,
                      "match": f"Pin {pin.get('tag')} „{new_title[:40]}…“",

@@ -85,13 +85,15 @@ BOARD_COVERS = {
 
 # ---------------------------------------------------------------- Token
 def get_token() -> str:
-    env = os.environ.get("PINTEREST_ACCESS_TOKEN", "")
-    if env:
-        return env.strip()
+    # EINE Token-Wahrheit für alle Pinterest-Skripte (#206, 07.09.2026):
+    # scripts/pinterest_token.py entscheidet über die Quelle (Auto-Refresh-
+    # Speicher → Env-Refresh-Bootstrap → klassisches Secret) und prüft sie
+    # live. Vorher hatte jedes Skript eine eigene Reihenfolge – die Wache
+    # prüfte damit einen anderen Token als der Bot benutzt.
     try:
-        import pinterest_auth
-        return (pinterest_auth.get_access_token() or "").strip()
-    except Exception:
+        import pinterest_token
+        return (pinterest_token.get_token() or "").strip()
+    except Exception:  # noqa: BLE001
         return ""
 
 

@@ -99,7 +99,8 @@ SECRETS = {
     },
     "PINTEREST_ACCESS_TOKEN": {
         "days": 15, "label": "Pinterest Access-Token", "probe": "pinterest",
-        "proof_by": ("pinterest-ai", "pinterest-watchdog", "premium-governance", "repin-weekly"),
+        "proof_by": ("pinterest-ai", "pinterest-watchdog", "premium-governance",
+                     "repin-weekly", "pinterest-token"),
     },
     "MASTODON_ACCESS_TOKEN": {
         "days": 45, "label": "Mastodon Access-Token", "probe": "mastodon",
@@ -108,7 +109,17 @@ SECRETS = {
     "PINTEREST_TOKEN_KEY": {
         "days": 60, "label": "Pinterest Verschlüsselungs-Key",
         "optional": True, "alt_of": "PINTEREST_ACCESS_TOKEN", "probe": None,
-        "proof_by": ("pinterest-ai",),
+        "proof_by": ("pinterest-ai", "pinterest-token"),
+    },
+    # 07.09.2026 (#206): Der Pinterest-Kanal starb planmäßig alle 30 Tage, weil
+    # er an einem von Hand eingefügten Access-Token hing. Mit Refresh-Token +
+    # App-Zugangsdaten trägt sich der Kanal selbst (continuous refresh). Das
+    # Secret ist optional – aber sein FEHLEN ist der eigentliche Dauerbefund,
+    # deshalb steht es hier sichtbar in der Registrierung.
+    "PINTEREST_REFRESH_TOKEN": {
+        "days": 365, "label": "Pinterest Refresh-Token (Auto-Erneuerung)",
+        "optional": True, "probe": None,
+        "proof_by": ("pinterest-token",),
     },
     # 07.09.2026 (#206): Die Klick-Datenbank der Monetarisierungs-Schleife war
     # dauerhaft „0 Klicks“, ohne dass jemand sagte, WORAN das liegt (Export
@@ -126,6 +137,11 @@ LEVELS = ("red", "amber", "info")
 
 # Befunde, die NIEMALS ein Governance-Issue auslösen sollen (nur Hinweis).
 INFO_ONLY_CODES = {"not_configured", "not_used", "untracked_optional", "probe_skipped"}
+
+# Lebenszyklus-Befunde des Pinterest-Zugangs (Quelle: scripts/pinterest_token.py).
+# Sie beantworten die Frage, die #206 wochenlang offen ließ: Läuft der Kanal nur
+# gerade zufällig – oder trägt er sich selbst?
+PIN_RUNBOOK = "docs/PINTEREST-TOKEN-RUNBOOK.md"
 
 
 # ------------------------------------------------------------------ State (robust)
@@ -310,17 +326,44 @@ def _http_status(url, headers=None, timeout=PROBE_TIMEOUT):
         return None, f"{exc.__class__.__name__}"
 
 
+_PIN_HEALTH_VERIFIED = {}
+
+
+def _pinterest_health(verify=True):
+    """Lagebild des Pinterest-Zugangs vom zentralen Broker (nie Token-Material).
+
+    #206-Kern: Vorher prüfte diese Wache das Env-Secret, während der Bot mit
+    einer ganz anderen Quelle arbeitete (Auto-Refresh-Speicher). Ein grüner
+    Report konnte einen toten Kanal bedeuten – und ein roter einen gesunden.
+    Jetzt fragt die Wache exakt den Zugang ab, den der Betrieb benutzt.
+    """
+    if not verify and _PIN_HEALTH_VERIFIED:
+        # Im selben Lauf schon live geprüft: Report und Befund zeigen denselben
+        # Stand (sonst steht im Cockpit „unverified", während die Probe 200 sah).
+        return _PIN_HEALTH_VERIFIED
+    try:
+        import pinterest_token
+        h = pinterest_token.health(verify=verify, allow_refresh=verify)
+        if verify:
+            _PIN_HEALTH_VERIFIED.clear()
+            _PIN_HEALTH_VERIFIED.update(h)
+        return h
+    except Exception as exc:  # noqa: BLE001 – die Wache stirbt nie am Broker
+        return {"state": "unknown", "severity": "amber", "source": None,
+                "detail": f"Token-Broker nicht verfügbar ({exc.__class__.__name__})",
+                "renewable": False, "auto_renew_armed": False, "runbook": PIN_RUNBOOK,
+                "next_action": "scripts/pinterest_token.py prüfen (Selbsttest)"}
+
+
 def _pinterest_token():
-    """Env-Token, sonst der verschlüsselte Bestand aus pinterest_auth."""
+    """Nur für Vorhandensein/Länge – ohne Netz, ohne Erneuerung."""
     tok = os.environ.get("PINTEREST_ACCESS_TOKEN", "").strip()
     if tok:
         return tok
     try:
-        import pinterest_auth
-        tok = pinterest_auth.get_access_token() or ""
-        return tok.strip()
-    except SystemExit:
-        return ""                        # Key fehlt → kein Zugriff, kein Crash
+        import pinterest_token
+        h = pinterest_token.resolve(verify=False, allow_refresh=False)
+        return (h.get("token") or "").strip()
     except Exception:  # noqa: BLE001  – Krypto-Bibliotheken können fehlen
         return ""
 
@@ -346,14 +389,23 @@ def _probe_gemini(secret):
     return "error", _sanitize(err or f"Gemini HTTP {code}", secret)
 
 
-def _probe_pinterest(secret):
-    code, err = _http_status("https://api.pinterest.com/v5/users/me",
-                             {"Authorization": f"Bearer {secret}"})
-    if code == 200:
-        return "ok", "Pinterest /users/me 200"
-    if code in (401, 403):
-        return "dead", f"Pinterest-Token abgelaufen/ungültig ({code})"
-    return "error", _sanitize(err or f"Pinterest HTTP {code}", secret)
+def _probe_pinterest(_secret):
+    """Delegiert an den Token-Broker: Failover über alle Quellen inklusive.
+
+    Zwei alte Fehler stecken in der ersetzten Zeile:
+      1. `/v5/users/me` gibt es in der Pinterest-API v5 gar nicht (v3-Altlast) –
+         die Wache befragte einen Pfad, den niemand benutzt.
+      2. Geprüft wurde nur das Env-Secret. Lebt der Kanal über den
+         Auto-Refresh-Speicher weiter, meldete die Wache trotzdem ROT.
+    """
+    h = _pinterest_health(verify=True)
+    state = h.get("state")
+    src = h.get("source_label") or "unbekannte Quelle"
+    if state == "live":
+        return "ok", f"Pinterest /v5/user_account 200 (Quelle: {src})"
+    if state in ("dead", "absent"):
+        return "dead", h.get("next_action") or "Pinterest lehnt alle Token ab"
+    return "error", h.get("detail") or "Pinterest-Live-Probe nicht möglich"
 
 
 def _probe_mastodon(secret):
@@ -474,10 +526,21 @@ def run_verifications(vars_to_check):
 # ------------------------------------------------------------------ Audit
 
 def _present(var):
-    """Secret im Env – oder bei Pinterest alternativ als verschlüsselte Datei."""
+    """Secret im Env – oder bei Pinterest über einen der Erneuerungspfade.
+
+    Der Pinterest-Zugang hat drei mögliche Quellen (Broker-Reihenfolge):
+    verschlüsselter Auto-Refresh-Speicher, Env-Refresh-Token + App-Daten,
+    klassisches Access-Secret. „Vorhanden" heißt: mindestens eine davon.
+    """
     if os.environ.get(var, "").strip():
         return True
-    return var == "PINTEREST_ACCESS_TOKEN" and os.path.exists(PIN_FILE)
+    if var != "PINTEREST_ACCESS_TOKEN":
+        return False
+    if os.path.exists(PIN_FILE):
+        return True
+    return bool(os.environ.get("PINTEREST_REFRESH_TOKEN", "").strip()
+                and os.environ.get("PINTEREST_APP_ID", "").strip()
+                and os.environ.get("PINTEREST_APP_SECRET", "").strip())
 
 
 def _alt_active(meta):
@@ -566,7 +629,45 @@ def classify(var, meta, ent, today=None, verification=None, live_check_available
                f"die Live-Probe läuft im Premium-Governance-Workflow"})
 
 
-def audit(verification=None, live_check_available=False):
+def pinterest_lifecycle_findings(health, token_dead=False):
+    """Vorwarnung statt Nachruf: Was passiert mit dem Zugang in den nächsten Tagen?
+
+    Der teuerste Teil von #206 war nicht der tote Token, sondern dass sein Tod
+    planbar war und trotzdem niemand vorher gewarnt hat. Diese Befunde melden
+    das Risiko, BEVOR der Kanal steht.
+    """
+    out = []
+    if not health or token_dead:
+        return out          # ein toter Kanal hat schon seinen roten Befund
+    if health.get("state") not in ("live", "unverified"):
+        return out
+    if not health.get("auto_renew_armed"):
+        out.append({
+            "level": "amber", "code": "manual_token", "var": "PINTEREST_ACCESS_TOKEN",
+            "msg": ("Pinterest läuft im Handbetrieb: Der Access-Token stirbt "
+                    f"planmäßig nach 30 Tagen und niemand erneuert ihn. "
+                    f"Auto-Erneuerung scharfschalten (5 Min., einmalig): `{PIN_RUNBOOK}` "
+                    "– danach trägt sich der Kanal selbst.")})
+        return out
+    left = health.get("refresh_days_left")
+    age = health.get("refresh_age_days")
+    if isinstance(left, int) and left <= 8:
+        out.append({
+            "level": "red", "code": "refresh_rotation", "var": "PINTEREST_ACCESS_TOKEN",
+            "msg": (f"Der Refresh-Token rotiert in {left} Tagen zwangsweise "
+                    f"(Alter {age} Tage) und wurde seither nicht erneuert – die "
+                    "tägliche Token-Wache (`pinterest-token.yml`) läuft offenbar "
+                    "nicht. Ohne Erneuerung steht der Kanal danach still.")})
+    elif isinstance(left, int) and left <= 20:
+        out.append({
+            "level": "amber", "code": "refresh_rotation", "var": "PINTEREST_ACCESS_TOKEN",
+            "msg": (f"Refresh-Token seit {age} Tagen nicht rotiert (noch {left} Tage "
+                    "Reserve). Die tägliche Token-Wache sollte das automatisch tun – "
+                    "Lauf prüfen: `gh run list --workflow=pinterest-token.yml`.")})
+    return out
+
+
+def audit(verification=None, live_check_available=False, pin_health=None):
     verification = verification or {}
     state, state_warning = _read_state_file()
     entries = state.get("entries") or {}
@@ -583,6 +684,11 @@ def audit(verification=None, live_check_available=False):
     if state_warning:
         findings.append({"level": "amber", "code": "state_corrupt", "var": "STATE",
                          "msg": f"State-Datei: {state_warning}"})
+    token_dead = any(f.get("var") == "PINTEREST_ACCESS_TOKEN"
+                     and f.get("code") in ("dead", "missing") for f in findings)
+    if pin_health is None and _present("PINTEREST_ACCESS_TOKEN"):
+        pin_health = _pinterest_health(verify=False)     # ohne Netz, nur Bestand
+    findings += pinterest_lifecycle_findings(pin_health, token_dead=token_dead)
     return findings, summary
 
 
@@ -603,7 +709,34 @@ def actionable(findings):
 
 # ------------------------------------------------------------------ Report
 
-def render_report(findings, summary, verification=None):
+def render_pinterest_lifecycle(health):
+    """Kurzer Lebenszyklus-Block: Woher kommt der Zugang, wie lange trägt er?"""
+    if not health:
+        return []
+    icon = {"green": "🟢", "amber": "🟡", "red": "🔴"}.get(health.get("severity"), "⚪")
+    armed = "scharf" if health.get("auto_renew_armed") else "**nicht scharf**"
+    rows = [
+        "", "## 🔁 Pinterest-Zugang (Lebenszyklus)", "",
+        "| Merkmal | Wert |", "|---|---|",
+        f"| Zustand | {icon} {health.get('state')} |",
+        f"| Aktive Quelle | {health.get('source_label') or '–'} |",
+        f"| Auto-Erneuerung | {armed} |",
+    ]
+    if health.get("access_age_days") is not None:
+        rows.append(f"| Access-Token-Alter | {health['access_age_days']} Tage "
+                    f"(Ablauf nach 30) |")
+    if health.get("refresh_days_left") is not None:
+        rows.append(f"| Refresh-Token-Reserve | {health['refresh_days_left']} Tage "
+                    "bis zur Zwangs-Rotation |")
+    if health.get("fingerprint"):
+        rows.append(f"| Fingerabdruck | `{health['fingerprint']}` (kein Token-Material) |")
+    rows.append(f"| Nächster Schritt | {health.get('next_action') or '–'} |")
+    rows += ["", f"_Quelle: `scripts/pinterest_token.py` · Runbook: `{PIN_RUNBOOK}` · "
+                 "täglich erneuert von `pinterest-token.yml`._"]
+    return rows
+
+
+def render_report(findings, summary, verification=None, pin_health=None):
     verdict = verdict_of(findings)
     lines = [
         "# 🔐 Secrets-/Token-Alters-Wache",
@@ -617,6 +750,7 @@ def render_report(findings, summary, verification=None):
     ]
     for var, st, proof in summary:
         lines.append(f"| `{var}` | {st} | {proof} |")
+    lines += render_pinterest_lifecycle(pin_health)
     infos = [f for f in findings if f.get("level") == "info"]
     hard = [f for f in findings if f.get("level") in ("red", "amber")]
     lines += ["", "## Befunde", ""]
@@ -634,9 +768,19 @@ def render_report(findings, summary, verification=None):
     lines += ["", "## Empfehlungen", ""]
     recs = []
     if any(f["code"] == "dead" for f in findings):
-        recs.append("**Token tot (401/403):** sofort erneuern – Pinterest via "
-                    "`python3 scripts/pinterest_auth.py --auth-url` + `--exchange <code>`, "
-                    "danach `--verify` zur Gegenprobe.")
+        recs.append("**Token tot (401/403):** Der Pinterest-Zugang wird über die "
+                    f"Token-Wache erneuert – Runbook `{PIN_RUNBOOK}` (Actions → "
+                    "„Pinterest-Token-Wache\" → *Run workflow* → Autorisierungs-Code "
+                    "einfügen). Danach erneuert sich der Kanal täglich selbst; "
+                    "Gegenprobe: `python3 scripts/pinterest_token.py --status`.")
+    if any(f["code"] == "manual_token" for f in findings):
+        recs.append("**Handbetrieb beenden:** Solange nur `PINTEREST_ACCESS_TOKEN` "
+                    "existiert, stirbt der Kanal alle 30 Tage erneut. Einmalig "
+                    f"Auto-Erneuerung scharfschalten: `{PIN_RUNBOOK}`.")
+    if any(f["code"] == "refresh_rotation" for f in findings):
+        recs.append("**Erneuerungs-Lauf prüfen:** Der Refresh-Token rotiert nach 60 "
+                    "Tagen. Läuft `pinterest-token.yml` täglich? "
+                    "`gh run list --workflow=pinterest-token.yml --limit 5`.")
     if any(f["code"] == "stale" for f in findings):
         recs.append("Pflicht-Secret seit über der Frist ohne Erfolg: Kanal läuft "
                     "stumm ins Leere – Workflow-Log prüfen (`gh run list`).")
@@ -762,6 +906,49 @@ def _selftest():
                           proven_by="premium-governance"), today=today)
         if not st[2] or st[2]["code"] != "foreign_proof":
             failures.append("Selbst-Waschen (Nachweis aus fremdem Workflow) bleibt unsichtbar")
+        # --- #206-Lebenszyklus: Handbetrieb ist ein Risiko, kein grüner Zustand
+        live_manual = {"state": "live", "severity": "amber", "auto_renew_armed": False,
+                       "source_label": "klassisches Secret"}
+        res = pinterest_lifecycle_findings(live_manual)
+        if not res or res[0]["code"] != "manual_token" or res[0]["level"] != "amber":
+            failures.append("Pinterest im 30-Tage-Handbetrieb wird nicht als Risiko "
+                            "gemeldet – genau daran starb der Kanal in #206")
+        if PIN_RUNBOOK not in res[0]["msg"]:
+            failures.append("Handbetrieb-Befund ohne Runbook (nicht handlungsfähig)")
+        # --- gesunder Auto-Refresh-Kanal: kein Befund
+        healthy = {"state": "live", "severity": "green", "auto_renew_armed": True,
+                   "refresh_days_left": 57, "refresh_age_days": 3}
+        if pinterest_lifecycle_findings(healthy):
+            failures.append("selbsttragender Pinterest-Kanal erzeugt trotzdem Befunde")
+        # --- Rotation überfällig: rot BEVOR der Kanal steht
+        overdue = {"state": "live", "severity": "red", "auto_renew_armed": True,
+                   "refresh_days_left": 4, "refresh_age_days": 56}
+        res = pinterest_lifecycle_findings(overdue)
+        if not res or res[0]["level"] != "red" or res[0]["code"] != "refresh_rotation":
+            failures.append("überfällige Refresh-Rotation wird nicht vorab rot gemeldet")
+        soon = {"state": "live", "severity": "amber", "auto_renew_armed": True,
+                "refresh_days_left": 15, "refresh_age_days": 45}
+        res = pinterest_lifecycle_findings(soon)
+        if not res or res[0]["level"] != "amber":
+            failures.append("alternder Refresh-Token wird nicht gelb vorgewarnt")
+        # --- toter Token: KEIN zweiter Befund (Doppel-Alarm war #206-Muster)
+        if pinterest_lifecycle_findings(live_manual, token_dead=True):
+            failures.append("toter Kanal erzeugt zusätzlich einen Lebenszyklus-Befund "
+                            "(Doppel-Alarm)")
+        # --- Broker-Ausfall darf die Wache nicht mitreißen
+        if pinterest_lifecycle_findings(None):
+            failures.append("fehlendes Lagebild erzeugt Phantom-Befunde")
+        # --- Auto-Erneuerungspfad ist registriert und dokumentiert
+        if "PINTEREST_REFRESH_TOKEN" not in SECRETS:
+            failures.append("Refresh-Token nicht in der Secret-Registrierung "
+                            "(der Erneuerungspfad bliebe unsichtbar)")
+        if "pinterest-token" not in (SECRETS["PINTEREST_ACCESS_TOKEN"].get("proof_by") or ()):
+            failures.append("Token-Wache darf den Pinterest-Nachweis nicht führen")
+        # --- Lebenszyklus-Block landet im Report (Cockpit-Sichtbarkeit)
+        rep = render_report([], [("PINTEREST_ACCESS_TOKEN", "OK", "live")],
+                            pin_health=healthy)
+        if "Pinterest-Zugang (Lebenszyklus)" not in rep or "Auto-Erneuerung" not in rep:
+            failures.append("Report zeigt den Token-Lebenszyklus nicht")
         # --- Verdict-Hierarchie + Actionable-Filter
         fs = [{"level": "info", "code": "not_configured"}, {"level": "amber", "code": "aging"}]
         if verdict_of(fs) != "AMBER":
@@ -839,8 +1026,11 @@ def main(argv=None):
         targets = [only] if only else [v for v in SECRETS if (SECRETS[v].get("probe"))]
         verification = run_verifications(targets)
 
-    findings, summary = audit(verification, live_check_available=live)
-    report = render_report(findings, summary, verification)
+    pin_health = (_pinterest_health(verify=False)
+                  if _present("PINTEREST_ACCESS_TOKEN") else None)
+    findings, summary = audit(verification, live_check_available=live,
+                              pin_health=pin_health)
+    report = render_report(findings, summary, verification, pin_health=pin_health)
     quiet = "--quiet" in argv
     if not quiet:
         with open(REPORT, "w", encoding="utf-8") as f:

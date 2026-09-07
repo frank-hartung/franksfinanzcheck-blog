@@ -64,6 +64,9 @@ jobs:
         # Selftest-Schutz: ohne grünen Selftest wird NICHTS verändert.
         env:
           PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
         run: |
           python3 scripts/spam_guard.py --selftest
@@ -81,10 +84,15 @@ jobs:
       # Täglicher Nachweis für die Secrets-Wache (#206): der Pinterest-Token läuft
       # nach 30 Tagen ab. Der Governance-Lauf prüft wöchentlich – dieser Lauf
       # bestätigt ihn täglich live, damit „Token tot" nie erst nach Wochen auffällt.
+      # Erneuert wird NICHT hier, sondern in `pinterest-token.yml` (eine Stelle,
+      # ein Refresh-Token, keine Rotations-Kollisionen).
       - name: Pinterest-Token live verifizieren (Nachweis für die Secrets-Wache)
         if: always()
         env:
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
           PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
         run: |
           python3 scripts/secrets_age_guard.py --verify-only PINTEREST_ACCESS_TOKEN --quiet \
@@ -100,6 +108,21 @@ jobs:
             git commit -m "chore: Pinterest-Selbstheilung + Report"
             scripts/git_sync.sh --push-only
           fi
+
+      # 07.09.2026 (#209): Der Lauf vom 07.09. ist NICHT am Pinterest-Check
+      # gescheitert, sondern an dieser Meldung: `gh issue create --label pinterest`
+      # mit einem Label, das im Repository nie angelegt wurde → HTTP 422 → roter
+      # Lauf → Fehler-Alerting öffnet ein Issue über das Issue, das nicht
+      # geschrieben werden konnte. Ein Melder, der am Melden scheitert, ist der
+      # teuerste Fehler im ganzen Betrieb. Deshalb: Label immer erst sicherstellen
+      # (Governance-Vertrag C12 prüft das ab jetzt für jeden Workflow).
+      - name: Label sicherstellen
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create pinterest --repo "$GITHUB_REPOSITORY" --color "e60023" \
+            --description "Pinterest-Kanal: Befunde des Watchdogs" --force || true
 
       - name: Issue bei Problemen eröffnen
         if: steps.check.outputs.exit != '0'

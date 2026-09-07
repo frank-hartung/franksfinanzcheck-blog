@@ -19,8 +19,8 @@ kurzantwort: "Frugalismus bedeutet nicht knauseriger Verzicht, sondern das bewus
 
 social_posted: true
 keywords: ["Frugalismus Tipps", "Geld sparen im Alltag", "50 30 20 Regel", "Finanzielle Freiheit", "Notgroschen aufbauen", "Tagesgeld Zinsen", "Frugalismus-Tipps"]
-pin_title: "Finanzielle Freiheit beginnt im Kopf: 7 Gewohnheiten, die zählen"
-pin_description: "*Werbung | Vom Gehalt allein wird niemand frei – entscheidend ist, was daraus wird: 7 Gewohnheiten, mit denen du dein Geld-Mindset neu verlegst, Konsumfallen aushebelst und Monat für Monat Vermögen aufbaust. Jetzt den Guide lesen!"
+pin_title: 5 einfache Frugalismus-Tricks für den Alltag
+pin_description: "*Werbung | Geld sparen ohne Verzicht-Stress: Diese 5 praxiserprobten Frugalismus-Tricks senken deine Alltagsausgaben ab Tag 1 – von der 24-Stunden-Regel bis zum No-Spend-Weekend. Jetzt alle Tricks im Guide nachlesen."
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 ---
 

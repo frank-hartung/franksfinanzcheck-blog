@@ -1,0 +1,217 @@
+# ============================================================
+#  PINTEREST-TOKEN-WACHE – der Kanal erneuert sich selbst
+#  ------------------------------------------------------------
+#  WARUM (Governance-Report #206, 07.09.2026):
+#  Pinterest-Access-Tokens sterben nach 30 Tagen. Der Betrieb hing an einem
+#  von Hand eingefügten Secret – also stand der Kanal planmäßig jeden Monat
+#  still: roter Governance-Befund (#206), fehlgeschlagene Läufe (#153, #209),
+#  keine Pins, keine Performance-Daten. Kein Einzelfehler, ein fehlender
+#  Lebenszyklus.
+#
+#  WAS DIESER LAUF TUT (täglich 04:40 MESZ, vor allen Pinterest-Jobs):
+#    1. Erneuert den Zugang über den Broker (scripts/pinterest_token.py):
+#       verschlüsselter Speicher → Env-Refresh-Bootstrap → klassisches Secret.
+#       Pinterest stellt bei jeder Erneuerung einen neuen 60-Tage-Refresh-Token
+#       aus (continuous refresh) → läuft dieser Job täglich, läuft der Kanal
+#       unbegrenzt.
+#    2. Schreibt den rotierten Token AES-256-GCM-verschlüsselt ins Repo
+#       (data/pinterest_tokens.enc – ohne PINTEREST_TOKEN_KEY unlesbar).
+#    3. Führt den Nachweis für die Secrets-Wache (Live-Probe, kein Selbst-
+#       Beglaubigen) und schreibt das Lagebild data/pinterest_token_state.json.
+#    4. Meldet NUR, wenn ein Mensch wirklich gebraucht wird (einmalige
+#       Neu-Autorisierung) – ein Issue, aktualisiert statt dupliziert,
+#       automatisch geschlossen, sobald der Kanal wieder trägt.
+#
+#  EINMALIGE ERST-AUTORISIERUNG (5 Minuten, danach nie wieder):
+#    Actions → „Pinterest-Token-Wache" → Run workflow → Feld `auth_code`
+#    füllen. Die URL dafür steht im Lauf (Modus `auth-url`) und im Runbook
+#    docs/PINTEREST-TOKEN-RUNBOOK.md.
+#
+#  Benötigte Secrets: PINTEREST_APP_ID, PINTEREST_APP_SECRET,
+#  PINTEREST_TOKEN_KEY (frei wählbare, lange Zeichenkette).
+#  Optional: PINTEREST_REFRESH_TOKEN (Bootstrap ohne Browser-Handschlag),
+#  PINTEREST_ACCESS_TOKEN (Notnagel/Altbestand).
+# ============================================================
+name: Pinterest-Token-Wache
+
+on:
+  schedule:
+    - cron: "40 2 * * *"     # täglich 04:40 MESZ – vor Watchdog (06:30) und Governance
+  workflow_dispatch:
+    inputs:
+      auth_code:
+        description: "Autorisierungs-Code aus der Pinterest-URL (?code=…) – nur bei Erst-/Neu-Autorisierung"
+        required: false
+        default: ""
+      show_auth_url:
+        description: "Nur die Autorisierungs-URL ausgeben (nichts ändern)"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: pinterest-token          # Refresh-Token rotiert: nie zwei Läufe parallel
+  cancel-in-progress: false
+
+env:
+  TOKEN_LABEL: pinterest-token
+  TOKEN_TITLE: "🔑 Pinterest-Zugang braucht eine einmalige Neu-Autorisierung"
+
+jobs:
+  token:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Krypto-Bibliothek
+        run: python3 -m pip install -q cryptography
+
+      # Ein kaputter Broker darf keinen Token anfassen – erst Selbsttest.
+      - name: Selbsttest des Token-Brokers (Sabotage-Schutz)
+        run: python3 scripts/pinterest_token.py --selftest
+
+      - name: Autorisierungs-URL anzeigen (nur auf Wunsch)
+        if: ${{ inputs.show_auth_url }}
+        env:
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+        run: |
+          python3 scripts/pinterest_auth.py --auth-url | tee /tmp/authurl.txt
+          {
+            echo "### 🔑 Pinterest-Autorisierung"
+            echo ""
+            echo '```'
+            cat /tmp/authurl.txt
+            echo '```'
+            echo ""
+            echo "Danach: diesen Workflow erneut starten und den Code in \`auth_code\` einfügen."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Erst-/Neu-Autorisierung (Code → Token-Speicher)
+        if: ${{ inputs.auth_code != '' }}
+        env:
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+        run: |
+          python3 scripts/pinterest_auth.py --exchange "${{ inputs.auth_code }}"
+
+      - name: Zugang erneuern + Lagebild schreiben
+        id: token
+        if: ${{ !inputs.show_auth_url }}
+        env:
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+          PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
+          PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+        run: |
+          set +e
+          python3 scripts/pinterest_token.py --refresh | tee /tmp/token.log
+          rc=$?
+          set -e
+          {
+            echo "### 🔑 Pinterest-Zugang"
+            echo '```'
+            cat /tmp/token.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      # Nachweis für die Secrets-Wache – live geprüft, mit Herkunft (C5).
+      - name: Nachweis für die Secrets-Wache
+        if: ${{ !inputs.show_auth_url }}
+        env:
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+          PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
+          PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+        run: |
+          python3 scripts/secrets_age_guard.py --verify-only PINTEREST_ACCESS_TOKEN --quiet \
+            || echo "::warning::Pinterest-Zugang nicht bestätigt – siehe Issue/Runbook."
+          if [ -n "${PINTEREST_TOKEN_KEY:-}" ]; then
+            python3 scripts/secrets_age_guard.py --record-success PINTEREST_TOKEN_KEY \
+              --proof-by pinterest-token || true
+          fi
+
+      - name: Erneuerten Token + Lagebild committen
+        if: ${{ always() && !inputs.show_auth_url }}
+        run: |
+          git config user.name "Pinterest-Token-Bot"
+          git config user.email "pinterest-bot@users.noreply.github.com"
+          git add data/pinterest_tokens.enc data/pinterest_token_state.json \
+                  data/secrets_state.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Token-Wache: keine Änderungen."
+          else
+            git commit -m "chore(pinterest): Zugang erneuert (continuous refresh)"
+            scripts/git_sync.sh --push-only
+          fi
+
+      - name: Label sicherstellen (sonst schlägt die Issue-Erstellung fehl)
+        if: ${{ !inputs.show_auth_url }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create "$TOKEN_LABEL" --repo "$GITHUB_REPOSITORY" --color "d93f0b" \
+            --description "Pinterest-Zugang: einmalige Handlung nötig" --force || true
+
+      # Melden nur, wenn ein Mensch gebraucht wird. Alles andere heilt der Lauf.
+      - name: Befund melden oder schließen (ein Issue, kein Duplikat)
+        if: ${{ always() && !inputs.show_auth_url }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          STATE="$(python3 -c "import json;print(json.load(open('data/pinterest_token_state.json')).get('state',''))" 2>/dev/null || echo unknown)"
+          SEV="$(python3 -c "import json;print(json.load(open('data/pinterest_token_state.json')).get('severity',''))" 2>/dev/null || echo unknown)"
+          NEXT="$(python3 -c "import json;print(json.load(open('data/pinterest_token_state.json')).get('next_action',''))" 2>/dev/null || echo '')"
+          RUN="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          OPEN="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label "$TOKEN_LABEL" \
+                  --json number --jq '.[0].number' 2>/dev/null || echo "")"
+          echo "Zustand=$STATE Ampel=$SEV offenes Issue=${OPEN:-keins}"
+          if [ "$STATE" = "live" ]; then
+            if [ -n "$OPEN" ]; then
+              gh issue close "$OPEN" --repo "$GITHUB_REPOSITORY" \
+                --comment "✅ Pinterest-Zugang lebt wieder und erneuert sich ab jetzt täglich selbst. Nachweis: [Run ${GITHUB_RUN_ID}](${RUN})."
+            fi
+            exit 0
+          fi
+          BODY=$(cat <<EOF
+          ## 🔑 Pinterest-Zugang: einmalige Handlung nötig
+
+          **Zustand:** \`$STATE\` · **Ampel:** \`$SEV\` · Lauf: [${GITHUB_RUN_ID}](${RUN})
+
+          Die automatische Erneuerung konnte den Zugang nicht wiederherstellen.
+
+          ### Nächster Schritt
+          $NEXT
+
+          ### So geht es (5 Minuten, danach trägt sich der Kanal selbst)
+          1. Actions → **Pinterest-Token-Wache** → *Run workflow* → Haken bei
+             \`show_auth_url\` → der Lauf zeigt die Autorisierungs-URL.
+          2. URL im Browser öffnen, mit dem Pinterest-Konto erlauben, aus der
+             Adresszeile den Wert hinter \`?code=\` kopieren.
+          3. Actions → **Pinterest-Token-Wache** → *Run workflow* → Code in
+             \`auth_code\` einfügen → starten.
+          4. Fertig: Der Lauf legt \`data/pinterest_tokens.enc\` an, ab dann
+             erneuert sich der Zugang täglich (continuous refresh) und dieses
+             Issue schließt sich von selbst.
+
+          Vollständiges Runbook: \`docs/PINTEREST-TOKEN-RUNBOOK.md\`
+          EOF
+          )
+          if [ -n "$OPEN" ]; then
+            gh issue edit "$OPEN" --repo "$GITHUB_REPOSITORY" --body "$BODY"
+            gh issue comment "$OPEN" --repo "$GITHUB_REPOSITORY" \
+              --body "🔁 Zugang weiterhin \`$STATE\` – erneuter Versuch: [Run ${GITHUB_RUN_ID}](${RUN})."
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TOKEN_TITLE" \
+              --label "$TOKEN_LABEL" --body "$BODY"
+          fi

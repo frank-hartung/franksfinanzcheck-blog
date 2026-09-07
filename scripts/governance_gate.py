@@ -80,6 +80,10 @@ STEPS = {
 # Amber-Befunde, die einen Menschen etwas angehen (Kanal/API/Build/CSS-JS-Hygiene).
 ACTIONABLE_AMBER = {
     "aging", "untracked", "state_corrupt",                       # secrets
+    # 07.09.2026 (#206): Der Pinterest-Kanal starb planmäßig alle 30 Tage. Beide
+    # Codes melden das Risiko, BEVOR der Kanal steht – ein Wartungsfall mit
+    # Vorlauf ist die billigste Sorte Befund, deshalb ist er handlungswürdig.
+    "manual_token", "refresh_rotation",                          # Token-Lebenszyklus
     "render_block_css", "render_block_js", "inline_js", "cls_img", "build_missing",
     "build_thin",                                                # cwv
     "stale_content", "unmatched_subid", "unattributed",          # decay / awin / clicks
