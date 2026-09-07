@@ -14,9 +14,22 @@ bei Überschreitung meldet. Dieser Wächter schließt die Lücke deterministisch
     width/height bzw. aspect-ratio auf Bildern), INP/JS-Budget, Render-Blocking,
     Bild-Optimierung (avif/webp vorhanden?), Dateigrößen.
 
+NEU (Härtung 07.09.2026, Governance-Report #206):
+  * `--strict-build`  – ohne (oder mit leerem) Build-Baum gibt es KEIN Grün.
+    Vorher lief `hugo --minify ... || true` im Workflow: brach der Build,
+    maß der Wächter einen leeren `public/`, fand nichts – und meldete GREEN.
+    „Nicht gemessen" ist aber gerade kein Befund der Entwarnung.
+  * `build_measured`   – im Manifest: wurde der Build-Baum WIRKLICH geprüft?
+    Die Scorecard zeigt deshalb jetzt „⚪ nicht gemessen" statt einer erfundenen
+    Ampel und bestraft einen Stale-/Skip-Fall nicht als Performance-Problem.
+  * `--min-html N`      – ein teilweise gebauter Baum (weniger Seiten als erwartet)
+    ist ein Befund (`build_thin`), keine Entwarnung.
+  * `data/cwv_history.jsonl` + `--trend` – Ampel-Verlauf statt Einzelpunkt.
+
 AUSGABE:
   - `CWV-REPORT.md` – Ampel-Report + Befunde + Empfehlung
-  - `data/cwv_manifest.json` – Kennzahlen (für Verlauf/Issues)
+  - `data/cwv_manifest.json` – Kennzahlen (für Verlauf/Issues/Scorecard)
+  - `data/cwv_history.jsonl`   – Verlauf (Letzte 260 Läufe)
   - `--issue`          – GitHub-Issue-Body (bei SOLL-Verstoß)
   - `--selftest`       – eingefrorene Fälle
 
@@ -37,6 +50,7 @@ import datetime
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPORT = os.path.join(BLOG_DIR, "CWV-REPORT.md")
 MANIFEST = os.path.join(BLOG_DIR, "data", "cwv_manifest.json")
+HISTORY = os.path.join(BLOG_DIR, "data", "cwv_history.jsonl")
 PUBLIC_DEFAULT = os.path.join(BLOG_DIR, "public")
 STATIC_DIR = os.path.join(BLOG_DIR, "static")
 
@@ -233,10 +247,45 @@ def _scan_public(public_dir):
     return metrics, findings
 
 
+def _build_findings(public_dir, public_metrics, strict_build, min_html):
+    """Build-Hygiene beginnt mit der Frage, OB überhaupt gemessen wurde.
+
+    `public/` fehlt/ist leer => im Strict-Modus (CI) ROT, sonst Hinweis. Ein
+    Bau mit deutlich zu wenigen HTML-Seiten => `build_thin` (Amber), weil ein
+    halbfertiger Baum wie „alles in Ordnung" aussehen würde.
+    """
+    out = []
+    measured = bool(public_metrics.get("html_files"))
+    if not public_dir:
+        out.append({"level": "info" if not strict_build else "red",
+                    "code": "build_missing",
+                    "msg": "kein Build-Baum geprüft (`public/` fehlt und kein --public "
+                           "übergeben) – Build-Hygiene ist UNBEKANNT, nicht grün"})
+        return out, measured
+    if not os.path.isdir(public_dir):
+        out.append({"level": "red" if strict_build else "amber", "code": "build_missing",
+                    "msg": f"Build-Verzeichnis `{public_dir}` existiert nicht – Hugo-Lauf "
+                           f"fehlgeschlagen oder übersprungen?"})
+        return out, measured
+    n = int(public_metrics.get("html_files") or 0)
+    if n == 0:
+        out.append({"level": "red" if strict_build else "amber", "code": "build_missing",
+                    "msg": f"Build-Verzeichnis `{public_dir}` enthält 0 HTML-Dateien – "
+                           f"der Hugo-Build hat nichts erzeugt (Report wäre sonst grün "
+                           f"ohne Aussage)"})
+    elif n < min_html:
+        out.append({"level": "amber", "code": "build_thin",
+                    "msg": f"nur {n} HTML-Seiten im Build (erwartet ≥ {min_html}) – "
+                           f"Build unvollständig, Messung mit Vorsicht lesen"})
+    return out, measured
+
+
 def _verdict(static_metrics, static_findings, public_metrics, public_findings):
     ratings = {"green": 0, "amber": 0, "red": 0}
     for f in static_findings + public_findings:
-        ratings[f["level"]] += 1
+        # `info` (Hinweis, keine Abweichung) ist bewusst wertneutral.
+        if f["level"] in ratings:
+            ratings[f["level"]] += 1
     if ratings["red"] > 0:
         return "RED"
     if ratings["amber"] > 0:
@@ -244,7 +293,7 @@ def _verdict(static_metrics, static_findings, public_metrics, public_findings):
     return "GREEN"
 
 
-def _render_report(verdict, s_met, s_find, p_met, p_find):
+def _render_report(verdict, s_met, s_find, p_met, p_find, build_measured=True):
     lines = [
         "# ⚡ Core-Web-Vitals-Wächter (Agentur/Performance)",
         f"**Stand:** {TODAY.isoformat()} · **Messmethode:** deterministisch (kein Browser)",
@@ -255,6 +304,8 @@ def _render_report(verdict, s_met, s_find, p_met, p_find):
         "|---|---|",
         f"| Bild-Budget (`static/`) | {len(s_find)} |",
         f"| Build-Hygiene (`public/`) | {len(p_find)} |",
+        "",
+        f"**Build gemessen:** {'ja' if build_measured else 'NEIN – Ampel gilt nur für static/'}",
         "",
     ]
     if s_find or p_find:
@@ -364,6 +415,26 @@ def _selftest():
     v = _verdict({}, [], {}, [])
     if v != "GREEN":
         failures.append(f"verdict GRÜN: {v}")
+    # --- Ehrlichkeit der Messung (#206): kein Baum => kein Grün im CI-Modus
+    f_info, measured = _build_findings(None, {}, False, 20)
+    if measured or f_info[0]["level"] != "info":
+        failures.append("ohne Build: muss info-Hinweis sein und 'nicht gemessen' melden")
+    f_strict, measured = _build_findings(None, {}, True, 20)
+    if measured or f_strict[0]["level"] != "red":
+        failures.append("--strict-build ohne Baum darf nie grün sein")
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        f_empty, measured = _build_findings(td, {"html_files": 0}, True, 20)
+        if measured or f_empty[0]["code"] != "build_missing":
+            failures.append("leerer Build-Baum meldet nicht build_missing")
+        f_thin, measured = _build_findings(td, {"html_files": 4}, True, 20)
+        if not measured or f_thin[0]["code"] != "build_thin":
+            failures.append("unvollständiger Build meldet nicht build_thin")
+        f_ok, measured = _build_findings(td, {"html_files": 315}, True, 20)
+        if f_ok or not measured:
+            failures.append("vollständiger Build erzeugt einen Fehlalarm")
+    if _verdict({}, [], {}, [{"level": "info", "code": "build_missing"}]) != "GREEN":
+        failures.append("info-Befund färbt die Ampel (erwartet: unverändert)")
     if failures:
         print("❌ CWV-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
@@ -373,13 +444,61 @@ def _selftest():
     return 0
 
 
+def _append_history(verdict, s_met, p_met, findings, build_measured):
+    """Ampel-Verlauf (JSONL) – macht Trends sichtbar und die Scorecard ehrlich."""
+    try:
+        os.makedirs(os.path.dirname(HISTORY), exist_ok=True)
+        row = {
+            "generated": TODAY.isoformat(), "verdict": verdict,
+            "findings": len(findings), "build_measured": build_measured,
+            "codes": sorted({f["code"] for f in findings}),
+            "html_files": p_met.get("html_files", 0), "inline_js": p_met.get("inline_js", 0),
+            "blocking_js": p_met.get("blocking_js", 0), "img_nosize": p_met.get("img_nosize", 0),
+            "count_img": s_met.get("count_img", 0), "worst_cover_bytes": s_met.get("worst_cover_bytes", 0),
+        }
+        with open(HISTORY, "a", encoding="utf-8") as f:
+            f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+        lines = open(HISTORY, encoding="utf-8").read().splitlines()
+        if len(lines) > 260:
+            with open(HISTORY, "w", encoding="utf-8") as f:
+                f.write("\n".join(lines[-260:]) + "\n")
+    except OSError:
+        pass
+    return row
+
+
+def _print_trend():
+    try:
+        rows = [json.loads(l) for l in open(HISTORY, encoding="utf-8") if l.strip()]
+    except (OSError, json.JSONDecodeError):
+        print("Kein CWV-Verlauf gefunden (data/cwv_history.jsonl).")
+        return 1
+    icon = {"RED": "🔴", "AMBER": "🟡", "GREEN": "🟢"}
+    print("CWV-Verlauf (letzte Läufe):")
+    for r in rows[-12:]:
+        print(f"  {r.get('generated')}  {icon.get(r.get('verdict'), '⚪')} {r.get('verdict')}  "
+              f"Befunde {r.get('findings')}  HTML {r.get('html_files')}  "
+              f"{'Build unverifiziert' if not r.get('build_measured') else ''}".rstrip())
+    return 0
+
+
 def main():
     if "--selftest" in sys.argv:
         return _selftest()
+    argv = sys.argv[1:]
+    if "--trend" in argv:
+        return _print_trend()
     public_dir = None
-    for i, arg in enumerate(sys.argv):
-        if arg == "--public" and i + 1 < len(sys.argv):
-            public_dir = sys.argv[i + 1]
+    strict_build = "--strict-build" in argv
+    min_html = 20
+    for i, arg in enumerate(argv):
+        if arg == "--public" and i + 1 < len(argv):
+            public_dir = argv[i + 1]
+        if arg == "--min-html" and i + 1 < len(argv):
+            try:
+                min_html = max(1, int(argv[i + 1]))
+            except ValueError:
+                pass
     if public_dir is None and os.path.isdir(PUBLIC_DEFAULT):
         public_dir = PUBLIC_DEFAULT
 
@@ -387,25 +506,37 @@ def main():
     p_met, p_find = ({}, [])
     if public_dir and os.path.isdir(public_dir):
         p_met, p_find = _scan_public(public_dir)
+    b_find, build_measured = _build_findings(public_dir, p_met, strict_build, min_html)
+    p_find = b_find + p_find
     verdict = _verdict(s_met, s_find, p_met, p_find)
-    report = _render_report(verdict, s_met, s_find, p_met, p_find)
+    report = _render_report(verdict, s_met, s_find, p_met, p_find, build_measured)
     with open(REPORT, "w", encoding="utf-8") as f:
         f.write(report)
     os.makedirs(os.path.dirname(MANIFEST), exist_ok=True)
-    with open(MANIFEST, "w", encoding="utf-8") as f:
+    all_findings = s_find + p_find
+    hard = [f for f in all_findings if f.get("level") in ("red", "amber")]
+    _append_history(verdict, s_met, p_met, all_findings, build_measured)
+    tmp = f"{MANIFEST}.tmp-{os.getpid()}"
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump({
             "generated": TODAY.isoformat(),
             "verdict": verdict,
+            "build_measured": build_measured,
+            "strict_build": strict_build,
             "static": s_met, "public": p_met,
-            "findings": s_find + p_find,
+            "findings": all_findings,
         }, f, ensure_ascii=False, indent=2)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, MANIFEST)
     print(report)
-    if "--issue" in sys.argv and verdict != "GREEN":
-        n = len(s_find) + len(p_find)
+    if "--issue" in sys.argv and hard:
+        n = len(hard)
         print("\n===== ISSUE BODY =====\n")
         print(f"## ⚡ Core Web Vitals: {verdict} – {n} Befunde\n\n"
               f"{report}\n\n---\n_Automatisch vom CWV-Wächter._")
-    return 0 if verdict == "GREEN" else 1
+    # Alarm nur bei echter Abweichung – reine Hinweise (info) bleiben still.
+    return 0 if not hard else 1
 
 
 if __name__ == "__main__":

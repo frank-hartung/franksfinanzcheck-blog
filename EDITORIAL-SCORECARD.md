@@ -1,21 +1,21 @@
 # 🏆 Chefredakteur-Scorecard
 **Stand:** 2026-09-07 · **Auftrag:** Redaktionelle Gesamt-Steuerung
 
-## Gesamt-Score: **83/100** · Ampel: **AMBER**
+## Gesamt-Score: **90/100** · Ampel: **GREEN**
 
 | Kennzahl | Wert | Ampel |
 |---|---|---|
-| Veröffentlichte Artikel | 30 | 🟢 |
-| Entwürfe (Warteschlange) | 2 | 🟡 |
+| Veröffentlichte Artikel | 31 | 🟢 |
+| Entwürfe (Warteschlange) | 1 | ⚪ |
 | Pillars / Themen-Cluster | 6 | 🟢 |
 | Decay-Kandidaten (STALE+DECAYING) | 0 | 🟢 |
-| Core-Web-Vitals | AMBER | 🟡 |
+| Core-Web-Vitals | GREEN | 🟢 |
 | Ø Lesbarkeit (Flesch) | 53.3 | 🟡 |
 | Lektorat-Befunde (auto-behebbar) | 0 | 🟢 |
 | Stil-Hinweise (Lektorat, nur Info) | 18 | ℹ️ |
-| Tote Secrets | 0 | 🟢 |
-| Affiliate-Klicks (Umsatz-Hebel) | 0 über 0 Artikel | 🟡 |
-| Awin-Provision (Klicks→Umsatz) | 0.00 € (0.00 € bezahlt) über 0 Artikel | 🟡 |
+| Secrets (Wache v1 – Report veraltet) | 0 / 0 / 0 von 3 | ⚪ |
+| Affiliate-Klicks (Umsatz-Hebel) | 0 über 0 Artikel | ⚪ |
+| Awin-Provision (Klicks→Umsatz) | 0.00 € (0.00 € bezahlt) über 0 Artikel | ⚪ |
 
 ## Affiliate-Klick-Attribution
 
@@ -25,6 +25,17 @@ _Noch keine Klick-Daten – Umami-Export nach `data/umami_clicks.json` legen, da
 
 _Noch keine Awin-Provisions-Daten – `scripts/awin_provisions.py` mit dem Awin-Transaktions-CSV ausführen (Dashboard → Reports → Transactions)._
 - Hinweis: `--gen-subid-map` erzeugt `data/subid_map.yaml`; danach `--awin-csv <pfad>` → `AWIN-REPORT.md` + `data/awin_provisions.json`.
+
+## Datenlagen (Messabdeckung)
+
+| Kennzahl | Quelle | Stand | Bewertung |
+|---|---|---|---|
+| Core-Web-Vitals | `data/cwv_manifest.json` | 0 d | gemessen |
+| Decay-Radar | `data/decay_queue.json` | - | 0 Kandidat(en) |
+| Secrets | `SECRETS-REPORT.md + data/secrets_state.json` | LEGACY | Report der v1-Wache – Format ohne Nachweis-Spalte, Neu erzeugen ausstehend |
+| Lektorat | `LEKTOR-REPORT.md` | heute | 0 auto-behebbar, 18 Stil-Hinweise |
+| Affiliate-Klicks | `data/umami_clicks.json (via scripts/umami_clicks.py)` | nie | Import nie gelaufen |
+| Awin-Provision | `data/awin_transactions.csv` | - | CSV-Export fehlt |
 
 ## Pillar-Verteilung
 
@@ -39,7 +50,9 @@ _Noch keine Awin-Provisions-Daten – `scripts/awin_provisions.py` mit dem Awin-
 
 ## Handlungsempfehlungen
 
-- Core-Web-Vitals unter Soll – `scripts/cwv_guard.py` für Befunde; Covers als AVIF/WebP, Bilder < 220 KB, `<img>` mit width/height.
-- **2** Artikel in der Entwurf-Warteschlange – manuelle Qualitätsfreigabe prüfen (Kadenz- bzw. Qualitäts-Gate).
+- Secrets-Wache im alten Format (ohne Nachweis-Spalte) – die Zeile bleibt ⚪, bis `premium-governance.yml` den Report neu erzeugt (Live-Probe `--verify`).
+- Ø Lesbarkeit 53.3 (Ziel ≥ 70, Amstad-deutsch) – lange Sätze splittern, Nominalstil auflösen; Hebel pro Artikel zeigt `python3 scripts/readability_check.py` bzw. `lektor_guard.py`. Lesbarkeit ist bei Pinterest-/Suchtraffic der Verweil-Dauer-Hebel.
+- **1** Artikel in der Entwurf-Warteschlange – Freigabe prüfen (`python3 scripts/publish_gate.py` bzw. Kadenz-Gate). Vorrat ist kein Mangel – erst > 8 Entwürfe werden zu Altlasten.
+- Umsatz-Daten fehlen, weil die Pipeline nie gefüllt wurde – nicht, weil niemand klickt: `python3 scripts/umami_clicks.py --fetch` (Secret `UMAMI_API_TOKEN`; Website-ID steht schon in `hugo.toml`).
 
 _Erzeugt von `scripts/editorial_scorecard.py` (Chefredakteur-View)._

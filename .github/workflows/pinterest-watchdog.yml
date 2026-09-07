@@ -78,6 +78,18 @@ jobs:
           echo "exit=$?" >> "$GITHUB_OUTPUT"
           set -e
 
+      # Täglicher Nachweis für die Secrets-Wache (#206): der Pinterest-Token läuft
+      # nach 30 Tagen ab. Der Governance-Lauf prüft wöchentlich – dieser Lauf
+      # bestätigt ihn täglich live, damit „Token tot" nie erst nach Wochen auffällt.
+      - name: Pinterest-Token live verifizieren (Nachweis für die Secrets-Wache)
+        if: always()
+        env:
+          PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+        run: |
+          python3 scripts/secrets_age_guard.py --verify-only PINTEREST_ACCESS_TOKEN --quiet \
+            || echo "::warning::Pinterest-Token nicht bestätigt (401/403 = erneuern: scripts/pinterest_auth.py --auth-url)"
+
       - name: Report committen + pushen
         if: always()
         run: |

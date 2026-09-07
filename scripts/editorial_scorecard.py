@@ -44,7 +44,37 @@ _DECAY_Q = DATA("decay_queue.json")
 _CWV_M = DATA("cwv_manifest.json")
 _SECRETS_S = DATA("secrets_state.json")
 _CLICK_S = DATA("click_stats.json")
+_CLICK_META = DATA("umami_clicks.meta.json")
 _AWIN_P = DATA("awin_provisions.json")
+_HISTORY = DATA("scorecard_history.jsonl")
+_SECRETS_REPORT = os.path.join(BLOG_DIR, "SECRETS-REPORT.md")
+_CWV_REPORT = os.path.join(BLOG_DIR, "CWV-REPORT.md")
+
+# Wie alt eine Messung sein darf, bevor sie als Blindflug gilt (Wochenrhythmus + Puffer).
+STALE_AFTER_DAYS = 9
+
+
+def _read_text(path):
+    try:
+        with open(path, encoding="utf-8") as f:
+            return f.read()
+    except OSError:
+        return ""
+
+
+def _age_days(raw, today=None):
+    """Tage seit einem ISO-Datum; None, wenn unlesbar (nie raten)."""
+    if not raw:
+        return None
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", str(raw))
+    if not m:
+        return None
+    try:
+        d = datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+    except ValueError:
+        return None
+    delta = (today or TODAY) - d
+    return delta.days if delta.days > 0 else 0
 
 
 def _read_json(path, default=None):
@@ -53,6 +83,97 @@ def _read_json(path, default=None):
             return json.load(f)
     except (OSError, json.JSONDecodeError):
         return default
+
+
+def _cwv_state(manifest, today=None):
+    """CWV-Ampel mit Herkunftsnachweis.
+
+    Kern der #206-Korrektur: die Scorecard hat das Manifest des Vorlaufs
+    gelesen (sie lief IM Workflow VOR dem CWV-Schritt) und daraus eine
+    falsche AMBER-Zeile samt 7 Punkten Abzug gebaut. Deshalb wird jetzt
+    die Altersangabe mitgeführt und ein veraltetes/unvollständiges Bild
+    als Blindflug ausgewiesen – nicht als Performance-Diagnose.
+    """
+    today = today or TODAY
+    verdict = (manifest or {}).get("verdict") or "UNKNOWN"
+    age = _age_days((manifest or {}).get("generated"), today)
+    measured = bool((manifest or {}).get("build_measured", True))
+    hard = [f for f in (manifest or {}).get("findings", []) if f.get("level") in ("red", "amber")]
+    state = "OK"
+    if verdict == "UNKNOWN":
+        state = "MISSING"
+    elif age is None or age > STALE_AFTER_DAYS:
+        state = "STALE"
+    elif not measured:
+        state = "PARTIAL"
+    display = {"OK": verdict, "STALE": f"STALE ({age}d)",
+               "MISSING": "nicht gemessen", "PARTIAL": f"{verdict} (nur static/)"}[state]
+    return {"verdict": verdict, "state": state, "display": display, "age": age,
+            "findings": len(hard), "red": sum(1 for f in hard if f.get("level") == "red"),
+            "measured": measured}
+
+
+def _secret_state(state, report_text=""):
+    """Secrets-Lage aus Report (Policy) + State (Nachweise) – nicht selbst erfunden.
+
+    Formatsperre: der Report der v1-Wache hat keine `Nachweis`-Spalte und damit
+    keine Nachweis-Qualität. Ein View darf aus einem unbekannten Format keine
+    Ampel bauen (das ist genau die #206-Klasse: Verbraucher und Erzeuger
+    schreiben aneinander vorbei) – also ⚪ statt 🟡, bis der Wächter neu läuft.
+    """
+    out = {"red": 0, "amber": 0, "info": 0, "entries": len((state or {}).get("entries") or {}),
+           "proven": 0, "verdict": "UNKNOWN", "legacy": False}
+    v1_tabelle = bool(re.search(r"^\|\s*Secret\s*\|\s*Status\s*\|\s*$", report_text or "", re.M))
+    if v1_tabelle and "Nachweis" not in report_text:
+        out["legacy"] = True
+        out["verdict"] = "LEGACY"
+        return out
+    for m in re.finditer(r"^\|\s*(RED|AMBER)\s*\|\s*([A-Za-z0-9_\-]+)\s*\|", report_text or "", re.M):
+        out["red" if m.group(1) == "RED" else "amber"] += 1
+    m = re.search(r"Gesamt-Ampel:\s*\*\*(GREEN|AMBER|RED)\*\*", report_text or "")
+    if m:
+        out["verdict"] = m.group(1)
+    for ent in ((state or {}).get("entries") or {}).values():
+        if isinstance(ent, dict) and ent.get("quality") == "proven":
+            out["proven"] += 1
+    return out
+
+
+def _drafts_lamp(n):
+    """Entwürfe sind Vorrat, kein Mangel – erst die Stapelgröße macht Arbeit."""
+    if n == 0:
+        return "🟢"
+    if n <= 3:
+        return "⚪"
+    return "🟡" if n <= 8 else "🔴"
+
+
+def _data_lamp(total, articles, configured):
+    """Lampen für Monetarisierungs-Signale.
+
+    ⚪ = Datenlage offen (nie importiert) – das ist KEIN Befund und war in #206
+        als 🟡 markiert, wodurch die Scorecard dauerhaft gelb erschien.
+    🟡 = Import läuft, aber ohne zuordenbare Erlöse – Handlung: Attribute/CSV.
+    🟢 = messbarer Umsatz-Hebel.
+    """
+    if not configured:
+        return "⚪"
+    if total >= 100:
+        return "🟢"
+    return "🟡"
+
+
+def _trend():
+    """Letzte Scorecard-Stände (für die eine Zahl, die ein Chefredakteur sieht)."""
+    try:
+        rows = [json.loads(l) for l in open(_HISTORY, encoding="utf-8") if l.strip()]
+    except (OSError, json.JSONDecodeError):
+        return None, None
+    rows = [r for r in rows if isinstance(r, dict) and r.get("score") is not None]
+    if not rows:
+        return None, None
+    prev = rows[-2].get("score") if len(rows) >= 2 else None
+    return prev, len(rows)
 
 
 def _count_live_drafts():
@@ -150,9 +271,12 @@ def collect():
     live, drafts = _count_live_drafts()
     pillars = _pillar_counts()
     decay = _read_json(_DECAY_Q, {"count": 0, "queue": []})
-    cwv = _read_json(_CWV_M, {})
-    secrets = _read_json(_SECRETS_S, {"entries": {}})
+    cwv_manifest = _read_json(_CWV_M, {})
+    cwv = _cwv_state(cwv_manifest)
+    secrets_state = _read_json(_SECRETS_S, {"entries": {}})
+    secrets_lage = _secret_state(secrets_state, _read_text(_SECRETS_REPORT))
     clicks = _read_json(_CLICK_S, {})
+    clicks_meta = _read_json(_CLICK_META, {}) or {}
     awin = _read_json(_AWIN_P, {})
     readability = _avg_readability()
     lektor = _lektor_findings()
@@ -165,15 +289,11 @@ def collect():
     if click_articles:
         top_article = max(click_articles.items(), key=lambda kv: kv[1].get("clicks", 0))[0]
 
-    # Secrets: Anzahl fehlender/"roter" Einträge über Env
-    # (SCORECARD nutzt denselben Ansatz minimal: nur rot, wenn gesetzt aber stale)
-    secret_red = 0
-    for var, ent in (secrets.get("entries") or {}).items():
-        ls = ent.get("last_success")
-        if ls:
-            age = (TODAY - datetime.date.fromisoformat(ls)).days
-            if age > 60:
-                secret_red += 1
+    # Secrets: die Wache selbst bewertet (rot = Kanal tot/fehlend, gelb = altern).
+    # Vorher rechnete die Scorecard hier ein zweites Mal – mit anderer Regel und
+    # ohne die Info-Stufen zu kennen; das Ergebnis war eine Ampel, die niemand
+    # reproduzieren konnte.
+    secret_red = secrets_lage["red"]
 
     # Awin-Provisions-Import (Klicks → Umsatz): aggregiert, DSGVO-sicher.
     _awin_un = awin.get("unmatched", 0)
@@ -185,18 +305,24 @@ def collect():
         "live": live, "drafts": drafts,
         "pillars": pillars, "pillar_count": len(pillars),
         "decay_count": decay.get("count", 0),
-        "cwv_verdict": cwv.get("verdict", "UNKNOWN"),
-        "cwv_findings": len(cwv.get("findings", [])),
+        "cwv_verdict": cwv["verdict"], "cwv_state": cwv["state"], "cwv_display": cwv["display"],
+        "cwv_age": cwv["age"], "cwv_findings": cwv["findings"], "cwv_red": cwv["red"],
+        "cwv_measured": cwv["measured"],
         "readability": readability,
         # `lektor` = auto-behebbare Befunde (steuert Score & Empfehlung),
         # `lektor_advisory` = reine Stil-Hinweise (Info, nicht abstrafend).
         "lektor": (lektor or {}).get("auto") if lektor is not None else None,
         "lektor_advisory": (lektor or {}).get("advisory") if lektor is not None else None,
         "secret_red": secret_red,
-        "secret_entries": len(secrets.get("entries") or {}),
+        "secret_amber": secrets_lage["amber"], "secret_verdict": secrets_lage["verdict"],
+        "secret_legacy": secrets_lage["legacy"],
+        "secret_proven": secrets_lage["proven"], "secret_entries": secrets_lage["entries"],
         "click_articles": len(click_articles),
         "total_clicks": total_clicks,
         "top_article": top_article,
+        "clicks_pipeline": clicks_meta.get("status") or "nie",
+        "clicks_reason": clicks_meta.get("reason") or "",
+        "clicks_stand": clicks_meta.get("written") or clicks_meta.get("attempted") or "nie",
         "awin_total": awin.get("total_commission", 0),
         "awin_paid": awin.get("total_paid", 0),
         "awin_articles": len(awin.get("articles", {})),
@@ -219,6 +345,78 @@ def _readability_lamp(v):
     return "🔴"
 
 
+def _cwv_lamp(d):
+    """Ampel inkl. Blindflug-Anzeige: nicht gemessen ≠ gut und ≠ schlecht."""
+    if d.get("cwv_state") in ("STALE", "MISSING", "PARTIAL"):
+        return "⚪"
+    return {"GREEN": "🟢", "AMBER": "🟡", "RED": "🔴"}.get(d.get("cwv_verdict"), "⚪")
+
+
+def _secret_lamp(d):
+    if d.get("secret_legacy"):
+        return "⚪"
+    if d.get("secret_red", 0) > 0:
+        return "🔴"
+    if d.get("secret_amber", 0) > 0:
+        return "🟡"
+    if d.get("secret_verdict") == "GREEN":
+        return "🟢"
+    return "⚪"
+
+
+def _render_datalage(d):
+    """Was ist gemessen, was ist Lücke? (Agentur-Standard: keine Schein-Sicherheit.)"""
+    body = [
+        ("Core-Web-Vitals", "data/cwv_manifest.json",
+         f"{(d.get('cwv_age') if d.get('cwv_age') is not None else '-')} d",
+         {"OK": "gemessen", "STALE": "**zu alt – Messung läuft nicht**",
+          "MISSING": "**fehlt**", "PARTIAL": "nur static/ (Build ausgefallen)"}
+         .get(d.get("cwv_state"), "")),
+        ("Decay-Radar", "data/decay_queue.json", "-",
+         f"{d['decay_count']} Kandidat(en)"),
+        ("Secrets", "SECRETS-REPORT.md + data/secrets_state.json", d.get("secret_verdict", "-"),
+         "Report der v1-Wache – Format ohne Nachweis-Spalte, Neu erzeugen ausstehend"
+         if d.get("secret_legacy") else
+         f"{d.get('secret_proven', 0)}/{d['secret_entries']} live bewiesen"),
+        ("Lektorat", "LEKTOR-REPORT.md",
+         "heute" if os.path.exists(os.path.join(BLOG_DIR, "LEKTOR-REPORT.md")) else "fehlt",
+         f"{d['lektor'] if d['lektor'] is not None else 'n/a'} auto-behebbar, "
+         f"{d.get('lektor_advisory') if d.get('lektor_advisory') is not None else 'n/a'} Stil-Hinweise"),
+        ("Affiliate-Klicks", "data/umami_clicks.json (via scripts/umami_clicks.py)",
+         d.get("clicks_stand", "nie"),
+         {"ok": "automatisch befüllt", "skipped": "Pipeline wartet auf Secret "
+          "`UMAMI_API_TOKEN`"}.get(d.get("clicks_pipeline"), "Import nie gelaufen")),
+        ("Awin-Provision", "data/awin_transactions.csv", "-",
+         "CSV-Export fehlt" if int(d.get("awin_articles") or 0) == 0 else "befüllt"),
+    ]
+    out = ["| Kennzahl | Quelle | Stand | Bewertung |", "|---|---|---|---|"]
+    for name, src, stand, note in body:
+        out.append(f"| {name} | `{src}` | {stand} | {note} |")
+    return "\n".join(out)
+
+
+def _append_history(d, score):
+    """Ein Score ohne Verlauf ist eine Meinung, keine Steuerung."""
+    ampel = _ampel(score)
+    row = {"date": d["date"], "score": score, "ampel": ampel,
+           "live": d["live"], "drafts": d["drafts"], "decay": d["decay_count"],
+           "cwv": d.get("cwv_verdict"), "cwv_state": d.get("cwv_state"),
+           "readability": d["readability"], "lektor": d["lektor"],
+           "secret_red": d["secret_red"], "secret_amber": d.get("secret_amber", 0),
+           "clicks": d["total_clicks"], "awin": d["awin_total"]}
+    try:
+        os.makedirs(os.path.dirname(_HISTORY), exist_ok=True)
+        with open(_HISTORY, "a", encoding="utf-8") as f:
+            f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+        lines = [l for l in open(_HISTORY, encoding="utf-8").read().splitlines() if l.strip()]
+        if len(lines) > 260:                      # Retention: gut 5 Jahre Wochenläufe
+            with open(_HISTORY, "w", encoding="utf-8") as f:
+                f.write("\n".join(lines[-260:]) + "\n")
+    except OSError:
+        pass
+    return row
+
+
 def _score(d) -> int:
     """Gesamtscore 0..100."""
     s = 100
@@ -227,25 +425,30 @@ def _score(d) -> int:
         s -= 15
     # Freshness blass: viele decay = Frische-Druck
     s -= min(30, d["decay_count"] * 3)
-    # CWV rot
-    if d["cwv_verdict"] == "RED":
-        s -= 15
-    elif d["cwv_verdict"] == "AMBER":
-        s -= 7
+    # CWV: rot/amber nur, WENN gemessen wurde. Ein Blindflug (veraltete oder
+    # ausgefallene Messung) kostet wenig, aber sichtbar – und die Empfehlung
+    # nennt die Reparatur der Messung statt einer erfundenen Performance-Diagnose.
+    if d.get("cwv_state") == "OK":
+        if d["cwv_verdict"] == "RED":
+            s -= 15
+        elif d["cwv_verdict"] == "AMBER":
+            s -= 7
+    else:
+        s -= 3
     # Lesbarkeit (wenn bekannt)
     if d["readability"] is not None:
         if d["readability"] < 60:
             s -= 10
         elif d["readability"] < 70:
             s -= 4
+    # Secrets: nur rote Befunde (Kanal tot/fehlt) ziehen ab, gelbe altern mit 1 pkt.
+    s -= min(15, d["secret_red"] * 5) + min(2, d.get("secret_amber", 0))
     # Lektorat
     if d["lektor"] is not None:
         if d["lektor"] > 60:
             s -= 10
         elif d["lektor"] > 25:
             s -= 4
-    # Secrets tot
-    s -= min(15, d["secret_red"] * 5)
     # Monetarisierungs-Signal: Affiliate-Klicks vorhanden = gesunder Umsatz-Hebel;
     # ganz ohne Klick-Daten (neues Setup) ist das neutral, nicht strafend.
     if d.get("click_articles", 0) > 0:
@@ -274,21 +477,28 @@ def _ampel(score):
 
 def render(d, score):
     ampel = _ampel(score)
+    prev, runs = _trend()
+    trend = ""
+    if prev is not None:
+        delta = score - prev
+        trend = f" · **Vorlauf {prev} → {score}** ({delta:+d})"
+    elif runs:
+        trend = " · erster erfasster Lauf"
     lines = [
         "# 🏆 Chefredakteur-Scorecard",
-        f"**Stand:** {d['date']} · **Auftrag:** Redaktionelle Gesamt-Steuerung",
+        f"**Stand:** {d['date']} · **Auftrag:** Redaktionelle Gesamt-Steuerung{trend}",
         "",
         f"## Gesamt-Score: **{score}/100** · Ampel: **{ampel}**",
         "",
         "| Kennzahl | Wert | Ampel |",
         "|---|---|---|",
         f"| Veröffentlichte Artikel | {d['live']} | {'🟢' if d['live'] >= 15 else '🔴'} |",
-        f"| Entwürfe (Warteschlange) | {d['drafts']} | 🟡 |",
+        f"| Entwürfe (Warteschlange) | {d['drafts']} | {_drafts_lamp(d['drafts'])} |",
         f"| Pillars / Themen-Cluster | {d['pillar_count']} | 🟢 |",
         f"| Decay-Kandidaten (STALE+DECAYING) | {d['decay_count']} | "
         f"{'🟢' if d['decay_count'] == 0 else ('🟡' if d['decay_count'] <= 5 else '🔴')} |",
-        f"| Core-Web-Vitals | {d['cwv_verdict']} | "
-        f"{'🟢' if d['cwv_verdict'] == 'GREEN' else ('🟡' if d['cwv_verdict'] == 'AMBER' else '🔴')} |",
+        f"| Core-Web-Vitals | {d.get('cwv_display', d['cwv_verdict'])} | "
+        f"{_cwv_lamp(d)} |",
         f"| Ø Lesbarkeit (Flesch) | {'n/a' if d['readability'] is None else d['readability']} | "
         f"{_readability_lamp(d['readability'])} |",
         f"| Lektorat-Befunde (auto-behebbar) | "
@@ -296,13 +506,16 @@ def render(d, score):
         f"{'⚪' if d['lektor'] is None else ('🟢' if d['lektor'] == 0 else '🟡')} |",
         f"| Stil-Hinweise (Lektorat, nur Info) | "
         f"{'n/a' if d.get('lektor_advisory') is None else d['lektor_advisory']} | ℹ️ |",
-        f"| Tote Secrets | {d['secret_red']} | "
-        f"{'🟢' if d['secret_red'] == 0 else '🔴'} |",
+        f"| Secrets ({'Wache v1 – Report veraltet' if d.get('secret_legacy') else 'rot / gelb / bewiesen'}) "
+        f"| {d['secret_red']} / {d.get('secret_amber', 0)} / "
+        f"{d.get('secret_proven', 0)} von {d['secret_entries']} | "
+        f"{_secret_lamp(d)} |",
         f"| Affiliate-Klicks (Umsatz-Hebel) | {d['total_clicks']} über "
-        f"{d['click_articles']} Artikel | {'🟢' if d['total_clicks'] >= 100 else ('🟡' if d['total_clicks'] > 0 else '🟡')} |",
+        f"{d['click_articles']} Artikel | "
+        f"{_data_lamp(d['total_clicks'], d['click_articles'], d.get('clicks_pipeline') == 'ok')} |",
         f"| Awin-Provision (Klicks→Umsatz) | {d['awin_total']:.2f} € "
         f"({d['awin_paid']:.2f} € bezahlt) über {d['awin_articles']} Artikel | "
-        f"{'🟢' if d['awin_total'] > 0 else '🟡'} |",
+        f"{_data_lamp(int(d['awin_total'] or 0), d['awin_articles'], d['awin_articles'] > 0)} |",
         "",
         "## Affiliate-Klick-Attribution",
         "",
@@ -311,6 +524,10 @@ def render(d, score):
         "## Awin-Provisions-Import (Monetarisierung)",
         "",
         _render_awin(d),
+        "",
+        "## Datenlagen (Messabdeckung)",
+        "",
+        _render_datalage(d),
         "",
         "## Pillar-Verteilung",
         "",
@@ -323,12 +540,26 @@ def render(d, score):
     if d["decay_count"] > 0:
         recs.append(f"**{d['decay_count']}** Artikel veralten – `scripts/decay_radar.py` zeigt die "
                     "priorisierte Refresh-Queue (Stichtag-/Tarif-Themen zuerst).")
-    if d["cwv_verdict"] != "GREEN":
+    if d.get("cwv_state") in ("STALE", "MISSING", "PARTIAL"):
+        recs.append(f"Core-Web-Vitals **nicht aktuell gemessen** ({d.get('cwv_display')}) – "
+                    "das ist eine Messlücke, keine Performance-Diagnose: Build-Step in "
+                    "`premium-governance.yml` und `scripts/cwv_guard.py --public public/ "
+                    "--strict-build` laufen lassen, bevor die Zahl wieder als Befund zählt.")
+    elif d["cwv_verdict"] != "GREEN":
         recs.append("Core-Web-Vitals unter Soll – `scripts/cwv_guard.py` für Befunde; "
                     "Covers als AVIF/WebP, Bilder < 220 KB, `<img>` mit width/height.")
+    if d.get("secret_legacy"):
+        recs.append("Secrets-Wache im alten Format (ohne Nachweis-Spalte) – die Zeile "
+                    "bleibt ⚪, bis `premium-governance.yml` den Report neu erzeugt "
+                    "(Live-Probe `--verify`).")
     if d["secret_red"] > 0:
-        recs.append("Tote/schwache Secrets – `scripts/secrets_age_guard.py` prüfen "
-                    "(Pinterest 30-Tage-Token, Mastodon, KI-Keys).")
+        recs.append(f"**{d['secret_red']}** rote Secret-Befunde – Kanal ist tot oder "
+                    "abgelaufen: `python3 scripts/secrets_age_guard.py --verify` zeigt "
+                    "live, welche API den Token ablehnt (Pinterest 30-Tage-Token, "
+                    "Mastodon, KI-Keys).")
+    elif d.get("secret_amber", 0) > 0:
+        recs.append(f"{d['secret_amber']} gelber Secret-Hinweis(e) – altern, aber "
+                    "functieren; `--verify` im Wochentakt hält den Nachweis frisch.")
     if d["lektor"]:
         recs.append(f"**{d['lektor']}** auto-behebbare Lektorat-Befunde – "
                     "`scripts/lektor_guard.py --fix` (Doppelwörter, Füll-Phrasen, "
@@ -339,9 +570,19 @@ def render(d, score):
                     "Weichmacher) – nicht automatisch behebbar. Redaktionell in der "
                     "Refresh-Queue mitziehen: `scripts/lektor_guard.py` listet die "
                     "Fundstellen pro Artikel.")
+    if d["readability"] is not None and d["readability"] < 70:
+        recs.append(f"Ø Lesbarkeit {d['readability']} (Ziel ≥ 70, Amstad-deutsch) – "
+                    "lange Sätze splittern, Nominalstil auflösen; Hebel pro Artikel zeigt "
+                    "`python3 scripts/readability_check.py` bzw. `lektor_guard.py`. "
+                    "Lesbarkeit ist bei Pinterest-/Suchtraffic der Verweil-Dauer-Hebel.")
     if d["drafts"] > 0:
-        recs.append(f"**{d['drafts']}** Artikel in der Entwurf-Warteschlange – manuelle "
-                    "Qualitätsfreigabe prüfen (Kadenz- bzw. Qualitäts-Gate).")
+        recs.append(f"**{d['drafts']}** Artikel in der Entwurf-Warteschlange – Freigabe "
+                    "prüfen (`python3 scripts/publish_gate.py` bzw. Kadenz-Gate). "
+                    "Vorrat ist kein Mangel – erst > 8 Entwürfe werden zu Altlasten.")
+    if d.get("clicks_pipeline") in (None, "nie", "skipped"):
+        recs.append("Umsatz-Daten fehlen, weil die Pipeline nie gefüllt wurde – nicht, "
+                    "weil niemand klickt: `python3 scripts/umami_clicks.py --fetch` "
+                    "(Secret `UMAMI_API_TOKEN`; Website-ID steht schon in `hugo.toml`).")
     if not recs:
         recs.append("Keine akuten Handlungsfelder – Frequenz halten (Mo/Mi/Fr), "
                     "Decay & CWV weiter beobachten.")
@@ -401,6 +642,65 @@ def _selftest():
     # _ampel Grenzen
     if _ampel(90) != "GREEN" or _ampel(75) != "AMBER" or _ampel(50) != "RED":
         failures.append("Ampel-Grenzen")
+    # --- _age_days: tolerierend, nie ratend
+    ref = datetime.date(2026, 9, 7)
+    if _age_days("2026-09-01", ref) != 6:
+        failures.append("_age_days zählt falsch")
+    if _age_days("2026-09-13", ref) != 0:
+        failures.append("Zukunft datum gibt negativen Wert")
+    if _age_days(None, ref) is not None or _age_days("gestern", ref) is not None:
+        failures.append("_age_days rät bei Müll")
+    # --- CWV-Herkunft (#206-Kern): veraltete Messung != Befund
+    man_ok = {"generated": "2026-09-07", "verdict": "GREEN", "build_measured": True, "findings": []}
+    st = _cwv_state(man_ok, ref)
+    if st["state"] != "OK" or st["display"] != "GREEN" \
+            or _cwv_lamp({"cwv_state": st["state"], "cwv_verdict": st["verdict"]}) != "🟢":
+        failures.append(f"frische grüne CWV-Messung wird nicht als OK gelesen ({st})")
+    st = _cwv_state({"generated": "2026-08-20", "verdict": "AMBER", "findings": [
+        {"level": "amber", "code": "img_soft"}]}, ref)
+    if st["state"] != "STALE" \
+            or _cwv_lamp({"cwv_state": st["state"], "cwv_verdict": st["verdict"]}) != "⚪":
+        failures.append("veraltetes Manifest wird als aktueller Befund verkauft (#206-Fall)")
+    st = _cwv_state({"generated": "2026-09-07", "verdict": "GREEN", "build_measured": False,
+                     "findings": [{"level": "info", "code": "build_missing"}]}, ref)
+    if st["state"] != "PARTIAL":
+        failures.append("Build-Lücke (public/ fehlgeschlagen) bleibt unsichtbar")
+    if _cwv_state({}, ref)["state"] != "MISSING":
+        failures.append("fehlendes Manifest != MISSING")
+    # --- Score: Blindflug < echter roter Befund (Reihenfolge muss stimmen)
+    base = {"live": 20, "decay_count": 0, "lektor": 0, "secret_red": 0, "readability": 80}
+    s_ok = _score(dict(base, cwv_state="OK", cwv_verdict="GREEN"))
+    s_red = _score(dict(base, cwv_state="OK", cwv_verdict="RED"))
+    s_blind = _score(dict(base, cwv_state="STALE", cwv_verdict="AMBER"))
+    if not (s_ok > s_blind > s_red):
+        failures.append(f"Score-Hierarchie CWV falsch: ok={s_ok} blind={s_blind} rot={s_red}")
+    # --- Secrets-Ampel aus Report-Policy (nicht aus eigener Rechnung)
+    lage = _secret_state({"entries": {"A": {"quality": "proven"}}},
+                         "| Secret | Status | Nachweis |\n|---|---|---|\n"
+                         "## Gesamt-Ampel: **RED**\n\n| RED | dead | `A` – tot |\n"
+                         "| AMBER | aging | `B` – alt |")
+    if lage["red"] != 1 or lage["amber"] != 1 or lage["verdict"] != "RED" or lage["proven"] != 1:
+        failures.append(f"Secrets-Report wird falsch gelesen: {lage}")
+    legacy = _secret_state({"entries": {"A": {}}},
+                           "| Secret | Status |\n|---|---|\n## Gesamt-Ampel: **AMBER**\n"
+                           "\n| AMBER | untracked | `PINTEREST` – kein Erfolgs-Log |")
+    if not legacy["legacy"] or legacy["red"] or legacy["amber"]:
+        failures.append("v1-Report (ohne Nachweis-Spalte) wird als Bewertung gelesen")
+    if _secret_lamp({"secret_legacy": True, "secret_red": 0, "secret_amber": 0}) != "⚪":
+        failures.append("Legacy-Secrets-Zeile leuchtet trotzdem")
+    if _secret_lamp({"secret_red": 1}) != "🔴" or _secret_lamp({"secret_red": 0, "secret_amber": 2}) != "🟡" \
+            or _secret_lamp({"secret_red": 0, "secret_amber": 0, "secret_verdict": "GREEN"}) != "🟢":
+        failures.append("Secrets-Lampe inkonsistent")
+    # --- Entwurfs-Lampe: 0 Entwürfe dürfen nie gelb sein (war Dauer-🟡 in #206)
+    if _drafts_lamp(0) != "🟢" or _drafts_lamp(2) != "⚪" or _drafts_lamp(9) not in ("🟡", "🔴"):
+        failures.append("Entwurfs-Lampe bestraft den leeren Warteschlangen-Stand")
+    # --- Datenlampen: „noch keine Daten" ist ⚪, nicht 🟡
+    if _data_lamp(0, 0, False) != "⚪" or _data_lamp(0, 0, True) != "🟡" \
+            or _data_lamp(250, 5, True) != "🟢":
+        failures.append("Monetarisierungs-Lampe verwechselt Datenlücke mit Befund")
+    # --- _age_days in render(): fehlende Historie darf nicht crashen
+    if _trend()[0] is not None and not isinstance(_trend()[0], int):
+        failures.append("Trend-Lieferform unstetig")
     # _score monoton (mehr decay = schlechter)
     a = _score({"live": 20, "decay_count": 0, "cwv_verdict": "GREEN",
                 "readability": 80, "lektor": 10, "secret_red": 0})
@@ -437,6 +737,7 @@ def main():
     rep = render(d, score)
     with open(REPORT, "w", encoding="utf-8") as f:
         f.write(rep)
+    _append_history(d, score)
     print(rep)
     if "--issue" in sys.argv and score < 75:
         print("\n===== ISSUE BODY =====\n")

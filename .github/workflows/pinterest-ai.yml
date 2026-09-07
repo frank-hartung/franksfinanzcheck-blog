@@ -69,17 +69,25 @@ jobs:
       # Beweist der Secrets-Alters-Wache, dass der Pinterest-Kanal WIRKLICH
       # lebt. Ohne diesen Schritt meldet die Wache dauerhaft "UNBEKANNT" und
       # ein echter Token-Ablauf (30 Tage) bliebe im Rauschen unsichtbar.
-      - name: Pinterest-Secret-Erfolg vermerken
+      - name: Pinterest-Secret live verifizieren (Nachweis für die Secrets-Wache)
         if: ${{ success() && steps.bereit.outputs.bereit == 'true' }}
         env:
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
           PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
         run: |
+          # 07.09.2026 (#206): Vorher wurde der Erfolg blind vermerkt – auch im
+          # Queue-Modus ohne einen einzigen API-Aufruf. Die Wache hätte einen
+          # abgelaufenen Token also nie als tot erkannt. Jetzt: Live-Probe gegen
+          # /v5/users/me, Erfolg gilt nur bei HTTP 200.
           if [ -n "${PINTEREST_ACCESS_TOKEN:-}" ]; then
-            python3 scripts/secrets_age_guard.py --record-success PINTEREST_ACCESS_TOKEN || true
+            python3 scripts/secrets_age_guard.py --verify-only PINTEREST_ACCESS_TOKEN --quiet \
+              || echo "::warning::Pinterest-Token live nicht bestätigt – Secrets-Wache meldet das."
           fi
+          # Der Krypto-Key ist kein API-Endpoint: hier reicht der Nachweis, dass
+          # genau dieser Workflow ihn benutzt hat – mit Herkunft (--proof-by).
           if [ -n "${PINTEREST_TOKEN_KEY:-}" ]; then
-            python3 scripts/secrets_age_guard.py --record-success PINTEREST_TOKEN_KEY || true
+            python3 scripts/secrets_age_guard.py --record-success PINTEREST_TOKEN_KEY \
+              --proof-by pinterest-ai || true
           fi
 
       - name: Status + pinned-Flags committen

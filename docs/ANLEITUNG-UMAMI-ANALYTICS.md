@@ -83,6 +83,38 @@ Vertrauen + keine Drittanbieter-Labels in Lighthouse).
 
 ---
 
+## Automatische Klick-Übernahme in den Blog (seit 07.09.2026)
+
+Der Affiliate-Report (`scripts/click_attribution.py`) braucht die `affiliate_click`-
+Events als Datei. Bislang: manuell aus dem Dashboard exportieren – und weil das
+niemand wöchentlich tut, stand in jeder Scorecard „0 Klicks über 0 Artikel"
+(Governance-Report #206). Seit dem 07.09.2026 holt ein Job die Daten selbst:
+
+```bash
+# lokal / im Workflow (premium-governance.yml, Schritt „Umami-Klicks laden")
+python3 scripts/umami_clicks.py --fetch --days 90
+python3 scripts/umami_clicks.py --status     # Was ist der Stand der Pipeline?
+```
+
+Einmalige Einrichtung (2 Minuten):
+
+1. **Umami Cloud:** Avatar → *User Settings* → *API* → *Generate API Key*
+   (self-hosted: `POST /api/access-tokens` bzw. Token im Admin-Bereich).
+2. Repository-Secret anlegen: `gh secret set UMAMI_API_TOKEN`
+3. Optional, wenn die Instanz nicht `https://api.umami.is/v1` ist:
+   Repository-Variable `UMAMI_API_BASE` (z. B. `https://umami.example.com/api`).
+4. Website-ID wird **nicht** als Secret gepflegt – `scripts/umami_clicks.py` liest sie
+   aus `hugo.toml` (`[params.umami] websiteId`). Eine Wahrheit, kein zweiter Ort.
+
+Was ankommt: `data/umami_clicks.json` (aggregierte Zähler je /go/-Stelle,
+Quell-Artikel und Pillar) + `data/umami_clicks.meta.json` (Stand, Quelle, Grund
+eines fehlenden Imports). Keine IPs, keine Profile, keine Sessions – und das
+Token taucht in keinem Log und keiner Datei auf.
+
+Bei Ausfall bleibt der letzte Bestand stehen (ein Analytics-Problem darf nicht wie
+„0 Klicks" aussehen), und der Governance-Lauf meldet die Lücke als Hinweis, nicht
+als Fehler.
+
 ## Konfigurations-Optionen (hugo.toml)
 
 | Parameter | Bedeutung | Default |
