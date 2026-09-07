@@ -28,6 +28,16 @@ ohne Netzwerk, ohne API, determinisch. Läuft lokal, im Premium-Governance-Lauf
   C8  Commit-Hygiene     – `git add` im Workflow darf nur versionierbare Pfade
                           nennen (Sonst: harter Abbruch, vgl. #205)
   C9  Secret-Leak-Schutz – Report-Dateien dürfen kein Token-Material enthalten
+  C10 Token-Broker      – jedes Pinterest-Skript holt seinen Token beim zentralen
+                          Broker; kein Skript baut sich eine eigene Reihenfolge
+                          (sonst prüft die Wache einen anderen Token als der Bot
+                          benutzt – Kernbefund #206)
+  C11 Token-Lebenszyklus– es gibt einen täglichen Erneuerungslauf, der den
+                          rotierten Refresh-Token sichert und sich selbst heilt
+                          (ein 30-Tage-Secret von Hand ist kein Betrieb)
+  C12 Label-Garantie    – jeder Workflow, der ein Issue mit Label erzeugt, legt
+                          das Label vorher an; sonst scheitert der Melder am
+                          Melden (Ursache des roten Laufs in #209)
 
 Exit-Codes: 0 = Vertrag erfüllt · 1 = Verletzung(en) · 2 = Selbsttest/Fehler
 
@@ -54,7 +64,13 @@ WORKFLOWS_DIR = os.path.join(BLOG_DIR, ".github", "workflows")
 GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "decay_radar.py", "governance_gate.py", "readability_check.py",
           "umami_clicks.py", "click_attribution.py", "awin_provisions.py",
-          "pinterest_perf_feedback.py"]
+          "pinterest_perf_feedback.py", "pinterest_token.py"]
+
+# Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
+# holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
+TOKEN_BROKER = "pinterest_token"
+TOKEN_BROKER_EXEMPT = {"pinterest_token.py", "pinterest_auth.py"}
+TOKEN_WORKFLOW = "pinterest-token.yml"
 
 # Reihenfolge-Vertrag: diese Schritte sind Messungen, die vor der Sicht liegen müssen
 MEASURE_STEPS = ("decay", "cwv", "secrets", "lesbarkeit", "pinperf", "clicks", "awin")
@@ -310,6 +326,98 @@ SECRET_PATTERNS = [
 ]
 
 
+def c10_token_broker(script_texts):
+    """C10: EINE Token-Wahrheit für den ganzen Pinterest-Betrieb.
+
+    Der teuerste Teil von #206 war nicht der abgelaufene Token, sondern dass
+    sechs Skripte sechs verschiedene Reihenfolgen benutzten: Die Wache prüfte
+    das Env-Secret, der Bot arbeitete mit dem Auto-Refresh-Speicher. Ein grüner
+    Report konnte einen toten Kanal bedeuten – und ein roter einen gesunden.
+    """
+    out = []
+    for name, text in sorted(script_texts.items()):
+        if name in TOKEN_BROKER_EXEMPT:
+            continue
+        if "api.pinterest.com" not in text and "PINTEREST_ACCESS_TOKEN" not in text:
+            continue
+        uses_broker = TOKEN_BROKER in text
+        # Direktzugriff auf das Env-Secret als TOKEN-QUELLE (nicht bloß erwähnt)
+        direct = re.search(r"os\.environ(?:\.get\(\s*)?\[?[\"']PINTEREST_ACCESS_TOKEN", text)
+        if not uses_broker and direct:
+            out.append(("C10", f"scripts/{name}: holt den Pinterest-Token direkt aus dem "
+                               "Env statt über `pinterest_token.get_token()` – damit prüft "
+                               "die Wache einen anderen Token als der Bot benutzt (#206)."))
+        if not uses_broker and "api.pinterest.com" in text and not direct:
+            out.append(("C10", f"scripts/{name}: spricht mit der Pinterest-API, kennt aber "
+                               "den Token-Broker `pinterest_token` nicht – Failover und "
+                               "Auto-Erneuerung greifen dort nicht."))
+    return out
+
+
+def c11_token_lifecycle(workflow_texts, root=None):
+    """C11: Der Zugang muss sich selbst erneuern – täglich, nachweisbar."""
+    out = []
+    path = next((p for p in workflow_texts if os.path.basename(p) == TOKEN_WORKFLOW), None)
+    if not path:
+        out.append(("C11", f"Kein Erneuerungslauf `.github/workflows/{TOKEN_WORKFLOW}` – "
+                           "ein Pinterest-Token von Hand stirbt planmäßig nach 30 Tagen "
+                           "(genau der Dauerbefund aus #206)."))
+        return out
+    text = workflow_texts[path]
+    if "schedule:" not in text or "cron:" not in text:
+        out.append(("C11", f"{TOKEN_WORKFLOW}: kein Zeitplan – eine Erneuerung, die nur "
+                           "von Hand läuft, ist keine Erneuerung."))
+    if "pinterest_token.py --refresh" not in text:
+        out.append(("C11", f"{TOKEN_WORKFLOW}: erneuert den Zugang nicht über "
+                           "`pinterest_token.py --refresh`."))
+    if "data/pinterest_tokens.enc" not in text:
+        out.append(("C11", f"{TOKEN_WORKFLOW}: sichert den rotierten Refresh-Token nicht "
+                           "(`data/pinterest_tokens.enc`) – nach 60 Tagen ist der Kanal "
+                           "trotz Automatik tot."))
+    if "issue close" not in text:
+        out.append(("C11", f"{TOKEN_WORKFLOW}: kein Selbstheilungs-Pfad – ein erledigter "
+                           "Befund muss sein Issue selbst schließen."))
+    if "--selftest" not in text:
+        out.append(("C11", f"{TOKEN_WORKFLOW}: fasst Tokens ohne vorherigen Selbsttest an "
+                           "(Sabotage-Schutz fehlt)."))
+    return out
+
+
+def c12_label_guarantee(workflow_texts):
+    """C12: Ein Melder, der am Melden scheitert, ist schlimmer als kein Melder.
+
+    `gh issue create --label X` schlägt mit HTTP 422 fehl, wenn X im Repository
+    nicht existiert. Genau das hat den Pinterest-Watchdog am 07.09.2026 rot
+    laufen lassen (#209) – und das Fehler-Alerting öffnete daraufhin ein Issue
+    über das Issue, das nicht geschrieben werden konnte.
+    """
+    out = []
+    for path, raw in sorted(workflow_texts.items()):
+        rel = os.path.basename(path)
+        # Kommentarzeilen raus: In den Kommentaren stehen Beispielbefehle (auch
+        # dieser Regel), die sonst als echte Issue-Erzeugung gezählt würden.
+        raw = "\n".join(l for l in raw.splitlines()
+                         if not l.lstrip().startswith("#"))
+        text = re.sub(r"\\\s*\n\s*", " ", raw)          # Zeilenfortsetzungen
+        labels = set()
+        for m in re.finditer(r"gh issue create[^\n]*", text):
+            labels |= {l.strip("\"'`,;") for l in re.findall(r"--label\s+(\S+)", m.group(0))}
+        for m in re.finditer(r"labels:\s*\[([^\]]*)\]", text):
+            labels |= {l.strip().strip("\"'") for l in m.group(1).split(",") if l.strip()}
+        for label in sorted(l for l in labels if l):
+            # `--label "$GOV_LABEL"` und `--label governance` sollen beide
+            # zum passenden `gh label create` finden – deshalb der nackte Kern.
+            var = label.strip('${} "\'')
+            pattern = r'gh label create\s+["\']?\$?\{?' + re.escape(var)
+            created = (re.search(pattern, text)
+                       or re.search(r"issues\.createLabel", text))
+            if not created:
+                out.append(("C12", f"{rel}: erzeugt Issues mit Label `{label}`, legt es aber "
+                                   "nie an (`gh label create … --force`). Fehlt das Label im "
+                                   "Repo, scheitert die Meldung mit HTTP 422 (#209)."))
+    return out
+
+
 def c9_secret_leak(texts):
     out = []
     for name, text in texts.items():
@@ -369,6 +477,12 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
         if os.path.getsize(path) < 400_000:
             leak_texts[os.path.relpath(path, root)] = _read(path)
     checks += c9_secret_leak(leak_texts)
+    script_texts = {}
+    for path in sorted(glob.glob(os.path.join(root, "scripts", "*.py"))):
+        script_texts[os.path.basename(path)] = _read(path)
+    checks += c10_token_broker(script_texts)
+    checks += c11_token_lifecycle(wflows, root=root)
+    checks += c12_label_guarantee(wflows)
     return checks
 
 
@@ -393,11 +507,21 @@ RULE_TEXT = {
           "unversionierte Dateien brechen den Lauf hart ab (#205).",
     "C9": "Reports und `data/*.json` enthalten kein Secret-Material (Pinterest/Groq/"
           "Gemini/GitHub/JWT-Muster).",
+    "C10": "Alle Pinterest-Skripte holen ihren Token über den Broker "
+           "`scripts/pinterest_token.py` – eine Reihenfolge, ein Failover, und die "
+           "Wache prüft denselben Token, mit dem der Bot arbeitet (#206).",
+    "C11": "Es gibt einen täglichen Erneuerungslauf (`pinterest-token.yml`), der den "
+           "rotierten Refresh-Token sichert, sich selbst testet und sein Issue bei "
+           "Heilung schließt – ein Handbetriebs-Secret stirbt sonst alle 30 Tage.",
+    "C12": "Jeder Workflow, der Issues mit Label erzeugt, legt das Label vorher an – "
+           "sonst scheitert die Meldung mit HTTP 422 und der Melder wird selbst zum "
+           "Zwischenfall (#209).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C4": "Issue-Policy", "C5": "Nachweis-Provenienz", "C6": "Selbsttests",
-         "C7": "Datenkonsistenz", "C8": "Commit-Hygiene", "C9": "Secret-Leak-Schutz"}
+         "C7": "Datenkonsistenz", "C8": "Commit-Hygiene", "C9": "Secret-Leak-Schutz",
+         "C10": "Token-Broker", "C11": "Token-Lebenszyklus", "C12": "Label-Garantie"}
 
 
 def render_md(checks, ok_notes=()):
@@ -414,7 +538,8 @@ def render_md(checks, ok_notes=()):
         "## Regeln",
         "",
     ]
-    for code, label in sorted(LABEL.items()):
+    # Natürliche Reihenfolge: C2 vor C10 (lexikografisch wäre C1, C10, C11, C2 …)
+    for code, label in sorted(LABEL.items(), key=lambda kv: int(kv[0][1:])):
         lines.append(f"- **{code} {label}** – {RULE_TEXT.get(code, '')}")
     lines += ["", "## Befund", ""]
     if not checks:
@@ -543,18 +668,67 @@ def _selftest():
                                    'STEPS = {\n    "decay":   {"report": "x"},\n    "cwv":     {"report": "y"},\n}')
     if len(res) != 2:
         failures.append(f"C3: fehlende Emit-Zweige nur {len(res)}x gemeldet (erwartet 2)")
+    # --- C10: eigene Token-Reihenfolge im Skript (der #206-Kern)
+    bad_scripts = {"pinterest_dings.py":
+                   'tok = os.environ.get("PINTEREST_ACCESS_TOKEN", "")\n'
+                   'urllib.request.urlopen("https://api.pinterest.com/v5/boards")\n'}
+    if not any(code == "C10" for code, _ in c10_token_broker(bad_scripts)):
+        failures.append("C10: eigenmächtige Token-Quelle im Skript bleibt unentdeckt")
+    good_scripts = {"pinterest_dings.py":
+                    "import pinterest_token\n"
+                    "tok = pinterest_token.get_token()\n"
+                    'urllib.request.urlopen("https://api.pinterest.com/v5/boards")\n'}
+    if c10_token_broker(good_scripts):
+        failures.append("C10: sauberes Skript über den Broker wird beanstandet")
+    if c10_token_broker({"pinterest_token.py": 'os.environ["PINTEREST_ACCESS_TOKEN"]'}):
+        failures.append("C10: der Broker selbst darf nicht gegen seine eigene Regel laufen")
+    # --- C11: fehlender/halber Erneuerungslauf
+    if not c11_token_lifecycle({}):
+        failures.append("C11: fehlender Token-Erneuerungslauf bleibt unentdeckt")
+    halb = {".github/workflows/pinterest-token.yml":
+            "on:\n  workflow_dispatch: {}\nsteps:\n  - run: python3 scripts/pinterest_token.py --status\n"}
+    res = c11_token_lifecycle(halb)
+    if len(res) < 4:
+        failures.append(f"C11: unvollständiger Erneuerungslauf nur {len(res)}x gemeldet")
+    voll = {".github/workflows/pinterest-token.yml":
+            "on:\n  schedule:\n    - cron: \"40 2 * * *\"\n"
+            "steps:\n  - run: python3 scripts/pinterest_token.py --selftest\n"
+            "  - run: python3 scripts/pinterest_token.py --refresh\n"
+            "  - run: git add data/pinterest_tokens.enc\n"
+            "  - run: gh issue close 1\n"}
+    if c11_token_lifecycle(voll):
+        failures.append(f"C11: vollständiger Erneuerungslauf wird beanstandet: {c11_token_lifecycle(voll)}")
+    # --- C12: Issue-Label ohne Anlegen (Ursache #209)
+    bad_label = {"x.yml": 'run: gh issue create --title "T" --label pinterest --body "b"\n'}
+    if not any(code == "C12" for code, _ in c12_label_guarantee(bad_label)):
+        failures.append("C12: Issue-Label ohne `gh label create` bleibt unentdeckt (#209)")
+    good_label = {"x.yml": 'run: |\n  gh label create pinterest --force\n'
+                           '  gh issue create --title "T" --label pinterest --body "b"\n'}
+    if c12_label_guarantee(good_label):
+        failures.append("C12: abgesicherter Melder wird beanstandet")
+    var_label = {"x.yml": 'env:\n  L: gov\nrun: |\n  gh label create "$L" --force\n'
+                          '  gh issue create --label "$L" --body b\n'}
+    if c12_label_guarantee(var_label):
+        failures.append("C12: Label über Variable wird fälschlich beanstandet")
+    js_label = {"x.yml": "issues.createLabel({name:'auto-report'})\n"
+                         "issues.create({labels: ['auto-report']})\n"}
+    if c12_label_guarantee(js_label):
+        failures.append("C12: github-script mit createLabel wird beanstandet")
+    kommentar = {"x.yml": "# Beispiel: gh issue create --label demo\njobs: {}\n"}
+    if c12_label_guarantee(kommentar):
+        failures.append("C12: Beispiel im Kommentar wird als echter Melder gezählt")
     # --- LABEL/Regeltext-Deckung: jede Regel ist erklärt (Doku gehört zum Vertrag)
     for code in LABEL:
         if code not in RULE_TEXT or len(RULE_TEXT[code]) < 40:
             failures.append(f"{code} ohne richtigen Regeltext")
-    if "C1" not in LABEL or "C9" not in LABEL:
+    if "C1" not in LABEL or "C12" not in LABEL:
         failures.append("Regel-Codes nicht vollständig gelabelt")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C9 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C12 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 
@@ -575,8 +749,8 @@ def main(argv=None):
             if annotate:
                 print(f"::error::{line}")
     else:
-        print("🔒 GOVERNANCE-VERTRAG erfüllt – alle neun Regeln prüfen in beide Richtungen "
-              "(Fehler UND Schein-Sicherheit).")
+        print("🔒 GOVERNANCE-VERTRAG erfüllt – alle zwölf Regeln prüfen in beide "
+              "Richtungen (Fehler UND Schein-Sicherheit).")
     if "--md" in argv:
         target = argv[argv.index("--md") + 1]
         try:

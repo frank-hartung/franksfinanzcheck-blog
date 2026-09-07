@@ -68,7 +68,7 @@ jobs:
           for s in editorial_scorecard cwv_guard secrets_age_guard decay_radar \
                    governance_gate governance_contract readability_check \
                    umami_clicks click_attribution awin_provisions \
-                   pinterest_perf_feedback; do
+                   pinterest_perf_feedback pinterest_token; do
             if python3 "scripts/$s.py" --selftest >/tmp/selftest-$s.log 2>&1; then
               tail -n 1 "/tmp/selftest-$s.log"
             else
@@ -133,6 +133,9 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
           PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
           MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
           MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
           UMAMI_API_TOKEN: ${{ secrets.UMAMI_API_TOKEN }}
@@ -302,6 +305,7 @@ jobs:
           git add data/governance_status.json data/governance_history.jsonl 2>/dev/null || true
           git add data/cwv_history.jsonl data/scorecard_history.jsonl 2>/dev/null || true
           git add data/pinterest_weights.yaml data/click_stats.json data/pinterest_perf_history.jsonl 2>/dev/null || true
+          git add data/pinterest_token_state.json 2>/dev/null || true
           git add data/awin_provisions.json data/subid_map.yaml 2>/dev/null || true
           git add data/umami_clicks.json data/umami_clicks.meta.json 2>/dev/null || true
           if git diff --cached --quiet; then

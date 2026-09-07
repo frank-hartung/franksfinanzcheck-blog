@@ -120,13 +120,17 @@ def mark_pinned(post):
 def main():
     dry_run = "--dry-run" in sys.argv
     list_boards = "--list-boards" in sys.argv
-    # Token-Priorität: 1) Auto-Refresh (pinterest_auth.py) 2) Env-Secret
+    # EINE Token-Wahrheit für alle Pinterest-Skripte (#206, 07.09.2026):
+    # scripts/pinterest_token.py entscheidet über die Quelle (Auto-Refresh-
+    # Speicher → Env-Refresh-Bootstrap → klassisches Secret) und prüft sie
+    # live. Vorher hatte jedes Skript eine eigene Reihenfolge – die Wache
+    # prüfte damit einen anderen Token als der Bot benutzt.
     try:
-        import pinterest_auth
-        token = pinterest_auth.get_access_token() or os.environ.get("PINTEREST_ACCESS_TOKEN", "").strip()
-    except BaseException as _auth_err:  # noqa: BLE001 – auch SystemExit aus defekter Token-Datei abfangen
-        print(f"⚠ Pinterest-Token-Refresh übersprungen ({_auth_err}) – nutze Env-Token.")
-        token = os.environ.get("PINTEREST_ACCESS_TOKEN", "").strip()
+        import pinterest_token
+        token = (pinterest_token.get_token() or "").strip()
+    except BaseException as _auth_err:  # noqa: BLE001 – nie den Lauf mitreißen
+        print(f"⚠ Token-Broker nicht verfügbar ({_auth_err}) – Queue-Modus.")
+        token = ""
     board_id = os.environ.get("PINTEREST_BOARD_ID", "").strip()
 
     if list_boards:

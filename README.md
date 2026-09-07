@@ -149,9 +149,15 @@ Routing über 6 Boards) laufen über **Actions → „Pinterest-AI" → Run
 workflow** (`pinterest_engine.py`); Rate-Limits und 30-Tage-Repeat-Schutz
 setzt `spam_guard.py` durch.
 
-**Einmalige Einrichtung (~10 Min.):** Siehe `ANLEITUNG-PINTEREST-API.md`
-- Pinterest-Developer-App + Access-Token → Secret `PINTEREST_ACCESS_TOKEN`
+**Einmalige Einrichtung (~5 Min.):** Siehe **`docs/PINTEREST-TOKEN-RUNBOOK.md`**
+- Pinterest-Developer-App → Secrets `PINTEREST_APP_ID`, `PINTEREST_APP_SECRET`,
+  `PINTEREST_TOKEN_KEY` (selbst gewählte Zufallszeichenkette)
+- Autorisierung komplett in Actions: **„Pinterest-Token-Wache" → Run workflow**
+  (`show_auth_url` → Code in `auth_code`). Danach erneuert sich der Zugang
+  **täglich selbst** (continuous refresh) – kein 30-Tage-Handbetrieb mehr.
 - Board-ID (`python3 scripts/pinterest_engine.py --list-boards`) → Variable `PINTEREST_BOARD_ID`
+- Lagebild jederzeit: `python3 scripts/pinterest_token.py --status`
+  (Quelle, Restlaufzeiten, nächster Schritt – ohne Token-Material)
 
 **🔍 Automatische SEO-Optimierung (wöchentlich, kostenlos, Profi-Niveau):**
 
@@ -364,6 +370,7 @@ python3 scripts/umami_clicks.py --fetch            # Klick-Daten automatisch lad
 |---|---|---|
 | Scorecard „Core-Web-Vitals **AMBER**", Wächter meldet GREEN | Scorecard lief im Workflow **vor** der Messung und las das Manifest der Vorwoche | Messen → Sehen (Reihenfolge ist jetzt Regel **C1**), Scorecard-Zeile trägt Alter der Messung; „nicht gemessen" = ⚪ statt 🟡 |
 | `PINTEREST_ACCESS_TOKEN` dauerhaft „UNBEKANNT" → jeder Lauf rot/gelb | Einziger Nachweis-Lieferant (`pinterest-ai.yml`) lief seit 20.08. nur noch manuell | Tägliche Live-Probe im Pinterest-Watchdog + wöchentliche `--verify`; Erfolg gilt nur bei HTTP 200, Ablehnung = **rot** |
+| `PINTEREST_ACCESS_TOKEN` 401 – **jeden Monat aufs Neue** (Folge-Issues #153, #209) | Kein Lebenszyklus: 30-Tage-Token von Hand, sechs Skripte mit sechs Token-Reihenfolgen, Live-Probe gegen den v3-Pfad `/v5/users/me`, harter 401-Abbruch statt Queue-Modus | **Token-Broker** `scripts/pinterest_token.py` (eine Quelle, Failover, proaktive Erneuerung) + **tägliche Token-Wache** `pinterest-token.yml` (continuous refresh, verschlüsselt committet) + Vorwarnung `manual_token`/`refresh_rotation`, **bevor** der Kanal steht. Regeln **C10–C12** halten das fest. Details: `GOVERNANCE-206-BEHOBEN-2026-09-07.md` |
 | `GROQ/GEMINI_API_KEY` „OK (6d)" | Der Governance-Lauf vermerkte Erfolg für Keys, die er nie benutzt (Selbst-Wäsche) | Regel **C5**: Nachweis nur mit `--proof-by <workflow>`, und nur dort, wo das Secret gerçekten gebraucht wird |
 | Issue #145 + #206 = Duplikate im Wochenrhythmus | Issue an rohen Exit-Codes aufgehängt; „noch keine Daten" war ein Fehler | Policy im Gate: ℹ️-Datenlage ≠ Befund; ein Issue, aktualisiert statt neu created, close bei Grün |
 | „Affiliate-Klicks 0 / Awin 0,00 €" ohne Ende | Manueller Dashboard-Export als einzige Datenquelle | `scripts/umami_clicks.py` holt die Klicks selbst (Secret `UMAMI_API_TOKEN`, Website-ID aus `hugo.toml`); ohne Token sauberes Skip + dokumentierter Grund statt Schein-Null |
@@ -371,7 +378,8 @@ python3 scripts/umami_clicks.py --fetch            # Klick-Daten automatisch lad
 | Reports/Manifeste konnten bei Parallel-Läufen halbbeschrieben werden | `open(...,"w")` ohne Sperre/Atomicity | Alle State-Schreibungen atomar (`tmp` + `os.replace`) und bei der Secrets-Wache zusätzlich mit Dateisperre; kaputter State wird gesichert + neu begonnen statt abzustürzen |
 
 **Neu im Set:** `scripts/governance_gate.py` (Bewertungs-Policy + Issue-Entscheidung),
-`scripts/governance_contract.py` (Vertrag C1–C9, im Qualitäts-Gate bei jedem Push/PR),
+`scripts/governance_contract.py` (Vertrag C1–C12, im Qualitäts-Gate bei jedem Push/PR),
+`scripts/pinterest_token.py` (Token-Broker mit Failover + Lebenszyklus-Lagebild),
 `scripts/umami_clicks.py` (Umsatz-Datenpipeline). Verlauf Artefakte:
 `data/cwv_history.jsonl`, `data/scorecard_history.jsonl`,
 `data/governance_status.json`, `data/governance_history.jsonl`,
