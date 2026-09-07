@@ -4,7 +4,7 @@
 - 🔴 **STALE** (sofort aktualisieren): **0**
 - 🟠 **DECAYING** (in den nächsten Wochen): **0**
 - 🟡 **WATCH** (im Auge behalten): **0**
-- 🟢 **FRESH** (ok): **30**
+- 🟢 **FRESH** (ok): **31**
 
 ---
 

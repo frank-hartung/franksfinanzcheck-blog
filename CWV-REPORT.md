@@ -8,6 +8,8 @@
 | Bild-Budget (`static/`) | 0 |
 | Build-Hygiene (`public/`) | 0 |
 
+**Build gemessen:** ja
+
 ## Befunde
 
 _Alle Soll-Werte eingehalten._
@@ -19,7 +21,7 @@ _Alle Soll-Werte eingehalten._
 
 ## Kennzahlen (public/)
 
-- HTML-Dateien: **315** · JS-Dateien 4 (245 KB) · CSS 0 (0 KB)
+- HTML-Dateien: **324** · JS-Dateien 4 (245 KB) · CSS 0 (0 KB)
 - Inline-<style>: 0 · externe Skripte ohne async/defer: 0 · Inline-JS-Blöcke: 278 · JSON-LD/strukturierte Daten (nicht blockierend): 38 · <img> ohne Größensetzung: 0
 
 ## Empfehlungen

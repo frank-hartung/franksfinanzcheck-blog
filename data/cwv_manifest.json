@@ -1,6 +1,8 @@
 {
   "generated": "2026-09-07",
   "verdict": "GREEN",
+  "build_measured": true,
+  "strict_build": true,
   "static": {
     "total_img_bytes": 14938276,
     "count_img": 517,
@@ -8,12 +10,12 @@
     "worst_cover_bytes": 138530
   },
   "public": {
-    "html_files": 315,
+    "html_files": 324,
     "js_files": 4,
     "css_files": 0,
     "js_bytes": 251115,
     "css_bytes": 0,
-    "html_bytes": 15383736,
+    "html_bytes": 15828465,
     "inline_styles": 0,
     "blocking_js": 0,
     "inline_js": 278,

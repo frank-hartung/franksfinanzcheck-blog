@@ -1,0 +1,13 @@
+{
+  "attempted": "2026-09-07",
+  "base": "https://api.umami.is/v1",
+  "website_id_set": true,
+  "token_present": false,
+  "days": 90,
+  "event": "affiliate_click",
+  "endpoint": null,
+  "rows": 0,
+  "total": 0,
+  "reason": "kein UMAMI_API_TOKEN",
+  "status": "skipped"
+}

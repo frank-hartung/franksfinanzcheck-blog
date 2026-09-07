@@ -1,0 +1,1 @@
+{"action": "report", "amber": 0, "fingerprint": "015cfde80d84", "green": 4, "info": 4, "red": 1, "steps": {"awin": "info", "build": "green", "clicks": "info", "cwv": "green", "decay": "green", "pinperf": "info", "scorecard": "green", "secrets": "red", "umami": "info"}, "ts": "2026-09-07T09:10:21+00:00", "verdict": "RED"}

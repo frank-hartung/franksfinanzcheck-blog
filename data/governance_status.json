@@ -1,0 +1,111 @@
+{
+  "counts": {
+    "amber": 0,
+    "green": 4,
+    "info": 4,
+    "red": 1
+  },
+  "fingerprint": "015cfde80d84",
+  "generated": "2026-09-07T09:10:21+00:00",
+  "issue_action": "report",
+  "last": {
+    "action": "report",
+    "changed": true,
+    "fingerprint": "015cfde80d84",
+    "verdict": "RED"
+  },
+  "steps": {
+    "awin": {
+      "actionable": false,
+      "code": "no_data",
+      "exit": 0,
+      "findings": 0,
+      "level": "info",
+      "message": "Datenlage offen (noch kein Export/Import)",
+      "report": "AWIN-REPORT.md",
+      "ts": "2026-09-07T09:10:21+00:00"
+    },
+    "build": {
+      "actionable": false,
+      "code": "ok",
+      "exit": 0,
+      "findings": 0,
+      "level": "green",
+      "message": "Schritt erfolgreich (Report folgt nicht)",
+      "report": "",
+      "ts": "2026-09-07T09:10:19+00:00"
+    },
+    "clicks": {
+      "actionable": false,
+      "code": "no_data",
+      "exit": 0,
+      "findings": 0,
+      "level": "info",
+      "message": "Datenlage offen (noch kein Export/Import)",
+      "report": "CLICK-REPORT.md",
+      "ts": "2026-09-07T09:10:21+00:00"
+    },
+    "cwv": {
+      "actionable": false,
+      "code": "ok",
+      "exit": 0,
+      "findings": 0,
+      "level": "green",
+      "message": "in Ordnung",
+      "report": "CWV-REPORT.md",
+      "ts": "2026-09-07T09:10:20+00:00"
+    },
+    "decay": {
+      "actionable": false,
+      "code": "ok",
+      "exit": 0,
+      "findings": 0,
+      "level": "green",
+      "message": "in Ordnung",
+      "report": "DECAY-REPORT.md",
+      "ts": "2026-09-07T09:10:19+00:00"
+    },
+    "pinperf": {
+      "actionable": false,
+      "code": "no_data",
+      "exit": 0,
+      "findings": 0,
+      "level": "info",
+      "message": "Datenlage offen (noch kein Export/Import)",
+      "report": "PINTEREST-PERF-REPORT.md",
+      "ts": "2026-09-07T09:10:21+00:00"
+    },
+    "scorecard": {
+      "actionable": false,
+      "code": "ok",
+      "exit": 0,
+      "findings": 0,
+      "level": "green",
+      "message": "in Ordnung",
+      "report": "EDITORIAL-SCORECARD.md",
+      "ts": "2026-09-07T09:10:21+00:00"
+    },
+    "secrets": {
+      "actionable": true,
+      "code": "red_finding",
+      "exit": 1,
+      "findings": 1,
+      "level": "red",
+      "message": "`PINTEREST_ACCESS_TOKEN` – Pinterest Access-Token: Live-Check abgelehnt – Pinterest-Token abgelaufen/ungültig (401)",
+      "report": "SECRETS-REPORT.md",
+      "ts": "2026-09-07T09:10:21+00:00"
+    },
+    "umami": {
+      "actionable": false,
+      "code": "no_data",
+      "exit": 0,
+      "findings": 0,
+      "level": "info",
+      "message": "Datenlage offen (noch kein Export/Import)",
+      "report": "data/umami_clicks.meta.json",
+      "ts": "2026-09-07T09:10:21+00:00"
+    }
+  },
+  "verdict": "RED",
+  "version": 1
+}
