@@ -1,9 +1,9 @@
 ---
 title: "Frugalismus Tipps: Mehr Freiheit durch bewussten Konsum"
 description: Entdecke effektive Frugalismus Tipps für dein Leben. Lerne, wie du ohne Verzicht Geld sparen im Alltag meisterst und deine Finanzen optimierst.
-date: 2026-09-07T20:52:41Z
-draft: true
-reserve: true
+date: 2026-09-07T23:25:42Z
+draft: false
+reserve_published: 2026-09-07
 tags: ["frugalismus tipps", "geld sparen im alltag", "sparmethoden", "haushaltsbuch führen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"

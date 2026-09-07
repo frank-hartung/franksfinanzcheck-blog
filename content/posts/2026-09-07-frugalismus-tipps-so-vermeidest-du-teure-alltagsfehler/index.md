@@ -1,9 +1,9 @@
 ---
 title: "Frugalismus Tipps: So vermeidest du teure Alltagsfehler"
 description: Diese Frugalismus Tipps helfen dir, teure Fehler im Alltag zu vermeiden und entspannt Vermögen aufzubauen. Starte jetzt ohne Verzicht-Stress durch.
-date: 2026-09-07T18:43:39Z
-draft: true
-reserve: true
+date: 2026-09-07T23:25:42Z
+draft: false
+reserve_published: 2026-09-07
 tags: ["frugalismus tipps", "geld sparen im alltag", "sparmethoden", "haushaltsbuch führen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
