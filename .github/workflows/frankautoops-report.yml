@@ -1,17 +1,23 @@
 # ============================================================
-#  FRANKAUTOOPS – TÄGLICHER REPORT & AUDIT
+#  FRANKAUTOOPS – WOCHENTLICHER REPORT & AUDIT (Mo)
 #
-#  Erzeugt täglich den maschinenlesbaren Ops-Report (JSON) und
-#  aktualisiert OPS-REPORT.md (menschliche Kurzfassung) im Repo.
-#  Führt die Audit-Log-Retention durch (90 Tage / kritisch 1 Jahr).
+#  Erzeugt den maschinenlesbaren Ops-Report (ops-report.json) und
+#  die menschliche Kurzfassung OPS-REPORT.md, sichert beide als
+#  CI-Artefakt (90 Tage Aufbewahrung) und pflegt die versionierten
+#  Audit-Logs unter data/audit/ (Retention 90 Tage / kritisch 1 Jahr).
 #
-#  Läuft: täglich 06:00 UTC (08:00 MESZ) + manuell.
+#  WICHTIG (Fix #205, 07.09.2026): ops-report.json und OPS-REPORT.md
+#  sind seit dem Profi-Cleanup (31.08.2026) bewusst NICHT versioniert
+#  (.gitignore: "Workflows schreiben diese bei Bedarf neu"). Ein
+#  `git add` auf diese ignorierten Dateien bricht den Lauf hart ab
+#  (git-Exit 1 unter bash -e) – exakt die Ursache von #205. Deshalb:
+#  Reports → CI-Artefakt, committet wird nur der versionierte Bestand
+#  unter data/audit/.
+#
+#  Läuft: Montag 04:45 UTC (06:45 MESZ / 05:45 MEZ) + manuell.
 # ============================================================
 name: FrankAutoOps-Report
 
-# HINWEIS (11.08. Spaet): Cron 07:35 MESZ statt 08:00 – raus aus dem
-# Push-Rennen mit Pinterest-AI (08:00) + Content-Engine (08:10), beide
-# committen ebenfalls. Weniger Rebase-Larm, weniger Wartezeit.
 on:
   schedule:
     - cron: "45 4 * * 1"   # Mo 06:45 MESZ – wöchentlich + entzerrt (Profi-Cleanup 20.08.)
@@ -29,38 +35,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Python-Abhängigkeiten installieren
         run: |
           python3 -m pip install -q pyyaml 2>/dev/null || true
+
       - name: Audit-Retention durchsetzen
         run: |
           python3 scripts/audit_log.py --cleanup || true
 
       - name: Ops-Report erzeugen (JSON + Markdown)
         run: |
-          # JSON (maschinenlesbar) als Artefakt speichern
+          # JSON (maschinenlesbar) + Markdown-Kurzfassung erzeugen.
+          # Beide Dateien sind seit dem Profi-Cleanup bewusst ignoriert
+          # und werden im nächsten Schritt als Artefakt gesichert.
           python3 scripts/ops_report.py > ops-report.json
-          # Menschliche Kurzfassung in OPS-REPORT.md
           python3 scripts/ops_report.py --summary > OPS-REPORT.md
-          echo "Report erzeugt:"
-          cat ops-report.json | head -30
+          echo "Report erzeugt (ops-report.json + OPS-REPORT.md):"
+          head -20 ops-report.json
 
-      - name: Report committen
-        run: |
-          git config user.name "FrankAutoOps"
-          git config user.email "frankautoops@users.noreply.github.com"
-          git add ops-report.json OPS-REPORT.md data/audit/
-          if git diff --cached --quiet; then
-            echo "Report unverändert."
-          else
-            git commit -m "chore: FrankAutoOps-Report $(date +%F)"
-            scripts/git_sync.sh --push-only
-            echo "✅ Report gepusht"
-          fi
+      - name: Reports als Artefakt sichern (bewusst nicht versioniert)
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: frankautoops-report-${{ github.run_id }}
+          path: |
+            ops-report.json
+            OPS-REPORT.md
+          if-no-files-found: warn
+          retention-days: 90
 
-      - name: Audit-Events für den Lauf loggen
+      - name: Audit-Event für den Lauf loggen
         run: |
           python3 - <<'EOF'
           import sys; sys.path.insert(0, "scripts")
@@ -69,3 +75,20 @@ jobs:
                     input={"cron": True}, output={"status": "ok"}, status="ok")
           print("Audit-Event geschrieben")
           EOF
+
+      - name: Audit-Log-Stand committen (data/audit)
+        run: |
+          git config user.name "FrankAutoOps"
+          git config user.email "frankautoops@users.noreply.github.com"
+          # NUR den versionierten Bestand stagen. ops-report.json und
+          # OPS-REPORT.md sind bewusst ignoriert (Profi-Cleanup 31.08.) –
+          # ein git add darauf würde mit Exit 1 abbrechen (Regression
+          # #205). Beide liegen als CI-Artefakt dieses Laufs vor.
+          git add data/audit/
+          if git diff --cached --quiet; then
+            echo "Audit-Log unverändert – nichts zu committen."
+          else
+            git commit -m "chore: FrankAutoOps-Report $(date +%F)"
+            scripts/git_sync.sh --push-only
+            echo "✅ Audit-Log gepusht"
+          fi

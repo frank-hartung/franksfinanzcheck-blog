@@ -7,8 +7,9 @@
 #  BACKLINK-REPORT.md. Das ABSENDEN bleibt bewusst manuell
 #  (Qualitäts-Gate – automatisches Posten wäre Spam).
 #
-#  Der Report wird automatisch committet, damit du ihn immer
-#  aktuell im Repo findest (oder per E-Mail-Benachrichtigung).
+#  Der Report wird als CI-Artefakt gesichert (seit dem Profi-Cleanup
+#  31.08.2026 bewusst nicht mehr versioniert); der CRM-Stand
+#  data/backlink_state.json wird weiterhin committet.
 #
 #  Zeitzonen: GitHub-Cron läuft UTC. MESZ = UTC+2, MEZ = UTC+1.
 #    Sommerzeit: 06:00 UTC = 08:00 MESZ
@@ -45,10 +46,24 @@ jobs:
         run: |
           git config user.name "Backlink-Bot"
           git config user.email "backlink-bot@users.noreply.github.com"
-          git add BACKLINK-REPORT.md data/backlink_prospects.yaml
+          # BACKLINK-REPORT.md ist seit dem Profi-Cleanup (31.08.2026)
+          # bewusst ignoriert (.gitignore) und wird im nächsten Schritt
+          # als CI-Artefakt gesichert – ein git add darauf würde den Lauf
+          # mit Exit 1 abbrechen (Fix #205-Klasse). Versioniert wird nur
+          # der CRM-Stand in data/backlink_state.json (data/backlink_prospects.yaml
+          # bleibt kuratiert und wird vom Scout nie überschrieben).
+          git add data/backlink_state.json data/backlink_prospects.yaml
           if git diff --cached --quiet; then
             echo "Keine Änderungen – Report ist aktuell."
           else
             git commit -m "backlinks: wöchentlicher Scout-Report generiert"
             scripts/git_sync.sh --push-only
           fi
+
+      - name: Backlink-Report als Artefakt sichern (bewusst nicht versioniert)
+        uses: actions/upload-artifact@v5
+        with:
+          name: backlink-report-${{ github.run_id }}
+          path: BACKLINK-REPORT.md
+          if-no-files-found: warn
+          retention-days: 90
