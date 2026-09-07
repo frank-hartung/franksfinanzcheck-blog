@@ -85,7 +85,7 @@
      1 · KONFIGURATION
      ============================================================ */
 
-  var VOICE_VERSION = '2026.09.10';
+  var VOICE_VERSION = '2026.09.11';
 
   var cfgEl = doc.getElementById('ff-voice-config');
   if (!cfgEl) return;
@@ -314,6 +314,9 @@
        4. Zahlen-Kern: reine Ziffernkerne treffen per Containment —
           so bleibt „02.01.2006“ hell, während der Sprecher
           „2. Januar 2006“ sagt.
+       6. Fremdwort-Erweiterung: die deutsche Lautschreibung
+          („homoffis“ für „Homeoffice“, „sörwis“ für „Service“)
+          wird über FOREIGN_SPOKEN auf den rohen Kern zurückgeschlagen.
        5. Kein Treffer: das N-Wort erbt das zuletzt verbrauchte
           rohe Wort; ab sechs Treffern in Folge wird weit
           vorgespult neu verankert (Resync-Fenster).
@@ -366,6 +369,11 @@
           }
           if (Object.prototype.hasOwnProperty.call(UNIT_SPOKEN, rc) && UNIT_SPOKEN[rc][nc]) { matched = o; break; }
           if (/^[0-9]+$/.test(rc) && /^[0-9]+$/.test(nc) && (nc.indexOf(rc) !== -1 || rc.indexOf(nc) !== -1)) { matched = o; break; }
+          // (6) Fremdwort-Erweiterung: Sprechschreibung → Original
+          //     („homoffis“ → „homeoffice“). Nur ein echter Treffer
+          //     zählt, damit ein deutsches Homonym kein anderes rohes
+          //     Wort verschluckt.
+          if (Object.prototype.hasOwnProperty.call(FOREIGN_SPOKEN, nc) && FOREIGN_SPOKEN[nc] === rc) { matched = o; break; }
         }
       }
       if (matched >= 0) { out.push(matched); prev = matched; j = matched + 1; miss = 0; }
@@ -489,6 +497,320 @@
   var MONTHS_DE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
     'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 
+  /* ============================================================
+     4b · NUR-DEUTSCH-AUSSPRACHE — Germanisierungs-Glossar
+     ------------------------------------------------------------
+     Befund 07.09.2026: Mehrsprachige Neuronalstimmen im Browser
+     (Google de-DE, Microsoft Online) erkennen englisch geschriebene
+     Begriffe an der Schreibung und kippen mitten im deutschen Satz auf
+     die ENGLISCHE Aussprache (Code-Switching): „Homepage“ klingt wie
+     „Hoampeidsch“, „Service“ wie „Sörwiss“. Das `u.lang = 'de-DE'`
+     allein kann das nicht verhindern — die Spracherkennung der Stimme
+     schlägt innerhalb des Satzes an.
+
+     Die High-End-Lösung der Sprecherziehung: die Begriffe gehen in
+     deutscher LAUTSCHREIBUNG auf das Manuskript („Service“ → „sörwis“,
+     „Homeoffice“ → „homoffis“). Jede Stimme — Edge-Conrad in der
+     Studio-Tonspur, Piper, Google- und Microsoft-Browserstimmen —
+     spricht dann nach deutschem Lautsystem, wie ein Nachrichtensprecher,
+     der Fremdwörter im deutschen Satz eindeutscht.
+
+     Wortgleich gespiegelt: _GERMANIZE_PAIRS in
+     scripts/ff_voice_backends.py. Das Paritäts-Gate
+     (scripts/ff_voice_parity_check.py) vergleicht beide Ausgaben.
+     ============================================================ */
+  var GERMANIZE_PAIRS = [
+    // —— Mehrwort-Marken und Begriffe (längste Kette zuerst) ——
+    ['apple watch', 'äppel wotsch'],
+    ['apple pay', 'äppel peh'],
+    ['smart watch', 'smart wotsch'],
+    ['smart-watch', 'smart wotsch'],
+    ['smartwatch', 'smartwotsch'],
+    ['social media', 'soschl miedia'],
+    ['live stream', 'leif schtrihm'],
+    ['live-stream', 'leif schtrihm'],
+    ['livestream', 'leifschtrihm'],
+    ['online banking', 'onlein bänking'],
+    ['online-banking', 'onlein bänking'],
+    ['onlinebanking', 'onleinbänking'],
+    ['e banking', 'i bänking'],
+    ['e-banking', 'i bänking'],
+    ['ebanking', 'ibänking'],
+    ['onlineshop', 'onleinschopp'],
+    ['online-shop', 'onlein schopp'],
+    ['online shop', 'onlein schopp'],
+    ['home office', 'hom offis'],
+    ['home-office', 'hom offis'],
+    ['homeoffice', 'homoffis'],
+    ['home page', 'hom peitsch'],
+    ['home-page', 'hom peitsch'],
+    ['homepage', 'hompeitsch'],
+    ['black friday', 'bleck freidä'],
+    // —— Marken / Plattformen ——
+    ['instagram', 'instakramm'],
+    ['facebook', 'feisbuk'],
+    ['whatsapp', 'wots äpp'],
+    ['youtube', 'jutjub'],
+    ['spotify', 'schpotifei'],
+    ['ebay', 'i beh'],
+    ['paypal', 'pehpal'],
+    ['iphone', 'ei fohn'],
+    ['ipad', 'ei päd'],
+    ['airpods', 'ehr pods'],
+    // —— Technik / Internet ——
+    ['smartphone', 'smartfohn'],
+    ['blockchain', 'bloktschehn'],
+    ['blockchains', 'bloktschehns'],
+    ['dashboard', 'däschbord'],
+    ['downloads', 'daunlohts'],
+    ['download', 'daunloht'],
+    ['uploads', 'aplohts'],
+    ['upload', 'aploht'],
+    ['updates', 'apdehts'],
+    ['update', 'apdeht'],
+    ['upgrades', 'apgrehds'],
+    ['upgrade', 'apgrehd'],
+    ['backups', 'bäk aps'],
+    ['backup', 'bäk ap'],
+    ['resets', 'rie setts'],
+    ['reset', 'rie sett'],
+    ['browser', 'brauser'],
+    ['routers', 'ruhter'],
+    ['router', 'ruhter'],
+    ['hotspots', 'hotspotts'],
+    ['hotspot', 'hotspott'],
+    ['provider', 'proweider'],
+    ['roaming', 'rohming'],
+    ['websites', 'websaits'],
+    ['website', 'websait'],
+    ['laptops', 'leptopps'],
+    ['laptop', 'leptopp'],
+    ['desktops', 'desktopps'],
+    ['desktop', 'desktopp'],
+    ['tablets', 'tebblets'],
+    ['tablet', 'tebblet'],
+    ['wallets', 'wollets'],
+    ['wallet', 'wollet'],
+    ['accounts', 'ekaunts'],
+    ['account', 'ekaunt'],
+    ['logins', 'loggins'],
+    ['login', 'loggin'],
+    ['logout', 'logaut'],
+    ['cookies', 'kuckis'],
+    ['cookie', 'kucki'],
+    ['cloud', 'klaud'],
+    // —— Sozial / Content ——
+    ['newsletter', 'njusletter'],
+    ['followers', 'folohrer'],
+    ['follower', 'folohrer'],
+    ['hashtags', 'heschtecks'],
+    ['hashtag', 'heschteck'],
+    ['postings', 'pohstings'],
+    ['posting', 'pohsting'],
+    ['channels', 'tschennels'],
+    ['channel', 'tschennel'],
+    ['stories', 'schtorris'],
+    ['story', 'schtorry'],
+    ['reels', 'riels'],
+    ['reel', 'riel'],
+    ['streams', 'schtrihms'],
+    ['streaming', 'schtrihming'],
+    ['streamen', 'schtrihmen'],
+    ['streamt', 'schtrihmt'],
+    ['stream', 'schtrihm'],
+    ['podcasts', 'pottkasts'],
+    ['podcast', 'pottkast'],
+    ['feeds', 'fiehds'],
+    ['feed', 'fiehd'],
+    ['rankings', 'renkings'],
+    ['ranking', 'renking'],
+    ['traffic', 'trefik'],
+    ['leads', 'lieds'],
+    ['lead', 'lied'],
+    ['content', 'kontent'],
+    ['chats', 'tschetts'],
+    ['chatten', 'tschetten'],
+    ['gechattet', 'getschettet'],
+    ['chat', 'tschett'],
+    ['blogs', 'bloggs'],
+    ['blog', 'blogg'],
+    ['apps', 'äpps'],
+    ['app', 'äpp'],
+    ['gecheckt', 'getschekt'],
+    ['checken', 'tscheken'],
+    ['checkt', 'tschekt'],
+    ['checks', 'tscheks'],
+    ['check', 'tscheck'],
+    // —— Business / Finanzen ——
+    ['fintech', 'fintek'],
+    ['startups', 'schtart aps'],
+    ['startup', 'schtart ap'],
+    ['start-ups', 'schtart aps'],
+    ['start-up', 'schtart ap'],
+    ['crowdfunding', 'krautfanding'],
+    ['funding', 'fanding'],
+    ['cashback', 'käsch beck'],
+    ['cash', 'käsch'],
+    ['trading', 'trehding'],
+    ['trader', 'trehder'],
+    ['broker', 'brohker'],
+    ['banking', 'bänking'],
+    ['business', 'bissnis'],
+    ['service', 'sörwis'],
+    ['support', 'sepport'],
+    ['coaching', 'kotsching'],
+    ['coaches', 'kotschis'],
+    ['coach', 'kotsch'],
+    ['feedback', 'fiehdbäck'],
+    ['meetings', 'mietings'],
+    ['meeting', 'mieting'],
+    ['workshops', 'wörkschopps'],
+    ['workshop', 'wörkschopp'],
+    ['shoppen', 'schoppen'],
+    ['shopping', 'schopping'],
+    ['shops', 'schopps'],
+    ['shopper', 'schopper'],
+    ['shop', 'schopp'],
+    ['sales', 'sehls'],
+    ['sale', 'sehl'],
+    ['leasing', 'liesing'],
+    ['tracking', 'trekking'],
+    ['tracker', 'trekker'],
+    ['fake', 'fehk'],
+    // —— Einzelbegriffe mit hohem Code-Switching-Risiko ——
+    ['news', 'njus'],
+    ['online', 'onlein'],
+    ['offline', 'offlein'],
+    ['live', 'leif'],
+    ['office', 'offis'],
+    ['emails', 'i mehls'],
+    ['email', 'i mehl'],
+    ['e-mails', 'i mehls'],
+    ['e-mail', 'i mehl'],
+    ['watchlist', 'wottsch list'],
+    ['watchlists', 'wottsch lists'],
+    ['keyword', 'kiwört'],
+    ['keywords', 'kiwörter'],
+    ['backlinks', 'bek links'],
+    ['backlink', 'bek link'],
+    ['features', 'fiehtschers'],
+    ['feature', 'fiehtscher'],
+    ['repeater', 'ri pieters'],
+    ['viral', 'wiral'],
+    ['code', 'koot'],
+    ['speed', 'schpiet'],
+    ['power', 'pauer'],
+    ['hotline', 'hottlain'],
+    ['prepaid', 'prie pehd'],
+    // —— Hochfrequenz-Fremdwörter aus dem Content-Bestand (07.09.2026) ——
+    ['smart home', 'smart hohm'],
+    ['smart-home', 'smart hohm'],
+    ['standby', 'ständbei'],
+    ['stand-by', 'ständbei'],
+    ['gaming', 'gehming'],
+    ['gamer', 'gehmer'],
+    ['phishing', 'fisching'],
+    ['runway', 'ranwei'],
+    ['cookieless', 'kuckilos'],
+    ['privacy', 'preiwessi'],
+    ['resolver', 'ressolwer'],
+    ['cluster', 'klaster'],
+    ['discounter', 'diskaunter'],
+    ['cache', 'kesch'],
+    ['caches', 'kesche'],
+    ['banner', 'bänner'],
+    ['timing', 'teiming'],
+    ['access', 'äksess'],
+    ['mesh', 'mesch'],
+    ['tools', 'tuhls'],
+    ['tool', 'tuhl'],
+    ['excel', 'exel'],
+    ['user', 'juser'],
+    ['mails', 'mehls'],
+    ['mail', 'mehl'],
+    ['logfiles', 'lokfeils'],
+    ['logfile', 'lokfeil'],
+    ['logs', 'loks'],
+    ['log', 'lok']
+  ];
+
+  /** Glossar + automatisch abgeleitete Flektionsformen: deutsche
+   *  Plural-/Genitiv-Endung „-s“ und schwache Endung „-n“ an englischen
+   *  Fremdwörtern („Providers“ → „proweiders“, „Newslettern“ →
+   *  „njuslettern“). Das Suffix bleibt an der Lautschreibung erhalten —
+   *  es ist bereits deutsch. Gespiegelt: _flected_pairs() im Generator. */
+  function flectedGermanizePairs() {
+    var pairs = GERMANIZE_PAIRS.slice();
+    var seen = {};
+    for (var i = 0; i < GERMANIZE_PAIRS.length; i++) seen[GERMANIZE_PAIRS[i][0].toLowerCase()] = 1;
+    var suffixes = ['s', 'n'];
+    for (var j = 0; j < GERMANIZE_PAIRS.length; j++) {
+      var src = GERMANIZE_PAIRS[j][0], dst = GERMANIZE_PAIRS[j][1];
+      if (src.indexOf(' ') !== -1 || src.indexOf('-') !== -1) continue;
+      if (!src || !/[a-z]/i.test(src.charAt(src.length - 1))) continue;
+      for (var k = 0; k < suffixes.length; k++) {
+        var fsrc = src + suffixes[k];
+        if (seen[fsrc.toLowerCase()]) continue;   // explizite Form (z. B. „cookies“)
+        seen[fsrc.toLowerCase()] = 1;
+        pairs.push([fsrc, dst + suffixes[k]]);
+      }
+    }
+    return pairs;
+  }
+
+  /** Glossar → Regelliste, längste Muster zuerst (damit „newsletter“
+   *  vor „news“ und „home-office“ vor „office“ gewinnt). Leerzeichen im
+   *  Muster treffen auch den Bindestrich (Schreibschwankungen im Blog).
+   *  Wortgrenzen verhindern Treffer in deutschen Komposita. */
+  function buildGermanizeRules() {
+    var pairs = flectedGermanizePairs().sort(function (a, b) {
+      return b[0].length - a[0].length;
+    });
+    var rules = [];
+    for (var i = 0; i < pairs.length; i++) {
+      var src = pairs[i][0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\ /g, '[\\s\\-]+');
+      rules.push({ re: new RegExp('(?<![\\w])' + src + '(?![\\w])', 'gi'), to: pairs[i][1] });
+    }
+    return rules;
+  }
+
+  var GERMANIZE_RULES = buildGermanizeRules();
+
+  /** Erzwingt die DEUTSCHE Aussprache englisch geschriebener Begriffe
+   *  (Spiegel von germanize_speech() in scripts/ff_voice_backends.py).
+   *  Kennt kein Englisch als Zielsprache — lenkt die Stimme nur ins
+   *  deutsche Lautsystem. URLs, E-Mails und Daten sind beim Aufruf
+   *  bereits in Halte-Platzhaltern geborgen. */
+  function germanizeSpeech(text) {
+    var out = String(text == null ? '' : text);
+    if (!out) return '';
+    for (var i = 0; i < GERMANIZE_RULES.length; i++) {
+      var r = GERMANIZE_RULES[i];
+      out = out.replace(r.re, function () { return r.to; });
+    }
+    return out;
+  }
+
+  /** Wortuhr-Brücke: Kern der Sprechschreibung → Kern der
+   *  Originalschreibung („homoffis“ → „homeoffice“), damit die
+   *  Leseanzeige das rohe Wort im Artikeltext trifft. Aus dem Glossar
+   *  abgeleitet; gespiegelt in ttb.germanize_spoken_cores(). */
+  function germanizeSpokenCores() {
+    var table = {};
+    var pairs = flectedGermanizePairs();
+    for (var i = 0; i < pairs.length; i++) {
+      var src = pairs[i][0], dst = pairs[i][1];
+      if (src.indexOf(' ') !== -1) continue;
+      if (dst.indexOf(' ') !== -1) continue;
+      var rc = tokenCore(src);
+      var nc = tokenCore(dst);
+      if (rc && nc) table[nc] = rc;
+    }
+    return table;
+  }
+
+  var FOREIGN_SPOKEN = germanizeSpokenCores();
+
   function unhold(text, store) {
     return String(text).replace(new RegExp(HOLD_OPEN + '(\\d+)' + HOLD_CLOSE, 'g'), function (m, i) {
       var v = store[parseInt(i, 10)];
@@ -610,6 +932,14 @@
     out = normalizeUrls(out, hold);
     out = normalizeDates(out, hold);
     out = normalizeTimes(out, hold);
+
+    // NUR-DEUTSCH-AUSSPRACHE (Befund 07.09.2026): englisch geschriebene
+    // Fach- und Markenbegriffe werden in deutsche Lautschreibung
+    // überführt, bevor die Stimme sie sieht — verhindert das
+    // Code-Switching der Neuronalstimme mitten im deutschen Satz.
+    // URLs/Daten/E-Mails liegen bereits in Halte-Platzhaltern.
+    // Spiegel: germanize_speech() in scripts/ff_voice_backends.py.
+    out = germanizeSpeech(out);
 
     // Abkürzungen, Einheiten, Währungen, Paragraphen — deutsches Regelwerk
     var rules = ABBREV_DE;
@@ -3241,8 +3571,31 @@
       try { u = new win.SpeechSynthesisUtterance(unit.text); } catch (e) { u = null; }
       if (!u) { finishUnit(); return; }
 
-      u.lang = 'de-DE';                              // Nur-Deutsch-Vertrag
-      if (voice) { try { u.voice = voice; } catch (e) {} }
+      /* Nur-Deutsch-Vertrag, doppelt abgesichert (Befund 07.09.2026):
+         Die Äußerungssprache wird auf die DEUTSCHE Stimme festgenagelt,
+         die die Regie ausgewählt hat — auf manchen Plattformen (Chrome
+         Android, älteres Edge) bestimmt allein die Stimme die
+         Ausgabesprache; ein davon abweichendes lang-Attribut kann die
+         Engine sonst zur System-Stimme zurückfallen lassen. Die
+         Lautschreibung in germanizeSpeech() verhindert zusätzlich das
+         Code-Switching innerhalb der deutschen Stimme. */
+      if (voice) {
+        try { u.voice = voice; } catch (e) {}
+        try {
+          // Kanonisches BCP-47: Sprache klein, Region GROSS (de-DE,
+          // de-AT, de-CH) — verlangt vom Nur-Deutsch-Vertrag und von
+          // den Stimmen-Regie-Tests.
+          var vl = String(voice.lang || '').toLowerCase().replace('_', '-');
+          var parts = vl.split('-');
+          if (parts[0] === 'de') {
+            u.lang = parts.length > 1 ? ('de-' + parts[1].toUpperCase()) : 'de-DE';
+          } else {
+            u.lang = 'de-DE';
+          }
+        } catch (e) { u.lang = 'de-DE'; }
+      } else {
+        u.lang = 'de-DE';
+      }
       u.rate = Math.max(0.6, Math.min(1.4, unit.effRate * (res.tier ? res.tier.rate : 1)));
       u.pitch = Math.max(0.5, Math.min(1.5, unit.effPitch + (res.tier && res.tier.pitchZone ? res.tier.pitchZone : 0)));
       u.volume = Math.max(0.4, Math.min(1, unit.effVolume));

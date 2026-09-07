@@ -184,6 +184,9 @@ def sniff_sentence_lang(sentence: str = "", base_lang: str = "de") -> str:
 #      des N-Tokens (Containment), gilt der ROHE Token als Sprecher-
 #      wort — so bleibt die ganze Zahl „1.2.2006“ hell, während der
 #      Sprecher „zweiten Januar zweitausendsechs“ sagt.
+#   6. Fremdwort-Erweiterung: die Nur-Deutsch-Lautschreibung
+#      („homoffis“ für „Homeoffice“, „sörwis“ für „Service“) wird über
+#      FOREIGN_SPOKEN auf den rohen Kern zurückgeschlagen.
 #   5. Kein Treffer: das N-Wort erbt das zuletzt verbrauchte rohe
 #      Wort (der Cursor steht still — nichts wandert davon). Bei
 #      ≥ 6 Treffern in Folge wird im Rest von R neu verankert.
@@ -218,6 +221,16 @@ _UNIT_SPOKEN = {
     "eur": {"euro"},
     "a": {"jahr", "jahrpro"},
 }
+
+# (6) FREMDWORT-ERWEITERUNG (Befund 07.09.2026): Die Nur-Deutsch-Regie
+#     spricht englisch geschriebene Begriffe in deutscher Lautschreibung
+#     aus („Homeoffice“ → „homoffis“). Die Leseanzeige muss dennoch das
+#     rohe Wort im Artikeltext treffen — diese Tabelle schlägt den Kern
+#     der Sprechschreibung auf den Kern der Originalschreibung zurück.
+#     Automatisch aus dem Germanisierungs-Glossar abgeleitet; gespiegelt
+#     im Reader (FOREIGN_SPOKEN in static/premium/ff-voice.js) und durch
+#     das Paritäts-Gate wortgleich geprüft.
+FOREIGN_SPOKEN = ttb.germanize_spoken_cores()
 
 
 def _raw_is_digits(core: str) -> bool:
@@ -257,6 +270,14 @@ def align_norm_to_raw(norm_tokens_list: list, raw_tokens_list: list) -> list:
                     break
                 # (4) Zahlen-Kern (Containment, nur wenn beide rein numerisch)
                 if _raw_is_digits(rc) and nc.isdigit() and (nc in rc or rc in nc):
+                    matched = o
+                    break
+                # (6) Fremdwort-Erweiterung: Sprechschreibung → Original
+                #     („homoffis“ → „homeoffice“). Erst echten Treffer
+                #     nehmen, damit ein deutsches Homonym (z. B. „blogg“)
+                #     nicht ein anderes rohes Wort verschluckt.
+                fk = FOREIGN_SPOKEN.get(nc)
+                if fk and rc == fk:
                     matched = o
                     break
         if matched >= 0:

@@ -82,6 +82,39 @@ SAMPLES = [
     ("on 02/01/2006", "de"),
     ("gas & oil", "de"),
     ("Switching saves money.", "de"),
+    # NUR-DEUTSCH-AUSSPRACHE (Befund 07.09.2026): englisch geschriebene
+    # Fach- und Markenbegriffe müssen auf BEIDEN Seiten identisch in
+    # deutsche Lautschreibung überführt werden — das Code-Switching der
+    # Neuronalstimme darf nirgends durchschlagen.
+    ("Der Service ist gut.", "de"),
+    ("Im Homeoffice arbeitet es sich gut.", "de"),
+    ("Der Live-Stream laeuft.", "de"),
+    ("Jetzt den Download starten.", "de"),
+    ("Der Newsletter kommt heute.", "de"),
+    ("Zwei Apps genuegen.", "de"),
+    ("Vergleich bei Check24.", "de"),
+    ("Die Dienstleistung zaehlt.", "de"),
+    ("Cloud und Cookie sind Begriffe.", "de"),
+    ("Das Update und das Upgrade laufen.", "de"),
+    ("Social Media und der Podcast.", "de"),
+    ("Der Cashback und die Watchlist.", "de"),
+    ("E-Mail an uns schicken.", "de"),
+    ("Online und offline immer live.", "de"),
+    ("Der Browser nutzt den Router.", "de"),
+    # Flektionsformen (Plural/Genitiv -s, schwache Endung -n) muessen
+    # BEIDSEITIG identisch gedeutscht werden (Befund 07.09.2026).
+    ("Der Providers des Services ueberzeugt.", "de"),
+    ("Zwei Apps und drei Updates genuegen.", "de"),
+    ("Die Podcasts und Channels in den Streams.", "de"),
+    ("Die Broker und Trader sowie Leads.", "de"),
+    # Hochfrequenz-Fremdwoerter aus dem Content-Bestand (07.09.2026)
+    ("Der Standby des Gaming-PC und das Phishing.", "de"),
+    ("Privacy beim Cookieless-Tracking, Resolver und Cluster.", "de"),
+    ("Excel mit Mesh-Repeater, Tools und Access-Log.", "de"),
+    ("Smart Home, der Runway und der Discounter mit Banner.", "de"),
+    ("Cache leeren, die Logfiles und Logs pruefen.", "de"),
+    ("Der Gamer liest seine Mails als User.", "de"),
+    ("Den Transfer und das Hosting beim Provider.", "de"),
 ]
 
 # ---------------------------------------------------------------------------
@@ -107,6 +140,16 @@ ALIGN_PAIRS = [
     ("zum Beispiel Strom", "z. B. Strom"),
     ("Erster Satz ganz normal. Zweiter auch.", "Erster Satz ganz normal. Zweiter auch."),
     ("Das Router-Modell 4 kostet 120 Euro monatlich", "Das Router-Modell 4 kostet 120 € monatlich"),
+    # Fremdwort-Erweiterung (Befund 07.09.2026): die Lautschreibung muss
+    # auf das rohe Fremdwort im Artikeltext zurueckgeschlagen werden —
+    # auf beiden Seiten wortgleich, sonst wandert die Leseanzeige.
+    ("Der sörwis ist gut", "Der Service ist gut"),
+    ("Im homoffis arbeitet es sich gut", "Im Homeoffice arbeitet es sich gut"),
+    ("Der leif schtrihm läuft", "Der Live-Stream läuft"),
+    ("Jetzt den daunloht starten", "Jetzt den Download starten"),
+    ("Der njusletter kommt heute", "Der Newsletter kommt heute"),
+    ("Zwei äpps genügen", "Zwei Apps genügen"),
+    ("Die klaud und das kucki sind Begriffe", "Die Cloud und das Cookie sind Begriffe"),
 ]
 
 
@@ -325,6 +368,29 @@ def main() -> int:
     check("Generator: keine Wortlauf-Segmentierung mehr", "def language_runs" not in gen_source)
     check("Generator: Spracherkennung liefert nur noch de",
           'return "de"' in gen_source and 'def detect_language' in gen_source)
+
+    # ---------- 6 · Germanisierungs-Glossar (Befund 07.09.2026) ----------
+    # Der Code-Switching-Fix muss in BEIDEN Quellen vorhanden sein und
+    # drahtgebunden in der Normalisierung laufen — ein reines
+    # Bekenntnis im Kommentar genuegt nicht.
+    back_path = os.path.join(ROOT, "scripts", "ff_voice_backends.py")
+    with open(back_path, "r", encoding="utf-8") as fh:
+        back_source = fh.read()
+    check("Generator: Germanisierungs-Glossar vorhanden",
+          "_GERMANIZE_PAIRS" in back_source and "def germanize_speech" in back_source)
+    check("Generator: Germanisierung ist verdrahtet",
+          "germanize_speech(out)" in back_source)
+    check("Generator: Wortuhr-Bruecke fuer Fremdwoerter",
+          "def germanize_spoken_cores" in back_source)
+    check("Reader: Germanisierungs-Glossar vorhanden",
+          "GERMANIZE_PAIRS" in js_source and "function germanizeSpeech" in js_source)
+    check("Reader: Germanisierung ist verdrahtet",
+          "germanizeSpeech(out)" in js_source)
+    check("Reader: Wortuhr-Bruecke fuer Fremdwoerter",
+          "FOREIGN_SPOKEN" in js_source)
+    check("Rezept-Version: Reader und Generator synchron",
+          ttb.RECIPE_VERSION.split("-")[-1] in js_source,
+          "Generator %s" % ttb.RECIPE_VERSION)
 
     failed = [(n, d) for n, ok, d in results if not ok]
     for name, detail in failed[:25]:
