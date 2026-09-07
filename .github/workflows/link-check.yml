@@ -38,6 +38,32 @@ jobs:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
+      # ------------------------------------------------------------
+      #  GOVERNANCE-VERTRAG + SELBSTTESTS (seit 07.09.2026, Befund #206)
+      #  Die Governance-Wachen werden hier bei JEDEM Push/PR geprüft, damit ein
+      # kaputter Wächter, eine falsche Schritt-Reihenfolge oder ein
+      # .duplizierendes Issue den main-Zweig nicht mehr erreichen kann.
+      # ------------------------------------------------------------
+      - name: Python-Abhängigkeiten (für Governance-Skripte)
+        run: python3 -m pip install -q pyyaml 2>/dev/null || true
+
+      - name: Governance-Selbsttests (10 Wachen)
+        run: |
+          fail=0
+          for s in editorial_scorecard cwv_guard secrets_age_guard decay_radar \
+                   governance_gate governance_contract umami_clicks click_attribution \
+                   awin_provisions pinterest_perf_feedback; do
+            if ! python3 "scripts/$s.py" --selftest >/tmp/st.log 2>&1; then
+              echo "::error::scripts/$s --selftest fehlgeschlagen"
+              tail -n 25 /tmp/st.log
+              fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Governance-Vertrag C1–C9 (Reihenfolge, Issue-Policy, Nachweise)
+        run: python3 scripts/governance_contract.py --quick
+
       - name: Hugo installieren
         uses: peaceiris/actions-hugo@v3
         with:

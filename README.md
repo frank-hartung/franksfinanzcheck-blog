@@ -335,53 +335,57 @@ Report: `LESEHILFEN-STUDIO-2026-09-05.md`.
 
 ---
 
-## 🗞️ Premium-Governance (Chefredakteur-Cockpit, seit 01.09.2026)
+## 🗞️ Premium-Governance (Chefredakteur-Cockpit · v2, gehärtet 07.09.2026)
 
-Die Blogautomatik prüfte schon viel — jetzt **steuert** sie auch. Der Workflow **„Premium-Governance"** (Mo 07:15 MESZ) bündelt vier Wachen, die zuvor fehlten, auf **eine** Ampel:
+Die Blogautomatik prüfte schon viel — jetzt **steuert** sie auch, und zwar ohne
+Dauer-Alarm. Der Workflow **„Premium-Governance"** (Mo 07:15 MESZ) läuft in vier
+Klar getrennten Phasen — **Messen → Sehen → Bewerten → Melden**:
 
-| Wache | Skript | Was es misst |
+| Phase | Skript | Was passiert |
 |---|---|---|
-| **Chefredakteur-Scorecard** | `scripts/editorial_scorecard.py` | Gesamt-Score **/100** + Ampel über Content, Decay, CWV, Lektorat, Secrets → `EDITORIAL-SCORECARD.md` |
-| **Content-Decay-Radar** | `scripts/decay_radar.py` | Welche YMYL-/Stichtag-Artikel (Kfz 30.11., Gas/Strom, DSL, Zinsen) **veralten** → priorisierte Refresh-Queue (`data/decay_queue.json`, `--as-of` für Forecast) |
-| **Core-Web-Vitals-Wächter** | `scripts/cwv_guard.py` | Bild-Budget, LCP-Cover, Render-Blocking, CLS (img ohne width/height) → Ampel GREEN/AMBER/RED (`CWV-REPORT.md`) |
-| **Secrets-/Token-Alters-Wache** | `scripts/secrets_age_guard.py` | „Zuletzt erfolgreich genutzt"-Log gegen 30-Tage-Pinterest-/45-Tage-Mastodon-Token → verhindert **lautlosen Kanaltod** (`SECRETS-REPORT.md`) |
-
-Bei Handlungsbedarf öffnet der Lauf **ein** gebündeltes GitHub-Issue (Label `governance`). Alle Reports werden committet (Selbstheilungs-Doku).
+| **0 · Preflight** | `scripts/governance_contract.py` (C1–C9) + `--selftest` aller Wachen | Kaputte Wachen liefern falsche Sicherheit → erst Selbsttest, dann Messung. Läuft auch bei **jedem** Push/PR im Qualitäts-Gate. |
+| **1 · Messen** | `hugo --minify`, `scripts/decay_radar.py`, `scripts/cwv_guard.py --strict-build`, `scripts/secrets_age_guard.py --verify`, `scripts/pinterest_perf_feedback.py`, `scripts/umami_clicks.py`, `scripts/awin_provisions.py` | Alle Signale werden **frisch** erzeugt. Secret-Health = Live-Probe gegen die Kanal-API (Pinterest `/v5/users/me`, Mastodon `verify_credentials`, Groq/Gemini `/models`), nicht „steht im Env". |
+| **2 · Sehen** | `scripts/editorial_scorecard.py` | Die Scorecard läuft direkt nach dem Messen (sie braucht die Werte *desselben* Laufs, nie die der Vorwoche) → `EDITORIAL-SCORECARD.md` + Trend `data/scorecard_history.jsonl`. |
+| **3 · Bewerten** | `scripts/governance_gate.py` | Eine dokumentierte Policy entscheidet über **alle** Schritte (auch über die Sicht), was ein **Befund** ist (rot/gelb) und was nur **Datenlage** (ℹ️). Ledger: `data/governance_status.json`, Verlauf: `data/governance_history.jsonl`, Job-Summary inklusive. |
+| **4 · Melden** | Gate + `gh issue` | **Ein** Issue pro Befundlage: offenes Issue wird aktualisiert (bei verändertem Fingerabdruck neuer Body, sonst nur Kommentar), bei Grün automatisch geschlossen. Kein Wochen-Duplikat mehr. |
 
 ```bash
-python3 scripts/editorial_scorecard.py          # Scorecard
-python3 scripts/decay_radar.py --as-of +180d    # Frische-Forecast
-python3 scripts/cwv_guard.py --public public/   # nach Hugo-Build
-python3 scripts/secrets_age_guard.py            # Secrets-Ampel
+python3 scripts/governance_gate.py --rehearse      # Was würde der Lauf heute entscheiden? (schreibt nichts)
+python3 scripts/governance_contract.py             # Governance-Vertrag C1–C9 prüfen
+python3 scripts/editorial_scorecard.py             # Scorecard aus dem Bestand
+python3 scripts/cwv_guard.py --public public/ --strict-build   # Performance nach dem Build
+python3 scripts/secrets_age_guard.py --verify      # Live-Probe gegen alle Kanäle
+python3 scripts/umami_clicks.py --fetch            # Klick-Daten automatisch laden
 ```
 
-### 📊 Datengetriebene Content- & Monetarisierungs-Steuerung (seit 01.09.2026)
+### Was der Governance-Report #206 dauerhaft behoben hat
 
-Zwei Feedback-Schleifen schließen den Kreis von „prüfen" zu „steuern":
-
-| Schleife | Skript | Wirkung |
+| Befund aus #206 | Ursache | Zustand jetzt |
 |---|---|---|
-| **Pinterest-Performance** | `scripts/pinterest_perf_feedback.py` | Liest `data/pinterest_perf.yaml` (Dashboard/Bulk-Export), gewichtet den **Themenpool** der Content-Engine nach Outbound-Klicks/Saves/CTR (`data/pinterest_weights.yaml`) → `PINTEREST-PERF-REPORT.md`. Engine wählt Themen datengetrieben (`_weighted_choose`), Fallback gleichverteilt. |
-| **Affiliate-Klick-Attribution** | `scripts/click_attribution.py` | Werte den Umami-`affiliate_click`-Export (`data/umami_clicks.json`, DSGVO-cookielos) aus → **welcher Artikel wie viele CHECK24-Klicks erzeugt** (`CLICK-REPORT.md`, `data/click_stats.json`). `render-link.html` sendet dafür Ziel-`/go/`-Stelle + Quellartikel + Pillar. |
+| Scorecard „Core-Web-Vitals **AMBER**", Wächter meldet GREEN | Scorecard lief im Workflow **vor** der Messung und las das Manifest der Vorwoche | Messen → Sehen (Reihenfolge ist jetzt Regel **C1**), Scorecard-Zeile trägt Alter der Messung; „nicht gemessen" = ⚪ statt 🟡 |
+| `PINTEREST_ACCESS_TOKEN` dauerhaft „UNBEKANNT" → jeder Lauf rot/gelb | Einziger Nachweis-Lieferant (`pinterest-ai.yml`) lief seit 20.08. nur noch manuell | Tägliche Live-Probe im Pinterest-Watchdog + wöchentliche `--verify`; Erfolg gilt nur bei HTTP 200, Ablehnung = **rot** |
+| `GROQ/GEMINI_API_KEY` „OK (6d)" | Der Governance-Lauf vermerkte Erfolg für Keys, die er nie benutzt (Selbst-Wäsche) | Regel **C5**: Nachweis nur mit `--proof-by <workflow>`, und nur dort, wo das Secret gerçekten gebraucht wird |
+| Issue #145 + #206 = Duplikate im Wochenrhythmus | Issue an rohen Exit-Codes aufgehängt; „noch keine Daten" war ein Fehler | Policy im Gate: ℹ️-Datenlage ≠ Befund; ein Issue, aktualisiert statt neu created, close bei Grün |
+| „Affiliate-Klicks 0 / Awin 0,00 €" ohne Ende | Manueller Dashboard-Export als einzige Datenquelle | `scripts/umami_clicks.py` holt die Klicks selbst (Secret `UMAMI_API_TOKEN`, Website-ID aus `hugo.toml`); ohne Token sauberes Skip + dokumentierter Grund statt Schein-Null |
+| CWV könnte GREEN melden, ohne gebaut zu haben (`hugo … \|\| true`) | Messung auf leerem/altem `public/` | `--strict-build`: fehlender/leerer Build = Befund `build_missing`, Manifest-Feld `build_measured` (Regel **C2**) |
+| Reports/Manifeste konnten bei Parallel-Läufen halbbeschrieben werden | `open(...,"w")` ohne Sperre/Atomicity | Alle State-Schreibungen atomar (`tmp` + `os.replace`) und bei der Secrets-Wache zusätzlich mit Dateisperre; kaputter State wird gesichert + neu begonnen statt abzustürzen |
 
-```bash
-python3 scripts/pinterest_perf_feedback.py --selftest   # Themen-Gewichtung
-python3 scripts/pinterest_perf_feedback.py              # aus YAML/CSV (−-fetch mit read_ads-Token)
-python3 scripts/click_attribution.py --selftest         # Klick-Attribution
-python3 scripts/click_attribution.py                    # Umami-Export auswerten
-```
-Beide laufen wöchentlich im Premium-Governance-Workflow (Schritte 5/6); die Engine-Gewichte greifen beim nächsten Content-Engine-Lauf.
+**Neu im Set:** `scripts/governance_gate.py` (Bewertungs-Policy + Issue-Entscheidung),
+`scripts/governance_contract.py` (Vertrag C1–C9, im Qualitäts-Gate bei jedem Push/PR),
+`scripts/umami_clicks.py` (Umsatz-Datenpipeline). Verlauf Artefakte:
+`data/cwv_history.jsonl`, `data/scorecard_history.jsonl`,
+`data/governance_status.json`, `data/governance_history.jsonl`,
+`data/secrets_state.json` (jetzt mit Nachweis-Qualität `proven`/`declared`),
+`data/umami_clicks.meta.json`. Details & Belege: `GOVERNANCE-HAERTUNG-2026-09-07.md`,
+Regelwerk maschinenlesbar: `docs/GOVERNANCE-KONTRAKT.md`.
 
-**Dabei behoben (echte Produktions-Bugs):** `Content-Engine v2` + `Premium-Governance` wurden in die Deploy-Trigger-Kette (`deploy-catchup.yml`) aufgenommen — Engine-Artikel werden jetzt **automatisch deployt**; und die in README versprochene Engine-**Phase 4** (`BOT-STATUS.md` + kadenz-bewusste Tagesdefizit-Wache) wurde ergänzt, ebenso die kaputte Heredoc-Shell-Syntax in Phase 2 (S2).
-
-> **⚠️ Workflow-Änderungen liegen als Patch vor** (Agent-Token ohne `workflows`-Scope kann `.github/workflows/*` nicht pushen — vgl. bisherige Audits). Einmalig einspielen:
-> ```bash
-> git apply patches/premium-governance-2026-09-01-workflows.patch &&
-> git add .github && git commit -m "ci: Premium-Governance + Engine-Fixes" && git push
-> ```
-> Betrifft: `premium-governance.yml` (neu), `deploy-catchup.yml` (F1), `content-engine-v2.yml` (F2 + S2-Fix). Details & Belege: `PREMIUM-OPTIMIERUNG-2026-09-01.md`.
-
----
+> **Datennachschub für die Monetarisierungs-Schleifen** (einmalig, 5 Min.):
+> `UMAMI_API_TOKEN` als Repository-Secret anlegen (Umami → Avatar → *User Settings* →
+> *API* → *Generate API Key*) — schon füllt der wöchentliche Governance-Lauf
+> `data/umami_clicks.json` selbst, und Scorecard/Klick-Report rechnen mit echten
+> Klicks. Awin bleibt CSV-basiert: Export nach `data/awin_transactions.csv` legen,
+> `python3 scripts/awin_provisions.py` (bzw. `--gen-subid-map` für die SubID-Zuordnung)
+> läuft im gleichen Workflow.
 
 ## 🚀 In 15 Minuten live
 
