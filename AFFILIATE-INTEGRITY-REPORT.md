@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-09-06 08:16:02 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-09-07 08:48:43 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 28 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 19
+**Geprüfte Live-Artikel:** 31 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 19
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -40,6 +40,9 @@
 | 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen | 2 → 2 ✅ | /go/mietwagen/ |
 | 2026-09-03-hausratversicherung-kosten-leistungen-vergleich | 1 → 1 ✅ | /go/hausrat/ |
 | 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen | 1 → 2 ✅ | /go/kreditkarte/, /go/reisekrankenversicherung/ |
+| 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich | 3 → 3 ✅ | /go/tagesgeld/ |
+| 2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise | 3 → 3 ✅ | /go/mietwagen/ |
+| 2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh | 2 → 3 ✅ | /go/dsl/ |
 
 ## Hinweise (nicht blockierend)
 
