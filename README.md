@@ -322,17 +322,19 @@ Die Tonspur läuft im nativen HTML5-Player und klingt dadurch **identisch** auf 
 - **Atemgruppen** – Sätze werden an Konnektoren und Nebensatzgrenzen geteilt; die harte Obergrenze bleibt unter der Chrome-Abbruchgrenze.
 - **Vollständigkeit** – Überschriften aller Ebenen, Listen, Zitate, Fettdruck an seiner Stelle, Premium-Übersichten samt Titel und Fußnote. Tabellen und Übersichten werden vollständig mit Zeilen und Spalten erkannt und gesprochen: HTML- und ARIA-Tabellen (`role="table"/"grid"`, Zeilen über `role="row"`), colspan/rowspan als logisches Gitter, mehrzeilige Köpfe, Zeilentitel (`th scope="row"`), Gruppen- und Summenzeilen (auch im `<tbody>`), Werbelink-Zeilen als offengelegte Empfehlung, Titel aus `<caption>`, `aria-label`, Premium-Headline oder der Überschrift davor (Details: `VORLESEN-TABELLEN-HIGHEND-REPORT.md`).
 - **Barrierefreiheit** – WCAG 2.2 / BITV: Live-Region, Fokus-Falle, Scroll-Sperre, Fokus-Rückkehr, Escape, Tastatursteuerung, `prefers-reduced-motion`, Media Session (Sperrbildschirm/Headset).
-- **Robuster Fortschritt** – gelber, sichtbarer Progress-Meter mit Prozentwert, Modus-Badge, Abschnittslabel und zugänglichem `role="progressbar"`; er bleibt auch bei schwachen `onboundary`-Events durch Zeit-/Block-Interpolation plausibel in Bewegung.
+- **Profi-Fortschrittsanzeige** – gelber, sichtbarer Progress-Meter mit Prozentwert, Modus-Badge und zugänglichem `role="progressbar"`; er bleibt auch bei schwachen `onboundary`-Events durch Zeit-/Block-Interpolation plausibel in Bewegung. Die Zeile **„Gerade vorgelesen“** nennt zusätzlich den aktuell gesprochenen Satz samt Abschnittszähler („Abschnitt 3 von 12“) — satzgenau bei der Browser-Engine, über die Tonspur-Uhr block-/satzgenau bei der Studio-MP3. Die Fläche ist dauerhaft reserviert (kein CLS), bleibt beim Pausieren stehen und wird beim Beenden geleert.
 
 ### Wächter (alle grün)
 
 ```bash
-node scripts/ff_voice_functional_test.mjs   # 184 Gates: echte DOM, alle echten Artikel, Doppel-Lese-Schleuse
+node scripts/ff_voice_functional_test.mjs   # 207 Gates: echte DOM, alle echten Artikel, Doppel-Lese-Schleuse, „Gerade vorgelesen“
 node scripts/ff_voice_voice_test.js         #  96 Gates: männlich, DE & EN, Wortlauf-Regie, 7 Geräte-Kataloge
-python3 scripts/ff_voice_parity_check.py    # 328 Gates: Tonspur ≡ Browser-Engine, Wortlauf-Parität
-python3 scripts/ff_voice_toolbar_check.py   #  89 Gates: Layout, Styling, Workflow, Rückbau
-python3 scripts/ff_voice_backends.py --selftest  # 44 Gates: Aussprache, Prosodie, Audio
-python3 scripts/ff_voice_audio.py --selftest     # 48 Gates: Block-Parität, Tabellen, Injektion
+node scripts/ff_voice_repair_test.mjs       #  56 Gates: Reparatur-Pinne (Befund 06.09.2026)
+node scripts/ff_voice_tts_hardening_test.mjs#  57 Gates: Ehrlichkeits-/Stumm-/Hänger-Wachen (Befund 07.09.2026)
+python3 scripts/ff_voice_parity_check.py    # 332 Gates: Tonspur ≡ Browser-Engine, Wortlauf-Parität
+python3 scripts/ff_voice_toolbar_check.py   # 108 Gates: Layout, Styling, Workflow, Rückbau
+python3 scripts/ff_voice_backends.py --selftest  # 67 Gates: Aussprache, Prosodie, Audio
+python3 scripts/ff_voice_audio.py --selftest     # 92 Gates: Block-Parität, Tabellen, Injektion
 ```
 
 Die Suiten laufen im Workflow **„Lesehilfen-Gate (Vorlesen + Kurzfassung)“** – bei jedem Push/PR auf Lesehilfen oder Content sowie täglich um 08:20 MESZ.

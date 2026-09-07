@@ -15,6 +15,10 @@
    · Die Fortschrittsanzeige ist sichtbar, gelb, robust und
      barrierefrei: eigener Progress-Meter, Prozentwert,
      Modus-Badge und klare Zustandsmarken.
+   · „Gerade vorgelesen“ (07.09.2026): Der Meter zeigt zusätzlich
+     den aktuell gesprochenen Satz und den Abschnittszähler —
+     satzgenau in der Browser-Engine, block-/satzgenau über die
+     Tonspur-Uhr. Die Zeile ist dauerhaft reserviert (kein CLS).
    · Alle Zustände (Bereit · läuft · pausiert · beendet) sind an
      Kontrast (WCAG 2.2 AA+), Fokus-Sichtbarkeit und
      `prefers-reduced-motion` geprüft.
@@ -245,6 +249,80 @@
   color: #1b1500;
 }
 
+/* ---------- 4a. „Gerade vorgelesen“ (Profi-Fortschritt) ------ */
+/* Sagt dem Leser, welcher SATZ in diesem Moment gesprochen wird.
+   Die Zeile ist dauerhaft im Layout reserviert (min-height + Grid),
+   im Ruhezustand nur visibility:hidden — kein Layout-Sprung beim
+   Start, kein CLS. Text und Abschnittszähler schreibt die Engine
+   (static/premium/ff-voice.js); barrierefrei über aria-valuetext. */
+.ff-voice-meter__live {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  gap: 4px 10px;
+  min-width: 0;
+  min-height: 1.6em;
+}
+.ff-voice-bar[data-state="idle"] .ff-voice-meter__live {
+  visibility: hidden;
+}
+.ff-voice-meter__live-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ffv-emerald);
+  white-space: nowrap;
+}
+.ff-voice-meter__live-label::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ffv-yellow);
+  box-shadow: 0 0 0 0 rgba(255, 179, 0, .4);
+  flex: 0 0 8px;
+}
+.ff-voice-bar[data-state="playing"] .ff-voice-meter__live-label::before {
+  animation: ffv-live-pulse 1.6s ease-out infinite;
+}
+@keyframes ffv-live-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 179, 0, .55); }
+  70%  { box-shadow: 0 0 0 7px rgba(255, 179, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 179, 0, 0); }
+}
+.ff-voice-meter__live-text {
+  min-width: 0;
+  flex: 1 1 auto;
+  font-size: .88rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--ffv-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow-wrap: break-word;
+}
+.ff-voice-meter__pos {
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding-left: 10px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--ffv-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  text-align: right;
+}
+.ff-voice-meter__pos:empty { display: none; }
+
 .ff-voice-progress-shell {
   display: block;
   width: 100%;
@@ -304,6 +382,9 @@
 }
 .ff-voice-bar--floating .ff-voice-meter__label {
   font-size: .8rem;
+}
+.ff-voice-bar--floating .ff-voice-meter__live-text {
+  -webkit-line-clamp: 1;
 }
 .ff-voice-bar--floating .ff-voice-progress-shell {
   height: 8px;
@@ -587,12 +668,28 @@
     white-space: normal;
     line-height: 1.3;
   }
+  .ff-voice-meter__live {
+    flex-wrap: wrap;
+    row-gap: 2px;
+    align-items: flex-start;
+  }
+  .ff-voice-meter__live-label {
+    width: 100%;
+  }
+  .ff-voice-meter__live-text {
+    -webkit-line-clamp: 3;
+  }
+  .ff-voice-meter__pos {
+    margin-left: 0;
+    padding-left: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .ff-voice-bar--floating { animation: none; }
   .ff-voice-progress { transition: none; }
   .ff-voice-progress::after { display: none; }
+  .ff-voice-meter__live-label::before { animation: none; }
   .ff-voice-btn { transition: none; }
 }
 

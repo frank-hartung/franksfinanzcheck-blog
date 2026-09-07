@@ -47,12 +47,17 @@ REQUIRED_IDS = [
     "ff-voice-summary-label", "ff-voice-status", "ff-voice-remaining",
     "ff-voice-meter", "ff-voice-progress-mode", "ff-voice-progress-label",
     "ff-voice-progress-value", "ff-voice-progress", "ff-voice-config",
+    # Profi-Fortschrittsanzeige (07.09.2026): „Gerade vorgelesen“ + Zähler
+    "ff-voice-live", "ff-voice-live-label", "ff-voice-now", "ff-voice-pos",
 ]
 
 REQUIRED_CSS_CLASSES = [
     "ff-voice-slot", "ff-voice-bar", "ff-voice-btn", "ff-voice-meter",
     "ff-voice-progress", "ff-voice-progress-shell", "ff-voice-bar--floating",
     "ff-voice-active", "ff-voice-dialog", "ff-voice-figures", "ff-voice-toc",
+    # Profi-Fortschrittsanzeige (07.09.2026)
+    "ff-voice-meter__live", "ff-voice-meter__live-label",
+    "ff-voice-meter__live-text", "ff-voice-meter__pos",
 ]
 
 REMOVED_MARKERS = [
