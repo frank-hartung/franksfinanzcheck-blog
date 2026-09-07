@@ -1,6 +1,6 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-09-07 05:28 UTC
+**Letzter Lauf:** 2026-09-07 06:33 UTC
 
 **Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
@@ -40,6 +40,6 @@
 
 ## Letzte Heilungen
 
-- Aus Re-Queue live gesetzt: `2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise`
+- – (nichts in diesem Lauf)
 
 _Wird von `cadence_guard.py` bei jedem Kadenz-Lauf aktualisiert (Deploy-Gate, Content-Engine, Blog-Health)._
