@@ -1,7 +1,9 @@
 # 🤝 AFFILIATE-REPORT
 
-**Stand:** 2026-09-07 10:45 UTC · Modus: CHECK
+**Stand:** 2026-09-07 12:18 UTC · Modus: CHECK
 
-Probleme: 0 · Geheilt: 0
+Probleme: 1 · Geheilt: 0
 
-✅ Alle Affiliate-Profi-Signale erfüllt.
+| Code | Artikel | Problem |
+|---|---|---|
+| A3 | 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt | nur 1 interne Links (< 2) |

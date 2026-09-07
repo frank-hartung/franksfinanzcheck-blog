@@ -3,7 +3,9 @@ title: "Finanzielle Freiheit erreichen: Denke dich reich! – Geld"
 description: Erfahre, wie du finanzielle Freiheit erreichen kannst. Vermeide teure Denkfehler, ändere dein Geld-Mindset und starte heute mit dem Vermögensaufbau.
 kurzantwort: "Finanzielle Freiheit entsteht meist nicht durch ein höheres Einkommen, sondern durch klare Gewohnheiten: Ausgaben steuern, Sparraten automatisieren und früh breit gestreut investieren. Schon 300 € monatlich können bei 7 % Rendite in 20 Jahren auf rund 156.000 € anwachsen."
 date: 2026-09-07T04:52:22Z
-draft: false
+draft: true
+cadence_demoted: 2026-09-07T12:17:09Z
+cadence_grund: "publish-gate: Zeichenlänge (check_length.py) nicht bestanden"
 tags: ["finanzielle freiheit erreichen", "geld mindset", "vermögen aufbauen", "sparroutinen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"

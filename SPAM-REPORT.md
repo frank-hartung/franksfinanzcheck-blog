@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-07 10:45 UTC · Modus: FIX
+**Stand:** 2026-09-07 12:18 UTC · Modus: FIX
 
 **Domain-Status (Pinterest):** 🔴 GESPERRT – Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026. (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)
 
@@ -8,13 +8,15 @@
 
 ## B: Blog (B1–B8)
 
+- 🟡 [B2] 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
+- 🟡 [B2] 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
+- 🟡 [B2] 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B5] 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub: Originalitäts-Quote 44 % (< 45 %)
-- 🟡 [B1] 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet: Keyword-Stuffing (ein Signal): Text: 'dns' ×46 (4.1 % Dichte)
-- 🟡 [B5] 2026-09-03-hausratversicherung-kosten-leistungen-vergleich: Originalitäts-Quote 42 % (< 45 %)
-- 🟡 [B5] 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen: Originalitäts-Quote 43 % (< 45 %)
-- 🟡 [B1] 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Keyword-Stuffing (ein Signal): Text: 'dns' ×39 (3.6 % Dichte)
-- 🟡 [B2] 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
-- 🟡 [B2] 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich: Superlativ ohne Einschränkung (\bhöchst(?:e|er|es)\b)
+- 🟡 [B1] 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet: Keyword-Stuffing (ein Signal): Text: 'dns' ×44 (4.7 % Dichte)
+- 🟡 [B5] 2026-09-03-hausratversicherung-kosten-leistungen-vergleich: Originalitäts-Quote 43 % (< 45 %)
+- 🟡 [B5] 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen: Originalitäts-Quote 44 % (< 45 %)
+- 🟡 [B1] 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Keyword-Stuffing (ein Signal): Text: 'dns' ×30 (3.6 % Dichte)
+- 🟡 [B2] 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Superlativ ohne Einschränkung (\bgünstigst(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh: Superlativ ohne Einschränkung (\bgünstigst(?:e|er|es)\b)
 - 🟡 [B5] 2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh: Originalitäts-Quote 45 % (< 45 %)
