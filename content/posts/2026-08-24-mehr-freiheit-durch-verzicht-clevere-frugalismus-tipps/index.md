@@ -20,7 +20,7 @@ kurzantwort: "Frugalismus bedeutet nicht knauseriger Verzicht, sondern das bewus
 social_posted: true
 keywords: ["Frugalismus Tipps", "Geld sparen im Alltag", "50 30 20 Regel", "Finanzielle Freiheit", "Notgroschen aufbauen", "Tagesgeld Zinsen", "Frugalismus-Tipps"]
 pin_title: 5 einfache Frugalismus-Tricks für den Alltag
-pin_description: "*Werbung | Geld sparen ohne Verzicht-Stress: Diese 5 praxiserprobten Frugalismus-Tricks senken deine Alltagsausgaben ab Tag 1 – von der 24-Stunden-Regel bis zum No-Spend-Weekend. Jetzt alle Tricks im Guide nachlesen."
+pin_description: "*Werbung | Frugalismus-Tipps für mehr finanzielle Freiheit: 50-30-20-Regel, Konsumfallen stoppen, Notgroschen aufbauen und bis zu 450 € im Monat sparen. Mehr Spartipps auf FranksFinanzcheck! #frugalismustipps #geldsparenimalltag #503020regel"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 ---
 
@@ -73,7 +73,7 @@ Prüfe die Kontoauszüge der letzten drei Monate. Welche Dienste nutzt du wirkli
 Essen auswärts kostet schnell 10 € bis 15 € am Tag. Das sind rund 250 € im Monat. Wer mit Zettel einkauft und für zwei bis drei Tage vorkocht, zahlt unter 6 € am Tag. Die Ersparnis liegt bei über **150 € im Monat**.
 
 ### 4. Den Notgroschen zuerst aufbauen
-Investiere erst, wenn die Reserve steht. Drei bis sechs Monatsausgaben gehören auf ein Tagesgeldkonto. So brauchst du bei Notfällen keinen teuren Dispokredit.
+Investiere erst, wenn die Reserve steht. Drei bis sechs Monatsausgaben gehören auf ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). So brauchst du bei Notfällen keinen teuren Dispokredit.
 
 ### 5. Das Prinzip „Pay Yourself First“
 Zahle dich zuerst selbst. Überweise deine Sparrate nicht am Monatsende. Dann ist meist nichts übrig. Setze einen Dauerauftrag direkt nach dem Gehalt. Er überweist 15 bis 25 % auf dein Sparkonto.

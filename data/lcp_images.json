@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-09-07T18:56:43+00:00",
+  "generatedAt": "2026-09-07T18:57:15+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -15,7 +15,7 @@
   },
   "pages": {
     "/": {
-      "image": "images/covers/2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen.jpg",
+      "image": "images/covers/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen.jpg",
       "type": "home",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -31,7 +31,7 @@
       "decoding": "async"
     },
     "/posts/": {
-      "image": "images/covers/2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen.jpg",
+      "image": "images/covers/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen.jpg",
       "type": "section",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -480,38 +480,6 @@
     },
     "/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/": {
       "image": "images/covers/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh/": {
-      "image": "images/covers/2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen/": {
-      "image": "images/covers/2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

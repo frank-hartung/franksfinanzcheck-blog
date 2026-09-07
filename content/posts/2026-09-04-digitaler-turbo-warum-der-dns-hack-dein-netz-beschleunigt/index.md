@@ -137,6 +137,9 @@ Wir sind ständig online. Jede Sekunde Wartezeit stört. Der Wechsel des DNS-Ser
 
 2026 ist die Technik so einfach wie nie. Egal ob Smartphone, Tablet oder PC: Der Aufwand ist klein. Die Vorteile sind groß. Teste es und spüre den Unterschied.
 
+
+
+**Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/)
 ## Häufige Fragen
 
 ### Kann der DNS-Hack meinen Computer beschädigen?

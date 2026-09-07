@@ -68,7 +68,7 @@ Der Markt in Deutschland ist hart umkämpft. Jeder Anbieter hat eine andere Stra
 * **Vodafone:** Hier findest du oft die aggressivsten Angebote. Besonders bei Kabel-Internet sind Wechselprämien von bis zu 240 € (als „Startguthaben“) keine Seltenheit. Vodafone erlässt Wechslern zudem oft die Grundgebühr für die Restlaufzeit des alten Vertrages (bis zu 12 Monate lang!), falls dieser noch läuft.
 * **1&1:** Bekannt für die „Vorteilswelt“. Statt eines rein finanziellen Cashbacks kannst du dich hier oft zwischen einer hohen Gutschrift oder teurer Hardware (Laptops, Tablets, Konsolen) entscheiden. Rechnerisch ist der Bar-Bonus meist sinnvoller, aber die Hardware-Bundles sind für viele attraktiv.
 * **O2 Telefónica:** O2 verzichtet oft auf hohe Einmalzahlungen und setzt stattdessen auf dauerhaft niedrigere Preise oder den Wegfall der Anschlussgebühr (ca. 70 € Ersparnis). Ein großer Pluspunkt für Wechsler ist der „Kombi-Vorteil“, wenn bereits ein O2 Handyvertrag besteht.
-* **Regionale Netzbetreiber (M-net, NetCologne, EWE):** Diese Anbieter sind oft die heimlichen Preis-Leistungs-Sieger beim **Internetvertrag wechseln**. Da sie eigene Infrastruktur besitzen, können sie oft sehr hohe Boni bei Glasfaser-Anschlüssen (FTTH) anbieten, um Kunden vom Kupfernetz wegzuholen.
+* **Regionale Netzbetreiber (M-net, NetCologne, EWE):** Diese Anbieter sind oft die heimlichen Preis-Leistungs-Sieger beim **[Internetvertrag wechseln](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)**. Da sie eigene Infrastruktur besitzen, können sie oft sehr hohe Boni bei Glasfaser-Anschlüssen (FTTH) anbieten, um Kunden vom Kupfernetz wegzuholen.
 
 ## Die Psychologie des Wartens: Warum du nicht bis zum letzten Tag warten solltest
 

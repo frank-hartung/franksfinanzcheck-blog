@@ -95,7 +95,7 @@ Kannst du nach einem Schaden nicht im Haus wohnen, brauchst du ein Hotel. Die Ve
 
 ## Was 2026 in der Police stehen muss – ohne Marketingnebel
 
-So eine Wohngebäudeversicherung nimmt man nicht nebenbei mit. Sie zahlt bei Feuer, Leitungswasser, Sturm und Hagel. Elementarschäden deckt nur eine Zusatz-Klausel.
+So eine [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) nimmt man nicht nebenbei mit. Sie zahlt bei Feuer, Leitungswasser, Sturm und Hagel. Elementarschäden deckt nur eine Zusatz-Klausel.
 
 Ohne Elementar bleibst du nach Starkregen auf dem Keller sitzen. Der Zusatz kostet oft 80–300 € extra im Jahr. In manchen ZÜRS-Zonen bekommst du ihn schwer. Vergleiche darum nicht nur den Preis. Prüfe auch, ob dich der Versicherer überhaupt nimmt.
 

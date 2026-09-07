@@ -119,7 +119,7 @@ Preissprünge wird es immer geben. Du entscheidest nur, ob sie in deiner Küche 
 
 ## Fazit: Mit Preisgarantie entspannt durch jede Marktphase
 
-Eine **Gaspreisgarantie** ist der einfachste Schutz gegen hohe Energiekosten. Wer früh aus der Grundversorgung wechselt, behält die Kontrolle über seine Kosten. Und spart Jahr für Jahr hunderte Euro.
+Eine **[Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)** ist der einfachste Schutz gegen hohe Energiekosten. Wer früh aus der Grundversorgung wechselt, behält die Kontrolle über seine Kosten. Und spart Jahr für Jahr hunderte Euro.
 
 **Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Sicher heizen](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/): Preisgarantie Ratgeber · [Günstige Tarife 2026 sichern](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
 
