@@ -1,5 +1,5 @@
 # 📊 Pinterest-Performance-Feedback (Profi)
-**Stand:** 2026-09-01 · **Quelle:** data/pinterest_perf.yaml
+**Stand:** 2026-09-07 · **Quelle:** data/pinterest_perf.yaml
 
 - Einträge analysiert: **0** Themen · **0** Boards/Pillars
 
@@ -28,4 +28,4 @@ _Keine Flop-Einträge (noch zu wenig Daten)._
 4. **Datenpflege:** `data/pinterest_perf.yaml` regelmäßig aus dem
    Partner-Dashboard/Bulk-Export befüllen (oder `--fetch` mit read_ads-Token).
 
-_Erzeugt von `scripts/pinterest_perf_feedback.py` am 2026-09-01._
+_Erzeugt von `scripts/pinterest_perf_feedback.py` am 2026-09-07._

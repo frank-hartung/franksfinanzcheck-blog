@@ -1,17 +1,18 @@
 # 🏆 Chefredakteur-Scorecard
-**Stand:** 2026-09-03 · **Auftrag:** Redaktionelle Gesamt-Steuerung
+**Stand:** 2026-09-07 · **Auftrag:** Redaktionelle Gesamt-Steuerung
 
 ## Gesamt-Score: **83/100** · Ampel: **AMBER**
 
 | Kennzahl | Wert | Ampel |
 |---|---|---|
-| Veröffentlichte Artikel | 26 | 🟢 |
+| Veröffentlichte Artikel | 30 | 🟢 |
 | Entwürfe (Warteschlange) | 2 | 🟡 |
 | Pillars / Themen-Cluster | 6 | 🟢 |
 | Decay-Kandidaten (STALE+DECAYING) | 0 | 🟢 |
 | Core-Web-Vitals | AMBER | 🟡 |
-| Ø Lesbarkeit (Flesch) | n/a | 🟢 |
-| Lektorat-Befunde | 110 | 🟡 |
+| Ø Lesbarkeit (Flesch) | 53.3 | 🟡 |
+| Lektorat-Befunde (auto-behebbar) | 0 | 🟢 |
+| Stil-Hinweise (Lektorat, nur Info) | 18 | ℹ️ |
 | Tote Secrets | 0 | 🟢 |
 | Affiliate-Klicks (Umsatz-Hebel) | 0 über 0 Artikel | 🟡 |
 | Awin-Provision (Klicks→Umsatz) | 0.00 € (0.00 € bezahlt) über 0 Artikel | 🟡 |
@@ -29,17 +30,16 @@ _Noch keine Awin-Provisions-Daten – `scripts/awin_provisions.py` mit dem Awin-
 
 | Pillar | Artikel |
 |---|---|
-| frugalismus | 3 |
-| internet-dsl | 7 |
+| frugalismus | 4 |
+| internet-dsl | 9 |
 | konto-karten | 4 |
-| mietwagen | 2 |
+| mietwagen | 3 |
 | strom-sparen | 7 |
 | versicherungen | 5 |
 
 ## Handlungsempfehlungen
 
 - Core-Web-Vitals unter Soll – `scripts/cwv_guard.py` für Befunde; Covers als AVIF/WebP, Bilder < 220 KB, `<img>` mit width/height.
-- **110** Lektorat-Befunde – `scripts/lektor_guard.py --fix` (Doppelwörter, Füll-Phrasen, Person-Mix).
 - **2** Artikel in der Entwurf-Warteschlange – manuelle Qualitätsfreigabe prüfen (Kadenz- bzw. Qualitäts-Gate).
 
 _Erzeugt von `scripts/editorial_scorecard.py` (Chefredakteur-View)._
