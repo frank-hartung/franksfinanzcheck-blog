@@ -128,7 +128,8 @@ python3 scripts/governance_gate.py --rehearse      # Was würde der Lauf heute m
 python3 scripts/pinterest_token.py --status        # Lagebild des Zugangs
 ```
 
-Alle 14 Wachen-Selbsttests laufen grün, der Governance-Vertrag ist erfüllt.
+Alle Wachen-Selbsttests laufen grün (11 davon bei jedem Push im Qualitäts-Gate),
+der Governance-Vertrag C1–C12 ist erfüllt.
 
 ---
 
@@ -151,3 +152,37 @@ Voraussetzung sind die Secrets `PINTEREST_APP_ID`, `PINTEREST_APP_SECRET` und
 `PINTEREST_TOKEN_KEY` (Details im Runbook). Wer bereits einen Refresh-Token
 besitzt, hinterlegt stattdessen `PINTEREST_REFRESH_TOKEN` – dann läuft sogar
 dieser Schritt automatisch.
+
+---
+
+## 5. Texte für die Issues (zum Kopieren)
+
+Die Automatik darf Issues zwar öffnen und schließen, aber nicht kommentieren –
+darum stehen die drei Statusmeldungen hier zum Einfügen bereit.
+
+**Zu #206 – Governance-Report**
+
+> Ursache war kein abgelaufenes Secret, sondern ein fehlender Lebenszyklus: Der
+> Zugang wurde von Hand gesetzt und starb planmäßig alle 30 Tage, während die
+> Wache einen anderen Endpunkt und eine andere Token-Reihenfolge prüfte als der
+> Betrieb benutzt. Behoben in PR #211 – ein Token-Broker für alle Skripte, eine
+> tägliche Erneuerung mit Selbstheilung, Vorwarnung statt Ausfallmeldung und die
+> Vertragsregeln C10–C12 gegen Rückfall. Es bleibt ein einmaliger Handgriff von
+> fünf Minuten: Actions → „Pinterest-Token-Wache" → `show_auth_url`, dann den
+> Code aus der Adresszeile in `auth_code`. Danach schließt sich dieses Issue beim
+> nächsten grünen Lauf selbst. Anleitung: `docs/PINTEREST-TOKEN-RUNBOOK.md`.
+
+**Zu #153 – Pinterest-AI schlägt fehl**
+
+> Gleiche Wurzel wie #206: Bei totem Zugang endete `pinterest_engine.py` mit
+> Exit 1, ein Wartungsfall wurde also als Systemfehler gemeldet. Ab PR #211
+> schreibt die Engine stattdessen eine Pin-Queue (`data/pin_queue.yaml`),
+> vermerkt Grund und nächsten Schritt in `PIN-STATUS.md` und endet sauber.
+> Nichts geht verloren, es wird nach der Wiederanmeldung nachgeholt.
+
+**Zu #209 – Watchdog-Lauf rot**
+
+> Der Lauf scheiterte nicht an der Prüfung, sondern am Melden: `gh issue create
+> --label pinterest` lief auf HTTP 422, weil dieses Label im Repository nie
+> angelegt war. PR #211 legt fehlende Labels vor der Meldung an und sichert das
+> mit Vertragsregel C12 für alle Workflows ab.
