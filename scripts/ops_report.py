@@ -137,6 +137,48 @@ def build_report() -> dict:
     return report
 
 
+def _pinterest_token_step() -> dict:
+    """Pinterest-Zugang aus dem Lagebild des Token-Brokers – nie geraten.
+
+    Liest ausschließlich die Datei, die die tägliche Token-Wache schreibt
+    (kein Netz, keine Secrets). Fehlt sie, wird das ehrlich gesagt statt
+    dauerhaft „Token fehlt" zu behaupten.
+    """
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import pinterest_token
+        state = pinterest_token.load_state()
+    except Exception:
+        state = {}
+
+    if not state:
+        return {"priority": 3, "action": "pinterest-token",
+                "detail": "Zugang unbekannt – die Token-Wache lief hier noch "
+                          "nicht: docs/PINTEREST-TOKEN-RUNBOOK.md"}
+
+    status = state.get("status", "unknown")
+    source = state.get("source") or "unbekannt"
+    armed = state.get("auto_renew_armed")
+    left = state.get("refresh_days_left")
+
+    if status == "live" and armed:
+        detail = (f"Zugang lebt (Quelle: {source}), Auto-Erneuerung scharf"
+                  + (f", Reserve {left} Tage" if isinstance(left, int) else ""))
+        return {"priority": 4, "action": "pinterest-token", "detail": detail}
+    if status == "live":
+        return {"priority": 3, "action": "pinterest-token",
+                "detail": "Zugang lebt, aber im Handbetrieb – Auto-Erneuerung "
+                          "scharf schalten: docs/PINTEREST-TOKEN-RUNBOOK.md"}
+    if status == "unreachable":
+        return {"priority": 3, "action": "pinterest-token",
+                "detail": "Pinterest gerade nicht erreichbar – die Wache prüft "
+                          "morgen erneut, kein Eingriff nötig"}
+    return {"priority": 2, "action": "pinterest-token",
+            "detail": state.get("next_action")
+            or "Kein lebender Pinterest-Zugang – Pins wandern in die Warteschlange: "
+               "docs/PINTEREST-TOKEN-RUNBOOK.md"}
+
+
 def _next_steps(q: dict, audit_stats: dict) -> list[dict]:
     steps = []
     if q.get("human_review"):
@@ -152,8 +194,7 @@ def _next_steps(q: dict, audit_stats: dict) -> list[dict]:
                   "detail": "Content-Engine v2 läuft automatisch (Crons 08:10–19:40 MESZ)"})
     steps.append({"priority": 3, "action": "monitor-tls-cert",
                   "detail": "GitHub-TLS-Zertifikat: Watchdog Check 4 meldet, sobald da → Cloudflare SSL auf Full (strict) (kein CF Pages/Workers)"})
-    steps.append({"priority": 3, "action": "pinterest-token",
-                  "detail": "PINTEREST_ACCESS_TOKEN fehlt → Pinterest-AI postet noch nicht"})
+    steps.append(_pinterest_token_step())
     steps.append({"priority": 3, "action": "s3-backup",
                   "detail": "S3-Export geplant (INFRASTRUKTUR.md §4.5) – Credentials fehlen; GitHub-Repo ist bereits Offsite-Backup"})
     return steps
