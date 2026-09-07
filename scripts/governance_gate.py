@@ -70,6 +70,10 @@ STEPS = {
     "umami":   {"report": "data/umami_clicks.meta.json", "label": "Umami-Datenimport"},
     "clicks":  {"report": "CLICK-REPORT.md",      "label": "Affiliate-Klick-Attribution"},
     "awin":    {"report": "AWIN-REPORT.md",       "label": "Awin-Provisionen"},
+    # Lesbarkeits-Wache: Befundtabelle aus readability_check --gate-bestand
+    # --report LESBARKEIT-REPORT.md (read_avg = Ø < 62, read_floor = Artikel
+    # < 55). Exit-Code allein wäre „exit_only“ (Info) – deshalb der Report.
+    "lesbarkeit": {"report": "LESBARKEIT-REPORT.md", "label": "Lesbarkeits-Wache (Bestand)"},
     "scorecard": {"report": "EDITORIAL-SCORECARD.md", "label": "Chefredakteur-Scorecard"},
 }
 
@@ -523,6 +527,11 @@ def _selftest():
         ("decay", "- 🔴 **STALE** (sofort aktualisieren): **3**\n- 🟢 **FRESH** (ok): **27**", "", 1, "red"),
         ("decay", "- 🔴 **STALE** (sofort aktualisieren): **0**\n- 🟢 **FRESH** (ok): **30**", "", 0, "green"),
         ("scorecard", "## Gesamt-Score: **83/100** · Ampel: **AMBER**", "", 0, "info"),
+        # Lesbarkeits-Wache: Report liefert Ampel + Befundtabelle, Exit-Code
+        # allein darf NICHT alarmieren (exit_only-Policy, vgl. #206).
+        ("lesbarkeit", "Gesamt-Ampel: **GREEN**\n\n| Level | Code | Befund |\n|---|---|---|\n", "", 0, "green"),
+        ("lesbarkeit", "Gesamt-Ampel: **AMBER**\n\n| AMBER | read_avg | Ø Flesch 58.0 < Ziel 62 |", "", 1, "amber"),
+        ("lesbarkeit", "Gesamt-Ampel: **RED**\n\n| RED | read_floor | content/posts/x – Flesch 53.0 < Floor 55 |", "", 1, "red"),
     ]
     for step, rep, log, rc, want in cases:
         got = classify(step, rep, log, rc, "test")

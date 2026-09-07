@@ -26,7 +26,7 @@ pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 
 Zahlst du für deinen heimischen Internetanschluss jeden Monat mehr als 45 €, obwohl Neukunden für dieselbe Geschwindigkeit nur einen Bruchteil davon bezahlen? Viele Haushalte in Deutschland verharren aus Bequemlichkeit oder Angst vor tagelangem Internetausfall jahrelang im selben Altvertrag.
 
-Dabei ist der Wechsel heute dank modernisierter gesetzlicher Regelungen im Telekommunikations­gesetz so sicher, schnell und komfortabel wie nie zuvor. Durch das **Internet & DSL wechseln** sicherst du dir nicht nur schnellere Bandbreiten von bis zu 250 Mbit/s oder Glasfaser-Speed, sondern sparst im Schnitt **280 € bis 380 €** über die Mindestvertragslaufzeit. Praxisnah erkläre ich dir, wie der Wechsel ohne Unterbrechung gelingt und welche Stolpersteine du vermeiden musst.
+Dank neuer Regeln im Telekommunikationsgesetz ist der Wechsel heute einfach. Du wechselst **Internet & DSL** und bekommst mehr Tempo – bis 250 Mbit/s oder Glasfaser. Im Schnitt sparst du **280 € bis 380 €** über die Laufzeit. Ich zeige dir, wie der Wechsel ohne Pause klappt und welche Stolpersteine du vermeidest.
 
 
 ---
@@ -46,16 +46,16 @@ Telekommunikations­unternehmen belohnen Neukunden mit großzügigen Einstiegsko
 ## Die 4 Phasen des reibungslosen Anbieterwechsels
 
 ### Phase 1: Verfügbarkeitscheck & Bedarfsanalyse
-Ermittle vorab, welche Anschlussart an deiner Wohnadresse verfügbar ist (DSL/VDSL, Kabel-Internet oder FTTH-Glasfaser). Für einen normalen Haushalt mit Streaming in 4K und Homeoffice reicht eine Bandbreite von 50 bis 100 Mbit/s völlig aus. Haushalte mit mehreren Personen oder intensiven Cloud-Uploads profitieren von 250 Mbit/s. Gigabit-Leitungen lohnen sich meist nur bei extrem datenintensiven Hobbys. Achte darauf, dass der Anbieter echte Dual-Stack-Anschlüsse mit nativer IPv4- und IPv6-Adresse bereitstellt, falls du von unterwegs auf Heimnetzwerk-Server zugreifen möchtest. Was die verfügbaren Technologien und Tarife konkret kosten, siehst du in unserem [DSL-Vergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) – dort findest du auch die 4-Punkte-Formel für den echten Monatspreis.
+Prüfe zuerst, welche Technik es bei dir gibt: DSL, Kabel oder Glasfaser. Für Streaming und Homeoffice reichen 50 bis 100 Mbit/s. Größere Haushalte nehmen 250 Mbit/s. Gigabit lohnt nur bei extremem Datenbedarf. Wichtig: Der Anbieter sollte echtes Dual-Stack mit IPv4 und IPv6 bieten. Das brauchst du für den Zugriff von unterwegs. Was die Tarife kosten, zeigt unser [DSL-Vergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/). Dort findest du die Formel für den echten Monatspreis.
 
 ### Phase 2: Tarifvergleich & Effektivpreis berechnen
-Achte beim Vergleich nicht nur auf die werbewirksame Einstiegsgebühr der ersten Monate, sondern berechne den durchschnittlichen Effektivpreis über 24 Monate inklusive aller Boni, Bereitstellungskosten und Versandgebühren. Nur dieser Durchschnittspreis spiegelt die tatsächliche Belastung für dein Monatsbudget wider. Addiere sämtliche Fixkosten der 24 Monate, subtrahiere Aktionsguthaben und teile das Ergebnis durch vierundzwanzig.
+Achte nicht nur auf den niedrigen Startpreis. Rechne den Schnitt über 24 Monate. Nimm alle Boni, Bereitstellungs- und Versandkosten dazu. Nur dieser Preis zeigt die echte Belastung für dein Budget.
 
 ### Phase 3: Neuen Anbieter beauftragen (Nicht selbst kündigen!)
-Das ist die wichtigste Grundregel beim DSL-Wechsel: Kündige deinen bestehenden Vertrag **nicht** auf eigene Faust! Gib dem neuen Provider im Bestellprozess den Auftrag zur Rufnummernmitnahme (Portierung) und Kündigung. Dadurch ist gesetzlich garantiert, dass die Leitungslücke bei der Umschaltung höchstens einen Kalendertag betragen darf. Sollte es dennoch zu Verzögerungen kommen, muss der bisherige Anbieter die Leitung nahtlos Weiterbetreiben und darf dafür maximal die bisherigen Entgelte berechnen.
+Das ist die wichtigste Regel: Kündige deinen alten Vertrag **nicht** selbst! Der neue Anbieter übernimmt Kündigung und Rufnummernmitnahme. So darf die Leitung höchstens einen Tag unterbrochen sein. Gibt es Verzögerungen, muss der alte Anbieter weiter liefern. Er darf nur die bisherigen Preise nehmen.
 
 ### Phase 4: Hardware einrichten & Altgeräte retournieren
-Nach Erhalt der Auftragsbestätigung und des Schalttermins schließt du deinen neuen Router am Umstellungstag an. Falls du einen Mietrouter des alten Anbieters hattest, sende diesen innerhalb von 14 Tagen mit dem bereitgestellten Retourenschein zurück, um Strafgebühren zu vermeiden. Bewahre den Einlieferungsbeleg des Paketdienstleisters mindestens zwei Jahre sorgfältig auf.
+Am Umstellungstag schließt du den neuen Router an. Hattest du einen Mietrouter, schicke ihn binnen 14 Tagen zurück. Nutze den Retourenschein des Anbieters. So vermeidest du Strafgebühren. Bewahre den Einlieferungsbeleg zwei Jahre auf.
 
 
 
@@ -77,12 +77,11 @@ Nach Erhalt der Auftragsbestätigung und des Schalttermins schließt du deinen n
 
 ## Router mieten oder kaufen: Was rechnet sich mehr?
 
-Viele Anbieter bieten bei Vertragsabschluss WLAN-Router zur Miete für 4,99 € bis 7,99 € pro Monat an. Auf 24 Monate gerechnet summiert sich die Miete auf 120 € bis 190 €.
+Mietrouter kosten 4,99 € bis 7,99 € pro Monat. In 24 Monaten sind das 120 € bis 190 €.
 
-Ein eigener Markenrouter (z. B. AVM FRITZ! Box 7530 AX oder 7590 AX) kostet einmalig zwischen 140 € und 220 € und kann über viele Jahre hinweg und über mehrere Anbieterwechsel genutzt werden.
+Ein eigener Router (z. B. eine FRITZ!Box) kostet einmalig 140 € bis 220 €. Du nutzt ihn viele Jahre lang – auch bei mehreren Anbieterwechseln.
 
-
-Dank der gesetzlichen Routerfreiheit in Deutschland bist du nicht an Geräte deines Internetanbieters gebunden und sparst langfristig viel Geld. Wer den Router nach vier oder fünf Jahren im Gebrauchtmarkt weiterverkauft, erzielt oft noch 40 bis 50 % des ursprünglichen Anschaffungspreises. Damit das neue Gerät in jeder Ecke der Wohnung wirklich volle Geschwindigkeit liefert, haben wir die wichtigsten Tricks in [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): Mehr Speed in jeder Ecke zusammengestellt.
+Die Routerfreiheit in Deutschland erlaubt dir eigene Geräte. So sparst du langfristig Geld. Nach vier oder fünf Jahren bekommst du beim Verkauf oft noch 40 bis 50 % des Preises. Damit der Router überall schnelles WLAN liefert, hilft unser Ratgeber [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/).
 
 <!-- premium-length-2026 -->
 
@@ -119,26 +118,26 @@ So geplant wird der Wechsel zur 20-Minuten-Aktion. Ohne Plan erlebst du ihn als 
 
 ## Fazit: Mit minimalem Aufwand hunderte Euro sparen
 
-Überprüfst du alle 24 Monate deinen DSL- oder Kabelvertrag und wechselst bei Bedarf, surfst du dauerhaft mit modernen Technologien und sparst pro Jahr zwischen 280 € und 380 €. Der Wechselprozess läuft dank Anbieter-Kündigungsservice unterbrechungsfrei im Hintergrund ab.
+Prüfst du alle 24 Monate deinen DSL- oder Kabelvertrag, sparst du oft 280 € bis 380 €. Der Wechsel läuft dank des Kündigungsservice ohne Unterbrechung ab.
 
 Erfahre in unserer [Übersicht zu Internet & DSL](../../pillar/internet-dsl/) alle weiteren Spartipps rund um Breitbandanschlüsse.
 
 ## Häufige Fragen
 
 ### Wie lange dauert die Umstellung beim Internetwechsel?
-Von der Online-Bestellung bis zum Schaltungstag vergehen in der Regel 2 bis 4 Wochen. Am eigentlichen Umstellungstag dauert die technische Leitungsübergabe meist nur wenige Minuten.
+Von der Bestellung bis zum Schaltungstag dauert es meist 2 bis 4 Wochen. Am Wechseltag selbst ist die Leitung oft in Minuten umgestellt.
 
 ### Was passiert, wenn beim Wechsel etwas schiefgeht?
-Nach § 58 TKG ist der bisherige Anbieter verpflichtet, dich solange weiterzuversorgen, bis der neue Anbieter die Leitung erfolgreich geschaltet hat. Du bleibst somit zu keinem Zeitpunkt ohne Internet.
+Nach § 58 TKG muss der alte Anbieter dich weiter versorgen. Das gilt, bis der neue Anschluss läuft. Ohne Internet bist du also nie.
 
 ### Kann ich meine Festnetz-Telefonnummer behalten?
-Ja. Wenn du im selben Vorwahlbereich wohnst, kannst du deine bisherigen Rufnummern kostenlos zum neuen Anbieter mitnehmen.
+Ja. Bleibst du im selben Vorwahlbereich, nimmst du deine Nummern kostenlos mit.
 
 ### Wann muss ich den alten Mietrouter zurückschicken?
-In der Regel innerhalb von 14 Tagen nach Vertragsende. Nutze immer den Rücksendebeleg des Paketzustellers als Nachweis.
+Meist binnen 14 Tagen nach Vertragsende. Nutze den Beleg des Paketdienstes als Nachweis.
 
 ### Was ist der Unterschied zwischen DSL, Kabel und Glasfaser?
-DSL nutzt Kupfertelefonleitungen (bis 250 Mbit/s), Kabel nutzt Koaxial-Fernsehkabel (bis 1.000 Mbit/s) und FTTH-Glasfaser bringt Lichtwellenleiter direkt in die Wohnung (bis 1.000+ Mbit/s mit sehr hoher Stabilität).
+DSL läuft über das Telefonkabel. Es schafft bis 250 Mbit/s. Kabel nutzt das Fernsehkabel mit bis zu 1.000 Mbit/s. Glasfaser bringt das Licht direkt in die Wohnung. Sie ist am stabilsten und schnellsten.
 
 ---
 

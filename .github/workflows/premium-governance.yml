@@ -66,8 +66,9 @@ jobs:
         run: |
           fail=0
           for s in editorial_scorecard cwv_guard secrets_age_guard decay_radar \
-                   governance_gate governance_contract umami_clicks click_attribution \
-                   awin_provisions pinterest_perf_feedback; do
+                   governance_gate governance_contract readability_check \
+                   umami_clicks click_attribution awin_provisions \
+                   pinterest_perf_feedback; do
             if python3 "scripts/$s.py" --selftest >/tmp/selftest-$s.log 2>&1; then
               tail -n 1 "/tmp/selftest-$s.log"
             else
@@ -142,6 +143,17 @@ jobs:
           set -e
           python3 scripts/governance_gate.py --emit secrets --report SECRETS-REPORT.md \
             --log /tmp/secrets.log --exit "$rc"
+
+      - name: Lesbarkeits-Wache (Flesch-Amstad – Regelwerk R6 Bestands-Gate)
+        id: lesbarkeit
+        run: |
+          set +e
+          python3 scripts/readability_check.py --gate-bestand \
+            --report LESBARKEIT-REPORT.md | tee /tmp/lesbarkeit.log
+          rc=${PIPESTATUS[0]}
+          set -e
+          python3 scripts/governance_gate.py --emit lesbarkeit --report LESBARKEIT-REPORT.md \
+            --log /tmp/lesbarkeit.log --exit "$rc"
 
       - name: Pinterest-Performance-Feedback (Themen-Gewichtung)
         id: pinperf

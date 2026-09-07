@@ -52,11 +52,12 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 GOV_WORKFLOW = os.path.join(BLOG_DIR, ".github", "workflows", "premium-governance.yml")
 WORKFLOWS_DIR = os.path.join(BLOG_DIR, ".github", "workflows")
 GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
-          "decay_radar.py", "governance_gate.py", "umami_clicks.py",
-          "click_attribution.py", "awin_provisions.py", "pinterest_perf_feedback.py"]
+          "decay_radar.py", "governance_gate.py", "readability_check.py",
+          "umami_clicks.py", "click_attribution.py", "awin_provisions.py",
+          "pinterest_perf_feedback.py"]
 
 # Reihenfolge-Vertrag: diese Schritte sind Messungen, die vor der Sicht liegen müssen
-MEASURE_STEPS = ("decay", "cwv", "secrets", "pinperf", "clicks", "awin")
+MEASURE_STEPS = ("decay", "cwv", "secrets", "lesbarkeit", "pinperf", "clicks", "awin")
 VIEW_STEP = "scorecard"
 
 
@@ -91,6 +92,7 @@ def step_blocks(workflow_text):
 
 STEP_SIGNATURES = {
     "decay":     (r"--emit\s+decay\b", r"decay_radar\.py"),
+    "lesbarkeit": (r"--emit\s+lesbarkeit\b", r"readability_check\.py"),
     "cwv":       (r"--emit\s+cwv\b", r"cwv_guard\.py"),
     "secrets":   (r"--emit\s+secrets\b", r"secrets_age_guard\.py"),
     "pinperf":   (r"--emit\s+pinperf\b", r"pinterest_perf_feedback\.py"),

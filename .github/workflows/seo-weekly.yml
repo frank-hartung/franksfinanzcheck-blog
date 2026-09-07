@@ -176,7 +176,8 @@ jobs:
         # können.
         continue-on-error: true
         run: |
-          python3 scripts/readability_check.py | tee /tmp/read_audit.txt
+          python3 scripts/readability_check.py --gate-bestand \
+            --report LESBARKEIT-REPORT.md | tee /tmp/read_audit.txt
           exit ${PIPESTATUS[0]}
 
       - name: Textverständnis-Audit (R2–R8 Komplettprüfung + R8-Anker-Selbstheilung)
