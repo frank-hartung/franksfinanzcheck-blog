@@ -193,7 +193,7 @@ Drucke die Liste aus, hänge sie am Kühlschrank auf und hake jeden Punkt ab –
 
 Senke deine **Gasrechnung**, bevor die Kälte kommt. Entlüftete Heizkörper, smarte Thermostate, ein hydraulischer Abgleich und ein günstiger Gastarif entlasten dich um bis zu **720 €** im Jahr. Nutze die warmen Tage für die Vorbereitung – dein Geldbeutel und die Umwelt danken es dir.
 
-**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Sicher heizen](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/): So schützt dich eine Gaspreisgarantie · [Preisgarantie Gas](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): So sicherst du [günstige Tarife](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/) für 2026  
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Sicher heizen](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/): So schützt dich eine [Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · [Preisgarantie Gas](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): So sicherst du [günstige Tarife](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/) für 2026  
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/gas/)
 

@@ -9,7 +9,7 @@ tags: ["heizung wartung", "winterfest machen wohnung", "spätsommer heizung", "g
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["heizung wartung", "winterfest machen wohnung", "spätsommer heizung", "gaskosten senken", "bereitest", "effizient", "Gaspreisgarantie", "Gastarif wechseln"]
+keywords: ["heizung wartung", "winterfest machen wohnung", "spätsommer heizung", "gaskosten senken", "Gaspreisgarantie", "Gastarif wechseln"]
 pinwand: Strom & Gas sparen | Tarife clever wechseln
 pin_title: "Heizung fit für den Winter: Sparen beginnt im Spätsommer"
 pin_description: "*Werbung | Der Worst Case: erste Kältewelle, Heizung rattert, Gaspreis gestiegen. Dagegen hilft nur früh dran sein: Wartung, Einstellungen, Vertrag – unsere Übersicht priorisiert alle Maßnahmen nach Wirkung und Kosten. In 1 Stunde erledigt, den ganzen Winter gespart. Jetzt lesen!"

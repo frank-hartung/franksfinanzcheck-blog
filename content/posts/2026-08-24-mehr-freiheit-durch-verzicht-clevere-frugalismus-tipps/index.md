@@ -77,7 +77,7 @@ Prüfe die Kontoauszüge der letzten drei Monate. Welche Dienste nutzt du wirkli
 Essen auswärts kostet schnell 10 € – 15 € am Tag. Das sind rund 250 € im Monat. Wer mit Zettel einkauft und für zwei bis drei Tage vorkocht, zahlt unter 6 € am Tag. Die Ersparnis liegt bei über **150 € im Monat**.
 
 ### 4. Den Notgroschen zuerst aufbauen  
-Investiere erst, wenn die Reserve steht. Drei bis sechs Monatsausgaben gehören auf ein Tagesgeldkonto. So brauchst du bei Notfällen keinen teuren Dispokredit.
+Investiere erst, wenn die Reserve steht. Drei bis sechs Monatsausgaben gehören auf ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). So brauchst du bei Notfällen keinen teuren Dispokredit.
 
 ### 5. Das Prinzip „Pay Yourself First“  
 Zahle dich zuerst selbst. Überweise deine Sparrate nicht am Monatsende. Dann ist meist nichts übrig. Setze einen Dauerauftrag direkt nach dem Gehalt. Er überweist 15 % – 25 % auf dein Sparkonto.

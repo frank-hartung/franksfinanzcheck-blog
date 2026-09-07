@@ -12,3 +12,4 @@
 {"ts": "2026-09-07T20:59:26Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 43}, "output": {"changes": 57}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-09-07T21:05:04Z", "module": "extend_articles", "action": "apply", "input": {"min_words": 1428, "targets": 9}, "output": {"ok": 7, "failed": 1}, "status": "partial", "critical": false, "commit": null}
 {"ts": "2026-09-07T21:05:05Z", "module": "fix_spaces", "action": "apply", "input": {"files": 43}, "output": {"fixes": 676}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-07T21:08:23Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 4}, "status": "ok", "critical": false, "commit": null}

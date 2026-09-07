@@ -77,7 +77,7 @@ Diese Tabelle zeigt die Kosten bei einem Preissprung im Winter. Beispiel: Einfam
 
 ## Preisgarantie im Vergleich: 12‑Monats‑ vs. 24‑Monats‑Bindung
 
-Eine längere Bindung senkt häufig den Arbeitspreis, erhöht aber die Bindungsdauer. Die folgende Gegenüberstellung hilft beim **Gastarif wechseln**.
+Eine längere Bindung senkt häufig den Arbeitspreis, erhöht aber die Bindungsdauer. Die folgende Gegenüberstellung hilft beim **[Gastarif wechseln](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)**.
 
 | Merkmal | 12‑Monats‑Garantie | 24‑Monats‑Garantie |
 |:---|:---|:---|

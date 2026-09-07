@@ -40,7 +40,7 @@ Trenne deine Finanzen in drei klare Töpfe:
 | **Konto 2 (Konsum)** | Monatliches Budget für Einkäufe, Freizeit, Kleidung, Hobbys | Unterkonto im selben Online‑Banking oder separate Giro‑Karte |
 | **Konto 3 (Tagesgeld)** | Notgroschen & Sparziele (Pay yourself first) | [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) mit Zins > 2 % (z. B. ING, Consorsbank) |
 
-**Praxis‑Tipp:** Richte am Zahltag einen **automatischen Dauerauftrag** von 10 % deines Nettoeinkommens auf das Tagesgeldkonto ein. So sparst du, ohne jedes Mal daran denken zu müssen. Wer das 3‑Konten‑Modell mit einer App wie **Outbank** oder **Finanzguru** kombiniert, sieht sofort, wo das Geld hingeht – das erhöht die Motivation, Fixkosten zu reduzieren.
+**Praxis‑Tipp:** Richte am Zahltag einen **automatischen Dauerauftrag** von 10 % deines Nettoeinkommens auf das [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) ein. So sparst du, ohne jedes Mal daran denken zu müssen. Wer das 3‑Konten‑Modell mit einer App wie **Outbank** oder **Finanzguru** kombiniert, sieht sofort, wo das Geld hingeht – das erhöht die Motivation, Fixkosten zu reduzieren.
 
 ---
 

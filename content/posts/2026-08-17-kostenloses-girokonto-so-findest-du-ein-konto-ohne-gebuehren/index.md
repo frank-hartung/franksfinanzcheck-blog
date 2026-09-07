@@ -104,7 +104,7 @@ Der Umzug dauert heute oft weniger als zehn Minuten:
 Der Markt für **Girokonten ohne Gebühren** hat sich konsolidiert. Während früher fast jedes Konto bedingungslos gratis war, schauen Banken heute genauer hin. Damit du ein echtes „Profi-Konto“ findest, achte auf diese Details:
 
 * **Echtzeit-Überweisungen (SCT Inst):** Geld in Sekunden senden ist 2026 der Standard. Manche Banken lassen sich das mit 50 Cent bezahlen. Top-Anbieter wie die C24 Bank integrieren dies kostenlos.
-* **Unterkonten (Pockets):** Hilfreich für die Budgetierung. Du hast ein Pocket für „Fixkosten“, eines für „Urlaub“ und eines für „Notgroschen“. Jedes mit eigener IBAN ist der Goldstandard.
+* **Unterkonten (Pockets):** Hilfreich für die Budgetierung. Du hast ein Pocket für „Fixkosten“, eines für „Urlaub“ und eines für „[Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/)“. Jedes mit eigener IBAN ist der Goldstandard.
 * **App-Qualität:** Da du keine Filiale hast, ist die App dein Banking. Sie muss schnell sein, Push-Benachrichtigungen bei jeder Zahlung senden und eine gute Auswertung deiner Ausgaben (Multibanking) bieten.
 
 ## Girocard oder Debitkarte – der deutsche Sonderweg

@@ -180,7 +180,7 @@ Kaufpreis = 600 € → Amortisation = 7,1 Jahre.
 
 **Entscheidungs‑Regel:**  
 * ≤ 3 Jahre → sofort kaufen (Finanzierung lohnenswert).  
-* 3‑8 Jahre → prüfen, ob Förderungen (KfW‑Energieeffizienz‑Programm) verfügbar sind.  
+* 3‑8 Jahre → prüfen, ob Förderungen (KfW‑[Energieeffizienz](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)‑Programm) verfügbar sind.  
 * > 8 Jahre → zuerst Einstellungen anpassen (Temperatur, Abtauen, Zeitschaltung).  
 
 Ein kleiner Temperatur‑Abschlag von **‑18 °C** statt **‑24 °C** bei einer Gefriertruhe reduziert den Verbrauch um **10 %** ohne Komfortverlust – das spart 15 € / Jahr.

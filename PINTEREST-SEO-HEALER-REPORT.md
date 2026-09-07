@@ -1,9 +1,9 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-07 18:57 UTC · **Modus:** FIX
+**Stand:** 2026-09-07 21:08 UTC · **Modus:** FIX
 
-- Artikel: **34**
-- Geheilt: **4**
+- Artikel: **37**
+- Geheilt: **3**
 - Offene Issues: **0**
 - Covers: 1 Titel-Stale + fehlende nachgezogen
 
@@ -52,7 +52,10 @@
 | ✅ | `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` *(draft)* | — |
 | ✅ | `2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise` *(draft)* | — |
 | ✅ | `2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh` *(draft)* | — |
+| ✅ | `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` *(draft)* | — |
 | ✅ | `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` *(draft)* | — |
+| ✅ | `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` *(draft)* | — |
+| ✅ | `2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor` *(draft)* | — |
 | ✅ | `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen` *(draft)* | — |
 
 ## Selbstheilung (diese Runde)
