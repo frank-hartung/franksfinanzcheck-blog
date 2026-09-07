@@ -380,9 +380,17 @@ async function computeBlocks(title, bodyHtml) {
 
 const BASE_CPS = 15.2;
 
+const SMALL_TITLE = 'Strom sparen im Haushalt';
+const BIG_TITLE = 'Gasanbieter wechseln: Praxis-Tipps';
+/* Die Titel der Tonspur-Szenes MÜSSEN den Fixture-Titeln gleichen:
+   Block 0 (Anmoderation) enthält den Artikeltitel — und die Wortuhr
+   (chunk.w) ist auf die Rohtexte der Seite gemünzt. Ein anderer Titel
+   hier wäre ein anderer Text, die Karte zeigte ins Leere und die
+   Plausibilitäts-Wache würde die Spur zu Recht verwerfen. */
+
 async function main() {
-  const small = await computeBlocks('Strom sparen im Haushalt', SMALL_BODY);
-  const big = await computeBlocks('Gasanbieter wechseln: Praxis-Tipps', BIG_BODY);
+  const small = await computeBlocks(SMALL_TITLE, SMALL_BODY);
+  const big = await computeBlocks(BIG_TITLE, BIG_BODY);
   const smallExpected = (small.totalChars / BASE_CPS) * 1000 * 1.18;
   const bigExpected = (big.totalChars / BASE_CPS) * 1000 * 1.18;
 
@@ -424,10 +432,10 @@ async function main() {
   route('s2', { title: 'Sprechfluss', bodyHtml: SMALL_BODY });
   route('s3', { title: 'Lazy Katalog', bodyHtml: SMALL_BODY, lazyVoices: true });
   route('s4', { title: 'Synthese-Fehler', bodyHtml: SMALL_BODY, speechMode: 'failing' });
-  route('s5', { title: 'Gute Tonspur', bodyHtml: SMALL_BODY, track: goodTrack });
-  route('s6', { title: 'Tonspur 404', bodyHtml: SMALL_BODY, track: { ...goodTrack, src: '/audio/missing.wav' } });
+  route('s5', { title: SMALL_TITLE, bodyHtml: SMALL_BODY, track: goodTrack });
+  route('s6', { title: SMALL_TITLE, bodyHtml: SMALL_BODY, track: { ...goodTrack, src: '/audio/missing.wav' } });
   route('s7', { title: 'Deployte Defekt-Spur', bodyHtml: BIG_BODY, track: deployedTrack, speech: 'double' });
-  route('s8', { title: 'Zu kurze Spur', bodyHtml: BIG_BODY, track: shortTrack });
+  route('s8', { title: BIG_TITLE, bodyHtml: BIG_BODY, track: shortTrack });
 
   const server = http.createServer((req, res) => {
     const url = new URL(req.url, 'http://127.0.0.1');
@@ -558,7 +566,7 @@ async function main() {
     ok('Weibliche Stimme nie gewählt', await page.evaluate(() =>
       window.__speech.log.length === 0 || window.__speech.log.every((l) => !l.voice || !/Anna/.test(l.voice))));
     await page.click('#ff-voice-stop');
-    ok('Idle-aria-label verspricht männliche Stimme', /männliche Stimme/.test(
+    ok('Idle-aria-label verspricht den männlichen Nachrichtensprecher', /männliche(n)? (Nachrichtensprecher|Stimme)/.test(
       await page.evaluate(() => document.getElementById('ff-voice-play').getAttribute('aria-label'))));
   }
 
