@@ -1,8 +1,8 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-07 21:08 UTC  
+**Stand:** 2026-09-07 22:44 UTC  
 **Stufe:** P1  
-**Befund:** Heute (Montag, 2026-09-07) ist ein Publikationstag – alle Slots vorbei, **0 Artikel** erschienen (Ziel: 2). – Bestand: 6 von Gates gehalten (ältester 0 Tage: quality-score: Score 0.716 < 0.80 (schwach: spelling 0.00, readability 0.70, meta 0.85) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174))
+**Befund:** Heute (Montag, 2026-09-07) ist ein Publikationstag – alle Slots vorbei, **0 Artikel** erschienen (Ziel: 2). – Bestand: 6 von Gates gehalten (ältester 0 Tage: publish-gate: Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig; Textverständnis-Gate nicht bestanden: R3-TERMINOLOGIE: Konzept „DNS-Ser…)
 
 | Kennzahl | Wert |
 |---|---|
