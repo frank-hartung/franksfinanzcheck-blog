@@ -17,7 +17,7 @@ pin_description: "*Werbung | Rund um den Hausrat lauern teure Lücken: Untervers
 ai_generated: false
 engine_level: "reserve"
 kurzantwort: "Eine gute Hausratversicherung kostet für eine 70-Quadratmeter-Wohnung etwa 7 bis 12 Euro im Monat. Sie ersetzt nach Einbruch, Brand, Leitungswasser oder Sturm deinen kompletten Hausrat zum Neuwert, wenn du die Versicherungssumme realistisch planst. Achte auf gleitende Neuwertentschädigung, den Verzicht auf die Unterversicherungsprüfung und sinnvolle Bausteine wie Fahrrad- oder Elementarschutz."
-social_posted: false
+social_posted: true
 cover:
   image: "images/covers/2026-09-03-hausratversicherung-kosten-leistungen-vergleich.jpg"
   alt: "Hausratversicherung: Was sie kostet und wen sie schützt"
