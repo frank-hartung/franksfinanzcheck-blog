@@ -82,30 +82,13 @@ jobs:
           # AI3 (Text-Plausibilität) ist optional – ein apt-Flake darf die Wache nicht töten.
           sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1 || true
 
-      - name: Hugo installieren
-        uses: peaceiris/actions-hugo@v3
+      # Hugo Extended, verifiziert + PyPI-Fallback. Ersetzt die
+      # Einzel-Reparatur aus Issue #220 (peaceiris lieferte still die
+      # Standard-Binary -> Run 34204720578 rot) – jetzt systemweit.
+      - name: Hugo installieren (Extended, verifiziert, mehrquellig)
+        uses: ./.github/actions/install-hugo
         with:
-          hugo-version: ${{ env.HUGO_VERSION }}
-          extended: true
-
-      # PaperMod braucht Extended (TOCSS/Libsass). Wenn der Action-Download
-      # still die Standard-Binary liefert, stirbt `hugo --minify` in Sekunden
-      # – genau das Schadensbild von Run 34204720578 (Issue #220).
-      - name: Hugo-Extended prüfen (sonst selbst nachladen)
-        run: |
-          set -euo pipefail
-          if command -v hugo >/dev/null 2>&1 && hugo version 2>&1 | grep -qi extended; then
-            hugo version
-            exit 0
-          fi
-          echo "⚠ Hugo-Extended fehlt nach der Action-Installation – Fallback-Download."
-          VER="${HUGO_VERSION}"
-          URL="https://github.com/gohugoio/hugo/releases/download/v${VER}/hugo_extended_${VER}_linux-amd64.tar.gz"
-          curl -fsSL --retry 3 --retry-delay 4 "$URL" -o /tmp/hugo.tgz
-          tar -xzf /tmp/hugo.tgz -C /tmp hugo
-          sudo install -m 0755 /tmp/hugo /usr/local/bin/hugo
-          hugo version
-          hugo version 2>&1 | grep -qi extended
+          version: ${{ env.HUGO_VERSION }}
 
       # ============ STAGE 1: DETEKTOR-SELBSTTEST (fail-closed) ============
       - name: Detektor-Selbsttest (Wache muss sehen können)

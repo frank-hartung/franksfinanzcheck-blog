@@ -29,6 +29,7 @@ permissions:
 jobs:
   automerge:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     # NUR Dependabot-PRs, NUR github-actions-Updates:
     if: github.actor == 'dependabot[bot]'
     steps:

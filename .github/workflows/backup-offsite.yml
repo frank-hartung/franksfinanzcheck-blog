@@ -53,6 +53,7 @@ permissions:
 jobs:
   backup:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     env:
       # Quelle des Backups. Immer 'main': gh-pages ist ein regenerierbares
       # Build-Artefakt (deploy.yml) und wird bewusst NICHT gesichert

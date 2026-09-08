@@ -33,16 +33,15 @@ concurrency:
 jobs:
   layout-audit:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
-      - name: Hugo installieren
-        run: |
-          curl -sL -o /tmp/hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v0.164.0/hugo_extended_0.164.0_linux-amd64.tar.gz"
-          tar -xzf /tmp/hugo.tar.gz -C /tmp hugo
-          sudo mv /tmp/hugo /usr/local/bin/hugo
-          hugo version
+      - name: Hugo installieren (Extended, verifiziert, mehrquellig)
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
 
       - name: Website bauen
         env:

@@ -34,7 +34,7 @@
 {{- $kurzantwort := .Params.kurzantwort | default $description | default "" -}}
 {{- $readingTime := .ReadingTime -}}
 {{- $wordCount := .WordCount -}}
-{{- $pageLang := .Language.Lang | default site.LanguageCode | default "de" -}}
+{{- $pageLang := .Language.Lang | default site.Language.Locale | default "de" -}}
 {{- $author := .Params.author | default site.Params.author | default "" -}}
 {{- $dateStr := .Date | time.Format "02.01.2006" -}}
 {{- $updatedStr := "" -}}

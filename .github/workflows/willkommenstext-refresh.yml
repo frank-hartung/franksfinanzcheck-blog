@@ -52,6 +52,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     env:
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -70,10 +71,9 @@ jobs:
           sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
 
       - name: Hugo installieren
-        uses: peaceiris/actions-hugo@v3
+        uses: ./.github/actions/install-hugo
         with:
-          hugo-version: "0.164.0"
-          extended: true
+          version: "0.164.0"
 
       - name: Hugo-Build (Voraussetzung für Render-Beweis)
         run: hugo --minify

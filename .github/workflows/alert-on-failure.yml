@@ -11,6 +11,10 @@
 #  → Issue mit Workflow-Name, Run-Link und Log-Auszug.
 #
 #  Kein manuelles Zutun nötig – das System meldet sich selbst.
+#
+#  BEWUSST NICHT ÜBERWACHT:
+#    - "Fehler-Alerting" selbst (kann sich nicht selbst beobachten)
+#    - "Textverständnis-Patches einspielen (einmalig)" (Einmal-Aktion)
 # ============================================================
 name: Fehler-Alerting
 
@@ -21,6 +25,7 @@ on:
       - "Qualitäts-Gate (Build + interne Links)"   # PREM-AUDIT: war blind – rote Runs + Issues #85 nur zufällig auffällig
       - "Deploy-Catchup"                            # PREM-AUDIT: ohne ihn treibt ein Bot-Commit den Live-Stand nie nach
       - "Wöchentliche SEO-Optimierung"
+      - "AGC-Autopilot (Recherche & Kalender)"    # PREM-AUDIT 08.09.: war blind – Recherche/Planung fiele still aus
       - "Backlink-Automation"
       - "Wöchentliches Nach-Pinnen"
       - "Quartalsweises Artikel-Update"
@@ -28,8 +33,11 @@ on:
       - "Social-Media-AI"
       - "Content-Reserve (täglicher Vorrat)"
       - "Publication Delivery (öffentlicher Nachweis)"
+      - "Publication reliability regression tests"  # PREM-AUDIT 08.09.: CI-Regression war blind
       - "Content-Engine v2"          # Herzstück (ersetzt daily-content, entfernt 2026-08-10)
+      - "KI-Redaktion"           # PREM-AUDIT 08.09.: Redaktions-Stilautomatik war blind
       - "Pinterest-AI"           # Pins würden still ausfallen
+      - "Pinterest-Token-Wache"  # PREM-AUDIT 08.09.: Lebenszyklus-Wache war blind (#219-Klasse)
       - "Pinterest-Watchdog"     # PREM-AUDIT: Spam-/SEO-Wache lief still aus
       - "Layout-AI"              # Layout-Regressionen still
       - "FrankAutoOps-Report"
@@ -62,6 +70,7 @@ permissions:
 jobs:
   alarm:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     if: ${{ github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'cancelled' }}
     steps:
       - name: Issue bei fehlgeschlagenem Workflow erstellen
