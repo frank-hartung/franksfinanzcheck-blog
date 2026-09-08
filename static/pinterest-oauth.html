@@ -54,43 +54,64 @@
   var err = q.get('error');
   var out = document.getElementById('out');
   var wf = 'https://github.com/frank-hartung/franksfinanzcheck-blog/actions/workflows/pinterest-token.yml';
-  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  /* Alles per DOM-API gebaut – keine HTML-Strings. Grund: Das Qualitäts-Gate
+     (scripts/check_internal_links.sh) grept href= im gebauten HTML; ein
+     href= innerhalb eines JS-Strings würde als kaputter interner Link gelten. */
+  function el(tag, attrs, children) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    (children || []).forEach(function (c) { n.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    return n;
+  }
+  function box(cls, nodes) { return el('div', {'class': cls}, nodes); }
+  while (out.firstChild) out.removeChild(out.firstChild);
   if (err) {
-    out.innerHTML = '<div class="err"><strong>Pinterest hat keinen Code geliefert</strong> (' + esc(err) +
-      (q.get('error_description') ? ': ' + esc(q.get('error_description')) : '') + ').<br>' +
-      'Typisch: „Ablehnen" geklickt, falsches Konto, App noch nicht freigegeben oder ein Scope ist ' +
-      'für die App nicht aktiviert. Autorisierungs-URL erneut öffnen und „Erlauben" wählen.</div>';
+    var desc = q.get('error_description') ? ': ' + q.get('error_description') : '';
+    out.appendChild(box('err', [
+      el('strong', {}, ['Pinterest hat keinen Code geliefert']),
+      ' (' + err + desc + ').', el('br'),
+      'Typisch: „Ablehnen“ geklickt, falsches Konto, App noch nicht freigegeben oder ein Scope ist ' +
+      'für die App nicht aktiviert. Autorisierungs-URL erneut öffnen und „Erlauben“ wählen.'
+    ]));
     return;
   }
   if (!code) {
-    out.innerHTML = '<div class="err"><strong>Kein Code in der Adresse.</strong> Diese Seite ist das Ziel der ' +
-      'Pinterest-Autorisierung. Starte sie über <em>Actions → Pinterest-Token-Wache → Run workflow → ' +
-      '<code>show_auth_url</code></em> und öffne die dort gezeigte URL.</div>';
+    out.appendChild(box('err', [
+      el('strong', {}, ['Kein Code in der Adresse.']),
+      ' Diese Seite ist das Ziel der Pinterest-Autorisierung. Starte sie über ',
+      el('em', {}, ['Actions → Pinterest-Token-Wache → Run workflow → ', el('code', {}, ['show_auth_url'])]),
+      ' und öffne die dort gezeigte URL.'
+    ]));
     return;
   }
-  out.innerHTML =
-    '<p class="ok">✅ Erlaubt – hier ist dein Autorisierungs-Code:</p>' +
-    '<code class="big" id="code">' + esc(code) + '</code>' +
-    '<button id="copy" type="button">Code kopieren</button>' +
-    '<a class="btn" href="' + wf + '" target="_blank" rel="noopener">Zur Pinterest-Token-Wache →</a>' +
-    '<ol style="margin-top:22px">' +
-    '<li>Code kopieren (Knopf oben).</li>' +
-    '<li>In GitHub: <strong>Run workflow</strong> → Feld <code>auth_code</code> → einfügen → starten.</li>' +
-    '<li>Fertig. Der Lauf tauscht den Code, legt <code>data/pinterest_tokens.enc</code> an und schließt das Issue selbst.</li>' +
-    '</ol>' +
-    '<p class="muted">Zügig eintauschen – der Code verfällt nach wenigen Minuten. Falls der Tausch mit HTTP 400 scheitert: ' +
-    'URL erneut öffnen, neu erlauben, neuen Code verwenden.</p>';
-  document.getElementById('copy').addEventListener('click', function () {
+  var codeEl = el('code', {'class': 'big', 'id': 'code'}, [code]);
+  var copyBtn = el('button', {'type': 'button', 'id': 'copy'}, ['Code kopieren']);
+  var link = el('a', {'class': 'btn', 'target': '_blank', 'rel': 'noopener'}, ['Zur Pinterest-Token-Wache →']);
+  link.href = wf;
+  out.appendChild(el('p', {'class': 'ok'}, ['✅ Erlaubt – hier ist dein Autorisierungs-Code:']));
+  out.appendChild(codeEl);
+  out.appendChild(copyBtn);
+  out.appendChild(link);
+  out.appendChild(el('ol', {'style': 'margin-top:22px'}, [
+    el('li', {}, ['Code kopieren (Knopf oben).']),
+    el('li', {}, ['In GitHub: ', el('strong', {}, ['Run workflow']), ' → Feld ', el('code', {}, ['auth_code']), ' → einfügen → starten.']),
+    el('li', {}, ['Fertig. Der Lauf tauscht den Code, legt ', el('code', {}, ['data/pinterest_tokens.enc']), ' an und schließt das Issue selbst.'])
+  ]));
+  out.appendChild(el('p', {'class': 'muted'}, [
+    'Zügig eintauschen – der Code verfällt nach wenigen Minuten. Falls der Tausch mit HTTP 400 scheitert: ' +
+    'URL erneut öffnen, neu erlauben, neuen Code verwenden.'
+  ]));
+  copyBtn.addEventListener('click', function () {
     var b = this;
-    function done(){ b.textContent = '✔ kopiert'; setTimeout(function(){ b.textContent = 'Code kopieren'; }, 2500); }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(code).then(done, function(){ selectCode(); });
-    } else { selectCode(); }
-    function selectCode(){
-      var r = document.createRange(); r.selectNodeContents(document.getElementById('code'));
+    function done() { b.textContent = '✔ kopiert'; setTimeout(function () { b.textContent = 'Code kopieren'; }, 2500); }
+    function selectCode() {
+      var r = document.createRange(); r.selectNodeContents(codeEl);
       var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
       try { document.execCommand('copy'); done(); } catch (e) {}
     }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(done, selectCode);
+    } else { selectCode(); }
   });
   /* Code aus der Browser-History nehmen (Tab-Vorschau, Sync, Verlauf). */
   try { history.replaceState(null, '', location.pathname); } catch (e) {}
