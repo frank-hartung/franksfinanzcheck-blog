@@ -4,6 +4,15 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 
 > ⚠️ **Hinweis zur Automatisierung (Stand 26.08.2026):** Der Bot veröffentlicht Artikel automatisch, aber NUR wenn sie mehrere harte Qualitäts- und SEO-Gates bestehen (Profi-Qualitäts-Gate, `publish_gate.py`, `quality_score.py` ≥ 0,85) – siehe Abschnitt „Vollautomatik ohne manuelles Eingreifen" unten. Kein manueller Freigabe-Schritt mehr nötig; die Publikationsfrequenz ist fix auf Mo/Mi/Fr mit 2–3 Artikeln pro Tag begrenzt, um „Scaled Content Abuse"-Risiken bei einer jungen Domain zu vermeiden (DAUERVORGABE, siehe CADENCE-REPORT.md). **Seit 26.08.2026 wird die Routine HART erzwungen:** Vor jedem Publish (Deploy, Engine, manuell) prüft und heilt ein Gate-Komplex (`cadence_guard.py` + `publish_gate.py` + Titel-/Cover-Gates) Kadenz und Cover-Text-Komplettheit automatisch – Verstöße können nicht mehr live gehen, der Bestand heilt sich selbst (Details: `CADENCE-REPORT.md` Regel 5).
 
+> 🧠 **Neu: AGC-Autopilot (08.09.2026):** Die Blog-Automatik bildet jetzt den
+> Funktionsumfang von AGC Studio nach – **Brand Brain** (`data/brand_brain.yaml`),
+> **6 tägliche Research-Teams** mit Reports & Routing (`scripts/research_engine.py`),
+> **Kampagnen-Management** (Promo/Researched, CTA-Override, `data/campaigns.yaml`)
+> und ein **Redaktionskalender** (`data/editorial_calendar.yaml`). Der Autopilot
+> recherchiert und plant – veröffentlicht wird weiterhin NUR über die
+> Content-Engine v2 + ihre Gates. Vollständige Anleitung & Feature-Parität:
+> **[`AGC-AUTOPILOT.md`](AGC-AUTOPILOT.md)** · Orchestrator: `python3 scripts/autopilot.py --run`.
+
 ---
 
 ## 📋 Was ist enthalten

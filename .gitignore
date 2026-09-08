@@ -42,6 +42,8 @@ ops-report.json
 # Nur im Root ignorieren, docs/ enthält strategische Dokumente
 /*-REPORT.md
 /*-STATUS.md
+/AGC-FORSCHUNG-BERICHT.md
+/AGC-AUTOPILOT-STATUS.md
 /ENGINE-STATUS.md
 /BOT-STATUS.md
 /PIN-STATUS.md

@@ -1,0 +1,51 @@
+# ============================================================
+#  📣 KAMPAGNEN – Single Source of Truth (AGC-Parität, Stufe 3)
+#  ------------------------------------------------------------
+#  AGC Studio unterscheidet:
+#    type: promo       – Angebots-/Aktions-Kampagnen (eigener CTA, schnell)
+#    type: researched  – Thought-Leadership-/Themen-Kampagnen (Research-gestützt)
+#
+#  FELDER:
+#    id            eindeutiger Schlüssel (nie wiederverwenden)
+#    type          promo | researched
+#    name          Anzeigename
+#    goal          Ziel (für dich + Reports)
+#    cta           Kampagnen-CTA (überschreibt default_cta aus brand_brain;
+#                  leer = default_cta verwenden)
+#    pillars       zugeordnete Pillars (Themen-Auswahl + Routing)
+#    start / end   Gültigkeitszeitraum (ISO-Datum)
+#    status        active | paused | draft
+#                  ⚠️ Nur `active` wirkt auf CTA + Kalender. Neue Kampagnen
+#                  starten als `paused`, damit nichts ungewollt publiziert.
+#    topics_hint   optionale Themenliste für den Kalender (promo)
+#
+#  AKTIVIEREN: status: active setzen → dann wirkt die Kampagne automatisch
+#  über scripts/campaign_manager.py (Kalender) und scripts/agc_context.py
+#  (CTA im Artikel). Kein Code-Edit nötig.
+# ============================================================
+
+campaigns:
+  - id: herbst-energiewechsel-2026
+    type: promo
+    name: "Herbst-Energiewechsel 2026"
+    goal: "Strom-/Gaswechsel vor der Heizperiode; Tarifvergleich als Sofort-Nutzen."
+    cta: "Jetzt Strom- & Gaspreise vergleichen"
+    pillars: ["strom-sparen"]
+    start: "2026-09-01"
+    end: "2026-10-31"
+    status: paused
+    topics_hint:
+      - "Heizperiode vorbereiten im Spätsommer"
+      - "Gastarife vergleichen vor dem Herbst"
+      - "Stromanbieter wechseln und bis zu 300 Euro sparen"
+
+  - id: frugalismus-autoritaet-q4
+    type: researched
+    name: "Frugalismus-Autorität Q4"
+    goal: "Thought Leadership: bewusster Konsum, 50-30-20, finanzielle Freiheit."
+    cta: ""
+    pillars: ["frugalismus"]
+    start: "2026-09-01"
+    end: "2026-12-31"
+    status: paused
+    topics_hint: []

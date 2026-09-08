@@ -1,0 +1,158 @@
+# ============================================================
+#  🧠 BRAND BRAIN – Single Source of Truth (AGC-Parität, Stufe 1)
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 08.09.2026): Der Blog-Autopilot soll den
+#  Funktionsumfang von AGC Studio nachbilden. AGC-Schritt 1 ist das
+#  "Brand Brain": Marke, Stimme, Zielgruppe, Produkte und Avatar EINMAL
+#  konfigurieren – alle Agenten (Recherche, Redaktion, Kampagnen,
+#  Routing) lesen daraus. Genau diese Rolle übernimmt diese Datei.
+#
+#  KONSUMENTEN (Single Source of Truth für):
+#    - scripts/brand_brain.py          (Lader + Validator + Wächter)
+#    - scripts/agc_context.py          (Prompt-Injektion für den Schreiber)
+#    - scripts/research_engine.py      (Recherche-Teams → Routing)
+#    - scripts/campaign_manager.py     (CTA-Auflösung, Kalender)
+#    - scripts/autopilot.py            (Cockpit)
+#
+#  ABGRENZUNG (WICHTIG – kein Konflikt mit bestehenden Wächtern):
+#    - Die KANONISCHEN Marken-Artefakte (Logo, Favicon, Willkommenstext,
+#      description, disclaimer) bleiben in data/brand_lock.yaml + hugo.toml.
+#      brand_brain.py --selftest prüft, dass die hier gespiegelten Werte
+#      EXAKT mit brand_lock.yaml übereinstimmen (Drift → Selbstheilung via
+#      --fix, nie gegen den Brand-Guard).
+#    - Diese Datei ergänzt die bestehende Governance, sie ersetzt sie nicht.
+#
+#  ÄNDERUNGEN: direkt hier editieren ODER
+#      python3 scripts/brand_brain.py --set-current   (aus brand_lock ziehen)
+# ============================================================
+
+version: 1
+
+brand:
+  name: "FranksFinanzcheck"
+  tagline: "So holst du mit ehrlichen Tipps das Beste aus deinem Geld"
+  domain: "https://franksfinanzcheck.de/"
+  author: "Frank Hartung"
+  niche: "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
+  value_proposition: "Oft reichen zehn Minuten, um Fixkosten massiv zu senken – bis zu 1.800 € pro Jahr."
+  languages: ["de"]
+
+audience:
+  primary: "Privathaushalte in Deutschland, die ihre Fixkosten senken wollen – ohne Fachchinesisch und ohne Verkaufsdruck."
+  secondary: "Wechsel-Interessierte (Strom, Gas, DSL, Konto, Versicherung), Frugalismus-Einsteiger, Vielbeschäftigte mit wenig Zeit."
+  reading_level: "verständliche Alltagssprache, kurze Sätze, ein Gedanke pro Absatz"
+  pain_points:
+    - "Nachzahlungen von Strom-/Gasrechnung (vor allem im Herbst/Winter)"
+    - "Versteckte Gebühren und Preiserhöhungen bei Konto, Handy und Versicherungen"
+    - "Überforderung im Tarifdschungel (zu viele Angebote, unklare Bedingungen)"
+    - "Angst vor Wechselfallen (Kündigungsfristen, Preisgarantie-Kleingedrucktes)"
+    - "Kein Überblick über die eigenen laufenden Kosten"
+
+voice:
+  tone: "ehrlich, praxisnah, auf Augenhöhe, zahlengetrieben, kein Verkaufsdruck"
+  anrede: "du"                    # du = Du-Form; alternativ "sie"
+  perspectives: ["direkt", "erfahrung", "neutral"]
+  redaktionsstandard: "Capital · WirtschaftsWoche · DIE ZEIT (siehe data/terminologie.yaml + REDAKTIONS-STANDARD)"
+  forbidden_phrases:
+    - "In der heutigen schnelllebigen Welt"
+    - "Es ist wichtig zu beachten"
+    - "Zusammenfassend lässt sich sagen"
+    - "Des Weiteren"
+    - "heutzutage"
+    - "Tauchen wir ein"
+    - "Der Schlüssel zum Erfolg"
+    - "In diesem Ratgeber zeige ich dir"
+
+avatar:
+  name: "Frank Hartung"
+  rolle: "Autor & Finanz-Praktiker"
+  erfahrung: "über zehn Jahre Erfahrung im Finanzbereich"
+  charakter:
+    - "ehrlich"
+    - "praxisnah"
+    - "zahlengetrieben"
+    - "verzichtet auf Fachchinesisch"
+    - "empfiehlt nur, was er selbst nachvollziehen kann"
+
+# Produkte/Dienstleistungen = die Affiliate-Familien (Route-Namen 1:1 aus
+# scripts/check24_links.yaml). research_engine/campaign_manager nutzen das
+# Mapping pillar → family, um jedem Artikel die korrekte /go/-Route und CTA
+# zuzuordnen (keine rohen Partner-URLs im Content).
+products:
+  - family: "strom"
+    label: "Stromtarif-Vergleich"
+    cta: "Jetzt Stromtarif vergleichen"
+    pillars: ["strom-sparen"]
+    route: "strom"
+  - family: "gas"
+    label: "Gastarif-Vergleich"
+    cta: "Jetzt Gastarif vergleichen"
+    pillars: ["strom-sparen"]
+    route: "gas"
+  - family: "internet"
+    label: "DSL-/Internet-Vergleich"
+    cta: "Jetzt DSL-Tarif vergleichen"
+    pillars: ["internet-dsl"]
+    route: "dsl"
+  - family: "versicherung"
+    label: "Versicherungs-Vergleich"
+    cta: "Jetzt Versicherung vergleichen"
+    pillars: ["versicherungen"]
+    route: "hausrat"              # generischer Fallback; spezifischere Routen siehe check24_links.yaml
+  - family: "konto"
+    label: "Konto- & Karten-Vergleich"
+    cta: "Jetzt kostenloses Konto vergleichen"
+    pillars: ["konto-karten"]
+    route: "girokonto"
+  - family: "mietwagen"
+    label: "Mietwagen-Vergleich"
+    cta: "Jetzt Mietwagen vergleichen"
+    pillars: ["mietwagen"]
+    route: "mietwagen"
+  - family: "reisen"
+    label: "Reise-Vergleich"
+    cta: "Jetzt Reise vergleichen"
+    pillars: ["mietwagen"]
+    route: "reisen"
+
+# Standard-CTA, wenn keine aktive Kampagne einen CTA überschreibt
+# (campaign_manager.cta_for). Der Kampagnen-CTA hat Vorrang.
+default_cta: "Jetzt bei CHECK24 vergleichen"
+
+# Kanonische Marken-Texte – MÜSSEN mit data/brand_lock.yaml übereinstimmen
+# (brand_brain.py --selftest erzwingt das; bei Drift: --fix oder --set-current).
+canonical:
+  description: "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
+  disclaimer: "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
+  home_title: "FranksFinanzcheck: So holst du mit ehrlichen Tipps das Beste aus deinem Geld"
+
+frameworks:
+  editorial:
+    - "Das Wichtigste in Kürze (fettes Label + 3–4 Bullets) direkt nach der Einleitung"
+    - "Mindestens 2 H2-Überschriften als Fragen, direkt beantwortet"
+    - "Mindestens eine markierte Faustregel (**Faustregel:** …)"
+    - "Mindestens eine nummerierte Schrittfolge (3–6 Schritte)"
+    - "Zahlen-Ehrlichkeit: Spannen + Einordnung statt erfundener Präzision"
+    - "FAQ-Bereich (## Häufige Fragen, 5 Fragen als H3)"
+  openings:
+    - "Schritt-für-Schritt-Versprechen"
+    - "Zahlen-These"
+    - "Irrtum widerlegen"
+    - "Vergleich/Analogie"
+    - "Warnung + Konsequenz"
+    - "Mini-Geschichte"
+    - "Checkliste-Vorab („Drei Dinge zählen: …“)"
+    - "Frage an den Leser"
+  hooks:
+    - "6-Wort-Haken"
+    - "Frage-Hook"
+    - "Zahl-Hook"
+    - "Irrtum-Hook"
+    - "Vorher/Nachher-Hook"
+
+hard_rules:
+  - "KEINE erfundenen Studien, Umfragen, Experten, Gesetze/Paragraphen oder exakten Preise (Haftungsrisiko)."
+  - "E-E-A-T: eigene Erfahrung als Formulierung erlaubt, Fakten nur als Allgemeinwissen oder aus kuratierten Quellen."
+  - "Affiliate-Links NUR über das /go/-Gateway, mit rel=\"sponsored\" (Werbekennzeichnung)."
+  - "Recherche-Hooks (data/research) sind Anregungen, keine zitierten Fakten – Quellenkennzeichnung im Report."
+  - "Kadenz DAUERVORGABE: Publikation nur Mo/Mi/Fr, 2–3 Artikel pro Tag (cadence_guard)."

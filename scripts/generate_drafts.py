@@ -43,6 +43,13 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, slug_of
 import groq_config
+# AGC-AUTOPILOT (08.09.2026): optionaler Kontext aus der Blog-Automatik
+# (Brand Brain + geroutete Tages-Recherche + Kampagnen-CTA). Der Import DARF
+# NIE brechen: fehlt das Modul, schreibt der Bot exakt wie bisher.
+try:
+    import agc_context
+except Exception:  # noqa: BLE001
+    agc_context = None
 TOPICS_FILE = os.path.join(BLOG_DIR, "data", "topics.yaml")
 
 PINTEREST_PLAN = os.path.join(BLOG_DIR, "data", "pinterest_plan.yaml")
@@ -658,6 +665,16 @@ def generate_article_text(topic, angle, perspective=None, pin=None, keywords=Non
             f"[Ratgeber: ...](../../pillar/{pillar}/) – "
             "z. B. „Mehr dazu im Ratgeber …“ mit aussagekräftigem Ankertext.\n"
         )
+    # AGC-AUTOPILOT: Brand Brain + geroutete Recherche + Kampagnen-CTA als
+    # Kontext an den Schreiber übergeben. Fehlt ein Baustein → leerer Block,
+    # der Prompt bleibt identisch zum bisherigen Verhalten.
+    agc_block = ""
+    if agc_context is not None:
+        try:
+            agc_block = agc_context.build_context_block(
+                topic, pillar=pillar, keywords=keywords, pin=pin)
+        except Exception:  # noqa: BLE001
+            agc_block = ""
     prompt = f"""Schreibe einen EINZIGARTIGEN, hilfreichen deutschen Blog-Artikel zum Thema:
 "{topic}"
 
@@ -667,6 +684,7 @@ def generate_article_text(topic, angle, perspective=None, pin=None, keywords=Non
 Stil des Artikels: {angle_desc}.
 Erzählperspektive: {persp_desc}.
 
+{agc_block}
 FORMAT – halte dich GENAU daran (wichtig für die Weiterverarbeitung):
 Zeile 1: TITLE: Ein prägnanter, klickstarker Titel (max. 60 Zeichen). Wähle einen FRISCHEN Blickwinkel – verwende NICHT den Pin-Titel und nicht wörtlich das Thema.
 Zeile 2: DESCRIPTION: Eine Meta-Beschreibung (max. 155 Zeichen, mit wichtigstem Keyword)

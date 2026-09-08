@@ -1,0 +1,67 @@
+# ============================================================
+#  PAIN-POINT-POOL – kuratierter Signal-Pool für die Recherche-
+#  Team "Pain Point Discovery" (scripts/research_engine.py)
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 08.09.2026): AGC-Parität. Das Pain-Point-Team
+#  "minet Beschwerden aus echten Gesprächen" – wir bilden das
+#  DETERMINISTISCH ab: kuratierte, SICHERE Schmerzpunkte je Pillar,
+#  von einem Menschen geprüft. KEINE erfundenen Zahlen/Studien.
+#
+#  REGELN:
+#    - Nur allgemein gültige, nicht überprüfbare Einzelfakten enthaltende
+#      Beobachtungen (analog data/aktuelle_entwicklungen.yaml).
+#    - `score` = relative Relevanz für die Rotation (0..1).
+#    - `pillar` muss einem Pillar in data/topics.yaml entsprechen.
+#    - Neue Einträge: einfach unten ergänzen; id nie wiederverwenden.
+# ============================================================
+
+pain_points:
+  - id: strom-nachzahlung-herbst
+    pillar: strom-sparen
+    hook: "Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist."
+    score: 0.95
+
+  - id: gas-preisschock-heizperiode
+    pillar: strom-sparen
+    hook: "Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich höher aus als erwartet – der Schock kommt mit der Heizperiode."
+    score: 0.90
+
+  - id: dsl-teuer-trotz-schlecht
+    pillar: internet-dsl
+    hook: "Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die Rechnung bleibt hoch, der Speed trotzdem mau."
+    score: 0.85
+
+  - id: dsl-wlan-funkloch
+    pillar: internet-dsl
+    hook: "Funklöcher in Wohnung oder Homeoffice nerven täglich – oft liegt es nicht am Anbieter, sondern an Router und WLAN-Aufbau."
+    score: 0.80
+
+  - id: konto-gebuehren-schleichend
+    pillar: konto-karten
+    hook: "Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich vergleicht, zahlt für Leistungen, die es anderswo gratis gibt."
+    score: 0.88
+
+  - id: kreditkarte-versteckte-kosten
+    pillar: konto-karten
+    hook: "Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise."
+    score: 0.75
+
+  - id: versicherung-zu-teuer-verlaengert
+    pillar: versicherungen
+    hook: "Policen werden automatisch verlängert und Jahr für Jahr teurer – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel."
+    score: 0.92
+
+  - id: hausrat-unterschaetzt
+    pillar: versicherungen
+    hook: "Viele unterschätzen, was Hausrat im Ernstfall wirklich kostet – oder zahlen umgekehrt für überhöhte Summen ohne Prüfung."
+    score: 0.70
+
+  - id: mietwagen-kaution-falle
+    pillar: mietwagen
+    hook: "Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten."
+    score: 0.78
+
+  - id: frugalismus-verzicht-missverstanden
+    pillar: frugalismus
+    hook: "Frugalismus wird oft als reiner Verzicht missverstanden – dabei geht es um bewussten Konsum, nicht um Askese."
+    score: 0.72
