@@ -81,6 +81,7 @@ import os
 import re
 import shutil
 import sys
+import time
 from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -1685,6 +1686,22 @@ def main(argv=None) -> int:
                     help="Stimmen-Profil — alle ausschließlich Deutsch (Standard: news)")
     ap.add_argument("--order", default="newest", choices=["newest", "oldest", "path"])
     ap.add_argument("--limit-new", type=int, default=0)
+    # ZEITBUDGET (Reparatur Issue #218, 08.09.2026)
+    # ------------------------------------------------------------------
+    # Die Neuvertonung ist der mit ABSTAND teuerste Schritt des Deploys:
+    # gemessen 63 min (Run 34129128450) bzw. 151 min (Run 34121113112),
+    # während der komplette Rest (Checkout, alle Gates, Hugo-Build,
+    # gh-pages-Push) zusammen nur ~90 s braucht. Ein reiner Stück-Zaehler
+    # (--limit-new) kann das NICHT begrenzen, weil die Dauer je Artikel
+    # stark schwankt (Laenge, Netz, Backend-Retries). --max-seconds ist
+    # die fehlende Wanduhr-Grenze: Sie deckelt AUSSCHLIESSLICH die neue
+    # Synthese. Bereits fertige Spuren bleiben erhalten, der Rest wird im
+    # naechsten Lauf aus dem Cache weitergefuehrt (konvergent).
+    # 0 = unbegrenzt (bewusster Backfill-Lauf).
+    ap.add_argument("--max-seconds", type=int, default=0,
+                    help="Wanduhr-Budget fuer NEUE Vertonungen in Sekunden "
+                         "(0 = unbegrenzt). Cache-Wiederverwendung laeuft "
+                         "immer vollstaendig weiter.")
     ap.add_argument("--only", default="")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
@@ -1753,6 +1770,16 @@ def main(argv=None) -> int:
     produced = 0
     reused = 0
     failed = 0
+    # Zurueckgestellte Artikel (Budget/Limit erschoepft) – siehe unten:
+    # sie werden NICHT abgebrochen, sondern nur von der teuren Synthese
+    # ausgenommen, damit ihre Cache-Spuren weiterhin eingebunden werden.
+    deferred = 0
+    deadline = (time.monotonic() + args.max_seconds) if args.max_seconds > 0 else None
+    limit_noted = False
+    budget_noted = False
+    if deadline is not None:
+        print("Zeitbudget fuer neue Vertonungen: %d s (danach nur noch Cache-Wiederverwendung)."
+              % args.max_seconds)
 
     for slug, path, markup in articles:
         root = parse_html(markup)
@@ -1829,9 +1856,30 @@ def main(argv=None) -> int:
                     print("  ⚠ Cache-Spur %s verworfen (%s) — wird neu vertont" % (slug, why))
                     strip_track_config(path)
 
+        # ---- STUECK- UND ZEITGRENZE (Reparatur Issue #218) ----------------
+        # WICHTIG: hier wird bewusst `continue` statt des frueheren `break`
+        # verwendet. Der Abbruch mit `break` verliess die Schleife komplett –
+        # dadurch bekamen ALLE nachfolgenden Artikel ihren Tonspur-Block
+        # nicht mehr in die frisch gebaute Seite injiziert und verloren ihr
+        # Audio im Livegang, OBWOHL eine gueltige Spur im Cache lag. Mit
+        # `continue` laeuft die guenstige Cache-Wiederverwendung fuer den
+        # gesamten Rest der Warteschlange weiter; gedeckelt wird nur die
+        # teure Neusynthese.
         if args.limit_new and produced >= args.limit_new:
-            print("Limit erreicht (--limit-new %d) – Rest beim nächsten Lauf." % args.limit_new)
-            break
+            if not limit_noted:
+                print("Limit erreicht (--limit-new %d) – Rest beim nächsten Lauf "
+                      "(Cache-Spuren werden weiterhin eingebunden)." % args.limit_new)
+                limit_noted = True
+            deferred += 1
+            continue
+
+        if deadline is not None and time.monotonic() >= deadline:
+            if not budget_noted:
+                print("Zeitbudget erschoepft (--max-seconds %d) – Rest beim nächsten Lauf "
+                      "(Cache-Spuren werden weiterhin eingebunden)." % args.max_seconds)
+                budget_noted = True
+            deferred += 1
+            continue
 
         if args.dry_run:
             print("Würde vertonen: %s (%d Blöcke, %d Zeichen)"
@@ -1931,8 +1979,11 @@ def main(argv=None) -> int:
               % (slug, duration_ms / 1000.0, len(blocks),
                  final_stats.get("peak", 0), final_stats.get("audible_ratio", 0) * 100.0))
 
-    print("FF-VOICE-AUDIO – neu: %d, wiederverwendet: %d, fehlgeschlagen: %d"
-          % (produced, reused, failed))
+    print("FF-VOICE-AUDIO – neu: %d, wiederverwendet: %d, fehlgeschlagen: %d, zurückgestellt: %d"
+          % (produced, reused, failed, deferred))
+    if deferred:
+        print("Hinweis: %d Artikel warten auf Vertonung (Stück-/Zeitgrenze). "
+              "Der nächste Lauf setzt genau dort fort – kein Verlust." % deferred)
     return 0
 
 
@@ -2409,6 +2460,68 @@ def selftest() -> int:
         inject_track_config(page, {"src": "/audio/articles/gute-spur.wav",
                                    "duration": int(secs * 1000), "chunks": chunks_g})
         check("Endkontrolle lässt gesunde Spur durch", verify_tracks(html_dir, out_dir) == 0)
+
+    # ------------------------------------------------------------------
+    # ZEITBUDGET + WARTESCHLANGEN-TREUE (Reparatur Issue #218, 08.09.2026)
+    #
+    # Regression, die dieser Block dauerhaft ausschliesst: Die Stueckgrenze
+    # brach die Schleife frueher mit `break` ab. Damit verloren ALLE
+    # nachfolgenden Artikel ihren Tonspur-Block in der frisch gebauten
+    # Seite – auch die, deren fertige Spur laengst im Cache lag. Aus einer
+    # reinen Drossel wurde so ein stiller Audio-Verlust im Livegang.
+    # Erwartet: gedrosselt wird nur die teure NEUsynthese, die Schleife
+    # laeuft ueber die gesamte Warteschlange.
+    # ------------------------------------------------------------------
+    import contextlib as _ctx
+    import io as _io
+
+    with _tf2.TemporaryDirectory() as td:
+        html_dir = os.path.join(td, "public")
+        out_dir = os.path.join(html_dir, "audio", "articles")
+        os.makedirs(out_dir, exist_ok=True)
+        for slug in ("artikel-eins", "artikel-zwei", "artikel-drei"):
+            page_dir = os.path.join(html_dir, "posts", slug)
+            os.makedirs(page_dir, exist_ok=True)
+            with open(os.path.join(page_dir, "index.html"), "w", encoding="utf-8") as fh:
+                fh.write(FIXTURE)
+
+        # Hermetisch: kein echtes TTS-Backend noetig, kein Netzzugriff.
+        _orig_pick = globals()["pick_engine"]
+        globals()["pick_engine"] = lambda _b: "edge"
+        try:
+            buf = _io.StringIO()
+            with _ctx.redirect_stdout(buf):
+                rc_limit = main(["--html-dir", html_dir, "--out-dir", out_dir,
+                                 "--dry-run", "--order", "path", "--limit-new", "1"])
+            out_limit = buf.getvalue()
+
+            buf2 = _io.StringIO()
+            with _ctx.redirect_stdout(buf2):
+                rc_free = main(["--html-dir", html_dir, "--out-dir", out_dir,
+                                "--dry-run", "--order", "path"])
+            out_free = buf2.getvalue()
+
+            buf3 = _io.StringIO()
+            with _ctx.redirect_stdout(buf3):
+                rc_budget = main(["--html-dir", html_dir, "--out-dir", out_dir,
+                                  "--dry-run", "--order", "path", "--max-seconds", "600"])
+            out_budget = buf3.getvalue()
+        finally:
+            globals()["pick_engine"] = _orig_pick
+
+        check("Drossel: Lauf bleibt erfolgreich", rc_limit == 0)
+        check("Drossel: genau 1 Artikel neu vertont", "neu: 1," in out_limit)
+        check("Drossel: Warteschlange wird NICHT abgebrochen (Issue #218)",
+              "zurückgestellt: 2" in out_limit)
+        check("Drossel: Rest wird als wartend gemeldet, nicht verschwiegen",
+              "warten auf Vertonung" in out_limit)
+        check("Ohne Grenze: alle Artikel werden bearbeitet", "neu: 3," in out_free)
+        check("Ohne Grenze: nichts zurückgestellt", "zurückgestellt: 0" in out_free)
+        check("Zeitbudget: Option wird angenommen", rc_budget == 0)
+        check("Zeitbudget: Budget wird protokolliert",
+              "Zeitbudget fuer neue Vertonungen: 600 s" in out_budget)
+        check("Zeitbudget: grosszuegiges Budget drosselt nicht",
+              "neu: 3," in out_budget and "zurückgestellt: 0" in out_budget)
 
     failed = [n for n, ok in results if not ok]
     for name, ok in results:
