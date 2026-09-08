@@ -1021,6 +1021,11 @@ def main(argv=None):
         if only not in SECRETS:
             print(f"❌ Unbekanntes Secret '{only}'")
             return 1
+        # #219 (08.09.2026): Drei Workflows riefen `--verify-only X` OHNE
+        # `--verify` auf – und es lief nie eine Probe. Der Pinterest-Nachweis
+        # blieb monatelang „unverified". `--verify-only` heißt ab jetzt, was es
+        # sagt: genau dieses eine Secret LIVE prüfen.
+        live = True
     verification = None
     if live:
         targets = [only] if only else [v for v in SECRETS if (SECRETS[v].get("probe"))]

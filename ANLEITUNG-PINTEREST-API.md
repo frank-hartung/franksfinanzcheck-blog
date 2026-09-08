@@ -41,10 +41,13 @@ Gehe auf **https://developers.pinterest.com/** → **„My apps"** → **„Conn
 
 Dann **„Submit"** klicken.
 
-**Scopes (Premium, Stand 27.08.2026):** Unter „Requested scopes" mindestens ankreuzen:
+**Scopes (Stand 08.09.2026, #219):** Unter „Requested scopes" genau diese ankreuzen:
 `boards:read`, `boards:write`, `pins:read`, `pins:write` – plus
 **`user_accounts:read`**, damit der **Profil-Audit** (Name/Bio/Website des
-Live-Profils via `/v5/user_account`) laufen kann.
+Live-Profils via `/v5/user_account`) **und die tägliche Live-Probe des Token-Brokers**
+laufen können. Pin-Analytics (`/v5/pins/{id}/analytics`) brauchen laut Pinterest-Doku
+nur `boards:read` + `pins:read` – ein `read_ads` gibt es in v5 nicht (nur `ads:read`,
+und das nur für Werbekonten).
 ⚠️ Wichtig: In der Pinterest-API **v5 gibt es den Scope `profile:read` nicht**
 (der hieße früher so und führt zu leeren Audit-Ergebnissen) – es muss
 `user_accounts:read` sein. Hinweis: Die Domain-Notbremse blockt Postings,
@@ -67,32 +70,36 @@ Pinterest prüft jede App **manuell** – die Freigabe („Trial access") kann *
 
 ### 2b. Redirect-URI in der App hinterlegen
 Pinterest-Dashboard → **My apps → deine App →** Redirect URI:
-**`https://franksfinanzcheck.de/pinterest-oauth`** eintragen und speichern.
-(Die Seite muss nicht existieren – der Browser landet nach dem Erlauben auf
-einer 404-Seite, der Code steht trotzdem in der Adresszeile.)
+**`https://franksfinanzcheck.de/pinterest-oauth`** eintragen und speichern
+(exakt so, ohne Slash am Ende). Seit 08.09.2026 ist das eine echte Seite: Sie
+zeigt nach dem Erlauben den Code groß an, mit Kopier-Knopf und Link zum Workflow.
 
-### 2c. Autorisierung durchführen (mit Assistenz oder lokal)
+### 2c. Autorisierung durchführen – **empfohlen: komplett in GitHub Actions**
+1. *Actions* → **Pinterest-Token-Wache** → *Run workflow* → Haken bei `show_auth_url`.
+   Die Zusammenfassung zeigt den anklickbaren Autorisierungs-Link.
+2. Link öffnen → **Erlauben** → Code von der Landeseite kopieren.
+3. *Actions* → **Pinterest-Token-Wache** → *Run workflow* → Code (oder die ganze
+   Adresszeile) in `auth_code` → *Run*. Der Code gilt nur Minuten und genau einmal.
+4. Der Lauf tauscht, verschlüsselt, prüft live, committet und schließt das Issue.
+
+Alternativ lokal:
 ```bash
-# 1. URL erzeugen und im Browser öffnen (mit Pinterest eingeloggt):
-PINTEREST_APP_ID=<deine-app-id> python3 scripts/pinterest_auth.py --auth-url
-
-# 2. Nach „Erlauben" den ?code=... aus der Adresszeile kopieren und austauschen:
-PINTEREST_APP_ID=<id> PINTEREST_APP_SECRET=<secret> \
-PINTEREST_TOKEN_KEY=<schluessel> \
-python3 scripts/pinterest_auth.py --exchange <CODE>
-
-# 3. Verschlüsselte Tokens ins Repo (sicher, auch bei öffentlichem Repo):
-git add data/pinterest_tokens.enc && git commit -m "chore: Pinterest-Tokens (verschlüsselt)" && git push
-
-# 4. Jederzeit prüfbar:
-PINTEREST_TOKEN_KEY=<schluessel> python3 scripts/pinterest_auth.py --status
+export PINTEREST_APP_ID=<id> PINTEREST_APP_SECRET=<secret> PINTEREST_TOKEN_KEY=<schluessel>
+python3 scripts/pinterest_auth.py --auth-url                    # URL öffnen, erlauben
+python3 scripts/pinterest_auth.py --exchange "<Code oder komplette URL>"
+PINTEREST_TOKEN_WACHE=1 python3 scripts/pinterest_token.py --refresh
+git add data/pinterest_tokens.enc data/pinterest_token_state.json \
+  && git commit -m "chore(pinterest): Zugang autorisiert (verschlüsselt)" && git push
+python3 scripts/pinterest_auth.py --status                      # jederzeit prüfbar
 ```
 
-> ℹ️ **Ab jetzt vollautomatisch:** Jeder Bot-Lauf ruft den Refresh-Endpunkt auf,
-> bekommt frische Tokens (Access 30 Tage, Refresh-Token wird neu ausgestellt) und
-> committet die erneuerte `data/pinterest_tokens.enc`. Solange der Workflow nicht
-> länger als 60 Tage pausiert, ist nie wieder Handarbeit nötig.
-> Das klassische Secret `PINTEREST_ACCESS_TOKEN` bleibt als Fallback weiter nutzbar.
+> ℹ️ **Ab jetzt vollautomatisch:** Die tägliche **Pinterest-Token-Wache** (04:40 MESZ)
+> erneuert proaktiv, bekommt frische Tokens (Access 30 Tage, Refresh-Token wird neu
+> ausgestellt) und committet die erneuerte `data/pinterest_tokens.enc`. Alle anderen
+> Läufe reparieren nur bei einem echten 401 (kein Rotations-Wettlauf). Solange die
+> Wache nicht länger als 60 Tage pausiert, ist nie wieder Handarbeit nötig.
+> Das klassische Secret `PINTEREST_ACCESS_TOKEN` bleibt als Fallback nutzbar.
+> Vollständiges Runbook inkl. Fehlerdiagnose: `docs/PINTEREST-TOKEN-RUNBOOK.md`.
 
 ## Schritt 3: Boards – werden automatisch gemanagt (Premium 25.08.2026)
 
