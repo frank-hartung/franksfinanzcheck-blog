@@ -237,6 +237,27 @@ Der Blog ist barrierefrei umgesetzt und wird wöchentlich geprüft
 
 ---
 
+## 🤖 KI-Redaktion (seit 08.09.2026: Claude/ChatGPT/Jasper-Schema, 0 €)
+
+Die **KI-Redaktion** bildet das Dreier-Schema „Claude für lange Artikel +
+ChatGPT für schnelle News + Jasper für SEO" mit gleichem Funktionsumfang ab –
+ausschließlich über die vorhandenen **Gratis-Zugänge** (Groq/Gemini), es
+entstehen **keinerlei Kosten** (Details und ehrliche Einordnung der
+Abo-API-Lage: `KI-REDAKTION.md`).
+
+| Slot | Rolle | Ergebnis |
+|---|---|---|
+| Mo/Mi/Fr 06:30 | „Claude" (`claude_writer.py`) + „Jasper"-SEO-Pass | Premium-Langentwurf + `KI-SEO-REPORT.md` |
+| Di/Do/So 06:30 | „ChatGPT" (`news_writer.py`) + SEO-Pass | News-Kompakt-Entwurf |
+
+Alles bleibt **Entwurf** (`draft: true`, ohne `cadence_wait`): Veröffentlicht
+wird erst nach bewusster Freigabe über
+`python3 scripts/ki_redaktion.py --promote <slug>` – dann wie gewohnt über
+den `cadence_guard` (Mo/Mi/Fr, 2–3 Artikel/Tag, alle Gates).
+Status: `python3 scripts/ki_redaktion.py --status`.
+
+---
+
 ## 🧠 Verständnis-Qualität (seit 01.09.2026, Audit-Umsetzung)
 
 Die Verständnis-Gates aus dem `TEXTVERSTAENDNIS-AUDIT-REPORT.md` sind als
