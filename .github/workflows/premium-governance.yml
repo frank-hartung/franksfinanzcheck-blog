@@ -68,7 +68,7 @@ jobs:
           for s in editorial_scorecard cwv_guard secrets_age_guard decay_radar \
                    governance_gate governance_contract readability_check \
                    umami_clicks click_attribution awin_provisions \
-                   pinterest_perf_feedback pinterest_token; do
+                   pinterest_perf_feedback pinterest_token pinterest_auth; do
             if python3 "scripts/$s.py" --selftest >/tmp/selftest-$s.log 2>&1; then
               tail -n 1 "/tmp/selftest-$s.log"
             else

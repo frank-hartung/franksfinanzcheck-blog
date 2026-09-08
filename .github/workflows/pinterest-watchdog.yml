@@ -95,7 +95,7 @@ jobs:
           PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
           PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
         run: |
-          python3 scripts/secrets_age_guard.py --verify-only PINTEREST_ACCESS_TOKEN --quiet \
+          python3 scripts/secrets_age_guard.py --verify --verify-only PINTEREST_ACCESS_TOKEN --quiet \
             || echo "::warning::Pinterest-Token nicht bestätigt (401/403 = erneuern: scripts/pinterest_auth.py --auth-url)"
 
       - name: Report committen + pushen

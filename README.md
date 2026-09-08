@@ -162,8 +162,12 @@ setzt `spam_guard.py` durch.
 - Pinterest-Developer-App → Secrets `PINTEREST_APP_ID`, `PINTEREST_APP_SECRET`,
   `PINTEREST_TOKEN_KEY` (selbst gewählte Zufallszeichenkette)
 - Autorisierung komplett in Actions: **„Pinterest-Token-Wache" → Run workflow**
-  (`show_auth_url` → Code in `auth_code`). Danach erneuert sich der Zugang
+  (`show_auth_url` → Link klicken → Erlauben → Code von `franksfinanzcheck.de/pinterest-oauth`
+  kopieren → Code oder ganze Adresszeile in `auth_code`). Danach erneuert sich der Zugang
   **täglich selbst** (continuous refresh) – kein 30-Tage-Handbetrieb mehr.
+  Härtung 08.09.2026 (#219): Live-Probe im Nachweis (`--verify`), nur die Wache rotiert
+  proaktiv, Lagebild nur aus geprüften Läufen, echte v5-Scopes, Diagnose statt „Exit 1" –
+  Regel **C13** im Governance-Vertrag. Details: `PINTEREST-TOKEN-219-REPARATUR-2026-09-08.md`
 - Board-ID (`python3 scripts/pinterest_engine.py --list-boards`) → Variable `PINTEREST_BOARD_ID`
 - Lagebild jederzeit: `python3 scripts/pinterest_token.py --status`
   (Quelle, Restlaufzeiten, nächster Schritt – ohne Token-Material)

@@ -35,6 +35,10 @@ ohne Netzwerk, ohne API, determinisch. Läuft lokal, im Premium-Governance-Lauf
   C11 Token-Lebenszyklus– es gibt einen täglichen Erneuerungslauf, der den
                           rotierten Refresh-Token sichert und sich selbst heilt
                           (ein 30-Tage-Secret von Hand ist kein Betrieb)
+  C13 Nachweis-Echtheit – ein Pinterest-Nachweis läuft immer mit Live-Probe
+                          (`--verify`), nur die Token-Wache rotiert proaktiv
+                          (PINTEREST_TOKEN_WACHE=1), und die Autorisierung
+                          fordert die echten v5-Scopes (#219)
   C12 Label-Garantie    – jeder Workflow, der ein Issue mit Label erzeugt, legt
                           das Label vorher an; sonst scheitert der Melder am
                           Melden (Ursache des roten Laufs in #209)
@@ -64,7 +68,7 @@ WORKFLOWS_DIR = os.path.join(BLOG_DIR, ".github", "workflows")
 GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "decay_radar.py", "governance_gate.py", "readability_check.py",
           "umami_clicks.py", "click_attribution.py", "awin_provisions.py",
-          "pinterest_perf_feedback.py", "pinterest_token.py"]
+          "pinterest_perf_feedback.py", "pinterest_token.py", "pinterest_auth.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
@@ -418,6 +422,52 @@ def c12_label_guarantee(workflow_texts):
     return out
 
 
+def c13_proof_integrity(workflow_texts, auth_text=""):
+    """C13: Ein Nachweis ohne Probe ist eine Behauptung (#219, 08.09.2026).
+
+    Drei Workflows riefen `secrets_age_guard.py --verify-only PINTEREST_ACCESS_TOKEN`
+    OHNE `--verify` auf – es lief nie eine Live-Probe, und das Lagebild stand
+    monatelang auf `unverified`. Dazu: Nur die Token-Wache darf den Refresh-
+    Token proaktiv rotieren (sonst Kollision), und die Autorisierungs-URL muss
+    die echten v5-Scopes anfordern (`read_ads` gibt es nicht; ohne
+    `user_accounts:read` antwortet die Broker-Probe /v5/user_account mit 403).
+    """
+    out = []
+    for path, raw in sorted(workflow_texts.items()):
+        rel = os.path.basename(path)
+        text = "\n".join(l for l in raw.splitlines() if not l.lstrip().startswith("#"))
+        text = re.sub(r"\\\s*\n\s*", " ", text)
+        for m in re.finditer(r"secrets_age_guard\.py([^\n]*)--verify-only\s+PINTEREST_ACCESS_TOKEN", text):
+            if not re.search(r"(^|\s)--verify(\s|$)", m.group(1) + " "):
+                out.append(("C13", f"{rel}: prüft den Pinterest-Nachweis mit `--verify-only`, "
+                                   "aber ohne `--verify` – es läuft keine Live-Probe, die Wache "
+                                   "bleibt `unverified` (#219)."))
+        if rel == TOKEN_WORKFLOW and "PINTEREST_TOKEN_WACHE" not in text:
+            out.append(("C13", f"{rel}: setzt `PINTEREST_TOKEN_WACHE` nicht – der Broker rotiert "
+                               "dann nie proaktiv, der Access-Token stirbt am 30. Tag."))
+        if rel != TOKEN_WORKFLOW and re.search(r"PINTEREST_TOKEN_WACHE:\s*[\"']?(1|true|yes|ja)", text):
+            out.append(("C13", f"{rel}: gibt sich als Token-Wache aus – zwei Rotierer entwerten "
+                               "sich gegenseitig den Refresh-Token."))
+    if auth_text:
+        m = re.search(r"^DEFAULT_SCOPES\s*=\s*[\"']([^\"']+)[\"']", auth_text, re.M)
+        scopes = set(m.group(1).replace(" ", ",").split(",")) if m else set()
+        if not m:
+            out.append(("C13", "scripts/pinterest_auth.py: keine `DEFAULT_SCOPES` – die "
+                               "Autorisierungs-URL ist nicht prüfbar."))
+        else:
+            bad = [sc for sc in scopes if not re.fullmatch(r"[a-z_]+:(read|write)(_secret)?", sc)]
+            if bad:
+                out.append(("C13", "scripts/pinterest_auth.py: ungültige v5-Scopes "
+                                   f"{sorted(bad)} – Pinterest bricht die Autorisierung ab."))
+            for need in ("pins:write", "boards:read", "user_accounts:read"):
+                if need not in scopes:
+                    out.append(("C13", f"scripts/pinterest_auth.py: Scope `{need}` fehlt – "
+                                       + ("die Broker-Probe /v5/user_account liefert 403."
+                                          if need == "user_accounts:read"
+                                          else "ohne ihn kann der Bot nicht pinnen.")))
+    return out
+
+
 def c9_secret_leak(texts):
     out = []
     for name, text in texts.items():
@@ -483,6 +533,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c10_token_broker(script_texts)
     checks += c11_token_lifecycle(wflows, root=root)
     checks += c12_label_guarantee(wflows)
+    checks += c13_proof_integrity(wflows, auth_text=script_texts.get("pinterest_auth.py", ""))
     return checks
 
 
@@ -516,12 +567,17 @@ RULE_TEXT = {
     "C12": "Jeder Workflow, der Issues mit Label erzeugt, legt das Label vorher an – "
            "sonst scheitert die Meldung mit HTTP 422 und der Melder wird selbst zum "
            "Zwischenfall (#209).",
+    "C13": "Ein Pinterest-Nachweis läuft immer mit Live-Probe (`--verify`), nur die "
+           "Token-Wache rotiert den Refresh-Token proaktiv, und die Autorisierung "
+           "fordert die echten v5-Scopes – sonst steht `unverified` im Cockpit, während "
+           "niemand gemessen hat (#219).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C4": "Issue-Policy", "C5": "Nachweis-Provenienz", "C6": "Selbsttests",
          "C7": "Datenkonsistenz", "C8": "Commit-Hygiene", "C9": "Secret-Leak-Schutz",
-         "C10": "Token-Broker", "C11": "Token-Lebenszyklus", "C12": "Label-Garantie"}
+         "C10": "Token-Broker", "C11": "Token-Lebenszyklus", "C12": "Label-Garantie",
+         "C13": "Nachweis-Echtheit"}
 
 
 def render_md(checks, ok_notes=()):
@@ -717,18 +773,43 @@ def _selftest():
     kommentar = {"x.yml": "# Beispiel: gh issue create --label demo\njobs: {}\n"}
     if c12_label_guarantee(kommentar):
         failures.append("C12: Beispiel im Kommentar wird als echter Melder gezählt")
+    # --- C13: Nachweis ohne Live-Probe (Ursache #219)
+    no_probe = {".github/workflows/x.yml":
+                "run: |\n  python3 scripts/secrets_age_guard.py --verify-only PINTEREST_ACCESS_TOKEN --quiet\n"}
+    if not any(code == "C13" for code, _ in c13_proof_integrity(no_probe)):
+        failures.append("C13: `--verify-only` ohne `--verify` bleibt unentdeckt (#219)")
+    with_probe = {".github/workflows/x.yml":
+                  "run: |\n  python3 scripts/secrets_age_guard.py --verify --verify-only PINTEREST_ACCESS_TOKEN \\\n    --quiet\n"}
+    if c13_proof_integrity(with_probe):
+        failures.append(f"C13: echter Nachweis wird beanstandet: {c13_proof_integrity(with_probe)}")
+    fake_wache = {".github/workflows/pinterest-ai.yml": "env:\n  PINTEREST_TOKEN_WACHE: \"1\"\n"}
+    if not c13_proof_integrity(fake_wache):
+        failures.append("C13: zweiter Rotierer bleibt unentdeckt")
+    no_flag = {f".github/workflows/{TOKEN_WORKFLOW}": "env:\n  X: y\n"}
+    if not c13_proof_integrity(no_flag):
+        failures.append("C13: Token-Wache ohne Wache-Flag bleibt unentdeckt")
+    good_flag = {f".github/workflows/{TOKEN_WORKFLOW}": "env:\n  PINTEREST_TOKEN_WACHE: \"1\"\n"}
+    if c13_proof_integrity(good_flag):
+        failures.append("C13: korrekt markierte Token-Wache wird beanstandet")
+    bad_scope = 'DEFAULT_SCOPES = "boards:read,pins:write,read_ads"\n'
+    if not any("read_ads" in msg or "user_accounts" in msg
+               for _, msg in c13_proof_integrity({}, auth_text=bad_scope)):
+        failures.append("C13: ungültiger Scope `read_ads` / fehlender Profil-Scope bleibt unentdeckt")
+    good_scope = 'DEFAULT_SCOPES = "boards:read,boards:write,pins:read,pins:write,user_accounts:read"\n'
+    if c13_proof_integrity({}, auth_text=good_scope):
+        failures.append("C13: korrekte v5-Scopes werden beanstandet")
     # --- LABEL/Regeltext-Deckung: jede Regel ist erklärt (Doku gehört zum Vertrag)
     for code in LABEL:
         if code not in RULE_TEXT or len(RULE_TEXT[code]) < 40:
             failures.append(f"{code} ohne richtigen Regeltext")
-    if "C1" not in LABEL or "C12" not in LABEL:
+    if "C1" not in LABEL or "C13" not in LABEL:
         failures.append("Regel-Codes nicht vollständig gelabelt")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C12 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C13 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 
@@ -749,7 +830,7 @@ def main(argv=None):
             if annotate:
                 print(f"::error::{line}")
     else:
-        print("🔒 GOVERNANCE-VERTRAG erfüllt – alle zwölf Regeln prüfen in beide "
+        print("🔒 GOVERNANCE-VERTRAG erfüllt – alle dreizehn Regeln prüfen in beide "
               "Richtungen (Fehler UND Schein-Sicherheit).")
     if "--md" in argv:
         target = argv[argv.index("--md") + 1]

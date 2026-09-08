@@ -98,7 +98,20 @@ API = "https://api.pinterest.com/v5"
 # die einen nicht existierenden Endpunkt befragt, misst nicht den Kanal,
 # sondern sich selbst (vgl. #206).
 PROBE_PATH = "/user_account"
+# Fallback, wenn /user_account mit 403 antwortet: Der Token lebt dann meist,
+# ihm fehlt nur der Scope `user_accounts:read` (Altbestand vor 08.09.2026).
+# Ein lebender Token ohne Profil-Scope darf nicht als „tot" gelten – sonst
+# rotiert der Broker sinnlos und meldet ROT für einen funktionierenden Kanal.
+PROBE_FALLBACK_PATH = "/boards?page_size=1"
 PROBE_TIMEOUT = 20
+
+# Wer darf den Refresh-Token PROAKTIV rotieren? Nur die Token-Wache
+# (pinterest-token.yml setzt PINTEREST_TOKEN_WACHE=1) und lokale Aufrufe mit
+# --refresh. Alle anderen Prozesse (Pinterest-AI, Watchdog, Governance …)
+# erneuern nur nach einem echten 401 (Failover). Grund (#219, 08.09.2026):
+# Zwei Runner, die denselben Refresh-Token gleichzeitig rotieren, entwerten
+# sich gegenseitig – der Verlierer committet einen toten Speicher.
+WACHE_ENV = "PINTEREST_TOKEN_WACHE"
 
 # Access-Token: 30 Tage. Wir erneuern deutlich früher – ein Lauf darf ruhig
 # einmal ausfallen, ohne dass der Kanal stirbt.
@@ -198,24 +211,47 @@ def _unlock(fh):
 # ersetzt sie durch eingefrorene Attrappen – dadurch ist die gesamte Logik
 # offline, deterministisch und ohne echte Secrets prüfbar.
 
-def _default_probe(token):
-    """→ ('live'|'dead'|'unreachable', Detailtext). Nie Secret-Material."""
+def _http_get(path, token):
+    """→ (status|None, fehlertext|None) – nie Secret-Material."""
     req = urllib.request.Request(
-        API + PROBE_PATH,
+        API + path,
         headers={"Authorization": f"Bearer {token}",
-                 "User-Agent": "franksfin-pinterest-token/1.0"})
+                 "User-Agent": "franksfin-pinterest-token/1.1"})
     try:
         with urllib.request.urlopen(req, timeout=PROBE_TIMEOUT) as resp:
             resp.read(512)
-            return "live", f"GET /v5{PROBE_PATH} {getattr(resp, 'status', 200)}"
+            return getattr(resp, "status", 200), None
     except urllib.error.HTTPError as exc:
-        if exc.code in (401, 403):
-            return "dead", f"Pinterest lehnt den Token ab (HTTP {exc.code})"
-        if exc.code == 429:
-            return "unreachable", "Pinterest-Rate-Limit (HTTP 429)"
-        return "unreachable", f"Pinterest antwortet HTTP {exc.code}"
+        return exc.code, f"HTTP {exc.code}"
     except (urllib.error.URLError, TimeoutError, OSError) as exc:
-        return "unreachable", f"Netzwerkfehler ({exc.__class__.__name__})"
+        return None, f"Netzwerkfehler ({exc.__class__.__name__})"
+
+
+def _default_probe(token):
+    """→ ('live'|'dead'|'unreachable', Detailtext). Nie Secret-Material.
+
+    /v5/user_account verlangt den Scope `user_accounts:read`. Fehlt er (Token
+    aus der Zeit vor 08.09.2026), antwortet Pinterest 403, obwohl der Token
+    für Boards/Pins völlig in Ordnung ist. Deshalb Gegenprobe auf /v5/boards.
+    """
+    code, err = _http_get(PROBE_PATH, token)
+    if code == 200:
+        return "live", f"GET /v5{PROBE_PATH} 200"
+    if code == 403:
+        code2, _ = _http_get(PROBE_FALLBACK_PATH, token)
+        if code2 == 200:
+            return "live", ("GET /v5/boards 200 – Token lebt, aber ohne Scope "
+                            "`user_accounts:read` (Profil-Audit eingeschränkt; "
+                            "bei nächster Neu-Autorisierung automatisch dabei)")
+        if code2 in (401, 403):
+            return "dead", f"Pinterest lehnt den Token ab (HTTP {code2})"
+    if code in (401, 403):
+        return "dead", f"Pinterest lehnt den Token ab (HTTP {code})"
+    if code == 429:
+        return "unreachable", "Pinterest-Rate-Limit (HTTP 429)"
+    if code is None:
+        return "unreachable", err or "Netzwerkfehler"
+    return "unreachable", f"Pinterest antwortet HTTP {code}"
 
 
 def _default_store_load():
@@ -270,6 +306,11 @@ def _hook(hooks, name):
     return (hooks or {}).get(name) or HOOKS[name]
 
 
+def _is_wache(env):
+    """Läuft dieser Prozess als Token-Wache (darf proaktiv rotieren)?"""
+    return str(env(WACHE_ENV) or "").strip().lower() in ("1", "true", "yes", "ja")
+
+
 # ------------------------------------------------------------------- Auflösung
 
 def _store_credentials(store, hooks):
@@ -303,12 +344,35 @@ def _refresh_store(store, hooks, now):
             new["refresh_token"] = resp["refresh_token"]
             new["refresh_rotated_at"] = now.isoformat()
         new["refreshed_at"] = now.isoformat()
+        _absorb_oauth_meta(new, resp)
         if not new["access_token"]:
             return None, "Pinterest lieferte keinen Access-Token zurück"
         _hook(hooks, "store_save")(new)
         return new, "Access-Token erneuert (continuous refresh)"
     finally:
         _unlock(lock)
+
+
+def _absorb_oauth_meta(store, resp):
+    """Scope + Ablaufdaten aus der OAuth-Antwort merken (kein Token-Material).
+
+    Pinterest liefert `scope`, `expires_in` (Access, 30 d) und
+    `refresh_token_expires_at` (Unix-Zeit der Zwangs-Rotation). Damit rechnet
+    das Lagebild mit Pinterests Uhr statt mit unserer Annahme.
+    """
+    if resp.get("scope"):
+        store["scope"] = str(resp["scope"])
+    try:
+        if resp.get("refresh_token_expires_at"):
+            store["refresh_expires_at"] = datetime.datetime.fromtimestamp(
+                int(resp["refresh_token_expires_at"]), datetime.timezone.utc).isoformat()
+        elif resp.get("refresh_token_expires_in"):
+            store["refresh_expires_at"] = (
+                _now() + datetime.timedelta(seconds=int(resp["refresh_token_expires_in"]))
+            ).isoformat()
+    except (TypeError, ValueError, OverflowError, OSError):
+        pass
+    return store
 
 
 def _bootstrap_from_env(hooks, now):
@@ -332,8 +396,10 @@ def _bootstrap_from_env(hooks, now):
         "access_token": resp.get("access_token") or "",
         "refresh_token": resp.get("refresh_token") or refresh_token,
         "refreshed_at": now.isoformat(),
+        "refresh_rotated_at": now.isoformat() if resp.get("refresh_token") else None,
         "bootstrapped_from": "env",
     }
+    _absorb_oauth_meta(data, resp)
     if not data["access_token"]:
         return None, "Pinterest lieferte keinen Access-Token zurück"
     if env("PINTEREST_TOKEN_KEY"):
@@ -366,7 +432,10 @@ def resolve(verify=True, allow_refresh=True, force_refresh=False,
     # ---------------------------------------------------------------- 1) Speicher
     if store:
         stale = store_age is None or store_age >= REFRESH_AFTER_DAYS
-        if allow_refresh and (force_refresh or stale):
+        # Proaktiv rotiert nur die Token-Wache (oder ein expliziter --refresh).
+        # Alle anderen dürfen NUR nach 401 erneuern – sonst Rotations-Kollision.
+        proactive_ok = force_refresh or _is_wache(env)
+        if allow_refresh and proactive_ok and (force_refresh or stale):
             new, why = _refresh_store(store, hooks, now)
             attempts.append({"source": "store", "action": "refresh",
                              "result": "ok" if new else "failed", "detail": why})
@@ -449,6 +518,9 @@ def resolve(verify=True, allow_refresh=True, force_refresh=False,
 
     health = {
         "checked_at": now.isoformat(timespec="seconds"),
+        "verified": bool(verify),
+        "written_by": (env("GITHUB_WORKFLOW") or "lokal").strip()[:60],
+        "scopes": (store or {}).get("scope") or "",
         "state": state,
         "source": source,
         "source_label": SOURCE_LABELS.get(source or "", "keine"),
@@ -459,8 +531,8 @@ def resolve(verify=True, allow_refresh=True, force_refresh=False,
         "store_present": bool(store),
         "access_age_days": store_age,
         "refresh_age_days": rotate_age,
-        "refresh_days_left": (None if rotate_age is None
-                              else max(0, REFRESH_TTL_DAYS - rotate_age)),
+        "refresh_days_left": _refresh_days_left(store, rotate_age, now),
+        "refresh_expires_at": (store or {}).get("refresh_expires_at") or None,
         "attempts": attempts,
         "runbook": RUNBOOK,
         "token": token,
@@ -468,6 +540,22 @@ def resolve(verify=True, allow_refresh=True, force_refresh=False,
     health["next_action"] = _next_action(health)
     health["severity"] = _severity(health)
     return health
+
+
+def _refresh_days_left(store, rotate_age, now):
+    """Restlaufzeit des Refresh-Tokens – nach Pinterests Uhr, wenn bekannt.
+
+    Pinterest liefert `refresh_token_expires_at` in jeder Erneuerungsantwort.
+    Liegt das vor, zählt es; sonst die eigene Rechnung (60 d ab Rotation).
+    """
+    exp = _parse_ts((store or {}).get("refresh_expires_at"))
+    if exp is not None:
+        if exp.tzinfo is None:
+            exp = exp.replace(tzinfo=datetime.timezone.utc)
+        return max(0, int((exp - now).total_seconds() // 86400))
+    if rotate_age is None:
+        return None
+    return max(0, REFRESH_TTL_DAYS - rotate_age)
 
 
 def _next_action(h):
@@ -511,11 +599,30 @@ def _severity(h):
 
 # ------------------------------------------------------------------- Zustand
 
-def save_state(health):
-    """Schreibt das Lagebild – ohne Token, atomar, tolerant."""
+def _may_persist(health, exists):
+    """Darf dieses Lagebild die Datei überschreiben?
+
+    Befund #219 (08.09.2026): JEDER Prozess schrieb die Datei – auch der
+    Deploy-Lauf ohne ein einziges Secret (→ `absent/red`) und der Nachweis-
+    Schritt ohne Live-Probe (→ `unverified/amber`). Das Cockpit zeigte damit
+    den Stand des am schlechtesten informierten Prozesses, nicht die Wahrheit.
+    Regel: Nur ein LIVE geprüftes Lagebild darf schreiben – und „nichts
+    konfiguriert" überschreibt niemals einen vorhandenen Befund.
+    """
+    if not health.get("verified"):
+        return False
+    if health.get("state") == "absent" and exists:
+        return False
+    return True
+
+
+def save_state(health, force=False):
+    """Schreibt das Lagebild – ohne Token, atomar, tolerant, nur wenn beglaubigt."""
     public = {k: v for k, v in health.items() if k != "token"}
     public["attempts"] = [
         {k: v for k, v in a.items()} for a in health.get("attempts", [])]
+    if not force and not _may_persist(health, os.path.exists(STATE_FILE)):
+        return public
     try:
         os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
         tmp = f"{STATE_FILE}.tmp-{os.getpid()}"
@@ -581,8 +688,12 @@ def describe(h):
     if h.get("refresh_days_left") is not None:
         lines.append(f"   Refresh-Token: noch {h['refresh_days_left']}d bis zur "
                      f"Zwangs-Rotation")
+    if h.get("scopes"):
+        lines.append(f"   Scopes: {h['scopes']}")
     if h.get("fingerprint"):
         lines.append(f"   Fingerabdruck: {h['fingerprint']} (kein Token-Material)")
+    lines.append(f"   Live geprüft: {'ja' if h.get('verified') else 'nein (Bestand)'}"
+                 f" · Lagebild von: {h.get('written_by') or '?'}")
     lines.append(f"   Nächster Schritt: {h.get('next_action')}")
     return "\n".join(lines)
 
@@ -669,15 +780,88 @@ def _selftest():
         failures.append("Störung bei Pinterest wird nicht als AMBER behandelt")
 
     # --- Fall 6: proaktive Erneuerung VOR Ablauf (Alter > REFRESH_AFTER_DAYS)
+    #     … aber NUR durch die Token-Wache (#219: Rotations-Kollision).
     old = (now - datetime.timedelta(days=25)).isoformat()
+    old_store = {"access_token": "alt", "refresh_token": "r1", "app_id": "a",
+                 "app_secret": "s", "refreshed_at": old}
     hooks, saved = mk(probe_map={"alt": ("live", "200"), "neu": ("live", "200")},
-                      store={"access_token": "alt", "refresh_token": "r1", "app_id": "a",
-                             "app_secret": "s", "refreshed_at": old},
-                      refresh_result={"access_token": "neu", "refresh_token": "r2"})
+                      store=old_store, env={WACHE_ENV: "1"},
+                      refresh_result={"access_token": "neu", "refresh_token": "r2",
+                                      "scope": "boards:read pins:read",
+                                      "refresh_token_expires_at": 1762000000})
     h = resolve(hooks=hooks, now=now)
     if h["token"] != "neu":
-        failures.append("alter Access-Token wird nicht proaktiv erneuert "
+        failures.append("alter Access-Token wird von der Wache nicht proaktiv erneuert "
                         "(Kanal stirbt am 30. Tag)")
+    if not saved or saved[-1].get("scope") != "boards:read pins:read" \
+            or not saved[-1].get("refresh_expires_at"):
+        failures.append("Scope/Ablaufdatum aus der OAuth-Antwort werden nicht gespeichert")
+    hooks, saved = mk(probe_map={"alt": ("live", "200"), "neu": ("live", "200")},
+                      store=old_store, env={},
+                      refresh_result={"access_token": "neu", "refresh_token": "r2"})
+    h = resolve(hooks=hooks, now=now)
+    if h["token"] != "alt" or saved:
+        failures.append("Fremdprozess (kein Wache-Flag) rotiert den Refresh-Token proaktiv – "
+                        "zwei Runner würden sich gegenseitig aussperren (#219)")
+    if h["state"] != "live":
+        failures.append("lebender Alt-Token ohne Wache-Rotation gilt nicht als live")
+    # … der Failover nach 401 bleibt aber JEDEM Prozess erlaubt (Kanal darf nie stehen):
+    hooks, saved = mk(probe_map={"alt": ("dead", "401"), "neu": ("live", "200")},
+                      store=old_store, env={},
+                      refresh_result={"access_token": "neu", "refresh_token": "r2"})
+    h = resolve(hooks=hooks, now=now)
+    if h["token"] != "neu" or not saved:
+        failures.append("Failover nach 401 ohne Wache-Flag funktioniert nicht")
+    # … und --refresh (explizit) darf immer:
+    hooks, saved = mk(probe_map={"alt": ("live", "200"), "neu": ("live", "200")},
+                      store=old_store, env={},
+                      refresh_result={"access_token": "neu", "refresh_token": "r2"})
+    h = resolve(hooks=hooks, now=now, force_refresh=True)
+    if h["token"] != "neu":
+        failures.append("--refresh erzwingt keine Erneuerung")
+
+    # --- Fall 6c: Live-Probe mit 403 auf /user_account, aber 200 auf /boards
+    #     (Token ohne `user_accounts:read`) → LIVE, nicht tot.
+    calls = []
+
+    def fake_get(path, token, _calls=calls):
+        _calls.append(path)
+        if path == PROBE_PATH:
+            return 403, "HTTP 403"
+        if path == PROBE_FALLBACK_PATH:
+            return 200, None
+        return 500, "HTTP 500"
+    orig_get = globals()["_http_get"]
+    globals()["_http_get"] = fake_get
+    try:
+        kind, why = _default_probe("tok")
+        if kind != "live" or "user_accounts:read" not in why:
+            failures.append("Token ohne Profil-Scope (403) wird als tot behandelt – "
+                            "Broker würde einen lebenden Kanal rot melden und sinnlos rotieren")
+        calls.clear()
+        globals()["_http_get"] = lambda path, token: (401, "HTTP 401")
+        if _default_probe("tok")[0] != "dead":
+            failures.append("401 wird nicht als tot erkannt")
+        globals()["_http_get"] = lambda path, token: (403, "HTTP 403")
+        if _default_probe("tok")[0] != "dead":
+            failures.append("403 auf beiden Endpunkten wird nicht als tot erkannt")
+        globals()["_http_get"] = lambda path, token: (None, "Netzwerkfehler (URLError)")
+        if _default_probe("tok")[0] != "unreachable":
+            failures.append("Netzwerkfehler wird nicht als unreachable erkannt")
+    finally:
+        globals()["_http_get"] = orig_get
+
+    # --- Fall 6d: Lagebild-Schreibrecht (#219 – Cockpit zeigte den dümmsten Prozess)
+    if _may_persist({"verified": False, "state": "unverified"}, exists=True):
+        failures.append("ungeprüftes Lagebild überschreibt den Live-Befund")
+    if _may_persist({"verified": True, "state": "absent"}, exists=True):
+        failures.append("Prozess ohne Secrets (absent) überschreibt einen vorhandenen Befund")
+    if not _may_persist({"verified": True, "state": "absent"}, exists=False):
+        failures.append("Erstbefund `absent` wird nicht geschrieben (Datei bliebe leer)")
+    if not _may_persist({"verified": True, "state": "live"}, exists=True):
+        failures.append("live geprüfter Befund darf nicht schreiben")
+    if not _may_persist({"verified": True, "state": "dead"}, exists=True):
+        failures.append("live geprüfter Tod darf nicht schreiben (Kanaltod bliebe unsichtbar)")
 
     # --- Fall 7: Refresh-Token altert unbemerkt → Vorwarnung vor der Rotation
     stale_rot = (now - datetime.timedelta(days=REFRESH_CRITICAL_DAYS + 1)).isoformat()
@@ -723,7 +907,8 @@ def _selftest():
             print("   -", f)
         return 2
     print("✅ PINTEREST-TOKEN-SELFTEST bestanden (Failover, Bootstrap, proaktive "
-          "Erneuerung, Rotations-Vorwarnung, Störungs-Toleranz, Secret-Dichtigkeit).")
+          "Erneuerung nur durch die Wache, 403-Scope-Gegenprobe, Lagebild-Schreibrecht, "
+          "Rotations-Vorwarnung, Störungs-Toleranz, Secret-Dichtigkeit).")
     return 0
 
 
@@ -736,7 +921,9 @@ def main(argv=None):
     offline = "--offline" in argv
     h = resolve(verify=not offline, allow_refresh=not offline,
                 force_refresh="--refresh" in argv)
-    public = save_state(h)
+    # Die Token-Wache ist die einzige Instanz, deren Lagebild auch „absent"
+    # sagen darf – sie hat alle Secrets und hat live geprüft.
+    public = save_state(h, force=("--refresh" in argv and not offline))
     if "--json" in argv:
         print(json.dumps(public, ensure_ascii=False, indent=2, sort_keys=True))
     else:

@@ -1,7 +1,8 @@
 # 🔑 Runbook: Pinterest-Zugang (Token-Lebenszyklus)
 
-**Stand:** 07.09.2026 · Zuständig: `pinterest-token.yml` (täglich) ·
-Broker: `scripts/pinterest_token.py` · Wache: `scripts/secrets_age_guard.py`
+**Stand:** 08.09.2026 (Härtung #219) · Zuständig: `pinterest-token.yml` (täglich) ·
+Broker: `scripts/pinterest_token.py` · Autorisierung: `scripts/pinterest_auth.py` ·
+Wache: `scripts/secrets_age_guard.py` · Vertrag: `governance_contract.py` C10–C13
 
 Dieses Runbook beantwortet drei Fragen: Warum stand der Pinterest-Kanal
 regelmäßig still, was erledigt die Automatik jetzt allein – und was genau musst
@@ -9,7 +10,32 @@ du **einmalig** tun (5 Minuten), damit du es nie wieder tun musst.
 
 ---
 
-## 1. Warum das nötig war (Governance-Report #206)
+## 0. Schnellstart – die einmalige Neu-Autorisierung (5 Minuten)
+
+> Das ist der Weg, den Issue **#219** verlangt. Alles andere macht die Automatik.
+
+| # | Wo | Was |
+|---|---|---|
+| 1 | GitHub → *Actions* → **Pinterest-Token-Wache** → *Run workflow* | Haken bei **`show_auth_url`** → *Run*. In der Zusammenfassung des Laufs steht ein **anklickbarer Autorisierungs-Link**. |
+| 2 | Browser | Link öffnen, mit dem Pinterest-Konto von FranksFinanzcheck **Erlauben**. Du landest auf `franksfinanzcheck.de/pinterest-oauth` – die Seite zeigt den **Code groß mit Kopier-Knopf**. |
+| 3 | GitHub → *Actions* → **Pinterest-Token-Wache** → *Run workflow* | Code in **`auth_code`** einfügen (du darfst auch die **komplette Adresszeile** einfügen) → *Run*. **Zügig:** Der Code gilt nur wenige Minuten und genau einmal. |
+| 4 | – | Fertig. Der Lauf tauscht den Code, legt `data/pinterest_tokens.enc` an, prüft live, committet – und **schließt #219 von selbst**. Ab jetzt erneuert sich der Zugang täglich (continuous refresh). |
+
+**Voraussetzungen (einmalig, sonst scheitert Schritt 3):**
+
+* Secrets `PINTEREST_APP_ID`, `PINTEREST_APP_SECRET`, `PINTEREST_TOKEN_KEY` (Kap. 3, Schritt 0).
+  Fehlt eines, sagt es der Lauf in der Zusammenfassung und im Issue.
+* In der Pinterest-App (developers.pinterest.com → My apps): Redirect-URI
+  **exakt** `https://franksfinanzcheck.de/pinterest-oauth` (ohne Slash am Ende) und die
+  Scopes `boards:read`, `boards:write`, `pins:read`, `pins:write`, `user_accounts:read`.
+
+**Wenn Schritt 3 mit „HTTP 400" scheitert:** Der Code war schon verbraucht oder abgelaufen.
+Schritt 1 erneut starten, neu erlauben, den **neuen** Code sofort einfügen. Weitere
+Diagnosen (401 = App-Daten, 403 = Freigabe/Scopes) stehen im Lauf – Kap. 4.
+
+---
+
+## 1. Warum das nötig war (Governance-Report #206 → Issue #219)
 
 Pinterest gibt drei Sorten Zugangsdaten aus:
 
@@ -20,16 +46,20 @@ Pinterest gibt drei Sorten Zugangsdaten aus:
 | App-Zugangsdaten | – | dauerhaft | `PINTEREST_APP_ID` + `PINTEREST_APP_SECRET` |
 
 Der Betrieb hing bis 07.09.2026 an einem **von Hand eingefügten Access-Token**.
-Das heißt: Der Kanal war so gebaut, dass er nach spätestens 30 Tagen stirbt.
-Genau das ist passiert – und zwar mit drei Alarmen gleichzeitig:
+Das heißt: Der Kanal war so gebaut, dass er nach spätestens 30 Tagen stirbt (#206).
 
-* `#206` – Governance-Report: `PINTEREST_ACCESS_TOKEN` … 401
-* `#153` – Pinterest-AI läuft rot (Engine bricht mit HTTP 401 ab)
-* `#209` – Pinterest-Watchdog läuft rot (Folgefehler beim Melden)
+Am 07.09. kam der Token-Broker + die tägliche Wache. Am 08.09. meldete die Wache
+**#219** – und die erste Neu-Autorisierung scheiterte zweimal. Die Ursachenanalyse
+fand **sechs** Fehler, alle behoben:
 
-Dazu kam ein Messfehler, der die Sache verschleiert hat: Die Wache prüfte das
-Env-Secret, während die Engine mit einer anderen Quelle arbeitete. Ein grüner
-Report konnte einen toten Kanal bedeuten – und ein roter einen gesunden.
+| # | Befund | Wirkung | Fix |
+|---|---|---|---|
+| a | Nachweis-Schritt rief `--verify-only` **ohne** `--verify` | nie eine Live-Probe; Lagebild `unverified/amber` – ein Zustand, der weder heilt noch schließt | `--verify-only` prüft jetzt immer live; Vertrag **C13** |
+| b | **Jeder** Prozess schrieb `data/pinterest_token_state.json` – auch der Deploy ohne Secrets | Cockpit zeigte `absent/red`, obwohl ein Secret existierte | nur live geprüfte Lagebilder dürfen schreiben; „absent" überschreibt nie einen Befund |
+| c | Code-Tausch als Shell-Argument, keine URL-Erkennung, HTTP 400 ohne Erklärung | zwei rote Läufe, keine Handlungsanweisung | Code über Env, URL/`&state=` werden erkannt, Fehler → Diagnose in Lauf + Issue |
+| d | Tausch-Fehler riss den Lauf ab (kein Refresh, kein Issue-Update) | Mensch sieht nur „Exit 1" | jeder Schritt berichtet, keiner blockiert den nächsten |
+| e | Scope `read_ads` (kein v5-Scope), `user_accounts:read` fehlte | Autorisierung kann abbrechen; Broker-Probe `/v5/user_account` liefert 403 | korrekte v5-Scopes; Probe mit `/v5/boards`-Gegenprobe für Alt-Tokens |
+| f | jeder Prozess durfte proaktiv rotieren | zwei Runner entwerten sich den Refresh-Token | nur die Wache (`PINTEREST_TOKEN_WACHE=1`) rotiert proaktiv; Failover nach 401 bleibt für alle |
 
 ---
 
@@ -37,26 +67,29 @@ Report konnte einen toten Kanal bedeuten – und ein roter einen gesunden.
 
 ```
         ┌──────────────────────────── täglich 04:40 MESZ ───────────────────────────┐
-        │  pinterest-token.yml                                                      │
-        │    1. Selbsttest des Brokers (ohne grünen Test wird nichts angefasst)     │
-        │    2. Access-Token erneuern  → neuer 60-Tage-Refresh-Token (Rotation)     │
-        │    3. verschlüsselt speichern (data/pinterest_tokens.enc, AES-256-GCM)    │
-        │    4. Live-Nachweis für die Secrets-Wache                                 │
-        │    5. Issue NUR, wenn ein Mensch gebraucht wird – schließt sich selbst    │
+        │  pinterest-token.yml  (einzige Instanz mit PINTEREST_TOKEN_WACHE=1)       │
+        │    1. Selbsttests Broker + Autorisierung (ohne Grün wird nichts angefasst)│
+        │    2. [optional] Code → Token-Speicher (nur bei auth_code)                │
+        │    3. Access-Token erneuern → neuer 60-Tage-Refresh-Token (Rotation)      │
+        │    4. verschlüsselt speichern (data/pinterest_tokens.enc, AES-256-GCM)    │
+        │    5. LIVE-Nachweis für die Secrets-Wache (--verify)                      │
+        │    6. Issue NUR, wenn ein Mensch gebraucht wird – schließt sich selbst    │
         └───────────────────────────────────────────────────────────────────────────┘
 ```
 
 Alle Pinterest-Skripte holen ihren Token ausschließlich über den Broker
 `scripts/pinterest_token.py`. Der probiert in dieser Reihenfolge:
 
-1. **Auto-Refresh-Speicher** `data/pinterest_tokens.enc` (erneuert proaktiv ab
-   20 Tagen Alter, spätestens beim ersten 401)
+1. **Auto-Refresh-Speicher** `data/pinterest_tokens.enc` (die Wache erneuert
+   proaktiv ab 20 Tagen Alter; jeder Prozess repariert beim ersten 401)
 2. **Bootstrap aus dem Env**: `PINTEREST_REFRESH_TOKEN` + `PINTEREST_APP_ID` +
    `PINTEREST_APP_SECRET` (legt den Speicher aus 1. gleich mit an)
 3. **klassisches Secret** `PINTEREST_ACCESS_TOKEN` (Notnagel)
 
-Die erste Quelle, die live mit HTTP 200 antwortet, gewinnt. Fällt eine aus,
-übernimmt die nächste – ohne roten Lauf.
+Die erste Quelle, die live antwortet, gewinnt. Die Live-Probe fragt
+`/v5/user_account`; antwortet Pinterest 403 (Alt-Token ohne
+`user_accounts:read`), entscheidet `/v5/boards` – ein lebender Token wird nie
+als tot behandelt.
 
 **Wenn gar nichts trägt**, geht der Betrieb nicht kaputt, sondern in den
 Queue-Modus: Pins werden vorbereitet (`data/pin_queue.yaml`, `PIN-STATUS.md`),
@@ -64,7 +97,7 @@ der Lauf bleibt grün, und genau **ein** Issue erklärt, was zu tun ist.
 
 ---
 
-## 3. Einmalige Ersteinrichtung (5 Minuten)
+## 3. Einmalige Ersteinrichtung – ausführlich
 
 ### Schritt 0 – Secrets anlegen (nur beim allerersten Mal)
 
@@ -73,71 +106,65 @@ In GitHub → *Settings* → *Secrets and variables* → *Actions*:
 | Secret | Woher |
 |---|---|
 | `PINTEREST_APP_ID` | Pinterest → *Developers* → *My apps* → App-ID |
-| `PINTEREST_APP_SECRET` | dieselbe Seite → App-Secret |
-| `PINTEREST_TOKEN_KEY` | selbst ausdenken: lange Zufallszeichenkette (≥ 32 Zeichen). Damit wird der Token-Speicher verschlüsselt – ohne diesen Schlüssel ist `data/pinterest_tokens.enc` wertloser Datenmüll, auch im öffentlichen Repo. |
+| `PINTEREST_APP_SECRET` | dieselbe Seite → App-Secret (nach einem Reset gilt nur das neue) |
+| `PINTEREST_TOKEN_KEY` | selbst ausdenken: lange Zufallszeichenkette (≥ 32 Zeichen, z. B. `openssl rand -base64 48`). Damit wird der Token-Speicher verschlüsselt – ohne diesen Schlüssel ist `data/pinterest_tokens.enc` wertloser Datenmüll, auch im öffentlichen Repo. |
 
-Wichtig: In der Pinterest-App muss die Redirect-URI
-`https://franksfinanzcheck.de/pinterest-oauth` hinterlegt sein.
+In der Pinterest-App: Redirect-URI `https://franksfinanzcheck.de/pinterest-oauth`
+und die Scopes `boards:read, boards:write, pins:read, pins:write, user_accounts:read`.
+(Optional `ads:read`, falls später Ad-Analytics gewünscht – per Repo-Variable
+`PINTEREST_SCOPES` überschreibbar. Pin-Analytics brauchen laut Pinterest-Doku nur
+`boards:read` + `pins:read`.)
 
-### Schritt 1 – Autorisierungs-URL holen
-
-GitHub → *Actions* → **Pinterest-Token-Wache** → *Run workflow* →
-Haken bei `show_auth_url` → starten.
-Die URL steht anschließend in der Lauf-Zusammenfassung.
-
-### Schritt 2 – Erlauben und Code kopieren
-
-URL im Browser öffnen (mit dem Pinterest-Konto eingeloggt) → *Erlauben*.
-Du landest auf einer Fehlerseite – das ist richtig so. Aus der Adresszeile den
-Wert hinter `?code=` kopieren (bis vor `&state=`).
-
-### Schritt 3 – Code eintauschen
-
-GitHub → *Actions* → **Pinterest-Token-Wache** → *Run workflow* → Code in das
-Feld `auth_code` einfügen → starten.
-
-Der Lauf legt `data/pinterest_tokens.enc` an, committet die Datei und bestätigt
-den Zugang live. **Ab hier trägt sich der Kanal selbst** – solange der tägliche
-Lauf aktiv ist, läuft er unbegrenzt weiter.
+### Schritt 1–3 – siehe Kap. 0 (Schnellstart)
 
 ### Alternative ohne Browser-Handschlag
 
-Wer bereits einen Refresh-Token besitzt, hinterlegt ihn als Secret
+Wer bereits einen gültigen Refresh-Token besitzt, hinterlegt ihn als Secret
 `PINTEREST_REFRESH_TOKEN`. Der nächste Lauf holt daraus einen frischen
 Access-Token und legt den verschlüsselten Speicher automatisch an.
+
+### Lokal (ohne GitHub Actions)
+
+```bash
+export PINTEREST_APP_ID=… PINTEREST_APP_SECRET=… PINTEREST_TOKEN_KEY=…
+python3 scripts/pinterest_auth.py --auth-url          # URL öffnen, erlauben
+python3 scripts/pinterest_auth.py --exchange "<Code oder komplette URL>"
+PINTEREST_TOKEN_WACHE=1 python3 scripts/pinterest_token.py --refresh
+git add data/pinterest_tokens.enc data/pinterest_token_state.json && git commit && git push
+```
 
 ---
 
 ## 4. Kontrolle und Fehlersuche
 
 ```bash
-# Lagebild (Quelle, Zustand, Restlaufzeiten – ohne Token-Material)
-python3 scripts/pinterest_token.py --status
-
-# maschinenlesbar (dieselbe Wahrheit, die Wache und Cockpit lesen)
-python3 scripts/pinterest_token.py --json
-
-# ohne Netz, nur Bestand (z. B. lokal ohne Secrets)
-python3 scripts/pinterest_token.py --offline
-
-# Erneuerung erzwingen (macht der tägliche Lauf automatisch)
-python3 scripts/pinterest_token.py --refresh
-
-# Gegenprobe der Wache
-python3 scripts/secrets_age_guard.py --verify-only PINTEREST_ACCESS_TOKEN
+python3 scripts/pinterest_token.py --status     # Lagebild (ohne Token-Material)
+python3 scripts/pinterest_token.py --json       # dieselbe Wahrheit, maschinenlesbar
+python3 scripts/pinterest_token.py --offline    # ohne Netz, nur Bestand
+python3 scripts/pinterest_auth.py  --status     # Speicher: Scopes, Zeitstempel, Ablauf
+python3 scripts/pinterest_token.py --selftest   # Broker-Logik (offline)
+python3 scripts/pinterest_auth.py  --selftest   # Code-Erkennung, Scopes, Diagnosen
+python3 scripts/secrets_age_guard.py --verify-only PINTEREST_ACCESS_TOKEN   # Live-Probe
+gh run list --workflow=pinterest-token.yml      # läuft die Wache täglich?
 ```
 
 Das Lagebild liegt versioniert in `data/pinterest_token_state.json` –
-**ohne Token-Material**, nur mit Fingerabdruck (SHA-256-Kürzel), Quelle,
-Zustand und Restlaufzeiten.
+**ohne Token-Material**, mit Fingerabdruck (SHA-256-Kürzel), Quelle, Zustand,
+Scopes, Restlaufzeiten, `verified` (live geprüft?) und `written_by` (welcher Lauf).
 
 | Symptom | Bedeutung | Maßnahme |
 |---|---|---|
-| `state: live`, `auto_renew_armed: false` | Handbetrieb – stirbt in ≤ 30 Tagen | Kapitel 3 durchlaufen |
-| `state: dead`, `renewable: true` | Refresh schlug fehl (App-Daten falsch/App-Zugriff entzogen) | App-Secrets prüfen, dann Kapitel 3 |
-| `state: dead`, `renewable: false` | keine Erneuerung möglich | Kapitel 3 |
+| Code-Tausch **HTTP 400** | Code verbraucht/abgelaufen, falsch ausgeschnitten oder Redirect-URI weicht ab | neue URL, neu erlauben, neuen Code sofort einfügen (ganze Adresszeile erlaubt) |
+| Code-Tausch **HTTP 401** | App-ID/Secret falsch | Secrets prüfen (Developer-Portal → My apps) |
+| Code-Tausch **HTTP 403** | App nicht freigegeben oder Scope nicht aktiviert | Trial access abwarten / Scopes in der App aktivieren |
+| `state: live`, `auto_renew_armed: false` | Handbetrieb – stirbt in ≤ 30 Tagen | Kap. 0 durchlaufen |
+| `state: live`, Nachweis „ohne Scope user_accounts:read" | Alt-Token funktioniert, Profil-Audit eingeschränkt | nichts Dringendes; bei nächster Neu-Autorisierung automatisch dabei |
+| `state: dead`, `renewable: true` | Refresh schlug fehl (App-Daten falsch / Zugriff entzogen) | App-Secrets prüfen, dann Kap. 0 |
+| `state: dead`, `renewable: false` | keine Erneuerung möglich | Kap. 0 |
 | `state: unreachable` | Pinterest gestört / Rate-Limit | nichts tun, nächster Lauf prüft erneut |
-| `refresh_days_left` < 20 | Automatik läuft nicht täglich | `gh run list --workflow=pinterest-token.yml` |
+| `state: unverified` im Cockpit | ein Lauf hat ohne Live-Probe geschrieben – seit 08.09. nicht mehr möglich | `gh run list --workflow=pinterest-token.yml`, Vertrag C13 prüfen |
+| `refresh_days_left` < 20 | Automatik läuft nicht täglich | Workflow aktiv? `gh run list --workflow=pinterest-token.yml` |
+| „Fehlende Secrets" im Lauf | Schritt 0 unvollständig | Secrets anlegen |
 
 ---
 
@@ -146,10 +173,13 @@ Zustand und Restlaufzeiten.
 * **Kein Token im Klartext im Repo.** Der Speicher ist AES-256-GCM-verschlüsselt,
   der Schlüssel liegt nur als GitHub-Secret.
 * **Kein Token in Logs, Reports oder Issues.** Ausgegeben wird ausschließlich ein
-  12-stelliger SHA-256-Fingerabdruck; Fehlermeldungen werden vor der Ausgabe
-  von Secret-Material bereinigt.
-* **Regel C9 des Governance-Vertrags** durchsucht Reports und `data/*.json` nach
-  Token-Mustern (`pina_`, `pinr_`, …) – ein Leak bricht den Build.
-* **Regel C10/C11** stellen sicher, dass es bei einer Token-Quelle und einem
-  täglichen Erneuerungslauf bleibt. Wer die Automatik ausbaut, bekommt einen
-  roten Build statt eines stillen Kanaltods in 30 Tagen.
+  12-stelliger SHA-256-Fingerabdruck; `--status` zeigt keine Präfixe mehr;
+  Fehlermeldungen werden vor der Ausgabe von Secret-Material bereinigt; der
+  Autorisierungs-Code wird im Workflow maskiert (`add-mask`) und nur über das Env
+  übergeben.
+* **Landeseite `/pinterest-oauth`** liest den Code nur im Browser, sendet nichts,
+  ist `noindex`, `no-referrer` und entfernt den Code aus der Browser-History.
+* **Regel C9** durchsucht Reports und `data/*.json` nach Token-Mustern – ein Leak
+  bricht den Build. **C10/C11** sichern Broker und täglichen Erneuerungslauf.
+  **C13** (neu) sichert: Nachweise laufen live, nur die Wache rotiert proaktiv,
+  und die Autorisierung fordert echte v5-Scopes.

@@ -89,7 +89,7 @@ jobs:
           # abgelaufenen Token also nie als tot erkannt. Jetzt: Live-Probe gegen
           # /v5/users/me, Erfolg gilt nur bei HTTP 200.
           if [ -n "${PINTEREST_ACCESS_TOKEN:-}" ]; then
-            python3 scripts/secrets_age_guard.py --verify-only PINTEREST_ACCESS_TOKEN --quiet \
+            python3 scripts/secrets_age_guard.py --verify --verify-only PINTEREST_ACCESS_TOKEN --quiet \
               || echo "::warning::Pinterest-Token live nicht bestätigt – Secrets-Wache meldet das."
           fi
           # Der Krypto-Key ist kein API-Endpoint: hier reicht der Nachweis, dass

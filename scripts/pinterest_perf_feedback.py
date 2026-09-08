@@ -13,7 +13,7 @@ DREI DATENQUELLEN (jede frei wählbar, DSLGVO-konform – kein Zwang):
   1. `data/pinterest_perf.yaml` (kanonisch, manuell oder per CSV) – die
      Hauptquelle. Enthält pro Thema/Pin/Kategorie einen Performance-Eintrag.
   2. Pinterest-API (optional): `--fetch` liest Board-/Pin-Analytics live über
-     v5 (braucht Token mit `read_ads`-Scope). Fällt auf Datei zurück, wenn der
+     v5 (braucht Token mit `boards:read` + `pins:read`). Fällt auf Datei zurück, wenn der
      Token fehlt → kein Absturz, nur "keine API-Daten".
   3. `--ingest-csv` importiert den Pinterest-Bulk-Export (Spalte Outbound
      Clicks / Saves) aus `spam_guard --gen-csv`-Format.
@@ -292,7 +292,7 @@ def render_report(per_topic, per_pillar, fetched):
               "   Zinsen, Mietwagen) erhalten automatisch Saison-Boost → zur richtigen",
               "   Zeit genug Content.",
               "4. **Datenpflege:** `data/pinterest_perf.yaml` regelmäßig aus dem",
-              "   Partner-Dashboard/Bulk-Export befüllen (oder `--fetch` mit read_ads-Token).",
+              "   Partner-Dashboard/Bulk-Export befüllen (oder `--fetch` mit gültigem Token).",
               "",
               f"_Erzeugt von `scripts/pinterest_perf_feedback.py` am {TODAY.isoformat()}._",
     ]
