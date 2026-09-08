@@ -1,351 +1,290 @@
 # ============================================================
-#  BOT-WATCHDOG (Selbstüberwachung der Automatisierung)
+#  BOT-WATCHDOG – Profi-Agentur-Level Selbstüberwachung
+#  ------------------------------------------------------------
+#  Version: 2.0 – Reparatur #227 + Profi-Optimierung (08.09.2026)
 #
 #  Schließt die größte Lücke: Wenn der Content-Bot GAR NICHT läuft
 #  (Cron verworfen, Workflow deaktiviert, GitHub-Ausfall, stiller
 #  Fehler), meldet sich sonst niemand – es käme einfach kein Artikel.
 #
-#  Der Watchdog prüft täglich:
-#    1) Ist die Automatisierung selbst noch wach?
-#       1a) META: Läuft die Produktions-Wache (Inhaltsprüfung) noch?
-#       1b) FALLBACK: Publikationstag-Bilanz (nur wenn 1a nicht greift)
-#    2) Sind alle Bot-Skripte syntaktisch valide?
-#    3) Ist der neueste Artikel live (Deploy ok)?
-#    4) Ist das GitHub-TLS-Zertifikat für franksfinanzcheck.de ausgestellt?
-#       (Wenn ja → Hinweis-Issue: Cloudflare auf "Full (strict)" umstellen)
+#  UMFANG (Profi-Agentur-Level):
+#    1) META: Läuft die Produktions-Wache noch? (26h Fenster)
+#    1b) Publikationstag-Bilanz (Mo/Mi/Fr, cadence_guard SSOT)
+#    2) Skript-Syntax (py_compile)
+#    3) Live-Site: neuester Artikel wirklich live? (Redirect-follow, Retry)
+#    4) GitHub-TLS-Zertifikat (Cloudflare Full strict Hinweis)
+#    5) Affiliate-Manager: Affiliate-Integritäts-Wache aktiv + Report gesund?
+#    6) Pinterest-Experte: Pinterest-Watchdog aktiv?
+#    7) Pinterest-Token Lebenszyklus (Broker-Status, kein monatlicher Tod)
+#    8) Content-Reserve Gesundheit (Pool >=4)
+#    9) Pinterest Duplikat-Sperre (Spam-Signal)
 #
-#  UMSTELLUNG AUF PUBLIKATIONSTAGE (29.08.2026):
-#    Check 1 war ein starres Zeitfenster ("kein Artikel in 30 h") gegen
-#    die Annahme "2 Artikel/Tag". Die Dauervorgabe lautet aber
-#    Mo/Mi/Fr – zwischen Freitag 06:10 UTC und Sonntag 08:30 UTC liegen
-#    50,3 Stunden. Der Check schlug also JEDEN SONNTAG an, völlig
-#    grundlos (nachgerechnet, nicht geschätzt). Verschärft man die
-#    Schwelle stattdessen auf 26 h, wären es 8 Fehlalarme in 14 Tagen.
-#    Ein Zeitfenster ist das falsche Modell für einen Wochenplan.
+#  REPARATUR #227 (08.09.2026):
+#    - Lauf 34229150161 failte im Schritt "Issue bei Problemen erstellen"
+#      (github-script). Ursache: fragiles Env-Handling (EOF-Collision möglich),
+#      stray \"-Zeichen im Issue-Body, keine try-catch → Workflow rot statt
+#      gelb, Fehler-Alerting öffnet #227 über den Melder, der am Melden scheitert.
+#    - Fix: Python-Skript scripts/bot_watchdog.py als SSOT, sichere Delimiter,
+#      try-catch in allen github-script Schritten, Label-Garantie (C12),
+#      continue-on-error für Melder, robuste Live-Prüfung mit -L + Retry.
 #
-#    Neu: bewertet wird der letzte ABGESCHLOSSENE Publikationstag
-#    (Mo/Mi/Fr) gegen das Mindestziel – Quelle ist cadence_guard,
-#    dieselbe Definition wie in Engine und Deploy-Gate.
+#  PROFILIERT NACH:
+#    - Governance-Vertrag C12 (Label-Garantie, #209)
+#    - Affiliate-Integritäts-Wache #220 (Hugo-Flake darf Wache nicht töten)
+#    - Deploy-Warteschlange #218 (Phantom-Alarme)
+#    - Pinterest-Token-Lebenszyklus #206 (30-Tage-Tod)
 #
-#    Die Inhaltsprüfung selbst liegt in der PRODUKTIONS-WACHE (PR #1):
-#    sie ist publikationstags-bewusst, kennt die drei Engine-Slots und
-#    unterscheidet neue Artikel von Recycling. Bot-Watchdog prüft hier
-#    nur, ob dieser Wächter noch lebt (Meta-Ebene) – und behält die
-#    Bilanz als Fallback, falls die Produktions-Wache fehlt oder
-#    stehengeblieben ist. So gibt es keine doppelten Issues.
-#
-#  Bei Problemen: automatisch GitHub-Issue (mit Dedupe – kein Spam).
-#  Manuell starten: Actions → Bot-Watchdog → Run workflow
+#  Bei Problemen: automatisch GitHub-Issue (Dedupe, kein Spam).
+#  Manuell: Actions → Bot-Watchdog → Run workflow
 # ============================================================
 name: Bot-Watchdog
 
 on:
   schedule:
-    - cron: "30 8 * * *"    # 10:30 Uhr MESZ – nach dem Morgen-Artikel (08:10)
+    - cron: "30 8 * * *"    # 10:30 MESZ – nach dem Morgen-Artikel (08:10)
   workflow_dispatch: {}
 
 permissions:
   contents: read
   issues: write
-  actions: read      # für `gh run list` (Meta-Check: läuft die Wache noch?)
+  actions: read      # für gh run list (Meta-Check)
+
+concurrency:
+  group: bot-watchdog
+  cancel-in-progress: false
+
+env:
+  MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
+  MAX_ARTIKEL_PRO_TAG: ${{ vars.MAX_ARTIKEL_PRO_TAG || '3' }}
 
 jobs:
   watchdog:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # volle Historie für git log
+          fetch-depth: 0
 
-      - name: Watchdog-Prüfungen
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten
+        run: |
+          pip install --quiet pyyaml
+          # gh CLI ist auf ubuntu-latest vorinstalliert
+
+      - name: Selftest (Wache muss sehen können)
+        run: |
+          python3 scripts/bot_watchdog.py --selftest
+          python3 scripts/cadence_guard.py --selftest
+          python3 scripts/watchdog_check4_tls.py --help 2>&1 | head -n 5 || true
+
+      - name: Watchdog-Prüfungen (Profi-Level)
         id: checks
         env:
           GH_TOKEN: ${{ github.token }}
-          MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
         run: |
-          PROBLEMS=""
-          NOW=$(date +%s)
-
-          # 1a) META-CHECK: Läuft die Produktions-Wache noch?
-          #     Die Inhaltsprüfung selbst ist dorthin ausgelagert (sie ist
-          #     publikationstags-bewusst und kennt die drei Engine-Slots).
-          #     Hier wird nur überwacht, dass der Wächter nicht selbst
-          #     einschläft – genau die Lücke, die dieser Watchdog füllt.
-          SEIT26H=$(date -u -d '26 hours ago' +%Y-%m-%dT%H:%M:%SZ)
-          WACHE_RUNS=$(gh run list --workflow=produktions-wache.yml \
-                         --created ">$SEIT26H" --json databaseId --jq 'length' \
-                         2>/tmp/gh_wache.err || echo "-1")
-          if [ "$WACHE_RUNS" = "-1" ]; then
-            echo "Produktions-Wache nicht gefunden – dieser Watchdog prüft die Bilanz selbst."
-            echo "CHECK1A=NOEXIST" >> "$GITHUB_ENV"
-            WACHE_DA=0
-          elif [ "$WACHE_RUNS" = "0" ]; then
-            PROBLEMS="$PROBLEMS
-          - **Produktions-Wache hat in den letzten 26 h nicht gedreht** – die Ausfall-Erkennung ist derzeit blind. Workflow prüfen (Cron aktiv? Repo inaktiv?)"
-            echo "CHECK1A=FAIL" >> "$GITHUB_ENV"
-            WACHE_DA=0
-          else
-            echo "Produktions-Wache aktiv: $WACHE_RUNS Lauf/Läufe in den letzten 26 h."
-            echo "CHECK1A=OK" >> "$GITHUB_ENV"
-            WACHE_DA=1
-          fi
-
-          # 1b) PUBLIKATIONSTAG-BILANZ – immer berechnen und berichten,
-          #     aber nur alarmieren, wenn die Produktions-Wache nicht
-          #     aktiv ist (sonst meldet diese bereits -> keine Doppel-Issues).
-          #     Bewertet wird der letzte ABGESCHLOSSENE Publikationstag:
-          #     heute zählt erst ab 18:30 UTC, wenn alle drei Slots
-          #     (06:10 / 14:10 / 17:40 UTC) gelaufen sind.
-          python3 - <<'PYEOF' > /tmp/bilanz.env
-          import datetime, os, sys
-          sys.path.insert(0, "scripts")
-          import cadence_guard as cg
-
-          names = ["Montag", "Dienstag", "Mittwoch", "Donnerstag",
-                   "Freitag", "Samstag", "Sonntag"]
-          today = datetime.date.today()
-          now = datetime.datetime.now(datetime.timezone.utc)
-          minute = now.hour * 60 + now.minute
-          minimum = int(os.environ.get("MIN_ARTIKEL_PRO_TAG") or "2")
-
-          day = None
-          for back in range(0, 10):
-              d = today - datetime.timedelta(days=back)
-              if d.weekday() not in cg.PUBLICATION_DAYS:
-                  continue
-              if d == today and minute < (18 * 60 + 30):
-                  continue          # heute läuft noch
-              day = d
-              break
-
-          if day is None:
-              print("BILANZ_TAG=-")
-              print("BILANZ_COUNT=0")
-              print("BILANZ_MIN=%d" % minimum)
-              print("BILANZ_STATUS=SKIP")
-              print('BILANZ_TEXT="kein abgeschlossener Publikationstag im Pruefbereich"')
-          else:
-              count = len(cg.published_on(cg.load_posts(), day))
-              status = "OK" if count >= minimum else ("FAIL" if count == 0 else "WARN")
-              print("BILANZ_TAG=%s" % day.isoformat())
-              print("BILANZ_COUNT=%d" % count)
-              print("BILANZ_MIN=%d" % minimum)
-              print("BILANZ_STATUS=%s" % status)
-              print('BILANZ_TEXT="%s %s: %d/%d Artikel"' % (
-                  names[day.weekday()], day.isoformat(), count, minimum))
-          PYEOF
-          cat /tmp/bilanz.env
-
-          BILANZ_STATUS=$(grep '^BILANZ_STATUS=' /tmp/bilanz.env | cut -d= -f2)
-          BILANZ_COUNT=$(grep  '^BILANZ_COUNT='  /tmp/bilanz.env | cut -d= -f2)
-          BILANZ_MIN=$(grep    '^BILANZ_MIN='    /tmp/bilanz.env | cut -d= -f2)
-          BILANZ_TAG=$(grep    '^BILANZ_TAG='    /tmp/bilanz.env | cut -d= -f2)
-          # Anführungszeichen aus der Env-Datei entfernen, sonst landen sie
-          # mit im Log. Ohne diese Zeile ist BILANZ_TEXT unter `set -u`
-          # ungesetzt und der Schritt bricht ab.
-          BILANZ_TEXT=$(grep '^BILANZ_TEXT=' /tmp/bilanz.env | cut -d= -f2- | sed 's/^"//; s/"$//')
-          echo "CHECK1B=$BILANZ_STATUS" >> "$GITHUB_ENV"
-          echo "BILANZ_TEXT=$BILANZ_TEXT" >> "$GITHUB_ENV"
-
-          # Alarm NUR als Fallback, wenn die Produktions-Wache nicht greift.
-          if [ "$WACHE_DA" = "0" ] && [ "$BILANZ_STATUS" = "FAIL" ]; then
-            PROBLEMS="$PROBLEMS
-          - **Kein Artikel am Publikationstag ${BILANZ_TAG}** (0 von ${BILANZ_MIN}) – Engine prüfen (Phase 1: Tageslimit, Themenpool oder API-Keys)"
-          elif [ "$WACHE_DA" = "0" ] && [ "$BILANZ_STATUS" = "WARN" ]; then
-            PROBLEMS="$PROBLEMS
-          - **Nur ${BILANZ_COUNT} von ${BILANZ_MIN} Artikeln am Publikationstag ${BILANZ_TAG}**"
-          fi
-
-          # 2) Skript-Syntax
-          python3 -m py_compile scripts/*.py 2>/tmp/syntax_err.txt
-          if [ $? -ne 0 ]; then
-            PROBLEMS="$PROBLEMS
-          - **Skript-Syntaxfehler:** $(head -3 /tmp/syntax_err.txt | tr '\n' ' ')"
-            echo "CHECK2=FAIL" >> "$GITHUB_ENV"
-          else
-            echo "CHECK2=OK" >> "$GITHUB_ENV"
-          fi
-
-          # 3) Live-Site aktuell? Den neuesten Artikel über das FRONTMATTER
-          #    bestimmen statt über `git log --grep="^content:"` – das matchte
-          #    auch reine Qualitäts-Commits ("content: Qualitäts-Fixes …")
-          #    und lieferte dann einen falschen Slug.
-          NEWEST_SLUG=$(python3 - <<'PYEOF'
-          import datetime, glob, os, re
-
-          best = None
-          for p in (glob.glob("content/posts/*/index.md")
-                    + glob.glob("content/posts/*.md")):
-              try:
-                  c = open(p, encoding="utf-8").read()
-              except OSError:
-                  continue
-              if re.search(r"(?m)^draft:\s*true\s*$", c):
-                  continue
-              m = re.search(r"(?m)^date:\s*[\"']?(\d{4}-\d{2}-\d{2})", c)
-              if not m:
-                  continue
-              d = datetime.date.fromisoformat(m.group(1))
-              if best is None or d > best[0]:
-                  slug = (os.path.basename(os.path.dirname(p))
-                          if os.path.basename(p) == "index.md"
-                          else os.path.basename(p)[:-3])
-                  best = (d, slug)
-          print(best[1] if best else "")
-          PYEOF
-          )
-          if [ -n "$NEWEST_SLUG" ]; then
-              STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "https://franksfinanzcheck.de/posts/${NEWEST_SLUG}/")
-              if [ "$STATUS" != "200" ]; then
-                PROBLEMS="$PROBLEMS
-          - **Neuester Artikel nicht live (HTTP ${STATUS})** – ${NEWEST_SLUG} (Deploy prüfen)"
-                echo "CHECK3=FAIL" >> "$GITHUB_ENV"
-              else
-                echo "CHECK3=OK (${NEWEST_SLUG} → 200)" >> "$GITHUB_ENV"
-                echo "Live-Site aktuell: ${NEWEST_SLUG} → HTTP 200"
-              fi
-          else
-            echo "CHECK3=FAIL" >> "$GITHUB_ENV"
-            PROBLEMS="$PROBLEMS
-          - **Kein veröffentlichter Artikel in content/posts/ gefunden** – Deploy kann nicht geprüft werden"
-          fi
-
-          # 4) GitHub-TLS-Zertifikat für franksfinanzcheck.de ausgestellt?
-          #    (ausgelagert in scripts/watchdog_check4_tls.py – robuster als Inline-Python)
-          CERT_OK=0
-          if python3 scripts/watchdog_check4_tls.py 2>/dev/null; then
-            CERT_OK=1
-          fi
-          if [ "$CERT_OK" = "1" ]; then
-            echo "CHECK4=OK" >> "$GITHUB_ENV"
-          else
-            echo "CHECK4=WAIT" >> "$GITHUB_ENV"
-          fi
-
-          echo "$PROBLEMS" > /tmp/problems.txt
-          echo "PROBLEMS<<EOF" >> "$GITHUB_ENV"
-          echo "$PROBLEMS" >> "$GITHUB_ENV"
-          echo "EOF" >> "$GITHUB_ENV"
-          if [ -z "$PROBLEMS" ]; then
-            echo "ALLES OK"
-          fi
+          set -euo pipefail
+          echo "=== Bot-Watchdog 2.0 – Profi-Agentur-Level ==="
+          python3 scripts/bot_watchdog.py --emit-env
+          echo "--- Env Dump ---"
+          cat /tmp/bot_watchdog.env || true
+          echo "--- Problems ---"
+          cat /tmp/problems.txt || echo "(keine)"
+          # Zusätzlich klassische Checks für Rückwärtskompatibilität in GITHUB_ENV laden
+          # bot_watchdog.py schreibt bereits ins GITHUB_ENV via emit-env
 
       - name: Zusammenfassung
+        if: always()
         run: |
-          echo "## 🤖 Watchdog-Ergebnis" >> "$GITHUB_STEP_SUMMARY"
+          echo "## 🤖 Watchdog-Ergebnis (Profi-Agentur-Level)" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Check 1a (Produktions-Wache aktiv): ${{ env.CHECK1A }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Check 1b (Publikationstag-Bilanz): ${{ env.CHECK1B }} – ${{ env.BILANZ_TEXT }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Check 2 (Skript-Syntax): ${{ env.CHECK2 }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Check 3 (Live-Site): ${{ env.CHECK3 }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Check 4 (GitHub-TLS-Zertifikat): ${{ env.CHECK4 }}" >> "$GITHUB_STEP_SUMMARY"
+          cat BOT-WATCHDOG-REPORT.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || echo "Report fehlt" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          if [ -n "${{ env.PROBLEMS }}" ]; then
-            echo "### Probleme" >> "$GITHUB_STEP_SUMMARY"
-            echo "${{ env.PROBLEMS }}" >> "$GITHUB_STEP_SUMMARY"
-          fi
+          echo "---" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Raw Env" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          cat /tmp/bot_watchdog.env 2>/dev/null || echo "kein env" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Issue bei fertigem GitHub-Zertifikat (Hinweis auf Full strict)
+      # ------------------------------------------------------------
+      #  Label-Garantie (C12): Jeder Melder legt sein Label vorher an.
+      #  Bot-Watchdog nutzt kein Pflicht-Label, aber für Konsistenz
+      #  und für das zentrale auto-report Handling legen wir Labels an.
+      # ------------------------------------------------------------
+      - name: Labels sicherstellen (C12)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create bot-watchdog --repo "$GITHUB_REPOSITORY" --color "0e8a16" --description "Bot-Watchdog: Meta-Überwachung der Automatisierung" --force || true
+          gh label create auto-report --repo "$GITHUB_REPOSITORY" --color "d73a4a" --description "Automatisch erkannte Fehlermeldung" --force || true
+          gh label create pinterest --repo "$GITHUB_REPOSITORY" --color "e60023" --description "Pinterest-Kanal" --force || true
+
+      - name: Issue bei fertigem GitHub-Zertifikat (Hinweis Full strict)
         if: ${{ env.CHECK4 == 'OK' }}
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |
-            const { data: existing } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner, repo: context.repo.repo,
-              state: 'open', per_page: 100
-            });
-            const open = existing.filter(i => i.title && i.title.includes('GitHub-Zertifikat') && !i.pull_request);
-            if (open.length > 0) {
-              console.log('Hinweis-Issue existiert bereits (#' + open[0].number + ').');
-              return;
+            try {
+              const { data: existing } = await github.paginate(
+                github.rest.issues.listForRepo,
+                { owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100 }
+              );
+              const open = existing.filter(i => i.title && i.title.includes('GitHub-Zertifikat') && !i.pull_request);
+              if (open.length > 0) {
+                console.log(`Hinweis-Issue existiert bereits (#${open[0].number}).`);
+                return;
+              }
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '✅ GitHub-Zertifikat für franksfinanzcheck.de ist da',
+                body: [
+                  'Das TLS-Zertifikat von GitHub Pages für **franksfinanzcheck.de** ist jetzt ausgestellt.',
+                  '',
+                  '**Empfohlener Schritt (1 Min):**',
+                  '1. Cloudflare → franksfinanzcheck.de → SSL/TLS → Overview',
+                  '2. Modus von **"Full"** auf **"Full (strict)"** umstellen',
+                  '3. Fertig – maximale Sicherheit (Cloudflare verifiziert das Origin-Zertifikat)',
+                  '',
+                  'Dieses Issue kann danach geschlossen werden.',
+                  '',
+                  '---',
+                  '*Automatisch erstellt vom Bot-Watchdog (Profi-Level).*'
+                ].join('\n')
+              });
+              console.log('✅ Hinweis-Issue erstellt');
+            } catch (e) {
+              console.log('⚠️ Zertifikat-Hinweis konnte nicht erstellt werden: ' + e.message);
+              // Nicht failen – Melder darf nicht selbst zum Incident werden
             }
-            await github.rest.issues.create({
-              owner: context.repo.owner, repo: context.repo.repo,
-              title: '✅ GitHub-Zertifikat für franksfinanzcheck.de ist da',
-              body: [
-                'Das TLS-Zertifikat von GitHub Pages für **franksfinanzcheck.de** ist jetzt ausgestellt.',
+
+      - name: Issue bei Problemen erstellen (mit Dedupe, robust)
+        if: ${{ env.PROBLEMS != '' }}
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              const problems = process.env.PROBLEMS || '';
+              console.log('Probleme erkannt, prüfe Dedupe...');
+              // Pagination-sicher: alle offenen Issues holen
+              const existing = await github.paginate(
+                github.rest.issues.listForRepo,
+                { owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100 }
+              );
+              const open = existing.filter(i => i.title && i.title.includes('Bot-Watchdog') && !i.pull_request);
+              if (open.length > 0) {
+                console.log(`Offenes Watchdog-Issue existiert bereits (#${open[0].number}) – kein Duplikat.`);
+                console.log('Aktuelle Probleme bleiben offen: ' + problems.slice(0,500));
+                // Optional: Kommentar mit aktuellem Stand
+                try {
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: open[0].number,
+                    body: `**Update ${new Date().toISOString()}** – weiterhin Probleme:\n\n${problems}\n\n---\n*Auto-Update vom Bot-Watchdog.*`
+                  });
+                } catch (cErr) {
+                  console.log('Kommentar konnte nicht erstellt werden: ' + cErr.message);
+                }
+                return;
+              }
+              // Profi-Body ohne stray Zeichen, mit Affiliate + Pinterest Kontext
+              const body = [
+                '## 🤖 Bot-Watchdog hat Probleme festgestellt (Profi-Agentur-Level)',
                 '',
-                '**Empfohlener Schritt (1 Min):**',
-                '1. Cloudflare → franksfinanzcheck.de → SSL/TLS → Overview',
-                '2. Modus von **"Full"** auf **"Full (strict)"** umstellen',
-                '3. Fertig – maximale Sicherheit (Cloudflare verifiziert das Origin-Zertifikat)',
+                'Folgende Checks sind fehlgeschlagen:',
                 '',
-                'Dieses Issue kann danach geschlossen werden.',
+                problems,
+                '',
+                '### Nächste Schritte (nach Priorität)',
+                '1. **Artikel-Bilanz ansehen:** `PRODUKTIONS-STATUS.md` + `BOT-WATCHDOG-REPORT.md` im Repo',
+                '2. **Workflow-Log ansehen:** Actions → "Content-Engine v2" → letzter Lauf → Phase 1',
+                '3. **Affiliate-Check:** `AFFILIATE-INTEGRITY-REPORT.md` – CTA-Boxen/Linkziele (tägliche Wache 06:00 MESZ)',
+                '4. **Pinterest-Check:** `PINTEREST-REPORT.md` + `data/pinterest_token_state.json` – Token-Lebenszyklus (täglich 04:40 MESZ)',
+                '5. **API-Keys prüfen:** Settings → Secrets and variables → Actions (GROQ/GEMINI)',
+                '6. **Manuell nachhelfen:** Actions → "Content-Engine v2" → Run workflow',
+                '7. **Deploy prüfen:** Actions → "Deploy auf GitHub Pages" → letzter Lauf (Catchup bei Queue-Stau)',
+                '8. **Nur Mo/Mi/Fr:** Di/Do/Wochenende sind publikationsfrei – dort ist "kein Artikel" korrekt.',
+                '',
+                '### Kontext (Profi-Agentur)',
+                '- **Affiliate-Manager:** Prüfe, ob `affiliate-integrity-daily.yml` in den letzten 30h lief und ob der Render-Beweis (Hugo Extended) grün ist. Ein toter Affiliate-Link kostet Provision.',
+                '- **Pinterest-Experte:** Prüfe Token-Broker (`scripts/pinterest_token.py --status`), Watchdog-Liveness und Duplikat-Sperre. Repeat-Pin <30 Tage = Spam-Signal.',
+                '- **Content-Reserve:** Sollte >=4 Artikel enthalten (2 Tage × 2 Mindestziel).',
+                '',
+                'Das Issue wird automatisch geschlossen, sobald der nächste Watchdog-Lauf alles grün meldet.',
                 '',
                 '---',
-                '*Automatisch erstellt vom Bot-Watchdog.*'
-              ].join('\n')
-            });
-            console.log('✅ Hinweis-Issue erstellt');
-
-      - name: Issue bei Problemen erstellen (mit Dedupe)
-        if: ${{ env.PROBLEMS != '' }}
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const problems = process.env.PROBLEMS || '';
-            // Dedupe: kein neues Issue, wenn schon ein offenes Watchdog-Issue existiert
-            const { data: existing } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              per_page: 100
-            });
-            const open = existing.filter(i => i.title && i.title.includes('Bot-Watchdog') && !i.pull_request);
-            if (open.length > 0) {
-              console.log('Offenes Watchdog-Issue existiert bereits (#' + open[0].number + ') – kein Duplikat.');
-              console.log('Probleme bleiben offen: ' + problems);
-              return;
+                '*Automatisch erstellt vom Bot-Watchdog 2.0 (täglich 10:30 MESZ, Profi-Agentur-Level, inkl. Affiliate + Pinterest).*'
+              ].join('\n');
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '⚠️ Bot-Watchdog: Probleme mit der Content-Automatisierung',
+                body: body,
+                labels: ['bot-watchdog']
+              });
+              console.log('✅ Watchdog-Issue erstellt');
+            } catch (e) {
+              console.log('❌ Fehler beim Erstellen des Watchdog-Issues: ' + e.message);
+              console.log(e.stack || '');
+              // Workflow soll NICHT rot werden, weil das Melden scheitert – das war Ursache #227
+              // Wir loggen, aber werfen nicht
             }
-            const body = [
-              '## 🤖 Bot-Watchdog hat Probleme festgestellt',
-              '',
-              'Folgende Checks sind fehlgeschlagen:',
-              '',
-              problems,
-              '',
-              '### Nächste Schritte',
-              '1. **Artikel-Bilanz ansehen:** `PRODUKTIONS-STATUS.md` im Repo (oder Actions → „Produktions-Wache (Content-Engine)“)",
-              '2. **Workflow-Log ansehen:** Actions → „Content-Engine v2“ → letzter Lauf → Schritt „Phase 1 – Artikel generieren“",
-              '3. **API-Keys prüfen:** Settings → Secrets and variables → Actions (GROQ/GEMINI)',
-              '4. **Manuell nachhelfen:** Actions → „Content-Engine v2“ → Run workflow',
-              '5. **Deploy prüfen:** Actions → „Deploy auf GitHub Pages“ → letzter Lauf',
-              '6. **Nur Mo/Mi/Fr:** Dienstage, Donnerstage und Wochenenden sind publikationsfrei – dort ist „kein Artikel“ korrekt, kein Fehler.',
-              '',
-              'Das Issue wird automatisch geschlossen, sobald der nächste Watchdog-Lauf alles grün meldet.',
-              '',
-              '---',
-              '*Automatisch erstellt vom Bot-Watchdog (täglich 10:30 Uhr MESZ).*'
-            ].join('\n');
-            await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: '⚠️ Bot-Watchdog: Probleme mit der Content-Automatisierung',
-              body: body
-            });
-            console.log('✅ Watchdog-Issue erstellt');
 
       - name: Offenes Watchdog-Issue schließen (alles wieder grün)
         if: ${{ env.PROBLEMS == '' }}
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |
-            const { data: existing } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              per_page: 100
-            });
-            const open = existing.filter(i => i.title && i.title.includes('Bot-Watchdog') && !i.pull_request);
-            for (const issue of open) {
-              await github.rest.issues.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issue.number,
-                state: 'closed',
-                state_reason: 'completed'
-              });
-              console.log('✅ Watchdog-Issue #' + issue.number + ' geschlossen (alles grün).');
+            try {
+              const existing = await github.paginate(
+                github.rest.issues.listForRepo,
+                { owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100 }
+              );
+              const open = existing.filter(i => i.title && i.title.includes('Bot-Watchdog') && !i.pull_request);
+              for (const issue of open) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: `✅ **${new Date().toISOString()}** – alle Checks grün (Profi-Level): Produktions-Wache lebt, Live-Site aktuell, Affiliate- und Pinterest-Kanäle im grünen Bereich.\n\n*Auto-Close vom Bot-Watchdog 2.0.*`
+                });
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed',
+                  state_reason: 'completed'
+                });
+                console.log(`✅ Watchdog-Issue #${issue.number} geschlossen (alles grün).`);
+              }
+              if (open.length === 0) console.log('Kein offenes Watchdog-Issue.');
+            } catch (e) {
+              console.log('⚠️ Konnte Watchdog-Issue nicht schließen: ' + e.message);
             }
-            if (open.length === 0) console.log('Kein offenes Watchdog-Issue.');
+
+      - name: Report committen (optional, für Audit)
+        if: always()
+        continue-on-error: true
+        run: |
+          git config user.name "Bot-Watchdog"
+          git config user.email "bot-watchdog@users.noreply.github.com"
+          git add BOT-WATCHDOG-REPORT.md 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: Bot-Watchdog Report aktualisiert (Profi-Level, Fix #227)" || true
+            # Push nur wenn auf main, sonst skip (vermeidet Loop)
+            if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+              scripts/git_sync.sh --push-only || echo "Push fehlgeschlagen, ignoriere"
+            fi
+          else
+            echo "Kein Report-Update nötig"
+          fi
