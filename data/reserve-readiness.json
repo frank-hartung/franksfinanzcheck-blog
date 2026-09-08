@@ -5,22 +5,35 @@
     {
       "slug": "2026-09-08-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
       "ready": false,
-      "sha256": "b520428a08f3bc666817292acbc8f9e24fa046b0463739855c6651bb39ef2bae"
-    },
-    {
-      "slug": "2026-09-08-50-30-20-regel-so-beherrschst-du-dein-budget-endlich",
-      "ready": false,
-      "sha256": "6942a799a237bc8d0b2b278a18080c5af62621a36fabca87339ff6c45b0b2809"
-    },
-    {
-      "slug": "2026-09-08-finanzen-im-griff-die-50-30-20-regel-fuer-dein-budget",
-      "ready": false,
-      "sha256": "4131cdf8d825410a6e0da36cea92e95ba9ad77f0a2341f217e3f55b9d831fa4e"
+      "sha256": "c37dbe98c0f8ed724fbf8d0111cab3a2a4697773105e6eb9eae3cd838f7d296d",
+      "score": 0.89,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      },
+      "reason": null
     },
     {
       "slug": "2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks",
       "ready": false,
-      "sha256": "0bf3210aff97be7b606c2ecc74bf4295371148b62dca57b1de7ab23f8c97b8d5"
+      "sha256": "f133d0a9b4bf9cf72bf282d374b06f8a0a56639566e5acb28490cceb0a7a122c",
+      "score": 0.89,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      },
+      "reason": null
     }
-  ]
+  ],
+  "_hinweis": "Reife-Zertifikate erzeugt reserve_readiness.py unter CI (hugo + publish_gate). Dieser Stand: Kandidaten am 08.09.2026 veredelt (Heiler-Kette konvergiert, hash-stabil über Läufe) + Redaktions-Finalisierung; ready=false bis zur CI-Zertifizierung."
 }

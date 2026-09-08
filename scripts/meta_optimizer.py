@@ -56,14 +56,16 @@ def norm(s):
     return re.sub(r"[^a-z0-9]+", " ", s).strip()
 
 
-def load_articles():
+def load_articles(files=None):
     arts = []
-    for path in list_post_paths():
+    scoped = bool(files)  # --file: gezielter Lauf (auch Entwürfe) – Korpuslauf überspringt Entwürfe
+    paths = list(files) if scoped else list_post_paths()
+    for path in paths:
         content = open(path, encoding="utf-8").read()
         parts = content.split("---", 2)
         fm = parts[1] if len(parts) > 1 else ""
         body = parts[2] if len(parts) == 3 else content
-        if "draft: true" in fm:
+        if not scoped and "draft: true" in fm:
             continue
 
         def get(key):
@@ -456,8 +458,11 @@ def main():
     fix = "--fix" in sys.argv
     use_ai = "--ai" in sys.argv
     as_json = "--json" in sys.argv
+    only_file = None
+    if "--file" in sys.argv:
+        only_file = sys.argv[sys.argv.index("--file") + 1]
 
-    articles = load_articles()
+    articles = load_articles([only_file] if only_file else None)
     results = [audit(a) for a in articles]
     critical = [r for r in results if r["issues"]]
     avg_tl = sum(r["tl"] for r in results) / len(results) if results else 0
