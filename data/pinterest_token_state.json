@@ -2,24 +2,25 @@
   "access_age_days": null,
   "attempts": [
     {
-      "action": "read",
-      "detail": "PINTEREST_ACCESS_TOKEN nicht gesetzt",
-      "result": "absent",
+      "action": "probe",
+      "detail": "ohne Live-Probe übernommen",
+      "fingerprint": "6d628e4d2138",
+      "result": "unverified",
       "source": "env"
     }
   ],
   "auto_renew_armed": false,
-  "checked_at": "2026-09-07T16:02:03+00:00",
-  "detail": "keine Token-Quelle konfiguriert",
-  "fingerprint": "",
+  "checked_at": "2026-09-08T08:56:55+00:00",
+  "detail": "ohne Live-Probe übernommen",
+  "fingerprint": "6d628e4d2138",
   "next_action": "Einmalige Neu-Autorisierung nötig (danach trägt sich der Kanal selbst): docs/PINTEREST-TOKEN-RUNBOOK.md – `python3 scripts/pinterest_auth.py --auth-url`",
   "refresh_age_days": null,
   "refresh_days_left": null,
   "renewable": false,
   "runbook": "docs/PINTEREST-TOKEN-RUNBOOK.md",
-  "severity": "red",
-  "source": null,
-  "source_label": "keine",
-  "state": "absent",
+  "severity": "amber",
+  "source": "env",
+  "source_label": "klassisches Secret PINTEREST_ACCESS_TOKEN",
+  "state": "unverified",
   "store_present": false
 }
