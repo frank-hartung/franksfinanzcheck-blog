@@ -108,6 +108,7 @@ import re
 import shutil
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -425,20 +426,43 @@ def find_hugo(root: Path | None = None) -> str | None:
     return None
 
 
-def rebuild_hugo(root: Path | None = None) -> tuple[bool, str]:
+def rebuild_hugo(root: Path | None = None, attempts: int = 3) -> tuple[bool, str]:
+    """Hugo --minify mit Wiederholung.
+
+    Issue #220 (08.09.2026): Die tägliche Wache starb am EINZELNEN
+    `hugo --minify` im Workflow, bevor das Gate überhaupt lief. Dieselbe
+    Fehlerklasse (kurzer Runner-Blip, TOCSS-Flake, GitHub-Release-CDN)
+    darf den Render-Beweis nicht mehr mit einem Schuss umwerfen.
+    """
     root = root or ROOT
     hugo_bin = find_hugo(root)
     if not hugo_bin:
         return False, "kein Hugo-Binary gefunden (hugo im PATH?)"
-    try:
-        r = subprocess.run([hugo_bin, "--minify"], cwd=root,
-                           capture_output=True, text=True, timeout=600)
-    except Exception as exc:  # noqa: BLE001
-        return False, f"Hugo-Build fehlgeschlagen: {exc}"
-    if r.returncode != 0:
-        tail = (r.stderr or r.stdout or "").strip().splitlines()[-6:]
-        return False, "Hugo-Build fehlgeschlagen: " + " | ".join(tail)
-    return True, ""
+    tries = max(1, int(attempts))
+    last_err = "Hugo-Build fehlgeschlagen"
+    for attempt in range(1, tries + 1):
+        try:
+            r = subprocess.run(
+                [hugo_bin, "--minify"],
+                cwd=root,
+                capture_output=True,
+                text=True,
+                timeout=600,
+            )
+        except subprocess.TimeoutExpired:
+            last_err = f"Hugo-Build Zeitüberschreitung (Versuch {attempt}/{tries}, 600s)"
+        except Exception as exc:  # noqa: BLE001
+            last_err = f"Hugo-Build fehlgeschlagen: {exc}"
+        else:
+            if r.returncode == 0:
+                if attempt > 1:
+                    _say(f"Hugo-Build erfolgreich im {attempt}. Versuch.")
+                return True, ""
+            tail = (r.stderr or r.stdout or "").strip().splitlines()[-8:]
+            last_err = "Hugo-Build fehlgeschlagen: " + " | ".join(tail)
+        if attempt < tries:
+            time.sleep(min(8, attempt * 3))
+    return False, last_err + f" (nach {tries} Versuchen)"
 
 
 def ensure_build(root: Path | None = None) -> tuple[bool, dict]:
@@ -1159,6 +1183,17 @@ def run_selftest() -> list[str]:
         errors.append(f"{RENDER_HOOK.relative_to(ROOT)} fehlt – "
                       "Gateway-Links würden ohne Tracking gerendert")
 
+    # 8) Rebuild ohne Binary = klarer Werkzeugfehler (Issue #220)
+    old_find = globals()["find_hugo"]
+    globals()["find_hugo"] = lambda root=None: None  # type: ignore[misc]
+    try:
+        with tempfile.TemporaryDirectory() as tmp3:
+            ok_b, msg_b = rebuild_hugo(Path(tmp3), attempts=1)
+        expect(ok_b is False and "kein Hugo-Binary" in msg_b,
+               "fehlendes Hugo muss als Werkzeugfehler enden, nicht als Hang")
+    finally:
+        globals()["find_hugo"] = old_find
+
     return errors
 
 
@@ -1175,7 +1210,7 @@ def main() -> int:
         print("✅ AFFILIATE-INTEGRITY-SELFTEST bestanden (attribut-tolerante Anker-"
               "Erkennung inkl. ?subid=/Legacy/unminifiziert, rohe Partner-Links, "
               "AI1–AI3-Schadensbilder, Deduplikation, AI5-Gateway-Beweis, "
-              "Selbstheilung, Build-Frische, Hook-Drift-Wächter).")
+              "Selbstheilung, Build-Frische, Hook-Drift-Wächter, Hugo-Rebuild-Klartext).")
         return EXIT_OK
 
     result = run()
