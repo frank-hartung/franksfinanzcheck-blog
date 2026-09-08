@@ -1,4 +1,5 @@
 ---
+
 lastmod: 2026-09-02
 title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
 description: "Preisgarantie Gas: So schützt du dich vor extremen Preissprüngen am Energiemarkt. Klauseln, Tarife & Spartipps im Check – spare bis zu 580 € pro Jahr."
@@ -22,7 +23,10 @@ keywords: ["Preisgarantie Gas", "Gaspreissprünge", "Gastarif wechseln", "Heizko
 pin_title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
 pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel: bevor die Heizperiode die Preise anzieht. Vergleiche Tarife mit Preisgarantie und Wechselbonus, in nur 5 Minuten Aufwand. Jetzt die Schritt-für-Schritt-Anleitung lesen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
----Wer die Energiepreise verfolgt, weiß: Die Zeit der stabilen Niedrigpreise ist vorbei. Krisen, kalte Winter und der CO₂‑Preis lassen die Preise an der Börse immer wieder springen.
+---
+Wer die Energiepreise verfolgt, weiß: Die Zeit der stabilen Niedrigpreise ist vorbei. Krisen, kalte Winter und der CO₂‑Preis lassen die Preise an der Börse immer wieder springen.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Gibt dein Versorger diese Spitzen an dich weiter, drohen hohe Nachzahlungen. Eine wasserdichte **[Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)** wirkt wie ein Schutzschild für dein Budget. Preissprünge abfedern, die richtige Garantie wählen, Klauseln prüfen: Diese drei Schritte führen durch den Artikel.
 

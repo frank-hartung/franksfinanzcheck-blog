@@ -1,4 +1,5 @@
 ---
+
 title: "Energiediebe stoppen: So kannst du Stromfresser finden"
 description: "Energiediebe stoppen: Die größten heimlichen Stromfresser im Haushalt entlarven, Standby-Kosten eliminieren und bis zu 420 € Stromkosten sparen."
 date: 2026-08-19T08:35:12Z
@@ -22,7 +23,10 @@ keywords: ["Energiediebe stoppen", "Stromfresser finden", "Strom sparen Haushalt
 pin_title: "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe"
 pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr und Sofort-Tipps gegen Standby-Kosten. Jetzt checken und bis zu 300 € im Jahr sparen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
----Steigt deine Stromrechnung, obwohl du sparsam lebst? In fast jedem Haushalt verstecken sich heimliche **Energiediebe**. Sie ziehen rund um die Uhr Strom – auch wenn niemand zu Hause ist. Alte Geräte und dauerlaufende Elektronik treiben den Verbrauch um hunderte Kilowattstunden nach oben. Ich zeige dir, wie du **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen kannst. So sparst du bis zu **420 €** im Jahr.
+---
+Steigt deine Stromrechnung, obwohl du sparsam lebst? In fast jedem Haushalt verstecken sich heimliche **Energiediebe**. Sie ziehen rund um die Uhr Strom – auch wenn niemand zu Hause ist. Alte Geräte und dauerlaufende Elektronik treiben den Verbrauch um hunderte Kilowattstunden nach oben. Ich zeige dir, wie du **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen kannst. So sparst du bis zu **420 €** im Jahr.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 ---
 Steigt deine Stromrechnung, obwohl du sparsam lebst? In fast jedem Haushalt verstecken sich heimliche **Energiediebe**. Sie ziehen rund um die Uhr Strom – auch wenn niemand zu Hause ist. Alte Geräte und dauerlaufende Elektronik treiben den Verbrauch um hunderte Kilowattstunden nach oben. Ich zeige dir, wie du **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen kannst. So sparst du bis zu **420 €** im Jahr.

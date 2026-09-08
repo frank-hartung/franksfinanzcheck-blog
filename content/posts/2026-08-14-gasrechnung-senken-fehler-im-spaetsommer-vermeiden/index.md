@@ -1,4 +1,5 @@
 ---
+
 lastmod: 2026-09-02
 title: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
 description: "Gasrechnungen senken vor der Heizperiode: Vermeide die 5 teuersten Spätsommer-Fehler bei Heizung, Thermostaten & Tarifen und spare bis zu 720 €."
@@ -22,7 +23,10 @@ keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heiz
 pin_title: "Heizperiode vorbereiten: 6 Schritte gegen hohe Gasrechnungen"
 pin_description: "*Werbung | Wer die Heizperiode schon im Spätsommer vorbereitet, spart richtig Geld: Heizung entlüften, Thermostate clever einstellen, Gasvertrag prüfen – unsere 6-Schritte-Checkliste macht dein Zuhause fit für den Winter. Jetzt abhaken!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
----Im Spätsommer denkt kaum jemand an die Heizung. Genau das ist ein teurer Fehler.  
+---
+Im Spätsommer denkt kaum jemand an die Heizung. Genau das ist ein teurer Fehler.  
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Merkt jemand erst im November, dass die Heizkörper gluckern? Dann ist es zu spät. Auch wer dann erst den Tarif prüft, zahlt drauf. Besser ist es, im Spätsommer zu handeln. Mit der richtigen Vorbereitung senkst du deine **Gasrechnung** um bis zu **720 €**. Wir zeigen dir die fünf häufigsten Kostenfallen und geben dir sofort umsetzbare Profi‑Tipps.
 
