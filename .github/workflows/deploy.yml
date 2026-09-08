@@ -33,6 +33,10 @@ on:
         description: 'Maximal neu zu vertonende Artikel je Lauf (ignoriert, wenn audio_backfill=true)'
         type: string
         default: '25'
+      audio_max_minutes:
+        description: 'Zeitbudget für NEUE Vertonungen in Minuten (leer/0 = automatisch: 20 normal, 90 bei Backfill)'
+        type: string
+        default: ''
       audio_order:
         description: 'Reihenfolge für Archiv-Backfill und limitierte Queue'
         type: choice
@@ -50,6 +54,27 @@ on:
 permissions:
   contents: write
 
+# ============================================================
+#  WARTESCHLANGE (Befund Issue #218, 08.09.2026)
+#  ------------------------------------------------------------
+#  `cancel-in-progress: false` bleibt BEWUSST stehen: Ein laufender
+#  Deploy darf nicht mitten in der Vertonung abgeschossen werden –
+#  er wuerde Rechenzeit verbrennen, ohne eine Spur zu hinterlassen.
+#
+#  Wichtig zu wissen (das war die Ursache der Phantom-Meldungen):
+#  GitHub haelt je Gruppe genau EINEN wartenden Lauf vor. Trifft ein
+#  weiterer Push ein, wird der bis dahin WARTENDE Lauf mit
+#  `cancelled` beendet – er hat nie eine Zeile ausgefuehrt. Das ist
+#  KEIN Fehler, sondern gewolltes Verdraengen: Da `main` linear ist,
+#  enthaelt der neuere Commit den aelteren bereits, der spaetere Lauf
+#  veroeffentlicht also einen Superset-Stand. Verloren geht nichts.
+#  Das Fehler-Alerting unterscheidet diesen Fall seit dem 08.09.2026
+#  sauber von einem echten Abbruch (siehe alert-on-failure.yml).
+#
+#  Die eigentliche Reparatur ist deshalb nicht die Warteschlange,
+#  sondern die Laufzeit: Sie wird unten hart gedeckelt, damit die
+#  Warteschlange gar nicht erst volllaeuft.
+# ============================================================
 concurrency:
   group: pages-deploy
   cancel-in-progress: false
@@ -57,6 +82,14 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # SICHERHEITSNETZ (Issue #218): Ohne eigenes Limit gilt GitHubs
+    # Voreinstellung von 360 Minuten. Lauf 34140579736 hat sie voll
+    # ausgeschoepft und die Deploy-Warteschlange SECHS STUNDEN blockiert –
+    # in dieser Zeit ging kein einziger Artikel live. 150 Minuten liegen
+    # komfortabel ueber dem groessten geplanten Lauf (Backfill: 90 min
+    # Tonspur-Budget + Build + Deploy) und geben die Gruppe im Stoerfall
+    # trotzdem schnell wieder frei.
+    timeout-minutes: 150
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
@@ -282,7 +315,39 @@ jobs:
           else
             LIMIT_NEW="$AUDIO_LIMIT_NEW"
           fi
-          echo "🔧 Tonspuren: backend=$AUDIO_BACKEND profile=$AUDIO_PROFILE order=$AUDIO_ORDER limit_new=$LIMIT_NEW"
+
+          # ---- ZEITBUDGET (Reparatur Issue #218, 08.09.2026) -------------
+          # Messung an echten Laeufen: Dieser eine Schritt brauchte 63 min
+          # (Run 34129128450) bzw. 151 min (Run 34121113112), waehrend der
+          # KOMPLETTE Rest des Deploys – Checkout, alle Gates, Hugo-Build
+          # und gh-pages-Push – zusammen nur rund 90 Sekunden dauert. Die
+          # Vertonung stellte also 97-99 % der Laufzeit und hat die
+          # Deploy-Warteschlange dauerhaft verstopft; wartende Laeufe
+          # wurden verdraengt (`cancelled`) und der Livegang verzoegerte
+          # sich um Stunden.
+          #
+          # Die Stueckgrenze --limit-new konnte das nicht verhindern, weil
+          # die Dauer je Artikel stark schwankt. --max-seconds ist die
+          # fehlende Wanduhr: Sie deckelt NUR die Neusynthese. Fertige
+          # Spuren bleiben, alle uebrigen Artikel behalten ihre Spur aus
+          # dem Cache, und der naechste Lauf setzt die Warteschlange genau
+          # dort fort (konvergent, kein Verlust).
+          AUDIO_MAX_MINUTES="${{ github.event.inputs.audio_max_minutes || '' }}"
+          case "$AUDIO_MAX_MINUTES" in
+            ''|*[!0-9]*) AUDIO_MAX_MINUTES=0 ;;
+          esac
+          if [ "$AUDIO_MAX_MINUTES" -eq 0 ]; then
+            # Automatik: Ein bewusst angestossener Backfill darf laenger
+            # arbeiten, der normale Push-Deploy bleibt schnell.
+            if [ "${{ github.event.inputs.audio_backfill }}" = "true" ]; then
+              AUDIO_MAX_MINUTES=90
+            else
+              AUDIO_MAX_MINUTES=20
+            fi
+          fi
+          MAX_SECONDS=$(( AUDIO_MAX_MINUTES * 60 ))
+
+          echo "🔧 Tonspuren: backend=$AUDIO_BACKEND profile=$AUDIO_PROFILE order=$AUDIO_ORDER limit_new=$LIMIT_NEW budget=${AUDIO_MAX_MINUTES}min"
           python3 scripts/ff_voice_audio.py \
             --html-dir public \
             --out-dir public/audio/articles \
@@ -291,6 +356,7 @@ jobs:
             --profile "$AUDIO_PROFILE" \
             --order "$AUDIO_ORDER" \
             --limit-new "$LIMIT_NEW" \
+            --max-seconds "$MAX_SECONDS" \
             || echo "⚠ Vorlese-Tonspuren unvollständig – Deploy läuft weiter (Browser-Fallback aktiv)"
           echo "✅ Vorlese-Audio-Schritt abgeschlossen."
 

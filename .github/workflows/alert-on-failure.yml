@@ -57,6 +57,7 @@ on:
 
 permissions:
   issues: write
+  actions: read   # Issue #218: Jobs/Schritte eines Runs lesen, um verdrängte Läufe zu erkennen
 
 jobs:
   alarm:
@@ -74,6 +75,52 @@ jobs:
             const branch = run.head_branch || 'main';
             const created = new Date(run.created_at).toLocaleString('de-DE', { timeZone: 'Europe/Berlin' });
             const headSha = run.head_sha ? run.head_sha.slice(0, 8) : '?';
+
+            // ================================================================
+            //  PHANTOM-FILTER (Reparatur Issue #218, 08.09.2026)
+            //  --------------------------------------------------------------
+            //  Befund: Issue #218 meldete einen "fehlgeschlagenen" Deploy, der
+            //  in Wahrheit NIE GELAUFEN ist. GitHub haelt je Concurrency-Gruppe
+            //  genau einen wartenden Lauf vor; trifft ein neuerer Push ein,
+            //  wird der wartende Lauf mit `cancelled` verdraengt – ohne eine
+            //  einzige Zeile auszufuehren. Geprueft an den echten Runs:
+            //  34148140778 (= Issue #218), 34123667405, 34217052055 und
+            //  34218421327 hatten allesamt NULL Jobs.
+            //
+            //  Fachlich ist das voellig unkritisch: `main` ist linear, der
+            //  verdraengende Lauf veroeffentlicht denselben Stand inklusive
+            //  der neueren Commits. Eine Fehlermeldung dafuer ist ein
+            //  Fehlalarm – und ein teurer, denn der Dedupe-Filter unten
+            //  unterdrueckt danach ECHTE Meldungen desselben Workflows,
+            //  solange das Phantom-Issue offen steht. Genau das ist passiert.
+            //
+            //  Unterscheidungsmerkmal: Hat der Lauf ueberhaupt etwas
+            //  ausgefuehrt? Ein echter Abbruch (z. B. Timeout wie Run
+            //  34140579736, 6 h) hat erfolgreich beendete Schritte, ein
+            //  verdraengter Lauf hat keine. Nur `cancelled` wird so geprueft –
+            //  `failure` meldet weiterhin immer.
+            // ================================================================
+            if (conclusion === 'cancelled') {
+              let ranSomething = false;
+              try {
+                const jobs = await github.paginate(
+                  github.rest.actions.listJobsForWorkflowRun,
+                  { owner: context.repo.owner, repo: context.repo.repo, run_id: run.id, per_page: 100 }
+                );
+                ranSomething = jobs.some(j =>
+                  (j.steps || []).some(s => s.conclusion === 'success')
+                );
+                if (!ranSomething) {
+                  console.log('Verdrängter Wartelauf (' + jobs.length + ' Jobs, kein ausgeführter Schritt) – kein Fehlalarm.');
+                  console.log('Der nachfolgende Lauf veröffentlicht denselben Stand inkl. neuerer Commits.');
+                  return;
+                }
+                console.log('Echter Abbruch: Der Lauf hatte bereits ausgeführte Schritte – Meldung wird erstellt.');
+              } catch (e) {
+                // Im Zweifel lieber melden als eine echte Störung verschlucken.
+                console.log('Job-Abfrage fehlgeschlagen (' + e.message + ') – Meldung wird sicherheitshalber erstellt.');
+              }
+            }
 
             const { data: existing } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
