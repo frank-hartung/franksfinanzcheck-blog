@@ -1,8 +1,8 @@
 # 🤖 ENGINE-STATUS (Content-Engine v2)
 
-**Letzter Lauf:** 2026-09-07 20:53 UTC
+**Letzter Lauf:** 2026-09-08 11:04 UTC
 **Status:** OK
 
-2 Artikel live heute (2 NEU · 0 recycelt · 7 Entwurf) | Ziel: 2-2 LIVE an Mo/Mi/Fr
+Reserve-Produktion: 2 Kandidaten (Freigabe erst nach finalen Gates).
 
 _Wird bei jedem Lauf der Content-Engine v2 aktualisiert._
