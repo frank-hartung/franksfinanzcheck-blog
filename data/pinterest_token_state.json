@@ -9,7 +9,7 @@
     }
   ],
   "auto_renew_armed": false,
-  "checked_at": "2026-09-08T09:59:38+00:00",
+  "checked_at": "2026-09-08T16:00:55+00:00",
   "detail": "keine Token-Quelle konfiguriert",
   "fingerprint": "",
   "next_action": "Einmalige Neu-Autorisierung nötig (danach trägt sich der Kanal selbst): docs/PINTEREST-TOKEN-RUNBOOK.md – `python3 scripts/pinterest_auth.py --auth-url`",

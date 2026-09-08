@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-08 09:59 UTC · Modus: FIX
+**Stand:** 2026-09-08 16:00 UTC · Modus: FIX
 
 **Domain-Status (Pinterest):** 🔴 GESPERRT – Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026. (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)
 
@@ -11,40 +11,28 @@
 - 🟡 [B5] 2026-08-10-dsl-wechselbonus-sichern: Originalitäts-Quote 42 % (< 45 %)
 - 🟡 [B2] 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B5] 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas: Originalitäts-Quote 44 % (< 45 %)
-- 🔴 [B3] 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 - 🟡 [B2] 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b, \bhöchst(?:e|er|es)\b)
 - 🟡 [B2] 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
-- 🔴 [B3] 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
-- 🔴 [B3] 2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 - 🟡 [B1] 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden: Keyword-Stuffing (ein Signal): Text: 'kwh' ×44 (4.6 % Dichte)
-- 🔴 [B3] 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 - 🟡 [B2] 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B5] 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub: Originalitäts-Quote 44 % (< 45 %)
-- 🔴 [B3] 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
-- 🔴 [B3] 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 - 🟡 [B1] 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet: Keyword-Stuffing (ein Signal): Text: 'dns' ×44 (4.7 % Dichte)
 - 🟡 [B5] 2026-09-03-hausratversicherung-kosten-leistungen-vergleich: Originalitäts-Quote 43 % (< 45 %)
 - 🟡 [B5] 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen: Originalitäts-Quote 44 % (< 45 %)
 - 🟡 [B1] 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Keyword-Stuffing (ein Signal): Text: 'dns' ×29 (3.5 % Dichte)
 - 🟡 [B2] 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Superlativ ohne Einschränkung (\bgünstigst(?:e|er|es)\b)
-- 🔴 [B3] 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 - 🟡 [B2] 2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
-- 🔴 [B3] 2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 - 🟡 [B5] 2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh: Originalitäts-Quote 44 % (< 45 %)
 - 🟡 [B2] 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort: Superlativ ohne Einschränkung (\bhöchst(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor: Superlativ ohne Einschränkung (\bhöchst(?:e|er|es)\b)
+- 🟡 [B2] 2026-09-08-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
+- 🟡 [B2] 2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b, \bgünstigst(?:e|er|es)\b)
+- 🔴 [B3] 2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 
 **Geheilt:**
-- ✅ 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden: B3-Disclosure eingefügt
-- ✅ 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit: B3-Disclosure eingefügt
-- ✅ 2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann: B3-Disclosure eingefügt
-- ✅ 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden: B3-Disclosure eingefügt
-- ✅ 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps: B3-Disclosure eingefügt
-- ✅ 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen: B3-Disclosure eingefügt
-- ✅ 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich: B3-Disclosure eingefügt
-- ✅ 2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh: B3-Disclosure eingefügt
+- ✅ 2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks: B3-Disclosure eingefügt
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
@@ -52,9 +40,7 @@
 
 ## C: CSV pins_upload.csv (C1–C8)
 
-- 🔴 [C1] Zeile 2: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 3: C1: Scheduling in der Vergangenheit
-- 🔴 [C1] Zeile 4: C1: Scheduling in der Vergangenheit
+- keine Funde
 
 **Geheilt:**
 - ✅ CSV neu geschrieben: 3 Zeilen behalten
@@ -66,7 +52,7 @@
 
 ## Fazit
 
-🔴 12 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
+🔴 2 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
 
 ---
 _Wache: Blog B1–B8 · Feed F1–F6 · CSV C1–C8 · API A1–A4 – Dauerauftrag, niemals Content-Verlust._
