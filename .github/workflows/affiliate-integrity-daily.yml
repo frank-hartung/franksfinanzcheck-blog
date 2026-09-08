@@ -1,36 +1,47 @@
 # ============================================================
 #  AFFILIATE-INTEGRITÄTS-WACHE (täglich) – scripts/affiliate_integrity_gate.py
 #  ------------------------------------------------------------
-#  Auftrag (Frank, 14.08.2026): "Die Affiliate-Links wurden beschädigt.
-#  Bitte dauerhaft beheben (Automatik und Selbstheilung), indem die
-#  Veröffentlichung nur vorgenommen wird, wenn alle Links funktionieren
-#  und tatsächlich im Blog erscheinen. Ansonsten soll sofort eine
-#  Reparatur erfolgen."
+#  Auftrag (Frank, 14.08.2026, unverändert gültig): "Die Affiliate-Links
+#  wurden beschädigt. Bitte dauerhaft beheben (Automatik und Selbstheilung),
+#  indem die Veröffentlichung nur vorgenommen wird, wenn alle Links
+#  funktionieren und tatsächlich im Blog erscheinen. Ansonsten soll sofort
+#  eine Reparatur erfolgen."
 #
 #  Hintergrund: Am 14.08.2026 hatten 8 Live-Artikel beschädigte
-#  Affiliate-CTA-Boxen (dangling Markdown-Links, verstümmelter Text,
-#  ein Rohlink zum falschen Partner) – unbemerkt bis zur manuellen
-#  Meldung. Die bestehende Prüfung dieser Klasse von Schäden
-#  (scripts/bestand_gate.py -> affiliate_integrity_gate.py) lief bis
-#  dahin nur EINMAL PRO WOCHE über seo-weekly.yml (Mittwoch). Das
-#  erfüllt NICHT die Anforderung "sofort" – ein neuer Schaden hätte im
-#  schlimmsten Fall fast eine Woche unbemerkt live bleiben können.
+#  Affiliate-CTA-Boxen (dangling Markdown-Links, verstümmelter Text, ein
+#  Rohlink zum falschen Partner) – unbemerkt bis zur manuellen Meldung.
+#  Die Prüfung dieser Schadensklasse lief bis dahin nur EINMAL PRO WOCHE
+#  (seo-weekly.yml). Das erfüllt NICHT "sofort". Dieser schlanke,
+#  eigenständige Workflow läuft TÄGLICH und prüft/heilt AUSSCHLIESSLICH
+#  die Affiliate-Link-Integrität (AI1–AI5).
 #
-#  Dieser eigenständige, bewusst schlanke Workflow schließt die Lücke:
-#  läuft TÄGLICH, prüft und heilt AUSSCHLIESSLICH die Affiliate-Link-
-#  Integrität (AI1-AI4: vollständige Markdown-Links, nur registrierte
-#  /go/-Redirects, Text-Plausibilität, Render-Beweis im gebauten HTML)
-#  – bewusst OHNE die breiteren, langsameren wöchentlichen SEO-/Meta-
-#  Heilungsketten aus seo-weekly.yml anzufassen, um das Risiko
-#  unbeabsichtigter Seiteneffekte durch eine höhere Lauffrequenz gering
-#  zu halten.
+#  ------------------------------------------------------------
+#  PREMIUM-AUSBAU 02.09.2026 (Vorfall "stille Blindheit"):
+#    attribut-toleranter Render-Beweis, Selftest, fail-closed, AI5,
+#    actions: write, idempotente Issue-Pflege, Deploy nur bei echter Heilung.
 #
-#  Ablauf: Hugo-Build -> affiliate_integrity_gate.py (prüft + heilt +
-#  baut bei Heilung automatisch neu, um den Render-Beweis danach erneut
-#  zu führen) -> bei Änderungen committen + pushen -> Deploy explizit
-#  anstoßen (GITHUB_TOKEN-Commits lösen den push-Trigger in deploy.yml
-#  NICHT aus, siehe content-engine-v2.yml) -> bei weiterhin bestehenden
-#  Problemen automatisch ein GitHub-Issue eröffnen.
+#  REPARATUR 08.09.2026 (Issue #220, Run 34204720578):
+#    Der Lauf starb nach 13 s im Schritt "Hugo-Build" – Gate, Heilung,
+#    Report, Deploy-Trigger und fachliches Issue wurden ALLE übersprungen.
+#    Das zentrale Alerting eröffnete darauf ein generisches Issue mit der
+#    irreführenden Diagnose "API-Key abgelaufen".
+#
+#    Ursache der Betriebslücke (nicht des einzelnen Hugo-Exits):
+#      1. Einziger `hugo --minify` ohne Wiederholung, ohne Extended-Check,
+#         ohne Log-Auszug – ein Runner-/TOCSS-/CDN-Blip tötet die Wache.
+#      2. Hugo-Schritt ohne continue-on-error → Folge-Schritte skipped.
+#         Das Gate kann selbst neu bauen (ensure_build), kam aber nie dran.
+#      3. Der Premium-Workflow (Selftest, Issue-Pflege, Artefakt, Deploy
+#         nur bei healed+pushed) war im Live-YAML nicht vollständig drin.
+#
+#    Dauerhafte Behebung:
+#      • Hugo-Extended nach der Installation prüfen, notfalls selbst laden
+#      • Hugo-Build 3× mit Pause, Log-Tail, unvollständiges public/ löschen
+#      • Gate läuft TROTZDEM (eigener Rebuild mit 3 Versuchen)
+#      • Selftest vor jeder Prüfung (fail-closed)
+#      • Issue-Pflege idempotent, auch wenn Hugo/Gate nie einen Exit liefern
+#      • Job nur bei unheilbarem Werkzeugfehler rot (Alerting bleibt ehrlich)
+#      • Inhaltsschaden → fachliches Issue, Lauf betrieblich grün (kein Doppelalarm)
 # ============================================================
 name: Affiliate-Integritäts-Wache (täglich)
 
@@ -48,9 +59,14 @@ concurrency:
   group: affiliate-integrity
   cancel-in-progress: false
 
+env:
+  HUGO_VERSION: "0.164.0"
+  ISSUE_MARKER: "<!-- affiliate-integrity-daily -->"
+
 jobs:
   integritaet:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
@@ -63,44 +79,148 @@ jobs:
       - name: Abhängigkeiten
         run: |
           pip install --quiet pyyaml
-          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1
+          # AI3 (Text-Plausibilität) ist optional – ein apt-Flake darf die Wache nicht töten.
+          sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1 || true
 
       - name: Hugo installieren
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "0.164.0"
+          hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
 
-      - name: Hugo-Build (Voraussetzung für Render-Beweis AI4)
-        run: hugo --minify
+      # PaperMod braucht Extended (TOCSS/Libsass). Wenn der Action-Download
+      # still die Standard-Binary liefert, stirbt `hugo --minify` in Sekunden
+      # – genau das Schadensbild von Run 34204720578 (Issue #220).
+      - name: Hugo-Extended prüfen (sonst selbst nachladen)
+        run: |
+          set -euo pipefail
+          if command -v hugo >/dev/null 2>&1 && hugo version 2>&1 | grep -qi extended; then
+            hugo version
+            exit 0
+          fi
+          echo "⚠ Hugo-Extended fehlt nach der Action-Installation – Fallback-Download."
+          VER="${HUGO_VERSION}"
+          URL="https://github.com/gohugoio/hugo/releases/download/v${VER}/hugo_extended_${VER}_linux-amd64.tar.gz"
+          curl -fsSL --retry 3 --retry-delay 4 "$URL" -o /tmp/hugo.tgz
+          tar -xzf /tmp/hugo.tgz -C /tmp hugo
+          sudo install -m 0755 /tmp/hugo /usr/local/bin/hugo
+          hugo version
+          hugo version 2>&1 | grep -qi extended
 
-      - name: Affiliate-Integritäts-Gate ausführen (prüfen + sofort heilen)
-        id: gate
+      # ============ STAGE 1: DETEKTOR-SELBSTTEST (fail-closed) ============
+      - name: Detektor-Selbsttest (Wache muss sehen können)
+        id: selftest
+        run: python3 scripts/affiliate_integrity_gate.py --selftest
+
+      # ============ STAGE 1b: HUGO-BUILD MIT WIEDERHOLUNG ============
+      # continue-on-error: Das Gate darf den Rebuild selbst versuchen.
+      # Bei Fehlschlag wird public/ gelöscht, damit ensure_build() nicht
+      # gegen ein halbfertiges Artefakt "aktuell" beweist.
+      - name: Hugo-Build (Render-Beweis-Grundlage, mit Wiederholung)
+        id: hugo
         continue-on-error: true
         run: |
-          python3 scripts/affiliate_integrity_gate.py | tee /tmp/integrity_log.txt
-          exit ${PIPESTATUS[0]}
+          set +e
+          if ! command -v hugo >/dev/null 2>&1; then
+            echo "::error::Hugo-Binary fehlt im PATH."
+            echo "PATH=$PATH"
+            echo "hugo_ok=false" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          hugo version
+          for attempt in 1 2 3; do
+            echo "::group::Hugo-Build Versuch ${attempt}/3"
+            hugo --minify > /tmp/hugo-build.log 2>&1
+            rc=$?
+            tail -n 60 /tmp/hugo-build.log
+            echo "::endgroup::"
+            if [ "$rc" -eq 0 ]; then
+              echo "hugo_ok=true" >> "$GITHUB_OUTPUT"
+              echo "✅ Hugo-Build erfolgreich (Versuch ${attempt})."
+              exit 0
+            fi
+            echo "⚠ Versuch ${attempt} Exit ${rc}"
+            if [ "$attempt" -lt 3 ]; then
+              sleep $((attempt * 8))
+            fi
+          done
+          echo "hugo_ok=false" >> "$GITHUB_OUTPUT"
+          rm -rf public
+          echo "::warning::Hugo-Build nach 3 Versuchen fehlgeschlagen – Gate versucht eigenen Rebuild. Letzte Zeilen:"
+          tail -n 40 /tmp/hugo-build.log || true
+          exit 1
 
-      - name: Reparatur + Report committen
+      # ============ STAGE 2: PRÜFEN + SOFORT HEILEN ============
+      # Läuft auch nach Hugo-Flake (selftest muss grün sein).
+      - name: Affiliate-Integritäts-Gate ausführen (prüfen + sofort heilen)
+        id: gate
+        if: ${{ always() && !cancelled() && steps.selftest.outcome == 'success' }}
+        continue-on-error: true
+        run: |
+          set +e
+          python3 scripts/affiliate_integrity_gate.py | tee /tmp/integrity_log.txt
+          code=${PIPESTATUS[0]}
+          echo "exit_code=${code}" >> "$GITHUB_OUTPUT"
+          if [ -f .affiliate_integrity_state.json ]; then
+            cp .affiliate_integrity_state.json /tmp/state.json
+          else
+            echo '{}' > /tmp/state.json
+          fi
+          case "$code" in
+            0) echo "✅ Affiliate-Integrität bewiesen (Links intakt, registriert, gerendert, Gateway geprüft)." ;;
+            1) echo "🔴 Inhaltsschaden offen – Details im Report/Issue." ;;
+            2) echo "🟠 WERKZEUGFEHLER – Render-Beweis nicht möglich (fail-closed)." ;;
+            *) echo "⚠ Unerwarteter Exit-Code ${code}" ;;
+          esac
+          exit "$code"
+
+      - name: Heilungs-Status aus Zustand ableiten
+        id: state
+        if: ${{ always() && !cancelled() }}
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+          state = {}
+          for cand in (Path("/tmp/state.json"), Path(".affiliate_integrity_state.json")):
+              if cand.is_file():
+                  try:
+                      state = json.loads(cand.read_text(encoding="utf-8"))
+                      break
+                  except Exception:
+                      pass
+          healed = state.get("healed") or []
+          print(f"healed={'true' if healed else 'false'}")
+          print(f"healed_count={len(healed)}")
+          print(f"exit_code={state.get('exit_code', '')}")
+          print(f"content_problems={len(state.get('content_problems') or [])}")
+          print(f"tool_errors={len(state.get('errors') or [])}")
+          PY
+
+      # ============ STAGE 3: HEILUNG SICHERN ============
+      - name: Reparatur + Report committen und pushen
+        id: commit
+        if: ${{ always() && !cancelled() && steps.gate.outcome != 'skipped' }}
         run: |
           git config user.name "Affiliate-Integrity-Bot"
           git config user.email "affiliate-integrity-bot@users.noreply.github.com"
-          # BUGFIX (14.08.2026, siehe uniqueness-guard.yml/seo-weekly.yml):
-          # 'git add' mit mehreren Pfaden bricht OHNE IRGENDETWAS zu stagen
-          # ab, wenn auch nur EIN Pfad fehlt – deshalb pro Pfad ein eigener
-          # add-Aufruf statt eines gemeinsamen.
           git add content/ 2>/dev/null || true
           git add AFFILIATE-INTEGRITY-REPORT.md 2>/dev/null || true
+          git add .affiliate_integrity_state.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Affiliate-Integritäts-Wache: keine Änderungen."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "fix(content): Affiliate-Integritäts-Wache – defekte CTA-Box(en) automatisch geheilt (täglich)"
-            SYNC_OK_VAR=GEHEILT scripts/git_sync.sh --push-only
+            git commit -m "fix(content): Affiliate-Integritäts-Wache – CTA-Boxen/Linkziele automatisch geheilt (täglich)"
+            scripts/git_sync.sh --push-only
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Deploy anstoßen (nur wenn tatsächlich repariert wurde)
-        if: env.GEHEILT == 'true'
+      - name: Deploy anstoßen (nur wenn tatsächlich repariert und gepusht wurde)
+        if: ${{ steps.state.outputs.healed == 'true' && steps.commit.outputs.pushed == 'true' }}
         uses: actions/github-script@v7
+        env:
+          HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
         with:
           script: |
             await github.rest.actions.createWorkflowDispatch({
@@ -109,25 +229,159 @@ jobs:
               workflow_id: 'deploy.yml',
               ref: 'main',
             });
-            console.log('✅ Deploy ausgelöst.');
+            console.log(`✅ Deploy ausgelöst – ${process.env.HEALED_COUNT} Artikel geheilt und gepusht.`);
 
-      - name: Issue bei weiterhin bestehenden Problemen (z. B. nicht registrierter /go/-Key)
-        # Greift NUR, wenn nach der Selbstheilung noch etwas übrig ist
-        # (z. B. Render-Beweis scheitert trotz Heilung, oder ein Link
-        # verweist auf einen nicht in check24_links.yaml registrierten
-        # Key – das kann affiliate_integrity_gate.py nicht selbst lösen,
-        # das braucht eine redaktionelle/registrierungsseitige Korrektur).
-        if: steps.gate.outcome == 'failure'
+      # ============ STAGE 4: ISSUE-PFLEGE (idempotent) ============
+      - name: Issue pflegen (öffnen/aktualisieren bei Rot, schließen bei Grün)
+        if: ${{ always() && !cancelled() }}
         uses: actions/github-script@v7
+        env:
+          GATE_EXIT: ${{ steps.gate.outputs.exit_code }}
+          HEALED: ${{ steps.state.outputs.healed }}
+          HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
+          CONTENT_PROBLEMS: ${{ steps.state.outputs.content_problems }}
+          TOOL_ERRORS: ${{ steps.state.outputs.tool_errors }}
+          HUGO_OUTCOME: ${{ steps.hugo.outcome }}
+          SELFTEST_OUTCOME: ${{ steps.selftest.outcome }}
         with:
           script: |
             const fs = require('fs');
-            let details = 'Affiliate-Integritäts-Wache hat Artikel gefunden, deren CTA-Boxen NICHT automatisch vollständig geheilt werden konnten.';
-            try { details = fs.readFileSync('AFFILIATE-INTEGRITY-REPORT.md', 'utf-8'); } catch (e) {}
-            await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: '🔗 Affiliate-Integritäts-Wache: CTA-Boxen brauchen Aufmerksamkeit',
-              body: details + '\n\n---\nAutomatisch erstellt von der täglichen Affiliate-Integritäts-Wache. Betroffene Artikel wurden NICHT gelöscht.'
-            });
-            console.log('✅ Issue erstellt');
+            const marker = process.env.ISSUE_MARKER;
+            const exitCode = String(process.env.GATE_EXIT || '');
+            const green = exitCode === '0';
+            const healedCount = Number(process.env.HEALED_COUNT || 0);
+            const toolErrors = Number(process.env.TOOL_ERRORS || 0);
+
+            let report = '';
+            try { report = fs.readFileSync('AFFILIATE-INTEGRITY-REPORT.md', 'utf-8'); }
+            catch (e) { report = '_Report konnte nicht gelesen werden._'; }
+            let log = '';
+            try { log = fs.readFileSync('/tmp/integrity_log.txt', 'utf-8'); }
+            catch (e) {}
+            let hugoLog = '';
+            try { hugoLog = fs.readFileSync('/tmp/hugo-build.log', 'utf-8'); }
+            catch (e) {}
+
+            const listed = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', per_page: 100,
+            }).catch(() => ({ data: [] }));
+            let existing = (listed.data || []).filter(i => !i.pull_request && (i.body || '').includes(marker));
+
+            if (green) {
+              for (const issue of existing) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: `${marker}\n✅ **Affiliate-Integritäts-Wache grün** (${new Date().toISOString()}): ` +
+                        `alle Affiliate-Links sind intakt, registriert und der Render-Beweis im gebauten HTML ` +
+                        `ist geführt (AI4/AI5).${healedCount ? ` In diesem Lauf automatisch geheilt: ${healedCount} Artikel.` : ''}\n\n` +
+                        `Issue wird automatisch geschlossen.`,
+                });
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: issue.number, state: 'closed', state_reason: 'completed',
+                });
+                console.log(`✅ Issue #${issue.number} automatisch geschlossen (Wache grün).`);
+              }
+              if (!existing.length) console.log('✅ Wache grün, kein offenes Issue vorhanden.');
+              return;
+            }
+
+            const isToolError = exitCode === '2' || exitCode === '' || toolErrors > 0
+              || process.env.SELFTEST_OUTCOME !== 'success';
+            const title = isToolError
+              ? '🔗 Affiliate-Integritäts-Wache: Render-Beweis nicht möglich (Werkzeugfehler, fail-closed)'
+              : '🔗 Affiliate-Integritäts-Wache: CTA-Boxen brauchen Aufmerksamkeit';
+            const body = [
+              marker,
+              isToolError
+                ? '> 🟠 **Werkzeugfehler:** Der Render-Beweis konnte nicht geführt werden ' +
+                  '(Hugo-Build, `public/`, Detektor oder Python). **Fail-closed:** Es wurde nichts "geheilt" ' +
+                  'und `publish_gate.py` veröffentlicht in diesem Zustand keine Artikel. ' +
+                  'Bitte `python3 scripts/affiliate_integrity_gate.py --selftest` und das Hugo-Log prüfen. ' +
+                  (exitCode === '' ? ` Hinweis: Gate-Exit fehlt (Selftest=${process.env.SELFTEST_OUTCOME}, ` +
+                   `Hugo=${process.env.HUGO_OUTCOME}).` : '')
+                : '> 🔴 **Inhaltsschaden:** Nach der automatischen Selbstheilung bleiben Affiliate-CTAs ' +
+                  'auffällig. Betroffene Artikel wurden NICHT gelöscht.',
+              '',
+              `**Lauf:** ${new Date().toISOString()} · **Exit-Code:** ${exitCode || 'unbekannt'} · ` +
+              `**Hugo:** ${process.env.HUGO_OUTCOME || '?'} · **Selftest:** ${process.env.SELFTEST_OUTCOME || '?'} · ` +
+              `**Automatisch geheilt:** ${healedCount} Artikel · **Offene Funde:** ${process.env.CONTENT_PROBLEMS || 0}`,
+              '',
+              '---',
+              '',
+              report,
+              '',
+              '<details><summary>Gate-Log</summary>',
+              '',
+              '```',
+              (log || hugoLog || '(kein Log)').slice(0, 20000),
+              '```',
+              '</details>',
+              '',
+              '---',
+              '_Automatisch erstellt/aktualisiert von der täglichen Affiliate-Integritäts-Wache. ' +
+              'Pro Schadenslage gibt es genau EIN Issue – es wird bei Grün automatisch geschlossen._',
+            ].join('\n');
+
+            if (existing.length) {
+              const issue = existing[0];
+              await github.rest.issues.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: issue.number, title, body,
+              });
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `${marker}\n🔁 Wache lief erneut (${new Date().toISOString()}), Befund aktualisiert. ` +
+                      `Exit-Code ${exitCode || '?'}, Hugo=${process.env.HUGO_OUTCOME}, ${healedCount} Artikel geheilt.`,
+              });
+              console.log(`🔁 Issue #${issue.number} aktualisiert (kein Duplikat).`);
+              for (const dup of existing.slice(1)) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: dup.number, state: 'closed', state_reason: 'duplicate',
+                });
+                console.log(`🧹 Duplikat #${dup.number} geschlossen.`);
+              }
+            } else {
+              const created = await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo, title, body,
+              });
+              console.log(`✅ Issue #${created.data.number} erstellt.`);
+            }
+
+      - name: Diagnose-Artefakt bei Rot (Report, Log, Zustand)
+        if: always() && !cancelled() && steps.gate.outputs.exit_code != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-integrity-run-${{ github.run_id }}
+          path: |
+            AFFILIATE-INTEGRITY-REPORT.md
+            .affiliate_integrity_state.json
+          if-no-files-found: ignore
+          retention-days: 14
+
+      # Inhaltsschaden: fachliches Issue reicht (kein Doppelalarm über alert-on-failure).
+      # Werkzeugfehler nach allen Wiederholungen: Lauf rot, Alerting bleibt ehrlich.
+      - name: Lauf bewerten (rot nur bei unheilbarem Werkzeugfehler)
+        if: ${{ always() && !cancelled() }}
+        run: |
+          SELF="${{ steps.selftest.outcome }}"
+          GATE="${{ steps.gate.outputs.exit_code }}"
+          HUGO="${{ steps.hugo.outcome }}"
+          if [ "$SELF" != "success" ]; then
+            echo "::error::Detektor-Selbsttest nicht bestanden – fail-closed."
+            exit 1
+          fi
+          if [ "$GATE" = "0" ]; then
+            echo "✅ Affiliate-Integrität bewiesen."
+            exit 0
+          fi
+          if [ "$GATE" = "1" ]; then
+            echo "🔴 Inhaltsschaden – fachliches Issue gepflegt. Lauf bleibt betrieblich grün (kein Doppel-Alarm)."
+            exit 0
+          fi
+          echo "::error::Werkzeugfehler (Gate-Exit=${GATE:-keiner}, Hugo=${HUGO}). Render-Beweis nicht geführt – fail-closed."
+          exit 1
