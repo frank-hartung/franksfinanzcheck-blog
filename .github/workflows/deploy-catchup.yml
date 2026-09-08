@@ -30,6 +30,7 @@ on:
     workflows:
       - "Wöchentliche SEO-Optimierung"
       - "Content-Engine v2"
+      - "Kadenz-Endkontrolle (Mo/Mi/Fr – 2–3 LIVE erzwingen)"
       - "Affiliate-Health (Wochenwache)"
       - "Backlink-Automation"
       - "Layout-AI"

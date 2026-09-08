@@ -1,0 +1,57 @@
+name: Content-Reserve (täglicher Vorrat)
+on:
+  schedule:
+    - cron: "25 3 * * *"
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: content-bot
+  cancel-in-progress: false
+jobs:
+  reserve:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml cryptography pillow pillow-avif-plugin fonttools brotli
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq hunspell hunspell-de-de
+      - name: Produce reserve even on days without publication
+        id: stock
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
+          AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
+          AUTO_PUBLISH: profi
+          RESERVE_TARGET: '6'
+        run: python3 scripts/engine_generate.py --reserve-only
+      - name: Prove reserve readiness through production gates
+        id: readiness
+        continue-on-error: true
+        run: python3 scripts/reserve_readiness.py
+      - name: Save drafts even if stock target is not reached
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "content: unabhängige Redaktionsreserve auffüllen"
+            scripts/git_sync.sh --push-only
+          fi
+      - name: Stock shortage must not look successful
+        run: test '${{ steps.readiness.outcome }}' = success

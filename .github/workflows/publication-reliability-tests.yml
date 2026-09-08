@@ -1,0 +1,23 @@
+name: Publication reliability regression tests
+on:
+  pull_request:
+    paths:
+      - 'scripts/**'
+      - '.github/workflows/**'
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml pillow cryptography
+      - run: |
+          python3 -m unittest discover -s scripts/tests -v
+          python3 scripts/engine_generate.py --selftest
+          python3 scripts/reserve_pool.py --selftest
+          python3 scripts/cadence_guard.py --selftest

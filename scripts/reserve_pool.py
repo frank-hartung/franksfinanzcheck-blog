@@ -17,8 +17,8 @@ WARUM (Premium-Fix 03.09.2026, Auftrag „Mi 02.09.: nur 1 Artikel live“):
   live-Posts (draft: false, Datum = heute) und durchlaufen danach exakt
   dieselben Deploy-Gates wie jeder andere Artikel.
 
-  Die Engine füllt den Pool nach erfolgreichen Produktionstagen selbsttätig
-  wieder auf (Reserve-Top-up) – der Pool trocknet also nie aus.
+  Tägliche Reserve-Produktion ergänzt den Engine-Top-up. Der Vorrat ist
+  endlich; fehlende gate-geprüfte Reserve löst einen sichtbaren Fehler aus.
 
 SICHERHEIT:
   * reserve:true-Entwürfe haben KEINE cadence_*-Felder → park_state liest
@@ -98,7 +98,7 @@ def publish_one(index: Path, when=None) -> str:
 
 
 def publish_to_min(min_per_day: int | None = None,
-                   posts_dir: Path = POSTS) -> list:
+                   posts_dir: Path = POSTS, validator=None) -> list:
     """Füllt die heutige LIVE-Lücke bis zum Mindestziel aus dem Reserve-Pool.
 
     Nur an Publikationstagen (Mo/Mi/Fr). Rückgabe: Liste veröffentlichter
@@ -109,13 +109,32 @@ def publish_to_min(min_per_day: int | None = None,
         print(f"Kein Publikationstag ({cadence_guard.DAYS_DE[today.weekday()]}) "
               f"– Reserve-Pool bleibt unangetastet.")
         return []
-    if min_per_day is None:
-        min_per_day = cadence_guard.effective_limits()[0]
+    floor, ceiling = cadence_guard.effective_limits()
+    min_per_day = max(floor, min(min_per_day or floor, ceiling))
+    if validator is None:
+        from publication_release import accept_candidate
+        validator = accept_candidate
     published = []
     for index in reserve_drafts(posts_dir):
+        # Never carry a delayed slot across midnight into a non-publication day.
+        if datetime.date.today() != today:
+            break
         if live_count_today(posts_dir) >= min_per_day:
             break
-        iso = publish_one(index)
+        original = index.read_text(encoding="utf-8")
+        accepted = False
+        try:
+            iso = now_utc_iso()
+            if iso[:10] != today.isoformat():
+                break
+            iso = publish_one(index, when=iso)
+            accepted = validator(index)
+        finally:
+            if not accepted:
+                index.write_text(original, encoding="utf-8")
+        if not accepted:
+            print(f"  Reserve abgelehnt, bleibt Entwurf: {index.parent.name}")
+            continue
         published.append(index.parent.name)
         print(f"  🆘 RESERVE live geschaltet: {index.parent.name} "
               f"(datiert {iso[:10]})")

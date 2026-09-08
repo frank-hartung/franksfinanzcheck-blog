@@ -26,6 +26,8 @@ on:
       - "Quartalsweises Artikel-Update"
       - "Bot-Watchdog"
       - "Social-Media-AI"
+      - "Content-Reserve (täglicher Vorrat)"
+      - "Publication Delivery (öffentlicher Nachweis)"
       - "Content-Engine v2"          # Herzstück (ersetzt daily-content, entfernt 2026-08-10)
       - "Pinterest-AI"           # Pins würden still ausfallen
       - "Pinterest-Watchdog"     # PREM-AUDIT: Spam-/SEO-Wache lief still aus
