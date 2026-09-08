@@ -33,6 +33,7 @@ Aufruf (wie bisherige Bot-Umgebung):
   PIN_TOPICS=1 python3 scripts/engine_generate.py
 """
 import datetime
+import json
 import os
 import random
 import re
@@ -524,16 +525,30 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
     angefasst (keine cadence_*-Felder). Rückgabe: 1 bei Erfolg, sonst 0."""
     if reserve_target is None:
         try:
-            reserve_target = int(os.environ.get("RESERVE_TARGET") or "2")
+            reserve_target = int(os.environ.get("RESERVE_TARGET") or "6")
         except ValueError:
-            reserve_target = 2
+            reserve_target = 6
     try:
         import reserve_pool as rp
     except Exception as exc:  # noqa: BLE001
         print(f"  ⚠ Reserve-Pool nicht verfügbar: {exc}")
         return 0
     try:
-        if len(rp.reserve_drafts()) >= reserve_target:
+        pool = rp.reserve_drafts()
+        # A flag is not a readiness certificate; rejected candidates must not
+        # make the pool look full. Hash prevents stale certificates after edits.
+        import hashlib
+        from pathlib import Path
+        ready = 0
+        try:
+            report = json.loads(Path("data/reserve-readiness.json").read_text())
+            certified = {r["slug"]: r for r in report["candidates"] if r["ready"]}
+            ready = sum(1 for p in pool if p.parent.name in certified
+                        and hashlib.sha256(p.read_bytes()).hexdigest()
+                        == certified[p.parent.name]["sha256"])
+        except (OSError, ValueError, KeyError):
+            pass
+        if ready >= reserve_target or len(pool) >= 12:
             return 0
         freie = [t for t in topics
                  if not g.topic_already_covered(t["title"], used_titles)
@@ -806,6 +821,19 @@ def main():
     # Datengeführte Themen-Priorisierung (Pinterest-Performance-Gewichte),
     # sobald data/pinterest_weights.yaml existiert (01.09.2026 Feedback-Schleife).
     _init_topic_weights()
+
+    # Independent stock production, including non-publication days. Never publishes.
+    if "--reserve-only" in sys.argv:
+        used_titles = g.existing_titles()
+        topics = g.load_topics()
+        used_topics = set()
+        for _ in range(2):  # bounded API cost; subsequent daily runs continue
+            if not _reserve_topup(topics, "Themenpool", used_titles, used_topics):
+                break
+        import reserve_pool
+        count = len(reserve_pool.reserve_drafts())
+        write_status(f"Reserve-Produktion: {count} Kandidaten (Freigabe erst nach finalen Gates).")
+        return 0 if count >= 6 else 1
 
     # Wochentags-Guard (DAUERVORGABE: nur Mo/Mi/Fr publizieren)
     weekday = datetime.date.today().weekday()

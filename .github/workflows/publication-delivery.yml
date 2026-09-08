@@ -1,0 +1,41 @@
+name: Publication Delivery (öffentlicher Nachweis)
+on:
+  schedule:
+    - cron: "17 20,22 * * 1,3,5"
+    # Detect missed schedules and late demotions on the following day too.
+    - cron: "17 7 * * 2,4,6"
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  issues: write
+  actions: write
+concurrency:
+  group: publication-delivery
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - run: pip install pyyaml
+      - name: Verify sitemap AND article HTML; retry CDN propagation
+        id: receipt
+        continue-on-error: true
+        run: python3 scripts/publication_check.py --online --attempts 5 --delay 60
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: publication-receipt
+          path: tmp/publication-receipt.json
+      - name: Reconcile one delivery incident and request recovery
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RECEIPT_OK: ${{ steps.receipt.outcome == 'success' }}
+        run: python3 scripts/publication_incident.py
+      - name: Missing public delivery is a failed run
+        run: test '${{ steps.receipt.outcome }}' = success

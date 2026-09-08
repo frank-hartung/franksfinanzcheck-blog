@@ -42,14 +42,18 @@ concurrency:
 
 jobs:
   engine:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
         
       - name: Python-Abhängigkeiten installieren
         run: |
-          python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli 2>/dev/null || true
+          python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq hunspell hunspell-de-de
 
       # ================= PHASE 0: PRE-FLIGHT =================
       - name: Pre-Flight-Check (Syntax, Keys, Themenpool)
@@ -324,6 +328,26 @@ jobs:
         continue-on-error: true
         run: python3 scripts/submit_indexnow.py || echo 
 
+      - name: Hugo for final acceptance
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+
+      - name: Final publication acceptance and reserve refill
+        id: final_release
+        continue-on-error: true
+        run: python3 scripts/publication_release.py
+
+      - name: Persist final acceptance corrections
+        if: ${{ !cancelled() }}
+        run: |
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "content: finale Veröffentlichungsgates und geprüfte Reserve"
+            scripts/git_sync.sh --push-only
+          fi
+
       # ================= PHASE 4: STATUS & TAGESDEFIZIT (26.08.2026) =================
       # Reaktivierte verwaiste Wachen (Agentur-Audit S5): Der Lauf hält BOT-STATUS.md
       # aktuell und meldet am Tagesende ein Defizit gegen die Dauervorgabe
@@ -355,3 +379,7 @@ jobs:
             git commit -m "docs: BOT-STATUS.md aktualisiert (Phase 4)"
             scripts/git_sync.sh --push-only
           fi
+
+      - name: Do not report a quota deficit as success
+        if: ${{ !cancelled() }}
+        run: test '${{ steps.final_release.outcome }}' = success
