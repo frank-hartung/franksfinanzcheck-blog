@@ -32,6 +32,7 @@ concurrency:          # AUDIT-FIX
 jobs:
   backlink-scout:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4

@@ -1,0 +1,110 @@
+# ============================================================
+#  install-hugo – Gemeinsame Hugo-Installation (Profi-Agentur)
+#  ------------------------------------------------------------
+#  WARUM (Reparatur der Flake-Klasse #209/#220, 08.09.2026):
+#  `peaceiris/actions-hugo@v3` lieferte in mehreren Läufen still die
+#  STANDARD-Binary (nicht extended). PaperMod braucht Extended
+#  (TOCSS/Libsass) -> der erste `hugo --minify`-Schritt starb nach
+#  Sekunden: Pinterest-Watchdog (#209, 07.+08.09.) und die
+#  Affiliate-Integritäts-Wache (#220) liefen rot, obwohl der Content
+#  gesund war. Die Wache wurde bereits pro-workflow repariert – diese
+#  Action macht die Reparatur SYSTEMWEIT und zukunftssicher:
+#
+#  1. Prüfen:   hugo vorhanden UND Extended? -> fertig (idempotent,
+#               auch für lokal vorinstallierte Runner).
+#  2. Quelle 1: GitHub-Release (hugo_extended_<ver>_linux-amd64) mit
+#               curl --retry – der bisherige Fallback-Pfad.
+#  3. Quelle 2: PyPI-Paket `hugo==<ver>` (hugo-python-distributions,
+#               Dritte CDN-Kette, kein GitHub-Asset nötig) – greift,
+#               wenn GitHub-Releases blockiert/rate-limited sind
+#               (real beobachtet: SSL_ERROR_SYSCALL/EOF am Asset-Host).
+#  4. Verifikation: finale Prüfung fail-closed (Exit 2). Ein Build mit
+#               Standard-Binary darf NIE „grün“ durchlaufen – genau das
+#               erzeugte die Phantom-Fehler #209/#220.
+#
+#  NUTZUNG: jede Workflow-Datei ersetzt
+#     uses: peaceiris/actions-hugo@v3
+#     with: { hugo-version: "0.164.0", extended: true }
+#  durch
+#     uses: ./.github/actions/install-hugo
+#     with: { version: "0.164.0" }
+#  (und entfernt eigene „Hugo-Extended prüfen“-Komfort-Schritte).
+# ============================================================
+name: "Install Hugo (Extended, verifiziert, mehrquellig)"
+
+inputs:
+  version:
+    description: "Hugo-Version ohne 'v' (z. B. 0.164.0)"
+    required: true
+    default: "0.164.0"
+
+runs:
+  using: composite
+  steps:
+    - name: "Bereits vorhanden & Extended?"
+      id: existing
+      shell: bash
+      run: |
+        if command -v hugo >/dev/null 2>&1 && hugo version 2>&1 | grep -qi extended; then
+          echo "ok=true" >> "$GITHUB_OUTPUT"
+          echo "Hugo bereits vorhanden (Extended):"
+          hugo version
+        else
+          echo "ok=false" >> "$GITHUB_OUTPUT"
+          echo "Hugo fehlt oder ist nicht Extended – Installation nötig."
+        fi
+
+    - name: "Quelle 1 – GitHub-Release (extended tarball, mit Retry)"
+      if: steps.existing.outputs.ok != 'true'
+      shell: bash
+      run: |
+        set -euo pipefail
+        VER="${{ inputs.version }}"
+        URL="https://github.com/gohugoio/hugo/releases/download/v${VER}/hugo_extended_${VER}_linux-amd64.tar.gz"
+        echo "→ Download: ${URL}"
+        if curl -fsSL --retry 3 --retry-delay 4 "$URL" -o /tmp/hugo.tgz; then
+          tar -xzf /tmp/hugo.tgz -C /tmp hugo
+          sudo install -m 0755 /tmp/hugo /usr/local/bin/hugo
+          echo "GitHub-Quelle erfolgreich."
+        else
+          echo "⚠ GitHub-Releasedownload fehlgeschlagen (blockiert/ratelimited?) – PyPI-Fallback."
+        fi
+
+    - name: "Verifikation nach Quelle 1"
+      id: verify1
+      shell: bash
+      run: |
+        if hugo version 2>&1 | grep -qi extended; then
+          echo "ok=true" >> "$GITHUB_OUTPUT"
+          hugo version
+        else
+          echo "ok=false" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: "Quelle 2 – PyPI-Fallback (hugo-python-distributions)"
+      if: steps.verify1.outputs.ok != 'true'
+      shell: bash
+      run: |
+        set -euo pipefail
+        VER="${{ inputs.version }}"
+        echo "→ PyPI-Fallback: hugo==${VER}"
+        python3 -m pip install --quiet --disable-pip-version-check "hugo==${VER}"
+        BIN="$(python3 -c "import hugo, os; print(os.path.join(os.path.dirname(hugo.__file__), 'binaries', 'hugo'))")"
+        if [ ! -x "$BIN" ]; then
+          echo "❌ PyPI-Paket ohne Binary gefunden: $BIN"
+          exit 2
+        fi
+        sudo install -m 0755 "$BIN" /usr/local/bin/hugo
+        echo "PyPI-Quelle erfolgreich."
+
+    - name: "Finale Verifikation (fail-closed)"
+      if: always()
+      shell: bash
+      run: |
+        hugo version || { echo "❌ hugo nicht installierbar – Build würde scheitern."; exit 2; }
+        if ! hugo version 2>&1 | grep -qi extended; then
+          echo "❌ Hugo ist NICHT Extended (PaperMod braucht TOCSS/Libsass)."
+          echo "   Ein Build mit Standard-Binary erzeugt genau die Phantom-Fehler #209/#220."
+          exit 2
+        fi
+        echo "✅ Hugo Extended verifiziert – Build-Grundlage steht."

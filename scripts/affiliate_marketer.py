@@ -102,6 +102,49 @@ def route_for(text: str, pillar: str = "") -> str:
             return key
     return PILLAR_ROUTE.get(pillar, "allgemein")
 
+
+def normalize_gateway_links(text: str, reg: dict, pillar: str = "") -> tuple[str, int]:
+    """NR (08.09.2026, Reserve-Engpass #224): Gateway-Links deterministisch
+    normalisieren, BEVOR das Publish-Gate prüft.
+
+    Heilungsklasse im echten Befund (08.09.2026):
+      * `/go/check24-dsl/` – Key nicht in check24_links.yaml registriert
+        -> reserve_readiness.py lehnte den Kandidaten ewig ab (Pool 1/6,
+        täglicher „Stock shortage“-Alarm).
+      * `/go/check24-finanzen` – registrierter Pfad OHNE Schluss-Slash
+        -> der AI4-Render-Beweis sah den Link nicht (Gate-blind) und der
+        Kandidat wurde als „ready“ zertifiziert, obwohl die Zielseite
+        404 liefert. Das ist der gefährlichere Fall (still toter Link).
+
+    Regeln (idempotent, ohne KI, ohne Hugo-Build):
+      1. Key nicht registriert -> auf die thematisch beste Route ersetzen
+         (Kontextfenster ±180 Zeichen um den Link, sonst Artikel-Route).
+      2. Registrierter Key ohne Slash -> kanonisch `/go/<key>/` ergänzen
+         (Gateway-Seiten + AI4-Beweis erwarten exakt den Slash).
+      3. Registrierte, korrekte Links bleiben byte-identisch.
+    """
+    known = set(reg)
+
+    def repl(m: re.Match) -> str:
+        nonlocal fixed
+        key = m.group(1)
+        if key not in known:
+            start = max(0, m.start() - 180)
+            window = text[start:m.end() + 180]
+            route = route_for(window, pillar)
+            if route not in known:
+                route = "allgemein"
+            fixed += 1
+            return f"/go/{route}/"
+        if not m.group(2):
+            fixed += 1
+            return f"/go/{key}/"
+        return m.group(0)
+
+    fixed = 0
+    new_text = re.sub(r"/go/([\w-]+)(/?)", repl, text)
+    return new_text, fixed
+
 # ------------------------------------------------------------
 # SABOTAGE-SCHUTZ (Selbsttest-Batterie, 11.08.2026)
 # 19 kanonische Routing-Faelle, eingefroren nach der grossen
@@ -147,6 +190,26 @@ def run_selftest() -> list[str]:
         got = route_for(txt, pillar)
         if got != want:
             fehler.append(f"  Fall {i}: erwartet /go/{want}/, bekam /go/{got}/  ← „{txt[:60]}“")
+    # NR-Regression (08.09.2026, Reserve-Engpass #224): Die Gateway-
+    # Normalisierung darf weder registrierte Links beschädigen noch
+    # unbekannte Keys durchrutschen lassen. Eingefroren auf die realen
+    # Befunde: /go/check24-dsl/ (unbekannt) und /go/kreditkarte (ohne Slash).
+    try:
+        reg_test = load_registry()
+        t1, n1 = normalize_gateway_links(
+            "Für den [DSL-Vergleich](/go/check24-dsl/) lohnt der Anbieterwechsel.",
+            reg_test, "frugalismus")
+        t2, n2 = normalize_gateway_links(
+            "Alle Karten im [Vergleich](/go/kreditkarte) ohne Jahresgebühr.",
+            reg_test, "konto-karten")
+        if n1 != 1 or "/go/dsl/" not in t1 or "/go/check24-dsl" in t1:
+            fehler.append("  NR: unbekannter Key nicht umgeroutet "
+                          f"(n1={n1}, t1={t1[:90]})")
+        if n2 != 1 or "/go/kreditkarte/" not in t2 or "/go/kreditkarte)" in t2:
+            fehler.append("  NR: fehlender Slash nicht ergänzt "
+                          f"(n2={n2}, t2={t2[:90]})")
+    except Exception as exc:  # noqa: BLE001
+        fehler.append(f"  NR: Selbsttest-Ausnahme: {exc}")
     return fehler
 
 CTA_POOL = [
@@ -263,7 +326,8 @@ def process(path: Path, reg: dict) -> dict:
     affils = go_link("\n".join(body_lines))
     pillar = pillar_of(text)
     has_disclaimer = bool(DISCLAIMER_PAT.search(text))
-    fixes = {"am1": False, "am2": False, "am3": False, "am7": False}
+    fixes = {"am1": False, "am2": False, "am3": False, "am7": False,
+             "am8": False}
     status = []
     if not affils:
         status.append(("AM1", "kein Affiliate-Link", "kritisch"))
@@ -323,12 +387,40 @@ def process(path: Path, reg: dict) -> dict:
                 fixes["am7"] = True
                 status.append(("AM7", f"In-Text-CTA hinzu, Ziel /go/{route}/", "info"))
 
+    # NR (08.09.2026): Gateway-Links normalisieren – unbekannte Keys auf die
+    # thematisch beste Route, fehlende Schluss-Slashes ergänzen. Läuft VOR
+    # dem RT-Retarget, damit auch In-Text-Links (keine CTA-Boxen) im
+    # Register landen und der AI4-Render-Beweis sie schlüsselgenau sieht.
+    # NUR im FIX-Modus: Report-/Selftest-Läufe bleiben read-only.
+    if DO_FIX and not DRY_RUN:
+        norm_text, n_norm = normalize_gateway_links(text, reg, pillar)
+        if n_norm:
+            text = norm_text
+            fixes["am8"] = True
+            status.append(("NR", f"Gateway-Links normalisiert: {n_norm}",
+                           "info"))
+
     # RETARGET (universell & sabotage-robust): Jede Schnell-Tipp-Box, deren Route vom
     # Ideal abweicht, wird auf die thematisch beste Route umgeschrieben.
     # Register-Gate gegen 404. Sabotage-Test ist global (selftest) aktiv.
+    #
+    # 08.09.2026 (Kontext-Fix): `best` wurde früher NUR aus dem Artikel-
+    # Kontext (erste 1200 Zeichen) bestimmt. Bei Budget-Artikeln mit
+    # „Tagesgeldkonto“-Anker (z. B. haushaltsbuch-fuehren) gewann so
+    # „allgemein“ -> die C24-Bank-CTA „…Tagesgeld vergleichen“ zeigte auf
+    # /go/allgemein/ (Anker/Route-Dissonanz). Jetzt: lokales Kontextfenster
+    # um die CTA (Anker + ±300 Zeichen) hat Vorrang; Artikel-Kontext nur,
+    # wenn lokal nichts Spezifisches erkennbar ist.
     marker = "Schnell-Tipp von FranksFinanzcheck"
-    best = route_for(text, pillar)
     cur_route_m = re.search(marker + r".*?/go/([\w-]+)/", text, re.S)
+    best = ""
+    if cur_route_m:
+        ctx = text[max(0, cur_route_m.start() - 300):cur_route_m.start() + 340]
+        best = route_for(ctx, pillar)
+        if best not in reg or best == "allgemein":
+            best = route_for(text, pillar)
+        if best not in reg:
+            best = "allgemein"
     if best and best in reg and cur_route_m:
         cur_route = cur_route_m.group(1)
         if cur_route != best:
@@ -367,7 +459,11 @@ def main():
         r = process(p, reg)
         results.append(r)
         zusatz = sum(r["fixes"].values())
-        if zusatz and not DRY_RUN:
+        # 08.09.2026 (Write-Guard): Nur der FIX-Modus schreibt. Report- und
+        # Selftest-Aufrufe (--selftest, keine Flags) waren vorher in der
+        # Lage, Live-Inhalte zu verändern, sobald ein Fix-Flag gesetzt war
+        # (real ausgelöst durch die NR-Normalisierung).
+        if zusatz and DO_FIX and not DRY_RUN:
             p.write_text(r["text"], encoding="utf-8")
             touch += 1
 

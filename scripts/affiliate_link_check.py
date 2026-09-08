@@ -61,6 +61,10 @@ SLUG_DEEP = {
     "kostenloses-girokonto-finden": ("c24bank&cat=14", "C24 Girokonto"),
     "notgroschen-aufbauen-wie-viel-reicht": ("c24bank&cat=14", "C24 Girokonto"),
     "kreditkarte-ohne-jahresgebuehr": ("kreditkarte", "Kreditkarten-Vergleich"),
+    # 08.09.2026: datierter Kreditkarten-Ratgeber fehlte im Mapping – der
+    # Pillar-Fallback (konto-karten) erwartete fälschlich c24bank&cat=14
+    # (C24 Girokonto) und der Report blieb dauerhaft rot.
+    "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": ("kreditkarte", "Kreditkarten-Vergleich"),
     "ratenkredit-bestszins-vergleichen": ("kreditvergleich", "Kreditvergleich"),
     "tagesgeld-zinsen-sicher-anlegen": ("tagesgeldvergleich", "Tagesgeld-Vergleich"),
     # Versicherungen (CHECK24)

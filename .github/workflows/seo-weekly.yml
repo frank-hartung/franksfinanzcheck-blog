@@ -31,15 +31,15 @@ concurrency:          # AUDIT-FIX
 jobs:
   seo:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
       - name: Hugo-Build für Sitemap-Check
-        uses: peaceiris/actions-hugo@v3
+        uses: ./.github/actions/install-hugo
         with:
-          hugo-version: "0.164.0"
-          extended: true
+          version: "0.164.0"
 
       - name: Python-Abhängigkeiten (SEO, PyYAML, Crypto, Pillow)
         # BUGFIX 13.08. / 26.08.: pyyaml, cryptography, pillow, fonttools, brotli

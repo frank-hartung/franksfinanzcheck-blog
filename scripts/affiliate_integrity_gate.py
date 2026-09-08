@@ -137,7 +137,7 @@ CTA_MARKERS = [
 RAW_PARTNER_RE = re.compile(
     r"https?://a\.(?:check24\.net|partner-versicherung\.de)/[^\s)\"'<>]+"
 )
-GO_LINK_RE = re.compile(r"/go/([\w-]+)/")
+GO_LINK_RE = re.compile(r"/go/([\w-]+)(/?)")
 MD_LINK_RE = re.compile(r"\[\*\*([^\]]*)\*\*\]\(([^)\s]+)\)")
 # Fingerabdruck des Gateway-Links im Render-Hook (Drift-Wächter im Selftest)
 HOOK_FINGERPRINTS = ("/go/", "affiliate_click")
@@ -591,6 +591,9 @@ def heal_unregistered_keys(article: dict, reg: dict) -> list[str]:
     def _replace_key(match: re.Match) -> str:
         key = match.group(1)
         if key in reg:
+            if not match.group(2):
+                fixed.append(f"/go/{key} → /go/{key}/ (kanonisch)")
+                return f"/go/{key}/"
             return match.group(0)
         fixed.append(f"/go/{key}/ → /go/{route}/")
         return f"/go/{route}/"
@@ -747,8 +750,13 @@ def run(root: Path | None = None, posts_dir: Path | None = None,
         for m in RAW_PARTNER_RE.finditer(a["body"]):
             problems.append(f"Rohe Partner-URL im Artikeltext: {m.group(0)[:90]}")
         for m in GO_LINK_RE.finditer(a["body"]):
-            if m.group(1) not in reg_keys:
-                problems.append(f"/go/{m.group(1)}/ nicht registriert")
+            key = m.group(1)
+            if key not in reg_keys:
+                problems.append(f"/go/{key}/ nicht registriert")
+            elif not m.group(2):
+                problems.append(
+                    f"/go/{key} ohne Schluss-Slash (Gateway-Seite und "
+                    f"AI4-Beweis erwarten /go/{key}/)")
         if problems:
             findings[a["slug"]] = {"problems": sorted(set(problems)),
                                    "broken_kinds": broken_kinds, "healed": []}
@@ -1148,8 +1156,9 @@ def run_selftest() -> list[str]:
         healed = heal_article_ctas(article, kinds, reg)
         expect(bool(healed), "Heilung muss mindestens eine CTA neu generieren")
         text_after = Path(posts / "index.md").read_text(encoding="utf-8")
-        expect(not GO_LINK_RE.findall(text_after.replace("/go/haftpflicht/", ""))
-               or all(k in reg for k in GO_LINK_RE.findall(text_after)),
+        keys_after = {m.group(1) for m in GO_LINK_RE.finditer(
+            text_after.replace("/go/haftpflicht/", ""))}
+        expect(not keys_after or all(k in reg for k in keys_after),
                "nach Heilung dürfen nur registrierte /go/-Keys im Artikel stehen")
         expect(bool(rerouted), "nicht registrierter Key muss umgeroutet werden")
         for marker, kind, line, *_ in find_cta_lines(

@@ -57,6 +57,7 @@ permissions:
 jobs:
   catchup:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - name: main mit letztem erfolgreichen Deploy vergleichen, ggf. anstoßen
         uses: actions/github-script@v7

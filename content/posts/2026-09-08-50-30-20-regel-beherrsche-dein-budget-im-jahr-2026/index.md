@@ -83,7 +83,7 @@ Der Übergang zu diesem System passiert nicht über Nacht. Es erfordert eine ehr
 
 **So gehst du vor:**
 1. **Status Quo ermitteln:** Gehe deine Kontoauszüge der letzten drei Monate durch. Sortiere jede Ausgabe in eine der drei Kategorien. Sei dabei schonungslos ehrlich zu dir selbst.
-2. **Fixkosten optimieren:** Prüfe deinen 50-Prozent-Block. Wo zahlst du zu viel? Ein Wechsel des Stromanbieters oder eine günstigere Versicherung können monatlich 30 bis 50 € freischaufeln. Nutze hierfür spezialisierte Vergleichsportale: [Fixkosten jetzt vergleichen](/go/check24-finanzen) (werbung).
+2. **Fixkosten optimieren:** Prüfe deinen 50-Prozent-Block. Wo zahlst du zu viel? Ein Wechsel des Stromanbieters oder eine günstigere Versicherung können monatlich 30 bis 50 € freischaufeln. Nutze hierfür spezialisierte Vergleichsportale: [Fixkosten jetzt vergleichen](/go/strom/) (werbung).
 3. **Automatisierung einrichten:** Richte einen Dauerauftrag für deine 20 % Sparrate ein. Dieser sollte idealerweise am Tag des Gehaltseingangs ausgeführt werden. Was weg ist, kann nicht mehr ausgegeben werden.
 4. **Wünsche deckeln:** Setze dir ein hartes Limit für deine 30 %. Wenn das Budget für Restaurantbesuche am 20. des Monats aufgebraucht ist, bleibt die Küche eben kalt oder es wird selbst gekocht.
 5. **Monatliche Kontrolle:** Nimm dir am Monatsende zehn Minuten Zeit, um zu prüfen, ob die Verteilung gestimmt hat. Justiere nach, wenn eine Kategorie dauerhaft aus dem Ruder läuft.

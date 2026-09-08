@@ -64,10 +64,10 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pyyaml cryptography pillow pillow-avif-plugin fonttools brotli
-      - uses: peaceiris/actions-hugo@v3
+      # Hugo Extended, verifiziert + PyPI-Fallback (Flake-Klasse #209/#220)
+      - uses: ./.github/actions/install-hugo
         with:
-          hugo-version: "0.164.0"
-          extended: true
+          version: "0.164.0"
       - run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq hunspell hunspell-de-de
