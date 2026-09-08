@@ -511,6 +511,69 @@ def _hygiene_neuer_artikel(filename):
         print(f"  ⚠ URL-Hygiene übersprungen: {exc}")
 
 
+def _pool_conflicts(pool_paths, topic_title):
+    """Schützt die Themen-DIVERSITÄT des Pools (Reparatur 08.09.2026).
+
+    Befund: `_reserve_topup` erzeugte bei mehreren Läufen am selben Tag
+    mehrfach Kandidaten zum SELBEN Kernthema (3× „50-30-20-Regel“), weil nur
+    exakte Titel verglichen wurden (used_titles) und KI-Titelvarianten zum
+    selben Topic durchrutschten. Der Pool soll aber verschiedene Evergreen-
+    Themen bevorraten (eine Reserve-Kopie pro Thema genügt).
+
+    Regeln (konservativ, deterministisch):
+      - Gleicher 4-Wort-Präfix oder ≥ 50 % inhaltstragende Token-Überlappung
+        mit einem vorhandenen Pool-Kandidaten-Titel → Themen-Konflikt.
+    Frontmatter-Titel werden robust gelesen; ohne lesbaren Titel: kein
+    Konflikt (fail-open – ein fehlendes Feld darf nie den Top-up blockieren).
+    """
+    if not pool_paths:
+        return False
+    STOP = {"der", "die", "das", "und", "oder", "für", "fuer", "mit", "von",
+            "im", "in", "den", "dem", "ein", "eine", "einer", "eines", "auf",
+            "bei", "zum", "zur", "sich", "nicht", "auch", "als", "wie", "was",
+            "dein", "deine", "ihr", "ihre", "so", "du", "sie", "is", "sind",
+            "gegen", "nach", "aus", "über", "uber", "durch", "mehr", "noch",
+            "schon", "dann", "auch", "diese", "dieser", "dieses"}
+
+    def tokens(text):
+        raw = re.findall(r"[a-z0-9]+", text.lower())
+        # Zahlen (z. B. „50“, „30“, „20“ bei der 50-30-20-Regel) sind
+        # inhaltstragend und bleiben erhalten – anders als in der
+        # kanonischen 60-%-Regel von generate_drafts, die nur Token mit
+        # len > 2 zählt und numerische Themen dadurch „unsichtbar“ macht
+        # (genau so entstanden die 3×-Duplikate am 08.09.2026).
+        return [w for w in raw
+                if w not in STOP and (len(w) > 2 or (len(w) >= 2 and w.isdigit()))]
+
+    mine = tokens(topic_title)
+    if len(mine) < 2:
+        return False
+    for index in pool_paths:
+        try:
+            fm = _frontmatter(index.read_text(encoding="utf-8"))
+            m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', fm, re.M)
+            if not m:
+                continue
+            theirs = tokens(m.group(1))
+        except OSError:
+            continue
+        if len(theirs) < 2:
+            continue
+        prefix_mine = mine[:4]
+        prefix_theirs = theirs[:4]
+        if prefix_mine == prefix_theirs and prefix_mine:
+            return True
+        shared = sum(1 for w in mine if w in theirs)
+        if shared / len(mine) >= 0.5:
+            return True
+    return False
+
+
+def _frontmatter(text: str) -> str:
+    parts = text.split("---", 2)
+    return parts[1] if len(parts) == 3 and parts[0] == "" else ""
+
+
 def _reserve_topup(topics, quelle, used_titles, used_topics,
                    reserve_target=None):
     """RESERVE-POOL-Top-up (Premium-Fix 03.09.2026, „zwingend 2–3 LIVE“):
@@ -522,7 +585,24 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
     Best-effort: Nur wenn eine Profi-Generierung gelingt, wird EIN weiterer
     Artikel als Reserve gespeichert (draft, engine_level: reserve). Er geht
     NICHT live, belegt keinen Slot und wird von keiner anderen Automatik
-    angefasst (keine cadence_*-Felder). Rückgabe: 1 bei Erfolg, sonst 0."""
+    angefasst (keine cadence_*-Felder). Rückgabe: 1 bei Erfolg, sonst 0.
+
+    REPARATUR 08.09.2026 (Reserve-Pipeline, täglicher Vorrat):
+      * Zählung auf GATE-FERTIGE Kandidaten umgestellt: Eine `reserve: true`-
+        Fahne ist KEIN Reife-Zertifikat. Es wird nur nachproduziert, solange
+        die Zahl der hash-zertifizierten READY-Kandidaten unter dem Ziel liegt
+        (Zertifikate: data/reserve-readiness.json, erzeugt von
+        reserve_readiness.py NACH der Veredelungs-Stufe).
+      * In-Flight-Schutz: Ungedeckelte Roh-Kandidaten von HEUTE warten bereits
+        auf die Veredelungs-Stufe desselben Laufs (reserve_finisher.py) –
+        es werden keine weiteren Kandidaten gestapelt, solange der heutige
+        Schub noch nicht veredelt/zertifiziert ist. Das verhindert die
+        Themen-Duplikat-Kaskade vom 08.09.2026 (3× 50-30-20-Regel).
+      * Themen-Diversität: `_pool_conflicts` verhindert, dass ein Thema als
+        KI-Titelvariante ein zweites Mal in den Pool wandert.
+      * Ein erfolgreich gespeicherter Kandidat wird sofort auf used_topics
+        gesetzt, damit der zweite Top-up-Aufruf desselben Laufs ein ANDERES
+        Thema wählt (vorher: gleiches Topic, zweite Titelvariante)."""
     if reserve_target is None:
         try:
             reserve_target = int(os.environ.get("RESERVE_TARGET") or "6")
@@ -539,6 +619,7 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
         # make the pool look full. Hash prevents stale certificates after edits.
         import hashlib
         from pathlib import Path
+        certified = {}
         ready = 0
         try:
             report = json.loads(Path("data/reserve-readiness.json").read_text())
@@ -548,12 +629,29 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
                         == certified[p.parent.name]["sha256"])
         except (OSError, ValueError, KeyError):
             pass
-        if ready >= reserve_target or len(pool) >= 12:
+        if ready >= reserve_target:
+            return 0
+        # Kapazitäts-Deckel (Notbremse gegen unendliches Stapeln).
+        if len(pool) >= 12:
+            print("  ⚠ Reserve-Pool-Kapazität erreicht (12) – keine neuen "
+                  "Roh-Kandidaten, bis die Veredelung/Zertifizierung greift.")
+            return 0
+        # In-Flight-Schutz: Heutige, noch nicht zertifizierte Kandidaten
+        # gehören zum heutigen Veredelungs-Schub – nicht stapeln.
+        today = datetime.date.today().isoformat()
+        inflight = [p for p in pool if p.parent.name.startswith(today)
+                    and p.parent.name not in certified]
+        if inflight:
+            print(f"  ⏳ {len(inflight)} Kandidat(en) von heute warten auf die "
+                  f"Veredelungs-Stufe (reserve_finisher) – kein weiterer "
+                  f"Top-up, um Themen-Duplikate zu vermeiden.")
             return 0
         freie = [t for t in topics
                  if not g.topic_already_covered(t["title"], used_titles)
-                 and id(t) not in used_topics]
+                 and id(t) not in used_topics
+                 and not _pool_conflicts(pool, t.get("title", ""))]
         if not freie:
+            print("  ⚠ Reserve-Top-up: Themenpool ohne freie Themen.")
             return 0
         topic = freie[0]
         keywords = topic.get("keywords")
@@ -584,7 +682,11 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
             fh.writelines(lines)
         _hygiene_neuer_artikel(filename)
         used_titles.add(title.lower())
-        print(f"  🛟 Reserve-Pool aufgefüllt: {slug} (draft, {info})")
+        # Thema sofort verbrauchen: der zweite Top-up-Aufruf desselben Laufs
+        # muss ein ANDERES Thema wählen (Reparatur 08.09.2026).
+        used_topics.add(id(topic))
+        print(f"  🛟 Reserve-Pool aufgefüllt: {slug} (draft, {info}) – "
+              f"READY {ready}/{reserve_target}, Kandidat wartet auf Veredelung")
         return 1
     except Exception as exc:  # noqa: BLE001 – Top-up darf nie die Engine brechen
         print(f"  ⚠ Reserve-Top-up fehlgeschlagen (nicht kritisch): {exc}")
@@ -827,13 +929,30 @@ def main():
         used_titles = g.existing_titles()
         topics = g.load_topics()
         used_topics = set()
+        produced = 0
         for _ in range(2):  # bounded API cost; subsequent daily runs continue
-            if not _reserve_topup(topics, "Themenpool", used_titles, used_topics):
-                break
+            produced += _reserve_topup(topics, "Themenpool", used_titles,
+                                       used_topics)
         import reserve_pool
         count = len(reserve_pool.reserve_drafts())
-        write_status(f"Reserve-Produktion: {count} Kandidaten (Freigabe erst nach finalen Gates).")
-        return 0 if count >= 6 else 1
+        write_status(f"Reserve-Produktion: {count} Kandidaten "
+                     f"({produced} neu heute – Freigabe erst nach finalen "
+                     f"Gates).")
+        # Ehrlicher Exit (Reparatur 08.09.2026): Die bloße Anzahl von
+        # `reserve: true`-Fahnen ist KEIN Reife-Zertifikat – die Reife weist
+        # die Veredelungs- + Zertifizierungsstufe nach (reserve_finisher.py
+        # + reserve_readiness.py). Die Engine meldet hier nur, ob sie etwas
+        # beitragen konnte bzw. ob überhaupt Kandidaten existieren.
+        if produced > 0:
+            return 0
+        if count > 0:
+            print("⚠ Reserve: Kandidaten vorhanden, aber keine Neuproduktion "
+                  "möglich (API?) – Veredelung/Zertifizierung entscheidet "
+                  "über die Pool-Reife.")
+            return 0
+        print("🛑 Reserve-Produktion: KEIN Kandidat und KEINE Neuproduktion – "
+              "Pool ist leer.")
+        return 1
 
     # Wochentags-Guard (DAUERVORGABE: nur Mo/Mi/Fr publizieren)
     weekday = datetime.date.today().weekday()

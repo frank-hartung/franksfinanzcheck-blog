@@ -1,18 +1,61 @@
+# ============================================================
+#  CONTENT-RESERVE (täglicher Vorrat) – Produktionslinie v2
+#
+#  REPARATUR 08.09.2026 (Fehler-Issue #224, Dauer-„Stock shortage“):
+#  Die alte Stufe erzeugte nur ROH-Entwürfe (`engine_generate.py
+#  --reserve-only`) und verlangte im selben Lauf dafür Reife-Zertifikate
+#  (reserve_readiness.py) – ein Widerspruch: Roh-Entwürfe bestehen die
+#  Produktions-Gates prinzipbedingt nie. Ergebnis: readiness = 0 an jedem
+#  Tag, tägliche Fehler-Alerts, Pool mit unbrauchbaren Kandidaten (inkl.
+#  3× Duplikat „50-30-20-Regel“).
+#
+#  Die Reserve-Stufe ist jetzt eine echte DREI-STUFEN-PRODUKTIONSLINIE,
+#  spiegelbildlich zur Content-Engine v2 (Mo/Mi/Fr):
+#    Stufe 1 – PRODUKTION:   engine_generate.py --reserve-only
+#                             (readiness-aware: produziert nur, wenn der
+#                             Zertifikats-Pool unter RESERVE_TARGET liegt;
+#                             max. 2 neue Kandidaten/Tag, keine Themen-
+#                             Duplikate, In-Flight-Schutz)
+#    Stufe 2 – VEREDELUNG:    reserve_finisher.py --finish
+#                             (Phase-2/3-Äquivalent: dieselbe Heiler-Kette
+#                             wie die Live-Engine – Rechtschreibung,
+#                             Grammatik, Typografie, Länge, E-E-A-T,
+#                             Affiliate-/go/-Gateway, Meta/Pin-SEO,
+#                             Kurzantwort, Cover – NUR für Pool-Kandidaten,
+#                             NIE für den Live-Bestand; katastrophale
+#                             Fehler rollen die Snapshots zurück)
+#    Stufe 3 – ZERTIFIZIERUNG: reserve_readiness.py
+#                             (echte Produktions-Gates: quality_score
+#                             ≥ 0.85 + hugo + publish_gate STRICT inkl.
+#                             /go/-Render-Beweis; hash-gesicherte
+#                             Zertifikate in data/reserve-readiness.json)
+#
+#  Der harte End-Gate „Stock shortage must not look successful“ bleibt:
+#  Erst wenn ≥ RESERVE_TARGET Kandidaten GATE-FERTIG (nicht nur „vorhanden“)
+#  sind, gilt der Lauf als grün. Jeder Engpass nennt jetzt die konkrete
+#  Diagnose pro Kandidat (Score-Teile bzw. Gate-Grund).
+# ============================================================
 name: Content-Reserve (täglicher Vorrat)
+
 on:
   schedule:
     - cron: "25 3 * * *"
   workflow_dispatch: {}
+
 permissions:
   contents: write
+
 concurrency:
   group: content-bot
   cancel-in-progress: false
+
 jobs:
   reserve:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
+    env:
+      RESERVE_TARGET: ${{ vars.RESERVE_TARGET || '6' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,7 +71,9 @@ jobs:
       - run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq hunspell hunspell-de-de
-      - name: Produce reserve even on days without publication
+
+      # ================= STUFE 1: PRODUKTION =================
+      - name: Stufe 1 – Kandidaten erzeugen (nur bei echtem Bedarf)
         id: stock
         continue-on-error: true
         env:
@@ -36,14 +81,26 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
-          AUTO_PUBLISH: profi
-          RESERVE_TARGET: '6'
         run: python3 scripts/engine_generate.py --reserve-only
-      - name: Prove reserve readiness through production gates
+
+      # ================= STUFE 2: VEREDELUNG =================
+      - name: Stufe 2 – Kandidaten veredeln (Phase-2/3-Kette, nur Pool)
+        id: finish
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
+          AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
+        run: python3 scripts/reserve_finisher.py --finish
+
+      # ================= STUFE 3: ZERTIFIZIERUNG =================
+      - name: Stufe 3 – Reife durch Produktions-Gates beweisen
         id: readiness
         continue-on-error: true
         run: python3 scripts/reserve_readiness.py
-      - name: Save drafts even if stock target is not reached
+
+      - name: Entwürfe, Zertifikate und Reporte sichern (auch bei Engpass)
         if: ${{ !cancelled() }}
         run: |
           git config user.name "Content-Bot"
@@ -53,5 +110,17 @@ jobs:
             git commit -m "content: unabhängige Redaktionsreserve auffüllen"
             scripts/git_sync.sh --push-only
           fi
+
+      # ================= HARTES END-GATE =================
       - name: Stock shortage must not look successful
-        run: test '${{ steps.readiness.outcome }}' = success
+        if: ${{ !cancelled() }}
+        run: |
+          if test '${{ steps.readiness.outcome }}' = success; then
+            echo "✅ Reserve-Pool gate-fertig (RESERVE_TARGET erreicht)."
+          else
+            echo "🛑 RESERVE-ENGPAß: Weniger als $RESERVE_TARGET Kandidaten sind"
+            echo "   gate-fertig. Diagnose: Schritt 'Stufe 3' im Log und"
+            echo "   RESERVE-FINISH-REPORT.md (Score-Teile je Kandidat)."
+            echo "   Der Engpass ist KEIN Schein-Erfolg – Lauf endet rot."
+            exit 1
+          fi
