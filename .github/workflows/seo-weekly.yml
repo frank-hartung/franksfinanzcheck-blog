@@ -34,7 +34,9 @@ jobs:
     timeout-minutes: 45
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v4
+        # checkout@v5 (09.09.2026): v4 zielt auf Node.js 20 (deprecated,
+        # erzeugte in jedem Lauf eine Warn-Annotation).
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -66,7 +68,16 @@ jobs:
           exit ${PIPESTATUS[0]}
 
       - name: LSI-Keyword-Änderungen committen
-        if: steps.kw.outcome == 'success'
+        # PREMIUM-FIX #233 (09.09.2026): Der Schritt lief wochenlang NIE –
+        # keyword_optimizer.py beendet mit Exit 1, sobald IRGENDEIN Artikel
+        # unter 60/100 Punkten bleibt. `if: steps.kw.outcome == 'success'`
+        # übersprang dann den Commit, obwohl --apply längst LSI-Fixes in
+        # die Artikel geschrieben hatte (silent gap, sichtbar in Run
+        # 34328155997: Schritt 7 skipped). Jetzt: Fixes IMMER committen –
+        # der Exit-Code signalisiert "Rest-Bedarf", nicht "Fixes ungültig".
+        # Der Rest-Bedarf wird über das Issue unten sichtbar gemacht.
+        if: ${{ !cancelled() }}
+        continue-on-error: true
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
@@ -78,6 +89,39 @@ jobs:
             scripts/git_sync.sh --push-only
           fi
 
+      - name: Issue bei kritischen Keyword-Scores (verbleibender Bedarf)
+        # PREMIUM-LÜCKE ZU (09.09.2026): Kritische Keyword-Artikel wurden
+        # bisher weder committet (siehe oben) NOCH gemeldet – der Exit-1
+        # verpuffte in continue-on-error. Jetzt dediziertes Issue mit
+        # Dedupe (offenes Issue gleichen Titels -> Kommentar statt Duplikat).
+        if: ${{ steps.kw.outcome == 'failure' && !cancelled() }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let details = 'Keyword-Audit hat Artikel unter 60/100 Punkten gefunden.';
+            try { details = fs.readFileSync('/tmp/kw_audit_log.txt', 'utf-8'); } catch (e) {}
+            const title = '🔑 Keyword-Audit: Artikel unter 60/100 Punkten';
+            const { data: open } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100
+            });
+            const existing = open.find(i => i.title === title && !i.pull_request);
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: existing.number,
+                body: 'Wöchentliches Keyword-Audit (Lauf ' + context.runId + ') findet weiterhin kritische Artikel:\n\n```\n' + details.slice(0, 4000) + '\n```'
+              });
+              console.log('✅ Bestehendes Issue #' + existing.number + ' aktualisiert (Dedupe)');
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title: title,
+                body: '```\n' + details.slice(0, 60000) + '\n```\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow (Keyword-Audit). Exit 1 = Artikel unter 60/100 Punkten nachautomatischer Optimierung.'
+              });
+              console.log('✅ Issue erstellt');
+            }
+
       - name: Interne Verlinkung automatisch ausbauen
         # Fügt kontextuelle Links zwischen thematisch passenden Artikeln ein
         # (max. 3 neue Links pro Lauf, natürliche Anker, keine Duplikate).
@@ -86,9 +130,15 @@ jobs:
         # (Draft-/Zukunfts-Posts sind aus dem Ziel-Pool ausgeschlossen) und
         # der Draft-Link-Heiler räumt danach sicherheitsshalb tote Ziele
         # (Kadenz-Heilungen anderer Läufe) aus – IM SELBEN COMMIT.
+        # PREMIUM-HÄRTUNG #233 (09.09.): Linker/Healer dürfen einen
+        # transienten Fehler haben, ohne die 35-Schritte-Kette zu töten –
+        # ihre Änderungen (falls vorhanden) landen sonst im Fangnetz-Schritt.
+        continue-on-error: true
         run: |
-          python3 scripts/internal_linker.py --apply --max 5 | tee /tmp/internal_link_log.txt
-          python3 scripts/draft_link_healer.py --fix
+          python3 scripts/internal_linker.py --apply --max 5 | tee /tmp/internal_link_log.txt \
+            || echo "::warning::Internal-Linker fehlgeschlagen (nicht kritisch, Rest siehe Log)"
+          python3 scripts/draft_link_healer.py --fix \
+            || echo "::warning::Draft-Link-Heiler fehlgeschlagen (nicht kritisch)"
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
           git add -A
@@ -120,6 +170,7 @@ jobs:
           exit ${PIPESTATUS[0]}
       - name: Pinterest-SEO-Healer-Änderungen committen
         if: always()
+        continue-on-error: true
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
@@ -133,7 +184,13 @@ jobs:
             scripts/git_sync.sh --push-only
           fi
       - name: Meta-Änderungen committen
-        if: steps.meta.outcome == 'success'
+        # PREMIUM-FIX #233 (09.09.): gleiche silent-gap-Klasse wie der
+        # LSI-Schritt – meta_optimizer.py meldet Exit 1, sobald Rest-
+        # Probleme bleiben, und begrub dann die bereits angewendeten
+        # Meta-Fixes im Runner (Workspace wird weggeworfen). Fixes immer
+        # committen; Rest-Bedarf regelt der Meta-Qualitäts-Gate + Issue.
+        if: ${{ !cancelled() }}
+        continue-on-error: true
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
@@ -203,7 +260,15 @@ jobs:
           exit 0
 
       - name: Textverständnis-Report und -Fixes committen
+        # GENAU HIER starb Lauf #23 / Issue #233 (09.09.2026): Ein EINMALIGER
+        # transienter Netzwerkfehler beim git-pull im git_sync.sh machte den
+        # Schritt rot – 18 nachfolgende Schritte (Affiliate-, Bestand-,
+        # Cover-, Meta-Gates, IndexNow) wurden komplett übersprungen.
+        # Doppelt gehärtet: (1) git_sync.sh wiederholt fetch/rebase/push mit
+        # Backoff + Rettungsanker, (2) dieser Schritt bleibt bei einem
+        # Rest-Fehler nicht-killend – das Fangnetz am Ende sichert alles.
         if: always()
+        continue-on-error: true
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
@@ -221,6 +286,9 @@ jobs:
         # thematisch passende Deep-Links, korrekte Partner-IDs.
         # --fix ersetzt generische CTA-Links durch passende Deep-Links.
         # Exit 1 → Workflow-Abbruch (nichts Ungeprüftes geht live).
+        # Bewusst OHNE continue-on-error: hartes Gate. Das Fangnetz unten
+        # respektiert das und committet bei rotem Gate nichts Ungeprüftes.
+        id: affiliate
         run: |
           python3 scripts/affiliate_link_check.py --fix | tee /tmp/aff_log.txt
           exit ${PIPESTATUS[0]}
@@ -231,11 +299,15 @@ jobs:
         # Affiliate-Dichte (A5), Trust-Box (A6), Autor (A7), CTA (A8).
         # --fix heilt deterministisch (erfahrung/Pillar-Links/author);
         # Selbsttest vor Fix-Aktionen (Sabotage-Schutz). Exit 1 → Alarm.
+        # Bewusst hart (kein continue-on-error): das Fangnetz unten
+        # respektiert auch dieses Gate.
+        id: profi
         run: |
           python3 scripts/affiliate_profi_check.py --fix | tee /tmp/profi_log.txt
           exit ${PIPESTATUS[0]}
 
       - name: Affiliate-Fixes committen
+        continue-on-error: true
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
@@ -272,6 +344,7 @@ jobs:
           exit ${PIPESTATUS[0]}
 
       - name: Bestand-Gate-Fixes + Report committen
+        continue-on-error: true
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
@@ -315,11 +388,15 @@ jobs:
         # Prüft für jeden Post, dass ALLE Cover-Varianten (620/720/avif/webp
         # + responsive) existieren. --fix zieht fehlende Varianten automatisch
         # nach (verhindert 404 im <picture>-srcset). Exit 1 → Workflow-Abbruch.
+        # Bewusst hart (kein continue-on-error): das Fangnetz unten
+        # respektiert ein rotes Cover-Gate und übernimmt dann nichts.
+        id: covers
         run: |
           python3 scripts/check_covers.py --fix | tee /tmp/cov_log.txt
           exit ${PIPESTATUS[0]}
 
       - name: Cover-Fixes committen
+        continue-on-error: true
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
@@ -349,6 +426,8 @@ jobs:
         # Sprach-Wachen -> mittwochs konnte sich falsch gesetzter Text
         # einschleichen. Jetzt: die komplette Waechter-Sturmkette danach,
         # selbstheilend, mit eigenem Commit (automatisch mit in Fresh-Sein).
+        # PREMIUM-HÄRTUNG #233: Sync-Fehler töten die Kette nicht mehr.
+        continue-on-error: true
         run: |
           # --plan: data/pinterest_plan.yaml ist die Quelle der Pin-Texte.
           # Wird nur der Inhalt geheilt, ueberschreibt der naechste Pin-Sync
@@ -374,6 +453,9 @@ jobs:
         # Artikel, die in diesem Lauf optimiert wurden (Meta, Rechtschreibung,
         # Links), bekommen lastmod=heute → Hugo rendert article:modified_time
         # + Sitemap-lastmod (Google erkennt das Update).
+        # PREMIUM-HÄRTUNG #233: Frische-Signal ist Nice-to-have – ein Fehler
+        # hier darf IndexNow & Co. nicht blockieren.
+        continue-on-error: true
         run: |
           python3 scripts/set_lastmod.py --git-changed
 
@@ -385,6 +467,8 @@ jobs:
         # Ende der 30-teiligen Kette liegt, wurde er faktisch nie erreicht,
         # solange frühere Schritte (Grammatik/Cover) die Kette vorher schon
         # abbrachen – jetzt, wo die Kette weiter kommt, greift der Bug direkt.
+        # PREMIUM-HÄRTUNG #233: nicht-killend, Fangnetz sichert Reste.
+        continue-on-error: true
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
@@ -455,6 +539,7 @@ jobs:
         run: python3 scripts/submit_indexnow.py
 
       - name: Bing-Status committen
+        continue-on-error: true
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
@@ -464,6 +549,31 @@ jobs:
           else
             git commit -m "seo: Bing-Indexierungs-Status aktualisiert"
             scripts/git_sync.sh --push-only
+          fi
+
+      - name: Fangnetz – übergangene Änderungen sicher committen und pushen
+        # PREMIUM-HÄRTUNG #233 (09.09.2026), Kernstück der Ketten-Resilienz:
+        # Die Commit-Schritte oben sind continue-on-error – ein transienter
+        # Sync-Fehler darf die 35er-Kette nicht mehr abschießen (genau das
+        # tötete Lauf #23: 18 Schritte inkl. IndexNow liefen nie). Ihre
+        # Änderungen bleiben im Workspace liegen und werden HIER gesammelt
+        # committet und mit dem gehärteten git_sync.sh gepusht.
+        #   · Klappt der Push  -> Lauf grün, nichts verloren (nur Warnung).
+        #   · Schlägt er aus   -> Lauf rot -> zentrales Fehler-Alerting.
+        #   · War ein HARTES Gate (Affiliate-/Profi-/Cover-Check) rot, läuft
+        #     das Fangnetz bewusst NICHT – nichts Ungeprüftes geht live.
+        if: ${{ !cancelled() && steps.affiliate.outcome != 'failure' && steps.profi.outcome != 'failure' && steps.covers.outcome != 'failure' }}
+        run: |
+          git config user.name "SEO-Bot"
+          git config user.email "seo-bot@users.noreply.github.com"
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Fangnetz: nichts übrig – alle Commits sind sauber durch."
+          else
+            echo "::warning::Fangnetz findet übergangene Änderungen (mindestens ein Commit-Schritt war an einem Sync-Fehler gescheitert) – sichere sie jetzt gesammelt."
+            git add -A
+            git commit -m "seo: Fangnetz – übergangene Änderungen aus dem Wochentlichlauf gesichert (#233-Härtung)"
+            scripts/git_sync.sh --push-only
+            echo "✅ Fangnetz hat Reständerungen gesichert"
           fi
 
       - name: Issue bei kritischen SEO-Problemen erstellen
