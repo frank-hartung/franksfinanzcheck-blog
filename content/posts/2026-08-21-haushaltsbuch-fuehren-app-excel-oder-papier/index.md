@@ -151,7 +151,7 @@ Bei 2.500 € netto heißt das: 1.250 € Fixkosten, 750 € Freizeit, 500 �
 | Coffee-to-go & Snacks bewusster kaufen | 60 € |
 | **Gesamt** | **bis zu 430 €** |
 
-> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Jetzt C24 Bank Angebote vergleichen**](/go/tagesgeld/)
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Jetzt C24 Bank-Angebote vergleichen**](/go/tagesgeld/)
 
 ## Häufige Anfängerfehler und wie du sie vermeidest
 

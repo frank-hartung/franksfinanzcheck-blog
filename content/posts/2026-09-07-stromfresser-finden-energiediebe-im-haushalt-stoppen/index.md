@@ -5,7 +5,7 @@ date: 2026-09-07T18:42:52Z
 draft: true
 cadence_demoted: 2026-09-07T18:56:01Z
 cadence_grund: "quality-score: Score 0.766 < 0.80 (schwach: spelling 0.00, meta 0.85, readability 0.95) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174)"
-tags: ["stromfresser finden", "strom sparen tipps", "energiekosten senken", "standby kosten"]
+tags: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
@@ -72,7 +72,7 @@ Besonders kritisch sind externe Netzteile. Steckst du das Ladekabel oder das Net
 
 In der Summe kosten dich diese kleinen Lecks oft zwischen 80 € und 150 € im Jahr. Das ist Geld ohne jeden Gegenwert. Es ist reine Verschwendung durch Bequemlichkeit. Hier helfen schaltbare Steckdosenleisten oder intelligente Zwischenstecker, um die Zufuhr wirklich zu kappen.
 
-## Ein Rechenbeispiel: Altes vs. Neues Kühlgerät
+## Ein Rechenbeispiel: Altes vs. neues Kühlgerät
 
 Blicke auf die nackten Zahlen, um die Dimensionen zu verstehen. Wir vergleichen einen alten Kühlschrank von 2008 mit einem modernen Gerät der Klasse C. Wir legen einen Strompreis von rund 0,40 € pro kWh zugrunde.
 
@@ -110,7 +110,7 @@ Auch das Zustellen von Kühlgeräten ist ein Klassiker. Steht der Kühlschrank i
 
 Zuletzt unterschätzen viele die Temperatur. Stellst du die Gefriertruhe auf -22 Grad statt der empfohlenen -18 Grad ein? Das erhöht den Verbrauch um etwa 10 % bis 15 %. Einen Vorteil bei der Haltbarkeit hast du dadurch nicht.
 
-## Welche weiteren Strom sparen Tipps helfen sofort?
+## Welche weiteren Tipps zum Stromsparen helfen sofort?
 
 In der Küche liegt enormes Potenzial. Nutze beim Kochen immer einen passenden Deckel auf dem Topf. Das verkürzt die Garzeit und spart bis zu 25 % Energie. Auch das Erhitzen von Wasser im Wasserkocher ist effizienter als auf einem alten Elektroherd. Erhitze dabei nur so viel Wasser, wie du wirklich brauchst.
 

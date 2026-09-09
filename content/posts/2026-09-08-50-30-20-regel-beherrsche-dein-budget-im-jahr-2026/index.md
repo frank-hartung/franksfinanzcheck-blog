@@ -4,7 +4,7 @@ description: "Die 50-30-20-Regel bringt Ordnung in deine Finanzen: 50 % Fixkoste
 date: 2026-09-08T11:45:48Z
 draft: true
 reserve: true
-tags: ["50-30-20-Regel", "50 30 20 Regel", "Budget planen", "Fixkosten senken"]
+tags: ["50-30-20-Regel", "Budget planen", "Fixkosten senken"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
@@ -38,7 +38,7 @@ Hier setzt ein System an, das so simpel wie genial ist. Es geht nicht darum, jed
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt C24 Bank Angebote vergleichen**](/go/tagesgeld/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt C24 Bank-Angebote vergleichen**](/go/tagesgeld/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was steckt hinter der 50-30-20-Formel?
@@ -92,7 +92,7 @@ Der Übergang zu diesem System passiert nicht über Nacht. Es erfordert eine ehr
 
 
 
-> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Jetzt C24 Bank Angebote vergleichen**](/go/tagesgeld/)
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Jetzt C24 Bank-Angebote vergleichen**](/go/tagesgeld/)
 
 
 ## Welche Fehler kosten dich am meisten Geld?
@@ -135,7 +135,7 @@ In der Welt des Frugalismus nutzen wir diese Regel oft als Sprungbrett. Wer einm
 
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
-**Lesetipp:** [Frugalismus Tipps: So vermeidest du teure Alltagsfehler](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)
+**Lesetipp:** [Frugalismus-Tipps: So vermeidest du teure Alltagsfehler](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)
 
 ## Häufige Fragen
 

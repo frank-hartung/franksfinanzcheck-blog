@@ -281,6 +281,87 @@ def _lektor_findings():
     return {"auto": auto, "advisory": advisory}
 
 
+_CASING_J = os.path.join(BLOG_DIR, ".casing_report.json")
+_CASING_H = os.path.join(BLOG_DIR, "data", "casing_history.jsonl")
+
+
+def _casing_words(report):
+    """Liest die Wortbasis eines Casing-Reports rückwärtskompatibel.
+
+    Aktuelle Guard-Läufe schreiben die gesamte gescannte Wortmenge als
+    `woerter`. Alte JSON-Reports kannten nur Fund-Dateien; deren Liste ist
+    ausschließlich der Fallback, damit ein Restfund nicht künstlich auf wenige
+    Wörter hochgerechnet wird.
+    """
+    try:
+        whole_scan = int(report.get("woerter") or 0)
+    except (AttributeError, TypeError, ValueError):
+        whole_scan = 0
+    if whole_scan > 0:
+        return whole_scan
+    total = 0
+    rows = report.get("dateien_liste", []) if isinstance(report, dict) else []
+    for row in rows if isinstance(rows, list) else []:
+        try:
+            total += int(row.get("woerter") or 0)
+        except (AttributeError, TypeError, ValueError):
+            continue
+    return total
+
+
+def _casing_state():
+    """Groß-/Kleinschreibung: harte Befunde, Dichte je 1.000 Woerter, Trend.
+
+    Die Zahl uebernimmt die Scorecard aus dem Bericht der Wache
+    (.casing_report.json) – sie rechnet nicht selbst nach. Der Trend kommt aus
+    data/casing_history.jsonl (letzter TAG vor heute); ohne Bericht ist die
+    Lampe ⚪ (Datenluecke), nicht 🟡 – dieselbe Regel wie bei Klicks und CWV.
+    """
+    j = _read_json(_CASING_J, {})
+    if not j:
+        return None
+    hist = []
+    try:
+        with open(_CASING_H, encoding="utf-8") as fh:
+            for line in fh:
+                line = line.strip()
+                if line:
+                    try:
+                        hist.append(json.loads(line))
+                    except json.JSONDecodeError:
+                        pass
+    except OSError:
+        hist = []
+    woerter = _casing_words(j)
+    hart = int(j.get("hart") or 0)
+    park = j.get("geparkt") or []
+    vorher = None
+    for h in reversed(hist):
+        if h.get("tag") != TODAY.isoformat():
+            vorher = h.get("hart")
+            break
+    return {
+        "hart": hart,
+        "hinweise": int(j.get("befunde") or 0) - hart,
+        "gefixt": int(j.get("gefixt") or 0),
+        "geparkt": len(park) if isinstance(park, list) else int(park or 0),
+        "woerter": woerter,
+        "dichte": round(1000.0 * hart / woerter, 2) if woerter else None,
+        "trend": None if vorher is None else hart - int(vorher),
+        "stand": (j.get("stand") or "nie")[:10],
+        "tage": len({h.get("tag") for h in hist if h.get("tag")}),
+    }
+
+
+def _casing_lamp(d):
+    c = d.get("casing")
+    if c is None:
+        return "⚪"
+    if c == 0 and not d.get("casing_geparkt"):
+        return "🟢"
+    return "🟡" if c <= 3 else "🔴"
+
+
 def collect():
     """Sammelt alle Daten für die Scorecard."""
     live, drafts = _count_live_drafts()
@@ -295,6 +376,7 @@ def collect():
     awin = _read_json(_AWIN_P, {})
     readability = _avg_readability()
     lektor = _lektor_findings()
+    casing = _casing_state()
     # Affiliate-Klick-Attribution: summiert Klicks über Pillars / Artikel.
     click_articles = (clicks.get("articles") or {})
     click_pillars = (clicks.get("pillars") or {})
@@ -328,6 +410,16 @@ def collect():
         # `lektor_advisory` = reine Stil-Hinweise (Info, nicht abstrafend).
         "lektor": (lektor or {}).get("auto") if lektor is not None else None,
         "lektor_advisory": (lektor or {}).get("advisory") if lektor is not None else None,
+        # Casing: harte Befunde (Schreibkanon) steuern die Ampel, Hinweise sind
+        # Redaktionsentscheidungen (Shouting-Betonung, angeklebte Ueberschriften).
+        "casing": (casing or {}).get("hart") if casing is not None else None,
+        "casing_hint": (casing or {}).get("hinweise") if casing is not None else None,
+        "casing_woerter": (casing or {}).get("woerter") if casing is not None else None,
+        "casing_dichte": (casing or {}).get("dichte") if casing is not None else None,
+        "casing_trend": (casing or {}).get("trend") if casing is not None else None,
+        "casing_geparkt": (casing or {}).get("geparkt") if casing is not None else None,
+        "casing_stand": (casing or {}).get("stand") if casing is not None else None,
+        "casing_hist": (casing or {}).get("tage") if casing is not None else None,
         "secret_red": secret_red,
         "secret_amber": secrets_lage["amber"], "secret_verdict": secrets_lage["verdict"],
         "secret_legacy": secrets_lage["legacy"],
@@ -407,6 +499,13 @@ def _render_datalage(d):
          "heute" if os.path.exists(os.path.join(BLOG_DIR, "LEKTOR-REPORT.md")) else "fehlt",
          f"{d['lektor'] if d['lektor'] is not None else 'n/a'} auto-behebbar, "
          f"{d.get('lektor_advisory') if d.get('lektor_advisory') is not None else 'n/a'} Stil-Hinweise"),
+        ("Casing", "CASING-REPORT.md + .casing_report.json",
+         d.get("casing_stand") or "fehlt",
+         f"{d['casing'] if d.get('casing') is not None else 'n/a'} hart, "
+         f"{d.get('casing_hint') if d.get('casing_hint') is not None else 'n/a'} Hinweise, "
+         f"{d['casing_hist'] or 0} Tage Historie"
+         if d.get("casing") is not None else "Bericht noch nicht erzeugt "
+         "(`casing_guard.py --json`)"),
         ("Affiliate-Klicks", "data/umami_clicks.json (via scripts/umami_clicks.py)",
          d.get("clicks_stand", "nie"),
          {"ok": "automatisch befüllt", "skipped": "Pipeline wartet auf Secret "
@@ -535,6 +634,13 @@ def render(d, score):
         f"{'⚪' if d['lektor'] is None else ('🟢' if d['lektor'] == 0 else '🟡')} |",
         f"| Stil-Hinweise (Lektorat, nur Info) | "
         f"{'n/a' if d.get('lektor_advisory') is None else d['lektor_advisory']} | ℹ️ |",
+        f"| Groß-/Kleinschreibung – harte Befunde | "
+        f"{'n/a' if d.get('casing') is None else d['casing']}"
+        f"{' ' + chr(0xb7) + ' ' + format(d['casing_dichte'], '.2f') + '/1.000 W.' if d.get('casing_dichte') is not None else ''}"
+        f"{' (' + format(d['casing_woerter'], ',').replace(',', '.') + ' W. geprüft)' if d.get('casing_woerter') else ''} "
+        f"| {_casing_lamp(d)} |",
+        f"| Schreibweise – Hinweise (nur Info) | "
+        f"{'n/a' if d.get('casing_hint') is None else d.get('casing_hint')} | ℹ️ |",
         f"| Secrets ({'Wache v1 – Report veraltet' if d.get('secret_legacy') else 'rot / gelb / bewiesen'}) "
         f"| {d['secret_red']} / {d.get('secret_amber', 0)} / "
         f"{d.get('secret_proven', 0)} von {d['secret_entries']} | "
@@ -589,6 +695,20 @@ def render(d, score):
     elif d.get("secret_amber", 0) > 0:
         recs.append(f"{d['secret_amber']} gelber Secret-Hinweis(e) – altern, aber "
                     "functieren; `--verify` im Wochentakt hält den Nachweis frisch.")
+    if d.get("casing"):
+        recs.append(f"**{d['casing']}** harte Casing-Befunde (Marken/Akronymen/"
+                    f"Tags) – `python3 scripts/casing_guard.py --fix --plan` heilt "
+                    f"Inhalt UND Pinterest-Plan; `--gate` parkt betroffene "
+                    f"Neugeburten stattdessen. Dichte: "
+                    f"{d.get('casing_dichte')} je 1.000 Woerter.")
+    if (d.get("casing_trend") or 0) > 0:
+        recs.append(f"Casing verschlechtert um {d['casing_trend']} Befund(e) "
+                    "gegenüber dem Vortag – meist ein Hinweis, dass ein Editor "
+                    "(KI-Nachtrag, SEO-Keyword) vor der Wache geschrieben hat.")
+    if d.get("casing_geparkt"):
+        recs.append(f"{d['casing_geparkt']} Artikel wegen Casing-Gate geparkt – "
+                    "CASING-REPORT.md zeigt die Zeilen; nach der Korrektur "
+                    "entblockt `casing_guard.py --gate --new-only` automatisch.")
     if d["lektor"]:
         recs.append(f"**{d['lektor']}** auto-behebbare Lektorat-Befunde – "
                     "`scripts/lektor_guard.py --fix` (Doppelwörter, Füll-Phrasen, "
@@ -734,6 +854,20 @@ def _selftest():
     if _data_lamp(0, 0, False) != "⚪" or _data_lamp(0, 0, True) != "🟡" \
             or _data_lamp(250, 5, True) != "🟢":
         failures.append("Monetarisierungs-Lampe verwechselt Datenlücke mit Befund")
+    # --- Casing: Vollscan-Nenner ist SSOT, alte Fundlisten bleiben lesbar.
+    if (_casing_words({"woerter": 12000, "dateien_liste": [{"woerter": 12}]}) != 12000
+            or _casing_words({"dateien_liste": [{"woerter": 12}, {"woerter": "8"}]}) != 20
+            or _casing_words({"woerter": "kaputt", "dateien_liste": [{"woerter": "?"}]}) != 0):
+        failures.append("Casing-Wortnenner ignoriert Vollscan oder bricht Legacy-Reports")
+    # --- Casing-Lampe: Datenluecke ⚪, sauber 🟢, Ausreisser 🔴
+    if _casing_lamp({"casing": None}) != "⚪" or _casing_lamp({"casing": 0}) != "🟢" \
+            or _casing_lamp({"casing": 2}) != "🟡" or _casing_lamp({"casing": 9}) != "🔴" \
+            or _casing_lamp({"casing": 0, "casing_geparkt": 1}) != "🟡":
+        failures.append("Casing-Lampe verwechselt Datenluecke/Befund/Parken")
+    if _casing_state() is not None:
+        _c = _casing_state()
+        if _c["hart"] < 0 or (_c["dichte"] or 0) < 0:
+            failures.append("Casing-Zustand negativ")
     # --- _age_days in render(): fehlende Historie darf nicht crashen
     if _trend()[0] is not None and not isinstance(_trend()[0], int):
         failures.append("Trend-Lieferform unstetig")

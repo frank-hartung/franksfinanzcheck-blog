@@ -107,7 +107,7 @@ Ein Mesh-Set für 180 € kostet über 36 Monate gerechnet 5 € im Monat. Das
 1. **Messen, nicht schätzen.** Speedtest per Kabel am Router, dann per WLAN am Schreibtisch, im Schlafzimmer, auf der Terrasse. Notiere Download, Upload, Ping. Alles unter 30 % der Vertragswerte ist ein Funk- oder Leitungsproblem – beides musst du trennen.
 2. **Kabel-Referenz.** Liegt der LAN-Test klar unter dem Vertrag, ist es der Anschluss (Provider anrufen, Entstörungsnummer, 14-Tage-Protokoll). Liegt LAN gut und WLAN schlecht, arbeitest du am Funk.
 3. **Position.** Router auf Augenhöhe, weg von Mikrowelle, DECT-Basis und Bluetooth-Lautsprechern. Antennen senkrecht.
-4. **Kanal und Band.** 5 GHz für Arbeitsgeräte, 2,4 GHz für Smarthome. DFS-Kanäle meiden, wenn die FritzBox ständig neu startet (Radar-Erkennung).
+4. **Kanal und Band.** 5 GHz für Arbeitsgeräte, 2,4 GHz für Smarthome. DFS-Kanäle meiden, wenn die FRITZ!Box ständig neu startet (Radar-Erkennung).
 5. **Mesh oder Powerline entscheiden.** Mehr als zwei Wände aus Stein oder eine Etage dazwischen → Mesh. Altbau mit Stahlträgern → Powerline testen (im selben Stromkreis).
 6. **Gäste-WLAN an, IoT getrennt.** Kameras und Staubsaugerroboter gehören nicht ins Arbeitsnetz.
 7. **Nach 7 Tagen erneut messen.** Dieselbe Uhrzeit, dieselben drei Orte. Nur Zahlen beweisen, dass die Maßnahme wirkt.
@@ -122,7 +122,7 @@ Hast du Glasfaser mit 300 Mbit/s oder mehr? Dann binde den zweiten Knoten per LA
 
 Du musst dich nicht mit Funklöchern abfinden. Oft reichen ein guter Router-Standort und getrennte Funkbänder. Schon das verbessert dein **WLAN** spürbar. Für große Wohnungen ist ein Mesh-Set die beste Wahl. Es bringt stabiles Arbeiten und flüssiges Entertainment.
 
-**Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [DSL Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
+**Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [DSL-Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
 
 ## Häufige Fragen
 

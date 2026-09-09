@@ -5,7 +5,7 @@ description: Wie viel Notgroschen ist wirklich nötig? Erfahre, wie du dein fina
 date: 2026-09-09T08:16:43Z
 draft: true
 reserve: true
-tags: ["Notgroschen", "Wahrheit", "finanzielle"]
+tags: ["Notgroschen", "Wahrheit", "Finanzielle"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"

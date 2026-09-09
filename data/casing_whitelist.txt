@@ -1,0 +1,21 @@
+# Casing-Whitelist – Woerter, die die Gross-/Kleinschreibungs-Wache NIEMALS
+# umbiegen darf (Einzelwort, klein geschrieben; siehe scripts/casing_guard.py).
+#
+# Warum diese Datei existiert: die Wache entscheidet deterministisch ueber
+# Akronyme, Marken und Nomen. Bei neuen Partnern, Produkten oder Fachbegriffen
+# reicht hier EINE Zeile – kein Code-Wechsel, kein Risiko fuer die anderen Wachen.
+#
+# Marken, die bewusst klein schreiben (kanonisch, nicht nachsehen!):
+congstar
+otelo
+idealo
+ebay
+comdirect
+pyur
+lexoffice
+flatex
+smartbroker
+# Produktnamen, deren Suchbegriff-Schreibweise bewusst stehen bleibt:
+# Begriffe, die im Blog absichtlich klein stehen:
+newsletter-formular
+inhaltsangabe

@@ -1,10 +1,10 @@
 ---
 lastmod: 2026-09-02
-title: "DSL Vergleich: So findest du den günstigsten Internettarif"
-description: "DSL Vergleich 2026: Tarife, Geschwindigkeiten & versteckte Kostenfallen im Check. So findest du günstigeres Internet und sparst bis zu 360 €."
+title: "DSL-Vergleich: So findest du den günstigsten Internettarif"
+description: "DSL-Vergleich 2026: Tarife, Geschwindigkeiten & versteckte Kostenfallen im Check. So findest du günstigeres Internet und sparst bis zu 360 €."
 date: 2026-08-19T08:35:12Z
 draft: false
-tags: ["DSL Vergleich", "Internettarif wechseln", "Günstiges Internet", "Breitband Vergleich"]
+tags: ["DSL-Vergleich", "Internettarif wechseln", "Günstiges Internet", "Breitband Vergleich"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
@@ -13,14 +13,14 @@ erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft
 ai_generated: false
 cover:
   image: "images/covers/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.jpg"
-  alt: "DSL Vergleich: So findest du günstigeres Internet"
+  alt: "DSL-Vergleich: So findest du günstigeres Internet"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein transparenter DSL-Vergleich berechnet die effektiven Monatspreise über die gesamte 24-monatige Vertragslaufzeit inklusive aller Aktionsrabatte, Router-Gebühren und Wechselprämien. Wer alle zwei Jahre seinen Festnetztarif wechselt, senkt die monatlichen Internetkosten im Schnitt von 44,95 € auf 24,95 €."
 
 social_posted: true
-keywords: ["DSL Vergleich", "Günstigeres Internet", "DSL-Tarife vergleichen", "Internetvertrag wechseln", "Internetanbieter wechseln", "DSL-Vergleich"]
+keywords: ["DSL-Vergleich", "Günstigeres Internet", "DSL-Tarife vergleichen", "Internetvertrag wechseln", "Internetanbieter wechseln", "DSL-Vergleich"]
 pin_title: "DSL & Internet Flat: Schnell surfen ab 9,99 €/Monat"
-pin_description: "*Werbung | Du zahlst noch über 30 € für dein Internet? DSL- und Kabeltarife gibt es schon ab 9,99 € im Monat – mit Wechselbonus und Fritzbox-Rabatt obendrauf. Vergleichen, wechseln, sparen: Der Wechsel-Service übernimmt sogar die Kündigung. Jetzt Speed checken!"
+pin_description: "*Werbung | Du zahlst noch über 30 € für dein Internet? DSL- und Kabeltarife gibt es schon ab 9,99 € im Monat – mit Wechselbonus und FRITZ!Box-Rabatt obendrauf. Vergleichen, wechseln, sparen: Der Wechsel-Service übernimmt sogar die Kündigung. Jetzt Speed checken!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
@@ -151,7 +151,7 @@ Für flüssige Video-Konferenzen, VPN-Verbindungen und paralleles Surfen reicht 
 Deine Festnetznummer kannst du kostenlos zum neuen Provider mitnehmen (Rufnummernportierung). Der neue Anbieter wickelt dies im Rahmen des Wechselservices automatisch ab.
 
 ### Brauche ich für Glasfaser einen neuen Router?
-Nicht zwingend. Viele neuere Fritz! Box-Modelle lassen sich über ein separates Glasfasermodem (ONT) problemlos an einem FTTH-Anschluss Weiternutzen.
+Nicht zwingend. Viele neuere FRITZ!Box-Modelle lassen sich über ein separates Glasfasermodem (ONT) problemlos an einem FTTH-Anschluss Weiternutzen.
 
 ---
 

@@ -166,8 +166,24 @@ jobs:
           python3 scripts/spellcheck.py --fix || echo "⚠ Spellcheck-Fehler (nicht kritisch)"
           echo "== Grammatik =="
           python3 scripts/grammar_check.py --fix --new-only || echo "⚠ Grammatik-Fehler (nicht kritisch)"
-          echo "== Akronym-Orthografie (Casing-Guard: dsl->DSL, Durchkopplung) =="
+          echo "== Akronym-/Marken-/Tagschreibung (casing_guard: C1–C17 + T1, Selbsttest vor jedem Schreibvorgang) =="
           python3 scripts/casing_guard.py --fix --new-only || echo "⚠ Casing-Guard (nicht kritisch)"
+          # CASING-VERBUND (PREMIUM 09.09.2026): Pin-Texte werden IMMER aus
+          # data/pinterest_plan.yaml neu kopiert (pinterest_pin_text_sync).
+          # Ohne Plan-Pass ware jede Casing-Heilung im Frontmatter nach dem
+          # naechsten Sync weg – der Guard richtet daher zuerst die Quelle,
+          # dann die Kopien, und prueft anschliessend als GATE: bleibt ein
+          # harter Befund (C1/C4/C7/C9/C13/C15/T1), wird der Artikel als
+          # Entwurf geparkt statt mit Sprachfehler live zu gehen.
+          python3 scripts/casing_guard.py --fix --new-only --plan || echo "⚠ Casing-Guard Plan (nicht kritisch)"
+          # STRUKTUR: Absatztext, der an eine Ueberschrift geklebt wurde, rendert
+          # bei Hugo als fette Ueberschrift UEBER dem ganzen Absatz. Getrennt wird
+          # nur an den drei beweisbaren Nahtstellen (Fettkoerper / Folgesatz nach
+          # ?|! / Listenkopf mit Satzanfang + Verbbeleg); mehrdeutige Faelle
+          # bleiben im Report stehen. Selbster Erklaerung: zweiter Lauf = 0.
+          python3 scripts/casing_guard.py --split-headglue --new-only || echo "⚠ HeadGlue (nicht kritisch)"
+          python3 scripts/pinterest_pin_text_sync.py --apply || echo "⚠ Pin-Sync (nicht kritisch)"
+          python3 scripts/casing_guard.py --gate --new-only --plan || echo "🅿 Casing-Gate: Artikel bleibt Entwurf (Grund im CASING-REPORT)"
           echo "== Strich-Typografie (Dash-Guard: Duden-Niveau + KI-Schiedsrichter) =="
           python3 scripts/dash_guard.py --fix --ai --new-only || echo "⚠ Dash-Guard: Hinweise (nicht kritisch)"
           echo "== Komposita-Waechter (compound_guard.py: Keyword-Falle 'Preisgarantie Gas' etc.) =="

@@ -1,6 +1,6 @@
 # 📕 QUALITÄTS-REGELWERK – FranksFinanzcheck
 
-**Version:** 1.0 · **Stand:** 10.08.2026 · **Geltungsbereich:** gesamtes Blog
+**Version:** 1.1 · **Stand:** 09.09.2026 · **Geltungsbereich:** gesamtes Blog
 (alles unter `content/`, die Startseite, die Skripte in `scripts/`, die
 Workflows in `.github/workflows/`)
 
@@ -26,7 +26,7 @@ KI-Artikel (engine_generate.py)
    ├─► spellcheck.py            Rechtschreibung (Hunspell, de-DE)
    ├─► grammar_check.py         Grammatik (LanguageTool)
    │
-   ├─► 🔠 casing_guard.py       Akronym-/Marken-Schreibweise (C1–C3)
+   ├─► 🔠 casing_guard.py       Groß-/Kleinschreibung + Überschriften-Kanon (C1–C17, T1)
    ├─► 📏 dash_guard.py         Strich-Typografie (R1–R8) + KI-Stil (S1/S3)
    ├─► fix_dash_breaks.py       Umbruch NACH Gedankenstrich
    ├─► fix_heading_breaks.py    Teilüberschrift:<br>-Umbruch
@@ -199,12 +199,42 @@ Markup (`role="region"`, `scope="col"`, `<colgroup>`), CSS in
 Hugo-WASM-Engine (0.147) + Produktions-Hugo 0.164 (identische Hook-API).
 `table_guard.py` arbeitet unverändert auf dem Markdown-Quelltext.
 
-### ### casing_guard.py – Akronym-Orthografie (Duden, deterministisch)
-| Regel | Inhalt | Beispiel |
+### casing_guard.py – Groß-/Kleinschreibung & Überschriften-Kanon (Duden, deterministisch)
+
+`casing_guard.py` ist ein **Entscheider**, keine bloße Fundliste: Er heilt nur
+nachweisbare Fälle, schützt URLs, Slugs, Code und SEO-Keywords strikt und
+meldet Zweifelsfälle statt sie zu erraten. `scripts/tag_casing.py` ist der
+geteilte Kanon für Wache und Generator; `data/casing_whitelist.txt` schützt
+bewusst abweichende Einzelbegriffe ohne Code-Änderung.
+
+| Regeln | Inhalt | Beispiel / Grenze |
 |---|---|---|
-| C1 | Kanonische Akronym-Form (auch Satzanfang) | `dsl` → `DSL`, `etfs` → `ETFs`, `cashback` → `Cashback` |
-| C2 | Durchkopplung Akronym + Nomen | `DSL Tarif` → `DSL-Tarif` |
-| C3 | Marken-Durchkopplung | `Check24 Gasvergleich` → `Check24-Gasvergleich` (Marken: Check24/CHECK24, Tarifcheck, Verivox, Idealo) |
+| C1, C2, C3 | Akronym- und Markenkanon samt Durchkopplung | `dsl Tarif` → `DSL-Tarif`, `CHECK24 Vergleich` → `CHECK24-Vergleich` |
+| C4–C8, C13, C15 | sichere deutsche Schreibfälle | `zum sparen` → `zum Sparen`, `etwas neues` → `etwas Neues`, `im august` → `im August`; Satzanfänge sind abkürzungs-, Datums- und Rechtszitat-sicher |
+| C9, C10 | Hersteller- und Einheitenkanon | `FritzBox` → `FRITZ!Box`, `KWH` → `kWh`; `KW 42` bleibt Kalenderwoche |
+| C11, C14 | Shouting / CamelCase | eindeutige Kompositum-Schreibweise wird geheilt; mehrdeutige Betonung oder Binnenmajuskel wird **nur gemeldet** |
+| C12, C16, C17 | Überschriften-Kanon | deutscher Satz-Case statt Title Case, kein redundantes `**Fett**`, `Frugalismus Tipps` → `Frugalismus-Tipps` / `Heizung wartung` → `Heizungswartung` |
+| T1 | sichtbare Tags und Kategorien | `dns hack` → `DNS Hack`; gleiches Taxonomie-Slug-Duplikat wird verschmolzen |
+
+**Zonenvertrag:** `keywords`, URLs, Linkziele, Bildpfade, Slugs, Code und
+Hashtags bleiben bytegleich. Sichtbarer Linktext, Titel, Pin- und Cover-Texte
+werden nach ihrem Feldvertrag behandelt. Dadurch kann ein Linklabel verbessert
+werden, ohne dass sich sein Ziel – und damit kein Ranking- oder 404-Risiko –
+ändert.
+
+**Klebefugen-Beweis:** Eine lange Überschrift ist kein Befund. Der Strukturmodus
+`--split-headglue` trennt Absatztext nur an drei belegten Nähten: einem
+Fettkörper, einem Folgesatz nach `?`/`!` oder einem Listen-Kopf mit
+Satzanfang und Verbbeleg. Köpfe, die auf Artikel, Demonstrativpronomen oder
+Konjunktion enden, sind durch `HG_ENDHANG` vor einer falschen Trennung
+abgesichert. Mehrdeutige Fugen bleiben als Redaktionshinweis stehen.
+
+**Nachweis & Betrieb:** `--selftest` läuft vor jedem Schreibvorgang; ein
+fehlgeschlagener Test endet mit Exit 2 und schreibt nichts. `--fix --plan`
+heilt Bestand und Pinterest-Quelle, `--gate --new-only` hält nur neue Beiträge
+mit harten Restbefunden zurück. `CASING-REPORT.md`,
+`data/casing_history.jsonl` und `.casing_report.json` protokollieren Bestand,
+Quote und Trend für die Scorecard.
 
 ### dash_guard.py – Strich-Typografie (Duden + Web)
 | Regel | Inhalt |
@@ -435,6 +465,11 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **09.09.2026:** Casing-Bund auf C1–C17 + T1 erweitert: gemeinsamer
+  Marken-/Tag-Kanon, Satzanfangs- und Einheiten-Schutz, sichere
+  HeadGlue-Trennung, C16-Fettdruck- und C17-Komposita-Entscheider.
+  Sichtbare Linklabels werden geheilt, Linkziele/Slugs bleiben unverändert.
+  Der Report zählt die gesamte gescannte Wortbasis statt nur Fund-Dateien.
 - **02.09.2026:** REDAKTIONS-STANDARD Capital · WirtschaftsWoche · DIE ZEIT
   (Frank-Auftrag: „Blogautomatik dauerhaft auf deren Niveau“). Recherche
   der Online-Methoden der drei Redaktionen

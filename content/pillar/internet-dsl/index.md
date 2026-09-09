@@ -8,7 +8,7 @@ author: "Frank Hartung"
 categories: ["Ratgeber"]
 build:
   list: never
-keywords: ["DSL Vergleich", "Internet schneller machen", "WLAN verbessern", "DSL Wechselbonus", "Handytarife"]
+keywords: ["DSL-Vergleich", "Internet schneller machen", "WLAN verbessern", "DSL-Wechselbonus", "Handytarife"]
 ---
 Ein stabiler und schneller Internetanschluss gehört heute zur absoluten Grundversorgung in jedem Haushalt – egal ob für Homeoffice, 4K-Streaming oder Online-Gaming. Dennoch zahlen Millionen Haushalte in Deutschland Monat für Monat deutlich zu viel für veraltete Bandbreiten oder unzureichende WLAN-Abdeckung. Drei Stellschrauben zählen: das Heimnetzwerk optimieren, teure DSL-Altverträge durch lukrative Wechselprämien ersetzen und beim Smartphone-Tarif massiv sparen – in genau dieser Reihenfolge sinkt deine monatliche Rechnung am schnellsten.
 
@@ -36,7 +36,7 @@ Ein stabiler und schneller Internetanschluss gehört heute zur absoluten Grundve
 
 Viele Verbraucher bleiben über Jahre beim selben Anbieter, obwohl die zweijährige Mindestvertragslaufzeit längst abgelaufen ist. Nach 24 Monaten entfallen jedoch die anfänglichen Rabatte, und der Vertrag wird spürbar teurer.
 
-Wie du den Markt systematisch analysierst und günstige Tarife für deine Region findest, zeige ich dir im Leitfaden [DSL Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/). Welche Boni und Cashbacks sich besonders lohnen und wie der Anbieterwechsel nahtlos funktioniert, erfährst du im Spezialbeitrag [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/).
+Wie du den Markt systematisch analysierst und günstige Tarife für deine Region findest, zeige ich dir im Leitfaden [DSL-Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/). Welche Boni und Cashbacks sich besonders lohnen und wie der Anbieterwechsel nahtlos funktioniert, erfährst du im Spezialbeitrag [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/).
 
 ### Worauf du beim DSL-Vergleich achten solltest:
 1. **Effektiver Monatspreis:** Berechne den Preis über 24 Monate inklusive aller Boni, Freimonate, Bereitstellungsentgelte und Router-Kosten.
@@ -134,7 +134,7 @@ Die Verfügbarkeitskarte lügt höflich. „Bis zu 250 Mbit“ heißt: an der S
 
 **Messung A – Leitungsqualität.** Ein Techniker- oder Selbsttest am Abschluss (Teilnehmeranschluss, Glasfaser-ONT). Liegt der Sync 40 % unter der Werbung, ist der Tarif falsch, nicht dein Router.
 
-**Messung B – Inhouse.** 15 m CAT7 zur FritzBox schlägt 15 m Powerline durch die Spülmaschine. Wer neu baut oder renoviert, legt Leerrohr. Wer mietet, verhandelt eine Dose im Arbeitszimmer, nicht nur im Flur.
+**Messung B – Inhouse.** 15 m CAT7 zur FRITZ!Box schlägt 15 m Powerline durch die Spülmaschine. Wer neu baut oder renoviert, legt Leerrohr. Wer mietet, verhandelt eine Dose im Arbeitszimmer, nicht nur im Flur.
 
 **Messung C – Funk.** Dieselbe Speedtest-App, drei Orte, 19 Uhr. Unter 30 % der Leitung ist Mesh- oder Positionsthema, kein Grund für 1 Gbit.
 
@@ -144,11 +144,11 @@ Hybrid (DSL+LTE) ist Backup, kein Dauerzustand. Das LTE-Volumen ist gedrosselt, 
 
 Nach der Mindestlaufzeit monatlich kündbar, Umschaltung max. ein Kalendertag, Entstörung mit gesetzlicher Frist. Das steht im Gesetz, nicht in der Kulanzabteilung. Wenn der Wechseltag überschritten wird, dokumentieren (Ping, Traceroute, Ticketnummer) und Minderungsanspruch ansprechen. Die meisten Fälle lösen sich mit einem Ticket am Umschaltmorgen – aber nur, wenn du den Hotspot parat hast und nicht drei Stunden in der Warteschleife ohne Protokoll verbringst.
 
-Rufnummern und E-Mail-Adressen @Anbieter. de sind kein Grund zu bleiben. Domain und Mail besser selbst hosten oder bei einem unabhängigen Postfach. Wer 24 Monate bleibt, weil „die E-Mail“, zahlt eine emotionale Miete.
+Rufnummern und E-Mail-Adressen @Anbieter.de sind kein Grund zu bleiben. Domain und Mail besser selbst hosten oder bei einem unabhängigen Postfach. Wer 24 Monate bleibt, weil „die E-Mail“, zahlt eine emotionale Miete.
 
 ## Hardware-Parkour ohne Neu-Kauf-Zwang
 
-Eine solide FritzBox aus 2023/24 trägt 2026 noch VDSL 250 und FTTH im Bridge hinter dem ONT. Mesh-Repeater derselben Generation halten mit. Der Zwang zur Provider-Box ist oft Firmware-Politik, nicht Physik. Bridge-Modus schriftlich erfragen, bevor du die eigene Box in den Schrank stellst.
+Eine solide FRITZ!Box aus 2023/24 trägt 2026 noch VDSL 250 und FTTH im Bridge hinter dem ONT. Mesh-Repeater derselben Generation halten mit. Der Zwang zur Provider-Box ist oft Firmware-Politik, nicht Physik. Bridge-Modus schriftlich erfragen, bevor du die eigene Box in den Schrank stellst.
 
 Stromkosten: Router + zwei Mesh-Knoten + Switch ≈ 15–25 Watt dauerhaft ≈ 40–70 €/Jahr. Das rechtfertigt keinen Billig-Repeater, der alle zwei Tage neu startet. Es rechtfertigt Zeitsteuerung nachts, wenn niemand streamt.
 
@@ -168,7 +168,7 @@ Ja. Sobald die anfängliche Mindestvertragslaufzeit (in der Regel 24 Monate) abg
 Für einen Ein- bis Zwei-Personen-Haushalt reicht ein stabiler Anschluss mit 50&nbsp;Mbit/s für gleichzeitige Videokonferenzen in HD und 4K-Streaming problemlos aus. Wichtig ist dabei auch ein Upload von mindestens 10&nbsp;Mbit/s für flüssige Upstreams.
 
 ### Lohnt es sich, den Router beim Anbieter zu mieten?
-In den meisten Fällen nicht. Nach zwei bis drei Jahren übersteigen die monatlichen Mietkosten von 5&nbsp;€ bis 8&nbsp;€ den Neupreis eines eigenen Geräts wie einer AVM FRITZ! Box deutlich.
+In den meisten Fällen nicht. Nach zwei bis drei Jahren übersteigen die monatlichen Mietkosten von 5&nbsp;€ bis 8&nbsp;€ den Neupreis eines eigenen Geräts wie einer AVM FRITZ!Box deutlich.
 
 ---
 
