@@ -5,7 +5,7 @@ description: "Frugalismus im Alltag: 5 einfache Tricks, mit denen du ohne echten
 date: 2026-09-08T11:45:48Z
 draft: true
 reserve: true
-tags: ["Frugalismus im Alltag", "Frugalismus", "Geld sparen", "minimalistisch leben"]
+tags: ["Frugalismus im Alltag", "Frugalismus", "Geld sparen", "Minimalistisch Leben"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
@@ -126,7 +126,7 @@ Du musst das nicht ewig machen. Oft reichen drei Monate intensiver Dokumentation
 
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
-**Lesetipp:** [Frugalismus Tipps: So vermeidest du teure Alltagsfehler](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)
+**Lesetipp:** [Frugalismus-Tipps: So vermeidest du teure Alltagsfehler](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)
 
 ## Häufige Fragen
 

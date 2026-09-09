@@ -61,8 +61,45 @@ bringt (Deploy, Engine, manueller Commit, `publish.py`):
 | **Engine-Phase 6** | `engine_issue.py --deficit`: Tagesende unter Minimum → sichtbares, auto-schließendes Issue |
 | **Blog-Health (täglich)** | Heilt auch ZWISCHEN den Publishing-Slots: Kadenz, Titel, Covers + Überschriften-Hygiene (`blog_health_gate.py` ruft seit 27.08. `heading_guard.py` anker-stabil auf – kein `<br>` in Überschriften, TOC-/Leerzeichen-Fehlerwurzel) |
 | **Affiliate-Integritäts-Wache (täglich)** | Seit 02.09. Premium-Stufe: Detektor-**Selbsttest** vor jeder Prüfung, **Render-Beweis AI4** attribut-tolerant + schlüsselgenau, **Gateway-Beweis AI5** (`/go/<key>/` leitet auf die registrierte Partner-URL weiter), **fail-closed** bei Werkzeugfehlern (Exit 2 → `publish_gate.py` veröffentlicht nichts), EIN Issue pro Schadenslage (auto-schließend). Details: `AFFILIATE-INTEGRITY-GATE-REPORT.md` |
+| **Casing-Bund (täglich + bei der Geburt)** | `casing_guard.py` entscheidet Groß-/Kleinschreibung nach Duden – 17 Textregeln (C1–C17) plus Tag/Kategorie-Regel T1, gemeinsames Lexikon `tag_casing.py`, Selbsttest vor JEDEM Schreibvorgang, `--gate` parkt Neugeburten mit hartem Befund, `--plan` heilt die Quelle der Pin-Texte mit. Details: `CASING-REPORT.md` |
 | **Doktor-Kette / Engine** | `blog_doctor.py` (Phase A, erste Text-Wache) heilt jeden NEUEN Artikel bei der Geburt (`--new-only` via Content-Engine v2) und bei jeder Visite |
 | **`publish.py` (manuell)** | Gleiche Routine wie die Automation – Verstoß blockiert hart (Notfall: `--force-cadence`) |
+
+**✍️ Casing-Bund auf Premium-Stufe (09.09.2026):**
+
+`scripts/casing_guard.py` ist keine Warnliste, sondern ein Entscheider: Es prüft
+und heilt die gesamte Sprach-Oberfläche des Blogs in einem Lauf – Akronym-Kanon
+(`dsl → DSL`, `W/kWh`), Marken-Schreibweise (`fritzbox → FRITZ!Box`,
+`Check24 → CHECK24`, bewusst klein: `congstar`, `otelo`, `idealo`),
+Durchkopplung (`DSL Vergleich → DSL-Vergleich`), Nominalisierung nach
+Präposition (`zum sparen → zum Sparen`), substantivierte Adjektive
+(`etwas neues → etwas Neues`), Satzanfang, Monats-/Wochentagsnamen,
+Title-Case-Leaks aus der KI (`Den Stichtag Kennen und nutzen → kennen`),
+Shouting-Betonung (`NICHT → nicht`) und die Tags/Kategorien selbst
+(`dns hack → DNS Hack`, inklusive Slug-Dedup).
+
+| Baustein | Beweis |
+|---|---|
+| 17 Regeln + T1, Zonenmodell (Fließtext / SEO-Feld / Pin-Feld / Tag / geschützte Register) | `python3 scripts/casing_guard.py --selftest` – 19 Fix- + 18 Schutz- + 23 Struktur-/Meldefälle inkl. Idempotenz |
+| Titel-Zone heilt mit | `C3` + `C17` in `TYPO_RULES`: Akronyp- und Komposita-Kanon gelten auch in `title`/`description` (dort ist die Leerzeichenform der Fehler, im Fließtext kann sie Aufzählung sein) |
+| Überschriften-Hygiene | `C16` entfernt redundantes `**Fettdruck**` aus Überschriften; `C17` koppelt Leerraum-Komposita im Titel (`Frugalismus Tipps → Frugalismus-Tipps`, `Heizung wartung → Heizungswartung`) |
+| Kopf-Vollständigkeit als Trenn-Bremse | `HG_ENDHANG`: ein Kopf, der auf Artikel, Demonstrativpronomen oder Konjunktion endet („Welche Rolle spielt die | **Elementarschadenversicherung** bei einer Photovoltaik‑Anlage?“), wird nicht getrennt – die Sperre heilt einen Fall, den die erste Fassung der Trennung selbst gerissen hatte; 3 zusätzliche Selbsttestfälle (davon 2 mit verbotener Trennung: „… am einfachsten an?“, „Fair geht vor“) |
+| Länge ist kein Fehler | Gemeldet wird nur die **nachgewiesene Satzfuge** (Satz endet mit Punkt innerhalb der Zeile / trennbarer Fettkörper), nie die Wortzahl – fünf saubere FAQ- und Doppelpunkt-Titel waren der alten Heuristik zum Opfer gefallen |
+| Gleiche Entscheidung im Generator (Prävention) | `tag_casing.py` wird von `generate_drafts.normalize_tags()` und `engine_generate._casing_frontmatter()` genutzt |
+| Struktur-Modus `--split-headglue` | trennt angeklebten Absatztext nur an drei beweisbaren Nahtstellen (Fettkörper / Folgesatz nach `?`/`!` / Listenkopf mit Satzanfang + Verbbeleg), 13 Struktur- + 10 Meldefälle, zweiter Lauf = 0. **Bewusst keine vierte Nahtstelle:** ein Satz, der mit einem Nomen beginnt, ist maschinell nicht von einem fortlaufenden Titel zu unterscheiden – geraten würde eine zerlegte Überschrift, also geht der Fall als Meldung an die Redaktion |
+| Keine Klebefalle im Generator | `fazit_schmiede.py` schrieb `## Fazit: <kompletter H1> schlau nutzen` – CTA-Satz in der Überschrift, doppelter Doppelpunkt, duplizierter Titel. Seit 09.09.: Fazit-Überschrift ohne CTA, Unterüberschrift mit Gedankenstrich, Komposita über dasselbe Lexikon (`tc_join`) |
+| Keine Kollision mit der Tipp-Kette | `fix_spaces.py` maskiert Marken mit Ausrufezeichen (FRITZ!Box) und ignoriert Wort-inneres `!`; Pin/SEO-Felder werden nie in der Betonung gefixt |
+| extensionsfähig ohne Code-Change | `data/casing_whitelist.txt` (ein Wort pro Zeile = alle Regeln schweigen für diesen Begriff) |
+| Nachvollziehbarkeit | `CASING-REPORT.md`, `data/casing_history.jsonl` (Dichte harter Befunde je 1.000 Wörter + Trend), Lampe in `EDITORIAL-SCORECARD.md` |
+
+```bash
+python3 scripts/casing_guard.py --selftest          # Detektor-Beweis (Exit 2 = Wache blind)
+python3 scripts/casing_guard.py --dry-run           # Bestand prüfen, nichts schreiben
+python3 scripts/casing_guard.py --fix --plan        # Inhalt + Pinterest-Plan heilen
+python3 scripts/casing_guard.py --gate --new-only   # harter Restbefund → Artikel bleibt Entwurf
+python3 scripts/casing_guard.py --split-headglue --dry-run  # angeklebte Überschriften anzeigen
+python3 scripts/casing_guard.py --split-headglue            # eindeutige Fälle trennen (idempotent)
+```
 
 Dazu: zentrale Titel-Kürzung an Wortgrenzen (`post_utils.safe_title_cut()`,
 nie mitten im Wort) und `check_covers.py` C4, die für jedes Cover

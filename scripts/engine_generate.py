@@ -109,6 +109,49 @@ def write_status(line_extra=None, level="OK"):
 # Hilfsfunktionen: Frontmatter + Datei speichern
 # ---------------------------------------------------------------------------
 
+def _casing_frontmatter(title, desc, pin_t, pin_d, kws):
+    """Groß-/Kleinschreibung schon BEIM Generieren richten (Prävention).
+
+    Nutzt exakt denselben Kanon wie scripts/casing_guard.py – was hier sauber
+    entsteht, muss später weder im Bestand repariert noch vor dem Publizieren
+    geparkt werden. Fail-open: ist die Wache nicht ladbar, wird der Originaltext
+    durchgereicht und die Pipeline läuft weiter (ein Casing-Fall stoppt nie die
+    Publikation, er wird nur im Log gemeldet).
+    """
+    try:
+        import casing_guard as cg
+    except Exception as e:                                  # noqa: BLE001
+        print(f"  ⚠ Casing-Pass nicht verfügbar: {e}")
+        return title, desc, pin_t, pin_d, kws
+    n = 0
+
+    def pas(val, allowed, heading=False):
+        nonlocal n
+        if not val:
+            return val
+        hits = cg.Sink()
+        out = cg.apply_rules(val, allowed, hits, 0, heading=heading,
+                             continuation=not heading)
+        n += len([h for h in hits if not h["regel"].endswith("-report")])
+        return out
+
+    title = pas(title, cg.SEO_RULES, heading=True)
+    desc = pas(desc, cg.SEO_RULES)
+    pin_t = pas(pin_t, cg.SEO_RULES, heading=True)
+    pin_d = pas(pin_d, cg.PIN_RULES)
+    try:
+        import tag_casing as tc
+        neu, changed, _ = tc.normalize_terms(list(kws or []))
+        if changed and neu:
+            n += 1
+            kws = neu[:5]
+    except Exception:                                       # noqa: BLE001
+        pass
+    if n:
+        print(f"  · Casing-Kanon: {n} Korrektur(en) im Frontmatter vorab geheilt")
+    return title, desc, pin_t, pin_d, kws
+
+
 def yaml_quote(value: str) -> str:
     """Quoted einen Wert YAML-sicher (Doppelpunkte, Sonderzeichen).
     Verhindert Frontmatter-Build-Fehler wie 'inspiration: Text: Mehr'."""
@@ -198,6 +241,8 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
     if inspiration:
         insp_line = f"\ninspiration: {yaml_quote(inspiration)}\n"
     draft_line = "true" if draft else "false"
+    title, desc, pin_t, pin_d, kws = _casing_frontmatter(
+        title, desc, pin_t, pin_d, kws)
     kw_yaml = "[" + ", ".join(f'"{k}"' for k in kws[:8]) + "]"
     tag_yaml = "[" + ", ".join(f'"{k}"' for k in kws[:4]) + "]"
     pinwand_line = f"pinwand: {yaml_quote(pinwand)}\n" if pinwand else ""

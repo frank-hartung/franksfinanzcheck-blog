@@ -4,7 +4,7 @@ description: "Die 50-30-20-Regel bringt Ordnung in deine Finanzen: 50 % Fixkoste
 date: 2026-09-08T11:45:48Z
 draft: true
 reserve: true
-tags: ["50-30-20-Regel", "50 30 20 Regel", "Budget planen", "Fixkosten senken"]
+tags: ["50-30-20-Regel", "Budget planen", "Fixkosten senken"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
@@ -135,7 +135,7 @@ In der Welt des Frugalismus nutzen wir diese Regel oft als Sprungbrett. Wer einm
 
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
-**Lesetipp:** [Frugalismus Tipps: So vermeidest du teure Alltagsfehler](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)
+**Lesetipp:** [Frugalismus-Tipps: So vermeidest du teure Alltagsfehler](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)
 
 ## Häufige Fragen
 

@@ -18,7 +18,7 @@ cover:
 kurzantwort: "Einen Mietwagen komplett ohne Kaution gibt es in der Praxis nur in Ausnahmefällen, aber du kannst die Kaution deutlich senken und das Risiko auf null reduzieren: Buche ein Angebot mit 'Vollkasko ohne Selbstbeteiligung' über einen deutschen Vergleichsanbieter, hinterlege eine echte Kreditkarte (keine Debitkarte) und lehne jede Zusatzversicherung am Schalter konsequent ab. So vermeidest du die typische 900-€-bis-1.500-€-Blockierung und sparst gegenüber der Buchung vor Ort bis zu 40 Prozent."
 
 social_posted: true
-keywords: ["Mietwagen buchen", "Mietwagen ohne Kaution", "Mietwagen Kaution Kreditkarte", "Vollkasko ohne Selbstbeteiligung", "Mietwagen Fallen", "Mietwagen Versicherung", "günstige Mietwagen", "Mietwagen ohne Kautionsfallen"]
+keywords: ["Mietwagen buchen", "Mietwagen ohne Kaution", "Mietwagen-Kaution Kreditkarte", "Vollkasko ohne Selbstbeteiligung", "Mietwagen Fallen", "Mietwagen Versicherung", "günstige Mietwagen", "Mietwagen ohne Kautionsfallen"]
 pin_title: "Zusatzversicherung, Kaution & Co.: Mietwagen-Fallen entschärft"
 pin_description: "*Werbung | Am Mietwagen-Schalter läuft das Spielchen immer gleich ab: Druck für teure Zusatzpakete. So bleibst du cool und sparst: vorab Vollkasko ohne Selbstbeteiligung buchen, Kaution realistisch einplanen, Übergabeprotokoll mit Fotos sichern. Alle Details im Guide!"
 pinwand: "Günstig reisen | Reisebudget & Mietwagen"
@@ -49,7 +49,7 @@ Wichtig: Das Geld wird meist **nicht abgebucht**. Es wird nur blockiert. Nach de
 
 Ein Mietwagen **ganz ohne Kaution** ist selten. In Spanien, Italien oder den USA gilt das fast nie. Auch bei Vollkasko verlangt der Vermieter eine kleine Summe. Meist sind es 100 € bis 300 €. Sie deckt Tank und Zusatzkosten. Was es aber gibt:
 
-- **Kaution reduziert auf 0 € durch "Super-Cover" oder "Zero Excess":** Einige Anbieter (z. B. Enterprise, Alamo, Sixt Plus) erlauben gegen einen moderaten Aufpreis von 5 € bis 12 € pro Tag eine Kautionsbefreiung.
+- **Kaution reduziert auf 0 € durch "Super-Cover" oder "Zero Excess":** Einige Anbieter (z. B. Enterprise, Alamo, SIXT Plus) erlauben gegen einen moderaten Aufpreis von 5 € bis 12 € pro Tag eine Kautionsbefreiung.
 - **Geringere Kaution durch "Vollkasko ohne Selbstbeteiligung":** Weil die Selbstbeteiligung bereits abgesichert ist, sinkt der blockierte Betrag auf 100 € bis 250 €.
 - **Kaution per Debitkarte:** Immer mehr Vermieter in Deutschland und den Benelux-Ländern akzeptieren statt einer Kreditkarte eine normale Girocard – im Ausland (insbesondere Spanien, USA) ist das aber nach wie vor die absolute Ausnahme.
 
@@ -67,7 +67,7 @@ Grundsätzlich ist jeder Mietwagen in Europa haftpflichtversichert. Im Preisverg
 
 Für einen **Zusatzfahrer** zahlen viele 8 € bis 15 € pro Tag. Bei zwei Wochen sind das schnell 210 € extra.
 
-**So umgehst du sie:** Achte bereits bei der Buchung auf die Angabe "Zusatzfahrer inklusive". Bei Anbietern wie Enterprise, Alamo, National und einigen Sixt-Tarifen ist der Ehepartner oder Lebensgefährte oft kostenlos mitversichert. In Spanien bieten zudem Record Go und Centauro günstige Pauschalpakete.
+**So umgehst du sie:** Achte bereits bei der Buchung auf die Angabe "Zusatzfahrer inklusive". Bei Anbietern wie Enterprise, Alamo, National und einigen SIXT-Tarifen ist der Ehepartner oder Lebensgefährte oft kostenlos mitversichert. In Spanien bieten zudem Record Go und Centauro günstige Pauschalpakete.
 
 ### 3. Die Tankregelung
 

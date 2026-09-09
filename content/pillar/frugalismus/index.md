@@ -113,7 +113,7 @@ Ein No-Spend-Weekend im Monat, eine In-Liste, eine automatische Rate. Drei Instr
 
 Ja, wenn die Kürzungen bei Verträgen, Abos und Impulsen der Erwachsenen sitzen, nicht beim Kindergeburtstag. Transparenz: „Wir sparen für X“, nicht „wir dürfen nichts“.
 
-### Ist ein Haushaltsbuch-App Pflicht?
+### Ist eine Haushaltsbuch-App Pflicht?
 
 Nein. Pflicht ist eine Methode, die du 90 Tage durchhältst. App, Sheet oder Papier – der Artikel im Cluster hilft bei der Wahl. Die Methode, die nach 14 Tagen stirbt, hat 0 € Ersparnis.
 

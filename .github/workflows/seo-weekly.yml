@@ -348,7 +348,12 @@ jobs:
         # einschleichen. Jetzt: die komplette Waechter-Sturmkette danach,
         # selbstheilend, mit eigenem Commit (automatisch mit in Fresh-Sein).
         run: |
-          python3 scripts/casing_guard.py --fix || echo "⚠ Casing (nicht kritisch)"
+          # --plan: data/pinterest_plan.yaml ist die Quelle der Pin-Texte.
+          # Wird nur der Inhalt geheilt, ueberschreibt der naechste Pin-Sync
+          # die Korrektur – deshalb richtet der Guard zuerst die Quelle.
+          python3 scripts/casing_guard.py --fix --plan || echo "⚠ Casing (nicht kritisch)"
+          python3 scripts/casing_guard.py --split-headglue || echo "⚠ HeadGlue (nicht kritisch)"
+          python3 scripts/pinterest_pin_text_sync.py --apply || echo "⚠ Pin-Sync (nicht kritisch)"
           python3 scripts/dash_guard.py --fix || echo "⚠ Dash (nicht kritisch)"
           python3 scripts/compound_guard.py --fix || echo "⚠ Compound (nicht kritisch)"
           python3 scripts/unit_guard.py --fix || echo "⚠ Unit (nicht kritisch)"

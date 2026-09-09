@@ -154,7 +154,7 @@ Machst du das einmal im Jahr, brauchst du kein gutes Gefühl, sondern eine Liste
 
 ## Checkliste für den Jahres‑Check (Kurz & Knapp)
 
-- [ ] **Versicherungs‑Summe**: Wohnfläche × 650 € = Versicherungssumme prüfen. - [ ] **Elementarschutz**: In den Vertragsbedingungen nach „Zahlungs‑ZUSATZ‑Risiko“ suchen.
+- [ ] **Versicherungs‑Summe**: Wohnfläche × 650 € = Versicherungssumme prüfen. - [ ] **Elementarschutz**: In den Vertragsbedingungen nach „Zahlungs‑Zusatz‑Risiko“ suchen.
 - [ ] **Selbstbeteiligung**: Ideal 0 €–150 €; höher reduziert Prämie, erhöht aber Eigenanteil. - [ ] **Klausel „grobe Fahrlässigkeit“**: Verzicht muss ausdrücklich stehen.
 - [ ] **Zusatz‑Sicherungen**: Fahrrad‑Diebstahl, Cyber‑Schutz, Photovoltaik‑Versicherung. - [ ] **Kontakt‑Notfallnummer**: Auf dem Telefon gespeichert, nicht erst im Schadenfall suchen.
 
@@ -175,7 +175,8 @@ Nur wenn dein Tarif auf die Einrede der groben Fahrlässigkeit verzichtet. Alte 
 ### Wie oft sollte ich meine Hausversicherung überprüfen?
 Alle zwei bis drei Jahre ist sinnvoll. Dann meldest du neue Wertgegenstände nach und wechselst in günstigere Tarife mit besseren Klauseln.
 
-### Welche Rolle spielt die **Elementarschadenversicherung** bei einer Photovoltaik‑Anlage?
+### Welche Rolle spielt die Elementarschadenversicherung bei einer Photovoltaik‑Anlage?
+
 Die PV‑Anlage ist fest am Dach montiert und fällt damit in die **Wohngebäudeversicherung**. Ein Sturm‑ oder Hagelschaden, der das Dach beschädigt, wird nur dann komplett erstattet, wenn der Tarif **Elementarschaden‑Zusatz** enthält. Ohne diesen Zusatz kann die Versicherung nur für das reine Dach, nicht für die teure Solaranlage zahlen – ein Verlust von 8 % bis 12 % der Gesamtkosten.
 
 ### Gibt es einen Unterschied zwischen einer reinen Hausrat‑Police und einer Kombi‑Police (Hausrat + Elementar)?

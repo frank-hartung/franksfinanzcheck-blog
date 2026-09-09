@@ -18,7 +18,7 @@ cover:
 kurzantwort: "Ein DSL-Wechselbonus ist eine Neukundenprämie zwischen 50 € und 240 €, die Provider bei einem Anbieterwechsel als Einmalgutschrift oder Cashback auszahlen. Zusammen mit reduzierten Grundgebühren im ersten Vertragsjahr sinken die monatlichen Effektivkosten für schnelles Internet um bis zu 40 Prozent."
 
 social_posted: true
-keywords: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich", "Cashback DSL", "günstiges Internet", "DSL Wechselbonus sichern"]
+keywords: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich", "Cashback DSL", "günstiges Internet", "DSL-Wechselbonus sichern"]
 pin_title: "DSL-Wechselbonus mitnehmen: Cashback & Rabatte sichern"
 pin_description: "*Werbung | Beim DSL-Wechsel winken aktuell Wechselboni von bis zu 200 € – als Cashback, Gutschrift oder Hardware-Rabatt. Wir zeigen, wie du Bonus UND günstigen Tarif kombinierst, ohne in die Vertragsfalle zu tappen. Jetzt Angebote vergleichen und Bonus kassieren!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
@@ -43,8 +43,8 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 Ein **DSL-Wechselbonus** ist eine gezielte Marketing-Prämie. Die Provider wissen genau, dass die Hürde für einen Wechsel im Kopf der Kunden hoch ist („Was, wenn das Internet tagelang weg ist?“). Um diese psychologische Hürde zu senken, wird Geld in die Hand genommen. Die Auszahlung läuft dabei meist über drei verschiedene Wege:
 
 1. **Einmalige Rechnungsgutschrift:** Dies ist die sauberste Form. Der Gutschriftbetrag (z. B. 120 € bis 200 €) wird direkt im Kundenkonto hinterlegt und mit den ersten monatlichen Grundgebühren verrechnet. In den ersten Monaten zahlst du dadurch effektiv 0 € für deinen Anschluss, bis das Guthaben aufgebraucht ist.
-2. **Direktes Cashback:** Portale wie Check24 oder Verivox bieten oft ein eigenes Cashback an, das zusätzlich zu den Provider-Vorteilen gezahlt wird. Nach Freischaltung des Anschlusses und Einreichung der ersten Monatsrechnung (meist via Upload im Kundenbereich) überweist das Vergleichsportal die vereinbarte Prämie direkt auf dein Bankkonto.
-3. **Hardware-Zuschuss oder Freimonate:** Du erhältst moderne Premium-Router (wie die AVM Fritz! Box 7530 AX oder 7590 AX) entweder dauerhaft kostenlos oder mit einem massiven Preisnachlass. Manche Anbieter verzichten auch komplett auf die Grundgebühr in den ersten 6 bis 10 Monaten, was rechnerisch oft den höchsten **DSL-Wechselbonus** darstellt.
+2. **Direktes Cashback:** Portale wie CHECK24 oder Verivox bieten oft ein eigenes Cashback an, das zusätzlich zu den Provider-Vorteilen gezahlt wird. Nach Freischaltung des Anschlusses und Einreichung der ersten Monatsrechnung (meist via Upload im Kundenbereich) überweist das Vergleichsportal die vereinbarte Prämie direkt auf dein Bankkonto.
+3. **Hardware-Zuschuss oder Freimonate:** Du erhältst moderne Premium-Router (wie die AVM FRITZ!Box 7530 AX oder 7590 AX) entweder dauerhaft kostenlos oder mit einem massiven Preisnachlass. Manche Anbieter verzichten auch komplett auf die Grundgebühr in den ersten 6 bis 10 Monaten, was rechnerisch oft den höchsten **DSL-Wechselbonus** darstellt.
 
 Damit der Bonus sicher kommt, muss der Wechsel zwingend als solcher beauftragt werden. Kündigst du deinen alten Vertrag selbst, ohne beim neuen Anbieter das Feld „Anbieterwechsel“ anzukreuzen, gilt der Anschluss oft nur als Neuanschluss ohne Bonusberechtigung. Zudem riskierst du so den Verlust deiner Festnetznummer.
 
@@ -113,13 +113,13 @@ Bevor du den Vertrag unterschreibst, solltest du beide Seiten der Medaille kenne
 **Nachteile:**
 * **Administrativer Aufwand:** Du musst den Vergleich machen und die Hardware am Schalttag austauschen (ca. 30–60 Min. Aufwand).
 * **Neue Hardware:** Eventuell müssen Smart-Home-Geräte oder WLAN-Drucker neu mit dem neuen Router verbunden werden.
-* **E-Mail-Adressen:** Nutzt du eine Mailadresse deines Providers (z. B. @t-online. de oder @vodafone. de), kann diese nach dem Wechsel gelöscht werden. **Tipp:** Nutze lieber anbieterunabhängige Dienste wie Gmail, Outlook oder Posteo.
+* **E-Mail-Adressen:** Nutzt du eine Mailadresse deines Providers (z. B. @t-online.de oder @vodafone.de), kann diese nach dem Wechsel gelöscht werden. **Tipp:** Nutze lieber anbieterunabhängige Dienste wie Gmail, Outlook oder Posteo.
 
 ## Hardware-Check: Mieten oder kaufen?
 
 Beim **[Internetvertrag wechseln](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)** wird dir oft ein Miet-Router angeboten. Die Kosten liegen meist zwischen 4,99 € und 7,99 € pro Monat. 
 * **Miete:** Vorteil ist der Support und der sofortige Austausch bei Defekt. Nachteil: Nach 24 Monaten hast du bis zu 192 € bezahlt und das Gerät gehört dir nicht.
-* **Kauf:** Eine Fritz! Box 7530 AX kostet einmalig ca. 140–150 €. Nach weniger als zwei Jahren hast du die Kosten im Vergleich zur Miete rausgeholt. Zudem kannst du das Gerät beim nächsten Wechsel einfach weiterverwenden oder bei eBay für gutes Geld verkaufen.
+* **Kauf:** Eine FRITZ!Box 7530 AX kostet einmalig ca. 140–150 €. Nach weniger als zwei Jahren hast du die Kosten im Vergleich zur Miete rausgeholt. Zudem kannst du das Gerät beim nächsten Wechsel einfach weiterverwenden oder bei eBay für gutes Geld verkaufen.
 
 Wenn der Anbieter im Rahmen des **DSL-Wechselbonus** den Router für 0 € dazu gibt (echtes Eigentum nach 24 Monaten), solltest du zuschlagen. Ist es nur eine "0 € Miete für 12 Monate", rechne die Kosten für das zweite Jahr genau durch.
 
@@ -148,7 +148,7 @@ Die **Gutschrift auf der Rechnung** ist die bequemste Variante, da du nichts wei
 
 Nimm den **DSL-Wechselbonus** alle zwei Jahre mit. Es ist eine der einfachsten Möglichkeiten, im Haushalt ohne Verzicht mehrere hundert Euro zu sparen. Der neue Anbieter übernimmt fast die komplette Arbeit. Dein Zeitaufwand beträgt unter einer Stunde, die Ersparnis ist jedoch messbar und landet direkt auf deinem Konto oder reduziert deine Fixkosten.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · DSL Vergleich: So findest du günstigeres Internet · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke.
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · DSL-Vergleich: So findest du günstigeres Internet · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke.
 
 ## Häufige Fragen
 

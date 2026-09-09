@@ -1,19 +1,21 @@
 # 🏆 Chefredakteur-Scorecard
-**Stand:** 2026-09-07 · **Auftrag:** Redaktionelle Gesamt-Steuerung · **Vorlauf 90 → 95** (+5)
+**Stand:** 2026-09-09 · **Auftrag:** Redaktionelle Gesamt-Steuerung · **Vorlauf 95 → 95** (+0)
 
 ## Gesamt-Score: **95/100** · Ampel: **GREEN**
 
 | Kennzahl | Wert | Ampel |
 |---|---|---|
-| Veröffentlichte Artikel | 31 | 🟢 |
-| Entwürfe (Warteschlange) | 1 | ⚪ |
+| Veröffentlichte Artikel | 30 | 🟢 |
+| Entwürfe (Warteschlange) | 9 | 🔴 |
 | Pillars / Themen-Cluster | 6 | 🟢 |
 | Decay-Kandidaten (STALE+DECAYING) | 0 | 🟢 |
 | Core-Web-Vitals | GREEN | 🟢 |
-| Ø Lesbarkeit (Flesch, Ziel ≥ 62) | 69.5 | 🟢 |
+| Ø Lesbarkeit (Flesch, Ziel ≥ 62) | 65.1 | 🟢 |
 | Artikel unter Flesch-Floor (55) | 0 | 🟢 |
 | Lektorat-Befunde (auto-behebbar) | 0 | 🟢 |
-| Stil-Hinweise (Lektorat, nur Info) | 18 | ℹ️ |
+| Stil-Hinweise (Lektorat, nur Info) | 31 | ℹ️ |
+| Groß-/Kleinschreibung – harte Befunde | 0 | 🟢 |
+| Schreibweise – Hinweise (nur Info) | 0 | ℹ️ |
 | Secrets (rot / gelb / bewiesen) | 1 / 0 / 3 von 4 | 🔴 |
 | Affiliate-Klicks (Umsatz-Hebel) | 0 über 0 Artikel | ⚪ |
 | Awin-Provision (Klicks→Umsatz) | 0.00 € (0.00 € bezahlt) über 0 Artikel | ⚪ |
@@ -31,10 +33,11 @@ _Noch keine Awin-Provisions-Daten – `scripts/awin_provisions.py` mit dem Awin-
 
 | Kennzahl | Quelle | Stand | Bewertung |
 |---|---|---|---|
-| Core-Web-Vitals | `data/cwv_manifest.json` | 0 d | gemessen |
+| Core-Web-Vitals | `data/cwv_manifest.json` | 2 d | gemessen |
 | Decay-Radar | `data/decay_queue.json` | - | 0 Kandidat(en) |
 | Secrets | `SECRETS-REPORT.md + data/secrets_state.json` | RED | 3/4 live bewiesen |
-| Lektorat | `LEKTOR-REPORT.md` | heute | 0 auto-behebbar, 18 Stil-Hinweise |
+| Lektorat | `LEKTOR-REPORT.md` | heute | 0 auto-behebbar, 31 Stil-Hinweise |
+| Casing | `CASING-REPORT.md + .casing_report.json` | 2026-09-09 | 0 hart, 0 Hinweise, 1 Tage Historie |
 | Affiliate-Klicks | `data/umami_clicks.json (via scripts/umami_clicks.py)` | 2026-09-07 | Pipeline wartet auf Secret `UMAMI_API_TOKEN` |
 | Awin-Provision | `data/awin_transactions.csv` | - | CSV-Export fehlt |
 
@@ -42,17 +45,17 @@ _Noch keine Awin-Provisions-Daten – `scripts/awin_provisions.py` mit dem Awin-
 
 | Pillar | Artikel |
 |---|---|
-| frugalismus | 4 |
+| frugalismus | 8 |
 | internet-dsl | 9 |
 | konto-karten | 4 |
 | mietwagen | 3 |
-| strom-sparen | 7 |
+| strom-sparen | 10 |
 | versicherungen | 5 |
 
 ## Handlungsempfehlungen
 
 - **1** rote Secret-Befunde – Kanal ist tot oder abgelaufen: `python3 scripts/secrets_age_guard.py --verify` zeigt live, welche API den Token ablehnt (Pinterest 30-Tage-Token, Mastodon, KI-Keys).
-- **1** Artikel in der Entwurf-Warteschlange – Freigabe prüfen (`python3 scripts/publish_gate.py` bzw. Kadenz-Gate). Vorrat ist kein Mangel – erst > 8 Entwürfe werden zu Altlasten.
+- **9** Artikel in der Entwurf-Warteschlange – Freigabe prüfen (`python3 scripts/publish_gate.py` bzw. Kadenz-Gate). Vorrat ist kein Mangel – erst > 8 Entwürfe werden zu Altlasten.
 - Umsatz-Daten fehlen, weil die Pipeline nie gefüllt wurde – nicht, weil niemand klickt: `python3 scripts/umami_clicks.py --fetch` (Secret `UMAMI_API_TOKEN`; Website-ID steht schon in `hugo.toml`).
 
 _Erzeugt von `scripts/editorial_scorecard.py` (Chefredakteur-View)._

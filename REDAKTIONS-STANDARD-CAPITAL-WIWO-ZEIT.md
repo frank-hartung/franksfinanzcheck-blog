@@ -91,6 +91,7 @@ Befunde aus Live-Artikeln:
 | **RS5** | WiWo-Verifikation | Sätze mit harten Zahlen (€/%/3+-stellig) ohne Einordnung (ca./rund/laut/Stand/Spanne) | weich (Report); `--ai` formuliert ehrlich um |
 | **RS6** | WiWo-Quellen-Regel / Pressekodex | Erfundene-Quellen-Muster („laut einer Studie“, „Experten sagen“, Phantom-Statistiken) | weich (Report); `--ai` ersetzt durch beleg-freie, ehrliche Formulierungen |
 | **RS7** | ZEIT-/Capital-Byline, E-E-A-T | Frontmatter `author:` UND `erfahrung:` vorhanden | deterministische Selbstheilung (Standard-Erfahrungstext wird ergänzt) |
+| **Regel K** | Duden + Handelsblatt-/ZEIT-Schreibweiseregime | Groß-/Kleinschreibung im gesamten Textkörper und in den Metadaten: Akronyme, Marken-Kanon, Durchkopplung, Nominalisierung, Satzanfang, Titel-Case-Leak in Überschriften, Shouting-Betonung, Tags/Kategorien. **Überschriften-Kanon (K.1–K.3):** K.1 – eine Überschrift endet nie mit einem Punkt und enthält keinen vollständigen Satz (CTA-Sätze wie „schlau nutzen“ gehören in den Fließtext); K.2 – kein Fettdruck in der Überschrift (sie ist schon fett); K.3 – Komposita im Titel zusammen- oder gekoppelt geschrieben (`Frugalismus-Tipps`, `Heizungswartung`, nie `Frugalismus Tipps`) | `casing_guard.py` (C1–C17 + T1) – heilt deterministisch, meldet nur Nachgewiesenes (Länge ist kein Befund), `--gate` parkt harte Restfunde neuer Artikel, Report `CASING-REPORT.md` |
 | **RS8** | WiWo-Korrektur-Transparenz | `korrektur:`-Feld im Frontmatter → sichtbare Korrektur-Box im Layout; Log in `data/korrekturen.yaml` | Layout + Log (dauerhaft aktiv) |
 
 **Sabotage-Schutz:** eingefrorener Selbsttest (`--selftest`, Exit 2 = CI-Abbruch)
@@ -107,6 +108,7 @@ fehlerhaft (gleiche Schutzlogik wie beim Qualitäts-Score).
 | `content-engine-v2.yml` Phase 2 | `redaktions_standard.py --fix --ai --new-only` (Heilung bei der Geburt) + `--gate --new-only` (harte Funde → Artikel bleibt Entwurf) |
 | `scripts/blog_doctor.py` (täglich via Health + Engine) | Eintrag in der kanonischen Kette: `--fix` (deterministisch, kostenlos) |
 | `seo-weekly.yml` (mittwochs) | **Bestands-Retrofit:** `--fix --ai --backlog 3` hebt wöchentlich die 3 Artikel mit den meisten Lücken auf Standard |
+| `scripts/casing_guard.py` (Regel K) | Engine-Phase 2 (`--fix --new-only --plan` → HeadGlue → Pin-Sync → `--gate`), `blog-health-daily.yml` (Bestand inkl. Plan), `seo-weekly.yml` (Textbatterie nach den KI-/SEO-Editoren), `blog_doctor.py` KETTE Phase A |
 | `scripts/generate_drafts.py` (Prompts) | Die Pflicht-Module (Kürze-Box, Frage-H2, Faustregel, Schritte, Zahlen-/Quellen-Regeln) stehen jetzt DIREKT im Generierungs-Prompt – die meisten RS-Regeln werden also von der KI schon beim Schreiben erfüllt; die Wache prüft und heilt nur noch die Restfälle |
 
 ## 4. Bericht & Nachvollziehbarkeit
@@ -115,6 +117,9 @@ fehlerhaft (gleiche Schutzlogik wie beim Qualitäts-Score).
 - **Historie:** `data/redaktions_standard_history.jsonl`
 - **Korrekturen:** `data/korrekturen.yaml` + Korrektur-Box im Artikel-Layout
 - **Regelwerk:** Abschnitt „Redaktions-Standard RS1–RS8" im `QUALITAETS-REGELWERK.md`
+- **Casing (Regel K):** `CASING-REPORT.md` (je Lauf: Befunde nach Regel, Zone und
+  Datei, Auto-Fix-Zahl, geparkte Artikel) + `data/casing_history.jsonl`
+  (Dichte harter Befunde je 1.000 Wörter, Trend) + Lampe in `EDITORIAL-SCORECARD.md`
 
 ## 5. Quellen
 

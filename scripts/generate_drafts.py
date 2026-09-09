@@ -822,8 +822,19 @@ def normalize_tags(keywords):
     werden exakt wie im Frontmatter angezeigt. Deshalb müssen sie hier
     korrekt geschrieben werden: erstes Wort groß, bekannte Nomen/Fachbegriffe
     korrekt, Rest klein (deutsche Regeln).
-    Bekannte Korrekturen (häufige Bot-Keywords) + generische Regel:
-    erstes Wort groß, übrige Wörter klein – außer sie stehen in NOMEN_SET."""
+    Der Kanon liegt in scripts/tag_casing.py (gemeinsame Quelle mit
+    casing_guard.py) – damit gilt dieselbe Schreibweise in Tag, Pin-Text und
+    Artikel. Nur wenn das Lexikon nicht ladbbar ist, greifen die unten
+    hinterlegten Legacy-Regeln (NOMEN_SET + TAG_FIXES).
+    """
+    try:
+        import tag_casing as _tc
+        items = [str(k).strip() for k in (keywords or []) if str(k).strip()]
+        norm, _changed, _notes = _tc.normalize_terms(items)
+        if norm:
+            return norm
+    except Exception as _e:                      # Fail-open: Generation laeuft weiter
+        print(f"    ⚠ tag_casing nicht ladbar ({_e}) – Legacy-Regeln greifen")
     NOMEN_SET = {
         "alltag", "budget", "checkliste", "energie", "freiheit", "girokonto",
         "haushalt", "haushaltsbuch", "internet", "kredit", "kreditkarte",

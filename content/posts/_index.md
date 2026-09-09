@@ -1,7 +1,7 @@
 ---
 title: "Alle Ratgeber im Überblick – Strom, Gas, Internet & Finanzen clever sparen"
 description: "Alle Ratgeber von FranksFinanzcheck an einem Ort: Strom- & Gas-Vergleiche, DSL & Internet günstiger, Versicherungen verständlich erklärt und Frugalismus-Tricks mit konkreten Zahlen – unabhängig & Praxis-getestet."
-keywords: ["Strom sparen", "Gasvergleich", "DSL Vergleich", "Versicherungen", "Frugalismus", "Geld sparen", "Girokonto", "Mietwagen"]
+keywords: ["Strom sparen", "Gasvergleich", "DSL-Vergleich", "Versicherungen", "Frugalismus", "Geld sparen", "Girokonto", "Mietwagen"]
 # Keine Pagination-Aliase: Bei pagerSize 8 und 25+ Posts existieren
 # /posts/page/2/–/posts/page/4/ als echte Seiten. Ein Alias auf dieselbe
 # URL bricht `hugo --minify` hart ab.

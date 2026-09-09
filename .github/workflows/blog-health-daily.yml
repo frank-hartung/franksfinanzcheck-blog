@@ -38,6 +38,19 @@ jobs:
       - run: python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
       - run: python3 scripts/fix_url_hygiene.py --heal-holds
 
+      # CASING-GATE (PREMIUM 09.09.2026): Groß-/Kleinschreibung ist die
+      # Fehlerklasse, die der KI-Pipeline am leichtesten durchrutscht
+      # (Title-Case in Ueberschriften, „fritzbox“/„check24“ statt FRITZ!Box/
+      # CHECK24, kleingeschriebene Tags). Laeuft ZWISCHEN den Publishing-Slots:
+      # erst Selbsttest (die Wache muss decisiv sein), dann Heilung inkl.
+      # Pinterest-Plan, dann die Gegenprobe. Ein harter Restbefund parkt den
+      # Artikel nicht mehr – er ist laengst live –, sondern landet als
+      # Report + Exit-1-Fingerabdruck im taeglichen Gesundheitsprotokoll.
+      - run: python3 scripts/casing_guard.py --selftest
+      - run: python3 scripts/casing_guard.py --fix --plan || echo "⚠ Casing – Restfunde im CASING-REPORT"
+      - run: python3 scripts/casing_guard.py --split-headglue || echo "⚠ HeadGlue – mehrdeutige Fälle bleiben im Report"
+      - run: python3 scripts/pinterest_pin_text_sync.py --apply || echo "⚠ Pin-Sync (nicht kritisch)"
+
       - run: python3 scripts/cadence_guard.py --selftest
       - run: python3 scripts/cadence_guard.py --fix
       - run: python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate – Funde im Log (R5 heilt nicht automatisch)"

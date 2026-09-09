@@ -153,7 +153,7 @@ DSL, Mobilfunk, Strom, Gas, Versicherungen: Anbieter belohnen Wechsellust. Nimm 
 **Schritt‑für‑Schritt‑Checkliste:**  
 
 1. **Liste erstellen:** Alle laufenden Verträge in einer Tabelle erfassen.  
-2. **Kosten vergleichen:** Nutze Vergleichsportale (Check24, Verivox).  
+2. **Kosten vergleichen:** Nutze Vergleichsportale (CHECK24, Verivox).  
 3. **Kündigungsfristen prüfen:** Meist 1‑3 Monate.  
 4. **Angebote einholen:** Direkt beim Anbieter anrufen und nach einem **Treue‑Rabatt** fragen.  
 5. **Wechsel durchführen:** Bei Strom/Gas einfach über den neuen Anbieter – der alte kümmert sich um die Kündigung.
@@ -167,7 +167,7 @@ Kaufst du online sowieso ein? Dann nutze Cashback‑Portale. Du bekommst 2 bis 8
 
 | Portal | Durchschnittlicher Cashback‑Satz | Besonderheiten |
 |:---|---:|:---|
-| **Payback** | 2‑5 % | Kombiniert mit Aktionen im Einzelhandel |
+| **PAYBACK** | 2‑5 % | Kombiniert mit Aktionen im Einzelhandel |
 | **Shoop** | 3‑8 % | Sofortige Auszahlung per PayPal |
 | **iGraal** | 2‑6 % | Browser‑Extension für automatisches Tracking |
 | **Amazon‑Kreditkarte** | 3 % (Amazon) | Nur bei Nutzung der Karte |

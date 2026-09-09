@@ -56,7 +56,11 @@ KETTE = [
 
     # (skript, basis-args, phase, zweck)
     ("heading_guard.py",      ["--fix"],                "A-Text", "Überschriften-Hygiene H1-H3: kein <br>, Anker-stabil (27.08. hinzu)"),
-    ("casing_guard.py",       ["--fix"],                "A-Text", "Akronyme/Marken (DSL, Check24)"),
+    # Casing fuehrt die Textkette: es stellt Marken-/Akronym-Kanon und
+    # Tagschreibung her, worauf Dash-/Compound-/Unit-Wachen aufsetzen. Der
+    # --plan-Schritt heilt data/pinterest_plan.yaml (Quelle der Pin-Texte)
+    # mit – sonst ueberschreibt der naechste Pin-Sync die Korrektur.
+    ("casing_guard.py",       ["--fix", "--plan"],      "A-Text", "Groß-/Kleinschreibung C1–C15 + T1 (Akronyme, Marken, Tags, Title-Case-Leak, Pinterest-Plan)"),
     ("dash_guard.py",         ["--fix"],                "A-Text", "Dash-Typografie R1-R9"),
     ("unit_guard.py",         ["--fix"],                "A-Text", "Euro/Prozent/NBSP"),
     ("emoji_guard.py",        ["--fix"],                "A-Text", "Emoji-Zero-Width etc."),
