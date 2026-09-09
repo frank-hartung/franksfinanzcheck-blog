@@ -38,7 +38,7 @@ Du musst dafür keinen ganzen Samstag blocken. Oft reichen 30 bis 60 Minuten fü
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/gas/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Warum der Spätsommer der beste Zeitpunkt ist

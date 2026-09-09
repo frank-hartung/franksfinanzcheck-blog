@@ -129,12 +129,38 @@ def score_article(path: str) -> dict:
     # Achtung (Stoerfall 11.08.): Kesselplatten (Schnell-Tipp-Box, Disclaimer,
     # CTA-Zeilen, „Das Wichtigste"-Hakenlistung) werden ZUERST abgezogen -
     # sonst wertet jeder Artikel als „Duplikat" und es stuermt das Massen-Parken.
+    # REPARATUR 09.09.2026 (Reserve #4): Die alte Schablonen-Liste erkannte die
+    # von der KI eingesetzten CTA-/Disclosure-Bausteine nur teilweise – je nach
+    # Format- bzw. Groß-/Kleinschreibungs-Variante. Genau jene unerkannten
+    # Bausteine drückten die 7-Gramm-Einzigartigkeit fälschlich auf 0.00:
+    # frugalismus-Reserve-Entwürfe „kollidierten“ allein über den wiederholten
+    # Affiliate-Disclosure-Satz (in den Varianten „_(Dieser Artikel…)_“,
+    # „*Dieser Artikel…*“, „**Transparenz:** Dieser/dieser Artikel…“,
+    # „_Wichtiger Hinweis…_“) mit bis zu 13 UNVERWANDTEN Artikeln (Mietwagen-,
+    # Hausrat-, Herbst-Spar-Posts). Schablonen-bereinigt messen dieselben
+    # Entwürfe 0 Überlappungen → Einzigartigkeit 1.0. Der Uniqueness-Score soll
+    # echte Text-Dopplung messen, nicht Template-Repetition. Deshalb wird jetzt
+    # JEDE ganze Zeile entfernt, die einen bekannten Baustein trägt.
     def _strip_boilerplate(text: str) -> str:
-        text = re.sub(r"💡[^\n]*Schnell-Tipp[^\n]*", " ", text)
-        text = re.sub(r"[*_]?Dieser Artikel enthält Affiliate-Links[^\n]*", " ", text)
-        text = re.sub(r"👉[^\n]*", " ", text)
-        text = re.sub(r"\*\*Das Wichtigste in Kürze:\*\*", " ", text)
-        text = re.sub(r"_(Dieser Artikel enthält|Lesetipps zum Weitersparen)[^\n]*_", " ", text)
+        def _drop(pattern: str, flags: int = 0) -> None:
+            nonlocal text
+            text = re.sub(r"(?m)^[^\n]*" + pattern + r"[^\n]*$\n?",
+                          " ", text, flags=flags)
+
+        # Hinweis: Die KI setzt in „Schnell-Tipp“/„Spar-Tipp“ teils den
+        # geschützten Bindestrich U+2011 „‑“ statt des ASCII-Hyphens – deshalb
+        # erlaubt die Klasse [-‑\u2010] beide (Befund Reserve #4 09.09.2026).
+        _drop(r"💡[^\n]*Schnell[-‑\u2010]?Tipp[^\n]*")   # 💡 Schnell-Tipp von FranksFinanzcheck
+        _drop(r"Spar[-‑\u2010]?Tipp zwischendurch")      # 💶 Spar-Tipp zwischendurch: … Vergleichen & sparen
+        _drop(r"Wichtiger Hinweis")             # „keine Anlage-/Rechts-/Steuerberatung“-Klausel
+        _drop(r"Lesetipps zum Weitersparen")
+        _drop(r"Das Wichtigste in Kurzform")
+        _drop(r"Das Wichtigste in Kürze")
+        _drop(r"👉[^\n]*")                       # CTA „Jetzt vergleichen und sparen“
+        # Affiliate-Disclosure in ALLEN Varianten & Groß-/Kleinschreibung
+        # (inkl. kleingeschriebenem „dieser Artikel“, „Transparenz:“-Vorspann).
+        text = re.sub(r"(?im)^[^\n]*affiliate[^\n]*?(werbung|provision)[^\n]*$\n?",
+                      " ", text)
         return text
     try:
         import check_uniqueness as cu
