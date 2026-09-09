@@ -33,6 +33,25 @@
 #       und `git commit`-Zeilen bleiben unangetastet, nur die zwei
 #       kaputten Zeilen werden ersetzt. Minimaler Diff, maximale Wirkung.
 #
+#  HÄRTUNG #233 (Wöchentliche SEO-Optimierung, 09.09.2026):
+#    Der Lauf starb an "Pull von origin/main fehlgeschlagen – kein
+#    Konflikt": ein EINMALIGER transienter Netzwerkfehler beim
+#    `git pull` (fetch) reichte, weil nur der PUSH Retries hatte –
+#    nicht der Fetch. Härtung in vier Lagen:
+#      1. fetch_mit_retry(): fetch wird wiederholt (exponentielles
+#         Backoff + Jitter), nach dem ersten Rückschlag zusätzlich mit
+#         HTTP/1.1 (bekanntes Mittel gegen GitHubs „RPC failed; HTTP/2
+#         stream"-Transients) und größerem postBuffer.
+#      2. Fehlerklassifikation: Auth-/Berechtigungsfehler werden NICHT
+#         wiederholt (sinnlos) sondern sofort und präzise gemeldet;
+#         nur echte Transients werden wiederholt.
+#      3. Rettungsanker: Schlägt der fetch endgültig fehl, wird ein
+#         direkter Push versucht – ist origin nicht weitergelaufen,
+#         geht er als Fast-Forward durch (Run bleibt grün).
+#      4. Runden-Logik: Rebase+Push als Gesamtzyklus mit Wiederholung –
+#         auch ein mitten im Rennen abgelehnter Push (paralleler Bot)
+#         heilt sich durch erneutes Angleichen selbst.
+#
 #  Umgebung:
 #    BRANCH       Zielbranch (Default: GITHUB_HEAD_REF/REF_NAME, sonst main)
 #    GIT_USER     Committer-Name                (Default: Automation-Bot)
@@ -43,6 +62,9 @@
 #                 bestehende Auswertungen wie `if: env.ARTIKEL_ERSTELLT
 #                 == 'true'` unverändert nutzbar – nur ehrlicher:
 #                 gesetzt wird sie erst NACHweislich erfolgreichem Push.
+#    GIT_SYNC_TRIES        Gesamt-Runden Rebase+Push   (Default: 3)
+#    GIT_SYNC_FETCH_TRIES  Fetch-Versuche pro Runde    (Default: 3)
+#    GIT_SYNC_BACKOFF      Backoff-Basis in Sekunden   (Default: 4)
 #
 #  Exit-Codes:
 #    0 = alles ok (oder nichts zu committen / nichts zu pushen)
@@ -59,6 +81,13 @@ GIT_USER="${GIT_USER:-Automation-Bot}"
 GIT_MAIL="${GIT_MAIL:-automation-bot@users.noreply.github.com}"
 DRY_RUN="${DRY_RUN:-0}"
 SYNC_OK_VAR="${SYNC_OK_VAR:-GEHEILT}"
+GIT_SYNC_TRIES="${GIT_SYNC_TRIES:-3}"
+GIT_SYNC_FETCH_TRIES="${GIT_SYNC_FETCH_TRIES:-3}"
+GIT_SYNC_BACKOFF="${GIT_SYNC_BACKOFF:-4}"
+
+# Warum der letzte Synchronisierungsversuch gescheitert ist:
+#   netzwerk | auth | konflikt | rebase | autostash | leer
+SYNC_FAIL_URSACHE=""
 
 PUSH_ONLY=0
 if [ "${1:-}" = "--push-only" ]; then
@@ -93,6 +122,57 @@ sync_ok() {
   fi
 }
 
+# ---------- Hilfen ------------------------------------------------------
+# Auth-/Berechtigungsfehler erkennen: erneutes Versuchen ist sinnlos,
+# sie müssen sofort, präzise und mit Handlungsempfehlung gemeldet werden.
+ist_auth_fehler() {
+  printf '%s' "$1" | grep -qiE \
+    'could not read [Uu]sername|[Aa]uthentication failed|[Aa]uthorization failed|[Pp]ermission denied|[Aa]ccess denied|HTTP 403|403 [Ff]orbidden|remote: Permission to|supported authentication'
+}
+
+backoff_sekunden() {  # $1 = Rundennummer (1-basiert)
+  local b="$GIT_SYNC_BACKOFF" d
+  d=$(( b * (1 << ( ($1 - 1) > 4 ? 4 : ($1 - 1) )) ))
+  d=$(( d + RANDOM % 3 ))   # Jitter gegen synchronisierte Bot-Retrys
+  printf '%s' "$d"
+}
+
+# ========================================================================
+#  fetch mit Retry – die eigentliche #233-Reparatur.
+#  Ein einzelner Transient (GitHub-5xx, „Empty reply", „RPC failed;
+#  curl 92 HTTP/2 stream", DNS-Hickser) darf keinen Lauf mehr rot machen.
+# ========================================================================
+fetch_mit_retry() {
+  local i out versuche="$GIT_SYNC_FETCH_TRIES"
+  for (( i = 1; i <= versuche; i++ )); do
+    if out=$(git fetch origin "$BRANCH" --prune --no-tags 2>&1); then
+      [ -n "$out" ] && printf '%s\n' "$out" | sed 's/^/  fetch: /'
+      return 0
+    fi
+    printf '%s\n' "$out" | sed 's/^/  fetch: /'
+    if ist_auth_fehler "$out"; then
+      SYNC_FAIL_URSACHE=auth
+      echo "::error::git_sync.sh: fetch von origin/$BRANCH abgelehnt "\
+           "(Auth/Berechtigung). Kein Retry sinnvoll – prüfe "\
+           "'contents: write' im Workflow und den Token-Zugriff."
+      return 1
+    fi
+    if (( i < versuche )); then
+      echo "  fetch: Versuch $i/$versuche fehlgeschlagen (transient?) – "\
+           "erneuter Versuch in $(backoff_sekunden "$i") s."
+      sleep "$(backoff_sekunden "$i")"
+      # Bekannte Gegenmittel bei HTTP/2-/Buffer-Transients nachrüsten
+      # (schadet nie, hilft bei großen Pushes und Proxy-Zickereien):
+      git config http.version HTTP/1.1        2>/dev/null || true
+      git config http.postBuffer 33554432     2>/dev/null || true  # 32 MiB
+    fi
+  done
+  SYNC_FAIL_URSACHE=netzwerk
+  echo "::error::git_sync.sh: fetch von origin/$BRANCH nach $versuche "\
+       "Versuchen fehlgeschlagen (Netzwerk-/GitHub-Transient)."
+  return 1
+}
+
 # ========================================================================
 #  Rebase gegen den aktuellen Stand (SICHTBAR, ohne `|| true`)
 # ========================================================================
@@ -102,20 +182,29 @@ sync_ok() {
 # fachlicher Konflikt und soll keinen roten Run erzeugen (#233-Klasse).
 # Content-Dateien bleiben bewusst tabu: echter Textkonflikt => harter Fehler.
 auto_resolve_generated_rebase_conflicts() {
-  local conflicts f safe=1
+  local conflicts f safe=1 guard=0
   conflicts=$(git diff --name-only --diff-filter=U || true)
   [ -n "$conflicts" ] || return 1
 
-  echo "  rebase: prüfe automatisch lösbare Bot-Artefakt-Konflikte:"
-  printf '%s\n' "$conflicts" | sed 's/^/    - /'
+  # Mehrere Commits können nacheinander konflikten – solange heilen,
+  # bis der Rebase durch ist (Guard gegen Endlosschleifen).
+  while [ -n "$(git diff --name-only --diff-filter=U || true)" ]; do
+    guard=$(( guard + 1 ))
+    if [ "$guard" -gt 25 ]; then
+      echo "  rebase: zu viele Konfliktwellen – Abbruch."
+      return 1
+    fi
+    conflicts=$(git diff --name-only --diff-filter=U || true)
+    echo "  rebase: prüfe automatisch lösbare Bot-Artefakt-Konflikte:"
+    printf '%s\n' "$conflicts" | sed 's/^/    - /'
 
-  while IFS= read -r f; do
-    [ -n "$f" ] || continue
-    case "$f" in
-      data/*.jsonl|data/**/*.jsonl|*.jsonl)
-        # JSONL-Historien sind append-only. Nimm beide Seiten, entferne
-        # exakte Duplikate und halte die Datei valides zeilenbasiertes JSON.
-        python3 - "$f" <<'PY'
+    while IFS= read -r f; do
+      [ -n "$f" ] || continue
+      case "$f" in
+        data/*.jsonl|data/**/*.jsonl|*.jsonl)
+          # JSONL-Historien sind append-only. Nimm beide Seiten, entferne
+          # exakte Duplikate und halte die Datei valides zeilenbasiertes JSON.
+          python3 - "$f" <<'PY'
 import pathlib, subprocess, sys
 path = pathlib.Path(sys.argv[1])
 parts = []
@@ -135,57 +224,89 @@ for line in parts:
 path.parent.mkdir(parents=True, exist_ok=True)
 path.write_text("\n".join(out) + ("\n" if out else ""), encoding="utf-8")
 PY
-        git add -- "$f"
-        ;;
-      *-REPORT.md|*REPORT.md|*STATUS.md|BOT-STATUS.md|PRODUKTIONS-STATUS.md|PIN-STATUS.md|SOCIAL-STATUS.md|ENGINE-STATUS.md)
-        # Reports/Statusseiten werden vollständig aus dem aktuellen Lauf
-        # erzeugt. Beim Rebase ist --theirs der gerade zu pushende Bot-Commit.
-        git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
-        git add -- "$f"
-        ;;
-      .meta_cache.json|.meta_report.json|.keyword_suggestions.json|.affiliate_report.json|.affiliate_integrity_state.json|.indexnow_submitted.json)
-        git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
-        git add -- "$f"
-        ;;
-      *)
-        safe=0
-        ;;
-    esac
-  done <<< "$conflicts"
+          git add -- "$f"
+          ;;
+        *-REPORT.md|*REPORT.md|*STATUS.md|BOT-STATUS.md|PRODUKTIONS-STATUS.md|PIN-STATUS.md|SOCIAL-STATUS.md|ENGINE-STATUS.md)
+          # Reports/Statusseiten werden vollständig aus dem aktuellen Lauf
+          # erzeugt. Beim Rebase ist --theirs der gerade zu pushende Bot-Commit.
+          git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
+          git add -- "$f"
+          ;;
+        .meta_cache.json|.meta_report.json|.keyword_suggestions.json|.affiliate_report.json|.affiliate_integrity_state.json|.indexnow_submitted.json)
+          git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
+          git add -- "$f"
+          ;;
+        *)
+          safe=0
+          ;;
+      esac
+    done <<< "$conflicts"
 
-  if [ "$safe" -ne 1 ]; then
-    echo "  rebase: enthält nicht automatisch lösbare Dateien – kein Blind-Merge."
+    if [ "$safe" -ne 1 ]; then
+      echo "  rebase: enthält nicht automatisch lösbare Dateien – kein Blind-Merge."
+      return 1
+    fi
+
+    if git diff --name-only --diff-filter=U | grep -q .; then
+      echo "  rebase: Restkonflikte vorhanden – Abbruch."
+      return 1
+    fi
+
+    GIT_EDITOR=true git rebase --continue 2>&1 | sed 's/^/  rebase: /' || true
+  done
+
+  # Der Rebase muss jetzt WIRKLICH beendet sein (kein rebase-merge/-apply
+  # mehr vorhanden), sonst war die letzte Welle doch nicht heilbar.
+  if [ -d "$(git rev-parse --git-path rebase-merge 2>/dev/null)" ] || \
+     [ -d "$(git rev-parse --git-path rebase-apply 2>/dev/null)" ]; then
+    echo "  rebase: trotz Konfliktlösung nicht abgeschlossen – Abbruch."
     return 1
   fi
-
-  if git diff --name-only --diff-filter=U | grep -q .; then
-    echo "  rebase: Restkonflikte vorhanden – Abbruch."
-    return 1
-  fi
-
-  GIT_EDITOR=true git rebase --continue 2>&1 | sed 's/^/  rebase: /'
+  return 0
 }
 
 rebase_gegen_origin() {
-  local out
-  if ! out=$(git pull --rebase --autostash origin "$BRANCH" 2>&1); then
+  local out ahead rebase_dir
+
+  # 1) Aktuellen Stand holen – MIT Retry (die #233-Ursache war genau hier).
+  fetch_mit_retry || return 1
+
+  # 2) Rebase überhaupt nötig? (spart Autostash-Risiken im Normalfall)
+  if ahead=$(git rev-list --count "HEAD..origin/$BRANCH" 2>/dev/null) \
+     && [ "$ahead" -eq 0 ]; then
+    echo "  rebase: origin/$BRANCH nicht weitergelaufen – kein Rebase nötig."
+    return 0
+  fi
+
+  # 3) Rebase mit Autostash gegen den frischen Stand.
+  if ! out=$(git rebase --autostash "origin/$BRANCH" 2>&1); then
     printf '%s\n' "$out" | sed 's/^/  rebase: /'
-    # Ursache unterscheiden: läuft noch ein Rebase, ist es ein echter
-    # Konflikt. Sonst war es Netzwerk/Auth – eine völlig andere Maßnahme.
-    if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
+    rebase_dir=$(git rev-parse --git-path rebase-merge 2>/dev/null || true)
+    if [ -d "$rebase_dir" ] || [ -d "$(git rev-parse --git-path rebase-apply 2>/dev/null || true)" ]; then
       if auto_resolve_generated_rebase_conflicts; then
         echo "  rebase: generierte Bot-Artefakt-Konflikte automatisch gelöst."
         return 0
       fi
       git rebase --abort 2>/dev/null || true
+      SYNC_FAIL_URSACHE=konflikt
       echo "::error::git_sync.sh: Rebase-Konflikt gegen origin/$BRANCH "\
            "(ein paralleler Workflow hat dieselben Zeilen geändert). "\
            "Kein Push – Arbeitsstand bleibt lokal sauber. "\
            "Nur echte Content-Konflikte benötigen manuelles Mergen; "\
            "generierte Report-/JSONL-Konflikte werden automatisch geheilt."
+    elif printf '%s' "$out" | grep -qi 'autostash'; then
+      # Extremfall: Rebase selbst ok, aber das Wiedereinsetzen des Autostash
+      # stand in Konflikt. Die Änderungen liegen sicher im Stash – laut
+      # melden statt halb zurücklassen.
+      SYNC_FAIL_URSACHE=autostash
+      echo "::error::git_sync.sh: Autostash konnte nach dem Rebase nicht "\
+           "wieder eingesetzt werden. Die lokalen Änderungen liegen sicher "\
+           "im Stash ('git stash list') – bitte aufräumen und erneut laufen "\
+           "lassen. Kein Push."
     else
-      echo "::error::git_sync.sh: Pull von origin/$BRANCH fehlgeschlagen "\
-           "(Netzwerk, Auth oder fehlende 'contents: write'-Berechtigung) – kein Konflikt."
+      SYNC_FAIL_URSACHE=rebase
+      echo "::error::git_sync.sh: Rebase gegen origin/$BRANCH ohne Konflikt-"\
+           "Marker gescheitert (siehe rebase-Ausgabe oben). Kein Push."
     fi
     return 1
   fi
@@ -194,32 +315,77 @@ rebase_gegen_origin() {
 }
 
 # ========================================================================
-#  Push mit Retry
+#  Synchronisieren ALS GANZES mit Runden-Logik:
+#    Runde = fetch(+Retry) → rebase(Selbstheilung) → push
+#  Schlägt ein Teil ab (paralleler Bot, Transient), wird die Runde
+#  wiederholt – bis zu GIT_SYNC_TRIES Mal mit exponentiellem Backoff.
 # ========================================================================
-push_mit_retry() {
-  local i ok=0
-  for i in 1 2 3; do
-    if git push origin "HEAD:$BRANCH" 2>&1 | sed 's/^/  push: /'; then
-      ok=1
-      break
+sync_und_push() {
+  local runde out
+  for (( runde = 1; runde <= GIT_SYNC_TRIES; runde++ )); do
+    SYNC_FAIL_URSACHE=""
+
+    if rebase_gegen_origin; then
+      if out=$(git push origin "HEAD:$BRANCH" 2>&1); then
+        printf '%s\n' "$out" | sed 's/^/  push: /'
+        return 0
+      fi
+      printf '%s\n' "$out" | sed 's/^/  push: /'
+      if ist_auth_fehler "$out"; then
+        SYNC_FAIL_URSACHE=auth
+        echo "::error::git_sync.sh: Push auf origin/$BRANCH abgelehnt "\
+             "(Auth/Berechtigung) – kein Retry sinnvoll. Prüfe "\
+             "'contents: write' im Workflow, Branch-Schutz und den Token."
+        return 1
+      fi
+      echo "  push: Versuch $runde/$GIT_SYNC_TRIES fehlgeschlagen – "\
+           "angleichen und erneut versuchen."
+    else
+      case "$SYNC_FAIL_URSACHE" in
+        netzwerk)
+          # RETTUNGSANKER: Der fetch ist an Netzwerk/Transient gescheitert.
+          # Ist origin/$BRANCH gar nicht weitergelaufen (sehr wahrscheinlich
+          # bei einem Gesamt-Ausfall), ist ein direkter Push trotzdem ein
+          # sauberes Fast-Forward – dann bleibt der Lauf grün.
+          echo "  push: Rettungsanker – direkter Push-Versuch ohne fetch …"
+          if out=$(git push origin "HEAD:$BRANCH" 2>&1); then
+            printf '%s\n' "$out" | sed 's/^/  push: /'
+            echo "  push: Rettungsanker erfolgreich (origin war nicht weitergelaufen)."
+            return 0
+          fi
+          printf '%s\n' "$out" | sed 's/^/  push: /'
+          if ist_auth_fehler "$out"; then
+            SYNC_FAIL_URSACHE=auth
+            echo "::error::git_sync.sh: Auch der Rettungsanker-Push wurde "\
+                 "abgelehnt (Auth/Berechtigung) – kein Retry sinnvoll."
+            return 1
+          fi
+          ;;
+        auth)
+          return 1
+          ;;
+        *)
+          # konflikt / rebase / autostash: gezielt gescheitert –
+          # ein Repeat ändert daran nichts, kein Blind-Versuch.
+          return 1
+          ;;
+      esac
     fi
-    echo "  push: Versuch $i fehlgeschlagen – neuer Versuch in 5 s."
-    sleep 5
-    # Vor dem nächsten Versuch erneut angleichen: ein anderer Workflow
-    # kann inzwischen committet haben. Dabei dieselbe Premium-Konflikt-
-    # Selbstheilung nutzen wie beim ersten Rebase (JSONL/Reports).
-    if ! rebase_gegen_origin; then
-      git rebase --abort 2>/dev/null || true
-      break
+
+    if (( runde < GIT_SYNC_TRIES )); then
+      local w
+      w=$(backoff_sekunden "$runde")
+      echo "  sync: neue Runde in ${w} s (Versuch $(( runde + 1 ))/$GIT_SYNC_TRIES)…"
+      sleep "$w"
     fi
   done
-  if [ "$ok" -ne 1 ]; then
-    echo "::error::git_sync.sh: Push nach 3 Versuchen fehlgeschlagen. "\
-         "Mögliche Ursachen: fehlende 'contents: write'-Berechtigung, "\
-         "Branch-Schutz, oder ein anderer Workflow schreibt gleichzeitig."
-    return 1
-  fi
-  return 0
+
+  SYNC_FAIL_URSACHE="${SYNC_FAIL_URSACHE:-netzwerk}"
+  echo "::error::git_sync.sh: Synchronisation nach $GIT_SYNC_TRIES Runden "\
+       "fehlgeschlagen (zuletzt: $SYNC_FAIL_URSACHE). Mögliche Ursachen: "\
+       "GitHub-Transient, fehlende 'contents: write'-Berechtigung, "\
+       "Branch-Schutz oder ein anderer Workflow schreibt gleichzeitig."
+  return 1
 }
 
 # ========================================================================
@@ -247,8 +413,7 @@ if [ "$PUSH_ONLY" = "1" ]; then
     sync_ok
     exit 0
   fi
-  rebase_gegen_origin || exit 1
-  push_mit_retry     || exit 1
+  sync_und_push    || exit 1
   echo "git_sync.sh: Push erfolgreich."
   sync_ok
   exit 0
@@ -286,8 +451,7 @@ fi
 
 git commit -m "$MSG"
 
-rebase_gegen_origin || exit 1
-push_mit_retry     || exit 1
+sync_und_push    || exit 1
 
 echo "git_sync.sh: Push erfolgreich."
 sync_ok
