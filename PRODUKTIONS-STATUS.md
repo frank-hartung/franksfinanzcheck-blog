@@ -1,8 +1,8 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-09 16:33 UTC  
+**Stand:** 2026-09-09 17:50 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-09-09): 2 Artikel – Ziel erfüllt. – Bestand: 9 von Gates gehalten (ältester 2 Tage: publish-gate: Zeichenlänge (check_length.py) nicht bestanden)
+**Befund:** Letzter Publikationstag (2026-09-09): 2 Artikel – Ziel erfüllt. – Bestand: 9 von Gates gehalten (ältester 2 Tage: quality-score: Score 0.768 < 0.80 (schwach: spelling 0.00, meta 0.85, readability 0.95) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174))
 
 | Kennzahl | Wert |
 |---|---|
