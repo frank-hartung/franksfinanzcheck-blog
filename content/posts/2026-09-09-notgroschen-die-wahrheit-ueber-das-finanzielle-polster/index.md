@@ -11,7 +11,7 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Notgroschen", "Wahrheit", "finanzielle"]
+keywords: ["Notgroschen", "finanzielle", "Geld sparen"]
 pin_title: "Notgroschen: Die Wahrheit über das finanzielle Polster"
 pin_description: "*Werbung | Wie viel Notgroschen ist wirklich nötig? Erfahre, wie du dein finanzielles Polster individuell berechnest und sicher aufbaust – ohne Verzicht. Mehr Spartipps auf FranksFinanzcheck! #notgroschen #wahrheit #finanzielle"
 ai_generated: true

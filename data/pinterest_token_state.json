@@ -2,24 +2,29 @@
   "access_age_days": null,
   "attempts": [
     {
-      "action": "read",
-      "detail": "PINTEREST_ACCESS_TOKEN nicht gesetzt",
-      "result": "absent",
+      "action": "probe",
+      "detail": "Pinterest lehnt den Token ab (HTTP 401)",
+      "fingerprint": "6d628e4d2138",
+      "result": "dead",
       "source": "env"
     }
   ],
   "auto_renew_armed": false,
-  "checked_at": "2026-09-08T16:00:55+00:00",
-  "detail": "keine Token-Quelle konfiguriert",
+  "checked_at": "2026-09-09T09:02:54+00:00",
+  "detail": "Pinterest lehnt den Token ab (HTTP 401)",
   "fingerprint": "",
   "next_action": "Einmalige Neu-Autorisierung nötig (danach trägt sich der Kanal selbst): docs/PINTEREST-TOKEN-RUNBOOK.md – `python3 scripts/pinterest_auth.py --auth-url`",
   "refresh_age_days": null,
   "refresh_days_left": null,
+  "refresh_expires_at": null,
   "renewable": false,
   "runbook": "docs/PINTEREST-TOKEN-RUNBOOK.md",
+  "scopes": "",
   "severity": "red",
   "source": null,
   "source_label": "keine",
-  "state": "absent",
-  "store_present": false
+  "state": "dead",
+  "store_present": false,
+  "verified": true,
+  "written_by": "Pinterest-Watchdog"
 }
