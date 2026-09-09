@@ -2,7 +2,7 @@
 
 **Letzter Lauf:** 2026-09-09 19:28 UTC
 
-**Dauervorgabe:** nur Mo/Mi/Fr · 2–2 Artikel pro Publikationstag
+**Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
 
 ## Live-Posts pro Tag
