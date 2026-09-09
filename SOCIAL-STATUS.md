@@ -1,6 +1,6 @@
 # 📣 Social-Media-Status
 
-> Automatisch aktualisiert: 07.09.2026 21:45 UTC
+> Automatisch aktualisiert: 09.09.2026 12:18 UTC
 
 - **Mastodon:** 🟢 aktiv (https://mastodon.social)
 - **LinkedIn:** ⚪ nicht eingerichtet (Achtung: Token läuft ~60 Tage)
@@ -10,7 +10,8 @@
 
 ## Zuletzt gepostet (dieser Lauf)
 
-- Hausratversicherung: Was sie kostet und wen sie schützt → https://franksfinanzcheck.de/posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/
+- Frugalismus-Tipps: So vermeidest du teure Alltagsfehler → https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/
+- Frugalismus-Tipps: Mehr Freiheit durch bewussten Konsum → https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/
 
 ---
 *Erzeugt von scripts/social_poster.py – Setup: ANLEITUNG-SOCIAL-MEDIA.md*

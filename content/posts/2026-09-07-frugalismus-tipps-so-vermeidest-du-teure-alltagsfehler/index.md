@@ -24,6 +24,7 @@ cover:
   alt: "Frugalismus-Tipps: So vermeidest du teure Alltagsfehler"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Setze automatische Überweisungen ein, um monatlich mindestens 20 % deines Nettoeinkommens zu sparen, und nutze die 30‑Tage‑Regel, bevor du größere Anschaffungen tätigst. Vergleiche Preise online und kaufe nur, wenn du den Bedarf nach 24 Stunden immer noch hast. So vermeidest du Impulskäufe, senkst laufende Kosten und baust nachhaltig Vermögen auf."
+social_posted: true
 ---
 Lukas steht im Supermarkt vor dem Regal mit den Sonderangeboten. Ein schicker Milchaufschäumer lacht ihn an, reduziert von ca. 60 € auf nur rund 35 €. Ein echtes Schnäppchen, denkt er sich, und legt das Gerät in den Wagen. Drei Monate später steht das Teil unbenutzt ganz hinten im Küchenschrank. Lukas hat nicht nur Geld ausgegeben, sondern auch wertvollen Platz in seiner kleinen Wohnung verloren. Solche Situationen zeigen, warum viele klassische **Frugalismus-Tipps** im echten Leben oft nicht funktionieren.
 

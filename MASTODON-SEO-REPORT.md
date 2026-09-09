@@ -1,8 +1,8 @@
 # 🐘 Mastodon-SEO-Report
 
-> Automatisch: 07.09.2026 21:56 UTC 
+> Automatisch: 09.09.2026 12:18 UTC 
 
-- **Geprüfte Toots:** 27
+- **Geprüfte Toots:** 29
 - **Mit Befund:** 0
 - **Geheilt:** 0
 - **Duplikate (gleicher Artikel, nur gemeldet):** keine
@@ -11,6 +11,8 @@
 
 | Status | Artikel | Befunde | Heilung |
 |---|---|---|---|
+| [117241042499687159](https://mastodon.social/@FranksFinanzcheck/117241042499687159) | `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` | ✓ | — |
+| [117241042379378377](https://mastodon.social/@FranksFinanzcheck/117241042379378377) | `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` | ✓ | — |
 | [117231946375577948](https://mastodon.social/@FranksFinanzcheck/117231946375577948) | `2026-09-03-hausratversicherung-kosten-leistungen-vergleich` | ✓ | — |
 | [117228565216836963](https://mastodon.social/@FranksFinanzcheck/117228565216836963) | `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` | ✓ | — |
 | [117228565100781103](https://mastodon.social/@FranksFinanzcheck/117228565100781103) | `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` | ✓ | — |
