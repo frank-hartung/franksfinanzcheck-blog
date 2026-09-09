@@ -134,7 +134,7 @@ Für alle anderen gilt: Die „Beratung“ in der Filiale kostet dich indirekt T
 Wenn du schon wechselst, optimiere direkt dein gesamtes System. Viele Finanzprofis nutzen die 3-Konten-Logik:
 1. **Girokonto (0 €):** Hier geht das Gehalt ein. Alle Fixkosten (Miete, Strom, Versicherungen) gehen hier ab.
 2. **Konsumkonto (0 €):** Ein zweites kostenloses Konto oder ein „Pocket“ deines Hauptkontos. Hierhin überweist du dir am Monatsanfang dein „Taschengeld“ für Essen, Freizeit und Shopping. Ist das Konto leer, ist Schluss für den Monat.
-3. **Tagesgeld/Notgroschen:** Hier liegen 3 Nettomonatsgehälter für Notfälle.
+3. **Tagesgeld/[Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/):** Hier liegen 3 Nettomonatsgehälter für Notfälle.
 
 Dank moderner Apps wie der von C24 kannst du dieses System oft innerhalb einer einzigen App mit Unterkonten abbilden, ohne fünf verschiedene Bankzugänge zu verwalten.
 

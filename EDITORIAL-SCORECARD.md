@@ -6,14 +6,14 @@
 | Kennzahl | Wert | Ampel |
 |---|---|---|
 | Veröffentlichte Artikel | 30 | 🟢 |
-| Entwürfe (Warteschlange) | 9 | 🔴 |
+| Entwürfe (Warteschlange) | 11 | 🔴 |
 | Pillars / Themen-Cluster | 6 | 🟢 |
 | Decay-Kandidaten (STALE+DECAYING) | 0 | 🟢 |
 | Core-Web-Vitals | GREEN | 🟢 |
-| Ø Lesbarkeit (Flesch, Ziel ≥ 62) | 65.1 | 🟢 |
-| Artikel unter Flesch-Floor (55) | 0 | 🟢 |
+| Ø Lesbarkeit (Flesch, Ziel ≥ 62) | 64.4 | 🟢 |
+| Artikel unter Flesch-Floor (55) | 1 | 🟡 |
 | Lektorat-Befunde (auto-behebbar) | 0 | 🟢 |
-| Stil-Hinweise (Lektorat, nur Info) | 31 | ℹ️ |
+| Stil-Hinweise (Lektorat, nur Info) | 16 | ℹ️ |
 | Groß-/Kleinschreibung – harte Befunde | 0 | 🟢 |
 | Schreibweise – Hinweise (nur Info) | 0 | ℹ️ |
 | Secrets (rot / gelb / bewiesen) | 1 / 0 / 3 von 4 | 🔴 |
@@ -36,7 +36,7 @@ _Noch keine Awin-Provisions-Daten – `scripts/awin_provisions.py` mit dem Awin-
 | Core-Web-Vitals | `data/cwv_manifest.json` | 2 d | gemessen |
 | Decay-Radar | `data/decay_queue.json` | - | 0 Kandidat(en) |
 | Secrets | `SECRETS-REPORT.md + data/secrets_state.json` | RED | 3/4 live bewiesen |
-| Lektorat | `LEKTOR-REPORT.md` | heute | 0 auto-behebbar, 31 Stil-Hinweise |
+| Lektorat | `LEKTOR-REPORT.md` | heute | 0 auto-behebbar, 16 Stil-Hinweise |
 | Casing | `CASING-REPORT.md + .casing_report.json` | 2026-09-09 | 0 hart, 0 Hinweise, 1 Tage Historie |
 | Affiliate-Klicks | `data/umami_clicks.json (via scripts/umami_clicks.py)` | 2026-09-07 | Pipeline wartet auf Secret `UMAMI_API_TOKEN` |
 | Awin-Provision | `data/awin_transactions.csv` | - | CSV-Export fehlt |
@@ -45,7 +45,7 @@ _Noch keine Awin-Provisions-Daten – `scripts/awin_provisions.py` mit dem Awin-
 
 | Pillar | Artikel |
 |---|---|
-| frugalismus | 8 |
+| frugalismus | 10 |
 | internet-dsl | 9 |
 | konto-karten | 4 |
 | mietwagen | 3 |
@@ -55,7 +55,7 @@ _Noch keine Awin-Provisions-Daten – `scripts/awin_provisions.py` mit dem Awin-
 ## Handlungsempfehlungen
 
 - **1** rote Secret-Befunde – Kanal ist tot oder abgelaufen: `python3 scripts/secrets_age_guard.py --verify` zeigt live, welche API den Token ablehnt (Pinterest 30-Tage-Token, Mastodon, KI-Keys).
-- **9** Artikel in der Entwurf-Warteschlange – Freigabe prüfen (`python3 scripts/publish_gate.py` bzw. Kadenz-Gate). Vorrat ist kein Mangel – erst > 8 Entwürfe werden zu Altlasten.
+- **11** Artikel in der Entwurf-Warteschlange – Freigabe prüfen (`python3 scripts/publish_gate.py` bzw. Kadenz-Gate). Vorrat ist kein Mangel – erst > 8 Entwürfe werden zu Altlasten.
 - Umsatz-Daten fehlen, weil die Pipeline nie gefüllt wurde – nicht, weil niemand klickt: `python3 scripts/umami_clicks.py --fetch` (Secret `UMAMI_API_TOKEN`; Website-ID steht schon in `hugo.toml`).
 
 _Erzeugt von `scripts/editorial_scorecard.py` (Chefredakteur-View)._

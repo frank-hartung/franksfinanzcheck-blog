@@ -1,9 +1,9 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-08 08:56 UTC · **Modus:** FIX
+**Stand:** 2026-09-09 09:02 UTC · **Modus:** FIX
 
-- Artikel: **37**
-- Geheilt: **0**
+- Artikel: **40**
+- Geheilt: **1**
 - Offene Issues: **0**
 - Covers: fehlende nachgezogen
 
@@ -57,6 +57,12 @@
 | ✅ | `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` *(draft)* | — |
 | ✅ | `2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor` *(draft)* | — |
 | ✅ | `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen` *(draft)* | — |
+| ✅ | `2026-09-08-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` *(draft)* | — |
+| ✅ | `2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks` *(draft)* | — |
+| ✅ | `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` *(draft)* | — |
+
+## Selbstheilung (diese Runde)
+
 
 ---
 *Erzeugt von `scripts/pinterest_seo_healer.py` – Teil der FrankAutoOps-Selbstheilung.*

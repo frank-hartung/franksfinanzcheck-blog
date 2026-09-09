@@ -1,6 +1,6 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-09-08 13:32:41 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-09-09 08:31:19 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
 **Geprüfte Live-Artikel:** 30 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 19
 
@@ -25,7 +25,7 @@
 | 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren | 2 → 3 ✅ | /go/girokonto/, /go/kredit/ |
 | 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet | 3 → 3 ✅ | /go/haftpflicht/ |
 | 2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann | 1 → 3 ✅ | /go/girokonto/, /go/tagesgeld/ |
-| 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst | 3 → 3 ✅ | /go/haftpflicht/, /go/hausrat/ |
+| 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst | 2 → 3 ✅ | /go/haftpflicht/, /go/hausrat/ |
 | 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden | 1 → 5 ✅ | /go/strom/ |
 | 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause | 3 → 3 ✅ | /go/dsl/ |

@@ -243,7 +243,7 @@ Alltagssparen braucht keine eiserne Disziplin. Es braucht kluge Systeme. Der Dau
 ## Häufige Fragen
 
 ### Wie hoch sollte ein Notgroschen sein?
-Als Faustregel gelten 3 bis 6 Monatsgehälter. Lege sie auf ein Tagesgeldkonto. So bist du für Reparaturen oder Krisen gewappnet.
+Als Faustregel gelten 3 bis 6 Monatsgehälter. Lege sie auf ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). So bist du für Reparaturen oder Krisen gewappnet.
 
 ### Wie führe ich am einfachsten ein Haushaltsbuch?
 Nutze eine einfache Excel‑Tabelle. Oder eine kostenlose App wie **Finanzguru**. Auch die 50‑30‑20‑Regel hilft. Sie teilt dein Geld in drei Töpfe.
@@ -275,7 +275,7 @@ Analysiere jede wiederkehrende Position. Oft lassen sich Strom‑ und Gastarife 
 | **Outbank** | kostenlos | Mehrere Banken in einer Übersicht, Kategorisierung |
 | **Excel‑Vorlage** | – | Vollständig anpassbar, keine Internetverbindung nötig |
 
-Wähle das Tool, das zu deinem Stil passt, und halte dich konsequent daran – das ist der Schlüssel zu langfristigem **Geld sparen im Alltag**.
+Wähle das Tool, das zu deinem Stil passt, und halte dich konsequent daran – das ist der Schlüssel zu langfristigem **[Geld sparen im Alltag](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)**.
 
 ---
 

@@ -1,10 +1,21 @@
 {
- "stand": "2026-09-09T09:51:19Z",
+ "stand": "2026-09-09T10:04:58Z",
  "modus": "fix · Bestand · +Pinterest-Plan",
- "dateien": 0,
+ "dateien": 2,
  "befunde": 0,
  "hart": 0,
- "gefixt": 0,
+ "gefixt": 2,
  "geparkt": [],
- "dateien_liste": []
+ "dateien_liste": [
+  {
+   "pfad": "content/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/index.md",
+   "befunde": 0,
+   "woerter": 1433
+  },
+  {
+   "pfad": "data/pinterest_plan.yaml",
+   "befunde": 0,
+   "woerter": 5336
+  }
+ ]
 }

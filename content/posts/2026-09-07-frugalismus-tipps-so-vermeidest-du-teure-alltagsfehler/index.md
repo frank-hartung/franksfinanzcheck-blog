@@ -52,7 +52,7 @@ Die meisten Menschen haben gar kein Einnahmenproblem, sondern ein Ausgabenproble
 
 ## Welche Fehler beim Haushaltsbuch führen kosten dich Geld?
 
-Ein häufiger Fehler ist die mangelnde Kontinuität. Viele starten motiviert und tragen jeden Cent in eine App ein. Nach zwei Wochen lässt der Eifer nach. Ein **haushaltsbuch führen** sollte jedoch kein Selbstzweck sein. Es dient dazu, Muster zu erkennen. Wer nur Zahlenkolonnen sammelt, ohne sie zu analysieren, verschwendet seine Zeit.
+Ein häufiger Fehler ist die mangelnde Kontinuität. Viele starten motiviert und tragen jeden Cent in eine App ein. Nach zwei Wochen lässt der Eifer nach. Ein **[haushaltsbuch führen](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)** sollte jedoch kein Selbstzweck sein. Es dient dazu, Muster zu erkennen. Wer nur Zahlenkolonnen sammelt, ohne sie zu analysieren, verschwendet seine Zeit.
 
 Ein weiterer Fehler ist das Vergessen von jährlichen oder quartalsweisen Zahlungen. Versicherungen, Rundfunkbeiträge oder Vereinsmitgliedschaften tauchen oft nicht in der monatlichen Betrachtung auf. Das verzerrt das Bild deiner Finanzen. Du denkst, du hast noch Puffer, dabei wartet im nächsten Monat eine dicke Rechnung auf dich. Nutze für solche Fälle Rücklagenkonten.
 
@@ -78,7 +78,7 @@ Impulskäufe sind der größte Feind deines Kontostands. Wenn du im Internet ode
 
 Diese Methode funktioniert besonders gut beim Online-Shopping. Lege die Artikel in den Warenkorb und schließe den Tab. Wenn du dich nach 24 Stunden noch immer aktiv an den Artikel erinnerst und ihn wirklich brauchst, kannst du den Kauf in Erwägung ziehen. Du wirst überrascht sein, wie viele Dinge du am nächsten Tag gar nicht mehr willst.
 
-In der Praxis spart dieser einfache Trick oft hunderte Euro im Jahr. Er trainiert deine Selbstbeherrschung und schärft dein Bewusstsein für echte Bedürfnisse. Du lernst wieder, zwischen einem kurzfristigen Wunsch und einer langfristigen Bereicherung zu unterscheiden. Das ist ein fundamentaler Baustein für effektives **geld sparen im Alltag**.
+In der Praxis spart dieser einfache Trick oft hunderte Euro im Jahr. Er trainiert deine Selbstbeherrschung und schärft dein Bewusstsein für echte Bedürfnisse. Du lernst wieder, zwischen einem kurzfristigen Wunsch und einer langfristigen Bereicherung zu unterscheiden. Das ist ein fundamentaler Baustein für effektives **[Geld sparen im Alltag](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/)**.
 
 ## Trick 2: Das Prinzip der No-Spend-Weekends
 

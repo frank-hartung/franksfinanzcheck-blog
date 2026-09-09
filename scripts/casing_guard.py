@@ -461,13 +461,32 @@ def r_c8(text: str, hits: Sink, line: int) -> str:
 # Sonderfaelle, die die Wort-Marke-Regex nicht erfasst: AVM setzt „FRITZ!Box",
 # im Blog kursieren „FritzBox", „Fritz box", „FRITZ! Box" (Leerzeichen nach dem !),
 # dazu U+2011-Hyphen in kompositen Namen.
-BRAND_SPECIALS: list[tuple[re.Pattern[str], str]] = [
-    (re.compile(r"\bAVM\s+Fritz(?:en)?\s*!?\s*[Bb]ox\b", re.I), "AVM FRITZ!Box"),
-    (re.compile(r"\bAVM\s+FRITZ\s*!\s*(Box|Repeater|Powerline|Fon|DECT|OS)\b"),
-     r"AVM FRITZ!\1"),
-    (re.compile(r"\bFritz(?:en)?\s*!?\s*[Bb]ox\b"), "FRITZ!Box"),
-    (re.compile(r"\bFRITZ\s*!\s*(Box|Repeater|Powerline|Fon|DECT|OS|WLAN)\b"), r"FRITZ!\1"),
-    (re.compile(r"\bfritz\s*!?\s*(box|repeater|powerline|fon|dect|os|wlan)\b"), r"FRITZ!\1"),
+# Produkt-Namen der AVM-Marke: der zweite Bestandteil ist Teil des Markennamens
+# und NICHT frei in der Großschreibung. Fruehere Fassung schrieb das Quell-Case
+# fort (r"FRITZ!\1") und erzeugte damit „FRITZ!box“ – eine Form, die von keiner
+# Regel mehr erkannt wurde: halb geheilt und damit dauerhaft unsichtbar.
+FRITZ_ART = {"box": "Box", "repeater": "Repeater", "powerline": "Powerline",
+             "fon": "Fon", "dect": "DECT", "os": "OS", "wlan": "WLAN",
+             "cable": "Cable", "sat": "Sat", "dect4020": "DECT 4020"}
+
+
+def _fritz(prae: str):
+    def rep(m):
+        art = m.group(1).lower().replace(" ", "")
+        return prae + FRITZ_ART.get(art, art.capitalize())
+    return rep
+
+
+BRAND_SPECIALS: list[tuple[re.Pattern[str], object]] = [
+    (re.compile(r"\bAVM\s+Fritz(?:en)?\s*!?\s*"
+                r"(box|repeater|powerline|fon|dect|os|wlan)\b", re.I),
+     _fritz("AVM FRITZ!")),
+    (re.compile(r"\bFritz(?:en)?\s*!?\s*"
+                r"(box|repeater|powerline|fon|dect|os|wlan)\b", re.I),
+     _fritz("FRITZ!")),
+    (re.compile(r"\bFRITZ\s*!?\s*"
+                r"(box|repeater|powerline|fon|dect|os|wlan)\b", re.I),
+     _fritz("FRITZ!")),
 ]
 
 
@@ -1205,7 +1224,8 @@ def write_report(rows, mode, scanned):
     L = ["# 🔠 CASING-REPORT (Groß-/Kleinschreibung)", "",
          f"**Stand:** {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC · Modus: {mode}", "",
          f"Geprüfte Dateien: {scanned} · Dateien mit Befund: {len(rows)} · "
-         f"Befunde: {total} · hart (gate-würdig): {hart} · automatisch geheilt: {gefixt}",
+         f"Befunde: {total} · hart (gate-würdig): {hart} · automatisch geheilt: {gefixt}"
+         + (" · davon behoben: " + str(gefixt) if gefixt else ""),
          "",
          f"**Casing-Deliktquote:** {1000 * hart / worte:.2f} harte Befunde je 1.000 Wörter "
          "– Zielwert 0,00 (Redaktions-Standard Capital/WiWo/ZEIT).", ""]
@@ -1297,6 +1317,8 @@ def log_history(rows, geparkt):
 
 def gate_new(rows):
     geparkt = []
+    # r["funde"] ist nach der Heilung neu gesetzt (s. main) – hier stehen also
+    # nur offene harte Befunde; ein Lauf, der alles geheilt hat, parkt nichts.
     hard = [r for r in rows if any(f["regel"] in HARD_RULES for f in r["funde"]
                                    if not f["regel"].endswith("-report"))]
     if len(hard) > 3:
@@ -1502,6 +1524,12 @@ FIX_CASES = [
     # SEO-Zone: nur Tippfehler, kein Umbauen
     ("DSL Vergleich: So sparst du 360 €", "DSL Vergleich: So sparst du 360 €", SEO_RULES, True, False),
     ("Fritzbox Rabatt für Neukunden", "FRITZ!Box Rabatt für Neukunden", SEO_RULES, True, False),
+    # FRITZ!-Kanon: auch aus „FRITZ!box“ (die die Vorversion selbst erzeugte)
+    # wird die Markenschreibreibung – und der zweite Lauf ändert nichts mehr.
+    ("die FRITZ!box startet neu", "die FRITZ!Box startet neu", BODY_RULES, True, False),
+    ("die fritzbox startet neu", "die FRITZ!Box startet neu", BODY_RULES, True, False),
+    ("die Fritz! Box startet neu", "die FRITZ!Box startet neu", BODY_RULES, True, False),
+    ("die AVM FritzBox 7590 startet", "die AVM FRITZ!Box 7590 startet", BODY_RULES, True, False),
 ]
 KEEP_CASES = [
     ("title: DSL Vergleich: So findest du den günstigsten Internettarif", TYPO_RULES),
@@ -1696,6 +1724,14 @@ def main():
         if heilbar and DO_FIX and not DRY_RUN and new_text != p.read_text(encoding="utf-8"):
             p.write_text(new_text, encoding="utf-8")
             row["gefixt"] = len(heilbar)
+            # Nach der Heilung neu zaehlen: Bericht, Historie, JSON und Gate
+            # zeigen und entscheiden nur noch ueber das, was WIRKLICH offen
+            # bleibt. Eine erfolgreich geschriebene Korrektur ist keine offene
+            # Wunde – sonst springt die Scorecard-Lampe bei jedem Lauf, der
+            # nichts als geheilt hat, auf Gelb (und ein kombiniertes
+            # --gate --fix wuerde Artikel parken, die gerade sauber wurden).
+            rest, _ = process_file(p)
+            row["funde"] = rest
         rows.append(row)
 
     if DO_PLAN and PLAN_FILE.exists():
@@ -1707,6 +1743,8 @@ def main():
             if heilbar and DO_FIX and not DRY_RUN:
                 PLAN_FILE.write_text(new_text, encoding="utf-8")
                 row["gefixt"] = len(heilbar)
+                rest, _ = process_plan(PLAN_FILE.read_text(encoding="utf-8"))
+                row["funde"] = rest
             rows.append(row)
 
     geparkt = gate_new(rows) if DO_GATE else []

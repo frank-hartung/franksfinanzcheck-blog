@@ -63,7 +63,7 @@ Ein Festpreistarif hat gegenüber Tarifen ohne Bindung diese Vorteile:
 | **Sicherheitsnetz bei Gaspreissprüngen** | Schutz vor plötzlichen Preiserhöhungen im Winter | Manche Anbieter begrenzen die Garantie nur auf den Energieanteil, nicht auf Netzentgelte |
 | **Vertragslaufzeit** | 12 Monate sind flexibel, 24 Monate bieten noch mehr Preis‑Stabilität | Längere Bindungen können bei einem Anbieterwechsel höhere Vorlaufkosten bedeuten |
 | **Wechselprämien** | Einmalige Boni reduzieren die effektiven Jahreskosten | Boni werden oft erst nach 12 Monaten ausgezahlt – ein vorzeitiger Kündigungsversuch kann sie verfallen lassen |
-| **Transparenz** | Klare Preisstruktur, leicht zu vergleichen im Gasvergleich | Manche AGB verstecken Nachjustierungen bei gesetzlichen Änderungen (z. B. Strom‑Umlage) |
+| **Transparenz** | Klare Preisstruktur, leicht zu vergleichen im [Gasvergleich](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) | Manche AGB verstecken Nachjustierungen bei gesetzlichen Änderungen (z. B. Strom‑Umlage) |
 
 Die Entscheidung hängt von deiner Risikobereitschaft und deinem Verbrauchsprofil ab. Für Familien mit hohem, planbarem Jahresverbrauch ist die **Preisgarantie Gas** meist die sicherere Wahl.
 

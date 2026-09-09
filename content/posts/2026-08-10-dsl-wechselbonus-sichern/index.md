@@ -148,7 +148,7 @@ Die **Gutschrift auf der Rechnung** ist die bequemste Variante, da du nichts wei
 
 Nimm den **DSL-Wechselbonus** alle zwei Jahre mit. Es ist eine der einfachsten Möglichkeiten, im Haushalt ohne Verzicht mehrere hundert Euro zu sparen. Der neue Anbieter übernimmt fast die komplette Arbeit. Dein Zeitaufwand beträgt unter einer Stunde, die Ersparnis ist jedoch messbar und landet direkt auf deinem Konto oder reduziert deine Fixkosten.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · DSL-Vergleich: So findest du günstigeres Internet · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke.
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · DSL-Vergleich: So findest du [günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke.
 
 ## Häufige Fragen
 

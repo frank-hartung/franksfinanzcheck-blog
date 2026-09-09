@@ -1,14 +1,15 @@
 {
   "target": 6,
-  "ready": 2,
+  "ready": 0,
   "candidates": [
     {
       "slug": "2026-09-08-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
-      "ready": true,
+      "ready": false,
       "sha256": "092222fc294406c39ad0c4d4285b7b46c639d5ab270f6e571bbe08773650d8f1",
-      "score": 0.89,
+      "reason": "quality-score 0.79 < 0.85 (schwach: spelling 0.00, readability 0.95, meta 1.00)",
+      "score": 0.79,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.0,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -19,14 +20,31 @@
     },
     {
       "slug": "2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks",
-      "ready": true,
+      "ready": false,
       "sha256": "e61693eae0e5ea63f509237bf01c811bca866e70d895067e9fa788aa336d8a19",
-      "score": 0.89,
+      "reason": "quality-score 0.79 < 0.85 (schwach: spelling 0.00, readability 0.95, meta 1.00)",
+      "score": 0.79,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.0,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster",
+      "ready": false,
+      "sha256": "c161a870187b9883b93686eb7a35354b0a71f40ee682563445066904b4a2b001",
+      "reason": "quality-score 0.836 < 0.85 (schwach: spelling 0.30, typography 0.86, readability 0.95)",
+      "score": 0.836,
+      "parts": {
+        "spelling": 0.29999999999999993,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.86,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95

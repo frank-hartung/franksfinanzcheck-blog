@@ -1,6 +1,6 @@
 {
-  "signed_at": "2026-09-09T09:51:19.672807+00:00",
-  "head": "116145d",
+  "signed_at": "2026-09-09T10:05:01.343427+00:00",
+  "head": "5841417",
   "files": {
     "assets/css/extended/custom.css": "aff792a93c072ab34296406ce97e5d46b36dd877e3d50b89972ee07ced06964b",
     "data/brand_lock.yaml": "3d7386ffdca3a48da91a6532982a3982cefecc5bebf47f69cd45b72e3bfbe100",
@@ -25,7 +25,7 @@
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
     "scripts/blog_doctor.py": "c2c269e2c3632374b401f4e040a85ad3e1ee7cb107d5525147ed14b3831e0af4",
     "scripts/brand_guard.py": "e668be495b16d13ee9c13806d6281b08a862cc075888f3abf418a56b6bc92bed",
-    "scripts/casing_guard.py": "64f5b442faa278659b9446980def10fdb565db1a15bad966bafb6a2397d04f39",
+    "scripts/casing_guard.py": "f72048206669829eba2b02278d7d4dc1ddbd25fffd36573d289de14e72ce03c0",
     "scripts/check24_links.yaml": "688db17156e445678c31de4bddb95338516afe21a64bf6ad1e926b2329add53a",
     "scripts/check_covers.py": "c888f5b301eba6e891ec719296ced218f643f020d1a2ec86b060c1d77cf2b2da",
     "scripts/content_audit.py": "99a482e8f6a1bb035e841f905a68da6cbf42a32346682ecb3e339c7d48550689",
