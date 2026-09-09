@@ -96,6 +96,76 @@ sync_ok() {
 # ========================================================================
 #  Rebase gegen den aktuellen Stand (SICHTBAR, ohne `|| true`)
 # ========================================================================
+# Automatische Konfliktlösung für rein generierte Bot-Artefakte.
+# Hintergrund: Lange SEO-/Content-Läufe starten auf einem alten main-Stand,
+# während andere Bots Reports/JSONL-Historien fortschreiben. Das ist kein
+# fachlicher Konflikt und soll keinen roten Run erzeugen (#233-Klasse).
+# Content-Dateien bleiben bewusst tabu: echter Textkonflikt => harter Fehler.
+auto_resolve_generated_rebase_conflicts() {
+  local conflicts f safe=1
+  conflicts=$(git diff --name-only --diff-filter=U || true)
+  [ -n "$conflicts" ] || return 1
+
+  echo "  rebase: prüfe automatisch lösbare Bot-Artefakt-Konflikte:"
+  printf '%s\n' "$conflicts" | sed 's/^/    - /'
+
+  while IFS= read -r f; do
+    [ -n "$f" ] || continue
+    case "$f" in
+      data/*.jsonl|data/**/*.jsonl|*.jsonl)
+        # JSONL-Historien sind append-only. Nimm beide Seiten, entferne
+        # exakte Duplikate und halte die Datei valides zeilenbasiertes JSON.
+        python3 - "$f" <<'PY'
+import pathlib, subprocess, sys
+path = pathlib.Path(sys.argv[1])
+parts = []
+for stage in (2, 3):
+    r = subprocess.run(["git", "show", f":{stage}:{path.as_posix()}"], text=True, capture_output=True)
+    if r.returncode == 0:
+        parts.extend(r.stdout.splitlines())
+seen = set()
+out = []
+for line in parts:
+    if not line.strip():
+        continue
+    if line in seen:
+        continue
+    seen.add(line)
+    out.append(line)
+path.parent.mkdir(parents=True, exist_ok=True)
+path.write_text("\n".join(out) + ("\n" if out else ""), encoding="utf-8")
+PY
+        git add -- "$f"
+        ;;
+      *-REPORT.md|*REPORT.md|*STATUS.md|BOT-STATUS.md|PRODUKTIONS-STATUS.md|PIN-STATUS.md|SOCIAL-STATUS.md|ENGINE-STATUS.md)
+        # Reports/Statusseiten werden vollständig aus dem aktuellen Lauf
+        # erzeugt. Beim Rebase ist --theirs der gerade zu pushende Bot-Commit.
+        git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
+        git add -- "$f"
+        ;;
+      .meta_cache.json|.meta_report.json|.keyword_suggestions.json|.affiliate_report.json|.affiliate_integrity_state.json|.indexnow_submitted.json)
+        git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
+        git add -- "$f"
+        ;;
+      *)
+        safe=0
+        ;;
+    esac
+  done <<< "$conflicts"
+
+  if [ "$safe" -ne 1 ]; then
+    echo "  rebase: enthält nicht automatisch lösbare Dateien – kein Blind-Merge."
+    return 1
+  fi
+
+  if git diff --name-only --diff-filter=U | grep -q .; then
+    echo "  rebase: Restkonflikte vorhanden – Abbruch."
+    return 1
+  fi
+
+  GIT_EDITOR=true git rebase --continue 2>&1 | sed 's/^/  rebase: /'
+}
+
 rebase_gegen_origin() {
   local out
   if ! out=$(git pull --rebase --autostash origin "$BRANCH" 2>&1); then
@@ -103,11 +173,16 @@ rebase_gegen_origin() {
     # Ursache unterscheiden: läuft noch ein Rebase, ist es ein echter
     # Konflikt. Sonst war es Netzwerk/Auth – eine völlig andere Maßnahme.
     if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
+      if auto_resolve_generated_rebase_conflicts; then
+        echo "  rebase: generierte Bot-Artefakt-Konflikte automatisch gelöst."
+        return 0
+      fi
       git rebase --abort 2>/dev/null || true
       echo "::error::git_sync.sh: Rebase-Konflikt gegen origin/$BRANCH "\
            "(ein paralleler Workflow hat dieselben Zeilen geändert). "\
            "Kein Push – Arbeitsstand bleibt lokal sauber. "\
-           "Nächster Lauf übernimmt es; bei Dauer-Konflikt Datei manuell mergen."
+           "Nur echte Content-Konflikte benötigen manuelles Mergen; "\
+           "generierte Report-/JSONL-Konflikte werden automatisch geheilt."
     else
       echo "::error::git_sync.sh: Pull von origin/$BRANCH fehlgeschlagen "\
            "(Netzwerk, Auth oder fehlende 'contents: write'-Berechtigung) – kein Konflikt."
@@ -131,8 +206,9 @@ push_mit_retry() {
     echo "  push: Versuch $i fehlgeschlagen – neuer Versuch in 5 s."
     sleep 5
     # Vor dem nächsten Versuch erneut angleichen: ein anderer Workflow
-    # kann inzwischen committet haben.
-    if ! git pull --rebase --autostash origin "$BRANCH" >/dev/null 2>&1; then
+    # kann inzwischen committet haben. Dabei dieselbe Premium-Konflikt-
+    # Selbstheilung nutzen wie beim ersten Rebase (JSONL/Reports).
+    if ! rebase_gegen_origin; then
       git rebase --abort 2>/dev/null || true
       break
     fi

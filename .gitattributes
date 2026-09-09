@@ -1,0 +1,3 @@
+# Bot-Historien sind append-only JSONL. Parallele Automationen dürfen ihre
+# Zeilen vereinigen, statt bei wöchentlichen SEO-/Health-Läufen zu kollidieren.
+*.jsonl merge=union
