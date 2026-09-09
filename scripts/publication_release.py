@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
-"""Final acceptance, before quota accounting. No relaxed gate or network AI required."""
+"""Final acceptance, before quota accounting.
+
+Premium-Fix 09.09.2026 (#237): Wenn der Tag nach den finalen Gates noch unter
+Minimum liegt, versucht die Endabnahme vor dem Reserve-Publish eine
+bedarfsgetriebene Reserve-Veredelung. So kann dieselbe Engine-Ausführung einen
+unterreifen Pool noch am Publikationstag nachziehen, statt blind mit 0 READY in
+`publish_to_min()` zu laufen und erst am nächsten Morgen auf die Reserve-Linie
+zu warten.
+"""
+import datetime as dt
 import subprocess
 import sys
 from pathlib import Path
@@ -9,6 +18,40 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def run(*args):
     subprocess.run(args, cwd=ROOT, check=True, timeout=240)
+
+
+def finish_reserve_if_needed() -> bool:
+    """Best-effort: veredelt Reserve-Kandidaten on demand bei Tagesdefizit.
+
+    Die tägliche Reserve-Linie hält den Pool normalerweise bereit. Wenn ein
+    Publikationstag aber bis zur finalen Abnahme unter dem LIVE-Minimum bleibt,
+    lohnt ein letzter lokaler Finish-Pass auf vorhandene Reserve-Entwürfe,
+    bevor `publish_to_min()` Kandidaten verwirft. Fehler bremsen die finale
+    Freigabe nicht – die Reserve-Prüfung selbst bleibt die Autorität.
+    """
+    import cadence_guard as cg
+    import reserve_pool
+
+    today = dt.datetime.now(dt.timezone.utc).date()
+    if today.weekday() not in cg.PUBLICATION_DAYS:
+        return False
+    minimum, _ = cg.effective_limits()
+    live = len(cg.published_on(cg.load_posts(), today))
+    pool = reserve_pool.reserve_drafts()
+    if live >= minimum or not pool:
+        return False
+    try:
+        import reserve_finisher
+        print(f"Reserve-Finish on demand: LIVE {live}/{minimum}, "
+              f"Pool {len(pool)} – Veredelung vor Reserve-Freigabe.")
+        rc = reserve_finisher.finish()
+        if rc != 0:
+            print(f"⚠ Reserve-Finish on demand unvollständig (rc={rc}) – "
+                  "trotzdem weiter mit harter Reserve-Prüfung.")
+        return True
+    except Exception as exc:  # noqa: BLE001 – finale Gates bleiben robust
+        print(f"⚠ Reserve-Finish on demand fehlgeschlagen: {exc}")
+        return False
 
 
 def accept_candidate(index):
@@ -46,6 +89,7 @@ def main():
             park_state.hold(str(index), f"quality-score: {score['score']} < {qs.THRESHOLD_PUBLISH}; finale Freigabe fehlt")
     run('hugo', '--minify', '--cleanDestinationDir')
     run(sys.executable, 'scripts/publish_gate.py')
+    finish_reserve_if_needed()
     import reserve_pool
     reserve_pool.publish_to_min()
     run(sys.executable, 'scripts/draft_link_healer.py', '--fix')

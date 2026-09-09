@@ -29,6 +29,8 @@ NUTZUNG:
   python3 scripts/spellcheck.py --fix         # Eindeutige Fehler korrigieren
   python3 scripts/spellcheck.py --fix --ai    # + KI-Entscheidung für unsichere Fälle
   python3 scripts/spellcheck.py --file X.md   # einzelner Artikel
+  python3 scripts/spellcheck.py --file X.md --include-drafts
+                                             # auch Entwürfe prüfen/heilen
   python3 scripts/spellcheck.py --json        # maschinenlesbar (Workflow)
 """
 import os
@@ -194,7 +196,7 @@ def load_whitelist():
     return wl
 
 
-def load_articles(files=None):
+def load_articles(files=None, include_drafts=False):
     arts = []
     paths = files or sorted(
         glob.glob(os.path.join(POSTS_DIR, "*.md"))
@@ -202,12 +204,13 @@ def load_articles(files=None):
         + glob.glob(os.path.join(BLOG_DIR, "content", "pillar", "*", "index.md"))
     )
     for path in paths:
-        content = open(path, encoding="utf-8").read()
+        with open(path, encoding="utf-8") as fh:
+            content = fh.read()
         parts = content.split("---", 2)
         if len(parts) < 3:
             continue
         fm, body = parts[1], parts[2]
-        if "draft: true" in fm:
+        if not include_drafts and "draft: true" in fm:
             continue
 
         def get(key):
@@ -859,12 +862,13 @@ def main():
     fix = "--fix" in sys.argv
     use_ai = "--ai" in sys.argv
     as_json = "--json" in sys.argv
+    include_drafts = "--include-drafts" in sys.argv
     files = None
     if "--file" in sys.argv:
         files = [sys.argv[sys.argv.index("--file") + 1]]
 
     whitelist = load_whitelist()
-    articles = load_articles(files)
+    articles = load_articles(files, include_drafts=include_drafts)
     print(f"Rechtschreib-/Groß-Klein-Prüfung: {len(articles)} Artikel\n")
 
     all_problems = []

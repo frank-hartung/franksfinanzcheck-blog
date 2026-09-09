@@ -24,6 +24,8 @@ NUTZUNG:
   python3 scripts/grammar_check.py               # Prüfung + Report
   python3 scripts/grammar_check.py --fix         # eindeutige Fehler korrigieren
   python3 scripts/grammar_check.py --file X.md   # einzelner Artikel
+  python3 scripts/grammar_check.py --file X.md --include-drafts
+                                               # auch Entwürfe prüfen/heilen
   python3 scripts/grammar_check.py --new-only    # nur Artikel von heute
 """
 import os
@@ -215,7 +217,7 @@ def lt_check(text, whitelist):
     return results
 
 
-def load_articles(files=None, new_only=False):
+def load_articles(files=None, new_only=False, include_drafts=False):
     import datetime
     today = datetime.date.today().isoformat()
     arts = []
@@ -224,12 +226,13 @@ def load_articles(files=None, new_only=False):
         + glob.glob(os.path.join(POSTS_DIR, "*", "index.md"))
     )
     for path in paths:
-        content = open(path, encoding="utf-8").read()
+        with open(path, encoding="utf-8") as fh:
+            content = fh.read()
         parts = content.split("---", 2)
         if len(parts) < 3:
             continue
         fm, body = parts[1], parts[2]
-        if "draft: true" in fm:
+        if not include_drafts and "draft: true" in fm:
             continue
 
         def get(key):
@@ -382,12 +385,13 @@ def main():
     fix = "--fix" in sys.argv
     as_json = "--json" in sys.argv
     new_only = "--new-only" in sys.argv
+    include_drafts = "--include-drafts" in sys.argv
     files = None
     if "--file" in sys.argv:
         files = [sys.argv[sys.argv.index("--file") + 1]]
 
     whitelist = load_whitelist()
-    articles = load_articles(files, new_only)
+    articles = load_articles(files, new_only, include_drafts=include_drafts)
     print(f"Grammatik-Prüfung (LanguageTool): {len(articles)} Artikel\n")
 
     all_problems = []
