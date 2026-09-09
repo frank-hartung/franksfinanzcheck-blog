@@ -125,7 +125,7 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 ## Was eine gute Police unbedingt enthalten sollte
 
 - **Mindestdeckung 100 Mio. € pauschal**, mindestens 15 Mio. € pro Person
-- **Mallorca-Police** (Deckung bei [Mietwagen](../../posts/2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer/) im europäischen Ausland in gewohnter Höhe)
+- **Mallorca-Police** (Deckung bei Mietwagen im europäischen Ausland in gewohnter Höhe)
 - **Zusammenstoß mit Tieren aller Art** (nicht nur Haarwild)
 - **Erweiterte Wildschadenklausel**
 - **Grobe Fahrlässigkeit** (außer bei Vorsatz, Drogen/Alkohol)

@@ -1,6 +1,13 @@
 # 🔗 DRAFT-LINK-REPORT (draft_link_healer.py)
 
-**Stand:** 2026-09-09 15:19 UTC · Modus: FIX
+**Stand:** 2026-09-09 16:33 UTC · Modus: FIX
+
+## Repariert: Ziel existiert nicht (4)
+
+- `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` → `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` (Ziel existiert nicht (gelöscht))
+- `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` → `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` (Ziel existiert nicht (gelöscht))
+- `2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen` → `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` (Ziel existiert nicht (gelöscht))
+- `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` → `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` (Ziel existiert nicht (gelöscht))
 
 ## Gemeldet: Ziel gerade nicht im Build (32)
 
@@ -38,6 +45,13 @@ Kein Eingriff nötig – der Render-Guard `layouts/_default/_markup/render-link.
 - `pillar/frugalismus/index.md` → `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` (Draft (Kadenz-Re-Queue))
 - `pillar/internet-dsl/index.md` → `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` (Draft (Kadenz-Re-Queue))
 - `pillar/strom-sparen/index.md` → `2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst` (Draft (Kadenz-Re-Queue))
+
+## Geheilt (dieser Lauf)
+
+- ✅ 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub: 1 defekte Link(s) entlinkt
+- ✅ 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen: 1 defekte Link(s) entlinkt
+- ✅ 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen: 1 defekte Link(s) entlinkt
+- ✅ 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen: 1 defekte Link(s) entlinkt
 
 ---
 _Heiler: Ankertext bleibt 1:1 erhalten (kein Content-Verlust). Läuft in der Deploy-Gate-Kette vor dem Hugo-Build, in der Content-Engine vor jedem Slot und im Blog-Gesundheits-Check._

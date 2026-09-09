@@ -30,7 +30,7 @@ social_posted: true
 
 Stell dir vor: Du stehst am Flughafen von Faro. Die Luft ist warm. Die Hitze des Hochsommers ist weg. Andere haben im August viel für einen Kleinwagen gezahlt. Du öffnest entspannt deine App.
 
-Du hast dein **[Mietwagen](../../posts/2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer/)-Schnäppchen** schon Wochen vorher gesichert. Die Ersparnis reicht locker für drei Abendessen in einer guten Fischtaverne.
+Du hast dein **Mietwagen-Schnäppchen** schon Wochen vorher gesichert. Die Ersparnis reicht locker für drei Abendessen in einer guten Fischtaverne.
 
 **Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
