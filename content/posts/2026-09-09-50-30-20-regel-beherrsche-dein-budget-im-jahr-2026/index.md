@@ -38,7 +38,7 @@ Hier setzt ein System an, das so simpel wie genial ist. Es geht nicht darum, jed
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Jetzt C24 Bank-Angebote vergleichen**](/go/tagesgeld/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt C24 Bank-Angebote vergleichen**](/go/tagesgeld/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was steckt hinter der 50-30-20-Formel?

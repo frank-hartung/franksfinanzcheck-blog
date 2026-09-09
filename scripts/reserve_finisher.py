@@ -107,6 +107,32 @@ def _slug_tail(slug: str) -> str:
     return m.group(1) if m else slug
 
 
+# REPARATUR 09.09.2026 (Reserve #4): deterministische Hygiene der kanonischen
+# Partner-CTA-Zeile. KI-Polish (bzw. der reserve-only-Generator) verschmilzt
+# wiederholt „Die besten“ zu „Ddiebesten“ (Lektorat-L13 „Doppel-Anlauf“; wird
+# dort NUR gemeldet, nie automatisch gefixt). Genau deshalb blieb der
+# Rechtschreib-Teil der Reserve-Kandidaten an jedem Lauf bei 0.00, obwohl die
+# Heiler-/Zertifizierungsstufe in CI lief. Diese exakte, kanonische
+# Korruption wird deterministisch repariert – VOR allen Heiler-/KI-Läufen und
+# unabhängig von der API-Verfügbarkeit.
+CANONICAL_CTA_RE = re.compile(
+    r"\bDdiebesten Tarife findest du über unseren Partner[-‑]Vergleich")
+
+
+def _canonical_cta_hygiene(index: Path) -> int:
+    """Repariert die kanonische CTA-Zeile, falls die KI sie korrumpiert hat.
+
+    Rückgabe: Anzahl der Korrekturen (0 = nichts zu tun). Schreibend nur bei
+    Fund – kein churn, wenn der Text bereits sauber ist.
+    """
+    text = index.read_text(encoding="utf-8")
+    new, n = CANONICAL_CTA_RE.subn(
+        "Die besten Tarife findest du über unseren Partner-Vergleich", text)
+    if n:
+        index.write_text(new, encoding="utf-8")
+    return n
+
+
 def lift_to_today(index: Path) -> Path:
     """Hebt einen Pool-Kandidaten auf das heutige Datum (Präfix + date).
 
@@ -332,6 +358,14 @@ def finish() -> int:
     for index in pool:
         try:
             lifted = lift_to_today(index)
+            # Deterministische CTA-Hygiene VOR den Heilern (Reserve #4): eine
+            # von der KI korrumpierte kanonische CTA-Zeile („Ddiebesten“)
+            # kostete sonst dauerhaft den Rechtschreib-Score – jetzt wird sie
+            # API-unabhängig geheilt, bevor polish/spellcheck/grammar laufen.
+            n_hyg = _canonical_cta_hygiene(lifted)
+            if n_hyg:
+                print(f"  🧹 {n_hyg} kanonische(r) CTA-Tippfehler repariert: "
+                      f"{lifted.parent.name}")
             targets.append(lifted)
             print(f"  🛠 Kandidat wird veredelt: {lifted.parent.name}")
         except Exception as exc:  # noqa: BLE001 – niemals den ganzen Lauf opfern
@@ -407,6 +441,20 @@ def selftest() -> int:
         digest = hashlib.sha256(idx.read_bytes()).hexdigest()
         if not _is_certified(idx, {"2026-09-01-reserve-a": digest}):
             fehler.append("Kandidat mit passendem Hash gilt nicht als ready")
+        # CTA-Hygiene (Reserve #4): „Ddiebesten“-Korruption muss deterministisch
+        # zurück auf die kanonische Form, sonst kostet sie den Spelling-Score.
+        bad = idx.parent / "bad.md"
+        bad.write_text("💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten "
+                       "Tarife findest du über unseren Partner-Vergleich: x\n"
+                       "Body.", encoding="utf-8")
+        if _canonical_cta_hygiene(bad) != 1 or \
+                "Ddiebesten" in bad.read_text(encoding="utf-8") or \
+                "Die besten Tarife findest du über unseren Partner-Vergleich" \
+                not in bad.read_text(encoding="utf-8"):
+            fehler.append("CTA-Hygiene repariert die Ddiebesten-Korruption nicht")
+        # Idempotenz: erneuter Lauf ändert nichts (0 Funde).
+        if _canonical_cta_hygiene(bad) != 0:
+            fehler.append("CTA-Hygiene ist nicht idempotent (churnt)")
     if fehler:
         print("🛑 RESERVE-FINISHER-SELFTEST FEHLGESCHLAGEN:")
         for e in fehler:
