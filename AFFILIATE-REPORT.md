@@ -1,7 +1,9 @@
 # 🤝 AFFILIATE-REPORT
 
-**Stand:** 2026-09-09 14:48 UTC · Modus: CHECK
+**Stand:** 2026-09-09 15:19 UTC · Modus: CHECK
 
-Probleme: 0 · Geheilt: 0
+Probleme: 1 · Geheilt: 0
 
-✅ Alle Affiliate-Profi-Signale erfüllt.
+| Code | Artikel | Problem |
+|---|---|---|
+| A3 | 2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer | nur 1 interne Links (< 2) |
