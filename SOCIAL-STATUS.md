@@ -1,6 +1,6 @@
 # 📣 Social-Media-Status
 
-> Automatisch aktualisiert: 09.09.2026 12:18 UTC
+> Automatisch aktualisiert: 09.09.2026 21:09 UTC
 
 - **Mastodon:** 🟢 aktiv (https://mastodon.social)
 - **LinkedIn:** ⚪ nicht eingerichtet (Achtung: Token läuft ~60 Tage)
@@ -10,8 +10,7 @@
 
 ## Zuletzt gepostet (dieser Lauf)
 
-- Frugalismus-Tipps: So vermeidest du teure Alltagsfehler → https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/
-- Frugalismus-Tipps: Mehr Freiheit durch bewussten Konsum → https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/
+- Notgroschen: Die Wahrheit über das finanzielle Polster → https://franksfinanzcheck.de/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/
 
 ---
 *Erzeugt von scripts/social_poster.py – Setup: ANLEITUNG-SOCIAL-MEDIA.md*
