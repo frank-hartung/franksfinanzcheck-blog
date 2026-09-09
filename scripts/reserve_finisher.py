@@ -167,14 +167,19 @@ def lift_to_today(index: Path) -> Path:
 # ---------------------------------------------------------------------------
 HEALER_CHAIN = [
     # --- Phase 2 (Qualitäts-Kette) ---
-    ("profi_polish.py", ["--new"]),
+    # Reserve-Kandidaten sind bewusst draft:true. File-Scoped-Heiler müssen
+    # deshalb Entwürfe explizit zulassen, sonst läuft die Veredelung scheinbar
+    # grün, bearbeitet aber 0 Dateien (Befund 09.09.2026: Pool 0 READY trotz
+    # brauchbarer Kandidaten, weil Polish/Spellcheck/Grammar alle drafts
+    # stumm übersprangen).
+    ("profi_polish.py", ["--include-drafts"], "file"),
     ("fix_linebreaks.py", [], "file"),
     ("fix_dash_und.py", ["--fix"]),
     ("fix_dash_eol.py", ["--fix"]),
     ("check_length.py", ["--fix"]),
     ("fix_spaces.py", []),
-    ("spellcheck.py", ["--fix"], "file"),
-    ("grammar_check.py", ["--fix", "--new-only"], "file"),
+    ("spellcheck.py", ["--fix", "--include-drafts"], "file"),
+    ("grammar_check.py", ["--fix", "--include-drafts"], "file"),
     ("casing_guard.py", ["--fix", "--new-only"]),
     ("dash_guard.py", ["--fix", "--ai", "--new-only"]),
     ("compound_guard.py", ["--fix", "--ai", "--new-only"]),

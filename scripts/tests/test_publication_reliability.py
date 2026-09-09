@@ -9,9 +9,13 @@ from pathlib import Path
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import bot_status
+import grammar_check
+import profi_polish
 import publication_check as pc
-import reserve_pool as rp
 import publish_day_check as watchdog
+import reserve_pool as rp
+import spellcheck
 
 
 class Monday(dt.date):
@@ -124,6 +128,54 @@ class DeliveryTests(unittest.TestCase):
             def today(cls): return cls(2026, 9, 8)
         with patch.object(watchdog.datetime, 'date', Tuesday), patch.object(watchdog, 'articles_on', return_value=(['a'], ['b'])), redirect_stdout(io.StringIO()):
             self.assertEqual(watchdog.main(), 1)
+
+
+class DraftScopedHealerTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.post = Path(self.tmp.name) / 'draft-post' / 'index.md'
+        self.post.parent.mkdir(parents=True)
+        self.post.write_text(
+            '---\n'
+            'title: "Test"\n'
+            'description: "Testbeschreibung."\n'
+            'date: 2026-09-09T06:00:00Z\n'
+            'draft: true\n'
+            'ai_generated: true\n'
+            '---\n\n'
+            'Das ist ein Testtext.\n',
+            encoding='utf-8',
+        )
+
+    def test_spellcheck_scoped_include_drafts(self):
+        self.assertEqual(spellcheck.load_articles([str(self.post)]), [])
+        arts = spellcheck.load_articles([str(self.post)], include_drafts=True)
+        self.assertEqual(len(arts), 1)
+        self.assertEqual(arts[0]['path'], str(self.post))
+
+    def test_grammar_scoped_include_drafts(self):
+        self.assertEqual(grammar_check.load_articles([str(self.post)]), [])
+        arts = grammar_check.load_articles([str(self.post)], include_drafts=True)
+        self.assertEqual(len(arts), 1)
+        self.assertEqual(arts[0]['path'], str(self.post))
+
+    def test_profi_polish_include_drafts(self):
+        self.assertIsNone(profi_polish.load_article(str(self.post)))
+        article = profi_polish.load_article(str(self.post), include_drafts=True)
+        self.assertIsNotNone(article)
+        self.assertEqual(article['path'], str(self.post))
+
+    def test_engine_snapshot_uses_final_source_truth(self):
+        posts = [
+            {'slug': 'a', 'date': dt.date(2026, 9, 9), 'draft': True, 'state': 'hold'},
+            {'slug': 'b', 'date': dt.date(2026, 9, 9), 'draft': True, 'state': 'manual'},
+        ]
+        level, note = bot_status.engine_snapshot(posts, dt.date(2026, 9, 9), 2, 3)
+        self.assertEqual(level, 'WARN')
+        self.assertIn('0 Artikel live heute', note)
+        self.assertIn('2 Entwurf', note)
+        self.assertIn('unter LIVE-Mindestziel', note)
 
 
 if __name__ == '__main__':

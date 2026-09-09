@@ -19,6 +19,8 @@ SICHERHEIT (Verifikation VOR dem Schreiben):
 
 Nutzung:
     python3 scripts/profi_polish.py --file X.md     # einzelnen Artikel
+    python3 scripts/profi_polish.py --file X.md --include-drafts
+                                                  # auch Entwürfe polieren
     python3 scripts/profi_polish.py --new           # alle Artikel ohne lastmod
     python3 scripts/profi_polish.py --all           # ALLE Artikel (auch manuelle)
     python3 scripts/profi_polish.py --dry-run       # ohne zu schreiben
@@ -37,13 +39,14 @@ import groq_config
 CACHE_FILE = os.path.join(BLOG_DIR, ".polish_cache.json")
 
 
-def load_article(path):
-    content = open(path, encoding="utf-8").read()
+def load_article(path, include_drafts=False):
+    with open(path, encoding="utf-8") as fh:
+        content = fh.read()
     parts = content.split("---", 2)
     if len(parts) != 3:
         return None
     fm, body = parts[1], parts[2]
-    if "draft: true" in fm:
+    if not include_drafts and "draft: true" in fm:
         return None
 
     def get(key):
@@ -265,6 +268,7 @@ def main():
     dry = "--dry-run" in sys.argv
     mode_new = "--new" in sys.argv
     mode_all = "--all" in sys.argv
+    include_drafts = "--include-drafts" in sys.argv
 
     files = []
     if "--file" in sys.argv:
@@ -285,7 +289,7 @@ def main():
     polished, failed, skipped = [], [], 0
     import time
     for idx, path in enumerate(files):
-        a = load_article(path)
+        a = load_article(path, include_drafts=include_drafts)
         if not a:
             skipped += 1
             continue
