@@ -70,7 +70,7 @@ Der Hauptgrund für das Scheitern ist das Gefühl von Mangel. Wenn du dir alles 
 
 Oft fehlt auch ein konkretes Ziel. „Einfach nur weniger ausgeben“ ist zu vage für unser Gehirn. Wenn du jedoch weißt, dass du für eine Weltreise sparst oder in zehn Jahren weniger arbeiten möchtest, fällt der Verzicht leichter. Das Ziel gibt dem Handeln einen Sinn. Ohne diesen Nordstern verlierst du in der nächsten Rabattaktion die Orientierung.
 
-Viele Menschen versuchen auch, an den falschen Stellen zu sparen. Du jagst jedem Cent im Supermarkt hinterher, fährst aber ein Auto, das du dir eigentlich nicht leisten kannst. Das Verhältnis von Aufwand und Nutzen stimmt hier nicht. Wirkliche finanzielle Freiheit entsteht durch die Optimierung der großen Posten wie Wohnen, Mobilität und Ernährung.
+Viele Menschen versuchen auch, an den falschen Stellen zu sparen. Du jagst jedem Cent im Supermarkt hinterher, fährst aber ein Auto, das du dir eigentlich nicht leisten kannst. Das Verhältnis von Aufwand und Nutzen stimmt hier nicht. Wirkliche [finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) entsteht durch die Optimierung der großen Posten wie Wohnen, Mobilität und Ernährung.
 
 ## Trick 1: Die 24-Stunden-Regel gegen Impulskäufe
 
@@ -158,7 +158,7 @@ Diese Summe kann den Grundstock für ein beachtliches Vermögen bilden. Wenn man
 
 Sparen darf nicht wehtun. Wenn du dich ständig einschränkst, wirst du das Ziel aus den Augen verlieren. Belohne dich für erreichte Etappenziele. Hast du den ersten Tausender gespart? Dann gönne dir etwas Besonderes, das dir wirklich Freude bereitet. Das erhält den Spaß an der Sache und verhindert Frustration.
 
-Suche dir Gleichgesinnte. Es ist viel einfacher, **Geld sparen im Alltag** durchzuziehen, wenn dein Umfeld ähnliche Werte teilt. Wenn alle deine Freunde ständig teuer essen gehen wollen, wird es für dich schwer. Tausche dich in Foren oder Gruppen aus. Dort findest du oft neue Inspirationen und praktische Kniffe für deinen Weg.
+Suche dir Gleichgesinnte. Es ist viel einfacher, **[[Geld spare](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/)n im Alltag](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)** durchzuziehen, wenn dein Umfeld ähnliche Werte teilt. Wenn alle deine Freunde ständig teuer essen gehen wollen, wird es für dich schwer. Tausche dich in Foren oder Gruppen aus. Dort findest du oft neue Inspirationen und praktische Kniffe für deinen Weg.
 
 Betrachte Frugalismus als ein Spiel oder ein Experiment. Wie wenig brauche ich wirklich, um glücklich zu sein? Oft stellen wir fest, dass uns weniger Besitz freier macht. Weniger Dinge bedeuten weniger Wartung, weniger Reinigung und weniger Sorgen. Diese psychologische Entlastung ist oft wertvoller als der reine Geldbetrag auf dem Konto.
 

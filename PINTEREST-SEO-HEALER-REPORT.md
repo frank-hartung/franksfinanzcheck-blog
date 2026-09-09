@@ -1,11 +1,11 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-09 09:02 UTC · **Modus:** FIX
+**Stand:** 2026-09-09 11:30 UTC · **Modus:** FIX
 
-- Artikel: **40**
-- Geheilt: **1**
+- Artikel: **43**
+- Geheilt: **8**
 - Offene Issues: **0**
-- Covers: fehlende nachgezogen
+- Covers: 2 Titel-Stale + fehlende nachgezogen
 
 ## Kriterien 2026 (Agentur-Standard)
 
@@ -59,6 +59,9 @@
 | ✅ | `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen` *(draft)* | — |
 | ✅ | `2026-09-08-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` *(draft)* | — |
 | ✅ | `2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks` *(draft)* | — |
+| ✅ | `2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag` *(draft)* | — |
+| ✅ | `2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` *(draft)* | — |
+| ✅ | `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` *(draft)* | — |
 | ✅ | `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` *(draft)* | — |
 
 ## Selbstheilung (diese Runde)

@@ -175,7 +175,7 @@ Ein kleiner Temperatur‑Abschlag von **‑18 °C** statt **‑24 °C** bei 
 
 ## Fazit: Erst messen, dann gezielt Energiediebe stoppen
 
-Heimliche **Stromfresser finden** und stoppen? Das ist der schnellste Weg zu viel Ersparnis. Du ersetzt alte Dauerläufer, du schaltest Standby‑Kosten per Knopfdruck ab und du prüfst deinen Tarif. So holst du jedes Jahr über **400 €** zurück.
+Heimliche **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen? Das ist der schnellste Weg zu viel Ersparnis. Du ersetzt alte Dauerläufer, du schaltest Standby‑Kosten per Knopfdruck ab und du prüfst deinen Tarif. So holst du jedes Jahr über **400 €** zurück.
 
 **Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · Strom [sparen im Herbst](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/) · Gasanbieter wechseln: Praxis‑Tipps
 
