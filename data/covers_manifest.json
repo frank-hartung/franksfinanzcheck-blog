@@ -364,8 +364,8 @@
   }
  },
  "2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag": {
-  "title": "5 einfache Frugalismus-Tricks für den Alltag",
-  "ts": "2026-09-09T11:29:46+00:00",
+  "title": "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen",
+  "ts": "2026-09-09T16:43:34+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -387,6 +387,24 @@
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-09-09-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
+  "title": "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken",
+  "ts": "2026-09-09T16:42:39+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-09-09-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks": {
+  "title": "Frugalismus im Alltag: Mehr Freiheit durch 5 einfache Tricks",
+  "ts": "2026-09-09T16:42:42+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
  }

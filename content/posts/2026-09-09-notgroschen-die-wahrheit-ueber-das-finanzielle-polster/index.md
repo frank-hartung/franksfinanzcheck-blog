@@ -45,7 +45,7 @@ Viele Ratgeber nennen pauschal drei Netto-Monatsgehälter. Das wirkt griffig, hi
 
 Noch wichtiger: Vom Gehalt kannst du nicht automatisch auf deine Pflichtausgaben schließen. Wenn du 3.000 € netto verdienst, aber 2.400 € fest verplant sind, ist ein kleiner Puffer schneller aufgebraucht, als viele denken. Der Notgroschen soll dir Zeit verschaffen, nicht nur eine einzelne Rechnung abfedern.
 
-Ich betrachte die Reserve deshalb wie eine private Feuerwehr. Sie steht nicht für Konsum bereit. Sie springt ein, wenn etwas wirklich brennt: Jobverlust, kaputte Heizung, Autoreparatur, hohe Nachzahlung oder ungeplante Gesundheitskosten.
+Ich betrachte die Reserve deshalb wie eine private Feuerwehr. Du bist nicht zum Konsum bereit. Sie springt ein, wenn etwas wirklich brennt: Jobverlust, kaputte Heizung, Autoreparatur, hohe Nachzahlung oder ungeplante Gesundheitskosten.
 
 ## Wie hoch sollte dein persönlicher Notgroschen sein?
 
@@ -107,9 +107,9 @@ Das zeigt den entscheidenden Punkt: Du musst nicht alles sofort schaffen. Wichti
 
 ## Die 50-30-20-Regel als Aufbauhilfe
 
-Viele Menschen wissen, dass sie sparen sollten. Sie verschieben es trotzdem bis zum Monatsende. Dann bleibt meist wenig übrig. Besser funktioniert eine feste Budget-Regel.
+Viele Menschen wissen, dass sie sparen sollten. Du verschiebst es trotzdem bis zum Monatsende. Dann bleibt meist wenig übrig. Besser funktioniert eine feste Budget-Regel.
 
-Die 50-30-20-Regel ist dafür ein praxistauglicher Start:
+Die 50–30–20-Regel ist dafür ein praxistauglicher Start:
 
 * **50 % für Bedürfnisse:** Wohnen, Energie, Lebensmittel, Mobilität, Versicherungen.
 * **30 % für Wünsche:** Freizeit, Urlaub, Restaurant, Hobbys und Extras.
@@ -124,8 +124,8 @@ Ein Notgroschen scheitert selten an Mathematik. Meist scheitert er am Alltag. Di
 1. **Zu früh investieren:** Wer bei null Puffer schon alles in ETFs steckt, verkauft im Notfall oft im falschen Moment.
 2. **Den Betrag zu klein wählen:** 1.000 € sind ein guter Start, aber für viele Haushalte keine fertige Lösung.
 3. **Keine Trennung vom Girokonto:** Dann wird das Geld für Urlaub, Technik oder spontane Käufe mitbenutzt.
-4. **Unregelmäßig sparen:** Was erst am Monatsende übrig bleiben soll, bleibt häufig gar nicht übrig.
-5. **Lebenslage nicht nachziehen:** Neues Kind, neues Auto oder höhere Miete bedeuten fast immer auch einen größeren Bedarf.
+4. **Unregelmäßig sparen:** Was erst am Monatsende übrig bleiben soll, bleibt häufig gar nicht erhalten.
+5. **Lebenslage nicht nachziehen:** Ein neues Kind, ein Fahrzeug oder höhere Miete bedeuten fast immer auch einen größeren Bedarf.
 
 **Checkliste: Ist dein Notgroschen stabil?**
 * [ ] Liegt das Geld auf einem separaten Konto?
@@ -154,7 +154,7 @@ Nein. Ein Dispokredit ist teuer und kann von der Bank gekürzt werden. Eine Rese
 Bei teuren Schulden ist ein Parallelweg oft sinnvoll. Baue zunächst einen kleinen Mini-Notgroschen auf. Danach konzentrierst du dich auf die teuersten Kredite.
 
 ### Muss der komplette Betrag sofort auf dem Konto liegen?
-Nein. Wichtig ist ein Plan. Schon ein erster Puffer von 1.000 € nimmt Druck aus dem Alltag. Danach wächst die Reserve Schritt für Schritt weiter.
+Nein. Wichtig ist ein Plan. Schon ein erster Puffer von 1.000 € nimmt Druck aus dem Alltag. Danach wächst die Reserve Schritt für Stufe weiter.
 
 ### Darf ich den Notgroschen investieren?
 Für den Notgroschen selbst ist das meist keine gute Idee. Das Geld soll stabil und schnell verfügbar bleiben. Für viele Haushalte ist Tagesgeld deshalb die sauberste Lösung.

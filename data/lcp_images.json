@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-09-09T15:19:30+00:00",
+  "generatedAt": "2026-09-09T16:43:34+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -464,22 +464,6 @@
     },
     "/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/": {
       "image": "images/covers/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer/": {
-      "image": "images/covers/2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
