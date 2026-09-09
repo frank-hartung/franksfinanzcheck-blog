@@ -1,6 +1,6 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-09-09 11:20 UTC
+**Letzter Lauf:** 2026-09-09 11:35 UTC
 
 **Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
@@ -28,7 +28,7 @@
 ## Re-Queue-Integrität (Park-Zustände)
 
 - 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **0**
-- ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **6**
+- ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **8**
 - ✍️ manuelle Entwürfe (von der Automatik unberührt): **5**
 - 🔁 wiederhergestellte Re-Queue-Flags: **0**
 - 🧹 Park-Reste an live-Posts (gefunden, weg mit --fix): **0**
@@ -41,6 +41,8 @@
 - `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` – quality-score: Score 0.768 < 0.80 (schwach: spelling 0.00, meta 0.85, readability 0.95) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174) · seit 2 Tagen
 - `2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor` – quality-score: Score 0.716 < 0.80 (schwach: spelling 0.00, readability 0.70, meta 0.85) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174) · seit 2 Tagen
 - `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen` – quality-score: Score 0.766 < 0.80 (schwach: spelling 0.00, meta 0.85, readability 0.95) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174) · seit 2 Tagen
+- `2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` – quality-score: Score 0.799 < 0.80 (schwach: spelling 0.40, readability 0.75, meta 0.85) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174) · seit 0 Tagen
+- `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` – quality-score: Score 0.718 < 0.80 (schwach: spelling 0.00, typography 0.80, readability 0.80) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174) · seit 0 Tagen
 
 
 ## Letzte Heilungen

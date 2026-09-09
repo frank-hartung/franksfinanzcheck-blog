@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-09 11:07 UTC · Modus: FIX
+**Stand:** 2026-09-09 11:35 UTC · Modus: FIX
 
 **Domain-Status (Pinterest):** 🔴 GESPERRT – Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026. (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)
 
@@ -8,11 +8,12 @@
 
 ## B: Blog (B1–B8)
 
-- 🟡 [B5] 2026-08-10-dsl-wechselbonus-sichern: Originalitäts-Quote 42 % (< 45 %)
+- 🟡 [B5] 2026-08-10-dsl-wechselbonus-sichern: Originalitäts-Quote 40 % (< 45 %)
 - 🟡 [B2] 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B5] 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas: Originalitäts-Quote 44 % (< 45 %)
 - 🟡 [B2] 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b, \bhöchst(?:e|er|es)\b)
 - 🟡 [B2] 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
+- 🟡 [B5] 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren: Originalitäts-Quote 44 % (< 45 %)
 - 🟡 [B2] 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst: Superlativ ohne Einschränkung (\bgünstigst(?:e|er|es)\b)
 - 🟡 [B1] 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden: Keyword-Stuffing (ein Signal): Text: 'kwh' ×44 (4.6 % Dichte)
 - 🟡 [B2] 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
@@ -31,7 +32,12 @@
 - 🟡 [B2] 2026-09-08-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b, \bgünstigst(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag: Superlativ ohne Einschränkung (\bsofort\s+(?:sparen|auszahlung)\b)
+- 🟡 [B2] 2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer: Superlativ ohne Einschränkung (ohne\s+risiko, \bbest(?:e|er|es)\b)
+- 🔴 [B3] 2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 - 🟡 [B2] 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
+
+**Geheilt:**
+- ✅ 2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer: B3-Disclosure eingefügt
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
@@ -51,7 +57,7 @@
 
 ## Fazit
 
-🔴 2 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
+🔴 3 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
 
 ---
 _Wache: Blog B1–B8 · Feed F1–F6 · CSV C1–C8 · API A1–A4 – Dauerauftrag, niemals Content-Verlust._
