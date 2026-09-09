@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-09 11:35 UTC · Modus: FIX
+**Stand:** 2026-09-09 12:19 UTC · Modus: FIX
 
 **Domain-Status (Pinterest):** 🔴 GESPERRT – Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026. (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)
 
@@ -33,11 +33,7 @@
 - 🟡 [B2] 2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b, \bgünstigst(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag: Superlativ ohne Einschränkung (\bsofort\s+(?:sparen|auszahlung)\b)
 - 🟡 [B2] 2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer: Superlativ ohne Einschränkung (ohne\s+risiko, \bbest(?:e|er|es)\b)
-- 🔴 [B3] 2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 - 🟡 [B2] 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
-
-**Geheilt:**
-- ✅ 2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer: B3-Disclosure eingefügt
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
@@ -57,7 +53,7 @@
 
 ## Fazit
 
-🔴 3 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
+🔴 2 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
 
 ---
 _Wache: Blog B1–B8 · Feed F1–F6 · CSV C1–C8 · API A1–A4 – Dauerauftrag, niemals Content-Verlust._
