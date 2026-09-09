@@ -24,7 +24,7 @@ pin_title: 5 einfache Frugalismus-Tricks für den Alltag
 pin_description: "*Werbung | Frugalismus-Tipps für mehr finanzielle Freiheit: 50-30-20-Regel, Konsumfallen stoppen, Notgroschen aufbauen und bis zu 450 € im Monat sparen. Mehr Spartipps auf FranksFinanzcheck! #frugalismustipps #geldsparenimalltag #503020regel"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 ---
-Bedeutet Sparen für dich grauen Alltag? Schlechte Laune und Verzicht? Dann verwechselst du Knausrigkeit mit Frugalismus.
+Bedeutet Sparen für dich grauen Alltag? Schlechte Laune und Verzicht? Dann verwechselst du Knausrigkeit mit [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/).
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -192,7 +192,7 @@ Frugalismus ist kein Verzichtsprogramm. Er ist ein Werkzeug für **Finanzielle F
 Knausrigkeit spart auf Kosten anderer. Oder auf Kosten der Gesundheit. Frugalismus ist bewusster Konsum. Du sparst dort, um für Wichtiges Geld zu haben.
 
 ### Wie viel Geld brauche ich als Notgroschen?  
-Als Faustregel gelten drei bis sechs Fixkosten im Monat. Bei 1.500 € sind das 4.500 € bis 9.000 €. Lege sie auf ein Tagesgeldkonto. Dort sind sie täglich verfügbar.
+Als Faustregel gelten drei bis sechs Fixkosten im Monat. Bei 1.500 € sind das 4.500 € bis 9.000 €. Lege sie auf ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Dort sind sie täglich verfügbar.
 
 ### Kann jeder Mensch Frugalist werden?  
 Ja. Frugalismus beginnt im Kopf. Du prüfst deine Ausgaben und senkst die Fixkosten. Das geht bei jedem Einkommen.

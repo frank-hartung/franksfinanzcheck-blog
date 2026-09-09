@@ -35,7 +35,7 @@ Dieser Ratgeber zeigt, was eine [Hausratversicherung](../../posts/2026-08-12-dei
 
 ## Was die Hausratversicherung abdeckt
 
-Die Hausratversicherung bündelt fast alle deine beweglichen Sachen an einem Ort. Versichert ist alles, was du zum Leben brauchst: Möbel, Elektronik, Kleidung, Küchengeräte, Bücher und Fahrräder im Keller.
+Die [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) bündelt fast alle deine beweglichen Sachen an einem Ort. Versichert ist alles, was du zum Leben brauchst: Möbel, Elektronik, Kleidung, Küchengeräte, Bücher und Fahrräder im Keller.
 
 Der Versicherer zahlt, wenn eine versicherte Gefahr dein Eigentum beschädigt. Dazu gehören klassisch:
 
