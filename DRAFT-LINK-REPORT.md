@@ -1,8 +1,8 @@
 # 🔗 DRAFT-LINK-REPORT (draft_link_healer.py)
 
-**Stand:** 2026-09-09 11:20 UTC · Modus: FIX
+**Stand:** 2026-09-09 11:30 UTC · Modus: FIX
 
-## Gemeldet: Ziel gerade nicht im Build (15)
+## Gemeldet: Ziel gerade nicht im Build (20)
 
 Kein Eingriff nötig – der Render-Guard `layouts/_default/_markup/render-link.html` gibt diese Links als Klartext aus (kein 404), und sie leben automatisch wieder auf, sobald das Ziel zurück im Build ist. Entlinken würde nur kuratierte Listen dauerhaft ausdünnen.
 
@@ -17,9 +17,14 @@ Kein Eingriff nötig – der Render-Guard `layouts/_default/_markup/render-link.
 - `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` → `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` (Draft (Kadenz-Re-Queue))
 - `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` → `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` (Draft (Kadenz-Re-Queue))
 - `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` → `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` (Draft (Kadenz-Re-Queue))
+- `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` → `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` (Draft (Kadenz-Re-Queue))
+- `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` → `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` (Draft (Kadenz-Re-Queue))
 - `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` → `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` (Draft (Kadenz-Re-Queue))
 - `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` → `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` (Draft (Kadenz-Re-Queue))
+- `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` → `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` (Draft (Kadenz-Re-Queue))
+- `2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen` → `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` (Draft (Kadenz-Re-Queue))
 - `2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen` → `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` (Draft (Kadenz-Re-Queue))
+- `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` → `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` (Draft (Kadenz-Re-Queue))
 - `2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor` → `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` (Draft (Kadenz-Re-Queue))
 
 ---
