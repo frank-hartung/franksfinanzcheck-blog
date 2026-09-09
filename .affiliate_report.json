@@ -1,7 +1,7 @@
 {
  "total": 36,
- "errors": 1,
- "fixed": 2,
+ "errors": 0,
+ "fixed": 0,
  "posts": [
   {
    "slug": "frugalismus",
@@ -325,28 +325,30 @@
    "title": "Kreditkarte vergleichen: Kostenlos und sicher zahl",
    "pillar": "konto-karten",
    "fixed": 0,
-   "errors": [
-    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14 (erwartet: C24 Girokonto)"
-   ],
-   "infos": [],
-   "ok": false
-  },
-  {
-   "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-   "title": "Heizkosten senken: Mit diesen Strategien sparst du",
-   "pillar": "strom-sparen",
-   "fixed": 1,
    "errors": [],
    "infos": [],
    "ok": true
   },
   {
-   "slug": "2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor",
-   "title": "Heizung wartung: So bereitest du dein Heim effizie",
-   "pillar": "strom-sparen",
-   "fixed": 1,
+   "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+   "title": "Frugalismus Tipps: Mehr Freiheit durch bewussten K",
+   "pillar": "frugalismus",
+   "fixed": 0,
    "errors": [],
-   "infos": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
+   "ok": true
+  },
+  {
+   "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+   "title": "Frugalismus Tipps: So vermeidest du teure Alltagsf",
+   "pillar": "frugalismus",
+   "fixed": 0,
+   "errors": [],
+   "infos": [
+    "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
+   ],
    "ok": true
   }
  ]
