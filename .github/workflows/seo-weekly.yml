@@ -35,6 +35,8 @@ jobs:
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Hugo-Build für Sitemap-Check
         uses: ./.github/actions/install-hugo
@@ -105,7 +107,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python3 scripts/meta_optimizer.py --fix --ai | tee /tmp/meta_log.txt
-                    exit ${PIPESTATUS[0]}
+          exit ${PIPESTATUS[0]}
 
       - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte, Keywords)
         # Agentur-Selbstheilung: erzwingt Doppelpunkt-Titel, SERP-Längen,
