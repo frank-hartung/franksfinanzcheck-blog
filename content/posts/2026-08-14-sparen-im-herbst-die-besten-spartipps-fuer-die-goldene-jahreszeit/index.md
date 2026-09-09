@@ -3,8 +3,10 @@
 lastmod: 2026-09-02
 title: "Sparen im Herbst: Spartipps für die goldene Jahreszeit"
 description: "Sparen im Herbst: Mit diesen 7 praxiserprobten Spartipps für Heizung, Versicherungen, Kfz-Wechsel & Haushaltsbudget sparst du bis zu 1.250 €."
-date: 2026-08-14T08:35:12Z
-draft: false
+date: 2026-09-09T14:46:26Z
+draft: true
+cadence_demoted: 2026-09-09T14:46:32Z
+cadence_grund: "quality-score: 0.68 < 0.85; finale Freigabe fehlt"
 tags: ["Sparen im Herbst", "Spartipps", "Haushaltsbudget", "Kfz-Versicherung wechseln", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
