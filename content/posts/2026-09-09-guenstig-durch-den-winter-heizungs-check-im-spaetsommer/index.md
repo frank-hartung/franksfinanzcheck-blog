@@ -155,9 +155,9 @@ Stoßlüften für fünf Minuten bei weit geöffnetem Fenster bleibt die einzig r
 Drehe währenddessen die Thermostate zu, damit die Anlage nicht gegen die Kaltluft arbeitet.
 
 Auch die Technik im Hintergrund spielt eine oft unterschätzte Rolle für deine Effizienz.  
-Smarte Thermostate benötigen eine stabile Internetverbindung für die präzise Steuerung über die Cloud.  
-Wer seine [FRITZ!Box DNS ändern](/go/strom/){rel="sponsored"} möchte, verbessert die Reaktionszeit seiner Smart-Home-Geräte spürbar.  
-Sogar solche kleinen technischen Kniffe tragen heute zu einer modernen und günstigen Haushaltsführung bei.
+Smarte Thermostate funktionieren nur dann sauber, wenn Zeitpläne und Temperaturen sinnvoll eingestellt sind.  
+Prüfe deshalb zum Saisonstart jede Heizphase in der App oder direkt am Gerät.  
+Schon kleine Korrekturen verhindern, dass die Heizung unnötig hochfährt oder nachts zu lange läuft.
 
 ## So gehst du vor: Dein Plan für einen günstigen Winter
 
