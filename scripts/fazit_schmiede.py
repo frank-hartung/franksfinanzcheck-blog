@@ -221,6 +221,17 @@ def check_sections(body: str) -> tuple[bool, bool]:
     return has_fazit, has_faq
 
 
+def tc_join(text: str) -> tuple[str, bool]:
+    """Komposita-Kanon aus scripts/tag_casing.py – dieselbe Quelle wie die
+    Casing-Wache, damit Generator und Wache nie gegeneinander schreiben.
+    fail-open: ohne Lexikon bleibt der Text unveraendert."""
+    try:
+        import tag_casing as tc
+        return tc.join_compounds(text)
+    except Exception:  # noqa: BLE001
+        return text, False
+
+
 def generate_fazit_text(title: str, route: str) -> str:
     """Generiert einen maßgeschneiderten, hochqualitativen Fazit-Abschnitt."""
     cleantitle = re.sub(r"^[0-9\-\s\.]+", "", title).strip() # Entfernt Datumspräfixe oder Nummern
@@ -252,7 +263,17 @@ def generate_fazit_text(title: str, route: str) -> str:
     s2 = sentence_map.get(route, sentence_map["allgemein"])
     s3 = "Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀"
     
-    return f"## Fazit: {cleantitle} schlau nutzen\n\n{s1} {s2} {s3}\n"
+    # Ueberschriftentraeger: „## Fazit: <H1 komplett> schlau nutzen“ war dreifach
+    # kaputt – (1) der CTA-Satz „schlau nutzen“ klebte in der Ueberschrift (Hugo
+    # setzt ihn fett und als Teil des Ankers), (2) der Doppelpunkt des H1 ergab
+    # „Fazit: X: Y“, (3) die ganze H1 duplizierte nur den Seitentitel. Jetzt:
+    # Unterstitel wird Gedankenstrich, CTA faellt weg, Nomen-Komposita bleiben
+    # zusammen (dasselbe Lexikon wie die Casing-Wache).
+    head = re.sub(r"^\s*Fazit\s*[:\-–]+\s*", "", cleantitle)
+    head = head.replace(": ", " \u2013 ")
+    head, _ = tc_join(head)
+    head = head.rstrip(".!?" + "\u2026")
+    return f"## Fazit: {head}\n\n{s1} {s2} {s3}\n"
 
 
 def generate_faq_text(route: str) -> str:

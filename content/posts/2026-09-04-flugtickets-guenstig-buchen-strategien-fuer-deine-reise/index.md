@@ -5,7 +5,7 @@ date: 2026-09-07T05:27:32Z
 draft: true
 cadence_demoted: 2026-09-07T12:17:09Z
 cadence_grund: "publish-gate: Zeichenlänge (check_length.py) nicht bestanden"
-tags: ["flugtickets günstig", "flugvergleich", "billigflüge finden", "preisalarm flug"]
+tags: ["Flugtickets günstig", "Flugvergleich", "Billigflüge finden", "Preisalarm Flug"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
@@ -74,7 +74,9 @@ Nutze die Multi-Stopp-Suche oder "Gabelflüge". Ein Flug von Berlin nach New Yor
 ### Die Macht der "Hidden City Ticketing" Taktik
 Manchmal ist ein Flug von A nach C mit Zwischenstopp in B günstiger als ein Direktflug von A nach B. Manche Profis buchen A-C und steigen in B einfach aus. **Vorsicht:** Das funktioniert nur mit Handgepäck, da dein Koffer sonst nach C weiterfliegt. Zudem verfällt bei den meisten Airlines der Rückflug, wenn du ein Segment der Hinreise auslässt.
 
-## Was kostet ein Flug wirklich? Ein Rechenbeispiel aus 2023/2024
+## Was kostet ein Flug wirklich?
+
+Ein Rechenbeispiel aus 2023/2024
 
 Die Preisspanne ist gewaltig. Ich habe reale Daten für die Strecke München (MUC) nach Palma de Mallorca (PMI) analysiert. Die Beispielreise fand im August statt (Hauptsaison). Die Unterschiede je nach Buchungsverhalten sind drastisch:
 
@@ -167,7 +169,7 @@ Oft stellt sich die Frage: Lohnt sich der "Billigflug" wirklich? Hier ist ein di
 
 **Mein Fazit:** Für Flüge unter 2 Stunden gewinnt der Billigflieger. Alles darüber hinaus rechtfertigt oft den Aufpreis der Linien-Airline für den Komfort und die Zeitersparnis bei der Anreise zum zentralen Flughafen.
 
-## Fazit: Flugtickets günstig buchen: Strategien für deine Reise schlau nutzen
+## Fazit: Flugtickets günstig buchen – Strategien, die tragen
 
 Wer sich intensiv mit dem Thema **Flugtickets günstig buchen** befasst, schont sein Urlaubsbudget massiv. Es ist einer der einfachsten Hebel in deiner Reiseplanung. Nutze die technologischen Möglichkeiten der Preisalarme und bleib flexibel bei deinen Daten.
 

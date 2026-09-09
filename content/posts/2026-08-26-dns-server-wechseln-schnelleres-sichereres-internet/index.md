@@ -1,10 +1,10 @@
 ---
 lastmod: 2026-09-02
 title: "DNS-Server wechseln: Schnelleres und sichereres Internet"
-description: "DNS-Server wechseln für mehr Tempo: Beste kostenlose DNS-Server 2026 (Cloudflare, Google, Quad9) + Anleitung für FritzBox, Windows & Android."
+description: "DNS-Server wechseln für mehr Tempo: Beste kostenlose DNS-Server 2026 (Cloudflare, Google, Quad9) + Anleitung für FRITZ!Box, Windows & Android."
 date: 2026-08-26T06:00:00Z
 draft: false
-tags: ["DNS Server wechseln", "DNS Server ändern", "Schnelleres Internet", "FritzBox DNS", "Cloudflare DNS", "Internet Sicherheit"]
+tags: ["DNS Server wechseln", "DNS Server ändern", "Schnelleres Internet", "FRITZ!Box DNS", "Cloudflare DNS", "Internet Sicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
@@ -15,16 +15,16 @@ cover:
   image: "images/covers/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet.jpg"
   alt: "DNS-Server wechseln für schnelleres und sichereres Internet"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Beim DNS-Server-Wechsel trägst du in FritzBox, Router oder Endgerät zwei IP-Adressen eines schnellen öffentlichen DNS-Anbieters ein – etwa 1.1.1.1 (Cloudflare), 8.8.8.8 (Google) oder 9.9.9.9 (Quad9). Das beschleunigt das Aufrufen von Webseiten um 10 bis 30 Millisekunden, blockiert aktiv Malware- und Phishing-Domains und verhindert, dass dein Internetanbieter dein Surfverhalten mitliest. Die Einrichtung dauert pro Gerät 5 Minuten und ist kostenlos."
+kurzantwort: "Beim DNS-Server-Wechsel trägst du in FRITZ!Box, Router oder Endgerät zwei IP-Adressen eines schnellen öffentlichen DNS-Anbieters ein – etwa 1.1.1.1 (Cloudflare), 8.8.8.8 (Google) oder 9.9.9.9 (Quad9). Das beschleunigt das Aufrufen von Webseiten um 10 bis 30 Millisekunden, blockiert aktiv Malware- und Phishing-Domains und verhindert, dass dein Internetanbieter dein Surfverhalten mitliest. Die Einrichtung dauert pro Gerät 5 Minuten und ist kostenlos."
 
 social_posted: true
-keywords: ["DNS-Server wechseln", "DNS-Server ändern", "Bester DNS-Server", "FritzBox DNS ändern", "Cloudflare DNS", "Google DNS", "Schnelleres Internet", "DNS Sicherheit"]
+keywords: ["DNS-Server wechseln", "DNS-Server ändern", "Bester DNS-Server", "FRITZ!Box DNS ändern", "Cloudflare DNS", "Google DNS", "Schnelleres Internet", "DNS Sicherheit"]
 pin_title: "DNS wechseln leicht gemacht: Mehr Tempo ohne neuen Tarif"
-pin_description: "*Werbung | Du brauchst keinen teureren Tarif für schnelleres Netz – nur den richtigen DNS-Server: Unsere Anleitung zeigt den Wechsel für Windows, Mac, Android, iPhone und Fritzbox – jeweils in unter 5 Minuten. Kostenlos, sicher, jederzeit rückgängig zu machen. Jetzt lesen!"
+pin_description: "*Werbung | Du brauchst keinen teureren Tarif für schnelleres Netz – nur den richtigen DNS-Server: Unsere Anleitung zeigt den Wechsel für Windows, Mac, Android, iPhone und FRITZ!Box – jeweils in unter 5 Minuten. Kostenlos, sicher, jederzeit rückgängig zu machen. Jetzt lesen!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
-Wusstest du, dass dein Anbieter mitlesen kann? Er sieht jede Seite, die du aufrufst – auch im Inkognito-Modus. Der Grund ist der **DNS-Server** deines Providers. Er ist das Telefonbuch des Internets. Er übersetzt Namen wie www. google. de in Zahlen.
+Wusstest du, dass dein Anbieter mitlesen kann? Er sieht jede Seite, die du aufrufst – auch im Inkognito-Modus. Der Grund ist der **DNS-Server** deines Providers. Er ist das Telefonbuch des Internets. Er übersetzt Namen wie www.google.de in Zahlen.
 
 Die meisten nutzen automatisch den DNS-Server ihres Anbieters. Es gibt aber schnellere und sicherere Optionen. Der Wechsel ist kostenlos. Er dauert fünf Minuten. Und er verkürzt oft die Ladezeit. Welche Anbieter 2026 zählen, zeigt der [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
@@ -36,7 +36,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Was macht ein DNS-Server überhaupt?
 
-Tippst du eine Adresse wie www. google. de ein, läuft im Hintergrund ein Vorgang ab:
+Tippst du eine Adresse wie www.google.de ein, läuft im Hintergrund ein Vorgang ab:
 
 1. Dein Browser fragt den **DNS-Server** (standardmäßig den deines Internetanbieters): "Welche IP-Adresse gehört zu `www.google.de`?"
 2. Er schlägt die Adresse nach und antwortet mit `142.250.185.195`.
@@ -88,9 +88,9 @@ Quad9 (9.9.9.9) und Cloudflare (1.1.1.2) prüfen jede Anfrage. Auch der Family-S
 * **IPs:** 9.9.9.9 und 149.112.112.112
 * **Besonderheit:** Gemeinnützige Stiftung, blockiert aktiv Bedrohungen (über 100 Mio. Einträge in der Bedrohungsdatenbank), keine Speicherung personenbezogener Daten.
 
-## Anleitung: DNS-Server an der FritzBox ändern (empfohlen)
+## Anleitung: DNS-Server an der FRITZ!Box ändern (empfohlen)
 
-Änderst du den DNS-Server im Router, gilt das für **alle Geräte**. Handy, Smart-TV, Laptop und Konsole profitieren. Bei einer FritzBox geht es so:
+Änderst du den DNS-Server im Router, gilt das für **alle Geräte**. Handy, Smart-TV, Laptop und Konsole profitieren. Bei einer FRITZ!Box geht es so:
 
 1. Browser öffnen, zu `http://fritz.box` navigieren und anmelden.
 2. Im linken Menü zu **Internet → Zugangsdaten → Namensserver** wechseln.
@@ -98,7 +98,7 @@ Quad9 (9.9.9.9) und Cloudflare (1.1.1.2) prüfen jede Anfrage. Auch der Family-S
 4. Trage ein:
    - **Bevorzugter Namensserver:** `1.1.1.1`
    - **Verzögerter DNS-Server:** `1.0.0.1`
-5. Auf **"Übernehmen"** klicken. Die FritzBox startet kurz die Internetverbindung neu.
+5. Auf **"Übernehmen"** klicken. Die FRITZ!Box startet kurz die Internetverbindung neu.
 6. Test auf [https://1.1.1.1/help](https://1.1.1.1/help) oder mit `nslookup franksfinanzcheck.de` in der Windows-Kommandozeile.
 
 > 💡 **Tipp:** Bei anderen Routern (Telekom Speedport, Unitymedia Connect Box, Vodafone Station) findest du die DNS-Einstellungen im Menü unter "Netzwerk", "Internet" oder "LAN". Das Prinzip ist identisch.
@@ -154,7 +154,7 @@ Schnelle Resolver helfen nur bei den Antwortzeiten. Sie ersetzen keine schwache 
 
 Der DNS-Server ändert nichts an einem schwachen Funkloch. In einem guten Netz spürst du schnellere Seiten. Der Speedtest bleibt gleich. Das ist kein Widerspruch.
 
-FritzBox: Internet → Zugangsdaten → DNS-Server. Zuerst die bisherigen Adressen deines Providers notieren, dann die zwei neuen Server eintragen (einer primär, einer sekundär).
+FRITZ!Box: Internet → Zugangsdaten → DNS-Server. Zuerst die bisherigen Adressen deines Providers notieren, dann die zwei neuen Server eintragen (einer primär, einer sekundär).
 
 48 Stunden testen, bei Problemen mit VPN oder Banking zurück. Kinder-Filter und Ad-Blocking-Dienste sind extra – sie zerlegen manches Online-Banking. Dann Split-DNS oder Ausnahmen.
 

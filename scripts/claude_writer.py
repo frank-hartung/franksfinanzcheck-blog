@@ -66,6 +66,21 @@ gerundeten, als Beispiel gekennzeichneten Annahmen arbeiten.
 Keine Emojis im Fließtext (nur im CTA-Block).
 5. Nenne keine konkreten Anbieter-Empfehlungen außer CHECK24 als \
 Vergleichsportal.
+6. Groß-/Kleinschreibung nach Duden (deutsche Satzschreibung, kein englisches \
+Title-Case): In Überschriften und Sätzen wird NUR groß, was ein Nomen ist oder \
+am Satzanfang steht – nicht jedes Wort. „So sparst du 300 €“, nicht \
+„So Sparst Du 300 €“. Nach einem Doppelpunkt beginnt ein neuer Satz (dann groß), \
+nach Komma, Präposition oder Artikel klein. Feste Wendungen klein: „bar bezahlen“, \
+„pro Monat“, „im Alltag“. Marken exakt so: CHECK24, FRITZ!Box (ein Wort, Ausrufezeichen), \
+congstar, otelo, idealo, Verivox, O2, PAYBACK, Pinterest, Excel, Vodafone. \
+Fachkürzel groß: DSL, WLAN, DNS, kWh, AGB, FAQ. Keine GROSSBUCHSTABEN als \
+Betonung („Das ist NICHT egal“ → „Das ist nicht egal“). \
+Überschriften (Regel K.1–K.3): deutsche Satzschreibung, enden NIE mit einem Punkt, \
+enthalten keinen zweiten Satz und keinen Call-to-action in der Titelzeile – \
+„## Fazit: Heizkosten senken“, nie „## Fazit: Heizkosten senken: spar sofort schlau nutzen“. \
+Kein **Fettdruck** in der Überschrift (sie ist bereits fett). \
+Komposita zusammen- oder mit Bindestrich geschrieben: „Frugalismus-Tipps“, \
+„Heizungswartung“, „DSL-Vergleich“ – nie „Frugalismus Tipps“.
 
 STRUKTUR (exakt so, mit ## -Überschriften):
 - Einstieg (1 Absatz Alltagssituation oder Leitfrage, ohne Überschrift)

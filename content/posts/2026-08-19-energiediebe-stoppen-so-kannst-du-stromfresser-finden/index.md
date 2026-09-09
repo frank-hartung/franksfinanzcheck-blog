@@ -72,7 +72,7 @@ Ein Zwischenstecker‑Messgerät (z. B. **Brennenstuhl PM 114** oder **TP-Link
 Ein Infrarot‑Thermometer (z. B. **Fluke 62 Max**) erkennt überhitzte Netzteile. Werte über **30 °C** über Umgebungstemperatur im Leerlauf deuten auf veraltete **Trafo‑Technik** hin. Ersetze sie durch **Schaltnetzteile** (80 % weniger Verlustleistung).
 
 ### 4. Smart‑Plug‑Analyse  
-Smart‑Plugs mit integriertem Messwert (z. B. **AVM FRITZ! DECT 200**) liefern Echtzeit‑Daten in der App. Sie ermöglichen das **Automatisieren** von Abschaltzeiten (z. B. Router 01:00–06:00 Uhr).  
+Smart‑Plugs mit integriertem Messwert (z. B. **AVM FRITZ!DECT 200**) liefern Echtzeit‑Daten in der App. Sie ermöglichen das **Automatisieren** von Abschaltzeiten (z. B. Router 01:00–06:00 Uhr).
 
 #### Vor‑ und Nachteile von Smart‑Plugs vs. klassischen Messgeräten  
 

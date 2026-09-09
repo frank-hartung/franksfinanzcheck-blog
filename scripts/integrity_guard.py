@@ -71,6 +71,12 @@ FEST = {
     "scripts/affiliate_marketer.py",
     "scripts/lektor_guard.py",
     "scripts/blog_doctor.py",
+    # Casing-Bund (09.09.2026): casing_guard entscheidet Groess-/Kleinschreibung
+    # im gesamten Bestand inkl. Pin-Plan, tag_casing ist sein gemeinsames Lexikon
+    # mit dem Generator. Wer hier aendert, aendert die Rechtschreibung der Site –
+    # beides deshalb signaturpflichtig wie die uebrigen Dienst-wachen.
+    "scripts/casing_guard.py",
+    "scripts/tag_casing.py",
     # Marken-Design-Bewohner (Frank 12.08. ihr Markendesign dauerhaft bewachen):
     "scripts/generate_covers.py",
     "scripts/check_covers.py",

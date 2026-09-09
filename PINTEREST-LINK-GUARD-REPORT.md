@@ -1,6 +1,6 @@
 # 🔒 PINTEREST-LINK-GUARD-REPORT (Premium-Zielseiten-Garantie)
 
-**Stand:** 31.08.2026 17:10 UTC · **Modus:** LOCAL (offline)
+**Stand:** 09.09.2026 10:52 UTC · **Modus:** LOCAL (offline)
 
 **Garantie:** Jeder Pin (Masterplan + Queue + alle Artikel-Permalinks) zeigt auf eine
 echte Blogseite der eigenen Domain – nie auf das Profil, nie nackt auf CHECK24,
@@ -10,9 +10,9 @@ nie auf einen toten Slug. Bei LIVE-Prüfung zusätzlich: 200 + Rich-Pin-Meta.
 
 | Kennzahl | Wert |
 |---|---|
-| Geprüfte eindeutige Ziele | 28 |
+| Geprüfte eindeutige Ziele | 34 |
 | Probleme | **0** |
-| Lokal geprüfte URLs | 28 |
+| Lokal geprüfte URLs | 34 |
 | Live-geprüfte URLs | – |
 
 ✅ Alle Pin-Ziele verlässlich – keine toten Links, keine Sackgassen, kein Spam-Signal.

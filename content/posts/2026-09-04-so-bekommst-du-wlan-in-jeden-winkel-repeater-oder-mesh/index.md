@@ -72,13 +72,13 @@ Teurer wird es nur, wenn große Datenmengen zählen: schnelle Cloud‑Backups, g
 
 ## Sicherheit mitdenken: Updates und Gäste‑Netz  
 
-Neue Funkpunkte bedeuten neue Angriffsfläche. Schalte nach der Einrichtung sofort die automatischen Updates ein – bei Mesh‑Systemen und Fritz! Box‑Geräten ein einziger Haken im Menü. Veraltete Firmware ist der häufigste Einfallspfad im Heimnetz.  
+Neue Funkpunkte bedeuten neue Angriffsfläche. Schalte nach der Einrichtung sofort die automatischen Updates ein – bei Mesh‑Systemen und FRITZ!Box‑Geräten ein einziger Haken im Menü. Veraltete Firmware ist der häufigste Einfallspfad im Heimnetz.
 
 Zweiter Punkt: Smarthome‑Geräte wie Kameras oder Staubsaugerroboter gehören ins Gäste‑Netz, nicht ins Hauptnetz. Fast jeder aktuelle Router bietet ein separates Gäste‑WLAN. So bleibt dein Arbeitsrechner und Online‑Banking geschützt, falls ein IoT‑Gerät kompromittiert wird.  
 
 ## Der Null‑Euro‑Trick: Dein alter Router wird Verstärker  
 
-Bevor du kaufst, wirf einen Blick in die Schublade. Viele Haushalte besitzen noch den Router vom vorherigen Anbieter. Viele Fritz! Box‑Modelle lassen sich per Knopfdruck im Menü als Mesh‑Repeater anmelden und funktionieren dann wie ein zusätzlicher Mesh‑Knoten – inklusive automatischer Geräte‑Übergabe.  
+Bevor du kaufst, wirf einen Blick in die Schublade. Viele Haushalte besitzen noch den Router vom vorherigen Anbieter. Viele FRITZ!Box‑Modelle lassen sich per Knopfdruck im Menü als Mesh‑Repeater anmelden und funktionieren dann wie ein zusätzlicher Mesh‑Knoten – inklusive automatischer Geräte‑Übergabe.
 
 Stabiler wird es mit Kabel: Liegt eine LAN‑Leitung oder ein Powerline‑Paar in der Wand, lässt sich der Alt‑Router als Access Point betreiben. Das Funkspektrum bleibt dann komplett deinen Geräten vorbehalten, weil der Datenrücktransport über das Kabel läuft.  
 
@@ -131,19 +131,29 @@ Der größte Hebel liegt oft in der kostenlosen Variante: der alte Router als Me
 
 💶 **Fehlt es gar nicht am Funknetz, sondern am Tarif?** Dann ist ein Wechsel die beste Investition: Neukunden sichern sich regelmäßig Boni und Cashbacks – [**jetzt Tarife vergleichen**](/go/dsl/).  
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) **Lesetipp:** [WLAN verbessern: So bringst du stabilen Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DSL Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) **Lesetipp:** [WLAN verbessern: So bringst du stabilen Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DSL-Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
 
 ## Häufige Fragen  
 
-### Lohnt sich ein WLAN‑Repeater fürs Homeoffice? Nur bedingt. Ein Repeater halbiert die Datenrate und wechselt Geräte nicht automatisch an den stärkeren Punkt. Für tägliche Video‑Calls und große Uploads ist ein Mesh‑System oder ein per Kabel angebundener Access Point die bessere Wahl.
+### Lohnt sich ein WLAN‑Repeater fürs Homeoffice?
 
-### Kann ich meinen alten Router als Mesh‑Knoten nutzen? Häufig ja. Viele Fritz! Box‑Modelle lassen sich im Menü als Mesh‑Repeater einbinden und arbeiten dann wie ein echter Mesh‑Knoten. Mit LAN‑Kabel in der Wand funktioniert der Alt‑Router zudem als Access Point – die stabilste Lösung überhaupt.
+Nur bedingt. Ein Repeater halbiert die Datenrate und wechselt Geräte nicht automatisch an den stärkeren Punkt. Für tägliche Video‑Calls und große Uploads ist ein Mesh‑System oder ein per Kabel angebundener Access Point die bessere Wahl.
 
-### Wie viel Strom spart eine WLAN‑Zeitschaltung wirklich? Bei ca. 0,40 €/kWh und sieben Stunden Nachtabschaltung sparst du pro Zusatzgerät bis zu rund 15 € im Jahr. Bei zwei Mesh‑Knoten sind das bis zu ca. 30 € – Jahr für Jahr, ohne Komfortverlust am Tag.
+### Kann ich meinen alten Router als Mesh‑Knoten nutzen?
 
-### Repeater oder Mesh – was hilft bei dicken Altbauwänden? Beides stößt an Stahlbeton schnell an Grenzen. In diesem Fall ist **Powerline vs. Mesh** meist die wirksamere Lösung, weil das Signal durch die Stromleitung wandert. Wichtig: nur mit Rückgaberecht kaufen und 48 Stunden testen.
+Häufig ja. Viele FRITZ!Box‑Modelle lassen sich im Menü als Mesh‑Repeater einbinden und arbeiten dann wie ein echter Mesh‑Knoten. Mit LAN‑Kabel in der Wand funktioniert der Alt‑Router zudem als Access Point – die stabilste Lösung überhaupt.
 
-### Was bedeutet Band Steering? Band Steering ist eine Mesh‑Funktion, die deine Geräte automatisch auf das passende Frequenzband (2,4 GHz oder 5 GHz) und den stärksten Funkpunkt lotst. Du merkst davon nichts – außer dass das Netz überall gleichmäßig schnell bleibt.
+### Wie viel Strom spart eine WLAN‑Zeitschaltung wirklich?
+
+Bei ca. 0,40 €/kWh und sieben Stunden Nachtabschaltung sparst du pro Zusatzgerät bis zu rund 15 € im Jahr. Bei zwei Mesh‑Knoten sind das bis zu ca. 30 € – Jahr für Jahr, ohne Komfortverlust am Tag.
+
+### Repeater oder Mesh – was hilft bei dicken Altbauwänden?
+
+Beides stößt an Stahlbeton schnell an Grenzen. In diesem Fall ist **Powerline vs. Mesh** meist die wirksamere Lösung, weil das Signal durch die Stromleitung wandert. Wichtig: nur mit Rückgaberecht kaufen und 48 Stunden testen.
+
+### Was bedeutet Band Steering?
+
+Band Steering ist eine Mesh‑Funktion, die deine Geräte automatisch auf das passende Frequenzband (2,4 GHz oder 5 GHz) und den stärksten Funkpunkt lotst. Du merkst davon nichts – außer dass das Netz überall gleichmäßig schnell bleibt.
 
 👉 **Jetzt vergleichen und sparen:** [**→ Angebote prüfen**](/go/dsl/)  
 

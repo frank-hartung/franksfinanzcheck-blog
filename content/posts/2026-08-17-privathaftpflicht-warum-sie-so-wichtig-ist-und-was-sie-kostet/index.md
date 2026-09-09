@@ -60,7 +60,7 @@ Trotz des großen Schutzes ist die Haftpflicht günstig. Diese Übersicht zeigt 
 | **Single-Tarif (Standard)** | ca. 3,20 € / Monat | ca. 38,00 € / Jahr | 20–30 Mio. € pauschal |
 | **Single-Tarif (Testsieger)** | ca. 3,90 € / Monat | ca. 46,00 € / Jahr | 50 Mio. € (inkl. Schlüssel & Ausfall) |
 | **Paare / Lebensgemeinschaft** | ca. 4,80 € / Monat | ca. 58,00 € / Jahr | 50 Mio. € (zwei Erwachsene) |
-| **Familientarif (mit Kindern)** | ca. 5,60 € / Monat | ca. 67,00 € / Jahr | 50 Mio. € (inkl. deliktsunfähige Kinder) |
+| **Familientarif (mit Kindern)** | ca. 5,60 € / Monat | ca. 67,00 € / Jahr | 50 Mio. € (inkl. deliktsunfähigen Kindern) |
 | **Seniorentarif (ab 60/65)** | ca. 3,50 € / Monat | ca. 42,00 € / Jahr | Spezielle Rabatte für Rentner |
 
 Die **Haftpflichtversicherung Kosten** hängen massiv von der gewählten Selbstbeteiligung ab. Wer 150 € pro Schaden selbst zahlt, drückt den Jahresbeitrag oft um 20–30 %. Das ist sinnvoll, da die Versicherung primär gegen existenzbedrohende Großschäden schützen soll, nicht gegen den kaputten 20-Euro-Teller.
@@ -120,7 +120,7 @@ Im Partnertarif zählt der gemeinsame Haushalt (gemeldet unter derselben Adresse
 
 * **Volljährige Kinder:** Sobald das Studium oder die Ausbildung beendet ist, oder wenn das Kind auszieht und einen eigenen Hausstand gründet, ist eine eigene **Privathaftpflichtversicherung** Pflicht.
 * **Ehrenamt:** Schäden, die du während einer ehrenamtlichen Tätigkeit (Trainer im Verein, Hilfe bei der Tafel) verursachst, sind in guten Tarifen heute inklusive.
-* **Haustiere:** Hier lauert die größte Falle. Kleintiere wie Katzen, Kaninchen oder Wellensittiche sind über die Privathaftpflicht abgedeckt. Hunde und Pferde hingegen benötigen zwingend eine eigene Tierhalterhaftpflicht. Ein Biss deines Hundes wird NICHT von der Privathaftpflicht bezahlt.
+* **Haustiere:** Hier lauert die größte Falle. Kleintiere wie Katzen, Kaninchen oder Wellensittiche sind über die Privathaftpflicht abgedeckt. Hunde und Pferde hingegen benötigen zwingend eine eigene Tierhalterhaftpflicht. Ein Biss deines Hundes wird nicht von der Privathaftpflicht bezahlt.
 
 Eine Privathaftpflicht ersetzt zudem keine Hausrat-, Gebäude- oder Kfz-Police. Sie deckt nur Schäden ab, die du *anderen* zufügst. Dein eigenes kaputtes Handy ist nicht versichert, wenn du es selbst fallen lässt.
 

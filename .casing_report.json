@@ -1,0 +1,50 @@
+{
+ "stand": "2026-09-09T10:45:32Z",
+ "modus": "fix · Bestand · +Pinterest-Plan",
+ "dateien": 6,
+ "gepruefte_dateien": 52,
+ "woerter": 86525,
+ "erkannte_befunde": 8,
+ "befunde": 0,
+ "hart": 0,
+ "gefixt": 8,
+ "geparkt": [],
+ "dateien_liste": [
+  {
+   "pfad": "content/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/index.md",
+   "erkannte_befunde": 1,
+   "befunde": 0,
+   "woerter": 2024
+  },
+  {
+   "pfad": "content/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/index.md",
+   "erkannte_befunde": 1,
+   "befunde": 0,
+   "woerter": 1355
+  },
+  {
+   "pfad": "content/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/index.md",
+   "erkannte_befunde": 1,
+   "befunde": 0,
+   "woerter": 1488
+  },
+  {
+   "pfad": "content/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/index.md",
+   "erkannte_befunde": 1,
+   "befunde": 0,
+   "woerter": 1694
+  },
+  {
+   "pfad": "content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md",
+   "erkannte_befunde": 2,
+   "befunde": 0,
+   "woerter": 1812
+  },
+  {
+   "pfad": "content/posts/2026-09-08-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/index.md",
+   "erkannte_befunde": 2,
+   "befunde": 0,
+   "woerter": 1851
+  }
+ ]
+}

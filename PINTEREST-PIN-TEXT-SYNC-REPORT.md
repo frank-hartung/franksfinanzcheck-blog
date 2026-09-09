@@ -1,11 +1,11 @@
 # 🖋 PINTEREST-PIN-TEXT-SYNC-REPORT (Premium-Pin-Texte)
 
-**Stand:** 31.08.2026 17:10 UTC · **Modus:** APPLY
+**Stand:** 09.09.2026 10:46 UTC · **Modus:** DRY-RUN
 
 **Regel:** Jeder Artikel trägt die Premium-Texte des besten Masterplan-Pins
 (Schwelle 1.2) + das `pinwand`-Feld für das Multi-Board-Routing.
 
-Artikel: 25 · geänderte: 0 · Pins im Plan: 73
+Artikel: 41 · geänderte: 0 · Pins im Plan: 48
 
 | Artikel | Plan-Pin | Score | Status |
 |---|---|---|---|
@@ -13,9 +13,9 @@ Artikel: 25 · geänderte: 0 · Pins im Plan: 73
 | 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie | 32 | 2.63 | identisch |
 | 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-upda | 33 | 2.52 | identisch |
 | 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-ta | 25 | 1.61 | identisch |
-| 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeide | 5 | 1.81 | identisch |
+| 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeide | 5 | 1.36 | identisch |
 | 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbie | 34 | 2.66 | identisch |
-| 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-go | 13 | 0.84 | identisch |
+| 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-go | - | 0.00 | keine (Pin-Ziel ist ein anderer Artikel) |
 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | 3 | 1.39 | identisch |
 | 2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige | 35 | 1.72 | identisch |
 | 2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-de | 27 | 1.70 | identisch |
@@ -27,13 +27,29 @@ Artikel: 25 · geänderte: 0 · Pins im Plan: 73
 | 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-fi | 2 | 1.99 | identisch |
 | 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-z | 38 | 1.98 | identisch |
 | 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier | 39 | 2.56 | identisch |
-| 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub | 25 | 1.59 | identisch |
-| 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus- | 10 | 1.57 | identisch |
+| 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub | 6 | 1.45 | identisch |
+| 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus- | 1 | 1.44 | identisch |
 | 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preissp | 40 | 2.55 | identisch |
-| 2026-08-26-dns-server-wechseln-schnelleres-sichereres-intern | 18 | 2.16 | identisch |
-| 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-08-26-dns-server-wechseln-schnelleres-sichereres-intern | 18 | 2.20 | identisch |
+| 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife | - | 0.00 | keine (Pin-Ziel ist ein anderer Artikel) |
 | 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen | 15 | 1.63 | identisch |
 | 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-ve | 23 | 1.81 | identisch |
+| 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-sch | 30 | 1.83 | identisch |
+| 2026-09-03-hausratversicherung-kosten-leistungen-vergleich | - | 0.00 | keine (Pin-Ziel ist ein anderer Artikel) |
+| 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen | - | 0.00 | keine (Pin-Ziel ist ein anderer Artikel) |
+| 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-besc | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-k | - | 0.00 | keine (Pin-Ziel ist ein anderer Artikel) |
+| 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsf | - | 0.00 | keine (Pin-Ziel ist ein anderer Artikel) |
+| 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizie | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stop | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-08-50-30-20-regel-beherrsche-dein-budget-im-jahr-202 | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfa | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-po | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 
 ---
 
