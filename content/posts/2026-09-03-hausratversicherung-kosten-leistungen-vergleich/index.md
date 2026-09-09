@@ -25,17 +25,18 @@ cover:
 ---
 
 
+
 Stell dir vor: Du kommst nach dem Wochenende nach Hause. Die Tür steht offen. Im Flur liegt dein Laptop, daneben die leere Hülle. Im Schlafzimmer fehlt der Schmuck, im Wohnzimmer der Fernseher. Die Polizei schätzt den Schaden auf 18.000 Euro. Deine Ersparnisse decken das nicht.
 
 Genau dafür gibt es die [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/). Sie ersetzt deinen Hausrat nach einem Einbruch zum Neuwert. Trotzdem zögern viele. Sie halten den Tarif für teuer oder verstehen die Leistungen nicht. Dabei kostet guter Schutz oft weniger als eine Pizza im Monat.
 
 **Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Dieser Ratgeber zeigt, was eine [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) leisten sollte. Du lernst, wie du die Summe richtig berechnest und beim Vergleich Geld sparst. Am Ende gibt es eine Checkliste für den Abschluss.
+Dieser Ratgeber zeigt, was eine Hausratversicherung leisten sollte. Du lernst, wie du die Summe richtig berechnest und beim Vergleich Geld sparst. Am Ende gibt es eine Checkliste für den Abschluss.
 
 ## Was die Hausratversicherung abdeckt
 
-Die [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) bündelt fast alle deine beweglichen Sachen an einem Ort. Versichert ist alles, was du zum Leben brauchst: Möbel, Elektronik, Kleidung, Küchengeräte, Bücher und Fahrräder im Keller.
+Die Hausratversicherung bündelt fast alle deine beweglichen Sachen an einem Ort. Versichert ist alles, was du zum Leben brauchst: Möbel, Elektronik, Kleidung, Küchengeräte, Bücher und Fahrräder im Keller.
 
 Der Versicherer zahlt, wenn eine versicherte Gefahr dein Eigentum beschädigt. Dazu gehören klassisch:
 
@@ -134,7 +135,7 @@ Nutzt du einen Vergleichsrechner, wisse: Die günstigsten Tarife haben nicht imm
 - Kombinationsrabatte mit Haftpflicht oder Kfz-Versicherung nutzen
 - Jährlichen Vergleich einplanen, denn gute Tarife wechseln schneller als gedacht
 
-Mit dieser Liste findest du Schutz, der im Ernstfall trägt – ohne zu viel Beitrag. Wer auch sein Haus absichern will, findet im Ratgeber zum [Vorsorge-Update für dein Haus](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) mehr Infos.
+Mit dieser Liste findest du Schutz, der im Ernstfall trägt – ohne zu viel Beitrag. Wer auch sein Haus absichern will, findet im Ratgeber zum Vorsorge-Update für dein Haus mehr Infos.
 
 ## Häufige Fragen zur Hausratversicherung
 

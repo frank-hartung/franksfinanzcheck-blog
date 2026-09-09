@@ -27,3 +27,6 @@
 {"ts": "2026-09-09T10:46:46Z", "module": "pinterest_link_guard", "action": "local", "input": {"targets": 34}, "output": {"problems": 0}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-09-09T10:46:47Z", "module": "pinterest_pin_text_sync", "action": "check", "input": {"posts": 41}, "output": {"changed": 0}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-09-09T10:52:31Z", "module": "pinterest_link_guard", "action": "local", "input": {"targets": 34}, "output": {"problems": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-09T11:27:48Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 49}, "output": {"changes": 118}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-09T11:27:49Z", "module": "fix_spaces", "action": "apply", "input": {"files": 49}, "output": {"fixes": 770}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-09T11:29:29Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 43}, "output": {"changed": 1}, "status": "ok", "critical": false, "commit": null}

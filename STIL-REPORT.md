@@ -1,50 +1,46 @@
 # 🎭 STIL-REPORT (stil_guard.py)
 
-**Stand:** 2026-09-07 21:07 UTC
-**Artikel:** 5 · **mit Stil-Funden:** 5
+**Stand:** 2026-09-09 11:30 UTC
+**Artikel:** 4 · **mit Stil-Funden:** 4
 
 ## 📐 Flotten-Lesbarkeit (LIX)
 
 | Median | Schnitt | Zielkorridor |
 |---|---|---|
-| 45.8 | 46.5 | 35-50 (Ratgeber-Gut) |
+| 51.0 | 49.2 | 35-50 (Ratgeber-Gut) |
 
 ### 📕 Schwer lesbar (Top 5, hoechster LIX zuerst)
 
-- `2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor` — LIX 48.2 · Saetze o 12.2 W · Passiv 5 %
-- `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` — LIX 47.2 · Saetze o 12.0 W · Passiv 0 %
-- `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen` — LIX 45.8 · Saetze o 9.8 W · Passiv 0 %
-- `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` — LIX 45.7 · Saetze o 11.1 W · Passiv 0 %
-- `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` — LIX 45.5 · Saetze o 12.5 W · Passiv 1 %
+- `2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag` — LIX 55.9 · Saetze o 15.3 W · Passiv 0 %
+- `2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` — LIX 51.0 · Saetze o 11.2 W · Passiv 0 %
+- `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` — LIX 46.0 · Saetze o 11.1 W · Passiv 0 %
+- `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` — LIX 44.1 · Saetze o 10.7 W · Passiv 0 %
 
 ### 📗 Leicht lesbar (Top 5)
 
-- `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` — LIX 45.5
-- `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` — LIX 45.7
-- `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen` — LIX 45.8
-- `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` — LIX 47.2
-- `2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor` — LIX 48.2
+- `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` — LIX 44.1
+- `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` — LIX 46.0
+- `2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` — LIX 51.0
+- `2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag` — LIX 55.9
 
 ## 🔧 Fundstellen (fuer redaktionelle Politur mit --ai-budget)
 
-### `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum`
-- S1 Satzanfang-Echo: „das“ ×12
-- S4 Weiche-Wolke 12.9/100W
+### `2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag`
+- S1 Satzanfang-Echo: „das“ ×6
+- S4 Weiche-Wolke 9.5/100W
+- S6 LIX 55.9 > 55 (schwer lesbar)
 
-### `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler`
-- S1 Satzanfang-Echo: „das“ ×16
-- S4 Weiche-Wolke 13.1/100W
+### `2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer`
+- S1 Satzanfang-Echo: „das“ ×6
+- S4 Weiche-Wolke 9.9/100W
+- S7 Absatz-Monster: 2 Bloecke > 8 Saetze
 
-### `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort`
-- S1 Satzanfang-Echo: „das“ ×17
-- S4 Weiche-Wolke 6.7/100W
+### `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer`
+- S1 Satzanfang-Echo: „das“ ×8
+- S4 Weiche-Wolke 9.3/100W
 
-### `2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor`
+### `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster`
 - S1 Satzanfang-Echo: „das“ ×11
-- S4 Weiche-Wolke 7.9/100W
-
-### `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen`
-- S1 Satzanfang-Echo: „ein“ ×11
 
 ---
 _Wirkung freigestellt. Messung ist Report, kein Zwang. Stil-Verschiebungen passieren ueber redaktions-politur.yml._

@@ -28,7 +28,7 @@ Die Vorfreude ist groß. Doch am Schalter kommt oft das böse Erwachen. Der Verm
 
 Und selbst dann warten Kostenfallen: „Selbstbeteiligung“, „Zusatzfahrer“, „Tankregelung“ und „Reifenschutz“. Sie verdoppeln schnell den Schnäppchenpreis.
 
-Wie du einen **Mietwagen ohne Kaution** buchst (oder die Kaution klein hältst), zeigt dir diese Anleitung. Außerdem verrät sie, welche Versicherung wirklich schützt und wie du am Urlaubsort bis zu **40&nbsp;%** sparst.
+Wie du einen **[Mietwagen](../../posts/2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer/) ohne Kaution** buchst (oder die Kaution klein hältst), zeigt dir diese Anleitung. Außerdem verrät sie, welche Versicherung wirklich schützt und wie du am Urlaubsort bis zu **40&nbsp;%** sparst.
 
 ---
 

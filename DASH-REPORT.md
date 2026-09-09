@@ -1,10 +1,8 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-09-09 08:19 UTC · Modus: FIX+KI
+**Stand:** 2026-09-09 11:30 UTC · Modus: FIX
 
-## ✅ Automatisch korrigiert (1 Dateien)
-
-- `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md`: Regel-Fixes 1, KI-Umformulierungen 0
+🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
 
 ---
 _Deterministisch: Gedankenstrich-Typ, Bis-Striche, Doppelminus · KI-Schiedsrichter (S1/S3) nur mit --ai. Geschützt: Front-Matter, Listen, Tabellen, Überschriften, URLs, Code._

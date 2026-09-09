@@ -27,6 +27,11 @@ pinwand: "Versicherungen clever wechseln & sparen"
 Wer eine **[Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) vergleichen** will, sieht viele Klauseln, Optionen und große Preisunterschiede. Für dasselbe Haus zahlen Anbieter oft zwischen **380 € und über 850 €** im Jahr. Welche Bausteine zählen und wie du dein Haus gut absicherst, zeigen wir jetzt Schritt für Schritt.
 
 ---
+Dein Haus ist meist deine größte Investition. Ein schweres Unwetter, ein Brand oder ein Rohrbruch kann es schnell zerstören. Ohne guten Schutz droht dann der [finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Ruin.
+
+Wer eine **[Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) vergleichen** will, sieht viele Klauseln, Optionen und große Preisunterschiede. Für dasselbe Haus zahlen Anbieter oft zwischen **380 € und über 850 €** im Jahr. Welche Bausteine zählen und wie du dein Haus gut absicherst, zeigen wir jetzt Schritt für Schritt.
+
+---
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Schütze dein Hab und Gut mit den fairsten Konditionen am Markt: [**Versicherungsvergleich starten**](/go/hausrat/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
@@ -35,15 +40,13 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Eine [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) schützt dein Haus und alles, was fest damit verbunden ist. Dazu zählen etwa Heizung, Bad und fest eingebaute Küchen. Diese Gefahren deckt sie ab:
 
-1. **Feuer & Brand:** Schutz bei offenem Brand, Blitzeinschlag, Explosion, Implosion oder Verpuffung sowie Schäden durch Löschwasser und Rauchgase.  
-2. **Leitungswasser:** Schutz bei bestimmungswidrig austretendem Wasser aus Zu‑ und Ableitungsrohren der Wasserversorgung, Heizungsrohren oder Waschmaschinenschläuchen einschließlich Frost‑ und Bruchschäden an Rohrleitungen.  
+1. **Feuer & Brand:** Schutz bei offenem Brand, Blitzeinschlag, Explosion, Implosion oder Verpuffung sowie Schäden durch Löschwasser und Rauchgase. 2. **Leitungswasser:** Schutz bei bestimmungswidrig austretendem Wasser aus Zu‑ und Ableitungsrohren der Wasserversorgung, Heizungsrohren oder Waschmaschinenschläuchen einschließlich Frost‑ und Bruchschäden an Rohrleitungen.
 3. **Sturm & Hagel:** Deckung für Schäden durch Stürme ab Windstärke 8 (ab 62 km/h) sowie Hagelschlag an Dach, Fassade, Fenstern und Solaranlagen.
 
 ### Kostenfaktor Selbstbeteiligung
 
 Eine höhere Selbstbeteiligung senkt die Jahresprämie merklich. Beispiel:  
-* 0 € SB → 420 € Jahresbeitrag  
-* 500 € SB → 380 € Jahresbeitrag  
+* 0 € SB → 420 € Jahresbeitrag * 500 € SB → 380 € Jahresbeitrag
 * 1.000 € SB → 340 € Jahresbeitrag  
 
 Rechne die mögliche Ersparnis gegen das Risiko ab, dass du im Schadensfall mehr aus der Tasche zahlst. Für Leitungswasserschäden, die durchschnittlich 1.200 € pro Vorfall kosten, lohnt sich meist eine SB von 500 €, weil die meisten Schäden unter dieser Schwelle bleiben.
@@ -58,8 +61,7 @@ Der optionale Zusatz **Elementarschutz** deckt dann diese Schäden ab:
 
 ### Zahlen, die überzeugen
 
-* Laut GDV lag die durchschnittliche Schadenhöhe für Elementarschäden 2025 bei **12.300 €** pro Vorfall.  
-* In den letzten zehn Jahren haben 27 % aller Wohngebäude in den ZÜRS‑Zonen 1‑2 mindestens einen Starkregen‑Schaden erlitten.  
+* Laut GDV lag die durchschnittliche Schadenhöhe für Elementarschäden 2025 bei **12.300 €** pro Vorfall. * In den letzten zehn Jahren haben 27 % aller Wohngebäude in den ZÜRS‑Zonen 1‑2 mindestens einen Starkregen‑Schaden erlitten.
 * Der Aufpreis für den Elementarschutz liegt zwischen **80 € und 300 €** jährlich – ein Bruchteil der durchschnittlichen Schadenssumme.
 
 ## Die 5 wichtigsten Klauseln im Kleingedruckten
@@ -98,7 +100,7 @@ Kannst du nach einem Schaden nicht im Haus wohnen, brauchst du ein Hotel. Die Ve
 
 ## Was 2026 in der Police stehen muss – ohne Marketingnebel
 
-So eine [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) nimmt man nicht nebenbei mit. Sie zahlt bei Feuer, Leitungswasser, Sturm und Hagel. Elementarschäden deckt nur eine Zusatz‑Klausel.
+So eine Wohngebäudeversicherung nimmt man nicht nebenbei mit. Sie zahlt bei Feuer, Leitungswasser, Sturm und Hagel. Elementarschäden deckt nur eine Zusatz‑Klausel.
 
 Ohne Elementar bleibst du nach Starkregen auf dem Keller sitzen. Der Zusatz kostet oft 80–300 € extra im Jahr. In manchen ZÜRS‑Zonen bekommst du ihn schwer. Vergleiche darum nicht nur den Preis. Prüfe auch, ob dich der Versicherer überhaupt nimmt.
 
@@ -118,12 +120,9 @@ Bist du unterversichert, kürzt der Versicherer im Schaden mit. Beispiel: Ein Ha
 
 ## Vergleich in sechs Schritten
 
-1. **Wertermittlung** – Wohnfläche, Wiederaufbauwert und Sonderausstattungen exakt erfassen.  
-2. **Elementar‑Ja/Nein** – Lage, Hanglage, Kanalisation und die letzten 10 Jahre Starkregen‑Statistik prüfen.  
-3. **Klauseln** – Grobe Fahrlässigkeit, Ableitungsrohre, Photovoltaik, Wärmepumpe und mögliche Unterversicherungs‑Verzicht‑Klausel.  
-4. **Selbstbeteiligung** – Zwei Angebote mit 0 € und 500 € SB vergleichen; rechne die Gesamtkosten über 10 Jahre.  
-5. **Vorschäden ehrlich angeben** – sonst Gefahr der Anfechtung im Schadensfall.  
-6. **Altvertrag erst kündigen**, wenn die neue Police mit Beginn‑Datum vorliegt. Bei Immobilienkredit oft Bank als Gläubiger eintragen.
+1. **Wertermittlung** – Wohnfläche, Wiederaufbauwert und Sonderausstattungen exakt erfassen. 2. **Elementar‑Ja/Nein** – Lage, Hanglage, Kanalisation und die letzten 10 Jahre Starkregen‑Statistik prüfen.
+3. **Klauseln** – Grobe Fahrlässigkeit, Ableitungsrohre, Photovoltaik, Wärmepumpe und mögliche Unterversicherungs‑Verzicht‑Klausel. 4. **Selbstbeteiligung** – Zwei Angebote mit 0 € und 500 € SB vergleichen; rechne die Gesamtkosten über 10 Jahre.
+5. **Vorschäden ehrlich angeben** – sonst Gefahr der Anfechtung im Schadensfall. 6. **Altvertrag erst kündigen**, wenn die neue Police mit Beginn‑Datum vorliegt. Bei Immobilienkredit oft Bank als Gläubiger eintragen.
 
 Ein Gebäudevertrag ist langweilig, bis er der einzige Grund ist, warum du nach einem Sturm nicht den Kredit nachfinanzieren musst.
 
@@ -136,7 +135,7 @@ Ein Gebäudevertrag ist langweilig, bis er der einzige Grund ist, warum du nach 
 | Ostdeutschland (Flachland) | 3 | 440 € | 150 € |
 | Westdeutschland (Mischgebiet) | 2 | 395 € | 110 € |
 
-In ZÜRS‑Stufe 3 (z. B. Teile von Brandenburg, Sachsen) ist der Elementarschutz fast immer unverzichtbar, weil Rückstau und Grundwasser‑Einbruch statistisch häufiger auftreten.
+In ZÜRS‑Stufe 3 (z. B. teile von Brandenburg, Sachsen) ist der Elementarschutz fast immer unverzichtbar, weil Rückstau und Grundwasser‑Einbruch statistisch häufiger auftreten.
 
 ## Checkliste zum Download
 
@@ -155,10 +154,8 @@ In ZÜRS‑Stufe 3 (z. B. Teile von Brandenburg, Sachsen) ist der Elementars
 
 ## Vorteile von Online‑Vergleichsplattformen
 
-* **Zeitersparnis:** 5‑10 Minuten für bis zu 12 Angebote.  
-* **Transparenz:** Alle wichtigen Klauseln (grobe Fahrlässigkeit, Elementar) werden im Ergebnis‑Report hervorgehoben.  
-* **Preis‑Garantie:** Viele Plattformen bieten die günstigste Prämie plus 30‑Tage‑Rücktrittsrecht.  
-* **Unabhängige Bewertung:** Nutzer‑Reviews und Schadens‑Statistiken geben Aufschluss über Service‑Qualität.
+* **Zeitersparnis:** 5‑10 Minuten für bis zu 12 Angebote. * **Transparenz:** Alle wichtigen Klauseln (grobe Fahrlässigkeit, Elementar) werden im Ergebnis‑Report hervorgehoben.
+* **Preis‑Garantie:** Viele Plattformen bieten die günstigste Prämie plus 30‑Tage‑Rücktrittsrecht. * **Unabhängige Bewertung:** Nutzer‑Reviews und Schadens‑Statistiken geben Aufschluss über Service‑Qualität.
 
 Achte jedoch darauf, dass die Plattform **nicht** nur den Preis, sondern auch die Vertragsbedingungen filtert. Ein reiner „Billig‑Tarif“ ohne Elementarschutz kann im Ernstfall teurer werden.
 
@@ -171,7 +168,7 @@ Sie ist neben der [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-w
 ## Häufige Fragen
 
 ### Was ist der Unterschied zwischen Wohngebäude- und Hausratversicherung?
-Faustregel: Stellst du dein Haus auf den Kopf und schüttelst es, fällt alles heraus, was die Hausratversicherung versichert (Möbel, Kleidung, Elektrogeräte). Alles, was fest mit dem Haus verbunden bleibt (Wände, Dach, Heizung, Parkett), deckt die [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) ab.
+Faustregel: Stellst du dein Haus auf den Kopf und schüttelst es, fällt alles heraus, was die Hausratversicherung versichert (Möbel, Kleidung, Elektrogeräte). Alles, was fest mit dem Haus verbunden bleibt (Wände, Dach, Heizung, Parkett), deckt die Wohngebäudeversicherung ab.
 
 ### Muss ich meine Photovoltaikanlage extra versichern?
 Solaranlagen auf dem Dach sind oft gegen einen kleinen Aufpreis mitversichert, manchmal ohne Extra‑Beitrag. Melde die Anlage deinem Versicherer sofort, sonst kann die Leistung im Schadensfall gekürzt werden.

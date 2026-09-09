@@ -50,7 +50,7 @@ Eine günstige Karte verlangt in keinem dieser Fälle zu viel. Kostenlose Karten
 
 Viele Banken nennen ihre Karten Kreditkarten, obwohl es Debitkarten sind. Der Unterschied ist einfach: Bei einer echten Kreditkarte bekommst du einen Rahmen und zahlst später. Bei einer Debitkarte bucht die Bank jeden Kauf sofort ab.
 
-Für die meisten Fälle reicht eine Debitkarte mit Kreditkarten-Funktion. Sie funktioniert weltweit, online und am Automaten. Eine echte Kreditkarte lohnt sich für Mietwagen, Hotels oder Geschäftsreisen. Dort musst du oft eine Karte hinterlegen.
+Für die meisten Fälle reicht eine Debitkarte mit Kreditkarten-Funktion. Sie funktioniert weltweit, online und am Automaten. Eine echte Kreditkarte lohnt sich für [Mietwagen](../../posts/2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer/), Hotels oder Geschäftsreisen. Dort musst du oft eine Karte hinterlegen.
 
 Reist du oft, prüfe vorher: Kostet die Karte im Ausland extra? Manche Gratis-Karten nehmen pro Zahlung eine Gebühr. Bei zwei Wochen Urlaub sind das schnell 20 bis 30 Euro.
 

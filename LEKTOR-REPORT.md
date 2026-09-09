@@ -1,16 +1,16 @@
 # ✒️ LEKTOR-REPORT (lektor_guard.py)
 
-**Stand:** 2026-09-09 08:19 UTC · Modus: FIX+KI
+**Stand:** 2026-09-09 11:30 UTC · Modus: FIX
 
 | Regel | Anzahl |
 |---|---|
 | L1 Doppelwoerter (Auto) | 0 |
 | L2 Fuehl-Phrasen (Auto) | 0 |
-| L3 Personenkonsistenz | 2 |
+| L3 Personenkonsistenz | 0 |
 | L4 Ausrufezeichen/Grenze | 0 |
-| L5 Echo (Report/KI-gefixt) | 2/1 |
+| L5 Echo (Report) | 2/0 |
 | L7 Nominalstil-Radar (Report) | 0 |
-| L8 Weichmacher-Dichte (Report) | 11 |
+| L8 Weichmacher-Dichte (Report) | 20 |
 | L9 Satzanfangs-Echo (Report) | 1 |
 | L10 Zahlenschreibweise (Auto) | 0 |
 | L11 Werbe-Intensivel (Auto) | 0 |
@@ -21,12 +21,10 @@
 
 ## Fundstellen (Auswahl)
 
-- `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md` Z.38: **L9-Satzanfang** „er“ ×3: Betrachte den Notgroschen daher als deine persönlic
-- `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md` Z.100: **L3-Formal-Ich** Wie schaffst du es nun, diesen Betrag anzusparen, ohne dein 
-- `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md` Z.106: **L8-Weichmacher** 7+ Konjunktive – Wenn du merkst, dass deine Fixkosten mehr a
-- `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md` Z.110: **L3-Formal-Ich** Es gibt ein paar Stolperfallen, die ich immer wieder beobach
-- `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md` Z.114: **L5-Echo** spart: **Keine Automatisierung:** Wer am Monatsende spart, w
-- `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md` Z.152: **L5-Echo** jetzt/vergleichen: 👉 **Jetzt vergleichen und sparen:** [**→ 
+- `content/posts/2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag/index.md` Z.156: **L5-Echo** schritt: Sobald du die erste Einsparung realisiert hast, kan
+- `content/posts/2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer/index.md` Z.124: **L5-Echo** vollgetankt: Du bekommst den Wagen vollgetankt und gibst ihn
+- `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md` Z.49: **L9-Satzanfang** „er“ ×3: Betrachte den Notgroschen daher als deine persönlic
+- `content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md` Z.122: **L8-Weichmacher** 7+ Konjunktive – Wenn du merkst, dass deine Fixkosten mehr a
 
 ---
 _Verlagslektorat: Du-Duktus, keine Echo-Woerter, keine Buerokratie-Phrasen, max 3 Ausrufezeichen. KI nur bei --ai._

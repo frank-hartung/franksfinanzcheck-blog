@@ -1,11 +1,11 @@
 # 🖋 PINTEREST-PIN-TEXT-SYNC-REPORT (Premium-Pin-Texte)
 
-**Stand:** 09.09.2026 10:46 UTC · **Modus:** DRY-RUN
+**Stand:** 09.09.2026 11:29 UTC · **Modus:** APPLY
 
 **Regel:** Jeder Artikel trägt die Premium-Texte des besten Masterplan-Pins
 (Schwelle 1.2) + das `pinwand`-Feld für das Multi-Board-Routing.
 
-Artikel: 41 · geänderte: 0 · Pins im Plan: 48
+Artikel: 43 · geänderte: 1 · Pins im Plan: 48
 
 | Artikel | Plan-Pin | Score | Status |
 |---|---|---|---|
@@ -49,6 +49,8 @@ Artikel: 41 · geänderte: 0 · Pins im Plan: 48
 | 2026-09-08-50-30-20-regel-beherrsche-dein-budget-im-jahr-202 | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 | 2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfa | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 | 2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaet | - | 0.00 | keine (Pin-Ziel ist ein anderer Artikel) |
+| 2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer | 3 | 1.36 | Pin 3 „Urlaubskasse clever aufbessern: 7 Tipps …“ |
 | 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-po | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 
 ---

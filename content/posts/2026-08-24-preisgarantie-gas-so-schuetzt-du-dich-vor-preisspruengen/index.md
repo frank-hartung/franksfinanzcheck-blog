@@ -24,6 +24,7 @@ pin_title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
 pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel: bevor die Heizperiode die Preise anzieht. Vergleiche Tarife mit Preisgarantie und Wechselbonus, in nur 5 Minuten Aufwand. Jetzt die Schritt-für-Schritt-Anleitung lesen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
+
 Wer die Energiepreise verfolgt, weiß: Die Zeit der stabilen Niedrigpreise ist vorbei. Krisen, kalte Winter und der CO₂‑Preis lassen die Preise an der Börse immer wieder springen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -34,7 +35,7 @@ Gibt dein Versorger diese Spitzen an dich weiter, drohen hohe Nachzahlungen. Ein
 ---
 Wer die Energiepreise verfolgt, weiß: Die Zeit der stabilen Niedrigpreise ist vorbei. Krisen, kalte Winter und der CO₂‑Preis lassen die Preise an der Börse immer wieder springen.
 
-Gibt dein Versorger diese Spitzen an dich weiter, drohen hohe Nachzahlungen. Eine wasserdichte **[Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)** wirkt wie ein Schutzschild für dein Budget. Preissprünge abfedern, die richtige Garantie wählen, Klauseln prüfen: Diese drei Schritte führen durch den Artikel.
+Gibt dein Versorger diese Spitzen an dich weiter, drohen hohe Nachzahlungen. Eine wasserdichte **Gaspreisgarantie** wirkt wie ein Schutzschild für dein Budget. Preissprünge abfedern, die richtige Garantie wählen, Klauseln prüfen: Diese drei Schritte führen durch den Artikel.
 
 
 ---
@@ -81,7 +82,7 @@ Diese Tabelle zeigt die Kosten bei einem Preissprung im Winter. Beispiel: Einfam
 
 ## Preisgarantie im Vergleich: 12‑Monats‑ vs. 24‑Monats‑Bindung
 
-Eine längere Bindung senkt häufig den Arbeitspreis, erhöht aber die Bindungsdauer. Die folgende Gegenüberstellung hilft beim **[Gastarif wechseln](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)**.
+Eine längere Bindung senkt häufig den Arbeitspreis, erhöht aber die Bindungsdauer. Die folgende Gegenüberstellung hilft beim **[Gastarif wechseln](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/)**.
 
 | Merkmal | 12‑Monats‑Garantie | 24‑Monats‑Garantie |
 |:---|:---|:---|
@@ -120,21 +121,16 @@ Kombiniert kannst du mit diesen Maßnahmen leicht 10 % deiner Jahresrechnung e
 
 ## Schritt‑für‑Schritt: Gasanbieter mit Preisgarantie wechseln
 
-1. **Jahresabrechnung bereitlegen:** Notiere deinen Jahresverbrauch in kWh sowie die Zählernummer deines Gaszählers.  
-2. **PLZ in den Vergleichsrechner eingeben:** Filtere nach Tarifen mit mindestens 12 Monaten Preisgarantie und hoher Weiterempfehlungsquote von über 85 %. Achte auf verbraucherfreundliche Vertragslaufzeiten von 12 Monaten.  
-3. **Auftrag digital absenden:** Der neue Anbieter kündigt deinen alten Vertrag fristgerecht und übernimmt die gesamte formale Abwicklung bei Netzbetreiber und Vorversorger.  
-4. **Zählerstand zum Stichtag ablesen:** Lies am Tag der Belieferung den Gaszähler ab und übermittle den Stand online an deinen Netzbetreiber für eine exakte Abrechnung.  
+1. **Jahresabrechnung bereitlegen:** Notiere deinen Jahresverbrauch in kWh sowie die Zählernummer deines Gaszählers. 2. **PLZ in den Vergleichsrechner eingeben:** Filtere nach Tarifen mit mindestens 12 Monaten Preisgarantie und hoher Weiterempfehlungsquote von über 85 %. Achte auf verbraucherfreundliche Vertragslaufzeiten von 12 Monaten.
+3. **Auftrag digital absenden:** Der neue Anbieter kündigt deinen alten Vertrag fristgerecht und übernimmt die gesamte formale Abwicklung bei Netzbetreiber und Vorversorger. 4. **Zählerstand zum Stichtag ablesen:** Lies am Tag der Belieferung den Gaszähler ab und übermittle den Stand online an deinen Netzbetreiber für eine exakte Abrechnung.
 
 Wie du mit der richtigen Heizungs‑Wartung sparst, zeigen [unsere Spätsommer‑Tipps zur Heizungsoptimierung](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) und der [Vergleich günstiger Gastarife 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/).
 
 ## Checkliste für den Tarifwechsel – alles im Blick
 
-- [ ] Jahresverbrauch (kWh) und Zählernummer notiert  
-- [ ] Mindestens 12 Monate Preisgarantie im Vergleichsfilter aktiviert  
-- [ ] Bonusbedingungen (Auszahlungszeitpunkt, Mindestlaufzeit) geprüft  
-- [ ] AGB auf versteckte Nachjustierungsklauseln gescannt  
-- [ ] Kündigungsfrist nach Garantieende notiert (max. 1 Monat)  
-- [ ] Erinnerungs‑Kalendereintrag für „Garantie‑Check“ 10 Monate nach Vertragsstart  
+- [ ] Jahresverbrauch (kWh) und Zählernummer notiert - [ ] Mindestens 12 Monate Preisgarantie im Vergleichsfilter aktiviert
+- [ ] Bonusbedingungen (Auszahlungszeitpunkt, Mindestlaufzeit) geprüft - [ ] AGB auf versteckte Nachjustierungsklauseln gescannt
+- [ ] Kündigungsfrist nach Garantieende notiert (max. 1 Monat) - [ ] Erinnerungs‑Kalendereintrag für „Garantie‑Check“ 10 Monate nach Vertragsstart
 
 Mit dieser Liste vergisst du keine Details und kannst sicherstellen, dass du wirklich von einer **Preisgarantie Gas** profitierst.
 
@@ -165,19 +161,15 @@ Tarife ohne Garantie gewinnen nur in Szenario A. Und nur, wenn du monatlich wech
 
 ## Kleingedrucktes, das Preissprünge trotz „Garantie“ durchlässt
 
-- „Anpassung bei Änderung der gesetzlichen Abgaben“ ohne Obergrenze  
-- Garantie nur auf den Energieeinkauf, nicht auf Netzentgelte  
-- Boni, die als Gutschrift in Monat 13 kommen – und verfallen, wenn du vorher gehst  
-- Paketpreise mit Strom + Gas, bei denen die Gas‑Garantie kürzer ist als die Strom‑Bindung  
+- „Anpassung bei Änderung der gesetzlichen Abgaben“ ohne Obergrenze - Garantie nur auf den Energieeinkauf, nicht auf Netzentgelte
+- Boni, die als Gutschrift in Monat 13 kommen – und verfallen, wenn du vorher gehst - Paketpreise mit Strom + Gas, bei denen die Gas‑Garantie kürzer ist als die Strom‑Bindung
 
 Treffen zwei dieser Punkte zu, rechne den Tarif wie ohne Garantie. Vergleiche ihn nur über den echten Preis.
 
 ## Ablauf in vier Schritten, ohne Versorgungslücke
 
-1. Verbrauch und Zähler von der letzten Rechnung übernehmen.  
-2. Drei Tarife mit voller Garantie ≥ 12 Monate und Bonusbedingungen nebeneinanderlegen.  
-3. Online abschließen, Widerrufsfrist notieren (14 Tage), aber nicht aus Angst liegen lassen – der Starttermin liegt meist Wochen in der Zukunft.  
-4. Erst wenn die Bestätigung mit Lieferbeginn da ist, den Kalender auf „8 Wochen vorher neu vergleichen“ setzen. Den Altvertrag kündigt in der Regel der neue Anbieter.  
+1. Verbrauch und Zähler von der letzten Rechnung übernehmen. 2. Drei Tarife mit voller Garantie ≥ 12 Monate und Bonusbedingungen nebeneinanderlegen.
+3. Online abschließen, Widerrufsfrist notieren (14 Tage), aber nicht aus Angst liegen lassen – der Starttermin liegt meist Wochen in der Zukunft. 4. Erst wenn die Bestätigung mit Lieferbeginn da ist, den Kalender auf „8 Wochen vorher neu vergleichen“ setzen. Den Altvertrag kündigt in der Regel der neue Anbieter.
 
 Preissprünge wird es immer geben. Du entscheidest nur, ob sie in deiner Küche landen oder der Versorger sie trägt.
 

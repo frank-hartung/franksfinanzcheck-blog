@@ -1,11 +1,14 @@
 # 📏📝 LENGTH-REPORT (length_guard.py)
 
-**Stand:** 2026-09-07 21:07 UTC · Modus: FIX
+**Stand:** 2026-09-09 11:30 UTC · Modus: FIX
 
-**Geprüft:** 2 Seiten | 🔴 0 · 🟡 0 · 🟢 2 · 🟠 0
+**Geprüft:** 2 Seiten | 🔴 0 · 🟡 1 · 🟢 1 · 🟠 0
 
 **Korridor (Premium Google+Pinterest):** Posts 12.000–18.000 Zeichen (Floor 10.000, heil < 10.000) · Pillar 15.000–32.000 Zeichen (Floor 12.000, heil < 12.000)
 
+## Kürzeste Seiten außerhalb des Korridors
+
+- 🟡 kurz `content/posts/2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer/index.md`: **11.290 Zeichen** (1607 Wörter. posts)
 
 ---
 _Selbstheilung: ⚠ Modul-Erweiterung durch KI, verifiziert (Links/Disclaimer/Länge). Nur --ai heilt; ohne Keys bleibt es ein Report._

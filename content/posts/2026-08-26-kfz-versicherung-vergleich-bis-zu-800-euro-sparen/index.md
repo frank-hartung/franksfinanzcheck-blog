@@ -107,7 +107,7 @@ Die SF-Klasse ist der mit Abstand wichtigste einzelne Prämienfaktor:
 
 Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gibt keinen "Reset".
 
-### 7. Den Stichtag 30.11. kennen und nutzen
+### 7. Den Stichtag 30.11. Kennen und nutzen
 
 - **Kündigungsfrist:** Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der **31.12.** ist.
 - **Sonderkündigungsrecht bei Beitragserhöhung:** Wenn dein Versicherer den Preis ohne Schadensfall erhöht, hast du **vier Wochen** nach Eingang der Mitteilung Zeit zu kündigen – unabhängig vom 30.11.
@@ -125,7 +125,7 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 ## Was eine gute Police unbedingt enthalten sollte
 
 - **Mindestdeckung 100 Mio. € pauschal**, mindestens 15 Mio. € pro Person
-- **Mallorca-Police** (Deckung bei Mietwagen im europäischen Ausland in gewohnter Höhe)
+- **Mallorca-Police** (Deckung bei [Mietwagen](../../posts/2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer/) im europäischen Ausland in gewohnter Höhe)
 - **Zusammenstoß mit Tieren aller Art** (nicht nur Haarwild)
 - **Erweiterte Wildschadenklausel**
 - **Grobe Fahrlässigkeit** (außer bei Vorsatz, Drogen/Alkohol)

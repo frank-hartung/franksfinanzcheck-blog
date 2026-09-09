@@ -1,7 +1,7 @@
 {
- "total": 36,
- "errors": 0,
- "fixed": 0,
+ "total": 38,
+ "errors": 1,
+ "fixed": 1,
  "posts": [
   {
    "slug": "frugalismus",
@@ -199,7 +199,7 @@
   },
   {
    "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
-   "title": "DSL Vergleich: So findest du den günstigsten Inter",
+   "title": "DSL-Vergleich: So findest du den günstigsten Inter",
    "pillar": "internet-dsl",
    "fixed": 0,
    "errors": [],
@@ -331,7 +331,7 @@
   },
   {
    "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
-   "title": "Frugalismus Tipps: Mehr Freiheit durch bewussten K",
+   "title": "Frugalismus-Tipps: Mehr Freiheit durch bewussten K",
    "pillar": "frugalismus",
    "fixed": 0,
    "errors": [],
@@ -342,7 +342,7 @@
   },
   {
    "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
-   "title": "Frugalismus Tipps: So vermeidest du teure Alltagsf",
+   "title": "Frugalismus-Tipps: So vermeidest du teure Alltagsf",
    "pillar": "frugalismus",
    "fixed": 0,
    "errors": [],
@@ -350,6 +350,26 @@
     "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
    "ok": true
+  },
+  {
+   "slug": "2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+   "title": "Günstig durch den Winter: Heizungs-Check im Spätso",
+   "pillar": "strom-sparen",
+   "fixed": 1,
+   "errors": [],
+   "infos": [],
+   "ok": true
+  },
+  {
+   "slug": "2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer",
+   "title": "Mietwagen Abzocke vermeiden: Profi-Tricks für",
+   "pillar": "mietwagen",
+   "fixed": 0,
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
+   "infos": [],
+   "ok": false
   }
  ]
 }
