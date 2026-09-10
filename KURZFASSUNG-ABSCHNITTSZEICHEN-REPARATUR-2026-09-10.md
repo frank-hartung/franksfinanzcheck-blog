@@ -113,8 +113,10 @@ Eine eigenständige Suite, die die **echten Produktions-Dateien**
 | Prüfung | Ergebnis |
 |---|---|
 | `node scripts/ff_heading_glyph_guard_test.mjs` (neu) | **40/40** |
-| `node scripts/ff_voice_functional_test.mjs` (inkl. Gruppe 13) | **247/247** |
+| `python3 scripts/heading_anchor_guard.py --selftest` (neu) | **4/4** |
 | `python3 scripts/heading_anchor_guard.py` (erweitert) | **36/36** |
+| Simulierter Hugo-Bau: alle 34 Artikel · 94 Überschriften mit Theme-Ankern | **0 Befunde** |
+| `node scripts/ff_voice_functional_test.mjs` (inkl. Gruppe 13) | **247/247** |
 | `node scripts/ff_voice_repair_test.mjs` | **56/56** |
 | `node scripts/ff_voice_tts_hardening_test.mjs` | **57/57** |
 | `node scripts/ff_voice_voice_test.js` (Stimmen-Regie) | **69/69** |
@@ -125,15 +127,55 @@ Eine eigenständige Suite, die die **echten Produktions-Dateien**
 | Bestandslauf über alle echten Artikel | **34 Artikel** — keine Gliederung mit „§“, Label-Vertrag hält überall |
 | Schutz vor Übereifer | „Rechte aus **§ 8 EinSiG**“ bleibt in Überschrift, Verzeichnis und Vorlesen erhalten |
 
-## 8 · Geänderte Dateien (dieser PR)
+## 8 · Beifund (mitrepariert): Bau-Prüfung der Anker-Wache blockierte jeden Deploy
+
+**Der Befund:** Nach dem Merge lief der Deploy zweimal rot (13:09 und
+13:44) — bereits ab dem Grund-Fix-Merge `5d90d91` (PR #250), also
+**unabhängig von dieser Härtung**. Schritt 22 „Anker-Wache“ scheiterte.
+
+**Die Ursache:** Die **Bau-Prüfung** (Schicht 4, `public/`) kannte keine
+Ausnahme für verstecktes Markup. Aber **jede gebaute Seite** trägt in
+**jeder Überschrift** den legitimen Theme-Anker
+(`<a hidden class="anchor" aria-hidden="true" href="#…">#</a>` aus
+`anchored_headings.html`) — versteckt, exakt wie es Schicht 3 dieser
+Wache selbst vorgibt. Das Muster `INNER_ANCHOR_RE` flaggte ihn als
+„Ankersymbol in `<a>`/`<button>`“ → der erste Artikel genügte zum
+Deploy-Stopp. Warum es niemand vorher sah: Die Bau-Prüfung lief zum
+ersten Mal im echten Deploy — lokal gibt es kein `public/` (kein Hugo),
+und das Lesehilfen-Gate baut nicht. Ein Klassiker: die neue Wache war
+selbst ungeprüft.
+
+**Die Reparatur:**
+1. **Sichtbarkeits-Kontext:** `INNER_ANCHOR_RE` erfasst jetzt die
+   Attribute der Kandidaten — `hidden`/`aria-hidden`/Klasse `anchor`
+   werden ausgenommen (legitimer Theme-Anker), ein **sichtbares**
+   „§“/„#“ in `<a>`/`<button>` bleibt ein Befund.
+2. **Ehrlicher sichtbarer Text:** Der Enden-Check entfernt versteckte
+   Knoten **vor** der Auswertung — sonst würde ein legitimes
+   „Rechte aus § 8 EinSiG“ + versteckter „#“-Anker fälschlich als
+   „endet auf Ankersymbol“ gelten.
+3. **`--selftest` (neu):** baut ein synthetisches `public/` mit dem
+   echten Theme-Markup und prüft die Bau-Logik in vier Fällen
+   (sauber · Original-Bug-Knopf · Text-Ende „§“ · sichtbares Anker-„#“).
+   Der Selbsttest läuft im **Lesehilfen-Gate** und im **Deploy vor der
+   Wache** — die Bau-Prüfung kann nie wieder zum ersten Mal im Deploy
+   laufen.
+
+**Verifikation:** Selbsttest 4/4 · Simulation des echten Hugo-Baus über
+alle 34 Artikel (94 Überschriften mit Theme-Ankern): **0 Befunde** ·
+Minify-Variante (Attribute ohne Anführungszeichen): 0 Befunde, Original-
+Bug weiterhin erkannt · Wache 36/36.
+
+## 9 · Geänderte Dateien (dieser PR)
 
 | Datei | Änderung |
 |---|---|
 | `scripts/ff_heading_glyph_guard_test.mjs` | **neu** — „§“-Wache, 40 Gates (echte DOM, echte Produktions-Dateien, Feind-Injektion, alle 34 Artikel) |
 | `static/premium/ff-summary-safety.js` | Härtung: reine Ankerrest-Knoten fallen komplett weg, Nachzieh-Durchläufe |
 | `assets/css/extended/z-premium-blog.css` | `user-select: none` für den Abschnitts-Knopf |
-| `.github/workflows/lesehilfen-gate.yml` | neuer Schritt „§“-Wache + Auslöser-Pfade |
-| `scripts/heading_anchor_guard.py` | 4 neue Prüfungen („§“-Wache vorhanden/verdrahtet, Sicherheitsnetz-Härtung) |
+| `.github/workflows/lesehilfen-gate.yml` | neuer Schritt „§“-Wache + Auslöser-Pfade + Anker-Wachen-Selbsttest |
+| `.github/workflows/deploy.yml` | Anker-Wachen-Selbsttest vor der echten Wache |
+| `scripts/heading_anchor_guard.py` | 4 neue Prüfungen („§“-Wache vorhanden/verdrahtet, Sicherheitsnetz-Härtung) · **Bau-Prüfung repariert** (Hidden-Ausnahme, sichtbarer Text) · `--selftest` (4 Fälle) |
 | `README.md` | Wächter-Liste ergänzt, Gate-Zahlen auf den aktuellen Stand gebracht |
 | `KURZFASSUNG-ABSCHNITTSZEICHEN-REPARATUR-2026-09-10.md` | **neu** — dieser Report |
 

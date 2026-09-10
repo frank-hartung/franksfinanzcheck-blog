@@ -140,7 +140,12 @@ jobs:
       # ---- Anker-Wache (Befund 10.09.2026) ----
       # Der Abschnitts-Knopf „Link kopieren“ trug ein „§“ als Text in
       # JEDER Überschrift. Die Wache sichert Quelle, Engine, Theme und
-      # die Regressionsgruppe dauerhaft ab.
+      # die Regressionsgruppe dauerhaft ab. Der Selbsttest prüft die
+      # BAU-Prüfung gegen ein synthetisches public/ (echtes Hugo-Markup),
+      # damit die Wache nie wieder erst im Deploy zum ersten Mal läuft.
+      - name: Anker-Wache – Selbsttest (Bau-Prüfung lauffähig)
+        run: python3 scripts/heading_anchor_guard.py --selftest
+
       - name: Anker-Wache (kein § in Überschriften, Kurzfassung & Vorlesen)
         run: python3 scripts/heading_anchor_guard.py
 

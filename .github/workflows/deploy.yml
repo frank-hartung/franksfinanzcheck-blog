@@ -230,7 +230,12 @@ jobs:
       # Titel, Klartext-Kopie, Mini-Verzeichnis, die Vorlese-Engine,
       # Screenreader (Überschriften-Name) und Suchmaschinen lasen es mit.
       # Die Wache prüft die QUELLE und die gerade gebauten Seiten in
-      # public/ – ein Fund stoppt den Deploy.
+      # public/ – ein Fund stoppt den Deploy. Der Selbsttest sichert die
+      # Bau-Prüfung selbst (Befund 13:44: sie flaggte zunächst den
+      # legitimen, versteckten Theme-Anker auf jeder Seite).
+      - name: Anker-Wache – Selbsttest (Bau-Prüfung lauffähig)
+        run: python3 scripts/heading_anchor_guard.py --selftest
+
       - name: Anker-Wache (kein § in Überschriften, Kurzfassung & Vorlesen)
         run: python3 scripts/heading_anchor_guard.py
 
