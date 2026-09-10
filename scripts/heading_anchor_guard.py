@@ -23,12 +23,16 @@ die Reparatur DAUERHAFT ab — fünf Schichten:
   3. THEME    der Anker des Themes bleibt für Lesemaschinen unsichtbar
               (`hidden` + `aria-hidden`), nie als nacktes Zeichen.
   4. BAU      im gebauten public/ endet KEINE Überschrift auf ein
-              Ankersymbol (läuft nur, wenn public/ vorhanden ist).
+              SICHTBARES Ankersymbol und kein sichtbares <a>/<button>
+              trägt „§“/„#“ als Text. Der versteckte Theme-Anker ist
+              legitim und bleibt ausgenommen (läuft nur, wenn public/
+              vorhanden ist; `--selftest` prüft die Logik ohne Hugo).
   5. TEST     die Regressionsgruppe „Abschnitts-Link“ ist vorhanden und
               das Lesehilfen-Gate führt diese Wache aus.
 
 Aufruf: python3 scripts/heading_anchor_guard.py
         python3 scripts/heading_anchor_guard.py --json
+        python3 scripts/heading_anchor_guard.py --selftest
 
 Rückgabe: 0 = alles grün, 1 = mindestens ein Befund (Deploy stoppen).
 """
@@ -54,7 +58,14 @@ PUBLIC = os.path.join(ROOT, "public")
 GLYPH = "\u00a7"          # §
 TAG_STRIP = re.compile(r"<[^>]*>")
 HEADING_RE = re.compile(r"<h([1-6])\b[^>]*>(.*?)</h\1>", re.S | re.I)
-INNER_ANCHOR_RE = re.compile(r"<(a|button)\b[^>]*>\s*(" + GLYPH + r"|#)\s*</\1>", re.I)
+INNER_ANCHOR_RE = re.compile(r"<(a|button)\b([^>]*)>\s*(" + GLYPH + r"|#)\s*</\1>", re.I)
+# Versteckte Knoten (Theme-Anker) zählen nicht zum sichtbaren Text —
+# genau das ist Schicht 3 dieser Wache („der Anker des Themes bleibt für
+# Lesemaschinen unsichtbar“). \bhidden\b trifft sowohl das HTML-Attribut
+# `hidden` als auch `aria-hidden="true"`.
+HIDDEN_TAG_RE = re.compile(
+    r"<(?:a|span|button|svg|small)\b[^>]*\bhidden\b[^>]*>.*?</(?:a|span|button|svg|small)>",
+    re.S | re.I)
 
 # Prüfsteine der Quelltexte: (Befund-Text, Muster, muss enthalten?)
 SOURCE_RULES = [
@@ -174,13 +185,37 @@ def check_theme(rep):
     rep.add(layer, "Anker trägt kein „§“", GLYPH not in src)
 
 
-def check_build(rep):
-    layer = "4) BAU · public/ (gebraute Seiten)"
-    if not os.path.isdir(PUBLIC):
-        rep.add(layer, "public/ nicht vorhanden \u2014 Bauprüfung übersprungen", True)
-        return
+def visible_heading_text(inner_html):
+    """Sichtbarer Überschriften-Text: versteckte Knoten (Theme-Anker)
+    zuerst entfernen, dann Tags weg. Nur dieser Text wird geprüft —
+    sonst würde der legitime, versteckte Theme-Anker („#“) ein
+    angeblich angehängtes Ankersymbol vortäuschen."""
+    return TAG_STRIP.sub("", HIDDEN_TAG_RE.sub("", inner_html)).strip()
+
+
+def heading_findings(html, rel):
+    """Liefert die Befunde EINER Seite: Liste von Klartext-Funden.
+    Ein Fund ist immer ein SICHTBARES Ankersymbol — verstecktes Markup
+    (Theme-Anker: `hidden`/`aria-hidden`/Klasse `anchor`) ist legitim."""
+    out = []
+    for level, inner in HEADING_RE.findall(html):
+        visible = visible_heading_text(inner)
+        if GLYPH in visible and re.search(r"[\s" + GLYPH + r"#]$", visible):
+            out.append(rel + ": " + visible[-48:])
+        for m in INNER_ANCHOR_RE.finditer(inner):
+            attrs = m.group(2) or ""
+            if re.search(r"\bhidden\b", attrs, re.I):
+                continue
+            if re.search(r"\banchor\b", attrs, re.I):
+                continue
+            out.append(rel + ": sichtbares Ankersymbol in <{}>".format(m.group(1)))
+    return out
+
+
+def scan_build(public_dir):
+    """Prüft alle gebauten Seiten in public_dir. Rückgabe: (Befunde, Anzahl Seiten)."""
     files = []
-    for base, _dirs, names in os.walk(PUBLIC):
+    for base, _dirs, names in os.walk(public_dir):
         for name in names:
             if name.endswith(".html"):
                 files.append(os.path.join(base, name))
@@ -193,14 +228,91 @@ def check_build(rep):
                 html = fh.read()
         except OSError:
             continue
-        for level, inner in HEADING_RE.findall(html):
-            if GLYPH in inner and re.search(r"[\s" + GLYPH + r"#]$", TAG_STRIP.sub("", inner).strip()):
-                bad.append(os.path.relpath(path, PUBLIC) + ": " + TAG_STRIP.sub("", inner).strip()[-48:])
-                continue
-            if INNER_ANCHOR_RE.search(inner):
-                bad.append(os.path.relpath(path, PUBLIC) + ": Ankersymbol in <a>/<button>")
-    rep.add(layer, "Keine Überschrift endet auf ein Ankersymbol ({} Seiten)".format(len(files[:600])),
+        bad.extend(heading_findings(html, os.path.relpath(path, public_dir)))
+    return bad, len(files[:600])
+
+
+def check_build(rep):
+    layer = "4) BAU · public/ (gebraute Seiten)"
+    if not os.path.isdir(PUBLIC):
+        rep.add(layer, "public/ nicht vorhanden \u2014 Bauprüfung übersprungen", True)
+        return
+    bad, count = scan_build(PUBLIC)
+    rep.add(layer, "Keine Überschrift endet auf ein sichtbares Ankersymbol ({} Seiten)".format(count),
             not bad, " | ".join(bad[:4]))
+
+
+def selftest():
+    """Selbsttest der Bau-Prüfung mit einer synthetischen public/-Umgebung.
+
+    Hintergrund (Befund 10.09.2026): Die Bau-Prüfung lief zum ersten Mal
+    im ECHTEN Deploy — und scheiterte an jedem Theme-Anker, weil das
+    Muster verstecktes Markup nicht ausnahm. Lokal gibt es kein public/
+    (kein Hugo), das Lesehilfen-Gate baut nicht — deshalb prüft dieser
+    Selbsttest die Bau-Logik gegen ein Mini-public/, das den echten
+    Hugo-Output nachbildet (anchored_headings.html). Er läuft im
+    Lesehilfen-Gate und im Deploy VOR der echten Wache.
+    """
+    theme_anchor = '<a hidden class="anchor" aria-hidden="true" href="#x">#</a>'
+    cases = []
+
+    # 1 · Saubere Seite, wie Hugo sie baut: Theme-Anker (versteckt) +
+    #     legitimes „§“ mitten im Überschriften-Text.
+    okay = (
+        "<html><body><main><article>"
+        '<h2 id="a">Was ist Tagesgeld?' + theme_anchor + "</h2>"
+        "<p>Text</p>"
+        '<h2 id="b">Rechte aus § 8 EinSiG' + theme_anchor + "</h2>"
+        "</article></main></body></html>"
+    )
+    cases.append(("saubere Seite (Theme-Anker + legitimes §)", okay, False))
+
+    # 2 · Der Original-Bug: sichtbarer „§“-Knopf in der Überschrift.
+    button = (
+        "<html><body><main><article>"
+        '<h2 id="a">Was ist Tagesgeld?<button class="ff-heading-copy" type="button">§</button></h2>'
+        "</article></main></body></html>"
+    )
+    cases.append(("sichtbarer §-Knopf (Original-Bug)", button, True))
+
+    # 3 · Überschriften-TEXT endet sichtbar auf „§“.
+    trailing = (
+        "<html><body><main><article>"
+        '<h2 id="a">Zinsen im Vergleich §</h2>'
+        "</article></main></body></html>"
+    )
+    cases.append(("Text endet sichtbar auf §", trailing, True))
+
+    # 4 · SICHTBARES Anker-„#“ als Elementtext (nicht versteckt).
+    visible_anchor = (
+        "<html><body><main><article>"
+        '<h2 id="a">Zinsen im Vergleich<a class="some-link" href="#a">#</a></h2>'
+        "</article></main></body></html>"
+    )
+    cases.append(("sichtbares Anker-# in <a>", visible_anchor, True))
+
+    import tempfile
+    failed = 0
+    with tempfile.TemporaryDirectory() as tmp:
+        for i, (label, html, expect_bad) in enumerate(cases):
+            case_dir = os.path.join(tmp, "fall-{}".format(i))
+            os.makedirs(case_dir)
+            with open(os.path.join(case_dir, "seite.html"), "w", encoding="utf-8") as fh:
+                fh.write(html)
+            findings, count = scan_build(case_dir)
+            got_bad = bool(findings)
+            mark = "\u2713" if got_bad == expect_bad and count == 1 else "\u2717"
+            if got_bad != expect_bad or count != 1:
+                failed += 1
+            detail = "" if got_bad == expect_bad else " \u2014 Befunde: {}".format(findings)
+            print("  {} {}{}".format(mark, label, detail))
+
+    print("")
+    if failed:
+        print("\u274c heading_anchor_guard Selbsttest: {} Fall/F\u00e4lle fehlgeschlagen.".format(failed))
+        return 1
+    print("\u2705 heading_anchor_guard Selbsttest: gr\u00fcn.")
+    return 0
 
 
 def check_tests(rep):
@@ -221,6 +333,12 @@ def check_tests(rep):
 
 
 def main():
+    if "--selftest" in sys.argv:
+        print("")
+        print("  heading_anchor_guard.py \u2014 Selbsttest der Bau-Pr\u00fcfung")
+        print("  " + "=" * 52)
+        return selftest()
+
     rep = Report()
     check_source(rep)
     check_engine(rep)
