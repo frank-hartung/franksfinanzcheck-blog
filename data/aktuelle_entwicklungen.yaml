@@ -50,6 +50,7 @@
   ab: "2026-01-01"
   bis: ""
   hook: "Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher."
+  ki_news_used: true
 
 - id: energie-jahreswechsel-wechselfenster
   kategorie: energie
