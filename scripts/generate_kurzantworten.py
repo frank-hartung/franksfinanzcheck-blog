@@ -45,14 +45,31 @@ def get_meta(path):
     return get("title"), get("description"), fm
 
 
+def strip_markdown_links(text):
+    """Macht KI-Ausgaben zu sicherem Klartext, auch bei kaputtem Markdown."""
+    out = str(text or "")
+    for _ in range(6):
+        before = out
+        out = re.sub(r"!\[([^\[\]]*)\]\((?:[^()]|\([^()]*\))*\)", r"\1", out)
+        out = re.sub(r"\[([^\[\]]+)\]\((?:[^()]|\([^()]*\))*\)", r"\1", out)
+        if out == before:
+            break
+    out = re.sub(r"\]\((?:[^()]|\([^()]*\))*\)", "", out)
+    out = out.replace("[", "").replace("]", "")
+    out = re.sub(r"https?://[^\s<>\"')]+", "", out, flags=re.I)
+    out = re.sub(r"[*_`#>]", "", out)
+    return re.sub(r"\s+", " ", out).strip()
+
+
 def set_kurzantwort(path, answer):
     content = open(path, encoding="utf-8").read()
     parts = content.split("---", 2)
     fm = parts[1]
+    quoted = json.dumps(answer, ensure_ascii=False)
     if re.search(r"^kurzantwort:\s*", fm, re.M):
-        fm2 = re.sub(r"^kurzantwort:.*$", f'kurzantwort: "{answer}"', fm, count=1, flags=re.M)
+        fm2 = re.sub(r"^kurzantwort:.*$", f"kurzantwort: {quoted}", fm, count=1, flags=re.M)
     else:
-        fm2 = fm.rstrip() + f'\nkurzantwort: "{answer}"\n'
+        fm2 = fm.rstrip() + f"\nkurzantwort: {quoted}\n"
     open(path, "w", encoding="utf-8").write("---".join([parts[0], fm2, parts[2]]))
 
 
@@ -85,7 +102,7 @@ def main():
             print(f"  ⚠ übersprungen (kein Provider): {os.path.basename(os.path.dirname(path))}")
             fail += 1
             continue
-        answer = answer.strip().replace("\n", " ")
+        answer = strip_markdown_links(answer.strip().replace("\n", " "))
         # BERREINIGUNG (Top-Level): Whitespace kollabieren, HTML-Entities in
         # geschützte Leerzeichen (U+00A0) wandeln, KI-Fehler entfernen.
         # Sonst erscheinen sie im Frontmatter/HTML als sichtbarer Text bzw.
@@ -95,7 +112,9 @@ def main():
         answer = re.sub(r"\bless als\b", "weniger als", answer, flags=re.I)
         answer = re.sub(r"\d[ \u00a0]+[%€]", lambda m: m.group(0)[0] + "\u00a0" + m.group(0)[-1], answer)
         # Validierung: keine Entities, kein normales Leerzeichen vor %/€, keine offensichtlichen Fehler
-        if any(bad in answer for bad in ["&nbsp;", "&amp;", "less als", "  "]) or re.search(r"\d[ \u00a0]* [ \u00a0]*[%€]", answer):
+        if (any(bad in answer for bad in ["&nbsp;", "&amp;", "less als", "  "]) or
+                re.search(r"\d[ \u00a0]* [ \u00a0]*[%€]", answer) or
+                re.search(r"\[[^]]*\]|\]\(|https?://", answer, re.I)):
             print(f"  ⚠ Antwort nach Bereinigung noch fehlerhaft: {os.path.basename(os.path.dirname(path))}")
             fail += 1
             continue
