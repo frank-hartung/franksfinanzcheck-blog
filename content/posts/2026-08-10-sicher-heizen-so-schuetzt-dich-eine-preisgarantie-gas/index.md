@@ -121,7 +121,7 @@ Eine Garantie bedeutet nicht, dass du an den Anbieter "gekettet" bist, wenn dies
 
 ## Heiz-Check vor der Saison: Die perfekte Ergänzung zur Garantie
 
-Die beste Preisgarantie ist die für das Gas, das du gar nicht erst verbrauchst. Wer seine **[[Heizkoste](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/)n senken](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)** will, sollte parallel zum Tarifwechsel sein Haus winterfest machen. Hier sind drei Sofort-Maßnahmen, die sofort wirken:
+Die beste Preisgarantie ist die für das Gas, das du gar nicht erst verbrauchst. Wer seine **[Heizkosten senken](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/)** will, sollte parallel zum Tarifwechsel sein Haus winterfest machen. Hier sind drei Sofort-Maßnahmen, die sofort wirken:
 
 * **Hydraulischer Abgleich:** Wenn deine Heizkörper ungleichmäßig warm werden, verbraucht die Pumpe zu viel Energie. Ein Fachmann kann das für ca. 300–500 Euro optimieren. Das spart bis zu 15 % Gas – jedes Jahr.
 * **Smarte Thermostate:** Ersetze alte Drehregler durch programmierbare Thermostate. Diese senken die Temperatur automatisch ab, wenn du bei der Arbeit bist oder schläfst. Ein Grad weniger Raumtemperatur spart im Schnitt 6 % Heizenergie.
