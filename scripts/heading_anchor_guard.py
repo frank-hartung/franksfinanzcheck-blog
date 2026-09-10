@@ -47,6 +47,7 @@ ENGINE = os.path.join(ROOT, "static", "premium", "ff-voice.js")
 SAFETY = os.path.join(ROOT, "static", "premium", "ff-summary-safety.js")
 THEME_ANCHOR = os.path.join(ROOT, "themes", "PaperMod", "layouts", "_partials", "anchored_headings.html")
 FUNCTIONAL_TEST = os.path.join(ROOT, "scripts", "ff_voice_functional_test.mjs")
+GLYPH_GUARD = os.path.join(ROOT, "scripts", "ff_heading_glyph_guard_test.mjs")
 GATE = os.path.join(ROOT, ".github", "workflows", "lesehilfen-gate.yml")
 PUBLIC = os.path.join(ROOT, "public")
 
@@ -155,6 +156,9 @@ def check_engine(rep):
     rep.add("2) ENGINE · static/premium/ff-voice.js",
             "Sicherheitsnetz prüft Ankerreste im Verzeichnis",
             "ff-voice-toc" in safety)
+    rep.add("2) ENGINE · static/premium/ff-voice.js",
+            "Sicherheitsnetz entfernt reine Ankerrest-Knoten (Härtung #248)",
+            "removeChild(last)" in safety)
 
 
 def check_theme(rep):
@@ -205,8 +209,13 @@ def check_tests(rep):
     rep.add(layer, "Gruppe „Abschnitts-Link“ vorhanden", "Abschnitts-Link" in src)
     rep.add(layer, "Prüfung „Verzeichnis: kein einziges „§““", "kein einziges" in src)
     rep.add(layer, "Prüfung „echtes § bleibt erhalten“", "EinSiG" in src)
+    guard = read(GLYPH_GUARD) or ""
+    rep.add(layer, "„§“-Wache (jsdom, echte Produktions-Dateien) vorhanden",
+            "ff-heading-copy" in guard and "Feind-Injektion" in guard)
+    rep.add(layer, "„§“-Wache pinnt alle echten Artikel", "listArticles()" in guard)
     gate = read(GATE) or ""
     rep.add(layer, "Gate führt den Funktionstest aus", "ff_voice_functional_test.mjs" in gate)
+    rep.add(layer, "Gate führt die „§“-Wache aus", "ff_heading_glyph_guard_test.mjs" in gate)
     rep.add(layer, "Gate führt diese Wache aus", "heading_anchor_guard.py" in gate)
     rep.add(layer, "Gate reagiert auf ff-premium.js", "static/premium/ff-premium.js" in gate)
 

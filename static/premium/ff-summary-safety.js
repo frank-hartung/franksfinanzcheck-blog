@@ -40,17 +40,29 @@
      Steht es im Überschriften-Text, landet es im Inhaltsverzeichnis der
      Kurzfassung. Hier wird deshalb am ENDE jedes Verzeichnis-Eintrags
      ein angehängtes Ankersymbol entfernt. Ein echtes „§“ mitten im Text
-     („Rechte aus § 8 EinSiG“) bleibt unangetastet. */
+     („Rechte aus § 8 EinSiG“) bleibt unangetastet.
+
+     Härtung 10.09.2026 (Issue #248): Bestand der letzte Textknoten NUR
+     aus dem Ankerrest (z. B. „Fazit “ + „§“ als eigene Knoten), blieb
+     das „§“ stehen, weil die Kürzung einen nicht-leeren Rest verlangte.
+     Jetzt fällt ein reiner Ankerrest-Knoten komplett weg und der
+     vorangehende Knoten wird in einem zweiten Durchlauf nachgezogen. */
   function trimAnchorTrail(node) {
     if (!node || !document.createTreeWalker) return;
-    var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
-    var last = null;
-    var current;
-    while ((current = walker.nextNode())) last = current;
-    if (!last) return;
-    var raw = last.nodeValue || '';
-    var cleaned = raw.replace(/[\s\u00a7#]+$/, '');
-    if (cleaned !== raw && cleaned.length) last.nodeValue = cleaned;
+    for (var round = 0; round < 3; round++) {
+      var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+      var last = null;
+      var current;
+      while ((current = walker.nextNode())) last = current;
+      if (!last) return;
+      var raw = last.nodeValue || '';
+      if (!/[\u00a7#]/.test(raw)) return; // kein Ankerrest mehr → fertig
+      var cleaned = raw.replace(/[\s\u00a7#]+$/, '');
+      if (cleaned === raw) return;        // endet nicht auf Ankerrest → Inhalt bleibt
+      if (cleaned.length) { last.nodeValue = cleaned; return; }
+      var parent = last.parentNode;       // Knoten ist reiner Ankerrest → entfernen
+      if (parent) parent.removeChild(last);
+    }
   }
 
   function cleanTocTrails(dialog) {

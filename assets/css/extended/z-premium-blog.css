@@ -357,6 +357,11 @@ body.ff-scrolled .header {
   opacity: 0;
   transform: translateY(-1px);
   transition: opacity .18s ease, color .18s ease, background-color .18s ease;
+  /* Premium-Politur (Issue #248): Der Knopf ist reine Bedienfläche.
+     Beim manuellen Markieren von Überschriften-Text bleibt die Auswahl
+     sauber — kein Icon landet in Franks Zwischenablage. */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 h2:hover .ff-heading-copy,
