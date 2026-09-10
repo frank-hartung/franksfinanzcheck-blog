@@ -1,7 +1,7 @@
 ---
 title: "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken"
 description: "Die 50-30-20-Regel bringt Ordnung in deine Finanzen: 50 % Fixkosten, 30 % Wünsche, 20 % Sparen. Frank Hartung zeigt, wie du dein Budget beherrschst."
-date: 2026-09-09T16:36:58Z
+date: 2026-09-10T08:20:17Z
 draft: true
 reserve: true
 tags: ["50-30-20-Regel", "Budget planen", "Fixkosten senken"]
@@ -38,7 +38,7 @@ Hier setzt ein System an, das so simpel wie genial ist. Es geht nicht darum, jed
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt C24 Bank-Angebote vergleichen**](/go/tagesgeld/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Jetzt C24 Bank-Angebote vergleichen**](/go/tagesgeld/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was steckt hinter der 50-30-20-Formel?
@@ -53,7 +53,7 @@ Die restlichen 20 % fließen direkt in deine finanzielle Zukunft. Das ist der w
 
 Die Welt hat sich weiterentwickelt, und damit auch die Art, wie wir unser Budget betrachten müssen. Im Jahr 2026 sehen wir uns mit einer veränderten Kostenstruktur konfrontiert. Die Energiepreise für Strom und Gas sind volatiler geworden, und die CO2-Bepreisung schlägt bei den Fixkosten deutlicher ins Kontor als noch vor fünf Jahren. Wer starr an alten Tabellen festhält, wundert sich, warum am Ende des Geldes noch so viel Monat übrig ist.
 
-Ein weiterer Faktor ist die „Abonnentisierung“ unseres Alltags. Früher waren Software oder Musik einmalige Käufe. Heute sind fast alle Dienste monatliche Fixkosten. Das verschiebt die Grenze zwischen dem 50-Prozent-Block (Notwendigkeiten wie Internet/Mobilfunk) und dem 30-Prozent-Block (Wünsche wie Unterhaltungs-Streaming). Viele Menschen verbuchen zu viele Wünsche fälschlicherweise als Notwendigkeiten.
+Ein weiterer Faktor ist die „Abonnentisierung“ unseres Alltags. Früher waren Software oder Musik einmalige Käufe. Heute sind fast alle Dienste monatliche Fixkosten. Das verschiebt die Grenze zwischen dem 50-Prozent-Block (Notwendigkeiten wie Internet/Mobilfunk) und dem 30-Prozent-Block (Wünsche wie Unterhaltungs-Streaming). **Viele Menschen verbuchen zu zahlreiche Wünsche fälschlicherweise als Notwendigkeiten.**
 
 Zudem ist die Bedeutung der 20 % für die Altersvorsorge gestiegen. Die gesetzliche Rente ist 2026 noch stärker unter Druck, was private Vorsorge zur Pflichtaufgabe macht. Wenn du heute nicht mindestens diese 20 % investierst, riskierst du eine massive Versorgungslücke im Alter. Die 50–30–20-Regel ist also kein nettes Extra mehr, sondern eine Überlebensstrategie für deine Finanzen.
 
@@ -122,7 +122,7 @@ Es ist eine berechtigte Frage: Was ist, wenn die 50 % für Miete und Lebensmitt
 
 Wenn deine Fixkosten aktuell bei 70 % liegen, bleiben dir nur 30 % für Wünsche und Sparen. Hier ist es wichtig, den Sparanteil nicht auf Null zu setzen. Selbst wenn es nur 5 % oder 25 € im Monat sind – die Gewohnheit des Sparens ist wichtiger als der absolute Betrag. Dein Ziel sollte es sein, durch Einkommenssteigerung oder drastische Fixkosten-Senkung (z. B. Umzug, WG, Verzicht auf das Auto) schrittweise näher an die 50–30–20-Verteilung heranzukommen.
 
-Die Regel hilft dir gerade bei geringem Einkommen, Prioritäten zu setzen. sie zeigt dir schwarz auf weiß, dass du bestimmte Wünsche vielleicht erst leisten kannst, wenn die Fixkosten sinken. Diese Klarheit verhindert, dass du dich unbewusst verschuldest, weil du den Überblick über deine Kapazitäten verlierst.
+Die Regel hilft dir gerade bei geringem Einkommen, Prioritäten zu setzen. Sie zeigt dir schwarz auf weiß, dass du bestimmte Wünsche vielleicht erst leisten kannst, wenn die Fixkosten sinken. Diese Klarheit verhindert, dass du dich unbewusst verschuldest, weil du den Überblick über deine Kapazitäten verlierst.
 
 ## Warum die 50-30-20-Regel dein Mindset verändert
 
