@@ -53,7 +53,8 @@ def engine_snapshot(posts: list[dict], today: datetime.date,
 
     try:
         import engine_generate as eg
-        bilanz = eg.tages_bilanz(posts, set(), max_n, min_n)
+        # Stichtag mitgeben: die Bilanz gilt für DIESEN Tag (deterministisch).
+        bilanz = eg.tages_bilanz(posts, set(), max_n, min_n, today=today)
     except Exception:
         live_today = [p for p in posts if not p["draft"] and p["date"] == today]
         drafts_today = [p for p in posts if p["draft"] and p["date"] == today]

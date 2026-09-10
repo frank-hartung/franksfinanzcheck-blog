@@ -146,3 +146,33 @@ Lücke ist jetzt geschlossen (Gruppe 13 lädt das **echte**
 | `.github/workflows/deploy.yml` | Wache nach dem Build |
 | `.github/workflows/lesehilfen-gate.yml` | Auslöser, Syntaxprüfung, Wache |
 | `tools/heading-anchor-preview/index.html` | **neu** — Vorher/Nachher-Vorschau mit echten Skripten |
+
+## 8 · Beifund (mitrepariert): nichtdeterministische Tagesbilanz
+
+Beim Abschluss des Pull Requests war die Suite **„Publication reliability
+regression tests“ rot**. Der Fehler ist **nicht** durch die §-Reparatur
+entstanden — er tritt auf dem Basis-Commit `a081c24` genauso auf:
+
+```
+FAIL: test_engine_snapshot_uses_final_source_truth
+AssertionError: '2 Entwurf' not found in
+'0 Artikel live heute (0 NEU · 0 recycelt · 0 Entwurf · 1 hold) | …'
+```
+
+**Ursache:** `engine_generate.tages_bilanz()` rechnete immer mit
+`datetime.date.today()`. `bot_status.engine_snapshot(posts, today, …)`
+übergab zwar einen Stichtag, dieser wurde aber ignoriert — die Bilanz
+kam vom *Ausführungstag*, nicht vom *Auswertungstag*. Der Test war damit
+an jedem Tag außer seinem Stichtag rot.
+
+**Reparatur:** `tages_bilanz(..., today=None)` — ohne Angabe bleibt alles
+beim Alten (heute); `bot_status.engine_snapshot()` übergibt seinen
+Stichtag jetzt mit. Kein Verhalten für die Produktion geändert, nur die
+Auswertung deterministisch gemacht.
+
+| Prüfung | vorher | nachher |
+|---|---|---|
+| `python3 -m unittest discover -s scripts/tests` | 1 Fehler | **31/31 OK** |
+| `engine_generate.py --selftest` | grün | grün |
+| `cadence_guard.py --selftest` | grün | grün |
+| `bot_status.py` (Schreiblauf) | grün | grün |
