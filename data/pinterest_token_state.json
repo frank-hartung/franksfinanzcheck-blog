@@ -10,7 +10,7 @@
     }
   ],
   "auto_renew_armed": false,
-  "checked_at": "2026-09-09T09:02:54+00:00",
+  "checked_at": "2026-09-10T09:01:38+00:00",
   "detail": "Pinterest lehnt den Token ab (HTTP 401)",
   "fingerprint": "",
   "next_action": "Einmalige Neu-Autorisierung nötig (danach trägt sich der Kanal selbst): docs/PINTEREST-TOKEN-RUNBOOK.md – `python3 scripts/pinterest_auth.py --auth-url`",

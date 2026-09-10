@@ -8,9 +8,9 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
-keywords: ["Notgroschen", "Notfallreserve", "Tagesgeld", "Finanzpolster", "monatsausgaben", "sparplan"]
+keywords: ["Notgroschen", "Notfallreserve", "Finanzpolster", "monatsausgaben", "finanzielle"]
 pin_title: "Notgroschen: So groß sollte dein finanzielles Polster sein"
-pin_description: "*Werbung | Wie viel Notgroschen ist wirklich sinnvoll? Erfahre, wie du deine Notfallreserve realistisch berechnest, aufbaust und sicher auf Tagesgeld parkst. Klar, praktisch und ohne Panikmache. Jetzt lesen!"
+pin_description: "*Werbung | Wie viel Notgroschen brauchst du wirklich? So berechnest du dein finanzielles Polster, baust es planbar auf und parkst es sicher auf Tagesgeld. Mehr Spartipps auf FranksFinanzcheck! #notgroschen #notfallreserve #finanzpolster"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

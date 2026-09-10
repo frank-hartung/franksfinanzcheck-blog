@@ -11,7 +11,7 @@ author: "Frank Hartung"
 keywords: ["Heizung Wartung", "Winterfest machen Wohnung", "Spätsommer Heizung", "Gaskosten senken", "Günstig durch den Winter", "Heizungs-Check", "Gaspreisgarantie"]
 pinwand: Strom & Gas sparen | Tarife clever wechseln
 pin_title: "Heizung fit für den Winter: Sparen beginnt im Spätsommer"
-pin_description: "*Werbung | Heizungs-Check im Spätsommer: Mit Wartung, Thermostaten, dichten Fenstern und fairem Gastarif senkst du Kosten vor dem Winter. Unsere Checkliste zeigt die beste Reihenfolge für schnelle Wirkung. Jetzt lesen!"
+pin_description: "*Werbung | Mit Heizungswartung, klugen Einstellungen und einem Tarif-Check senkst du Gaskosten schon vor dem Winter. So machst du deine Wohnung jetzt effizient winterfest. Mehr Spartipps auf FranksFinanzcheck! #heizungwartung #winterfestmachenwohnung #spaetsommerheizung"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "profi"

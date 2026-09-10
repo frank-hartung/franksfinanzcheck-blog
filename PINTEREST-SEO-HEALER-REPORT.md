@@ -1,11 +1,11 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-09 11:30 UTC · **Modus:** FIX
+**Stand:** 2026-09-10 09:01 UTC · **Modus:** FIX
 
 - Artikel: **43**
-- Geheilt: **8**
+- Geheilt: **2**
 - Offene Issues: **0**
-- Covers: 2 Titel-Stale + fehlende nachgezogen
+- Covers: fehlende nachgezogen
 
 ## Kriterien 2026 (Agentur-Standard)
 
@@ -26,17 +26,17 @@
 | ✅ | `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` | — |
 | ✅ | `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden` | — |
 | ✅ | `2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel` | — |
-| ✅ | `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` | — |
+| ✅ | `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` *(draft)* | — |
 | ✅ | `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` | — |
 | ✅ | `2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife` | — |
-| ✅ | `2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst` | — |
+| ✅ | `2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst` *(draft)* | — |
 | ✅ | `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` | — |
 | ✅ | `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | — |
 | ✅ | `2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann` | — |
 | ✅ | `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | — |
 | ✅ | `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` | — |
 | ✅ | `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` | — |
-| ✅ | `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` | — |
+| ✅ | `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` *(draft)* | — |
 | ✅ | `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier` | — |
 | ✅ | `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` | — |
 | ✅ | `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` | — |
@@ -57,12 +57,12 @@
 | ✅ | `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` *(draft)* | — |
 | ✅ | `2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor` *(draft)* | — |
 | ✅ | `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen` *(draft)* | — |
-| ✅ | `2026-09-08-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` *(draft)* | — |
-| ✅ | `2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks` *(draft)* | — |
-| ✅ | `2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag` *(draft)* | — |
-| ✅ | `2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` *(draft)* | — |
-| ✅ | `2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer` *(draft)* | — |
-| ✅ | `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` *(draft)* | — |
+| ✅ | `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` | — |
+| ✅ | `2026-09-10-5-einfache-frugalismus-tricks-fuer-den-alltag` *(draft)* | — |
+| ✅ | `2026-09-10-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` *(draft)* | — |
+| ✅ | `2026-09-10-finanzieller-puffer-wie-viel-notgroschen-ist-genug` *(draft)* | — |
+| ✅ | `2026-09-10-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks` *(draft)* | — |
+| ✅ | `2026-09-10-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` *(draft)* | — |
 
 ## Selbstheilung (diese Runde)
 
