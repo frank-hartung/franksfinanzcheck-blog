@@ -36,7 +36,7 @@ Ein Heizungs-Check im Spätsommer ist deshalb mehr als nur Fleißarbeit. Du erke
 
 Du musst dafür keinen ganzen Samstag opfern. Oft reichen 30 bis 60 Minuten für einen Sichtcheck, die Thermostate und einen kurzen Tarifvergleich. Diese kleinen Schritte senken dein Risiko für teure Überraschungen im Winter massiv.
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/gas/)  
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/gas/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Warum der Spätsommer der beste Zeitpunkt ist
