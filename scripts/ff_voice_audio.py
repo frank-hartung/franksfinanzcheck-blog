@@ -1331,7 +1331,7 @@ def track_plausible(blocks, chunks, duration_ms) -> tuple:
     return True, ""
 
 
-def synth_article(blocks, engine, profile_name, tmp_dir, log):
+def synth_article(blocks, engine, profile_name, tmp_dir, log, deadline=None):
     """Erzeugt (samples, chunks, stats).
 
     chunks: [{b, t0, t1, lang:"de", w?: [[rawWortIndex, ms], …]}] in ms.
@@ -1351,13 +1351,22 @@ def synth_article(blocks, engine, profile_name, tmp_dir, log):
     komplett. Kein stilles Überspringen mehr: Eine Tonspur mit Lügen ist
     schlechter als keine Tonspur (der Reader fällt auf die Gerätestimme
     zurück).
+
+    `deadline` (time.monotonic-Wert, optional): Zeitbudget aus
+    --max-seconds. Wird VOR JEDEM Segment geprüft — nicht erst vor
+    jedem Artikel (Härtung 10.09.2026): Ein einzelner Artikel mit
+    vielen Segmenten (oder hängenden Versuchen) überzog das Budget
+    sonst unbegrenzt. Bei Ablauf kehrt die Funktion mit
+    stats["aborted"] = True zurück; der Aufrufer stellt den Artikel
+    zurück (deferred), statt ihn als defekt zu verwerfen — der
+    nächste Lauf setzt die Warteschlange fort.
     """
     os.makedirs(tmp_dir, exist_ok=True)
     pieces = []
     chunks = []
     cursor_ms = 0
     seg_index = 0
-    stats = {"segments": 0, "ok": 0, "failed": 0, "words": 0}
+    stats = {"segments": 0, "ok": 0, "failed": 0, "words": 0, "aborted": False}
 
     for bi, block in enumerate(blocks):
         profile = ttb.prosody_for(block["type"])
@@ -1392,6 +1401,17 @@ def synth_article(blocks, engine, profile_name, tmp_dir, log):
             pitch = int(round(profile.get("pitch", 0)))
 
             seg_wav = os.path.join(tmp_dir, "seg_%05d.wav" % seg_index)
+            # ZEITBUDGET (Härtung 10.09.2026): Die Deadline wird vor
+            # JEDEM Segment geprüft. Früher galt sie nur zwischen
+            # Artikeln — ein einziger Artikel mit vielen Segmenten
+            # (oder hängenden Versuchen) überzog sie unbegrenzt.
+            # Ablauf ⇒ sofortiger, ehrlicher Rückzug: Der Artikel wird
+            # zurückgestellt (deferred), NICHT als defekt verworfen.
+            if deadline is not None and time.monotonic() >= deadline:
+                stats["aborted"] = True
+                if log:
+                    log("Zeitbudget abgelaufen — Artikel wird zurückgestellt (Rest beim nächsten Lauf)")
+                return None, [], stats
             stats["segments"] += 1
             used_engine, ok, boundaries = ttb.synthesize(seg, blang, engine, profile_name,
                                                          seg_wav, rate=rate, pitch=pitch, volume=volume)
@@ -1905,7 +1925,20 @@ def main(argv=None) -> int:
 
         tmp_dir = os.path.join(args.out_dir, ".tmp-" + slug)
         samples, chunks, stats = synth_article(blocks, engine, profile, tmp_dir,
-                                               log=lambda m: print("  · %s" % m))
+                                               log=lambda m: print("  · %s" % m),
+                                               deadline=deadline)
+        if stats.get("aborted"):
+            # Budget lief MITTEN im Artikel ab (Segment-Deckel,
+            # Härtung 10.09.2026) — derselbe Umgang wie zwischen
+            # Artikeln: zurückstellen, Cache läuft weiter, kein
+            # Verwerfen, kein Strip; der nächste Lauf setzt fort.
+            if not budget_noted:
+                print("Zeitbudget erschöpft (--max-seconds %d) – Rest beim nächsten Lauf "
+                      "(Cache-Spuren werden weiterhin eingebunden)." % args.max_seconds)
+                budget_noted = True
+            deferred += 1
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+            continue
         if not samples:
             failed += 1
             shutil.rmtree(tmp_dir, ignore_errors=True)
@@ -2368,6 +2401,34 @@ def selftest() -> int:
             ok3, why3 = track_plausible(blocks, c3, dur3)
             check("Wortspur besteht das Plausibilitäts-Gate", ok3)
             check("Wortuhr: stats zählen Wörter mit", st3["words"] >= 2)
+
+        # ZEITBUDGET ZWISCHEN SEGMENTEN (Härtung 10.09.2026): Früher
+        # galt die Deadline nur zwischen Artikeln — ein Artikel mit
+        # vielen (oder hängenden) Segmenten überzog sie unbegrenzt.
+        # Ablauf ⇒ sofortiger Abbruch mit Ehrlichkeits-Flag statt
+        # Verwerfen; der Aufrufer stellt zurück (deferred).
+        calls = []
+
+        def _counting_synth(text, lang, engine, profile_name, out_wav,
+                            rate=1.0, pitch=0, volume=1.0):
+            calls.append(text)
+            return _working_synth(text, lang, engine, profile_name, out_wav,
+                                  rate=rate, pitch=pitch, volume=volume)
+
+        ttb.synthesize = _counting_synth
+        with _tf.TemporaryDirectory() as td:
+            past = time.monotonic() - 1.0
+            sa, _ca, sta = synth_article(blocks, "edge", "natural", td, log=None,
+                                         deadline=past)
+            check("Budget: abgelaufene Deadline bricht mit Ehrlichkeits-Flag ab",
+                  sta.get("aborted") is True and sa is None)
+            check("Budget: kein Segment mehr synthetisiert", calls == [])
+            future = time.monotonic() + 600.0
+            _sb, _cb, stb = synth_article(blocks, "edge", "natural", td, log=None,
+                                          deadline=future)
+            check("Budget: frische Deadline synthetisiert normal",
+                  stb.get("aborted") is not True and stb["ok"] > 0
+                  and stb["failed"] == 0)
     finally:
         ttb.synthesize = orig_synthesize
 

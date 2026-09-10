@@ -406,8 +406,8 @@ node scripts/ff_voice_repair_test.mjs       #  56 Gates: Reparatur-Pinne (Befund
 node scripts/ff_voice_tts_hardening_test.mjs#  57 Gates: Ehrlichkeits-/Stumm-/Hänger-Wachen (Befund 07.09.2026)
 python3 scripts/ff_voice_parity_check.py    # 384 Gates: Tonspur ≡ Browser-Engine, Wortuhr-Aligner-Parität, Nur-Deutsch-Verbote
 python3 scripts/ff_voice_toolbar_check.py   # 118 Gates: Layout, Styling, Wortzähler-IDs, Workflow, Rückbau
-python3 scripts/ff_voice_backends.py --selftest  #  83 Gates: Aussprache, Prosodie, Audio, Profile
-python3 scripts/ff_voice_audio.py --selftest     # 114 Gates: Block-Parität, Tabellen, Injektion, Wortuhr
+python3 scripts/ff_voice_backends.py --selftest  #  88 Gates: Aussprache, Prosodie, Audio, Profile, Edge-Timeout (10.09.)
+python3 scripts/ff_voice_audio.py --selftest     # 117 Gates: Block-Parität, Tabellen, Injektion, Wortuhr, Segment-Budget (10.09.)
 python3 scripts/heading_anchor_guard.py     #  36 Prüfungen: Anker-Wache — kein § in Überschriften, Quelle, Engine, Theme, Bau, Test-Verdrahtung
 ```
 

@@ -1283,8 +1283,21 @@ def _cleanup(path: str) -> None:
         pass
 
 
+# ---------------------------------------------------------------------------
+# Edge-Synthese: ein Segment sprechen (mit Timeout-Deckel, Befund 10.09.2026)
+# ---------------------------------------------------------------------------
+EDGE_SEGMENT_TIMEOUT = 120.0  # Sekunden je Stream-Versuch. Segmente sind
+                               # kurz (HARD_CHUNK = 220 Zeichen, normal
+                               # < 15 s Sprechzeit) — 120 s sind bewusst
+                               # großzügig. Rechenweg: 3 Versuche × 2
+                               # Stil-Stufen ⇒ max. ~12 Min. je Segment,
+                               # danach Engine-Fallback bzw. ehrlicher
+                               # Fehlschlag; die Artikelschleife bricht
+                               # zusätzlich am Zeitbudget ab.
+
+
 def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume: float,
-               out_wav: str):
+               out_wav: str, style=None, timeout: float = EDGE_SEGMENT_TIMEOUT):
     """Ein Segment mit einer Edge-Neuralstimme sprechen.
 
     KERNREPARATUR 06.09.2026: `edge-tts` liefert einen **MP3-Strom**
@@ -1311,6 +1324,22 @@ def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume
 
     `lang` wird ignoriert (Nur-Deutsch-Vertrag); die Signatur bleibt
     gegenueber Reader, Generator und Tests stabil.
+
+    BEFUND 10.09.2026 (stiller Totalausfall): Der Parameter `style`
+    fehlte in der Signatur, obwohl Aufrufer (`synthesize`) und Rumpf
+    ihn seit Gen 4 (07.09.2026) verwenden — JEDER Edge-Aufruf starb
+    drei Tage lang mit TypeError, alle Neuvertonungen fielen lautlos
+    auf Piper zurück. Kein Test fing es, weil alle Tests diese
+    Funktion fakten. Der Selbsttest ruft seitdem die ECHTE Funktion
+    auf (nur das Netzwerkmodul ist eine Attrappe).
+
+    TIMEOUT-HÄRTUNG 10.09.2026: `timeout` (Standard
+    EDGE_SEGMENT_TIMEOUT = 120 s) deckelt JEDEN Stream-Versuch. Ohne
+    Deckel konnte ein hängender Websocket das Segment — und damit
+    den Deploy — bis zur Job-Wanduhr (150 Min.) blockieren. Bei
+    Ablauf gilt der Versuch als Fehlschlag (Retry/Fallback wie bei
+    Netz-Aussetzern). `timeout=None` oder `<= 0` schaltet den Deckel
+    ab (nur für Diagnose).
     """
     import edge_tts
     del lang  # Nur-Deutsch-Vertrag — die Stimme entscheidet Deutsch.
@@ -1348,16 +1377,23 @@ def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume
                             "text": chunk.get("text", ""),
                         })
 
+        # Timeout-Deckel (10.09.2026): wait_for bricht einen hängenden
+        # Strom als TimeoutError ab — der landet im except-Zweig wie
+        # jeder Netz-Aussetzer (Retry, Stil-Fallback, Engine-Kette).
+        if timeout is not None and timeout > 0:
+            task = asyncio.wait_for(run(), timeout)
+        else:
+            task = run()
         try:
             try:
                 loop = asyncio.new_event_loop()
             except Exception:
                 loop = None
             if loop is None:
-                asyncio.run(run())
+                asyncio.run(task)
             else:
                 try:
-                    loop.run_until_complete(run())
+                    loop.run_until_complete(task)
                 finally:
                     loop.close()
         except Exception:
@@ -1748,6 +1784,77 @@ def _selftest() -> int:
             globals_[k] = v
         os.environ.pop("FF_VOICE_RETRY_SLEEP", None)
         shutil.rmtree(tmp, ignore_errors=True)
+
+    # ------------------------------------------------------------------
+    # Edge-Timeout + style-Signatur (Befund 10.09.2026)
+    # ------------------------------------------------------------------
+    # Gen 4 (07.09.2026) ließ `synthesize` ein `style=` an synth_edge
+    # übergeben, das es in der Signatur nicht gab — JEDER Edge-Aufruf
+    # starb drei Tage lang mit TypeError, alle Neuvertonungen fielen
+    # lautlos auf Piper zurück. Kein Test fing es, weil ALLE Tests
+    # diese Funktion fakten. Diese Checks rufen die ECHTE Funktion
+    # auf — nur das Netzwerkmodul edge_tts ist eine Attrappe.
+    import asyncio as _aio
+    import time as _time
+    import types as _types
+
+    class _HangingCommunicate:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        async def stream(self):
+            await _aio.sleep(3600)   # hängt für immer
+            yield {}                  # (unerreichbar)
+
+    class _EmptyCommunicate:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        async def stream(self):
+            return
+            yield {}                  # leerer Strom
+
+    fake_edge = _types.ModuleType("edge_tts")
+    saved_edge = sys.modules.get("edge_tts")
+    tmp2 = tempfile.mkdtemp(prefix="ff-edge-timeout-")
+    try:
+        # 1) Hängender Strom + echter Aufruf MIT style (Gen-4-Konvention):
+        #    muss mit (False, []) in Sekunden zurückkehren — kein
+        #    TypeError (Signatur-Bug), kein Hänger (Timeout-Deckel).
+        fake_edge.Communicate = _HangingCommunicate
+        sys.modules["edge_tts"] = fake_edge
+        try:
+            t0 = _time.monotonic()
+            ok_hang, b_hang = synth_edge("Hallo Welt", "de", "stimme", 1.0, 0, 1.0,
+                                         os.path.join(tmp2, "hang.wav"),
+                                         style="serious", timeout=0.3)
+            dt_hang = _time.monotonic() - t0
+        except TypeError:
+            ok_hang, b_hang, dt_hang = "TYPEERROR", [], 999.0
+        check("Edge-Timeout: hängender Stream kehrt mit (False, []) zurück",
+              ok_hang is False and b_hang == [])
+        check("Edge-Timeout: Rückkehr in Sekunden (Deckel greift)", dt_hang < 30)
+        import inspect as _inspect
+        _sig = _inspect.signature(synth_edge)
+        check("Edge-Signatur: style-Parameter mit Default None",
+              "style" in _sig.parameters
+              and _sig.parameters["style"].default is None)
+        # 2) Diagnose-Notausgang: timeout=None bleibt nutzbar.
+        fake_edge.Communicate = _EmptyCommunicate
+        sys.modules["edge_tts"] = fake_edge
+        ok_empty, _b_empty = synth_edge("Hallo", "de", "stimme", 1.0, 0, 1.0,
+                                        os.path.join(tmp2, "empty.wav"),
+                                        timeout=None)
+        check("Edge-Timeout: timeout=None bleibt nutzbar (leerer Strom ⇒ False)",
+              ok_empty is False)
+    finally:
+        if saved_edge is None:
+            sys.modules.pop("edge_tts", None)
+        else:
+            sys.modules["edge_tts"] = saved_edge
+        shutil.rmtree(tmp2, ignore_errors=True)
+    check("Edge-Timeout: Standard-Deckel aktiv und maßvoll",
+          (EDGE_SEGMENT_TIMEOUT or 0) > 0 and EDGE_SEGMENT_TIMEOUT <= 300)
 
     failed = [n for n, ok in results if not ok]
     for name, ok in results:

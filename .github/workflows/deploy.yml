@@ -303,6 +303,18 @@ jobs:
           python3 scripts/ff_voice_audio.py --engines || true
 
       - name: Vorlese-Tonspuren erzeugen (männliche deutsche Nachrichtensprecher-Stimme, kostenlos)
+        # WANDUHR FÜR DEN SCHLIMMSTEN FALL (Härtung 10.09.2026):
+        # Normal braucht dieser Schritt Budget (20 Min., Backfill 90)
+        # plus Anlauf/Überlauf (Cache-Fetch, ein Segment-Überhang von
+        # höchstens ~12 Min.). 120 Min. decken beides mit Reserve ab.
+        # Bleibt der Schritt DENNOCH hängen (unvorhergesehener Hänger
+        # außerhalb der gedeckelten Synthese), stirbt der Deploy NICHT
+        # erst an der Job-Wanduhr (150 Min.): continue-on-error lässt
+        # ihn mit Cache- + Browser-Fallback weiterlaufen, die
+        # Nachmessung (--heal) räumt Teilausgaben weg. Ton darf den
+        # Livegang verzögern, aber nie verhindern.
+        timeout-minutes: 120
+        continue-on-error: true
         run: |
           mkdir -p /tmp/ff-voice-cache
           # Vorherige Tonspuren vom letzten Deploy holen (inkrementell).
