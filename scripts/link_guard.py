@@ -47,6 +47,8 @@ NEW_ONLY = "--new-only" in sys.argv
 # REL_LINK: erfasst auch URLs MIT Leerzeichen („zu Hause“-Slugs)
 REL_LINK = re.compile(r"\]\((\.\./\.\./(?:posts|pillar)/)([^)]*?)(/?)\)")
 GO_LINK = re.compile(r"\]\(/go/([\w-]+)/\)")
+# Link-in-Link-Artefakte sind kein gültiges Markdown und müssen den Build stoppen.
+MALFORMED_LINK = re.compile(r"\[\[[^\n]*?\]\([^)]*\)[^\n]*?\]\([^)]*\)")
 
 
 def slug_register() -> dict:
@@ -169,6 +171,10 @@ def scan_file(path: Path, register: dict, gow: set) -> tuple:
 
     text2 = REL_LINK.sub(repl_rel, text)
 
+    for m in MALFORMED_LINK.finditer(text2):
+        preview = re.sub(r"\s+", " ", m.group(0))[:140]
+        reports.append(("V3-MALFORMED", f"verschachtelter Markdown-Link: {preview}"))
+
     for m in GO_LINK.finditer(text2):
         if m.group(1) not in gow:
             reports.append(("V2", f"/go/{m.group(1)}/ unbekannt (Register)"))
@@ -196,7 +202,8 @@ def main() -> None:
         text2, fixes, reports = scan_file(f, register, gow)
         tot_fix += fixes
         tot_reports += [(str(f.relative_to(ROOT)), r) for r in reports]
-        tot_dead += sum(1 for r in reports if r[0] == "V1-TOT") + sum(1 for r in reports if r[0] == "V2")
+        tot_dead += (sum(1 for r in reports if r[0] == "V1-TOT") +
+                     sum(1 for r in reports if r[0] in ("V2", "V3-MALFORMED")))
         if fixes and DO_FIX and not DRY_RUN and text2 != f.read_text(encoding="utf-8"):
             f.write_text(text2, encoding="utf-8")
 
