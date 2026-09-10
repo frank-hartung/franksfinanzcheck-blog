@@ -37,6 +37,7 @@ on:
       - "layouts/pillar/single.html"
       - "layouts/shortcodes/**"
       - "scripts/ff_voice_functional_test.mjs"
+      - "scripts/ff_heading_glyph_guard_test.mjs"
       - "scripts/ff_voice_voice_test.js"
       - "scripts/ff_voice_repair_test.mjs"
       - "scripts/ff_voice_tts_hardening_test.mjs"
@@ -66,6 +67,7 @@ on:
       - "scripts/ff_voice_audio.py"
       - "scripts/ff_voice_backends.py"
       - "scripts/ff_voice_functional_test.mjs"
+      - "scripts/ff_heading_glyph_guard_test.mjs"
       - "scripts/ff_voice_voice_test.js"
       - "scripts/ff_voice_repair_test.mjs"
       - "scripts/ff_voice_tts_hardening_test.mjs"
@@ -123,6 +125,17 @@ jobs:
       # ---- Echter Funktionstest (jsdom, echte Engine-Datei) ----
       - name: Funktionstest Vorlesen + Kurzfassung (echte DOM)
         run: node scripts/ff_voice_functional_test.mjs
+
+      # ---- „§“-Wache (Issue #248 / Befund 10.09.2026) ----
+      # Der Abschnitts-Knopf „Link kopieren“ trug einst ein „§“ als Text
+      # in JEDER Überschrift — Kurzfassung, Klartext-Kopie und Vorlesen
+      # lasen es mit. Diese Wache lädt die echten Produktions-Dateien
+      # (ff-premium.js + ff-voice.js + ff-summary-safety.js) in eine echte
+      # DOM, prüft alle echten Artikel, den Label-Vertrag (Gliederung ≡
+      # sichtbarem Überschriftentext), den Inhaltsschutz („§ 8 EinSiG“
+      # bleibt) und die Immunität gegen künftige UI-Injektionen.
+      - name: "„§“-Wache (Kurzfassung/Klartext/Vorlesen bleiben §-frei)"
+        run: node scripts/ff_heading_glyph_guard_test.mjs
 
       # ---- Anker-Wache (Befund 10.09.2026) ----
       # Der Abschnitts-Knopf „Link kopieren“ trug ein „§“ als Text in
