@@ -224,6 +224,16 @@ jobs:
         if: steps.gate_diff.outputs.changed == 'true'
         run: hugo --minify
 
+      # ================= ANKER-WACHE (Befund 10.09.2026) =================
+      # Der Abschnitts-Knopf „Link kopieren“ trug ein „§“ als TEXT in
+      # JEDER Überschrift. Kurzfassung („In diesem Artikel“), Tabellen-
+      # Titel, Klartext-Kopie, Mini-Verzeichnis, die Vorlese-Engine,
+      # Screenreader (Überschriften-Name) und Suchmaschinen lasen es mit.
+      # Die Wache prüft die QUELLE und die gerade gebauten Seiten in
+      # public/ – ein Fund stoppt den Deploy.
+      - name: Anker-Wache (kein § in Überschriften, Kurzfassung & Vorlesen)
+        run: python3 scripts/heading_anchor_guard.py
+
       # ================= VORLESE-AUDIO (FF Voice Studio, 05.09.2026) ========
       # Vorab vertonte Artikel mit einem MÄNNLICHEN DEUTSCHEN
       # NACHRICHTENSPRECHER – wie bei zeit.de. Die Tonspur (MP3) läuft über

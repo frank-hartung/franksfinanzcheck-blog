@@ -308,7 +308,10 @@ def duration_phrase(minutes, C):
 
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input",
         "link", "meta", "param", "source", "track", "wbr"}
-SKIP_TAGS = {"script", "style", "noscript", "svg", "template"}
+# Bedienelemente, eingebettete Flächen und Anker zählen nicht zum
+# Vorlesetext (Parität zur Browser-Engine, Befund 10.09.2026).
+SKIP_TAGS = {"script", "style", "noscript", "svg", "template",
+             "button", "input", "select", "textarea", "canvas", "iframe"}
 
 
 class Node:
@@ -479,6 +482,12 @@ def text_of(node: Node) -> str:
         return ""
     if node.attr("aria-hidden") == "true":
         return ""
+    if node.attr("hidden") is not None:
+        return ""
+    if node.has_class("anchor") or node.has_class("ff-heading-copy"):
+        return ""
+    if node.has_class("ff-mini-toc"):
+        return ""
     if node.tag in ("br",):
         return " "
     parts = [text_of(c) for c in node.children]
@@ -502,6 +511,12 @@ def _text_without(node: Node, skip_classes) -> str:
     if node.tag is None:
         return node.text or ""
     if node.tag in SKIP_TAGS:
+        return ""
+    if node.attr("data-ff-skip-read") is not None:
+        return ""
+    if node.attr("hidden") is not None:
+        return ""
+    if node.has_class("anchor") or node.has_class("ff-heading-copy"):
         return ""
     if any(node.has_class(c) for c in skip_classes):
         return ""
@@ -1158,7 +1173,8 @@ def extract_blocks(root: Node, cfg: dict):
             idx = el.parent.children.index(el) + 1
             speak_text = C["listItemNum"].replace("{n}", str(idx)) + " " + text
         if re.match(r"^h[23456]$", el.tag or ""):
-            heading = re.sub(r"[\s?!.…]+$", "", text)
+            # Ankersymbole („§“, „#“) am Ende sind nie Teil einer Überschrift
+            heading = re.sub(r"[\s#§?!.…]+$", "", text)
             speak_text = heading + ("?" if text.rstrip().endswith("?") else ".")
 
         spoken_blocks.append((el, speak_text))

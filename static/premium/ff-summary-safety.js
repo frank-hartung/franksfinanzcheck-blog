@@ -35,8 +35,34 @@
     }
   }
 
+  /* Letztes Sicherheitsnetz gegen ANKERRESTE (Befund 10.09.2026):
+     Manche Erweiterungen hängen an Überschriften ein Symbol („§“, „#“).
+     Steht es im Überschriften-Text, landet es im Inhaltsverzeichnis der
+     Kurzfassung. Hier wird deshalb am ENDE jedes Verzeichnis-Eintrags
+     ein angehängtes Ankersymbol entfernt. Ein echtes „§“ mitten im Text
+     („Rechte aus § 8 EinSiG“) bleibt unangetastet. */
+  function trimAnchorTrail(node) {
+    if (!node || !document.createTreeWalker) return;
+    var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+    var last = null;
+    var current;
+    while ((current = walker.nextNode())) last = current;
+    if (!last) return;
+    var raw = last.nodeValue || '';
+    var cleaned = raw.replace(/[\s\u00a7#]+$/, '');
+    if (cleaned !== raw && cleaned.length) last.nodeValue = cleaned;
+  }
+
+  function cleanTocTrails(dialog) {
+    if (!dialog || !dialog.querySelectorAll) return;
+    var links = dialog.querySelectorAll('.ff-voice-toc a');
+    for (var i = 0; i < links.length; i++) trimAnchorTrail(links[i]);
+  }
+
   function run() {
-    sanitizeDialog(document.getElementById('ff-voice-dialog'));
+    var dialog = document.getElementById('ff-voice-dialog');
+    sanitizeDialog(dialog);
+    cleanTocTrails(dialog);
   }
 
   if (document.readyState === 'loading') {
