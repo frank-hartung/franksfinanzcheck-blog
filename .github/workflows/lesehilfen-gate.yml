@@ -26,7 +26,9 @@ on:
     branches: ["**"]
     paths:
       - "static/premium/ff-voice.js"
+      - "static/premium/ff-premium.js"
       - "assets/css/extended/ff-voice.css"
+      - "assets/css/extended/z-premium-blog.css"
       - "layouts/_partials/ff_voice_toolbar.html"
       - "layouts/single.html"
       - "layouts/_default/single.html"
@@ -37,6 +39,7 @@ on:
       - "scripts/ff_voice_repair_test.mjs"
       - "scripts/ff_voice_tts_hardening_test.mjs"
       - "scripts/ff_voice_browser_test.mjs"
+      - "scripts/ff_heading_glyph_guard_test.mjs"
       - "scripts/ff_voice_qa_lib.mjs"
       - "tools/ff-voice-browser/**"
       - "scripts/ff_voice_probe.mjs"
@@ -62,6 +65,7 @@ on:
       - "scripts/ff_voice_repair_test.mjs"
       - "scripts/ff_voice_tts_hardening_test.mjs"
       - "scripts/ff_voice_browser_test.mjs"
+      - "scripts/ff_heading_glyph_guard_test.mjs"
   schedule:
     - cron: "20 6 * * *"   # 08:20 MESZ – tägliche Wache gegen stillen Verfall
   workflow_dispatch: {}
@@ -110,6 +114,11 @@ jobs:
       # ---- Echter Funktionstest (jsdom, echte Engine-Datei) ----
       - name: Funktionstest Vorlesen + Kurzfassung (echte DOM)
         run: node scripts/ff_voice_functional_test.mjs
+
+      # ---- Abschnitts-„§“-Wache (Befund 10.09.2026: Der „§“-Copy-Button
+      #      rutschte in Kurzfassung, Klartext-Kopie und Vorlesen durch) ----
+      - name: „§“-Wache (Kurzfassung/Klartext/Vorlesen bleiben §-frei)
+        run: node scripts/ff_heading_glyph_guard_test.mjs
 
       # ---- Reparatur-Pinne (Befund 06.09.2026: Tonspur-Wache,
       #      Fallback, ehrlicher Stopp, lazy Stimmbindung) ----

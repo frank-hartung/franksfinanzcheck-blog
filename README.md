@@ -400,10 +400,11 @@ Die Tonspur läuft im nativen HTML5-Player und klingt dadurch **identisch** auf 
 
 ```bash
 node scripts/ff_voice_functional_test.mjs   # 218 Gates: echte DOM, alle echten Artikel, Doppel-Lese-Schleuse, Wort-Takt (Gruppe 9b)
+node scripts/ff_heading_glyph_guard_test.mjs#  33 Gates: „§“-Wache — Copy-Button bleibt in Kurzfassung/Klartext/Vorlesen unsichtbar (Befund 10.09.2026)
 node scripts/ff_voice_voice_test.js         #  69 Gates: männlicher Nachrichtensprecher, Nur-Deutsch, Wortuhr-Sprechpfad, 8 Geräte-Kataloge
 node scripts/ff_voice_repair_test.mjs       #  56 Gates: Reparatur-Pinne (Befund 06.09.2026)
 node scripts/ff_voice_tts_hardening_test.mjs#  57 Gates: Ehrlichkeits-/Stumm-/Hänger-Wachen (Befund 07.09.2026)
-python3 scripts/ff_voice_parity_check.py    # 337 Gates: Tonspur ≡ Browser-Engine, Wortuhr-Aligner-Parität, Nur-Deutsch-Verbote
+python3 scripts/ff_voice_parity_check.py    # 384 Gates: Tonspur ≡ Browser-Engine, Wortuhr-Aligner-Parität, Nur-Deutsch-Verbote
 python3 scripts/ff_voice_toolbar_check.py   # 118 Gates: Layout, Styling, Wortzähler-IDs, Workflow, Rückbau
 python3 scripts/ff_voice_backends.py --selftest  #  71 Gates: Aussprache, Prosodie, Audio, Profile
 python3 scripts/ff_voice_audio.py --selftest     # 105 Gates: Block-Parität, Tabellen, Injektion, Wortuhr

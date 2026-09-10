@@ -250,13 +250,18 @@
   function storeDel(k) { try { win.localStorage.removeItem(k); } catch (e) {} }
   function escapeRe(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
-  /** Sichtbarer Text eines Knotens – mit Zeilen-/Absatz-Abstand. */
+  /** Sichtbarer Text eines Knotens – mit Zeilen-/Absatz-Abstand.
+      UI-Kontrollen sind KEIN Artikeltext: <button>-Knoten (Abschnitts-„§“-
+      Copy-Buttons, Toolbar-Knöfe, CTAs) werden vor jeder Extraktion
+      entfernt. Damit bleiben Kurzfassung, Klartext-Kopie, Vorlesen und
+      Fortschrittsanzeige immun gegen UI-Elemente, die in Inhaltselemente
+      injiziert werden (Befund 10.09.2026: „§“ in jeder Gliederung). */
   function readableText(el) {
     if (!el) return '';
     var clone = el;
     if (el.cloneNode) {
       clone = el.cloneNode(true);
-      qsa('script, style, noscript, svg, [data-ff-skip-read], [aria-hidden="true"]', clone)
+      qsa('script, style, noscript, svg, button, [data-ff-skip-read], [aria-hidden="true"]', clone)
         .forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); });
       qsa('br', clone).forEach(function (n) {
         if (n.parentNode) n.parentNode.replaceChild(doc.createTextNode(' '), n);
@@ -4273,6 +4278,19 @@
     return fallback;
   }
 
+  /** Redaktionell sauberes Überschriften-Label für Gliederungen:
+      UI-Schmuck (Abschnitts-„§“, Paragraphenzeichen, Anker-„#“) wird
+      entfernt — dieselbe Konvention wie in der ff-mini-toc. So bleibt
+      die Kurzfassung-Gliederung auch dann sauber, wenn sich künftig
+      irgendein UI-Knoten oder Zeichen in eine Überschrift schiebt. */
+  function cleanHeadingLabel(text) {
+    return String(text == null ? '' : text)
+      .replace(/[\u00a0]+/g, ' ')
+      .replace(/[§¶#]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
   function buildToc() {
     return collectHeadings().map(function (h) {
       var id = h.getAttribute('id');
@@ -4280,7 +4298,7 @@
         id = 'ff-voice-sec-' + Math.random().toString(36).slice(2, 8);
         h.setAttribute('id', id);
       }
-      return { id: id, text: readableText(h), level: parseInt(tagOf(h).slice(1), 10) };
+      return { id: id, text: cleanHeadingLabel(readableText(h)), level: parseInt(tagOf(h).slice(1), 10) };
     });
   }
 

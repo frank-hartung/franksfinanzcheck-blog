@@ -183,6 +183,19 @@
     animateMoneyWithGsap();
   }
 
+  /* Abschnitts-Link-Kopierer („§“ hinter jeder Überschrift).
+     PREMIUM-EXTRAKTIONSSICHERHEIT (Befund 10.09.2026): Das „§“ ist reine
+     UI-Dekoration und darf NIEMALS in Textextraktionen landen — die
+     Kurzfassung-Gliederung („In diesem Artikel“), die Klartext-Kopie,
+     das Vorlesen und die Fortschrittsanzeige lesen sonst bei jedem
+     Abschnitt ein „§“ mit. Dreifach abgesichert:
+       1. Glyph lebt in <span aria-hidden="true"> — dekorativ, kein Inhalt;
+       2. Button trägt data-ff-skip-read — die etablierte Konvention, die
+          alle ff-voice.js-Extraktoren respektieren;
+       3. ff-voice.js::readableText() strippt zusätzlich jegliche
+          <button>-Knoten (dritter Wall gegen künftige UI-Injektionen).
+     Der Button bleibt über sein aria-label voll zugänglich (Screenreader
+     sagen „Link zu diesem Abschnitt kopieren“, nicht „§“). */
   function addHeadingCopyButtons() {
     qsa('.post-content h2[id], .post-content h3[id], .md-content h2[id], .md-content h3[id]').forEach(function (heading) {
       if (heading.querySelector('.ff-heading-copy')) return;
@@ -190,7 +203,12 @@
       button.className = 'ff-heading-copy';
       button.type = 'button';
       button.setAttribute('aria-label', 'Link zu diesem Abschnitt kopieren');
-      button.innerHTML = '§';
+      button.setAttribute('data-ff-skip-read', '');
+      var glyph = doc.createElement('span');
+      glyph.className = 'ff-heading-copy__glyph';
+      glyph.setAttribute('aria-hidden', 'true');
+      glyph.textContent = '§';
+      button.appendChild(glyph);
       button.addEventListener('click', function (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -198,9 +216,11 @@
         var done = function () {
           button.classList.add('ff-copied');
           button.setAttribute('aria-label', 'Link kopiert');
+          glyph.textContent = '✓';
           setTimeout(function () {
             button.classList.remove('ff-copied');
             button.setAttribute('aria-label', 'Link zu diesem Abschnitt kopieren');
+            glyph.textContent = '§';
           }, 1500);
         };
         if (navigator.clipboard && navigator.clipboard.writeText) {

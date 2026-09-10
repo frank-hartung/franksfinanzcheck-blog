@@ -359,6 +359,14 @@ body.ff-scrolled .header {
   transition: opacity .18s ease, color .18s ease, background-color .18s ease;
 }
 
+/* Das „§“-Glyph ist Dekoration (aria-hidden): nicht wählbar,
+   keine Textmarkierung, ruhige Zeilenhöhe. */
+.ff-heading-copy__glyph {
+  line-height: 1;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 h2:hover .ff-heading-copy,
 h3:hover .ff-heading-copy,
 .ff-heading-copy:focus-visible {
