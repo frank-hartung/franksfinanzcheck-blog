@@ -1340,20 +1340,36 @@ def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume
     Ablauf gilt der Versuch als Fehlschlag (Retry/Fallback wie bei
     Netz-Aussetzern). `timeout=None` oder `<= 0` schaltet den Deckel
     ab (nur für Diagnose).
+
+    WORTUHR (Befund 10.09.2026): edge-tts 7.x liefert WordBoundary-
+    Ereignisse nur mit boundary="WordBoundary" (Standard: Satzebene).
+    Der Schalter wird gesetzt; Bibliotheken ohne ihn fallen weich
+    zurück (Satzebene statt Wortuhr — Ton bleibt, gelogen wird nie).
     """
     import edge_tts
     del lang  # Nur-Deutsch-Vertrag — die Stimme entscheidet Deutsch.
     os.makedirs(os.path.dirname(out_wav) or ".", exist_ok=True)
 
     def _make(style=None):
+        # WORTUHR (Befund 10.09.2026): edge-tts 7.x meldet Wortgrenzen nur
+        # mit boundary="WordBoundary" (Standard ist Satzebene) — ohne
+        # diesen Schalter bliebe `boundaries` für immer leer und die
+        # wortgenaue Leseanzeige stumm. Alte Bibliotheken ohne den
+        # Schalter fallen unten weich auf Satzebene zurück (Ton bleibt).
         kwargs = dict(rate=_rate_to_edge(rate), volume=_volume_to_edge(volume),
-                      pitch=_pitch_to_edge(pitch))
+                      pitch=_pitch_to_edge(pitch), boundary="WordBoundary")
         if style:
             try:
                 return edge_tts.Communicate(text, voice, style=style, **kwargs)
             except TypeError:
                 pass  # Dieses edge-tts kennt keine Styles — neutral sprechen.
-        return edge_tts.Communicate(text, voice, **kwargs)
+        try:
+            return edge_tts.Communicate(text, voice, **kwargs)
+        except TypeError:
+            # Uralt-edge-tts ohne boundary-Schalter — letzter Rückzug:
+            # neutral und auf Satzebene, aber mit Ton.
+            kwargs.pop("boundary", None)
+            return edge_tts.Communicate(text, voice, **kwargs)
 
     src_path = out_wav + ".edge.src"
 
@@ -1847,6 +1863,46 @@ def _selftest() -> int:
                                         timeout=None)
         check("Edge-Timeout: timeout=None bleibt nutzbar (leerer Strom ⇒ False)",
               ok_empty is False)
+        # 3) Wortuhr-Schalter (Befund 10.09.2026): Die Attrappe
+        #    protokolliert mit, welche Schalter _make setzt.
+        REC = []
+
+        class _RecordingCommunicate:
+            def __init__(self, *args, **kwargs):
+                REC.append(kwargs)
+
+            async def stream(self):
+                return
+                yield {}
+
+        fake_edge.Communicate = _RecordingCommunicate
+        sys.modules["edge_tts"] = fake_edge
+        synth_edge("Hallo Welt", "de", "stimme", 1.0, 0, 1.0,
+                   os.path.join(tmp2, "rec.wav"), style="serious", timeout=5)
+        check("Edge-Wortuhr: boundary='WordBoundary' wird gesetzt",
+              len(REC) > 0 and all(k.get("boundary") == "WordBoundary" for k in REC))
+
+        # 4) Uralt-Bibliothek ohne den Schalter: TypeError beim
+        #    boundary-Schalter ⇒ weicher Rückzug ohne ihn (Ton bleibt).
+        REC2 = []
+
+        class _AncientCommunicate:
+            def __init__(self, *args, **kwargs):
+                if "boundary" in kwargs:
+                    raise TypeError("unexpected keyword argument 'boundary'")
+                REC2.append(kwargs)
+
+            async def stream(self):
+                return
+                yield {}
+
+        fake_edge.Communicate = _AncientCommunicate
+        sys.modules["edge_tts"] = fake_edge
+        ok_ancient, _b_ancient = synth_edge("Hallo", "de", "stimme", 1.0, 0, 1.0,
+                                            os.path.join(tmp2, "ancient.wav"),
+                                            timeout=5)
+        check("Edge-Wortuhr: Fallback ohne Schalter bei alter Bibliothek",
+              ok_ancient is False and len(REC2) > 0)
     finally:
         if saved_edge is None:
             sys.modules.pop("edge_tts", None)

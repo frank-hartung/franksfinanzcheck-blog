@@ -26,7 +26,7 @@ Willst du am Monatsende mehr Geld in der Tasche haben? Dann ist Frugalismus ein 
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Angebote in deiner Region sehen**](/go/strom/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Angebote in deiner Region sehen**](/go/strom/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## 1. Strom und Energie clever managen
