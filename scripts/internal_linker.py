@@ -89,6 +89,53 @@ def strip_markdown(text):
     text = re.sub(r"\s+", " ", text)
     return text.strip()
 
+def _balanced_end(text, start, opening, closing):
+    """Findet das Ende eines escaped-sicheren, verschachtelten Delimiters."""
+    depth = 1
+    escaped = False
+    for pos in range(start + 1, len(text)):
+        char = text[pos]
+        if escaped:
+            escaped = False
+            continue
+        if char == "\\":
+            escaped = True
+        elif char == opening:
+            depth += 1
+        elif char == closing:
+            depth -= 1
+            if depth == 0:
+                return pos
+    return None
+
+def markdown_link_ranges(text):
+    """Liefert komplette Markdown-Linkbereiche, auch bei verschachtelten Links.
+
+    Die alte Regex stoppte am ersten ]/) und liess Teile eines bereits
+    verlinkten Anchors fuer den naechsten Lauf offen. Die Positionen
+    bleiben wie bei find_anchor unveraendert.
+    """
+    ranges = []
+    pos = 0
+    while pos < len(text):
+        if text[pos] == "\\":
+            pos += 2
+            continue
+        if text[pos] != "[":
+            pos += 1
+            continue
+        label_end = _balanced_end(text, pos, "[", "]")
+        if label_end is None or label_end + 1 >= len(text) or text[label_end + 1] != "(":
+            pos += 1
+            continue
+        url_end = _balanced_end(text, label_end + 1, "(", ")")
+        if url_end is None:
+            pos += 1
+            continue
+        ranges.append((pos, url_end + 1))
+        pos = url_end + 1
+    return ranges
+
 
 def find_anchor(body, phrase):
     """Findet das erste Vorkommen einer Phrase im Body, außerhalb von
@@ -97,10 +144,8 @@ def find_anchor(body, phrase):
     code_ranges = []
     for m in re.finditer(r"(`[^`]*`|```.*?```)", body, re.S):
         code_ranges.append((m.start(), m.end()))
-    # Body ohne bestehende Links betrachten
-    link_ranges = []
-    for m in re.finditer(r"\[[^\]]*\]\([^)]*\)", body):
-        link_ranges.append((m.start(), m.end()))
+    # Body ohne bestehende Links betrachten – verschachtelte Links komplett sperren.
+    link_ranges = markdown_link_ranges(body)
 
     # Überschriften-Ranges
     head_ranges = []
@@ -260,6 +305,10 @@ def main():
             if not anchor:
                 continue
             start, end = anchor
+            # Keine sich überschneidenden Inserts: verhindert Link-in-Link-Kaskaden.
+            if any(start < other_end and end > other_start
+                   for other_start, other_end, _ in planned):
+                continue
             # tgt_fn IST der Ordner-Slug (kein .md-Rest mehr) – NIE kuerzen!
             # (12.08. Root-Cause: [:-3] riss „wechseln“ zu „wechs“ → 404.)
             target = f"../../posts/{tgt_fn}/"  # relativ (Hugo-Subdir-sicher)
