@@ -26,7 +26,11 @@ on:
     branches: ["**"]
     paths:
       - "static/premium/ff-voice.js"
+      - "static/premium/ff-premium.js"
+      - "static/premium/ff-summary-safety.js"
+      - "scripts/heading_anchor_guard.py"
       - "assets/css/extended/ff-voice.css"
+      - "assets/css/extended/z-premium-blog.css"
       - "layouts/_partials/ff_voice_toolbar.html"
       - "layouts/single.html"
       - "layouts/_default/single.html"
@@ -51,7 +55,11 @@ on:
   pull_request:
     paths:
       - "static/premium/ff-voice.js"
+      - "static/premium/ff-premium.js"
+      - "static/premium/ff-summary-safety.js"
+      - "scripts/heading_anchor_guard.py"
       - "assets/css/extended/ff-voice.css"
+      - "assets/css/extended/z-premium-blog.css"
       - "layouts/**"
       - "content/posts/**"
       - "content/pillar/**"
@@ -107,9 +115,21 @@ jobs:
       - name: Syntaxprüfung ff-voice.js
         run: node --check static/premium/ff-voice.js
 
+      - name: Syntaxprüfung ff-premium.js & Sicherheitsnetz
+        run: |
+          node --check static/premium/ff-premium.js
+          node --check static/premium/ff-summary-safety.js
+
       # ---- Echter Funktionstest (jsdom, echte Engine-Datei) ----
       - name: Funktionstest Vorlesen + Kurzfassung (echte DOM)
         run: node scripts/ff_voice_functional_test.mjs
+
+      # ---- Anker-Wache (Befund 10.09.2026) ----
+      # Der Abschnitts-Knopf „Link kopieren“ trug ein „§“ als Text in
+      # JEDER Überschrift. Die Wache sichert Quelle, Engine, Theme und
+      # die Regressionsgruppe dauerhaft ab.
+      - name: Anker-Wache (kein § in Überschriften, Kurzfassung & Vorlesen)
+        run: python3 scripts/heading_anchor_guard.py
 
       # ---- Reparatur-Pinne (Befund 06.09.2026: Tonspur-Wache,
       #      Fallback, ehrlicher Stopp, lazy Stimmbindung) ----

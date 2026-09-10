@@ -183,24 +183,109 @@
     animateMoneyWithGsap();
   }
 
+  /* ============================================================
+     Abschnitts-Link (Anker-Knopf) — Befund 10.09.2026
+     ------------------------------------------------------------
+     Der Knopf trug früher ein „§“ als TEXTKNOTEN direkt in der
+     Überschrift. Dadurch hing an jeder Überschrift des Blogs ein
+     sichtbares „§“ — überall dort, wo der Überschriften-Text
+     ausgelesen wird:
+
+       · Kurzfassung → „In diesem Artikel“ (jeder Eintrag mit „§“)
+       · Kurzfassung → Tabellen-Titel und Klartext-Kopie
+       · Vorlesen-Engine (sprach „… Paragraph“)
+       · Mini-Inhaltsverzeichnis (dort notdürftig weggeputzt)
+       · Überschriften-Name für Screenreader (WCAG/BITV)
+       · Suchmaschinen (Überschriften sind ein Ranking-Signal)
+
+     Reparatur auf Verlagshaus-Niveau:
+       · SYMBOL STATT GLYPHE: reines Inline-SVG, kein Textknoten
+       · `data-ff-skip-read`: Lesemaschinen überspringen den Knopf
+       · `.ff-heading-text` + `aria-labelledby`: nur der echte
+         Überschriften-Text beschriftet die Überschrift
+     ============================================================ */
+  var COPY_LABEL = 'Link zu diesem Abschnitt kopieren';
+  var COPIED_LABEL = 'Link kopiert';
+  var LINK_ICON = '<svg class="ff-heading-copy__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'
+    + '<path d="M9.5 14.5 14.5 9.5"></path>'
+    + '<path d="M11 6.5 12.6 4.9a4.2 4.2 0 0 1 5.9 5.9L17 12.5"></path>'
+    + '<path d="M13 17.5 11.4 19.1a4.2 4.2 0 0 1-5.9-5.9L7 11.5"></path></svg>';
+  var CHECK_ICON = '<svg class="ff-heading-copy__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'
+    + '<path d="M20 6 9 17l-5-5"></path></svg>';
+  var headingUid = 0;
+
+  function hasCls(el, name) {
+    return !!(el && el.classList && el.classList.contains(name));
+  }
+
+  /** Reiner Überschriften-Text – ohne Ankersymbol, ohne Kopierknopf. */
+  function headingText(heading) {
+    if (!heading) return '';
+    var label = null;
+    var kids = heading.children || [];
+    for (var i = 0; i < kids.length; i++) {
+      if (hasCls(kids[i], 'ff-heading-text')) { label = kids[i]; break; }
+    }
+    var text = String((label || heading).textContent || '');
+    return text.replace(/[\s#§]+$/g, '').replace(/\s+/g, ' ').trim();
+  }
+
+  /**
+   * Fasst den echten Überschriften-Text in ein eigenes Etikett.
+   * Nur dieses Etikett beschriftet die Überschrift (aria-labelledby),
+   * damit Anker und Kopierknopf den Namen nicht verunstalten.
+   */
+  function headingLabel(heading) {
+    var kids = heading.children || [];
+    for (var i = 0; i < kids.length; i++) {
+      if (hasCls(kids[i], 'ff-heading-text')) return kids[i];
+    }
+    var label = doc.createElement('span');
+    label.className = 'ff-heading-text';
+    var move = [];
+    for (var j = 0; j < heading.childNodes.length; j++) {
+      var node = heading.childNodes[j];
+      if (node.nodeType !== 1) { move.push(node); continue; }
+      if (node.hasAttribute('hidden')) continue;
+      if (node.getAttribute('aria-hidden') === 'true') continue;
+      if (hasCls(node, 'anchor') || hasCls(node, 'ff-heading-copy') || hasCls(node, 'ff-heading-text')) continue;
+      move.push(node);
+    }
+    for (var k = 0; k < move.length; k++) label.appendChild(move[k]);
+    if (heading.firstChild) heading.insertBefore(label, heading.firstChild);
+    else heading.appendChild(label);
+
+    var id = (heading.id || 'ff-heading') + '-label';
+    while (doc.getElementById(id)) id = id + '-' + (++headingUid);
+    label.setAttribute('id', id);
+    return label;
+  }
+
   function addHeadingCopyButtons() {
     qsa('.post-content h2[id], .post-content h3[id], .md-content h2[id], .md-content h3[id]').forEach(function (heading) {
       if (heading.querySelector('.ff-heading-copy')) return;
+      var label = headingLabel(heading);
+      if (!heading.getAttribute('aria-labelledby')) heading.setAttribute('aria-labelledby', label.id);
+
       var button = doc.createElement('button');
       button.className = 'ff-heading-copy';
       button.type = 'button';
-      button.setAttribute('aria-label', 'Link zu diesem Abschnitt kopieren');
-      button.innerHTML = '§';
+      button.setAttribute('aria-label', COPY_LABEL);
+      button.setAttribute('title', COPY_LABEL);
+      button.setAttribute('data-ff-skip-read', '');
+      button.innerHTML = LINK_ICON;
       button.addEventListener('click', function (event) {
         event.preventDefault();
         event.stopPropagation();
         var url = win.location.origin + win.location.pathname + '#' + heading.id;
         var done = function () {
           button.classList.add('ff-copied');
-          button.setAttribute('aria-label', 'Link kopiert');
+          button.innerHTML = CHECK_ICON;
+          button.setAttribute('aria-label', COPIED_LABEL);
           setTimeout(function () {
             button.classList.remove('ff-copied');
-            button.setAttribute('aria-label', 'Link zu diesem Abschnitt kopieren');
+            button.innerHTML = LINK_ICON;
+            button.setAttribute('aria-label', COPY_LABEL);
           }, 1500);
         };
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -219,7 +304,7 @@
     if (!content || doc.querySelector('.ff-mini-toc')) return;
 
     var headings = qsa('h2[id]', content).filter(function (h) {
-      return h.textContent.trim().length > 0;
+      return headingText(h).length > 0;
     });
     if (headings.length < 3) return;
 
@@ -231,7 +316,9 @@
     var links = headings.slice(0, 9).map(function (heading) {
       var a = doc.createElement('a');
       a.href = '#' + heading.id;
-      var label = heading.textContent.replace(/[§#]+/g, '').trim();
+      // Sauberer Überschriften-Text: Ankersymbol und Kopierknopf bleiben
+      // draußen (Befund 10.09.2026 – das „§“ stand hier früher im Text).
+      var label = headingText(heading);
       // Premium hanging indent: split the leading "N." off the label so the
       // wrapped lines of the title align with the first word after the number
       // (grid columns in .ff-mini-toc a.ff-mini-toc--num, see z-premium-blog.css).

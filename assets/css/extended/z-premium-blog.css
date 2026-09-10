@@ -365,6 +365,36 @@ h3:hover .ff-heading-copy,
   opacity: 1;
 }
 
+/* Symbol statt Textglyphe (Befund 10.09.2026): der Knopf trägt ein
+   Inline-SVG, damit Überschriften-Text, Kurzfassung, Vorlesen,
+   Screenreader und Suchmaschinen kein „§“ mehr mitlesen. */
+.ff-heading-copy__ico {
+  display: block;
+  width: 15px;
+  height: 15px;
+  pointer-events: none;
+}
+
+/* Nur der redaktionelle Text beschriftet die Überschrift. */
+.ff-heading-text {
+  display: inline;
+}
+
+/* Touch-Geräte kennen kein Hover: der Knopf bleibt dezent sichtbar,
+   damit der Abschnitts-Link auch mobil teilbar ist. */
+@media (hover: none) {
+  .ff-heading-copy {
+    opacity: .5;
+  }
+}
+
+/* Im Ausdruck hat ein Kopierknopf nichts verloren. */
+@media print {
+  .ff-heading-copy {
+    display: none !important;
+  }
+}
+
 .ff-heading-copy:hover,
 .ff-heading-copy:focus-visible,
 .ff-heading-copy.ff-copied {

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kurzfassung-Vorschau · Anker-Reparatur (Befund 10.09.2026)</title>
+<link rel="stylesheet" href="../../assets/css/extended/ff-voice.css">
+<style>
+  :root {
+    --ff-emerald: #0E5A43;
+    --ff-green: #1F8A5F;
+    --ff-accent: #FFB300;
+    --border: rgba(15, 52, 43, .14);
+    --theme: #fff;
+    --content: #1b2a24;
+    --secondary: #5b6b64;
+    --code-bg: #f2f5f3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font: 16px/1.65 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--content);
+    background: #f6f8f7;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 28px 20px 80px; }
+  header.hero {
+    background: linear-gradient(135deg, var(--ff-emerald), var(--ff-green));
+    color: #fff; border-radius: 18px; padding: 22px 26px; margin-bottom: 22px;
+  }
+  header.hero h1 { margin: 0 0 6px; font-size: 1.35rem; letter-spacing: -.02em; }
+  header.hero p { margin: 0; opacity: .92; font-size: .95rem; }
+  .panel {
+    background: var(--theme); border: 1px solid var(--border); border-radius: 16px;
+    padding: 20px 24px; margin-bottom: 18px;
+  }
+  .panel h2 { margin: 0 0 10px; font-size: 1.05rem; color: var(--ff-emerald); }
+  .switch { display: flex; flex-wrap: wrap; gap: 10px; margin: 4px 0 16px; }
+  .switch button {
+    font: inherit; cursor: pointer; border-radius: 999px; padding: 9px 16px;
+    border: 1px solid var(--border); background: #fff; color: var(--ff-emerald);
+    font-weight: 600;
+  }
+  .switch button.primary { background: var(--ff-emerald); color: #fff; border-color: var(--ff-emerald); }
+  .switch button.warn { background: #fff6e5; border-color: rgba(180,120,20,.4); color: #8a5b00; }
+  .note { font-size: .88rem; color: var(--secondary); margin: 0 0 12px; }
+  article.post-content h2 { color: var(--ff-emerald); font-weight: 700; }
+  article.post-content h3 { color: #24352d; font-weight: 700; }
+  code { background: var(--code-bg); padding: 1px 5px; border-radius: 5px; font-size: .9em; }
+  footer.foot { color: var(--secondary); font-size: .85rem; text-align: center; padding-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1>Kurzfassung ohne „§“ – Anker-Reparatur vom 10.09.2026</h1>
+    <p>Vorher/Nachher-Vorschau mit den echten Skripten <code>ff-premium.js</code> und <code>ff-voice.js</code>.
+       Oben „Kurzfassung“ klicken: im reparierten Zustand steht hinter keinem Eintrag ein „§“.</p>
+  </header>
+
+  <section class="panel">
+    <h2>Bedienung</h2>
+    <p class="note">Die Überschriften unten tragen den Abschnitts-Knopf (Link-Symbol). Er kopiert die
+      Abschnitts-URL, ist für Lesemaschinen markiert (<code>data-ff-skip-read</code>) und beschriftet
+      die Überschrift über <code>aria-labelledby</code> – der Name bleibt sauber.</p>
+    <div class="switch">
+      <button type="button" class="primary" id="demo-fixed">Kurzfassung (repariert)</button>
+      <button type="button" class="warn" id="demo-broken">Fehlerbild von vorher („§“ als Text)</button>
+      <button type="button" id="demo-reset">Zurücksetzen</button>
+    </div>
+    <p class="note" id="demo-status">Zustand: repariert (Original-Code).</p>
+  </section>
+
+  <section class="panel">
+    <h2>Artikel-Beispiel (mit Lesehilfen-Leiste)</h2>
+
+    <div class="ff-voice-slot" id="ff-voice-slot">
+      <div class="ff-voice-bar" id="ff-voice-bar" role="region" aria-label="Lesehilfen: Vorlesen und Kurzfassung" data-page-lang="de">
+        <span class="ff-voice-bar__label" aria-hidden="true">Lesen &amp; Verstehen</span>
+        <button type="button" class="ff-voice-btn ff-voice-btn--primary" id="ff-voice-play" aria-pressed="false" aria-label="Artikel vorlesen">
+          <span class="ff-voice-btn__icon" aria-hidden="true"></span>
+          <span class="ff-voice-btn__text" id="ff-voice-play-label">Vorlesen</span>
+        </button>
+        <div class="ff-voice-bar__nav" role="group" aria-label="Abschnittsnavigation beim Vorlesen">
+          <button type="button" class="ff-voice-btn ff-voice-btn--icon" id="ff-voice-prev" aria-label="Vorheriger Abschnitt"></button>
+          <button type="button" class="ff-voice-btn ff-voice-btn--icon" id="ff-voice-next" aria-label="Nächster Abschnitt"></button>
+          <button type="button" class="ff-voice-btn ff-voice-btn--icon" id="ff-voice-stop" aria-label="Vorlesen beenden"></button>
+        </div>
+        <button type="button" class="ff-voice-btn ff-voice-btn--summary" id="ff-voice-summary" aria-haspopup="dialog" aria-label="Kurzfassung des Artikels anzeigen">
+          <span class="ff-voice-btn__icon" aria-hidden="true"></span>
+          <span class="ff-voice-btn__text" id="ff-voice-summary-label">Kurzfassung</span>
+        </button>
+        <div class="ff-voice-bar__meta">
+          <span class="ff-voice-bar__remaining" id="ff-voice-remaining" aria-hidden="true"></span>
+          <span class="ff-voice-bar__status" id="ff-voice-status" role="status" aria-live="polite"></span>
+        </div>
+        <div class="ff-voice-meter" id="ff-voice-meter" role="progressbar" aria-label="Vorlesefortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 %">
+          <div class="ff-voice-meter__meta">
+            <span class="ff-voice-meter__mode" id="ff-voice-progress-mode">Bereit</span>
+            <span class="ff-voice-meter__label" id="ff-voice-progress-label">Noch nicht gestartet</span>
+            <span class="ff-voice-meter__value" id="ff-voice-progress-value">0 %</span>
+          </div>
+          <div class="ff-voice-meter__live" id="ff-voice-live" aria-hidden="true">
+            <span class="ff-voice-meter__live-label" id="ff-voice-live-label">Gerade vorgelesen</span>
+            <span class="ff-voice-meter__live-text" id="ff-voice-now" title=""></span>
+            <span class="ff-voice-meter__pos" id="ff-voice-pos" aria-hidden="true"></span>
+            <span class="ff-voice-meter__words" id="ff-voice-word-count" aria-hidden="true"></span>
+          </div>
+          <span class="ff-voice-progress-shell" aria-hidden="true"><span class="ff-voice-progress" id="ff-voice-progress"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ff-kurzantwort" role="note">
+      <div class="ff-kurzantwort__head">
+        <span class="ff-kurzantwort__icon">💡</span>
+        <span class="ff-kurzantwort__eyebrow">Kurz &amp; knapp – die Antwort</span>
+      </div>
+      <p class="ff-kurzantwort__text">Tagesgeld ist 2026 mit Zinssätzen zwischen 1,8 und 3,2 Prozent wieder eine echte Alternative für den Notgroschen.</p>
+    </div>
+
+    <article class="post-content md-content">
+      <h2 id="was-ist-tagesgeld-eigentlich">Was ist Tagesgeld eigentlich?</h2>
+      <p>Ein Tagesgeldkonto ist ein Sparkonto ohne Laufzeit und ohne Kündigungsfrist. Du kannst täglich Geld
+        einzahlen und abheben – anders als das Girokonto ist es nicht für den Alltag gedacht, sondern als
+        Parkplatz für dein Geld mit täglicher Verfügbarkeit.</p>
+
+      <h3 id="rechte-aus-paragraph-8-einsig">Rechte aus § 8 EinSiG</h3>
+      <p>Beträge, die aus Immobilienverkäufen, Versicherungsleistungen oder Abfindungen stammen, können bis zu
+        500.000 € für sechs Monate zusätzlich abgesichert sein. Ein echtes Paragrafenzeichen im Text bleibt
+        selbstverständlich erhalten – es wird nur kein Ankersymbol mehr angehängt.</p>
+
+      <h2 id="zinsen-im-vergleich">Zinsen im Vergleich</h2>
+      <table>
+        <thead><tr><th>Anbieter</th><th>Zins</th><th>Garantie</th></tr></thead>
+        <tbody>
+          <tr><td>Bank A</td><td>3,20 %</td><td>12 Monate</td></tr>
+          <tr><td>Bank B</td><td>1,80 %</td><td>6 Monate</td></tr>
+          <tr><td>Bank C</td><td>2,50 %</td><td>9 Monate</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="fazit-tagesgeld-als-basis-baustein">Fazit: Tagesgeld als Basis-Baustein</h2>
+      <p>Wer 10.000 Euro parkt, bekommt rund 250 Euro Zinsen pro Jahr – bei täglicher Verfügbarkeit und ohne
+        Kursrisiko. Achte auf einen langen Zins-Garantiezeitraum von 6 bis 12 Monaten.</p>
+    </article>
+  </section>
+
+  <footer class="foot">FranksFinanzcheck · Qualitätssicherung Lesehilfen · tools/heading-anchor-preview</footer>
+</div>
+
+<script type="application/json" id="ff-voice-config">
+{
+  "title": "Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich",
+  "kurzantwort": "Tagesgeld ist 2026 mit Zinssätzen zwischen 1,8 und 3,2 Prozent wieder eine echte Alternative für den Notgroschen.",
+  "description": "Tagesgeld-Zinsen 2026 im Vergleich.",
+  "readingTime": 6,
+  "wordCount": 1150,
+  "lang": "de",
+  "siteName": "FranksFinanzcheck",
+  "author": "Frank Hartung",
+  "date": "26.08.2026",
+  "updated": "10.09.2026",
+  "category": "Ratgeber",
+  "slug": "tagesgeld-zinsen-2026",
+  "permalink": "/posts/2026-08-26-tagesgeld-zinsen-2026/"
+}
+</script>
+
+<script src="../../static/premium/ff-voice.js"></script>
+<script src="../../static/premium/ff-summary-safety.js"></script>
+<script>
+/* ff-premium.js wird hier NICHT global geladen (es erwartet die volle
+   Blog-Umgebung). Die Vorschau übernimmt nur den relevanten Teil:
+   die Abschnitts-Knöpfe – wahlweise repariert oder im alten Fehlerbild. */
+(function () {
+  'use strict';
+  var doc = document;
+
+  var LINK_ICON = '<svg class="ff-heading-copy__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'
+    + '<path d="M9.5 14.5 14.5 9.5"></path>'
+    + '<path d="M11 6.5 12.6 4.9a4.2 4.2 0 0 1 5.9 5.9L17 12.5"></path>'
+    + '<path d="M13 17.5 11.4 19.1a4.2 4.2 0 0 1-5.9-5.9L7 11.5"></path></svg>';
+
+  function buttonStyle() {
+    if (doc.getElementById('ff-heading-copy-style')) return;
+    var css = doc.createElement('style');
+    css.id = 'ff-heading-copy-style';
+    css.textContent = [
+      '.ff-heading-copy{display:inline-flex;align-items:center;justify-content:center;',
+      'width:1.75rem;height:1.75rem;margin-left:.35rem;border:0;cursor:pointer;',
+      'border-radius:999px;vertical-align:middle;color:#5b6b64;background:#eef2f0;',
+      'opacity:0;transition:opacity .18s ease,color .18s ease,background-color .18s ease}',
+      'h2:hover .ff-heading-copy,h3:hover .ff-heading-copy,.ff-heading-copy:focus-visible{opacity:1}',
+      '.ff-heading-copy:hover,.ff-heading-copy.ff-copied{color:#1F8A5F;background:rgba(255,179,0,.25)}',
+      '.ff-heading-copy__ico{display:block;width:15px;height:15px;pointer-events:none}',
+      '@media (hover:none){.ff-heading-copy{opacity:.5}}'
+    ].join('');
+    doc.head.appendChild(css);
+  }
+
+  function headingLabel(heading) {
+    var label = heading.querySelector('.ff-heading-text');
+    if (label) return label;
+    label = doc.createElement('span');
+    label.className = 'ff-heading-text';
+    var move = [];
+    Array.prototype.slice.call(heading.childNodes).forEach(function (node) {
+      if (node.nodeType === 1 && (node.hasAttribute('hidden')
+        || node.getAttribute('aria-hidden') === 'true'
+        || node.classList.contains('ff-heading-copy'))) return;
+      move.push(node);
+    });
+    move.forEach(function (n) { label.appendChild(n); });
+    heading.insertBefore(label, heading.firstChild);
+    label.id = (heading.id || 'ff-heading') + '-label';
+    return label;
+  }
+
+  function addButtons(mode) {
+    Array.prototype.slice.call(doc.querySelectorAll('.post-content h2[id], .post-content h3[id]'))
+      .forEach(function (heading) {
+        var old = heading.querySelector('.ff-heading-copy');
+        if (old) old.parentNode.removeChild(old);
+        var button = doc.createElement('button');
+        button.className = 'ff-heading-copy';
+        button.type = 'button';
+        button.setAttribute('title', 'Link zu diesem Abschnitt kopieren');
+        if (mode === 'broken') {
+          // FEHLERBILD VOR DER REPARATUR: „§“ als Textknoten in der Überschrift
+          button.setAttribute('aria-label', 'Link zu diesem Abschnitt kopieren');
+          button.innerHTML = '§';
+        } else {
+          var label = headingLabel(heading);
+          if (!heading.getAttribute('aria-labelledby')) heading.setAttribute('aria-labelledby', label.id);
+          button.setAttribute('aria-label', 'Link zu diesem Abschnitt kopieren');
+          button.setAttribute('data-ff-skip-read', '');
+          button.innerHTML = LINK_ICON;
+        }
+        button.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          var url = location.origin + location.pathname + '#' + heading.id;
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url);
+          else location.hash = heading.id;
+          button.classList.add('ff-copied');
+          setTimeout(function () { button.classList.remove('ff-copied'); }, 1500);
+        });
+        heading.appendChild(button);
+      });
+  }
+
+  function reset() {
+    addButtons('fixed');
+    doc.getElementById('demo-status').textContent = 'Zustand: repariert (Original-Code).';
+  }
+
+  doc.getElementById('demo-fixed').addEventListener('click', function () {
+    reset();
+    doc.getElementById('ff-voice-summary').click();
+  });
+  doc.getElementById('demo-broken').addEventListener('click', function () {
+    addButtons('broken');
+    doc.getElementById('demo-status').textContent =
+      'Zustand: Fehlerbild – der Knopf trägt ein „§“ als Text. Jetzt „Kurzfassung“ klicken.';
+    doc.getElementById('ff-voice-summary').click();
+  });
+  doc.getElementById('demo-reset').addEventListener('click', reset);
+
+  buttonStyle();
+  reset();
+})();
+</script>
+</body>
+</html>

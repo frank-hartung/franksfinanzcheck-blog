@@ -250,13 +250,30 @@
   function storeDel(k) { try { win.localStorage.removeItem(k); } catch (e) {} }
   function escapeRe(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
+  /**
+   * Elemente, die beim Textlesen NIE mitgelesen werden (Befund 10.09.2026).
+   *
+   * Der Abschnitts-Knopf der Premium-Erweiterung (`.ff-heading-copy`) trug
+   * ein „§“ als Textknoten in JEDER Überschrift. Weil er hier nicht
+   * herausgefiltert wurde, landete das „§“ in Kurzfassung, Inhalts-
+   * verzeichnis, Tabellen-Titeln und im Vorlesen. Diese Liste ist die
+   * dauerhafte Verteidigungslinie: Bedienelemente, versteckte Knoten und
+   * Anker zählen nicht zum lesbaren Text eines Abschnitts.
+   */
+  var READ_SKIP_SELECTOR = [
+    'script', 'style', 'noscript', 'svg', 'canvas', 'iframe',
+    'button', 'input', 'select', 'textarea', 'label',
+    '[data-ff-skip-read]', '[aria-hidden="true"]', '[hidden]',
+    '.anchor', '.ff-heading-copy', '.ff-mini-toc'
+  ].join(', ');
+
   /** Sichtbarer Text eines Knotens – mit Zeilen-/Absatz-Abstand. */
   function readableText(el) {
     if (!el) return '';
     var clone = el;
     if (el.cloneNode) {
       clone = el.cloneNode(true);
-      qsa('script, style, noscript, svg, [data-ff-skip-read], [aria-hidden="true"]', clone)
+      qsa(READ_SKIP_SELECTOR, clone)
         .forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); });
       qsa('br', clone).forEach(function (n) {
         if (n.parentNode) n.parentNode.replaceChild(doc.createTextNode(' '), n);
@@ -264,6 +281,19 @@
     }
     var raw = clone.textContent || clone.innerText || '';
     return raw.replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  /**
+   * Überschriften-Text: bevorzugt das redaktionelle Etikett
+   * (`.ff-heading-text`), frei von Ankersymbolen am Ende.
+   * Ein „§“ mitten im Text („§ 8 EinSiG“) bleibt selbstverständlich
+   * erhalten – entfernt wird nur angehängter Anker-Müll.
+   */
+  function headingTextOf(el) {
+    if (!el) return '';
+    var label = qsa('.ff-heading-text', el)[0];
+    var text = readableText(label || el);
+    return text.replace(/[\s#§]+$/g, '').trim();
   }
 
   function stripMd(s) {
@@ -406,7 +436,7 @@
     if (!block) return T.progressIdle;
     if (block.type === 'intro') return T.progressIntro;
     if (block.type === 'outro') return T.progressOutro;
-    if (/^h[2-6]$/i.test(block.type || '')) return trimUiText(readableText(block.el) || block.text || T.progressHeading, 72);
+    if (/^h[2-6]$/i.test(block.type || '')) return trimUiText(headingTextOf(block.el) || block.text || T.progressHeading, 72);
     if (block.type === 'table-intro') return T.progressTableIntro;
     if (block.type === 'table-header') return T.progressTableHeader;
     if (block.type === 'table-group') return T.progressTableGroup;
@@ -1188,8 +1218,8 @@
     // Wrapper der Kette suchen.
     for (var w = 0; w < wrappers.length; w++) {
       var h = qsa('.ff-tv-title, .ff-es-title, caption, h3, h4', wrappers[w])[0];
-      if (h && h !== tableEl && closestOf(h, 'table') !== tableEl && stripDecor(readableText(h))) {
-        return stripDecor(readableText(h));
+      if (h && h !== tableEl && closestOf(h, 'table') !== tableEl && stripDecor(headingTextOf(h))) {
+        return stripDecor(headingTextOf(h));
       }
     }
 
@@ -1200,7 +1230,7 @@
     var guard = 0;
     while (prev && guard++ < 4) {
       if (/^H[23456]$/.test(tagOf(prev)) || anyClass(prev, ['ff-tv-title', 'ff-es-title'])) {
-        var tHead = stripDecor(readableText(prev));
+        var tHead = stripDecor(headingTextOf(prev));
         if (tHead) return tHead;
       }
       prev = prev.previousElementSibling;
@@ -4170,7 +4200,7 @@
     if (!content) return [];
     return qsa('h2, h3', content).filter(function (h) {
       if (isReaderSkipped(h)) return false;
-      return readableText(h).length > 2;
+      return headingTextOf(h).length > 2;
     });
   }
 
@@ -4280,7 +4310,7 @@
         id = 'ff-voice-sec-' + Math.random().toString(36).slice(2, 8);
         h.setAttribute('id', id);
       }
-      return { id: id, text: readableText(h), level: parseInt(tagOf(h).slice(1), 10) };
+      return { id: id, text: headingTextOf(h), level: parseInt(tagOf(h).slice(1), 10) };
     });
   }
 

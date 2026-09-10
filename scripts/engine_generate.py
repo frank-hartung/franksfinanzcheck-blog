@@ -431,9 +431,18 @@ def ist_recycelt(post, promoted_slugs):
         return False
 
 
-def tages_bilanz(posts, promoted_slugs, max_per_day, min_per_day):
+def tages_bilanz(posts, promoted_slugs, max_per_day, min_per_day, today=None):
     """Trennt ECHTE LIVE-Neuproduktion von recycelten Re-Queue-Posts
     und von bloßen Entwürfen.
+
+    STICHTAG (Reparatur 10.09.2026): Der Auswertungstag ist jetzt
+    übergebbar (`today`). Vorher rechnete die Bilanz IMMER mit
+    `datetime.date.today()` – ein Aufrufer, der die Bilanz für einen
+    bestimmten Tag braucht (`bot_status.engine_snapshot(posts, today, …)`),
+    bekam dadurch Werte des Tages, an dem der Code lief. Die Prüfung
+    `test_engine_snapshot_uses_final_source_truth` war deshalb abhängig
+    vom Ausführungstag und schlug an jedem Tag außer dem Stichtag fehl.
+    Ohne Angabe bleibt alles beim Alten (heute).
 
     PREMIUM-FIX 03.09.2026 (Kernbefund Mi 02.09.2026): Gezählt wird NUR,
     was WIRKLICH live ist (draft: false, Datum heute). Ein am Publish-Gate
@@ -445,8 +454,9 @@ def tages_bilanz(posts, promoted_slugs, max_per_day, min_per_day):
 
     Bewusst rein (keine Seiteneffekte) -> regressionstestbar.
     """
-    today = datetime.date.today().isoformat()
-    heute = [p for p in posts if p["date"].isoformat() == today]
+    stichtag = today or datetime.date.today()
+    stichtag_iso = stichtag.isoformat() if hasattr(stichtag, "isoformat") else str(stichtag)
+    heute = [p for p in posts if p["date"].isoformat() == stichtag_iso]
     heute_live = [p for p in heute if not p["draft"]]
     drafts = [p for p in heute if p["draft"]]
     recycelt = [p for p in heute_live if ist_recycelt(p, promoted_slugs)]

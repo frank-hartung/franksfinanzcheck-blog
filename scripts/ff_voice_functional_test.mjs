@@ -9,7 +9,9 @@
  *         (jsdom liegt in tools/ff-voice-qa/node_modules)
  */
 
-import { createRunner, loadPage, skeleton, mdToHtml, listArticles, sleep } from './ff_voice_qa_lib.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { createRunner, loadPage, skeleton, mdToHtml, listArticles, sleep, ROOT } from './ff_voice_qa_lib.mjs';
 
 const t = createRunner('Funktionstest Vorlesen + Kurzfassung (echte DOM)');
 
@@ -801,6 +803,188 @@ t.group('12) Alle echten Artikel – kein Absturz, vollständige Ausbeute');
   t.ok('Blöcke insgesamt', totalBlocks > articles.length * 5, 'Blöcke: ' + totalBlocks);
   t.ok('Sprecheinheiten insgesamt', totalUnits > articles.length * 5, 'Einheiten: ' + totalUnits);
   console.log(`    · ${articles.length} Artikel → ${totalBlocks} Blöcke, ${totalUnits} Sprecheinheiten`);
+}
+
+/* ============================================================
+   13 · Abschnitts-Link (Befund 10.09.2026)
+   ------------------------------------------------------------
+   Der Premium-Knopf „Link zu diesem Abschnitt kopieren“ trug ein
+   „§“ als TEXTKNOTEN in jeder Überschrift. Dadurch stand das „§“
+   in Kurzfassung („In diesem Artikel“), Tabellen-Titeln,
+   Klartext-Kopie, Mini-Verzeichnis und im Vorlesen („… Paragraph“).
+
+   Diese Gruppe lädt das ECHTE static/premium/ff-premium.js gegen
+   die echte DOM und prüft:
+     · der Knopf bleibt funktionsfähig (Kopieren setzt die URL),
+     · er trägt ein Symbol statt einer Textglyphe,
+     · kein Ankersymbol landet in Kurzfassung, Verzeichnis,
+       Tabellen-Titeln, Klartext oder Vorlesen-Blöcken,
+     · der Überschriften-Name (Screenreader) bleibt sauber,
+     · ein ECHTES „§“ im Text (z. B. „§ 8 EinSiG“) bleibt erhalten.
+   ============================================================ */
+t.group('13) Abschnitts-Link: kein Ankersymbol in Kurzfassung & Vorlesen');
+{
+  const premiumJs = fs.readFileSync(path.join(ROOT, 'static', 'premium', 'ff-premium.js'), 'utf8');
+
+  /** Lädt eine Seite MIT dem echten Premium-Skript (Kopierknöpfe inklusive). */
+  function loadPremiumPage(body) {
+    const page = loadPage(skeleton({
+      title: 'Tagesgeld-Zinsen 2026',
+      kurzantwort: 'Tagesgeld ist 2026 mit 1,8 bis 3,2 Prozent wieder eine echte Alternative.',
+      bodyHtml: mdToHtml(body),
+    }));
+    page.win.eval(premiumJs);
+    // Im Browser läuft das Skript, während das Dokument noch parst
+    // (readyState "loading") – jsdom ist nach dem Aufbau "complete".
+    if (!page.doc.querySelector('.ff-heading-copy')) {
+      page.doc.dispatchEvent(new page.win.Event('DOMContentLoaded'));
+    }
+    return page;
+  }
+
+  /* ---- 13a · Reparatur: kein Ankersymbol weit und breit ---- */
+  const { win, doc } = loadPremiumPage([
+    '## Was ist Tagesgeld eigentlich?',
+    '',
+    'Ein Tagesgeldkonto ist ein Sparkonto ohne Laufzeit und ohne Kündigungsfrist für jeden Sparer.',
+    '',
+    '### Zinsgarantie im Blick',
+    '',
+    'Achte auf einen möglichst langen Zins-Garantiezeitraum von 6 bis 12 Monaten beim Abschluss.',
+    '',
+    '## Zinsen im Vergleich',
+    '',
+    '| Anbieter | Zins |',
+    '| --- | --- |',
+    '| Bank A | 3,20 % |',
+    '| Bank B | 1,80 % |',
+    '',
+    '## Fazit: Tagesgeld als Basis-Baustein',
+    '',
+    'Wer 10.000 Euro parkt, bekommt rund 250 Euro Zinsen pro Jahr ausgezahlt.',
+  ].join('\n'));
+
+  const headings = Array.from(doc.querySelectorAll('.post-content h2[id], .post-content h3[id]'));
+  const buttons = Array.from(doc.querySelectorAll('.post-content .ff-heading-copy'));
+
+  t.ok('Kopierknöpfe injiziert (sonst prüft die Gruppe nichts)',
+    headings.length >= 3 && buttons.length === headings.length,
+    'Überschriften: ' + headings.length + ', Knöpfe: ' + buttons.length);
+  t.ok('Knopf trägt ein Symbol statt einer Textglyphe',
+    buttons.length > 0 && buttons.every((b) => b.querySelector('svg')));
+  t.eq('Knopf trägt kein Textzeichen', buttons.map((b) => b.textContent.trim()).join(''), '');
+  t.ok('Knopf ist für Lesemaschinen markiert',
+    buttons.length > 0 && buttons.every((b) => b.hasAttribute('data-ff-skip-read')));
+  t.ok('Knopf bleibt bedienbar (Fokus & Tastatur)',
+    buttons.length > 0 && buttons.every((b) => b.getAttribute('type') === 'button' && b.getAttribute('aria-label')));
+
+  // Überschriften-Name (Screenreader, SEO) trägt nur den redaktionellen Text
+  const namedHeadings = headings.filter((h) => h.getAttribute('aria-labelledby'));
+  t.ok('Überschrift ist sauber beschriftet (aria-labelledby)',
+    namedHeadings.length === headings.length, namedHeadings.length + '/' + headings.length);
+  const accNames = headings.map((h) => {
+    const ref = h.getAttribute('aria-labelledby');
+    const target = ref ? doc.getElementById(ref) : null;
+    return (target || h).textContent.trim();
+  });
+  t.ok('Überschriften-Name ohne Ankersymbol',
+    accNames.every((n) => !/§|[\s#]$/.test(n)), accNames.join(' | '));
+  t.ok('Überschriften-Text im DOM ohne Ankersymbol',
+    headings.every((h) => !/§|[\s#]$/.test(h.textContent.trim())));
+
+  // Funktion: Klick kopiert die Abschnitts-URL
+  if (buttons.length) {
+    const first = headings[0];
+    buttons[0].dispatchEvent(new win.MouseEvent('click', { bubbles: true, cancelable: true }));
+    t.eq('Klick setzt die Abschnitts-URL', win.location.hash, '#' + first.id);
+    t.eq('Rückmeldung „Link kopiert“', buttons[0].getAttribute('aria-label'), 'Link kopiert');
+    t.ok('Häkchen als Bestätigung', !!buttons[0].querySelector('svg'));
+  }
+
+  // Kurzfassung: Verzeichnis, Tabellen-Titel, Klartext
+  doc.getElementById('ff-voice-summary').click();
+  const dlg = doc.getElementById('ff-voice-dialog');
+  const toc = Array.from(dlg.querySelectorAll('.ff-voice-toc a')).map((a) => a.textContent);
+
+  t.ok('Inhaltsverzeichnis gefüllt', toc.length >= 3, 'Einträge: ' + toc.length);
+  t.eq('Verzeichnis: kein einziges „§“', (toc.join(' ').match(/§/g) || []).length, 0);
+  t.ok('Verzeichnis ohne angehängtes „#“', toc.every((x) => !/[\s#]+$/.test(x)), toc.join(' | '));
+  t.ok('Redaktioneller Text im Verzeichnis erhalten',
+    toc.some((x) => /^Was ist Tagesgeld eigentlich\?$/.test(x.trim())), toc.join(' | '));
+  t.eq('Kein „§“ im gesamten Kurzfassungs-Dialog', (dlg.textContent.match(/§/g) || []).length, 0);
+
+  const tableTitles = Array.from(dlg.querySelectorAll('.ff-voice-tablecard')).map((c) => c.textContent);
+  t.ok('Tabellen-Titel ohne „§“', tableTitles.every((x) => !/§/.test(x)), tableTitles.join(' | '));
+
+  let copied = null;
+  win.__ff_voice_copied = (text) => { copied = text; };
+  doc.getElementById('ff-voice-copy').click();
+  t.ok('Klartext-Kopie erzeugt', typeof copied === 'string' && copied.length > 40);
+  t.eq('Klartext-Kopie: kein einziges „§“', (String(copied || '').match(/§/g) || []).length, 0);
+  doc.getElementById('ff-voice-dialog').querySelector('.ff-voice-dialog__close').click();
+
+  // Vorlesen: kein „§“ – und damit kein „… Paragraph“ aus einem Anker
+  const blocks = win.__ffVoice.collectBlocks().map((b) => b.text);
+  t.eq('Vorlesen-Blöcke: kein einziges „§“', (blocks.join(' ').match(/§/g) || []).length, 0);
+  t.ok('Vorlesen-Blöcke ohne „Paragraph“ aus Ankern',
+    blocks.every((x) => !/paragraph/i.test(x)),
+    blocks.filter((x) => /paragraph/i.test(x)).join(' | '));
+  t.ok('Überschriften werden weiterhin vorgelesen',
+    blocks.some((x) => /^Was ist Tagesgeld eigentlich\?/.test(x.trim())));
+
+  // Mini-Verzeichnis der Premium-Erweiterung
+  const mini = Array.from(doc.querySelectorAll('.ff-mini-toc a')).map((a) => a.textContent.trim());
+  t.ok('Mini-Verzeichnis ohne Ankersymbol', mini.every((x) => !/§|[\s#]$/.test(x)), mini.join(' | '));
+
+  /* ---- 13b · Schutz vor Übereifer: ein ECHTES „§“ bleibt stehen ---- */
+  const law = loadPremiumPage([
+    '## Rechte aus § 8 EinSiG',
+    '',
+    'Beträge aus Immobilienverkäufen können bis zu 500.000 € für sechs Monate zusätzlich abgesichert sein.',
+    '',
+    '## Fazit zum Einlagenschutz',
+    '',
+    'Die gesetzliche Sicherung greift pro Person und Bank, nicht pro Konto bei derselben Bank.',
+  ].join('\n'));
+
+  const lawHeadings = Array.from(law.doc.querySelectorAll('.post-content h2[id]'));
+  t.ok('Echtes „§ 8 EinSiG“ bleibt im Überschriften-Text',
+    lawHeadings.some((h) => /§\s?8\s?EinSiG/.test(h.textContent.trim())),
+    lawHeadings.map((h) => h.textContent.trim()).join(' | '));
+
+  law.doc.getElementById('ff-voice-summary').click();
+  const lawToc = Array.from(law.doc.querySelectorAll('.ff-voice-toc a')).map((a) => a.textContent.trim());
+  t.ok('Echtes „§ 8 EinSiG“ bleibt im Verzeichnis erhalten',
+    lawToc.some((x) => /^Rechte aus § 8 EinSiG$/.test(x)), lawToc.join(' | '));
+
+  /* ---- 13c · Bestand: jeder echte Artikel, mit echtem Premium-Skript ---- */
+  const articles = listArticles();
+  const trails = [];
+  const glyphs = [];
+  const unnamed = [];
+  let checkedHeadings = 0;
+
+  for (const article of articles) {
+    const page = loadPremiumPage(article.body);
+    const heads = Array.from(page.doc.querySelectorAll('.post-content h2[id], .post-content h3[id]'));
+    const knobs = Array.from(page.doc.querySelectorAll('.post-content .ff-heading-copy'));
+    checkedHeadings += heads.length;
+    if (knobs.some((b) => b.textContent.trim() !== '')) glyphs.push(article.slug);
+    if (heads.length && heads.some((h) => !h.getAttribute('aria-labelledby'))) unnamed.push(article.slug);
+
+    page.doc.getElementById('ff-voice-summary').click();
+    const entries = Array.from(page.doc.querySelectorAll('.ff-voice-toc a')).map((a) => a.textContent);
+    if (entries.some((x) => /[\s§#]$/.test(x))) {
+      trails.push(article.slug + ': ' + entries.filter((x) => /[\s§#]$/.test(x))[0]);
+    }
+  }
+
+  t.ok('Echte Artikel geprüft', articles.length > 0 && checkedHeadings > 50,
+    articles.length + ' Artikel, ' + checkedHeadings + ' Überschriften');
+  t.eq('Kein Verzeichnis-Eintrag endet auf ein Ankersymbol', trails.length, 0, trails.slice(0, 3).join(' | '));
+  t.eq('Kein Kopierknopf trägt ein Textzeichen', glyphs.length, 0, glyphs.slice(0, 3).join(' | '));
+  t.eq('Jede Überschrift ist sauber beschriftet', unnamed.length, 0, unnamed.slice(0, 3).join(' | '));
+  console.log(`    · ${articles.length} echte Artikel, ${checkedHeadings} Überschriften geprüft`);
 }
 
 t.done();
