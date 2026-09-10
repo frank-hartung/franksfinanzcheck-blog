@@ -185,17 +185,27 @@ Sich mit **[Finanzieller Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-ve
 
 ### Wie viel Geld muss ich monatlich sparen, um frei zu sein? Das hängt von deinem Lebensstil ab. Meist brauchst du das 25‑fache deiner Jahresausgaben. Wer bescheiden lebt, schafft das schneller. Rechne mit deinen echten Fixkosten.
 
-### Kann man auch mit Schulden investieren? Nein, meist nicht. Tilge zuerst deine Konsumkredite. Sie kosten mehr, als der Markt bringt. Eine Ausnahme: sehr günstige Immobilienkredite. Dort kann beides parallel laufen.
+### Kann man auch mit Schulden investieren?
+
+Nein, meist nicht. Tilge zuerst deine Konsumkredite. Sie kosten mehr, als der Markt bringt. Eine Ausnahme: sehr günstige Immobilienkredite. Dort kann beides parallel laufen.
 
 ### Welches Risiko gehe ich beim Vermögensaufbau ein? Jede Anlage hat Risiken. Aktien schwanken. Immobilien kosten für Reparaturen. Breite Streuung senkt das Risiko. Über 15 Jahre schrumpft die Gefahr stark.
 
-### Muss ich auf alles verzichten, um finanzielle Freiheit zu erreichen? Nein. Es geht um bewusste Entscheidungen. Spare bei Dingen ohne Wert. Dann bleibt Geld für das, was zählt. Zu strenger Verzicht führt oft zum Abbruch.
+### Muss ich auf alles verzichten, um finanzielle Freiheit zu erreichen?
 
-### Reicht ein Sparkonto für den langfristigen Aufbau aus? Meist nicht. Die Inflation frisst die Zinsen. Dein Geld verliert an Wert. Besser sind Aktien oder ETFs. Sie schlagen die Teuerung auf Dauer.
+Nein. Es geht um bewusste Entscheidungen. Spare bei Dingen ohne Wert. Dann bleibt Geld für das, was zählt. Zu strenger Verzicht führt oft zum Abbruch.
 
-### Wie kann ich meine Ausgaben tracken, ohne viel Aufwand? Nutze eine Finanz‑App, die deine Konten per API verbindet. Lege Kategorien an (Miete, Lebensmittel, Freizeit) und setze wöchentliche Erinnerungen, um neue Buchungen zu prüfen. So erkennst du Muster sofort und kannst gezielt anpassen.
+### Reicht ein Sparkonto für den langfristigen Aufbau aus?
 
-### Welchen ETF sollte ich für den ersten Sparplan wählen? Ein breit diversifizierter Welt‑ETF (z. B. MSCI All‑Country World) bietet günstige Kosten (TER ≈ 0,15 %) und deckt über 20 Märkte ab. Achte auf die Gesamtkostenquote, die Fondsgröße und die Replikationsmethode (physisch vs. synthetisch). Für Einsteiger ist ein physisch replizierender ETF empfehlenswert.
+Meist nicht. Die Inflation frisst die Zinsen. Dein Geld verliert an Wert. Besser sind Aktien oder ETFs. Sie schlagen die Teuerung auf Dauer.
+
+### Wie kann ich meine Ausgaben tracken, ohne viel Aufwand?
+
+Nutze eine Finanz‑App, die deine Konten per API verbindet. Lege Kategorien an (Miete, Lebensmittel, Freizeit) und setze wöchentliche Erinnerungen, um neue Buchungen zu prüfen. So erkennst du Muster sofort und kannst gezielt anpassen.
+
+### Welchen ETF sollte ich für den ersten Sparplan wählen?
+
+Ein breit diversifizierter Welt‑ETF (z. B. MSCI All‑Country World) bietet günstige Kosten (TER ≈ 0,15 %) und deckt über 20 Märkte ab. Achte auf die Gesamtkostenquote, die Fondsgröße und die Replikationsmethode (physisch vs. synthetisch). Für Einsteiger ist ein physisch replizierender ETF empfehlenswert.
 
 ---
 
