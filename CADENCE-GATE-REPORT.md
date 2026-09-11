@@ -1,6 +1,6 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-09-11 20:27 UTC
+**Letzter Lauf:** 2026-09-11 21:17 UTC
 
 **Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
@@ -50,6 +50,6 @@
 
 ## Letzte Heilungen
 
-- Aus Re-Queue live gesetzt: `2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest`
+- – (nichts in diesem Lauf)
 
 _Wird von `cadence_guard.py` bei jedem Kadenz-Lauf aktualisiert (Deploy-Gate, Content-Engine, Blog-Health)._
