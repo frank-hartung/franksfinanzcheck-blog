@@ -1295,9 +1295,33 @@ EDGE_SEGMENT_TIMEOUT = 120.0  # Sekunden je Stream-Versuch. Segmente sind
                                # Fehlschlag; die Artikelschleife bricht
                                # zusätzlich am Zeitbudget ab.
 
+EDGE_CALL_TIMEOUT = 300.0     # Sekunden je synth_edge-AUFRUF (Härtung
+                               # 11.09.2026). Der Segment-Deckel oben gilt
+                               # pro Versuch — ein Aufruf macht aber bis zu
+                               # 2 Stil-Stufen (Profil-Stil, danach neutral)
+                               # und kann vom Aufrufer wiederholt werden.
+                               # Ohne Aufruf-Deckel addierten sich die
+                               # Versuche (2 × 120 s) und liefen am
+                               # übergeordneten Budget vorbei. Jetzt gilt:
+                               # JEDER einzelne Versuch wird auf das
+                               # RESTBUDGET des Aufrufs gekappt
+                               # (min(EDGE_SEGMENT_TIMEOUT, Rest)); ist das
+                               # Budget aufgebraucht, ist der Aufruf zu Ende
+                               # — ehrlich (False, []), nie hängend.
+                               # `call_timeout=None/≤ 0` schaltet den Deckel
+                               # ab (nur für Diagnose).
+
+PIPER_TIMEOUT = 600.0          # Sekunden für den lokalen Piper-Prozess.
+                               # War bis 11.09.2026 im subprocess-Aufruf
+                               # verdrahtet — der Aufrufer konnte das
+                               # Restbudget eines Segments nicht
+                               # durchreichen. Jetzt Parameter mit
+                               # unverändertem Standard.
+
 
 def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume: float,
-               out_wav: str, style=None, timeout: float = EDGE_SEGMENT_TIMEOUT):
+               out_wav: str, style=None, timeout: float = EDGE_SEGMENT_TIMEOUT,
+               call_timeout: float = EDGE_CALL_TIMEOUT):
     """Ein Segment mit einer Edge-Neuralstimme sprechen.
 
     KERNREPARATUR 06.09.2026: `edge-tts` liefert einen **MP3-Strom**
@@ -1341,6 +1365,17 @@ def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume
     Netz-Aussetzern). `timeout=None` oder `<= 0` schaltet den Deckel
     ab (nur für Diagnose).
 
+    AUFRUF-BUDGET (Härtung 11.09.2026): `call_timeout` (Standard
+    EDGE_CALL_TIMEOUT = 300 s) deckelt den GESAMTEN Aufruf — also alle
+    Stil-Stufen zusammen, nicht jeden Versuch einzeln. Jeder Versuch
+    läuft mit `min(timeout, Restbudget)`; ist das Restbudget auf
+    Null, kehrt der Aufruf sofort mit `(False, [])` zurück, statt eine
+    weitere Stil-Stufe zu beginnen. Der Aufrufer (`synthesize`) reicht
+    hier sein eigenes Segment-Budget durch, damit die Kette
+    edge → piper nie über die `--max-seconds`-Deadline des Laufs
+    hinausläuft. `call_timeout=None/≤ 0` schaltet den Deckel ab
+    (nur für Diagnose — dann gilt allein `timeout`).
+
     WORTUHR (Befund 10.09.2026): edge-tts 7.x liefert WordBoundary-
     Ereignisse nur mit boundary="WordBoundary" (Standard: Satzebene).
     Der Schalter wird gesetzt; Bibliotheken ohne ihn fallen weich
@@ -1371,13 +1406,28 @@ def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume
             kwargs.pop("boundary", None)
             return edge_tts.Communicate(text, voice, **kwargs)
 
+    import time as _time
+
     src_path = out_wav + ".edge.src"
+
+    # AUFRUF-BUDGET (11.09.2026): Wanduhr über den ganzen Aufruf. Jeder
+    # Versuch unten wird auf das Restbudget gekappt — so addieren sich
+    # Stil-Stufen nie über `call_timeout` hinaus.
+    call_deadline = None
+    if call_timeout is not None and call_timeout > 0:
+        call_deadline = _time.monotonic() + float(call_timeout)
 
     # Erster Versuch mit dem Profil-Style, bei Bedarf einer ohne —
     # ein Newsroom-Stil ist Komfort, Ton ist Pflicht.
     style_tries = [style, None] if style else [None]
 
     for attempt_style in style_tries:
+        # Restbudget aufgebraucht ⇒ keine weitere Stil-Stufe beginnen.
+        # Ehrlicher Fehlschlag: Der Aufrufer fällt auf Piper zurück bzw.
+        # verwirft das Segment — der Ton darf nie hängen bleiben.
+        if call_deadline is not None and _time.monotonic() >= call_deadline:
+            _cleanup(src_path)
+            return False, []
         comm = _make(attempt_style)
         boundaries = []
 
@@ -1396,8 +1446,17 @@ def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume
         # Timeout-Deckel (10.09.2026): wait_for bricht einen hängenden
         # Strom als TimeoutError ab — der landet im except-Zweig wie
         # jeder Netz-Aussetzer (Retry, Stil-Fallback, Engine-Kette).
-        if timeout is not None and timeout > 0:
-            task = asyncio.wait_for(run(), timeout)
+        # Aufruf-Budget (11.09.2026): Der Versuch bekommt nie mehr als
+        # das RESTBUDGET des Aufrufs — min(Versuchsdeckel, Rest).
+        attempt_timeout = timeout
+        if call_deadline is not None:
+            remaining = call_deadline - _time.monotonic()
+            if attempt_timeout is None or attempt_timeout <= 0:
+                attempt_timeout = remaining
+            else:
+                attempt_timeout = min(attempt_timeout, remaining)
+        if attempt_timeout is not None and attempt_timeout > 0:
+            task = asyncio.wait_for(run(), attempt_timeout)
         else:
             task = run()
         try:
@@ -1436,15 +1495,30 @@ def synth_edge(text: str, lang: str, voice: str, rate: float, pitch: int, volume
     return False, []
 
 
-def synth_piper(text: str, voice: str, out_wav: str):
-    """Lokale ONNX-Stimme. Liefert nur True, wenn die Datei echten Ton traegt."""
+def synth_piper(text: str, voice: str, out_wav: str, timeout: float = PIPER_TIMEOUT):
+    """Lokale ONNX-Stimme. Liefert nur True, wenn die Datei echten Ton traegt.
+
+    `timeout` (Standard PIPER_TIMEOUT = 600 s) deckelt den Piper-Prozess.
+    Härtung 11.09.2026: Der Wert war im subprocess-Aufruf VERDRAHTET —
+    `synthesize` konnte sein Segment-Budget (bzw. die `--max-seconds`-
+    Deadline des Laufs) nicht durchreichen, ein hängendes ONNX-Modell
+    blockierte also bis zu 10 Minuten am übergeordneten Budget vorbei.
+    Jetzt reicht der Aufrufer sein Restbudget durch; `timeout=None/≤ 0`
+    schaltet den Deckel ab (nur für Diagnose).
+    """
     if not piper_available():
         return False
     os.makedirs(os.path.dirname(out_wav) or ".", exist_ok=True)
     cmd = ["piper", "--model", voice, "--output_file", out_wav]
+    run_kwargs = {}
+    if timeout is not None and timeout > 0:
+        run_kwargs["timeout"] = float(timeout)
     try:
         proc = subprocess.run(cmd, input=text.encode("utf-8"),
-                              capture_output=True, timeout=600)
+                              capture_output=True, **run_kwargs)
+    except subprocess.TimeoutExpired:
+        _cleanup(out_wav)      # halbe Datei ist keine Tonspur
+        return False
     except Exception:
         return False
     if proc.returncode != 0 or not os.path.exists(out_wav) or os.path.getsize(out_wav) == 0:
@@ -1462,6 +1536,40 @@ def synth_piper(text: str, voice: str, out_wav: str):
 
 SYNTH_ATTEMPTS = 3          # Versuche je Engine (Netz-Aussetzer sind normal)
 SYNTH_BACKOFF = (0.8, 2.0)  # Wartezeit vor Versuch 2 und 3 in Sekunden
+SYNTH_SEGMENT_BUDGET = 900.0  # Wanduhr (Sekunden) je synthesize-Aufruf.
+                              # Härtung 11.09.2026: Die Kette
+                              # edge → piper mit 3 Versuchen je Stufe
+                              # konnte rechnerisch ~46 Min. an einem
+                              # EINZIGEN Segment stehen (2 × 3 × 120 s
+                              # Edge + 2 × 3 × 600 s Piper). Die
+                              # `--max-seconds`-Deadline des Laufs wurde
+                              # nur ZWISCHEN Segmenten geprüft — ein
+                              # einziges hängendes Segment überzog sie
+                              # damit unbegrenzt. Dieses Budget gilt
+                              # INNERHALB des Segments: Ablauf ⇒ sofort
+                              # ehrlicher Fehlschlag, kein Hänger.
+                              # Reicht der Aufrufer eine eigene Deadline
+                              # (`deadline=`), gewinnt die FRÜHERE der
+                              # beiden. `≤ 0` schaltet das Budget ab.
+
+
+def _accepts_kw(func, name: str) -> bool:
+    """Akzeptiert `func` das Schlüsselwort `name` (oder **kwargs)?
+
+    Nötig, weil Backend-Funktionen in Tests und im Feld auch in älteren
+    Signaturen auftreten (Attrappen ohne `call_timeout`/`timeout`). Ein
+    blind übergebenes Schlüsselwort würde dort TypeError werfen — und
+    genau so starb Edge am 07.09.2026 still für drei Tage. Also: erst
+    fragen, dann reichen.
+    """
+    try:
+        import inspect
+        params = inspect.signature(func).parameters
+    except Exception:
+        return False
+    if name in params:
+        return True
+    return any(p.kind == p.VAR_KEYWORD for p in params.values())
 
 
 def _retry_sleep(seconds: float) -> None:
@@ -1506,7 +1614,8 @@ def verify_segment(out_wav: str) -> tuple:
 
 def synthesize(text: str, lang: str, engine: str, profile_name: str, out_wav: str,
                rate: float = 1.0, pitch: int = 0, volume: float = 1.0,
-               attempts: int = SYNTH_ATTEMPTS, allow_engine_fallback: bool = True):
+               attempts: int = SYNTH_ATTEMPTS, allow_engine_fallback: bool = True,
+               deadline: float = None):
     """Ein Segment sprechen. Gibt (engine, ok, word_boundaries) zurueck.
 
     NUR-DEUTSCH-VERTRAG: `lang` wird ignoriert — gesprochen wird
@@ -1522,11 +1631,40 @@ def synthesize(text: str, lang: str, engine: str, profile_name: str, out_wav: st
          (edge -> piper), sofern erlaubt.
       3. JEDES Ergebnis wird gemessen: dekodierbar, nicht stumm. Nur
          hoerbare Segmente gelten als Erfolg.
+
+    SEGMENT-WANDUHR (Härtung 11.09.2026): `deadline` ist der
+    `time.monotonic()`-Wert, bis zu dem dieses Segment fertig sein muss
+    — durchgereicht aus `--max-seconds` über `synth_article`. Ohne ihn
+    gilt `SYNTH_SEGMENT_BUDGET` (900 s) ab Aufrufbeginn; gesetzt gilt
+    die FRÜHERE der beiden Grenzen. Vor jeder Engine und vor jedem
+    Versuch wird sie geprüft, und das Restbudget wird als Deckel an
+    `synth_edge(call_timeout=…)` bzw. `synth_piper(timeout=…)`
+    durchgereicht. Ablauf ⇒ `(engine, False, [])`: ehrlicher
+    Fehlschlag statt Hänger — der Aufrufer stellt den Artikel zurück
+    (deferred) statt ihn zu verwerfen. Damit greift die Deadline
+    MITTEN im Artikel, nicht nur zwischen Artikeln.
     """
+    import time as _time
+
     del lang  # Nur-Deutsch-Vertrag — immer die deutsche Stimme.
     profile = VOICE_PROFILES.get(profile_name) or VOICE_PROFILES[DEFAULT_PROFILE]
     voice = profile["de"]
     style = profile.get("style")
+
+    # Segment-Budget: eigene Wanduhr UND (falls gereicht) die Deadline
+    # des Laufs — die frühere Grenze gewinnt.
+    seg_deadline = None
+    if SYNTH_SEGMENT_BUDGET and SYNTH_SEGMENT_BUDGET > 0:
+        seg_deadline = _time.monotonic() + float(SYNTH_SEGMENT_BUDGET)
+    if deadline is not None:
+        deadline = float(deadline)
+        seg_deadline = deadline if seg_deadline is None else min(seg_deadline, deadline)
+
+    def _remaining():
+        """Restsekunden des Segment-Budgets (None = kein Budget)."""
+        if seg_deadline is None:
+            return None
+        return seg_deadline - _time.monotonic()
 
     chain = [engine]
     if allow_engine_fallback:
@@ -1542,16 +1680,30 @@ def synthesize(text: str, lang: str, engine: str, profile_name: str, out_wav: st
         if eng not in ("edge", "piper"):
             continue   # keine dritte, fremdsprachige Stufe mehr
         for attempt in range(max(1, attempts)):
+            # SEGMENT-WANDUHR: Budget weg ⇒ keine weiteren Versuche.
+            # Früher lief die Kette hier bis zum letzten Versuch durch,
+            # auch wenn der Lauf längst über seiner Deadline war.
+            remaining = _remaining()
+            if remaining is not None and remaining <= 0:
+                return engine, False, []
             if attempt:
                 _retry_sleep(SYNTH_BACKOFF[min(attempt - 1, len(SYNTH_BACKOFF) - 1)])
             ok = False
             boundaries = []
             try:
                 if eng == "edge":
+                    # Restbudget als Aufruf-Deckel durchreichen — nur wenn
+                    # die (ggf. ältere/gefakte) Signatur ihn kennt.
+                    extra = {}
+                    if remaining is not None and _accepts_kw(synth_edge, "call_timeout"):
+                        extra["call_timeout"] = min(EDGE_CALL_TIMEOUT, remaining)
                     ok, boundaries = synth_edge(text, "de", voice, rate, pitch, volume,
-                                                 out_wav, style=style)
+                                                 out_wav, style=style, **extra)
                 elif eng == "piper":
-                    ok = synth_piper(text, PIPER_VOICES["de"], out_wav)
+                    extra = {}
+                    if remaining is not None and _accepts_kw(synth_piper, "timeout"):
+                        extra["timeout"] = min(PIPER_TIMEOUT, remaining)
+                    ok = synth_piper(text, PIPER_VOICES["de"], out_wav, **extra)
             except Exception:
                 ok = False
             if not ok:
@@ -1911,6 +2063,235 @@ def _selftest() -> int:
         shutil.rmtree(tmp2, ignore_errors=True)
     check("Edge-Timeout: Standard-Deckel aktiv und maßvoll",
           (EDGE_SEGMENT_TIMEOUT or 0) > 0 and EDGE_SEGMENT_TIMEOUT <= 300)
+
+    # ------------------------------------------------------------------
+    # Aufruf-Budget, Piper-Deckel und Segment-Wanduhr (Härtung 11.09.2026)
+    #
+    # Bis hierhin galt: 120 s je Stream-VERSUCH (edge) und 600 s
+    # VERDRAHTET im Piper-Prozess; das `--max-seconds`-Budget wurde nur
+    # zwischen Segmenten geprüft. Ein einzelnes Segment konnte damit
+    # rechnerisch ~46 Min. stehen (2 Stil-Stufen × 3 Versuche × 120 s
+    # Edge + 2 Kettenstufen × 3 Versuche × 600 s Piper) — die Deadline
+    # des Laufs lief mitten im Artikel ins Leere. Diese Gates pinnen die
+    # drei Deckel: Aufruf-Budget (edge), Parameter statt Verdrahtung
+    # (piper), Segment-Wanduhr (synthesize).
+    # ------------------------------------------------------------------
+    check("Aufruf-Budget: Konstante aktiv und über dem Versuchsdeckel",
+          (EDGE_CALL_TIMEOUT or 0) > 0 and EDGE_CALL_TIMEOUT >= EDGE_SEGMENT_TIMEOUT)
+
+    tmp3 = tempfile.mkdtemp(prefix="ff-edge-callbudget-")
+    fake_edge3 = _types.ModuleType("edge_tts")
+    saved_edge3 = sys.modules.get("edge_tts")
+    try:
+        # 1) Versuchsdeckel riesig, Aufruf-Budget klein: Der Aufruf-Deckel
+        #    muss gewinnen — sonst läuft ein einziger Versuch 3600 s.
+        fake_edge3.Communicate = _HangingCommunicate
+        sys.modules["edge_tts"] = fake_edge3
+        t0 = _time.monotonic()
+        ok_big, b_big = synth_edge("Hallo Welt", "de", "stimme", 1.0, 0, 1.0,
+                                   os.path.join(tmp3, "big.wav"), style="serious",
+                                   timeout=3600, call_timeout=0.4)
+        dt_big = _time.monotonic() - t0
+        check("Aufruf-Budget: gewinnt gegen riesigen Versuchsdeckel",
+              ok_big is False and b_big == [] and dt_big < 30)
+
+        # 2) Restbudget kappt die Versuche: Die zweite Stil-Stufe darf
+        #    nicht mehr BEGONNEN werden, wenn das Budget weg ist.
+        ATTEMPTS = []
+
+        class _CountingHanging:
+            def __init__(self, *args, **kwargs):
+                ATTEMPTS.append(kwargs)
+
+            async def stream(self):
+                await _aio.sleep(3600)
+                yield {}
+
+        fake_edge3.Communicate = _CountingHanging
+        sys.modules["edge_tts"] = fake_edge3
+        synth_edge("Hallo Welt", "de", "stimme", 1.0, 0, 1.0,
+                   os.path.join(tmp3, "count.wav"), style="serious",
+                   timeout=5, call_timeout=0.45)
+        check("Aufruf-Budget: erschöpftes Restbudget startet keine weitere Stil-Stufe",
+              len(ATTEMPTS) == 1)
+
+        # 3) Diagnose-Notausgang: Ohne Aufruf-Deckel laufen beide
+        #    Stil-Stufen (Profil-Stil, danach neutral) — der Deckel darf
+        #    die normale Arbeitsweise nicht verkürzen.
+        SLOW = []
+
+        class _SlowEmpty:
+            def __init__(self, *args, **kwargs):
+                SLOW.append(kwargs)
+
+            async def stream(self):
+                await _aio.sleep(0.06)
+                return
+                yield {}
+
+        fake_edge3.Communicate = _SlowEmpty
+        sys.modules["edge_tts"] = fake_edge3
+        synth_edge("Hallo", "de", "stimme", 1.0, 0, 1.0,
+                   os.path.join(tmp3, "offen.wav"), style="serious",
+                   timeout=5, call_timeout=None)
+        check("Aufruf-Budget: call_timeout=None schaltet den Deckel ab (Diagnose)",
+              len(SLOW) == 2)
+        SLOW2 = []
+
+        class _SlowEmpty3:
+            def __init__(self, *args, **kwargs):
+                SLOW2.append(kwargs)
+
+            async def stream(self):
+                await _aio.sleep(0.06)
+                return
+                yield {}
+
+        fake_edge3.Communicate = _SlowEmpty3
+        sys.modules["edge_tts"] = fake_edge3
+        synth_edge("Hallo", "de", "stimme", 1.0, 0, 1.0,
+                   os.path.join(tmp3, "knapp.wav"), style="serious",
+                   timeout=5, call_timeout=0.06)
+        check("Aufruf-Budget: knappes Budget beendet den Aufruf nach dem ersten Versuch",
+              len(SLOW2) == 1)
+    finally:
+        if saved_edge3 is None:
+            sys.modules.pop("edge_tts", None)
+        else:
+            sys.modules["edge_tts"] = saved_edge3
+        shutil.rmtree(tmp3, ignore_errors=True)
+
+    # 4) Piper: Der Deckel ist PARAMETER (Standard unverändert 600 s) und
+    #    kommt wirklich im subprocess-Aufruf an.
+    import inspect as _inspect2
+    _piper_sig = _inspect2.signature(synth_piper)
+    check("Piper: timeout ist Parameter mit unverändertem Standard",
+          "timeout" in _piper_sig.parameters
+          and _piper_sig.parameters["timeout"].default == PIPER_TIMEOUT)
+
+    REC_RUN = []
+    _orig_run = subprocess.run
+    _orig_piper_avail = globals()["piper_available"]
+
+    class _RecProc:
+        returncode = 1          # „Fehlschlag“ — hier zählt nur der Deckel
+        stdout = b""
+        stderr = b""
+
+    def _rec_run(cmd, **kwargs):
+        REC_RUN.append(kwargs)
+        return _RecProc()
+
+    tmp4 = tempfile.mkdtemp(prefix="ff-piper-timeout-")
+    try:
+        subprocess.run = _rec_run
+        globals()["piper_available"] = lambda: True
+        synth_piper("Hallo", "stimme", os.path.join(tmp4, "p1.wav"), timeout=12.5)
+        check("Piper: gereichter Deckel kommt im subprocess an",
+              len(REC_RUN) == 1 and REC_RUN[0].get("timeout") == 12.5)
+        REC_RUN.clear()
+        synth_piper("Hallo", "stimme", os.path.join(tmp4, "p2.wav"))
+        check("Piper: ohne Angabe gilt der Standard-Deckel",
+              len(REC_RUN) == 1 and REC_RUN[0].get("timeout") == PIPER_TIMEOUT)
+        REC_RUN.clear()
+        synth_piper("Hallo", "stimme", os.path.join(tmp4, "p3.wav"), timeout=0)
+        check("Piper: timeout=0 schaltet den Deckel ab (Diagnose)",
+              len(REC_RUN) == 1 and "timeout" not in REC_RUN[0])
+    finally:
+        subprocess.run = _orig_run
+        globals()["piper_available"] = _orig_piper_avail
+        shutil.rmtree(tmp4, ignore_errors=True)
+
+    # 5) Segment-Wanduhr in synthesize(): eigenes Budget + gereichte
+    #    Deadline (aus --max-seconds) — die frühere Grenze gewinnt.
+    check("Segment-Wanduhr: Budget-Konstante aktiv",
+          (SYNTH_SEGMENT_BUDGET or 0) > 0)
+    check("Segment-Wanduhr: synthesize nimmt eine Deadline an",
+          "deadline" in _inspect2.signature(synthesize).parameters)
+
+    globals_2 = globals()
+    orig2 = {k: globals_2[k] for k in ("synth_edge", "synth_piper", "edge_available",
+                                       "piper_available")}
+    os.environ["FF_VOICE_RETRY_SLEEP"] = "0"
+    tmp5 = tempfile.mkdtemp(prefix="ff-segbudget-")
+    try:
+        hits = {"edge": 0, "piper": 0}
+        budgets = {"edge": [], "piper": []}
+
+        def counting_edge(text, lang, voice, rate, pitch, volume, out_wav,
+                          style=None, timeout=None, call_timeout=None):
+            hits["edge"] += 1
+            budgets["edge"].append(call_timeout)
+            _time.sleep(0.2)               # langsames, scheiterndes Backend
+            return False, []
+
+        def counting_piper(text, voice, out_wav, timeout=None):
+            hits["piper"] += 1
+            budgets["piper"].append(timeout)
+            return False
+
+        globals_2["synth_edge"] = counting_edge
+        globals_2["synth_piper"] = counting_piper
+        globals_2["edge_available"] = lambda: True
+        globals_2["piper_available"] = lambda: True
+
+        # 5a) Abgelaufene Deadline ⇒ KEIN Backend-Aufruf, ehrlicher
+        #     Fehlschlag (statt 46 Minuten Kettenlauf).
+        hits["edge"] = hits["piper"] = 0
+        eng_x, ok_x, _b_x = synthesize("Test", "de", "edge", "natural",
+                                       os.path.join(tmp5, "x.wav"),
+                                       deadline=_time.monotonic() - 1.0)
+        check("Segment-Wanduhr: abgelaufene Deadline ruft kein Backend mehr",
+              ok_x is False and hits["edge"] == 0 and hits["piper"] == 0)
+
+        # 5b) Laufende Deadline bricht MITTEN in der Versuchsreihe ab —
+        #     nicht erst nach dem letzten Versuch.
+        hits["edge"] = hits["piper"] = 0
+        budgets["edge"] = []
+        eng_y, ok_y, _b_y = synthesize("Test", "de", "edge", "natural",
+                                       os.path.join(tmp5, "y.wav"),
+                                       deadline=_time.monotonic() + 0.35,
+                                       allow_engine_fallback=False)
+        check("Segment-Wanduhr: bricht mitten in der Versuchsreihe ab",
+              ok_y is False and 0 < hits["edge"] < SYNTH_ATTEMPTS)
+
+        # 5c) Das Restbudget wird als Deckel an die Backends gereicht.
+        check("Segment-Wanduhr: Edge bekommt das Restbudget als Aufruf-Deckel",
+              len(budgets["edge"]) > 0
+              and all(b is not None and 0 < b <= SYNTH_SEGMENT_BUDGET
+                      and b <= EDGE_CALL_TIMEOUT for b in budgets["edge"]))
+        hits["edge"] = hits["piper"] = 0
+        budgets["piper"] = []
+        synthesize("Test", "de", "piper", "natural", os.path.join(tmp5, "z.wav"),
+                   deadline=_time.monotonic() + 1.2, allow_engine_fallback=False)
+        check("Segment-Wanduhr: Piper bekommt das Restbudget als Prozess-Deckel",
+              len(budgets["piper"]) > 0
+              and all(t is not None and 0 < t <= 1.2 for t in budgets["piper"]))
+
+        # 5d) Signatur-Kompatibilität (Lektion vom 07.09.2026): Backend-
+        #     Attrappen OHNE die neuen Parameter müssen weiterlaufen —
+        #     ein blind gereichtes Schlüsselwort kostete damals drei
+        #     Tage lang jede Edge-Synthese.
+        def old_edge(text, lang, voice, rate, pitch, volume, out_wav, style=None):
+            write_wav_mono(out_wav, speech_like)
+            return True, []
+
+        def old_piper(text, voice, out_wav):
+            write_wav_mono(out_wav, speech_like)
+            return True
+
+        globals_2["synth_edge"] = old_edge
+        globals_2["synth_piper"] = old_piper
+        eng_o, ok_o, _b_o = synthesize("Test", "de", "edge", "natural",
+                                       os.path.join(tmp5, "alt.wav"),
+                                       deadline=_time.monotonic() + 60.0)
+        check("Signatur-Kompatibilität: alte Backend-Signaturen laufen weiter",
+              ok_o is True and eng_o == "edge")
+    finally:
+        for k, v in orig2.items():
+            globals_2[k] = v
+        os.environ.pop("FF_VOICE_RETRY_SLEEP", None)
+        shutil.rmtree(tmp5, ignore_errors=True)
 
     failed = [n for n, ok in results if not ok]
     for name, ok in results:
