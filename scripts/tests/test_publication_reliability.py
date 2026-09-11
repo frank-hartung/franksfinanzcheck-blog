@@ -13,6 +13,7 @@ import bot_status
 import grammar_check
 import profi_polish
 import publication_check as pc
+import publication_release as pr
 import publish_day_check as watchdog
 import reserve_pool as rp
 import spellcheck
@@ -102,6 +103,33 @@ class DeliveryTests(unittest.TestCase):
         before = p.read_bytes()
         self.assertEqual(rp.publish_to_min(posts_dir=self.posts, validator=lambda p: True), [])
         self.assertEqual(p.read_bytes(), before)
+
+    def test_requeue_fallback_restores_rejected_and_fills_min(self):
+        class FixedDateTime(dt.datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return cls(2026, 9, 7, 12, 0, tzinfo=dt.timezone.utc)
+
+        live = self.post('live', draft=False)
+        rejected = self.post('old-a', draft=True)
+        accepted = self.post('old-b', draft=True)
+        for p in (rejected, accepted):
+            text = p.read_text()
+            text = text.replace('draft: true\n', 'draft: true\ncadence_wait: true\ncadence_demoted: 2026-09-06T12:00:00Z\ncadence_grund: "test"\n')
+            p.write_text(text)
+        before_rejected = rejected.read_bytes()
+
+        with patch.object(pr.dt, 'datetime', FixedDateTime), \
+             patch('cadence_guard.now_utc_iso', lambda: '2026-09-07T12:00:00Z'):
+            published = pr.promote_requeue_to_min(
+                posts_dir=self.posts,
+                validator=lambda p: p.parent.name == 'old-b')
+
+        self.assertEqual(published, ['old-b'])
+        self.assertEqual(rejected.read_bytes(), before_rejected)
+        self.assertIn('draft: false', accepted.read_text())
+        self.assertNotIn('cadence_wait:', accepted.read_text())
+        self.assertIn('draft: false', live.read_text())
 
     def test_real_html_class_list_and_soft_404(self):
         class Response:

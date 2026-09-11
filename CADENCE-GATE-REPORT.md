@@ -1,6 +1,6 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-09-11 19:40 UTC
+**Letzter Lauf:** 2026-09-11 19:53 UTC
 
 **Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
@@ -21,7 +21,7 @@
 - ✅ 2026-09-04 (Freitag): 2
 - ✅ 2026-09-07 (Montag): 2
 - ✅ 2026-09-09 (Mittwoch): 2
-- ✅ 2026-09-11 (Freitag): 3
+- ✅ 2026-09-11 (Freitag): 2
 
 ## Aktiver Befund
 
@@ -29,8 +29,8 @@
 
 ## Re-Queue-Integrität (Park-Zustände)
 
-- 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **7**
-- ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **5**
+- 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **6**
+- ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **7**
 - ✍️ manuelle Entwürfe (von der Automatik unberührt): **7**
 - 🔁 wiederhergestellte Re-Queue-Flags: **0**
 - 🧹 Park-Reste an live-Posts (gefunden, weg mit --fix): **0**
@@ -42,11 +42,12 @@
 - `2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt` – publish-gate: Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig; Textverständnis-Gate nicht bestanden: R3-TERMINOLOGIE: Konzept „DNS-Ser… · seit 4 Tagen
 - `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` – publish-gate: Zeichenlänge (check_length.py) nicht bestanden · seit 4 Tagen
 - `2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise` – publish-gate: Zeichenlänge (check_length.py) nicht bestanden · seit 4 Tagen
+- `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` – publish-gate: Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig · seit 0 Tagen
+- `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen` – publish-gate: Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig · seit 0 Tagen
 
 
 ## Letzte Heilungen
 
-- Aus Re-Queue live gesetzt: `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen`
-- Aus Re-Queue live gesetzt: `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort`
+- – (nichts in diesem Lauf)
 
 _Wird von `cadence_guard.py` bei jedem Kadenz-Lauf aktualisiert (Deploy-Gate, Content-Engine, Blog-Health)._
