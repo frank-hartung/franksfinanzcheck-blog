@@ -1,7 +1,7 @@
 # 🧱 FM-GRENZEN-REPORT (fm_boundary_guard.py)
 
-**Stand:** 2026-09-11 16:20 UTC · Modus: FIX
-**Geprüfte Dateien:** 59 · **baukritisch:** 0 · **automatisch geheilt:** 0 · **unheilbar:** 0 · **offen nach Heilung:** 0 · **Kleber-Hinweise:** 11
+**Stand:** 2026-09-11 17:27 UTC · Modus: FIX
+**Geprüfte Dateien:** 59 · **baukritisch:** 0 · **automatisch geheilt:** 0 · **unheilbar:** 0 · **offen nach Heilung:** 0 · **Kleber-Hinweise:** 10
 
 **Regelkanon:** F1 Grenze oben · F2 Grenze unten · F3 Block/Zeile nicht YAML-parbar · F4 Quote/Flow nicht geschlossen · F5 Fallback-Regel ohne PyYAML · G Kleber an der Schlussgrenze (Hinweis)
 
@@ -13,7 +13,6 @@
 
 Hugo schließt das Frontmatter an der ersten Zeile, die mit `---` beginnt – der Text dahinter ist damit NICHT Teil des Body (deshalb erscheint der Einstiegsabsatz doppelt, wenn er unter der Grenze noch einmal steht). Zerlegen ist Aufgabe der Umbruch-/Casing-Wache, hier nur gemeldet.
 
-- `content/posts/2026-08-10-dsl-wechselbonus-sichern/index.md` FM-Schlussgrenze zugeklebt: '---Warum zahlen Millionen Haushalte in Deutschland Monat fü'
 - `content/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/index.md` FM-Schlussgrenze zugeklebt: '---Zahlst du monatlich über 160 € für Gas? Viele Haushalte '
 - `content/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/index.md` FM-Schlussgrenze zugeklebt: '---Starkregen, Sturm und Überschwemmungen zeigen: Dein Zuha'
 - `content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md` FM-Schlussgrenze zugeklebt: '---Wer Heizkosten im Griff behalten will, denkt früh an die'
