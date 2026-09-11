@@ -4,8 +4,9 @@ title: "Gasvergleich: Wie du teure Fehler beim Wechsel vermeidest"
 description: Mit einem Gasvergleich sparst du bares Geld. Erfahre hier, wie du Gastarife wechseln kannst, um deine Heizkosten dauerhaft zu senken.
 date: 2026-09-11T17:44:28Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-09-11T18:15:15Z
-cadence_grund: "quality-score: 0.84 < 0.85; finale Freigabe fehlt"
+cadence_grund: "quality-hold aufgehoben (#251): Score 0.860 ≥ 0.80 – Re-Queue für vollen Gate-Durchlauf"
 tags: ["Gasvergleich", "Gastarife wechseln", "Gaskosten sparen", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

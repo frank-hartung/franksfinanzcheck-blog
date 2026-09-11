@@ -3,8 +3,9 @@ title: "So nutzt du die 50-30-20-Regel: Wohin mit dem Gehalt?"
 description: "Du fragst dich oft: wohin mit dem Gehalt? Die 50-30-20-Regel hilft dir beim Geld einteilen lernen und schafft Ordnung auf deinem Konto."
 date: 2026-09-11T17:43:43Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-09-11T17:55:42Z
-cadence_grund: "quality-score: Score 0.742 < 0.80 (schwach: spelling 0.00, typography 0.74, meta 0.85) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174)"
+cadence_grund: "quality-hold aufgehoben (#251): Score 0.854 ≥ 0.80 – Re-Queue für vollen Gate-Durchlauf"
 tags: ["Wohin mit dem gehalt", "50 30 20 Regel Budget", "Kontomodell", "Geld einteilen lernen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
