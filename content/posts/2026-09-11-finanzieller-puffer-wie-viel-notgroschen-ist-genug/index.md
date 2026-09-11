@@ -91,18 +91,13 @@ Solange dein finanzieller Puffer nicht steht, nutzt du die vollen 20 % dafür.
 
 Betrachten wir einen Single‑Haushalt in einer deutschen Großstadt mit 2.500 € Netto‑Einkommen.
 
-* **Monatliche Fixkosten:**  
-    * Miete & Nebenkosten: 900 €  
-    * Lebensmittel: 400 €  
-    * Versicherungen & Abos: 150 €  
-    * Mobilität (Auto/ÖPNV): 200 €  
-    * **Gesamtausgaben:** 1.650 €
+* **Monatliche Fixkosten:** * Miete & Nebenkosten: 900 €
+    * Lebensmittel: 400 € * Versicherungen & Abos: 150 €
+    * Mobilität (Auto/ÖPNV): 200 € * **Gesamtausgaben:** 1.650 €
 
-* **Zielsetzung:** Vier Monatsausgaben als Sicherheit.  
-    * Rechnung: 1.650 € × 4 = 6.600 €
+* **Zielsetzung:** Vier Monatsausgaben als Sicherheit. * Rechnung: 1.650 € × 4 = 6.600 €
 
-* **Sparplan:**  
-    * Monatliche Rate (20 %): 500 €  
+* **Sparplan:** * Monatliche Rate (20 %): 500 €
     * Dauer bis zum Ziel: ca. 13,2 Monate.
 
 Nach etwa 13 Monaten ist dieser Haushalt finanziell wetterfest. Ab dem 14. Monat fließen die 500 € monatlich direkt in den langfristigen Vermögensaufbau.
@@ -135,12 +130,9 @@ Nutze diesen Check, um deine laufenden Kosten dauerhaft zu senken. Jede eingespa
 
 ## Praktische Checkliste zum Start deines finanziellen Puffers
 
-- [ ] **Fixkosten‑Liste** erstellen (Miete, Nebenkosten, Versicherungen, Lebensmittel, Transport).  
-- [ ] **Monatlichen Sicherheitsfaktor** festlegen (4 × Fixkosten für Singles, 5‑6 × für Familien).  
-- [ ] **Tagesgeldkonto** auswählen (mind. 100 % Einlagensicherung, kostenlose Kontoführung).  
-- [ ] **Dauerauftrag** einrichten (automatischer Transfer am Zahltag).  
-- [ ] **Notfall‑Trigger definieren** (z. B. Reparatur > 500 €, plötzlicher Jobverlust).  
-- [ ] **Jährlichen Review‑Termin** im Kalender blocken (z. B. 1. Januar).  
+- [ ] **Fixkosten‑Liste** erstellen (Miete, Nebenkosten, Versicherungen, Lebensmittel, Transport). - [ ] **Monatlichen Sicherheitsfaktor** festlegen (4 × Fixkosten für Singles, 5‑6 × für Familien).
+- [ ] **Tagesgeldkonto** auswählen (mind. 100 % Einlagensicherung, kostenlose Kontoführung). - [ ] **Dauerauftrag** einrichten (automatischer Transfer am Zahltag).
+- [ ] **Notfall‑Trigger definieren** (z. B. Reparatur > 500 €, plötzlicher Jobverlust). - [ ] **Jährlichen Review‑Termin** im Kalender blocken (z. B. 1. Januar).
 
 ## Fazit: Finanzieller Puffer – Wie viel Notgroschen ist genug
 

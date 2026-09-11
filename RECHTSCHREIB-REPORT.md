@@ -1,6 +1,6 @@
 # 📝 Rechtschreib-Report
 
-> **Automatisch** erzeugt am 2026-09-11 – 37 Artikel geprüft, 494 Funde, 5 korrigiert, 489 offen.
+> **Automatisch** erzeugt am 2026-09-11 – 37 Artikel geprüft, 470 Funde, 4 korrigiert, 466 offen.
 
 ## Offene Punkte
 
@@ -54,7 +54,7 @@
 - `Unbekanntes Wort: „BEHG“ (Vorschläge: –)`
 - `Unbekanntes Wort: „durchreichen“ (Vorschläge: –)`
 - `Unbekanntes Wort: „Gasanbieterwechsel“ (Vorschläge: –)`
-- … und 439 weitere
+- … und 416 weitere
 
 ---
 *Erzeugt von scripts/spellcheck.py*

@@ -118,7 +118,7 @@ Willst du deine Kosten senken, brauchst du eine klare Struktur. Folge diesen ein
 
 Oft ist der Stromtarif selbst dein größter Hebel für Ersparnisse. Wer seit Jahren beim Grundversorger bleibt, zahlt meist viel zu hohe Preise. Ein schneller Vergleich bewirkt hier oft mehr als das Ziehen vieler Stecker. Prüfe deine aktuellen Konditionen und wechsle zu einem günstigeren Anbieter.
 
-Hier kannst du direkt prüfen, wie viel du sparen kannst: [Stromanbieter vergleichen und wechseln](/go/strom/) {rel="sponsored"}.
+**Hier kannst du direkt prüfen, wie viel du sparen könntest: [Stromanbieter vergleichen und wechseln](/go/strom/) {rel="sponsored"}.**
 
 ## Dauerverbraucher im Check: Wo lohnt sich das Abschalten am meisten?
 Bei einigen Geräten ist das Abschalten fast schon Pflicht. Bei anderen bringt es weniger Nutzen oder ist sogar kontraproduktiv. Ein Router sollte in der Regel laufen, damit Telefonie und Smarthome funktionieren. Hier sparst du durch eine Nachtabschaltung des WLANs nur minimale Beträge.

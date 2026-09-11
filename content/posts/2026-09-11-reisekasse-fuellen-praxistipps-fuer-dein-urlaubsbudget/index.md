@@ -54,7 +54,7 @@ Ohne Struktur versickert dein Geld oft in kleinen Spontankäufen.
 Diese Ausgaben bereiten dir langfristig meist keine Freude.
 Betrachte deine privaten Finanzen daher wie ein erfolgreiches Unternehmen.
 
-Nutze dafür die bewährte 50–30–20-Regel.
+Nutze dafür die bewährte 50–30–20-Regel.  
 Dabei fließen 50 % deines Einkommens in feste Grundbedürfnisse wie die Miete.
 30 % stehen für deine persönlichen Wünsche und die Freizeit zur Verfügung.
 Die restlichen 20 % nutzt du für den Vermögensaufbau oder dein Sparziel Urlaub.
@@ -101,7 +101,7 @@ Wer einfache Cashback Tipps befolgt, sammelt über das Jahr beachtliche Summen.
 Registriere dich zuerst bei einem großen und seriösen Cashback-Portal wie Shoop oder iGraal.
 Installiere am besten die Browser-Erweiterung, damit du keinen Bonus mehr verpasst.
 Prüfe vor jedem Kauf von Elektronik oder Kleidung die aktuellen Partner-Shops.
-Manche Portale bieten dir sogar Cashback auf Reisebuchungen an – das ist die Königsdisziplin: Geld für den Urlaub erhalten, während du deine Reise buchst.
+Manche Portale bieten dir sogar Cashback auf Reisebuchungen an – das ist die Königsdisziplin: Geld für den Urlaub erhalten, während du deine Reise buchst.  
 Lass dir das gesammelte Guthaben einmal jährlich kurz vor deiner Reise auszahlen.
 
 Manche Banken bieten mittlerweile integrierte Cashback-Programme direkt im Konto an.
@@ -142,7 +142,7 @@ Oft verschwindet der Kaufwunsch nach einer Nacht Schlaf von selbst.
 
 Ein enormes Sparpotenzial bietet die Ernährung.
 Wer täglich in der Mittagspause zum Imbiss geht, gibt leicht 10 € bis 15 € aus.
-Durch „Meal Prepping“ – also das Vorkochen zu Hause – reduzierst du diese Kosten auf etwa 3 € pro Tag.
+Durch „Meal Prepping“ – also das Vorkochen zu Hause – reduzierst du diese Kosten auf etwa 3 € pro Tag.  
 Auf den Monat gerechnet ergibt das eine Ersparnis von rund 150 € bis 200 €.
 Das ist bereits ein Wochenende in einer europäischen Metropole inklusive Unterkunft.
 

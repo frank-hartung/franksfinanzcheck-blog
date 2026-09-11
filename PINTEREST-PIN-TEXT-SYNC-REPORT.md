@@ -1,11 +1,11 @@
 # 🖋 PINTEREST-PIN-TEXT-SYNC-REPORT (Premium-Pin-Texte)
 
-**Stand:** 11.09.2026 11:29 UTC · **Modus:** APPLY
+**Stand:** 11.09.2026 17:55 UTC · **Modus:** APPLY
 
 **Regel:** Jeder Artikel trägt die Premium-Texte des besten Masterplan-Pins
 (Schwelle 1.2) + das `pinwand`-Feld für das Multi-Board-Routing.
 
-Artikel: 47 · geänderte: 1 · Pins im Plan: 48
+Artikel: 49 · geänderte: 1 · Pins im Plan: 48
 
 | Artikel | Plan-Pin | Score | Status |
 |---|---|---|---|
@@ -28,7 +28,7 @@ Artikel: 47 · geänderte: 1 · Pins im Plan: 48
 | 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-z | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 | 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier | 39 | 2.56 | identisch |
 | 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub | 6 | 1.45 | identisch |
-| 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus- | 1 | 1.44 | identisch |
+| 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus- | 1 | 1.44 | Pin 1 „5 einfache Frugalismus-Tricks für den Al…“ |
 | 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preissp | 40 | 2.55 | identisch |
 | 2026-08-26-dns-server-wechseln-schnelleres-sichereres-intern | 18 | 2.20 | identisch |
 | 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife | - | 0.00 | keine (Pin-Ziel ist ein anderer Artikel) |
@@ -53,9 +53,11 @@ Artikel: 47 · geänderte: 1 · Pins im Plan: 48
 | 2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genu | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 | 2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfa | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 | 2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-aug | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-ver | - | 0.00 | keine (Pin-Ziel ist ein anderer Artikel) |
 | 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaet | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
-| 2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsb | 9 | 2.27 | identisch |
-| 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfr | 8 | 1.28 | Pin 8 „Diese 5 Geräte treiben deine Stromrechnu…“ |
+| 2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsb | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-geha | 20 | 2.24 | identisch |
+| 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfr | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 
 ---
 

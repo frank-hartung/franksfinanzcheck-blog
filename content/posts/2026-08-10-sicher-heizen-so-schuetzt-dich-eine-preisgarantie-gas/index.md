@@ -25,6 +25,9 @@ pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---Zahlst du monatlich über 160 € für Gas? Viele Haushalte stecken im teuren Grundtarif ihres Stadtwerks. Oder sie erleben nach dem Winter eine böse Nachzahlung, die das Urlaubsbudget für das nächste Jahr auffrisst. Eine **Gaspreisgarantie** schützt dich vor steigenden Preisen und gibt dir Planungssicherheit in einem Markt, der so volatil ist wie selten zuvor. Bevor du jedoch den erstbesten Vertrag unterschreibst, solltest du drei Punkte kennen: wie Garantien im Detail laufen, was der Unterschied zwischen „voll“ und „eingeschränkt“ für deinen Geldbeutel bedeutet und wie du strategisch klug den **Gastarif wechseln** kannst, um maximale Ersparnisse zu erzielen.
 
 ---
+Zahlst du monatlich über 160 € für Gas? Viele Haushalte stecken im teuren Grundtarif ihres Stadtwerks. Oder sie erleben nach dem Winter eine böse Nachzahlung, die das Urlaubsbudget für das nächste Jahr auffrisst. Eine **Gaspreisgarantie** schützt dich vor steigenden Preisen und gibt dir Planungssicherheit in einem Markt, der so volatil ist wie selten zuvor. Bevor du jedoch den erstbesten Vertrag unterschreibst, solltest du drei Punkte kennen: wie Garantien im Detail laufen, was der Unterschied zwischen „voll“ und „eingeschränkt“ für deinen Geldbeutel bedeutet und wie du strategisch klug den **[Gastarif wechseln](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/)** kannst, um maximale Ersparnisse zu erzielen.
+
+---
 Zahlst du monatlich über 160 € für Gas? Viele Haushalte stecken im teuren Grundtarif ihres Stadtwerks. Oder sie erleben nach dem Winter eine böse Nachzahlung, die das Urlaubsbudget für das nächste Jahr auffrisst. Eine **Gaspreisgarantie** schützt dich vor steigenden Preisen und gibt dir Planungssicherheit in einem Markt, der so volatil ist wie selten zuvor. Bevor du jedoch den erstbesten Vertrag unterschreibst, solltest du drei Punkte kennen: wie Garantien im Detail laufen, was der Unterschied zwischen „voll“ und „eingeschränkt“ für deinen Geldbeutel bedeutet und wie du strategisch klug den **[Gastarif wechseln](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)** kannst, um maximale Ersparnisse zu erzielen.
 
 ---
@@ -65,7 +68,7 @@ Eine eingeschränkte Garantie schützt dich vor den größten Preissprüngen am 
 
 ## Konkrete Beispiel-Rechnung: Ersparnis bei 20.000 kWh Verbrauch
 
-Stell dir ein typisches Einfamilienhaus vor, das 20.000 kWh Gas pro Jahr benötigt. Viele Bewohner scheuen den Wechsel, weil sie glauben, der Aufwand lohne sich für "ein paar Euro" nicht. Die Realität sieht anders aus, wenn man den **[Gastarif wechseln](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)** will:
+Stell dir ein typisches Einfamilienhaus vor, das 20.000 kWh Gas pro Jahr benötigt. Viele Bewohner scheuen den Wechsel, weil sie glauben, der Aufwand lohne sich für "ein paar Euro" nicht. Die Realität sieht anders aus, wenn man den **Gastarif wechseln** will:
 
 | Kostenfaktor | Grundversorgung (Stadtwerk) | Tarif mit Gaspreisgarantie & Bonus |
 | :--- | :--- | :--- |

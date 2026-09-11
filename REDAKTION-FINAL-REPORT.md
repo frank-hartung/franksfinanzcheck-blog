@@ -1,7 +1,7 @@
 # 🎓 REDAKTIONS-FINAL-REPORT (Endabnahme)
 
-**Stand:** 2026-09-11 11:30 UTC
-**Artikel:** 8
+**Stand:** 2026-09-11 17:56 UTC
+**Artikel:** 10
 
 ## 🔴 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
 
@@ -29,17 +29,26 @@
 - G2 Weichmacher-Dichte
 - G3 Schnell-Tipp-Box fehlt
 
+## 🔴 2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest
+
+- G3 Schnell-Tipp-Box fehlt
+
 ## 🔴 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
 
 - G1 Entwurf-Status (nicht live)
 
 ## 🔴 2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsbudget
 
+- G1 Entwurf-Status (nicht live)
 - G3 Schnell-Tipp-Box fehlt
 
-## 🟢 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+## 🟢 2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt
 
   verlagsreif ✅ (G1–G5 bestanden)
+
+## 🔴 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+
+- G1 Entwurf-Status (nicht live)
 
 ---
 _Endabnahme = letzte Instanz vor der Welt. Gates G1–G5; Sabotage->Exit 2._

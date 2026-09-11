@@ -26,6 +26,7 @@ pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
 
+
 Im Spätsommer denkt kaum jemand an die Heizung. Genau das ist ein teurer Fehler.  
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -49,7 +50,7 @@ Wer [Heizkosten senken](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-
 
 **Was passiert?** Luft in den Heizkörpern stört den Wasserfluss. Oben bleibt der Heizkörper kalt, die Pumpe läuft länger und verbraucht mehr Energie. Der Verbrauch steigt um 5 % – 10 %.
 
-**Wie du das vermeidest:** 1. **Entlüften:** Nimm einen Vierkantschlüssel (ca. 2 €) und ein Gefäß. Öffne das Entlüftungsventil, bis zischende Luft entweicht und Wasser austritt.
+**Wie du das [vermeidest](../../posts/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest/):** 1. **Entlüften:** Nimm einen Vierkantschlüssel (ca. 2 €) und ein Gefäß. Öffne das Entlüftungsventil, bis zischende Luft entweicht und Wasser austritt.
 2. **Druck prüfen:** Das Manometer sollte 1,2 – 1,8 bar anzeigen (kalt). Bei Bedarf Wasser nachfüllen – am besten destilliertes Wasser, um Kalkablagerungen zu vermeiden.  
 
 **Pro & Contra**  
@@ -222,7 +223,7 @@ Mindestens einmal im Monat, besser zu Beginn und Ende jedes Abrechnungszeitraums
 
 Senke deine **Gasrechnung**, bevor die Kälte kommt. Entlüftete Heizkörper, smarte Thermostate, ein hydraulischer Abgleich und ein günstiger Gastarif entlasten dich um bis zu **720 €** im Jahr. Nutze die warmen Tage für die Vorbereitung – dein Geldbeutel und die Umwelt danken es dir.
 
-**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Sicher heizen](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/): So schützt dich eine [Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · [Preisgarantie Gas](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): So sicherst du [günstige Tarife](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/) für 2026  
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Sicher heizen](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/): So schützt dich eine Gaspreisgarantie · [Preisgarantie Gas](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): So sicherst du [günstige Tarife](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/) für 2026  
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/gas/)
 

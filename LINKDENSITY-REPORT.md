@@ -1,18 +1,18 @@
 # 🔗 LINKDENSITY-REPORT (link_density_guard.py)
 
-**Stand:** 2026-09-11 11:30 UTC · Modus: FIX
+**Stand:** 2026-09-11 17:56 UTC · Modus: FIX
 
 | Kennzahl | Wert | Goldkorridor |
 |---|---|---|
-| Artikel | 47 | — |
-| ø interne Links/Artikel | 4.1 | 2–9 |
-| Artikel im Korridor | 77 % | ≥ 85 % |
+| Artikel | 49 | — |
+| ø interne Links/Artikel | 4.3 | 2–9 |
+| Artikel im Korridor | 78 % | ≥ 85 % |
 | unterversorgt (<2) | 10 | 0 |
 | überladen (>9) | 1 | 0 |
-| Ziel-Duplikate (heilbar offen) | 18 | 0 |
+| Ziel-Duplikate (heilbar offen) | 20 | 0 |
 | Ziel-Duplikate (strukturell, unheilbar) | 2 | Info |
 
-✅ **Selbstheilung Duplikate:** 32 Folge-Links entlinkt (Text blieb).
+✅ **Selbstheilung Duplikate:** 31 Folge-Links entlinkt (Text blieb).
 ✅ **Selbstheilung Dichte:** 2 Artikel per Linker nachgeruestet.
   ⚠ LOW  2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel: 1 Links
   ⚠ LOW  2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: 1 Links
@@ -23,7 +23,7 @@
   ⚠ LOW  2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks: 1 Links
   ⚠ LOW  2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: 1 Links
   ⚠ LOW  2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer: 1 Links
-  ⚠ LOW  2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser: 0 Links
+  ⚠ LOW  2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser: 1 Links
   ⚠ HIGH 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit: 10 Links (Sichtung empfohlen)
 
 ---
