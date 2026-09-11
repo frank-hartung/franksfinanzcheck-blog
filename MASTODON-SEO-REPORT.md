@@ -1,8 +1,8 @@
 # 🐘 Mastodon-SEO-Report
 
-> Automatisch: 11.09.2026 12:18 UTC 
+> Automatisch: 11.09.2026 21:16 UTC 
 
-- **Geprüfte Toots:** 30
+- **Geprüfte Toots:** 33
 - **Mit Befund:** 0
 - **Geheilt:** 0
 - **Duplikate (gleicher Artikel, nur gemeldet):** keine
@@ -11,6 +11,9 @@
 
 | Status | Artikel | Befunde | Heilung |
 |---|---|---|---|
+| [117254481595802095](https://mastodon.social/@FranksFinanzcheck/117254481595802095) | `2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest` | ✓ | — |
+| [117254481444382285](https://mastodon.social/@FranksFinanzcheck/117254481444382285) | `2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` | ✓ | — |
+| [117254481303797286](https://mastodon.social/@FranksFinanzcheck/117254481303797286) | `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` | ✓ | — |
 | [117243127091749309](https://mastodon.social/@FranksFinanzcheck/117243127091749309) | `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` | ✓ | — |
 | [117241042499687159](https://mastodon.social/@FranksFinanzcheck/117241042499687159) | `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` | ✓ | — |
 | [117241042379378377](https://mastodon.social/@FranksFinanzcheck/117241042379378377) | `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` | ✓ | — |

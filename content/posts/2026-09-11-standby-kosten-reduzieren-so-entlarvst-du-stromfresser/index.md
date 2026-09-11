@@ -22,6 +22,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 kurzantwort: "Durch das vollständige Trennen von Geräten wie Fernsehern, Routern oder Computern vom Netz spart ein durchschnittlicher Haushalt jährlich bis zu 115 Euro an Stromkosten ein. Zur Identifizierung der heimlichen Verbraucher eignen sich einfache Strommessgeräte, während schaltbare Steckdosenleisten die effektivste Lösung für das dauerhafte Abschalten darstellen."
+social_posted: true
 ---
 
 Zahlst du jedes Jahr bis zu 150 € für absolut nichts? Deine Elektrogeräte ziehen oft Strom, während sie scheinbar schlafen. Diese lautlosen Diebe verursachen **Standby Kosten**, die dein Budget unnötig belasten. Während du arbeitest oder schläfst, ziehen Fernseher, Router und Kaffeemaschine permanent Energie aus der Steckdose.
