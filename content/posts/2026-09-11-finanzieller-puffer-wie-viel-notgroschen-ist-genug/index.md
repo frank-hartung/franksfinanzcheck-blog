@@ -40,7 +40,10 @@ Was tust du, wenn am Montagmorgen dein Auto streikt und nachmittags die Waschmas
 
 Wer ohne Rücklagen investiert, spielt mit seinem Vermögen. In Krisenzeiten zwingen dich fehlende Reserven oft dazu, Aktien oder ETFs mit Verlust zu verkaufen. Ein Notgroschen verhindert diese Notverkäufe zuverlässig. Er bildet die psychologische Brandschutzmauer für dein Depot und deine mentale Gelassenheit.
 
-Erwarte von diesem Geld keine hohen Renditen. Durch die Inflation verliert das Geld auf dem Tagesgeldkonto real meist etwas an Wert. Das ist akzeptabel, da die wahre Rendite in gesparten Dispozinsen liegt. Diese kosten dich bei vielen Banken ca. 8 % bis 14 % Zinsen pro Jahr.
+Erwarte von diesem Geld keine hohen Renditen. Durch die Inflation verliert das Geld auf dem Tagesgeldkonto real meist etwas an Wert.
+
+Das ist akzeptabel, da die wahre Rendite in gesparten Dispozinsen liegt. Diese kosten dich bei vielen Banken ca. 8 % bis 14 % Zinsen pro Jahr.
+
 
 ## Wie viel Notgroschen reicht in deiner Situation wirklich?
 
@@ -48,8 +51,10 @@ Vergiss die pauschale Empfehlung von „drei Nettogehältern“. Orientiere dich
 
 In der Praxis variiert dein Bedarf je nach Lebensphase:
 1. **Single zur Miete:** hier reichen oft ca. 3 Monatsausgaben für kleine Notfälle aus.
+
 2. **Familie mit Eigenheim:** Plane ca. 5 bis 6 Monatsausgaben ein. Reparaturen an Dach oder Heizung kosten oft fünfstellige Beträge.
 3. **Selbstständige:** Halte mindestens 6, besser 12 Monatsausgaben als eiserne Reserve bereit.
+
 
 **Faustregel:** Addiere deine monatlichen Fixkosten für Miete, Strom, Energie und Lebensmittel. Multipliziere diese Summe mit vier. Das ergibt einen soliden Startwert für die meisten Haushalte in Deutschland.
 
@@ -57,16 +62,16 @@ In der Praxis variiert dein Bedarf je nach Lebensphase:
 
 Dein Geld muss sofort greifbar sein. Ein Sparbuch mit Kündigungsfrist oder Festgeld scheiden deshalb aus. Wähle ein separates Tagesgeldkonto bei einer Bank mit deutscher Einlagensicherung. Die optische Trennung vom Girokonto schützt dich davor, das Geld für Konsumwünsche auszugeben.
 
-Vergleiche die Konditionen regelmäßig, auch wenn Zinsen zweitrangig bleiben. Viele Anbieter bieten Neukunden attraktive Zinssätze, die den Wertverlust durch Inflation bremsen. Hier kannst du aktuelle Konditionen prüfen und direkt vergleichen: [/go/tagesgeld/](/go/allgemein/) (sponsored). Achte auf eine garantierte Auszahlung innerhalb von 24 Stunden.
+Vergleiche die Konditionen regelmäßig, auch wenn Zinsen zweitrangig bleiben. Viele Anbieter bieten Neukunden attraktive Zinssätze, die den Wertverlust durch Inflation bremsen. Hier kannst du aktuelle Konditionen prüfen und direkt vergleichen: [**Tagesgeldkonten vergleichen**](/go/tagesgeld/) (Werbung). Achte auf eine garantierte Auszahlung innerhalb von 24 Stunden.
 
 ### Kontotypen im Vergleich
 
-| Kontotyp            | Verfügbarkeit | Zinsniveau (2024) | Kosten | Vor‑ und Nachteile |
+| Kontotyp            | Verfügbarkeit | Zinsniveau (Richtwerte, schwankt je Marktphase) | Kosten | Vor‑ und Nachteile |
 |---------------------|---------------|-------------------|--------|--------------------|
-| **Tagesgeld**       | Sofort (innerhalb 24 h) | 0,10 % – 0,30 % p.a. | Keine Kontoführungsgebühr | + Höchste Flexibilität, – geringe Rendite |
-| **Festgeld (3‑12 Monate)** | Nach Laufzeit | 0,40 % – 0,70 % p.a. | Keine (manche Banken erheben Abschlussgebühr) | + Höhere Zinsen, – Geld ist gebunden |
-| **Sparbuch (klassisch)** | 1‑2 Werktage | 0,01 % – 0,05 % p.a. | Kontoführungsgebühr möglich | + Vertraut, – lange Auszahlungszeit, niedrige Zinsen |
-| **Online‑Sparplan (ETF‑Sparplan)** | 1‑3 Tage | Marktrendite (5‑7 % p.a. Langfristig) | Ordergebühr ggf. | + Renditechance, – Risiko von Kursverlusten, nicht ideal für Notfälle |
+| **Tagesgeld**       | Sofort (innerhalb 24 h) | ca. 1,5 % – 2,5 % p.a. | Keine Kontoführungsgebühr | + Höchste Flexibilität, – geringere Rendite |
+| **Festgeld (3‑12 Monate)** | Nach Laufzeit | ca. 2,0 % – 3,0 % p.a. | Keine (manche Banken erheben Abschlussgebühr) | + Höhere Zinsen, – Geld ist gebunden |
+| **Sparbuch (klassisch)** | 1‑2 Werktage | 0,01 % – 0,25 % p.a. | Kontoführungsgebühr möglich | + Vertraut, – lange Auszahlungszeit, niedrige Zinsen |
+| **Online‑Sparplan (ETF‑Sparplan)** | 1‑3 Tage | Marktrendite (ca. 5‑7 % p.a. Langfristig) | Ordergebühr ggf. | + Renditechance, – Risiko von Kursverlusten, nicht ideal für Notfälle |
 
 ## Die 50/30/20-Regel als Turbo für deinen Sparplan
 
@@ -85,7 +90,7 @@ Solange dein finanzieller Puffer nicht steht, nutzt du die vollen 20 % dafür.
 4. **Dauerauftrag einrichten:** Automatisiere den Sparvorgang direkt nach deinem Gehaltseingang.
 5. **Jährlicher Check:** Prüfe im Januar, ob Mieterhöhungen oder Inflation eine Anpassung erfordern.
 
-> 💶 **Spar‑Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)
+> 💶 **Spartipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)
 
 ## Rechenbeispiel: Notgroschen‑Aufbau 2024
 

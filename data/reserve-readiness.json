@@ -1,31 +1,29 @@
 {
   "target": 6,
-  "ready": 1,
+  "ready": 5,
   "candidates": [
     {
       "slug": "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
-      "ready": false,
-      "sha256": "a1eeaa77aac9aacca7b0a5e042cac857437f4ca7c93314fbcee74e593650e31b",
-      "reason": "quality-score 0.78 < 0.85 (schwach: spelling 0.30, typography 0.70, readability 0.75)",
-      "score": 0.78,
+      "ready": true,
+      "sha256": "845b8ab4aa6853e7195b048b48731574b0a48d622f3cbe07f2a41b533e21bb76",
+      "score": 0.96,
       "parts": {
-        "spelling": 0.29999999999999993,
+        "spelling": 1.0,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.7,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.75
+        "readability": 0.8
       }
     },
     {
       "slug": "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
-      "ready": false,
-      "sha256": "9c9b2e47b1a866753e1358ce898d80147525a3d5ad5a891968f1b777e1b1494e",
-      "reason": "quality-score 0.79 < 0.85 (schwach: spelling 0.00, readability 0.95, meta 1.00)",
-      "score": 0.79,
+      "ready": true,
+      "sha256": "9d84101bcf24b43a3da537faa0239e6ce0afa9b5f8cb4f977fc1c8e767ed55ba",
+      "score": 0.99,
       "parts": {
-        "spelling": 0.0,
+        "spelling": 1.0,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -36,12 +34,11 @@
     },
     {
       "slug": "2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
-      "ready": false,
-      "sha256": "f08b85437a4cbd4452f66b7cd756510df2299623912841b6f83dfb2a68d7040f",
-      "reason": "publish_gate/hugo abgelehnt (STRICT dry-run) – Details im Workflow-Log",
-      "score": 0.866,
+      "ready": true,
+      "sha256": "d454733f3d4e15afd177222dbd40e176dc18aacabf7c32206848cef6b037eb90",
+      "score": 0.946,
       "parts": {
-        "spelling": 0.6,
+        "spelling": 1.0,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.96,
@@ -52,49 +49,32 @@
     },
     {
       "slug": "2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks",
-      "ready": false,
-      "sha256": "a65d1d00df472f0612514971718f81f1fe8831dd74d20ea8a924a70485ad4f31",
-      "reason": "quality-score 0.79 < 0.85 (schwach: spelling 0.00, readability 0.95, meta 1.00)",
-      "score": 0.79,
+      "ready": true,
+      "sha256": "d3922b9a3eb3581f0f2987d764a35fbef7190b338a9ff76ec2e9b7b76ada5282",
+      "score": 1.0,
       "parts": {
-        "spelling": 0.0,
+        "spelling": 1.0,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 1.0
       }
     },
     {
       "slug": "2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe",
-      "ready": false,
-      "sha256": "218978b97264252e80c87d5b1883940ba05d2b5ce7855a6d701844aeb2b4fb58",
-      "reason": "quality-score 0.78 < 0.85 (schwach: spelling 0.00, readability 0.90, meta 1.00)",
-      "score": 0.78,
+      "ready": true,
+      "sha256": "91d27e1d1206cad6c9cea872749eee0a99fb4bd422be39ff874fd852884257b1",
+      "score": 0.98,
       "parts": {
-        "spelling": 0.0,
+        "spelling": 1.0,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.9
-      }
-    },
-    {
-      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-      "ready": true,
-      "sha256": "bff5139af8b8fd802c757dbd615969d9ade8d6fd0b747e9c5a80f68cb2000147",
-      "score": 0.93,
-      "parts": {
-        "spelling": 0.7,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
       }
     }
   ]

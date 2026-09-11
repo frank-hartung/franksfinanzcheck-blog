@@ -101,6 +101,8 @@ jobs:
           python3 scripts/fix_url_hygiene.py --heal-holds
           python3 scripts/requeue_quality_holds.py --selftest
           python3 scripts/requeue_quality_holds.py --fix
+          python3 scripts/fix_cta_hygiene.py --selftest
+          python3 scripts/r5_absatz_splitter.py --selftest
           python3 scripts/cadence_guard.py --selftest
           python3 scripts/cadence_guard.py --fix
           python3 scripts/fm_boundary_guard.py --selftest
@@ -164,6 +166,8 @@ jobs:
         run: |
           echo "== Profi-Polish (KI) =="
           python3 scripts/profi_polish.py --new || echo "⚠ Polish-Fehler (nicht kritisch)"
+          echo "== CTA-Hygiene direkt nach KI-Polish (kanonische Partner-Zeile, FIX #247) =="
+          python3 scripts/fix_cta_hygiene.py --include-drafts || echo "⚠ CTA-Hygiene (nicht kritisch)"
           echo "== Zeilenumbruch-Generator (Profi-Level, selbstheilend) =="
           python3 scripts/fix_linebreaks.py || echo "⚠ Zeilenumbruch-Generator (nicht kritisch)"
           echo "== Gedankenstrich-vor-und-Generator (deterministisch, selbstheilend) =="
@@ -341,6 +345,8 @@ jobs:
           python3 scripts/affiliate_profi_check.py --fix || echo "⚠ Profi-Check (nicht blockierend)"
           echo "== URL-Hygiene nach Optimierung (R8-URL-LEERZEICHEN, PREMIUM-FIX 03.09.2026) =="
           python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
+          echo "== Finale CTA-Hygiene nach allen Rewrite-Heilern (FIX #247) =="
+          python3 scripts/fix_cta_hygiene.py --include-drafts || echo "⚠ CTA-Hygiene – Restfunde siehe Log"
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
           git add -A

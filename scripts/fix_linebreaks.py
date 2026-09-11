@@ -38,10 +38,15 @@ import urllib.request
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 import groq_config
 
+# REPARATUR 11.09.2026 (Reserve #5): Auch „## FAQ – kurze Antworten“ gilt
+# als FAQ-Anfang (alter Regex endete auf \s*$ und erkannte ihn nicht;
+# quality_score.py nutzt bereits die tolerante \b-Form). Beide Instanzen
+# müssen dieselbe Region sehen, sonst bleibt der Typografie-Score rot.
 RE_FAQ_START = re.compile(
-    r"^#{1,2}\s*(Häufige Fragen|Häufig gestellte Fragen|Häufige Fragen \(FAQ\)|FAQ)\s*$",
+    r"^#{1,2}\s*(Häufige Fragen|Häufig gestellte Fragen|FAQ)\b",
     re.I)
 RE_BROKEN_END = re.compile(r"[ \u00a0]{2,}$")       # Zeile endet mit Hard-Break-Spuren
+RE_HR = re.compile(r"^\s*(?:-{3,}|\*{3,}|_{3,})\s*$")
 RE_DASH = re.compile(r"\u2013")                      # Gedankenstrich
 
 
@@ -202,7 +207,16 @@ def apply_decisions(body: str, candidates: list[dict], decisions: list[bool]) ->
 
 
 def self_heal(body: str) -> tuple[str, int]:
-    """Deterministische Selbstheilung: Umbrüche in Schutzkontexten zurückbauen."""
+    """Deterministische Selbstheilung: Umbrüche in Schutzkontexten zurückbauen.
+
+    REPARATUR 11.09.2026 (Reserve #5): Bisher wurde eine Hard-Break-Spur nur
+    ZURÜCKGEBAUT, wenn eine zusammensetzbare Folgezeile existierte. Blieben am
+    Zeilenende zwei Spaces stehen (Listenpunkt ohne Folgezeile, Überschrift,
+    HR, CTA/Disclaimer in der FAQ-Region, Dateiende), wertete quality_score
+    sie als „broken context“ (Typografie −0,30) – genau die Minuspunktzahl,
+    die fertige Reserve-Kandidaten unter die 0,85-Schwelle drückte. Jetzt
+    werden solche verwaisten Hard-Breaks deterministisch ENTFERNT, und zwei
+    Listenzeilen werden nie mehr zu einer Zeile verschmolzen."""
     lines = body.split("\n")
     out: list[str] = []
     changed = 0
@@ -216,14 +230,27 @@ def self_heal(body: str) -> tuple[str, int]:
                 in_faq = True
             elif re.match(r"^#{1,2}\s+", line):
                 in_faq = False
-        if (in_faq or _is_protected(line) or _is_lead_definition(line)) \
-                and RE_BROKEN_END.search(line) and i + 1 < n:
-            nxt = lines[i + 1].strip()
-            if nxt and not RE_BROKEN_END.search(nxt) and not re.match(r"^#{1,6}\s+", nxt):
+        if (in_faq or _is_protected(line) or _is_lead_definition(line)
+                or RE_HR.match(line)) and RE_BROKEN_END.search(line):
+            nxt = lines[i + 1].strip() if i + 1 < n else ""
+            mergeable = bool(
+                nxt
+                and not RE_BROKEN_END.search(nxt)
+                and not re.match(r"^#{1,6}\s+", nxt)
+                and not re.match(r"^\s*(?:[-*]|\d+\.)\s+", nxt)
+                and not RE_HR.match(nxt)
+                and not nxt.startswith(("|", ">", "```")))
+            if mergeable:
                 out.append(line.rstrip() + " " + nxt)
                 changed += 1
                 i += 2
                 continue
+            # Kein zusammensetzbarer Kontext: verwaiste Hard-Break-Spur
+            # entfernen (kein Churn bei sauberen Zeilen, ohne Markup-Effekt).
+            out.append(RE_BROKEN_END.sub("", line))
+            changed += 1
+            i += 1
+            continue
         out.append(line)
         i += 1
     return "\n".join(out), changed
@@ -267,7 +294,56 @@ def fix_body(body: str) -> tuple[str, int]:
     return body, n0 + n1 + n2
 
 
+def run_selftest() -> list:
+    """Sabotage-Schutz für die deterministische Selbstheilung."""
+    fehler = []
+
+    # 1) Tolerante FAQ-Erkennung (Titel mit Zusatz) + verwaiste
+    # Hard-Break-Spuren auf Überschrift/HR werden entfernt, nicht verschmolzen.
+    body = ("## FAQ – die wichtigsten Fragen kurz beantwortet  \n\n---  \n\n"
+            "Text.\n")
+    out, n = self_heal(body)
+    if n < 2 or "beantwortet  " in out or "---  " in out:
+        fehler.append(f"verwaiste Hard-Breaks in FAQ (Heading/HR) nicht "
+                      f"entfernt: {out!r}")
+    if self_heal(out)[1] != 0:
+        fehler.append("Selbstheilung nach FAQ-Bereinigung nicht idempotent")
+
+    # 2) Zwei Listenzeilen dürfen NIE zu einer verschmelzen; die
+    # Hard-Break-Spur am Ende des ersten Punkts wird gestrippt.
+    body = "* **Ersparnis sichern** – überweise den Betrag.  \n" \
+           "* **Automatisieren** – Dauerauftrag stellen.\n"
+    out, n = self_heal(body)
+    if len(out.splitlines()) != 2 or not out.splitlines()[1].startswith("*"):
+        fehler.append(f"zwei Listenzeilen wurden verschmolzen: {out!r}")
+    if "Betrag.  " in out:
+        fehler.append(f"Hard-Break am Listenelement nicht entfernt: {out!r}")
+
+    # 3) Listenpunkt mit eingerückter Fortsetzungszeile WIRD verbunden.
+    body = "* Zweizeiliger Hinweis  \n  mit Fortsetzung auf dieser Ebene.\n"
+    out, n = self_heal(body)
+    if n != 1 or "Hinweis mit Fortsetzung" not in out:
+        fehler.append(f"Listen-Fortsetzung wurde nicht verbunden: {out!r}")
+
+    # 4) Normaler Fließtext ohne Hard-Break bleibt unverändert.
+    body = "Ein ganz normaler Absatz.\n\nZweiter Absatz.\n"
+    out, n = self_heal(body)
+    if out != body or n != 0:
+        fehler.append("Selbstheilung fasst sauberen Fließtext an")
+    return fehler
+
+
 def main() -> int:
+    heal_only = "--heal-only" in sys.argv
+    if "--selftest" in sys.argv:
+        fehler = run_selftest()
+        if fehler:
+            print("🛑 ZEILENUMBRUCH-SELFTEST FEHLGESCHLAGEN:")
+            for f in fehler:
+                print("   -", f)
+            return 2
+        print("✅ Zeilenumbruch-Selbsttest grün (FAQ-Region, Listen, Idempotenz).")
+        return 0
     dry = "--dry-run" in sys.argv
     only = None
     if "--file" in sys.argv:
@@ -282,7 +358,10 @@ def main() -> int:
         parts = content.split("---", 2)
         if len(parts) < 3:
             continue
-        new_body, n = fix_body(parts[2])
+        if heal_only:
+            new_body, n = self_heal(parts[2])
+        else:
+            new_body, n = fix_body(parts[2])
         if n:
             total += n
             print(f"  {f.split('/')[-2]}: {n} Änderung(en)")

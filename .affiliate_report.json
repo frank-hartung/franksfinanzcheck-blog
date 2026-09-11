@@ -1,6 +1,6 @@
 {
- "total": 34,
- "errors": 0,
+ "total": 36,
+ "errors": 1,
  "fixed": 0,
  "posts": [
   {
@@ -331,6 +331,26 @@
    "infos": [
     "Generischer Link (erlaubt): Pillar frugalismus: generischer Link erlaubt – prüfen, ob ein Deep-Link sinnvoll wäre"
    ],
+   "ok": true
+  },
+  {
+   "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+   "title": "Günstig durch den Winter: Heizungs-Check im Spätso",
+   "pillar": "strom-sparen",
+   "fixed": 0,
+   "errors": [
+    "Fehlt der passende Deep-Link: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1 (erwartet: Stromtarif-Vergleich)"
+   ],
+   "infos": [],
+   "ok": false
+  },
+  {
+   "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
+   "title": "Standby Kosten reduzieren: So entlarvst du Stromfr",
+   "pillar": "strom-sparen",
+   "fixed": 0,
+   "errors": [],
+   "infos": [],
    "ok": true
   }
  ]

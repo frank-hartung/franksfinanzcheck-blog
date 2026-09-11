@@ -1,7 +1,7 @@
 # 🧮 MATH-REPORT (math_guard.py)
 
-**Stand:** 2026-09-11 18:17 UTC · Modus: FIX
-**Gepruefte Artikel:** 26 · **Auto-Fixes:** 0 · **Hinweise:** 0
+**Stand:** 2026-09-11 21:37 UTC · Modus: FIX
+**Gepruefte Artikel:** 10 · **Auto-Fixes:** 0 · **Hinweise:** 0
 
 🎉 Alle Rechenbeispiele korrekt nachgerechnet (Verlags-Faktencheck).
 
