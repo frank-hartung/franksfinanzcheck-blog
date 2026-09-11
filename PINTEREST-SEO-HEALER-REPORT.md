@@ -1,8 +1,8 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-11 11:31 UTC · **Modus:** FIX
+**Stand:** 2026-09-11 17:57 UTC · **Modus:** FIX
 
-- Artikel: **47**
+- Artikel: **49**
 - Geheilt: **4**
 - Offene Issues: **5**
 - Covers: 1 Titel-Stale + fehlende nachgezogen
@@ -64,8 +64,10 @@
 | ⚠️ | `2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug` *(draft)* | Cover-Datei fehlt |
 | ⚠️ | `2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks` *(draft)* | Cover-Datei fehlt |
 | ✅ | `2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe` *(draft)* | — |
+| ✅ | `2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest` | — |
 | ⚠️ | `2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` *(draft)* | Cover-Datei fehlt |
 | ✅ | `2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsbudget` *(draft)* | — |
+| ✅ | `2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt` *(draft)* | — |
 | ✅ | `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` *(draft)* | — |
 
 ## Selbstheilung (diese Runde)

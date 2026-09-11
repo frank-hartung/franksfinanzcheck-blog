@@ -34,7 +34,7 @@ Genau dafür gibt es die [Hausratversicherung](../../posts/2026-08-12-dein-haus-
 
 **Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Dieser Ratgeber zeigt, was eine Hausratversicherung leisten sollte. Du lernst, wie du die Summe richtig berechnest und beim Vergleich Geld sparst. Am Ende gibt es eine Checkliste für den Abschluss.
+Dieser Ratgeber zeigt, was eine [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) leisten sollte. Du lernst, wie du die Summe richtig berechnest und beim Vergleich Geld sparst. Am Ende gibt es eine Checkliste für den Abschluss.
 
 ## Was die Hausratversicherung abdeckt
 

@@ -81,7 +81,7 @@ Ein Notgroschen muss vor allem schnell verfügbar sein. Rendite ist hier zweitra
 
 Für die meisten Haushalte ist ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) die beste Lösung. Es trennt das Geld sauber vom Alltag. Außerdem bleibt die Reserve mit kurzer Verfügbarkeit nutzbar, und du nimmst im besten Fall noch ein paar Zinsen mit.
 
-| Kriterium | Girokonto | Tagesgeldkonto | ETF/Depot | Festgeld |
+| Kriterium | Girokonto | [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) | ETF/Depot | Festgeld |
 | :--- | :--- | :--- | :--- | :--- |
 | Verfügbarkeit | Sofort | Meist 1 Banktag | Mehrere Tage | Erst nach Laufzeit |
 | Schwankungsrisiko | Gering | Gering | Hoch | Gering |

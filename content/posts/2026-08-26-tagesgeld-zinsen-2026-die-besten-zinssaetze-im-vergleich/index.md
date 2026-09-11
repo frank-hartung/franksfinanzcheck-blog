@@ -61,7 +61,7 @@ Die Europäische Zentralbank (EZB) hat die Zinsen zwischen 2022 und 2024 stark a
 | Zinsgarantie | – | variabel (oft 3–12 Monate garantiert) | für gesamte Laufzeit fest |
 | Kursrisiko | nein | nein | nein |
 | Einlagensicherung | ✅ 100.000 € | ✅ 100.000 € | ✅ 100.000 € |
-| Ideal für | Zahlungsverkehr | Notgroschen, Reserve | mittelfristige Ziele (1–5 J.) |
+| Ideal für | Zahlungsverkehr | [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/), Reserve | mittelfristige Ziele (1–5 J.) |
 
 **Faustregel für die Aufteilung deiner Sparguthaben:**
 

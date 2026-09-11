@@ -9,7 +9,7 @@ tags: ["Wohin mit dem gehalt", "50 30 20 Regel Budget", "Kontomodell", "Geld ein
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-keywords: ["Wohin mit dem gehalt", "50 30 20 Regel Budget", "Kontomodell", "Geld einteilen lernen", "So nutzt du die 50-30-20-Regel"]
+keywords: ["Wohin mit dem gehalt", "50 30 20 Regel Budget", "Kontomodell", "Geld einteilen lernen", "So nutzt du die 50-30-20-Regel", "So nutzt du die 50 30 20 Regel", "50-30-20-Regel"]
 pinwand: "Budget & Haushaltskasse: clever planen"
 pin_title: Wohin mit dem Gehalt? Die 50-30-20-Regel bringt Ordnung rein
 pin_description: "*Werbung | Am 15. ist das Konto leer? Die 50-30-20-Regel ist der Klassiker unter den Budget-Methoden, weil sie so einfach ist: 50 % für Fixkosten, 30 % zum Leben, 20 % für deine Ziele. Wir zeigen die Umsetzung mit und ohne App. Jetzt durchstarten!"

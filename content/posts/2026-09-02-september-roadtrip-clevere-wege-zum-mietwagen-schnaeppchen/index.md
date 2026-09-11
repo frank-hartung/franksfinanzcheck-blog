@@ -84,7 +84,7 @@ Bei „Full-to-Empty“ zahlst du bei der Abholung oft eine überhöhte Tankfül
 
 Bei „Voll/Voll“ bekommst du das Auto vollgetankt. Du gibst es auch voll wieder ab. Du zahlst nur den Sprit, den du wirklich verbrauchst.
 
-Hebe die Tankquittung der letzten Füllung auf. Manche Vermieter behaupten später, der Tank war nicht voll. Mit dem Beleg hast du einen Beweis. So vermeidest du falsche Nachzahlungen auf der Kreditkarte.
+Hebe die Tankquittung der letzten Füllung auf. Manche Vermieter behaupten später, der Tank war nicht voll. Mit dem Beleg hast du einen Beweis. So [vermeidest](../../posts/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest/) du falsche Nachzahlungen auf der Kreditkarte.
 
 ## Typische Fehler bei der Mietwagenbuchung vermeiden
 
