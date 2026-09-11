@@ -1,8 +1,8 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-09-11 11:17 UTC
+**Letzter Lauf:** 2026-09-11 14:36 UTC
 
-**Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
+**Dauervorgabe:** nur Mo/Mi/Fr · 2–2 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
 
 ## Live-Posts pro Tag
@@ -29,7 +29,7 @@
 ## Re-Queue-Integrität (Park-Zustände)
 
 - 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **0**
-- ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **9**
+- ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **11**
 - ✍️ manuelle Entwürfe (von der Automatik unberührt): **8**
 - 🔁 wiederhergestellte Re-Queue-Flags: **0**
 - 🧹 Park-Reste an live-Posts (gefunden, weg mit --fix): **0**
@@ -45,6 +45,8 @@
 - `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` – quality-score: Score 0.768 < 0.80 (schwach: spelling 0.00, meta 0.85, readability 0.95) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174) · seit 4 Tagen
 - `2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor` – quality-score: Score 0.716 < 0.80 (schwach: spelling 0.00, readability 0.70, meta 0.85) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174) · seit 4 Tagen
 - `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen` – quality-score: Score 0.766 < 0.80 (schwach: spelling 0.00, meta 0.85, readability 0.95) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174) · seit 4 Tagen
+- `2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsbudget` – quality-score: Score 0.726 < 0.80 (schwach: spelling 0.00, readability 0.75, meta 0.85) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174) · seit 0 Tagen
+- `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` – quality-score: Score 0.722 < 0.80 (schwach: spelling 0.00, readability 0.75, meta 0.85) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174) · seit 0 Tagen
 
 
 ## Letzte Heilungen
