@@ -1,11 +1,11 @@
 # 🩺 DOKTOR-REPORT (Oberarzt, Gesamtprognose)
 
-**Stand:** 2026-09-09 11:30 UTC · Modus: GEBURT
-**Wachen behandelt:** 23 · **0-Exit:** 21 · Funde: 2 · Sabotage-Fehler: 0
+**Stand:** 2026-09-11 11:30 UTC · Modus: GEBURT
+**Wachen behandelt:** 23 · **0-Exit:** 20 · Funde: 3 · Sabotage-Fehler: 0
 
 | Wache (Phase) | Zweck | Exit |
 |---|---|---|
-| `integrity_guard.py` (0-LOCK) | Kern-Integritaet (Signatruehe nach Drift) | 0 |
+| `integrity_guard.py` (0-LOCK) | Kern-Integritaet (Signatruehe nach Drift) | 1 |
 | `history_guard.py` (0-LOCK) | Append-Only-Historien: marker-frei, JSON-rein, chronologisch | 0 |
 | `heading_guard.py` (A-Text) | Überschriften-Hygiene H1-H3: kein <br>, Anker-stabil (27.08. hinzu) | 0 |
 | `casing_guard.py` (A-Text) | Groß-/Kleinschreibung C1–C17 + T1 (Akronyme, Marken, Tags, HeadGlue-/Komposita-Kanon, Pinterest-Plan) | 0 |
@@ -30,6 +30,7 @@
 | `workspace_guard.py` (D-Ordnung) | Junk/Waisen/Rotation/Billig | 0 |
 
 ## 🟡 Funde (nicht-fatal, dokumentiert)
+- `integrity_guard.py`: Kern-Integritaet (Signatruehe nach Drift)
 - `fazit_schmiede.py`: Fazit- & FAQ-Schmiede mit Selbstheilung
 - `link_density_guard.py`: Interne Link-Dichte & Duplikate (12.08. Pro-Link-Leck)
 

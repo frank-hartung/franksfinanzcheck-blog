@@ -33,7 +33,7 @@ Die bekannte Regel „drei Monatsgehälter" klingt einfach, trifft aber oft dane
 * Ein Notgroschen orientiert sich an deinen monatlichen Ausgaben, nicht am Einkommen allein.
 * Für Angestellte reichen oft drei bis sechs Monatsausgaben als Sicherheit.
 * Selbstständige planen besser mit sechs bis zwölf Monatsausgaben.
-* Ein separates Tagesgeldkonto ist meist der beste Parkplatz für die Reserve.
+* Ein separates [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) ist meist der beste Parkplatz für die Reserve.
 
 ---
 
@@ -114,7 +114,7 @@ Die 50–30–20-Regel ist dafür ein praxistauglicher Start:
 
 * **50 % für Bedürfnisse:** Wohnen, Energie, Lebensmittel, Mobilität, Versicherungen.
 * **30 % für Wünsche:** Freizeit, Urlaub, Restaurant, Hobbys und Extras.
-* **20 % für Sparen:** Erst den Notgroschen aufbauen, danach investieren.
+* **20 % für Sparen:** Erst den [Notgroschen aufbauen](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/), danach investieren.
 
 Wenn deine Fixkosten deutlich über 50 % liegen, solltest du zuerst die großen Hebel prüfen. Ein günstigerer Stromtarif, ein besserer Handyvertrag oder eine sauberere Versicherungsstruktur können sofort Geld freimachen. Genau dieser freie Betrag finanziert später deinen Notgroschen.
 

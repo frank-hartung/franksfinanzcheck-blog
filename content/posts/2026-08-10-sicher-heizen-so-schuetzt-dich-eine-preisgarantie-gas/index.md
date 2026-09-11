@@ -65,7 +65,7 @@ Eine eingeschränkte Garantie schützt dich vor den größten Preissprüngen am 
 
 ## Konkrete Beispiel-Rechnung: Ersparnis bei 20.000 kWh Verbrauch
 
-Stell dir ein typisches Einfamilienhaus vor, das 20.000 kWh Gas pro Jahr benötigt. Viele Bewohner scheuen den Wechsel, weil sie glauben, der Aufwand lohne sich für "ein paar Euro" nicht. Die Realität sieht anders aus, wenn man den **Gastarif wechseln** will:
+Stell dir ein typisches Einfamilienhaus vor, das 20.000 kWh Gas pro Jahr benötigt. Viele Bewohner scheuen den Wechsel, weil sie glauben, der Aufwand lohne sich für "ein paar Euro" nicht. Die Realität sieht anders aus, wenn man den **[Gastarif wechseln](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)** will:
 
 | Kostenfaktor | Grundversorgung (Stadtwerk) | Tarif mit Gaspreisgarantie & Bonus |
 | :--- | :--- | :--- |

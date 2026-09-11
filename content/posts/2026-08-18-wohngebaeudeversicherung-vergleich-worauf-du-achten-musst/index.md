@@ -32,13 +32,18 @@ Dein Haus ist meist deine größte Investition. Ein schweres Unwetter, ein Brand
 Wer eine **[Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) vergleichen** will, sieht viele Klauseln, Optionen und große Preisunterschiede. Für dasselbe Haus zahlen Anbieter oft zwischen **380 € und über 850 €** im Jahr. Welche Bausteine zählen und wie du dein Haus gut absicherst, zeigen wir jetzt Schritt für Schritt.
 
 ---
+Dein Haus ist meist deine größte Investition. Ein schweres Unwetter, ein Brand oder ein Rohrbruch kann es schnell zerstören. Ohne guten Schutz droht dann der [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Ruin.
+
+Wer eine **[Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) vergleichen** will, sieht viele Klauseln, Optionen und große Preisunterschiede. Für dasselbe Haus zahlen Anbieter oft zwischen **380 € und über 850 €** im Jahr. Welche Bausteine zählen und wie du dein Haus gut absicherst, zeigen wir jetzt Schritt für Schritt.
+
+---
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Schütze dein Hab und Gut mit den fairsten Konditionen am Markt: [**Versicherungsvergleich starten**](/go/hausrat/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Die unverzichtbaren Grundbausteine einer Gebäudeversicherung
 
-Eine [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) schützt dein Haus und alles, was fest damit verbunden ist. Dazu zählen etwa Heizung, Bad und fest eingebaute Küchen. Diese Gefahren deckt sie ab:
+Eine Wohngebäudeversicherung schützt dein Haus und alles, was fest damit verbunden ist. Dazu zählen etwa Heizung, Bad und fest eingebaute Küchen. Diese Gefahren deckt sie ab:
 
 1. **Feuer & Brand:** Schutz bei offenem Brand, Blitzeinschlag, Explosion, Implosion oder Verpuffung sowie Schäden durch Löschwasser und Rauchgase. 2. **Leitungswasser:** Schutz bei bestimmungswidrig austretendem Wasser aus Zu‑ und Ableitungsrohren der Wasserversorgung, Heizungsrohren oder Waschmaschinenschläuchen einschließlich Frost‑ und Bruchschäden an Rohrleitungen.
 3. **Sturm & Hagel:** Deckung für Schäden durch Stürme ab Windstärke 8 (ab 62 km/h) sowie Hagelschlag an Dach, Fassade, Fenstern und Solaranlagen.
@@ -100,7 +105,7 @@ Kannst du nach einem Schaden nicht im Haus wohnen, brauchst du ein Hotel. Die Ve
 
 ## Was 2026 in der Police stehen muss – ohne Marketingnebel
 
-So eine [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) nimmt man nicht nebenbei mit. Sie zahlt bei Feuer, Leitungswasser, Sturm und Hagel. Elementarschäden deckt nur eine Zusatz‑Klausel.
+So eine Wohngebäudeversicherung nimmt man nicht nebenbei mit. Sie zahlt bei Feuer, Leitungswasser, Sturm und Hagel. Elementarschäden deckt nur eine Zusatz‑Klausel.
 
 Ohne Elementar bleibst du nach Starkregen auf dem Keller sitzen. Der Zusatz kostet oft 80–300 € extra im Jahr. In manchen ZÜRS‑Zonen bekommst du ihn schwer. Vergleiche darum nicht nur den Preis. Prüfe auch, ob dich der Versicherer überhaupt nimmt.
 

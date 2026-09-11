@@ -147,8 +147,7 @@ Ein Vorsorge‑Update ist kein neuer Vertrag um des Wechsels willen. Nimm dir ei
 
 Minute 0–15: Drei PDFs öffnen (Gebäude, Hausrat, Haftpflicht). Prüfe Deckung, Selbstbeteiligung, Elementar und das Datum der letzten Anpassung.  
 Minute 15–30: Wohnfläche, Wert 1914 oder Wertermittlung, Liste von Solaranlage und Wärmepumpe.  
-Minute 30–45: Fotos von Dach, Keller und Rückstauklappe – nicht für Instagram, sondern für den Schadenfall.  
-Minute 45–60: Vergleiche oder kläre mit einem Makler, was die Klauseln bedeuten.
+Minute 30–45: Fotos von Dach, Keller und Rückstauklappe – nicht für Instagram, sondern für den Schadenfall. Minute 45–60: Vergleiche oder kläre mit einem Makler, was die Klauseln bedeuten.
 
 Machst du das einmal im Jahr, brauchst du kein gutes Gefühl, sondern eine Liste mit Datum. Genau das trennt ein gepflegtes Risiko von Hoffnung.
 

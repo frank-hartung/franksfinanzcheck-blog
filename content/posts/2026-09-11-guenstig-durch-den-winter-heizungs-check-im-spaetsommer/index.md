@@ -83,7 +83,7 @@ Ein Fachbetrieb prüft für dich, welche Einstellung zu deinem Haus passt.
 ## Wohnung winterfest machen: die kurze Checkliste
 
 Wenn du deine Wohnung winterfest machen willst, beginne mit den einfachen Dingen.
-Sie kosten wenig Zeit und wirken sofort auf dein Wohlbefinden.
+Du brauchst wenig Zeit und spürst sofort eine Wirkung auf dein Wohlbefinden.
 Diese Handgriffe kannst du meist ohne Hilfe erledigen.
 
 1. **Fensterdichtungen prüfen:** Flackert eine Kerze am Rahmen, zieht Luft durch. Neue Dichtungen montierst du meist schnell selbst.

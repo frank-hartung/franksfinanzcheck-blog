@@ -135,7 +135,7 @@ Durch konsequente Kontrolle und kleine, regelmäßige Anpassungen vermeidest du,
 
 ## So startest du ohne Druck  
 
-Viele scheitern nicht an fehlendem Willen, sondern daran, dass sie zu viele Änderungen gleichzeitig umsetzen wollen. Beginne mit einem kleinen, sichtbaren Hebel und baue auf dem Erfolg auf.  
+**Viele scheitern nicht an fehlendem Willen, sondern daran, dass sie zu zahlreiche Änderungen gleichzeitig umsetzen wollen.** Beginne mit einem kleinen, sichtbaren Hebel und baue auf dem Erfolg auf.  
 
 1. **Eine Fixkosten‑Kategorie wählen** – zum Beispiel Strom, Internet oder Versicherungen. 2. **Eine konkrete Maßnahme umsetzen** – Tarif wechseln, Abo kündigen oder eine Einkaufsliste testen.
 3. **Ersparnis sofort sichern** – überweise den freien Betrag am selben Tag auf ein Tages‑ oder Unterkonto.  

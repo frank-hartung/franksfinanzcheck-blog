@@ -25,12 +25,13 @@ pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
+
 Steigt deine Stromrechnung, obwohl du sparsam lebst? In fast jedem Haushalt verstecken sich heimliche **Energiediebe**. Sie ziehen rund um die Uhr Strom – auch wenn niemand zu Hause ist. Alte Geräte und dauerlaufende Elektronik treiben den Verbrauch um hunderte Kilowattstunden nach oben. Ich zeige dir, wie du **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen kannst. So sparst du bis zu **420 €** im Jahr.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 ---
-Steigt deine Stromrechnung, obwohl du sparsam lebst? In fast jedem Haushalt verstecken sich heimliche **Energiediebe**. Sie ziehen rund um die Uhr Strom – auch wenn niemand zu Hause ist. Alte Geräte und dauerlaufende Elektronik treiben den Verbrauch um hunderte Kilowattstunden nach oben. Ich zeige dir, wie du **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen kannst. So sparst du bis zu **420 €** im Jahr.
+Steigt deine Stromrechnung, obwohl du sparsam lebst? In fast jedem Haushalt verstecken sich heimliche **Energiediebe**. Sie ziehen rund um die Uhr Strom – auch wenn niemand zu Hause ist. Alte Geräte und dauerlaufende Elektronik treiben den Verbrauch um hunderte Kilowattstunden nach oben. Ich zeige dir, wie du **Stromfresser finden** und stoppen kannst. So sparst du bis zu **420 €** im Jahr.
 
 ---
 
@@ -183,7 +184,7 @@ Ein kleiner Temperatur‑Abschlag von **‑18 °C** statt **‑24 °C** bei 
 
 ## Fazit: Erst messen, dann gezielt Energiediebe stoppen
 
-Heimliche **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen? Das ist der schnellste Weg zu viel Ersparnis. Du ersetzt alte Dauerläufer, du schaltest Standby‑Kosten per Knopfdruck ab und du prüfst deinen Tarif. So holst du jedes Jahr über **400 €** zurück.
+Heimliche **Stromfresser finden** und stoppen? Das ist der schnellste Weg zu viel Ersparnis. Du ersetzt alte Dauerläufer, du schaltest Standby‑Kosten per Knopfdruck ab und du prüfst deinen Tarif. So holst du jedes Jahr über **400 €** zurück.
 
 **Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · Strom [sparen im Herbst](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/) · Gasanbieter wechseln: Praxis‑Tipps
 

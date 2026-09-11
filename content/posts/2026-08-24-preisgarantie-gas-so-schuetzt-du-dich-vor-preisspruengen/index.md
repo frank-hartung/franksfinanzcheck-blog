@@ -25,6 +25,7 @@ pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswech
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
+
 Wer die Energiepreise verfolgt, weiß: Die Zeit der stabilen Niedrigpreise ist vorbei. Krisen, kalte Winter und der CO₂‑Preis lassen die Preise an der Börse immer wieder springen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -35,7 +36,7 @@ Gibt dein Versorger diese Spitzen an dich weiter, drohen hohe Nachzahlungen. Ein
 ---
 Wer die Energiepreise verfolgt, weiß: Die Zeit der stabilen Niedrigpreise ist vorbei. Krisen, kalte Winter und der CO₂‑Preis lassen die Preise an der Börse immer wieder springen.
 
-Gibt dein Versorger diese Spitzen an dich weiter, drohen hohe Nachzahlungen. Eine wasserdichte **Gaspreisgarantie** wirkt wie ein Schutzschild für dein Budget. Preissprünge abfedern, die richtige Garantie wählen, Klauseln prüfen: Diese drei Schritte führen durch den Artikel.
+Gibt dein Versorger diese Spitzen an dich weiter, drohen hohe Nachzahlungen. Eine wasserdichte **[Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)** wirkt wie ein Schutzschild für dein Budget. Preissprünge abfedern, die richtige Garantie wählen, Klauseln prüfen: Diese drei Schritte führen durch den Artikel.
 
 
 ---
@@ -124,7 +125,7 @@ Kombiniert kannst du mit diesen Maßnahmen leicht 10 % deiner Jahresrechnung e
 1. **Jahresabrechnung bereitlegen:** Notiere deinen Jahresverbrauch in kWh sowie die Zählernummer deines Gaszählers. 2. **PLZ in den Vergleichsrechner eingeben:** Filtere nach Tarifen mit mindestens 12 Monaten Preisgarantie und hoher Weiterempfehlungsquote von über 85 %. Achte auf verbraucherfreundliche Vertragslaufzeiten von 12 Monaten.
 3. **Auftrag digital absenden:** Der neue Anbieter kündigt deinen alten Vertrag fristgerecht und übernimmt die gesamte formale Abwicklung bei Netzbetreiber und Vorversorger. 4. **Zählerstand zum Stichtag ablesen:** Lies am Tag der Belieferung den Gaszähler ab und übermittle den Stand online an deinen Netzbetreiber für eine exakte Abrechnung.
 
-Wie du mit der richtigen Heizungs‑Wartung sparst, zeigen [unsere Spätsommer‑Tipps zur Heizungsoptimierung](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) und der [Vergleich günstiger Gastarife 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/).
+Wie du mit der richtigen Heizungs‑Wartung sparst, zeigen unsere Spätsommer‑Tipps zur Heizungsoptimierung und der [Vergleich günstiger Gastarife 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/).
 
 ## Checkliste für den Tarifwechsel – alles im Blick
 

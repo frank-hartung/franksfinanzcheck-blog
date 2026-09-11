@@ -10,3 +10,8 @@
 {"ts": "2026-09-11T08:22:12Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug"]}, "output": {"gated": ["2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug"], "demoted": []}, "status": "gated", "critical": false, "commit": null}
 {"ts": "2026-09-11T08:59:36Z", "module": "secrets_age_guard", "action": "verify", "input": {"vars": ["PINTEREST_ACCESS_TOKEN"]}, "output": {"PINTEREST_ACCESS_TOKEN": "dead"}, "status": "error", "critical": true, "commit": null}
 {"ts": "2026-09-11T10:00:57Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 45}, "output": {"changed": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T11:25:39Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 53}, "output": {"changes": 13}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T11:25:39Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T11:27:02Z", "module": "extend_articles", "action": "apply", "input": {"min_words": 1428, "targets": 3}, "output": {"ok": 3, "failed": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T11:27:02Z", "module": "fix_spaces", "action": "apply", "input": {"files": 53}, "output": {"fixes": 841}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T11:29:02Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 47}, "output": {"changed": 1}, "status": "ok", "critical": false, "commit": null}

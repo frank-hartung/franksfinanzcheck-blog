@@ -33,6 +33,7 @@ pinwand: "Budget & Haushaltskasse: clever planen"
 
 
 
+
 Am Monatsende ist das Konto leer. Du weißt nicht, wohin das Geld geflossen ist? So geht es rund **60 % der Haushalte** in Deutschland. Das zeigt eine Auswertung der Stiftung Warentest.
 
 Schon fünf Minuten im Monat reichen, um das zu ändern. Wer ein **Haushaltsbuch führt**, sieht alle Einnahmen und Ausgaben auf einen Blick. Auch teure Abos, schlechte Tarife und Konsum-Fallen fallen so auf.
