@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """Final acceptance, before quota accounting.
 
-Premium-Fix 09.09.2026 (#237): Wenn der Tag nach den finalen Gates noch unter
-Minimum liegt, versucht die Endabnahme vor dem Reserve-Publish eine
-bedarfsgetriebene Reserve-Veredelung. So kann dieselbe Engine-Ausführung einen
-unterreifen Pool noch am Publikationstag nachziehen, statt blind mit 0 READY in
-`publish_to_min()` zu laufen und erst am nächsten Morgen auf die Reserve-Linie
-zu warten.
+Premium-Fix 11.09.2026 (#258): Wenn der Tag nach den finalen Gates noch unter
+Minimum liegt, versucht die Endabnahme zuerst weitere Re-Queue-Artikel und dann
+den Reserve-Pool jeweils einzeln durch die echten Publish-Gates zu bekommen.
+Der frühere On-demand-Reserve-Finish (lange KI-/Heiler-Kette) ist in dieser
+letzten Brandschutzlinie standardmäßig deaktiviert: Die Endkontrolle muss
+schnell, deterministisch und persistierbar bleiben.
 """
 import datetime as dt
+import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -21,14 +23,25 @@ def run(*args):
 
 
 def finish_reserve_if_needed() -> bool:
-    """Best-effort: veredelt Reserve-Kandidaten on demand bei Tagesdefizit.
+    """Optionaler, bewusst deaktivierter Reserve-Finish-Pass.
 
-    Die tägliche Reserve-Linie hält den Pool normalerweise bereit. Wenn ein
-    Publikationstag aber bis zur finalen Abnahme unter dem LIVE-Minimum bleibt,
-    lohnt ein letzter lokaler Finish-Pass auf vorhandene Reserve-Entwürfe,
-    bevor `publish_to_min()` Kandidaten verwirft. Fehler bremsen die finale
-    Freigabe nicht – die Reserve-Prüfung selbst bleibt die Autorität.
+    Premium-Fix 11.09.2026 (#258): Die finale Kadenz-Endkontrolle ist die
+    letzte, deterministische Brandschutzlinie des Tages. Dort darf kein
+    langer KI-/Heiler-Marathon mehr starten: genau dieser On-demand-Finish
+    konnte die Endabnahme so lange blockieren, dass trotz vorhandener
+    Kandidaten kein zweiter LIVE-Post persistiert wurde.
+
+    Die Reserve wird weiterhin in `content-reserve.yml` veredelt und
+    zertifiziert. In der Endkontrolle veröffentlichen wir nur noch bereits
+    vorhandene Kandidaten, die die echten Publish-Gates sofort bestehen.
+    Wer den alten Notfall-Finish gezielt testen will, kann ihn explizit mit
+    `ENABLE_ON_DEMAND_RESERVE_FINISH=1` aktivieren. Default: aus.
     """
+    if os.environ.get("ENABLE_ON_DEMAND_RESERVE_FINISH") != "1":
+        print("Reserve-Finish on demand: übersprungen (deterministische Endkontrolle; "
+              "Reserve-Veredelung läuft separat in content-reserve.yml).")
+        return False
+
     import cadence_guard as cg
     import reserve_pool
 
@@ -43,7 +56,7 @@ def finish_reserve_if_needed() -> bool:
     try:
         import reserve_finisher
         print(f"Reserve-Finish on demand: LIVE {live}/{minimum}, "
-              f"Pool {len(pool)} – Veredelung vor Reserve-Freigabe.")
+              f"Pool {len(pool)} – explizit aktiviert.")
         rc = reserve_finisher.finish()
         if rc != 0:
             print(f"⚠ Reserve-Finish on demand unvollständig (rc={rc}) – "
@@ -77,6 +90,71 @@ def accept_candidate(index):
         gate.DRY_RUN, gate.STRICT = old_dry, old_strict
 
 
+
+def promote_requeue_to_min(posts_dir=None, validator=None) -> list[str]:
+    """Validiert wartende Re-Queue-Artikel einzeln und füllt nur bis Minimum.
+
+    Warum zusätzlich zu `cadence_guard --fix`? Das Kadenz-Gate kann vor der
+    finalen Endabnahme mehrere wartende Artikel live setzen. Fällt einer davon
+    später am harten Publish-Gate wieder heraus, blieb der Tag bisher unter
+    Minimum, obwohl weitere wartende, potenziell bessere Artikel vorhanden
+    waren. Diese Funktion ist der deterministische zweite Griff: Kandidat
+    temporär freigeben, echte Gates ausführen, bei Ablehnung bytegenau
+    zurückstellen und den nächsten Kandidaten versuchen.
+    """
+    import cadence_guard as cg
+    import park_state
+
+    posts_dir = posts_dir or ROOT / 'content' / 'posts'
+    today = dt.datetime.now(dt.timezone.utc).date()
+    if today.weekday() not in cg.PUBLICATION_DAYS:
+        print("Re-Queue-Fallback: kein Publikationstag – übersprungen.")
+        return []
+    minimum, _ = cg.effective_limits()
+    validator = validator or accept_candidate
+    published: list[str] = []
+
+    def _load():
+        return cg.load_posts(str(posts_dir))
+
+    while len(cg.published_on(_load(), today)) < minimum:
+        waiting = [p for p in _load() if p['draft'] and p['wait']]
+        waiting.sort(key=lambda p: (p['date_raw'], p['slug']))
+        if not waiting:
+            break
+        progressed = False
+        for post in waiting:
+            if len(cg.published_on(_load(), today)) >= minimum:
+                break
+            index = Path(post['path'])
+            original = index.read_text(encoding='utf-8')
+            accepted = False
+            try:
+                iso = cg.now_utc_iso()
+                if iso[:10] != today.isoformat():
+                    print("Re-Queue-Fallback: Mitternachtsgrenze erreicht – Abbruch ohne Backdate.")
+                    return published
+                text = re.sub(r"(?m)^date:\s*.*$", f"date: {iso}", original, count=1)
+                index.write_text(text, encoding='utf-8')
+                park_state.release(str(index), do_fix=True)
+                accepted = bool(validator(index))
+            finally:
+                if not accepted:
+                    index.write_text(original, encoding='utf-8')
+            if accepted:
+                published.append(index.parent.name)
+                progressed = True
+                print(f"  ♻️  Re-Queue-Fallback live geschaltet: {index.parent.name}")
+            else:
+                print(f"  Re-Queue-Fallback abgelehnt, bleibt wartend: {index.parent.name}")
+        if not progressed:
+            break
+    if published:
+        print(f"Re-Queue-Fallback: {len(published)} Artikel veröffentlicht – "
+              f"jetzt {len(cg.published_on(_load(), today))}/{minimum} live.")
+    return published
+
+
 def main():
     # Run after ALL editorial mutations; source quota must survive final gates.
     import publish_gate
@@ -89,6 +167,7 @@ def main():
             park_state.hold(str(index), f"quality-score: {score['score']} < {qs.THRESHOLD_PUBLISH}; finale Freigabe fehlt")
     run('hugo', '--minify', '--cleanDestinationDir')
     run(sys.executable, 'scripts/publish_gate.py')
+    promote_requeue_to_min()
     finish_reserve_if_needed()
     import reserve_pool
     reserve_pool.publish_to_min()
