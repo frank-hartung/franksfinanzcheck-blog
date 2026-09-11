@@ -40,7 +40,7 @@ Vor allem bei Gas zählt jedes Detail, da kleine Verluste deine Abrechnung belas
 * **Tarif-Check:** neben der Technik bleibt der Gaspreis ein entscheidender Hebel.
 
 Du musst dafür keinen ganzen Samstag opfern.
-Oft reichen 30 bis 60 Minuten für einen Sichtcheck der Thermostate und einen kurzen Tarifvergleich.
+**Oft reichen 30 bis 60 Minuten für den Sichtcheck der Thermostate sowie einen kurzen Tarifvergleich.**
 Diese kleinen Schritte senken dein Risiko für teure Pannen im Winter massiv.
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Angebote vergleichen**](/go/gas/)  

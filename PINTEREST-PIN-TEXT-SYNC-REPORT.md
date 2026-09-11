@@ -1,11 +1,11 @@
 # 🖋 PINTEREST-PIN-TEXT-SYNC-REPORT (Premium-Pin-Texte)
 
-**Stand:** 11.09.2026 17:55 UTC · **Modus:** APPLY
+**Stand:** 11.09.2026 18:11 UTC · **Modus:** APPLY
 
 **Regel:** Jeder Artikel trägt die Premium-Texte des besten Masterplan-Pins
 (Schwelle 1.2) + das `pinwand`-Feld für das Multi-Board-Routing.
 
-Artikel: 49 · geänderte: 1 · Pins im Plan: 48
+Artikel: 50 · geänderte: 2 · Pins im Plan: 48
 
 | Artikel | Plan-Pin | Score | Status |
 |---|---|---|---|
@@ -56,8 +56,9 @@ Artikel: 49 · geänderte: 1 · Pins im Plan: 48
 | 2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-ver | - | 0.00 | keine (Pin-Ziel ist ein anderer Artikel) |
 | 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaet | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 | 2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsb | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
-| 2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-geha | 20 | 2.24 | identisch |
+| 2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-geha | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 | 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfr | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergle | 28 | 1.43 | Pin 28 „Funklöcher adé: WLAN-Verstärker oder Mes…“ |
 
 ---
 

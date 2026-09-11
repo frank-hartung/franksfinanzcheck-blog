@@ -1,12 +1,12 @@
 # 🔎 CONTENT-AUDIT-REPORT (content_audit.py)
 
-**Stand:** 2026-09-11 17:56 UTC
+**Stand:** 2026-09-11 18:14 UTC
 
 ## 🎯 Wichtigster Befund (fuer redaktionellen Ausbau)
 
 📏 Viele Artikel sind substanzarm – Ausbau ueber die Engine-Vorlagen folgt.
 
-**Artikel:** 10 · **mit Funden:** 4 · **Funde gesamt:** 4 · **C3 auto-geheilt:** 0
+**Artikel:** 11 · **mit Funden:** 4 · **Funde gesamt:** 4 · **C3 auto-geheilt:** 0
 
 | Kategorie | Funde |
 |---|---|
@@ -24,7 +24,7 @@
 **`2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer`** (1242w)
   - C1 dünn: 1242 woerter < 1400
 
-**`2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt`** (2248w)
+**`2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich`** (1639w)
   - C2 kein Fazit (h2/h3)
 
 

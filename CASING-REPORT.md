@@ -1,8 +1,8 @@
 # 🔠 CASING-REPORT (Groß-/Kleinschreibung)
 
-**Stand:** 2026-09-11 17:56 UTC · Modus: fix · new-only · +Pinterest-Plan
+**Stand:** 2026-09-11 18:14 UTC · Modus: fix · new-only · +Pinterest-Plan
 
-Geprüfte Dateien: 10 · geprüfte Content-Wörter: 19.098 · Dateien mit Fund im Lauf: 0 · erkannte Funde: 0 · offene Befunde: 0 · hart (gate-würdig): 0 · automatisch geheilt: 0
+Geprüfte Dateien: 11 · geprüfte Content-Wörter: 21.091 · Dateien mit Fund im Lauf: 0 · erkannte Funde: 0 · offene Befunde: 0 · hart (gate-würdig): 0 · automatisch geheilt: 0
 
 **Casing-Deliktquote:** 0.00 harte Befunde je 1.000 Wörter – Zielwert 0,00 (Redaktions-Standard Capital/WiWo/ZEIT).
 

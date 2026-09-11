@@ -1,16 +1,16 @@
 # ✒️ LEKTOR-REPORT (lektor_guard.py)
 
-**Stand:** 2026-09-11 17:56 UTC · Modus: FIX
+**Stand:** 2026-09-11 18:14 UTC · Modus: FIX
 
 | Regel | Anzahl |
 |---|---|
 | L1 Doppelwoerter (Auto) | 0 |
 | L2 Fuehl-Phrasen (Auto) | 0 |
-| L3 Personenkonsistenz | 0 |
+| L3 Personenkonsistenz | 1 |
 | L4 Ausrufezeichen/Grenze | 0 |
-| L5 Echo (Report) | 13/0 |
+| L5 Echo (Report) | 16/0 |
 | L7 Nominalstil-Radar (Report) | 3 |
-| L8 Weichmacher-Dichte (Report) | 46 |
+| L8 Weichmacher-Dichte (Report) | 49 |
 | L9 Satzanfangs-Echo (Report) | 0 |
 | L10 Zahlenschreibweise (Auto) | 0 |
 | L11 Werbe-Intensivel (Auto) | 0 |
@@ -35,12 +35,12 @@
 - `content/posts/2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe/index.md` Z.83: **L7-Nominalstil** 6 Behörden-Nomen: Zusätzlich zum Fachmann kannst du selbst d
 - `content/posts/2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe/index.md` Z.161: **L7-Nominalstil** 6 Behörden-Nomen: Sich gezielt mit dem Thema **Gasrechnung s
 - `content/posts/2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe/index.md` Z.166: **L8-Weichmacher** 7+ Konjunktive – In der Regel reicht es, dies einmal jährlic
-- `content/posts/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest/index.md` Z.157: **L5-Echo** einen: Ja, wenn du einen eigenen Gaszähler und einen direkte
-- `content/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/index.md` Z.43: **L5-Echo** einen: Oft reichen 30 bis 60 Minuten für einen Sichtcheck de
+- `content/posts/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest/index.md` Z.160: **L5-Echo** einen: Ja, wenn du einen eigenen Gaszähler und einen direkte
 - `content/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/index.md` Z.46: **L13-Doppelanlauf** Ddiebesten in: 💡 **Schnell-Tipp von FranksFinanzcheck:** Ddi
 - `content/posts/2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsbudget/index.md` Z.111: **L5-Echo** einen: So generierst du bei jedem Euro Umsatz einen Gegenwer
-- `content/posts/2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsbudget/index.md` Z.254: **L5-Echo** einen: Damit finanzierst du in der Regel problemlos einen gr
-- `content/posts/2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt/index.md` Z.27: **L12-Longsatz** Vielleicht kennst du das Gefühl: Das Gehalt kommt, die erste
+- `content/posts/2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsbudget/index.md` Z.253: **L5-Echo** einen: Damit finanzierst du in der Regel problemlos einen gr
+- `content/posts/2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt/index.md` Z.31: **L12-Longsatz** Vielleicht kennst du das Gefühl: Das Gehalt kommt, die erste
+- `content/posts/2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt/index.md` Z.100: **L5-Echo** schritt: So gehst du Schritt für Schritt vor:
 
 ---
 _Verlagslektorat: Du-Duktus, keine Echo-Woerter, keine Buerokratie-Phrasen, max 3 Ausrufezeichen. KI nur bei --ai._

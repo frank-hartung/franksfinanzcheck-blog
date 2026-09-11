@@ -551,5 +551,14 @@
    "badge": "KONTO & FINANZEN",
    "savings": ""
   }
+ },
+ "2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich": {
+  "title": "WLAN-Probleme lösen: Mesh oder Repeater im Vergleich",
+  "ts": "2026-09-11T18:13:53+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
  }
 }

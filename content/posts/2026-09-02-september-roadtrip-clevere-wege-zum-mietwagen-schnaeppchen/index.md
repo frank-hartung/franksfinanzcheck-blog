@@ -28,6 +28,7 @@ kurzantwort: "Buche deinen Mietwagen 3‑4 Wochen vor Reisebeginn und nutze Verg
 social_posted: true
 ---
 
+
 Stell dir vor: Du stehst am Flughafen von Faro. Die Luft ist warm. Die Hitze des Hochsommers ist weg. Andere haben im August viel für einen Kleinwagen gezahlt. Du öffnest entspannt deine App.
 
 Du hast dein **Mietwagen-Schnäppchen** schon Wochen vorher gesichert. Die Ersparnis reicht locker für drei Abendessen in einer guten Fischtaverne.

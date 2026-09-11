@@ -25,6 +25,7 @@ pinwand: "Budget & Haushaltskasse: clever planen"
 ---
 
 
+
 Nach Jahren mit Nullzinsen ist das **Tagesgeld** 2026 wieder attraktiv. Das Girokonto bringt 0,0 %, das Sparbuch oft unter 0,5 %. Viele Banken zahlen dagegen **1,8 bis 3,2 %** – bei täglicher Verfügbarkeit und ohne Kursrisiko. Für den **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)** ist Tagesgeld darum ideal. Wo es die hohen Zinsen gibt, wie die Einlagensicherung funktioniert und welche Fallen lauern, zeige ich dir jetzt.
 
 ---

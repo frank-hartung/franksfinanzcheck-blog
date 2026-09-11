@@ -1,6 +1,6 @@
 {
  "total": 36,
- "errors": 0,
+ "errors": 1,
  "fixed": 1,
  "posts": [
   {
@@ -338,14 +338,16 @@
    "title": "Gasvergleich: Wie du teure Fehler beim Wechsel ver",
    "pillar": "strom-sparen",
    "fixed": 0,
-   "errors": [],
+   "errors": [
+    "KEIN Affiliate-Link vorhanden"
+   ],
    "infos": [],
-   "ok": true
+   "ok": false
   },
   {
-   "slug": "2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt",
-   "title": "So nutzt du die 50-30-20-Regel: Wohin mit dem Geha",
-   "pillar": "konto-karten",
+   "slug": "2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich",
+   "title": "WLAN-Probleme lösen: Mesh oder Repeater im Verglei",
+   "pillar": "internet-dsl",
    "fixed": 1,
    "errors": [],
    "infos": [],

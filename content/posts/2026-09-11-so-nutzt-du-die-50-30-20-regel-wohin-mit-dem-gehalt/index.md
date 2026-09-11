@@ -179,7 +179,7 @@ Es ist befreiend, wenn du monatlich einen festen Betrag sparst. Das gibt dir die
 
 ## Fazit: So nutzt du die 50-30-20-Regel – Wohin mit dem Gehalt
 
-Sich gezielt mit dem Thema **So nutzt du die 50-30-20-Regel: Wohin mit dem Gehalt?** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und bares Geld zu sparen. Nutze attraktive Tagesgeld-Angebote der C24 Bank, um dein Erspartes flexibel, sicher und rentabel vor der Inflation zu schützen. Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀
+Sich gezielt mit dem Thema **So nutzt du die 50–30–20-Regel: Wohin mit dem Gehalt?** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und bares Geld zu sparen. Nutze attraktive Tagesgeld-Angebote der C24 Bank, um dein Erspartes flexibel, sicher und rentabel vor der Inflation zu schützen. Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀
 
 ## Häufige Fragen
 

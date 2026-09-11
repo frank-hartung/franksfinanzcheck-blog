@@ -1,6 +1,6 @@
 # ✅ HARDCASES-REPORT (hardcases_guard.py)
 
-**Stand:** 2026-09-11 17:56 UTC
+**Stand:** 2026-09-11 18:14 UTC
 **Modus:** FIX (0 geheilt)
 **Offene Fest-Fehler:** 0
 

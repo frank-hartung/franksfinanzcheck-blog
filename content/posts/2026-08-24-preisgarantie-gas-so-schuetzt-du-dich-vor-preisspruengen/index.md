@@ -27,6 +27,7 @@ pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 
 
 
+
 Wer die Energiepreise verfolgt, weiß: Die Zeit der stabilen Niedrigpreise ist vorbei. Krisen, kalte Winter und der CO₂‑Preis lassen die Preise an der Börse immer wieder springen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -37,7 +38,7 @@ Gibt dein Versorger diese Spitzen an dich weiter, drohen hohe Nachzahlungen. Ein
 ---
 Wer die Energiepreise verfolgt, weiß: Die Zeit der stabilen Niedrigpreise ist vorbei. Krisen, kalte Winter und der CO₂‑Preis lassen die Preise an der Börse immer wieder springen.
 
-Gibt dein Versorger diese Spitzen an dich weiter, drohen hohe Nachzahlungen. Eine wasserdichte **[Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)** wirkt wie ein Schutzschild für dein Budget. Preissprünge abfedern, die richtige Garantie wählen, Klauseln prüfen: Diese drei Schritte führen durch den Artikel.
+Gibt dein Versorger diese Spitzen an dich weiter, drohen hohe Nachzahlungen. Eine wasserdichte **Gaspreisgarantie** wirkt wie ein Schutzschild für dein Budget. Preissprünge abfedern, die richtige Garantie wählen, Klauseln prüfen: Diese drei Schritte führen durch den Artikel.
 
 
 ---
@@ -159,7 +160,7 @@ Tarife ohne Garantie gewinnen nur in Szenario A. Und nur, wenn du monatlich wech
 | **VivaGas** | 12 Monate | 9,10 | 10,50 | 100 € (nach 12 Mon.) | 4,2 |
 | **EcoEnergy** | 18 Monate | 8,60 | 12,50 | 130 € (nach 18 Mon.) | 4,5 |
 
-*Die Werte basieren auf dem [Gasvergleich](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) vom August 2024 und gelten für einen Jahresverbrauch von 20.000 kWh. Alle Angaben zzgl. gesetzlicher Abgaben.*
+*Die Werte basieren auf dem [Gasvergleich](../../posts/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest/) vom August 2024 und gelten für einen Jahresverbrauch von 20.000 kWh. Alle Angaben zzgl. gesetzlicher Abgaben.*
 
 ## Kleingedrucktes, das Preissprünge trotz „Garantie“ durchlässt
 

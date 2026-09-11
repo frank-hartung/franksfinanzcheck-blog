@@ -27,6 +27,7 @@ pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 
 
 
+
 Im Spätsommer denkt kaum jemand an die Heizung. Genau das ist ein teurer Fehler.  
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.

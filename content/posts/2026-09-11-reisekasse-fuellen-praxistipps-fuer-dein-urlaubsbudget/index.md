@@ -142,8 +142,7 @@ Oft verschwindet der Kaufwunsch nach einer Nacht Schlaf von selbst.
 
 Ein enormes Sparpotenzial bietet die Ernährung.
 Wer täglich in der Mittagspause zum Imbiss geht, gibt leicht 10 € bis 15 € aus.
-Durch „Meal Prepping“ – also das Vorkochen zu Hause – reduzierst du diese Kosten auf etwa 3 € pro Tag.  
-Auf den Monat gerechnet ergibt das eine Ersparnis von rund 150 € bis 200 €.
+Durch „Meal Prepping“ – also das Vorkochen zu Hause – reduzierst du diese Kosten auf etwa 3 € pro Tag. Auf den Monat gerechnet ergibt das eine Ersparnis von rund 150 € bis 200 €.
 Das ist bereits ein Wochenende in einer europäischen Metropole inklusive Unterkunft.
 
 Verkaufe Dinge, die du nicht mehr benötigst.
