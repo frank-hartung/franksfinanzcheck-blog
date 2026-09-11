@@ -153,13 +153,32 @@ def _casing_frontmatter(title, desc, pin_t, pin_d, kws):
 
 
 def yaml_quote(value: str) -> str:
-    """Quoted einen Wert YAML-sicher (Doppelpunkte, Sonderzeichen).
-    Verhindert Frontmatter-Build-Fehler wie 'inspiration: Text: Mehr'."""
+    """Quoted einen Wert YAML-sicher – eine Regel für ALLE FM-Schreiber.
+
+    WARUM DIESE VERSION (11.09.2026, FM-GRENZEN): die alte Regel kannte nur
+    ':', '#' und die Wertstarts ' ', '-', '?', '!'. Der UWG-Prefix
+    '*Werbung | …' in pin_description fiel dadurch durchs Raster – YAML liest
+    ein vorangestelltes '*' als Alias, Hugo verlor das Frontmatter und der
+    komplette Deploy starb im Bauschritt (drei rote Runs am 11.09.). Die
+    Entscheidungsregel liegt jetzt in scripts/fm_boundary_guard.py
+    (needs_quote/yaml_quote): Gate und Generator teilen sich dieselbe
+    Wahrheit; ist die Wache nicht importierbar, greift eine identische
+    Notfall-Regel."""
     if value is None:
         return '""'
+    try:
+        from fm_boundary_guard import yaml_quote as _fm_quote
+        return _fm_quote(value)
+    except Exception:
+        pass
     v = str(value)
-    if ":" in v or "#" in v or v.startswith((" ", "-", "?", "!")) or v != v.strip():
-        return '"' + v.replace('"', '\\"') + '"'
+    if (not v or v != v.strip()
+            or v[0] in ("-", "?", ":", "*", "&", "!", "@", "`", "|", ">", "%",
+                        "[", "]", "{", "}", '"', "'", "#", ",")
+            or ": " in v or v.endswith(":") or " #" in v or "\n" in v):
+        v = v.replace("\\", "\\\\").replace('"', '\\\"')
+        v = v.replace("\r", "").replace("\n", "\\\\n")
+        return '"' + v + '"'
     return v
 
 
@@ -944,6 +963,36 @@ def run_selftest() -> list:
     if entscheidung != "WEITER":
         fehler.append(f"(e) 1 Recycling + 1 neu (LIVE 2/2, aber NEU-Ziel "
                       f"offen): erwartet WEITER, bekam {entscheidung}")
+
+    # (f) FM-GRENZEN (11.09.2026): der UWG-Prefix '*Werbung | …' in
+    #     pin_description wurde UNQUOTIERT geschrieben. YAML liest ein
+    #     vorangestelltes '*' als Alias → Hugo verliert das Frontmatter →
+    #     der ganze Deploy starb im Bauschritt (3 rote Runs am 11.09.).
+    #     Der Generator muss solche Werte quotieren – und der Text darf
+    #     dabei kein einziges Zeichen verändern.
+    try:
+        import yaml as _y
+    except Exception:                                  # pragma: no cover
+        _y = None
+    for wert in ("*Werbung | Der Traumurlaub: 500 € – jetzt lesen!",
+                 "Reisekasse: 7 Tipps", "- beginnt wie eine Liste",
+                 'sagt "hi"', "mehr\nzeilig", "  lead", "trail ",
+                 "ganz normaler Text"):
+        zeile = f"pin_description: {yaml_quote(wert)}"
+        if _y is None:                                 # nur Strukturprüfung
+            if wert.startswith(("*", "-", " ", '"')) and not (
+                    zeile.endswith(': ""') or ': "' in zeile):
+                fehler.append(f"(f) FM-Wert ohne PyYAML nicht quotiert: "
+                              f"{wert!r} → {zeile!r}")
+            continue
+        try:
+            geladen = _y.safe_load(zeile + "\n")
+        except Exception as exc:
+            fehler.append(f"(f) FM-Zeile nicht parsbar: {wert!r} – {exc}")
+            continue
+        if not isinstance(geladen, dict) or geladen.get("pin_description") != wert:
+            fehler.append(f"(f) FM-Wert verändert: {wert!r} → {geladen!r} "
+                          f"(Zeile: {zeile!r})")
     return fehler
 
 
