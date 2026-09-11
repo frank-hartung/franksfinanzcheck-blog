@@ -20,7 +20,7 @@ engine_level: "draft"
 
 inspiration: "Notgroschen aufbauen: Wie viel reicht wirklich?"
 cover:
-  image: "images/covers/2026-09-10-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg"
+  image: "images/covers/2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg"
   alt: "Finanzieller Puffer: Wie viel Notgroschen ist genug?"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein Notgroschen sollte mindestens drei bis sechs Monate deiner fixen Lebenshaltungskosten abdecken. Bei durchschnittlichen Ausgaben von etwa 1 500 € pro Monat bedeutet das einen Puffer von rund 4 500 € – 9 000 €. So kannst du sowohl unerwartete Reparaturen als auch kurzfristige Einkommensausfälle sicher überbrücken."
