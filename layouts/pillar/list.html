@@ -9,9 +9,15 @@
     optimierten internen Verlinkungen.
 ============================================================ */ -}}
 
-{{- $pillars := slice "strom-sparen" "internet-dsl" "versicherungen" "konto-karten" "frugalismus" "mietwagen" }}
-{{- $labels := dict "strom-sparen" "⚡" "internet-dsl" "🌐" "versicherungen" "🛡️" "konto-karten" "💳" "frugalismus" "🌱" "mietwagen" "🚗" }}
-{{- $names := dict "strom-sparen" "Strom & Gas sparen" "internet-dsl" "Internet, DSL & Handy" "versicherungen" "Versicherungen & Vorsorge" "konto-karten" "Konto, Karten & Zinsen" "frugalismus" "Frugalismus & Budget" "mietwagen" "Mietwagen & Reisen" }}
+{{- /* Namen und Reihenfolge nicht getrennt von /posts/ pflegen. */ -}}
+{{- $pillars := slice -}}
+{{- $labels := dict -}}
+{{- $names := dict -}}
+{{- range (partialCached "themenwelten_data.html" .).topics -}}
+  {{- $pillars = $pillars | append .id -}}
+  {{- $labels = merge $labels (dict .id .emoji) -}}
+  {{- $names = merge $names (dict .id .title) -}}
+{{- end -}}
 {{- $savings := dict "strom-sparen" "Bis zu 800 € / Jahr" "internet-dsl" "Bis zu 350 € / Jahr" "versicherungen" "Bis zu 500 € / Jahr" "konto-karten" "Bis zu 180 € / Jahr" "frugalismus" "Über 200 € / Monat" "mietwagen" "Bis zu 400 € / Reise" }}
 {{- $topics := dict "strom-sparen" (slice "Stromanbieter wechseln" "Gaspreisgarantien" "Stromfresser im Standby" "Heizkosten senken") "internet-dsl" (slice "DSL-Wechselbonus" "WLAN optimieren" "DNS-Tuning" "Günstige Handytarife") "versicherungen" (slice "Privathaftpflicht" "Wohngebäude & Hausrat" "Kfz-Versicherungswechsel" "Zahnzusatz") "konto-karten" (slice "Kostenloses Girokonto" "C24 Bank Vergleich" "Kreditkarten ohne Jahresgebühr" "Tagesgeld-Zinsen") "frugalismus" (slice "50–30–20-Regel" "Notgroschen aufbauen" "Ausgaben-Tracking" "Konsum-Gewohnheiten") "mietwagen" (slice "Mietwagen ohne Kautionsfalle" "Vollkasko ohne Selbstbeteiligung" "Günstige Flüge" "Last-Minute-Buchung") }}
 {{- $ctas := dict "strom-sparen" (dict "url" "/go/strom/" "text" "Stromtarife vergleichen") "internet-dsl" (dict "url" "/go/dsl/" "text" "DSL-Tarife vergleichen") "versicherungen" (dict "url" "/go/haftpflicht/" "text" "Haftpflicht vergleichen") "konto-karten" (dict "url" "/go/girokonto/" "text" "Girokonto vergleichen") "frugalismus" (dict "url" "/go/tagesgeld/" "text" "Tagesgeld vergleichen") "mietwagen" (dict "url" "/go/mietwagen/" "text" "Mietwagen vergleichen") }}

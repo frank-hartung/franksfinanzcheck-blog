@@ -130,6 +130,11 @@ jobs:
       - name: Py-Abhängigkeiten für Gate-Chain
         run: python3 -m pip install -q pyyaml pillow pillow-avif-plugin 2>/dev/null || python3 -m pip install -q --break-system-packages pyyaml pillow pillow-avif-plugin
 
+      # Die alte R9-Bestandsprüfung war nur ein Report (Exit 0), neue
+      # Artikel-Gates übersprangen _index.md. Navigation immer hart prüfen.
+      - name: Themenwelten – Quellvertrag (sechs Themen, saubere Texte)
+        run: python3 scripts/themenwelten_guard.py --source-only
+
       # ===== URL-HYGIENE-GATE (PREMIUM-FIX 03.09.2026) =====================
       # Kernbefund Mi 02.09.2026: Ein fertiger Artikel wurde wegen einer
       # Markdown-URL mit Leerzeichen (R8-URL-LEERZEICHEN, „…-zu Hause/“
@@ -240,6 +245,12 @@ jobs:
       - name: Rebuild nach Heilungen (nur wenn sich Content geändert hat)
         if: steps.gate_diff.outputs.changed == 'true'
         run: hugo --minify
+
+      # NACH ALLEN Content-Heilungen und dem letzten Rebuild: prüft genau
+      # das auszuliefernde HTML, auch /posts/page/2/, Links und Live-Zähler.
+      # Kein || true / continue-on-error: defekte Navigation geht nicht live.
+      - name: Themenwelten – finales Veröffentlichungs-Gate
+        run: python3 scripts/themenwelten_guard.py --public public
 
       # ================= ANKER-WACHE (Befund 10.09.2026) =================
       # Der Abschnitts-Knopf „Link kopieren“ trug ein „§“ als TEXT in

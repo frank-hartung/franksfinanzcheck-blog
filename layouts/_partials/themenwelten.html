@@ -1,0 +1,54 @@
+{{- /* Eine Quelle für Blog und Startseite. Nicht durch Markdown-Inserter,
+       anchored_headings oder Reveal-JS schleusen: Navigation ist ab Paint 1 da.
+       Fehlende/gesperrte Ziele brechen den Build ab, statt Karten zu verstecken. */ -}}
+{{- $data := (partialCached "themenwelten_data.html" .) -}}
+{{- $id := .id | default "deine-6-themenwelten" -}}
+{{- $title := .title | default $data.title -}}
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- if ne (len $data.topics) 6 -}}
+  {{- errorf "Themenwelten: genau 6 Einträge in data/themenwelten.json erforderlich" -}}
+{{- end -}}
+<section class="ff-topics{{ if .home }} ff-clusters{{ end }}" aria-labelledby="{{ $id }}" data-ff-topic-worlds>
+  {{- if .legacyAnchor }}
+  {{- /* Alte geteilte Abschnitts-Links bleiben gültig, ohne den Tippfehler
+         als sichtbaren Text oder als Überschriften-Namen weiterzuführen. */}}
+  <span id="ddeine6-themenwelten" class="ff-topics-legacy-anchor" aria-hidden="true"></span>
+  {{- end }}
+  <header class="ff-topics-heading">
+    <p class="ff-topics-eyebrow">Dein Sparkompass</p>
+    <h2 id="{{ $id }}">{{ $title }}</h2>
+    <p class="ff-topics-intro">{{ $data.intro }}</p>
+  </header>
+  <ul class="ff-topics-grid" role="list">
+    {{- $seen := slice -}}
+    {{- range $data.topics -}}
+
+      {{- if in $seen .id -}}{{- errorf "Themenwelten: doppelte ID %q" .id -}}{{- end -}}
+      {{- $seen = $seen | append .id -}}
+      {{- $target := site.GetPage (printf "/pillar/%s" .id) -}}
+      {{- if not $target -}}
+        {{- errorf "Themenwelten: Ratgeber /pillar/%s/ fehlt oder ist nicht veröffentlicht" .id -}}
+      {{- else if or $target.Draft (not $target.RelPermalink) -}}
+        {{- errorf "Themenwelten: Ratgeber /pillar/%s/ ist nicht öffentlich erreichbar" .id -}}
+      {{- else -}}
+        {{- $count := len (where $posts "Params.pillar" .id) -}}
+        {{- $cardID := printf "%s-%s" $id .id -}}
+    <li>
+      <a class="ff-topic-card" href="{{ $target.RelPermalink }}" data-topic="{{ .id }}"
+         aria-labelledby="{{ $cardID }}-title" aria-describedby="{{ $cardID }}-description {{ $cardID }}-count">
+        <div class="ff-topic-card-head">
+          <span class="ff-topic-icon">{{ partial "themenwelt_icon.html" .id }}</span>
+          <h3 id="{{ $cardID }}-title">{{ .title }}</h3>
+        </div>
+        <p class="ff-topic-description" id="{{ $cardID }}-description">{{ .description }}</p>
+        <div class="ff-topic-card-footer">
+          <span class="ff-topic-count" id="{{ $cardID }}-count" data-article-count="{{ $count }}">{{ if gt $count 0 }}{{ $count }} {{ if eq $count 1 }}Artikel{{ else }}Artikel{{ end }}{{ else }}Basis-Ratgeber{{ end }}</span>
+          <span class="ff-topic-cta" aria-hidden="true">Zum Thema <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </li>
+      {{- end -}}
+    {{- end }}
+  </ul>
+  <p class="ff-topics-tip"><span class="ff-topics-tip-label">Franks Tipp</span> {{ $data.tip }}</p>
+</section>

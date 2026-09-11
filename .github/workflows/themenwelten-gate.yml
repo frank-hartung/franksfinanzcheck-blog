@@ -1,0 +1,79 @@
+name: Themenwelten – Navigation & Darstellung
+
+on:
+  pull_request:
+    paths:
+      - 'content/**'
+      - 'data/themenwelten.json'
+      - 'layouts/**'
+      - 'assets/css/**'
+      - 'hugo.toml'
+      - 'static/premium/ff-premium.js'
+      - 'scripts/themenwelten*'
+      - 'scripts/textverstaendnis_guard.py'
+      - 'scripts/tests/test_themenwelten.py'
+      - 'tools/ff-voice-browser/package*.json'
+      - '.github/workflows/themenwelten-gate.yml'
+      - '.github/workflows/deploy.yml'
+      - '.github/actions/install-hugo/**'
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'data/themenwelten.json'
+      - 'layouts/**'
+      - 'assets/css/**'
+      - 'hugo.toml'
+      - 'static/premium/ff-premium.js'
+      - 'scripts/themenwelten*'
+      - 'scripts/textverstaendnis_guard.py'
+      - 'scripts/tests/test_themenwelten.py'
+      - 'tools/ff-voice-browser/package*.json'
+      - '.github/workflows/themenwelten-gate.yml'
+      - '.github/workflows/deploy.yml'
+      - '.github/actions/install-hugo/**'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: themenwelten-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  navigation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: tools/ff-voice-browser/package-lock.json
+      - uses: ./.github/actions/install-hugo
+        with:
+          version: '0.164.0'
+      - name: Vertragstests und echte Hugo-Negativtests
+        run: |
+          python3 -m unittest discover -s scripts/tests -p 'test_themenwelten.py' -v
+          python3 scripts/themenwelten_guard.py --source-only
+      - name: Produktions-Build und Auslieferungsprüfung
+        run: |
+          hugo --minify --cleanDestinationDir
+          python3 scripts/themenwelten_guard.py --public public
+      - name: Browser-Abhängigkeiten aus dem vorhandenen Lockfile
+        run: npm ci --prefix tools/ff-voice-browser --no-audit --no-fund
+      - name: Chromium – mobil, Desktop, Tastatur, Dunkelmodus, ohne JavaScript
+        run: node scripts/themenwelten_browser_test.mjs --public public
+      - name: Unterverzeichnis-Build (keine kaputten relativen Links)
+        run: |
+          hugo --minify --baseURL https://example.invalid/blog/ --destination tmp/themenwelten-subdir
+          python3 scripts/themenwelten_guard.py --public tmp/themenwelten-subdir --base-path /blog/
+          node scripts/themenwelten_browser_test.mjs --public tmp/themenwelten-subdir --base-path /blog/
