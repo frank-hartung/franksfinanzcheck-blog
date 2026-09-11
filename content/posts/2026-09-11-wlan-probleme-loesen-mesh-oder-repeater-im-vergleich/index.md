@@ -1,11 +1,8 @@
 ---
 title: "WLAN-Probleme lösen: Mesh oder Repeater im Vergleich"
 description: "WLAN Probleme lösen: Ruckelndes Internet nervt. So kannst du WLAN-Probleme lösen: Wir vergleichen Mesh-Systeme und Repeater für stabiles Homeoffice Internet…"
-date: 2026-09-11T17:59:59Z
-draft: true
-cadence_wait: true
-cadence_demoted: 2026-09-11T18:13:22Z
-cadence_grund: "quality-hold aufgehoben (#251): Score 0.820 ≥ 0.80 – Re-Queue für vollen Gate-Durchlauf"
+date: 2026-09-11T22:06:29Z
+draft: false
 tags: ["WLAN probleme lösen", "Mesh WLAN Test", "WLAN Abdeckung verbessern", "Homeoffice Internet"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"

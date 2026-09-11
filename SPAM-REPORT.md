@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-11 21:42 UTC · Modus: FIX
+**Stand:** 2026-09-11 22:07 UTC · Modus: FIX
 
 **Domain-Status (Pinterest):** 🔴 GESPERRT – Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026. (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)
 
@@ -44,7 +44,7 @@
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
-- 🔴 [F5] Doppelte Description in Items [1, 19, 26]
+- 🔴 [F5] Doppelte Description in Items [19, 26]
 
 ## C: CSV pins_upload.csv (C1–C8)
 
