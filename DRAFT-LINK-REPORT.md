@@ -1,8 +1,8 @@
 # 🔗 DRAFT-LINK-REPORT (draft_link_healer.py)
 
-**Stand:** 2026-09-11 11:17 UTC · Modus: FIX
+**Stand:** 2026-09-11 16:20 UTC · Modus: FIX
 
-## Gemeldet: Ziel gerade nicht im Build (32)
+## Gemeldet: Ziel gerade nicht im Build (30)
 
 Kein Eingriff nötig – der Render-Guard `layouts/_default/_markup/render-link.html` gibt diese Links als Klartext aus (kein 404), und sie leben automatisch wieder auf, sobald das Ziel zurück im Build ist. Entlinken würde nur kuratierte Listen dauerhaft ausdünnen.
 
@@ -22,8 +22,6 @@ Kein Eingriff nötig – der Render-Guard `layouts/_default/_markup/render-link.
 - `2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann` → `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` (Draft (Kadenz-Re-Queue))
 - `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` → `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` (Draft (Kadenz-Re-Queue))
 - `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` → `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` (Draft (Kadenz-Re-Queue))
-- `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` → `2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst` (Draft (Kadenz-Re-Queue))
-- `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` → `2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst` (Draft (Kadenz-Re-Queue))
 - `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` → `2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst` (Draft (Kadenz-Re-Queue))
 - `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` → `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` (Draft (Kadenz-Re-Queue))
 - `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier` → `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` (Draft (Kadenz-Re-Queue))

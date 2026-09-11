@@ -1,6 +1,6 @@
 # 🧱 FM-GRENZEN-REPORT (fm_boundary_guard.py)
 
-**Stand:** 2026-09-11 15:35 UTC · Modus: CHECK
+**Stand:** 2026-09-11 16:20 UTC · Modus: FIX
 **Geprüfte Dateien:** 59 · **baukritisch:** 0 · **automatisch geheilt:** 0 · **unheilbar:** 0 · **offen nach Heilung:** 0 · **Kleber-Hinweise:** 11
 
 **Regelkanon:** F1 Grenze oben · F2 Grenze unten · F3 Block/Zeile nicht YAML-parbar · F4 Quote/Flow nicht geschlossen · F5 Fallback-Regel ohne PyYAML · G Kleber an der Schlussgrenze (Hinweis)
