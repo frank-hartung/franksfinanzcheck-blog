@@ -1,17 +1,17 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-11 20:24 UTC  
+**Stand:** 2026-09-11 22:26 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-09-11): 2 Artikel – Ziel erfüllt. – Bestand: 2 förderfähig in der Re-Queue, 9 von Gates gehalten (ältester 4 Tage: publish-gate: Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig; Textverständnis-Gate nicht bestanden: R3-TERMINOLOGIE: Konzept „DNS-Ser…)
+**Befund:** Letzter Publikationstag (2026-09-11): 3 Artikel – Ziel erfüllt. – Bestand: 1 förderfähig in der Re-Queue, 9 von Gates gehalten (ältester 4 Tage: publish-gate: Zeichenlänge (check_length.py) nicht bestanden)
 
 | Kennzahl | Wert |
 |---|---|
 | Heute | 2026-09-11 (Freitag) |
 | Publikationstag heute | ja |
-| Artikel letzter Publikationstag (2026-09-11) | 2 |
+| Artikel letzter Publikationstag (2026-09-11) | 3 |
 | Letzter Artikel überhaupt | 2026-09-11 (0 Tage her) |
-| Live-Artikel gesamt | 30 |
-| Förderfähig in der Re-Queue | 2 |
+| Live-Artikel gesamt | 31 |
+| Förderfähig in der Re-Queue | 1 |
 | Von Gates gehalten (braucht Korrektur) | 9 |
 | Mindestziel/Tag | 2 |
 
