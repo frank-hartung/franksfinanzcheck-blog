@@ -1,11 +1,11 @@
 # 🖋 PINTEREST-PIN-TEXT-SYNC-REPORT (Premium-Pin-Texte)
 
-**Stand:** 10.09.2026 10:03 UTC · **Modus:** APPLY
+**Stand:** 11.09.2026 10:00 UTC · **Modus:** APPLY
 
 **Regel:** Jeder Artikel trägt die Premium-Texte des besten Masterplan-Pins
 (Schwelle 1.2) + das `pinwand`-Feld für das Multi-Board-Routing.
 
-Artikel: 44 · geänderte: 1 · Pins im Plan: 48
+Artikel: 45 · geänderte: 1 · Pins im Plan: 48
 
 | Artikel | Plan-Pin | Score | Status |
 |---|---|---|---|
@@ -47,12 +47,13 @@ Artikel: 44 · geänderte: 1 · Pins im Plan: 48
 | 2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizie | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 | 2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stop | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 | 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-po | - | 0.00 | keine (Pin-Ziel ist ein anderer Artikel) |
-| 2026-09-10-5-einfache-frugalismus-tricks-fuer-den-alltag | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
-| 2026-09-10-50-30-20-regel-beherrsche-dein-budget-im-jahr-202 | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 | 2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
-| 2026-09-10-finanzieller-puffer-wie-viel-notgroschen-ist-genu | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
-| 2026-09-10-frugalismus-im-alltag-mehr-freiheit-durch-5-einfa | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
-| 2026-09-10-guenstig-durch-den-winter-heizungs-check-im-spaet | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-202 | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genu | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfa | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-aug | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
+| 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaet | - | 0.00 | keine (Draft – beim Publizieren automatisch) |
 
 ---
 
