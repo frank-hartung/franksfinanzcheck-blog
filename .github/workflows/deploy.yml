@@ -173,6 +173,23 @@ jobs:
       - name: Draft-Link-Gate (defekte Post-Ziele entlinken, Report)
         run: python3 scripts/draft_link_healer.py --fix
 
+      # ================= FM-GRENZEN-GATE (Befund 11.09.2026) =================
+      # Der Deploy starb drei Läufe in Folge nach Sekunden im Build-Schritt:
+      # eine pin_description begann unquotiert mit dem UWG-Prefix
+      # „*Werbung | …“ – in YAML startet „*“ einen ALIAS, Hugo verliert das
+      # Frontmatter und `hugo --minify` bricht ab (Exit 1). Fatal daran ist
+      # die WIRKUNG: Frontmatter-Fehler stoppen den ganzen Build, also auch
+      # Spam-Gate, Publish-Gate, Anker-Wache, Vorlesen UND den Publish –
+      # ohne Report, ohne verwertbares Alert, nur ein toter Deploy.
+      # Die Wache prüft den FM-BLOCK so wie Hugo (Grenzen + YAML-Parse) und
+      # heilt ausschließlich die Wert-Ebene (Quote) – nachweislich konvergent
+      # und ohne Schema-Eingriff (eine Liste darf nie zum String werden).
+      - name: FM-Grenzen-Selbsttest (Wache muss lauffähig sein, sonst kein Build)
+        run: python3 scripts/fm_boundary_guard.py --selftest
+
+      - name: FM-Gate (Frontmatter-Grenzen – selbstheilend, VOR dem Build)
+        run: python3 scripts/fm_boundary_guard.py --fix
+
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
         with:

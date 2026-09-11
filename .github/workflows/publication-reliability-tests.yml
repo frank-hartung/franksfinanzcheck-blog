@@ -22,3 +22,5 @@ jobs:
           python3 scripts/engine_generate.py --selftest
           python3 scripts/reserve_pool.py --selftest
           python3 scripts/cadence_guard.py --selftest
+          python3 scripts/fm_boundary_guard.py --selftest
+          python3 scripts/fm_boundary_guard.py --check

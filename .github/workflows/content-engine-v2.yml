@@ -92,11 +92,13 @@ jobs:
           python3 scripts/fix_url_hygiene.py --heal-holds
           python3 scripts/cadence_guard.py --selftest
           python3 scripts/cadence_guard.py --fix
+          python3 scripts/fm_boundary_guard.py --selftest
+          python3 scripts/fm_boundary_guard.py --fix
           python3 scripts/draft_link_healer.py --selftest
           python3 scripts/draft_link_healer.py --fix
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
-          git add content/ CADENCE-GATE-REPORT.md DRAFT-LINK-REPORT.md
+          git add content/ CADENCE-GATE-REPORT.md DRAFT-LINK-REPORT.md FM-GRENZEN-REPORT.md
           if git diff --cached --quiet; then
             echo "Kadenz-Gate: Bestand bereits konform."
           else
