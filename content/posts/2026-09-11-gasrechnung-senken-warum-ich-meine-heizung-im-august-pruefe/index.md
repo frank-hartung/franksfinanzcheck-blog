@@ -28,7 +28,7 @@ kurzantwort: "Ja, du kannst deine Gasrechnung senken, indem du im August deine H
 
 Stell dir vor, es ist der erste richtig frostige Abend im Oktober. Du kommst nach Hause, freust dich auf ein warmes Wohnzimmer, drehst das Thermostat auf, und nichts passiert. Oder schlimmer noch: Die Heizung gluckert bedrohlich, wird aber nur lauwarm. Genau das ist mir vor drei Jahren passiert. Damals saß ich mit Wolldecke und schlechter Laune auf der Couch, während der Heizungsnotdienst am Wochenende einen saftigen Aufschlag verlangte. Seit diesem Winter-Debakel habe ich meine Strategie geändert. Ich fange bereits im August oder September an, mein persönliches Wärmemanagement unter die Lupe zu nehmen. Wenn du clever bist und frühzeitig deine **Gasrechnung senken** willst, nutzt du die warmen Tage, um die Technik und die eigenen Verträge fit zu machen. Wer erst beim ersten Frost reagiert, zahlt meistens drauf – entweder durch unnötigen Mehrverbrauch oder mittels überteuerter Reparatur‑Eilaufträge.
 
-**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+**Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 **Das Wichtigste in Kürze:**
 * **Frühstart spart Geld:** wer die Heizung bereits im Spätsommer prüft, vermeidet teure Notdienste und erkennt Effizienzfresser rechtzeitig.

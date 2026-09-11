@@ -152,7 +152,7 @@ Wenn der Anbieter im Rahmen des **DSL-Wechselbonus** den Router für 0 € dazu
 Ein 150-€-Bonus nach 6 Monaten bei 24 Monaten Laufzeit sind rechnerisch 6,25 € Ersparnis pro Monat. Ein Sofortbonus von 80 € ohne komplizierte Bedingungen ist oft ehrlicher als ein 200 € Cashback, das an fünf Bedingungen (wie Werbeeinwilligung oder Mindestumsatz) geknüpft ist. 
 
 Der echte Wert eines Angebots berechnet sich so:
-**(Summe aller Grundgebühren über 24 Monate + Anschlussgebühr + Versandkosten - Boni - Cashback) / 24 Monate.**
+**(Summe aller Grundgebühren über 24 Monate + Anschlussgebühr + Versandkosten – Boni – Cashback) / 24 Monate.**
 Nur dieser "Effektivpreis" ist die Kennzahl, die du im **DSL-Vergleich** heranziehen solltest.
 
 ## Provider-Unterschiede, die den Bonus relativieren

@@ -139,8 +139,8 @@ Der Schlüssel liegt im **Balance‑Act**: Sparen, wo es keinen Mehrwert gibt, u
 
 **Schritte, die Max unternahm**
 
-1. **Abo‑Audit** – 3 Abos (Streaming, Fitness, Zeitschrift) gekündigt → –45 € / Monat. 2. **Stromanbieter gewechselt** – 10 % günstiger → –30 € / Monat.
-3. **Meal‑Prep** – wöchentlicher Einkauf mit Liste → –120 € / Monat. 4. **Dauerauftrag** – 560 € sofort nach Gehaltseingang auf ETF‑Sparplan.
+1. **Abo‑Audit** – 3 Abos (Streaming, Fitness, Zeitschrift) gekündigt → – 45 € / Monat. 2. **Stromanbieter gewechselt** – 10 % günstiger → – 30 € / Monat.
+3. **Meal‑Prep** – wöchentlicher Einkauf mit Liste → – 120 € / Monat. 4. **Dauerauftrag** – 560 € sofort nach Gehaltseingang auf ETF‑Sparplan.
 
 **Ergebnis nach 2 Jahren:** * Notgroschen von 5.400 € (vollständig gefüllt).
 * ETF‑Bestand von ca. 15.000 € (inkl. Zinseszinseffekt). * Finanzielle Freiheit: Max kann jetzt 2‑3 Monate ohne Arbeit überbrücken, ohne Kredit aufzunehmen.
@@ -160,7 +160,7 @@ In vielen Städten ist 50 % für Grundbedürfnisse Illusion. Dann gilt eine eh
 
 **2. 24‑Stunden‑Warenkorb.** Online‑Shops speichern den Warenkorb. Schluss‑Kauf erst am nächsten Abend. Die Hälfte der Artikel überlebt die Nacht nicht.
 
-**3. Nutzungspreis.** 200‑€‑Werkzeug, acht Einsätze in drei Jahren = 25 € pro Einsatz. Leihen in der Bibliothek der Dinge oder Nachbarschaft kostet 0 – 5 €.
+**3. Nutzungspreis.** 200‑€‑Werkzeug, acht Einsätze in drei Jahren = 25 € pro Einsatz. Leihen in der Bibliothek der Dinge oder Nachbarschaft kostet 0–5 €.
 
 **4. Gehaltserhöhung zuerst sparen.** Kommt 150 € netto oben drauf, wandern 100 € in den Dauerauftrag, 50 € in den Leben‑Topf. Lifestyle‑Inflation ist der leise Killer der Sparquote.
 

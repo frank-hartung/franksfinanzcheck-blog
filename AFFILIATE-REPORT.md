@@ -1,10 +1,7 @@
 # 🤝 AFFILIATE-REPORT
 
-**Stand:** 2026-09-11 18:16 UTC · Modus: FIX
+**Stand:** 2026-09-11 18:18 UTC · Modus: CHECK
 
-Probleme: 0 · Geheilt: 1
+Probleme: 0 · Geheilt: 0
 
 ✅ Alle Affiliate-Profi-Signale erfüllt.
-
-**Selbstheilung:**
-- [A3] 2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich: Pillar-Link ergänzt (→ internet-dsl)

@@ -69,7 +69,7 @@ Ein Festpreistarif hat gegenüber Tarifen ohne Bindung diese Vorteile:
 | **Wechselprämien** | Einmalige Boni reduzieren die effektiven Jahreskosten | Boni werden oft erst nach 12 Monaten ausgezahlt – ein vorzeitiger Kündigungsversuch kann sie verfallen lassen |
 | **Transparenz** | Klare Preisstruktur, leicht zu vergleichen im [Gasvergleich](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) | Manche AGB verstecken Nachjustierungen bei gesetzlichen Änderungen (z. B. Strom‑Umlage) |
 
-Die Entscheidung hängt von deiner Risikobereitschaft und deinem Verbrauchsprofil ab. Für Familien mit hohem, planbarem Jahresverbrauch ist die **Preisgarantie Gas** meist die sicherere Wahl.
+Die Entscheidung hängt von deiner Risikobereitschaft und deinem Verbrauchsprofil ab. Für Familien mit hohem, planbarem Jahresverbrauch ist die **Gaspreisgarantie** meist die sicherere Wahl.
 
 ## Kostenanalyse: 20.000 kWh Verbrauch bei Marktschwankungen
 
@@ -131,11 +131,11 @@ Wie du mit der richtigen Heizungs‑Wartung sparst, zeigen unsere Spätsommer‑
 
 ## Checkliste für den Tarifwechsel – alles im Blick
 
-- [ ] Jahresverbrauch (kWh) und Zählernummer notiert - [ ] Mindestens 12 Monate Preisgarantie im Vergleichsfilter aktiviert
-- [ ] Bonusbedingungen (Auszahlungszeitpunkt, Mindestlaufzeit) geprüft - [ ] AGB auf versteckte Nachjustierungsklauseln gescannt
+- [ ] Jahresverbrauch (kWh) und Zählernummer notiert – [ ] Mindestens 12 Monate Preisgarantie im Vergleichsfilter aktiviert
+- [ ] Bonusbedingungen (Auszahlungszeitpunkt, Mindestlaufzeit) geprüft – [ ] AGB auf versteckte Nachjustierungsklauseln gescannt
 - [ ] Kündigungsfrist nach Garantieende notiert (max. 1 Monat) - [ ] Erinnerungs‑Kalendereintrag für „Garantie‑Check“ 10 Monate nach Vertragsstart
 
-Mit dieser Liste vergisst du keine Details und kannst sicherstellen, dass du wirklich von einer **Preisgarantie Gas** profitierst.
+Mit dieser Liste vergisst du keine Details und kannst sicherstellen, dass du wirklich von einer **Gaspreisgarantie** profitierst.
 
 ## Marktschwankung in Zahlen: 20.000 kWh durch drei Szenarien
 
@@ -164,8 +164,8 @@ Tarife ohne Garantie gewinnen nur in Szenario A. Und nur, wenn du monatlich wech
 
 ## Kleingedrucktes, das Preissprünge trotz „Garantie“ durchlässt
 
-- „Anpassung bei Änderung der gesetzlichen Abgaben“ ohne Obergrenze - Garantie nur auf den Energieeinkauf, nicht auf Netzentgelte
-- Boni, die als Gutschrift in Monat 13 kommen – und verfallen, wenn du vorher gehst - Paketpreise mit Strom + Gas, bei denen die Gas‑Garantie kürzer ist als die Strom‑Bindung
+- „Anpassung bei Änderung der gesetzlichen Abgaben“ ohne Obergrenze – Garantie nur auf den Energieeinkauf, nicht auf Netzentgelte
+- Boni, die als Gutschrift in Monat 13 kommen – und verfallen, wenn du vorher gehst – Paketpreise mit Strom + Gas, bei denen die Gas‑Garantie kürzer ist als die Strom‑Bindung
 
 Treffen zwei dieser Punkte zu, rechne den Tarif wie ohne Garantie. Vergleiche ihn nur über den echten Preis.
 

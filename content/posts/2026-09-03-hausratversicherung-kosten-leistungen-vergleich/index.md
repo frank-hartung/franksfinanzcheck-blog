@@ -29,7 +29,7 @@ cover:
 
 
 
-Stell dir vor: Du kommst nach dem Wochenende nach Hause. Die Tür steht offen. Im Flur liegt dein Laptop, daneben die leere Hülle. Im Schlafzimmer fehlt der Schmuck, im Wohnzimmer der Fernseher. Die Polizei schätzt den Schaden auf 18.000 Euro. Deine Ersparnisse decken das nicht.
+Stell dir vor: Du kommst nach dem Wochenende nach Hause. Die Tür steht offen. Im Flur liegt dein Laptop, daneben die leere Hülle. Im Schlafzimmer fehlt der Schmuck, im Wohnzimmer der Fernseher. Die Polizei schätzt den Schaden auf 18.000 €. Deine Ersparnisse decken das nicht.
 
 Genau dafür gibt es die [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/). Sie ersetzt deinen Hausrat nach einem Einbruch zum Neuwert. Trotzdem zögern viele. Sie halten den Tarif für teuer oder verstehen die Leistungen nicht. Dabei kostet guter Schutz oft weniger als eine Pizza im Monat.
 
@@ -60,26 +60,26 @@ Genauso wichtig sind die Lücken. Die Versicherung ersetzt weder Bargeld in jede
 - Wertgegenstände wie Schmuck, Uhren oder Kunst haben je nach Tarif eine eigene Entschädigungsgrenze
 - Grobe Fahrlässigkeit, etwa die offene Terrassentür beim Weggehen, kann zu Kürzungen führen – gute Tarife verzichten aber darauf
 
-Wohnst du im Erdgeschoss in einem Hochwassergebiet, denke über den Elementar-Baustein nach. Er kostet je nach Lage 10 bis 40 Euro im Jahr. Im Ernstfall entscheidet er über deine Existenz. Die Rückstau-Klausel gehört oft schon dazu. Prüfe sie trotzdem im Kleingedruckten.
+Wohnst du im Erdgeschoss in einem Hochwassergebiet, denke über den Elementar-Baustein nach. Er kostet je nach Lage 10 bis 40 € im Jahr. Im Ernstfall entscheidet er über deine Existenz. Die Rückstau-Klausel gehört oft schon dazu. Prüfe sie trotzdem im Kleingedruckten.
 
 ## Was eine Hausratversicherung kostet
 
-Der Preis hängt von drei Dingen ab: Wohnfläche, Eigenanteil und Zusatzbausteinen. Für 70 Quadratmeter in einem normalen Tarif zahlst du etwa 85 bis 140 Euro im Jahr. Das sind 7 bis 12 Euro im Monat.
+Der Preis hängt von drei Dingen ab: Wohnfläche, Eigenanteil und Zusatzbausteinen. Für 70 Quadratmeter in einem normalen Tarif zahlst du etwa 85 bis 140 € im Jahr. Das sind 7 bis 12 € im Monat.
 
 Spannend wird der Vergleich: Für dieselbe Wohnung verlangen schwache Anbieter oft doppelt so viel wie gute. Schau darum auf die Leistungen, nicht nur auf den Preis.
 
-Gut für Sparer: Viele Versicherer geben Rabatt, wenn du mehrere Verträge bündelst. Wer Hausrat mit Haftpflicht oder Kfz kombiniert, spart oft 5 bis 15 Prozent. Auch Familienrabatte helfen.
+Gut für Sparer: Viele Versicherer geben Rabatt, wenn du mehrere Verträge bündelst. Wer Hausrat mit Haftpflicht oder Kfz kombiniert, spart oft 5 bis 15 %. Auch Familienrabatte helfen.
 
 ## Die Versicherungssumme richtig bestimmen
 
-Der häufigste Fehler ist eine zu niedrige Summe. Dann greift die Unterversicherung: Der Versicherer zahlt nur den Anteil, der deiner Summe entspricht. Bei 60 Prozent Deckung bekommst du bei 10.000 Euro Schaden nur 6.000 Euro.
+Der häufigste Fehler ist eine zu niedrige Summe. Dann greift die Unterversicherung: Der Versicherer zahlt nur den Anteil, der deiner Summe entspricht. Bei 60 % Deckung bekommst du bei 10.000 € Schaden nur 6.000 €.
 
 Moderne Tarife lösen das Problem so:
 
-1. **Verzicht auf die Unterversicherungsprüfung:** Der Versicherer akzeptiert eine pauschal vereinbarte Summe, zum Beispiel 650 Euro pro Quadratmeter Wohnfläche, ohne im Schadenfall nachzurechnen.
+1. **Verzicht auf die Unterversicherungsprüfung:** Der Versicherer akzeptiert eine pauschal vereinbarte Summe, zum Beispiel 650 € pro Quadratmeter Wohnfläche, ohne im Schadenfall nachzurechnen.
 2. **Gleitende Neuwertentschädigung:** Deine Versicherungssumme wächst automatisch mit der jährlichen Preissteigerung mit, ohne dass du den Beitrag neu berechnen musst.
 
-Als Faustregel gelten 650 bis 700 Euro pro Quadratmeter. Bei 80 Quadratmetern sind das rund 52.000 bis 56.000 Euro. Hast du teure Möbel oder eine gute Küche, erhöhe die Summe.
+Als Faustregel gelten 650 bis 700 € pro Quadratmeter. Bei 80 Quadratmetern sind das rund 52.000 bis 56.000 €. Hast du teure Möbel oder eine gute Küche, erhöhe die Summe.
 
 ## Zusatzbausteine: sinnvoll oder überflüssig
 
@@ -87,11 +87,11 @@ Die Anbieter haben viele Zusatzbausteine erfunden. Nicht jeder lohnt sich. Meine
 
 | Baustein | Sinnvoll für | Typische Kosten pro Jahr |
 |---|---|---|
-| Fahrrad | Alle mit Rädern ab 500 Euro | 15 bis 35 Euro |
-| Elementar | Erdgeschoss, Hochwassergebiet, Keller | 10 bis 40 Euro |
-| Glas | Wohnungen mit großen Scheiben | 10 bis 25 Euro |
-| Photovoltaik | Eigentümer mit Balkonkraftwerk | ab 10 Euro |
-| Auslandsschutz | Wertgegenstände auf Reisen | 5 bis 20 Euro |
+| Fahrrad | Alle mit Rädern ab 500 € | 15 bis 35 € |
+| Elementar | Erdgeschoss, Hochwassergebiet, Keller | 10 bis 40 € |
+| Glas | Wohnungen mit großen Scheiben | 10 bis 25 € |
+| Photovoltaik | Eigentümer mit Balkonkraftwerk | ab 10 € |
+| Auslandsschutz | Wertgegenstände auf Reisen | 5 bis 20 € |
 
 Der Fahrrad-Baustein lohnt sich für Pendler und Familien. Achtung: Viele Tarife zahlen nur, wenn das Rad abgeschlossen war. Auch vor dem Supermarkt. Die genaue Regel steht in den Bedingungen.
 
@@ -131,7 +131,7 @@ Nutzt du einen Vergleichsrechner, wisse: Die günstigsten Tarife haben nicht imm
 
 ## Checkliste für deinen Tarifabschluss
 
-- Wohnfläche realistisch angeben und Versicherungssumme mit 650 bis 700 Euro pro Quadratmeter planen
+- Wohnfläche realistisch angeben und Versicherungssumme mit 650 bis 700 € pro Quadratmeter planen
 - Auf gleitende Neuwertentschädigung und Verzicht auf die Unterversicherungsprüfung achten
 - Grobe Fahrlässigkeit im Tarif ausschließen lassen
 - Zusatzbausteine bewusst wählen: Fahrrad und Elementar vor Glas und Auslandsschutz
@@ -150,7 +150,7 @@ Mit dieser Liste findest du Schutz, der im Ernstfall trägt – ohne zu viel Bei
 
 **Zahlt die Versicherung bei grober Fahrlässigkeit?** Das hängt vom Tarif ab. Alte Verträge kürzen, wenn du bei Gewitter das Fenster offen lässt. Gute Tarife verzichten auf diese Einrede. Achte beim Vergleich ausdrücklich auf diese Klausel.
 
-**Was kostet die Hausratversicherung für ein Haus mit 120 Quadratmetern?** Als Faustregel gelten 650 bis 700 Euro Summe pro Quadratmeter. Bei 120 m² sind das 78.000 bis 84.000 Euro. Dafür zahlst du je nach Tarif 150 bis 240 Euro im Jahr. Miss Keller und Etagen genau aus – die Fläche bestimmt den Preis.
+**Was kostet die Hausratversicherung für ein Haus mit 120 Quadratmetern?** Als Faustregel gelten 650 bis 700 € Summe pro Quadratmeter. Bei 120 m² sind das 78.000 bis 84.000 €. Dafür zahlst du je nach Tarif 150 bis 240 € im Jahr. Miss Keller und Etagen genau aus – die Fläche bestimmt den Preis.
 
 > 💡 **Mein Fazit:** Eine solide Hausratversicherung ist für die meisten Haushalte ein klares Ja – aber nur mit den richtigen Bedingungen und einer realistischen Versicherungssumme. Der Vergleich zahlt sich doppelt aus: Du sparst Geld und bekommst im Ernstfall deutlich besseren Schutz.
 

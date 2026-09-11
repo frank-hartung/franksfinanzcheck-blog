@@ -1,9 +1,9 @@
 ---
 title: "Günstig durch den Winter: Heizungs-Check im Spätsommer"
 description: "Mit Heizungswartung, klugen Einstellungen und einem Tarif-Check senkst du Gaskosten schon vor dem Winter. So machst du deine Wohnung jetzt effizient winterfest."
-date: 2026-09-11T08:13:34Z
-draft: true
-reserve: true
+date: 2026-09-11T18:17:22Z
+draft: false
+reserve_published: 2026-09-11
 tags: ["Heizung Wartung", "Winterfest machen Wohnung", "Spätsommer Heizung", "Gaskosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

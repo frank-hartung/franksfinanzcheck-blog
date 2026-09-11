@@ -38,7 +38,7 @@ Drei Dinge zählen beim Start in ein frugales Leben: die Analyse der Status-quo-
 * **Alltagsroutinen ändern:** kleine Gewohnheiten wie Meal Prepping oder die 30-Tage-Regel bei Käufen haben die größte Hebelwirkung auf dein Vermögen.
 
 ## Was ist Frugalismus eigentlich?
-Viele Menschen verwechseln Frugalismus mit extremem Geiz oder Verzicht. In meiner Praxis als Finanzberater sehe ich jedoch oft das Gegenteil. **Frugalisten sind Menschen, die ihr Geld nicht für Statussymbole ausgeben, die sie überflüssig finden, um Leute zu beeindrucken, die ihnen missfallen.** Das Ziel ist meist die finanzielle Unabhängigkeit – oft schon mit 40 oder 50 Jahren.
+Viele Menschen verwechseln Frugalismus mit extremem Geiz oder Verzicht. In meiner Praxis als Finanzberater sehe ich jedoch oft das Gegenteil. **Frugalisten sind Menschen, die ihr Geld nicht für Statussymbole ausgeben, die sie überflüssig finden, um Leute zu beeindrucken, die ihnen missfallen.** das Ziel ist meist die finanzielle Unabhängigkeit – oft schon mit 40 oder 50 Jahren.
 
 Der Kern dieser Lebensphilosophie ist die Sparquote. Während der Durchschnittsdeutsche etwa 10 % seines Einkommens zur Seite legt, streben Frugalisten Quoten von 50 % oder mehr an. Das funktioniert nur, wenn du deine Ausgaben radikal auf das Wesentliche reduzierst. Du fragst dich bei jeder Ausgabe: „Bringt mir dieser Gegenstand wirklich einen dauerhaften Mehrwert, der die investierte Lebenszeit wert ist?“
 

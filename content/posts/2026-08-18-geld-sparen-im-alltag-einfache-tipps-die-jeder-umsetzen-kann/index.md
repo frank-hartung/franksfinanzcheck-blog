@@ -55,10 +55,10 @@ Trenne deine Finanzen in drei klare Töpfe:
 ### 2. Die 30‑Tage‑Regel bei Spontankäufen
 Du siehst etwas Schönes? Es kostet über 50 €? Dann warte 30 Tage. Schreibe den Wunsch auf eine Liste. Willst du ihn nach einem Monat immer noch, kaufe ihn bewusst. In über 80 % der Fälle verfliegt der Kaufimpuls von allein.
 
-**Vorteile:** - Verhindert Impulskäufe, die das Haushaltsbudget sprengen.
+**Vorteile:** – Verhindert Impulskäufe, die das Haushaltsbudget sprengen.
 - Gibt Zeit, Preise zu vergleichen (bis zu 30 % günstiger).
 
-**Nachteile:** - Erfordert Disziplin, besonders bei teuren Wunschobjekten (z. B. Elektronik).
+**Nachteile:** – Erfordert Disziplin, besonders bei teuren Wunschobjekten (z. B. Elektronik).
 
 **Beispiel:** Du willst ein neues Smartphone für 799 €. Nach 30 Tagen hast du festgestellt, dass du das alte Gerät noch 6 Monate nutzen kannst und ein günstigeres Modell für 599 € ausreicht. Ersparnis: **200 €**.
 
@@ -108,7 +108,7 @@ Zahlst du 5 bis 9 € im Monat für dein Konto? Auch Überweisungen und Kredit
 ### 6. Leitungswasser statt Marken‑Mineralwasser trinken
 Leitungswasser ist in Deutschland streng kontrolliert. Es ist oft reiner als Flaschenware. Steigst du um, sparst du als 4‑Personen‑Haushalt rund **350 €** im Jahr. Und du schleppst keine Kisten mehr.
 
-**Zusatznutzen:** - Reduzierter CO₂‑Fußabdruck (≈ 1,5 t CO₂ pro Jahr weniger).
+**Zusatznutzen:** – Reduzierter CO₂‑Fußabdruck (≈ 1,5 t CO₂ pro Jahr weniger).
 - Mit einem **Sprudel‑System** (z. B. SodaStream) kannst du trotzdem prickelndes Wasser genießen – die Kosten liegen bei etwa **30 €** pro Jahr.
 
 ---
@@ -137,7 +137,7 @@ Kleidung, Möbel, Spielzeug, Elektronik: Auf Kleinanzeigen, Vinted oder Rebuy gi
 ### 8. Bibliotheken und Tauschbörsen nutzen
 Bücher, Hörbücher und Spiele gibt es in der Bibliothek. Auch Werkzeuge kannst du dort oft leihen. Der Jahresbeitrag liegt bei 15 bis 25 €. Dafür ist die Ausleihe unbegrenzt.
 
-**Was du leihen kannst:** - Fachbücher (statt teurer Fachliteratur).
+**Was du leihen kannst:** – Fachbücher (statt teurer Fachliteratur).
 - **Werkzeug** (Bohrmaschine, Rasenmäher) – spart bis zu **200 €** pro Jahr. - **Spiele** (Brett‑ und Videospiele) – erspart teure Neuanschaffungen.
 
 **Tipp:** Viele Kommunen bieten **digitale Bibliotheken** (Onleihe) für E‑Books und Hörbücher – ideal für unterwegs.

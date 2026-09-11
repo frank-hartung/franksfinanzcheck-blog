@@ -52,13 +52,13 @@ Wer [Heizkosten senken](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-
 **Was passiert?** Luft in den Heizkörpern stört den Wasserfluss. Oben bleibt der Heizkörper kalt, die Pumpe läuft länger und verbraucht mehr Energie. Der Verbrauch steigt um 5 % – 10 %.
 
 **Wie du das [vermeidest](../../posts/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest/):** 1. **Entlüften:** Nimm einen Vierkantschlüssel (ca. 2 €) und ein Gefäß. Öffne das Entlüftungsventil, bis zischende Luft entweicht und Wasser austritt.
-2. **Druck prüfen:** Das Manometer sollte 1,2 – 1,8 bar anzeigen (kalt). Bei Bedarf Wasser nachfüllen – am besten destilliertes Wasser, um Kalkablagerungen zu vermeiden.  
+2. **Druck prüfen:** Das Manometer sollte 1,2–1,8 bar anzeigen (kalt). Bei Bedarf Wasser nachfüllen – am besten destilliertes Wasser, um Kalkablagerungen zu vermeiden.  
 
 **Pro & Contra**  
 
 | | Pro | Contra |
 |---|---|---|
-| **Entlüften** | Spart 60 – 90 € pro Winter, verhindert Geräusche, erhöht Lebensdauer der Pumpe | Aufwand von 5 – 10 Min. pro Heizkörper |
+| **Entlüften** | Spart 60–90 € pro Winter, verhindert Geräusche, erhöht Lebensdauer der Pumpe | Aufwand von 5–10 Min. pro Heizkörper |
 | **Druck prüfen** | Verhindert Überdruck‑Schäden, optimiert Brennwertnutzung | Fehlender Druck kann zu Unterheizung führen |
 
 ### Fehler 2: Verstaubte Heizkörper & verdeckte Konvektoren
@@ -68,7 +68,7 @@ Staub, Vorhänge und Möbel blockieren die Wärmeabgabe. Das Thermostat reagiert
 **Maßnahmen:** * **30 cm Abstand** zu Möbeln und Vorhängen einhalten.
 * **Bürste** (Weichbürste oder Staubsauger‑Aufsatz) einmal pro Monat die Lamellen reinigen. * **Dichtungsbänder** an Türen und Fenstern anbringen – verhindert Zugluft, die die Thermostate nach oben treiben lässt.
 
-**Kosten/Nutzen:** 15 € für ein Set Dichtungsbänder → Ersparnis 50 – 80 € pro Saison.
+**Kosten/Nutzen:** 15 € für ein Set Dichtungsbänder → Ersparnis 50–80 € pro Saison.
 
 ### Fehler 3: Dauerlüften über gekippten Fenstern
 
@@ -90,7 +90,7 @@ Alte Drehventile reagieren träge, heizen weiter, wenn niemand zu Hause ist, und
 
 ### Fehler 5: Im teuren Grundversorgungstarif verharren
 
-Die Grundversorgung liegt häufig bei 12 – 14 Cent/kWh. Anbieter mit Preisgarantie bieten 8,5 – 9,5 Cent/kWh.
+Die Grundversorgung liegt häufig bei 12–14 Cent/kWh. Anbieter mit Preisgarantie bieten 8,5–9,5 Cent/kWh.
 
 **Rechenbeispiel (20.000 kWh/Jahr):**  
 
