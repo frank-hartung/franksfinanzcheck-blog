@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-11 19:40 UTC · Modus: FIX
+**Stand:** 2026-09-11 20:04 UTC · Modus: FIX
 
 **Domain-Status (Pinterest):** 🔴 GESPERRT – Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026. (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)
 
@@ -45,12 +45,7 @@
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
-- 🔴 [F2] Item 1 (Heizkosten senken: Mit diesen Strategien): Titel unvollständig (R5)
-- 🔴 [F2] Item 2 (Stromfresser finden: Energiediebe im Hau): Titel unvollständig (R5)
-- 🔴 [F5] Doppelte Description in Items [2, 23]
-
-**Geheilt:**
-- ✅ check_titles --fix (Exit 256)
+- 🔴 [F5] Doppelte Description in Items [19, 26]
 
 ## C: CSV pins_upload.csv (C1–C8)
 
@@ -66,7 +61,7 @@
 
 ## Fazit
 
-🔴 5 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
+🔴 3 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
 
 ---
 _Wache: Blog B1–B8 · Feed F1–F6 · CSV C1–C8 · API A1–A4 – Dauerauftrag, niemals Content-Verlust._
