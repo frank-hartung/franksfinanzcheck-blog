@@ -80,7 +80,10 @@ DEEP_HINTS = [
     (re.compile(r"flug|fluege|flugzeug|flugticket", re.I), "fluege"),
     (re.compile(r"pauschal|last.minute|urlaubskasse|all.inclusive|urlaub", re.I), "reisen"),
     (re.compile(r"elementar|starkregen|hochwasser|flut|sturm|unwetter", re.I), "hausrat"),
-    (re.compile(r"gasanbieter|gaspreis|gastarif|gasheizung", re.I), "gas"),
+    # 11.09.2026 (Reserve #5): „Gas-Tarif“ mit Bindestrich, Gasrechnung/
+    # Gasvergleich fehlten – ein Gas-Artikel mit /go/tagesgeld/-Fehllink
+    # wurde so nicht auf die korrekte Route zurueckgeholt.
+    (re.compile(r"gasanbieter|gaspreis|gas[-\u00a0\u202f\s]?tarif|gasheizung|gasrechnung|gasvergleich|gaswechsel", re.I), "gas"),
     (re.compile(r"strom|wärmepumpe|kühl|nachtspeicher|stromfresser|stromvergleich|eigend|balkonkraft|e-auto", re.I), "strom"),
     (re.compile(r"handy|mobilfunktarif|datenvolumen|sim.karte", re.I), "handytarife"),
     (re.compile(r"breitband|glasfaser|router|fritz", re.I), "dsl"),
@@ -101,6 +104,80 @@ def route_for(text: str, pillar: str = "") -> str:
         if pat.search(ctx):
             return key
     return PILLAR_ROUTE.get(pillar, "allgemein")
+
+
+def route_explicit(text: str):
+    """Wie route_for, ABER nur bei einem echten Themen-Treffer (DEEP_HINTS).
+
+    Der Pillar-Fallback wird NICHT als Kontextbeweis gewertet: er ist zu
+    grob, um einen registrierten Gateway-Link umzuschreiben.
+    """
+    ctx = text.lower()[:1200]
+    for pat, key in DEEP_HINTS:
+        if pat.search(ctx):
+            return key
+    return None
+
+
+# Markdown-Gateway-Link mit optionalem absolutem Blog-Host (Reserve #5:
+# die KI lieferte [Gas-Tarife](https://franksfinanzcheck.de/go/tagesgeld/)
+# statt des relativen /go/-Gateways; der Render-Hook versieht nur relative
+# /go/-Links mit rel="sponsored" -> harter Affiliate-Integrity-Fund).
+MD_GO_LINK_RE = re.compile(
+    r"(\[[^\]]+\]\()"
+    r"(?:https?://(?:www\.)?franksfinanzcheck\.de)?"
+    r"/go/([\w-]+)(/?)(\))")
+
+
+def heal_misrouted_links(text: str, reg: dict, pillar: str = ""):
+    """Heilt thematisch FALSCHE, aber registrierte Gateway-Keys.
+
+    Bewusst konservativ, damit Cross-Selling nicht zerstoert wird:
+      * Artikel-Route R muss ueber einen echten DEEP_HINTS-Treffer belegt
+        sein (kein „allgemein“, kein bloesser Pillar-Fallback).
+      * Der Artikel MUSS bereits mindestens einen Link auf /go/R/ haben
+        (das eigene Thema ist versorgt; der Fremdlink ist dann ein Fehler,
+        kein beabsichtigtes Zweitangebot).
+      * Im Umfeld des Fremdlinks muss dasselbe Thema R explizit genannt
+        sein – Beweis primaer ueber den Link-Ankertext selbst plus ein
+        enges +/-80-Zeichen-Fenster (das breite +/-180-Fenster griff am
+        11.09.2026 durch ein themenfremdes Wort im Absatz darueber
+        daneben).
+      * Absolute Blog-Host-URLs werden dabei automatisch relativiert.
+    """
+    route = route_explicit(text)
+    if not route or route not in reg or route == "allgemein":
+        return text, 0
+    if not re.search(r"/go/" + re.escape(route) + r"/", text):
+        return text, 0
+    fixed = 0
+
+    def repl(m):
+        nonlocal fixed
+        head, key, slash, tail = m.group(1), m.group(2), m.group(3), m.group(4)
+        if key == route:
+            if m.group(0).startswith("http"):
+                fixed += 1
+                return head + "/go/" + key + "/" + tail
+            return m.group(0)
+        # Themenbeweis PRIMÄR über den Link-Text selbst (der Anker nennt das
+        # Angebot, z. B. „Gas-Tarife vergleichen“) plus enge ±80-Zeichen-Um-
+        # gebung. Das breite ±180-Fenster griff 11.09.2026 daneben ("Urlaub"
+        # im Absatz darüber schlug das im Anker stehende "Gas-Tarif").
+        label = head.strip("[]( ")
+        start = max(0, m.start() - 80)
+        window = label + " " + text[start:m.end() + 80]
+        if route_explicit(window) == route:
+            fixed += 1
+            return head + "/go/" + route + "/" + tail
+        # Kein Themenbeweis, aber absoluter Host: trotzdem kanonisieren.
+        if m.group(0).startswith("http"):
+            fixed += 1
+            return head + "/go/" + key + slash + tail
+        return m.group(0)
+
+    new_text = MD_GO_LINK_RE.sub(repl, text)
+    return new_text, fixed
 
 
 def normalize_gateway_links(text: str, reg: dict, pillar: str = "") -> tuple[str, int]:
@@ -127,6 +204,7 @@ def normalize_gateway_links(text: str, reg: dict, pillar: str = "") -> tuple[str
 
     def repl(m: re.Match) -> str:
         nonlocal fixed
+        had_host = m.group(0).startswith("http")
         key = m.group(1)
         if key not in known:
             start = max(0, m.start() - 180)
@@ -136,13 +214,20 @@ def normalize_gateway_links(text: str, reg: dict, pillar: str = "") -> tuple[str
                 route = "allgemein"
             fixed += 1
             return f"/go/{route}/"
-        if not m.group(2):
+        out = f"/go/{key}/"
+        # Fehlender Slash oder absoluter Blog-Host zaehlen als Korrektur;
+        # kanonische relative Links bleiben bytegleich (kein Churn).
+        if had_host or not m.group(2):
             fixed += 1
-            return f"/go/{key}/"
-        return m.group(0)
+        return out
 
     fixed = 0
-    new_text = re.sub(r"/go/([\w-]+)(/?)", repl, text)
+    # 11.09.2026 (Reserve #5): optionalen absoluten Blog-Host mit
+    # aufsaugen -> alle /go/-Links verlassen die KI-Erzeugung kanonisch
+    # relativ (nur so greift rel="sponsored" im Render-Hook).
+    go_re = re.compile(
+        r"(?:https?://(?:www\.)?franksfinanzcheck\.de)?/go/([\w-]+)(/?)")
+    new_text = go_re.sub(repl, text)
     return new_text, fixed
 
 # ------------------------------------------------------------
@@ -208,6 +293,34 @@ def run_selftest() -> list[str]:
         if n2 != 1 or "/go/kreditkarte/" not in t2 or "/go/kreditkarte)" in t2:
             fehler.append("  NR: fehlender Slash nicht ergänzt "
                           f"(n2={n2}, t2={t2[:90]})")
+        # HOST-KANONISIERUNG (Reserve #5, 11.09.2026): absoluter Blog-Host
+        # muss zur relativen /go/-Form werden (sonst fehlt rel=sponsored).
+        t3, n3 = normalize_gateway_links(
+            "Siehe [Gas](https://franksfinanzcheck.de/go/gas) hier.",
+            reg_test, "strom-sparen")
+        if n3 != 1 or "https://franksfinanzcheck.de" in t3 \
+                or "/go/gas/" not in t3:
+            fehler.append(f"  NR: absoluter Blog-Host nicht kanonisiert (t3={t3})")
+        # MISROUTING (Reserve #5): Gas-Artikel mit eigenem Gas-Link und
+        # thematisch belegtem tagesgeld-Fremdlink wird umgeroutet + relativ.
+        gas_text = ("Gasrechnung senken, Gastarife vergleichen, Gasanbieter "
+                    "wechseln. [Gas-Tarife sparen](/go/gas/) und "
+                    "[anders](https://franksfinanzcheck.de/go/tagesgeld/) "
+                    "mit Gas-Kontext.")
+        t4, n4 = heal_misrouted_links(gas_text, reg_test, "strom-sparen")
+        if n4 != 1 or "/go/tagesgeld/" in t4 or "/go/gas/ ]" in t4 \
+                or t4.count("/go/gas/") != 2:
+            fehler.append(f"  NR: Fehlrouting nicht geheilt (n4={n4}, t4={t4})")
+        # Konservativ: ohne eigenen Themenlink bleibt der Fremdlink unangetastet.
+        gas_ohne_eigenen = ("Gasrechnung senken, Gastarife vergleichen. "
+                            "[anders](https://franksfinanzcheck.de/go/tagesgeld/)")
+        t5, n5 = heal_misrouted_links(gas_ohne_eigenen, reg_test, "strom-sparen")
+        if n5 != 0 or "/go/tagesgeld/" not in t5:
+            fehler.append(f"  NR: zu aggressives Routing ohne eigenen Link (n5={n5})")
+        # Idempotenz
+        t6, n6 = heal_misrouted_links(t4, reg_test, "strom-sparen")
+        if n6 != 0 or t6 != t4:
+            fehler.append("  NR: Misrouting-Heilung ist nicht idempotent")
     except Exception as exc:  # noqa: BLE001
         fehler.append(f"  NR: Selbsttest-Ausnahme: {exc}")
     return fehler
@@ -393,6 +506,11 @@ def process(path: Path, reg: dict) -> dict:
     # Register landen und der AI4-Render-Beweis sie schlüsselgenau sieht.
     # NUR im FIX-Modus: Report-/Selftest-Läufe bleiben read-only.
     if DO_FIX and not DRY_RUN:
+        text, n_mis = heal_misrouted_links(text, reg, pillar)
+        if n_mis:
+            fixes["am8"] = True
+            status.append(("NR", f"Gateway-Fehlrouting/Host-Form geheilt: {n_mis}",
+                           "info"))
         norm_text, n_norm = normalize_gateway_links(text, reg, pillar)
         if n_norm:
             text = norm_text

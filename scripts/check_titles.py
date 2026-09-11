@@ -76,6 +76,18 @@ R5_END_WHITELIST = {
     "erreichen", "gewinnst", "gewinnen", "kündigst", "kündigen",
     "wechselst", "wechseln", "sicherst", "sichern", "planst", "planen",
     "investierst", "investieren", "anlegst", "anlegen", "versicherst",
+    # REPARATUR 11.09.2026 (Reserve #5): 1.-Person-Singular-Formen
+    # (Ich-Perspektive des Blogs, z. B. „…warum ich meine Heizung im August
+    # prüfe“). Der Truncation-Wächter kannte nur 2.-Person/Infinitiv und
+    # blockierte vollständige Ich-Titel als „vermutlich unvollständig“.
+    "prüfe", "senke", "zeige", "erkläre", "erklare", "verrate", "empfehle",
+    "mache", "gehe", "schaue", "schau", "nutze", "nutz", "wechsle", "finde",
+    "lege", "rechne", "schütze", "halte", "setze", "stelle", "beachte",
+    "vergleiche", "wähle", "lerne", "kenne", "glaube", "meine",
+    "sage", "lese", "sieh", "höre", "schreibe", "überprüfe", "spare",
+    "plane", "klicke", "tippe", "starte", "laufe", "buche", "sichere",
+    "heize", "lade", "richte", "steuere", "kontrolliere", "kalkuliere",
+    "betrachte", "beobachte", "vermeide", "erziele", "erfährst",
     "versichern", "heizt", "heizen", "ladest", "laden", "installierst",
     "installieren", "einrichtest", "einrichten", "richtest", "richten",
     "steuerst", "steuern", "behältst", "behalten", "kontrollierst",

@@ -255,11 +255,16 @@ def extract_words(body, whitelist):
     # U+00AD (weiche Trennstelle aus scripts/umbruch_guard.py) zählt als
     # Wortbestandteil – sonst würde „Verbraucher\u00adschlichtungsstelle“
     # als zwei Wörter geprüft und „schlichtungs“ als Fehler gemeldet.
-    for m in re.finditer(r"[A-Za-zÄÖÜäöüß0-9]+(?:[\u00ad-][A-Za-zÄÖÜäöüß0-9]+)*", text):
+    # 11.09.2026 (Reserve #5): geschützte Bindestriche U+2010/U+2011
+    # ("Spar‑Tipp", "Second‑Hand") sind ebenfalls Wort-intern – sonst
+    # entstanden Phantom-Fragmente ("Spar", "Heizungs"), die hunspell
+    # als Fehler meldeten und den Rechtschreib-Score drückten.
+    for m in re.finditer(r"[A-Za-zÄÖÜäöüß0-9]+(?:[\u00ad\u2010\u2011-][A-Za-zÄÖÜäöüß0-9]+)*", text):
         w = m.group(0)
         # Weiche Trennstellen (U+00AD, umbruch_guard) für alle Vergleiche
         # entfernen: "Sonder\u00adtillgungsmöglichkeiten" == "Sondertilgungsmöglichkeiten"
-        wnorm = w.replace("\u00ad", "")
+        wnorm = (w.replace("\u00ad", "").replace("\u2010", "-")
+                 .replace("\u2011", "-"))
         # Abkürzungen + Whitelist ignorieren
         if wnorm.lower().rstrip(".") in ABKUERZUNGEN or wnorm.lower() in whitelist:
             continue
@@ -271,7 +276,7 @@ def extract_words(body, whitelist):
         # Deutsch, aber nie ein eigenständig zu prüfendes Wort → überspringen.
         # (Hätte nach dem Bindestrich ein Wort-/Ziffernzeichen gestanden,
         # wäre es vom Token-Regex bereits als Kompositum mitgezogen worden.)
-        if m.end() < len(text) and text[m.end()] in "-\u00ad":
+        if m.end() < len(text) and text[m.end()] in "-\u00ad\u2010\u2011":
             continue
         words.append((w, m.start(), m.end()))
     return words
@@ -286,15 +291,27 @@ def batch_hunspell(words):
     """
     if not words:
         return set()
-    clean = [w.replace("\u00ad", "") for w in words]
+    clean = [w.replace("\u00ad", "").replace("\u2010", "-").replace("\u2011", "-")
+             for w in words]
+    # Whitelist schuetzt auch Bindestrich-KOMPONENTEN ("Frugalismus-Tricks"):
+    # freigestellte Teile werden durch ein sicheres bekanntes Nomen ersetzt,
+    # damit hunspell nur die echten Fremdteile prueft.
+    wl = load_whitelist()
+
+    def _probe(token: str) -> str:
+        if "-" not in token:
+            return token
+        return "-".join("Haus" if part.lower() in wl else part
+                        for part in token.split("-"))
+    probes = [_probe(c) for c in clean]
     r = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
-                       input="\n".join(clean) + "\n",
+                       input="\n".join(probes) + "\n",
                        capture_output=True, text=True)
     out = r.stdout.strip()
     if not out:
         return set()
     bad_clean = set(out.split("\n"))
-    return {w for w, c in zip(words, clean) if c in bad_clean}
+    return {w for w, pr in zip(words, probes) if pr in bad_clean}
 
 
 def is_noun_capitalized(word):
@@ -305,7 +322,7 @@ def is_noun_capitalized(word):
       Adjektiv oder Pronomen – z. B. 'erreichst', 'deine', 'finanzielle').
     - Die GROSSform muss ein Hunspell-TREFFER sein.
     Nur dann liegt ein kleingeschriebenes Nomen vor ('geld'→'Geld')."""
-    word = word.replace("\u00ad", "")
+    word = word.replace("\u00ad", "").replace("\u2010", "-").replace("\u2011", "-")
     if not word or word[0].isupper():
         return False
     # Kleinform: bekannt → kein Nomen-Fall (Verb/Adjektiv)
@@ -322,7 +339,7 @@ def is_noun_capitalized(word):
 
 def suggestions(word):
     """Hunspell-Korrekturvorschläge."""
-    word = word.replace("\u00ad", "")
+    word = word.replace("\u00ad", "").replace("\u2010", "-").replace("\u2011", "-")
     r = subprocess.run(["hunspell", "-d", "de_DE"],
                        input=word + "\n", capture_output=True, text=True)
     lines = [l for l in r.stdout.strip().split("\n") if l.strip()]

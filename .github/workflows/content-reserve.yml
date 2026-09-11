@@ -1,46 +1,45 @@
 # ============================================================
 #  CONTENT-RESERVE (täglicher Vorrat) – Produktionslinie v2
 #
-#  REPARATUR 08.09.2026 (Fehler-Issue #224, Dauer-„Stock shortage“):
-#  Die alte Stufe erzeugte nur ROH-Entwürfe (`engine_generate.py
-#  --reserve-only`) und verlangte im selben Lauf dafür Reife-Zertifikate
-#  (reserve_readiness.py) – ein Widerspruch: Roh-Entwürfe bestehen die
-#  Produktions-Gates prinzipbedingt nie. Ergebnis: readiness = 0 an jedem
-#  Tag, tägliche Fehler-Alerts, Pool mit unbrauchbaren Kandidaten (inkl.
-#  3× Duplikat „50-30-20-Regel“).
+#  REPARATUR 11.09.2026 (Fehler #247, „dauerhaft auf Premium-Level“):
+#  Drei Befunde ließen den Lauf nachts dauerhaft rot werden, obwohl der
+#  Pool fast voll war:
+#    1. KI-Polish verklebte die kanonische Partner-CTA („Ddiebesten“)
+#       IMMER WIEDER NEU – die deterministische CTA-Hygiene lief nur
+#       VOR der Kette. Sie läuft jetzt mehrfach (fix_cta_hygiene.py in
+#       der Finisher-Kette, nach jedem KI-Schritt + am Ende) und ebenso
+#       in der Live-Engine.
+#    2. Mehrere harte Publish-Gate-Regeln hatten in der Reserve-Kette
+#       kein Gegenstück: R5-ABSATZ-HART (r5_absatz_splitter.py war in
+#       KEINEM Workflow verdrahtet), R5-Titel-Truncation (falsches
+#       „prüfe“-Endwort), absolute/fehlgeroutete /go/-Links
+#       (tagesgeld in einem Gas-Artikel, ohne rel=sponsored) und
+#       verwaiste Hard-Breaks in Listen/FAQ (Typografie-Score).
+#    3. Die Nachproduktion lief VOR der Veredelung: waren am Morgen
+#       noch unveredelte Kandidaten vom Vortag da, blockierte der
+#       In-Flight-Schutz jede Neuproduktion – auch NACHDEM die Charge
+#       im selben Lauf zertifiziert war. Stufe 4 (Konvergenz) prüft das
+#       frische Zertifikat und schiebt GENAU die fehlende Stückzahl
+#       nach, veredelt und zertifiziert sie im selben Lauf.
 #
-#  Die Reserve-Stufe ist jetzt eine echte DREI-STUFEN-PRODUKTIONSLINIE,
-#  spiegelbildlich zur Content-Engine v2 (Mo/Mi/Fr):
+#  Drei Stufen + Konvergenz, spiegelbildlich zur Content-Engine v2:
 #    Stufe 1 – PRODUKTION:   engine_generate.py --reserve-only
-#                             (readiness-aware: produziert nur, wenn der
-#                             Zertifikats-Pool unter RESERVE_TARGET liegt;
-#                             max. 2 neue Kandidaten/Tag, keine Themen-
-#                             Duplikate, In-Flight-Schutz)
-#    Stufe 2 – VEREDELUNG:    reserve_finisher.py --finish
-#                             (Phase-2/3-Äquivalent: dieselbe Heiler-Kette
-#                             wie die Live-Engine – Rechtschreibung,
-#                             Grammatik, Typografie, Länge, E-E-A-T,
-#                             Affiliate-/go/-Gateway, Meta/Pin-SEO,
-#                             Kurzantwort, Cover – NUR für Pool-Kandidaten,
-#                             NIE für den Live-Bestand; katastrophale
-#                             Fehler rollen die Snapshots zurück)
-#    Stufe 3 – ZERTIFIZIERUNG: reserve_readiness.py
-#                             (echte Produktions-Gates: quality_score
-#                             ≥ 0.85 + hugo + publish_gate STRICT inkl.
-#                             /go/-Render-Beweis; hash-gesicherte
-#                             Zertifikate in data/reserve-readiness.json)
+#    Stufe 2 – VEREDELUNG:   reserve_finisher.py --finish
+#    Stufe 3 – ZERTIFIZIERUNG: reserve_readiness.py (echte Gates,
+#                             hash-gesicherte Zertifikate)
+#    Stufe 4 – KONVERGENZ:   Nachschub bis RESERVE_TARGET, dann erneut
+#                             Stufe 1–3 (höchstens eine Zusatzrunde)
 #
-#  Der harte End-Gate „Stock shortage must not look successful“ bleibt:
-#  Erst wenn ≥ RESERVE_TARGET Kandidaten GATE-FERTIG (nicht nur „vorhanden“)
-#  sind, gilt der Lauf als grün. Jeder Engpass nennt jetzt die konkrete
-#  Diagnose pro Kandidat (Score-Teile bzw. Gate-Grund).
+#  Der harte End-Gate „Stock shortage must not look successful“ liest
+#  das geschriebene Zertifikat (data/reserve-readiness.json), nicht einen
+#  Step-Exit-Code: erst ≥ RESERVE_TARGET gate-fertige Kandidaten = grün.
 # ============================================================
 name: Content-Reserve (täglicher Vorrat)
 
 on:
   schedule:
     - cron: "25 3 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch: { }
 
 permissions:
   contents: write
@@ -63,7 +62,7 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - run: pip install pyyaml cryptography pillow pillow-avif-plugin fonttools brotli
+      - run: pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli
       # Hugo Extended, verifiziert + PyPI-Fallback (Flake-Klasse #209/#220)
       - uses: ./.github/actions/install-hugo
         with:
@@ -72,7 +71,23 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq hunspell hunspell-de-de
 
-      # ================= STUFE 1: PRODUKTION =================
+      # ================= SABOTAGESCHUTZ =================
+      # Jeder Heiler, der den Pool umbaut, muss erst seinen Selbsttest
+      # bestehen (gleicher Kodex wie die Live-Engine): ein kaputter
+      # Gate-/Heiler darf nicht still weiterarbeiten.
+      - name: Selbsttests der Reserve-Produktionslinie
+        run: |
+          python3 scripts/engine_generate.py --selftest
+          python3 scripts/reserve_pool.py --selftest
+          python3 scripts/reserve_finisher.py --selftest
+          python3 scripts/fix_cta_hygiene.py --selftest
+          python3 scripts/r5_absatz_splitter.py --selftest
+          python3 scripts/fix_linebreaks.py --selftest
+          python3 scripts/reserve_gate.py --selftest
+          python3 scripts/affiliate_marketer.py  # Routing-Selbsttest, dann Report (read-only)
+
+      # ================= RUNDE 1 =================
+      # Stufe 1 – PRODUKTION
       - name: Stufe 1 – Kandidaten erzeugen (nur bei echtem Bedarf)
         id: stock
         continue-on-error: true
@@ -83,7 +98,7 @@ jobs:
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
         run: python3 scripts/engine_generate.py --reserve-only
 
-      # ================= STUFE 2: VEREDELUNG =================
+      # Stufe 2 – VEREDELUNG
       - name: Stufe 2 – Kandidaten veredeln (Phase-2/3-Kette, nur Pool)
         id: finish
         continue-on-error: true
@@ -94,17 +109,50 @@ jobs:
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
         run: python3 scripts/reserve_finisher.py --finish
 
-      # ================= STUFE 3: ZERTIFIZIERUNG =================
+      # Stufe 3 – ZERTIFIZIERUNG
       - name: Stufe 3 – Reife durch Produktions-Gates beweisen
         id: readiness
         continue-on-error: true
         run: python3 scripts/reserve_readiness.py
+
+      # ================= RUNDE 2 (KONVERGENZ) =================
+      # Die Charge von gestern/heute ist jetzt veredelt UND zertifiziert.
+      # Nur wenn danach noch Zertifikate fehlen, wird bedarfsgerecht nach-
+      # produziert (der In-Flight-Schutz blockiert dann nicht mehr),
+      # sofort veredelt und erneut zertifiziert – alles im selben Lauf,
+      # damit der Pool über Nacht RESERVE_TARGET erreicht statt einen
+      # weiteren Tag zu fehlen.
+      - name: Stufe 4 – Konvergenz-Nachschub bis zum Zielbestand
+        id: convergence
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
+          AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
+          RESERVE_TARGET: ${{ vars.RESERVE_TARGET || '6' }}
+        run: |
+          set -u
+          need=$(python3 -c "import json; d=json.load(open('data/reserve-readiness.json')); print(max(0, int(d['target']) - int(d['ready'])))")
+          if [ "$need" -eq 0 ]; then
+            echo "✅ Pool bereits vollständig zertifiziert – kein Nachschub nötig."
+            exit 0
+          fi
+          echo "🛟 Noch $need zertifizierte(s) Ziel fehlt – Nachschub-Charge läuft."
+          python3 scripts/engine_generate.py --reserve-only
+          python3 scripts/reserve_finisher.py --finish
+          python3 scripts/reserve_readiness.py
 
       - name: Entwürfe, Zertifikate und Reporte sichern (auch bei Engpass)
         if: ${{ !cancelled() }}
         run: |
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
+          # data/reserve-readiness.json ist versioniert (Hash-Zertifikat,
+          # auch nach engpass-bedingtem Abbruch sichtbar); die Lauf-Reports
+          # bleiben absichtlich gitignoriert, sonst erzeugt ihr Zeitstempel
+          # nächtliche Leer-Commits. Ihre Diagnose steht im Actions-Log.
           git add -A
           if ! git diff --cached --quiet; then
             git commit -m "content: unabhängige Redaktionsreserve auffüllen"
@@ -114,13 +162,4 @@ jobs:
       # ================= HARTES END-GATE =================
       - name: Stock shortage must not look successful
         if: ${{ !cancelled() }}
-        run: |
-          if test '${{ steps.readiness.outcome }}' = success; then
-            echo "✅ Reserve-Pool gate-fertig (RESERVE_TARGET erreicht)."
-          else
-            echo "🛑 RESERVE-ENGPAß: Weniger als $RESERVE_TARGET Kandidaten sind"
-            echo "   gate-fertig. Diagnose: Schritt 'Stufe 3' im Log und"
-            echo "   RESERVE-FINISH-REPORT.md (Score-Teile je Kandidat)."
-            echo "   Der Engpass ist KEIN Schein-Erfolg – Lauf endet rot."
-            exit 1
-          fi
+        run: python3 scripts/reserve_gate.py

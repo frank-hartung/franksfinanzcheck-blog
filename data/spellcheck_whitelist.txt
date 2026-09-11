@@ -1447,3 +1447,27 @@ rücklaufgeeignet
 
 young
 
+
+# Reserve-Korrektur #247 (11.09.2026): legitime Komposita/Fachbegriffe,
+# die das 2017er-Frami-Wörterbuch (CI-Basis) nicht kennt
+vertragsunterlagen
+nachfragewelle
+rußablagerungen
+rußschicht
+wohlfühltemperatur
+durchheizt
+thermostatkopf
+checkup
+secondhand
+repair
+gadget
+gadgets
+hype
+mindset
+provisionsanteil
+restaurantessen
+beiseitelegst
+prepping
+neukaufen
+regalfächern
+regalfach

@@ -107,30 +107,17 @@ def _slug_tail(slug: str) -> str:
     return m.group(1) if m else slug
 
 
-# REPARATUR 09.09.2026 (Reserve #4): deterministische Hygiene der kanonischen
-# Partner-CTA-Zeile. KI-Polish (bzw. der reserve-only-Generator) verschmilzt
-# wiederholt „Die besten“ zu „Ddiebesten“ (Lektorat-L13 „Doppel-Anlauf“; wird
-# dort NUR gemeldet, nie automatisch gefixt). Genau deshalb blieb der
-# Rechtschreib-Teil der Reserve-Kandidaten an jedem Lauf bei 0.00, obwohl die
-# Heiler-/Zertifizierungsstufe in CI lief. Diese exakte, kanonische
-# Korruption wird deterministisch repariert – VOR allen Heiler-/KI-Läufen und
-# unabhängig von der API-Verfügbarkeit.
-CANONICAL_CTA_RE = re.compile(
-    r"\bDdiebesten Tarife findest du über unseren Partner[-‑]Vergleich")
-
-
+# REPARATUR 09.09.2026 (Reserve #4) + 11.09.2026 (Reserve #5):
+# Die kanonische CTA-Reparatur wohnt jetzt als gemeinsamer, selbsttestender
+# Heiler in scripts/fix_cta_hygiene.py und wird MEHRFACH in der Kette
+# gefahren (siehe HEALER_CHAIN): die KI-Schritte (v. a. profi_polish)
+# erzeugen das Klebewort „Ddiebesten“ aus der kanonischen Partner-CTA
+# immer wieder NEU – ein einmaliger Hygiene-Pass VOR der Kette konnte den
+# Befund also nicht dauerhaft schließen (Workflow #247).
 def _canonical_cta_hygiene(index: Path) -> int:
-    """Repariert die kanonische CTA-Zeile, falls die KI sie korrumpiert hat.
-
-    Rückgabe: Anzahl der Korrekturen (0 = nichts zu tun). Schreibend nur bei
-    Fund – kein churn, wenn der Text bereits sauber ist.
-    """
-    text = index.read_text(encoding="utf-8")
-    new, n = CANONICAL_CTA_RE.subn(
-        "Die besten Tarife findest du über unseren Partner-Vergleich", text)
-    if n:
-        index.write_text(new, encoding="utf-8")
-    return n
+    """Delegiert an fix_cta_hygiene (SSOT für beide Produktionslinien)."""
+    import fix_cta_hygiene as cta
+    return cta.hygiene_file(index)
 
 
 def lift_to_today(index: Path) -> Path:
@@ -199,6 +186,9 @@ HEALER_CHAIN = [
     # brauchbarer Kandidaten, weil Polish/Spellcheck/Grammar alle drafts
     # stumm übersprangen).
     ("profi_polish.py", ["--include-drafts"], "file"),
+    # Der Polish kann die kanonische Partner-CTA verkleben ("Ddiebesten")
+    # – deterministisch zurücksetzen, bevor die übrigen Heiler laufen.
+    ("fix_cta_hygiene.py", [], "file"),
     ("fix_linebreaks.py", [], "file"),
     ("fix_dash_und.py", ["--fix"]),
     ("fix_dash_eol.py", ["--fix"]),
@@ -213,6 +203,8 @@ HEALER_CHAIN = [
     ("emoji_guard.py", ["--fix"]),
     ("math_guard.py", ["--fix", "--new-only"]),
     ("lektor_guard.py", ["--fix", "--ai", "--new-only"]),
+    # Lektorat-KI kann Textstellen neu verschmelzen – CTA erneut kanonisieren.
+    ("fix_cta_hygiene.py", ["--include-drafts"], "corpus"),
     ("brand_guard.py", ["--fix"]),
     ("table_guard.py", ["--fix", "--new-only"]),
     ("affiliate_link_check.py", ["--fix"]),
@@ -227,6 +219,18 @@ HEALER_CHAIN = [
     ("check_covers.py", ["--fix"]),
     ("generate_kurzantworten.py", [], "file"),
     ("affiliate_profi_check.py", ["--fix"]),
+    # REPARATUR 11.09.2026 (Reserve #5, #247): Der deterministische
+    # R5-Absatz-Splitter war vorher in KEINEM Workflow verdrahtet – frische
+    # KI-Artikel mit >6 Sätzen/Absatz scheiterten dauerhaft am harten
+    # R5-ABSATZ-HART-Gate der Publish-Gate-Prüfung. Datei-bezirkelt, damit
+    # der Live-Bestand in der Reserve-Queue nicht angefasst wird.
+    ("r5_absatz_splitter.py", ["--apply"], "file"),
+    # Zweiter Zeilenumbruch-Pass NACH allen KI-Umschreibungen: entfernt
+    # verwaiste Hard-Break-Spuren in Listen/FAQ/Überschriften (Typografie-
+    # Score), ohne dass KI-Quota gebraucht wird (reine Selbstheilung).
+    ("fix_linebreaks.py", ["--heal-only"], "file"),
+    # Letztes deterministisches Wort zur CTA-Kanonic vor der Zertifizierung.
+    ("fix_cta_hygiene.py", [], "file"),
     ("fix_url_hygiene.py", ["--fix"]),
 ]
 
