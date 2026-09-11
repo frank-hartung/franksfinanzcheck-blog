@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-11 18:23 UTC · Modus: FIX
+**Stand:** 2026-09-11 19:16 UTC · Modus: FIX
 
 **Domain-Status (Pinterest):** 🔴 GESPERRT – Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026. (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)
 
@@ -10,13 +10,11 @@
 
 - 🟡 [B5] 2026-08-10-dsl-wechselbonus-sichern: Originalitäts-Quote 38 % (< 45 %)
 - 🟡 [B2] 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
-- 🔴 [B3] 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 - 🟡 [B5] 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas: Originalitäts-Quote 41 % (< 45 %)
 - 🟡 [B2] 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b, \bhöchst(?:e|er|es)\b)
 - 🟡 [B2] 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B5] 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren: Originalitäts-Quote 42 % (< 45 %)
 - 🟡 [B2] 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst: Superlativ ohne Einschränkung (\bgünstigst(?:e|er|es)\b)
-- 🔴 [B3] 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 - 🟡 [B5] 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst: Originalitäts-Quote 40 % (< 45 %)
 - 🟡 [B1] 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden: Keyword-Stuffing (ein Signal): Text: 'kwh' ×44 (4.6 % Dichte)
 - 🟡 [B2] 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
@@ -45,10 +43,6 @@
 - 🟡 [B2] 2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 
-**Geheilt:**
-- ✅ 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas: B3-Disclosure eingefügt
-- ✅ 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst: B3-Disclosure eingefügt
-
 ## F: RSS-Feed /index.xml (F1–F6)
 
 - 🔴 [F4] Item 1: Cover fehlt im Build (images/covers/2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer.jpg)
@@ -71,7 +65,7 @@
 
 ## Fazit
 
-🔴 6 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
+🔴 4 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
 
 ---
 _Wache: Blog B1–B8 · Feed F1–F6 · CSV C1–C8 · API A1–A4 – Dauerauftrag, niemals Content-Verlust._
