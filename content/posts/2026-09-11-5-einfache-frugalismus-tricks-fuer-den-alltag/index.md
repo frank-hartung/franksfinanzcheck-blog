@@ -16,7 +16,7 @@ ai_generated: true
 ki_redaktion: "claude"
 ki_redaktion_status: "review"
 cover:
-  image: "images/covers/2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag.jpg"
+  image: "images/covers/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag.jpg"
   alt: "5 einfache Frugalismus-Tricks für den Alltag"
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "5 einfache Frugalismus-Tricks für den Alltag"

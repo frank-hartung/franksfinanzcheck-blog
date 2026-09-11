@@ -3,8 +3,9 @@ title: "Heizkosten senken: Mit diesen Strategien sparst du sofort"
 description: "Effektiv Heizkosten senken: Vermeide teure Fehler, nutze clevere Heizung Sparen Tipps und bereite deine Wohnung optimal auf den nächsten Winter vor."
 date: 2026-09-07T20:51:42Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-09-07T21:06:47Z
-cadence_grund: "quality-score: Score 0.768 < 0.80 (schwach: spelling 0.00, meta 0.85, readability 0.95) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174)"
+cadence_grund: "quality-hold aufgehoben (#251): Score 0.870 ≥ 0.80 – Re-Queue für vollen Gate-Durchlauf"
 tags: ["Heizkosten senken", "Heizung sparen Tipps", "Gas Abschlag anpassen", "Winter Vorbereitung Wohnung"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

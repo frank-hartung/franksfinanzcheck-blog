@@ -80,6 +80,15 @@ jobs:
       # dadurch blockierte holds werden entblockt (--heal-holds), BEVOR
       # cadence_guard promotet – so geht kein Post mit heilbarem
       # URL-Fehler live bzw. in die Kapazität.
+      #
+      # QUALITY-HOLD-SELBSTHEILUNG (PREMIUM-FIX #251, 11.09.2026): Holds mit
+      # `cadence_grund: "quality-score: …"` stammten aus zwei behobenen
+      # Score-Fehlern (Fazit-/FAQ-Schablonen → uniqueness 0.0; Wörterbuch-
+      # Lücken → spelling 0.00). Sie werden hier NEU bewertet: erreicht der
+      # Score wieder ≥ 0.80, wird der Hold in eine Re-Queue verwandelt
+      # (cadence_wait: true) und durchläuft beim nächsten Schritt den vollen
+      # Gate-Durchlauf. Falsch geparkte Artikel verstopfen so nie wieder
+      # dauerhaft die Pipeline.
       - name: Phase 0.5 – Kadenz-Gate sicherstellen (Selbsttest + Selbstheilung)
         # PREM-AUDIT 26.08.2026: nach jeder Kadenz-Heilung (Zurückstufung
         # → draft, URL verschwindet aus dem Build) sofort die kontextuellen
@@ -90,6 +99,8 @@ jobs:
           python3 scripts/fix_url_hygiene.py --selftest
           python3 scripts/fix_url_hygiene.py --fix
           python3 scripts/fix_url_hygiene.py --heal-holds
+          python3 scripts/requeue_quality_holds.py --selftest
+          python3 scripts/requeue_quality_holds.py --fix
           python3 scripts/cadence_guard.py --selftest
           python3 scripts/cadence_guard.py --fix
           python3 scripts/fm_boundary_guard.py --selftest

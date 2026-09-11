@@ -30,8 +30,34 @@ import sys
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
+import template_boilerplate  # noqa: E402  (SSOT Fazit-/FAQ-Bausteine, #251)
+
 THRESHOLD_PUBLISH = 0.85
 THRESHOLD_REVIEW = 0.80
+
+# Rechtschreib-Befunde, die ECHTE Fehler sind (harte Abwertung): eindeutiger
+# Tippfehler, bekannte Fehl-Phrase (z. B. „dns server“ → „DNS-Server“),
+# kleingeschriebenes Nomen.
+SPELLING_HARD_TYPES = ("typo", "phrase", "noun_case")
+# Wörterbuch-Lücken: gültige deutsche Komposita/Fachbegriffe, die hunspell
+# de_DE nicht kennt („Gasanbieterwechsel“, „abrücken“, „Thermostat“ …).
+# Das sind KEINE Rechtschreibfehler – nur schwach werten, damit ein lücken-
+# haftes Wörterbuch nicht den ganzen Artikel sperrt (Issue #251: „spelling
+# 0.00“ → Score < 0.80 → Massen-Parking → Tagesdefizit).
+SPELLING_SOFT_TYPES = ("unknown",)
+
+
+def _spelling_score(problems):
+    """Rechtschreib-Score 0–1 aus den Spellcheck-Befunden.
+
+    Nur echte Fehler (typo/phrase/noun_case) zählen hart (je −0.1);
+    Wörterbuch-Lücken (unknown) zählen schwach (je −0.02). Stil-Befunde
+    (Satzanfang, Zeichensetzung, Anrede, „zuhause“ …) gehören zur Typografie/
+    Grammatik und fließen hier bewusst NICHT ein.
+    """
+    hard = [p for p in problems if p.get("type") in SPELLING_HARD_TYPES]
+    soft = [p for p in problems if p.get("type") in SPELLING_SOFT_TYPES]
+    return max(0.0, 1.0 - len(hard) * 0.1 - len(soft) * 0.02)
 
 # Typografische Fehler (Detect-Komponente)
 RE_DBL_SPACE = re.compile(r"[^ \t]  +[^ \t]")
@@ -64,9 +90,9 @@ def score_article(path: str) -> dict:
         wl = sc.load_whitelist()
         problems = sc.analyze_article({"body": a["body"], "content": a["content"],
                                        "fm": "", "meta": a["meta"]}, wl)
-        # Nur Rechtschreib-/Groß-Klein-Fehler zählen (keine Hinweise)
-        real = [p for p in problems if p.get("type") not in ("entity", "nbsp")]
-        parts["spelling"] = max(0.0, 1.0 - len(real) * 0.1)
+        # Issue #251: nur ECHTE Fehler hart werten – Wörterbuch-Lücken sind
+        # keine Rechtschreibfehler, sonst sperrt hunspell de_DE ganze Artikel.
+        parts["spelling"] = _spelling_score(problems)
     except Exception:
         parts["spelling"] = 0.5  # unbekannt
 
@@ -142,26 +168,13 @@ def score_article(path: str) -> dict:
     # echte Text-Dopplung messen, nicht Template-Repetition. Deshalb wird jetzt
     # JEDE ganze Zeile entfernt, die einen bekannten Baustein trägt.
     def _strip_boilerplate(text: str) -> str:
-        def _drop(pattern: str, flags: int = 0) -> None:
-            nonlocal text
-            text = re.sub(r"(?m)^[^\n]*" + pattern + r"[^\n]*$\n?",
-                          " ", text, flags=flags)
-
-        # Hinweis: Die KI setzt in „Schnell-Tipp“/„Spar-Tipp“ teils den
-        # geschützten Bindestrich U+2011 „‑“ statt des ASCII-Hyphens – deshalb
-        # erlaubt die Klasse [-‑\u2010] beide (Befund Reserve #4 09.09.2026).
-        _drop(r"💡[^\n]*Schnell[-‑\u2010]?Tipp[^\n]*")   # 💡 Schnell-Tipp von FranksFinanzcheck
-        _drop(r"Spar[-‑\u2010]?Tipp zwischendurch")      # 💶 Spar-Tipp zwischendurch: … Vergleichen & sparen
-        _drop(r"Wichtiger Hinweis")             # „keine Anlage-/Rechts-/Steuerberatung“-Klausel
-        _drop(r"Lesetipps zum Weitersparen")
-        _drop(r"Das Wichtigste in Kurzform")
-        _drop(r"Das Wichtigste in Kürze")
-        _drop(r"👉[^\n]*")                       # CTA „Jetzt vergleichen und sparen“
-        # Affiliate-Disclosure in ALLEN Varianten & Groß-/Kleinschreibung
-        # (inkl. kleingeschriebenem „dieser Artikel“, „Transparenz:“-Vorspann).
-        text = re.sub(r"(?im)^[^\n]*affiliate[^\n]*?(werbung|provision)[^\n]*$\n?",
-                      " ", text)
-        return text
+        # Deterministische Fazit-/FAQ-Blöcke der Fazit-Schmiede ZENTRAL
+        # entfernen (Issue #251): Template-Repetition ≠ Text-Dopplung – sonst
+        # kollidiert jeder Artikel über den geteilten „Hebel“-Satz + Vergleichs-
+        # CTA mit 10+ unverwandten Artikeln (uniqueness 0.0 → Massen-Parking).
+        # Marketing-/Affiliate-Bausteine kommen aus DERSELBEN Quelle wie
+        # check_uniqueness (scripts/template_boilerplate.py) – keine Drift.
+        return template_boilerplate.strip_template_boilerplate(text)
     try:
         import check_uniqueness as cu
         arts = {}

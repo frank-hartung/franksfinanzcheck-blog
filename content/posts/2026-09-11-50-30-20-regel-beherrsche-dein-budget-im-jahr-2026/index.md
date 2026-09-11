@@ -20,7 +20,7 @@ kurzantwort: "Die 50-30-20-Regel teilt dein Nettoeinkommen in 50 % notwendige A
 
 inspiration: Die 50-30-20-Regel einfach erklärt
 cover:
-  image: "images/covers/2026-09-08-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026.jpg"
+  image: "images/covers/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026.jpg"
   alt: "50-30-20-Regel: Beherrsche dein Budget"
   caption: "Tipp von FranksFinanzcheck"
 ---

@@ -17,7 +17,7 @@ ai_provider: "Content-Engine v2"
 engine_level: "profi"
 inspiration: "Heizung fit für den Winter: Sparen beginnt im Spätsommer"
 cover:
-  image: "images/covers/2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer.jpg"
+  image: "images/covers/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer.jpg"
   alt: "Günstig durch den Winter: Heizungs-Check im Spätsommer"
   caption: "Tipp von FranksFinanzcheck"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."

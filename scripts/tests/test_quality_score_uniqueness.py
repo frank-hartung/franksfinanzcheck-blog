@@ -106,5 +106,51 @@ class UniquenessBoilerplateTests(unittest.TestCase):
         self.assertLess(self._uniqueness(a), 1.0)
 
 
+# Kanonischer Fazit-/FAQ-Baustein der Fazit-Schmiede (scripts/fazit_schmiede.py):
+# deterministic, nahezu wortgleich in jedem automatisch veredelten Artikel.
+FAZIT_SCHMIEDE_BOILERPLATE = (
+    "## Fazit: Testthema\n"
+    "Sich gezielt mit dem Thema **Testthema** zu beschäftigen, ist einer der "
+    "einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und "
+    "bares Geld zu sparen. Fang am besten heute an, vergleiche die Angebote "
+    "und sichere dir deine Ersparnis! 💸🚀\n\n"
+    "## Häufige Fragen\n"
+    "### Wie starte ich am besten?\n"
+    "Genau jetzt und ohne Aufwand – der Einstieg ist in wenigen Minuten erledigt.\n"
+)
+
+
+class FazitSchmiedeBoilerplateTests(unittest.TestCase):
+    """Issue #251: geteilte Fazit-/FAQ-Schablonen sind KEINE Text-Dopplung."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.posts = Path(self.tmp.name) / "content" / "posts"
+        self.posts.mkdir(parents=True)
+
+    def _uniqueness(self, index: Path) -> float:
+        old = qs.BLOG_DIR
+        qs.BLOG_DIR = str(Path(self.tmp.name))
+        try:
+            return qs.score_article(str(index))["parts"]["uniqueness"]
+        finally:
+            qs.BLOG_DIR = old
+
+    def test_shared_fazit_faq_boilerplate_counts_as_unique(self):
+        # Zwei Artikel mit EINZIGARTIGEM Fließtext, aber identischem
+        # Fazit-Schmiede-Baustein -> vor #251: uniqueness 0.0 (Massen-Parking).
+        alpha = _post(self.posts, "alpha", PEER_ALPHA + "\n\n" + FAZIT_SCHMIEDE_BOILERPLATE)
+        _post(self.posts, "beta", PEER_BETA + "\n\n" + FAZIT_SCHMIEDE_BOILERPLATE)
+        self.assertEqual(self._uniqueness(alpha), 1.0)
+
+    def test_real_duplicate_inside_body_still_detected(self):
+        # Teilt der FLIESSTEXT echten Inhalt, wird weiterhin erkannt – der
+        # Fazit-Strip darf keine echte Dopplung im Artikelkörper schlucken.
+        a = _post(self.posts, "delta", REAL_SHARED + "\n\n" + FAZIT_SCHMIEDE_BOILERPLATE)
+        _post(self.posts, "epsilon", REAL_SHARED + "\n\n" + FAZIT_SCHMIEDE_BOILERPLATE)
+        self.assertLess(self._uniqueness(a), 1.0)
+
+
 if __name__ == "__main__":
     unittest.main()

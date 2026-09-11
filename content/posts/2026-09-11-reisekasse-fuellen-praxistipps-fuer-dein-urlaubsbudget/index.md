@@ -4,8 +4,9 @@ title: "Reisekasse füllen: Praxistipps für dein Urlaubsbudget"
 description: Wer effektiv seine Reisekasse füllen möchte, braucht System. Erfahre, wie du mit Cashback Tipps und Fixkosten-Optimierung hunderte Euro extra sparst.
 date: 2026-09-11T11:17:28Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-09-11T11:29:40Z
-cadence_grund: "quality-score: Score 0.726 < 0.80 (schwach: spelling 0.00, readability 0.75, meta 0.85) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174)"
+cadence_grund: "quality-hold aufgehoben (#251): Score 0.848 ≥ 0.80 – Re-Queue für vollen Gate-Durchlauf"
 tags: ["Reisekasse füllen", "Urlaubsbudget", "Geld für Urlaub sparen", "Cashback Tipps"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"

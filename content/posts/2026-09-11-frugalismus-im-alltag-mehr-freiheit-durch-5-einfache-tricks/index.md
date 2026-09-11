@@ -21,7 +21,7 @@ kurzantwort: "Frugalismus heißt bewusster Konsum statt Verzicht: Wer seine grö
 
 inspiration: 5 einfache Frugalismus-Tricks für den Alltag
 cover:
-  image: "images/covers/2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks.jpg"
+  image: "images/covers/2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks.jpg"
   alt: "Frugalismus im Alltag: Mehr Freiheit durch 5 einfache Tricks"
   caption: "Tipp von FranksFinanzcheck"
 ---

@@ -3,8 +3,9 @@ title: "Stromfresser finden: Energiediebe im Haushalt stoppen"
 description: Effektiv Stromfresser finden und Kosten senken. Erfahre, welche Geräte heimlich Energie ziehen und wie du deine Stromrechnung dauerhaft reduzierst.
 date: 2026-09-07T18:42:52Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-09-07T18:56:01Z
-cadence_grund: "quality-score: Score 0.766 < 0.80 (schwach: spelling 0.00, meta 0.85, readability 0.95) – Human-Review; Score-Defekte am 05.09. behoben (Wache #174)"
+cadence_grund: "quality-hold aufgehoben (#251): Score 0.878 ≥ 0.80 – Re-Queue für vollen Gate-Durchlauf"
 tags: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
