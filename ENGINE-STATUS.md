@@ -3,6 +3,6 @@
 **Letzter Lauf:** 2026-09-11 20:24 UTC
 **Status:** OK
 
-3 Artikel live heute (3 NEU · 0 recycelt · 11 Entwurf) | Ziel: 2-2 LIVE an Mo/Mi/Fr
+2 Artikel live heute (2 NEU · 0 recycelt · 11 Entwurf · 4 hold, 2 Re-Queue) | Ziel: 2-3 LIVE an Mo/Mi/Fr
 
 _Wird bei jedem Lauf der Content-Engine v2 aktualisiert._

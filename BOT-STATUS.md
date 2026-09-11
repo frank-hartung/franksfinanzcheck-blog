@@ -1,17 +1,17 @@
 # 🤖 Bot-Status
 
-> Automatisch aktualisiert: 11.09.2026 20:01 Uhr (lokal)
+> Automatisch aktualisiert: 11.09.2026 20:24 Uhr (lokal)
 
 ## Heutiger Stand
 
 - **Publikationstag:** ja (Mo/Mi/Fr)
 - **Veröffentlicht heute:** 2/3 Artikel (Mindestziel 2)
-- **Entwürfe heute:** 13
+- **Entwürfe heute:** 11
 
 ## System
 
 - **Themenpool:** 175 Themen, **142 frei**
-- **Letzter Content-Tag:** 2026-09-11 (Fr.): 2 live, 13 Entwurf(e)
+- **Letzter Content-Tag:** 2026-09-11 (Fr.): 2 live, 11 Entwurf(e)
 - **Tageslimit:** 2–3 Artikel pro Publikationstag (Mo/Mi/Fr; MIN_ARTIKEL_PRO_TAG / MAX_ARTIKEL_PRO_TAG)
 
 ## Bei Problemen
