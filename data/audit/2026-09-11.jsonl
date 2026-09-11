@@ -8,3 +8,4 @@
 {"ts": "2026-09-11T08:19:16Z", "module": "fix_spaces", "action": "apply", "input": {"files": 51}, "output": {"fixes": 768}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-09-11T08:21:52Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 6}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-09-11T08:22:12Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug"]}, "output": {"gated": ["2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug"], "demoted": []}, "status": "gated", "critical": false, "commit": null}
+{"ts": "2026-09-11T08:59:36Z", "module": "secrets_age_guard", "action": "verify", "input": {"vars": ["PINTEREST_ACCESS_TOKEN"]}, "output": {"PINTEREST_ACCESS_TOKEN": "dead"}, "status": "error", "critical": true, "commit": null}

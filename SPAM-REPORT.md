@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-11 08:28 UTC · Modus: FIX
+**Stand:** 2026-09-11 08:59 UTC · Modus: FIX
 
 **Domain-Status (Pinterest):** 🔴 GESPERRT – Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026. (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)
 
@@ -31,18 +31,12 @@
 - 🟡 [B2] 2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor: Superlativ ohne Einschränkung (\bhöchst(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag: Superlativ ohne Einschränkung (\bsofort\s+(?:sparen|auszahlung)\b)
-- 🔴 [B3] 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 - 🟡 [B2] 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b, \bgünstigst(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b, \bgünstigst(?:e|er|es)\b)
-- 🔴 [B3] 2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: Affiliate-Links ohne Werbekennzeichnung im Intro (UWG + Pinterest-Ad-Policy)
 - 🟡 [B5] 2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: Originalitäts-Quote 43 % (< 45 %)
 - 🟡 [B2] 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
-
-**Geheilt:**
-- ✅ 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag: B3-Disclosure eingefügt
-- ✅ 2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: B3-Disclosure eingefügt
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
@@ -62,7 +56,7 @@
 
 ## Fazit
 
-🔴 5 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
+🔴 3 harte Funde – Details oben (Heilung via --fix; API-Pausen werden NIE automatisch zurückgesetzt, nur per --reset-pause).
 
 ---
 _Wache: Blog B1–B8 · Feed F1–F6 · CSV C1–C8 · API A1–A4 – Dauerauftrag, niemals Content-Verlust._

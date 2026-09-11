@@ -1,9 +1,9 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-10 09:01 UTC · **Modus:** FIX
+**Stand:** 2026-09-11 08:59 UTC · **Modus:** FIX
 
-- Artikel: **43**
-- Geheilt: **2**
+- Artikel: **45**
+- Geheilt: **3**
 - Offene Issues: **0**
 - Covers: fehlende nachgezogen
 
@@ -58,11 +58,13 @@
 | ✅ | `2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor` *(draft)* | — |
 | ✅ | `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen` *(draft)* | — |
 | ✅ | `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` | — |
-| ✅ | `2026-09-10-5-einfache-frugalismus-tricks-fuer-den-alltag` *(draft)* | — |
-| ✅ | `2026-09-10-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` *(draft)* | — |
-| ✅ | `2026-09-10-finanzieller-puffer-wie-viel-notgroschen-ist-genug` *(draft)* | — |
-| ✅ | `2026-09-10-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks` *(draft)* | — |
-| ✅ | `2026-09-10-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` *(draft)* | — |
+| ✅ | `2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert` *(draft)* | — |
+| ✅ | `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag` *(draft)* | — |
+| ✅ | `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` *(draft)* | — |
+| ✅ | `2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug` *(draft)* | — |
+| ✅ | `2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks` *(draft)* | — |
+| ✅ | `2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe` *(draft)* | — |
+| ✅ | `2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` *(draft)* | — |
 
 ## Selbstheilung (diese Runde)
 
