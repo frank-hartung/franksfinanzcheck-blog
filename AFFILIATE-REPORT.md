@@ -1,6 +1,6 @@
 # 🤝 AFFILIATE-REPORT
 
-**Stand:** 2026-09-11 17:57 UTC · Modus: FIX
+**Stand:** 2026-09-11 18:00 UTC · Modus: CHECK
 
 Probleme: 0 · Geheilt: 0
 
