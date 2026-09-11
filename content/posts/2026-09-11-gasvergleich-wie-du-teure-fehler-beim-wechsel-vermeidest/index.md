@@ -2,11 +2,11 @@
 
 title: "Gasvergleich: Wie du teure Fehler beim Wechsel vermeidest"
 description: Mit einem Gasvergleich sparst du bares Geld. Erfahre hier, wie du Gastarife wechseln kannst, um deine Heizkosten dauerhaft zu senken.
-date: 2026-09-11T17:44:28Z
+date: 2026-09-11T20:26:29Z
 draft: true
 cadence_wait: true
-cadence_demoted: 2026-09-11T18:15:15Z
-cadence_grund: "quality-hold aufgehoben (#251): Score 0.860 ≥ 0.80 – Re-Queue für vollen Gate-Durchlauf"
+cadence_demoted: 2026-09-11T21:52:45Z
+cadence_grund: "kadenz: über Tages-Max"
 tags: ["Gasvergleich", "Gastarife wechseln", "Gaskosten sparen", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -26,6 +26,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 kurzantwort: "Ein Gasvergleich ermöglicht es Verbrauchern, durch den Wechsel zu einem günstigeren Anbieter jährlich bis zu 500 Euro oder mehr an Heizkosten einzusparen. Der Prozess lässt sich online in wenigen Minuten abschließen, wobei der neue Versorger in der Regel die formale Kündigung des bestehenden Vertrags übernimmt."
+social_posted: true
 ---
 
 Wer bis zum ersten Frost wartet, verbrennt jährlich bis zu 500 €. Die Preise für fossile Brennstoffe steigen im Herbst erfahrungsgemäß sprunghaft an. Ein rechtzeitiger **[Gasvergleich](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/)** [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor diesen hohen Fixkosten. Handle jetzt, bevor die Heizsaison deine Ersparnisse auffrisst.

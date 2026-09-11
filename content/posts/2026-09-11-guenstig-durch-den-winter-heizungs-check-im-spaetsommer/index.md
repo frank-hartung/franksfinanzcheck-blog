@@ -22,6 +22,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 kurzantwort: "Eine Heizungswartung im Spätsommer spart oft bares Geld, weil kleine Defekte früh auffallen und die Anlage sauber in die Heizsaison startet. Wenn du zusätzlich Thermostate prüfst, Fenster abdichtest und den Gastarif vergleichst, sinken Verbrauch und Risiko für teure Notfälle deutlich."
+social_posted: true
 ---
 
 Zahlst du für deine Heizung jedes Jahr hunderte Euro zu viel?

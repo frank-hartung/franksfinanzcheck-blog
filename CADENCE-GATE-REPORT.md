@@ -1,8 +1,8 @@
 # 📅 CADENCE-GATE-REPORT (Kadenz-Wache, 26.08.2026)
 
-**Letzter Lauf:** 2026-09-11 20:04 UTC
+**Letzter Lauf:** 2026-09-11 21:53 UTC
 
-**Dauervorgabe:** nur Mo/Mi/Fr · 2–3 Artikel pro Publikationstag
+**Dauervorgabe:** nur Mo/Mi/Fr · 2–2 Artikel pro Publikationstag
 **Regelwerk:** `CADENCE-REPORT.md` Regel 2 · `scripts/cadence_guard.py`
 
 ## Live-Posts pro Tag
@@ -21,7 +21,7 @@
 - ✅ 2026-09-04 (Freitag): 2
 - ✅ 2026-09-07 (Montag): 2
 - ✅ 2026-09-09 (Mittwoch): 2
-- ✅ 2026-09-11 (Freitag): 3
+- ✅ 2026-09-11 (Freitag): 2
 
 ## Aktiver Befund
 
@@ -29,7 +29,7 @@
 
 ## Re-Queue-Integrität (Park-Zustände)
 
-- 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **3**
+- 🕓 in der Re-Queue (werden am nächsten Slot gefördert): **2**
 - ✋ gehalten (Korrektur nötig, NIEMALS automatisch): **9**
 - ✍️ manuelle Entwürfe (von der Automatik unberührt): **7**
 - 🔁 wiederhergestellte Re-Queue-Flags: **0**
@@ -50,6 +50,6 @@
 
 ## Letzte Heilungen
 
-- Aus Re-Queue live gesetzt: `2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsbudget`
+- Zurückgestuft + Re-Queue: `2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest`
 
 _Wird von `cadence_guard.py` bei jedem Kadenz-Lauf aktualisiert (Deploy-Gate, Content-Engine, Blog-Health)._

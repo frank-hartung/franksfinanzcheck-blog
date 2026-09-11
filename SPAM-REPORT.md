@@ -1,6 +1,6 @@
 # 🛡️ SPAM-REPORT (spam_guard.py)
 
-**Stand:** 2026-09-11 20:04 UTC · Modus: FIX
+**Stand:** 2026-09-11 21:42 UTC · Modus: FIX
 
 **Domain-Status (Pinterest):** 🔴 GESPERRT – Pinterest hat franksfinanzcheck.de wegen Spam-Markierung gesperrt (Link-Domain blockiert). Sperre aktiv seit 27.08.2026. (Notbremse aktiv, PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md)
 
@@ -40,12 +40,11 @@
 - 🟡 [B5] 2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: Originalitäts-Quote 43 % (< 45 %)
 - 🟡 [B2] 2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
-- 🟡 [B2] 2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 - 🟡 [B2] 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser: Superlativ ohne Einschränkung (\bbest(?:e|er|es)\b)
 
 ## F: RSS-Feed /index.xml (F1–F6)
 
-- 🔴 [F5] Doppelte Description in Items [19, 26]
+- 🔴 [F5] Doppelte Description in Items [1, 19, 26]
 
 ## C: CSV pins_upload.csv (C1–C8)
 
