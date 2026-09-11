@@ -1,11 +1,8 @@
 ---
 title: "Standby Kosten reduzieren: So entlarvst du Stromfresser"
 description: Hohe Standby Kosten belasten dein Budget? Erfahre, wie du heimliche Dauerverbraucher entlarvst und durch gezieltes Abschalten bares Geld sparst.
-date: 2026-09-11T11:18:02Z
-draft: true
-cadence_wait: true
-cadence_demoted: 2026-09-11T11:29:40Z
-cadence_grund: "quality-hold aufgehoben (#251): Score 0.834 ≥ 0.80 – Re-Queue für vollen Gate-Durchlauf"
+date: 2026-09-11T20:00:23Z
+draft: false
 tags: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
