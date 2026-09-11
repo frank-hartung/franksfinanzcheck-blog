@@ -1,0 +1,18 @@
+{{- /* Dekorative, lokale SVGs: keine Emoji-/Font-/JavaScript-Abhängigkeit. */ -}}
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {{- if eq . "strom-sparen" -}}
+  <path d="m13 2-9 12h7l-1 8 10-12h-7l1-8Z"/>
+  {{- else if eq . "internet-dsl" -}}
+  <path d="M2 8.5a16 16 0 0 1 20 0M5 12a11 11 0 0 1 14 0M8.5 15.5a5.5 5.5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/>
+  {{- else if eq . "versicherungen" -}}
+  <path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/>
+  {{- else if eq . "konto-karten" -}}
+  <rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/>
+  {{- else if eq . "frugalismus" -}}
+  <path d="M12 21v-9M12 16C5 16 3 11 3 6c6 0 9 3 9 8M12 12c0-6 3-9 9-9 0 6-3 9-9 9"/>
+  {{- else if eq . "mietwagen" -}}
+  <path d="m5 9 2-5h10l2 5M5 17H3v-6l2-2h14l2 2v6h-2M7 17h10M5 17v3M19 17v3M7 13h1M16 13h1"/>
+  {{- else -}}
+  {{- errorf "Themenwelten: kein Icon für %q" . -}}
+  {{- end -}}
+</svg>

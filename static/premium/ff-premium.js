@@ -300,6 +300,9 @@
   }
 
   function createMiniToc() {
+    // /posts/ ist eine Übersicht, kein Artikel. Der schwebende Artikel-ToC
+    // würde die Themenkarten überdecken und nur die nachgelagerte FAQ zeigen.
+    if (doc.querySelector('.ff-posts-index')) return;
     var content = doc.querySelector('.post-content');
     if (!content || doc.querySelector('.ff-mini-toc')) return;
 

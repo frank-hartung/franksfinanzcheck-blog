@@ -1,0 +1,4 @@
+{{- /* data/ enthält auch Bot-Protokolle (*.jsonl). hugo.Data/Site.Data
+       würde den ganzen Baum parsen und daran scheitern. Nur die geprüfte
+       Navigationsdatei laden; partialCached cached pro Build. */ -}}
+{{- return (os.ReadFile "data/themenwelten.json" | transform.Unmarshal) -}}

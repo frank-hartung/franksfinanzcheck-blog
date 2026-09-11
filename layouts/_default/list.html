@@ -4,9 +4,30 @@
 {{- partial "index_profile.html" . }}
 {{- else }} {{/* if not profileMode */}}
 
+{{- $isPosts := and (eq .Section "posts") (eq .Kind "section") -}}
+{{- $pages := union .RegularPages .Sections -}}
+{{- if .IsHome -}}
+  {{- $pages = where site.RegularPages "Section" "eq" "posts" -}}
+  {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" -}}
+{{- else if $isPosts -}}
+  {{- $pages = $pages.ByDate.Reverse -}}
+{{- end -}}
+{{- $paginator := .Paginate $pages -}}
+
 {{- if not .IsHome | and .Title }}
-<header class="page-header">
+<header class="page-header{{ if $isPosts }} ff-posts-header{{ end }}">
   {{- partial "breadcrumbs.html" . }}
+  {{- if $isPosts }}
+  <p class="ff-posts-eyebrow">FranksFinanzcheck · Der Blog</p>
+  <h1>{{ if eq $paginator.PageNumber 1 }}{{ .Params.heading | default .Title }}{{ else }}Weitere Ratgeber{{ end }}</h1>
+  {{- if eq $paginator.PageNumber 1 }}
+  <p class="ff-posts-intro">{{ .Params.intro | default .Description }}</p>
+  <a class="ff-posts-jump" href="#neueste-artikel">Direkt zu den neuesten Artikeln <span aria-hidden="true">↓</span></a>
+  {{- else }}
+  <p class="ff-posts-intro">Seite {{ $paginator.PageNumber }} von {{ $paginator.TotalPages }} · Alle Beiträge, neueste zuerst.</p>
+  <a class="ff-posts-jump" href="{{ "posts/" | relURL }}#deine-6-themenwelten"><span aria-hidden="true">←</span> Zurück zu den Themenwelten</a>
+  {{- end }}
+  {{- else }}
   <h1>
     {{ .Title | plainify }}
     {{- if and (or (eq .Kind `term`) (eq .Kind `section`)) (.Param "ShowRssButtonInSectionTermList") }}
@@ -23,14 +44,17 @@
     {{- end }}
   </h1>
   {{- if .Description }}
-  <div class="post-description">
-    {{ .Description | markdownify }}
-  </div>
+  <div class="post-description">{{ .Description | markdownify }}</div>
+  {{- end }}
   {{- end }}
 </header>
 {{- end }}
 
-{{- if .Content }}
+{{- if $isPosts }}
+  {{- if eq $paginator.PageNumber 1 }}
+    {{- partial "themenwelten.html" (dict "legacyAnchor" true) }}
+  {{- end }}
+{{- else if .Content }}
 <div class="post-content md-content">
   {{- if not (.Param "disableAnchoredHeadings") }}
   {{- partial "anchored_headings.html" ((.Content | partial "nbsp_sicherung.html") | safeHTML) -}}
@@ -38,32 +62,16 @@
 </div>
 {{- end }}
 
-{{- $pages := union .RegularPages .Sections }}
-
-{{- /* Profi-Filterleiste nur auf /posts/ – erhöht Reichweite & interne Verlinkung */ -}}
-{{- if eq .Section "posts" }}
-<nav class="ff-filter-bar" aria-label="Themen filtern" style="display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 8px;">
-  <a href="/pillar/strom-sparen/" style="background:#0E5A43;color:#fff;padding:6px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">⚡ Strom</a>
-  <a href="/pillar/strom-sparen/" style="background:#0E5A43;color:#fff;padding:6px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">🔥 Gas</a>
-  <a href="/pillar/internet-dsl/" style="background:#0E5A43;color:#fff;padding:6px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">🌐 Internet & DSL</a>
-  <a href="/pillar/versicherungen/" style="background:#0E5A43;color:#fff;padding:6px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">🛡️ Versicherungen</a>
-  <a href="/pillar/frugalismus/" style="background:#fff;color:#0E5A43;border:2px solid #0E5A43;padding:4px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">💰 Frugalismus</a>
-  <a href="/pillar/konto-karten/" style="background:#fff;color:#0E5A43;border:2px solid #0E5A43;padding:4px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">🏦 Konto</a>
-  <a href="/pillar/mietwagen/" style="background:#fff;color:#0E5A43;border:2px solid #0E5A43;padding:4px 14px;border-radius:999px;font-size:.85em;font-weight:700;text-decoration:none;">🚗 Reise</a>
-</nav>
-<p style="font-size:.82em; color:#5a6b64; margin:0 0 18px;">Tipp: Ein Klick bringt dich in die passende Ratgeber-Welt – dort sind alle Artikel thematisch gebündelt.</p>
-{{- end }}
-
-{{- if .IsHome }}
-{{- $pages = where site.RegularPages "Section" "eq" "posts" }}
-{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true"  }}
-{{- end }}
-
-
-{{- $paginator := .Paginate $pages }}
-
 {{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
 {{- partial "home_info.html" . }}
+{{- end }}
+
+{{- if $isPosts }}
+<header class="ff-posts-feed-heading" id="neueste-artikel" tabindex="-1">
+  <h2>{{ if eq $paginator.PageNumber 1 }}Neueste Ratgeber{{ else }}Weitere Artikel{{ end }}</h2>
+  <p>{{ len $pages }} Beiträge · Neueste zuerst</p>
+</header>
+<div class="ff-posts-feed">
 {{- end }}
 
 {{- $term := .Data.Term }}
@@ -112,15 +120,17 @@
     {{- partial "post_meta.html" . -}}
   </footer>
   {{- end }}
-  <a class="entry-link" aria-label="Weiterlesen: {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+  <a class="entry-link" aria-label="Weiterlesen: {{ .Title | plainify }}" href="{{ .RelPermalink }}"></a>
 </article>
 {{- end }}
+
+{{- if $isPosts }}</div>{{ end }}
 
 {{- if gt $paginator.TotalPages 1 }}
 <footer class="page-footer">
   <nav class="pagination">
     {{- if $paginator.HasPrev }}
-    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+    <a class="prev" href="{{ $paginator.Prev.URL | relURL }}">
       «&nbsp;{{ i18n "prev_page" }}&nbsp;
       {{- if (.Param "ShowPageNums") }}
       {{- sub $paginator.PageNumber 1 }}/{{ $paginator.TotalPages }}
@@ -128,7 +138,7 @@
     </a>
     {{- end }}
     {{- if $paginator.HasNext }}
-    <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+    <a class="next" href="{{ $paginator.Next.URL | relURL }}">
       {{- i18n "next_page" }}&nbsp;
       {{- if (.Param "ShowPageNums") }}
       {{- add 1 $paginator.PageNumber }}/{{ $paginator.TotalPages }}
@@ -137,6 +147,16 @@
     {{- end }}
   </nav>
 </footer>
+{{- end }}
+
+{{- /* Erklärung/FAQ nur einmal und NACH der Artikelliste – keine lange
+       wiederholte Einleitung auf /posts/page/2/ und folgenden Seiten. */ -}}
+{{- if and $isPosts (eq $paginator.PageNumber 1) .Content }}
+<div class="post-content md-content ff-posts-guide">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" ((.Content | partial "nbsp_sicherung.html") | safeHTML) -}}
+  {{- else }}{{ (.Content | partial "nbsp_sicherung.html") | safeHTML }}{{ end }}
+</div>
 {{- end }}
 
 {{- /* Ratgeber-Cluster am Seitenende: hält das erste Cover (LCP) im

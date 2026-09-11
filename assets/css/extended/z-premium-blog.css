@@ -602,9 +602,12 @@ blockquote,
   text-wrap: balance;
 }
 
-/* Running text -> no orphan on the last line */
+/* Running text -> no orphan on the last line.
+   Nicht auf Menü-li anwenden: text-wrap:pretty überschreibt das geerbte
+   nowrap und brach „Über mich“ im mobilen Sticky-Header in zwei Zeilen. */
 p,
-li,
+.post-content li,
+.md-content li,
 dd {
   text-wrap: pretty;
 }

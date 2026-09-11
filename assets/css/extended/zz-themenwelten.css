@@ -1,0 +1,348 @@
+/* Themenwelten: eigenständige Navigation, kein Markdown-/Reveal-Styling.
+   Alle Links und Texte sind ohne JavaScript sichtbar und bedienbar. */
+:root {
+  --ff-topic-ink: #193b2e;
+  --ff-topic-muted: #52645a;
+  --ff-topic-surface: #fff;
+  --ff-topic-soft: #edf4ef;
+  --ff-topic-line: #d9e6dd;
+  --ff-topic-focus: #0e5a43;
+}
+
+:root[data-theme="dark"] {
+  --ff-topic-ink: #e0f0e6;
+  --ff-topic-muted: #b5c8bd;
+  --ff-topic-surface: #202e27;
+  --ff-topic-soft: #2b3c32;
+  --ff-topic-line: #40564a;
+  --ff-topic-focus: #ffcf60;
+}
+
+/* System-Dunkelmodus auch ohne das Theme-JavaScript respektieren. */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
+    --ff-topic-ink: #e0f0e6;
+    --ff-topic-muted: #b5c8bd;
+    --ff-topic-surface: #202e27;
+    --ff-topic-soft: #2b3c32;
+    --ff-topic-line: #40564a;
+    --ff-topic-focus: #ffcf60;
+  }
+}
+
+/* Nur die Blog-Übersicht verbreitern, nicht Artikel oder andere Listen. */
+main.main.ff-posts-index {
+  display: block;
+  max-width: calc(1120px + var(--gap) * 2);
+}
+
+.ff-posts-index .ff-posts-header {
+  margin: 22px 0 40px;
+}
+
+.ff-posts-header .breadcrumbs {
+  margin-bottom: 24px;
+  font-size: .8rem;
+}
+
+.ff-posts-eyebrow,
+.ff-topics-eyebrow {
+  color: var(--ff-topic-muted);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.ff-posts-header h1 {
+  max-width: 900px;
+  margin: 10px 0 16px;
+  color: var(--ff-topic-ink);
+  font-size: clamp(2rem, 4.4vw, 3.1rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.ff-posts-intro {
+  max-width: 720px;
+  color: var(--ff-topic-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.ff-posts-jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin-top: 16px;
+  padding: 8px 16px;
+  border: 1px solid var(--ff-topic-line);
+  border-radius: 999px;
+  background: var(--ff-topic-surface);
+  color: var(--ff-topic-ink);
+  font-size: .85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.ff-posts-jump:hover {
+  border-color: var(--ff-topic-focus);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.ff-topics {
+  margin: 0 0 44px;
+  padding-top: 28px;
+  border-top: 1px solid var(--ff-topic-line);
+  color: var(--ff-topic-ink);
+}
+
+.ff-topics.ff-clusters {
+  margin-top: 32px;
+}
+
+.ff-topics-heading {
+  margin-bottom: 24px;
+}
+
+.ff-topics-heading h2 {
+  margin: 6px 0 10px;
+  color: var(--ff-topic-ink);
+  font-size: clamp(1.55rem, 3vw, 2rem);
+  line-height: 1.25;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+}
+
+.ff-topics-intro {
+  max-width: 740px;
+  color: var(--ff-topic-muted);
+  font-size: .94rem;
+  line-height: 1.65;
+}
+
+.ff-topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ff-topics-grid > li {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.ff-topic-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 22px;
+  border: 1px solid var(--ff-topic-line);
+  border-radius: 18px;
+  background: var(--ff-topic-surface);
+  color: var(--ff-topic-ink);
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgb(14 50 32 / 3%);
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  overflow-wrap: break-word;
+}
+
+.ff-topic-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ff-topic-icon {
+  display: inline-flex;
+  flex: 0 0 44px;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--ff-topic-line);
+  border-radius: 12px;
+  background: var(--ff-topic-soft);
+  color: var(--ff-topic-ink);
+}
+
+.ff-topic-card h3 {
+  min-width: 0;
+  margin: 0;
+  color: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+
+.ff-topic-description {
+  flex: 1;
+  margin: 16px 0 20px;
+  color: var(--ff-topic-muted);
+  font-size: .85rem;
+  line-height: 1.7;
+}
+
+.ff-topic-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ff-topic-line);
+  font-size: .75rem;
+  line-height: 1.4;
+}
+
+.ff-topic-count {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--ff-topic-soft);
+  color: var(--ff-topic-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ff-topic-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ff-topic-ink);
+  font-weight: 700;
+}
+
+.ff-topic-card:hover .ff-topic-cta {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .ff-topic-card:hover {
+    transform: translateY(-3px);
+    border-color: #bc9743;
+    box-shadow: 0 8px 24px rgb(14 50 32 / 9%);
+  }
+}
+
+.ff-topic-card:focus-visible,
+.ff-posts-jump:focus-visible {
+  /* Die globale gelbe !important-Fokusregel hat auf Weiß zu wenig Kontrast. */
+  outline: 3px solid var(--ff-topic-focus) !important;
+  outline-offset: 4px !important;
+}
+
+.ff-topic-card:focus-visible { border-radius: 18px; }
+.ff-posts-jump:focus-visible { border-radius: 999px; }
+
+.ff-topics-tip {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 18px 0 0;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: var(--ff-topic-soft);
+  color: var(--ff-topic-muted);
+  font-size: .82rem;
+  line-height: 1.65;
+}
+
+.ff-topics-tip-label {
+  flex-shrink: 0;
+  color: var(--ff-topic-ink);
+  font-weight: 700;
+}
+
+.ff-topics-legacy-anchor {
+  display: block;
+  height: 0;
+}
+
+/* Sprünge landen unterhalb des Sticky-Headers, auch bei alten URLs. */
+.ff-topics h2[id],
+.ff-topics-legacy-anchor,
+.ff-posts-feed-heading {
+  scroll-margin-top: 100px;
+}
+
+.ff-posts-feed-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px 20px;
+  margin: 0 0 22px;
+  padding-top: 28px;
+  border-top: 1px solid var(--ff-topic-line);
+}
+
+.ff-posts-feed-heading h2 {
+  color: var(--ff-topic-ink);
+  font-size: 1.45rem;
+  line-height: 1.35;
+  letter-spacing: -.025em;
+}
+
+.ff-posts-feed-heading p {
+  color: var(--ff-topic-muted);
+  font-size: .78rem;
+}
+
+.ff-posts-feed {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.ff-posts-feed > .post-entry {
+  min-width: 0;
+  margin: 0;
+}
+
+.ff-posts-index .ff-posts-guide {
+  max-width: 760px;
+  margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--ff-topic-line);
+}
+
+@media (max-width: 760px) {
+  .ff-posts-feed { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .ff-posts-index .ff-posts-header { margin: 12px 0 28px; }
+  .ff-posts-header .breadcrumbs { margin-bottom: 18px; }
+  .ff-posts-header h1 { margin-bottom: 12px; }
+  .ff-posts-intro { font-size: .94rem; }
+  .ff-topics { padding-top: 22px; margin-bottom: 30px; }
+  .ff-topics-heading { margin-bottom: 18px; }
+  .ff-topic-card { padding: 18px; }
+  .ff-topic-description { margin: 12px 0 16px; }
+  .ff-topic-card-footer { padding-top: 12px; }
+  .ff-topics-tip { display: block; }
+  .ff-topics-tip-label { display: block; margin-bottom: 2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ff-topic-card { transition: none; }
+  html:has(.ff-posts-index) { scroll-behavior: auto; }
+}
+
+@media (forced-colors: active) {
+  .ff-topic-card { border-color: LinkText; }
+  .ff-topic-card:focus-visible,
+  .ff-posts-jump:focus-visible { outline-color: Highlight !important; }
+}

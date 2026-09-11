@@ -26,7 +26,7 @@
     {{- partial "consent_banner.html" . }}
     <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
     {{ partialCached "header.html" . .Page -}}
-    <main class="main" id="main-content">
+    <main class="main{{ if and (eq .Section "posts") (eq .Kind "section") }} ff-posts-index{{ end }}" id="main-content">
         {{- block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . -}}

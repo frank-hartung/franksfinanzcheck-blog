@@ -1,0 +1,43 @@
+{
+  "title": "Deine 6 Themenwelten",
+  "intro": "Was möchtest du als Nächstes angehen? Wähle dein Thema und finde den passenden Ratgeber.",
+  "tip": "Starte mit deiner höchsten regelmäßigen Rechnung. Dort lohnt sich der erste Blick.",
+  "topics": [
+    {
+      "id": "strom-sparen",
+      "title": "Strom & Gas sparen",
+      "emoji": "⚡",
+      "description": "Stromfresser finden, Tarife vergleichen und Heizkosten Schritt für Schritt senken."
+    },
+    {
+      "id": "internet-dsl",
+      "title": "Internet, DSL & Handy",
+      "emoji": "🌐",
+      "description": "Den passenden Tarif finden, Wechselkosten prüfen und dein WLAN verbessern."
+    },
+    {
+      "id": "versicherungen",
+      "title": "Versicherungen & Vorsorge",
+      "emoji": "🛡️",
+      "description": "Wichtigen Schutz erkennen, Leistungen vergleichen und doppelte Policen vermeiden."
+    },
+    {
+      "id": "konto-karten",
+      "title": "Konto, Karten & Zinsen",
+      "emoji": "💳",
+      "description": "Kontogebühren prüfen, die passende Karte wählen und Rücklagen sinnvoll parken."
+    },
+    {
+      "id": "frugalismus",
+      "title": "Frugalismus & Budget",
+      "emoji": "🌱",
+      "description": "Ausgaben ordnen, einen Notgroschen aufbauen und bewusst mit Geld umgehen."
+    },
+    {
+      "id": "mietwagen",
+      "title": "Mietwagen & Reisen",
+      "emoji": "🚗",
+      "description": "Mietwagen clever buchen, Kostenfallen umgehen und mehr aus der Reisekasse machen."
+    }
+  ]
+}
