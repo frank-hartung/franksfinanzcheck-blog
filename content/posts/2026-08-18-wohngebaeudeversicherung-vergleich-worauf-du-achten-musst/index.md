@@ -43,7 +43,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Die unverzichtbaren Grundbausteine einer Gebäudeversicherung
 
-Eine Wohngebäudeversicherung schützt dein Haus und alles, was fest damit verbunden ist. Dazu zählen etwa Heizung, Bad und fest eingebaute Küchen. Diese Gefahren deckt sie ab:
+Eine [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) schützt dein Haus und alles, was fest damit verbunden ist. Dazu zählen etwa Heizung, Bad und fest eingebaute Küchen. Diese Gefahren deckt sie ab:
 
 1. **Feuer & Brand:** Schutz bei offenem Brand, Blitzeinschlag, Explosion, Implosion oder Verpuffung sowie Schäden durch Löschwasser und Rauchgase. 2. **Leitungswasser:** Schutz bei bestimmungswidrig austretendem Wasser aus Zu‑ und Ableitungsrohren der Wasserversorgung, Heizungsrohren oder Waschmaschinenschläuchen einschließlich Frost‑ und Bruchschäden an Rohrleitungen.
 3. **Sturm & Hagel:** Deckung für Schäden durch Stürme ab Windstärke 8 (ab 62 km/h) sowie Hagelschlag an Dach, Fassade, Fenstern und Solaranlagen.

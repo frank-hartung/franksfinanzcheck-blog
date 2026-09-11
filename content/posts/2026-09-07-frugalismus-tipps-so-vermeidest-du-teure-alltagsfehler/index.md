@@ -27,7 +27,7 @@ kurzantwort: "Setze automatische Überweisungen ein, um monatlich mindestens 20�
 social_posted: true
 ---
 
-Lukas steht im Supermarkt vor dem Regal mit den Sonderangeboten. Ein schicker Milchaufschäumer lacht ihn an, reduziert von ca. 60 € auf nur rund 35 €. Ein echtes Schnäppchen, denkt er sich, und legt das Gerät in den Wagen. Drei Monate später steht das Teil unbenutzt ganz hinten im Küchenschrank. Lukas hat nicht nur Geld ausgegeben, sondern auch wertvollen Platz in seiner kleinen Wohnung verloren. Solche Situationen zeigen, warum viele klassische **Frugalismus-Tipps** im echten Leben oft nicht funktionieren.
+Lukas steht im Supermarkt vor dem Regal mit den Sonderangeboten. Ein schicker Milchaufschäumer lacht ihn an, reduziert von ca. 60 € auf nur rund 35 €. Ein echtes Schnäppchen, denkt er sich, und legt das Gerät in den Wagen. Drei Monate später steht das Teil unbenutzt ganz hinten im Küchenschrank. Lukas hat nicht nur Geld ausgegeben, sondern auch wertvollen Platz in seiner kleinen Wohnung verloren. Solche Situationen zeigen, warum viele klassische **[Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)** im echten Leben oft nicht funktionieren.
 
 Das Wichtigste in Kürze:
 - **Fehlkäufe vermeiden:** Kurze Wartezeiten vor dem Kauf eliminieren emotionale Impulsentscheidungen fast vollständig.
@@ -160,7 +160,7 @@ Diese Summe kann den Grundstock für ein beachtliches Vermögen bilden. Wenn man
 
 Sparen darf nicht wehtun. Wenn du dich ständig einschränkst, wirst du das Ziel aus den Augen verlieren. Belohne dich für erreichte Etappenziele. Hast du den ersten Tausender gespart? Dann gönne dir etwas Besonderes, das dir wirklich Freude bereitet. Das erhält den Spaß an der Sache und verhindert Frustration.
 
-Suche dir Gleichgesinnte. Es ist viel einfacher, **Geld sparen im Alltag** durchzuziehen, wenn dein Umfeld ähnliche Werte teilt. Wenn alle deine Freunde ständig teuer essen gehen wollen, wird es für dich schwer. Tausche dich in Foren oder Gruppen aus. Dort findest du oft neue Inspirationen und praktische Kniffe für deinen Weg.
+Suche dir Gleichgesinnte. Es ist viel einfacher, **[Geld sparen im Alltag](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)** durchzuziehen, wenn dein Umfeld ähnliche Werte teilt. Wenn alle deine Freunde ständig teuer essen gehen wollen, wird es für dich schwer. Tausche dich in Foren oder Gruppen aus. Dort findest du oft neue Inspirationen und praktische Kniffe für deinen Weg.
 
 Betrachte Frugalismus als ein Spiel oder ein Experiment. Wie wenig brauche ich wirklich, um glücklich zu sein? Oft stellen wir fest, dass uns weniger Besitz freier macht. Weniger Dinge bedeuten weniger Wartung, weniger Reinigung und weniger Sorgen. Diese psychologische Entlastung ist oft wertvoller als der reine Geldbetrag auf dem Konto.
 

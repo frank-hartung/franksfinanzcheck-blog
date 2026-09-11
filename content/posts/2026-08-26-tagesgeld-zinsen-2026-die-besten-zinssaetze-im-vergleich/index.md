@@ -48,7 +48,7 @@ Die wichtigsten Merkmale im Überblick:
 Die Europäische Zentralbank (EZB) hat die Zinsen zwischen 2022 und 2024 stark angehoben. Auch wenn sie 2025 und 2026 wieder senkt: Die Tagesgeld-Zinsen liegen 2026 noch deutlich über dem Null-Niveau. Drei Gründe sprechen für Tagesgeld:
 
 1. **Kaufkraft teilweise erhalten:** Bei 2,0 bis 3,0 % Zinsen und einer Inflation von rund 2,0 bis 2,5 % (Juli 2026) bleibt unter dem Strich zumindest ein leichter Realertrag.
-2. **Notgroschen-Reserve:** Wer drei bis sechs Monatsausgaben auf Tagesgeld parkt, ist vor teuren Dispokrediten (7 bis 14 % effektiv!) bei plötzlichen Ausgaben geschützt.
+2. **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)-Reserve:** Wer drei bis sechs Monatsausgaben auf Tagesgeld parkt, ist vor teuren Dispokrediten (7 bis 14 % effektiv!) bei plötzlichen Ausgaben geschützt.
 3. **Psychologischer Puffer:** Geld, das auf einem separaten Tagesgeldkonto liegt, ist in der Vorstellung "weg vom Alltag" und wird weniger spontan ausgegeben.
 
 ## Tagesgeld vs. Festgeld vs. Girokonto

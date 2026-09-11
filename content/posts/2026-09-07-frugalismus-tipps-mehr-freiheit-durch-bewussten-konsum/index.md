@@ -136,12 +136,12 @@ Nutze für deine Organisation einfache Listen. Eine "Haben-Wollen-Liste" ist ein
 
 ## Fazit: Mehr Freiheit durch bewussten Konsum
 
-Sich gezielt mit dem Thema **Frugalismus-Tipps: [Mehr Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) durch bewussten Konsum** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und bares Geld zu sparen. Bereits kleine Anpassungen im Konsumverhalten und regelmäßige Vertragsprüfungen summieren sich über das Jahr zu einer beachtlichen Ersparnis. Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀
+Sich gezielt mit dem Thema **[Frugalismus-Tipps](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/): [Mehr Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) durch bewussten Konsum** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und bares Geld zu sparen. Bereits kleine Anpassungen im Konsumverhalten und regelmäßige Vertragsprüfungen summieren sich über das Jahr zu einer beachtlichen Ersparnis. Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀
 
 
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
-**Lesetipp:** Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
+**Lesetipp:** Frugalismus-Tipps: [Mehr Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) durch klugen Verzicht
 
 ## Häufige Fragen
 
