@@ -67,7 +67,7 @@ Die Europäische Zentralbank (EZB) hat die Zinsen zwischen 2022 und 2024 stark a
 **Faustregel für die Aufteilung deiner Sparguthaben:**
 
 - **Girokonto:** 1–2 Monatsausgaben als Puffer
-- **Tagesgeld:** 3–6 Monatsausgaben als Notgroschen
+- **Tagesgeld:** 3–6 Monatsausgaben als [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)
 - **Festgeld:** Geld, das du in 1–5 Jahren sicher brauchst (z. B. Urlaub, Autokauf, Anzahlung)
 - **ETF-Sparplan / Aktien-ETF:** Vermögensaufbau mit 10+ Jahren Anlagehorizont
 

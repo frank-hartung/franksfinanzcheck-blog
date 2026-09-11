@@ -25,7 +25,7 @@ social_posted: true
 
 
 
-Wenn die Waschmaschine ausläuft oder das Auto plötzlich in die Werkstatt muss, wird aus einem normalen Dienstag schnell ein teurer Tag. Genau dafür ist ein Notgroschen da. Er hält dich handlungsfähig und verhindert, dass du sofort den Dispo, eine Kreditkarte oder einen Ratenkredit brauchst.
+Wenn die Waschmaschine ausläuft oder das Auto plötzlich in die Werkstatt muss, wird aus einem normalen Dienstag schnell ein teurer Tag. Genau dafür ist ein [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) da. Er hält dich handlungsfähig und verhindert, dass du sofort den Dispo, eine Kreditkarte oder einen Ratenkredit brauchst.
 
 Die bekannte Regel „drei Monatsgehälter" klingt einfach, trifft aber oft daneben. Entscheidend ist nicht dein Gehalt, sondern das Geld, das du jeden Monat wirklich brauchst. Wer hohe Fixkosten hat, braucht meist mehr Reserve als jemand mit kleiner Wohnung und stabilem Job.
 

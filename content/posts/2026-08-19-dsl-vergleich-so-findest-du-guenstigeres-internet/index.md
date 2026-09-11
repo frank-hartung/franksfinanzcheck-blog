@@ -136,7 +136,7 @@ Glasfaser schlägt VDSL. Vorausgesetzt, der Hausanschluss liegt und die Dose ist
 
 ## Fazit: Durch regelmäßigen Vergleich hunderte Euro sparen
 
-Ein fairer **DSL-Vergleich** deckt versteckte Preistreiber auf. Du zahlst dann nicht mehr als nötig für stabiles Internet. Wer alle zwei Jahre wechselt, spart dauerhaft 300 bis 360 €.
+Ein fairer **[DSL-Vergleich](../../posts/2026-08-10-dsl-wechselbonus-sichern/)** deckt versteckte Preistreiber auf. Du zahlst dann nicht mehr als nötig für stabiles Internet. Wer alle zwei Jahre wechselt, spart dauerhaft 300 bis 360 €.
 
 **Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/): So sparst du beim Internetvertrag · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke
 

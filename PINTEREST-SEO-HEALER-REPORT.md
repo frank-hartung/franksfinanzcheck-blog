@@ -1,9 +1,9 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-11 17:57 UTC · **Modus:** FIX
+**Stand:** 2026-09-11 18:15 UTC · **Modus:** FIX
 
-- Artikel: **49**
-- Geheilt: **4**
+- Artikel: **50**
+- Geheilt: **3**
 - Offene Issues: **5**
 - Covers: 1 Titel-Stale + fehlende nachgezogen
 
@@ -69,6 +69,7 @@
 | ✅ | `2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsbudget` *(draft)* | — |
 | ✅ | `2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt` *(draft)* | — |
 | ✅ | `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` *(draft)* | — |
+| ✅ | `2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich` *(draft)* | — |
 
 ## Selbstheilung (diese Runde)
 
