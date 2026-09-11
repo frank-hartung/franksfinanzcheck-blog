@@ -1413,8 +1413,15 @@ def synth_article(blocks, engine, profile_name, tmp_dir, log, deadline=None):
                     log("Zeitbudget abgelaufen — Artikel wird zurückgestellt (Rest beim nächsten Lauf)")
                 return None, [], stats
             stats["segments"] += 1
+            # Die Deadline wird auch IN das Backend gereicht (Härtung
+            # 11.09.2026): Ein einziges hängendes Segment überzog die
+            # `--max-seconds`-Deadline bisher unbegrenzt, weil oben nur
+            # VOR dem Segment geprüft wurde. Jetzt trägt die Kette
+            # edge → piper das Restbudget selbst und zieht sich mitten
+            # im Artikel zurück.
             used_engine, ok, boundaries = ttb.synthesize(seg, blang, engine, profile_name,
-                                                         seg_wav, rate=rate, pitch=pitch, volume=volume)
+                                                         seg_wav, rate=rate, pitch=pitch, volume=volume,
+                                                         deadline=deadline)
             if not ok:
                 stats["failed"] += 1
                 norm_cursor += words
@@ -2346,7 +2353,8 @@ def selftest() -> int:
     import tempfile as _tf
     orig_synthesize = ttb.synthesize
     try:
-        def _failing_synth(text, lang, engine, profile_name, out_wav, rate=1.0, pitch=0, volume=1.0):
+        def _failing_synth(text, lang, engine, profile_name, out_wav, rate=1.0, pitch=0,
+                           volume=1.0, deadline=None):
             return engine, False, []
         ttb.synthesize = _failing_synth
         with _tf.TemporaryDirectory() as td:
@@ -2354,7 +2362,8 @@ def selftest() -> int:
             check("Backend-Ausfall zählt als Fehler", st["failed"] == st["segments"] and st["failed"] > 0)
             check("Backend-Ausfall: kein Segment ok", st["ok"] == 0)
 
-        def _working_synth(text, lang, engine, profile_name, out_wav, rate=1.0, pitch=0, volume=1.0):
+        def _working_synth(text, lang, engine, profile_name, out_wav, rate=1.0, pitch=0,
+                           volume=1.0, deadline=None):
             import math as _math
             n = int((len(text) / ttb.BASE_CPS) * ttb.SAMPLE_RATE)
             tone = [int(12000 * _math.sin(2 * _math.pi * 180 * i / ttb.SAMPLE_RATE))
@@ -2376,7 +2385,7 @@ def selftest() -> int:
         # eine Zeit; die Karte muss strukturiert, im Chunkfenster und
         # indexseitig gültig sein — und das Gate muss sie bestehen.
         def _boundary_synth(text, lang, engine, profile_name, out_wav,
-                            rate=1.0, pitch=0, volume=1.0):
+                            rate=1.0, pitch=0, volume=1.0, deadline=None):
             import math as _m
             n = int((len(text) / ttb.BASE_CPS) * ttb.SAMPLE_RATE)
             tone = [int(12000 * _m.sin(2 * _m.pi * 180 * i / ttb.SAMPLE_RATE))
@@ -2408,12 +2417,15 @@ def selftest() -> int:
         # Ablauf ⇒ sofortiger Abbruch mit Ehrlichkeits-Flag statt
         # Verwerfen; der Aufrufer stellt zurück (deferred).
         calls = []
+        deadlines_seen = []
 
         def _counting_synth(text, lang, engine, profile_name, out_wav,
-                            rate=1.0, pitch=0, volume=1.0):
+                            rate=1.0, pitch=0, volume=1.0, deadline=None):
             calls.append(text)
+            deadlines_seen.append(deadline)
             return _working_synth(text, lang, engine, profile_name, out_wav,
-                                  rate=rate, pitch=pitch, volume=volume)
+                                  rate=rate, pitch=pitch, volume=volume,
+                                  deadline=deadline)
 
         ttb.synthesize = _counting_synth
         with _tf.TemporaryDirectory() as td:
@@ -2429,6 +2441,17 @@ def selftest() -> int:
             check("Budget: frische Deadline synthetisiert normal",
                   stb.get("aborted") is not True and stb["ok"] > 0
                   and stb["failed"] == 0)
+            # DURCHREICHUNG (Härtung 11.09.2026): Die Prüfung VOR dem
+            # Segment reicht nicht — ein EINZIGES hängendes Segment
+            # überzog die Deadline unbegrenzt. Sie muss deshalb IN die
+            # Backend-Kette wandern (synth_edge/synth_piper deckeln
+            # dort jeden Versuch auf das Restbudget).
+            check("Budget: Deadline wird an das Backend durchgereicht",
+                  len(deadlines_seen) > 0
+                  and all(d == future for d in deadlines_seen))
+            import inspect as _insp
+            check("Budget: Backend-Synthese nimmt die Deadline an",
+                  "deadline" in _insp.signature(orig_synthesize).parameters)
     finally:
         ttb.synthesize = orig_synthesize
 
