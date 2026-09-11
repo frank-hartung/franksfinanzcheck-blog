@@ -5,6 +5,15 @@
 #  auf DEFEKTE INTERNE LINKS geprüft (Rendering-Ebene – erkennt auch
 #  Theme-Links, /go/-Weiterleitungen, Bilder und Menü-Links).
 #
+#  NEU 11.09.2026 (Premium-Reparatur /posts/): HARTES HUB-GATE
+#  (textverstaendnis_guard --hub-gate). Die Sektions-Hubs (content/**/_index.md)
+#  waren die einzige Zone OHNE Blocker-Gate – deshalb standen dort wochenlang
+#  Inserter-Artefakte („Hhierfindest“, „Ddeine6“) live. Der Guard prüft jetzt
+#  R9/R10 (Kleber-Artefakte), R11 (keine ../-Links), R12 (Link-Ziele
+#  existieren & sind kein Draft), R13 (Meta-Maße) und R14 (Kurz-&-knapp-Kanon).
+#  Fund = roter Run = PR Merge-Blocker. [skip ci]-Bots werden zusätzlich von
+#  blog-health-daily.yml (Cron, nicht skipbar) abgefangen.
+#
 #  Bei kaputten Links  →  Issue "🔗 Defekte interne Links gefunden"
 #                          (Label auto-report, ohne Duplikate)
 #  Bei sauberem Build  →  offenes Link-Issue wird automatisch geschlossen
@@ -47,12 +56,13 @@ jobs:
       - name: Python-Abhängigkeiten (für Governance-Skripte)
         run: python3 -m pip install -q pyyaml 2>/dev/null || true
 
-      - name: Governance-Selbsttests (11 Wachen)
+      - name: Governance-Selbsttests (12 Wachen)
         run: |
           fail=0
           for s in editorial_scorecard cwv_guard secrets_age_guard decay_radar \
                    governance_gate governance_contract umami_clicks click_attribution \
-                   awin_provisions pinterest_perf_feedback pinterest_token; do
+                   awin_provisions pinterest_perf_feedback pinterest_token \
+                   textverstaendnis_guard; do
             if ! python3 "scripts/$s.py" --selftest >/tmp/st.log 2>&1; then
               echo "::error::scripts/$s --selftest fehlgeschlagen"
               tail -n 25 /tmp/st.log
@@ -71,6 +81,14 @@ jobs:
 
       - name: Seite bauen
         run: hugo --minify
+
+      # HUB-GATE (11.09.2026): blockiert Kleber-Artefakte, tote Hub-Ziele und
+      # Meta-Verfall in content/**/_index.md DURCHGAENDIG – jeder Push/PR muss
+      # gruen sein, sonst bleibt die Sektionsseite (z. B. /posts/) rot.
+      # Kein continue-on-error: das ist der dauerhafte Premium-Blocker.
+      - name: Hub-Gate – Sektions-Intros (R9/R10/R11/R12/R13/R14)
+        run: |
+          python3 scripts/textverstaendnis_guard.py --hub-gate
 
       - name: Interne Links prüfen
         id: links

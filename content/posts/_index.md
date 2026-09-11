@@ -1,18 +1,20 @@
 ---
 title: "Alle Ratgeber im Überblick – Strom, Gas, Internet & Finanzen clever sparen"
-description: "Alle Ratgeber von FranksFinanzcheck an einem Ort: Strom- & Gas-Vergleiche, DSL & Internet günstiger, Versicherungen verständlich erklärt und Frugalismus-Tricks mit konkreten Zahlen – unabhängig & Praxis-getestet."
-keywords: ["Strom sparen", "Gasvergleich", "DSL-Vergleich", "Versicherungen", "Frugalismus", "Geld sparen", "Girokonto", "Mietwagen"]
+description: "Alle Ratgeber von FranksFinanzcheck: Strom, Gas, DSL & Internet, Versicherungen, Konto & Frugalismus – unabhängig, praxisgetestet, mit konkreten Euro-Beträgen."
+keywords: ["Strom sparen", "Gasvergleich", "DSL-Vergleich", "Versicherungen", "Frugalismus", "Geld sparen", "Spartipps", "Girokonto", "Mietwagen"]
 # Keine Pagination-Aliase: Bei pagerSize 8 und 25+ Posts existieren
 # /posts/page/2/–/posts/page/4/ als echte Seiten. Ein Alias auf dieselbe
 # URL bricht `hugo --minify` hart ab.
+# Interne Links hier NIE als ../-Relativpfade setzen (textverstaendnis_guard
+# R11 blockiert das dauerhaft) – Wurzel-absolute Pfade sind der Hausstandard.
 cover:
   image: "images/covers/_index.jpg"
   alt: "Alle Ratgeber von FranksFinanzcheck – Strom, Gas, Internet, Versicherungen und Frugalismus mit konkreten Spartipps"
   caption: "FranksFinanzcheck – verständlich, unabhängig, mit konkreten Zahlen"
-lastmod: 2026-09-02
+lastmod: 2026-09-11
 ---
 
-> 💡 **Kurz & knapp:** Hhierfindest du **alle Ratgeber von FranksFinanzcheck** – sortiert nach Aktualität, mit klaren Spartipps für Strom, Gas, Internet, Versicherungen und Frugalismus. Jeder Artikel: verständlich erklärt, mit konkreten Euro-Beträgen, Vor- und Nachteilen und Schritt-für-Schritt-Anleitung.
+> 💡 **Kurz & knapp:** Hier findest du **alle Ratgeber von FranksFinanzcheck** – frisch sortiert nach Aktualität, mit klaren Spartipps für Strom, Gas, Internet, Versicherungen und Frugalismus. Jeder Artikel liefert konkrete Euro-Beträge, ehrliche Vor- und Nachteile und eine Schritt-für-Schritt-Anleitung – der Tarifwechsel dauert oft nur 15 Minuten.
 
 ## Was dich hier erwartet
 
@@ -20,14 +22,14 @@ Du willst **monatlich bares Geld sparen**, ohne stundenlang Tarife zu wälzen? G
 
 Montags, mittwochs und freitags erscheinen **2–3 neue Ratgeber**. So bleibst du am Ball, ohne den Überblick zu verlieren.
 
-### Ddeine6 Themenwelten
+### Deine 6 Themenwelten
 
 Finde direkt den Bereich, der dich am meisten interessiert – alle Artikel sind dort gebündelt und untereinander verlinkt:
 
-- ⚡ **[Strom & Gas sparen](/pillar/strom-sparen/)** – [Stromfresser finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/), [Gasrechnung senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) und bis zu 800 € im Jahr sparen
-- 🌐 **[Internet, DSL & Handy](/pillar/internet-dsl/)** – [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/), WLAN in jede Ecke bringen und [DSL vergleichen](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
-- 🛡️ **[Versicherungen & Vorsorge](/pillar/versicherungen/)** – [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) und [Hausrat & Wohngebäude](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) verständlich erklärt
-- 💳 **[Konto, Karten & Zinsen](/pillar/konto-karten/)** – [Kostenloses Girokonto](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) finden, Gebührenfallen vermeiden und Zinsen sichern
+- ⚡ **[Strom & Gas sparen](/pillar/strom-sparen/)** – [Stromfresser finden](/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/), [Gasrechnung senken](/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) und bis zu 800 € im Jahr sparen
+- 🌐 **[Internet, DSL & Handy](/pillar/internet-dsl/)** – [DSL-Wechselbonus sichern](/posts/2026-08-10-dsl-wechselbonus-sichern/), [WLAN bis in jede Ecke bringen](/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) und [DSL vergleichen](/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
+- 🛡️ **[Versicherungen & Vorsorge](/pillar/versicherungen/)** – [Privathaftpflicht](/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) und [Hausrat & Wohngebäude](/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) verständlich erklärt
+- 💳 **[Konto, Karten & Zinsen](/pillar/konto-karten/)** – [Kostenloses Girokonto](/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) finden, Gebührenfallen vermeiden und Zinsen sichern
 - 🌱 **[Frugalismus & Budget](/pillar/frugalismus/)** – 50–30–20-Regel, Notgroschen aufbauen und finanzielle Gelassenheit erreichen
 - 🚗 **[Mietwagen & Reisen](/pillar/mietwagen/)** – Fallen am Schalter vermeiden, günstige Flüge finden und Reisekasse aufbessern
 
@@ -35,7 +37,7 @@ Finde direkt den Bereich, der dich am meisten interessiert – alle Artikel sind
 
 ## So nutzt du den Blog am besten
 
-1. **Überblick behalten:** Diese Seite zeigt immer die neuesten Artikel zuerst – scrolle oder nutze die Suche (oben).
+1. **Überblick behalten:** Diese Seite zeigt immer die neuesten Artikel zuerst – scrolle oder filtere über die Themenleiste direkt unter diesem Text.
 2. **Tiefer einsteigen:** Jeder Artikel verlinkt am Ende auf den passenden **Pillar-Ratgeber** und verwandte Beiträge – so baust du dir dein Wissen Schritt für Schritt auf.
 3. **Direkt handeln:** In jedem Ratgeber findest du einen **Partner-Vergleich (CHECK24)** – damit prüfst du in 2 Minuten, was du konkret sparen kannst. Für dich ohne Mehrkosten, für den Blog eine kleine Provision (mehr dazu im [Disclaimer](/datenschutz/)).
 
@@ -46,7 +48,7 @@ Finde direkt den Bereich, der dich am meisten interessiert – alle Artikel sind
 - **Unabhängig & verständlich:** Kein Verkaufsgespräch, sondern ehrliche Vor- und Nachteile – in normaler Sprache.
 - **Konkrete Zahlen statt Floskeln:** Euro-Beträge, kWh-Preise, Effektivpreise über 24 Monate – damit du vergleichen kannst.
 - **Erfahrung aus der Praxis:** Tipps, die der Autor selbst nutzt und regelmäßig prüft (siehe [Über mich](/ueber/)).
-- **Geprüfte Qualität:** Rechtschreibung, Grammatik, Lesbarkeit und Aktualität werden automatisch bei jedem Artikel geprüft.
+- **Geprüfte Qualität:** Rechtschreibung, Grammatik, Lesbarkeit und Aktualität werden bei jedem Artikel automatisch geprüft.
 
 > **Transparenz:** Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link einen Tarif abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig.
 
@@ -70,4 +72,4 @@ Ja. Wir vergleichen über **CHECK24** (Deutschlands größtes Vergleichsportal) 
 
 ---
 
-**Bereit zu sparen?** Stöbere jetzt durch die neuesten Ratgeber unten – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀
+**Bereit zu sparen?** Stöbere durch die neuesten Ratgeber unten – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀

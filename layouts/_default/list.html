@@ -30,12 +30,24 @@
 </header>
 {{- end }}
 
+{{- /* PREMIUM-PAGINATION (11.09.2026): Der lange Sektions-Intro-Text wird nur
+       auf der ERSTEN Seite gezeigt. Ab Seite 2 kürzt das Layout auf einen
+       kompakten Rückverweis – das verhindert Duplicate Content auf
+       /posts/page/2/…/4/ und hält alle „oben/unten“-Verweise im Intro
+       (Themenwelten, Themenleiste, Artikelstrom) wahr. */ -}}
+{{- $pg := 1 }}{{- with .Paginator }}{{- $pg = .PageNumber }}{{- end }}
 {{- if .Content }}
+{{- if and (gt $pg 1) (eq .Section "posts") }}
+<div class="post-content md-content">
+  <p>💡 <strong>Kurz &amp; knapp:</strong> Die komplette Übersicht mit den 6 Themenwelten und der Blog-Anleitung findest du auf der <a href="/posts/">ersten Seite aller Ratgeber</a> – hier folgen die neuesten Beiträge, sortiert nach Aktualität.</p>
+</div>
+{{- else }}
 <div class="post-content md-content">
   {{- if not (.Param "disableAnchoredHeadings") }}
   {{- partial "anchored_headings.html" ((.Content | partial "nbsp_sicherung.html") | safeHTML) -}}
   {{- else }}{{ (.Content | partial "nbsp_sicherung.html") | safeHTML }}{{ end }}
 </div>
+{{- end }}
 {{- end }}
 
 {{- $pages := union .RegularPages .Sections }}

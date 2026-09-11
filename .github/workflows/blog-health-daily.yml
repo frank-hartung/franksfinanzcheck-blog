@@ -74,6 +74,12 @@ jobs:
       - run: python3 scripts/fix_r8_anker.py --selftest
       - run: python3 scripts/fix_r8_anker.py --fix || echo "⚠ R8-Anker-Heiler - Restfunde siehe TEXTVERSTAENDNIS-REPORT.md"
       - run: python3 scripts/textverstaendnis_guard.py
+      # HUB-GATE (11.09.2026): laeuft hier zusaetzlich zum Push-Gate in
+      # link-check.yml – Bots commiten oft mit [skip ci] und umgehen das
+      # Push-Gate; der taegliche Cron laeuft NIE uebersprungen. Hub-Zerfall
+      # (Kleber-Artefakte, tote Hub-Ziele, Meta-Verfall) wird spaetestens am
+      # Folgetag rot (alert-on-failure.yml oeffnet dann das Issue).
+      - run: python3 scripts/textverstaendnis_guard.py --hub-gate
 
       - run: python3 scripts/blog_health_gate.py
       - run: |

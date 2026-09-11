@@ -1,6 +1,6 @@
 ---
 title: "Ratgeber: Die 6 großen Sparthemen im Überblick"
-description: "Die großen Spar-Ratgeber auf FranksFinanzcheck: Strom & Gas sparen, Versicherungen, Internet & DSL, Konto & Karten, Frugalismus sowie Mietwagen & Reisen – spare jährlich bis zu 2.000 € Fixkosten."
+description: "Die 6 großen Spar-Ratgeber auf FranksFinanzcheck: Strom & Gas, DSL, Versicherungen, Konto, Frugalismus, Mietwagen – spare bis zu 2.000 € Fixkosten pro Jahr."
 date: 2026-08-08
 draft: false
 author: "Frank Hartung"

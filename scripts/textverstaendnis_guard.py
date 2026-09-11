@@ -19,14 +19,43 @@ KEIN bestehendes Gate misst:
   R9  Klebewort-Guard      Inserter-Artefakte „HHerfindestdu“/„Ddeine…"
                            Leerzeichen in URL = harter Fehler
 
+HUB-WACHEN (11.09.2026 – Premium-Reparatur /posts/: die Artefakte
+„Hhierfindest“ und „Ddeine6“ standen WOCHENLANG live, weil die Hub-Seiten
+nur im Report mitliefen (und dort hinter 60 Artikel-Funden abgeschnitten
+wurden) – es gab kein Gate. Jetzt R10–R14 plus harter --hub-gate-Modus,
+verankert im Qualitäts-Gate (link-check.yml, läuft bei jedem Push/PR +
+täglich). Regeln für content/**/_index.md (Sektions-Hubs) & pillar-Bundles:
+
+  R10 Zahl-Kleber-Guard    Buchstabe+Zahl geklebt („Ddeine6“, „zahlst20“) –
+                           Folgeklasse des defekten Inserters. Marken/Akronyme
+                           (CHECK24, CAT7, MP3) und „90ern“ bleiben verschont.
+  R11 Hub-Link-Regel       Sektions-Hubs dürfen keine ../-Relativlinks
+                           enthalten – die brechen still um, sobald Hugo-
+                           Ref-Auflösung/Pagination sich ändert. Wurzel-
+                           absolut (/posts/…, /pillar/…) ist Hausstandard.
+  R12 Hub-Ziel-Existenz    Jeder /posts/<slug>/- und /pillar/<slug>/-Link
+                           eines Hubs muss auf ein existierendes, nicht als
+                           draft markiertes Content-Bundle zeigen.
+  R13 Hub-Meta             Titel 10–130 Zeichen, Description 80–160
+                           (SERP-Korridor), lastmod gültig & nicht in der
+                           Zukunft; posts/_index.md braucht lastmod zwingend
+                           („sortiert nach Aktualität" ist ein Versprechen).
+  R14 Kurz-&-knapp-Block   posts/_index.md beginnt mit dem Zitat
+                           „> 💡 **Kurz & knapp:** …" (≤ 420 Zeichen) –
+                           Snippet-/Pin-Kanon der Sektionsseite.
+
 MODI:
   python3 scripts/textverstaendnis_guard.py            # Report (alle Artikel)
   python3 scripts/textverstaendnis_guard.py --json     # maschinenlesbar
   python3 scripts/textverstaendnis_guard.py --new-only # Engine-Modus (heute);
                                                        # harte Regeln -> Exit 1
+  python3 scripts/textverstaendnis_guard.py --hub-gate # Hubs hart prüfen;
+                                                       # Fund -> Exit 1 (CI-Gate)
   python3 scripts/textverstaendnis_guard.py --selftest # Sabotage-Schutz
 
 Ausgabe: TEXTVERSTAENDNIS-REPORT.md + data/verstaendnis_history.jsonl
+(Hub-Funde stehen im Report VOR den Artikel-Funden – nicht mehr hinten
+abgeschnitten.)
 """
 
 import json
@@ -49,6 +78,7 @@ TERMINOLOGIE = ROOT / "data" / "terminologie.yaml"
 NEW_ONLY = "--new-only" in sys.argv
 AS_JSON = "--json" in sys.argv
 SELFTEST_ONLY = "--selftest" in sys.argv
+HUB_GATE = "--hub-gate" in sys.argv
 
 # R2
 R2_MAX_LEN = 200
@@ -296,7 +326,8 @@ def check_nested_links(rel: str, body: str) -> list:
 # In deutscher Prosa kommt das praktisch nie vor (Ausnahme: Ortsnamen wie
 # „Aachen") — darum harter Fehler, kaum False-Positive-Risiko.
 R9_KLEBE_RX = re.compile(r"\b([A-ZÄÖÜa-zäöü])([A-ZÄÖÜa-zäöü])([a-zäöü][\wÄÖÜäöüß]*)")
-R9_ALLOW = {"Aachen", "Aachener", "Ggf", "ggf"}  # Abk. „gegebenenfalls“ ist legitim
+R9_ALLOW = {"Aachen", "Aachener", "Ggf", "ggf", "zgl", "Zzgl", "zzgl"}  # „gegebenenfalls“/„zuzüglich“ = legitime Abk.
+# (Live-Fund 11.09.2026: R9 meldete „zzgl“ und haette jeden neuen Artikel im Engine-Gate blockiert)
 
 
 def check_klebewoerter(rel: str, body: str) -> list:
@@ -318,6 +349,192 @@ def check_klebewoerter(rel: str, body: str) -> list:
                     f"Klebe-Artefakt „{w}“ (Wort fängt doppelt an: {w[0]}{w[1]}…) "
                     f"– Überrest eines defekten Text-Inserters, manuell reparieren", w))
     return out
+
+
+# ---------------------------------------------------------------------------
+# HUB-WACHEN R10–R14 (11.09.2026) – schützen die Sektions-/Hub-Seiten, die
+# von der Artikel-Kette (Engine-Gate, Lektor, Rechtschreib-Report) bisher
+# nicht hart erwischt wurden. Alle Funde sind HART: Hub-Seiten sind klein,
+# jede Regel ist dort deterministisch beweisbar – False-Positive-Ausreden
+# wie bei Langtext-Weichregeln gibt es hier bewusst nicht.
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# HUB-WACHEN R10–R14 (11.09.2026) – schützen die Sektions-/Hub-Seiten, die
+# von der Artikel-Kette (Engine-Gate, Lektor, Rechtschreib-Report) bisher
+# nicht hart erwischt wurden. Alle Funde sind HART: Hub-Seiten sind klein,
+# jede Regel ist dort deterministisch beweisbar – False-Positive-Ausreden
+# wie bei Langtext-Weichregeln gibt es hier bewusst nicht.
+# ---------------------------------------------------------------------------
+
+# R10: Kleinbuchstabe klebt direkt an Ziffern („Ddeine6“, „zahlst20“).
+# Nur die Richtung Buchstabe→Zahl: die Gegenrichtung erzeugt im Deutschen
+# regulär legitime Formen („90ern“, „20er-Jahre“). Großbuchstaben vor der
+# Zahl sind Marken/Akronyme (CHECK24, CAT7, VDSL50) und bleiben unberührt.
+R10_ZAHL_RX = re.compile(r"\b[A-ZÄÖÜ]?[a-zäöüß]{2,}\d+\b")
+R10_ALLOW = {"mp3", "mp4", "x86", "utf8"}  # Technik-Terme: Buchstabe+Zahl ist korrekt
+
+
+def check_zahl_kleber(rel: str, body: str) -> list:
+    """R10: Buchstabe+Zahl geklebt – Resteschaden desselben Inserter-Typs wie R9."""
+    out = []
+    clean = re.sub(r"```.*?```", " ", body, flags=re.S)
+    clean = re.sub(r"\{\{[^}]*\}\}", " ", clean)
+    clean = re.sub(r"\]\([^)\n]*\)", "]()", clean)  # Link-Ziele (Datums-Slugs) ausklammern
+    for m in R10_ZAHL_RX.finditer(clean):
+        w = m.group(0)
+        if w.lower() in R10_ALLOW:
+            continue
+        out.append((rel, "R10-ZAHL-KLEBER",
+                    f"„{w}“ – Buchstabe klebt an Zahl (Muster „Ddeine6“): "
+                    "liest sich nie so gemeint – Leerzeichen ergänzen oder Wort trennen", w))
+    return out
+
+
+# R11: Ausbrechende Relativlinks in Sektions-Hubs. „../../posts/x/“ wird
+# aktuell von Hugo zur Permalink-Auflösung genutzt – verlässt man sich
+# darauf, wird die Seite beim kleinsten Ref-/Pagination-Umbau still falsch.
+R11_ESC_RX = re.compile(r"\]\((\.\.[^)\n]*)\)")
+
+
+def check_hub_links(rel: str, body: str) -> list:
+    out = []
+    for m in R11_ESC_RX.finditer(body):
+        out.append((rel, "R11-HUB-LINK",
+                    f"Hub-Seite verlinkt relativ ausbrechend „{m.group(1)[:60]}“ – "
+                    "wurzel-absolut setzen (/posts/…, /pillar/…)", m.group(1)))
+    return out
+
+
+# R12: Ziel-Existenz. Ein Slug-Umbau lässt Hub-Links zu 404-Waisen
+# verkommen; geprüft wird deterministisch gegen die Content-Struktur
+# (identische Auflösung wie Hugo-Pages, ohne Hugo).
+R12_TARGET_RX = re.compile(r"\]\((/posts/[^)\s#?]+|/pillar(?:/[^)\s#?]+)?)/?\)")
+
+
+def hub_target_state(href: str, root: Path = None) -> tuple:
+    """(ok, grund) – prüft Bundle-/Datei-Existenz und draft-Status eines Ziels."""
+    root = root or ROOT
+    path = href.strip().rstrip("/")
+    if path == "/pillar":
+        ok = (root / "content" / "pillar" / "_index.md").exists()
+        return (True, "") if ok else (False, "content/pillar/_index.md fehlt")
+    parts = [x for x in path.split("/") if x]
+    if len(parts) < 2:
+        return (True, "")  # /posts/ (Sektion selbst) – entsteht immer mit dem Bau
+    sec, slug = parts[0], parts[1]
+    for cand in (root / "content" / sec / slug / "index.md",
+                 root / "content" / sec / (slug + ".md")):
+        if cand.exists():
+            if re.search(r"^draft:\s*true\s*$", cand.read_text(encoding="utf-8"), re.M):
+                return (False, "Ziel existiert, ist aber Entwurf (draft: true) – im Live-Bau 404")
+            return (True, "")
+    return (False, f"Content-Bundle content/{sec}/{slug}/ fehlt – toter Link im Live-Bau")
+
+
+def check_hub_targets(rel: str, body: str, resolve=None) -> list:
+    resolve = resolve or hub_target_state
+    out = []
+    for m in R12_TARGET_RX.finditer(body):
+        href = m.group(1)
+        ok, grund = resolve(href)
+        if not ok:
+            out.append((rel, "R12-HUB-ZIEL", f"Hub-Link {href} → {grund}", href))
+    return out
+
+
+def _fm_field(fm: str, key: str) -> str:
+    m = re.search(rf"^{key}:\s*\"?([^\"\n]*?)\"?\s*$", fm, re.M)
+    return m.group(1).strip() if m else ""
+
+
+def check_hub_meta(rel: str, raw: str) -> list:
+    """R13: Frontmatter-Maße der Hub-Seite (SERP-Korridor + ehrliche Aktualität)."""
+    out = []
+    fm = raw.split("---", 2)[1] if raw.startswith("---") else ""
+    title = _fm_field(fm, "title")
+    desc = _fm_field(fm, "description")
+    lm = _fm_field(fm, "lastmod")
+    if not (10 <= len(title) <= 130):
+        out.append((rel, "R13-HUB-META",
+                    f"Titel {len(title)} Zeichen (Korridor 10–130) – außerhalb kein sauberes SERP-Snippet", title[:80]))
+    if not (80 <= len(desc) <= 160):
+        out.append((rel, "R13-HUB-META",
+                    f"Description {len(desc)} Zeichen (Korridor 80–160) – Google kürzt ab ~160; Unterlänge verschenkt die Snippet-Zeile", desc[:80]))
+    if lm:
+        m = re.match(r"(\d{4}-\d{2}-\d{2})", lm)
+        if not m:
+            out.append((rel, "R13-HUB-META", f"lastmod „{lm[:20]}“ nicht im Format JJJJ-MM-TT", lm))
+        elif m.group(1) > date.today().isoformat():
+            out.append((rel, "R13-HUB-META",
+                        f"lastmod {m.group(1)} liegt in der Zukunft (heute {date.today()}) – „zuletzt aktualisiert“ wäre eine Lüge", lm))
+    if rel.replace("\\", "/").endswith("posts/_index.md") and not lm:
+        out.append((rel, "R13-HUB-META",
+                    "posts/_index.md braucht lastmod – die Seite verspricht „sortiert nach Aktualität“; frische Inhalte ohne frisches lastmod wirken veraltet", lm))
+    return out
+
+
+R14_KURZ_RX = re.compile(r"^>\s*💡?\s*\*\*Kurz & knapp:\*\*\s*\S")
+R14_MAX = 420
+
+
+def check_kurz_block(rel: str, body: str) -> list:
+    """R14: Der Kurz-&-knapp-Satz ist der kanonische Teaser der Sektionsseite
+    (Snippet-/Pin-Quelle) – er muss ERSTES Element und kurz genug sein."""
+    for line in body.split("\n"):
+        if not line.strip():
+            continue
+        stripped = line.strip()
+        if not R14_KURZ_RX.match(stripped):
+            return [(rel, "R14-KURZ-BLOCK",
+                     "Erstes Element von posts/_index.md muss das Zitat „> 💡 **Kurz & knapp:** …“ sein "
+                     "(Snippet-/Pin-Kanon der Sektionsseite) – gefunden: „" + stripped[:50] + "“", stripped)]
+        if len(stripped) > R14_MAX:
+            return [(rel, "R14-KURZ-BLOCK",
+                     f"Kurz-&-knapp-Block {len(stripped)} Zeichen (Limit {R14_MAX}) – Meta-Vorschau und Pin-Text laufen sonst über", stripped[:80])]
+        return []
+    return [(rel, "R14-KURZ-BLOCK", "posts/_index.md hat keinen Textkörper – die Sektionsseite wäre leer", "")]
+
+
+def hub_files() -> list:
+    files = [ROOT / "content" / "_index.md", POSTS / "_index.md",
+             ROOT / "content" / "pillar" / "_index.md"]
+    files += sorted((ROOT / "content" / "pillar").glob("*/index.md"))
+    return [p for p in files if p.exists()]
+
+
+def check_hub(rel: str, path: Path) -> list:
+    """Alle Hub-Regeln für eine Datei. R11–R14 gelten nur für echte
+    Sektions-Hubs (_index.md); die Pillar-Bundles pflegen bewusst den
+    bestehenden Hausstil (../../-Relativlinks) – dort wären R11/R13
+    sofort falscher Alarm, R9/R10 laufen für sie trotzdem."""
+    raw = path.read_text(encoding="utf-8")
+    body = split_body(raw)
+    out = []
+    out += check_nested_links(rel, body)
+    out += check_klebewoerter(rel, body)
+    out += check_zahl_kleber(rel, body)
+    if path.name == "_index.md":
+        out += check_hub_links(rel, body)
+        out += check_hub_targets(rel, body)
+        out += check_hub_meta(rel, raw)
+        if rel.replace("\\", "/").endswith("posts/_index.md"):
+            out += check_kurz_block(rel, body)
+    return out
+
+
+def run_hub_gate() -> int:
+    finds = []
+    for p in hub_files():
+        finds += check_hub(str(p.relative_to(ROOT)), p)
+    if finds:
+        print(f"❌ Hub-Gate: {len(finds)} Fundstelle(n) in den Sektions-/Hub-Seiten:")
+        for rel, regel, detail, _pos in finds[:40]:
+            print(f"  [{regel}] {rel}: {detail[:170]}")
+        return 1
+    print(f"✅ Hub-Gate: {len(hub_files())} Hub-Seiten grün "
+          "(Kleber R9, Zahl-Kleber R10, Hub-Links R11, Ziel-Existenz R12, Meta R13, Kurz-&-knapp R14).")
+    return 0
 
 
 def run_selftest() -> list:
@@ -384,9 +601,45 @@ def run_selftest() -> list:
         fehler.append("R9: Klebe-Artefakt nicht erkannt")
     # Negativfälle dürfen NICHT anschlagen
     for _ok in ("WLAN und DSGVO sind legitim.", "MagentaZuhause-Tarife bei der Telekom.",
-                "Aachen liegt im Westen.", "Die FritzBox ist ein Router."):
+                "Aachen liegt im Westen.", "Die FritzBox ist ein Router.",
+                "Die Buchung kostet 49 € zzgl. 19 % MwSt."):
         if check_klebewoerter("t", "TEXT\n\n" + _ok):
             fehler.append(f"R9: False-Positive bei „{_ok}“")
+
+    # R10–R14 HUB-Wachen (11.09.2026, Live-Schaden posts/_index.md):
+    # R10 muss den Zahl-Kleber finden, aber Marken & Ordinalzahlen verschonen
+    if not check_zahl_kleber("t", "TEXT\n\ndu zahlst20 € extra"):
+        fehler.append("R10: Zahl-Kleber nicht erkannt")
+    for _ok2 in ("**CHECK24** prüfst du in Minuten.", "15 m CAT7 verlegen.",
+                 "Nachtspeicher aus den 90ern.", "Die 50–30–20-Regel hilft.",
+                 "mp3-Player und mp4-Video bleiben ruhig."):
+        if check_zahl_kleber("t", "TEXT\n\n" + _ok2):
+            fehler.append(f"R10: False-Positive bei „{_ok2}“")
+    # R11: ausbrechende Relativlinks finden, wurzel-absolute & Kinderrefs lassen
+    if not check_hub_links("t", "[a](../../posts/x/)"):
+        fehler.append("R11: ../-Hub-Link nicht erkannt")
+    if check_hub_links("t", "[a](/posts/x/) und [b](strom-sparen/)"):
+        fehler.append("R11: False-Positive auf sauberen Hub-Links")
+    # R12: mit eingesetzter Fake-Auflösung hermetisch testen
+    fake = lambda href: (href != "/posts/gespenst/", "feht")
+    if len(check_hub_targets("t", "[x](/posts/gespenst/) [y](/posts/reales/)", resolve=fake)) != 1:
+        fehler.append("R12: Hub-Ziel-Prüfung nicht korrekt (Geist-Ziel nicht gefunden oder False-Positive)")
+    # R13: Meta-Maße
+    bad_fm = "---\ntitle: \"x\"\ndescription: \"zu kurz\"\n---\n\nText"
+    if len([f for f in check_hub_meta("content/posts/_index.md", bad_fm)]) < 2:
+        fehler.append("R13: Meta-Verstöße nicht erkannt")
+    good_fm = ("---\ntitle: \"" + "A" * 60 + "\"\ndescription: \"" + "B" * 120 +
+               "\"\nlastmod: 2026-01-01\n---\n\nText")
+    if check_hub_meta("content/pillar/_index.md", good_fm):
+        fehler.append("R13: False-Positive auf gesunder Hub-Meta")
+    # R14: Kurz-&-knapp-Pflicht nur posts/_index.md – positiv + negativ
+    if check_kurz_block("content/posts/_index.md",
+                        "\n> 💡 **Kurz & knapp:** Hier findest du alles.\n\n## Mehr\n"):
+        fehler.append("R14: sauberer Kurz-&-knapp-Block wurde gefunden (False-Positive)")
+    if not check_kurz_block("content/posts/_index.md", "\n## Los geht es\n\nText.\n"):
+        fehler.append("R14: fehlender Kurz-&-knapp-Block nicht erkannt")
+    if not check_kurz_block("content/posts/_index.md", "\n> 💡 **Kurz & knapp:** " + "x" * 500 + "\n"):
+        fehler.append("R14: überlanger Kurz-&-knapp-Block nicht erkannt")
 
     return fehler
 
@@ -399,8 +652,13 @@ def main() -> int:
         if fehler:
             print("SELFTEST FEHLGESCHLAGEN – nichts geschrieben.")
             return 2
-        print("✅ Verständnis-Selbsttest: 9 Fälle grün.")
+        print("✅ Verständnis-Selbsttest: alle Fälle grün (R2–R14 inkl. Hub-Wachen).")
         return 0
+
+    # Hub-Gate (11.09.2026): liest NUR die content/**/_index.md + Pillar-Hubs,
+    # schreibt nichts – der harte Blocker für Push/PR im Qualitäts-Gate.
+    if HUB_GATE:
+        return run_hub_gate()
 
     term = load_terminologie()
     today = date.today().isoformat()
@@ -420,20 +678,15 @@ def main() -> int:
         body = split_body(p.read_text(encoding="utf-8"))
         all_finds += check_article(rel, body, term)
 
-    # Hub-/Listen-Seiten (02.09.2026): In posts/_index.md wurde mit
-    # „HHerfindestdu“/„Ddeine6 Themenwelten“ das Reste-Artefakt eines
-    # historischen Inserter-Skripts gefunden – seitdem laufen für diese
-    # Seiten die Seiten-Level-Regeln (Nested-Links, Klebewörter) mit.
+    # Hub-/Listen-Seiten (02.09.2026, gehärtet 11.09.2026): In posts/_index.md
+    # standen die Inserter-Artefakte „Hhierfindest“/„Ddeine6“ wochenlang live,
+    # weil Hub-Funde nur im Report mittliefen und dort hinter den ersten 60
+    # Artikel-Funden abschnitten. Jetzt: volle Hub-Regeln R9–R14 (check_hub)
+    # + harter --hub-gate-Modus als CI-Blocker. Hub-Funde stehen im Report
+    # vor den Artikel-Funden.
     if not NEW_ONLY:
-        hub_paths = [POSTS / "_index.md"]
-        hub_paths += sorted((ROOT / "content" / "pillar").glob("*/index.md"))
-        for p in hub_paths:
-            if not p.exists():
-                continue
-            rel = str(p.relative_to(ROOT))
-            body = split_body(p.read_text(encoding="utf-8"))
-            all_finds += check_nested_links(rel, body)
-            all_finds += check_klebewoerter(rel, body)
+        for p in hub_files():
+            all_finds += check_hub(str(p.relative_to(ROOT)), p)
 
     # dedup
     uniq, seen = [], set()
@@ -447,18 +700,23 @@ def main() -> int:
     # R8-ANKER-ZIEL ist bewusst NUR weich (semantische Kohärenz ist nicht
     # deterministisch prüfbar – Funde sind Review-Kandidaten, keine Blocker).
     hard_rules = ("R2-KEYWORD-DUMP", "R3-TERMINOLOGIE", "R5-ABSATZ-HART", "R7-INTRO-FORMEL",
-                  "R8-URL-LEERZEICHEN", "R8-NESTED-LINK", "R9-KLEBEWORT")
+                  "R8-URL-LEERZEICHEN", "R8-NESTED-LINK", "R9-KLEBEWORT",
+                  "R10-ZAHL-KLEBER", "R11-HUB-LINK", "R12-HUB-ZIEL", "R13-HUB-META", "R14-KURZ-BLOCK")
     hard = [f for f in uniq if f[1] in hard_rules]
     soft = [f for f in uniq if f[1] not in hard_rules]
 
     lines = [f"# 🧠 TEXTVERSTÄNDNIS-REPORT (textverstaendnis_guard.py)",
-             f"**Stand:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')} · Artikel: {len(paths)}" +
+             f"**Stand:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')} · Artikel: {len(paths)} · Hub-Seiten: {len(hub_files())}" +
              (" · Engine (nur heute)" if NEW_ONLY else ""),
              "",
-             f"**Harte Regeln (R2/R3/R5-hart/R7/R8-URL):** {len(hard)} Funde",
+             f"**Harte Regeln (R2/R3/R5-hart/R7/R8/R9/R10–R14):** {len(hard)} Funde",
              f"**Weiche Regeln (R4/R5/R8-Anker):** {len(soft)} Funde",
              ""]
-    for rel, regel, detail, pos in uniq[:60]:
+    # Harte Funde ZUERST – Hub-Reparaturen dürfen nicht mehr hinter weichen
+    # Artikel-Echos im 60-Zeilen-Abschneiden untergehen (Ursache #posts-Typo).
+    for rel, regel, detail, pos in hard[:150]:
+        lines.append(f"- `{rel}` **{regel}**: {detail}")
+    for rel, regel, detail, pos in soft[:60]:
         lines.append(f"- `{rel}` **{regel}**: {detail}")
     lines.append("")
     lines.append("_Textverständnis: 1 Konzept = 1 Leitbegriff, 1 Absatz = 1 Gedanke, keine Komma-Listen, keine Template-Sprache._")
