@@ -216,6 +216,8 @@ altersvorsorge
 finanz-community
 schnäppchen
 staatlich
+abrücken
+gasanbieterwechsel
 
 # Ergänzungen aus der Kontext-Analyse
 ipv4

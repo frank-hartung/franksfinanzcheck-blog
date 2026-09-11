@@ -28,6 +28,7 @@ from itertools import combinations
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths
+import template_boilerplate  # SSOT für deterministische Fazit-/FAQ-Bausteine (#251)
 PINTEREST_PLAN = os.path.join(BLOG_DIR, "data", "pinterest_plan.yaml")
 
 PHRASE_LEN = int(os.environ.get("PHRASE_LEN", "7"))
@@ -47,7 +48,15 @@ def clean_body(content):
     """Entfernt Frontmatter und alle Template-Bausteine → nur Fließtext."""
     parts = content.split("---", 2)
     body = parts[2] if len(parts) == 3 else content
-    # Werbekennzeichnung (variiert in Zeilenumbrüchen)
+    # Deterministische Fazit-/FAQ-Blöcke der Fazit-Schmiede ZENTRAL entfernen
+    # (Issue #251): Template-Repetition ≠ Text-Dopplung – sonst kollidiert
+    # jeder Artikel über den geteilten „Hebel“-Satz + Vergleichs-CTA mit 10+
+    # unverwandten Artikeln und wird fälschlich als Duplikat geparkt.
+    body = template_boilerplate.strip_generated_conclusions(body)
+    # Marketing-/Affiliate-Bausteine aus DERSELBEN Quelle wie quality_score
+    # (keine Drift mehr): Werbekennzeichnung, Schnell-/Spar-Tipp, CTA-Zeilen.
+    body = template_boilerplate.strip_marketing_boilerplate(body)
+    # Werbekennzeichnung in umbrochenen Varianten (mehrzeilig, Altbestand)
     body = re.sub(r"\*?_?Dieser Artikel enthält Affiliate-Links.*?(?:Mehrkosten|Mehrkosten\.)_?\*?", " ", body, flags=re.S)
     body = re.sub(r"\(Dieser Artikel enthält Affiliate-Links.*?\)", " ", body, flags=re.S)
     # UI-Callout-Blöcke & CTAs (Schnell-Tipp, Spar-Tipp, Weiterlesen, Conversion-Buttons)
