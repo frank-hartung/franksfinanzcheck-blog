@@ -1,0 +1,10 @@
+{"ts": "2026-09-11T08:18:50Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 9}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T08:18:56Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T08:19:00Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 4}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T08:19:05Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T08:19:11Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T08:19:16Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T08:19:16Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T08:19:16Z", "module": "fix_spaces", "action": "apply", "input": {"files": 51}, "output": {"fixes": 768}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T08:21:52Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 6}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-11T08:22:12Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug"]}, "output": {"gated": ["2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug"], "demoted": []}, "status": "gated", "critical": false, "commit": null}
