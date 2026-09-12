@@ -12,9 +12,10 @@ items:
   date: '2026-09-12'
   time: '14:15'
   scheduled_at: '2026-09-12T14:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD
+    fehlen
 - id: facebook:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen:nutzen:2026-09-12
   channel: facebook
   slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
@@ -24,9 +25,9 @@ items:
   date: '2026-09-12'
   time: '15:15'
   scheduled_at: '2026-09-12T15:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: threads:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen:nutzen:2026-09-12
   channel: threads
   slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
@@ -36,9 +37,9 @@ items:
   date: '2026-09-12'
   time: '16:15'
   scheduled_at: '2026-09-12T16:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: mastodon:2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich:takeaway:2026-09-12
   channel: mastodon
   slug: 2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich
@@ -48,8 +49,8 @@ items:
   date: '2026-09-12'
   time: '17:30'
   scheduled_at: '2026-09-12T17:30:00+02:00'
-  status: planned
-  attempts: 0
+  status: published
+  attempts: 1
   reason: ''
 - id: telegram:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen:nutzen:2026-09-12
   channel: telegram
@@ -60,9 +61,9 @@ items:
   date: '2026-09-12'
   time: '18:00'
   scheduled_at: '2026-09-12T18:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: bluesky:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:frage:2026-09-12
   channel: bluesky
   slug: 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife
@@ -72,9 +73,9 @@ items:
   date: '2026-09-12'
   time: '18:15'
   scheduled_at: '2026-09-12T18:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: instagram:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen:frage:2026-09-12
   channel: instagram
   slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen

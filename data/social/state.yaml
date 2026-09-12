@@ -300,5 +300,17 @@ history:
   text: ''
   ref: altbestand
   migrated: true
+- posted_at: '2026-09-12T18:22:17.651742+02:00'
+  channel: mastodon
+  slug: 2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich
+  title: 'WLAN-Probleme lösen: Mesh oder Repeater im Vergleich'
+  angle: takeaway
+  url: https://mastodon.social/@FranksFinanzcheck/117258986614384406
+  ok: true
+  text: 'Mehr stabile Homeoffice‑Verbindung – Mesh‑System statt Repeater. Repeater
+    halbieren oft die Bandbreite, kosten 30‑80 €, Mesh‑Lösungen 150‑400 €. 📶💻 https://franksfinanzcheck.de/posts/2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #WLAN #Internet #MeshWLANTest #HomeofficeInternet'
+  ref: '117258986614384406'
+  ai: true
 failures: []
-updated_at: '2026-09-12T14:12:44.978773+02:00'
+updated_at: '2026-09-12T18:22:23.054393+02:00'
