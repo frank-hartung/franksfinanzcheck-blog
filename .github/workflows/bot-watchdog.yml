@@ -34,7 +34,23 @@
 #    - Deploy-Warteschlange #218 (Phantom-Alarme)
 #    - Pinterest-Token-Lebenszyklus #206 (30-Tage-Tod)
 #
-#  Bei Problemen: automatisch GitHub-Issue (Dedupe, kein Spam).
+#  REPARATUR #272 (12.09.2026) – Alarm-Routing statt Dauer-Alarm:
+#    Der Watchdog kannte genau EINEN Meldeweg für ALLE Befunde. Ein toter
+#    Pinterest-Token (nur per Browser-OAuth heilbar) stand damit als
+#    „Problem mit der Content-Automatisierung" im Briefkasten – obwohl
+#    Kadenz, Live-Site und Reserve kerngesund waren. Schlimmer: der
+#    automatische Schließpfad war konstruktiv unmöglich (Grün erst durch
+#    den Menschen, der Lauf durfte aber nie grün melden) → täglich ein
+#    neues Issue (#251 → #272 → …), ein Melder als Dauerläufer.
+#    Jetzt trennt scripts/alert_router.py nach BESITZ:
+#      · Maschine heilt  → Automations-Ticket (Label `bot-watchdog`)
+#      · Mensch heilt    → Fach-Ticket mit Runbook + Eskalationsleiter
+#        (Label `pinterest-parked` / `pinterest-token` …), maximal ein
+#        Kommentar pro Stufe und frühestens alle 72 h.
+#    Menschliche Befunde halten das Automations-Ticket NIE offen –
+#    damit hat jedes Ticket einen Schließpfad.
+#
+#  Bei Problemen: automatisch GitHub-Issue (Besitz, Kadenz, Auto-Close).
 #  Manuell: Actions → Bot-Watchdog → Run workflow
 # ============================================================
 name: Bot-Watchdog
@@ -45,7 +61,7 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: read
+  contents: write    # für den Routing-Zustand (data/alert_router_state.json)
   issues: write
   actions: read      # für gh run list (Meta-Check)
 
@@ -165,112 +181,35 @@ jobs:
               // Nicht failen – Melder darf nicht selbst zum Incident werden
             }
 
-      - name: Issue bei Problemen erstellen (mit Dedupe, robust)
-        if: ${{ env.PROBLEMS != '' }}
-        continue-on-error: true
-        uses: actions/github-script@v7
-        with:
-          script: |
-            try {
-              const problems = process.env.PROBLEMS || '';
-              console.log('Probleme erkannt, prüfe Dedupe...');
-              // Pagination-sicher: alle offenen Issues holen
-              const existing = await github.paginate(
-                github.rest.issues.listForRepo,
-                { owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100 }
-              );
-              const open = existing.filter(i => i.title && i.title.includes('Bot-Watchdog') && !i.pull_request);
-              if (open.length > 0) {
-                console.log(`Offenes Watchdog-Issue existiert bereits (#${open[0].number}) – kein Duplikat.`);
-                console.log('Aktuelle Probleme bleiben offen: ' + problems.slice(0,500));
-                // Optional: Kommentar mit aktuellem Stand
-                try {
-                  await github.rest.issues.createComment({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    issue_number: open[0].number,
-                    body: `**Update ${new Date().toISOString()}** – weiterhin Probleme:\n\n${problems}\n\n---\n*Auto-Update vom Bot-Watchdog.*`
-                  });
-                } catch (cErr) {
-                  console.log('Kommentar konnte nicht erstellt werden: ' + cErr.message);
-                }
-                return;
-              }
-              // Profi-Body ohne stray Zeichen, mit Affiliate + Pinterest Kontext
-              const body = [
-                '## 🤖 Bot-Watchdog hat Probleme festgestellt (Profi-Agentur-Level)',
-                '',
-                'Folgende Checks sind fehlgeschlagen:',
-                '',
-                problems,
-                '',
-                '### Nächste Schritte (nach Priorität)',
-                '1. **Artikel-Bilanz ansehen:** `PRODUKTIONS-STATUS.md` + `BOT-WATCHDOG-REPORT.md` im Repo',
-                '2. **Workflow-Log ansehen:** Actions → "Content-Engine v2" → letzter Lauf → Phase 1',
-                '3. **Affiliate-Check:** `AFFILIATE-INTEGRITY-REPORT.md` – CTA-Boxen/Linkziele (tägliche Wache 06:00 MESZ)',
-                '4. **Pinterest-Check:** `PINTEREST-REPORT.md` + `data/pinterest_token_state.json` – Token-Lebenszyklus (täglich 04:40 MESZ)',
-                '5. **API-Keys prüfen:** Settings → Secrets and variables → Actions (GROQ/GEMINI)',
-                '6. **Manuell nachhelfen:** Actions → "Content-Engine v2" → Run workflow',
-                '7. **Deploy prüfen:** Actions → "Deploy auf GitHub Pages" → letzter Lauf (Catchup bei Queue-Stau)',
-                '8. **Nur Mo/Mi/Fr:** Di/Do/Wochenende sind publikationsfrei – dort ist "kein Artikel" korrekt.',
-                '',
-                '### Kontext (Profi-Agentur)',
-                '- **Affiliate-Manager:** Prüfe, ob `affiliate-integrity-daily.yml` in den letzten 30h lief und ob der Render-Beweis (Hugo Extended) grün ist. Ein toter Affiliate-Link kostet Provision.',
-                '- **Pinterest-Experte:** Prüfe Token-Broker (`scripts/pinterest_token.py --status`), Watchdog-Liveness und Duplikat-Sperre. Repeat-Pin <30 Tage = Spam-Signal.',
-                '- **Content-Reserve:** Sollte >=4 Artikel enthalten (2 Tage × 2 Mindestziel).',
-                '',
-                'Das Issue wird automatisch geschlossen, sobald der nächste Watchdog-Lauf alles grün meldet.',
-                '',
-                '---',
-                '*Automatisch erstellt vom Bot-Watchdog 2.0 (täglich 10:30 MESZ, Profi-Agentur-Level, inkl. Affiliate + Pinterest).*'
-              ].join('\n');
-              await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                title: '⚠️ Bot-Watchdog: Probleme mit der Content-Automatisierung',
-                body: body,
-                labels: ['bot-watchdog']
-              });
-              console.log('✅ Watchdog-Issue erstellt');
-            } catch (e) {
-              console.log('❌ Fehler beim Erstellen des Watchdog-Issues: ' + e.message);
-              console.log(e.stack || '');
-              // Workflow soll NICHT rot werden, weil das Melden scheitert – das war Ursache #227
-              // Wir loggen, aber werfen nicht
-            }
+      # ------------------------------------------------------------
+      #  Alarm-Routing (#272): Besitz, Kadenz, Schließpfad – eine Stelle,
+      #  ein Code-Pfad (scripts/alert_router.py), statt Melde-Logik im YAML.
+      #  Der Melder darf nie selbst zum Vorfall werden: der Schritt ist
+      #  immer erfolgreich, Fehler stehen als ::error:: im Lauf-Log.
+      # ------------------------------------------------------------
+      - name: Alarm-Routing (Besitz · Kadenz · Auto-Close)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          python3 scripts/bot_watchdog.py --route
+          echo "exit=$?" >> "$GITHUB_STEP_SUMMARY"
+          set -e
 
-      - name: Offenes Watchdog-Issue schließen (alles wieder grün)
-        if: ${{ env.PROBLEMS == '' }}
-        continue-on-error: true
-        uses: actions/github-script@v7
-        with:
-          script: |
-            try {
-              const existing = await github.paginate(
-                github.rest.issues.listForRepo,
-                { owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100 }
-              );
-              const open = existing.filter(i => i.title && i.title.includes('Bot-Watchdog') && !i.pull_request);
-              for (const issue of open) {
-                await github.rest.issues.createComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: issue.number,
-                  body: `✅ **${new Date().toISOString()}** – alle Checks grün (Profi-Level): Produktions-Wache lebt, Live-Site aktuell, Affiliate- und Pinterest-Kanäle im grünen Bereich.\n\n*Auto-Close vom Bot-Watchdog 2.0.*`
-                });
-                await github.rest.issues.update({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: issue.number,
-                  state: 'closed',
-                  state_reason: 'completed'
-                });
-                console.log(`✅ Watchdog-Issue #${issue.number} geschlossen (alles grün).`);
-              }
-              if (open.length === 0) console.log('Kein offenes Watchdog-Issue.');
-            } catch (e) {
-              console.log('⚠️ Konnte Watchdog-Issue nicht schließen: ' + e.message);
-            }
+      - name: Routing-Zustand sichern (Kadenz/Eskalation überlebt den Lauf)
+        if: always()
+        continue-on-error: true    # ein Push-Rennen darf den Melder nicht röten
+        run: |
+          git config user.name "Bot-Watchdog"
+          git config user.email "bot-watchdog@users.noreply.github.com"
+          git add data/alert_router_state.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Routing-Zustand unverändert."
+          else
+            git commit -m "chore(watchdog): Alarm-Routing-Zustand"
+            scripts/git_sync.sh --push-only
+          fi
 
       # REPORT: BOT-WATCHDOG-REPORT.md ist seit dem Premium-Audit 12.09.2026
       # gitignored und nicht versioniert (bleibt im Lauf-Log). Der frühere
