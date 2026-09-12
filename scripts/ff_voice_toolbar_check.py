@@ -169,13 +169,11 @@ def main() -> int:
     check("Engine: Abschnittsnavigation", "jumpBlock" in engine)
     check("Engine: Satz-Sprung (Shift + Pfeil)", "jumpSentence" in engine)
     check("Engine: Live-Markierung", "ff-voice-active" in engine)
-    # NUR-DEUTSCH-VERTRAG (Befund 07.09.2026): Die Vorlese-Funktion nutzt
-    # ausschließlich Deutsch — englische Stimmenketten und der
-    # Sprachwechsel mitten im Satz (Wortlauf-Regie) sind verboten.
-    check("Engine: Nur-Deutsch — keine englische Stimm-Kette",
-          "'en-US'" not in engine and not re.search(r"^\s*en:\s*\{", engine, re.M))
-    check("Engine: Nur-Deutsch — keine Sprachwechsel-Regie",
-          "languageRuns" not in engine and "sniffLangOf(el, fallback)" not in engine)
+    # PREMIUM-BILINGUAL (12.09.2026): DE+EN ohne Umschalter, eine Stimme
+    check("Engine: Premium-Bilingual — en vorhanden (ohne Umschalter)",
+          "'en-us'" in engine.lower() and "en:" in engine)
+    check("Engine: Premium-Bilingual — Sprachwechsel je Block/Satz",
+          "sniffLangOf" in engine and "detectArticleLanguage" in engine)
     # WORT-TAKT: drei Quellen (Wortuhr der Spur, onboundary, Schätzung),
     # eine Anzeige; die Quelle wird an der Leiste ausgewiesen.
     check("Engine: Wort-Takt mit Wortuhr-Aligner",

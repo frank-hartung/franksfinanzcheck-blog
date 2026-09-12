@@ -17,7 +17,7 @@
 
 import { createRunner, loadPage, skeleton, mdToHtml, makeVoices, sleep } from './ff_voice_qa_lib.mjs';
 
-const t = createRunner('Stimmen-Regie: männlicher Nachrichtensprecher, nur Deutsch');
+const t = createRunner('Stimmen-Regie: männlich, Premium-Bilingual DE+EN ohne Umschalter');
 
 const BODY = mdToHtml('## Abschnitt\n\nDer Wechsel spart bis zu 650 € im Jahr – bei 12 bis 24 Monaten Laufzeit.\n');
 
@@ -86,17 +86,18 @@ const CATALOGS = {
 
 const FEMALE = /anna|katja|hedda|marlene|vicki|elke|amala|clara|julia|lena|laura|sophie|sofia|zoe|emma|mia|hannah|sarah|emily|ashley|samantha|karen|moira|tessa|fiona|serena|allison|ava|susan|joan|linda|nancy|nina|victoria|aria/i;
 
-t.group('1) Jeder Katalog liefert eine DEUTSCHE Stimme – still darf es nie bleiben');
+t.group('1) Jeder Katalog liefert die PASSENDE Stimme je Sprache – Premium-Bilingual');
 for (const [label, voices] of Object.entries(CATALOGS)) {
   const { api } = openWith(voices);
   const de = api.resolveMaleVoice('de');
-  const en = api.resolveMaleVoice('en');   // fremdes Ziel: Nur-Deutsch-Vertrag
+  const en = api.resolveMaleVoice('en');
   const hasGerman = voices.some((v) => String(v.lang).toLowerCase().startsWith('de'));
+  const hasEnglish = voices.some((v) => String(v.lang).toLowerCase().startsWith('en'));
   t.ok(`${label}: Stimme gefunden, wo Deutsch existiert`, !!de.voice === hasGerman,
     'voice=' + (de.voice && de.voice.name));
   t.ok(`${label}: gefundene Sprache ist immer deutsch`, !de.voice || String(de.voice.lang).toLowerCase().startsWith('de'),
     de.voice && de.voice.lang);
-  t.ok(`${label}: „en“-Ziel liefert nie Englisch`, !en.voice || String(en.voice.lang).toLowerCase().startsWith('de'),
+  t.ok(`${label}: „en“-Ziel liefert Englisch wo verfügbar`, !hasEnglish || (!!en.voice && String(en.voice.lang).toLowerCase().startsWith('en')),
     en.voice && en.voice.name + ' / ' + en.voice.lang);
 }
 
@@ -119,15 +120,17 @@ t.group('3) Ohne männliche deutsche Stimme: ehrlicher Notnagel in der männlich
   t.ok('Notnagel bleibt deutsch', String(de.voice.lang).toLowerCase().startsWith('de'), de.voice.lang);
 }
 {
-  // Katalog ganz ohne Deutsch: gar keine Stimme ist die ehrliche Antwort —
-  // NIE die englische als „Ersatz“ anzapfen (Nur-Deutsch-Vertrag).
+  // Katalog ganz ohne Deutsch: de→ keine Stimme, en→ englische Stimme
   const { api } = openWith(CATALOGS['Nur englische Männer']);
   const de = api.resolveMaleVoice('de');
-  t.ok('Keine deutsche Stimme im Katalog → keine Stimme gewählt', !de.voice,
+  const en = api.resolveMaleVoice('en');
+  t.ok('Keine deutsche Stimme → de leer', !de.voice,
     de.voice && ('TROTZDEM: ' + de.voice.name));
+  t.ok('EN-Stimme vorhanden wo Englisch existiert', !!en.voice && String(en.voice.lang).toLowerCase().startsWith('en'),
+    en.voice && en.voice.name + ' / ' + en.voice.lang);
 }
 
-t.group('4) Determinismus – dieselbe Entscheidung bei jedem Aufruf');
+t.group('4) Determinismus – dieselbe Entscheidung je Sprache');
 {
   const { api } = openWith(CATALOGS['Windows/Edge (Online Neural)']);
   const a = api.resolveMaleVoice('de').voice.name;
@@ -135,8 +138,10 @@ t.group('4) Determinismus – dieselbe Entscheidung bei jedem Aufruf');
   const c = api.resolveMaleVoice('de').voice.name;
   t.eq('DE stabil', a, b);
   t.eq('DE stabil (3. Aufruf)', b, c);
-  t.eq('Fremdes Ziel „en“ entscheidet identisch (eine Regie, eine Sprache)',
-    api.resolveMaleVoice('en').voice.name, a);
+  const en1 = api.resolveMaleVoice('en').voice.name;
+  const en2 = api.resolveMaleVoice('en').voice.name;
+  t.eq('EN stabil', en1, en2);
+  t.ok('DE≠EN (bilingual, zwei Stimmen)', a !== en1, 'de=' + a + ' en=' + en1);
 }
 
 t.group('5) Qualität & Nachrichtenton: Studio vor Standard, News-Stimme vor allem');
@@ -164,16 +169,19 @@ t.group('6) Google-Buchstabencodes: B/D/F sind männlich, A/C/E weiblich');
   t.ok('nicht A/C/E', !/-(A|C|E)$/i.test(de.voice.name), de.voice.name);
 }
 
-t.group('7) Namen mit Teilstring-Fallen – und die deutsche Pflicht');
+t.group('7) Namen mit Teilstring-Fallen – Premium-Bilingual');
 {
   // Der Katalog enthält nur englische Stimmen („Sam“ als Falle neben
-  // „Samantha“): Die Regie darf keine davon wählen — sie sucht Deutsch.
+  // „Samantha“): Für de→ keine Stimme, für en→ Sam (männlich, nicht Samantha)
   const { api } = openWith(makeVoices([
     { name: 'Samantha', lang: 'en-US', localService: true },
     { name: 'Sam', lang: 'en-US', localService: true },
   ]));
+  const de = api.resolveMaleVoice('de');
   const en = api.resolveMaleVoice('en');
-  t.ok('Englischer Katalog bleibt komplett unerreichbar', !en.voice,
+  t.ok('Deutsch unerreichbar ohne de-Stimme', !de.voice,
+    de.voice && ('GEWÄHLT: ' + de.voice.name));
+  t.ok('EN: Sam wird gewählt (nicht Samantha)', en.voice && /\bSam\b/i.test(en.voice.name) && !/Samantha/i.test(en.voice.name),
     en.voice && ('GEWÄHLT: ' + en.voice.name));
 }
 {
@@ -186,30 +194,33 @@ t.group('7) Namen mit Teilstring-Fallen – und die deutsche Pflicht');
   t.ok('Notnagel bleibt trotzdem deutsch', String(de.voice.lang).toLowerCase().startsWith('de'));
 }
 
-t.group('8) Sprechplan: jede Einheit deutsch, eine Stimme für alles');
+t.group('8) Sprechplan: Premium-Bilingual je Einheit');
 {
   const { win } = loadPage(skeleton({
     title: 'Tarifwechsel',
     bodyHtml: '<h2>Was du beachten solltest</h2>'
-      + '<p>Der Wechsel ist einfach. This sentence is clearly written in English and will be spoken by the German news voice.</p>',
+      + '<p>Der Wechsel ist einfach. Ein deutscher Satz.</p>'
+      + '<p>This sentence is clearly written in English and will be spoken by the English male voice now.</p>',
   }), { voices: CATALOGS['Windows/Edge (Online Neural)'] });
   const api = win.__ffVoice;
   const units = api.buildTimeline().units;
   t.ok('Einheiten vorhanden', units.length > 0);
-  t.ok('Keine einzige englische Einheit', units.every((u) => u.lang === 'de'),
+  t.ok('Mindestens eine EN-Einheit', units.some((u) => u.lang === 'en'),
     'en-Einheiten: ' + units.filter((u) => u.lang === 'en').length);
-  const v = api.resolveMaleVoice('de').voice.name;
-  t.ok('Alle Einheiten teilen dieselbe deutsche Stimme', /conrad/i.test(v), v);
+  t.ok('Mindestens eine DE-Einheit', units.some((u) => u.lang === 'de'));
+  t.ok('DE+EN beide bedient', new Set(units.map(u=>u.lang)).size === 2, 'langs=' + [...new Set(units.map(u=>u.lang))].join(','));
   t.ok('Wort-Takt ist eingeschaltet (Quelle: Sprachpfad)', api.wordSyncSource === 'none' || api.wordSyncSource === 'speech',
     api.wordSyncSource);
 }
 
-t.group('8b) Wiedergabe: der Nachrichtensprecher liest ALLES — auch die englischen Begriffe');
+t.group('8b) Wiedergabe: Premium-Bilingual – je Sprache die passende Stimme (Conrad ↔ Andrew)');
 {
   const { win } = loadPage(skeleton({
-    title: 'Robo Advisor',
-    bodyHtml: '<h2>Robo Advisor</h2>'
-      + '<p>Ein Robo Advisor nutzt Compound Interest und Cost Averaging. Der Wechsel spart bis zu 650 Euro im Jahr.</p>',
+    title: 'Bilingual Playback',
+    bodyHtml: '<h2>Deutscher Absatz</h2>'
+      + '<p>Der Wechsel spart bis zu 650 Euro im Jahr.</p>'
+      + '<h2>English section</h2>'
+      + '<p>This English sentence saves you money every year and will be spoken by Andrew.</p>',
   }), { voices: CATALOGS['Windows/Edge (Online Neural)'] });
   const spoken = [];
   const origSpeak = win.speechSynthesis.speak.bind(win.speechSynthesis);
@@ -219,18 +230,13 @@ t.group('8b) Wiedergabe: der Nachrichtensprecher liest ALLES — auch die englis
   };
   const api = win.__ffVoice;
   api.start();
-  await sleep(2500);
+  await sleep(3000);
 
   t.ok('Es wurde gesprochen', spoken.length > 0);
-  t.ok('Alle Äußerungen tragen de-DE', spoken.every((s) => s.lang === 'de-DE'),
-    JSON.stringify(spoken.map((s) => s.lang)));
-  t.ok('Kein einziger en-US-Aufruf', !spoken.some((s) => String(s.lang).toLowerCase().startsWith('en')));
-  t.ok('„Robo Advisor“ klingt in der deutschen Stimme (ein Lauf, kein Wechsel)',
-    spoken.some((s) => s.text.includes('Robo Advisor') && s.text.includes('Compound Interest')),
-    JSON.stringify(spoken.map((s) => s.text)));
-  t.ok('Alle Äußerungen mit Stimme tragen den Nachrichtensprecher Conrad',
-    spoken.every((s) => !s.voice || /conrad/i.test(s.voice)),
-    JSON.stringify(spoken.map((s) => s.voice)));
+  t.ok('Mindestens ein de-DE und ein en-*', spoken.some((s)=>String(s.lang).toLowerCase().startsWith('de')) && spoken.some((s)=>String(s.lang).toLowerCase().startsWith('en')), JSON.stringify(spoken.map((s)=>s.lang)));
+  t.ok('DE-Teile de-DE, EN-Teile en-*', spoken.every((s)=>{var l=String(s.lang).toLowerCase(); return l.startsWith('de')||l.startsWith('en');}), JSON.stringify(spoken));
+  t.ok('EN-Abschnitt mit EN-Stimme (Andrew)', spoken.some((s)=>String(s.lang).toLowerCase().startsWith('en') && /andrew/i.test(s.voice||'')), JSON.stringify(spoken.map((s)=>s.voice+':'+s.lang)));
+  t.ok('DE-Abschnitt mit Conrad', spoken.some((s)=>String(s.lang).toLowerCase().startsWith('de') && /conrad/i.test(s.voice||'')), JSON.stringify(spoken.map((s)=>s.voice+':'+s.lang)));
   t.ok('Lesen läuft ohne Stall zu Ende', api.reading === false || api.playing === true);
 }
 
