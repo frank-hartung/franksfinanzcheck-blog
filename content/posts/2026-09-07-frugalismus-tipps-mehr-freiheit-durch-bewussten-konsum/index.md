@@ -120,7 +120,7 @@ Auch sozialer Druck ist eine Falle. Wir geben oft Geld aus, um Leute zu beeindru
 
 ## Frugalismus im Haushalt: Effizienz bei Energie und Wasser
 
-Neben den großen Verträgen kannst du auch durch kleine Verhaltensänderungen im Haushalt deine Kosten senken. Das fängt beim richtigen Heizen an. Schon ein Grad weniger Raumtemperatur spart in der Regel rund 6 % der Heizkosten. Stoßlüften statt Kippfenster sorgt für frische Luft, ohne dass die Wände auskühlen. Auch beim Wasserverbrauch gibt es Potenzial. Ein Sparduschkopf reduziert den Durchfluss merklich, ohne dass der Komfort beim Duschen leidet.
+Neben den großen Verträgen kannst du auch durch kleine Verhaltensänderungen im Haushalt deine Kosten senken. Das fängt beim richtigen Heizen an. Schon ein Grad weniger am Thermostat drückt die Heizrechnung nach Erfahrungswerten um etwa sechs Prozent. Stoßlüften statt Kippfenster sorgt für frische Luft, ohne dass die Wände auskühlen. Auch beim Wasserverbrauch gibt es Potenzial. Ein Sparduschkopf reduziert den Durchfluss merklich, ohne dass der Komfort beim Duschen leidet.
 
 In der Küche ist der bewusste Umgang mit Elektrogeräten wichtig. Nutze beim Kochen immer einen Deckel auf dem Topf und verwende den Wasserkocher statt des Herdes, um Wasser zu erhitzen. Diese Dinge klingen im Einzelnen trivial, aber in der Summe reduzieren sie deine Nebenkostenabrechnung spürbar. Wer konsequent auf LED-Beleuchtung setzt und Standby-Geräte per schaltbarer Steckdosenleiste vom Netz trennt, schont nicht nur seinen Geldbeutel, sondern auch die Umwelt.
 

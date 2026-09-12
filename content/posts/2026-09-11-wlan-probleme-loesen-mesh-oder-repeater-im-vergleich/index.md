@@ -11,6 +11,7 @@ keywords: ["WLAN probleme lösen", "Mesh WLAN Test", "WLAN Abdeckung verbessern"
 pinwand: Internet & DSL | WLAN-Tipps & Tarife
 pin_title: "Funklöcher adé: WLAN-Verstärker oder Mesh-System?"
 pin_description: "*Werbung | Ein Zimmer mit Empfang, das nächste ohne – das Kästchen aus dem Elektromarkt hilft da oft nur halb: Wir zeigen, wann ein 30-€-Repeater reicht, wann nur ein Mesh-System Ruhe bringt und was beide Lösungen wirklich kosten. Jetzt lesen!"
+kurzantwort: "Ein Repeater genügt für ein einzelnes Funkloch und kostet rund 80 Euro – wegen des Half-Duplex-Betriebs halbiert er aber die Bandbreite am betroffenen Endgerät. Wer mehrere Etagen oder viele Geräte gleichzeitig versorgt, fährt mit einem Mesh-Set für rund 250 Euro besser: Die Knoten wechseln per Seamless Roaming in Millisekunden, und ein drittes Funkband (oder LAN-Kabel) hält die volle Geschwindigkeit frei."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "profi"

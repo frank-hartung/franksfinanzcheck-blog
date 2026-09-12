@@ -26,7 +26,17 @@ while IFS= read -r file; do
 
   # href/src extrahieren – egal ob "doppelt", 'einfach' oder ohne Anführungszeichen
   # (Hugo entfernt beim Minifizieren oft die Anführungszeichen – deshalb robust matchen)
-  links="$(grep -oE "(href|src)=(\"[^\"]*\"|'[^']*'|[^[:space:]'\">]*)" "$file" 2>/dev/null \
+  # Skript-, Style- und Kommentar-Blöcke vorher entfernen: das robuste Muster
+  # unten sieht jedes `href=` (auch `link.href = wf;` in OAuth-JavaScript und
+  # href= in Kommentaren) und meldete deshalb drei Phantom-Links. Phantome in
+  # einer Gate-Ausgabe sind teurer als ein übersehener JavaScript-Link, den
+  # kein statischer Prüfer der Welt auflösen kann.
+  if command -v perl >/dev/null 2>&1; then
+    scan="$(perl -0777 -pe 's|<script\b.*?</script>| |gs; s|<style\b.*?</style>| |gs; s|<!--.*?-->| |gs' "$file" 2>/dev/null || cat "$file")"
+  else
+    scan="$(cat "$file")"
+  fi
+  links="$(printf '%s' "$scan" | grep -oE "(href|src)=(\"[^\"]*\"|'[^']*'|[^[:space:]'\">]*)" 2>/dev/null \
     | sed -E "s/^(href|src)=//; s/^[\"']//; s/[\"']$//" || true)"
 
   for link in $links; do

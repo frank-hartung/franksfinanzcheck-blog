@@ -12,6 +12,7 @@ keywords: ["Notgroschen", "Notfallreserve", "Finanzpolster", "monatsausgaben", "
 pin_title: "Notgroschen: So groß sollte dein finanzielles Polster sein"
 pin_description: "*Werbung | Wie viel Notgroschen brauchst du wirklich? So berechnest du dein finanzielles Polster, baust es planbar auf und parkst es sicher auf Tagesgeld. Mehr Spartipps auf FranksFinanzcheck! #notgroschen #notfallreserve #finanzpolster"
 ai_generated: true
+pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
 inspiration: "Notgroschen aufbauen: Wie viel reicht wirklich?"

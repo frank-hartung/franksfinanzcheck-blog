@@ -1,0 +1,64 @@
+{{- /* layouts/shortcodes/newsletter_form.html – der einzige Anmeldeweg der Site.
+
+    Provider-neutral nach außen, hart in der Sache:
+      1. `params.newsletterFormAction` gesetzt  -> echtes Inline-Formular (POST zum
+         Anbieter-Endpunkt, Feld `email`). Das ist der schnelle Weg: Anmeldung bleibt
+         auf der Seite, Double-Opt-in-Mail kommt trotzdem.
+      2. nur `params.newsletterFormUrl` gesetzt  -> Button zum gehosteten Formular
+         (Brevo-Formular, der Weg aus docs/ANLEITUNG-NEWSLETTER.md).
+      3. beides leer                            -> ehrlicher Leerzustand. Kein
+         Dummy-Feld, kein Formular, das ins Leere postet. Der Footer-CTA wird von
+         `extend_footer.html` ebenfalls nur gesetzt angezeigt – die Site bewirbt
+         also nichts, was nicht funktioniert.
+
+    Absender-/Empfangs-Logik gehört nicht hierher: Verschickt wird über
+    `scripts/newsletter_digest.py` (Workflow `newsletter-daily.yml`).
+*/ -}}
+{{- $action := trim (string site.Params.newsletterFormAction) " " -}}
+{{- $url := trim (string site.Params.newsletterFormUrl) " " -}}
+{{- $liste := default "Fundsachen, Rechner und Sparechnungen – eine Mail pro Werktag." site.Params.newsletterPromise -}}
+<div class="ff-newsletter" id="newsletter-anmeldung">
+{{- if $action -}}
+  <p style="margin:0 0 10px;color:var(--secondary);">{{ $liste }}</p>
+  <form action="{{ $action }}" method="post" accept-charset="utf-8"
+        style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+    <label for="ff-ml" style="font-weight:600;color:var(--primary);">E-Mail-Adresse</label>
+    <input id="ff-ml" type="email" name="email" required autocomplete="email"
+           inputmode="email" placeholder="du@beispiel.de"
+           style="flex:1 1 220px;min-width:200px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--entry-bg,var(--theme-bg));color:var(--primary);">
+    <input type="hidden" name="markdown" value="0">
+    <button type="submit"
+            style="padding:10px 18px;border:0;border-radius:8px;background:#0f6049;color:#fff;font-weight:700;cursor:pointer;">
+      Kostenlos anlegen
+    </button>
+  </form>
+  <p style="margin:10px 0 0;font-size:.9em;color:var(--secondary);">
+    Zwei Klicks: Nach dem Absenden schicken wir dir eine Bestätigungs-Mail. Erst
+    wenn du den Link darin öffnest (Double-Opt-in), kommst du auf die Liste.
+    Abmeldung über den Link in jeder Mail, Details in den
+    <a href="/datenschutz/">Datenschutzhinweisen</a>.
+  </p>
+{{- else if $url -}}
+  <p style="margin:0 0 10px;color:var(--secondary);">{{ $liste }}</p>
+  <p style="margin:0;">
+    <a href="{{ $url }}" target="_blank" rel="noopener noreferrer"
+       style="display:inline-flex;padding:10px 18px;border-radius:8px;background:#0f6049;color:#fff;font-weight:700;text-decoration:none;">
+      Newsletter anmelden (öffnet das Anmeldeformular)
+    </a>
+  </p>
+  <p style="margin:10px 0 0;font-size:.9em;color:var(--secondary);">
+    Anmeldung über das Formular deines E-Mail-Dienstleisters, Double-Opt-in inklusive.
+    <a href="/datenschutz/">Datenschutzhinweise</a>.
+  </p>
+{{- else -}}
+  <p style="margin:0;color:var(--secondary);">
+    <strong>Der Newsletter ist noch nicht geschaltet.</strong>
+    Diese Seite bleibt bewusst leer, statt ein Formular zu zeigen, das nirgends
+    ankommt. Freigeschaltet wird sie durch einen Eintrag in
+    <code>hugo.toml</code> – <code>params.newsletterFormAction</code> (inline) oder
+    <code>params.newsletterFormUrl</code> (gehostetes Formular). Anleitung,
+    Pfad und Kontrolle: <code>docs/ANLEITUNG-NEWSLETTER.md</code>; die Wache heißt
+    <code>scripts/newsletter_digest.py --check</code>.
+  </p>
+{{- end -}}
+</div>

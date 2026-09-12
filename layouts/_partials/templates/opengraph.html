@@ -43,18 +43,46 @@
            = zuverlässigere Pin-Bilder. Cache-Frische der Covern bleibt
            über die ?v=<SHA>-Parameter im Seiten-<img> (cover.html)
            gewährleistet; für Pinterest zählt die Stabilität. */ -}}
+    {{- /* ECHTE Pixelmaße des Covers (Premium-Audit 11.09.2026):
+           Der Altbestand meldete pauschal 1000×1500 – für 1:1-Board-Cover,
+           quartalsweise nachgerechnete Zuschnitte oder ein künftiges 1200×628-
+           Format wären die Angaben falsch. Rich-Pin-/Discover-Parser nutzen
+           width/height für das Layout des Pins; eine Abweichung vom echten
+           Bild gilt als Signal für mindere Qualität. imageConfig liest die
+           Maße direkt aus der Datei, Fallback bleibt das Pinterest-Format. */ -}}
+    {{- $ogW := 1000 }}{{ $ogH := 1500 -}}
+    {{- $ogDisk := path.Join "static" (replaceRE "^/" "" .Params.cover.image) -}}
+    {{- if os.FileExists $ogDisk -}}
+      {{- with imageConfig $ogDisk -}}{{- $ogW = .Width | int -}}{{- $ogH = .Height | int -}}{{- end -}}
+    {{- end -}}
     <meta property="og:image" content="{{ .Params.cover.image | absURL }}">
-    <meta property="og:image:width" content="1000">
-    <meta property="og:image:height" content="1500">
+    <meta property="og:image:width" content="{{ $ogW }}">
+    <meta property="og:image:height" content="{{ $ogH }}">
+    <meta property="og:image:type" content="{{ if hasSuffix (lower .Params.cover.image) ".png" }}image/png{{ else }}image/jpeg{{ end }}">
     {{- with .Params.cover.alt }}<meta property="og:image:alt" content="{{ . | plainify }}">{{ end }}
   {{- else}}
     <meta property="og:image" content="{{ (path.Join .RelPermalink .Params.cover.image ) | absURL }}">
   {{- end}}
 {{- else }}
-  {{- with partial "_funcs/get-page-images" . }}
-    {{- range . | first 6 }}
-      <meta property="og:image" content="{{ .Permalink }}">
+  {{- /* Kein Seiten-Cover: erstes Bild aus _funcs/get-page-images (dort fällt
+         Hugo auf site.Params.images zurück – das Marken-Cover der Site).
+         Maße und Alt werden mitgeliefert, weil Pinterest/Google Shares ohne
+         og:image:alt schlechter ausspielen und fehlende Maße als
+         „Bildqualität minderer Güte" werten. */ -}}
+  {{- $imgs := partial "_funcs/get-page-images" . }}
+  {{- with index $imgs 0 }}
+    <meta property="og:image" content="{{ .Permalink }}">
+    {{- $disk := "" }}{{- $w := 0 }}{{- $h := 0 -}}
+    {{- with urls.Parse .Permalink -}}{{- $disk = path.Join "static" (strings.TrimPrefix "/" .Path) -}}{{- end -}}
+    {{- if os.FileExists $disk -}}
+      {{- with imageConfig $disk -}}{{- $w = .Width | int -}}{{- $h = .Height | int -}}{{- end -}}
+    {{- end -}}
+    {{- if and (gt $w 0) (gt $h 0) }}
+    <meta property="og:image:width" content="{{ $w }}">
+    <meta property="og:image:height" content="{{ $h }}">
     {{- end }}
+    <meta property="og:image:type" content="{{ if hasSuffix (lower $disk) ".png" }}image/png{{ else }}image/jpeg{{ end }}">
+    <meta property="og:image:alt" content="{{ site.Params.ogImageAlt | default site.Title }}">
   {{- end }}
 {{- end }}
 

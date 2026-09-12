@@ -22,7 +22,8 @@ keywords: ["DSL wechseln", "Internet Anbieterwechsel", "DSL Tarifvergleich", "Hi
 pin_title: "Internet und DSL wechseln: Praxis-Tipps ohne Ausfall"
 pin_description: "*Werbung | DSL-Anbieterwechsel ohne Internet-Loch: Portierung, Kündigung durch den Neuanbieter und der echte Effektivpreis über 24 Monate. Wer diese 4 Phasen kennt, spart 280 bis 380 Euro und behält jederzeit Anschluss. Jetzt die Schritt-für-Schritt-Anleitung lesen."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
----Zahlst du für deinen heimischen Internetanschluss jeden Monat mehr als 45 €, obwohl Neukunden für dieselbe Geschwindigkeit nur einen Bruchteil davon bezahlen? Viele Haushalte in Deutschland verharren aus Bequemlichkeit oder Angst vor tagelangem Internetausfall jahrelang im selben Altvertrag. Dabei verschenkst du Jahr für Jahr bares Geld, das du mit nur 20 Minuten Aufwand wieder in deine Tasche holen kannst.
+---
+Zahlst du für deinen heimischen Internetanschluss jeden Monat mehr als 45 €, obwohl Neukunden für dieselbe Geschwindigkeit nur einen Bruchteil davon bezahlen? Viele Haushalte in Deutschland verharren aus Bequemlichkeit oder Angst vor tagelangem Internetausfall jahrelang im selben Altvertrag. Dabei verschenkst du Jahr für Jahr bares Geld, das du mit nur 20 Minuten Aufwand wieder in deine Tasche holen kannst.
 
 Dank neuer Regeln im Telekommunikationsgesetz (TKG) ist der Wechsel heute so einfach wie nie zuvor. Du wechselst **Internet & DSL** und bekommst mehr Tempo – bis 250 Mbit/s bei DSL, 1.000 Mbit/s bei Kabel oder sogar noch mehr via Glasfaser. Im Schnitt sparst du durch einen klugen **Internet Anbieterwechsel** zwischen **280 € bis 380 €** über die Mindestlaufzeit von 24 Monaten. Ich zeige dir, wie der Wechsel ohne Pause klappt, warum du die Treue-Falle vermeiden musst und welche technischen Stolpersteine du umgehst.
 

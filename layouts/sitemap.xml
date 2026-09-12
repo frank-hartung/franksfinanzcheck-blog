@@ -1,34 +1,82 @@
 {{- /* ============================================================
-    sitemap.xml – Standard-Sitemap + die 6 Pillar-Ratgeber
+    sitemap.xml – Premium-Sitemap (Agentur-Standard, Stand 11.09.2026)
     ------------------------------------------------------------
-    Die Pillar-Seiten haben 'build: list: never' (Commit 6a1c81a,
-    damit sie nicht als Post-Karten in Listen erscheinen). Dadurch
-    fehlen sie auch in der Standard-Sitemap. Dieses Template erbt
-    das Hugo-Standardverhalten (.Data.Pages) und ergänzt die 6
-    Pillars explizit per site.GetPage.
+    WHY (warum überhaupt ein eigenes Template):
+    Die Hugo-Standard-Sitemap listet ALLES, was einen Output hat – diese Site
+    hatte dadurch 161 URLs, davon 116 Tag-Archive (je ein Artikel = Duplikat
+    des Artikels) und die Paginierungs-Kopien. Eine Sitemap, zu 72 % aus
+    dünnen Duplikaten besteht, verschenkt Crawlbudget, verwässert die
+    Prioritäten und fördert Keyword-Kannibalisierung – und genau diese URLs
+    wurden über IndexNow zusätzlich zur Indexierung eingereicht.
+
+    NEU – Money-Pages-Prinzip:
+      · Home                       (priority 1.0, changefreq daily)
+      · alle /posts/-Artikel live   (0.8)
+      · die 6 Pillar-Ratgeber       (0.9)  – wegen `build: list: never`
+                                             fehlen sie in .Data.Pages und
+                                             werden unten ergänzt
+      · Rechtliches + /ueber/       (0.3)  – E-E-A-T-Seiten, gehören ins Netz
+      · AUSGESCHLOSSEN: Tags, Kategorien, Paginierung, 404, Drafts,
+        Zukünftiges, Abgelaufenes, `sitemap: false` / `robotsNoIndex: true`
+
+    LASTMOD-DETERMINISMUS (2. Fix, kritisch):
+      Hugo fällt ohne `lastmod` im Frontmatter auf .Lastmod = Datei-Mtime
+      zurück – im CI der Checkout-/Build-Zeitstempel. Folge: JEDER Deploy
+      (hier mehrmals täglich) meldete Google „heute aktualisiert" für Seiten,
+      an denen nichts geändert war. Frische-Signale sind damit wertlos bis
+      schädlich. Deshalb: rotes lastmod = Frontmatter-Wert, sonst date.
+      Format date-only (Google normalisiert ohnehin auf Tag).
+      Abgesichert durch scripts/schema_seo_gate.py (S7).
 ============================================================ */ -}}
-{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+{{- $seen := slice -}}
+{{- $out := slice -}}
+{{- /* ---- Hilfsfunktion: Seite würfeln (URL, lastmod, freq, prio) ---- */ -}}
+{{- $legal := slice "impressum" "datenschutz" "ueber" -}}
+{{- /* ---------- 1) Startseite ---------- */ -}}
+{{- with site.Home -}}
+  {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "daily" "prio" 1.0) -}}
+  {{- $seen = $seen | append .Permalink -}}
+{{- end -}}
+{{- /* ---------- 2) Live-Artikel ---------- */ -}}
+{{- range site.RegularPages -}}
+  {{- if ne .Section "posts" }}{{ continue }}{{ end -}}
+  {{- if or (.Params.sitemap.disable) (eq .Params.robotsNoIndex true) (in $seen .Permalink) }}{{ continue }}{{ end -}}
+  {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.8) -}}
+  {{- $seen = $seen | append .Permalink -}}
+{{- end -}}
+{{- /* ---------- 3) Pillar-Ratgeber (list: never → manuell) ---------- */ -}}
+{{- $pillars := slice "strom-sparen" "versicherungen" "mietwagen" "frugalismus" "internet-dsl" "konto-karten" -}}
+{{- range $pillars -}}
+  {{- with site.GetPage (printf "pillar/%s" .) -}}
+    {{- if or (.Params.sitemap.disable) (in $seen .Permalink) }}{{ continue }}{{ end -}}
+    {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.9) -}}
+    {{- $seen = $seen | append .Permalink -}}
+  {{- end -}}
+{{- end -}}
+{{- /* ---------- 4) Pillar-Übersicht + Rechtliches/Über ---------- */ -}}
+{{- range (slice "pillar") -}}
+  {{- with site.GetPage (printf "/%s" .) -}}
+    {{- if and .Permalink (not (in $seen .Permalink)) -}}
+      {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.6) -}}
+      {{- $seen = $seen | append .Permalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- range $legal -}}
+  {{- with site.GetPage (printf "/%s" .) -}}
+    {{- if and .Permalink (not (in $seen .Permalink)) -}}
+      {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "monthly" "prio" 0.3) -}}
+      {{- $seen = $seen | append .Permalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{ printf `<?xml version="1.0" encoding="utf-8" standalone="yes"?>` | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-{{- range .Data.Pages }}
-{{- if or .Permalink (and .Sitemap (ne .Sitemap.Disable true)) }}
+{{- range $out }}
 <url>
-  <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
-  <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}{{ with .Sitemap.ChangeFreq }}
-  <changefreq>{{ . }}</changefreq>{{ end }}{{ if ge .Sitemap.Priority 0.0 }}
-  <priority>{{ .Sitemap.Priority }}</priority>{{ end }}
-</url>
-{{- end }}
-{{- end }}
-{{- /* Die 6 Pillar-Ratgeber explizit ergänzen (fehlen wegen list: never) */}}
-{{- $pillars := slice "strom-sparen" "versicherungen" "mietwagen" "frugalismus" "internet-dsl" "konto-karten" }}
-{{- range $pillars }}
-  {{- with site.GetPage (printf "pillar/%s" .) }}
-<url>
-  <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
-  <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}
-  <changefreq>weekly</changefreq>
-  <priority>0.8</priority>
-</url>
-  {{- end }}
-{{- end }}
+  <loc>{{ .url }}</loc>{{ with .lastmod }}
+  <lastmod>{{ . }}</lastmod>{{ end }}
+  <changefreq>{{ .freq }}</changefreq>
+  <priority>{{ printf "%.1f" .prio }}</priority>
+</url>{{- end }}
 </urlset>

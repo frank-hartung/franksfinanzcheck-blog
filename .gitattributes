@@ -1,3 +1,10 @@
 # Bot-Historien sind append-only JSONL. Parallele Automationen dürfen ihre
 # Zeilen vereinigen, statt bei wöchentlichen SEO-/Health-Läufen zu kollidieren.
 *.jsonl merge=union
+
+# Root-Reports sind Maschinenausgaben der Wachen: als CI-Dashboard versioniert,
+# aber nicht als Diff gelesen. Ohne diese Zeilen bläht jeder Lauf jeden PR-Diff
+# (70 Dateien, meiste Zeilen = Zeitstempel). linguist-generated blendet sie zudem
+# in der GitHub-Ansicht aus – der Inhalt bleibt klickbar, der Lärm ist weg.
+/*-REPORT.md -diff linguist-generated=true
+/*-STATUS.md -diff linguist-generated=true

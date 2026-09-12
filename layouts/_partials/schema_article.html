@@ -3,74 +3,140 @@
      Wird auf jeder Artikel-Seite (posts/* & pillar/*) ausgegeben.
      Enthält: headline, description, author (Person mit E-E-A-T ID),
      publisher (Organization), datePublished, dateModified, image,
-     mainEntityOfPage, inLanguage, keywords, isPartOf.
+     mainEntityOfPage, inLanguage, keywords, isPartOf, articleSection.
+
+     ------------------------------------------------------------
+     ROOT-CAUSE-FIX (Premium-Audit 11.09.2026, davor seit Theme-Override aktiv):
+     Altbaufbau war ein per Hand geschriebenes JSON-Objekt mit
+     `"@id": {{ .Permalink | jsonify }}` u. s. w. Hugo betreibt in
+     `<script>`-Blöcken kontextsensitives Auto-Escaping: das bereits
+     geparste JSON von `jsonify` (ein String MIT Anführungszeichen) wurde
+     vom JS-Escaper NOCH EINMAL als String behandelt → Ausgabe
+     `"@id": "\"https://…\""`  (Anführungszeichen im Wert).
+     Folge: JSON war syntaktisch gültig (deshalb lief jede Presence-Prüfung
+     grün), aber WERTSEITIG kaputt – Google sah invalid URLs und ein
+     invalides Datum („\"2026-08-10T10:20:09Z\"\") → Article-Rich-Results,
+     Author-/Publisher-Entity-Anbindung und Bild-Signal waren auf ALLEN
+     Artikeln tot. 31 von 31 Live-Artikeln + 6 Pillars waren betroffen.
+
+     NEU: ein einziges dict → `| jsonify | safeJS`. `safeJS` entzieht den
+     Wert dem erneuten Escaping, `jsonify` erledigt das exakt EINmal.
+     Identisch zum bereits korrekten Muster in extend_head.html
+     (Person/ProfilePage/WebSite/BreadcrumbList/FAQPage).
+     Dauerhaft abgesichert durch scripts/schema_seo_gate.py (S1/S2/S3).
+
+     ZWEITER FIX (Frische-Signal): dateModified nutzte `.Lastmod`. Ohne
+     `lastmod` im Frontmatter fällt Hugo auf die Datei-Mtime zurück – und
+     die ist im CI der Checkout-Zeitstempel, also der Deployment-Zeitpunkt.
+     Ein Deploy-Lauf hätte damit täglich als „inhaltliches Update“ gegolten
+     (Soft-504-Frische-Inflation, von Google messbar abgestraft).neu:
+     redaktionelles `lastmod`-Frontmatter, sonst Publikationsdatum.
      ============================================================ */ -}}
-{{- $title := .Title | plainify | htmlUnescape -}}
-{{- $desc := or .Description (.Summary | plainify) | htmlUnescape -}}
-{{- $img := "" -}}
+
+{{- /* ---------- Werte (rohe Strings – jsonify escapt genau einmal) ---------- */ -}}
+{{- $title := .Title | plainify | htmlUnescape | chomp -}}
+{{- $desc := or .Description (.Summary | plainify) | htmlUnescape | chomp -}}
+
+{{- /* Cover: URL + ECHTE Pixelmaße (imageConfig) statt hartem 1000×1500 */ -}}
+{{- $imgURL := "" -}}{{- $imgW := 0 -}}{{- $imgH := 0 -}}
 {{- with .Params.cover -}}
-  {{- if .image -}}
-    {{- $img = printf "%s%s" site.BaseURL (replaceRE "^/" "" .image) -}}
+  {{- with .image -}}
+    {{- $rel := replaceRE "^/" "" . -}}
+    {{- $imgURL = printf "%s%s" site.BaseURL $rel -}}
+    {{- $disk := path.Join "static" $rel -}}
+    {{- if os.FileExists $disk -}}
+      {{- with imageConfig $disk -}}
+        {{- $imgW = .Width | int -}}{{- $imgH = .Height | int -}}
+      {{- end -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
-{{- $published := .Date.Format "2006-01-02T15:04:05Z" -}}
-{{- $modified := .Lastmod.Format "2006-01-02T15:04:05Z" -}}
-{{- if or (eq $modified "0001-01-01T00:00:00Z") (lt .Lastmod .Date) }}{{ $modified = $published }}{{ end -}}
-{{- $kwList := slice -}}
-{{- with .Params.keywords -}}
-  {{- $kwList = . -}}
+
+{{- /* ---------- Datums-Integrität (ehrlich, nie Build-Zeitstempel) ---------- */ -}}
+{{- $published := .Date -}}
+{{- $modified := $published -}}
+{{- with .Params.lastmod -}}
+  {{- /* `lastmod` darf Datum oder Datum/Zeit sein – beides parsebar */ -}}
+  {{- $lm := printf "%.10s" (printf "%v" .) -}}
+  {{- if findRE `^\d{4}-\d{2}-\d{2}$` $lm -}}
+    {{- $cand := time.AsTime (printf "%sT00:00:00Z" $lm) -}}
+    {{- if $cand.After $published -}}{{- $modified = $cand -}}{{- end -}}
+  {{- end -}}
 {{- else -}}
-  {{- with .Params.tags -}}
-    {{- $kwList = . -}}
-  {{- end -}}
+  {{- /* Nur ein ECHTER Redaktions-Lastmod aus dem Frontmatter zählt.
+         .Lastmod (Datei-Mtime) wird bewusst NICHT verwendet. */ -}}
 {{- end -}}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "@id": {{ (printf "%s#article" .Permalink) | jsonify }},
-  "isPartOf": {
-    "@type": "WebSite",
-    "@id": {{ (printf "%s#website" site.BaseURL) | jsonify }},
-    "name": "FranksFinanzcheck",
-    "url": {{ site.BaseURL | jsonify }}
-  },
-  "headline": {{ $title | jsonify }},
-  "description": {{ $desc | jsonify }},
-  "inLanguage": "de-DE",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": {{ .Permalink | jsonify }}
-  },
-  {{- if $img }}
-  "image": {
-    "@type": "ImageObject",
-    "url": {{ $img | jsonify }},
-    "width": 1000,
-    "height": 1500
-  },
-  {{- end }}
-  "author": {
-    "@type": "Person",
-    "@id": {{ (printf "%s#frank-hartung" site.BaseURL) | jsonify }},
-    "name": "Frank Hartung",
-    "url": {{ (printf "%sueber/" site.BaseURL) | jsonify }},
-    "jobTitle": "Finanzexperte & Redaktionsleiter"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "@id": {{ (printf "%s#organization" site.BaseURL) | jsonify }},
-    "name": "FranksFinanzcheck",
-    "url": {{ site.BaseURL | jsonify }},
-    "logo": {
-      "@type": "ImageObject",
-      "url": {{ (printf "%simages/brand/logo.svg" site.BaseURL) | jsonify }}
-    }
-  },
-  "datePublished": {{ $published | jsonify }},
-  "dateModified": {{ $modified | jsonify }}
-  {{- if gt (len $kwList) 0 }},
-  "keywords": {{ delimit $kwList ", " | jsonify }}
-  {{- end }}
-}
-</script>
+{{- /* In die Zukunft darf das Update nie zeigen (wäre ein Lügen-Signal). */ -}}
+{{- if $modified.After now -}}{{- $modified = $published -}}{{- end -}}
+
+{{- /* ---------- Keywords + Rubrik ---------- */ -}}
+{{- $kwList := slice -}}
+{{- with .Params.keywords -}}{{- $kwList = . -}}
+{{- else -}}{{- with .Params.tags -}}{{- $kwList = . -}}{{- end -}}{{- end -}}
+{{- $rubrik := slice -}}
+{{- with .Params.categories -}}
+  {{- if reflect.IsSlice . -}}{{- $rubrik = . -}}{{- else -}}{{- $rubrik = slice . -}}{{- end -}}
+{{- end -}}
+
+{{- /* ---------- Profil-Identität (Person + Organization teilen sich dieselben
+       offiziellen Profile → Google kann die Entities sauber zusammenführen) ---------- */ -}}
+{{- $profiles := slice -}}
+{{- range site.Params.socialIcons -}}{{- with .url -}}{{- $profiles = $profiles | append . -}}{{- end -}}{{- end -}}
+
+{{- /* ---------- Organization / Author (E-E-A-T-Knoten der Site) ---------- */ -}}
+{{- $orgID  := printf "%s#organization" site.BaseURL -}}
+{{- $siteID := printf "%s#website" site.BaseURL -}}
+{{- $personID := printf "%s#frank-hartung" site.BaseURL -}}
+
+{{- $person := dict
+  "@type" "Person"
+  "@id" $personID
+  "name" (.Params.author | default site.Params.author | default "Frank Hartung")
+  "url" (printf "%sueber/" site.BaseURL)
+  "jobTitle" "Finanzexperte & Redaktionsleiter"
+  "sameAs" $profiles
+-}}
+
+{{- $publisher := dict
+  "@type" "Organization"
+  "@id" $orgID
+  "name" site.Title
+  "url" site.BaseURL
+  "logo" (dict "@type" "ImageObject" "url" (printf "%simages/brand/logo.svg" site.BaseURL))
+  "sameAs" $profiles
+-}}
+
+{{- $out := dict
+  "@context" "https://schema.org"
+  "@type" "Article"
+  "@id" (printf "%s#article" .Permalink)
+  "isPartOf" (dict "@type" "WebSite" "@id" $siteID "name" site.Title "url" site.BaseURL)
+  "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink "url" .Permalink)
+  "headline" $title
+  "description" $desc
+  "inLanguage" "de-DE"
+  "author" $person
+  "publisher" $publisher
+  "datePublished" ($published.Format "2006-01-02T15:04:05Z07:00")
+  "dateModified" ($modified.Format "2006-01-02T15:04:05Z07:00")
+  "wordCount" (.WordCount | int)
+  "isAccessibleForFree" true
+-}}
+{{- if $imgURL -}}
+  {{- $image := dict "@type" "ImageObject" "url" $imgURL -}}
+  {{- if and (gt $imgW 0) (gt $imgH 0) -}}
+    {{- $image = merge $image (dict "width" $imgW "height" $imgH) -}}
+  {{- end -}}
+  {{- with .Params.cover.alt -}}
+    {{- $image = merge $image (dict "caption" (. | plainify | htmlUnescape | chomp)) -}}
+  {{- end -}}
+  {{- $out = merge $out (dict "image" $image) -}}
+{{- end -}}
+{{- if gt (len $rubrik) 0 -}}
+  {{- $out = merge $out (dict "articleSection" $rubrik) -}}
+{{- end -}}
+{{- if gt (len $kwList) 0 -}}
+  {{- $out = merge $out (dict "keywords" (delimit $kwList ", ")) -}}
+{{- end -}}
+
+<script type="application/ld+json">{{ $out | jsonify | safeJS }}</script>

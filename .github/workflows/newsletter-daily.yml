@@ -1,0 +1,124 @@
+# Newsletter-Tageslauf: Capture-Wache + Digest, Versand nur mit Absender.
+#
+# Warum dieser Workflow überhaupt existiert: docs/ANLEITUNG-NEWSLETTER.md
+# beschrieb seit Wochen einen „Newsletter-AI"-Lauf samt NEWSLETTER-STATUS.md.
+# Beides gab es nie – der Newsletter war eine Dokumentation, keine Funktion.
+# Dieser Lauf ist die Funktion (bzw. der ehrliche Nachweis, dass sie noch
+# inert ist), und die Wache meldet beides laut.
+#
+# Sicherheitshierarchie (absichtlich dreifach):
+#   1. ohne Secrets (BREVO_API_KEY / BREVO_LIST_ID) wird kein Netzversuch gemacht
+#   2. ohne workflow_dispatch-Eingabe „live" wird nur gebaut, nicht gesendet
+#   3. gesendet wird an eine Liste, deren Double-Opt-in bei Brevo liegt –
+#      Adressen berühren diesen Repo-Workflow nie
+name: Newsletter-Daily (Capture-Wache + Digest)
+
+on:
+  schedule:
+    - cron: "5 5 * * 1-5"     # 05:05 UTC = 07:05 MESZ – vor dem Frühstück
+  workflow_dispatch:
+    inputs:
+      tage:
+        description: 'Zeitraum: Artikel der letzten N Tage in den Digest'
+        type: string
+        default: '1'
+      live:
+        description: 'WIRKLICH an die Liste senden (sonst nur bauen)'
+        type: boolean
+        default: false
+      test_adresse:
+        description: 'Testversand an diese Adresse (leer = kein Testversand)'
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: newsletter-daily
+  cancel-in-progress: false
+
+jobs:
+  newsletter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Wachen-Selbsttest (Capture-Logik, Verdopplungsschutz, Verriegelung)
+        run: python3 scripts/newsletter_digest.py --selftest
+
+      - name: Capture-Wache – konfiguriert oder laut inert
+        # --strict-inert: ein Lauf, der senden will, darf Inaktivität nicht als
+        # Erfolg verbuchen. Kein Gate-Fehler (der Leerzustand ist ein Betreiber-
+        # entscheid, kein Defekt), aber eine Warnung im Lauf + Summary.
+        run: |
+          set +e
+          python3 scripts/newsletter_digest.py --check --strict-inert | tee /tmp/nl_check.log
+          rc=${PIPESTATUS[0]}
+          set -e
+          {
+            echo "## 📬 Newsletter-Capture"
+            echo '```'
+            sed -n '1,20p' /tmp/nl_check.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$rc" -ne 0 ]; then
+            echo "::warning::Newsletter-Capture inaktiv oder Befund – es gehen keine Adressen ein (siehe Summary)"
+          fi
+
+      - name: Digest bauen (und senden, wenn Absender + Freigabe da sind)
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+          NEWSLETTER_ABSENDER: ${{ vars.NEWSLETTER_ABSENDER }}
+          NEWSLETTER_SEND: ${{ (inputs.live || github.event_name == 'schedule') && 'ja' || '' }}
+        run: |
+          TAGE="${{ github.event.inputs.tage || '1' }}"
+          case "$TAGE" in ''|*[!0-9]*) TAGE=1 ;; esac
+          ARGS="--build --days $TAGE --out /tmp/ff-newsletter"
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            ARGS="--build --days 1 --out /tmp/ff-newsletter --send"
+          fi
+          if [ -n "${{ github.event.inputs.test_adresse }}" ]; then
+            ARGS="$ARGS --test-adresse ${{ github.event.inputs.test_adresse }}"
+          fi
+          if [ "${{ github.event.inputs.live }}" = "true" ] || [ "${{ github.event_name }}" = "schedule" ]; then
+            ARGS="$ARGS --live"
+          fi
+          # Ohne Absender kein Versand – und kein roter Lauf: der Leerzustand ist
+          # eine Betreiber-Entscheidung, kein Defekt. Die Warnung steht im Log,
+          # die Capture-Wache oben meldet denselben Zustand zusätzlich laut.
+          if [ -z "$BREVO_API_KEY" ] || [ -z "$BREVO_LIST_ID" ]; then
+            echo "⚠ Kein Absender konfiguriert (Secrets BREVO_API_KEY / BREVO_LIST_ID) – Digest wird nur gebaut."
+            ARGS="${ARGS/--send/}"
+            ARGS="${ARGS/--live/}"
+          fi
+          python3 scripts/newsletter_digest.py $ARGS | tee /tmp/nl_build.log
+          {
+            echo ""
+            echo "**Versandlauf:**"
+            echo '```'
+            sed -n '1,24p' /tmp/nl_build.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Versandstatus protokollieren (data/newsletter_state.json)
+        run: |
+          git config user.name "Newsletter-Bot"
+          git config user.email "newsletter-bot@users.noreply.github.com"
+          git add data/newsletter_state.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Keine Versandänderung – nichts zu committen."
+          else
+            git commit -m "newsletter: Versandstatus des Laufs festschreiben"
+            scripts/git_sync.sh --push-only || echo "::warning::Push des Versandstatus fehlgeschlagen – Digest bleibt trotzdem korrekt"
+          fi

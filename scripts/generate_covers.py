@@ -555,10 +555,16 @@ def _title_from_content(content):
     return re.sub(r"<[^>]+>", "", m.group(1)).strip()
 
 
-def ensure_cover_in_frontmatter(md_path, slug, title=None):
+# Opt-out-Zeile für Ratgeber-Covers: og:image ja, kein <link rel=preload>
+PRELOAD_OPTOUT_LINE = "  preload: false   # Bild liefert og:image, nicht den LCP\n"
+
+
+def ensure_cover_in_frontmatter(md_path, slug, title=None, caption=None,
+                                 extra_cover_lines=""):
     """Legt Cover-Frontmatter an ODER heilt generische Alt-Texte.
 
     Alt-Text = Artikel-Titel (keywordreich, natürlich) – nie „Spar-Tipp: 2026…".
+    `caption` optional: Pillar-Ratgeber tragen eine eigene Bildunterschrift.
     """
     with open(md_path, encoding="utf-8") as f:
         content = f.read()
@@ -567,6 +573,21 @@ def ensure_cover_in_frontmatter(md_path, slug, title=None):
     image_path = f"images/covers/{slug}.jpg"   # OHNE Slash: Hugo absURL + Subdir-BaseURL
 
     if re.search(r"^cover:", content, re.M):
+        # Premium-Parität (11.09.2026): Pillar-Cover liefern og:image und das
+        # Article-Bild, werden auf der Ratgeber-Seite selbst aber bewusst NICHT
+        # über dem Falt gerendert – dort steht die Sparestabelle, sie ist der
+        # Grund für den Klick. Ohne Opt-out hätte head.html das Cover dennoch
+        # per <link rel=preload> geladen (un-genutzter Preload = Lighthouse-
+        # Abzug + Bytes auf der wichtigsten Seitenklasse). Normalisierung:
+        # `preload: false` in den Cover-Block, self-healing für alle Pillars.
+        m_blk = re.search(r"(?m)^(cover:\n(?:[ \t]+\S.*\n?)+)", content)
+        if extra_cover_lines and m_blk and "preload:" not in m_blk.group(1):
+                content = (content[:m_blk.end()]
+                       + extra_cover_lines
+                       + content[m_blk.end():])
+                with open(md_path, "w", encoding="utf-8") as f:
+                    f.write(content)
+                return True
         # Alt heilen wenn generisch/slug-basiert
         m_alt = re.search(r'^(\s*alt:\s*)["\']?(.+?)["\']?\s*$', content, re.M)
         if m_alt:
@@ -593,7 +614,8 @@ def ensure_cover_in_frontmatter(md_path, slug, title=None):
         f"cover:\n"
         f'  image: "{image_path}"\n'
         f'  alt: "{plain_title}"\n'
-        f'  caption: "Tipp von FranksFinanzcheck"\n'
+        f'  caption: "{caption or "Tipp von FranksFinanzcheck"}"\n'
+        + (extra_cover_lines or "")
     )
     # Nach dem Frontmatter-Ende (---) einfügen, vor der ersten Inhaltszeile
     if content.startswith("---"):
@@ -617,15 +639,111 @@ def ensure_responsive_variants(out_path, force=False):
     return bool(modern)
 
 
+def pillar_paths():
+    """Die 6 Pillar-Ratgeber (content/pillar/<silos>/index.md).
+
+    Premium-Paritäts-Regel (Audit 11.09.2026): Pillar-Seiten sind die
+    wertvollsten URLs der Site (Cluster-Köpfe, Affiliate-Sammler). Sie
+    bekamen aber NIE ein Cover – die Cover-Pipeline kannte nur posts/.
+    Folge: ohne `cover.image` kein `og:image`, kein `twitter:image`, kein
+    ImageObject im Article-Schema und damit kein Bild beim Teilen auf
+    Pinterest/Facebook/LinkedIn/Slack – die 6 wichtigsten Seiten der Site
+    teilten sich bildlos.
+    """
+    out = []
+    base = os.path.join(BLOG_DIR, "content", "pillar")
+    if not os.path.isdir(base):
+        return out
+    for silo in sorted(os.listdir(base)):
+        p = os.path.join(base, silo, "index.md")
+        if os.path.isfile(p):
+            out.append((silo, p))
+    return out
+
+
+def ensure_pillar_covers(force=False, only=None):
+    """Erzeugt für jeden Pillar ein 2:3-Branding-Cover + alle Varianten und
+    trägt das Cover-Frontmatter ein. Returns (covers, frontmatter, variants)."""
+    os.makedirs(OUT_DIR, exist_ok=True)
+    covers = frontmatter = variants = 0
+    for silo, path in pillar_paths():
+        slug = f"pillar-{silo}"
+        if only and slug != only:
+            continue
+        with open(path, encoding="utf-8") as f:
+            content = f.read()
+        title = (_title_from_content(content) or silo.replace("-", " ")).strip()
+        title = re.sub(r"<[^>]+>", " ", title)
+        title = (title.replace("&nbsp;", " ").replace("\u00a0", " ")
+                 .replace("&amp;", "&"))
+        title = re.sub(r"\s+", " ", title).strip()
+        desc_m = re.search(r'^description:\s*["\']?(.+?)["\']?\s*$', content, re.M)
+        savings_m = re.search(r'^savings:\s*["\']?(.+?)["\']?\s*$', content, re.M)
+        # Badge = Silo-Beschriftung der Artikel-Cover → durchgängige Marke
+        badge = PILLAR_BADGES.get(silo) or detect_badge(silo, slug, title)
+        savings = extract_savings(title, desc_m.group(1) if desc_m else "",
+                                  savings_m.group(1) if savings_m else None)
+        design = {"v": DESIGN_VERSION, "badge": badge, "savings": savings or ""}
+        manifest = load_manifest()
+        drift = manifest.get(slug, {}).get("design") != design
+        out_path = os.path.join(OUT_DIR, f"{slug}.jpg")
+        if force or not os.path.exists(out_path) or drift:
+            make_cover(title, slug, out_path, force=force or drift,
+                       badge=badge, savings=savings)
+            covers += 1
+        if ensure_responsive_variants(out_path, force=force or drift):
+            variants += 1
+        if ensure_cover_in_frontmatter(
+                path, slug, title=title,
+                caption="Kompletter Ratgeber von FranksFinanzcheck",
+                extra_cover_lines=PRELOAD_OPTOUT_LINE):
+            frontmatter += 1
+        if force or manifest.get(slug, {}).get("title") != title or drift:
+            manifest_set(slug, title, design=design)
+    return covers, frontmatter, variants
+
+
+BRAND_COVER_SLUG = "brand-franksfinanzcheck"
+BRAND_COVER_TITLE = "FranksFinanzcheck \u2013 Geld sparen leicht gemacht"
+BRAND_COVER_BADGE = "FRUGALISMUS \u00b7 TARIFE \u00b7 VERSICHERUNGEN"
+
+
+def ensure_brand_cover(force=False):
+    """Startseiten-Cover = og:image der Home-URL (Premium-Audit 11.09.2026).
+
+    Die Startseite war die meistgeteilte URL der Site (Pinterest-Profil,
+    Bio-Links, RSS-Channel) \u2013 und hatte als einzige Seite kein og:image.
+    Ohne Bild zeigt Pinterest/Facebook/LinkedIn nur einen Text-K\u00e4stchen-
+    Snippet; die Klickrate geteilter Links halbiert sich damit praktisch.
+    Gleiche Marke, gleiches 2:3-Format wie die Artikelfcover.
+    """
+    out_path = os.path.join(OUT_DIR, f"{BRAND_COVER_SLUG}.jpg")
+    made = 0
+    if force or not os.path.exists(out_path):
+        make_cover(BRAND_COVER_TITLE, BRAND_COVER_SLUG, out_path,
+                   force=force or not os.path.exists(out_path),
+                   badge=BRAND_COVER_BADGE, savings=None)
+        made = 1
+    variants = 1 if ensure_responsive_variants(out_path, force=force) else 0
+    manifest = load_manifest()
+    if force or manifest.get(BRAND_COVER_SLUG, {}).get("title") != BRAND_COVER_TITLE:
+        manifest_set(BRAND_COVER_SLUG, BRAND_COVER_TITLE,
+                     design={"v": DESIGN_VERSION, "badge": BRAND_COVER_BADGE,
+                             "savings": ""})
+    return made, variants
+
+
 def main():
     force = "--force" in sys.argv  # alle Covers neu generieren (neue Umbruch-Regel)
+    nur_pillars = "--pillars" in sys.argv      # nur die 6 Ratgeber (Premium-Parität)
+    nur_posts = "--posts-only" in sys.argv     # altes Verhalten (kompatibel)
     only_slug = None
     if "--slug" in sys.argv:
         i = sys.argv.index("--slug")
         if i + 1 < len(sys.argv):
             only_slug = sys.argv[i + 1].strip()
     os.makedirs(OUT_DIR, exist_ok=True)
-    files = list_post_paths()
+    files = [] if nur_pillars else list_post_paths()
     covers = 0
     frontmatter = 0
     variants = 0
@@ -675,6 +793,17 @@ def main():
             m = load_manifest()
             if m.get(slug, {}).get("title") != title or design_drift:
                 manifest_set(slug, title, design=design)
+    bc = bv = 0
+    if not nur_pillars:
+        bc, bv = ensure_brand_cover(force=force)
+        covers += bc
+        variants += bv
+    pc = pf = pv = 0
+    if not nur_posts:
+        pc, pf, pv = ensure_pillar_covers(force=force or bool(only_slug), only=only_slug)
+        covers += pc
+        frontmatter += pf
+        variants += pv
     try:
         from lcp_image_optimizer import build_manifest as build_lcp_manifest, write_manifest as write_lcp_manifest
         write_lcp_manifest(build_lcp_manifest())

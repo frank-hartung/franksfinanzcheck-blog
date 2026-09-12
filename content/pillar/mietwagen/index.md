@@ -9,6 +9,11 @@ categories: ["Ratgeber"]
 build:
   list: never
 keywords: ["Mietwagen buchen", "Mietwagen günstig", "Mietwagen Fallen", "Flüge sparen", "Urlaubskasse aufbessern"]
+cover:
+  image: "images/covers/pillar-mietwagen.jpg"
+  alt: "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen"
+  caption: "Kompletter Ratgeber von FranksFinanzcheck"
+  preload: false   # Bild liefert og:image, nicht den LCP
 ---
 Ein Urlaub soll Erholung und unvergessliche Erlebnisse bringen – doch bei der Buchung von Mietwagen, Flügen und Pauschalreisen lauern zahlreiche Kostenfallen. Vor allem an den Schaltern der Autovermieter am Urlaubsflughafen versuchen viele Anbieter, teure Zusatzversicherungen zu verkaufen oder mit unfairen Tankregelungen abzukassieren. Wer am Schalter die Zusatzversicherung des Vermieters kauft, zahlt schnell das Doppelte des Buchungspreises. Mit der richtigen Vorbereitung bleibt dein Mietwagen ein Schnäppchen statt einer Kostenfalle.
 

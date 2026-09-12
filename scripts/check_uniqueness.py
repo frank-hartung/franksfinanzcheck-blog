@@ -82,6 +82,19 @@ def ngrams(text, n):
     return set(" ".join(words[i:i + n]) for i in range(len(words) - n + 1))
 
 
+def _slug(path):
+    """Lesbarer Artikelname statt abgeschnittener Pfad.
+
+    Der Report druckte `path[:32]` – bei absoluten Pfaden zeigte damit JEDES
+    Paar „/home/user/franksfinanzcheck-blo" und der Fund war unbrauchbar: man
+    sah, DASS etwas doppelt ist, aber nicht WELCHE Artikel. Bei einer Wache,
+    deren Ausgabe der Redakteur abarbeitet, ist das der Unterschied zwischen
+    Werkzeug und Attrappe.
+    """
+    base = os.path.splitext(os.path.basename(path))[0]
+    return base if base and base != "index" else os.path.basename(os.path.dirname(path))
+
+
 def load_pinterest_plan():
     pins = []
     if not os.path.exists(PINTEREST_PLAN):
@@ -283,7 +296,8 @@ def main():
         hits = len(my_grams & ref_grams)
         if hits > max_sim:
             pin_problems += 1
-            print(f"  ⚠️ {fn[:45]}: {hits} gleiche Phrasen mit Pin (Tag {pin.get('tag')})")
+            print(f"  ⚠️ {_slug(fn)}: {hits} gleiche Phrasen mit Pin "
+                  f"(Tag {pin.get('tag')})")
     if not pin_problems:
         print("  ✅ Alle Artikel einzigartig gegenüber den Pin-Texten")
 
@@ -299,9 +313,16 @@ def main():
             internal += 1
             if overlap >= 5:
                 critical += 1
-                print(f"  🚨 KRITISCH {a[:32]} ↔ {b[:32]}: {overlap} gleiche Phrasen")
+                print(f"  🚨 KRITISCH {_slug(a)} ↔ {_slug(b)}: {overlap} gleiche "
+                      f"{n}-Wort-Phrasen")
+                # Die betroffenen Passagen gleich mit ausgeben: „irgendwas ist
+                # doppelt" wird in der Redaktion umformuliert, indem man rät –
+                # mit den konkreten Ketten ist der Fix 10 Minuten Arbeit.
+                for gram in sorted(grams[a] & grams[b])[:8]:
+                    print(f"       · {gram}")
             else:
-                print(f"  ℹ️ unkritisch {a[:32]} ↔ {b[:32]}: {overlap} Phrasen (Standard-Formulierungen)")
+                print(f"  ℹ️ unkritisch {_slug(a)} ↔ {_slug(b)}: {overlap} Phrasen "
+                      f"(Standard-Formulierungen)")
     if not internal:
         print("  ✅ Keine internen Duplikate")
     else:

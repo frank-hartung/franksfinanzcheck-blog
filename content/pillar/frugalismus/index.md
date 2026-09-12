@@ -9,6 +9,11 @@ categories: ["Ratgeber"]
 build:
   list: never
 keywords: ["Frugalismus", "Geld sparen im Alltag", "50 30 20 Regel", "Notgroschen aufbauen", "Finanzielle Freiheit"]
+cover:
+  image: "images/covers/pillar-frugalismus.jpg"
+  alt: "Frugalismus & Budget: Der große Ratgeber für finanzielle Freiheit"
+  caption: "Kompletter Ratgeber von FranksFinanzcheck"
+  preload: false   # Bild liefert og:image, nicht den LCP
 ---
 Frugalismus bedeutet für mich nicht knauseriger Verzicht oder extremes Knausern an Lebensqualität – sondern die bewusste Entscheidung, Geld nicht für Dinge zu verschwenden, die dir keinen echten Mehrwert bringen. Wenn du deine Fixkosten drückst und unnötige Konsumfallen meidest, entsteht jeden Monat ein finanzieller Überschuss. Dieses Geld arbeitet für dich, bringt dir mentale Ruhe und schafft echte Freiheit. Konkret heißt das: Fixkosten senken, die 50–30–20-Methode anwenden und deinen Notgroschen krisensicher aufbauen – Schritt für Schritt, ohne auf Lebensqualität zu verzichten.
 

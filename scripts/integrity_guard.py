@@ -250,10 +250,10 @@ def main():
     crit_bad, fest_bad = verify()
     L = ["# 🔐 INTEGRITY-REPORT", "",
          f"**Stand:** {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC · HEAD: `{git_head()}`",
-         f"**Verlade-Ebene:** {len(load_lock().get('files', {}))} Dateien gelockt",
+         f"**Lock-Ebene:** {len(load_lock().get('files', {}))} Dateien gelockt",
          f"**Gesperrte kritische Knoten:** {len(KRITISCH)}", ""]
     if crit_bad:
-        L += ["## 🛑 KRITISCHE Abweichungen (hartn-foot lle)", ""]
+        L += ["## 🛑 KRITISCHE Abweichungen (kein Weg zurück: neu signieren oder rückgängig machen)", ""]
         L += [f"- `{c}`" for c in crit_bad]
     if fest_bad:
         L += ["", "## 🟠 Festrelevante Abweichungen", ""]
@@ -261,7 +261,7 @@ def main():
     if not crit_bad and not fest_bad:
         L += ["🎉 Integritaet: Der Kern entspricht exakt dem letzten signierten Zustand.", ""]
     L += ["---",
-          "_Selbsttest vor jedem Start. Kritisch unterschreitet und Frank heißt Schritt._"]
+          "_Der Selbsttest läuft vor jedem Check. Ein kritischer Befund stoppt den Schritt – neu signieren (--set-current) oder Änderung zurücknehmen._"]
     REPORT.write_text("\n".join(L) + "\n", encoding="utf-8")
     print("\n".join(L[:20]))
     HISTORY.parent.mkdir(exist_ok=True)

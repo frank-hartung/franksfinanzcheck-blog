@@ -25,7 +25,8 @@ cover:
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 kurzantwort: "Vergleiche die Preise auf mehreren Flugvergleichsportalen und richte Preisalarme für deine Strecke ein – du wirst sofort informiert, wenn der Ticketpreis um mindestens 20 % sinkt. Buche idealerweise 6–8 Wochen vor Abflug und wähle Flüge an Dienstag oder Mittwoch, weil diese Tage im Schnitt 10–15 % günstiger sind. So kannst du bei einer normalen Buchung leicht 30 % oder mehr sparen."
 social_posted: true
----Ein Sitznachbar im Flugzeug zahlt oft das Dreifache für die identische Flugstrecke. Ich saß letztes Jahr am Flughafen in Lissabon und sprach mit einer Mitreisenden. Wir flogen beide nach Frankfurt, hatten den gleichen Service und identisches Gepäck. Du zahltest 60 % mehr als ich – weil du erst drei Tage vor Abflug gebucht hattest. Wer ohne Strategie bucht, verbrennt unnötig Geld.
+---
+Ein Sitznachbar im Flugzeug zahlt oft das Dreifache für die identische Flugstrecke. Ich saß letztes Jahr am Flughafen in Lissabon und sprach mit einer Mitreisenden. Wir flogen beide nach Frankfurt, hatten den gleichen Service und identisches Gepäck. Du zahltest 60 % mehr als ich – weil du erst drei Tage vor Abflug gebucht hattest. Wer ohne Strategie bucht, verbrennt unnötig Geld.
 
 **Das Wichtigste in Kurzform:**
 - Ein systematischer **Flugvergleich** spart oft mehrere hundert Euro pro Buchung.

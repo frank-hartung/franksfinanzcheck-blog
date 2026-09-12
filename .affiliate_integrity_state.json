@@ -1,14 +1,14 @@
 {
- "generated_at": "2026-09-10 08:33:26 UTC",
+ "generated_at": "2026-09-11 23:34:36 UTC",
  "exit_code": 0,
- "checked": 28,
+ "checked": 31,
  "healed": [],
  "healed_count": 0,
  "content_problems": [],
  "errors": [],
  "build": {
-  "built": false,
-  "reason": "public/ aktuell (kein Rebuild nötig)",
+  "built": true,
+  "reason": "public/ veraltet → Hugo-Rebuild",
   "ok": true
  }
 }

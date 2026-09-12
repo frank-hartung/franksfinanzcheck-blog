@@ -70,8 +70,17 @@ def check_internal_links():
     # Render-Beweis der Affiliate-Integritäts-Wache, deshalb hier dieselbe
     # Härtung: Attribut-Wert mit oder ohne Quotes erkennen.
     href_pat = re.compile(r"""href\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))""", re.I)
+    # PHANTOM-BREMSE (11.09.2026): das quote-tolerante Muster sieht `href=`
+    # überall – auch in <script> (`link.href = wf;` in der Pinterest-OAuth-
+    # Landeseite) und in HTML-Kommentaren. Drei Phantom-„kaputte Links" waren
+    # die Folge; eine Wache, die Phantome meldet, wird abgeschaltet. Also:
+    # Skript-/Style-/Kommentar-Blöge vor dem Scannen entfernen. Echte Links
+    # stehen nie in einem Skript-String, den der Browser nicht selbst setzt.
+    NOISE_RE = re.compile(r"<!--.*?-->|<script\b.*?</script>|<style\b.*?</style>",
+                          re.S | re.I)
     for page in pages:
         text = open(page, encoding="utf-8", errors="ignore").read()
+        text = NOISE_RE.sub(" ", text)
         for m in href_pat.finditer(text):
             raw = m.group(1) if m.group(1) is not None else (
                 m.group(2) if m.group(2) is not None else (m.group(3) or ""))

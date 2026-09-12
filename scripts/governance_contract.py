@@ -65,10 +65,19 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 GOV_WORKFLOW = os.path.join(BLOG_DIR, ".github", "workflows", "premium-governance.yml")
 WORKFLOWS_DIR = os.path.join(BLOG_DIR, ".github", "workflows")
+# Mindestmenge der Wachen, die der Vertrag prüft (C6: jede mit `--selftest`).
+# schema_seo_gate.py + generate_pwa_icons.py sind der 11.09.2026 dazugekommen:
+# das doppelte `| jsonify` in schema_article.html hatte die Article-Schema aller
+# Live-Artikel unbrauchbar gemacht, und die Site registrierte einen Service
+# Worker ohne Manifest. Beide Fehler waren im Build unsichtbar – jede Korrektur
+# ohne Wache hier wäre eine Leihgabe.
 GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "decay_radar.py", "governance_gate.py", "readability_check.py",
           "umami_clicks.py", "click_attribution.py", "awin_provisions.py",
-          "pinterest_perf_feedback.py", "pinterest_token.py", "pinterest_auth.py"]
+          "pinterest_perf_feedback.py", "pinterest_token.py", "pinterest_auth.py",
+          "schema_seo_gate.py", "generate_pwa_icons.py", "report_hygiene.py",
+          "live_policy_guard.py", "draft_triage.py", "check_uniqueness.py",
+          "audio_coverage_check.py", "newsletter_digest.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
@@ -77,7 +86,8 @@ TOKEN_BROKER_EXEMPT = {"pinterest_token.py", "pinterest_auth.py"}
 TOKEN_WORKFLOW = "pinterest-token.yml"
 
 # Reihenfolge-Vertrag: diese Schritte sind Messungen, die vor der Sicht liegen müssen
-MEASURE_STEPS = ("decay", "cwv", "secrets", "lesbarkeit", "pinperf", "clicks", "awin")
+MEASURE_STEPS = ("decay", "cwv", "secrets", "lesbarkeit", "pinperf", "clicks", "awin",
+                 "live-policy")
 VIEW_STEP = "scorecard"
 
 
@@ -118,6 +128,7 @@ STEP_SIGNATURES = {
     "pinperf":   (r"--emit\s+pinperf\b", r"pinterest_perf_feedback\.py"),
     "clicks":    (r"--emit\s+clicks\b", r"click_attribution\.py"),
     "awin":      (r"--emit\s+awin\b", r"awin_provisions\.py"),
+    "live-policy": (r"--emit\s+live-policy\b", r"live_policy_guard\.py"),
     "scorecard": (r"--emit\s+scorecard\b", r"editorial_scorecard\.py"),
 }
 

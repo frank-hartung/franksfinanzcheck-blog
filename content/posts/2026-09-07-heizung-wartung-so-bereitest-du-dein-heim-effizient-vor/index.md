@@ -69,7 +69,7 @@ Hier ist eine Übersicht der wichtigsten Handgriffe für den Spätsommer:
 
 Viele Menschen glauben, dass man nur durch Verzicht Gaskosten senken kann. Das ist ein Trugschluss. Effizienz bedeutet, mit dem gleichen Einsatz mehr Wirkung zu erzielen. Ein zentraler Punkt ist die Programmierung der Heizkurve an deinem Steuergerät. Oft ist diese viel zu hoch eingestellt, was dazu führt, dass die Anlage ständig an- und ausschaltet (Taktung).
 
-Ein weiterer Hebel ist der hydraulische Abgleich. Dabei wird sichergestellt, dass jeder Heizkörper im Haus genau die Menge an Wasser erhält, die er für die gewünschte Raumtemperatur benötigt. Ohne diesen Abgleich werden Heizkörper, die nah am Kessel sind, glühend heiß, während entfernte Räume kaum Wärme erreichen. Diese Maßnahme muss zwar vom Profi durchgeführt werden, amortisiert sich aber oft innerhalb weniger Jahre.
+Ein weiterer Hebel ist der hydraulische Abgleich. Dabei bekommt jedes Heizventil im Haus exakt die Wassermenge, die es für die gewünschte Raumwärme braucht. Ohne diesen Abgleich werden Heizkörper, die nah am Kessel sind, glühend heiß, während entfernte Räume kaum Wärme erreichen. Diese Maßnahme muss zwar vom Profi durchgeführt werden, amortisiert sich aber oft innerhalb weniger Jahre.
 
 Achte auch auf die Raumtemperaturen. Jedes Grad weniger senkt den Verbrauch um einen beachtlichen Prozentsatz. In Schlafräumen reichen oft 18 Grad, während im Wohnzimmer 20 bis 21 Grad als angenehm empfunden werden. Smarte Thermostate können dir helfen, diese Werte automatisiert einzuhalten und die Heizung abzusenken, wenn niemand zu Hause ist.
 
@@ -81,7 +81,7 @@ Nicht für jeden Handgriff benötigst du einen Fachbetrieb. Die Vorbereitung fü
 
 So gehst du vor:
 1. Drehe alle Thermostate in der Wohnung auf die höchste Einstellung (Stufe 5).
-2. Warte etwa 30 bis 60 Minuten, damit sich die Luft im System sammeln kann.
+2. Lass das System danach eine halbe bis ganze Stunde in Ruhe, bis die Luft oben in den Heizkörpern zusammenläuft.
 3. Halte ein Gefäß unter das Entlüftungsventil und öffne es vorsichtig mit einem Vierkantschlüssel.
 4. Lass die Luft entweichen, bis ein konstanter Wasserstrahl austritt.
 5. Schließe das Ventil sofort wieder und prüfe danach den Wasserdruck an der Zentralanlage.

@@ -144,6 +144,22 @@ jobs:
           python3 scripts/reserve_finisher.py --finish
           python3 scripts/reserve_readiness.py
 
+      # ================= RUNDE 3 (TRIAGE) =================
+      # Reserve heißt nicht Stapel. Jeder Entwurf bekommt einen begründeten
+      # Zustand: REIF (kann raus), BLOCKIERT (Konkretes Hindernis), WARTET
+      # (Zukunftsdatum), VERWAIST (reif, aber seit 21 Tagen unbearbeitet).
+      # Kein Blocker – was wann erscheint, entscheidet die Redaktion, nicht
+      # die Automation. Aber die Automation legt die Entscheidungsliste täglich
+      # vor, statt 17 Schubladen ungeöffnet zu lassen.
+      - name: Stufe 5 – Reserve triagieren (Entscheidungsdruck statt Stapel)
+        if: ${{ !cancelled() }}
+        run: |
+          python3 scripts/draft_triage.py --selftest
+          python3 scripts/draft_triage.py --md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null \
+            || echo "::warning::Triage-Tabelle nicht schreibbar – Details im Log"
+          python3 scripts/draft_triage.py --check-decisions \
+            || echo "::warning::Reife Entwürfe verfallen oder Quellen sind defekt – Liste in der Lauf-Zusammenfassung"
+
       - name: Entwürfe, Zertifikate und Reporte sichern (auch bei Engpass)
         if: ${{ !cancelled() }}
         run: |

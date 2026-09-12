@@ -1,0 +1,61 @@
+{
+  "id": "https://franksfinanzcheck.de/",
+  "name": "FranksFinanzcheck",
+  "short_name": "Finanzcheck",
+  "description": "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen.",
+  "start_url": "https://franksfinanzcheck.de/?utm_source=pwa&utm_medium=app",
+  "scope": "https://franksfinanzcheck.de/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0E5A43",
+  "lang": "de-DE",
+  "dir": "ltr",
+  "categories": [
+    "finance",
+    "news",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "/images/pwa/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/pwa/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Strom & Gas sparen",
+      "url": "https://franksfinanzcheck.de/pillar/strom-sparen/?utm_source=pwa-shortcut",
+      "description": "Ratgeber-Kategorie öffnen"
+    },
+    {
+      "name": "Internet & DSL",
+      "url": "https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pwa-shortcut",
+      "description": "Ratgeber-Kategorie öffnen"
+    },
+    {
+      "name": "Versicherungen",
+      "url": "https://franksfinanzcheck.de/pillar/versicherungen/?utm_source=pwa-shortcut",
+      "description": "Ratgeber-Kategorie öffnen"
+    },
+    {
+      "name": "Frugalismus & Budget",
+      "url": "https://franksfinanzcheck.de/pillar/frugalismus/?utm_source=pwa-shortcut",
+      "description": "Ratgeber-Kategorie öffnen"
+    }
+  ]
+}
