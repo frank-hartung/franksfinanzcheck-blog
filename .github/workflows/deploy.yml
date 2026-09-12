@@ -16,6 +16,8 @@ on:
   workflow_dispatch:
     inputs:
       audio_backfill:
+        # Runbook (wann sinnvoll, Dauer, Kontrolle, Abbruch):
+        # docs/AUDIO-BACKFILL-RUNBUCH.md
         description: 'Vorlese-Audio: alle fehlenden Tonspuren neu vertonen (sonst max. 25 je Lauf)'
         type: boolean
         default: false
@@ -431,6 +433,43 @@ jobs:
             --html-dir public \
             --out-dir public/audio/articles \
             || echo "⚠ Es bleiben beanstandete Spuren – bitte im Log nachsehen"
+
+      # NACHWEIS FÜR DEN AUDIO-BACKFILL (Runbook: docs/AUDIO-BACKFILL-RUNBUCH.md)
+      # Wer `audio_backfill=true` auslöst, startet bewusst einen Lauf von bis zu
+      # 90 Minuten Vertonung. Die Frage danach ist immer dieselbe: „Hat es was
+      # gebracht?" – und die soll sich beantworten lassen, ohne eine Stunde Log
+      # zu wälzen. Gemessen wird deshalb zweimal: VORHER aus dem gh-pages-Stand,
+      # aus dem der Audio-Cache gefüllt wurde, NACHHER aus dem Build, der gleich
+      # veröffentlicht wird. Beide Zahlen landen in der Lauf-Zusammenfassung.
+      # Rein berichtend: der Schritt kann den Livegang nicht aufhalten (eine
+      # fehlende Studiospur bedeutet Gerätestimme, keinen Ausfall).
+      - name: Audio-Abdeckung in die Lauf-Zusammenfassung
+        continue-on-error: true
+        run: |
+          {
+            echo "## 🎧 Studio-Tonspuren (Vorlese-Audio)"
+            echo ""
+            echo "**Vorher** – Stand auf \`gh-pages\` vor diesem Lauf:"
+            echo '```'
+            python3 scripts/audio_coverage_check.py --ref origin/gh-pages \
+              || echo "(kein Vorher-Nachweis: gh-pages nicht erreichbar)"
+            echo '```'
+            echo ""
+            echo "**Nachher** – dieser Build, wird veröffentlicht:"
+            echo '```'
+            # Ohne Verzeichnis wäre die Ausgabe „0/31“ – das ist keine
+            # Aussage über den Bestand, sondern nur ein fehlender Fundort.
+            if [ -d public/audio/articles ]; then
+              python3 scripts/audio_coverage_check.py --dir public/audio/articles \
+                || echo "(nicht messbar)"
+            else
+              echo "(Vertonungsschritt hat in diesem Lauf kein Audio-Verzeichnis erzeugt)"
+            fi
+            echo '```'
+            echo ""
+            echo "_Lücken schließen: Deploy mit \`audio_backfill=true\` erneut auslösen_"
+            echo "_(Runbook: \`docs/AUDIO-BACKFILL-RUNBUCH.md\`)._"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Deploy auf gh-pages
         uses: peaceiris/actions-gh-pages@v4
