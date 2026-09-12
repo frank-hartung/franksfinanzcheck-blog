@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 5,
+  "ready": 6,
   "candidates": [
     {
       "slug": "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
@@ -21,9 +21,9 @@
       "slug": "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
       "ready": true,
       "sha256": "9d84101bcf24b43a3da537faa0239e6ce0afa9b5f8cb4f977fc1c8e767ed55ba",
-      "score": 0.99,
+      "score": 0.986,
       "parts": {
-        "spelling": 1.0,
+        "spelling": 0.98,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -36,9 +36,9 @@
       "slug": "2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
       "ready": true,
       "sha256": "d454733f3d4e15afd177222dbd40e176dc18aacabf7c32206848cef6b037eb90",
-      "score": 0.946,
+      "score": 0.938,
       "parts": {
-        "spelling": 1.0,
+        "spelling": 0.96,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.96,
@@ -51,9 +51,9 @@
       "slug": "2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks",
       "ready": true,
       "sha256": "d3922b9a3eb3581f0f2987d764a35fbef7190b338a9ff76ec2e9b7b76ada5282",
-      "score": 1.0,
+      "score": 0.968,
       "parts": {
-        "spelling": 1.0,
+        "spelling": 0.84,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -66,15 +66,30 @@
       "slug": "2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe",
       "ready": true,
       "sha256": "91d27e1d1206cad6c9cea872749eee0a99fb4bd422be39ff874fd852884257b1",
-      "score": 0.98,
+      "score": 0.944,
       "parts": {
-        "spelling": 1.0,
+        "spelling": 0.8200000000000001,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.9
+      }
+    },
+    {
+      "slug": "2026-09-12-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
+      "ready": true,
+      "sha256": "2e4c51622224ba3c1062b8de4b4a60ae22fcf571f3d3ddb9778377c98c53363c",
+      "score": 0.889,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 0.7,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
       }
     }
   ]

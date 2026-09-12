@@ -1,12 +1,10 @@
 # 📏 DASH-REPORT (dash_guard.py)
 
-**Stand:** 2026-09-11 21:37 UTC · Modus: FIX+KI
+**Stand:** 2026-09-12 08:03 UTC · Modus: FIX+KI
 
-🎉 Alle geprüften Artikel sind strich-typografisch sauber (Duden-Level).
+## ✅ Automatisch korrigiert (1 Dateien)
 
-## 🎓 Stil-Hinweise (Ebene 2, nur Info bzw. mit --ai aktiv)
-
-- `content/posts/2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich/index.md` Zeile 89: S1-Doppelschub
+- `content/posts/2026-09-12-gasrechnung-senken-dein-strategieplan-im-spaetsommer/index.md`: Regel-Fixes 1, KI-Umformulierungen 0
 
 ---
 _Deterministisch: Gedankenstrich-Typ, Bis-Striche, Doppelminus · KI-Schiedsrichter (S1/S3) nur mit --ai. Geschützt: Front-Matter, Listen, Tabellen, Überschriften, URLs, Code._
