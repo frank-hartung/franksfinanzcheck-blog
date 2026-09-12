@@ -107,7 +107,7 @@ Die SF-Klasse ist der mit Abstand wichtigste einzelne Prämienfaktor:
 
 Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gibt keinen "Reset".
 
-### 7. Den Stichtag 30.11. Kennen und nutzen
+### 7. Den Stichtag 30.11. kennen und nutzen
 
 - **Kündigungsfrist:** Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der **31.12.** ist.
 - **Sonderkündigungsrecht bei Beitragserhöhung:** Wenn dein Versicherer den Preis ohne Schadensfall erhöht, hast du **vier Wochen** nach Eingang der Mitteilung Zeit zu kündigen – unabhängig vom 30.11.

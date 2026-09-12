@@ -1,8 +1,8 @@
 # 🧠 TEXTVERSTÄNDNIS-REPORT (textverstaendnis_guard.py)
-**Stand:** 2026-09-12 00:17 UTC · Artikel: 48
+**Stand:** 2026-09-12 09:35 UTC · Artikel: 49
 
 **Harte Regeln (R2/R3/R5-hart/R7/R8-URL):** 29 Funde
-**Weiche Regeln (R4/R5/R8-Anker):** 241 Funde
+**Weiche Regeln (R4/R5/R8-Anker):** 242 Funde
 
 - `content/posts/2026-08-10-dsl-wechselbonus-sichern/index.md` **R4-SATZANFANG**: „die“ startet 6/48 Sätze (7.5/1k Wörter)
 - `content/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/index.md` **R4-SATZANFANG**: „eine“ startet 6/48 Sätze (7.5/1k Wörter)
