@@ -1,11 +1,11 @@
 # 📌 PINTEREST- + GOOGLE-SEO-HEALER
 
-**Stand:** 2026-09-11 18:15 UTC · **Modus:** FIX
+**Stand:** 2026-09-12 08:42 UTC · **Modus:** FIX
 
-- Artikel: **50**
-- Geheilt: **3**
-- Offene Issues: **5**
-- Covers: 1 Titel-Stale + fehlende nachgezogen
+- Artikel: **49**
+- Geheilt: **1**
+- Offene Issues: **0**
+- Covers: fehlende nachgezogen
 
 ## Kriterien 2026 (Agentur-Standard)
 
@@ -59,17 +59,16 @@
 | ✅ | `2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen` *(draft)* | — |
 | ✅ | `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` | — |
 | ✅ | `2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert` *(draft)* | — |
-| ⚠️ | `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag` *(draft)* | Cover-Datei fehlt |
-| ⚠️ | `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` *(draft)* | Cover-Datei fehlt |
-| ⚠️ | `2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug` *(draft)* | Cover-Datei fehlt |
-| ⚠️ | `2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks` *(draft)* | Cover-Datei fehlt |
+| ✅ | `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag` *(draft)* | — |
+| ✅ | `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` *(draft)* | — |
+| ✅ | `2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug` *(draft)* | — |
+| ✅ | `2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks` *(draft)* | — |
 | ✅ | `2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe` *(draft)* | — |
-| ✅ | `2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest` | — |
-| ⚠️ | `2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` *(draft)* | Cover-Datei fehlt |
-| ✅ | `2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsbudget` *(draft)* | — |
-| ✅ | `2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt` *(draft)* | — |
-| ✅ | `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` *(draft)* | — |
-| ✅ | `2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich` *(draft)* | — |
+| ✅ | `2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest` *(draft)* | — |
+| ✅ | `2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` | — |
+| ✅ | `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` | — |
+| ✅ | `2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich` | — |
+| ✅ | `2026-09-12-gasrechnung-senken-dein-strategieplan-im-spaetsommer` *(draft)* | — |
 
 ## Selbstheilung (diese Runde)
 
