@@ -1,25 +1,31 @@
 /* ============================================================
-   FranksFinanzcheck — FF Voice Studio (Lesehilfen, Generation 4)
-   10.09.2026 — Profi-Agentur-Standard
+   FranksFinanzcheck — FF Voice Studio (Lesehilfen, Generation 5 — ElevenLabs Premium)
+   12.09.2026 — Profi-Agentur, Premium-Level (ElevenLabs · männlich · DE+EN ohne Umschalter)
    ------------------------------------------------------------
    VORLESEN — Zwei garantierte Tonpfade, eine Regie, kein Umschalter:
-       (a) STUDIO-TONSPUR — vorab vertonte MP3, gesprochen von einem
-           männlichen, DEUTSCHEN NACHRICHTENSPRECHER (serverseitig
-           erzeugt durch scripts/ff_voice_audio.py, Profil „news“) im
-           nativen HTML5-Player. Identischer Klang auf iPhone, iPad,
-           Mac, Android, Windows/Linux und in Chrome, Safari, Firefox,
-           Edge.
+       (a) STUDIO-TONSPUR — vorab vertonte MP3, gesprochen von einer
+           MÄNNLICHEN ELEVENLABS-PREMIUM-STIMME (Eleven Multilingual v2,
+           Voice Adam, serverseitig erzeugt durch scripts/ff_voice_audio.py,
+           Profil „eleven“) im nativen HTML5-Player. Eine Stimme, zwei
+           Sprachen (DE+EN) — auto Language-Detect pro Block/Satz, kein
+           Schalter. Identischer Klang auf iPhone, iPad, Mac, Android,
+           Windows/Linux und in Chrome, Safari, Firefox, Edge.
+           Ohne ElevenLabs-Key fällt die Kette automatisch auf die
+           männliche Edge-Nachrichtensprecher-Doppelbesetzung
+           (Conrad DE / Andrew EN) — niemals stumm.
        (b) BROWSER-ENGINE — lokale Web Speech API mit derselben
-           Regie, wenn keine Tonspur vorliegt oder sie nicht ladbar
-           ist. Nie stumm, nie eine Warteschleife.
+           Regie (Conrad/Andrew, Florian/Brian, Killian/Ryan), wenn keine
+           Tonspur vorliegt oder sie nicht ladbar ist. Nie stumm, nie
+           eine Warteschleife.
 
-   NUR-DEUTSCH-VERTRAG (Auftrag 07.09.2026)
-     Die Vorlese-Funktion spricht ausschließlich Deutsch — es gibt
-     keine englische Stimme, keinen Sprachumschalter und keinen
-     Sprachwechsel mitten im Satz. Englische Fachbegriffe spricht
-     der Nachrichtensprecher so, wie es im deutschen Hörfunk üblich
-     ist. Das Paritäts-Gate (scripts/ff_voice_parity_check.py) hält
-     Reader und Generator auf diesem Vertrag.
+   PREMIUM-BILINGUAL OHNE UMSCHALTER (12.09.2026, Profi-Agentur)
+     Die Vorlese-Funktion spricht Deutsch UND Englisch — mit EINER
+     männlichen Stimme, ohne Menü und ohne Umschalter. Die Sprache
+     wird je Block/Satz automatisch erkannt (ä/ö/ü/ß + Stopwörter), die
+     Studio-Stimme (ElevenLabs Multilingual v2, Adam) schaltet selbst,
+     die Browser-Engine wählt Conrad vs. Andrew etc. Das Paritäts-Gate
+     (scripts/ff_voice_parity_check.py) hält beide Regien auf diesem
+     Vertrag — premium, first-party, DSGVO-sauber.
 
    LESEANZEIGE — wortgenau (WCAG 2.2 AA, barrierefrei auf
    Verlagshaus-Niveau)
@@ -63,10 +69,10 @@
 
    VERTRAG MIT DEM GENERATOR (scripts/ff_voice_audio.py):
      <script type="application/json" id="ff-voice-track-config">
-     { "src": "...", "version": "...", "voice": {...}, "lang": "de",
+     { "src": "...", "version": "2026.09.12-elevenlabs", "voice": {"eleven":"Adam", "model":"eleven_multilingual_v2"}, "lang": "de|en",
        "duration": ms,
-       "chunks": [ { "b": blockIndex, "t0": ms, "t1": ms, "lang": "de",
-                     "w": [ [rohwortIndex, ms], ... ]? } ] }
+       "chunks": [ { "b": blockIndex, "t0": ms, "t1": ms, "lang": "de|en",
+                     "w": [ [rohwortIndex, ms], ... ]? } ] }  // lang je Chunk, auto — kein Umschalter
      `b` ist der 0-basierte Blockindex in Lesereihenfolge
      (0 = Anmoderation, letzter = Abmoderation) — exakt die
      Reihenfolge von collectBlocks(). Das Feld `w` ist die Wortuhr:
@@ -85,7 +91,7 @@
      1 · KONFIGURATION
      ============================================================ */
 
-  var VOICE_VERSION = '2026.09.11';
+  var VOICE_VERSION = '2026.09.12-elevenlabs';
 
   var cfgEl = doc.getElementById('ff-voice-config');
   if (!cfgEl) return;
@@ -131,28 +137,31 @@
   var STORE_POS = 'ff-voice-pos:' + String(cfg.slug || cfg.permalink || doc.location.pathname);
 
   /* ============================================================
-     2 · OBERFLÄCHEN-TEXT — NUR DEUTSCH (Nur-Deutsch-Vertrag)
+     2 · OBERFLÄCHEN-TEXT — PREMIUM-BILINGUAL OHNE UMSCHALTER
      ------------------------------------------------------------
-     Die Vorlese-Funktion spricht ausschließlich Deutsch. Die früheren
-     I18N.en-Texte und die Sprachschalter-Mechanik sind ersatzlos
-     entfallen (Befund 07.09.2026): Ein englischer Text im Artikel
-     wird NICHT mehr auf Englisch vorgelesen — ihn spricht der
-     deutsche Nachrichtensprecher. Das Paritäts-Gate verbietet beide
-     Richtungen: weder im Reader noch im Generator darf eine zweite
-     Sprache eingebaut werden.
+     Die Vorlese-Funktion spricht Deutsch UND Englisch — mit EINER
+     männlichen ElevenLabs-Premium-Stimme (Multilingual v2, Adam),
+     ohne Menü und ohne Umschalter. Die Sprache wird je Artikel/
+     Block automatisch erkannt (ä/ö/ü + Stopwörter); ein englischer
+     Satz im deutschen Artikel erklingt also auf Englisch — mit
+     demselben Klang. Das Paritäts-Gate hält Reader und Generator
+     auf diesem Vertrag — premium, DSGVO-sauber, first-party.
      ============================================================ */
 
+  // Premium-Bilingual: Sprache wird je Artikel auto gewählt (kein Umschalter für Leser).
+  // Die ElevenLabs-Stimme (Adam) spricht BEIDES nativ; die Browser-Fallbacks wählen
+  // Conrad/Andrew etc. je nach erkannter Sprache — ein Klang, kein Menü.
   var I18N = {
     de: {
       play: 'Vorlesen', pause: 'Pausieren', resume: 'Weiterlesen', stop: 'Beenden',
-      playAria: 'Artikel vorlesen (männliche Nachrichtensprecher-Stimme)',
+      playAria: 'Artikel vorlesen (männliche ElevenLabs-Premium-Stimme, DE & EN)',
       playAriaNeutral: 'Artikel vorlesen (Stimme deines Geräts)',
       pauseAria: 'Vorlesen pausieren', resumeAria: 'Vorlesen fortsetzen', stopAria: 'Vorlesen beenden',
       summaryBtn: 'Kurzfassung', summaryAria: 'Kurzfassung des Artikels anzeigen',
       unsupported: 'Vorlesen wird von diesem Browser nicht unterstützt.',
       noText: 'Kein vorlesbarer Text gefunden.',
       started: 'Vorlesen gestartet.',
-      startedTrack: 'Studio-Tonspur läuft.',
+      startedTrack: 'ElevenLabs Studio läuft.',
       trackDefective: 'Die Tonspur dieses Artikels ist unbrauchbar – die Stimme deines Geräts übernimmt.',
       trackBroken: 'Tonspur konnte nicht geladen werden – die Stimme deines Geräts übernimmt.',
       trackEndedEarly: 'Die Tonspur endet zu früh – es geht mit der Gerätestimme weiter.',
@@ -160,9 +169,9 @@
       trackStalled: 'Die Tonspur hängt – die Stimme deines Geräts übernimmt.',
       synthesisDead: 'Sprachausgabe ist auf diesem Gerät nicht verfügbar. Der Artikel bleibt vollständig lesbar.',
       synthesisMute: 'Dein Browser meldet Sprachausgabe, gibt aber keinen Ton aus. Das Vorlesen wurde gestoppt – der Artikel bleibt vollständig lesbar.',
-      voiceActive: 'Deutscher Nachrichtensprecher aktiv.',
+      voiceActive: 'ElevenLabs Premium-Stimme aktiv (männlich, DE & EN).',
       voiceFallback: 'Vorlesen gestartet; dein Browser stellt die verfügbare Stimme bereit.',
-      voiceLoading: 'Nachrichtensprecher-Stimme wird geladen …',
+      voiceLoading: 'Premium-Stimme wird geladen …',
       sectionError: 'Dieser Abschnitt konnte nicht abgespielt werden; es geht weiter.',
       paused: 'Vorlesen pausiert.', resumed: 'Vorlesen fortgesetzt.',
       finished: 'Vorlesen beendet.', resumedPos: 'Vorlesen an der zuletzt gehörten Stelle fortgesetzt.',
@@ -171,14 +180,14 @@
       progressNowLabel: 'Gerade vorgelesen',
       progressPos: 'Abschnitt {n} von {total}',
       progressWords: 'Wort {i} von {total}',
-      progressModeReady: 'Bereit', progressModeSpeech: 'Gerät', progressModeTrack: 'Studio', progressModePaused: 'Pause', progressModeDone: 'Fertig',
+      progressModeReady: 'Bereit', progressModeSpeech: 'Gerät', progressModeTrack: 'ElevenLabs', progressModePaused: 'Pause', progressModeDone: 'Fertig',
       progressHeading: 'Überschrift', progressParagraph: 'Absatz', progressList: 'Liste', progressQuote: 'Zitat',
       progressCallout: 'Merksatz', progressWarning: 'Hinweis', progressOverview: 'Übersicht',
       progressTableIntro: 'Tabelle im Überblick', progressTableHeader: 'Tabelle · Spalten', progressTableGroup: 'Tabelle · Gruppe',
       progressTableRow: 'Tabelle · Zeile {row} von {total}', progressTableSum: 'Tabelle · Summe', progressTableCta: 'Tabelle · Empfehlung', progressTableOutro: 'Tabellenende',
       progressIntro: 'Intro', progressOutro: 'Abschluss',
       mediaTitle: '{title} – FranksFinanzcheck',
-      mediaArtist: 'FranksFinanzcheck – Nachrichtensprecher (Deutsch)',
+      mediaArtist: 'FranksFinanzcheck – ElevenLabs Premium (männlich, DE & EN ohne Umschalter)',
       introLine: '{title}. Ein Beitrag von FranksFinanzcheck. Hördauer etwa {duration}.',
       durationMinutes: '{n} Minuten', durationMinuteOne: 'eine Minute', durationUnknown: 'einige Minuten',
       outroLine: 'Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.',
@@ -199,28 +208,81 @@
       tableDefault: 'Übersichtstabelle',
       prevAria: 'Vorheriger Abschnitt', nextAria: 'Nächster Abschnitt',
       prevSentenceAria: 'Vorheriger Satz', nextSentenceAria: 'Nächster Satz',
-      // Kurzfassung
-      summaryEyebrow: 'Kurzfassung',
-      summaryQuick: 'Das Wichtigste in 30 Sekunden',
-      summaryKeypoints: 'Die Kernaussagen',
-      summaryFigures: 'Auf einen Blick – die wichtigsten Zahlen',
-      summaryTables: 'Tabellen & Übersichten im Fokus',
-      summaryToc: 'In diesem Artikel',
-      summaryCopy: 'Kurzfassung kopieren',
-      summaryCopied: 'Kopiert',
-      summaryCopyFail: 'Kopieren fehlgeschlagen',
-      summaryReadFull: 'Ganzen Artikel lesen',
-      summaryClose: 'Kurzfassung schließen',
-      summaryAuthor: 'Autor: {name}',
-      summaryStand: 'Stand: {date}',
-      summaryUpdated: 'Aktualisiert: {date}',
+      summaryEyebrow: 'Kurzfassung', summaryQuick: 'Das Wichtigste in 30 Sekunden',
+      summaryKeypoints: 'Die Kernaussagen', summaryFigures: 'Auf einen Blick – die wichtigsten Zahlen',
+      summaryTables: 'Tabellen & Übersichten im Fokus', summaryToc: 'In diesem Artikel',
+      summaryCopy: 'Kurzfassung kopieren', summaryCopied: 'Kopiert', summaryCopyFail: 'Kopieren fehlgeschlagen',
+      summaryReadFull: 'Ganzen Artikel lesen', summaryClose: 'Kurzfassung schließen',
+      summaryAuthor: 'Autor: {name}', summaryStand: 'Stand: {date}', summaryUpdated: 'Aktualisiert: {date}',
       summaryEmpty: 'Für diesen Artikel liegt derzeit keine Kurzfassung vor.',
-      summaryRowCount: '{count} Zeilen',
-      summaryRowCountOne: '1 Zeile',
-      summaryMoreRows: '+ {count} weitere Zeilen',
-      summaryReadingTime: 'ca. {time} Min. Lesezeit',
-      summaryWords: '{count} Wörter',
-      summaryJump: 'Zum Abschnitt'
+      summaryRowCount: '{count} Zeilen', summaryRowCountOne: '1 Zeile', summaryMoreRows: '+ {count} weitere Zeilen',
+      summaryReadingTime: 'ca. {time} Min. Lesezeit', summaryWords: '{count} Wörter', summaryJump: 'Zum Abschnitt'
+    },
+    en: {
+      play: 'Listen', pause: 'Pause', resume: 'Resume', stop: 'Stop',
+      playAria: 'Listen to article (male ElevenLabs premium voice, DE & EN)',
+      playAriaNeutral: 'Listen to article (your device voice)',
+      pauseAria: 'Pause listening', resumeAria: 'Resume listening', stopAria: 'Stop listening',
+      summaryBtn: 'Summary', summaryAria: 'Show article summary',
+      unsupported: 'Listening is not supported by this browser.',
+      noText: 'No readable text found.',
+      started: 'Listening started.',
+      startedTrack: 'ElevenLabs studio running.',
+      trackDefective: 'This article track is unusable — your device voice takes over.',
+      trackBroken: 'Track could not be loaded — your device voice takes over.',
+      trackEndedEarly: 'Track ends early — continuing with your device voice.',
+      trackSilent: 'Track stays silent — your device voice takes over.',
+      trackStalled: 'Track stalls — your device voice takes over.',
+      synthesisDead: 'Speech is not available on this device. The article remains fully readable.',
+      synthesisMute: 'Your browser reports speech but plays no sound. Listening stopped — article remains readable.',
+      voiceActive: 'ElevenLabs premium voice active (male, DE & EN).',
+      voiceFallback: 'Listening started; your browser provides the available voice.',
+      voiceLoading: 'Premium voice loading …',
+      sectionError: 'This section could not be played; continuing.',
+      paused: 'Listening paused.', resumed: 'Listening resumed.',
+      finished: 'Listening finished.', resumedPos: 'Resumed at last position.',
+      remaining: 'about {min} min left',
+      progressIdle: 'Not started',
+      progressNowLabel: 'Now playing',
+      progressPos: 'Section {n} of {total}',
+      progressWords: 'Word {i} of {total}',
+      progressModeReady: 'Ready', progressModeSpeech: 'Device', progressModeTrack: 'ElevenLabs', progressModePaused: 'Pause', progressModeDone: 'Done',
+      progressHeading: 'Heading', progressParagraph: 'Paragraph', progressList: 'List', progressQuote: 'Quote',
+      progressCallout: 'Key point', progressWarning: 'Note', progressOverview: 'Overview',
+      progressTableIntro: 'Table overview', progressTableHeader: 'Table · Columns', progressTableGroup: 'Table · Group',
+      progressTableRow: 'Table · Row {row} of {total}', progressTableSum: 'Table · Total', progressTableCta: 'Table · Recommendation', progressTableOutro: 'End of table',
+      progressIntro: 'Intro', progressOutro: 'Outro',
+      mediaTitle: '{title} – FranksFinanzcheck',
+      mediaArtist: 'FranksFinanzcheck – ElevenLabs Premium (male, DE & EN)',
+      introLine: '{title}. An article by FranksFinanzcheck. Listening time about {duration}.',
+      durationMinutes: '{n} minutes', durationMinuteOne: 'one minute', durationUnknown: 'a few minutes',
+      outroLine: 'End of article. Thanks for listening to FranksFinanzcheck.',
+      listItemNum: 'Item {n}:',
+      cueShortAnswer: 'Key takeaway:', cueCorrection: 'Correction:', cueSaving: 'Potential saving:', cueTariff: 'Tariff at a glance:',
+      cueWarning: 'Attention:', cueNote: 'Note:',
+      columnLabel: 'Column', rowLabel: 'Row',
+      tableHeaders: 'Columns are: {headers}.',
+      tableHeaderRow: 'Header row {n}: {headers}.',
+      tableIntro: 'Table: {title}. Overview with {cols} columns and {rows} rows.',
+      tableIntroOne: 'Table: {title}. Overview with {cols} columns and one row.',
+      tableRow: 'Row {row} of {total}. {content}.',
+      tableRowLabel: 'Row {row} of {total}: {label}. {content}.',
+      tableGroup: 'Group: {name}.',
+      tableSum: 'Total: {content}.',
+      tableCta: 'Recommendation: {cta}. Note: This is a partner link.',
+      tableOutro: 'End of table {title}.',
+      tableDefault: 'Overview table',
+      prevAria: 'Previous section', nextAria: 'Next section',
+      prevSentenceAria: 'Previous sentence', nextSentenceAria: 'Next sentence',
+      summaryEyebrow: 'Summary', summaryQuick: 'Key points in 30 seconds',
+      summaryKeypoints: 'Key takeaways', summaryFigures: 'At a glance — key figures',
+      summaryTables: 'Tables & overviews in focus', summaryToc: 'In this article',
+      summaryCopy: 'Copy summary', summaryCopied: 'Copied', summaryCopyFail: 'Copy failed',
+      summaryReadFull: 'Read full article', summaryClose: 'Close summary',
+      summaryAuthor: 'Author: {name}', summaryStand: 'Date: {date}', summaryUpdated: 'Updated: {date}',
+      summaryEmpty: 'No summary available for this article.',
+      summaryRowCount: '{count} rows', summaryRowCountOne: '1 row', summaryMoreRows: '+ {count} more rows',
+      summaryReadingTime: 'about {time} min read', summaryWords: '{count} words', summaryJump: 'Go to section'
     }
   };
 
@@ -306,25 +368,54 @@
   }
 
   /* ============================================================
-     4 · NUR-DEUTSCH-VERTRAG (Befund 07.09.2026)
+     4 · PREMIUM-BILINGUAL OHNE UMSCHALTER (12.09.2026)
      ------------------------------------------------------------
-     Die Vorlese-Funktion nutzt ausschließlich Deutsch. Die frühere
-     Spracherkennung (Artikel-, Satz- und Wortlauf-Routing zwischen
-     DE und EN) ist ersatzlos entfallen — ihre Tabellen und
-     Heuristiken sind bewusst NICHT mehr vorhanden, damit niemand
-     sie „nur kurz“ wieder anstöpselt. Ein englischer Begriff im
-     Text wird vom deutschen Nachrichtensprecher gesprochen, wie es
-     im Hörfunk üblich ist.
+     Die Vorlese-Funktion spricht Deutsch UND Englisch mit EINER
+     männlichen ElevenLabs-Premium-Stimme (Adam) — ohne Menü, ohne
+     Umschalter. Die Sprache wird je Block/Satz automatisch erkannt:
 
-     Beide Funktionen bleiben als Signaturen erhalten (Generator-
-     Spiegel + Tests): Sie liefern für JEDE Eingabe „de“.
+       · Enthält ä/ö/ü/ß            → de
+       · Zählt deutsche vs. englische Stopwörter (der/die/das …
+         vs. the/and/is …); Mehrheit gewinnt
+       · Fallback: <html lang>, cfg.lang Bar oder 'de'
+
+     Eine Stimme, ein Klang — nur die Aussprache wechselt.
+     Spiegel: detect_language/sniff_sentence_lang in
+     scripts/ff_voice_audio.py + ff_voice_backends.py.
      ============================================================ */
 
-  function detectArticleLanguage() { return 'de'; }
-  function sniffSentenceLang() { return 'de'; }
+  function detectArticleLanguage(sample, declared) {
+    var t = String(sample == null ? '' : sample).toLowerCase();
+    var d = String(declared != null ? declared : (cfg && cfg.lang) || (doc.documentElement && doc.documentElement.lang) || 'de').toLowerCase().slice(0,2);
+    if (!t.trim()) return (d === 'en' ? 'en' : 'de');
+    var de_hits = 0, en_hits = 0;
+    var de_words = ' der  die  das  und  oder  nicht  ein  eine  für  mit  von  im  auf  ist  zu  den  dem  wir  sie  sparen  strom  gas  tarif  euro  pro  jahr  monat ';
+    var en_words = ' the  and  is  are  you  your  with  for  this  that  save  money  energy  tariff  euro  per  year  month  from  have  will  can ';
+    var pad = ' ' + t + ' ';
+    if (pad.indexOf(' ä ') !== -1 || pad.indexOf(' ö ') !== -1 || pad.indexOf(' ü ') !== -1 || t.indexOf('ä') !== -1 || t.indexOf('ö') !== -1 || t.indexOf('ü') !== -1 || t.indexOf('ß') !== -1) de_hits += 2;
+    var dw = de_words.trim().split(/\s+/);
+    for (var i=0;i<dw.length;i++) if (pad.indexOf(' ' + dw[i] + ' ') !== -1) de_hits++;
+    var ew = en_words.trim().split(/\s+/);
+    for (var j=0;j<ew.length;j++) if (pad.indexOf(' ' + ew[j] + ' ') !== -1) en_hits++;
+    if (en_hits > de_hits + 1) return 'en';
+    if (de_hits > en_hits) return 'de';
+    return d === 'en' ? 'en' : 'de';
+  }
+  function sniffSentenceLang(sentence, base) {
+    return detectArticleLanguage(sentence, base || 'de');
+  }
 
-  var lang = 'de';
-  var T = I18N.de;
+  function resolveDocLang() {
+    var probe = '';
+    try {
+      var contentEl = doc.querySelector('.post-content') || doc.querySelector('.md-content') || doc.body;
+      probe = readableText(contentEl).slice(0, 4000);
+    } catch(e) {}
+    var declared = (cfg && cfg.lang) || (bar && bar.getAttribute && bar.getAttribute('data-page-lang')) || (doc.documentElement && doc.documentElement.lang) || 'de';
+    return detectArticleLanguage(probe, declared);
+  }
+  var lang = resolveDocLang();
+  var T = I18N[lang] || I18N.de;
 
   /* ============================================================
      4a · WORTUHR-ALIGNER — die Brücke zwischen Sprechtext und
@@ -523,7 +614,20 @@
       [/(\d)\s?%/g, '$1 Prozent'],
       [/%/g, 'Prozent']
   ];
+  var ABBREV_EN = [
+    [/\bMr\./g, 'Mister'], [/\bMrs\./g, 'Misses'], [/\bMs\./g, 'Miss'],
+    [/\bDr\./g, 'Doctor'], [/\bSt\./g, 'Street'], [/\bvs\./gi, 'versus'],
+    [/\betc\./gi, 'et cetera'], [/\be\.g\./gi, 'for example'], [/\bi\.e\./gi, 'that is'],
+    [/€\s?\/\s?(month|year|kWh|person)/gi, 'euros per $1'],
+    [/ct\/\s?kWh/gi, 'cents per kilowatt hour'], [/kWh\/a/g, 'kilowatt hours per year'],
+    [/kWh/g, 'kilowatt hours'], [/kWp/g, 'kilowatt peak'], [/m²/g, 'square meters'],
+    [/m³/g, 'cubic meters'], [/km\/h/g, 'kilometers per hour'],
+    [/Mio\.\s?€/g, 'million euros'], [/Mrd\.\s?€/g, 'billion euros'],
+    [/Tsd\./g, 'thousand'], [/§\s?(\d+)/g, 'paragraph $1'],
+    [/€/g, 'euros'], [/(\d)\s?%/g, '$1 percent'], [/%/g, 'percent']
+  ];
 
+  var MONTHS_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   var MONTHS_DE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
     'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 
@@ -933,12 +1037,14 @@
   }
 
   /**
-   * Überführt Schreibsprache in Sprechsprache.
-   * NUR-DEUTSCH-VERTRAG: ein optionales zweite Argument (alt: 'en')
-   * wird ignoriert — geregelt wird immer nach deutschem Regelwerk.
-   * @param {string} text
+   * Überführt Schreibsprache in Sprechsprache — PREMIUM-BILINGUAL.
+   * `lang` ∈ {de,en} wählt das Regelwerk (RULES_DE vs. RULES_EN) und
+   * entscheidet, ob die Germanisierung läuft (nur in de).
+   * @param {string} text  Rohtext des Blocks
+   * @param {string=} lang Zielsprache ('de'|'en'), Default aus Artikel oder 'de'
    */
-  function speechNormalize(text) {
+  function speechNormalize(text, lang) {
+    var wantEn = String(lang || '').toLowerCase().indexOf('en') === 0;
     var out = String(text == null ? '' : text);
     if (!out) return '';
 
@@ -960,24 +1066,44 @@
     out = out.replace(/[\u00ad\u200b-\u200f\u2060\u2190-\u21ff\u2300-\u27bf\u2b00-\u2bff\ufe00-\ufe0f]|[\ud83c-\udbff][\udc00-\udfff]/g, ' ');
 
     out = normalizeUrls(out, hold);
-    out = normalizeDates(out, hold);
-    out = normalizeTimes(out, hold);
+    // Bilinguale Datumsaufbereitung: DE → "2. Januar 2006", EN → "January 2, 2006"
+    if (wantEn) {
+      out = out.replace(/\b(\d{1,2})[.\/](\d{1,2})[.\/](\d{4})\b/g, function (m, a, b, c) {
+        var mo = parseInt(a,10), da = parseInt(b,10);
+        if (mo>=1 && mo<=12) return hold(MONTHS_EN[mo-1] + ' ' + da + ', ' + c);
+        return m;
+      });
+      out = out.replace(/\b(\d{1,2})\.(\d{1,2})\.(?!\d)/g, function (m, d, mo) {
+        var month = parseInt(mo,10);
+        if (month>=1 && month<=12) return hold(MONTHS_EN[month-1] + ' ' + parseInt(d,10));
+        return m;
+      });
+      out = out.replace(/\b(\d{1,2}):(\d{2})\s?(Uhr)?\b/g, function (m, h, min) {
+        var hh=parseInt(h,10), mm=parseInt(min,10);
+        return hold(hh + ':' + (mm<10?'0':'') + mm);
+      });
+    } else {
+      out = normalizeDates(out, hold);
+      out = normalizeTimes(out, hold);
+    }
 
-    // NUR-DEUTSCH-AUSSPRACHE (Befund 07.09.2026): englisch geschriebene
-    // Fach- und Markenbegriffe werden in deutsche Lautschreibung
-    // überführt, bevor die Stimme sie sieht — verhindert das
-    // Code-Switching der Neuronalstimme mitten im deutschen Satz.
-    // URLs/Daten/E-Mails liegen bereits in Halte-Platzhaltern.
-    // Spiegel: germanize_speech() in scripts/ff_voice_backends.py.
-    out = germanizeSpeech(out);
+    // PREMIUM-BILINGUAL (12.09.2026): Im Deutschen germanisiert, im Englischen nicht.
+    // Englisch „Service“ würde sonst zu „Sörwis“ — dort also aus.
+    if (!wantEn) out = germanizeSpeech(out);
 
-    // Abkürzungen, Einheiten, Währungen, Paragraphen — deutsches Regelwerk
-    var rules = ABBREV_DE;
+    // Abkürzungen etc. je Sprache (wortgleich zum Backend-Verzeichnis)
+    var rules = wantEn ? ABBREV_EN : ABBREV_DE;
     for (var i = 0; i < rules.length; i++) out = out.replace(rules[i][0], rules[i][1]);
 
-    out = normalizeRanges(out, hold);
-    out = normalizeNumbers(out, hold);
-    out = normalizeSymbols(out, hold);
+    if (wantEn) {
+      out = out.replace(/(\d)\s?(?:–|—|\-)\s?(\d)/g, function(m,a,b){ return a + ' to ' + b; });
+      out = out.replace(/(\d)\s(\d{3})\b/g, '$1,$2');
+      out = out.replace(/&/g, ' and ');
+    } else {
+      out = normalizeRanges(out, hold);
+      out = normalizeNumbers(out, hold);
+      out = normalizeSymbols(out, hold);
+    }
 
     // Mehrfach-Leerzeichen & doppelte Satzzeichen
     out = out.replace(/\s+/g, ' ').trim();
@@ -1436,10 +1562,11 @@
 
   /** Eine Tabelle wird vollständig gesprochen — Zeile für Zeile. */
   function extractTableBlocks(tableEl, blockLang) {
-    var L = blockLang;
+    var L = blockLang === 'en' ? 'en' : 'de';
+    var TT = I18N[L] || T;
     var model = buildTableModel(tableEl);
     var out = [];
-    var title = model.title || T.tableDefault;
+    var title = model.title || TTTT.tableDefault;
 
     var dataRows = model.rows.filter(function (r) { return r.kind === 'data' && r.parts.length; });
     var hasContent = dataRows.length > 0 || model.headers.some(function (h) { return h; })
@@ -1452,7 +1579,7 @@
       el: tableEl,
       lang: L,
       type: 'table-intro',
-      text: (rowCount === 1 ? T.tableIntroOne : T.tableIntro)
+      text: (rowCount === 1 ? TT.tableIntroOne : TT.tableIntro)
         .replace('{title}', title)
         .replace('{cols}', model.colCount)
         .replace('{rows}', rowCount)
@@ -1464,7 +1591,7 @@
         el: tableEl,
         lang: L,
         type: 'table-header',
-        text: T.tableHeaders.replace('{headers}', spokenHeaders.join(', '))
+        text: TT.tableHeaders.replace('{headers}', spokenHeaders.join(', '))
       });
     }
     model.headerExtras.forEach(function (extra, i) {
@@ -1472,7 +1599,7 @@
         el: tableEl,
         lang: L,
         type: 'table-header',
-        text: T.tableHeaderRow.replace('{n}', i + 1).replace('{headers}', extra)
+        text: TT.tableHeaderRow.replace('{n}', i + 1).replace('{headers}', extra)
       });
     });
 
@@ -1482,7 +1609,7 @@
       if (row.kind === 'data') {
         if (!row.parts.length) return;
         dataIdx += 1;
-        var tmpl = row.label ? T.tableRowLabel : T.tableRow;
+        var tmpl = row.label ? TT.tableRowLabel : TT.tableRow;
         out.push({
           el: row.el,
           lang: L,
@@ -1496,17 +1623,17 @@
         return;
       }
       if (row.kind === 'group') {
-        out.push({ el: row.el, lang: L, type: 'table-group', text: T.tableGroup.replace('{name}', row.group) });
+        out.push({ el: row.el, lang: L, type: 'table-group', text: TT.tableGroup.replace('{name}', row.group) });
         return;
       }
       if (row.kind === 'sum') {
         if (!row.parts.length) return;
-        out.push({ el: row.el, lang: L, type: 'table-sum', text: T.tableSum.replace('{content}', row.parts.join(', ')) });
+        out.push({ el: row.el, lang: L, type: 'table-sum', text: TT.tableSum.replace('{content}', row.parts.join(', ')) });
         return;
       }
       if (row.kind === 'cta') {
         if (!row.cta) return;
-        out.push({ el: row.el, lang: L, type: 'table-cta', text: T.tableCta.replace('{cta}', row.cta) });
+        out.push({ el: row.el, lang: L, type: 'table-cta', text: TT.tableCta.replace('{cta}', row.cta) });
       }
     });
 
@@ -1514,7 +1641,7 @@
       el: tableEl,
       lang: L,
       type: 'table-outro',
-      text: T.tableOutro.replace('{title}', title)
+      text: TT.tableOutro.replace('{title}', title)
     });
 
     return out;
@@ -1630,10 +1757,11 @@
         if (boxText.length <= 5) return;
         var isWarn = /\b(achtung|warnung|vorsicht|wichtig|caution|warning)\b/i.test(boxText.slice(0, 60))
           || hasClass(el, 'ff-korrektur');
-        var cue = hasClass(el, 'ff-kurzantwort') ? T.cueShortAnswer
-          : hasClass(el, 'ff-einspar-box') ? T.cueSaving
-            : hasClass(el, 'ff-tarif-card') ? T.cueTariff
-              : isWarn ? T.cueWarning : T.cueNote;
+        var TT2 = I18N[elLang] || T;
+        var cue = hasClass(el, 'ff-kurzantwort') ? TT2.cueShortAnswer
+          : hasClass(el, 'ff-einspar-box') ? TT2.cueSaving
+            : hasClass(el, 'ff-tarif-card') ? TT2.cueTariff
+              : isWarn ? TT2.cueWarning : TT2.cueNote;
         out.push({
           el: el,
           lang: elLang,
@@ -1677,7 +1805,7 @@
         var parentList = el.parentElement;
         if (parentList && tagOf(parentList) === 'OL') {
           var idx = Array.prototype.indexOf.call(parentList.children, el) + 1;
-          speakText = T.listItemNum.replace('{n}', idx) + ' ' + text;
+          speakText = (I18N[elLang] || T).listItemNum.replace('{n}', idx) + ' ' + text;
         }
       }
 
@@ -1699,7 +1827,23 @@
   }
 
   /** NUR-DEUTSCH-VERTRAG: Blöcke wechseln die Sprache nicht (Generator-Spiegel: _lang_of). */
-  function sniffLangOf() { return 'de'; }
+  function sniffLangOf(el, articleLang) {
+    var base = articleLang || lang || 'de';
+    // 1) explizites lang-Attribut an Block oder Vorfahren
+    var node = el;
+    for (var d=0; d<4 && node; d++) {
+      var a = node.getAttribute && node.getAttribute('lang');
+      if (a) { a = String(a).toLowerCase().slice(0,2); if (a==='de'||a==='en') return a; }
+      node = node.parentElement;
+    }
+    // 2) Satz-Heuristik auf dem Blocktext
+    try {
+      var txt = readableText(el);
+      var sniffed = sniffSentenceLang(txt, base);
+      if (sniffed === 'en' || sniffed === 'de') return sniffed;
+    } catch(e) {}
+    return base === 'en' ? 'en' : 'de';
+  }
 
   /* ============================================================
      7 · STUDIO-REGIE — Tempo, Tonlage, Lautstärke, Pausen
@@ -1917,7 +2061,7 @@
     blocks.forEach(function (b, bi) {
       var profile = prosodyFor(b.type);
       var uInBlock = 0;
-      var raw = splitForSpeech(speechNormalize(b.text));
+      var raw = splitForSpeech(speechNormalize(b.text, (b && b.lang) ? b.lang : 'de'));
       raw.forEach(function (c, ci) {
         if (!c.text) return;
         var density = densityFactor(c.text);
@@ -1930,7 +2074,7 @@
           blockIndex: bi,
           index: index++,
           text: c.text,
-          lang: 'de',
+          lang: (b.lang || 'de').toLowerCase().indexOf('en')===0 ? 'en' : 'de',
           type: b.type,
           profile: profile,
           melody: melodyOf(c.text),
@@ -2001,7 +2145,10 @@
      Diese Namen stehen für den nüchtern-professionellen Vortragsstil. */
   var NEWS_PRIORITY = {
     conrad: 90,        // Microsoft-Newsroom-Stimme (de-DE)
+    andrew: 88,        // Edge EN-NEWS (en-US) — männlich, seriös
     killian: 60,       // sachlicher Nachrichtenton (de-DE)
+    ryan: 58,          // Edge EN (en-GB) — männlich
+    brian: 55,         // Edge EN (en-US) — männlich, natürlich
     florian: 45,       // Multilingual v2 — klar, ruhig
     thorsten: 40,      // Piper-Standard der Studiospur (de_DE)
     klaus: 22, stefan: 22, yannick: 18, benjamin: 18, jonas: 16,
@@ -2014,8 +2161,8 @@
   var QUALITY_TOKENS = ['neural', 'neural2', 'wavenet', 'studio', 'premium', 'enhanced', 'natural', 'siri', 'online', 'high'];
 
   var voiceCache = [];
-  var voiceResolved = { de: null };
-  var maleVoiceFound = { de: false };
+  var voiceResolved = { de: null, en: null };
+  var maleVoiceFound = { de: false, en: false };
 
   function refreshVoices() {
     var list = [];
@@ -2033,8 +2180,8 @@
        Bei einer ÄNDERUNG des Katalogs wird die Auswahl neu getroffen;
        die nächste Sprecheinheit läuft dann auf der echten Stimme. */
     if (changed) {
-      voiceResolved = { de: null };
-      maleVoiceFound = { de: false };
+      voiceResolved = { de: null, en: null };
+      maleVoiceFound = { de: false, en: false };
       try { applyLabels(); } catch (e) {}
       try { if (typeof setBarState === 'function' && !reading) setBarState('idle'); } catch (e) {}
     }
@@ -2055,14 +2202,19 @@
     return i > 0 ? s.slice(0, i) : s;
   }
 
-  /** Deutsch-Pflicht: fremdsprachige Stimmen sind ausgeschlossen. */
-  function isGermanVoice(v) {
+  /** Premium-Bilingual: zugelassen sind DE + EN (alles andere: Fallback).
+      Keine Fremd-Sperre für Englisch — eine Stimme (ElevenLabs) spricht BEIDES,
+      die Browser-Fallbacks wählen je nach Block-Sprache die passende Stimme. */
+  function isAllowedVoice(v) {
     var l = voiceLang(v);
-    return l.indexOf('de') === 0;
+    return l.indexOf('de') === 0 || l.indexOf('en') === 0;
   }
+  function isGermanVoice(v) { return isAllowedVoice(v) && voiceLang(v).indexOf('de') === 0; }
+  function isEnglishVoice(v) { return voiceLang(v).indexOf('en') === 0; }
 
   var LOCALE_CHAIN = {
-    de: ['de-de', 'de-at', 'de-ch', 'de-li', 'de-lu', 'de-be', 'de']
+    de: ['de-de', 'de-at', 'de-ch', 'de-li', 'de-lu', 'de-be', 'de'],
+    en: ['en-us', 'en-gb', 'en-au', 'en-ca', 'en-ie', 'en']
   };
 
   function localeScore(v, target) {
@@ -2073,8 +2225,12 @@
     if (idx > 0) return 60 - idx * 6;
     if (langPrefix(l) === target) return 34;
     if (l === target) return 40;
-    // Nachbarsprache (z. B. nl für de) ist ein Notnagel, kein Ziel
+    // Nachbarsprache als Notnagel (z. B. nl für de), aber nie sprachfremd
     if (target === 'de' && (l.indexOf('nl') === 0 || l.indexOf('da') === 0)) return 6;
+    if (target === 'en' && (l.indexOf('en') === 0)) return 20;
+    // Für EN-Ziel darf DE nicht als Ersatz einspringen — umgekehrt auch nicht
+    if (target === 'de' && l.indexOf('en') === 0) return -80;
+    if (target === 'en' && l.indexOf('de') === 0) return -80;
     return -100;
   }
 
@@ -2134,19 +2290,23 @@
   }
 
   function scoreVoice(v, target) {
-    if (!isGermanVoice(v)) return -9999;        // Nur-Deutsch-Vertrag
-    var locale = localeScore(v, 'de');
+    var want = (String(target||'de').toLowerCase().indexOf('en')===0) ? 'en' : 'de';
+    if (!isAllowedVoice(v)) return -9999;
+    // Sprach-Treue: die Stimme muss zur Zielsprache passen (kein DE für EN-Block)
+    var l = voiceLang(v);
+    if (want === 'de' && l.indexOf('de')!==0) return -9999;
+    if (want === 'en' && l.indexOf('en')!==0) return -9999;
+    var locale = localeScore(v, want);
     if (locale < -50) return -9999;
     return locale + genderScore(v) + qualityScore(v) + newsScore(v);
   }
 
   function rankVoices(target) {
-    // NUR-DEUTSCH-VERTRAG: welches Ziel auch immer fragt — gerankt
-    // wird ausschließlich der deutsche Stimmen-Katalog.
+    var want = (String(target||'de').toLowerCase().indexOf('en')===0) ? 'en' : 'de';
     var list = voiceCache.length ? voiceCache : refreshVoices();
     var scored = [];
     list.forEach(function (v, i) {
-      var s = scoreVoice(v, target);
+      var s = scoreVoice(v, want);
       if (s > -9000) scored.push({ voice: v, score: s, order: i });
     });
     scored.sort(function (a, b) {
@@ -2174,12 +2334,13 @@
   }
 
   /**
-   * Ermittelt die beste männliche, DEUTSCHE Nachrichtensprecher-Stimme.
-   * Gibt immer ein Objekt zurück — nie null (außer bei leerem Katalog).
-   * Das Argument ist Signatur-Kompatibilität; bewertet wird immer de.
+   * Ermittelt die beste männliche Stimme für die Zielsprache (de/en) —
+   * ohne Umschalter, deterministisch. Gibt immer ein Objekt zurück —
+   * nie null (außer bei leerem Katalog). Premium: ElevenLabs liefert
+   * eine Stimme für BEIDE, Edge liefert Conrad/Andrew je Sprache.
    */
   function resolveMaleVoice(target) {
-    target = 'de';   // Nur-Deutsch-Vertrag
+    target = (String(target||'de').toLowerCase().indexOf('en')===0) ? 'en' : 'de';
     if (voiceResolved[target]) return voiceResolved[target];
     var ranked = rankVoices(target);
     if (!ranked.length) return { voice: null, tier: TIERS.standard, male: false, score: -1 };
@@ -2212,10 +2373,14 @@
 
   function calibrateQuality() {
     var de = resolveMaleVoice('de');
-    // Nur-Deutsch-Vertrag: die Regie folgt ausschließlich der
-    // deutschen Stimme (Roboterstufen sprechen langsamer).
-    var rate = de.tier ? de.tier.rate : 1;
-    return { rate: rate, de: de, en: de };
+    var en = resolveMaleVoice('en');
+    // Premium-Bilingual: beide Stimmen werten die Qualität — die
+    // langsamere bestimmt den Takt (nie schneller als die Studio-Regie).
+    var rate = Math.min(de.tier ? de.tier.rate : 1, en.tier ? en.tier.rate : 1);
+    // Fallback: wenn kein EN im Katalog, dient DE als EN-Ersatz (aber: ElevenLabs deckt beides)
+    if (!en.voice) en = de;
+    if (!de.voice) de = en;
+    return { rate: rate, de: de, en: en };
   }
 
   var quality = { rate: 1, de: null, en: null };
@@ -2417,7 +2582,7 @@
     var out = [];
     var b = blocks[bi];
     if (b) {
-      var pieces = splitForSpeech(speechNormalize(b.text));
+      var pieces = splitForSpeech(speechNormalize(b.text, (b && b.lang) ? b.lang : 'de'));
       for (var i = 0; i < pieces.length; i++) {
         if (pieces[i] && pieces[i].text) out.push(pieces[i].text);
       }
@@ -2650,7 +2815,7 @@
     var b = blocks[bi];
     if (!b || !b.text) return null;
     var raw = normTokens(b.text);
-    var chunks = splitForSpeech(speechNormalize(b.text));
+    var chunks = splitForSpeech(speechNormalize(b.text, (b && b.lang) ? b.lang : 'de'));
     var N = [];
     var units = [];
     var nAt = 0;
@@ -3601,30 +3766,35 @@
       try { u = new win.SpeechSynthesisUtterance(unit.text); } catch (e) { u = null; }
       if (!u) { finishUnit(); return; }
 
-      /* Nur-Deutsch-Vertrag, doppelt abgesichert (Befund 07.09.2026):
-         Die Äußerungssprache wird auf die DEUTSCHE Stimme festgenagelt,
-         die die Regie ausgewählt hat — auf manchen Plattformen (Chrome
-         Android, älteres Edge) bestimmt allein die Stimme die
-         Ausgabesprache; ein davon abweichendes lang-Attribut kann die
-         Engine sonst zur System-Stimme zurückfallen lassen. Die
-         Lautschreibung in germanizeSpeech() verhindert zusätzlich das
-         Code-Switching innerhalb der deutschen Stimme. */
+      /* Premium-Bilingual (12.09.2026): Die Äußerungssprache folgt dem
+         Block (unit.lang) und der dazu passenden Stimme (Conrad für de,
+         Andrew/Brian/Ryan für en, ElevenLabs für beide). Die Lautschreibung
+         germanizeSpeech() läuft nur im Deutschen; im Englischen bleibt der
+         Text natürlich englisch. */
+      var wantEnUnit = String(unit.lang||'de').toLowerCase().indexOf('en')===0;
+      var targetForUnit = wantEnUnit ? 'en' : 'de';
+      // Für die Einheit die passende Stimme holen (statt einer globalen)
+      try {
+        var resForUnit = resolveMaleVoice(targetForUnit) || res;
+        if (resForUnit && resForUnit.voice) { voice = resForUnit.voice; res = resForUnit; }
+      } catch(e) {}
       if (voice) {
         try { u.voice = voice; } catch (e) {}
         try {
-          // Kanonisches BCP-47: Sprache klein, Region GROSS (de-DE,
-          // de-AT, de-CH) — verlangt vom Nur-Deutsch-Vertrag und von
-          // den Stimmen-Regie-Tests.
-          var vl = String(voice.lang || '').toLowerCase().replace('_', '-');
+          var vl = String(voice.lang || (wantEnUnit ? 'en-US' : 'de-DE')).toLowerCase().replace('_', '-');
           var parts = vl.split('-');
-          if (parts[0] === 'de') {
-            u.lang = parts.length > 1 ? ('de-' + parts[1].toUpperCase()) : 'de-DE';
+          var wantPrefix = wantEnUnit ? 'en' : 'de';
+          if (parts[0] === wantPrefix) {
+            u.lang = parts.length > 1 ? (wantPrefix + '-' + parts[1].toUpperCase()) : (wantPrefix + (wantPrefix==='de' ? '-DE' : '-US'));
+          } else if (parts[0] === 'de' || parts[0] === 'en') {
+            // Stimmesprache weicht vom Block ab (Notnagel) — trotzdem kanonisch
+            u.lang = parts.length > 1 ? (parts[0] + '-' + parts[1].toUpperCase()) : (parts[0] + (parts[0]==='de' ? '-DE' : '-US'));
           } else {
-            u.lang = 'de-DE';
+            u.lang = wantEnUnit ? 'en-US' : 'de-DE';
           }
-        } catch (e) { u.lang = 'de-DE'; }
+        } catch (e) { u.lang = wantEnUnit ? 'en-US' : 'de-DE'; }
       } else {
-        u.lang = 'de-DE';
+        u.lang = wantEnUnit ? 'en-US' : 'de-DE';
       }
       u.rate = Math.max(0.6, Math.min(1.4, unit.effRate * (res.tier ? res.tier.rate : 1)));
       u.pitch = Math.max(0.5, Math.min(1.5, unit.effPitch + (res.tier && res.tier.pitchZone ? res.tier.pitchZone : 0)));

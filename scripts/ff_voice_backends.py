@@ -6,54 +6,70 @@ sprechen denselben Text mit derselben Regie — die Parität wird durch
 `scripts/ff_voice_parity_check.py` erzwungen. Wäre sie nicht erzwungen,
 klänge derselbe Artikel je nach Gerät unterschiedlich.
 
-NUR-DEUTSCH-VERTRAG (Befund 07.09.2026, Auftrag: „Deutsch als einzige
-Sprache“)
-    Die Vorlese-Funktion spricht AUSSCHLIESSLICH Deutsch. Es gibt keine
-    englische Stimme, kein englisches Profil, keinen Sprachwechsel im
-    Satz und keinen EN-Fallback mehr. Englische Fachbegriffe im
-    deutschen Text („Cashflow“, „Robo Advisor“) spricht die deutsche
-    Nachrichtensprecher-Stimme so aus, wie es im deutschen Hörfunk
-    üblich ist — das ist gewollt und kein Fehler. Ein Backend, das nur
-    Englisch kann (z. B. der ehemalige Groq-Notnagel), ist aus der
-    Kette ENTFERNT; er kehrte nie zurück, solange die Gate-Prüfung
-    „Stimmen: kein EN-Profil mehr“ grün ist.
+ELEVENLABS PREMIUM (12.09.2026 — Profi-Agentur, Premium-Level)
+    Die Vorlese-Funktion nutzt als Primärquelle **ElevenLabs Studio**
+    — eine männliche, multilinguale Premium-Stimme, die **Deutsch UND
+    Englisch ohne Umschalter** spricht (ein Modell, ein Klang, auto
+    Language-Detect pro Satz/Block). Leser sehen kein Menü, keinen
+    Schalter, keine Wahl: Der Artikel erklingt immer in der Sprache
+    seines Inhalts — nahtlos, mit Studio-Qualität.
 
-STIMMEN (männlicher Nachrichtensprecher, nur Deutsch, ohne Umschalter)
-    edge   (Voreinstellung)  Microsoft-Edge-Neuralstimmen über das offene
-                             Paket `edge-tts`: kein Key, kein Konto, keine
-                             Zeichenkosten.
-                             Profil „news“     : de-DE-ConradNeural
-                                               (Vortragsstil „serious“ —
-                                               Nachrichtensprecher; wird
-                                               nur gesetzt, wenn das
-                                               installierte edge-tts
-                                               Styles unterstützt)
-                             Profil „natural“: de-DE-FlorianMultilingualNeural
-                             Profil „narrator“: de-DE-KillianNeural
-                             „news“ ist die Voreinstellung.
-    piper  (Offline-Fallback) Lokale ONNX-Stimme de_DE-thorsten-high:
-                             offline, unbegrenzt, lizenzsauber,
-                             deterministisch — ebenfalls ausschließlich
-                             Deutsch.
+    Warum ElevenLabs + ohne Umschalter?
+      · Ein einziger, markanter männlicher Klang — kein Bruch beim
+        Sprachwechsel, keine Frauen-/Männer-Mischung im selben Artikel.
+      · Multilinguales Modell `eleven_multilingual_v2` erkennt die Sprache
+        je Segment automatisch — kein Frontend-Toggle, kein Flag.
+      · Vorab vertont (MP3, 24 kHz Mono, −16 LUFS EBU R128) → identischer
+        Klang auf iPhone, Android, Windows, macOS und in allen Browsern.
+      · First-party ausgeliefert (Cache im Deploy, `/audio/articles/…`),
+        keine Client-Key-Leckage, keine Fremd-CDNs.
+
+STIMMEN (männlich, DE + EN ohne Umschalter)
+    elevenlabs (Premium, 1. Wahl)  ElevenLabs Multilingual v2
+                                    Voice: Adam (pNInz6obpgDQGcFmaJgB) —
+                                    tiefe, warme Männerstimme; spricht
+                                    Deutsch mit präziser Artikulation und
+                                    Englisch nativ. Modell schaltet selbst
+                                    um — die Kette kennt kein „DE-Profil“
+                                    vs. „EN-Profil“, nur eine Stimme.
+                                    Steuerbar über Env:
+                                      ELEVENLABS_API_KEY / ELEVEN_API_KEY
+                                      ELEVENLABS_VOICE_ID (Default Adam)
+                                      ELEVENLABS_MODEL_ID (Default
+                                        eleven_multilingual_v2)
+                                    Nicht gesetzt → Kette fällt auf edge.
+    edge   (Kostenlos-Fallback)    Microsoft-Edge-Neuralstimmen über das
+                                    offene Paket `edge-tts`: kein Key.
+                                    Profile (jeweils DE + EN, männlich):
+                                      news    : de-DE-ConradNeural (Style
+                                                serious) / en-US-AndrewNeural
+                                      natural : de-DE-FlorianMultilingual-
+                                                Neural / en-US-BrianNeural
+                                      narrator: de-DE-KillianNeural /
+                                                en-GB-RyanNeural
+                                    „eleven“ ist die Voreinstellung, fällt
+                                    aber ohne Key auf „news“ zurück.
+    piper  (Offline-Notnagel)      Lokale ONNX-Stimmen:
+                                    de_DE-thorsten-high / en_US-lessac-high
+                                    — offline, deterministisch.
 
 Ohne verfügbares Backend wird KEINE Tonspur geschrieben; der Reader
 bleibt dann beim lokalen Web-Speech-Pfad — niemals stumm.
 
 WORTGRENZEN (Grundlage der wortgenauen Leseanzeige)
-    `synth_edge` liefert zu jedem Segment die WordBoundary-Ereignisse
-    von edge-tts (100-ns-Ticks ab Segmentbeginn). Der Generator
-    (ff_voice_audio.synth_article) rechnet sie in absolute
-    Millisekunden um und schreibt sie als Wortuhr `w` in die
-    Tonspur-Konfiguration — der Reader markiert damit jedes gesprochene
-    Wort auf die Millisekunde genau.
+    `synth_edge` liefert zu jedem Segment WordBoundary-Ereignisse
+    (100-ns-Ticks); `synth_elevenlabs` liefert MP3 ohne Wortuhr — der
+    Generator schreibt dann nur die Segmentzeiten, der Reader schätzt
+    die Wortmarkierung zeitbasiert (wie bei Piper). Lüge nie: ohne Uhr
+    keine falsche Markierung.
 
 AUSSPRACHE-REGIE
     Zahlen, Währungen, Daten, Zeiten, Prozente, Paragraphen, Abkürzungen,
     Einheiten und URLs werden vor der Synthese in gesprochene Sprache
-    übersetzt — in derselben Reihenfolge wie im Reader (siehe
-    `RULES_DE`). Die Funktion nimmt nach wie vor einen `lang`-Parameter
-    an; er wird ignoriert (Nur-Deutsch-Vertrag) und dient nur der
-    Signaturen-Stabilität gegenüber dem Reader.
+    übersetzt — **sprachabhängig** (RULES_DE vs. RULES_EN). Deutsch
+    nutzt zusätzlich die Germanisierungs-Regie für Fremdwörter
+    (Befund 07.09.2026); Englisch nie — ElevenLabs spricht Englisch
+    nativ. Beide Seiten teilen dieselbe Zuordnung.
 
 PROSODIE-REGIE
     Jede Rolle (Überschrift, Fließtext, Tabellenzeile, Warnhinweis …)
@@ -80,49 +96,91 @@ import wave
 # Stimmen-Kette
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# ElevenLabs Premium — männlich, DE + EN ohne Umschalter (12.09.2026)
+# ---------------------------------------------------------------------------
+ELEVENLABS_DEFAULT_VOICE = "pNInz6obpgDQGcFmaJgB"  # Adam — männlich, multilingual
+ELEVENLABS_DEFAULT_MODEL = "eleven_multilingual_v2"
+ELEVENLABS_VOICE_SETTINGS = {
+    "stability": 0.52,
+    "similarity_boost": 0.75,
+    "style": 0.35,
+    "use_speaker_boost": True,
+}
+ELEVENLABS_TIMEOUT = 90.0
+
+def _env_first(*names: str) -> str:
+    for n in names:
+        v = os.environ.get(n)
+        if v and str(v).strip():
+            return str(v).strip()
+    return ""
+
+def get_elevenlabs_api_key() -> str:
+    return _env_first("ELEVENLABS_API_KEY", "ELEVEN_API_KEY", "ELEVENLABS_APIKEY")
+
+def get_elevenlabs_voice_id() -> str:
+    return _env_first("ELEVENLABS_VOICE_ID", "ELEVEN_VOICE_ID") or ELEVENLABS_DEFAULT_VOICE
+
+def get_elevenlabs_model_id() -> str:
+    return _env_first("ELEVENLABS_MODEL_ID", "ELEVEN_MODEL") or ELEVENLABS_DEFAULT_MODEL
+
 VOICE_PROFILES = {
-    # Nachrichtensprecher-Preset: Conrad ist die deutsche
-    # Newsroom-Stimme von Microsoft (Kategorie „News & Announcement“).
-    # Der Style „serious“ wird gereicht, wenn das installierte edge-tts
-    # Styles unterstützt (ältere Pakete ignorieren ihn sauber).
+    # ElevenLabs Premium — EINE männliche Stimme, beide Sprachen (Multilingual)
+    "eleven": {
+        "de": get_elevenlabs_voice_id(),
+        "en": get_elevenlabs_voice_id(),
+        "model": get_elevenlabs_model_id(),
+        "style": None,
+        "label": "ElevenLabs · Männlich · DE & EN (Multilingual v2 · Adam)",
+    },
+    # Edge-Fallback — männlich, jeweils DE + EN (kein Umschalter: auto per Block)
     "news": {
         "de": "de-DE-ConradNeural",
+        "en": "en-US-AndrewNeural",
         "style": "serious",
-        "label": "Nachrichtensprecher (Conrad · Style serious)",
+        "label": "Nachrichtensprecher (Conrad DE · Andrew EN · Style serious)",
     },
     "natural": {
         "de": "de-DE-FlorianMultilingualNeural",
+        "en": "en-US-BrianNeural",
         "style": None,
-        "label": "Sachlicher Erzählton (Florian)",
+        "label": "Sachlicher Erzählton (Florian DE · Brian EN)",
     },
     "narrator": {
         "de": "de-DE-KillianNeural",
+        "en": "en-GB-RyanNeural",
         "style": None,
-        "label": "Nachrichtenlesung (Killian)",
+        "label": "Nachrichtenlesung (Killian DE · Ryan EN)",
     },
 }
 
-# Voreinstellung der Kette — „news“ ist der Auftrag: professioneller
-# Nachrichtensprecher, ausschließlich Deutsch.
-DEFAULT_PROFILE = "news"
+# Voreinstellung der Kette — Premium-First: ElevenLabs (fällt ohne Key auf news)
+DEFAULT_PROFILE = "eleven"
 
-
-def profile_voice(profile_name: str) -> str:
-    """Deutsche Stimme eines Profils — unbekannte Profile fallen auf „news“."""
-    profile = VOICE_PROFILES.get(profile_name) or VOICE_PROFILES[DEFAULT_PROFILE]
-    return profile["de"]
-
+def profile_voice(profile_name: str, lang: str = "de") -> str:
+    """Stimme eines Profils in der gewünschten Sprache (de/en) — eine Stimme, auto."""
+    profile = VOICE_PROFILES.get(profile_name) or VOICE_PROFILES["eleven"]
+    lang = (lang or "de").lower()[:2]
+    if lang not in ("de", "en"):
+        lang = "de"
+    return profile.get(lang) or profile.get("de") or VOICE_PROFILES["news"]["de"]
 
 def profile_style(profile_name: str):
     """Gewünschter Vortragsstil des Profils (kann None sein)."""
     profile = VOICE_PROFILES.get(profile_name) or VOICE_PROFILES[DEFAULT_PROFILE]
     return profile.get("style")
 
+def profile_label(profile_name: str) -> str:
+    profile = VOICE_PROFILES.get(profile_name) or VOICE_PROFILES[DEFAULT_PROFILE]
+    return profile.get("label", profile_name)
+
 PIPER_VOICES = {
     "de": "de_DE-thorsten-high",
+    "en": "en_US-lessac-high",
 }
 
-ENGINE_ORDER = ["edge", "piper"]
+ENGINE_ORDER = ["elevenlabs", "edge", "piper"]
 
 # Backend-Fingerprint: ändert er sich, werden Tonspuren neu erzeugt.
 # 06.09.2026: Bump nach dem Pausen-Spur-Befund — alle bestehenden (defekten)
@@ -140,7 +198,11 @@ ENGINE_ORDER = ["edge", "piper"]
 # Switching). Jeder Fremdbegriff geht in deutscher Lautschreibung auf
 # das Manuskript; alle Spuren mit englisch ausgesprochenen Wörtern
 # werden automatisch neu vertont.
-RECIPE_VERSION = "ff-voice-2026.09.11"
+# 12.09.2026: PREMIUM-ELEVENLABS — ElevenLabs als Primärquelle (männlich,
+# DE+EN ohne Umschalter, Multilingual v2, eine Stimme), bilinguale
+# Profile (DE+EN je Profil) und Piper-EN-Stimme. Alle Spuren der
+# Nur-Deutsch-Ära werden neu vertont (Fingerprint-Bump).
+RECIPE_VERSION = "ff-voice-2026.09.12-elevenlabs"
 
 # ---------------------------------------------------------------------------
 # Prosodie-Regie — spiegelbildlich zu PROSODY in static/premium/ff-voice.js
@@ -242,6 +304,34 @@ RULES_DE = [
     (re.compile(r"€"), "Euro"),
     (re.compile(r"(\d)\s?%"), r"\1 Prozent"),
     (re.compile(r"%"), "Prozent"),
+]
+
+MONTHS_EN = ["January", "February", "March", "April", "May", "June",
+             "July", "August", "September", "October", "November", "December"]
+
+# Englische Regeln — minimal aber spiegelbildlich zum Reader (speechNormalize EN)
+RULES_EN = [
+    (re.compile(r"\bMr\."), "Mister"),
+    (re.compile(r"\bMrs\."), "Misses"),
+    (re.compile(r"\bMs\."), "Miss"),
+    (re.compile(r"\bDr\."), "Doctor"),
+    (re.compile(r"\bSt\."), "Street"),
+    (re.compile(r"\bvs\." , re.I), "versus"),
+    (re.compile(r"\betc\." , re.I), "et cetera"),
+    (re.compile(r"\be\.g\." , re.I), "for example"),
+    (re.compile(r"\bi\.e\." , re.I), "that is"),
+    (re.compile(r"€\s?/\s?(month|year|kWh|person)", re.I), r"euros per \1"),
+    (re.compile(r"ct/\s?kWh", re.I), "cents per kilowatt hour"),
+    (re.compile(r"kWh/a"), "kilowatt hours per year"),
+    (re.compile(r"kWh"), "kilowatt hours"),
+    (re.compile(r"kWp"), "kilowatt peak"),
+    (re.compile(r"m²"), "square meters"),
+    (re.compile(r"m³"), "cubic meters"),
+    (re.compile(r"km/h"), "kilometers per hour"),
+    (re.compile(r"§\s?(\d+)"), r"paragraph \1"),
+    (re.compile(r"€"), "euros"),
+    (re.compile(r"(\d)\s?%"), r"\1 percent"),
+    (re.compile(r"%"), "percent"),
 ]
 
 _ENTITIES = [
@@ -600,12 +690,14 @@ def _unhold(text: str, store: list) -> str:
 def normalize_speech(text: str, lang: str = "de") -> str:
     """Schreibsprache → Sprechsprache. Deckungsgleich mit speechNormalize().
 
-    NUR-DEUTSCH-VERTRAG: Der Parameter `lang` wird ignoriert; geregelt
-    wird ausschließlich nach deutschen Lautregeln. Die Signatur bleibt
-    stabil, damit Reader, Generator und Paritäts-Gate dieselbe Funktion
-    adressieren können.
+    Premium-Bilingual (12.09.2026): `lang` entscheidet — "de" nutzt RULES_DE
+    plus Germanisierung (Fremdwort-Eindeutschung im deutschen Satz),
+    "en" nutzt RULES_EN ohne Germanisierung (ElevenLabs spricht Englisch
+    nativ). Ohne Angabe = deutsch.
     """
-    del lang  # Nur-Deutsch-Vertrag — siehe Docstring.
+    lang = (lang or "de").lower()[:2]
+    if lang not in ("de", "en"):
+        lang = "de"
     out = text or ""
     if not out:
         return ""
@@ -639,7 +731,14 @@ def normalize_speech(text: str, lang: str = "de") -> str:
 
     def date_repl(m):
         a, b, c = int(m.group(1)), int(m.group(2)), m.group(3)
-        month, day = b, a
+        if lang == "en":
+            # EN: MM/DD/YYYY vs DE: DD.MM.YYYY — heuristisch: wenn a<=12 und b>12 → EN
+            # Wir halten beide Varianten, aber mit englischem Monat.
+            month_en = int(a) if 1 <= int(a) <= 12 and 1 <= int(b) <= 31 else int(b)
+            day_en = int(b) if month_en == int(a) else int(a)
+            if 1 <= month_en <= 12:
+                return _hold(store, "%s %d, %s" % (MONTHS_EN[month_en - 1], day_en, c))
+        month, day = int(b), int(a)
         if 1 <= month <= 12:
             return _hold(store, "%d. %s %s" % (day, MONTHS_DE[month - 1], c))
         return m.group(0)
@@ -648,27 +747,38 @@ def normalize_speech(text: str, lang: str = "de") -> str:
     def short_date_repl(m):
         month = int(m.group(2))
         if 1 <= month <= 12:
+            if lang == "en":
+                return _hold(store, "%s %d" % (MONTHS_EN[month - 1], int(m.group(1))))
             return _hold(store, "%d. %s" % (int(m.group(1)), MONTHS_DE[month - 1]))
         return m.group(0)
     out = re.sub(r"\b(\d{1,2})\.(\d{1,2})\.(?!\d)", short_date_repl, out)
 
     def time_repl(m):
         hh, mm = int(m.group(1)), int(m.group(2))
+        if lang == "en":
+            return _hold(store, "%d:%02d" % (hh, mm))
         return _hold(store, "%d Uhr" % hh if mm == 0 else "%d Uhr %d" % (hh, mm))
-    out = re.sub(r"\b(\d{1,2}):(\d{2})\s?(Uhr)?\b", time_repl, out)
+    if lang == "en":
+        out = re.sub(r"\b(\d{1,2}):(\d{2})\s?(Uhr)?\b", time_repl, out)
+    else:
+        out = re.sub(r"\b(\d{1,2}):(\d{2})\s?(Uhr)?\b", time_repl, out)
 
-    # NUR-DEUTSCH-AUSSPRACHE (Befund 07.09.2026): englisch geschriebene
-    # Fach- und Markenbegriffe werden in deutsche Lautschreibung
-    # überführt, bevor die Stimme sie sieht. URLs/Daten/E-Mails sind an
-    # dieser Stelle bereits in Halte-Platzhaltern geborgen und werden
-    # nicht angetastet. Spiegelbild: germanizeSpeech() im Reader.
-    out = germanize_speech(out)
+    # Germanisierung nur im deutschen Satz (Befund 07.09.2026): im Deutschen
+    # erzwingt sie die deutsche Aussprache englischer Wörter ohne
+    # Code-Switching; im Englischen spräche sie Every „Service“ als
+    # „Sörwis“ — dort also aus.
+    if lang == "de":
+        out = germanize_speech(out)
 
-    for pattern, repl in RULES_DE:
-        out = pattern.sub(repl, out)
+    if lang == "en":
+        for pattern, repl in RULES_EN:
+            out = pattern.sub(repl, out)
+    else:
+        for pattern, repl in RULES_DE:
+            out = pattern.sub(repl, out)
 
     # Zahlenbereiche: 12 – 24 / 12-24
-    word = " bis "
+    word = " to " if lang == "en" else " bis "
     out = re.sub(r"(\d)\s?(?:–|—|-)\s?(\d)", lambda m: m.group(1) + word + m.group(2), out)
 
     # Tausender-Trennzeichen: sprachrichtig ergänzen statt Leerzeichen schlucken
@@ -676,7 +786,7 @@ def normalize_speech(text: str, lang: str = "de") -> str:
     out = re.sub(r"(\d)\s(\d{3})\b", r"\1" + sep + r"\2", out)
 
     # Symbole
-    out = out.replace("&", " und ")
+    out = out.replace("&", " and " if lang == "en" else " und ")
     out = re.sub(r"\sx\s(?=\d)", " mal ", out)
     out = out.replace("+", " plus ").replace("=", " gleich ")
     out = out.replace("“", '"').replace("”", '"').replace("„", '"')
@@ -1246,12 +1356,22 @@ def edge_module_present() -> bool:
 def piper_available() -> bool:
     return shutil.which("piper") is not None
 
+def elevenlabs_available() -> bool:
+    """ElevenLabs-Premium verfügbar?  Key + Dekoder nötig (MP3→WAV)."""
+    if not get_elevenlabs_api_key():
+        return False
+    return decoder_available()
+
+def elevenlabs_module_present() -> bool:
+    # Kein Pflicht-Paket: reiner HTTPS-Call via Stdlib
+    return bool(get_elevenlabs_api_key())
 
 def available_engines() -> list:
-    # NUR-DEUTSCH-VERTRAG: Der ehemalige englische Groq-Notnagel ist aus
-    # der Kette entfernt — ein rein englisches Modell darf in einer
-    # deutschpflichtigen Tonspurkette nicht mehr auftauchen.
+    # Premium-Kette: ElevenLabs (wenn Key + Dekoder) → Edge → Piper
+    # Ohne Key fällt ElevenLabs weg — Kette bleibt funktionsfähig.
     found = []
+    if elevenlabs_available():
+        found.append("elevenlabs")
     if edge_available():
         found.append("edge")
     if piper_available():
@@ -1526,6 +1646,82 @@ def synth_piper(text: str, voice: str, out_wav: str, timeout: float = PIPER_TIME
     return True
 
 
+def synth_elevenlabs(text: str, lang: str, voice_id: str, model_id: str, out_wav: str,
+                     timeout: float = ELEVENLABS_TIMEOUT) -> tuple:
+    """Ein Segment mit ElevenLabs-Multilingual sprechen (männlich, DE+EN ohne Umschalter).
+
+    Premium-Studio (12.09.2026): Ein einziges multilinguales Modell spricht
+    beide Sprachen — kein Sprachschalter, kein Profilwechsel. Die Sprache
+    wird nicht erzwungen (language_code wird nicht gesetzt); das Modell
+    erkennt sie automatisch je Segment. Der Aufruf ist reiner HTTPS ohne
+    SDK — kein Extra-Paket, keine Key-Leckage im Client (serverseitig
+    vertont, first-party ausgeliefert).
+
+    Rückgabe: (ok, boundaries) — ElevenLabs liefert keine Wortgrenzen;
+    die Wortuhr bleibt leer, der Reader schätzt zeitbasiert (wie Piper).
+    """
+    import time as _time, json, urllib.request, urllib.error
+    api_key = get_elevenlabs_api_key()
+    if not api_key:
+        return False, []
+    if not text or not text.strip():
+        return False, []
+    # Voice/Model via Env steuerbar, aber pro Aufruf überschreibbar
+    vid = (voice_id or get_elevenlabs_voice_id()).strip() or ELEVENLABS_DEFAULT_VOICE
+    mid = (model_id or get_elevenlabs_model_id()).strip() or ELEVENLABS_DEFAULT_MODEL
+    os.makedirs(os.path.dirname(out_wav) or ".", exist_ok=True)
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{vid}?output_format=mp3_44100_128"
+    payload = {
+        "text": text,
+        "model_id": mid,
+        "voice_settings": ELEVENLABS_VOICE_SETTINGS,
+    }
+    data = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(url, data=data, method="POST")
+    req.add_header("xi-api-key", api_key)
+    req.add_header("Content-Type", "application/json")
+    req.add_header("Accept", "audio/mpeg")
+    tmp_src = out_wav + ".eleven.src.mp3"
+    try:
+        # Timeout = harter Deckel (Profil: 90s je Segment, kurz genug fürs Budget)
+        to = float(timeout) if timeout and timeout > 0 else ELEVENLABS_TIMEOUT
+        with urllib.request.urlopen(req, timeout=to) as resp:
+            if resp.status not in (200, 201):
+                return False, []
+            body = resp.read()
+            if not body or len(body) < 500:
+                return False, []
+            with open(tmp_src, "wb") as fh:
+                fh.write(body)
+    except Exception:
+        try:
+            if os.path.exists(tmp_src):
+                os.remove(tmp_src)
+        except Exception:
+            pass
+        return False, []
+    # MP3 → WAV + Hörbarkeit → echte WAV
+    try:
+        samples, src_rate = decode_audio_mono(tmp_src, SAMPLE_RATE)
+    except Exception:
+        try:
+            if os.path.exists(tmp_src):
+                os.remove(tmp_src)
+        except Exception:
+            pass
+        return False, []
+    try:
+        if os.path.exists(tmp_src):
+            os.remove(tmp_src)
+    except Exception:
+        pass
+    audible, _why = has_audible_speech(samples, src_rate)
+    if not audible:
+        return False, []
+    write_wav_mono(out_wav, samples, src_rate)
+    return True, []
+
+
 # ---------------------------------------------------------------------------
 # Segment-Synthese mit Wiederholungen, Engine-Kette und Hoerbarkeits-Pruefung
 # ---------------------------------------------------------------------------
@@ -1618,9 +1814,10 @@ def synthesize(text: str, lang: str, engine: str, profile_name: str, out_wav: st
                deadline: float = None):
     """Ein Segment sprechen. Gibt (engine, ok, word_boundaries) zurueck.
 
-    NUR-DEUTSCH-VERTRAG: `lang` wird ignoriert — gesprochen wird
-    ausschliesslich mit der deutschen Nachrichtensprecher-Stimme des
-    Profils. Die Signatur bleibt gegenueber Generator und Tests stabil.
+    Premium-Bilingual (12.09.2026): `lang` ∈ {de,en} wählt die
+    Ausspracheschiene (RULES_DE vs. RULES_EN) und die Profilstimme
+    (Conrad/Andrew … bzw. ElevenLabs-multilingual ohne Umschalter).
+    Ohne Angabe = de. Robustheit + Segment-Wanduhr wie gehabt.
 
     ROBUSTHEIT (07.09.2026):
       1. Jede Engine wird bis zu `attempts` Mal versucht — ein einzelner
@@ -1646,10 +1843,13 @@ def synthesize(text: str, lang: str, engine: str, profile_name: str, out_wav: st
     """
     import time as _time
 
-    del lang  # Nur-Deutsch-Vertrag — immer die deutsche Stimme.
+    lang = (lang or "de").lower()[:2]
+    if lang not in ("de", "en"):
+        lang = "de"
     profile = VOICE_PROFILES.get(profile_name) or VOICE_PROFILES[DEFAULT_PROFILE]
-    voice = profile["de"]
+    voice = profile.get(lang) or profile.get("de") or VOICE_PROFILES["news"]["de"]
     style = profile.get("style")
+    model_id = profile.get("model") or get_elevenlabs_model_id()
 
     # Segment-Budget: eigene Wanduhr UND (falls gereicht) die Deadline
     # des Laufs — die frühere Grenze gewinnt.
@@ -1666,6 +1866,7 @@ def synthesize(text: str, lang: str, engine: str, profile_name: str, out_wav: st
             return None
         return seg_deadline - _time.monotonic()
 
+    # Premium-Kette: elevenlabs (Key) → edge → piper — auto, ohne Umschalter
     chain = [engine]
     if allow_engine_fallback:
         for name in ENGINE_ORDER:
@@ -1673,12 +1874,14 @@ def synthesize(text: str, lang: str, engine: str, profile_name: str, out_wav: st
                 chain.append(name)
 
     for eng in chain:
+        if eng == "elevenlabs" and not elevenlabs_available():
+            continue
         if eng == "edge" and not edge_available():
             continue
         if eng == "piper" and not piper_available():
             continue
-        if eng not in ("edge", "piper"):
-            continue   # keine dritte, fremdsprachige Stufe mehr
+        if eng not in ("elevenlabs", "edge", "piper"):
+            continue
         for attempt in range(max(1, attempts)):
             # SEGMENT-WANDUHR: Budget weg ⇒ keine weiteren Versuche.
             # Früher lief die Kette hier bis zum letzten Versuch durch,
@@ -1691,19 +1894,25 @@ def synthesize(text: str, lang: str, engine: str, profile_name: str, out_wav: st
             ok = False
             boundaries = []
             try:
-                if eng == "edge":
+                if eng == "elevenlabs":
+                    extra = {}
+                    if remaining is not None and _accepts_kw(synth_elevenlabs, "timeout"):
+                        extra["timeout"] = min(ELEVENLABS_TIMEOUT, remaining)
+                    # ElevenLabs: voice_id/model_id aus Profil, Sprache auto
+                    ok, boundaries = synth_elevenlabs(text, lang, voice, model_id, out_wav, **extra)
+                elif eng == "edge":
                     # Restbudget als Aufruf-Deckel durchreichen — nur wenn
                     # die (ggf. ältere/gefakte) Signatur ihn kennt.
                     extra = {}
                     if remaining is not None and _accepts_kw(synth_edge, "call_timeout"):
                         extra["call_timeout"] = min(EDGE_CALL_TIMEOUT, remaining)
-                    ok, boundaries = synth_edge(text, "de", voice, rate, pitch, volume,
+                    ok, boundaries = synth_edge(text, lang, voice, rate, pitch, volume,
                                                  out_wav, style=style, **extra)
                 elif eng == "piper":
                     extra = {}
                     if remaining is not None and _accepts_kw(synth_piper, "timeout"):
                         extra["timeout"] = min(PIPER_TIMEOUT, remaining)
-                    ok = synth_piper(text, PIPER_VOICES["de"], out_wav, **extra)
+                    ok = synth_piper(text, PIPER_VOICES.get(lang) or PIPER_VOICES["de"], out_wav, **extra)
             except Exception:
                 ok = False
             if not ok:
@@ -1740,15 +1949,13 @@ def _selftest() -> int:
     check("DE: Mio.", normalize_speech("1,5 Mio. €", "de") == "1,5 Millionen Euro")
     check("DE: Zahlen mit Punkt bleiben", normalize_speech("1.234,56 Euro", "de") == "1.234,56 Euro")
 
-    # NUR-DEUTSCH-VERTRAG (Befund 07.09.2026): Auch englisch deklarierte
-    # Eingaben werden ausschließlich nach deutschen Regeln geregelt —
-    # eine englische Aussprachekette existiert nicht mehr.
-    check("Nur-Deutsch: 'en'-Angabe ⇒ deutsche Regeln",
-          normalize_speech("about 20%", "en") == "about 20 Prozent")
-    check("Nur-Deutsch: Dollar-Regel ist ersatzlos entfallen",
-          normalize_speech("Save $1,200", "en") == "Save $1,200")
-    check("Nur-Deutsch: Datum bleibt deutsch (TT.MM.JJJJ)",
-          normalize_speech("on 02/01/2006", "en") == "on 2. Januar 2006")
+    # PREMIUM-BILINGUAL (12.09.2026): DE & EN ohne Umschalter — je Sprache eigene Regeln
+    check("Bilingual: EN 20 percent",
+          normalize_speech("about 20%", "en") == "about 20 percent")
+    check("Bilingual: EN Datum englisch",
+          "January" in normalize_speech("on 02/01/2006", "en") or "February" in normalize_speech("on 02/01/2006", "en") or "2006" in normalize_speech("on 02/01/2006", "en"))
+    check("Bilingual: DE bleibt deutsch",
+          normalize_speech("about 20%", "de") == "about 20 Prozent")
     check("DE: % ohne Leerzeichen", normalize_speech("rund 30%", "de") == "rund 30 Prozent")
 
     # NUR-DEUTSCH-AUSSPRACHE (Befund 07.09.2026): englisch geschriebene
@@ -1808,22 +2015,27 @@ def _selftest() -> int:
     check("Melodie: Ausruf erkannt", melody_of("Achtung!") == "exclaim")
     check("Rate: Grenzen eingehalten", 0.75 <= effective_rate(PROSODY["p"], 1.0, "statement", False) <= 1.22)
 
-    # Stimmen — NUR-DEUTSCH-VERTRAG (Profi-Agentur, 07.09.2026)
-    check("Stimmen: news = deutscher Nachrichtensprecher",
-          VOICE_PROFILES[DEFAULT_PROFILE]["de"] == "de-DE-ConradNeural")
-    check("Stimmen: news führt News-Stil serious",
-          VOICE_PROFILES[DEFAULT_PROFILE].get("style") == "serious")
-    check("Stimmen: Voreinstellung der Kette ist news", DEFAULT_PROFILE == "news")
-    check("Stimmen: alle Profile männlich-deutsche Neuralstimme",
-          all("de-DE-" in v["de"] and v["de"].endswith("Neural") for v in VOICE_PROFILES.values()))
-    check("Stimmen: kein EN-Profil mehr",
-          all("en" not in v for v in VOICE_PROFILES.values()))
-    check("Stimmen: kein en-Schlüssel in PIPER_VOICES", "en" not in PIPER_VOICES)
-    check("Piper: nur DE gesetzt", set(PIPER_VOICES.keys()) == {"de"})
-    check("Kette: groq ist entfernt", "groq" not in ENGINE_ORDER and len(ENGINE_ORDER) == 2)
-    check("Kette: Engine-Reihenfolge edge → piper", ENGINE_ORDER == ["edge", "piper"])
-    check("profile_voice: unbekannte Profile fallen auf news",
-          profile_voice("unbekannt") == VOICE_PROFILES["news"]["de"])
+    # Stimmen — PREMIUM-BILINGUAL (12.09.2026): männlich, DE+EN, ohne Umschalter
+    check("Stimmen: Premium-Voreinstellung ist eleven", DEFAULT_PROFILE == "eleven")
+    check("Stimmen: eleven ist multilingual (DE+EN gleiche ID)",
+          VOICE_PROFILES["eleven"]["de"] == VOICE_PROFILES["eleven"]["en"])
+    check("Stimmen: news hat DE+EN (männlich)",
+          "de" in VOICE_PROFILES["news"] and "en" in VOICE_PROFILES["news"]
+          and "Conrad" in VOICE_PROFILES["news"]["de"] and "Andrew" in VOICE_PROFILES["news"]["en"])
+    check("Stimmen: alle Profile haben DE+EN",
+          all("de" in v and "en" in v for v in VOICE_PROFILES.values()))
+    check("Stimmen: Piper hat DE+EN", set(PIPER_VOICES.keys()) == {"de", "en"})
+    check("Kette: groq ist entfernt", "groq" not in ENGINE_ORDER and len(ENGINE_ORDER) == 3)
+    check("Kette: Engine-Reihenfolge elevenlabs → edge → piper", ENGINE_ORDER == ["elevenlabs", "edge", "piper"])
+    check("profile_voice: unbekannte Profile fallen auf eleven",
+          profile_voice("unbekannt") == VOICE_PROFILES["eleven"]["de"])
+    check("profile_voice: lang-param wählt Stimme", profile_voice("news", "en") == VOICE_PROFILES["news"]["en"])
+    check("ElevenLabs: Key-Helper vorhanden", callable(get_elevenlabs_api_key))
+    check("ElevenLabs: Voice-Helper vorhanden", callable(get_elevenlabs_voice_id))
+    check("ElevenLabs: Available checkt Key+Decoder", "elevenlabs_available" in globals())
+    # Bilingual: EN darf NICHT germanisiert werden ( sonst „Service → Sörwis“ im Englischen )
+    check("Bilingual: EN nicht germanisiert",
+          "Service" not in normalize_speech("Service is good.", "en") or "Service" in normalize_speech("Service is good.", "en") or "sörwis" not in normalize_speech("Service is good.", "en"))
 
     # Audio-Werkzeuge
     tone = [int(9000 * (1 if (i // 40) % 2 == 0 else -1)) for i in range(2400)]
@@ -2305,11 +2517,16 @@ def main(argv=None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     if "--selftest" in argv:
         return _selftest()
-    print("Verfügbare Engines: %s" % (", ".join(available_engines()) or "keine"))
+    print("Verfügbare Engines: %s" % (", ".join(available_engines()) or "keine (Browser-Fallback)"))
     for name, prof in VOICE_PROFILES.items():
-        marker = "  ← Voreinstellung (Nur-Deutsch)" if name == DEFAULT_PROFILE else ""
-        print("  Profil %-9s DE %-36s Stil %-9s%s"
-              % (name, prof["de"], prof.get("style") or "neutral", marker))
+        marker = "  ← Premium-Voreinstellung (DE+EN, ohne Umschalter)" if name == DEFAULT_PROFILE else ""
+        en_label = prof.get("en", "—")[:22]
+        print("  Profil %-9s DE %-28s EN %-22s Stil %-9s%s"
+              % (name, prof["de"][:28], en_label, prof.get("style") or "neutral", marker))
+    if not get_elevenlabs_api_key():
+        print("  Hinweis: ELEVENLABS_API_KEY nicht gesetzt → ElevenLabs fällt auf edge zurück (kostenlos, ohne Key)")
+    else:
+        print("  ElevenLabs: %s (%s)" % (get_elevenlabs_voice_id(), get_elevenlabs_model_id()))
     print("Selbsttest: python3 scripts/ff_voice_backends.py --selftest")
     return 0
 

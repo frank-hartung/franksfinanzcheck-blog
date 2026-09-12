@@ -10,9 +10,10 @@ Warum dieses Gate existiert
     zwischen Überschrift und Fließtext. Genau das verhindert dieses Gate.
 
 Was geprüft wird
-    0. NUR-DEUTSCH — in BEIDEN Quellen verbietet das Gate jede zweite
-       Sprache: keine EN-Stimmenkette, kein Sprachwechsel im Satz,
-       keine EN-Aussprachetabellen (Befund 07.09.2026).
+    0. PREMIUM-BILINGUAL (12.09.2026) — BEIDE Quellen sprechen DE + EN
+       mit EINER männlichen ElevenLabs-Stimme (ohne Umschalter):
+       Locale-Ketten de+en, EN-Aussprachetabellen, Sprachwechsel je
+       Block/Satz (Heuristik ä/ö/ü/ß vs. Stopwörter).
     1. AUSSPRACHE — dieselben Beispieltexte durch die JavaScript- und die
        Python-Normalisierung (Zahlen, Währungen, Daten, Zeiten, Bereiche,
        Einheiten, Abkürzungen, URLs, Symbole). Englische Beispieltexte
@@ -70,18 +71,18 @@ SAMPLES = [
     ("siehe franksfinanzcheck.de", "de"),
     ("Nr. 3 und S. 12", "de"),
     ("Der Wechsel lohnt sich.", "de"),
-    # Englische Texte: werden bewusst DEUTSCH behandelt (Nur-Deutsch-
-    # Vertrag). Sie bleiben als Beispiele erhalten — beide Seiten müssen
-    # sie identisch deutsch normalisieren.
-    ("Save $1,200", "de"),
-    ("about 20%", "de"),
-    ("e. g. gas", "de"),
-    ("e.g. gas", "de"),
-    ("tariffs etc.", "de"),
-    ("20,000 kWh", "de"),
-    ("on 02/01/2006", "de"),
-    ("gas & oil", "de"),
-    ("Switching saves money.", "de"),
+    # Englische Texte: PREMIUM-BILINGUAL — werden auf BEIDEN Seiten
+    # mit englischem Regelwerk gelesen (percent, dates EN, kein
+    # Germanisieren). Identität wird je Sprache geprüft.
+    ("Save $1,200", "en"),
+    ("about 20%", "en"),
+    ("e. g. gas", "en"),
+    ("e.g. gas", "en"),
+    ("tariffs etc.", "en"),
+    ("20,000 kWh", "en"),
+    ("on 02/01/2006", "en"),
+    ("gas & oil", "en"),
+    ("Switching saves money.", "en"),
     # NUR-DEUTSCH-AUSSPRACHE (Befund 07.09.2026): englisch geschriebene
     # Fach- und Markenbegriffe müssen auf BEIDEN Seiten identisch in
     # deutsche Lautschreibung überführt werden — das Code-Switching der
@@ -351,23 +352,30 @@ def main() -> int:
     check("Pillar: keine Doppeltexte (Python-Join eindeutig)",
           len({b["text"] for b in pillar_py}) == len(pillar_py),
           "Doppelte Blocktexte")
-    check("Pillar: jede Blocksprache ist de (Nur-Deutsch-Vertrag)",
+    check("Pillar: jede Blocksprache ist de (Pillar ist deutsch)",
           all(b["lang"] == "de" for b in pillar_py)
           and all(b["lang"] == "de" for b in pillar_js),
-          "Fremdsprache im Pillar-Block")
+          "Fremdsprache im deutschen Pillar-Block")
+    # EN-Seite: mindestens ein Block muss als en erkannt werden (Bilingual-Nachweis).
+    en_root = gen.parse_html(PAGE_EN)
+    en_cfg = gen.read_reader_config(en_root)
+    en_py, _enlang = gen.extract_blocks(en_root, en_cfg)
+    check("EN-Seite: mindestens ein en-Block (Bilingual)",
+          any(b["lang"] == "en" for b in en_py),
+          "Kein en erkannt auf EN-Fixture")
 
-    # ---------- 5 · Nur-Deutsch-Vertrag in beiden Quellen ----------
-    # Harte Zeichenketten-Verbote, damit kein späterer Patch die
-    # Sprachmehrgleisigkeit „nur kurz“ zurückholt.
-    check("Reader: keine englische Locale-Kette", "'en-US'" not in js_source)
-    check("Reader: keine Wortlauf-Regie", "languageRuns" not in js_source)
-    check("Reader: keine EN-Aussprachetabelle", "MONTHS_EN" not in js_source)
+    # ---------- 5 · Premium-Bilingual (12.09.2026): DE + EN ohne Umschalter ----------
+    # Harte Gebote: BEIDE Quellen müssen EN sprechen können (Locale-Ketten,
+    # EN-Monatsnamen, auto-Heuristik). Keine Verbote mehr für EN.
+    check("Reader: englische Locale-Kette vorhanden", "'en-us'" in js_source.lower() or '"en-us"' in js_source.lower() or "en-us" in js_source.lower())
+    check("Reader: EN-Aussprachetabelle vorhanden", "MONTHS_EN" in js_source)
+    check("Reader: EN-Stimmenbewertung vorhanden (en branch)", "isEnglishVoice" in js_source or "isAllowedVoice" in js_source)
+    check("Reader: VOICE_VERSION bilingual (elevenlabs)", "elevenlabs" in js_source.lower())
     gen_path = os.path.join(ROOT, "scripts", "ff_voice_audio.py")
     with open(gen_path, "r", encoding="utf-8") as fh:
         gen_source = fh.read()
-    check("Generator: keine Wortlauf-Segmentierung mehr", "def language_runs" not in gen_source)
-    check("Generator: Spracherkennung liefert nur noch de",
-          'return "de"' in gen_source and 'def detect_language' in gen_source)
+    check("Generator: Bilingual-CUES (en present)", '"en"' in gen_source and "CUES" in gen_source)
+    check("Generator: Spracherkennung bilingual (de/en)", 'def detect_language' in gen_source and 'return "en"' in gen_source)
 
     # ---------- 6 · Germanisierungs-Glossar (Befund 07.09.2026) ----------
     # Der Code-Switching-Fix muss in BEIDEN Quellen vorhanden sein und
