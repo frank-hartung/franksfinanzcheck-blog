@@ -85,9 +85,9 @@ items:
   date: '2026-09-12'
   time: '18:45'
   scheduled_at: '2026-09-12T18:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: x:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:nutzen:2026-09-12
   channel: x
   slug: 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife
@@ -97,9 +97,9 @@ items:
   date: '2026-09-12'
   time: '19:15'
   scheduled_at: '2026-09-12T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: facebook:2026-09-03-hausratversicherung-kosten-leistungen-vergleich:zahl:2026-09-12
   channel: facebook
   slug: 2026-09-03-hausratversicherung-kosten-leistungen-vergleich
@@ -109,9 +109,9 @@ items:
   date: '2026-09-12'
   time: '19:45'
   scheduled_at: '2026-09-12T19:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: threads:2026-09-03-hausratversicherung-kosten-leistungen-vergleich:zahl:2026-09-12
   channel: threads
   slug: 2026-09-03-hausratversicherung-kosten-leistungen-vergleich
@@ -121,9 +121,9 @@ items:
   date: '2026-09-12'
   time: '20:30'
   scheduled_at: '2026-09-12T20:30:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: telegram:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler:takeaway:2026-09-13
   channel: telegram
   slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
