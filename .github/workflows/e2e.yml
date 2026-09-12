@@ -1,0 +1,99 @@
+# ============================================================
+#  E2E-TESTS (PLAYWRIGHT) – Design-Skills-Rollout 12.09.2026
+#  ------------------------------------------------------------
+#  Baut die Hugo-Website und fährt die Playwright-Suite in e2e/:
+#    · Startseite, Artikel (dynamisch neuester Beitrag), Navigation,
+#      Pagination, 404-Verhalten
+#    · SEO-Meta (Canonical, Open Graph, JSON-LD, Twitter Card)
+#    · Barrierefreiheit (H1-Struktur, alt-Texte, Landmarks, Skip-Link)
+#    · Affiliate-Integrität (/go/-Links: sponsored+nofollow+noopener,
+#      Redirect-Stümpfe, Tabnabbing-Schutz)
+#    · Mobile (iPhone-14-Emulation): kein horizontaler Overflow,
+#      Tap-Ziele >= 40px
+#
+#  Läuft: bei PRs auf main (nur wenn layouts/assets/content/e2e/
+#  berührt sind), wöchentlich (Di 07:00 MESZ) + manuell.
+#  KEIN push-Trigger: der Deploy-Workflow pusst bei Push auf main
+#  nach gh-pages – eine E2E auf jedem Push würde die Actions-
+#  Minuten verbrennen, ohne neue Information zu liefern.
+#
+#  Browser: Chromium (offizieller Download via npx playwright install
+#  – auf GitHub-Runnern problemlos; der @sparticuz/chromium-Fallback
+#  aus e2e/browser.mjs greift nur in CDN-blockierten Umgebungen).
+# ============================================================
+name: E2E-Tests (Playwright)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "layouts/**"
+      - "assets/**"
+      - "content/**"
+      - "hugo.toml"
+      - "e2e/**"
+      - "playwright.config.mjs"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/e2e.yml"
+  schedule:
+    - cron: "0 5 * * 2"    # Dienstag 07:00 MESZ (05:00 UTC)
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    name: Playwright-Suite (Desktop + Mobile)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Hugo installieren (Extended, verifiziert, mehrquellig)
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
+
+      - name: Node einrichten (22, mit npm-Cache)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Abhängigkeiten installieren
+        run: npm ci
+
+      - name: Playwright-Chromium installieren (mit System-libs)
+        run: npx playwright install --with-deps chromium
+
+      - name: Website bauen
+        env:
+          HUGO_JSDELIVR_SHA: ${{ github.sha }}
+        run: hugo --quiet --destination public
+
+      - name: E2E-Suite ausführen
+        run: npx playwright test
+
+      - name: Messbarer Design-Audit (Kontraste, Tap-Ziele, Typo)
+        run: node e2e/design-metrics.mjs > design-metrics.json
+        continue-on-error: true
+
+      - name: HTML-Report als Artifact hochladen (bei Fehlern)
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+            design-metrics.json
+          retention-days: 7
+          if-no-files-found: ignore

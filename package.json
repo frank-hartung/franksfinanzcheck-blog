@@ -1,0 +1,16 @@
+{
+  "name": "franksfinanzcheck-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E2E-Tests (Playwright) für FranksFinanzcheck – Startseite, Artikel, Navigation, SEO/A11y und Affiliate-Integrität. Siehe e2e/ und .github/workflows/e2e.yml.",
+  "scripts": {
+    "build": "hugo --destination public",
+    "test:e2e": "npm run build && playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:report": "playwright show-report",
+    "test:e2e:debug": "playwright test --debug"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}

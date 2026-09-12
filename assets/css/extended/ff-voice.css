@@ -485,7 +485,7 @@
   max-height: min(86vh, 900px);
   padding: 0;
   border: 1px solid var(--ffv-line);
-  border-radius: 18px;
+  border-radius: 16px;
   background: var(--ffv-surface);
   color: var(--ffv-text);
   box-shadow: var(--ffv-shadow-float);

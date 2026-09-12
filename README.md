@@ -430,6 +430,41 @@ Report: `LESEHILFEN-STUDIO-2026-09-05.md` · „§“-Reparatur mit Wachen: `KUR
 
 ---
 
+## 🎨 Design-Skills + Playwright-E2E (Premium-Rollout 12.09.2026)
+
+Der Blog bekommt eine **messbare Design-Qualitätsschicht** – fünf Agent-Skills
+plus kompletter Playwright-Testumgebung, eingerichtet auf Profi-Agentur-Niveau:
+
+**Agent-Skills** (`.claude/skills/`, Updates via `npx skills update`):
+`impeccable` (pbakaus) · `web-design-guidelines` (Vercel) ·
+`frontend-design` (Anthropic) · `design-taste-frontend` (taste-skill) ·
+`webapp-testing` (Anthropic/Playwright). Kontext für jede Design-Arbeit:
+`PRODUCT.md` (Marke, Publikum, harte Gates) + `DESIGN.md` (Design-System
+aus dem echten CSS) + `CLAUDE.md` (Agenten-Leitfaden).
+
+**Playwright-E2E** (`e2e/`, `npm run test:e2e`): 25 Tests in Desktop +
+iPhone-14-Emulation – Startseite/Artikel/Navigation/404, SEO-Meta &
+JSON-LD, A11y (H1, alt, Landmarks, Skip-Link), **Affiliate-Integrität**
+(/go/-Links: sponsored+nofollow+noopener+subid) und Mobile-Overflow.
+Hermetisch gegen den Build (Produktions-URLs werden lokal geroutet),
+zero-dependency-Static-Server, in CI via `.github/workflows/e2e.yml`
+(PRs auf main + dienstags 07:00 MESZ, HTML-Report als Artifact).
+
+**Messbarer Design-Audit** (`node e2e/design-metrics.mjs`): WCAG-Kontraste
+hell+dunkel, Typo-Skala, Messweite, Heading-Rhythmus, Fokus-Sichtbarkeit
+und Tap-Ziele mit echtem Hit-Test – als JSON, auch in CI.
+
+**Erster Audit + Politur** (Details: `DESIGN-SKILLS-ROLLOUT-2026-09-12.md`):
+Dark-Mode-Überschriften 2.04:1 → **9.28:1**, Tap-Ziel-AA-Verstöße 12 → **0**
+(19 Kopier-Buttons auf 44px erweitert), Home-Info-Link-Kontrast 4.49 →
+**5.8:1**, `::selection` im Marken-Gelb, Skip-Link über allen Overlays,
+Radius/Spacing normalisiert, Pillar-Seiten auf Dark-fähige `.ff-pc-*`-
+Klassen refactored (Light-Optik 1:1 vermessen). Politur-Layer:
+`assets/css/extended/zzz-agency-polish.css`. Bestätigt: Messweite 65ch,
+Fokus-Ring 3px, Übergangs-Disziplin, reduced-motion.
+
+---
+
 ## 🗞️ Premium-Governance (Chefredakteur-Cockpit · v2, gehärtet 07.09.2026)
 
 Die Blogautomatik prüfte schon viel — jetzt **steuert** sie auch, und zwar ohne

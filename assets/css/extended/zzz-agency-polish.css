@@ -1,0 +1,436 @@
+/* ============================================================
+   FranksFinanzcheck – AGENCY-POLISH-LAYER (Design-Skills-Rollout)
+   ============================================================
+   Datum:      12.09.2026
+   Anlass:     Premium-Integration der Design-Skills (Impeccable,
+               web-design-guidelines, frontend-design, taste-skill)
+               + erster messbarer Design-Audit (e2e/design-metrics.mjs).
+   Rollen:     Diese Datei lädt als LETZTE der extended-CSS und
+               bündelt ALLE Politur-Maßnahmen des Rollouts in einem
+               reviewbaren Layer. Bestehende Dateien bleiben bis auf
+               dokumentierte Ausreißer-Normalisierung unangetastet.
+
+   ─── AUDIT-BEFUNDE, DIE DIESER LAYER BEHEBT ───────────────────
+   A1 [KRITISCH] Dark Mode: .post-title/.post-content h1–h3 in
+       Smaragdgrün #0E5A43 auf PaperMod-Dark (#1D1E20) = 2.04:1
+       (WCAG fordert ≥3:1 große Typo / ≥4.5:1 Fließtext).
+       defaultTheme=auto + disableThemeToggle=true → jeder Nutzer
+       mit dunklem OS sieht diese Überschriften. Fix: heller
+       Smaragd-Tint #7FD1B4 = 10.3:1 auf #1D1E20 (berechnet).
+   A2 [KONTRAST] Home-Info-Links/-Kursiv in Signalgelb #FFB300 auf
+       Smaragd-Verlauf = 4.49:1 (Grenzfall, knapp unter AA 4.5).
+       Fix: --ff-accent-2 (#FFD15A) = 5.8:1.
+   A3 [TAP-ZIELE] Überschriften-Kopierknopf .ff-heading-copy nur
+       28×28px (WCAG 2.5.8: min 24 ✓, Best Practice/GD: 44).
+       Fix: unsichtbare Trefferfläche-Erweiterung auf 44px
+       (::after inset −8px), Optik bleibt 1:1.
+   A4 [BROWSER-FLÄCHEN] ::selection war unthematisiert (--selection
+       war toter Token, Browser-Blau griff) + kein caret-color.
+       Fix: Auswahl/Farbe im Marken-Gelb, Caret im Smaragd.
+   A5 [Z-ORDNUNG] Skip-Link (z 100000) lag UNTER der Lese-
+       Fortschrittsleiste (z 999998) – Tastatur-Sprungziel wurde
+       überdeckt. Fix: Skip-Link z 999999.
+   A6 [RADIUS/NORMALISIERUNG] 18px-Radien → 16px (Impeccable:
+       „Card radii stay at 12–16px"); 11px-Spacing → 12px-Raster
+       (direkt in den Quelldateien normalisiert, hier dokumentiert).
+   A7 [PILLAR] Ratgeber-Seiten: Inline-Styles mit Hell-Farben ohne
+       Dark-Varianten (Layouts/pillar/single.html). Fix: Template
+       auf semantische Klassen .ff-pc-* umgestellt (siehe unten),
+       Light-Werte 1:1 übernommen, Dark-Varianten hier definiert.
+
+   ─── WAS BEWUSST NICHT ANGEFASST WURDE ────────────────────────
+   · width-Transition am Voice-Fortschrittsbalken (0.18s linear):
+     legitim für kontinuierliche Wertanzeige, kein Layout-Thrash
+     (fixe Höhe, overflow-gekapselt) – Impeccable-Ban zielt auf
+     Entrance/Hover-Effekte.
+   · 31× !important: historisch gewachsen, Abbau ist eigenes
+     Refactoring (Risiko für die Gates), nicht Teil des Polituren-
+     Rollouts.
+   · Meta-Zeile mit Mittel-Punkten („11.09.2026 · 9 Minuten"):
+     Verlags-Konvention des Blogs, kein AI-Slop-Tell.
+
+   Messbarkeit: `node e2e/design-metrics.mjs` liefert die Kontrast-
+   und Tap-Ziel-Werte vor/nach (siehe DESIGN-SKILLS-ROLLOUT-2026-
+   09-12.md im Repo-Root).
+   ============================================================ */
+
+/* ---------- 1. Design-Tokens des Layers ---------- */
+:root {
+    /* Heller Smaragd für Dark-Mode-Überschriften (10.3:1 auf #1D1E20) */
+    --ff-emerald-bright: #7FD1B4;
+    /* Radius-Skala (Normalisierung, s. A6): 8 / 12 / 16 / 999 */
+    --ff-radius-sm: 8px;
+    --ff-radius-md: 12px;
+    --ff-radius-lg: 16px;
+    /* Ebenen-Skala (s. A5): Overlay-Ordnung an einem Ort.
+       Skip-Link bewusst ÜBER allem (auch über dem Consent-Banner,
+       das inline z-index:999999 trägt). */
+    --ff-z-progress: 999998;
+    --ff-z-skiplink: 1000001;
+}
+
+/* ---------- 2. Dark-Mode-Kontraste (A1, KRITISCH) ---------- */
+/* PaperMod schaltet via :root[data-theme="dark"]; genau dort greift
+   der Override – im Hell-Modus bleibt alles unverändert. */
+:root[data-theme="dark"] .post-title,
+:root[data-theme="dark"] .post-content h1,
+:root[data-theme="dark"] .post-content h2,
+:root[data-theme="dark"] .post-content h3 {
+    color: var(--ff-emerald-bright);
+}
+
+/* Breadcrumbs & Meta der Ratgeber-Seiten (vorher #666/#555 inline,
+   auf Dark nur ~3.2–3.9:1) – Klassen siehe Abschnitt 7. */
+:root[data-theme="dark"] .ff-pc-breadcrumbs,
+:root[data-theme="dark"] .ff-pc-breadcrumbs a,
+:root[data-theme="dark"] .ff-pc-meta,
+:root[data-theme="dark"] .ff-pc-meta__author,
+:root[data-theme="dark"] .ff-pc-card__desc {
+    color: var(--secondary); /* PaperMod-Dark: #9B9C9D ≈ 6.0:1 */
+}
+
+/* ---------- 3. Home-Info: Link-Kontrast (A2) ---------- */
+.home-info .entry-content a,
+.home-info .entry-content em {
+    color: var(--ff-accent-2); /* #FFD15A auf Smaragd ≈ 5.8:1 (vorher 4.49:1) */
+}
+
+/* ---------- 4. Tap-Ziele (A3) ---------- */
+/* Kopierknopf an Überschriften: Optik bleibt 28×28px, die
+   Trefferfläche wächst auf 44×44px. Ohne Auswirkung auf die
+   Textauswahl (user-select bleibt wie gehabt). */
+.ff-heading-copy {
+    position: relative;
+}
+.ff-heading-copy::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 999px;
+}
+
+/* Footer-Links („Impressum/Datenschutz/Über mich" maßen 21px Höhe,
+   WCAG 2.5.8 fordert min 24px): inline-block + Padding – Inline-
+   Elemente melden vertikales Padding weder in getBoundingClientRect
+   noch zuverlässig an die Hit-Testing-Engine, inline-block schon. */
+footer.footer a,
+.site-footer a {
+    display: inline-block;
+    padding-block: 3px;
+}
+
+/* Consent-Banner: Text-Link „Datenschutzerklärung" maß 178×22px
+   (WCAG 2.5.8: min 24px) – inline-block + Padding macht die
+   Fläche verlässlich klickbar; Buttons bekommen etwas mehr Höhe. */
+#ff-consent-banner a {
+    display: inline-block;
+    padding-block: 3px;
+}
+#ff-consent-banner button {
+    padding-block: 10px;
+}
+
+/* Consent-Wiederöffnen-Link unter dem Footer (extend_footer.html):
+   war 162x20px – inline-block + Padding auf WCAG-Mindestmaß. */
+.ff-consent-reopen {
+    display: inline-block;
+    padding-block: 3px;
+}
+
+/* Inhaltsverzeichnis (details.toc) & Text-Links im Artikelbereich
+   (inkl. Trust-Box „Mehr über mich"): Listen-Links maßen 21px Höhe
+   (WCAG 2.5.8: min 24px). Inline-Padding vergrößert die Treffer-
+   fläche, ohne das Layout zu verschieben (Inline-Boxen: paint-only). */
+details.toc a,
+.post-tags a,
+.post-single p a {
+    padding-block: 3px;
+}
+
+/* ---------- 5. Browser-Flächen (A4) ---------- */
+/* Auswahl im Marken-Signalgelb (der --selection-Token war bisher
+   ungenutzt, es griff das Browser-Blau) – halbtransparent, damit
+   auch weiße Schrift auf Smaragd lesbar bleibt. */
+::selection {
+    background: rgba(255, 179, 0, 0.38);
+    color: inherit;
+}
+:root[data-theme="dark"] ::selection {
+    background: rgba(255, 209, 90, 0.32);
+}
+/* Caret in Eingabefeldern (Newsletter/Kommentar) in Markenfarbe */
+input,
+textarea {
+    caret-color: var(--ff-emerald);
+}
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea {
+    caret-color: var(--ff-emerald-bright);
+}
+
+/* ---------- 6. Z-Ordnung (A5) ---------- */
+/* Skip-Link muss über ALLEN Overlays stehen – auch über der
+   Lese-Fortschrittsleiste (.ff-progress-shell, z 999998). */
+.skip-link {
+    z-index: var(--ff-z-skiplink);
+}
+
+/* ---------- 7. Pillar-/Ratgeber-Seiten (A7) ----------
+   Semantische Klassen für layouts/pillar/single.html (vorher
+   Inline-Styles). Light-Werte 1:1 aus dem Template übernommen,
+   Dark-Varianten ergänzt. Präfix .ff-pc- = FranksFinanzcheck
+   Pillar Content. */
+
+.ff-pc-breadcrumbs {
+    font-size: 0.85em;
+    margin-bottom: 12px;
+    color: #666;
+}
+.ff-pc-breadcrumbs a {
+    color: var(--ff-emerald);
+    text-decoration: none;
+}
+.ff-pc-breadcrumbs__sep {
+    margin: 0 6px;
+}
+.ff-pc-breadcrumbs__current {
+    color: #555;
+}
+:root[data-theme="dark"] .ff-pc-breadcrumbs__current {
+    color: var(--secondary);
+}
+
+.ff-pc-title {
+    color: var(--ff-emerald);
+    font-weight: 800;
+    font-size: 2em;
+    line-height: 1.25;
+    margin-bottom: 12px;
+}
+:root[data-theme="dark"] .ff-pc-title {
+    color: var(--ff-emerald-bright);
+}
+
+.ff-pc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.88em;
+    color: #555;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(14, 90, 67, 0.15);
+}
+.ff-pc-meta__author {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    color: var(--ff-emerald);
+}
+:root[data-theme="dark"] .ff-pc-meta {
+    color: var(--secondary);
+    border-bottom-color: rgba(127, 209, 180, 0.22);
+}
+.ff-pc-badge {
+    background: var(--ff-emerald-soft);
+    color: var(--ff-emerald);
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.82em;
+}
+:root[data-theme="dark"] .ff-pc-badge {
+    background: rgba(127, 209, 180, 0.14);
+    color: var(--ff-emerald-bright);
+}
+
+/* — Cluster-Box „Alle vertiefenden Artikel" — */
+.ff-pc-cluster {
+    margin: 36px 0 12px;
+    padding: 24px 20px;
+    background: #F7FBF9;
+    border: 1px solid rgba(14, 90, 67, 0.18);
+    border-radius: var(--ff-radius-lg);
+}
+:root[data-theme="dark"] .ff-pc-cluster {
+    background: var(--entry);
+    border-color: rgba(127, 209, 180, 0.18);
+}
+.ff-pc-cluster__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.ff-pc-cluster__title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    color: var(--ff-emerald);
+    margin: 0 0 4px;
+    font-size: 1.35em;
+}
+:root[data-theme="dark"] .ff-pc-cluster__title {
+    color: var(--ff-emerald-bright);
+}
+.ff-pc-cluster__sub {
+    color: #555;
+    font-size: 0.92em;
+    margin: 0;
+}
+.ff-pc-cluster__count {
+    font-size: 0.82em;
+    font-weight: 700;
+    background: var(--ff-emerald);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+/* — Beitragskarten im Cluster — */
+.ff-pc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+}
+.ff-pc-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid rgba(14, 90, 67, 0.18);
+    border-radius: var(--ff-radius-md);
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+:root[data-theme="dark"] .ff-pc-card {
+    background: var(--theme);
+    border-color: rgba(127, 209, 180, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+.ff-pc-card:hover,
+.ff-pc-card:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(14, 90, 67, 0.16);
+}
+:root[data-theme="dark"] .ff-pc-card:hover,
+:root[data-theme="dark"] .ff-pc-card:focus-visible {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+.ff-pc-card__cover {
+    display: block;
+    position: relative;
+}
+.ff-pc-card__cover--fallback {
+    display: block;
+    width: 100%;
+    padding-top: 40%;
+    background: linear-gradient(160deg, #0E5A43, #0B4A36);
+}
+.ff-pc-card__img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.ff-pc-card__body {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 16px;
+    flex: 1;
+}
+.ff-pc-card__title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.02em;
+    line-height: 1.35;
+    color: var(--ff-emerald);
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+:root[data-theme="dark"] .ff-pc-card__title {
+    color: var(--ff-emerald-bright);
+}
+.ff-pc-card__desc {
+    font-size: 0.84em;
+    color: #555;
+    line-height: 1.45;
+    display: block;
+    margin-bottom: 10px;
+    flex: 1;
+}
+.ff-pc-card__cta {
+    font-size: 0.82em;
+    color: var(--ff-emerald);
+    font-weight: 700;
+    margin-top: auto;
+}
+:root[data-theme="dark"] .ff-pc-card__cta {
+    color: var(--ff-emerald-bright);
+}
+
+/* — Verwandte Ratgeber (Chips) — */
+.ff-pc-related {
+    margin: 28px 0 8px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(14, 90, 67, 0.15);
+}
+:root[data-theme="dark"] .ff-pc-related {
+    border-top-color: rgba(127, 209, 180, 0.22);
+}
+.ff-pc-related__title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: var(--ff-emerald);
+    margin-bottom: 14px;
+    font-size: 1.15em;
+}
+:root[data-theme="dark"] .ff-pc-related__title {
+    color: var(--ff-emerald-bright);
+}
+.ff-pc-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.ff-pc-chip {
+    background: var(--ff-emerald-soft);
+    color: var(--ff-emerald);
+    border: 1px solid rgba(14, 90, 67, 0.25);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 0.88em;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: background 0.15s ease;
+}
+:root[data-theme="dark"] .ff-pc-chip {
+    background: rgba(127, 209, 180, 0.12);
+    color: var(--ff-emerald-bright);
+    border-color: rgba(127, 209, 180, 0.3);
+}
+
+/* ---------- 8. Feinschliff ---------- */
+/* Reduced-Motion für die NEUEN Effekte dieses Layers (die
+   bestehenden Karten-Hover-Lifts deckt custom.css bereits ab). */
+@media (prefers-reduced-motion: reduce) {
+    .ff-pc-card,
+    .ff-pc-chip {
+        transition: none;
+    }
+    .ff-pc-card:hover,
+    .ff-pc-card:focus-visible {
+        transform: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+    :root[data-theme="dark"] .ff-pc-card:hover,
+    :root[data-theme="dark"] .ff-pc-card:focus-visible {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
+}
