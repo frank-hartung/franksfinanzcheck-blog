@@ -133,7 +133,8 @@ class CaptureKette(unittest.TestCase):
 
     def test_gesunde_kette_findet_nichts(self):
         b = Baum(self.tmp.name, toml='newsletterFormAction = "https://l.brevo.com/x"\n',
-                 datenschutz='<h2 id="newsletter">Newsletter</h2>',
+                 datenschutz='<h2 id="newsletter">Newsletter</h2>'
+                             '<p>Double-Opt-In, Widerruf formlos, 30 Tage.</p>',
                  footer="newsletter-footer", workflow="BREVO_API_KEY\n--strict-inert\n")
         with open(os.path.join(b.root, "public/newsletter/index.html"), "w",
                   encoding="utf-8") as fh:
@@ -142,6 +143,54 @@ class CaptureKette(unittest.TestCase):
         funde, _, zustand = nd.pruefe_capture(b.root)
         self.assertEqual([], funde)
         self.assertEqual("aktiv", zustand)
+
+
+class RechtstextQuelle(unittest.TestCase):
+    """Stiller-Freispruch-Fix: Ohne Hugo-Build (leeres public/) muss die
+    Wache die Markdown-Quelle lesen, Vorlagen-Reste als Fund melden – und
+    Markdown-Links nicht als Platzhalter verwechseln."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory(prefix="nl-ds-")
+        self.addCleanup(self.tmp.cleanup)
+
+    def _baum(self, name: str, ds_md: str) -> "Baum":
+        b = Baum(self.tmp.name, name,
+                 toml='newsletterFormAction = "https://l.brevo.com/x"\n',
+                 workflow="BREVO_API_KEY\n--strict-inert\n")
+        # gebaute Seite entfernen = Sandbox ohne Hugo-Build
+        os.remove(os.path.join(b.root, "public", "datenschutz", "index.html"))
+        d = os.path.join(b.root, "content", "datenschutz")
+        os.makedirs(d, exist_ok=True)
+        with open(os.path.join(d, "index.md"), "w", encoding="utf-8") as fh:
+            fh.write(ds_md)
+        return b
+
+    def test_quelle_ersatzt_fehlenden_build(self):
+        b = self._baum("quelle",
+                       "## 8. Newsletter / Kontaktaufnahme\n\n"
+                       "Double-Opt-In, Widerruf formlos, Löschung 30 Tage "
+                       "nach Abmeldung.\n")
+        funde, _, _ = nd.pruefe_capture(b.root)
+        codes = {c for _, _, c in funde}
+        for code in ("ds-fehlt", "rechtstext", "ds-leer"):
+            self.assertNotIn(code, codes,
+                             f"Quell-Fallback bricht ({code}): {funde}")
+
+    def test_platzhalter_im_live_text_ist_fund(self):
+        b = self._baum("platzhalter",
+                       "## 8. Newsletter\n\n"
+                       "Speicherdauer: [30] Tage, Widerruf an [deine Adresse].\n")
+        funde, _, _ = nd.pruefe_capture(b.root)
+        self.assertIn("ds-platzhalter", {c for _, _, c in funde}, funde)
+
+    def test_markdown_links_sind_kein_platzhalter(self):
+        b = self._baum("links",
+                       "## 8. Newsletter\n\n"
+                       "Anmeldung über [die Anmeldeseite](/newsletter/), "
+                       "Widerruf formlos.\n")
+        funde, _, _ = nd.pruefe_capture(b.root)
+        self.assertNotIn("ds-platzhalter", {c for _, _, c in funde}, funde)
 
 
 class DigestUndVersand(unittest.TestCase):
@@ -253,6 +302,19 @@ class Verdrahtung(unittest.TestCase):
         rc = subprocess.run([sys.executable, os.path.join(SCRIPTS, "newsletter_digest.py"),
                              "--selftest"], cwd=ROOT, capture_output=True, text=True)
         self.assertEqual(0, rc.returncode, rc.stdout + rc.stderr)
+
+    def test_footer_cta_traegt_beide_anmeldewege(self):
+        """Die Anleitung verspricht: „Sobald eines der beiden Felder gefüllt
+        ist: Footer-CTA auf allen Inhaltsseiten" – das Template muss also auf
+        newsletterFormAction UND newsletterFormUrl reagieren, sonst bleibt
+        das reine Inline-Formular bei N6/cta-versteckt liegen."""
+        t = open(os.path.join(ROOT, "layouts", "_partials", "extend_footer.html"),
+                 encoding="utf-8").read()
+        self.assertIn("newsletterFormUrl", t)
+        self.assertIn("newsletterFormAction", t,
+                      "Footer-CTA reagiert nur auf newsletterFormUrl – "
+                      "reines Inline-Formular (Action ohne URL) wird "
+                      "unsichtbar")
 
     def test_anleitung_verspricht_keinen_erfundenen_workflow(self):
         doku = open(os.path.join(ROOT, "docs/ANLEITUNG-NEWSLETTER.md"), encoding="utf-8").read()

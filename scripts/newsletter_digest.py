@@ -31,7 +31,7 @@ Dieses Skript schließt beide Seiten der Lücke:
             beides passiert kein Netzwerkzugriff. Kein Testversand ohne
             `--test-adresse`.
 
-  --selftest Sechs Fälle, ohne Netzwerk, ohne Schreibzugriff auf den Bestand.
+  --selftest Selbsttest, ohne Netzwerk, ohne Schreibzugriff auf den Bestand.
 
 Nutzung:
     python3 scripts/newsletter_digest.py --check
@@ -153,6 +153,86 @@ def assert_worktree(root: str) -> None:
                          "Schreibzugriff verweigert (Schutz vor Selbsttest-Unfällen).")
 
 
+DS_REL = os.path.join("content", "datenschutz", "index.md")
+
+
+def _ds_laden(pub: str, root: str) -> tuple[str, str]:
+    """Den Rechtstext laden: gebautes HTML, sonst Fallback auf die Markdown-Quelle.
+
+    → (text, herkunft) mit herkunft „html", „quelle" oder „fehlend".
+    Der Fallback schließt den stillen Freispruch: ohne Hugo-Build (Sandbox,
+    Check vor dem ersten Build) war die Zeichenkette leer – 0 geprüfte
+    Zeichen, 0 Funde, grün. Ausgefallen ist nicht bestanden: wenn beides
+    fehlt, meldet die Wache `ds-fehlt`, statt im Leerlauf grün zu leuchten.
+    """
+    ds = _read(os.path.join(pub, "datenschutz", "index.html"))
+    if ds.strip():
+        return ds, "html"
+    qu = _read(os.path.join(root, DS_REL))
+    if qu.strip():
+        return qu, "quelle"
+    return "", "fehlend"
+
+
+def _ds_abschnitt(ds: str, herkunft: str) -> str | None:
+    """Den Newsletter-Abschnitt aus dem Rechtstext herausschneiden.
+
+    → None, wenn keine Überschrift den Abschnitt nennt („fehlt"), sonst den
+    Abschnitts-Text – der auch leer sein kann („halbfertig"). Die beiden
+    Zustände sind verschiedene Befunde: aus einem fehlenden Rechtstext und
+    einem halbfertigen darf nicht derselbe Fund werden.
+    """
+    if herkunft == "html":
+        heads = list(re.finditer(r"(?i)<h([1-3])(?:\s[^>]*)?>(.*?)</h\1\s*>", ds))
+        for m in heads:
+            if "newsletter" not in m.group(2).lower():
+                continue
+            stufe = int(m.group(1))
+            nach = ds[m.end():]
+            m2 = re.search(r"(?i)<h[1-" + str(stufe) + r"](?=[\s>])", nach)
+            return nach[: m2.start()] if m2 else nach
+        return None
+    # Markdown-Quelle: Abschnitt = Zeilen bis zur nächsten gleichrangigen
+    # oder höheren Überschrift.
+    zeilen = ds.splitlines()
+    start, stufe = None, 0
+    for i, zeile in enumerate(zeilen):
+        m = re.match(r"^(#{1,4})\s+(.*)$", zeile)
+        if m and "newsletter" in m.group(2).lower():
+            start, stufe = i + 1, len(m.group(1))
+            break
+    if start is None:
+        return None
+    for j in range(start, len(zeilen)):
+        m = re.match(r"^(#{1,4})\s", zeilen[j])
+        if m and len(m.group(1)) <= stufe:
+            return "\n".join(zeilen[start:j])
+    return "\n".join(zeilen[start:])
+
+
+def _platzhalter(abschnitt: str | None) -> list[str]:
+    """Vorlagen-Reste: Klammern im Abschnitts-Text, ausgenommen Markdown-Links.
+
+    Die Vorlage (docs/NEWSLETTER-RECHTSTEXT-VORLAGE.md) verlangt: keine
+    Klammer darf im Live-Text übrig bleiben. Im gebauten HTML sind
+    Markdown-Links <a>-Tags, dort ist jede Klammer ein Rest; in der Quelle
+    ist „[Text](Ziel)" der legale Träger – nur „[Text]" ohne Ziel ist ein
+    ungefüllter Pflichtwert.
+    """
+    if not abschnitt:
+        return []
+    return re.findall(r"\[([^\[\]]+)\](?!\()", abschnitt)
+
+
+def _platzhalter_meldung(platz: list[str]) -> str:
+    einzig = sorted(set(platz))
+    stuecke = ", ".join(f"„{p}“" for p in einzig[:5])
+    mehr = f" (+{len(einzig) - 5} weitere)" if len(einzig) > 5 else ""
+    return ("der Newsletter-Rechtstext enthält Vorlagen-Reste in Klammern: "
+            + stuecke + mehr + " – keine Klammer darf im Live-Text übrig bleiben "
+            "(Vorlage: docs/NEWSLETTER-RECHTSTEXT-VORLAGE.md)")
+
+
 # -------------------------------------------------------------------------- --check
 def pruefe_capture(root: str, offentlich: str = "") -> tuple[list, list, str]:
     """→ (Funde, Hinweise, Zustand: inert|aktiv|kaputt)"""
@@ -164,16 +244,21 @@ def pruefe_capture(root: str, offentlich: str = "") -> tuple[list, list, str]:
     seite = _read(os.path.join(pub, "newsletter", "index.html"))
     footer = _read(os.path.join(pub, "index.html"))
 
-    ds = _read(os.path.join(pub, "datenschutz", "index.html"))
+    ds, ds_herkunft = _ds_laden(pub, root)
     # Ein Newsletter-Abschnitt gilt als vorhanden, wenn eine Überschrift ihn nennt.
     # Ein Anker (`id="newsletter"`) wird nicht verlangt – verlinkt wird ohne
     # Fragment, damit der Link trägt, auch wenn die Ziffer der Überschrift wandert.
-    ds_hinweis = bool(re.search(r"(?i)<h[23][^>]*>[^<]*newsletter", ds or ""))
+    ds_abschnitt = _ds_abschnitt(ds, ds_herkunft)
     ds_widerspruch = bool(re.search("(?i)(derzeit|zurzeit|aktuell) keinen newsletter"
-                                    "|bietet[^.]{0,60}keinen newsletter", ds or ""))
+                                    "|bietet[^.]{0,60}keinen newsletter", ds))
+    ds_platz = _platzhalter(ds_abschnitt)
 
     if not action and not url:
         # Leerzustand ist erlaubt, aber er darf keine leeren Versprechen erzeugen.
+        if ds_herkunft == "fehlend":
+            funde.append(("N7", "die Datenschutzerklärung existiert weder gebaut "
+                                "(public/) noch als Quelle (content/) – die Prüfung "
+                                "ist ausgefallen, nicht bestanden", "ds-fehlt"))
         if ds_widerspruch:
             # Noch kein Fund: solange kein Formular läuft, ist „bietet derzeit
             # keinen Newsletter an" die Wahrheit. Der Widerspruch entsteht erst mit
@@ -184,6 +269,8 @@ def pruefe_capture(root: str, offentlich: str = "") -> tuple[list, list, str]:
                                "Formulars wird daraus ein Widerspruch; vorher "
                                "ersetzen (docs/NEWSLETTER-RECHTSTEXT-VORLAGE.md)",
                         "ds-widerspruch-vorstudie"))
+        if ds_platz:
+            funde.append(("N7", _platzhalter_meldung(ds_platz), "ds-platzhalter"))
         wirbt = [f for f in glob.glob(os.path.join(pub, "**", "index.html"), recursive=True)
                  if re.search(r"Newsletter abonnieren|Newsletter-Anmeldung", _read(f))]
         if wirbt or "newsletter-footer" in footer:
@@ -247,12 +334,24 @@ def pruefe_capture(root: str, offentlich: str = "") -> tuple[list, list, str]:
         funde.append(("N6", "Capture konfiguriert, aber im Footer nirgends verlinkt "
                             "– die Liste wächst nie, weil niemand den Weg sieht",
                       "cta-versteckt"))
-    if not ds_hinweis:
+    if ds_herkunft == "fehlend":
+        funde.append(("N7", "die Datenschutzerklärung existiert weder gebaut "
+                            "(public/) noch als Quelle (content/datenschutz/index.md) "
+                            "– die Prüfung ist ausgefallen, nicht bestanden",
+                      "ds-fehlt"))
+    elif ds_abschnitt is None:
         funde.append(("N7", "datenschutz/-Seite hat keinen Newsletter-Abschnitt "
                             "(Anlass, Double-Opt-In-Nachweis, Speicherdauer, Widerruf) "
                             "– Capture ohne Rechtstext ist der Grund, warum "
                             "Formulare abgemahnt werden; Vorlage: "
                             "docs/NEWSLETTER-RECHTSTEXT-VORLAGE.md", "rechtstext"))
+    elif not ds_abschnitt.strip():
+        funde.append(("N7", "Newsletter-Abschnitt hat eine Überschrift, aber keinen "
+                            "Text – ein halbfertiger Rechtstext ist ein anderer "
+                            "Befund als ein fehlender; Vorlage: "
+                            "docs/NEWSLETTER-RECHTSTEXT-VORLAGE.md", "ds-leer"))
+    elif ds_platz:
+        funde.append(("N7", _platzhalter_meldung(ds_platz), "ds-platzhalter"))
     if ds_widerspruch:
         funde.append(("N7", "Formular ist geschaltet, die Datenschutzerklärung "
                             "behauptet aber, es gebe „derzeit keinen Newsletter"
@@ -336,6 +435,15 @@ def _selftest() -> int:
     import shutil
     import tempfile
     fehler: list = []
+    zaehler = 0
+
+    def pruefe(bedingung: bool, meldung: str) -> None:
+        nonlocal zaehler
+        if bedingung:
+            zaehler += 1
+        else:
+            fehler.append(meldung)
+
     HEUTE_FIX = datetime.date.today()
     tmp = tempfile.mkdtemp(prefix="newsletter-selftest-")
     global TRANSPORT
@@ -343,7 +451,8 @@ def _selftest() -> int:
     try:
         def baum(root: str, params_toml: str, *, seite_extra: str = "",
                  footer_extra: str = "newsletter-CTA", datenschutz: str = "",
-                 workflow: str = "x", artikel: list | None = None):
+                 workflow: str = "x", artikel: list | None = None,
+                 ds_md: str = ""):
             os.makedirs(os.path.join(root, "layouts", "shortcodes"), exist_ok=True)
             os.makedirs(os.path.join(root, "public", "newsletter"), exist_ok=True)
             os.makedirs(os.path.join(root, "public", "datenschutz"), exist_ok=True)
@@ -374,37 +483,43 @@ def _selftest() -> int:
                 with open(os.path.join(d, "index.md"), "w", encoding="utf-8") as fh:
                     fh.write(f"---\ntitle: {slug}\ndate: {dat}\n"
                              f"description: Beschreibung {slug}\ndraft: {draft}\n---\nText\n")
+            if ds_md:
+                d = os.path.join(root, "content", "datenschutz")
+                os.makedirs(d, exist_ok=True)
+                with open(os.path.join(d, "index.md"), "w", encoding="utf-8") as fh:
+                    fh.write(ds_md)
 
-        # 1) INERT: nichts konfiguriert, nirgends wird geworben
+        # 1–3) INERT: nichts konfiguriert, nirgends wird geworben
         r1 = os.path.join(tmp, "inert")
         os.makedirs(os.path.join(r1, ".github", "workflows"), exist_ok=True)
         baum(r1, "", footer_extra="", datenschutz="<p>Newsletter: Widerruf jederzeit.</p>")
         f, n, z = pruefe_capture(r1)
-        if z != "inert" or f or not any(x[2] == "inert" for x in n):
-            fehler.append(f"Leerzustand meldet nicht sauber INERT: {z} {f} {n}")
+        pruefe(z == "inert", f"Leerzustand meldet {z} statt inert: {f} {n}")
+        pruefe(not f, f"Leerzustand meldet Funde: {f}")
+        pruefe(any(x[2] == "inert" for x in n), "Leerzustand meldet den Code inert nicht")
 
-        # 2) totes Versprechen: wirbt, aber kein Weg konfiguriert
+        # 4) totes Versprechen: wirbt, aber kein Weg konfiguriert
         with open(os.path.join(r1, "public", "index.html"), "w", encoding="utf-8") as fh:
             fh.write("<html>Jetzt Newsletter abonnieren</html>")
         f2, _, z2 = pruefe_capture(r1)
-        if not any(c == "config-widerspruch" for _, _, c in f2):
-            fehler.append(f"toter Werbe-Link ohne Anmeldung bleibt unsichtbar: {f2}")
+        pruefe(any(c == "config-widerspruch" for _, _, c in f2),
+               f"toter Werbe-Link ohne Anmeldung bleibt unsichtbar: {f2}")
 
-        # 3) http-Endpunkt + Rechtstext fehlt -> Funde, kein Grün
+        # 5–7) http-Endpunkt + Rechtstext nirgends -> Funde, kein Grün
         r3 = os.path.join(tmp, "kaputt")
         os.makedirs(os.path.join(r3, ".github", "workflows"), exist_ok=True)
         baum(r3, 'newsletterFormAction = "http://form.example.de/x"\n',
              datenschutz="")
         f3, _, z3 = pruefe_capture(r3)
         codes = {c for _, _, c in f3}
-        for erwartet in ("form-http", "rechtstext"):
-            if erwartet not in codes:
-                fehler.append(f"konfigurierte, aber rechtlich offene Kette meldet "
-                              f"{erwartet} nicht: {sorted(codes)}")
-        if z3 != "kaputt":
-            fehler.append("Zustand nach Funden nicht kaputt")
+        pruefe("form-http" in codes,
+               f"http-Endpunkt meldet form-http nicht: {sorted(codes)}")
+        pruefe("ds-fehlt" in codes,
+               f"Rechtstext weder gebautes HTML noch Quelle meldet ds-fehlt "
+               f"nicht (ausgefallen ist nicht bestanden): {sorted(codes)}")
+        pruefe(z3 == "kaputt", f"Zustand nach Funden nicht kaputt: {z3}")
 
-        # 4) saubere Kette: https, Feldname, DOI, Rechtstext, CTA, Workflow
+        # 8–9) saubere Kette: https, Feldname, DOI, Rechtstext, CTA, Workflow
         r4 = os.path.join(tmp, "gut")
         os.makedirs(os.path.join(r4, ".github", "workflows"), exist_ok=True)
         baum(r4, 'newsletterFormAction = "https://l.brevo.com/landing/x"\n'
@@ -413,51 +528,88 @@ def _selftest() -> int:
                       ("2026-01-01-alt-1", datetime.date(2026, 1, 1), "false"),
                       ("2026-09-11-draft-1", HEUTE_FIX, "true")],
              seite_extra='<form action="https://l.brevo.com/landing/x"><input name="email">',
-             datenschutz="<h2 id=\"newsletter\">Newsletter</h2>",
+             datenschutz='<h2 id="newsletter">Newsletter</h2>'
+                         '<p>Double-Opt-In, Widerruf formlos, Loeschung 30 Tage.</p>',
              workflow="BREVO_API_KEY\n--strict-inert\n",
              footer_extra="newsletter-footer")
         f4, n4, z4 = pruefe_capture(r4)
-        if f4:
-            fehler.append(f"saubere Kette meldet Funde: {f4}")
-        if z4 != "aktiv":
-            fehler.append(f"gesunde Kette gilt nicht als aktiv: {z4}")
+        pruefe(not f4, f"saubere Kette meldet Funde: {f4}")
+        pruefe(z4 == "aktiv", f"gesunde Kette gilt nicht als aktiv: {z4}")
 
-        # 5) Digest-Bau + Duplikat-Schutz über den State
+        # 10–11) Quell-Fallback: kein Build (public/-Seite weg), Markdown trägt
+        r5 = os.path.join(tmp, "quelle")
+        os.makedirs(os.path.join(r5, ".github", "workflows"), exist_ok=True)
+        baum(r5, 'newsletterFormAction = "https://l.brevo.com/landing/x"\n',
+             datenschutz="",
+             ds_md="## 8. Newsletter\n\nAnmeldung über [die Anmeldeseite]"
+                   "(/newsletter/), Double-Opt-In, Widerruf formlos.\n")
+        os.remove(os.path.join(r5, "public", "datenschutz", "index.html"))
+        f5, _, z5 = pruefe_capture(r5)
+        codes5 = {c for _, _, c in f5}
+        pruefe(not ({"ds-fehlt", "rechtstext", "ds-leer"} & codes5),
+               f"Quell-Fallback liest den Rechtstext aus content/ nicht: "
+               f"{sorted(codes5)}")
+        pruefe("ds-platzhalter" not in codes5,
+               f"Markdown-Link wird als Platzhalter geschrien: {sorted(codes5)}")
+
+        # 12) Platzhalter-Rest im Live-Text -> Fund ds-platzhalter
+        r6 = os.path.join(tmp, "platzhalter")
+        os.makedirs(os.path.join(r6, ".github", "workflows"), exist_ok=True)
+        baum(r6, 'newsletterFormAction = "https://l.brevo.com/landing/x"\n',
+             datenschutz="",
+             ds_md="## 8. Newsletter\n\nSpeicherdauer: [30] Tage, Widerruf an "
+                   "[deine Adresse].\n")
+        os.remove(os.path.join(r6, "public", "datenschutz", "index.html"))
+        f6, _, z6 = pruefe_capture(r6)
+        codes6 = {c for _, _, c in f6}
+        pruefe("ds-platzhalter" in codes6,
+               f"Platzhalter-Rest im Live-Text meldet ds-platzhalter nicht: "
+               f"{sorted(codes6)}")
+
+        # 13) Überschrift da, Abschnitt leer -> eigener Befund, kein rechtstext
+        r7 = os.path.join(tmp, "leer")
+        os.makedirs(os.path.join(r7, ".github", "workflows"), exist_ok=True)
+        baum(r7, 'newsletterFormAction = "https://l.brevo.com/landing/x"\n',
+             datenschutz='<h2 id="newsletter">Newsletter</h2>')
+        f7, _, z7 = pruefe_capture(r7)
+        codes7 = {c for _, _, c in f7}
+        pruefe("ds-leer" in codes7 and "rechtstext" not in codes7,
+               f"halbfertiger Abschnitt und fehlende Überschrift fallen "
+               f"zusammen: {sorted(codes7)}")
+
+        # 14–16) Digest-Bau + Duplikat-Schutz über den State
         heute = datetime.date.today()
         artikel = live_artikel(r4, heute - datetime.timedelta(days=3))
-        if [a["slug"] for a in artikel] != ["2026-09-11-neu-1"]:
-            fehler.append(f"Digest-Auswahl falsch: {[a['slug'] for a in artikel]}")
+        pruefe([a["slug"] for a in artikel] == ["2026-09-11-neu-1"],
+               f"Digest-Auswahl falsch: {[a['slug'] for a in artikel]}")
         html, text, anzahl = baue_digest(artikel, heute.isoformat(), "Eine Mail/Tag")
-        if not (anzahl == 1 and "neu-1" in html and "{unsubscribe}" in text
-                and "Rechnung öffnen" in html):
-            fehler.append(f"Digest-Inhalt unvollständig ({anzahl})")
+        pruefe(anzahl == 1 and "neu-1" in html and "{unsubscribe}" in text
+               and "Rechnung öffnen" in html,
+               f"Digest-Inhalt unvollständig ({anzahl})")
         leeren = baue_digest([], heute.isoformat(), "x")
-        if leeren[2] != 0 or leeren[0]:
-            fehler.append("Digest ohne Artikel erzeugt leere Mail")
+        pruefe(leeren[2] == 0 and not leeren[0],
+               "Digest ohne Artikel erzeugt leere Mail")
 
-        # 6) Versand-Verriegelung: ohne Bestätigung und ohne Key kein Netz
+        # 17–19) Versand-Verriegelung: ohne Bestätigung und ohne Key kein Netz
         def spy(api_key, pfad, payload):
             aufgerufen.append((api_key, pfad))
             return 201, '{"id": 42}'
         TRANSPORT = spy
         rc = versende(r4, html, text, "FranksFinanzcheck", dry_run=True)
-        if aufgerufen or rc != 0:
-            fehler.append(f"--dry-run fasst das Netz an (rc={rc})")
+        pruefe(not aufgerufen and rc == 0, f"--dry-run fasst das Netz an (rc={rc})")
+        aufgerufen.clear()
         rc2 = versende(r4, html, text, "X", dry_run=False, test_adresse="")
-        if aufgerufen:
-            fehler.append("Versand ohne Secrets/Bestätigung hat das Netz berührt")
-        if rc2 == 0:
-            fehler.append("Versand ohne Brevo-Zugang meldet Erfolg")
+        pruefe(not aufgerufen and rc2 != 0,
+               "Versand ohne Secrets/Bestätigung berührt das Netz oder meldet Erfolg")
         speichere_state(r4, {"pending": [a["slug"] for a in artikel]})
         os.environ["BREVO_API_KEY"] = "key"
         os.environ["BREVO_LIST_ID"] = "7"
         os.environ["NEWSLETTER_SEND"] = "ja"
         rc3 = versende(r4, html, text, "X", dry_run=False)
-        if not aufgerufen or rc3 != 0:
-            fehler.append(f"verscharfter Versand läuft nicht durch (rc={rc3})")
         state = lade_state(r4)
-        if state.get("versandene_artikel", [])[-1:] != ["2026-09-11-neu-1"]:
-            fehler.append(f"State protokolliert die Artikel nicht: {state}")
+        pruefe(bool(aufgerufen) and rc3 == 0
+               and state.get("versandene_artikel", [])[-1:] == ["2026-09-11-neu-1"],
+               f"verscharfter Versand läuft nicht durch (rc={rc3}): {state}")
         TRANSPORT = brevo
     except Exception as exc:  # noqa: BLE001
         import traceback
@@ -473,8 +625,9 @@ def _selftest() -> int:
         for e in fehler:
             print("  -", e)
         return 2
-    print("✅ Newsletter-Selbsttest: 6 Fälle grün (INERT, totes Versprechen, http, "
-          "Rechtstext, Digest, Versand-Verriegelung).")
+    print(f"✅ Newsletter-Selbsttest: {zaehler} Fälle grün (INERT, totes "
+          f"Versprechen, http + ds-fehlt, saubere Kette, Quell-Fallback, "
+          f"Platzhalter, halbfertiger Abschnitt, Digest, Versand-Verriegelung).")
     return 0
 
 
