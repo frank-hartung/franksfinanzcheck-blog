@@ -35,6 +35,21 @@
        (?v=<SHA>-Cache-Busting). fonts.googleapis.com + fonts.gstatic.com
        sind komplett eliminiert (kein Render-Blocking). */ -}}
 
+{{- /* ---------- PWA: Manifest + iOS-Startbildschirm (Premium-Audit 11.09.2026)
+       Die Site registriert einen Service Worker, hatte aber kein Manifest –
+       damit gab es nie einen Install-Dialog und auf iOS keinen Vollbild-Start.
+       manifest.json und die Icons werden deterministisch aus hugo.toml erzeugt:
+       scripts/generate_pwa_icons.py (Prüfung: schema_seo_gate.py S11). */ -}}
+<link rel="manifest" href="{{ "manifest.json" | relURL }}">
+<meta name="application-name" content="{{ site.Title }}">
+{{- if not site.Params.disableAppleMeta }}
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Finanzcheck">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+{{- end }}
+{{- /* theme-color kommt bereits aus PaperMod (mit Light-/Dark-Variante) –
+       hier extra zu setzen wäre ein doppeltes Meta-Tag. */ -}}
+
 {{- /* ---------- Consent-Banner: LCP-/CLS-optimierte Anzeige ---------- */ -}}
 <script>
 (function () {

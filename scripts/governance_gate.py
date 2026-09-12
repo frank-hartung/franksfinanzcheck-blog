@@ -74,6 +74,8 @@ STEPS = {
     # --report LESBARKEIT-REPORT.md (read_avg = Ø < 62, read_floor = Artikel
     # < 55). Exit-Code allein wäre „exit_only“ (Info) – deshalb der Report.
     "lesbarkeit": {"report": "LESBARKEIT-REPORT.md", "label": "Lesbarkeits-Wache (Bestand)"},
+    "live-policy": {"report": "LIVE-POLICY-REPORT.md",
+                    "label": "Live-Konsistenz (Cloudflare/CDN)"},
     "scorecard": {"report": "EDITORIAL-SCORECARD.md", "label": "Chefredakteur-Scorecard"},
 }
 

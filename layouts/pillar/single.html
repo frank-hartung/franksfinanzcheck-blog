@@ -1,6 +1,18 @@
 {{- define "main" }}
 
 <article class="post-single">
+  {{- /* PREMIUM-AUDIT 11.09.2026 · Pin-It auch auf den 6 RINGEN:
+         Der Pin-It-Button hing bisher ausschließlich an layouts/single.html
+         (Section „posts"). Die Ratgeber-Seiten – die wertvollsten URLs der
+         Site und die einzigen mit Cluster-Charakter – hatten keinen. Damit
+         lief der komplette Viral-Loop (Leser pinnt → Rich-Pin-Signal →
+         Pinterest-Reichweite) an 6 von 6 Themenwelten vorbei; und seit dem
+         Domain-Spam-Claim ist jeder organische Pin bares Geld wert.
+         Gleiche Bedingung wie bei den Posts: echtes Cover als Pin-Bild
+         (2:3), kein Entwurf. */ -}}
+  {{- if and (not .Draft) .Params.cover.image }}
+  {{ partial "pin_button.html" (slice "float" .) }}
+  {{- end }}
   <header class="post-header">
     <nav class="breadcrumbs" aria-label="Breadcrumb" style="font-size:.85em; margin-bottom:12px; color:#666;">
       <a href="{{ "/" | relURL }}" style="color:#0E5A43; text-decoration:none;">Start</a>
@@ -125,6 +137,10 @@
   {{ partial "extend_post_content.html" . }}
 
   <footer class="post-footer">
+    {{- /* Pin-It am Ende des Ratgebers (Mobile: der einzige Pin-Anfasser) */ -}}
+    {{- if and (not .Draft) .Params.cover.image }}
+    <div class="ff-pin-footer" style="margin:4px 0 14px;">{{ partial "pin_button.html" (slice "footer" .) }}</div>
+    {{- end }}
     {{- $tags := .Language.Params.Taxonomies.tags | default "tags" }}
     <ul class="post-tags">
       {{- range ($.GetTerms $tags) }}

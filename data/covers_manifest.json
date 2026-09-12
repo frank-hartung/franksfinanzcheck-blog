@@ -560,5 +560,68 @@
    "badge": "INTERNET & DSL",
    "savings": ""
   }
+ },
+ "pillar-frugalismus": {
+  "title": "Frugalismus & Budget: Der große Ratgeber für finanzielle Freiheit",
+  "ts": "2026-09-11T22:56:42+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "pillar-internet-dsl": {
+  "title": "Internet, DSL & Mobilfunk: Der große Ratgeber für schnelles Netz",
+  "ts": "2026-09-11T22:56:45+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "pillar-konto-karten": {
+  "title": "Konto & Karten: Der große Ratgeber für gebührenfreie Finanzen",
+  "ts": "2026-09-11T22:56:48+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "pillar-mietwagen": {
+  "title": "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen",
+  "ts": "2026-09-11T22:56:52+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "pillar-strom-sparen": {
+  "title": "Strom & Gas sparen: Der große Ratgeber für niedrige Energiekosten",
+  "ts": "2026-09-11T22:56:55+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "pillar-versicherungen": {
+  "title": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
+  "ts": "2026-09-11T22:56:58+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
+ },
+ "brand-franksfinanzcheck": {
+  "title": "FranksFinanzcheck – Geld sparen leicht gemacht",
+  "ts": "2026-09-11T23:07:35+00:00",
+  "design": {
+   "v": 3,
+   "badge": "FRUGALISMUS · TARIFE · VERSICHERUNGEN",
+   "savings": ""
+  }
  }
 }

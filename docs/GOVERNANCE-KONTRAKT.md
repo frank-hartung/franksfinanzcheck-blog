@@ -1,6 +1,6 @@
 # 🔒 Governance-Vertrag (automatisch geprüft)
 
-**Stand:** 2026-09-07 · erzeugt von `scripts/governance_contract.py` · geprüft in `link-check.yml` (Qualitäts-Gate) und als Preflight in `premium-governance.yml`.
+**Stand:** 2026-09-12 · erzeugt von `scripts/governance_contract.py` · geprüft in `link-check.yml` (Qualitäts-Gate) und als Preflight in `premium-governance.yml`.
 
 Dieser Vertrag hält die Regeln fest, die den Dauer-Alarm aus Governance-Report #206 ermöglicht haben. Jede Verletzung ist ein Build-Fehler.
 
@@ -18,6 +18,7 @@ Dieser Vertrag hält die Regeln fest, die den Dauer-Alarm aus Governance-Report 
 - **C10 Token-Broker** – Alle Pinterest-Skripte holen ihren Token über den Broker `scripts/pinterest_token.py` – eine Reihenfolge, ein Failover, und die Wache prüft denselben Token, mit dem der Bot arbeitet (#206).
 - **C11 Token-Lebenszyklus** – Es gibt einen täglichen Erneuerungslauf (`pinterest-token.yml`), der den rotierten Refresh-Token sichert, sich selbst testet und sein Issue bei Heilung schließt – ein Handbetriebs-Secret stirbt sonst alle 30 Tage.
 - **C12 Label-Garantie** – Jeder Workflow, der Issues mit Label erzeugt, legt das Label vorher an – sonst scheitert die Meldung mit HTTP 422 und der Melder wird selbst zum Zwischenfall (#209).
+- **C13 Nachweis-Echtheit** – Ein Pinterest-Nachweis läuft immer mit Live-Probe (`--verify`), nur die Token-Wache rotiert den Refresh-Token proaktiv, und die Autorisierung fordert die echten v5-Scopes – sonst steht `unverified` im Cockpit, während niemand gemessen hat (#219).
 
 ## Befund
 

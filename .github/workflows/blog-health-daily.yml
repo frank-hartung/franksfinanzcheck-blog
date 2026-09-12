@@ -56,6 +56,27 @@ jobs:
       - run: python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate – Funde im Log (R5 heilt nicht automatisch)"
       - run: python3 scripts/check_covers.py --fix || echo "⚠ Cover-Gate – Funde im Log"
 
+      # ASSET-HEILUNG (Premium-Audit 11.09.2026): die Ratgeber-Seiten (pillar/*)
+      # hatten gar keine Covers – og:image, Pin-It-Button und LCP-Bild fehlten
+      # auf den wichtigsten Landingpages. generate_covers.py --pillars erzeugt
+      # sie offline nach demselben Marken-Design wie die Artikelfcover (inkl.
+      # 14 Varianten + cover:-Frontmatter mit preload: false, weil das
+      # Pillar-Template das Cover nicht rendert). Der Lauf ist idempotent und
+      # heilt damit auch nach einem manuellen Eingriff am nächsten Tag zurück.
+      - run: python3 scripts/generate_covers.py --pillars || echo "⚠ Pillar-Cover – Funde im Log"
+      # PWA-Grundlagen: Manifest + Icons werden aus hugo.toml abgeleitet – ohne
+      # sie bleibt der registrierte Service Worker ohne Install-Prompt.
+      - run: python3 scripts/generate_pwa_icons.py --selftest
+      - run: python3 scripts/generate_pwa_icons.py || echo "⚠ PWA-Manifest/Icons – nichtkritisch"
+
+      # ROOT-HYGIENE (12.09.2026): generierte Reports, die niemand liest, fliegen aus
+      # dem Index (Datei bleibt auf der Platte, .gitignore deckt sie bereits), und
+      # von Hand geschriebene Root-Berichte wandern nach docs/. Vor dem git add -A
+      # unten, damit die Index-Änderung im selben Commit landet. Wache:
+      # scripts/report_hygiene.py (--check prüft, --apply heilt).
+      - run: python3 scripts/report_hygiene.py --selftest
+      - run: python3 scripts/report_hygiene.py --apply || echo "⚠ Report-Hygiene – Restfunde im Log"
+
       # DRAFT-LINK-GATE (PREM-AUDIT 26.08.2026): heilt auch ZWISCHEN den
       # Publishing-Slots tote Post-Links (Kadenz-Heilung → URL weg aus dem
       # Build → kontextuelle Links defekt; Issue #85). Ankertext bleibt 1:1.

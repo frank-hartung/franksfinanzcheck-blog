@@ -82,6 +82,16 @@ jobs:
       - name: Governance-Vertrag prüfen (C1–C9)
         run: python3 scripts/governance_contract.py --quick --md docs/GOVERNANCE-KONTRAKT.md
 
+      - name: Report-Hygiene (Root bleibt sortenrein)
+        # Wöchentliche Einordnung der Root-Reports: ci-dashboard | doku |
+        # maschinen-muell | verwaist. Kein harter Fehler – der wöchentliche
+        # Checkpunkt soll den Fund zeigen, die Heilung passiert täglich in
+        # blog-health-daily.yml (dort auch im selben Commit).
+        run: |
+          python3 scripts/report_hygiene.py --selftest
+          python3 scripts/report_hygiene.py --check \
+            || echo "::warning::Root-Reports ohne Einordnung – heilen mit: python3 scripts/report_hygiene.py --apply"
+
       - name: Ledger zurücksetzen (nur dieser Lauf zählt)
         run: python3 scripts/governance_gate.py --reset
 
@@ -204,6 +214,26 @@ jobs:
             --log /tmp/awin.log --exit "$rc"
 
       # ---------- 2) SEHEN (direkt nach dem Messen – die Sicht braucht frische Werte) ----------
+      - name: "Live-Konsistenz (Cloudflare, CDN-Cache, Auslieferung)"
+        id: live_policy
+        # Kein Blick ins Repo, sondern auf die Antwort des Servers: robots.txt,
+        # Der Report bleibt ein Lauf-Artefakt (Root-Regel in .gitignore) – der
+        # dauerhafte Nachweis sitzt im Ledger-Event data/governance_history.jsonl.
+        # Ein erzwungenes `git add` hier wäre genau die Root-Müll-Quelle, die
+        # scripts/report_hygiene.py sonst wegräumt.
+        # Sitemap, canonical/og:image/JSON-LD einer Live-Seite, HTTP-Umleitung,
+        # Manifest-MIME. Der Lauf gilt nur mit Erreichbarkeit (--require-live);
+        # die Messbarkeits-Lücke selbst bleibt Info, echte Drift ist ROT.
+        run: |
+          set +e
+          python3 scripts/live_policy_guard.py --selftest >> /tmp/live_policy.log 2>&1 \
+            && python3 scripts/live_policy_guard.py --require-live \
+                 --report LIVE-POLICY-REPORT.md | tee -a /tmp/live_policy.log
+          rc=${PIPESTATUS[0]}
+          set -e
+          python3 scripts/governance_gate.py --emit live-policy --report LIVE-POLICY-REPORT.md \
+            --log /tmp/live_policy.log --exit "$rc"
+
       - name: Chefredakteur-Scorecard
         id: scorecard
         run: |

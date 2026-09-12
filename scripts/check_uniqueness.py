@@ -19,6 +19,7 @@ Nutzung:
     python3 scripts/check_uniqueness.py            # alle Artikel prüfen
     python3 scripts/check_uniqueness.py --strict   # strengere Schwelle (5-Wort-Phrasen)
     python3 scripts/check_uniqueness.py --sameday --fix  # Geburts-Modus (Engine)
+    python3 scripts/check_uniqueness.py --selftest       # nur Sabotage-Schutz (Wachen-Loop)
 """
 import os
 import re
@@ -80,6 +81,19 @@ def clean_body(content):
 def ngrams(text, n):
     words = re.findall(r"\w+", norm(text))
     return set(" ".join(words[i:i + n]) for i in range(len(words) - n + 1))
+
+
+def _slug(path):
+    """Lesbarer Artikelname statt abgeschnittener Pfad.
+
+    Der Report druckte `path[:32]` – bei absoluten Pfaden zeigte damit JEDES
+    Paar „/home/user/franksfinanzcheck-blo" und der Fund war unbrauchbar: man
+    sah, DASS etwas doppelt ist, aber nicht WELCHE Artikel. Bei einer Wache,
+    deren Ausgabe der Redakteur abarbeitet, ist das der Unterschied zwischen
+    Werkzeug und Attrappe.
+    """
+    base = os.path.splitext(os.path.basename(path))[0]
+    return base if base and base != "index" else os.path.basename(os.path.dirname(path))
 
 
 def load_pinterest_plan():
@@ -172,6 +186,27 @@ def run_selftest() -> list:
         got = same_day_twin(a, b)
         if got != want:
             fehler.append(f"  Fall {i}: erwartet „{want}“, bekam „{got}“  ← {a[:40]!r} ↔ {b[:40]!r}")
+    # Der Report-Teil: Slugs lesbar + geteilte Phrasen realmente bestimmbar.
+    # Beides ist der Grund, warum der Report überhaupt abarbeitbar ist; ohne diese
+    # zwei Fälle könnte die Wache wieder „/home/user/franksfinanzcheck-blo …“ als
+    # Fund ausgeben und der Satz „1 Überlappung“ bliebe unbenannt.
+    for pfad, erwartet in (("/repo/content/posts/2026-08-17-gasvergleich/index.md",
+                             "2026-08-17-gasvergleich"),
+                            ("/repo/content/posts/2026-08-17-gasvergleich.md",
+                             "2026-08-17-gasvergleich"),
+                            ("content/posts/2026-09-11-stromfresser/index.md",
+                             "2026-09-11-stromfresser")):
+        if _slug(pfad) != erwartet:
+            fehler.append(f"  _slug({pfad!r}) = {_slug(pfad)!r}, erwartet {erwartet!r}")
+    a = "Heizung laufen lassen und Strom sparen jeden Monat mit diesen Tipps"
+    b = "So Heizung laufen lassen und Strom sparen jeden Monat ohne Folgeschäden"
+    gem = ngrams(a, PHRASE_LEN) & ngrams(b, PHRASE_LEN)
+    if "heizung laufen lassen und strom sparen jeden" not in gem:
+        fehler.append("  geteilte Sieben-Wort-Phrase wird nicht gefunden – der "
+                      "Report könnte ‚Überlappung‘ wieder ohne Beleg drucken")
+    fremd = ngrams("völlig andere Formulierung ohne Bezug", PHRASE_LEN) & ngrams(a, PHRASE_LEN)
+    if fremd:
+        fehler.append(f"  fremde Texte werden als überlappend gemeldet: {sorted(fremd)[:1]}")
     return fehler
 
 
@@ -210,7 +245,14 @@ def main():
         print("   Kein Audit, keine Heilung. Bitte same_day_twin() prüfen:")
         print("\n".join(fehler))
         sys.exit(2)
-    print(f"✅ Selbsttest: {len(SELFTEST_SAMEDAY)} Twin-Faelle stimmen.")
+    print(f"✅ Selbsttest: {len(SELFTEST_SAMEDAY)} Twin-Faelle + Slug-/Gram-Report-Pinne stimmen.")
+    # --selftest ist der Eintrittspunkt des Wachen-Loops (link-check.yml) und von
+    # governance_contract C6: hier ends the run – der Selbsttest prüft die Logik,
+    # nicht den Bestand. Sonst hinge ein grüner Selbsttest davon ab, ob gerade
+    # jemand zwei Artikel ähnlich geschrieben hat (und ein roter von einem Fund,
+    # für den es ein eigenes Gate gibt).
+    if "--selftest" in sys.argv:
+        return
 
     strict = "--strict" in sys.argv
     do_fix = "--fix" in sys.argv
@@ -283,7 +325,8 @@ def main():
         hits = len(my_grams & ref_grams)
         if hits > max_sim:
             pin_problems += 1
-            print(f"  ⚠️ {fn[:45]}: {hits} gleiche Phrasen mit Pin (Tag {pin.get('tag')})")
+            print(f"  ⚠️ {_slug(fn)}: {hits} gleiche Phrasen mit Pin "
+                  f"(Tag {pin.get('tag')})")
     if not pin_problems:
         print("  ✅ Alle Artikel einzigartig gegenüber den Pin-Texten")
 
@@ -299,9 +342,16 @@ def main():
             internal += 1
             if overlap >= 5:
                 critical += 1
-                print(f"  🚨 KRITISCH {a[:32]} ↔ {b[:32]}: {overlap} gleiche Phrasen")
+                print(f"  🚨 KRITISCH {_slug(a)} ↔ {_slug(b)}: {overlap} gleiche "
+                      f"{n}-Wort-Phrasen")
+                # Die betroffenen Passagen gleich mit ausgeben: „irgendwas ist
+                # doppelt" wird in der Redaktion umformuliert, indem man rät –
+                # mit den konkreten Ketten ist der Fix 10 Minuten Arbeit.
+                for gram in sorted(grams[a] & grams[b])[:8]:
+                    print(f"       · {gram}")
             else:
-                print(f"  ℹ️ unkritisch {a[:32]} ↔ {b[:32]}: {overlap} Phrasen (Standard-Formulierungen)")
+                print(f"  ℹ️ unkritisch {_slug(a)} ↔ {_slug(b)}: {overlap} Phrasen "
+                      f"(Standard-Formulierungen)")
     if not internal:
         print("  ✅ Keine internen Duplikate")
     else:

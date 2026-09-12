@@ -104,6 +104,16 @@ PILLAR_DEEP = {
     "versicherungen": None,  # partner-versicherung.de mit eigenem Deep (siehe TARIF_DEEP)
 }
 
+# 12.09.2026: Der Pillar „strom-sparen“ heißt intern „Strom & Gas“ (pinwand:
+# „Strom & Gas sparen | Tarife clever wechseln"). Ein Heizungs- oder
+# Gastarif-Artikel in diesem Pillar verlinkt korrekt /go/gas/ – die Erwartung
+# „Stromtarif-Vergleich" war damit ein Mapping-Fehler der Wache, nicht des
+# Artikels (derselbe Fall wie das Kreditkarten-Mapping vom 08.09.2026, Zeile 66).
+# Erlaubt ist deshalb die ganze Produktfamilie des Pillars; ein generischer
+# Link ohne Deep bleibt ein Fehler, und fix_post zielt weiter auf den Primär-Deep.
+PILLAR_DEEP_ALT = {
+    "strom-sparen": [("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich")],
+}
 # Pillar-Seiten (content/pillar/<slug>/index.md) → erwarteter Deep-Link
 PILLAR_PAGE_DEEP = {
     "strom-sparen": ("stromanbieter-wechseln&cat=1", "Stromtarif-Vergleich"),
@@ -243,7 +253,20 @@ def check_post(post):
 
     if art == "check24":
         expected_url = f"{CHECK24}&deep={deep}"
-        if not any(expected_url in l or l == expected_url for l in links):
+        getroffen = any(expected_url in l or l == expected_url for l in links)
+        if not getroffen:
+            for alt_deep, alt_name in PILLAR_DEEP_ALT.get(post["pillar"], ()):
+                alt_url = f"{CHECK24}&deep={alt_deep}"
+                if any(alt_url in l for l in links):
+                    problems.append({
+                        "severity": "info",
+                        "msg": ("Deep-Link aus der Produktfamilie des Pillars "
+                               f"„{post['pillar']}“: {alt_name} statt {name} – "
+                               "thematisch passend, kein Fehler"),
+                    })
+                    getroffen = True
+                    break
+        if not getroffen:
             problems.append({
                 "severity": "error",
                 "msg": f"Fehlt der passende Deep-Link: {expected_url} (erwartet: {name})",

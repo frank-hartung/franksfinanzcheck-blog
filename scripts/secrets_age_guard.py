@@ -629,6 +629,65 @@ def classify(var, meta, ent, today=None, verification=None, live_check_available
                f"die Live-Probe läuft im Premium-Governance-Workflow"})
 
 
+# ---------------------------------------------------------------- OAuth-Empfänger
+OAUTH_SEITE = os.path.join(BLOG_DIR, "static", "pinterest-oauth.html")
+OAUTH_ZWILLING = os.path.join(BLOG_DIR, "static", "pinterest-oauth", "index.html")
+# Was die Seite können muss, damit die Handlungsanweisung aus #246 funktioniert.
+OAUTH_MARKEN = (("URLSearchParams", "liest den code-Parameter nicht (der Code "
+                 "landet nirgends – Kopieren unmöglich)"),
+                ("opy", "kein Kopierweg (clipboard-Knopf oder select-all) – "
+                 "manuelles Abtipieren eines 200-Zeichen-Codes ist der übliche Fehler"),
+                ("noindex", "Seite ist indexierbar – Autorender-Links gehören "
+                 "nicht in Suchmaschinen (meta robots noindex)"))
+
+
+def oauth_empfaenger_findings(pruef_pfad: str = "", zwilling_pfad: str = "") -> list:
+    """Prüft den Empfänger der Pinterest-Rückleitung – die Empfehlung muss helfen.
+
+    Der Fund `manual_token` (und jeder #246-Lauf) schickt den Betreiber auf
+    /pinterest-oauth.html: dort liegt der `?code=…` aus der Pinterest-Umleitung,
+    von dort wandert er in den Workflow-Input `auth_code`. Diese Seite ist der
+    EINZIGE Weg zurück in den Auto-Betrieb. Fällt sie weg – Aufräumen im static/-
+    Baum, ein Build-Filter, ein Umbau der Verzeichnisstruktur –, bleibt der
+    Kanal tot, während die Wache parallel einen toten Link empfiehlt. Das ist
+    die klassische Schein-Sicherheit: Anleitung vorhanden, Ausführung unmöglich.
+
+    Bewusst syntaktisch geprüft (kein Build, kein Netz): der Fehler ist genau
+    dann da, wenn gerade niemand hinsieht, und die Prüfung muss in jedem Lauf
+    laufen können – auch offline im Selbsttest.
+    """
+    haupt = pruef_pfad or OAUTH_SEITE
+    zwil = zwilling_pfad or OAUTH_ZWILLING
+    out = []
+    if not os.path.isfile(haupt):
+        return [{"level": "red", "code": "oauth_page_missing",
+                 "var": "PINTEREST_ACCESS_TOKEN",
+                 "msg": "Empfänger-Seite der Pinterest-Rückleitung fehlt "
+                        f"(`static/{os.path.basename(os.path.dirname(haupt))}/…` bzw. "
+                        "pinterest-oauth.html) – die Neu-Autorisierung aus #246 "
+                        "läuft ins Leere"}]
+    try:
+        with open(haupt, encoding="utf-8") as fh:
+            text = fh.read()
+    except OSError as exc:
+        return [{"level": "red", "code": "oauth_page_missing",
+                 "var": "PINTEREST_ACCESS_TOKEN",
+                 "msg": f"Empfänger-Seite ist nicht lesbar ({exc.strerror})"}]
+    for marke, grund in OAUTH_MARKEN:
+        if marke not in text:
+            out.append({"level": "red", "code": "oauth_page_incomplete",
+                        "var": "PINTEREST_ACCESS_TOKEN",
+                        "msg": f"pinterest-oauth.html: {grund}"})
+    if not os.path.isfile(zwil):
+        out.append({"level": "amber", "code": "oauth_page_zwilling",
+                    "var": "PINTEREST_ACCESS_TOKEN",
+                    "msg": "Zwilling `static/pinterest-oauth/index.html` fehlt – "
+                           "Pinterest leitet auf /pinterest-oauth/ (mit Slash) um, "
+                           "ohne ihn gibt es 404 statt Code"})
+    return out
+
+
+
 def pinterest_lifecycle_findings(health, token_dead=False):
     """Vorwarnung statt Nachruf: Was passiert mit dem Zugang in den nächsten Tagen?
 
@@ -689,6 +748,7 @@ def audit(verification=None, live_check_available=False, pin_health=None):
     if pin_health is None and _present("PINTEREST_ACCESS_TOKEN"):
         pin_health = _pinterest_health(verify=False)     # ohne Netz, nur Bestand
     findings += pinterest_lifecycle_findings(pin_health, token_dead=token_dead)
+    findings += oauth_empfaenger_findings()
     return findings, summary
 
 
@@ -777,6 +837,13 @@ def render_report(findings, summary, verification=None, pin_health=None):
         recs.append("**Handbetrieb beenden:** Solange nur `PINTEREST_ACCESS_TOKEN` "
                     "existiert, stirbt der Kanal alle 30 Tage erneut. Einmalig "
                     f"Auto-Erneuerung scharfschalten: `{PIN_RUNBOOK}`.")
+    if any(f["code"] in ("oauth_page_missing", "oauth_page_incomplete",
+                         "oauth_page_zwilling") for f in findings):
+        recs.append("**Empfänger der Rückleitung reparieren:** die Neu-Autorisierung "
+                    "führt über `static/pinterest-oauth.html` (Code lesen + Kopierknopf"
+                    ") und dessen Zwilling `static/pinterest-oauth/index.html`. Ohne "
+                    "diese Seiten ist jeder Anleitungs-Link aus #246 tot – erst "
+                    "reparieren, dann autorisieren.")
     if any(f["code"] == "refresh_rotation" for f in findings):
         recs.append("**Erneuerungs-Lauf prüfen:** Der Refresh-Token rotiert nach 60 "
                     "Tagen. Läuft `pinterest-token.yml` täglich? "
@@ -935,6 +1002,28 @@ def _selftest():
         if pinterest_lifecycle_findings(live_manual, token_dead=True):
             failures.append("toter Kanal erzeugt zusätzlich einen Lebenszyklus-Befund "
                             "(Doppel-Alarm)")
+        # --- OAuth-Empfänger: die Handlungsanweisung muss ausführbar bleiben
+        if oauth_empfaenger_findings():
+            failures.append("intakter Pinterest-Code-Empfänger meldet Befunde "
+                            "(die Wache wäre bei #246 störend, nicht helfend): "
+                            f"{oauth_empfaenger_findings()}")
+        if not oauth_empfaenger_findings(pruef_pfad=os.path.join(
+                os.sep, "gibt", "es", "nicht", "pinterest-oauth.html")):
+            failures.append("fehlende Empfänger-Seite bleibt unsichtbar – die "
+                            "Anweisung aus #246 führte ins Leere")
+        import tempfile as _tf
+        with _tf.TemporaryDirectory() as _td:
+            _bl = os.path.join(_td, "pinterest-oauth.html")
+            with open(_bl, "w", encoding="utf-8") as _fh:
+                _fh.write("<html><body><p>Umgebaut, ohne Code-Leserei</p></body></html>")
+            _f = oauth_empfaenger_findings(
+                pruef_pfad=_bl, zwilling_pfad=os.path.join(_td, "weg", "index.html"))
+            if len([x for x in _f if x["code"] == "oauth_page_incomplete"]) != 3:
+                failures.append("stumpfe Empfänger-Seite wird nicht vollständig "
+                                f"benannt: {[x['code'] for x in _f]}")
+            if not any(x["code"] == "oauth_page_zwilling" for x in _f):
+                failures.append("fehlender Zwilling bleibt ungemeldet (404 für "
+                                "Pinterests Umleitung mit Slash)")
         # --- Broker-Ausfall darf die Wache nicht mitreißen
         if pinterest_lifecycle_findings(None):
             failures.append("fehlendes Lagebild erzeugt Phantom-Befunde")

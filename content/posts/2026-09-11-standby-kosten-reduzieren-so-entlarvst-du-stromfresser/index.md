@@ -81,7 +81,7 @@ Zahlen liefern oft die beste Motivation für eine Verhaltensänderung. Betrachte
 Stellen wir uns vor, deine Standby-Verbraucher summieren sich auf 40 Watt.
 - 40 Watt * 24 Stunden = 960 Wattstunden pro Tag (knapp 1 kWh).
 - 1 kWh pro Tag * 365 Tage = 365 kWh pro Jahr.
-- Bei einem Strompreis von ca. 0,40 € pro kWh ergibt das **jährliche Kosten von rund 146 €**.
+- Mit dem aktuellen Schnitt von 0,40 € je Kilowattstunde ergibt das **einen Jahresbetrag von rund 146 €**.
 
 Diese 146 € zahlst du jedes Jahr für absolut keine Leistung. Senkst du diesen Wert durch schaltbare Leisten auf 5 Watt, sparst du über 120 € pro Jahr. Das entspricht einem guten Abendessen oder einem Versicherungsbeitrag. Jedes eingesparte Watt reduziert deine Rechnung um ca. 3,50 € bis 4,00 € pro Jahr.
 
@@ -115,7 +115,7 @@ Willst du deine Kosten senken, brauchst du eine klare Struktur. Folge diesen ein
 5. **Smarte Hilfe:** Nutze Zeitschaltuhren für schwer zugängliche Steckdosen.
 6. **Tarif optimieren:** Senke zusätzlich den Preis pro Kilowattstunde durch einen Wechsel.
 
-Oft ist der Stromtarif selbst dein größter Hebel für Ersparnisse. Wer seit Jahren beim Grundversorger bleibt, zahlt meist viel zu hohe Preise. Ein schneller Vergleich bewirkt hier oft mehr als das Ziehen vieler Stecker. Prüfe deine aktuellen Konditionen und wechsle zu einem günstigeren Anbieter.
+Oft ist der Stromtarif selbst dein größter Hebel für Ersparnisse. Viele Haushalte harren jahrelang beim Grundversorger aus und zahlen dort deutlich mehr, als ihr Tarif wert ist. Ein schneller Vergleich bewirkt hier oft mehr als das Ziehen vieler Stecker. Prüfe deine aktuellen Konditionen und wechsle zu einem günstigeren Anbieter.
 
 **Hier kannst du direkt prüfen, wie viel du sparen könntest: [Stromanbieter vergleichen und wechseln](/go/strom/) {rel="sponsored"}.**
 

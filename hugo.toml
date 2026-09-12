@@ -42,6 +42,15 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   home = ["HTML", "RSS", "SWJS"]  # RSS = Pinterest-Feed unter /index.xml
   section = ["HTML"]              # keine Sektions-Feeds (nur der Home-Feed)
   page = ["HTML"]
+  # PREMIUM-AUDIT 11.09.2026: Taxonomie-Archive bekamen je einen eigenen
+  # RSS-Feed – 116 zusätzliche Feeds (1 pro Tag), jeder mit ein und demselben
+  # Artikel. Das ist Crawl-Rauschen (Google sieht Duplikat-Feeds), kostet
+  # Build-Zeit und widerspricht der Entscheidung „nur der Home-Feed".
+  # Die Tag-/Kategorieseiten selbst bleiben erhalten (interne Verlinkung),
+  # werden aber in head.html auf noindex, follow gestellt und aus der
+  # Sitemap genommen (layouts/sitemap.xml, Wache: schema_seo_gate.py S6).
+  taxonomy = ["HTML"]
+  term = ["HTML"]
 
 # RSS-Feed: letzte 50 Artikel (deckt alle Publikationen ab;
 # Pinterest pinnt beim ersten Verbinden die vorhandenen Artikel einmalig)
@@ -60,6 +69,16 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   description = "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
   keywords = ["Geld sparen", "Frugalismus", "Budgetplanung", "Stromvergleich", "Gasvergleich", "DSL vergleichen", "Kfz-Versicherung", "Sparen"]
   author = "Frank Hartung"
+  # SITE-WEITES Social-Fallback-Bild (Premium-Audit 11.09.2026).
+  # Startseite, /ueber/ und die Rechtsseiten haben kein Cover – damit fiel
+  # auf der meistgeteilten URL (Home) og:image UND twitter:image komplett weg:
+  # Pinterest, Facebook und LinkedIn zeigten nur einen Text-Kasten. Hugo nutzt
+  # site.Params.images automatisch als Fallback in _funcs/get-page-images; das
+  # Bild entsteht wie die Artikelfcover durch scripts/generate_covers.py
+  # (2:3, 1000x1500, gleiche Marke) und wird von der Wache eingefordert (S5).
+  images = ["images/covers/brand-franksfinanzcheck.jpg"]
+  # Alt-Text des Site-Fallback-Bildes (og:image:alt) – konkret, nicht generisch.
+  ogImageAlt = "FranksFinanzcheck: unabhÃ¤ngige Spar-Ratgeber mit echten Euro-BetrÃ¤gen"
   DateFormat = "02.01.2006"
   defaultTheme = "auto"
   disableThemeToggle = true
@@ -77,7 +96,18 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   mastodonUrl    = "https://mastodon.social/@FranksFinanzcheck"
   mastodonUser   = "@FranksFinanzcheck@mastodon.social"
   # URL des gehosteten Brevo-Anmeldeformulars (leer = Button unsichtbar):
+  # Newsletter (12.09.2026): der Anmeldeweg der Site liegt in
+  # layouts/shortcodes/newsletter_form.html, die Landingpage in content/newsletter/.
+  # Zwei Wege, beide erlaubt – der Shortcode entscheidet nach dieser Reihenfolge:
+  #   newsletterFormAction  echtes Inline-Formular (POST, Feld `email`) an den
+  #                       gehosteten Brevo-/Formular-Endpunkt
+  #   newsletterFormUrl     Button zum gehosteten Formular (Link, kein Feld)
+  # Beides leer = kein Capture: der Footer-CTA verschwindet, die Landingpage zeigt
+  # den Leerzustand, und scripts/newsletter_digest.py --check meldet laut „nicht
+  # geschaltet" (damit „keine Anmeldung" nie mit „Alles in Ordnung" verwechselt wird).
   newsletterFormUrl = ""
+  newsletterFormAction = ""
+  newsletterPromise = "Eine Mail pro Werktag: die Sparechnungen des Tages, sonst nichts."
   bingVerify = "5079875E367065FE09E09FC61BC077C6"
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 

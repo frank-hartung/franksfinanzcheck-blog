@@ -22,7 +22,8 @@ keywords: ["Privathaftpflicht", "Privathaftpflichtversicherung", "Haftpflichtver
 pin_title: "Privathaftpflicht: Warum sie unverzichtbar ist"
 pin_description: "*Werbung | Ein unachtsamer Moment, ein Millionenschaden: Die Privathaftpflicht ist die wichtigste Versicherung überhaupt. Hier lernst du, welche Schäden sie abdeckt und wie du Top-Schutz ab rund 35 Euro im Jahr findest. Jetzt lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
----Ein kurzer Moment der Unachtsamkeit kann dein [finanzielles](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Fundament zerstören. Du übersiehst als Fußgänger einen Radfahrer. Er stürzt schwer. Oder du stößt im Freundeskreis ein teures Gerät um.
+---
+Ein kurzer Moment der Unachtsamkeit kann dein [finanzielles](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Fundament zerstören. Du übersiehst als Fußgänger einen Radfahrer. Er stürzt schwer. Oder du stößt im Freundeskreis ein teures Gerät um.
 
 Nach dem Bürgerlichen Gesetzbuch (§ 823 BGB) musst du Schäden ersetzen, die du verschuldet hast. Und zwar unbegrenzt: mit deinem Vermögen, deinem Lohn und deinen künftigen Einkünften. Die **Privathaftpflicht** ist darum die wichtigste Versicherung überhaupt. Worauf es ankommt und wie du gut und günstig versichert bist, erfährst du hier.
 

@@ -1,0 +1,50 @@
+{{- /* ============================================================
+    sitemap_lastmod.html – Deterministisches Aktualisierungs-Datum
+    ------------------------------------------------------------
+    Liefert das Datum, das Google als „zuletzt redaktionell geändert"
+    gemeldet wird (YYYY-MM-DD).
+
+    Regel (Premium-Audit 11.09.2026):
+      1. `lastmod:` im Frontmatter  → ehrliches Redaktionsdatum
+         (wird von scripts/set_lastmod.py nach echten Inhaltsänderungen
+          gesetzt und von der DOKTOR-Kette gepflegt)
+      2. kein lastmod              → Publikationsdatum (.Date)
+      3. kein Datum überhaupt      → Stand des neuesten Artikels
+         (Start-, Sammel- und Rechtsseiten haben .Date = 0001-01-01;
+          genau dieser Wert stand bisher in der Sitemap.)
+
+    Bewusst NICHT benutzt: .Lastmod. Ohne Punkt 1 fällt Hugo darauf zurück,
+    und der ist im CI die Datei-Mtime des Checkouts = Build-Zeitpunkt. Ein
+    Deploy-Lauf pro Push hätte so täglich ein Update vorgetäuscht
+    (Sitemap-lastmod UND Article:dateModified) – Frische-Inflation, die
+    Google mit sinkendem Crawl-Vertrauen quittiert.
+
+    Zwei Schutzclipps: ein lastmod VOR dem Publikationsdatum (Tippfehler)
+    wird ignoriert, ein in der Zukunft liegendes Datum auf heute begrenzt.
+    ISO-Daten sind lexikografisch vergleichbar – keine Zeitzone nötig.
+    Geprüft von scripts/schema_seo_gate.py (S7).
+============================================================ */ -}}
+{{- $page  := . -}}
+{{- $heute := now.Format "2006-01-02" -}}
+{{- $pub   := "" -}}
+{{- with $page.Date.Format "2006-01-02" -}}
+  {{- if not (hasPrefix . "0001") -}}{{- $pub = . -}}{{- end -}}
+{{- end -}}
+{{- if not $pub -}}
+  {{- $nach := site.RegularPages.ByDate -}}
+  {{- if gt (len $nach) 0 -}}
+    {{- with index $nach (sub (len $nach) 1) -}}{{- $pub = .Date.Format "2006-01-02" -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $pub -}}{{- $pub = $heute -}}{{- end -}}
+{{- $lm := "" -}}
+{{- with $page.Params.lastmod -}}
+  {{- $s := printf "%.10s" (printf "%v" .) -}}
+  {{- if findRE `^\d{4}-\d{2}-\d{2}$` $s -}}{{- $lm = $s -}}{{- end -}}
+{{- end -}}
+{{- /* lastmod VOR dem Publikationsdatum = Tippfehler → Datum der Veröffentlichung */ -}}
+{{- if and $lm $pub (lt $lm $pub) -}}{{- $lm = $pub -}}{{- end -}}
+{{- if not $lm -}}{{- $lm = $pub -}}{{- end -}}
+{{- if gt $lm $heute -}}{{- $lm = $heute -}}{{- end -}}
+{{- $lm -}}
+

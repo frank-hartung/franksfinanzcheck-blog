@@ -1,14 +1,10 @@
 # 🔐 INTEGRITY-REPORT
 
-**Stand:** 2026-09-11 18:14 UTC · HEAD: `1f39225`
-**Verlade-Ebene:** 42 Dateien gelockt
+**Stand:** 2026-09-12 00:32 UTC · HEAD: `8ec9d8e`
+**Lock-Ebene:** 42 Dateien gelockt
 **Gesperrte kritische Knoten:** 7
 
+🎉 Integritaet: Der Kern entspricht exakt dem letzten signierten Zustand.
 
-## 🟠 Festrelevante Abweichungen
-
-- `layouts/_partials/home_clusters.html`
-- `layouts/pillar/list.html`
-- `scripts/internal_linker.py`
 ---
-_Selbsttest vor jedem Start. Kritisch unterschreitet und Frank heißt Schritt._
+_Der Selbsttest läuft vor jedem Check. Ein kritischer Befund stoppt den Schritt – neu signieren (--set-current) oder Änderung zurücknehmen._

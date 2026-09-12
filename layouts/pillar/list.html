@@ -285,36 +285,31 @@
   </div>
 </section>
 
-{{- /* ---------- CollectionPage + ItemList Schema.org JSON-LD ---------- */ -}}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "Ratgeber: Die großen Sparthemen im Überblick",
-  "description": "Die großen Spar-Ratgeber von FranksFinanzcheck: Strom & Gas sparen, Internet & DSL, Versicherungen, Konto & Karten, Frugalismus und Mietwagen.",
-  "url": {{ .Permalink | jsonify }},
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "FranksFinanzcheck",
-    "url": {{ site.BaseURL | jsonify }}
-  },
-  "mainEntity": {
-    "@type": "ItemList",
-    "itemListElement": [
-      {{- range $i, $p := $pillars }}
-      {{- with site.GetPage (printf "pillar/%s" $p) }}
-      {{- if $i }},{{ end }}
-      {
-        "@type": "ListItem",
-        "position": {{ add $i 1 }},
-        "name": {{ .Title | plainify | jsonify }},
-        "url": {{ .Permalink | jsonify }}
-      }
-      {{- end }}
-      {{- end }}
-    ]
-  }
-}
-</script>
+{{- /* ---------- CollectionPage + ItemList Schema.org JSON-LD ----------
+     PREMIUM-FIX (Audit 11.09.2026): wie in schema_article.html. Der Altblock
+     war handgebaut und rief `{{ .Permalink | jsonify }}` innerhalb eines
+     <script>-Tags auf. Hugos kontextsensitiver Escaper behandelt den
+     Ausgabeort <script> als JS-Kontext und setzt das bereits geparste JSON
+     NOCH EINMAL in Quotes → `"url": "\"https://…\""`. Google sah invalid
+     URLs und (bei `name`) Titel mit literalen Anführungszeichen.
+     Jetzt: ein dict → `| jsonify | safeJS`, exakt ein Escaping.
+     Dauerhaft geprüft von scripts/schema_seo_gate.py (S1/S2). */ -}}
+{{- $items := slice -}}
+{{- range $i, $p := $pillars -}}
+  {{- with site.GetPage (printf "pillar/%s" $p) -}}
+    {{- $items = $items | append (dict "@type" "ListItem" "position" (add $i 1)
+         "name" (.Title | plainify | htmlUnescape) "url" .Permalink) -}}
+  {{- end -}}
+{{- end -}}
+<script type="application/ld+json">{{ (dict
+  "@context" "https://schema.org"
+  "@type" "CollectionPage"
+  "@id" (printf "%s#ratgeber-liste" .Permalink)
+  "name" "Ratgeber: Die großen Sparthemen im Überblick"
+  "description" "Die großen Spar-Ratgeber von FranksFinanzcheck: Strom & Gas sparen, Internet & DSL, Versicherungen, Konto & Karten, Frugalismus und Mietwagen."
+  "url" .Permalink
+  "isPartOf" (dict "@type" "WebSite" "name" site.Title "url" site.BaseURL)
+  "mainEntity" (dict "@type" "ItemList" "numberOfItems" (len $items) "itemListElement" $items)
+) | jsonify | safeJS }}</script>
 
 {{- end }}{{/* end main */}}

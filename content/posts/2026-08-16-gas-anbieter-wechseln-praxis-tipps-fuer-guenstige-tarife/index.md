@@ -23,7 +23,8 @@ pin_title: "Gas-Anbieter wechseln: So sparst du bis zu 680 Euro"
 pin_description: "*Werbung | Gaswechsel leicht gemacht: Preisgarantie, Kündigungsfristen und die Fallstricke im Kleingedruckten. Mit diesen Praxis-Tipps wechselst du stressfrei und sparst bis zu 680 Euro bei den Heizkosten. Jetzt die 10-Minuten-Anleitung lesen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_image: "images/pins/premium-pin-gaswechsel-882-euro.jpg"
----Die Gaspreise ändern sich oft. Trotzdem bleiben viele im teuren Tarif des Stadtwerks. Dabei ist der Wechsel einfach. Er senkt deine Fixkosten deutlich.
+---
+Die Gaspreise ändern sich oft. Trotzdem bleiben viele im teuren Tarif des Stadtwerks. Dabei ist der Wechsel einfach. Er senkt deine Fixkosten deutlich.
 
 Wer seinen **Gas-Anbieter wechselt**, spart viel Geld. Eine Familie mit 20.000 kWh spart **im ersten Jahr bis zu 882 €**. Auch ohne Bonus bleiben **700 € bis 775 €** pro Jahr.
 

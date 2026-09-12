@@ -101,10 +101,28 @@ def generate_go_pages(reg: dict) -> int:
     trägt ?subid=<artikelslug>. Das kleine JS liest diese aus location.search und
     hängt sie vor dem Weiterleiten als &subid= an die Affiliate-URL. Fallback
     (kein JS): die Meta-Refresh auf {url} bleibt byte-identisch = check_gateway
-    (registry URL als Substring) und noindex/Sponsored bleiben unangetastet."""
+    (registry URL als Substring) und noindex/Sponsored bleiben unangetastet.
+
+    PREMIUM-FIX (12.09.2026, zwei Funde im Audit-Nachlauf):
+    1) Kein `rel=canonical` auf die Awin-Klick-URL. Eine Weiterleitung, die
+       zugleich noindex trägt UND kanonisch auf den Werbelink zeigt, ist
+       widersprüchlich: Google ignoriert das canonical zwar (noindex gewinnt),
+       aber Crawler, Sitemap-Tools und KI-Systeme lesen die Tracking-URL als
+       offizielle Adresse der Seite – und die Domain bekommt einen
+       Werbe-Link als Selbstbeschreibung. canonical gehört auf eine
+       Weiterleitung grundsätzlich nicht hin.
+    2) `fuer dich kostenlos` → `für dich kostenlos`: der Umlaut-Fehler stand
+       auf 19 Übergabeseiten im sichtbaren Text – genau dem Satz, den ein
+       Nutzer beim Wechseln liest (UWG-Transparenzline).
+    Zusätzlich: viewport-Meta (die Seiten werden mobil geöffnet, bis dahin
+    zoomte der Browser die Absatzeile auf 200 %) und ein ehrlicher
+    Hinweis, dass es sich um eine Weiterleitung mit Partnerlink handelt.
+    Registrierung/Pflichtteile (noindex, refresh, subid-Script) unverändert.
+    """
     GO_DIR.mkdir(parents=True, exist_ok=True)
     count = 0
     tpl = """<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <script>
 // Awin-SubID-Förderung (Klicks→Umsatz per Artikel, 01.09.2026): Der /go/-Link am
@@ -122,13 +140,12 @@ def generate_go_pages(reg: dict) -> int:
 })();
 </script>
 <meta http-equiv="refresh" content="0; url={url}">
-<link rel="canonical" href="{url}">
 <title>Weiter zu {zielname} | FranksFinanzcheck</title>
 </head><body style="font-family:sans-serif;text-align:center;padding:60px 20px;color:#19324c">
 <p>Du wirst zu <strong>{zielname}</strong> weitergeleitet …</p>
 <h1 style="font-size:20px">FranksFinanzcheck</h1>
 <p><a href="{url}" style="background:#0f6049;color:#fff;padding:12px 26px;border-radius:8px;text-decoration:none;font-weight:600">Falls nicht automatisch: weiter zu {zielname}</a></p>
-<p style="color:#798897;font-size:12px;margin-top:40px">Partnerlink (Werbung). Wir erhalten ggf. eine Provision – fuer dich kostenlos.</p>
+<p style="color:#798897;font-size:12px;margin-top:40px">Partnerlink (Werbung). Wir erhalten ggf. eine Provision – für dich kostenlos. Es ändert sich nichts am Preis, nur die Seite wechselt.</p>
 </body></html>
 """
     for key, url in reg.items():

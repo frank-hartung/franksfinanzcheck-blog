@@ -9,6 +9,11 @@ categories: ["Ratgeber"]
 build:
   list: never
 keywords: ["Versicherungen vergleichen", "Privathaftpflicht", "Hausratversicherung", "Wohngebäudeversicherung", "Kfz-Versicherung"]
+cover:
+  image: "images/covers/pillar-versicherungen.jpg"
+  alt: "Versicherungen: Der große Ratgeber für den richtigen Schutz"
+  caption: "Kompletter Ratgeber von FranksFinanzcheck"
+  preload: false   # Bild liefert og:image, nicht den LCP
 ---
 Beim Thema Versicherungen machen viele Verbraucher einen von zwei kostspieligen Fehlern: Entweder sind sie für viel Geld gegen Bagatellschäden überversichert, oder es fehlen elementare Policen gegen existenzbedrohende Risiken. Aus meiner langjährigen Praxis als kritischer Verbraucher gilt der eiserne Grundsatz: **Versichere nur Schäden, die deinen finanziellen Ruin bedeuten würden.** Die gute Nachricht: Wer die wenigen Pflicht-Policen richtig wählt, spart gegenüber dem üblichen Rundum-Sorglos-Paket oft hunderte Euro pro Jahr – und schläft trotzdem besser.
 

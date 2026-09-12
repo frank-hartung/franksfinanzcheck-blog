@@ -1,10 +1,10 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-09-10 08:33:26 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-09-11 23:34:36 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 28 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 19
+**Geprüfte Live-Artikel:** 31 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 19
 
-**Build:** public/ aktuell (kein Rebuild nötig)
+**Build:** public/ veraltet → Hugo-Rebuild
 
 🎉 Alle CTA-Boxen sind strukturell intakt, jedes Linkziel ist in `scripts/check24_links.yaml` registriert, jeder Link erscheint tatsächlich im gebauten HTML (AI4) und jede `/go/`-Seite leitet auf die registrierte Partner-URL weiter (AI5).
 
@@ -40,6 +40,9 @@
 | 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum | 3 → 3 ✅ | /go/allgemein/ |
 | 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler | 3 → 3 ✅ | /go/allgemein/ |
 | 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster | 3 → 4 ✅ | /go/tagesgeld/ |
+| 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer | 1 → 3 ✅ | /go/gas/ |
+| 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser | 3 → 4 ✅ | /go/strom/ |
+| 2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich | 2 → 3 ✅ | /go/dsl/ |
 
 ## Hinweise (nicht blockierend)
 
@@ -49,6 +52,7 @@
 - 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub: 5 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
 - 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet: 4 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
 - 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster: 4 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
+- 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser: 4 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
 
 ---
 _Defekte CTA-Boxen werden NIE per Text-Patch geflickt, sondern komplett neu aus den geprüften Vorlagen (affiliate_marketer.py) generiert; nicht registrierte Linkziele werden auf die thematisch korrekte Route umgeroutet. Bestandsartikel werden nie gelöscht. Detektor-Selbsttest: `python3 scripts/affiliate_integrity_gate.py --selftest`._

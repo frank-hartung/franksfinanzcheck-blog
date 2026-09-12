@@ -75,3 +75,50 @@ Disallow: /go/
 User-agent: Pinterestbot
 Allow: /
 Disallow: /go/
+
+# ============================================================
+#  KI-SICHTBARKEIT – Antwortmaschinen ja, Trainings-Fresser nein
+#  (Premium-Audit 11.09.2026, Frank-Hartung-Policy)
+#  ------------------------------------------------------------
+#  Der Cloudflare-Block oben sperrt pauschal alle KI-Crawler. Für eine
+#  Ratgeber-Seite, deren Traffic zu 100 % aus Suche und Pinterest kommt,
+#  ist das ein Einnahmen-Verzicht: AI Overviews, ChatGPT-Search, Perplexity
+#  und Co. verlinken nur, was sie lesen dürfen – und „verlinkbar sein" ist
+#  2026 der teuerste Hebel im Affiliate-SEO.
+#
+#  Diese Site differenziert deshalb nach ZWECK statt nach Firma:
+#    ERLAUBT  = nutzerseitig ausgelöste Abrufe (Antwort/Verweis, kein Korpus)
+#    GESPERRT = Massen-Sauger für Modell-Training (bleiben zu, siehe oben)
+#  Wer das komplett sperren will: die sieben User-agent-Gruppen unten löschen.
+#  Die Wache (scripts/schema_seo_gate.py, S8) prüft den Zustand und meldet
+#  beides sauber – Freigabe als INFO, Sperre als Hinweis, nie als stiller Defekt.
+#  Die Content-Signale oben (search=yes, ai-train=no, use=reference) bleiben
+#  unverändert gültig: zitieren ja, trainieren nein, nicht horten.
+# ============================================================
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /go/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /go/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /go/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /go/
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /go/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /go/
+
+User-agent: meta-externalfetcher
+Allow: /
+Disallow: /go/

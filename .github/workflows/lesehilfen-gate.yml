@@ -184,6 +184,23 @@ jobs:
       - name: Toolbar-, Barrierefreiheits- & Rückbau-Wache
         run: python3 scripts/ff_voice_toolbar_check.py
 
+      # ---- Abdeckung: wer hat eine Studio-Tonspur, wer nutzt die Gerätestimme? ----
+      # Zählt NICHT static/audio im Quell-Repo (dort liegt nur ein Handwerks-
+      # stück), sondern die Tonspuren auf dem Pages-Zweig – die einzige Zahl,
+      # die für Leser zählt. Lücken sind kein Gate-Fehler: der Reader fällt
+      # bewusst auf die Gerätestimme zurück. Der Hinweis nennt die Artikel, die
+      # der nächste Deploy mit audio_backfill=true vertont.
+      - name: Studio-Audio-Abdeckung (gh-pages vs. Live-Bestand)
+        continue-on-error: true
+        run: |
+          python3 scripts/audio_coverage_check.py --selftest
+          python3 scripts/audio_coverage_check.py --ref origin/gh-pages \
+            | tee /tmp/audio_coverage.log
+          python3 scripts/audio_coverage_check.py --ref origin/gh-pages --strict \
+            && echo "✅ vollständig" >> "$GITHUB_STEP_SUMMARY" \
+            || { echo "## 🎧 Studio-Audio-Lücke" >> "$GITHUB_STEP_SUMMARY"; \
+                 sed -n '1,20p' /tmp/audio_coverage.log >> "$GITHUB_STEP_SUMMARY"; }
+
       # ---- Diagnose (kein Deploy-Stopp): welche Engines wären verfügbar? ----
       - name: TTS-Engines im CI (Diagnose)
         run: python3 scripts/ff_voice_audio.py --engines || true

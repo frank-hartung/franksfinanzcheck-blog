@@ -1,9 +1,40 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-{{- if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
+{{- /* ============================================================
+     Indexierungs-Steuerung (Premium-Audit 11.09.2026)
+     ------------------------------------------------------------
+     Der alte Code kannte nur „production → index, follow". Damit waren
+     drei Seitenklassen mit indexiert, die einer kleinen Seite das
+     Ranking kosten:
+       · 115 Tag-Archive + 1 Kategorie-Archiv – jedes mit genau EINEM
+         Artikel. Das sind Duplikate der Artikel-Seite (Thin/Doorway-
+         Signal) und sie standen zusätzlich in der Sitemap.
+       · Paginierungs-Seiten (/page/2/ …) – identische Listen-Ausschnitte.
+       · 404.html – Hugo baut sie als normale Seite, also „index, follow".
+     Neu: Archive bleiben CRAWLBAR und werden auf noindex, follow gestellt
+     (nur so sieht Google das noindex und vererbt Linkkraft an die Artikel),
+     die 404 wird komplett aus der Indexierung genommen.
+     Paginierungs-Kopien (/page/2/ …) sind bereits durch ihr selbst-
+     referenzierendes canonical auf die Basis-Seite konsolidiert; der
+     Regex unten fängt zusätzlich alle Fälle, in denen .RelPermalink den
+     /page/-Pfad trägt.
+     Abgesichert durch scripts/schema_seo_gate.py (S6).
+     ============================================================ */ -}}
+{{- $prod     := hugo.IsProduction | or (eq site.Params.env "production") -}}
+{{- $archiv   := or (eq .Kind "term") (eq .Kind "taxonomy") -}}
+{{- $pager    := findRE `/page/\d+/?$` .RelPermalink -}}
+{{- $notFound := hasPrefix .RelPermalink "/404" -}}
+{{- $explicit := eq .Params.robotsNoIndex true -}}
+{{- if and $prod (not $explicit) (not $notFound) -}}
+  {{- if $archiv -}}
+<meta name="robots" content="noindex, follow">
+  {{- else if $pager -}}
+<meta name="robots" content="noindex, follow">
+  {{- else -}}
 <meta name="robots" content="index, follow">
-{{- else }}
+  {{- end -}}
+{{- else -}}
 <meta name="robots" content="noindex, nofollow">
 {{- end }}
 
@@ -83,6 +114,27 @@
 {{- $lcpCover := "" }}{{- $lcpDir := "" }}{{- $lcpBase := "" }}{{- $lcpSizes := "(min-width: 768px) 620px, 100vw" }}
 {{- $lcpWidths := slice "360" "480" "620" "720" -}}
 {{- $pageKey := .RelPermalink -}}
+{{- /* PRELOAD-BREMSE (Premium-Audit 11.09.2026, Fund S9 der neuen Wache):
+       Pager-Seiten (/page/2/, /posts/page/3/, /categories/ratgeber/page/2/)
+       und die noindex-Archive bekommen KEINEN Bild-Preload.
+       Warum: Hugos .RelPermalink ist auf einer Pager-Seite die Basis-URL –
+       das LCP-Manifest (keyed nach .RelPermalink) wurde deshalb auch auf
+       Seite 2, 3, 4 … angezogen und lud das Cover des NEUESTEN Artikels, das
+       auf genau diesen Seiten gar nicht vorkommt (Seite 1 ist dort schon
+       durch). Folge: unnütze Bytes beim wichtigsten Klickpfad und ein
+       Lighthouse-Fund „Preload wird nicht verwendet". Archive werden
+       notorisch nicht indexiert – Vorladen lohnt dort nicht.
+       Pager-Erkennung: .Paginator.PageNumber > 1. Bewusst NICHTE .Truncated
+       benutzt – das Flag steht auf JEDEM Artikel mit >70 Wörtern (Summary-
+       Schnitt) und hätte den legitimen Cover-Preload aller Artikel
+       abgeschaltet. .PagingMetadata/.OutputPath existieren in Hugo 0.164
+       nicht auf der Seite (verifiziert). */ -}}
+{{- $isPager := false -}}
+{{- if or (eq .Kind "home") (eq .Kind "section") (eq .Kind "term") (eq .Kind "taxonomy") -}}
+  {{- with .Paginator -}}{{- if gt (.PageNumber | int) 1 -}}{{- $isPager = true -}}{{- end -}}{{- end -}}
+{{- end -}}
+{{- $noPreload := or $isPager (eq .Kind "term") (eq .Kind "taxonomy") -}}
+{{- if $noPreload -}}{{- $pageKey = "___kein-preload___" -}}{{- end -}}
 {{- $lcpManifest := dict -}}
 {{- if os.FileExists "data/lcp_images.json" -}}{{- $lcpManifest = (readFile "data/lcp_images.json" | transform.Unmarshal) -}}{{- end -}}
 {{- with $lcpManifest.pages -}}
@@ -95,8 +147,7 @@
 
 {{- if not $lcpCover -}}
   {{- $isList := or (eq .Kind "home") (eq .Kind "section") (eq .Kind "term") -}}
-  {{- $isPagerPage := findRE `/page/\d+/?$` .RelPermalink -}}
-  {{- if and $isList (not $isPagerPage) -}}
+  {{- if and $isList (not $noPreload) -}}
     {{- $lcpPages := .RegularPages -}}
     {{- if .IsHome -}}
       {{- $lcpPages = where site.RegularPages "Section" "eq" "posts" -}}
@@ -107,13 +158,13 @@
         {{- with .Params.cover.image }}{{- $lcpCover = . -}}{{- end -}}
       {{- end -}}
     {{- end -}}
-  {{- else if and .Params.cover.image (eq .Kind "page") -}}
+  {{- else if and .Params.cover.image (eq .Kind "page") (ne .Params.cover.preload false) -}}
     {{- $lcpCover = .Params.cover.image -}}
     {{- $lcpSizes = "(min-width: 768px) 720px, 100vw" -}}
   {{- end -}}
 {{- end -}}
 
-{{- if $lcpCover -}}
+{{- if and $lcpCover (not $noPreload) -}}
 {{- $lcpDir = path.Dir $lcpCover -}}
 {{- $lcpBase = strings.TrimSuffix (path.Ext (path.Base $lcpCover)) (path.Base $lcpCover) -}}
 {{- $lcpSrcset := slice -}}
