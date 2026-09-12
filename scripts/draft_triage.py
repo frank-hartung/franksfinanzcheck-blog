@@ -80,16 +80,17 @@ def assert_worktree(root: str) -> None:
                         "Schreibzugriff wird verweigert (Selbsttest-Lerneffekt).")
 
 
-def fm_and_body(text: str) -> tuple[dict, str, list]:
-    """(Frontmatter, Körper, Hindernisse beim Parsen).
+def fm_and_body(text: str) -> tuple[dict, str, list, list]:
+    """(Frontmatter, Körper, Hindernisse, Hinweise).
 
     Bewusst zweistufig: erst die Zeilen-Grenze (Hugo-Realität), dann YAML. Eine
     geklebte Grenze (`---Text`) wird als Hindernis gemeldet, weil genau dann
     Repo-Wache und Build unterschiedliche Texte sehen.
     """
     note: list = []
+    notiz: list = []
     if not text.startswith("---\n"):
-        return {}, text, ["fm-anfang: Datei beginnt nicht mit einer Frontmatter-Zeile"]
+        return {}, text, ["fm-anfang: Datei beginnt nicht mit einer Frontmatter-Zeile"], notiz
     lines = text.split("\n")
     ende = None
     for i in range(1, min(len(lines), 120)):
@@ -101,15 +102,72 @@ def fm_and_body(text: str) -> tuple[dict, str, list]:
                             "sehen unterschiedliche Texte")
             break
     if ende is None:
-        return {}, text, ["fm-grenze: keine schließende `---`-Zeile gefunden"]
+        return {}, text, ["fm-grenze: keine schließende `---`-Zeile gefunden"], notiz
+    block = "\n".join(lines[1:ende])
     try:
         import yaml
-        fm = yaml.safe_load("\n".join(lines[1:ende])) or {}
+        fm = yaml.safe_load(block) or {}
+    except ImportError:
+        # PyYAML ist keine harte Voraussetzung dieser Wache: ihr Zweck ist die
+        # Einordnung des Bestands, und ein fehlendes Modul im CI-Runner (oder im
+        # lokalen venv) dürfte nie dazu führen, dass jeder Artikel als
+        # Frontmatter-Defekt gemeldet wird – die Wache würde dann nur noch Lärm
+        # erzeugen und wäre damit wertlos. Für die hier benötigte Struktur
+        # (Skalare, Inline-Listen, eine Verschachtelungstiefe wie bei `cover:`)
+        # reicht ein bewusster Mini-Parser; Unsicheres bleibt als Hindernis stehen.
+        fm = _mini_yaml(block)
+        notiz.append("fm-mini: ohne PyYAML gelesen (Mini-Parser) – Schlüssel "
+                     "einzeln geprüft, kein Hindernis")
     except Exception as exc:  # noqa: BLE001
-        return {}, "\n".join(lines[ende + 1:]), [f"fm-yaml: {exc.__class__.__name__}: {str(exc)[:70]}"]
+        return ({}, "\n".join(lines[ende + 1:]),
+                [f"fm-yaml: {exc.__class__.__name__}: {str(exc)[:70]}"], notiz)
     if not isinstance(fm, dict):
-        return {}, "\n".join(lines[ende + 1:]), ["fm-yaml: kein Schlüssel/Wert-Block"]
-    return fm, "\n".join(lines[ende + 1:]), note
+        return {}, "\n".join(lines[ende + 1:]), ["fm-yaml: kein Schlüssel/Wert-Block"], notiz
+    return fm, "\n".join(lines[ende + 1:]), note, notiz
+
+
+def _mini_yaml(block: str) -> dict:
+    """Winziger YAML-Leser für Frontmatter-Fallback (ohne PyYAML).
+
+    Deckt genau das ab, was die content/-Dateien dieser Site benutzen:
+    `key: wert`, `key:` mit eingerückten Unterkeys (ein Level) und
+    Inline-Listen. Mehrzellige Blöcke (`|`, `>`), Anker und Flows werden zu
+    Strings – für die geprüften Felder (title, date, draft, cover.image,
+    tags) reicht das; alles andere meldet die Wache als unlesbar statt zu raten.
+    """
+    out: dict = {}
+    aktueller: str | None = None
+    for zeile in block.split("\n"):
+        if not zeile.strip() or zeile.lstrip().startswith("#"):
+            continue
+        eingerueckt = zeile[:1] in (" ", "\t")
+        m = re.match(r"\s*([A-Za-z0-9_.-]+):\s*(.*)$", zeile)
+        if not m:
+            continue
+        key, wert = m.group(1), m.group(2).strip()
+        if eingerueckt and aktueller:
+            u = out.setdefault(aktueller, {})
+            if isinstance(u, dict):
+                u[key] = _wert(wert)
+            continue
+        if wert == "":
+            out[key] = {}
+            aktueller = key
+        else:
+            out[key] = _wert(wert)
+            aktueller = None
+    return out
+
+
+def _wert(roh: str):
+    if roh.startswith("[") and roh.endswith("]"):
+        return [w.strip().strip("\"'„“”") for w in
+                roh[1:-1].split(",") if w.strip()]
+    if roh.lower() in ("true", "false"):
+        return roh.lower() == "true"
+    if roh.startswith(("|", ">")):
+        return roh[1:].strip()
+    return roh.strip().strip("\"'")
 
 
 def cover_pfade(fm: dict) -> list:
@@ -135,12 +193,45 @@ def date_of(fm: dict, key: str) -> datetime.date | None:
     return datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3))) if m else None
 
 
+def registry(root: str) -> dict:
+    """`links:`-Block aus scripts/check24_links.yaml – mit und ohne PyYAML.
+
+    Die /go/-Route muss registriert sein, sonst führt die Anmeldung ins Leere;
+    geprüft wird das an einer zweizeiligen Liste, die auch per Zeilenmuster
+    sicher lesbar ist.
+    """
+    pfad = os.path.join(root, "scripts", "check24_links.yaml")
+    try:
+        import yaml
+        with open(pfad, encoding="utf-8") as fh:
+            return (yaml.safe_load(fh) or {}).get("links", {}) or {}
+    except ImportError:
+        pass
+    except OSError:
+        return {}
+    out: dict = {}
+    im_block = False
+    with open(pfad, encoding="utf-8") as fh:
+        for zeile in fh:
+            if re.match(r"^links:\s*$", zeile):
+                im_block = True
+                continue
+            if not im_block:
+                continue
+            m = re.match(r"^  ([A-Za-z0-9_-]+):\s*(\S.*)$", zeile)
+            if m:
+                out[m.group(1)] = m.group(2).strip().strip("'\u0022")
+            elif zeile.strip() and not zeile[:1] in (" ", "\t"):
+                break
+    return out
+
+
 # ------------------------------------------------------------------ Klassifikation
 def classify(path: str, root: str, today: datetime.date, stale_days: int) -> dict:
     rel = os.path.relpath(path, root)
     with open(path, encoding="utf-8") as fh:
         text = fh.read()
-    fm, body, blocker = fm_and_body(text)
+    fm, body, blocker, notiz = fm_and_body(text)
     is_draft = fm.get("draft") is True
     if not is_draft and re.search(r"^draft:\s*true\s*$", text, re.M):
         # Frontmatter unparierbar, aber draft-flag sichtbar -> trotzdem aufnehmen
@@ -232,14 +323,7 @@ def classify(path: str, root: str, today: datetime.date, stale_days: int) -> dic
             stand["blocker"].append("werbekennzeichnung: Affiliate-Link ohne "
                                     "'Werbung'/'Anzeige' im Text – UWG-Risiko "
                                     "bei Veröffentlichung")
-        try:
-            sys.path.insert(0, os.path.join(root, "scripts"))
-            import yaml
-            with open(os.path.join(root, "scripts", "check24_links.yaml"),
-                      encoding="utf-8") as fh:
-                reg = (yaml.safe_load(fh) or {}).get("links", {})
-        except Exception:  # noqa: BLE001
-            reg = {}
+        reg = registry(root)
         for key in sorted(set(GO_LINK.findall(body))):
             if reg and key not in reg:
                 stand["blocker"].append(f"go-route: /go/{key}/ ist nicht in "
@@ -256,7 +340,7 @@ def classify(path: str, root: str, today: datetime.date, stale_days: int) -> dic
         stand["hinweise"].append("Alter aus Dateisystem gemessen (kein Git-Nachweis)")
     stand["tage_seit_letzte_aenderung"] = alter
     stand["blocker"] = list(dict.fromkeys(stand["blocker"]))
-    stand["hinweise"] = list(dict.fromkeys(stand["hinweise"]))
+    stand["hinweise"] = list(dict.fromkeys(stand["hinweise"] + notiz))
 
     # Ein Zukunftsdatum ist der Zustand – inhaltliche Hindernisse werden gelistet,
     # aber nicht angemahnt: gebaut wird der Artikel erst dann, und bis dahin ist

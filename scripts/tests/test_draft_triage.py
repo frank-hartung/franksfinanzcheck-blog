@@ -175,5 +175,31 @@ class BestandUndVertrag(unittest.TestCase):
             self.assertIn("kein Git-Worktree", rc.stdout + rc.stderr)
 
 
+class OptionaleAbhaengigkeit(unittest.TestCase):
+    """Ohne PyYAML darf die Triage Lärm erzeugen – sie muss weiterarbeiten.
+
+    Der reale Anlass: ein Sandbox-Reset hatte `~/.local` (und damit PyYAML)
+    entfernt. Eine Wache, die dann jeden Artikel als Frontmatter-Defekt meldet,
+    ist schlimmer als keine: sie liefert 17 erfundene Hindernisse und verdeckt
+    die echten. Der Mini-Parser ist deshalb Teil des Vertrags, nicht Fallback-Kosmetik.
+    """
+
+    def test_ohne_pyyaml_keine_phantom_hindernisse(self):
+        with tempfile.TemporaryDirectory() as td:
+            block = os.path.join(td, "yaml.py")
+            with open(block, "w", encoding="utf-8") as fh:
+                fh.write("raise ImportError('PyYAML bewusst nicht verfuegbar')\n")
+            env = dict(os.environ, PYTHONPATH=td + os.pathsep + os.environ.get("PYTHONPATH", ""))
+            rc = subprocess.run([sys.executable, os.path.join(SCRIPTS, "draft_triage.py")],
+                                cwd=ROOT, env=env, capture_output=True, text=True)
+            self.assertEqual(0, rc.returncode, rc.stdout + rc.stderr)
+            self.assertNotIn("fm-yaml", rc.stdout)
+            self.assertIn("Reserve-Triage", rc.stdout)
+            selb = subprocess.run([sys.executable, os.path.join(SCRIPTS, "draft_triage.py"),
+                                   "--selftest"], cwd=ROOT, env=env,
+                                  capture_output=True, text=True)
+            self.assertEqual(0, selb.returncode, selb.stdout + selb.stderr)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

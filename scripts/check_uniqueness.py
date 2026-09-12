@@ -19,6 +19,7 @@ Nutzung:
     python3 scripts/check_uniqueness.py            # alle Artikel prüfen
     python3 scripts/check_uniqueness.py --strict   # strengere Schwelle (5-Wort-Phrasen)
     python3 scripts/check_uniqueness.py --sameday --fix  # Geburts-Modus (Engine)
+    python3 scripts/check_uniqueness.py --selftest       # nur Sabotage-Schutz (Wachen-Loop)
 """
 import os
 import re
@@ -185,6 +186,27 @@ def run_selftest() -> list:
         got = same_day_twin(a, b)
         if got != want:
             fehler.append(f"  Fall {i}: erwartet „{want}“, bekam „{got}“  ← {a[:40]!r} ↔ {b[:40]!r}")
+    # Der Report-Teil: Slugs lesbar + geteilte Phrasen realmente bestimmbar.
+    # Beides ist der Grund, warum der Report überhaupt abarbeitbar ist; ohne diese
+    # zwei Fälle könnte die Wache wieder „/home/user/franksfinanzcheck-blo …“ als
+    # Fund ausgeben und der Satz „1 Überlappung“ bliebe unbenannt.
+    for pfad, erwartet in (("/repo/content/posts/2026-08-17-gasvergleich/index.md",
+                             "2026-08-17-gasvergleich"),
+                            ("/repo/content/posts/2026-08-17-gasvergleich.md",
+                             "2026-08-17-gasvergleich"),
+                            ("content/posts/2026-09-11-stromfresser/index.md",
+                             "2026-09-11-stromfresser")):
+        if _slug(pfad) != erwartet:
+            fehler.append(f"  _slug({pfad!r}) = {_slug(pfad)!r}, erwartet {erwartet!r}")
+    a = "Heizung laufen lassen und Strom sparen jeden Monat mit diesen Tipps"
+    b = "So Heizung laufen lassen und Strom sparen jeden Monat ohne Folgeschäden"
+    gem = ngrams(a, PHRASE_LEN) & ngrams(b, PHRASE_LEN)
+    if "heizung laufen lassen und strom sparen jeden" not in gem:
+        fehler.append("  geteilte Sieben-Wort-Phrase wird nicht gefunden – der "
+                      "Report könnte ‚Überlappung‘ wieder ohne Beleg drucken")
+    fremd = ngrams("völlig andere Formulierung ohne Bezug", PHRASE_LEN) & ngrams(a, PHRASE_LEN)
+    if fremd:
+        fehler.append(f"  fremde Texte werden als überlappend gemeldet: {sorted(fremd)[:1]}")
     return fehler
 
 
@@ -223,7 +245,14 @@ def main():
         print("   Kein Audit, keine Heilung. Bitte same_day_twin() prüfen:")
         print("\n".join(fehler))
         sys.exit(2)
-    print(f"✅ Selbsttest: {len(SELFTEST_SAMEDAY)} Twin-Faelle stimmen.")
+    print(f"✅ Selbsttest: {len(SELFTEST_SAMEDAY)} Twin-Faelle + Slug-/Gram-Report-Pinne stimmen.")
+    # --selftest ist der Eintrittspunkt des Wachen-Loops (link-check.yml) und von
+    # governance_contract C6: hier ends the run – der Selbsttest prüft die Logik,
+    # nicht den Bestand. Sonst hinge ein grüner Selbsttest davon ab, ob gerade
+    # jemand zwei Artikel ähnlich geschrieben hat (und ein roter von einem Fund,
+    # für den es ein eigenes Gate gibt).
+    if "--selftest" in sys.argv:
+        return
 
     strict = "--strict" in sys.argv
     do_fix = "--fix" in sys.argv
