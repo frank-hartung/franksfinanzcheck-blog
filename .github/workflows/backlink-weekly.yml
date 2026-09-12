@@ -62,7 +62,7 @@ jobs:
           fi
 
       - name: Backlink-Report als Artefakt sichern (bewusst nicht versioniert)
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: backlink-report-${{ github.run_id }}
           path: BACKLINK-REPORT.md

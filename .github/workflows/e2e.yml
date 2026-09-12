@@ -88,7 +88,7 @@ jobs:
 
       - name: HTML-Report als Artifact hochladen (bei Fehlern)
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: |
