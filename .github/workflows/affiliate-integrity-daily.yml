@@ -337,7 +337,7 @@ jobs:
 
       - name: Diagnose-Artefakt bei Rot (Report, Log, Zustand)
         if: always() && !cancelled() && steps.gate.outputs.exit_code != '0'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: affiliate-integrity-run-${{ github.run_id }}
           path: |
