@@ -96,6 +96,14 @@ jobs:
       - run: python3 scripts/fix_r8_anker.py --fix || echo "⚠ R8-Anker-Heiler - Restfunde siehe TEXTVERSTAENDNIS-REPORT.md"
       - run: python3 scripts/textverstaendnis_guard.py
 
+      # DUPLIKAT-WACHE (Premium-Audit 12.09.2026): Die Wache existierte,
+      # war aber in KEINEM Workflow verdrahtet – 6 Artikel trugen Monate
+      # lang Intro-Duplikate (KI-Fallback-Muster). Jetzt: taegliche
+      # Selbstheilung im Bestand (exakte + Trennlinien-Muster + Nahe-
+      # Kopien >= 0.92); Cross-Artikel-Check (D3/D4) ist Report-only.
+      - run: python3 scripts/duplikat_guard.py --selftest
+      - run: python3 scripts/duplikat_guard.py --fix || echo "⚠ Duplikat-Wache – Restfunde im Log"
+
       - run: python3 scripts/blog_health_gate.py
       - run: |
           git config user.name "Agent (Arena.ai)"

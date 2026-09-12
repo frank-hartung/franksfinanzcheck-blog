@@ -42,6 +42,9 @@ ops-report.json
 # Nur im Root ignorieren, docs/ enthält strategische Dokumente
 /*-REPORT.md
 /*-STATUS.md
+# Governance-Scorecard (Premium-Audit 12.09.2026: nicht versioniert,
+# bleibt im Lauf-Log; passt nicht auf die -REPORT/-STATUS-Muster)
+/EDITORIAL-SCORECARD.md
 /AGC-FORSCHUNG-BERICHT.md
 /AGC-AUTOPILOT-STATUS.md
 /ENGINE-STATUS.md

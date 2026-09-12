@@ -14,7 +14,7 @@
 #  --mark-all-posted` ausführen & pushen (siehe Anleitung).
 #
 #  OHNE Token: Lauf endet sauber (exit 0) mit Setup-Anleitung –
-#  kein Fehler-Alerting. Setup: ANLEITUNG-SOCIAL-MEDIA.md
+#  kein Fehler-Alerting. Setup: docs/ANLEITUNG-SOCIAL-MEDIA.md
 #
 #  Manuell starten: Actions → „Social-Media-AI" → Run workflow
 # ============================================================

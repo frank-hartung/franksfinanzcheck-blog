@@ -94,10 +94,16 @@ jobs:
         run: |
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
-          git add content/ data/ KI-REDAKTION-REPORT.md KI-SEO-REPORT.md 2>/dev/null || true
+          # 12.09.2026 (Premium-Audit): Reports gitignored/nicht versioniert;
+          # pro Pfad eigener add-Aufruf (Repo-Bugfix-Muster 14.08.2026).
+          git add content/ 2>/dev/null || true
+          git add data/ 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Keine Änderungen – nichts zu committen."
           else
             git commit -m "content(ki-redaktion): neuer KI-Entwurf (draft, Rolle $ROLLE)"
-            git push || echo "::warning::Push fehlgeschlagen – nächster Lauf versucht es erneut"
+            # 12.09.2026 (Premium-Audit): zentrales git_sync.sh statt rohem
+            # `git push` – roter Non-Fast-Forward bei parallelen Bots war
+            # sonst nur ein Warning, und der Entwurf-Commit ging verloren.
+            scripts/git_sync.sh --push-only || echo "::warning::Push fehlgeschlagen – nächster Lauf versucht es erneut"
           fi

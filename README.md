@@ -21,7 +21,7 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 > harten 10-Punkte-Gate (nie ein Affiliate-Link, nie eine erfundene Zahl, nie ein
 > Duplikat). **Zu tun: nur einmalig die Tokens hinterlegen** – danach keine
 > Planung, keine Textarbeit, kein Terminieren mehr. Vollständige Anleitung:
-> **[`ANLEITUNG-SOCIAL-AUTOPILOT.md`](ANLEITUNG-SOCIAL-AUTOPILOT.md)** ·
+> **[`docs/ANLEITUNG-SOCIAL-AUTOPILOT.md`](docs/ANLEITUNG-SOCIAL-AUTOPILOT.md)** ·
 > Orchestrator: `python3 scripts/social_studio.py --run` ·
 > Kanal-Playbook: `data/social/channels.yaml` · Cockpit: `SOCIAL-AUTOPILOT-STATUS.md`.
 
@@ -568,7 +568,7 @@ python3 scripts/social_studio.py --selftest               # fail-closed Gesundhe
 ```
 
 Einrichtung (einmalig, ~5 Minuten je Kanal) und alle Details:
-**[`ANLEITUNG-SOCIAL-AUTOPILOT.md`](ANLEITUNG-SOCIAL-AUTOPILOT.md)**.
+**[`docs/ANLEITUNG-SOCIAL-AUTOPILOT.md`](docs/ANLEITUNG-SOCIAL-AUTOPILOT.md)**.
 Arbeitsteilung: **Erst-Pins** bleiben bei `pinterest-engine` (`pinterest-ai.yml`),
 die **Toot-Pflege** bei `mastodon-seo.yml`; der alte `social-ai.yml`-Zeitplan wurde
 zugunsten des Autopiloten entfernt (Doppelpost-Schutz).
@@ -694,7 +694,7 @@ DEMO_MODE=1 python3 scripts/generate_drafts.py   # erzeugt Test-Entwurf
 - [ ] **Datenschutzerklärung** anpassen (Generator wie eRecht24/IT-Recht Kanzlei empfohlen)
 - [ ] **Affiliate-Links kennzeichnen** – im Blog bereits eingebaut (Hinweis + Disclaimer in `hugo.toml`)
 - [ ] **CHECK24-Partnerprogramm** – Anmeldung (z. B. über das Awin-Netzwerk), Voraussetzung: eigene Website
-- [ ] **Persönliche Partnerlinks einsetzen** – zentral in `scripts/check24_links.yaml` pflegen und mit `python3 scripts/affiliate_shield.py --fix` + `python3 scripts/affiliate_link_check.py --fix` in Artikel/Gateway übernehmen (siehe `ANLEITUNG-CHECK24-LINKS.md`)
+- [ ] **Persönliche Partnerlinks einsetzen** – zentral in `scripts/check24_links.yaml` pflegen und mit `python3 scripts/affiliate_shield.py --fix` + `python3 scripts/affiliate_link_check.py --fix` in Artikel/Gateway übernehmen (siehe `docs/ANLEITUNG-CHECK24-LINKS.md`)
 - [ ] **Steuer** – Provisionen sind Einkünfte (Steuererklärung!)
 - [ ] **Marke:** keine Domain mit „check24" im Namen verwenden
 

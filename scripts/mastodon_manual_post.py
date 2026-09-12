@@ -97,7 +97,7 @@ def main():
         return
 
     if not sp.MASTODON_TOKEN:
-        sys.exit("FEHLER: Kein MASTODON_ACCESS_TOKEN gesetzt – siehe ANLEITUNG-SOCIAL-MEDIA.md.")
+        sys.exit("FEHLER: Kein MASTODON_ACCESS_TOKEN gesetzt – siehe docs/ANLEITUNG-SOCIAL-MEDIA.md.")
 
     if args.edit_status_id:
         # Leeres Intro = Original-Format des Auto-Posters beibehalten

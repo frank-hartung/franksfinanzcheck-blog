@@ -122,7 +122,7 @@ Teil der C6-Selbsttest-Pflicht und des Governance-Preflights.
 ### 2.7 Doku
 
 - `docs/PINTEREST-TOKEN-RUNBOOK.md`: Kap. 0 Schnellstart (Tabelle), Ursachen-Tabelle, Fehler-Matrix (400/401/403), Sicherheitszusagen aktualisiert.
-- `ANLEITUNG-PINTEREST-API.md`: Scopes korrigiert, Actions-Weg als Standard.
+- `docs/ANLEITUNG-PINTEREST-API.md`: Scopes korrigiert, Actions-Weg als Standard.
 - `README.md`: Abschnitt Pinterest-Zugang ergänzt.
 
 ---

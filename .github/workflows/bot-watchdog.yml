@@ -272,19 +272,6 @@ jobs:
               console.log('⚠️ Konnte Watchdog-Issue nicht schließen: ' + e.message);
             }
 
-      - name: Report committen (optional, für Audit)
-        if: always()
-        continue-on-error: true
-        run: |
-          git config user.name "Bot-Watchdog"
-          git config user.email "bot-watchdog@users.noreply.github.com"
-          git add BOT-WATCHDOG-REPORT.md 2>/dev/null || true
-          if ! git diff --cached --quiet; then
-            git commit -m "chore: Bot-Watchdog Report aktualisiert (Profi-Level, Fix #227)" || true
-            # Push nur wenn auf main, sonst skip (vermeidet Loop)
-            if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-              scripts/git_sync.sh --push-only || echo "Push fehlgeschlagen, ignoriere"
-            fi
-          else
-            echo "Kein Report-Update nötig"
-          fi
+      # REPORT: BOT-WATCHDOG-REPORT.md ist seit dem Premium-Audit 12.09.2026
+      # gitignored und nicht versioniert (bleibt im Lauf-Log). Der frühere
+      # „Report committen“-Schritt ist entfallen.

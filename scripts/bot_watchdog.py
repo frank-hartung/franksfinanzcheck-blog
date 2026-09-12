@@ -207,11 +207,49 @@ def check_produktions_status_age(max_age_hours=30):
     return True, f"{age:.1f}h alt"
 
 def check_affiliate_integrity():
-    """Prüft Affiliate-Integritäts-Report auf offene Probleme."""
-    report = BLOG_DIR / "AFFILIATE-INTEGRITY-REPORT.md"
+    """Prüft Affiliate-Integrität: State-Datei zuerst, Report als Fallback.
+
+    Premium-Audit 12.09.2026: Der Report ist Markdown (Marker-Scan) – die
+    State-Datei ist maschinenlesbar (exit_code, content_problems,
+    generated_at) und trägt zusätzlich die FRISCHE: Ein stiller
+    Wache-Ausfall war im reinen Report-Scan unsichtbar (alter Report
+    ohne rotes Marker = scheinbar „ok"). Jetzt: State älter als 30 h
+    (täglicher Lauf 06:00 MESZ) = harter Befund.
+    """
     state_file = BLOG_DIR / ".affiliate_integrity_state.json"
+    if state_file.is_file():
+        try:
+            data = json.loads(state_file.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            data = None
+        if isinstance(data, dict) and data.get("generated_at"):
+            age_h = None
+            for fmt in ("%Y-%m-%d %H:%M:%S UTC", "%Y-%m-%d %H:%M:%S %Z",
+                        "%Y-%m-%dT%H:%M:%SZ"):
+                try:
+                    ts = datetime.datetime.strptime(str(data["generated_at"]), fmt)
+                    age_h = ((datetime.datetime.now(datetime.timezone.utc)
+                              - ts.replace(tzinfo=datetime.timezone.utc))
+                             .total_seconds() / 3600)
+                    break
+                except ValueError:
+                    continue
+            if age_h is None:
+                return None, "State-Timestamp unlesbar – Report-Fallback"
+            problems = len(data.get("content_problems") or [])
+            if data.get("exit_code") == 0 and problems == 0:
+                if age_h > 30:
+                    return False, (f"Integritäts-Wache schweigt: State {age_h:.0f} h alt "
+                                   f"(> 30 h, täglicher Lauf 06:00 MESZ)")
+                return True, f"ok (State {age_h:.0f} h alt, {data.get('checked', '?')} geprüft)"
+            if problems > 0:
+                return False, f"{problems} offene Affiliate-Probleme (State {age_h:.0f} h alt)"
+            return False, f"letzter Lauf exit {data.get('exit_code')} (State {age_h:.0f} h alt)"
+    # Fallback: Report-Inhalts-Scan (früheres Verhalten, z. B. wenn die
+    # State-Datei bei einem Lauf nicht geschrieben wurde).
+    report = BLOG_DIR / "AFFILIATE-INTEGRITY-REPORT.md"
     if not report.is_file():
-        return None, "Report fehlt"
+        return None, "State+Report fehlen"
     try:
         txt = report.read_text(encoding="utf-8")
         # Suche nach FAIL Markern

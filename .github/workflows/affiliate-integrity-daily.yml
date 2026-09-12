@@ -187,6 +187,10 @@ jobs:
         run: |
           git config user.name "Affiliate-Integrity-Bot"
           git config user.email "affiliate-integrity-bot@users.noreply.github.com"
+          # 12.09.2026 (Premium-Audit): Report + State bleiben versioniert –
+          # der Bot-Watchdog (bot_watchdog.py) liest beides aus dem frischen
+          # CI-Checkout (Frische-/Detail-Check). Beide Dateien sind getrackt,
+          # daher ist das git add trotz Ignore-Muster sicher.
           git add content/ 2>/dev/null || true
           git add AFFILIATE-INTEGRITY-REPORT.md 2>/dev/null || true
           git add .affiliate_integrity_state.json 2>/dev/null || true

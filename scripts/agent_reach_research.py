@@ -27,7 +27,7 @@ Leitplanken (entsprechen dem KI-Redaktions-Statut, siehe KI-REDAKTION.md)
 * KEINE Secrets: Alle hier genutzten Kanäle sind Zero-Config
   (ohne API-Keys/Logins). Login-pflichtige Agent-Reach-Kanäle
   (Twitter, Reddit, XiaoHongShu …) gehören ausschließlich auf den
-  lokalen Rechner – niemals in CI (siehe ANLEITUNG-AGENT-REACH.md).
+  lokalen Rechner – niemals in CI (siehe docs/ANLEITUNG-AGENT-REACH.md).
 
 Aufruf
 ------

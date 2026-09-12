@@ -81,7 +81,9 @@ jobs:
         run: |
           git config user.name "Fristen-Bot"
           git config user.email "fristen-bot@users.noreply.github.com"
-          git add FRISTEN-REPORT.md data/recht-fristen.yaml data/fristen_state.json
+          # 12.09.2026 (Premium-Audit): Report ist gitignored/nicht versioniert
+          # (git add auf ignorierte Pfade bricht die Staging-Phase hart ab).
+          git add data/recht-fristen.yaml data/fristen_state.json
           if git diff --cached --quiet; then
             echo "Keine Fristen-Änderungen – kein Commit nötig."
           else

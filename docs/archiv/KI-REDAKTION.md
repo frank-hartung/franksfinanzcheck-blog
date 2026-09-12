@@ -217,7 +217,7 @@ ohne API-Keys).
    (inkl. `id`/`kategorie`/`ab`/`bis`, siehe Kommentarblock der YAML).
 3. Agent Reach läuft hier **rein lesend**: kein Posten, kein Kommentieren,
    keine Cookies/Logins in CI (Login-Kanäle nur lokal, siehe
-   `ANLEITUNG-AGENT-REACH.md`). Das schützt die Garantie aus Abschnitt 7.
+   `docs/ANLEITUNG-AGENT-REACH.md`). Das schützt die Garantie aus Abschnitt 7.
 
 **Bedienung:**
 
@@ -229,5 +229,5 @@ python3 scripts/agent_reach_gate.py
 python3 scripts/agent_reach_research.py
 ```
 
-Einzelheiten, Kanalmatrix und Troubleshooting: `ANLEITUNG-AGENT-REACH.md`.
+Einzelheiten, Kanalmatrix und Troubleshooting: `docs/ANLEITUNG-AGENT-REACH.md`.
 Rollout-Nachweis: `AGENT-REACH-INTEGRATION-2026-09-12.md`.

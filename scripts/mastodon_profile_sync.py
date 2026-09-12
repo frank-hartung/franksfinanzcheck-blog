@@ -16,7 +16,7 @@
 #  Benötigtes Secret: MASTODON_ACCESS_TOKEN
 #    WICHTIG: Braucht zusätzlich zu 'write:statuses'+'write:media'
 #    (für scripts/social_poster.py) auch den Scope 'write:accounts',
-#    sonst schlägt der Aufruf mit HTTP 403 fehl. Siehe ANLEITUNG-SOCIAL-MEDIA.md.
+#    sonst schlägt der Aufruf mit HTTP 403 fehl. Siehe docs/ANLEITUNG-SOCIAL-MEDIA.md.
 #
 #  OHNE Token: zeigt eine Setup-Anleitung und endet SAUBER (exit 0).
 #
@@ -156,7 +156,7 @@ def print_setup_hint():
     print("")
     print("Setup: Secret MASTODON_ACCESS_TOKEN muss den Scope 'write:accounts'")
     print("zusätzlich zu 'write:statuses'+'write:media' enthalten.")
-    print("Details: ANLEITUNG-SOCIAL-MEDIA.md")
+    print("Details: docs/ANLEITUNG-SOCIAL-MEDIA.md")
     print("=" * 68)
 
 

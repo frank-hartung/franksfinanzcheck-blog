@@ -61,7 +61,9 @@ jobs:
         run: |
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
-          git add MASTODON-SEO-REPORT.md data/social_log.jsonl
+          # 12.09.2026 (Premium-Audit): Report ist gitignored/nicht versioniert
+          # (git add auf ignorierte Pfade bricht die Staging-Phase hart ab).
+          git add data/social_log.jsonl
           if git diff --cached --quiet; then
             echo "Nichts zu committen."
           else

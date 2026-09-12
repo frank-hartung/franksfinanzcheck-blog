@@ -111,7 +111,11 @@ jobs:
           python3 scripts/draft_link_healer.py --fix
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
-          git add content/ CADENCE-GATE-REPORT.md DRAFT-LINK-REPORT.md FM-GRENZEN-REPORT.md
+          # 12.09.2026 (Premium-Audit): Die drei Gate-Reports sind gitignored
+          # und nicht versioniert – `git add` darauf brach die Staging-Phase
+          # hart ab und hätte die Kadenz-Heilungen in content/ SWELLEND
+          # verworfen (schwerster Interferenzfall im Audit).
+          git add content/
           if git diff --cached --quiet; then
             echo "Kadenz-Gate: Bestand bereits konform."
           else
@@ -147,7 +151,12 @@ jobs:
           # würde ARTIKEL_ERSTELLT fälschlich true und Phase 2/3 liefen ohne
           # neuen Artikel – inkl. unnötiger KI-API-Calls.)
           if git status --short content/ data/ | grep -q .; then
-            git add content/ data/ static/images/covers/ ENGINE-STATUS.md BOT-STATUS.md 2>/dev/null || true
+            # 12.09.2026 (Premium-Audit): pro Pfad ein eigener add-Aufruf
+            # (Repo-Bugfix-Muster 14.08.2026) + Status-Dateien entfernt
+            # (gitignored, nicht versioniert).
+            git add content/ 2>/dev/null || true
+            git add data/ 2>/dev/null || true
+            git add static/images/covers/ 2>/dev/null || true
             git commit -m "content: neuer Artikel automatisch generiert und veröffentlicht"
             SYNC_OK_VAR=ARTIKEL_ERSTELLT scripts/git_sync.sh --push-only
             echo "✅ Phase-1-Commit: Artikel (oder Entwurf) veröffentlicht"
@@ -314,6 +323,14 @@ jobs:
           python3 scripts/generate_kurzantworten.py || echo "⚠ Kurzantworten (nicht kritisch)"
           echo "== URL-Hygiene (R8-URL-LEERZEICHEN selbstheilend, PREMIUM-FIX 03.09.2026) =="
           python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
+          # DUPLIKAT-GATE (Premium-Audit 12.09.2026): die Wache war nie
+          # verdrahtet – dadurch konnten Intro-Duplikate KI-Entwuerfe
+          # monatelang unentdeckt durchlaufen. Neue Artikel werden hier
+          # deterministisch bereinigt VOR dem Commit; Restfunde (weiche
+          # Near-Duplikate < 0.92) heilt die blog-health-daily naechstens.
+          echo "== Duplikat-Wache (neue Artikel) =="
+          python3 scripts/duplikat_guard.py --selftest
+          python3 scripts/duplikat_guard.py --new-only --fix || echo "⚠ Duplikat-Wache – Restfunde im Log (naechste Heilung: blog-health-daily)"
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
           git add -A
@@ -404,15 +421,10 @@ jobs:
           else
             echo "Kein Publikationstag ($DOW) – Defizit-Wache übersprungen."
           fi
-          git config user.name "Content-Bot"
-          git config user.email "content-bot@users.noreply.github.com"
-          git add BOT-STATUS.md ENGINE-STATUS.md 2>/dev/null || true
-          if git diff --cached --quiet; then
-            echo "BOT-STATUS unverändert."
-          else
-            git commit -m "docs: BOT-STATUS.md aktualisiert (Phase 4)"
-            scripts/git_sync.sh --push-only
-          fi
+          # 12.09.2026 (Premium-Audit): BOT-/ENGINE-STATUS sind gitignored und
+          # nicht versioniert (bleiben im Lauf-Log/Audit-Report) – der frühere
+          # Status-Commit wurde gestrichen. Status-Skripte laufen weiter.
+          echo "BOT-STATUS/ENGINE-STATUS im Log verbleibend (nicht versioniert)."
 
       - name: Do not report a quota deficit as success
         if: ${{ !cancelled() }}

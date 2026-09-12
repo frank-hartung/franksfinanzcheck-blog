@@ -34,7 +34,7 @@ Ohne Token (oder ohne profile:read-Scope):
 
 API-Scopes: boards:read + boards:write (vorhanden) reichen für
 Boards; für Name/Bio/Website zusätzlich `user_accounts:read` in der
-Pinterest-Developer-App aktivieren (siehe ANLEITUNG-PINTEREST-API.md).
+Pinterest-Developer-App aktivieren (siehe docs/ANLEITUNG-PINTEREST-API.md).
 
 Ausgabe: PINTEREST-PROFILE-REPORT.md
 Exit:    0 = ok (Reporting) · 2 = Selbsttest-Sabotage
@@ -162,7 +162,7 @@ def main() -> int:
             api_notes.append(f"/user_account nicht verfügbar ({err}). Name/Bio/Website "
                              "werden aus dem Soll-Zustand als Checkliste geliefert. "
                              "→ Scope `user_accounts:read` in der Pinterest-Developer-App "
-                             "hinzufügen (ANLEITUNG-PINTEREST-API.md, Abschnitt Scopes).")
+                             "hinzufügen (docs/ANLEITUNG-PINTEREST-API.md, Abschnitt Scopes).")
         st, boards_resp = api_get("/boards?page_size=100&board_fields=id,name,description,pins_count", token)
         if st == 200:
             boards_live = boards_resp.get("items", [])

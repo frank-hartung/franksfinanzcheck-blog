@@ -107,7 +107,10 @@ jobs:
           git config user.email "pinterest-bot@users.noreply.github.com"
           # pinterest_tokens.enc ist erst da, wenn du den OAuth-Handschlag
           # gemacht hast – ohne Datei trotzdem committen (12.08. gehaertet).
-          git add PIN-STATUS.md data/pin_queue.yaml content/posts/ 2>/dev/null || true
+          # 12.09.2026 (Premium-Audit): PIN-STATUS.md gitignored/nicht
+          # versioniert; pro Pfad eigener add-Aufruf.
+          git add data/pin_queue.yaml 2>/dev/null || true
+          git add content/posts/ 2>/dev/null || true
                     # Erfolgs-Log der Secrets-Wache mitnehmen (sonst geht der Nachweis
           # mit dem Runner verloren und die Wache bleibt auf "UNBEKANNT").
           [ -f data/secrets_state.json ] && git add data/secrets_state.json 2>/dev/null || true

@@ -24,7 +24,7 @@
 #  (Settings → Secrets and variables → Actions). Beim nächsten Lauf
 #  erkennt der Autopilot den Kanal von selbst. Fehlt ein Secret, läuft
 #  der Kanal im Standby – sichtbar im Cockpit, OHNE Fehlalarm.
-#  Anleitung: ANLEITUNG-SOCIAL-AUTOPILOT.md
+#  Anleitung: docs/ANLEITUNG-SOCIAL-AUTOPILOT.md
 #
 #  Manuell: Actions → „Social-Autopilot" → Run workflow
 # ============================================================

@@ -272,7 +272,8 @@ jobs:
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
-          git add TEXTVERSTAENDNIS-REPORT.md data/verstaendnis_history.jsonl 2>/dev/null || true
+          # 12.09.2026 (Premium-Audit): Report gitignored/nicht versioniert.
+          git add data/verstaendnis_history.jsonl 2>/dev/null || true
           git add content/ 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Textverständnis: keine Änderungen."
@@ -311,9 +312,9 @@ jobs:
         run: |
           git config user.name "SEO-Bot"
           git config user.email "seo-bot@users.noreply.github.com"
+          # 12.09.2026 (Premium-Audit): Report + Audit-Cache gitignored/nicht
+          # versioniert (bleiben im Lauf-Log) – nur der Content wird gestagt.
           git add content/ 2>/dev/null || true
-          git add AFFILIATE-REPORT.md 2>/dev/null || true
-          git add .affiliate_report.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Keine Affiliate-Änderungen."
           else
@@ -459,26 +460,10 @@ jobs:
         run: |
           python3 scripts/set_lastmod.py --git-changed
 
-      - name: Meta-Report committen
-        # BUGFIX 13.08.: '.meta_report.json' steht bewusst in .gitignore
-        # (lokaler Cache, siehe .gitignore Zeile 19) – 'git add' auf einen
-        # per .gitignore ausgeschlossenen Pfad OHNE '-f' schlägt fehl und
-        # bricht den Schritt (bash -e) sofort ab. Da dieser Schritt gegen
-        # Ende der 30-teiligen Kette liegt, wurde er faktisch nie erreicht,
-        # solange frühere Schritte (Grammatik/Cover) die Kette vorher schon
-        # abbrachen – jetzt, wo die Kette weiter kommt, greift der Bug direkt.
-        # PREMIUM-HÄRTUNG #233: nicht-killend, Fangnetz sichert Reste.
-        continue-on-error: true
-        run: |
-          git config user.name "SEO-Bot"
-          git config user.email "seo-bot@users.noreply.github.com"
-          git add META-REPORT.md
-          if git diff --cached --quiet; then
-            echo "Report unverändert"
-          else
-            git commit -m "seo: Meta-Report aktualisiert (vollautomatisch)"
-            scripts/git_sync.sh --push-only
-          fi
+      # META-REPORT.md ist seit dem Premium-Audit 12.09.2026 gitignored und
+      # nicht versioniert (Report bleibt als Lauf-Artefakt im Log). Der
+      # frühere „Meta-Report committen“-Schritt ist weg: `git add` auf einen
+      # ignorierten Pfad bricht die Staging-Phase hart ab (bash -e).
 
       - name: Issue bei verbleibenden Meta-Problemen (kein manuelles Sichten nötig)
         # Greift NUR wenn nach der automatischen Optimierung noch Probleme

@@ -10,7 +10,7 @@ Funktionsweise:
   - Setzt danach "pinned: true" im Frontmatter (damit jeder Artikel nur
     EINMAL gepinnt wird)
 
-Voraussetzungen (einmalig, siehe ANLEITUNG-PINTEREST-API.md):
+Voraussetzungen (einmalig, siehe docs/ANLEITUNG-PINTEREST-API.md):
   - Pinterest-Developer-App + Access-Token (Umgebungsvariable PINTEREST_ACCESS_TOKEN)
   - Board-ID (Umgebungsvariable PINTEREST_BOARD_ID) – per --list-boards ermittelbar
 
@@ -145,7 +145,7 @@ def main():
         if dry_run:
             print("(Trockenlauf ohne Token – nur Anzeige, nichts wird gepinnt)")
         else:
-            sys.exit("FEHLER: PINTEREST_ACCESS_TOKEN fehlt (siehe ANLEITUNG-PINTEREST-API.md).")
+            sys.exit("FEHLER: PINTEREST_ACCESS_TOKEN fehlt (siehe docs/ANLEITUNG-PINTEREST-API.md).")
     if not board_id and not dry_run:
         sys.exit("FEHLER: PINTEREST_BOARD_ID fehlt – erst mit --list-boards ermitteln.")
 
