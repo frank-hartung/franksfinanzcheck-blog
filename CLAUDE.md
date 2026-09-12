@@ -20,6 +20,7 @@ Python-Gates in `scripts/`, ausführliche Zustands-Reports im Root.
    | `frontend-design` (Anthropic) | Neue Oberflächen mit eigener visueller Identität |
    | `design-taste-frontend` (taste-skill) | Anti-Slop-Disziplin bei Frontend-Arbeiten |
    | `webapp-testing` (Anthropic) | Browser-Interaktion/Test mit Playwright |
+   | `agent-reach` | **Jede** Internet-Recherche/Suche/URL-Lektüre (Twitter, Reddit, YouTube, GitHub, RSS, Web …) – auch bei deutschen Aufträgen („recherchiere …", „suche …", „was sagt man über …") |
    Aktualisierung: `npx skills update` (Quellen in `skills-lock.json`).
 2. **PRODUCT.md und DESIGN.md lesen, bevor eine Farbe geändert wird.**
    Sie enthalten die Marken-Tokens, Anti-References und harten Gates.
@@ -52,6 +53,21 @@ Playwright heimlich WebKit (device-`defaultBrowserType`-Falle).
   07:00 MESZ; HTML-Report als Artifact.
 - Agenten-Tokens haben KEINE `workflows`-Permission: Workflow-Dateien nur
   per Patch/PR mit vollwertigem Token ändern (siehe README, Known Issue).
+
+## Internet-Recherche (Agent Reach, seit 12.09.2026)
+
+- **Ad-hoc-Recherche/Suche/URL-Lektüre:** immer über den Skill
+  `.claude/skills/agent-reach/` (Routing-Tabelle + `references/` beachten;
+  vor Login-/Multi-Backend-Plattformen `agent-reach doctor --json` prüfen).
+  Nichts „aus dem Gedächtnis" erfinden, wenn das Netz die Antwort hat.
+- **Geplante Signalsammlung:** `scripts/agent_reach_research.py` liest den
+  kuratierten Themenplan (`data/agent_reach/themenplan.yaml`) und legt
+  Briefs unter `data/research/` ab (CI: `.github/workflows/agent-reach-research.yml`,
+  Mo 08:15 MESZ). Gesundheitscheck: `scripts/agent_reach_gate.py`.
+- **Leitplanken:** nur LESEN (nie posten/schreiben), keine Cookies/Logins in
+  CI, Facts aus Briefs erst nach menschlicher Prüfung in kuratierte Pools
+  (`data/aktuelle_entwicklungen.yaml`, `data/topics.yaml`) übernehmen.
+- Installations- und Betriebsdetails: `ANLEITUNG-AGENT-REACH.md`.
 
 ## Wichtige Konventionen
 

@@ -1,0 +1,24 @@
+# ============================================================
+#  Agent Reach – Recherche-Fähigkeit für KI-Agenten & CI
+#  (Integration 12.09.2026, siehe ANLEITUNG-AGENT-REACH.md)
+#
+#  WICHTIG – Sicherheits-/Supply-Chain-Hinweis:
+#  Das PyPI-Paket „agent-reach" (0.1.0, Autor jgalea) ist ein
+#  ANDERES, namensgleiches Projekt. Agent Reach wird AUSSCHLIESSLICH
+#  aus dem offiziellen GitHub-Repository installiert, gepinnt auf
+#  den Commit des Tags v1.5.0 (reproduzierbar, prüfbar).
+#
+#  Installation:  pip install -r requirements-agent-reach.txt
+#  Verifikation:  python3 scripts/agent_reach_gate.py
+# ============================================================
+
+# Agent Reach v1.5.0 (Tag-Pin: f65526cbaaad3879473acc1ba6dbefd195caf2be)
+https://github.com/Panniantong/Agent-Reach/archive/f65526cbaaad3879473acc1ba6dbefd195caf2be.zip
+
+# YouTube-/Video-Backend (von Agent Reach geroutet; hier explizit,
+# damit die Version nicht unbemerkt driftet – upstream constraint: >=2026.07.04)
+yt-dlp>=2026.07.04
+
+# RSS-Backend (ist ohnehin Agent-Reach-Abhängigkeit; explizit für
+# scripts/agent_reach_research.py, das feedparser direkt nutzt)
+feedparser>=6.0
