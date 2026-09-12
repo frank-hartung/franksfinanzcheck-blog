@@ -39,6 +39,8 @@ npx playwright test                  # nur Tests (nutzt vorhandenes public/)
 node e2e/design-metrics.mjs          # messbarer Design-Audit (stdout = JSON)
 node e2e/design-shots.mjs            # Screenshots für Design-Reviews → shots/
 python3 scripts/layout_audit.py      # bestehendes statisches Layout-Gate
+python3 -m unittest discover -s scripts/tests        # Unit-Tests (u. a. Alarm-Routing)
+python3 scripts/alert_router.py --selftest           # Routing-Regeln (Besitz/Kadenz/Schließpfad)
 ```
 
 E2E-Architektur (Details in `e2e/`-Datei-Köpfen): zero-dependency
@@ -53,6 +55,19 @@ Playwright heimlich WebKit (device-`defaultBrowserType`-Falle).
   07:00 MESZ; HTML-Report als Artifact.
 - Agenten-Tokens haben KEINE `workflows`-Permission: Workflow-Dateien nur
   per Patch/PR mit vollwertigem Token ändern (siehe README, Known Issue).
+
+## Alarm-Routing (seit #272, 12.09.2026)
+
+**Nie wieder einen Befund ohne Besitzer melden.** Jeder neue Melde-Befund
+braucht `owner` (`auto` = Maschine heilt, `human` = nur ein Mensch), `severity`
+(P1–P3) und `channel` (Label, dem das Ticket gehört). Menschliche Befunde
+öffnen **kein** Automations-Ticket und halten keins offen – sonst entsteht der
+Dauer-Alarm ohne Schließpfad, der #272 erzeugt hat.
+
+- SSOT: `scripts/alert_router.py` (Planung rein/testbar, `gh`-Aufrufe abgesichert)
+- Anwender: `scripts/bot_watchdog.py --route`
+- Vertrag: `governance_contract.py` **C14** (prüft Besitz-Trennung + Schließpfad)
+- Betriebsmodell: `docs/ALARMROUTING-2026-09-12.md`
 
 ## Internet-Recherche (Agent Reach, seit 12.09.2026)
 

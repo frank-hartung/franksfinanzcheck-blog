@@ -42,6 +42,10 @@ ohne Netzwerk, ohne API, determinisch. Läuft lokal, im Premium-Governance-Lauf
   C12 Label-Garantie    – jeder Workflow, der ein Issue mit Label erzeugt, legt
                           das Label vorher an; sonst scheitert der Melder am
                           Melden (Ursache des roten Laufs in #209)
+  C14 Alarm-Routing     – jeder Befund hat einen Besitzer (Maschine/Mensch),
+                          einen Kanal und einen Schließpfad. Menschliche Befunde
+                          dürfen kein Automations-Ticket öffnen oder offen halten
+                          (sonst Dauer-Alarm ohne Ausweg, #272)
 
 Exit-Codes: 0 = Vertrag erfüllt · 1 = Verletzung(en) · 2 = Selbsttest/Fehler
 
@@ -79,11 +83,16 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "live_policy_guard.py", "draft_triage.py", "check_uniqueness.py",
           "audio_coverage_check.py", "newsletter_digest.py",
           # Social-Autopilot: der fail-closed Selbsttest der Kanallogik
-          "social_studio.py"]
+          "social_studio.py",
+          # Alarm-Routing (#272): Besitz, Kadenz, Schließpfad
+          "alert_router.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
 TOKEN_BROKER = "pinterest_token"
+
+# Kanal der maschinell behebbaren Befunde (Alarm-Routing, C14).
+GENERIC_LABEL = "bot-watchdog"
 TOKEN_BROKER_EXEMPT = {"pinterest_token.py", "pinterest_auth.py"}
 TOKEN_WORKFLOW = "pinterest-token.yml"
 
@@ -492,6 +501,84 @@ def c9_secret_leak(texts):
 
 # ------------------------------------------------------------------ Ausführung
 
+def c14_alarm_routing(wflows, script_texts, root=BLOG_DIR):
+    """C14: Jeder Alarm hat einen Besitzer, eine Kadenz und einen Schließpfad.
+
+    Auslöser (#272, 12.09.2026): Der Bot-Watchdog kannte nur EINEN Meldeweg.
+    Ein Befund, den ausschließlich ein Mensch heilen kann (totes Pinterest-
+    Token → OAuth im Browser), lief als „Problem mit der Content-
+    Automatisierung" durchs Haus – und weil der automatische Schließpfad
+    „grün melden" voraussetzte, das Grün aber am Menschen hing, konnte das
+    Ticket NIE zugehen: #251 → #272 → täglich ein neues Gesicht. Ein Melder
+    ohne Besitz und ohne Schließpfad ist ein Dauerläufer, kein Melder.
+
+    Geprüft wird dreierlei: der Router existiert und verhält sich richtig,
+    der Watchdog meldet ausschließlich über ihn, und menschliche Befunde
+    kommen niemals in den Automations-Kanal.
+    """
+    out = []
+    router = script_texts.get("alert_router.py", "")
+    watchdog = script_texts.get("bot_watchdog.py", "")
+    rel = "bot-watchdog.yml"
+    raw = ""
+    for path, text in wflows.items():
+        if os.path.basename(path) == rel:
+            raw = text
+    text = "\n".join(l for l in raw.splitlines() if not l.lstrip().startswith("#"))
+
+    # a) Der Router existiert und trägt die vier tragenden Teile.
+    if not router.strip():
+        out.append(("C14", "scripts/alert_router.py fehlt – ohne ihn gibt es keinen "
+                           "Besitzer, keine Kadenz und keinen Schließpfad (#272)."))
+    else:
+        for needle in ("def plan_generic(", "def plan_channels(", "def tier_for_age(",
+                       "class Finding"):
+            if needle not in router:
+                out.append(("C14", f"scripts/alert_router.py: `{needle}` fehlt – die "
+                                   "Router-Logik ist nicht vollständig prüfbar."))
+
+    # b) Der Watchdog meldet über den Router – nicht mit eigenem gh-Aufruf.
+    if raw:
+        if "--route" not in text:
+            out.append(("C14", f"{rel}: kein `bot_watchdog.py --route` – die Meldung läuft "
+                               "am Alarm-Router vorbei (Rückfall in den Dauer-Alarm)."))
+        if re.search(r"gh issue create", text) and GENERIC_LABEL in text:
+            out.append(("C14", f"{rel}: erzeugt Issues mit eigenem `gh issue create` im "
+                               f"Kanal `{GENERIC_LABEL}` – Besitz und Kadenz liegen damit "
+                               "wieder im YAML statt im Router (#272-Regression)."))
+
+    # c) Verhalten: Besitzer-Trennung + kein Ticket für Mensch-Befunde.
+    if watchdog.strip():
+        try:
+            sys.path.insert(0, os.path.join(root, "scripts"))
+            import alert_router as ar
+            import bot_watchdog as bw
+            mensch = bw._f("pinterest-token", "Token tot", owner="human",
+                           channel="pinterest-token")
+            maschine = bw._f("cadence", "Kadenz", severity="P1", owner="auto")
+            m, h = bw.split_findings([mensch, maschine])
+            if len(m) != 1 or len(h) != 1:
+                out.append(("C14", "scripts/bot_watchdog.py: split_findings trennt "
+                                   "Maschinen- und Menschen-Befunde nicht sauber."))
+            decision = ar.plan_generic([mensch], None,
+                                       datetime.datetime.now(datetime.timezone.utc))
+            if decision.action != "none":
+                out.append(("C14", "scripts/bot_watchdog.py: ein menschlicher Befund öffnet "
+                                   "das Automations-Ticket – genau die Sackgasse aus #272."))
+            offen = ar.IssueRef(number=1,
+                                created_at=datetime.datetime.now(datetime.timezone.utc)
+                                - datetime.timedelta(days=3))
+            if ar.plan_generic([mensch], offen,
+                               datetime.datetime.now(datetime.timezone.utc)).action != "close":
+                out.append(("C14", "scripts/bot_watchdog.py: ein offenes Automations-Ticket "
+                                   "ohne maschinellen Befund wird nicht geschlossen – "
+                                   "Schließpfad fehlt (#272)."))
+        except Exception as exc:  # Import/Logikfehler sind ein Befund, kein Absturz
+            out.append(("C14", f"Alarm-Routing nicht prüfbar: "
+                               f"{exc.__class__.__name__}: {exc}"))
+    return out
+
+
 def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     gov = _read(os.path.join(root, ".github", "workflows", "premium-governance.yml"))
     gate = _read(os.path.join(root, "scripts", "governance_gate.py"))
@@ -547,6 +634,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c11_token_lifecycle(wflows, root=root)
     checks += c12_label_guarantee(wflows)
     checks += c13_proof_integrity(wflows, auth_text=script_texts.get("pinterest_auth.py", ""))
+    checks += c14_alarm_routing(wflows, script_texts, root=root)
     return checks
 
 
@@ -584,13 +672,16 @@ RULE_TEXT = {
            "Token-Wache rotiert den Refresh-Token proaktiv, und die Autorisierung "
            "fordert die echten v5-Scopes – sonst steht `unverified` im Cockpit, während "
            "niemand gemessen hat (#219).",
+    "C14": "Jeder Alarm hat einen Besitzer (Maschine oder Mensch), einen Kanal und "
+           "einen Schließpfad: menschliche Befunde öffnen kein Automations-Ticket und "
+           "halten keins offen – sonst wird der Melder zum Dauerläufer (#272).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C4": "Issue-Policy", "C5": "Nachweis-Provenienz", "C6": "Selbsttests",
          "C7": "Datenkonsistenz", "C8": "Commit-Hygiene", "C9": "Secret-Leak-Schutz",
          "C10": "Token-Broker", "C11": "Token-Lebenszyklus", "C12": "Label-Garantie",
-         "C13": "Nachweis-Echtheit"}
+         "C13": "Nachweis-Echtheit", "C14": "Alarm-Routing"}
 
 
 def render_md(checks, ok_notes=()):
@@ -811,6 +902,25 @@ def _selftest():
     good_scope = 'DEFAULT_SCOPES = "boards:read,boards:write,pins:read,pins:write,user_accounts:read"\n'
     if c13_proof_integrity({}, auth_text=good_scope):
         failures.append("C13: korrekte v5-Scopes werden beanstandet")
+    # --- C14: Alarm ohne Besitzer/Schließpfad (Ursache #272)
+    bad_wf = {".github/workflows/bot-watchdog.yml":
+              "run: |\n  gh issue create --label bot-watchdog --title \"Alarm\" --body \"x\"\n"}
+    if not any(code == "C14" for code, _ in c14_alarm_routing(bad_wf, {})):
+        failures.append("C14: Melde-Logik im YAML statt im Router bleibt unentdeckt (#272)")
+    good_wf = {".github/workflows/bot-watchdog.yml":
+               "run: |\n  python3 scripts/bot_watchdog.py --route\n"}
+    router_src = _read(os.path.join(BLOG_DIR, "scripts", "alert_router.py"))
+    watchdog_src = _read(os.path.join(BLOG_DIR, "scripts", "bot_watchdog.py"))
+    if not router_src or not watchdog_src:
+        failures.append("C14: Router oder Watchdog nicht lesbar – Vertrag nicht prüfbar")
+    else:
+        res = c14_alarm_routing(good_wf, {"alert_router.py": router_src,
+                                          "bot_watchdog.py": watchdog_src})
+        if res:
+            failures.append(f"C14: sauberes Routing wird beanstandet: {res}")
+    if not c14_alarm_routing({}, {}):
+        failures.append("C14: fehlender Router (kein Besitz, kein Schließpfad) bleibt unentdeckt (#272)")
+
     # --- LABEL/Regeltext-Deckung: jede Regel ist erklärt (Doku gehört zum Vertrag)
     for code in LABEL:
         if code not in RULE_TEXT or len(RULE_TEXT[code]) < 40:
@@ -843,7 +953,7 @@ def main(argv=None):
             if annotate:
                 print(f"::error::{line}")
     else:
-        print("🔒 GOVERNANCE-VERTRAG erfüllt – alle dreizehn Regeln prüfen in beide "
+        print("🔒 GOVERNANCE-VERTRAG erfüllt – alle vierzehn Regeln prüfen in beide "
               "Richtungen (Fehler UND Schein-Sicherheit).")
     if "--md" in argv:
         target = argv[argv.index("--md") + 1]
