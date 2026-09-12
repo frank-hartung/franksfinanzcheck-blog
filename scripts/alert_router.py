@@ -754,6 +754,28 @@ def route(findings: Sequence[Finding],
     return report
 
 
+def should_notify(client: "GhClient", channel: str, every_days: int,
+                  now: datetime.datetime | None = None) -> tuple[bool, str]:
+    """Ist die nächste Erinnerung in diesem Kanal fällig?
+
+    Für Fach-Workflows, die ihr Ticket selbst besitzen (z. B.
+    `pinterest-token.yml`): Sie dürfen erinnern, aber nicht im Taktfeuer.
+    Ohne offenes Ticket ist die Erinnerung immer fällig (dann wird eröffnet).
+    """
+    now = now or datetime.datetime.now(datetime.timezone.utc)
+    ticket = client.find_ticket(channel)
+    if ticket is None:
+        return True, "kein offenes Ticket im Kanal – Erinnerung fällig"
+    last = client.last_comment_at(ticket.number)
+    if last is None:
+        return True, f"Ticket #{ticket.number} ohne Kommentar"
+    age = (now - last).total_seconds() / 86400.0
+    if age >= every_days:
+        return True, f"letzter Kommentar {age:.1f} Tage alt (Kadenz {every_days} Tage)"
+    return False, (f"Ticket #{ticket.number}: letzter Kommentar {age:.1f} Tage alt "
+                   f"– Kadenz {every_days} Tage noch nicht erreicht")
+
+
 def render_close_comment(findings: Sequence[Finding], now: datetime.datetime) -> str:
     human = human_findings(findings)
     lines = [f"✅ **{now:%Y-%m-%d %H:%M} UTC** – kein maschinell behebbarer Befund mehr offen.",
@@ -855,6 +877,26 @@ def _selftest() -> int:
     check("Kanal-Default: Mensch → human-action",
           Finding(id="x", title="y", owner="human").channel == "human-action")
 
+    # 6b) Erinnerungstakt für Fach-Workflows
+    class _Fake:
+        def __init__(self, ticket, last):
+            self._ticket, self._last = ticket, last
+
+        def find_ticket(self, _channel):
+            return self._ticket
+
+        def last_comment_at(self, _number):
+            return self._last
+
+    jung = now - datetime.timedelta(days=2)
+    alt = now - datetime.timedelta(days=9)
+    check("Kadenz: frischer Kommentar bremst",
+          should_notify(_Fake(IssueRef(number=1), jung), "x", 7, now)[0] is False)
+    check("Kadenz: alter Kommentar lässt melden",
+          should_notify(_Fake(IssueRef(number=1), alt), "x", 7, now)[0] is True)
+    check("Kadenz: ohne Ticket ist Erinnerung fällig",
+          should_notify(_Fake(None, None), "x", 7, now)[0] is True)
+
     # 7) Round-Trip JSON (Findings-Datei der Wachen)
     rt = Finding.from_dict(human.as_dict())
     check("JSON-Roundtrip", rt == human)
@@ -887,6 +929,25 @@ def main(argv: Sequence[str] | None = None) -> int:
         plan += [d.__dict__ for d in plan_channels(findings, {}, now, {})]
         print(json.dumps(plan, ensure_ascii=False, indent=2, default=str))
         return 0
+
+    if "--should-notify" in argv:
+        # Fach-Workflows fragen damit ihren eigenen Erinnerungstakt ab.
+        try:
+            channel = argv[argv.index("--should-notify") + 1]
+        except IndexError:
+            print("⚠️  --should-notify braucht einen Kanalnamen.")
+            return 1
+        every_days = 7
+        if "--every-days" in argv:
+            try:
+                every_days = int(argv[argv.index("--every-days") + 1])
+            except (IndexError, ValueError):
+                print("⚠️  --every-days braucht eine ganze Zahl.")
+                return 1
+        client = GhClient()
+        fällig, grund = should_notify(client, channel, every_days)
+        print(("✅ Erinnerung fällig – " if fällig else "⏳ noch nicht fällig – ") + grund)
+        return 0 if fällig else 1
 
     if "--status" in argv:
         client = GhClient()

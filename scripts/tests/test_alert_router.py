@@ -232,6 +232,26 @@ class TestRouteAusfuehrung(unittest.TestCase):
         self.assertEqual(create[0]["channel"], "pinterest-token")
         self.assertEqual(create[0]["issue"], 300)
 
+    def test_erinnerungstakt_fuer_fach_workflows(self):
+        """Fach-Workflows dürfen erinnern – aber nicht im Taktfeuer."""
+
+        class _Client:
+            def __init__(self, ticket, last):
+                self._ticket, self._last = ticket, last
+
+            def find_ticket(self, _channel):
+                return self._ticket
+
+            def last_comment_at(self, _number):
+                return self._last
+
+        frisch = _Client(ar.IssueRef(number=1), NOW - datetime.timedelta(days=2))
+        self.assertFalse(ar.should_notify(frisch, "pinterest-token", 7, NOW)[0])
+        alt = _Client(ar.IssueRef(number=1), NOW - datetime.timedelta(days=9))
+        self.assertTrue(ar.should_notify(alt, "pinterest-token", 7, NOW)[0])
+        leer = _Client(None, None)
+        self.assertTrue(ar.should_notify(leer, "pinterest-token", 7, NOW)[0])
+
     def test_fehlgeschlagene_aktion_wird_nicht_als_erledigt_vermerkt(self):
         """Ein nicht zugestellter Kommentar darf die Eskalationsstufe nicht verbrauchen."""
 

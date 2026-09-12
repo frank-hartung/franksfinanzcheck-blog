@@ -248,12 +248,38 @@ jobs:
             --description "Pinterest-Zugang: einmalige Handlung nötig" --force || true
 
       # Melden nur, wenn ein Mensch gebraucht wird. Alles andere heilt der Lauf.
+      # Seit #272 (12.09.2026): Solange Pinterest die Domain sperrt, ist eine
+      # Neu-Autorisierung wirkungslos – der Kanal ist geparkt. Dann eröffnet
+      # diese Wache KEIN eigenes Token-Ticket (das Kanal-Ticket führt der
+      # Bot-Watchdog: Label `pinterest-parked`) und erinnert nur im 7-Tage-Takt
+      # statt täglich. Ohne Sperre gilt unverändert der alte Weg.
+      - name: Meldetakt bestimmen (Kanal geparkt?)
+        id: takt
+        if: ${{ always() && !inputs.show_auth_url }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PARKED=0
+          if [ -f data/pinterest_domain_block.json ]; then PARKED=1; fi
+          echo "parked=$PARKED" >> "$GITHUB_OUTPUT"
+          if [ "$PARKED" = "1" ]; then
+            if python3 scripts/alert_router.py --should-notify "$TOKEN_LABEL" --every-days 7; then
+              echo "notify=1" >> "$GITHUB_OUTPUT"
+            else
+              echo "notify=0" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "notify=1" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Befund melden oder schließen (ein Issue, kein Duplikat)
         if: ${{ always() && !inputs.show_auth_url }}
         env:
           GH_TOKEN: ${{ github.token }}
           EXCHANGE_RC: ${{ steps.exchange.outputs.rc }}
           MISSING: ${{ steps.pre.outputs.missing }}
+          PARKED: ${{ steps.takt.outputs.parked }}
+          NOTIFY: ${{ steps.takt.outputs.notify }}
         run: |
           field() { python3 -c "import json,sys;d=json.load(open('data/pinterest_token_state.json'));print(d.get(sys.argv[1]) or sys.argv[2])" "$1" "$2" 2>/dev/null || echo "$2"; }
           STATE="$(field state unknown)"
@@ -279,6 +305,25 @@ jobs:
             [ -n "$OPEN" ] && gh issue comment "$OPEN" --repo "$GITHUB_REPOSITORY" \
               --body "🟡 Pinterest war in [Run ${GITHUB_RUN_ID}](${RUN}) nicht erreichbar – kein Handlungsbedarf, morgen erneut."
             exit 0
+          fi
+
+          # Geparkter Kanal (Domain-Sperre): Reihenfolge erklären und Takt achten.
+          if [ "${PARKED:-0}" = "1" ]; then
+            EXTRA=""
+            EXTRA="$EXTRA"$'\n'"### ⏸️ Kanal geparkt – Reihenfolge beachten"$'\n'
+            EXTRA="$EXTRA""Pinterest hat \`franksfinanzcheck.de\` gesperrt (\`data/pinterest_domain_block.json\`)."$'\n'
+            EXTRA="$EXTRA""Solange die Sperre steht, pinnt der Betrieb bewusst nicht – eine neue"$'\n'
+            EXTRA="$EXTRA""Autorisierung bringt erst NACH der Domain-Freigabe etwas"$'\n'
+            EXTRA="$EXTRA""(\`docs/PINTEREST-SPIELBUCH.md\`). Das Kanal-Ticket führt der Bot-Watchdog"$'\n'
+            EXTRA="$EXTRA""(Label \`pinterest-parked\`); diese Wache erinnert deshalb nur im 7-Tage-Takt."$'\n'
+            if [ -z "$OPEN" ]; then
+              echo "⏸️ Kanal geparkt – kein neues Token-Ticket (Kanal-Ticket führt der Bot-Watchdog)."
+              exit 0
+            fi
+            if [ "${NOTIFY:-1}" != "1" ]; then
+              echo "⏸️ Kanal geparkt – Erinnerung nicht fällig (7-Tage-Takt)."
+              exit 0
+            fi
           fi
 
           EXTRA=""

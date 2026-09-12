@@ -135,6 +135,11 @@ python3 scripts/bot_watchdog.py --emit-env          # prüfen, Env schreiben, Fi
 python3 scripts/bot_watchdog.py --route             # melden (Besitz, Kadenz, Auto-Close)
 python3 scripts/bot_watchdog.py --route --dry-run   # nur planen, nichts schreiben
 python3 scripts/alert_router.py --status            # offene Tickets + Eskalationsstufe
+
+# Für Fach-Workflows, die ihr Ticket selbst besitzen (z. B. pinterest-token.yml):
+# „Darf ich heute erinnern?“ – verhindert das tägliche Nachfassen im eigenen Ticket.
+python3 scripts/alert_router.py --should-notify pinterest-token --every-days 7
+# Exit 0 = fällig · Exit 1 = noch nicht fällig (Kadenz nicht erreicht)
 python3 scripts/alert_router.py --selftest          # Routing-Regeln prüfen
 python3 -m unittest discover -s scripts/tests -p 'test_*alert*.py' -v
 ```
