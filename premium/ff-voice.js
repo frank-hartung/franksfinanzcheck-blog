@@ -1,0 +1,4908 @@
+/* ============================================================
+   FranksFinanzcheck — FF Voice Studio (Lesehilfen, Generation 5 — ElevenLabs Premium)
+   12.09.2026 — Profi-Agentur, Premium-Level (ElevenLabs · männlich · DE+EN ohne Umschalter)
+   ------------------------------------------------------------
+   VORLESEN — Zwei garantierte Tonpfade, eine Regie, kein Umschalter:
+       (a) STUDIO-TONSPUR — vorab vertonte MP3, gesprochen von einer
+           MÄNNLICHEN ELEVENLABS-PREMIUM-STIMME (Eleven Multilingual v2,
+           Voice Adam, serverseitig erzeugt durch scripts/ff_voice_audio.py,
+           Profil „eleven“) im nativen HTML5-Player. Eine Stimme, zwei
+           Sprachen (DE+EN) — auto Language-Detect pro Block/Satz, kein
+           Schalter. Identischer Klang auf iPhone, iPad, Mac, Android,
+           Windows/Linux und in Chrome, Safari, Firefox, Edge.
+           Ohne ElevenLabs-Key fällt die Kette automatisch auf die
+           männliche Edge-Nachrichtensprecher-Doppelbesetzung
+           (Conrad DE / Andrew EN) — niemals stumm.
+       (b) BROWSER-ENGINE — lokale Web Speech API mit derselben
+           Regie (Conrad/Andrew, Florian/Brian, Killian/Ryan), wenn keine
+           Tonspur vorliegt oder sie nicht ladbar ist. Nie stumm, nie
+           eine Warteschleife.
+
+   PREMIUM-BILINGUAL OHNE UMSCHALTER (12.09.2026, Profi-Agentur)
+     Die Vorlese-Funktion spricht Deutsch UND Englisch — mit EINER
+     männlichen Stimme, ohne Menü und ohne Umschalter. Die Sprache
+     wird je Block/Satz automatisch erkannt (ä/ö/ü/ß + Stopwörter), die
+     Studio-Stimme (ElevenLabs Multilingual v2, Adam) schaltet selbst,
+     die Browser-Engine wählt Conrad vs. Andrew etc. Das Paritäts-Gate
+     (scripts/ff_voice_parity_check.py) hält beide Regien auf diesem
+     Vertrag — premium, first-party, DSGVO-sauber.
+
+   LESEANZEIGE — wortgenau (WCAG 2.2 AA, barrierefrei auf
+   Verlagshaus-Niveau)
+     „Was wird gerade vorgelesen?“ — drei Ebenen, ein Rechenweg:
+       · WORT für Wort: das gesprochene Wort leuchtet im Artikeltext
+         (Studio-Tonspur: Wortuhr der Tonspur-Konfiguration auf ms —
+         Browser-Engine: onboundary-Grenzen der Engine; ohne beides:
+         redliche Zeit-Schätzung, nie ein Blindflug).
+       · SATZ für Satz: die Leiste zeigt den aktuell gesprochenen
+         Satz und hebt das aktuelle Wort darin hervor.
+       · ABSCHNITT für Abschnitt: „Abschnitt n von m“, Wortzähler
+         „Wort i von n“, Prozent, Restzeit — alles auch als
+         aria-valuetext der Fortschritts-Meter-Rolle.
+     Automatik ohne Umschalter; bei prefers-reduced-motion ohne
+     Sanft-Scroll; in Forced-Colors/Trajektion mit Systemfarben.
+
+   KURZFASSUNG
+     Verlagshaus-Kurzfassung im barrierefreien <dialog>:
+     Kurzantwort, Byline, Kernaussagen, Zahlen auf einen Blick,
+     Tabellen im Fokus (mit Mini-Vorschau), Inhaltsverzeichnis,
+     Kopier-Funktion, Fokus-Falle, Scroll-Sperre.
+
+   TABELLEN & ÜBERSICHTEN (vollständig, mit Zeilen und Spalten)
+     HTML- und ARIA-Tabellen (role="table"/"grid"/"treegrid",
+     Zeilen über role="row") werden als logisches Gitter gelesen:
+     colspan/rowspan korrekt aufgespannt, mehrzeilige Köpfe,
+     Zeilentitel (th scope="row"), Gruppen-, Summen- und
+     Werbelink-Zeilen als eigene Rollen, Titel-Kaskade aus
+     caption/aria-label/Premium-Headline/Überschrift davor.
+     Details: VORLESEN-TABELLEN-HIGHEND-REPORT.md
+
+   FIRST-PARTY & PRIVACY: keine Fremd-CDNs, kein Tracking, keine
+   Netzwerkaufrufe zur Laufzeit — die Tonspur liegt auf dem
+   eigenen Ursprung, die Browserstimme bleibt auf dem Gerät.
+
+   BARRIEREFREIHEIT: WCAG 2.2 / BITV — Rollen, aria-live-Status,
+   Fokus-Sichtbarkeit, Fokus-Falle, Tastatursteuerung (Esc,
+   Leertaste in der Leiste, ←/→ Abschnitt, Shift+←/→ Satz),
+   prefers-reduced-motion, sichtbare Live-Markierung,
+   Hoher-Kontrast-Modus.
+
+   VERTRAG MIT DEM GENERATOR (scripts/ff_voice_audio.py):
+     <script type="application/json" id="ff-voice-track-config">
+     { "src": "...", "version": "2026.09.12-elevenlabs", "voice": {"eleven":"Adam", "model":"eleven_multilingual_v2"}, "lang": "de|en",
+       "duration": ms,
+       "chunks": [ { "b": blockIndex, "t0": ms, "t1": ms, "lang": "de|en",
+                     "w": [ [rohwortIndex, ms], ... ]? } ] }  // lang je Chunk, auto — kein Umschalter
+     `b` ist der 0-basierte Blockindex in Lesereihenfolge
+     (0 = Anmoderation, letzter = Abmoderation) — exakt die
+     Reihenfolge von collectBlocks(). Das Feld `w` ist die Wortuhr:
+     je rohem Wort des Blocktextes (Whitespace-Tokonisierung von
+     block.text) der Absolute ms-Zeitpunkt des Sprechbeginns.
+     Die Parität zwischen Generator und Reader wird durch
+     scripts/ff_voice_parity_check.py erzwungen.
+============================================================ */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var win = window;
+
+  /* ============================================================
+     1 · KONFIGURATION
+     ============================================================ */
+
+  var VOICE_VERSION = '2026.09.12-elevenlabs';
+
+  var cfgEl = doc.getElementById('ff-voice-config');
+  if (!cfgEl) return;
+
+  var cfg = {};
+  try { cfg = JSON.parse(cfgEl.textContent || '{}') || {}; } catch (e) { cfg = {}; }
+
+  // Studio-Tonspur: eigener, austauschbarer Config-Block. Fehlt er,
+  // bleibt der Browser-Pfad aktiv (kostenloser Sofort-Fallback).
+  var trackEl = doc.getElementById('ff-voice-track-config');
+  if (trackEl) {
+    try {
+      var trackCfg = JSON.parse(trackEl.textContent || '{}') || {};
+      if (trackCfg && trackCfg.audio) cfg.audio = trackCfg.audio;
+      else if (trackCfg && trackCfg.src) cfg.audio = trackCfg;
+    } catch (e) {}
+  }
+
+  var bar = doc.getElementById('ff-voice-bar');
+  var slot = doc.getElementById('ff-voice-slot');
+  var playBtn = doc.getElementById('ff-voice-play');
+  var playLabel = doc.getElementById('ff-voice-play-label');
+  var prevBtn = doc.getElementById('ff-voice-prev');
+  var nextBtn = doc.getElementById('ff-voice-next');
+  var stopBtn = doc.getElementById('ff-voice-stop');
+  var summaryBtn = doc.getElementById('ff-voice-summary');
+  var summaryLabel = doc.getElementById('ff-voice-summary-label');
+  var statusEl = doc.getElementById('ff-voice-status');
+  var remainEl = doc.getElementById('ff-voice-remaining');
+  var progressMeterEl = doc.getElementById('ff-voice-meter');
+  var progressModeEl = doc.getElementById('ff-voice-progress-mode');
+  var progressLabelEl = doc.getElementById('ff-voice-progress-label');
+  var progressValueEl = doc.getElementById('ff-voice-progress-value');
+  var progressEl = doc.getElementById('ff-voice-progress');
+  var nowLabelEl = doc.getElementById('ff-voice-live-label');
+  var nowEl = doc.getElementById('ff-voice-now');
+  var posEl = doc.getElementById('ff-voice-pos');
+  var wordCountEl = doc.getElementById('ff-voice-word-count');
+
+  if (!bar || !playBtn || !summaryBtn) return;
+
+  var reducedMotion = !!(win.matchMedia && win.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var STORE_POS = 'ff-voice-pos:' + String(cfg.slug || cfg.permalink || doc.location.pathname);
+
+  /* ============================================================
+     2 · OBERFLÄCHEN-TEXT — PREMIUM-BILINGUAL OHNE UMSCHALTER
+     ------------------------------------------------------------
+     Die Vorlese-Funktion spricht Deutsch UND Englisch — mit EINER
+     männlichen ElevenLabs-Premium-Stimme (Multilingual v2, Adam),
+     ohne Menü und ohne Umschalter. Die Sprache wird je Artikel/
+     Block automatisch erkannt (ä/ö/ü + Stopwörter); ein englischer
+     Satz im deutschen Artikel erklingt also auf Englisch — mit
+     demselben Klang. Das Paritäts-Gate hält Reader und Generator
+     auf diesem Vertrag — premium, DSGVO-sauber, first-party.
+     ============================================================ */
+
+  // Premium-Bilingual: Sprache wird je Artikel auto gewählt (kein Umschalter für Leser).
+  // Die ElevenLabs-Stimme (Adam) spricht BEIDES nativ; die Browser-Fallbacks wählen
+  // Conrad/Andrew etc. je nach erkannter Sprache — ein Klang, kein Menü.
+  var I18N = {
+    de: {
+      play: 'Vorlesen', pause: 'Pausieren', resume: 'Weiterlesen', stop: 'Beenden',
+      playAria: 'Artikel vorlesen (männliche ElevenLabs-Premium-Stimme, DE & EN)',
+      playAriaNeutral: 'Artikel vorlesen (Stimme deines Geräts)',
+      pauseAria: 'Vorlesen pausieren', resumeAria: 'Vorlesen fortsetzen', stopAria: 'Vorlesen beenden',
+      summaryBtn: 'Kurzfassung', summaryAria: 'Kurzfassung des Artikels anzeigen',
+      unsupported: 'Vorlesen wird von diesem Browser nicht unterstützt.',
+      noText: 'Kein vorlesbarer Text gefunden.',
+      started: 'Vorlesen gestartet.',
+      startedTrack: 'ElevenLabs Studio läuft.',
+      trackDefective: 'Die Tonspur dieses Artikels ist unbrauchbar – die Stimme deines Geräts übernimmt.',
+      trackBroken: 'Tonspur konnte nicht geladen werden – die Stimme deines Geräts übernimmt.',
+      trackEndedEarly: 'Die Tonspur endet zu früh – es geht mit der Gerätestimme weiter.',
+      trackSilent: 'Die Tonspur bleibt stumm – die Stimme deines Geräts übernimmt.',
+      trackStalled: 'Die Tonspur hängt – die Stimme deines Geräts übernimmt.',
+      synthesisDead: 'Sprachausgabe ist auf diesem Gerät nicht verfügbar. Der Artikel bleibt vollständig lesbar.',
+      synthesisMute: 'Dein Browser meldet Sprachausgabe, gibt aber keinen Ton aus. Das Vorlesen wurde gestoppt – der Artikel bleibt vollständig lesbar.',
+      voiceActive: 'ElevenLabs Premium-Stimme aktiv (männlich, DE & EN).',
+      voiceFallback: 'Vorlesen gestartet; dein Browser stellt die verfügbare Stimme bereit.',
+      voiceLoading: 'Premium-Stimme wird geladen …',
+      sectionError: 'Dieser Abschnitt konnte nicht abgespielt werden; es geht weiter.',
+      paused: 'Vorlesen pausiert.', resumed: 'Vorlesen fortgesetzt.',
+      finished: 'Vorlesen beendet.', resumedPos: 'Vorlesen an der zuletzt gehörten Stelle fortgesetzt.',
+      remaining: 'noch ca. {min} Min.',
+      progressIdle: 'Noch nicht gestartet',
+      progressNowLabel: 'Gerade vorgelesen',
+      progressPos: 'Abschnitt {n} von {total}',
+      progressWords: 'Wort {i} von {total}',
+      progressModeReady: 'Bereit', progressModeSpeech: 'Gerät', progressModeTrack: 'ElevenLabs', progressModePaused: 'Pause', progressModeDone: 'Fertig',
+      progressHeading: 'Überschrift', progressParagraph: 'Absatz', progressList: 'Liste', progressQuote: 'Zitat',
+      progressCallout: 'Merksatz', progressWarning: 'Hinweis', progressOverview: 'Übersicht',
+      progressTableIntro: 'Tabelle im Überblick', progressTableHeader: 'Tabelle · Spalten', progressTableGroup: 'Tabelle · Gruppe',
+      progressTableRow: 'Tabelle · Zeile {row} von {total}', progressTableSum: 'Tabelle · Summe', progressTableCta: 'Tabelle · Empfehlung', progressTableOutro: 'Tabellenende',
+      progressIntro: 'Intro', progressOutro: 'Abschluss',
+      mediaTitle: '{title} – FranksFinanzcheck',
+      mediaArtist: 'FranksFinanzcheck – ElevenLabs Premium (männlich, DE & EN ohne Umschalter)',
+      introLine: '{title}. Ein Beitrag von FranksFinanzcheck. Hördauer etwa {duration}.',
+      durationMinutes: '{n} Minuten', durationMinuteOne: 'eine Minute', durationUnknown: 'einige Minuten',
+      outroLine: 'Ende des Beitrags. Vielen Dank fürs Zuhören bei FranksFinanzcheck.',
+      listItemNum: 'Punkt {n}:',
+      cueShortAnswer: 'Kurzantwort:', cueCorrection: 'Korrekturhinweis:', cueSaving: 'Sparpotenzial:',
+      cueTariff: 'Tarif im Überblick:', cueWarning: 'Achtung:', cueNote: 'Hinweis:',
+      columnLabel: 'Spalte', rowLabel: 'Zeile',
+      tableHeaders: 'Die Spalten lauten: {headers}.',
+      tableHeaderRow: 'Kopfzeile {n}: {headers}.',
+      tableIntro: 'Tabelle: {title}. Übersicht mit {cols} Spalten und {rows} Zeilen.',
+      tableIntroOne: 'Tabelle: {title}. Übersicht mit {cols} Spalten und einer Zeile.',
+      tableRow: 'Zeile {row} von {total}. {content}.',
+      tableRowLabel: 'Zeile {row} von {total}: {label}. {content}.',
+      tableGroup: 'Gruppe: {name}.',
+      tableSum: 'Zusammengerechnet: {content}.',
+      tableCta: 'Empfehlung: {cta}. Hinweis: Dies ist ein Partnerlink.',
+      tableOutro: 'Ende der Tabelle {title}.',
+      tableDefault: 'Übersichtstabelle',
+      prevAria: 'Vorheriger Abschnitt', nextAria: 'Nächster Abschnitt',
+      prevSentenceAria: 'Vorheriger Satz', nextSentenceAria: 'Nächster Satz',
+      summaryEyebrow: 'Kurzfassung', summaryQuick: 'Das Wichtigste in 30 Sekunden',
+      summaryKeypoints: 'Die Kernaussagen', summaryFigures: 'Auf einen Blick – die wichtigsten Zahlen',
+      summaryTables: 'Tabellen & Übersichten im Fokus', summaryToc: 'In diesem Artikel',
+      summaryCopy: 'Kurzfassung kopieren', summaryCopied: 'Kopiert', summaryCopyFail: 'Kopieren fehlgeschlagen',
+      summaryReadFull: 'Ganzen Artikel lesen', summaryClose: 'Kurzfassung schließen',
+      summaryAuthor: 'Autor: {name}', summaryStand: 'Stand: {date}', summaryUpdated: 'Aktualisiert: {date}',
+      summaryEmpty: 'Für diesen Artikel liegt derzeit keine Kurzfassung vor.',
+      summaryRowCount: '{count} Zeilen', summaryRowCountOne: '1 Zeile', summaryMoreRows: '+ {count} weitere Zeilen',
+      summaryReadingTime: 'ca. {time} Min. Lesezeit', summaryWords: '{count} Wörter', summaryJump: 'Zum Abschnitt'
+    },
+    en: {
+      play: 'Listen', pause: 'Pause', resume: 'Resume', stop: 'Stop',
+      playAria: 'Listen to article (male ElevenLabs premium voice, DE & EN)',
+      playAriaNeutral: 'Listen to article (your device voice)',
+      pauseAria: 'Pause listening', resumeAria: 'Resume listening', stopAria: 'Stop listening',
+      summaryBtn: 'Summary', summaryAria: 'Show article summary',
+      unsupported: 'Listening is not supported by this browser.',
+      noText: 'No readable text found.',
+      started: 'Listening started.',
+      startedTrack: 'ElevenLabs studio running.',
+      trackDefective: 'This article track is unusable — your device voice takes over.',
+      trackBroken: 'Track could not be loaded — your device voice takes over.',
+      trackEndedEarly: 'Track ends early — continuing with your device voice.',
+      trackSilent: 'Track stays silent — your device voice takes over.',
+      trackStalled: 'Track stalls — your device voice takes over.',
+      synthesisDead: 'Speech is not available on this device. The article remains fully readable.',
+      synthesisMute: 'Your browser reports speech but plays no sound. Listening stopped — article remains readable.',
+      voiceActive: 'ElevenLabs premium voice active (male, DE & EN).',
+      voiceFallback: 'Listening started; your browser provides the available voice.',
+      voiceLoading: 'Premium voice loading …',
+      sectionError: 'This section could not be played; continuing.',
+      paused: 'Listening paused.', resumed: 'Listening resumed.',
+      finished: 'Listening finished.', resumedPos: 'Resumed at last position.',
+      remaining: 'about {min} min left',
+      progressIdle: 'Not started',
+      progressNowLabel: 'Now playing',
+      progressPos: 'Section {n} of {total}',
+      progressWords: 'Word {i} of {total}',
+      progressModeReady: 'Ready', progressModeSpeech: 'Device', progressModeTrack: 'ElevenLabs', progressModePaused: 'Pause', progressModeDone: 'Done',
+      progressHeading: 'Heading', progressParagraph: 'Paragraph', progressList: 'List', progressQuote: 'Quote',
+      progressCallout: 'Key point', progressWarning: 'Note', progressOverview: 'Overview',
+      progressTableIntro: 'Table overview', progressTableHeader: 'Table · Columns', progressTableGroup: 'Table · Group',
+      progressTableRow: 'Table · Row {row} of {total}', progressTableSum: 'Table · Total', progressTableCta: 'Table · Recommendation', progressTableOutro: 'End of table',
+      progressIntro: 'Intro', progressOutro: 'Outro',
+      mediaTitle: '{title} – FranksFinanzcheck',
+      mediaArtist: 'FranksFinanzcheck – ElevenLabs Premium (male, DE & EN)',
+      introLine: '{title}. An article by FranksFinanzcheck. Listening time about {duration}.',
+      durationMinutes: '{n} minutes', durationMinuteOne: 'one minute', durationUnknown: 'a few minutes',
+      outroLine: 'End of article. Thanks for listening to FranksFinanzcheck.',
+      listItemNum: 'Item {n}:',
+      cueShortAnswer: 'Key takeaway:', cueCorrection: 'Correction:', cueSaving: 'Potential saving:', cueTariff: 'Tariff at a glance:',
+      cueWarning: 'Attention:', cueNote: 'Note:',
+      columnLabel: 'Column', rowLabel: 'Row',
+      tableHeaders: 'Columns are: {headers}.',
+      tableHeaderRow: 'Header row {n}: {headers}.',
+      tableIntro: 'Table: {title}. Overview with {cols} columns and {rows} rows.',
+      tableIntroOne: 'Table: {title}. Overview with {cols} columns and one row.',
+      tableRow: 'Row {row} of {total}. {content}.',
+      tableRowLabel: 'Row {row} of {total}: {label}. {content}.',
+      tableGroup: 'Group: {name}.',
+      tableSum: 'Total: {content}.',
+      tableCta: 'Recommendation: {cta}. Note: This is a partner link.',
+      tableOutro: 'End of table {title}.',
+      tableDefault: 'Overview table',
+      prevAria: 'Previous section', nextAria: 'Next section',
+      prevSentenceAria: 'Previous sentence', nextSentenceAria: 'Next sentence',
+      summaryEyebrow: 'Summary', summaryQuick: 'Key points in 30 seconds',
+      summaryKeypoints: 'Key takeaways', summaryFigures: 'At a glance — key figures',
+      summaryTables: 'Tables & overviews in focus', summaryToc: 'In this article',
+      summaryCopy: 'Copy summary', summaryCopied: 'Copied', summaryCopyFail: 'Copy failed',
+      summaryReadFull: 'Read full article', summaryClose: 'Close summary',
+      summaryAuthor: 'Author: {name}', summaryStand: 'Date: {date}', summaryUpdated: 'Updated: {date}',
+      summaryEmpty: 'No summary available for this article.',
+      summaryRowCount: '{count} rows', summaryRowCountOne: '1 row', summaryMoreRows: '+ {count} more rows',
+      summaryReadingTime: 'about {time} min read', summaryWords: '{count} words', summaryJump: 'Go to section'
+    }
+  };
+
+  /* ============================================================
+     3 · GRUNDWERKZEUGE
+     ============================================================ */
+
+  function qsa(sel, ctx) {
+    var node = ctx || doc;
+    if (!node || typeof node.querySelectorAll !== 'function') return [];
+    return Array.prototype.slice.call(node.querySelectorAll(sel));
+  }
+  function tagOf(el) { return String((el && el.tagName) || '').toUpperCase(); }
+  function hasClass(el, name) {
+    return !!(el && el.classList && el.classList.contains(name));
+  }
+  function anyClass(el, names) {
+    for (var i = 0; i < names.length; i++) { if (hasClass(el, names[i])) return true; }
+    return false;
+  }
+  function closestOf(el, sel) {
+    if (!el || typeof el.closest !== 'function') return null;
+    return el.closest(sel);
+  }
+  function storeGet(k) { try { return win.localStorage.getItem(k); } catch (e) { return null; } }
+  function storeSet(k, v) { try { win.localStorage.setItem(k, v); } catch (e) {} }
+  function storeDel(k) { try { win.localStorage.removeItem(k); } catch (e) {} }
+  function escapeRe(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+  /**
+   * Elemente, die beim Textlesen NIE mitgelesen werden (Befund 10.09.2026).
+   *
+   * Der Abschnitts-Knopf der Premium-Erweiterung (`.ff-heading-copy`) trug
+   * ein „§“ als Textknoten in JEDER Überschrift. Weil er hier nicht
+   * herausgefiltert wurde, landete das „§“ in Kurzfassung, Inhalts-
+   * verzeichnis, Tabellen-Titeln und im Vorlesen. Diese Liste ist die
+   * dauerhafte Verteidigungslinie: Bedienelemente, versteckte Knoten und
+   * Anker zählen nicht zum lesbaren Text eines Abschnitts.
+   */
+  var READ_SKIP_SELECTOR = [
+    'script', 'style', 'noscript', 'svg', 'canvas', 'iframe',
+    'button', 'input', 'select', 'textarea', 'label',
+    '[data-ff-skip-read]', '[aria-hidden="true"]', '[hidden]',
+    '.anchor', '.ff-heading-copy', '.ff-mini-toc'
+  ].join(', ');
+
+  /** Sichtbarer Text eines Knotens – mit Zeilen-/Absatz-Abstand. */
+  function readableText(el) {
+    if (!el) return '';
+    var clone = el;
+    if (el.cloneNode) {
+      clone = el.cloneNode(true);
+      qsa(READ_SKIP_SELECTOR, clone)
+        .forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); });
+      qsa('br', clone).forEach(function (n) {
+        if (n.parentNode) n.parentNode.replaceChild(doc.createTextNode(' '), n);
+      });
+    }
+    var raw = clone.textContent || clone.innerText || '';
+    return raw.replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  /**
+   * Überschriften-Text: bevorzugt das redaktionelle Etikett
+   * (`.ff-heading-text`), frei von Ankersymbolen am Ende.
+   * Ein „§“ mitten im Text („§ 8 EinSiG“) bleibt selbstverständlich
+   * erhalten – entfernt wird nur angehängter Anker-Müll.
+   */
+  function headingTextOf(el) {
+    if (!el) return '';
+    var label = qsa('.ff-heading-text', el)[0];
+    var text = readableText(label || el);
+    return text.replace(/[\s#§]+$/g, '').trim();
+  }
+
+  function stripMd(s) {
+    return String(s || '')
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+      .replace(/[*_`#>]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  /* ============================================================
+     4 · PREMIUM-BILINGUAL OHNE UMSCHALTER (12.09.2026)
+     ------------------------------------------------------------
+     Die Vorlese-Funktion spricht Deutsch UND Englisch mit EINER
+     männlichen ElevenLabs-Premium-Stimme (Adam) — ohne Menü, ohne
+     Umschalter. Die Sprache wird je Block/Satz automatisch erkannt:
+
+       · Enthält ä/ö/ü/ß            → de
+       · Zählt deutsche vs. englische Stopwörter (der/die/das …
+         vs. the/and/is …); Mehrheit gewinnt
+       · Fallback: <html lang>, cfg.lang Bar oder 'de'
+
+     Eine Stimme, ein Klang — nur die Aussprache wechselt.
+     Spiegel: detect_language/sniff_sentence_lang in
+     scripts/ff_voice_audio.py + ff_voice_backends.py.
+     ============================================================ */
+
+  function detectArticleLanguage(sample, declared) {
+    var t = String(sample == null ? '' : sample).toLowerCase();
+    var d = String(declared != null ? declared : (cfg && cfg.lang) || (doc.documentElement && doc.documentElement.lang) || 'de').toLowerCase().slice(0,2);
+    if (!t.trim()) return (d === 'en' ? 'en' : 'de');
+    var de_hits = 0, en_hits = 0;
+    var de_words = ' der  die  das  und  oder  nicht  ein  eine  für  mit  von  im  auf  ist  zu  den  dem  wir  sie  sparen  strom  gas  tarif  euro  pro  jahr  monat ';
+    var en_words = ' the  and  is  are  you  your  with  for  this  that  save  money  energy  tariff  euro  per  year  month  from  have  will  can ';
+    var pad = ' ' + t + ' ';
+    if (pad.indexOf(' ä ') !== -1 || pad.indexOf(' ö ') !== -1 || pad.indexOf(' ü ') !== -1 || t.indexOf('ä') !== -1 || t.indexOf('ö') !== -1 || t.indexOf('ü') !== -1 || t.indexOf('ß') !== -1) de_hits += 2;
+    var dw = de_words.trim().split(/\s+/);
+    for (var i=0;i<dw.length;i++) if (pad.indexOf(' ' + dw[i] + ' ') !== -1) de_hits++;
+    var ew = en_words.trim().split(/\s+/);
+    for (var j=0;j<ew.length;j++) if (pad.indexOf(' ' + ew[j] + ' ') !== -1) en_hits++;
+    if (en_hits > de_hits + 1) return 'en';
+    if (de_hits > en_hits) return 'de';
+    return d === 'en' ? 'en' : 'de';
+  }
+  function sniffSentenceLang(sentence, base) {
+    return detectArticleLanguage(sentence, base || 'de');
+  }
+
+  function resolveDocLang() {
+    var probe = '';
+    try {
+      var contentEl = doc.querySelector('.post-content') || doc.querySelector('.md-content') || doc.body;
+      probe = readableText(contentEl).slice(0, 4000);
+    } catch(e) {}
+    var declared = (cfg && cfg.lang) || (bar && bar.getAttribute && bar.getAttribute('data-page-lang')) || (doc.documentElement && doc.documentElement.lang) || 'de';
+    return detectArticleLanguage(probe, declared);
+  }
+  var lang = resolveDocLang();
+  var T = I18N[lang] || I18N.de;
+
+  /* ============================================================
+     4a · WORTUHR-ALIGNER — die Brücke zwischen Sprechtext und
+     Artikeltext (Grundlage der wortgenauen Leseanzeige)
+     ------------------------------------------------------------
+     Vorgelesen wird der NORMALISIERTE Text („bis zu 650 Euro“),
+     markiert werden muss das rohe Wort im Artikel („€“). Der
+     Aligner schiebt die normalisierten Wörter (N) über die rohen
+     Wörter (R) und merkt je N-Wort, welches R-Wort er spricht.
+
+     Regeln (wortgleich zu align_norm_to_raw() in
+     scripts/ff_voice_audio.py — das Paritäts-Gate vergleicht beide
+     Implementierungen Wort für Wort):
+       1. Kern-Gleichheit (Kleinschreibung, Nicht-Buchstaben weg).
+       2. Symbol-Erweiterung: „–“ ↔ „bis“, „€“ ↔ „Euro“ …
+       3. Einheiten-Erweiterung: „kWh“ ↔ „Kilowattstunden“.
+       4. Zahlen-Kern: reine Ziffernkerne treffen per Containment —
+          so bleibt „02.01.2006“ hell, während der Sprecher
+          „2. Januar 2006“ sagt.
+       6. Fremdwort-Erweiterung: die deutsche Lautschreibung
+          („homoffis“ für „Homeoffice“, „sörwis“ für „Service“)
+          wird über FOREIGN_SPOKEN auf den rohen Kern zurückgeschlagen.
+       5. Kein Treffer: das N-Wort erbt das zuletzt verbrauchte
+          rohe Wort; ab sechs Treffern in Folge wird weit
+          vorgespult neu verankert (Resync-Fenster).
+     ============================================================ */
+
+  function normTokens(text) {
+    return String(text == null ? '' : text).split(/\s+/).filter(function (t) { return t.length > 0; });
+  }
+
+  function tokenCore(tok) {
+    return String(tok || '').toLowerCase().replace(/[^0-9a-zäöüß']/g, '');
+  }
+
+  var SYMBOL_SPOKEN = {
+    '€': 'euro', '%': 'prozent', '&': 'und', '§': 'paragraph',
+    '+': 'plus', '=': 'gleich', '–': 'bis', '—': 'bis', '-': 'bis',
+    '·': 'punkt', '…': ''
+  };
+
+  var UNIT_SPOKEN = {
+    kwh: { kilowattstunden: 1, kilowattstunde: 1, kilowatt: 1, kilowattpeak: 1 },
+    kmh: { kilometer: 1, kilometerprosstunde: 1, stunde: 1 },
+    ct: { cent: 1 },
+    kw: { kilowatt: 1, kilowattpeak: 1 },
+    kwp: { kilowatt: 1, kilowattpeak: 1 },
+    m: { meter: 1, quadratmeter: 1, kubikmeter: 1 },
+    m2: { quadratmeter: 1 },
+    m3: { kubikmeter: 1 },
+    eur: { euro: 1 },
+    a: { jahr: 1, jahrpro: 1 }
+  };
+
+  function alignNormToRaw(N, R) {
+    N = N || []; R = R || [];
+    var out = [];
+    var j = 0, prev = -1, miss = 0;
+    for (var k = 0; k < N.length; k++) {
+      var nc = tokenCore(N[k]);
+      if (!R.length) { out.push(-1); continue; }
+      var matched = -1;
+      var window = miss < 6 ? 4 : 64;
+      var upto = Math.min(j + window, R.length);
+      for (var o = j; o < upto; o++) {
+        var rc = tokenCore(R[o]);
+        if (rc && nc && rc === nc) { matched = o; break; }
+        if (nc) {
+          if (!rc) {
+            var sym = String(R[o]).trim().replace(/^[.:;,!?]+/g, '').replace(/[.:;,!?]+$/g, '');
+            if (Object.prototype.hasOwnProperty.call(SYMBOL_SPOKEN, sym) && SYMBOL_SPOKEN[sym] === nc) { matched = o; break; }
+          }
+          if (Object.prototype.hasOwnProperty.call(UNIT_SPOKEN, rc) && UNIT_SPOKEN[rc][nc]) { matched = o; break; }
+          if (/^[0-9]+$/.test(rc) && /^[0-9]+$/.test(nc) && (nc.indexOf(rc) !== -1 || rc.indexOf(nc) !== -1)) { matched = o; break; }
+          // (6) Fremdwort-Erweiterung: Sprechschreibung → Original
+          //     („homoffis“ → „homeoffice“). Nur ein echter Treffer
+          //     zählt, damit ein deutsches Homonym kein anderes rohes
+          //     Wort verschluckt.
+          if (Object.prototype.hasOwnProperty.call(FOREIGN_SPOKEN, nc) && FOREIGN_SPOKEN[nc] === rc) { matched = o; break; }
+        }
+      }
+      if (matched >= 0) { out.push(matched); prev = matched; j = matched + 1; miss = 0; }
+      else { out.push(prev); miss += 1; }
+    }
+    return out;
+  }
+
+
+  function durationPhrase(minutes) {
+    var n = parseInt(minutes, 10);
+    if (!isFinite(n) || n <= 0) return T.durationUnknown;
+    return n === 1 ? T.durationMinuteOne : T.durationMinutes.replace('{n}', n);
+  }
+
+  function trimUiText(text, max) {
+    var clean = String(text || '').replace(/\s+/g, ' ').trim();
+    if (!clean) return '';
+    if (!max || clean.length <= max) return clean;
+    return clean.slice(0, Math.max(1, max - 1)).replace(/[\s,.;:!?-]+$/g, '') + '…';
+  }
+
+  function progressModeText() {
+    if (!reading) return progressRatio >= 0.999 ? T.progressModeDone : T.progressModeReady;
+    if (!playing) return T.progressModePaused;
+    return mode === 'track' ? T.progressModeTrack : T.progressModeSpeech;
+  }
+
+  function progressLabelFromBlock(block) {
+    if (!block) return T.progressIdle;
+    if (block.type === 'intro') return T.progressIntro;
+    if (block.type === 'outro') return T.progressOutro;
+    if (/^h[2-6]$/i.test(block.type || '')) return trimUiText(headingTextOf(block.el) || block.text || T.progressHeading, 72);
+    if (block.type === 'table-intro') return T.progressTableIntro;
+    if (block.type === 'table-header') return T.progressTableHeader;
+    if (block.type === 'table-group') return T.progressTableGroup;
+    if (block.type === 'table-sum') return T.progressTableSum;
+    if (block.type === 'table-cta') return T.progressTableCta;
+    if (block.type === 'table-outro') return T.progressTableOutro;
+    if (block.type === 'table-row') {
+      var rowInfo = String(block.text || '').match(/\b(?:Zeile|Row)\s+(\d+)\s+(?:von|of)\s+(\d+)/i);
+      if (rowInfo) return T.progressTableRow.replace('{row}', rowInfo[1]).replace('{total}', rowInfo[2]);
+      return T.progressTableHeader;
+    }
+    if (block.type === 'blockquote') return T.progressQuote;
+    if (block.type === 'li') return T.progressList;
+    if (block.type === 'warning') return T.progressWarning;
+    if (block.type === 'callout' || block.type === 'emphasis') return T.progressCallout;
+    if (String(block.type || '').indexOf('overview') === 0) return T.progressOverview;
+    /* Absätze und sonstige Blöcke zeigen ihre ROLLE als Abschnitts-
+       beschriftung; den Wortlaut des gerade gesprochenen Satzes zeigt
+       die „Gerade vorgelesen“-Zeile darunter (Profi-Fortschritt). */
+    if (block.type === 'p' || block.type === 'lead') return T.progressParagraph;
+    return trimUiText(block.text || T.progressParagraph, 72);
+  }
+
+  /* ============================================================
+     5 · SPRECHTEXT-NORMALISIERUNG (Aussprache-Regie)
+     ------------------------------------------------------------
+     Eine Redaktion schreibt „bis zu 650 €“, „12 – 24 Monate“,
+     „ca. 3,5 %“, „§ 12“, „20.000 kWh“. Vorgelesen werden muss
+     „bis zu 650 Euro“, „12 bis 24 Monate“, „circa 3,5 Prozent“,
+     „Paragraph 12“, „20.000 Kilowattstunden“.
+
+     Dieselbe Regelmenge liegt — wortgleich spezifiziert — in
+     scripts/ff_voice_backends.py. Die Parität wird durch
+     scripts/ff_voice_parity_check.py geprüft: Tonspur und
+     Browserstimme müssen denselben Text sprechen.
+
+     Prinzip: Jede Regel ersetzt ihren Treffer durch einen
+     Platzhalter (\u0000n\u0000). Dadurch kann keine Folgeregel
+     ein schon gesprochenes Wort erneut anfassen (Kaskadenfehler).
+     ============================================================ */
+
+  var HOLD_OPEN = '\u0000';
+  var HOLD_CLOSE = '\u0001';
+
+  var ABBREV_DE = [
+      [/bzw\./gi, 'beziehungsweise'],
+      [/zzgl\./gi, 'zuzüglich'],
+      [/inkl\./gi, 'inklusive'],
+      [/exkl\./gi, 'exklusiv'],
+      [/ca\./gi, 'circa'],
+      [/usw\./gi, 'und so weiter'],
+      [/usf\./gi, 'und so fort'],
+      [/vgl\./gi, 'vergleiche'],
+      [/sog\./gi, 'sogenannt'],
+      [/geb\./gi, 'geboren'],
+      [/MwSt\./g, 'Mehrwertsteuer'],
+      [/Abs\.\s?(\d+)/g, 'Absatz $1'],
+      [/Nr\.\s?(\d+)/g, 'Nummer $1'],
+      [/Nr\./g, 'Nummer'],
+      [/Art\.\s?(\d+)/g, 'Artikel $1'],
+      [/S\.\s?(\d+)/g, 'Seite $1'],
+      [/Abb\.\s?(\d+)/g, 'Abbildung $1'],
+      [/Tab\.\s?(\d+)/g, 'Tabelle $1'],
+      [/\bz\.\s?B\./gi, 'zum Beispiel'],
+      [/\bu\.\s?a\./gi, 'unter anderem'],
+      [/\bd\.\s?h\./gi, 'das heißt'],
+      [/\bi\.\s?d\.\s?R\./gi, 'in der Regel'],
+      [/\bo\.\s?g\./gi, 'oben genannt'],
+      [/€\s?\/\s?(Monat|Jahr|kWh|Person)/gi, 'Euro pro $1'],
+      [/ct\/\s?kWh/gi, 'Cent pro Kilowattstunde'],
+      [/kWh\/a/g, 'Kilowattstunden pro Jahr'],
+      [/kWh/g, 'Kilowattstunden'],
+      [/kWp/g, 'Kilowatt Peak'],
+      [/m²/g, 'Quadratmeter'],
+      [/m³/g, 'Kubikmeter'],
+      [/km\/h/g, 'Kilometer pro Stunde'],
+      [/Mio\.\s?€/g, 'Millionen Euro'],
+      [/Mrd\.\s?€/g, 'Milliarden Euro'],
+      [/\bMio\./g, 'Millionen'],
+      [/\bMrd\./g, 'Milliarden'],
+      [/\bTsd\./g, 'Tausend'],
+      [/§\s?(\d+)/g, 'Paragraph $1'],
+      [/€/g, 'Euro'],
+      [/(\d)\s?%/g, '$1 Prozent'],
+      [/%/g, 'Prozent']
+  ];
+  var ABBREV_EN = [
+    [/\bMr\./g, 'Mister'], [/\bMrs\./g, 'Misses'], [/\bMs\./g, 'Miss'],
+    [/\bDr\./g, 'Doctor'], [/\bSt\./g, 'Street'], [/\bvs\./gi, 'versus'],
+    [/\betc\./gi, 'et cetera'], [/\be\.g\./gi, 'for example'], [/\bi\.e\./gi, 'that is'],
+    [/€\s?\/\s?(month|year|kWh|person)/gi, 'euros per $1'],
+    [/ct\/\s?kWh/gi, 'cents per kilowatt hour'], [/kWh\/a/g, 'kilowatt hours per year'],
+    [/kWh/g, 'kilowatt hours'], [/kWp/g, 'kilowatt peak'], [/m²/g, 'square meters'],
+    [/m³/g, 'cubic meters'], [/km\/h/g, 'kilometers per hour'],
+    [/Mio\.\s?€/g, 'million euros'], [/Mrd\.\s?€/g, 'billion euros'],
+    [/Tsd\./g, 'thousand'], [/§\s?(\d+)/g, 'paragraph $1'],
+    [/€/g, 'euros'], [/(\d)\s?%/g, '$1 percent'], [/%/g, 'percent']
+  ];
+
+  var MONTHS_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var MONTHS_DE = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+    'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+
+  /* ============================================================
+     4b · NUR-DEUTSCH-AUSSPRACHE — Germanisierungs-Glossar
+     ------------------------------------------------------------
+     Befund 07.09.2026: Mehrsprachige Neuronalstimmen im Browser
+     (Google de-DE, Microsoft Online) erkennen englisch geschriebene
+     Begriffe an der Schreibung und kippen mitten im deutschen Satz auf
+     die ENGLISCHE Aussprache (Code-Switching): „Homepage“ klingt wie
+     „Hoampeidsch“, „Service“ wie „Sörwiss“. Das `u.lang = 'de-DE'`
+     allein kann das nicht verhindern — die Spracherkennung der Stimme
+     schlägt innerhalb des Satzes an.
+
+     Die High-End-Lösung der Sprecherziehung: die Begriffe gehen in
+     deutscher LAUTSCHREIBUNG auf das Manuskript („Service“ → „sörwis“,
+     „Homeoffice“ → „homoffis“). Jede Stimme — Edge-Conrad in der
+     Studio-Tonspur, Piper, Google- und Microsoft-Browserstimmen —
+     spricht dann nach deutschem Lautsystem, wie ein Nachrichtensprecher,
+     der Fremdwörter im deutschen Satz eindeutscht.
+
+     Wortgleich gespiegelt: _GERMANIZE_PAIRS in
+     scripts/ff_voice_backends.py. Das Paritäts-Gate
+     (scripts/ff_voice_parity_check.py) vergleicht beide Ausgaben.
+     ============================================================ */
+  var GERMANIZE_PAIRS = [
+    // —— Mehrwort-Marken und Begriffe (längste Kette zuerst) ——
+    ['apple watch', 'äppel wotsch'],
+    ['apple pay', 'äppel peh'],
+    ['smart watch', 'smart wotsch'],
+    ['smart-watch', 'smart wotsch'],
+    ['smartwatch', 'smartwotsch'],
+    ['social media', 'soschl miedia'],
+    ['live stream', 'leif schtrihm'],
+    ['live-stream', 'leif schtrihm'],
+    ['livestream', 'leifschtrihm'],
+    ['online banking', 'onlein bänking'],
+    ['online-banking', 'onlein bänking'],
+    ['onlinebanking', 'onleinbänking'],
+    ['e banking', 'i bänking'],
+    ['e-banking', 'i bänking'],
+    ['ebanking', 'ibänking'],
+    ['onlineshop', 'onleinschopp'],
+    ['online-shop', 'onlein schopp'],
+    ['online shop', 'onlein schopp'],
+    ['home office', 'hom offis'],
+    ['home-office', 'hom offis'],
+    ['homeoffice', 'homoffis'],
+    ['home page', 'hom peitsch'],
+    ['home-page', 'hom peitsch'],
+    ['homepage', 'hompeitsch'],
+    ['black friday', 'bleck freidä'],
+    // —— Marken / Plattformen ——
+    ['instagram', 'instakramm'],
+    ['facebook', 'feisbuk'],
+    ['whatsapp', 'wots äpp'],
+    ['youtube', 'jutjub'],
+    ['spotify', 'schpotifei'],
+    ['ebay', 'i beh'],
+    ['paypal', 'pehpal'],
+    ['iphone', 'ei fohn'],
+    ['ipad', 'ei päd'],
+    ['airpods', 'ehr pods'],
+    // —— Technik / Internet ——
+    ['smartphone', 'smartfohn'],
+    ['blockchain', 'bloktschehn'],
+    ['blockchains', 'bloktschehns'],
+    ['dashboard', 'däschbord'],
+    ['downloads', 'daunlohts'],
+    ['download', 'daunloht'],
+    ['uploads', 'aplohts'],
+    ['upload', 'aploht'],
+    ['updates', 'apdehts'],
+    ['update', 'apdeht'],
+    ['upgrades', 'apgrehds'],
+    ['upgrade', 'apgrehd'],
+    ['backups', 'bäk aps'],
+    ['backup', 'bäk ap'],
+    ['resets', 'rie setts'],
+    ['reset', 'rie sett'],
+    ['browser', 'brauser'],
+    ['routers', 'ruhter'],
+    ['router', 'ruhter'],
+    ['hotspots', 'hotspotts'],
+    ['hotspot', 'hotspott'],
+    ['provider', 'proweider'],
+    ['roaming', 'rohming'],
+    ['websites', 'websaits'],
+    ['website', 'websait'],
+    ['laptops', 'leptopps'],
+    ['laptop', 'leptopp'],
+    ['desktops', 'desktopps'],
+    ['desktop', 'desktopp'],
+    ['tablets', 'tebblets'],
+    ['tablet', 'tebblet'],
+    ['wallets', 'wollets'],
+    ['wallet', 'wollet'],
+    ['accounts', 'ekaunts'],
+    ['account', 'ekaunt'],
+    ['logins', 'loggins'],
+    ['login', 'loggin'],
+    ['logout', 'logaut'],
+    ['cookies', 'kuckis'],
+    ['cookie', 'kucki'],
+    ['cloud', 'klaud'],
+    // —— Sozial / Content ——
+    ['newsletter', 'njusletter'],
+    ['followers', 'folohrer'],
+    ['follower', 'folohrer'],
+    ['hashtags', 'heschtecks'],
+    ['hashtag', 'heschteck'],
+    ['postings', 'pohstings'],
+    ['posting', 'pohsting'],
+    ['channels', 'tschennels'],
+    ['channel', 'tschennel'],
+    ['stories', 'schtorris'],
+    ['story', 'schtorry'],
+    ['reels', 'riels'],
+    ['reel', 'riel'],
+    ['streams', 'schtrihms'],
+    ['streaming', 'schtrihming'],
+    ['streamen', 'schtrihmen'],
+    ['streamt', 'schtrihmt'],
+    ['stream', 'schtrihm'],
+    ['podcasts', 'pottkasts'],
+    ['podcast', 'pottkast'],
+    ['feeds', 'fiehds'],
+    ['feed', 'fiehd'],
+    ['rankings', 'renkings'],
+    ['ranking', 'renking'],
+    ['traffic', 'trefik'],
+    ['leads', 'lieds'],
+    ['lead', 'lied'],
+    ['content', 'kontent'],
+    ['chats', 'tschetts'],
+    ['chatten', 'tschetten'],
+    ['gechattet', 'getschettet'],
+    ['chat', 'tschett'],
+    ['blogs', 'bloggs'],
+    ['blog', 'blogg'],
+    ['apps', 'äpps'],
+    ['app', 'äpp'],
+    ['gecheckt', 'getschekt'],
+    ['checken', 'tscheken'],
+    ['checkt', 'tschekt'],
+    ['checks', 'tscheks'],
+    ['check', 'tscheck'],
+    // —— Business / Finanzen ——
+    ['fintech', 'fintek'],
+    ['startups', 'schtart aps'],
+    ['startup', 'schtart ap'],
+    ['start-ups', 'schtart aps'],
+    ['start-up', 'schtart ap'],
+    ['crowdfunding', 'krautfanding'],
+    ['funding', 'fanding'],
+    ['cashback', 'käsch beck'],
+    ['cash', 'käsch'],
+    ['trading', 'trehding'],
+    ['trader', 'trehder'],
+    ['broker', 'brohker'],
+    ['banking', 'bänking'],
+    ['business', 'bissnis'],
+    ['service', 'sörwis'],
+    ['support', 'sepport'],
+    ['coaching', 'kotsching'],
+    ['coaches', 'kotschis'],
+    ['coach', 'kotsch'],
+    ['feedback', 'fiehdbäck'],
+    ['meetings', 'mietings'],
+    ['meeting', 'mieting'],
+    ['workshops', 'wörkschopps'],
+    ['workshop', 'wörkschopp'],
+    ['shoppen', 'schoppen'],
+    ['shopping', 'schopping'],
+    ['shops', 'schopps'],
+    ['shopper', 'schopper'],
+    ['shop', 'schopp'],
+    ['sales', 'sehls'],
+    ['sale', 'sehl'],
+    ['leasing', 'liesing'],
+    ['tracking', 'trekking'],
+    ['tracker', 'trekker'],
+    ['fake', 'fehk'],
+    // —— Einzelbegriffe mit hohem Code-Switching-Risiko ——
+    ['news', 'njus'],
+    ['online', 'onlein'],
+    ['offline', 'offlein'],
+    ['live', 'leif'],
+    ['office', 'offis'],
+    ['emails', 'i mehls'],
+    ['email', 'i mehl'],
+    ['e-mails', 'i mehls'],
+    ['e-mail', 'i mehl'],
+    ['watchlist', 'wottsch list'],
+    ['watchlists', 'wottsch lists'],
+    ['keyword', 'kiwört'],
+    ['keywords', 'kiwörter'],
+    ['backlinks', 'bek links'],
+    ['backlink', 'bek link'],
+    ['features', 'fiehtschers'],
+    ['feature', 'fiehtscher'],
+    ['repeater', 'ri pieters'],
+    ['viral', 'wiral'],
+    ['code', 'koot'],
+    ['speed', 'schpiet'],
+    ['power', 'pauer'],
+    ['hotline', 'hottlain'],
+    ['prepaid', 'prie pehd'],
+    // —— Hochfrequenz-Fremdwörter aus dem Content-Bestand (07.09.2026) ——
+    ['smart home', 'smart hohm'],
+    ['smart-home', 'smart hohm'],
+    ['standby', 'ständbei'],
+    ['stand-by', 'ständbei'],
+    ['gaming', 'gehming'],
+    ['gamer', 'gehmer'],
+    ['phishing', 'fisching'],
+    ['runway', 'ranwei'],
+    ['cookieless', 'kuckilos'],
+    ['privacy', 'preiwessi'],
+    ['resolver', 'ressolwer'],
+    ['cluster', 'klaster'],
+    ['discounter', 'diskaunter'],
+    ['cache', 'kesch'],
+    ['caches', 'kesche'],
+    ['banner', 'bänner'],
+    ['timing', 'teiming'],
+    ['access', 'äksess'],
+    ['mesh', 'mesch'],
+    ['tools', 'tuhls'],
+    ['tool', 'tuhl'],
+    ['excel', 'exel'],
+    ['user', 'juser'],
+    ['mails', 'mehls'],
+    ['mail', 'mehl'],
+    ['logfiles', 'lokfeils'],
+    ['logfile', 'lokfeil'],
+    ['logs', 'loks'],
+    ['log', 'lok']
+  ];
+
+  /** Glossar + automatisch abgeleitete Flektionsformen: deutsche
+   *  Plural-/Genitiv-Endung „-s“ und schwache Endung „-n“ an englischen
+   *  Fremdwörtern („Providers“ → „proweiders“, „Newslettern“ →
+   *  „njuslettern“). Das Suffix bleibt an der Lautschreibung erhalten —
+   *  es ist bereits deutsch. Gespiegelt: _flected_pairs() im Generator. */
+  function flectedGermanizePairs() {
+    var pairs = GERMANIZE_PAIRS.slice();
+    var seen = {};
+    for (var i = 0; i < GERMANIZE_PAIRS.length; i++) seen[GERMANIZE_PAIRS[i][0].toLowerCase()] = 1;
+    var suffixes = ['s', 'n'];
+    for (var j = 0; j < GERMANIZE_PAIRS.length; j++) {
+      var src = GERMANIZE_PAIRS[j][0], dst = GERMANIZE_PAIRS[j][1];
+      if (src.indexOf(' ') !== -1 || src.indexOf('-') !== -1) continue;
+      if (!src || !/[a-z]/i.test(src.charAt(src.length - 1))) continue;
+      for (var k = 0; k < suffixes.length; k++) {
+        var fsrc = src + suffixes[k];
+        if (seen[fsrc.toLowerCase()]) continue;   // explizite Form (z. B. „cookies“)
+        seen[fsrc.toLowerCase()] = 1;
+        pairs.push([fsrc, dst + suffixes[k]]);
+      }
+    }
+    return pairs;
+  }
+
+  /** Glossar → Regelliste, längste Muster zuerst (damit „newsletter“
+   *  vor „news“ und „home-office“ vor „office“ gewinnt). Leerzeichen im
+   *  Muster treffen auch den Bindestrich (Schreibschwankungen im Blog).
+   *  Wortgrenzen verhindern Treffer in deutschen Komposita. */
+  function buildGermanizeRules() {
+    var pairs = flectedGermanizePairs().sort(function (a, b) {
+      return b[0].length - a[0].length;
+    });
+    var rules = [];
+    for (var i = 0; i < pairs.length; i++) {
+      var src = pairs[i][0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\ /g, '[\\s\\-]+');
+      rules.push({ re: new RegExp('(?<![\\w])' + src + '(?![\\w])', 'gi'), to: pairs[i][1] });
+    }
+    return rules;
+  }
+
+  var GERMANIZE_RULES = buildGermanizeRules();
+
+  /** Erzwingt die DEUTSCHE Aussprache englisch geschriebener Begriffe
+   *  (Spiegel von germanize_speech() in scripts/ff_voice_backends.py).
+   *  Kennt kein Englisch als Zielsprache — lenkt die Stimme nur ins
+   *  deutsche Lautsystem. URLs, E-Mails und Daten sind beim Aufruf
+   *  bereits in Halte-Platzhaltern geborgen. */
+  function germanizeSpeech(text) {
+    var out = String(text == null ? '' : text);
+    if (!out) return '';
+    for (var i = 0; i < GERMANIZE_RULES.length; i++) {
+      var r = GERMANIZE_RULES[i];
+      out = out.replace(r.re, function () { return r.to; });
+    }
+    return out;
+  }
+
+  /** Wortuhr-Brücke: Kern der Sprechschreibung → Kern der
+   *  Originalschreibung („homoffis“ → „homeoffice“), damit die
+   *  Leseanzeige das rohe Wort im Artikeltext trifft. Aus dem Glossar
+   *  abgeleitet; gespiegelt in ttb.germanize_spoken_cores(). */
+  function germanizeSpokenCores() {
+    var table = {};
+    var pairs = flectedGermanizePairs();
+    for (var i = 0; i < pairs.length; i++) {
+      var src = pairs[i][0], dst = pairs[i][1];
+      if (src.indexOf(' ') !== -1) continue;
+      if (dst.indexOf(' ') !== -1) continue;
+      var rc = tokenCore(src);
+      var nc = tokenCore(dst);
+      if (rc && nc) table[nc] = rc;
+    }
+    return table;
+  }
+
+  var FOREIGN_SPOKEN = germanizeSpokenCores();
+
+  function unhold(text, store) {
+    return String(text).replace(new RegExp(HOLD_OPEN + '(\\d+)' + HOLD_CLOSE, 'g'), function (m, i) {
+      var v = store[parseInt(i, 10)];
+      return v == null ? '' : v;
+    });
+  }
+
+  function normalizeUrls(text, hold) {
+    var out = String(text);
+    // E-Mail-Adressen
+    out = out.replace(/[\w.+-]+@[\w-]+\.[\w.-]+/g, function (m) {
+      return hold(m.replace(/@/g, ' at ').replace(/\./g, ' Punkt '));
+    });
+    // Vollständige URLs
+    out = out.replace(/\bhttps?:\/\/[^\s<>"')]+/gi, function (m) {
+      var spoken = m.replace(/^https?:\/\//i, '').replace(/\/$/, '');
+      spoken = spoken.replace(/\./g, ' Punkt ').replace(/\//g, ' ');
+      return hold(spoken);
+    });
+    // Nackte Domains (z. B. franksfinanzcheck.de)
+    out = out.replace(/\b([\w-]+\.(?:de|com|org|net|io|eu|info|blog))\b/gi, function (m, dom) {
+      return hold(m.replace(/\./g, ' Punkt '));
+    });
+    return out;
+  }
+
+  function normalizeDates(text, hold) {
+    var out = String(text);
+    var months = MONTHS_DE;
+    // TT.MM.JJJJ — ausschließlich deutsches Datumsformat
+    // (Nur-Deutsch-Vertrag; ein MM/DD-Format wird nicht mehr geraten)
+    out = out.replace(/\b(\d{1,2})[.\/](\d{1,2})[.\/](\d{4})\b/g, function (m, a, b, c) {
+      var day = parseInt(a, 10);
+      var month = parseInt(b, 10);
+      if (month >= 1 && month <= 12) {
+        return hold(day + '. ' + months[month - 1] + ' ' + c);
+      }
+      return m;
+    });
+    // TT.MM. (ohne Jahr)
+    out = out.replace(/\b(\d{1,2})\.(\d{1,2})\.(?!\d)/g, function (m, d, mo) {
+      var month = parseInt(mo, 10);
+      if (month >= 1 && month <= 12) return hold(parseInt(d, 10) + '. ' + months[month - 1]);
+      return m;
+    });
+    return out;
+  }
+
+  function normalizeTimes(text, hold) {
+    var out = String(text);
+    out = out.replace(/\b(\d{1,2}):(\d{2})\s?(Uhr)?\b/g, function (m, h, min) {
+      var hh = parseInt(h, 10);
+      var mm = parseInt(min, 10);
+      if (mm === 0) return hold(hh + ' Uhr');
+      return hold(hh + ' Uhr ' + mm);
+    });
+    return out;
+  }
+
+  function normalizeRanges(text, hold) {
+    var out = String(text);
+    var word = ' bis ';
+    // 12 – 24 / 12 - 24 / 12 bis 24 (nur mit Trennzeichen, nie bei „Covid-19“)
+    out = out.replace(/(\d)\s?(?:–|—|\-)\s?(\d)/g, function (m, a, b) {
+      return a + word + b;
+    });
+    return out;
+  }
+
+  function normalizeNumbers(text, hold) {
+    var out = String(text);
+    /* Ein Zeilenumbruch im Tausenderblock („20 000 kWh“) würde als Pause
+       gelesen. Er wird zum deutschen Tausenderpunkt normalisiert:
+       „20 000“ → „20.000“. */
+    var sep = '.';
+    out = out.replace(/(\d)\s(\d{3})\b/g, '$1' + sep + '$2');
+    // Bereiche mit „bis“ bleiben unangetastet, Prozentzeichen schon ersetzt.
+    return out;
+  }
+
+  function normalizeSymbols(text, hold) {
+    var out = String(text);
+    out = out.replace(/&/g, ' und ');
+    out = out.replace(/\sx\s(?=\d)/g, ' mal ');
+    out = out.replace(/\+/g, ' plus ');
+    out = out.replace(/=/g, ' gleich ');
+    out = out.replace(/[\u201c\u201d\u201e]/g, '"');
+    out = out.replace(/[\u2018\u2019\u201a]/g, "'");
+    return out;
+  }
+
+  /**
+   * Überführt Schreibsprache in Sprechsprache — PREMIUM-BILINGUAL.
+   * `lang` ∈ {de,en} wählt das Regelwerk (RULES_DE vs. RULES_EN) und
+   * entscheidet, ob die Germanisierung läuft (nur in de).
+   * @param {string} text  Rohtext des Blocks
+   * @param {string=} lang Zielsprache ('de'|'en'), Default aus Artikel oder 'de'
+   */
+  function speechNormalize(text, lang) {
+    var wantEn = String(lang || '').toLowerCase().indexOf('en') === 0;
+    var out = String(text == null ? '' : text);
+    if (!out) return '';
+
+    var store = [];
+    function hold(value) {
+      store.push(String(value));
+      return HOLD_OPEN + (store.length - 1) + HOLD_CLOSE;
+    }
+
+    // HTML-Entitäten & Steuerzeichen
+    out = out.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+      .replace(/&szlig;/g, 'ß').replace(/&uuml;/g, 'ü').replace(/&ouml;/g, 'ö')
+      .replace(/&auml;/g, 'ä').replace(/&euro;/g, '€').replace(/&[a-zA-Z]+;/g, ' ');
+    out = out.replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, ' ');
+    out = out.replace(/[\u2013\u2014]/g, '–');
+    // Schmuckzeichen, Pfeile und Emoji sind keine Wörter — sie werden
+    // still entfernt (💰 ❌ ✅ 🏆 → …), statt als „money bag“ o. Ä.
+    // vorgelesen zu werden. Wortgleich in scripts/ff_voice_backends.py.
+    out = out.replace(/[\u00ad\u200b-\u200f\u2060\u2190-\u21ff\u2300-\u27bf\u2b00-\u2bff\ufe00-\ufe0f]|[\ud83c-\udbff][\udc00-\udfff]/g, ' ');
+
+    out = normalizeUrls(out, hold);
+    // Bilinguale Datumsaufbereitung: DE → "2. Januar 2006", EN → "January 2, 2006"
+    if (wantEn) {
+      out = out.replace(/\b(\d{1,2})[.\/](\d{1,2})[.\/](\d{4})\b/g, function (m, a, b, c) {
+        var mo = parseInt(a,10), da = parseInt(b,10);
+        if (mo>=1 && mo<=12) return hold(MONTHS_EN[mo-1] + ' ' + da + ', ' + c);
+        return m;
+      });
+      out = out.replace(/\b(\d{1,2})\.(\d{1,2})\.(?!\d)/g, function (m, d, mo) {
+        var month = parseInt(mo,10);
+        if (month>=1 && month<=12) return hold(MONTHS_EN[month-1] + ' ' + parseInt(d,10));
+        return m;
+      });
+      out = out.replace(/\b(\d{1,2}):(\d{2})\s?(Uhr)?\b/g, function (m, h, min) {
+        var hh=parseInt(h,10), mm=parseInt(min,10);
+        return hold(hh + ':' + (mm<10?'0':'') + mm);
+      });
+    } else {
+      out = normalizeDates(out, hold);
+      out = normalizeTimes(out, hold);
+    }
+
+    // PREMIUM-BILINGUAL (12.09.2026): Im Deutschen germanisiert, im Englischen nicht.
+    // Englisch „Service“ würde sonst zu „Sörwis“ — dort also aus.
+    if (!wantEn) out = germanizeSpeech(out);
+
+    // Abkürzungen etc. je Sprache (wortgleich zum Backend-Verzeichnis)
+    var rules = wantEn ? ABBREV_EN : ABBREV_DE;
+    for (var i = 0; i < rules.length; i++) out = out.replace(rules[i][0], rules[i][1]);
+
+    if (wantEn) {
+      out = out.replace(/(\d)\s?(?:–|—|\-)\s?(\d)/g, function(m,a,b){ return a + ' to ' + b; });
+      out = out.replace(/(\d)\s(\d{3})\b/g, '$1,$2');
+      out = out.replace(/&/g, ' and ');
+    } else {
+      out = normalizeRanges(out, hold);
+      out = normalizeNumbers(out, hold);
+      out = normalizeSymbols(out, hold);
+    }
+
+    // Mehrfach-Leerzeichen & doppelte Satzzeichen
+    out = out.replace(/\s+/g, ' ').trim();
+    out = out.replace(/\.{2,}(?!\.)/g, '.');
+    out = out.replace(/\s+([.,;:!?])/g, '$1');
+
+    return unhold(out, store).replace(/\s+/g, ' ').trim();
+  }
+
+  /* ============================================================
+     6 · DOKUMENTMODELL — Was wird in welcher Reihenfolge gelesen?
+     ------------------------------------------------------------
+     Die Reihenfolge ist VERTRAG zwischen Reader, Generator und
+     Kurzfassung. Sie lautet:
+
+       1. Anmoderation (Titel + Hördauer)
+       2. Redaktionelle Vorab-Boxen vor dem Artikel
+          (.ff-korrektur, .ff-kurzantwort)
+       3. Alle Blöcke des Artikels in DOM-Reihenfolge
+       4. Abmoderation
+
+     Der Generator (scripts/ff_voice_audio.py) baut exakt diese
+     Reihenfolge serverseitig nach; scripts/ff_voice_parity_check.py
+     vergleicht beide Listen Block für Block.
+     ============================================================ */
+
+  var CONTENT_SELECTOR = [
+    'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'blockquote',
+    'table', '[role="table"]', '[role="grid"]', '[role="treegrid"]',
+    '.ff-table-scroll', '.ff-tv-tablewrap', '.ff-es-tablewrap',
+    '.wp-block-table', '.table-wrapper', '.table-responsive',
+    'strong', 'b',
+    '.ff-tarif-card', '.ff-einspar-box', '.ff-kurzantwort', '.ff-korrektur', '.callout',
+    '.ff-tv-footnote', '.ff-es-footnote'
+  ].join(', ');
+
+  var SKIP_SELECTOR = '[data-ff-skip-read], .ff-voice-bar, nav, .toc, .ff-toc';
+  var BOX_CLASSES = ['ff-tarif-card', 'ff-einspar-box', 'ff-kurzantwort', 'ff-korrektur', 'callout'];
+  var TABLE_WRAPPERS = 'table, [role="table"], [role="grid"], .ff-table-scroll, .ff-tv-tablewrap, .ff-es-tablewrap, .wp-block-table, .table-wrapper, .table-responsive';
+
+  function isReaderSkipped(el) {
+    if (!el) return true;
+    if (el.getAttribute && el.getAttribute('data-ff-skip-read') !== null) return true;
+    if (el.getAttribute && el.getAttribute('aria-hidden') === 'true') return true;
+    if (closestOf(el, SKIP_SELECTOR)) return true;
+    return false;
+  }
+
+  function isTableLike(el) {
+    if (!el) return false;
+    var t = tagOf(el);
+    if (t === 'TABLE') return true;
+    var role = (el.getAttribute && el.getAttribute('role')) || '';
+    if (role === 'table' || role === 'grid' || role === 'treegrid') return true;
+    if (anyClass(el, ['ff-table-scroll', 'ff-tv-tablewrap', 'ff-es-tablewrap'])) return true;
+    // Wrapper, die genau eine Tabelle enthalten, gelten als Tabelle.
+    if (anyClass(el, ['wp-block-table', 'table-wrapper', 'table-responsive'])) {
+      var inner = qsa('table', el);
+      if (inner.length === 1) return true;
+    }
+    return false;
+  }
+
+  function innerTable(el) {
+    if (!el) return null;
+    if (tagOf(el) === 'TABLE') return el;
+    var tables = qsa('table', el);
+    if (tables.length) return tables[0];
+    return el; // ARIA-Tabelle (role="table" auf div/grid)
+  }
+
+  function isStandaloneEmphasis(el) {
+    // Fettdruck wird an SEINER Stelle gesprochen, wenn er nicht nur
+    // ein einzelnes Wort im Satz ist, sondern ein eigener Block
+    // (z. B. ein ganzer Absatz in Fettschrift oder ein Merksatz).
+    // Maßgeblich ist allein der TEXTANTEIL am Elternelement: Ein
+    // Lead-in wie „<strong>Tarifwechsel als größter Hebel:</strong>
+    // Ein Wechsel …“ ist KEIN eigener Merksatz — der Listenpunkt
+    // spricht es bereits; ein zweiter Block ließe die Einleitung
+    // doppelt erklingen. (Die frühere Knotenzahl-Regel „siblings
+    // <= 2“ scheiterte an Textknoten: <li><strong>…</strong> Rest
+    // </li> hat genau zwei Kindknoten und galt so fälschlich als
+    // eigenständig — genau der Doppel-Leser auf /pillar/strom-sparen/.)
+    if (!el) return false;
+    var text = readableText(el);
+    if (text.length < 12) return false;
+    var parent = el.parentNode;
+    if (!parent) return false;
+    var parentText = readableText(parent);
+    return text.length >= Math.max(12, parentText.length - 2);
+  }
+
+  /* ---------- Tabellenmodell (Premium, Generation 2) --------
+     Vollständige Erkennung mit Zeilen und Spalten:
+     · HTML-Tabellen UND ARIA-Tabellen (role="table"/"grid"/
+       "treegrid" auf div-Basis, Zeilen über role="row")
+     · colspan/rowspan werden zu einem logischen Gitter
+       aufgespannt: jede Zelle erscheint in genau der Spalte,
+       zu der sie gehört — nie verschoben, nie verloren,
+      nie doppelt.
+     · mehrzeilige Kopfzeilen: die unterste trägt die
+       Spaltennamen, darüberliegende werden angesagt
+     · Zeilentitel (th scope="row", role="rowheader") werden
+       zum Namen ihrer Zeile
+     · Gruppenzeilen, Summenzeilen (auch mitten im tbody) und
+       Werbelink-Zeilen (CTA) bekommen eine eigene Rolle
+     · Ziertext aus <small> wird mit Komma angebunden;
+       Schmuck-Emoji und Pfeile werden entfernt
+     Wortgleich gespiegelt in scripts/ff_voice_audio.py —
+     die Parität prüft scripts/ff_voice_parity_check.py.
+     --------------------------------------------------------- */
+
+  var GENERIC_TABLE_LABELS = ['tabelle', 'table'];
+  var SUM_WORDS = ['zwischensumme', 'summe', 'gesamt', 'insgesamt', 'total', 'grand total', 'in total', 'sum'];
+
+  /** Schmuckzeichen, Pfeile und Emoji entfernen (💰 ❌ ✅ 🏆 →). */
+  function stripDecor(text) {
+    return String(text == null ? '' : text)
+      .replace(/[\u00ad\u200b-\u200f\u2060\u2190-\u21ff\u2300-\u27bf\u2b00-\u2bff\ufe00-\ufe0f]|[\ud83c-\udbff][\udc00-\udfff]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  /** colspan/rowspan bzw. aria-colspan/aria-rowspan einer Zelle. */
+  function spanOf(cell, attr, ariaAttr) {
+    var span = 1;
+    if (cell && cell.getAttribute) {
+      var raw = cell.getAttribute(attr);
+      if (raw == null && ariaAttr) raw = cell.getAttribute(ariaAttr);
+      var v = parseInt(raw, 10);
+      if (isFinite(v) && v > 1) span = Math.min(v, 24);
+    }
+    return span;
+  }
+
+  /**
+   * Sprechtext einer Zelle: Grundtext, dann Ziertext aus <small>
+   * mit Komma angebunden („Vorher, Alter Verbraucher“).
+   */
+  function cellSpeechText(cell) {
+    if (!cell) return '';
+    var clone = cell.cloneNode ? cell.cloneNode(true) : cell;
+    qsa('script, style, noscript, svg, [data-ff-skip-read], [aria-hidden="true"]', clone)
+      .forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); });
+    var smallParts = [];
+    qsa('small', clone).forEach(function (s) {
+      var t = String(s.textContent || '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
+      if (t) smallParts.push(t);
+      if (s.parentNode) s.parentNode.removeChild(s);
+    });
+    qsa('br', clone).forEach(function (n) {
+      if (n.parentNode) n.parentNode.replaceChild(doc.createTextNode(' '), n);
+    });
+    // Blockelemente in der Zelle (z. B. Innentabelle, Absätze) bekommen
+    // einen hörbaren Abstand — wortgleich zur Generator-Seite.
+    qsa('p, div, li, h1, h2, h3, h4, h5, h6, blockquote, tr, td, th, section, figcaption', clone)
+      .forEach(function (n) {
+        if (n.parentNode) n.parentNode.insertBefore(doc.createTextNode(' '), n.nextSibling);
+      });
+    var base = String(clone.textContent || '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
+    var out = base;
+    for (var i = 0; i < smallParts.length; i++) out = (out ? out + ', ' : '') + smallParts[i];
+    return stripDecor(out);
+  }
+
+  function isHeaderCell(cell) {
+    if (!cell) return false;
+    if (tagOf(cell) === 'TH') return true;
+    var scope = (cell.getAttribute && cell.getAttribute('scope')) || '';
+    if (scope === 'col' || scope === 'row' || scope === 'colgroup' || scope === 'rowgroup') return true;
+    var role = (cell.getAttribute && cell.getAttribute('role')) || '';
+    return role === 'columnheader' || role === 'rowheader';
+  }
+
+  function rowCells(tr, tableEl) {
+    if (!tr) return [];
+    var cells = qsa('th, td, [role="columnheader"], [role="rowheader"], [role="cell"], [role="gridcell"]', tr);
+    // Zellen einer verschachtelten Innentabelle gehören zur Innentabelle.
+    if (tableEl && tagOf(tableEl) === 'TABLE') {
+      return cells.filter(function (c) { return closestOf(c, 'table') === tableEl; });
+    }
+    return cells;
+  }
+
+  function tableRows(tableEl) {
+    var rows = [];
+    var seen = [];
+    function push(tr, kind) {
+      if (!tr || seen.indexOf(tr) !== -1) return;
+      // Zeilen einer verschachtelten Innentabelle gehören nicht hierher.
+      var owner = closestOf(tr, 'table');
+      if (owner && owner !== tableEl) return;
+      seen.push(tr);
+      rows.push({ tr: tr, kind: kind });
+    }
+    qsa('thead tr', tableEl).forEach(function (tr) { push(tr, 'head'); });
+    qsa('tbody tr', tableEl).forEach(function (tr) { push(tr, 'body'); });
+    qsa('tfoot tr', tableEl).forEach(function (tr) { push(tr, 'foot'); });
+    qsa('tr', tableEl).forEach(function (tr) {
+      if (seen.indexOf(tr) === -1) push(tr, rows.length === 0 ? 'head' : 'body');
+    });
+    // ARIA-Tabellen ohne <tr>: Zeilen laufen über role="row".
+    if (!rows.length) {
+      qsa('[role="row"]', tableEl).forEach(function (r) { push(r, 'body'); });
+    }
+    return rows;
+  }
+
+  /** Titel der Übersicht — caption, aria-label, Premium-Titel oder
+      die unmittelbar davorstehende Überschrift (Markdown-Tabellen). */
+  function tableTitle(tableEl) {
+    var cap = qsa('caption', tableEl)[0];
+    if (cap && stripDecor(readableText(cap))) return stripDecor(readableText(cap));
+
+    // Wrapper-Kette nach oben sammeln (Tablewrapper bis zur Sektion).
+    var wrappers = [];
+    var node = tableEl;
+    for (var up = 0; up < 4 && node; up++) {
+      var wrap = closestOf(node, '.ff-tarifvergleich, .ff-einspar, .ff-tv-tablewrap, .ff-es-tablewrap, .ff-table-scroll, .wp-block-table, .table-wrapper, .table-responsive');
+      if (!wrap || wrappers.indexOf(wrap) !== -1) break;
+      wrappers.push(wrap);
+      node = wrap.parentElement;
+    }
+
+    // aria-label der Tabelle oder ihrer Wrapper — außer Allgemeinplätzen
+    // wie „Tabelle“ (vom Table-Render-Hook automatisch gesetzt).
+    var ariaSrcs = [tableEl].concat(wrappers);
+    for (var a = 0; a < ariaSrcs.length; a++) {
+      var aria = ariaSrcs[a].getAttribute && ariaSrcs[a].getAttribute('aria-label');
+      if (aria) {
+        var cleanAria = stripDecor(aria);
+        if (cleanAria && GENERIC_TABLE_LABELS.indexOf(cleanAria.toLowerCase()) === -1) return cleanAria;
+      }
+    }
+
+    // Premium-Übersichten setzen ihren Titel (.ff-tv-title /
+    // .ff-es-title) AUSSERHALB des Tablewrappers — in jedem
+    // Wrapper der Kette suchen.
+    for (var w = 0; w < wrappers.length; w++) {
+      var h = qsa('.ff-tv-title, .ff-es-title, caption, h3, h4', wrappers[w])[0];
+      if (h && h !== tableEl && closestOf(h, 'table') !== tableEl && stripDecor(headingTextOf(h))) {
+        return stripDecor(headingTextOf(h));
+      }
+    }
+
+    // Unmittelbar davorstehende Überschrift (z. B. Markdown-Tabelle
+    // unter einer Zwischenüberschrift).
+    var outerEl = wrappers.length ? wrappers[wrappers.length - 1] : tableEl;
+    var prev = outerEl.previousElementSibling;
+    var guard = 0;
+    while (prev && guard++ < 4) {
+      if (/^H[23456]$/.test(tagOf(prev)) || anyClass(prev, ['ff-tv-title', 'ff-es-title'])) {
+        var tHead = stripDecor(headingTextOf(prev));
+        if (tHead) return tHead;
+      }
+      prev = prev.previousElementSibling;
+    }
+    return '';
+  }
+
+  /**
+   * Spannt die Zeilen zu einem logischen Gitter auf: colspan- und
+   * rowspan-Zellen belegen genau ihre Spalten. Jeder Eintrag trägt
+   * `lead` = diese Spalte spricht den Wert (colspan-Fortsetzungen
+   * schweigen, rowspan-Werte werden in jeder überspannten Zeile
+   * wiederholt — wie ein Screenreader).
+   */
+  function expandGrid(tableEl, rows) {
+    var occupied = {};
+    var grid = [];
+    for (var r = 0; r < rows.length; r++) {
+      var cells = rowCells(rows[r].tr, tableEl);
+      var entries = [];
+      var col = 0;
+      for (var ci = 0; ci < cells.length; ci++) {
+        while (occupied[r + ',' + col]) { entries.push(occupied[r + ',' + col]); col++; }
+        var cell = cells[ci];
+        var cs = spanOf(cell, 'colspan', 'aria-colspan');
+        var rs = spanOf(cell, 'rowspan', 'aria-rowspan');
+        var text = cellSpeechText(cell);
+        var head = isHeaderCell(cell);
+        for (var d = 0; d < cs; d++) {
+          entries.push({ el: cell, text: text, head: head, lead: d === 0 });
+          for (var dr = 1; dr < rs; dr++) {
+            occupied[(r + dr) + ',' + (col + d)] = { el: cell, text: text, head: head, lead: true };
+          }
+        }
+        col += cs;
+      }
+      while (occupied[r + ',' + col]) { entries.push(occupied[r + ',' + col]); col++; }
+      grid.push({ el: rows[r].tr, kind: rows[r].kind, cells: entries });
+    }
+    return grid;
+  }
+
+  /** Eine Zelle als Paar „Spaltenname: Wert“. */
+  function cellSpeech(name, value, index) {
+    var label = name && String(name).length ? String(name) : (T.columnLabel + ' ' + (index + 1));
+    var val = value == null || String(value) === '' ? '' : String(value);
+    if (!val) return '';
+    return label + ': ' + val;
+  }
+
+  function startsWithSumWord(text) {
+    var low = String(text || '').toLowerCase();
+    for (var i = 0; i < SUM_WORDS.length; i++) {
+      if (low.indexOf(SUM_WORDS[i]) === 0) return true;
+    }
+    return false;
+  }
+
+  /**
+   * Das vollständige Modell einer Tabelle/Übersicht:
+   * Titel, Spaltennamen (auch mehrzeilige Köpfe), Zeilen mit ihrer
+   * Rolle (data | group | sum | cta | empty) und vorgerüsteten
+   * Sprech-Teilen. Wortgleich in scripts/ff_voice_audio.py.
+   */
+  function buildTableModel(tableEl) {
+    var grid = expandGrid(tableEl, tableRows(tableEl));
+    var headerRows = [];
+    var bodyRows = [];
+    var footRows = [];
+    var headerDone = false;
+
+    grid.forEach(function (row) {
+      var nonEmpty = row.cells.filter(function (e) { return e.text; });
+      var allHead = nonEmpty.length > 0 && nonEmpty.every(function (e) { return e.head; });
+      if (row.kind === 'head' || (!headerDone && allHead)) {
+        headerRows.push(row);
+        headerDone = true;
+        return;
+      }
+      if (row.kind === 'foot') { footRows.push(row); return; }
+      bodyRows.push(row);
+    });
+
+    var colCount = 0;
+    grid.forEach(function (row) { colCount = Math.max(colCount, row.cells.length); });
+
+    // Spaltennamen = die UNTERSTE Kopfzeile (sie trägt die Werte).
+    var headers = [];
+    if (headerRows.length) {
+      var lastHead = headerRows[headerRows.length - 1];
+      for (var c = 0; c < colCount; c++) {
+        var e = lastHead.cells[c];
+        headers.push(e && e.text ? e.text : '');
+      }
+    }
+
+    // Darüberliegende Kopfzeilen (Gruppierungen) werden angesagt.
+    var headerExtras = [];
+    for (var h = 0; h < headerRows.length - 1; h++) {
+      var texts = [];
+      headerRows[h].cells.forEach(function (entry) {
+        if (!entry.text || entry.lead === false) return;
+        if (texts.length && texts[texts.length - 1] === entry.text) return;
+        texts.push(entry.text);
+      });
+      if (texts.length) headerExtras.push(texts.join(', '));
+    }
+
+    function classify(row, isFoot) {
+      var rec = { el: row.el, kind: 'data', label: '', parts: [], cta: '', group: '' };
+      var nonEmpty = [];
+      row.cells.forEach(function (entry, c) { if (entry.text) nonEmpty.push({ e: entry, c: c }); });
+
+      // Anzeige-Zellen für die Kurzfassung (je Spalte, ohne Span-Duplikate)
+      var display = [];
+      for (var c0 = 0; c0 < row.cells.length; c0++) {
+        var de = row.cells[c0];
+        display.push(de && de.lead !== false ? de.text : '');
+      }
+      rec.display = display;
+
+      if (!nonEmpty.length) { rec.kind = 'empty'; return rec; }
+
+      // 1 · Werbelink-Zeile (CTA): Button/Partnerlink in der Zelle.
+      var ctaParts = [];
+      var ctaCells = 0;
+      var plainCells = [];
+      nonEmpty.forEach(function (item) {
+        var links = qsa('a.ff-tv-btn, a.ff-es-btn, a.ff-cta, button', item.e.el);
+        var texts = [];
+        links.forEach(function (a) {
+          var t = stripDecor(readableText(a));
+          if (t) texts.push(t);
+        });
+        if (texts.length) {
+          ctaCells++;
+          texts.forEach(function (t) { if (ctaParts.indexOf(t) === -1) ctaParts.push(t); });
+        } else {
+          plainCells.push(item.e.text);
+        }
+      });
+      var onlyDecorLeft = plainCells.every(function (t) { return t.length < 24 && !/\d/.test(t); });
+      if (ctaCells > 0 && onlyDecorLeft) {
+        rec.kind = 'cta';
+        rec.cta = ctaParts.join(', ');
+        return rec;
+      }
+
+      // 2 · Summenzeile: tfoot, Summen-Klasse oder Summenwort.
+      var first = nonEmpty[0];
+      var isSum = isFoot || hasClass(row.el, 'ff-es-sum') || hasClass(row.el, 'ff-tv-sum')
+        || startsWithSumWord(first.e.text);
+      if (isSum) {
+        rec.kind = 'sum';
+        var skipFirst = startsWithSumWord(first.e.text);
+        nonEmpty.forEach(function (item, i) {
+          if (i === 0 && skipFirst) return;   // „Summe/Gesamt“ sagt der Cue selbst
+          if (item.e.lead === false) return;
+          var spoken = cellSpeech(headers[item.c], item.e.text, item.c);
+          if (spoken) rec.parts.push(spoken);
+        });
+        return rec;
+      }
+
+      // 3 · Gruppenzeile: alle Zellen sind Köpfe (z. B. th mit colspan).
+      if (nonEmpty.every(function (item) { return item.e.head; })) {
+        var names = [];
+        nonEmpty.forEach(function (item) {
+          if (item.e.lead !== false && names.indexOf(item.e.text) === -1) names.push(item.e.text);
+        });
+        rec.kind = 'group';
+        rec.group = names.join(', ');
+        return rec;
+      }
+
+      // 4 · Datenzeile — ein Zeilentitel (th/rowheader) wird ihr Name.
+      var startAt = 0;
+      if (first.e.head) {
+        rec.label = first.e.text;
+        startAt = 1;
+      }
+      for (var i2 = startAt; i2 < nonEmpty.length; i2++) {
+        var it = nonEmpty[i2];
+        if (it.e.lead === false) continue;
+        var spoken2 = cellSpeech(headers[it.c], it.e.text, it.c);
+        if (spoken2) rec.parts.push(spoken2);
+      }
+      return rec;
+    }
+
+    var rows = [];
+    bodyRows.forEach(function (row) { rows.push(classify(row, false)); });
+    footRows.forEach(function (row) { rows.push(classify(row, true)); });
+
+    return {
+      title: tableTitle(tableEl) || T.tableDefault,
+      headers: headers,
+      headerExtras: headerExtras,
+      rows: rows,
+      colCount: colCount
+    };
+  }
+
+  /** Eine Tabelle wird vollständig gesprochen — Zeile für Zeile. */
+  function extractTableBlocks(tableEl, blockLang) {
+    var L = blockLang === 'en' ? 'en' : 'de';
+    var TT = I18N[L] || T;
+    var model = buildTableModel(tableEl);
+    var out = [];
+    var title = model.title || TTTT.tableDefault;
+
+    var dataRows = model.rows.filter(function (r) { return r.kind === 'data' && r.parts.length; });
+    var hasContent = dataRows.length > 0 || model.headers.some(function (h) { return h; })
+      || model.headerExtras.length > 0
+      || model.rows.some(function (r) { return r.kind === 'sum' || r.kind === 'cta' || r.kind === 'group'; });
+    if (!hasContent) return out;   // leere Hülle: nichts sprechen
+
+    var rowCount = dataRows.length;
+    out.push({
+      el: tableEl,
+      lang: L,
+      type: 'table-intro',
+      text: (rowCount === 1 ? TT.tableIntroOne : TT.tableIntro)
+        .replace('{title}', title)
+        .replace('{cols}', model.colCount)
+        .replace('{rows}', rowCount)
+    });
+
+    var spokenHeaders = model.headers.filter(function (h) { return h; });
+    if (spokenHeaders.length) {
+      out.push({
+        el: tableEl,
+        lang: L,
+        type: 'table-header',
+        text: TT.tableHeaders.replace('{headers}', spokenHeaders.join(', '))
+      });
+    }
+    model.headerExtras.forEach(function (extra, i) {
+      out.push({
+        el: tableEl,
+        lang: L,
+        type: 'table-header',
+        text: TT.tableHeaderRow.replace('{n}', i + 1).replace('{headers}', extra)
+      });
+    });
+
+    var dataIdx = 0;
+    model.rows.forEach(function (row) {
+      if (row.kind === 'empty') return;
+      if (row.kind === 'data') {
+        if (!row.parts.length) return;
+        dataIdx += 1;
+        var tmpl = row.label ? TT.tableRowLabel : TT.tableRow;
+        out.push({
+          el: row.el,
+          lang: L,
+          type: 'table-row',
+          text: tmpl
+            .replace('{row}', dataIdx)
+            .replace('{total}', rowCount)
+            .replace('{label}', row.label)
+            .replace('{content}', row.parts.join(', '))
+        });
+        return;
+      }
+      if (row.kind === 'group') {
+        out.push({ el: row.el, lang: L, type: 'table-group', text: TT.tableGroup.replace('{name}', row.group) });
+        return;
+      }
+      if (row.kind === 'sum') {
+        if (!row.parts.length) return;
+        out.push({ el: row.el, lang: L, type: 'table-sum', text: TT.tableSum.replace('{content}', row.parts.join(', ')) });
+        return;
+      }
+      if (row.kind === 'cta') {
+        if (!row.cta) return;
+        out.push({ el: row.el, lang: L, type: 'table-cta', text: TT.tableCta.replace('{cta}', row.cta) });
+      }
+    });
+
+    out.push({
+      el: tableEl,
+      lang: L,
+      type: 'table-outro',
+      text: TT.tableOutro.replace('{title}', title)
+    });
+
+    return out;
+  }
+
+  /* ---------- Blöcke vor dem Artikel ------------------------ */
+
+  function preContentBoxes() {
+    var scope = doc.body || doc;
+    return qsa('.ff-korrektur, .ff-kurzantwort', scope).filter(function (el) {
+      if (closestOf(el, '.post-content, .md-content')) return false;
+      if (closestOf(el, SKIP_SELECTOR)) return false;
+      return true;
+    });
+  }
+
+  function boxTextWithoutHeadline(box) {
+    if (!box) return '';
+    var probe = box;
+    if (box.cloneNode) {
+      probe = box.cloneNode(true);
+      qsa('.ff-kurzantwort__head, .ff-kurzantwort__label, .ff-kurzantwort__icon, .ff-kurzantwort__eyebrow', probe)
+        .forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); });
+    }
+    return readableText(probe);
+  }
+
+  /* ---------- Die Lesereihenfolge --------------------------- */
+
+  function collectBlocks() {
+    var content = doc.querySelector('.post-content') || doc.querySelector('.md-content');
+    if (!content) return [];
+    var out = [];
+    var done = [];
+
+    // (1) Anmoderation
+    out.push({
+      el: bar,
+      lang: lang,
+      type: 'intro',
+      text: T.introLine
+        .replace('{title}', stripMd(cfg.title || doc.title || ''))
+        .replace('{duration}', durationPhrase(cfg.readingTime))
+    });
+
+    // (2) Redaktionelle Vorab-Boxen
+    preContentBoxes().forEach(function (box) {
+      var text = boxTextWithoutHeadline(box);
+      if (text.length <= 5) return;
+      var isKorrektur = hasClass(box, 'ff-korrektur');
+      out.push({
+        el: box,
+        lang: lang,
+        type: isKorrektur ? 'warning' : 'callout',
+        text: (isKorrektur ? T.cueCorrection : T.cueShortAnswer) + ' ' + text
+      });
+    });
+
+    // (3) Artikelblöcke in DOM-Reihenfolge
+    var nodes = qsa(CONTENT_SELECTOR, content);
+    nodes.forEach(function (el) {
+      if (isReaderSkipped(el)) return;
+      if (closestOf(el, 'figure') && !isTableLike(el)) return;
+      // Premium-Übersichten liefern denselben Inhalt zweimal (Tabelle
+      // für Desktop, Kartenstapel für Mobil). Die Tabelle ist die
+      // vollständigere Quelle — der Kartenstapel bleibt stumm.
+      if (closestOf(el, '.ff-tv-cards, .ff-es-cards')) return;
+
+      var elLang = sniffLangOf(el, lang);
+
+      if (isTableLike(el)) {
+        // Innentabellen sprechen als Zelleninhalt der Außentabelle mit —
+        // nie ein zweites Mal als eigene Tabelle.
+        if (el.parentElement && closestOf(el.parentElement, 'table')) return;
+        var tbl = innerTable(el);
+        if (!tbl || done.indexOf(tbl) !== -1) return;
+        done.push(tbl);
+        extractTableBlocks(tbl, elLang).forEach(function (b) { out.push(b); });
+        return;
+      }
+
+      if (closestOf(el, TABLE_WRAPPERS)) return;
+
+      // Eigener Fettdruck-Block (Merksatz) — an seiner Stelle gesprochen.
+      if (/^(STRONG|B)$/.test(tagOf(el))) {
+        if (!isStandaloneEmphasis(el)) return;
+        var emph = readableText(el);
+        if (emph.length < 8) return;
+        /* Doppel-Lese-Schleuse: Steht dieser Text bereits in einem
+           Vorfahren-Block (Lead-in des Listenpunkts, CTA-Link im
+           Absatz), wird er dort schon gesprochen — niemals ein
+           zweites Mal. Blöcke liegen in Dokumentordnung, der
+           Vorfahren-Block liegt also davor. */
+        var emphBare = emph.replace(/[\s?!.…:]+$/, '');
+        if (emphBare) {
+          for (var ancestor = el.parentNode; ancestor; ancestor = ancestor.parentNode) {
+            for (var di = out.length - 1; di >= 0; di--) {
+              var prevB = out[di];
+              if (!prevB || !prevB.el) break;
+              if (prevB.el === ancestor) {
+                if (prevB.text && prevB.text.indexOf(emphBare) !== -1) return;
+                break;
+              }
+            }
+          }
+        }
+        out.push({ el: el, lang: elLang, type: 'emphasis', text: emph.replace(/[\s?!.…]+$/, '') + '.' });
+        return;
+      }
+
+      if (anyClass(el, BOX_CLASSES)) {
+        var boxText = readableText(el);
+        if (boxText.length <= 5) return;
+        var isWarn = /\b(achtung|warnung|vorsicht|wichtig|caution|warning)\b/i.test(boxText.slice(0, 60))
+          || hasClass(el, 'ff-korrektur');
+        var TT2 = I18N[elLang] || T;
+        var cue = hasClass(el, 'ff-kurzantwort') ? TT2.cueShortAnswer
+          : hasClass(el, 'ff-einspar-box') ? TT2.cueSaving
+            : hasClass(el, 'ff-tarif-card') ? TT2.cueTariff
+              : isWarn ? TT2.cueWarning : TT2.cueNote;
+        out.push({
+          el: el,
+          lang: elLang,
+          type: isWarn ? 'warning' : (hasClass(el, 'ff-tarif-card') || hasClass(el, 'ff-einspar-box') ? 'overview-card' : 'callout'),
+          text: cue + ' ' + boxText
+        });
+        return;
+      }
+
+      /* Nur echte Vorfahren zählen: Ein <blockquote> selbst soll gelesen
+         werden, sein Inhalt nicht zusätzlich ein zweites Mal. */
+      var boxAncestor = el.parentElement
+        ? closestOf(el.parentElement, '.ff-kurzantwort, .ff-korrektur, .callout, .ff-tarif-card, .ff-einspar-box, blockquote')
+        : null;
+      if (boxAncestor) return;
+
+      /* Besteht der Block nur aus einem eigenen Fettdruck-Merksatz, spricht
+         ihn der Fettdruck-Zweig – sonst stünde derselbe Satz zweimal. */
+      var ownText = readableText(el);
+      if (ownText) {
+        var hasOwnEmphasis = qsa('strong, b', el).some(function (k) {
+          return isStandaloneEmphasis(k) && readableText(k) === ownText;
+        });
+        if (hasOwnEmphasis) return;
+      }
+
+      var text = ownText;
+      if (text.length < 2) return;
+      if (/^(quelle|source|stand|foto|bild|anzeige|werbung|affiliate)\b/i.test(text) && text.length < 140) return;
+
+      var t = tagOf(el).toLowerCase();
+      var type = t;
+      if (hasClass(el, 'ff-lead')) type = 'lead';
+      if (anyClass(el, ['ff-tv-title', 'ff-es-title'])) type = 'overview-title';
+      else if (anyClass(el, ['ff-tv-sub', 'ff-es-sub', 'ff-tv-footnote', 'ff-es-footnote'])) type = 'overview-note';
+
+      var speakText = text;
+
+      // Gezählte Listenpunkte
+      if (t === 'li') {
+        var parentList = el.parentElement;
+        if (parentList && tagOf(parentList) === 'OL') {
+          var idx = Array.prototype.indexOf.call(parentList.children, el) + 1;
+          speakText = (I18N[elLang] || T).listItemNum.replace('{n}', idx) + ' ' + text;
+        }
+      }
+
+      /* Überschriften stehen im Satzbaum meist ohne Punkt. Gesprochen
+         brauchen sie einen — außer bei Fragen: Aus „Kann mir das Gas
+         abgestellt werden?“ darf keine Feststellung werden. */
+      if (/^H[23456]$/.test(tagOf(el))) {
+        var heading = text.replace(/[\s?!.…]+$/, '');
+        speakText = heading + (/\?\s*$/.test(text) ? '?' : '.');
+      }
+
+      out.push({ el: el, lang: elLang, type: type, text: speakText });
+    });
+
+    // (4) Abmoderation
+    out.push({ el: bar, lang: lang, type: 'outro', text: T.outroLine });
+
+    return out.filter(function (b) { return b && b.text && b.text.length > 1; });
+  }
+
+  /** NUR-DEUTSCH-VERTRAG: Blöcke wechseln die Sprache nicht (Generator-Spiegel: _lang_of). */
+  function sniffLangOf(el, articleLang) {
+    var base = articleLang || lang || 'de';
+    // 1) explizites lang-Attribut an Block oder Vorfahren
+    var node = el;
+    for (var d=0; d<4 && node; d++) {
+      var a = node.getAttribute && node.getAttribute('lang');
+      if (a) { a = String(a).toLowerCase().slice(0,2); if (a==='de'||a==='en') return a; }
+      node = node.parentElement;
+    }
+    // 2) Satz-Heuristik auf dem Blocktext
+    try {
+      var txt = readableText(el);
+      var sniffed = sniffSentenceLang(txt, base);
+      if (sniffed === 'en' || sniffed === 'de') return sniffed;
+    } catch(e) {}
+    return base === 'en' ? 'en' : 'de';
+  }
+
+  /* ============================================================
+     7 · STUDIO-REGIE — Tempo, Tonlage, Lautstärke, Pausen
+     ------------------------------------------------------------
+     Keine Regler, keine Stimmenwahl. Die Regie folgt drei
+     Eingangsgrößen:
+       · ROLLE       — Überschrift, Fließtext, Tabellenzeile,
+                       Warnhinweis … bekommen je ein Grundprofil.
+       · DICHTE      — Zahlen, lange Komposita, Schachtelsätze
+                       werden automatisch ruhiger gelesen.
+       · MELDODIE    — Fragen steigen, Ausrufe betonen, der letzte
+                       Satz eines Blocks klingt aus (Final-Längung).
+     Dieselben Profile fahren Tonspur (Serverseite) und
+     Browserstimme — die Parität wird geprüft.
+     ============================================================ */
+
+  var PROSODY = {
+    intro:          { rate: 0.99, pitch: 1.00, volume: 1.00, before: 0,   after: 520 },
+    outro:          { rate: 0.94, pitch: 0.97, volume: 0.96, before: 420, after: 0 },
+    h2:             { rate: 0.90, pitch: 0.96, volume: 1.00, before: 620, after: 420 },
+    h3:             { rate: 0.92, pitch: 0.97, volume: 1.00, before: 520, after: 340 },
+    h4:             { rate: 0.94, pitch: 0.98, volume: 1.00, before: 440, after: 280 },
+    h5:             { rate: 0.96, pitch: 0.99, volume: 1.00, before: 380, after: 240 },
+    h6:             { rate: 0.97, pitch: 0.99, volume: 1.00, before: 340, after: 220 },
+    lead:           { rate: 0.96, pitch: 1.00, volume: 1.00, before: 420, after: 460 },
+    p:              { rate: 1.00, pitch: 1.00, volume: 1.00, before: 180, after: 420 },
+    li:             { rate: 1.01, pitch: 1.00, volume: 1.00, before: 120, after: 320 },
+    blockquote:     { rate: 0.95, pitch: 0.98, volume: 0.98, before: 380, after: 460 },
+    callout:        { rate: 0.97, pitch: 1.00, volume: 1.00, before: 380, after: 460 },
+    warning:        { rate: 0.93, pitch: 0.97, volume: 1.02, before: 460, after: 520 },
+    emphasis:       { rate: 0.96, pitch: 1.01, volume: 1.02, before: 320, after: 420 },
+    'overview-title': { rate: 0.90, pitch: 0.96, volume: 1.00, before: 560, after: 320 },
+    'overview-note':  { rate: 0.98, pitch: 0.99, volume: 0.96, before: 220, after: 380 },
+    'overview-card':  { rate: 0.97, pitch: 1.00, volume: 1.00, before: 320, after: 420 },
+    'table-intro':  { rate: 0.92, pitch: 0.97, volume: 1.00, before: 520, after: 320 },
+    'table-header': { rate: 0.95, pitch: 0.98, volume: 1.00, before: 160, after: 300 },
+    'table-row':    { rate: 0.93, pitch: 0.98, volume: 0.99, before: 120, after: 340 },
+    'table-group':  { rate: 0.93, pitch: 0.97, volume: 1.00, before: 360, after: 300 },
+    'table-sum':    { rate: 0.92, pitch: 0.98, volume: 1.01, before: 260, after: 400 },
+    'table-cta':    { rate: 0.97, pitch: 1.00, volume: 1.00, before: 300, after: 460 },
+    'table-outro':  { rate: 0.96, pitch: 0.99, volume: 0.98, before: 300, after: 520 }
+  };
+
+  var HARD_CHUNK = 220;   // Chrome bricht Äußerungen > ~15 s ab; 220 Zeichen bleiben sicher darunter.
+  var SOFT_CHUNK = 180;   // Atemgruppen-Ziel bei guter Stimme.
+
+  function prosodyFor(type) { return PROSODY[type] || PROSODY.p; }
+
+  /* ---------- Satzzerlegung --------------------------------- */
+
+  // Punkte in Zahlen, Abkürzungen und Auslassungen dürfen KEIN
+  // Satzende bedeuten: 1.234,56 · z. B. · Nr. 3 · … · 20.000 kWh
+  function maskSentenceDots(text) {
+    return String(text)
+      .replace(/(\d)\.(\d)/g, '$1\u0002$2')
+      .replace(/\b(\d{1,2})\.\s?(\d{1,2})\.\s?(\d{4})\b/g, function (m) { return m.replace(/\./g, '\u0002'); })
+      .replace(/\b(Abs|Art|Nr|S|Abb|Tab|Mio|Mrd|Tsd|bzw|ca|vgl|usw|usf|zzgl|inkl|exkl|sog|geb|MwSt|z\s?B|u\s?a|d\s?h|i\s?d\s?R|o\s?g)\./g,
+        function (m) { return m.replace(/\./g, '\u0002'); })
+      .replace(/\b(\w)\.(?=\w{2,}\.)/g, '$1\u0002')
+      // Getrennt geschriebene Abkürzungen: „z. B.“, „u. a.“, „d. h.“, „e. g.“
+      .replace(/\b([a-z])\.\s+([a-zA-Z])\./g, function (m, a, b) { return a + '\u0002 ' + b + '\u0002'; });
+  }
+  function unmaskDots(text) { return String(text).replace(/\u0002/g, '.'); }
+
+  function sentences(text) {
+    var masked = maskSentenceDots(text);
+    var parts = masked.split(/(?<=[.!?…])\s+(?=["'“„]?[A-ZÄÖÜ0-9(])/);
+    if (parts.length <= 1) parts = masked.split(/(?<=[.!?…])\s+/);
+    return parts.map(unmaskDots).map(function (s) { return s.trim(); })
+      .filter(function (s) { return s.length > 0; });
+  }
+
+  /* ---------- Atemgruppen ----------------------------------- */
+
+  var CONNECTIVES = /\b(und|oder|aber|denn|weil|da|wenn|falls|obwohl|während|damit|sodass|als|wie|nachdem|bevor|seit|sowie|jedoch|allerdings|dennoch|trotzdem|deshalb|daher|darüber hinaus|außerdem|zudem|and|or|but|because|although|however|while|whereas|since|if|unless|therefore|moreover|furthermore|nevertheless|so that|as well as)\b/i;
+
+  function cutAtConnectives(text) {
+    var out = [];
+    var rest = String(text);
+    var guard = 0;
+    while (rest.length > HARD_CHUNK && guard++ < 12) {
+      var cut = -1;
+      var re = new RegExp(CONNECTIVES.source, 'gi');
+      var m;
+      while ((m = re.exec(rest)) !== null) {
+        var at = m.index;
+        if (at > HARD_CHUNK * 0.4 && at < rest.length - 40) { cut = at; }
+        if (at > HARD_CHUNK) break;
+      }
+      if (cut < 0) {
+        var slice = rest.slice(0, HARD_CHUNK);
+        var lastStop = Math.max(slice.lastIndexOf(', '), slice.lastIndexOf('; '), slice.lastIndexOf(': '), slice.lastIndexOf(' – '));
+        cut = lastStop > HARD_CHUNK * 0.35 ? lastStop + 1 : HARD_CHUNK;
+      }
+      out.push(rest.slice(0, cut).trim());
+      rest = rest.slice(cut).trim();
+    }
+    if (rest) out.push(rest);
+    return out;
+  }
+
+  function commaPieces(text) {
+    // Komma-Teile zu natürlichen Atemgruppen bündeln
+    var pieces = String(text).split(/(?<=[,;:])\s+/);
+    var out = [];
+    var buf = '';
+    pieces.forEach(function (piece) {
+      var candidate = buf ? buf + ' ' + piece : piece;
+      if (candidate.length > SOFT_CHUNK && buf) {
+        out.push(buf.trim());
+        buf = piece;
+      } else {
+        buf = candidate;
+      }
+    });
+    if (buf.trim()) out.push(buf.trim());
+    return out;
+  }
+
+  /** Zerlegt einen Block in Sprecheinheiten (Atemgruppen).
+      NUR-DEUTSCH-VERTRAG: kein Satz-Routing mehr — jede Einheit trägt
+      „de“. (Ein optionales zweite Argument bleibt Signatur-Kompatibilität.) */
+  function splitForSpeech(text) {
+    var out = [];
+    sentences(text).forEach(function (sentence) {
+      if (!sentence) return;
+      if (sentence.length <= HARD_CHUNK) {
+        out.push({ text: sentence, lang: 'de' });
+        return;
+      }
+      cutAtConnectives(sentence).forEach(function (piece) {
+        if (piece.length <= HARD_CHUNK) { out.push({ text: piece, lang: 'de' }); return; }
+        commaPieces(piece).forEach(function (sub) {
+          if (sub.length <= HARD_CHUNK) { out.push({ text: sub, lang: 'de' }); return; }
+          var words = sub.split(/\s+/);
+          var buf = '';
+          words.forEach(function (w) {
+            var cand = buf ? buf + ' ' + w : w;
+            if (buf && cand.length > HARD_CHUNK - 12) { out.push({ text: buf.trim(), lang: 'de' }); buf = w; }
+            else buf = cand;
+          });
+          if (buf.trim()) out.push({ text: buf.trim(), lang: 'de' });
+        });
+      });
+    });
+    return out;
+  }
+
+  /* ---------- Dichte & Melodie ------------------------------ */
+
+  function densityFactor(text) {
+    var t = String(text || '');
+    var words = Math.max(1, (t.match(/\S+/g) || []).length);
+    var numbers = (t.match(/\d/g) || []).length;
+    var longWords = (t.match(/\b\w{14,}\b/g) || []).length;
+    var clauses = (t.match(/[,;:]/g) || []).length;
+    var score = (numbers / words) * 2.2 + (longWords / words) * 2.4 + (clauses / words) * 0.9;
+    // 1.0 = neutral; dichtere Sätze werden ruhiger (bis 0.90)
+    return Math.max(0.90, Math.min(1.06, 1.02 - score));
+  }
+
+  function melodyOf(text) {
+    if (/\?\s*$/.test(text)) return 'question';
+    if (/!\s*$/.test(text)) return 'exclaim';
+    if (/…\s*$/.test(text)) return 'trailing';
+    if (/[:,;]\s*$/.test(text)) return 'open';
+    return 'statement';
+  }
+
+  var MELODY_PITCH = { question: 0.06, exclaim: 0.02, trailing: -0.02, open: -0.01, statement: 0 };
+  var MELODY_RATE = { question: 0.98, exclaim: 1.02, trailing: 0.94, open: 0.99, statement: 1 };
+  var MELODY_AFTER = { question: 240, exclaim: 200, trailing: 380, open: 60, statement: 0 };
+
+  /* ---------- Zeitachse ------------------------------------- */
+
+  var BASE_CPS = 15.2;   // Zeichen pro Sekunde bei rate 1.0 (Klang-Referenz: ruhige Sprechstimme)
+
+  function effectiveRate(unit) {
+    var p = unit.profile;
+    var density = unit.density;
+    var melody = MELODY_RATE[unit.melody] || 1;
+    var quality = unit.qualityRate || 1;
+    var isLast = unit.finalChunk ? 0.97 : 1;      // Final-Längung am Blockende
+    return Math.max(0.75, Math.min(1.22, p.rate * density * melody * quality * isLast));
+  }
+
+  function effectivePitch(unit) {
+    var p = unit.profile;
+    var melody = MELODY_PITCH[unit.melody] || 0;
+    var micro = (unit.index % 2 === 0 ? 0.012 : -0.012);   // Mikro-Modulation gegen Monotonie
+    var zone = unit.pitchZone || 0;
+    return Math.max(0.6, Math.min(1.4, p.pitch + melody + micro + zone));
+  }
+
+  function effectiveVolume(unit) {
+    var p = unit.profile;
+    var melody = unit.melody === 'exclaim' ? 0.04 : 0;
+    return Math.max(0.55, Math.min(1, p.volume + melody));
+  }
+
+  function pauseAfter(unit) {
+    var p = unit.profile;
+    var base = p.after || 0;
+    var melody = MELODY_AFTER[unit.melody] || 0;
+    var byLength = unit.words > 28 ? 120 : (unit.words > 16 ? 60 : 0);
+    var rateComp = 1 / Math.max(0.8, unit.effRate);
+    return Math.round((base + melody + byLength) * rateComp);
+  }
+
+  function buildTimeline(blocks, qualityRate) {
+    var units = [];
+    var totalChars = 0;
+    var totalTokens = 0;
+    var index = 0;
+    blocks.forEach(function (b, bi) {
+      var profile = prosodyFor(b.type);
+      var uInBlock = 0;
+      var raw = splitForSpeech(speechNormalize(b.text, (b && b.lang) ? b.lang : 'de'));
+      raw.forEach(function (c, ci) {
+        if (!c.text) return;
+        var density = densityFactor(c.text);
+        // Leseanzeige-Zählwerk: je Einheit die Wort-Anzahl und der
+        // Bestand an gespr. WÖRTERN bis hierhin (ntokStart) — die
+        // Brücke von onboundary/Wortuhr zum rohen Wort im DOM.
+        var unitToks = (c.text.match(/\S+/g) || []).length;
+        var unit = {
+          block: b,
+          blockIndex: bi,
+          index: index++,
+          text: c.text,
+          lang: (b.lang || 'de').toLowerCase().indexOf('en')===0 ? 'en' : 'de',
+          type: b.type,
+          profile: profile,
+          melody: melodyOf(c.text),
+          density: density,
+          words: unitToks,
+          ntokStart: totalTokens,
+          ntokEnd: totalTokens + unitToks,
+          qualityRate: qualityRate || 1,
+          firstChunk: ci === 0,
+          finalChunk: ci === raw.length - 1,
+          startChars: totalChars,
+          endChars: totalChars + c.text.length,
+          uInBlock: uInBlock++
+        };
+        totalTokens += unitToks;
+        unit.effRate = effectiveRate(unit);
+        unit.effPitch = effectivePitch(unit);
+        unit.effVolume = effectiveVolume(unit);
+        unit.before = ci === 0 ? profile.before : 0;
+        unit.after = pauseAfter(unit);
+        totalChars += c.text.length;
+        units.push(unit);
+      });
+    });
+    return { units: units, totalChars: totalChars, totalTokens: totalTokens };
+  }
+
+  function estimatedMs(unit) {
+    var ms = (unit.text.length / (BASE_CPS * Math.max(0.5, unit.effRate))) * 1000;
+    return ms + (unit.before || 0) + (unit.after || 0);
+  }
+
+  /* ============================================================
+     8 · STIMMEN-REGIE — männlicher NACHRICHTENSPRECHER, nur Deutsch
+     ------------------------------------------------------------
+     Es gibt kein Menü und keinen Umschalter. Die Regie trifft eine
+     deterministische Entscheidung — und zwar ausschließlich für
+     DEUTSCHE Stimmen (Nur-Deutsch-Vertrag):
+
+       1. Sprache        — immer Deutsch (de-DE → de-AT → de-CH → de)
+       2. Geschlecht     — männlich, mit Veto gegen weibliche Stimmen
+       3. Nachrichtenton — Benannte News-/Studio-Stimmen zuerst:
+                           Conrad (Microsoft-Newsroom-Stimme) vor
+                           Killian vor Florian vor Thorsten …; Online/
+                           Natural-Qualität schlägt Standard, Standard
+                           schlägt Roboter
+       4. Nachbarschaft  — de-DE → de-AT → de-CH → de-li → de-lu → de
+       5. Tonlage        — ohne männliche Stimme: ehrlicher Notnagel,
+                           in die männliche Klangzone abgestimmt
+
+     Nie stumm: Ist der Stimmen-Katalog beim Klick noch leer
+     (Chromium, Safari und Android füllen ihn LAZY), wird SOFORT auf
+     de-DE gesprochen und beim Eintreffen des Katalogs auf die echte
+     Nachrichtensprecher-Stimme angehoben. Ein Warten auf Stimmen
+     würde das User-Activation-Token verbrennen und genau die
+     Stummheit erzeugen, die dieses Modell ausschließt.
+     ============================================================ */
+
+  var synth = (win.speechSynthesis || null);
+  var speechSupported = !!(synth && win.SpeechSynthesisUtterance);
+
+  var MALE_NAMES = ('conrad florian klaus stefan yannick bernd christoph benjamin jonas ralf kasper jeppe thomas daniel ' +
+    'andrew ryan brian christopher eric guy jacob liam oliver alex fred sam michael george arthur james william henry ' +
+    'nathan adam rishi arjun prabhat aarav rehan thorsten karlsson gereon jan lukas niklas sebastian david elias finn ' +
+    'noah ben jannik markus martin tobias felix paul leon tim mattis oskar anton milan emil josef gregor alfred kurt ' +
+    'werner rudolph owen jack charlie henry leo max hugo antonio diego javier carlos miguel pedro raj sanjay').split(' ');
+  /* Nachrichtensprecher-Vorrang (nur für die deutsche Regie wirksam):
+     Diese Namen stehen für den nüchtern-professionellen Vortragsstil. */
+  var NEWS_PRIORITY = {
+    conrad: 90,        // Microsoft-Newsroom-Stimme (de-DE)
+    andrew: 88,        // Edge EN-NEWS (en-US) — männlich, seriös
+    killian: 60,       // sachlicher Nachrichtenton (de-DE)
+    ryan: 58,          // Edge EN (en-GB) — männlich
+    brian: 55,         // Edge EN (en-US) — männlich, natürlich
+    florian: 45,       // Multilingual v2 — klar, ruhig
+    thorsten: 40,      // Piper-Standard der Studiospur (de_DE)
+    klaus: 22, stefan: 22, yannick: 18, benjamin: 18, jonas: 16,
+    david: 12, eric: 12, marcus: 12, olliver: 12
+  };
+  var FEMALE_NAMES = ('anna katja hedda marlene vicki elke amala clara julia lena laura sophie sofia zoe emma mia hannah ' +
+    'sarah emily ashley samantha karen moira tessa fiona serena allison ava susan joan linda nancy nina victoria ' +
+    'katherine katie eva marie luise lea nele maila sarah elena nora frieda ida alma mathilde johanna charlotte').split(' ');
+  var ROBOTIC = ['espeak', 'pico', 'festival', 'flite', 'robotic'];
+  var QUALITY_TOKENS = ['neural', 'neural2', 'wavenet', 'studio', 'premium', 'enhanced', 'natural', 'siri', 'online', 'high'];
+
+  var voiceCache = [];
+  var voiceResolved = { de: null, en: null };
+  var maleVoiceFound = { de: false, en: false };
+
+  function refreshVoices() {
+    var list = [];
+    try { if (synth && synth.getVoices) list = synth.getVoices() || []; } catch (e) { list = []; }
+    var changed = list.length !== voiceCache.length;
+    if (!changed && list.length) {
+      try { changed = String(list[0] && list[0].voiceURI) !== String(voiceCache[0] && voiceCache[0].voiceURI); }
+      catch (e) { changed = true; }
+    }
+    voiceCache = list.slice();
+    /* Befund 06.09.2026: Der Katalog trifft in Chromium/Safari/Android
+       LAZY ein — oft erst nach dem ersten Klick. Die bisherige Regie
+       caching das „keine Stimme“-Ergebnis für immer: die männliche
+       Stimme band nie, das aria-label versprach die Geräte-Stimme.
+       Bei einer ÄNDERUNG des Katalogs wird die Auswahl neu getroffen;
+       die nächste Sprecheinheit läuft dann auf der echten Stimme. */
+    if (changed) {
+      voiceResolved = { de: null, en: null };
+      maleVoiceFound = { de: false, en: false };
+      try { applyLabels(); } catch (e) {}
+      try { if (typeof setBarState === 'function' && !reading) setBarState('idle'); } catch (e) {}
+    }
+    return voiceCache;
+  }
+  refreshVoices();
+  if (synth && typeof win.addEventListener === 'function') {
+    try { synth.addEventListener('voiceschanged', refreshVoices); } catch (e) {}
+  }
+
+  function voiceHay(v) {
+    return (String((v && v.name) || '') + ' ' + String((v && v.voiceURI) || '') + ' ' + String((v && v.lang) || '')).toLowerCase();
+  }
+  function voiceLang(v) { return String((v && v.lang) || '').toLowerCase().replace('_', '-'); }
+  function langPrefix(l) {
+    var s = String(l || '').toLowerCase().replace('_', '-');
+    var i = s.indexOf('-');
+    return i > 0 ? s.slice(0, i) : s;
+  }
+
+  /** Premium-Bilingual: zugelassen sind DE + EN (alles andere: Fallback).
+      Keine Fremd-Sperre für Englisch — eine Stimme (ElevenLabs) spricht BEIDES,
+      die Browser-Fallbacks wählen je nach Block-Sprache die passende Stimme. */
+  function isAllowedVoice(v) {
+    var l = voiceLang(v);
+    return l.indexOf('de') === 0 || l.indexOf('en') === 0;
+  }
+  function isGermanVoice(v) { return isAllowedVoice(v) && voiceLang(v).indexOf('de') === 0; }
+  function isEnglishVoice(v) { return voiceLang(v).indexOf('en') === 0; }
+
+  var LOCALE_CHAIN = {
+    de: ['de-de', 'de-at', 'de-ch', 'de-li', 'de-lu', 'de-be', 'de'],
+    en: ['en-us', 'en-gb', 'en-au', 'en-ca', 'en-ie', 'en']
+  };
+
+  function localeScore(v, target) {
+    var l = voiceLang(v);
+    var chain = LOCALE_CHAIN[target] || [target];
+    var idx = chain.indexOf(l);
+    if (idx === 0) return 70;
+    if (idx > 0) return 60 - idx * 6;
+    if (langPrefix(l) === target) return 34;
+    if (l === target) return 40;
+    // Nachbarsprache als Notnagel (z. B. nl für de), aber nie sprachfremd
+    if (target === 'de' && (l.indexOf('nl') === 0 || l.indexOf('da') === 0)) return 6;
+    if (target === 'en' && (l.indexOf('en') === 0)) return 20;
+    // Für EN-Ziel darf DE nicht als Ersatz einspringen — umgekehrt auch nicht
+    if (target === 'de' && l.indexOf('en') === 0) return -80;
+    if (target === 'en' && l.indexOf('de') === 0) return -80;
+    return -100;
+  }
+
+  /** Namen in Wort-Tokens zerlegen („Samantha“ darf nicht als „Sam“ zählen). */
+  function nameTokens(v) {
+    return String((v && v.name) || '').toLowerCase().split(/[\s\-_()\[\],.]+/)
+      .filter(function (t) { return t.length > 0; });
+  }
+
+  function genderScore(v) {
+    var hay = voiceHay(v);
+    var name = String((v && v.name) || '').toLowerCase();
+    var tokens = nameTokens(v);
+
+    // Weibliche Namen ZUERST prüfen: Ein Teilstring-Treffer („Sam“ in
+    // „Samantha“) darf niemals eine Frauenstimme als männlich durchwinken.
+    for (var f = 0; f < FEMALE_NAMES.length; f++) {
+      if (tokens.indexOf(FEMALE_NAMES[f]) !== -1) return -600;
+    }
+    if (/\bfemale\b|\bweiblich\b|\bfrau\b|\bwoman\b/.test(hay)) return -600;
+
+    for (var i = 0; i < MALE_NAMES.length; i++) {
+      if (tokens.indexOf(MALE_NAMES[i]) !== -1) return 140;
+    }
+    if (/\bmale\b|\bmännlich\b/.test(hay)) return 100;
+
+    // Buchstaben-Codes: Google A/C/E = weiblich, B/D/F = männlich
+    var m = name.match(/[a-z]{2}-[a-z]{2}-(?:standard|wavenet|neural2|studio)-([a-f])$/i);
+    if (m) return ('bdf'.indexOf(m[1].toLowerCase()) !== -1) ? 110 : -600;
+    return 0;   // neutral/unbenannt
+  }
+
+  function qualityScore(v) {
+    var hay = voiceHay(v);
+    var score = 0;
+    for (var i = 0; i < QUALITY_TOKENS.length; i++) {
+      if (hay.indexOf(QUALITY_TOKENS[i]) !== -1) score += 22;
+    }
+    for (var r = 0; r < ROBOTIC.length; r++) {
+      if (hay.indexOf(ROBOTIC[r]) !== -1) score -= 90;
+    }
+    try { if (v && v.localService) score += 8; } catch (e) {}
+    if (hay.indexOf('compact') !== -1) score -= 26;
+    return score;
+  }
+
+  function newsScore(v) {
+    var tokens = nameTokens(v);
+    var best = 0;
+    for (var i = 0; i < tokens.length; i++) {
+      var p = NEWS_PRIORITY[tokens[i]];
+      if (p > best) best = p;
+    }
+    var hay = voiceHay(v);
+    if (best && (hay.indexOf('natural') !== -1 || hay.indexOf('online') !== -1)) best += 15;
+    return best;
+  }
+
+  function scoreVoice(v, target) {
+    var want = (String(target||'de').toLowerCase().indexOf('en')===0) ? 'en' : 'de';
+    if (!isAllowedVoice(v)) return -9999;
+    // Sprach-Treue: die Stimme muss zur Zielsprache passen (kein DE für EN-Block)
+    var l = voiceLang(v);
+    if (want === 'de' && l.indexOf('de')!==0) return -9999;
+    if (want === 'en' && l.indexOf('en')!==0) return -9999;
+    var locale = localeScore(v, want);
+    if (locale < -50) return -9999;
+    return locale + genderScore(v) + qualityScore(v) + newsScore(v);
+  }
+
+  function rankVoices(target) {
+    var want = (String(target||'de').toLowerCase().indexOf('en')===0) ? 'en' : 'de';
+    var list = voiceCache.length ? voiceCache : refreshVoices();
+    var scored = [];
+    list.forEach(function (v, i) {
+      var s = scoreVoice(v, want);
+      if (s > -9000) scored.push({ voice: v, score: s, order: i });
+    });
+    scored.sort(function (a, b) {
+      if (b.score !== a.score) return b.score - a.score;
+      return a.order - b.order;
+    });
+    return scored;
+  }
+
+  var TIERS = {
+    studio:   { rate: 1.00, pitchZone: 0.00, label: 'studio' },
+    neural:   { rate: 0.99, pitchZone: 0.00, label: 'neural' },
+    standard: { rate: 0.97, pitchZone: -0.02, label: 'standard' },
+    robotic:  { rate: 0.94, pitchZone: -0.05, label: 'robotic' }
+  };
+
+  function tierFor(v) {
+    var hay = voiceHay(v);
+    var isRobotic = ROBOTIC.some(function (r) { return hay.indexOf(r) !== -1; });
+    if (isRobotic) return TIERS.robotic;
+    var hits = QUALITY_TOKENS.filter(function (q) { return hay.indexOf(q) !== -1; }).length;
+    if (hits >= 2) return TIERS.studio;
+    if (hits === 1) return TIERS.neural;
+    return TIERS.standard;
+  }
+
+  /**
+   * Ermittelt die beste männliche Stimme für die Zielsprache (de/en) —
+   * ohne Umschalter, deterministisch. Gibt immer ein Objekt zurück —
+   * nie null (außer bei leerem Katalog). Premium: ElevenLabs liefert
+   * eine Stimme für BEIDE, Edge liefert Conrad/Andrew je Sprache.
+   */
+  function resolveMaleVoice(target) {
+    target = (String(target||'de').toLowerCase().indexOf('en')===0) ? 'en' : 'de';
+    if (voiceResolved[target]) return voiceResolved[target];
+    var ranked = rankVoices(target);
+    if (!ranked.length) return { voice: null, tier: TIERS.standard, male: false, score: -1 };
+
+    var male = null;
+    for (var i = 0; i < ranked.length; i++) {
+      if (genderScore(ranked[i].voice) > 0) { male = ranked[i]; break; }
+    }
+
+    var chosen = male || ranked[0];
+    var tier = tierFor(chosen.voice);
+    var isMale = !!male;
+
+    /* Letzter Notnagel: keine männliche Stimme vorhanden. Dann wird die
+       Stimme in die männliche Klangzone abgesenkt (nicht stumm bleiben,
+       nicht mit einer hellen Stimme überraschen). */
+    var zone = isMale ? 0 : -0.14;
+    var result = {
+      voice: chosen.voice,
+      tier: { rate: tier.rate, pitchZone: tier.pitchZone + zone, label: tier.label },
+      male: isMale,
+      score: chosen.score
+    };
+    voiceResolved[target] = result;
+    maleVoiceFound[target] = isMale;
+    return result;
+  }
+
+  function hasExplicitMaleVoice() { return !!maleVoiceFound.de; }
+
+  function calibrateQuality() {
+    var de = resolveMaleVoice('de');
+    var en = resolveMaleVoice('en');
+    // Premium-Bilingual: beide Stimmen werten die Qualität — die
+    // langsamere bestimmt den Takt (nie schneller als die Studio-Regie).
+    var rate = Math.min(de.tier ? de.tier.rate : 1, en.tier ? en.tier.rate : 1);
+    // Fallback: wenn kein EN im Katalog, dient DE als EN-Ersatz (aber: ElevenLabs deckt beides)
+    if (!en.voice) en = de;
+    if (!de.voice) de = en;
+    return { rate: rate, de: de, en: en };
+  }
+
+  var quality = { rate: 1, de: null, en: null };
+
+  /* ============================================================
+     9 · LAUFZEIT-STATUS
+     ============================================================ */
+
+  var blocks = [];
+  var units = [];
+  var totalChars = 0;
+  var cursor = 0;
+  var nextIndex = 0;
+  var reading = false;
+  var playing = false;
+  var mode = 'speech';        // 'track' (Studio-Tonspur) | 'speech' (Browser-Engine)
+  var runId = 0;              // macht Rückrufe abgebrochener Läufe ungültig
+
+  /* ---------- Fortschritt: ein Rechenweg für alles ------------- */
+  var spokenChars = 0;       // gesprochene Zeichen (Browser-Modus)
+  var displayedChars = 0;    // angezeigte Zeichen (monoton steigend)
+  var progressRatio = 0;
+  var progressTimer = null;
+  var progressBlock = null;
+  var activeUnit = null;
+  var activeUnitStartedAt = 0;
+  var activeUnitElapsedMs = 0;
+  var nowReadingText = '';     // Wortlaut der „Gerade vorgelesen“-Zeile
+  var nowReadingPos = '';      // Abschnittszähler („Abschnitt 3 von 12“)
+
+  /* ============================================================
+     PHYSIK-DECKEL (Befund 06.09./07.09.2026)
+     ------------------------------------------------------------
+     Der gemeldete Fehler hatte zwei Gesichter: „kein Ton“ UND „die
+     Fortschrittsanzeige rennt“. Beide entstehen aus derselben Lüge —
+     eine Engine (oder eine stumme Tonspur) meldet Sprechfortschritt,
+     ohne zu sprechen. Dagegen hilft nur eine Größe, die nicht gelogen
+     werden kann: die WANDUHR.
+
+     Niemand spricht schneller als SPEECH_FLOOR_CPS Zeichen pro
+     Sekunde (Standard 60 — viermal schneller als die Regie mit 15,2
+     Zeichen/s und weit jenseits jeder verständlichen Sprache).
+       1. Der Balken darf nie über diesen Wert hinauslaufen.
+       2. Wer schneller „fertig“ ist, hat nicht gesprochen: Der Lauf
+          wird ehrlich gestoppt (kein falsches „Vorlesen beendet“).
+
+     `speechFloorCps: 0` in der Seiten-Konfiguration schaltet den
+     Deckel ab — ausschließlich für QA-Suiten mit Zeitraffer-Attrappen.
+     Die ausgelieferten Seiten setzen den Wert nie.
+     ============================================================ */
+
+  var SPEECH_FLOOR_CPS = (function () {
+    var v = Number(cfg.speechFloorCps);
+    if (cfg.speechFloorCps === 0 || v === 0) return 0;
+    return (isFinite(v) && v > 0) ? v : 60;
+  })();
+
+  var clockRunning = false;
+  var clockStartedAt = 0;
+  var clockAccumMs = 0;
+  var clockBaseChars = 0;     // Zeichenstand beim Start des Laufs
+
+  function nowMs() {
+    try {
+      if (win.performance && typeof win.performance.now === 'function') return win.performance.now();
+    } catch (e) {}
+    return Date.now();
+  }
+  function clockReset(baseChars) {
+    clockRunning = false; clockStartedAt = 0; clockAccumMs = 0;
+    clockBaseChars = Math.max(0, baseChars || 0);
+  }
+  function clockGo() { if (!clockRunning) { clockRunning = true; clockStartedAt = nowMs(); } }
+  function clockHalt() {
+    if (clockRunning) { clockAccumMs += Math.max(0, nowMs() - clockStartedAt); clockRunning = false; }
+  }
+  function clockActiveMs() {
+    return clockAccumMs + (clockRunning ? Math.max(0, nowMs() - clockStartedAt) : 0);
+  }
+  /** Zeichen, die bis jetzt PHYSIKALISCH gesprochen sein können. */
+  function clockCharCeiling() {
+    if (!SPEECH_FLOOR_CPS) return Infinity;
+    return clockBaseChars + 60 + (clockActiveMs() / 1000) * SPEECH_FLOOR_CPS;
+  }
+
+  function clearActiveUnit() {
+    activeUnit = null;
+    activeUnitStartedAt = 0;
+    activeUnitElapsedMs = 0;
+  }
+
+  function freezeActiveUnit() {
+    if (activeUnit && activeUnitStartedAt) {
+      activeUnitElapsedMs += Math.max(0, nowMs() - activeUnitStartedAt);
+      activeUnitStartedAt = 0;
+    }
+  }
+
+  function startActiveUnit(unit) {
+    activeUnit = unit || null;
+    activeUnitElapsedMs = 0;
+    activeUnitStartedAt = activeUnit ? nowMs() : 0;
+    if (activeUnit && activeUnit.block) progressBlock = activeUnit.block;
+    syncProgressMeta();
+    updateNowLine();          // „Gerade vorgelesen“ auf den neuen Satz
+  }
+
+  function activeUnitMs() {
+    if (!activeUnit) return 0;
+    return activeUnitElapsedMs + (activeUnitStartedAt ? Math.max(0, nowMs() - activeUnitStartedAt) : 0);
+  }
+
+  function progressCharsFromActiveUnit() {
+    if (!activeUnit) return spokenChars;
+    var span = Math.max(1, activeUnit.endChars - activeUnit.startChars);
+    var estimate = Math.max(260, estimatedMs(activeUnit));
+    var ratio = Math.max(0, Math.min(1, activeUnitMs() / estimate));
+    return Math.max(spokenChars, activeUnit.startChars + span * ratio);
+  }
+
+  function syncProgressMeta() {
+    var label = progressLabelFromBlock(progressBlock);
+    var percent = Math.round(progressRatio * 100) + ' %';
+    if (progressModeEl) progressModeEl.textContent = progressModeText();
+    if (progressLabelEl) progressLabelEl.textContent = label;
+    if (progressValueEl) progressValueEl.textContent = percent;
+    var meter = progressMeterEl || bar;
+    if (meter) {
+      meter.setAttribute('aria-valuenow', String(Math.round(progressRatio * 100)));
+      meter.setAttribute('aria-valuemin', '0');
+      meter.setAttribute('aria-valuemax', '100');
+      var valParts = [label, percent, progressModeText()];
+      if (nowReadingPos) valParts.push(nowReadingPos);
+      if (wordSync.rawIndex >= 0 && wordSync.blockIndex >= 0) {
+        valParts.push(T.progressWords
+          .replace('{i}', String(globalWordNumber(wordSync.blockIndex, wordSync.rawIndex)))
+          .replace('{total}', String(articleWordTotal())));
+      }
+      if (nowReadingText) valParts.push(T.progressNowLabel + ': ' + trimUiText(nowReadingText, 160));
+      meter.setAttribute('aria-valuetext', valParts.join(' · '));
+    }
+  }
+
+  function paintProgress(ratio) {
+    var r = Math.max(0, Math.min(1, ratio || 0));
+    if (r < progressRatio && r < 0.999) r = progressRatio;      // monoton – nie zurück
+    progressRatio = r;
+    if (progressEl) progressEl.style.width = (r * 100).toFixed(2) + '%';
+    syncProgressMeta();
+  }
+
+  function setProgressChars(chars, allowBackward) {
+    if (!totalChars) return;
+    var next = Math.max(0, Math.min(totalChars, chars));
+    if (!allowBackward && next < displayedChars) next = displayedChars;
+    displayedChars = next;
+    // Physik-Deckel: Der Balken kann der Wanduhr nicht davonlaufen.
+    var shown = (mode === 'speech') ? Math.min(next, clockCharCeiling()) : next;
+    paintProgress(totalChars ? shown / totalChars : 0);
+  }
+
+
+  function resetProgress(chars) {
+    progressRatio = 0;
+    displayedChars = Math.max(0, chars || 0);
+    if (progressEl) progressEl.style.width = '0%';
+    if (totalChars && displayedChars) paintProgress(displayedChars / totalChars);
+    else syncProgressMeta();
+  }
+
+  function completeProgress() { paintProgress(1); displayedChars = totalChars; }
+
+  /* ---------- „Gerade vorgelesen“ (Barrierefreiheit) -----------
+     Was spricht gerade? Satz in der Leiste (mit hellem Wort),
+     Abschnitts-Zähler daneben. aria-live="polite" hält
+     Screenreader auf dem Laufenden, ohne zu schreien. Quelle ist
+     der Wort-Takt (Abschnitt 9a), nicht das Raten. */
+
+  var nowReadingText = '';
+  var trackWordClock = false;   // Wortuhr in der Tonspur-Konfiguration vorhanden
+
+  function blockIndexOf(block) {
+    if (!block) return -1;
+    for (var i = 0; i < blocks.length; i++) { if (blocks[i] === block) return i; }
+    return -1;
+  }
+
+  function progressPosText(bi) {
+    if (!blocks.length || typeof bi !== 'number' || bi < 0) return '';
+    return T.progressPos.replace('{n}', bi + 1).replace('{total}', blocks.length);
+  }
+
+  /* Sprecheinheiten eines Blocks (für die Tonspur-Schätzung, wenn die
+     Tonspur keine Wortuhr mitbringt). Ergebnis je Block gecacht —
+     derselbe Rechenweg wie im Wort-Takt-Plan, nie teuer im Ticker. */
+  var trackSentenceCache = {};
+  function sentencesOfBlock(bi) {
+    if (trackSentenceCache[bi]) return trackSentenceCache[bi];
+    var out = [];
+    var b = blocks[bi];
+    if (b) {
+      var pieces = splitForSpeech(speechNormalize(b.text, (b && b.lang) ? b.lang : 'de'));
+      for (var i = 0; i < pieces.length; i++) {
+        if (pieces[i] && pieces[i].text) out.push(pieces[i].text);
+      }
+    }
+    trackSentenceCache[bi] = out;
+    return out;
+  }
+
+  /* t0/t1 des Tonspur-Abschnitts, der zu Block bi gehört. */
+  function trackBlockTimeRange(bi) {
+    var t0 = 0;
+    var t1 = trackTotalMs();
+    if (trackChunks.length) {
+      for (var i = 0; i < trackChunks.length; i++) {
+        if (trackChunks[i] && trackChunks[i].b === bi) {
+          t0 = trackChunks[i].t0 || 0;
+          t1 = trackChunks[i].t1 || t1;
+          break;
+        }
+      }
+    }
+    return { t0: t0, t1: t1 };
+  }
+
+  /** Aktuelle Sprecheinheit (Satz) des laufenden Tonspur-Blocks. */
+  function trackSentenceAt(bi, ratio) {
+    var list = sentencesOfBlock(bi);
+    if (!list.length) return '';
+    var total = 0;
+    for (var i = 0; i < list.length; i++) total += String(list[i]).length;
+    if (total <= 0) return list[0];
+    var r = Math.max(0, Math.min(1, ratio || 0));
+    var target = r * total;
+    var acc = 0;
+    for (var j = 0; j < list.length; j++) {
+      acc += String(list[j]).length;
+      if (target <= acc) return list[j];
+    }
+    return list[list.length - 1];
+  }
+
+  function currentNowInfo() {
+    if (mode === 'track' && track) {
+      var bix = trackBlock >= 0 ? trackBlock : 0;
+      if (trackWordClock && wordSync.sentenceIndex >= 0) {
+        var plan = blockPlan(bix);
+        var u = plan && plan.units[wordSync.sentenceIndex];
+        if (u) return { bi: bix, text: u.text, token: wordSync.tokenIndex };
+      }
+      var t = 0;
+      try { if (track && track.currentTime) t = track.currentTime * 1000; } catch (e) { t = 0; }
+      var rg = trackBlockTimeRange(bix);
+      var ratio = 0;
+      if (rg.t1 > rg.t0) ratio = Math.max(0, Math.min(1, (t - rg.t0) / (rg.t1 - rg.t0)));
+      var est = trackSentenceAt(bix, ratio);
+      if (!est && blocks[bix]) est = trimUiText(blocks[bix].text || '', 320);
+      return { bi: bix, text: est, token: -1 };
+    }
+    if (activeUnit) return { bi: activeUnit.blockIndex, text: activeUnit.text, token: wordSync.tokenIndex };
+    if (units && units.length && reading) {
+      var u = units[Math.max(0, Math.min(cursor, units.length - 1))];
+      if (u) return { bi: u.blockIndex, text: u.text, token: wordSync.tokenIndex };
+    }
+    if (progressBlock) {
+      var pbi = blockIndexOf(progressBlock);
+      return { bi: pbi, text: trimUiText(progressBlock.text || '', 320), token: -1 };
+    }
+    return null;
+  }
+
+  function updateNowLine() {
+    if (!nowEl) return;
+    if (!reading) {
+      // Kein laufender Vorlese-Vorgang: Zeile leer (Pausieren erhält sie,
+      // denn `reading` bleibt dabei true).
+      nowSpans = [];
+      if (nowEl.textContent !== '') nowEl.textContent = '';
+      if (nowReadingText !== '') { nowReadingText = ''; if (posEl) posEl.textContent = ''; }
+      if (posEl) posEl.textContent = '';
+      nowReadingPos = '';
+      syncProgressMeta();
+      return;
+    }
+    var info = currentNowInfo();
+    renderNowLine(info && info.text ? info.text : '', info && info.token >= 0 ? info.token : -1);
+    var pos = (info && info.bi >= 0) ? progressPosText(info.bi) : '';
+    if (pos !== nowReadingPos) {
+      nowReadingPos = pos;
+      if (posEl) posEl.textContent = pos;
+    }
+    syncProgressMeta();
+  }
+
+  /* ---------- Restzeit aus demselben Modell -------------------- */
+  function updateRemainingFromChars() {
+    if (!remainEl) return;
+    if (!units.length) { remainEl.textContent = ''; return; }
+    var restChars = Math.max(0, totalChars - displayedChars);
+    var cps = BASE_CPS * (quality.rate || 1);
+    var minutes = restChars / cps / 60;
+    remainEl.textContent = minutes >= 0.1 ? T.remaining.replace('{min}', Math.max(1, Math.round(minutes))) : '';
+  }
+
+  function updateRemainingFromTime(msLeft) {
+    if (!remainEl) return;
+    var minutes = Math.max(0, msLeft) / 60000;
+    remainEl.textContent = minutes >= 0.1 ? T.remaining.replace('{min}', Math.max(1, Math.round(minutes))) : '';
+  }
+
+  function startProgressTicker() {
+    stopProgressTicker();
+    var tick = function () {
+      if (!reading || !playing) { progressTimer = null; return; }
+      if (mode === 'speech') {
+        // Sanftes Nachführen zwischen Wortgrenzen – auch dann, wenn eine
+        // Engine keine brauchbaren onboundary-Ereignisse liefert.
+        setProgressChars(activeUnit ? progressCharsFromActiveUnit() : spokenChars, false);
+        updateRemainingFromChars();
+        // Kein onboundary auf diesem Gerät? Die Wortanzeige läuft dann
+        // redlich aus der Zeitschätzung mit — nie blind.
+        estimateSpeechWord();
+      } else if (mode === 'track' && track) {
+        // iOS Safari feuert timeupdate nur spärlich — der Balken folgt
+        // der Uhr, nicht dem Event-Takt, und bleibt dadurch lebendig.
+        var d = track.duration;
+        if (d && isFinite(d) && d > 0 && !track.paused) {
+          paintProgress((track.currentTime || 0) / d);
+          updateRemainingFromTime((d - (track.currentTime || 0)) * 1000);
+          trackSyncPosition();
+        }
+        trackWatch();       // Hänger- und Stille-Wache (07.09.2026)
+      }
+      if (win.requestAnimationFrame && !reducedMotion) {
+        progressTimer = win.requestAnimationFrame(tick);
+      } else {
+        progressTimer = setTimeout(tick, 120);
+      }
+    };
+    if (win.requestAnimationFrame && !reducedMotion) progressTimer = win.requestAnimationFrame(tick);
+    else progressTimer = setTimeout(tick, 120);
+  }
+
+  function stopProgressTicker() {
+    if (progressTimer) {
+      if (win.cancelAnimationFrame && !reducedMotion) win.cancelAnimationFrame(progressTimer);
+      else clearTimeout(progressTimer);
+      progressTimer = null;
+    }
+  }
+
+  /* ---------- Live-Markierung --------------------------------- */
+  function highlightBlock(block) {
+    var el = block && block.el ? block.el : null;
+    progressBlock = block || progressBlock;
+    syncProgressMeta();
+    blocks.forEach(function (b) { if (b.el && b.el !== el) b.el.classList.remove('ff-voice-active'); });
+    if (!el || el === bar) return;
+    el.classList.add('ff-voice-active');
+    if (!reducedMotion && el.scrollIntoView) {
+      try { el.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) { el.scrollIntoView(); }
+    } else if (el.scrollIntoView) {
+      try { el.scrollIntoView({ block: 'center' }); } catch (e) {}
+    }
+  }
+
+  function clearHighlight() {
+    progressBlock = null;
+    syncProgressMeta();
+    blocks.forEach(function (b) { if (b.el) b.el.classList.remove('ff-voice-active'); });
+    clearWordSync(true);      // Wort-Spans zurückbauen: DOM im Ruhezustand unverändert
+    updateNowLine();          // Zeile leeren (Lesen beendet)
+  }
+
+  /* ============================================================
+     9a · WORT-TAKT — die wortgenaue Leseanzeige
+     ------------------------------------------------------------
+     Drei Quellen, eine Darstellung. Das aktuelle gesprochene Wort
+     leuchtet im Artikeltext (Klasse ff-voice-w--now), die Leiste
+     zeigt den aktuellen Satz mit hervorgehobenem Wort
+     („Gerade vorgelesen“), dazu der Wortzähler „Wort i von n“:
+
+       1. „track“    — Wortuhr der Studio-Tonspur (chunk.w: je rohem
+                       Wort sein Sprechbeginn in ms). Binärsuche in
+                       der Zeit — millisekundengenau, serverseitig
+                       bestimmt, geräteunabhängig.
+       2. „speech“   — onboundary-Grenzen der Browser-Engine, gemappt
+                       über den Wortuhr-Aligner (Abschnitt 4a) auf die
+                       rohen Wörter des Blocks.
+       3. Schätzung  — kein onboundary auf dem Gerät (z. B. Firefox)?
+                       Dann läuft die Wortanzeige redlich aus der
+                       Zeit-Schätzung mit. data-ff-wordsync nennt die
+                       Quelle; nichts tut je so, käme es von der Engine,
+                       wenn sie keine Grenzen liefert.
+
+     Grundregel: es wird NUR das Wort hell, das wirklich gesprochen
+     wird. Klappt die Zuordnung nicht (Tabellenzeilen-Präfixe,
+     ausgefranste DOM-Texte, fehlende Daten), bleibt der Satz hell —
+     nie wird ein Wort blind markiert.
+
+     Das Anlegen der Wort-Spans geschieht lazy beim ersten Wort eines
+     Blocks und wird beim Beenden wieder zurückgebaut (unwrap); der
+     Artikel-DOM bleibt im Ruhezustand unangetastet.
+     ============================================================ */
+
+  var WORD_CLASS = 'ff-voice-w';
+  var WORD_NOW = 'ff-voice-w--now';
+  var LIVE_WORD = 'ff-voice-live-w';
+  var LIVE_WORD_NOW = 'ff-voice-live-w--now';
+
+  var wordSync = {
+    blockIndex: -1,
+    rawIndex: -1,
+    tokenIndex: -1,
+    sentenceIndex: -1,
+    source: 'none',      // 'track' | 'speech' | 'none'
+    spans: null,
+    lastNudgeAt: 0
+  };
+  var blockPlans = {};
+  var articleWordCache = 0;
+  var nowSpans = [];
+
+  function resetWordPlans() {
+    blockPlans = {};
+    articleWordCache = 0;
+  }
+
+  function blockPlan(bi) {
+    if (blockPlans[bi]) return blockPlans[bi];
+    var b = blocks[bi];
+    if (!b || !b.text) return null;
+    var raw = normTokens(b.text);
+    var chunks = splitForSpeech(speechNormalize(b.text, (b && b.lang) ? b.lang : 'de'));
+    var N = [];
+    var units = [];
+    var nAt = 0;
+    for (var i = 0; i < chunks.length; i++) {
+      var toks = normTokens(chunks[i].text);
+      units.push({ text: chunks[i].text, toks: toks, firstN: nAt, lastN: nAt + toks.length });
+      for (var t = 0; t < toks.length; t++) N.push(toks[t]);
+      nAt += toks.length;
+    }
+    var map = alignNormToRaw(N, raw);
+    var prevR = -1;
+    for (var u = 0; u < units.length; u++) {
+      var f = units[u].firstN < map.length ? map[units[u].firstN] : -1;
+      if (f == null) f = -1;
+      if (f < 0) f = prevR;
+      units[u].firstR = f;
+      prevR = f;
+    }
+    blockPlans[bi] = { raw: raw, align: map, units: units, rawCount: raw.length };
+    return blockPlans[bi];
+  }
+
+  function articleWordTotal() {
+    if (!articleWordCache) {
+      var n = 0;
+      for (var bi = 0; bi < blocks.length; bi++) {
+        var plan = blockPlan(bi);
+        if (plan) n += plan.rawCount;
+      }
+      articleWordCache = n;
+    }
+    return articleWordCache;
+  }
+
+  function globalWordNumber(bi, rawIdx) {
+    var n = 0;
+    for (var k = 0; k < bi && k < blocks.length; k++) {
+      var p = blockPlan(k);
+      if (p) n += p.rawCount;
+    }
+    return n + Math.max(0, rawIdx) + 1;
+  }
+
+  function collectWordNodes(el) {
+    var out = [];
+    if (!doc.createTreeWalker) return out;
+    var walker = doc.createTreeWalker(el, 4 /* SHOW_TEXT */, null);
+    var node;
+    while ((node = walker.nextNode())) {
+      var parent = node.parentNode;
+      if (parent && /^(SCRIPT|STYLE|NOSCRIPT)$/.test(parent.nodeName || '')) continue;
+      if (parent && parent.classList && parent.classList.contains(WORD_CLASS)) continue;
+      if (!/\S/.test(node.data || '')) continue;
+      out.push(node);
+    }
+    return out;
+  }
+
+  /** Wort-Spans für einen Block anlegen. Gibt die Span-Zahl zurück,
+      0 wenn der Block nicht wort-synchronisierbar ist (redlich:
+      dann bleibt die Satzebene die Anzeige der Wahl). */
+  function wrapBlockWords(bi) {
+    var block = blocks[bi];
+    var el = block && block.el;
+    if (!el || el === bar || el.nodeType !== 1) return 0;
+    if (el._ffv && el._ffv.bi === bi) { wordSync.spans = el._ffv.spans; return el._ffv.spans.length; }
+    unwrapEl(el);
+    var plan = blockPlan(bi);
+    if (!plan || !plan.rawCount) return 0;
+    var nodes = collectWordNodes(el);
+    var domWords = [];
+    nodes.forEach(function (node) {
+      var m = String(node.data).match(/\S+/g);
+      if (m) domWords = domWords.concat(m);
+    });
+    var same = domWords.length === plan.raw.length;
+    if (same) {
+      for (var i = 0; i < domWords.length; i++) {
+        if (domWords[i] === plan.raw[i]) continue;
+        // Der Generator hängt Überschriften einen Punkt an — darf fehlen
+        if (i === domWords.length - 1 && domWords[i] + '.' === plan.raw[i]) continue;
+        same = false; break;
+      }
+    }
+    if (!same) return 0;
+    var spans = [];
+    nodes.forEach(function (node) {
+      var s = String(node.data);
+      var re = /\S+/g, m, last = 0;
+      var frag = doc.createDocumentFragment();
+      while ((m = re.exec(s)) !== null) {
+        if (m.index > last) frag.appendChild(doc.createTextNode(s.slice(last, m.index)));
+        var sp = doc.createElement('span');
+        sp.className = WORD_CLASS;
+        sp.setAttribute('data-ffv-w', String(spans.length));
+        sp.textContent = m[0];
+        frag.appendChild(sp);
+        spans.push(sp);
+        last = m.index + m[0].length;
+        if (re.lastIndex === m.index) re.lastIndex++;
+      }
+      if (last < s.length) frag.appendChild(doc.createTextNode(s.slice(last)));
+      if (node.parentNode) node.parentNode.replaceChild(frag, node);
+    });
+    if (!spans.length) return 0;
+    el._ffv = { bi: bi, spans: spans };
+    wordSync.spans = spans;
+    return spans.length;
+  }
+
+  function unwrapEl(el) {
+    if (!el || !el._ffv) return;
+    var spans = el._ffv.spans || [];
+    for (var i = 0; i < spans.length; i++) {
+      var sp = spans[i];
+      if (!sp || !sp.parentNode) continue;
+      sp.removeAttribute('class');
+      sp.removeAttribute('data-ffv-w');
+      while (sp.firstChild) sp.parentNode.insertBefore(sp.firstChild, sp);
+      sp.parentNode.removeChild(sp);
+    }
+    el._ffv = null;
+    try { el.normalize(); } catch (e) {}
+  }
+
+  function updateWordReadout() {
+    var st = wordSync;
+    var txt = '';
+    if (st.rawIndex >= 0 && st.blockIndex >= 0) {
+      txt = T.progressWords
+        .replace('{i}', String(globalWordNumber(st.blockIndex, st.rawIndex)))
+        .replace('{total}', String(articleWordTotal()));
+    }
+    if (wordCountEl && wordCountEl.textContent !== txt) wordCountEl.textContent = txt;
+    if (bar) bar.setAttribute('data-ff-wordsync', st.rawIndex >= 0 ? (st.source === 'track' ? 'track' : 'speech') : 'none');
+  }
+
+  function nudgeWordIntoView(span) {
+    if (!span || reducedMotion || typeof span.scrollIntoView !== 'function') return;
+    var t = nowMs();
+    if (t - wordSync.lastNudgeAt < 200) return;   // nicht jedes Wort scheucht die Seite
+    wordSync.lastNudgeAt = t;
+    try {
+      var r = span.getBoundingClientRect();
+      var vh = win.innerHeight || doc.documentElement.clientHeight || 0;
+      if (r.top < 64 || r.bottom > vh - 96) span.scrollIntoView({ block: 'center', behavior: 'auto' });
+    } catch (e) {}
+  }
+
+  /** Das eine Wort hell machen, das gerade gesprochen wird. */
+  function markWord(bi, rawIdx, source) {
+    var st = wordSync;
+    if (bi < 0 || rawIdx == null || rawIdx < 0) return;
+    if (st.blockIndex !== bi || !st.spans) {
+      if (st.blockIndex >= 0 && st.blockIndex !== bi && blocks[st.blockIndex] && blocks[st.blockIndex].el) {
+        unwrapEl(blocks[st.blockIndex].el);
+      }
+      var n = wrapBlockWords(bi);
+      if (!n) {
+        // Kein Wort-Sync für diesen Block (Barren-Intro, Tabelle,
+        // ausgefranster Text): alte Markierung löschan, nie stehen lassen.
+        var pb = st.blockIndex >= 0 && blocks[st.blockIndex] ? blocks[st.blockIndex].el : null;
+        var oldSpan = pb && pb._ffv && pb._ffv.spans ? pb._ffv.spans[st.rawIndex] : null;
+        if (oldSpan && oldSpan.classList) oldSpan.classList.remove(WORD_NOW);
+        st.source = 'none'; st.rawIndex = -1; st.blockIndex = -1; st.spans = null;
+        updateWordReadout();
+        return;
+      }
+      st.blockIndex = bi;
+      st.rawIndex = -1;
+    }
+    if (rawIdx >= st.spans.length) rawIdx = st.spans.length - 1;
+    st.source = source || st.source;
+    if (st.rawIndex === rawIdx) return;
+    var prev = st.spans[st.rawIndex];
+    if (prev && prev.classList) prev.classList.remove(WORD_NOW);
+    var now = st.spans[rawIdx];
+    if (now && now.classList) now.classList.add(WORD_NOW);
+    st.rawIndex = rawIdx;
+    updateWordReadout();
+    nudgeWordIntoView(now);
+  }
+
+  function clearWordSync(unwrapAll) {
+    var st = wordSync;
+    if (unwrapAll) {
+      for (var bi = 0; bi < blocks.length; bi++) {
+        var el = blocks[bi] && blocks[bi].el;
+        if (el && el._ffv) unwrapEl(el);
+      }
+    } else if (st.blockIndex >= 0 && blocks[st.blockIndex] && blocks[st.blockIndex].el) {
+      unwrapEl(blocks[st.blockIndex].el);
+    }
+    st.blockIndex = -1; st.rawIndex = -1; st.tokenIndex = -1; st.sentenceIndex = -1; st.spans = null;
+    updateWordReadout();
+  }
+
+  /** onboundary der Browser-Engine → Wort im Plan → DOM. */
+  function noteBoundaryWord(unit, charIndex) {
+    if (!unit) return;
+    var head = String(unit.text).slice(0, Math.max(0, charIndex | 0));
+    var k = (head.match(/\S+/g) || []).length;   // Wörter, die vor dieser Grenze lagen
+    var plan = blockPlan(unit.blockIndex);
+    if (!plan) return;
+    var u = plan.units[unit.uInBlock];
+    if (!u) return;
+    if (k >= u.toks.length) k = Math.max(0, u.toks.length - 1);
+    wordSync.sentenceIndex = unit.uInBlock;
+    wordSync.tokenIndex = k;
+    var ri = u.firstN + k < plan.align.length ? plan.align[u.firstN + k] : -1;
+    if (ri == null) ri = -1;
+    if (ri < 0 && k > 0) { ri = plan.align[u.firstN + k - 1]; if (ri == null) ri = -1; }
+    if (ri >= 0) markWord(unit.blockIndex, ri, 'speech');
+    updateNowLine();
+  }
+
+  /** Satzanfang ist sicher, das Innere Schätzung — nur wenn die Engine
+      keine Grenzen liefert (Firefox-Scherz). */
+  function estimateSpeechWord() {
+    var unit = activeUnit;
+    if (!unit || unit.sawBoundary) return;
+    var plan = blockPlan(unit.blockIndex);
+    if (!plan || !plan.units[unit.uInBlock]) return;
+    var u = plan.units[unit.uInBlock];
+    var dur = Math.max(1, estimatedMs(unit));
+    var el = Math.max(0, activeUnitMs());
+    var k = Math.floor((el / dur) * Math.max(1, u.toks.length));
+    if (k >= u.toks.length) k = Math.max(0, u.toks.length - 1);
+    wordSync.sentenceIndex = unit.uInBlock;
+    wordSync.tokenIndex = k;
+    var ri = u.firstN + k < plan.align.length ? plan.align[u.firstN + k] : -1;
+    if (ri == null) ri = -1;
+    if (ri >= 0) markWord(unit.blockIndex, ri, 'speech');
+  }
+
+  /** Wortuhr-Treffer der Tonspur: rohes Wort → Satz + Position darin. */
+  function applyTrackWord(bi, rawIdx) {
+    var plan = blockPlan(bi);
+    if (!plan || !plan.units.length) { markWord(bi, rawIdx, 'track'); return; }
+    var su = 0;
+    for (var i = 0; i < plan.units.length; i++) {
+      var fr = plan.units[i].firstR;
+      if (fr >= 0 && fr <= rawIdx) su = i;
+    }
+    var u = plan.units[su];
+    var tk = 0;
+    for (var t = 0; t < u.toks.length; t++) {
+      var ri = plan.align[u.firstN + t];
+      if (ri === rawIdx) { tk = t; break; }
+      if (ri != null && ri < rawIdx) tk = t;
+    }
+    wordSync.sentenceIndex = su;
+    wordSync.tokenIndex = tk;
+    markWord(bi, rawIdx, 'track');
+  }
+
+  /** Satz-Anfang ist sicher: das erste Wort leuchtet, sobald die Stimme
+      einsetzt — ohne auf die erste Engine-Grenze zu warten. */
+  function markWordFromUnitStart(unit) {
+    if (!unit) return;
+    var plan = blockPlan(unit.blockIndex);
+    if (!plan || !plan.units[unit.uInBlock]) return;
+    wordSync.sentenceIndex = unit.uInBlock;
+    wordSync.tokenIndex = 0;
+    var fr = plan.units[unit.uInBlock].firstR;
+    if (fr >= 0) markWord(unit.blockIndex, fr, 'speech');
+  }
+
+  /** Leisten-Satz: nur bei Satzwechsel neu bauen, Wort hell per Klasse. */
+  function renderNowLine(text, activeTok) {
+    if (!nowEl) return;
+    var txt = text ? trimUiText(text) : '';
+    if (txt !== nowReadingText) {
+      nowReadingText = txt;
+      if (!txt || txt === T.progressIdle) {
+        nowSpans = [];
+        nowEl.textContent = '';
+        nowEl.removeAttribute('title');
+        return;
+      }
+      nowEl.setAttribute('title', text);
+      var frag = doc.createDocumentFragment();
+      nowSpans = [];
+      txt.split(/\s+/).forEach(function (word, i) {
+        if (!word) return;
+        var sp = doc.createElement('span');
+        sp.className = LIVE_WORD;
+        sp.setAttribute('data-ffv-i', String(i));
+        sp.textContent = word;
+        frag.appendChild(sp);
+        frag.appendChild(doc.createTextNode(' '));
+        nowSpans.push(sp);
+      });
+      nowEl.textContent = '';
+      nowEl.appendChild(frag);
+    }
+    for (var i = 0; i < nowSpans.length; i++) {
+      if (nowSpans[i].classList) nowSpans[i].classList.toggle(LIVE_WORD_NOW, i === (activeTok | 0));
+    }
+  }
+
+  /* ---------- Positionsgedächtnis ----------------------------- */
+  function rememberBlock(bi) {
+    if (cfg.slug || cfg.permalink) storeSet(STORE_POS, String(bi));
+  }
+  function rememberedBlock() {
+    var v = parseInt(storeGet(STORE_POS) || '0', 10);
+    if (!isFinite(v) || v <= 0) return 0;
+    return Math.min(Math.max(0, v), Math.max(0, blocks.length - 1));
+  }
+
+  /* ============================================================
+     10 · TONPFAD A — STUDIO-TONSPUR (HTML5-<audio>)
+     ------------------------------------------------------------
+     Verlagsstandard: vorab vertonte MP3 im nativen Player. Sie
+     klingt auf jedem Gerät identisch und ist unabhängig von den
+     Stimmen des Betriebssystems. Fällt sie aus (noch nicht
+     generiert, Netz, Codec), wechselt der Reader nahtlos auf die
+     Browser-Engine — niemals stumm.
+     ============================================================ */
+
+  var track = null;
+  var trackChunks = [];
+  var trackChunkWords = [];   // je Chunk die Wortuhr [[rohes Wort, ms], …] (chunk.w)
+  var trackCur = -1;
+  var trackBlock = 0;
+  var trackLoadTimer = null;   // Lade-Wache: endloses Stumm ohne Fehlermeldung verhindern
+  var trackLastTime = -1;      // Hänger-Wache: läuft die Uhr der Datei wirklich?
+  var trackLastMoveAt = 0;
+  var trackAudioCtx = null;    // Stille-Sonde (Web Audio)
+  var trackProbe = null;
+  var trackProbeState = { tried: false, playedMs: 0, heard: false, lastAt: 0 };
+
+  /* ============================================================
+     STILLE-SONDE DER TONSPUR (Befund 07.09.2026)
+     ------------------------------------------------------------
+     Auf gh-pages standen 34 Tonspuren mit peak = 0 — digitale Stille,
+     technisch einwandfrei abspielbar. Metadaten-Prüfungen können so
+     etwas nicht sehen: Die Datei „läuft“, nur hört man nichts.
+     Deshalb misst der Reader das SIGNAL: Das <audio>-Element wird über
+     einen Analyser geführt (und unverändert an die Lautsprecher
+     weitergereicht). Bleibt der Pegel über 2,5 Sekunden Wiedergabe
+     exakt bei null, ist die Spur stumm — die Gerätestimme übernimmt.
+
+     Sicherheitsregeln: Die Sonde wird NUR angeklemmt, wenn der
+     Audio-Kontext wirklich läuft (sonst bliebe die native Wiedergabe
+     stumm), sie ist über `audioProbe: false` in der Seiten-
+     Konfiguration abschaltbar und jeder Fehler lässt die native
+     Wiedergabe unangetastet.
+     ============================================================ */
+
+  function armSilenceProbe() {
+    if (trackProbeState.tried || !track) return;
+    trackProbeState.tried = true;
+    if (cfg.audioProbe === false) return;
+    var AC = win.AudioContext || win.webkitAudioContext;
+    if (!AC) return;
+    try { trackAudioCtx = trackAudioCtx || new AC(); } catch (e) { trackAudioCtx = null; return; }
+
+    var attach = function () {
+      if (trackProbe || !track || !trackAudioCtx) return;
+      if (trackAudioCtx.state !== 'running') return;   // sonst würde die Spur verstummen
+      try {
+        var src = trackAudioCtx.createMediaElementSource(track);
+        var analyser = trackAudioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        src.connect(analyser);
+        analyser.connect(trackAudioCtx.destination);   // Ton bleibt hörbar
+        trackProbe = { analyser: analyser, data: new win.Uint8Array(analyser.fftSize) };
+      } catch (e) {
+        trackProbe = null;
+      }
+    };
+
+    try {
+      var p = trackAudioCtx.resume ? trackAudioCtx.resume() : null;
+      if (p && p.then) p.then(attach, function () {}); else attach();
+    } catch (e) {}
+    setTimeout(attach, 400);      // zweiter Anlauf, falls der Kontext spät startet
+  }
+
+  /** Ein Messpunkt der Stille-Sonde; true = die Spur ist nachweislich stumm. */
+  function probeSilence() {
+    if (!trackProbe || !track || track.paused) return false;
+    var now = nowMs();
+    var since = trackProbeState.lastAt ? Math.min(400, now - trackProbeState.lastAt) : 0;
+    trackProbeState.lastAt = now;
+    var peak = 0;
+    try {
+      trackProbe.analyser.getByteTimeDomainData(trackProbe.data);
+      for (var i = 0; i < trackProbe.data.length; i += 8) {
+        var d = Math.abs(trackProbe.data[i] - 128);
+        if (d > peak) peak = d;
+      }
+    } catch (e) { return false; }
+    if (peak >= 2) { trackProbeState.heard = true; trackProbeState.playedMs = 0; return false; }
+    trackProbeState.playedMs += since;
+    return !trackProbeState.heard && trackProbeState.playedMs >= 2500;
+  }
+
+  /**
+   * Hänger- und Stille-Wache im Takt des Fortschritts-Tickers.
+   * Läuft die Uhr der Datei nicht (Netz weg, Codec hängt) oder bleibt
+   * das Signal stumm, übernimmt die Gerätestimme — nie wieder eine
+   * Leiste, die „läuft“, während nichts passiert.
+   */
+  function trackWatch() {
+    if (!track || !reading || mode !== 'track' || !playing) return;
+    var now = nowMs();
+    var t = track.currentTime || 0;
+    if (track.paused || track.ended) { trackLastTime = t; trackLastMoveAt = now; return; }
+    if (trackLastMoveAt === 0) { trackLastMoveAt = now; trackLastTime = t; }
+    if (Math.abs(t - trackLastTime) > 0.01) {
+      trackLastTime = t;
+      trackLastMoveAt = now;
+    } else if (now - trackLastMoveAt > 6000) {
+      fallbackToSpeech(T.trackStalled || T.trackBroken);
+      return;
+    }
+    if (probeSilence()) fallbackToSpeech(T.trackSilent || T.trackDefective);
+  }
+
+  /**
+   * Plausibilitäts-Wache für die Studio-Tonspur (Befund 06.09.2026).
+   * Der Generator übersprang fehlgeschlagene TTS-Segmente still — auf
+   * gh-pages standen dadurch Tonspuren aus NUR Pausen (jeder Chunk
+   * t0 == t1, 33 s für einen Zehn-Minuten-Artikel). Der Reader spielte
+   * sie stumm durch: kein Ton, Fortschritt rannte. Eine Tonspur wird
+   * deshalb VOR dem Start geprüft:
+   *   · Mehrheit der Chunks mit echter Sprechdauer (t1 > t0)
+   *   · Gesamtlaufzeit im plausiblen Fenster um die erwartete
+   *     Sprechzeit des ARTIKELS (± Abweichung deckt auch einen
+   *     leichten Block-Paritätsdrift ab — nicht aber eine Spur
+   *     für einen anderen Artikel oder aus puren Pausen).
+   */
+  function trackPlausible() {
+    if (!track) return false;
+    var a = cfg.audio || {};
+    var chunks = trackChunks || [];
+    if (!chunks.length) return false;
+    var spoken = 0;
+    for (var i = 0; i < chunks.length; i++) {
+      if ((chunks[i].t1 || 0) > (chunks[i].t0 || 0)) spoken += 1;
+    }
+    if (spoken < Math.ceil(chunks.length * 0.6)) return false;
+
+    var totalChars_ = blocks.reduce(function (n, b) { return n + (b.text || '').length; }, 0);
+    var expectedMs = (totalChars_ / BASE_CPS) * 1000 * 1.18;   // + Block-Pausen
+    var durationMs = Number(a.duration) || 0;
+    if (!durationMs && track && isFinite(track.duration) && track.duration > 0) {
+      durationMs = track.duration * 1000;
+    }
+    if (!durationMs) return false;
+    if (durationMs < expectedMs * 0.25) return false;   // Stumm-/Pausen-Spur
+    if (durationMs > expectedMs * 4.0) return false;    // falsche Spur / falsches Tempo
+
+    /* Wortuhr-Grenze: eine Karte, die auf Wörter zeigt, die der Artikel
+       nicht hat, wird nicht vertraut — die Gerätestimme übernimmt.
+       (Das Gegenstück zur Gate im Generator: track_plausible().) */
+    if (trackWordClock) {
+      var badMaps = 0;
+      for (var wi = 0; wi < trackChunks.length && !badMaps; wi++) {
+        var wl = trackChunkWords[wi];
+        if (!wl) continue;
+        var plan = blockPlan(trackChunks[wi].b || 0);
+        if (!plan) { badMaps = 1; break; }
+        for (var e = 0; e < wl.length; e++) {
+          if (!(wl[e][0] >= 0 && wl[e][0] < plan.rawCount)) { badMaps = 1; break; }
+        }
+      }
+      if (badMaps) return false;
+    }
+    return true;
+  }
+
+  function initTrack() {
+    var a = cfg.audio;
+    if (!a) return false;
+    var url = String(typeof a === 'string' ? a : (a.src || ''));
+    if (!url) return false;
+    var elt = null;
+    try { elt = doc.createElement('audio'); } catch (e) { return false; }
+    if (!elt || typeof elt.addEventListener !== 'function') return false;
+    elt.setAttribute('preload', 'metadata');
+    elt.setAttribute('playsinline', '');
+    elt.setAttribute('aria-hidden', 'true');
+    elt.style.display = 'none';
+    try { elt.src = url; } catch (e) { return false; }
+    track = elt;
+    trackChunks = (a && a.chunks && a.chunks.length) ? a.chunks : [];
+    /* Wortuhr: chunk.w = [ [rohes-Wort-Index, Sprechbeginn-ms], … ] —
+       der Generator bestimmt sie aus den Wortgrenzen seiner Synthese
+       (ff_voice_audio.py, fields.w). Fehlt das Feld (alte Spur), bleibt
+       die Satzebene die Anzeige; erfunden wird nichts. */
+    trackChunkWords = [];
+    trackWordClock = false;
+    for (var ci = 0; ci < trackChunks.length; ci++) {
+      var wl0 = trackChunks[ci] && trackChunks[ci].w;
+      if (wl0 && wl0.length > 1) { trackChunkWords[ci] = wl0; trackWordClock = true; }
+    }
+    try { doc.body.appendChild(elt); } catch (e) {}
+
+    elt.addEventListener('timeupdate', trackOnTime);
+    elt.addEventListener('play', function () { if (reading) startProgressTicker(); });
+    elt.addEventListener('pause', stopProgressTicker);
+    elt.addEventListener('ended', trackOnEnded);
+    elt.addEventListener('error', function () { if (reading) fallbackToSpeech(T.trackBroken); });
+    return true;
+  }
+
+  function clearTrackLoadGuard() {
+    if (trackLoadTimer) { clearTimeout(trackLoadTimer); trackLoadTimer = null; }
+  }
+
+  /** Lade-Wache: startet die Spur nicht binnen 8 s hörbar (Netz
+      hängt, Metadaten kommen nie), übernimmt die Browser-Engine. */
+  function armTrackLoadGuard() {
+    clearTrackLoadGuard();
+    trackLoadTimer = setTimeout(function () {
+      if (!reading || mode !== 'track' || !track) return;
+      if (track.readyState >= 2 && !track.paused) return;   // lädt/läuft
+      fallbackToSpeech(T.trackBroken);
+    }, 8000);
+  }
+
+  function trackTotalMs() {
+    if (!track) return 0;
+    var d = track.duration;
+    if (d && isFinite(d) && d > 0) return d * 1000;
+    if (trackChunks.length) return trackChunks[trackChunks.length - 1].t1 || 0;
+    return 0;
+  }
+
+  function trackOnTime() {
+    if (!track || !reading) return;
+    trackSyncPosition();
+  }
+
+  /**
+   * Positionssynchronisation der Tonspur: Live-Markierung, gemerkte
+   * Position, Fortschritt und Restzeit aus EINER Uhr. timeupdate feuert
+   * je Browser sehr unterschiedlich (iOS Safari spärlich, Headless kaum)
+   * — deshalb läuft dieselbe Synchronisation zusätzlich im rAF-Ticker.
+   */
+  function trackSyncPosition() {
+    if (!track || !reading) return;
+    var t = (track.currentTime || 0) * 1000;
+    var total = trackTotalMs();
+    if (trackChunks.length) {
+      var idx = -1;
+      for (var i = 0; i < trackChunks.length; i++) {
+        if (t >= trackChunks[i].t0 && t < trackChunks[i].t1) { idx = i; break; }
+        if (t >= trackChunks[i].t0) idx = i;
+      }
+      if (idx >= 0 && idx !== trackCur) {
+        trackCur = idx;
+        var bi = trackChunks[idx] ? trackChunks[idx].b : 0;
+        if (blocks[bi]) { trackBlock = bi; highlightBlock(blocks[bi]); rememberBlock(bi); }
+      }
+    }
+    /* Wortuhr: Wort für Wort im Artikeltext — die präziseste der
+       drei Quellen, weil millisekundengenau und geräteunabhängig. */
+    if (trackWordClock && trackCur >= 0 && trackChunks.length) {
+      var wl = trackChunkWords[trackCur];
+      if (wl && wl.length) {
+        var lo = 0, hi = wl.length - 1, found = -1;
+        while (lo <= hi) {
+          var mid = (lo + hi) >> 1;
+          if ((wl[mid][1] || 0) <= t) { found = mid; lo = mid + 1; } else { hi = mid - 1; }
+        }
+        if (found >= 0) applyTrackWord(trackChunks[trackCur].b || 0, wl[found][0] || 0);
+      }
+    }
+    if (total > 0) {
+      paintProgress(t / total);
+      updateRemainingFromTime(total - t);
+    }
+    updateNowLine();   // „Gerade vorgelesen“ folgt der Tonspur-Uhr
+  }
+
+  /**
+   * Endet die Spur deutlich vor der erwarteten Hörzeit (zu kurz
+   * geschnittene oder unvollständig vertonte Datei, Pausen-Spur),
+   * wäre „Vorlesen beendet“ eine Frottelei: Der Fortschritt spränge
+   * auf 100 %, obwohl fast nichts gesprochen wurde — genau der
+   * gemeldete Fehler (kein Ton, Anzeige rennt). Die Browser-Engine
+   * übernimmt deshalb ab dem zuletzt gehörten Block.
+   */
+  function trackOnEnded() {
+    stopProgressTicker();
+    clearTrackLoadGuard();
+    if (!reading || mode !== 'track') { if (reading) endReading(true, true); return; }
+    var expectedMs = (blocks.reduce(function (n, b) { return n + (b.text || '').length; }, 0) / BASE_CPS) * 1000 * 1.18;
+    var realMs = 0;
+    try {
+      if (track && isFinite(track.duration) && track.duration > 0) realMs = track.duration * 1000;
+    } catch (e) { realMs = 0; }
+    var mapMs = trackChunks.length ? (trackChunks[trackChunks.length - 1].t1 || 0) : 0;
+    var endedEarly =
+      (realMs && realMs < expectedMs * 0.35) ||                       // Datei zu kurz für den Artikel
+      (realMs && mapMs && realMs < mapMs * 0.6) ||                    // Datei kürzer als ihre eigene Karte
+      ((trackBlock || 0) < blocks.length - 2 && (!realMs || realMs < expectedMs * 0.35));
+    if (endedEarly) { fallbackToSpeech(T.trackEndedEarly); return; }
+    endReading(true, true);
+  }
+
+  function trackSeek(bi) {
+    if (!track) return;
+    var target = Math.max(0, Math.min(blocks.length - 1, bi));
+    var t = 0;
+    for (var i = 0; i < trackChunks.length; i++) {
+      if (trackChunks[i].b === target) { t = trackChunks[i].t0 || 0; break; }
+      if (trackChunks[i].b < target) t = trackChunks[i].t1 || t;
+    }
+    try { track.currentTime = t / 1000; } catch (e) {}
+  }
+
+  function trackStart(fromBlock) {
+    if (!track) return;
+    trackBlock = typeof fromBlock === 'number' && fromBlock > 0 ? Math.min(fromBlock, blocks.length - 1) : 0;
+    trackCur = -1;
+    wordSync.source = trackWordClock ? 'track' : 'none';
+    progressBlock = blocks[trackBlock] || blocks[0] || null;
+    clearActiveUnit();
+    updateNowLine();   // sofort anzeigen, was ab jetzt zu hören ist
+    if (track.error) { fallbackToSpeech(T.trackBroken); return; }
+    trackSeek(trackBlock);
+    var total = trackTotalMs();
+    if (total > 0 && trackChunks.length) {
+      var t = 0;
+      for (var i = 0; i < trackChunks.length; i++) {
+        if (trackChunks[i].b === trackBlock) { t = trackChunks[i].t0 || 0; break; }
+      }
+      paintProgress(t / total);
+    }
+    trackLastTime = -1;
+    trackLastMoveAt = 0;
+    trackProbeState.playedMs = 0;
+    trackProbeState.heard = false;
+    trackProbeState.lastAt = 0;
+    armTrackLoadGuard();
+    armSilenceProbe();          // im Klick-Kontext: Audio-Kontext darf starten
+    playElement(track);
+  }
+
+  function playElement(elt) {
+    if (!elt) return;
+    var p = null;
+    try { p = elt.play(); } catch (e) { p = null; }
+    if (p && p.then) {
+      p.catch(function () {
+        // Autoplay-Verweigerung: im Klickkontext selten, einmalig erneut.
+        try { var q = elt.play(); if (q && q.catch) q.catch(function () {}); } catch (e) {}
+      });
+    }
+  }
+
+  function trackPause() { clearTrackLoadGuard(); if (track) { try { track.pause(); } catch (e) {} } }
+  function trackResume() { trackLastMoveAt = 0; armTrackLoadGuard(); playElement(track); }
+  function trackStop() {
+    clearTrackLoadGuard();
+    if (!track) return;
+    try { track.pause(); } catch (e) {}
+    try { track.currentTime = 0; } catch (e) {}
+  }
+
+  function trackJump(delta) {
+    var target = (blocks[trackBlock] ? trackBlock : 0) + delta;
+    if (target < 0) target = 0;
+    if (target >= blocks.length) { endReading(true, true); return; }
+    trackBlock = target;
+    trackCur = -1;
+    trackSeek(target);
+    if (track && track.paused) playElement(track);
+    highlightBlock(blocks[target]);
+    rememberBlock(target);
+    updateNowLine();
+  }
+
+  /**
+   * Tonspur nicht abspielbar → nahtlos auf die Browser-Engine.
+   *
+   * Befund 06.09.2026: Diese Funktion rief startReading() auf, das bei
+   * laufender Wiedergabe SOFORT zurückkehrte (reading === true). Der
+   * Fallback war damit ein No-Op: Bei einer 404-/Codec-Spur hing die
+   * Leiste endlos auf „Studio-Tonspur läuft.“ — kein Ton, kein
+   * Fortschritt. Jetzt wird der alte Lauf vollständig entwertet und
+   * die Sprach-Engine DIREKT ab dem zuletzt gehörten Block gestartet.
+   */
+  function fallbackToSpeech(reason) {
+    var resumeAt = 0;
+    if (mode === 'track') resumeAt = blocks[trackBlock] ? trackBlock : 0;
+    else if (units.length) {
+      var cu = units[Math.min(cursor, units.length - 1)];
+      resumeAt = cu ? cu.blockIndex : 0;
+    }
+    runId += 1;                     // alte Rückrufe entwerten
+    clearPauseTimer();
+    clearStartWatchdog();
+    clearTrackLoadGuard();
+    stopProgressTicker();
+    stopKeepAlive();
+    unitInFlight = false;
+    liveUtterance = null;
+    clearActiveUnit();
+    progressBlock = blocks[resumeAt] || progressBlock;
+    if (synth) { try { synth.cancel(); } catch (e) {} }
+    if (track) { try { track.pause(); } catch (e) {} }
+    mode = 'speech';
+    wordSync.source = 'speech';   // ab jetzt liefert (vielleicht) die Engine die Wortgrenzen
+    if (!speechSupported || !blocks.length) {
+      endReading(false, false);
+      setStatus(speechSupported ? T.noText : T.unsupported);
+      return;
+    }
+    startSpeech(resumeAt);
+    if (reason) setStatus(reason, 6000);  // Grund der Übernahme bleibt sichtbar
+  }
+
+  /* ============================================================
+     11 · TONPFAD B — BROWSER-ENGINE (Web Speech API)
+     ------------------------------------------------------------
+     Härtung gegen die vier bekannten Abbruch-Ursachen:
+       · Chrome beendet sehr lange Äußerungen → harte Chunk-Grenze
+       · Chrome friert nach ~15 s Stille ein  → Keep-Alive-Wache
+       · Safari „resumed“ ohne hörbaren Ton  → Pause = Abbruch +
+                                                Neu-Sprechen derselben
+                                                Einheit (plattformgleich)
+       · Android bricht die Queue ab         → Anti-Stall-Watchdog mit
+                                                kontrolliertem Neustart
+     ============================================================ */
+
+  var liveUtterance = null;
+  var utteranceRefs = [];
+  var unitInFlight = false;
+  var startWatchdog = null;
+  var keepAliveTimer = null;
+  var pauseTimer = null;
+  var errorStreak = 0;
+  var retryCounts = {};
+  var everStarted = false;    // mind. ein onstart je Lauf (Ehrlichkeits-Wache)
+  var runStartedAt = 0;       // Beginn des aktuellen Sprech-Laufs (Wanduhr)
+  var measuredMs = 0;         // real vergangene Zeit fertiger Einheiten
+  var measuredChars = 0;      // Zeichen ebendieser Einheiten
+  var measuredUnits = 0;
+  var muteStop = false;       // Lauf wegen tonloser Engine gestoppt
+  var resumeUnit = -1;        // Einheit, mit der „Weiterlesen“ fortsetzt
+  var softStarts = 0;         // weiche Neustarts (cancel→speak-Rennen)
+
+  var UA = String((win.navigator && win.navigator.userAgent) || '');
+  // Nur Chrome/Edge brauchen den pause()/resume()-Impuls gegen den
+  // 15-Sekunden-Einfrierer; Firefox und Safari stottern davon.
+  var CHROME_LIKE = /Chrome|Chromium|CriOS|Edg/i.test(UA) && !/Firefox|FxiOS/i.test(UA);
+
+  /**
+   * Ehrlichkeits-Wache (Befund 06.09.2026): Startet die Synthese in
+   * einem Browser GAR nicht (keine Engine, keine Stimmen, Headless),
+   * fegte der Reader vorher still durch alle Einheiten — Fortschritt
+   * rannte, kein Ton, „Vorlesen beendet“. Ein Lauf, der NIEMALS ein
+   * onstart gesehen hat, wird jetzt ehrlich beendet und benannt,
+   * statt so zu tun, als wäre vorgelesen worden.
+   */
+  function honestDeadStop(msg) {
+    endReading(false, false);
+    setStatus(msg || T.synthesisDead);
+  }
+
+  /**
+   * Stumm-Sweep-Wache (Befund 07.09.2026, zweites Gesicht des Fehlers).
+   * Manche Engines melden brav onstart und onend — ohne einen Ton
+   * auszugeben (Linux ohne speech-dispatcher, verwaltete Browser,
+   * einige Android-WebViews). Vorher rannte der Fortschritt in
+   * Sekunden durch den ganzen Artikel und meldete „beendet“.
+   *
+   * Gemessen wird gegen die Wanduhr: Niemand spricht schneller als
+   * SPEECH_FLOOR_CPS Zeichen pro Sekunde. Wer das doch „schafft“,
+   * spricht nicht — der Lauf endet ehrlich und benannt.
+   */
+  function muteSweepDetected() {
+    if (!SPEECH_FLOOR_CPS) return false;
+    if (measuredUnits < 2 || measuredChars < 400) return false;
+    var seconds = Math.max(0.001, measuredMs / 1000);
+    return (measuredChars / seconds) > SPEECH_FLOOR_CPS;
+  }
+
+  function clearStartWatchdog() {
+    if (startWatchdog) { clearTimeout(startWatchdog); startWatchdog = null; }
+  }
+  function clearPauseTimer() {
+    if (pauseTimer) { clearTimeout(pauseTimer); pauseTimer = null; }
+  }
+  function stopKeepAlive() {
+    if (keepAliveTimer) { clearInterval(keepAliveTimer); keepAliveTimer = null; }
+  }
+  function startKeepAlive() {
+    stopKeepAlive();
+    /* Chrome/Edge frieren die Sprach-Queue nach ~15 Sekunden ein — die
+       Äußerung bricht mitten im Satz ab und die Engine bleibt hängen.
+       Der etablierte Gegengriff ist ein kurzer pause()/resume()-Impuls
+       im laufenden Sprechen; er ist nicht hörbar, hält die Queue aber
+       wach. Andere Browser bekommen nur den sanften Aufwecker, falls
+       die Engine ungewollt pausiert stehen bleibt. */
+    keepAliveTimer = setInterval(function () {
+      if (!reading || !playing || !synth) { stopKeepAlive(); return; }
+      try {
+        if (synth.paused && !unitInFlight) { synth.resume(); return; }
+        if (CHROME_LIKE && unitInFlight && synth.speaking && !synth.paused) {
+          synth.pause();
+          synth.resume();
+        }
+      } catch (e) {}
+    }, 9000);
+  }
+
+  function unlockEngine() {
+    if (!synth) return;
+    try {
+      if (synth.paused) synth.resume();
+      synth.cancel();
+      synth.resume();
+    } catch (e) {}
+  }
+
+  /* ----------------------------------------------------------------
+     speakUnit — NUR-DEUTSCH-VERTRAG:
+     Eine Sprecheinheit = GENAU eine Äußerung auf de-DE. Die frühere
+     Wortlauf-Regie (Zerlegung in de/en-Läufe mit Stimmwechsel mitten
+     in der Einheit) ist ersatzlos entfallen; Fortschritt, Pause,
+     Wiederholung und Watchdog bleiben unverändert einheitsbezogen.
+     Die onboundary-Grenzen der Engine speisen die Wort-Takt-Anzeige
+     (Abschnitt 9a) — ohne Grenzen läuft die Zeitschätzung mit.
+     ---------------------------------------------------------------- */
+  function speakUnit(index, isInitial) {
+    if (!reading || !playing) return;
+    if (index >= units.length) { endReading(true, true); return; }
+
+    var myRun = runId;
+    var unit = units[index];
+    cursor = index;
+    nextIndex = index + 1;
+    resumeUnit = index;         // Pause mitten in der Einheit → hier weiter
+
+    unitInFlight = true;
+    unit.sawBoundary = false;
+    var lastStarted = -1;      // 0 = diese Einheit hat echt gestartet
+    var softTries = 0;         // weiche Neustarts DIESER Einheit
+    var unitClock = nowMs();   // Wanduhr der Einheit (Stumm-Sweep-Wache)
+
+    function measureUnit() {
+      measuredMs += Math.max(0, nowMs() - unitClock);
+      measuredChars += String(unit.text || '').length;
+      measuredUnits += 1;
+      if (muteSweepDetected()) {
+        muteStop = true;
+        honestDeadStop(T.synthesisMute || T.synthesisDead);
+        return true;
+      }
+      return false;
+    }
+
+    function finishUnit() {
+      if (myRun !== runId) return;
+      clearStartWatchdog();
+      unitInFlight = false;
+      liveUtterance = null;
+      spokenChars = unit.endChars;
+      clearActiveUnit();
+      setProgressChars(spokenChars, false);
+      if (measureUnit()) return;
+      advance(index);
+    }
+
+    function retryUnit() {
+      if (myRun !== runId) return;
+      clearStartWatchdog();
+      unitInFlight = false;
+      liveUtterance = null;
+      clearActiveUnit();
+      errorStreak += 1;
+      var tries = retryCounts[index] || 0;
+      if (!everStarted && tries >= 1) { honestDeadStop(); return; }
+      if (tries < 2 && errorStreak < 4) {
+        retryCounts[index] = tries + 1;
+        setStatus(T.sectionError);
+        clearPauseTimer();
+        pauseTimer = setTimeout(function () {
+          if (myRun !== runId) return;
+          speakUnit(index, false);
+        }, 320);
+      } else {
+        setStatus(T.sectionError);
+        spokenChars = unit.endChars;
+        setProgressChars(spokenChars, false);
+        if (measureUnit()) return;
+        advance(index);
+      }
+    }
+
+    /* Anti-Stall-Wache in zwei Stufen (Befund 07.09.2026):
+         Stufe 1 (weich)  Chrome verschluckt speak() unmittelbar nach
+                          cancel() — die Äußerung startet dann NIE.
+                          Derselbe Lauf wird nach kurzer Ruhe erneut
+                          angestoßen, ohne Fehlermeldung, ohne Sprung.
+         Stufe 2 (hart)   Bleibt es still, wird die Einheit verworfen
+                          und neu versucht; ohne JEDEN Start seit
+                          mindestens 6 Sekunden gilt die Engine als tot
+                          (ehrliches Ende statt stillem Durchfegen). */
+    function armWatchdog() {
+      clearStartWatchdog();
+      var wait = softTries === 0 ? 1500 : (softTries === 1 ? 2500 : 4500);
+      startWatchdog = setTimeout(function () {
+        if (myRun !== runId) return;
+        if (lastStarted >= 0) return;               // echtes onstart — Wache erledigt
+        if (softTries < 2) {
+          softTries += 1;
+          softStarts += 1;
+          try { synth.cancel(); } catch (e) {}
+          clearPauseTimer();
+          pauseTimer = setTimeout(function () {
+            if (myRun !== runId || !reading || !playing) return;
+            speakOnce();
+          }, 120);
+          return;
+        }
+        try { synth.cancel(); } catch (e) {}
+        unitInFlight = false;
+        liveUtterance = null;
+        clearActiveUnit();
+        var tries = retryCounts[index] || 0;
+        if (!everStarted && (nowMs() - runStartedAt) >= 6000) { honestDeadStop(); return; }
+        if (tries < 2) {
+          retryCounts[index] = tries + 1;
+          speakUnit(index, false);
+        } else {
+          advance(index);
+        }
+      }, wait);
+    }
+
+    function speakOnce() {
+      if (myRun !== runId) return;
+      if (!reading || !playing) return;
+
+      var res = resolveMaleVoice() || {};
+      var voice = res.voice || null;
+
+      var u = null;
+      try { u = new win.SpeechSynthesisUtterance(unit.text); } catch (e) { u = null; }
+      if (!u) { finishUnit(); return; }
+
+      /* Premium-Bilingual (12.09.2026): Die Äußerungssprache folgt dem
+         Block (unit.lang) und der dazu passenden Stimme (Conrad für de,
+         Andrew/Brian/Ryan für en, ElevenLabs für beide). Die Lautschreibung
+         germanizeSpeech() läuft nur im Deutschen; im Englischen bleibt der
+         Text natürlich englisch. */
+      var wantEnUnit = String(unit.lang||'de').toLowerCase().indexOf('en')===0;
+      var targetForUnit = wantEnUnit ? 'en' : 'de';
+      // Für die Einheit die passende Stimme holen (statt einer globalen)
+      try {
+        var resForUnit = resolveMaleVoice(targetForUnit) || res;
+        if (resForUnit && resForUnit.voice) { voice = resForUnit.voice; res = resForUnit; }
+      } catch(e) {}
+      if (voice) {
+        try { u.voice = voice; } catch (e) {}
+        try {
+          var vl = String(voice.lang || (wantEnUnit ? 'en-US' : 'de-DE')).toLowerCase().replace('_', '-');
+          var parts = vl.split('-');
+          var wantPrefix = wantEnUnit ? 'en' : 'de';
+          if (parts[0] === wantPrefix) {
+            u.lang = parts.length > 1 ? (wantPrefix + '-' + parts[1].toUpperCase()) : (wantPrefix + (wantPrefix==='de' ? '-DE' : '-US'));
+          } else if (parts[0] === 'de' || parts[0] === 'en') {
+            // Stimmesprache weicht vom Block ab (Notnagel) — trotzdem kanonisch
+            u.lang = parts.length > 1 ? (parts[0] + '-' + parts[1].toUpperCase()) : (parts[0] + (parts[0]==='de' ? '-DE' : '-US'));
+          } else {
+            u.lang = wantEnUnit ? 'en-US' : 'de-DE';
+          }
+        } catch (e) { u.lang = wantEnUnit ? 'en-US' : 'de-DE'; }
+      } else {
+        u.lang = wantEnUnit ? 'en-US' : 'de-DE';
+      }
+      u.rate = Math.max(0.6, Math.min(1.4, unit.effRate * (res.tier ? res.tier.rate : 1)));
+      u.pitch = Math.max(0.5, Math.min(1.5, unit.effPitch + (res.tier && res.tier.pitchZone ? res.tier.pitchZone : 0)));
+      u.volume = Math.max(0.4, Math.min(1, unit.effVolume));
+
+      liveUtterance = u;
+      utteranceRefs.push(u);                     // GC-Schutz (Chrome-Abbrüche)
+      if (utteranceRefs.length > 24) utteranceRefs.splice(0, utteranceRefs.length - 24);
+
+      u.onstart = function () {
+        if (myRun !== runId) return;
+        lastStarted = 0;
+        everStarted = true;            // Engine lebt — Ehrlichkeits-Wache entspannt
+        clearStartWatchdog();
+        errorStreak = 0;
+        startActiveUnit(unit);
+        markWordFromUnitStart(unit);   // erstes Wort leuchtet, kaum dass die Stimme einsetzt
+        highlightBlock(unit.block);
+        rememberBlock(unit.blockIndex);
+        setStatus(res.male ? T.voiceActive : (T.voiceFallback || T.started));
+      };
+
+      /* Grenzen der Engine → wortgenaue Hervorhebung (Wort-Takt) */
+      u.onboundary = function (ev) {
+        if (myRun !== runId) return;
+        if (!ev || typeof ev.charIndex !== 'number') return;
+        unit.sawBoundary = true;
+        var local = Math.max(0, Math.min(String(unit.text).length, ev.charIndex));
+        spokenChars = unit.startChars + local;
+        setProgressChars(spokenChars, false);
+        updateRemainingFromChars();
+        noteBoundaryWord(unit, local);
+      };
+
+      u.onend = function () {
+        if (myRun !== runId) return;
+        clearStartWatchdog();
+        spokenChars = unit.endChars;
+        setProgressChars(spokenChars, false);
+        updateRemainingFromChars();
+        finishUnit();
+      };
+
+      u.onerror = function (ev) {
+        if (myRun !== runId) return;
+        var reason = ev && ev.error ? String(ev.error) : 'unknown';
+        if (reason === 'interrupted' || reason === 'canceled') return;   // gewollter Abbruch
+        retryUnit();
+      };
+
+      armWatchdog();
+      try { synth.speak(u); } catch (e) {
+        clearStartWatchdog();
+        retryUnit();
+      }
+    }
+
+    speakOnce();
+  }
+
+  /** Nächste Einheit — mit der rollengerechten Pause davor. */
+  function advance(index) {
+    if (!reading || !playing) return;
+    var next = index + 1;
+    if (next >= units.length) { endReading(true, true); return; }
+    resumeUnit = next;
+    var wait = units[next].before || 0;
+    clearPauseTimer();
+    pauseTimer = setTimeout(function () { speakUnit(next, false); }, wait);
+  }
+
+  function startSpeech(fromIndex, reason) {
+    unlockEngine();
+    errorStreak = 0;
+    retryCounts = {};
+    everStarted = false;          // neuer Lauf: Ehrlichkeits-Wache scharf
+    muteStop = false;
+    measuredMs = 0;
+    measuredChars = 0;
+    measuredUnits = 0;
+    softStarts = 0;
+    runId += 1;
+    clearPauseTimer();
+    clearStartWatchdog();
+    stopKeepAlive();
+
+    quality = calibrateQuality();
+    var plan = buildTimeline(blocks, quality.rate);
+    units = plan.units;
+    totalChars = plan.totalChars;
+    // Wort-Takt: ab jetzt kommen die Grenzen (vielleicht) von der Engine.
+    wordSync.source = 'speech';
+    for (var ui = 0; ui < units.length; ui++) units[ui].sawBoundary = false;
+
+    if (!units.length) { setStatus(T.noText); return; }
+
+    var startIdx = 0;
+    if (typeof fromIndex === 'number' && fromIndex > 0 && fromIndex < blocks.length) {
+      // Wiedereinstieg an einer gemerkten Blockgrenze
+      for (var i = 0; i < units.length; i++) {
+        if (units[i].blockIndex >= fromIndex) { startIdx = i; break; }
+      }
+    }
+    spokenChars = units[startIdx] ? units[startIdx].startChars : 0;
+    progressBlock = units[startIdx] ? units[startIdx].block : (blocks[0] || null);
+    clearActiveUnit();
+    resetProgress(spokenChars);
+    clockReset(spokenChars);
+    clockGo();
+    runStartedAt = nowMs();
+    cursor = startIdx;
+    nextIndex = startIdx;
+    resumeUnit = startIdx;
+    reading = true;
+    playing = true;
+    setBarState('playing');
+    setStatus(startIdx > 0 ? T.resumedPos : T.started);
+    if (reason) setStatus(reason, 6000);   // Grund einer Übernahme bleibt sichtbar
+    setupMediaSession();
+    startProgressTicker();
+    startKeepAlive();
+    speakUnit(startIdx, true);
+  }
+
+  function pauseSpeech() {
+    playing = false;
+    clearPauseTimer();
+    clearStartWatchdog();
+    stopProgressTicker();
+    stopKeepAlive();
+    clockHalt();
+    freezeActiveUnit();
+    runId += 1;                       // Rückrufe laufender Äußerungen entwerten
+    unitInFlight = false;
+    liveUtterance = null;
+    if (synth) { try { synth.cancel(); } catch (e) {} }
+    setBarState('paused');
+    setStatus(T.paused);
+  }
+
+  function resumeSpeech() {
+    if (!reading) return;
+    playing = true;
+    runId += 1;
+    var idx = resumeUnit >= 0 ? resumeUnit : nextIndex;
+    progressBlock = units[idx] ? units[idx].block : progressBlock;
+    setBarState('playing');
+    setStatus(T.resumed);
+    clockGo();
+    startProgressTicker();
+    startKeepAlive();
+    if (!speechSupported) return;
+    /* Pause ist ein kontrollierter Abbruch. Fortgesetzt wird mit der
+       Einheit, die beim Pausieren lief — sie wird als Ganzes wiederholt.
+       Lieber ein Satz doppelt als ein Satz verloren (Befund 07.09.2026:
+       die alte Regie sprang auf die FOLGE-Einheit und verschluckte den
+       Rest des laufenden Satzes). */
+    speakUnit(Math.min(Math.max(0, idx), Math.max(0, units.length - 1)), true);
+  }
+
+  /* ============================================================
+     12 · REGIE — Start, Pause, Sprung, Ende
+     ============================================================ */
+
+  /**
+   * Statuszeile.
+   *
+   * `hold` (ms oder true) macht die Meldung kurzzeitig unverdrängbar:
+   * Wenn die Tonspur hängt oder stumm bleibt und die Gerätestimme
+   * übernimmt, muss der Grund lesbar bleiben — sonst überschreibt ihn
+   * die nächste Routinemeldung („Männliche Stimme aktiv.“) nach
+   * Sekundenbruchteilen und niemand erfährt, was passiert ist.
+   * Jede Bedienhandlung (Start, Pause, Stopp, Sprung) hebt die Sperre
+   * sofort wieder auf — sie läuft der Bedienung nie hinterher.
+   */
+  var statusHoldUntil = 0;
+  function setStatus(msg, hold) {
+    if (!statusEl) return;
+    var t = nowMs();
+    if (!hold && statusHoldUntil > t) return;
+    statusEl.textContent = msg || '';
+    statusHoldUntil = hold ? (t + (typeof hold === 'number' ? hold : 6000)) : 0;
+  }
+  function releaseStatusHold() { statusHoldUntil = 0; }
+
+  function setBarState(state) {
+    if (!bar) return;
+    bar.setAttribute('data-state', state);
+    if (state === 'playing') {
+      if (playLabel) playLabel.textContent = T.pause;
+      playBtn.setAttribute('aria-label', T.pauseAria);
+      playBtn.setAttribute('aria-pressed', 'true');
+    } else if (state === 'paused') {
+      if (playLabel) playLabel.textContent = T.resume;
+      playBtn.setAttribute('aria-label', T.resumeAria);
+      playBtn.setAttribute('aria-pressed', 'true');
+    } else {
+      if (playLabel) playLabel.textContent = T.play;
+      playBtn.setAttribute('aria-label', hasExplicitMaleVoice() ? T.playAria : (T.playAriaNeutral || T.playAria));
+      playBtn.setAttribute('aria-pressed', 'false');
+    }
+    syncProgressMeta();
+  }
+
+  function applyLabels() {
+    if (playLabel) playLabel.textContent = reading ? (playing ? T.pause : T.resume) : T.play;
+    if (summaryLabel) summaryLabel.textContent = T.summaryBtn;
+    if (prevBtn) prevBtn.setAttribute('aria-label', T.prevAria);
+    if (nextBtn) nextBtn.setAttribute('aria-label', T.nextAria);
+    if (stopBtn) stopBtn.setAttribute('aria-label', T.stopAria);
+    if (bar) {
+      // Nur-Deutsch-Vertrag: Die Oberfläche ist deutsch, die Hilfe ebenso.
+      bar.setAttribute('aria-label', 'Lesehilfen: Vorlesen und Kurzfassung');
+    }
+    if (playBtn) playBtn.setAttribute('aria-label', hasExplicitMaleVoice() ? T.playAria : (T.playAriaNeutral || T.playAria));
+    if (summaryBtn) summaryBtn.setAttribute('aria-label', T.summaryAria);
+    if (progressMeterEl) progressMeterEl.setAttribute('aria-label', 'Vorlesefortschritt');
+    if (nowLabelEl) nowLabelEl.textContent = T.progressNowLabel;
+    syncProgressMeta();
+  }
+
+  function prepareBlocks() {
+    lang = detectArticleLanguage();
+    T = I18N[lang] || I18N.de;
+    blocks = collectBlocks();
+    trackSentenceCache = {};   // Tonspur-Schätzung je Lauf frisch aufbauen
+    resetWordPlans();          // Wort-Takt-Pläne an den neuen Text binden
+    return blocks.length > 0;
+  }
+
+  function startReading(fromIndex, forceSpeech) {
+    var trackRejected = null;
+    if (reading) return;
+    releaseStatusHold();          // Bedienung geht der Erklärung vor
+    if (!prepareBlocks()) { setStatus(T.noText); return; }
+
+    var useTrack = (mode === 'track' && track && !forceSpeech);
+    if (useTrack && !trackPlausible()) {
+      // Defekte Spur (Pausen-Spur, falsche Spur, kaputte Metadaten):
+      // nie stumm durchlaufen lassen — die Browser-Engine übernimmt.
+      useTrack = false;
+      mode = 'speech';
+      track = null;
+      trackRejected = T.trackDefective;
+    }
+    if (!speechSupported && !useTrack) { setStatus(T.unsupported); return; }
+
+    reading = true;
+    playing = true;
+    setupMediaSession();
+
+    if (useTrack) {
+      setStatus(T.startedTrack);
+      setBarState('playing');
+      var saved = (typeof fromIndex === 'number' && fromIndex > 0) ? fromIndex : (forceSpeech ? 0 : rememberedBlock());
+      trackStart(saved);
+      startProgressTicker();
+      return;
+    }
+    startSpeech(typeof fromIndex === 'number' ? fromIndex : 0, trackRejected);
+  }
+
+  function pauseReading() {
+    if (!reading) return;
+    releaseStatusHold();
+    playing = false;
+    if (mode === 'track' && track) { trackPause(); setBarState('paused'); setStatus(T.paused); return; }
+    pauseSpeech();
+  }
+
+  function resumeReading() {
+    if (!reading) return;
+    releaseStatusHold();
+    playing = true;
+    if (mode === 'track' && track) { trackResume(); setBarState('playing'); setStatus(T.resumed); return; }
+    resumeSpeech();
+  }
+
+  function endReading(announce, completed) {
+    releaseStatusHold();
+    reading = false;
+    playing = false;
+    runId += 1;
+    clearPauseTimer();
+    clearStartWatchdog();
+    clearTrackLoadGuard();
+    stopProgressTicker();
+    stopKeepAlive();
+    clockHalt();
+    clearActiveUnit();
+    resumeUnit = -1;
+    unitInFlight = false;
+    liveUtterance = null;
+    utteranceRefs.length = 0;
+    if (synth) { try { synth.cancel(); } catch (e) {} }
+    if (mode === 'track' && track) trackStop();
+    clearHighlight();
+    if (completed) {
+      progressBlock = blocks[blocks.length - 1] || progressBlock;
+      completeProgress();
+      storeDel(STORE_POS);
+    }
+    else {
+      progressBlock = null;
+      resetProgress(0);
+    }
+    if (remainEl) remainEl.textContent = '';
+    setBarState('idle');
+    setFloating(false);
+    if (announce) setStatus(T.finished);
+  }
+
+  function jumpBlock(delta) {
+    if (!reading) return;
+    releaseStatusHold();
+    if (mode === 'track' && track) { trackJump(delta); return; }
+    if (!units.length) return;
+    var cur = units[Math.min(cursor, units.length - 1)];
+    var bi = cur ? cur.blockIndex : 0;
+    var target = Math.max(0, Math.min(blocks.length - 1, bi + delta));
+    if (delta > 0 && bi + delta >= blocks.length) { endReading(true, true); return; }
+    var idx = 0;
+    for (var i = 0; i < units.length; i++) {
+      if (units[i].blockIndex >= target) { idx = i; break; }
+    }
+    runId += 1;
+    clearPauseTimer();
+    clearActiveUnit();
+    if (synth) { try { synth.cancel(); } catch (e) {} }
+    playing = true;
+    progressBlock = blocks[target] || progressBlock;
+    setBarState('playing');
+    spokenChars = units[idx] ? units[idx].startChars : 0;
+    resetProgress(spokenChars);
+    clockReset(spokenChars);            // Sprung: Physik-Deckel neu ansetzen
+    clockGo();
+    measuredMs = 0; measuredChars = 0; measuredUnits = 0;
+    speakUnit(idx, true);
+    if (blocks[target]) highlightBlock(blocks[target]);
+  }
+
+  /* ---------- Satz-Sprung (Shift + ←/→) ------------------------
+     Browser-Engine: die nächste Sprecheinheit ist exakt der nächste
+     Satz, es wird direkt dort neu angestoßen. Studio-Tonspur: ohne
+     Wortuhr wäre ein Ziel-Ms nicht bestimmbar — dann wird redlich
+     auf Abschnittssprung zurückgefallen, nie geraten. */
+  function jumpSentence(delta) {
+    if (!reading || !delta) return;
+    if (mode === 'speech' && units && units.length) {
+      var base = cursor;
+      if (!playing && resumeUnit >= 0) base = resumeUnit;
+      var target = base + (delta > 0 ? 1 : 0);
+      if (delta < 0) {
+        // Rückwärts: der gerade hörte/gemeldete Satz wird erneut gesprochen
+        target = base;
+      }
+      if (target < 0) target = 0;
+      if (target >= units.length) { endReading(true, true); return; }
+      runId += 1;
+      clearPauseTimer();
+      try { synth.cancel(); } catch (e) {}
+      clearStartWatchdog();
+      playing = true;
+      setBarState('playing');
+      clockGo();
+      var jumpUnit = units[target];
+      spokenChars = jumpUnit.startChars;
+      setProgressChars(spokenChars, false);
+      clockReset(spokenChars);
+      measuredMs = 0; measuredChars = 0; measuredUnits = 0;
+      speakUnit(target, true);
+      if (blocks[jumpUnit.blockIndex]) highlightBlock(blocks[jumpUnit.blockIndex]);
+      return;
+    }
+    if (mode === 'track' && track) {
+      if (!trackWordClock) { jumpBlock(delta); return; }
+      var bi = wordSync.blockIndex >= 0 ? wordSync.blockIndex : trackBlock;
+      var plan = blockPlan(bi);
+      if (!plan || !plan.units.length) { jumpBlock(delta); return; }
+      var su = wordSync.sentenceIndex >= 0 ? wordSync.sentenceIndex : 0;
+      var nu = su + delta;
+      if (nu < 0) {
+        var pprev = blockPlan(bi - 1);
+        if (pprev && pprev.units.length) seekTrackToWord(bi - 1, pprev.units[pprev.units.length - 1].firstR);
+        return;
+      }
+      if (nu >= plan.units.length) { seekTrackToWord(bi + 1, 0); return; }
+      seekTrackToWord(bi, plan.units[nu].firstR);
+    }
+  }
+
+  /** Sprung auf den Sprechbeginn eines rohen Wortes (Wortuhr). */
+  function seekTrackToWord(bi, rawIdx) {
+    if (!track) return;
+    if (!(rawIdx >= 0)) rawIdx = 0;
+    if (bi < 0) { try { track.currentTime = 0; } catch (e) {} return; }
+    if (bi >= blocks.length) { try { track.pause(); } catch (e) {} endReading(true, true); return; }
+    var wl = null;
+    for (var ci = 0; ci < trackChunks.length; ci++) {
+      if (trackChunks[ci].b === bi) { wl = trackChunkWords[ci]; break; }
+    }
+    if (!wl || !wl.length) { trackSeek(bi); return; }
+    var ms = null;
+    for (var e = 0; e < wl.length; e++) {
+      if ((wl[e][0] || 0) >= rawIdx) { ms = wl[e][1]; break; }
+    }
+    if (ms == null) ms = wl[0][1] || 0;
+    var wasPlaying = playing;
+    try { track.currentTime = Math.max(0, ms) / 1000; } catch (e) { trackSeek(bi); return; }
+    trackSyncPosition();
+    if (wasPlaying) { try { playElement(track); } catch (e) {} }
+  }
+
+  function toggleReading() {
+    if (!reading) {
+      // User-Activation-Token: alle Audio-Aufrufe bleiben synchron im Klick.
+      if (mode === 'track' && track) startReading(rememberedBlock(), false);
+      else startReading(rememberedBlock(), false);
+      return;
+    }
+    if (playing) pauseReading(); else resumeReading();
+  }
+
+  /* ---------- Media Session (Sperrbildschirm & Headset) ------- */
+  function setupMediaSession() {
+    if (!win.navigator || !win.navigator.mediaSession) return;
+    try {
+      win.navigator.mediaSession.metadata = new win.MediaMetadata({
+        title: String(T.mediaTitle || '{title}').replace('{title}', stripMd(cfg.title || doc.title || '')),
+        artist: T.mediaArtist,
+        album: String(cfg.siteName || 'FranksFinanzcheck')
+      });
+      win.navigator.mediaSession.playbackState = 'playing';
+    } catch (e) {}
+    var handlers = {
+      play: function () { if (reading && !playing) resumeReading(); },
+      pause: function () { if (reading && playing) pauseReading(); },
+      stop: function () { if (reading) endReading(true, false); },
+      previoustrack: function () { if (reading) jumpBlock(-1); },
+      nexttrack: function () { if (reading) jumpBlock(1); }
+    };
+    Object.keys(handlers).forEach(function (key) {
+      try { win.navigator.mediaSession.setActionHandler(key, handlers[key]); } catch (e) {}
+    });
+  }
+
+  /* ---------- Schwebender Mini-Player ------------------------ */
+  var floating = false;
+  function setFloating(on) {
+    if (!bar || floating === !!on) return;
+    floating = !!on;
+    if (floating) bar.classList.add('ff-voice-bar--floating');
+    else bar.classList.remove('ff-voice-bar--floating');
+  }
+  function syncFloating() {
+    if (!reading || !bar || !slot) { setFloating(false); return; }
+    var rect = slot.getBoundingClientRect();
+    setFloating(rect.bottom < 8);
+  }
+  if (typeof win.addEventListener === 'function') {
+    var scrollTicking = false;
+    win.addEventListener('scroll', function () {
+      if (scrollTicking) return;
+      scrollTicking = true;
+      win.requestAnimationFrame ? win.requestAnimationFrame(function () { scrollTicking = false; syncFloating(); })
+        : setTimeout(function () { scrollTicking = false; syncFloating(); }, 100);
+    }, { passive: true });
+    win.addEventListener('resize', syncFloating, { passive: true });
+  }
+
+  /* ---------- Ereignisse ------------------------------------- */
+  playBtn.addEventListener('click', toggleReading);
+  if (prevBtn) prevBtn.addEventListener('click', function () { jumpBlock(-1); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { jumpBlock(1); });
+  if (stopBtn) stopBtn.addEventListener('click', function () { if (reading) endReading(true, false); });
+
+  // Seite verlassen / Tab wechseln: gehörte Position sauber sichern.
+  if (typeof doc.addEventListener === 'function') {
+    doc.addEventListener('visibilitychange', function () {
+      if (doc.hidden && reading && playing) pauseReading();
+    });
+  }
+  if (typeof win.addEventListener === 'function') {
+    win.addEventListener('pagehide', function () { if (reading) endReading(false, false); });
+    win.addEventListener('beforeunload', function () { if (reading) endReading(false, false); });
+  }
+
+  /* ---------- Tastatur (WCAG 2.2 / BITV) --------------------- */
+  if (typeof doc.addEventListener === 'function') {
+    doc.addEventListener('keydown', function (e) {
+      if (!e || e.defaultPrevented) return;
+      var t = e.target;
+      var tn = t && t.tagName ? String(t.tagName).toUpperCase() : '';
+      if (tn === 'INPUT' || tn === 'TEXTAREA' || tn === 'SELECT' || (t && t.isContentEditable)) return;
+      if (dialogIsOpen && dialogIsOpen()) return;
+      if (e.key === 'Escape' && reading) { endReading(true, false); return; }
+      if (!reading) return;
+      if (e.key === ' ' || e.key === 'Spacebar') {
+        // Nur wenn der Fokus in der Toolbar liegt – sonst bleibt die
+        // Leertaste das normale Blättern der Seite.
+        if (bar && t && bar.contains && bar.contains(t)) { e.preventDefault(); toggleReading(); }
+        return;
+      }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); if (e.shiftKey) jumpSentence(-1); else jumpBlock(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); if (e.shiftKey) jumpSentence(1); else jumpBlock(1); }
+    });
+  }
+
+  /* ============================================================
+     13 · KURZFASSUNG — Verlagshaus-Standard im <dialog>
+     ------------------------------------------------------------
+     Aufbau (Capital / WirtschaftsWoche / Die Zeit als Maßstab):
+       1. Byline         Lesezeit · Wörter · Autor · Stand
+       2. Kurzantwort    „Das Wichtigste in 30 Sekunden“
+       3. Kernaussagen   3–5 redaktionell gerankte Aussagen
+       4. Zahlen         Big-Number-Karten (Euro, Prozent, kWh …)
+       5. Tabellen       Übersichten im Fokus
+       6. Inhalt         Sprungverzeichnis
+     Barrierefreiheit: role="dialog", aria-modal, Beschriftung,
+     Fokus-Falle, Fokus-Rückkehr, Scroll-Sperre, Escape, Fallback
+     für Browser ohne <dialog>.
+     ============================================================ */
+
+  var dialog = null;
+  var lastFocused = null;
+  var fallbackBackdrop = null;
+
+  function el(tag, cls, text) {
+    var node = doc.createElement(tag);
+    if (cls) node.className = cls;
+    if (text != null) node.textContent = String(text);
+    return node;
+  }
+
+  function dialogIsOpen() {
+    if (!dialog) return false;
+    if (dialog.classList.contains('ff-voice-dialog--fallback')) return dialog.getAttribute('open') !== null;
+    return typeof dialog.open === 'boolean' ? dialog.open : dialog.getAttribute('open') !== null;
+  }
+
+  function lockScroll(on) {
+    try {
+      if (!doc.body) return;
+      if (on) {
+        doc.body.style.overflow = 'hidden';
+        doc.body.style.paddingRight = '0px';
+      } else {
+        doc.body.style.overflow = '';
+        doc.body.style.paddingRight = '';
+      }
+    } catch (e) {}
+  }
+
+  function focusables(root) {
+    return qsa('a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])', root)
+      .filter(function (n) { return n.offsetWidth > 0 || n.offsetHeight > 0 || n === doc.activeElement; });
+  }
+
+  function trapFocus(e) {
+    if (!dialog) return;
+    var list = focusables(dialog);
+    if (!list.length) return;
+    var first = list[0];
+    var last = list[list.length - 1];
+    if (e.shiftKey && doc.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && doc.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+
+  /* ---------- Inhalte der Kurzfassung ------------------------ */
+
+  function collectHeadings() {
+    var content = doc.querySelector('.post-content') || doc.querySelector('.md-content');
+    if (!content) return [];
+    return qsa('h2, h3', content).filter(function (h) {
+      if (isReaderSkipped(h)) return false;
+      return headingTextOf(h).length > 2;
+    });
+  }
+
+  function collectTables() {
+    var content = doc.querySelector('.post-content') || doc.querySelector('.md-content');
+    if (!content) return [];
+    var seen = [];
+    var out = [];
+    qsa('table, [role="table"], [role="grid"], [role="treegrid"], .ff-table-scroll, .ff-tv-tablewrap, .ff-es-tablewrap', content)
+      .forEach(function (t) {
+        if (isReaderSkipped(t)) return;
+        var inner = innerTable(t);
+        if (!inner || seen.indexOf(inner) !== -1) return;
+        seen.push(inner);
+        var model = buildTableModel(inner);
+        var hasData = model.rows.some(function (r) { return r.kind === 'data' && r.parts.length; });
+        if (!hasData && !model.headers.some(function (h) { return h; })) return;
+        out.push(model);
+      });
+    return out;
+  }
+
+  function dataRowsOf(model) {
+    return model.rows.filter(function (r) { return r.kind === 'data' && r.parts.length; });
+  }
+
+  /** Kernaussagen: die ersten tragenden Sätze der Abschnitte. */
+  function buildKeypoints(limit) {
+    var content = doc.querySelector('.post-content') || doc.querySelector('.md-content');
+    if (!content) return [];
+    var headings = collectHeadings();
+    var out = [];
+    headings.forEach(function (h) {
+      if (out.length >= limit) return;
+      if (tagOf(h) !== 'H2') return;
+      var node = h.nextElementSibling;
+      var guard = 0;
+      while (node && guard++ < 6) {
+        if (tagOf(node) === 'P') {
+          var text = readableText(node);
+          if (text.length > 40) {
+            out.push(firstSentences(text, 2));
+            return;
+          }
+        }
+        if (/^H[23]$/.test(tagOf(node))) return;
+        node = node.nextElementSibling;
+      }
+    });
+    if (!out.length) {
+      qsa('p', content).slice(0, 6).forEach(function (p) {
+        if (out.length >= limit) return;
+        var text = readableText(p);
+        if (text.length > 60) out.push(firstSentences(text, 2));
+      });
+    }
+    return out.slice(0, limit);
+  }
+
+  function firstSentences(text, n) {
+    return sentences(String(text)).slice(0, n).join(' ').trim();
+  }
+
+  /** Zahlen auf einen Blick: Beträge, Prozente, Energiemengen. */
+  function buildFigures(limit) {
+    var content = doc.querySelector('.post-content') || doc.querySelector('.md-content');
+    if (!content) return [];
+    var text = readableText(content);
+    var found = [];
+    var seen = [];
+
+    var moneyRe = /(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{1,2})?)\s?(€|EUR|Euro)/gi;
+    var m;
+    while ((m = moneyRe.exec(text)) !== null && found.length < limit) {
+      var value = m[1] + ' €';
+      var key = value.toLowerCase();
+      if (seen.indexOf(key) !== -1) continue;
+      seen.push(key);
+      found.push({ value: value, label: labelAround(text, m.index, m[0].length, 'Euro') });
+    }
+    var pctRe = /(\d{1,3}(?:[.,]\d{1,2})?)\s?%/g;
+    while ((m = pctRe.exec(text)) !== null && found.length < limit) {
+      var pv = m[1] + ' %';
+      var pkey = pv.toLowerCase();
+      if (seen.indexOf(pkey) !== -1) continue;
+      seen.push(pkey);
+      found.push({ value: pv, label: labelAround(text, m.index, m[0].length, 'Prozent') });
+    }
+    return found.slice(0, limit);
+  }
+
+  /** Sucht das sinntragende Substantiv vor einem Zahlenfund. */
+  function labelAround(text, index, length, fallback) {
+    var before = String(text).slice(Math.max(0, index - 90), index);
+    var after = String(text).slice(index + length, index + length + 60);
+    var cand = (before.match(/([A-ZÄÖÜ][\wäöüßÄÖÜ-]{3,})\s+(?:von|bis|auf|um|rund|etwa|ca\.?|circa)?\s*$/) || [])[1];
+    if (cand) return cand;
+    var afterCand = (after.match(/^\s*(?:pro|je|für|im|pro)\s+([A-Za-zÄÖÜäöüß]{3,})/) || [])[1];
+    if (afterCand) return 'pro ' + afterCand;
+    return fallback;
+  }
+
+  function buildToc() {
+    return collectHeadings().map(function (h) {
+      var id = h.getAttribute('id');
+      if (!id) {
+        id = 'ff-voice-sec-' + Math.random().toString(36).slice(2, 8);
+        h.setAttribute('id', id);
+      }
+      return { id: id, text: headingTextOf(h), level: parseInt(tagOf(h).slice(1), 10) };
+    });
+  }
+
+  function summaryPlainText() {
+    var lines = [];
+    lines.push(String(cfg.title || doc.title || ''));
+    lines.push('');
+    if (cfg.kurzantwort) { lines.push(stripMd(cfg.kurzantwort)); lines.push(''); }
+    var kp = buildKeypoints(5);
+    if (kp.length) {
+      lines.push(T.summaryKeypoints);
+      kp.forEach(function (k, i) { lines.push((i + 1) + '. ' + k); });
+      lines.push('');
+    }
+    var tables = collectTables();
+    if (tables.length) {
+      lines.push(T.summaryTables);
+      tables.slice(0, 6).forEach(function (model) {
+        lines.push('· ' + (model.title || T.tableDefault));
+        var heads = model.headers.filter(function (h) { return h; });
+        if (heads.length) lines.push('  ' + heads.join(' · '));
+        dataRowsOf(model).slice(0, 5).forEach(function (r) {
+          lines.push('  – ' + (r.label ? r.label + ': ' : '') + r.parts.join('; '));
+        });
+      });
+      lines.push('');
+    }
+    var toc = buildToc();
+    if (toc.length) {
+      lines.push(T.summaryToc);
+      toc.forEach(function (t) { lines.push('· ' + t.text); });
+    }
+    return lines.join('\n');
+  }
+
+  /* ---------- Aufbau des Dialogs ----------------------------- */
+
+  function buildDialog() {
+    if (dialog) return dialog;
+    var dlg = el('div', 'ff-voice-dialog');
+    dlg.setAttribute('role', 'dialog');
+    dlg.setAttribute('aria-modal', 'true');
+    dlg.setAttribute('aria-label', T.summaryBtn + ' – ' + stripMd(cfg.title || ''));
+    dlg.id = 'ff-voice-dialog';
+
+    var head = el('div', 'ff-voice-dialog__head');
+    var headText = el('div');
+    headText.appendChild(el('div', 'ff-voice-dialog__eyebrow', T.summaryEyebrow));
+    headText.appendChild(el('h2', 'ff-voice-dialog__title', stripMd(cfg.title || doc.title || '')));
+    head.appendChild(headText);
+    var closeBtn = el('button', 'ff-voice-dialog__close', '\u00d7');
+    closeBtn.type = 'button';
+    closeBtn.setAttribute('aria-label', T.summaryClose);
+    head.appendChild(closeBtn);
+    dlg.appendChild(head);
+
+    var body = el('div', 'ff-voice-dialog__body');
+
+    // 1 · Byline
+    var byline = el('ul', 'ff-voice-byline');
+    if (cfg.readingTime) byline.appendChild(el('li', null, T.summaryReadingTime.replace('{time}', cfg.readingTime)));
+    if (cfg.wordCount) byline.appendChild(el('li', null, T.summaryWords.replace('{count}', cfg.wordCount)));
+    if (cfg.author) byline.appendChild(el('li', null, T.summaryAuthor.replace('{name}', cfg.author)));
+    if (cfg.date) byline.appendChild(el('li', null, T.summaryStand.replace('{date}', cfg.date)));
+    if (cfg.updated) byline.appendChild(el('li', null, T.summaryUpdated.replace('{date}', cfg.updated)));
+    if (byline.children.length) body.appendChild(byline);
+
+    // 2 · Kurzantwort
+    if (cfg.kurzantwort) {
+      var secQuick = el('section', 'ff-voice-sec');
+      secQuick.appendChild(el('h3', 'ff-voice-sec__h', T.summaryQuick));
+      secQuick.appendChild(el('p', 'ff-voice-quick', stripMd(cfg.kurzantwort)));
+      body.appendChild(secQuick);
+    }
+
+    // 3 · Kernaussagen
+    var kp = buildKeypoints(5);
+    if (kp.length) {
+      var secKp = el('section', 'ff-voice-sec');
+      secKp.appendChild(el('h3', 'ff-voice-sec__h', T.summaryKeypoints));
+      var ul = el('ul', 'ff-voice-list ff-voice-list--plain');
+      kp.forEach(function (k) { ul.appendChild(el('li', null, k)); });
+      secKp.appendChild(ul);
+      body.appendChild(secKp);
+    }
+
+    // 4 · Zahlen auf einen Blick
+    var figures = buildFigures(6);
+    if (figures.length) {
+      var secFig = el('section', 'ff-voice-sec');
+      secFig.appendChild(el('h3', 'ff-voice-sec__h', T.summaryFigures));
+      var grid = el('div', 'ff-voice-figures');
+      figures.forEach(function (f) {
+        var card = el('div', 'ff-voice-figure');
+        card.appendChild(el('span', 'ff-voice-figure__value', f.value));
+        card.appendChild(el('span', 'ff-voice-figure__label', f.label));
+        grid.appendChild(card);
+      });
+      secFig.appendChild(grid);
+      body.appendChild(secFig);
+    }
+
+    // 5 · Tabellen & Übersichten im Fokus (mit Mini-Vorschau)
+    var tables = collectTables();
+    if (tables.length) {
+      var secTab = el('section', 'ff-voice-sec');
+      secTab.appendChild(el('h3', 'ff-voice-sec__h', T.summaryTables));
+      var wrap = el('div', 'ff-voice-tables');
+      tables.slice(0, 6).forEach(function (model) {
+        var card = el('div', 'ff-voice-tablecard');
+        card.appendChild(el('h4', 'ff-voice-tablecard__h', model.title || T.tableDefault));
+        var rows = dataRowsOf(model);
+        var meta = rows.length === 1 ? T.summaryRowCountOne : T.summaryRowCount.replace('{count}', rows.length);
+        card.appendChild(el('p', 'ff-voice-tablecard__meta',
+          model.colCount + ' \u00d7 ' + meta));
+
+        // Mini-Vorschau: Kopfzeile + die ersten drei Datenzeilen
+        var preview = el('table', 'ff-voice-tablecard__preview');
+        preview.setAttribute('aria-hidden', 'true');
+        var visibleHeaders = model.headers.filter(function (h) { return h; });
+        if (visibleHeaders.length) {
+          var thead = el('thead');
+          var trh = el('tr');
+          visibleHeaders.slice(0, 4).forEach(function (h) { trh.appendChild(el('th', null, h)); });
+          thead.appendChild(trh);
+          preview.appendChild(thead);
+        }
+        var tbody = el('tbody');
+        rows.slice(0, 3).forEach(function (r) {
+          var tr = el('tr');
+          var shown = [];
+          for (var dc = 0; dc < r.display.length && shown.length < 4; dc++) {
+            if (r.display[dc]) shown.push(r.display[dc]);
+          }
+          if (!shown.length && r.label) shown.push(r.label);
+          shown.forEach(function (v) { tr.appendChild(el('td', null, v)); });
+          if (tr.children.length) tbody.appendChild(tr);
+        });
+        if (tbody.children.length) preview.appendChild(tbody);
+        if (preview.children.length) card.appendChild(preview);
+        if (rows.length > 3) {
+          card.appendChild(el('p', 'ff-voice-tablecard__more',
+            T.summaryMoreRows.replace('{count}', rows.length - 3)));
+        }
+        wrap.appendChild(card);
+      });
+      secTab.appendChild(wrap);
+      body.appendChild(secTab);
+    }
+
+    // 6 · Inhaltsverzeichnis
+    var toc = buildToc();
+    if (toc.length) {
+      var secToc = el('section', 'ff-voice-sec');
+      secToc.appendChild(el('h3', 'ff-voice-sec__h', T.summaryToc));
+      var tocList = el('ul', 'ff-voice-toc');
+      toc.forEach(function (item) {
+        var li = el('li');
+        var a = el('a', null, item.text);
+        a.href = '#' + item.id;
+        a.setAttribute('aria-label', T.summaryJump + ': ' + item.text);
+        a.addEventListener('click', function () { closeDialog(); });
+        li.appendChild(a);
+        tocList.appendChild(li);
+      });
+      secToc.appendChild(tocList);
+      body.appendChild(secToc);
+    }
+
+    if (!body.children.length) body.appendChild(el('p', null, T.summaryEmpty));
+
+    dlg.appendChild(body);
+
+    // Fußzeile
+    var foot = el('div', 'ff-voice-dialog__foot');
+    var copyBtn = el('button', 'ff-voice-btn', T.summaryCopy);
+    copyBtn.type = 'button';
+    copyBtn.id = 'ff-voice-copy';
+    copyBtn.addEventListener('click', function () {
+      var text = summaryPlainText();
+      var ok = false;
+      try {
+        if (win.navigator && win.navigator.clipboard && win.navigator.clipboard.writeText) {
+          win.navigator.clipboard.writeText(text);
+          ok = true;
+        } else {
+          var ta = doc.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          doc.body.appendChild(ta);
+          ta.select();
+          ok = !!doc.execCommand('copy');
+          doc.body.removeChild(ta);
+        }
+      } catch (e) { ok = false; }
+      if (win.__ff_voice_copied) win.__ff_voice_copied(text);
+      copyBtn.textContent = ok ? T.summaryCopied : T.summaryCopyFail;
+      setTimeout(function () { copyBtn.textContent = T.summaryCopy; }, 2200);
+    });
+    foot.appendChild(copyBtn);
+
+    var readFull = el('a', 'ff-voice-link', T.summaryReadFull + ' \u2192');
+    readFull.href = String(cfg.permalink || doc.location.pathname);
+    readFull.addEventListener('click', function () { closeDialog(); });
+    foot.appendChild(readFull);
+    dlg.appendChild(foot);
+
+    closeBtn.addEventListener('click', closeDialog);
+
+    try { doc.body.appendChild(dlg); } catch (e) {}
+    dialog = dlg;
+
+    // Fallback, wenn <dialog> nicht unterstützt wird
+    if (typeof dlg.showModal !== 'function' && typeof win.HTMLDialogElement === 'undefined') {
+      dlg.classList.add('ff-voice-dialog--fallback');
+    }
+    return dlg;
+  }
+
+  function addFallbackBackdrop() {
+    if (fallbackBackdrop) return;
+    fallbackBackdrop = el('div', 'ff-voice-backdrop');
+    fallbackBackdrop.addEventListener('click', closeDialog);
+    try { doc.body.appendChild(fallbackBackdrop); } catch (e) {}
+  }
+  function removeFallbackBackdrop() {
+    if (fallbackBackdrop && fallbackBackdrop.parentNode) fallbackBackdrop.parentNode.removeChild(fallbackBackdrop);
+    fallbackBackdrop = null;
+  }
+
+  function openDialog() {
+    lastFocused = doc.activeElement;
+    var dlg = buildDialog();
+    lockScroll(true);
+    var useNative = typeof dlg.showModal === 'function';
+    if (useNative) {
+      try { dlg.showModal(); } catch (e) { useNative = false; }
+    }
+    if (!useNative) {
+      dlg.classList.add('ff-voice-dialog--fallback');
+      dlg.setAttribute('open', '');
+      addFallbackBackdrop();
+    }
+    var focusTarget = dlg.querySelector('.ff-voice-dialog__close') || dlg;
+    try { focusTarget.focus(); } catch (e) {}
+  }
+
+  function closeDialog() {
+    if (!dialog || !dialogIsOpen()) return;
+    var fallback = dialog.classList.contains('ff-voice-dialog--fallback');
+    if (!fallback && typeof dialog.close === 'function') {
+      try { dialog.close(); } catch (e) {}
+    }
+    if (fallback || dialog.getAttribute('open') !== null) {
+      dialog.removeAttribute('open');
+      dialog.classList.remove('ff-voice-dialog--fallback');
+      removeFallbackBackdrop();
+    }
+    lockScroll(false);
+    if (lastFocused && typeof lastFocused.focus === 'function') {
+      try { lastFocused.focus(); } catch (e) {}
+    }
+    lastFocused = null;
+  }
+
+  summaryBtn.addEventListener('click', openDialog);
+
+  if (typeof doc.addEventListener === 'function') {
+    doc.addEventListener('keydown', function (e) {
+      if (!dialogIsOpen()) return;
+      if (e.key === 'Escape') {
+        if (dialog.classList.contains('ff-voice-dialog--fallback')) { e.preventDefault(); closeDialog(); return; }
+        return;   // native <dialog> behandelt Escape selbst
+      }
+      if (e.key === 'Tab') trapFocus(e);
+    });
+  }
+
+  /* ============================================================
+     14 · INITIALISIERUNG
+     ============================================================ */
+
+  /* Support-Schalter in der Adresszeile (kein Tracking, kein Speichern):
+       ?ffvoice=nostudio   Studio-Tonspur überspringen, Gerätestimme testen
+       ?ffvoice=debug      Diagnose in der Konsole ausgeben
+     Damit lässt sich eine Tonstörung am echten Gerät in Sekunden
+     einkreisen, ohne Code zu ändern. */
+  var urlFlag = '';
+  try {
+    var qs = String(win.location && win.location.search || '');
+    var m = qs.match(/[?&]ffvoice=([a-z-]+)/i);
+    urlFlag = m ? String(m[1]).toLowerCase() : '';
+  } catch (e) { urlFlag = ''; }
+
+  var trackReady = (urlFlag === 'nostudio') ? false : initTrack();
+  mode = trackReady ? 'track' : 'speech';
+  if (!trackReady && !speechSupported) {
+    if (playBtn) playBtn.disabled = true;
+    setStatus(T.unsupported);
+  }
+
+  function diagnostics() {
+    var voices = [];
+    try {
+      voices = (voiceCache || []).slice(0, 40).map(function (v) {
+        return { name: v && v.name, lang: v && v.lang, local: !!(v && v.localService) };
+      });
+    } catch (e) {}
+    return {
+      version: VOICE_VERSION,
+      mode: mode,
+      reading: reading,
+      playing: playing,
+      trackReady: trackReady,
+      trackSrc: (cfg.audio && (cfg.audio.src || cfg.audio)) || '',
+      trackPlausible: (function () { try { if (!blocks.length) blocks = collectBlocks(); return trackPlausible(); } catch (e) { return null; } })(),
+      trackProbe: { attached: !!trackProbe, heard: trackProbeState.heard, silentMs: trackProbeState.playedMs },
+      speechSupported: speechSupported,
+      voiceCount: (voiceCache || []).length,
+      maleVoice: (function () {
+        /* Ohne vorherigen Lauf ist noch nichts aufgelöst — für die
+           Ferndiagnose am fremden Gerät wird hier bewusst nachgesehen. */
+        var m = { de: !!maleVoiceFound.de };
+        try {
+          if (speechSupported && (voiceCache || []).length) {
+            m = { de: !!resolveMaleVoice('de').male };
+          }
+        } catch (e) {}
+        return m;
+      })(),
+      everStarted: everStarted,
+      softStarts: softStarts,
+      muteStop: muteStop,
+      speechFloorCps: SPEECH_FLOOR_CPS,
+      measured: { ms: Math.round(measuredMs), chars: measuredChars, units: measuredUnits },
+      wordSync: {
+        source: wordSync.source,
+        block: wordSync.blockIndex,
+        raw: wordSync.rawIndex,
+        token: wordSync.tokenIndex,
+        sentence: wordSync.sentenceIndex,
+        total: articleWordCache || 0,
+        trackClock: !!trackWordClock
+      },
+      progress: {
+        ratio: Number(progressRatio.toFixed(4)),
+        displayedChars: Math.round(displayedChars),
+        spokenChars: Math.round(spokenChars),
+        modeLabel: progressModeText(),
+        blockLabel: progressLabelFromBlock(progressBlock),
+        nowReading: nowReadingText.slice(0, 160),
+        position: nowReadingPos
+      },
+      chromeKeepAlive: CHROME_LIKE,
+      blocks: blocks.length,
+      voices: voices
+    };
+  }
+
+  /* Diagnose-Modus ohne Konsolenrauschen: Der Befund landet als
+     Attribut an der Leiste (in den Entwicklerwerkzeugen sichtbar und
+     kopierbar) und unter window.__ffVoice.diagnostics(). Die
+     ausgelieferte Seite schreibt nie von sich aus in die Konsole. */
+  function publishDiagnostics() {
+    if (!bar) return;
+    try { bar.setAttribute('data-ff-voice-diagnostics', JSON.stringify(diagnostics())); } catch (e) {}
+  }
+  if (urlFlag === 'debug') {
+    publishDiagnostics();
+    win.setInterval(publishDiagnostics, 4000);
+  }
+
+  applyLabels();
+  setBarState('idle');
+  try { bar.setAttribute('data-ff-wordsync', 'none'); } catch (e) {}
+
+  // Test- und Diagnose-Schnittstelle (kein Tracking, keine Netzaufrufe)
+  win.__ffVoice = {
+    version: VOICE_VERSION,
+    diagnostics: diagnostics,
+    get mode() { return mode; },
+    get blocks() { return blocks.slice(); },
+    get units() { return units.slice(); },
+    get lang() { return lang; },
+    get reading() { return reading; },
+    get playing() { return playing; },
+    get trackReady() { return trackReady; },
+    get everStarted() { return everStarted; },
+    get muteStop() { return muteStop; },
+    get softStarts() { return softStarts; },
+    get speechFloorCps() { return SPEECH_FLOOR_CPS; },
+    get trackBlock() { return trackBlock; },
+    trackPlausible: function () {
+      if (!blocks.length) blocks = collectBlocks();
+      return trackPlausible();
+    },
+    speechNormalize: speechNormalize,
+    sentences: sentences,
+    splitForSpeech: splitForSpeech,
+    normTokens: normTokens,
+    alignNormToRaw: alignNormToRaw,
+    blockPlan: blockPlan,
+    jumpSentence: function (delta) { jumpSentence(delta); },
+    get wordSyncSource() { return wordSync.source; },
+    get currentWord() { return { block: wordSync.blockIndex, raw: wordSync.rawIndex, token: wordSync.tokenIndex, sentence: wordSync.sentenceIndex }; },
+    collectBlocks: collectBlocks,
+    buildTimeline: function () {
+      if (!blocks.length) blocks = collectBlocks();
+      return buildTimeline(blocks, quality.rate || 1);
+    },
+    resolveMaleVoice: resolveMaleVoice,
+    detectArticleLanguage: detectArticleLanguage,
+    sniffSentenceLang: sniffSentenceLang,
+    buildTableModel: buildTableModel,
+    summaryPlainText: summaryPlainText,
+    buildKeypoints: function () { return buildKeypoints(5); },
+    buildFigures: function () { return buildFigures(6); },
+    openSummary: openDialog,
+    closeSummary: closeDialog,
+    start: function () { startReading(0, mode !== 'track'); },
+    stop: function () { endReading(false, false); }
+  };
+})();
