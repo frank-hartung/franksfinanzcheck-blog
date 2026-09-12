@@ -311,25 +311,11 @@ def check_affiliate_integrity():
         return None, f"Report nicht lesbar: {e}"
     return True, "ok"
 
-def check_pinterest_token():
-    """Prüft Pinterest Token State (data/pinterest_token_state.json)."""
-    state_path = BLOG_DIR / "data/pinterest_token_state.json"
-    if not state_path.is_file():
-        return None, "Token-State fehlt (kein Broker-Status)"
-    try:
-        data = json.loads(state_path.read_text(encoding="utf-8"))
-        severity = data.get("severity", "unknown")
-        source = data.get("source_label") or data.get("source") or "?"
-        detail = data.get("detail") or data.get("next_action") or ""
-        if severity == "red":
-            return False, f"Token RED – Quelle: {source} – {detail[:120]}"
-        if severity == "amber":
-            return None, f"Token AMBER – Quelle: {source} – {detail[:120]}"
-        if severity == "green":
-            return True, f"Token OK – Quelle: {source}"
-        return None, f"Token Zustand {severity}: {detail[:120]}"
-    except Exception as e:
-        return None, f"Token-State unparsbar: {e}"
+# Achtung: `check_pinterest_token()` (nur Ampel, ohne Besitzer) wurde am
+# 12.09.2026 durch `check_pinterest_channel()` ersetzt – sie bewertet den
+# Kanal als Ganzes (Domain-Sperre, Token, Frische) und liefert Befunde MIT
+# Besitzer. Zwei Wahrheiten über denselben Kanal sind der Kern von #272.
+
 
 def check_content_reserve():
     """Prüft ob Reserve-Pool genug Artikel hat."""
