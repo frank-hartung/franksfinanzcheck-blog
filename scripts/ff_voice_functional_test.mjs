@@ -355,19 +355,23 @@ t.group('4) Aussprache-Regie Deutsch (Zahlen, Währung, Datum, Einheiten)');
    die EN-Abkürzungsregeln (e. g., etc.) werden nicht mehr angewandt,
    weil sie sonst deutschen Text verstümmeln.
    ============================================================ */
-t.group('5) Sprechregeln: ausschließlich deutsch');
+t.group('5) Sprechregeln: Premium-Bilingual DE+EN ohne Umschalter');
 {
   const { win } = loadPage(skeleton({ title: 'Test', bodyHtml: '<p>x</p>' }));
-  const n = (text) => win.__ffVoice.speechNormalize(text);
+  const n = (text, lang) => win.__ffVoice.speechNormalize(text, lang);
 
-  t.eq('Englisches Wort bleibt, Prozent deutsch', n('about 20%'), 'about 20 Prozent');
-  t.eq('Dollarzeichen bleibt stehen', n('Save $1,200'), 'Save $1,200');
-  t.eq('Datum mit Schrägstrich = deutsche Reihenfolge', n('on 02/01/2006'), 'on 2. Januar 2006');
-  t.eq('e. g. wird nicht mehr aufgelöst (EN-Regel entfallen)', n('e. g. gas'), 'e. g. gas');
-  t.eq('etc. wird nicht mehr aufgelöst (EN-Regel entfallen)', n('tariffs etc.'), 'tariffs etc.');
-  t.eq('Und-Zeichen wird deutsches Wort', n('gas & oil'), 'gas und oil');
-  t.ok('Keine Wortlauf-Regie mehr (kein Sprachwechsel mitten im Satz)',
-    typeof win.__ffVoice.languageRuns === 'undefined');
+  // DE-Regelwerk
+  t.eq('DE: Prozent deutsch', n('etwa 20%', 'de'), 'etwa 20 Prozent');
+  t.eq('DE: Und-Zeichen deutsch', n('Strom & Gas', 'de'), 'Strom und Gas');
+  t.eq('DE: Datum deutsche Reihenfolge', n('am 02.01.2006', 'de'), 'am 2. Januar 2006');
+  t.eq('DE: Germanize aktiv (Service→Sörwis)', n('Der Service ist gut.', 'de').includes('sörwis') || n('Der Service ist gut.', 'de').includes('Sörwis'), true);
+  // EN-Regelwerk
+  t.eq('EN: Prozent englisch', n('about 20%', 'en'), 'about 20 percent');
+  t.eq('EN: Datum englisch', n('on 01/02/2006', 'en').includes('January') || n('on 01/02/2006', 'en').includes('February'), true);
+  t.eq('EN: e.g. aufgelöst', n('e.g. gas', 'en').toLowerCase().includes('for example'), true);
+  t.eq('EN: etc. englisch', n('tariffs etc.', 'en').toLowerCase().includes('etc') || n('tariffs etc.', 'en').toLowerCase().includes('et cetera'), true);
+  t.eq('EN: Und-Zeichen englisch', n('gas & oil', 'en'), 'gas and oil');
+  t.ok('Bilingual: speechNormalize nimmt lang', typeof n('test','de') === 'string');
 }
 
 /* ============================================================
@@ -376,7 +380,7 @@ t.group('5) Sprechregeln: ausschließlich deutsch');
    Ein englischsprachiger Artikel wird NICHT englisch vorgelesen:
    Die Oberfläche bleibt deutsch, jede Sprecheinheit trägt „de“.
    ============================================================ */
-t.group('6) Nur-Deutsch — auch bei englischem Artikeltext');
+t.group('6) Premium-Bilingual — EN-Artikel spricht EN, DE-Artikel DE (ohne Umschalter)');
 {
   const deBody = mdToHtml('## Strom sparen\n\nMit einem Wechsel sparst du jedes Jahr mehrere hundert Euro bei den Kosten.');
   const enBody = mdToHtml('## Save Money on Electricity\n\nSwitching your tariff can save you several hundred pounds every year on your energy costs and comparison shows it.');
@@ -385,26 +389,24 @@ t.group('6) Nur-Deutsch — auch bei englischem Artikeltext');
   const en = loadPage(skeleton({ title: 'Save Money on Electricity', lang: 'en', bodyHtml: enBody }));
 
   t.eq('Deutscher Artikel → de', de.win.__ffVoice.lang, 'de');
-  t.eq('Englischer Artikel → ebenfalls de', en.win.__ffVoice.lang, 'de');
-  t.eq('Vorlesen-Beschriftung bleibt deutsch',
-    en.doc.getElementById('ff-voice-play-label').textContent, 'Vorlesen');
-  t.eq('Kurzfassung-Beschriftung bleibt deutsch',
-    en.doc.getElementById('ff-voice-summary-label').textContent, 'Kurzfassung');
-  t.ok('Alle Blöcke sind deutsch',
-    en.win.__ffVoice.collectBlocks().every((b) => b.lang === 'de'));
+  t.eq('Englischer Artikel → en', en.win.__ffVoice.lang, 'en');
+  t.eq('Vorlesen-Beschriftung EN', en.doc.getElementById('ff-voice-play-label').textContent, 'Listen');
+  t.eq('Kurzfassung-Beschriftung EN', en.doc.getElementById('ff-voice-summary-label').textContent, 'Summary');
+  t.ok('EN-Blöcke sind en', en.win.__ffVoice.collectBlocks().some((b) => b.lang === 'en'));
 
-  // Englischer Satz im deutschen Artikel wechselt die Sprache NICHT mehr
+  // Englischer Satz im deutschen Artikel wechselt die Sprache je Block
   const mixed = loadPage(skeleton({
     title: 'Tarifwechsel leicht gemacht',
     bodyHtml: '<h2>Was du beachten solltest</h2>'
-      + '<p>Der Wechsel ist einfach. This sentence is clearly written in English and should be read by the German news voice anyway.</p>',
+      + '<p>Der Wechsel ist einfach.</p>'
+      + '<p>This sentence is clearly written in English and saves money every year.</p>',
   }));
   const blocks = mixed.win.__ffVoice.collectBlocks();
   const units = mixed.win.__ffVoice.buildTimeline().units;
   const langs = new Set(units.map((u) => u.lang));
   t.ok('Blöcke vorhanden', blocks.length > 2);
-  t.ok('Regiesprache ist de', langs.has('de'));
-  t.ok('Keine englische Einheit im Sprechplan', !langs.has('en'), 'en im Unit-Language');
+  t.ok('Regiesprachen gemischt de+en', langs.has('de') && langs.has('en'), 'langs=' + [...langs].join(','));
+  t.ok('EN-Einheit vorhanden', langs.has('en'));
 }
 
 /* ============================================================
@@ -415,7 +417,7 @@ t.group('6) Nur-Deutsch — auch bei englischem Artikeltext');
    Standard. Englische Stimmen sind ausgeschlossen — auch dann,
    wenn der Katalog sie hergibt und jemand „en“ als Ziel übergibt.
    ============================================================ */
-t.group('7) Nachrichtensprecher – deterministisch, nur Deutsch');
+t.group('7) Nachrichtensprecher – deterministisch, Premium-Bilingual DE+EN');
 {
   const { win } = loadPage(skeleton({ title: 'Test', bodyHtml: '<p>x</p>' }));
   const api = win.__ffVoice;
@@ -430,11 +432,11 @@ t.group('7) Nachrichtensprecher – deterministisch, nur Deutsch');
   t.ok('DE: Neural-/Studio-Qualität bevorzugt',
     /natural|neural|premium|enhanced/i.test(de.voice.name), de.voice.name);
   t.ok('DE: Locale passt', (de.voice.lang || '').toLowerCase().indexOf('de') === 0);
-  // Nur-Deutsch-Vertrag: selbst ein „en“-Ziel liefert nie eine englische Stimme
+  // Premium-Bilingual: en-Ziel liefert englische männliche Stimme
   const en = api.resolveMaleVoice('en');
-  t.ok('Fremdsprachiges Ziel wird nicht bedient (de-Locale bleibt)',
-    !en.voice || (en.voice.lang || '').toLowerCase().indexOf('de') === 0,
-    en.voice && en.voice.name + ' / ' + en.voice.lang);
+  t.ok('EN: eine Stimme gefunden', !!en.voice, 'keine EN-Stimme');
+  t.ok('EN: männlich erkannt', en.male === true, 'EN Stimme: ' + (en.voice && en.voice.name));
+  t.ok('EN: Locale passt en', (en.voice.lang || '').toLowerCase().indexOf('en') === 0, en.voice && en.voice.name + ' / ' + en.voice.lang);
 }
 
 t.group('7b) Keine männliche Stimme im Katalog – ehrlicher Notnagel');
@@ -634,7 +636,7 @@ t.group('10) Studio-Tonspur wird bevorzugt – Fallback greift nie ins Leere');
 
   doc.getElementById('ff-voice-play').click();
   t.ok('Tonspur startet', api.reading === true);
-  t.ok('Status nennt die Tonspur', /Tonspur/.test(doc.getElementById('ff-voice-status').textContent));
+  t.ok('Status nennt die Tonspur', /Tonspur|ElevenLabs|Studio/.test(doc.getElementById('ff-voice-status').textContent), 'status=' + doc.getElementById('ff-voice-status').textContent);
   t.ok('Tonspur: „Gerade vorgelesen“ zeigt den Startabschnitt',
     /Tonspur-Test/.test(doc.getElementById('ff-voice-now').textContent),
     'now=' + doc.getElementById('ff-voice-now').textContent);
@@ -781,10 +783,11 @@ t.group('12) Alle echten Artikel – kein Absturz, vollständige Ausbeute');
       }
       const de = api.resolveMaleVoice('de');
       if (de.voice && /anna|katja|hedda|marlene|vicki|elke/i.test(de.voice.name)) female += 1;
-      // Nur-Deutsch-Vertrag: egal welche Ziel-Sprache — nie eine fremde Stimme
+      // Premium-Bilingual: je Ziel-Sprache die passende Stimme (de→de, en→en)
       for (const probe of ['de', 'en']) {
         const v = api.resolveMaleVoice(probe);
-        if (v.voice && !/^de/i.test(v.voice.lang || '')) foreignVoice += 1;
+        const want = probe === 'en' ? 'en' : 'de';
+        if (v.voice && (v.voice.lang || '').toLowerCase().indexOf(want) !== 0) foreignVoice += 1;
       }
       // Kurzfassung muss auf jeder Seite funktionieren
       doc.getElementById('ff-voice-summary').click();

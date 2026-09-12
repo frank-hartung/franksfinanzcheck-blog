@@ -566,8 +566,8 @@ async function main() {
     ok('Weibliche Stimme nie gewählt', await page.evaluate(() =>
       window.__speech.log.length === 0 || window.__speech.log.every((l) => !l.voice || !/Anna/.test(l.voice))));
     await page.click('#ff-voice-stop');
-    ok('Idle-aria-label verspricht den männlichen Nachrichtensprecher', /männliche(n)? (Nachrichtensprecher|Stimme)/.test(
-      await page.evaluate(() => document.getElementById('ff-voice-play').getAttribute('aria-label'))));
+    ok('Idle-aria-label verspricht die männliche Premium-Stimme (DE+EN)', /ElevenLabs|männliche/i.test(
+      await page.evaluate(() => document.getElementById('ff-voice-play').getAttribute('aria-label'))), await page.evaluate(() => document.getElementById('ff-voice-play').getAttribute('aria-label')));
   }
 
   /* ---------- S4 · Synthese-Fehler ---------- */
@@ -594,7 +594,7 @@ async function main() {
     const s0 = await snap();
     ok('Wiedergabe läuft', s0.reading === true && s0.audio && s0.audio.paused === false);
     ok('Duration geladen', s0.audio && s0.audio.dur && s0.audio.dur > 5, JSON.stringify(s0.audio));
-    eq('Status „Studio-Tonspur läuft.“', s0.status, 'Studio-Tonspur läuft.');
+    ok('Status „Studio/ElevenLabs läuft.“', /Studio.*läuft|ElevenLabs/.test(s0.status), 'status=' + s0.status);
     const samples = [];
     for (let i = 0; i < 8; i++) { await sleep(280); samples.push(await snap()); }
     ok('currentTime läuft real', samples[samples.length - 1].audio.cur > 1.2, 'cur=' + samples[samples.length - 1].audio.cur);

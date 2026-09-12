@@ -25,9 +25,9 @@ on:
         description: 'TTS-Backend für die Vorlese-Tonspur'
         type: choice
         default: auto
-        options: [auto, edge, piper]
+        options: [auto, elevenlabs, edge, piper]
       audio_profile:
-        description: 'Stimmen-Profil (news = deutscher Nachrichtensprecher, natural = Multilingual v2, narrator = Conrad)'
+        description: 'Stimmen-Profil (news = Conrad/Andrew, natural = Multilingual v2, narrator = Kilian/Brian)'
         type: choice
         default: news
         options: [news, natural, narrator]
@@ -278,18 +278,16 @@ jobs:
       # (Befund 07.09.2026): Die Vorlese-Funktion spricht ausschließlich
       # Deutsch; englische Begriffe liest der Nachrichtensprecher.
       #
-      # KOSTENLOS & OHNE KEY: Eine Backend-Kette ohne Abo und ohne
-      # Pflicht-Secret:
-      #   edge  -> Microsoft-Edge-Neuralstimmen über das offene Paket edge-tts
-      #            (Profil news: de-DE-ConradNeural — nüchterner
-      #            Nachrichtenoton; Profil natural:
-      #            de-DE-FlorianMultilingualNeural mit Mehrsprachigkeit
-      #            für englische Fachbegriffe im deutschen Satz)
-      #   piper -> lokale ONNX-Stimmen (de_DE-thorsten-high),
-      #            offline, unbegrenzt, lizenzsauber
-      #   (Das englische Groq-Notnagel-Backend ist mit dem Nur-Deutsch-
-      #    Vertrag ersatzlos entfallen — GROQ_API_KEY wird für die Tonspur
-      #    nicht mehr gelesen; die Content-Workflows nutzen es unberührt.)
+      # PREMIUM-KETTE (12.09.2026, ohne Umschalter, männlich DE+EN):
+      #   elevenlabs -> ElevenLabs Multilingual v2 (Adam pNInz6obpgDQGcFmaJgB)
+      #                 — EINE Stimme für DE+EN, identischer Klang cross-device,
+      #                 nur aktiv wenn ELEVENLABS_API_KEY als Secret gesetzt.
+      #   edge       -> Microsoft-Edge-Neuralstimmen (Conrad de, Andrew/Brian/Ryan en)
+      #                 über das offene Paket edge-tts; Fallback wenn kein Key.
+      #   piper      -> lokale ONNX-Stimmen (de_DE-thorsten-high, en …),
+      #                 offline, unbegrenzt, lizenzsauber; letzter Fallback.
+      #   Ohne ELEVENLABS_API_KEY ist die Kette automatisch edge→piper
+      #   (kostenlos, ohne Abo). GROQ_API_KEY wird für Tonspuren nicht mehr gelesen.
       #
       # Robustheit: (1) Ohne verfügbares Backend wird keine Tonspur
       # geschrieben; der Reader bleibt automatisch auf der lokalen
@@ -332,7 +330,7 @@ jobs:
           # Zeigt Engines, Rezept-Version UND den gefundenen Dekoder an.
           python3 scripts/ff_voice_audio.py --engines || true
 
-      - name: Vorlese-Tonspuren erzeugen (männliche deutsche Nachrichtensprecher-Stimme, kostenlos)
+      - name: Vorlese-Tonspuren erzeugen (männlich, DE+EN ohne Umschalter – ElevenLabs Premium, kostenloser Fallback)
         # WANDUHR FÜR DEN SCHLIMMSTEN FALL (Härtung 10.09.2026):
         # Normal braucht dieser Schritt Budget (20 Min., Backfill 90)
         # plus Anlauf/Überlauf (Cache-Fetch, ein Segment-Überhang von
@@ -345,6 +343,8 @@ jobs:
         # Livegang verzögern, aber nie verhindern.
         timeout-minutes: 120
         continue-on-error: true
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
         run: |
           mkdir -p /tmp/ff-voice-cache
           # Vorherige Tonspuren vom letzten Deploy holen (inkrementell).

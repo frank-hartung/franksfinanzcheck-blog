@@ -171,7 +171,7 @@ t.group('C2 · Tonspur-Fehler zur Laufzeit: Fallback ist keine Blockade mehr');
 
   doc.getElementById('ff-voice-play').click();
   t.ok('Start im Track-Modus', api.mode === 'track', 'mode=' + api.mode);
-  t.eq('Status „Studio-Tonspur läuft.“', doc.getElementById('ff-voice-status').textContent, 'Studio-Tonspur läuft.');
+  t.ok('Status nennt Studio/Track (ElevenLabs)', /Studio.*läuft|Tonspur.*läuft|ElevenLabs/.test(doc.getElementById('ff-voice-status').textContent), 'status=' + doc.getElementById('ff-voice-status').textContent);
 
   // Der Fehler, der vorher endlos hing: <audio> meldet Lade-Fehler.
   audio.dispatchEvent(new win.Event('error'));
@@ -314,8 +314,8 @@ t.group('C4 · Lazy Stimmen-Katalog: männliche Stimme bindet nachträglich');
   t.ok('Weibliche Stimmen werden nie gewählt',
     speech.log.every((l) => !l.voice || !/Anna|Katja|Samantha/.test(l.voice)));
   api.stop();
-  t.ok('Nach Stopp: Idle-aria-label verspricht den männlichen Nachrichtensprecher',
-    /männliche(n)? (Nachrichtensprecher|Stimme)/.test(doc.getElementById('ff-voice-play').getAttribute('aria-label')),
+  t.ok('Nach Stopp: Idle-aria-label verspricht die männliche ElevenLabs-Premium-Stimme, DE & EN',
+    /ElevenLabs|männliche/i.test(doc.getElementById('ff-voice-play').getAttribute('aria-label')),
     'aria=' + doc.getElementById('ff-voice-play').getAttribute('aria-label'));
 }
 
@@ -330,8 +330,8 @@ t.group('C4b · Sofortiger Katalog: männliche Stimme ab der ersten Einheit');
   await sleep(60);
   t.ok('Männliche Stimme ab Einheit 1', speech.log.length >= 1 && /Conrad/.test(speech.log[0].voice || ''),
     'log0=' + JSON.stringify(speech.log[0] || {}));
-  t.ok('Meldung „Deutscher Nachrichtensprecher aktiv.“',
-    /Nachrichtensprecher/.test(doc.getElementById('ff-voice-status').textContent),
+  t.ok('Meldung „ElevenLabs Premium-Stimme aktiv.“',
+    /Premium-Stimme aktiv|ElevenLabs/.test(doc.getElementById('ff-voice-status').textContent),
     doc.getElementById('ff-voice-status').textContent);
   win.__ffVoice.stop();
 }

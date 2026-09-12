@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
 """ff_voice_audio.py — Studio-Tonspuren für die Vorlese-Funktion (FF Voice Studio).
 
-Vertont die Artikel des Blogs mit einer MÄNNLICHEN, DEUTSCHEN
-NACHRICHTENSPRECHER-STIMME — kostenlos, ohne Schlüssel und ohne
-Umschalter für die Leser:innen.
+Vertont die Artikel des Blogs mit einer MÄNNLICHEN PREMIUM-STIMME
+(ElevenLabs, Multilingual v2) — Deutsch UND Englisch ohne Umschalter,
+ein Klang, auto Language-Detect pro Block/Satz.
 
-NUR-DEUTSCH-VERTRAG (Befund 07.09.2026)
-    Die Tonspur spricht ausschließlich Deutsch. Es gibt keine
-    englische Stimme, keinen Satz-Routing-Zweig und keinen
-    EN-Fallback. Englische Begriffe im Text spricht der deutsche
-    Nachrichtensprecher, wie es im Hörfunk üblich ist. Die Blöcke
-    tragen weiterhin das Feld `lang` — es ist IMMER „de“, und beide
-    Seiten (Generator und Reader) werden durch das Paritäts-Gate auf
-    diesem Vertrag gehalten.
+ELEVENLABS PREMIUM (12.09.2026 — Profi-Agentur, Premium-Level)
+    Primär: ElevenLabs Studio (männlich, DE+EN auto) → MP3, 24 kHz Mono,
+    −16 LUFS (EBU R128). Ohne Key fällt die Kette automatisch auf
+    Edge-Neuralstimmen (Conrad/Andrew) bzw. Piper — niemals stumm, nie
+    ein Schalter für Leser:innen. Jede Tonspur liegt first-party unter
+    /audio/articles/ und klingt identisch auf allen Geräten.
+
+Block-Sprache: Der Generator erkennt je Block/Satz automatisch de vs. en
+(ä/ö/ü/ß + deutsche Stopwörter vs. englische Stopwörter) und schreibt
+sie in die Tonspur-Konfiguration — der Reader folgt derselben Regie
+ohne Umschalter.
 
 WORTUHR (Grundlage der wortgenauen Leseanzeige)
     Bei edge-tts-Synthese liefert jedes Segment WordBoundary-Ereignisse.
@@ -52,9 +55,9 @@ Aufruf (lokal oder im Deploy-Workflow NACH `hugo --minify`):
       --out-dir public/audio/articles --cache-dir /tmp/ff-voice-cache \\
       --backend auto --profile news [--only <slug>] [--dry-run] [--force]
 
-  · --backend   auto (edge → piper) | edge | piper
-  · --profile   news (Standard: Conrad, Style serious) | natural (Florian)
-                | narrator (Killian) — ausschließlich deutsche Stimmen
+  · --backend   auto (elevenlabs → edge → piper) | elevenlabs | edge | piper
+  · --profile   eleven (ElevenLabs Adam Multilingual, DE+EN) |
+                news (Conrad DE / Andrew EN, Style serious) | natural | narrator
   · --out-dir   Zielverzeichnis. Pro Artikel entstehen <slug>.mp3
                 (Fallback .wav ohne ffmpeg) + <slug>.track.json.
   · --cache-dir Vorherige Tonspuren (z. B. aus dem letzten gh-pages-Stand).
@@ -145,26 +148,79 @@ CUES = {
         "tableOutro": "Ende der Tabelle {title}.",
         "tableDefault": "Übersichtstabelle",
     },
+    "en": {
+        "introLine": "{title}. An article by FranksFinanzcheck. Listening time about {duration}.",
+        "durationMinutes": "{n} minutes", "durationMinuteOne": "one minute",
+        "durationUnknown": "a few minutes",
+        "outroLine": "End of article. Thanks for listening to FranksFinanzcheck.",
+        "listItemNum": "Item {n}:",
+        "cueShortAnswer": "Key takeaway:", "cueCorrection": "Correction:",
+        "cueSaving": "Potential saving:", "cueTariff": "Tariff at a glance:",
+        "cueWarning": "Attention:", "cueNote": "Note:",
+        "columnLabel": "Column", "rowLabel": "Row",
+        "tableHeaders": "Columns are: {headers}.",
+        "tableHeaderRow": "Header row {n}: {headers}.",
+        "tableIntro": "Table: {title}. Overview with {cols} columns and {rows} rows.",
+        "tableIntroOne": "Table: {title}. Overview with {cols} columns and one row.",
+        "tableRow": "Row {row} of {total}. {content}.",
+        "tableRowLabel": "Row {row} of {total}: {label}. {content}.",
+        "tableGroup": "Group: {name}.",
+        "tableSum": "Total: {content}.",
+        "tableCta": "Recommendation: {cta}. Note: This is a partner link.",
+        "tableOutro": "End of table {title}.",
+        "tableDefault": "Overview table",
+    },
 }
 
 
 # ---------------------------------------------------------------------------
-# Nur-Deutsch-Vertrag — Sprach-Erkennung ist bewusst abgeschaltet
+# Bilingual ohne Umschalter — auto DE/EN je Block/Satz (Premium 12.09.2026)
 # ---------------------------------------------------------------------------
-# Frühere Modelle erkannten Artikel-, Satz- und Wort-Sprachen und kippten
-# auf englische Stimmen. Der Auftrag lautet seit 07.09.2026: Die
-# Vorlese-Funktion spricht ausschließlich Deutsch. Die Funktion bleibt
-#Signatur-stabil (Reader und Paritäts-Gate adressieren denselben Namen) und
-# liefert für JEDE Eingabe „de“.
+# Die Vorlese-Funktion spricht Deutsch UND Englisch mit EINER männlichen
+# ElevenLabs-Stimme (Multilingual v2) — ohne Menü, ohne Schalter. Die
+# Signatur bleibt stabil (Reader und Paritäts-Gate vergleichen denselben
+# Namen und dieselbe Heuristik).
 
 def detect_language(sample: str = "", declared: str = "de") -> str:
-    """Nur-Deutsch-Vertrag: immer „de“ — kein Raten, kein Routing."""
-    return "de"
+    """Premium-Bilingual: auto DE vs. EN ohne Umschalter (eine Stimme).
+
+    Heuristik (schnell, offline, deterministisch):
+      · Enthält ä/ö/ü/ß → de
+      · Zählt deutsche vs. englische Stopwörter; Mehrheit gewinnt
+      · Fallback: declared (meist aus <html lang> oder Config)
+    """
+    t = (sample or "").lower()
+    if not t.strip():
+        return (declared or "de").lower()[:2] if declared else "de"
+    if any(ch in t for ch in ("ä", "ö", "ü", "ß")):
+        # Starkes DE-Signal — nur wenn zugleich kaum EN-Stopwörter
+        # (verhindert Fehl-Rate auf gemischten Blogs)
+        pass
+    de_hits = 0
+    en_hits = 0
+    de_words = (" der ", " die ", " das ", " und ", " oder ", " nicht ", " ein ", " eine ", " für ", " mit ", " von ", " im ", " auf ", " ist ", " zu ", " den ", " dem ", " wir ", " sie ", " sparen ", " strom ", " gas ", " tarif ", " euro ", " pro ", " jahr ", " monat ")
+    en_words = (" the ", " and ", " is ", " are ", " you ", " your ", " with ", " for ", " this ", " that ", " save ", " money ", " energy ", " tariff ", " euro ", " per ", " year ", " month ", " from ", " have ", " will ", " can ")
+    pad = " " + t + " "
+    for w in de_words:
+        if w in pad:
+            de_hits += 1
+    for w in en_words:
+        if w in pad:
+            en_hits += 1
+    if "ä" in t or "ö" in t or "ü" in t or "ß" in t:
+        de_hits += 2
+    # Schwelle: klarer Vorsprung nötig, sonst declared
+    if en_hits > de_hits + 1:
+        return "en"
+    if de_hits > en_hits:
+        return "de"
+    d = (declared or "de").lower()[:2]
+    return "en" if d == "en" else "de"
 
 
 def sniff_sentence_lang(sentence: str = "", base_lang: str = "de") -> str:
-    """Nur-Deutsch-Vertrag: Sätze wechseln die Sprache nicht mehr."""
-    return "de"
+    """Satz-Sprache: gleiche Heuristik wie Artikel, aber je Satz (feiner)."""
+    return detect_language(sentence or "", base_lang or "de")
 
 
 # ---------------------------------------------------------------------------
@@ -1003,14 +1059,30 @@ def extract_table_blocks(table: Node, block_lang: str, C):
 # ---------------------------------------------------------------------------
 
 def _lang_of(node: Node, fallback: str = "de") -> str:
-    """Nur-Deutsch-Vertrag: Blöcke wechseln die Sprache nicht mehr.
+    """Premium-Bilingual: Block-Sprache auto DE/EN ohne Umschalter.
 
-    Das `lang`-Feld bleibt als Vertragsfeld erhalten (Reader, Generator
-    und Paritäts-Gate adressieren es), sein Wert ist immer „de“ — auch
-    wenn ein Knoten ein `lang="en"`-Attribut trägt. Ein englisches
-    Attribut darf die deutsche Pflichtstimme nicht aushebeln.
+    Das `lang`-Feld steuert die Aussprache-Schiene (RULES_DE vs. RULES_EN)
+    und die Voice-Wahl (ElevenLabs bleibt eine Stimme, Edge wählt
+    Conrad vs. Andrew). Erkannt aus Textprobe + deklarierter Artikel-
+    sprache — kein manueller Schalter für Leser:innen.
     """
-    return "de"
+    raw = ""
+    try:
+        raw = readable_text(node)[:500] if node else ""
+    except Exception:
+        raw = ""
+    if raw:
+        sniffed = sniff_sentence_lang(raw, fallback or "de")
+        if sniffed in ("de", "en"):
+            return sniffed
+    # Fallback: explizites lang-Attribut im DOM (wenn Autor es gesetzt hat)
+    try:
+        a = node.attr("lang", "") if node else ""
+        if a and a.lower()[:2] in ("de", "en"):
+            return a.lower()[:2]
+    except Exception:
+        pass
+    return (fallback or "de").lower()[:2] if (fallback or "de").lower()[:2] in ("de", "en") else "de"
 
 
 def _is_standalone_emphasis(node: Node) -> bool:
@@ -1042,12 +1114,21 @@ def extract_blocks(root: Node, cfg: dict):
     if content is None:
         return [], "de"
 
-    lang = "de"
-    C = CUES["de"]
+    declared = (cfg.get("lang") or "de").lower()[:2] if cfg.get("lang") else "de"
+    # Artikel-Sprache aus erstem Absatz erkennen (Premium-Bilingual, auto)
+    probe_raw = ""
+    try:
+        probe_node = find_first(root, ".post-content") or find_first(root, "article")
+        if probe_node:
+            probe_raw = readable_text(probe_node)[:800]
+    except Exception:
+        probe_raw = ""
+    lang = detect_language(probe_raw, declared if declared in ("de", "en") else "de")
+    C = CUES.get(lang) or CUES["de"]
 
     out = []
 
-    # (1) Anmoderation
+    # (1) Anmoderation — sprachabhängig
     out.append({"lang": lang, "type": "intro",
                 "text": C["introLine"].replace("{title}", cfg.get("title", ""))
                                       .replace("{duration}", duration_phrase(cfg.get("readingTime"), C))})
@@ -1180,7 +1261,7 @@ def extract_blocks(root: Node, cfg: dict):
         spoken_blocks.append((el, speak_text))
         out.append({"lang": el_lang, "type": btype, "text": speak_text})
 
-    # (4) Abmoderation
+    # (4) Abmoderation — in Artikel-Sprache
     out.append({"lang": lang, "type": "outro", "text": C["outroLine"]})
 
     return [b for b in out if b.get("text") and len(b["text"]) > 1], lang
@@ -1203,19 +1284,17 @@ def read_reader_config(root: Node):
 
 
 def fingerprint(blocks, engine, profile, voice_de, voice_en=None):
-    """Inhalts-Fingerprint einer Tonspur.
+    """Inhalts-Fingerprint einer Tonspur — PREMIUM-BILINGUAL (12.09.2026).
 
-    NUR-DEUTSCH-VERTRAG: Der `voice_en`-Parameter ist nur
-    Signatur-Kompatibilität und wird ignoriert; die deutsche Stimme,
-    das Profil, die Rezept-Version (inkl. Wortuhr) und die Blockfolge
-    bestimmen den Fingerabdruck. Er ändert sich — die Spur wird neu
-    erzeugt.
+    `voice_en` ist jetzt erstklassig: ElevenLabs liefert eine Stimme
+    für beide Sprachen, Edge liefert Conrad (de) + Andrew/Brian (en).
+    Der Fingerabdruck deckt die Bilingual-Spur ab: Rezept-Version,
+    Engine, Profil, DE- plus EN-Stimme und die Blockfolge inkl. `lang`.
     """
-    del voice_en  # Nur-Deutsch-Vertrag: keine englische Stimme mehr.
     payload = {
         "recipe": ttb.RECIPE_VERSION,
         "engine": engine, "profile": profile,
-        "de": voice_de,
+        "de": voice_de, "en": voice_en,
         "blocks": [[b["type"], b["lang"], b["text"]] for b in blocks],
     }
     return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True)
@@ -1370,7 +1449,9 @@ def synth_article(blocks, engine, profile_name, tmp_dir, log, deadline=None):
 
     for bi, block in enumerate(blocks):
         profile = ttb.prosody_for(block["type"])
-        blang = "de"                                   # Nur-Deutsch-Vertrag
+        blang = (block.get("lang") or "de").lower()[:2]
+        if blang not in ("de", "en"):
+            blang = "de"
         spoken = ttb.normalize_speech(block["text"], blang)
         segments = ttb.split_for_speech(spoken, blang)
 
@@ -1724,9 +1805,9 @@ def main(argv=None) -> int:
     ap.add_argument("--html-dir", default="public")
     ap.add_argument("--out-dir", default=os.path.join("public", "audio", "articles"))
     ap.add_argument("--cache-dir", default="")
-    ap.add_argument("--backend", default="auto", choices=["auto", "edge", "piper"])
+    ap.add_argument("--backend", default="auto", choices=["auto", "elevenlabs", "edge", "piper"])
     ap.add_argument("--profile", default=ttb.DEFAULT_PROFILE, choices=sorted(ttb.VOICE_PROFILES.keys()),
-                    help="Stimmen-Profil — alle ausschließlich Deutsch (Standard: news)")
+                    help="Stimmen-Profil — ElevenLabs Premium (eleven) oder Edge-Fallback (news/natural/narrator), DE+EN ohne Umschalter")
     ap.add_argument("--order", default="newest", choices=["newest", "oldest", "path"])
     ap.add_argument("--limit-new", type=int, default=0)
     # ZEITBUDGET (Reparatur Issue #218, 08.09.2026)
@@ -1772,7 +1853,7 @@ def main(argv=None) -> int:
             marker = "  ← Voreinstellung" if name == ttb.DEFAULT_PROFILE else ""
             print("  Profil %-9s DE %-36s Stil %-9s%s"
                   % (name, prof["de"], prof.get("style") or "neutral", marker))
-        print("Sprache:              ausschließlich Deutsch (Nur-Deutsch-Vertrag)")
+        print("Sprache:              Premium-Bilingual DE+EN ohne Umschalter (eine Stimme)")
         print("Wortuhr (Leseanzeige): wird je Artikel mit erzeugt, wenn edge-tts Wortgrenzen liefert")
         print("ffmpeg:             %s" % ("ja" if ttb.has_ffmpeg() else "nein (WAV-Fallback)"))
         print("Audio-Dekoder:      %s" % (ttb.decoder_name() or "KEINER — edge-tts (MP3) unbrauchbar!"))
@@ -1833,7 +1914,7 @@ def main(argv=None) -> int:
         if not blocks:
             continue
 
-        fp = fingerprint(blocks, engine, profile, voices["de"])
+        fp = fingerprint(blocks, engine, profile, voices.get("de"), voices.get("en"))
         track_json = os.path.join(args.out_dir, slug + ".track.json")
 
         # Inkrementell: unveränderte Artikel 1:1 wiederverwenden
@@ -2233,19 +2314,31 @@ def selftest() -> int:
           sum(1 for t in p_text if "Jetzt Stromtarife vergleichen" in t) == 1)
     check("Keine doppelten Blocktexte", len(set(p_text)) == len(p_text))
 
-    # ---------- Nur-Deutsch-Vertrag (Befund 07.09.2026) ----------
-    check("Nur-Deutsch: Sprach-Erkennung liefert immer de",
-          detect_language("This is an English sample about insurance costs.", "en") == "de")
-    check("Nur-Deutsch: Satz-Sniffing liefert immer de",
-          sniff_sentence_lang("This sentence is clearly English.", "en") == "de")
-    check("Nur-Deutsch: kein englisches CUES-Set mehr", "en" not in CUES)
-    check("Nur-Deutsch: Blöcke tragen immer lang=de",
+    # ---------- Premium-Bilingual (12.09.2026): DE + EN ohne Umschalter ----------
+    check("Bilingual: Sprach-Erkennung de→de",
+          detect_language("Der Strompreis und das Gas sparen Euro pro Jahr.", "de") == "de")
+    check("Bilingual: Sprach-Erkennung en→en",
+          detect_language("This is an English sample about insurance costs and saving money.", "en") == "en")
+    check("Bilingual: Satz-Sniffing de→de",
+          sniff_sentence_lang("Der Service spart Geld im Tarif.", "de") == "de")
+    check("Bilingual: Satz-Sniffing en→en",
+          sniff_sentence_lang("This sentence is clearly English and saves money.", "en") == "en")
+    check("Bilingual: CUES hat de und en",
+          "de" in CUES and "en" in CUES)
+    check("Bilingual: Blöcke tragen je nach HTML lang (Pillar deutsch)",
           all(b["lang"] == "de" for b in p_blocks))
-    check("Nur-Deutsch: englisches Attribut kippt Block nicht",
-          all(b["lang"] == "de" for b in extract_blocks(
-              parse_html(FIXTURE.replace('<html lang="de">', '<html lang="en">')), cfg)[0]))
-    check("Nur-Deutsch: Aussprache folgt deutschem Regelwerk",
-          normalize_speech("about 20%") == "about 20 Prozent")
+    # EN-Nachweis: nimm einen klar englischen Mini-Artikel (sonst gewinnt die deutsche Heuristik)
+    en_mini = "<!doctype html><html lang=\"en\"><body><article class=\"post-content\"><p>This is an English sample about insurance costs and saving money every year.</p></article><script type=\"application/json\" id=\"ff-voice-config\">{\"title\":\"EN\",\"lang\":\"en\",\"readingTime\":2,\"description\":\"\"}</script></body></html>"
+    check("Bilingual: EN-HTML liefert en-Blöcke",
+          any(b["lang"] == "en" for b in extract_blocks(
+              parse_html(en_mini), read_reader_config(parse_html(en_mini)))[0]))
+    check("Bilingual: Aussprache de→deutsch (Prozent)",
+          ttb.normalize_speech("etwa 20%", "de") == "etwa 20 Prozent")
+    check("Bilingual: Aussprache en→englisch (percent, no Germanize)",
+          ttb.normalize_speech("about 20%", "en") == "about 20 percent")
+    check("Bilingual: Germanize nur de (Service→Sörwis nur de)",
+          "sörwis" in ttb.normalize_speech("Der Service ist gut.", "de").lower()
+          and "service" in ttb.normalize_speech("The service is good.", "en").lower())
 
     # ---------- Wortuhr: Aligner N→R ----------
     def _aligned(norm, raw):
@@ -2284,8 +2377,8 @@ def selftest() -> int:
     fp3 = fingerprint(blocks, "edge", "narrator", "de-DE-KillianNeural")
     check("Fingerprint stabil", fp1 == fp2)
     check("Fingerprint reagiert auf Stimme", fp1 != fp3)
-    check("Fingerprint: englische Stimme ist bedeutungslos (Nur-Deutsch)",
-          fp1 == fingerprint(blocks, "edge", "news", "de-DE-ConradNeural", "en-US-Irgendwas"))
+    check("Fingerprint: englische Stimme prägt Fingerprint (Bilingual)",
+          fp1 != fingerprint(blocks, "edge", "news", "de-DE-ConradNeural", "en-US-AndrewNeural"))
 
     # Injektion (idempotent)
     import tempfile
