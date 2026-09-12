@@ -20,10 +20,14 @@
 # ============================================================
 name: Social-Media-AI
 
+# AB 12.09.2026 MANUELLER NOTLAUF – der Zeitplan wurde bewusst entfernt.
+# Grund: Der Social-Autopilot (`.github/workflows/social-autopilot.yml`,
+# scripts/social_studio.py) veröffentlicht seitdem VOLLAUTOMATISCH auf allen
+# Kanälen – inklusive Mastodon, mit kanalnativen Texten, 14-Tage-Plan und
+# hartem Gate. Zwei Bots auf demselben Kanal wären Doppelposts.
+# Dieser Workflow bleibt als Handwerkzeug erhalten (z. B. um den Altbestand
+# mit --mark-all-posted zu markieren oder einen Einzel-Toot abzusetzen).
 on:
-  schedule:
-    - cron: "15 7 * * 1,3,5"    # 09:15 MESZ – Mo/Mi/Fr nach 08:10
-    - cron: "45 18 * * 1,3,5"   # 20:45 MESZ – Mo/Mi/Fr nach 19:40
   workflow_dispatch: {}
 
 permissions:

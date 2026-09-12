@@ -92,3 +92,8 @@ data/*.tmp-*
 # versendeten Artikel über Läufe hinweg, sonstbaute jeder zweite Lauf dieselbe
 # Rechnung noch einmal ein). Die gebauten Digeste bleiben Lauf-Artefakte: CI
 # schreibt nach /tmp, lokal nach public/ – beides schon ignoriert.
+
+# Social-Autopilot (12.09.2026): Cockpit ist ein Lauf-Artefakt (wie SOCIAL-STATUS.md),
+# Plan/Stand in data/social/ sind versioniert (Dedupe über Läufe hinweg!).
+/SOCIAL-AUTOPILOT-STATUS.md
+data/social/pinterest_boards_cache.json

@@ -1,0 +1,493 @@
+# ============================================================
+#  🛰️ SOCIAL-AUTOPILOT – KANAL-PLAYBOOK (Single Source of Truth)
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 12.09.2026): Der Blog soll VOLLAUTOMATISCH auf
+#  allen relevanten Social-Kanälen veröffentlichen – kanalgerecht
+#  aufbereitet, geplant und publiziert, ohne dass Frank noch etwas
+#  tun muss. Ausführung auf Premium-Niveau einer Profi-Agentur.
+#
+#  DIESE DATEI IST DIE EINZIGE WAHRHEIT FÜR:
+#    - scripts/social_studio.py        (Orchestrierung, Planung, Versand)
+#    - scripts/social_planner.py       (Rolling Redaktionsplan)
+#    - scripts/social_copywriter.py    (kanalnative Text-Fassung)
+#    - scripts/social_gate.py          (hartes Freigabe-Gate, fail-closed)
+#    - scripts/social_channels/*.py    (API-Adapter je Netzwerk)
+#    - scripts/social_images.py        (Format-Varianten der Cover)
+#
+#  GRUNDPRINZIPIEN (Agentur-Standard):
+#    1. JEDER Kanal bekommt seine EIGENE Fassung – nie ein Text für alle.
+#       (Zeichenbudget, Hashtag-Zahl, Tonalität, Bildformat, Link-Logik.)
+#    2. Kein Kanal postet ohne seine Zugangsdaten: fehlt ein Token, läuft
+#       der Kanal im Standby (sichtbar im Cockpit) – KEIN Fehler, KEIN Alarm.
+#    3. Erst planen, dann prüfen, dann senden. Der Plan ist versioniert
+#       (data/social/schedule.yaml) und damit nachvollziehbar.
+#    4. Evergreen-Recycling mit Sperrfrist: derselbe Artikel kommt auf
+#       demselben Kanal erst nach `recycle_cooldown_days` wieder – und
+#       dann mit einem ANDEREN inhaltlichen Winkel.
+#    5. Kein Affiliate-Link (/go/, a.check24.net) verlässt je den Blog:
+#       Social verlinkt ausschließlich kanonische Artikel-URLs mit UTM.
+#
+#  KANAL AKTIVIEREN: Secret ins Repo legen (Settings → Secrets and
+#  variables → Actions). Beim nächsten Lauf erkennt der Autopilot den
+#  Kanal automatisch – sonst nichts zu tun. Anleitung:
+#  ANLEITUNG-SOCIAL-AUTOPILOT.md
+# ============================================================
+
+version: 1
+
+meta:
+  timezone: "Europe/Berlin"
+  base_url: "https://franksfinanzcheck.de"
+  # Rolling-Plan: so viele Tage im Voraus wird geplant (Agentur-Default).
+  plan_horizon_days: 14
+  # Neuplanung, wenn weniger als X geplante Posten im Horizont liegen
+  # (schützt davor, dass ein einzelner Fehlversuch den Plan leert).
+  min_planned_items: 12
+  # Harte Tages-Obergrenze ÜBER ALLE Kanäle (Anti-Spam, Frequenzschutz).
+  max_posts_per_day_total: 12
+  # Artikel gelten so viele Tage nach Publikation als „neu“ und bekommen
+  # Priorität im Plan (Launch-Welle über alle Kanäle).
+  new_article_window_days: 10
+  # Sperrfrist für Evergreen-Recycling je Kanal (Default, je Kanal
+  # überschreibbar) – Agentur-Default 75 Tage.
+  recycle_cooldown_days: 75
+  # Wie stark sich zwei Postings auf demselben Kanal ähneln dürfen
+  # (Jaccard-Ähnlichkeit der Wortmengen). Darüber = Ablehnung.
+  similarity_threshold: 0.72
+  # Nach wie vielen Tagen ein fehlgeschlagener Post endgültig verworfen
+  # wird (danach neu eingeplant).
+  failure_retry_hours: 6
+  # KI-Politur (Hybrid): deterministischer Text ist IMMER möglich, die KI
+  # poliert ihn nur – ohne Key oder bei Gate-Verstoß gilt die Vorlage.
+  llm:
+    mode: "auto"                 # auto | llm | off
+    providers: ["groq", "gemini"]  # NUR Gratis-Zugänge (Kosten-Regel)
+    max_per_run: 6
+    temperature: 0.5
+    max_tokens: 900
+  utm:
+    medium: "social"
+    campaign: "autopilot"
+  link:
+    # Diese Muster dürfen in KEINEM Social-Text auftauchen (Affiliate).
+    forbid:
+      - "/go/"
+      - "a.check24.net"
+      - "check24.net/misc"
+      - "bit.ly"
+      - "tinyurl.com"
+      - "t.co/"
+    require_trailing_slash: true
+  gate:
+    # Harte Sperrliste: Phrasen, die Reichweite und Seriosität kosten.
+    forbidden_phrases:
+      - "In der heutigen schnelllebigen Welt"
+      - "Es ist wichtig zu beachten"
+      - "Zusammenfassend lässt sich sagen"
+      - "Des Weiteren"
+      - "Tauchen wir ein"
+      - "Der Schlüssel zum Erfolg"
+      - "In diesem Ratgeber zeige ich dir"
+      - "Achtung, geheimer Trick"
+    # Versprechen, die rechtlich oder redaktionell nicht tragbar sind.
+    blocked_terms:
+      - "garantiert"
+      - "risikofrei"
+      - "schnell reich"
+      - "ohne Risiko"
+      - "zu 100 % sicher"
+    # Mindestlänge eines Social-Textes (zu kurz = kein Mehrwert).
+    min_chars: 60
+    # Maximaler Anteil Großbuchstaben-Wörter (Shouting).
+    max_shouting_ratio: 0.12
+
+# ============================================================================
+#  KANÄLE
+#  ----------------------------------------------------------------------------
+#  kinds: microblog (Kurztext) · business (Fachpublikum) · community
+#         (Reddit) · visual (Bild first) · messenger (Telegram) · pin (Pinterest)
+# ============================================================================
+channels:
+
+  # ------------------------------------------------------------------ Mastodon
+  mastodon:
+    label: "Mastodon"
+    adapter: "mastodon"
+    kind: "microblog"
+    enabled: true
+    priority: 1
+    profile: "https://mastodon.social/@FranksFinanzcheck"
+    secrets: ["MASTODON_ACCESS_TOKEN"]
+    vars: ["MASTODON_INSTANCE"]
+    text:
+      max_chars: 500                       # Mastodon-Standard (500 Zeichen)
+      hashtags: {min: 2, max: 4, style: "camel", max_len: 20}
+      emoji_max: 2
+      link_position: "end"                 # end | first_comment | none
+      link_required: true
+      thread: {supported: true, max_parts: 5}
+    media:
+      supported: true
+      required: false
+      variant: null
+      alt_required: true
+      alt_max_chars: 1400
+    cadence:
+      days: [0, 1, 2, 3, 4, 5, 6]
+      times: ["07:30", "11:30", "17:30", "20:00"]
+      max_per_day: 2
+      min_gap_min: 180
+      recycle_cooldown_days: 75
+      launch_delay_hours: 1                # Erstpost X Stunden nach Artikel-Livegang
+    tone: >
+      Fediverse-Stil: sachlich, hilfsbereit, kein Marketing-Deutsch. Erste
+      Zeile trägt den Nutzen, dann der Beleg (Zahl oder konkreter Handgriff),
+      dann der Link. Hashtags sind auf Mastodon das Suchsystem – lieber zwei
+      treffsichere Begriffe als vier Allgemeinplätze.
+    angles: ["nutzen", "zahl", "takeaway", "frage", "mythos", "zitat", "vergleich", "thread"]
+    notes: "Token läuft NICHT ab. Scopes: write:statuses, write:media."
+
+  # ------------------------------------------------------------------ Bluesky
+  bluesky:
+    label: "Bluesky"
+    adapter: "bluesky"
+    kind: "microblog"
+    enabled: true
+    priority: 2
+    profile: "https://bsky.app/profile/franksfinanzcheck.de"
+    secrets: ["BLUESKY_IDENTIFIER", "BLUESKY_APP_PASSWORD"]
+    vars: ["BLUESKY_PDS"]
+    text:
+      max_chars: 300                       # 300 Graphem – URL zählt voll mit
+      hashtags: {min: 1, max: 2, style: "camel", max_len: 20}
+      emoji_max: 1
+      link_position: "end"
+      link_required: true
+      thread: {supported: true, max_parts: 4}
+    media:
+      supported: true
+      required: false
+      variant: null
+      alt_required: true
+      alt_max_chars: 900
+    cadence:
+      days: [0, 1, 2, 3, 4, 5, 6]
+      times: ["08:15", "12:15", "18:15"]
+      max_per_day: 2
+      min_gap_min: 240
+      recycle_cooldown_days: 75
+      launch_delay_hours: 4
+    tone: >
+      Kurz und präzise – Bluesky belohnt Dichte. Ein Gedanke, eine Zahl,
+      ein Link. Keine Emoji-Ketten, keine Aufzählungs-Friedhöfe. Hashtags
+      sparsam (Suche läuft primär über Text).
+    angles: ["nutzen", "zahl", "takeaway", "frage", "mythos", "zitat", "vergleich"]
+    notes: "App-Passwort (kein Account-Passwort!) unter Einstellungen → App-Passwörter."
+
+  # ------------------------------------------------------------------ LinkedIn
+  linkedin:
+    label: "LinkedIn"
+    adapter: "linkedin"
+    kind: "business"
+    enabled: true
+    priority: 3
+    profile: "https://www.linkedin.com/"
+    secrets: ["LINKEDIN_ACCESS_TOKEN"]
+    vars: ["LINKEDIN_PERSON_URN", "LINKEDIN_ORG_URN"]
+    text:
+      max_chars: 2900                      # Profi-Fenster: 1300–1800 lesen sich am besten
+      soft_max_chars: 1800
+      hashtags: {min: 3, max: 5, style: "camel", max_len: 24}
+      emoji_max: 0
+      link_position: "first_comment"       # Reichweiten-Standard der Agenturen
+      link_required: true
+      thread: {supported: false, max_parts: 1}
+    media:
+      supported: true
+      required: false
+      variant: null
+      alt_required: false
+      alt_max_chars: 0
+    cadence:
+      days: [0, 1, 2, 3, 4]                # Werktage: Di–Do performen am besten
+      times: ["07:45", "11:45"]
+      max_per_day: 1
+      min_gap_min: 600
+      recycle_cooldown_days: 90
+      launch_delay_hours: 20
+    tone: >
+      Business-Ton, Du-Form, keine Emojis. Erste Zeile entscheidet (vor dem
+      „mehr anzeigen“): These oder Zahl, maximal 12 Wörter. Dann 3–5 kurze
+      Absätze mit Luft, ein bis drei Aufzählungspunkte, am Ende eine echte
+      Frage. Der Link wandert in den ersten Kommentar.
+    angles: ["nutzen", "zahl", "takeaway", "frage", "vergleich", "zitat"]
+    notes: "Token läuft nach ~60 Tagen ab; die Secrets-Wache meldet die Erneuerung."
+
+  # ------------------------------------------------------------------ X
+  x:
+    label: "X (Twitter)"
+    adapter: "x"
+    kind: "microblog"
+    enabled: true
+    priority: 4
+    profile: "https://x.com/"
+    secrets: ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_SECRET"]
+    vars: []
+    text:
+      max_chars: 280                       # Standard-Account (ohne Premium)
+      link_weight: 23                      # X zählt jeden Link mit 23 Zeichen (t.co)
+      hashtags: {min: 1, max: 2, style: "camel", max_len: 20}
+      emoji_max: 1
+      link_position: "end"
+      link_required: true
+      thread: {supported: true, max_parts: 5}
+    media:
+      supported: true
+      required: false
+      variant: null
+      alt_required: true
+      alt_max_chars: 1000
+    cadence:
+      days: [0, 1, 2, 3, 4, 5, 6]
+      times: ["08:45", "13:15", "19:15"]
+      max_per_day: 3
+      min_gap_min: 120
+      recycle_cooldown_days: 60
+      launch_delay_hours: 6
+    tone: >
+      Härteste Zeichenökonomie: eine Behauptung, ein Beleg, ein Link. Kein
+      Füllwort. Hashtags maximal zwei – X gewichtet Text stärker als Tags.
+    angles: ["nutzen", "zahl", "takeaway", "frage", "mythos", "thread"]
+    notes: "Kostenpflichtige API – Kanal bleibt automatisch im Standby, solange die vier Secrets fehlen."
+
+  # ------------------------------------------------------------------ Threads
+  threads:
+    label: "Threads"
+    adapter: "threads"
+    kind: "microblog"
+    enabled: true
+    priority: 5
+    profile: "https://www.threads.net/"
+    secrets: ["THREADS_ACCESS_TOKEN"]
+    vars: ["THREADS_USER_ID"]
+    text:
+      max_chars: 500
+      hashtags: {min: 1, max: 2, style: "camel", max_len: 20}
+      emoji_max: 1
+      link_position: "end"
+      link_required: true
+      thread: {supported: true, max_parts: 4}
+    media:
+      supported: true
+      required: false
+      variant: null
+      alt_required: true
+      alt_max_chars: 1000
+    cadence:
+      days: [0, 1, 2, 3, 4, 5, 6]
+      times: ["09:15", "16:15", "20:30"]
+      max_per_day: 2
+      min_gap_min: 180
+      recycle_cooldown_days: 75
+      launch_delay_hours: 5
+    tone: >
+      Persönlicher als X, sachlicher als Instagram. Kurzer Aufhänger, dann
+      der konkrete Tipp. Ein Hashtag genügt (Threads gewichtet ihn stärker).
+    angles: ["nutzen", "zahl", "takeaway", "frage", "mythos", "vergleich"]
+    notes: "Threads-API über eine Meta-App; Long-Lived-Token (~60 Tage) erneuert die Token-Wache."
+
+  # ------------------------------------------------------------------ Facebook
+  facebook:
+    label: "Facebook (Seite)"
+    adapter: "facebook"
+    kind: "business"
+    enabled: true
+    priority: 6
+    profile: "https://www.facebook.com/"
+    secrets: ["FACEBOOK_PAGE_TOKEN"]
+    vars: ["FACEBOOK_PAGE_ID"]
+    text:
+      max_chars: 1200
+      soft_max_chars: 480                  # optimal: 1–3 Sätze + Link-Vorschau
+      hashtags: {min: 1, max: 3, style: "camel", max_len: 24}
+      emoji_max: 1
+      link_position: "end"
+      link_required: true
+      thread: {supported: false, max_parts: 1}
+    media:
+      supported: true
+      required: false
+      variant: null
+      alt_required: false
+      alt_max_chars: 0
+    cadence:
+      days: [0, 1, 2, 3, 4, 5, 6]
+      times: ["09:45", "15:15", "19:45"]
+      max_per_day: 2
+      min_gap_min: 240
+      recycle_cooldown_days: 90
+      launch_delay_hours: 8
+    tone: >
+      Erzählend, alltagsnah, eine Frage am Ende (Kommentare sind die
+      Reichweiten-Währung). Der Link erzeugt eine Vorschau – deshalb
+      Text DAVOR kurz halten.
+    angles: ["nutzen", "zahl", "takeaway", "frage", "vergleich"]
+    notes: "Benötigt eine Facebook-SEITE und einen nicht ablaufenden Seiten-Token."
+
+  # ------------------------------------------------------------------ Instagram
+  instagram:
+    label: "Instagram"
+    adapter: "instagram"
+    kind: "visual"
+    enabled: true
+    priority: 7
+    profile: "https://www.instagram.com/"
+    secrets: ["INSTAGRAM_ACCESS_TOKEN"]
+    vars: ["INSTAGRAM_ACCOUNT_ID"]
+    text:
+      max_chars: 2200
+      soft_max_chars: 900
+      hashtags: {min: 5, max: 12, style: "camel", max_len: 24}
+      emoji_max: 3
+      link_position: "none"                # IG-Captions: keine klickbaren Links
+      link_required: false
+      thread: {supported: false, max_parts: 1}
+    media:
+      supported: true
+      required: true                       # OHNE Bild kein Instagram-Post
+      variant: "4:5"                       # 1080×1350 – bester Feed-Ratio
+      alt_required: true
+      alt_max_chars: 900
+    cadence:
+      days: [0, 1, 2, 3, 4, 5, 6]
+      times: ["11:45", "18:45"]
+      max_per_day: 1
+      min_gap_min: 720
+      recycle_cooldown_days: 90
+      launch_delay_hours: 12
+    tone: >
+      Bild first: die Caption erklärt, was das Bild zeigt, und liefert den
+      Nutzen in den ersten 125 Zeichen (der Rest ist hinter „mehr“).
+      Hashtag-Block am Ende, CTA „Link in der Bio“.
+    angles: ["nutzen", "zahl", "takeaway", "frage", "mythos", "karussell"]
+    notes: "Business-/Creator-Account + Facebook-Seite nötig; Bild-URL muss öffentlich erreichbar sein."
+
+  # ------------------------------------------------------------------ Pinterest
+  pinterest:
+    label: "Pinterest"
+    adapter: "pinterest"
+    kind: "pin"
+    enabled: true
+    priority: 8
+    profile: "https://www.pinterest.de/franksfinanzcheck/"
+    secrets: ["PINTEREST_TOKEN_KEY"]
+    vars: ["PINTEREST_BOARD_ID"]
+    text:
+      max_chars: 500                       # Pin-Beschreibung (Titel separat ≤ 100)
+      title_max_chars: 100
+      hashtags: {min: 2, max: 5, style: "camel", max_len: 20}
+      emoji_max: 0
+      link_position: "end"
+      link_required: true
+      thread: {supported: false, max_parts: 1}
+    media:
+      supported: true
+      required: true
+      variant: null                        # Cover ist bereits 2:3 (Pinterest-Format)
+      alt_required: false
+      alt_max_chars: 0
+    cadence:
+      days: [0, 1, 2, 3, 4, 5, 6]
+      times: ["10:15", "21:15"]
+      max_per_day: 1
+      min_gap_min: 480
+      recycle_cooldown_days: 120
+      launch_delay_hours: 2
+    # Pinterest bekommt NUR Artikel, die mindestens so alt sind – die
+    # Erstverpinnung bleibt bewusst bei pinterest_engine.py (hart erprobte
+    # Anti-Spam-Logik). Der Autopilot übernimmt die REFRESH-Pins.
+    min_article_age_days: 45
+    tone: >
+      Suchmaschinen-Ton statt Social-Ton: Titel mit Keyword vorn,
+      Beschreibung mit Nutzen, konkreter Zahl und Handlungsaufforderung.
+      Pinterest rankt über Begriffe – keine Umgangssprache.
+    angles: ["nutzen", "zahl", "takeaway", "vergleich"]
+    notes: "Token-Broker (pinterest_token.py) erneuert automatisch; Erst-Pins: pinterest-ai.yml."
+
+  # ------------------------------------------------------------------ Telegram
+  telegram:
+    label: "Telegram (Kanal)"
+    adapter: "telegram"
+    kind: "messenger"
+    enabled: true
+    priority: 9
+    profile: "https://t.me/"
+    secrets: ["TELEGRAM_BOT_TOKEN"]
+    vars: ["TELEGRAM_CHAT_ID"]
+    text:
+      max_chars: 4096
+      soft_max_chars: 700
+      hashtags: {min: 1, max: 3, style: "camel", max_len: 20}
+      emoji_max: 2
+      link_position: "end"
+      link_required: true
+      thread: {supported: false, max_parts: 1}
+      markup: "html"                       # <b>, <i>, <a href>
+    media:
+      supported: true
+      required: false
+      variant: null
+      alt_required: false
+      alt_max_chars: 0
+    cadence:
+      days: [0, 1, 2, 3, 4, 5, 6]
+      times: ["07:00", "18:00"]
+      max_per_day: 2
+      min_gap_min: 300
+      recycle_cooldown_days: 120
+      launch_delay_hours: 0                # Abonnenten lesen zuerst
+    tone: >
+      Nachrichten-Stil: Kopfzeile fett, zwei bis drei Sätze, ein bis drei
+      Aufzählungen, dann der Link. Telegram-Abonnenten wollen Tempo, keine
+      Einleitung.
+    angles: ["nutzen", "zahl", "takeaway", "frage", "vergleich"]
+    notes: "Bot mit Admin-Rechten im Kanal; Chat-ID z. B. @franksfinanzcheck oder -100…"
+
+  # ------------------------------------------------------------------ Reddit
+  reddit:
+    label: "Reddit"
+    adapter: "reddit"
+    kind: "community"
+    enabled: true
+    priority: 10
+    profile: "https://www.reddit.com/"
+    secrets: ["REDDIT_CLIENT_ID", "REDDIT_CLIENT_SECRET", "REDDIT_USERNAME", "REDDIT_PASSWORD"]
+    vars: ["REDDIT_SUBREDDIT"]
+    text:
+      max_chars: 40000
+      title_max_chars: 300
+      soft_max_chars: 900
+      hashtags: {min: 0, max: 0, style: "camel", max_len: 0}
+      emoji_max: 0                         # Reddit hasst Emoji-Marketing
+      link_position: "end"
+      link_required: true
+      thread: {supported: false, max_parts: 1}
+    media:
+      supported: false
+      required: false
+      variant: null
+      alt_required: false
+      alt_max_chars: 0
+    cadence:
+      days: [0, 1, 2, 3, 4, 5, 6]
+      times: ["14:15"]
+      max_per_day: 1
+      min_gap_min: 1440                    # maximal EIN Beitrag pro Tag
+      recycle_cooldown_days: 180
+      launch_delay_hours: 72               # nie am Erscheinungstag – Selbstpromo-Schutz
+    tone: >
+      Community-Regel Nr. 1: kein Marketing. Beitrag als Erfahrungsbericht
+      mit Zahlen, offenlegen, dass es der eigene Ratgeber ist, keine
+      Hashtags, keine Emojis, keine Werbesprache.
+    angles: ["nutzen", "zahl", "takeaway"]
+    notes: "Standardmäßig aufs eigene Profil (u/<user>) – sicher; Subreddits nur mit deren Regeln."

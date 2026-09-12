@@ -13,6 +13,18 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 > Content-Engine v2 + ihre Gates. Vollständige Anleitung & Feature-Parität:
 > **[`AGC-AUTOPILOT.md`](AGC-AUTOPILOT.md)** · Orchestrator: `python3 scripts/autopilot.py --run`.
 
+> 🛰️ **Neu: Social-Autopilot (12.09.2026):** Der Blog bewirbt sich ab jetzt
+> **vollautomatisch auf bis zu 10 Social-Kanälen** – Mastodon, Bluesky, LinkedIn,
+> X, Threads, Facebook, Instagram, Pinterest, Telegram und Reddit. Jeder Kanal
+> bekommt seine **eigene** Fassung (Zeichenlimit, Hashtags, Tonalität, Link-Logik,
+> Bildformat), geplant über 14 Tage mit Evergreen-Recycling, geprüft von einem
+> harten 10-Punkte-Gate (nie ein Affiliate-Link, nie eine erfundene Zahl, nie ein
+> Duplikat). **Zu tun: nur einmalig die Tokens hinterlegen** – danach keine
+> Planung, keine Textarbeit, kein Terminieren mehr. Vollständige Anleitung:
+> **[`ANLEITUNG-SOCIAL-AUTOPILOT.md`](ANLEITUNG-SOCIAL-AUTOPILOT.md)** ·
+> Orchestrator: `python3 scripts/social_studio.py --run` ·
+> Kanal-Playbook: `data/social/channels.yaml` · Cockpit: `SOCIAL-AUTOPILOT-STATUS.md`.
+
 ---
 
 ## 📋 Was ist enthalten
@@ -25,6 +37,7 @@ Ein **kostenloser**, SEO-optimierter Blog mit **automatischer Content-Versorgung
 | Themenpool | `data/topics.yaml` – 175 Themen über alle 6 Pillars (repariert & erweitert 13.08.2026; bei 2–3 Artikeln an Mo/Mi/Fr reicht der Pool über ein halbes Jahr), inkl. themenspezifischer CHECK24-Links |
 | 🤖 Content-Bot | `scripts/generate_drafts.py` – erzeugt an Publikationstagen (Mo/Mi/Fr) frische, einzigartige Artikel-Entwürfe (Titel, Meta-Description, Keywords, strukturiertes Markdown, FAQ, Affiliate-CTA) |
 | ⏰ Publikations-Job | `.github/workflows/content-engine-v2.yml` – Mo/Mi/Fr 08:10 MESZ (Fallback 16:10 / 19:40) |
+| 🛰️ Social-Autopilot | `.github/workflows/social-autopilot.yml` – alle 2 Stunden; postet, textet, plant und prüft für 10 Kanäle (`scripts/social_studio.py`) |
 | 🚀 Deployment | `.github/workflows/deploy.yml` – baut & veröffentlicht kostenlos auf GitHub Pages |
 | 📤 Publish-Helfer | `scripts/publish.py` – Entwürfe mit einem Befehl veröffentlichen |
 
@@ -470,6 +483,60 @@ Regelwerk maschinenlesbar: `docs/GOVERNANCE-KONTRAKT.md`.
 > Klicks. Awin bleibt CSV-basiert: Export nach `data/awin_transactions.csv` legen,
 > `python3 scripts/awin_provisions.py` (bzw. `--gen-subid-map` für die SubID-Zuordnung)
 > läuft im gleichen Workflow.
+
+## 🛰️ Social-Autopilot – vollautomatische Social-Media-Redaktion (12.09.2026)
+
+Der Blog schreibt und veröffentlicht nicht nur selbst – er **bewirbt** sich auch selbst.
+Der Social-Autopilot übernimmt die komplette Social-Media-Redaktion: **Planung,
+Content-Erstellung, Freigabe und Veröffentlichung** – kanalgerecht, rund um die Uhr.
+
+| Stufe | Baustein | Leistung |
+|---|---|---|
+| **Planen** | `scripts/social_planner.py` | 14-Tage-Plan: **Launch-Welle** für neue Artikel über alle Kanäle + **Evergreen-Recycling** mit Sperrfrist (60–120 Tage) und neuem Winkel. Versioniert in `data/social/schedule.yaml` |
+| **Texten** | `scripts/social_copywriter.py` | Pro Kanal eine **eigene Fassung** aus Artikel-Material (Kurzantwort, „Das Wichtigste in Kürze", Euro-Zahlen, FAQ). 9 Winkel (Nutzen, Zahl, Takeaway, Frage, Mythos, Zitat, Vergleich, Thread, Karussell) |
+| **Polieren** | `llm_client` (Groq/Gemini) | Optionaler KI-Schliff – **fail-safe**: ohne Key oder bei Regelverstoß gilt die deterministische Vorlage |
+| **Prüfen** | `scripts/social_gate.py` | 10 harte Regeln, fail-closed: Länge (Plattform-Zählung, X-Link = 23 Zeichen), **kein `/go/`-Affiliate-Link**, keine unzässlichen Versprechen, Hashtags, Emoji-Budget, Sprache, Spam, Duplikat-Schutz, Fakten-Treue, Bildpflicht |
+| **Bild** | `scripts/social_images.py` | Kanalgenaue Formate (Instagram 4:5 / 1080×1350) – und der Beitrag wartet, bis die URL live ist |
+| **Senden** | `scripts/social_channels/` | Ein Adapter je Netzwerk (OAuth, AT-Protokoll, Graph-API, Bot-API) – mit Wiederholversuchen und Protokoll |
+| **Berichten** | Cockpit | `SOCIAL-AUTOPILOT-STATUS.md` + Job-Zusammenfassung: Kanäle, nächste Beiträge, Fehler |
+
+**Kanalkriterien sind keine Nebensache, sondern die Regel** – sie stehen als
+Single Source of Truth in `data/social/channels.yaml`:
+
+| Kanal | Zeichen | Hashtags | Bild | Taktung | Token |
+|---|---:|---:|---|---|---|
+| Mastodon | 500 | 2–4 | Alt-Text | 2/Tag | **läuft nie ab** |
+| Bluesky | 300 | 1–2 | Alt-Text | 2/Tag | App-Passwort |
+| LinkedIn | 2.900 | 3–5 | optional | 1/Tag (Mo–Fr) | ~60 Tage |
+| X (Twitter) | 280 | 1–2 | optional | 3/Tag | tarifabhängig |
+| Threads | 500 | 1–2 | optional | 2/Tag | ~60 Tage |
+| Facebook | 1.200 | 1–3 | optional | 2/Tag | Seitentoken |
+| Instagram | 2.200 | 5–12 | **4:5 Pflicht** | 1/Tag | ~60 Tage |
+| Pinterest | 500 | 2–5 | **2:3 Pflicht** | 1/Tag | Broker erneuert automatisch |
+| Telegram | 4.096 | 1–3 | optional | 2/Tag | Bot-Token |
+| Reddit | 40.000 | 0 | – | **1/Tag** | Passwort-App |
+
+**Betriebsphilosophie (wie bei allen Wachen dieses Blogs):**
+
+* Fehlendes Token = **Standby**, kein Fehler, kein Alarm (Cockpit zeigt es).
+* Ein Text, der durchs Gate fällt, bekommt **automatisch einen anderen Winkel**;
+  erst nach 3 Fehlversuchen gilt ein Senden als gescheitert.
+* Nur ein **Vollausfall** (≥ 3 Fehler, kein Erfolg) färbt den Lauf rot → Alarmierung greift.
+* Der Selbsttest (`python3 scripts/social_studio.py --selftest`) ist in den
+  **Governance-Vertrag (C6)** und in die **Publikations-Regressionstests** eingehängt.
+
+```bash
+python3 scripts/social_studio.py --run --dry-run          # Probelauf: zeigt alles, sendet nichts
+python3 scripts/social_studio.py --run --channel mastodon # nur ein Kanal
+python3 scripts/social_studio.py --status                 # Kanallage + Cockpit schreiben
+python3 scripts/social_studio.py --selftest               # fail-closed Gesundheitsprüfung
+```
+
+Einrichtung (einmalig, ~5 Minuten je Kanal) und alle Details:
+**[`ANLEITUNG-SOCIAL-AUTOPILOT.md`](ANLEITUNG-SOCIAL-AUTOPILOT.md)**.
+Arbeitsteilung: **Erst-Pins** bleiben bei `pinterest-engine` (`pinterest-ai.yml`),
+die **Toot-Pflege** bei `mastodon-seo.yml`; der alte `social-ai.yml`-Zeitplan wurde
+zugunsten des Autopiloten entfernt (Doppelpost-Schutz).
 
 ## 🚀 In 15 Minuten live
 
