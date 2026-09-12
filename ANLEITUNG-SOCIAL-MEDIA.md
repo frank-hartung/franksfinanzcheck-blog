@@ -1,5 +1,15 @@
 # ANLEITUNG: Social-Media-Automatisierung (Mastodon & LinkedIn)
 
+> 🛰️ **WICHTIG (12.09.2026): Diese Anleitung ist ABGELÖST.**
+> Die automatische Veröffentlichung auf Social Media übernimmt jetzt der
+> **Social-Autopilot** mit 10 Kanälen, kanalnativen Texten, 14-Tage-Plan und
+> hartem Qualitäts-Gate: **[`ANLEITUNG-SOCIAL-AUTOPILOT.md`](ANLEITUNG-SOCIAL-AUTOPILOT.md)**.
+> Der hier beschriebene Workflow `social-ai.yml` hat **keinen Zeitplan mehr**
+> (Schutz vor Doppelposts) und dient nur noch als **manueller Notlauf**
+> (z. B. `--mark-all-posted`, Einzel-Toot). Die Profil-Pflege
+> (`mastodon-profile-sync.yml`) und die Toot-Nachbesserung (`mastodon-seo.yml`)
+> bleiben unverändert sinnvoll und aktiv.
+
 Postet neue Artikel automatisch auf Social Media – mit Titel, Kurzantwort-Hook,
 Link, Cover-Bild (Mastodon) und Hashtags aus deinen Artikel-Tags.
 

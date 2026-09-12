@@ -77,7 +77,9 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "pinterest_perf_feedback.py", "pinterest_token.py", "pinterest_auth.py",
           "schema_seo_gate.py", "generate_pwa_icons.py", "report_hygiene.py",
           "live_policy_guard.py", "draft_triage.py", "check_uniqueness.py",
-          "audio_coverage_check.py", "newsletter_digest.py"]
+          "audio_coverage_check.py", "newsletter_digest.py",
+          # Social-Autopilot: der fail-closed Selbsttest der Kanallogik
+          "social_studio.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.

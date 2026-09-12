@@ -1,0 +1,199 @@
+# ============================================================
+#  SOCIAL-AUTOPILOT – vollautomatische Social-Media-Redaktion
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 12.09.2026): Der Blog veröffentlicht künftig
+#  VOLLAUTOMATISCH auf allen angebundenen Social-Kanälen – kanalgerecht
+#  aufbereitet, geplant und versendet. Kein manueller Schritt:
+#  keine Themensuche, keine Textarbeit, kein Terminieren.
+#
+#  WAS DER LAUF TUT (scripts/social_studio.py):
+#    1 Planen   14-Tage-Plan (Launch-Welle + Evergreen-Recycling)
+#    2 Bauen    je Kanal eine EIGENE Fassung (Zeichenlimit, Hashtags,
+#               Tonalität, Link-Position, Bildformat)
+#    3 Prüfen   hartes Gate: Länge, Link-Hygiene (nie /go/), Recht,
+#               Hashtags, Emojis, Sprache, Duplikate, Fakten-Treue
+#    4 Senden   über den Kanal-Adapter; Scheitern → bis zu 3 Versuche
+#    5 Bericht  Cockpit SOCIAL-AUTOPILOT-STATUS.md + State fortschreiben
+#
+#  TAKTUNG: alle 2 Stunden (05:20–19:20 UTC). Der Planer entscheidet
+#  anhand der Berliner Ortszeit, welcher Slot dran ist – dadurch
+#  funktioniert die Taktung sommers wie winters (MESZ/MEZ) ohne
+#  Cron-Änderung. Verpasste Slots werden beim nächsten Lauf nachgeholt.
+#
+#  KANAL EINRICHTEN: einfach das passende Secret hinterlegen
+#  (Settings → Secrets and variables → Actions). Beim nächsten Lauf
+#  erkennt der Autopilot den Kanal von selbst. Fehlt ein Secret, läuft
+#  der Kanal im Standby – sichtbar im Cockpit, OHNE Fehlalarm.
+#  Anleitung: ANLEITUNG-SOCIAL-AUTOPILOT.md
+#
+#  Manuell: Actions → „Social-Autopilot" → Run workflow
+# ============================================================
+name: Social-Autopilot
+
+on:
+  schedule:
+    # Alle 2 Stunden von 05:20 bis 19:20 UTC (≈ 07:20–21:20 MESZ)
+    - cron: "20 5,7,9,11,13,15,17,19 * * *"
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: "Was soll der Lauf tun?"
+        required: true
+        default: "run"
+        type: choice
+        options:
+          - run        # plant bei Bedarf neu und sendet fällige Beiträge
+          - plan       # erneuert nur den 14-Tage-Plan (sendet nichts)
+          - dry-run    # zeigt die Beiträge, sendet nichts
+          - status     # schreibt nur das Cockpit neu
+      kanal:
+        description: "Nur dieser Kanal (leer = alle), z. B. mastodon"
+        required: false
+        default: ""
+      limit:
+        description: "Maximal so viele Beiträge in diesem Lauf (0 = alle fälligen)"
+        required: false
+        default: "0"
+      force:
+        description: "Auch Kanäle ohne gültiges Token versuchen (nur zum Testen)"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: social-autopilot
+  cancel-in-progress: false
+
+jobs:
+  autopilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten installieren
+        run: |
+          python3 -m pip install -q --disable-pip-version-check pyyaml pillow \
+            || python3 -m pip install -q --break-system-packages pyyaml pillow
+
+      # Fail-closed: Eine blinde Wache postet nichts. Der Selbsttest
+      # prüft Kanäle, Zeichenlimits, Gate-Fälle, Duplikat-Schutz,
+      # Planungsregeln und die Standby-Regel.
+      - name: Selbsttest (fail-closed)
+        run: python3 scripts/social_studio.py --selftest
+
+      - name: Plan erneuern / Status schreiben
+        if: ${{ github.event.inputs.modus == 'plan' || github.event.inputs.modus == 'status' }}
+        run: |
+          if [ "${{ github.event.inputs.modus }}" = "plan" ]; then
+            python3 scripts/social_studio.py --plan
+          else
+            python3 scripts/social_studio.py --status
+          fi
+
+      - name: Autopilot-Lauf (planen · texten · prüfen · senden)
+        if: ${{ github.event.inputs.modus == 'run' || github.event.inputs.modus == 'dry-run' || github.event_name == 'schedule' }}
+        env:
+          # --- Mastodon -----------------------------------------------------
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+          # --- Bluesky ------------------------------------------------------
+          BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          BLUESKY_PDS: ${{ vars.BLUESKY_PDS }}
+          # --- LinkedIn -----------------------------------------------------
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_PERSON_URN: ${{ vars.LINKEDIN_PERSON_URN }}
+          LINKEDIN_ORG_URN: ${{ vars.LINKEDIN_ORG_URN }}
+          # --- X (Twitter) --------------------------------------------------
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          # --- Threads ------------------------------------------------------
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_USER_ID: ${{ vars.THREADS_USER_ID }}
+          # --- Facebook -----------------------------------------------------
+          FACEBOOK_PAGE_TOKEN: ${{ secrets.FACEBOOK_PAGE_TOKEN }}
+          FACEBOOK_PAGE_ID: ${{ vars.FACEBOOK_PAGE_ID }}
+          # --- Instagram ----------------------------------------------------
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ vars.INSTAGRAM_ACCOUNT_ID }}
+          # --- Pinterest (Token-Broker erneuert automatisch) ----------------
+          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_BOARD_ID: ${{ vars.PINTEREST_BOARD_ID }}
+          # --- Telegram -----------------------------------------------------
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ vars.TELEGRAM_CHAT_ID }}
+          # --- Reddit -------------------------------------------------------
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+          REDDIT_SUBREDDIT: ${{ vars.REDDIT_SUBREDDIT }}
+          # --- Steuerung ----------------------------------------------------
+          SOCIAL_COPY_MODE: ${{ vars.SOCIAL_COPY_MODE }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          ARGS="--run"
+          [ "${{ github.event.inputs.modus }}" = "dry-run" ] && ARGS="$ARGS --dry-run"
+          [ -n "${{ github.event.inputs.kanal }}" ] && ARGS="$ARGS --channel ${{ github.event.inputs.kanal }}"
+          [ -n "${{ github.event.inputs.limit }}" ] && ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"
+          [ "${{ github.event.inputs.force }}" = "true" ] && ARGS="$ARGS --force"
+          echo "Aufruf: python3 scripts/social_studio.py $ARGS"
+          python3 scripts/social_studio.py $ARGS
+
+      # Nachweis für die Secrets-Wache, dass der Mastodon-Kanal lebt – als
+      # echte LIVE-Probe (verify_credentials antwortet 200). Bewusst die
+      # Probe und nicht `--record-success`: eine fremde Erfolgsmeldung gilt
+      # der Wache nur als „declared" und würde einen bewiesenen Kanal
+      # schlechter stellen, als er ist (Governance-Regel C5/C13).
+      - name: Mastodon-Secret live verifizieren
+        if: success()
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+        run: |
+          if [ -n "${MASTODON_ACCESS_TOKEN:-}" ]; then
+            python3 scripts/secrets_age_guard.py --verify-only MASTODON_ACCESS_TOKEN --quiet \
+              || echo "::warning::Mastodon-Token live nicht bestätigt – die Secrets-Wache meldet das."
+          fi
+
+      - name: Alte Bildvarianten aufräumen
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.modus == 'run' }}
+        run: python3 scripts/social_images.py --prune --days 21
+
+      - name: Cockpit in die Job-Zusammenfassung schreiben
+        if: always()
+        run: |
+          if [ -f SOCIAL-AUTOPILOT-STATUS.md ]; then
+            cat SOCIAL-AUTOPILOT-STATUS.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Plan, Stand und Bilder sichern
+        run: |
+          git config user.name "Social-Autopilot"
+          git config user.email "social-autopilot@users.noreply.github.com"
+          # Das Cockpit ist bewusst NICHT versioniert (Lauf-Artefakt) – es
+          # erscheint unten in der Job-Zusammenfassung. Versioniert werden nur
+          # Plan, Stand und Bildvarianten: sie sichern die Dedupe über Läufe.
+          git add data/social/ static/images/social/
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen – Plan und Stand sind aktuell."
+          else
+            git commit -m "social: Autopilot-Plan aktualisiert + Beiträge versendet"
+            scripts/git_sync.sh --push-only
+            echo "✅ Social-Stand gepusht"
+          fi
