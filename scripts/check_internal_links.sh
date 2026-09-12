@@ -31,8 +31,13 @@ while IFS= read -r file; do
   # href= in Kommentaren) und meldete deshalb drei Phantom-Links. Phantome in
   # einer Gate-Ausgabe sind teurer als ein übersehener JavaScript-Link, den
   # kein statischer Prüfer der Welt auflösen kann.
+  # Ebenfalls vorweg entfernt: onerror-Attribute (Premium-Audit 12.09.2026,
+  # 266 Phantom-Funde): das Cover-Partial (cover.html) trägt
+  # onerror="...this.src='\/images\/covers\/….jpg'" – der AVIF→JPG-Fallback
+  # ist JavaScript in einem Attribut, kein Markup-Link. Der Wert ist
+  # backslash-escapt, und `this.src=` traf das src=-Extraktionsmuster.
   if command -v perl >/dev/null 2>&1; then
-    scan="$(perl -0777 -pe 's|<script\b.*?</script>| |gs; s|<style\b.*?</style>| |gs; s|<!--.*?-->| |gs' "$file" 2>/dev/null || cat "$file")"
+    scan="$(perl -0777 -pe 's|<script\b.*?</script>| |gs; s|<style\b.*?</style>| |gs; s|<!--.*?-->| |gs; s|onerror="[^"]*"||gs; s|onerror='"'"'[^'"'"']*'"'"'||gs' "$file" 2>/dev/null || cat "$file")"
   else
     scan="$(cat "$file")"
   fi
@@ -48,6 +53,12 @@ while IFS= read -r file; do
     path="${link%%#*}"
     path="${path%%\?*}"
     [ -z "$path" ] && continue
+    # Backslash-Werte sind JS-escapte Zeichenketten (onerror-Fallbacks o. ä.),
+    # keine Markup-Links – sie existieren so nie als Datei (Sicherheitsnetz,
+    # siehe onerror-Entfernung oben).
+    case "$path" in
+      *\\*) continue ;;
+    esac
 
     # Optionalen Unterpfad abziehen (nur bei absoluten Links relevant)
     if [ -n "$SITE_PREFIX" ] && [[ "$path" == "$SITE_PREFIX"* ]]; then
