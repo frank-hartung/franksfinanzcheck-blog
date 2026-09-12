@@ -19,7 +19,7 @@
 | 8 | **Profil-Audit**: Live-Profil (Name/Bio/Boards) wird gegen den Premium-Soll-Zustand geprüft, inkl. Copy-Paste-Report | ✅ `scripts/pinterest_profile_audit.py` (Phase 2, § 14) |
 | 9 | **Pin-It-Button auf jedem Artikel** (floating + Footer) + sauberes `og:image` (Rich-Pin-Fix) | ✅ Templates (Phase 2, § 13) |
 
-**Warum 4 nicht automatisiert geht:** Pinterest sperrt jeden Dritt-Zugriff auf Profil-Einstellungen ohne OAuth-Token – Bio, Board-Namen und Board-Beschreibungen änderst du in deinem Dashboard in Minuten (Texte liegen unten fertig). Sobald dein API-Token aktiv ist (`ANLEITUNG-PINTEREST-API.md`), erledigt die Engine das Pin-Posting **und** der Profil-Audit prüft danach automatisch, ob das Live-Profil mit dem Soll-Zustand übereinstimmt (§ 14).
+**Warum 4 nicht automatisiert geht:** Pinterest sperrt jeden Dritt-Zugriff auf Profil-Einstellungen ohne OAuth-Token – Bio, Board-Namen und Board-Beschreibungen änderst du in deinem Dashboard in Minuten (Texte liegen unten fertig). Sobald dein API-Token aktiv ist (`docs/ANLEITUNG-PINTEREST-API.md`), erledigt die Engine das Pin-Posting **und** der Profil-Audit prüft danach automatisch, ob das Live-Profil mit dem Soll-Zustand übereinstimmt (§ 14).
 
 ---
 
@@ -278,7 +278,7 @@ Max. **3 Hashtags, ASCII-only** (Umlaute killen die Hashtag-Indexierung: `#spare
 **Tage 1–30 (Fundament):**
 - [ ] Profil: Name, Bio, Foto, Cover (Schritt 2, 20 Min.)
 - [ ] Boards umbenennen + Beschreibungen einsetzen (Schritt 3, 20 Min.)
-- [ ] API-Token aktivieren (`ANLEITUNG-PINTEREST-API.md`) → Engine postet Masterplan-Pins automatisch
+- [ ] API-Token aktivieren (`docs/ANLEITUNG-PINTEREST-API.md`) → Engine postet Masterplan-Pins automatisch
 - [ ] Baseline: Impressions/Outbound-Clicks notieren
 
 **Tage 31–60 (Design-Hebel):**
@@ -332,7 +332,7 @@ Max. **3 Hashtags, ASCII-only** (Umlaute killen die Hashtag-Indexierung: `#spare
 - `layouts/_default/rss.xml` – Channel-`<image>` (Feed-Bild für Auto-Publish).
 - `.github/workflows/pinterest-watchdog.yml` – + Pin-Text-Sync (Drift) + LIVE-Link-Guard mit eigenem Issue-Pfad.
 - `.github/workflows/pinterest-ai.yml` – + Profil-Audit-Step; Commit um Report/Board-Cache erweitert.
-- `ANLEITUNG-PINTEREST-API.md` – Scopes (profile:read), Multi-Board-Verfahren, neuer Automatik-Plan.
+- `docs/ANLEITUNG-PINTEREST-API.md` – Scopes (profile:read), Multi-Board-Verfahren, neuer Automatik-Plan.
 
 ## 11. ANHANG: UTM-Konvention & „Welcher Pin bringt Provision?"
 
@@ -508,7 +508,7 @@ Soll-Zustand aus `data/pinterest_profile_target.yaml` (+ Boards aus
 als Dashboard-Checkliste – der Lauf bleibt grün (Reporting, kein Fehler-Alerting).
 **Mit Token:** LIVE-Abgleich per API v5 (`/me` + `/boards`); Abweichungen werden
 als ❌ mit aktuellem Wert + Soll-Wert gemeldet. Scope `profile:read` in der
-Developer-App ergänzen (ANLEITUNG-PINTEREST-API.md, Schritt 1b), sonst prüft der
+Developer-App ergänzen (docs/ANLEITUNG-PINTEREST-API.md, Schritt 1b), sonst prüft der
 Audit nur die Boards (vorhandene Scopes reichen dafür).
 
 Report: `PINTEREST-PROFILE-REPORT.md` · Läuft automatisch bei jedem „Pinterest-AI"-Run.

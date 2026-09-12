@@ -81,15 +81,22 @@ class Verdrahtung(unittest.TestCase):
         self.assertIn("contents: read", yml)
 
     def test_ref_pfad_liest_den_pages_zweig_nicht_den_quellbaum(self):
-        # Der Quellbaum allein darf nie die Antwort sein: static/audio enthält nur
-        # ein Handwerksstück aus der Anfangszeit.
+        # Der Quellbaum allein darf nie die Antwort sein. Die fertigen
+        # Tonspuren leben auf dem gh-pages-Zweig (deploy.yml: audio/articles),
+        # im Quellbaum höchstens Überreste. Premium-Audit 12.09.2026: die
+        # frühere harte Schwelle (>= 15) scheiterte in jedem vollen Clone
+        # (gh-pages dort lesbar, aber nicht mit dem CI-Stand identisch) –
+        # die Regression wird jetzt RELATIV geprüft: der Pages-Zweig muss
+        # MEHR Spuren tragen als der Quellbaum, sonst ist der Vorpfad
+        # (audio/articles) in deploy.yml vermutlich geändert.
         spur = ac.spuren_von_dir(os.path.join(ROOT, "static", "audio"))
         self.assertLessEqual(len(spur), 2)
         res = ac.auswerten(ROOT, "origin/gh-pages", "")
         if res["quelle"] == "origin/gh-pages":
-            self.assertGreaterEqual(len(res["spuren"]), 15,
-                                    "Pages-Zweig gelesen, aber fast keine Spur – "
-                                    "Vorpfad geändert? (deploy.yml schreibt audio/articles)")
+            self.assertGreater(len(res["spuren"]), len(spur),
+                               "Pages-Zweig trägt keine Spur mehr als der "
+                               "Quellbaum – Vorpfad geändert? (deploy.yml "
+                               "schreibt audio/articles)")
         else:
             self.assertIn("nicht verfügbar", res["quelle"])
 

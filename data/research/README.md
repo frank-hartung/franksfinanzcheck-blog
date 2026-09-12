@@ -11,4 +11,4 @@ Prüfung in kuratierte Dateien wie `data/aktuelle_entwicklungen.yaml`
 
 Quellen des Briefs sind der kuratierte Themenplan
 (`data/agent_reach/themenplan.yaml`) und die Kanalmatrix von
-`agent-reach doctor` (im Brief dokumentiert). Details: `ANLEITUNG-AGENT-REACH.md`.
+`agent-reach doctor` (im Brief dokumentiert). Details: `docs/ANLEITUNG-AGENT-REACH.md`.

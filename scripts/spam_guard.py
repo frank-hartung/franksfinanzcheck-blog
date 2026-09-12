@@ -678,19 +678,42 @@ def check_feed():
                                  f"Item {i + 1}: Cover fehlt im Build ({rel})"))
 
     # F5 Cross-Item-Dedup (Titel/Description/Bild)
+    # Premium-Audit 12.09.2026: der frühere 60-Zeichen-Präfix auf
+    # Descriptions flaggte zwei Gas-Artikel, deren pin_descriptions
+    # nur den EROTZEN SATZ teilten (Rest inhaltlich klar getrennt) –
+    # für 300-Zeichen-Descriptions zu stur. Jetzt: Text-Prüfung auf
+    # Ganztexthöhe (exakt oder SequenceMatcher-Ratio >= 0.9, das
+    # hausinterne Near-Duplikat-Maß), Bild-Prüfung exakt.
+    import difflib as _dl
+    flagged_any = False
     for label, getter in (
             ("Titel", lambda it: plag.normalize(it["title"])),
-            ("Description", lambda it: plag.normalize(it["desc"])[:60]),
-            ("Bild", lambda it: it["image"].rstrip("/"))):
+            ("Description", lambda it: plag.normalize(it["desc"]))):
+        vals = [(i, getter(it)) for i, it in enumerate(items) if getter(it)]
+        flagged = set()
+        for a in range(len(vals)):
+            for b in range(a + 1, len(vals)):
+                if vals[a][0] in flagged or vals[b][0] in flagged:
+                    continue
+                va, vb = vals[a][1], vals[b][1]
+                if va == vb or \
+                        _dl.SequenceMatcher(None, va, vb).ratio() >= 0.9:
+                    flagged.update((vals[a][0], vals[b][0]))
+        if flagged:
+            findings.append(("F5", "hard",
+                             f"Doppelte {label} in Items "
+                             f"{sorted(i + 1 for i in flagged)}"))
+            flagged_any = True
+            break
+    if not flagged_any:
         seen = {}
         for i, it in enumerate(items):
-            k = getter(it)
-            if k:
-                seen.setdefault(k, []).append(i)
-        for _k, idxs in seen.items():
+            if it["image"]:
+                seen.setdefault(it["image"].rstrip("/"), []).append(i)
+        for idxs in seen.values():
             if len(idxs) > 1:
                 findings.append(("F5", "hard",
-                                 f"Doppelte {label} in Items "
+                                 f"Doppeltes Bild in Items "
                                  f"{[i + 1 for i in idxs]}"))
                 break
 

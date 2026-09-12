@@ -2,7 +2,7 @@
 """Agent-Reach-Gate: Gesundheitsprüfung der Recherche-Integration.
 
 Teil der Agent-Reach-Premium-Integration (12.09.2026, siehe
-ANLEITUNG-AGENT-REACH.md). Das Gate beantwortet eine Frage:
+docs/ANLEITUNG-AGENT-REACH.md). Das Gate beantwortet eine Frage:
 „Kann dieses Repository gerade mit Agent Reach im Internet lesen?“
 
 Prüfschritte

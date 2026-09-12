@@ -82,7 +82,87 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # ============================================================
+  #  DEPLOY-ENTLASTUNG (Premium-Audit 12.09.2026)
+  #  ------------------------------------------------------------
+  #  Groesste Selbstbehinderung der Automation: DIESER Deploy hat
+  #  keinen Pfade-Filter, also loeste JEDER Push auf main einen
+  #  kompletten Lauf aus (Gates + Hugo-Build + bis zu 20 Min.
+  #  TTS + gh-pages-Push). Der Social-Autopilot committet z. B.
+  #  alle 2 h nur data/social/ + Pin-Bilder, dazu Newsletter-,
+  #  Fristen-, Mastodon- und Status-Commits: ~8 Deploys pro Tag
+  #  ohne eine einzige Content-Aenderung – sie verstopften die
+  #  pages-deploy-Warteschlange (Befund Issue #218) und verdraengten
+  #  echte Artikel-Deploys.
+  #
+  #  Die Gate-JOBS verlieren durch den Sprung nichts an Abdeckung:
+  #  blog-health-daily (taeglich 07:45 MESZ) faehrt dieselbe
+  #  Heilkette, und die Content-Workflows pruefen vor jedem Slot.
+  #  Fehlsicherheit: Bei Unklarheit (Erst-Push, API-Fehler,
+  #  Force-Push, manueller Lauf) wird IMMER deployed.
+  # ============================================================
+  deploy-gate:
+    name: Relevante Aenderungen pruefen (Deploy-Entlastung)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    concurrency:
+      group: pages-deploy-gate
+      cancel-in-progress: true
+    outputs:
+      deploy: ${{ steps.gate.outputs.deploy }}
+    steps:
+      - name: Relevante Aenderungen?
+        id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # 1) Manueller Lauf: immer Deploy (Audio-Backfill & Co. muessen
+          #    erreichbar bleiben).
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Manuell geloest – Deploy laeuft immer."
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # 2) Push-Ereignis: Dateien zwischen Before und After diffen
+          #    (deckt auch Multi-Commit-Pushes ab; Compare-API arbeitet
+          #    ohne Checkout und unabhaeig von der Ancestry).
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.event.after }}"
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "Erst-Push (kein Before) – Deploy laeuft."
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          files="$(gh api "repos/${{ github.repository }}/compare/${BEFORE}...${AFTER}" \
+            --paginate --jq '.files[].filename' 2>/tmp/compare.err)" || files=""
+          if [ -z "$files" ]; then
+            # API nicht erreichbar o. a. -> Fehlsicherheit: Deploy laeuft.
+            echo "⚠ Compare-API nicht erreichbar ($(head -c 200 /tmp/compare.err 2>/dev/null)) – Deploy laeuft (Fehlsicherheit)."
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "Pfade dieses Pushes:"
+          echo "$files" | sed 's/^/  /'
+          # 3) Negativliste: NUR bekannte Zustands-/Doku-Pfade sind
+          #    deploy-irrelevant. Alles Neue (content/..., static/...,
+          #    data/themenwelten.json, hugo.toml, layouts/...) ist per
+          #    Default RELEVANT – so kann kein zukuenftiger State-Pfad
+          #    versehentlich den Livegang stoppen.
+          STATE_ONLY='^(\.github/|docs/|scripts/|e2e/|data/social/|data/research/|data/audit/|data/[^/]*_state\.json|data/[^/]*_history\.jsonl|data/social_log\.jsonl|data/secrets_state\.json|data/pinterest_token_state\.json|static/images/social/|\.gitignore|package\.json|package-lock\.json|[A-Za-z0-9._-]+\.md)$'
+          relevant="$(echo "$files" | grep -vE "$STATE_ONLY" || true)"
+          if [ -n "$relevant" ]; then
+            echo "Deploy-relevante Pfade:"
+            echo "$relevant" | sed 's/^/  /'
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Nur Zustands-/Doku-Aenderungen – Build+Vertonung wird uebersprungen."
+            echo "(Gates laufen weiter: blog-health-daily + Content-Workflows.)"
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+          fi
+
   deploy:
+    needs: deploy-gate
+    if: needs.deploy-gate.outputs.deploy == 'true'
     runs-on: ubuntu-latest
     # SICHERHEITSNETZ (Issue #218): Ohne eigenes Limit gilt GitHubs
     # Voreinstellung von 360 Minuten. Lauf 34140579736 hat sie voll

@@ -360,12 +360,11 @@ jobs:
             exit 0
           fi
           git commit -m "chore: PRODUKTIONS-STATUS aktualisiert [skip ci]"
-          if ! git pull --rebase --autostash origin main; then
-            git rebase --abort 2>/dev/null || true
-            echo "::warning::Rebase fehlgeschlagen – Status wird im Artefakt gesichert."
-            exit 0
-          fi
-          git push origin HEAD:main || echo "::warning::Push fehlgeschlagen – Status im Artefakt gesichert."
+          # 12.09.2026 (Premium-Audit): zentrales git_sync.sh (Fetch-Retry,
+          # Rebase-Runden, Fehlerklassifikation) statt Einmal-Rebase + rohem
+          # Push – der Status-Commit wurde sonst bei jedem parallelen Bot
+          # stumm verworfen (Warning nur, kein Retry).
+          scripts/git_sync.sh --push-only || echo "::warning::Push fehlgeschlagen – Status im Artefakt gesichert."
 
       - name: Status als Artefakt
         if: always()

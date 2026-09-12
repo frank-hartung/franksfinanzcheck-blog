@@ -51,8 +51,10 @@ jobs:
         run: |
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
-          git add AFFILIATE-HEALTH-REPORT.md data/affiliate_health_history.jsonl \
-                  scripts/check24_links.yaml static/go/
+          # 12.09.2026 (Premium-Audit): Report ist gitignored/nicht versioniert.
+          # `git add` auf einen ignorierten Pfad bricht die GANZE Staging-Phase
+          # ab (Exit 1, alle Pfade desselben Befehls) – Report bleibt im Log.
+          git add data/affiliate_health_history.jsonl scripts/check24_links.yaml static/go/
           if git diff --cached --quiet; then
             echo "Kein Update."
           else

@@ -17,7 +17,7 @@
 #  kein Fehler-Alerting) – wie pinterest_engine.py.
 #
 #  Konfiguration (Settings → Secrets and variables → Actions):
-#    Secret:   MASTODON_ACCESS_TOKEN   (Setup siehe ANLEITUNG-SOCIAL-MEDIA.md)
+#    Secret:   MASTODON_ACCESS_TOKEN   (Setup siehe docs/ANLEITUNG-SOCIAL-MEDIA.md)
 #    Variable: MASTODON_INSTANCE       (optional, Default: https://mastodon.social)
 #    Secret:   LINKEDIN_ACCESS_TOKEN   (optional)
 #    Variable: LINKEDIN_PERSON_URN     (optional, z. B. "urn:li:person:AbC123")
@@ -462,7 +462,7 @@ def write_status(posted: list[str], remaining: int) -> None:
         lines += ["## Zuletzt gepostet (dieser Lauf)", ""]
         lines += [f"- {p}" for p in posted]
         lines.append("")
-    lines += ["---", "*Erzeugt von scripts/social_poster.py – Setup: ANLEITUNG-SOCIAL-MEDIA.md*"]
+    lines += ["---", "*Erzeugt von scripts/social_poster.py – Setup: docs/ANLEITUNG-SOCIAL-MEDIA.md*"]
     STATUS_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -513,7 +513,7 @@ def main() -> None:
         print("  3. Zugriffstoken kopieren → GitHub-Repo → Settings → Secrets and")
         print("     variables → Actions → Secret MASTODON_ACCESS_TOKEN")
         print("  4. Optional: Variable MASTODON_INSTANCE (Default: https://mastodon.social)")
-        print("  Details: ANLEITUNG-SOCIAL-MEDIA.md")
+        print("  Details: docs/ANLEITUNG-SOCIAL-MEDIA.md")
         print("=" * 68)
         return
 

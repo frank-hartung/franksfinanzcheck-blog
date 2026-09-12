@@ -1,6 +1,6 @@
 # ============================================================
 #  AGENT-REACH INTERNET-RECHERCHE (wöchentlich)
-#  Integration 12.09.2026 – siehe ANLEITUNG-AGENT-REACH.md
+#  Integration 12.09.2026 – siehe docs/ANLEITUNG-AGENT-REACH.md
 #
 #  Läuft jeden Montag um 08:15 MESZ (entzerrt):
 #    1. Gate:     scripts/agent_reach_gate.py prüft Installation
@@ -71,7 +71,9 @@ jobs:
             git config user.email "agent-reach-recherche@users.noreply.github.com"
             git add data/research/
             git commit -m "docs(recherche): Internet-Recherche-Brief $(date +%F)"
-            git push
+            # 12.09.2026 (Premium-Audit): zentrales git_sync.sh statt rohem
+            # `git push` (Retry + Rebase-Runde gegen parallele Bots).
+            scripts/git_sync.sh --push-only
             echo "Brief committet."
           else
             echo "Keine Änderungen am Brief."
@@ -105,7 +107,7 @@ jobs:
           Mögliche Ursachen: Feeds im Themenplan (data/agent_reach/themenplan.yaml)
           unerreichbar, r.jina.ai-Ratenlimit oder Netzwerkstörung im Runner.
 
-          Prüfen: Gate-Ausgabe im Workflow-Log + ANLEITUNG-AGENT-REACH.md (Troubleshooting).
+          Prüfen: Gate-Ausgabe im Workflow-Log + docs/ANLEITUNG-AGENT-REACH.md (Troubleshooting).
           EOF
           )
             gh issue create --repo "$GITHUB_REPOSITORY" \

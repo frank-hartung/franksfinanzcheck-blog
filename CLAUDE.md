@@ -67,7 +67,7 @@ Playwright heimlich WebKit (device-`defaultBrowserType`-Falle).
 - **Leitplanken:** nur LESEN (nie posten/schreiben), keine Cookies/Logins in
   CI, Facts aus Briefs erst nach menschlicher Prüfung in kuratierte Pools
   (`data/aktuelle_entwicklungen.yaml`, `data/topics.yaml`) übernehmen.
-- Installations- und Betriebsdetails: `ANLEITUNG-AGENT-REACH.md`.
+- Installations- und Betriebsdetails: `docs/ANLEITUNG-AGENT-REACH.md`.
 
 ## Wichtige Konventionen
 

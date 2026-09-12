@@ -126,7 +126,7 @@ Konto pinnst massiv auf eine neue Domain“*. Die Reparatur muss deshalb auf
 - [ ] **Keine neuen Pins manuell anlegen** (auch nicht ohne Link) — auch
       nicht über die jetzt freigeschaltete API.
 - [ ] **API-Token einrichten ist erlaubt** (Lese-Zugriff!): Die App ist
-      freigegeben → nach `ANLEITUNG-PINTEREST-API.md` OAuth durchführen
+      freigegeben → nach `docs/ANLEITUNG-PINTEREST-API.md` OAuth durchführen
       (`--auth-url` → `--exchange`). Mit Token den **Live-Profil-Audit**
       laufen lassen (`scripts/pinterest_profile_audit.py`), um Name/Bio/
       Boards/Verifikation direkt auszulesen. **Posting blockt die Notbremse
@@ -255,7 +255,7 @@ Erst wenn Pinterest die Freigabe bestätigt hat:
 | **Fertige Bulk-CSV** | `data/pins_upload.csv` (18 Pins, getaktet, gekennzeichnet) als sicherer Upload-Start nach Entsperrung. |
 | **Canary-Posting-Limit** | Nach Entsperrung postet jeder Lauf max. 3 Pins (`api_run_capacity()` / `PINTEREST_MAX_PINS_PER_RUN`); Rest bleibt in der Queue. Verhindert das Massen-Posting-Muster, das die Sperre mit auslöste. |
 | **Premium-Texte im Legacy-Lauf** | `generate_pins.py` nutzt `pin_title`/`pin_description` aus dem Frontmatter (statt generischer Meta-Texte), kein doppelter `*Werbung`-Prefix. |
-| **Scope korrigiert** | Profil-Audit braucht `user_accounts:read` (v5-API; `profile:read` existiert nicht) — in `ANLEITUNG-PINTEREST-API.md` berichtigt. |
+| **Scope korrigiert** | Profil-Audit braucht `user_accounts:read` (v5-API; `profile:read` existiert nicht) — in `docs/ANLEITUNG-PINTEREST-API.md` berichtigt. |
 
 ---
 

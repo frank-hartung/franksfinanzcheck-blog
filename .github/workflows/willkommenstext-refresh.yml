@@ -107,9 +107,9 @@ jobs:
           git add data/willkommenstext_history.jsonl 2>/dev/null || true
           git add data/integrity_lock.json 2>/dev/null || true
           git add data/integrity_history.jsonl 2>/dev/null || true
-          git add WILLKOMMENSTEXT-REPORT.md 2>/dev/null || true
-          git add BRAND-REPORT.md 2>/dev/null || true
-          git add INTEGRITY-REPORT.md 2>/dev/null || true
+          # 12.09.2026 (Premium-Audit): die drei Reports sind gitignored und
+          # nicht versioniert (bleiben im Lauf-Log) – git add darauf bricht
+          # ansonsten die Staging-Phase hart ab.
           if git diff --cached --quiet; then
             echo "Willkommenstext-Refresh: keine Änderungen."
           else

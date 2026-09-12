@@ -14,7 +14,7 @@
 #      Artikel-URL, Hashtags)
 #    - Setzt "pinned: true" und committet
 #
-#  VORAUSSETZUNG (einmalig, ~10 Min., siehe ANLEITUNG-PINTEREST-API.md):
+#  VORAUSSETZUNG (einmalig, ~10 Min., siehe docs/ANLEITUNG-PINTEREST-API.md):
 #    - Pinterest-Developer-App + Access-Token
 #      → Secret: PINTEREST_ACCESS_TOKEN
 #    - Board-ID (mit --list-boards ermitteln)

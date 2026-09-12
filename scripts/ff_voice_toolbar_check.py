@@ -198,6 +198,16 @@ def main() -> int:
                 rel = os.path.relpath(path, ROOT)
                 if rel.startswith("docs/") and "FF-VOICE" in rel:
                     continue
+                # Historische Archive: die REPARATUR-/Studio-Dokus (09-03…09-11)
+                # DOKUMENTIEREN den Rückbau des alten TTS-Modells – "ff-reader"
+                # ist dort das Thema, nicht ein Rest. Die Wache schützt den
+                # LIVE-Code (Layouts, Engine, Content, Workflows), nicht die
+                # geschriebene Historie. (Premium-Audit 12.09.2026: nach der
+                # Konsolidierung der One-Shot-Dokumente in docs/archiv/ sah
+                # die Wache diese Dateien zum ersten Mal und blockierte den
+                # Merge – Historie wird nicht umgeschrieben.)
+                if rel.startswith("docs/archiv/"):
+                    continue
                 # Diese Wache listet die Alt-Dateien absichtsvoll auf –
                 # sie ist die Dokumentation des Rückbaus, nicht sein Rest.
                 if rel == os.path.relpath(__file__, ROOT):

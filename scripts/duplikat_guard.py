@@ -69,6 +69,12 @@ BOILERPLATE_RE = [
     r"lesetipps zum weitersparen",
     r"dieser beitrag enthält affiliate",
     r"beim abschluss über einen link",
+    # Haus-Templates, die abschriftlich in vielen Artikeln stehen (Befund
+    # 12.09.2026, D3/D4-Einführung): In-Text-CTA aus affiliate_marketer.py
+    # und die Fazit-Formel aus fazit_schmiede.py. Nichts zu heilen – aber
+    # ohne Whitelist blendet jede Cross-Artikel-Messung sie als Duplikat.
+    r"spar-tipp zwischendurch",
+    r"sich gezielt mit dem thema",
 ]
 
 
@@ -83,7 +89,14 @@ def split_body(frontmatter_body: str) -> str:
 
 
 def normalize(text: str) -> str:
-    return re.sub(r"\s+", " ", text).strip()
+    t = re.sub(r"\s+", " ", text).strip()
+    # Angeklebte Trennlinie (Korruptions-Muster: wiederholte Intro-Blöcke
+    # stehen als "---\n<Einleitung>" im Text): das "---" darf NICHT Teil
+    # des Fingerabdrucks sein, sonst verfehlt D1/D2 die ERSTE Kopie und
+    # der Rest ist selbst im --fix-Modus nicht heilbar (Befund 12.09.2026:
+    # 7 Artikel mit je 2–4 eingefügten Intro-Kopien, Dauersignal im Report).
+    t = re.sub(r"^[-=]{3,}\s+", "", t)
+    return t
 
 
 def blocks_of(body: str) -> list:
@@ -198,6 +211,82 @@ def ngrams(text: str, n: int) -> set:
     return {tuple(words[i:i + n]) for i in range(len(words) - n + 1)} if len(words) >= n else set()
 
 
+def load_blocks(paths: list) -> dict:
+    """{rel: [(block_text, pos), ...]} – Boilerplate aussortiert."""
+    per: dict[str, list] = {}
+    for p in paths:
+        try:
+            raw = p.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        per[str(p.relative_to(ROOT))] = [(t, pos)
+                                         for t, pos, _ in blocks_of(split_body(raw))
+                                         if not is_boilerplate(t)]
+    return per
+
+
+def check_cross(paths: list) -> list:
+    """D3 (exakt) + D4 (near) ÜBER Artikel hinweg – NUR Report, nie Auto-Fix.
+
+    (Befund 12.09.2026: D3/D4 standen im Docstring, wurden aber nie
+    implementiert – der `articles`-Parameter von check_article war tot.
+    Zwei Artikel DÜRFEN sich legitime Formulierungen teilen, deshalb bleibt
+    die Gegenprüfung hier bewusst report-only; der Heilweg läuft über die
+    Redaktion. Rückgabe: (rel_a, regel, detail, pos, rel_b)."""
+    per = load_blocks(paths)
+    finds: list = []
+
+    # D3: exakte Übereinstimmung (SHA-256) in ≥ 2 Artikeln
+    by_hash: dict = {}
+    for rel, blocks in per.items():
+        for t, pos in blocks:
+            if len(t) < MIN_EXACT:
+                continue
+            by_hash.setdefault(hashlib.sha256(t.encode()).hexdigest(),
+                               []).append((rel, pos, t))
+    for hits in by_hash.values():
+        articles = sorted({rel for rel, _, _ in hits})
+        if len(articles) >= 2:
+            rel_a, rel_b = articles[0], articles[1]
+            pos = next(pos for rel, pos, _ in hits if rel == rel_b)
+            finds.append((rel_a, "D3-X",
+                          f"Absatz wortgleich in {len(articles)} Artikeln "
+                          f"({rel_a} ≈ {rel_b}): {hits[0][2][:90]}…", pos, rel_b))
+
+    # D4: Near-Duplikate über Artikel hinweg (Bucket-Strategie wie D2)
+    buckets: dict = {}
+    for rel, blocks in per.items():
+        for t, pos in blocks:
+            if len(t) < MIN_NEAR_X:
+                continue
+            buckets.setdefault((t[:1].lower(), len(t) // 40), []).append((rel, t, pos))
+    seen_pairs = set()
+    for rel_a, blocks in per.items():
+        for t, pos in blocks:
+            if len(t) < MIN_NEAR_X:
+                continue
+            key = (t[:1].lower(), len(t) // 40)
+            for dk in (key[1] - 1, key[1], key[1] + 1):
+                for rel_b, tb, posb in buckets.get((key[0], dk), []):
+                    if rel_a == rel_b or tb < t:
+                        continue
+                    if min(len(t), len(tb)) / max(len(t), len(tb)) < RATIO_NEAR:
+                        continue
+                    if t[:6] != tb[:6]:
+                        continue
+                    r = difflib.SequenceMatcher(None, t, tb).ratio()
+                    if r < RATIO_NEAR:
+                        continue
+                    pair = (min(rel_a, rel_b), max(rel_a, rel_b))
+                    if pair in seen_pairs:
+                        continue
+                    seen_pairs.add(pair)
+                    finds.append((rel_a, "D4-X",
+                                  f"Fast-Duplikat über Artikel (Ratio {r:.2f}, "
+                                  f"{rel_a} ≈ {rel_b}): {t[:80]}…", posb, rel_b))
+    return finds
+
+
 def fix_sections(body: str) -> tuple:
     """D5-Auto-Fix: fast identische H2-Kapitel (Ratio >= 0.92) – die spätere
     Version wird komplett entfernt (inkl. Überschrift). Nur Kapitel ohne
@@ -277,8 +366,14 @@ def auto_fix(rel: str, body: str) -> tuple:
             r = difflib.SequenceMatcher(None, ti, tj).ratio()
             len_diff = abs(len(ti) - len(tj)) / max(len(ti), len(tj))
             if r >= RATIO_FIX and len_diff <= FIX_LEN_DIFF:
-                # spätere Version entfernen (größerer Index)
-                later = max(i, j)
+                # spätere Version entfernen (größerer Index).
+                # ACHTUNG (Befund 12.09.2026): i/j sind Indizes in `cand`
+                # (nur Blöcke >= MIN_NEAR), `drop` adressiert aber `keep`
+                # (ALLE Blöcke). Ohne Rückübersetzung per cand[..][0] würde
+                # bei kürzeren Blöcken dazwischen der FALSCHER Absatz
+                # entfernt (Index-Drift) – hier der Hebel, der den
+                # Near-Duplikat-Fix über unvollständige cand-Listen rettet.
+                later = cand[max(i, j)][0]
                 if later not in drop:
                     drop.add(later)
                     removed.append(("D2-FIX", f"Absatz {later}: {ti[:70]}…"))
@@ -333,6 +428,39 @@ def run_selftest() -> list:
               for a, b in pairs)
     if not hit:
         fehler.append("Fall 5 (D2-Near): Fast-Duplikat nicht erkannt")
+    # Fall 6: Korruptions-Muster der 7 Alt-Artikel (12.09.2026): wiederholte
+    # Intro-Blöcke, die als "---\n<Einleitung>" vorliegen. Die ERSTE Kopie
+    # muss erkannt UND im --fix-Modus entfernt werden (davor: Fingerprint-
+    # Mismatch, Kopie blieb für immer).
+    intro = ("Warum zahlen Millionen Haushalte Monat für Monat zu viel für ihren "
+             "Anschluss? Weil Treue im Markt leider nicht belohnt wird, im Gegenteil.")
+    b6 = (intro + "\n\n"
+          "---\n" + intro + "\n\n"
+          "---\n\n"
+          "💡 **Schnell-Tipp von FranksFinanzcheck:** Vergleiche jetzt deine Optionen.")
+    b6_hashes = {hashlib.sha256(t.encode()).hexdigest()
+                 for t, _, _ in blocks_of(b6) if len(t) >= MIN_EXACT}
+    if len(b6_hashes) != 1:
+        fehler.append("Fall 6 (Trennlinie): trennliniengeklebte Kopie nicht als "
+                      "Duplikat erkannt")
+    out6, n6, _ = auto_fix("t", b6)
+    if n6 != 1 or out6.count("Warum zahlen") != 1:
+        fehler.append(f"Fall 6 (Trennlinie-Fix): erwartet 1/1, bekam {n6}/{out6.count('Warum zahlen')}")
+    if "\n---\n\n" not in out6:
+        fehler.append("Fall 6 (Trennlinie-Fix): Trennlinie vor CTA-Box wurde mitgelöscht")
+    # Fall 7: D2-Near mit kurzen Absätzen ZWISCHEN den Kandidaten – der Fix
+    # darf die spätere (nahe) Version entfernen, nicht das Original
+    # (Regression: cand/keep-Index-Drift in auto_fix).
+    a7 = ("Der Gaspreis je Kilowattstunde liegt aktuell etwa bei neun Cent, und wer früh "
+          "vergleicht, sichert sich den günstigeren Tarif für ein ganzes Jahr vorab.")
+    a7b = ("Der Gaspreis je Kilowattstunde liegt aktuell etwa bei neun Cent, und wer früh "
+           "vergleicht, sichert sich den günstigeren Tarif für ein ganzes Jahr im Voraus.")
+    b7 = "Kurzer Absatz hier.\n\nKurz zwei.\n\n" + a7 + "\n\n" + a7b + "\n\nKurz drei."
+    out7, n7, _ = auto_fix("t", b7)
+    if n7 != 1 or "im Voraus" in out7:
+        fehler.append(f"Fall 7 (D2-Index-Drift): falscher Absatz entfernt ({n7})")
+    if a7 not in out7:
+        fehler.append("Fall 7 (D2-Index-Drift): Original entfernt statt der Kopie")
     return fehler
 
 
@@ -344,7 +472,8 @@ def main() -> int:
         if fehler:
             print("SELFTEST FEHLGESCHLAGEN – nichts geschrieben.")
             return 2
-        print("✅ Duplikat-Selbsttest: 4 Fälle grün.")
+        print("✅ Duplikat-Selbsttest: 7 Fälle grün (inkl. Trennlinien-Muster "
+              "und Index-Drift-Regression).")
         return 0
 
     today = date.today().isoformat()
@@ -372,6 +501,17 @@ def main() -> int:
                 print(f"  ✂ {p.relative_to(ROOT)}: {n} Duplikat(e) entfernt")
         all_finds += check_article(p, paths)
 
+    # D3/D4 über Artikel hinweg (einmalig, report-only; Sicherheit:
+    # Cross-Artikel-Funde werden NIEMALS auto-gefixed). Im Engine-Modus
+    # (--new-only) zählt nur, was HEUTIGE Artikel berührt – ein Fund
+    # zwischen zwei Alt-Artikeln darf den Publikationstag nicht blockieren.
+    focus = ({str(p.relative_to(ROOT)) for p in paths}
+             if NEW_ONLY else None)
+    for rel_a, rule, detail, pos, rel_b in check_cross(paths):
+        if focus is not None and not ({rel_a, rel_b} & focus):
+            continue
+        all_finds.append((rel_a, rule, detail, pos))
+
     # deduplizieren (Fix + Check desselben Fundes)
     uniq, seen = [], set()
     for f in all_finds:
@@ -398,6 +538,8 @@ def main() -> int:
              f"|---|---|",
              f"| D1 Exakt (im Artikel) | {len(d1)} |",
              f"| D2 Near (im Artikel) | {len(d2)} |",
+             f"| D3 Exakt (über Artikel) | {len(d3)} |",
+             f"| D4 Near (über Artikel) | {len(d4)} |",
              f"| D5 Sektion (im Artikel) | {len(d5)} |",
              f"| D6 Premium-Anhang | {len(d6)} |",
              f"| Auto-Fixes | {len(fx)} |",
@@ -410,18 +552,19 @@ def main() -> int:
     lines.append("_Kein Duplikat darf den Leser zweimal dieselbe Information lesen lassen._")
     REPORT.write_text("\n".join(lines), encoding="utf-8")
     with HISTORY.open("a", encoding="utf-8") as h:
-        h.write(json.dumps({"date": today, "d1": len(d1), "d2": len(d2), "d5": len(d5),
+        h.write(json.dumps({"date": today, "d1": len(d1), "d2": len(d2),
+                            "d3": len(d3), "d4": len(d4), "d5": len(d5),
                             "d6": len(d6), "fix": len(fx)}, ensure_ascii=False) + "\n")
 
     if AS_JSON:
         print(json.dumps({"duplicates": [{"file": f[0], "rule": f[1], "detail": f[2]} for f in uniq]},
                          ensure_ascii=False, indent=2))
-        return 1 if (d1 or d2 or d5 or d6) and NEW_ONLY else 0
+        return 1 if (d1 or d2 or d3 or d4 or d5 or d6) and NEW_ONLY else 0
 
-    print(f"Duplikat-Audit: {len(paths)} Artikel | D1 {len(d1)} · D2 {len(d2)} · D5 {len(d5)} · D6 {len(d6)} · Fixes {len(fx)}")
+    print(f"Duplikat-Audit: {len(paths)} Artikel | D1 {len(d1)} · D2 {len(d2)} · D3 {len(d3)} · D4 {len(d4)} · D5 {len(d5)} · D6 {len(d6)} · Fixes {len(fx)}")
     for rel, regel, detail, pos in uniq[:25]:
         print(f"  {'❌' if regel.startswith('D') else '✂'} [{regel:>10}] {rel} Z.{pos}: {detail[:110]}")
-    if NEW_ONLY and (d1 or d2 or d5 or d6):
+    if NEW_ONLY and (d1 or d2 or d3 or d4 or d5 or d6):
         print("❌ Duplikat-Gate nicht bestanden – neue Artikel enthalten Redundanz!")
         return 1
     if not uniq:

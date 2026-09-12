@@ -97,19 +97,10 @@ jobs:
             > /tmp/browser-audit.json || echo "BROWSER_ISSUES=true" >> "$GITHUB_ENV"
           cat /tmp/browser-audit.json || true
 
-      # ============ REPORT COMMITTEN ============
-      - name: Layout-Report veröffentlichen
-        if: ${{ !cancelled() }}
-        run: |
-          git config user.name "Layout-Bot"
-          git config user.email "layout-bot@users.noreply.github.com"
-          git add LAYOUT-REPORT.md
-          if git diff --cached --quiet; then
-            echo "Report unverändert."
-          else
-            git commit -m "chore: LAYOUT-REPORT aktualisiert"
-            scripts/git_sync.sh --push-only
-          fi
+      # REPORT: LAYOUT-REPORT.md ist seit dem Premium-Audit 12.09.2026
+      # gitignored und nicht versioniert (Report bleibt als Lauf-Artefakt
+      # im Log). Der frühere „Report veröffentlichen“-Schritt ist weg –
+      # `git add` auf einen ignorierten Pfad bricht die Staging-Phase hart ab.
 
       # ============ ISSUE BEI KRITISCHEN PROBLEMEN (Dedupe) ============
       - name: Issue bei kritischen Layout-Problemen

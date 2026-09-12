@@ -2,7 +2,7 @@
 
 > Premium-Integration von [Agent Reach](https://github.com/Panniantong/Agent-Reach)
 > in den Redaktionsbetrieb von franksfinanzcheck.de.
-> Betriebsanleitung: `ANLEITUNG-AGENT-REACH.md`
+> Betriebsanleitung: `docs/ANLEITUNG-AGENT-REACH.md`
 
 ## Auftrag
 
@@ -44,7 +44,7 @@ vorgenommen, gepinnt auf den Commit des Tags v1.5.0
 6. **Workflow** `.github/workflows/agent-reach-research.yml` – montags
    08:15 MESZ (entzerrter Slot) + manuell; commitet Briefs, meldet
    Totalausfälle als Issue.
-7. **Dokumentation** – diese Datei + `ANLEITUNG-AGENT-REACH.md` +
+7. **Dokumentation** – diese Datei + `docs/ANLEITUNG-AGENT-REACH.md` +
    Ergänzungen in `CLAUDE.md` und `KI-REDAKTION.md`.
 
 ## Verifikations-Ergebnisse (12.09.2026, Arbeitsumgebung)
@@ -97,7 +97,7 @@ Brief-Rendering, Bilanz-Logik). Gate-Exit-Code-Pfad verifiziert.
 ```
 NEU  .claude/skills/agent-reach/          (Skill + 7 Referenzen)
 NEU  .github/workflows/agent-reach-research.yml
-NEU  ANLEITUNG-AGENT-REACH.md
+NEU  docs/ANLEITUNG-AGENT-REACH.md
 NEU  AGENT-REACH-INTEGRATION-2026-09-12.md
 NEU  requirements-agent-reach.txt
 NEU  scripts/agent_reach_gate.py

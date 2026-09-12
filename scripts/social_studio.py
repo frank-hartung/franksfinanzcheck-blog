@@ -371,7 +371,7 @@ def write_cockpit(cfg: dict, state: dict, schedule: dict, results: dict,
               "",
               "---",
               "*Erzeugt von scripts/social_studio.py · Kanal-Playbook: "
-              "data/social/channels.yaml · Anleitung: ANLEITUNG-SOCIAL-AUTOPILOT.md*"]
+              "data/social/channels.yaml · Anleitung: docs/ANLEITUNG-SOCIAL-AUTOPILOT.md*"]
     with open(COCKPIT, "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines) + "\n")
 
