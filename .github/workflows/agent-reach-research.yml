@@ -91,16 +91,27 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          # Governance-Vertrag C12 (Label-Garantie, #209): Label VOR der
+          # Issue-Erzeugung anlegen, sonst scheitert die Meldung mit HTTP 422.
+          gh label create agent-reach --repo "$GITHUB_REPOSITORY" \
+            --color "0e8a16" \
+            --description "Agent-Reach-Recherche: automatische Meldungen" --force || true
           TITEL="Agent-Reach-Recherche: alle Quellen ausgefallen ($(date +%F))"
           if ! gh issue list --repo "$GITHUB_REPOSITORY" --state open \
                --search "in:title \"$TITEL\"" | grep -q .; then
+            BODY=$(cat <<'EOF'
+          scripts/agent_reach_research.py lieferte keine einzige Quelle.
+
+          Mögliche Ursachen: Feeds im Themenplan (data/agent_reach/themenplan.yaml)
+          unerreichbar, r.jina.ai-Ratenlimit oder Netzwerkstörung im Runner.
+
+          Prüfen: Gate-Ausgabe im Workflow-Log + ANLEITUNG-AGENT-REACH.md (Troubleshooting).
+          EOF
+          )
             gh issue create --repo "$GITHUB_REPOSITORY" \
               --title "$TITEL" \
               --label agent-reach \
-              --body "scripts/agent_reach_research.py lieferte keine einzige Quelle.
-          Mögliche Ursachen: Feeds im Themenplan (data/agent_reach/themenplan.yaml)
-          unerreichbar, r.jina.ai-Ratenlimit oder Netzwerkstörung im Runner.
-          Prüfen: Gate-Ausgabe im Workflow-Log + ANLEITUNG-AGENT-REACH.md (Troubleshooting)."
+              --body "$BODY"
           else
             echo "Issue existiert bereits – kein Duplikat."
           fi
