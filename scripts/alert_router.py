@@ -104,6 +104,10 @@ DEFAULT_MAX_STATE_AGE_HOURS = 48
 MARKER = "<!-- alarm-router: {channel} -->"
 TIER_MARKER = "<!-- alarm-router: {channel} stufe:{tier} -->"
 SIG_MARKER = "<!-- alarm-router: {channel} sig:{sig} -->"
+# Version der Ticket-Darstellung: ändert sich die Aufbereitung, werden
+# bestehende Bodies einmalig aktualisiert (sonst bliebe eine korrigierte
+# Kadenz-Zeile monatelang im Ticket stehen).
+BODY_VERSION = "v2"
 
 
 # --------------------------------------------------------------------------- #
@@ -177,7 +181,7 @@ def blocking_findings(findings: Iterable[Finding]) -> list[Finding]:
 def signature(findings: Sequence[Finding]) -> str:
     """Kurzer Fingerabdruck der Befundmenge (Änderung → Body-Update statt Kommentar)."""
     raw = "|".join(sorted(f"{f.id}:{f.severity}:{f.detail[:80]}" for f in findings))
-    return hashlib.sha1(raw.encode("utf-8")).hexdigest()[:10]
+    return hashlib.sha1(f"{BODY_VERSION}|{raw}".encode("utf-8")).hexdigest()[:10]
 
 
 # --------------------------------------------------------------------------- #
@@ -317,6 +321,18 @@ def plan_channels(findings: Sequence[Finding],
                 reason="Kein Ticket im Fach-Kanal offen – Router übernimmt den Fallback-Besitz."))
             continue
 
+        # Nur Tickets aus dem Router selbst werden aktualisiert – ein fremdes
+        # oder von Hand geschriebenes Ticket bleibt unangetastet.
+        eigenes = MARKER.format(channel=channel) in (issue.body or "")
+        if eigenes and not worst_f.once and signature(group) not in (issue.body or ""):
+            out.append(RouteDecision(
+                action="update", channel=channel, issue=issue.number,
+                title=issue.title, body=render_channel_body(channel, group, now),
+                severity=worst_f.severity, owner="human",
+                reason="Befundlage hat sich geändert – Ticket-Body aktualisiert "
+                       "(kein neuer Kommentar)."))
+            continue
+
         age = _age_days(issue, now)
         tier = tier_for_age(age, worst_f.ladder)
         label = tier_label(tier, worst_f.ladder)
@@ -391,7 +407,8 @@ def render_status_comment(machine: Sequence[Finding], now: datetime.datetime) ->
 
 
 def render_channel_title(channel: str, group: Sequence[Finding]) -> str:
-    icons = {"pinterest": "📌", "pinterest-token": "🔑", "human-action": "🙋"}
+    icons = {"pinterest": "📌", "pinterest-token": "🔑", "pinterest-parked": "⏸️",
+            "human-action": "🙋"}
     icon = icons.get(channel, "🔔")
     return f"{icon} {worst(group).title}"
 
@@ -412,10 +429,13 @@ def render_channel_body(channel: str, group: Sequence[Finding], now: datetime.da
     lines += ["", "### Nächster Schritt", ""]
     for f in group:
         lines.append(f"- **{f.title}** – {f.next_step or 'siehe Runbook'}")
+    ladder = worst(group).ladder
+    stufen = [f"{days} Tage" for days, _ in ladder[1:]]
+    text_stufen = ", ".join(stufen) if stufen else "keine weiteren Stufen"
     lines += ["", "### Kadenz", "",
-              f"Erinnerung nach {ESCALATION_LADDER[1][0]} Tagen, Eskalation nach "
-              f"{ESCALATION_LADDER[2][0]} Tagen, Kanal-Review nach {ESCALATION_LADDER[3][0]} Tagen.",
-              "Ein Kommentar pro Stufe – kein tägliches Rauschen.", "",
+              f"Erinnerung/Eskalation nach {text_stufen} – ein Kommentar pro Stufe, "
+              f"frühestens alle {MIN_COMMENT_INTERVAL_HOURS} h. Kein tägliches Rauschen: "
+              "ein offenes Ticket ist kein täglicher Auftrag.", "",
               MARKER.format(channel=channel),
               SIG_MARKER.format(channel=channel, sig=signature(list(group))), ""]
     return "\n".join(lines)
@@ -521,6 +541,26 @@ class GhClient:
             created_at=_parse_ts(item.get("createdAt")),
         )
 
+    def find_ticket(self, channel: str) -> IssueRef | None:
+        """Offenes Ticket eines Kanals finden – label-first, marker-fallback.
+
+        Warum der Rückweg: `gh issue create --label X` kann das Label
+        verlieren (eingeschränkte App-Tokens, HTTP-422-Klassen). Ohne
+        Fallback würde der Router beim nächsten Lauf ein ZWEITES Ticket für
+        denselben Kanal eröffnen – genau die Duplikat-Suppe, die er
+        verhindern soll. Der Marker im Body ist daher die eigentliche
+        Wahrheit, das Label nur der Komfort-Filter.
+        """
+        issues = self.open_issues(channel)
+        if not issues:
+            for candidate in self.open_issues():
+                if MARKER.format(channel=channel) in (candidate.body or ""):
+                    issues = [candidate]
+                    break
+        if not issues:
+            return None
+        return sorted(issues, key=lambda i: i.number)[-1]
+
     def load_channel_comments(self, issue: IssueRef, channel: str) -> IssueRef:
         """Höchste bereits gemeldete Eskalationsstufe je Kanal (aus Kommentaren).
 
@@ -535,6 +575,11 @@ class GhClient:
                 if TIER_MARKER.format(channel=channel, tier=t) in body:
                     issue.last_tier = max(issue.last_tier, t)
                     break
+        # Ein vom Router eröffneter Body (sig-Marker) gilt als Stufe 0 – die
+        # Eröffnung IST die Meldung, sie braucht keine Wiederholung.
+        if (issue.last_tier < 0
+                and f"<!-- alarm-router: {channel} sig:" in (issue.body or "")):
+            issue.last_tier = 0
         return issue
 
     def load_comments(self, number: int) -> list[dict[str, Any]]:
@@ -576,6 +621,13 @@ class GhClient:
         rc, _out, err = self._gh(["issue", "edit", str(number), "--body", body], timeout=60)
         if rc != 0:
             self.errors.append(f"issue edit #{number}: rc={rc} {err.strip()[:120]}")
+            return False
+        return True
+
+    def add_label(self, number: int, label: str) -> bool:
+        rc, _out, err = self._gh(["issue", "edit", str(number), "--add-label", label], timeout=60)
+        if rc != 0:
+            self.errors.append(f"label {label} auf #{number}: rc={rc} {err.strip()[:120]}")
             return False
         return True
 
@@ -631,18 +683,19 @@ def route(findings: Sequence[Finding],
     try:
         state = client.load_state()
         open_generic = None
-        generic_issues = (client.open_issues(GENERIC_CHANNEL) or []) if not dry_run else []
-        if generic_issues:
-            open_generic = sorted(generic_issues, key=lambda i: i.number)[-1]
+        open_generic = None if dry_run else client.find_ticket(GENERIC_CHANNEL)
+        if open_generic is not None:
             open_generic.last_bot_comment_at = client.last_comment_at(open_generic.number)
+            open_generic = client.load_channel_comments(open_generic, GENERIC_CHANNEL)
 
         decisions = [plan_generic(findings, open_generic, now)]
         channels = {f.channel for f in human_findings(findings)}
         open_by_channel: dict[str, IssueRef] = {}
         for channel in sorted(channels):
-            issues = (client.open_issues(channel) or []) if not dry_run else []
-            if issues:
-                issue = sorted(issues, key=lambda i: i.number)[-1]
+            if dry_run:
+                continue
+            issue = client.find_ticket(channel)
+            if issue is not None:
                 issue = client.load_channel_comments(issue, channel)
                 issue.last_bot_comment_at = client.last_comment_at(issue.number)
                 open_by_channel[channel] = issue
@@ -659,6 +712,11 @@ def route(findings: Sequence[Finding],
             if d.action == "create":
                 created = client.create(d.title, d.body, [d.channel])
                 entry["issue"] = created.number if created else None
+                if created and d.channel not in (created.labels or ()):
+                    # Label verloren gegangen (eingeschränktes Token/422):
+                    # nachziehen, damit die Ticket-Suche per Label funktioniert.
+                    client.add_label(created.number, d.channel)
+                    entry["label_retry"] = True
                 if created:
                     ch_state = (state.setdefault("channels", {}).setdefault(d.channel, {}))
                     ch_state.update({"first_seen": now.isoformat(), "ticket": created.number,
@@ -667,17 +725,23 @@ def route(findings: Sequence[Finding],
                                                      if f.channel == d.channel]).once:
                         ch_state["done"] = True
             elif d.action == "update" and d.issue:
-                client.edit_body(d.issue, d.body)
-                client.comment(d.issue, "🔄 Befundmenge aktualisiert – Stand siehe Ticket-Body.")
+                if client.edit_body(d.issue, d.body) and d.channel == GENERIC_CHANNEL:
+                    client.comment(d.issue, "🔄 Befundmenge aktualisiert – Stand siehe Ticket-Body.")
             elif d.action == "comment" and d.issue:
-                client.comment(d.issue, d.body)
-                ch_state = (state.setdefault("channels", {}).setdefault(d.channel, {}))
-                ch_state.update({"last_tier": d.tier, "last_action": now.isoformat()})
+                # Zustand NUR bei Erfolg – sonst behauptet das Repo eine
+                # Eskalation, die niemand gelesen hat.
+                if client.comment(d.issue, d.body):
+                    ch_state = (state.setdefault("channels", {}).setdefault(d.channel, {}))
+                    ch_state.update({"last_tier": d.tier, "last_action": now.isoformat()})
+                else:
+                    entry["delivered"] = False
             elif d.action == "close" and d.issue:
-                client.close(d.issue, render_close_comment(findings, now))
-                ch_state = (state.setdefault("channels", {}).setdefault(d.channel, {}))
-                ch_state.update({"open": False, "closed_at": now.isoformat(),
-                                 "last_tier": -1})
+                if client.close(d.issue, render_close_comment(findings, now)):
+                    ch_state = (state.setdefault("channels", {}).setdefault(d.channel, {}))
+                    ch_state.update({"open": False, "closed_at": now.isoformat(),
+                                     "last_tier": -1})
+                else:
+                    entry["delivered"] = False
             report["actions"].append(entry)
             report["channels"][d.channel] = d.action
 
@@ -747,20 +811,35 @@ def _selftest() -> int:
     plans = plan_channels([human], {}, now, {})
     check("Fallback-Besitz bei fehlendem Fach-Ticket",
           plans and plans[0].action == "create" and plans[0].channel == "pinterest-token")
+    ticket_body = render_channel_body("pinterest-token", [human], now)
     covered = plan_channels([human], {"pinterest-token": IssueRef(
-        number=246, created_at=born, last_tier=tier_for_age(_age_days(
-            IssueRef(number=246, created_at=born), now)))}, now, {})
+        number=246, created_at=born, body=ticket_body,
+        last_tier=tier_for_age(_age_days(IssueRef(number=246, created_at=born), now)))}, now, {})
     check("abgedecktes Fach-Ticket bleibt still (Stufe schon eskaliert)",
           covered and covered[0].action == "none" and covered[0].issue == 246)
     fresh = IssueRef(number=246, created_at=now - datetime.timedelta(days=9),
-                     last_tier=0, last_bot_comment_at=now - datetime.timedelta(days=9))
+                     body=ticket_body, last_tier=0,
+                     last_bot_comment_at=now - datetime.timedelta(days=9))
     esc = plan_channels([human], {"pinterest-token": fresh}, now, {})
     check("Eskalation feuert genau einmal pro Stufe",
           esc and esc[0].action == "comment" and esc[0].tier >= 2)
     check("Eskalation doppelt nicht (72 h)",
           plan_channels([human], {"pinterest-token": IssueRef(
-              number=246, created_at=now - datetime.timedelta(days=9), last_tier=0,
+              number=246, created_at=now - datetime.timedelta(days=9), body=ticket_body,
+              last_tier=0,
               last_bot_comment_at=now - datetime.timedelta(hours=1))}, now, {})[0].action == "none")
+
+    # 4b) Fakten geändert → Body-Update; fremdes Ticket bleibt unangetastet
+    veraltet = IssueRef(number=246, created_at=born,
+                        body=render_channel_body("pinterest-token", [human], born))
+    neu = Finding(id="pinterest-token", title="Token tot (jetzt mit Domain-Sperre)",
+                  detail="HTTP 401 + Domain gesperrt", severity="P3", owner="human",
+                  channel="pinterest-token")
+    check("geänderte Fakten aktualisieren den Ticket-Body",
+          plan_channels([neu], {"pinterest-token": veraltet}, now, {})[0].action == "update")
+    fremd = IssueRef(number=246, created_at=born, body="von Hand geschrieben")
+    check("fremdes Ticket wird nicht umgeschrieben",
+          plan_channels([neu], {"pinterest-token": fremd}, now, {})[0].action in ("none", "comment"))
 
     # 5) Leiter + Signaturen
     check("Leiter Tag 0", tier_for_age(0) == 0)

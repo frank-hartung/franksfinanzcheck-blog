@@ -89,6 +89,12 @@ Für langsame Sachverhalte gibt es eigene Leitern: der geparkte Pinterest-Kanal
 (`pinterest-parked`) eskaliert nach **14/30** Tagen – eine Domain-Sperre bei
 Pinterest dauert Wochen, nicht Tage.
 
+Ändern sich die **Fakten** (nicht das Datum), wird der Ticket-Body
+aktualisiert – ohne neuen Kommentar. Die Zugehörigkeit eines Tickets erkennt
+der Router am Marker `<!-- alarm-router: <kanal> -->` im Body, nicht am Label:
+geht ein Label verloren (eingeschränktes Token, HTTP-422-Klasse), entsteht
+trotzdem kein zweites Ticket. Tickets von Menschen bleiben unangetastet.
+
 ---
 
 ## 4. So sieht das im Betrieb aus

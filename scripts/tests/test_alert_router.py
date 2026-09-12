@@ -30,9 +30,10 @@ import alert_router as ar  # noqa: E402
 NOW = datetime.datetime(2026, 9, 12, 12, 0, tzinfo=datetime.timezone.utc)
 
 
-def mensch(fid="pinterest-token", severity="P2", channel="pinterest-token", **kw):
+def mensch(fid="pinterest-token", severity="P2", channel="pinterest-token",
+           detail="HTTP 401", **kw):
     return ar.Finding(id=fid, title="Nur ein Mensch kann das heilen",
-                      detail="HTTP 401", severity=severity, owner="human",
+                      detail=detail, severity=severity, owner="human",
                       channel=channel, **kw)
 
 
@@ -168,6 +169,29 @@ class TestEskalationsleiter(unittest.TestCase):
                                  {}, NOW, state)
         self.assertEqual(plans[0].action, "none")
 
+    def test_geaenderte_fakten_aktualisieren_den_body(self):
+        alt = mensch()
+        neu = mensch(detail="HTTP 401 + Domain gesperrt", severity="P3")
+        ticket = ar.IssueRef(number=246, created_at=NOW - datetime.timedelta(days=2),
+                             body=ar.render_channel_body("pinterest-token", [alt], NOW))
+        plans = ar.plan_channels([neu], {"pinterest-token": ticket}, NOW, {})
+        self.assertEqual(plans[0].action, "update")
+        self.assertIn("Domain gesperrt", plans[0].body)
+
+    def test_fremdes_ticket_wird_nicht_umgeschrieben(self):
+        ticket = ar.IssueRef(number=246, created_at=NOW - datetime.timedelta(days=2),
+                             body="von Hand geschrieben – Hände weg!")
+        plans = ar.plan_channels([mensch(severity="P3")], {"pinterest-token": ticket}, NOW, {})
+        self.assertNotEqual(plans[0].action, "update")
+
+    def test_kadenz_text_nutzt_die_leiter_des_kanals(self):
+        langsam = ((0, "Meldung"), (14, "Erinnerung"), (30, "Eskalation"))
+        body = ar.render_channel_body("pinterest-parked",
+                                      [mensch(channel="pinterest-parked", ladder=langsam)], NOW)
+        self.assertIn("14 Tage", body)
+        self.assertIn("30 Tage", body)
+        self.assertNotIn("Kanal-Review nach 14 Tagen", body)
+
 
 class TestRouteAusfuehrung(unittest.TestCase):
     """Der Melder darf nie selbst zum Vorfall werden (Lehre aus #209/#227)."""
@@ -208,6 +232,25 @@ class TestRouteAusfuehrung(unittest.TestCase):
         self.assertEqual(create[0]["channel"], "pinterest-token")
         self.assertEqual(create[0]["issue"], 300)
 
+    def test_fehlgeschlagene_aktion_wird_nicht_als_erledigt_vermerkt(self):
+        """Ein nicht zugestellter Kommentar darf die Eskalationsstufe nicht verbrauchen."""
+
+        def runner(args, timeout=60):
+            key = " ".join(args)
+            if "issue list" in key:
+                return (0, json.dumps([{"number": 246, "title": "Token",
+                                        "body": ar.MARKER.format(channel="pinterest-token"),
+                                        "labels": [], "createdAt": "2026-08-20T00:00:00Z"}]), "")
+            return (1, "", "boom")          # comment/create/edit schlagen fehl
+
+        client = ar.GhClient(repo="o/r", runner=runner,
+                             state_path=os.path.join(tempfile.mkdtemp(), "state.json"))
+        ar.route([mensch()], client, now=NOW)
+        with open(client.state_path, encoding="utf-8") as f:
+            state = json.load(f)
+        kanal = state.get("channels", {}).get("pinterest-token", {})
+        self.assertNotIn("last_tier", kanal)
+
     def test_gh_fehler_lassen_den_lauf_gruen(self):
         client = self._client({"issue list": (1, "", "boom"),
                                "issue create": (1, "", "boom")})
@@ -215,6 +258,28 @@ class TestRouteAusfuehrung(unittest.TestCase):
         self.assertFalse(report["ok"])
         self.assertTrue(report["errors"])          # sichtbar im Bericht …
         self.assertIsInstance(report["actions"], list)  # … aber kein Absturz
+
+    def test_ticket_wird_ohne_label_per_marker_gefunden(self):
+        """Label verloren (eingeschränktes Token) → kein zweites Ticket."""
+        body = ar.render_channel_body("pinterest-parked", [mensch()], NOW)
+
+        def runner(args, timeout=60):
+            key = " ".join(args)
+            if "--label" in key:
+                return (0, "[]", "")           # per Label: nichts gefunden
+            if "issue list" in key:
+                return (0, json.dumps([{"number": 279, "title": "geparkt", "body": body,
+                                        "labels": [], "createdAt": "2026-09-12T00:00:00Z"}]), "")
+            return (0, "[]", "")
+
+        client = ar.GhClient(repo="o/r", runner=runner,
+                             state_path=os.path.join(tempfile.mkdtemp(), "state.json"))
+        ticket = client.find_ticket("pinterest-parked")
+        self.assertIsNotNone(ticket)
+        self.assertEqual(ticket.number, 279)
+        # und der Router eröffnet deshalb KEIN zweites Ticket:
+        report = ar.route([mensch(channel="pinterest-parked")], client, now=NOW)
+        self.assertNotIn("create", [a["action"] for a in report["actions"]])
 
     def test_zustand_wird_geschrieben(self):
         client = self._client({
