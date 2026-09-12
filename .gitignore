@@ -97,3 +97,10 @@ data/*.tmp-*
 # Plan/Stand in data/social/ sind versioniert (Dedupe über Läufe hinweg!).
 /SOCIAL-AUTOPILOT-STATUS.md
 data/social/pinterest_boards_cache.json
+
+# Design-Review-Screenshots (e2e/design-shots.mjs)
+shots/
+
+# Playwright E2E-Artefakte
+test-results/
+playwright-report/

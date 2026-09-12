@@ -1,6 +1,6 @@
 # 📐 LAYOUT-REPORT (Layout-Automatisierung)
 
-**Stand:** 2026-09-12 00:19 UTC
+**Stand:** 2026-09-12 14:25 UTC
 
 ## ✅ OK (7)
 
@@ -9,7 +9,7 @@
 ## ⚠️ Warnungen
 
 ## ✅ OK
-Interne Links: 1818 geprüft, 0 kaputt.
+Interne Links: 1819 geprüft, 0 kaputt.
 Covers: alle Originale + WebP/AVIF-Varianten vorhanden.
 Alt-Texte: alle gesetzt und aussagekräftig.
 Schema-JSON-LD (Article) auf allen 31 Artikel-Seiten.
