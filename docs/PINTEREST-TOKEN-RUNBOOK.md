@@ -1,6 +1,6 @@
 # 🔑 Runbook: Pinterest-Zugang (Token-Lebenszyklus)
 
-**Stand:** 08.09.2026 (Härtung #219) · Zuständig: `pinterest-token.yml` (täglich) ·
+**Stand:** 12.09.2026 (Kommandozeilen-Form + Label-Schließung; Härtung #219 vom 08.09.2026) · Zuständig: `pinterest-token.yml` (täglich) ·
 Broker: `scripts/pinterest_token.py` · Autorisierung: `scripts/pinterest_auth.py` ·
 Wache: `scripts/secrets_age_guard.py` · Vertrag: `governance_contract.py` C10–C13
 
@@ -12,14 +12,22 @@ du **einmalig** tun (5 Minuten), damit du es nie wieder tun musst.
 
 ## 0. Schnellstart – die einmalige Neu-Autorisierung (5 Minuten)
 
-> Das ist der Weg, den Issue **#219** verlangt. Alles andere macht die Automatik.
+> Das ist der Weg, den das offene Autorisierungs-Issue (Label `pinterest-token`)
+> verlangt. Alles andere macht die Automatik.
 
 | # | Wo | Was |
 |---|---|---|
 | 1 | GitHub → *Actions* → **Pinterest-Token-Wache** → *Run workflow* | Haken bei **`show_auth_url`** → *Run*. In der Zusammenfassung des Laufs steht ein **anklickbarer Autorisierungs-Link**. |
 | 2 | Browser | Link öffnen, mit dem Pinterest-Konto von FranksFinanzcheck **Erlauben**. Du landest auf `franksfinanzcheck.de/pinterest-oauth` – die Seite zeigt den **Code groß mit Kopier-Knopf**. |
 | 3 | GitHub → *Actions* → **Pinterest-Token-Wache** → *Run workflow* | Code in **`auth_code`** einfügen (du darfst auch die **komplette Adresszeile** einfügen) → *Run*. **Zügig:** Der Code gilt nur wenige Minuten und genau einmal. |
-| 4 | – | Fertig. Der Lauf tauscht den Code, legt `data/pinterest_tokens.enc` an, prüft live, committet – und **schließt #219 von selbst**. Ab jetzt erneuert sich der Zugang täglich (continuous refresh). |
+| 4 | – | Fertig. Der Lauf tauscht den Code, legt `data/pinterest_tokens.enc` an, prüft live, committet – und **schließt das offene Issue von selbst** (der Lauf findet es über das Label `pinterest-token`; die Nummer ist nirgends eingebaut). Ab jetzt erneuert sich der Zugang täglich (continuous refresh). |
+
+**Dasselbe von der Kommandozeile:**
+
+```bash
+gh workflow run pinterest-token.yml -f show_auth_url=true  # Schritt 1
+gh workflow run pinterest-token.yml -f auth_code="<Code>"  # Schritt 3
+```
 
 **Voraussetzungen (einmalig, sonst scheitert Schritt 3):**
 

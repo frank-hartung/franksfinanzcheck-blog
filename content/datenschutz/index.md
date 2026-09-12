@@ -178,7 +178,14 @@ Diese Website enthält Links zu externen Websites Dritter. Auf die Datenverarbei
 
 ## 8. Newsletter / Kontaktaufnahme
 
-**Newsletter:** Diese Website bietet derzeit **keinen Newsletter** an.
+**Newsletter (noch nicht aktiv).** Du kannst dich über [die Anmeldeseite](/newsletter/) oder das Formular im Fußbereich für den Newsletter von FranksFinanzcheck anmelden. Dafür verarbeiten wir deine E-Mail-Adresse sowie die im Formular zusätzlich angegebenen Angaben. **Die Anmeldung ist noch nicht geschaltet:** Sie wird erst aktiv, wenn der Auftragsverarbeitungsvertrag (AVV, Art. 28 DSGVO) mit dem Anbieter abgeschlossen ist – ohne ihn bleibt sie aus.
+
+- **Double-Opt-In.** Nach der Anmeldung senden wir eine Bestätigungs-Mail. Der Newsletter wird erst nach deinem Klick auf den Bestätigungslink verschickt. Wir speichern Anmeldezeitpunkt, Bestätigungszeitpunkt und deine IP-Adresse, um nachweisen zu können, dass die Anmeldung von dir stammt (Art. 6 Abs. 1 lit. a, Art. 7 Abs. 1 DSGVO).
+- **Inhalt und Kadenz.** Eine Mail pro Werktag: die Sparechnungen, Tariffristen und Rechner des Tages aus dem Blog.
+- **Rechtsgrundlage.** Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
+- **Speicherdauer.** Deine Adresse bleibt auf der Liste, bis du dich abmeldest. Nach der Abmeldung löschen wir die Adresse innerhalb von 30 Tagen; Nachweise zur erteilten Einwilligung bewahren wir gemäß Art. 7 Abs. 1 DSGVO für 3 Jahre auf (berechtigtes Interesse zur Abwehr von Ansprüchen).
+- **Widerruf.** Jeder Newsletter enthält am Ende einen Link, mit dem du die Liste sofort verlässt. Du kannst die Einwilligung außerdem jederzeit mit Wirkung für die Zukunft widerrufen, z. B. formlos per Mail an die in der Impressum-Seite genannte Adresse (frankhartung@web.de).
+- **Auftragsverarbeiter.** Versand und Speicherung erfolgen bei BREVO, 131 rue de La Rochefoucauld, 75009 Paris, Frankreich. Der Auftragsverarbeitungsvertrag (DPA) ist in den Brevo-Einstellungen unter *Rechtliches → DPA* als PDF abrufbar und wird mit Abschluss des Kontos geschlossen.
 
 **Kontakt per E-Mail:** Wenn du uns per E-Mail kontaktierst, verarbeiten wir deine angegebenen Daten (E-Mail-Adresse, ggf. Name, Inhalt der Nachricht) zur Bearbeitung deiner Anfrage. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertrag/Vorvertrag) bzw. lit. f DSGVO (berechtigtes Interesse). Die Daten werden gelöscht, sobald sie für die Zweckerreichung nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
 
@@ -191,6 +198,7 @@ Diese Website enthält Links zu externen Websites Dritter. Auf die Datenverarbei
 | Server-Logfiles | 7–14 Tage, danach automatische Löschung/Anonymisierung |
 | Consent-Cookie (`ff_cookie_consent`) | 12 Monate |
 | E-Mail-Korrespondenz | Bis zur abschließenden Bearbeitung, danach Löschung (gesetzliche Aufbewahrungspflichten bleiben unberührt) |
+| Newsletter-Adresse (Brevo-Liste) | Bis zur Abmeldung; Löschung innerhalb von 30 Tagen danach; Einwilligungsnachweise 3 Jahre |
 
 ---
 
@@ -239,6 +247,6 @@ Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne des 
 
 ## 15. Aktualität und Änderung dieser Datenschutzerklärung
 
-Diese Datenschutzerklärung ist aktuell gültig (**Stand: 30. August 2026**). Durch die Weiterentwicklung dieser Website oder aufgrund geänderter gesetzlicher bzw. behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern. Die jeweils aktuelle Fassung findest du jederzeit auf dieser Seite.
+Diese Datenschutzerklärung ist aktuell gültig (**Stand: 12. September 2026**). Durch die Weiterentwicklung dieser Website oder aufgrund geänderter gesetzlicher bzw. behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern. Die jeweils aktuelle Fassung findest du jederzeit auf dieser Seite.
 
-**Letzte Überarbeitung:** 30. August 2026 – Drittlandtransfer in die USA auf das EU-US Data Privacy Framework (Art. 45 DSGVO) für GitHub Pages und Cloudflare umgestellt; Impressum um KI-Transparenzhinweis (Art. 50 EU-KI-VO) ergänzt.
+**Letzte Überarbeitung:** 12. September 2026 – Abschnitt 8 trägt jetzt den vollständigen Newsletter-Rechtstext (Double-Opt-In mit Nachweis, Inhalt und Kadenz, Speicherdauer, Widerruf, Auftragsverarbeiter BREVO); die Freischaltung der Anmeldung ist an den Abschluss des AVV geknüpft; §9 um die Newsletter-Zeile ergänzt. 30. August 2026 – Drittlandtransfer in die USA auf das EU-US Data Privacy Framework (Art. 45 DSGVO) für GitHub Pages und Cloudflare umgestellt; Impressum um KI-Transparenzhinweis (Art. 50 EU-KI-VO) ergänzt.

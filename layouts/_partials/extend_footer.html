@@ -26,12 +26,20 @@
 {{- end -}}
 
 {{- /* ---------- Newsletter-Anmeldung (Footer, nur Inhaltsseiten) ---------- */ -}}
-{{- /* News (10.08.2026): Button erscheint nur, wenn der Param newsletterFormUrl
-       in hugo.toml gesetzt ist (Brevo gehostetes DOI-Formular). */ -}}
-{{- with site.Params.newsletterFormUrl -}}
+{{- /* News (10.08.2026): Button erscheint, wenn EINER der beiden Parameter in
+       hugo.toml gesetzt ist: newsletterFormUrl (Button zum gehosteten
+       Brevo-Formular) oder newsletterFormAction (Inline-Formular auf
+       /newsletter/). Ziel: gehostetes Formular, falls gesetzt, sonst die
+       eigene Anmeldeseite. (12.09.2026: reines Inline-Formular liess den
+       Footer leer – N6/cta-versteckt meldete die Lücke, die Doku versprach
+       aber den CTA für beide Varianten.) */ -}}
+{{- $nlUrl := trim (string site.Params.newsletterFormUrl) " " -}}
+{{- $nlAction := trim (string site.Params.newsletterFormAction) " " -}}
+{{- if or $nlUrl $nlAction -}}
 <div class="newsletter-footer" style="text-align:center; margin: 16px 0 6px; padding: 14px 10px; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
   <span style="display:block; font-weight:600; color:var(--primary); margin-bottom:6px;">📬 Keinen Spartipp mehr verpassen?</span>
-  <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
+  <a href="{{ if $nlUrl }}{{ $nlUrl }}{{ else }}/newsletter/{{ end }}"
+     {{- if $nlUrl }} target="_blank" rel="noopener noreferrer"{{ end }}
      title="Zum kostenlosen Newsletter von FranksFinanzcheck anmelden"
      style="display:inline-flex; align-items:center; gap:8px; background:#0f6049; color:#fff; padding:9px 18px; border-radius:8px; text-decoration:none; font-weight:600; font-size:.95em;">
     Jetzt Newsletter abonnieren – 1 Mail/Tag, jederzeit kündbar
