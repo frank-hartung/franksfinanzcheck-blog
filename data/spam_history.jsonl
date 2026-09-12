@@ -952,3 +952,36 @@
 {"ts": "2026-09-12T14:36:51Z", "module": "spam_guard", "action": "feed-fix", "rules": ["F5"]}
 {"ts": "2026-09-12T14:36:51Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-09-12T14:36:51Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 3}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-10-dsl-wechselbonus-sichern", "rules": ["B5"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas", "rules": ["B2", "B5"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren", "rules": ["B5"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst", "rules": ["B2", "B5"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden", "rules": ["B1"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub", "rules": ["B5"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet", "rules": ["B1"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-03-hausratversicherung-kosten-leistungen-vergleich", "rules": ["B5"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen", "rules": ["B5"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt", "rules": ["B1", "B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh", "rules": ["B5"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe", "rules": ["B2", "B5"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-09-12-gasrechnung-senken-dein-strategieplan-im-spaetsommer", "rules": ["B2"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "feed-fix", "rules": ["F5"]}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-09-12T15:01:13Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 3}
