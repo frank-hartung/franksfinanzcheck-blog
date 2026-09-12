@@ -1,0 +1,106 @@
+# ============================================================
+#  AGENT-REACH INTERNET-RECHERCHE (wöchentlich)
+#  Integration 12.09.2026 – siehe ANLEITUNG-AGENT-REACH.md
+#
+#  Läuft jeden Montag um 08:15 MESZ (entzerrt):
+#    1. Gate:     scripts/agent_reach_gate.py prüft Installation
+#                 und Kanalmatrix (agent-reach doctor)
+#    2. Recherche: scripts/agent_reach_research.py sammelt LESEND
+#                 Signale aus dem kuratierten Themenplan
+#                 (data/agent_reach/themenplan.yaml)
+#    3. Commit:   Recherche-Brief nach data/research/
+#    4. Störung:  Bei Totalausfall aller Quellen → GitHub-Issue
+#
+#  LEITPLANKEN:
+#    - Nur Zero-Config-Kanäle in CI (RSS, Web, YouTube, GitHub).
+#      Login-Kanäle (Twitter/Reddit/…) laufen NIE in CI – Cookies
+#      gehören nur auf Franks lokalen Rechner.
+#    - Der Brief ist eine Signalsammlung: keine Faktenübernahme
+#      ohne menschliche Kuratierung (KI-Redaktions-Statut).
+#
+#  Manuell starten: GitHub → Actions → „Agent-Reach Internet-Recherche"
+# ============================================================
+name: Agent-Reach Internet-Recherche
+
+on:
+  schedule:
+    - cron: "15 6 * * 1"    # Montag 08:15 MESZ – entzerrt (freier Slot)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: agent-reach-research
+  cancel-in-progress: false
+
+jobs:
+  recherche:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v5
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Agent Reach installieren (gepinnt, siehe requirements-agent-reach.txt)
+        run: |
+          # Hinweis: NIEMALS `pip install agent-reach` – das PyPI-Paket
+          # gleichen Namens ist ein anderes Projekt (Supply-Chain-Schutz).
+          python3 -m pip install -q --disable-pip-version-check \
+            -r requirements-agent-reach.txt
+
+      - name: Gate – Installation & Kanalmatrix prüfen
+        run: python3 scripts/agent_reach_gate.py
+
+      - name: Recherche-Brief erzeugen
+        id: recherche
+        # Exit-Code 3 = keine Quelle erreichbar → melden, aber nicht abbrechen
+        continue-on-error: true
+        run: python3 scripts/agent_reach_research.py
+
+      - name: Brief committen (falls neue Signale vorliegen)
+        run: |
+          if git status --porcelain data/research/ | grep -q .; then
+            git config user.name "Agent-Reach-Recherche"
+            git config user.email "agent-reach-recherche@users.noreply.github.com"
+            git add data/research/
+            git commit -m "docs(recherche): Internet-Recherche-Brief $(date +%F)"
+            git push
+            echo "Brief committet."
+          else
+            echo "Keine Änderungen am Brief."
+          fi
+
+      - name: Brief als Artefakt sichern
+        uses: actions/upload-artifact@v4
+        with:
+          name: recherche-brief
+          path: |
+            data/research/*.md
+            data/research/*.json
+          if-no-files-found: ignore
+
+      - name: Issue erstellen bei Totalausfall aller Quellen
+        if: steps.recherche.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITEL="Agent-Reach-Recherche: alle Quellen ausgefallen ($(date +%F))"
+          if ! gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+               --search "in:title \"$TITEL\"" | grep -q .; then
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "$TITEL" \
+              --label agent-reach \
+              --body "scripts/agent_reach_research.py lieferte keine einzige Quelle.
+          Mögliche Ursachen: Feeds im Themenplan (data/agent_reach/themenplan.yaml)
+          unerreichbar, r.jina.ai-Ratenlimit oder Netzwerkstörung im Runner.
+          Prüfen: Gate-Ausgabe im Workflow-Log + ANLEITUNG-AGENT-REACH.md (Troubleshooting)."
+          else
+            echo "Issue existiert bereits – kein Duplikat."
+          fi

@@ -1,0 +1,56 @@
+# ============================================================
+#  AGENT-REACH-THEMENPLAN – kuratierte Recherche-Quellen
+#  (Integration 12.09.2026, siehe ANLEITUNG-AGENT-REACH.md)
+#
+#  Diese Datei ist – wie data/topics.yaml und
+#  data/aktuelle_entwicklungen.yaml – MENSCHLICH KURATIERT.
+#  scripts/agent_reach_research.py liest sie und sammelt daraus
+#  automatisiert Signale (nur LESEN, niemals posten/schreiben).
+#
+#  Pflege: Quellen vierteljährlich prüfen (Feed erreichbar?
+#  Themenfeld noch relevant?). Kaputte Feeds werden im Brief als
+#  Fehler ausgewiesen und sollten dann hier ersetzt werden.
+#
+#  Felder:
+#    rss.name / rss.url       öffentlich zugänglicher RSS/Atom-Feed
+#    rss.kategorie            energie | versicherung | konto | internet | saisonal | gemischt
+#    youtube.query            Suchbegriff für ytsearch (YouTube-Suche)
+#    github.query             GitHub-Repo-Suche (gh search repos)
+#    web.url                  einzelne Webseite, wird per Jina Reader
+#                             als Klartext gelesen (optional, max. 3)
+# ============================================================
+
+version: 1
+
+# --- Nachrichtliche Signalquellen (verifiziert am 12.09.2026) ----
+rss:
+  - name: Tagesschau – alle Meldungen
+    url: "https://www.tagesschau.de/infoservices/alle-meldungen-100~atom.xml"
+    kategorie: gemischt
+  - name: DER SPIEGEL – Wirtschaft
+    url: "https://www.spiegel.de/wirtschaft/index.rss"
+    kategorie: gemischt
+  - name: heise online (Internet/Telekommunikation)
+    url: "https://www.heise.de/rss/heise-atom.xml"
+    kategorie: internet
+
+# --- YouTube: Wonach suchen Leser gerade? -------------------------
+youtube:
+  - query: "Strompreis senken Anbieter wechseln"
+  - query: "ETF Sparplan für Anfänger erklärt"
+  - query: "Kreditkarten Vergleich ohne Jahresgebühr"
+
+# --- GitHub: Werkzeuge/Projekte mit Leser-Nutzen ------------------
+github:
+  - query: "haushaltsbuch"
+
+# --- Einzelne Referenzseiten (Jina Reader, Klartext) --------------
+web:
+  - url: "https://www.tagesschau.de/wirtschaft/"
+
+# --- Brief-Einstellungen -------------------------------------------
+einstellungen:
+  rss_max_je_feed: 5        # Meldungen pro Feed im Brief
+  youtube_max: 5            # Treffer je YouTube-Suche
+  github_max: 5             # Treffer je GitHub-Suche
+  web_max_zeichen: 1200     # Klartext-Auszug je Webseite

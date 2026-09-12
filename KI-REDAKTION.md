@@ -182,3 +182,52 @@ KI-REDAKTION.md                      diese Doku
 Kompatibilität: Die Content-Engine v2, der AGC-Autopilot und alle Guards
 bleiben unverändert. Die KI-Redaktion nutzt die AGC-Recherche
 (Brand Brain + Tagesreport) über `agc_context.py` automatisch mit.
+
+---
+
+## 9. Internet-Recherche (Agent Reach, seit 12.09.2026)
+
+Damit **News-Anlässe** und **Faktenanker** nicht allein aus den kuratierten
+Stamm-Dateien kommen, gibt es eine ergänzende, rein **lesende** Recherche-
+Schicht über das Open-Source-Tool
+[Agent Reach](https://github.com/Panniantong/Agent-Reach) (kostenlos,
+ohne API-Keys).
+
+```
+  KURATIERTE QUELLEN (Themenplan)        agent-reach (lesend)
+  ┌────────────────────────────┐   ┌─────────────────────────────┐
+  │ data/agent_reach/          │ → │ Mo 08:15 MESZ (CI) / manuell │
+  │ themenplan.yaml            │   │ scripts/agent_reach_research │
+  │ (RSS-Feeds, YouTube-,      │   │ → RSS / YouTube / GitHub / Web│
+  │  GitHub-, Web-Quellen)     │   │ → data/research/<datum>-*.md  │
+  └────────────────────────────┘   └─────────────────────────────┘
+                       │
+                       ▼  (bewusste, menschliche Übernahme einzelner Signale)
+  data/aktuelle_entwicklungen.yaml  /  data/topics.yaml
+```
+
+**So bleibt es statuskonform:**
+
+1. Der Recherche-Brief ist eine **Signalsammlung**, kein fertiger Text.
+   Die KI-Redaktion zitiert/paraphrasiert weiterhin **nur** aus den
+   kuratierten Pools (`aktuelle_entwicklungen.yaml`, `topics.yaml`) –
+   niemals direkt aus einem Brief.
+2. Ein Signal wird erst dann zum Faktenanker, wenn Frank (oder ein Agent
+   mit Quellenprüfung) es **bewusst** in eine kuratierte Datei übernimmt
+   (inkl. `id`/`kategorie`/`ab`/`bis`, siehe Kommentarblock der YAML).
+3. Agent Reach läuft hier **rein lesend**: kein Posten, kein Kommentieren,
+   keine Cookies/Logins in CI (Login-Kanäle nur lokal, siehe
+   `ANLEITUNG-AGENT-REACH.md`). Das schützt die Garantie aus Abschnitt 7.
+
+**Bedienung:**
+
+```bash
+# Gesundheit der Recherche-Schicht prüfen (Exit 0 = einsatzbereit)
+python3 scripts/agent_reach_gate.py
+
+# Recherche-Brief manuell erzeugen → data/research/
+python3 scripts/agent_reach_research.py
+```
+
+Einzelheiten, Kanalmatrix und Troubleshooting: `ANLEITUNG-AGENT-REACH.md`.
+Rollout-Nachweis: `AGENT-REACH-INTEGRATION-2026-09-12.md`.
