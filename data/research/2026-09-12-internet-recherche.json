@@ -1,78 +1,228 @@
 {
   "datum": "2026-09-12",
-  "erzeugt_utc": "2026-09-12 15:02 UTC",
+  "erzeugt_utc": "2026-09-12 15:14 UTC",
   "agent_reach": "Agent Reach v1.5.0",
-  "kanal_ok": 1,
-  "kanal_fehler": 7,
+  "kanal_ok": 7,
+  "kanal_fehler": 1,
   "ergebnisse": {
     "rss": {
       "Tagesschau – alle Meldungen": {
-        "treffer": [],
-        "fehler": "Feed nicht lesbar (bozo, keine Einträge)"
+        "treffer": [
+          {
+            "titel": "Protest in vielen Städten: Zehntausende demonstrieren gegen Rechts",
+            "url": "https://www.tagesschau.de/inland/gesellschaft/demos-gegen-rechts-120.html",
+            "datum": "2026-09-12T14:52",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Wie die Stadt Wittenberge ihr Industrie-Erbe neu nutzen will",
+            "url": "https://www.tagesschau.de/wirtschaft/technologie/wittenberge-industriequartier-100.html",
+            "datum": "2026-09-12T13:22",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Bundesnetzagentur stellt klar - Gasspeicher sind ausreichend gefüllt",
+            "url": "https://www.tagesschau.de/wirtschaft/verbraucher/gas-speicher-preise-102.html",
+            "datum": "2026-09-12T13:20",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "China fordert auf BRICS-Treffen in Neu-Delhi mehr Einsatz für Frieden",
+            "url": "https://www.tagesschau.de/ausland/brics-treffen-neu-delhi-china-100.html",
+            "datum": "2026-09-12T13:07",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "CDU-Generalsekretärin Hoppermann verteidigt Bundeskanzler Merz",
+            "url": "https://www.tagesschau.de/inland/merz-kritik-hoppermann-100.html",
+            "datum": "2026-09-12T11:46",
+            "quelle": "Tagesschau – alle Meldungen"
+          }
+        ],
+        "fehler": null
       },
       "DER SPIEGEL – Wirtschaft": {
-        "treffer": [],
-        "fehler": "Feed nicht lesbar (bozo, keine Einträge)"
+        "treffer": [
+          {
+            "titel": "Streit über Termingarantie: Kassenärzte stellen schnellere Facharzttermine in Aussicht – bei medizinischer Notwendigkeit",
+            "url": "https://www.spiegel.de/wirtschaft/soziales/streit-ueber-termingarantie-kassenaerzte-stellen-schnellere-facharzttermine-in-aussicht-bei-medizinischer-notwendigkeit-a-a670f70b-5311-4270-93cf-7e1b0abffc20#ref=rss",
+            "datum": "Sat, 12 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Fair Fashion: Wie nachhaltige Marken in der Krise um Kundschaft kämpfen",
+            "url": "https://www.spiegel.de/wirtschaft/unternehmen/fair-fashion-wie-nachhaltige-marken-in-der-krise-um-kundschaft-kaempfen-a-68068374-79a1-4d7b-b0cc-fc3483dd8fcb#ref=rss",
+            "datum": "Sat, 12 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Iran-Krieg und Gaspreis: Verivox rechnet mit bis zu 20 Prozent höheren Kosten",
+            "url": "https://www.spiegel.de/wirtschaft/service/iran-krieg-und-gaspreis-verivox-rechnet-mit-bis-zu-20-prozent-hoeheren-kosten-a-14cf04d5-5859-415b-bfea-b89ba55c9f6d#ref=rss",
+            "datum": "Sat, 12 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Grüne wollen Milliarden von verwaisten Bankkonten mobilisieren",
+            "url": "https://www.spiegel.de/wirtschaft/gruene-wollen-milliarden-von-verwaisten-bankkonten-mobilisieren-a-f425b69c-e923-42b6-a3fd-bf90d0e747e3#ref=rss",
+            "datum": "Sat, 12 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Volkswagen: Arbeitnehmer wollen VW-Vorstand zu Gesprächen zwingen",
+            "url": "https://www.spiegel.de/wirtschaft/unternehmen/volkswagen-arbeitnehmer-wollen-vw-vorstand-zu-gespraechen-zwingen-a-e4455a3f-21a1-45ea-8f10-cdef5a5749cf#ref=rss",
+            "datum": "Fri, 11 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          }
+        ],
+        "fehler": null
       },
       "heise online (Internet/Telekommunikation)": {
-        "treffer": [],
-        "fehler": "Feed nicht lesbar (bozo, keine Einträge)"
+        "treffer": [
+          {
+            "titel": "Mobiler Monitor Asus Zenscreen OLED MQ16FC im Test: wertig & farbstark für 280 €",
+            "url": "https://www.heise.de/bestenlisten/testbericht/mobiler-monitor-asus-zenscreen-oled-mq16fc-im-test-wertig-und-farbstark-fuer-280-euro/71j1e0w?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-12T16:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "KI-Bots von OpenAI griffen Open-Source-Plattform RubyGems an",
+            "url": "https://www.heise.de/news/Autonome-KI-Agenten-von-OpenAI-an-Cyberangriff-gegen-RubyGems-beteiligt-11451345.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-12T15:45",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Roboterkoch brät am Bahnhof: Modellversuch in Leipzig",
+            "url": "https://www.heise.de/news/Roboterkoch-braet-am-Bahnhof-Modellversuch-in-Leipzig-11451299.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-12T14:05",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "VW stimmt Gesprächen mit Gewerkschaft über Konzernumbau zu",
+            "url": "https://www.heise.de/news/VW-stimmt-Gespraechen-mit-Gewerkschaft-ueber-Konzernumbau-zu-11451295.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-12T13:05",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "heise-Angebot: Java in seiner besten Form: Noch Frühbucherticket für betterCode() Java sichern",
+            "url": "https://www.heise.de/news/Java-in-seiner-besten-Form-Noch-Fruehbucherticket-fuer-betterCode-Java-sichern-11449790.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-12T13:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          }
+        ],
+        "fehler": null
       }
     },
     "youtube": {
       "Strompreis senken Anbieter wechseln": {
-        "treffer": [],
-        "fehler": "yt-dlp-Fehler: WARNING: [youtube:search] TLS/SSL connection has been closed (EOF) (_ssl.c:992). Retrying (1/3)..."
+        "treffer": [
+          {
+            "titel": "Geld sparen mit Strom/Gas Anbieter Wechsel | Frugalismus Tipps",
+            "url": "https://www.youtube.com/watch?v=TmCaACcZgN8",
+            "kanal": "BusinessWikinger",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Dein Stromtarifwechsel in nur 5 Schritten - SPARE bis zu €850!",
+            "url": "https://www.youtube.com/watch?v=U4K-J6fDdqw",
+            "kanal": "Verträge, Vorsorge & Sparpotenziale",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Ich wechsel meinen Stromanbieter live in diesem Video und zahle dann nur noch 36,88 Cent / kWh",
+            "url": "https://www.youtube.com/watch?v=uO2lRAkhLHE",
+            "kanal": "Smart2Finance",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "STROMKOSTEN SENKEN LEICHT GEMACHT",
+            "url": "https://www.youtube.com/watch?v=AV6klzZwCeo",
+            "kanal": "Energiepreis Reduktion",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "TIBBER - Stromkosten senken! Geld Sparen, Stromtarif, Strombörse",
+            "url": "https://www.youtube.com/watch?v=a6flroWreNk",
+            "kanal": "Frührentner",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
       },
       "ETF Sparplan für Anfänger erklärt": {
-        "treffer": [],
-        "fehler": "yt-dlp-Fehler: WARNING: [youtube:search] TLS/SSL connection has been closed (EOF) (_ssl.c:992). Retrying (1/3)..."
+        "treffer": [
+          {
+            "titel": "Alles über ETFs in nur 15 Minuten: Index, Sparplan, Steuern",
+            "url": "https://www.youtube.com/watch?v=r80NOOdFIn8",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF einfach erklärt (explainity® Erklärvideo)",
+            "url": "https://www.youtube.com/watch?v=YVB2TV0ziIE",
+            "kanal": "explainity ® Erklärvideos",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "So fängst du 2026 mit dem Investieren an (in 10 Min!)",
+            "url": "https://www.youtube.com/watch?v=eTCTGwFO1-Y",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF Sparplan: Schritt-für-Schritt zum ETF Portfolio",
+            "url": "https://www.youtube.com/watch?v=LCLpqN99_iU",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF kaufen 2024: Anleitung zum Sparen mit ETFs - in 3 Schritten zur Geldanlage mit ETF Sparplan",
+            "url": "https://www.youtube.com/watch?v=JoQ9_KliPWk",
+            "kanal": "Stiftung Warentest",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
       },
       "Kreditkarten Vergleich ohne Jahresgebühr": {
-        "treffer": [],
-        "fehler": "yt-dlp-Fehler: WARNING: [youtube:search] TLS/SSL connection has been closed (EOF) (_ssl.c:992). Retrying (1/3)..."
+        "treffer": [
+          {
+            "titel": "Kreditkarten Vergleich: Die besten kostenlosen Kreditkarten 2025! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=r0VXMVcN1k4",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten ohne Auslandsgebühren (2026) Welche lohnt sich wirklich?",
+            "url": "https://www.youtube.com/watch?v=2HuHTzSNDvE",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "💳  💳  💳 Kreditkarten Vergleich - Kreditkarte kostenlos - Kreditkarte beantragen 💳  💳  💳",
+            "url": "https://www.youtube.com/watch?v=gP8ibA0yuWQ",
+            "kanal": "Digitale Infoprodukte",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten Vergleich, Test online kostenlos beantragen (unbedingt ansehen!)",
+            "url": "https://www.youtube.com/watch?v=zNxtV6nPw98",
+            "kanal": "GeldWiki",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "💥 Kreditkarte ohne Jahresgebühr + 75€ Gutschrift für Neukunde! *2.500€ Kreditlimit* 💥",
+            "url": "https://www.youtube.com/watch?v=F0aDt8my4Rw",
+            "kanal": "Online Kredit Erfahrungen",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
       }
     },
     "github": {
       "haushaltsbuch": {
-        "treffer": [
-          {
-            "titel": "s-yukikaze/Haushaltsbuch",
-            "url": "https://github.com/s-yukikaze/Haushaltsbuch",
-            "beschreibung": "TH155 netplay statistics recording tool",
-            "sterne": 12,
-            "quelle": "GitHub"
-          },
-          {
-            "titel": "SebastianRzk/BudgetButlerWeb",
-            "url": "https://github.com/SebastianRzk/BudgetButlerWeb",
-            "beschreibung": "Ein einfaches Haushaltsbuch für eine schlanke und individuelle Finanzverwaltung.",
-            "sterne": 20,
-            "quelle": "GitHub"
-          },
-          {
-            "titel": "hska-ebusiness-ws2021/haushaltsbuch",
-            "url": "https://github.com/hska-ebusiness-ws2021/haushaltsbuch",
-            "beschreibung": "",
-            "sterne": 0,
-            "quelle": "GitHub"
-          },
-          {
-            "titel": "Sleepwalker86/Haushaltsbuch",
-            "url": "https://github.com/Sleepwalker86/Haushaltsbuch",
-            "beschreibung": "Finanzverwaltung für den Haushalt - CSV-Import, Dashboard, Analysen und Paperless-Integration. Docker-ready, self-hosted.",
-            "sterne": 8,
-            "quelle": "GitHub"
-          },
-          {
-            "titel": "eichstaedtk/haushaltsbuch",
-            "url": "https://github.com/eichstaedtk/haushaltsbuch",
-            "beschreibung": "Anwendung zur Führung eines Haushaltbuches",
-            "sterne": 5,
-            "quelle": "GitHub"
-          }
-        ],
-        "fehler": null
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
       }
     }
   }
