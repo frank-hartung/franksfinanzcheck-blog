@@ -217,9 +217,9 @@ items:
   date: '2026-09-13'
   time: '13:15'
   scheduled_at: '2026-09-13T13:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: facebook:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum:vergleich:2026-09-13
   channel: facebook
   slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
@@ -229,9 +229,9 @@ items:
   date: '2026-09-13'
   time: '15:15'
   scheduled_at: '2026-09-13T15:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: threads:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen:vergleich:2026-09-13
   channel: threads
   slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
@@ -241,9 +241,9 @@ items:
   date: '2026-09-13'
   time: '16:15'
   scheduled_at: '2026-09-13T16:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: telegram:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:nutzen:2026-09-13
   channel: telegram
   slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
