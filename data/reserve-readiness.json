@@ -78,15 +78,31 @@
       }
     },
     {
-      "slug": "2026-09-12-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
+      "slug": "2026-09-13-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
       "ready": true,
-      "sha256": "2e4c51622224ba3c1062b8de4b4a60ae22fcf571f3d3ddb9778377c98c53363c",
+      "sha256": "e7d812df74243cb5877b819a8bfdc389c53d3c3ca289d629e719610c01af608a",
       "score": 0.889,
       "parts": {
         "spelling": 0.88,
         "meta": 0.7,
         "structure": 1.0,
         "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-13-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "ready": false,
+      "sha256": "49f39c633ed5663ef0de07fa30e6ec7a6c77483d0a8614d45232c930d15c585d",
+      "reason": "publish_gate/hugo abgelehnt (STRICT dry-run) – Details im Workflow-Log",
+      "score": 0.94,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8
