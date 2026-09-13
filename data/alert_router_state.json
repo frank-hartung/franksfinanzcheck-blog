@@ -2,9 +2,11 @@
   "channels": {
     "bot-watchdog": {
       "closed_at": "2026-09-12T19:14:27.262270+00:00",
-      "last_tier": -1,
-      "open": false
+      "first_seen": "2026-09-13T13:23:57.708721+00:00",
+      "last_tier": 0,
+      "open": true,
+      "ticket": 281
     }
   },
-  "updated_at": "2026-09-12T19:14:34.823744+00:00"
+  "updated_at": "2026-09-13T13:24:02.198440+00:00"
 }
