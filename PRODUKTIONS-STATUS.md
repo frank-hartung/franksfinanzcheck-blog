@@ -1,15 +1,15 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-12 22:09 UTC  
+**Stand:** 2026-09-13 22:19 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-09-11): 3 Artikel – Ziel erfüllt. – Bestand: 1 förderfähig in der Re-Queue, 9 von Gates gehalten (ältester 5 Tage: publish-gate: Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig)
+**Befund:** Letzter Publikationstag (2026-09-11): 3 Artikel – Ziel erfüllt. – Bestand: 1 förderfähig in der Re-Queue, 9 von Gates gehalten (ältester 6 Tage: publish-gate: Textverständnis-Gate nicht bestanden: R5-ABSATZ-HART: Absatz mit 11 Sätzen (Limit 6): Im Herbst wird es früher dunkel. Der Alltag verändert sich. Das Licht brennt …)
 
 | Kennzahl | Wert |
 |---|---|
-| Heute | 2026-09-12 (Samstag) |
+| Heute | 2026-09-13 (Sonntag) |
 | Publikationstag heute | nein |
 | Artikel letzter Publikationstag (2026-09-11) | 3 |
-| Letzter Artikel überhaupt | 2026-09-11 (1 Tage her) |
+| Letzter Artikel überhaupt | 2026-09-11 (2 Tage her) |
 | Live-Artikel gesamt | 31 |
 | Förderfähig in der Re-Queue | 1 |
 | Von Gates gehalten (braucht Korrektur) | 9 |
