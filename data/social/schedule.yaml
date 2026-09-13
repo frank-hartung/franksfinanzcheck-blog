@@ -253,9 +253,9 @@ items:
   date: '2026-09-13'
   time: '18:00'
   scheduled_at: '2026-09-13T18:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: x:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen:thread:2026-09-13
   channel: x
   slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
@@ -265,9 +265,9 @@ items:
   date: '2026-09-13'
   time: '19:15'
   scheduled_at: '2026-09-13T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: telegram:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen:nutzen:2026-09-14
   channel: telegram
   slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
