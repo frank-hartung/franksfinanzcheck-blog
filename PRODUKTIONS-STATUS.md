@@ -1,8 +1,8 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-14 19:20 UTC  
+**Stand:** 2026-09-14 21:03 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-09-14): 2 Artikel – Ziel erfüllt. – Bestand: 11 von Gates gehalten (ältester 7 Tage: publish-gate: Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig)
+**Befund:** Letzter Publikationstag (2026-09-14): 2 Artikel – Ziel erfüllt. – Bestand: 11 von Gates gehalten (ältester 7 Tage: publish-gate: Textverständnis-Gate nicht bestanden: R5-ABSATZ-HART: Absatz mit 9 Sätzen (Limit 6): Wenn die Tage kürzer werden, beginnt die beste Zeit zum Sparen. Die Blätter fä…)
 
 | Kennzahl | Wert |
 |---|---|
