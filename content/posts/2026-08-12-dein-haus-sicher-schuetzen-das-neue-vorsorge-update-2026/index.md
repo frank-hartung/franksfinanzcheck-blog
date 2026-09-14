@@ -138,7 +138,7 @@ Die Politik diskutiert über eine Pflicht. Abgeschlossen ist sie nicht. Wer in Z
 
 - Neuwert statt Zeitwert bei Hausrat - Aufräum‑ und Abbruchkosten ausreichend hoch
 - Hotelkosten nach Unbewohnbarkeit, mind. 150–200 Tage - Datenrettung und Schlossänderung nach Einbruch
-- Ableitungsrohre auf dem Grundstück  
+- Ableitungsrohre auf dem Grundstück
 
 Ein Vorsorge‑Update ist kein neuer Vertrag um des Wechsels willen. Nimm dir einen Nachmittag und lies deine drei PDFs. Frage dich: Würde ich das nach einem Sturm noch fair finden? Wenn nein, vergleiche und ersetze den Vertrag nahtlos.
 

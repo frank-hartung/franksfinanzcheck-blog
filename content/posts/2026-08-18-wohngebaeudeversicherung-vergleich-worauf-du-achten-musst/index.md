@@ -48,7 +48,7 @@ Eine Wohngebäudeversicherung schützt dein Haus und alles, was fest damit verbu
 
 Eine höhere Selbstbeteiligung senkt die Jahresprämie merklich. Beispiel:  
 * 0 € SB → 420 € Jahresbeitrag * 500 € SB → 380 € Jahresbeitrag
-* 1.000 € SB → 340 € Jahresbeitrag  
+* 1.000 € SB → 340 € Jahresbeitrag
 
 Rechne die mögliche Ersparnis gegen das Risiko ab, dass du im Schadensfall mehr aus der Tasche zahlst. Für Leitungswasserschäden, die durchschnittlich 1.200 € pro Vorfall kosten, lohnt sich meist eine SB von 500 €, weil die meisten Schäden unter dieser Schwelle bleiben.
 
