@@ -1,7 +1,7 @@
 ---
 title: "Gasrechnung senken: So bereitest du dich im Spätsommer vor"
 description: Wer rechtzeitig handelt, kann massiv seine Gasrechnung senken. Erfahre, wie du mit der Herbst Vorbereitung Heizkosten sparst und die Heizung prüfst.
-date: 2026-09-13T08:26:47Z
+date: 2026-09-14T09:07:03Z
 draft: true
 reserve: true
 tags: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]

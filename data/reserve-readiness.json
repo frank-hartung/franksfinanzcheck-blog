@@ -93,9 +93,9 @@
       }
     },
     {
-      "slug": "2026-09-13-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "slug": "2026-09-14-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
       "ready": false,
-      "sha256": "49f39c633ed5663ef0de07fa30e6ec7a6c77483d0a8614d45232c930d15c585d",
+      "sha256": "9b54b9f24b74227e149349c6868fc0be455e17adca1bf410a5ded5b02ab54d16",
       "reason": "publish_gate/hugo abgelehnt (STRICT dry-run) – Details im Workflow-Log",
       "score": 0.94,
       "parts": {
