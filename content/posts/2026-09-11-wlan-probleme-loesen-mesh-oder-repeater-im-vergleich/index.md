@@ -87,7 +87,7 @@ Hier siehst du auf einen Blick, welche Lösung für deine spezifischen **WLAN-Pr
 | **Roaming** | Manuell / Verzögerung | Nahtlos (Seamless) | Nahtlos & Priorisierung |
 | **Maximale Geräte** | ca. 5–10 | ca. 20–40 | 100+ (Smart Home ready) |
 | **Installation** | Einstecken & WPS | App-gesteuert (einfach) | App-gesteuert (umfangreich) |
-SATZ: | **Kosten** | 30–80 € | 120–200 € | 300–600 € |
+| **Kosten** | 30–80 € | 120–200 € | 300–600 € |
 | **Vorteil** | Preiswert, klein | Preis-Leistungs-Sieger | Maximale Performance |
 
 ## Homeoffice Internet: Stabil und sicher arbeiten

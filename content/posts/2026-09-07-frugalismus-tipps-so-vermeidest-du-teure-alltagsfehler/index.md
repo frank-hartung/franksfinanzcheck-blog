@@ -90,8 +90,8 @@ Ein Wochenende ohne jegliche Ausgaben klingt für viele zunächst abschreckend. 
 
 Solche Tage oder Wochenenden zeigen dir, dass Erlebnisse nicht zwangsläufig Geld kosten müssen. Oft entstehen bei diesen Gelegenheiten die schönsten Erinnerungen. Du triffst dich mit Freunden zum Spieleabend zu Hause statt in einer teuren Bar. Jeder bringt etwas mit, und die Kosten für den Abend sinken gegen Null.
 
-| Aktivität | Kosten konventionell (ca.) | Kosten No-Spend (ca.) | Ersparnis (ca.) |
-| :--- | :--- | :--- | :--- |
+| Aktivität | Kosten konventionell (ca.) | Alternative | Kosten No-Spend (ca.) | Ersparnis (ca.) |
+| :--- | :--- | :--- | :--- | :--- |
 | Kinobesuch mit Popcorn | 25 € | Filmabend zu Hause | 0 € | 25 € |
 | Abendessen im Restaurant | 40 € | Gemeinsames Kochen | 5 € | 35 € |
 | Fitnesskurs im Studio | 15 € | Workout im Park | 0 € | 15 € |
