@@ -34,7 +34,7 @@ Du verdienst 5.000 € netto – und trotzdem bleibt nichts übrig? Der Kontos
 **Das Wichtigste in Kürze**
 * Deine innere Einstellung bestimmt ca. 80 bis 90 % deines langfristigen Erfolgs. * Automatische Abläufe bilden das Fundament für dein wachsendes Kapital.
 * Kleine monatliche Beträge führen über ca. 15 bis 30 Jahre zu Wohlstand. * Bewusster Verzicht heute sichert dir morgen deine persönliche Unabhängigkeit.
-* Transparenz über alle Kosten verhindert unnötige Geldverluste.  
+* Transparenz über alle Kosten verhindert unnötige Geldverluste.
 
 ---
 
@@ -56,7 +56,7 @@ Sieh Geld als Werkzeug für deine Ziele. Es bringt Sicherheit und Freiheit. Geld
 
 Reichtum beginnt im Kopf. Übernimm die Verantwortung für deine Finanzen. Gib nicht dem Markt oder dem Chef die Schuld. Nur du steuerst dein Geld. Dein Tun heute bestimmt dein Konto morgen.
 
-### Praktische Übungen für ein starkes Money Mindset  
+### Praktische Übungen für ein starkes Money Mindset
 
 | Übung | Ziel | Wie du sie umsetzt (5 Min/Tag) |
 |------|------|--------------------------------|
@@ -82,7 +82,7 @@ Nutze die 30‑Tage‑Regel bei großen Käufen. Warte einen Monat ab. Oft verge
 | Abos regelmäßig prüfen | ca. 1.500 € Ersparnis | Gefühl von Ordnung und Kontrolle |
 | Impulskäufe vermeiden | ca. 5.000 € Ersparnis | Mentale Disziplin und Klarheit |
 
-### Automatisierung leicht gemacht – Tools & Tipps  
+### Automatisierung leicht gemacht – Tools & Tipps
 
 | Tool | Kosten | Was es automatisiert | Pro | Contra |
 |------|--------|----------------------|-----|--------|
@@ -126,12 +126,12 @@ Bilde zuerst einen [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-di
 
 Automatisiere danach deine Sparrate. Bilde dich in Finanzen weiter. Lies Bücher und seriöse Quellen. Wer mehr weiß, bleibt ruhig. Kontinuität schlägt fast immer bloße Klugheit.
 
-### Checkliste für den Start  
+### Checkliste für den Start
 
 1. **Einnahmen & Fixkosten erfassen** (Miete, Versicherungen, Abos). 2. **Variable Kosten analysieren** (Essen, Freizeit, Shopping).
 3. **Notgroschen anlegen** (mind. 3 Monate, ideal 6). 4. **Schulden priorisieren** – zuerst hochverzinsliche Kredite.
 5. **Dauerauftrag für Sparplan einrichten** (ETF, Indexfonds). 6. **Finanz‑App installieren** und Kategorien anpassen.
-7. **Monatliche Review** (15 Minuten): Soll‑Ist‑Vergleich, Anpassungen.  
+7. **Monatliche Review** (15 Minuten): Soll‑Ist‑Vergleich, Anpassungen.
 
 ## Welche Fehler kosten dich am meisten Geld?
 
@@ -141,7 +141,7 @@ Ein großer Fehler: alles auf eine Karte setzen. Egal ob Aktie, Krypto oder Gold
 
 Auch kleine Gebühren fressen Rendite. Kontokosten und teure Policen summieren sich. Prüfe deine Verträge darum oft. Wechsle bei gleicher Leistung zum günstigeren Anbieter. Jeder gesparte Euro bleibt im Depot.
 
-### Häufige Fehlentscheidungen und ihr finanzieller Effekt  
+### Häufige Fehlentscheidungen und ihr finanzieller Effekt
 
 | Fehler | Beispiel | Verpasste Chance (10 Jahre, 7 % Rendite) |
 |--------|----------|------------------------------------------|
@@ -166,7 +166,7 @@ Wer mit wenig auskommt, hat Macht über sein Leben. Deine Fixkosten bestimmen de
 
 Frage vor jedem Kauf: Bringt er mir langfristig etwas? Macht er mich dauerhaft glücklich? Oft kaufen wir gegen ein Loch im Bauch. Wir beeindrucken Menschen, die wir nicht mögen. Freiheit heißt, diesem Druck zu entkommen.
 
-### Frugalismus vs. Minimalismus – Unterschiede und Nutzen  
+### Frugalismus vs. Minimalismus – Unterschiede und Nutzen
 
 | Aspekt | Frugalismus | Minimalismus |
 |--------|-------------|--------------|

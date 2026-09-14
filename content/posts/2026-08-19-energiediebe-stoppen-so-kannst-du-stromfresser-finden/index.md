@@ -50,7 +50,7 @@ _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über eine
 | 6 | **Halogen‑/Glühlampen** | 280 kWh (15 × 50 W × 4 h) | 98 € | 84 € (LED 5 W) | **Vorteil:** Gutes Licht, günstiger Preis. **Nachteil:** 10‑x höherer Verbrauch als LED. |
 | 7 | **Zweit‑Kühlschrank im Keller** | 300 kWh | 105 € | 105 € (Ausschalten) | **Vorteil:** Extra Lagerfläche. **Nachteil:** Selten genutzt, hoher Verbrauch. |
 
-### Warum diese Geräte besonders kritisch sind  
+### Warum diese Geräte besonders kritisch sind
 
 * **Kühl‑/Gefriergeräte**: Jeder Grad kälter erhöht den Strombedarf um ca. 6 %. Ein Gerät, das 7 °C statt 5 °C im Frischteil hat, spart bereits 15 € / Jahr. * **Heizungspumpen**: Moderne Hocheffizienz‑Pumpen passen die Drehzahl dem tatsächlichen Bedarf an (Variable‑Speed‑Technik). Das reduziert nicht nur Strom, sondern schont auch das Heizsystem.
 * **Standby‑Verbraucher**: Viele Geräte zeigen im Netzstecker keinen Hinweis auf den Verbrauch. Ein Messgerät offenbart, dass ein „ausgeschalteter“ Fernseher oft 12 W zieht – das entspricht 105 kWh/Jahr. * **Warmwasser‑Boiler**: Ein 150‑Liter‑Boiler mit 1500 W Heizelement verbraucht rund 1 200 kWh, wenn er ständig auf 60 °C gehalten wird. Ein Durchlauferhitzer mit Temperatur‑Regelung kann den Bedarf um bis zu 50 % senken.
@@ -76,7 +76,7 @@ Ein Infrarot‑Thermometer (z. B. **Fluke 62 Max**) erkennt überhitzte Netzte
 
 **AVM FRITZ!DECT 200**) liefern Echtzeit‑Daten in der App. Sie ermöglichen das **Automatisieren** von Abschaltzeiten (z. B. Router 01:00–06:00 Uhr).
 
-#### Vor‑ und Nachteile von Smart‑Plugs vs. klassischen Messgeräten  
+#### Vor‑ und Nachteile von Smart‑Plugs vs. klassischen Messgeräten
 
 | Merkmal | Klassisches Messgerät | Smart‑Plug |
 |--------|----------------------|------------|
@@ -170,10 +170,10 @@ Energiediebe sind selten dramatisch. Sie sind langweilig und dauerhaft. Genau de
 
 ## Ersatzentscheidung mit Amortisation, nicht mit schlechtem Gewissen
 
-**Schritt‑für‑Schritt‑Rechner:**  
+**Schritt‑für‑Schritt‑Rechner:**
 
 1. **Alter Verbrauch** (kWh/Jahr) – **Neuer Verbrauch** (kWh/Jahr) = **ΔkWh**. 2. **ΔkWh × Strompreis** = **Jährliche Ersparnis**.
-3. **Kaufpreis** ÷ **Jährliche Ersparnis** = **Amortisationszeit** (Jahre).  
+3. **Kaufpreis** ÷ **Jährliche Ersparnis** = **Amortisationszeit** (Jahre).
 
 Beispiel: *Alter Kühlschrank*: 350 kWh → 122,50 € *Neuer A‑Klasse‑Kühlschrank*: 110 kWh → 38,50 € ΔkWh = 240 kWh → Ersparnis = 84 € Kaufpreis = 600 € → Amortisation = 7,1 Jahre.
 

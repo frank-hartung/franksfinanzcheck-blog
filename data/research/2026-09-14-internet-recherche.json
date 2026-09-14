@@ -1,0 +1,229 @@
+{
+  "datum": "2026-09-14",
+  "erzeugt_utc": "2026-09-14 12:53 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 7,
+  "kanal_fehler": 1,
+  "ergebnisse": {
+    "rss": {
+      "Tagesschau – alle Meldungen": {
+        "treffer": [
+          {
+            "titel": "Rückendeckung für Merz - aber die Debatte reißt nicht ab",
+            "url": "https://www.tagesschau.de/inland/innenpolitik/cdu-merz-debatte-100.html",
+            "datum": "2026-09-14T12:51",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Bund und UniCredit verhandeln über Commerzbank-Übernahme",
+            "url": "https://www.tagesschau.de/wirtschaft/finanzen/marktbericht-commerzbank-unicredit-100.html",
+            "datum": "2026-09-14T12:27",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Russische Drohnenangriffe - Vor allem Kiew ist im Visier",
+            "url": "https://www.tagesschau.de/ausland/europa/ukraine-drohnen-134.html",
+            "datum": "2026-09-14T12:11",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Trump kündigt Ende der Zölle auf irischen Whiskey an",
+            "url": "https://www.tagesschau.de/wirtschaft/weltwirtschaft/trump-whiskey-irland-100.html",
+            "datum": "2026-09-14T11:09",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Bundesanwaltschaft: Anklage gegen mutmaßliche Russland-Spionin",
+            "url": "https://www.tagesschau.de/inland/innenpolitik/anklage-spionin-russland-100.html",
+            "datum": "2026-09-14T11:03",
+            "quelle": "Tagesschau – alle Meldungen"
+          }
+        ],
+        "fehler": null
+      },
+      "DER SPIEGEL – Wirtschaft": {
+        "treffer": [
+          {
+            "titel": "Insel Syros: Griechische Steuerfahnder verhängen Strafe – weil Fisch zu frisch erschien",
+            "url": "https://www.spiegel.de/wirtschaft/insel-syros-griechische-steuerfahnder-verhaengen-strafe-weil-fisch-zu-frisch-erschien-a-458048a1-4ce1-41cd-b43f-40e90e6415b6#ref=rss",
+            "datum": "Mon, 14 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Spritpreise: Tankstellenverband warnt vor drei Euro pro Liter",
+            "url": "https://www.spiegel.de/wirtschaft/spritpreise-tankstellenverband-warnt-vor-drei-euro-pro-liter-a-8b95a40e-259a-4eb1-a963-8c086e949fad#ref=rss",
+            "datum": "Mon, 14 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Was passiert mit den Milliarden für die »Schwedenrente«? Experten warnen",
+            "url": "https://www.spiegel.de/wirtschaft/legt-deutschland-das-geld-fuer-die-kuenftige-kapitalrente-richtig-an-a-db43bb32-a698-4e4b-861a-51a587ef6687#ref=rss",
+            "datum": "Mon, 14 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Künstliche Intelligenz: Experten warnen vor neuer Abhängigkeit Europas von USA",
+            "url": "https://www.spiegel.de/wirtschaft/kuenstliche-intelligenz-experten-warnen-vor-neuer-abhaengigkeit-europas-von-usa-a-674407e7-3e7a-43bd-9be9-62c4984077ef#ref=rss",
+            "datum": "Mon, 14 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Amazon setzt Zusammenarbeit mit Frachtfluglinie aus",
+            "url": "https://www.spiegel.de/wirtschaft/amazon-setzt-zusammenarbeit-mit-frachtfluglinie-aus-a-03b0b715-9cbf-44b7-b9a6-23ffac1c39e5#ref=rss",
+            "datum": "Mon, 14 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          }
+        ],
+        "fehler": null
+      },
+      "heise online (Internet/Telekommunikation)": {
+        "treffer": [
+          {
+            "titel": "Salesforce Enterprise AI Harness: KI-Infrastruktur für Unternehmen",
+            "url": "https://www.heise.de/news/Salesforce-Enterprise-AI-Harness-KI-Infrastruktur-fuer-Unternehmen-11451895.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-14T14:36",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "KI-Einsatz wächst rasant – doch Potenzial bleibt weitgehend ungenutzt",
+            "url": "https://www.heise.de/news/KI-Einsatz-waechst-rasant-doch-Potenzial-bleibt-weitgehend-ungenutzt-11452391.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-14T14:29",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Podiumsdiskussion: Wenn ChatGPT die Antwort schon kennt",
+            "url": "https://www.heise.de/news/Podiumsdiskussion-Wenn-ChatGPT-die-Antwort-schon-kennt-11452439.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-14T14:27",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "ESA: Gefahr für Menschen durch abstürzenden Weltraumschrott steigt schnell an",
+            "url": "https://www.heise.de/news/ESA-Gefahr-fuer-Menschen-durch-abstuerzenden-Weltraumschrott-steigt-schnell-an-11452231.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-14T14:15",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "heise-Angebot: iX-Workshop: Keycloak – der fundierte Einstieg in IAM und SSO",
+            "url": "https://www.heise.de/news/iX-Workshop-Keycloak-der-fundierte-Einstieg-in-IAM-und-SSO-11433614.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-14T14:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {
+      "Strompreis senken Anbieter wechseln": {
+        "treffer": [
+          {
+            "titel": "Geld sparen mit Strom/Gas Anbieter Wechsel | Frugalismus Tipps",
+            "url": "https://www.youtube.com/watch?v=TmCaACcZgN8",
+            "kanal": "BusinessWikinger",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Dein Stromtarifwechsel in nur 5 Schritten - SPARE bis zu €850!",
+            "url": "https://www.youtube.com/watch?v=U4K-J6fDdqw",
+            "kanal": "Verträge, Vorsorge & Sparpotenziale",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Drastically reduce electricity costs when growing – online calculator shows your savings potential!",
+            "url": "https://www.youtube.com/watch?v=I0_3kUfiS84",
+            "kanal": "Growtutorials",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "TIBBER - Stromkosten senken! Geld Sparen, Stromtarif, Strombörse",
+            "url": "https://www.youtube.com/watch?v=a6flroWreNk",
+            "kanal": "Frührentner",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Ich wechsel meinen Stromanbieter live in diesem Video und zahle dann nur noch 36,88 Cent / kWh",
+            "url": "https://www.youtube.com/watch?v=uO2lRAkhLHE",
+            "kanal": "Smart2Finance",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "ETF Sparplan für Anfänger erklärt": {
+        "treffer": [
+          {
+            "titel": "Alles über ETFs in nur 15 Minuten: Index, Sparplan, Steuern",
+            "url": "https://www.youtube.com/watch?v=r80NOOdFIn8",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "So fängst du 2026 mit dem Investieren an (in 10 Min!)",
+            "url": "https://www.youtube.com/watch?v=eTCTGwFO1-Y",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Why you should invest your money + ETFs explained | Finance for beginners",
+            "url": "https://www.youtube.com/watch?v=KnI-psdrchg",
+            "kanal": "EINFACH LEICHTER",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF Sparplan: Schritt-für-Schritt zum ETF Portfolio",
+            "url": "https://www.youtube.com/watch?v=LCLpqN99_iU",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Investieren in ETFs: DAS musst du VORHER wissen!",
+            "url": "https://www.youtube.com/watch?v=b0jlsAiAT04",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "Kreditkarten Vergleich ohne Jahresgebühr": {
+        "treffer": [
+          {
+            "titel": "Kreditkarten Vergleich: Die besten kostenlosen Kreditkarten 2025! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=r0VXMVcN1k4",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten ohne Auslandsgebühren (2026) Welche lohnt sich wirklich?",
+            "url": "https://www.youtube.com/watch?v=2HuHTzSNDvE",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "3 Kreditkarten ohne Jahresgebühr im Vergleich: Amazon Visa, TF Bank und Free.at Kreditkarte",
+            "url": "https://www.youtube.com/watch?v=cqbuXUZSbv0",
+            "kanal": "Broker-Test.at",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "💳  💳  💳 Kreditkarten Vergleich - Kreditkarte kostenlos - Kreditkarte beantragen 💳  💳  💳",
+            "url": "https://www.youtube.com/watch?v=gP8ibA0yuWQ",
+            "kanal": "Digitale Infoprodukte",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten Vergleich, Test online kostenlos beantragen (unbedingt ansehen!)",
+            "url": "https://www.youtube.com/watch?v=zNxtV6nPw98",
+            "kanal": "GeldWiki",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "github": {
+      "haushaltsbuch": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      }
+    }
+  }
+}

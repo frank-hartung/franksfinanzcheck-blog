@@ -208,7 +208,7 @@ Inflation reduziert die Kaufkraft deines Geldes. Deshalb sollte **der Notgrosche
 
 **Gemeinsame Ziele definieren** – z. B. ein gemeinsamer Urlaub oder ein neues Auto.
 2. **Transparente Aufstellung** – jeder schreibt seine Ausgaben auf; dann wird gemeinsam entschieden, was wirklich nötig ist. 3. **Aufgabenteilung** – ein Partner übernimmt das Abo‑Audit, der andere das Meal‑Prep. So fühlt sich keiner bevormundet.
-4. **Belohnungs‑System** – wenn das Familienbudget ein Quartal unter dem Ziel liegt, gibt es ein kleines, gemeinsam ausgewähltes Highlight (z. B. Kinobesuch).  
+4. **Belohnungs‑System** – wenn das Familienbudget ein Quartal unter dem Ziel liegt, gibt es ein kleines, gemeinsam ausgewähltes Highlight (z. B. Kinobesuch).
 
 Durch offene Kommunikation bleibt Frugalismus ein gemeinsamer Gewinn und nicht ein Streitpunkt.
 

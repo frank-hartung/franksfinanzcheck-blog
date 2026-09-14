@@ -57,7 +57,7 @@ Ein Wechsel des Gasanbieters dauert in der Regel einige Wochen bis zur finalen U
 Handelst du jetzt, greift der günstigere Tarif pünktlich zum Start der Heizperiode.
 
 Ein weiterer Punkt betrifft die Materialverfügbarkeit im Baumarkt. 
-Ob Dichtungen für Fenster oder Dämmmaterial für Rohre – im Spätsommer sind die Regale voll.
+Ob Dichtungen für Fenster oder Dämmmaterial für Rohre – im Spätsommer sind die Regale voll.  
 Beim ersten Kälteeinbruch sind gängige Standardmaße oft sofort vergriffen. 
 Diese antizyklische Planung hält deine Fixkosten dauerhaft auf einem niedrigen Niveau.
 

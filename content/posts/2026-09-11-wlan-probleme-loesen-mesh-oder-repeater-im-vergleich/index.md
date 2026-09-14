@@ -1,8 +1,10 @@
 ---
 title: "WLAN-Probleme lösen: Mesh oder Repeater im Vergleich"
 description: "WLAN Probleme lösen: Ruckelndes Internet nervt. So kannst du WLAN-Probleme lösen: Wir vergleichen Mesh-Systeme und Repeater für stabiles Homeoffice Internet…"
-date: 2026-09-11T22:06:29Z
-draft: false
+date: 2026-09-14T21:02:14Z
+draft: true
+cadence_demoted: 2026-09-14T21:02:22Z
+cadence_grund: "quality-score: 0.83 < 0.85; finale Freigabe fehlt"
 tags: ["WLAN probleme lösen", "Mesh WLAN Test", "WLAN Abdeckung verbessern", "Homeoffice Internet"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -47,7 +49,7 @@ Physikalisch gesehen ist WLAN eine Funktechnologie, die auf Sichtverbindung opti
 Im 2,4-GHz-Band drängen sich zudem zahlreiche Geräte: Bluetooth-Kopfhörer, Mikrowellen, Babyfone und die Netzwerke deiner Nachbarn sorgen für ein "Grundrauschen". Das führt zu **WLAN-Problemen**, die sich durch Verbindungsabbrüche äußern. Das 5-GHz-Band ist zwar deutlich schneller und weniger störanfällig, hat aber aufgrund der kürzeren Wellenlänge eine geringere Durchdringungskraft bei Wänden. Wer sein **Homeoffice Internet** priorisieren will, muss daher strategisch planen, wie die Datenpakete vom Router zum Endgerät gelangen.
 
 ## Repeater: Die schnelle Lösung für punktuelle Lücken
-ein klassischer WLAN-Verstärker (Repeater) empfängt das Signal des Routers und sendet es erneut aus. Dabei entsteht das sogenannte „Half-Duplex-Dilemma“: Da der Repeater nicht gleichzeitig auf derselben Frequenz empfangen und senden kann, halbiert sich die theoretische Bandbreite für dein Endgerät.
+Ein klassischer WLAN-Verstärker (Repeater) empfängt das Signal des Routers und sendet es erneut aus. Dabei entsteht das sogenannte „Half-Duplex-Dilemma“: Da der Repeater nicht gleichzeitig auf derselben Frequenz empfangen und senden kann, halbiert sich die theoretische Bandbreite für dein Endgerät.
 
 Für einfaches Surfen oder E-Mails reicht das meist aus. Wer jedoch 4K-Filme streamt oder große Datenmengen in die Cloud lädt, stößt schnell an Grenzen. Ein Repeater arbeitet „dumm“: Er fungiert lediglich als Brücke. In vielen Fällen legt er sogar ein eigenes Netzwerk mit identischem Namen (SSID) an, was zu Problemen beim „Roaming“ führt. Dein Smartphone bleibt oft so lange am schwachen Router-Signal hängen, bis die Verbindung fast abbricht, bevor es mühsam auf den stärkeren Repeater wechselt. Diese Gedenksekunde unterbricht jeden Call.
 
@@ -60,7 +62,7 @@ Ein Repeater gehört exakt in die Mitte zwischen Router und die Stelle, an der d
 ## Mesh WLAN Test: Wann lohnt sich das intelligente System?
 Ein **[Mesh WLAN](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Test** zeigt sofort den größten Vorteil: das nahtlose Zusammenspiel aller Komponenten. Im Gegensatz zum Repeater bilden beim Mesh alle Knotenpunkte (Nodes) ein einziges, dynamisches System. Sie kommunizieren ständig untereinander und entscheiden in Millisekunden, welcher Knoten dein Smartphone gerade am besten versorgt.
 
-Dieses „Seamless Roaming“ (nach den Standards 802.11k/v/r) sorgt dafür, dass du während eines Telefonats vom Keller bis unters Dach laufen kannst, ohne dass die Verbindung abreißt. In einem **Mesh WLAN Test** unter Realbedingungen punktet das System besonders bei vielen Hindernissen und gleichzeitig aktiven Nutzern.
+Dieses „Seamless Roaming“ (nach den Standards 802.11k/v/r) sorgt dafür, dass du während eines Telefonats vom Keller bis unters Dach laufen kannst, ohne dass die Verbindung abreißt. In einem **[Mesh WLAN](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Test** unter Realbedingungen punktet das System besonders bei vielen Hindernissen und gleichzeitig aktiven Nutzern.
 
 ### Der Backhaul-Vorteil
 Das Geheimnis professioneller Mesh-Systeme ist der „Backhaul“. Das ist eine Art reservierte Datenautobahn für die Kommunikation zwischen den Mesh-Knoten.

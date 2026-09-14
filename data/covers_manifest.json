@@ -19,7 +19,7 @@
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-09-11T18:15:39+00:00",
+  "ts": "2026-09-14T12:54:09+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -617,7 +617,7 @@
  },
  "brand-franksfinanzcheck": {
   "title": "FranksFinanzcheck – Geld sparen leicht gemacht",
-  "ts": "2026-09-11T23:07:35+00:00",
+  "ts": "2026-09-14T12:54:12+00:00",
   "design": {
    "v": 3,
    "badge": "FRUGALISMUS · TARIFE · VERSICHERUNGEN",
@@ -657,6 +657,24 @@
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-14-5-einfache-frugalismus-tricks-fuer-den-alltag": {
+  "title": "5 einfache Frugalismus-Tricks für den Alltag",
+  "ts": "2026-09-14T12:53:19+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-09-14-finanzplan-mit-der-50-30-20-regel-wohin-mit-dem-gehalt": {
+  "title": "Finanzplan mit der 50-30-20-Regel: Wohin mit dem Gehalt?",
+  "ts": "2026-09-14T12:53:22+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
    "savings": ""
   }
  }

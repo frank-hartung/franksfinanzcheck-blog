@@ -3,7 +3,9 @@
 title: "Gasvergleich: Wie du teure Fehler beim Wechsel vermeidest"
 description: Mit einem Gasvergleich sparst du bares Geld. Erfahre hier, wie du Gastarife wechseln kannst, um deine Heizkosten dauerhaft zu senken.
 date: 2026-09-14T09:26:54Z
-draft: false
+draft: true
+cadence_demoted: 2026-09-14T12:53:44Z
+cadence_grund: "publish-gate: Affiliate-Link-Integrität nicht bestanden (defekte/nicht gerenderte CTA): Kein vollständiger Markdown-Link in CTA-Zeile ('Spar-Tipp zwischendurch')"
 tags: ["Gasvergleich", "Gastarife wechseln", "Gaskosten sparen", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -30,14 +32,15 @@ Wer bis zum ersten Frost wartet, verbrennt jährlich bis zu 500 €. Die Preise
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-In der Grundversorgung verschenkst du monatlich Beträge für einen kompletten Kurzurlaub. Die Bequemlichkeit beim alten Anbieter ist ein teures Hobby deutscher Haushalte. Ein Wechsel dauert oft weniger als zehn Minuten – du erledigst das bequem vom Sofa aus.
+In der Grundversorgung verschenkst du monatlich Beträge für einen kompletten Kurzurlaub. Die Bequemlichkeit beim alten Anbieter ist ein teures Hobby deutscher Haushalte. Ein Wechsel dauert oft weniger als zehn Minuten –  
+du erledigst das bequem vom Sofa aus.
 
 **Das Wichtigste in Kürze**
 * **Ersparnis:** ein Anbieterwechsel spart dir meist 200 € bis 500 € pro Jahr.
-* **Timing:** Vergleiche deine Tarife im Spätsommer vor Beginn der Heizperiode.
-* **Sicherheit:** Deine Versorgung ist gesetzlich garantiert – die Heizung bleibt niemals kalt.
-* **Fristen:** Achte auf die Laufzeit, damit du keine teuren Kündigungsfristen verpasst.
-* **Aufwand:** Du benötigst für den digitalen Vergleich nur deine letzte Jahresabrechnung.
+* **Timing:** vergleiche deine Tarife im Spätsommer vor Beginn der Heizperiode.
+* **Sicherheit:** deine Versorgung ist gesetzlich garantiert – die Heizung bleibt niemals kalt.
+* **Fristen:** achte auf die Laufzeit, damit du keine teuren Kündigungsfristen verpasst.
+* **Aufwand:** du benötigst für den digitalen Vergleich nur deine letzte Jahresabrechnung.
 
 ---
 
@@ -76,12 +79,12 @@ Der Wechsel ist deutlich unkomplizierter als viele Verbraucher vermuten. Du muss
 
 **So gehst du vor:**
 
-1. **Daten sammeln:** Halte deine letzte Jahresabrechnung und die Kundennummer bereit.
-2. **Vergleich starten:** Gib deine Postleitzahl und den Verbrauch online ein.
-3. **Filter setzen:** Wähle maximal 12 Monate Laufzeit und eine Preisgarantie.
-4. **Boni prüfen:** Entscheide zwischen Einmalbonus oder dauerhaft niedrigem Preis.
-5. **Anbieter prüfen:** Achte auf gute Bewertungen und hohe Weiterempfehlungsquoten.
-6. **Abschluss:** Dein neuer Anbieter kündigt in der Regel beim alten Versorger.
+1. **Daten sammeln:** halte deine letzte Jahresabrechnung und die Kundennummer bereit.
+2. **Vergleich starten:** gib deine Postleitzahl und den Verbrauch online ein.
+3. **Filter setzen:** wähle maximal 12 Monate Laufzeit und eine Preisgarantie.
+4. **Boni prüfen:** entscheide zwischen Einmalbonus oder dauerhaft niedrigem Preis.
+5. **Anbieter prüfen:** achte auf gute Bewertungen und hohe Weiterempfehlungsquoten.
+6. **Abschluss:** dein neuer Anbieter kündigt in der Regel beim alten Versorger.
 
 > 💶 **Spar-Tipp zwischendurch:** Alle sechs Schritte sind in wenigen Minuten erledigt – halte nur die letzte Jahresabrechnung bereit: [**Vergleichen & sparen**](/go/gas/)
 
@@ -132,9 +135,9 @@ Du trägst also kein technisches Risiko bei deiner Entscheidung. Möchtest du de
 Bereite eine kleine digitale Mappe für deinen Wechsel vor. Das spart Zeit und vermeidet unnötige Rückfragen der neuen Versorger. Mit den richtigen Daten erledigst du alles in Rekordzeit. So wird der Wechsel zum Kinderspiel.
 
 **Checkliste für deinen Wechsel:**
-* Letzte Jahresabrechnung für Verbrauch und Kundennummer.
+* letzte Jahresabrechnung für Verbrauch und Kundennummer.
 * Zählernummer vom Gaszähler im Keller oder Flur.
-* Aktueller Zählerstand zum Stichtag des Wechsels.
+* aktueller Zählerstand zum Stichtag des Wechsels.
 * Bankverbindung für das SEPA-Lastschriftmandat des Anbieters.
 * Kalender-Erinnerung für das Ende der neuen Mindestlaufzeit.
 

@@ -132,7 +132,7 @@ Stand: August 2026, eigene Recherche und öffentliche Vergleichsportale. Zinsen 
 
 ## Rechenbeispiel: Was bringt das Tagesgeld konkret?
 
-Angenommen, du hast einen **Notgroschen von 15.000 €**:
+Angenommen, du hast einen **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) von 15.000 €**:
 
 | Anlageform | Zinssatz | Zinsertrag pro Jahr |
 |:---|---:|---:|

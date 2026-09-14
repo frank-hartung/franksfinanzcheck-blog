@@ -41,7 +41,7 @@ _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über eine
 
 Der 30. November ist der wichtigste Termin für Autofahrer. Fast alle Kfz‑Verträge enden am 31. Dezember. Du kannst sie bis Ende November mit einer Frist von einem Monat kündigen. Im Herbst kämpfen die Versicherer um Neukunden. Ein Wechsel bringt deshalb oft **180 € bis 350 €** im Jahr – bei gleicher Leistung.
 
-**Wie du vorgehst:**  
+**Wie du vorgehst:**
 
 | Schritt | Was du tun musst | Hinweis |
 |---|---|---|
@@ -52,7 +52,7 @@ Der 30. November ist der wichtigste Termin für Autofahrer. Fast alle Kfz‑Ve
 | 5 | Alte Police schriftlich bestätigen lassen | Dokumentation für den Fall von Rückfragen. |
 
 **Vorteile:** - Sofortige Prämienreduktion.
-- Möglichkeit, moderne Telematik‑Tarife (nach gefahrenen Kilometern) zu testen – oft günstiger bei wenig Fahrleistung im Herbst.  
+- Möglichkeit, moderne Telematik‑Tarife (nach gefahrenen Kilometern) zu testen – oft günstiger bei wenig Fahrleistung im Herbst.
 
 **Nachteile:** - Bei sehr alten Fahrzeugen kann die [Schadenfreiheitsklasse](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) (SF‑Klasse) beim Wechsel verloren gehen.
 - Manche Sonderkonditionen (z. B. Jahresendbonus) entfallen.
@@ -65,12 +65,12 @@ Der 30. November ist der wichtigste Termin für Autofahrer. Fast alle Kfz‑Ve
 
 Bevor die Heizung dauerhaft läuft, entlüfte die Heizkörper. Lass auch die Heizkurve prüfen. Wer die Vorlauftemperatur um ein paar Grad senkt und alte Thermostate tauscht, spart 8 % bis 12 % Energie. Bei einem Einfamilienhaus sind das **160 € bis 240 €**.
 
-**Konkrete Maßnahmen:**  
+**Konkrete Maßnahmen:**
 
 1. **Entlüften** – 5 min pro Heizkörper, spart bis zu 5 % des Verbrauchs. 2. **Vorlauftemperatur** um 5 °C reduzieren (z. B. von 70 °C auf 65 °C).
 3. **Witterungsgeführte Thermostate** installieren (Kosten 15‑30 € pro Stück, amortisieren sich nach ca. 1,5 Jahren). 4. **Heizkurve anpassen** – flachere Kurve bei milderen Außentemperaturen.
 
-**Pro & Contra:**  
+**Pro & Contra:**
 
 | Pro | Contra |
 |---|---|
@@ -85,7 +85,7 @@ Bevor die Heizung dauerhaft läuft, entlüfte die Heizkörper. Lass auch die Hei
 
 Viele zahlen für alte [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)-, Hausrat‑ oder Rechtsschutzverträge doppelt so viel wie Neukunden. Moderne Tarife mit 50 Mio. € Deckung kosten oft unter 5 € im Monat. Ein Vergleich bringt schnell **100 € bis 200 €** pro Jahr – bei mehr Leistung. Streiche Bausteine wie Glasbruch, wenn du keine teuren Ceranfelder oder Wintergärten hast.
 
-**Checkliste für den Versicherungs‑Check:**  
+**Checkliste für den Versicherungs‑Check:**
 
 | Versicherung | Prüfpunkte | Sparpotenzial |
 |---|---|---|
@@ -94,7 +94,7 @@ Viele zahlen für alte [Privathaftpflicht](../../posts/2026-08-17-privathaftpfli
 | Rechtsschutz | Leistungsumfang (z. B. Arbeitsrecht) | 10 €‑30 €/Jahr |
 | Kfz‑Zusatz (z. B. Schutzbrief) | Notwendigkeit prüfen | 15 €‑25 €/Jahr |
 
-**Vor‑ und Nachteile einer Bündelung:**  
+**Vor‑ und Nachteile einer Bündelung:**
 
 - **Vorteil:** Ein Ansprechpartner, ein Jahresbeitrag, häufig 10 %‑15 % Rabatt. - **Nachteil:** Bei einem Schaden kann die gesamte Police gekündigt werden, wenn du mit dem Anbieter unzufrieden bist.
 
@@ -106,12 +106,12 @@ Viele zahlen für alte [Privathaftpflicht](../../posts/2026-08-17-privathaftpfli
 
 Wechselst du den Strom‑ oder Gasanbieter im Spätsommer, sicherst du dir gute Preise. Viele Tarife haben lange Preisgarantien. Meide die Grundversorgung. Bei 3.500 kWh Strom und 20.000 kWh Gas sparst du bis zu **450 €**.
 
-**Schritte zum Wechsel:**  
+**Schritte zum Wechsel:**
 
 1. **Zählerstände notieren** (letzte Ablesung). 2. **Verbrauchsprofil analysieren** (z. B. über den Jahresverbrauchs‑Rechner des BDEW).
 3. **Mindertarif vs. Grundversorgung** vergleichen (Achtung: Grundversorgung hat oft höhere Grundgebühr). 4. **Preisgarantie prüfen** – 12‑24 Monate sind üblich.
 
-**Pro‑ und Contra‑Liste:**  
+**Pro‑ und Contra‑Liste:**
 
 | Pro | Contra |
 |---|---|
@@ -126,7 +126,7 @@ Wechselst du den Strom‑ oder Gasanbieter im Spätsommer, sicherst du dir gute 
 
 Kürbisse, Äpfel und Kohl haben im Herbst Saison. Regionales Obst und Gemüse ist frisch und günstig. Importware kostet oft ein Vielfaches. Meal‑Prep, Einkochen und Einfrieren sparen **50 € bis 80 €** im Monat. Wer mit Wochenplänen kocht, wirft fast nichts mehr weg.
 
-**Praktische Tipps:**  
+**Praktische Tipps:**
 
 | Tipp | Umsetzung | Ersparnis (Beispiel) |
 |---|---|---|
@@ -135,7 +135,7 @@ Kürbisse, Äpfel und Kohl haben im Herbst Saison. Regionales Obst und Gemüse i
 | Gemüse einfrieren (Brokkoli, Spinat) | Schnell blanchieren, luftdicht verpacken | 5 €‑8 € pro Woche |
 | Preis‑Check: Markt vs. Supermarkt | Direkt beim Bauernmarkt einkaufen | 20 %‑40 % günstiger |
 
-**Vor‑ und Nachteile von Vorratshaltung:**  
+**Vor‑ und Nachteile von Vorratshaltung:**
 
 - **Vorteil:** Preisstabilität, weniger wöchentliche Einkaufsfahrten. - **Nachteil:** Platzbedarf im Keller/Freezer, Risiko von Verderb bei falscher Lagerung.
 
@@ -145,7 +145,7 @@ Kürbisse, Äpfel und Kohl haben im Herbst Saison. Regionales Obst und Gemüse i
 
 Undichte Fenster lassen kalte Luft herein. Dichtungsbänder aus dem Baumarkt kosten nur 10 €. Sie schließen die Ritzen schnell. Die Räume bleiben warm. Die Heizung läuft weniger. Das entlastet deine Strom‑ und Gasrechnung.
 
-**Detaillierte Vorgehensweise:**  
+**Detaillierte Vorgehensweise:**
 
 1. **Risse lokalisieren:** Mit einer brennenden Kerze – Flackern zeigt Zugluft. 2. **Dichtungsband anbringen:** Selbstklebend, 2‑3 cm Breite, rund um Fensterrahmen.
 3. **Tür‑Zugluftstopper:** Schaumstoff‑ oder Silikon‑Stopper (ca. 8 €). 4. **Kontrolle nach 2 Wochen:** Noch einmal prüfen, ob neue Undichtigkeiten entstanden sind.
@@ -158,7 +158,7 @@ Undichte Fenster lassen kalte Luft herein. Dichtungsbänder aus dem Baumarkt kos
 
 Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen steigen lassen. Auch Heim‑Kino mit selbstgemachtem Popcorn ist günstig. So sparst du **60 € bis 100 €** im Monat. Auf Lebensfreude musst du nicht verzichten.
 
-**Ideen für kostenlose Aktivitäten:**  
+**Ideen für kostenlose Aktivitäten:**
 
 | Aktivität | Aufwand | Spartipp |
 |---|---|---|
@@ -167,7 +167,7 @@ Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen ste
 | Kostenlose Stadtführungen (Touristen‑Info) | 1‑2 h | Kultur erleben, kein Eintritt |
 | Bibliotheks‑Lesungen & Workshops | 1‑3 h | Weiterbildung [ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) |
 
-**Pro‑ und Contra‑Analyse:**  
+**Pro‑ und Contra‑Analyse:**
 
 - **Pro:** Mehr Bewegung, bessere Stimmung, keine zusätzlichen Ausgaben. - **Contra:** Wetterabhängig – bei Regen muss man Alternativen (z. B. Indoor‑Basteln) planen.
 
@@ -190,7 +190,7 @@ Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen ste
 
 <!-- premium-length-2026 -->
 
-## Herbst als Kassensturz, nicht als Konsum‑Saison  
+## Herbst als Kassensturz, nicht als Konsum‑Saison
 
 Der Kalender schiebt dir Halloween, Black Friday und Weihnachten in drei Monate. Wer im September kein Budget für Dezember hat, zahlt im Januar Dispo. Deshalb ist der Herbst der passende Moment für den Jahres‑Schnitt – nicht der 1. Januar, wenn die Motivation schon verbraucht ist.
 
@@ -202,7 +202,7 @@ Der Kalender schiebt dir Halloween, Black Friday und Weihnachten in drei Monate.
 
 **Lebensmittel.** Saisonales Gemüse, Einkochen, was du wirklich isst. Ein Glas, das zwei Jahre im Keller steht, ist kein Spartipp, sondern vergessenes Kapital.
 
-## Black Friday ohne Nachzahlung  
+## Black Friday ohne Nachzahlung
 
 Liste vor dem Event: nur Dinge, die schon auf der 30‑Tage‑Wunschliste stehen. Preis 30 Tage vorher notieren – viele „‑40 %“ sind der Preis von Mitte Oktober. Cashback nur auf der Liste, nicht als Freibrief. Bezahlmittel ohne Dispo.
 
@@ -212,7 +212,7 @@ Wenn der Herbst so läuft, startest du mit Puffer ins neue Jahr. Du zahlst keine
 
 <!-- premium-length-2026-b -->
 
-## Weihnachtskonto im September  
+## Weihnachtskonto im September
 
 Ein Unterkonto oder Umschlag „Dezember“ ab 1.9.: 4 × 50 – 150 € je nach Haushalt. Geschenke, Bahn, Essen.
 
@@ -222,16 +222,16 @@ Parallel: Energie‑ und [DSL‑Vergleich](../../posts/2026-08-10-dsl-wechselbon
 
 <!-- premium-length-2026-c -->
 
-## Der September‑Abend, der den Dezember trägt  
+## Der September‑Abend, der den Dezember trägt
 
 Setz 75 Minuten – so teilst du sie ein:
 
 - 25 Minuten Verträge (Energie, DSL, Mobilfunk – alles, was älter als 12 Monate ist, kommt in den Vergleich) - 25 Minuten Dezember‑Budget auf ein Unterkonto
-- 25 Minuten Kleidung/Heizen: Was du wirklich brauchst vs. was der Herbstschlussverkauf suggeriert  
+- 25 Minuten Kleidung/Heizen: Was du wirklich brauchst vs. was der Herbstschlussverkauf suggeriert
 
 Wenn nur eine der drei Schichten sitzt, nimm die Verträge. Sie zahlen den Rest.
 
-## Fazit: Nutze den Herbst für deinen persönlichen Kassensturz  
+## Fazit: Nutze den Herbst für deinen persönlichen Kassensturz
 
 Der Herbst ist keine trübe Zeit. Er ist die perfekte Gelegenheit, deine Finanzen in Ordnung zu bringen. Prüfe deine Verträge. Nutze den **Kfz‑Stichtag 30 November**. Mach dein Zuhause energieeffizient. So gehst du mit einem dicken Plus auf dem Konto ins neue Jahr.
 
