@@ -63,7 +63,7 @@ Ein Festpreistarif hat gegenüber Tarifen ohne Bindung diese Vorteile:
 | **Wechselprämien** | Einmalige Boni reduzieren die effektiven Jahreskosten | Boni werden oft erst nach 12 Monaten ausgezahlt – ein vorzeitiger Kündigungsversuch kann sie verfallen lassen |
 | **Transparenz** | Klare Preisstruktur, leicht zu vergleichen im [Gasvergleich](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) | Manche AGB verstecken Nachjustierungen bei gesetzlichen Änderungen (z. B. Strom‑Umlage) |
 
-Die Entscheidung hängt von deiner Risikobereitschaft und deinem Verbrauchsprofil ab. Für Familien mit hohem, planbarem Jahresverbrauch ist die **Gaspreisgarantie** meist die sicherere Wahl.
+Die Entscheidung hängt von deiner Risikobereitschaft und deinem Verbrauchsprofil ab. Für Familien mit hohem, planbarem Jahresverbrauch ist die **[Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)** meist die sicherere Wahl.
 
 ## Kostenanalyse: 20.000 kWh Verbrauch bei Marktschwankungen
 

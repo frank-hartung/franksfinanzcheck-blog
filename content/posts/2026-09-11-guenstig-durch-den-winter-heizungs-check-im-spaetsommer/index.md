@@ -29,7 +29,7 @@ Zahlst du für deine Heizung jedes Jahr hunderte Euro zu viel?
 Ein einfacher Check im August verhindert teure Notdienste im Dezember.
 Wer früher plant, spart oft doppelt – du senkst den Verbrauch und vermeidest kostspielige Reparaturen.
 
-Ein Heizungs-Check im Spätsommer schützt dich vor bösen Überraschungen.
+Ein Heizungs-Check im Spätsommer [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor bösen Überraschungen.
 Du erkennst Schwachstellen, bevor diese dein Geld kosten.
 So gehst du entspannt in die kalte Jahreszeit.
 Vor allem bei Gas zählt jedes Detail, da kleine Verluste deine Abrechnung belasten.
@@ -203,7 +203,7 @@ Müssen Teile ersetzt werden, kommt der Materialpreis des Herstellers hinzu.
 ### Ab wann lohnt sich der Austausch eines alten Thermostats?
 
 Wenn Thermostate ungenau regeln oder älter als 15 Jahre sind, lohnt sich der Wechsel oft schnell.
-Moderne Modelle arbeiten präziser und sparen im Alltag spürbar Energie ein.
+Moderne Modelle arbeiten präziser und [sparen im Alltag](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/) spürbar Energie ein.
 
 ### Verliere ich bei einem Gasanbieterwechsel die Versorgungssicherheit?
 

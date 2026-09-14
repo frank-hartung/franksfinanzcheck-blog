@@ -33,7 +33,7 @@ Die bekannte Regel „drei Monatsgehälter" klingt einfach, trifft aber oft dane
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 **Das Wichtigste in Kürze**
-* Ein Notgroschen orientiert sich an deinen monatlichen Ausgaben, nicht am Einkommen allein.
+* Ein [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) orientiert sich an deinen monatlichen Ausgaben, nicht am Einkommen allein.
 * Für Angestellte reichen oft drei bis sechs Monatsausgaben als Sicherheit.
 * Selbstständige planen besser mit sechs bis zwölf Monatsausgaben.
 * Ein separates [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) ist meist der beste Parkplatz für die Reserve.
@@ -90,7 +90,7 @@ Für die meisten Haushalte ist ein [Tagesgeldkonto](../../posts/2026-08-26-tages
 | Trennung vom Alltag | Schwach | Sehr gut | Gut | Gut |
 | Eignung als Notgroschen | Nein | **Sehr gut** | Nein | Nein |
 
-Achte beim Konto auf die Einlagensicherung und darauf, dass du ohne Gebühren an dein Geld kommst. Einen schnellen Marktüberblick findest du hier: [**Tagesgeld jetzt prüfen**](/go/tagesgeld/).
+Achte beim Konto auf die Einlagensicherung und darauf, dass du [ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) an dein Geld kommst. Einen schnellen Marktüberblick findest du hier: [**Tagesgeld jetzt prüfen**](/go/tagesgeld/).
 
 > 💶 **Spar-Tipp zwischendurch:** Für eine Notfallreserve zählt vor allem Sicherheit und Zugriff – nicht die letzte Nachkommastelle Zins. [**Tagesgeld vergleichen**](/go/tagesgeld/)
 
