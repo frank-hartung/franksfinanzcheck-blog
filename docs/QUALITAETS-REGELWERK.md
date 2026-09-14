@@ -442,6 +442,8 @@ jeder Schreibaktion.
 | Website down | uptime-check → Issue (auto-schließend!) |
 | Workflow-Fehler | alert-on-failure → Issue (Abdeckung: alle Kern-Workflows) |
 | Text-Regelverstoß | die sechs Guards oben (korrigieren selbst) |
+| Doctor-Dry-Run schreibt trotzdem (Live-Artikel entlinkt, 63 Deckbilder zum Loeschen vorgemerkt) | `blog_doctor.kinder_args()`: im `--dry-run` wird `--fix` abgezogen, der Doktor-Selbsttest haelt die Regel als Fall fest (14.09.) |
+| Pillar-/Brand-Deckbild als „Phantom“ fehlklassifiziert und von W2 zum `git rm` vorgemerkt | `workspace_guard.py` W2 prueft vor jeder Loeschung `referenzierte_stems()` (content/*.md + hugo.toml) |
 | Marken-Text verändert | brand_guard (Lock-Reset) |
 | Actions veraltet | Dependabot + Auto-Merge (Patch/Minor auto) |
 
@@ -465,6 +467,22 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **14.09.2026:** Doktor-Kette wieder in Betrieb – und die zwei Defekte
+  repariert, die ihr Stillstand verdeckt hatte. Der Integritaets-Lock zeigte auf
+  einen Commit (f0078db), der auf GitHub nicht mehr existiert; damit stoppte jede
+  Visite seit 12.09. an Wache 1 und 22 von 23 Heilungen liefen nie. Nach Sichtung
+  der drei offenen Abweichungen (Encoding-Fix, Design-Rollout – beide laengst live)
+  und neuer Signatur (42 Dateien) lief die Kette erstmals durch. Dabei zeigte sich:
+  (1) `blog_doctor.py --dry-run` war nicht schreibfrei. Es haengte nur `--dry-run`
+  an, Wachen ohne dieses Flag (`link_density_guard`, `casing_guard`) schrieben
+  trotzdem, und `workspace_guard` war vom Flag ausdruecklich ausgenommen – ein
+  Dry-Run entlinkte Live-Artikel und merkte 63 Deckbilder zum `git rm` vor. Neu:
+  `kinder_args()` zieht im Dry-Run `--fix` ab; der Doktor-Selbsttest prueft das
+  fuer jede Kette-Wache. (2) `workspace_guard.py` W2 glich Cover-Namen nur mit
+  Artikel-Ordner-Namen ab: `pillar-*.jpg`, `brand-franksfinanzcheck.jpg` und Cover
+  von Einzeldatei-Posts galten als „Phantom“, obwohl content/*.md und hugo.toml sie
+  referenzieren. Neu: `referenzierte_stems()` vor jeder Loeschung, plus
+  Selbsttest-Faelle „waise-referenz“. Fund auf heutigem Stand: 63 → 0.
 - **09.09.2026:** Casing-Bund auf C1–C17 + T1 erweitert: gemeinsamer
   Marken-/Tag-Kanon, Satzanfangs- und Einheiten-Schutz, sichere
   HeadGlue-Trennung, C16-Fettdruck- und C17-Komposita-Entscheider.

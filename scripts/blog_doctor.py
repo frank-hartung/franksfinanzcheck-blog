@@ -101,10 +101,21 @@ SELFTEST = [
 ]
 
 
+def kinder_args(script: str, args: list, dry: bool, new_only: bool) -> list:
+    """Argument-Bau fuer eine Wache – eigen, damit der Selbsttest ihn pruefen kann.
+
+    DRY-RUN bedeutet: nichts schreiben. Frueher wurde nur --dry-runanhaengt, und das
+    zweimal schief: (a) kennen mehrere Wachen (u. a. link_density_guard, casing_guard)
+    kein --dry-run, sondern schreiben bei --fix trotzdem – der Dry-Run hat Live-Artikel
+    umgeschrieben; (b) war workspace_guard vom --dry-run ausgenommen und hat im Dry-Run
+    ungenutzte Deckbilder geloescht (60 Dateien). Deshalb im Dry-Run: --fix abziehen.
+    """
+    eff = [a for a in args if not (dry and a == "--fix")]
+    return [sys.executable, str(ROOT / "scripts" / script)] + eff + (["--new-only"] if new_only else [])
+
+
 def run_guard(script, args, phase, dry):
-    cmd = [sys.executable, str(ROOT / "scripts" / script)] + args + (["--new-only"] if NEW_ONLY else [])
-    if dry:
-        cmd.append("--dry-run") if script != "workspace_guard.py" else None
+    cmd = kinder_args(script, args, dry, NEW_ONLY)
     r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=600)
     return r.returncode, (r.stdout + r.stderr)[:280]
 
@@ -122,6 +133,15 @@ def selftest() -> list:
             fehler.append(f"  Kette kaputt: scripts/{script} fehlt!")
     if len({k[0] for k in KETTE}) != len(KETTE):
         fehler.append("  Doppelter Eintrag in KETTE")
+    # Dry-Run darf nichts schreiben: keiner Wache darf im Dry-Run --fix erreichen.
+    # (Regel-Lock, weil 2026-09-14 genau dort Live-Artikel umgeschrieben und 60
+    #  Deckbilder geloescht wurden – trotz --dry-run.)
+    for script, args, *_ in KETTE:
+        eff = kinder_args(script, args, True, False)
+        if "--fix" in eff:
+            fehler.append(f"  Dry-Run schreibt: {script} bekommt --fix weitergereicht!")
+    if "--fix" not in kinder_args("dash_guard.py", ["--fix"], False, False):
+        fehler.append("  Dry-Run-Regel kaputt: im scharfen Lauf fehlt --fix")
     return fehler
 
 
