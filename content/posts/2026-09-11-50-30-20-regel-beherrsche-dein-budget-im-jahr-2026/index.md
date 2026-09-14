@@ -1,9 +1,9 @@
 ---
 title: "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken"
 description: "Die 50-30-20-Regel bringt Ordnung in deine Finanzen: 50 % Fixkosten, 30 % Wünsche, 20 % Sparen. Frank Hartung zeigt, wie du dein Budget beherrschst."
-date: 2026-09-11T08:13:34Z
-draft: true
-reserve: true
+date: 2026-09-14T23:11:00Z
+draft: false
+reserve_published: 2026-09-14
 tags: ["50-30-20-Regel", "Budget planen", "Fixkosten senken"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
