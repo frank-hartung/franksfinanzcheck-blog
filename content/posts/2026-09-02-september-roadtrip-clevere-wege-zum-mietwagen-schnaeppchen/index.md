@@ -33,7 +33,7 @@ Stell dir vor: Du stehst am Flughafen von Faro. Die Luft ist warm. Die Hitze des
 
 Du hast dein **Mietwagen-Schnäppchen** schon Wochen vorher gesichert. Die Ersparnis reicht locker für drei Abendessen in einer guten Fischtaverne.
 
-**Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 In der Praxis läuft es oft anders. Du buchst zu spät. Oder versteckte Gebühren blenden dich. Damit dir das nicht passiert, schauen wir auf den Markt. Drei Dinge zählen: das richtige Timing, die Tankregelung und das Kleingedruckte bei der Versicherung.
 

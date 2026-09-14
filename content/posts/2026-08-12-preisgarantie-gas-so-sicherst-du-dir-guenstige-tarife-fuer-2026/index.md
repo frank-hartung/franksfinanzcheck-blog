@@ -69,7 +69,7 @@ Die folgende Tabelle zeigt die Kostenstruktur für einen typischen Vier-Personen
 
 *Hinweis: Die Preise sind Beispielwerte und variieren je nach Postleitzahl und aktuellem Marktniveau. Stand 2024/2025.*
 
-> 💶 **Spar-Tipp:** Prüfe deinen Verbrauch und sichere dir günstige Konditionen vor Beginn der nächsten Heizperiode über unseren [Gasvergleich](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): [**Vergleichen & sparen**](/go/gas/)
+> 💶 **Spar-Tipp zwischendurch:** Prüfe deinen Verbrauch und sichere dir günstige Konditionen vor Beginn der nächsten Heizperiode über unseren [Gasvergleich](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): [**Vergleichen & sparen**](/go/gas/)
 
 ## Worauf muss man bei der Vertragslaufzeit achten?
 

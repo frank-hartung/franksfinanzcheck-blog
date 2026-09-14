@@ -54,6 +54,19 @@
 #    AI1 STRUKTUR   Jede CTA-Marker-Zeile enthält einen VOLLSTÄNDIGEN
 #                   Markdown-Link [**Text**](/go/<key>/) – kein Dangling
 #                   (Vorfall 14.08.: `[**Text**` ohne `](url)`).
+#                   SEIT 14.09.2026 prüft AI1 auch den REST HINTER dem Link
+#                   (Vorfall Gasvergleich, 14.09.: `[**… checken**](/go/gas/))`
+#                   – Link makellos, eine Klammer zu viel; das Zeichen landete
+#                   sichtbar im gelben CTA-Kasten, AI1 meldete trotzdem grün,
+#                   weil MD_LINK_RE nur den Link selbst sucht). Pflicht: Der
+#                   Rest ist Leerraum, harter Umbruch oder ein balancierter
+#                   Nachsatz (z. B. „_(Dieser Artikel enthält Affiliate-Links
+#                   (Werbung).)_“).
+#                   MARKER-SUCHE (14.09.2026): CTA-Marker werden strich-
+#                   normalisiert (U+2010…U+2015/U+2212 = "-") und einmalig
+#                   case-insensitiv mit Doppelpunkt gesucht – sonst war die
+#                   Top-CTA von „energiediebe-stoppen…" (Schnell‑Tipp mit
+#                   U+2011) für AI1–AI4 unsichtbar.
 #    AI2 REGISTRY   Jedes /go/<key>/ im Artikel ist in
 #                   scripts/check24_links.yaml registriert; KEINE rohen
 #                   Partner-URLs (a.check24.net / partner-versicherung.de)
@@ -134,6 +147,38 @@ CTA_MARKERS = [
     ("Jetzt vergleichen und sparen", "end"),
     ("Sparend zuerst vergleichen", "end"),
 ]
+
+# Nicht trennende Bindestriche, wie sie die Dash-Heiler im Bestand verteilen
+# (U+2010…U+2015, U+2212). Für die Marker-Suche sind sie mit "-" gleichbedeu-
+# tend: Vorfall 14.09. im Strom-Artikel „energiediebe-stoppen…" schrieb die
+# Engine „Schnell‑Tipp" mit U+2011 – AI1 sah die CTA-Zeile nicht, der kaputte
+# Kasten blieb unbewacht. translate() ersetzt Zeichen für Zeichen, alle
+# Offsets bleiben daher auf den ORIGINAL-Body anwendbar.
+DASH_NORMAL = dict.fromkeys(
+    [0x2010, 0x2011, 0x2012, 0x2013, 0x2014, 0x2015, 0x2212], ord("-"))
+
+
+def marker_view(body: str) -> str:
+    """Such-Sicht auf den Body: Länge und Offsets identisch zum Original."""
+    return body.translate(DASH_NORMAL)
+
+
+def marker_hits(body: str) -> list[tuple[int, str, str]]:
+    """(position, marker, kind) aller CTA-Marker im Text.
+
+    Zwei Pfade: (1) exakter Marker-String, (2) Groß-/Kleinschreibung egal,
+    aber nur mit Doppelpunkt („Marker:") – der Doppelpunkt verhindert, dass ein
+    normaler Satz wie „…damit du jetzt vergleichen und sparen kannst." als CTA
+    gilt. Zusammen mit der Strich-Normalisierung erkennt die Wache damit auch
+    die Varianten, die die Engine im Bestand verteilt."""
+    view = marker_view(body)
+    hits: list[tuple[int, str, str]] = []
+    for marker, kind in CTA_MARKERS:
+        for m in re.finditer(re.escape(marker), view):
+            hits.append((m.start(), marker, kind))
+        for m in re.finditer(re.escape(marker) + r"\s*:", view, re.IGNORECASE):
+            hits.append((m.start(), marker, kind))
+    return sorted(set(hits))
 RAW_PARTNER_RE = re.compile(
     r"https?://a\.(?:check24\.net|partner-versicherung\.de)/[^\s)\"'<>]+"
 )
@@ -226,19 +271,19 @@ def find_cta_lines(body: str) -> list[tuple[str, str, str, int, int]]:
     Mehrere Marker in derselben Zeile werden zu EINEM Eintrag zusammen-
     gefasst (sonst Doppelzählung im Render-Beweis)."""
     spans: dict[tuple[int, int], list[str]] = {}
-    for marker, kind in CTA_MARKERS:
-        for m in re.finditer(re.escape(marker), body):
-            line_start = body.rfind("\n", 0, m.start()) + 1
-            line_end = body.find("\n", m.start())
-            if line_end == -1:
-                line_end = len(body)
-            entry = spans.setdefault((line_start, line_end), [])
-            if kind not in entry:
-                entry.append(kind)
+    for pos, marker, kind in marker_hits(body):
+        line_start = body.rfind("\n", 0, pos) + 1
+        line_end = body.find("\n", pos)
+        if line_end == -1:
+            line_end = len(body)
+        entry = spans.setdefault((line_start, line_end), [])
+        if kind not in entry:
+            entry.append(kind)
     found = []
     for (line_start, line_end), kinds in sorted(spans.items()):
         line = body[line_start:line_end]
-        marker = next((mk for mk, _kd in CTA_MARKERS if mk in line), CTA_MARKERS[0][0])
+        marker = next((mk for mk, _kd in CTA_MARKERS
+                       if mk in marker_view(line)), CTA_MARKERS[0][0])
         found.append((marker, kinds[0], line, line_start, line_end))
     return found
 
@@ -276,6 +321,41 @@ def check_cta_line(marker: str, line: str, reg_keys: set) -> list[str]:
         else:
             problems.append(f"Kein vollständiger Markdown-Link in CTA-Zeile ('{marker}')")
         return problems  # Folgeprüfungen ohne gültigen Link sinnlos
+
+    # --- AI1b: REST HINTER dem Link (Vorfall 14.09.2026) --------------------
+    # Der Link kann makellos sein und die Zeile trotzdem kaputt machen:
+    #   [**→ Angebote sofort checken**](/go/gas/))   <- Dangling-Klammer
+    # Goldmark setzt das überzählige ")" als Text in den CTA-Kasten – für den
+    # Nutzer sichtbar, für MD_LINK_RE unsichtbar. Deshalb: Der Rest der Zeile
+    # (nach dem Link) darf nur Leerraum, ein harter Umbruch (<br>/\) oder ein
+    # syntaktisch BALANCIERTER Nachsatz sein (z. B. der Klammerzusatz
+    # "_(Dieser Artikel enthält Affiliate-Links (Werbung).)_").
+    rest = line[link_m.end():]
+    if rest.strip() and not re.fullmatch(r"(?:\s|\\|<br\s*/?>)+", rest):
+        tail = re.sub(r"<[^>]+>", "", rest)          # Markup-Reste ausklammern
+        depth = {"(": 0, "[": 0}
+        dangling = ""
+        for ch in tail:
+            if ch in "([":
+                depth[ch] += 1
+            elif ch == ")":
+                depth["("] -= 1
+                if depth["("] < 0:
+                    dangling = ")"
+                    break
+            elif ch == "]":
+                depth["["] -= 1
+                if depth["["] < 0:
+                    dangling = "]"
+                    break
+        if not dangling and (depth["("] or depth["["]):
+            dangling = "(" if depth["("] else "["
+        if not dangling and tail.count("*") % 2:
+            dangling = "*"
+        if dangling:
+            problems.append(
+                f"Unbalanciertes Zeichen '{dangling}' im Rest der CTA-Zeile "
+                f"('{marker}') – Link korrekt, Nachsatz kaputt: {rest.strip()[:60]}")
 
     url = link_m.group(2)
     if url.startswith("http"):
@@ -555,7 +635,11 @@ def heal_article_ctas(article: dict, broken_kinds: set,
     for marker, kind in CTA_MARKERS:
         if kind not in broken_kinds:
             continue
-        idx = body.find(marker)
+        idx = -1
+        for pos, mk, kd in marker_hits(body):
+            if mk == marker and body[pos:pos + len(marker)].lower() == marker.lower():
+                idx = pos
+                break
         if idx == -1:
             continue
         line_start = body.rfind("\n", 0, idx) + 1
@@ -567,8 +651,15 @@ def heal_article_ctas(article: dict, broken_kinds: set,
             body = body[:line_start] + new_block + body[line_end:]
         else:
             rest = body[line_end:]
+            # Die Vorlage bringt ihren eigenen Werbehinweis mit. Steht unter
+            # der defekten Zeile schon einer, wird er ÜBERNOMMEN statt
+            # verdoppelt. Toleranz gegen Leerzeile + italic-Umrandlung
+            # (End-CTA-Form "\n\n*Dieser Artikel …*") – die alte Regel sah
+            # nur "\n_?\*?\(?Dieser …" und ließ bei jeder Leerzeile eine
+            # doppelte Rechtstext-Zeile im Artikel stehen (Nachweis 14.09.).
             disclaimer_m = re.match(
-                r"\n_?\*?\(?Dieser Artikel enthält Affiliate-Links[^\n]*\n?", rest)
+                r"[ \t]*(?:\n[ \t]*)*_?\*?\(?Dieser Artikel enthält Affiliate-Links[^\n]*",
+                rest)
             if disclaimer_m:
                 rest = rest[disclaimer_m.end():]
             prefix = re.sub(r"\n?---\s*\n?\Z", "\n", body[:line_start])
@@ -1044,6 +1135,36 @@ FIXTURE_INTACT_MD = (
     "💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über "
     "unseren Partner-Vergleich: [**Kostenlos vergleichen**](/go/kfz-versicherung/)"
 )
+# Schadensbild 14.09.2026 (Gasvergleich-Artikel, LIVE sichtbar): Link korrekt,
+# eine Klammer zu viel dahinter – genau das musste AI1 bisher durchwinken.
+FIXTURE_TRAILING_PAREN_MD = (
+    "👉 **Jetzt vergleichen und sparen:** [**→ Angebote sofort checken**](/go/gas/))"
+)
+# Der Rest darf alles sein, was balanciert ist: harter Umbruch, <br>, Klammer-
+# zusatz mit der Disclaimer-Klammer in (Werbung).
+FIXTURE_INTACT_TRAILING_MD = (
+    "👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/gas/)  \n"
+    "_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen "
+    "Link erhalten wir eine Provision.)_"
+)
+FIXTURE_INTACT_BR_MD = (
+    "💡 **Schnell-Tipp von FranksFinanzcheck:** Prüfe deine Adresse: "
+    "[**Stromtarife vergleichen**](/go/strom/)<br>"
+)
+# Marker-Varianten, die die Engine im Bestand verteilt: Nicht-trennender
+# Bindestrich (U+2011) im Label und Großbuchstaben im Markennamen. Beide
+# waren AI1–AI4 bisher UNSICHTBAR (Vorfall 14.09.2026).
+FIXTURE_DASH_LABEL_MD = (
+    "\ud83d\udca1 **Schnell\u2011Tipp von FranksFinanzcheck:** Pr\u00fcfe deine Adresse: "
+    "[**Jetzt Angebote vergleichen**](/go/strom/)"
+)
+FIXTURE_DASH_LABEL_BROKEN_MD = (
+    "\ud83d\udca1 **Schnell\u2011Tipp von FranksFinanzcheck:** Pr\u00fcfe deine Adresse: "
+    "[**Jetzt Angebote vergleichen**](/go/strom/))"
+)
+FIXTURE_CASE_LABEL_MD = (
+    "\ud83d\udc49 **JETZT VERGLEICHEN UND SPAREN:** [**→ Angebote vergleichen**](/go/gas/))"
+)
 FIXTURE_GATEWAY_PAGE = """<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <script>location.replace("https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kfz-versicherung");</script>
@@ -1104,6 +1225,33 @@ def run_selftest() -> list[str]:
     expect(not check_cta_line("Schnell-Tipp von FranksFinanzcheck",
                               FIXTURE_INTACT_MD, reg_keys),
            "intakte CTA-Zeile darf keine Funde liefern")
+    expect(any("Unbalanciertes Zeichen" in p for p in check_cta_line(
+        "Jetzt vergleichen und sparen", FIXTURE_TRAILING_PAREN_MD, reg_keys)),
+        "Dangling-Klammer hinter dem CTA-Link (Vorfall 14.09.) muss erkannt werden")
+    expect(not check_cta_line("Jetzt vergleichen und sparen",
+                              FIXTURE_INTACT_TRAILING_MD, reg_keys),
+           "balancierter Nachsatz (Umbruch + Klammerzusatz) darf kein Fund sein")
+    expect(not check_cta_line("Schnell-Tipp von FranksFinanzcheck",
+                              FIXTURE_INTACT_BR_MD, reg_keys),
+           "hartes <br> am CTA-Ende darf kein Fund sein")
+
+    # 2b) Marker-Erkennung über Schreibvarianten (Strich + Groß/Klein)
+    expect(len(find_cta_lines(FIXTURE_DASH_LABEL_MD)) == 1,
+           "Top-CTA mit Nicht-trennendem Bindestrich (U+2011) muss als CTA-Zeile "
+           "erkannt werden – sonst bleibt sie unbewacht")
+    expect(find_cta_lines(FIXTURE_DASH_LABEL_MD)[0][1] == "top",
+           "Strich-Variante muss dem richtigen CTA-Typ zugeordnet werden")
+    expect(bool(check_cta_line("Schnell-Tipp von FranksFinanzcheck",
+                               FIXTURE_DASH_LABEL_BROKEN_MD, reg_keys)),
+           "Dangling-Klammer in einer Strich-Varianten-CTA muss erkannt werden")
+    dash_hits = find_cta_lines(FIXTURE_DASH_LABEL_BROKEN_MD)
+    expect(dash_hits and dash_hits[0][2].endswith("/go/strom/))"),
+           "die erkannte CTA-Zeile muss zeilengenau aus dem ORIGINAL-Text sliced sein")
+    expect(len(find_cta_lines(FIXTURE_CASE_LABEL_MD)) == 1,
+           "Marker in GROSSSCHREIBUNG (mit Doppelpunkt) muss als CTA-Zeile zählen")
+    expect(not find_cta_lines("Ein Satz, damit du jetzt vergleichen und sparen kannst, "
+                              "spart wirklich Geld."),
+           "ein:normaler Satz mit dem Marker-Wort darf NICHT als CTA gelten")
 
     # 3) CTA-Zeilen-Deduplikation (mehrere Marker in einer Zeile)
     double = ("👉 **Jetzt vergleichen und sparen:** "
@@ -1143,7 +1291,10 @@ def run_selftest() -> list[str]:
         posts.mkdir(parents=True)
         broken = ("---\ntitle: \"Test\"\npillar: \"versicherungen\"\ndraft: false\n---\n\n"
                   "Intro.\n\n## Abschnitt\n\n" + FIXTURE_DANGLING_MD + "\n\n"
-                  "## Fazit\n\n" + FIXTURE_UNREGISTERED_MD + "\n")
+                  "## Fazit\n\n" + FIXTURE_UNREGISTERED_MD + "\n\n"
+                  "*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss "
+                  "über einen Link erhalten wir eine Provision – für dich entstehen "
+                  "keine Mehrkosten.*\n")
         (posts / "index.md").write_text(broken, encoding="utf-8")
         article = load_live_articles(root / "content" / "posts")[0]
         kinds = set()
@@ -1155,7 +1306,12 @@ def run_selftest() -> list[str]:
         rerouted = heal_unregistered_keys(article, reg)
         healed = heal_article_ctas(article, kinds, reg)
         expect(bool(healed), "Heilung muss mindestens eine CTA neu generieren")
+        # Je geheilter CTA genau EIN Werbehinweis – die Vorlage liefert ihn
+        # selbst, ein vorhandener darunter darf also nicht stehen bleiben.
         text_after = Path(posts / "index.md").read_text(encoding="utf-8")
+        expect(text_after.count("Dieser Artikel enthält Affiliate-Links") == 2,
+               "Heilung muss den vorhandenen Werbehinweis übernehmen, statt ihn zu "
+               "verdoppeln (Top + Ende = 2)")
         keys_after = {m.group(1) for m in GO_LINK_RE.finditer(
             text_after.replace("/go/haftpflicht/", ""))}
         expect(not keys_after or all(k in reg for k in keys_after),

@@ -28,7 +28,7 @@ kurzantwort: "Ein Notgroschen sollte mindestens drei bis sechs Monate deiner fix
 
 Was tust du, wenn am Montagmorgen dein Auto streikt und nachmittags die Waschmaschine den Keller flutet? Solche Momente entscheiden über schlaflose Nächte oder eine sachliche Lösung. Ein solider finanzieller Puffer ist keine Option, sondern deine elementare Versicherung gegen den Alltag. Drei Faktoren zählen dabei: Verfügbarkeit, Sicherheit und die exakt passende Summe für dein Leben.
 
-**Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 **Das Wichtigste in Kürze**
 * **Richtwert:** Plane ca. 3 bis 6 Netto-Monatsausgaben für deine Basis ein.
@@ -62,7 +62,7 @@ In der Praxis variiert dein Bedarf je nach Lebensphase:
 
 Dein Geld muss sofort greifbar sein. Ein Sparbuch mit Kündigungsfrist oder Festgeld scheiden deshalb aus. Wähle ein separates Tagesgeldkonto bei einer Bank mit deutscher Einlagensicherung. Die optische Trennung vom Girokonto schützt dich davor, das Geld für Konsumwünsche auszugeben.
 
-Vergleiche die Konditionen regelmäßig, auch wenn Zinsen zweitrangig bleiben. Viele Anbieter bieten Neukunden attraktive Zinssätze, die den Wertverlust durch Inflation bremsen. Hier kannst du aktuelle Konditionen prüfen und direkt vergleichen: [**Tagesgeldkonten vergleichen**](/go/tagesgeld/) (Werbung). Achte auf eine garantierte Auszahlung innerhalb von 24 Stunden.
+Vergleiche die Konditionen regelmäßig, auch wenn Zinsen zweitrangig bleiben. Viele Anbieter bieten Neukunden attraktive Zinssätze, die den Wertverlust durch Inflation bremsen. Achte auf eine garantierte Auszahlung innerhalb von 24 Stunden.
 
 ### Kontotypen im Vergleich
 
@@ -90,7 +90,7 @@ Solange dein finanzieller Puffer nicht steht, nutzt du die vollen 20 % dafür.
 4. **Dauerauftrag einrichten:** Automatisiere den Sparvorgang direkt nach deinem Gehaltseingang.
 5. **Jährlicher Check:** Prüfe im Januar, ob Mieterhöhungen oder Inflation eine Anpassung erfordern.
 
-> 💶 **Spartipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)
 
 ## Rechenbeispiel: Notgroschen‑Aufbau 2024
 

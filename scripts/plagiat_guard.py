@@ -68,9 +68,18 @@ BOILER_LINES = (
     "Ratgeber ",                      # z. B. „Weitere Tipps findest du im Ratgeber …"
     "pillar ",                       # Kanalverweis unten (im Pillar-box)
 )
+DASH_RX = re.compile(r"[\u2010\u2011\u2012\u2013\u2014\u2015\u2212]")
+
+
 def _is_boiler(sentence: str) -> bool:
-    low = sentence.lower()
-    return any(m.lower() in low for m in BOILER_LINES)
+    """Boilerplate-Zuordnung, gleichgueltig ob ASCII-Bindestrich oder der von
+    der Engine eingesetzte Nicht-trennende Strich (U+2011) – sonst zahlten
+    „Schnell‑Tipp"- und „Affiliate‑Links"-Zeilen als Eigenleistung und drueckten
+    die Boilerplate-Quote (P3) falscherweise hoch (Nachweis 14.09.2026)."""
+    low = DASH_RX.sub("-", sentence.lower())
+    return any(DASH_RX.sub("-", m.lower()) in low for m in BOILER_LINES)
+
+
 BOILER_RX = re.compile("|".join(re.escape(m) for m in BOILER_LINES), re.I)
 
 WORD_RX = re.compile(r"[a-zäöüß0-9]+")

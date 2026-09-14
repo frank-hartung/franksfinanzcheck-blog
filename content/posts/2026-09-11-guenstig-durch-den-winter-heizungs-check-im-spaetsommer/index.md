@@ -173,7 +173,7 @@ Kombinierst du den Technik-Check mit einem Tarifwechsel, wirkt die Ersparnis dop
 Du senkst deinen Verbrauch und zahlst gleichzeitig weniger für jede verbrauchte Einheit.
 Das ist der effizienteste Weg zu niedrigen Fixkosten.
 
-[**Hier kannst du Tarife vergleichen und direkt sparen**](/go/gas/)
+> 💶 **Spar-Tipp zwischendurch:** Nach dem Technik-Check ist der Tarif der zweite Hebel – der Vergleich dauert nur wenige Minuten: [**Vergleichen & sparen**](/go/gas/)
 
 ## Fazit: Günstig durch den Winter – Heizungs-Check im Spätsommer
 
@@ -213,6 +213,6 @@ Der Wechsel ist ein reiner Verwaltungsprozess – an den Leitungen und deinem Z�
 
 ---
 
-👉 **Jetzt Gastarif prüfen:** [**→ Jetzt Angebote vergleichen**](/go/gas/)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/gas/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

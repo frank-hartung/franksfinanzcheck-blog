@@ -115,9 +115,8 @@ Willst du deine Kosten senken, brauchst du eine klare Struktur. Folge diesen ein
 5. **Smarte Hilfe:** Nutze Zeitschaltuhren für schwer zugängliche Steckdosen.
 6. **Tarif optimieren:** Senke zusätzlich den Preis pro Kilowattstunde durch einen Wechsel.
 
-Oft ist der Stromtarif selbst dein größter Hebel für Ersparnisse. Viele Haushalte harren jahrelang beim Grundversorger aus und zahlen dort deutlich mehr, als ihr Tarif wert ist. Ein schneller Vergleich bewirkt hier oft mehr als das Ziehen vieler Stecker. Prüfe deine aktuellen Konditionen und wechsle zu einem günstigeren Anbieter.
+Oft ist der Stromtarif selbst dein größter Hebel für Ersparnisse. Viele Haushalte harren jahrelang beim Grundversorger aus und zahlen dort deutlich mehr, als ihr Tarif wert ist. Ein schneller Vergleich bewirkt hier oft mehr als das Ziehen vieler Stecker – welche Geräte wirklich dauerhaft ziehen, zeigt dir die [Stromfresser-Suche](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/).
 
-**Hier kannst du direkt prüfen, wie viel du sparen könntest: [Stromanbieter vergleichen und wechseln](/go/strom/) {rel="sponsored"}.**
 
 ## Dauerverbraucher im Check: Wo lohnt sich das Abschalten am meisten?
 Bei einigen Geräten ist das Abschalten fast schon Pflicht. Bei anderen bringt es weniger Nutzen oder ist sogar kontraproduktiv. Ein Router sollte in der Regel laufen, damit Telefonie und Smarthome funktionieren. Hier sparst du durch eine Nachtabschaltung des WLANs nur minimale Beträge.

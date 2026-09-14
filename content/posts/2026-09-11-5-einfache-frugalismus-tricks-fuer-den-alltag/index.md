@@ -29,7 +29,7 @@ Willst du am Monatsende mehr Geld in der Tasche haben? Dann probiere Frugalismus
 Du streichst überflüssige Ausgaben und behältst deine Lebensqualität. Die **5 einfache Frugalismus-Tricks für den Alltag** zeigen dir sofort, wo du sparen kannst. Pro Monat reicht ein einziger Hebel, um messbare Ersparnisse zu erzielen.
   
 
-**Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 ---
 
@@ -194,6 +194,6 @@ Du hast jetzt **5 einfache Frugalismus‑Tricks für den Alltag** kennengelernt.
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/strom/)
 
-***Transparenz:** Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 
 _Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage‑, Rechts‑ oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._

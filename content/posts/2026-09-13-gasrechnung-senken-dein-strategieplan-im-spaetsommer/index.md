@@ -93,7 +93,7 @@ Gehe die Punkte nacheinander durch, um optimal vorbereitet zu sein:
 4. **Thermostate testen:** Drehe alle Regler voll auf und zu, um die Gängigkeit der Ventile sicherzustellen.
 5. **Tarif-Check durchführen:** Vergleiche online, ob dein aktueller Gasvertrag noch zu den Top-Konditionen passt.
 
-[Hier kannst du direkt deinen Gasanbieter vergleichen und wechseln](/go/gas/){rel="sponsored"}.
+Der Tarif-Check ist in wenigen Minuten erledigt – halte dafür deine letzte Jahresabrechnung bereit, die Kündigung übernimmt der neue Anbieter.
 
 ## Was bringt das regelmäßige Heizung prüfen wirklich?
 

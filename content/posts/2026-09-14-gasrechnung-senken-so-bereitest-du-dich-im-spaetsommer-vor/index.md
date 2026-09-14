@@ -108,7 +108,9 @@ Ein Einfamilienhaus verbraucht ca. 20.000 kWh Gas im Jahr.
 * **Alternativer Tarif:** Preis pro kWh ca. 10 Cent – Jährliche Kosten: ca. 2.000 €
 * **Potenzielle Ersparnis:** ca. 800 € pro Jahr
 
-Diese 800 € sind kein theoretischer Wert. Das ist echtes Geld für deinen nächsten Urlaub oder deine Altersvorsorge. Der Wechsel des Anbieters dauert online weniger als zehn Minuten. Vergleiche jetzt direkt deine Optionen: [Gasanbieter vergleichen](/go/gas/).
+Diese 800 € sind kein theoretischer Wert. Das ist echtes Geld für deinen nächsten Urlaub oder deine Altersvorsorge. Der Wechsel des Anbieters dauert online weniger als zehn Minuten.
+
+> 💶 **Spar-Tipp zwischendurch:** Deine letzte Jahresabrechnung reicht als Datengrundlage – mehr brauchst du für den Vergleich nicht: [**Vergleichen & sparen**](/go/gas/)
 
 ## Die Checkliste für die Heizperiode
 
