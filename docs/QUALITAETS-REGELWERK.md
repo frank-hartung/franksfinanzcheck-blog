@@ -484,11 +484,15 @@ jeder Schreibaktion.
   + 5 Weiterlesen-Zeilen mit lebenden Zielen, danach `link_density_guard --fix`
   (38 Ziel-Duplikate). Korridor 76 % → 100 %, unterversorgt 11 → 0, überladen 1 → 0.
   Nebenbefunde repariert: Markdown-Links in `tags`/`keywords` eines WLAN-Artikels,
-  an `**Weiterlesen:**` geklebte `**Lesetipp:**`-Zeilen. (5) **Fund, noch nicht
-  behoben:** `spam_guard` und `stil_guard` schreiben ihre Historie im VISIT-Lauf
-  neu statt anzuhängen (`spam_history.jsonl` 1497 → 3 Zeilen,
-  `stil_history.jsonl` 51/51 überschrieben); `history_guard` prüft nur die Form
-  und meldet 🟢. Schreibmodus „a" statt „w" gehört in beide Skripte.
+  an `**Weiterlesen:**` geklebte `**Lesetipp:**`-Zeilen. (5) **Fund, noch nicht behoben (zwei getrennte Dinge):** (a) Im VISIT-Lauf wurde
+  `data/spam_history.jsonl` von 1497 auf 3 Zeilen gestutzt und
+  `data/stil_history.jsonl` Zeile für Zeile ausgetauscht (51/51, Länge bleibt 51 –
+  Letzte-Messung-Ledger pro Artikel statt Historie). `history_guard` meldet 🟢,
+  weil er Form und Chronologie prüft, nicht Schwund. (b) Jede Visite schreibt
+  Historien-Zeilen, auch `--dry-run` (+67 Zeilen im Testlauf, content/ bleibt
+  unberührt): schreibarm, aber nicht schreibfrei. Wer (a) behebt, hängt in
+  `spam_guard`/`stil_guard` an statt zu schreiben, und ergänzt in `history_guard`
+  eine Schwund-Prüfung (Zeilenanzahl einer Historie darf nicht fallen).
 - **14.09.2026:** Doktor-Kette wieder in Betrieb – und die zwei Defekte
   repariert, die ihr Stillstand verdeckt hatte. Der Integritaets-Lock zeigte auf
   einen Commit (f0078db), der auf GitHub nicht mehr existiert; damit stoppte jede
