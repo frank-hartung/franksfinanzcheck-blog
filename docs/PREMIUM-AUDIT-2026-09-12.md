@@ -91,6 +91,8 @@ Dot-Caches: `.grammar_report.json`, `.spellcheck_report.json`, `.keyword_suggest
 ### 4.4 Watchdog-Härtung
 `check_affiliate_integrity` liest jetzt **state-first**: `.affiliate_integrity_state.json` (exit_code + content_problems + `generated_at`) mit Frische-Check – State > 30 h (täglicher Lauf 06:00 MESZ) = harter Befund. Damit ist ein stiller Wache-Ausfall sichtbar, der im reinen Report-Marker-Scan unsichtbar war. Der Report-Scan bleibt Fallback. Die beiden Eingaben (State + Report) werden in `affiliate-integrity-daily.yml` weiterhin versioniert (beide getrackt → `git add` trotz Ignore-Muster sicher).
 
+> **Nachtrag 15.09.2026 (Issue #281):** Die Frische-Prüfung setzte voraus, dass der Zustand regelmäßig neu geschrieben wird – das Gate schrieb ihn aber „konvergent" (nur bei geändertem Befund). An ruhigen Tagen fror `generated_at` ein und die Prüfung meldete „Wache schweigt" (P1), obwohl die Wache täglich fehlerfrei lief. Seit 15.09. erneuert jeder Lauf einen **Herzschlag** (`generated_at`), `verdict_changed` trennt Lage von Lebenszeichen, und der Watchdog belegt die Frische per Herzschlag **oder** fehlerfreiem Lauf. Vertrag: `GOVERNANCE-KONTRAKT.md` C16 · Reparatur: `docs/archiv/AFFILIATE-INTEGRITY-WACHE-281-REPARATUR-2026-09-15.md`.
+
 ---
 
 ## 5 · Verifikation (Nachweise)
