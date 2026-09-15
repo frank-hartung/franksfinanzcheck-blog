@@ -42,6 +42,33 @@
 #      • Issue-Pflege idempotent, auch wenn Hugo/Gate nie einen Exit liefern
 #      • Job nur bei unheilbarem Werkzeugfehler rot (Alerting bleibt ehrlich)
 #      • Inhaltsschaden → fachliches Issue, Lauf betrieblich grün (kein Doppelalarm)
+#
+#  ------------------------------------------------------------
+#  REPARATUR #281 (15.09.2026) – HERZSCHLAG vs. BEFUND
+#
+#  Fehlalarm (P1): „Integritäts-Wache schweigt: State 64 h alt (> 30 h)",
+#  obwohl die Wache jeden Tag fehlerfrei lief.
+#
+#  Ursache: Zwei Reparaturen widersprachen sich.
+#    02.09.: Report + Zustand wurden „konvergent" geschrieben (nur bei
+#            geändertem Befund) – gedacht gegen täglichen Diff und einen
+#            Deploy ohne Heilung.
+#    12.09.: Der Bot-Watchdog liest denselben Zeitstempel als LEBENSZEICHEN
+#            (State > 30 h = Wache schweigt, P1).
+#  An ruhigen Tagen fror der Zeitstempel damit ein, die Datei wurde nie
+#  committet – der Watchdog konnte gar nichts anderes melden.
+#
+#  Dauerhafte Behebung (im Gate + hier):
+#    · Jeder Lauf erneuert den Herzschlag (`generated_at`) und committet den
+#      Beweis-Nachweis – auch wenn sich der Befund nicht geändert hat.
+#      Commit-Botschaft unterscheidet Herzschlag / geänderte Lage / Heilung;
+#      nur eine Heilung oder ein roter Befund lösen einen Deploy aus.
+#    · Der Lauf BEWEIST, dass sein Herzschlag in origin/main angekommen ist
+#      (`push_verified`) – ein ausgebliebener Push fällt sofort auf, statt
+#      still den nächsten Fehlalarm zu erzeugen.
+#    · Der Deploy-Trigger verlangt genau diesen Nachweis.
+#    · Der Zustand ist deploy-irrelevant (Deploy-Gate-Negativliste); ein
+#      Lebenszeichen darf nie eine Veröffentlichung auslösen.
 # ============================================================
 name: Affiliate-Integritäts-Wache (täglich)
 
@@ -178,13 +205,26 @@ jobs:
           print(f"exit_code={state.get('exit_code', '')}")
           print(f"content_problems={len(state.get('content_problems') or [])}")
           print(f"tool_errors={len(state.get('errors') or [])}")
+          # HERZSCHLAG vs. BEFUND (#281): der Zeitstempel ist ein Lebenszeichen,
+          # `verdict_changed` sagt, ob sich die LAGE geändert hat.
+          print(f"verdict_changed={'true' if state.get('verdict_changed') else 'false'}")
+          print(f"heartbeat={state.get('generated_at', '')}")
           PY
 
-      # ============ STAGE 3: HEILUNG SICHERN ============
-      - name: Reparatur + Report committen und pushen
+      # ============ STAGE 3: BEWEIS-NACHWEIS SICHERN ============
+      # 15.09.2026 (#281): Hier wird nicht mehr nur eine „Heilung" gesichert,
+      # sondern der BEWEIS-NACHWEIS: Herzschlag (Zeitstempel) + Befund. Genau
+      # dieser Push macht die Wache von außen überprüfbar – fehlt er, meldet
+      # der Bot-Watchdog „Wache schweigt" (der Fehlalarm aus #281 entstand,
+      # weil der Zeitstempel an ruhigen Tagen nie erneuert wurde).
+      - name: Beweis-Nachweis committen und pushen (Herzschlag + Befund)
         id: commit
         if: ${{ always() && !cancelled() && steps.gate.outcome != 'skipped' }}
+        env:
+          HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
+          VERDICT_CHANGED: ${{ steps.state.outputs.verdict_changed }}
         run: |
+          set +e
           git config user.name "Affiliate-Integrity-Bot"
           git config user.email "affiliate-integrity-bot@users.noreply.github.com"
           # 12.09.2026 (Premium-Audit): Report + State bleiben versioniert –
@@ -194,17 +234,47 @@ jobs:
           git add content/ 2>/dev/null || true
           git add AFFILIATE-INTEGRITY-REPORT.md 2>/dev/null || true
           git add .affiliate_integrity_state.json 2>/dev/null || true
+          echo "pushed=false" >> "$GITHUB_OUTPUT"
+          echo "push_verified=false" >> "$GITHUB_OUTPUT"
           if git diff --cached --quiet; then
             echo "Affiliate-Integritäts-Wache: keine Änderungen."
-            echo "pushed=false" >> "$GITHUB_OUTPUT"
-          else
-            git commit -m "fix(content): Affiliate-Integritäts-Wache – CTA-Boxen/Linkziele automatisch geheilt (täglich)"
-            scripts/git_sync.sh --push-only
-            echo "pushed=true" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+          # Commit-Botschaft nach BEDEUTUNG: Heilung / geänderte Lage /
+          # reines Lebenszeichen. `[skip ci]` nur am Herzschlag – ein
+          # Lebenszeichen darf keinen Deploy anstoßen (#281).
+          if [ "${{ steps.state.outputs.healed }}" = "true" ]; then
+            MSG="fix(content): Affiliate-Integritäts-Wache – CTA-Boxen/Linkziele automatisch geheilt (${HEALED_COUNT} Artikel)"
+          elif [ "$VERDICT_CHANGED" = "true" ]; then
+            MSG="chore(affiliate): Beweis-Lage aktualisiert – kein Fund offen (ohne Heilung)"
+          else
+            MSG="chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+          fi
+          git commit -m "$MSG"
+          scripts/git_sync.sh --push-only
+          rc=$?
+          if [ "$rc" -ne 0 ]; then
+            echo "::warning::Push des Beweis-Nachweises fehlgeschlagen (git_sync exit ${rc}) – der Zustand bleibt im Lauf-Artefakt."
+            exit 0
+          fi
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+          # FRISCHE-NACHWEIS (#281): Der Herzschlag muss WIRKLICH in
+          # origin/main stehen. Ohne diese Prüfung konnte ein stiller
+          # Push-Verlust genau den Zustand erzeugen, den der Watchdog als
+          # „Wache schweigt" meldet – ein Fehlalarm, der nie auffällt.
+          git fetch origin main --quiet
+          local_blob="$(git rev-parse HEAD:.affiliate_integrity_state.json 2>/dev/null)"
+          remote_blob="$(git rev-parse origin/main:.affiliate_integrity_state.json 2>/dev/null)"
+          if [ -n "$local_blob" ] && [ "$local_blob" = "$remote_blob" ]; then
+            echo "push_verified=true" >> "$GITHUB_OUTPUT"
+            echo "✅ Herzschlag in origin/main nachgewiesen (${local_blob:0:12})."
+          else
+            echo "::warning::Herzschlag NICHT in origin/main nachweisbar (lokal ${local_blob:0:12} / remote ${remote_blob:0:12}) – Nachweis nur im Lauf-Artefakt."
+          fi
+          exit 0
 
-      - name: Deploy anstoßen (nur wenn tatsächlich repariert und gepusht wurde)
-        if: ${{ steps.state.outputs.healed == 'true' && steps.commit.outputs.pushed == 'true' }}
+      - name: Deploy anstoßen (nur wenn wirklich geheilt UND der Nachweis gepusht wurde)
+        if: ${{ steps.state.outputs.healed == 'true' && steps.commit.outputs.pushed == 'true' && steps.commit.outputs.push_verified == 'true' }}
         uses: actions/github-script@v7
         env:
           HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
@@ -339,6 +409,30 @@ jobs:
               console.log(`✅ Issue #${created.data.number} erstellt.`);
             }
 
+      # ============ STAGE 5: BEWEIS-LAGE IN DIE ZUSAMMENFASSUNG ============
+      # Eine Wache, die nur bei Rot etwas zeigt, ist im Alltag unsichtbar.
+      # Hier steht nach jedem Lauf nachvollziehbar: Lebenszeichen, Lage,
+      # Heilungen – und ob der Nachweis im Repo angekommen ist (#281).
+      - name: Beweis-Lage (Herzschlag, Frische-Nachweis) zusammenfassen
+        if: ${{ always() && !cancelled() }}
+        run: |
+          {
+            echo "## 🔗 Affiliate-Integritäts-Wache – Beweis-Lage"
+            echo ""
+            echo "| Feld | Wert |"
+            echo "|---|---|"
+            echo "| Herzschlag (dieser Lauf) | \`${{ steps.state.outputs.heartbeat }}\` |"
+            echo "| Lage gegenüber letztem Lauf | ${{ steps.state.outputs.verdict_changed == 'true' && 'GEÄNDERT' || 'unverändert' }} |"
+            echo "| Gate-Exit | ${{ steps.gate.outputs.exit_code }} |"
+            echo "| Automatisch geheilt | ${{ steps.state.outputs.healed_count }} Artikel |"
+            echo "| Offene Funde | ${{ steps.state.outputs.content_problems }} |"
+            echo "| Werkzeugfehler | ${{ steps.state.outputs.tool_errors }} |"
+            echo "| Nachweis in origin/main | ${{ steps.commit.outputs.push_verified }} |"
+            echo ""
+            echo "_Herzschlag = Lebenszeichen der Wache (jeder Lauf erneuert ihn) · Lage = Befund "
+            echo "(nur bei Änderung); der Bot-Watchdog prüft beides getrennt (Issue #281)._"
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Diagnose-Artefakt bei Rot (Report, Log, Zustand)
         if: always() && !cancelled() && steps.gate.outputs.exit_code != '0'
         uses: actions/upload-artifact@v7
@@ -358,9 +452,17 @@ jobs:
           SELF="${{ steps.selftest.outcome }}"
           GATE="${{ steps.gate.outputs.exit_code }}"
           HUGO="${{ steps.hugo.outcome }}"
+          VERIFIED="${{ steps.commit.outputs.push_verified }}"
+          PUSHED="${{ steps.commit.outputs.pushed }}"
           if [ "$SELF" != "success" ]; then
             echo "::error::Detektor-Selbsttest nicht bestanden – fail-closed."
             exit 1
+          fi
+          # #281: Ein ausgebliebener Nachweis-Push ist ein HINWEIS (der
+          # Bot-Watchdog liest ihn als Hinweis, ab 54 h als Befund) – kein
+          # Doppelalarm über alert-on-failure, aber sichtbar im Lauf.
+          if [ "$PUSHED" = "true" ] && [ "$VERIFIED" != "true" ]; then
+            echo "::warning::Beweis-Nachweis nicht in origin/main nachgewiesen – Frische-Beweis nur im Lauf-Artefakt."
           fi
           if [ "$GATE" = "0" ]; then
             echo "✅ Affiliate-Integrität bewiesen."

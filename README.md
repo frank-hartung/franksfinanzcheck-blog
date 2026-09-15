@@ -176,25 +176,39 @@ nutzen jetzt denselben Attribut-Vertrag über
 `layouts/_partials/affiliate_anchor_attrs.html` (Fund vom 02.09.: Buttons
 ohne `rel="sponsored"` und ohne Klick-Attribution).
 
-Report und Zustand werden **konvergent** geschrieben (nur bei inhaltlicher
-Änderung) – ruhige Tage erzeugen kein Git-Diff, keinen Commit, keinen
-Deploy-Trigger und kein Issue.
+**💓 Herzschlag statt eingefrorenem Zeitstempel (15.09.2026, Issue #281):**
+
+Jeder Lauf schreibt Report **und** Zustand mit frischem „Stand" – auch wenn
+sich am Befund nichts ändert. Der Zeitstempel ist das **Lebenszeichen** der
+Wache (versioniert im Repo, offline lesbar), `verdict_changed` trennt davon
+die **Lage**:
+
+| Feld | Bedeutung |
+|---|---|
+| `generated_at` | Herzschlag – wird bei **jedem** Lauf erneuert |
+| `verdict_changed` | `true`, wenn sich der Befund gegenüber dem letzten Lauf geändert hat |
+| `exit_code` / `content_problems` / `errors` | der Befund selbst (rot bleibt rot, bis geheilt) |
+
+Nur eine echte Heilung, ein geänderter Befund oder ein roter Zustand lösen
+einen Deploy aus – ein Lebenszeichen nie (`[skip ci]` + Deploy-Negativliste).
+Der Lauf **beweist** außerdem, dass sein Nachweis in `origin/main` angekommen
+ist (`push_verified`), und der Bot-Watchdog prüft Befund und Frische getrennt
+(Herzschlag **oder** fehlerfreier Lauf; Verträge: `docs/GOVERNANCE-KONTRAKT.md`
+C16). Hintergrund, Fehlerbild und Beweise:
+`docs/archiv/AFFILIATE-INTEGRITY-WACHE-281-REPARATUR-2026-09-15.md`.
 
 Report: `AFFILIATE-INTEGRITY-REPORT.md` (täglich) ·
 Zustand: `.affiliate_integrity_state.json` ·
-Hintergrund/Dauerhaftigkeit: `AFFILIATE-INTEGRITY-GATE-REPORT.md`
+Hintergrund/Dauerhaftigkeit: `docs/PROFIBLOGGER-AFFILIATE-REPORT.md`,
+`docs/archiv/AFFILIATE-INTEGRITY-WACHE-281-REPARATUR-2026-09-15.md`
 
-> ⚠️ **Einmalig einspielen (Workflow):** Die Premium-Fassung von
-> `.github/workflows/affiliate-integrity-daily.yml` liegt als fertiger Patch
-> bei – Agenten dürfen keine Workflow-Dateien pushen (GitHub-App ohne
-> `workflows`-Permission). Ohne Patch fehlt der Wache `actions: write`, der
-> Deploy-Trigger läuft an Heilungs-Tagen in eine 403:
->
-> ```bash
-> git apply patches/affiliate-integrity-premium-2026-09-02-workflows.patch
-> # alternativ: cp patches/affiliate-integrity-daily-2026-09-02-workflow-ready.yml \
-> #                 .github/workflows/affiliate-integrity-daily.yml
-> ```
+> ✅ **Workflow eingespielt (15.09.2026):** Die Premium-Fassung von
+> `.github/workflows/affiliate-integrity-daily.yml` läuft im Repo – inklusive
+> `actions: write` für den Deploy-Trigger, Herzschlag-Commit und
+> Frische-Nachweis (`push_verified`). Der frühere Einspiel-Hinweis (Patch +
+> „Agenten dürfen keine Workflow-Dateien pushen") ist damit erledigt: Der
+> Workflow ist über den normalen Branch-/PR-Weg änderbar (am 15.09.2026
+> verifiziert); der Patch bleibt nur als Historie in `patches/`.
 
 
 **📌 Automatisches Pinnen bei Pinterest (RSS-Auto-Publish):**

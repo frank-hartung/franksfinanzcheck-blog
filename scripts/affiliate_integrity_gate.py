@@ -97,6 +97,39 @@
 #    • deploy.yml → publish_gate.py (neue/Re-Queue-Kandidaten, hart)
 #    • seo-weekly.yml → bestand_gate.py (Bestand, nicht-destruktiv)
 #
+#  ------------------------------------------------------------
+#  REPARATUR #281 (15.09.2026) – HERZSCHLAG statt eingefrorener Zeitstempel
+#
+#  Befund (Bot-Watchdog-Ticket #281, P1 „Affiliate-Integrität offen"):
+#    „Integritäts-Wache schweigt: State 64 h alt (> 30 h, täglicher Lauf
+#     06:00 MESZ)" – obwohl die Wache JEDEN Tag fehlerfrei lief.
+#
+#  Ursache (Konstruktionswiderspruch zweier Reparaturen):
+#    · 02.09.2026: Report UND Zustand werden „konvergent" geschrieben –
+#      bei unverändertem Befund wird KEINE Datei angefasst (Schutz vor
+#      täglichem Git-Diff ohne Inhalt / Deploy-Trigger ohne Heilung).
+#    · 12.09.2026: Der Bot-Watchdog prüft genau diesen Zeitstempel als
+#      LEBENSZEICHEN (`generated_at` > 30 h = Wache schweigt, P1).
+#    Damit war die Frische-Anforderung unerfüllbar: An ruhigen Tagen
+#    (Befund unverändert grün) fror `generated_at` ein, die Datei wurde
+#    nie committet und der Watchdog meldete einen stillen Ausfall, den
+#    es nie gab. Ein BEFUND-Zeitstempel ist kein LEBENSZEICHEN.
+#
+#  Dauerhafte Behebung (Trennung der beiden Bedeutungen):
+#    · HERZSCHLAG – `generated_at` wird bei JEDEM Lauf erneuert; Report
+#      und Zustand werden immer geschrieben. Das Lebenszeichen steht
+#      damit versioniert im Repo (offline lesbar, unbestechlich).
+#    · BEFUND – `verdict_changed` / `report_changed` sagen, ob sich die
+#      LAGE geändert hat (Vergleich ohne die flüchtigen Zeilen). Nur ein
+#      geänderter Befund, eine Heilung oder ein roter Zustand lösen im
+#      Workflow einen Deploy aus – ein Lebenszeichen nicht.
+#    · ESKALATION – Bleibt der Herzschlag > 54 h alt, obwohl die Wache
+#      fehlerfrei lief, meldet der Watchdog den Nachweis-Weg (kein
+#      Herzschlag) – getrennt vom Befund, den er aus dem Zustand liest.
+#    · SELBSTTEST – Der Selbsttest friert beide Eigenschaften ein: ein
+#      zweiter Lauf mit gleichem Befund muss den Herzschlag erneuern und
+#      `verdict_changed=false` melden; ein geänderter Befund true.
+#
 #  EXIT-CODES
 #    0  grün – alle Links intakt, registriert, gerendert, Gateway belegt
 #    1  Inhaltsschaden – nach Heilungsversuch bleibt etwas offen
@@ -940,15 +973,25 @@ def run(root: Path | None = None, posts_dir: Path | None = None,
     }
 
 
-# Konvergenz (02.09.2026): Zeitstempel und Build-Herkunft sind flüchtig und
-# umgebungsabhängig. Würde der Report sie bei jedem Lauf neu schreiben, gäbe
-# es TÄGLICH ein Git-Diff ohne inhaltliche Änderung – der Workflow committet
-# dann, git_sync.sh meldet Erfolg, und der Deploy-Trigger springt ohne echte
-# Heilung an. Deshalb: geschrieben wird nur bei inhaltlicher Änderung
-# (Vergleich ohne die flüchtigen Zeilen). Gleiches Prinzip wie das
-# "konvergent" in deploy.yml.
+# HERZSCHLAG vs. BEFUND (Reparatur #281, 15.09.2026)
+# ---------------------------------------------------------------
+# Bis 14.09.2026 wurden Report UND Zustand „konvergent" geschrieben:
+# gleicher Befund → Datei nicht angefasst (Schutz vor täglichem Git-Diff
+# ohne Inhalt und vor einem Deploy-Trigger ohne Heilung). Der Bot-Watchdog
+# liest denselben Zeitstempel seit dem 12.09.2026 aber als LEBENSZEICHEN
+# („State älter als 30 h = Wache schweigt", P1). Beides zusammen konnte
+# nur falsch ausgehen: an ruhigen Tagen fror `generated_at` ein → P1-Fehlalarm
+# (#281), und der Zustand landete nie im Repo → der Alarm blieb offen.
+#
+# Deshalb jetzt zwei getrennte Bedeutungen:
+#   HERZSCHLAG – `generated_at` (Report-Stand, Zustands-Zeitstempel) wird bei
+#                JEDEM Lauf erneuert; beide Dateien werden immer geschrieben.
+#                Das ist das Lebenszeichen der Wache, versioniert im Repo.
+#   BEFUND     – `verdict_changed` / `report_changed` beschreiben, ob sich die
+#                LAGE geändert hat (Vergleich OHNE die flüchtigen Zeilen).
+#                Nur das löst Commit-/Deploy-Entscheidungen aus.
 VOLATILE_REPORT_LINE = re.compile(r"^\*\*(?:Stand|Build):\*\*.*$")
-VOLATILE_STATE_KEYS = ("generated_at", "build")
+VOLATILE_STATE_KEYS = ("generated_at", "build", "verdict_changed")
 
 
 def _report_fingerprint(text: str) -> str:
@@ -1049,11 +1092,11 @@ def write_report(result: dict) -> str:
     ]
     text = "\n".join(lines) + "\n"
     previous = REPORT.read_text(encoding="utf-8") if REPORT.is_file() else ""
-    if _report_fingerprint(previous) == _report_fingerprint(text):
-        # Inhalt unverändert → Datei nicht anfassen (kein Git-Diff, kein
-        # Commit, kein Deploy-Trigger). Der Log zeigt trotzdem den frischen Stand.
-        result["report_written"] = False
-        return text
+    # Der Report wird IMMER geschrieben (Herzschlag = „Stand"). `report_changed`
+    # trennt die Lage vom Lebenszeichen: false = dieselbe Lage, nur frischer
+    # Zeitstempel (siehe „HERZSCHLAG vs. BEFUND" oben).
+    result["report_changed"] = (not previous
+                                or _report_fingerprint(previous) != _report_fingerprint(text))
     REPORT.write_text(text, encoding="utf-8")
     result["report_written"] = True
     return text
@@ -1061,9 +1104,15 @@ def write_report(result: dict) -> str:
 
 def write_state(result: dict) -> None:
     """Maschinenlesbarer Zustand für die Workflows (Deploy-Trigger, Issue-
-    Pflege). Bewusst kleines, stabiles Schema."""
+    Pflege) UND Lebenszeichen für den Bot-Watchdog.
+
+    Wird bei JEDEM Lauf geschrieben – auch wenn sich der Befund nicht
+    geändert hat. Genau daran ist die Wache am 14.09.2026 gescheitert:
+    der eingefrorene Zeitstempel eines „konvergenten" Schreibens wurde im
+    Watchdog als stiller Ausfall gelesen (#281). `verdict_changed` hält
+    fest, ob die LAGE anders ist als im vorherigen Zustand.
+    """
     payload = {
-        "generated_at": result["generated_at"],
         "exit_code": result["exit_code"],
         "checked": result["checked"],
         "healed": result["healed"],
@@ -1072,18 +1121,27 @@ def write_state(result: dict) -> None:
         "errors": result["errors"],
         "build": result["build"],
     }
+    previous = {}
+    if STATE.is_file():
+        try:
+            loaded = json.loads(STATE.read_text(encoding="utf-8"))
+            if isinstance(loaded, dict):
+                previous = loaded
+        except (OSError, json.JSONDecodeError):
+            previous = {}
+    verdict_changed = (not previous
+                       or _state_fingerprint(previous) != _state_fingerprint(payload))
+    payload = {
+        "generated_at": result["generated_at"],   # Herzschlag: DIESER Lauf
+        "verdict_changed": bool(verdict_changed),
+        **payload,
+    }
+    result["verdict_changed"] = bool(verdict_changed)
     try:
-        previous = json.loads(STATE.read_text(encoding="utf-8")) if STATE.is_file() else {}
-        if _state_fingerprint(previous) == _state_fingerprint(payload):
-            return  # konvergent: gleicher Befund → keine Dateiänderung
         STATE.write_text(json.dumps(payload, ensure_ascii=False, indent=1) + "\n",
                          encoding="utf-8")
-    except (OSError, json.JSONDecodeError) as exc:
-        try:
-            STATE.write_text(json.dumps(payload, ensure_ascii=False, indent=1) + "\n",
-                             encoding="utf-8")
-        except OSError as exc2:
-            _say(f"⚠ Zustand konnte nicht geschrieben werden: {exc2} ({exc})")
+    except OSError as exc:
+        _say(f"⚠ Zustand konnte nicht geschrieben werden: {exc}")
 
 
 # ------------------------------------------------------------------ #
@@ -1359,6 +1417,67 @@ def run_selftest() -> list[str]:
     finally:
         globals()["find_hugo"] = old_find
 
+    # 9) HERZSCHLAG vs. BEFUND (Reparatur #281) – der Kern der dauerhaften
+    #    Behebung. Ein zweiter Lauf mit UNVERÄNDERTEM Befund MUSS den
+    #    Zeitstempel erneuern (sonst liest der Bot-Watchdog wieder einen
+    #    stillen Ausfall) und darf die Lage nicht als geändert melden.
+    #    Wichtig (C15 „Beweisen ist nicht Heilen"): Der Test läuft in einem
+    #    temporären Verzeichnis und stellt die echten Pfade garantiert wieder
+    #    her – der Selbsttest schreibt NIE in den echten Report/Zustand.
+    old_state_path, old_report_path = globals()["STATE"], globals()["REPORT"]
+    try:
+        with tempfile.TemporaryDirectory() as tmp4:
+            tmp_root = Path(tmp4)
+            globals()["STATE"] = tmp_root / ".affiliate_integrity_state.json"
+            globals()["REPORT"] = tmp_root / "AFFILIATE-INTEGRITY-REPORT.md"
+            base = {
+                "generated_at": "2026-09-15 04:00:00 UTC",
+                "checked": 32,
+                "findings": {},
+                "render_problems": {},
+                "healed": [],
+                "healed_count": 0,
+                "per_article": [],
+                "build": {"built": True, "reason": "public/ frisch", "ok": True},
+                "registry_routes": 19,
+                "errors": [],
+                "exit_code": EXIT_OK,
+            }
+            first = dict(base)
+            write_report(first)
+            write_state(first)
+            expect(first["verdict_changed"] is True,
+                   "erster Lauf ohne vorherigen Zustand muss die Lage als 'geändert' "
+                   "melden (sonst wäre der erste Befund unsichtbar)")
+            expect(globals()["STATE"].is_file(),
+                   "der Zustand muss geschrieben werden (Herzschlag)")
+
+            second = dict(base)
+            second["generated_at"] = "2026-09-16 04:00:00 UTC"
+            write_report(second)
+            write_state(second)
+            written = json.loads(globals()["STATE"].read_text(encoding="utf-8"))
+            expect(second["verdict_changed"] is False,
+                   "gleicher Befund am Folgetag darf NICHT als Lageänderung gelten")
+            expect(written["generated_at"] == "2026-09-16 04:00:00 UTC",
+                   "DER HERZSCHLAG MUSS SICH ERNEUERN: der Folgelauf mit gleichem "
+                   "Befund hat den Zeitstempel nicht aktualisiert – genau daran ist "
+                   "der Bot-Watchdog in #281 falsch aufgewacht")
+            expect(second["report_changed"] is False,
+                   "der Report darf am ruhigen Tag nur den Zeitstempel erneuern")
+            expect("**Stand:** 2026-09-16 04:00:00 UTC" in
+                   globals()["REPORT"].read_text(encoding="utf-8"),
+                   "der Report-Stand (Lebenszeichen für Menschen) muss frisch sein")
+
+            third = dict(base)
+            third["generated_at"] = "2026-09-17 04:00:00 UTC"
+            third["findings"] = {"2026-08-10-test": {"problems": ["kaputt"], "healed": []}}
+            write_state(third)
+            expect(third["verdict_changed"] is True,
+                   "geänderter Befund (offener Fund) muss als Lageänderung gelten")
+    finally:
+        globals()["STATE"], globals()["REPORT"] = old_state_path, old_report_path
+
     return errors
 
 
@@ -1375,7 +1494,8 @@ def main() -> int:
         print("✅ AFFILIATE-INTEGRITY-SELFTEST bestanden (attribut-tolerante Anker-"
               "Erkennung inkl. ?subid=/Legacy/unminifiziert, rohe Partner-Links, "
               "AI1–AI3-Schadensbilder, Deduplikation, AI5-Gateway-Beweis, "
-              "Selbstheilung, Build-Frische, Hook-Drift-Wächter, Hugo-Rebuild-Klartext).")
+              "Selbstheilung, Build-Frische, Hook-Drift-Wächter, Hugo-Rebuild-Klartext, "
+              "Herzschlag vs. Befund aus #281).")
         return EXIT_OK
 
     result = run()
@@ -1386,6 +1506,9 @@ def main() -> int:
     else:
         print(write_report(result))
         write_state(result)
+        _say(f"💓 Herzschlag: {result['generated_at']} · Lage "
+             f"{'GEÄNDERT' if result.get('verdict_changed') else 'unverändert'}"
+             f" · Report {'inhaltlich geändert' if result.get('report_changed') else 'nur Zeitstempel'}")
         if result["exit_code"] == EXIT_TOOL:
             _say("🟠 WERKZEUGFEHLER – Render-Beweis konnte nicht geführt werden "
                  "(fail-closed: keine Veröffentlichung).")

@@ -16,7 +16,9 @@ Checks:
   2)  Skript-Syntax (py_compile)
   3)  Live-Site: neuester Artikel wirklich live?
   4)  TLS-Zertifikat (GitHub Pages)
-  5)  Affiliate-Integritäts-Wache aktiv? (26h)
+  5)  Affiliate-Integritäts-Wache aktiv? (30h, nur FEHLERFREIE Läufe zählen)
+  5b) Affiliate-Integrität: Befund aus dem Zustand, Frische per Herzschlag
+      ODER fehlerfreiem Lauf (Reparatur #281 – siehe unten)
   6)  Pinterest-Watchdog aktiv? (30h)
   7)  Pinterest-Kanal (Token + Domain-Sperre + Frische) – MIT BESITZER
   8)  Content-Reserve Gesundheit (Pool-Größe, Drafts)
@@ -32,6 +34,23 @@ ALARM-ROUTING (seit #272, 12.09.2026)
   Menschliche Befunde öffnen und blockieren KEIN Automations-Ticket – genau
   das war die Sackgasse: „wird automatisch geschlossen, sobald alles grün
   ist" konnte nie eintreten, weil das Grün am Menschen hing (#251 → #272 → …).
+
+HERZSCHLAG STATT BEFUND-ZEITSTEMPEL (Reparatur #281, 15.09.2026)
+  Check 5b meldete „Integritäts-Wache schweigt: State 64 h alt" (P1) – obwohl
+  die Wache jeden Tag fehlerfrei lief. Ursache: Der Zustand der Wache wurde
+  „konvergent" geschrieben (nur bei geändertem Befund), sein Zeitstempel fror
+  an ruhigen Tagen ein – und genau diesen als LEBENSZEICHEN zu lesen, war die
+  Frische-Prüfung vom 12.09.2026. Ein Befund-Zeitstempel beweist keinen Lauf.
+  Jetzt (dauerhaft, fail-safe):
+    · Das Gate erneuert bei JEDEM Lauf den Herzschlag (`generated_at`) und
+      schreibt `verdict_changed` als eigenes Feld (Befund ≠ Lebenszeichen).
+    · 5b liest den BEFUND aus dem Zustand (rot bleibt rot) und belegt die
+      FRISCHE per Herzschlag ODER per fehlerfreiem Lauf im 30-h-Fenster.
+    · Bleibt der Herzschlag > 54 h alt trotz fehlerfreier Läufe, meldet der
+      Watchdog genau das („Nachweis landet nicht im Repo") – statt eines
+      Fehlalarms „Wache schweigt".
+    · Check 5 wertet nur noch fehlerfreie Läufe: eine dauerhaft rote Wache
+      ist kein Grün (C2: eine nicht ausgeführte Messung ist kein Grün).
 
 Exit-Codes:
   0 = Lauf ok (Befunde stehen in Env/Report; Meldung macht der Router)
@@ -75,6 +94,15 @@ FINDINGS_PATH = Path("/tmp/bot_watchdog_findings.json")
 # Wie alt ein Pinterest-Lagebild sein darf, bevor die Wache selbst zum Befund
 # wird (ein veraltetes Bild ist kein Beweis für einen toten Kanal).
 STATE_MAX_AGE_HOURS = 48
+
+# Frische der Affiliate-Integritäts-Wache (täglich 06:00 MESZ).
+#   · Der ZUSTAND (Herzschlag) darf bis 30 h alt sein – ein verpasster Lauf
+#     oder ein ausgebliebener Push fällt so am nächsten Tag auf.
+#   · Bleibt der Herzschlag länger als 54 h alt, obwohl die Wache fehlerfrei
+#     lief, landet der Nachweis dauerhaft nicht im Repo → eigener Befund
+#     (Reparatur #281: „Herzschlag vs. Befund" statt P1-Fehlalarm).
+AFFILIATE_STATE_MAX_AGE_HOURS = 30
+AFFILIATE_STATE_ESCALATE_HOURS = 54
 
 # Fach-Kanäle: ein Besitzer pro Ticket (Alarm-Routing).
 PINTEREST_TOKEN_CHANNEL = "pinterest-token"     # besetzt von pinterest-token.yml
@@ -236,6 +264,58 @@ def check_workflow_liveness(workflow_file, hours=26):
     except ValueError:
         return None, f"gh output unparsable: {out[:200]}"
 
+
+def workflow_run_evidence(workflow_file, hours=30):
+    """Läufe eines Workflows im Fenster – getrennt nach Ergebnis.
+
+    Rückgabe `(total, success, running, err)`:
+      total/success = Anzahl aller Läufe / davon FEHLERFREI abgeschlossen
+      running      = noch nicht abgeschlossen (neutral, kein Urteil)
+      Bei gh-Fehler: `(None, None, None, fehlertext)` – der Aufrufer darf
+      daraus KEINEN Befund konstruieren (Offline ist kein Ausfall).
+
+    Warum fehlerfreie Läufe zählen (Reparatur #281, 15.09.2026): Ein
+    „Lauf vorhanden" sagt nichts über die Wache – ein dauerhaft rotes
+    Wache-Skript dreht täglich und ist trotzdem blind. Und ein Befund-
+    Zeitstempel ist kein Lebenszeichen: erst der fehlerfreie Lauf beweist,
+    dass der Beweis geführt wurde (C2: „eine nicht ausgeführte Messung ist
+    kein Grün").
+    """
+    # Bewusst OHNE `--created`: das Flag fehlt in älteren gh-Versionen
+    # (Debian 2.23) und machte die Abfrage dort zu einem Werkzeugfehler.
+    # Gefiltert wird deshalb im Python-Code – gleiches Ergebnis, überall
+    # lauffähig (und lokal prüfbar).
+    cmd = (f"gh run list --workflow={workflow_file} --limit 100 "
+           f"--json createdAt,status,conclusion "
+           f"2>/tmp/gh_evidence_{workflow_file}.err")
+    rc, out, err = run_cmd(cmd, timeout=25)
+    if rc != 0:
+        try:
+            err = Path(f"/tmp/gh_evidence_{workflow_file}.err").read_text(
+                encoding="utf-8", errors="ignore") or err
+        except OSError:
+            pass
+        return None, None, None, f"gh Fehler: {(err or out or 'ohne Meldung').strip()[:200]}"
+    try:
+        rows = json.loads(out.strip() or "[]")
+    except ValueError:
+        return None, None, None, f"gh output unparsable: {out[:200]}"
+    if not isinstance(rows, list):
+        return None, None, None, f"gh output unerwartet: {str(out)[:200]}"
+    cutoff = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=hours)
+    total = success = running = 0
+    for row in rows:
+        created = _parse_ts((row or {}).get("createdAt"))
+        if created is None or created < cutoff:
+            continue
+        total += 1
+        if (row.get("status") or "") != "completed":
+            running += 1
+        elif (row.get("conclusion") or "") == "success":
+            success += 1
+    return total, success, running, ""
+
+
 def check_produktions_status_age(max_age_hours=30):
     """Fallback: Wie alt ist PRODUKTIONS-STATUS.md?"""
     p = BLOG_DIR / "PRODUKTIONS-STATUS.md"
@@ -247,14 +327,31 @@ def check_produktions_status_age(max_age_hours=30):
     return True, f"{age:.1f}h alt"
 
 def check_affiliate_integrity():
-    """Prüft Affiliate-Integrität: State-Datei zuerst, Report als Fallback.
+    """Prüft Affiliate-Integrität: Befund aus dem Zustand, Frische belegt.
 
-    Premium-Audit 12.09.2026: Der Report ist Markdown (Marker-Scan) – die
-    State-Datei ist maschinenlesbar (exit_code, content_problems,
-    generated_at) und trägt zusätzlich die FRISCHE: Ein stiller
-    Wache-Ausfall war im reinen Report-Scan unsichtbar (alter Report
-    ohne rotes Marker = scheinbar „ok"). Jetzt: State älter als 30 h
-    (täglicher Lauf 06:00 MESZ) = harter Befund.
+    Reparatur #281 (15.09.2026) – Lehre aus dem P1-Fehlalarm „Integritäts-
+    Wache schweigt: State 64 h alt", obwohl die Wache jeden Tag fehlerfrei
+    lief: Damals war der Zustand „konvergent" geschrieben (nur bei
+    geändertem Befund), sein Zeitstempel fror an ruhigen Tagen ein – und
+    DIESER Zeitstempel war hier das einzige Lebenszeichen. Ein Befund-
+    Zeitstempel ist aber kein Lebenszeichen. Deshalb prüft der Check jetzt
+    zwei Dinge getrennt:
+
+      BEFUND (Zustand)   exit_code, content_problems, errors – rot bleibt
+                         rot, bis ein Lauf heilt. Gilt unabhängig vom Alter.
+      FRISCHE            Herzschlag des Zustands ≤ 30 h ODER ein fehler-
+                         freier Lauf der Wache im selben Fenster (der Lauf
+                         ist die härtere Evidenz: unveränderlich, nicht
+                         push-abhängig).
+      ESKALATION         Herzschlag > 54 h alt TROTZ fehlerfreier Läufe
+                         = der Nachweis landet nicht im Repo (eigener,
+                         präziser Befund statt „Wache schweigt").
+
+    Seit dem Gate-Fix schreibt jeder Wache-Lauf einen frischen Herzschlag
+    (`.affiliate_integrity_state.json`); der Lauf-Beweis fängt den Fall ab,
+    dass dieser Push einmal ausbleibt (Rennen, Rechte) – dann gibt es
+    einen Hinweis statt eines P1-Fehlalarms, und erst ein dauerhaft
+    fehlender Nachweis (> 54 h) wird wieder ein Befund.
     """
     state_file = BLOG_DIR / ".affiliate_integrity_state.json"
     if state_file.is_file():
@@ -274,17 +371,44 @@ def check_affiliate_integrity():
                     break
                 except ValueError:
                     continue
-            if age_h is None:
-                return None, "State-Timestamp unlesbar – Report-Fallback"
             problems = len(data.get("content_problems") or [])
-            if data.get("exit_code") == 0 and problems == 0:
-                if age_h > 30:
-                    return False, (f"Integritäts-Wache schweigt: State {age_h:.0f} h alt "
-                                   f"(> 30 h, täglicher Lauf 06:00 MESZ)")
-                return True, f"ok (State {age_h:.0f} h alt, {data.get('checked', '?')} geprüft)"
+            errors = len(data.get("errors") or [])
+            age_text = "Alter unlesbar" if age_h is None else f"{age_h:.0f} h alt"
+
+            # 1) BEFUND – hat Vorrang, das Alter spielt hier keine Rolle
             if problems > 0:
-                return False, f"{problems} offene Affiliate-Probleme (State {age_h:.0f} h alt)"
-            return False, f"letzter Lauf exit {data.get('exit_code')} (State {age_h:.0f} h alt)"
+                return False, f"{problems} offene Affiliate-Probleme (Zustand {age_text})"
+            if data.get("exit_code") != 0 or errors:
+                return False, (f"letzter Lauf exit {data.get('exit_code')} · {errors} "
+                               f"Werkzeugfehler (Zustand {age_text})")
+
+            # 2) FRISCHE – Herzschlag des Zustands ist der Regelfall
+            if age_h is not None and age_h <= AFFILIATE_STATE_MAX_AGE_HOURS:
+                return True, (f"ok (Herzschlag {age_h:.0f} h alt, "
+                              f"{data.get('checked', '?')} geprüft)")
+
+            # 3) Herzschlag fehlt/alt → Lauf-Beweis (härtere Evidenz)
+            total, success, running, err = workflow_run_evidence(
+                AFFILIATE_WACHE_WORKFLOW, hours=AFFILIATE_STATE_MAX_AGE_HOURS)
+            if total is None:
+                return None, (f"Herzschlag {age_text} – Lauf-Beweis nicht prüfbar ({err})")
+            if running and not success:
+                return None, (f"Herzschlag {age_text} – Lauf läuft gerade "
+                              f"({total} Lauf/Läufe im Fenster, keiner abgeschlossen)")
+            if success == 0:
+                detail = ("kein Lauf" if total == 0
+                          else f"{total} Lauf/Läufe, davon keiner fehlerfrei")
+                return False, (f"Integritäts-Wache schweigt: {detail} in den letzten "
+                               f"{AFFILIATE_STATE_MAX_AGE_HOURS:.0f} h (Herzschlag {age_text})")
+            # Wache lebt (fehlerfreier Lauf) – nur der Herzschlag im Repo fehlt.
+            # Ein einzelner ausgebliebener Push ist ein HINWEIS, kein Ausfall.
+            if age_h is not None and age_h > AFFILIATE_STATE_ESCALATE_HOURS:
+                return False, (f"Nachweis landet nicht im Repo: Herzschlag {age_h:.0f} h alt "
+                               f"trotz {success} fehlerfreiem Lauf/Läufen "
+                               f"(Grenze {AFFILIATE_STATE_ESCALATE_HOURS} h) "
+                               f"– Push des Zustands prüfen (git_sync/Rechte)")
+            return None, (f"Herzschlag {age_text}, aber {success} fehlerfreier Lauf/Läufe "
+                          f"– Beweis über den Lauf geführt (Zustands-Push ausgeblieben?)")
     # Fallback: Report-Inhalts-Scan (früheres Verhalten, z. B. wenn die
     # State-Datei bei einem Lauf nicht geschrieben wurde).
     report = BLOG_DIR / "AFFILIATE-INTEGRITY-REPORT.md"
@@ -618,17 +742,34 @@ def run_all():
         env["CHECK4"] = "WAIT"
 
     # 5 Affiliate-Wache
-    count_aff, _ = check_workflow_liveness(AFFILIATE_WACHE_WORKFLOW, hours=30)
+    # Premium 15.09.2026 (#281): „Lauf vorhanden" ist kein Beweis – ein
+    # Wache-Skript, das dauerhaft rot dreht, ist genauso blind wie ein
+    # stiller Ausfall. Gewertet wird deshalb der FEHLERFREIE Lauf (C2:
+    # eine nicht ausgeführte Messung ist kein Grün).
+    count_aff, success_aff, running_aff, aff_err = workflow_run_evidence(
+        AFFILIATE_WACHE_WORKFLOW, hours=AFFILIATE_STATE_MAX_AGE_HOURS)
     if count_aff is None:
-        env["CHECK5"] = "UNKNOWN (gh Fehler)"
+        grund = f": {aff_err[:80]}" if aff_err else ""
+        env["CHECK5"] = f"UNKNOWN (gh Fehler{grund})"
     elif count_aff == 0:
         env["CHECK5"] = "FAIL"
         findings.append(_f(
             "affiliate-wache", "Affiliate-Integritäts-Wache dreht nicht", "P2", "auto",
             detail="Kein Lauf in den letzten 30 h – Affiliate-Links können unbemerkt brechen.",
             next_step="Workflow `affiliate-integrity-daily.yml` prüfen (täglich 06:00 MESZ)."))
+    elif success_aff == 0 and not running_aff:
+        env["CHECK5"] = f"FAIL ({count_aff} Läufe, keiner fehlerfrei)"
+        findings.append(_f(
+            "affiliate-wache", "Affiliate-Integritäts-Wache läuft rot", "P2", "auto",
+            detail=f"{count_aff} Lauf/Läufe in den letzten 30 h, davon keiner fehlerfrei "
+                   f"– der Render-Beweis wird nicht geführt (fail-closed).",
+            next_step="Actions → Affiliate-Integritäts-Wache → letzten Lauf öffnen "
+                      "(Hugo-Build/Detektor/Selbsttest); Gate ggf. mit --selftest prüfen.",
+            evidence=[f"Läufe={count_aff}", f"fehlerfrei={success_aff}"]))
+    elif running_aff and not success_aff:
+        env["CHECK5"] = f"WAIT ({count_aff} Läufe, einer läuft)"
     else:
-        env["CHECK5"] = f"OK ({count_aff} Läufe)"
+        env["CHECK5"] = f"OK ({count_aff} Läufe, {success_aff} fehlerfrei)"
 
     # 5b Affiliate-Report
     ok_aff, msg_aff = check_affiliate_integrity()

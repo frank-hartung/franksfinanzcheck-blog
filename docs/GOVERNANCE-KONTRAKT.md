@@ -21,6 +21,7 @@ Dieser Vertrag hält die Regeln fest, die den Dauer-Alarm aus Governance-Report 
 - **C13 Nachweis-Echtheit** – Ein Pinterest-Nachweis läuft immer mit Live-Probe (`--verify`), nur die Token-Wache rotiert den Refresh-Token proaktiv, und die Autorisierung fordert die echten v5-Scopes – sonst steht `unverified` im Cockpit, während niemand gemessen hat (#219).
 - **C14 Alarm-Routing** – Jeder Alarm hat einen Besitzer (Maschine oder Mensch), einen Kanal und einen Schließpfad: menschliche Befunde öffnen kein Automations-Ticket und halten keins offen – sonst wird der Melder zum Dauerläufer (#272).
 - **C15 Beweis-Trockenlauf** – Beweisen ist nicht Heilen: wer den Site-Bestand bei jedem Aufruf umschreibt, muss einen trockenen Beweispfad haben, und ein Kettenleiter darf `--fix` im eigenen Selbsttest nicht weitergeben – ein Prüflauf, der nebenbei heilt, verändert die Messgröße, die er prüfen will (15.09.2026).
+- **C16 Wache-Herzschlag** – Ein Lebenszeichen ist kein Befund: die Affiliate-Integritäts-Wache erneuert ihren Zeitstempel bei jedem Lauf (Beweis im Gate-Selbsttest), ihre Frische wird per Herzschlag ODER fehlerfreiem Lauf belegt, und der Lebenszeichen-Pfad ist deploy-irrelevant – ein ruhiger Tag darf weder einen Fehlalarm noch eine Veröffentlichung auslösen (#281).
 
 ## Befund
 

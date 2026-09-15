@@ -148,7 +148,25 @@ jobs:
           #    data/themenwelten.json, hugo.toml, layouts/...) ist per
           #    Default RELEVANT – so kann kein zukuenftiger State-Pfad
           #    versehentlich den Livegang stoppen.
-          STATE_ONLY='^(\.github/|docs/|scripts/|e2e/|data/social/|data/research/|data/audit/|data/[^/]*_state\.json|data/[^/]*_history\.jsonl|data/social_log\.jsonl|data/secrets_state\.json|data/pinterest_token_state\.json|static/images/social/|\.gitignore|package\.json|package-lock\.json|[A-Za-z0-9._-]+\.md)$'
+          #
+          #    `.affiliate_integrity_state.json` (#281, 15.09.2026): Der
+          #    Zustand der Affiliate-Wache wird jetzt bei JEDEM Lauf als
+          #    Lebenszeichen mitgepusht (Herzschlag statt eingefrorenem
+          #    Zeitstempel). Er liegt im Wurzelverzeichnis und hat null
+          #    Site-Wirkung – ohne diesen Eintrag koennte ein reines
+          #    Lebenszeichen einen vollen Deploy samt Vertonung anstossen
+          #    (genau die Queue-Belastung aus dem Premium-Audit 12.09.).
+          #
+          #    NEBENBEFUND 15.09.2026 (beim Absichern des Herzschlags
+          #    aufgefallen): Die Verzeichnis-Eintraege hiessen `docs/`,
+          #    `scripts/`, `.github/` … – mit den Ankern ^…$ matcht das nur
+          #    eine Datei, die exakt so heisst. Verzeichnis-Pushes (docs/,
+          #    scripts/, data/social/, …) galten damit als deploy-relevant
+          #    und loesten den vollen Deploy aus, obwohl die Intention (und
+          #    der Audit-Befund F1) genau das Gegenteil war. Jetzt `dir/.*`.
+          #    Vertrag: tests/test_deploy_gate_paths.py friert beide
+          #    Richtungen ein (Lebenszeichen irrelevant, Site-Pfade relevant).
+          STATE_ONLY='^(\.github/.*|docs/.*|scripts/.*|e2e/.*|data/social/.*|data/research/.*|data/audit/.*|data/[^/]*_state\.json|data/[^/]*_history\.jsonl|data/social_log\.jsonl|data/secrets_state\.json|data/pinterest_token_state\.json|static/images/social/.*|\.affiliate_integrity_state\.json|\.gitignore|package\.json|package-lock\.json|[A-Za-z0-9._-]+\.md)$'
           relevant="$(echo "$files" | grep -vE "$STATE_ONLY" || true)"
           if [ -n "$relevant" ]; then
             echo "Deploy-relevante Pfade:"

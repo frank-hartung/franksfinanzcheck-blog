@@ -49,6 +49,11 @@ ohne Netzwerk, ohne API, determinisch. Läuft lokal, im Premium-Governance-Lauf
   C15 Beweis-Trockenlauf – ein Prüf-Aufruf heilt nicht: Nacktheiler brauchen
                      einen trockenen `--selftest`, Kettenleiter dürfen `--fix`
                      im Selbsttest nicht weitergeben
+  C16 Wache-Herzschlag  – ein Lebenszeichen ist kein Befund: die Affiliate-
+                     Integritäts-Wache erneuert ihren Zeitstempel bei jedem Lauf
+                     (Beweis im Gate-Selbsttest), ihre Frische wird per Herzschlag
+                     ODER fehlerfreiem Lauf belegt, und der Lebenszeichen-Pfad ist
+                     deploy-irrelevant (#281)
 
 Exit-Codes: 0 = Vertrag erfüllt · 1 = Verletzung(en) · 2 = Selbsttest/Fehler
 
@@ -88,7 +93,10 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # Social-Autopilot: der fail-closed Selbsttest der Kanallogik
           "social_studio.py",
           # Alarm-Routing (#272): Besitz, Kadenz, Schließpfad
-          "alert_router.py"]
+          "alert_router.py",
+          # Wache-Herzschlag (#281): der Selbsttest friert ein, dass ein
+          # zweiter Lauf mit gleichem Befund den Zeitstempel ERNEUERT
+          "affiliate_integrity_gate.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
@@ -660,6 +668,76 @@ def c15_proof_not_healing(script_texts, wflows):
     return out
 
 
+# --- C16: Wache-Herzschlag (Lebenszeichen != Befund, Ursache #281) ----------
+# Auslöser (15.09.2026, Ticket #281): Der Bot-Watchdog meldete „Integritäts-Wache
+# schweigt: State 64 h alt" – obwohl die Wache jeden Tag fehlerfrei lief. Das
+# Gate schrieb seinen Zustand „konvergent" (nur bei geändertem Befund), der
+# Zeitstempel fror an ruhigen Tagen ein, und genau dieser Zeitstempel war die
+# Frische-Prüfung. Ein Befund-Zeitstempel beweist keinen Lauf.
+# Die Regel prüft beide teuren Fehlerrichtungen: ein Lebenszeichen darf keinen
+# Deploy auslösen (Queue-Belastung, Audit F1), ein Site-Pfad darf nie als
+# deploy-irrelevant durchrutschen (unveröffentlichter Artikel).
+RE_C16_LAUFEVIDENZ = re.compile(r"""workflow_run_evidence\(""")
+RE_C16_ESKALATION = re.compile(r"""AFFILIATE_STATE_ESCALATE_HOURS\s*=""")
+RE_C16_STATE_ONLY = re.compile(r"""STATE_ONLY='([^']+)'""")
+C16_LEBENSZEICHEN = (".affiliate_integrity_state.json", "AFFILIATE-INTEGRITY-REPORT.md")
+C16_SITE_PFADE = ("content/posts/2026-09-15-beispiel/index.md",
+                  "layouts/_default/baseof.html", "assets/css/extended/custom.css",
+                  "static/images/cover.jpg", "hugo.toml")
+
+
+def c16_heartbeat(deploy_text, script_texts):
+    """C16: Ein Lebenszeichen ist kein Inhalt – ein Befund kein Lebenszeichen.
+
+    Drei Klauseln, jede mit einer echten Fehlerrichtung aus #281:
+      (a) Der Watchdog belegt die Frische AUCH über fehlerfreie Läufe
+          (`workflow_run_evidence`) und kennt eine Eskalationsgrenze fuer den
+          Fall, dass der Nachweis dauerhaft nicht im Repo landet.
+      (b) Der Lebenszeichen-Pfad ist in der Deploy-Negativliste, und die
+          Negativliste laesst keinen Site-Pfad durch (beide Richtungen).
+      (c) Der Herzschlag-Beweis laeuft in der Governance mit: `affiliate_
+          integrity_gate.py` steht in GUARDS, sein `--selftest` friert ein,
+          dass ein zweiter Lauf mit gleichem Befund den Zeitstempel erneuert.
+    """
+    out = []
+    watchdog = script_texts.get("bot_watchdog.py", "")
+    if not watchdog:
+        out.append(("C16", "scripts/bot_watchdog.py fehlt – die Frische der Affiliate-"
+                           "Wache ist nicht prüfbar."))
+    else:
+        if not RE_C16_LAUFEVIDENZ.search(watchdog):
+            out.append(("C16", "scripts/bot_watchdog.py: keine Lauf-Evidenz "
+                               "(`workflow_run_evidence`) – die Frische der Wache hinge "
+                               "wieder allein an einem Zeitstempel (#281)."))
+        if not RE_C16_ESKALATION.search(watchdog):
+            out.append(("C16", "scripts/bot_watchdog.py: keine Eskalationsgrenze fuer den "
+                               "Herzschlag (`AFFILIATE_STATE_ESCALATE_HOURS`) – ein "
+                               "dauerhaft fehlender Nachweis bliebe unsichtbar."))
+    m = RE_C16_STATE_ONLY.search(deploy_text or "")
+    if not m:
+        out.append(("C16", "deploy.yml: STATE_ONLY-Negativliste fehlt – ein Lebenszeichen "
+                           "würde einen vollen Deploy (inkl. Vertonung) auslösen."))
+    else:
+        try:
+            rx = re.compile(m.group(1))
+        except re.error as exc:
+            out.append(("C16", f"deploy.yml: STATE_ONLY-Muster ist kein gültiger Ausdruck ({exc})."))
+            rx = None
+        if rx is not None:
+            for pfad in C16_LEBENSZEICHEN:
+                if not rx.match(pfad):
+                    out.append(("C16", f"deploy.yml: `{pfad}` gilt als deploy-relevant – ein "
+                                       f"Lebenszeichen darf keinen Livegang auslösen (#281)."))
+            for pfad in C16_SITE_PFADE:
+                if rx.match(pfad):
+                    out.append(("C16", f"deploy.yml: `{pfad}` gilt als deploy-irrelevant – ein "
+                                       f"Site-Pfad darf nie still übersprungen werden."))
+    if "affiliate_integrity_gate.py" not in GUARDS:
+        out.append(("C16", "scripts/affiliate_integrity_gate.py steht nicht in GUARDS – der "
+                           "Herzschlag-Selbsttest (C6) läuft in keiner Governance-Prüfung."))
+    return out
+
+
 def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     gov = _read(os.path.join(root, ".github", "workflows", "premium-governance.yml"))
     gate = _read(os.path.join(root, "scripts", "governance_gate.py"))
@@ -717,6 +795,8 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c13_proof_integrity(wflows, auth_text=script_texts.get("pinterest_auth.py", ""))
     checks += c14_alarm_routing(wflows, script_texts, root=root)
     checks += c15_proof_not_healing(script_texts, wflows)
+    deploy_yml = _read(os.path.join(root, ".github", "workflows", "deploy.yml"))
+    checks += c16_heartbeat(deploy_yml, script_texts)
     return checks
 
 
@@ -757,6 +837,11 @@ RULE_TEXT = {
     "C14": "Jeder Alarm hat einen Besitzer (Maschine oder Mensch), einen Kanal und "
            "einen Schließpfad: menschliche Befunde öffnen kein Automations-Ticket und "
            "halten keins offen – sonst wird der Melder zum Dauerläufer (#272).",
+    "C16": "Ein Lebenszeichen ist kein Befund: die Affiliate-Integritäts-Wache erneuert "
+           "ihren Zeitstempel bei jedem Lauf (Beweis im Gate-Selbsttest), ihre Frische wird "
+           "per Herzschlag ODER fehlerfreiem Lauf belegt, und der Lebenszeichen-Pfad ist "
+           "deploy-irrelevant – ein ruhiger Tag darf weder einen Fehlalarm noch eine "
+           "Veröffentlichung auslösen (#281).",
     "C15": "Beweisen ist nicht Heilen: wer den Site-Bestand bei jedem Aufruf umschreibt, "
            "muss einen trockenen Beweispfad haben, und ein Kettenleiter darf `--fix` im "
            "eigenen Selbsttest nicht weitergeben – ein Prüflauf, der nebenbei heilt, "
@@ -768,7 +853,7 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C7": "Datenkonsistenz", "C8": "Commit-Hygiene", "C9": "Secret-Leak-Schutz",
          "C10": "Token-Broker", "C11": "Token-Lebenszyklus", "C12": "Label-Garantie",
          "C13": "Nachweis-Echtheit", "C14": "Alarm-Routing",
-         "C15": "Beweis-Trockenlauf"}
+         "C15": "Beweis-Trockenlauf", "C16": "Wache-Herzschlag"}
 
 
 def render_md(checks, ok_notes=()):
@@ -1032,12 +1117,47 @@ def _selftest():
     leiter = 'import sys\nDO_FIX = "--fix" in sys.argv\nkinder_args("x")\n'
     if not [f for f in c15_proof_not_healing({"blog_doctor.py": leiter}, {}) if "weiter" in f[1]]:
         failures.append("C15 laesst einen Kettenleiter durch, der --fix im Selbsttest weitergibt.")
+    # --- C16: Wache-Herzschlag (Lebenszeichen ≠ Befund, Ursache #281)
+    guter_watchdog = ('def workflow_run_evidence(wf, hours=30):\n'
+                      '    return 0, 0, 0, ""\n'
+                      'AFFILIATE_STATE_ESCALATE_HOURS = 54\n')
+    gute_liste = ("STATE_ONLY='^(docs/.*|\\.affiliate_integrity_state\\.json|"
+                  "[A-Za-z0-9._-]+\\.md)$'\n")
+    if c16_heartbeat(gute_liste, {"bot_watchdog.py": guter_watchdog}):
+        failures.append("C16: sauberer Herzschlag-Aufbau wird beanstandet: "
+                        f"{c16_heartbeat(gute_liste, {'bot_watchdog.py': guter_watchdog})}")
+    # (a) Frische ohne Lauf-Evidenz / ohne Eskalationsgrenze
+    ohne_evidenz = "AFFILIATE_STATE_ESCALATE_HOURS = 54\n"
+    if not [f for f in c16_heartbeat(gute_liste, {"bot_watchdog.py": ohne_evidenz})
+            if "Lauf-Evidenz" in f[1]]:
+        failures.append("C16: fehlende Lauf-Evidenz im Watchdog bleibt unentdeckt (#281).")
+    ohne_grenze = "def workflow_run_evidence(wf, hours=30):\n    return 0\n"
+    if not [f for f in c16_heartbeat(gute_liste, {"bot_watchdog.py": ohne_grenze})
+            if "Eskalationsgrenze" in f[1]]:
+        failures.append("C16: fehlende Eskalationsgrenze bleibt unentdeckt.")
+    # (b) Lebenszeichen würde deployen / Site-Pfad würde übersprungen
+    if not [f for f in c16_heartbeat("STATE_ONLY='^(docs/.*)$'\n",
+                                     {"bot_watchdog.py": guter_watchdog})
+            if "Lebenszeichen" in f[1]]:
+        failures.append("C16: Lebenszeichen-Pfad außerhalb der Negativliste bleibt unentdeckt.")
+    site_uebersprungen = ("STATE_ONLY='^(content/.*|docs/.*|\\.affiliate_integrity_state"
+                          "\\.json)$'\n")
+    if not [f for f in c16_heartbeat(site_uebersprungen, {"bot_watchdog.py": guter_watchdog})
+            if "Site-Pfad" in f[1]]:
+        failures.append("C16: Site-Pfad in der Negativliste bleibt unentdeckt.")
+    if not [f for f in c16_heartbeat("jobs: {}\n", {"bot_watchdog.py": guter_watchdog})
+            if "Negativliste" in f[1]]:
+        failures.append("C16: fehlende Negativliste bleibt unentdeckt.")
+    if not c16_heartbeat(gute_liste, {}):
+        failures.append("C16: fehlender Watchdog bleibt unentdeckt.")
+    if "affiliate_integrity_gate.py" not in GUARDS:
+        failures.append("C16: Gate-Selbsttest läuft nicht in der Governance (GUARDS).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C15 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C16 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 
@@ -1058,7 +1178,7 @@ def main(argv=None):
             if annotate:
                 print(f"::error::{line}")
     else:
-        print("🔒 GOVERNANCE-VERTRAG erfüllt – alle fünfzehn Regeln prüfen in beide "
+        print("🔒 GOVERNANCE-VERTRAG erfüllt – alle sechzehn Regeln prüfen in beide "
               "Richtungen (Fehler UND Schein-Sicherheit).")
     if "--md" in argv:
         target = argv[argv.index("--md") + 1]
