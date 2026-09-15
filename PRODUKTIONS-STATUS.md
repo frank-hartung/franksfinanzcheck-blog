@@ -1,6 +1,6 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-15 09:49 UTC  
+**Stand:** 2026-09-15 12:11 UTC  
 **Stufe:** OK  
 **Befund:** Letzter Publikationstag (2026-09-14): 2 Artikel – Ziel erfüllt. – Bestand: 11 förderfähig in der Re-Queue
 
