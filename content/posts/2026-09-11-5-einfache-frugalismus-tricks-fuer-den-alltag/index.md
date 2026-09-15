@@ -155,11 +155,11 @@ So wird aus einem guten Vorsatz schnell eine feste Gewohnheit, die du dauerhaft 
 Du musst nicht alles sofort ändern. Ein kleiner Plan reicht, um erste Erfolge zu erleben und motiviert zu bleiben.  
 
 * **Tag 1:** Schau auf dein Girokonto und markiere alle festen Kosten.
-*  **Tag 2:** Kündige ein Abo, das du kaum nutzt.
+* **Tag 2:** Kündige ein Abo, das du kaum nutzt.
 * **Tag 3:** Prüfe Strom, Handy oder Internet auf bessere Preise.
-*  **Tag 4:** Plane den Einkauf für eine Woche vorab.
+* **Tag 4:** Plane den Einkauf für eine Woche vorab.
 * **Tag 5:** Lege 10–20 € direkt auf die Seite.
-*  **Tag 6:** Prüfe eine Versicherung auf Preis und Leistung.
+* **Tag 6:** Prüfe eine Versicherung auf Preis und Leistung.
 * **Tag 7:** Ziehe kurz Bilanz. Was war leicht? Was spart sofort Geld?
 
 So merkst du schnell, dass Frugalismus kein harter Verzicht sein muss. Es geht um klare Schritte, die sich gut in deinen Alltag einfügen.  

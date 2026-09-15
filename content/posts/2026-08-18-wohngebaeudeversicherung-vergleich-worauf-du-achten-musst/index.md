@@ -159,9 +159,9 @@ In ZÜRS‑Stufe 3 (z. B. teile von Brandenburg, Sachsen) ist der Elementars
 ## Vorteile von Online‑Vergleichsplattformen
 
 * **Zeitersparnis:** 5‑10 Minuten für bis zu 12 Angebote.
-*  **Transparenz:** Alle wichtigen Klauseln (grobe Fahrlässigkeit, Elementar) werden im Ergebnis‑Report hervorgehoben.
+* **Transparenz:** Alle wichtigen Klauseln (grobe Fahrlässigkeit, Elementar) werden im Ergebnis‑Report hervorgehoben.
 * **Preis‑Garantie:** Viele Plattformen bieten die günstigste Prämie plus 30‑Tage‑Rücktrittsrecht.
-*  **Unabhängige Bewertung:** Nutzer‑Reviews und Schadens‑Statistiken geben Aufschluss über Service‑Qualität.
+* **Unabhängige Bewertung:** Nutzer‑Reviews und Schadens‑Statistiken geben Aufschluss über Service‑Qualität.
 
 Achte jedoch darauf, dass die Plattform **nicht** nur den Preis, sondern auch die Vertragsbedingungen filtert. Ein reiner „Billig‑Tarif“ ohne Elementarschutz kann im Ernstfall teurer werden.
 

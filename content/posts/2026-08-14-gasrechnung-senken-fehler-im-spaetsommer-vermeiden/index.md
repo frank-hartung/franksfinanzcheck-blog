@@ -60,7 +60,7 @@ Staub, Vorhänge und Möbel blockieren die Wärmeabgabe. Das Thermostat reagiert
 
 **Maßnahmen:** * **30 cm Abstand** zu Möbeln und Vorhängen einhalten.
 * **Bürste** (Weichbürste oder Staubsauger‑Aufsatz) einmal pro Monat die Lamellen reinigen.
-*  **Dichtungsbänder** an Türen und Fenstern anbringen – verhindert Zugluft, die die Thermostate nach oben treiben lässt.
+* **Dichtungsbänder** an Türen und Fenstern anbringen – verhindert Zugluft, die die Thermostate nach oben treiben lässt.
 
 **Kosten/Nutzen:** 15 € für ein Set Dichtungsbänder → Ersparnis 50–80 € pro Saison.
 
@@ -215,7 +215,7 @@ Mindestens einmal im Monat, besser zu Beginn und Ende jedes Abrechnungszeitraums
 
 **BEG‑Wärme** – Zuschüsse für Heizungsoptimierung, hydraulischen Abgleich und neue Brennwertkessel (bis zu 35 % der Kosten).
 * **KfW‑Effizienzhaus‑Programm** – zinsgünstige Darlehen für umfassende Dämmung und Smart‑Home‑Lösungen.
-*  **Bundesförderung für den Austausch von Thermostatventilen** – bis zu 150 € pro Stück bei Austausch gegen intelligente Ventile.
+* **Bundesförderung für den Austausch von Thermostatventilen** – bis zu 150 € pro Stück bei Austausch gegen intelligente Ventile.
 
 ## Fazit: Durch vorausschauende Vorbereitung hunderte Euro sparen
 

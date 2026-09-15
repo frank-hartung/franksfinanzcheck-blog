@@ -447,6 +447,8 @@ jeder Schreibaktion.
 | Workflow-Fehler | alert-on-failure → Issue (Abdeckung: alle Kern-Workflows) |
 | Text-Regelverstoß | die sechs Guards oben (korrigieren selbst) |
 | Doctor-Dry-Run schreibt trotzdem (Live-Artikel entlinkt, 63 Deckbilder zum Loeschen vorgemerkt) | `blog_doctor.kinder_args()`: im `--dry-run` wird `--fix` abgezogen, der Doktor-Selbsttest haelt die Regel als Fall fest (14.09.) |
+| Leerzeichen um Listen-Marker, um `€`/`%`, zerrissene Domains | `fix_spaces.py` (Regeln A–H; seit 15.09.2026 mit `--selftest` – 40 Fälle, `--selftest`/`--check` sind Trockenlauf, die Bilanz meldet nur echte Änderungen) |
+| Prüflauf heilt nebenbei (ein Selbsttest schreibt den Bestand um) | `governance_contract.py` C15 Beweis-Trockenlauf – Nacktheiler müssen `--selftest` trocken führen, `--fix` darf im Selbsttest nicht an Kinder weitergereicht werden |
 | Pillar-/Brand-Deckbild als „Phantom“ fehlklassifiziert und von W2 zum `git rm` vorgemerkt | `workspace_guard.py` W2 prueft vor jeder Loeschung `referenzierte_stems()` (content/*.md + hugo.toml) |
 | Marken-Text verändert | brand_guard (Lock-Reset) |
 | Actions veraltet | Dependabot + Auto-Merge (Patch/Minor auto) |
@@ -570,6 +572,32 @@ jeder Schreibaktion.
   UND `--selftest`; der Bericht weist den Modus aus, und drei Selbsttest-Fälle verbieten
   jetzt, dass einem Wache im Selbsttest-Lauf `--fix` weitergereicht wird. Die 10 Zeilen
   bleiben im Bestand – sie sind idempotent und wären beim nächsten scharfen Lauf dieselben.
+  (13) Nach (12) die Frage nach der Familie: Wo heilt im Haus ein Aufruf, der nur zur
+  Prüfung bestellt war? Grundwahrheit empirisch statt statisch geholt – alle 165 Skripte
+  von `scripts/` nackt und mit `--selftest` durch eine Arbeitskopie, als Änderung zählt nur
+  `content/`, `layouts/`, `assets/`, `static/`: genau EIN Treffer, `fix_spaces.py`
+  (4 Artikel, Marker-Doppelleerzeichen `*  ` → `* `). Ein statisches Zählen der Heil-Schalter
+  (72 als riskant gemeldet) war wertlos, weil im Haus --fix, --apply, --live und ein
+  handgeschriebenes „--fix in argv“ nebeneinander stehen; die Laufzeit-Kopie ist der Beweis,
+  die Zählung war Rauschen. Der Default wird NICHT umgedreht – content-engine-v2.yml und
+  seo-weekly.yml rufen den nackten Aufruf als Heiler auf, und ein Prüf-Default wäre der
+  Wegfall der Regel, nicht ihre Härtung (Workflows sind für Agenten ohnehin tabu).
+  Stattdessen: `fix_spaces.py` hat jetzt einen echten `--selftest` – 20 Paare, jede Regel
+  A–H plus der Beweis, was sie verschont (Hard-Break am Zeilenende, z. B., 18.000, 3,5,
+  www.example.de, „die Stadt. de“, Tabellen-, Inline-Code- und Blockquote-Zeilen), je ein
+  Idempotenz-Fall darunter, und `--selftest` gilt wie `--check` als Trockenlauf. Der
+  Selbsttest fand im Anlauf sofort einen echten Defekt: re.subn zählt auch Ersetzungen, die
+  den Text so lassen, wie er steht – Regel F traf das von ihr selbst gesetzte NBSP erneut.
+  Gemeldet waren 869 Korrekturen in 57 Dateien, geschrieben wurden 53 Umschreibungen ohne
+  ein einziges anderes Zeichen. Bilanz jetzt: gemeldet wird nur, was eine Zeile wirklich
+  verändert – ehrlich sind es 8 Korrekturen in 4 Artikeln, Wortbeweis 6878 → 6878 über
+  alle vier. Dauerhaft im Vertrag: **C15 Beweis-Trockenlauf** mit drei Klauseln
+  (registrierte Nacktheiler brauchen einen trockenen `--selftest`, jeder Workflow-
+  Nacktaufruf eines `fix_*`-Skripts muss einen Beweispfad ausweisen, ein Kettenleiter darf
+  `--fix` im eigenen Selbsttest nicht an seine Kinder weitergeben), vier Kunstbefunden im
+  Vertrags-Selbsttest – und beide Altstände laufen ihm nachweislich auf:
+  `HEAD:scripts/fix_spaces.py` und `HEAD~1:scripts/blog_doctor.py` werden gefunden, der
+  aktuelle Stand bleibt still.
   Lehre: Ein Werkzeug, das „nur prüfen" verspricht, muss das auch gegen seine eigene
   Aufrufreihenfolge verteidigen.
 - **14.09.2026:** Doktor-Kette wieder in Betrieb – und die zwei Defekte

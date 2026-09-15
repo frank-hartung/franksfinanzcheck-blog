@@ -46,6 +46,9 @@ ohne Netzwerk, ohne API, determinisch. Läuft lokal, im Premium-Governance-Lauf
                           einen Kanal und einen Schließpfad. Menschliche Befunde
                           dürfen kein Automations-Ticket öffnen oder offen halten
                           (sonst Dauer-Alarm ohne Ausweg, #272)
+  C15 Beweis-Trockenlauf – ein Prüf-Aufruf heilt nicht: Nacktheiler brauchen
+                     einen trockenen `--selftest`, Kettenleiter dürfen `--fix`
+                     im Selbsttest nicht weitergeben
 
 Exit-Codes: 0 = Vertrag erfüllt · 1 = Verletzung(en) · 2 = Selbsttest/Fehler
 
@@ -579,6 +582,84 @@ def c14_alarm_routing(wflows, script_texts, root=BLOG_DIR):
     return out
 
 
+
+# Wer den Bestand bei JEDEM Aufruf umschreibt (kein Heil-Flag noetig), und wer als
+# Laeufer --fix an Kinder weitergibt. Die Listen sind Ergebnis des Audits vom
+# 15.09.2026 (alle 165 Skripte nackt und mit --selftest in einer Arbeitskopie,
+# gezaehlt nur content/, layouts/, assets/, static/) – bei neuen Workflow-Heilern
+# greift Klausel (b) automatisch, die Listen muessen nur bei Befund nachziehen.
+HEILER_NACKT = ["fix_spaces.py"]
+KETTEN_LEITER = ["blog_doctor.py"]
+RE_C15_SCHREIBT = re.compile(r"""open\([^)\n]{0,90}["']w["']|\.write_text\(""")
+RE_C15_BEWEIS = re.compile(r"""["']--selftest["']""")
+RE_C15_TROCKEN = re.compile(r"""(?m)^\s*(?:dry|dry_run|DRY|DRY_RUN)\s*=[^\n]*"""
+                            r"""(?:--selftest|--check|trocken\()|def\s+trocken\(""")
+RE_C15_FIX_WEITER = re.compile(r"""kinder_args|child_args|append\(["']--fix["']\)""")
+
+
+def c15_proof_not_healing(script_texts, wflows):
+    """C15: Beweisen ist nicht Heilen.
+
+    Ausloeser (15.09.2026, ohne Ticket – Selbstfund beim Haerten der Kette): Ein
+    Prueflauf, der nebenbei heilt, veraendert die Messgroesse, die er pruefen will,
+    und sein Ergebnis haengt von der Aufrufreihenfolge ab. Zwei Faelle im Haus:
+      * `blog_doctor.py --selftest` leitete DRY nur aus `--dry-run` ab, `kinder_args()`
+        zog `--fix` nur im Dry-Run ab – der Selbsttest heilte die ganze Kette und
+        legte 13 Artikel um, die der Bericht als „unangetastet" ausgab.
+      * `fix_spaces.py` kannte keinen Beweispfad: jedes unbekannte Flag (auch
+        `--selftest`) las es als Heilauftrag – 4 Artikel, 8 Korrekturen.
+    Der Satz „schreibt bei unbekanntem Flag" wurde empirisch erhoben, nicht statisch
+    klassifiziert: eine statische Heil-Schalter-Zaehlung meldete 72 „riskante"
+    Skripte, real war es eines (im Haus hetieren --fix, --apply, --live, args.fix und
+    „--fix in argv" gleichermassen). Die drei Klauseln sind deshalb eng und beweisbar;
+    die Laufzeit-Kopie bleibt der Grundwahrheits-Beweis.
+    """
+    out = []
+    for name in HEILER_NACKT:
+        src = script_texts.get(name, "")
+        if not src:
+            out.append(("C15", f"scripts/{name}: fehlt – die Nacktheiler-Liste muss nach "
+                              f"dem nächsten Audit neu gelesen werden."))
+            continue
+        if not RE_C15_SCHREIBT.search(src):
+            out.append(("C15", f"scripts/{name} steht als Nacktheiler, schreibt aber nichts "
+                              f"mehr – Liste prüfen."))
+            continue
+        if not RE_C15_BEWEIS.search(src):
+            out.append(("C15", f"scripts/{name} schreibt den Bestand bei jedem Aufruf und hat "
+                              f"keinen `--selftest`: Prüfen und Heilen sind nicht zu "
+                              f"unterscheiden."))
+        elif not RE_C15_TROCKEN.search(src):
+            out.append(("C15", f"scripts/{name}: `--selftest` ist nicht als Trockenlauf "
+                              f"geführt – der Beweislauf heilt, was er prüfen soll."))
+    for pfad, text in sorted(wflows.items()):
+        for zeile in text.splitlines():
+            code = zeile.strip()
+            if code.startswith("#"):
+                continue
+            m = re.search(r"""scripts/(fix_[a-z0-9_]+\.py)\b""", code)
+            if not m:
+                continue
+            nach = code[code.index(m.group(1)) + len(m.group(1)):].split("||")[0].split("&&")[0]
+            if "--" in nach:
+                continue                    # Aufruf mit Schalter – keine Nack-Heilung
+            name = m.group(1)
+            src = script_texts.get(name, "")
+            if not src or not RE_C15_SCHREIBT.search(src):
+                continue
+            if not RE_C15_BEWEIS.search(src):
+                out.append(("C15", f"{pfad}: ruft scripts/{name} ohne Schalter auf (heilt "
+                                   f"dabei), und das Skript weist keinen `--selftest` aus – "
+                                   f"ein Kontrollauftrag ist hier nicht möglich."))
+    for name in KETTEN_LEITER:
+        src = script_texts.get(name, "")
+        if src and RE_C15_FIX_WEITER.search(src) and not RE_C15_TROCKEN.search(src):
+            out.append(("C15", f"scripts/{name} gibt `--fix` an seine Kinder weiter, ohne "
+                              f"`--selftest` als Trockenlauf zu führen – der Selbsttest "
+                              f"heilt die Kette."))
+    return out
+
+
 def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     gov = _read(os.path.join(root, ".github", "workflows", "premium-governance.yml"))
     gate = _read(os.path.join(root, "scripts", "governance_gate.py"))
@@ -635,6 +716,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c12_label_guarantee(wflows)
     checks += c13_proof_integrity(wflows, auth_text=script_texts.get("pinterest_auth.py", ""))
     checks += c14_alarm_routing(wflows, script_texts, root=root)
+    checks += c15_proof_not_healing(script_texts, wflows)
     return checks
 
 
@@ -675,13 +757,18 @@ RULE_TEXT = {
     "C14": "Jeder Alarm hat einen Besitzer (Maschine oder Mensch), einen Kanal und "
            "einen Schließpfad: menschliche Befunde öffnen kein Automations-Ticket und "
            "halten keins offen – sonst wird der Melder zum Dauerläufer (#272).",
+    "C15": "Beweisen ist nicht Heilen: wer den Site-Bestand bei jedem Aufruf umschreibt, "
+           "muss einen trockenen Beweispfad haben, und ein Kettenleiter darf `--fix` im "
+           "eigenen Selbsttest nicht weitergeben – ein Prüflauf, der nebenbei heilt, "
+           "verändert die Messgröße, die er prüfen will (15.09.2026).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C4": "Issue-Policy", "C5": "Nachweis-Provenienz", "C6": "Selbsttests",
          "C7": "Datenkonsistenz", "C8": "Commit-Hygiene", "C9": "Secret-Leak-Schutz",
          "C10": "Token-Broker", "C11": "Token-Lebenszyklus", "C12": "Label-Garantie",
-         "C13": "Nachweis-Echtheit", "C14": "Alarm-Routing"}
+         "C13": "Nachweis-Echtheit", "C14": "Alarm-Routing",
+         "C15": "Beweis-Trockenlauf"}
 
 
 def render_md(checks, ok_notes=()):
@@ -927,12 +1014,30 @@ def _selftest():
             failures.append(f"{code} ohne richtigen Regeltext")
     if "C1" not in LABEL or "C13" not in LABEL:
         failures.append("Regel-Codes nicht vollständig gelabelt")
+    # C15: Beweisen ist nicht Heilen (Kunst-Skripte, der reale Bestand bleibt unbeteiligt)
+    nacktt = 'import sys\nfor a in sys.argv:\n    pass\nopen("x", "w").write("1")\n'
+    fund = c15_proof_not_healing({"fix_spaces.py": nacktt},
+                                 {"a.yml": "run: python3 scripts/fix_spaces.py\n"})
+    if not [f for f in fund if "keinen `--selftest`" in f[1]]:
+        failures.append("C15 findet einen Nacktheiler ohne Beweispfad nicht.")
+    fund = c15_proof_not_healing({"fix_spaces.py": nacktt},
+                                 {"a.yml": "run: python3 scripts/fix_spaces.py --fix\n"})
+    if [f for f in fund if "Kontrollauftrag" in f[1]]:
+        failures.append("C15 meldet einen Heilauftrag als Kontrollauftrag.")
+    sicher = (nacktt + 'if "--selftest" in sys.argv:\n    raise SystemExit\n'
+              'def trocken(argv):\n    return True\n')
+    if c15_proof_not_healing({"fix_spaces.py": sicher},
+                             {"a.yml": "run: python3 scripts/fix_spaces.py\n"}):
+        failures.append("C15 meldet einen ausgewiesenen Trockenlauf als Fehler.")
+    leiter = 'import sys\nDO_FIX = "--fix" in sys.argv\nkinder_args("x")\n'
+    if not [f for f in c15_proof_not_healing({"blog_doctor.py": leiter}, {}) if "weiter" in f[1]]:
+        failures.append("C15 laesst einen Kettenleiter durch, der --fix im Selbsttest weitergibt.")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C13 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C15 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 
@@ -953,7 +1058,7 @@ def main(argv=None):
             if annotate:
                 print(f"::error::{line}")
     else:
-        print("🔒 GOVERNANCE-VERTRAG erfüllt – alle vierzehn Regeln prüfen in beide "
+        print("🔒 GOVERNANCE-VERTRAG erfüllt – alle fünfzehn Regeln prüfen in beide "
               "Richtungen (Fehler UND Schein-Sicherheit).")
     if "--md" in argv:
         target = argv[argv.index("--md") + 1]

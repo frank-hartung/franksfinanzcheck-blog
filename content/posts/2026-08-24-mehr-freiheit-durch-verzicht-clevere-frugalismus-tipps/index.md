@@ -47,7 +47,7 @@ _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über eine
 Die Idee ist einfach. Jeder Euro für unnötigen Konsum kostet dich Arbeitszeit. Wer seine Fixkosten senkt, gewinnt:
 
 * **[Finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Gelassenheit:** Plötzliche Ausgaben wie eine Autoreparatur oder eine Waschmaschinen‑Neuanschaffung verlieren ihren Schrecken.
-*  **Mehr Handlungsoptionen:** Eine hohe Sparquote ermöglicht berufliche Auszeiten (Sabbaticals), Weiterbildungen oder den Einstieg in die Teilzeit.
+* **Mehr Handlungsoptionen:** Eine hohe Sparquote ermöglicht berufliche Auszeiten (Sabbaticals), Weiterbildungen oder den Einstieg in die Teilzeit.
 * **Den Zinseszinseffekt nutzen:** Wer 300 € monatlich bei 6 % Rendite anlegt, verfügt nach 15 Jahren über ein Vermögen von rund **87.000 €** (bei nur 54.000 € eigener Einzahlung).
 
 > **Rechenbeispiel:** > 30‑Jähriger mit 2.500 € Netto, 20 % Sparquote (500 €) investiert in einen globalen ETF‑Sparplan (Kosten 0,15 % p.a., durchschnittliche Rendite 7 %). Nach 30 Jahren beträgt das Portfolio ca. **560.000 €** – genug für einen komfortablen Ruhestand ohne Vollzeit‑Job.

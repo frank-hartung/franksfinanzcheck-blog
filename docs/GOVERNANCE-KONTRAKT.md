@@ -1,6 +1,6 @@
 # 🔒 Governance-Vertrag (automatisch geprüft)
 
-**Stand:** 2026-09-14 · erzeugt von `scripts/governance_contract.py` · geprüft in `link-check.yml` (Qualitäts-Gate) und als Preflight in `premium-governance.yml`.
+**Stand:** 2026-09-15 · erzeugt von `scripts/governance_contract.py` · geprüft in `link-check.yml` (Qualitäts-Gate) und als Preflight in `premium-governance.yml`.
 
 Dieser Vertrag hält die Regeln fest, die den Dauer-Alarm aus Governance-Report #206 ermöglicht haben. Jede Verletzung ist ein Build-Fehler.
 
@@ -20,6 +20,7 @@ Dieser Vertrag hält die Regeln fest, die den Dauer-Alarm aus Governance-Report 
 - **C12 Label-Garantie** – Jeder Workflow, der Issues mit Label erzeugt, legt das Label vorher an – sonst scheitert die Meldung mit HTTP 422 und der Melder wird selbst zum Zwischenfall (#209).
 - **C13 Nachweis-Echtheit** – Ein Pinterest-Nachweis läuft immer mit Live-Probe (`--verify`), nur die Token-Wache rotiert den Refresh-Token proaktiv, und die Autorisierung fordert die echten v5-Scopes – sonst steht `unverified` im Cockpit, während niemand gemessen hat (#219).
 - **C14 Alarm-Routing** – Jeder Alarm hat einen Besitzer (Maschine oder Mensch), einen Kanal und einen Schließpfad: menschliche Befunde öffnen kein Automations-Ticket und halten keins offen – sonst wird der Melder zum Dauerläufer (#272).
+- **C15 Beweis-Trockenlauf** – Beweisen ist nicht Heilen: wer den Site-Bestand bei jedem Aufruf umschreibt, muss einen trockenen Beweispfad haben, und ein Kettenleiter darf `--fix` im eigenen Selbsttest nicht weitergeben – ein Prüflauf, der nebenbei heilt, verändert die Messgröße, die er prüfen will (15.09.2026).
 
 ## Befund
 
