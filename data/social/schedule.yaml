@@ -373,9 +373,9 @@ items:
   date: '2026-09-14'
   time: '13:15'
   scheduled_at: '2026-09-14T13:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: facebook:2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster:nutzen:2026-09-14
   channel: facebook
   slug: 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster
@@ -385,9 +385,9 @@ items:
   date: '2026-09-14'
   time: '15:15'
   scheduled_at: '2026-09-14T15:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: threads:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:mythos:2026-09-14
   channel: threads
   slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
@@ -397,9 +397,9 @@ items:
   date: '2026-09-14'
   time: '16:15'
   scheduled_at: '2026-09-14T16:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: x:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler:zahl:2026-09-14
   channel: x
   slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
@@ -409,9 +409,9 @@ items:
   date: '2026-09-14'
   time: '19:15'
   scheduled_at: '2026-09-14T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: telegram:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:takeaway:2026-09-15
   channel: telegram
   slug: 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife
@@ -421,9 +421,9 @@ items:
   date: '2026-09-15'
   time: 07:00
   scheduled_at: '2026-09-15T07:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: linkedin:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen:zitat:2026-09-15
   channel: linkedin
   slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
@@ -433,9 +433,9 @@ items:
   date: '2026-09-15'
   time: 07:45
   scheduled_at: '2026-09-15T07:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: LINKEDIN_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:vergleich:2026-09-15
   channel: bluesky
   slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
@@ -445,9 +445,9 @@ items:
   date: '2026-09-15'
   time: 08:15
   scheduled_at: '2026-09-15T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer:frage:2026-09-15
   channel: x
   slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
@@ -457,9 +457,9 @@ items:
   date: '2026-09-15'
   time: 08:45
   scheduled_at: '2026-09-15T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum:zahl:2026-09-15
   channel: threads
   slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
@@ -469,9 +469,9 @@ items:
   date: '2026-09-15'
   time: 09:15
   scheduled_at: '2026-09-15T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:frage:2026-09-15
   channel: facebook
   slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
@@ -481,9 +481,9 @@ items:
   date: '2026-09-15'
   time: 09:45
   scheduled_at: '2026-09-15T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: instagram:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen:nutzen:2026-09-15
   channel: instagram
   slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
@@ -493,9 +493,9 @@ items:
   date: '2026-09-15'
   time: '11:45'
   scheduled_at: '2026-09-15T11:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: bluesky:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler:frage:2026-09-15
   channel: bluesky
   slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
