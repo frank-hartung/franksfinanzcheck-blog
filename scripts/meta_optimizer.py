@@ -281,6 +281,32 @@ def _title_gate(new_title, orig_title, reject_no_colon=True):
     return t or None
 
 
+def desc_has_sentence_end(desc: str) -> bool:
+    """SSOT-Spiegel des Meta-Gates (scripts/quality_score.py):
+    `not desc or len(desc) > 160 or desc[-1] not in ".!?…"` kostet −0,3.
+
+    Warum als eigene Funktion (Befund 15.09.2026, Issue #295): Das Meta-Gate
+    verlangt ein Satzende, `audit()`/`fix_meta()` prüften aber NUR die Länge.
+    Ein Kandidat mit korrekt langer Description ohne Schlusspunkt hing damit
+    dauerhaft bei meta 0.70 (= −0,3) unter der Publish-Schwelle 0.85 – der
+    Reserve-Pool konnte den Zielbestand nie erreichen, und KEIN Heiler der
+    Kette konnte das Hindernis beseitigen (im Gegensatz zum Struktur-Gate,
+    das `check_length.py` heilt). Ein Gate braucht einen Heiler.
+    """
+    kern = (desc or "").strip().rstrip("\"'").strip()
+    return bool(kern) and kern[-1] in ".!?…"
+
+
+def _yaml_quote(text: str) -> str:
+    """Schreibt einen Wert sicher in eine doppelt gequotete YAML-Zeile.
+
+    Wichtig seit dem Befund „FM-Korruption“ (#287): Eine Description mit
+    Doppelpunkt oder Anführungszeichen darf das Frontmatter nicht zerlegen –
+    unquotiert ist `Key: Wert mit Doppelpunkt` bereits ungültiges YAML.
+    """
+    return text.replace("\\", "\\\\").replace('"', '\\"')
+
+
 def audit(a):
     issues = []
     # Titel-Länge OHNE HTML-Tags messen (z. B. "<br>" für den H1-Zeilenumbruch)
@@ -296,6 +322,9 @@ def audit(a):
         issues.append(f"Description zu kurz ({dl} Zeichen, min. {DESC_MIN})")
     elif dl > DESC_MAX:
         issues.append(f"Description zu lang ({dl} Zeichen, max. {DESC_MAX})")
+    elif not desc_has_sentence_end(a["description"]):
+        # Genau der Fall, den das Meta-Gate mit −0,3 bestraft (Satzende fehlt).
+        issues.append("Description ohne Satzende (Punkt/!/?/… fehlt)")
     if kw_count < KEYWORDS_MIN:
         issues.append(f"Nur {kw_count} Keywords (min. {KEYWORDS_MIN})")
     if not a["cover"]:
@@ -337,6 +366,27 @@ def fix_meta(a, use_ai):
     """Wendet Fixes an. Liefert (geändert, beschreibung_neu)."""
     content = a["content"]
     changed = False
+
+    # 0) Satzende der Description heilen (deterministisch, ohne KI, #295).
+    #    Das Meta-Gate (quality_score) verlangt "." / "!" / "?" / "…" am Ende
+    #    (−0,3 sonst). Vorher prüfte der Fixer nur die Länge – ein Kandidat
+    #    mit korrekt langer, aber punktloser Description konnte deshalb NIE
+    #    die Publish-Schwelle erreichen (Reserve-Pool hing bei 5/6, der harte
+    #    End-Gate wurde jede Nacht rot).
+    desc_now = a["description"].strip()
+    if desc_now and not desc_has_sentence_end(desc_now):
+        fixed = desc_now
+        if len(fixed) < DESC_MAX:
+            fixed = fixed + "."
+        else:  # exakt am Längenlimit: letztes Zeichen weicht dem Satzende
+            fixed = fixed[:DESC_MAX - 1].rstrip() + "."
+        old_line = re.search(r'^description:.*$', content, re.M)
+        if old_line and fixed != desc_now:
+            content = (content[:old_line.start()]
+                       + f'description: "{_yaml_quote(fixed)}"'
+                       + content[old_line.end():])
+            a["description"] = fixed
+            changed = True
 
     # 1) Description auf CTR-OPTIMUM fixen (120-160 Zeichen)
     dl = len(a["description"])
@@ -449,8 +499,29 @@ def fix_meta(a, use_ai):
             content = content[:old_line.start()] + f"keywords: [{new_list}]" + content[old_line.end():]
             changed = True
 
+    # 4) Letzte Instanz des Fan-out (Premium-Prinzip: Heiler mehrfach, weil
+    #    KI-Schritte die Arbeit zurücksetzen können): Das Meta-Gate verlangt
+    #    IMMER ein Satzende (quality_score: −0,3 sonst). Eine KI-Description
+    #    oder eine Kürzung auf das Längenlimit (extend_description schneidet
+    #    hart bei DESC_OPT_MAX) kann es verlieren – hier wird es
+    #    deterministisch garantiert, unabhängig davon, was vorher lief.
+    zeilen = content.splitlines(keepends=True)
+    for i, ln in enumerate(zeilen):
+        if not ln.startswith("description:"):
+            continue
+        cur = ln.split(":", 1)[1].strip().strip('"').strip("'").strip()
+        if cur and not desc_has_sentence_end(cur):
+            fixed = (cur + "." if len(cur) < DESC_MAX
+                     else cur[:DESC_MAX - 1].rstrip() + ".")
+            zeilen[i] = f'description: "{_yaml_quote(fixed)}"\n'
+            a["description"] = fixed
+            changed = True
+        break
+    content = "".join(zeilen)
+
     if changed:
-        open(a["path"], "w", encoding="utf-8").write(content)
+        with open(a["path"], "w", encoding="utf-8") as fh:
+            fh.write(content)
     return changed
 
 

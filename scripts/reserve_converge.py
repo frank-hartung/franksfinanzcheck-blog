@@ -38,6 +38,16 @@ WARUM DIESE DATEI EXISTIERT (Root-Cause 15.09.2026):
   Sie erfindet keinen Erfolg – sie stellt nur sicher, dass die Automation
   jede Nacht ihr Möglichstes getan hat, statt es gar nicht erst zu versuchen.
 
+  ZEITBUDGET (Nachtrag 15.09.2026, Issue #295): Konvergenz ist nach oben
+  doppelt begrenzt – Runden UND Wanduhr. Ohne die zweite Grenze konnte eine
+  langsame Nacht (KI-Wartezeiten, Hugo-Builds je Kandidat) den 90-Minuten-Job
+  überschreiten; GitHub killt dann den JOB und damit auch die Schritte
+  „sichern“ und „End-Gate“ – der Lauf wäre rot UND ohne Diagnose, der
+  erarbeitete Pool-Stand nicht mehr in main. Die Stufe bricht deshalb sauber
+  vor dem Budget ab (`--max-minuten`, Default 45, env
+  RESERVE_CONVERGE_MAX_MINUTES), meldet den Abbruchgrund `zeit-budget` und
+  übergibt den nachfolgenden Schritten einen intakten Arbeitsbaum.
+
 MODI:
   python3 scripts/reserve_converge.py                 # Workflow (Runden)
   python3 scripts/reserve_converge.py --status        # nur lesen/melden
@@ -54,6 +64,7 @@ import os
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -103,14 +114,32 @@ def _run(cmd: list, env_extra: dict | None = None, timeout: int = 2400) -> int:
 
 
 def converge(*, runner=_run, state_reader=cert_state, max_runden: int = 3,
+             max_sekunden: int | None = None, now=time.monotonic,
              log=print) -> dict:
     """Führt die begrenzte Konvergenz aus und liefert den Abschlussbericht.
 
-    `runner`/`state_reader` sind injizierbar (Selbsttest ohne API/Hugo).
+    `runner`/`state_reader`/`now` sind injizierbar (Selbsttest ohne API/Hugo).
+    `max_sekunden` ist das Wanduhr-Budget: Runde 1 läuft immer (sonst täte
+    die Stufe gar nichts), jede weitere nur, wenn noch Budget übrig ist.
     """
+    start = now()
     verlauf = []
     for runde in range(1, max_runden + 1):
+        verbraucht = now() - start
+        # Zustand IMMER frisch lesen – auch der Budget-Abbruch meldet damit
+        # den echten Stand (nie einen erfundenen).
         vorher = state_reader()
+        if max_sekunden is not None and runde > 1 and verbraucht >= max_sekunden:
+            ok = vorher["ready"] >= vorher["target"]
+            log(f"  ⏱ Zeitbudget erschöpft nach {int(verbraucht)}s "
+                f"(Grenze {max_sekunden}s) – keine weitere Runde. "
+                f"Stand: READY {vorher['ready']}/{vorher['target']}.")
+            return {"ok": ok, "runden": runde - 1, "state": vorher,
+                    "verlauf": verlauf, "abbruch": "zeit-budget"}
+        # Verbleibendes Budget als Deckel für JEDEN Schritt der Runde:
+        # kein Einzelschritt kann mehr über das Budget hinauslaufen.
+        rest = (2400 if max_sekunden is None
+                else max(300, int(max_sekunden - verbraucht)))
         brauche = max(0, vorher["target"] - vorher["ready"])
         log(f"  🔄 Konvergenz-Runde {runde}/{max_runden}: "
             f"READY {vorher['ready']}/{vorher['target']} "
@@ -127,9 +156,11 @@ def converge(*, runner=_run, state_reader=cert_state, max_runden: int = 3,
         log(f"    → {brauche} zertifizierte(r) Kandidat(en) fehlen – "
             f"Nachschub-Charge (Batch {batch}):")
         runner([PY, str(ROOT / "scripts" / "engine_generate.py"),
-                "--reserve-only"], env)
-        runner([PY, str(ROOT / "scripts" / "reserve_finisher.py"), "--finish"])
-        runner([PY, str(ROOT / "scripts" / "reserve_readiness.py")])
+                "--reserve-only"], env, timeout=rest)
+        runner([PY, str(ROOT / "scripts" / "reserve_finisher.py"), "--finish"],
+               timeout=rest)
+        runner([PY, str(ROOT / "scripts" / "reserve_readiness.py")],
+               timeout=rest)
         nachher = state_reader()
         fortschritt = (nachher["ready"] > vorher["ready"]
                        or nachher["pool_size"] > vorher["pool_size"])
@@ -262,6 +293,37 @@ def run_selftest() -> int:
         if st["ready"] != 0:
             fehler.append(f"Defektes Zertifikat muss leer zählen: {st}")
 
+    # Fall 6: Wanduhr-Budget – Runde 1 läuft, danach wird ehrlich abgebrochen
+    # (und der nachfolgende Speicher-Schritt findet einen intakten Baum vor)
+    rufe.clear()
+    uhr = {"t": 0.0}
+    zustand = {"n": 0}
+
+    def tick():
+        uhr["t"] += 1.0
+        return uhr["t"]
+
+    def langsamer_runner(cmd, env_extra=None, timeout=0):
+        rufe.append((Path(cmd[1]).name, env_extra or {}))
+        uhr["t"] += 400.0  # jede Stufe kostet ~6,7 Minuten
+        return 0
+
+    def steigend_klein():
+        zustand["n"] += 1
+        return {"target": 6, "ready": zustand["n"],
+                "pool_size": zustand["n"] + 1, "exists": True}
+
+    res = converge(runner=langsamer_runner, state_reader=steigend_klein,
+                   max_runden=3, max_sekunden=900, now=tick,
+                   log=lambda *_: None)
+    if res["abbruch"] != "zeit-budget" or res["runden"] != 1:
+        fehler.append(f"Zeitbudget-Abbruch falsch: {res}")
+    if len(rufe) != 3:
+        fehler.append(f"Nach Budget-Ende darf keine Runde mehr starten: {rufe}")
+    # Der Abbruch meldet den frisch gelesenen Stand (3) – keine Runde startet.
+    if res["state"]["ready"] != 3:
+        fehler.append(f"Budget-Abbruch muss den ehrlichen Stand melden: {res}")
+
     rufe.clear()
     zähler_b = {"n": -1}
 
@@ -282,7 +344,8 @@ def run_selftest() -> int:
             print(f"   - {f}")
         return 2
     print("✅ Reserve-Converge-Selbsttest grün (Ziel-Abbruch, Fortschritts-"
-          "Abbruch, Runden-/Batch-Deckel, ehrliche Zählung aus der Liste).")
+          "Abbruch, Runden-/Batch-/Zeitbudget-Deckel, ehrliche Zählung aus "
+          "der Liste).")
     return 0
 
 
@@ -293,6 +356,12 @@ def main() -> int:
     ap.add_argument("--status", action="store_true")
     ap.add_argument("--runden", type=int, default=3,
                     help="maximale Konvergenz-Runden (Default 3)")
+    ap.add_argument("--max-minuten", type=float,
+                    default=float(os.environ.get("RESERVE_CONVERGE_MAX_MINUTES")
+                                  or 45),
+                    help="Wanduhr-Budget der Stufe (Default 45, env "
+                         "RESERVE_CONVERGE_MAX_MINUTES) – danach laufen "
+                         "Sichern + End-Gate garantiert noch")
     ap.add_argument("--summary", default=os.environ.get("GITHUB_STEP_SUMMARY"),
                     help="Pfad zur Lauf-Zusammenfassung")
     ap.add_argument("--cert", default=str(CERT))
@@ -303,7 +372,8 @@ def main() -> int:
         st = cert_state(Path(args.cert))
         print(json.dumps(st, ensure_ascii=False))
         return 0 if st["ready"] >= st["target"] else 1
-    res = converge(max_runden=max(1, args.runden))
+    budget = max(300, int(args.max_minuten * 60)) if args.max_minuten else None
+    res = converge(max_runden=max(1, args.runden), max_sekunden=budget)
     write_summary(res, args.summary)
     if res["ok"]:
         return 0

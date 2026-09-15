@@ -46,6 +46,14 @@
 
 ### Dauerhafte Reparatur 15.09.2026
 
+0. **Heiler-Deckung (Nachtrag 15.09.2026):** Jedes Gate, das über die Reife
+   entscheidet, hat jetzt einen Heiler. Das Meta-Gate verlangt ein Satzende der
+   Description (−0,3) – `meta_optimizer.py` prüfte bisher nur die Länge, ein
+   Kandidat mit punktloser Description hing damit dauerhaft bei `meta 0.70`
+   unter der Schwelle 0.85 und der Pool erreichte `RESERVE_TARGET` nie
+   (Schwesterbefund zum Struktur-Gate, das `check_length.py` heilt). Der Heiler
+   spiegelt das Gate (`desc_has_sentence_end`), repariert deterministisch ohne
+   KI und wird am Ende der Kette erneut angewendet (letzte Instanz).
 1. `git_sync.sh`: Zertifikat und Cover-Manifest sind maschinengenerierte
    Artefakte → Auto-Heilung nach „letzter Schreiber gewinnt“. Ebenso heilt ein
    Konflikt auf einem Reserve-Kandidaten (beide Seiten `draft+reserve`):

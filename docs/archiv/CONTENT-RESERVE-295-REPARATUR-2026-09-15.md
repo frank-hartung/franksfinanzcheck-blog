@@ -5,6 +5,18 @@
 **Ergebnis vor der Reparatur:** 12 von 12 Fachstufen grün – trotzdem roter Lauf
 (Stufe „Sichern“ gescheitert, End-Gate „Stock shortage“ gescheitert).
 
+> **Nachtrag 2 (15.09.2026, nach dem Merge von PR #299/#300).** Beim Verifizieren
+> am realen Korpus (lokaler Reproduktionslauf von `reserve_readiness.py` auf
+> `main`, Hugo 0.164.0 Extended) kamen **zwei weitere Ursachen derselben Klasse**
+> zum Vorschein, beide behoben:
+> **(E) Ein Gate ohne Heiler** – das Meta-Gate verlangt ein Satzende der
+> Description (−0,3), `meta_optimizer.py` prüfte nur die Länge: Ein Kandidat mit
+> korrekt langer, aber punktloser Description blieb dauerhaft bei `meta 0.70` und
+> damit unter der Schwelle 0.85 (Ursache C war nur der Struktur-Zwilling).
+> **(F) Konvergenz ohne Zeitdeckel** – bis zu 3 Runden × 3 Schritte waren gegen
+> den 90-Minuten-Jobtimeout nicht abgesichert; ein Kill hätte „sichern“ und
+> End-Gate mitgerissen (roter Lauf *ohne* Diagnose). Details: §3.5, §3.6, §3.8.
+
 ---
 
 ## 1. Befund (was wirklich passierte)
@@ -62,9 +74,17 @@ Teilscore 0.70). Nachweis (lokaler Reproduktionslauf auf `main`):
 2026-09-13-gasrechnung-senken-…    1158 Wörter / 7.845 Zeichen  → structure 0.70, meta 0.70, Score 0.800
                                     (Schwelle: 0.85)
 ```
-Beide Defizite sind deterministisch heilbar: Verlängerung auf ≥ 1.400 Wörter
-(Struktur 1.0, +0,045) und ein fehlender Satzpunkt am Description-Ende
-(Meta 1.0, +0,045/0,09 – das erledigt der Meta-Heiler der Kette).
+Beide Defizite sind heilbar – aber nur EINES war es damals auch wirklich:
+
+* **Struktur (Wortzahl):** heilbar über `check_length.py --fix
+  --include-drafts --file` (§3.6).
+* **Meta (fehlender Satzpunkt):** *nicht* heilbar. Der erste Entwurf dieses
+  Dossiers nahm an, „das erledigt der Meta-Heiler der Kette“ – das war falsch.
+  `meta_optimizer.py` prüfte in `audit()`/`fix_meta()` nur die **Länge**
+  (70–160 Zeichen), während `quality_score.py` zusätzlich
+  `desc[-1] in ".!?…"` verlangt. Ein solcher Kandidat konnte die Schwelle
+  rechnerisch nie erreichen: der Pool hing bei 5/6, der harte End-Gate wurde
+  jede Nacht rot. Behoben in §3.6 (Ursache E).
 
 ### Ursache D – Der Lauf committete LIVE-Bestand mit
 Die Veredelungs-Kette enthält bewusst die *bewährten* Heiler der Live-Engine –
@@ -147,12 +167,45 @@ Konvergenz-Stufe hebt ihn ausdrücklich und begrenzt auf (Ziel, Kapazitätsdecke
 und unbegrenzte KI-Kosten. Die Stufe meldet ehrlich `exit 1`, wenn das Ziel
 nicht erreicht wurde – die Bewertung macht der End-Gate.
 
-### 3.6 `scripts/check_length.py` – Entwürfe heilen (Reserve #4-Klasse)
-Neu: `--include-drafts` und `--file <pfad>` (datei-bezirkelt). Der Finisher ruft
-die Längenheilung jetzt als `check_length.py --fix --include-drafts --file
-<candidate>` auf. Damit wird ein zu kurzer Pool-Kandidat per
-`extend_articles.py --slug <slug>` auf ≥ 1.400 Wörter gebracht – und **nur**
-er, nie der Korpus.
+**Zeitdeckel (Nachtrag 2, Ursache F):** Konvergenz ist jetzt doppelt begrenzt –
+Runden **und** Wanduhr. `--max-minuten` (Default 45) bzw.
+`RESERVE_CONVERGE_MAX_MINUTES`; das Restbudget wird als Timeout an jeden
+Unterschritt übergeben, Runde 1 läuft immer, jede weitere nur mit Restbudget.
+Ohne diesen Deckel konnte eine langsame Nacht (KI-Wartezeiten, ein Hugo-Build je
+Kandidat) den Jobtimeout reißen – GitHub killt dann den **Job**, also auch
+„sichern“ und End-Gate: der Lauf wäre rot *und* ohne Diagnose, der erarbeitete
+Pool-Stand nicht in `main`. Der Abbruchgrund `zeit-budget` steht im
+Step-Summary, der Workflow hat zusätzlich `timeout-minutes: 60` als Notausgang
+und der Job 120 Minuten Deckel (§3.8).
+
+### 3.6 Heiler-Deckung: beide Gate-Klassen bekommen einen Heiler
+
+**Struktur (`check_length.py`, Reserve #4-Klasse):** Neu `--include-drafts` und
+`--file <pfad>` (datei-bezirkelt). Der Finisher ruft die Längenheilung jetzt als
+`check_length.py --fix --include-drafts --file <candidate>` auf. Damit wird ein
+zu kurzer Pool-Kandidat per `extend_articles.py --slug <slug>` auf ≥ 1.400
+Wörter gebracht – und **nur** er, nie der Korpus.
+
+**Meta (`meta_optimizer.py`, Ursache E):** Der Heiler spiegelt jetzt das Gate.
+Neu ist `desc_has_sentence_end()` als SSOT-Spiegel der Regel
+`desc[-1] in ".!?…"` (quality_score.py), der Audit meldet
+„Description ohne Satzende (Punkt/!/?/… fehlt)“, und `fix_meta()` heilt die
+Klasse deterministisch – **ohne KI, ohne Netz**:
+* Schritt 0 setzt den fehlenden Schlusspunkt, bevor irgendein KI-Pfad greift,
+* Schritt 4 ist die letzte Instanz nach allen KI-/Generator-Descriptions (das
+  Prinzip „Heiler mehrfach“ aus der CTA-Hygiene) und hält das Längenlimit ein
+  (≤ 160 Zeichen), damit der Fix kein neues Gate reißt.
+
+Damit gilt der Vertrag, der vorher nur für die Struktur galt: **Jedes Gate, das
+über die Reife entscheidet, hat einen Heiler.** Wirkungsnachweis am echten
+Kandidaten (lokaler Lauf, kein KI-Schlüssel):
+
+```
+vorher : description endet auf „… bares Geld"    → meta 0.70, Score 0.800
+nachher: description endet auf „… bares Geld."   → meta 1.00, Score 0.845
+         (Struktur weiterhin 0.70 – heilt §3.6 über die KI-Verlängerung;
+          mit Rechtschreib-Score der CI liegt der Kandidat dann > 0.90)
+```
 
 ### 3.7 `scripts/reserve_gate.py` – kein veraltetes Zertifikat als Nachweis
 Der End-Gate prüft zusätzlich das Alter (`generated_at`, Grenze
@@ -164,7 +217,10 @@ Zeitstempel wird gewarnt, ein zu altes ist blockierend – die Klasse
 - Selbsttest-Stufe prüft jetzt auch `reserve_converge.py` und
   `reserve_stage_guard.py` (Sabotageschutz: ein kaputter Heiler darf nicht
   still weiterarbeiten).
-- Stufe 4 ruft `scripts/reserve_converge.py --runden 3` auf.
+- Stufe 4 ruft `scripts/reserve_converge.py --runden 3 --max-minuten 45` auf
+  (`timeout-minutes: 60` als Notausgang für hängende Kindprozesse).
+- Jobtimeout 120 Minuten (vorher 90): Die Konvergenz darf bis 60 Minuten
+  arbeiten, „sichern“ + End-Gate haben danach garantiert Platz.
 - Sicherungs-Schritt nutzt `reserve_stage_guard.py` statt `git add -A` und
   schreibt die gestagten Änderungen ins Log.
 
@@ -182,6 +238,8 @@ Zeitstempel wird gewarnt, ein zu altes ist blockierend – die Klasse
 | `…::KonvergenzTests` | Ziel-Abbruch ohne Produktion, Fortschritts-Abbruch nach einer Runde, Runden- und Batch-Deckel (max. 4) |
 | `…::GateFrischeTests` | Altes Zertifikat ⇒ kein Nachweis; frisches Zertifikat trägt |
 | `…::LaengenHeilungTests` | Entwürfe werden nur mit `--include-drafts`/`--file` gesehen (Live-Korpuslauf unverändert) |
+| `…::MetaSatzendeHeilungTests` | Audit meldet das fehlende Satzende, `fix_meta` heilt es deterministisch (ohne KI), ist idempotent und reißt das Längenlimit nicht; `quality_score` bestätigt meta 1.0 (Gate und Heiler deckungsgleich) |
+| `…::KonvergenzTests::test_zeitbudget_stoppt_vor_dem_job_timeout` | Das Wanduhr-Budget beendet die Konvergenz nach der laufenden Runde, kein Schritt startet danach |
 | `python3 scripts/reserve_converge.py --selftest` | Konvergenz ohne API/Hugo (Fake-Runner) |
 | `python3 scripts/reserve_stage_guard.py --selftest` | Staging-Politik gegen ein Wegwerf-Repo |
 
@@ -200,7 +258,8 @@ Alle Tests laufen im bestehenden PR-Gate
 - **Notbremse/Stellschrauben** (Repository-Variablen bzw. Env):
   `RESERVE_TARGET` (Ziel), `RESERVE_TOPUP_BATCH` (1–4, Deckel im Generator),
   `RESERVE_FORCE_TOPUP` (nur Konvergenz-Stufe setzt das),
-  `RESERVE_CERT_MAX_AGE_H` (Frische-Grenze des Zertifikats).
+  `RESERVE_CERT_MAX_AGE_H` (Frische-Grenze des Zertifikats),
+  `RESERVE_CONVERGE_MAX_MINUTES` (Wanduhr-Budget der Konvergenz, Default 45).
 - **Wenn der Pool trotz grüner Stufen leer bleibt:** zuerst
   `python3 scripts/reserve_converge.py --status` (Zählung aus der
   Kandidatenliste), dann das KI-Quota prüfen – der Nachschub ist der einzige
