@@ -295,6 +295,56 @@ class RaceUndKonfliktTests(GitSyncTestBase):
         self.assertEqual(local, "B: artikel")
 
 
+class ReserveKandidatKonfliktTests(GitSyncTestBase):
+    """#295: Reserve-Kandidaten sind maschinenverwaltet (draft+reserve) –
+    ein Konflikt darauf heilt (frischer Lauf gewinnt), LIVE-Content bleibt
+    ein harter Stopp."""
+
+    SLUG = "content/posts/2026-09-15-gasrechnung-senken-probe/index.md"
+
+    @staticmethod
+    def _draft(body, reserve=True, draft=True):
+        kopf = ("---\ntitle: Probe\ndate: 2026-09-15T06:00:00Z\n"
+                f"draft: {'true' if draft else 'false'}\n")
+        if reserve:
+            kopf += "reserve: true\n"
+        return kopf + "---\n" + body + "\n"
+
+    def test_beide_seiten_reserve_entwurf_heilt(self):
+        self._commit(self.bot_a, self.SLUG, self._draft("A: stale Fassung"),
+                     "A: stale Veredelung")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        self._commit(self.bot_b, self.SLUG, self._draft("B: frische Veredelung"),
+                     "B: frische Veredelung")
+        res = self.run_sync(["--push-only"])
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("Bot-Artefakt-Konflikte automatisch gelöst", res.stdout)
+        self.assertIn("B: frische Veredelung", self.origin_read(self.SLUG))
+
+    def test_live_artikel_bleibt_harter_stopp(self):
+        self._commit(self.bot_a, self.SLUG, self._draft("A: live", reserve=False,
+                                                        draft=False),
+                     "A: live")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        self._commit(self.bot_b, self.SLUG, self._draft("B: reserve"),
+                     "B: reserve")
+        res = self.run_sync(["--push-only"])
+        self.assertEqual(res.returncode, 1,
+                         "Live-Content darf NIE automatisch gemergt werden")
+        self.assertIn("Kein Push", res.stdout + res.stderr)
+
+    def test_hand_entwurf_ohne_reserve_marker_bleibt_harter_stopp(self):
+        self._commit(self.bot_a, self.SLUG, self._draft("A: Handentwurf",
+                                                        reserve=False),
+                     "A: Handentwurf")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        self._commit(self.bot_b, self.SLUG, self._draft("B: reserve"),
+                     "B: reserve")
+        res = self.run_sync(["--push-only"])
+        self.assertEqual(res.returncode, 1,
+                         "Hand-Entwürfe ohne reserve-Marker sind tabu")
+
+
 class NetzwerkHaertungTests(GitSyncTestBase):
     """Die eigentliche #233-Reparatur: transiente fetch-Fehler."""
 

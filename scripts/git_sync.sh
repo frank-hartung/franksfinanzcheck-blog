@@ -63,8 +63,14 @@
 #    Dauerhaft: maschinengenerierte Zertifikate/Manifeste
 #    (data/reserve-readiness.json, data/covers_manifest.json) sind jetzt als
 #    „letzter Schreiber gewinnt“ eingestuft – der frische Lauf gewinnt, weil
-#    jeder Lauf diese Dateien ohnehin vollständig neu erzeugt. Echte Content-
-#    Konflikte bleiben unverändert ein harter Stopp.
+#    jeder Lauf diese Dateien ohnehin vollständig neu erzeugt.
+#    Zusätzlich heilt ein Konflikt auf einem RESERVE-KANDIDATEN
+#    (content/posts/*/index.md mit `reserve: true` auf BEIDEN Seiten und ohne
+#    `draft: false`): Kandidaten sind bis zur Veröffentlichung
+#    maschinenverwaltet, und ihr sha256-Zertifikat gilt nur für genau diese
+#    Bytes – der frische Lauf gewinnt. Live-Artikel, Re-Queue-Posts und
+#    Hand-Entwürfe bleiben unverändert ein HARTER Stopp (kein Blind-Merge
+#    über Content).
 #
 #  Umgebung:
 #    BRANCH       Zielbranch (Default: GITHUB_HEAD_REF/REF_NAME, sonst main)
@@ -270,6 +276,41 @@ PY
           #   weil der jeweils nächste Lauf sie ohnehin vollständig neu schreibt.
           git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
           git add -- "$f"
+          ;;
+        content/posts/*/index.md)
+          # REPARATUR 15.09.2026 (Issue #295):
+          # Reserve-Kandidaten (draft: true + reserve: true) sind bis zur
+          # Veröffentlichung MASCHINENVERWALTET: nur die Reserve-Stufe darf sie
+          # schreiben, ihr Zertifikat (sha256) gilt exakt für diese Bytes. Trifft
+          # der Rebase hier auf einen Konflikt, hat ein parallel laufender
+          # Korpus-Heiler eine stale Kopie des Kandidaten angefasst. Richtig ist
+          # dann: der frische Reserve-Lauf gewinnt (--theirs) – sonst passt das
+          # gerade geschriebene Zertifikat nicht mehr zum Inhalt.
+          # HARTER STOFF bleibt hart: Die Regel greift NUR, wenn BEIDE Seiten
+          # unmissverständlich Reserve-Entwürfe sind (reserve: true und KEIN
+          # draft: false). Live-Artikel, Re-Queue-Posts und Hand-Entwürfe lösen
+          # weiterhin den harten Stopp aus (kein Blind-Merge über Content).
+          if python3 -c '
+import re, subprocess, sys
+path = sys.argv[1]
+def stage(n):
+    r = subprocess.run(["git", "show", f":{n}:{path}"],
+                       capture_output=True, text=True)
+    return r.stdout if r.returncode == 0 else None
+def is_reserve_draft(text):
+    if not text:
+        return False
+    fm = text.split("---", 2)[1] if text.startswith("---") else ""
+    if re.search(r"(?m)^draft:\s*false\s*$", fm):
+        return False
+    return bool(re.search(r"(?m)^reserve:\s*(true|yes|1)\s*$", fm))
+sys.exit(0 if is_reserve_draft(stage(2)) and is_reserve_draft(stage(3)) else 1)
+' "$f"; then
+            git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
+            git add -- "$f"
+          else
+            safe=0
+          fi
           ;;
         *)
           safe=0

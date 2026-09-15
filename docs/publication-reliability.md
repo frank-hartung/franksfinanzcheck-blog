@@ -47,8 +47,11 @@
 ### Dauerhafte Reparatur 15.09.2026
 
 1. `git_sync.sh`: Zertifikat und Cover-Manifest sind maschinengenerierte
-   Artefakte → Auto-Heilung nach „letzter Schreiber gewinnt“ (echte
-   Content-Konflikte bleiben ein harter Stopp).
+   Artefakte → Auto-Heilung nach „letzter Schreiber gewinnt“. Ebenso heilt ein
+   Konflikt auf einem Reserve-Kandidaten (beide Seiten `draft+reserve`):
+   Kandidaten sind maschinenverwaltet und ihr Hash-Zertifikat gilt exakt für
+   diese Bytes. Live-Content, Re-Queue-Posts und Hand-Entwürfe bleiben ein
+   harter Stopp (kein Blind-Merge).
 2. `reserve_finisher.py`: **Live-Korpus-Isolation** – außerhalb der
    Pool-Kandidaten wird jede Änderung bytegenau zurückgestellt, neue
    Fremd-Dateien wandern in Quarantäne; Cover werden nur noch pro Kandidat
