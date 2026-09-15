@@ -1,6 +1,32 @@
 # ============================================================
 #  CONTENT-RESERVE (täglicher Vorrat) – Produktionslinie v2
 #
+#  REPARATUR 15.09.2026 (Fehler #295, „dauerhaft auf Premium-Level“):
+#  Der Lauf (Run 34949097389) hatte VIER Befunde – alle vier sind behoben:
+#    1. Der Zielbestand war UNERREICHBAR. Der Top-up produzierte höchstens
+#       EINEN Kandidaten pro Nacht, während Publikationstage 1–3 aus dem
+#       Pool verbrauchen; zusätzlich blockierte der In-Flight-Schutz den
+#       Nachschub derselben Nacht (die Veredelung hebt jeden offenen
+#       Kandidaten auf HEUTE). Der Pool pendelte bei 5/6, der harte
+#       End-Gate wurde jede Nacht rot. Jetzt fährt Stufe 4 die BEGRENZTE,
+#       ZIELGERICHTETE Konvergenz (scripts/reserve_converge.py, max. 3
+#       Runden, Batch = exakter Fehlbestand, Dedup + Kapazitätsdeckel).
+#    2. Pool-Kandidaten wurden nie verlängert: check_length.py übersprang
+#       Entwürfe (wie früher spellcheck/grammar/polish, „Reserve #4“) – zwei
+#       Kandidaten hingen mit 1.134/1.149 Wörtern dauerhaft unter dem
+#       Struktur-Gate (0.70). Der Finisher ruft die Längenheilung jetzt
+#       datei-bezirkelt mit --include-drafts.
+#    3. Der Sicherungs-Schritt staggte mit `git add -A` auch LIVE-Content und
+#       Live-Cover, die korpusweite Heiler nebenbei „geheilt“ hatten. Diese
+#       Fremd-Änderungen kollidierten beim Rebase mit dem parallel laufenden
+#       Deploy-/Auslieferungslauf -> „Rebase-Konflikt … Kein Push“ -> roter
+#       Lauf, obwohl Pool und Content gesund waren. Jetzt: Isolation-Wächter
+#       (reserve_finisher, stellt Fremd-Änderungen bytegenau zurück),
+#       Staging-Politik (reserve_stage_guard) und Auto-Heilung für
+#       maschinengenerierte Artefakte (git_sync: Zertifikat, Cover-Manifest).
+#    4. Ein veraltetes Zertifikat konnte Frische vortäuschen – der End-Gate
+#       prüft jetzt zusätzlich das Alter (RESERVE_CERT_MAX_AGE_H, Default 36 h).
+#
 #  REPARATUR 11.09.2026 (Fehler #247, „dauerhaft auf Premium-Level“):
 #  Drei Befunde ließen den Lauf nachts dauerhaft rot werden, obwohl der
 #  Pool fast voll war:
@@ -84,6 +110,8 @@ jobs:
           python3 scripts/r5_absatz_splitter.py --selftest
           python3 scripts/fix_linebreaks.py --selftest
           python3 scripts/reserve_gate.py --selftest
+          python3 scripts/reserve_converge.py --selftest
+          python3 scripts/reserve_stage_guard.py --selftest
           python3 scripts/affiliate_marketer.py  # Routing-Selbsttest, dann Report (read-only)
 
       # ================= RUNDE 1 =================
@@ -116,12 +144,22 @@ jobs:
         run: python3 scripts/reserve_readiness.py
 
       # ================= RUNDE 2 (KONVERGENZ) =================
-      # Die Charge von gestern/heute ist jetzt veredelt UND zertifiziert.
-      # Nur wenn danach noch Zertifikate fehlen, wird bedarfsgerecht nach-
-      # produziert (der In-Flight-Schutz blockiert dann nicht mehr),
-      # sofort veredelt und erneut zertifiziert – alles im selben Lauf,
-      # damit der Pool über Nacht RESERVE_TARGET erreicht statt einen
-      # weiteren Tag zu fehlen.
+      # REPARATUR 15.09.2026 (#295): Die frühere Fassung war ein EINZELNER
+      # Nachschub-Block und lief garantiert ins Leere – die Veredelungs-Stufe
+      # hebt jeden offenen Kandidaten auf HEUTE, damit galt danach jeder
+      # unzertifizierte Kandidat als „in flight“ und der In-Flight-Schutz
+      # blockierte die Nachproduktion derselben Nacht. Ergebnis: Der Pool
+      # erreichte RESERVE_TARGET nie (5/6 seit Tagen), der harte End-Gate
+      # wurde jede Nacht rot.
+      #
+      # Jetzt: BEGRENZTE, ZIELGERICHTETE Schleife (scripts/reserve_converge.py)
+      #   brauche := Ziel − zertifiziert
+      #   solange brauche > 0 und Fortschritt und Runde ≤ 3:
+      #     Produktion (force, Batch = exakter Fehlbestand, max. 4)
+      #     → Veredelung → Zertifizierung
+      # Die Schleife bricht bei Zielerreichung ODER ohne Fortschritt ab
+      # (keine Endlosschleife, keine unbegrenzten API-Kosten) und meldet
+      # ehrlich, was erreicht wurde – die Bewertung macht der End-Gate.
       - name: Stufe 4 – Konvergenz-Nachschub bis zum Zielbestand
         id: convergence
         if: ${{ !cancelled() }}
@@ -132,17 +170,7 @@ jobs:
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
           RESERVE_TARGET: ${{ vars.RESERVE_TARGET || '6' }}
-        run: |
-          set -u
-          need=$(python3 -c "import json; d=json.load(open('data/reserve-readiness.json')); print(max(0, int(d['target']) - int(d['ready'])))")
-          if [ "$need" -eq 0 ]; then
-            echo "✅ Pool bereits vollständig zertifiziert – kein Nachschub nötig."
-            exit 0
-          fi
-          echo "🛟 Noch $need zertifizierte(s) Ziel fehlt – Nachschub-Charge läuft."
-          python3 scripts/engine_generate.py --reserve-only
-          python3 scripts/reserve_finisher.py --finish
-          python3 scripts/reserve_readiness.py
+        run: python3 scripts/reserve_converge.py --runden 3
 
       # ================= RUNDE 3 (TRIAGE) =================
       # Reserve heißt nicht Stapel. Jeder Entwurf bekommt einen begründeten
@@ -165,14 +193,36 @@ jobs:
         run: |
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
-          # data/reserve-readiness.json ist versioniert (Hash-Zertifikat,
-          # auch nach engpass-bedingtem Abbruch sichtbar); die Lauf-Reports
-          # bleiben absichtlich gitignoriert, sonst erzeugt ihr Zeitstempel
-          # nächtliche Leer-Commits. Ihre Diagnose steht im Actions-Log.
-          git add -A
+
+          # REPARATUR 15.09.2026 (#295) – warum NICHT mehr `git add -A`:
+          #   `git add -A` staggte alles, was irgendein korpusweit laufender
+          #   Heiler im Arbeitsbaum hinterlassen hat (Live-Posts, Live-Cover,
+          #   Manifeste). Genau diese Fremd-Änderungen kollidierten beim Rebase
+          #   mit dem parallel laufenden Deploy-/Auslieferungslauf -> „Kein
+          #   Push“ -> roter Lauf trotz gesundem Pool.
+          #   Staging-Politik liegt jetzt in einem eigenen, selbsttestenden
+          #   Skript (drei Lagen greifen unabhängig voneinander):
+          #     1. reserve_finisher.py  – Isolation-Wächter um die Heiler-Kette,
+          #     2. reserve_stage_guard.py – stagt nur Pool-Pfade, nimmt Fremd-
+          #        Content wieder aus dem Index und meldet, was liegen bleibt,
+          #     3. git_sync.sh          – heilt Rebase-Konflikte auf den
+          #        maschinengenerierten Artefakten (Zertifikat, Cover-Manifest).
+          echo "── Arbeitsbaum vor dem Commit ──────────────────────────────"
+          git status --porcelain | head -40
+          python3 scripts/reserve_stage_guard.py
+          echo "── Gestagte Änderungen ─────────────────────────────────────"
+          git diff --cached --stat | tail -15
           if ! git diff --cached --quiet; then
             git commit -m "content: unabhängige Redaktionsreserve auffüllen"
-            scripts/git_sync.sh --push-only
+            # git_sync pusht mit Retries, Auto-Rebase und Auto-Heilung für
+            # maschinengenerierte Artefakte (u. a. das Zertifikat selbst –
+            # genau der Konflikt, der diesen Lauf am 15.09. rot machte).
+            scripts/git_sync.sh --push-only || {
+              echo "::error::Push der Reserve nach main fehlgeschlagen. Der Lauf bleibt rot, WEIL der zertifizierte Pool sonst nicht in main ankommt (nächster Lauf könnte sonst erneut 0/6 lesen). Ursache im git_sync-Log oben."
+              exit 1
+            }
+          else
+            echo "Keine Änderungen am Pool – nichts zu committen."
           fi
 
       # ================= HARTES END-GATE =================

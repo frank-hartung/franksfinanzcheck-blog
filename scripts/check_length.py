@@ -14,9 +14,27 @@ Selbstheilung:
   --fix  ruft scripts/extend_articles.py für alle Artikel unter dem Floor
          und prüft danach erneut.
 
+REPARATUR 15.09.2026 (Issue #295 – „Reserve-Kandidaten bleiben unter dem
+Zielbestand“):
+  Dieses Skript übersprang Entwürfe (`draft: true`) KOMPLETT – wie früher
+  schon spellcheck/grammar/profi_polish (Befund „Reserve #4“). Die
+  Reserve-Kandidaten sind aber bewusst Entwürfe, bis sie zertifiziert sind.
+  Folge: Zwei Pool-Kandidaten standen seit Tagen bei 1.134 bzw. 1.149 Wörtern
+  (= Struktur-Teil des Quality-Scores 0.70, weil < 1.200 Wörter). Die
+  Selbstheilung (KI-Verlängerung auf ≥ 1.400 Wörter) konnte sie nie erreichen,
+  weil der Sammellauf sie gar nicht erst sah. Damit blieben sie unter der
+  Veröffentlichungsschwelle und der Reserve-Pool erreichte das Ziel nie.
+  Neu:
+    --include-drafts  Entwürfe werden mitgeprüft (und bei --fix verlängert) –
+                      identische Semantik wie in den übrigen Heilern.
+    --file <pfad>     Datei-bezirkelter Lauf (Pool-Kandidat) statt Korpus –
+                      der Reserve-Lauf heilt damit ausschließlich seinen Pool.
+
 Nutzung:
   python3 scripts/check_length.py             # nur melden (Exit 0/1)
   python3 scripts/check_length.py --fix       # kurze Artikel verlängern
+  python3 scripts/check_length.py --fix --include-drafts
+  python3 scripts/check_length.py --fix --file content/posts/<slug>/index.md
   python3 scripts/check_length.py --json      # JSON-Report
 
 Exit: 0 = alle im Rahmen · 1 = mind. 1 Verstoß (Workflow kann alerten).
@@ -68,12 +86,20 @@ def status_of(chars: int) -> str:
     return "ok"
 
 
-def collect():
+def collect(only_file=None, include_drafts=False):
+    """Längen-Messung; `only_file` prüft genau eine Datei (Pool-Kandidat),
+    `include_drafts` nimmt Entwürfe mit (Reserve-Veredelung, #295)."""
     arts = []
     from post_utils import list_post_paths, slug_of
-    for f in list_post_paths():
-        content = open(f, encoding="utf-8").read()
-        if re.search(r"^draft:\s*true\s*$", content[:2500], re.M):
+    paths = [only_file] if only_file else list_post_paths()
+    for f in paths:
+        if not os.path.exists(f):
+            print(f"  ⚠ check_length: Datei fehlt: {f}")
+            continue
+        with open(f, encoding="utf-8") as fh:
+            content = fh.read()
+        if (not include_drafts
+                and re.search(r"^draft:\s*true\s*$", content[:2500], re.M)):
             continue
         words, chars = measure_file(content)
         m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
@@ -92,7 +118,13 @@ def collect():
 def main():
     fix = "--fix" in sys.argv
     as_json = "--json" in sys.argv
-    arts = collect()
+    include_drafts = "--include-drafts" in sys.argv
+    only_file = None
+    if "--file" in sys.argv:
+        i = sys.argv.index("--file")
+        if i + 1 < len(sys.argv):
+            only_file = os.path.abspath(sys.argv[i + 1])
+    arts = collect(only_file, include_drafts)
     issues = [a for a in arts if a["status"] in ("zu-kurz", "zu-lang")]
 
     if fix:
@@ -100,11 +132,24 @@ def main():
         if short:
             print(f"{len(short)} Artikel unter {MIN_CHARS} Zeichen – "
                   f"starte KI-Verlängerung …")
-            subprocess.run([sys.executable,
-                            os.path.join(BLOG_DIR, "scripts", "extend_articles.py"),
-                            "--min-chars", str(MIN_CHARS)],
-                           cwd=BLOG_DIR, check=False)
-            arts = collect()
+            if only_file:
+                # Datei-bezirkelt (Reserve-Pool): NUR diesen Kandidaten
+                # verlängern, nie den Korpus (#295) – der Isolation-Wächter
+                # in reserve_finisher.py würde Korpus-Änderungen ohnehin
+                # zurückstellen, hier sparen wir den KI-Aufwand.
+                for a in short:
+                    subprocess.run(
+                        [sys.executable,
+                         os.path.join(BLOG_DIR, "scripts", "extend_articles.py"),
+                         "--slug", a["slug"], "--min-chars", str(MIN_CHARS)],
+                        cwd=BLOG_DIR, check=False)
+            else:
+                subprocess.run([sys.executable,
+                                os.path.join(BLOG_DIR, "scripts",
+                                             "extend_articles.py"),
+                                "--min-chars", str(MIN_CHARS)],
+                               cwd=BLOG_DIR, check=False)
+            arts = collect(only_file, include_drafts)
             issues = [a for a in arts if a["status"] in ("zu-kurz", "zu-lang")]
 
     ok = sum(1 for a in arts if a["status"] == "ok")
