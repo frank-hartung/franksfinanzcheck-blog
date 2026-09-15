@@ -91,7 +91,18 @@ Beide Dateien werden bei jedem Lauf vollständig neu erzeugt; ein Blatt-Merge
 verliert keine Information. **Echte Content-Konflikte bleiben ein harter
 Stopp** (unverändert, inklusive Test).
 
-### 3.2 `scripts/reserve_finisher.py` – Live-Korpus-Isolation
+### 3.2 `scripts/git_sync.sh` – Reserve-Kandidaten sind maschinenverwaltet
+Der Lift der Veredelungs-Stufe benennt jeden Kandidaten um; ein parallel
+laufender Korpus-Heiler, der eine stale Kopie desselben Kandidaten anfasst,
+erzeugt daraus einen echten Rebase-Konflikt. Da Kandidaten bis zur
+Veröffentlichung ausschließlich der Reserve-Stufe gehören (und ihr
+sha256-Zertifikat exakt für diese Bytes gilt), heilt `git_sync.sh` diesen Fall
+nach derselben Regel: **frischer Lauf gewinnt** – aber nur, wenn *beide* Seiten
+unmissverständlich Reserve-Entwürfe sind (`reserve: true`, kein `draft: false`).
+Live-Artikel, Re-Queue-Posts und Hand-Entwürfe lösen weiterhin den harten
+Stopp aus (drei Regressionen, siehe Abschnitt 4).
+
+### 3.3 `scripts/reserve_finisher.py` – Live-Korpus-Isolation
 Ein deterministischer Wächter friert vor der Heiler-Kette den Arbeitsbaum-Zustand
 aller geschützten Wurzeln (`content/ static/ data/ layouts/ assets/
 archetypes/ hugo.toml`) ein und stellt danach **jede** Änderung außerhalb der
@@ -108,14 +119,14 @@ Zusätzlich rendert die Kette Cover jetzt **pro Kandidat**
 korpusweit – der Bedarf an Fremd-Änderungen entsteht gar nicht mehr.
 Jeder Eingriff wird in `RESERVE-FINISH-REPORT.md` protokolliert.
 
-### 3.3 `scripts/reserve_stage_guard.py` – Staging-Politik (neu)
+### 3.4 `scripts/reserve_stage_guard.py` – Staging-Politik (neu)
 `git add -A` ist ersetzt: Das Skript stagt nur Pool-Pfade, prüft **jede**
 gestagte Content-Datei auf `reserve: true`, nimmt Fremd-Content wieder aus dem
 Index (und setzt getrackte Live-Dateien bytegenau auf HEAD zurück) und meldet,
 was bewusst liegen bleibt. Selbsttestend, unabhängig vom Isolation-Wächter
 (zwei Lagen, eine fällt aus → die andere greift).
 
-### 3.4 `scripts/reserve_converge.py` – zielgerichtete Konvergenz (neu)
+### 3.5 `scripts/reserve_converge.py` – zielgerichtete Konvergenz (neu)
 Stufe 4 ist jetzt eine begrenzte Schleife statt eines wirkungslosen
 Einzelblocks:
 
@@ -136,20 +147,20 @@ Konvergenz-Stufe hebt ihn ausdrücklich und begrenzt auf (Ziel, Kapazitätsdecke
 und unbegrenzte KI-Kosten. Die Stufe meldet ehrlich `exit 1`, wenn das Ziel
 nicht erreicht wurde – die Bewertung macht der End-Gate.
 
-### 3.5 `scripts/check_length.py` – Entwürfe heilen (Reserve #4-Klasse)
+### 3.6 `scripts/check_length.py` – Entwürfe heilen (Reserve #4-Klasse)
 Neu: `--include-drafts` und `--file <pfad>` (datei-bezirkelt). Der Finisher ruft
 die Längenheilung jetzt als `check_length.py --fix --include-drafts --file
 <candidate>` auf. Damit wird ein zu kurzer Pool-Kandidat per
 `extend_articles.py --slug <slug>` auf ≥ 1.400 Wörter gebracht – und **nur**
 er, nie der Korpus.
 
-### 3.6 `scripts/reserve_gate.py` – kein veraltetes Zertifikat als Nachweis
+### 3.7 `scripts/reserve_gate.py` – kein veraltetes Zertifikat als Nachweis
 Der End-Gate prüft zusätzlich das Alter (`generated_at`, Grenze
 `RESERVE_CERT_MAX_AGE_H`, Default 36 h). Ein Zertifikat ohne verwertbaren
 Zeitstempel wird gewarnt, ein zu altes ist blockierend – die Klasse
 „Zertifikat von gestern sagt 6/6, Pool hat real 4 Entwürfe“ ist damit tot.
 
-### 3.7 `.github/workflows/content-reserve.yml`
+### 3.8 `.github/workflows/content-reserve.yml`
 - Selbsttest-Stufe prüft jetzt auch `reserve_converge.py` und
   `reserve_stage_guard.py` (Sabotageschutz: ein kaputter Heiler darf nicht
   still weiterarbeiten).
@@ -164,6 +175,8 @@ Zeitstempel wird gewarnt, ein zu altes ist blockierend – die Klasse
 | `scripts/tests/test_git_sync.py::RaceUndKonfliktTests::test_reserve_zertifikat_konflikt_heilt_frischer_lauf_gewinnt` | Der Konflikt, der den Lauf rot machte, heilt jetzt (frischer Lauf gewinnt) |
 | `…::test_cover_manifest_konflikt_heilt_frischer_lauf_gewinnt` | Dasselbe für das Cover-Manifest |
 | `…::test_content_konflikt_bleibt_harter_stopp` (Bestand) | Echter Content-Konflikt bleibt hart – kein Blind-Merge |
+| `scripts/tests/test_git_sync.py::ReserveKandidatKonfliktTests::test_beide_seiten_reserve_entwurf_heilt` | Konflikt auf einem Reserve-Kandidaten (beide Seiten `draft+reserve`) heilt – frischer Lauf gewinnt |
+| `…::test_live_artikel_bleibt_harter_stopp` / `…::test_hand_entwurf_ohne_reserve_marker_bleibt_harter_stopp` | Live-Content und Hand-Entwürfe werden NIE automatisch gemergt |
 | `scripts/tests/test_reserve_pipeline.py::LiveKorpusIsolationTests` | Fremd-Änderungen (Live-Post, Live-Cover) werden bytegenau zurückgestellt, neue Fremd-Dateien wandern in Quarantäne, Kandidaten/manifeste/JSONL bleiben |
 | `…::StagingPolicyTests` | Live-Content wird nie gestagt; der Staging-Selbsttest bleibt grün |
 | `…::KonvergenzTests` | Ziel-Abbruch ohne Produktion, Fortschritts-Abbruch nach einer Runde, Runden- und Batch-Deckel (max. 4) |
