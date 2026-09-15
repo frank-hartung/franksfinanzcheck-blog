@@ -342,7 +342,7 @@ lauffähige Skripte umgesetzt und in die Pipeline integriert:
 | `scripts/length_guard.py` (R9) | Längen-Korridore + Duplikatschutz der KI-Selbstheilung (Shingle-Overlap > 40 % → verworfen) | – |
 | `scripts/quality_score.py` (R10) | Gesamt-Score mit Lesbarkeits-Gewicht 0,20 | publish/draft/human-review |
 | `scripts/absorb_whitelist.py` | Senkt Rechtschreib-Rauschen: Komposita in ≥ 3 Artikeln → Whitelist | – |
-| `scripts/r5_absatz_splitter.py` | Splittet Absätze > 4 Sätze an Satzgrenzen („eine Idee pro Absatz“) | – |
+| `scripts/r5_absatz_splitter.py` | Splittet Absätze > 4 Sätze iterativ an Satzgrenzen („eine Idee pro Absatz“); Publish-Gate/Re-Queue nutzen denselben In-Memory-Heiler gegen Dauer-Holds | – |
 
 **Schnell-Checks:**
 
@@ -357,7 +357,9 @@ python3 scripts/r5_absatz_splitter.py --apply         # Absätze splitten
 
 Neue Artikel, die harte Regeln verletzen, werden in `content-engine-v2.yml`
 automatisch auf `draft: true` geparkt („Entwurf statt Publikation“) – sie
-erscheinen erst nach manueller Freigabe. Der wöchentliche Lauf
+erscheinen erst nach manueller Freigabe. Heilbare R5-ABSATZ-HART-Fälle werden
+vorher deterministisch gesplittet; alte R5-Holds gehen nur nach Gegenprüfung
+wieder in die Re-Queue, nie direkt live. Der wöchentliche Lauf
 (`seo-weekly.yml`) auditert die gesamte Flotte.
 
 ---

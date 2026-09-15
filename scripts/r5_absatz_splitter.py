@@ -2,9 +2,9 @@
 """
 R5-ABSATZ-SPLITTER (Audit 01.09.2026, P0-Punkt 5: „Eine Idee pro Absatz“).
 
-Splittet Fließtext-Absätze mit mehr als 4 Sätzen an Satzgrenzen in zwei
-Absätze (möglichst 2+3 oder 3+2 Sätze), ohne Markdown-Links zu zerschneiden
-und ohne Abkürzungen (z. B., d. h., u. a., 18.000) als Satzende zu werten.
+Splittet Fließtext-Absätze mit mehr als 4 Sätzen iterativ an Satzgrenzen,
+bis keine harte Absatzhälfte bleibt, ohne Markdown-Links zu zerschneiden und
+ohne Abkürzungen (z. B., d. h., u. a., 18.000) als Satzende zu werten.
 
 Verifikation: python3 scripts/textverstaendnis_guard.py --json
   → Anzahl R5-ABSATZ-Funde muss sinken, keine neuen harten Fälle.
@@ -79,7 +79,10 @@ def split_para(para: str) -> str | None:
     a, b = p[:cut], p[cut:]
     a = restore(a, tokens)
     b = restore(b, tokens)
-    return (a.rstrip() + "\n\n" + b.lstrip()).rstrip() + "\n"
+    # Kein künstlicher Abschluss-Newline: `para` wird in einem Body ersetzt,
+    # dessen bestehende Absatztrenner erhalten bleiben. Ein zusätzliches `\n`
+    # erzeugte sonst drei Leerzeilen nach jedem Split.
+    return a.rstrip() + "\n\n" + b.lstrip()
 
 def paras_with_many_sents(body: str):
     out = []
@@ -105,39 +108,89 @@ def is_draft(text: str) -> bool:
         re.search(r"(?m)^draft:\s*true\s*$", parts[1]))
 
 
-def process_file(f: str, apply: bool) -> int:
-    """Splittet eine Datei. Rückgabe: Anzahl gesplitteter Absätze."""
-    t = open(f, encoding="utf-8").read()
-    parts = t.split("---", 2)
-    if len(parts) < 3:
-        return 0
-    body = parts[2]
+def split_body_text(body: str, max_rounds: int = 6, *, verbose: bool = False,
+                    label: str = "") -> tuple[str, int, list[str]]:
+    """Splittet einen Markdown-Body in-memory.
+
+    Gemeinsamer Kern für Workflow-Heiler, Publish-Gate und Re-Queue-
+    Selbstheilung. So gibt es nur eine R5-Reparaturlogik: keine Gate-Wache muss
+    wieder anfangen, ganze Artikel zu parken, nur weil der CLI-Heiler zwar
+    existiert, aber in einem Pfad nicht verdrahtet war.
+    """
     new_body = body
     total = 0
+    warnings: list[str] = []
     # Iterativ teilen, bis kein Fließabsatz mehr > MAX_SENT Sätze hat:
     # ein einziger Durchlauf würde bei 9+ Sätzen eine zu lange zweite
     # Hälfte zurücklassen (Reserve #5, #247). Mehrdeutige Funde werden
     # pro Runde erneut geprüft und im Zweifel konservativ übersprungen.
-    for runde in range(6):
+    for runde in range(max_rounds):
         hits = paras_with_many_sents(new_body)
         if not hits:
             break
-        if runde == 0:
-            print(f"\n=== {f} ({len(hits)} Absätze)")
+        if verbose and runde == 0:
+            print(f"\n=== {label or 'Text'} ({len(hits)} Absätze)")
+        moved = False
         for para, n in hits:
             if new_body.count(para) != 1:
                 # Mehrdeutig (identischer Absatz >1x): keine unsichere Ersetzung.
-                print(f"  ⚠ mehrdeutiger Absatzfund übersprungen: {para[:50]!r}")
+                msg = f"mehrdeutiger Absatzfund übersprungen: {para[:50]!r}"
+                warnings.append(msg)
+                if verbose:
+                    print(f"  ⚠ {msg}")
                 continue
             res = split_para(para)
             if not res:
                 continue
             new_body = new_body.replace(para, res, 1)
             total += 1
-            print(f"  [{n} Sätze → aufgeteilt] {para[:60]}…")
-    if new_body != body and apply:
-        open(f, "w", encoding="utf-8").write(
-            parts[0] + "---" + parts[1] + "---" + new_body)
+            moved = True
+            if verbose:
+                print(f"  [{n} Sätze → aufgeteilt] {para[:60]}…")
+        if not moved:
+            break
+    return new_body, total, warnings
+
+
+def heal_text(text: str, *, verbose: bool = False,
+              label: str = "") -> tuple[str, int, list[str]]:
+    """Splittet den Body einer kompletten Markdown-Datei in-memory.
+
+    Rückgabe: (neuer_text, anzahl_splits, warnungen). Frontmatter bleibt byte-
+    nah erhalten; ohne Frontmatter wird der Text unverändert zurückgegeben.
+    """
+    parts = text.split("---", 2)
+    if len(parts) < 3:
+        return text, 0, []
+    new_body, total, warnings = split_body_text(
+        parts[2], verbose=verbose, label=label)
+    if new_body == parts[2]:
+        return text, total, warnings
+    return parts[0] + "---" + parts[1] + "---" + new_body, total, warnings
+
+
+def hard_r5_findings(text: str, rel: str = "candidate") -> list:
+    """R5-ABSATZ-HART-Funde mit dem echten Textverständnis-Gate messen."""
+    try:
+        import textverstaendnis_guard as tv
+        body = tv.split_body(text)
+        return [f for f in tv.check_article(rel, body, {})
+                if f[1] == "R5-ABSATZ-HART"]
+    except Exception:
+        # Fail-safe für Aufrufer: Wenn der Prüfer nicht importierbar ist, soll
+        # die Veröffentlichung später am echten Publish-Gate stoppen; dieser
+        # Helfer erfindet kein Grün.
+        return [(rel, "R5-ABSATZ-HART", "Textverständnisprüfung nicht verfügbar", "")]
+
+
+def process_file(f: str, apply: bool) -> int:
+    """Splittet eine Datei. Rückgabe: Anzahl gesplitteter Absätze."""
+    with open(f, encoding="utf-8") as fh:
+        t = fh.read()
+    new_text, total, _warnings = heal_text(t, verbose=True, label=f)
+    if new_text != t and apply:
+        with open(f, "w", encoding="utf-8") as fh:
+            fh.write(new_text)
     return total
 
 

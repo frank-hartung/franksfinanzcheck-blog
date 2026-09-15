@@ -67,12 +67,43 @@ def finish_reserve_if_needed() -> bool:
         return False
 
 
+def preheal_candidate(index: Path) -> list[str]:
+    """Deterministische Source-Heilung, bevor ein Kandidat im Dry-Run-Gate steht.
+
+    `accept_candidate()` prüft Re-Queue/Reserve-Posts absichtlich mit
+    `publish_gate` im STRICT+DRY-RUN-Modus. Dry-Run darf aber nicht schreiben;
+    deshalb bekämen verlustfrei heilbare R5-Absatz-Hartfälle nie die Chance auf
+    Annahme und blieben als Hold liegen (Issue #286). Der Aufrufer hält bereits
+    einen bytegenauen Snapshot und stellt bei Ablehnung zurück – daher ist diese
+    Vorheilung sicher: angenommen = verbesserter Text bleibt, abgelehnt =
+    Originalbytes kommen zurück.
+    """
+    changes: list[str] = []
+    try:
+        import r5_absatz_splitter as r5
+        text = index.read_text(encoding='utf-8')
+        if r5.hard_r5_findings(text, f"content/posts/{index.parent.name}/index.md"):
+            new_text, splits, warnings = r5.heal_text(text)
+            if splits and new_text != text:
+                index.write_text(new_text, encoding='utf-8')
+                changes.append(f"R5-ABSATZ-HART: {splits} Absatz-Split(s)")
+            for warning in warnings[:3]:
+                print(f"  ⚠ {index.parent.name}: R5-Vorheilung: {warning}")
+    except Exception as exc:  # noqa: BLE001 – echte Gate-Prüfung entscheidet danach
+        print(f"  ⚠ {index.parent.name}: R5-Vorheilung nicht verfügbar: {exc}")
+    return changes
+
+
 def accept_candidate(index):
     """Candidate is temporarily live. Caller MUST restore draft on rejection/error.
 
     Uses exactly the production publish gate including rendered affiliate proof.
     Quality scores must meet the documented publish threshold, not merely avoid review.
     """
+    prehealed = preheal_candidate(index)
+    if prehealed:
+        print(f"Reserve/Re-Queue vorgeheilt: {index.parent.name}: "
+              + "; ".join(prehealed))
     import publish_gate as gate
     import quality_score as qs
     result = qs.score_article(str(index))

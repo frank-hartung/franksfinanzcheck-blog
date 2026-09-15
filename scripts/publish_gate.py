@@ -300,7 +300,8 @@ def textverstaendnis_failures(candidates):
         failed = {}
         for slug in candidates:
             path = os.path.join(POSTS_DIR, slug, "index.md")
-            body = split_body(open(path, encoding="utf-8").read())
+            with open(path, encoding="utf-8") as fh:
+                body = split_body(fh.read())
             finds = [f for f in check_article(
                 os.path.join("content", "posts", slug, "index.md"),
                 body, term
@@ -311,6 +312,49 @@ def textverstaendnis_failures(candidates):
     except Exception as exc:
         reason = f"Textverständnisprüfung nicht verfügbar: {exc}"
         return {slug: [reason] for slug in candidates}, None
+
+def r5_self_heal_candidates(candidates):
+    """Letzte deterministische Heilung für R5-ABSATZ-HART.
+
+    Hintergrund Issue #286: Re-Queue-Kandidaten wurden vom echten Publish-Gate
+    korrekt blockiert, blieben danach aber als `hold` liegen, obwohl die
+    Ursache (ein zu langer Fließtext-Absatz) durch den vorhandenen Splitter
+    verlustfrei heilbar ist. Das Gate darf solche Artikel nicht veröffentlichen
+    *und* nicht dauerhaft parken, wenn die Reparatur beweisbar ist.
+
+    Im Dry-Run wird nichts geschrieben; die eigentliche Ablehnung/Annahme
+    entscheidet danach weiterhin `textverstaendnis_failures()`.
+    """
+    try:
+        sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+        import r5_absatz_splitter as r5
+    except Exception as exc:  # noqa: BLE001 – spätere Textprüfung bleibt fail-closed
+        print(f"  ⚠ R5-Absatz-Splitter am Gate nicht verfügbar: {exc}")
+        return 0
+
+    healed = 0
+    for slug in list(candidates):
+        path = os.path.join(POSTS_DIR, slug, "index.md")
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8") as fh:
+            text = fh.read()
+        if not r5.hard_r5_findings(text, os.path.join("content", "posts", slug, "index.md")):
+            continue
+        new_text, splits, warnings = r5.heal_text(text)
+        if splits and not DRY_RUN:
+            with open(path, "w", encoding="utf-8") as fh:
+                fh.write(new_text)
+        if splits:
+            healed += 1
+            suffix = "geheilt" if not DRY_RUN else "würde geheilt"
+            print(f"  🧩 {slug}: R5-ABSATZ-HART {suffix} "
+                  f"({splits} Absatz-Split(s))")
+        for warning in warnings[:3]:
+            print(f"  ⚠ {slug}: R5-Split-Warnung: {warning}")
+    return healed
+
+
 
 def discard_article(slug):
     """Löscht einen durchgefallenen Artikel vollständig: Content-Bundle +
@@ -356,10 +400,12 @@ def main():
             path = os.path.join(POSTS_DIR, slug, "index.md")
             if not os.path.exists(path):
                 continue
-            text = open(path, encoding="utf-8").read()
+            with open(path, encoding="utf-8") as fh:
+                text = fh.read()
             new_text, n, _ = fix_url_hygiene.heal_text(text, slugs)
             if n and not DRY_RUN:
-                open(path, "w", encoding="utf-8").write(new_text)
+                with open(path, "w", encoding="utf-8") as fh:
+                    fh.write(new_text)
                 healed_any = True
                 print(f"  🧹 {slug}: {n} Leerzeichen-URL(s) direkt am Gate geheilt")
         if healed_any:
@@ -367,6 +413,13 @@ def main():
             print(f"Publish-Gate: Kandidaten nach URL-Heilung → {candidates}")
     except Exception as exc:  # noqa: BLE001 – Gate darf nie am Heiler scheitern
         print(f"  ⚠ URL-Hygiene am Gate nicht verfügbar: {exc}")
+
+    # ============ R5-ABSATZ-HART ALS LETZTE LINIE (#286) =====================
+    # Lange Absätze sind kein Grund für dauerhaften Content-Verlust, wenn sie
+    # deterministisch an Satzgrenzen teilbar sind. Deshalb heilt das Gate hier
+    # direkt VOR der harten Textverständnisprüfung. Bleibt danach noch ein
+    # R5-Hart-Fund, blockiert `textverstaendnis_failures()` wie bisher.
+    r5_self_heal_candidates(candidates)
 
     today = datetime.date.today().isoformat()
     len_fail, len_warn = check_length_failures()
