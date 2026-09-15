@@ -105,7 +105,10 @@ Kannst du nach einem Schaden nicht im Haus wohnen, brauchst du ein Hotel. Die Ve
 
 So eine Wohngebäudeversicherung nimmt man nicht nebenbei mit. Sie zahlt bei Feuer, Leitungswasser, Sturm und Hagel. Elementarschäden deckt nur eine Zusatz‑Klausel.
 
-Ohne Elementar bleibst du nach Starkregen auf dem Keller sitzen. Der Zusatz kostet oft 80–300 € extra im Jahr. In manchen ZÜRS‑Zonen bekommst du ihn schwer. Vergleiche darum nicht nur den Preis. Prüfe auch, ob dich der Versicherer überhaupt nimmt.
+Ohne Elementar bleibst du nach Starkregen auf dem Keller sitzen. Der Zusatz kostet oft 80–300 € extra im Jahr.
+
+In manchen ZÜRS‑Zonen bekommst du ihn schwer. Vergleiche darum nicht nur den Preis. Prüfe auch, ob dich der Versicherer überhaupt nimmt.
+
 
 **Gleitender Neuwert.** Die Summe muss mitbauen, sonst bist du in zehn Jahren unterversichert. Prüfe: Nutzt der Vertrag den Wert 1914 oder einen aktuellen Bogen? Lass dir die Wertermittlung schriftlich geben.
 
@@ -117,7 +120,10 @@ Ohne Elementar bleibst du nach Starkregen auf dem Keller sitzen. Der Zusatz kost
 
 ## Kostenbeispiel Einfamilienhaus 140 m², Baujahr 1998, ZÜRS 1‑2
 
-Feuer, Leitungswasser und Sturm kosten oft 280–450 €. Mit Elementarschutz sind es 380–700 €. Eine Selbstbeteiligung von 500–1.000 € senkt die Prämie. Doch bei Leitungswasser ist der Kleinschaden am häufigsten. Rechne mit ein bis zwei Schäden in 15 Jahren. Sparst du 150 €, musst du kleine Reparaturen selbst zahlen.
+Feuer, Leitungswasser und Sturm kosten oft 280–450 €. Mit Elementarschutz sind es 380–700 €.
+
+Eine Selbstbeteiligung von 500–1.000 € senkt die Prämie. Doch bei Leitungswasser ist der Kleinschaden am häufigsten. Rechne mit ein bis zwei Schäden in 15 Jahren. Sparst du 150 €, musst du kleine Reparaturen selbst zahlen.
+
 
 Bist du unterversichert, kürzt der Versicherer im Schaden mit. Beispiel: Ein Haus ist 250.000 € wert, versichert sind 200.000 €. Bei einem Schaden von 50.000 € zahlt die Police nur 40.000 €. So wird Sparen am falschen Ende teuer.
 

@@ -24,9 +24,15 @@ pin_description: "*Werbung | Du brauchst keinen teureren Tarif für schnelleres 
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
-Wusstest du, dass dein Anbieter mitlesen kann? Er sieht jede Seite, die du aufrufst – auch im Inkognito-Modus. Der Grund ist der **DNS-Server** deines Providers. Er ist das Telefonbuch des Internets. Er übersetzt Namen wie www.google.de in Zahlen.
+Wusstest du, dass dein Anbieter mitlesen kann? Er sieht jede Seite, die du aufrufst – auch im Inkognito-Modus.
 
-Die meisten nutzen automatisch den DNS-Server ihres Anbieters. Es gibt aber schnellere und sicherere Optionen. Der Wechsel ist kostenlos. Er dauert fünf Minuten. Und er verkürzt oft die Ladezeit. Welche Anbieter 2026 zählen, zeigt der [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
+Der Grund ist der **DNS-Server** deines Providers. Er ist das Telefonbuch des Internets. Er übersetzt Namen wie www.google.de in Zahlen.
+
+
+Die meisten nutzen automatisch den DNS-Server ihres Anbieters. Es gibt aber schnellere und sicherere Optionen.
+
+Der Wechsel ist kostenlos. Er dauert fünf Minuten. Und er verkürzt oft die Ladezeit. Welche Anbieter 2026 zählen, zeigt der [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
+
 
 
 ---
@@ -62,11 +68,17 @@ DNSPerf misst täglich tausende Server weltweit. Im August 2026 lagen die Antwor
 
 ### 2. Mehr Datenschutz
 
-Dein Anbieter sieht jede Domain, die du besuchst. Das gilt auch bei HTTPS. In Deutschland ist der Verkauf von Surf-Daten verboten. Doch Netzmanagement und Behörden können mitlesen. Öffentliche DNS-Anbieter speichern weniger. Sie schützen deine Privatsphäre besser.
+Dein Anbieter sieht jede Domain, die du besuchst. Das gilt auch bei HTTPS.
+
+In Deutschland ist der Verkauf von Surf-Daten verboten. Doch Netzmanagement und Behörden können mitlesen. Öffentliche DNS-Anbieter speichern weniger. Sie schützen deine Privatsphäre besser.
+
 
 ### 3. Eingebauter Phishing- und Malware-Schutz
 
-Quad9 (9.9.9.9) und Cloudflare (1.1.1.2) prüfen jede Anfrage. Auch der Family-Server (1.1.1.3) macht das. Bekannte Phishing- und Malware-Seiten werden direkt blockiert. Dein Gerät baut gar keine Verbindung auf. Das hilft Kindern und allen im Haushalt.
+Quad9 (9.9.9.9) und Cloudflare (1.1.1.2) prüfen jede Anfrage. Auch der Family-Server (1.1.1.3) macht das.
+
+Bekannte Phishing- und Malware-Seiten werden direkt blockiert. Dein Gerät baut gar keine Verbindung auf. Das hilft Kindern und allen im Haushalt.
+
 
 ## Die 3 attraktiven kostenlosen DNS-Server im Überblick
 
@@ -166,7 +178,10 @@ Der Wechsel ist ein 5-Minuten-Hebel mit geringem Risiko. Er ersetzt keinen Tarif
 
 Viele merken den Unterschied erst beim genauen Hinsehen. Hinter jeder Seite steckt eine DNS-Anfrage. Ein schneller Anbieter spart so mehrere Sekunden am Tag.
 
-Manche Dienste filtern Werbung und Tracker. Andere bieten Jugendschutz. Das ersetzt keinen Adblocker. Doch es ist eine zweite Schicht. Gerade für Smart-TV und Konsole.
+Manche Dienste filtern Werbung und Tracker. Andere bieten Jugendschutz.
+
+Das ersetzt keinen Adblocker. Doch es ist eine zweite Schicht. Gerade für Smart-TV und Konsole.
+
 
 Notiere deine alte Konfiguration. Mach einen Screenshot der Router-Seite. Stelle zwei unabhängige Anbieter ein. Teste 48 Stunden lang Banking, Streaming und VPN.
 

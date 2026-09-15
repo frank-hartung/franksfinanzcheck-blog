@@ -236,7 +236,10 @@ Nimm nur eine Sache mit: Automatisiere die Sparrate am 1. des Monats. Mach den R
 
 ## Fazit: Gewohnheiten schlagen Disziplin
 
-Alltagssparen braucht keine eiserne Disziplin. Es braucht kluge Systeme. Der Dauerauftrag aufs Tagesgeld läuft automatisch. Die Budgets sind klar begrenzt. Dein Vermögen wächst dann Monat für Monat.
+Alltagssparen braucht keine eiserne Disziplin. Es braucht kluge Systeme.
+
+Der Dauerauftrag aufs Tagesgeld läuft automatisch. Die Budgets sind klar begrenzt. Dein Vermögen wächst dann Monat für Monat.
+
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Konto & Karten optimieren](../../pillar/konto-karten/) · [Sparen im Herbst](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)
 

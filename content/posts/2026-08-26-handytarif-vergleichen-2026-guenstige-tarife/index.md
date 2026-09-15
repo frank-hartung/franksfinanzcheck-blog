@@ -26,7 +26,10 @@ pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 
 Hast du deinen Handyvertrag schon genauer geprüft? Millionen zahlen Monat für Monat 25 bis 45 €. Für Leistung, die heute die Hälfte kostet.
 
-Der Markt ist 2026 hart umkämpft. Discounter und Submarken unterbieten sich mit Allnet-Flats. Teilweise ist 5G für unter 10 € drin. Doch das **Kleingedruckte** hat Fallstricke. Da sind Datenautomatik, Roaming-Gebühren und die 24-Monate-Laufzeit. Worauf es beim **Handytarif-Vergleich** ankommt, zeigt dieser Überblick. Mit einem Wechsel sparst du bis zu **360 € im Jahr**.
+Der Markt ist 2026 hart umkämpft. Discounter und Submarken unterbieten sich mit Allnet-Flats. Teilweise ist 5G für unter 10 € drin.
+
+Doch das **Kleingedruckte** hat Fallstricke. Da sind Datenautomatik, Roaming-Gebühren und die 24-Monate-Laufzeit. Worauf es beim **Handytarif-Vergleich** ankommt, zeigt dieser Überblick. Mit einem Wechsel sparst du bis zu **360 € im Jahr**.
+
 
 
 ---
@@ -125,17 +128,26 @@ Bevor du einen Vertrag abschließt, prüfe systematisch diese acht Kriterien:
 | **Ersparnis pro Jahr** | – | **300 €** |
 | **Ersparnis über 24 Monate** | – | **600 €** |
 
-Mein Wechsel zeigt: Mehr Leistung muss nicht mehr kosten. Ich habe doppeltes Volumen und 5G bekommen. Der Monatsbeitrag sank um 25 €. Der Wechsel dauerte 15 Minuten. Auch die Rufnummernmitnahme lief reibungslos.
+Mein Wechsel zeigt: Mehr Leistung muss nicht mehr kosten. Ich habe doppeltes Volumen und 5G bekommen.
+
+Der Monatsbeitrag sank um 25 €. Der Wechsel dauerte 15 Minuten. Auch die Rufnummernmitnahme lief reibungslos.
+
 
 ## Die 5 häufigsten Fallstricke beim Vertragsabschluss
 
 ### 1. Die Datenautomatik
 
-Das Volumen ist aufgebraucht? Dann wird automatisch nachgebucht. Oft kostet das extra. Drei Nachbuchungen verdoppeln den Monatspreis. **Lösung:** Nimm einen Tarif mit Drosselung. Oder schalte die Datenautomatik ab.
+Das Volumen ist aufgebraucht? Dann wird automatisch nachgebucht.
+
+Oft kostet das extra. Drei Nachbuchungen verdoppeln den Monatspreis. **Lösung:** Nimm einen Tarif mit Drosselung. Oder schalte die Datenautomatik ab.
+
 
 ### 2. Lange Mindestlaufzeiten mit stillschweigender Verlängerung
 
-24 Monate Laufzeit. Dann verlängert sich der Vertrag oft automatisch. Willst du das nicht, musst du 3 Monate vorher kündigen. Seit Dezember 2021 ist diese Praxis meist unwirksam. Doch einige Anbieter versuchen es weiter. **Empfehlung:** Kündige direkt nach der Aktivierung schriftlich.
+24 Monate Laufzeit. Dann verlängert sich der Vertrag oft automatisch.
+
+Willst du das nicht, musst du 3 Monate vorher kündigen. Seit Dezember 2021 ist diese Praxis meist unwirksam. Doch einige Anbieter versuchen es weiter. **Empfehlung:** Kündige direkt nach der Aktivierung schriftlich.
+
 
 ### 3. "EU-Roaming inklusive", aber mit Einschränkungen
 
@@ -161,13 +173,19 @@ Manche Discounter nehmen Geld für den Telefon-Support. Oder es gibt nur einen C
 
 ## Zusatz-Tipp: Combo-Angebote nutzen
 
-Viele Anbieter geben Rabatt beim Bündel. Handy plus DSL aus einer Hand spart oft bis zu 20 € im Monat. Aber Vorsicht: Prüfe vorher die Einzelpreise. Manchmal ist das Bündel teurer. Einen guten DSL-Tarif findest du über den [DSL-Vergleich](/go/dsl/). Mehr dazu steht in meinem [Ratgeber zum richtigen DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
+Viele Anbieter geben Rabatt beim Bündel. Handy plus DSL aus einer Hand spart oft bis zu 20 € im Monat.
+
+Aber Vorsicht: Prüfe vorher die Einzelpreise. Manchmal ist das Bündel teurer. Einen guten DSL-Tarif findest du über den [DSL-Vergleich](/go/dsl/). Mehr dazu steht in meinem [Ratgeber zum richtigen DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
+
 
 <!-- premium-length-2026 -->
 
 ## Netz, nicht Logo: 2026 zählen die drei Infrastrukturen
 
-Discounter nutzen das Telekom-, Vodafone- oder O2-Netz. Ein 5G-Logo heißt nicht, dass 5G an deinem Bahnhof ankommt. Prüfe die Netzkarte. Teste 7 Tage, bevor du 24 Monate bindest. Hängst du oft im WLAN, reichen 8 bis 15 GB. Pendelst du viel, zählt das Netz auf dem Land mehr. Der billigste Gigabyte-Preis in der Stadt hilft dir dort nicht.
+Discounter nutzen das Telekom-, Vodafone- oder O2-Netz. Ein 5G-Logo heißt nicht, dass 5G an deinem Bahnhof ankommt. Prüfe die Netzkarte.
+
+Teste 7 Tage, bevor du 24 Monate bindest. Hängst du oft im WLAN, reichen 8 bis 15 GB. Pendelst du viel, zählt das Netz auf dem Land mehr. Der billigste Gigabyte-Preis in der Stadt hilft dir dort nicht.
+
 
 Starte die Rufnummernmitnahme parallel zum neuen Vertrag. Nicht erst danach. Die Portierung in 24 Stunden ist heute Standard. Mauert der Altanbieter, eskaliere mit der Vertragsnummer.
 
@@ -175,7 +193,10 @@ Rechne Combo-Tarife nur, wenn beide Teile allein teurer sind. Ein günstiger SIM
 
 ## Fazit: Jetzt vergleichen lohnt sich wie nie
 
-Noch nie war der Markt so günstig. Allnet-Flats mit 5G gibt es unter 10 €. Trotzdem zahlen Millionen 25 bis 40 € für alte Verträge. Ein Vergleich dauert 15 Minuten. Er bringt **200 bis 360 € im Jahr**. Prüfe Netz, Volumen und Kleingedrucktes. Der Aufwand lohnt sich dauerhaft.
+Noch nie war der Markt so günstig. Allnet-Flats mit 5G gibt es unter 10 €. Trotzdem zahlen Millionen 25 bis 40 € für alte Verträge.
+
+Ein Vergleich dauert 15 Minuten. Er bringt **200 bis 360 € im Jahr**. Prüfe Netz, Volumen und Kleingedrucktes. Der Aufwand lohnt sich dauerhaft.
+
 
 **Weiterlesen:** [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
 

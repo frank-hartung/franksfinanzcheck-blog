@@ -117,7 +117,7 @@ def check_robots(live: str, local: str, F: list, soft: list) -> None:
                             "im Repo steht sie (Cloudflare-Regel oder Cache?!)"))
     for bot, lines in lg.items():
         disallow = [l for l in lines if re.match(r"disallow:\s*/\s*$", l, re.I)]
-        if disallow and bot != "*":
+        if disallow and bot in ("Pinterestbot", *ANSWER_BOTS, "*"):
             F.append(("L1", f"{bot}: live disallowt das ganze Netz (`Disallow: /`) – "
                             "Rich Pins und Antwort-Zitate brechen weg"))
     if local and lgc:

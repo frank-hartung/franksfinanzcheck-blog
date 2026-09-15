@@ -30,7 +30,10 @@ Im Spätsommer denkt kaum jemand an die Heizung. Genau das ist ein teurer Fehler
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Merkt jemand erst im November, dass die Heizkörper gluckern? Dann ist es zu spät. Auch wer dann erst den Tarif prüft, zahlt drauf. Besser ist es, im Spätsommer zu handeln. Mit der richtigen Vorbereitung senkst du deine **Gasrechnung** um bis zu **720 €**. Wir zeigen dir die fünf häufigsten Kostenfallen und geben dir sofort umsetzbare Profi‑Tipps.
+Merkt jemand erst im November, dass die Heizkörper gluckern? Dann ist es zu spät.
+
+Auch wer dann erst den Tarif prüft, zahlt drauf. Besser ist es, im Spätsommer zu handeln. Mit der richtigen Vorbereitung senkst du deine **Gasrechnung** um bis zu **720 €**. Wir zeigen dir die fünf häufigsten Kostenfallen und geben dir sofort umsetzbare Profi‑Tipps.
+
 
 ---
 
@@ -159,7 +162,10 @@ Addiere einen **5 %‑Puffer**, wenn der letzte Winter milder war. Der so bere
 
 ## Warum der Spätsommer über die Winterrechnung entscheidet
 
-Heizen ist saisonal. Verträge sind es nicht. Wer im August Kessel, Thermostate und Tarif prüft, kauft Gas 10 % ‑ 20 % günstiger. Wer im Januar sucht, zahlt mehr. Termine bei Technikern und Bonusfenster sind jetzt frei. Im November sind sie voll.
+Heizen ist saisonal. Verträge sind es nicht.
+
+Wer im August Kessel, Thermostate und Tarif prüft, kauft Gas 10 % ‑ 20 % günstiger. Wer im Januar sucht, zahlt mehr. Termine bei Technikern und Bonusfenster sind jetzt frei. Im November sind sie voll.
+
 
 **Fehler 1:** Nur den Abschlag senken, nicht den Preis. Ein niedriger Abschlag bei teurem Arbeitspreis erzeugt die Nachzahlung, die im März weh tut.
 

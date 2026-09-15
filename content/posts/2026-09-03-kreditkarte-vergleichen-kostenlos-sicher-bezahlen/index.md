@@ -65,7 +65,10 @@ Reist du oft, prüfe vorher: Kostet die Karte im Ausland extra? Manche Gratis-Ka
 
 Die teuerste versteckte Gebühr ist das Fremdwährungsentgelt. Viele Banken verlangen beim Zahlen in Dollar oder Franken fast zwei Prozent Aufschlag. Bei 2.000 € Urlaubsbudget sind das rund 40 €.
 
-Dazu kommt die Dynamic Currency Conversion (DCC). Händler oder Automaten schlagen dir vor, gleich in Euro abzurechnen. Das klingt bequem, ist aber fast immer teuer. Der Wechselkurs ist dann schlecht. Zahl darum immer in der lokalen Währung.
+Dazu kommt die Dynamic Currency Conversion (DCC). Händler oder Automaten schlagen dir vor, gleich in Euro abzurechnen.
+
+Das klingt bequem, ist aber fast immer teuer. Der Wechselkurs ist dann schlecht. Zahl darum immer in der lokalen Währung.
+
 
 Eine gute Karte nutzt den Interbankenkurs ohne Aufschlag. Anbieter ohne Auslandsgebühr gibt es einige. Sie gehören zu den besten Karten für Reisen.
 
@@ -78,7 +81,10 @@ Kreditkartenbetrug ist in Deutschland selten, aber die Gefahr wächst mit jedem 
 - **Sofortige Sperrfunktion:** Die App des Kartenanbieters sollte es dir ermöglichen, die Karte jederzeit mit einem Klick zu sperren. Die kostenlose Sperr-Notrufnummer 116 116 gilt für alle Karten in Deutschland.
 - **SMS- oder Push-Benachrichtigung:** Bei jeder Zahlung über einem selbst gewählten Betrag bekommst du eine Meldung aufs Handy.
 
-Viele unterschätzen die Haftung bei Missbrauch. Bei Karten mit Online-Zugang haftest du meist nur bis 50 €. Dazu musst du den Verlust sofort melden. Bei manchen Karten entfällt sogar dieser Betrag. Prüfe das vor der Reise.
+Viele unterschätzen die Haftung bei Missbrauch. Bei Karten mit Online-Zugang haftest du meist nur bis 50 €.
+
+Dazu musst du den Verlust sofort melden. Bei manchen Karten entfällt sogar dieser Betrag. Prüfe das vor der Reise.
+
 
 ## Reiseversicherungen im Kreditkarten-Paket: Segen oder Müll?
 

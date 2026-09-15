@@ -107,7 +107,10 @@ Eine praxistaugliche Tabelle braucht nur drei Blätter:
 
 ## Methode 3: Stift und Papier (minimalistisch, aber zeitlos)
 
-Klingt altmodisch, wirkt aber bis heute. Das gilt, wenn du ein Konto hast und viel bar zahlst. Ein Heft mit zwei Spalten pro Tag reicht. Dazu ein Wochenabschluss. Vorteile: keine Technik, keine Datenweitergabe. Schreiben macht Ausgaben bewusst. Nachteile: keine Auswertungen, mehr Zeit, umständlich für Kartenzahler.
+Klingt altmodisch, wirkt aber bis heute. Das gilt, wenn du ein Konto hast und viel bar zahlst. Ein Heft mit zwei Spalten pro Tag reicht.
+
+Dazu ein Wochenabschluss. Vorteile: keine Technik, keine Datenweitergabe. Schreiben macht Ausgaben bewusst. Nachteile: keine Auswertungen, mehr Zeit, umständlich für Kartenzahler.
+
 
 ## Der direkte Vergleich: Welche Methode passt zu dir?
 
@@ -167,7 +170,10 @@ Bei 2.500 € netto heißt das: 1.250 € Fixkosten, 750 € Freizeit, 500 �
 
 ## Fazit: Das passende Haushaltsbuch ist das, das du auch wirklich nutzt
 
-App, Excel oder Papier? Entscheidend ist nicht das Werkzeug, sondern die **Gewohnheit**. Meine Empfehlung nach acht Jahren Buchführung: Starte mit der Ausgabenanalyse deiner Banking-App. Sie kostet nichts. Sie nimmt dir die meiste Arbeit ab. Schon in der ersten Woche liefert sie gute Daten.
+App, Excel oder Papier? Entscheidend ist nicht das Werkzeug, sondern die **Gewohnheit**.
+
+Meine Empfehlung nach acht Jahren Buchführung: Starte mit der Ausgabenanalyse deiner Banking-App. Sie kostet nichts. Sie nimmt dir die meiste Arbeit ab. Schon in der ersten Woche liefert sie gute Daten.
+
 
 Später kannst du jederzeit auf Excel umsteigen. Wichtig ist nur eines: **Fang heute an**. Jeder Monat ohne Haushaltsbuch lässt dich vielleicht hunderte Euro verlieren.
 

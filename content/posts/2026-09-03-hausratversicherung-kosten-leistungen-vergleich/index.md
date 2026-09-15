@@ -30,9 +30,15 @@ cover:
 
 
 
-Stell dir vor: Du kommst nach dem Wochenende nach Hause. Die Tür steht offen. Im Flur liegt dein Laptop, daneben die leere Hülle. Im Schlafzimmer fehlt der Schmuck, im Wohnzimmer der Fernseher. Die Polizei schätzt den Schaden auf 18.000 €. Deine Ersparnisse decken das nicht.
+Stell dir vor: Du kommst nach dem Wochenende nach Hause. Die Tür steht offen.
 
-Genau dafür gibt es die [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/). Sie ersetzt deinen Hausrat nach einem Einbruch zum Neuwert. Trotzdem zögern viele. Sie halten den Tarif für teuer oder verstehen die Leistungen nicht. Dabei kostet guter Schutz oft weniger als eine Pizza im Monat.
+Im Flur liegt dein Laptop, daneben die leere Hülle. Im Schlafzimmer fehlt der Schmuck, im Wohnzimmer der Fernseher. Die Polizei schätzt den Schaden auf 18.000 €. Deine Ersparnisse decken das nicht.
+
+
+Genau dafür gibt es die [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/). Sie ersetzt deinen Hausrat nach einem Einbruch zum Neuwert.
+
+Trotzdem zögern viele. Sie halten den Tarif für teuer oder verstehen die Leistungen nicht. Dabei kostet guter Schutz oft weniger als eine Pizza im Monat.
+
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -68,7 +74,10 @@ Genauso wichtig sind die Lücken. Die Versicherung ersetzt weder Bargeld in jede
 - Wertgegenstände wie Schmuck, Uhren oder Kunst haben je nach Tarif eine eigene Entschädigungsgrenze
 - Grobe Fahrlässigkeit, etwa die offene Terrassentür beim Weggehen, kann zu Kürzungen führen – gute Tarife verzichten aber darauf
 
-Wohnst du im Erdgeschoss in einem Hochwassergebiet, denke über den Elementar-Baustein nach. Er kostet je nach Lage 10 bis 40 € im Jahr. Im Ernstfall entscheidet er über deine Existenz. Die Rückstau-Klausel gehört oft schon dazu. Prüfe sie trotzdem im Kleingedruckten.
+Wohnst du im Erdgeschoss in einem Hochwassergebiet, denke über den Elementar-Baustein nach. Er kostet je nach Lage 10 bis 40 € im Jahr.
+
+Im Ernstfall entscheidet er über deine Existenz. Die Rückstau-Klausel gehört oft schon dazu. Prüfe sie trotzdem im Kleingedruckten.
+
 
 ## Was eine Hausratversicherung kostet
 
@@ -117,7 +126,10 @@ Portale zeigen Preise. Die Wahrheit steckt in den Bedingungen. Prüfe vor dem Ab
 - **Kurzfristige Kündigung nach Schaden:** Darfst du nach einem Schaden zum Stichtag wechseln? Die meisten Tarife erlauben das – ein starkes Zeichen für gute Konditionen.
 - **Bewegungsmelder-Rabatt:** Wer eine Alarmanlage oder einen Bewegungsmelder besitzt, bekommt oft fünf Prozent Nachlass. Das lässt sich leicht nachrüsten.
 
-Ergänzend hilft der Blick in meine Ratgeber zur [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) und zur [Wohngebäudeversicherung](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/). Die Haftpflicht [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor Forderungen anderer. Die Gebäudeversicherung brauchen Eigentümer. Die Hausratversicherung sichert deine Sachen. Zusammen ergeben die drei ein solides Fundament.
+Ergänzend hilft der Blick in meine Ratgeber zur [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) und zur [Wohngebäudeversicherung](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/). Die Haftpflicht [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor Forderungen anderer.
+
+Die Gebäudeversicherung brauchen Eigentümer. Die Hausratversicherung sichert deine Sachen. Zusammen ergeben die drei ein solides Fundament.
+
 
 ## Wann sich eine Hausratversicherung wirklich lohnt
 

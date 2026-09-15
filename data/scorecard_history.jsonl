@@ -9,3 +9,5 @@
 {"ampel": "GREEN", "awin": 0, "clicks": 0, "cwv": "GREEN", "cwv_state": "OK", "date": "2026-09-09", "decay": 0, "drafts": 11, "lektor": 0, "live": 30, "readability": 64.4, "score": 95, "secret_amber": 0, "secret_red": 1}
 {"ampel": "GREEN", "awin": 0, "clicks": 0, "cwv": "GREEN", "cwv_state": "OK", "date": "2026-09-09", "decay": 0, "drafts": 11, "lektor": 0, "live": 30, "readability": 64.4, "score": 95, "secret_amber": 0, "secret_red": 1}
 {"ampel": "GREEN", "awin": 0, "clicks": 0, "cwv": "GREEN", "cwv_state": "OK", "date": "2026-09-14", "decay": 0, "drafts": 19, "lektor": null, "live": 32, "readability": 62.9, "score": 94, "secret_amber": 1, "secret_red": 1}
+{"ampel": "GREEN", "awin": 0, "clicks": 0, "cwv": "GREEN", "cwv_state": "OK", "date": "2026-09-15", "decay": 0, "drafts": 19, "lektor": null, "live": 32, "readability": 62.9, "score": 85, "secret_amber": 0, "secret_red": 4}
+{"ampel": "GREEN", "awin": 0, "clicks": 0, "cwv": "GREEN", "cwv_state": "OK", "date": "2026-09-15", "decay": 0, "drafts": 19, "lektor": null, "live": 32, "readability": 64.6, "score": 85, "secret_amber": 0, "secret_red": 4}

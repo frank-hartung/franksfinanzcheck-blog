@@ -1,17 +1,17 @@
 {
   "counts": {
     "amber": 0,
-    "green": 4,
+    "green": 5,
     "info": 4,
-    "red": 3
+    "red": 2
   },
-  "fingerprint": "cd219439a7c0",
-  "generated": "2026-09-14T10:42:59+00:00",
+  "fingerprint": "c18cb0520148",
+  "generated": "2026-09-15T08:47:38+00:00",
   "issue_action": "report",
   "last": {
     "action": "report",
     "changed": true,
-    "fingerprint": "cd219439a7c0",
+    "fingerprint": "c18cb0520148",
     "verdict": "RED"
   },
   "steps": {
@@ -23,7 +23,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "AWIN-REPORT.md",
-      "ts": "2026-09-14T10:42:57+00:00"
+      "ts": "2026-09-15T08:47:37+00:00"
     },
     "build": {
       "actionable": false,
@@ -33,7 +33,7 @@
       "level": "green",
       "message": "Schritt erfolgreich (Report folgt nicht)",
       "report": "",
-      "ts": "2026-09-14T10:42:55+00:00"
+      "ts": "2026-09-15T08:47:36+00:00"
     },
     "clicks": {
       "actionable": false,
@@ -43,7 +43,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "CLICK-REPORT.md",
-      "ts": "2026-09-14T10:42:57+00:00"
+      "ts": "2026-09-15T08:47:37+00:00"
     },
     "cwv": {
       "actionable": false,
@@ -53,7 +53,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "CWV-REPORT.md",
-      "ts": "2026-09-14T10:42:55+00:00"
+      "ts": "2026-09-15T08:47:37+00:00"
     },
     "decay": {
       "actionable": false,
@@ -63,27 +63,27 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "DECAY-REPORT.md",
-      "ts": "2026-09-14T10:42:55+00:00"
+      "ts": "2026-09-15T08:47:36+00:00"
     },
     "lesbarkeit": {
-      "actionable": true,
-      "code": "red_finding",
-      "exit": 1,
-      "findings": 4,
-      "level": "red",
-      "message": "2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert/index.md – Flesch 49.7 < Floor 55; 2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug/index.md – Flesch 53.2 < Floor 55; 2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest/index.md – Flesch 54.3 < Floor 55; 2026-0",
+      "actionable": false,
+      "code": "ok",
+      "exit": 0,
+      "findings": 0,
+      "level": "green",
+      "message": "in Ordnung",
       "report": "LESBARKEIT-REPORT.md",
-      "ts": "2026-09-14T10:42:57+00:00"
+      "ts": "2026-09-15T08:47:37+00:00"
     },
     "live-policy": {
       "actionable": true,
       "code": "red_finding",
       "exit": 1,
-      "findings": 9,
+      "findings": 1,
       "level": "red",
-      "message": "L1: Amazonbot: live disallowt das ganze Netz (`Disallow: /`) – Rich Pins und Antwort-Zitate brechen weg; L1: Applebot-Extended: live disallowt das ganze Netz (`Disallow: /`) – Rich Pins und Antwort-Zitate brechen weg; L1: Bytespider: live disallowt das ganze Netz (`Disallow: /`) – Rich Pins und Antw",
+      "message": "Netz: keine Verbindung zur Site (DNS/TLS/Zeitlimit)",
       "report": "LIVE-POLICY-REPORT.md",
-      "ts": "2026-09-14T10:42:58+00:00"
+      "ts": "2026-09-15T08:47:37+00:00"
     },
     "pinperf": {
       "actionable": false,
@@ -93,7 +93,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "PINTEREST-PERF-REPORT.md",
-      "ts": "2026-09-14T10:42:57+00:00"
+      "ts": "2026-09-15T08:47:37+00:00"
     },
     "scorecard": {
       "actionable": false,
@@ -103,17 +103,17 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "EDITORIAL-SCORECARD.md",
-      "ts": "2026-09-14T10:42:59+00:00"
+      "ts": "2026-09-15T08:47:38+00:00"
     },
     "secrets": {
       "actionable": true,
       "code": "red_finding",
       "exit": 1,
-      "findings": 2,
+      "findings": 4,
       "level": "red",
-      "message": "`PINTEREST_ACCESS_TOKEN` – Pinterest Access-Token: Live-Check abgelehnt – Einmalige Neu-Autorisierung nötig (danach trägt sich der Kanal selbst): docs/PINTEREST-TOKEN-RUNBOOK.md – `python3 scripts/pinterest_auth.py --auth-url`; `PINTEREST_TOKEN_KEY` – Pinterest Verschlüsselungs-Key: kein Erfolgs-/Li",
+      "message": "`GROQ_API_KEY` – Groq KI-Key (`GROQ_API_KEY`) fehlt im Env – der Kanal kann nicht arbeiten; `GEMINI_API_KEY` – Gemini KI-Key (`GEMINI_API_KEY`) fehlt im Env – der Kanal kann nicht arbeiten; `PINTEREST_ACCESS_TOKEN` – Pinterest Access-Token (`PINTEREST_ACCESS_TOKEN`) fehlt im Env – der Kanal kann nic",
       "report": "SECRETS-REPORT.md",
-      "ts": "2026-09-14T10:42:56+00:00"
+      "ts": "2026-09-15T08:47:37+00:00"
     },
     "umami": {
       "actionable": false,
@@ -123,7 +123,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "data/umami_clicks.meta.json",
-      "ts": "2026-09-14T10:42:57+00:00"
+      "ts": "2026-09-15T08:47:37+00:00"
     }
   },
   "verdict": "RED",

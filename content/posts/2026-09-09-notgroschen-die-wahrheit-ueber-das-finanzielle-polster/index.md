@@ -80,7 +80,10 @@ Viele Menschen rechnen ihr Girokonto schön. Das ist ein Fehler. Geld auf dem Gi
 
 ## Wo parkst du deinen Notgroschen am besten?
 
-Ein Notgroschen muss vor allem schnell verfügbar sein. Rendite ist hier zweitrangig. Wenn am Freitagabend die Heizung ausfällt, hilft dir ein ETF nicht, den du erst verkaufen musst. Noch schlechter sind Festgeld, Bausparverträge oder Krypto. Dort fehlt dir im Ernstfall entweder der schnelle Zugriff oder die nötige Stabilität.
+Ein Notgroschen muss vor allem schnell verfügbar sein. Rendite ist hier zweitrangig.
+
+Wenn am Freitagabend die Heizung ausfällt, hilft dir ein ETF nicht, den du erst verkaufen musst. Noch schlechter sind Festgeld, Bausparverträge oder Krypto. Dort fehlt dir im Ernstfall entweder der schnelle Zugriff oder die nötige Stabilität.
+
 
 Für die meisten Haushalte ist ein Tagesgeldkonto die beste Lösung. Es trennt das Geld sauber vom Alltag. Außerdem bleibt die Reserve mit kurzer Verfügbarkeit nutzbar, und du nimmst im besten Fall noch ein paar Zinsen mit.
 
@@ -141,7 +144,10 @@ Ein Notgroschen scheitert selten an Mathematik. Meist scheitert er am Alltag. Di
 
 ## Warum sich ein voller Notgroschen sofort gut anfühlt
 
-Der größte Nutzen ist nicht nur finanziell. Ein Notgroschen verändert deine Entscheidungen. Wer ein Polster hat, bleibt bei Problemen ruhiger. Du musst bei einer Reparatur nicht hektisch rechnen. Du kannst Angebote vergleichen und unter Druck bessere Entscheidungen treffen.
+Der größte Nutzen ist nicht nur finanziell. Ein Notgroschen verändert deine Entscheidungen.
+
+Wer ein Polster hat, bleibt bei Problemen ruhiger. Du musst bei einer Reparatur nicht hektisch rechnen. Du kannst Angebote vergleichen und unter Druck bessere Entscheidungen treffen.
+
 
 Genau darin steckt der eigentliche Wert. Die Reserve kauft dir Zeit. Und Zeit ist im Finanzalltag oft wichtiger als ein Prozentpunkt mehr Rendite.
 

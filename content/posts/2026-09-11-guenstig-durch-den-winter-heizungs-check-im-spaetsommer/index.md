@@ -76,8 +76,10 @@ Programmierbare Thermostate sind günstig und helfen dir dabei, Wohn- und Schlaf
 
 Danach lohnt sich ein Blick auf die Vorlauftemperatur deiner Anlage.
 Viele Heizungen laufen unnötig hoch eingestellt.
+
 Das kostet Energie. Es bringt oft keinen echten Gewinn an Komfort.
 Ein Fachbetrieb prüft für dich, welche Einstellung zu deinem Haus passt.
+
 
 **Faustregel:** Ein Grad weniger Raumtemperatur spart ungefähr sechs Prozent Heizenergie.
 
