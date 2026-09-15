@@ -124,7 +124,7 @@ Prüfe zudem das Alter deiner Umwälzpumpe. Alte Modelle laufen oft mit einer ko
 
 ## Fazit: Heizungswartung – So bereitest du dein Heim effizient vor
 
-Der Hebel bei **Heizungswartung: So bereitest du dein Heim effizient vor** sitzt nicht im Verzicht, sondern im Nachrechnen. Gewartet wird zwischen August und September – dann sinkt der Verbrauch um 10 bis 15 %, und wer mit 12 Cent pro kWh rechnet, sieht den Unterschied bei rund 1.440 € Jahreskosten sofort. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Heizungswartung: So bereitest du dein Heim effizient vor** sitzt nicht im Verzicht, sondern im Nachrechnen. Gewartet wird zwischen August und September – dann sinkt der Verbrauch um 10 bis 15 %, und wer mit 12 Cent pro kWh rechnet, sieht den Unterschied bei rund 1.440 € Jahreskosten sofort. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 ## Häufige Fragen
 

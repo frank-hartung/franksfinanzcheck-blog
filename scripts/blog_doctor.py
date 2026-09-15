@@ -59,6 +59,10 @@ KETTE = [
 
     # (skript, basis-args, phase, zweck)
     ("heading_guard.py",      ["--fix"],                "A-Text", "Überschriften-Hygiene H1-H3: kein <br>, Anker-stabil (27.08. hinzu)"),
+    # LISTEN-GUARD (15.09.): vor den uebrigen Text-Wachen – er verschiebt
+    # Zeilengrenzen (geleimte Aufzählungen), und Dash-/Unit-/Stil-Wachen
+    # sollen das Ergebnis sehen, nicht den Fehler.
+    ("listen_guard.py",        ["--fix"],              "A-Text", "Geleimte Listenpunkte L1, Marker-Stil je Ebene L2 (Wortbeweis)"),
     # Casing fuehrt die Textkette: es stellt Marken-/Akronym-Kanon und
     # Tagschreibung her, worauf Dash-/Compound-/Unit-Wachen aufsetzen. Der
     # --plan-Schritt heilt data/pinterest_plan.yaml (Quelle der Pin-Texte)

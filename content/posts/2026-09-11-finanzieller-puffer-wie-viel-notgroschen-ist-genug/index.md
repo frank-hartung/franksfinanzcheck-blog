@@ -100,7 +100,8 @@ Betrachten wir einen Single‑Haushalt in einer deutschen Großstadt mit 2.500�
     * Lebensmittel: 400 € * Versicherungen & Abos: 150 €
     * Mobilität (Auto/ÖPNV): 200 € * **Gesamtausgaben:** 1.650 €
 
-* **Zielsetzung:** Vier Monatsausgaben als Sicherheit. * Rechnung: 1.650 € × 4 = 6.600 €
+* **Zielsetzung:** Vier Monatsausgaben als Sicherheit.
+* Rechnung: 1.650 € × 4 = 6.600 €
 
 * **Sparplan:** * Monatliche Rate (20 %): 500 €
     * Dauer bis zum Ziel: ca. 13,2 Monate.
@@ -135,13 +136,17 @@ Nutze diesen Check, um deine laufenden Kosten dauerhaft zu senken. Jede eingespa
 
 ## Praktische Checkliste zum Start deines finanziellen Puffers
 
-- [ ] **Fixkosten‑Liste** erstellen (Miete, Nebenkosten, Versicherungen, Lebensmittel, Transport). - [ ] **Monatlichen Sicherheitsfaktor** festlegen (4 × Fixkosten für Singles, 5‑6 × für Familien).
-- [ ] **Tagesgeldkonto** auswählen (mind. 100 % Einlagensicherung, kostenlose Kontoführung). - [ ] **Dauerauftrag** einrichten (automatischer Transfer am Zahltag).
-- [ ] **Notfall‑Trigger definieren** (z. B. Reparatur > 500 €, plötzlicher Jobverlust). - [ ] **Jährlichen Review‑Termin** im Kalender blocken (z. B. 1. Januar).
+- [ ] **Fixkosten‑Liste** erstellen (Miete, Nebenkosten, Versicherungen, Lebensmittel, Transport).
+- [ ] **Monatlichen Sicherheitsfaktor** festlegen (4 × Fixkosten für Singles, 5‑6 × für Familien).
+- [ ] **Tagesgeldkonto** auswählen (mind. 100 % Einlagensicherung, kostenlose Kontoführung).
+- [ ] **Dauerauftrag** einrichten (automatischer Transfer am Zahltag).
+- [ ] **Notfall‑Trigger definieren** (z. B. Reparatur > 500 €, plötzlicher Jobverlust).
+- [ ] **Jährlichen Review‑Termin** im Kalender blocken (z. B.
+1. Januar).
 
 ## Fazit: Finanzieller Puffer – Wie viel Notgroschen ist genug
 
-Der Hebel bei **Finanzieller Puffer: Wie viel Notgroschen ist genug?** sitzt nicht im Verzicht, sondern im Nachrechnen. Die Rechnung ist unspektakulär: drei bis sechs Netto-Monatsausgaben auf einem Tagesgeldkonto sind dauerhaft günstiger als ein Dispo, der hier mit 8 bis 14 % zu Buche schlägt. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Finanzieller Puffer: Wie viel Notgroschen ist genug?** sitzt nicht im Verzicht, sondern im Nachrechnen. Die Rechnung ist unspektakulär: drei bis sechs Netto-Monatsausgaben auf einem Tagesgeldkonto sind dauerhaft günstiger als ein Dispo, der hier mit 8 bis 14 % zu Buche schlägt. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 ## Häufige Fragen
 

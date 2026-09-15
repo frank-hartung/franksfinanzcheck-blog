@@ -135,7 +135,7 @@ Auch die Dämmung der obersten Geschossdecke oder des Kellerbodens sind Maßnahm
 
 ## Fazit: Heizkosten senken – Mit diesen Strategien sparst du sofort
 
-Der Hebel bei **Heizkosten senken: Mit diesen Strategien sparst du sofort** sitzt nicht im Verzicht, sondern im Nachrechnen. Nachgerechnet sind das 5 bis 15 % weniger Verbrauch, wenn Dichtigkeiten, Lüften und hydraulischer Abgleich zusammenkommen; die Faustregel bleibt: jedes Grad weniger Raumtemperatur spart rund 6 % der Heizkosten. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Heizkosten senken: Mit diesen Strategien sparst du sofort** sitzt nicht im Verzicht, sondern im Nachrechnen. Nachgerechnet sind das 5 bis 15 % weniger Verbrauch, wenn Dichtigkeiten, Lüften und hydraulischer Abgleich zusammenkommen; die Faustregel bleibt: jedes Grad weniger Raumtemperatur spart rund 6 % der Heizkosten. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 **Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Preisgarantie Gas](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · [günstige Gastarife 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
 ## Häufige Fragen

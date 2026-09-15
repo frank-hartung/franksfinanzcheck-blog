@@ -152,7 +152,8 @@ Der Schlüssel liegt im **Balance‑Act**: Sparen, wo es keinen Mehrwert gibt, u
 4. **Dauerauftrag** – 560 € sofort nach Gehaltseingang auf ETF‑Sparplan.
 
 **Ergebnis nach 2 Jahren:** * Notgroschen von 5.400 € (vollständig gefüllt).
-* ETF‑Bestand von ca. 15.000 € (inkl. Zinseszinseffekt). * Finanzielle Freiheit: Max kann jetzt 2‑3 Monate ohne Arbeit überbrücken, ohne Kredit aufzunehmen.
+* ETF‑Bestand von ca. 15.000 € (inkl. Zinseszinseffekt).
+* Finanzielle Freiheit: Max kann jetzt 2‑3 Monate ohne Arbeit überbrücken, ohne Kredit aufzunehmen.
 
 ## Die 50–30–20‑Regel, wenn die Miete 40 % frisst
 

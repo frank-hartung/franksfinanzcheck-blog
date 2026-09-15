@@ -165,7 +165,7 @@ Betrachte Frugalismus als ein Spiel oder ein Experiment. Wie wenig brauche ich w
 
 ## Fazit: Sparen ohne Frust – Vier Tricks gegen teure Alltagsfehler
 
-Der Hebel bei **Sparen ohne Frust: Vier Tricks gegen teure Alltagsfehler** sitzt nicht im Verzicht, sondern im Nachrechnen. Nachgerechnet bleiben 200 bis 2.500 € im Jahr, wenn die vier Alltagsfehler weg sind; bei den Nebenkosten-Klassikern sind es 80 bis 100 €, und ein Tarifwechsel drückt 60 € auf rund 35 €. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Sparen ohne Frust: Vier Tricks gegen teure Alltagsfehler** sitzt nicht im Verzicht, sondern im Nachrechnen. Nachgerechnet bleiben 200 bis 2.500 € im Jahr, wenn die vier Alltagsfehler weg sind; bei den Nebenkosten-Klassikern sind es 80 bis 100 €, und ein Tarifwechsel drückt 60 € auf rund 35 €. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
 **Lesetipp:** Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht

@@ -161,6 +161,14 @@ def rotation_kapazitaet() -> int:
         return ROTATION_KAP
 
 
+def _ueberlappung(vorher: list, jetzt: list) -> int:
+    """Laengster Anfang von `jetzt`, der ein Ende von `vorher` ist (0 = keiner)."""
+    for j in range(min(len(vorher), len(jetzt)), 0, -1):
+        if jetzt[:j] == vorher[len(vorher) - j:]:
+            return j
+    return 0
+
+
 def check_verlust(name: str, vorher: list, jetzt: list, kap=None):
     """(harte Fehler, Funde, Info) für einen Historien-Vergleich.
 
@@ -175,8 +183,14 @@ def check_verlust(name: str, vorher: list, jetzt: list, kap=None):
     if jetzt[:len(vorher)] == vorher:
         return hard, warn, (f"angewachsen um {len(jetzt) - len(vorher)}"
                             if len(jetzt) > len(vorher) else "unverändert")
-    if len(vorher) > kapz and len(jetzt) == kapz and jetzt == vorher[-kapz:]:
-        return hard, warn, f"W5-Rotation {len(vorher)} → {kapz} Records (erlaubt)"
+    # Ueberlappung: der groesste Anfang von `jetzt`, der ein Ende von `vorher`
+    # ist. Genau das liefert Rotation plus Anhaengen – das Altstuick rueckt nach
+    # vorn raus, der Rest bleibt Wort fuer Wort stehen.
+    j = _ueberlappung(vorher, jetzt)
+    neu_dazu = len(jetzt) - j
+    if j < len(vorher) and len(jetzt) == kapz and (len(vorher) + neu_dazu) > kapz:
+        return hard, warn, (f"W5-Rotation {len(vorher)} → {kapz} Records (erlaubt, "
+                            f"{len(vorher) - j} alte Zeilen gefallen, {neu_dazu} neu)")
     if len(jetzt) < len(vorher):
         hard.append(f"{name}: H6 Historie geschrumpft: {len(vorher)} → {len(jetzt)} "
                     f"Records, nicht als W5-Rotation erklärbar (Kapazität {kapz}) – "
@@ -213,6 +227,8 @@ SELBSTTEST_VERLUST = [
      ['{"ts": "2026-08-12T00:00:00Z"}'], 0, "unverändert"),
     ("rotation-erlaubt", ['{"n": %d}' % n for n in range(1, 41)],
      ['{"n": %d}' % n for n in range(13, 41)], 0, "W5-Rotation"),
+    ("schiebefenster", ['{"n": %d}' % n for n in range(1, 29)],
+     ['{"n": %d}' % n for n in range(2, 29)] + ['{"n": 29}'], 0, "W5-Rotation"),
     ("schwunderhalb", ['{"ts": "2026-08-01T00:00:00Z"}', '{"ts": "2026-08-02T00:00:00Z"}',
                        '{"ts": "2026-08-03T00:00:00Z"}'],
      ['{"ts": "2026-08-02T00:00:00Z"}', '{"ts": "2026-08-03T00:00:00Z"}'], 1, "geschrumpft"),

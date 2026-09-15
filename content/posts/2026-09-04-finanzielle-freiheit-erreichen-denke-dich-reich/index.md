@@ -100,12 +100,12 @@ Setze mindestens zwei dieser Tools ein – zum Beispiel einen Dauerauftrag für 
 
 Zeit ist dein stärkster Partner beim Anlegen. Stell dir vor, du startest heute mit einem monatlichen Plan. Dein Ziel: ein großes **Vermögen aufbauen**. Du nimmst einen breiten Welt‑ETF. Wir rechnen mit etwa 7 % Rendite pro Jahr.
 
-* Monatliche Sparrate: 300 €
+* Monatliche Sparrate: 300 €
 * Anlagezeitraum: 20 Jahre
-* Eingezahltes Kapital: 72.000 €
-* Erwartetes Endkapital: rund 156.000 €
+* Eingezahltes Kapital: 72.000 €
+* Erwartetes Endkapital: rund 156.000 €
 
-Die Zinsen von rund 84.000 € übersteigen deine eigene Einzahlung von 72.000 €. Magie ist das nicht – es ist Zeit, die für dich arbeitet. Wer früh startet, gewinnt Zeit.
+Die Zinsen von rund 84.000 € übersteigen deine eigene Einzahlung von 72.000 €. Magie ist das nicht – es ist Zeit, die für dich arbeitet. Wer früh startet, gewinnt Zeit.
 
 Die 72er‑Regel rechnest du im Kopf. Teile 72 durch deinen Zinssatz. Das Ergebnis zeigt, wann sich dein Geld verdoppelt. Bei 6 % sind das rund 12 Jahre. So planst du deine Ziele besser.
 
@@ -186,7 +186,7 @@ Beide Wege unterstützen **finanzielle Freiheit erreichen**, wenn du sie gezielt
 
 ## Fazit: Finanzielle Freiheit – denk dich reich, handle bewusst
 
-Der Hebel bei **finanzielle Freiheit erreichen** sitzt nicht im Verzicht, sondern in der Reihenfolge: erst der Dauerauftrag, dann der Rest des Monats. 300 € monatlich werden bei 7 % über 20 Jahre zu rund 156.000 €; nach Abzug der Inflation bleiben etwa 124.000 € echte Kaufkraft. Ein [Tagesgeldkonto mit fairen Zinsen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) hält den Notgroschen zusammen, vermehrt ihn aber nicht – das erledigt der Sparplan. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **finanzielle Freiheit erreichen** sitzt nicht im Verzicht, sondern in der Reihenfolge: erst der Dauerauftrag, dann der Rest des Monats. 300 € monatlich werden bei 7 % über 20 Jahre zu rund 156.000 €; nach Abzug der Inflation bleiben etwa 124.000 € echte Kaufkraft. Ein [Tagesgeldkonto mit fairen Zinsen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) hält den Notgroschen zusammen, vermehrt ihn aber nicht – das erledigt der Sparplan. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 ## Häufige Fragen
 

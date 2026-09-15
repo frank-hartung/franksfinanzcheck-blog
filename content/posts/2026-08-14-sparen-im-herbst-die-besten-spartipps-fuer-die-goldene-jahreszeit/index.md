@@ -74,8 +74,10 @@ Bevor die Heizung dauerhaft läuft, entlüfte die Heizkörper. Lass auch die Hei
 
 **Konkrete Maßnahmen:**
 
-1. **Entlüften** – 5 min pro Heizkörper, spart bis zu 5 % des Verbrauchs. 2. **Vorlauftemperatur** um 5 °C reduzieren (z. B. von 70 °C auf 65 °C).
-3. **Witterungsgeführte Thermostate** installieren (Kosten 15‑30 € pro Stück, amortisieren sich nach ca. 1,5 Jahren). 4. **Heizkurve anpassen** – flachere Kurve bei milderen Außentemperaturen.
+1. **Entlüften** – 5 min pro Heizkörper, spart bis zu 5 % des Verbrauchs.
+2. **Vorlauftemperatur** um 5 °C reduzieren (z. B. von 70 °C auf 65 °C).
+3. **Witterungsgeführte Thermostate** installieren (Kosten 15‑30 € pro Stück, amortisieren sich nach ca. 1,5 Jahren).
+4. **Heizkurve anpassen** – flachere Kurve bei milderen Außentemperaturen.
 
 **Pro & Contra:**
 
@@ -103,7 +105,8 @@ Viele zahlen für alte [Privathaftpflicht](../../posts/2026-08-17-privathaftpfli
 
 **Vor‑ und Nachteile einer Bündelung:**
 
-- **Vorteil:** Ein Ansprechpartner, ein Jahresbeitrag, häufig 10 %‑15 % Rabatt. - **Nachteil:** Bei einem Schaden kann die gesamte Police gekündigt werden, wenn du mit dem Anbieter unzufrieden bist.
+- **Vorteil:** Ein Ansprechpartner, ein Jahresbeitrag, häufig 10 %‑15 % Rabatt.
+- **Nachteil:** Bei einem Schaden kann die gesamte Police gekündigt werden, wenn du mit dem Anbieter unzufrieden bist.
 
 **Rechenbeispiel:** Lena hat drei Einzelverträge: Haftpflicht 6 €/Monat, Hausrat 5 €/Monat, Rechtsschutz 4 €/Monat → 180 €/Jahr. Ein Kombi‑Angebot kostet 12 €/Monat (144 €/Jahr). Sie spart **36 €** und hat nur noch einen Vertrag zu verwalten.
 
@@ -115,8 +118,10 @@ Wechselst du den Strom‑ oder Gasanbieter im Spätsommer, sicherst du dir gute 
 
 **Schritte zum Wechsel:**
 
-1. **Zählerstände notieren** (letzte Ablesung). 2. **Verbrauchsprofil analysieren** (z. B. über den Jahresverbrauchs‑Rechner des BDEW).
-3. **Mindertarif vs. Grundversorgung** vergleichen (Achtung: Grundversorgung hat oft höhere Grundgebühr). 4. **Preisgarantie prüfen** – 12‑24 Monate sind üblich.
+1. **Zählerstände notieren** (letzte Ablesung).
+2. **Verbrauchsprofil analysieren** (z. B. über den Jahresverbrauchs‑Rechner des BDEW).
+3. **Mindertarif vs. Grundversorgung** vergleichen (Achtung: Grundversorgung hat oft höhere Grundgebühr).
+4. **Preisgarantie prüfen** – 12‑24 Monate sind üblich.
 
 **Pro‑ und Contra‑Liste:**
 
@@ -146,7 +151,8 @@ Importware kostet oft ein Vielfaches. Meal‑Prep, Einkochen und Einfrieren spar
 
 **Vor‑ und Nachteile von Vorratshaltung:**
 
-- **Vorteil:** Preisstabilität, weniger wöchentliche Einkaufsfahrten. - **Nachteil:** Platzbedarf im Keller/Freezer, Risiko von Verderb bei falscher Lagerung.
+- **Vorteil:** Preisstabilität, weniger wöchentliche Einkaufsfahrten.
+- **Nachteil:** Platzbedarf im Keller/Freezer, Risiko von Verderb bei falscher Lagerung.
 
 ---
 
@@ -158,8 +164,10 @@ Sie schließen die Ritzen schnell. Die Räume bleiben warm. Die Heizung läuft w
 
 **Detaillierte Vorgehensweise:**
 
-1. **Risse lokalisieren:** Mit einer brennenden Kerze – Flackern zeigt Zugluft. 2. **Dichtungsband anbringen:** Selbstklebend, 2‑3 cm Breite, rund um Fensterrahmen.
-3. **Tür‑Zugluftstopper:** Schaumstoff‑ oder Silikon‑Stopper (ca. 8 €). 4. **Kontrolle nach 2 Wochen:** Noch einmal prüfen, ob neue Undichtigkeiten entstanden sind.
+1. **Risse lokalisieren:** Mit einer brennenden Kerze – Flackern zeigt Zugluft.
+2. **Dichtungsband anbringen:** Selbstklebend, 2‑3 cm Breite, rund um Fensterrahmen.
+3. **Tür‑Zugluftstopper:** Schaumstoff‑ oder Silikon‑Stopper (ca. 8 €).
+4. **Kontrolle nach 2 Wochen:** Noch einmal prüfen, ob neue Undichtigkeiten entstanden sind.
 
 **Kosten‑Nutzen‑Rechnung:** Kosten für Dichtungsband (10 m Rolle) = 9,90 €. Einsparung bei einem 100 m² Haus: ca. 5 % weniger Heizenergie → bei 1.800 kWh Jahresverbrauch ≈ 90 kWh → **≈ 8,5 €** Jahresersparnis. Der Pay‑back liegt nach ca. 1,5 Jahren, aber die Maßnahme ist praktisch kostenfrei.
 
@@ -180,7 +188,8 @@ Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen ste
 
 **Pro‑ und Contra‑Analyse:**
 
-- **Pro:** Mehr Bewegung, bessere Stimmung, keine zusätzlichen Ausgaben. - **Contra:** Wetterabhängig – bei Regen muss man Alternativen (z. B. Indoor‑Basteln) planen.
+- **Pro:** Mehr Bewegung, bessere Stimmung, keine zusätzlichen Ausgaben.
+- **Contra:** Wetterabhängig – bei Regen muss man Alternativen (z. B. Indoor‑Basteln) planen.
 
 > 💶 **Spar‑Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/kfz-versicherung/)
 

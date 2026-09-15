@@ -135,7 +135,7 @@ Nutze für deine Organisation einfache Listen. Eine "Haben-Wollen-Liste" ist ein
 
 ## Fazit: Kleine Beträge, große Wirkung – Frugalismus für den Einstieg
 
-Der Hebel bei **Kleine Beträge, große Wirkung: Frugalismus für den Einstieg** sitzt nicht im Verzicht, sondern im Nachrechnen. Nachgerechnet: 20 bis 50 € pro Monat stecken in Kleinstbeträgen, 5 bis 10 € sparest du pro vorgekochter Mahlzeit, und die rund 80 € für ungenutztes Streaming sind meist der größte Einzelposten. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Kleine Beträge, große Wirkung: Frugalismus für den Einstieg** sitzt nicht im Verzicht, sondern im Nachrechnen. Nachgerechnet: 20 bis 50 € pro Monat stecken in Kleinstbeträgen, 5 bis 10 € sparest du pro vorgekochter Mahlzeit, und die rund 80 € für ungenutztes Streaming sind meist der größte Einzelposten. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
 **Lesetipp:** Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht

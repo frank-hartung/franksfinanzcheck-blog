@@ -117,9 +117,12 @@ Wichtig: Die Zeitschaltung des Haupt‑Routers sollte Geräte mit Nachtschicht n
 
 ## Schritt für Schritt: WLAN‑Abdeckung an einem Abend
 
-1. **Bestandsaufnahme mit Zahlen.** Miss per Speedtest‑App an drei Orten: direkt neben dem Router, im Problembereich und an einem Mittelpunkt. Notiere Download, Upload und Ping – nur so erkennst du später, ob eine Maßnahme wirkt. 2. **Kabel‑Referenz prüfen.** Teste einmal per LAN‑Kabel am Router. Liegt der Wert deutlich unter deinem Tarif, sammle Belege und melde die Störung dem Provider – bevor du Hardware kaufst.
-3. **Router frei und erhöht stellen.** Mindestens einen Meter Höhe, nicht im Schrank, nicht neben Mikrowelle oder DECT‑Basisstation. Dieser Schritt bringt oft ein Drittel mehr Flächenabdeckung. 4. **Null‑Euro‑Option zuerst testen.** Hängt noch ein alter Router im Schrank, richte ihn als Mesh‑Knoten oder Access Point ein (siehe oben). Erst wenn das nicht reicht, lohnt der Kauf.
-5. **Kauf nach Grundriss.** Eine tote Ecke → Repeater. Mehrere Räume oder Etagen → Mesh‑Set. Massive Altbauwände → Powerline mit Rückgaberecht testen. 6. **Zeitschaltung aktivieren.** Nachtabschaltung für Zusatz‑Knoten einrichten und nach einer Woche erneut an denselben drei Punkten messen. Vergleiche die Werte mit Schritt 1.
+1. **Bestandsaufnahme mit Zahlen.** Miss per Speedtest‑App an drei Orten: direkt neben dem Router, im Problembereich und an einem Mittelpunkt. Notiere Download, Upload und Ping – nur so erkennst du später, ob eine Maßnahme wirkt.
+2. **Kabel‑Referenz prüfen.** Teste einmal per LAN‑Kabel am Router. Liegt der Wert deutlich unter deinem Tarif, sammle Belege und melde die Störung dem Provider – bevor du Hardware kaufst.
+3. **Router frei und erhöht stellen.** Mindestens einen Meter Höhe, nicht im Schrank, nicht neben Mikrowelle oder DECT‑Basisstation. Dieser Schritt bringt oft ein Drittel mehr Flächenabdeckung.
+4. **Null‑Euro‑Option zuerst testen.** Hängt noch ein alter Router im Schrank, richte ihn als Mesh‑Knoten oder Access Point ein (siehe oben). Erst wenn das nicht reicht, lohnt der Kauf.
+5. **Kauf nach Grundriss.** Eine tote Ecke → Repeater. Mehrere Räume oder Etagen → Mesh‑Set. Massive Altbauwände → Powerline mit Rückgaberecht testen.
+6. **Zeitschaltung aktivieren.** Nachtabschaltung für Zusatz‑Knoten einrichten und nach einer Woche erneut an denselben drei Punkten messen. Vergleiche die Werte mit Schritt 1.
 
 Viele Anbieter liefern Neukunden routerseitig moderne WLAN‑6‑Geräte mit Mesh‑Fähigkeit. Der [DSL‑Wechselbonus](../../posts/2026-08-10-dsl-wechselbonus-sichern/) von oft mehreren hundert Euro kann die Entscheidung direkt mitfinanzieren.  
 

@@ -119,8 +119,10 @@ Kombiniert kannst du mit diesen Maßnahmen leicht 10 % deiner Jahresrechnung e
 
 ## Schritt‑für‑Schritt: Gasanbieter mit Preisgarantie wechseln
 
-1. **Jahresabrechnung bereitlegen:** Notiere deinen Jahresverbrauch in kWh sowie die Zählernummer deines Gaszählers. 2. **PLZ in den Vergleichsrechner eingeben:** Filtere nach Tarifen mit mindestens 12 Monaten Preisgarantie und hoher Weiterempfehlungsquote von über 85 %. Achte auf verbraucherfreundliche Vertragslaufzeiten von 12 Monaten.
-3. **Auftrag digital absenden:** Der neue Anbieter kündigt deinen alten Vertrag fristgerecht und übernimmt die gesamte formale Abwicklung bei Netzbetreiber und Vorversorger. 4. **Zählerstand zum Stichtag ablesen:** Lies am Tag der Belieferung den Gaszähler ab und übermittle den Stand online an deinen Netzbetreiber für eine exakte Abrechnung.
+1. **Jahresabrechnung bereitlegen:** Notiere deinen Jahresverbrauch in kWh sowie die Zählernummer deines Gaszählers.
+2. **PLZ in den Vergleichsrechner eingeben:** Filtere nach Tarifen mit mindestens 12 Monaten Preisgarantie und hoher Weiterempfehlungsquote von über 85 %. Achte auf verbraucherfreundliche Vertragslaufzeiten von 12 Monaten.
+3. **Auftrag digital absenden:** Der neue Anbieter kündigt deinen alten Vertrag fristgerecht und übernimmt die gesamte formale Abwicklung bei Netzbetreiber und Vorversorger.
+4. **Zählerstand zum Stichtag ablesen:** Lies am Tag der Belieferung den Gaszähler ab und übermittle den Stand online an deinen Netzbetreiber für eine exakte Abrechnung.
 
 Wie du mit der richtigen Heizungs‑Wartung sparst, zeigen unsere Spätsommer‑Tipps zur Heizungsoptimierung und der [Vergleich günstiger Gastarife 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/).
 
@@ -166,8 +168,10 @@ Treffen zwei dieser Punkte zu, rechne den Tarif wie ohne Garantie. Vergleiche ih
 
 ## Ablauf in vier Schritten, ohne Versorgungslücke
 
-1. Verbrauch und Zähler von der letzten Rechnung übernehmen. 2. Drei Tarife mit voller Garantie ≥ 12 Monate und Bonusbedingungen nebeneinanderlegen.
-3. Online abschließen, Widerrufsfrist notieren (14 Tage), aber nicht aus Angst liegen lassen – der Starttermin liegt meist Wochen in der Zukunft. 4. Erst wenn die Bestätigung mit Lieferbeginn da ist, den Kalender auf „8 Wochen vorher neu vergleichen“ setzen. Den Altvertrag kündigt in der Regel der neue Anbieter.
+1. Verbrauch und Zähler von der letzten Rechnung übernehmen.
+2. Drei Tarife mit voller Garantie ≥ 12 Monate und Bonusbedingungen nebeneinanderlegen.
+3. Online abschließen, Widerrufsfrist notieren (14 Tage), aber nicht aus Angst liegen lassen – der Starttermin liegt meist Wochen in der Zukunft.
+4. Erst wenn die Bestätigung mit Lieferbeginn da ist, den Kalender auf „8 Wochen vorher neu vergleichen“ setzen. Den Altvertrag kündigt in der Regel der neue Anbieter.
 
 Preissprünge wird es immer geben. Du entscheidest nur, ob sie in deiner Küche landen oder der Versorger sie trägt.
 

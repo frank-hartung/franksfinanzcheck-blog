@@ -208,7 +208,7 @@ Schau in deinen Kalender und blockiere dir zwei Stunden für einen persönlichen
 
 ## Fazit: Gasrechnung senken – Warum ich meine Heizung im August prüfe
 
-Der Hebel bei **Gasrechnung senken: Warum ich meine Heizung im August prüfe** sitzt nicht im Verzicht, sondern im Nachrechnen. Wer im August die Heizung prüft, holt 5 bis 15 % heraus; jedes Grad weniger Raumtemperatur bringt rund 6 % dazu, und ab 15 Jahren Anlagenalter lohnt der Profi-Blick erst recht. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Gasrechnung senken: Warum ich meine Heizung im August prüfe** sitzt nicht im Verzicht, sondern im Nachrechnen. Wer im August die Heizung prüft, holt 5 bis 15 % heraus; jedes Grad weniger Raumtemperatur bringt rund 6 % dazu, und ab 15 Jahren Anlagenalter lohnt der Profi-Blick erst recht. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 ## Häufige Fragen
 

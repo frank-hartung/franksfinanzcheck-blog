@@ -134,7 +134,7 @@ Ein weiterer Fehler ist das Ignorieren von Firmware-Updates. Hersteller wie AVM 
 
 ## Fazit: WLAN-Probleme lösen – Mesh oder Repeater im Vergleich
 
-Der Hebel bei **WLAN-Probleme lösen: Mesh oder Repeater im Vergleich** sitzt nicht im Verzicht, sondern im Nachrechnen. Die Preisfrage ist schnell geklärt: 30 bis 80 € für einen Repeater stehen 150 bis 400 € für ein Mesh-System gegenüber – entschieden wird an der Stahlbetonwand, die 70 bis 90 % des Signals kostet. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **WLAN-Probleme lösen: Mesh oder Repeater im Vergleich** sitzt nicht im Verzicht, sondern im Nachrechnen. Die Preisfrage ist schnell geklärt: 30 bis 80 € für einen Repeater stehen 150 bis 400 € für ein Mesh-System gegenüber – entschieden wird an der Stahlbetonwand, die 70 bis 90 % des Signals kostet. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 **Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/)
 ## Häufige Fragen

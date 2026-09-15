@@ -157,7 +157,7 @@ In der Welt des Frugalismus nutzen wir diese Regel oft als Sprungbrett. Wer einm
 
 ## Fazit: 50-30-20-Regel – Budget aufteilen, Fixkosten senken
 
-Der Hebel bei **50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken** sitzt nicht im Verzicht, sondern im Nachrechnen. Die Aufteilung ist keine Sparübung, sondern eine Reihenfolge: 20 % gehen am Monatsanfang weg, 50 % decken das Leben, 30 % bleiben für Wünsche. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **50–30–20-Regel: Beherrsche dein Budget – Fixkosten senken** sitzt nicht im Verzicht, sondern im Nachrechnen. Die Aufteilung ist keine Sparübung, sondern eine Reihenfolge: 20 % gehen am Monatsanfang weg, 50 % decken das Leben, 30 % bleiben für Wünsche. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 ## Häufige Fragen
 

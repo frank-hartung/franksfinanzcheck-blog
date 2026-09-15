@@ -138,7 +138,7 @@ Danach reicht eine monatliche Kontrolle der Fixkosten. Es geht darum, die Kontro
 
 ## Fazit: Frugalismus im Alltag – Mehr Freiheit durch 5 einfache Tricks
 
-Der Hebel bei **Frugalismus im Alltag: Mehr Freiheit durch 5 einfache Tricks** sitzt nicht im Verzicht, sondern im Nachrechnen. Der Durchschnitt legt etwa 10 % des Einkommens zur Seite, Frugalisten zielen auf 50 % und mehr – der Unterschied entsteht nicht durch Verzicht, sondern durch die Routinen dazwischen. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Frugalismus im Alltag: Mehr Freiheit durch 5 einfache Tricks** sitzt nicht im Verzicht, sondern im Nachrechnen. Der Durchschnitt legt etwa 10 % des Einkommens zur Seite, Frugalisten zielen auf 50 % und mehr – der Unterschied entsteht nicht durch Verzicht, sondern durch die Routinen dazwischen. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 ## Häufige Fragen
 

@@ -127,7 +127,7 @@ Kombiniere am besten smarte Lösungen mit manuellen Schaltern. Eine Master-Slave
 
 ## Fazit: Standby Kosten reduzieren – So entlarvst du Stromfresser
 
-Der Hebel bei **Standby Kosten reduzieren: So entlarvst du Stromfresser** sitzt nicht im Verzicht, sondern im Nachrechnen. Reale 40 Watt im Dauereinsatz sind knapp 1 kWh am Tag – über das Jahr 80 bis 150 €, die in vielen Haushalten für absolut nichts bezahlt werden. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Standby Kosten reduzieren: So entlarvst du Stromfresser** sitzt nicht im Verzicht, sondern im Nachrechnen. Reale 40 Watt im Dauereinsatz sind knapp 1 kWh am Tag – über das Jahr 80 bis 150 €, die in vielen Haushalten für absolut nichts bezahlt werden. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 **Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
 **Lesetipp:** [Preisgarantie Gas: So schützt du dich vor Preissprüngen](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)

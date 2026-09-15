@@ -114,7 +114,7 @@ Diese 800 € sind kein theoretischer Wert. Das ist echtes Geld für deinen nä
 
 ## Die Checkliste für die Heizperiode
 
-Damit du optimal vorbereitet bist, habe ich diese Liste erstellt. Gehe die Punkte im September schrittweise durch:**
+Damit du optimal vorbereitet bist, habe ich diese Liste erstellt. Gehe die Punkte im September schrittweise durch.
 
 | Maßnahme | Aufwand | Potenzial |
 | :--- | :--- | :--- |

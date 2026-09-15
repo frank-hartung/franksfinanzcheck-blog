@@ -422,8 +422,9 @@ jeder Schreibaktion.
 | Artikel zu dünn | length_guard (KI-Module, Gate-verifiziert; seit 01.09.2026 R9-Shingle-Check gegen Duplikat-Erzeugung) |
 | Neuer Artikel verletzt Verständnis-Regeln (R1/R2/R3/R6/R7/R8) | Verständnis-Gates in content-engine-v2.yml parken ihn als draft (Entwurf statt Publikation) |
 | Absätze > 4 Sätze im Bestand | `r5_absatz_splitter.py --apply` (Satzgrenzen-Split 2+3, Abkürzungs-Schutz) |
+| Listenpunkte, die in einer Zeile stehen (Leser sehen Sterne im Fließtext) | `listen_guard.py --fix` L1, mit Wortbeweis und Nachkontrolle – seit 15.09. in der Kette |
 | Hold auf einem Entwurf, dessen Ursache längst behoben ist (niemand sieht sie nach) | `requeue_quality_holds.py` neu bewertet quality-score- UND Zeichenlänge-Holds am SSOT → `rearm` in die Kadenz, nie Direkt-Live (15.09.2026) |
-| Historie verlustig oder im Mittelteil umgeschrieben (nicht durch W5-Rotation erklärbar) | `history_guard.py` H6 → Exit 2, harte Kette; die Wache heilt nicht, sie nimmt den Befund weg (15.09.2026) |
+| Historie verlustig oder im Mittelteil umgeschrieben (nicht durch W5-Rotation erklärbar) | `history_guard.py` H6 → Exit 2, harte Kette; die Wache heilt nicht, sie nimmt den Befund weg (15.09.2026; Schiebefenster der Rotation ist erlaubt) |
 | Fazit im Altbaustil der ersten Schmiede-Generation („Sich gezielt mit dem Thema …“ + „Fang am besten heute an … 💸🚀“, dazu ein Satz der falschen Affiliate-Route) | `fazit_schmiede.py --altlasten` (melden) bzw. `--altlasten --fix` (tauschen); opt-in, nicht in der Kette – nur Sätze mit Formel *und* Aufruf/Emoji, redaktionelle Fazits bleiben |
 | Hunspell kennt korrekte Komposita nicht (Rauschen) | `absorb_whitelist.py --apply` (Wort in ≥ 3 Artikeln „unbekannt“ → Whitelist) |
 | LanguageTool-API down | grammar_check: Report-Banner „API nicht erreichbar“ + Exit 2 (kein falsch-grün) |
@@ -532,9 +533,34 @@ jeder Schreibaktion.
   („mindestens 20 %“ und „10–15 %“ standen so nie im Körper), Fazits auf Hausstruktur,
   `social_posted: true` auf zwei nie geposteten Entwürfen zurückgesetzt (der Schalter
   wäre nach dem Publish als „bereits gepostet“ gelesen worden). Im übrigen Bestand:
-  9 Artikel mit 26 geleimten Listen-Punkten (7 live) – bewusst keine Flächenheilkur in
-  diesem Schritt, die Zeilen stehen auf Live-Seiten und brauchen eine eigene,
-  selbstgetestete Wache statt eines Einmal-Skripts.
+  nach dem Einmal-Suchlauf 9 Artikel / 26 Punkte – die Wache misst strenger und
+  vollständiger (Task-Listen `- [ ] …` mitzählend, Mathe-Zeilen verwerfend):
+  **11 Artikel, 40 Zeilen, 41 Punkte, 8 live**. Bewusst keine Flächenheilkur in diesem
+  Schritt – die Zeilen stehen auf Live-Seiten und brauchen eine eigene, selbstgetestete
+  Wache statt eines Einmal-Skripts (Punkt 10).
+  (10) Neu am Regelwerk: `listen_guard.py` – **L1 GELEIMTER PUNKT** (heilbar) und
+  **L2 MARKER-STIL JE EBENE** (heilbar), als 24. Wache in der Doktor-Kette (Phase A-Text,
+  `--fix` nur im scharfen Lauf). L1 schneidet eine Listenzeile an jedem Marker ab, der
+  nach einem Satzzeichen folgt – der Schnitt liegt VOR dem Marker, darum kann der Splitter
+  kein Zeichen erfinden und keinen Marker verlieren (Genau das war der Fehler, den der
+  Hold-Lauf vom 15.09. zweimal baute). Mathe (`- 40 Watt * 24 Stunden`) und Preisstufen
+  (`ab 1. - 5 %`) bleiben Ruhe, weil nach dem Marker kein listenüblicher Anfang steht.
+  L2 lernte aus dem ersten Entwurf: `* außen / - darin` ist korrektes Markdown, kein
+  Befund – verglichen wird nur innerhalb derselben Einrückungsstufe, Ziel ist die Mehrheit
+  der Stufe, bei Gleichstand der erste Eintrag (Autorenwille; der Bestand führt beide
+  Kugeln gleichwertig: 320 `-` gegen 240 `*`). Jede Heilung muss den **Wortbeweis**
+  bestehen (Wortfolge unverändert, bei L2 höchstens die Marker), sonst wird gemeldet und
+  nichts geschrieben; nach dem Schreiben prüft die Wache erneut. 40 Befunde in 11 Artikeln
+  geheilt, zweiter Lauf: 0. Nebenbei ein verwaistes `**` ohne Öffner auf einer Live-Seite
+  entfernt (renderte literal – dasselbe Muster wie die einzelne Klammer im CTA-Kasten).
+  (11) H6 musste nachgezogen werden, und zwar an der Regel, nicht an der Historie: Der
+  erste Kettenlauf meldete `stil_history.jsonl` als „umgeschrieben“. Tatsächlich stand die
+  Datei bereits auf der Kapazität, Rotation und Anhängen verschieben dort nur das Fenster
+  (400 → 400: vorne fällt eine Zeile, hinten kommt eine). H6 vergleicht deshalb jetzt die
+  längste Überlappung von Alt- und Neu-Bestand und lässt das Schiebefenster zu, wenn das
+  Ergebnis die Kapazität füllt und vor der Rotation die Kapazität überschritten war.
+  Eingefrorener Fall `schiebefenster` im Selbsttest (14 Fälle), Gegenproben am echten
+  Korpus: 400 → 400 mit Anhang → 🟢, 400 → 398 ohne Anhang → 🛑 Exit 2.
 - **14.09.2026:** Doktor-Kette wieder in Betrieb – und die zwei Defekte
   repariert, die ihr Stillstand verdeckt hatte. Der Integritaets-Lock zeigte auf
   einen Commit (f0078db), der auf GitHub nicht mehr existiert; damit stoppte jede

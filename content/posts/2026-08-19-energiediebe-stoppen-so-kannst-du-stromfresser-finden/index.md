@@ -219,7 +219,8 @@ Viele Stadtwerke, Verbraucherzentralen und Energieagenturen verleihen Messgerät
 ### Wie wechsle ich den Stromanbieter?
 
 Der Wechsel läuft komplett online:
-1. **Postleitzahl**, **Zählernummer** und **Jahresverbrauch** (z. B. 3.500 kWh) bereithalten. 2. Im Vergleichs‑Tool das gewünschte **Tarif‑Modell** (Preisgarantie, Ökostrom) auswählen.
+1. **Postleitzahl**, **Zählernummer** und **Jahresverbrauch** (z. B. 3.500 kWh) bereithalten.
+2. Im Vergleichs‑Tool das gewünschte **Tarif‑Modell** (Preisgarantie, Ökostrom) auswählen.
 3. **Kündigungs‑Check**: Der neue Anbieter übernimmt die Kündigung beim alten Lieferanten.
 4. **Bestätigung** per E‑Mail erhalten – der Wechsel erfolgt meist zum **1. Monatsende**.
 

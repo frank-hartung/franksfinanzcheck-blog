@@ -77,7 +77,8 @@ Wer hungrig und ohne Plan einkauft, kauft rund 25 % mehr. Plane deine Mahlzeit
 | **Monatlich** | **210 €** | **90 €** | **120 €** |
 
 **Tipps für den Start:** 1. Nutze **Planungs‑Apps** wie **Mealime** oder **Paprika**.
-2. Koche am Sonntag 2‑3 Gerichte, die sich gut einfrieren lassen (z. B. Chili, Linsensuppe). 3. Verwende Resteverwertung – aus Gemüse‑Reste wird ein bunter Pfannen‑Eintopf.
+2. Koche am Sonntag 2‑3 Gerichte, die sich gut einfrieren lassen (z. B. Chili, Linsensuppe).
+3. Verwende Resteverwertung – aus Gemüse‑Reste wird ein bunter Pfannen‑Eintopf.
 
 ---
 
@@ -139,7 +140,8 @@ Kleidung, Möbel, Spielzeug, Elektronik: Auf Kleinanzeigen, Vinted oder Rebuy gi
 Bücher, Hörbücher und Spiele gibt es in der Bibliothek. Auch Werkzeuge kannst du dort oft leihen. Der Jahresbeitrag liegt bei 15 bis 25 €. Dafür ist die Ausleihe unbegrenzt.
 
 **Was du leihen kannst:** – Fachbücher (statt teurer Fachliteratur).
-- **Werkzeug** (Bohrmaschine, Rasenmäher) – spart bis zu **200 €** pro Jahr. - **Spiele** (Brett‑ und Videospiele) – erspart teure Neuanschaffungen.
+- **Werkzeug** (Bohrmaschine, Rasenmäher) – spart bis zu **200 €** pro Jahr.
+- **Spiele** (Brett‑ und Videospiele) – erspart teure Neuanschaffungen.
 
 **Tipp:** Viele Kommunen bieten **digitale Bibliotheken** (Onleihe) für E‑Books und Hörbücher – ideal für unterwegs.
 
@@ -150,8 +152,10 @@ DSL, Mobilfunk, Strom, Gas, Versicherungen: Anbieter belohnen Wechsellust. Nimm 
 
 **Schritt‑für‑Schritt‑Checkliste:**
 
-1. **Liste erstellen:** Alle laufenden Verträge in einer Tabelle erfassen. 2. **Kosten vergleichen:** Nutze Vergleichsportale (CHECK24, Verivox).
-3. **Kündigungsfristen prüfen:** Meist 1‑3 Monate. 4. **Angebote einholen:** Direkt beim Anbieter anrufen und nach einem **Treue‑Rabatt** fragen.
+1. **Liste erstellen:** Alle laufenden Verträge in einer Tabelle erfassen.
+2. **Kosten vergleichen:** Nutze Vergleichsportale (CHECK24, Verivox).
+3. **Kündigungsfristen prüfen:** Meist 1‑3 Monate.
+4. **Angebote einholen:** Direkt beim Anbieter anrufen und nach einem **Treue‑Rabatt** fragen.
 5. **Wechsel durchführen:** Bei Strom/Gas einfach über den neuen Anbieter – der alte kümmert sich um die Kündigung.
 
 **Beispiel:** Ein 4‑Personen‑Haushalt mit einem Stromverbrauch von 3.500 kWh zahlt 30 ct/kWh bei Anbieter A. Wechsel zu Anbieter B (27 ct/kWh) spart **≈ 105 €** pro Jahr. Kombiniert mit einem günstigeren DSL‑Tarif (10 € weniger) ergibt das **≈ 115 €** Jahresersparnis.
@@ -257,8 +261,10 @@ Verkaufe, was du nicht brauchst. Kündige sofort 3 Abos. Koche einen Monat lan
 Analysiere jede wiederkehrende Position. Oft lassen sich Strom‑ und Gastarife um 15‑20 % senken, wenn du zu einem Ökostromanbieter wechselst. Prüfe, ob du ein Kombi‑Paket (DSL + Mobil) günstiger bekommst. Bei Versicherungen lohnt sich ein **Jahres‑Check**: Viele Anbieter bieten Neukundenrabatte von bis zu 30 %.
 
 ### Welche Apps unterstützen mich beim Alltagssparen?
-- **Finanzguru** – erkennt Abo‑Kosten, warnt vor Überziehungen. - **Outbank** – aggregiert Konten, visualisiert Ausgaben nach Kategorien.
-- **YNAB** – hilft beim Budgetieren nach der 50‑30‑20‑Methode. - **Too Good To Go** – reduziert Lebensmittelverschwendung und spart bis zu 5 € pro Mahlzeit.
+- **Finanzguru** – erkennt Abo‑Kosten, warnt vor Überziehungen.
+- **Outbank** – aggregiert Konten, visualisiert Ausgaben nach Kategorien.
+- **YNAB** – hilft beim Budgetieren nach der 50‑30‑20‑Methode.
+- **Too Good To Go** – reduziert Lebensmittelverschwendung und spart bis zu 5 € pro Mahlzeit.
 
 ## Weiterführende Tools zum Haushaltsbudget planen
 
