@@ -41,7 +41,6 @@
        manifest.json und die Icons werden deterministisch aus hugo.toml erzeugt:
        scripts/generate_pwa_icons.py (Prüfung: schema_seo_gate.py S11). */ -}}
 <link rel="manifest" href="{{ "manifest.json" | relURL }}">
-<meta name="application-name" content="{{ site.Title }}">
 {{- if not site.Params.disableAppleMeta }}
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Finanzcheck">
