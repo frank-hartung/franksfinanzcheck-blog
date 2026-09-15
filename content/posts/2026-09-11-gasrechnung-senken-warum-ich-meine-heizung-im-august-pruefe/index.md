@@ -138,7 +138,7 @@ In meiner Praxis als Finanz-Blogger sehe ich oft Ersparnisse von 300 bis 500 �
 
 Achte beim Vergleich nicht nur auf den Neukundenbonus. Wichtig ist auch der Arbeitspreis pro Kilowattstunde und der Grundpreis.
 
-Ein hoher Bonus sieht im ersten Jahr toll aus, aber im zweiten Jahr wird es oft teuer. Ich wähle meist Tarife mit einer Preisgarantie von 12 Monaten, damit ich während der Heizperiode vor Überraschungen sicher bin. Es ist ein kleiner Aufwand mit großer Wirkung.
+Ein hoher Bonus sieht im ersten Jahr toll aus, aber im zweiten Jahr wird es oft teuer. Ich wähle meist Tarife mit einer [Preisgarantie](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) von 12 Monaten, damit ich während der Heizperiode vor Überraschungen sicher bin. Es ist ein kleiner Aufwand mit großer Wirkung.
 
 
 

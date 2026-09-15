@@ -25,6 +25,7 @@ kurzantwort: "Eine Heizungswartung im Spätsommer spart oft bares Geld, weil kle
 social_posted: true
 ---
 
+
 Zahlst du für deine Heizung jedes Jahr hunderte Euro zu viel?
 Ein einfacher Check im August verhindert teure Notdienste im Dezember.
 Wer früher plant, spart oft doppelt – du senkst den Verbrauch und vermeidest kostspielige Reparaturen.

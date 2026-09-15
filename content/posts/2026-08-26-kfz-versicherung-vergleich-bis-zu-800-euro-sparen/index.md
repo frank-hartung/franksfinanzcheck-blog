@@ -24,7 +24,7 @@ pin_description: "*Werbung | Stichtag 30.11. nicht verpassen: Bis dahin kannst d
 pinwand: "Versicherungen clever wechseln & sparen"
 ---
 
-Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung dabei. 10, 15 oder gar 25 Prozent. Genau jetzt beginnt die wichtigste Phase. Die Rede ist von der **Wechselsaison zwischen August und November**.
+Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung dabei. 10, 15 oder gar 25 %. Genau jetzt beginnt die wichtigste Phase. Die Rede ist von der **Wechselsaison zwischen August und November**.
 
 **30. November, 23:59 Uhr:** Bis dahin muss deine Kündigung beim alten Versicherer sein. Nur so wird der neue Vertrag zum 1. Januar wirksam. Wer den Stichtag verpasst, zahlt ein Jahr zu viel. Ich habe meine Autoversicherung in zehn Jahren fünfmal gewechselt. Der Beitrag hat sich halbiert. Wie das geht, zeige ich dir hier. Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr. Und zwar ohne Verlust an Deckung.
 

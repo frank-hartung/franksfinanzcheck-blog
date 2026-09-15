@@ -247,6 +247,6 @@ Sichere Fotos und das Protokoll helfen. Widersprich schriftlich und setze eine F
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Mietwagen mit Vollkasko ohne Selbstbeteiligung vergleichen**](/go/mietwagen/)
+👉 **Jetzt vergleichen und sparen:** [**→ Mietwagen mit Vollkasko ohne Selbstbeteiligung vergleichen**](/go/kfz-versicherung/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -131,7 +131,7 @@ Der Aufbau deiner Rücklagen ist der erste Schritt zur finanziellen Freiheit. We
 
 Nutze diesen Check, um deine laufenden Kosten dauerhaft zu senken. Jede eingesparte Gebühr reduziert nicht nur deine monatliche Last. Du senkst gleichzeitig auch die benötigte Zielsumme für deinen Notgroschen. Dies wirkt wie ein doppelter Hebel für deine finanzielle Sicherheit.
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) **Lesetipp:** [Notgroschen: Die Wahrheit über das finanzielle Polster](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)
+**Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/) · [Notgroschen: die Wahrheit](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) · [Tagesgeld-Zinsen 2026](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/)
 
 ## Praktische Checkliste zum Start deines finanziellen Puffers
 

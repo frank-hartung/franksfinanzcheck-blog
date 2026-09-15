@@ -94,7 +94,7 @@ Ein zweites Szenario: **Mietsachschäden**. Eine Badewanne läuft über, währen
 
 **Deckungssumme Haftpflicht.** 10 Millionen € sind das absolute Minimum, das heute noch vermittelt werden sollte. Experten empfehlen 50 Millionen €. Warum? Weil Personenschäden durch Klinik- und Pflegekosten sowie steigende Gehälter (Lohnausfallberechnung) immer teurer werden. Eine zu kleine Summe hilft dir in 20 Jahren bei einem schweren Unfall möglicherweise nicht mehr.
 
-**Forderungsausfall.** Jemand schädigt dich, hat aber keine Haftpflicht und kein Geld. Ohne die Klausel bleibst du auf dem Schaden sitzen. Mit ihr zahlt deine Versicherung – so, als wäre der andere versichert. Dies gilt oft ab einer Schadenshöhe von 2.500 Euro. In Premium-Tarifen ist oft sogar ein Rechtsschutz zur Durchsetzung dieser Forderung enthalten.
+**Forderungsausfall.** Jemand schädigt dich, hat aber keine Haftpflicht und kein Geld. Ohne die Klausel bleibst du auf dem Schaden sitzen. Mit ihr zahlt deine Versicherung – so, als wäre der andere versichert. Dies gilt oft ab einer Schadenshöhe von 2.500 €. In Premium-Tarifen ist oft sogar ein Rechtsschutz zur Durchsetzung dieser Forderung enthalten.
 
 **Grobe Fahrlässigkeit.** Du lässt die brennende Kerze kurz allein, um zur Tür zu gehen. Das Feuer greift über. Das ist grob fahrlässig. Manche Tarife kürzen hier die Leistung massiv. Gute Tarife verzichten auf den Einwand der groben Fahrlässigkeit und zahlen voll. Genau diese Klausel trennt 45-€- von 65-€-Policen.
 
@@ -137,7 +137,7 @@ Eine Privathaftpflicht ersetzt zudem keine Hausrat-, Gebäude- oder Kfz-Police. 
 
 ## Fazit: Unverzichtbarer Basisschutz für jeden Geldbeutel
 
-Die **Privathaftpflicht** ist das Fundament deiner Absicherung. Es gibt keine andere Versicherung, die für so wenig Geld (ca. 4–6 Euro im Monat) ein so gigantisches Risiko (unbegrenzte Haftung mit dem gesamten Privatvermögen) abfängt. Wer sie aufschiebt, weil bisher nichts passiert ist, verwechselt Statistik mit Glück. Ein einziger unachtsamer Schritt auf die Straße kann genügen.
+Die **Privathaftpflicht** ist das Fundament deiner Absicherung. Es gibt keine andere Versicherung, die für so wenig Geld (ca. 4–6 € im Monat) ein so gigantisches Risiko (unbegrenzte Haftung mit dem gesamten Privatvermögen) abfängt. Wer sie aufschiebt, weil bisher nichts passiert ist, verwechselt Statistik mit Glück. Ein einziger unachtsamer Schritt auf die Straße kann genügen.
 
 Achte beim **Haftpflicht Vergleich** auf die Details wie Forderungsausfall und grobe Fahrlässigkeit. So bleibt deine [finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Freiheit auch dann erhalten, wenn das Leben mal nicht nach Plan läuft.
 

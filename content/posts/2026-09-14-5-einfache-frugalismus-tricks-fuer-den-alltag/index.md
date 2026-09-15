@@ -141,7 +141,7 @@ Viele Menschen zahlen für Dienste, die sie kaum nutzen. Ein regelmäßiger Chec
 
 **Praktischer Tipp:** Erstelle dir eine kleine „Fehler‑Checkliste“ und hänge sie an deinen Arbeitsplatz. So erinnerst du dich jeden Monat daran, die typischen Stolperfallen zu prüfen.
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Frugalismus mit System](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · [50-30-20-Regel](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/)
 **Lesetipp:** [Notgroschen: Die Wahrheit über das finanzielle Polster](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)
 
 ## Fazit: einfache Frugalismus-Tricks für den Alltag

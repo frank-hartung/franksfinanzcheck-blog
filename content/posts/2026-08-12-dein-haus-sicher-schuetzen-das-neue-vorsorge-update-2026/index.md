@@ -138,8 +138,8 @@ Hol dir Angebote, auch wenn sie teuer sind. Und stelle wichtige Technik nicht in
 
 ## Klauseln, die nach dem Schaden zu spät kommen
 
-- Neuwert statt Zeitwert bei Hausrat - Aufräum‑ und Abbruchkosten ausreichend hoch
-- Hotelkosten nach Unbewohnbarkeit, mind. 150–200 Tage - Datenrettung und Schlossänderung nach Einbruch
+- Neuwert statt Zeitwert bei Hausrat – Aufräum‑ und Abbruchkosten ausreichend hoch
+- Hotelkosten nach Unbewohnbarkeit, mind. 150–200 Tage – Datenrettung und Schlossänderung nach Einbruch
 - Ableitungsrohre auf dem Grundstück
 
 Ein Vorsorge‑Update ist kein neuer Vertrag um des Wechsels willen. Nimm dir einen Nachmittag und lies deine drei PDFs. Frage dich: Würde ich das nach einem Sturm noch fair finden? Wenn nein, vergleiche und ersetze den Vertrag nahtlos.

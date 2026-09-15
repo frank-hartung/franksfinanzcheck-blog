@@ -28,7 +28,7 @@ Kennst du das Gefühl, wenn dein Gehalt am Monatsende wie durch Geisterhand vers
 
 Hier setzt ein System an, das so simpel wie genial ist. Es geht nicht darum, jeden Cent zwei Mal umzudrehen oder auf jeglichen Spaß zu verzichten.
 
-Es geht um Klarheit. Wenn du weißt, wohin dein Geld fließt, gewinnst du die Kontrolle über dein Leben zurück. In der Welt des Frugalismus ist diese Methode das Fundament für finanzielle Freiheit.
+Es geht um Klarheit. Wenn du weißt, wohin dein Geld fließt, gewinnst du die Kontrolle über dein Leben zurück. In der Welt des [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) ist diese Methode das Fundament für [finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/).
 
 
 **Das Wichtigste in Kürze**
@@ -177,7 +177,7 @@ Das kommt auf die Art des Kredits an. Die Mindesttilgung für eine Immobilie ode
 Ja, natürlich. Die 50–30–20-Regel ist ein Richtwert. Wenn du sehr sparsam lebst (Frugalismus), landest du vielleicht bei 40–20–40. Wichtig ist nur, dass du ein System hast und dieses konsequent durchziehst. Die Verhältnisse sollten so gewählt sein, dass du langfristig damit glücklich bist und nicht nach zwei Monaten abbrichst.
 
 ### Was ist, wenn mein Einkommen schwankt?
-Bei Selbstständigen oder Menschen mit Provisionsanteil ist es ratsam, die Prozentsätze auf den Durchschnitt der letzten zwölf Monate zu beziehen. In guten Monaten schiebst du die Überschüsse in den 20-Prozent-Topf, um in schlechteren Monaten den 50-Prozent-Block (Fixkosten) decken zu können. Ein Puffer auf dem Tagesgeldkonto ist hier essenziell.
+Bei Selbstständigen oder Menschen mit Provisionsanteil ist es ratsam, die Prozentsätze auf den Durchschnitt der letzten zwölf Monate zu beziehen. In guten Monaten schiebst du die Überschüsse in den 20-Prozent-Topf, um in schlechteren Monaten den 50-Prozent-Block (Fixkosten) decken zu können. Ein Puffer auf dem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) ist hier essenziell.
 
 ---
 

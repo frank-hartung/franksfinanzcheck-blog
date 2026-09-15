@@ -71,9 +71,9 @@ Schauen wir uns die nackten Zahlen an. Viele unterschätzen die „Kleckerbeträ
 | **Girocard / Debitkarte** | 12,00 € / Jahr | **0,00 €** | 12,00 € |
 | **Echtzeit-Überweisung** | 0,50 € pro Transaktion | **0,00 €** | Zeitgewinn & ca. 10 € |
 | **Bargeldabhebung** | Nur im eigenen Verbund frei | **Weltweit/Deutschlandweit frei** | Maximale Flexibilität |
-| **Dispozins** | ca. 14,5 % p.a. | **ca. 7,5 % - 11 % p.a.** | Günstiger bei Engpässen |
+| **Dispozins** | ca. 14,5 % p.a. | **ca. 7,5 % – 11 % p.a.** | Günstiger bei Engpässen |
 | **Guthabenzinsen** | 0,00 % | **Bis zu 2,5 % oder mehr** | passives Einkommen |
-| **Gesamtkosten/Jahr** | **ca. 160 € - 210 €** | **0,00 € (zzgl. Zinsgewinn!)** | **Mind. 180 € Cash-Vorteil** |
+| **Gesamtkosten/Jahr** | **ca. 160 € – 210 €** | **0,00 € (zzgl. Zinsgewinn!)** | **Mind. 180 € Cash-Vorteil** |
 
 > 💶 **Spar-Tipp von FranksFinanzcheck:** Wer heute noch Kontogebühren zahlt, verbrennt buchstäblich Geld. Ein Wechsel ist die einfachste Form der Gehaltserhöhung. [**Sichere dir hier dein kostenloses Konto**](/go/girokonto/)
 

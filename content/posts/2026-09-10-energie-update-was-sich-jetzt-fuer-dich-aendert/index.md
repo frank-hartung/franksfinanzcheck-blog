@@ -42,7 +42,7 @@ Zudem hat sich die Marktstruktur verändert. Wir sehen eine stärkere Spreizung 
 
 Du bekommst im Winter höhere Rechnungen. Das kann dein Budget belasten. Wenn du rechtzeitig prüfst, kannst du einen günstigeren Tarif finden. Das spart Geld und reduziert die Gefahr von unangenehmen Nachzahlungen. Ein früher Wechsel gibt dir Planungssicherheit. Du behältst die Kontrolle über deine Energiekosten und kannst besser auf saisonale Schwankungen reagieren.
 
-Konkret bedeutet das für einen Durchschnittshaushalt mit einem Verbrauch von 3.500 kWh Strom und 15.000 kWh Gas: Ein Preisunterschied von nur 2 Cent pro Kilowattstunde beim Strom und 1 Cent beim Gas summiert sich auf über 220 Euro pro Jahr. Das ist Geld, das du für den Notgroschen oder deine Altersvorsorge nutzen könntest, statt es ungenutzt beim Grundversorger zu lassen.
+Konkret bedeutet das für einen Durchschnittshaushalt mit einem Verbrauch von 3.500 kWh Strom und 15.000 kWh Gas: Ein Preisunterschied von nur 2 Cent pro Kilowattstunde beim Strom und 1 Cent beim Gas summiert sich auf über 220 € pro Jahr. Das ist Geld, das du für den Notgroschen oder deine Altersvorsorge nutzen könntest, statt es ungenutzt beim Grundversorger zu lassen.
 
 Zusätzlich zur rein finanziellen Komponente gibt es den Faktor "Preisgarantie". Viele Anbieter werben aktuell mit langen Laufzeiten. Doch Vorsicht: In einer Phase, in der die Erneuerbaren Energien den Börsenpreis oft gegen Null drücken, kann eine zu lange Bindung an einen fixen Preis zur Kostenfalle werden. Dein persönliches **Energie-Update** sollte daher immer auch die Flexibilität deines Vertrages hinterfragen.
 
@@ -77,10 +77,15 @@ Um die richtige Entscheidung für dein persönliches **Energie-Update: Was sich 
 
 | Tarifmodell | Vorteile | Nachteile | Für wen geeignet? |
 | :--- | :--- | :--- | :--- |
-| **Fix-Tarif (12-24 Monate)** | Hohe Planungssicherheit, Schutz vor Preisspitzen im Winter. | Man profitiert nicht von sinkenden Börsenpreisen; oft teurer. | Sicherheitsorientierte Haushalte ohne Smart Meter. |
+| **Fix-Tarif (12–24 Monate)** | Hohe Planungssicherheit, Schutz vor Preisspitzen im Winter. | Man profitiert nicht von sinkenden Börsenpreisen; oft teurer. | Sicherheitsorientierte Haushalte ohne Smart Meter. |
 | **Variabler Tarif** | Kurze Kündigungsfristen (oft monatlich), Preissenkungen werden schneller weitergegeben. | Preise können monatlich steigen; weniger Planungssicherheit. | Flexible Haushalte, die den Markt beobachten. |
 | **Dynamischer Tarif** | Direkte Weitergabe der Börsenpreise (Spotmarkt); Sparen bei Wind/Sonne. | Risiko sehr hoher Preise bei Dunkelflauten; erfordert Smart Meter. | Besitzer von E-Autos, Wärmepumpen oder Hausspeichern. |
 | **Grundversorgung** | Jederzeit kündbar (14 Tage); sicherster Versorger vor Ort. | In der Regel die teuerste Option am Markt. | Nur als Übergangslösung bei Umzug oder Insolvenz des Anbieters. |
+
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
+
 
 ## Die Psychologie der Abschlagszahlung
 
@@ -117,7 +122,7 @@ Einmal im Jahr ist das absolute Minimum, idealerweise im September oder Oktober,
 Ein interner Wechsel in einen anderen Tarif des gleichen Anbieters ist fast immer kostenlos. Er kann sogar vorteilhaft sein, da keine neue Bonitätsprüfung stattfindet. Aber Vorsicht: Oft sind die Konditionen für Neukunden bei anderen Anbietern dennoch attraktiver, da diese mit Wechselprämien kalkulieren können.
 
 ### Kann ich meinen bestehenden Vertrag anpassen, ohne zu wechseln?
-Ja, das nennt sich Tarifoptimierung. Viele Anbieter haben „versteckte“ Tarife für Bestandskunden, um Kündigungen zu verhindern. Ein Anruf unter dem Vorwand einer Kündigung („Ich habe ein besseres Angebot gefunden“) führt oft dazu, dass dir der Kundenservice sofort 10-15 % Rabatt oder eine Gutschrift anbietet.
+Ja, das nennt sich Tarifoptimierung. Viele Anbieter haben „versteckte“ Tarife für Bestandskunden, um Kündigungen zu verhindern. Ein Anruf unter dem Vorwand einer Kündigung („Ich habe ein besseres Angebot gefunden“) führt oft dazu, dass dir der Kundenservice sofort 10–15 % Rabatt oder eine Gutschrift anbietet.
 
 ### Was passiert, wenn mein Energieversorger pleitegeht?
 In Deutschland ist die Versorgungssicherheit gesetzlich garantiert. Du fällst automatisch in die sogenannte Ersatzversorgung deines lokalen Grundversorgers. Du stehst also nie ohne Strom oder Gas da. Allerdings ist die Ersatzversorgung oft teurer, weshalb du in diesem Fall schnellstmöglich einen neuen Sondervertrag abschließen solltest.

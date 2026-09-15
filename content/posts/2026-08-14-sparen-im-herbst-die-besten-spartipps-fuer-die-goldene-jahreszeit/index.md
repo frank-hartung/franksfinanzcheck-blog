@@ -58,10 +58,10 @@ Du kannst sie bis Ende November mit einer Frist von einem Monat kündigen. Im He
 | 4 | Zusatzschutz für Marderbisse aktivieren, falls relevant | Oft günstiger als ein separater Marderschaden‑Zusatz. |
 | 5 | Alte Police schriftlich bestätigen lassen | Dokumentation für den Fall von Rückfragen. |
 
-**Vorteile:** - Sofortige Prämienreduktion.
+**Vorteile:** – Sofortige Prämienreduktion.
 - Möglichkeit, moderne Telematik‑Tarife (nach gefahrenen Kilometern) zu testen – oft günstiger bei wenig Fahrleistung im Herbst.
 
-**Nachteile:** - Bei sehr alten Fahrzeugen kann die [Schadenfreiheitsklasse](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) (SF‑Klasse) beim Wechsel verloren gehen.
+**Nachteile:** – Bei sehr alten Fahrzeugen kann die [Schadenfreiheitsklasse](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) (SF‑Klasse) beim Wechsel verloren gehen.
 - Manche Sonderkonditionen (z. B. Jahresendbonus) entfallen.
 
 **Beispielrechnung:** Anna fährt 12 000 km/Jahr, zahlt 820 € für ihre Vollkasko. Nach dem Vergleich findet sie einen Tarif mit 560 € Jahresbeitrag inkl. Telematik‑Rabatt. Sie spart **260 €** und behält die gleiche SF‑Klasse, weil der neue Anbieter die Rückübernahme anbietet.
@@ -205,7 +205,7 @@ Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen ste
 
 Der Kalender schiebt dir Halloween, Black Friday und Weihnachten in drei Monate. Wer im September kein Budget für Dezember hat, zahlt im Januar Dispo. Deshalb ist der Herbst der passende Moment für den Jahres‑Schnitt – nicht der 1. Januar, wenn die Motivation schon verbraucht ist.
 
-**Fixkosten‑Nachmittag.** Strom, Gas, DSL, Mobilfunk, Haftpflicht, Giro. Alles, was älter als 12 Monate ist, in den Vergleich. Ziel: 30 – 80 € im Monat, die du in den Weihnachtstopf oder den [Tagesgeld‑Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) schiebst.
+**Fixkosten‑Nachmittag.** Strom, Gas, DSL, Mobilfunk, Haftpflicht, Giro. Alles, was älter als 12 Monate ist, in den Vergleich. Ziel: 30–80 € im Monat, die du in den Weihnachtstopf oder den [Tagesgeld‑Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) schiebst.
 
 **Kleidung und Sport.** Second‑Hand für Herbstjacken, Skischuhe leihen statt kaufen, wenn du drei Tage in den Alpen bist. Kosten pro Nutzung.
 
@@ -225,7 +225,7 @@ Wenn der Herbst so läuft, startest du mit Puffer ins neue Jahr. Du zahlst keine
 
 ## Weihnachtskonto im September
 
-Ein Unterkonto oder Umschlag „Dezember“ ab 1.9.: 4 × 50 – 150 € je nach Haushalt. Geschenke, Bahn, Essen.
+Ein Unterkonto oder Umschlag „Dezember“ ab 1.9.: 4 × 50–150 € je nach Haushalt. Geschenke, Bahn, Essen.
 
 Was im Umschlag ist, darf raus. Was nicht drin ist, wird nicht per Dispo geholt. Das ist langweiliger als Black Friday und verhindert den Januar, in dem jeder Spartipp zu spät kommt.
 
@@ -237,7 +237,7 @@ Parallel: Energie‑ und [DSL‑Vergleich](../../posts/2026-08-10-dsl-wechselbon
 
 Setz 75 Minuten – so teilst du sie ein:
 
-- 25 Minuten Verträge (Energie, DSL, Mobilfunk – alles, was älter als 12 Monate ist, kommt in den Vergleich) - 25 Minuten Dezember‑Budget auf ein Unterkonto
+- 25 Minuten Verträge (Energie, DSL, Mobilfunk – alles, was älter als 12 Monate ist, kommt in den Vergleich) – 25 Minuten Dezember‑Budget auf ein Unterkonto
 - 25 Minuten Kleidung/Heizen: Was du wirklich brauchst vs. was der Herbstschlussverkauf suggeriert
 
 Wenn nur eine der drei Schichten sitzt, nimm die Verträge. Sie zahlen den Rest.
@@ -248,7 +248,7 @@ Der Herbst ist keine trübe Zeit. Er ist die perfekte Gelegenheit, deine Finanze
 
 Prüfe deine Verträge. Nutze den **Kfz‑Stichtag 30 November**. Mach dein Zuhause energieeffizient. So gehst du mit einem dicken Plus auf dem Konto ins neue Jahr.
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [DSL‑Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [Versicherungen optimieren](../../pillar/versicherungen/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · DSL‑Wechselbonus sichern · [Versicherungen optimieren](../../pillar/versicherungen/)
 
 ## Häufige Fragen
 

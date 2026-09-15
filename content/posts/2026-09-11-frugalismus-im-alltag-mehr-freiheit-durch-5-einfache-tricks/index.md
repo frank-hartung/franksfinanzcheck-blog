@@ -37,7 +37,7 @@ Drei Dinge zählen beim Start in ein frugales Leben: die Analyse der Status-quo-
 
 **Das Wichtigste in Kürze**
 * **Bewusstsein schaffen:** Frugalismus bedeutet nicht Geiz, sondern die effiziente Nutzung deiner finanziellen Ressourcen für maximale Lebensqualität.
-* **Fixkosten senken:** ein jährlicher Check von DSL, Strom und Versicherungen spart oft mehrere hundert Euro bei identischer Leistung.
+* **[Fixkosten senken](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/):** ein jährlicher Check von DSL, Strom und Versicherungen spart oft mehrere hundert Euro bei identischer Leistung.
 * **Alltagsroutinen ändern:** kleine Gewohnheiten wie Meal Prepping oder die 30-Tage-Regel bei Käufen haben die größte Hebelwirkung auf dein Vermögen.
 
 ## Was ist Frugalismus eigentlich?

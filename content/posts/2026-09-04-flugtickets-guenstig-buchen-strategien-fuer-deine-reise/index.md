@@ -191,7 +191,7 @@ In Europa hast du bei den meisten Tarifen leider Pech gehabt. Es gibt jedoch Aus
 Bei reinen Linienflügen: Nein. Da sind sie fast immer am teuersten. Echte Last-Minute-Schnäppchen gibt es nur noch bei Charterflügen im Rahmen von Pauschalreisen, wenn Veranstalter ihre fest eingekauften Kontingente zwei Tage vor Abflug loswerden müssen. Für Individualreisen ist "Last Minute" finanzielles Harakiri.
 
 ### Wie sicher sind Billigflieger bei Verspätungen?
-Innerhalb der EU gilt die Fluggastrechteverordnung 261/2004 für alle Airlines. Egal ob du 10 € oder 500 € gezahlt hast: Bei mehr als 3 Stunden Verspätung (die die Airline verschuldet hat) stehen dir je nach Strecke 250 € bis 600 € Entschädigung zu. Oft ist die Entschädigung höher als der Flugpreis selbst.
+Innerhalb der EU gilt die Fluggastrechteverordnung 261/2004 für alle Airlines. Egal ob du 10 € oder 500 € gezahlt hast: Bei mehr als 3 Stunden Verspätung (die Airline verschuldet hat) stehen dir je nach Strecke 250 € bis 600 € Entschädigung zu. Oft ist die Entschädigung höher als der Flugpreis selbst.
 
 ### Lohnt sich ein Umstieg bei Langstreckenflügen wirklich immer?
 Finanziell oft ja. Du sparst durch einen Umstieg (z. B. in Istanbul, Dubai oder London) häufig 20 % bis 30 % der Kosten gegenüber dem Direktflug. Aber: Achte darauf, dass alles auf einem Ticket steht ("Interlining"). Wenn du zwei separate Tickets buchst und der erste Flug Verspätung hat, ist dein zweites Ticket wertlos. Die Airline muss dich dann nicht umbuchen.

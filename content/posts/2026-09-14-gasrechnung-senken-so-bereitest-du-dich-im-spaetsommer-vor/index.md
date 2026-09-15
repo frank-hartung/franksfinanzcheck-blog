@@ -143,7 +143,7 @@ Kalkuliere aber immer, wie teuer der Tarif im zweiten Jahr ohne Bonus wird. Oft 
 
 
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Standby Kosten reduzieren](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) · [günstige Gastarife 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
 **Lesetipp:** [Standby Kosten reduzieren: So entlarvst du Stromfresser](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/)
 
 ## Fazit: Gasrechnung senken – So bereitest du dich im Spätsommer vor

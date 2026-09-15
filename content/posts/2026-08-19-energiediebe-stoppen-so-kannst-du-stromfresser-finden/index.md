@@ -41,7 +41,7 @@ _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über eine
 
 | # | Gerät | Typischer Jahresverbrauch | Kosten (35 Cent/kWh) | **Ersparnis** bei Austausch | Vor‑/Nachteile |
 |---|-------|---------------------------|----------------------|-----------------------------|----------------|
-| 1 | **Kühl‑/Gefrierkombination > 15 Jahre** | 330 – 400 kWh | 115 – 140 € | 84 € (auf 110 kWh) | **Vorteil:** Noch funktionstüchtig, günstiger Anschaffungspreis. **Nachteil:** Hoher Stromverbrauch, häufiges Abtauen nötig. |
+| 1 | **Kühl‑/Gefrierkombination > 15 Jahre** | 330–400 kWh | 115–140 € | 84 € (auf 110 kWh) | **Vorteil:** Noch funktionstüchtig, günstiger Anschaffungspreis. **Nachteil:** Hoher Stromverbrauch, häufiges Abtauen nötig. |
 | 2 | **Heizungspumpe (Standard)** | 800 kWh | 280 € | 182 € (auf 80 kWh) | **Vorteil:** Robust, lange Lebensdauer. **Nachteil:** Keine Leistungsregelung, läuft immer voll. |
 | 3 | **Standby‑Geräte im Wohnzimmer** | 220 kWh | 77 € | 77 € (komplett abschalten) | **Vorteil:** Komfort (Sofort‑Start). **Nachteil:** Dauerverbrauch von 10‑30 W. |
 | 4 | **Elektrischer Warmwasser‑Boiler** | 1 200 kWh | 420 € | 210 € (auf 600 kWh) | **Vorteil:** Schnelle Warmwasserbereitung. **Nachteil:** Keine Temperaturregelung, hohe Verlustleistung. |
@@ -160,9 +160,9 @@ Mehr Tipps findest du in unserem Überblick zum Stromsparen im Herbst und im [Pi
 
 **Rechenformel**: Watt × Stunden × 365 ÷ 1 000 = kWh. Ergebnis × Strompreis = Kosten.  
 
-Ein Gerät mit **12 W Dauerbetrieb** verbraucht **105 kWh/Jahr** → **32 – 38 €**. Fünf solcher Geräte kosten dich praktisch einen Restaurantbesuch pro Monat, ohne dass du es merkst.
+Ein Gerät mit **12 W Dauerbetrieb** verbraucht **105 kWh/Jahr** → **32–38 €**. Fünf solcher Geräte kosten dich praktisch einen Restaurantbesuch pro Monat, ohne dass du es merkst.
 
-**Entscheidungshilfe:** Geräte, die mehr als **80 €** Jahreskosten verursachen, gehören auf die Ersatzliste. Ein A‑Klasse‑Kühlschrank spart gegenüber einem 15‑Jahre‑alten Modell **120 – 180 €**. Der Return on Investment liegt bei 4‑7 Jahren – häufig schneller, wenn du gleichzeitig das Abtau‑Verhalten optimierst.
+**Entscheidungshilfe:** Geräte, die mehr als **80 €** Jahreskosten verursachen, gehören auf die Ersatzliste. Ein A‑Klasse‑Kühlschrank spart gegenüber einem 15‑Jahre‑alten Modell **120–180 €**. Der Return on Investment liegt bei 4‑7 Jahren – häufig schneller, wenn du gleichzeitig das Abtau‑Verhalten optimierst.
 
 ## Die 4 Sofort‑Hacks ohne Anschaffung
 
@@ -199,18 +199,18 @@ Heimliche **Stromfresser finden** und stoppen? Das ist der schnellste Weg zu vie
 
 ### Wie viel Strom verbraucht ein typischer 3‑Personen‑Haushalt?
 
-In Deutschland liegt der Jahresverbrauch bei **2.800 – 3.500 kWh** für Strom allein. Nutzt du Warmwasser aus einem elektrischen Boiler, steigt der Gesamtverbrauch auf **4.200 – 5.000 kWh**.
+In Deutschland liegt der Jahresverbrauch bei **2.800–3.500 kWh** für Strom allein. Nutzt du Warmwasser aus einem elektrischen Boiler, steigt der Gesamtverbrauch auf **4.200–5.000 kWh**.
 
 ### Welche Geräte verbrauchen im Standby am meisten Strom?
 
 * Alte Spielekonsolen im Schnellstart‑Modus: bis zu **15 W**.
-* OLED‑Fernseher mit aktivem Bild‑Optimierer: **10 – 12 W**.
+* OLED‑Fernseher mit aktivem Bild‑Optimierer: **10–12 W**.
 * Kaffeevollautomaten mit Warmhalte‑Platte: **8 W**.
 * Mesh‑Repeater ohne Energiespar‑Modus: **5 W**.
 
 ### Lohnt sich der Austausch eines funktionierenden Altgeräts?
 
-Bei Kühl‑/Gefriergeräten, die älter als **12 – 15 Jahre** sind, amortisiert sich ein Austausch in der Regel nach **3 – 5 Jahren** allein durch Stromersparnis. Bei Geräten mit geringem Jahresverbrauch (z. B. LED‑Leuchten) ist die Amortisation länger, hier reicht ein **Austausch nur bei Defekt**.
+Bei Kühl‑/Gefriergeräten, die älter als **12–15 Jahre** sind, amortisiert sich ein Austausch in der Regel nach **3–5 Jahren** allein durch Stromersparnis. Bei Geräten mit geringem Jahresverbrauch (z. B. LED‑Leuchten) ist die Amortisation länger, hier reicht ein **Austausch nur bei Defekt**.
 
 ### Woher bekomme ich ein kostenloses Strommessgerät?
 

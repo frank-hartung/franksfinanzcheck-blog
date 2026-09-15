@@ -54,9 +54,9 @@ Keine Sekunde Unterbrechung. Wer in der Grundversorgung verbleibt, zahlt jedoch 
 
 Um effektiv **Gaskosten zu reduzieren**, musst du verstehen, woraus sich dein Preis zusammensetzt. Nur ein Teil des Preises ist durch den Anbieter wettbewerbsfähig gestaltbar:
 
-1. **Beschaffung und Vertrieb (ca. 40-50 %):** Hier entscheidet der Anbieter, wie günstig er an der Energiebörse (EEX) einkauft. Das ist dein Hebel beim Wechsel.
-2. **Netznutzungsentgelte (ca. 20-25 %):** Diese Gebühren zahlt der Anbieter an den örtlichen Netzbetreiber. Sie sind fix für alle Anbieter in deiner Region.
-3. **Steuern und Abgaben (ca. 25-30 %):** Dazu gehören die Energiesteuer, die Mehrwertsteuer und der CO2-Preis nach dem Brennstoffemissionshandelsgesetz (BEHG).
+1. **Beschaffung und Vertrieb (ca. 40–50 %):** Hier entscheidet der Anbieter, wie günstig er an der Energiebörse (EEX) einkauft. Das ist dein Hebel beim Wechsel.
+2. **Netznutzungsentgelte (ca. 20–25 %):** Diese Gebühren zahlt der Anbieter an den örtlichen Netzbetreiber. Sie sind fix für alle Anbieter in deiner Region.
+3. **Steuern und Abgaben (ca. 25–30 %):** Dazu gehören die Energiesteuer, die Mehrwertsteuer und der CO2-Preis nach dem Brennstoffemissionshandelsgesetz (BEHG).
 
 Da Steuern und Netzentgelte für jeden Anbieter gleich sind, resultiert die Ersparnis beim **Gas-Anbieter wechseln** primär aus den besseren Einkaufskonditionen und geringeren Verwaltungskosten der überregionalen Versorger.
 
@@ -78,7 +78,7 @@ Viele **günstige Gastarife** werben mit massiven Boni. Hier ist Genauigkeit gef
 * **Der Neukundenbonus:** Er wird prozentual oder als Fixbetrag gewährt. Er verfällt oft, wenn du vor Ablauf des ersten Jahres kündigst. Er ist ein Instrument, um den Preis im ersten Jahr künstlich niedrig zu halten.
 * **Der Sofortbonus:** Er wird unabhängig von der Jahresrechnung zeitnah ausgezahlt. Er bietet mehr Sicherheit, da du das Geld bereits auf dem Konto hast.
 
-**Strategie-Tipp:** Wenn du bereit bist, jedes Jahr einen **Gasanbieter Wechsel** durchzuführen, nimm die Boni mit. Wenn du lieber 2-3 Jahre Ruhe haben willst, wähle einen „effektiven Tarif“ ohne Boni, der dauerhaft niedrige Arbeitspreise bietet.
+**Strategie-Tipp:** Wenn du bereit bist, jedes Jahr einen **Gasanbieter Wechsel** durchzuführen, nimm die Boni mit. Wenn du lieber 2–3 Jahre Ruhe haben willst, wähle einen „effektiven Tarif“ ohne Boni, der dauerhaft niedrige Arbeitspreise bietet.
 
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**→ Tarife vergleichen & sparen**](/go/gas/)
 

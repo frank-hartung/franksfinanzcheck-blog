@@ -50,10 +50,10 @@ Bevor du den **DSL Tarifvergleich** startest, musst du deinen Bedarf kennen. Vie
 
 | Nutzerprofil | Empfohlene Bandbreite | Was ist möglich? |
 |:---|:---|:---|
-| **Single-Haushalt** | 16 – 50 Mbit/s | Netflix in 4K, Homeoffice (alleine), Browsing. |
+| **Single-Haushalt** | 16–50 Mbit/s | Netflix in 4K, Homeoffice (alleine), Browsing. |
 | **Paare / Kleinfamilie** | 100 Mbit/s | Parallel 4K-Streaming, Gaming und Video-Calls ohne Ruckler. |
 | **Power-User / WG** | 250 Mbit/s | Große Game-Downloads (100 GB+), viele parallele Nutzer. |
-| **Enthusiasten** | 500 – 1.000 Mbit/s | Professionelles Content-Creation, Cloud-Backups von Terabytes. |
+| **Enthusiasten** | 500–1.000 Mbit/s | Professionelles Content-Creation, Cloud-Backups von Terabytes. |
 
 **Profi-Tipp:** Achte besonders auf den **Upload**. Für Homeoffice (Cloud-Uploads, Videokonferenzen) sind 10 Mbit/s das Minimum, 40 Mbit/s (Standard bei DSL 250) sind ideal.
 
@@ -74,7 +74,7 @@ Nutze ein Vergleichstool, um zu prüfen, was an deiner Adresse ankommt. Wichtig:
 
 ### Phase 2: Tarifvergleich & Effektivpreis berechnen
 Lass dich nicht von den 9,99 € in den ersten Monaten blenden. Die wichtigste Kennzahl im **DSL Tarifvergleich** ist der **Effektivpreis pro Monat**.
-*Formel: (Grundgebühr Monate 1-12 + Grundgebühr Monate 13-24 + Anschlussgebühr + Hardwarekosten - Cashbacks - Boni) / 24.*
+*Formel: (Grundgebühr Monate 1–12 + Grundgebühr Monate 13–24 + Anschlussgebühr + Hardwarekosten – Cashbacks – Boni) / 24.*
 Nur dieser Wert ist vergleichbar. Oft ist der Anbieter mit der höheren Grundgebühr durch einen massiven Cashback am Ende der günstigere.
 
 ### Phase 3: Neuen Anbieter beauftragen (Nicht selbst kündigen!)
@@ -98,6 +98,11 @@ Am Tag der Umstellung erhältst du meist eine SMS oder E-Mail, sobald die Leitun
 
 > 💡 **Praxis-Tipp:** Nutze vor dem Abschluss unseren detaillierten Leitfaden zum [DSL-Wechselbonus und Willkommensprämien](../../posts/2026-08-10-dsl-wechselbonus-sichern/), um dir die maximalen Gutschriften zu sichern.
 
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/dsl/)
+
+
 ## Router mieten oder kaufen: Was rechnet sich mehr?
 
 Die Entscheidung, ob du beim **DSL wechseln** einen **Router mieten oder kaufen** solltest, beeinflusst deine Bilanz über Jahre.
@@ -110,9 +115,9 @@ Die meisten Anbieter berechnen zwischen 4,99 € (Standard-Modell) und 9,99 �
 ### Die Kauf-Option
 Eine aktuelle FRITZ!Box kostet zwischen 140 € und 250 € (z. B. FRITZ!Box 7690 für Highspeed Internet).
 - **Vorteile:** Du zahlst einmalig. Wenn du alle zwei Jahre den Anbieter wechselst, nimmst du deine Box einfach mit. Du musst keine WLAN-Passwörter an deinen 20 Smart-Home-Geräten ändern.
-- **Nachteile:** Du bist für Updates und Defekte selbst verantwortlich. Nach 5-6 Jahren ist die Technik veraltet.
+- **Nachteile:** Du bist für Updates und Defekte selbst verantwortlich. Nach 5–6 Jahren ist die Technik veraltet.
 
-**Die Rechnung:** Ein eigener Router für 180 € amortisiert sich gegenüber einer Miete von 6,99 € bereits nach ca. 26 Monaten. Da du eine gute Box locker 5 bis 7 Jahre nutzen kannst, sparst du hier über die Zeit weitere 200 € bis 300 €. Zudem kannst du das Gerät später für 40-60 € gebraucht verkaufen.
+**Die Rechnung:** Ein eigener Router für 180 € amortisiert sich gegenüber einer Miete von 6,99 € bereits nach ca. 26 Monaten. Da du eine gute Box locker 5 bis 7 Jahre nutzen kannst, sparst du hier über die Zeit weitere 200 € bis 300 €. Zudem kannst du das Gerät später für 40–60 € gebraucht verkaufen.
 
 ## Der Umschalttag: So verhinderst du den Homeoffice-Kollaps
 
@@ -135,7 +140,7 @@ Sobald die Leitung steht, beginnt deine Beweislast. Nutze die offizielle [Breitb
 Beim **Internet Anbieterwechsel** lauern kleine Gebühren, die die Ersparnis auffressen können:
 - **Versandkosten:** Oft werden 9,99 € für den Router-Versand fällig.
 - **Anschlussgebühr:** Diese liegt oft bei 69,99 €. Achte darauf, Tarife zu wählen, bei denen diese Gebühr für Wechsler gestrichen wird (Aktionsangebote).
-- **Sicherheitspakete:** Viele Anbieter buchen automatisch ein "Sicherheitspaket" (Virenscanner etc.) für 4,95 € monatlich dazu. Das ist in den ersten 2-3 Monaten kostenlos, danach kostet es. **Sofort im ersten Monat kündigen!** Das brauchst du in Zeiten von Windows Defender und MacOS-Sicherheit nicht.
+- **Sicherheitspakete:** Viele Anbieter buchen automatisch ein "Sicherheitspaket" (Virenscanner etc.) für 4,95 € monatlich dazu. Das ist in den ersten 2–3 Monaten kostenlos, danach kostet es. **Sofort im ersten Monat kündigen!** Das brauchst du in Zeiten von Windows Defender und MacOS-Sicherheit nicht.
 - **Festnetz-Flats:** Brauchst du wirklich eine Flatrate in alle deutschen Mobilfunknetze? Wenn du eh nur mit dem Handy telefonierst, nimm den Basistarif ohne Telefon-Extras.
 
 ## Sonderfall: Umzug und Anbieterwechsel
@@ -171,6 +176,8 @@ Ja, vor allem wegen der Stabilität und des Wertes deiner Immobilie. Glasfaser i
 ### Was ist "Peering" und warum ist es beim Wechsel wichtig?
 Peering bezeichnet die Verknüpfung von Netzwerken. Einige günstige Anbieter sparen hier, was dazu führen kann, dass zwar dein Speedtest volle Leistung zeigt, aber YouTube-Videos abends trotzdem puffern oder Downloads von US-Servern langsam sind. Marktführer wie Telekom oder große Kabelanbieter haben meist das bessere Peering, während Discounter hier manchmal das Nachsehen haben.
 
+
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Vergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [WLAN in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/dsl/)
