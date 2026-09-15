@@ -1,6 +1,6 @@
 ---
-title: "5 einfache Frugalismus-Tricks für den Alltag"
-description: "5 einfache Frugalismus-Tricks für den Alltag – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und …"
+title: "Frugalismus für Einsteiger: 5 Alltags-Tricks"
+description: "Frugalismus für Einsteiger: fünf Alltags-Tricks – tracken, Energie senken, Verträge prüfen, planen, Abos checken – mit durchgerechnetem Beispiel."
 date: 2026-09-14T10:00:54Z
 draft: true
 tags: ["5 einfache Frugalismus-Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus"]
@@ -18,7 +18,7 @@ cover:
   alt: "5 einfache Frugalismus-Tricks für den Alltag"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Frugalismus im Alltag gelingt durch Meal Prep, die 30-Tage-Regel für Einkäufe und das Eliminieren unnötiger Fixkosten. Wer täglich nur 5 Euro einspart, legt bereits über 1.800 Euro pro Jahr zusätzlich zur Seite. Diese bewussten Konsumentscheidungen ermöglichen oft eine überdurchschnittliche Sparquote von 50 Prozent und mehr."
-pin_title: "5 einfache Frugalismus-Tricks für den Alltag"
+pin_title: "Frugalismus für Einsteiger: 5 Alltags-Tricks"
 pin_description: "*Werbung | 5 einfache Frugalismus-Tricks für den Alltag – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und … Mehr Spartipps auf FranksFinanzcheck! #frugalismustricks #frugalismus #geldsparen"
 ---
 

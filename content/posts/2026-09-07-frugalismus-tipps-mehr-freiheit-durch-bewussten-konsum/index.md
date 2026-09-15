@@ -1,6 +1,6 @@
 ---
-title: "Frugalismus-Tipps: Mehr Freiheit durch bewussten Konsum"
-description: Entdecke effektive Frugalismus-Tipps für dein Leben. Lerne, wie du ohne Verzicht Geld sparen im Alltag meisterst und deine Finanzen optimierst.
+title: "Kleine Beträge, große Wirkung: Frugalismus für den Einstieg"
+description: "Frugalismus für den Einstieg: Haushaltsbuch führen, Fixkosten senken und kleine Beträge zur Seite legen – das Rechenbeispiel zeigt, was zusammenkommt."
 date: 2026-09-07T23:25:42Z
 draft: false
 reserve_published: 2026-09-07
@@ -12,7 +12,7 @@ erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft
 
 keywords: ["Frugalismus-Tipps", "geld sparen im alltag", "sparmethoden", "haushaltsbuch führen", "Frugalismus", "Geld sparen", "Frugalismus Tipps"]
 pinwand: Geld sparen im Alltag | Frugalismus-Tipps
-pin_title: 5 einfache Frugalismus-Tricks für den Alltag
+pin_title: "Frugalismus-Einstieg: kleine Beträge, große Wirkung"
 pin_description: "*Werbung | Entdecke effektive Frugalismus-Tipps für dein Leben. Lerne, wie du ohne Verzicht Geld sparen im Alltag meisterst und deine Finanzen optimierst. Mehr Spartipps auf FranksFinanzcheck! #frugalismustipps #geldsparenimalltag #sparmethoden"
 ai_generated: true
 ai_provider: "Content-Engine v2"

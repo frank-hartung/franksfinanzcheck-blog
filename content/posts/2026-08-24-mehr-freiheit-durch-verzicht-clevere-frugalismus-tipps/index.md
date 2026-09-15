@@ -1,8 +1,8 @@
 ---
 
 lastmod: 2026-09-02
-title: "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht"
-description: "Frugalismus-Tipps für mehr finanzielle Freiheit: 50-30-20-Regel, Konsumfallen stoppen, Notgroschen aufbauen und bis zu 450 € im Monat sparen."
+title: "Frugalismus mit System: 50-30-20-Regel und fünf Hacks"
+description: "Frugalismus mit System: Die 50-30-20-Regel als Kompass, fünf Hacks für den Alltag und eine Fallstudie mit bis zu 450 € Ersparnis pro Monat."
 date: 2026-08-24T08:35:12Z
 draft: false
 tags: ["Frugalismus-Tipps", "Geld sparen im Alltag", "50 30 20 Regel", "Finanzielle Freiheit", "Haushaltsbuch führen"]
@@ -20,7 +20,7 @@ kurzantwort: "Frugalismus bedeutet nicht knauseriger Verzicht, sondern das bewus
 
 social_posted: true
 keywords: ["Frugalismus-Tipps", "Geld sparen im Alltag", "50 30 20 Regel", "Finanzielle Freiheit", "Notgroschen aufbauen", "Tagesgeld Zinsen", "Frugalismus Tipps"]
-pin_title: 5 einfache Frugalismus-Tricks für den Alltag
+pin_title: "Frugalismus mit System: 50-30-20-Regel"
 pin_description: "*Werbung | Frugalismus-Tipps für mehr finanzielle Freiheit: 50-30-20-Regel, Konsumfallen stoppen, Notgroschen aufbauen und bis zu 450 € im Monat sparen. Mehr Spartipps auf FranksFinanzcheck! #frugalismustipps #geldsparenimalltag #503020regel"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 ---
